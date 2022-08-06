@@ -1,0 +1,59 @@
+site_dir: public
+
+site_name: tomoesaturn's blog
+site_author: tomoesaturn
+copyright: tomoesaturn
+
+theme:
+  name: material
+  palette:
+    - primary: indigo
+      accent: blue
+      scheme: default
+  features:
+    - header.autohide
+    - search.highlight
+    - search.share
+    - search.suggest
+  language: ja
+  font:
+    text: Roboto
+    code: Roboto Mono
+  logo: https://ja.gravatar.com/userimage/211310365/963eab531ad243620e077e066513ae19.png
+  favicon: https://ja.gravatar.com/userimage/211310365/963eab531ad243620e077e066513ae19.png
+
+markdown_extensions:
+  - attr_list
+  - md_in_html
+  - pymdownx.arithmatex:
+      generic: true
+  - admonition
+  - pymdownx.tilde
+  - pymdownx.inlinehilite
+  - pymdownx.highlight:
+      noclasses: false
+      pygments_style: vs
+      linenums: true
+      linenums_style: pymdownx-inline
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_div_format
+  - tables
+  - pymdownx.tasklist:
+      custom_checkbox: true
+
+plugins:
+  - search:
+      lang:
+        - ja
+
+extra_css:
+  - https://unpkg.com/mermaid@8.0.0/dist/mermaid.css
+
+extra_javascript:
+  - https://unpkg.com/mermaid@8.0.0/dist/mermaid.min.js
+  - javascripts/mathjax.js
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
