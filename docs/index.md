@@ -1,6 +1,5 @@
 ---
-title: tomoesaturn's blog
-summary: tomoesaturn's blog
+title: ホーム
 authors:
   - tomoesaturn
 ---
