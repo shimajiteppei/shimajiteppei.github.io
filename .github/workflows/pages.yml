@@ -26,25 +26,21 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    # runs-on: ubuntu-latest
-    # steps:
-    #   - name: Checkout
-    #     uses: actions/checkout@v3
-    #   - name: Setup Pages
-    #     uses: actions/configure-pages@v1
-    #   - name: Upload artifact
-    #     uses: actions/upload-pages-artifact@v1
-    #     with:
-    #       # Upload entire repository
-    #       path: "."
-    #   - name: Deploy to GitHub Pages
-    #     id: deployment
-    #     uses: actions/deploy-pages@main
     runs-on: ubuntu-latest
+    container:
+      image: squidfunk/mkdocs-material
+      volumes:
+        - ${PWD}:/docs
+      options: --cpus 1
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup Pages
+        uses: actions/configure-pages@v1
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
         with:
-          python-version: 3.x
-      - run: pip install mkdocs-material
-      - run: mkdocs gh-deploy --force
+          path: "./site"
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@main
