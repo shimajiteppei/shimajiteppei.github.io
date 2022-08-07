@@ -1,4 +1,4 @@
-# tomoesaturn's blog
+# blog
 
 install
 

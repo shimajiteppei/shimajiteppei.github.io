@@ -1,4 +1,4 @@
-site_name: tomoesaturn's blog
+site_name: tomoesaturn備忘録
 
 theme:
   name: material
@@ -11,6 +11,7 @@ theme:
     - header.autohide
     - search.highlight
     - search.suggest
+    - navigation.expand
   language: ja
   font:
     text: Roboto
@@ -19,26 +20,42 @@ theme:
   favicon: https://ja.gravatar.com/userimage/211310365/963eab531ad243620e077e066513ae19.png
 
 markdown_extensions:
+  - abbr
+  - admonition
   - attr_list
+  - def_list
+  - footnotes
   - md_in_html
+  - tables
+  - toc:
+      permalink: true
   - pymdownx.arithmatex:
       generic: true
-  - admonition
-  - pymdownx.tilde
-  - pymdownx.inlinehilite
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
   - pymdownx.highlight:
       noclasses: false
       pygments_style: vs
       linenums: true
-      linenums_style: pymdownx-inline
+      linenums_style: pymdownx-inline  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.smartsymbols
   - pymdownx.superfences:
       custom_fences:
         - name: mermaid
           class: mermaid
           format: !!python/name:pymdownx.superfences.fence_div_format
-  - tables
+  - pymdownx.tabbed:
+      alternate_style: true
   - pymdownx.tasklist:
       custom_checkbox: true
+  - pymdownx.tilde
 
 plugins:
   - search:
@@ -46,6 +63,7 @@ plugins:
         - ja
 
 extra_css:
+  - stylesheets/extra.css
   - https://unpkg.com/mermaid@8.0.0/dist/mermaid.css
 
 extra_javascript:

@@ -33,7 +33,9 @@ jobs:
       - name: install mkdocs
         run: docker pull squidfunk/mkdocs-material
       - name: build pages
-        run: docker run --rm -v ${PWD}:/docs squidfunk/mkdocs-material build
+        run: |
+          mv ./docs/incubator ./docs/.incubator
+          docker run --rm -v ${PWD}:/docs squidfunk/mkdocs-material build
       - name: Setup Pages
         uses: actions/configure-pages@v1
       - name: Upload artifact
