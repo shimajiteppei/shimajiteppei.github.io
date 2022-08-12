@@ -8,10 +8,10 @@
 
 ## 作ったもの
 
-- <a href="https://tomoesaturn2.gitlab.io/tool/" target="_blank">ついったー高度検索</a>
-- <a href="https://github.com/tomoesaturn/MasterThesis/blob/master/thesis/thesis.pdf" target="_blank">修士論文</a>
+- [ついったー高度検索](https://tomoesaturn2.gitlab.io/tool/)
+- [修士論文](https://github.com/tomoesaturn/MasterThesis/blob/master/thesis/thesis.pdf)
 
 ## リンク
 
-- <a href="https://twitter.com/tomoesaturn/" target="_blank">Twitter</a>
-- <a href="https://github.com/tomoesaturn/" target="_blank">GitHub</a>
+- [Twitter](https://twitter.com/tomoesaturn/)
+- [GitHub](https://github.com/tomoesaturn/)
