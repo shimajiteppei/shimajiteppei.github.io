@@ -8,7 +8,7 @@
 
 ## 作ったもの
 
-- [ついったー高度検索](https://tomoesaturn2.gitlab.io/tool/)
+- [ついったー高度検索](https://tomoesaturn.github.io/gemini/)
 - [修士論文](https://github.com/tomoesaturn/MasterThesis/blob/master/thesis/thesis.pdf)
 
 ## リンク
