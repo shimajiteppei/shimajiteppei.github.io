@@ -1,5 +1,7 @@
 # 好きな言葉
 
+<!-- textlint-disable -->
+
 !!! quote "老子"
     千里の道も一歩から
 
@@ -14,3 +16,5 @@
 
 !!! quote "eiki_okuma"
     シルバーバレットは存在しないが、その逆は存在する。
+
+<!-- textlint-enable -->
