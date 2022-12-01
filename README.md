@@ -1,5 +1,7 @@
 # blog
 
+https://tomoesaturn.github.io/blog/
+
 install
 
 ```bash
