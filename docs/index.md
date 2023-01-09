@@ -2,9 +2,9 @@
 
 ## 好きな食べ物
 
-- 和菓子 :rice_cracker:
-- たこ焼き :octopus: :fire: :fire: :fire:
-- 担々麺 :ramen:
+- 和菓子🍘
+- たこ焼き🐙🔥🔥🔥
+- 担々麺🍜
 
 ## 作ったもの
 

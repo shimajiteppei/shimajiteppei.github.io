@@ -3,6 +3,7 @@
   "scripts": {
     "dev": "docker run --rm -it -p 8000:8000 -v ${PWD}:/docs squidfunk/mkdocs-material",
     "build": "docker run --rm -v ${PWD}:/docs squidfunk/mkdocs-material build",
+    "preview": "cd ./site && python3 -m http.server 8000",
     "lint": "textlint docs"
   },
   "devDependencies": {
@@ -14,7 +15,7 @@
     "textlint-rule-spellcheck-tech-word": "^5.0.0"
   },
   "volta": {
-    "node": "16.16.0",
-    "npm": "8.16.0"
+    "node": "18.12.1",
+    "npm": "9.2.0"
   }
 }
