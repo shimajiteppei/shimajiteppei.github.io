@@ -1,8 +1,10 @@
 {
   "private": true,
   "scripts": {
-    "dev": "docker run --rm -it -p 8000:8000 -v ${PWD}:/docs squidfunk/mkdocs-material",
-    "build": "docker run --rm -v ${PWD}:/docs squidfunk/mkdocs-material build",
+    "predev": "docker build -t my-blog-mkdocs-material:latest .",
+    "dev": "docker run --rm -it -p 8000:8000 -v ${PWD}:/docs my-blog-mkdocs-material",
+    "prebuild": "docker build -t my-blog-mkdocs-material:latest .",
+    "build": "docker run --rm -v ${PWD}:/docs my-blog-mkdocs-material build",
     "preview": "cd ./site && python3 -m http.server 8000",
     "lint": "textlint docs"
   },
