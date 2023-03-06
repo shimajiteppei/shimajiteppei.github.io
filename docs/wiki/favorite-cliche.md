@@ -17,4 +17,7 @@
 !!! quote "eiki_okuma"
     シルバーバレットは存在しないが、その逆は存在する。
 
+!!! quote "Robert C. Martin"
+    The fact is that making messes is always slower than staying clean, no matter which time scale you are using.
+
 <!-- textlint-enable -->
