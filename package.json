@@ -1,12 +1,12 @@
 {
   "private": true,
   "scripts": {
-    "predev": "docker build -t my-blog-mkdocs-material:latest .",
-    "dev": "docker run --rm -it -p 8000:8000 -v ${PWD}:/docs my-blog-mkdocs-material",
-    "prebuild": "docker build -t my-blog-mkdocs-material:latest .",
-    "build": "docker run --rm -v ${PWD}:/docs my-blog-mkdocs-material build",
-    "preview": "cd ./site && python3 -m http.server 8000",
-    "lint": "textlint docs"
+    "install": "docker build -t my-blog-mkdocs-material:latest .",
+    "start": "docker run --rm -it -p 8000:8000 --user $(id -u):$(id -g) -v ${PWD}:/docs --name my-blog-mkdocs-material-dev my-blog-mkdocs-material",
+    "stop": "docker stop my-blog-mkdocs-material-dev",
+    "test": "textlint docs",
+    "generate": "docker run --rm --user $(id -u):$(id -g) -e EXCLUDE_DOCS='drafts/' -v ${PWD}:/docs my-blog-mkdocs-material build",
+    "postgenerate": "cd ./site && python3 -m http.server 8001"
   },
   "devDependencies": {
     "textlint": "^12.2.1",

@@ -1,7 +1,19 @@
-site_name: tomoesaturn's blog
+site_name: tomoesaturnの部屋
 site_url: https://tomoesaturn.github.io/blog/
-site_description: tomoesaturn's blog
+site_description: tomoesaturnの部屋
 site_author: tomoesaturn
+repo_url: https://github.com/tomoesaturn/blog
+repo_name: tomoesaturn/blog
+copyright: Copyright &copy; 2022 - Shimaji Teppei
+
+extra:
+  alternate:
+    - name: access-counter
+  social:
+    - icon: fontawesome/brands/twitter
+      link: https://twitter.com/tomoesaturn
+    - icon: fontawesome/brands/github
+      link: https://github.com/tomoesaturn
 
 theme:
   name: material
@@ -11,14 +23,13 @@ theme:
       accent: blue
       scheme: default
   features:
-    - header.autohide
     - search.highlight
     - search.suggest
-    - navigation.expand
+    - content.code.copy
   language: ja
   font:
-    text: Roboto
-    code: Roboto Mono
+    text: M PLUS 1p
+    code: Fragment Mono
   logo: favicon.png
   favicon: favicon.png
 
@@ -36,10 +47,9 @@ markdown_extensions:
       smart_enable: all
   - pymdownx.caret
   - pymdownx.highlight:
-      noclasses: false
       pygments_style: vs
       linenums: true
-      linenums_style: pymdownx-inline  - pymdownx.inlinehilite
+      anchor_linenums: true
   - pymdownx.inlinehilite
   - pymdownx.magiclink
   - pymdownx.saneheaders
@@ -54,9 +64,14 @@ markdown_extensions:
 
 plugins:
   - git-revision-date-localized
+  - awesome-pages
   - search:
       lang:
         - ja
+  - tags:
+      tags_file: category.md
+
+exclude_docs: !ENV EXCLUDE_DOCS
 
 extra_css:
   - stylesheets/extra.css

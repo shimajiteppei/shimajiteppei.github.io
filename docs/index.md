@@ -1,16 +1,42 @@
-# Home
+<div style="text-align: center; line-height: 2rem;">
+<p>
+いらっしゃいませ！
+<br/>
+あなたは<img src="https://counter1.fc2.com/counter_img.php?id=39263327&main=1" />番目のお客様です。
+<br/>
+小さな部屋ですが、ゆっくりしていってください。
+</p>
+</div>
 
-## 好きな食べ物
+<div style="padding-top: 120px"></div>
 
-- 和菓子🍘
-- 担々麺🍜
+<div style="text-align: center;">
+<h4 style="color: var(--md-primary-fg-color)">★管理人プロフィール★</h4>
+<p>
+ソフトウェアエンジニアとして働いています。
+<br/>
+自転車で和菓子屋さん巡りをするのが趣味です。
+</p>
+</div>
 
-## 作ったもの
+<div style="padding-top: 48px"></div>
 
-- [ついったー高度検索](https://tomoesaturn.github.io/gemini/)
-- [修士論文](https://github.com/tomoesaturn/MasterThesis/blob/master/thesis/thesis.pdf)
+<div style="text-align: center;">
+<h4 style="color: var(--md-primary-fg-color)">★作ったもの★</h4>
+<p>
+<a href="https://tomoesaturn.github.io/gemini/" target="_blank" rel="noopener noreferrer">ついったー高度検索</a>
+<br/>
+<a href="https://github.com/tomoesaturn/MasterThesis/blob/master/thesis/thesis.pdf" target="_blank" rel="noopener noreferrer">修士論文</a>
+</p>
+</div>
 
-## リンク
+<div style="padding-top: 48px"></div>
 
-- [Twitter](https://twitter.com/tomoesaturn/)
-- [GitHub](https://github.com/tomoesaturn/)
+<div style="text-align: center;">
+<h4 style="color: var(--md-primary-fg-color)">★リンク★</h4>
+<p>
+<a href="https://twitter.com/tomoesaturn" target="_blank" rel="noopener noreferrer">Twitter</a>
+<br/>
+<a href="https://github.com/tomoesaturn" target="_blank" rel="noopener noreferrer">GitHub</a>
+</p>
+</div>

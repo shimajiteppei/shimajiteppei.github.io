@@ -2,35 +2,59 @@
 
 https://tomoesaturn.github.io/blog/
 
-install
+## Prerequisite
 
-```bash
-docker pull squidfunk/mkdocs-material
+- Docker
+- Python3
+- Node.js
+
+## Tasks
+
+### Install
+
+```sh
 npm install
 ```
 
-dev
+### Develop
 
-```bash
-# docker
-docker run --rm -it -p 8000:8000 -v ${PWD}:/docs squidfunk/mkdocs-material
+Start auto-reload server.
 
-# npm
-npm run dev
+```sh
+npm start
 ```
 
-textlint
+Stop server.
 
-```bash
-npm run lint
+```sh
+npm stop
 ```
 
-build
+Restart server.
 
-```bash
-# docker
-docker run --rm -v ${PWD}:/docs squidfunk/mkdocs-material build
-
-# npm
-npm run build
+```sh
+npm restart
 ```
+
+### Lint
+
+Run textlint.
+
+```sh
+npm test
+```
+
+### Build & Preview
+
+```sh
+npm run generate
+```
+
+## Links
+
+- [MkDocs](https://www.mkdocs.org/)
+  - [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/)
+  - [mkdocs-git-revision-date-localized-plugin](https://github.com/timvink/mkdocs-git-revision-date-localized-plugin)
+  - [MkDocs Awesome Pages Plugin](https://github.com/lukasgeiter/mkdocs-awesome-pages-plugin)
+- [textlint-ja](https://github.com/textlint-ja)
+- [FC2カウンター](https://counter.fc2.com/)
