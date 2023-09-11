@@ -2,7 +2,15 @@
 <p>
 いらっしゃいませ！
 <br/>
-あなたは<img src="https://counter1.fc2.com/counter_img.php?id=39263327&main=1" />番目のお客様です。
+あなたは
+<img
+  src="https://counter1.fc2.com/counter_img.php?id=39263327&main=1"
+  alt="アクセスカウンター"
+  loading="lazy"
+  width="145"
+  height="32"
+/>
+番目のお客様です。
 <br/>
 小さな部屋ですが、ゆっくりしていってください。
 </p>
