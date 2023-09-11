@@ -35,12 +35,12 @@ jobs:
           docker build -t my-blog-mkdocs-material:latest .
           docker run --rm -e EXCLUDE_DOCS='drafts/' -v ${PWD}:/docs my-blog-mkdocs-material build
       - name: Setup Pages
-        uses: actions/configure-pages@v1
+        uses: actions/configure-pages@v3
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-pages-artifact@v2
         with:
           # Upload entire repository
           path: "./site"
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@main
+        uses: actions/deploy-pages@v2
