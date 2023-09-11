@@ -8,7 +8,7 @@
 </p>
 </div>
 
-<div style="padding-top: 120px"></div>
+<div style="padding-top: 60px"></div>
 
 <div style="text-align: center;">
 <h4 style="color: var(--md-primary-fg-color)">★管理人プロフィール★</h4>
@@ -21,24 +21,25 @@
 </p>
 </div>
 
-<div style="padding-top: 48px"></div>
+<div style="padding-top: 24px"></div>
 
 <div style="text-align: center;">
 <h4 style="color: var(--md-primary-fg-color)">★作ったもの★</h4>
 <p>
+<a href="./game/nes/" target="_blank" rel="noopener noreferrer">ファミコンエミュレータ</a>
+<br/>
 <a href="https://tomoesaturn.github.io/gemini/" target="_blank" rel="noopener noreferrer">ついったー高度検索</a>
 <br/>
 <a href="https://github.com/tomoesaturn/MasterThesis/blob/master/thesis/thesis.pdf" target="_blank" rel="noopener noreferrer">修士論文</a>
 </p>
 </div>
 
-<div style="padding-top: 48px"></div>
+<div style="padding-top: 24px"></div>
 
 <div style="text-align: center;">
 <h4 style="color: var(--md-primary-fg-color)">★リンク★</h4>
 <p>
-<a href="https://twitter.com/tomoesaturn" target="_blank" rel="noopener noreferrer">Twitter</a>
-<br/>
+<a href="https://twitter.com/tomoesaturn" target="_blank" rel="noopener noreferrer">Twitter</a> /
 <a href="https://github.com/tomoesaturn" target="_blank" rel="noopener noreferrer">GitHub</a>
 </p>
 </div>
