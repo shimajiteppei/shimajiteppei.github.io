@@ -39,6 +39,17 @@
 <a href="https://tomoesaturn.github.io/gemini/" target="_blank" rel="noopener noreferrer">ついったー高度検索</a>
 <br/>
 <a href="https://github.com/tomoesaturn/MasterThesis/blob/master/thesis/thesis.pdf" target="_blank" rel="noopener noreferrer">修士論文</a>
+<br/>
+<a href="./game/life-jar/" target="_blank" rel="noopener noreferrer">ライフゲーム（高校時代版）</a>
+</p>
+</div>
+
+<div style="padding-top: 24px"></div>
+
+<div style="text-align: center;">
+<h4 style="color: var(--md-primary-fg-color)">★貢献★</h4>
+<p>
+<a href="https://github.com/olets/zsh-abbr-docs" target="_blank" rel="noopener noreferrer">olets/zsh-abbr-docs</a>
 </p>
 </div>
 
