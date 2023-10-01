@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  const isArticle = document.location.pathname.startsWith("/blog/article");
+  const isArticle = document.location.pathname.startsWith("/article");
   if (isArticle) {
     $('h1').addClass('article-page');
     $('h2').addClass('article-page');
