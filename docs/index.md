@@ -36,9 +36,9 @@
 <p>
 <a href="./game/nes/" target="_blank" rel="noopener noreferrer">ファミコンエミュレータ</a>
 <br/>
-<a href="https://tomoesaturn.github.io/gemini/" target="_blank" rel="noopener noreferrer">ついったー高度検索</a>
+<a href="https://shimajiteppei.github.io/gemini/" target="_blank" rel="noopener noreferrer">ついったー高度検索</a>
 <br/>
-<a href="https://github.com/tomoesaturn/MasterThesis/blob/master/thesis/thesis.pdf" target="_blank" rel="noopener noreferrer">修士論文</a>
+<a href="https://github.com/shimajiteppei/MasterThesis/blob/master/thesis/thesis.pdf" target="_blank" rel="noopener noreferrer">修士論文</a>
 <br/>
 <a href="./game/life-jar/" target="_blank" rel="noopener noreferrer">ライフゲーム（高校時代版）</a>
 </p>
@@ -58,7 +58,7 @@
 <div style="text-align: center;">
 <h4 style="color: var(--md-primary-fg-color)">★リンク★</h4>
 <p>
-<a href="https://twitter.com/tomoesaturn" target="_blank" rel="noopener noreferrer">Twitter</a> /
-<a href="https://github.com/tomoesaturn" target="_blank" rel="noopener noreferrer">GitHub</a>
+<a href="https://twitter.com/shimajiteppei" target="_blank" rel="noopener noreferrer">Twitter</a> /
+<a href="https://github.com/shimajiteppei" target="_blank" rel="noopener noreferrer">GitHub</a>
 </p>
 </div>

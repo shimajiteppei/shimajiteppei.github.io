@@ -1,6 +1,6 @@
 # ファミコンエミュレータ
 
-ファミコンエミュレータを趣味で作ってます。ソースコードは[GitHub](https://github.com/tomoesaturn/aries)で公開しています。
+ファミコンエミュレータを趣味で作ってます。ソースコードは[GitHub](https://github.com/shimajiteppei/aries)で公開しています。
 
 このページでは、Shiruさんが開発した[Alter Ego](https://shiru.untergrund.net/software.shtml)というソフトをプレイできます。キーボードとゲームパッドの両方に対応しています。
 

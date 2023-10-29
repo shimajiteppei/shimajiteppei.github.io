@@ -1,4 +1,4 @@
-import init, { WindowContext } from "https://cdn.jsdelivr.net/gh/tomoesaturn/aries@release/nes_wasm/pkg/nes_wasm.js";
+import init, { WindowContext } from "https://cdn.jsdelivr.net/gh/shimajiteppei/aries@release/nes_wasm/pkg/nes_wasm.js";
 
 // start nes
 await init();

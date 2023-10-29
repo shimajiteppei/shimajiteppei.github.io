@@ -2,7 +2,7 @@
 title: 私のpython仮想環境
 summary: マイPCでのpython仮想環境の作成方法
 authors:
-  - tomoesaturn
+  - shimajiteppei
 date: 2020-09-12
 ---
 
