@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "install": "docker build -t my-blog-mkdocs-material:latest .",
+    "install": "ncu -u && npm update && docker build -t my-blog-mkdocs-material:latest .",
     "start": "docker run --rm -it -p 8000:8000 --user $(id -u):$(id -g) -v ${PWD}:/docs --name my-blog-mkdocs-material-dev my-blog-mkdocs-material",
     "stop": "docker stop my-blog-mkdocs-material-dev",
     "test": "textlint docs",
@@ -9,15 +9,16 @@
     "postgenerate": "cd ./site && python3 -m http.server 8001"
   },
   "devDependencies": {
-    "textlint": "^12.2.1",
+    "npm-check-updates": "^16.14.6",
+    "textlint": "^13.3.3",
     "textlint-filter-rule-comments": "^1.2.2",
     "textlint-rule-preset-ja-engineering-paper": "^1.0.4",
-    "textlint-rule-preset-ja-spacing": "^2.2.0",
-    "textlint-rule-preset-ja-technical-writing": "^7.0.0",
+    "textlint-rule-preset-ja-spacing": "^2.3.0",
+    "textlint-rule-preset-ja-technical-writing": "^8.0.0",
     "textlint-rule-spellcheck-tech-word": "^5.0.0"
   },
   "volta": {
-    "node": "18.12.1",
-    "npm": "9.2.0"
+    "node": "20.9.0",
+    "npm": "10.2.1"
   }
 }

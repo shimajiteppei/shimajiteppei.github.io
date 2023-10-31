@@ -10,7 +10,7 @@ https://shimajiteppei.github.io/
 
 ## Tasks
 
-### Install
+### Install, Update
 
 ```sh
 npm install
