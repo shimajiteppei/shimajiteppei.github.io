@@ -1,16 +1,26 @@
 {
   "private": true,
   "scripts": {
-    "install": "ncu -u && npm update && docker build -t my-blog-mkdocs-material:latest .",
-    "start": "docker run --rm -it -p 8000:8000 --user $(id -u):$(id -g) -v ${PWD}:/docs --name my-blog-mkdocs-material-dev my-blog-mkdocs-material",
-    "stop": "docker stop my-blog-mkdocs-material-dev",
-    "test": "textlint docs",
-    "generate": "docker run --rm --user $(id -u):$(id -g) -e EXCLUDE_DOCS='drafts/' -v ${PWD}:/docs my-blog-mkdocs-material build",
-    "postgenerate": "cd ./site && python3 -m http.server 8001"
+    "install": "run-s tool:update_package tool:build_docker",
+    "start": "run-s docs:start_serve",
+    "stop": "run-s docs:stop_serve",
+    "test": "run-s tool:lint tool:check_dead_link",
+    "generate": "run-s docs:build docs:preview",
+    "docs:start_serve": "docker run --rm -it -p 8000:8000 --user $(id -u):$(id -g) -v ${PWD}:/docs --name my-blog-mkdocs-material-dev my-blog-mkdocs-material",
+    "docs:stop_serve": "docker stop my-blog-mkdocs-material-dev",
+    "docs:build": "docker run --rm --user $(id -u):$(id -g) -e EXCLUDE_DOCS='drafts/' -v ${PWD}:/docs my-blog-mkdocs-material build",
+    "docs:preview": "http-server ./site -p 8001",
+    "tool:update_package": "ncu -u && npm update",
+    "tool:build_docker": "docker build -t my-blog-mkdocs-material:latest .",
+    "tool:lint": "textlint docs",
+    "tool:check_dead_link": "find docs -type f -not -path '*/drafts/*' -name '*.md' | xargs npx markdown-link-check --quiet --config markdown-link-check.json"
   },
   "devDependencies": {
+    "http-server": "^14.1.1",
+    "markdown-link-check": "^3.11.2",
     "npm-check-updates": "^16.14.6",
-    "textlint": "^13.3.3",
+    "npm-run-all": "^4.1.5",
+    "textlint": "^13.4.0",
     "textlint-filter-rule-comments": "^1.2.2",
     "textlint-rule-preset-ja-engineering-paper": "^1.0.4",
     "textlint-rule-preset-ja-spacing": "^2.3.0",

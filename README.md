@@ -5,7 +5,6 @@ https://shimajiteppei.github.io/
 ## Prerequisite
 
 - Docker
-- Python3
 - Node.js
 
 ## Tasks
@@ -38,7 +37,7 @@ npm restart
 
 ### Lint
 
-Run textlint.
+Proofread markdowns expect for drafts.
 
 ```sh
 npm test
@@ -57,6 +56,7 @@ npm run generate
   - [mkdocs-git-revision-date-localized-plugin](https://github.com/timvink/mkdocs-git-revision-date-localized-plugin)
   - [MkDocs Awesome Pages Plugin](https://github.com/lukasgeiter/mkdocs-awesome-pages-plugin)
 - [textlint-ja](https://github.com/textlint-ja)
+- [markdown-link-check](https://github.com/tcort/markdown-link-check)
 - [FC2カウンター](https://counter.fc2.com/)
 - [Google Search Console](https://search.google.com/search-console?utm_source=about-page&resource_id=https://shimajiteppei.github.io/)
 - [tree.nathanfriend.io](https://tree.nathanfriend.io/)
