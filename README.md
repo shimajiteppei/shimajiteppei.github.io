@@ -4,8 +4,8 @@ https://shimajiteppei.github.io/
 
 ## Prerequisite
 
-- Docker
-- Node.js
+-   Docker
+-   Node.js
 
 ## Tasks
 
@@ -51,12 +51,13 @@ npm run generate
 
 ## Links
 
-- [MkDocs](https://www.mkdocs.org/)
-  - [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/)
-  - [mkdocs-git-revision-date-localized-plugin](https://github.com/timvink/mkdocs-git-revision-date-localized-plugin)
-  - [MkDocs Awesome Pages Plugin](https://github.com/lukasgeiter/mkdocs-awesome-pages-plugin)
-- [textlint-ja](https://github.com/textlint-ja)
-- [markdown-link-check](https://github.com/tcort/markdown-link-check)
-- [FC2カウンター](https://counter.fc2.com/)
-- [Google Search Console](https://search.google.com/search-console?utm_source=about-page&resource_id=https://shimajiteppei.github.io/)
-- [tree.nathanfriend.io](https://tree.nathanfriend.io/)
+-   [MkDocs](https://www.mkdocs.org/)
+    -   [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/)
+    -   [mkdocs-git-revision-date-localized-plugin](https://github.com/timvink/mkdocs-git-revision-date-localized-plugin)
+    -   [MkDocs Awesome Pages Plugin](https://github.com/lukasgeiter/mkdocs-awesome-pages-plugin)
+-   [textlint-ja](https://github.com/textlint-ja)
+-   [markdown-link-check](https://github.com/tcort/markdown-link-check)
+-   [FC2カウンター](https://counter.fc2.com/)
+-   [Google Search Console](https://search.google.com/search-console?utm_source=about-page&resource_id=https://shimajiteppei.github.io/)
+-   [tree.nathanfriend.io](https://tree.nathanfriend.io/)
+-   [XP.css](https://botoxparty.github.io/XP.css/)
