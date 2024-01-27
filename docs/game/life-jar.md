@@ -1,6 +1,19 @@
 # ライフゲーム（高校時代版）
 
-<div style="width: 100%; display: flex; flex-direction: column;">
+<div class="xp-css" style="width: 100%; display: flex; flex-direction: column;">
+<div class="window">
+<div class="title-bar" style="padding: 16px">
+<div class="title-bar-text">
+</div>
+<div class="title-bar-controls">
+<button
+  aria-label="Maximize"
+  onclick="document.getElementById('life-jar_content').requestFullscreen()"
+>
+</button>
+</div>
+</div>
+<div class="window-body" style="margin: 16px;">
 <iframe
   id="life-jar_content"
   src="../../javascripts/life-jar/index.html"
@@ -9,13 +22,8 @@
   loading="lazy"
   allowfullscreen>
 </iframe>
-<button
-  type="button"
-  onclick="document.getElementById('life-jar_content').requestFullscreen()"
-  style="justify-content: end; border: solid 1px; cursor: pointer;"
-  onMouseOver="this.style.background='lightgray';"
-  onMouseOut="this.style.background='white';">フルスクリーン表示
-</button>
+</div>
+</div>
 </div>
 
 2012年、高校2年生のときにJava 7のSwingで作ったライフゲームです。
