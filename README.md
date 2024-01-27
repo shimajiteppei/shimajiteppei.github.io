@@ -61,3 +61,4 @@ npm run generate
 -   [Google Search Console](https://search.google.com/search-console?utm_source=about-page&resource_id=https://shimajiteppei.github.io/)
 -   [tree.nathanfriend.io](https://tree.nathanfriend.io/)
 -   [XP.css](https://botoxparty.github.io/XP.css/)
+-   [和色大辞典](https://www.colordic.org/w)
