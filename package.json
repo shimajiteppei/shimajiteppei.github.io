@@ -13,6 +13,7 @@
         "tool:update_node": "volta pin node@latest && volta pin npm@latest",
         "tool:update_package": "npm update",
         "tool:build_docker": "docker build -t my-blog-mkdocs-material:latest .",
+        "tool:gen_xp-css": "sh gen_xp-css.sh docs/stylesheets/xp.scss && sass --no-source-map docs/stylesheets/xp.scss docs/stylesheets/xp.css",
         "tool:format": "prettier . --write",
         "tool:lint": "textlint docs",
         "tool:check_dead_link": "find docs -type f -not -path '*/drafts/*' -name '*.md' | xargs npx markdown-link-check --quiet --config markdown-link-check.json"
@@ -22,6 +23,7 @@
         "markdown-link-check": "latest",
         "npm-run-all": "latest",
         "prettier": "latest",
+        "sass": "latest",
         "textlint": "latest",
         "textlint-filter-rule-comments": "latest",
         "textlint-rule-preset-ja-engineering-paper": "latest",
@@ -30,7 +32,7 @@
         "textlint-rule-spellcheck-tech-word": "latest"
     },
     "volta": {
-        "node": "21.6.1",
-        "npm": "10.4.0"
+        "node": "22.1.0",
+        "npm": "10.7.0"
     }
 }

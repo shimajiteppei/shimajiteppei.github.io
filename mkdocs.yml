@@ -7,7 +7,20 @@ copyright: Copyright &copy; 2022 - Shimaji Teppei
 theme:
     name: material
     palette:
-        scheme: custom
+        - media: "(prefers-color-scheme: light)"
+          scheme: default
+          primary: custom-light
+          accent: custom
+          toggle:
+              icon: material/brightness-4
+              name: Switch to dark mode
+        - media: "(prefers-color-scheme: dark)"
+          scheme: slate
+          primary: custom-dark
+          accent: custom
+          toggle:
+              icon: material/brightness-7
+              name: Switch to light mode
     custom_dir: theme-overrides
     features:
         - search.highlight
@@ -33,6 +46,7 @@ markdown_extensions:
           smart_enable: all
     - pymdownx.caret
     - pymdownx.highlight:
+          use_pygments: true
           linenums: true
           anchor_linenums: true
     - pymdownx.inlinehilite

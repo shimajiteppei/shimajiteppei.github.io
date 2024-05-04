@@ -1,116 +1,123 @@
-/** https://github.com/squidfunk/mkdocs-material/blob/master/src/templates/assets/stylesheets/main/_colors.scss */
-[data-md-color-scheme="custom"] {
-    /** basics */
-    --md-primary: 77, 90, 175;
-    --md-accent: 44, 169, 225;
-    --md-base-bg: 255, 250, 250;
+[data-md-color-primary="custom-light"] {
+    --md-primary-fg-color: #4d5aaf;
+    --md-primary-fg-color--light: #6576e6;
+    --md-primary-fg-color--dark: #4d5aaf;
+}
 
-    --md-primary-fg-color: rgb(var(--md-primary));
-    --md-primary-fg-color--light: rgb(var(--md-primary));
-    --md-primary-fg-color--dark: rgb(var(--md-primary));
-    /* --md-primary-bg-color: var(--md-default-bg-color); */
-    /* --md-primary-bg-color--light: var(--md-default-bg-color--light); */
-    --md-accent-fg-color: rgb(var(--md-accent));
-    --md-accent-fg-color--transparent: rgb(var(--md-accent), 0.75);
-    /* --md-accent-bg-color: rgb(var(--md-accent-bg)); */
-    /* --md-accent-bg-color--light: rgb(var(--md-accent-bg)); */
-    --md-base-bg-color: rgb(var(--md-base-bg));
-    --md-base-bg-color--transparent: rgb(var(--md-base-bg), 0);
-
-    /** codes */
-    /* --md-code-fg-color: #e6edf3;
-    --md-code-bg-color: #0d1117;
-    --md-code-hl-color: #6e7681;
-    --md-code-hl-color--light: #8b949e;
-    --md-code-hl-number-color: #a5d6ff;
-    --md-code-hl-special-color: #8b949e;
-    --md-code-hl-function-color: #d2a8ff;
-    --md-code-hl-constant-color: #79c0ff;
-    --md-code-hl-keyword-color: #ff7b72;
-    --md-code-hl-string-color: #a5d6ff;
-    --md-code-hl-name-color: #e6edf3;
-    --md-code-hl-operator-color: #ff7b72;
-    --md-code-hl-punctuation-color: #79c0ff;
-    --md-code-hl-comment-color: #8b949e;
-    --md-code-hl-generic-color: #e6edf3;
-    --md-code-hl-variable-color: #79c0ff; */
+[data-md-color-primary="custom-dark"] {
+    --md-primary-fg-color: #6576e6;
+    --md-primary-fg-color--light: #6576e6;
+    --md-primary-fg-color--dark: #4d5aaf;
 }
 
 /** basic layout, color */
-body {
-    --site-max-width: 1440px;
-    --article-max-width: 720px;
+:root {
+    /** https://github.com/squidfunk/mkdocs-material/blob/master/src/templates/assets/stylesheets/main/_colors.scss */
+    --md-accent-fg-color: #2ca9e1;
+    --md-accent-fg-color--transparent: #2ca9e140;
 
-    background-color: var(--md-primary-fg-color);
+    scrollbar-width: thin;
 
-    header {
-        background: rgb(0, 0, 0, 0) !important;
-        box-shadow: unset !important;
-        transition: unset !important;
+    body {
+        --site-max-width: 1600px;
+        --article-max-width: 720px;
 
-        nav.md-header__inner {
-            max-width: var(--site-max-width);
+        header {
+            box-shadow: unset !important;
+            transition: unset !important;
 
-            form:hover {
+            nav.md-header__inner {
+                max-width: var(--site-max-width);
+
+                form {
+                    border-radius: 4px;
+                }
+
+                a.md-logo {
+                    margin: 0 8px;
+                    padding: 0;
+
+                    img {
+                        border-radius: 4px;
+                        height: 32px;
+                        width: 32px;
+                    }
+                }
+            }
+
+            .md-header__button {
                 background-color: var(
                     --md-accent-fg-color--transparent
                 ) !important;
+                border-radius: 50%;
+            }
+        }
+
+        header:has(nav > div.md-header__title--active) {
+            background-color: transparent !important;
+
+            [data-md-component="header-topic"] {
+                display: none;
+            }
+        }
+
+        main {
+            background-color: var(--md-default-fg-color--lightest);
+
+            > div.md-main__inner {
+                max-width: var(--site-max-width);
+                margin-top: 0;
+
+                .md-content {
+                    background-color: var(--md-default-bg-color);
+                    padding: 32px;
+                    padding-bottom: 64px;
+
+                    article {
+                        margin: 0 auto !important;
+                        max-width: var(--article-max-width);
+                    }
+                }
+
+                .md-sidebar {
+                    nav > label.md-nav__title {
+                        color: inherit !important;
+                        background-color: transparent !important;
+                        box-shadow: unset !important;
+                    }
+
+                    nav > label[for="__drawer"].md-nav__title {
+                        font-size: 0;
+                    }
+
+                    nav > label[for="__toc"].md-nav__title {
+                        font-size: 0;
+                    }
+
+                    * {
+                        scrollbar-color: unset;
+                        scrollbar-width: thin;
+                    }
+                }
+            }
+        }
+
+        footer {
+            * {
+                background-color: var(--md-primary-fg-color);
+                color: var(--md-primary-bg-color) !important;
             }
 
-            a.md-logo {
-                margin: 0 8px;
+            .md-copyright {
                 padding: 0;
+                white-space: nowrap;
+                overflow-x: auto;
 
-                img {
-                    height: 32px;
-                    width: 32px;
+                .md-copyright__highlight {
+                    display: inline;
+                    padding-right: 16px;
                 }
             }
-        }
-
-        .md-header__button {
-            background-color: var(--md-accent-fg-color--transparent) !important;
-        }
-    }
-
-    main {
-        background-color: var(--md-base-bg-color);
-
-        > div.md-main__inner {
-            max-width: var(--site-max-width);
-            margin-top: 0;
-
-            .md-content {
-                padding-top: 32px;
-                padding-bottom: 64px;
-                padding-left: 32px;
-                padding-right: 32px;
-                background-color: var(--md-default-bg-color);
-
-                article {
-                    margin: 0 auto !important;
-                    max-width: var(--article-max-width);
-                }
-            }
-
-            .md-sidebar label.md-nav__title {
-                height: unset !important;
-                color: inherit;
-                background-color: rgb(var(--md-base-bg)) !important;
-                box-shadow: unset !important;
-            }
-        }
-    }
-
-    footer {
-        background: var(--md-primary-fg-color) !important;
-
-        > div {
-            background-color: unset !important;
-        }
-
-        .md-copyright {
-            padding: 0;
         }
     }
 }
@@ -131,27 +138,34 @@ main .md-typeset {
     :not(pre) > code {
         margin: 0 4px;
         padding: 2px 4px;
-        background-color: var(--md-default-fg-color--lightest);
-        color: var(--md-typeset-color);
     }
 
     .highlight table {
+        border-width: 2px;
+        border-style: solid;
+        border-color: var(--md-default-fg-color--lightest);
+        border-radius: 4px;
+
         td.linenos {
             background-color: var(--md-default-fg-color--lightest);
         }
 
         td.code pre > code {
-            scrollbar-color: var(--md-default-bg-color--lighter) rgb(0, 0, 0, 0);
-            overflow-x: scroll !important;
+            scrollbar-color: unset;
+            scrollbar-width: thin;
+            padding-right: 48px;
+            overflow-x: auto;
         }
 
         td.code pre:hover {
             > code {
-                scrollbar-color: var(--md-accent-fg-color) rgb(0, 0, 0, 0);
+                scrollbar-color: unset;
+                scrollbar-width: thin;
             }
 
             > button {
                 background: var(--md-accent-fg-color--transparent);
+                border-radius: 4px;
             }
         }
     }

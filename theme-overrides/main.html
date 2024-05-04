@@ -1,20 +1,53 @@
-{% extends "base.html" %} {% block extrahead %}
-<meta
-    name="google-site-verification"
-    content="NLDaGmtM3JHbAsLdbgwl3h3XL_fhixwpQyUI0ha98yE"
-/>
+{% extends "base.html" %}
+
+{% block extrahead %}
+<meta name="google-site-verification" content="NLDaGmtM3JHbAsLdbgwl3h3XL_fhixwpQyUI0ha98yE" />
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:site:id" content="@shimajiteppei" />
 <meta name="twitter:creator" content="@shimajiteppei" />
 <meta property="og:url" content="{{ page.canonical_url }}" />
 <meta property="og:title" content="{{ page.title }}" />
 <meta property="og:description" content="{{ config.site_name }}" />
-<meta
-    property="og:image"
-    content="https://shimajiteppei.github.io/favicon.webp"
-/>
+<meta property="og:image" content="https://shimajiteppei.github.io/favicon.webp" />
 <meta property="og:type" content="website" />
 <meta property="og:image:type" content="image/png" />
 <meta property="og:image:width" content="200" />
 <meta property="og:image:height" content="200" />
+{% endblock %}
+
+{% block site_nav %}
+{% if nav %}
+{% if page.meta and page.meta.hide %}
+{% set hidden = "hidden" if "navigation" in page.meta.hide %}
+{% endif %}
+<div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" {{ hidden }}>
+    <div class="md-sidebar__scrollwrap">
+        <!-- /// override -->
+        <div style="
+            display: flex;
+            justify-content: center;
+            width: 100%;
+        ">
+            <img src="https://counter1.fc2.com/counter_img.php?id=39263327&main=1" alt="アクセスカウンター" loading="lazy"
+                width="144px" height="32px" style="margin: 8px" />
+        </div>
+        <!-- /// override -->
+        <div class="md-sidebar__inner">
+            {% include "partials/nav.html" %}
+        </div>
+    </div>
+</div>
+{% endif %}
+{% if "toc.integrate" not in features %}
+{% if page.meta and page.meta.hide %}
+{% set hidden = "hidden" if "toc" in page.meta.hide %}
+{% endif %}
+<div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" {{ hidden }}>
+    <div class="md-sidebar__scrollwrap">
+        <div class="md-sidebar__inner">
+            {% include "partials/toc.html" %}
+        </div>
+    </div>
+</div>
+{% endif %}
 {% endblock %}
