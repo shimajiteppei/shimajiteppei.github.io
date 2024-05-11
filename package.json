@@ -5,7 +5,8 @@
         "start": "run-s docs:start_serve",
         "stop": "run-s docs:stop_serve",
         "test": "run-s tool:format tool:lint tool:check_dead_link",
-        "generate": "run-s docs:build docs:preview",
+        "build": "run-s tool:build_docker tool:gen_xp-css docs:build",
+        "generate": "run-s build docs:preview",
         "docs:start_serve": "docker run --rm -it -p 8000:8000 --user $(id -u):$(id -g) -v ${PWD}:/docs --name my-blog-mkdocs-material-dev my-blog-mkdocs-material",
         "docs:stop_serve": "docker stop my-blog-mkdocs-material-dev",
         "docs:build": "docker run --rm --user $(id -u):$(id -g) -e EXCLUDE_DOCS='drafts/' -v ${PWD}:/docs my-blog-mkdocs-material build",
@@ -13,7 +14,7 @@
         "tool:update_node": "volta pin node@latest && volta pin npm@latest",
         "tool:update_package": "npm update",
         "tool:build_docker": "docker build -t my-blog-mkdocs-material:latest .",
-        "tool:gen_xp-css": "sh gen_xp-css.sh docs/stylesheets/xp.scss && sass --no-source-map docs/stylesheets/xp.scss docs/stylesheets/xp.css",
+        "tool:gen_xp-css": "sh codegen/xp-css/generate.sh docs/stylesheets/xp.scss && sass --no-source-map docs/stylesheets/xp.scss docs/stylesheets/xp.css",
         "tool:format": "prettier . --write",
         "tool:lint": "textlint docs",
         "tool:check_dead_link": "find docs -type f -not -path '*/drafts/*' -name '*.md' | xargs npx markdown-link-check --quiet --config markdown-link-check.json"

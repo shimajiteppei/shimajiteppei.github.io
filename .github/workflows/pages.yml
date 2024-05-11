@@ -24,10 +24,13 @@ jobs:
         steps:
             - name: Checkout
               uses: actions/checkout@main
+            - uses: actions/setup-node@main
+              with:
+                  node-version: latest
             - name: build pages
               run: |
-                  docker build -t my-blog-mkdocs-material:latest .
-                  docker run --rm -e EXCLUDE_DOCS='drafts/' -v ${PWD}:/docs my-blog-mkdocs-material build
+                  npm install --ignore-scripts
+                  npm run build
             - name: Setup Pages
               uses: actions/configure-pages@main
             - name: Upload artifact
