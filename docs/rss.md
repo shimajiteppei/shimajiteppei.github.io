@@ -2,7 +2,7 @@
 
 情報収集を一元化するために、RSSリーダーをブログでホストしています。
 
-GitHub Actionsで定期的にRSSを購読する[osmos::feed](https://github.com/osmoscraft/osmosfeed)を参考にしました。
+GitHub Actionsで定期的にRSSを購読する[osmos::feed](https://github.com/osmoscraft/osmosfeed)にインスパイアされてます。
 
 ## Rust
 
