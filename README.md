@@ -6,6 +6,7 @@ https://shimajiteppei.github.io/
 
 -   Docker
 -   Node.js
+-   Python3 + Poetry
 
 ## Tasks
 
