@@ -97,6 +97,7 @@ GitHub Actionsで定期的にRSSを購読する[osmos::feed](https://github.com/
 - [HackTheBox Monitored WriteUp](https://qiita.com/Perplex/items/e3a879634a31fff901d5)
 - [PythonでPC用通知システムを作る](https://qiita.com/kawamo55/items/cf593c9e047cb80f600d)
 - [Linuxインフラエンジニアレベルアップ](https://qiita.com/XYZXYZXYZ/items/99fcd7f93d43ed20a093)
+- [Ubuntu Server24.04起動時にsystemd-networkd-wait-online.serviceで待たされる問題を解消する。](https://qiita.com/sakai00kou/items/1934471c6a318a8c2e61)
 - [Dockerで『簡単に』cronの定期実行を行う方法](https://zenn.dev/masanarea777/articles/2da6cc9696b507)
 - [[OrbStack 対応版] グローバル環境を可能な限り汚染せずに Markdown から組版の PDF を生成](https://zenn.dev/yusuga/articles/949adb38047610)
 - [【golang】DockerでGo言語を導入してみた](https://zenn.dev/joho0724/articles/sankaku0724-newcreate14)
