@@ -1,0 +1,28 @@
+name: Generate RSS feed
+
+on:
+    schedule:
+        - cron: "0 12 * * *"
+    workflow_dispatch:
+
+jobs:
+    generate:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@main
+            - name: Setup Node
+              uses: actions/setup-node@main
+              with:
+                  node-version: latest
+            - name: Generate RSS feed
+              run: |
+                  npm install --ignore-scripts
+                  npm run tool:gen_rss
+            - name: Commit
+              run: |
+                  git config --global user.email hotarutwitter@gmail.com
+                  git config --global user.name shimajiteppei
+                  git add .
+                  git commit -m "autogen rss feed"
+                  git push origin main
