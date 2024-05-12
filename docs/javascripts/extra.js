@@ -1,3 +1,4 @@
+// 記事ページのHeadingに章番号を自動で振る
 $(document).ready(function () {
     const isArticle = document.location.pathname.startsWith("/article");
     if (isArticle) {
@@ -8,4 +9,11 @@ $(document).ready(function () {
         $("h5").addClass("article-page");
         $("h6").addClass("article-page");
     }
+});
+
+// 外部リンクを新しいタブで開く
+$(document).ready(function () {
+    $('a[href^="http"]')
+        .attr("target", "_blank")
+        .attr("rel", "noopener noreferrer");
 });

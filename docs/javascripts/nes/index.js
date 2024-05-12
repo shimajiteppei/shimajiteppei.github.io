@@ -2,6 +2,15 @@ import init, {
     WindowContext,
 } from "https://cdn.jsdelivr.net/gh/shimajiteppei/aries@release/nes_wasm/pkg/nes_wasm.js";
 
+const ABtnKey = "q";
+const BBtnKey = "w";
+const STARTBtnKey = "e";
+const SELECTBtnKey = "r";
+const UPBtnKey = "ArrowUp";
+const DOWNBtnKey = "ArrowDown";
+const LEFTBtnKey = "ArrowLeft";
+const RIGHTBtnKey = "ArrowRight";
+
 // start nes
 await init();
 const res = await fetch("../../javascripts/nes/Alter_Ego.nes");
@@ -12,58 +21,74 @@ const ctx = new WindowContext("canvas", new Uint8Array(buf));
 // https://w3c.github.io/uievents/#dom-keyboardevent-key
 window.addEventListener("keydown", (event) => {
     switch (event.key) {
-        case "w":
+        case ABtnKey:
             ctx.keydown_A();
-            return;
-        case "q":
+            event.preventDefault();
+            break;
+        case BBtnKey:
             ctx.keydown_B();
-            return;
-        case "e":
+            event.preventDefault();
+            break;
+        case SELECTBtnKey:
             ctx.keydown_SELECT();
-            return;
-        case "r":
+            event.preventDefault();
+            break;
+        case STARTBtnKey:
             ctx.keydown_START();
-            return;
-        case "l":
-            ctx.keydown_RIGHT();
-            return;
-        case "j":
-            ctx.keydown_LEFT();
-            return;
-        case "k":
-            ctx.keydown_DOWN();
-            return;
-        case "i":
+            event.preventDefault();
+            break;
+        case UPBtnKey:
             ctx.keydown_UP();
-            return;
+            event.preventDefault();
+            break;
+        case DOWNBtnKey:
+            ctx.keydown_DOWN();
+            event.preventDefault();
+            break;
+        case LEFTBtnKey:
+            ctx.keydown_LEFT();
+            event.preventDefault();
+            break;
+        case RIGHTBtnKey:
+            ctx.keydown_RIGHT();
+            event.preventDefault();
+            break;
     }
 });
 window.addEventListener("keyup", (event) => {
     switch (event.key) {
-        case "w":
+        case ABtnKey:
             ctx.keyup_A();
-            return;
-        case "q":
+            event.preventDefault();
+            break;
+        case BBtnKey:
             ctx.keyup_B();
-            return;
-        case "e":
+            event.preventDefault();
+            break;
+        case SELECTBtnKey:
             ctx.keyup_SELECT();
-            return;
-        case "r":
+            event.preventDefault();
+            break;
+        case STARTBtnKey:
             ctx.keyup_START();
-            return;
-        case "l":
-            ctx.keyup_RIGHT();
-            return;
-        case "j":
-            ctx.keyup_LEFT();
-            return;
-        case "k":
-            ctx.keyup_DOWN();
-            return;
-        case "i":
+            event.preventDefault();
+            break;
+        case UPBtnKey:
             ctx.keyup_UP();
-            return;
+            event.preventDefault();
+            break;
+        case DOWNBtnKey:
+            ctx.keyup_DOWN();
+            event.preventDefault();
+            break;
+        case LEFTBtnKey:
+            ctx.keyup_LEFT();
+            event.preventDefault();
+            break;
+        case RIGHTBtnKey:
+            ctx.keyup_RIGHT();
+            event.preventDefault();
+            break;
     }
 });
 

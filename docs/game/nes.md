@@ -1,23 +1,5 @@
 # ファミコンエミュレータ
 
-ファミコンエミュレータを趣味で作ってます。ソースコードは[GitHub](https://github.com/shimajiteppei/aries)で公開しています。
-
-このページでは、Shiruさんが開発した[Alter Ego](https://shiru.untergrund.net/software.shtml)というソフトをプレイできます。キーボードとゲームパッドの両方に対応しています。
-
-<div style="text-align: center; padding-top: 24px;">
-キーボード入力の操作法
-
-<div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr;">
-<div>Bボタン = Q</div>
-<div>Aボタン = W</div>
-<div>SELECTボタン = E</div>
-<div>STARTボタン = R</div>
-<div>←ボタン = J</div>
-<div>→ボタン = L</div>
-<div>↑ボタン = I</div>
-<div>↓ボタン = K</div>
-</div>
-
 <div class="xp-css" style="width: 100%; display: flex; flex-direction: column;">
 <div class="window">
 <div class="title-bar" style="padding: 16px;">
@@ -37,5 +19,18 @@
 </div>
 </div>
 
+<div style="text-align: center; padding-top: 24px;">
+キーボード入力の操作法
+
+<div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr;">
+<div>Aボタン = Q</div>
+<div>Bボタン = W</div>
+<div>STARTボタン = E</div>
+<div>SELECTボタン = R</div>
+</div>
 <script type="module" src="../../javascripts/nes/index.js"></script>
 </div>
+
+ファミコンエミュレータを趣味で作ってます。ソースコードは[GitHub](https://github.com/shimajiteppei/aries)で公開しています。
+
+このページでは、Shiruさんが開発した[Alter Ego](https://shiru.untergrund.net/software.shtml)というソフトをプレイできます。キーボードとゲームパッドの両方に対応しています。

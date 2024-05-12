@@ -2,9 +2,9 @@
     "private": true,
     "scripts": {
         "install": "run-s tool:update_node tool:update_package tool:build_docker",
-        "start": "run-s tool:build_docker tool:gen_xp-css tool:gen_rss docs:start_serve",
+        "start": "run-s tool:gen_xp-css docs:start_serve",
         "stop": "run-s docs:stop_serve",
-        "test": "run-s tool:format tool:lint tool:check_dead_link",
+        "test": "run-s -c tool:format tool:lint tool:check_dead_link",
         "build": "run-s tool:build_docker docs:build",
         "generate": "run-s build docs:preview",
         "docs:start_serve": "docker run --rm -it -p 8000:8000 --user $(id -u):$(id -g) -v ${PWD}:/docs --name my-blog-mkdocs-material-dev my-blog-mkdocs-material",
