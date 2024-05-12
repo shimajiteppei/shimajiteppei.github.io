@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Linux」のフィード]]></title><description><![CDATA[Zennのトピック「Linux」のRSSフィードです]]></description><link>https://zenn.dev/topics/linux</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/860a9eb1e4.png</url><title>Zennの「Linux」のフィード</title><link>https://zenn.dev/topics/linux</link></image><generator>zenn.dev</generator><lastBuildDate>Sun, 12 May 2024 03:32:39 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/linux/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Linux / Docker – hexdump / hd コマンドを使ってバイナリファイルをHEX ( 16進数 ) で標準出力する]]></title><description><![CDATA[
+ docker Ubutu で試してみる
+ホストマシンでdockerを起動する
+カレントディレクトリにバイナリファイル ( この例では test.png ) を置いておいて、dockerコンテナ の /home/ にマウントしておく
+ docker run -v=./:/home -it ubuntu bash
+以下dockerの操作
+apt update
+apt install bsdmainutils
+これで hexdump コマンドが使えるようになる
+次にdocker上でバイナリファイルのあるディレクトリに移動しておく
+cd /home
+
+ 今回利用したサンプルのバイナリファイル...]]></description><link>https://zenn.dev/yumainaura/articles/qiita-2024-05-08t13_32_10-09_00</link><guid isPermaLink="true">https://zenn.dev/yumainaura/articles/qiita-2024-05-08t13_32_10-09_00</guid><pubDate>Sat, 11 May 2024 14:34:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--H358I44n--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%2520%252F%2520Docker%2520%25E2%2580%2593%2520hexdump%2520%252F%2520hd%2520%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2583%2590%25E3%2582%25A4%25E3%2583%258A%25E3%2583%25AA%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2592HEX%2520%2528%252016%25E9%2580%25B2%25E6%2595%25B0...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E7%25A8%25B2%25E6%25B5%25A6%25E6%2582%25A0%25E9%25A6%25AC%2520%2528%25E3%2581%2584%25E3%2581%25AA%25E3%2581%2586%25E3%2582%2589%25E3%2582%2586%25E3%2581%2586%25E3%2581%25BE%2529%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FGZFp1Y3BPSm80MUYydFUxV05wb0owWGNCOTBiUGp1MVdxUmtEWjduWmRhSTlZPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>稲浦悠馬 (いなうらゆうま)</dc:creator></item><item><title><![CDATA[QEMU + ARM64用の最小Linuxカーネルをビルドする]]></title><description><![CDATA[本記事は、Linux カーネルを QEMU + ARM64 環境向けに最小限の機能のみ（本当にシリアル出力とキーボード入力のみレベル）に限定してビルドする手順をまとめています。
+
+ ソースコード取得
+git clone --depth=1 -b v6.8 https://github.com/torvalds/linux.git
+cd linux
+
+ 最小のコンフィグを用意する
+LinuxをQEMUで動かす（Armv8-A中心）を参考にさせていただきました。
+arch/arm64/configs/qemu-busybox-min.configを作成します。
+CONFIG_SERIAL_A...]]></description><link>https://zenn.dev/hidenori3/articles/5db71181a33d56</link><guid isPermaLink="true">https://zenn.dev/hidenori3/articles/5db71181a33d56</guid><pubDate>Sat, 11 May 2024 01:01:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Iesb4vmU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:QEMU%2520%252B%2520ARM64%25E7%2594%25A8%25E3%2581%25AE%25E6%259C%2580%25E5%25B0%258FLinux%25E3%2582%25AB%25E3%2583%25BC%25E3%2583%258D%25E3%2583%25AB%25E3%2582%2592%25E3%2583%2593%25E3%2583%25AB%25E3%2583%2589%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Hidenori%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RkMjk0NGM5N2QuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Hidenori</dc:creator></item><item><title><![CDATA[[高校生が使ってわかった]一番最初に使うべき初心者むけLinuxDistro5選!in 2024]]></title><description><![CDATA[
+ 本記事の意図
+私は中学二年生の時に、OSをwindows10からSparkyLinuxへと変えました。今思うと不思議なチョイスです。当時つかっていたパソコンのスペックはとても低く、どうにかして軽くしたいという気持ちから、軽量LinuxDistroであるSparkyLinuxを使い始めました。結果的にそれが私のLinuxライフの入口となったので感謝しています。
+しかし、Linuxを使い始めた頃は何も理解できていない状況であり、アプリを入れるのにも一苦労でした。この経験からわかったことは、私のような初心者はおとなしく「有名でユーザー数の多いDistroを使うべきなのではないか。」というこ...]]></description><link>https://zenn.dev/aet42/articles/f67cc88848a6a0</link><guid isPermaLink="true">https://zenn.dev/aet42/articles/f67cc88848a6a0</guid><pubDate>Fri, 10 May 2024 17:03:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--QscYBNmp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255B%25E9%25AB%2598%25E6%25A0%25A1%25E7%2594%259F%25E3%2581%258C%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2582%258F%25E3%2581%258B%25E3%2581%25A3%25E3%2581%259F%255D%25E4%25B8%2580%25E7%2595%25AA%25E6%259C%2580%25E5%2588%259D%25E3%2581%25AB%25E4%25BD%25BF%25E3%2581%2586%25E3%2581%25B9%25E3%2581%258D%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E3%2582%2580%25E3%2581%2591LinuxDistro5%25E9%2581%25B8%2521in%25202024%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:AET42%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZlOGFkM2Q5ZWYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>AET42</dc:creator></item><item><title><![CDATA[大概のLinuxで使えそうな日本語入力(Flatpak版Fcitx5-Mozc)]]></title><description><![CDATA[
+ Flatpak版Fcitx5-Mozc
+おそらく多くの人が用いている日本語入力のFcitx5-Mozc。そのFlatpak版が提供されています。
+Flatpak版のFcitx5-Mozcは、動作するディストリビューションが多いと思います。
+特にマイナーなディストリビューションでも、Flatpakに対応してくれていたら、日本語入力が容易になることでしょう。
+安定版も比較的バージョンが新しいです。
+Mozcのツールバーのアイコンが表示されない、設定画面の一部反応など、？がつく部分もありますが、実用範囲内で動作してくれています。
+(アイコン表示は、開発版では修正済みです。そのうち安定版にも...]]></description><link>https://zenn.dev/phoepsilonix/articles/flatpak-mozc</link><guid isPermaLink="true">https://zenn.dev/phoepsilonix/articles/flatpak-mozc</guid><pubDate>Fri, 10 May 2024 09:38:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--76e745M4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%25A4%25A7%25E6%25A6%2582%25E3%2581%25AELinux%25E3%2581%25A7%25E4%25BD%25BF%25E3%2581%2588%25E3%2581%259D%25E3%2581%2586%25E3%2581%25AA%25E6%2597%25A5%25E6%259C%25AC%25E8%25AA%259E%25E5%2585%25A5%25E5%258A%259B%2528Flatpak%25E7%2589%2588Fcitx5-Mozc%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:epsilon%2520phoenix%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvcC5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>epsilon phoenix</dc:creator></item><item><title><![CDATA[【missing-semester】1.课程概览与 shell]]></title><description><![CDATA[
+ 动机
+计算机相关工作中，挖掘现有工具的潜力，并介绍一些新的工具。
+
+ shell 是什么
+shell 是用户与操作系统内核之间的接口，用户可以通过输入命令来执行各种操作，例如运行程序、管理文件和目录、配置系统等。常见的 Shell 包括 Unix/Linux 系统中的 Bash（Bourne Again Shell）、Zsh（Z Shell）和 Windows 系统中的 PowerShell。
+使用文字进行指令的输入，核心功能都是一样的：它允许你执行程序，输入并获取某种半结构化的输出。
+
+ 环境变量
+如果你要求 shell 执行某个指令，但是该指令并不是 shell 所了解的编程关键...]]></description><link>https://zenn.dev/cwang/articles/6d39c798eecf4b</link><guid isPermaLink="true">https://zenn.dev/cwang/articles/6d39c798eecf4b</guid><pubDate>Thu, 09 May 2024 07:04:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7tIa6Nfk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590missing-semester%25E3%2580%25911.%25E8%25AF%25BE%25E7%25A8%258B%25E6%25A6%2582%25E8%25A7%2588%25E4%25B8%258E%2520shell%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:oharu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTGx6bGVVUlBadm1JWV9KTXEtVnlnSGhvU2tPVG9OQ3JsZ21OZGwtTUtsV19IcElxUT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>oharu</dc:creator></item><item><title><![CDATA[【Linux】「libnsl.so.1」が存在しない場合の対処法とは？]]></title><description><![CDATA[
+ はじめに
+Systemwalker Operation Managerを立ち上げる際に、以下のエラーが表示されたため対処方法を書く。
+
+エラーメッセージ
+/opt/FJSVftlo/bin/toolaudito: error while loading shared libraries: libnsl.so.1: cannot open shared object file: No such file or directory
+
+
+ 環境
+
+RHEL9.2
+
+$ cat /etc/redhat-release
+Red Hat Enterprise Linux release 9.2 ...]]></description><link>https://zenn.dev/supersatton/articles/597aba7f48a5fe</link><guid isPermaLink="true">https://zenn.dev/supersatton/articles/597aba7f48a5fe</guid><pubDate>Wed, 08 May 2024 14:31:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--aZaPY7sS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Linux%25E3%2580%2591%25E3%2580%258Clibnsl.so.1%25E3%2580%258D%25E3%2581%258C%25E5%25AD%2598%25E5%259C%25A8%25E3%2581%2597%25E3%2581%25AA%25E3%2581%2584%25E5%25A0%25B4%25E5%2590%2588%25E3%2581%25AE%25E5%25AF%25BE%25E5%2587%25A6%25E6%25B3%2595%25E3%2581%25A8%25E3%2581%25AF%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Massu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdmMzBiMTIwZDEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Massu</dc:creator></item><item><title><![CDATA[SadServers解説#13 "Cape Town":Borked Nginx]]></title><description><![CDATA[https://ja.wikipedia.org/wiki/ケープタウン
+
+ 問題概要
+
+ シナリオ
+故障したNginx
+
+ 問題詳細
+Nginxウェブサーバーがsystemdでインストールされて管理されています。curl -I 127.0.0.1:80を実行すると、curl: (7) Failed to connect to localhost port 80: Connection refusedと表示されます。デフォルトのNginxページを取得できるように修正してください。
+
+ 解決判定
+Check My Solutionボタンをクリックしてください。
+解答が正解かどうか、コマンド...]]></description><link>https://zenn.dev/comf_nakamura/articles/sadservers_13</link><guid isPermaLink="true">https://zenn.dev/comf_nakamura/articles/sadservers_13</guid><pubDate>Wed, 08 May 2024 13:45:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--kUv35byT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:SadServers%25E8%25A7%25A3%25E8%25AA%25AC%252313%2520%2522Cape%2520Town%2522%253ABorked%2520Nginx%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25BC%25E3%2583%2588%25E3%2582%25BE%25E3%2583%25BC%25E3%2583%25B3%25E4%25B8%25AD%25E6%259D%2591%25EF%25BD%259C%25E6%2596%25B0%25E4%25BA%25BA%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25A6%25E3%2583%2589...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU1OGFjNDI2M2QuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>コンフォートゾーン中村｜新人クラウドエンジニア</dc:creator></item><item><title><![CDATA[linuxの入った ssdを別のノートPCに移行する方法]]></title><description><![CDATA[先日メインで使用しているノートpcが壊れてしまったのでそのままssdを別のノートpcに移植した際の記録です。
+
+ 対応ハード
+huawei d15 ryzen7 3700U → huawei d15 ryzen5 3500U
+huawei d15のマザーボードにはm.2ssdのスロットと、2.5インチのsataスロットがついています。
+2つssdが入るデバイスなら問題ないと思います。
+一方にwindows11/10、もう一方にgaruda linuxが入ったssdを使用します。
+
+ 準備するもの
+windowsが入ったpc ssd slotが2つ以上挿入できるもの
+linuxの入ったss...]]></description><link>https://zenn.dev/tositada/articles/814cfd4766e98c</link><guid isPermaLink="true">https://zenn.dev/tositada/articles/814cfd4766e98c</guid><pubDate>Tue, 07 May 2024 15:46:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GsH43BWF--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:linux%25E3%2581%25AE%25E5%2585%25A5%25E3%2581%25A3%25E3%2581%259F%2520ssd%25E3%2582%2592%25E5%2588%25A5%25E3%2581%25AE%25E3%2583%258E%25E3%2583%25BC%25E3%2583%2588PC%25E3%2581%25AB%25E7%25A7%25BB%25E8%25A1%258C%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tositada%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dqd1FPYmhFZkxNaTVBMnBxQnZ5Wmgzbi1jVXVIZnhleXdvaHJIb0E9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tositada</dc:creator></item><item><title><![CDATA[SadServers解説#12 "Tokyo":can't serve web file]]></title><description><![CDATA[https://ja.wikipedia.org/wiki/東京
+
+ 問題概要
+
+ シナリオ
+WEBファイルを提供できません
+
+ 問題詳細
+ファイル「/var/www/html/index.html」を提供するWEBサーバーがあり、内容は「hello sadserver」です。しかし、curl 127.0.0.1:80を実行し、HTTPクライアントを使用してローカルで確認しようとしても、何も返されません。このシナリオは特定のWEBサーバーの設定に関するものではないため、WEBサーバーの動作に関する一般的な知識を持っていれば解決することが可能です。
+
+ 解決判定
+Check My Solu...]]></description><link>https://zenn.dev/comf_nakamura/articles/sadservers_12</link><guid isPermaLink="true">https://zenn.dev/comf_nakamura/articles/sadservers_12</guid><pubDate>Tue, 07 May 2024 12:59:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jO5G5s59--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:SadServers%25E8%25A7%25A3%25E8%25AA%25AC%252312%2520%2522Tokyo%2522%253Acan%2527t%2520serve%2520web%2520file%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25BC%25E3%2583%2588%25E3%2582%25BE%25E3%2583%25BC%25E3%2583%25B3%25E4%25B8%25AD%25E6%259D%2591%25EF%25BD%259C%25E6%2596%25B0%25E4%25BA%25BA%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25A6%25E3%2583%2589...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU1OGFjNDI2M2QuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>コンフォートゾーン中村｜新人クラウドエンジニア</dc:creator></item><item><title><![CDATA[WSL2からホストマシンのUSBデバイスを使えるようにする]]></title><description><![CDATA[
+ はじめに
+WSL2上で開発をする場合、ホスト側であるWindowsに接続されたUSBデバイスに直接アクセスする事ができないため、USBに接続されたデバイスを用いた開発が出来ませんが、USB/IPというUSBデバイスをIP上で使えるようにした仕組みがあり、今回はそのUSB/IPを利用してWSL2でUSBデバイスを使ってみたいと思います。
+
+ 前提条件
+
+ホストOSがWindows10/11かつ、x64版であること(x86/ARM版は非対応)
+WSL2がインストールされ何れかのLinuxディストリビューションがインストールされていること
+
+
+ ホスト側(Windows側)のセットアップ
+...]]></description><link>https://zenn.dev/headwaters/articles/b9183cca7e7233</link><guid isPermaLink="true">https://zenn.dev/headwaters/articles/b9183cca7e7233</guid><pubDate>Tue, 07 May 2024 08:43:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--kiRvTbmy--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:WSL2%25E3%2581%258B%25E3%2582%2589%25E3%2583%259B%25E3%2582%25B9%25E3%2583%2588%25E3%2583%259E%25E3%2582%25B7%25E3%2583%25B3%25E3%2581%25AEUSB%25E3%2583%2587%25E3%2583%2590%25E3%2582%25A4%25E3%2582%25B9%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2588%25E3%2582%258B%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:kt_skgk%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZjNGExY2UxMDYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2598%25E3%2583%2583%25E3%2583%2589%25E3%2582%25A6%25E3%2582%25A9%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%25BC%25E3%2582%25B9%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FmMmIxN2VmMGIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kt_skgk</dc:creator></item><item><title><![CDATA[Ubuntu 24.04 の標準機能で deb822 の deb-src を有効にする]]></title><description><![CDATA[
+ TL;DR
+deb822 スタイル形式の deb-src (ソースコードリポジトリ) を有効するワンライナーです 🚀
+
+Ubuntu 24.04
+sudo apt-get update \
+    &amp;&amp; sudo DEBIAN_FRONTEND=noninteractive apt-get --no-install-recommends -y install python3-software-properties \
+    &amp;&amp; sudo /usr/bin/python3 -c "from softwareproperties.SoftwarePro...]]></description><link>https://zenn.dev/mtkn1/articles/ubuntu-noble-repository-source</link><guid isPermaLink="true">https://zenn.dev/mtkn1/articles/ubuntu-noble-repository-source</guid><pubDate>Tue, 07 May 2024 08:32:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--PTamH30v--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ubuntu%252024.04%2520%25E3%2581%25AE%25E6%25A8%2599%25E6%25BA%2596%25E6%25A9%259F%25E8%2583%25BD%25E3%2581%25A7%2520deb822%2520%25E3%2581%25AE%2520deb-src%2520%25E3%2582%2592%25E6%259C%2589%25E5%258A%25B9%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25BE%25E3%2581%25A1%25E3%2582%2585%25E3%2581%2591%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lETmpYVG10WENQNFVmYVdwM0g2SEszbzhkZk1FbkY2cnBDUmJrS2c9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>まちゅけん</dc:creator></item><item><title><![CDATA[【インターネット】OS/IPアドレス/ユーザー名の確認コマンド]]></title><description><![CDATA[
+ OS名やバージョンについての情報を表示させるコマンド
+
+ 🔳Windows
+
+Windows OS
+winver
+
+
+ 🔳Mac
+
+Mac OS
+sw_vers
+
+
+ 🔳Linuxディストリビューション
+
+Amazon Linux/Ubuntuなど
+cat /etc/os-release
+
+
+ ローカルIPアドレスを表示させるコマンド
+
+ 🔳Windows
+
+windows OS
+ipconfig
+
+ipconfigコマンドの出力結果
+出力結果
+PS C:\-\-&gt; ipconfig
+Windows IP 構成
+Wireless LAN adapter ローカル エリア接続* ...]]></description><link>https://zenn.dev/code_journey_ys/articles/45b4f55027cecc</link><guid isPermaLink="true">https://zenn.dev/code_journey_ys/articles/45b4f55027cecc</guid><pubDate>Mon, 06 May 2024 10:55:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ObHEsoAb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%258D%25E3%2583%2583%25E3%2583%2588%25E3%2580%2591OS%252FIP%25E3%2582%25A2%25E3%2583%2589%25E3%2583%25AC%25E3%2582%25B9%252F%25E3%2583%25A6%25E3%2583%25BC%25E3%2582%25B6%25E3%2583%25BC%25E5%2590%258D%25E3%2581%25AE%25E7%25A2%25BA%25E8%25AA%258D%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yusuke%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2QxYmU5MTc2ZTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yusuke</dc:creator></item><item><title><![CDATA[MCA Selector で地形を編集する]]></title><description><![CDATA[Java版 Minecraft のワールドを読み込んでマップを表示したり、散策した場所を未踏の状態に初期化したり、地形の一部を別ワールドへ複製できる MCA Selector を Mac にインストールする方法を説明します。
+!
+インストールについての詳細は公式ドキュメントを参考にする。
+
+
+ 🛠️ 事前準備
+デバイスやソフトウェアは以下を用いる。
+
+💻 PC端末（macOS）
+💽 OpenJDK
+
+🔌 MCA Selector
+
+
+
+
+ 1. JavaFX の入手
+ダウンロードサイトから OpenJDKバイナリ （JavaFX同梱版）を入手しておく。
+https://www.azul....]]></description><link>https://zenn.dev/mesgory/articles/f36ff50e27893f</link><guid isPermaLink="true">https://zenn.dev/mesgory/articles/f36ff50e27893f</guid><pubDate>Mon, 06 May 2024 00:58:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2Gh-Yy7f--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:MCA%2520Selector%2520%25E3%2581%25A7%25E5%259C%25B0%25E5%25BD%25A2%25E3%2582%2592%25E7%25B7%25A8%25E9%259B%2586%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E1%25B4%258D%25E1%25B4%2587s%25C9%25A2%25E1%25B4%258F%25CA%2580%25CA%258F%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk4MGQyYmQ0MjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ᴍᴇsɢᴏʀʏ</dc:creator></item><item><title><![CDATA[Linuxディストリビューションを自作したいあなたへ]]></title><description><![CDATA[筆者は初期RAMディスクのないLinuxディストリビューションを作成したことがあるので、そのディストリビューションの作成に役立った情報、書籍、周辺情報についてこの記事に忘れぬよう記載しておきます。
+これを見た方の中で少しでも自分でLinuxディストリビューションを作ってみたいと思う方が増えてくれれば幸いです。
+
+ 最初に
+Linuxディストリビューションの自作はハンズオン形式のものがLinux from scratchくらいしかない上に、これはLinuxについて深い知識が要求されるものなので、最初のハードルがかなり高く感じております。
+そのため、Linuxシステムを「知っている」から「作...]]></description><link>https://zenn.dev/baba0119/articles/75371dc63d7eac</link><guid isPermaLink="true">https://zenn.dev/baba0119/articles/75371dc63d7eac</guid><pubDate>Sun, 05 May 2024 07:22:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6t9nMGOx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%25E3%2583%2587%25E3%2582%25A3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25AA%25E3%2583%2593%25E3%2583%25A5%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%2592%25E8%2587%25AA%25E4%25BD%259C%25E3%2581%2597%25E3%2581%259F%25E3%2581%2584%25E3%2581%2582%25E3%2581%25AA%25E3%2581%259F%25E3%2581%25B8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%2590%25E3%2583%2590%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE0MDUyYmEwMzguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ババ</dc:creator></item><item><title><![CDATA[EFI と grub2 のメモ]]></title><description><![CDATA[EFI パーティションと grub.cfg と vmlinuz などの配置に関するメモ。
+
+ EFI boot の選択肢
+
+ EFI partition を選択する
+/dev/sda1 とか usb とか。
+EFI partition を選択するということは、暗黙にデフォルトのEFIアプリケーションを選択して
+引数無しで実行する。
+!
+マザーボード(EFIファームウェア)のbootパーティションの選択はこのレイヤー
+
+
+ EFI application を選択する
+EFI partition　の中には複数の EFI application がありえる。
+/EFI/*/*.efi が EF...]]></description><link>https://zenn.dev/ousttrue/articles/e2f8585736194a</link><guid isPermaLink="true">https://zenn.dev/ousttrue/articles/e2f8585736194a</guid><pubDate>Sun, 05 May 2024 06:36:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3xSK53Ow--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:EFI%2520%25E3%2581%25A8%2520grub2%2520%25E3%2581%25AE%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ousttrue%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2QzZjA3OTNjNTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ousttrue</dc:creator></item><item><title><![CDATA[Linuxで、複数コマンドを一つずつ確認しながら実行するスクリプト]]></title><description><![CDATA[
+ はじめに
+マシンの管理などで、定期的に同じコマンド群を実行することがあります。
+手順書のファイルからコマンドを一つずつコピペして結果を確認しているのですが、手間がかかりますし、順序を間違えたりするリスクもあります。
+そのため、複数コマンドをループしながら、一つずつ実行確認していくスクリプトを作ってみました。
+
+ 概要
+以下の動きをします。
+
+複数コマンドを改行で区切ったファイルを、スクリプトファイル実行時に引き渡して使います。
+最初に対象のコマンドとインデックス番号を表示して、何番目から始めるかを指定します。
+各コマンド実行時は、コマンドの文字列を表示し、実行する/しない を指示しま...]]></description><link>https://zenn.dev/arbr/articles/2790a886e89384</link><guid isPermaLink="true">https://zenn.dev/arbr/articles/2790a886e89384</guid><pubDate>Sat, 04 May 2024 20:00:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--DB3xbn44--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%25E3%2581%25A7%25E3%2580%2581%25E8%25A4%2587%25E6%2595%25B0%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2582%2592%25E4%25B8%2580%25E3%2581%25A4%25E3%2581%259A%25E3%2581%25A4%25E7%25A2%25BA%25E8%25AA%258D%25E3%2581%2597%25E3%2581%25AA%25E3%2581%258C%25E3%2582%2589%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%2599%25E3%2582%258B%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ARBR%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzMxMTdiNTc4YWMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ARBR</dc:creator></item><item><title><![CDATA[RancherOSはどのようにpid1をdockerにしたのか]]></title><description><![CDATA[すでにパブリックアーカイブとなったRancherOSですが、pid1がdockerとなっている特殊なLinuxディストリビューションです。これがどのようにpid1をdockerにしているのかをコードを読みつつ紐解いていきたいと思います。
+
+ 最初に
+Linuxディストリビューションのinitプロセスは最近だとsystemdであったり、一昔前だとsystemvやbusyboxでした。これらのinitプログラムの場合はinitスクリプトやunitファイルに書いてある通りに特殊ファイルシステムのマウントやネットワークの設定、デーモンプロセスの起動を行っていました。
+しかし、dockerの場合は...]]></description><link>https://zenn.dev/baba0119/articles/fd4ed04ad117f2</link><guid isPermaLink="true">https://zenn.dev/baba0119/articles/fd4ed04ad117f2</guid><pubDate>Sat, 04 May 2024 06:42:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2KDINx3I--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:RancherOS%25E3%2581%25AF%25E3%2581%25A9%25E3%2581%25AE%25E3%2582%2588%25E3%2581%2586%25E3%2581%25ABpid1%25E3%2582%2592docker%25E3%2581%25AB%25E3%2581%2597%25E3%2581%259F%25E3%2581%25AE%25E3%2581%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%2590%25E3%2583%2590%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE0MDUyYmEwMzguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ババ</dc:creator></item><item><title><![CDATA[【Linux】Systemwalker Operation Managerの自動起動設定方法]]></title><description><![CDATA[
+ はじめに
+Systemwalker Operation Managerの自動起動設定について書きたいと思います。
+
+ 環境
+
+RHEL9.2
+
+$ cat /etc/redhat-release
+Red Hat Enterprise Linux release 9.2 (Plow)
+$
+
+Systemwalker Operation Manager Standard Edition V17.0.1
+
+# /opt/FJSVftlo/bin/swpkginfo
+*************************************************
+Systemwalker ...]]></description><link>https://zenn.dev/supersatton/articles/5f63d4bc87e92c</link><guid isPermaLink="true">https://zenn.dev/supersatton/articles/5f63d4bc87e92c</guid><pubDate>Sat, 04 May 2024 04:50:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--e2XywBGG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Linux%25E3%2580%2591Systemwalker%2520Operation%2520Manager%25E3%2581%25AE%25E8%2587%25AA%25E5%258B%2595%25E8%25B5%25B7%25E5%258B%2595%25E8%25A8%25AD%25E5%25AE%259A%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Massu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdmMzBiMTIwZDEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Massu</dc:creator></item><item><title><![CDATA[コンテナ内でSELinuxを有効化する]]></title><description><![CDATA[こんなことをしたい人は私以外にいないかもしれませんが、コンテナ内でSELinuxを有効化する方法を記します。
+Podmanで作業していますが、Dockerでも同様の手順で実行できます。
+
+ ホストマシン
+Hyper-Vで作成したRocky Linux 9.3の仮想マシンを使用します。
+
+host
+$ cat /etc/redhat-release
+Rocky Linux release 9.3 (Blue Onyx)
+$ uname -a
+Linux rocky9 5.14.0-362.24.1.el9_3.x86_64 #1 SMP PREEMPT_DYNAMIC Wed Mar 13...]]></description><link>https://zenn.dev/yutotnh/articles/807a8ec4ef47c9</link><guid isPermaLink="true">https://zenn.dev/yutotnh/articles/807a8ec4ef47c9</guid><pubDate>Sat, 04 May 2024 03:53:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--n9O5gyJz--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2586%25E3%2583%258A%25E5%2586%2585%25E3%2581%25A7SELinux%25E3%2582%2592%25E6%259C%2589%25E5%258A%25B9%25E5%258C%2596%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yutotnh%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lCMGg4Y3Vrb29zUnFuekVBZ0l2cFFxb0p0X3lIa1Z3QVBUYU5TPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yutotnh</dc:creator></item><item><title><![CDATA[Yoctoで自前のデバイスツリーを組み込んでみる]]></title><description><![CDATA[Yoctoで自前のデバイスツリーを組み込もうとしてはまったのでメモ。対象はRAspberry piです、
+
+ 準備
+まず自前のデバイス用にdtsファイルを準備。事前にdtcでコンパイルして問題がないこと、実機に組み込んで動作に問題がないことを確認しておく。
+
+ レシピファイルの準備
+自前で作ってもよいのですが、今回はyoctoの提供するツールを使って作成しました。
+
+ レイヤーの追加
+dtsを組み込むレシピを格納するレイヤーを作ります。まず、bitbake-layersで新規レイヤーを追加します。
+bitbake-layers create-layer meta-mydts
+レイヤーの作...]]></description><link>https://zenn.dev/kobayutapon/articles/886ded236d6a5a</link><guid isPermaLink="true">https://zenn.dev/kobayutapon/articles/886ded236d6a5a</guid><pubDate>Fri, 03 May 2024 23:57:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---t9V8yGD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Yocto%25E3%2581%25A7%25E8%2587%25AA%25E5%2589%258D%25E3%2581%25AE%25E3%2583%2587%25E3%2583%2590%25E3%2582%25A4%25E3%2582%25B9%25E3%2583%2584%25E3%2583%25AA%25E3%2583%25BC%25E3%2582%2592%25E7%25B5%2584%25E3%2581%25BF%25E8%25BE%25BC%25E3%2582%2593%25E3%2581%25A7%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25B3%25E3%2583%2590%25E3%2583%25A6%25E3%2582%25BF%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0Y2J6SVJNTHZLREJYd0NFYUQyaDctMktyYk9rU3F5NjNLSWtodEk3UzlMQmZvPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>コバユタ</dc:creator></item></channel></rss>
