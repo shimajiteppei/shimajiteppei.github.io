@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Rust」のフィード]]></title><description><![CDATA[Zennのトピック「Rust」のRSSフィードです]]></description><link>https://zenn.dev/topics/rust</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ba09661577.png</url><title>Zennの「Rust」のフィード</title><link>https://zenn.dev/topics/rust</link></image><generator>zenn.dev</generator><lastBuildDate>Sun, 12 May 2024 04:25:52 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/rust/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[df-pnアルゴリズムをRustで実装して公開しました]]></title><description><![CDATA[やねうら王さんの記事が話題になっていたので、便乗して以前 Rust で実装した df-pn アルゴリズムの実装を整理して公開しました。
+試しに 15 手詰めを解かせたところ 3 秒程度で解けているのでそこそこ優秀なんじゃないでしょうか。（もちろん問題によるでしょうが）
+リポジトリはこちらです。
+正直、個人的に C++や Python のコードはとても追いづらくて辛いので Rust で書いた df-pn の実装が誰かの理解に役立てば幸いです。
+
+ 使い方
+READMEにも書いた通りですが、将棋の盤面を AA で書いたファイルを引数に渡すと詰み盤面を探索します。
+詰みの全パターンを網羅して出...]]></description><link>https://zenn.dev/malt03/articles/9fa37b6bf812f0</link><guid isPermaLink="true">https://zenn.dev/malt03/articles/9fa37b6bf812f0</guid><pubDate>Sat, 11 May 2024 17:51:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--i3mq06Lw--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:df-pn%25E3%2582%25A2%25E3%2583%25AB%25E3%2582%25B4%25E3%2583%25AA%25E3%2582%25BA%25E3%2583%25A0%25E3%2582%2592Rust%25E3%2581%25A7%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2597%25E3%2581%25A6%25E5%2585%25AC%25E9%2596%258B%25E3%2581%2597%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:malt03%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzIwMTJkOWYwYzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>malt03</dc:creator></item><item><title><![CDATA[[Rust] 静的ディスパッチ(Enum)と動的ディスパッチ(dyn Trait)はどちらが速いのか？]]></title><description><![CDATA[ある時、 Rust で動的ポリモーフィズムを実現するには、 Enum は dyn Trait より遅いという主張を見ました。 dyn Trait は仮想関数テーブルのルックアップがある分、遅いはずだと思っていたので、これは確かめてみようと思いました。
+ただし、このようなマイクロベンチマークは話半分ぐらいに思っておいた方が良いです。実際のコードではオプティマイザがかなり仕事をするので、本当にスピードが問題になる局面では実際のコードでプロファイルを取った方が良いです。
+この記事では rustc -O を使って最適化を適用しています。
+
+ Enum の実装
+実用的には(平均的には) 5 種類ぐ...]]></description><link>https://zenn.dev/msakuta/articles/d83e0f80e20022</link><guid isPermaLink="true">https://zenn.dev/msakuta/articles/d83e0f80e20022</guid><pubDate>Sat, 11 May 2024 05:22:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--M6YagCwD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BRust%255D%2520%25E9%259D%2599%25E7%259A%2584%25E3%2583%2587%25E3%2582%25A3%25E3%2582%25B9%25E3%2583%2591%25E3%2583%2583%25E3%2583%2581%2528Enum%2529%25E3%2581%25A8%25E5%258B%2595%25E7%259A%2584%25E3%2583%2587%25E3%2582%25A3%25E3%2582%25B9%25E3%2583%2591%25E3%2583%2583%25E3%2583%2581%2528dyn%2520Trait%2529%25E3%2581%25AF%25E3%2581%25A9%25E3%2581%25A1%25E3%2582%2589%25E3%2581%258C%25E9%2580%259F%25E3%2581%2584%25E3%2581%25AE%25E3%2581%258B%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:msakuta%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFUWEFKeG5tZ0ZYQlJsZjJpZVh1QWlwOG9LaFdpT2FSczg2dXRzWlcwN3o9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>msakuta</dc:creator></item><item><title><![CDATA[cargo-zigbuildメモ [blessed.rsシリーズ6]]]></title><description><![CDATA[
+ 概要
+https://blessed.rs/crates
+こちらのリストにあるものを見て書いたメモの共有です。
+内容はまとめておらず、順番もぐちゃぐちゃ。あくまでメモになります。
+また、網羅的にメモしているわけではなく、自分が必要だと思ったもののみメモしているため、内容が偏っているかもしれません。
+今回はcargo-zigbuildについてです。
+
+ cargo-zigbuildとは
+リンカとしてzigを使用してクロスコンパイルを行うツール
+
+ install
+https://github.com/rust-cross/cargo-zigbuild?tab=readme-ov-fil...]]></description><link>https://zenn.dev/kotabrog/articles/021af38c7e4bb4</link><guid isPermaLink="true">https://zenn.dev/kotabrog/articles/021af38c7e4bb4</guid><pubDate>Fri, 10 May 2024 14:21:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--b8V1-nEZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:cargo-zigbuild%25E3%2583%25A1%25E3%2583%25A2%2520%255Bblessed.rs%25E3%2582%25B7%25E3%2583%25AA%25E3%2583%25BC%25E3%2582%25BA6%255D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kota%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pndUZyRTdIcS13U3dMRHFoT05pbjFKWVZHOVFZcjBEWXQ2SVZ3WWc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kota</dc:creator></item><item><title><![CDATA[「The Rust Programming Language 日本語版」を読んだ備忘録③]]></title><description><![CDATA[https://zenn.dev/matcha22/articles/03b4b3097a8bd0
+の続き
+
+ 11.自動テスト
+テスト関数が行う3つの動作
+1.必要なデータや状態をセットアップする。
+2.テスト対象のコードを走らせる。
+3.結果が想定通りであることを断定（以下、アサーションという）する。
+テストの例
+#[cfg(test)]
+mod tests {
+    #[test]
+    fn exploration() {
+        assert_eq!(2 + 2, 4);
+    }
+}
+fn main() {}
+
+// $ cargo test
+//    Com...]]></description><link>https://zenn.dev/matcha22/articles/1f5bdb36237150</link><guid isPermaLink="true">https://zenn.dev/matcha22/articles/1f5bdb36237150</guid><pubDate>Fri, 10 May 2024 12:24:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--77zW612H--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%258CThe%2520Rust%2520Programming%2520Language%2520%25E6%2597%25A5%25E6%259C%25AC%25E8%25AA%259E%25E7%2589%2588%25E3%2580%258D%25E3%2582%2592%25E8%25AA%25AD%25E3%2582%2593%25E3%2581%25A0%25E5%2582%2599%25E5%25BF%2598%25E9%258C%25B2%25E2%2591%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:matcha%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk4MTA1OWFmZjYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>matcha</dc:creator></item><item><title><![CDATA[【MongoDB】groupを用いた集計で中央値を取得したい]]></title><description><![CDATA[
+ 概要
+MongoDBではMongoDBの集計($group, $match, $sum, $avgなど)の記事にある通り、キーを指定して合計や平均などを集計することができます。
+MongoDB 7.0からmedian (aggregation)という中央値を取得できる機能が追加されたようなので、今回試してみました。
+
+ 前提
+
+使用したMongoDBのバージョンは7.0です。
+
+
+ 実装サンプル
+今回はRustでクエリを実装してみました。memo_listという配列項目の配下のevaluationの値を集計します。
+MongoDB group by array inner-eleme...]]></description><link>https://zenn.dev/someone7140/articles/112c5ef82e852d</link><guid isPermaLink="true">https://zenn.dev/someone7140/articles/112c5ef82e852d</guid><pubDate>Fri, 10 May 2024 11:09:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--osRhAxtu--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590MongoDB%25E3%2580%2591group%25E3%2582%2592%25E7%2594%25A8%25E3%2581%2584%25E3%2581%259F%25E9%259B%2586%25E8%25A8%2588%25E3%2581%25A7%25E4%25B8%25AD%25E5%25A4%25AE%25E5%2580%25A4%25E3%2582%2592%25E5%258F%2596%25E5%25BE%2597%25E3%2581%2597%25E3%2581%259F%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AA%25E3%2581%258B%25E3%2581%25A4%25E3%2581%258C%25E3%2582%258F%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFhNWRlOTE4YjEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>なかつがわ</dc:creator></item><item><title><![CDATA[impl TraitとTrait boundの違い]]></title><description><![CDATA[
+ 結論
+
+impl Trait: Trait bound（トレイト境界）の糖衣構文。シンプルに関数の引数や戻り値の型としてトレイトを定義したい場合に使われる。
+Trait bound: ジェネリクス型を使うので複数の引数に同じ型を定義できたりする。指定したいトレイトの数が多い場合はこちらを使うと見やすい。
+
+
+ impl Traitの使用例
+引数や戻り値に特定のトレイトを指定したい場合に使えます。
+fn first_item(mut iter: impl Iterator&lt;Item = i32&gt;) -&gt; Option&lt;i32&gt; {
+    iter.nex...]]></description><link>https://zenn.dev/torohash/articles/4a62e04187f38b</link><guid isPermaLink="true">https://zenn.dev/torohash/articles/4a62e04187f38b</guid><pubDate>Thu, 09 May 2024 02:08:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--I2LOX-It--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:impl%2520Trait%25E3%2581%25A8Trait%2520bound%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:torohash%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY0MmYzMDgyMmUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>torohash</dc:creator></item><item><title><![CDATA[【Rust】"Hello world!" without Standard Library]]></title><description><![CDATA[
+ Without Standard Library
+Let's start with a normal "Hello, world!" program as follows:
+// main.rs
+
+fn main() {
+    println!("Hello, world!");
+}
+https://doc.rust-lang.org/reference/names/preludes.html#the-no_std-attribute
+
+By default, the standard library is automatically included in the crate r...]]></description><link>https://zenn.dev/zulinx86/articles/rust-nostd-101</link><guid isPermaLink="true">https://zenn.dev/zulinx86/articles/rust-nostd-101</guid><pubDate>Thu, 09 May 2024 00:06:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--uK4XqZbp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Rust%25E3%2580%2591%2522Hello%2520world%2521%2522%2520without%2520Standard%2520Library%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:zulinx86%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQyZjYzMDk2NjEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>zulinx86</dc:creator></item><item><title><![CDATA[機能性表示評価成績一覧を商品名で検索・閲覧できる Web サイトを作ってみた]]></title><description><![CDATA[
+ 概要
+「一般社団法人 消費者市民社会をつくる会」様が公開している 機能性表示評価成績一覧（A1-I965）_240206c4（届出撤回非表示・下期漏れ分修正 2）(PDF ファイル)を商品名で検索・閲覧できる Web サイト アンシンめし を作ってみました。
+
+ 機能性表示評価成績一覧 とは
+「ASCON 科学者委員会」様が機能性表示食品の根拠に関する評価判定をまとめた PDF ファイルです。
+A ～ C の評価判定は科学的根拠の強さを示したものであり、製品の効果の強さを示したものではありません。
+
+ Web サイトを作った動機
+機能性表示評価成績一覧は PDF ファイルのため、評価...]]></description><link>https://zenn.dev/st_little/articles/create-website-list-of-grades-searched-viewed</link><guid isPermaLink="true">https://zenn.dev/st_little/articles/create-website-list-of-grades-searched-viewed</guid><pubDate>Wed, 08 May 2024 17:49:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--F-0IRS-5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%25A9%259F%25E8%2583%25BD%25E6%2580%25A7%25E8%25A1%25A8%25E7%25A4%25BA%25E8%25A9%2595%25E4%25BE%25A1%25E6%2588%2590%25E7%25B8%25BE%25E4%25B8%2580%25E8%25A6%25A7%25E3%2582%2592%25E5%2595%2586%25E5%2593%2581%25E5%2590%258D%25E3%2581%25A7%25E6%25A4%259C%25E7%25B4%25A2%25E3%2583%25BB%25E9%2596%25B2%25E8%25A6%25A7%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258B%2520Web%2520%25E3%2582%25B5%25E3%2582%25A4%25E3%2583%2588%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:st-little%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUxtNXd1MzFRX0lpMkZWUVdwclRKOUluaXJPN092TlI2WkV6c1A3WGRRMTU9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>st-little</dc:creator></item><item><title><![CDATA[Dioxus で QR code を生成する Web サイトを作ってみた]]></title><description><![CDATA[
+ 概要
+Dioxus で QR code を生成する Web サイト ZEQRA を作ってみたので、雑な内容ですが記事にしました。
+
+ 環境
+
+
+dioxus: 0.5.1
+
+bulma: 1.0.0
+
+qrcode-rust: 0.14.0
+
+
+ 関連記事
+
+【Rust】.env で環境変数を設定する
+
+
+ 実装
+結構雑に書いてるので GitHub のコードも併せて参照して下さい。
+https://github.com/st-little/zeqra/blob/develop/README.md
+
+
+Dioxus のプロジェクトを作成します。
+次のコマンドでプロジェクトの作成を開始し...]]></description><link>https://zenn.dev/st_little/articles/creating-website-generates-qr-codes-with-dioxus</link><guid isPermaLink="true">https://zenn.dev/st_little/articles/creating-website-generates-qr-codes-with-dioxus</guid><pubDate>Tue, 07 May 2024 14:27:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jnKSRX_u--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Dioxus%2520%25E3%2581%25A7%2520QR%2520code%2520%25E3%2582%2592%25E7%2594%259F%25E6%2588%2590%25E3%2581%2599%25E3%2582%258B%2520Web%2520%25E3%2582%25B5%25E3%2582%25A4%25E3%2583%2588%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:st-little%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUxtNXd1MzFRX0lpMkZWUVdwclRKOUluaXJPN092TlI2WkV6c1A3WGRRMTU9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>st-little</dc:creator></item><item><title><![CDATA[「The Rust Programming Language 日本語版」を読んだ備忘録②]]></title><description><![CDATA[https://zenn.dev/matcha22/articles/63ee2797fe47d6
+の続き
+
+ 6.Enum(列挙型)
+取り得る値を列挙することで型の定義が可能
+構造体の使い分け
+enumの列挙子は、その識別子の元に名前空間分けされていること
+
+ 簡単なプログラム(数当てゲーム)　一部追加
+use rand::Rng;
+use std::cmp::Ordering;
+use std::io;
+
+fn main() {
+    println!("Guess the number!");
+    let secret_number = rand::thread_rng()....]]></description><link>https://zenn.dev/matcha22/articles/03b4b3097a8bd0</link><guid isPermaLink="true">https://zenn.dev/matcha22/articles/03b4b3097a8bd0</guid><pubDate>Tue, 07 May 2024 11:01:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BL7GZdyA--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%258CThe%2520Rust%2520Programming%2520Language%2520%25E6%2597%25A5%25E6%259C%25AC%25E8%25AA%259E%25E7%2589%2588%25E3%2580%258D%25E3%2582%2592%25E8%25AA%25AD%25E3%2582%2593%25E3%2581%25A0%25E5%2582%2599%25E5%25BF%2598%25E9%258C%25B2%25E2%2591%25A1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:matcha%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk4MTA1OWFmZjYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>matcha</dc:creator></item><item><title><![CDATA[1つの構造体にしか実装予定がなくてもトレイトを定義するメリット]]></title><description><![CDATA[トレイトを実装すれば振る舞いを共通化することができ便利ですが、そこだけがメリットなら将来的に一つの構造体でしか実装しない場合は不要な気もします。
+個人的にそう思っていたので実装しないケースが多かったのですが、色々コーディングをしていく中でメリットのあるシーンを見つけたのでまとめてみます。
+
+ カプセル化
+例えば、UserData構造体にgetterメソッドを実装するとします。
+UserData構造体の中には機密情報が存在しており、コードレベルでアクセスの制限をかけていきたい場合、トレイトが有効に働きます。
+struct UserData {
+    username: String,
+ ...]]></description><link>https://zenn.dev/torohash/articles/390fda3496b893</link><guid isPermaLink="true">https://zenn.dev/torohash/articles/390fda3496b893</guid><pubDate>Tue, 07 May 2024 10:30:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Bopqsm9I--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:1%25E3%2581%25A4%25E3%2581%25AE%25E6%25A7%258B%25E9%2580%25A0%25E4%25BD%2593%25E3%2581%25AB%25E3%2581%2597%25E3%2581%258B%25E5%25AE%259F%25E8%25A3%2585%25E4%25BA%2588%25E5%25AE%259A%25E3%2581%258C%25E3%2581%25AA%25E3%2581%258F%25E3%2581%25A6%25E3%2582%2582%25E3%2583%2588%25E3%2583%25AC%25E3%2582%25A4%25E3%2583%2588%25E3%2582%2592%25E5%25AE%259A%25E7%25BE%25A9%25E3%2581%2599%25E3%2582%258B%25E3%2583%25A1%25E3%2583%25AA%25E3%2583%2583%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:torohash%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY0MmYzMDgyMmUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>torohash</dc:creator></item><item><title><![CDATA[Rust 基本文法 -繰り返し処理-]]></title><description><![CDATA[
+ はじめに
+久しぶりに、Rust 基本文法シリーズです。
+今回は、どの言語でも肝となってくる繰り返し処理について一緒に学んでいければと思います。
+コードは Rust Playground でも試すことができますので、もし宜しければ手を動かしてみてください。
+https://play.rust-lang.org/
+
+ 繰り返し処理
+Rust における繰り返し処理の方法はいくつか挙げられますが、
+比較的、代表的なものにフォーカスしつつ、普段私が業務やプライベートでも利用する機会の多い方法に絞り込んで紹介できればと思います。
+
+for ~ in ~ 文
+iter() + for_each()...]]></description><link>https://zenn.dev/collabostyle/articles/6d10595f67a850</link><guid isPermaLink="true">https://zenn.dev/collabostyle/articles/6d10595f67a850</guid><pubDate>Tue, 07 May 2024 09:41:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7WflWMzD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%2520%25E5%259F%25BA%25E6%259C%25AC%25E6%2596%2587%25E6%25B3%2595%2520-%25E7%25B9%25B0%25E3%2582%258A%25E8%25BF%2594%25E3%2581%2597%25E5%2587%25A6%25E7%2590%2586-%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Iseya%2520Shota%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MxOTFmZDljMTIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25B3%25E3%2583%25A9%25E3%2583%259C%25E3%2582%25B9%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25AB%2520Developers%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YjRyRXVYb0x2SGp5alRaelhENlBCRnZGTzhNTk0zLXlBTWZvM0Q9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Iseya Shota</dc:creator></item><item><title><![CDATA[Rust で callback function を設定する callback_fn の紹介]]></title><description><![CDATA[Rust で callback function を設定するやさしい方法
+
+ はじめに
+Rust で関数に callback function を追加するマクロ callback_fn 作成しました。
+この記事ではマクロの魅力をお届けしようと思います。
+https://github.com/poi2/callback_fn
+
+ callback_fn
+callback_fn は Rust の関数を拡張するマクロです。
+attribute 内で指定した関数を対象の関数の前後に追加します。
+
+ インストール
+Cargo.toml に callback_fn を追加してください。
+[depen...]]></description><link>https://zenn.dev/poi2/articles/5cc64f2edda9b0</link><guid isPermaLink="true">https://zenn.dev/poi2/articles/5cc64f2edda9b0</guid><pubDate>Mon, 06 May 2024 23:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--g4Vqtuxa--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%2520%25E3%2581%25A7%2520callback%2520function%2520%25E3%2582%2592%25E8%25A8%25AD%25E5%25AE%259A%25E3%2581%2599%25E3%2582%258B%2520callback_fn%2520%25E3%2581%25AE%25E7%25B4%25B9%25E4%25BB%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:daisuke%2520ito%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSmtNR1VZbWNfVEpRUVpDQk5nT2hDdFRjTG1CTklJcUkzamxvYURmejJ6PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>daisuke ito</dc:creator></item><item><title><![CDATA[RustでECDSA公開鍵からBTCアドレスを生成]]></title><description><![CDATA[
+ はじめに
+2024年4月からブロックチェーン公開講座を受講しています。今までなんとなく漠然と理解していたことを知識として体系的に整理できて、とてもありがたい講座です。
+第2回『ビットコインその1』ではECDSAの公開鍵からBTCアドレスを生成する方法について学びましたので、その復習のためRustで試してみました。
+RustとBlockchainの学習を目的として書いたものですので、実運用では信頼できるライブラリをお使いください。
+
+ アルゴリズム
+ECDSA公開鍵からBTCアドレスを生成する流れは以下になります。
+
+ECDSA公開鍵をSHA256でハッシュ化する
+1をRIPEMD16...]]></description><link>https://zenn.dev/halifax/articles/rust_crypto_02_btc_address</link><guid isPermaLink="true">https://zenn.dev/halifax/articles/rust_crypto_02_btc_address</guid><pubDate>Mon, 06 May 2024 15:13:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--310Vu5----/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25A7ECDSA%25E5%2585%25AC%25E9%2596%258B%25E9%258D%25B5%25E3%2581%258B%25E3%2582%2589BTC%25E3%2582%25A2%25E3%2583%2589%25E3%2583%25AC%25E3%2582%25B9%25E3%2582%2592%25E7%2594%259F%25E6%2588%2590%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:halifax%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JhNWUxM2Q5YzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>halifax</dc:creator></item><item><title><![CDATA[RustでECDSA署名を行う]]></title><description><![CDATA[
+ はじめに
+ECDSA（Elliptic Curve Digital Signature Algorithm）は楕円曲線暗号を用いたデジタル署名アルゴリズムです。また、secp256k1はECDSAで使用されるパラメータを決めたもので、Bitcoin、Ethereum、Internet Computerなどブロックチェーンでも使用されています。
+楕円曲線は一般にy^2=x^3+ax+bで表され、secp256k1ではa=0、b=7とする
+　　y^2 \mod p=x^3+7 \mod p
+　　　※p=2^{256}-2^{32}-2^9-2^8-2^7-2^6-2^4−1
+が使われます...]]></description><link>https://zenn.dev/halifax/articles/rust_crypto_01_ecdsa</link><guid isPermaLink="true">https://zenn.dev/halifax/articles/rust_crypto_01_ecdsa</guid><pubDate>Mon, 06 May 2024 12:39:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--SQ7bkvty--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25A7ECDSA%25E7%25BD%25B2%25E5%2590%258D%25E3%2582%2592%25E8%25A1%258C%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:halifax%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JhNWUxM2Q5YzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>halifax</dc:creator></item><item><title><![CDATA[Rust と Wasm で極限まで PNG ファイルを圧縮した話]]></title><description><![CDATA[
+ はじめに
+以前つくった Minsta というデジタルスタンプラリーの Web アプリの中で、ブラウザ上で Canvas を使用してスタンプ風の画像を生成する機能があるのですが、前々からもう少し画像のファイルサイズを落とせそうだなと思っていたので、今回 Rust と WebAssembly を使用して PNG ファイルを極限まで圧縮するのに挑戦してみました。
+Minsta については以下の記事をご覧ください。
+https://zenn.dev/wagao/articles/a9219daaf32f18
+
+ 動機
+Minsta では単色で背景透過の以下のようなスタンプの PNG 画像をブ...]]></description><link>https://zenn.dev/wagao/articles/788c4496756bad</link><guid isPermaLink="true">https://zenn.dev/wagao/articles/788c4496756bad</guid><pubDate>Mon, 06 May 2024 11:30:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--KS0pMmPf--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%2520%25E3%2581%25A8%2520Wasm%2520%25E3%2581%25A7%25E6%25A5%25B5%25E9%2599%2590%25E3%2581%25BE%25E3%2581%25A7%2520PNG%2520%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2592%25E5%259C%25A7%25E7%25B8%25AE%25E3%2581%2597%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:wagao%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JiYTU4NzFiN2EuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>wagao</dc:creator></item><item><title><![CDATA[【Rust】cargo-llvm-covでコードカバレッジを取得する]]></title><description><![CDATA[
+ はじめに
+cargo-llvm-covは、Rustでテストされたコードの割合「カバレッジ」を計測するツールです。
+テストされるコードが増えると潜在的な不具合を発見しやすくなるため、
+カバレッジの高さは、コード品質の指標にすることがあります。
+当記事ではcargo-llvm-covでテストを実行し、カバレッジを確認する手順をご紹介します。
+
+ 事前準備
+cargo-llvm-covとllvm-tools-previewをインストールします。
+% cargo install cargo-llvm-cov
+% rustup component add llvm-tools-preview
+...]]></description><link>https://zenn.dev/collabostyle/articles/f0654aa0feaba8</link><guid isPermaLink="true">https://zenn.dev/collabostyle/articles/f0654aa0feaba8</guid><pubDate>Mon, 06 May 2024 08:37:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Ir9N8xiD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Rust%25E3%2580%2591cargo-llvm-cov%25E3%2581%25A7%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2582%25AB%25E3%2583%2590%25E3%2583%25AC%25E3%2583%2583%25E3%2582%25B8%25E3%2582%2592%25E5%258F%2596%25E5%25BE%2597%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:TETRER%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MxOTFmZDljMTIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25B3%25E3%2583%25A9%25E3%2583%259C%25E3%2582%25B9%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25AB%2520Developers%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzYyN2RmN2E0ZWIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>TETRER</dc:creator></item><item><title><![CDATA[[小技] Rustでマーカーを使用して引数のオーバーロードもどきを実現させる方法]]></title><description><![CDATA[以下のような状況を解決するための小技を記載します。
+
+コールバックを受け取る関数functionが1つ存在
+コールバックには引数の有無を問わない
+
+
+fn function(f: impl FnOnce(usize)){
+}
+
+fn main(){
+    // コンパイルできる    
+    function(|input: usize|{
+        
+    })
+    
+    // コンパイルできない    
+    function(||{
+        
+    });
+}
+上記は専用のトレイトを定義することで解決できます。
+ポイントはマーカー型(Marker)を...]]></description><link>https://zenn.dev/elm/articles/fc6a4b81e1680a</link><guid isPermaLink="true">https://zenn.dev/elm/articles/fc6a4b81e1680a</guid><pubDate>Mon, 06 May 2024 05:01:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--huzpY8hX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255B%25E5%25B0%258F%25E6%258A%2580%255D%2520Rust%25E3%2581%25A7%25E3%2583%259E%25E3%2583%25BC%25E3%2582%25AB%25E3%2583%25BC%25E3%2582%2592%25E4%25BD%25BF%25E7%2594%25A8%25E3%2581%2597%25E3%2581%25A6%25E5%25BC%2595%25E6%2595%25B0%25E3%2581%25AE%25E3%2582%25AA%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2589%25E3%2582%2582%25E3%2581%25A9%25E3%2581%258D%25E3%2582%2592%25E5%25AE%259F%25E7%258F%25BE%25E3%2581%2595%25E3%2581%259B%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:elm%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI5MDQxZjM0YzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>elm</dc:creator></item><item><title><![CDATA[crossメモ [blessed.rsシリーズ5]]]></title><description><![CDATA[
+ 概要
+https://blessed.rs/crates
+こちらのリストにあるものを見て書いたメモの共有です。
+内容はまとめておらず、順番もぐちゃぐちゃ。あくまでメモになります。
+また、網羅的にメモしているわけではなく、自分が必要だと思ったもののみメモしているため、内容が偏っているかもしれません。
+今回はcrossについてです。
+
+ crossとは
+クロスコンパイルを行うためのツール
+
+ クロスコンパイルとは
+
+クロスコンパイルは、コンパイラが実行されているプラットフォーム以外のプラットフォーム向けの実行可能コードを作成するプロセス
+プラットフォームの違いとは、OSが異なることやアー...]]></description><link>https://zenn.dev/kotabrog/articles/0f6d08e9ae2742</link><guid isPermaLink="true">https://zenn.dev/kotabrog/articles/0f6d08e9ae2742</guid><pubDate>Mon, 06 May 2024 04:02:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bGBj2Bos--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:cross%25E3%2583%25A1%25E3%2583%25A2%2520%255Bblessed.rs%25E3%2582%25B7%25E3%2583%25AA%25E3%2583%25BC%25E3%2582%25BA5%255D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kota%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pndUZyRTdIcS13U3dMRHFoT05pbjFKWVZHOVFZcjBEWXQ2SVZ3WWc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kota</dc:creator></item><item><title><![CDATA[Rust Diesel を使って PostgresQL にアクセスする]]></title><description><![CDATA[
+ はじめに
+今回は Diesel という Rust の ORM ライブラリを触ってみたいと思います。
+最終的に、Rocket という web フレームワークに Http リクエストをして、Diesel からアクセスするというところまで行きたいと思います。
+🔻Diesel
+https://diesel.rs/
+🔻Rocket
+https://rocket.rs/
+
+ 初期構築
+
+ プロジェクトの作成
+任意の Rust プロジェクトを作成しておきます。
+改めてになりますが、今回は既存のプロジェクトを使用します。
+以下の記事にて、Rust の Rocketを使ったプロジェクトを用意する手順が...]]></description><link>https://zenn.dev/collabostyle/articles/6b03e11b1b78cd</link><guid isPermaLink="true">https://zenn.dev/collabostyle/articles/6b03e11b1b78cd</guid><pubDate>Sun, 05 May 2024 17:44:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--CYLRLlg4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%2520Diesel%2520%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%2520PostgresQL%2520%25E3%2581%25AB%25E3%2582%25A2%25E3%2582%25AF%25E3%2582%25BB%25E3%2582%25B9%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Iseya%2520Shota%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MxOTFmZDljMTIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25B3%25E3%2583%25A9%25E3%2583%259C%25E3%2582%25B9%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25AB%2520Developers%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YjRyRXVYb0x2SGp5alRaelhENlBCRnZGTzhNTk0zLXlBTWZvM0Q9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Iseya Shota</dc:creator></item></channel></rss>

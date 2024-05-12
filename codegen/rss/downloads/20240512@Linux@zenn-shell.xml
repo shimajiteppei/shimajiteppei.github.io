@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「shell」のフィード]]></title><description><![CDATA[Zennのトピック「shell」のRSSフィードです]]></description><link>https://zenn.dev/topics/shell</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/c8d33e6510.jpeg</url><title>Zennの「shell」のフィード</title><link>https://zenn.dev/topics/shell</link></image><generator>zenn.dev</generator><lastBuildDate>Sun, 12 May 2024 01:14:03 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/shell/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[リレーション定義のないDBからも自動でER図を作成したい！（SchemaSpyを応用してみる）]]></title><description><![CDATA[
+ 概要
+DBのスキーマ定義やER図の運用は、可能な限り手動ではなく自動化したいですよね。
+そのような場合に便利なのがSchemaSpyというツールで、稼働中のDBに接続してテーブル構造を解析し、以下のようなER図などのHTMLドキュメントを自動で作成してくれます。
+https://schemaspy.org/
+
+非常に便利なので私自身も使用しているのですが、当然リレーションが定義されていない場合ER図は作成できません。
+追加でXMLファイルを作成することにより、リレーションやその他のメタ情報を追加できるのですが、これは手動で更新する必要があり、メンテナンス漏れが発生する可能性があります...]]></description><link>https://zenn.dev/taroshun32/articles/schemaspy-auto-relation</link><guid isPermaLink="true">https://zenn.dev/taroshun32/articles/schemaspy-auto-relation</guid><pubDate>Thu, 09 May 2024 09:00:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jIM3Ueli--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%25AA%25E3%2583%25AC%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E5%25AE%259A%25E7%25BE%25A9%25E3%2581%25AE%25E3%2581%25AA%25E3%2581%2584DB%25E3%2581%258B%25E3%2582%2589%25E3%2582%2582%25E8%2587%25AA%25E5%258B%2595%25E3%2581%25A7ER%25E5%259B%25B3%25E3%2582%2592%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2597%25E3%2581%259F%25E3%2581%2584%25EF%25BC%2581%25EF%25BC%2588SchemaSpy%25E3%2582%2592%25E5%25BF%259C%25E7%2594%25A8%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:taroshun32%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZlYjAwZTc4MTcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>taroshun32</dc:creator></item><item><title><![CDATA[【missing-semester】1.课程概览与 shell]]></title><description><![CDATA[
+ 动机
+计算机相关工作中，挖掘现有工具的潜力，并介绍一些新的工具。
+
+ shell 是什么
+shell 是用户与操作系统内核之间的接口，用户可以通过输入命令来执行各种操作，例如运行程序、管理文件和目录、配置系统等。常见的 Shell 包括 Unix/Linux 系统中的 Bash（Bourne Again Shell）、Zsh（Z Shell）和 Windows 系统中的 PowerShell。
+使用文字进行指令的输入，核心功能都是一样的：它允许你执行程序，输入并获取某种半结构化的输出。
+
+ 环境变量
+如果你要求 shell 执行某个指令，但是该指令并不是 shell 所了解的编程关键...]]></description><link>https://zenn.dev/cwang/articles/6d39c798eecf4b</link><guid isPermaLink="true">https://zenn.dev/cwang/articles/6d39c798eecf4b</guid><pubDate>Thu, 09 May 2024 07:04:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7tIa6Nfk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590missing-semester%25E3%2580%25911.%25E8%25AF%25BE%25E7%25A8%258B%25E6%25A6%2582%25E8%25A7%2588%25E4%25B8%258E%2520shell%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:oharu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTGx6bGVVUlBadm1JWV9KTXEtVnlnSGhvU2tPVG9OQ3JsZ21OZGwtTUtsV19IcElxUT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>oharu</dc:creator></item><item><title><![CDATA[GPD Win 4にいれたUbuntuで指紋センサーを使いたい]]></title><description><![CDATA[
+ はじめに
+最近、ウルトラモバイルPCであるGPD Win 4にいれているUbuntuを24.04にアップデートしました。
+するとUHKBのタッチパッドが無線で動くようになっていたり、Bluetoothイヤホンが安定して再接続できるようになっていたりと、22.04では手が届かなかったかゆいところがちゃんと改善されており、感動しました！
+これでやっと実用できるのではないかと期待を膨らませて、ついでに指紋センサも使えるようにしてくれたら完璧なのになぁと思って調べてみたら、「できた」と言っているスレッドをみつけたので、早速試してみました。元記事の案内がやや簡素すぎるため、またやるときに再現で...]]></description><link>https://zenn.dev/turtlekazu/articles/03a239ef55cfd6</link><guid isPermaLink="true">https://zenn.dev/turtlekazu/articles/03a239ef55cfd6</guid><pubDate>Sun, 05 May 2024 15:08:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--i1yqrFPQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:GPD%2520Win%25204%25E3%2581%25AB%25E3%2581%2584%25E3%2582%258C%25E3%2581%259FUbuntu%25E3%2581%25A7%25E6%258C%2587%25E7%25B4%258B%25E3%2582%25BB%25E3%2583%25B3%25E3%2582%25B5%25E3%2583%25BC%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2584%25E3%2581%259F%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:turtlekazu%2520%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZhZDAwMzRhMDIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>turtlekazu🐢</dc:creator></item><item><title><![CDATA[曜日によってVSCodeのテーマを変える]]></title><description><![CDATA[曜日によって気分を切り替えるために VSCode のテーマを変える方法を考えました。
+
+ 方法
+VSCode の設定ファイル setting.json に以下のように設定を書きます。
+{
+  // "workbench.colorTheme": "Fluffy Dark Theme",            // @theme-auto-change Mon
+  // "workbench.colorTheme": "Amethyst Dark",                // @theme-auto-change Tue
+  // "workbench.colorTheme": ...]]></description><link>https://zenn.dev/anozon/articles/theme-switch-day</link><guid isPermaLink="true">https://zenn.dev/anozon/articles/theme-switch-day</guid><pubDate>Fri, 26 Apr 2024 01:06:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bGCVHEf9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%259B%259C%25E6%2597%25A5%25E3%2581%25AB%25E3%2582%2588%25E3%2581%25A3%25E3%2581%25A6VSCode%25E3%2581%25AE%25E3%2583%2586%25E3%2583%25BC%25E3%2583%259E%25E3%2582%2592%25E5%25A4%2589%25E3%2581%2588%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:anozon%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ4Njg1ZDFlMzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>anozon</dc:creator></item><item><title><![CDATA[シェルスクリプトでファイルサイズを取得する]]></title><description><![CDATA[
+ シェルスクリプトでファイルサイズを取得する
+
+ ls, awk コマンドで取得
+ls -l image.jpg | awk '{print $5}'
+
+ stat コマンドで取得
+単一コマンドで済みますが、GNU版かどうかでオプションが違います。
+
+ Mac
+stat -f "%z" image.jpg
+
+ Linux(GNU command)
+stat -c "%s" image.jpg
+]]></description><link>https://zenn.dev/naminodarie/articles/shell_file_size</link><guid isPermaLink="true">https://zenn.dev/naminodarie/articles/shell_file_size</guid><pubDate>Thu, 25 Apr 2024 14:06:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4JJxPYrU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B7%25E3%2582%25A7%25E3%2583%25AB%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2583%2588%25E3%2581%25A7%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%25B5%25E3%2582%25A4%25E3%2582%25BA%25E3%2582%2592%25E5%258F%2596%25E5%25BE%2597%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:KZRNM%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzMyZDYxMGJkNGEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>KZRNM</dc:creator></item><item><title><![CDATA[PDFのページを画像化するシェルスクリプト]]></title><description><![CDATA[
+ 概要
+LVMを使っていると「PDFを分析させたいけど画像しか対応していない」、「そもそもPDFだけど元がパワポで構造が複雑」みたいなことがあると思います。（私はありました）
+資料の数もページ数も多いとさすがにスクリプト書かないと厳しかったので、
+
+PDFのページをすべて画像化
+フォルダ内のすべてのPDFに対して実行
+
+の2つのスクリプトを書きました。
+
+ 環境
+
+WSL2 (Ubuntu 22.04.4)
+
+
+ 準備
+ImageMagick(画像変換全般のライブラリ・納品物に組み込むなどする場合ライセンスには注意してください)、poppler-utils（PDFのページ数カウントに使...]]></description><link>https://zenn.dev/headwaters/articles/0fde2d93474130</link><guid isPermaLink="true">https://zenn.dev/headwaters/articles/0fde2d93474130</guid><pubDate>Thu, 25 Apr 2024 09:47:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Irq92bfT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:PDF%25E3%2581%25AE%25E3%2583%259A%25E3%2583%25BC%25E3%2582%25B8%25E3%2582%2592%25E7%2594%25BB%25E5%2583%258F%25E5%258C%2596%25E3%2581%2599%25E3%2582%258B%25E3%2582%25B7%25E3%2582%25A7%25E3%2583%25AB%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:kodani%2520takushi%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZjNGExY2UxMDYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2598%25E3%2583%2583%25E3%2583%2589%25E3%2582%25A6%25E3%2582%25A9%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%25BC%25E3%2582%25B9%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZmNzIzMThiZjcuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kodani takushi</dc:creator></item><item><title><![CDATA[リモートワークでDiscordからの抜け忘れを防ぐため両方を起動すると通知を出す]]></title><description><![CDATA[
+ 概要
+私の会社では、リモートワークでのコミュニケーションに際して複数のチャットツールを利用しています。
+特に開発系のメンバーは以下の目的でツールを使い分けています。
+
+Google Meet: 特定の時間に開催される、または非開発系メンバーとのミーティング用
+Discord: 常時ボイスチャットにログインして、任意タイミングでの質問や雑談に答えられるようにする用
+
+
+ 課題
+しかしミーティングによってツールを切り替える際、 マイクを切り忘れて片方(特にDiscord)からの抜け忘れが発生し、音声が筒抜けになってしまうことがあります。
+Discordに残ったメンバーがその場で教えてくれ...]]></description><link>https://zenn.dev/imaizume/articles/exclusive_voice_chat</link><guid isPermaLink="true">https://zenn.dev/imaizume/articles/exclusive_voice_chat</guid><pubDate>Wed, 24 Apr 2024 12:25:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xPa8fYZ0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%25AA%25E3%2583%25A2%25E3%2583%25BC%25E3%2583%2588%25E3%2583%25AF%25E3%2583%25BC%25E3%2582%25AF%25E3%2581%25A7Discord%25E3%2581%258B%25E3%2582%2589%25E3%2581%25AE%25E6%258A%259C%25E3%2581%2591%25E5%25BF%2598%25E3%2582%258C%25E3%2582%2592%25E9%2598%25B2%25E3%2581%2590%25E3%2581%259F%25E3%2582%2581%25E4%25B8%25A1%25E6%2596%25B9%25E3%2582%2592%25E8%25B5%25B7%25E5%258B%2595%25E3%2581%2599%25E3%2582%258B%25E3%2581%25A8%25E9%2580%259A%25E7%259F%25A5%25E3%2582%2592%25E5%2587%25BA%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Tomohiro%2520Imaizumi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E0NjkwMDEyNTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Tomohiro Imaizumi</dc:creator></item><item><title><![CDATA[過去にcheckout (switch) したブランチに戻る]]></title><description><![CDATA[
+ レビューするとき、頻繁にブランチ移動して、元の開発ブランチを見失う
+自分はよくこの問題にぶち当たります。コミット履歴のように、ブランチ移動履歴が見れたらいいのに……と思ってたら、こんな素敵なテックブログが！
+Mobile Factory | Tech Blog #git checkoutで切り替えたブランチの履歴を表示する
+まさに求めていたものでした！the96さん、ありがとうございます🙏
+ただ人様のテックブログを引用するだけの記事じゃしょうもないので、 peco を追加して、ブランチ移動できるようにしてみました
+
+ 記事を参考に、機能を追加してみた
+切り替えたブランチの履歴を表示す...]]></description><link>https://zenn.dev/koakuma_ageha/articles/d185ecd5000dcf</link><guid isPermaLink="true">https://zenn.dev/koakuma_ageha/articles/d185ecd5000dcf</guid><pubDate>Sun, 21 Apr 2024 09:11:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4VXBe5sG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E9%2581%258E%25E5%258E%25BB%25E3%2581%25ABcheckout%2520%2528switch%2529%2520%25E3%2581%2597%25E3%2581%259F%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25B3%25E3%2583%2581%25E3%2581%25AB%25E6%2588%25BB%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:koakuma_ageha%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzliYjMxYTUxNWIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>koakuma_ageha</dc:creator></item><item><title><![CDATA[シェルスクリプトの実行方法]]></title><description><![CDATA[
+ はじめに
+このページではシェルスクリプトの基本的な実行方法について記述します。
+
+ シェルスクリプトの基本
+シェルスクリプトを実行するには、まずスクリプトファイルを作成し、適切な実行権限を設定する必要があります。
+
+ 1. スクリプトファイルの作成
+任意のテキストエディタを使用して、.sh 拡張子のファイルを作成します。ファイルの最初の行にはシバン（#!）を記述し、使用するシェルのパスを指定します。
+#!/bin/bash
+echo "Hello, world!"
+この例では、bash シェルを使用して「Hello, world!」と出力するシンプルなスクリプトを作成しています。
+
+...]]></description><link>https://zenn.dev/skrikzts/articles/07b8816b3bb9af</link><guid isPermaLink="true">https://zenn.dev/skrikzts/articles/07b8816b3bb9af</guid><pubDate>Thu, 18 Apr 2024 15:45:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--b8wqhxFX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B7%25E3%2582%25A7%25E3%2583%25AB%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2583%2588%25E3%2581%25AE%25E5%25AE%259F%25E8%25A1%258C%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:skrikzts%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA2OTdkMjhmMmMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>skrikzts</dc:creator></item><item><title><![CDATA[シェルスクリプトでの並行処理]]></title><description><![CDATA[
+ はじめに
+このページではシェルスクリプトにおける並行処理の実装方法について記述します。シェルスクリプトで効率よくタスクを並行実行するテクニックを、具体的なコード例とともに解説します。
+
+ シェルスクリプトでの並行処理の基本
+シェルスクリプトでは、複数のプロセスをバックグラウンドで同時に実行することにより、並行処理を実現することができます。これにより、タスクの完了を待たずに次のタスクを開始することが可能になり、全体の処理時間を短縮できます。
+
+ 1. バックグラウンド実行
+シェルスクリプトでコマンドをバックグラウンドで実行するには、コマンドの末尾に &amp; を付けます。
+# コマン...]]></description><link>https://zenn.dev/skrikzts/articles/bdb7f5aea4cc38</link><guid isPermaLink="true">https://zenn.dev/skrikzts/articles/bdb7f5aea4cc38</guid><pubDate>Thu, 18 Apr 2024 15:04:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--SokWK6Re--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B7%25E3%2582%25A7%25E3%2583%25AB%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2583%2588%25E3%2581%25A7%25E3%2581%25AE%25E4%25B8%25A6%25E8%25A1%258C%25E5%2587%25A6%25E7%2590%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:skrikzts%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA2OTdkMjhmMmMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>skrikzts</dc:creator></item><item><title><![CDATA[さくらレンタルサーバーにターミナルでSSH接続する(Mac)]]></title><description><![CDATA[
+ 概要
+ターミナル経由でssh接続するためのフローです。さくらサーバーメインの説明となりますが、基本的流れは同じでいけるかと思います。
+契約時に発行されたアカウントとパスワードを使用します。
+《 契約サービスの接続情報 》
+FTPサーバ名     ： sample.sakura.ne.jp
+FTPアカウント   ： username
+FTP初期フォルダ ： www
+サーバパスワード： pass
+
+ パスワード認証
+パスワードを使っての接続です。毎回パスワード聞かれたりするので面倒です。
+ssh username@sample.sakura.ne.jp
+パスワードを聞かれるので入力すると...]]></description><link>https://zenn.dev/steneco/articles/25bb36584f4802</link><guid isPermaLink="true">https://zenn.dev/steneco/articles/25bb36584f4802</guid><pubDate>Wed, 17 Apr 2024 08:28:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6a4451f2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%2595%25E3%2581%258F%25E3%2582%2589%25E3%2583%25AC%25E3%2583%25B3%25E3%2582%25BF%25E3%2583%25AB%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2581%25AB%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%259F%25E3%2583%258A%25E3%2583%25AB%25E3%2581%25A7SSH%25E6%258E%25A5%25E7%25B6%259A%25E3%2581%2599%25E3%2582%258B%2528Mac%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Nabeck%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTEJxWWF3N2dydFJJcUtwaWJabHc5cWR3a3Z0OXpfdDlka0hRYndUa3pzU2c9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Nabeck</dc:creator></item><item><title><![CDATA[【Shellscript】データオブジェクトまじで自動で吐いてくれんだけどwwww【Next.js】]]></title><description><![CDATA[
+ はじめに
+どうもこんにちは、てるし〜だよ😎
+今回で2回目のzennの投稿wwwwww
+現在、仕事でiosアプリのwebview部分の開発をNext.jsで行ってたんですよね〜〜〜。
+トップを開発専用の画面としてプルダウンにてページを選択し「遷移する」ボタンを押すと各ページに遷移をする仕組みにしてまして〜。
+data.tsというファイルが存在し、そこにパスとページIDを格納してたんす。
+ふと、開発中に私は思った。
+「ページを作ってオブジェクトに手動で追加していくの、めんどくさいんですけどwwwww😟特に一気にページを作った時がwwwwww😇」
+ということで遊びで作ってみたwww
+今回は...]]></description><link>https://zenn.dev/terusi/articles/08256a381f0e28</link><guid isPermaLink="true">https://zenn.dev/terusi/articles/08256a381f0e28</guid><pubDate>Tue, 16 Apr 2024 18:05:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--iaJdMZNp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Shellscript%25E3%2580%2591%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%25AA%25E3%2583%2596%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E3%2581%25BE%25E3%2581%2598%25E3%2581%25A7%25E8%2587%25AA%25E5%258B%2595%25E3%2581%25A7%25E5%2590%2590%25E3%2581%2584%25E3%2581%25A6%25E3%2581%258F%25E3%2582%258C%25E3%2582%2593%25E3%2581%25A0%25E3%2581%2591%25E3%2581%25A9wwww%25E3%2580%2590Next.js%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A6%25E3%2582%258B%25E3%2581%2597%25E3%2580%259C%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRlM2M5MzkyNjguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>てるし〜</dc:creator></item><item><title><![CDATA[素のUbuntuにstarshipをインストール]]></title><description><![CDATA[
+ 素のUbuntuにstarshipをインストール
+$ sudo apt update &amp;&amp; sudo apt upgrade
+$ sudo apt install -y gcc cmake
+$ cargo install starship --locked
+]]></description><link>https://zenn.dev/isksss/articles/starship-install-plain-ubuntu</link><guid isPermaLink="true">https://zenn.dev/isksss/articles/starship-install-plain-ubuntu</guid><pubDate>Sun, 14 Apr 2024 04:49:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--VwYu6lrQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%25B4%25A0%25E3%2581%25AEUbuntu%25E3%2581%25ABstarship%25E3%2582%2592%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:isksss%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2IxOTEzNjE4MGIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>isksss</dc:creator></item><item><title><![CDATA[Homebrew install時の最後の一手間で何をしているか]]></title><description><![CDATA[新しくMac miniをサーバー用途で再セットアップする機会があった。
+Macのセットアップ時の作業にHomebrewの導入がある。一般的なエンジニアであれば全員が入れていると思う。
+Shellを雰囲気で使っているので少し読んでみようと思った次第。
+
+ 見ていく
+2024/04/12現在では公式サイトの導入コマンドは以下のようになっている。
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+これを行うとAppleSilicon環境であれば
+Warn...]]></description><link>https://zenn.dev/shsw0228/articles/f89f2604bb53b3</link><guid isPermaLink="true">https://zenn.dev/shsw0228/articles/f89f2604bb53b3</guid><pubDate>Fri, 12 Apr 2024 11:55:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--sLBa3Ylc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Homebrew%2520install%25E6%2599%2582%25E3%2581%25AE%25E6%259C%2580%25E5%25BE%258C%25E3%2581%25AE%25E4%25B8%2580%25E6%2589%258B%25E9%2596%2593%25E3%2581%25A7%25E4%25BD%2595%25E3%2582%2592%25E3%2581%2597%25E3%2581%25A6%25E3%2581%2584%25E3%2582%258B%25E3%2581%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:TKng%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2hwTkNZLW1MNVJQSU50cGllUzZnTTY1VmxlbkNuYlJ4LVkxaFJFPXMyNTAtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>TKng</dc:creator></item><item><title><![CDATA[「変更ファイルのみ一括でテスト」をすばやく行う！]]></title><description><![CDATA[
+ 概要
+テストケースを追加するタスクを行っているときに、
+変更したファイルのみテストを実行したいときがある。
+ファイル名の上で右クリックして、相対パスを取得するのがめんどくさい。
+
+イメージ
+なるべく簡単に実行する方法について説明する。
+
+ 対象読者
+
+git初心者
+駆け出しエンジニア
+テストケース実装中の人
+
+
+ いいね！してね
+この記事の事例は必要に応じて今後追記していく予定です！
+「新しい事例が知りたい」「他の事例も知りたい」と思った人は、ぜひこの記事にいいね👍してください。筆者のモチベーションにつながります！
+それでは以下が本編です。
+
+ 結論
+1 変更ファイル一覧をテスト実行...]]></description><link>https://zenn.dev/rsugi/articles/0370775bc61dc6</link><guid isPermaLink="true">https://zenn.dev/rsugi/articles/0370775bc61dc6</guid><pubDate>Fri, 12 Apr 2024 04:52:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_44QuIND--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%258C%25E5%25A4%2589%25E6%259B%25B4%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2581%25AE%25E3%2581%25BF%25E4%25B8%2580%25E6%258B%25AC%25E3%2581%25A7%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E3%2580%258D%25E3%2582%2592%25E3%2581%2599%25E3%2581%25B0%25E3%2582%2584%25E3%2581%258F%25E8%25A1%258C%25E3%2581%2586%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:r-sugi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M0YTAwZTQ1YmIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>r-sugi</dc:creator></item><item><title><![CDATA[マルチプラットフォームなNu Shellを使ったら、あらゆるデータを一行で扱えて時間効率が上がった]]></title><description><![CDATA[
+ 3秒まとめ
+
+マルチプラットフォームで同じコマンドを利用して手元で動かしたい処理をサクッと実行できる
+GitHub Actionsでも簡単に利用可能
+JSON, YAML, SQLite, CSV, EXCELなどのファイルをデフォルトでパースしてデータフレームのように扱える
+httpリクエストも投げられるので、curl入ってない！みたいなことでイラッとすることが減る
+
+
+ こんな方向きの記事ではない
+
+zsh, bashなどをマスターしている人にとってはあまり導入する意味がない
+サーバールームでLinuxの標準シェル以外使えない環境で作業するような人には向かない
+
+
+ MacやWi...]]></description><link>https://zenn.dev/minedia/articles/6a8321fc6504ec</link><guid isPermaLink="true">https://zenn.dev/minedia/articles/6a8321fc6504ec</guid><pubDate>Thu, 11 Apr 2024 00:03:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Ps8wb_kX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%259E%25E3%2583%25AB%25E3%2583%2581%25E3%2583%2597%25E3%2583%25A9%25E3%2583%2583%25E3%2583%2588%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25BC%25E3%2583%25A0%25E3%2581%25AANu%2520Shell%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%259F%25E3%2582%2589%25E3%2580%2581%25E3%2581%2582%25E3%2582%2589%25E3%2582%2586%25E3%2582%258B%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%2592%25E4%25B8%2580%25E8%25A1%258C%25E3%2581%25A7%25E6%2589%25B1%25E3%2581%2588%25E3%2581%25A6%25E6%2599%2582%25E9%2596%2593%25E5%258A%25B9%25E7%258E%2587%25E3%2581%258C%25E4%25B8%258A%25E3%2581%258C%25E3%2581%25A3%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%25AF%25E3%2581%258C%25E3%2581%258F%25E3%2582%2593%2540%25E8%2596%25AC%25E5%2589%25A4%25E5%25B8%25AB%25EF%25BC%2586Flutter%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg5ODUyZjZkYzguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2583%259E%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2587%25E3%2582%25A3%25E3%2582%25A2%2520%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2YyZDdiMzc4M2QuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>はがくん@薬剤師＆Flutterエンジニア</dc:creator></item><item><title><![CDATA[コードやコマンド出力を画像化するコマンドラインツール「Freeze」の紹介]]></title><description><![CDATA[Charm がまた最高なツールを出してました。
+https://github.com/charmbracelet/freeze#readme
+例えばこういうコマンドを実行すると、
+$ freeze main.js \
+    --window \
+    --show-line-numbers \
+    --border.radius 8 \
+    --shadow.blur 4 \
+    --margin 12
+こういう画像を作れます。
+
+こういうの
+この記事では Freeze の基本的な使い方について簡単に紹介します。
+
+インストール
+基本的な使い方
+コマンドの実行結果を画像化...]]></description><link>https://zenn.dev/kou_pg_0131/articles/freeze-introduction</link><guid isPermaLink="true">https://zenn.dev/kou_pg_0131/articles/freeze-introduction</guid><pubDate>Mon, 08 Apr 2024 09:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fqRfzRJg--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2582%2584%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E5%2587%25BA%25E5%258A%259B%25E3%2582%2592%25E7%2594%25BB%25E5%2583%258F%25E5%258C%2596%25E3%2581%2599%25E3%2582%258B%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%25E3%2580%258CFreeze%25E3%2580%258D%25E3%2581%25AE%25E7%25B4%25B9%25E4%25BB%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:koki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2hiNFlHemhPbVVNRThrZjV5Z01DakFoOWsxeEtCTzRLdWdVMExDQWc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>koki</dc:creator></item><item><title><![CDATA[aliasに代わる略語展開(abbreviation)のススメ]]></title><description><![CDATA[私がターミナル上で操作するうえで、一番生産性に効いていると思っている
+aliasに相当する機能である略語展開(abbreviation)を今回オススメしたいと思います。
+
+ 略語展開とは？
+今回説明する略語展開(abbreviation)とは、シェル上で入力した特定の短縮文字をあらかじめ設定しておいた文字列に展開してくれるものです。
+以下の実際の挙動を見てもらった方がイメージがつきやすいと思います。
+
+略語展開の例
+
+
+
+いわゆるaliasに近いものであり、頻繁に使用するコマンドを少ない入力タイピング数で実行することが可能になります。
+fish shellでは標準で搭載されている機能であ...]]></description><link>https://zenn.dev/ryo246912/articles/161b1e339b4b5a</link><guid isPermaLink="true">https://zenn.dev/ryo246912/articles/161b1e339b4b5a</guid><pubDate>Sun, 07 Apr 2024 08:49:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Vf7sUE_W--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:alias%25E3%2581%25AB%25E4%25BB%25A3%25E3%2582%258F%25E3%2582%258B%25E7%2595%25A5%25E8%25AA%259E%25E5%25B1%2595%25E9%2596%258B%2528abbreviation%2529%25E3%2581%25AE%25E3%2582%25B9%25E3%2582%25B9%25E3%2583%25A1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ryo.%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I0NGZkYzI0NjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ryo.</dc:creator></item><item><title><![CDATA[snapstoreをrefreshするshellの作成]]></title><description><![CDATA[snapstoreをrefreshするshellを作成しました。
+主に「snap has no updates avaliable」エラーが起きた時に使用します。
+久しぶりにLinux環境でshellscriptを作成したので、備忘として手順を記載します。
+
+ shellscriptを作成する
+homeの下に自作shell保管用のディレクトリを作成します。
+$ mkdir /home/username/shell
+shellディレクトリ配下に以下のshellscriptを格納します。
+
+snaprefresh.sh
+echo "start"
+sudo killall snap-store...]]></description><link>https://zenn.dev/universe/articles/b67e619fd2709f</link><guid isPermaLink="true">https://zenn.dev/universe/articles/b67e619fd2709f</guid><pubDate>Sat, 06 Apr 2024 13:02:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--s6WvlIrm--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:snapstore%25E3%2582%2592refresh%25E3%2581%2599%25E3%2582%258Bshell%25E3%2581%25AE%25E4%25BD%259C%25E6%2588%2590%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:UTEU%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTDFtOHVCSnVZMVByRGZza3ZnS0Y1X2s3SVIzdldPcm45c1VGcUxwVnZmdEE9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>UTEU</dc:creator></item><item><title><![CDATA[Github Actions をローカルで実行する act をM1で実行する際のtips]]></title><description><![CDATA[
+ 概要
+M1 で act を実行しようとすると下記のWARNINGが表示されます。
+!
+WARN  ⚠ You are using Apple M-series chip and you have not specified container architecture, you might encounter issues while running act. If so, try running it with '--container-architecture linux/amd64'. ⚠
+
+毎回指定するのはめんどくさいので、常に --container-architectur...]]></description><link>https://zenn.dev/kuuumo/articles/8cf90d53f62751</link><guid isPermaLink="true">https://zenn.dev/kuuumo/articles/8cf90d53f62751</guid><pubDate>Thu, 04 Apr 2024 22:40:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--OadDbmEU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Github%2520Actions%2520%25E3%2582%2592%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25AB%25E3%2583%25AB%25E3%2581%25A7%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%2599%25E3%2582%258B%2520act%2520%25E3%2582%2592M1%25E3%2581%25A7%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%2599%25E3%2582%258B%25E9%259A%259B%25E3%2581%25AEtips%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kuuumo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZhN2YwNWI0ZGEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kuuumo</dc:creator></item></channel></rss>
