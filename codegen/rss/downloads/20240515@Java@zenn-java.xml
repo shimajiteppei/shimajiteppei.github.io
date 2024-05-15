@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Java」のフィード]]></title><description><![CDATA[Zennのトピック「Java」のRSSフィードです]]></description><link>https://zenn.dev/topics/java</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/5c47bb8423.png</url><title>Zennの「Java」のフィード</title><link>https://zenn.dev/topics/java</link></image><generator>zenn.dev</generator><lastBuildDate>Wed, 15 May 2024 02:03:56 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/java/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Apple Silicon でJavaのSpring使ったアプリのコンテナビルドしようとしたらうまくいかなかったことメモ]]></title><description><![CDATA[
+ はじめに
+タイトルにあるように、Apple Silicon で Java の Spring 使ったアプリのコンテナビルドしようとしたらうまくいかなかったことのメモ
+ふわふわした情報だけど、こうしたら動かなくて、こうしたら動いたよってメモです。
+
+ やろうとしたこと
+
+IBM Cloud Code Engine ってコンテナプラットフォームで Web アプリをデプロイするために、Apple Silicon の Macbook で、Java の Spring 使ったアプリのイメージをビルドしようとした
+
+
+ したこと
+
+
+gradleのイメージを使って Dockerfile を作った
+
+...]]></description><link>https://zenn.dev/optimisuke/articles/07d4120d37c542</link><guid isPermaLink="true">https://zenn.dev/optimisuke/articles/07d4120d37c542</guid><pubDate>Tue, 14 May 2024 13:31:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--HdsaGiW3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Apple%2520Silicon%2520%25E3%2581%25A7Java%25E3%2581%25AESpring%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%259F%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2581%25AE%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2586%25E3%2583%258A%25E3%2583%2593%25E3%2583%25AB%25E3%2583%2589%25E3%2581%2597%25E3%2582%2588%25E3%2581%2586%25E3%2581%25A8%25E3%2581%2597%25E3%2581%259F%25E3%2582%2589%25E3%2581%2586%25E3%2581%25BE%25E3%2581%258F%25E3%2581%2584%25E3%2581%258B%25E3%2581%25AA%25E3%2581%258B%25E3%2581%25A3%25E3%2581%259F%25E3%2581%2593%25E3%2581%25A8%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Naosuke%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ3MGQ3ZTQ5MmUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Naosuke</dc:creator></item><item><title><![CDATA[100DaysOfJava - [Day 5] `equals()`メソッドのオーバーライドについて]]></title><description><![CDATA[
+ equals()メソッドの役割
+
+
+equals()メソッドは、オブジェクト同士が等しいかどうかを判断するために使用されます。
+オブジェクトの等価性比較を行う際に、equals()メソッドのオーバーライドが重要です。
+
+
+ equals()メソッドのオーバーライド
+
+
+equals()メソッドのシグネチャ
+equals()メソッドをオーバーライドする際には、以下のシグネチャに従う必要があります。
+@Override
+public boolean equals(Object obj) {
+    // 実装
+}
+
+
+
+nullのチェック
+オブジェクトの比較を行う際には、nullチェック...]]></description><link>https://zenn.dev/jianbo/articles/b2ef5c4a79ad23</link><guid isPermaLink="true">https://zenn.dev/jianbo/articles/b2ef5c4a79ad23</guid><pubDate>Tue, 14 May 2024 07:17:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hAQPPk8_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:100DaysOfJava%2520-%2520%255BDay%25205%255D%2520%2560equals%2528%2529%2560%25E3%2583%25A1%25E3%2582%25BD%25E3%2583%2583%25E3%2583%2589%25E3%2581%25AE%25E3%2582%25AA%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2589%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:bob%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FGZFp1Y294R080dWFKVXlVNEZBZW1pdWt5cnZjQmhRMGdIQ09OMzJ6NThCSFE9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>bob</dc:creator></item><item><title><![CDATA[デザインパターン: Template Methodパターン -具体的な処理をサブクラスに任せる-]]></title><description><![CDATA[
+ はじめに
+GoFの23のデザインパターンがまとめられている「Java言語で学ぶデザインパターン入門」を読んでアウトプットとしてデザインパターンを1つずつ記事としてアウトプットしていきます。
+原則的にJavaで実装コード例などを記述していきますが、気になったことや改善点、感想等ありましたらぜひコメントくださると嬉しいです！
+23のパターン一覧はこちらから　※随時更新中
+1.Iteratorパターン
+2.Adapterパターン
+3.Template Methodパターン
+4.Factory Methodパターン
+5.Singletonパターン
+6.Prototypeパターン
+7.Buil...]]></description><link>https://zenn.dev/sadaizin/articles/0578d01e03f7cf</link><guid isPermaLink="true">https://zenn.dev/sadaizin/articles/0578d01e03f7cf</guid><pubDate>Tue, 14 May 2024 03:59:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--WoJKPgHP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2587%25E3%2582%25B6%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2591%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%25B3%253A%2520Template%2520Method%25E3%2583%2591%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%25B3%2520-%25E5%2585%25B7%25E4%25BD%2593%25E7%259A%2584%25E3%2581%25AA%25E5%2587%25A6%25E7%2590%2586%25E3%2582%2592%25E3%2582%25B5%25E3%2583%2596%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25B9%25E3%2581%25AB%25E4%25BB%25BB%25E3%2581%259B%25E3%2582%258B-%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:SADAIZIN%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzExNWFjZmRmNmUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>SADAIZIN</dc:creator></item><item><title><![CDATA[【Java】クラス解説35・抽象メソッド]]></title><description><![CDATA[
+ 抽象メソッド
+
+抽象メソッドとは、abstractが付与されたメソッドです。メソッド名、戻り値の型、引数、例外を定義しますが、処理内容を実装しません。
+
+そのため、抽象クラスを継承するサブクラスにおいて、抽象メソッドをオーバーライドして、処理内容を実装しなければなりません。
+
+抽象メソッドを含むクラスは、必ず抽象クラスとして宣言しなければなりません。
+
+
+
+ 抽象メソッドのコード例
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Fuzi fz ...]]></description><link>https://zenn.dev/goriki/articles/073-abstract-method</link><guid isPermaLink="true">https://zenn.dev/goriki/articles/073-abstract-method</guid><pubDate>Mon, 13 May 2024 06:39:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--VQymX_2Z--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Java%25E3%2580%2591%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25B9%25E8%25A7%25A3%25E8%25AA%25AC35%25E3%2583%25BB%25E6%258A%25BD%25E8%25B1%25A1%25E3%2583%25A1%25E3%2582%25BD%25E3%2583%2583%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E8%2597%25A4%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNhZTBkYWY1NTMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>藤</dc:creator></item><item><title><![CDATA[チームラボの通年インターンに参加してきた話]]></title><description><![CDATA[
+ はじめに
+2,3月にチームラボの通年インターンシップに行ってきたので、体験したことを書いていきます。
+初めて書く記事なので優しい目で読んでいただければ幸いです。
+
+ チームラボについて
+チームラボと聞くと豊洲のチームラボプラネッツや麻布台のチームラボボーダレスをはじめとするアート展示のことを思い浮かべる人が多いと思います。しかし、実際は展示だけでなく「りそなグループアプリ」「BUMP OF CHICKEN リスナー向け公式アプリ」などの受託開発も行っています。（私はインターン応募の際に事業を詳しく調べるまで知りませんでした）
+https://speakerdeck.com/teaml...]]></description><link>https://zenn.dev/naoki_ymd/articles/teamlab-internship-2024</link><guid isPermaLink="true">https://zenn.dev/naoki_ymd/articles/teamlab-internship-2024</guid><pubDate>Mon, 13 May 2024 00:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6FOQsjml--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2581%25E3%2583%25BC%25E3%2583%25A0%25E3%2583%25A9%25E3%2583%259C%25E3%2581%25AE%25E9%2580%259A%25E5%25B9%25B4%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%25B3%25E3%2581%25AB%25E5%258F%2582%25E5%258A%25A0%25E3%2581%2597%25E3%2581%25A6%25E3%2581%258D%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Naoki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JjMTFlNWJlZWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Naoki</dc:creator></item><item><title><![CDATA[Java EntityクラスはintとIntegerどちらを使うべきか]]></title><description><![CDATA[
+ はじめに
+個人開発で新しくアプリを作り始めるときに毎回迷います。
+また、調べてもintとIntegerの書き方が人によってマチマチでどちらであるべきかよくわかりません。
+Spring Data JDBCを使った開発を想定しています。
+
+ intとIntegerの違い
+int型とInteger型の違いについて。
+NULLを許容するかどうかがポイントな気がしています。
+
+NULL許容
+intはプリミティブ型で、NULLを許容しません。一方、Integerはオブジェクト型で、NULLを許容します。
+メソッドとフィールド
+Integerはオブジェクト型であり、値を操作するためのメソッド（例え...]]></description><link>https://zenn.dev/wanderer_eel/articles/6a6e2f41ea5d34</link><guid isPermaLink="true">https://zenn.dev/wanderer_eel/articles/6a6e2f41ea5d34</guid><pubDate>Sun, 12 May 2024 07:16:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dsEw1OWd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java%2520Entity%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25B9%25E3%2581%25AFint%25E3%2581%25A8Integer%25E3%2581%25A9%25E3%2581%25A1%25E3%2582%2589%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%25E3%2581%25B9%25E3%2581%258D%25E3%2581%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25AE%2587%25E9%2582%25A3%25E6%259C%25A8%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk5MjhlYjgwMjAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>宇那木</dc:creator></item><item><title><![CDATA[Spring Bootを使ってHello Worldを表示]]></title><description><![CDATA[Spring Bootは、Spring Frameworkに基づいていて
+Spring Frameworkより簡単なセットアップでSpring Application開発ができるフレームワーク。
+Spring Bootを使って画面にHello Worldを表示させてみる。
+
+流れ
+Spring Bootプロジェクトの作成
+HTMLの作成
+Controllerクラスの作成
+実行
+エラー
+
+
+ 流れ
+
+Spring Bootプロジェクトの作成
+HTMLの作成
+Controllerクラスの作成
+実行
+エラー
+
+
+ 1. Spring Bootプロジェクトの作成
+「ファイル」→「新規」→「その他...]]></description><link>https://zenn.dev/heylee/articles/4e89b26e159981</link><guid isPermaLink="true">https://zenn.dev/heylee/articles/4e89b26e159981</guid><pubDate>Fri, 10 May 2024 15:46:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--P6sC0Bf1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Spring%2520Boot%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6Hello%2520World%25E3%2582%2592%25E8%25A1%25A8%25E7%25A4%25BA%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Rin%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2EzZTlhOWRhZDkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Rin</dc:creator></item><item><title><![CDATA[はじめての業務開発]]></title><description><![CDATA[プログラミング入門者が業務に携わるために知っておくといいこと。]]></description><link>https://zenn.dev/k_tabuchi/books/82584ab0dac53a</link><guid isPermaLink="true">https://zenn.dev/k_tabuchi/books/82584ab0dac53a</guid><pubDate>Fri, 10 May 2024 14:48:22 GMT</pubDate><dc:creator>k-tabuchi</dc:creator></item><item><title><![CDATA[デザインパターン: Adapterパターン -一皮かぶせて再利用-]]></title><description><![CDATA[
+ はじめに
+GoFの23のデザインパターンがまとめられている「Java言語で学ぶデザインパターン入門」を読んでアウトプットとしてデザインパターンを1つずつ記事としてアウトプットしていきます。
+原則的にJavaで実装コード例などを記述していきますが、気になったことや改善点、感想等ありましたらぜひコメントくださると嬉しいです！
+23のパターン一覧はこちらから　※随時更新中
+1.Iteratorパターン
+2.Adapterパターン
+3.Template Methodパターン
+4.Factory Methodパターン
+5.Singletonパターン
+6.Prototypeパターン
+7.Buil...]]></description><link>https://zenn.dev/sadaizin/articles/332a0c8706178f</link><guid isPermaLink="true">https://zenn.dev/sadaizin/articles/332a0c8706178f</guid><pubDate>Fri, 10 May 2024 08:21:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--pfTBuv0k--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2587%25E3%2582%25B6%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2591%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%25B3%253A%2520Adapter%25E3%2583%2591%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%25B3%2520-%25E4%25B8%2580%25E7%259A%25AE%25E3%2581%258B%25E3%2581%25B6%25E3%2581%259B%25E3%2581%25A6%25E5%2586%258D%25E5%2588%25A9%25E7%2594%25A8-%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:SADAIZIN%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzExNWFjZmRmNmUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>SADAIZIN</dc:creator></item><item><title><![CDATA[【Java】クラス解説34・抽象クラス]]></title><description><![CDATA[
+ 抽象クラス
+
+抽象クラスとは、クラス名の前にabstractを付けたインスタンス化できないクラスを指します。
+主にスーパークラスで使う事が多いです。スーパークラスは、共通のアクションや機能を実装し、サブクラスに具体的な実装を任せるためです。
+抽象クラスで定義されたフィールドやメソッドは、サブクラスのインスタンスから参照することが可能です。
+
+
+ 抽象クラスのコード例
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        // 抽象クラスのインスタンスの...]]></description><link>https://zenn.dev/goriki/articles/072-abstract-class</link><guid isPermaLink="true">https://zenn.dev/goriki/articles/072-abstract-class</guid><pubDate>Fri, 10 May 2024 07:16:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--yisHrkqk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Java%25E3%2580%2591%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25B9%25E8%25A7%25A3%25E8%25AA%25AC34%25E3%2583%25BB%25E6%258A%25BD%25E8%25B1%25A1%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E8%2597%25A4%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNhZTBkYWY1NTMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>藤</dc:creator></item><item><title><![CDATA[CheerpJ 3.0 AMAを見る]]></title><description><![CDATA[
+https://youtu.be/Z-mHW6ldgco
+2023年9月18日（月）午後3時（BST）に、CTO兼リード開発者のアレッサンドロによるライブ**Ask-Me-Anything (AMA)**を開催しました。
+主なトピックはCheerpJ 3.0でしたが、WebAssemblyやコンパイラ、会社全般など、私たちの製品全般に関する質問を歓迎しました。CheerpJ 3.0の開発、リリーススケジュール、3.0のアーキテクチャが2.0とどう違うかなどの技術的な詳細について話しました。
+今後のイベント開始のお知らせを受け取るには、私たちのDiscordサーバーに参加してください！
+...]]></description><link>https://zenn.dev/leaning_tech_jp/articles/2faf0d14b37113</link><guid isPermaLink="true">https://zenn.dev/leaning_tech_jp/articles/2faf0d14b37113</guid><pubDate>Thu, 09 May 2024 22:03:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--cV7GMRam--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:CheerpJ%25203.0%2520AMA%25E3%2582%2592%25E8%25A6%258B%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Leaning%2520Technologi...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc0MmNjYWUyNWQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Leaning Technologies Japan (リーニングテクノロジー)</dc:creator></item><item><title><![CDATA[【Java】クラス解説33・スタティックイニシャライザ]]></title><description><![CDATA[
+ スタティックイニシャライザ
+
+スタティックイニシャライザとは、クラスがロードされる際に一度だけ実行され、その後は再度実行されません。
+コンストラクタとの順序については、スタティックイニシャライザが先で、コンストラクタが後になります。
+スーパークラスとサブクラスにスタティックイニシャライザが存在する場合は、その実行順はスーパークラスが先で、サブクラスが後になります。
+
+
+
+ クラスがロードされる際に一度だけ実行されるコード例
+import java.util.*;
+
+public class Main {
+    public static void main(String[] arg...]]></description><link>https://zenn.dev/goriki/articles/071-static-initializer</link><guid isPermaLink="true">https://zenn.dev/goriki/articles/071-static-initializer</guid><pubDate>Thu, 09 May 2024 07:10:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--K6Cmklwq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Java%25E3%2580%2591%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25B9%25E8%25A7%25A3%25E8%25AA%25AC33%25E3%2583%25BB%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%2586%25E3%2582%25A3%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25A4%25E3%2583%258B%25E3%2582%25B7%25E3%2583%25A3%25E3%2583%25A9%25E3%2582%25A4%25E3%2582%25B6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E8%2597%25A4%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNhZTBkYWY1NTMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>藤</dc:creator></item><item><title><![CDATA[【Java】クラス解説32・インスタンスイニシャライザ]]></title><description><![CDATA[
+ インスタンスイニシャライザ
+
+インスタンスイニシャライザとは、インスタンスが生成される度に毎回実行されます。
+これまでに学習したコンストラクタもインスタンスが生成される度に毎回実行されます。ただし、その順序はインスタンスイニシャライザが先で、コンストラクタが後になります。
+コンストラクタがオーバーロードされている場合でも、インスタンスイニシャライザは共通の初期化処理として利用可能です。
+サブクラスのインスタンスが生成された時、スーパークラス及びサブクラスにインスタンスイニシャライザが存在する場合は、その実行順はスーパークラスが先で、サブクラスが後になります
+
+
+
+ インスタンスイニシ...]]></description><link>https://zenn.dev/goriki/articles/070-instance-initializer</link><guid isPermaLink="true">https://zenn.dev/goriki/articles/070-instance-initializer</guid><pubDate>Thu, 09 May 2024 07:10:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--oRJwaqpF--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Java%25E3%2580%2591%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25B9%25E8%25A7%25A3%25E8%25AA%25AC32%25E3%2583%25BB%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%25B3%25E3%2582%25B9%25E3%2582%25A4%25E3%2583%258B%25E3%2582%25B7%25E3%2583%25A3%25E3%2583%25A9%25E3%2582%25A4%25E3%2582%25B6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E8%2597%25A4%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNhZTBkYWY1NTMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>藤</dc:creator></item><item><title><![CDATA[デザインパターン: Iteratorパターン -処理を繰り返す-]]></title><description><![CDATA[
+ はじめに
+GoFの23のデザインパターンがまとめられている「Java言語で学ぶデザインパターン入門」を読んでアウトプットとしてデザインパターンを1つずつ記事としてアウトプットしていきます。
+原則的にJavaで実装コード例などを記述していきますが、気になったことや改善点、感想等ありましたらぜひコメントくださると嬉しいです！
+23のパターン一覧はこちらから　※随時更新中
+1.Iteratorパターン
+2.Adapterパターン
+3.Template Methodパターン
+4.Factory Methodパターン
+5.Singletonパターン
+6.Prototypeパターン
+7.Buil...]]></description><link>https://zenn.dev/sadaizin/articles/cbc8b4220fd990</link><guid isPermaLink="true">https://zenn.dev/sadaizin/articles/cbc8b4220fd990</guid><pubDate>Thu, 09 May 2024 06:18:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--LK9NxBLN--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2587%25E3%2582%25B6%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2591%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%25B3%253A%2520Iterator%25E3%2583%2591%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%25B3%2520-%25E5%2587%25A6%25E7%2590%2586%25E3%2582%2592%25E7%25B9%25B0%25E3%2582%258A%25E8%25BF%2594%25E3%2581%2599-%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:SADAIZIN%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzExNWFjZmRmNmUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>SADAIZIN</dc:creator></item><item><title><![CDATA[VSCでJavaの開発環境を構築してMySQLと接続する]]></title><description><![CDATA[
+ はじめに
+Javaの開発環境を構築するにあたってeclipseではなく普段よく使うVisual Studio Codeで、できないかなと思いメモとしてまとめておく。
+!
+実行環境
+
+macOS14.3
+SoC:M3 Pro
+Visual Studio Code インストール済
+MySQL 構築済
+
+
+
+ VSCにJavaの開発環境を構築する
+
+ 必要な拡張機能をインストールする
+まずvscでJava関係で必要な拡張機能をインストールする。
+拡張機能のタブからExtension Pack for Javaと検索しインストール。
+
+上記の拡張機能には
+
+Language Support ...]]></description><link>https://zenn.dev/iput_app/articles/53a75ff375d80c</link><guid isPermaLink="true">https://zenn.dev/iput_app/articles/53a75ff375d80c</guid><pubDate>Wed, 08 May 2024 09:31:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Ldg180eQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:VSC%25E3%2581%25A7Java%25E3%2581%25AE%25E9%2596%258B%25E7%2599%25BA%25E7%2592%25B0%25E5%25A2%2583%25E3%2582%2592%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2597%25E3%2581%25A6MySQL%25E3%2581%25A8%25E6%258E%25A5%25E7%25B6%259A%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%2597%25E3%2582%2585%25E3%2581%25B0%25E3%2581%2584%25E3%2582%2593%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E1ZTg4M2Q2OTAuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2580%2590IPUT%25E3%2580%2591%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E9%2596%258B%25E7%2599%25BA%25E3%2582%25B5%25E3%2583%25BC%25E3%2582%25AF%25E3%2583%25AB%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NmZWU5MzQ0NzcuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>しゅばいん</dc:creator></item><item><title><![CDATA[【Java】二分探索3]]></title><description><![CDATA[
+ 例題
+サイズnの昇順にソートされた配列aがあります。a[0] ~ a[n-1]の長さのパイプからk本以上切り出すことができる整数単位での最大の長さを求めよ。
+
+ 例題の値
+n = 5
+k = 6
+a = [1, 2, 3, 4, 5]
+
+ 例題の答え
+長さが2の時、k = 6本のパイプを切り出すことができる。
+要素1÷長さ2=0本、要素2÷長さ2=1本、要素3÷長さ2=1本、要素4÷長さ2=2本、要素5÷長さ2=2本の合計6本。
+
+ アルゴリズム
+
+切り出すことができる最大の長さの求め方
+
+長さxを固定
+長さxのパイプは各要素毎にa[i] / x（切捨）本だけ切り出せる
+
+a[i] ...]]></description><link>https://zenn.dev/goriki/articles/068-binary-search3</link><guid isPermaLink="true">https://zenn.dev/goriki/articles/068-binary-search3</guid><pubDate>Tue, 07 May 2024 07:07:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--tfPquffS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Java%25E3%2580%2591%25E4%25BA%258C%25E5%2588%2586%25E6%258E%25A2%25E7%25B4%25A23%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E8%2597%25A4%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNhZTBkYWY1NTMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>藤</dc:creator></item><item><title><![CDATA[【Java】二分探索2]]></title><description><![CDATA[
+ 例題
+サイズnの配列aの要素の中には、サイズqの配列kの各要素k[i]以上の個数は何個あるか求めよ。
+
+ 例題の値
+n = 10
+a = 10 9 8 7 6 5 4 3 2 1
+q = 2
+k = 5 7
+
+ 例題の答え
+k[0] = 5の場合の答えは、下記の6個。
+5 6 7 8 9 10
+k[1] = 7の場合の答えは、下記の4個。
+7 8 9 10
+
+ アルゴリズム
+
+考え方
+
+配列aを昇順にソート
+
+x未満とx以上の境界を探し、x以上の要素数を求める
+境界の探すために二分探索を使用
+
+
+二分探索による境界の探し方
+ソートされた配列aと境界の関係性は、下記の通り| a[0] ...]]></description><link>https://zenn.dev/goriki/articles/067-binary-search2</link><guid isPermaLink="true">https://zenn.dev/goriki/articles/067-binary-search2</guid><pubDate>Tue, 07 May 2024 07:07:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--D-0YSp9v--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Java%25E3%2580%2591%25E4%25BA%258C%25E5%2588%2586%25E6%258E%25A2%25E7%25B4%25A22%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E8%2597%25A4%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNhZTBkYWY1NTMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>藤</dc:creator></item><item><title><![CDATA[TermuxにJava16をインストールする方法]]></title><description><![CDATA[Android で linux シェルが使えちゃう Termux で Java16 (openjdk-16) をインストールする方法です。（Minecarft 1.16.5 のサーバーを建ててみたかっただけなのですが、こんなに手こずるとは思いませんでした）
+通常ではインストールできない他の Java バージョンでもこの方法を使えばいけます！
+Termux デフォルトのパッケージマネージャー「pkg」でインストールできる JDK は、openjdk-17 のみです。
+そこで Termux に Ubuntu をインストールすれば幅が多少広がるのですが、それでもインストールできるバージョンは ...]]></description><link>https://zenn.dev/natsune/articles/b51e5f8a8f6dcc</link><guid isPermaLink="true">https://zenn.dev/natsune/articles/b51e5f8a8f6dcc</guid><pubDate>Tue, 07 May 2024 02:24:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--JJ_TpUg7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Termux%25E3%2581%25ABJava16%25E3%2582%2592%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AA%25E3%2581%25A4%25E3%2581%25AD%25E3%2581%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU5MDBkZjI5MmEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>なつねこ</dc:creator></item><item><title><![CDATA[Spring Framework 6.2 になると @Transactionalで検査例外もロールバックするための設定が増える (予定)]]></title><description><![CDATA[Spring Frameworkの @Transactional は、デフォルトで
+「非検査例外(RuntimeExceptionおよびそのサブクラス)ならロールバックする」
+という挙動です。(2024/05現在)
+Spring Framework 6.2からは設定項目が増え、アプリ全体での設定として「全ての例外でロールバックする」と指定できるようになる見込みなので、現行の挙動の整理とあわせて紹介します。
+
+ 対象読者
+
+Spring Frameworkの @Transactional でトランザクション制御をしてDBアクセスしている
+次のいずれかにあてはまる
+
+Kotlinを使っている...]]></description><link>https://zenn.dev/wkwkhautbois/articles/55290f65d92c89</link><guid isPermaLink="true">https://zenn.dev/wkwkhautbois/articles/55290f65d92c89</guid><pubDate>Mon, 06 May 2024 12:15:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--UyAi48FF--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Spring%2520Framework%25206.2%2520%25E3%2581%25AB%25E3%2581%25AA%25E3%2582%258B%25E3%2581%25A8%2520%2540Transactional%25E3%2581%25A7%25E6%25A4%259C%25E6%259F%25BB%25E4%25BE%258B%25E5%25A4%2596%25E3%2582%2582%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%25AB%25E3%2583%2590%25E3%2583%2583%25E3%2582%25AF%25E3%2581%2599%25E3%2582%258B%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%258F%25E3%2581%258F%25E3%2582%258F%25E3%2581%258F%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzlhYTM1ODdlOWIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>わくわく</dc:creator></item><item><title><![CDATA[新人Javaプログラマのための演習問題]]></title><description><![CDATA[この問題集は、Javaの基礎文法を学んだばかりの新人プログラマ向けに、基本的な応用能力を養う演習問題を提供します。情報システム開発を想定した問題を解くことで、Javaプログラミングの基礎を固めることを目的としています。
+
+想定読者：
+- Javaの基礎文法を学び、練習問題を通じて基礎文法の理解を確認している
+- 業務で行うプログラムが全くと言って良いほどに想像できていない]]></description><link>https://zenn.dev/nosix/books/c4f037c8addd1d</link><guid isPermaLink="true">https://zenn.dev/nosix/books/c4f037c8addd1d</guid><pubDate>Mon, 06 May 2024 01:26:01 GMT</pubDate><dc:creator>nosix</dc:creator></item></channel></rss>
