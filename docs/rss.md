@@ -11,6 +11,13 @@ GitHub Actionsで定期的にRSSを購読する[osmos::feed](https://github.com/
 
 ## Rust
 
+### 20240518
+
+- [テンプレートエンジン Handlebars を Rust で扱う](https://qiita.com/takavfx/items/0d3ea9f09e99d83d4471)
+- [Rust vs Python: 正規表現の速度比較](https://qiita.com/dubai_ojisan/items/ea81df2f771123ed9403)
+- [Rust 基本文法 - Struct 構造体-](https://zenn.dev/collabostyle/articles/2b037847a4e243)
+- [Dioxus v0.5 でデスクトップアプリを作って学んだこと、妥協したこと](https://zenn.dev/st_little/articles/lessons-compromises-desktop-app-with-dioxus-v05)
+
 ### 20240517
 
 - [RustのTower + Axumでフォーム送信時のCSRF対策を施す](https://qiita.com/tronicboy/items/3f2b1685787470cfc7dc)
@@ -77,6 +84,15 @@ GitHub Actionsで定期的にRSSを購読する[osmos::feed](https://github.com/
 
 
 ## Java
+
+### 20240518
+
+- [Spring FrameworkとSpring BootのEOLとCompatibilityについての備忘録](https://qiita.com/pair2/items/98be9797eb4d4aaf336a)
+- [Eclipseで「サーバーの起動に失敗しました」と出てくるときによくあるコーディングミス](https://qiita.com/nitaemon/items/fd13bd1453e62b39d22d)
+- [[Google Cloud Speech-to-Text API(V2)] Javaで認識精度を向上させるカスタムクラスの削除を取り消す](https://qiita.com/doran/items/0ec6a41e1281b000318d)
+- [【小ネタ】リフレクションを使って Apache Commons CSV で BeanToCSV 的なことをする](https://qiita.com/m-yu1/items/e3858ee460f209e28055)
+- [[Android] Scroll Custom Calendar](https://qiita.com/kimGeunTae/items/4250e00a2f8788e0769f)
+- [CheerpJ 3.0rc1を発表：テストと改善にご協力ください！](https://zenn.dev/leaning_tech_jp/articles/c475f91ab7d087)
 
 ### 20240517
 
@@ -190,6 +206,29 @@ GitHub Actionsで定期的にRSSを購読する[osmos::feed](https://github.com/
 
 
 ## Linux
+
+### 20240518
+
+- [バインドマウント](https://qiita.com/basabasa0129/items/306d5b1a62d9d2a2f3a4)
+- [Dockerの基本概念](https://qiita.com/basabasa0129/items/2d616cb3753d5caebe80)
+- [コンテナの構築の流れ](https://qiita.com/basabasa0129/items/53f60ec61dc23c30f1ad)
+- [WSL2のUbuntuにDockerをインストールする](https://qiita.com/Jazuma/items/9274d90167a3b61791fa)
+- [renameコマンドが使えないときにファイル名を一括置換するワンライナー](https://qiita.com/h-nabata/items/f18eb202bf035fb4d705)
+- [Zabbixの構築手順～インストールから基本的な管理機能を全て網羅～](https://qiita.com/infra-enthusiast/items/0d86a962a4389c240b60)
+- [EVE-NGのWebコンソールにログインできなくなった場合の対処方法を丁寧に解説](https://qiita.com/infra-enthusiast/items/91fbbc07ab8263c3d977)
+- [Teratermで簡単! ! 公開鍵認証を設定してパスワードレスでSSHログインする](https://qiita.com/infra-enthusiast/items/9c38725c4657aa09f49b)
+- [YYYYMMDDhhmmssをYYYY-MM-DD hh:mm:ssに変換するシェル芸](https://qiita.com/ko1nksm/items/be376336fed13b397eca)
+- [To set up the environments for Splunk Enterprise and Splunk SOAR](https://qiita.com/masafy/items/e3e563ba3fa369f9252f)
+- [Splunk EnterpriseとSplunk SOARの環境を構築する](https://qiita.com/masafy/items/9d218cd0df7ad4402836)
+- [Termuxでlibfprint設定のエラーを解決する方法](https://qiita.com/kawaharu869/items/fbd5f206565cc96e1591)
+- [Docker以前に、コンテナってそもそも何](https://zenn.dev/ayatakaa_chan/articles/b8f2c9d3edd4dd)
+- [ミニPCでマルチサーバー構築 [PostgreSQLコンテナ]](https://zenn.dev/scirexs/articles/cdd3214968e821)
+- [docker-comose の volumes の左辺は記法によってホストのディレクトリ / volume 名指定 が分かれるので注意](https://zenn.dev/yumainaura/articles/qiita-2024-05-14t11_24_00-09_00)
+- [【2024年版】WSL2+Ubuntu24.04+Docker＋GPUでつくる機械学習環境](https://zenn.dev/yumizz/articles/627d4e4821c636)
+- [ローカルのAWS Lambda開発環境を整える(hot reload)](https://zenn.dev/imishinist/articles/8ff24429f0eb41)
+- [新MacでLinux VM版：Kubuntu24.04LTS ③ Ubuntu Server](https://zenn.dev/armcore/articles/kubuntu2404_3)
+- [新MacでLinux VM版：Kubuntu24.04LTS ① prologue](https://zenn.dev/armcore/articles/kubuntu2404_1)
+- [新MacでLinux VM版：Kubuntu24.04LTS ② Virtual Machine](https://zenn.dev/armcore/articles/kubuntu2404_2)
 
 ### 20240517
 
@@ -332,7 +371,6 @@ GitHub Actionsで定期的にRSSを購読する[osmos::feed](https://github.com/
 - [シェルスクリプトの実行方法](https://zenn.dev/skrikzts/articles/07b8816b3bb9af)
 - [シェルスクリプトでの並行処理](https://zenn.dev/skrikzts/articles/bdb7f5aea4cc38)
 - [さくらレンタルサーバーにターミナルでSSH接続する(Mac)](https://zenn.dev/steneco/articles/25bb36584f4802)
-- [【Shellscript】データオブジェクトまじで自動で吐いてくれんだけどwwww【Next.js】](https://zenn.dev/terusi/articles/08256a381f0e28)
 
 ### 20240511
 
@@ -403,6 +441,17 @@ GitHub Actionsで定期的にRSSを購読する[osmos::feed](https://github.com/
 
 
 ## Python
+
+### 20240518
+
+- [既存クラスのメソッドにエラーハンドリングを追加する](https://qiita.com/yuma-long/items/63923d3e7356cf79fda3)
+- [Pythonを使ってiPhoneアプリ開発してみる](https://qiita.com/yuik1012/items/ad41e2c67581ac47e629)
+- [美容師歴13年の36歳が人生初めて株価分析やってみた結果](https://qiita.com/waratteas0714/items/c7eefa2bd163db984d3e)
+- [データ分析業務を経験して個人的に感じている各資格の方向性と強み](https://qiita.com/fuki_takahashi/items/d8140564d25f8cb1feb7)
+- [Pythonでフォルダが予約語になっている場合にfrom..importする方法](https://zenn.dev/masterlink193/articles/python-reserved-folder-name)
+- [How to normalize image](https://zenn.dev/yuto_mo/articles/fe961e0e7cdf33)
+- [【2024年5月】エンジニアなら読むべき技術書TOP5](https://zenn.dev/yottabyte/articles/63297860ab34e2)
+- [バックエンドも AWS も分からず Chalice を触った体験記【Python/ちょこっと PostgreSQL】](https://zenn.dev/poetrainy/articles/2b1e06c884a2a4)
 
 ### 20240517
 
@@ -511,6 +560,31 @@ GitHub Actionsで定期的にRSSを購読する[osmos::feed](https://github.com/
 
 
 ## Web
+
+### 20240518
+
+- [画像で横幅が-90度回転した場合に縦に合わせる](https://qiita.com/Gak-Py/items/6316f0cc4ed072ec5d87)
+- [[React] コンポーネントを用いたレンダリング](https://qiita.com/Jochun/items/8bd98064c0d985f83cbf)
+- [[React] スタイル指定方法](https://qiita.com/PenPe/items/a587d2a0c76a1cb97fec)
+- [rowspanを指定してるtableの行をホバーした時にcssで同じ行の背景色を変更する方法](https://qiita.com/mori_goq/items/0f6f7892fae334350535)
+- [Shields.io を使ってバッジを表示する](https://qiita.com/fujithuro/items/a8561983028c731309cf)
+- [JavaScript/TypeScriptの`for`構文について](https://qiita.com/yuu_7_ns/items/29a236adc88b66973d09)
+- [大学３回生がポートフォリオ作成してみた](https://qiita.com/takutosan/items/15088a2951b177c7f081)
+- [『JavaScript』プロパティ参照とオフセット計算について](https://qiita.com/yuu_7_ns/items/8d61d18dba98a4cc609a)
+- [[Rails] Rails7 cocoon導入方法](https://qiita.com/ruby_of_pokemon/items/001f39cbb5fb3ee1f279)
+- [TypeScriptにおける反復可能なオブジェクト：`Map` と `Set`](https://qiita.com/yuu_7_ns/items/84a77114a43acdcc8855)
+- [TypeScriptのタプルについて](https://qiita.com/yuu_7_ns/items/e2a7ff2f4e286b3bafcf)
+- [TypeScriptのリテラル型を使った型安全なコード](https://qiita.com/yuu_7_ns/items/c5c95f5ef3f41ec9e84e)
+- [Stylelint を導入して、規則性のある CSS へ | CSS Modules, Scss対応](https://zenn.dev/dekitate/articles/4b1ccbb81f4841)
+- [CSSでトランプみたいにカードをカッコよく重ねて並べた～い！](https://zenn.dev/kagan/articles/css-spread-cards)
+- [ブラウザのマウス座標がズレるのを調整するあのコード](https://zenn.dev/210neon/articles/8e64df6a5d6a45)
+- [JavaScriptのコメントを任意の場所で折りたためるようにする](https://zenn.dev/210neon/articles/e07755804f4d95)
+- [AWSを使用したアプリケーションのローカルテスト](https://zenn.dev/carenet/articles/eeafa0f2424a8a)
+- [Three.js T-pose モデルにアニメーションを適用する。](https://zenn.dev/masterak/articles/zenn_article_06)
+- [Pulumi コマンド を GitHub Actions で実行する](https://zenn.dev/z63d/articles/0d6b3ee4e9a44e)
+- [GraphQLエンドポイントが複数ある時のフロントエンド](https://zenn.dev/yamakenji24/articles/graphql-with-environments)
+- [Prismaのデータ取得で不要な列を除く](https://zenn.dev/k_log24/articles/8857eea5a8a0b6)
+- [AWS SDKでよく使う記述についてまとめてみた](https://zenn.dev/nenenemo/articles/9f534b1d523ea4)
 
 ### 20240517
 

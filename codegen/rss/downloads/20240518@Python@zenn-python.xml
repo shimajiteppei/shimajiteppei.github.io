@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Sat, 18 May 2024 06:21:31 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Pythonでフォルダが予約語になっている場合にfrom..importする方法]]></title><description><![CDATA[Pythonで from..import する時、フォルダに予約語が入っているとSyntax Errorが発生します。
+
+title=予約語のfrom..import
+from lambda import p_test # Syntax Errorが発生
+
+p_test()
+
+フォルダ名が予約語そのままというパターンはほぼないと思われます。
+が、AWS Lambdaのコードを管理していると lambda というフォルダにソースコードが入っているなんていうのはあり得ない話ではありません。
+Pythonでは lambda は予約語なので、いざ from..import しようとした時に困りま...]]></description><link>https://zenn.dev/masterlink193/articles/python-reserved-folder-name</link><guid isPermaLink="true">https://zenn.dev/masterlink193/articles/python-reserved-folder-name</guid><pubDate>Fri, 17 May 2024 14:16:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--rgsoekv7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A7%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25AB%25E3%2583%2580%25E3%2581%258C%25E4%25BA%2588%25E7%25B4%2584%25E8%25AA%259E%25E3%2581%25AB%25E3%2581%25AA%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%2584%25E3%2582%258B%25E5%25A0%25B4%25E5%2590%2588%25E3%2581%25ABfrom..import%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:link%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0ZXZZMk1hWS1JMEZTWHBDOGJBWWJVamhPX2JkYkw0YUJGN016Y2trb29kSEE9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>link</dc:creator></item><item><title><![CDATA[How to normalize image]]></title><description><![CDATA[
+ 1. Simply Normalization to 0-255
+def normalize(data: np.ndarray):
+    # Normalize 0-min
+    data = data - data.min()
+    # Normalize 0-255 int
+    data = (data / data.max() * 255).astype(np.uint8)
+    
+    return data
+This simply normalization reducing memory size efficiency, and prevent overfi...]]></description><link>https://zenn.dev/yuto_mo/articles/fe961e0e7cdf33</link><guid isPermaLink="true">https://zenn.dev/yuto_mo/articles/fe961e0e7cdf33</guid><pubDate>Fri, 17 May 2024 12:50:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--R65wckrA--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_76:How%2520to%2520normalize%2520image%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yuu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q0OTcwZWIzMmUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yuu</dc:creator></item><item><title><![CDATA[【2024年5月】エンジニアなら読むべき技術書TOP5]]></title><description><![CDATA[
+ 世界一流エンジニアの思考法
+
+
+noteでも大人気！　米マイクロソフトのエンジニアが放つ最前線の仕事術
+頭が先、手は後。一流の仕事のカギは順序にある。
+――楠木建（経営学者）
+知的生産へのリスペクトがイノベーションの源泉だ。
+――落合陽一（メディアアーティスト）
+「怠惰であれ！」「早く失敗せよ」――
+米マイクロソフトの現役ソフトウェアエンジニアの著者が、超巨大クラウドの開発の最前線で学んだ思考法とは？
+“三流プログラマ”でもできた〈生産性爆上がり〉の技術！
+・試行錯誤は「悪」。“基礎の理解”に時間をかける
+・より少ない時間で価値を最大化する考え方とは？
+・「準備」と「持ち帰り」をやめ...]]></description><link>https://zenn.dev/yottabyte/articles/63297860ab34e2</link><guid isPermaLink="true">https://zenn.dev/yottabyte/articles/63297860ab34e2</guid><pubDate>Fri, 17 May 2024 11:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jo8Tb6q5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%25902024%25E5%25B9%25B45%25E6%259C%2588%25E3%2580%2591%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%25E3%2581%25AA%25E3%2582%2589%25E8%25AA%25AD%25E3%2582%2580%25E3%2581%25B9%25E3%2581%258D%25E6%258A%2580%25E8%25A1%2593%25E6%259B%25B8TOP5%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%258A%25A0%25E8%2597%25A4%25EF%25BD%259C%25E9%25AB%2598%25E6%25A0%25A1%25E7%2594%259F%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA0YTcwNjA3NGUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>加藤｜高校生エンジニア</dc:creator></item><item><title><![CDATA[バックエンドも AWS も分からず Chalice を触った体験記【Python/ちょこっと PostgreSQL】]]></title><description><![CDATA[
+ はじめに
+これまでフロントエンドばかりやってきたので、バックエンドのことは全然知りません。REST API…？MVC…？なんとなく聞いたことはあるけど…そんなレベルです。
+今回 AWS Chalice と React を用いて簡単な Todo-app の開発を行ったので、体験記として残します。
+技術スタック
+
+ フロントエンド
+
+React + Vite
+
+
+ バックエンド
+
+Python
+AWS Chalice
+PostgreSQL
+
+
+
+ リポジトリ
+https://github.com/poetrainy/python-practice
+本記事では一部コードを例示する箇所があり...]]></description><link>https://zenn.dev/poetrainy/articles/2b1e06c884a2a4</link><guid isPermaLink="true">https://zenn.dev/poetrainy/articles/2b1e06c884a2a4</guid><pubDate>Fri, 17 May 2024 03:45:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4r2fJfMw--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2590%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2589%25E3%2582%2582%2520AWS%2520%25E3%2582%2582%25E5%2588%2586%25E3%2581%258B%25E3%2582%2589%25E3%2581%259A%2520Chalice%2520%25E3%2582%2592%25E8%25A7%25A6%25E3%2581%25A3%25E3%2581%259F%25E4%25BD%2593%25E9%25A8%2593%25E8%25A8%2598%25E3%2580%2590Python%252F%25E3%2581%25A1%25E3%2582%2587%25E3%2581%2593%25E3%2581%25A3%25E3%2581%25A8%2520PostgreSQL%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:poetrainy%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0JET29VN3NHZmVUZWxUR1ZQRXV4NUdpRmZ4NFVNYVlzbkxaalh0R2s1NWMwbkhjcTI9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>poetrainy</dc:creator></item><item><title><![CDATA[【初心者向け】Stripeでクレカ登録・決済・削除を実装する【Python, Go, Javascript】]]></title><description><![CDATA[こんにちは、わいけいです。
+今回の記事ではStripeを使ってクレジットカード決済を実装します。
+
+ 前置き
+開発規模の大小を問わず、実装したプロダクトで収益を得るにはユーザーからお金を払ってもらう必要があります。
+しかし、決済の仕組みを自分たちで実装するのは色々な困難が伴います。
+キャッシュレス決済といえばクレジットカードですが、クレカ決済の実装には例えば下記のような課題があります。
+
+実装ミスなどで、ユーザーのクレカ情報が流出すると大事故になる
+PCI DSSというセキュリティ要件を守り、決済ブランドの審査に通過するには莫大なコストがかかる
+
+結論として、個人や小規模な企業がクレカ決...]]></description><link>https://zenn.dev/spiralai/articles/e9704cd8879c0f</link><guid isPermaLink="true">https://zenn.dev/spiralai/articles/e9704cd8879c0f</guid><pubDate>Fri, 17 May 2024 03:10:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6AHQ2Ctc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E5%2590%2591%25E3%2581%2591%25E3%2580%2591Stripe%25E3%2581%25A7%25E3%2582%25AF%25E3%2583%25AC%25E3%2582%25AB%25E7%2599%25BB%25E9%258C%25B2%25E3%2583%25BB%25E6%25B1%25BA%25E6%25B8%2588%25E3%2583%25BB%25E5%2589%258A%25E9%2599%25A4%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2599%25E3%2582%258B%25E3%2580%2590Python%252C%2520Go%252C%2520Javascript%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2582%258F%25E3%2581%2584%25E3%2581%2591%25E3%2581%2584%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJhNDE5NGY4ZmYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Spiral.AI%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA3MjY1NjZiZmQuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>わいけい</dc:creator></item><item><title><![CDATA[OpenTelemetryのPythonインストゥルメンテーションパターン分類]]></title><description><![CDATA[https://opentelemetry.io/docs/languages/python/automatic/example/ の要点抽出です。
+
+ 手動(manual)インストゥルメンテーション
+概要:
+
+プログラムの処理中で tracer.start_as_current_span でスパンを作成する
+
+@app.route("/server_request")
+def server_request():
+    with tracer.start_as_current_span(
+        "server_request",
+        context=extract...]]></description><link>https://zenn.dev/mizti/articles/6b4b327ebc427b</link><guid isPermaLink="true">https://zenn.dev/mizti/articles/6b4b327ebc427b</guid><pubDate>Fri, 17 May 2024 02:55:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7aXE3h_i--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:OpenTelemetry%25E3%2581%25AEPython%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2582%25A5%25E3%2583%25AB%25E3%2583%25A1%25E3%2583%25B3%25E3%2583%2586%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2583%2591%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%25B3%25E5%2588%2586%25E9%25A1%259E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mizti%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lELUQxZUcyTk4zcFpBcWxTNWgtTTV1OW9DRFFQOXpKWE14Z285eFE9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mizti</dc:creator></item><item><title><![CDATA[pythonコマンドでpython3を実行できるようにする(macOS)]]></title><description><![CDATA[
+ はじめに
+macOS でpython3をインストールした後に、pythonコマンドを実行するとエラーが発生しました。
+python -v
+
+エラー内容
+zsh: command not found: python
+
+これは、pythonコマンドがpython3にリンクされていないためです。
+そのため、正しくは下記のようにpython3コマンドを実行する必要があります。
+python3 -v
+しかし、毎回python3と入力するのは、少しだけ手間です。
+そこで、この記事では、pythonコマンドでpython3を実行できるようにする方法を紹介します。
+
+ 解決方法
+以下の手順で解決でき...]]></description><link>https://zenn.dev/torakm/articles/80626c51a6a2c1</link><guid isPermaLink="true">https://zenn.dev/torakm/articles/80626c51a6a2c1</guid><pubDate>Thu, 16 May 2024 23:48:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--H6H1nhx---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:python%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2581%25A7python3%25E3%2582%2592%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258B%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%2528macOS%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:torakm%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSWpwb3BqampCamdqSmw3MFRFcnZKNWZGZncwVUdBNGJxdGpJQXpadDU3N3FnPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>torakm</dc:creator></item><item><title><![CDATA[宇宙からの地球観測第６章]]></title><description><![CDATA[宇宙からの地球観測　第6章の章末問題はついにきました。SAR Dataです。　去年の11月にSAR衛星を扱う会社に転職してからバイナリとしては頻繁に関わるようになりました。ただ、中身については理解できていません。気合い入れて課題に取り組みます。
+
+ 問題6.1
+
+SAR は相関処理で分解能を向上する。今，ALOS-2/PALSAR-2を想定して，分解能の向上率を計算しなさい。スラントレンジ長を 700km とする。
+
+
+ 基本用語、公式の理解
+
+ アジマス、スラントレンジ、グラントレンジ
+過去のまとめ 参照
+帯域幅（BandWidth）と周波数（Frequency）は、信号処理や通信にお...]]></description><link>https://zenn.dev/kozayupapa/articles/0879fb2ea61e2b</link><guid isPermaLink="true">https://zenn.dev/kozayupapa/articles/0879fb2ea61e2b</guid><pubDate>Thu, 16 May 2024 22:55:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--DMhv57Wf--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%25AE%2587%25E5%25AE%2599%25E3%2581%258B%25E3%2582%2589%25E3%2581%25AE%25E5%259C%25B0%25E7%2590%2583%25E8%25A6%25B3%25E6%25B8%25AC%25E7%25AC%25AC%25EF%25BC%2596%25E7%25AB%25A0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kozayupapa%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M1Y2ZkMTM5ZTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kozayupapa</dc:creator></item><item><title><![CDATA[RiderでPythonのコードを保存時に自動整形する]]></title><description><![CDATA[
+ 概要
+空文字や改行の数について、Riderの機能で修正候補が上がる事がありますが、
+都度修正するのが面倒なので、保存時に勝手に整形するように調整します。
+
+ 環境
+OS: Windows 11
+Rider: 2023.3.5
+Python: 3.8.19
+
+ 準備
+
+ 整形ツールのインストール
+black という自動整形ツールをインストールします。
+pip install black
+
+ ファイル監視プラグインの導入
+File &gt; Setting で設定を開き
+Plugins 項目を選択。
+検索欄に File wa 等と入力すると
+File Watchers というプラグインが...]]></description><link>https://zenn.dev/rhythmcan/articles/45d82b2d8f8c14</link><guid isPermaLink="true">https://zenn.dev/rhythmcan/articles/45d82b2d8f8c14</guid><pubDate>Thu, 16 May 2024 22:42:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jtE63Oyh--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rider%25E3%2581%25A7Python%25E3%2581%25AE%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2582%2592%25E4%25BF%259D%25E5%25AD%2598%25E6%2599%2582%25E3%2581%25AB%25E8%2587%25AA%25E5%258B%2595%25E6%2595%25B4%25E5%25BD%25A2%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:becky%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZkMzBmMjcxNjYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>becky</dc:creator></item><item><title><![CDATA[OCEAN COLOR: (NASA の衛星オープンデータ)  の Python での取得と可視化]]></title><description><![CDATA[
+
+ OCEAN COLOR WEB について
+NASA は海洋観測のために、幾つかの衛星や装置でセンサーを保有しています。
+これらのデータを統合して過去から現在までのアーカイブデータをオープンデータとして公開しています。
+https://oceancolor.gsfc.nasa.gov/
+!
+実装については最後に環境と共に Github でまとめております。
+
+
+ OCEAN COLOR とは
+そのままではありますが、主に海洋での色のことです。
+基本的には、海は太陽光の反射や散乱によってその色彩を変化させます。
+しかしながら、それだけではなく海では様々な影響によってその色合い、色調を変...]]></description><link>https://zenn.dev/syu_tan/articles/d61a0f2fd20ca6</link><guid isPermaLink="true">https://zenn.dev/syu_tan/articles/d61a0f2fd20ca6</guid><pubDate>Thu, 16 May 2024 22:40:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xsx_oJLe--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:OCEAN%2520COLOR%253A%2520%2528NASA%2520%25E3%2581%25AE%25E8%25A1%259B%25E6%2598%259F%25E3%2582%25AA%25E3%2583%25BC%25E3%2583%2597%25E3%2583%25B3%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%2529%2520%2520%25E3%2581%25AE%2520Python%2520%25E3%2581%25A7%25E3%2581%25AE%25E5%258F%2596%25E5%25BE%2597%25E3%2581%25A8%25E5%258F%25AF%25E8%25A6%2596%25E5%258C%2596%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:emmyeil%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAxODg1NmFkMGYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>emmyeil</dc:creator></item><item><title><![CDATA[FastAPIのDB接続とマイグレーション(DIコンテナも準備)]]></title><description><![CDATA[
+ 最終ディレクトリ構成
+
+かなり急いで書いたのでミスなどあったらコメントください！
+今回は前回に続きとしてDB接続(テスト用は後に作成しますが、下準備はします)とマイグレーションのup,downまでとなります。
+前回： https://zenn.dev/momonga_g/articles/f131ea192b1184
+今回の最終系のディレクトリ構成
+project_root
+├── _docker
+│   ├── nginx
+│   │   └── nginx.conf
+│   └── python
+│       └── Dockerfile
+├── src
+│   └── mai...]]></description><link>https://zenn.dev/momonga_g/articles/a62e2b95c68590</link><guid isPermaLink="true">https://zenn.dev/momonga_g/articles/a62e2b95c68590</guid><pubDate>Thu, 16 May 2024 15:39:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dp_uyeRp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:FastAPI%25E3%2581%25AEDB%25E6%258E%25A5%25E7%25B6%259A%25E3%2581%25A8%25E3%2583%259E%25E3%2582%25A4%25E3%2582%25B0%25E3%2583%25AC%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%2528DI%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2586%25E3%2583%258A%25E3%2582%2582%25E6%25BA%2596%25E5%2582%2599%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2582%25E3%2582%2582%25E3%2582%2593%25E3%2581%258C%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FiZWRkZTc0YzcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ももんが</dc:creator></item><item><title><![CDATA[Gemini 1.5 flash でjson回答の受け取り]]></title><description><![CDATA[ChatGPT-4oがでました。そしてその影ではGemini-1.5-flashがリリースされました。
+ChatGPTと比べたときの優位性は何でしょうか？
+それは、無料でAPIが使えることです。
+https://ai.google.dev/pricing?hl=ja
+無料版のapiの制限は現在
+
+１分あたりのリクエスト数 : 15
+１分あたりのトークン数 : 100万token
+一日あたりのリクエスト数 : 1500
+
+となっています。つまり、毎分100万tokenを１日中使っても問題ないのです(60*24=1440リクエスト)。個人利用では、十分すぎる使用容量です。
+しかも、flash...]]></description><link>https://zenn.dev/emoclew/articles/8d73e591e8f016</link><guid isPermaLink="true">https://zenn.dev/emoclew/articles/8d73e591e8f016</guid><pubDate>Thu, 16 May 2024 14:45:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0NX9JW2P--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Gemini%25201.5%2520flash%2520%25E3%2581%25A7json%25E5%259B%259E%25E7%25AD%2594%25E3%2581%25AE%25E5%258F%2597%25E3%2581%2591%25E5%258F%2596%25E3%2582%258A%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:emoclew%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUVkRlRwNXVmTzdVbGY4Tl9uV3hlamh0ZHpxSmtMVGpfWTlhNG1vZ0dOWDQ9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>emoclew</dc:creator></item><item><title><![CDATA[Command R+ を Cohere API + Gradio で使う]]></title><description><![CDATA[
+ Command R+ を Cohere API + Gradio で使う
+ただのメモです。公式以上の情報はないです。.env ファイルに COHERE_API_KEY を設定している前提です。
+
+.env
+COHERE_API_KEY="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+
+Cohere API Key は cohere にログインして下記のページで取得できます(2024/05現在)。
+
+API Keys
+
+記事の執筆時点では無料で取得可能ですが、時間がたつと条件が変わっているかもしれません。
+
+ 環境構築 (Anacondaの...]]></description><link>https://zenn.dev/bbled/articles/8f895be54b0412</link><guid isPermaLink="true">https://zenn.dev/bbled/articles/8f895be54b0412</guid><pubDate>Thu, 16 May 2024 12:36:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--c6LRbWoi--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Command%2520R%252B%2520%25E3%2582%2592%2520Cohere%2520API%2520%252B%2520Gradio%2520%25E3%2581%25A7%25E4%25BD%25BF%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E8%25B6%2585%25EF%25BC%25AC%25E3%2583%2581%25E3%2582%25AB%25E5%259B%25A3%25E7%25B7%25A8%25E9%259B%2586%25E5%25B1%2580%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0ZjA2enFDc2wzSWtPcXhWX0c2UEtBZFFtYUpJYnlZY3QzZGVTUEItbHRnZnc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>超Ｌチカ団編集局</dc:creator></item><item><title><![CDATA[sqlmodelを使ってテストデータを投入]]></title><description><![CDATA[pythonで良いseedライブラリのようなものが見つからなかったため、モデルを用意して、スクリプトを書くことにしました。
+モデルは、SQLModelを使います。
+すでに、productsテーブルはalembicで作成してしまっているので、まずは、DDLからモデルを作ってみようと思います。
+ざっと探してみたところ、omymodelsができそうかなと思いやってみました。
+poetryを導入したので、poetry addしてみました。
+$ poetry add omymodels
+Using version ^0.17.0 for omymodels
+
+Updating dependenci...]]></description><link>https://zenn.dev/sikmi_tech/articles/ff6fea24f936fd</link><guid isPermaLink="true">https://zenn.dev/sikmi_tech/articles/ff6fea24f936fd</guid><pubDate>Thu, 16 May 2024 10:27:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--AbDpScUC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:sqlmodel%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%2592%25E6%258A%2595%25E5%2585%25A5%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:na8esin%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhlYzhlY2ZlNDguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2581%2597%25E3%2581%258F%25E3%2581%25BF%25E3%2581%25AE%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2htRnZJU0VZaHpTODM3VVpLRE5tdHNYV2FBazF4WE5GSUt3TG1oPXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>na8esin</dc:creator></item><item><title><![CDATA[TclとPythonの連携：WSL2環境上での実用ガイド]]></title><description><![CDATA[
+ はじめに
+本記事では、TclスクリプトからPythonの関数を直接呼び出し、その結果を利用する方法を解説します。この連携により、Tclの利便性とPythonの強力なライブラリを組み合わせることができます。
+特に、データ処理や機械学習の分野でPythonのライブラリを活用しつつ、TclのスクリプトやGUIを利用することで、柔軟で強力なアプリケーションを構築できます。
+この記事では、WSL2上のUbuntu環境でMinicondaを使用してPython仮想環境を構築し、TclスクリプトからPython関数を呼び出す方法について説明します。具体的には、以下の3種のファイルを使用してこの連携...]]></description><link>https://zenn.dev/wassawa/articles/c2064ad9f1852c</link><guid isPermaLink="true">https://zenn.dev/wassawa/articles/c2064ad9f1852c</guid><pubDate>Thu, 16 May 2024 08:30:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vQ2smkZE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Tcl%25E3%2581%25A8Python%25E3%2581%25AE%25E9%2580%25A3%25E6%2590%25BA%25EF%25BC%259AWSL2%25E7%2592%25B0%25E5%25A2%2583%25E4%25B8%258A%25E3%2581%25A7%25E3%2581%25AE%25E5%25AE%259F%25E7%2594%25A8%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%258F%25E3%2581%25A3%25E3%2581%2595%25E3%2582%258F%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzMwZjcwZGViNmEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>わっさわ</dc:creator></item><item><title><![CDATA[Pythonの.pycファイル入門]]></title><description><![CDATA[こんにちは、fastriver(@fastriver_org)です。今回は皆さん一度は夢に見るであろう、Pythonのバイナリファイルの解析・扱い方について紹介します。
+
+ .pycファイルとは
+
+Pythonはインタプリタ型言語ですが、直接実行するのではなく一旦バイトコードに変換してからそれをPythonVM上で実行する、ということを行っています。PythonVMはJVMなど他の一般的なVM同様にスタックマシンであり、スタック上に値を積んだり変換したりを繰り返して計算を進めます。
+
+便宜上バイトコードと呼んでいますが、PythonVMのバイトコードは1命令あたり2バイトの大きさです。
+...]]></description><link>https://zenn.dev/fastriver/articles/python-pyc-binary</link><guid isPermaLink="true">https://zenn.dev/fastriver/articles/python-pyc-binary</guid><pubDate>Wed, 15 May 2024 14:36:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---4GTR5Qm--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25AE.pyc%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E5%2585%25A5%25E9%2596%2580%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:fastriver%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM3OTZiYTczZmMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>fastriver</dc:creator></item><item><title><![CDATA[Plotlyの図が表示されない問題の解決メモ]]></title><description><![CDATA[Jupyter labの場合とvscode(Jupyter)における図が表示されない場合における私がした対処方法をメモとして残しておきます。
+
+ Jupyter lab
+インストール
+
+conda install -c plotly plotly=5.22.0
+conda install "jupyterlab&gt;=3" "ipywidgets&gt;=7.6"
+conda install -c conda-forge -c plotly jupyter-dash
+Jupyter labで起動していろいろコードを書いていく
+
+JavaScript Error: Cannot read...]]></description><link>https://zenn.dev/production_765/articles/b7b3ddfe64f3c8</link><guid isPermaLink="true">https://zenn.dev/production_765/articles/b7b3ddfe64f3c8</guid><pubDate>Wed, 15 May 2024 14:19:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Fr7_RGQY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Plotly%25E3%2581%25AE%25E5%259B%25B3%25E3%2581%258C%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2595%25E3%2582%258C%25E3%2581%25AA%25E3%2581%2584%25E5%2595%258F%25E9%25A1%258C%25E3%2581%25AE%25E8%25A7%25A3%25E6%25B1%25BA%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:production_765%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFUWEFKeFJQZzRBZkpJNC1Bb2drREE5Y3Jjd0hlcGM3cjF2TlhILTJ6VUQ9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>production_765</dc:creator></item><item><title><![CDATA[DockerでFastAPI環境構築(HelloWorldまで)]]></title><description><![CDATA[
+ FastAPI環境構築
+
+リンク
+チュートリアル - ユーザーガイド - FastAPI
+
+ 使用技術
+
+ 環境
+
+Docker
+Python 3.12.3(執筆時最新)
+nginx(webサーバー)
+
+
+ DB
+
+MySQL 8系
+SQLModel(ORマッパー)
+alembic(マイグレーション管理)
+
+
+ ライブラリ管理
+
+poetry
+
+構成はシンプルでnginxをwebサーバーとして配置して、Uvicormをアプリケーションサーバーにします。
+
+ ディレクトリ作成
+最低限のディレクトリを作成していきます。
+project_root
+├── _docker
+│   ├── n...]]></description><link>https://zenn.dev/momonga_g/articles/f131ea192b1184</link><guid isPermaLink="true">https://zenn.dev/momonga_g/articles/f131ea192b1184</guid><pubDate>Wed, 15 May 2024 13:53:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--I3m3GWGB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%25E3%2581%25A7FastAPI%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%2528HelloWorld%25E3%2581%25BE%25E3%2581%25A7%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2582%25E3%2582%2582%25E3%2582%2593%25E3%2581%258C%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FiZWRkZTc0YzcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ももんが</dc:creator></item><item><title><![CDATA[デザインパターン備忘録(後半)]]></title><description><![CDATA[
+ 前回の記事から
+今回は2つの記事に分けることになりました。
+こちらはデザインパターン備忘録(前半)からの続きになります。
+
+ Chain of Responsibility（責任の連鎖）パターン
+
+ メリット
+
+柔軟なリクエスト処理
+
+リクエストを処理するオブジェクトを動的に変更できるため、柔軟なリクエスト処理が可能です。
+
+コードの分離
+
+リクエストを処理する各オブジェクトを独立して設計できるため、責任を分離できます。
+
+可読性と保守性の向上
+
+処理ロジックをチェーン内の各オブジェクトに分散させることで、コードの可読性と保守性が向上します。
+
+新しい処理の追加が容易
+
+新しい処理を...]]></description><link>https://zenn.dev/kou_kawa/articles/36-design-pattern-02</link><guid isPermaLink="true">https://zenn.dev/kou_kawa/articles/36-design-pattern-02</guid><pubDate>Wed, 15 May 2024 13:47:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--MQBCehL4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2587%25E3%2582%25B6%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2591%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%25B3%25E5%2582%2599%25E5%25BF%2598%25E9%258C%25B2%2528%25E5%25BE%258C%25E5%258D%258A%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kou%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzEyNTU3ZTY0NDIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kou</dc:creator></item><item><title><![CDATA[デザインパターン備忘録(前半)]]></title><description><![CDATA[
+ はじめに
+ChatGPT-4oが使用できるようになりました。私も早速使ってみましたが、以前のバージョンに比べてスピードと精度の向上を実感しました。これを機に、デザインパターンについての記事を書いてみることにしました。この記事を通じて勉強にもなり、後で見返すための資料としても活用できるようにしたいと思います。サンプルコードには、Java、TypeScript、Pythonのプログラミング言語を使用しています。
+今回は記事を2つに分けることになりました。
+後半の記事はこちら
+
+ デザインパターン一覧
+
+生成に関するパターン
+
+Abstract Factory（アブストラクトファクトリー）...]]></description><link>https://zenn.dev/kou_kawa/articles/35-design-pattern-01</link><guid isPermaLink="true">https://zenn.dev/kou_kawa/articles/35-design-pattern-01</guid><pubDate>Wed, 15 May 2024 13:47:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Ihl2SnhW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2587%25E3%2582%25B6%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2591%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%25B3%25E5%2582%2599%25E5%25BF%2598%25E9%258C%25B2%2528%25E5%2589%258D%25E5%258D%258A%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kou%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzEyNTU3ZTY0NDIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kou</dc:creator></item></channel></rss>

@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Linux」のフィード]]></title><description><![CDATA[Zennのトピック「Linux」のRSSフィードです]]></description><link>https://zenn.dev/topics/linux</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/860a9eb1e4.png</url><title>Zennの「Linux」のフィード</title><link>https://zenn.dev/topics/linux</link></image><generator>zenn.dev</generator><lastBuildDate>Sat, 18 May 2024 12:03:32 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/linux/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[新MacでLinux VM版：Kubuntu24.04LTS ③ Ubuntu Server]]></title><description><![CDATA[本連載ではAppleSilicon(M1系)で仮想マシン上にLinuxを入れる方法を、全くの初心者の方でも理解できるように説明しています。
+この連載の全記事目次はこちら
+
+ 1.予備知識とインストールの流れ
+さて、いよいよインストールです。が、いくつか説明しておくことがあります。
+
+ 1-2.Kubuntuとは何か
+KubuntuというのはUbuntuというメジャーなディストリビューションの派生版で、UbuntuをベースにKDE Plasmaというデスクトップ（GUI環境）を組み合わせて馴染ませたものになります。馴染ませるとは単にKDEを入れただけではなく、Ubuntuのフル機能を利用で...]]></description><link>https://zenn.dev/armcore/articles/kubuntu2404_3</link><guid isPermaLink="true">https://zenn.dev/armcore/articles/kubuntu2404_3</guid><pubDate>Sat, 18 May 2024 11:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--J5DFzwh3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%2596%25B0Mac%25E3%2581%25A7Linux%2520VM%25E7%2589%2588%25EF%25BC%259AKubuntu24.04LTS%2520%25E2%2591%25A2%2520Ubuntu%2520Server%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Armlin%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM3ODIxNWUwN2UuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Armlin</dc:creator></item><item><title><![CDATA[新MacでLinux VM版：Kubuntu24.04LTS ① prologue]]></title><description><![CDATA[本連載ではAppleSilicon(M1系)で仮想マシン上にLinuxを入れる方法を、全くの初心者の方でも理解できるように説明しています。
+この連載の全記事目次はこちら
+
+ 1.新章の開始✨
+
+ 1-1.まえがき
+はじめまして、Armlinです。
+これから始まるのは、「Mac買ったんだけど、Linux使いたいんだよね。」という方に向けた記事です。今後シリーズで書いていこうと思います。とにかく使える様にしたいけど、記事が多すぎる。という方。ひとまずこの記事を辿れば使えるようになりますよ👀
+インストール完了後はプログラミング環境の構築など別シリーズに繋げて行きたいと思っています。その為に今回...]]></description><link>https://zenn.dev/armcore/articles/kubuntu2404_1</link><guid isPermaLink="true">https://zenn.dev/armcore/articles/kubuntu2404_1</guid><pubDate>Fri, 17 May 2024 11:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GwHauc94--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%2596%25B0Mac%25E3%2581%25A7Linux%2520VM%25E7%2589%2588%25EF%25BC%259AKubuntu24.04LTS%2520%25E2%2591%25A0%2520prologue%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Armlin%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM3ODIxNWUwN2UuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Armlin</dc:creator></item><item><title><![CDATA[新MacでLinux VM版：Kubuntu24.04LTS ② Virtual Machine]]></title><description><![CDATA[本連載ではAppleSilicon(M1系)で仮想マシン上にLinuxを入れる方法を、全くの初心者の方でも理解できるように説明しています。
+この連載の全記事目次はこちら
+
+ 1.下準備
+
+ 1-1.仮想マシンの作り方
+M1系のMacで仮想マシンを作るには、専用のアプリを使います。そもそも仮想マシンとは何か簡単に説明しておきます。
+
+ ▷仮想マシンはソフトウェアで実現する、本物そっくりのPC
+パソコンは多くの部品が集まって出来ています。そしてその上でOS(MacOSなど)が動いています。しかしOSは単なるプログラムですから、本当にそこに物理的にパソコンが存在するかをOS自身が確認するわけで...]]></description><link>https://zenn.dev/armcore/articles/kubuntu2404_2</link><guid isPermaLink="true">https://zenn.dev/armcore/articles/kubuntu2404_2</guid><pubDate>Fri, 17 May 2024 11:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--aYeXzR96--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%2596%25B0Mac%25E3%2581%25A7Linux%2520VM%25E7%2589%2588%25EF%25BC%259AKubuntu24.04LTS%2520%25E2%2591%25A1%2520Virtual%2520Machine%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Armlin%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM3ODIxNWUwN2UuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Armlin</dc:creator></item><item><title><![CDATA[Raspberry Piを使ってストリーミング配信システムを作ってみる]]></title><description><![CDATA[Raspberry PiからNGINXとRTMP/HLSを使って配信サーバを作成し、試したときの作業メモです。
+
+ サーバ側の準備
+今回はOSとしてubuntu 22.04.3 LTSを用いました。
+
+ NGINXのインストール
+nginxとrtmpモジュールをインストールします。
+　sudo apt install -y nginx
+　sudo apt install -y libnginx-mod-rtmp
+インストールが終わったら、配信に使用するためのテンポラリ用のディレクトリを作成します。
+sudo chmod -R 755 /tmp/hls
+設定ファイルは以下のようにしました。...]]></description><link>https://zenn.dev/kobayutapon/articles/8a928dff86c45c</link><guid isPermaLink="true">https://zenn.dev/kobayutapon/articles/8a928dff86c45c</guid><pubDate>Fri, 17 May 2024 01:45:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---jh_yK8B--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Raspberry%2520Pi%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25AA%25E3%2583%25BC%25E3%2583%259F%25E3%2583%25B3%25E3%2582%25B0%25E9%2585%258D%25E4%25BF%25A1%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25B3%25E3%2583%2590%25E3%2583%25A6%25E3%2582%25BF%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0Y2J6SVJNTHZLREJYd0NFYUQyaDctMktyYk9rU3F5NjNLSWtodEk3UzlMQmZvPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>コバユタ</dc:creator></item><item><title><![CDATA[SadServers解説#17 "Melbourne": WSGI with Gunicorn]]></title><description><![CDATA[https://ja.wikipedia.org/wiki/メルボルン
+
+ 問題概要
+
+ シナリオ
+Gunicornを使用したWSGI
+
+ 問題詳細
+/home/admin/wsgi.pyというPython WSGIウェブアプリケーションファイルがあり、そのアプリケーションは文字列 "Hello, world!" を返します。このファイルはGunicornサーバーによって提供され、その手前にはnginxサーバーが配置されています（両方のサーバーはsystemdによって管理されています）。
+HTTPリクエストのフローは次のようになります
+
+ウェブクライアント (curl) -&gt; Ng...]]></description><link>https://zenn.dev/comf_nakamura/articles/sadservers_17</link><guid isPermaLink="true">https://zenn.dev/comf_nakamura/articles/sadservers_17</guid><pubDate>Thu, 16 May 2024 15:00:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--eSl1R_3d--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:SadServers%25E8%25A7%25A3%25E8%25AA%25AC%252317%2520%2522Melbourne%2522%253A%2520WSGI%2520with%2520Gunicorn%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25BC%25E3%2583%2588%25E3%2582%25BE%25E3%2583%25BC%25E3%2583%25B3%25E4%25B8%25AD%25E6%259D%2591%25EF%25BD%259C%25E6%2596%25B0%25E4%25BA%25BA%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25A6%25E3%2583%2589...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU1OGFjNDI2M2QuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>コンフォートゾーン中村｜新人クラウドエンジニア</dc:creator></item><item><title><![CDATA[デバッグのコツ]]></title><description><![CDATA[
+ 比較する。
+現状、期待通りに動作しているものとの比較を行うことで、異常の原因を探す手法です。
+プログラミングの他、Linuxでのサーバ構築で威力を発揮します。
+ただし、人間が目で確認するだけでは細かい違いを調べるのは難しいため、差分検出ツールを使います。
+windowsであればwinmerge、macであればCompareMergeがオススメ。
+この二つはフォルダ比較という機能を備えていて、同じディレクトリ構造であれば数百個のファイルでも一括で差分を洗い出すことができます。
+
+CompareMerge
+目で間違い探しをしていては抜け漏れが発生します。間違えない人でも無駄に疲れます。
+...]]></description><link>https://zenn.dev/k_tabuchi/articles/02176795753152</link><guid isPermaLink="true">https://zenn.dev/k_tabuchi/articles/02176795753152</guid><pubDate>Thu, 16 May 2024 13:06:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--WNQ5X7SP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2587%25E3%2583%2590%25E3%2583%2583%25E3%2582%25B0%25E3%2581%25AE%25E3%2582%25B3%25E3%2583%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:k-tabuchi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhkMjhhY2RlZGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>k-tabuchi</dc:creator></item><item><title><![CDATA[新MacでLinuxシリーズ 目次]]></title><description><![CDATA[
+ MacでLinuxを使おう！🍎
+
+ なぜMacでLinuxを使うの
+「Linuxと言えばPCでしょ？それにMacならOSがUNIXじゃなかったっけ？」
+　そんな風に思う人も多いでしょう。でもAppleシリコン（M1系CPU）を搭載した2020年以降のMacは本当に優秀。今では天才的な開発者のみなさまによって、ネイティブに（つまりMacOSなしに直接ハードウェアの上で）Linuxを動かすこともできます。確かにMacOSはUNIXです。が、UNIXとして使う、という点ではLinuxの方が文献や開設も豊富。Linuxを学ぶことでMacOSの使い方も変わるでしょう。
+　実はLinuxの生みの...]]></description><link>https://zenn.dev/armcore/articles/maclinux_index</link><guid isPermaLink="true">https://zenn.dev/armcore/articles/maclinux_index</guid><pubDate>Thu, 16 May 2024 11:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--uRLw-EmK--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%2596%25B0Mac%25E3%2581%25A7Linux%25E3%2582%25B7%25E3%2583%25AA%25E3%2583%25BC%25E3%2582%25BA%2520%25E7%259B%25AE%25E6%25AC%25A1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Armlin%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM3ODIxNWUwN2UuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Armlin</dc:creator></item><item><title><![CDATA[Java版 Minecraft Server を Docker で構築する（Vanilla）]]></title><description><![CDATA[Docker Hub のリポジトリに公開されている Docker イメージを用いて Minecraft Server を構築する方法を説明します。
+!
+用語：Vanilla【バニラ】
+Java版マインクラフトにおける、MODやデータパックの導入およびテクスチャ変更等の手を加えていない状態のこと。呼称についてはフレーバーやトッピングのないバニラアイスクリームに由来する。
+
+
+ 🛠️ 事前準備
+デバイスやソフトウェアは以下を用いる。
+
+💻 サーバ機（Ubuntu Server、Docker）
+
+🌐 itzg/minecraft-server … Minecraft Server on Doc...]]></description><link>https://zenn.dev/mesgory/articles/e3dc962bd38dfd</link><guid isPermaLink="true">https://zenn.dev/mesgory/articles/e3dc962bd38dfd</guid><pubDate>Wed, 15 May 2024 18:01:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--trZUHk_L--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java%25E7%2589%2588%2520Minecraft%2520Server%2520%25E3%2582%2592%2520Docker%2520%25E3%2581%25A7%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2599%25E3%2582%258B%25EF%25BC%2588Vanilla%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E1%25B4%258D%25E1%25B4%2587s%25C9%25A2%25E1%25B4%258F%25CA%2580%25CA%258F%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk4MGQyYmQ0MjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ᴍᴇsɢᴏʀʏ</dc:creator></item><item><title><![CDATA[Devcontainerでsystemdが動くコンテナを起動する]]></title><description><![CDATA[VS CodeのDevcontainerでsystemdが動くコンテナを起動する方法を記します。
+今回作成した環境(CentOS 7, Ubuntu 22.04, Red Hat Universal Base Image 9)は下記リポジトリで公開しています。
+
+
+ 実施すること
+Dockerfile側とdevcontainer.json側のそれぞれで設定が必要です。
+
+ Dockerfile側
+以下のようにENTRYPOINTを指定します。
+/sbin/initを指定することでsystemdが起動します。
+devcontainer.json側で"runArgs": ["--entryp...]]></description><link>https://zenn.dev/yutotnh/articles/9e8a4ce455ac44</link><guid isPermaLink="true">https://zenn.dev/yutotnh/articles/9e8a4ce455ac44</guid><pubDate>Wed, 15 May 2024 16:17:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--li2EJI87--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Devcontainer%25E3%2581%25A7systemd%25E3%2581%258C%25E5%258B%2595%25E3%2581%258F%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2586%25E3%2583%258A%25E3%2582%2592%25E8%25B5%25B7%25E5%258B%2595%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yutotnh%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lCMGg4Y3Vrb29zUnFuekVBZ0l2cFFxb0p0X3lIa1Z3QVBUYU5TPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yutotnh</dc:creator></item><item><title><![CDATA[Linuxとは、何が良いのか]]></title><description><![CDATA[
+ はじめに
+まちがってるとこあったらごめんなさい
+初心者向けの記事です
+
+ Linuxとは
+WindowsやMacと同じOSと呼ばれるもの
+
+ ざっくりとした歴史
+1971年ベル研究所が開発したUNIXというOSが世に出る
+1991年リーナス・トーバルズ氏がUNIXぽいOSを動かしてみたくなり、自分でOSの開発を始める
+その後フリーなOSを求めていた人が集まり、大規模に発展していきました
+
+ どこで使われているのか
+身近なところだとAndroidスマホに乗ってるAndroidOSはLinuxがベースとなってて
+ロボットにも使われてたり、エンジニアはLinux上でプログラム書いてる人多い...]]></description><link>https://zenn.dev/netetra/articles/488ab17e54ee5e</link><guid isPermaLink="true">https://zenn.dev/netetra/articles/488ab17e54ee5e</guid><pubDate>Wed, 15 May 2024 14:33:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ZACBo2PR--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%25E3%2581%25A8%25E3%2581%25AF%25E3%2580%2581%25E4%25BD%2595%25E3%2581%258C%25E8%2589%25AF%25E3%2581%2584%25E3%2581%25AE%25E3%2581%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Netetra%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUVkRlRwNl95WXRLSFl4TGZraE5iX2lNOVc5bUVidmhnWFdZQk9xR3NSYmY9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Netetra</dc:creator></item><item><title><![CDATA[「最近編集したプロジェクトフォルダ」を探す関数カスタム関数 lmd]]></title><description><![CDATA[
+ 「最近編集したプロジェクトフォルダ」を探す関数lmd(path, depth, n)をつくりました
+ファイルシステム上のデータを探索する際、通常は find コマンドを使用します。しかし、このコマンドはデフォルトで深さ優先探索のアプローチを取ります。つまり、可能な限り深い階層まで進んでから次の階層に進むため、大規模なデータセットの場合には探索に時間がかかることがあります。
+そこで、広く浅く探索する（幅優先的探索）方法が求められます。そこで、カスタム関数lmd(latest_modified_directory)を使用して、幅優先探索的なデータ走査を実現することができます。
+下記の関数...]]></description><link>https://zenn.dev/incognito/articles/765be09b9fdbbe</link><guid isPermaLink="true">https://zenn.dev/incognito/articles/765be09b9fdbbe</guid><pubDate>Wed, 15 May 2024 12:47:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--drRnAJqR--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%258C%25E6%259C%2580%25E8%25BF%2591%25E7%25B7%25A8%25E9%259B%2586%25E3%2581%2597%25E3%2581%259F%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25AB%25E3%2583%2580%25E3%2580%258D%25E3%2582%2592%25E6%258E%25A2%25E3%2581%2599%25E9%2596%25A2%25E6%2595%25B0%25E3%2582%25AB%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%25A0%25E9%2596%25A2%25E6%2595%25B0%2520lmd%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:incognito%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSlIyWjBITnFKNnBoVTBqQ2U3eXQwa0N4QUcyOGd2ME5vcFdIb2xYRC1LPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>incognito</dc:creator></item><item><title><![CDATA[【ネットワーク】netstatコマンドとssコマンドを用いて、基本的なネットワーク情報の確認する]]></title><description><![CDATA[基本的なネットワーク情報の確認するためのコマンドとしてnetstatコマンドとssコマンドが挙げられる。その使用方法などについて解説する。
+
+ 接続状態を確認するコマンド（netstat）
+接続されているべき機器が正常に接続され、通信が行われているかどうか、どのくらいの情報が流されているのかといったことを確認することができる。
+
+ １．netstatの基本的な使い方
+
+ターミナル
+netstat
+
+
+ターミナル（出力結果）
+$ netstat
+Active Internet connections (w/o servers)
+Proto Recv-Q Send-Q Local Addre...]]></description><link>https://zenn.dev/code_journey_ys/articles/d7166412b42c97</link><guid isPermaLink="true">https://zenn.dev/code_journey_ys/articles/d7166412b42c97</guid><pubDate>Wed, 15 May 2024 11:53:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--R5u29CEn--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E3%2583%258D%25E3%2583%2583%25E3%2583%2588%25E3%2583%25AF%25E3%2583%25BC%25E3%2582%25AF%25E3%2580%2591netstat%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2581%25A8ss%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2582%2592%25E7%2594%25A8%25E3%2581%2584%25E3%2581%25A6%25E3%2580%2581%25E5%259F%25BA%25E6%259C%25AC%25E7%259A%2584%25E3%2581%25AA%25E3%2583%258D%25E3%2583%2583%25E3%2583%2588%25E3%2583%25AF%25E3%2583%25BC%25E3%2582%25AF%25E6%2583%2585%25E5%25A0%25B1%25E3%2581%25AE%25E7%25A2%25BA%25E8%25AA%258D%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yusuke%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2QxYmU5MTc2ZTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yusuke</dc:creator></item><item><title><![CDATA[入門書と実際の業務の違いとは。]]></title><description><![CDATA[
+ はじめに
+プログラミングを覚えるにあたって、皆さんはどのように勉強してきたでしょうか？
+私は自費で入門書を買って勉強したり、ドットインストールという動画サイトに課金して勉強していました。
+最近はYoutubeの動画配信で勉強することも多いです。
+プログラミングスクールに通ったり、専門学校で習う方もいるでしょう。
+どんな教材であれ、プログラマーとして採用された皆さんは何かしらの言語を多少なりとも身につけ、教材どおりのプログラムを動かすことができるようになっていることと思います。
+さて、数週間の研修期間を終えたあなたは出向の面談に受かり、ついに業務案件に携わることになります。
+そこであな...]]></description><link>https://zenn.dev/k_tabuchi/articles/c97402a43fc9fa</link><guid isPermaLink="true">https://zenn.dev/k_tabuchi/articles/c97402a43fc9fa</guid><pubDate>Wed, 15 May 2024 09:58:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--yr1oFGzR--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2585%25A5%25E9%2596%2580%25E6%259B%25B8%25E3%2581%25A8%25E5%25AE%259F%25E9%259A%259B%25E3%2581%25AE%25E6%25A5%25AD%25E5%258B%2599%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%25E3%2581%25A8%25E3%2581%25AF%25E3%2580%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:k-tabuchi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhkMjhhY2RlZGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>k-tabuchi</dc:creator></item><item><title><![CDATA[[Linux] tarコマンドで圧縮/解凍]]></title><description><![CDATA[
+ 圧縮形式の種類
+
+gzip
+標準
+bzip2
+より高い圧縮率
+xz
+もっと高い圧縮率
+
+
+ 単体ファイル
+test.txtを圧縮する
+% touch test.txt
+% cat &gt; test.txt
+% ls -l test.txt | awk '{print $5}'
+402
+
+ 圧縮
+
+ gzip
+% gzip test.txt
+元ファイルを残す場合
+% gzip -c test.txt &gt; test.txt.gz
+
+ bzip2
+% bzip2 test.txt
+元ファイルを残す場合
+% bzip2 -c test.txt &gt; test.txt.bz
+
+ 解...]]></description><link>https://zenn.dev/kotopasi/articles/eaa03caf2779ee</link><guid isPermaLink="true">https://zenn.dev/kotopasi/articles/eaa03caf2779ee</guid><pubDate>Tue, 14 May 2024 05:36:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--FMD8C31f--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BLinux%255D%2520tar%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2581%25A7%25E5%259C%25A7%25E7%25B8%25AE%252F%25E8%25A7%25A3%25E5%2587%258D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2582%25E3%2581%25BE%25E3%2581%259F%25E3%2581%25A4%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FmOWU0NjBmZDUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>あまたつ</dc:creator></item><item><title><![CDATA[使うシェルを変える]]></title><description><![CDATA[
+ 本稿の前提
+使用OS: Unix/Linux, Unix-/Linux-like distro(Ubuntu, CentOSなど)
+
+ 現在使ってるシェルを確認しよう
+echo $SHELL
+これで、現在自分が使っているシェルが表示されます。
+僕は以下のように帰ってきました。
+echo $SHELL
+/bin/sh
+
+ 使用できるシェルの一覧を表示させよう
+下のコマンドを実行すると、
+cat /etc/shells
+cat: ファイルの内容を表示するためのコマンドです。
+/: ルートディレクトリを表します。
+etc/: ET CETERAの略で、OSやソフトに関する設定ファイルが保管...]]></description><link>https://zenn.dev/yunaimatsu/articles/8987e865e6f493</link><guid isPermaLink="true">https://zenn.dev/yunaimatsu/articles/8987e865e6f493</guid><pubDate>Mon, 13 May 2024 16:38:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--sd6RoWvA--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E4%25BD%25BF%25E3%2581%2586%25E3%2582%25B7%25E3%2582%25A7%25E3%2583%25AB%25E3%2582%2592%25E5%25A4%2589%25E3%2581%2588%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2586%25E3%2581%25AA%25E3%2581%2584%25E3%2581%25BE%25E3%2581%25A4%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSWd3cjA4RHNLUlN5Rjd4cl8xRmRVanV1ZHVMOUFqclpMbTRLNUNPSVhSPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ゆないまつ</dc:creator></item><item><title><![CDATA[GPGチートシート]]></title><description><![CDATA[GPG (GnuPG) では鍵自体の作成や変更、鍵を用いた運用まで多くの使い方があります。
+必要な場面で使うコマンドがいつもわからなくなるので、個人的に使う（使いそう）なコマンドをチートシートとしてまとめておきます。
+
+ 主鍵と副鍵
+GPGでは主鍵と副鍵に分けて管理することができる。
+主鍵は副鍵への署名と失効をすることができ、公開鍵に署名を集めることで自分の信用情報となる (Web of Trust) 。
+副鍵は万が一漏洩しても、主鍵を使って失効させることで、それまでの信用は保ったまま新しい副鍵を作成することができる。
+副鍵に比べ主鍵の秘密鍵が漏洩した場合の被害は非常に大きいため、主鍵の...]]></description><link>https://zenn.dev/shuh/articles/gpg-cheatsheet</link><guid isPermaLink="true">https://zenn.dev/shuh/articles/gpg-cheatsheet</guid><pubDate>Mon, 13 May 2024 13:42:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vIjkATYp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:GPG%25E3%2583%2581%25E3%2583%25BC%25E3%2583%2588%25E3%2582%25B7%25E3%2583%25BC%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Shusch%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk0ODg1Y2EwN2QuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Shusch</dc:creator></item><item><title><![CDATA[SadServers解説#16 "Oaxaca": Close an Open File]]></title><description><![CDATA[https://ja.wikipedia.org/wiki/オアハカ
+
+ 問題概要
+
+ シナリオ
+開かれているファイルを閉じてください。
+
+ 問題詳細
+/home/admin/somefileというファイルが、あるプロセスによって開かれています。プロセスを終了させずに、このファイルを閉じてください。
+
+ 解決判定
+Check My Solutionボタンをクリックしてください。
+解答が正解かどうか、コマンドプロンプト上で確認することも可能です。次のコマンドを実行して、なにも出力されなければ正解です。
+$  lsof /home/admin/somefile
+ 
+
+ 問題解決の方針
+【表示...]]></description><link>https://zenn.dev/comf_nakamura/articles/sadservers_16</link><guid isPermaLink="true">https://zenn.dev/comf_nakamura/articles/sadservers_16</guid><pubDate>Sun, 12 May 2024 14:12:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vzzmvU0u--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:SadServers%25E8%25A7%25A3%25E8%25AA%25AC%252316%2520%2522Oaxaca%2522%253A%2520Close%2520an%2520Open%2520File%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25BC%25E3%2583%2588%25E3%2582%25BE%25E3%2583%25BC%25E3%2583%25B3%25E4%25B8%25AD%25E6%259D%2591%25EF%25BD%259C%25E6%2596%25B0%25E4%25BA%25BA%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25A6%25E3%2583%2589...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU1OGFjNDI2M2QuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>コンフォートゾーン中村｜新人クラウドエンジニア</dc:creator></item><item><title><![CDATA[SadServers解説#15 "Venice": Am I in a container?]]></title><description><![CDATA[https://ja.wikipedia.org/wiki/ヴェネツィア
+
+ 問題概要
+
+ シナリオ
+私はコンテナの中にいますか？
+
+ 問題詳細
+コンテナ（たとえばDockerのようなもの）の内部にいるか、または仮想マシン（他のシナリオのように）の内部にいるかを見極めてください。
+
+ 解決判定
+このシナリオにテストはありません（したがって、check my solutionもありません）。
+ 
+
+ ヒント
+一部、SadServers公式のヒントを改変しています。
+ヒント
+もしも今の環境がコンテナであるならば、initプロセスの環境変数に、コンテナに関するものが存在するかもしれません。
+i...]]></description><link>https://zenn.dev/comf_nakamura/articles/sadservers_15</link><guid isPermaLink="true">https://zenn.dev/comf_nakamura/articles/sadservers_15</guid><pubDate>Sun, 12 May 2024 13:00:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4R-9tVIM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:SadServers%25E8%25A7%25A3%25E8%25AA%25AC%252315%2520%2522Venice%2522%253A%2520Am%2520I%2520in%2520a%2520container%253F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25BC%25E3%2583%2588%25E3%2582%25BE%25E3%2583%25BC%25E3%2583%25B3%25E4%25B8%25AD%25E6%259D%2591%25EF%25BD%259C%25E6%2596%25B0%25E4%25BA%25BA%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25A6%25E3%2583%2589...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU1OGFjNDI2M2QuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>コンフォートゾーン中村｜新人クラウドエンジニア</dc:creator></item><item><title><![CDATA[Fail2ban - ssh のセキュリティ対策をまとめてみた]]></title><description><![CDATA[先日投稿した「ssh のセキュリティ対策をまとめてみた」の続きです。Alma Linux 9.3 のホストの ssh のセキュリティ対策として Fail2ban[1] を導入します。今回もいくつかのサイトを巡って Fail2ban のインストールや設定方法をまとめてみました。
+
+ Fail2ban
+Fail2ban は「ホストに対して一定期間に、何かに一定回数のちょっかいを掛けてきた相手を、一定期間 BAN する」機能を持ったソフトウェアです。「何かに」は Apache であったり Postfix でであったりします。今回は ssh になります。「ちょっかいを掛けてきた」かどうかはログを...]]></description><link>https://zenn.dev/y_mrok/articles/ssh_security_fail2ban</link><guid isPermaLink="true">https://zenn.dev/y_mrok/articles/ssh_security_fail2ban</guid><pubDate>Sun, 12 May 2024 10:40:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---cAbdH3q--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Fail2ban%2520-%2520ssh%2520%25E3%2581%25AE%25E3%2582%25BB%25E3%2582%25AD%25E3%2583%25A5%25E3%2583%25AA%25E3%2583%2586%25E3%2582%25A3%25E5%25AF%25BE%25E7%25AD%2596%25E3%2582%2592%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:y_mrok%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FkM2ZjYjQyNDQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>y_mrok</dc:creator></item><item><title><![CDATA[SadServers解説#14 "Salta":Docker container won't start.]]></title><description><![CDATA[https://ja.wikipedia.org/wiki/サルタ
+
+ 問題概要
+
+ シナリオ
+Dockerコンテナが開始されません
+
+ 問題詳細
+/home/admin/appディレクトリにDocker化されたNode.jsウェブアプリケーションがあります。Dockerコンテナを作成することで、そのWEBアプリケーションにポート番号「:8888」でcurlでアクセスできるようにしようとしています。解決策と判定されるためには、実行中のDockerコンテナが1つだけである必要があります。
+
+ 解決判定
+Check My Solutionボタンをクリックしてください。
+解答が正解かどうか、コ...]]></description><link>https://zenn.dev/comf_nakamura/articles/sadservers_14</link><guid isPermaLink="true">https://zenn.dev/comf_nakamura/articles/sadservers_14</guid><pubDate>Sun, 12 May 2024 06:12:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--UYY5Ndef--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:SadServers%25E8%25A7%25A3%25E8%25AA%25AC%252314%2520%2522Salta%2522%253ADocker%2520container%2520won%2527t%2520start.%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25BC%25E3%2583%2588%25E3%2582%25BE%25E3%2583%25BC%25E3%2583%25B3%25E4%25B8%25AD%25E6%259D%2591%25EF%25BD%259C%25E6%2596%25B0%25E4%25BA%25BA%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25A6%25E3%2583%2589...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU1OGFjNDI2M2QuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>コンフォートゾーン中村｜新人クラウドエンジニア</dc:creator></item></channel></rss>
