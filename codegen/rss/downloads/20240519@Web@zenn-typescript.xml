@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「TypeScript」のフィード]]></title><description><![CDATA[Zennのトピック「TypeScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/typescript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/f13e758fdb.png</url><title>Zennの「TypeScript」のフィード</title><link>https://zenn.dev/topics/typescript</link></image><generator>zenn.dev</generator><lastBuildDate>Sun, 19 May 2024 06:21:43 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/typescript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[依存関係のあるタスクの実行]]></title><description><![CDATA[import {Subject, combineLatest} from 'rxjs';
+import {map} from 'rxjs/operators';
+
+// シグナルを表すSubjectを作成
+const signal1 = new Subject&lt;boolean&gt;();
+const signal2 = new Subject&lt;boolean&gt;();
+const signal3 = new Subject&lt;boolean&gt;();
+
+// combineLatestを使用して、すべてのシグナルの最新の値を組み合わせる
+const allSig...]]></description><link>https://zenn.dev/itouh2/articles/97a6a6542c28fc</link><guid isPermaLink="true">https://zenn.dev/itouh2/articles/97a6a6542c28fc</guid><pubDate>Sun, 19 May 2024 06:03:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wlopAB56--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E4%25BE%259D%25E5%25AD%2598%25E9%2596%25A2%25E4%25BF%2582%25E3%2581%25AE%25E3%2581%2582%25E3%2582%258B%25E3%2582%25BF%25E3%2582%25B9%25E3%2582%25AF%25E3%2581%25AE%25E5%25AE%259F%25E8%25A1%258C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:itouh2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUVkRlRwNEdMNkNfWGVhSl90NFlXd2JlU01oWU9lYmotdXVnbUk4OTdlbXFrUT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>itouh2</dc:creator></item><item><title><![CDATA[【ReactNative,Expo,ハリーポッタAPI】久しぶりReactNative ！とりあえずハリーポッタ図鑑作ってみるか〜🤪]]></title><description><![CDATA[
+ はじめに
+こんにちは！
+てるし〜です！
+本日はReactNativeの記事になります。
+社会人になって初めてアサインされた案件がReactNativeでそこから約一年が経ちました(現在2024/5)。
+案件終了後触ることがなくずっとNext.jsを触っていました。
+しかし、React conf 2024を見てかなりReactNativeの発表が多く「久々に触って遊ぶか〜」と思ったので触ってみたら色々変わってて目が驚きました。
+作ったものとしてはハリーポッタ図鑑です。
+ReactNativeとExpoを使って作りました。
+以前、Next.jsで作った記事があるのでそちらも是非ご覧くださ...]]></description><link>https://zenn.dev/terusi/articles/9cfca3c1a131c4</link><guid isPermaLink="true">https://zenn.dev/terusi/articles/9cfca3c1a131c4</guid><pubDate>Sun, 19 May 2024 06:02:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--98k9MeoA--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590ReactNative%252CExpo%252C%25E3%2583%258F%25E3%2583%25AA%25E3%2583%25BC%25E3%2583%259D%25E3%2583%2583%25E3%2582%25BFAPI%25E3%2580%2591%25E4%25B9%2585%25E3%2581%2597%25E3%2581%25B6%25E3%2582%258AReactNative%2520%25EF%25BC%2581%25E3%2581%25A8%25E3%2582%258A%25E3%2581%2582%25E3%2581%2588%25E3%2581%259A%25E3%2583%258F%25E3%2583%25AA%25E3%2583%25BC%25E3%2583%259D%25E3%2583%2583%25E3%2582%25BF%25E5%259B%25B3...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A6%25E3%2582%258B%25E3%2581%2597%25E3%2580%259C%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRlM2M5MzkyNjguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>てるし〜</dc:creator></item><item><title><![CDATA[Cloud9(linux2023)をTypeScriptが実行できる環境にする]]></title><description><![CDATA[
+ やること
+Cloud9でTypeScriptが実行できる環境にする手順メモです。
+
+ 環境
+用意したCloud9の情報です。
+
+
+
+項目
+設定値
+
+
+
+
+プラットフォーム
+Amazon Linux 2023
+
+
+インスタンスタイプ
+t3.small
+
+
+
+パブリックサブネットに構築しました。
+
+ セットアップ手順
+セットアップは簡単。以下のコマンドを実行するだけです。
+nvm install node
+nvm use node
+npm install -g typescript
+セットアップコマンド実行後の各モジュールのバージョンはこれでした。
+$ npm --version
+10....]]></description><link>https://zenn.dev/zgw426/articles/321bbc2f4640c3</link><guid isPermaLink="true">https://zenn.dev/zgw426/articles/321bbc2f4640c3</guid><pubDate>Sun, 19 May 2024 02:38:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--w0q8w29v--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Cloud9%2528linux2023%2529%25E3%2582%2592TypeScript%25E3%2581%258C%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258B%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:suo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E5OWNjMjMzNTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>suo</dc:creator></item><item><title><![CDATA[ボタンコンポーネントは難しいよ]]></title><description><![CDATA[
+ 見た目はボタン、中身は〇〇
+ボタンコンポーネントと一言で言っても「見た目はボタン、中身は〇〇」のような見た目と中身が一致しないケースがしばしば見受けられます。
+例えば、次のケースは日常的に特に遭遇することが多いです。
+
+ボタンに見えて button タグ
+ボタンに見えて a タグ
+
+上記に加え、Nuxt や Next.js を使用する場合、次のようなパターンも想定することができます。
+
+ボタンに見えて NuxtLink コンポーネント
+ボタンに見えて Link コンポーネント
+
+他にも様々なケースを考慮することができます。
+
+ボタンに見えて input タグ
+ボタンに見えて summ...]]></description><link>https://zenn.dev/splendente/articles/6d9f404163f259</link><guid isPermaLink="true">https://zenn.dev/splendente/articles/6d9f404163f259</guid><pubDate>Sun, 19 May 2024 01:17:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--C2uxNV9i--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%259C%25E3%2582%25BF%25E3%2583%25B3%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%259D%25E3%2583%25BC%25E3%2583%258D%25E3%2583%25B3%25E3%2583%2588%25E3%2581%25AF%25E9%259B%25A3%25E3%2581%2597%25E3%2581%2584%25E3%2582%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Hikaru%2520Kobayashi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ2YWIxZGQ2ZGYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Hikaru Kobayashi</dc:creator></item><item><title><![CDATA[Reactでwindow.confirmのように使用できるリーダブルな確認ダイアログを作る]]></title><description><![CDATA[
+ はじめに
+ブラウザ標準のwindow.confirmを使ったことはありますか？
+
+最もシンプルな確認ダイアログを表示する方法です。
+戻り値がboolean型であり、OKボタンが押された場合はtrue、キャンセルボタンが押された場合はfalseを返します。
+const handleClick = () =&gt; {
+  const result = window.confirm("本当に削除しますか？");
+  if (result) {
+    // 削除処理
+  }
+};
+このAPIが優れているのは、ダイアログの見た目や開閉状態の管理を内部でやってくれているため、はいが選ばれたと...]]></description><link>https://zenn.dev/bmth/articles/react-confirm-dialog</link><guid isPermaLink="true">https://zenn.dev/bmth/articles/react-confirm-dialog</guid><pubDate>Sat, 18 May 2024 17:49:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--PoCMHoa4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%25E3%2581%25A7window.confirm%25E3%2581%25AE%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E4%25BD%25BF%25E7%2594%25A8%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258B%25E3%2583%25AA%25E3%2583%25BC%25E3%2583%2580%25E3%2583%2596%25E3%2583%25AB%25E3%2581%25AA%25E7%25A2%25BA%25E8%25AA%258D%25E3%2583%2580%25E3%2582%25A4%25E3%2582%25A2%25E3%2583%25AD%25E3%2582%25B0%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2598%25E3%2582%2587%25E3%2581%2586%25E3%2581%2592%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YTVpY3FhSGVfOXQyWjc3YjBWV1RfWlM0MFF3MExBbS1zclhIRWtydDA9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>じょうげん</dc:creator></item><item><title><![CDATA[supabase gen types typescript で生成したTSで自作関数のJSON型にキーを定義する]]></title><description><![CDATA[Supabase CLIの supabase gen types typescript を叩くだけでTypeScript型を生成してくれて便利なのですが、JSON型だけはキー名を吐き出してくれません。
+JSON型でも補完が効き、型安全にプログラミングできるようにする流れをまとめておきます。
+僕のようなTypeScriptをなんとなくで使ってる勢に参考になれば幸いです。
+
+ 0. 今回の対象となるPostgreSQL関数を示します
+この記事で扱う自作のPostgreSQL関数を示します。この関数のJSON型に対してTS型を付けていきます。例として記事ページで、記事コンテンツ + その記事と...]]></description><link>https://zenn.dev/masa5714/articles/0e59e9adb2b40f</link><guid isPermaLink="true">https://zenn.dev/masa5714/articles/0e59e9adb2b40f</guid><pubDate>Sat, 18 May 2024 14:02:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2gAen36c--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:supabase%2520gen%2520types%2520typescript%2520%25E3%2581%25A7%25E7%2594%259F%25E6%2588%2590%25E3%2581%2597%25E3%2581%259FTS%25E3%2581%25A7%25E8%2587%25AA%25E4%25BD%259C%25E9%2596%25A2%25E6%2595%25B0%25E3%2581%25AEJSON%25E5%259E%258B%25E3%2581%25AB%25E3%2582%25AD%25E3%2583%25BC%25E3%2582%2592%25E5%25AE%259A%25E7%25BE%25A9%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:masa5714%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNlMzBjZjA3NzguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>masa5714</dc:creator></item><item><title><![CDATA[【Nestjs】Nestjsにおける推奨のtsconfig設定]]></title><description><![CDATA[
+ 概要
+Nestjsのtsconfigを厳格にするために以下のことを行います。
+
+nest cliでprojectを作成する時は--strictオプションをつけてnewする。
+上記で作成したtsconfig.jsonに以下の項目を追加。
+
+strictFunctionTypes
+strictPropertyInitialization
+noImplicitThis
+alwaysStrict
+forceConsistentCasingInFileNames
+noFallthroughCasesInSwitch
+noUnusedLocals
+noUnusedParameters
+exact...]]></description><link>https://zenn.dev/tomona/articles/cace7d81ca897a</link><guid isPermaLink="true">https://zenn.dev/tomona/articles/cace7d81ca897a</guid><pubDate>Sat, 18 May 2024 11:00:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--o9D7S-4m--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Nestjs%25E3%2580%2591Nestjs%25E3%2581%25AB%25E3%2581%258A%25E3%2581%2591%25E3%2582%258B%25E6%258E%25A8%25E5%25A5%25A8%25E3%2581%25AEtsconfig%25E8%25A8%25AD%25E5%25AE%259A%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tomona%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSUdaUUt6VlE0R21haS03c0FiSENlTjFkVnc2ZzUyY19zMUtxbTlJdzdmPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tomona</dc:creator></item><item><title><![CDATA[【セキュアな個人開発のお供に!!】 Honoで作ったMPAに、Cloudflare Accessを使って簡単に認証をかける]]></title><description><![CDATA[
+ 背景
+個人開発者の中には、
+簡単なWebアプリを作ったけど、一般公開したくない、、、でもそれなりのアクセス制限をかけるのは面倒、、、
+といった場面に遭遇したことはないでしょうか？
+今回はCloudflare Accessを使って、なるべく手間をかけずWebアプリにGitHub認証を実装します。
+その記録をメモ。
+!
+CloudflareダッシュボードのUIは記事執筆時点から変更されている場合があります。
+
+
+ 前提
+Cloudflare WorkersにWebアプリ(今回はHonoのMPA)がデプロイされていること。
+https://zenn.dev/y640/articles/dd...]]></description><link>https://zenn.dev/y640/articles/20240517-cloudflare-workers-with-cloudflare-access</link><guid isPermaLink="true">https://zenn.dev/y640/articles/20240517-cloudflare-workers-with-cloudflare-access</guid><pubDate>Sat, 18 May 2024 09:14:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--LS_Cn0Jd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E3%2582%25BB%25E3%2582%25AD%25E3%2583%25A5%25E3%2582%25A2%25E3%2581%25AA%25E5%2580%258B%25E4%25BA%25BA%25E9%2596%258B%25E7%2599%25BA%25E3%2581%25AE%25E3%2581%258A%25E4%25BE%259B%25E3%2581%25AB%2521%2521%25E3%2580%2591%2520Hono%25E3%2581%25A7%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259FMPA%25E3%2581%25AB%25E3%2580%2581Cloudflare%2520Access%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E7%25B0%25A1%25E5%258D%2598%25E3%2581%25AB%25E8%25AA%258D%25E8%25A8%25BC...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yasuaki640%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NhYmViMTI4MGMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yasuaki640</dc:creator></item><item><title><![CDATA[Three.js T-pose モデルにアニメーションを適用する。]]></title><description><![CDATA[Three.js を使って、T-pose モデルにアニメーションをブレンドして再生する方法です。
+初歩的な内容なのに、なかなか情報が見つからなかったので、メモとして残しておきます。
+※フレームワークにNext.js AppRouterを使用しています。
+
+ DEMO
+
+
+ モデルとアニメーションの配布場所 Mixamo
+
+Vangurad By T.Choonyung
+DOWNLOAD SETTING
+
+Format: FBX
+Pose: T-Pose
+保存名：Vanguard.fbx
+
+Sitting Animation
+DOWNLOAD SETTING
+
+Format: FBX
+Sk...]]></description><link>https://zenn.dev/masterak/articles/zenn_article_06</link><guid isPermaLink="true">https://zenn.dev/masterak/articles/zenn_article_06</guid><pubDate>Sat, 18 May 2024 06:35:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--sfj7JsMI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Three.js%2520T-pose%2520%25E3%2583%25A2%25E3%2583%2587%25E3%2583%25AB%25E3%2581%25AB%25E3%2582%25A2%25E3%2583%258B%25E3%2583%25A1%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%2592%25E9%2581%25A9%25E7%2594%25A8%25E3%2581%2599%25E3%2582%258B%25E3%2580%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:masterak%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ5Njk4ZjY0NTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>masterak</dc:creator></item><item><title><![CDATA[Pulumi コマンド を GitHub Actions で実行する]]></title><description><![CDATA[
+ 背景
+副業で Pulumi を使っています。
+プロバイダーなどのパッケージのバージョン更新をサボっていたのですが、対応しようと思い Renovate で更新するようにしました。しかし、PR が来た時点では Pulumi の差分が分かりません。ローカルで pulumi preview を実行して差分がないことを毎回確認するのは面倒なので GitHub Actions で pulumi preview を実行して PR のコメントで差分を表示してもらうことにしました。
+
+ 環境
+Pulumi + TypeScript
+Google Cloud
+
+ 実装していく
+複数環境（Stack）で ...]]></description><link>https://zenn.dev/z63d/articles/0d6b3ee4e9a44e</link><guid isPermaLink="true">https://zenn.dev/z63d/articles/0d6b3ee4e9a44e</guid><pubDate>Sat, 18 May 2024 05:30:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--B18V1Kbs--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Pulumi%2520%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%2520%25E3%2582%2592%2520GitHub%2520Actions%2520%25E3%2581%25A7%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:z63d%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ExMTEyYTA4OGIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>z63d</dc:creator></item><item><title><![CDATA[GraphQLエンドポイントが複数ある時のフロントエンド]]></title><description><![CDATA[最近GraphQLについて触る機会があったのでその過程で調査したことについてのメモです。
+GraphQLエンドポイントが複数あり、それぞれに個別のSchemaが定義されている場合、以下の点についてまとめています
+
+そもそもサーバー側でどういうことができそうか
+クラインアント側でどういう対応を行うことができるのか
+
+
+ GraphQLマイクロサービス
+GraphQLマイクロサービスとは、GraphQLサーバーがマイクロサービスとして稼働している状態を指します。
+それぞれのマイクロサービスが独自のスキーマを持ち、個別にサーバーが起動しています。
+これらのサーバーに対して、フロントエンドが直接...]]></description><link>https://zenn.dev/yamakenji24/articles/graphql-with-environments</link><guid isPermaLink="true">https://zenn.dev/yamakenji24/articles/graphql-with-environments</guid><pubDate>Sat, 18 May 2024 03:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2LZVisiO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:GraphQL%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2589%25E3%2583%259D%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2588%25E3%2581%258C%25E8%25A4%2587%25E6%2595%25B0%25E3%2581%2582%25E3%2582%258B%25E6%2599%2582%25E3%2581%25AE%25E3%2583%2595%25E3%2583%25AD%25E3%2583%25B3%25E3%2583%2588%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yamakenji24%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2QwMWYwNmMzMTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yamakenji24</dc:creator></item><item><title><![CDATA[Prismaのデータ取得で不要な列を除く]]></title><description><![CDATA[Prismaでデータを取得する際に、不要な列が含まれてしまう場合があります。セキュリティ上、意図しない列が含まれるのは避けたいところです。
+Prismaのデータ取得で不要な列を除く方法を紹介します。
+検証バージョンは prisma 5.14.0 です。
+
+ 使用するスキーマ
+Userテーブルを例に説明します。
+
+schema.prisma
+model User {
+  id    Int    @id @default(autoincrement())
+  name  String
+  email String
+}
+
+
+ データ取得
+javascriptでデータ取得します。
+
+ 対策なし...]]></description><link>https://zenn.dev/k_log24/articles/8857eea5a8a0b6</link><guid isPermaLink="true">https://zenn.dev/k_log24/articles/8857eea5a8a0b6</guid><pubDate>Sat, 18 May 2024 02:49:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jw-hXJGV--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Prisma%25E3%2581%25AE%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E5%258F%2596%25E5%25BE%2597%25E3%2581%25A7%25E4%25B8%258D%25E8%25A6%2581%25E3%2581%25AA%25E5%2588%2597%25E3%2582%2592%25E9%2599%25A4%25E3%2581%258F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kohei.com%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FhYTBhMmFjNTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kohei.com</dc:creator></item><item><title><![CDATA[AWS SDKでよく使う記述についてまとめてみた]]></title><description><![CDATA[
+ はじめに
+使用例ではNext.js、TypeScriptの場合によく使用する記述をまとめています。
+S3とDynamoDBについて記述していますが、今後他のサービスについても追記する予定です。
+
+ AWSの認証情報を安全に管理する
+AWSの認証情報、特にアクセスキーの安全を確保するためには、SDKの使用は必ずサーバーサイドで行ってください。
+もしクライアントサイドでSDKを利用したい場合は、Next.jsのAPIルートを通じて操作を行うようにしてください。クライアントサイドで直接SDKを使用してしまうと、ブラウザのネットワークタブから認証情報が確認されてしまい、情報が漏洩するリスクが...]]></description><link>https://zenn.dev/nenenemo/articles/9f534b1d523ea4</link><guid isPermaLink="true">https://zenn.dev/nenenemo/articles/9f534b1d523ea4</guid><pubDate>Fri, 17 May 2024 09:32:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--IoSkZp3b--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AWS%2520SDK%25E3%2581%25A7%25E3%2582%2588%25E3%2581%258F%25E4%25BD%25BF%25E3%2581%2586%25E8%25A8%2598%25E8%25BF%25B0%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%258D%25E3%2583%25A2%25E3%2581%2595%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FGZFp1Y3JqODQzWnc5aTdpNll5Z3dqX005LURkLWpYaHVoaFBSOWp5d3ZONXc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ネモさん</dc:creator></item><item><title><![CDATA[TwoGate - エンタメ×テクノロジーの現場から]]></title><description><![CDATA[こんにちは。初めまして、TwoGateのチャン[1]です。RubyKaigi 2024が迫ってきている中[2]、TwoGateという会社を知ってもらいたいということで記事を書いています。TwoGateで行っていることは技術的に特色があって書けることには困らないし、書きたいこともたくさんあるので今まで書こうと思い続けていましたが、仕事にもまた困らない会社なので、書けずじまいでした。今回は張り切って各プロダクトのエンジニアで座談会を開いて、横断的にプロダクトの特長と技術的特色などを書こうと思っています！
+
+ 技術スタック
+まずはTwoGateについて基本的な技術スタックの紹介をしましょう。R...]]></description><link>https://zenn.dev/twogate/articles/a269d157e7b0b0</link><guid isPermaLink="true">https://zenn.dev/twogate/articles/a269d157e7b0b0</guid><pubDate>Fri, 17 May 2024 06:50:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ZCSY2Dn9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TwoGate%2520-%2520%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25BF%25E3%2583%25A1%25C3%2597%25E3%2583%2586%25E3%2582%25AF%25E3%2583%258E%25E3%2583%25AD%25E3%2582%25B8%25E3%2583%25BC%25E3%2581%25AE%25E7%258F%25BE%25E5%25A0%25B4%25E3%2581%258B%25E3%2582%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:chang%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY1ZjA4MGZkMTguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:TwoGate%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSUtrZzg1T01Vb2NQSnFfM25KNzBpX2JybnhHTDhFN2hRMWhfamctY1p6SmdXYkpRPXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>chang</dc:creator></item><item><title><![CDATA[【最新版】もう迷わない！Stripeを使用したサブスク実装方法(Next.js, TypeScript)]]></title><description><![CDATA[
+ 個人開発でStripeの実装がスムーズにいったので解説する
+バージョンの違いやAPIの実装などで初心者の方は決済機能の実装がうまくいかないことが多々あると思います。自分も最初エラーが出まくったりしていたのですが、この記事の手順でやればほぼ無問題で実装からテストまでいけたので手順を追って解説したいと思います。
+また、ユーザーの認証関係の解説は省いていますのでご了承ください。
+DBはNeon、ORMはDrizzleを使用しています。
+それぞれの参考記事
+https://qiita.com/nuko-suke/items/e940ff8ccde35d09f668
+https://qiita...]]></description><link>https://zenn.dev/dragon1208/articles/898dbbeea10769</link><guid isPermaLink="true">https://zenn.dev/dragon1208/articles/898dbbeea10769</guid><pubDate>Fri, 17 May 2024 04:10:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--FIOVkb7I--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E6%259C%2580%25E6%2596%25B0%25E7%2589%2588%25E3%2580%2591%25E3%2582%2582%25E3%2581%2586%25E8%25BF%25B7%25E3%2582%258F%25E3%2581%25AA%25E3%2581%2584%25EF%25BC%2581Stripe%25E3%2582%2592%25E4%25BD%25BF%25E7%2594%25A8%25E3%2581%2597%25E3%2581%259F%25E3%2582%25B5%25E3%2583%2596%25E3%2582%25B9%25E3%2582%25AF%25E5%25AE%259F%25E8%25A3%2585%25E6%2596%25B9%25E6%25B3%2595%2528Next.js%252C%2520TypeScript%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Nao8%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBiMzE3YTE0ODIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Nao8</dc:creator></item><item><title><![CDATA[フロントエンドの関数単体テスト（Bun+Jest+TS）]]></title><description><![CDATA[
+ はじめに
+フロントエンド開発において、コードの品質を保つことは重要です。特に、ユーザーインターフェースの変更や機能の追加が頻繁に行われる現代のWeb開発では、予期しないバグが発生することを防ぐためにテストの導入が欠かせません。
+しかし、過去にはフロントエンドテストがあまり重視されていなかった時代もありました。そのため、バグが発生しやすく、保守が困難なコードが多く存在していました。
+この記事では、シンプルなフロントエンドテストに関する部分を書こうと思います。テストのレシピブックとしても使っていこうと思っているので、随時この記事を更新or新規記事作成していこうと思っています！
+環境構築
+...]]></description><link>https://zenn.dev/salvage0707/articles/007b53a374da24</link><guid isPermaLink="true">https://zenn.dev/salvage0707/articles/007b53a374da24</guid><pubDate>Fri, 17 May 2024 00:20:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qrEOyal---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2595%25E3%2583%25AD%25E3%2583%25B3%25E3%2583%2588%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2589%25E3%2581%25AE%25E9%2596%25A2%25E6%2595%25B0%25E5%258D%2598%25E4%25BD%2593%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25EF%25BC%2588Bun%252BJest%252BTS%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25BE%25E3%2582%258B%25E3%2581%25B9%25E3%2581%2584%25E3%2581%2598%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQxOGVmZTY1YzEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>まるべいじ</dc:creator></item><item><title><![CDATA[【備忘録】AWS GoogleOAuthをSAMテンプレで作った]]></title><description><![CDATA[
+ SAMってAWSが公式にサポートしてるわりには、ネット上にまとまった知見が少ない気がする
+そう思ったのが、本記事公開の背景になります。
+特に自分みたいなAWS初学者にとってはcloudFormationとかServerlessとか情報が錯綜して死にかける。
+今回、もがきながらなんとか環境を作ったので、少しでもAWS初学者に貢献したくて公開しました。
+（その割には色々雑ですが、わからないことはググれば、私より100億倍わかりやすい説明がもらえますので。）
+
+ 前提
+
+
+AWSについてやんわり知っている。以下の単語を知っている。
+
+Lambda関数
+APIGateway
+SAM
+
+
+
+G...]]></description><link>https://zenn.dev/antapp/articles/b30066d835d54e</link><guid isPermaLink="true">https://zenn.dev/antapp/articles/b30066d835d54e</guid><pubDate>Thu, 16 May 2024 16:54:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_RxHV_Vy--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%2582%2599%25E5%25BF%2598%25E9%258C%25B2%25E3%2580%2591AWS%2520GoogleOAuth%25E3%2582%2592SAM%25E3%2583%2586%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AC%25E3%2581%25A7%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kutsu-4ta%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZkYWE2ZmJlNGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kutsu-4ta</dc:creator></item><item><title><![CDATA[TypeScript で Vue Router の route parameter を string 型に変換する方法]]></title><description><![CDATA[こんにちは。 SAW です。
+最近、 水曜どうでしょう を Netflix で見始めました。
+映像に時代を感じながら視聴しています (笑)
+Nuxt のルーティングには、 Vue Router が利用されています。
+Vue Router を利用すると、 URL 内に埋め込まれたパラメーター (以下 route parameter と表記) を Vue コンポーネントから取得できます。
+以下の例では、 :id の部分にパラメーターの値が埋め込まれます。
+
+route parameter の例
+/users/:id
+
+route parameter で取得できるパラメーターの型は strin...]]></description><link>https://zenn.dev/comm_vue_nuxt/articles/1de127dca24494</link><guid isPermaLink="true">https://zenn.dev/comm_vue_nuxt/articles/1de127dca24494</guid><pubDate>Thu, 16 May 2024 15:30:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1bxeMBTG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%2520%25E3%2581%25A7%2520Vue%2520Router%2520%25E3%2581%25AE%2520route%2520parameter%2520%25E3%2582%2592%2520string%2520%25E5%259E%258B%25E3%2581%25AB%25E5%25A4%2589%25E6%258F%259B%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:SAW%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU5MTZlOWFlNjguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Vue%25E3%2583%25BBNuxt%2520%25E6%2583%2585%25E5%25A0%25B1%25E3%2581%258C%25E9%259B%2586%25E3%2581%25BE%25E3%2582%258B%25E5%25BA%2583%25E5%25A0%25B4%2520%252F%2520P...%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzYxZTEzOTQxNjUuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>SAW</dc:creator></item><item><title><![CDATA[useLocation: locationオブジェクトのプロパティ（React Router v5.1）]]></title><description><![CDATA[useLocation フックは バージョン5.1から導入された React Router ライブラリのフックの一つで、現在のURLの場所（location）に関する情報を提供する。URLのパス名、検索クエリ、ハッシュなどの情報に基づいてコンポーネントのレンダリングや動作を条件付きで制御できる。
+useLocation が返す location オブジェクトに含まれるプロパティは、以下の通り。
+例:
+https://example.com/about?name=John&amp;age=30#team
+
+ pathname
+URLのパス部分を表す。上記の例では、pathname は /a...]]></description><link>https://zenn.dev/kkoisland/articles/6284de6a50c442</link><guid isPermaLink="true">https://zenn.dev/kkoisland/articles/6284de6a50c442</guid><pubDate>Thu, 16 May 2024 14:54:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--B9fMYJsA--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:useLocation%253A%2520location%25E3%2582%25AA%25E3%2583%2596%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E3%2581%25AE%25E3%2583%2597%25E3%2583%25AD%25E3%2583%2591%25E3%2583%2586%25E3%2582%25A3%25EF%25BC%2588React%2520Router%2520v5.1%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kkoisland%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E2MzIwYmQ0NDQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kkoisland</dc:creator></item><item><title><![CDATA[VSCode拡張機能開発でpnpm workspace化をしようとしたら壁が高かった]]></title><description><![CDATA[私が開発している ts-type-expand という拡張機能では、以前は yarn workspace を使ったモノレポ構成を取っていましたが、今回 pnpm workspace に移行することにしました。
+つまりどころが多かったので知見を共有します。
+
+ 基本的な移行方法
+ロックファイルを移行するには以下のコマンドを使います。
+$ pnpm import
+これで、yarn.lock の内容を pnpm-lock.yaml に変換できます。
+あとは
+
+yarn の設定ファイルを削除
+pnpm-workspace.yaml を作成し、ワークスペース指定を移す
+
+等すればパッケージの依存管...]]></description><link>https://zenn.dev/kimuson/articles/vscode_extension_pnpm_workspace</link><guid isPermaLink="true">https://zenn.dev/kimuson/articles/vscode_extension_pnpm_workspace</guid><pubDate>Thu, 16 May 2024 12:07:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--gtePTrPf--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:VSCode%25E6%258B%25A1%25E5%25BC%25B5%25E6%25A9%259F%25E8%2583%25BD%25E9%2596%258B%25E7%2599%25BA%25E3%2581%25A7pnpm%2520workspace%25E5%258C%2596%25E3%2582%2592%25E3%2581%2597%25E3%2582%2588%25E3%2581%2586%25E3%2581%25A8%25E3%2581%2597%25E3%2581%259F%25E3%2582%2589%25E5%25A3%2581%25E3%2581%258C%25E9%25AB%2598%25E3%2581%258B%25E3%2581%25A3%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258D%25E3%2582%2580%25E3%2581%259D%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I1NWE1MzY5MWUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>きむそん</dc:creator></item></channel></rss>

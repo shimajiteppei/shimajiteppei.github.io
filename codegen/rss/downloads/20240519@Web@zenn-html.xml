@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「HTML」のフィード]]></title><description><![CDATA[Zennのトピック「HTML」のRSSフィードです]]></description><link>https://zenn.dev/topics/html</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/171432f5a6.png</url><title>Zennの「HTML」のフィード</title><link>https://zenn.dev/topics/html</link></image><generator>zenn.dev</generator><lastBuildDate>Sun, 19 May 2024 03:33:37 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/html/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[CMS用のHTMLテンプレートコーディングのtips]]></title><description><![CDATA[cms更新が入るページ では、LPや静的ページに比べ、考慮することが多々あります。
+コーディングをお願いする人への確認用としてその辺のtipsをまとめました。
+毎回、個別にお願いするより記事にした方が早いなと。
+こんなケースをカバーしましょう、という記事です。
+
+想定されたテキスト量より大幅に多かった
+デザインより要素が少なかった
+間違ったサイズの画像が登録された
+エラーの時の対応
+CMS化出来ないマークアップ
+
+なお本記事のhtmlとcssはほとんど、AI Code Editorの「Cursor」に書いてもらいました。
+VSCodeを使ってる方なら、インターフェースはほぼ同じなので、移...]]></description><link>https://zenn.dev/resistance_gowy/articles/1a8314fb8953e4</link><guid isPermaLink="true">https://zenn.dev/resistance_gowy/articles/1a8314fb8953e4</guid><pubDate>Sat, 18 May 2024 05:07:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wiQ_Ruce--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:CMS%25E7%2594%25A8%25E3%2581%25AEHTML%25E3%2583%2586%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AC%25E3%2583%25BC%25E3%2583%2588%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2587%25E3%2582%25A3%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%25AEtips%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:HTMLGO%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2hqc01qa3F3b0kycWV0ZTJVTHJPVDZva3hXWFV3NzlPNTJWemZlSGc9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>HTMLGO</dc:creator></item><item><title><![CDATA[Zenn 上での iframe 埋め込み表示テスト]]></title><description><![CDATA[
+ リンク色々（参照先記事の中身は無関係なので気にしないでください）
+https://twitter.com/Qiita/status/1365218441011990531
+https://qiita.com/release-notes#2021-02-26
+https://www.nikkei.com/article/DGXZQOUE1509P0V10C24A5000000/
+
+ アマゾンの商品はどうあがいてもダメ（そもそも Zenn 以外でも大抵ダメ）
+https://feel-log.net/seo/ssl-amazon-product-link-iframe-tag/
+http...]]></description><link>https://zenn.dev/yandrew/articles/28b180c20d7a3a</link><guid isPermaLink="true">https://zenn.dev/yandrew/articles/28b180c20d7a3a</guid><pubDate>Fri, 17 May 2024 06:33:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--EDcrQqIw--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Zenn%2520%25E4%25B8%258A%25E3%2581%25A7%25E3%2581%25AE%2520iframe%2520%25E5%259F%258B%25E3%2582%2581%25E8%25BE%25BC%25E3%2581%25BF%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yandrew%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSk5HVWh0VDNYWmRpMUNTUE82TzZadXhmeTc4bF96YnhXZG1mTWNQRWtmQzI4aThBPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yandrew</dc:creator></item><item><title><![CDATA[ドキュメント・ルート]]></title><description><![CDATA[
+ Document Rootとは？
+ドキュメント・ルート（Document Root）とは、元々はApacheの用語で、そのドメイン名で公開するディレクトリーを起点（Root）とすることです。
+https://example.com/index.html
+                   ↑このスラッシュ（/）がドキュメント・ルートです!
+
+ ドキュメント・ルートを覚えると、何が便利になるのか？
+ファイルのパスの指定が楽になります。
+&lt;img src="/img/top.jpg"/&gt; ←常に絶対パスで指定できる
+上記はドメイン名（FQDN）を省略した書き方になります。
+...]]></description><link>https://zenn.dev/phpbeginners/articles/3f51955c3d72f8</link><guid isPermaLink="true">https://zenn.dev/phpbeginners/articles/3f51955c3d72f8</guid><pubDate>Wed, 15 May 2024 18:06:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7ET0L9u9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2589%25E3%2582%25AD%25E3%2583%25A5%25E3%2583%25A1%25E3%2583%25B3%25E3%2583%2588%25E3%2583%25BB%25E3%2583%25AB%25E3%2583%25BC%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:PHP%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E5%258B%2589%25E5%25BC%25B7%25E4%25BC%259A%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZhYWYwZTgwOTUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>PHP初心者勉強会</dc:creator></item><item><title><![CDATA[入門書と実際の業務の違いとは。]]></title><description><![CDATA[
+ はじめに
+プログラミングを覚えるにあたって、皆さんはどのように勉強してきたでしょうか？
+私は自費で入門書を買って勉強したり、ドットインストールという動画サイトに課金して勉強していました。
+最近はYoutubeの動画配信で勉強することも多いです。
+プログラミングスクールに通ったり、専門学校で習う方もいるでしょう。
+どんな教材であれ、プログラマーとして採用された皆さんは何かしらの言語を多少なりとも身につけ、教材どおりのプログラムを動かすことができるようになっていることと思います。
+さて、数週間の研修期間を終えたあなたは出向の面談に受かり、ついに業務案件に携わることになります。
+そこであな...]]></description><link>https://zenn.dev/k_tabuchi/articles/c97402a43fc9fa</link><guid isPermaLink="true">https://zenn.dev/k_tabuchi/articles/c97402a43fc9fa</guid><pubDate>Wed, 15 May 2024 09:58:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--yr1oFGzR--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2585%25A5%25E9%2596%2580%25E6%259B%25B8%25E3%2581%25A8%25E5%25AE%259F%25E9%259A%259B%25E3%2581%25AE%25E6%25A5%25AD%25E5%258B%2599%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%25E3%2581%25A8%25E3%2581%25AF%25E3%2580%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:k-tabuchi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhkMjhhY2RlZGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>k-tabuchi</dc:creator></item><item><title><![CDATA[PrivacyPolicyの設定]]></title><description><![CDATA[
+ iOSリリースのために
+例のPrivacyPolicyが要る。
+なにを書くか、のほうは大して問題ないのだが、
+アプリの中に書けば簡単なのに、どこかにupしてURLが必要なんだったよね。
+初めてリリースした『はじめてのえにっき』のためにつくったが、
+三年も前だからいい加減忘れている。
+たしかgithub.ioにしたんだった。
+
+ 前回のPrivacyPolicyを流用する
+ほんとはAWSにあるServerpodのWebServerに上げればいいんだけれど、
+やり方がよくわからないので(&gt;_&lt;)
+前回同様github.ioを使おう。
+でも、github.ioって、無料だとたし...]]></description><link>https://zenn.dev/flutteruniv_dev/articles/b690ad19f97e2c</link><guid isPermaLink="true">https://zenn.dev/flutteruniv_dev/articles/b690ad19f97e2c</guid><pubDate>Tue, 14 May 2024 06:15:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dEDjzFD3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:PrivacyPolicy%25E3%2581%25AE%25E8%25A8%25AD%25E5%25AE%259A%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%25A9%25E3%2582%2593%25E3%2581%2590%25E3%2582%258A%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y0ODUxNDkwOTcuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Flutter%25E5%25A4%25A7%25E5%25AD%25A6%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dqQ2RNdHFjMF9fWVFUdkJndHR1R3plSnVVNW41ZXMyTzM0RDUzPXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>どんぐり</dc:creator></item><item><title><![CDATA[Github Profileに本棚を表示するアプリを作ってみた話]]></title><description><![CDATA[
+ 前書き
+Githubのプロフィールに読んでいる、あるいは良かった本を手軽に載せれるツールが欲しいなと思い、作ってみました。
+github-readme-statsなどの装飾系の便利ツールを大変リスペクトして作ったツールとなっております。
+https://github.com/anuraghazra/github-readme-stats
+
+ プロダクトについて
+以下の画像のように、Githubのプロフィール中に、本の表紙を並べて表示することができます。
+
+使い方としては、以下のようなURLをマークダウン中に埋め込むだけでOKです。
+クエリパラメータとして13桁ISBNコードを指定して...]]></description><link>https://zenn.dev/yu_ta_9/articles/ac1423e80a4e20</link><guid isPermaLink="true">https://zenn.dev/yu_ta_9/articles/ac1423e80a4e20</guid><pubDate>Mon, 13 May 2024 22:39:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--k8leGnzb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Github%2520Profile%25E3%2581%25AB%25E6%259C%25AC%25E6%25A3%259A%25E3%2582%2592%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2599%25E3%2582%258B%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:YU-TA-9%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2QwNzU2NmM5MzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>YU-TA-9</dc:creator></item><item><title><![CDATA[令和のHTML / CSS / JavaScriptの書き方50選]]></title><description><![CDATA[Web制作の技術は日々進化しており、会社やプロジェクトによっては昨今の環境に適さない書き方をしているケースも時折見受けられます。
+そこで今回は「2024年のWeb制作ではこのようにコードを書いてほしい！」という内容をまとめました。
+質より量で、まずは「こんな書き方があるんだ」をこの記事で伝えたかったので、コードの詳細はあまり解説していません。なので、具体的な仕様などを確認したい方は参考記事を読んだりご自身で調べていただけると幸いです。
+!
+当記事では「iOS Safari バージョン15系以上」でサポートされている技術を基本的に紹介しています。しかし、15系や16系でサポートされていない...]]></description><link>https://zenn.dev/necscat/articles/bc9bba54babaf5</link><guid isPermaLink="true">https://zenn.dev/necscat/articles/bc9bba54babaf5</guid><pubDate>Mon, 13 May 2024 10:10:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--insZ6hmG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E4%25BB%25A4%25E5%2592%258C%25E3%2581%25AEHTML%2520%252F%2520CSS%2520%252F%2520JavaScript%25E3%2581%25AE%25E6%259B%25B8%25E3%2581%258D%25E6%2596%25B950%25E9%2581%25B8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:dadada%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI3MjZkNzYwMWEuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%258D%25E3%2582%25AF%25E3%2582%25B9%25E3%2582%25AD%25E3%2583%25A3%25E3%2583%2583%25E3%2583%2588%2520%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2UwMWFkMzQ1M2QuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>dadada</dc:creator></item><item><title><![CDATA[未経験から3年で年収1000万円のフリーランスエンジニアに転職する方法！完全ロードマップ！]]></title><description><![CDATA[Step1：Html CSS を学習する
+Step2：JavaScript を学習する
+Step3：React を学習する
+Step4：ポートフォリオを作成する
+Step5：正社員エンジニアになる（月収25万）
+Step6：フリーランスエンジニアになる（月収50万）
+Step7：単価を上げる（月収80万）
+https://magicgifted.com/roadmap
+]]></description><link>https://zenn.dev/hilcrhymer78787/articles/fea2424020f182</link><guid isPermaLink="true">https://zenn.dev/hilcrhymer78787/articles/fea2424020f182</guid><pubDate>Mon, 13 May 2024 06:02:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--c9My20rj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%259C%25AA%25E7%25B5%258C%25E9%25A8%2593%25E3%2581%258B%25E3%2582%25893%25E5%25B9%25B4%25E3%2581%25A7%25E5%25B9%25B4%25E5%258F%258E1000%25E4%25B8%2587%25E5%2586%2586%25E3%2581%25AE%25E3%2583%2595%25E3%2583%25AA%25E3%2583%25BC%25E3%2583%25A9%25E3%2583%25B3%25E3%2582%25B9%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%25E3%2581%25AB%25E8%25BB%25A2%25E8%2581%25B7%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%25EF%25BC%2581%25E5%25AE%258C%25E5%2585%25A8%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2589%25E3%2583%259E%25E3%2583%2583%25E3%2583%2597%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ren%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE0MDc5MjQ3NDIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ren</dc:creator></item><item><title><![CDATA[Web開発]]></title><description><![CDATA[全体像から細部まで  詳細に、 簡潔に、 本質的に。
+1. これまで別々に学習されていたHTMLとCSS、JavaScriptを同時に有機的に学習する。
+2. Webページ作成だけでなく、実際にアップロードする方法・メンテナンス・セキュリティ・APIまで、全て詳細かつ網羅的に。
+3. 世界最先端の技術を、日本語で紹介する。]]></description><link>https://zenn.dev/yunaimatsu/books/acae645f13cf4d</link><guid isPermaLink="true">https://zenn.dev/yunaimatsu/books/acae645f13cf4d</guid><pubDate>Mon, 13 May 2024 01:39:49 GMT</pubDate><dc:creator>ゆないまつ</dc:creator></item><item><title><![CDATA[マウスホバーでぼかしを入れるには]]></title><description><![CDATA[
+
+ 概要
+ある要素をマウスホバーすると，そのコンテンツにはぼかしが入って，その上にさらに説明テキストや詳細ページへの誘導リンクボタンがふわっと表示されるようにしたいことがあります。
+上の画像のような感じです。左画像はマウスホバーする前，右画像はホバーした時の表示。
+どのように実装しますか？
+
+ ポイントは3つ
+
+どのような構造にするか
+hoverをどの要素に対して機能させるか
+ぼかしを入れるためのCSS設定は？
+
+
+ どのような構造にするか
+
+ 構造
+ここでのポイントは，下層レイヤーとカバーレイヤーを同じ位置に同じ大きさで配置するということです。構造としては
+- 外包レイヤー（2つの要...]]></description><link>https://zenn.dev/yhayas/articles/3938e4ac940380</link><guid isPermaLink="true">https://zenn.dev/yhayas/articles/3938e4ac940380</guid><pubDate>Sat, 11 May 2024 02:40:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--i2fQIAer--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%259E%25E3%2582%25A6%25E3%2582%25B9%25E3%2583%259B%25E3%2583%2590%25E3%2583%25BC%25E3%2581%25A7%25E3%2581%25BC%25E3%2581%258B%25E3%2581%2597%25E3%2582%2592%25E5%2585%25A5%25E3%2582%258C%25E3%2582%258B%25E3%2581%25AB%25E3%2581%25AF%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yusuke%2520Hayasaki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBiNjBmZjEwYmYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yusuke Hayasaki</dc:creator></item><item><title><![CDATA[iOS Safari で HTML Popover が期待通りに閉じない]]></title><description><![CDATA[HTML Popover 属性 は Safari 17 (iOS17 / macOS Sonoma)からサポートされている。
+macOS では試した限り期待通りに動作するようだが，iOS Safari (およびWKWebView) では，"Light Dismiss" (ポップオーバーの外をタップするとポップオーバーが非表示になる)が動作しない。
+Webkit Bugzilla でも議論されており，どうやらバグらしい。
+
+Adding a pointerdown event listener to document.body, "fixes" the issue.
+
+というコメントがあり...]]></description><link>https://zenn.dev/maltophilia/articles/53c4d955e6f5ff</link><guid isPermaLink="true">https://zenn.dev/maltophilia/articles/53c4d955e6f5ff</guid><pubDate>Thu, 09 May 2024 10:14:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jrb7s8lp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:iOS%2520Safari%2520%25E3%2581%25A7%2520HTML%2520Popover%2520%25E3%2581%258C%25E6%259C%259F%25E5%25BE%2585%25E9%2580%259A%25E3%2582%258A%25E3%2581%25AB%25E9%2596%2589%25E3%2581%2598%25E3%2581%25AA%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:maltophilia%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSmppY2t0Z1F6cFdfcEtwcWRYRk02aS1YZEV3dks2N2tXN2lab3owVF9yPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>maltophilia</dc:creator></item><item><title><![CDATA[ファイルアップロードの挙動確認]]></title><description><![CDATA[
+ 動機
+Reactでファイルアップロード機能を実装したい。
+まず、HTMLの仕様を確認する
+
+ 挙動確認
+
+ 単一ファイル
+以下のコードを検証する
+&lt;!DOCTYPE html&gt;
+&lt;head&gt;
+    &lt;meta charset="utf8"/&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;label for="single-file-uploader"&gt;単一ファイルのアップロード&lt;/label&gt;
+    &lt;input type="file" id="single-file-uploader" acc...]]></description><link>https://zenn.dev/regmarmcem/articles/5354b1a8ffe0b1</link><guid isPermaLink="true">https://zenn.dev/regmarmcem/articles/5354b1a8ffe0b1</guid><pubDate>Tue, 07 May 2024 12:22:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--uRsUFfKh--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2589%25E3%2581%25AE%25E6%258C%2599%25E5%258B%2595%25E7%25A2%25BA%25E8%25AA%258D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:regmarmcem%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFhZWJjN2Y0ZDUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>regmarmcem</dc:creator></item><item><title><![CDATA[Pandocを利用してHTML、PDFを作成する]]></title><description><![CDATA[
+ 1. 概要
+PandocはmarkdownなどからHTML、PDFなど様々な形式に変換してくれる便利なツールである。これを使用すればMarkdownで書かれた１つの文章から、HTMLで書かれた記事や\LaTeXを通したPDFの資料を作成することができる。Pandocはデフォルトのまま使用すると、HTMLでTex形式の数式が利用できなかったり、スタイルがシンプルすぎるのでテンプレートを利用する。今回、利用したテンプレートの覚書をここに残す。
+https://pandoc.org/
+
+ 2. 必要なパッケージ
+
+Pandoc
+\LaTeX
+
+$ sudo apt install texl...]]></description><link>https://zenn.dev/hoshi_ophiuchus/articles/2016e7234a2852</link><guid isPermaLink="true">https://zenn.dev/hoshi_ophiuchus/articles/2016e7234a2852</guid><pubDate>Mon, 06 May 2024 14:21:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--HEDNVrgB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Pandoc%25E3%2582%2592%25E5%2588%25A9%25E7%2594%25A8%25E3%2581%2597%25E3%2581%25A6HTML%25E3%2580%2581PDF%25E3%2582%2592%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E2%2598%2586%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RkMTQ4MzI1NjYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>☆</dc:creator></item><item><title><![CDATA[フォームの必須項目と任意項目にstyleちゃんとあてられてる？]]></title><description><![CDATA[
+ 結論
+擬似クラスで:required,:optional というものがあるのでそれを使いましょうって話
+具体的な使い方を下記に示します
+
+ サンプルコード
+
+上記のように required 属性をつけた要素には:required で style を設定し、その他には:optional で style を設定できる
+required 属性はアクセシビリティの観点でも使用するように勧められている
+
+
+ まとめ
+上記の属性は &lt;input&gt;, &lt;select&gt;, &lt;textarea&gt;タグに対応している
+form 上の上記タグの必須項目には require...]]></description><link>https://zenn.dev/rlab/articles/3f93b2a5b4f738</link><guid isPermaLink="true">https://zenn.dev/rlab/articles/3f93b2a5b4f738</guid><pubDate>Sun, 05 May 2024 10:31:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--MRvQ3qdU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25BC%25E3%2583%25A0%25E3%2581%25AE%25E5%25BF%2585%25E9%25A0%2588%25E9%25A0%2585%25E7%259B%25AE%25E3%2581%25A8%25E4%25BB%25BB%25E6%2584%258F%25E9%25A0%2585%25E7%259B%25AE%25E3%2581%25ABstyle%25E3%2581%25A1%25E3%2582%2583%25E3%2582%2593%25E3%2581%25A8%25E3%2581%2582%25E3%2581%25A6%25E3%2582%2589%25E3%2582%258C%25E3%2581%25A6%25E3%2582%258B%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%258A%25E3%2583%2584%25E3%2583%258E%25E3%2583%25AD%25E3%2583%2589%25E3%2583%25AA%25E3%2582%25B4%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNjNzdmZWEzNmQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ナツノロドリゴ</dc:creator></item><item><title><![CDATA[ドメインを入力してからページが表示されるまでの仕組み]]></title><description><![CDATA[
+ この記事の概要
+この記事では、ドメインを入力してから画面にページが表示されるまでの仕組みを出来るだけわかりやすく解説していきます。
+今回解説する一連のプロセスは以下の通りです。
+
+DNSサーバーに接続しドメインに対応するIPアドレスを取得する。
+ブラウザがHTTPまたはHTTPSリクエストをサーバーに送信する。
+ウェブサーバーがリクエストを受け取りレスポンスを返す。
+受け取ったファイルから画面を構築する。（ブラウザレンダリング）
+
+
+ DNS
+まずユーザーが入力したドメインはブラウザからDNSサーバーに送られ、DNSサーバーはドメインに対応したIPアドレスを返します。
+
+ DNSとは...]]></description><link>https://zenn.dev/dev8/articles/dns_http_https</link><guid isPermaLink="true">https://zenn.dev/dev8/articles/dns_http_https</guid><pubDate>Sat, 04 May 2024 04:40:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5s0ZTyqB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2589%25E3%2583%25A1%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%2592%25E5%2585%25A5%25E5%258A%259B%25E3%2581%2597%25E3%2581%25A6%25E3%2581%258B%25E3%2582%2589%25E3%2583%259A%25E3%2583%25BC%25E3%2582%25B8%25E3%2581%258C%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2595%25E3%2582%258C%25E3%2582%258B%25E3%2581%25BE%25E3%2581%25A7%25E3%2581%25AE%25E4%25BB%2595%25E7%25B5%2584%25E3%2581%25BF%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:dev8%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ1N2ZjNDU5MGMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>dev8</dc:creator></item><item><title><![CDATA[簡単なローディング画面表示機能 | HTML, CSS, JS]]></title><description><![CDATA[
+ 簡単なローディング画面表示機能
+
+ 表示イメージ
+
+
+ ソースコード
+
+ ディレクトリ構成
+    /
+    ├ index.html
+    ├ loaderview.css
+    └ loaderview.js
+
+ HTML / index.html
+
+index.html
+    &lt;!-- loaderview.js インポート --&gt;
+    &lt;script src="./loaderview.js" inline&gt;&lt;/script&gt;
+
+    &lt;!-- loaderview テンプレート --&gt;
+    &lt;div i...]]></description><link>https://zenn.dev/bbsfish/articles/60cd71289a6bb9</link><guid isPermaLink="true">https://zenn.dev/bbsfish/articles/60cd71289a6bb9</guid><pubDate>Thu, 02 May 2024 15:24:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--eADN28MK--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%25B0%25A1%25E5%258D%2598%25E3%2581%25AA%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2587%25E3%2582%25A3%25E3%2583%25B3%25E3%2582%25B0%25E7%2594%25BB%25E9%259D%25A2%25E8%25A1%25A8%25E7%25A4%25BA%25E6%25A9%259F%25E8%2583%25BD%2520%257C%2520HTML%252C%2520CSS%252C%2520JS%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Y.%2520HSD%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSS1ZeDZXOGNtbm1hTFhWM25SNC1QYnFWbTdDVkJ3RXdrT2czUlNnWjlOPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Y. HSD</dc:creator></item><item><title><![CDATA[Font Awesomeのアイコンを擬似要素で使用する]]></title><description><![CDATA[ボタンに、ラベルに、使い勝手の良いFont Awesomeのアイコン！
+このアイコンを擬似要素で使うことが多いので、使い方の方法をまとめてみました。
+今回はボタンにアイコンをつける方法を紹介します。
+
+ 下準備　Font Awesomeのキットをheadに入れる
+Font Awesomeは「キット」と呼ばれるコードをhead内部に入れることで使用可能です。
+無料会員登録をして、キットを入手しましょう。
+ログイン後、「Your Kits」をクリックします。
+
+使いたいキットをクリックし「Easy Installation」のコードをコピーしましょう。
+キットのコードは&lt;script ...]]></description><link>https://zenn.dev/928sekine/articles/9ff3bdf08bf596</link><guid isPermaLink="true">https://zenn.dev/928sekine/articles/9ff3bdf08bf596</guid><pubDate>Thu, 02 May 2024 15:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--FRYV71mA--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Font%2520Awesome%25E3%2581%25AE%25E3%2582%25A2%25E3%2582%25A4%25E3%2582%25B3%25E3%2583%25B3%25E3%2582%2592%25E6%2593%25AC%25E4%25BC%25BC%25E8%25A6%2581%25E7%25B4%25A0%25E3%2581%25A7%25E4%25BD%25BF%25E7%2594%25A8%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259B%25E3%2581%258D%25E3%2581%25AD%25E3%2582%258A%25E3%2581%25AA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAyNDQ3MGIzZjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>せきねりな</dc:creator></item><item><title><![CDATA[absoluteを使った上下左右中央寄せ]]></title><description><![CDATA[absoluteを使って、なにかを上下中央寄せ・左右中央寄せにすることが多いので方法をまとめます。
+
+ 準備
+中央寄せしたいアイテム（子）と、その親を用意しておきます。
+今回は親要素に「parent」を、子要素に「child」を用意しました。
+今回は最新のブラウザできちんと表示されることを優先しているので、ベンダープレフィックスについては取り上げません。
+
+    &lt;div class="parent"&gt;
+      &lt;div class="child"&gt;&lt;p&gt;子です&lt;/p&gt;&lt;/div&gt;
+    &lt;/div&gt;
+
+  ...]]></description><link>https://zenn.dev/928sekine/articles/abf2a29ffe1887</link><guid isPermaLink="true">https://zenn.dev/928sekine/articles/abf2a29ffe1887</guid><pubDate>Thu, 02 May 2024 04:55:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--luPj3Drl--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:absolute%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%259F%25E4%25B8%258A%25E4%25B8%258B%25E5%25B7%25A6%25E5%258F%25B3%25E4%25B8%25AD%25E5%25A4%25AE%25E5%25AF%2584%25E3%2581%259B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259B%25E3%2581%258D%25E3%2581%25AD%25E3%2582%258A%25E3%2581%25AA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAyNDQ3MGIzZjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>せきねりな</dc:creator></item><item><title><![CDATA[【React】scriptタグを埋め込んで動かしたい！！]]></title><description><![CDATA[
+ はじめに
+先日、4月頭にリリースしたサービスの広告審査が通りました。「よっしゃ、実装するぞ！」と意気込んだものの、対象画面内にscriptタグを埋め込む必要があり、どうやら単純に実装しても動かないようでした。
+自分なりに色々調べて、ChatGPTやBardに聞いたりしてうまいこと動いたのでメモとして残します。あまり必要としないかもしれませんが、同じく悩んでいる方の力になればと思います。
+
+ ちょっと宣伝
+審査が通ったサービスというのがこちらです。
+https://wikimiru.com/
+wikimiru（ウィキミル）という、時間経過でランダムに流れるWikipediaの情報を眺め...]]></description><link>https://zenn.dev/tacchan5424/articles/3cac8c0dd5743e</link><guid isPermaLink="true">https://zenn.dev/tacchan5424/articles/3cac8c0dd5743e</guid><pubDate>Thu, 02 May 2024 03:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--eZ-wCyo---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590React%25E3%2580%2591script%25E3%2582%25BF%25E3%2582%25B0%25E3%2582%2592%25E5%259F%258B%25E3%2582%2581%25E8%25BE%25BC%25E3%2582%2593%25E3%2581%25A7%25E5%258B%2595%25E3%2581%258B%25E3%2581%2597%25E3%2581%259F%25E3%2581%2584%25EF%25BC%2581%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259F%25E3%2581%25A4%25E3%2582%2584%25E3%2580%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzlkY2U4Y2NmNzIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>たつや、</dc:creator></item><item><title><![CDATA[List category postsのカスタマイズ]]></title><description><![CDATA[WordPressで、記事一覧を表示できるプラグイン”List category posts”ですが、とても細かくHTMLとCSSを使ってカスタマイズできることを知りました。
+今回私がハマった失敗で、WordPressのテーマのフォルダの中に、List category postsのテンプレートを入れるフォルダ名を間違えました。
+正しいフォルダ名は、こちらです。
+list-category-posts
+私は、最後のsが抜けていることに３時間気が付かず、むなしく時間が過ぎた経験をしました。
+このようなテンプレートでしたら、サムネイル→更新日時→タイトルという順番で表示できます。
+globa...]]></description><link>https://zenn.dev/masaru21/articles/0f9ff493d43204</link><guid isPermaLink="true">https://zenn.dev/masaru21/articles/0f9ff493d43204</guid><pubDate>Tue, 30 Apr 2024 04:36:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lcK2enXC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:List%2520category%2520posts%25E3%2581%25AE%25E3%2582%25AB%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%259E%25E3%2582%25A4%25E3%2582%25BA%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:lonely_creator_m%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2hzOWNVVzBjY3NDOXZPcXFwd0QtZktPblJpbmM4YnFYWG9LVDhVQmxvPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>lonely_creator_m</dc:creator></item></channel></rss>
