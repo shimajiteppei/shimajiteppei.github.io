@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「JavaScript」のフィード]]></title><description><![CDATA[Zennのトピック「JavaScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/javascript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/64acd76870.png</url><title>Zennの「JavaScript」のフィード</title><link>https://zenn.dev/topics/javascript</link></image><generator>zenn.dev</generator><lastBuildDate>Mon, 20 May 2024 08:17:32 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/javascript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Next.js（App Router）+ microCMSで埋め込みが初回レスポンス時以外は正常に表示されない]]></title><description><![CDATA[Next.js（App Router）製のブログでmicroCMSの埋め込みリンク（iframeタグ）を使おうとして、沼にハマった時の解決策です。
+この解決に僕は１週間もかかってしまい、皆さんにはそんな思いをしてほしくないので、共有します。
+あと、最後にちょっといい話もあるので、ぜひ読んでみてください。
+
+ 問題
+microCMSの埋め込みリンク（iframeタグ）が初回レスポンス時以外は正常に表示されないこと
+
+ 原因
+原因は２つ考えられます。
+
+
+//cdn.iframe.ly/embed.jsが読み込まれていない
+scriptタグがレンダレングごとに実行されていない
+
+
+ //cd...]]></description><link>https://zenn.dev/rion_freelance/articles/nextjs-microcms-embed-useeffect</link><guid isPermaLink="true">https://zenn.dev/rion_freelance/articles/nextjs-microcms-embed-useeffect</guid><pubDate>Mon, 20 May 2024 06:34:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--PiNDkQR9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Next.js%25EF%25BC%2588App%2520Router%25EF%25BC%2589%252B%2520microCMS%25E3%2581%25A7%25E5%259F%258B%25E3%2582%2581%25E8%25BE%25BC%25E3%2581%25BF%25E3%2581%258C%25E5%2588%259D%25E5%259B%259E%25E3%2583%25AC%25E3%2582%25B9%25E3%2583%259D%25E3%2583%25B3%25E3%2582%25B9%25E6%2599%2582%25E4%25BB%25A5%25E5%25A4%2596%25E3%2581%25AF%25E6%25AD%25A3%25E5%25B8%25B8%25E3%2581%25AB%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2595%25E3%2582%258C%25E3%2581%25AA%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%25AA%25E3%2582%25AA%25E3%2583%25B3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2QzMTUxNGJhNGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>リオン</dc:creator></item><item><title><![CDATA[JS/JSON理解度チェック問題（四択）]]></title><description><![CDATA[以下に、JavaScriptとJSONの理解度をチェックするための四択問題を15個考えました。
+
+ JavaScriptの問題
+
+ 問題1
+JavaScriptで変数を宣言する正しい方法はどれですか？
+
+var x = 10;
+variable x = 10;
+declare x = 10;
+int x = 10;
+
+答え: 1. var x = 10;
+
+
+ 問題2
+次のJavaScriptコードの出力は何ですか？
+console.log(typeof null);
+
+"null"
+"object"
+"undefined"
+"number"
+
+答え: 2. "object"
+
+
+ 問題...]]></description><link>https://zenn.dev/ggg24/articles/49a7110c3c2c51</link><guid isPermaLink="true">https://zenn.dev/ggg24/articles/49a7110c3c2c51</guid><pubDate>Mon, 20 May 2024 01:36:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--mIZgKHqb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JS%252FJSON%25E7%2590%2586%25E8%25A7%25A3%25E5%25BA%25A6%25E3%2583%2581%25E3%2582%25A7%25E3%2583%2583%25E3%2582%25AF%25E5%2595%258F%25E9%25A1%258C%25EF%25BC%2588%25E5%259B%259B%25E6%258A%259E%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ggg%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTHR4YkU3VDB3aGJESmVXSWNJN1FYMnhwS0xJNUF6RlFRT3o1dnZnaXdiPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ggg</dc:creator></item><item><title><![CDATA[位置情報エンジニアリングのすすめ]]></title><description><![CDATA[「位置情報」は、アプリ、ゲーム、気象・災害、オープンデータ、デジタルツイン、DX…などの昨今のトレンドを支える技術として、重要度が増しています。本連載では、位置情報技術の概観を学びつつ、具体的なアプリケーションを開発するための要素技術も紹介します。なお、本記事は技術評論社「Software Design」の2023年8月号〜2024年5月号にて連載した記事の入稿前の記事になります。したがって、誤字・誤植がある可能性がございます、ご了承ください。]]></description><link>https://zenn.dev/mierune_inc/books/location-engineering</link><guid isPermaLink="true">https://zenn.dev/mierune_inc/books/location-engineering</guid><pubDate>Mon, 20 May 2024 00:33:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--n29oxOcg--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci85ODY3OWZhMDdhLnBuZw==%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>MIERUNE Inc.</dc:creator></item><item><title><![CDATA[WordPress テーマ作成 初学備忘録]]></title><description><![CDATA[本書は、初心者が WordPress のテーマ作成を行った際の備忘録です。
+書籍や資料片手に作成した内容を整理し公開することで、当時の自分の考えを残そうという意図があります。
+また私のような初心者（下記）の方へ、学ぶ時の参考になればとも考えています。
+
+1. HTML, CSS, Javascript を学んでいる方
+　本書は HTML, CSS, Javascript で静的サイトを作成するところからスタートしています。
+
+2. WordPressテーマ作成を学んでいる方
+　本書は 市販の書籍でもよく使われている流れ（ HTML から WordPress テーマに落とし込む）を踏んでいます。
+
+3. Webアクセシビリティに興味がある方
+　本書は、デジタル庁デザインシステム（Ver 1.3.2）をベースに、Webアクセシビリティを考え取り入れようと試行錯誤した過程を記しています。
+
+本テーマのリポジトリは、下記のURLです。
+https://github.com/nonaka101/web-zukuri
+
+注：本書は初学者の備忘録であり、自身が分かる範囲を噛み砕いて説明したものとなります。そのため情報の精度は下がっていることをご了承ください。
+注：メモが大量になった関係から、誤字脱字や わかりにくい表現など、至らないところがあると思われます。致命的な誤りは出ないよう努力していますが、もし何かありましたら教えていただければ幸いです。]]></description><link>https://zenn.dev/nonaka101/books/web-zukuri-book</link><guid isPermaLink="true">https://zenn.dev/nonaka101/books/web-zukuri-book</guid><pubDate>Sun, 19 May 2024 16:06:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--95DKWggL--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci8xODc1YTFjNGE3LnBuZw==%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>Nonaka</dc:creator></item><item><title><![CDATA[Python ✖️ ReactでTokenを持たせたログイン機能の作成]]></title><description><![CDATA[＃＃　ポートフォリオのため初めての実装なのでお手柔らかに見てください。
+実装の手順
+1Flaskのバックエンドのセットアップ
+2ログインAPIエンドポイントの作成
+3Reactフロントエンドのセットアップ
+4Reactでの認証状態の管理
+5ログインおよびログアウト機能の実装
+1
+FlaskとFlask-JWTをインストール（まだの方）
+pip install Flask Flask-JWT-Extended
+login.py
+from flask import Flask, jsonify, request
+from flask_jwt_extended import JWTManage...]]></description><link>https://zenn.dev/shogo08/articles/7b8aa58eab34fc</link><guid isPermaLink="true">https://zenn.dev/shogo08/articles/7b8aa58eab34fc</guid><pubDate>Sun, 19 May 2024 13:09:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---RgeqUMm--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%2520%2520%2520React%25E3%2581%25A7Token%25E3%2582%2592%25E6%258C%2581%25E3%2581%259F%25E3%2581%259B%25E3%2581%259F%25E3%2583%25AD%25E3%2582%25B0%25E3%2582%25A4%25E3%2583%25B3%25E6%25A9%259F%25E8%2583%25BD%25E3%2581%25AE%25E4%25BD%259C%25E6%2588%2590%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:shogo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSmw0ZnFQc193ckRtUGZsTl80WWQ2YWRWUUEyZGpXM1hqZlJfYTdNMVd1WG9VPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>shogo</dc:creator></item><item><title><![CDATA[[Splide]縦スライダー・自動再生でショート動画風な動きを再現する]]></title><description><![CDATA[
+ 実装したこと
+スライダーのプラグインsplideを使用して、気になった記事を保存して、そちらをショート動画風に流すアプリを実装しました。
+
+
+ splideとは
+https://ja.splidejs.com/
+
+アクセシビリティに配慮した軽量・高機能スライダー。
+ほかのライブラリに依存せず、Lighthouseのエラーもありません。
+
+他のスライダープラグインと比べて、軽量でシンプルです。
+オプション機能も複数あり導入も簡単です。
+
+ ショート動画風にするために追加した機能（スマホ）
+・スライドは１枚ずつ表示し、スライドさせる
+・コンテンツを縦スワイプで次のコンテンツを見れるように...]]></description><link>https://zenn.dev/wool2405/articles/7434f585d5f465</link><guid isPermaLink="true">https://zenn.dev/wool2405/articles/7434f585d5f465</guid><pubDate>Sun, 19 May 2024 08:19:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--grU0rrku--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BSplide%255D%25E7%25B8%25A6%25E3%2582%25B9%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2580%25E3%2583%25BC%25E3%2583%25BB%25E8%2587%25AA%25E5%258B%2595%25E5%2586%258D%25E7%2594%259F%25E3%2581%25A7%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25BC%25E3%2583%2588%25E5%258B%2595%25E7%2594%25BB%25E9%25A2%25A8%25E3%2581%25AA%25E5%258B%2595%25E3%2581%258D%25E3%2582%2592%25E5%2586%258D%25E7%258F%25BE%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:st_wool%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FkNTMzMDIwZGYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>st_wool</dc:creator></item><item><title><![CDATA[新卒エンジニアがもらった今週のコードレビュー(1)]]></title><description><![CDATA[
+ いただいたコードレビューを次に活かしたい
+これまでコードレビューをいただいた時に、その個別具体的な事象では次に活かせていました。ただ、いただいたレビューを抽象化して理解することで、よりいろんな状況で活かせる気がしたのでまとめてみようと思います。
+
+ 1.フロントから送られてくる情報は信じるな
+自分が書いていたコードは、ある編集画面において、フロントから送られてきたキーを元に処理を変更するというAPIでした。（説明が難しい、、がここが目的ではないので今回は説明は頑張りません、、）
+ここでいただいたレビューは、「フロントから送られてきたキーを参照するんじゃなくて、データベースに登録されて...]]></description><link>https://zenn.dev/naritaharuki/articles/7340ee4902990e</link><guid isPermaLink="true">https://zenn.dev/naritaharuki/articles/7340ee4902990e</guid><pubDate>Sat, 18 May 2024 14:12:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--sUYG1_4A--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%2596%25B0%25E5%258D%2592%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%25E3%2581%258C%25E3%2582%2582%25E3%2582%2589%25E3%2581%25A3%25E3%2581%259F%25E4%25BB%258A%25E9%2580%25B1%25E3%2581%25AE%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2583%25AC%25E3%2583%2593%25E3%2583%25A5%25E3%2583%25BC%25281%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%2588%2590%25E7%2594%25B0%25E9%2599%25BD%25E7%25B4%2580%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2IwNTVhYWI3YjEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>成田陽紀</dc:creator></item><item><title><![CDATA[JavaScript のデフォルト引数とキーワード引数を Julia と Python と比較する]]></title><description><![CDATA[
+ 要約
+
+
+
+言語
+定義
+呼び出し
+
+
+
+
+Julia
+f(x, y=2; a, b="b")
+f(x, a=a)
+
+
+Python
+f(x, y=2, *, a, b="b")
+f(x, a=a)
+
+
+JavaScript
+f(x, y = 2, { a, b = "b" })
+f(x, undefined, { a: a })
+
+
+
+
+ 動機
+一番詳しいプログラミング言語は Julia なのだが、Python や JavaScript を触っているとどうなっているのかよく分からないのでいつでも思い出せるようにメモする。
+
+ 言語別の説明
+
+ Julia
+オプション引数 (optin...]]></description><link>https://zenn.dev/paalon/articles/0cd0c6c39e22ae</link><guid isPermaLink="true">https://zenn.dev/paalon/articles/0cd0c6c39e22ae</guid><pubDate>Sat, 18 May 2024 10:47:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2Ya3nch3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%2520%25E3%2581%25AE%25E3%2583%2587%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25AB%25E3%2583%2588%25E5%25BC%2595%25E6%2595%25B0%25E3%2581%25A8%25E3%2582%25AD%25E3%2583%25BC%25E3%2583%25AF%25E3%2583%25BC%25E3%2583%2589%25E5%25BC%2595%25E6%2595%25B0%25E3%2582%2592%2520Julia%2520%25E3%2581%25A8%2520Python%2520%25E3%2581%25A8%25E6%25AF%2594%25E8%25BC%2583%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Paalon%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE4ZWViZDI3YTcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Paalon</dc:creator></item><item><title><![CDATA[Prismaのデータ取得で不要な列を除く]]></title><description><![CDATA[Prismaでデータを取得する際に、不要な列が含まれてしまう場合があります。セキュリティ上、意図しない列が含まれるのは避けたいところです。
+Prismaのデータ取得で不要な列を除く方法を紹介します。
+検証バージョンは prisma 5.14.0 です。
+
+ 使用するスキーマ
+Userテーブルを例に説明します。
+
+schema.prisma
+model User {
+  id    Int    @id @default(autoincrement())
+  name  String
+  email String
+}
+
+
+ データ取得
+javascriptでデータ取得します。
+
+ 対策なし...]]></description><link>https://zenn.dev/k_log24/articles/8857eea5a8a0b6</link><guid isPermaLink="true">https://zenn.dev/k_log24/articles/8857eea5a8a0b6</guid><pubDate>Sat, 18 May 2024 02:49:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jw-hXJGV--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Prisma%25E3%2581%25AE%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E5%258F%2596%25E5%25BE%2597%25E3%2581%25A7%25E4%25B8%258D%25E8%25A6%2581%25E3%2581%25AA%25E5%2588%2597%25E3%2582%2592%25E9%2599%25A4%25E3%2581%258F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kohei.com%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FhYTBhMmFjNTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kohei.com</dc:creator></item><item><title><![CDATA[ブラウザのマウス座標がズレるのを調整するあのコード]]></title><description><![CDATA[マウス座標はウィンドウのビューポートを基準にしているため「要素の中のどの位置か」を取得するには、要素がウィンドウのどの位置にあるのかを取得する必要がある。
+
+const TapTarget = document.getElementsByClassName("element")[0];
+let _tap_position = { x: 0, y: 0 };
+
+TapTarget.addEventListener("mousedown", MouseDown);
+
+function MouseDown(evt) {
+    // マウス座標を保存
+    _tap_position.x =...]]></description><link>https://zenn.dev/210neon/articles/8e64df6a5d6a45</link><guid isPermaLink="true">https://zenn.dev/210neon/articles/8e64df6a5d6a45</guid><pubDate>Fri, 17 May 2024 18:59:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vGHhz95R--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2596%25E3%2583%25A9%25E3%2582%25A6%25E3%2582%25B6%25E3%2581%25AE%25E3%2583%259E%25E3%2582%25A6%25E3%2582%25B9%25E5%25BA%25A7%25E6%25A8%2599%25E3%2581%258C%25E3%2582%25BA%25E3%2583%25AC%25E3%2582%258B%25E3%2581%25AE%25E3%2582%2592%25E8%25AA%25BF%25E6%2595%25B4%25E3%2581%2599%25E3%2582%258B%25E3%2581%2582%25E3%2581%25AE%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:NettoNeon%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJlNGZhNmYxMjQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>NettoNeon</dc:creator></item><item><title><![CDATA[【VSCode】コメントを任意の場所で折りたためるようにする]]></title><description><![CDATA[// #region 見出し
+console.log("sugokubenri");
+// #endregion
+
+これが
+
+こうなる
+CSSみたいに折りたためて便利。
+]]></description><link>https://zenn.dev/210neon/articles/e07755804f4d95</link><guid isPermaLink="true">https://zenn.dev/210neon/articles/e07755804f4d95</guid><pubDate>Fri, 17 May 2024 17:28:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wl5ppqVe--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590VSCode%25E3%2580%2591%25E3%2582%25B3%25E3%2583%25A1%25E3%2583%25B3%25E3%2583%2588%25E3%2582%2592%25E4%25BB%25BB%25E6%2584%258F%25E3%2581%25AE%25E5%25A0%25B4%25E6%2589%2580%25E3%2581%25A7%25E6%258A%2598%25E3%2582%258A%25E3%2581%259F%25E3%2581%259F%25E3%2582%2581%25E3%2582%258B%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:NettoNeon%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJlNGZhNmYxMjQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>NettoNeon</dc:creator></item><item><title><![CDATA[AWSを使用したアプリケーションのローカルテスト]]></title><description><![CDATA[
+ AWSを使用したアプリケーションのテスト方法
+AWSを使用しているアプリケーションの開発時に問題となるのは、どのようにテストを実施するかという問題が発生します。
+この時の選択肢は次の通りとなります。
+
+単体テスト時にAWSのモックを作成してテストを行う
+AWS上にテスト用の環境を用意してテスト時に接続してテストを行う
+LocalStackを使用してローカルにAWSサービスのエミュレーターを動かしてテストする
+
+単体テスト時にAWSのモックを作成してテストを行う
+
+単体テスト時にモックアップする方法はテストに都合のいいデータを返せるため容易にテストが行えます。
+モックの作成に手間がかか...]]></description><link>https://zenn.dev/carenet/articles/eeafa0f2424a8a</link><guid isPermaLink="true">https://zenn.dev/carenet/articles/eeafa0f2424a8a</guid><pubDate>Fri, 17 May 2024 07:58:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fki_exQC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AWS%25E3%2582%2592%25E4%25BD%25BF%25E7%2594%25A8%25E3%2581%2597%25E3%2581%259F%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2581%25AE%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25AB%25E3%2583%25AB%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Kaz%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE0MTRiZmIwZWQuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:CareNet%2520Engineers%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUVkRlRwNXJGOGFDT3NiNW5JTGRDSkVSUC1tNTJZZF9qNzRqUWJTemlGR0s9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kaz</dc:creator></item><item><title><![CDATA[【初心者向け】Stripeでクレカ登録・決済・削除を実装する【Python, Go, Javascript】]]></title><description><![CDATA[こんにちは、わいけいです。
+今回の記事ではStripeを使ってクレジットカード決済を実装します。
+
+ 前置き
+開発規模の大小を問わず、実装したプロダクトで収益を得るにはユーザーからお金を払ってもらう必要があります。
+しかし、決済の仕組みを自分たちで実装するのは色々な困難が伴います。
+キャッシュレス決済といえばクレジットカードですが、クレカ決済の実装には例えば下記のような課題があります。
+
+実装ミスなどで、ユーザーのクレカ情報が流出すると大事故になる
+PCI DSSというセキュリティ要件を守り、決済ブランドの審査に通過するには莫大なコストがかかる
+
+結論として、個人や小規模な企業がクレカ決...]]></description><link>https://zenn.dev/spiralai/articles/e9704cd8879c0f</link><guid isPermaLink="true">https://zenn.dev/spiralai/articles/e9704cd8879c0f</guid><pubDate>Fri, 17 May 2024 03:10:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6AHQ2Ctc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E5%2590%2591%25E3%2581%2591%25E3%2580%2591Stripe%25E3%2581%25A7%25E3%2582%25AF%25E3%2583%25AC%25E3%2582%25AB%25E7%2599%25BB%25E9%258C%25B2%25E3%2583%25BB%25E6%25B1%25BA%25E6%25B8%2588%25E3%2583%25BB%25E5%2589%258A%25E9%2599%25A4%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2599%25E3%2582%258B%25E3%2580%2590Python%252C%2520Go%252C%2520Javascript%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2582%258F%25E3%2581%2584%25E3%2581%2591%25E3%2581%2584%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJhNDE5NGY4ZmYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Spiral.AI%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA3MjY1NjZiZmQuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>わいけい</dc:creator></item><item><title><![CDATA[フロントエンドの関数単体テスト（Bun+Jest+TS）]]></title><description><![CDATA[
+ はじめに
+フロントエンド開発において、コードの品質を保つことは重要です。特に、ユーザーインターフェースの変更や機能の追加が頻繁に行われる現代のWeb開発では、予期しないバグが発生することを防ぐためにテストの導入が欠かせません。
+しかし、過去にはフロントエンドテストがあまり重視されていなかった時代もありました。そのため、バグが発生しやすく、保守が困難なコードが多く存在していました。
+この記事では、シンプルなフロントエンドテストに関する部分を書こうと思います。テストのレシピブックとしても使っていこうと思っているので、随時この記事を更新or新規記事作成していこうと思っています！
+環境構築
+...]]></description><link>https://zenn.dev/salvage0707/articles/007b53a374da24</link><guid isPermaLink="true">https://zenn.dev/salvage0707/articles/007b53a374da24</guid><pubDate>Fri, 17 May 2024 00:20:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qrEOyal---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2595%25E3%2583%25AD%25E3%2583%25B3%25E3%2583%2588%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2589%25E3%2581%25AE%25E9%2596%25A2%25E6%2595%25B0%25E5%258D%2598%25E4%25BD%2593%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25EF%25BC%2588Bun%252BJest%252BTS%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25BE%25E3%2582%258B%25E3%2581%25B9%25E3%2581%2584%25E3%2581%2598%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQxOGVmZTY1YzEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>まるべいじ</dc:creator></item><item><title><![CDATA[SwiperのspaceBetweenはちょっと罠かもしれない]]></title><description><![CDATA[Swiperについては説明不要な有名なプラグインですね。
+パソコン版でもスマホのようにドラッグでスワイプ操作が可能となり、簡単にカルーセルが実装できることから多くのWeb開発者から支持を得ています。
+その中で、Swiperの spaceBetween というオプションの扱いに気をつけた方が良さそうだと思ったので記事を書いています。
+
+ 0. spaceBetween とは
+spaceBetween オプションはスライドとスライドの間を指定した値だけ間隔を開けてくれます。
+
+ 1. なんで spaceBetween の扱いに気をつけた方がいいのか？
+例として下記のサイトをご覧ください。（S...]]></description><link>https://zenn.dev/masa5714/articles/6ff1b8474d4f96</link><guid isPermaLink="true">https://zenn.dev/masa5714/articles/6ff1b8474d4f96</guid><pubDate>Thu, 16 May 2024 18:25:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--RnlzYlNY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Swiper%25E3%2581%25AEspaceBetween%25E3%2581%25AF%25E3%2581%25A1%25E3%2582%2587%25E3%2581%25A3%25E3%2581%25A8%25E7%25BD%25A0%25E3%2581%258B%25E3%2582%2582%25E3%2581%2597%25E3%2582%258C%25E3%2581%25AA%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:masa5714%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNlMzBjZjA3NzguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>masa5714</dc:creator></item><item><title><![CDATA[useLocation: locationオブジェクトのプロパティ（React Router v5.1）]]></title><description><![CDATA[useLocation フックは バージョン5.1から導入された React Router ライブラリのフックの一つで、現在のURLの場所（location）に関する情報を提供する。URLのパス名、検索クエリ、ハッシュなどの情報に基づいてコンポーネントのレンダリングや動作を条件付きで制御できる。
+useLocation が返す location オブジェクトに含まれるプロパティは、以下の通り。
+例:
+https://example.com/about?name=John&amp;age=30#team
+
+ pathname
+URLのパス部分を表す。上記の例では、pathname は /a...]]></description><link>https://zenn.dev/kkoisland/articles/6284de6a50c442</link><guid isPermaLink="true">https://zenn.dev/kkoisland/articles/6284de6a50c442</guid><pubDate>Thu, 16 May 2024 14:54:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--B9fMYJsA--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:useLocation%253A%2520location%25E3%2582%25AA%25E3%2583%2596%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E3%2581%25AE%25E3%2583%2597%25E3%2583%25AD%25E3%2583%2591%25E3%2583%2586%25E3%2582%25A3%25EF%25BC%2588React%2520Router%2520v5.1%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kkoisland%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E2MzIwYmQ0NDQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kkoisland</dc:creator></item><item><title><![CDATA[デバッグのコツ]]></title><description><![CDATA[
+ 比較する。
+現状、期待通りに動作しているものとの比較を行うことで、異常の原因を探す手法です。
+プログラミングの他、Linuxでのサーバ構築で威力を発揮します。
+ただし、人間が目で確認するだけでは細かい違いを調べるのは難しいため、差分検出ツールを使います。
+windowsであればwinmerge、macであればCompareMergeがオススメ。
+この二つはフォルダ比較という機能を備えていて、同じディレクトリ構造であれば数百個のファイルでも一括で差分を洗い出すことができます。
+
+CompareMerge
+目で間違い探しをしていては抜け漏れが発生します。間違えない人でも無駄に疲れます。
+...]]></description><link>https://zenn.dev/k_tabuchi/articles/02176795753152</link><guid isPermaLink="true">https://zenn.dev/k_tabuchi/articles/02176795753152</guid><pubDate>Thu, 16 May 2024 13:06:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--WNQ5X7SP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2587%25E3%2583%2590%25E3%2583%2583%25E3%2582%25B0%25E3%2581%25AE%25E3%2582%25B3%25E3%2583%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:k-tabuchi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhkMjhhY2RlZGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>k-tabuchi</dc:creator></item><item><title><![CDATA[話題のChatGPTで生成されたアプリを作ってみた(TypeScriptを使ったToDoリストアプリ制作)]]></title><description><![CDATA[
+ はじめに
+こちらの記事は、プログラミング初学者が書いています。内容の保証性は確立していません。
+また、ChatGPTで作成したコードを TypeScript 初学者がアウトプットするためのものです。
+
+ この記事ではなくChatGPTを見つつ学びたい場合
+以下の2つをChatGPTに質問し、返答を元に実行してください。
+
+TypeScriptの学習のために簡単なアプリを作りたいのですが、どんな案がありますか？
+ToDoリストアプリの作り方を教えてください。
+
+
+ ChatGPTに従ってTo Doアプリの作成 〜制作編〜
+
+ 0.このチュートリアルに必要なもの
+以下の4つが必要になりま...]]></description><link>https://zenn.dev/0o0zk/articles/589e3af07a9d89</link><guid isPermaLink="true">https://zenn.dev/0o0zk/articles/589e3af07a9d89</guid><pubDate>Thu, 16 May 2024 10:44:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--oci8OfH8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%25A9%25B1%25E9%25A1%258C%25E3%2581%25AEChatGPT%25E3%2581%25A7%25E7%2594%259F%25E6%2588%2590%25E3%2581%2595%25E3%2582%258C%25E3%2581%259F%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2528TypeScript%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%259FToDo%25E3%2583%25AA%25E3%2582%25B9%25E3%2583%2588%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E5%2588%25B6%25E4%25BD%259C%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kazuki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y3M2M3NTI5MjguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kazuki</dc:creator></item><item><title><![CDATA[【オブジェクト指向,is関数,リファクタリングベストプラクティス】JavaScript,Go,TypeScript, Ruby,Python]]></title><description><![CDATA[
+ 前回のおさらい
+前回: https://zenn.dev/llc_starhacks/articles/98cd2b28eab887
+
+オブジェクト指向を取り入れると: 階層構造でエンティティを表現できるのでした
+
+例 users[].followers[]
+
+例 users[].medias[].likes[]
+
+例 users[].medias[].comments[]
+
+
+
+変数名に注意！「フォローしているユーザー」は followUserではありません。
+
+followUser: "ユーザーをフォローする" という動詞(関数)になります
+プロパティ(変数)には名詞/動名詞/形...]]></description><link>https://zenn.dev/llc_starhacks/articles/e0890f52c443f2</link><guid isPermaLink="true">https://zenn.dev/llc_starhacks/articles/e0890f52c443f2</guid><pubDate>Thu, 16 May 2024 07:22:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--po25yGC9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E3%2582%25AA%25E3%2583%2596%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E6%258C%2587%25E5%2590%2591%252Cis%25E9%2596%25A2%25E6%2595%25B0%252C%25E3%2583%25AA%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25AF%25E3%2582%25BF%25E3%2583%25AA%25E3%2583%25B3%25E3%2582%25B0%25E3%2583%2599%25E3%2582%25B9%25E3%2583%2588%25E3%2583%2597%25E3%2583%25A9%25E3%2582%25AF%25E3%2583%2586%25E3%2582%25A3%25E3%2582%25B9%25E3%2580%2591JavaScript%252CGo%252CTypeScript...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:llc_starhacks%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY4M2QxODAxZjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>llc_starhacks</dc:creator></item><item><title><![CDATA[サバイバルTypescript 試してみた]]></title><description><![CDATA[
+ はじめに
+こちらの記事は、プログラミング初学者が書いています。内容の保証は確立していません。
+また、サバイバル TypeScript で学習したものを TypeScript 初学者がアウトプットするためのものです。
+
+ 作って学ぶTypeScript
+
+ Reactでいいねボタンを作ろう
+
+ 参考
+https://typescriptbook.jp/tutorials/react-like-button-tutorial
+
+ 冒頭の要約
+Reactの3大特徴
+
+仮想DOM (Virtual DOM)
+
+
+
+通常のDOMはHTMLをJavaScriptから操作する仕組みで、リアルタイム...]]></description><link>https://zenn.dev/0o0zk/articles/ac65cca1f3b4bd</link><guid isPermaLink="true">https://zenn.dev/0o0zk/articles/ac65cca1f3b4bd</guid><pubDate>Thu, 16 May 2024 05:34:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--JPHywQo---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B5%25E3%2583%2590%25E3%2582%25A4%25E3%2583%2590%25E3%2583%25ABTypescript%2520%25E8%25A9%25A6%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kazuki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y3M2M3NTI5MjguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kazuki</dc:creator></item></channel></rss>
