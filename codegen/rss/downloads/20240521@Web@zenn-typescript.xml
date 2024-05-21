@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「TypeScript」のフィード]]></title><description><![CDATA[Zennのトピック「TypeScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/typescript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/f13e758fdb.png</url><title>Zennの「TypeScript」のフィード</title><link>https://zenn.dev/topics/typescript</link></image><generator>zenn.dev</generator><lastBuildDate>Tue, 21 May 2024 12:03:31 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/typescript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[ReactでChrome拡張機能を作るメモ]]></title><description><![CDATA[
+ はじめに
+Chrome拡張機能を作る機会があったのでその時のメモです。
+
+ ライブラリ選定
+以下のライブラリを使用する。
+
+React
+TypeScript
+Vite
+Material-UI
+prettier
+
+選定基準は新しすぎない古すぎない。
+
+ プロジェクトの作成
+プロジェクト作成は以下のサイトを参考に行う。
+https://crxjs.dev/vite-plugin/getting-started/react/create-project
+vite3がbeta版なので、vite2を使用する。
+
+ プロジェクトの設定
+MUIは以下のサイトを参考にインストールする。
+https:...]]></description><link>https://zenn.dev/derbuihan/articles/5d4a05e09ca0ff</link><guid isPermaLink="true">https://zenn.dev/derbuihan/articles/5d4a05e09ca0ff</guid><pubDate>Tue, 21 May 2024 10:56:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--tkHXHwhg--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%25E3%2581%25A7Chrome%25E6%258B%25A1%25E5%25BC%25B5%25E6%25A9%259F%25E8%2583%25BD%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:PONTA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzkzZTRhYTM2MGMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>PONTA</dc:creator></item><item><title><![CDATA[BASE APIを使ってショップ情報や商品情報を取得してみる]]></title><description><![CDATA[
+ はじめに
+僕はオンラインショップで本屋さんを営んでおります。
+玉葱堂書店
+その母体となるのが BASE というサービスで、他にも有名なところでは STORES がありますが、僕はたまたま BASE で始めたので、今も使い続けています。
+BASE Developers | BASE
+特に何の問題もなく使えているのですが、どうしても外部からショップデータを取得してみたいという思いが高まり、ついつい検索してみたら、上記のリンクのように BASE API が Developer に向けて公開されていました。
+そちらを使って、ショップ情報を取得してみたいと思います。
+ググってもあまり記事はなく...]]></description><link>https://zenn.dev/hisasann/articles/how-to-use-the-base-api</link><guid isPermaLink="true">https://zenn.dev/hisasann/articles/how-to-use-the-base-api</guid><pubDate>Tue, 21 May 2024 09:56:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--CNLhJ0V2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:BASE%2520API%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%2583%25E3%2583%2597%25E6%2583%2585%25E5%25A0%25B1%25E3%2582%2584%25E5%2595%2586%25E5%2593%2581%25E6%2583%2585%25E5%25A0%25B1%25E3%2582%2592%25E5%258F%2596%25E5%25BE%2597%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yoshiyuki%2520Hisamatsu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhjM2ZhNTYzOTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yoshiyuki Hisamatsu</dc:creator></item><item><title><![CDATA[next-test-api-route-handler のアップデートによるエラー解決の備忘録]]></title><description><![CDATA[
+ はじめに
+この記事は Next.js のAPIテストに利用した next-test-api-route-handler を v3.2.0 から v4.0.7 にアップデートした際に発生したエラーの対処法の備忘録になります。
+https://www.npmjs.com/package/next-test-api-route-handler
+
+ 対象読者
+
+Next.js を使っている人
+
+Pages Router から App Router に移行する人
+
+
+
+next-test-api-route-handler を利用してテストを書いている人
+
+next-test-api-rout...]]></description><link>https://zenn.dev/hamworks/articles/7d84f6335596d8</link><guid isPermaLink="true">https://zenn.dev/hamworks/articles/7d84f6335596d8</guid><pubDate>Tue, 21 May 2024 09:14:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--LXL09XQV--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:next-test-api-route-handler%2520%25E3%2581%25AE%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%25E3%2583%2587%25E3%2583%25BC%25E3%2583%2588%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258B%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E8%25A7%25A3%25E6%25B1%25BA%25E3%2581%25AE%25E5%2582%2599%25E5%25BF%2598%25E9%258C%25B2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2583%258A%25E3%2582%25AC%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E2N2U3ZWNkMzkuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BEHAMWORKS%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2htbG9zYWtjQ1VCUFJsU19icXVrdXNXZnJwZ1p3VlVha0lSaTdNMXc9czI1MC1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ナガ</dc:creator></item><item><title><![CDATA[僕がエンジニア転職した方法]]></title><description><![CDATA[
+ またポエムでも書こうと思った
+エンジニア転職目指している人たちいると思うけど、どうやって転職すればいいのかわからない....
+私は２年ぐらい勉強して３０代でIT業界に入りました。最初は、PHP, MySQL, jQueryやってましたが全然成果物を作れなかったですね。通ってたプログラミング教室がそもそもレガシーだった笑
+
+ Jboyさんはどうやって転職したのか🧑‍💻
+あまり技術者がいないと言われているモバイルアプリを作る技術を勉強しましたね。FlutterとSwiftを勉強して転職しました。
+現在はフリーランスエンジニアですが、モバイルやってたおかげで仕事たくさんあるので、ライバルが...]]></description><link>https://zenn.dev/joo_hashi/articles/11d168b4e2e812</link><guid isPermaLink="true">https://zenn.dev/joo_hashi/articles/11d168b4e2e812</guid><pubDate>Tue, 21 May 2024 07:51:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--OqYyHtHb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2583%2595%25E3%2581%258C%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%25E8%25BB%25A2%25E8%2581%25B7%25E3%2581%2597%25E3%2581%259F%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:JboyHashimoto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNjOTBiY2M0M2YuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>JboyHashimoto</dc:creator></item><item><title><![CDATA[TSKaigi2024 参加レポート]]></title><description><![CDATA[こんにちは、TwoGateの本間です。今回は、2024年5月11日に初開催されたTSKaigi2024へ参加したので、参加レポートをいたします。
+https://tskaigi.org/
+株式会社TwoGateは「TSKaigi 2024」にBronze Sponsorとして協賛しました。TwoGateでは主にフロントエンドのフレームワークとしてAngularを採用しており、TypeScriptで開発をしています。
+
+入口から企業ブースへ下る様子
+
+ Keynote: What's New in TypeScript
+TypeScriptチームのDaniel Rosenwasserさんに...]]></description><link>https://zenn.dev/twogate/articles/87e3538c7c119a</link><guid isPermaLink="true">https://zenn.dev/twogate/articles/87e3538c7c119a</guid><pubDate>Tue, 21 May 2024 05:18:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--beLHBRjT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TSKaigi2024%2520%25E5%258F%2582%25E5%258A%25A0%25E3%2583%25AC%25E3%2583%259D%25E3%2583%25BC%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:honma%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY1ZjA4MGZkMTguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:TwoGate%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhjZjNiNjRkYTEuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>honma</dc:creator></item><item><title><![CDATA[Prismaが返すオブジェクトに機能をつけたい!]]></title><description><![CDATA[
+ Prismaが返すオブジェクト
+RubyとRailsばかり書いてきたぼくも、ここ最近はTypeScriptばかり書いています。
+今開発しているサービスはNestJSを使っているのですが、DBのデータを取得するのにPrismaを使っています。
+Prismaでは以下のようにしてデータを取得できますよね。
+const user = await prisma.user.findUnique({
+  where: { id: userId }
+});
+
+console.dir(user) 
+{
+  id: 1,
+  first_name: "つかさ",
+  last_name: "おおいし",...]]></description><link>https://zenn.dev/ubie_dev/articles/cab01b9028e295</link><guid isPermaLink="true">https://zenn.dev/ubie_dev/articles/cab01b9028e295</guid><pubDate>Tue, 21 May 2024 00:32:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--r34Hh_Uu--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Prisma%25E3%2581%258C%25E8%25BF%2594%25E3%2581%2599%25E3%2582%25AA%25E3%2583%2596%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E3%2581%25AB%25E6%25A9%259F%25E8%2583%25BD%25E3%2582%2592%25E3%2581%25A4%25E3%2581%2591%25E3%2581%259F%25E3%2581%2584%2521%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%258A%25E3%2581%258A%25E3%2581%2584%25E3%2581%2597%25E3%2581%25A4%25E3%2581%258B%25E3%2581%2595%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VlOWMzMWRhODMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Ubie%2520%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUxtNXd1MnhFUnlyd0s2RWx0NzJ4V0ZkZFRVaFFPX2NJQzFQMms5bFN5SFdUQT1zOTYtYw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>おおいしつかさ</dc:creator></item><item><title><![CDATA[チーム向けにツールの設定をパッケージ化して見えたもの]]></title><description><![CDATA[!
+この記事は、2024年4月25日のLTで発表した内容に加筆修正を加えたものです。
+登壇資料はこちらから
+
+こんにちは、@sushi-chanです。電気通信大学で学生をしています。
+最近、所属する学生団体向けにTypeScriptやWebフロントエンドのプロジェクトでよく利用される以下のツールの設定をパッケージ化しました。
+
+ESLint
+Prettier
+Stylelint
+TypeScript(tsconfig.json)
+
+
+今回はパッケージ化の背景や手法、メリットと実際にやってみて見えたものについて書いていきます。
+なお、以下の点はこの記事では触れません。
+
+それぞれのツールの...]]></description><link>https://zenn.dev/sushichaaaan/articles/ec97c4dac686b5</link><guid isPermaLink="true">https://zenn.dev/sushichaaaan/articles/ec97c4dac686b5</guid><pubDate>Mon, 20 May 2024 12:12:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wQ9y0oAT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2581%25E3%2583%25BC%25E3%2583%25A0%25E5%2590%2591%25E3%2581%2591%25E3%2581%25AB%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%25AE%25E8%25A8%25AD%25E5%25AE%259A%25E3%2582%2592%25E3%2583%2591%25E3%2583%2583%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B8%25E5%258C%2596%25E3%2581%2597%25E3%2581%25A6%25E8%25A6%258B%25E3%2581%2588%25E3%2581%259F%25E3%2582%2582%25E3%2581%25AE%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:sushi-chan%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU5ODFhMGYyZWUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sushi-chan</dc:creator></item><item><title><![CDATA[Berryテックブログはじめます。]]></title><description><![CDATA[こんにちは、株式会社Berry CEOの中野です！
+今月からテックブログを始めることにしたので、まずは先陣を切って、Berryの会社紹介やサービスなどについて書いていきたいと思います。
+
+ Berryについて
+赤ちゃんの頭の形のゆがみを治療する頭蓋形状矯正ヘルメットの製造販売をしている医療機器ベンチャーです。創業3年、40名程のメンバーでやっています。
+
+
+
+
+
+
+
+
+「ヘルメット治療」を聞いたことがないという人も多いと思うのですが、頭のゆがみが一定以上の場合に適用となる、小児向けの医療機器になります。
+特徴的な点として、3Dスキャンした赤ちゃんの頭部データをもとに、ヘルメットの３Dデー...]]></description><link>https://zenn.dev/berry_blog/articles/a738c8c8814b64</link><guid isPermaLink="true">https://zenn.dev/berry_blog/articles/a738c8c8814b64</guid><pubDate>Mon, 20 May 2024 06:30:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--RNIU7snz--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Berry%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%25E3%2581%25AF%25E3%2581%2598%25E3%2582%2581%25E3%2581%25BE%25E3%2581%2599%25E3%2580%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Hiroshi%2520Nakano%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFiMWVhYjdiNDMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BEBerry%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ViNWU3NjQ2NDYuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Hiroshi Nakano</dc:creator></item><item><title><![CDATA[Deploy Next.js Monorepo using Nx on AWS Amplify Gen 2.]]></title><description><![CDATA[AWS Amplify Gen 2 (Amplify) について
+
+GA になったため、使い方を学んでいく
+https://aws.amazon.com/jp/about-aws/whats-new/2024/05/aws-amplify-gen-2-available/
+進めるにあたり、前提は以下の通り
+
+TypeScript の Monorepo
+Managed Service を使う。極力
+
+Code はこれ
+https://github.com/danny-yamamoto/candy
+
+ Configure Monorepo
+https://nx.dev/
+
+Nx[1] を使用...]]></description><link>https://zenn.dev/dannya/articles/2268d393707d60</link><guid isPermaLink="true">https://zenn.dev/dannya/articles/2268d393707d60</guid><pubDate>Mon, 20 May 2024 01:57:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BROshoPB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Deploy%2520Next.js%2520Monorepo%2520using%2520Nx%2520on%2520AWS%2520Amplify%2520Gen%25202.%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Daisuke%2520Yamamoto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZiNDY0NzBmMTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Daisuke Yamamoto</dc:creator></item><item><title><![CDATA[Kysely + Cloudflare D1 でトランザクションを実行するヘルパー関数を書いた話]]></title><description><![CDATA[!
+この記事は株式会社HIKKY 開発者ブログの一部です。HIKKYでは CDN を Cloudflare R2 に移行[1] したほか、社内の細かいツールを新しく作る際に Cloudflare Workers を部分的に採用していっています。
+
+
+ TL;DR
+
+D1 の batch はトランザクション[2]
+
+kysely-d1 を改造してヘルパー関数を作ると batch を型付きで呼べてよい
+batch と beginTransaction/commit/rollback では、できることに差がある
+
+
+ 前提条件
+
+Cloudflare Workers + D1 + Kysely...]]></description><link>https://zenn.dev/hikky_co_ltd/articles/d1-batch-with-kysely</link><guid isPermaLink="true">https://zenn.dev/hikky_co_ltd/articles/d1-batch-with-kysely</guid><pubDate>Mon, 20 May 2024 01:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qu4ycyul--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Kysely%2520%252B%2520Cloudflare%2520D1%2520%25E3%2581%25A7%25E3%2583%2588%25E3%2583%25A9%25E3%2583%25B3%25E3%2582%25B6%25E3%2582%25AF%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%2592%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%2599%25E3%2582%258B%25E3%2583%2598%25E3%2583%25AB%25E3%2583%2591%25E3%2583%25BC%25E9%2596%25A2%25E6%2595%25B0%25E3%2582%2592%25E6%259B%25B8%25E3%2581%2584%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:called_D%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk0NjdhMTlkYmEuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BEHIKKY%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lqLTVUZHRnbDhvOHVYZWV3M3RudlZRa2VhY1V1bzBHbGtPVmFMPXMyNTAtYw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>called_D</dc:creator></item><item><title><![CDATA[ElectronでWindows/Linux向けアプリの習作開発を通して感じた注意点・感想]]></title><description><![CDATA[
+ はじめに
+
+TypeScript + Electronで「PDF Shift」というWindows, Linux向けのデスクトップアプリを個人の習作で作成しました。
+内容としてはPDFのページ入れ替えなどが出来るツールで、アプリとしては他に機能がずっと良いものが沢山あります（何よりMac OSではデフォルトのビューアで同様の操作が手軽に出来た！笑）。
+が、今回「マルチプラットフォームでデスクトップアプリを作ることに挑戦したい！」って気持ちがあり、かつ過去にもElectronを学んでいたことから、トライしてみました。
+後半ちょっと詰まってしまいましたが、大体1週間ちょっとくらいかけて作...]]></description><link>https://zenn.dev/shimarisu_121/articles/ab9e3dfe565b2c</link><guid isPermaLink="true">https://zenn.dev/shimarisu_121/articles/ab9e3dfe565b2c</guid><pubDate>Sun, 19 May 2024 23:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--UaNSs3U8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Electron%25E3%2581%25A7Windows%252FLinux%25E5%2590%2591%25E3%2581%2591%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2581%25AE%25E7%25BF%2592%25E4%25BD%259C%25E9%2596%258B%25E7%2599%25BA%25E3%2582%2592%25E9%2580%259A%25E3%2581%2597%25E3%2581%25A6%25E6%2584%259F%25E3%2581%2598%25E3%2581%259F%25E6%25B3%25A8%25E6%2584%258F%25E7%2582%25B9%25E3%2583%25BB%25E6%2584%259F%25E6%2583%25B3%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:shimarisu_121%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzUyYTA5YjFmMWQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>shimarisu_121</dc:creator></item><item><title><![CDATA[wxtで全てのページでchrome extensionを動作させる方法]]></title><description><![CDATA[
+ matchesの値を'&lt;all_urls&gt;'にする
+export default defineContentScript({
+  matches: ['&lt;all_urls&gt;'],
+  main() {
+    console.log('Hello content.');
+  },
+});
+]]></description><link>https://zenn.dev/tosa/articles/014252e97c4b0c</link><guid isPermaLink="true">https://zenn.dev/tosa/articles/014252e97c4b0c</guid><pubDate>Sun, 19 May 2024 11:56:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--67WQZq59--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:wxt%25E3%2581%25A7%25E5%2585%25A8%25E3%2581%25A6%25E3%2581%25AE%25E3%2583%259A%25E3%2583%25BC%25E3%2582%25B8%25E3%2581%25A7chrome%2520extension%25E3%2582%2592%25E5%258B%2595%25E4%25BD%259C%25E3%2581%2595%25E3%2581%259B%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A8%25E3%2581%2595%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FjM2M1MjdhZjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>とさ</dc:creator></item><item><title><![CDATA[ChatGPT (GPT4o) と TDD ライクなペアプロするとどうなるか試した]]></title><description><![CDATA[
+ はじめに
+以前 GPT4 で試したのでどうなるか試してみたくなった。
+https://zenn.dev/sterashima78/articles/7876bd00aa2115
+
+ やりとり
+こちらからの質問は前回と同じになるようにしている。
+（時間が経ってライブラリのバージョンが上がったのもあり記述が適当っぽくないのもあるがあえてそのままにしている）
+https://chatgpt.com/share/bebbd705-b1ed-4b40-a8df-471c2353d4ac
+
+ 実装したコード
+https://stackblitz.com/edit/vitejs-vite-nnlr...]]></description><link>https://zenn.dev/sterashima78/articles/8bca47a054fabd</link><guid isPermaLink="true">https://zenn.dev/sterashima78/articles/8bca47a054fabd</guid><pubDate>Sun, 19 May 2024 11:46:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vQXUQ2Is--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ChatGPT%2520%2528GPT4o%2529%2520%25E3%2581%25A8%2520TDD%2520%25E3%2583%25A9%25E3%2582%25A4%25E3%2582%25AF%25E3%2581%25AA%25E3%2583%259A%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AD%25E3%2581%2599%25E3%2582%258B%25E3%2581%25A8%25E3%2581%25A9%25E3%2581%2586%25E3%2581%25AA%25E3%2582%258B%25E3%2581%258B%25E8%25A9%25A6%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:sterashima78%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdmZTM3ODhmMTUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sterashima78</dc:creator></item><item><title><![CDATA[React + TypeScriptでテストコードの基礎を固める]]></title><description><![CDATA[
+ はじめに
+テストコードを書く機会が増える中で、より多様なテスト手法やベストプラクティスを身につけたいと感じるようになりました。特に、複雑なロジックやエッジケースを効果的にカバーするためには、より多くのテスト手法の引き出しを持つことが重要と考えます。これまでの知識に不足していた部分を補い、より深い知見を得たいと思います。
+そこで、今回はReact + TypeScriptを使ったプロジェクトに焦点を当て、単体テストと結合テストの基本を学び直し、その記録を記事として残すことにしました。JavaやPHPのテストコードやSeleniumのエンドツーエンドテストには今回は触れず、主にVites...]]></description><link>https://zenn.dev/kou_kawa/articles/37-react-unit-test</link><guid isPermaLink="true">https://zenn.dev/kou_kawa/articles/37-react-unit-test</guid><pubDate>Sun, 19 May 2024 11:27:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--UW0I5ZU7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%2520%252B%2520TypeScript%25E3%2581%25A7%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2581%25AE%25E5%259F%25BA%25E7%25A4%258E%25E3%2582%2592%25E5%259B%25BA%25E3%2582%2581%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kou%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzEyNTU3ZTY0NDIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kou</dc:creator></item><item><title><![CDATA[NestJSアプリケーションから複数のAzure Cosmos DBへ接続する]]></title><description><![CDATA[
+ はじめに
+NestJSアプリケーションから複数のAzure Cosmos DB NoSQL API（以下 Cosmos DB）へ接続する方法を実装したので紹介したいと思います。
+NestJSからCosmos DBへ接続する場合、基本的にはazure-databaseというライブラリを使用して実装をしていくことになると思います。
+その上で、１つのNestJSアプリケーションから複数のCosmos DBへ接続するパターンを構築する必要があり、azure-databaseのUsageでは実装方法が見当たらなかったため（（2024年05月19日時点））、検討をして実装を実現しました。
+今回は...]]></description><link>https://zenn.dev/logbuild/articles/138820629db049</link><guid isPermaLink="true">https://zenn.dev/logbuild/articles/138820629db049</guid><pubDate>Sun, 19 May 2024 08:06:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Ywu0WM2y--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:NestJS%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2581%258B%25E3%2582%2589%25E8%25A4%2587%25E6%2595%25B0%25E3%2581%25AEAzure%2520Cosmos%2520DB%25E3%2581%25B8%25E6%258E%25A5%25E7%25B6%259A%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Ryo%2520Kainuma%2528log%2520bu...%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U5NWZmMzJiMTUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BElog%2520build%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E5YjA1OTBhNjUuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Ryo Kainuma(log build)</dc:creator></item><item><title><![CDATA[依存関係のあるタスクの実行]]></title><description><![CDATA[import {Subject, combineLatest} from 'rxjs';
+import {map} from 'rxjs/operators';
+
+// シグナルを表すSubjectを作成
+const signal1 = new Subject&lt;boolean&gt;();
+const signal2 = new Subject&lt;boolean&gt;();
+const signal3 = new Subject&lt;boolean&gt;();
+
+// combineLatestを使用して、すべてのシグナルの最新の値を組み合わせる
+const allSig...]]></description><link>https://zenn.dev/itouh2/articles/97a6a6542c28fc</link><guid isPermaLink="true">https://zenn.dev/itouh2/articles/97a6a6542c28fc</guid><pubDate>Sun, 19 May 2024 06:03:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wlopAB56--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E4%25BE%259D%25E5%25AD%2598%25E9%2596%25A2%25E4%25BF%2582%25E3%2581%25AE%25E3%2581%2582%25E3%2582%258B%25E3%2582%25BF%25E3%2582%25B9%25E3%2582%25AF%25E3%2581%25AE%25E5%25AE%259F%25E8%25A1%258C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:itouh2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUVkRlRwNEdMNkNfWGVhSl90NFlXd2JlU01oWU9lYmotdXVnbUk4OTdlbXFrUT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>itouh2</dc:creator></item><item><title><![CDATA[【ReactNative,Expo,ハリーポッタAPI】久しぶりReactNative ！とりあえずハリーポッタ図鑑作ってみるか〜🤪]]></title><description><![CDATA[
+ はじめに
+こんにちは！
+てるし〜です！
+本日はReactNativeの記事になります。
+社会人になって初めてアサインされた案件がReactNativeでそこから約一年が経ちました(現在2024/5)。
+案件終了後触ることがなくずっとNext.jsを触っていました。
+しかし、React conf 2024を見てかなりReactNativeの発表が多く「久々に触って遊ぶか〜」と思ったので触ってみたら色々変わってて目が飛び出ました🤯
+作ったものとしてはハリーポッタ図鑑です。
+ReactNativeとExpoを使って作りました。
+以前、Next.jsで作った記事があるのでそちらも是非ご覧くだ...]]></description><link>https://zenn.dev/terusi/articles/9cfca3c1a131c4</link><guid isPermaLink="true">https://zenn.dev/terusi/articles/9cfca3c1a131c4</guid><pubDate>Sun, 19 May 2024 06:02:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--98k9MeoA--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590ReactNative%252CExpo%252C%25E3%2583%258F%25E3%2583%25AA%25E3%2583%25BC%25E3%2583%259D%25E3%2583%2583%25E3%2582%25BFAPI%25E3%2580%2591%25E4%25B9%2585%25E3%2581%2597%25E3%2581%25B6%25E3%2582%258AReactNative%2520%25EF%25BC%2581%25E3%2581%25A8%25E3%2582%258A%25E3%2581%2582%25E3%2581%2588%25E3%2581%259A%25E3%2583%258F%25E3%2583%25AA%25E3%2583%25BC%25E3%2583%259D%25E3%2583%2583%25E3%2582%25BF%25E5%259B%25B3...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A6%25E3%2582%258B%25E3%2581%2597%25E3%2580%259C%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRlM2M5MzkyNjguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>てるし〜</dc:creator></item><item><title><![CDATA[Cloud9(linux2023)をTypeScriptが実行できる環境にする]]></title><description><![CDATA[
+ やること
+Cloud9を、TypeScriptが実行できる環境にするセットアップ手順です。
+
+ 環境
+用意したCloud9の情報です。
+
+
+
+項目
+設定値
+
+
+
+
+プラットフォーム
+Amazon Linux 2023
+
+
+インスタンスタイプ
+t3.small
+
+
+
+パブリックサブネットに構築しました。
+
+ セットアップ手順
+セットアップは簡単。以下のコマンドを実行するだけです。
+nvm install node
+nvm use node
+npm install -g typescript
+セットアップコマンド実行後の各モジュールのバージョンはこれでした。
+$ npm --versio...]]></description><link>https://zenn.dev/zgw426/articles/321bbc2f4640c3</link><guid isPermaLink="true">https://zenn.dev/zgw426/articles/321bbc2f4640c3</guid><pubDate>Sun, 19 May 2024 02:38:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--w0q8w29v--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Cloud9%2528linux2023%2529%25E3%2582%2592TypeScript%25E3%2581%258C%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258B%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:suo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E5OWNjMjMzNTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>suo</dc:creator></item><item><title><![CDATA[ボタンコンポーネントは難しいよ]]></title><description><![CDATA[
+ 見た目はボタン、中身は〇〇
+ボタンコンポーネントと一言で言っても「見た目はボタン、中身は〇〇」のような見た目と中身が一致しないケースがしばしば見受けられます。
+例えば、次のケースは日常的に特に遭遇することが多いです。
+
+ボタンに見えて button タグ
+ボタンに見えて a タグ
+
+上記に加え、Nuxt や Next.js を使用する場合、次のようなパターンも想定することができます。
+
+ボタンに見えて NuxtLink コンポーネント
+ボタンに見えて Link コンポーネント
+
+他にも様々なケースを考慮することができます。
+
+ボタンに見えて input タグ
+ボタンに見えて summ...]]></description><link>https://zenn.dev/splendente/articles/6d9f404163f259</link><guid isPermaLink="true">https://zenn.dev/splendente/articles/6d9f404163f259</guid><pubDate>Sun, 19 May 2024 01:17:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--C2uxNV9i--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%259C%25E3%2582%25BF%25E3%2583%25B3%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%259D%25E3%2583%25BC%25E3%2583%258D%25E3%2583%25B3%25E3%2583%2588%25E3%2581%25AF%25E9%259B%25A3%25E3%2581%2597%25E3%2581%2584%25E3%2582%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Hikaru%2520Kobayashi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ2YWIxZGQ2ZGYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Hikaru Kobayashi</dc:creator></item><item><title><![CDATA[Reactでwindow.confirmのように使用できるリーダブルな確認ダイアログを作る]]></title><description><![CDATA[
+ はじめに
+ブラウザ標準のwindow.confirmを使ったことはありますか？
+
+最もシンプルな確認ダイアログを表示する方法です。
+戻り値がboolean型であり、OKボタンが押された場合はtrue、キャンセルボタンが押された場合はfalseを返します。
+カスタムフックで表現するとこんな感じ。
+
+**/components/delete-button.tsx
+const useConfirm = (message: string, onConfirm: () =&gt; void) =&gt;
+  useCallback(() =&gt; {
+    const result = w...]]></description><link>https://zenn.dev/bmth/articles/react-confirm-dialog</link><guid isPermaLink="true">https://zenn.dev/bmth/articles/react-confirm-dialog</guid><pubDate>Sat, 18 May 2024 17:49:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--PoCMHoa4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%25E3%2581%25A7window.confirm%25E3%2581%25AE%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E4%25BD%25BF%25E7%2594%25A8%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258B%25E3%2583%25AA%25E3%2583%25BC%25E3%2583%2580%25E3%2583%2596%25E3%2583%25AB%25E3%2581%25AA%25E7%25A2%25BA%25E8%25AA%258D%25E3%2583%2580%25E3%2582%25A4%25E3%2582%25A2%25E3%2583%25AD%25E3%2582%25B0%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2598%25E3%2582%2587%25E3%2581%2586%25E3%2581%2592%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YTVpY3FhSGVfOXQyWjc3YjBWV1RfWlM0MFF3MExBbS1zclhIRWtydDA9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>じょうげん</dc:creator></item></channel></rss>

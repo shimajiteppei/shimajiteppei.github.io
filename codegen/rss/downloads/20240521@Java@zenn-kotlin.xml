@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Kotlin」のフィード]]></title><description><![CDATA[Zennのトピック「Kotlin」のRSSフィードです]]></description><link>https://zenn.dev/topics/kotlin</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/0913f0325d.png</url><title>Zennの「Kotlin」のフィード</title><link>https://zenn.dev/topics/kotlin</link></image><generator>zenn.dev</generator><lastBuildDate>Tue, 21 May 2024 12:03:25 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/kotlin/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[ChromeCustomTabsってなんすか？]]></title><description><![CDATA[
+ ChromeCustomTabsってなんなの？
+
+アプリ開発者がカスタマイズされたブラウザ エクスペリエンスをアプリ内に直接追加できるようにする Android ブラウザーの機能
+アプリ内の画面としてウェブコンテンツを表示する機能
+Webコンテンツを表示する画面のUIを触れる機能
+Chromeのセキュリティ機能とプライバシー保護を継承しているためWebViewよりも安全
+2015年くらいに登場したけどあまり流行ってない機能
+正式名称はCustomTabsIntent
+（ここではChromeCustomTabsで基本書きます）
+WebViewの改良版というより、異なる目的で使用されるも...]]></description><link>https://zenn.dev/tsumire_mirise/articles/8eac7690dc3bbc</link><guid isPermaLink="true">https://zenn.dev/tsumire_mirise/articles/8eac7690dc3bbc</guid><pubDate>Tue, 21 May 2024 08:50:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--gDdSVmzr--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ChromeCustomTabs%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25AA%25E3%2582%2593%25E3%2581%2599%25E3%2581%258B%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A4%25E3%2581%25BF%25E3%2582%258C%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzYwNDA1MzdjYzAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>つみれ</dc:creator></item><item><title><![CDATA[KMP Jetpack Compose で animation]]></title><description><![CDATA[LazyList で並べた Card にアニメーションを入れる。
+Card 上に配置されたボタンをタップすると、アニメーション実行。
+出来上がり画面
+
+
+ AnimatedVisibility を使います
+https://developer.android.com/develop/ui/compose/animation/composables-modifiers
+の記載通り
+
+ コード
+
+ カード全体
+
+ボタンのところ onClick で visible のステートを変更する
+
+LaunchedEffect で enter -&gt; exit するように調整。（これがないと1回タップ...]]></description><link>https://zenn.dev/heartrails/articles/6d2dae5157436c</link><guid isPermaLink="true">https://zenn.dev/heartrails/articles/6d2dae5157436c</guid><pubDate>Thu, 16 May 2024 10:23:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--DZP2hiOx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:KMP%2520Jetpack%2520Compose%2520%25E3%2581%25A7%2520animation%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:maripiyo%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y0ODIyMDRiZDMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%258F%25E3%2583%25BC%25E3%2583%2588%25E3%2583%25AC%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%25BA%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2plcElLTG9ZR1NIcnBUOEFyVkkxS2w5R2tkZFkxMEpBYWNjTWo5Qmc9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>maripiyo</dc:creator></item><item><title><![CDATA[AndroidでBLEを取得する]]></title><description><![CDATA[
+ はじめに
+BLEの仕様や取得がややこしかったのでまとめておきます。
+
+ 1.BLEについて
+
+ 1.1概要
+Bluetooth Low Energyの略で、低電力で通信が可能なものです。
+BLE機器は
+
+セントラル機器
+ペリフェラル機器
+
+に分かれます。
+セントラル機器はスマホ等のBluetooth機器に接続する側の機器(親機)
+ペリフェラル機器はイヤホン等の接続される側の機器です。(子機)
+セントラル機器はスキャンという動作を行いペリフェラル機器が発しているアドバタイズ信号を検出することにより周囲にあるBluetooth機器を検出しています。
+検出しただけでは通信は確立しておらずG...]]></description><link>https://zenn.dev/nenfa/articles/a721d0bd211257</link><guid isPermaLink="true">https://zenn.dev/nenfa/articles/a721d0bd211257</guid><pubDate>Tue, 14 May 2024 08:29:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GYIG9YKx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Android%25E3%2581%25A7BLE%25E3%2582%2592%25E5%258F%2596%25E5%25BE%2597%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25B9%25B4%25E6%2599%25AE%2540%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdkZDc2ZDJmY2QuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>年普@</dc:creator></item><item><title><![CDATA[Kotlinのout/inを整理してみた]]></title><description><![CDATA[
+ モチベーション
+そもそも整理してみようと思ったきっかけは、下記のようなケースでコンパイルエラーが出るな・・、あまりGenericsを理解できていなさそうだったので色々調べてみようと思いました。
+
+ コンパイルエラーのケース
+
+もともとやりたかったこと（コンパイルエラー）
+fun xEvent (flow: MutableSharedFlow&lt;Any&gt;) {
+    // emitしたい
+}
+
+val stringFlow = MutableSharedFlow&lt;String&gt;()
+xEvent(flow = stringFlow) // コンパイルエラーになる...]]></description><link>https://zenn.dev/matsumaru/articles/fe81dd2d9039b5</link><guid isPermaLink="true">https://zenn.dev/matsumaru/articles/fe81dd2d9039b5</guid><pubDate>Tue, 14 May 2024 01:03:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--yNbsN-6F--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Kotlin%25E3%2581%25AEout%252Fin%25E3%2582%2592%25E6%2595%25B4%25E7%2590%2586%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25BE%25E3%2581%25A4%25E3%2581%25BE%25E3%2582%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2p0cy1OSHdmSkxkLVlXbkh5VGFNWHdtUTV0NUdsWlVtUXZvWmNwTmc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>まつまる</dc:creator></item><item><title><![CDATA[Compose Multiplatformを日本一レベルで使い込んだかもしれないので知見共有]]></title><description><![CDATA[こんにちは！sugitaniと申します。
+Black Cat Carnival という新型SNSを開発中です。
+リリースはまだ先なのですがティザーサイトを先日公開しました
+Black Cat CarnivalはiOS/Androidアプリで、Compose Multiplatformを使って開発をしています。ティザーサイトではWasmを使い、サービスを体験できるBlack Cat Carnival Simulatorも公開しています。是非お試しください
+
+https://bcc.cc/ja/simulator
+このシミュレーターはシミュレーターとして作ったものではなく、一人で開発してる都...]]></description><link>https://zenn.dev/bcc/articles/2784001f75c0e2</link><guid isPermaLink="true">https://zenn.dev/bcc/articles/2784001f75c0e2</guid><pubDate>Mon, 13 May 2024 04:59:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--D8r2OfGo--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Compose%2520Multiplatform%25E3%2582%2592%25E6%2597%25A5%25E6%259C%25AC%25E4%25B8%2580%25E3%2583%25AC%25E3%2583%2599%25E3%2583%25AB%25E3%2581%25A7%25E4%25BD%25BF%25E3%2581%2584%25E8%25BE%25BC%25E3%2582%2593%25E3%2581%25A0%25E3%2581%258B%25E3%2582%2582%25E3%2581%2597%25E3%2582%258C%25E3%2581%25AA%25E3%2581%2584%25E3%2581%25AE%25E3%2581%25A7%25E7%259F%25A5%25E8%25A6%258B%25E5%2585%25B1%25E6%259C%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:sugitani%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzkwYmM4NTk3YjAuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Black%2520Cat%2520Carnival%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2EzYzFhYWI0MGYuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sugitani</dc:creator></item><item><title><![CDATA[MVVMとMVIの違いを一度で理解する]]></title><description><![CDATA[
+ オリジナル記事の作成者へのクレジット
+この記事はPhill Lackner氏のビデオを参考にして作成しました。オリジナルビデオは以下のリンクからご覧いただけます:
+https://www.youtube.com/watch?v=b2z1jvD4VMQ
+
+
+ はじめに
+ネイティブAndroid開発を学ぶ際には、MVVMとMVIという用語が避けて通れないですね。一部の人々はMVVMを使うことを絶対に主張し、他の人々はMVIがどんな種類のアプリにも最適だと言います。そして、ほとんどの人々が実際の違いを理解していないように感じますし、単に他の開発者からのイデオロギーを盲目的に追っているように...]]></description><link>https://zenn.dev/galapagos/articles/342c3a815222cb</link><guid isPermaLink="true">https://zenn.dev/galapagos/articles/342c3a815222cb</guid><pubDate>Thu, 09 May 2024 01:48:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--h0TehPqJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:MVVM%25E3%2581%25A8MVI%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%25E3%2582%2592%25E4%25B8%2580%25E5%25BA%25A6%25E3%2581%25A7%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:volod.one%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBlMWFiMTkxYzQuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2582%25AC%25E3%2583%25A9%25E3%2583%2591%25E3%2582%25B4%25E3%2582%25B9%25EF%25BC%2588%25E6%259C%2589%25E5%25BF%2597%25EF%25BC%2589%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2QwMGMwYjc2YzEuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>volod.one</dc:creator></item><item><title><![CDATA[Spring Framework 6.2 になると @Transactionalで検査例外もロールバックするための設定が増える (予定)]]></title><description><![CDATA[Spring Frameworkの @Transactional は、デフォルトで
+「非検査例外(RuntimeExceptionおよびそのサブクラス)ならロールバックする」
+という挙動です。(2024/05現在)
+Spring Framework 6.2からは設定項目が増え、アプリ全体での設定として「全ての例外でロールバックする」と指定できるようになる見込みなので、現行の挙動の整理とあわせて紹介します。
+
+ 対象読者
+
+Spring Frameworkの @Transactional でトランザクション制御をしてDBアクセスしている
+次のいずれかにあてはまる
+
+Kotlinを使っている...]]></description><link>https://zenn.dev/wkwkhautbois/articles/55290f65d92c89</link><guid isPermaLink="true">https://zenn.dev/wkwkhautbois/articles/55290f65d92c89</guid><pubDate>Mon, 06 May 2024 12:15:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--UyAi48FF--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Spring%2520Framework%25206.2%2520%25E3%2581%25AB%25E3%2581%25AA%25E3%2582%258B%25E3%2581%25A8%2520%2540Transactional%25E3%2581%25A7%25E6%25A4%259C%25E6%259F%25BB%25E4%25BE%258B%25E5%25A4%2596%25E3%2582%2582%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%25AB%25E3%2583%2590%25E3%2583%2583%25E3%2582%25AF%25E3%2581%2599%25E3%2582%258B%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%258F%25E3%2581%258F%25E3%2582%258F%25E3%2581%258F%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzlhYTM1ODdlOWIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>わくわく</dc:creator></item><item><title><![CDATA[手動で Kotlin Multiplatform を利用した Kotlin の multi project を作成した]]></title><description><![CDATA[
+ 概要
+本記事では、Kotlin で multi project を作成する際に、Kotlin Multiplatform（KMP）を利用した構成で作成しました。
+うまく、Intellij IDEA を利用して作成できなかったため、備忘録としてまとめます。
+
+ 手順
+以下の手順で実装できました。
+
+プロジェクトの新規作成
+version catalog で Kotlin Multiplatform を導入
+settings.gradle.kts に multi project の対象ディレクトリを記述
+multi project にするディレクトリを作成して、build.gradle....]]></description><link>https://zenn.dev/msksgm/articles/20240506-kotlin-multi-project-by-hand</link><guid isPermaLink="true">https://zenn.dev/msksgm/articles/20240506-kotlin-multi-project-by-hand</guid><pubDate>Mon, 06 May 2024 08:29:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Xxbub16t--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%2589%258B%25E5%258B%2595%25E3%2581%25A7%2520Kotlin%2520Multiplatform%2520%25E3%2582%2592%25E5%2588%25A9%25E7%2594%25A8%25E3%2581%2597%25E3%2581%259F%2520Kotlin%2520%25E3%2581%25AE%2520multi%2520project%2520%25E3%2582%2592%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:msk%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzlmYTlhMzFhNTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>msk</dc:creator></item><item><title><![CDATA[Kotlin のプロジェクトに version catalog を導入する]]></title><description><![CDATA[
+ 概要
+本記事では、Kotlin のプロジェクトに version catalog を導入する方法を記載します。
+https://docs.gradle.org/current/userguide/platforms.html
+
+ version catalog について
+version catalog は gradle の機能の 1 つです。
+build.gradle.kts に記載する package やバージョンを ./gradle/libs.versions.toml に記載し、参照するようにします。
+導入することで以下のメリットがあります。
+
+IDE サポートが受けられる
+マ...]]></description><link>https://zenn.dev/msksgm/articles/20240505-kotlin-version-catalog</link><guid isPermaLink="true">https://zenn.dev/msksgm/articles/20240505-kotlin-version-catalog</guid><pubDate>Sun, 05 May 2024 00:33:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--YjLFeeLr--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Kotlin%2520%25E3%2581%25AE%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E3%2581%25AB%2520version%2520catalog%2520%25E3%2582%2592%25E5%25B0%258E%25E5%2585%25A5%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:msk%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzlmYTlhMzFhNTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>msk</dc:creator></item><item><title><![CDATA[Komapperを使い倒してみる]]></title><description><![CDATA[tips集です
+
+ 動的に条件文を作成する処理を共通化する
+例として、from-toのPairで、動的にbetweenと&lt;=と&gt;=を切り替えるものを作ってみます。
+from-toの両方を指定したり、fromだけ指定したかったり、toだけを指定したかったりということができるようになります。
+class ConditionExtension&lt;F : FilterScope&lt;F&gt;&gt;(
+    val filterScope: FilterScope&lt;F&gt;
+) {
+    infix fun &lt;T : Comparable&lt;T&gt;,...]]></description><link>https://zenn.dev/momosetkn/articles/4f77a5c4bcdd6b</link><guid isPermaLink="true">https://zenn.dev/momosetkn/articles/4f77a5c4bcdd6b</guid><pubDate>Thu, 02 May 2024 13:54:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--eMaTaO_X--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Komapper%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2584%25E5%2580%2592%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:momosetkn%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY3YzAxY2Q0MTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>momosetkn</dc:creator></item><item><title><![CDATA[コズムのバックエンド技術にKotlin,Ktorを選んだ理由その①]]></title><description><![CDATA[
+ はじめに
+こんにちは。
+株式会社コズムCTO内藤と申します。
+バックエンドの技術選定にお悩み中やコズムに興味を持ってくださった開発者の方に向けて、
+弊社バックエンド開発におけるメイン言語として Kotlin/Ktor を採用したときの着眼点についてお伝えできればと存じます。
+プログラマー三大美徳のひとつ “laziness” にのっとり、Kotlinとは？といった内容は省きます。
+きになるかたはぜひオフィシャルサイトをご確認ください。
+Kotlin / Ktor
+
+ 課題感
+まずは弊社の状況とバックエンド開発で抱えている課題感をお伝えできればと存じます。
+弊社は創業から1年半ほど、さ...]]></description><link>https://zenn.dev/cosmcorp/articles/d65c1f3da01ebb</link><guid isPermaLink="true">https://zenn.dev/cosmcorp/articles/d65c1f3da01ebb</guid><pubDate>Thu, 02 May 2024 09:49:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--rWFkXIBn--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B3%25E3%2582%25BA%25E3%2583%25A0%25E3%2581%25AE%25E3%2583%2590%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2589%25E6%258A%2580%25E8%25A1%2593%25E3%2581%25ABKotlin%252CKtor%25E3%2582%2592%25E9%2581%25B8%25E3%2582%2593%25E3%2581%25A0%25E7%2590%2586%25E7%2594%25B1%25E3%2581%259D%25E3%2581%25AE%25E2%2591%25A0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2582%25B3%25E3%2582%25BA%25E3%2583%25A0%25E5%2586%2585%25E8%2597%25A4%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY2MWZmNjBmZjUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2582%25B3%25E3%2582%25BA%25E3%2583%25A0%2Cx_220%2Cy_160/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>コズム内藤</dc:creator></item><item><title><![CDATA[AndroidからPresigned URLを使ってS3に画像をアップロードする]]></title><description><![CDATA[業務にてPresigned URLを用いたアップロードを行ったのですが一部詰まったところがあったため記事に起こします。
+
+ Presigned URLとは
+PresignedURLとはAWSのS3に関する機能の一つです。
+特別な権限なしにS3へのアップロード・ダウンロードを行うことができる署名付きURLを発行してくれます。
+Presigned URLを使うことで以下のような恩恵を受けることができます。
+
+クライアントサイドから直接画像のアップロード・ダウンロードを行うことができる
+URLに有効期限があるため、セキュリティリスクも比較的低く抑えることができる
+
+
+ Presigned UR...]]></description><link>https://zenn.dev/wansuko_cmd/articles/bdfe7a2490574e</link><guid isPermaLink="true">https://zenn.dev/wansuko_cmd/articles/bdfe7a2490574e</guid><pubDate>Thu, 02 May 2024 02:41:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bNY1e-hT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Android%25E3%2581%258B%25E3%2582%2589Presigned%2520URL%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6S3%25E3%2581%25AB%25E7%2594%25BB%25E5%2583%258F%25E3%2582%2592%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2589%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Wansuko-cmd%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNkNzUxZTYwNWMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Wansuko-cmd</dc:creator></item><item><title><![CDATA[Reladomoを活用して適用期間と履歴データの偶有的複雑性を隠蔽する]]></title><description><![CDATA[!
+この記事は毎週必ず記事がでるテックブログ "Loglass Tech Blog Sprint" の 37 週目の記事です！
+1 年間連続達成まで 残り 16 週 となりました！
+
+みなさんこんにちは。ログラスでVPoEをしているいとひろと申します。
+本記事では、ReladomoというJavaのORMライブラリを活用すると、「適用期間」や「履歴データ」といった概念を扱う際に生じる偶有的複雑性を吸収することができるよ、というお話を書こうと思います。
+最近、杉本啓（@sugimoto_kei） 氏が執筆した「データモデリングでドメインを駆動する──分散／疎結合な基幹系システムに向けて」とい...]]></description><link>https://zenn.dev/loglass/articles/7e431053758479</link><guid isPermaLink="true">https://zenn.dev/loglass/articles/7e431053758479</guid><pubDate>Thu, 02 May 2024 00:21:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ft9tWFYQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Reladomo%25E3%2582%2592%25E6%25B4%25BB%25E7%2594%25A8%25E3%2581%2597%25E3%2581%25A6%25E9%2581%25A9%25E7%2594%25A8%25E6%259C%259F%25E9%2596%2593%25E3%2581%25A8%25E5%25B1%25A5%25E6%25AD%25B4%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2581%25AE%25E5%2581%25B6%25E6%259C%2589%25E7%259A%2584%25E8%25A4%2587%25E9%259B%2591%25E6%2580%25A7%25E3%2582%2592%25E9%259A%25A0%25E8%2594%25BD%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Hiroshi%2520Ito%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRlNWQ4ZTRjZjguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2582%25B9%2520%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2o4el9OWkhnaC03WGpBcUhFZm1saXA2LVJUcGt2UFAxSGxpZFRqMkE9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Hiroshi Ito</dc:creator></item><item><title><![CDATA[Jetpack Composeでログイン状態を維持する]]></title><description><![CDATA[
+ 🤔やってみたいこと
+Jetpack Comopseで、FirebaseAuthを使用して、ログインした後ログイン状態を維持する機能を実装したい。
+こちらの記事の内容を改造する
+https://zenn.dev/jboy_blog/articles/811bb8941d13e9
+公式によると、ユーザーの情報を取得すればトークンを取得することができ、ログインの維持をするのを実現することができます。
+https://firebase.google.com/docs/auth/android/manage-users?hl=ja#get_the_currently_signed-in_use...]]></description><link>https://zenn.dev/joo_hashi/articles/18b8429acba3b1</link><guid isPermaLink="true">https://zenn.dev/joo_hashi/articles/18b8429acba3b1</guid><pubDate>Wed, 01 May 2024 13:26:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--P0KPwIQY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Jetpack%2520Compose%25E3%2581%25A7%25E3%2583%25AD%25E3%2582%25B0%25E3%2582%25A4%25E3%2583%25B3%25E7%258A%25B6%25E6%2585%258B%25E3%2582%2592%25E7%25B6%25AD%25E6%258C%2581%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:JboyHashimoto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNjOTBiY2M0M2YuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>JboyHashimoto</dc:creator></item><item><title><![CDATA[[Android] AdMob(バナー広告) + Jetpack Compose]]></title><description><![CDATA[2024年の5月現在いまだにAdMobはJetpack Composeに対応していないのでどう書くかわからなかったのでメモ
+https://developers.google.com/admob/android/quick-start?hl=ja
+依存の追加
+libs.versions.toml
+[versions]# adMob
+admob = { group = "com.google.android.gms", name = "play-services-ads", version.ref = "ads"}
+build.gradle.kts
+dependencies {
+........]]></description><link>https://zenn.dev/giglancer/articles/1c53c33f45b3ff</link><guid isPermaLink="true">https://zenn.dev/giglancer/articles/1c53c33f45b3ff</guid><pubDate>Sun, 28 Apr 2024 05:05:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Uc6qjt0b--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BAndroid%255D%2520AdMob%2528%25E3%2583%2590%25E3%2583%258A%25E3%2583%25BC%25E5%25BA%2583%25E5%2591%258A%2529%2520%252B%2520Jetpack%2520Compose%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:apollo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBjZmZlZTVlZjQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>apollo</dc:creator></item><item><title><![CDATA[【Android】Rich Text EditorのCompose Rich Editorを試す]]></title><description><![CDATA[
+ 概要
+AndroidでRich Text Editorを実装する際に、良さげなライブラリを探していた所 Compose Rich Editor がComposeで扱いやすそうだったので試してみました。
+※ Compose Multiplatform 対応との事ですが今回はAndroidのみでしか試してません。
+
+ 動作環境
+
+M3 MacBook Air 14.4.1
+Android Studio Iguana | 2023.2.1 Patch 1
+エミュレータ: Pixel 8 Pro API Level VanillalceCream
+
+
+ ベースとなるプロジェクト作成
+
+
+「N...]]></description><link>https://zenn.dev/slowhand/articles/d6a2d031dc717f</link><guid isPermaLink="true">https://zenn.dev/slowhand/articles/d6a2d031dc717f</guid><pubDate>Sat, 27 Apr 2024 21:38:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--opznjmgQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Android%25E3%2580%2591Rich%2520Text%2520Editor%25E3%2581%25AECompose%2520Rich%2520Editor%25E3%2582%2592%25E8%25A9%25A6%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:slowhand%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzEwY2YzMGUzMDAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>slowhand</dc:creator></item><item><title><![CDATA[OpenAPI Generator Gradle PluginsをAndroidプロジェクトに導入する]]></title><description><![CDATA[先日、OpenAPI Generator Gradle Pluginsの導入を行いました。
+コードの生成自体は非常に役に立ったのですが、詰まるところがあったため記事に起こします。
+
+ OpenAPI Generatorとは
+OpenAPI Specificationに従って書かれたyamlから、通信部分のコードを生成してくれるプログラムです。本家のGithubから対応している言語など確認することができます。
+
+ 依存関係を追加
+OpenAPI Generator Gradle Pluginsはその名の通り、Gradleのプラグインとして用意されています。
+build.gradle.kts...]]></description><link>https://zenn.dev/wansuko_cmd/articles/7fbf4420d48160</link><guid isPermaLink="true">https://zenn.dev/wansuko_cmd/articles/7fbf4420d48160</guid><pubDate>Thu, 25 Apr 2024 15:30:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--SWn99auN--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:OpenAPI%2520Generator%2520Gradle%2520Plugins%25E3%2582%2592Android%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E3%2581%25AB%25E5%25B0%258E%25E5%2585%25A5%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Wansuko-cmd%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNkNzUxZTYwNWMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Wansuko-cmd</dc:creator></item><item><title><![CDATA[Kotlin: 勉強メモ]]></title><description><![CDATA[
+ ラムダ
+!
+ラムダ式とは：
+ラムダは関数を簡潔に記述するための構文であり、処理自体を関数に渡すことで動的な振る舞いを可能にします。ラムダ式を使うと無名関数を、変数に代入したり引数として渡したりすることができます。ラムダ式は高次関数または高階関数と表現されます。
+（高階関数：　他の関数を引数に取るか結果として関数を返す関数）
+
+書式：{ 引数 -&gt; 処理 }
+fun double(x: Int, doSomething: (Int) -&gt; Unit): Int {
+	doSomething(x) // ①
+	return x * 2   // ②
+}
+この場合、次のことがシ...]]></description><link>https://zenn.dev/kkne/articles/2cfb46ea7cb691</link><guid isPermaLink="true">https://zenn.dev/kkne/articles/2cfb46ea7cb691</guid><pubDate>Thu, 25 Apr 2024 08:40:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--q2SNJw4m--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:Kotlin%253A%2520%25E5%258B%2589%25E5%25BC%25B7%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kkne%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA1N2M3NDVhYjYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kkne</dc:creator></item><item><title><![CDATA[Ktor Plugin Registryに自作プラグインを公開しよう]]></title><description><![CDATA[
+ Ktor Plugin Registryについて
+先日、Ktor Plugin RegistryというものがJetbrainsの公式Blogにて発表されました。
+https://blog.jetbrains.com/kotlin/2024/04/the-ktor-plugin-registry/
+自作のKtorプラグインを公開することで、これまでは公式プラグインのみが選択できたKtor Project GeneratorやIntelliJ IDEAのKtorプロジェクト生成画面に自作プラグインを加えることができます。
+以前Ktorを使ってLINE Botを作ったことがあり、Webho...]]></description><link>https://zenn.dev/cotrin1208/articles/5dced3929a1923</link><guid isPermaLink="true">https://zenn.dev/cotrin1208/articles/5dced3929a1923</guid><pubDate>Tue, 23 Apr 2024 18:08:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6LdrXE9X--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ktor%2520Plugin%2520Registry%25E3%2581%25AB%25E8%2587%25AA%25E4%25BD%259C%25E3%2583%2597%25E3%2583%25A9%25E3%2582%25B0%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%2592%25E5%2585%25AC%25E9%2596%258B%25E3%2581%2597%25E3%2582%2588%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2593%25E3%2581%25A8%25E3%2582%258A%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSVpWb1ducWY3b0VtUTJTYUVhSTVCaEdoOGJYUHk5OVFxazJGN25vWHZXNnJzPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ことりん</dc:creator></item><item><title><![CDATA[Androidのleakcanaryを導入してみた]]></title><description><![CDATA[
+ leakcanaryとは
+Android用のメモリリーク検出ライブラリ です。
+https://square.github.io/leakcanary/
+
+ 導入手順
+
+「build.gradle.kts」に追記
+
+dependencies {
+
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.material)
+    implementation(libs.androidx.activity)
+    imp...]]></description><link>https://zenn.dev/yt_hsgw/articles/d8d12d4c65c500</link><guid isPermaLink="true">https://zenn.dev/yt_hsgw/articles/d8d12d4c65c500</guid><pubDate>Fri, 19 Apr 2024 07:17:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--VS43eMEd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Android%25E3%2581%25AEleakcanary%25E3%2582%2592%25E5%25B0%258E%25E5%2585%25A5%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yt_hsgw%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RlMDI2NGQ0NWIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yt_hsgw</dc:creator></item></channel></rss>
