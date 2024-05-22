@@ -28,7 +28,7 @@
 
 2012年、高校2年生のときにJava 7のSwingで作ったライフゲームです。
 
-いまではブラウザでJavaを動かせなくなってしまいましたが、このページでは[CheerpJ](https://leaningtech.com/cheerpj/)というJavaのGUI環境を提供するWasmライブラリを使って表示しています。CheerpJが日本語未対応のため文字化けしております（ごめんちょ）。jarを[こちら](/javascripts/life-jar/Life.jar)からダウンロードしてデスクトップアプリとして実行していただくと文字化け無しで遊べます。
+いまではブラウザでJavaを動かせなくなってしまいましたが、このページでは[CheerpJ](https://leaningtech.com/cheerpj/)というJavaのGUI環境を提供するWasmライブラリを使って表示しています。jarを[こちら](/javascripts/life-jar/Life.jar)からダウンロードしてデスクトップアプリとしても実行できます。
 
 ## 昔話
 
