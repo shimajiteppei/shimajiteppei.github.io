@@ -14,8 +14,9 @@
         "tool:update_node": "volta pin node@latest && volta pin npm@latest",
         "tool:update_package": "npm update",
         "tool:build_docker": "docker build -t my-blog-mkdocs-material:latest .",
-        "tool:gen_xp-css": "sh codegen/xp-css/generate.sh docs/stylesheets/xp.scss && sass --no-source-map docs/stylesheets/xp.scss docs/stylesheets/xp.css",
+        "tool:gen_xp-css": "sh codegen/xp-css/generate.sh && sass --no-source-map codegen/xp-css/xp.scss docs/stylesheets/xp.css",
         "tool:gen_rss": "sh codegen/rss/generate.sh && mv codegen/rss/dist/rss.md docs/rss.md",
+        "tool:gen_webp": "sh codegen/webp/generate.sh",
         "tool:format": "prettier . --write",
         "tool:lint": "textlint docs",
         "tool:check_dead_link": "find docs -type f -not -path '*/drafts/*' -name '*.md' | xargs npx markdown-link-check --quiet --config markdown-link-check.json"
@@ -34,7 +35,7 @@
         "textlint-rule-spellcheck-tech-word": "latest"
     },
     "volta": {
-        "node": "22.1.0",
-        "npm": "10.7.0"
+        "node": "22.2.0",
+        "npm": "10.8.0"
     }
 }

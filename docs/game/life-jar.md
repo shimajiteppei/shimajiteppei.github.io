@@ -1,34 +1,34 @@
 # ライフゲーム（高校時代版）
 
 <div class="xp-css" style="width: 100%; display: flex; flex-direction: column;">
-<div class="window">
-<div class="title-bar" style="padding: 16px">
-<div class="title-bar-text">
-</div>
-<div class="title-bar-controls">
-<button
-  aria-label="Maximize"
-  onclick="document.getElementById('life-jar_content').requestFullscreen()"
->
-</button>
-</div>
-</div>
-<div class="window-body" style="margin: 16px;">
-<iframe
-  id="life-jar_content"
-  src="../../javascripts/life-jar/index.html"
-  width="100%"
-  height="600"
-  loading="lazy"
-  allowfullscreen>
-</iframe>
-</div>
-</div>
+  <div class="window">
+    <div class="title-bar" style="padding: 16px">
+      <div class="title-bar-text">
+      </div>
+      <div class="title-bar-controls">
+        <button
+          aria-label="Maximize"
+          onclick="document.getElementById('life-jar_content').requestFullscreen()"
+        >
+        </button>
+      </div>
+    </div>
+    <div class="window-body" style="margin: 16px;">
+      <iframe
+        id="life-jar_content"
+        src="/javascripts/life-jar/index.html"
+        width="100%"
+        height="600"
+        loading="lazy"
+        allowfullscreen>
+      </iframe>
+    </div>
+  </div>
 </div>
 
 2012年、高校2年生のときにJava 7のSwingで作ったライフゲームです。
 
-いまではブラウザでJavaを動かせなくなってしまいましたが、このページでは[CheerpJ](https://leaningtech.com/cheerpj/)というJavaのGUI環境を提供するWasmライブラリを使って表示しています。CheerpJが日本語未対応のため文字化けしております（ごめんちょ）。jarを[こちら](../../javascripts/life-jar/Life.jar)からダウンロードしてデスクトップアプリとして実行していただくと文字化け無しで遊べます。
+いまではブラウザでJavaを動かせなくなってしまいましたが、このページでは[CheerpJ](https://leaningtech.com/cheerpj/)というJavaのGUI環境を提供するWasmライブラリを使って表示しています。CheerpJが日本語未対応のため文字化けしております（ごめんちょ）。jarを[こちら](/javascripts/life-jar/Life.jar)からダウンロードしてデスクトップアプリとして実行していただくと文字化け無しで遊べます。
 
 ## 昔話
 

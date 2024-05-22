@@ -13,7 +13,7 @@ const RIGHTBtnKey = "ArrowRight";
 
 // start nes
 await init();
-const res = await fetch("../../javascripts/nes/Alter_Ego.nes");
+const res = await fetch("/javascripts/nes/Alter_Ego.nes");
 const buf = await res.arrayBuffer();
 const ctx = new WindowContext("canvas", new Uint8Array(buf));
 
