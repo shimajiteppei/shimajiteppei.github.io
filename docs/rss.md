@@ -11,8 +11,14 @@ GitHub Actionsで定期的にRSSを購読する[osmos::feed](https://github.com/
 
 ## Rust
 
+### 20240524
+
+- [プロジェクト内の様々な確認を行う：cargo-denyメモ [blessed.rsシリーズ11]](https://zenn.dev/kotabrog/articles/4d971167af4664)
+
 ### 20240523
 
+- [Rustのお勉強 #1  環境構築編](https://qiita.com/_sebastian/items/65fb050beab87238d74f)
+- [オブジェクト指向を学ばなかった話](https://qiita.com/adaiimps/items/e04ae03371435aeffe87)
 - [RustとEmbassyでKeyballのファームウェアを作った](https://zenn.dev/nazo6/articles/keyball-embassy-rp2040)
 - [OpenTelemetry と OpenObserve でトレースとログを可視化してみた](https://zenn.dev/pyama2000/articles/0ad0e8db11d854)
 
@@ -111,6 +117,17 @@ GitHub Actionsで定期的にRSSを購読する[osmos::feed](https://github.com/
 
 
 ## Java
+
+### 20240524
+
+- [コード内のエラー箇所特定のための、原因切り分け法のメモ](https://qiita.com/heppoko_engineer_minarai/items/6e043a391f8711ccc540)
+- [JavaでMarkdown形式をWord文書やPDF形式に変換する方法](https://qiita.com/iceblue/items/ee1f1797f632f6ff6f9b)
+- [[Google Address Validation API(V1)] Javaで住所を検証して結果をフィードバックする](https://qiita.com/doran/items/72ba71149395a74f5568)
+- [JavaでLRUキャッシュの実装](https://qiita.com/arihori13/items/2b46cad1ab0cdefd376c)
+- [【KotlinConf '24】Keynoteを見てAndroidエンジニアの視点で記憶に残ったこと](https://qiita.com/maxfie1d/items/df3b6e3b586c8e70b8b0)
+- [Amper / Kotlin](https://qiita.com/shokkaa/items/b3b0e3454d00c2a5b329)
+- [Javaクラスの基礎](https://zenn.dev/greenwakame/articles/1749ecd5cff5ae)
+- [Androidで環境変数を使用する](https://zenn.dev/nenfa/articles/67e4112bfc9665)
 
 ### 20240523
 
@@ -281,6 +298,27 @@ GitHub Actionsで定期的にRSSを購読する[osmos::feed](https://github.com/
 
 
 ## Linux
+
+### 20240524
+
+- [Dockerでローカルに分析環境を整える方法](https://qiita.com/live_in_2107/items/43fecec65f17e3240324)
+- [Docker で PostgreSQL を使いたい](https://qiita.com/domodomodomo/items/087404b3242688dffeac)
+- [DjangoでTodoListを作った話](https://qiita.com/maooz4426/items/c03dbcedcf0c4276f80c)
+- [Rails - Docker上の Rspec を Makefile から実行する書き方の例](https://qiita.com/YumaInaura/items/5dd7336d24fa693450d9)
+- [[Linux] Linuxディストリビューションとは](https://qiita.com/Jochun/items/3a83d821ef0f8c1b50e9)
+- [【RHEL】最新のRHEL9.4を使ってDNS兼NTPサーバを構築する](https://qiita.com/tomotomo_1D/items/0f03aab5a58c0d5c643e)
+- [デバイスファイルの名前](https://qiita.com/masatom86650860/items/b20b139cb82a1eea4ffc)
+- [【KVM入門①】〜KVMを使って仮想マシンを作成する〜](https://qiita.com/ryutarom128/items/a31cc4e296442cd0f9d6)
+- [Mbed StudioがUbuntuで動かない!!!](https://qiita.com/kzs321kzs/items/0b8727cf34ac77733bf4)
+- [UbuntuにSlackを入れる](https://qiita.com/Marron-chan/items/aea5324a48106a80749d)
+- [DockerでIPアドレスが枯渇した時の対処法](https://zenn.dev/nazo6/articles/docker-ip-not-available)
+- [gdrive で CLI から google drive を操る](https://zenn.dev/smznh/articles/eb468c55bfaf0e)
+- [Zabbix ディスカバリーで特定のサービス監視を除外する方法](https://zenn.dev/zuzuzu/articles/zabbix_exclude_service)
+- [【ネットワーク】ルートテーブルを確認する](https://zenn.dev/code_journey_ys/articles/a562b5ebf8ef8c)
+- [新MacでLinux VM版：Kubuntu24.04LTS ⑧ Network](https://zenn.dev/armcore/articles/kubuntu2404_8)
+- [GithubActionsで、shellを外部ファイルに切り出す](https://zenn.dev/morayl/articles/ca06c1ea93161a)
+- [型安全なシェルスクリプトを書けるプログラミング言語Amberを使ってみた](https://zenn.dev/arapower/articles/ad99eeb8c317df)
+- [Play with OpenCV で遊ぼう](https://zenn.dev/manyan3/articles/711e083fdbb917)
 
 ### 20240523
 
@@ -618,6 +656,16 @@ GitHub Actionsで定期的にRSSを購読する[osmos::feed](https://github.com/
 
 ## Python
 
+### 20240524
+
+- [Google Colab上で実行しているループをボタンで止める](https://qiita.com/Kuramubon/items/19fc586de1b930d51b15)
+- [Pythonを使用してPDFファイルからテーブルをバッチ抽出する方法](https://qiita.com/iceblue/items/8fbecd8133884f892cab)
+- [【Flet】Routeを使用して、画面切り替えを実装](https://qiita.com/oriefield/items/b1e51eca000a2ce1d552)
+- [PythonがOpenSSL周りのエラーで動かない](https://qiita.com/mu5dvlp/items/5c40911e0d5300341392)
+- [GoogleのGemini 1.5 FlashをAPIから試す](https://zenn.dev/meson/articles/get-started-gemini-api)
+- [MNISTをCUDAで学習して、DirectMLで推論する](https://zenn.dev/404cnf/articles/25854709c4900b)
+- [LM StudioとDiscord.pyを活用してローカルLLMが応答するインテリジェントDiscordボットの構築方法](https://zenn.dev/toki_mwc/articles/ce33994dc43c83)
+
 ### 20240523
 
 - [neovim で venv 環境の pyright LSP を使う](https://qiita.com/Tsukina_7mochi/items/abd7dfd7fb09d8f6957e)
@@ -824,6 +872,33 @@ GitHub Actionsで定期的にRSSを購読する[osmos::feed](https://github.com/
 
 
 ## Web
+
+### 20240524
+
+- [ボタンをゲーミング化](https://qiita.com/kelp-of-truth/items/213fc49ab7280d910930)
+- [HTMLとCSSを使ったレスポンシブデザインの実装方法](https://qiita.com/s_suzuki_eeen/items/5b5c2b6cd3faeb923ee6)
+- [CSS Anchor Positioning のきほん！](https://qiita.com/degudegu2510/items/b124213e05fb7efa328a)
+- [【AOS.js】スクロールアニメーションの紹介](https://qiita.com/k_yuduha/items/566e91dd33619d5a7434)
+- [「同じものを含む順列」その総数を求める（練習）](https://qiita.com/raster-Q/items/cd50ffa42f363de59af0)
+- [Google Colab上で実行しているループをボタンで止める](https://qiita.com/Kuramubon/items/19fc586de1b930d51b15)
+- [Materialize Tooltips のメッセージを動的に変更する](https://qiita.com/Koji_Hataya/items/71e06ea5db732782f76d)
+- [@testing-library/reactを使ってモーダル実装コードをテストする](https://qiita.com/w-tdon/items/19cf05f6d3c951d970a9)
+- [[Vue3]テトリスを作ろう(実装編①)](https://qiita.com/naitoyuma/items/8f980f4884c90ab6530d)
+- [rss-parserで複数のメディアのサムネイルを取得して表示する](https://qiita.com/unotame/items/72713941f7d1a4f60ce0)
+- [ReactユーザーがNext.jsを勉強する](https://qiita.com/hiropen/items/6772e358447f503238ba)
+- [抽象クラスとその使い方 - TypeScript](https://qiita.com/yuu_7_ns/items/2f76a8b084ba1641d15d)
+- [【React】3つの「propsの渡し方」から理解する、分割代入](https://zenn.dev/yamap_web/articles/c197f56924b3fa)
+- [【JavaScript】Map オブジェクトについてのまとめ](https://zenn.dev/sato_frontend/articles/2cc7e1890d46c7)
+- [メモ Next.js TypeScript 自作WebApp](https://zenn.dev/jim_soros/articles/2c3c6af78747a7)
+- [TSKaigi 2024へ参加してきました](https://zenn.dev/teamlab_fe/articles/6482b6e6e6000b)
+- [その関数ほんとに全部わかってますか? ~Effectの実例を添えて~](https://zenn.dev/forcia_tech/articles/202405_hatano_effect_ts)
+- [Hono + Cloudflare WorkersでserveStaticしている時のvitestの設定](https://zenn.dev/mierune/articles/618b2d7163a09d)
+- [TypeScript で LangChain で 簡易LLMアプリを構築](https://zenn.dev/hayato94087/articles/6473368cb6457e)
+- [Supabaseでの認証ユーザー追加時にデータ挿入エラーの解決方法](https://zenn.dev/kou_kawa/articles/39-nextjs-supabase-oauth-error)
+- [karabiner.tsがとてもいいぞ](https://zenn.dev/ryoppippi/articles/85373aaf0c92e0)
+- [メモアプリ by TypeScript](https://zenn.dev/jp_ymatsumoto/books/memo-app-by-ts)
+- [Nextjs(App Router)✖️Nest(graphql)✖️Auth0を用いた認証基盤の作成　〜実装編〜](https://zenn.dev/naginagi124/articles/b24493a04d6ec4)
+- [BlockNoteで文字数制限しようとしたら思ったより深くまで潜る必要があったので、せっかくなのでまとめてみる](https://zenn.dev/ryple/articles/49881fdb2fef51)
 
 ### 20240523
 

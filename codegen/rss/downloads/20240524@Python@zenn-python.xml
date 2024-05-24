@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Fri, 24 May 2024 08:38:43 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[GoogleのGemini 1.5 FlashをAPIから試す]]></title><description><![CDATA[
+
+ 概要
+最近はAIの発展が早すぎて目が話せませんね。つい先日もOpenAIがGPT-4oを発表したと思ったら、GoogleがGemini 1.5 ProやAI Teammateを発表したり。どんどんと便利になっていくAIにワクワクが止まりません。
+この記事は、ホットトピックである「マルチモーダル」な機能を使ってみた記事です。Google Colab上で動くものを作ったので、ぜひご自身でも試してみてください。
+https://colab.research.google.com/drive/1Xkx5KRJO4p9q_vPNkoGQTrFGYeDvEMUm?usp=sharing
+今回作...]]></description><link>https://zenn.dev/meson/articles/get-started-gemini-api</link><guid isPermaLink="true">https://zenn.dev/meson/articles/get-started-gemini-api</guid><pubDate>Thu, 23 May 2024 22:48:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--i7vTa0tb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Google%25E3%2581%25AEGemini%25201.5%2520Flash%25E3%2582%2592API%25E3%2581%258B%25E3%2582%2589%25E8%25A9%25A6%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:MESON%2520Tech%2520Blog%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y2NWFhYzQzZWUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>MESON Tech Blog</dc:creator></item><item><title><![CDATA[MNISTをCUDAで学習して、DirectMLで推論する]]></title><description><![CDATA[古典的な、機械学習のサンプルであるMNISTをCUDAで学習して、DirectMLで推論してみます。
+まず、CUDAで学習するコードを示します。
+# %%
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+from torchvision import datasets, transforms
+
+# ハイパーパラメータなどの設定値
+num_epochs = 10  # 学習を繰り返す回数
+num_batch = 100  # 一度に処理する画像の枚数
+learning_rate = 0.001  # 学習...]]></description><link>https://zenn.dev/404cnf/articles/25854709c4900b</link><guid isPermaLink="true">https://zenn.dev/404cnf/articles/25854709c4900b</guid><pubDate>Thu, 23 May 2024 15:28:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jr4pkpZ5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:MNIST%25E3%2582%2592CUDA%25E3%2581%25A7%25E5%25AD%25A6%25E7%25BF%2592%25E3%2581%2597%25E3%2581%25A6%25E3%2580%2581DirectML%25E3%2581%25A7%25E6%258E%25A8%25E8%25AB%2596%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:gorn%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLmRldi9pbWFnZXMvZGVmYXVsdC1wdWJsaWNhdGlvbi1hdmF0YXIucG5n%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:404%2520Circle%2520Not%2520Found%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2hIeXdFUmR2TnJESmpyZ1lRYUd3Y3hFYWhwaTVkclM1b2pNcGh3bXc9czI1MC1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>gorn</dc:creator></item><item><title><![CDATA[LM StudioとDiscord.pyを活用してローカルLLMが応答するインテリジェントDiscordボットの構築方法]]></title><description><![CDATA[
+ はじめに
+Discordはゲーマーやコミュニティ向けの人気チャットプラットフォームで、さまざまなボットを使って機能を拡張できます。しかし、ローカル環境で言語モデルをボットとして利用できるとしたら、もっと便利だと思いませんか？
+LM Studioは、ローカル環境で大規模言語モデル（LLM）を実行できるツールです。
+検索ボタンから気になる言語モデルをダウンロードできて、初心者でも比較的使いやすいです。
+このブログでは、LM Studioを使ってローカルで実行されるLLMが質問に答えるDiscordボットを構築する方法を紹介します。
+
+ 動作環境
+Windows11
+Python 3.10...]]></description><link>https://zenn.dev/toki_mwc/articles/ce33994dc43c83</link><guid isPermaLink="true">https://zenn.dev/toki_mwc/articles/ce33994dc43c83</guid><pubDate>Thu, 23 May 2024 15:05:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9MiPVPvc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:LM%2520Studio%25E3%2581%25A8Discord.py%25E3%2582%2592%25E6%25B4%25BB%25E7%2594%25A8%25E3%2581%2597%25E3%2581%25A6%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25AB%25E3%2583%25ABLLM%25E3%2581%258C%25E5%25BF%259C%25E7%25AD%2594%25E3%2581%2599%25E3%2582%258B%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2586%25E3%2583%25AA%25E3%2582%25B8%25E3%2582%25A7%25E3%2583%25B3%25E3%2583%2588Discord%25E3%2583%259C%25E3%2583%2583%25E3%2583%2588%25E3%2581%25AE%25E6%25A7%258B%25E7%25AF%2589%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:toki_mwc%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzViNzRiNzczNGIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>toki_mwc</dc:creator></item><item><title><![CDATA[なぜメソッドの引数にはselfが必要なのか]]></title><description><![CDATA[クラスのメソッドの第一引数にselfが必要な理由は、Pythonのオブジェクト指向プログラミングの基本的な設計に基づいています。具体的な理由を以下に説明します。
+
+ self の役割
+
+
+インスタンスへのアクセス
+
+
+selfは、そのメソッドが呼び出されたインスタンス自体を指します。これにより、メソッド内からそのインスタンスの属性や他のメソッドにアクセスすることができます。
+
+
+
+メソッドと関数の区別
+
+通常の関数とは異なり、クラスのメソッドはインスタンスに関連付けられています。selfを使うことで、メソッドがそのクラスのインスタンスに関連するものであることを明示します。
+
+
+
+インスタ...]]></description><link>https://zenn.dev/nyankonya/articles/d88d2ed39f2bfa</link><guid isPermaLink="true">https://zenn.dev/nyankonya/articles/d88d2ed39f2bfa</guid><pubDate>Thu, 23 May 2024 08:50:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--DyLIMH6N--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%25AA%25E3%2581%259C%25E3%2583%25A1%25E3%2582%25BD%25E3%2583%2583%25E3%2583%2589%25E3%2581%25AE%25E5%25BC%2595%25E6%2595%25B0%25E3%2581%25AB%25E3%2581%25AFself%25E3%2581%258C%25E5%25BF%2585%25E8%25A6%2581%25E3%2581%25AA%25E3%2581%25AE%25E3%2581%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AB%25E3%2582%2583%25E3%2582%2593%25E3%2581%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE1NmU0MTcwZmUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>にゃんこ</dc:creator></item><item><title><![CDATA[_instance = noneの役割]]></title><description><![CDATA[クラスの中に書かれた_instance = Noneは、そのクラスのシングルトンパターンを実装するための一部であることが多いです。シングルトンパターンは、あるクラスがただ一つのインスタンスしか持たないことを保証するためのデザインパターンです。このパターンは、インスタンスが重複して作られると問題が発生するような状況で役立ちます。
+以下に、シングルトンパターンを実装する例を示します。
+
+ シングルトンパターンの実装例
+class Singleton:
+    _instance = None
+
+    def __new__(cls, *args, **kwargs):
+        if...]]></description><link>https://zenn.dev/nyankonya/articles/8d16a29f468fad</link><guid isPermaLink="true">https://zenn.dev/nyankonya/articles/8d16a29f468fad</guid><pubDate>Thu, 23 May 2024 05:28:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--EJwAZBWK--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:_instance%2520%253D%2520none%25E3%2581%25AE%25E5%25BD%25B9%25E5%2589%25B2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AB%25E3%2582%2583%25E3%2582%2593%25E3%2581%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE1NmU0MTcwZmUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>にゃんこ</dc:creator></item><item><title><![CDATA[Faster WhisperとAWS SageMakerを活用してGPUでの高速文字起こしエンドポイントを構築する]]></title><description><![CDATA[
+ 概要
+最近の音声認識技術の進歩はすごいですね！
+特にOpenAIの最新モデルであるWhisper large-v3は、日本語の音声データでもかなりの高精度で文字起こしを行うことができ、APIも公開されています。
+ただし簡単に使用でき汎用性も高い一方で、大量に使用する場合の高コストやプライバシーの懸念もあるため、ローカル環境で効率よく高精度な文字起こしを実現するモデルが多数開発されています。
+今回は、その中でもGPUを使用した高速推論が可能な「Faster Whisper」を用いて、AWS SageMakerでカスタム文字起こしエンドポイントを構築してみたので、手順を解説していきたいと...]]></description><link>https://zenn.dev/nextbeat/articles/faster-whisper-sagemaker-gpu</link><guid isPermaLink="true">https://zenn.dev/nextbeat/articles/faster-whisper-sagemaker-gpu</guid><pubDate>Thu, 23 May 2024 05:12:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dp96oAJt--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Faster%2520Whisper%25E3%2581%25A8AWS%2520SageMaker%25E3%2582%2592%25E6%25B4%25BB%25E7%2594%25A8%25E3%2581%2597%25E3%2581%25A6GPU%25E3%2581%25A7%25E3%2581%25AE%25E9%25AB%2598%25E9%2580%259F%25E6%2596%2587%25E5%25AD%2597%25E8%25B5%25B7%25E3%2581%2593%25E3%2581%2597%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2589%25E3%2583%259D%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2588%25E3%2582%2592%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:taroshun32%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q3MzM5NTFkZmMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:nextbeat%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZlYjAwZTc4MTcuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>taroshun32</dc:creator></item><item><title><![CDATA[［AtCoder］ABC-353｜B - AtCoder Amusement Park]]></title><description><![CDATA[
+ 設問ページ
+
+🔗ABC-353 B - AtCoder Amusement Park
+
+
+
+ 提出結果
+def getIntMap():
+    return map(int, input().split())
+
+
+def getIntList():
+    return list(map(int, input().split()))
+
+
+def main():
+    n, k = getIntMap()
+    a = getIntList()
+
+    b = [0]
+    i = 0
+    for x in a:
+        if b[i] + x &lt;= k:
+...]]></description><link>https://zenn.dev/hyperdb/articles/47117c37468f8e</link><guid isPermaLink="true">https://zenn.dev/hyperdb/articles/47117c37468f8e</guid><pubDate>Thu, 23 May 2024 04:30:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xjr695Ix--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25EF%25BC%25BBAtCoder%25EF%25BC%25BDABC-353%25EF%25BD%259CB%2520-%2520AtCoder%2520Amusement%2520Park%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AF%25E3%2581%2584%25E3%2581%25B1%25E3%2581%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhODJkODgwMzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>はいぱぁ</dc:creator></item><item><title><![CDATA[［AtCoder］ABC-353｜A - Buildings]]></title><description><![CDATA[
+ 設問ページ
+
+🔗ABC-353 A - Buildings
+
+
+
+ 提出結果
+def getInt():
+    return int(input())
+
+
+def getIntList():
+    return list(map(int, input().split()))
+
+
+def main():
+    n = getInt()
+    a = getIntList()
+
+    r = -1
+    for i in range(1, n):
+        if a[i] &gt; a[0]:
+            r = (i + 1)
+            br...]]></description><link>https://zenn.dev/hyperdb/articles/1f1d17280f6d4c</link><guid isPermaLink="true">https://zenn.dev/hyperdb/articles/1f1d17280f6d4c</guid><pubDate>Thu, 23 May 2024 04:30:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--LNwrvoOd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25EF%25BC%25BBAtCoder%25EF%25BC%25BDABC-353%25EF%25BD%259CA%2520-%2520Buildings%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AF%25E3%2581%2584%25E3%2581%25B1%25E3%2581%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhODJkODgwMzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>はいぱぁ</dc:creator></item><item><title><![CDATA[ミニPCでマルチサーバー構築 [GUI環境整備]]]></title><description><![CDATA[
+ミニPCでマルチサーバー構築シリーズのGUI環境整備の記録メモです。シリーズ最後の記事です。
+
+ シリーズ
+
+N100搭載ミニPCでマルチサーバーの構想と構築準備
+ミニPCでマルチサーバー構築 [OS等インストール]
+ミニPCでマルチサーバー構築 [Sambaコンテナ]
+ミニPCでマルチサーバー構築 [PostgreSQLコンテナ]
+ミニPCでマルチサーバー構築 [Nginxコンテナ]
+ミニPCでマルチサーバー構築 [Immichコンテナ]
+ミニPCでマルチサーバー構築 [VaultwardenコンテナとTailscale]
+ミニPCでマルチサーバー構築 [AdGuard Homeコン...]]></description><link>https://zenn.dev/scirexs/articles/4393181fceaecf</link><guid isPermaLink="true">https://zenn.dev/scirexs/articles/4393181fceaecf</guid><pubDate>Wed, 22 May 2024 21:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--S_x-11Od--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%259F%25E3%2583%258BPC%25E3%2581%25A7%25E3%2583%259E%25E3%2583%25AB%25E3%2583%2581%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E6%25A7%258B%25E7%25AF%2589%2520%255BGUI%25E7%2592%25B0%25E5%25A2%2583%25E6%2595%25B4%25E5%2582%2599%255D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:scirexs%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FGZFp1Y3BiazJHVGtaaklCQV9TTzVGSW55bVU0TFNuaGtlanZ3aW15OUhBPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>scirexs</dc:creator></item><item><title><![CDATA[pythonのimportの順番]]></title><description><![CDATA[Pythonにおけるインポートの順番には、いくつかの推奨される基準や慣習があります。これらの基準に従うことで、コードがより読みやすく、管理しやすくなります。以下に、Pythonコミュニティで広く受け入れられているインポート順のガイドラインを示します。
+
+ PEP 8のガイドライン
+PEP 8（Python Enhancement Proposal 8）は、Pythonのコードスタイルガイドであり、インポートの順番に関しても具体的な推奨をしています。基本的な順序は次の通りです：
+
+
+標準ライブラリのインポート:
+標準ライブラリのモジュールを最初にインポートします。
+import os
+im...]]></description><link>https://zenn.dev/nyankonya/articles/ec615627379cb5</link><guid isPermaLink="true">https://zenn.dev/nyankonya/articles/ec615627379cb5</guid><pubDate>Wed, 22 May 2024 16:06:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vNRu9fjx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:python%25E3%2581%25AEimport%25E3%2581%25AE%25E9%25A0%2586%25E7%2595%25AA%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AB%25E3%2582%2583%25E3%2582%2593%25E3%2581%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE1NmU0MTcwZmUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>にゃんこ</dc:creator></item><item><title><![CDATA[【コード1行解説】 python 日本語版共起ネットワークの作成]]></title><description><![CDATA[ステップを追うことで誰でも簡単にpythonを使った共起ネットワークを作成できます。
+コード1行ごとに丁寧に解説しているためコード本体よりも解説の方が多く、pythonを触り始めた初心者にも優しい記事になります。詳細な記事を読むことで理解度も習得時間も早く済み、手を動かしながら習得しようとしている方におすすめです。]]></description><link>https://zenn.dev/krang/books/b89ed0adb19a88</link><guid isPermaLink="true">https://zenn.dev/krang/books/b89ed0adb19a88</guid><pubDate>Wed, 22 May 2024 14:10:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lZjisS_e--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci8xYjJkNzk3ZjUxLmpwZWc=%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>krang</dc:creator></item><item><title><![CDATA[【コード1行解説】 python 日本語版WordCloudの作成]]></title><description><![CDATA[ステップを追うことで誰でも簡単にpythonを使ったwordcloudを作成できます。
+コード1行ごとに丁寧に解説しているためコード本体よりも解説の方が多く、pythonを触り始めた初心者にも優しい記事になります。詳細な記事を読むことで理解度も習得時間も早く済むため、まずは手を動かして習得しようとしている方におすすめです。]]></description><link>https://zenn.dev/krang/books/0fe822d83374b4</link><guid isPermaLink="true">https://zenn.dev/krang/books/0fe822d83374b4</guid><pubDate>Wed, 22 May 2024 13:48:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--uMBlbzx4--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci83MWZjNmM3ZWE4LmpwZWc=%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>krang</dc:creator></item><item><title><![CDATA[Reflexとは？PythonのみでフルスタックWebアプリを構築]]></title><description><![CDATA[
+ はじめに
+
+ 本記事について
+最近、以下の記事を見て下さった方が多いようで、Reflexの注目が大きくなっているように思います。
+https://qiita.com/SFITB/items/c3361979b86f441993ff
+しかし、日本語の記事が少なく、Reflexってなにかわからない。
+インストールして動かしてみないとわからないことがありますよね。
+そんなわからないことのうち、使うか使わないかの参考にできそうな情報を集めました。
+まだReflexを触っていない方から、何度も使っている方まで、どんな方でも見れるように記事にしました。
+
+ 自己紹介
+山梨に住んでいる研究開発系の...]]></description><link>https://zenn.dev/peter_yusuke/articles/d3a799930d1ff7</link><guid isPermaLink="true">https://zenn.dev/peter_yusuke/articles/d3a799930d1ff7</guid><pubDate>Wed, 22 May 2024 12:48:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--OKmPmOe3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Reflex%25E3%2581%25A8%25E3%2581%25AF%25EF%25BC%259FPython%25E3%2581%25AE%25E3%2581%25BF%25E3%2581%25A7%25E3%2583%2595%25E3%2583%25AB%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%2583%25E3%2582%25AFWeb%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E6%25A7%258B%25E7%25AF%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:peter_yusuke%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q4YjI3NjhhMGIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>peter_yusuke</dc:creator></item><item><title><![CDATA[［AtCoder］ABC-350｜A - Past ABCs]]></title><description><![CDATA[
+ 設問ページ
+
+🔗ABC-350 A - Past ABCs
+
+
+
+ 提出結果
+def getString():
+    return input()
+
+
+def main():
+    s = getString()
+    q = int(s[3:])
+
+    print('Yes' if q != 316 and 0 &lt; q &lt; 350 else 'No')
+
+
+if __name__ == "__main__":
+    main()
+
+]]></description><link>https://zenn.dev/hyperdb/articles/ccdca7a54a8c75</link><guid isPermaLink="true">https://zenn.dev/hyperdb/articles/ccdca7a54a8c75</guid><pubDate>Wed, 22 May 2024 05:51:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Cmfjn1ab--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25EF%25BC%25BBAtCoder%25EF%25BC%25BDABC-350%25EF%25BD%259CA%2520-%2520Past%2520ABCs%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AF%25E3%2581%2584%25E3%2581%25B1%25E3%2581%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhODJkODgwMzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>はいぱぁ</dc:creator></item><item><title><![CDATA[［AtCoder］ABC-352｜A - AtCoder Line]]></title><description><![CDATA[
+ 設問ページ
+
+🔗ABC-352 A - AtCoder Line
+
+
+
+ 提出結果
+def getIntMap():
+    return map(int, input().split())
+
+
+def main():
+    n, x, y, z = getIntMap()
+
+    print('Yes' if min(x, y) &lt;= z &lt;= max(x, y) else 'No')
+
+
+if __name__ == "__main__":
+    main()
+]]></description><link>https://zenn.dev/hyperdb/articles/be901c99f055c0</link><guid isPermaLink="true">https://zenn.dev/hyperdb/articles/be901c99f055c0</guid><pubDate>Wed, 22 May 2024 05:51:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ZldyPkLx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25EF%25BC%25BBAtCoder%25EF%25BC%25BDABC-352%25EF%25BD%259CA%2520-%2520AtCoder%2520Line%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AF%25E3%2581%2584%25E3%2581%25B1%25E3%2581%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhODJkODgwMzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>はいぱぁ</dc:creator></item><item><title><![CDATA[［AtCoder］ABC-351｜A - The bottom of the ninth]]></title><description><![CDATA[
+ 設問ページ
+
+🔗ABC-351 A - The bottom of the ninth
+
+
+
+ 提出結果
+def getIntList():
+    return list(map(int, input().split()))
+
+
+def main():
+    a = getIntList()
+    b = getIntList()
+
+    print(sum(a) - sum(b) + 1)
+
+
+if __name__ == "__main__":
+    main()
+]]></description><link>https://zenn.dev/hyperdb/articles/a07508c9f5b92e</link><guid isPermaLink="true">https://zenn.dev/hyperdb/articles/a07508c9f5b92e</guid><pubDate>Wed, 22 May 2024 05:51:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--t_dA4URI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25EF%25BC%25BBAtCoder%25EF%25BC%25BDABC-351%25EF%25BD%259CA%2520-%2520The%2520bottom%2520of%2520the%2520ninth%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AF%25E3%2581%2584%25E3%2581%25B1%25E3%2581%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhODJkODgwMzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>はいぱぁ</dc:creator></item><item><title><![CDATA[［AtCoder］ABC-350｜B - Dentist Aoki]]></title><description><![CDATA[
+ 設問ページ
+
+🔗ABC-350 B - Dentist Aoki
+
+
+
+ 提出結果
+import collections
+
+
+def getIntMap():
+    return map(int, input().split())
+
+
+def getIntList():
+    return list(map(int, input().split()))
+
+
+def main():
+    n, q = getIntMap()
+    t = getIntList()
+
+    ta = collections.Counter(t)
+    for x in ta.values()...]]></description><link>https://zenn.dev/hyperdb/articles/552ae5d011f5d9</link><guid isPermaLink="true">https://zenn.dev/hyperdb/articles/552ae5d011f5d9</guid><pubDate>Wed, 22 May 2024 05:51:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7XpsvEGv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25EF%25BC%25BBAtCoder%25EF%25BC%25BDABC-350%25EF%25BD%259CB%2520-%2520Dentist%2520Aoki%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AF%25E3%2581%2584%25E3%2581%25B1%25E3%2581%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhODJkODgwMzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>はいぱぁ</dc:creator></item><item><title><![CDATA[［AtCoder］ABC-352｜B - Typing]]></title><description><![CDATA[
+ 設問ページ
+
+🔗ABC-352 B - Typing
+
+
+
+ 提出結果
+def getString():
+    return input()
+
+
+def main():
+    s = getString()
+    t = getString()
+
+    r = []
+    p = 0
+    for i in range(len(s)):
+        y = t[p:].index(s[i])
+        p += y
+        r.append(p)
+        p += 1
+
+    print(" ".join(map(str, [i + 1 for...]]></description><link>https://zenn.dev/hyperdb/articles/25f15c9a7c1b03</link><guid isPermaLink="true">https://zenn.dev/hyperdb/articles/25f15c9a7c1b03</guid><pubDate>Wed, 22 May 2024 05:51:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--uYRNfTqZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25EF%25BC%25BBAtCoder%25EF%25BC%25BDABC-352%25EF%25BD%259CB%2520-%2520Typing%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AF%25E3%2581%2584%25E3%2581%25B1%25E3%2581%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhODJkODgwMzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>はいぱぁ</dc:creator></item><item><title><![CDATA[［AtCoder］ABC-351｜B - Spot the Difference]]></title><description><![CDATA[
+ 設問ページ
+
+🔗ABC-351 B - Spot the Difference
+
+
+
+ 提出結果
+def getInt():
+    return int(input())
+
+
+def getStringRow(N):
+    return [input() for _ in range(N)]
+
+
+def main():
+    n = getInt()
+    a = getStringRow(n)
+    b = getStringRow(n)
+
+    for i in range(n):
+        if a[i] == b[i]:
+            contin...]]></description><link>https://zenn.dev/hyperdb/articles/01abe9db53df2d</link><guid isPermaLink="true">https://zenn.dev/hyperdb/articles/01abe9db53df2d</guid><pubDate>Wed, 22 May 2024 05:51:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dU_lE7vh--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25EF%25BC%25BBAtCoder%25EF%25BC%25BDABC-351%25EF%25BD%259CB%2520-%2520Spot%2520the%2520Difference%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AF%25E3%2581%2584%25E3%2581%25B1%25E3%2581%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhODJkODgwMzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>はいぱぁ</dc:creator></item><item><title><![CDATA[Pythonで建築構造最適化の評価]]></title><description><![CDATA[
+ 概要
+建築構造設計の中でも、超高層物件（評定物件）を対象とする。制振ダンパーの最適配置問題を解く。解析ソフトにはSNAP Ver.8を使う。メインプログラムにはPythonを使い、最適化アルゴリズムにはGAを用いる。①PythonでSNAPへの入力テキストファイルを作成→②SNAPで解析→③SNAPの解析結果をPythonで読取り→④GA→①・・・のような流れで最適化を行う。
+
+ フォルダ構成
+src
+├─GA.py :: メインファイル。GAによる最適化計算を行う。
+├─macro_inputpy.py ::  [make_input2.xlsm]の特定タブからinput.s8iの...]]></description><link>https://zenn.dev/kitagawadisk/articles/e053d5047e669e</link><guid isPermaLink="true">https://zenn.dev/kitagawadisk/articles/e053d5047e669e</guid><pubDate>Wed, 22 May 2024 05:39:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_0uZwAUw--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A7%25E5%25BB%25BA%25E7%25AF%2589%25E6%25A7%258B%25E9%2580%25A0%25E6%259C%2580%25E9%2581%25A9%25E5%258C%2596%25E3%2581%25AE%25E8%25A9%2595%25E4%25BE%25A1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kitagawadisk%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFUWEFKd0JtSUdQRGU5MjBBb1pIVzQtWVhBZzUzcmhFeHNoRjBkVTlvczQ9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kitagawadisk</dc:creator></item></channel></rss>
