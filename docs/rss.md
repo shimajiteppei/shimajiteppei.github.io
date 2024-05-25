@@ -11,6 +11,10 @@ GitHub Actionsで定期的にRSSを購読する[osmos::feed](https://github.com/
 
 ## Rust
 
+### 20240525
+
+- [AWS のスイッチロールを簡単に実行するコマンドを書きました](https://zenn.dev/okkez/articles/0101a435a28d43)
+
 ### 20240524
 
 - [プロジェクト内の様々な確認を行う：cargo-denyメモ [blessed.rsシリーズ11]](https://zenn.dev/kotabrog/articles/4d971167af4664)
@@ -117,6 +121,16 @@ GitHub Actionsで定期的にRSSを購読する[osmos::feed](https://github.com/
 
 
 ## Java
+
+### 20240525
+
+- [サロゲートペアについて【Java】](https://qiita.com/yuu_7_ns/items/408697a05599f953ef2e)
+- [Javaのパーマネント領域（PermGen）について](https://qiita.com/yuu_7_ns/items/008744b3846d709d32d5)
+- [Javaで「単項マイナス演算子」の動作を確認してみた](https://qiita.com/nori-channel/items/d8d7d48e3f46935788f6)
+- [Spring Boot において application.properties を環境ごとに切り替える](https://qiita.com/saleo_2764/items/0b08acb403f6b231a63d)
+- [Factory Methodパターン：インスタンス作成をサブクラスにまかせる](https://zenn.dev/sadaizin/articles/a41bd6f73c2d50)
+- [Java switch文のアロー演算子を用いた構文ついて](https://zenn.dev/sadaizin/articles/52eacf767b543d)
+- [KotlinConf 2024　個人的まとめ](https://zenn.dev/og1/articles/a5adad5774f7c1)
 
 ### 20240524
 
@@ -294,10 +308,28 @@ GitHub Actionsで定期的にRSSを購読する[osmos::feed](https://github.com/
 - [【Android】Rich Text EditorのCompose Rich Editorを試す](https://zenn.dev/slowhand/articles/d6a2d031dc717f)
 - [OpenAPI Generator Gradle PluginsをAndroidプロジェクトに導入する](https://zenn.dev/wansuko_cmd/articles/7fbf4420d48160)
 - [Kotlin: 勉強メモ](https://zenn.dev/kkne/articles/2cfb46ea7cb691)
-- [Ktor Plugin Registryに自作プラグインを公開しよう](https://zenn.dev/cotrin1208/articles/5dced3929a1923)
 
 
 ## Linux
+
+### 20240525
+
+- [DBコンテナ起動時に初期データを設定する](https://qiita.com/basabasa0129/items/95a987dc706e382f1c20)
+- [Ubuntu24.04でDockerを使用できるようにする](https://qiita.com/Marron-chan/items/570c7c7baaae3b4d6b11)
+- [Herokuでデプロイしようとしたら500エラー(Internal Server Error)が出た](https://qiita.com/maooz4426/items/fef39b610f5e820242c1)
+- [Django+Postgres+DockerをHerokuにデプロイ](https://qiita.com/maooz4426/items/afe851f2f1d93ab8baeb)
+- [cgroupのメモリ制御機能を使ってみた](https://qiita.com/kurosuke96/items/543648d7bd0613f4f740)
+- [neovimとlazy.nvimでskkeletonを使いたい](https://qiita.com/osamou/items/99b05016f1417bd7b46d)
+- [sortの+POS1 -POS2と-k POS1,POS2 の違い](https://qiita.com/etoootak/items/5ed60a786823e909841a)
+- [WSL2のUbuntu環境でNext.jsとMySQLコンテナを構築する](https://zenn.dev/takubii/articles/f7e07f621ac9dc)
+- [2020/7/11 DockerでLAMP&Redis環境を構築しながら、色々使い方を覚える（備忘録）](https://zenn.dev/genie_oh/articles/6cc50260ca78ca)
+- [2020/7/9 Docker。自分がよく使うコマンドをaliasに設定「説明付き」](https://zenn.dev/genie_oh/articles/123326ce7946e7)
+- [sftpでサーバーサイドcopy](https://zenn.dev/na8esin/articles/dbf98aee732ac0)
+- [パスワード認証つきプロキシサーバーを経由して443番ポートでGitHub/BitBucket/GitLabにssh接続する](https://zenn.dev/junkor/articles/82aba65d2f0880)
+- [2020/3/4「OZV勉強会LT」「Linux」niceコマンドで知るプロセスと優先順位](https://zenn.dev/genie_oh/articles/05f4095aa0a5b8)
+- [新MacでLinux VM版：Kubuntu24.04LTS ⑨ Adjustment](https://zenn.dev/armcore/articles/kubuntu2404_9)
+- [Ubuntu 24.04 をKVM上の仮想マシンで動かす際の注意事項](https://zenn.dev/hidomaru/articles/f7ee1ede258721)
+- [Flatpakアプリケーション：再インストール時の便利なスクリプト](https://zenn.dev/ykesamaru/articles/971a6e21e9b58e)
 
 ### 20240524
 
@@ -656,6 +688,17 @@ GitHub Actionsで定期的にRSSを購読する[osmos::feed](https://github.com/
 
 ## Python
 
+### 20240525
+
+- [弱々だけど Flask-SQLAlchemy (ver3.1.x) をQuickStartしたい](https://qiita.com/thinking-weed/items/a99cac72b455c5e9580f)
+- [正規表現「?」の使い道](https://qiita.com/tapitapi/items/87ffcc457e8013ccc272)
+- [Python 開発に役立つ基本文法（１）](https://qiita.com/Kate_Hira/items/2aac6120a988441db703)
+- [Flask - 個人的NOTE / 公式DOC>Tutorial (インストール対応~本番実装) 3/3](https://qiita.com/masaotomeza/items/fc6841c1d18c8780e2b3)
+- [【マケデコ】OptiverコンペKaggle上位解法勉強会(2024/5/23まとめ)](https://zenn.dev/gamella/articles/048ddebe7295ed)
+- [Visual Studio Codeでpyenv依存のvenvを使う](https://zenn.dev/yuhi_ili/articles/cce58a3a2b20e8)
+- [Django4でデフォルトのホスト/ポートを環境変数で指定する](https://zenn.dev/nondescript/articles/ae37eddc631b61)
+- [個人開発OSSが世界に勝てなかった話](https://zenn.dev/yukinarit/articles/7177ba04453e02)
+
 ### 20240524
 
 - [Google Colab上で実行しているループをボタンで止める](https://qiita.com/Kuramubon/items/19fc586de1b930d51b15)
@@ -872,6 +915,36 @@ GitHub Actionsで定期的にRSSを購読する[osmos::feed](https://github.com/
 
 
 ## Web
+
+### 20240525
+
+- [カスタマイズしたGoogle Form で回答が収集できなかったとき](https://qiita.com/Lyn131/items/0fa7c6edbcaa89e26651)
+- [【やってみた】FLEXBOX FROGGY](https://qiita.com/san_bay3/items/4103196b71a959980457)
+- [【練習】ブラウザで作った文字列コピーツール](https://qiita.com/nagura202010/items/fab788b0436db2b26d1c)
+- [やってみたシリーズ7編htmlStdio html CSS JavaScript 完結編](https://qiita.com/tattyan3/items/f5d15ac893e4461139cf)
+- [やってみたシリーズradioとcheckboxで遊んでみた。](https://qiita.com/tattyan3/items/b984d9a15754fd725ce7)
+- [html radioの使い方 JavaScript含む](https://qiita.com/tattyan3/items/906d863584c85a8d0e26)
+- [Uncaught SyntaxError: Identifier 'mouseoverCard' has already been declared 解決](https://qiita.com/Omanju/items/463006de3dc8c1996da3)
+- [JavaScript: 圧縮力編8](https://qiita.com/mashuel/items/3e76a46096918e680825)
+- [【React×TypeScript】クラスの基本的な考え方と作成方法をざっくり説明](https://qiita.com/AK_React/items/9d93571c4b514d60ca5a)
+- [TypeScript勉強してみた②](https://qiita.com/mr_noppo/items/1df10dd7a68d403427ba)
+- [Node.jsでCLIツールを作ろう！〜Commanderを使ったコマンド実装パターン〜](https://qiita.com/Takuya__/items/d91355aff0dcabbe574d)
+- [eslint-plugin-strict-dependenciesを使ってみる](https://qiita.com/yamatai12/items/90d61e36ee0013556937)
+- [【css】カクカク動かす＆ふわふわ動かす](https://zenn.dev/nami_06063/articles/7c2dde24a583da)
+- [2020/7/12 vscode・Emmet Snippetでhtml, css, jsxを手っ取り早くかく（備忘録）](https://zenn.dev/genie_oh/articles/12a4afe502a729)
+- [JS: 使えそうなビルドイン演算子](https://zenn.dev/llc_starhacks/articles/c9cd2bc329729a)
+- [Async ComponentはRSCだけのものじゃない、サーバだけじゃなくてクライアントでも動くんです！](https://zenn.dev/dai_shi/articles/edafb42997c98e)
+- [MediaPipeの検出結果をもとに、P5で描画する。](https://zenn.dev/makimura3329/articles/mediapipe-hand-p5-20240524)
+- [（JS→PHP→WP）WP REST APIでWordPressに投稿する](https://zenn.dev/210neon/articles/6a888e1797fb86)
+- [type-fest で便利なユーティリティ型を使う](https://zenn.dev/t0daaay/articles/1f531bd9f352bc)
+- [Custom Search EngineとCustom Search APIを利用したサイト内検索（JavaScript）](https://zenn.dev/yyoshioka/articles/fa0e0a8cc480b6)
+- [TypeScriptの基本的な型と機能](https://zenn.dev/machiaka/articles/88e8c99c4bd56f)
+- [React-Router v6 でのルーティングが本番環境で機能しない【403エラー】](https://zenn.dev/benjuwan/articles/030cd7860460b0)
+- [Node.jsでCLIツールを作ろう！〜Commanderを使ったコマンド実装パターン〜](https://zenn.dev/takuh/articles/20661cfd3cd337)
+- [2023/9/20 using : リソース変数の管理が楽になるキーワード (JavaScript&TypeScript)](https://zenn.dev/genie_oh/articles/ad33548f64b435)
+- [2020/7/26 Typescript書き方の速成まとめ](https://zenn.dev/genie_oh/articles/b6e1096b6c977e)
+- [Nest.jsをインストールしたが起動しなかった](https://zenn.dev/sgtkuc1118/articles/72bffa84fa2edc)
+- [TypeScript を利用し LangChain で チャットボットを構築](https://zenn.dev/hayato94087/articles/3a9cf81d1b8dd3)
 
 ### 20240524
 
