@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「JavaScript」のフィード]]></title><description><![CDATA[Zennのトピック「JavaScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/javascript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/64acd76870.png</url><title>Zennの「JavaScript」のフィード</title><link>https://zenn.dev/topics/javascript</link></image><generator>zenn.dev</generator><lastBuildDate>Sun, 26 May 2024 10:18:44 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/javascript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Node.jsのモジュールタイプごとの読み込み方法]]></title><description><![CDATA[
+ はじめに
+CJSやESMといったモジュールタイプ、先人たちの記事を読み理解したつもりになるが、時間が経つと完全に忘れるということを繰り返している。package.jsonの最低限の設定と、その読み込み方法を簡易的に記載する。
+これは検証で書いたサンプルコード
+https://github.com/kkznch/sample-dual-package
+
+ CJSからCJS, ESMを読み込む
+
+package-esm/package.json
+{
+  "name": "package-esm",
+  "main": "index.js",
+  "type": "module"
+}
+
+
+...]]></description><link>https://zenn.dev/kekezun/articles/06362e143950c5</link><guid isPermaLink="true">https://zenn.dev/kekezun/articles/06362e143950c5</guid><pubDate>Sun, 26 May 2024 09:54:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Y6iucQO_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Node.js%25E3%2581%25AE%25E3%2583%25A2%25E3%2582%25B8%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%25AB%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%2597%25E3%2581%2594%25E3%2581%25A8%25E3%2581%25AE%25E8%25AA%25AD%25E3%2581%25BF%25E8%25BE%25BC%25E3%2581%25BF%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2591%25E3%2581%2591%25E3%2581%259A%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2hCOG5jVXVrRUY4SkZPdVRPVy1IdS1VdERUVjhTOEp1dFpaejlGPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>けけずん</dc:creator></item><item><title><![CDATA[using に対応した Symbol を作る]]></title><description><![CDATA[
+ Symbol に [Symbol.dispose] プロパティを付与したい
+スコープ外を検知してセルフGCするSymbol型、要はスマートポインタもどきをピュアに実装したい
+いやいや、Symbol はプリミティブでしょうが…はい
+
+ 解: toString() で Symbol を返却するオブジェクトを作る
+なんと、({ toString: () =&gt; someSymbol }) と someSymbol は同様の働きをする
+const MY_SYMBOL = Symbol("address");
+
+using GC_SYMBOL = {
+    toString() {
+  ...]]></description><link>https://zenn.dev/ihasq/articles/ee92beccd4e172</link><guid isPermaLink="true">https://zenn.dev/ihasq/articles/ee92beccd4e172</guid><pubDate>Sun, 26 May 2024 04:08:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ArN-muAZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:using%2520%25E3%2581%25AB%25E5%25AF%25BE%25E5%25BF%259C%25E3%2581%2597%25E3%2581%259F%2520Symbol%2520%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ihasq%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I3YWEyZmFhZmMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ihasq</dc:creator></item><item><title><![CDATA[カスタムフック不要!! Reactとオブジェクト指向で完全state管理]]></title><description><![CDATA[Reactは意外とオブジェクト指向と相性がいいです
+状態管理ライブラリが不要になります
+
+
+不要: Redux、Jotai、Zustand、TanStack Query
+カスタムフックも不要になります。
+
+
+ 用語
+
+
+Model: User、Media、Roomといったエンティティです。
+
+階層型オブジェクト: users[].medias[].comments[] といったチェーンで繋げられるインスタンスのことです。
+
+
+ 実装
+
+Auth.js
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPasswo...]]></description><link>https://zenn.dev/llc_starhacks/articles/955208b2b2daaf</link><guid isPermaLink="true">https://zenn.dev/llc_starhacks/articles/955208b2b2daaf</guid><pubDate>Sun, 26 May 2024 02:57:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dzg7CqQk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25AB%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%25A0%25E3%2583%2595%25E3%2583%2583%25E3%2582%25AF%25E4%25B8%258D%25E8%25A6%2581%2521%2521%2520React%25E3%2581%25A8%25E3%2582%25AA%25E3%2583%2596%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E6%258C%2587%25E5%2590%2591%25E3%2581%25A7%25E5%25AE%258C%25E5%2585%25A8state%25E7%25AE%25A1%25E7%2590%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:llc_starhacks%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY4M2QxODAxZjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>llc_starhacks</dc:creator></item><item><title><![CDATA[フロントエンド ディレクトリ ベストプラクティス #Firebase]]></title><description><![CDATA[FeDdBp: Front-end Directory-dsign Best-practice
+## ディレクトリ構成
+
+src/
+  model/
+    User.js
+    Collection.js // basic
+    Following.js
+    Media.js
+    Tag.js
+    List.js
+    Room.js
+    ChatRoom.js
+  service/
+    firebase/
+      config.js
+      fcm.js
+      auth.js
+      firestore.js
+      storage.j...]]></description><link>https://zenn.dev/llc_starhacks/articles/9e6428de958175</link><guid isPermaLink="true">https://zenn.dev/llc_starhacks/articles/9e6428de958175</guid><pubDate>Sun, 26 May 2024 02:05:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Ylz2x16b--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2595%25E3%2583%25AD%25E3%2583%25B3%25E3%2583%2588%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2589%2520%25E3%2583%2587%25E3%2582%25A3%25E3%2583%25AC%25E3%2582%25AF%25E3%2583%2588%25E3%2583%25AA%2520%25E3%2583%2599%25E3%2582%25B9%25E3%2583%2588%25E3%2583%2597%25E3%2583%25A9%25E3%2582%25AF%25E3%2583%2586%25E3%2582%25A3%25E3%2582%25B9%2520%2523Firebase%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:llc_starhacks%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY4M2QxODAxZjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>llc_starhacks</dc:creator></item><item><title><![CDATA[React.オブジェクト指向: ファイルをアップロードするコード]]></title><description><![CDATA[
+ 最終形態
+
+page.js
+  onClick={async ()=&gt; {
+    const file = await new InputFile().get();
+    user.thumbnails.push(file);
+  }}
+
+
+Element.Input.js
+export class Input {
+  constructor(attr) {
+    this.El = document.createElement('input');
+  }
+}
+
+export class InputFile extends Input {
+  constructor() ...]]></description><link>https://zenn.dev/llc_starhacks/articles/1f005bc064fefa</link><guid isPermaLink="true">https://zenn.dev/llc_starhacks/articles/1f005bc064fefa</guid><pubDate>Sat, 25 May 2024 20:41:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9zdM-vm---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React.%25E3%2582%25AA%25E3%2583%2596%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E6%258C%2587%25E5%2590%2591%253A%2520%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2592%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2589%25E3%2581%2599%25E3%2582%258B%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:llc_starhacks%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY4M2QxODAxZjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>llc_starhacks</dc:creator></item><item><title><![CDATA[React.js(CDN)をかじる本]]></title><description><![CDATA[React.js(CDN版)の導入から時計やBMI計算機等、
+簡単なWebアプリケーションの作成手順をまとめていきます。
+この本は、次の3点に当てはまる読者様を想定しています。
+
+1. HTMLとCSSをさらっと使った事がある方
+2. JavaScriptをまずまず使った事がある方
+3, React.jsの雰囲気だけかじりたい方]]></description><link>https://zenn.dev/sdkfz181tiger/books/16ed38e7905013</link><guid isPermaLink="true">https://zenn.dev/sdkfz181tiger/books/16ed38e7905013</guid><pubDate>Sat, 25 May 2024 14:48:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7_5dWHoQ--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci85MjZjZjlkODI2LmpwZWc=%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>かじるプログラミング</dc:creator></item><item><title><![CDATA[100秒で理解するPolyfill]]></title><description><![CDATA[
+ はじめに
+この記事の内容は、以下の動画でも解説しているので、ぜひ見てみてください。他にもWebに関する解説動画を投稿しているので、良ければチャンネル登録よろしくお願いします！
+https://youtu.be/EL7UGJks-lw?si=EOsJRPKaVKqRRrmC
+
+ Polyfillとは？
+Polyfill とは、簡単に言うと、古いブラウザでサポートされていない機能を使えるようにするためのコードのことです。
+
+ポリフィルとは、最近の機能をサポートしていない古いブラウザーで、その機能を使えるようにするためのコードです。大抵はウェブ上の JavaScript です。
+MDN -...]]></description><link>https://zenn.dev/ak/articles/e48d94824bb8ee</link><guid isPermaLink="true">https://zenn.dev/ak/articles/e48d94824bb8ee</guid><pubDate>Sat, 25 May 2024 12:36:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--XBRqfgoG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:100%25E7%25A7%2592%25E3%2581%25A7%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2599%25E3%2582%258BPolyfill%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:aki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q3YTNhNmZhNjkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>aki</dc:creator></item><item><title><![CDATA[Next.jsで、たった3行で型安全なルーティングを行う]]></title><description><![CDATA[
+ はじめに
+主に、routerやLinkコンポーネントなどでパスを指定するとき、以下のような問題に悩まされていませんか？
+
+パス指定を手動で書くのがめんどくさい
+パス指定をするとき、タイピングミスで間違ったパスを指定してしまった
+開発途中でページのパス変更が必要になったが、パスの変更漏れが起きてしまった
+
+こんな問題が、たった3行の記述で解決されます。
+※app routerのみで使える機能です。
+
+ どんな機能？
+
+ パスに型補完が効く
+こんな感じでパスに補完が効くので、めちゃ楽にパスの指定ができます。
+
+
+ 型エラーで怒られる
+存在しないパスを設定すると、型エラーで怒ってくれます。...]]></description><link>https://zenn.dev/yarai/articles/e2476c2b39b0d5</link><guid isPermaLink="true">https://zenn.dev/yarai/articles/e2476c2b39b0d5</guid><pubDate>Sat, 25 May 2024 09:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Ejq41_yC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Next.js%25E3%2581%25A7%25E3%2580%2581%25E3%2581%259F%25E3%2581%25A3%25E3%2581%259F3%25E8%25A1%258C%25E3%2581%25A7%25E5%259E%258B%25E5%25AE%2589%25E5%2585%25A8%25E3%2581%25AA%25E3%2583%25AB%25E3%2583%25BC%25E3%2583%2586%25E3%2582%25A3%25E3%2583%25B3%25E3%2582%25B0%25E3%2582%2592%25E8%25A1%258C%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yuu_aoringo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U2MWQzYjIxZDIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yuu_aoringo</dc:creator></item><item><title><![CDATA[JS: 使えそうなビルドイン演算子]]></title><description><![CDATA[
+ 1
+https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Operators/Logical_OR_assignment
+
+
+ 2
+https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Operators/Nullish_coalescing_assignment
+
+
+ 3
+https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Operators/Nullish_coal...]]></description><link>https://zenn.dev/llc_starhacks/articles/c9cd2bc329729a</link><guid isPermaLink="true">https://zenn.dev/llc_starhacks/articles/c9cd2bc329729a</guid><pubDate>Sat, 25 May 2024 06:11:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1_-zBZOs--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JS%253A%2520%25E4%25BD%25BF%25E3%2581%2588%25E3%2581%259D%25E3%2581%2586%25E3%2581%25AA%25E3%2583%2593%25E3%2583%25AB%25E3%2583%2589%25E3%2582%25A4%25E3%2583%25B3%25E6%25BC%2594%25E7%25AE%2597%25E5%25AD%2590%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:llc_starhacks%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY4M2QxODAxZjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>llc_starhacks</dc:creator></item><item><title><![CDATA[Async ComponentはRSCだけのものじゃない、サーバだけじゃなくてクライアントでも動くんです！（でも、ダメだそうです）]]></title><description><![CDATA[RSC (React Server Component)の特徴の一つにAsync Componentが使えるというのがあるのですが、Async Component自体はRSCでなくても動いちゃいます。そう、React 19ならね。
+https://x.com/dai_shi/status/1794184060501479903
+
+
+追記
+無限ループになることがあるからダメだそうです。
+https://x.com/rickhanlonii/status/1794339764768002216
+]]></description><link>https://zenn.dev/dai_shi/articles/edafb42997c98e</link><guid isPermaLink="true">https://zenn.dev/dai_shi/articles/edafb42997c98e</guid><pubDate>Sat, 25 May 2024 02:11:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--c5k3_Sez--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Async%2520Component%25E3%2581%25AFRSC%25E3%2581%25A0%25E3%2581%2591%25E3%2581%25AE%25E3%2582%2582%25E3%2581%25AE%25E3%2581%2598%25E3%2582%2583%25E3%2581%25AA%25E3%2581%2584%25E3%2580%2581%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2581%25A0%25E3%2581%2591%25E3%2581%2598%25E3%2582%2583%25E3%2581%25AA%25E3%2581%258F%25E3%2581%25A6%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25A4%25E3%2582%25A2%25E3%2583%25B3%25E3%2583%2588%25E3%2581%25A7%25E3%2582%2582%25E5%258B%2595%25E3%2581%258F%25E3%2582%2593%25E3%2581%25A7%25E3%2581%2599%25EF%25BC%2581%25EF%25BC%2588%25E3%2581%25A7%25E3%2582%2582%25E3%2580%2581...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:daishi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzcwZGNhM2E2Y2IuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>daishi</dc:creator></item><item><title><![CDATA[MediaPipeの検出結果をもとに、P5で描画する。]]></title><description><![CDATA[
+ デモ
+
+ 実装
+🌾捕捉事項
+
+過去の記事ではMediaPipe Handsが用いられており、npmパッケージも@mediapipe/handsなどを使い実装されているものが多かった。
+2024.05現在MediaPipeのうち視覚情報を扱うものがMediaPipe Vision tasksとしてまとめ提供されているようなのでこの記事では後者で実装を行なっている。
+
+
+ 環境構築
+この記事では開発にViteを用いています。
+npm create vite@latest
+npm i @mediapipe/tasks-vision
+npm i p5 @types/p5
+
+ 手(HandLa...]]></description><link>https://zenn.dev/makimura3329/articles/mediapipe-hand-p5-20240524</link><guid isPermaLink="true">https://zenn.dev/makimura3329/articles/mediapipe-hand-p5-20240524</guid><pubDate>Fri, 24 May 2024 23:37:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Ti93cPbP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:MediaPipe%25E3%2581%25AE%25E6%25A4%259C%25E5%2587%25BA%25E7%25B5%2590%25E6%259E%259C%25E3%2582%2592%25E3%2582%2582%25E3%2581%25A8%25E3%2581%25AB%25E3%2580%2581P5%25E3%2581%25A7%25E6%258F%258F%25E7%2594%25BB%25E3%2581%2599%25E3%2582%258B%25E3%2580%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%2520Makimura%2520%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ3ZTE1MjMxZmYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>🧟Makimura🧟</dc:creator></item><item><title><![CDATA[（JS→PHP→WP）WP REST APIでWordPressに投稿する]]></title><description><![CDATA[
+ 概要
+JavaScriptで入力されたコンテンツをPHPに送信し、PHPからWordPressに投稿を実行します。
+この方法ではWordPressのログイン機能を使用せず、アプリケーションパスワードによる認証を行って投稿を作成します。
+つまりアプリケーションパスワードさえわかってしまえば荒らし放題のため、認証情報を秘匿するためにわざわざPHPを間に挟んでいます。
+くれぐれもクライアントサイドで認証情報を扱わないようにね。
+
+ アプリケーションパスワードの発行
+WordPressのユーザー一覧から、「アプリケーションパスワード」を発行します。
+（管理者権限以外のユーザーで発行するのが望...]]></description><link>https://zenn.dev/210neon/articles/6a888e1797fb86</link><guid isPermaLink="true">https://zenn.dev/210neon/articles/6a888e1797fb86</guid><pubDate>Fri, 24 May 2024 17:49:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0lRtptbz--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25EF%25BC%2588JS%25E2%2586%2592PHP%25E2%2586%2592WP%25EF%25BC%2589WP%2520REST%2520API%25E3%2581%25A7WordPress%25E3%2581%25AB%25E6%258A%2595%25E7%25A8%25BF%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:NettoNeon%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJlNGZhNmYxMjQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>NettoNeon</dc:creator></item><item><title><![CDATA[type-fest で便利なユーティリティ型を使う]]></title><description><![CDATA[
+ type-fest とは
+TypeScript の便利なユーティリティ型を集めたライブラリです。
+https://github.com/sindresorhus/type-fest
+
+ ユーティリティ型とは
+既存の型を変形して新しい型を作成するためのTypeScriptの機能です。
+TypeScript にもデフォルトで  Partial, Required, Readonly などいくつかのユーティリティ型が用意されています。
+https://www.typescriptlang.org/docs/handbook/utility-types.html
+
+ なぜ type-fest...]]></description><link>https://zenn.dev/t0daaay/articles/1f531bd9f352bc</link><guid isPermaLink="true">https://zenn.dev/t0daaay/articles/1f531bd9f352bc</guid><pubDate>Fri, 24 May 2024 15:45:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--24yZpiTE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:type-fest%2520%25E3%2581%25A7%25E4%25BE%25BF%25E5%2588%25A9%25E3%2581%25AA%25E3%2583%25A6%25E3%2583%25BC%25E3%2583%2586%25E3%2582%25A3%25E3%2583%25AA%25E3%2583%2586%25E3%2582%25A3%25E5%259E%258B%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A4%25E3%2581%2598%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNmOTY1Y2M0NzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>つじ</dc:creator></item><item><title><![CDATA[Custom Search EngineとCustom Search APIを利用したサイト内検索（JavaScript）]]></title><description><![CDATA[
+ はじめに
+サイト内検索を
+
+Custom Search Engine
+Custom Search API
+
+を利用して開発しました。
+
+ 設定
+まず、Custom Search Engine、Custom Search APIの設定を行います。
+
+ Custom Search Engine
+特定のサイトやドメインを対象としたサイト内検索を作成できるサービスです。
+ココで指定したサイトまたはページが検索の対象になります。
+
+
+ Custom Search API
+Custom Search APIは、Custom Search Engineの機能をプログラムから利用できるようにするため...]]></description><link>https://zenn.dev/yyoshioka/articles/fa0e0a8cc480b6</link><guid isPermaLink="true">https://zenn.dev/yyoshioka/articles/fa0e0a8cc480b6</guid><pubDate>Fri, 24 May 2024 08:41:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--VrN5EFPz--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Custom%2520Search%2520Engine%25E3%2581%25A8Custom%2520Search%2520API%25E3%2582%2592%25E5%2588%25A9%25E7%2594%25A8%25E3%2581%2597%25E3%2581%259F%25E3%2582%25B5%25E3%2582%25A4%25E3%2583%2588%25E5%2586%2585%25E6%25A4%259C%25E7%25B4%25A2%25EF%25BC%2588JavaScr...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25BF%25E3%2582%2587%25E3%2581%2586%25E3%2581%2598%25E3%2582%2587%25E3%2581%2586%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzkxYjkxZTg3NzEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>みょうじょう</dc:creator></item><item><title><![CDATA[【React】3つの「propsの渡し方」から理解する、分割代入]]></title><description><![CDATA[
+ まえがき
+const { id, title, date } = eventData;
+「なんだこの書き方は...？」となりがちなJavaScriptの記法、その1つが分割代入ではないでしょうか？
+本記事は、「分割代入という単語は知っているけれど仕組みはよく分かっていない」 あるいは、「propsの渡し方がいくつかあって混乱している」 そんな悩みを解決する記事としてお届けします。
+
+ 本記事で解説すること
+
+
+基本を学ぼう
+
+「オブジェクト」とは？
+JavaScriptの「分割代入」とは？
+Reactの「props」とは？
+
+
+
+3つの「propsの渡し方」
+
+分割代入は使わない p...]]></description><link>https://zenn.dev/yamap_web/articles/c197f56924b3fa</link><guid isPermaLink="true">https://zenn.dev/yamap_web/articles/c197f56924b3fa</guid><pubDate>Thu, 23 May 2024 10:48:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1LjRwhpc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590React%25E3%2580%25913%25E3%2581%25A4%25E3%2581%25AE%25E3%2580%258Cprops%25E3%2581%25AE%25E6%25B8%25A1%25E3%2581%2597%25E6%2596%25B9%25E3%2580%258D%25E3%2581%258B%25E3%2582%2589%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2599%25E3%2582%258B%25E3%2580%2581%25E5%2588%2586%25E5%2589%25B2%25E4%25BB%25A3%25E5%2585%25A5%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2584%25E3%2581%25BE%25E3%2581%25B4%25E3%2583%25BC%2520%252F%2520Mt.Piii%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzEwZGM5MGNmNzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>やまぴー / Mt.Piii</dc:creator></item><item><title><![CDATA[【JavaScript】Map オブジェクトについてのまとめ]]></title><description><![CDATA[LeetCodeでMapオブジェクト（ハッシュマップ）を使用して問題を解きました。
+この記事ではMapオブジェクトについて学んだ内容をまとめています。
+前回の記事
+https://zenn.dev/sato_frontend/articles/9bee0b0a455c1d
+
+ 概要
+nums: 数値が格納されている配列
+target: 目標の数値
+nums配列内の2つの数字を足してtargetの値になる組み合わせの値のindexを返す
+上記の課題が課され、下記のようなコードがRuntimeの少ないコードだということを学習しました。
+/**
+ * @param {number[]} num...]]></description><link>https://zenn.dev/sato_frontend/articles/2cc7e1890d46c7</link><guid isPermaLink="true">https://zenn.dev/sato_frontend/articles/2cc7e1890d46c7</guid><pubDate>Thu, 23 May 2024 08:12:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--V9rnvCA0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590JavaScript%25E3%2580%2591Map%2520%25E3%2582%25AA%25E3%2583%2596%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E3%2581%25AE%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Sato_frontend%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFUWEFKenJjQm0wLUZqcjN5RzU2djJsZlY2OGswUzNlbHN5cnNYdXR0M0g9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Sato_frontend</dc:creator></item><item><title><![CDATA[例外処理 try-catch文、finally、throwについてわかりやすくまとめてみました]]></title><description><![CDATA[
+ はじめに
+特定の例外をキャッチして処理しようとする場合、関係のない例外もキャッチしてしまう可能性があることを理解しておいてください。
+また、ライブラリやフレームワークで独自の例外処理が用意されている場合も多いので、その場合はそちらを使用することをお勧めします！
+
+ try { ... }
+例外が発生する可能性のあるコードを書きます。
+この部分のコードが実行され、例外が発生した場合にその例外はcatchブロックに渡されます。
+https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Statements/try...c...]]></description><link>https://zenn.dev/nenenemo/articles/9816ee95962ef4</link><guid isPermaLink="true">https://zenn.dev/nenenemo/articles/9816ee95962ef4</guid><pubDate>Thu, 23 May 2024 05:44:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--93Iz3LhF--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E4%25BE%258B%25E5%25A4%2596%25E5%2587%25A6%25E7%2590%2586%2520try-catch%25E6%2596%2587%25E3%2580%2581finally%25E3%2580%2581throw%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E3%2582%258F%25E3%2581%258B%25E3%2582%258A%25E3%2582%2584%25E3%2581%2599%25E3%2581%258F%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%258D%25E3%2583%25A2%25E3%2581%2595%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FGZFp1Y3JqODQzWnc5aTdpNll5Z3dqX005LURkLWpYaHVoaFBSOWp5d3ZONXc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ネモさん</dc:creator></item><item><title><![CDATA[【JavaScript】LeetCodeで計算量の改善とMapオブジェクトの活用方法を学んだことの共有]]></title><description><![CDATA[LeetCodeというサイトをご存知ですか？
+コーディング面接で使われたり、出題されたものに類似した問題を解くことができる海外の学習サイトで日本でいうPaizaのようなサイトだと思います。
+今まで名前だけ知っていたのですが、利用して気きませんでした。
+現在転職活動真っ最中で技術テスト対策の相談をしたところ、メンターさんからLeetCodeをおすすめしていただいたので始めてみました。
+LeetCodeの問題の難易度はEasy、Medium、Hardの三種類。
+まずはEasyで腕試しと思ったら意外と難しかったです、、。
+今回はtwoSumという問題を解いた際に、計算量やJavascriptの...]]></description><link>https://zenn.dev/sato_frontend/articles/9bee0b0a455c1d</link><guid isPermaLink="true">https://zenn.dev/sato_frontend/articles/9bee0b0a455c1d</guid><pubDate>Thu, 23 May 2024 04:50:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3MualaUu--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590JavaScript%25E3%2580%2591LeetCode%25E3%2581%25A7%25E8%25A8%2588%25E7%25AE%2597%25E9%2587%258F%25E3%2581%25AE%25E6%2594%25B9%25E5%2596%2584%25E3%2581%25A8Map%25E3%2582%25AA%25E3%2583%2596%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E3%2581%25AE%25E6%25B4%25BB%25E7%2594%25A8%25E6%2596%25B9%25E6%25B3%2595%25E3%2582%2592%25E5%25AD%25A6%25E3%2582%2593%25E3%2581%25A0%25E3%2581%2593%25E3%2581%25A8%25E3%2581%25AE%25E5%2585%25B1%25E6%259C%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Sato_frontend%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFUWEFKenJjQm0wLUZqcjN5RzU2djJsZlY2OGswUzNlbHN5cnNYdXR0M0g9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Sato_frontend</dc:creator></item><item><title><![CDATA[エラーを起こしてバグを減らそう]]></title><description><![CDATA[
+ はじめに
+みなさんはエラーは好きですか？
+大抵の人は嫌いなのではないでしょうか。
+プログラミングをしていると多くのエラーが発生し、修正に苦労します。
+そもそもエラーとは何なのでしょうか？
+何の為にあるのか考えたことはあるでしょうか？
+この記事でエラーの本質と向き合ってみましょう。
+※JavaやPHPでは言語仕様上「エラー」と「例外」は明確に区分されますが、ここでは話の便宜上、「例外」の事も「エラー」と表現する場合があります。
+
+ エラーは安全装置
+たとえば、崖に沿った道路を走っていたら、ガードレールにぶつかって車が凹んでしまったとします。
+じゃあ、ガードレールなんてない方が良かったの...]]></description><link>https://zenn.dev/k_tabuchi/articles/9fa03edd956f8a</link><guid isPermaLink="true">https://zenn.dev/k_tabuchi/articles/9fa03edd956f8a</guid><pubDate>Wed, 22 May 2024 16:30:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--D3by958Q--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E3%2582%2592%25E8%25B5%25B7%25E3%2581%2593%25E3%2581%2597%25E3%2581%25A6%25E3%2583%2590%25E3%2582%25B0%25E3%2582%2592%25E6%25B8%259B%25E3%2582%2589%25E3%2581%259D%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:k-tabuchi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhkMjhhY2RlZGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>k-tabuchi</dc:creator></item><item><title><![CDATA[CodeRabbit お試ししたくて面談管理ツールを作ってみる（その18：面談詳細画面の作成、フォーム入力補助）]]></title><description><![CDATA[
+ 本日の内容
+
+面談詳細画面を作成
+面談編集フォームの、面談者（被面談者）ID→名前フォームの連携
+面談一覧画面の色がガチャガチャだったので、１色に統一
+
+
+ 簡単な要約
+ようやく詳細画面を作成。次は面談ごとに質問事項を追加設定できるようにすることですかね。
+
+
+面談一覧
+
+
+
+面談詳細
+
+
+
+
+ プルリク
+https://github.com/WdknWdkn/oneonone/pull/18
+
+ CodeRabbitのコメント
+なんと今回はなし。。。！！物足りない。。。！！
+
+
+ 終わり
+真剣に次回は面談の質問設定ですね。まずはテーブル設計からか。
+]]></description><link>https://zenn.dev/wdknwdkn/articles/829c599ad29621</link><guid isPermaLink="true">https://zenn.dev/wdknwdkn/articles/829c599ad29621</guid><pubDate>Wed, 22 May 2024 14:58:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--JzylO9w6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:CodeRabbit%2520%25E3%2581%258A%25E8%25A9%25A6%25E3%2581%2597%25E3%2581%2597%25E3%2581%259F%25E3%2581%258F%25E3%2581%25A6%25E9%259D%25A2%25E8%25AB%2587%25E7%25AE%25A1%25E7%2590%2586%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%25EF%25BC%2588%25E3%2581%259D%25E3%2581%25AE18%25EF%25BC%259A%25E9%259D%25A2%25E8%25AB%2587%25E8%25A9%25B3%25E7%25B4%25B0%25E7%2594%25BB%25E9%259D%25A2%25E3%2581%25AE%25E4%25BD%259C%25E6%2588%2590%25E3%2580%2581%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25BC%25E3%2583%25A0%25E5%2585%25A5%25E5%258A%259B%25E8%25A3%259C%25E5%258A%25A9%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%258F%25E3%2581%25A0%25E3%2581%2591%25E3%2582%2593%25EF%25BC%25A0%25E9%25A7%2586%25E3%2581%2591%25E5%2587%25BA%25E3%2581%2597%25E8%2582%25B2%25E3%2581%25A6%25E3%2582%258BEM%25E5%259F%25B7%25E8%25A1%258C%25E5%25BD%25B9%25E5%2593%25A1%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FGZFp1Y3JISkF3QXNGeGxMY29sdEpjUHRpN0IwRWpTdlZ0MzFkWnluQ2tmUGc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>わだけん＠駆け出し育てるEM執行役員</dc:creator></item></channel></rss>

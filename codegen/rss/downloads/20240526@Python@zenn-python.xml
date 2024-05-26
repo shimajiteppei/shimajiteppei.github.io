@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Sun, 26 May 2024 09:53:26 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[pydeckで2011年東北地方太平洋沖地震の津波高を可視化してみた]]></title><description><![CDATA[
+ はじめに
+pydeckは、地理空間情報の可視化に強みをもつdeck.glのPythonバインディングライブラリです。この記事では、Google Colab上でpydeckを使用することで、津波の高さ分布をインタラクティブに確認できるか試してみました。
+
+出典：東北地方太平洋沖地震津波合同調査グループデータ, 2024/05/10参照
+
+ 動作環境
+
+Google Colaboratory
+Python 3.10.12
+cmcrameri 1.9
+pandas 2.0.3
+pydeck 0.9.0
+numpy 1.25.2
+
+
+ データの特徴
+東北地方太平洋沖地震津波の痕跡高データセッ...]]></description><link>https://zenn.dev/rescuenow/articles/7276c40e333f68</link><guid isPermaLink="true">https://zenn.dev/rescuenow/articles/7276c40e333f68</guid><pubDate>Sun, 26 May 2024 05:49:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--d1Rrp5yn--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:pydeck%25E3%2581%25A72011%25E5%25B9%25B4%25E6%259D%25B1%25E5%258C%2597%25E5%259C%25B0%25E6%2596%25B9%25E5%25A4%25AA%25E5%25B9%25B3%25E6%25B4%258B%25E6%25B2%2596%25E5%259C%25B0%25E9%259C%2587%25E3%2581%25AE%25E6%25B4%25A5%25E6%25B3%25A2%25E9%25AB%2598%25E3%2582%2592%25E5%258F%25AF%25E8%25A6%2596%25E5%258C%2596%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%2599%25E3%2581%25B5%25E3%2583%25BC%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E0NWI1N2NlZmMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%25AC%25E3%2582%25B9%25E3%2582%25AD%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%258A%25E3%2582%25A6%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I2ZmY3ZDJhMDQuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>すふー</dc:creator></item><item><title><![CDATA[【Django】可読性の高いディレクトリ構造を目指したら、urls.pyで詰まった件]]></title><description><![CDATA[
+ はじめに
+
+ この記事の対象読者
+
+Django初心者
+プログラミング初心者
+
+
+ 環境
+
+Mac M2
+Python 3.9
+Django 4.2.11
+
+
+ 背景
+Djangoのデフォルトのディレクトリ構造が、アプリケーションディレクトリを作成するたびに見えづらくなるなと感じたので、appsディレクトリを作成し、その中に全てのアプリケーションディレクトリを作成しようと考えたのが事の発端です。
+
+ やりたかったこと
+
+ 可読性の高いディレクトリ構造の作成
+※一部の今回の内容に不要なファイル等は記載しておりません。
+root
+├── Dockerfile
+├── README.md
+...]]></description><link>https://zenn.dev/tech_learner/articles/dd24a06b8fe318</link><guid isPermaLink="true">https://zenn.dev/tech_learner/articles/dd24a06b8fe318</guid><pubDate>Sun, 26 May 2024 04:43:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qaryloDJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Django%25E3%2580%2591%25E5%258F%25AF%25E8%25AA%25AD%25E6%2580%25A7%25E3%2581%25AE%25E9%25AB%2598%25E3%2581%2584%25E3%2583%2587%25E3%2582%25A3%25E3%2583%25AC%25E3%2582%25AF%25E3%2583%2588%25E3%2583%25AA%25E6%25A7%258B%25E9%2580%25A0%25E3%2582%2592%25E7%259B%25AE%25E6%258C%2587%25E3%2581%2597%25E3%2581%259F%25E3%2582%2589%25E3%2580%2581urls.py%25E3%2581%25A7%25E8%25A9%25B0%25E3%2581%25BE%25E3%2581%25A3%25E3%2581%259F%25E4%25BB%25B6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Tech%2520Learner%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE4M2QxNzYwNGYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Tech Learner</dc:creator></item><item><title><![CDATA[Gymnasiumを用いてAtariゲームをセットアップする 【Windows/Anaconda】]]></title><description><![CDATA[
+ 概要
+この記事では、Windows環境でAnacondaを用いて、Python 3.11でGymnasiumとAutoROMをセットアップし、Atariのゲーム「Breakout」を実行する方法を解説します。
+※ この記事は ChatGPTに書いてもらい、一部手動で内容を調整したものです。
+記事作成の過程については以下を参照ください。
+https://chatgpt.com/share/b25e7b40-e9ff-4713-8f43-8a0fcd4b0412
+
+ 環境
+
+OS: Windows 11
+Anaconda: 24.3.0
+Gymnasium: 0.29.1
+
+
+ 手順
+
+...]]></description><link>https://zenn.dev/rhythmcan/articles/e7939ba19ad5dc</link><guid isPermaLink="true">https://zenn.dev/rhythmcan/articles/e7939ba19ad5dc</guid><pubDate>Sun, 26 May 2024 01:54:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--kiFDCg5l--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Gymnasium%25E3%2582%2592%25E7%2594%25A8%25E3%2581%2584%25E3%2581%25A6Atari%25E3%2582%25B2%25E3%2583%25BC%25E3%2583%25A0%25E3%2582%2592%25E3%2582%25BB%25E3%2583%2583%25E3%2583%2588%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%25E3%2581%2599%25E3%2582%258B%2520%25E3%2580%2590Windows%252FAnaconda%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:becky%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZkMzBmMjcxNjYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>becky</dc:creator></item><item><title><![CDATA[LangChainを用いて大量ファイルをロードするVectorDBを作ってみた(8)]]></title><description><![CDATA[
+
+ はじめに
+前回は、XML形式のファイルから必要なエレメントの情報のみVectorDBに格納する方法を試してみました。
+https://qiita.com/ogi_kimura/items/4bbf2c987856a9435280
+大量ファイルをVectorDBに取り込んだ場合、データ量が多すぎて「ぼやけてしまう」せいか、生成AIから返ってくる回答精度が悪くなることもわかってきました。
+今回は、前回作成した属性を追加したVectorDBを基に、生成AIから精度の高い回答をもらえるようにしてみます。
+
+ VectorDBの内容
+今回は、filterを使ってVectorDBのデータを絞り...]]></description><link>https://zenn.dev/ogiki/articles/903838c2307c75</link><guid isPermaLink="true">https://zenn.dev/ogiki/articles/903838c2307c75</guid><pubDate>Sun, 26 May 2024 00:36:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--TMvT9MJS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:LangChain%25E3%2582%2592%25E7%2594%25A8%25E3%2581%2584%25E3%2581%25A6%25E5%25A4%25A7%25E9%2587%258F%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2592%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2589%25E3%2581%2599%25E3%2582%258BVectorDB%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25288%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%259C%25A8%25E6%259D%2591%25E3%2581%259F%25E3%2582%258D%25E3%2581%2586%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZkZjNiYWMwZmQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>木村たろう</dc:creator></item><item><title><![CDATA[[2024年5月暫定版]ryeでパッケージ管理しているPython Lambda FunctionをAWS CDKでデプロイする]]></title><description><![CDATA[boto3など以外のサードパーティーライブラリを含むPythonのLambdaのデプロイはそこそこ面倒である。
+cdkであれば、experimental扱いであるが、
+https://docs.aws.amazon.com/cdk/api/v2/docs/aws-lambda-python-alpha-readme.html
+というモジュールが存在し、2024年5月現在ではPipenvおよびPoetry：
+https://pipenv.pypa.io/en/latest/
+https://python-poetry.org/
+を使ってパッケージ管理されているLambdaはよしなにデプロイ...]]></description><link>https://zenn.dev/junkor/articles/982aefa4f8e300</link><guid isPermaLink="true">https://zenn.dev/junkor/articles/982aefa4f8e300</guid><pubDate>Sat, 25 May 2024 17:00:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0L4dtN8T--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255B2024%25E5%25B9%25B45%25E6%259C%2588%25E6%259A%25AB%25E5%25AE%259A%25E7%2589%2588%255Drye%25E3%2581%25A7%25E3%2583%2591%25E3%2583%2583%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B8%25E7%25AE%25A1%25E7%2590%2586%25E3%2581%2597%25E3%2581%25A6%25E3%2581%2584%25E3%2582%258BPython%2520Lambda%2520Function%25E3%2582%2592AWS%2520CDK...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:7e%252B8%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2Rhcmsvai5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>7e+8</dc:creator></item><item><title><![CDATA[【python】TrelloのデータをAPIで取得してCSVで出力する]]></title><description><![CDATA[Trello API Keyの取得
+https://trello.com/power-ups/admin にアクセス
+Power-Up &amp; 統合を新規作成
+
+
+APIキーとトークンを作成
+
+
+TrelloAPIでボードからデータを取得する
+
+パッケージのインストール
+pip install requests
+CSVファイルの出力
+import requests
+import json
+import csv
+
+# TrelloのAPIキーとトークン
+API_KEY = 'your key'
+API_TOKEN = 'your api'
+USER_NAME = 'your name'...]]></description><link>https://zenn.dev/ak358/articles/f1e83baa8df243</link><guid isPermaLink="true">https://zenn.dev/ak358/articles/f1e83baa8df243</guid><pubDate>Sat, 25 May 2024 16:32:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--VEWJzaLq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590python%25E3%2580%2591Trello%25E3%2581%25AE%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%2592API%25E3%2581%25A7%25E5%258F%2596%25E5%25BE%2597%25E3%2581%2597%25E3%2581%25A6CSV%25E3%2581%25A7%25E5%2587%25BA%25E5%258A%259B%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ak358%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NmN2MyMDNjNDEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ak358</dc:creator></item><item><title><![CDATA[LangChainを用いて大量ファイルをロードするVectorDBを作ってみた(7)]]></title><description><![CDATA[
+
+ はじめに
+前回、３つのVectorDB（chroma、Qdrant、FAISS）を用いて、生成AIに質問を投げてみたのですが、芳しくない結果となってしまいました。
+https://qiita.com/ogi_kimura/items/dacebc6d548af229d257
+そこで今回は、ファイルの情報をそのままVectorDBに登録するのではなく、ある程度選別してVectorDBへ格納したらどなるんだろうということで、検証していきたいと思います。
+
+ XMLファイルの書式について
+今回もインプットデータのサンプルとして特許庁のファイルを採用します。画像ファイルやCSVファイルなど...]]></description><link>https://zenn.dev/ogiki/articles/c44b2190248307</link><guid isPermaLink="true">https://zenn.dev/ogiki/articles/c44b2190248307</guid><pubDate>Sat, 25 May 2024 13:45:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Mt-UKjIN--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:LangChain%25E3%2582%2592%25E7%2594%25A8%25E3%2581%2584%25E3%2581%25A6%25E5%25A4%25A7%25E9%2587%258F%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2592%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2589%25E3%2581%2599%25E3%2582%258BVectorDB%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25287%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%259C%25A8%25E6%259D%2591%25E3%2581%259F%25E3%2582%258D%25E3%2581%2586%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZkZjNiYWMwZmQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>木村たろう</dc:creator></item><item><title><![CDATA[PythonでAmazonのAPIを叩く]]></title><description><![CDATA[
+ はじめに
+今回はAmazon Product Advertising APIを使用して、商品名、価格、商品画像などの情報を取得する方法を紹介します。
+
+ Amazon Product Advertising APIの利用方法
+
+
+Amazonアソシエイトプログラムへの登録
+まず、Amazonアソシエイトプログラムに登録する必要があります。これにより、アフィリエイトIDを取得できます。
+
+
+APIキーの取得
+AmazonアソシエイトダッシュボードからProduct Advertising APIのアクセスキーとシークレットキーを取得します。
+
+
+
+ PythonでAmazonの商品情報...]]></description><link>https://zenn.dev/ryouta26/articles/1b3cefebf36e6c</link><guid isPermaLink="true">https://zenn.dev/ryouta26/articles/1b3cefebf36e6c</guid><pubDate>Sat, 25 May 2024 10:06:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s----Uy_Hs3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A7Amazon%25E3%2581%25AEAPI%25E3%2582%2592%25E5%258F%25A9%25E3%2581%258F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ryouta.js%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI2ZjIyNTZmYmEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ryouta.js</dc:creator></item><item><title><![CDATA[Pythonでpandasのインストール手順]]></title><description><![CDATA[
+ はじめに
+今回はPythonのライブラリのpandasのインストール手順を紹介します。
+
+ pipのバージョンを確認
+まずPythonのパッケージ管理ツールが入っているか確認します。
+pip -V
+
+ pandasのインストール
+このコマンドでpandasをインストールできます。
+pip install pandas
+]]></description><link>https://zenn.dev/ryouta26/articles/2ef74d49ad1bb3</link><guid isPermaLink="true">https://zenn.dev/ryouta26/articles/2ef74d49ad1bb3</guid><pubDate>Sat, 25 May 2024 09:44:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fokU6ya---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A7pandas%25E3%2581%25AE%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E6%2589%258B%25E9%25A0%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ryouta.js%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI2ZjIyNTZmYmEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ryouta.js</dc:creator></item><item><title><![CDATA[Pythonで仮想環境の構築手順]]></title><description><![CDATA[
+ はじめに
+今回はvenvを使用して手軽にPythonの仮想環境を作成する手順を紹介します。
+
+ 仮想環境の作成
+.venvという名前でPythonの仮想環境を作成する。
+python -m venv .venv
+
+ 仮想環境のアクティベート
+このコマンドで上記で作成した仮想環境をアクティベートできます。
+. .venv/bin/activate
+
+ 仮想環境のディアクティベート
+仮想環境から抜けたい場合は以下のコマンドを実行してください。
+deactivate
+]]></description><link>https://zenn.dev/ryouta26/articles/e8fcc768df6c62</link><guid isPermaLink="true">https://zenn.dev/ryouta26/articles/e8fcc768df6c62</guid><pubDate>Sat, 25 May 2024 09:36:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_vwXssI0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A7%25E4%25BB%25AE%25E6%2583%25B3%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25AE%25E6%25A7%258B%25E7%25AF%2589%25E6%2589%258B%25E9%25A0%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ryouta.js%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI2ZjIyNTZmYmEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ryouta.js</dc:creator></item><item><title><![CDATA[spaCy + GiNZAで構文解析してみる]]></title><description><![CDATA[
+ はじめに
+Pythonではじめるテキストアナリティクス入門という本を読んで、spaCyとGiNZAで形態素解析や単語間の係り受け解析をやってみて、もう少しいろんなことをやってみたいと思いました。
+
+ 各ツールの関係
+spaCyは、Explosion AI社が開発しているオープンソースの自然言語処理ライブラリです。公式サイトのspaCy is designed specifically for production use and ... ということから製品への本格活用を想定して開発されています。
+また、spaCyは、構文解析のための基本的な機能を持っており、spaCy単体で日本語の形...]]></description><link>https://zenn.dev/ncdc/articles/5e934a43cf3cba</link><guid isPermaLink="true">https://zenn.dev/ncdc/articles/5e934a43cf3cba</guid><pubDate>Sat, 25 May 2024 08:47:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--m7lWBor2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:spaCy%2520%252B%2520GiNZA%25E3%2581%25A7%25E6%25A7%258B%25E6%2596%2587%25E8%25A7%25A3%25E6%259E%2590%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:T-KND%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNhODZhNDA5ZDMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:NCDC%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ExZDU1ZTkzMDAuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>T-KND</dc:creator></item><item><title><![CDATA[画像処理について考える (1) — 高速Fourier変換]]></title><description><![CDATA[
+ 目的
+画像処理の教科書を開くと、ローパスフィルタの説明などで、画像を Fourier 変換して高周波成分をカットするような話が出て来る。そして、Fourier 変換の可視化として以下のような絵が掲載されている。
+
+このグランドクロスかグランドクルスかそういった光の十字架は何なのだろうか？ということについて軽く試してみたい。
+
+ 高速 Fourier 変換
+Wikipedia で 高速フーリエ変換 を見ると、
+
+高速フーリエ変換（こうそくフーリエへんかん、英: fast Fourier transform, FFT）は、離散フーリエ変換（英: discrete Fourier tran...]]></description><link>https://zenn.dev/derwind/articles/dwd-image-processing01</link><guid isPermaLink="true">https://zenn.dev/derwind/articles/dwd-image-processing01</guid><pubDate>Sat, 25 May 2024 08:41:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qfK1hoOZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%2594%25BB%25E5%2583%258F%25E5%2587%25A6%25E7%2590%2586%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E8%2580%2583%25E3%2581%2588%25E3%2582%258B%2520%25281%2529%2520%25E2%2580%2594%2520%25E9%25AB%2598%25E9%2580%259FFourier%25E5%25A4%2589%25E6%258F%259B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:derwind%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFiNjBiZDcwMDMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>derwind</dc:creator></item><item><title><![CDATA[Python命名規則の基本]]></title><description><![CDATA[
+ はじめに
+Pythonの命名規則は、コードの可読性を高めるために非常に重要です。
+実はPeP8というPythonのスタイルガイドには、命名規則に関する詳細なガイドラインが記載されています。
+本記事では、Pythonの命名規則について、PeP8に基づいてまとめたいと思います。
+
+ なぜ命名規則が重要なのか
+命名規則(Naming Convention)は、コードの可読性を高めるために非常に重要です。
+最も重要なのは一貫性(Consistency)で、コードが一貫性のある命名規則に従っていると、変数や関数の目的が明確になり、コードの理解が容易になります。
+また、命名規則に従っていると、他...]]></description><link>https://zenn.dev/the_exile/articles/python-naming-convention-</link><guid isPermaLink="true">https://zenn.dev/the_exile/articles/python-naming-convention-</guid><pubDate>Sat, 25 May 2024 07:23:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vLwEwUho--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E5%2591%25BD%25E5%2590%258D%25E8%25A6%258F%25E5%2589%2587%25E3%2581%25AE%25E5%259F%25BA%25E6%259C%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:RUI%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2l4VVMwY0t3RHdtTktYOVczRUxHWUVaMk8tVnVDNXFnSWI0QjQwcEE9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>RUI</dc:creator></item><item><title><![CDATA[宇宙からの地球観測第７章 観測対象物の位置の決定]]></title><description><![CDATA[宇宙からの地球観測　第７章の章末問題は位置合わせの入門編です。衛星から撮影したデータが地上のどこにあたるのか。スマホと違い自分自身のGPSでポイントを決めれば良いわけではないのでちょっと想像するだけでも大変そうです。
+
+ 問題7.1.1
+
+ある時刻の人工衛星は x_0 = 0 \text{km}、y_0 = 0 \text{km}、H = 500 \text{km} を地面に平行に 5 \text{km/s} の速さで飛行している。
+
+光学センサを搭載し、 \theta = 30 \text{度}、 \phi = 10 \text{度} で地上点を観測した。この位置 (x, y) を計算...]]></description><link>https://zenn.dev/kozayupapa/articles/7658b1ec5515c5</link><guid isPermaLink="true">https://zenn.dev/kozayupapa/articles/7658b1ec5515c5</guid><pubDate>Sat, 25 May 2024 07:09:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dNzqoHMy--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%25AE%2587%25E5%25AE%2599%25E3%2581%258B%25E3%2582%2589%25E3%2581%25AE%25E5%259C%25B0%25E7%2590%2583%25E8%25A6%25B3%25E6%25B8%25AC%25E7%25AC%25AC%25EF%25BC%2597%25E7%25AB%25A0%2520%25E8%25A6%25B3%25E6%25B8%25AC%25E5%25AF%25BE%25E8%25B1%25A1%25E7%2589%25A9%25E3%2581%25AE%25E4%25BD%258D%25E7%25BD%25AE%25E3%2581%25AE%25E6%25B1%25BA%25E5%25AE%259A%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kozayupapa%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M1Y2ZkMTM5ZTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kozayupapa</dc:creator></item><item><title><![CDATA[Streamlit in Snowflakeのちょっとここがイケていない]]></title><description><![CDATA[
+ この記事の対象ユーザー
+
+Snowflakeユーザー
+Streamlit in Snowflakeをこれから触ろうとしている人
+Streamlit in Snowflakeを業務で使っていきたいと検討している人
+
+
+ 背景
+「Streamlit in Snowflake使えば、巨大なデータの可視化をローコスト&amp;高速にできるのでは？」
+Streamlit in Snowflakeが2023年12月に一般提供されたときに、真っ先に自身がよく分析するデータの可視化をStreamlit in Snowflake(以下「SiS」)でやってみようと考えました。
+しかし、実際に検討を進める...]]></description><link>https://zenn.dev/parfait/articles/e07ecced7ab129</link><guid isPermaLink="true">https://zenn.dev/parfait/articles/e07ecced7ab129</guid><pubDate>Sat, 25 May 2024 06:58:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--PQMpqiBw--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Streamlit%2520in%2520Snowflake%25E3%2581%25AE%25E3%2581%25A1%25E3%2582%2587%25E3%2581%25A3%25E3%2581%25A8%25E3%2581%2593%25E3%2581%2593%25E3%2581%258C%25E3%2582%25A4%25E3%2582%25B1%25E3%2581%25A6%25E3%2581%2584%25E3%2581%25AA%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:parfait%2528%25E3%2583%2591%25E3%2583%25AB%25E3%2583%2595%25E3%2582%25A7%2529%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JlM2FiM2I3YzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>parfait(パルフェ)</dc:creator></item><item><title><![CDATA[【マケデコ】OptiverコンペKaggle上位解法勉強会(2024/5/23まとめ)]]></title><description><![CDATA[マケデコという主に株式関連のマーケットAPIを活用し、分析や予測モデルを構築しているbotterのDiscordコミュニティをJPX総研様と運営しています。本記事は2024/5/23に開催された「OptiverコンペKaggle上位解法勉強会」イベントのまとめ記事です。
+
+
+ 概要
+Optiverが主催し、2024/3/23に終了したコンペOptiver - Trading at the Closeの上位解法勉強会となります。
+当日の動画はYouTubeで公開中です。
+https://www.youtube.com/watch?v=KKXUSl2A6v4
+
+ Optiver - Trad...]]></description><link>https://zenn.dev/gamella/articles/048ddebe7295ed</link><guid isPermaLink="true">https://zenn.dev/gamella/articles/048ddebe7295ed</guid><pubDate>Sat, 25 May 2024 03:12:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--FUoQnDfp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E3%2583%259E%25E3%2582%25B1%25E3%2583%2587%25E3%2582%25B3%25E3%2580%2591Optiver%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%259AKaggle%25E4%25B8%258A%25E4%25BD%258D%25E8%25A7%25A3%25E6%25B3%2595%25E5%258B%2589%25E5%25BC%25B7%25E4%25BC%259A%25282024%252F5%252F23%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tomo%2540Alpaca%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ExNDJhY2U1MzYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tomo@Alpaca</dc:creator></item><item><title><![CDATA[Visual Studio Codeでpyenv依存のvenvを使う]]></title><description><![CDATA[現状のバージョンはPython3.10.10を使用中。これをPython3.11.5以降のバージョンに変更したい。
+でも、この環境はProgram FilesとAppdataとAnacondaとDocumentにPythonが入っている。
+そんな人への備忘録。
+
+ 目的
+
+Pythonのバージョンを変更したい。
+venvの起動でPythonのバージョンも切り替える。
+
+
+ 参考
+https://zenn.dev/sion_pn/articles/4418eeda7c62d0
+https://qiita.com/probabilityhill/items/9a22f395a1e93206c...]]></description><link>https://zenn.dev/yuhi_ili/articles/cce58a3a2b20e8</link><guid isPermaLink="true">https://zenn.dev/yuhi_ili/articles/cce58a3a2b20e8</guid><pubDate>Sat, 25 May 2024 02:15:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--SyyLDFjs--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Visual%2520Studio%2520Code%25E3%2581%25A7pyenv%25E4%25BE%259D%25E5%25AD%2598%25E3%2581%25AEvenv%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25A4%2595%25E6%2597%25A5%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2QzOTk2NzgwZTUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>夕日</dc:creator></item><item><title><![CDATA[Django4でデフォルトのホスト/ポートを環境変数で指定する]]></title><description><![CDATA[
+ TL;DR
+
+HTTPの場合
+
+
+django.core.management.commands.runserver.Commandを継承したクラスをカスタムコマンドとして使用する
+
+
+HTTPS(SSL)の場合
+
+
+django-sslserverを用いてsslserver.management.commands.runsslserver.Commandを継承したクラスをカスタムコマンドとして使用する
+
+
+
+add_arguments()をオーバーライドし、super().add_arguments(parser)実行後parser._get_positional_actions(...]]></description><link>https://zenn.dev/nondescript/articles/ae37eddc631b61</link><guid isPermaLink="true">https://zenn.dev/nondescript/articles/ae37eddc631b61</guid><pubDate>Fri, 24 May 2024 15:15:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--WKAPjQyu--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Django4%25E3%2581%25A7%25E3%2583%2587%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25AB%25E3%2583%2588%25E3%2581%25AE%25E3%2583%259B%25E3%2582%25B9%25E3%2583%2588%252F%25E3%2583%259D%25E3%2583%25BC%25E3%2583%2588%25E3%2582%2592%25E7%2592%25B0%25E5%25A2%2583%25E5%25A4%2589%25E6%2595%25B0%25E3%2581%25A7%25E6%258C%2587%25E5%25AE%259A%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E7%25B4%25A0%25E4%25BA%25BA%25E3%2581%25AE%25E6%2588%25AF%25E8%25A8%2580%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVmYTVmOTBhM2EuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>素人の戯言</dc:creator></item><item><title><![CDATA[個人開発OSSが世界に勝てなかった話]]></title><description><![CDATA[!
+Nextbeat Tech Bar：第一回ライブラリ開発について考える会で本記事の内容を発表しました。
+
+ゆーすけべー氏の「OSSで世界と戦うために」にインスパイアされました。5年間pyserdeというOSSのライブラリを開発・メンテしてきた筆者が、ちょっとだけ世界と戦ってみたけど全然勝てなかったという話です。Honoとはプロダクトの規模も開発にかける情熱も全然違うけど、単純にポストモーテムは読み物として面白いかなと思ったので書いてみます。また、5年間の開発で学んだやってよかったことや失敗などもシェアできればと思います。
+
+ pyserde
+
+pyserdeは筆者が2019年から開発...]]></description><link>https://zenn.dev/yukinarit/articles/7177ba04453e02</link><guid isPermaLink="true">https://zenn.dev/yukinarit/articles/7177ba04453e02</guid><pubDate>Fri, 24 May 2024 11:36:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Ssw1PfGp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2580%258B%25E4%25BA%25BA%25E9%2596%258B%25E7%2599%25BAOSS%25E3%2581%258C%25E4%25B8%2596%25E7%2595%258C%25E3%2581%25AB%25E5%258B%259D%25E3%2581%25A6%25E3%2581%25AA%25E3%2581%258B%25E3%2581%25A3%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yukinarit%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q4YjFjZWY0NjguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yukinarit</dc:creator></item><item><title><![CDATA[GoogleのGemini 1.5 FlashをAPIから試す]]></title><description><![CDATA[
+
+ 概要
+最近はAIの発展が早すぎて目が話せませんね。つい先日もOpenAIがGPT-4oを発表したと思ったら、GoogleがGemini 1.5 ProやAI Teammateを発表したり。どんどんと便利になっていくAIにワクワクが止まりません。
+この記事は、ホットトピックである「マルチモーダル」な機能を使ってみた記事です。Google Colab上で動くものを作ったので、ぜひご自身でも試してみてください。
+https://colab.research.google.com/drive/1Xkx5KRJO4p9q_vPNkoGQTrFGYeDvEMUm?usp=sharing
+今回作...]]></description><link>https://zenn.dev/meson/articles/get-started-gemini-api</link><guid isPermaLink="true">https://zenn.dev/meson/articles/get-started-gemini-api</guid><pubDate>Thu, 23 May 2024 22:48:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--i7vTa0tb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Google%25E3%2581%25AEGemini%25201.5%2520Flash%25E3%2582%2592API%25E3%2581%258B%25E3%2582%2589%25E8%25A9%25A6%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:MESON%2520Tech%2520Blog%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y2NWFhYzQzZWUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>MESON Tech Blog</dc:creator></item></channel></rss>
