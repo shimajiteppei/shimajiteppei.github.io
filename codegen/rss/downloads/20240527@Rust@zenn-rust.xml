@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Rust」のフィード]]></title><description><![CDATA[Zennのトピック「Rust」のRSSフィードです]]></description><link>https://zenn.dev/topics/rust</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ba09661577.png</url><title>Zennの「Rust」のフィード</title><link>https://zenn.dev/topics/rust</link></image><generator>zenn.dev</generator><lastBuildDate>Mon, 27 May 2024 12:03:30 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/rust/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[AxumでのExtensionの使い方 - ミドルウェアとデータを共有する -]]></title><description><![CDATA[
+ 動作環境
+本記事は以下の環境で動作確認を行なっています。
+Rust, Axum共に最新の機能を使っているわけではないので、これよりもある程度古いバージョンでも動作すると思われます。
+
+Rust 1.78.0
+Axum 0.7.5
+
+
+ Extension
+axumには Extension という型があります。
+ドキュメントには多くは書かれていないのですが、それには以下のようにあります。
+
+Extractor and response for extensions.
+As extractor
+This is commonly used to share state across han...]]></description><link>https://zenn.dev/techno_tanoc/articles/a295da5efcd494</link><guid isPermaLink="true">https://zenn.dev/techno_tanoc/articles/a295da5efcd494</guid><pubDate>Mon, 27 May 2024 10:24:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--YYjhrlR6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Axum%25E3%2581%25A7%25E3%2581%25AEExtension%25E3%2581%25AE%25E4%25BD%25BF%25E3%2581%2584%25E6%2596%25B9%2520-%2520%25E3%2583%259F%25E3%2583%2589%25E3%2583%25AB%25E3%2582%25A6%25E3%2582%25A7%25E3%2582%25A2%25E3%2581%25A8%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%2592%25E5%2585%25B1%25E6%259C%2589%25E3%2581%2599%25E3%2582%258B%2520-%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:techno-tanoC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZlZTdjM2ZlYzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>techno-tanoC</dc:creator></item><item><title><![CDATA[KotlinでUnion Typeを使いこなそう]]></title><description><![CDATA[!
+この記事は毎週必ず記事がでるテックブログ "Loglass Tech Blog Sprint"の41週目の記事です！ 1年間連続達成まで 残り 12 週 となりました！
+
+
+ はじめに
+こんにちは、株式会社ログラスでエンジニアをしています、Kyosukeです。
+私は前職では主にTypescriptでフロントエンド・バックエンドのどちらも開発を行っていたのですが、ログラスではフロントエンドにTypescript、バックエンドにKotlinを使用しています。
+そしてKotlinを書いていると、定期的にTypeScriptで言う、Union Typeを使いたくなることがあります。
+そこで、...]]></description><link>https://zenn.dev/loglass/articles/46be7f140a60bd</link><guid isPermaLink="true">https://zenn.dev/loglass/articles/46be7f140a60bd</guid><pubDate>Mon, 27 May 2024 00:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--c_yWO4WT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Kotlin%25E3%2581%25A7Union%2520Type%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2584%25E3%2581%2593%25E3%2581%25AA%25E3%2581%259D%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Kyosuke%2520Awata%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRlNWQ4ZTRjZjguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2582%25B9%2520%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MzYmYxMDc5MDQuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kyosuke Awata</dc:creator></item><item><title><![CDATA[Rust における文字列の所有権]]></title><description><![CDATA[
+ はじめに
+Rust で参照&amp;を利用するシーンは少なくないことですよね。
+個人的に、Rust の学習において、所有権、所有権解放、メモリ等は理解しておかなければいけないところかなと感じています。
+今回は文字列にフォーカスして、紹介していけたらと思います。
+
+ 文字列
+参照はすでに知っている方もいらっしゃる方も少なくないかもしれません。
+&amp;を付けることによって、所有権を保持することのない参照の値とすることができます。
+fn main() {
+    let name = "Rust".to_string();
+    let rename = &amp;name;
+
+  ...]]></description><link>https://zenn.dev/collabostyle/articles/b9f185729c934f</link><guid isPermaLink="true">https://zenn.dev/collabostyle/articles/b9f185729c934f</guid><pubDate>Sat, 25 May 2024 15:23:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Ovd4TUzZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%2520%25E3%2581%25AB%25E3%2581%258A%25E3%2581%2591%25E3%2582%258B%25E6%2596%2587%25E5%25AD%2597%25E5%2588%2597%25E3%2581%25AE%25E6%2589%2580%25E6%259C%2589%25E6%25A8%25A9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Iseya%2520Shota%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MxOTFmZDljMTIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25B3%25E3%2583%25A9%25E3%2583%259C%25E3%2582%25B9%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25AB%2520Developers%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YjRyRXVYb0x2SGp5alRaelhENlBCRnZGTzhNTk0zLXlBTWZvM0Q9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Iseya Shota</dc:creator></item><item><title><![CDATA[SQLx を使って PostgreSQL にアクセスする]]></title><description><![CDATA[
+ はじめに
+今回は Rust の SQLx を使って、
+マイグレーションファイルを作成し、PostgreSQLにアクセスするところまでやっていきたいと思います。
+SQLx は様々なデーターベースサービスをサポートしていますので、良いですね。
+PostgreSQL, MySQL, MariaDB, SQLite
+▼SQLx
+https://github.com/launchbadge/sqlx
+
+ プロジェクトを作成
+Rust を動かすディレクトリを作成します。
+$ cargo new sqlx-sample
+$ cd new sqlx-sample
+これで一旦の準備は完了です。
+このタ...]]></description><link>https://zenn.dev/collabostyle/articles/97a5069804b175</link><guid isPermaLink="true">https://zenn.dev/collabostyle/articles/97a5069804b175</guid><pubDate>Sat, 25 May 2024 09:40:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Cgr7ytn4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:SQLx%2520%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%2520PostgreSQL%2520%25E3%2581%25AB%25E3%2582%25A2%25E3%2582%25AF%25E3%2582%25BB%25E3%2582%25B9%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Iseya%2520Shota%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MxOTFmZDljMTIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25B3%25E3%2583%25A9%25E3%2583%259C%25E3%2582%25B9%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25AB%2520Developers%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YjRyRXVYb0x2SGp5alRaelhENlBCRnZGTzhNTk0zLXlBTWZvM0Q9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Iseya Shota</dc:creator></item><item><title><![CDATA[AWS のスイッチロールを簡単に実行するコマンドを書きました]]></title><description><![CDATA[類似品は色々とあるし、何なら AWS CLI と簡単なシェルスクリプトだけでも実現できます[1]。
+https://github.com/99designs/aws-vault
+https://github.com/yoshihitoh/assume-rolers
+https://github.com/sinofseven/aws-masquerade
+環境変数に AWS_ACCESS_KEY_ID や AWS_SECRET_ACCESS_KEY なんかを入れておいたらよしなにしてくれるやつが欲しかったんですが、探してみたけどどれもそういうことはできませんでした。
+aws-vault は...]]></description><link>https://zenn.dev/okkez/articles/0101a435a28d43</link><guid isPermaLink="true">https://zenn.dev/okkez/articles/0101a435a28d43</guid><pubDate>Sat, 25 May 2024 00:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--zglMv-PC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AWS%2520%25E3%2581%25AE%25E3%2582%25B9%25E3%2582%25A4%25E3%2583%2583%25E3%2583%2581%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%25AB%25E3%2582%2592%25E7%25B0%25A1%25E5%258D%2598%25E3%2581%25AB%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%2599%25E3%2582%258B%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2582%2592%25E6%259B%25B8%25E3%2581%258D%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:okkez%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZlYmNkZTFhN2YuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>okkez</dc:creator></item><item><title><![CDATA[プロジェクト内の様々な確認を行う：cargo-denyメモ [blessed.rsシリーズ11]]]></title><description><![CDATA[
+ 概要
+https://blessed.rs/crates
+こちらのリストにあるものを見て書いたメモになります。
+今回はcargo-denyについてです。
+
+ cargo-denyとは
+プロジェクト内の様々な確認を行うcargoの拡張ツール
+
+ わかりやすいサイト
+
+https://qiita.com/KisaragiEffective/items/30071957ae4174fdaf1a
+
+
+ install
+https://github.com/EmbarkStudios/cargo-deny?tab=readme-ov-file#install-cargo-deny
+$ carg...]]></description><link>https://zenn.dev/kotabrog/articles/4d971167af4664</link><guid isPermaLink="true">https://zenn.dev/kotabrog/articles/4d971167af4664</guid><pubDate>Thu, 23 May 2024 11:09:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Irp9pbwI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E5%2586%2585%25E3%2581%25AE%25E6%25A7%2598%25E3%2580%2585%25E3%2581%25AA%25E7%25A2%25BA%25E8%25AA%258D%25E3%2582%2592%25E8%25A1%258C%25E3%2581%2586%25EF%25BC%259Acargo-deny%25E3%2583%25A1%25E3%2583%25A2%2520%255Bblessed.rs%25E3%2582%25B7%25E3%2583%25AA%25E3%2583%25BC%25E3%2582%25BA11%255D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kota%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pndUZyRTdIcS13U3dMRHFoT05pbjFKWVZHOVFZcjBEWXQ2SVZ3WWc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kota</dc:creator></item><item><title><![CDATA[RustとEmbassyでKeyballのファームウェアを作った]]></title><description><![CDATA[
+ はじめに
+以前RustでKeyballのファームウェアを書きたい話で、ATMega32U4向けのファームウェアの作成をRustで試みたという話を書きましたが、結論から言うとこれは諦めてProMicro RP2040向けのファームウェアをRustで書くことにしました。
+理由は当該記事に既にちらっと書いているのですが
+
+USBの謎バグを解決できなかった
+さすがにメモリサイズが小さすぎる
+RP2040であればEmbassyが対応している
+というのが大まかなものになっています。
+
+今回は純正品ではなくAliExpressで互換品を購入したのですが、これは16MBのフラッシュメモリを積んでおり...]]></description><link>https://zenn.dev/nazo6/articles/keyball-embassy-rp2040</link><guid isPermaLink="true">https://zenn.dev/nazo6/articles/keyball-embassy-rp2040</guid><pubDate>Wed, 22 May 2024 14:32:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3lawgCle--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25A8Embassy%25E3%2581%25A7Keyball%25E3%2581%25AE%25E3%2583%2595%25E3%2582%25A1%25E3%2583%25BC%25E3%2583%25A0%25E3%2582%25A6%25E3%2582%25A7%25E3%2582%25A2%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nazo6%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc0YTA4ZjY1ZTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nazo6</dc:creator></item><item><title><![CDATA[OpenTelemetry と OpenObserve でトレースとログを可視化してみた]]></title><description><![CDATA[マイクロサービスや分散システムなど今のシステムは複雑化していて全体の挙動を把握することは難しくなってきています。そこでシステムの内部状態を外部から可視化しシステムのパフォーマンスや健全性を維持するオブザーバビリティは必要不可欠となっています。
+オブザーバビリティを高めることで、
+
+障害の迅速な検出：リアルタイムでシステムの状態を監視し、問題が発生したときに通知することでダウンタイムを最小限に抑えられる
+信頼性の向上: アプリケーションのレスポンス時間やエラーレートなどを監視して自動リカバリ機能を実装したりユーザー体験の向上に繋げられる
+パフォーマンスの最適化：システムのボトルネックを特定...]]></description><link>https://zenn.dev/pyama2000/articles/0ad0e8db11d854</link><guid isPermaLink="true">https://zenn.dev/pyama2000/articles/0ad0e8db11d854</guid><pubDate>Wed, 22 May 2024 11:24:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--O9EFbLoe--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:OpenTelemetry%2520%25E3%2581%25A8%2520OpenObserve%2520%25E3%2581%25A7%25E3%2583%2588%25E3%2583%25AC%25E3%2583%25BC%25E3%2582%25B9%25E3%2581%25A8%25E3%2583%25AD%25E3%2582%25B0%25E3%2582%2592%25E5%258F%25AF%25E8%25A6%2596%25E5%258C%2596%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:pyama2000%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvcC5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>pyama2000</dc:creator></item><item><title><![CDATA[Diesel ORM 動的なクエリ発行ハック]]></title><description><![CDATA[
+ 背景・問題
+Diesel ORMで動的にクエリを生成したいことがある。
+特定の条件に当てはまるときのみ、WHEREを追加したいときはよくあるだろう。
+そういった場合はinto_boxed(https://docs.rs/diesel/latest/diesel/prelude/trait.QueryDsl.html#method.into_boxed) を使用すれば容易に解決できる。
+例はdocs.rsの方に載っているのでそちらを参照。
+この記事で紹介するのはそういった基本的な解決法ではなく、特定のユースケースに対応するための少しハッキーな方法だ。
+このようなSQLをORMで実現した...]]></description><link>https://zenn.dev/kbwok/articles/diesel-dynamic-query</link><guid isPermaLink="true">https://zenn.dev/kbwok/articles/diesel-dynamic-query</guid><pubDate>Tue, 21 May 2024 15:58:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--IXgVLE9m--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Diesel%2520ORM%2520%25E5%258B%2595%25E7%259A%2584%25E3%2581%25AA%25E3%2582%25AF%25E3%2582%25A8%25E3%2583%25AA%25E7%2599%25BA%25E8%25A1%258C%25E3%2583%258F%25E3%2583%2583%25E3%2582%25AF%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kbwo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzkxMzQ1ZGZjYjguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kbwo</dc:creator></item><item><title><![CDATA[依存関係のライセンスの確認：cargo-licenseメモ [blessed.rsシリーズ10]]]></title><description><![CDATA[
+ 概要
+https://blessed.rs/crates
+こちらのリストにあるものを見て書いたメモになります。
+今回はcargo-licenseについてです。
+
+ cargo-licenseとは
+dependenciesのライセンスを確認するcargoの拡張ツール
+
+ install
+https://github.com/onur/cargo-license?tab=readme-ov-file#installation-and-usage
+$ cargo install cargo-license
+
+ 使用方法
+https://github.com/onur/cargo-licen...]]></description><link>https://zenn.dev/kotabrog/articles/55565684cdeed0</link><guid isPermaLink="true">https://zenn.dev/kotabrog/articles/55565684cdeed0</guid><pubDate>Tue, 21 May 2024 15:36:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--gEZXayrU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E4%25BE%259D%25E5%25AD%2598%25E9%2596%25A2%25E4%25BF%2582%25E3%2581%25AE%25E3%2583%25A9%25E3%2582%25A4%25E3%2582%25BB%25E3%2583%25B3%25E3%2582%25B9%25E3%2581%25AE%25E7%25A2%25BA%25E8%25AA%258D%25EF%25BC%259Acargo-license%25E3%2583%25A1%25E3%2583%25A2%2520%255Bblessed.rs%25E3%2582%25B7%25E3%2583%25AA%25E3%2583%25BC%25E3%2582%25BA10%255D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kota%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pndUZyRTdIcS13U3dMRHFoT05pbjFKWVZHOVFZcjBEWXQ2SVZ3WWc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kota</dc:creator></item><item><title><![CDATA[【Rust】MongoDBで配列内の特定の値だけnullに更新する実装]]></title><description><![CDATA[
+ 概要
+MongoDBで配列内の値を更新するクエリはMongoDBで配列内の特定の値だけを更新するの記事で紹介されています。
+今回はこの記事を参考にして、Rustで配列内の特定の値だけnullに更新する実装をしてみたのでメモ書きします。
+
+ 前提
+
+今回使用したrustcのバージョンは1.78.0、mongo-rust-driverのバージョンは2.8.2です。
+
+
+ 実装のポイント
+
+nullをどうやって設定するかという点について、bsonのドキュメントにあるNullのenumを使用します。
+
+array_filtersに設定する実装として、UpdateOptionsを使用します。u...]]></description><link>https://zenn.dev/someone7140/articles/12c17433c57734</link><guid isPermaLink="true">https://zenn.dev/someone7140/articles/12c17433c57734</guid><pubDate>Tue, 21 May 2024 10:49:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--kVd56Vh8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Rust%25E3%2580%2591MongoDB%25E3%2581%25A7%25E9%2585%258D%25E5%2588%2597%25E5%2586%2585%25E3%2581%25AE%25E7%2589%25B9%25E5%25AE%259A%25E3%2581%25AE%25E5%2580%25A4%25E3%2581%25A0%25E3%2581%2591null%25E3%2581%25AB%25E6%259B%25B4%25E6%2596%25B0%25E3%2581%2599%25E3%2582%258B%25E5%25AE%259F%25E8%25A3%2585%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AA%25E3%2581%258B%25E3%2581%25A4%25E3%2581%258C%25E3%2582%258F%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFhNWRlOTE4YjEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>なかつがわ</dc:creator></item><item><title><![CDATA[Rust の slog の基本設定]]></title><description><![CDATA[開発において効果的なログ管理は非常に重要です。
+slogは構造化ログのための強力なライブラリなのですが、意外とまとまった記事が見つかりませんでした。もちろん公式サイトにはちゃんと書いてあるのですが、基本的な内容がほしいなと思いまとめてみました。
+
+ 全体像 (logging.rs)
+最初に、DEFAULTとしてslogを設定している具体例を示し、順に解説していきます。
+この例ではバージョン情報が全体のログに付与されるように設定してあります。
+
+logging.rs
+use once_cell::sync::Lazy;
+pub use slog::*;
+use slog_async::As...]]></description><link>https://zenn.dev/sawatani/articles/6f8790adb6d2c9</link><guid isPermaLink="true">https://zenn.dev/sawatani/articles/6f8790adb6d2c9</guid><pubDate>Mon, 20 May 2024 14:04:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--CHz5iPWb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%2520%25E3%2581%25AE%2520slog%2520%25E3%2581%25AE%25E5%259F%25BA%25E6%259C%25AC%25E8%25A8%25AD%25E5%25AE%259A%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:sawatani%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2IyYzQ3NmVkMTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sawatani</dc:creator></item><item><title><![CDATA[技術書典 16 と Rust グラフィックス本のご紹介]]></title><description><![CDATA[技術書典をご存知ですか？
+テックベース合同会社と事務局が運営している、技術書オンリーイベントです。
+年 2 回のペースで開催されており、オフライン会場（＠池袋）は毎回なかなかの賑わいを見せています。
+運営による書籍の出版や販売に関する情報発信なども手厚く、未経験者も安心してサークル出展できます。
+https://techbookfest.org/event/tbf16
+一般参加する側から見ても、技術書典は注目のイベントです。
+ノウハウをぎゅっと一冊にまとめましたみたいな技術書が、手軽に入手できるのが一番うれしいです[1]。
+商業書籍では見られないニッチな話題や、新しすぎる技術を扱ったもの...]]></description><link>https://zenn.dev/abechanta/articles/e00335c11600f8</link><guid isPermaLink="true">https://zenn.dev/abechanta/articles/e00335c11600f8</guid><pubDate>Sun, 19 May 2024 22:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--KT_fHRLq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%258A%2580%25E8%25A1%2593%25E6%259B%25B8%25E5%2585%25B8%252016%2520%25E3%2581%25A8%2520Rust%2520%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%2595%25E3%2582%25A3%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25B9%25E6%259C%25AC%25E3%2581%25AE%25E3%2581%2594%25E7%25B4%25B9%25E4%25BB%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:abechanta%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUVkRlRwNEI3T0NCbHEyVWdEZmo5NFBhZ29QcFNobjFSTUREaDNSZnJYc1Y9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>abechanta</dc:creator></item><item><title><![CDATA[そもそもプログラミング経験自体無い人がRustを学ぶとき，どんな順序が良いのか]]></title><description><![CDATA[遠きに行くには必ず邇きよりす．高きに登るには必ず卑きよりす．何事にも順序というものがあります．Rust の学習もそうです．
+そこで，前提知識がほぼ無い状態から Rust を学ぶときに，どんな順序が良いのか，考えてみました．
+
+
+コンパイル時と実行時の区別．
+Rust を学ぶとき，何がコンパイル時に起こって何が実行時に起こるか分からないと困ります．特に，型検査と借用検査がコンパイル時に行われることは，それらの基本的な規則を知る際に大切です．そこで，最初に Hello world を書く時点で，コンパイル→実行という流れを押さえておくべきでしょう．
+
+
+コンパイルエラーの読み方．
+まずコンパ...]]></description><link>https://zenn.dev/toga/articles/rust-for-beginner</link><guid isPermaLink="true">https://zenn.dev/toga/articles/rust-for-beginner</guid><pubDate>Sun, 19 May 2024 13:17:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GjOV9Eb8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%259D%25E3%2582%2582%25E3%2581%259D%25E3%2582%2582%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%259F%25E3%2583%25B3%25E3%2582%25B0%25E7%25B5%258C%25E9%25A8%2593%25E8%2587%25AA%25E4%25BD%2593%25E7%2584%25A1%25E3%2581%2584%25E4%25BA%25BA%25E3%2581%258CRust%25E3%2582%2592%25E5%25AD%25A6%25E3%2581%25B6%25E3%2581%25A8%25E3%2581%258D%25EF%25BC%258C%25E3%2581%25A9%25E3%2582%2593%25E3%2581%25AA%25E9%25A0%2586%25E5%25BA%258F%25E3%2581%258C%25E8%2589%25AF%25E3%2581%2584%25E3%2581%25AE%25E3%2581%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A8%25E3%2581%258C%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q1NTBlNjIzOTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>とが</dc:creator></item><item><title><![CDATA[グルーピングのためのデータ構造：Union Find Tree]]></title><description><![CDATA[
+ まとめ
+
+Union Find Tree を利用することで高速にグルーピングすることができます。
+Union Find Tree は要素をインデックスで管理するため、インデックスを求めるためにコストがかかることもあります。
+
+
+
+
+メソッド
+計算量
+
+
+
+
+find_root_idx()
+O(1)
+
+
+same()
+O(1)
+
+
+get_size()
+O(1)
+
+
+unite()
+O(1)
+
+
+size_iter()
+O(n)
+
+
+
+nは要素数
+
+ 所属するグループがわかっている場合
+for文と条件式を組み合わせると何とかなります。単に２つのグループに分ける場合、標準ライブラリにある...]]></description><link>https://zenn.dev/yatyou/articles/8a14ff1925cbc5</link><guid isPermaLink="true">https://zenn.dev/yatyou/articles/8a14ff1925cbc5</guid><pubDate>Sun, 19 May 2024 07:12:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0zHppl_z--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B0%25E3%2583%25AB%25E3%2583%25BC%25E3%2583%2594%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%25AE%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E6%25A7%258B%25E9%2580%25A0%25EF%25BC%259AUnion%2520Find%2520Tree%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yatyou%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSjJhZldfVDRNTWJCUzNDeG9YSlpnNFhJbndOeFkxbTB1TWxTWGtCSm9nPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yatyou</dc:creator></item><item><title><![CDATA[Rust 基本文法 - Struct 構造体-]]></title><description><![CDATA[
+ はじめに
+Struct は Rust における構造体を意味します。
+基本文法シリーズは全てそうなのですが、構造体の文法はかなり基本的になるので、紹介していきます。
+いつものように、Rust Playground で手を動かすことができますので、良ければ一緒に書いていきましょう。
+https://play.rust-lang.org/
+
+ 構造体
+構造体は、データ型をまとめたものです。
+Rust には データ型という概念があり、変数や関数などの要素にはデータ型というものがついてきます。
+それらを一つに取りまとめたのが、構造体です。
+データ型
+https://doc.rust-jp.rs...]]></description><link>https://zenn.dev/collabostyle/articles/2b037847a4e243</link><guid isPermaLink="true">https://zenn.dev/collabostyle/articles/2b037847a4e243</guid><pubDate>Sat, 18 May 2024 08:41:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--h3DNbqWd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%2520%25E5%259F%25BA%25E6%259C%25AC%25E6%2596%2587%25E6%25B3%2595%2520-%2520Struct%2520%25E6%25A7%258B%25E9%2580%25A0%25E4%25BD%2593-%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Iseya%2520Shota%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MxOTFmZDljMTIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25B3%25E3%2583%25A9%25E3%2583%259C%25E3%2582%25B9%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25AB%2520Developers%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YjRyRXVYb0x2SGp5alRaelhENlBCRnZGTzhNTk0zLXlBTWZvM0Q9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Iseya Shota</dc:creator></item><item><title><![CDATA[Dioxus v0.5 でデスクトップアプリを作って学んだこと、妥協したこと]]></title><description><![CDATA[
+ 概要
+Dioxus でデスクトップアプリを作って学んだこと、妥協したこと、所感を雑にまとめました。
+
+ 作りたかったデスクトップアプリ
+
+DICOM ファイルを読み込んで画像を表示・ダウンロードできるデスクトップアプリです。
+サポートする OS は Windows, Mac, Linux です。
+リポジトリは こちら です。
+
+
+ 環境
+
+cargo 1.78.0 (54d8815d0 2024-03-26)
+rustup 1.27.1 (54dd3d00f 2024-04-24)
+dioxus 0.5.4
+
+
+ 学んだこと
+
+
+dx serve で起動したアプリは常にフォアグラウン...]]></description><link>https://zenn.dev/st_little/articles/lessons-compromises-desktop-app-with-dioxus-v05</link><guid isPermaLink="true">https://zenn.dev/st_little/articles/lessons-compromises-desktop-app-with-dioxus-v05</guid><pubDate>Fri, 17 May 2024 11:39:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--NQh8-cNn--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Dioxus%2520v0.5%2520%25E3%2581%25A7%25E3%2583%2587%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%2588%25E3%2583%2583%25E3%2583%2597%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E5%25AD%25A6%25E3%2582%2593%25E3%2581%25A0%25E3%2581%2593%25E3%2581%25A8%25E3%2580%2581%25E5%25A6%25A5%25E5%258D%2594%25E3%2581%2597%25E3%2581%259F%25E3%2581%2593%25E3%2581%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:st-little%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUxtNXd1MzFRX0lpMkZWUVdwclRKOUluaXJPN092TlI2WkV6c1A3WGRRMTU9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>st-little</dc:creator></item><item><title><![CDATA[proconioで入力を受け取るメモ]]></title><description><![CDATA[
+ 整数の入力
+改行でもスペース区切りでも関係ないです。
+
+ 入力
+N
+A B
+
+input! {
+    n: usize,
+    a: isize,
+    b: isize
+}
+
+ 文字列の入力
+input!の型にBytesを指定すると、入力された文字列をVec&lt;u8&gt;に変換してくれます。
+もちろんStringも指定できますし、Vec&lt;char&gt;にしてくれるCharsもありますが、基本u8内に収まりますし、後でs[i] - b'a'のような操作がしやすいのでVec&lt;u8&gt;推しです。
+
+ 入力
+S
+
+input! {
+    s: Bytes
+}...]]></description><link>https://zenn.dev/maple8192/articles/ad8754759ec01c</link><guid isPermaLink="true">https://zenn.dev/maple8192/articles/ad8754759ec01c</guid><pubDate>Fri, 17 May 2024 09:42:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--TbBkvOE8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:proconio%25E3%2581%25A7%25E5%2585%25A5%25E5%258A%259B%25E3%2582%2592%25E5%258F%2597%25E3%2581%2591%25E5%258F%2596%25E3%2582%258B%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2581%25E3%2581%2587%25E3%2581%25B7%25E3%2582%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lIdGRwYVVQaFV1UVlEdEMtYy1UbVFJb1dEY0xxNGk2WWhOekV6PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>めぇぷる</dc:creator></item><item><title><![CDATA[依存関係の脆弱性確認：cargo auditメモ [blessed.rsシリーズ9]]]></title><description><![CDATA[
+ 概要
+https://blessed.rs/crates
+こちらのリストにあるものを見て書いたメモになります。
+今回はcargo auditについてです。
+
+ cargo auditとは
+脆弱性を持つクレートの依存関係をRustSec Advisory Databaseから見つけるツール
+
+ わかりやすい記事
+https://zenn.dev/shinyay/articles/hello-rust-day072
+
+ install
+https://github.com/RustSec/rustsec/tree/main/cargo-audit#installation
+$ cargo...]]></description><link>https://zenn.dev/kotabrog/articles/518d43b8ac2e19</link><guid isPermaLink="true">https://zenn.dev/kotabrog/articles/518d43b8ac2e19</guid><pubDate>Thu, 16 May 2024 11:23:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3Gib0zBs--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E4%25BE%259D%25E5%25AD%2598%25E9%2596%25A2%25E4%25BF%2582%25E3%2581%25AE%25E8%2584%2586%25E5%25BC%25B1%25E6%2580%25A7%25E7%25A2%25BA%25E8%25AA%258D%25EF%25BC%259Acargo%2520audit%25E3%2583%25A1%25E3%2583%25A2%2520%255Bblessed.rs%25E3%2582%25B7%25E3%2583%25AA%25E3%2583%25BC%25E3%2582%25BA9%255D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kota%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pndUZyRTdIcS13U3dMRHFoT05pbjFKWVZHOVFZcjBEWXQ2SVZ3WWc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kota</dc:creator></item><item><title><![CDATA[依存関係のversion確認：cargo-outdatedメモ [blessed.rsシリーズ8]]]></title><description><![CDATA[
+ 概要
+https://blessed.rs/crates
+こちらのリストにあるものを見て書いたメモになります。
+今回はcargo-outdatedについてです。
+
+ cargo-outdatedとは
+古くなった依存関係を表示するcargoの拡張機能
+
+ わかりやすい記事
+https://zenn.dev/shinyay/articles/hello-rust-day071
+
+ install
+https://github.com/kbknapp/cargo-outdated?tab=readme-ov-file#installing
+$ cargo install --locked ...]]></description><link>https://zenn.dev/kotabrog/articles/30f4c3ac087bc4</link><guid isPermaLink="true">https://zenn.dev/kotabrog/articles/30f4c3ac087bc4</guid><pubDate>Wed, 15 May 2024 13:56:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--sll9JfLB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E4%25BE%259D%25E5%25AD%2598%25E9%2596%25A2%25E4%25BF%2582%25E3%2581%25AEversion%25E7%25A2%25BA%25E8%25AA%258D%25EF%25BC%259Acargo-outdated%25E3%2583%25A1%25E3%2583%25A2%2520%255Bblessed.rs%25E3%2582%25B7%25E3%2583%25AA%25E3%2583%25BC%25E3%2582%25BA8%255D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kota%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pndUZyRTdIcS13U3dMRHFoT05pbjFKWVZHOVFZcjBEWXQ2SVZ3WWc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kota</dc:creator></item></channel></rss>

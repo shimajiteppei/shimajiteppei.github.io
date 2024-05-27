@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Mon, 27 May 2024 12:03:37 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[気が付いたら自作ライブラリが世界中で使われていた件]]></title><description><![CDATA[
+ OSS文化良く分からん
+こんにちは、北神です。
+なんかこの頃、国内OSSは海外で見向きもされないって話が出てたので、なんか知らんが世界中で使われた事例も乗っけて置こうかと思いました。
+北神について
+https://github.com/nonNoise/HelloWorld/tree/master
+基本的には、電子機器や組込み開発を多くやってます。
+
+ どのライブラリの話？
+自分はGithub文化が好きで、何でもGithubで公開すると言った形で、クソソースも沢山上げてます。
+空プロジェクトだって色々あったりします。日記だってあります。
+一番流行ったライブラリはこちら
+https:/...]]></description><link>https://zenn.dev/nonnoise/articles/ea354496ad7136</link><guid isPermaLink="true">https://zenn.dev/nonnoise/articles/ea354496ad7136</guid><pubDate>Mon, 27 May 2024 09:26:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xXjFK5TQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%25B0%2597%25E3%2581%258C%25E4%25BB%2598%25E3%2581%2584%25E3%2581%259F%25E3%2582%2589%25E8%2587%25AA%25E4%25BD%259C%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%25E3%2581%258C%25E4%25B8%2596%25E7%2595%258C%25E4%25B8%25AD%25E3%2581%25A7%25E4%25BD%25BF%25E3%2582%258F%25E3%2582%258C%25E3%2581%25A6%25E3%2581%2584%25E3%2581%259F%25E4%25BB%25B6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%258C%2597%25E7%25A5%259E%25E9%259B%2584%25E5%25A4%25AA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M0YTYxODY1YTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>北神雄太</dc:creator></item><item><title><![CDATA[asdf でPythonのバージョン管理]]></title><description><![CDATA[
+ asdf とは
+asdf は、複数の言語やツールのバージョン管理を一括で管理できるツールです。
+https://asdf-vm.com/
+
+ インストール
+Homebrew でインストールします。
+$ brew install asdf
+
+ シェルの組み込み
+こちらを参考にシェルへ組み込みます。シェル起動時に asdf を読み込むように設定します。 exec $SHELL -l でシェルを再起動します。
+$ echo -e "\n. $(brew --prefix asdf)/libexec/asdf.sh" &gt;&gt; ${ZDOTDIR:-~}/.zshrc
+$ exec ...]]></description><link>https://zenn.dev/hayato94087/articles/41a21fe7ed1282</link><guid isPermaLink="true">https://zenn.dev/hayato94087/articles/41a21fe7ed1282</guid><pubDate>Mon, 27 May 2024 09:23:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--OCmJ_hRk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:asdf%2520%25E3%2581%25A7Python%25E3%2581%25AE%25E3%2583%2590%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%25A7%25E3%2583%25B3%25E7%25AE%25A1%25E7%2590%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hayato94087%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU5ZTEyZGJjZTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hayato94087</dc:creator></item><item><title><![CDATA[Pythonで特定のプロセスが実行中か高速で確認する方法]]></title><description><![CDATA[
+ 概要
+Pythonで特定のプロセスが実行中かどうかを確認する方法として、
+
+subprocessを使った方法
+検索でよく引っかかるpsutilを使った方法
+
+の2パターンで、
+例としてVRChat.exeというプロセスが実行されているか確認した際の処理時間を比較します。
+
+ 環境
+
+Windows10 64bit
+Python 3.7.5
+
+
+ 結果：subprocessを使うと速い
+・VRChat.exeが実行中の状態。subprocessの方が3.3倍速い。
+
+
+
+方式
+処理時間[s]
+
+
+
+
+subprocess使用
+0.143
+
+
+psutil使用
+0.473
+
+
+
+・VRC...]]></description><link>https://zenn.dev/dimebag29/articles/4f09a2025f36f5</link><guid isPermaLink="true">https://zenn.dev/dimebag29/articles/4f09a2025f36f5</guid><pubDate>Mon, 27 May 2024 09:04:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--66eCky9X--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A7%25E7%2589%25B9%25E5%25AE%259A%25E3%2581%25AE%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25BB%25E3%2582%25B9%25E3%2581%258C%25E5%25AE%259F%25E8%25A1%258C%25E4%25B8%25AD%25E3%2581%258B%25E9%25AB%2598%25E9%2580%259F%25E3%2581%25A7%25E7%25A2%25BA%25E8%25AA%258D%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:dimebag29%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBiNGJmZjVlM2IuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>dimebag29</dc:creator></item><item><title><![CDATA[nvim-treesitter は Python のインデントを壊す (共存方法まで紹介)]]></title><description><![CDATA[
+ はじめに
+nvim-treesitterを導入していると、たまに Python のインデントがバグります。
+
+oによる改行でのインデントがおかしくなっている様子
+
+
+仕組み上仕方のないコンフリクトなんですが、初見だと戸惑いますし何が原因か分からないかと思います。
+本記事では
+
+なぜ起きるのか
+どうやって回避するのか
+
+について説明します。
+
+ 原因
+原因になる行はこういうものです。
+if s == "(":
+文字列の ( なんかが含まれる行ですね。
+組み込みや Vimjas/vim-python-pep8-indent による Python のインデント計算は、シンタックスハイライト...]]></description><link>https://zenn.dev/uga_rosa/articles/9eb5063f8f9b75</link><guid isPermaLink="true">https://zenn.dev/uga_rosa/articles/9eb5063f8f9b75</guid><pubDate>Sun, 26 May 2024 15:05:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0fRjy0Xl--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:nvim-treesitter%2520%25E3%2581%25AF%2520Python%2520%25E3%2581%25AE%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2587%25E3%2583%25B3%25E3%2583%2588%25E3%2582%2592%25E5%25A3%258A%25E3%2581%2599%2520%2528%25E5%2585%25B1%25E5%25AD%2598%25E6%2596%25B9%25E6%25B3%2595%25E3%2581%25BE%25E3%2581%25A7%25E7%25B4%25B9%25E4%25BB%258B%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:uga-rosa%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RkMWRkZmY1ZjIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>uga-rosa</dc:creator></item><item><title><![CDATA[Dockerを活用したLambdaの開発＆本番環境のおすすめ構成]]></title><description><![CDATA[
+ はじめに
+Lambdaの開発＆本番環境の構成について
+色々と試してきたが、Dockerを利用するのが良かったのでオススメとして紹介
+
+ Lambda開発の一般的な課題
+
+
+開発環境の設定
+
+開発環境の構築時に、本番環境との差異をなくす構成を取るのに苦労する
+また、環境の作り方によっては開発がしづらい構成になってしまう
+
+
+
+デプロイの複雑さ
+
+複数の環境（DEV、STG、PRDなど）が存在する場合、デプロイが複雑になることがある
+自動化すれば良いものの、複雑なものを自動化するのにも苦労する
+
+
+
+
+ よくある構成と課題
+
+ 1. エイリアスを使用した環境分割
+Lambdaではエイリア...]]></description><link>https://zenn.dev/konan/articles/efd004b1810463</link><guid isPermaLink="true">https://zenn.dev/konan/articles/efd004b1810463</guid><pubDate>Sun, 26 May 2024 14:04:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--onxXdXTc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%25E3%2582%2592%25E6%25B4%25BB%25E7%2594%25A8%25E3%2581%2597%25E3%2581%259FLambda%25E3%2581%25AE%25E9%2596%258B%25E7%2599%25BA%25EF%25BC%2586%25E6%259C%25AC%25E7%2595%25AA%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25AE%25E3%2581%258A%25E3%2581%2599%25E3%2581%2599%25E3%2582%2581%25E6%25A7%258B%25E6%2588%2590%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Konan%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZmODc1ZTg4OGYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Konan</dc:creator></item><item><title><![CDATA[年金をもらい始める最適なタイミングを計算してみた]]></title><description><![CDATA[
+ はじめに
+お久しぶりです。社会人になってようやく落ち着いてきて、FP3級の勉強を始めました。そこで出てきた年金の話で何歳に貰えば損しないのかという疑問が出たので解決しようと思います。
+
+ 本題
+老齢年金は2種類あって、国民保険の老齢基礎年金と、会社員の人が入っている、老齢厚生年金があります。そして、年金は働きながらももらえるらしいです。
+基礎年金は給与に関わらず全額、厚生年金は給与と年金の合計を48万円以下に抑えないと、全額もらえないので注意です。
+・基本年金月額 + 総報酬月額相当額が50万円以下の場合　→全額支給
+・基本月額 + 総報酬月額相当額が50万円を超える場合
+→基本月額...]]></description><link>https://zenn.dev/totopironote/articles/69846330ea74e6</link><guid isPermaLink="true">https://zenn.dev/totopironote/articles/69846330ea74e6</guid><pubDate>Sun, 26 May 2024 13:16:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--VcBqzzTl--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%25B9%25B4%25E9%2587%2591%25E3%2582%2592%25E3%2582%2582%25E3%2582%2589%25E3%2581%2584%25E5%25A7%258B%25E3%2582%2581%25E3%2582%258B%25E6%259C%2580%25E9%2581%25A9%25E3%2581%25AA%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%259F%25E3%2583%25B3%25E3%2582%25B0%25E3%2582%2592%25E8%25A8%2588%25E7%25AE%2597%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A8%25E3%2581%25A8%25E3%2581%25B4%25E3%2582%258Dnote%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzUzZTJhNzk2ZWIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ととぴろnote</dc:creator></item><item><title><![CDATA[30代未経験メカエンジニアがITエンジニアを目指すことにしました]]></title><description><![CDATA[ご覧いただきありがとうございます！
+東海地方でメカエンジニアとして働いているSomeと申します。
+タイトルにあります通り、30代未経験からITエンジニアを目指します！
+これから毎週日曜日、”自分にとっての進捗状況整理”と、”これからITエンジニアを目指す方の参考に”、という意味で投稿していくことにしました。
+まずは簡単な自己紹介をさせてください。
+
+ 自己紹介
+
+年齢：31
+住所：東海地方（名古屋付近）
+職業：メカエンジニア
+家族構成：妻・子一人
+趣味：ガジェット収集
+
+本業のメカエンジニアではリーダーポジションでチーム全体のプロジェクト管理やフォローアップを担当。
+4年前の27歳ごろか...]]></description><link>https://zenn.dev/some55/articles/efa413962e1dee</link><guid isPermaLink="true">https://zenn.dev/some55/articles/efa413962e1dee</guid><pubDate>Sun, 26 May 2024 11:08:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--buCt4Dhb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:30%25E4%25BB%25A3%25E6%259C%25AA%25E7%25B5%258C%25E9%25A8%2593%25E3%2583%25A1%25E3%2582%25AB%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%25E3%2581%258CIT%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%25E3%2582%2592%25E7%259B%25AE%25E6%258C%2587%25E3%2581%2599%25E3%2581%2593%25E3%2581%25A8%25E3%2581%25AB%25E3%2581%2597%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:some%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQzNWYzNjQ4YWQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>some</dc:creator></item><item><title><![CDATA[【python】複数HTMLファイル内の頻出ワードをカウントする]]></title><description><![CDATA[用意したhtmlは以下の通り
+file1.html
+&lt;!DOCTYPE html&gt;
+&lt;html lang="ja"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Sample HTML&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;学校に行くのは毎日楽しいです。学校ではたくさんのことを学びます。友達と一緒に勉強するのが好きです。&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+file2....]]></description><link>https://zenn.dev/ak358/articles/6e88dc3edbaf81</link><guid isPermaLink="true">https://zenn.dev/ak358/articles/6e88dc3edbaf81</guid><pubDate>Sun, 26 May 2024 10:08:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--uVvbvFjN--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590python%25E3%2580%2591%25E8%25A4%2587%25E6%2595%25B0HTML%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E5%2586%2585%25E3%2581%25AE%25E9%25A0%25BB%25E5%2587%25BA%25E3%2583%25AF%25E3%2583%25BC%25E3%2583%2589%25E3%2582%2592%25E3%2582%25AB%25E3%2582%25A6%25E3%2583%25B3%25E3%2583%2588%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ak358%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NmN2MyMDNjNDEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ak358</dc:creator></item><item><title><![CDATA[pydeckで2011年東北地方太平洋沖地震の津波高を可視化してみた]]></title><description><![CDATA[
+ はじめに
+pydeckは、地理空間情報の可視化に強みをもつdeck.glのPythonバインディングライブラリです。この記事では、Google Colab上でpydeckを使用することで、津波の高さ分布をインタラクティブに確認できるか試してみました。
+
+出典：東北地方太平洋沖地震津波合同調査グループデータ, 2024/05/10参照
+
+ 動作環境
+
+Google Colaboratory
+Python 3.10.12
+cmcrameri 1.9
+pandas 2.0.3
+pydeck 0.9.0
+numpy 1.25.2
+
+
+ データの特徴
+東北地方太平洋沖地震津波の痕跡高データセッ...]]></description><link>https://zenn.dev/rescuenow/articles/7276c40e333f68</link><guid isPermaLink="true">https://zenn.dev/rescuenow/articles/7276c40e333f68</guid><pubDate>Sun, 26 May 2024 05:49:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--d1Rrp5yn--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:pydeck%25E3%2581%25A72011%25E5%25B9%25B4%25E6%259D%25B1%25E5%258C%2597%25E5%259C%25B0%25E6%2596%25B9%25E5%25A4%25AA%25E5%25B9%25B3%25E6%25B4%258B%25E6%25B2%2596%25E5%259C%25B0%25E9%259C%2587%25E3%2581%25AE%25E6%25B4%25A5%25E6%25B3%25A2%25E9%25AB%2598%25E3%2582%2592%25E5%258F%25AF%25E8%25A6%2596%25E5%258C%2596%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%2599%25E3%2581%25B5%25E3%2583%25BC%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E0NWI1N2NlZmMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%25AC%25E3%2582%25B9%25E3%2582%25AD%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%258A%25E3%2582%25A6%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I2ZmY3ZDJhMDQuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>すふー</dc:creator></item><item><title><![CDATA[【Django】可読性の高いディレクトリ構造を目指したら、urls.pyで詰まった件]]></title><description><![CDATA[
+ はじめに
+
+ この記事の対象読者
+
+Django初心者
+プログラミング初心者
+
+
+ 環境
+
+Mac M2
+Python 3.9
+Django 4.2.11
+
+
+ 背景
+Djangoのデフォルトのディレクトリ構造が、アプリケーションディレクトリを作成するたびに見えづらくなるなと感じたので、appsディレクトリを作成し、その中に全てのアプリケーションディレクトリを作成しようと考えたのが事の発端です。
+
+ やりたかったこと
+
+ 可読性の高いディレクトリ構造の作成
+※一部の今回の内容に不要なファイル等は記載しておりません。
+root
+├── Dockerfile
+├── README.md
+...]]></description><link>https://zenn.dev/tech_learner/articles/dd24a06b8fe318</link><guid isPermaLink="true">https://zenn.dev/tech_learner/articles/dd24a06b8fe318</guid><pubDate>Sun, 26 May 2024 04:43:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qaryloDJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Django%25E3%2580%2591%25E5%258F%25AF%25E8%25AA%25AD%25E6%2580%25A7%25E3%2581%25AE%25E9%25AB%2598%25E3%2581%2584%25E3%2583%2587%25E3%2582%25A3%25E3%2583%25AC%25E3%2582%25AF%25E3%2583%2588%25E3%2583%25AA%25E6%25A7%258B%25E9%2580%25A0%25E3%2582%2592%25E7%259B%25AE%25E6%258C%2587%25E3%2581%2597%25E3%2581%259F%25E3%2582%2589%25E3%2580%2581urls.py%25E3%2581%25A7%25E8%25A9%25B0%25E3%2581%25BE%25E3%2581%25A3%25E3%2581%259F%25E4%25BB%25B6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Tech%2520Learner%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE4M2QxNzYwNGYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Tech Learner</dc:creator></item><item><title><![CDATA[Gymnasiumを用いてAtariゲームをセットアップする 【Windows/Anaconda】]]></title><description><![CDATA[
+ 概要
+この記事では、Windows環境でAnacondaを用いて、Python 3.11でGymnasiumとAutoROMをセットアップし、Atariのゲーム「Breakout」を実行する方法を解説します。
+※ この記事は ChatGPTに書いてもらい、一部手動で内容を調整したものです。
+記事作成の過程については以下を参照ください。
+https://chatgpt.com/share/b25e7b40-e9ff-4713-8f43-8a0fcd4b0412
+
+ 環境
+
+OS: Windows 11
+Anaconda: 24.3.0
+Gymnasium: 0.29.1
+
+
+ 手順
+
+...]]></description><link>https://zenn.dev/rhythmcan/articles/e7939ba19ad5dc</link><guid isPermaLink="true">https://zenn.dev/rhythmcan/articles/e7939ba19ad5dc</guid><pubDate>Sun, 26 May 2024 01:54:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--kiFDCg5l--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Gymnasium%25E3%2582%2592%25E7%2594%25A8%25E3%2581%2584%25E3%2581%25A6Atari%25E3%2582%25B2%25E3%2583%25BC%25E3%2583%25A0%25E3%2582%2592%25E3%2582%25BB%25E3%2583%2583%25E3%2583%2588%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%25E3%2581%2599%25E3%2582%258B%2520%25E3%2580%2590Windows%252FAnaconda%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:becky%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZkMzBmMjcxNjYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>becky</dc:creator></item><item><title><![CDATA[LangChainを用いて大量ファイルをロードするVectorDBを作ってみた(8)]]></title><description><![CDATA[
+
+ はじめに
+前回は、XML形式のファイルから必要なエレメントの情報のみVectorDBに格納する方法を試してみました。
+https://qiita.com/ogi_kimura/items/4bbf2c987856a9435280
+大量ファイルをVectorDBに取り込んだ場合、データ量が多すぎて「ぼやけてしまう」せいか、生成AIから返ってくる回答精度が悪くなることもわかってきました。
+今回は、前回作成した属性を追加したVectorDBを基に、生成AIから精度の高い回答をもらえるようにしてみます。
+
+ VectorDBの内容
+今回は、filterを使ってVectorDBのデータを絞り...]]></description><link>https://zenn.dev/ogiki/articles/903838c2307c75</link><guid isPermaLink="true">https://zenn.dev/ogiki/articles/903838c2307c75</guid><pubDate>Sun, 26 May 2024 00:36:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--TMvT9MJS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:LangChain%25E3%2582%2592%25E7%2594%25A8%25E3%2581%2584%25E3%2581%25A6%25E5%25A4%25A7%25E9%2587%258F%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2592%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2589%25E3%2581%2599%25E3%2582%258BVectorDB%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25288%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%259C%25A8%25E6%259D%2591%25E3%2581%259F%25E3%2582%258D%25E3%2581%2586%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZkZjNiYWMwZmQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>木村たろう</dc:creator></item><item><title><![CDATA[[2024年5月暫定版]ryeでパッケージ管理しているPython Lambda FunctionをAWS CDKでデプロイする]]></title><description><![CDATA[boto3など以外のサードパーティーライブラリを含むPythonのLambdaのデプロイはそこそこ面倒である。
+cdkであれば、experimental扱いであるが、
+https://docs.aws.amazon.com/cdk/api/v2/docs/aws-lambda-python-alpha-readme.html
+というモジュールが存在し、2024年5月現在ではPipenvおよびPoetry：
+https://pipenv.pypa.io/en/latest/
+https://python-poetry.org/
+を使ってパッケージ管理されているLambdaはよしなにデプロイ...]]></description><link>https://zenn.dev/junkor/articles/982aefa4f8e300</link><guid isPermaLink="true">https://zenn.dev/junkor/articles/982aefa4f8e300</guid><pubDate>Sat, 25 May 2024 17:00:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0L4dtN8T--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255B2024%25E5%25B9%25B45%25E6%259C%2588%25E6%259A%25AB%25E5%25AE%259A%25E7%2589%2588%255Drye%25E3%2581%25A7%25E3%2583%2591%25E3%2583%2583%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B8%25E7%25AE%25A1%25E7%2590%2586%25E3%2581%2597%25E3%2581%25A6%25E3%2581%2584%25E3%2582%258BPython%2520Lambda%2520Function%25E3%2582%2592AWS%2520CDK...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:7e%252B8%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2Rhcmsvai5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>7e+8</dc:creator></item><item><title><![CDATA[【python】TrelloのデータをAPIで取得してCSVで出力する]]></title><description><![CDATA[Trello API Keyの取得
+https://trello.com/power-ups/admin にアクセス
+Power-Up &amp; 統合を新規作成
+
+
+APIキーとトークンを作成
+
+
+TrelloAPIでボードからデータを取得する
+
+パッケージのインストール
+pip install requests
+CSVファイルの出力
+import requests
+import json
+import csv
+
+# TrelloのAPIキーとトークン
+API_KEY = 'your key'
+API_TOKEN = 'your api'
+USER_NAME = 'your name'...]]></description><link>https://zenn.dev/ak358/articles/f1e83baa8df243</link><guid isPermaLink="true">https://zenn.dev/ak358/articles/f1e83baa8df243</guid><pubDate>Sat, 25 May 2024 16:32:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--VEWJzaLq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590python%25E3%2580%2591Trello%25E3%2581%25AE%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%2592API%25E3%2581%25A7%25E5%258F%2596%25E5%25BE%2597%25E3%2581%2597%25E3%2581%25A6CSV%25E3%2581%25A7%25E5%2587%25BA%25E5%258A%259B%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ak358%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NmN2MyMDNjNDEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ak358</dc:creator></item><item><title><![CDATA[LangChainを用いて大量ファイルをロードするVectorDBを作ってみた(7)]]></title><description><![CDATA[
+
+ はじめに
+前回、３つのVectorDB（chroma、Qdrant、FAISS）を用いて、生成AIに質問を投げてみたのですが、芳しくない結果となってしまいました。
+https://qiita.com/ogi_kimura/items/dacebc6d548af229d257
+そこで今回は、ファイルの情報をそのままVectorDBに登録するのではなく、ある程度選別してVectorDBへ格納したらどなるんだろうということで、検証していきたいと思います。
+
+ XMLファイルの書式について
+今回もインプットデータのサンプルとして特許庁のファイルを採用します。画像ファイルやCSVファイルなど...]]></description><link>https://zenn.dev/ogiki/articles/c44b2190248307</link><guid isPermaLink="true">https://zenn.dev/ogiki/articles/c44b2190248307</guid><pubDate>Sat, 25 May 2024 13:45:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Mt-UKjIN--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:LangChain%25E3%2582%2592%25E7%2594%25A8%25E3%2581%2584%25E3%2581%25A6%25E5%25A4%25A7%25E9%2587%258F%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2592%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2589%25E3%2581%2599%25E3%2582%258BVectorDB%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25287%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%259C%25A8%25E6%259D%2591%25E3%2581%259F%25E3%2582%258D%25E3%2581%2586%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZkZjNiYWMwZmQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>木村たろう</dc:creator></item><item><title><![CDATA[PythonでAmazonのAPIを叩く]]></title><description><![CDATA[
+ はじめに
+今回はAmazon Product Advertising APIを使用して、商品名、価格、商品画像などの情報を取得する方法を紹介します。
+
+ Amazon Product Advertising APIの利用方法
+
+
+Amazonアソシエイトプログラムへの登録
+まず、Amazonアソシエイトプログラムに登録する必要があります。これにより、アフィリエイトIDを取得できます。
+
+
+APIキーの取得
+AmazonアソシエイトダッシュボードからProduct Advertising APIのアクセスキーとシークレットキーを取得します。
+
+
+
+ PythonでAmazonの商品情報...]]></description><link>https://zenn.dev/ryouta26/articles/1b3cefebf36e6c</link><guid isPermaLink="true">https://zenn.dev/ryouta26/articles/1b3cefebf36e6c</guid><pubDate>Sat, 25 May 2024 10:06:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s----Uy_Hs3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A7Amazon%25E3%2581%25AEAPI%25E3%2582%2592%25E5%258F%25A9%25E3%2581%258F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ryouta.js%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI2ZjIyNTZmYmEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ryouta.js</dc:creator></item><item><title><![CDATA[Pythonでpandasのインストール手順]]></title><description><![CDATA[
+ はじめに
+今回はPythonのライブラリのpandasのインストール手順を紹介します。
+
+ pipのバージョンを確認
+まずPythonのパッケージ管理ツールが入っているか確認します。
+pip -V
+
+ pandasのインストール
+このコマンドでpandasをインストールできます。
+pip install pandas
+]]></description><link>https://zenn.dev/ryouta26/articles/2ef74d49ad1bb3</link><guid isPermaLink="true">https://zenn.dev/ryouta26/articles/2ef74d49ad1bb3</guid><pubDate>Sat, 25 May 2024 09:44:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fokU6ya---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A7pandas%25E3%2581%25AE%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E6%2589%258B%25E9%25A0%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ryouta.js%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI2ZjIyNTZmYmEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ryouta.js</dc:creator></item><item><title><![CDATA[Pythonで仮想環境の構築手順]]></title><description><![CDATA[
+ はじめに
+今回はvenvを使用して手軽にPythonの仮想環境を作成する手順を紹介します。
+
+ 仮想環境の作成
+.venvという名前でPythonの仮想環境を作成する。
+python -m venv .venv
+
+ 仮想環境のアクティベート
+このコマンドで上記で作成した仮想環境をアクティベートできます。
+. .venv/bin/activate
+
+ 仮想環境のディアクティベート
+仮想環境から抜けたい場合は以下のコマンドを実行してください。
+deactivate
+]]></description><link>https://zenn.dev/ryouta26/articles/e8fcc768df6c62</link><guid isPermaLink="true">https://zenn.dev/ryouta26/articles/e8fcc768df6c62</guid><pubDate>Sat, 25 May 2024 09:36:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_vwXssI0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A7%25E4%25BB%25AE%25E6%2583%25B3%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25AE%25E6%25A7%258B%25E7%25AF%2589%25E6%2589%258B%25E9%25A0%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ryouta.js%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI2ZjIyNTZmYmEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ryouta.js</dc:creator></item><item><title><![CDATA[spaCy + GiNZAで構文解析してみる]]></title><description><![CDATA[
+ はじめに
+Pythonではじめるテキストアナリティクス入門という本を読んで、spaCyとGiNZAで形態素解析や単語間の係り受け解析をやってみて、もう少しいろんなことをやってみたいと思いました。
+
+ 各ツールの関係
+spaCyは、Explosion AI社が開発しているオープンソースの自然言語処理ライブラリです。公式サイトのspaCy is designed specifically for production use and ... ということから製品への本格活用を想定して開発されています。
+また、spaCyは、構文解析のための基本的な機能を持っており、spaCy単体で日本語の形...]]></description><link>https://zenn.dev/ncdc/articles/5e934a43cf3cba</link><guid isPermaLink="true">https://zenn.dev/ncdc/articles/5e934a43cf3cba</guid><pubDate>Sat, 25 May 2024 08:47:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--m7lWBor2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:spaCy%2520%252B%2520GiNZA%25E3%2581%25A7%25E6%25A7%258B%25E6%2596%2587%25E8%25A7%25A3%25E6%259E%2590%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:T-KND%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNhODZhNDA5ZDMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:NCDC%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ExZDU1ZTkzMDAuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>T-KND</dc:creator></item><item><title><![CDATA[画像処理について考える (1) — 高速Fourier変換]]></title><description><![CDATA[
+ 目的
+画像処理の教科書を開くと、ローパスフィルタの説明などで、画像を Fourier 変換して高周波成分をカットするような話が出て来る。そして、Fourier 変換の可視化として以下のような絵が掲載されている。
+
+このグランドクロスかグランドクルスかそういった光の十字架は何なのだろうか？ということについて軽く試してみたい。
+
+ 高速 Fourier 変換
+Wikipedia で 高速フーリエ変換 を見ると、
+
+高速フーリエ変換（こうそくフーリエへんかん、英: fast Fourier transform, FFT）は、離散フーリエ変換（英: discrete Fourier tran...]]></description><link>https://zenn.dev/derwind/articles/dwd-image-processing01</link><guid isPermaLink="true">https://zenn.dev/derwind/articles/dwd-image-processing01</guid><pubDate>Sat, 25 May 2024 08:41:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qfK1hoOZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%2594%25BB%25E5%2583%258F%25E5%2587%25A6%25E7%2590%2586%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E8%2580%2583%25E3%2581%2588%25E3%2582%258B%2520%25281%2529%2520%25E2%2580%2594%2520%25E9%25AB%2598%25E9%2580%259FFourier%25E5%25A4%2589%25E6%258F%259B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:derwind%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFiNjBiZDcwMDMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>derwind</dc:creator></item></channel></rss>
