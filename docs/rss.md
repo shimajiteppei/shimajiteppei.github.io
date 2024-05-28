@@ -11,6 +11,12 @@ GitHub Actionsで定期的にRSSを購読する[osmos::feed](https://github.com/
 
 ## Rust
 
+### 20240528
+
+- [GPT-4o APIを叩くRust製ぬるぬるCLIアプリ](https://zenn.dev/namn1125/articles/44a37d48adbcc8)
+- [Rustでファイルを既定のアプリで開く(Windows限定)](https://zenn.dev/dekunobo/articles/rust_openfile_for_windows)
+- [Rust製TypeScript Linterにおける型情報Lintルールの模索](https://zenn.dev/kirohi/articles/3c644b614977fe)
+
 ### 20240527
 
 - [Borgoを使ってRust風のコードからGoのコードを生成する](https://qiita.com/fits/items/a9164f6a8dd207499a72)
@@ -136,6 +142,16 @@ GitHub Actionsで定期的にRSSを購読する[osmos::feed](https://github.com/
 
 
 ## Java
+
+### 20240528
+
+- [Javaで「ビット演算子とシフト演算子」の動作を確認してみた](https://qiita.com/nori-channel/items/3d235d5381e0a769759b)
+- [Junit　どうやって使うの…？　初学者向け](https://qiita.com/s_ozawa/items/d67d06c1bc73ff1f80f0)
+- [正規表現でJavadoc形式のコメントを通常コメントに戻す](https://qiita.com/NagatoChanP/items/dd329fc73a8cf46e0a84)
+- [[Google Maps Datasets API(V1)] Javaで地理空間データのデータセットを取得する](https://qiita.com/doran/items/dad9bcbb1d46b87c92fb)
+- [【iOS SwiftUI ↔ Android Jetpack Compose】今こそ移行のタイミングかもしれません 🔥](https://qiita.com/chanzmao/items/7fe94fa0f5ce965d69a1)
+- [Spring Boot + Kotlin でパス変数を data class にマッピングする](https://qiita.com/ist-ko-su/items/9a8c03b73f3941d467e5)
+- [OSSのデザインパターン解説シリーズ：Adapter(Wrapper)パターンの活用と悪いコード例](https://zenn.dev/neko_student/articles/d2f9e6abe8727a)
 
 ### 20240527
 
@@ -349,6 +365,21 @@ GitHub Actionsで定期的にRSSを購読する[osmos::feed](https://github.com/
 
 
 ## Linux
+
+### 20240528
+
+- [【Drupal】さくっとLocal環境つくろ](https://qiita.com/umekikazuya/items/5b6069cd7a868bf74f3c)
+- [Next.js × Docker　開発環境作成](https://qiita.com/mkthrkw/items/30115c9ac54c2204faef)
+- [Dockerコンテナにbashで入りたいけど名前が分からない時](https://qiita.com/k-foo/items/af43a5142bef2e17ac4c)
+- [Docker サブコマンド](https://qiita.com/Yasushi-Mo/items/d02b28f4ff5d0be65ee0)
+- [【Linuxコマンド初心者向け】findコマンドでファイルを検索しよう](https://qiita.com/Takuya__/items/bc032c2914b01e847cf6)
+- [スワップ](https://qiita.com/masatom86650860/items/2876717dbe3de792641c)
+- [【備忘録】CentOSのIPアドレスとドメインとOSバージョンの確認方法](https://qiita.com/1225/items/535df2065d55e2d49811)
+- [ダーティページの書き込みのタイミング](https://qiita.com/masatom86650860/items/090c1f95bc8056a99366)
+- [任意の為替レートをteamsに通知するアプリの開発](https://qiita.com/engishoma/items/3b6d2c6bae513d49622e)
+- [任意のシェル(shell)スクリプトをsystemdで管理する](https://qiita.com/engishoma/items/f3e66ecb52d9670e2305)
+- [シェル(shell)スクリプトで並列処理をする](https://qiita.com/engishoma/items/18b9800ed27aa5a6ba28)
+- [Ollamaをチームで使うためのOSS、Ollama4Teamを公開しました](https://zenn.dev/scich/articles/878157bd8a53dc)
 
 ### 20240527
 
@@ -701,7 +732,6 @@ GitHub Actionsで定期的にRSSを購読する[osmos::feed](https://github.com/
 - [[OrbStack 対応版] グローバル環境を可能な限り汚染せずに Markdown から組版の PDF を生成](https://zenn.dev/yusuga/articles/949adb38047610)
 - [【golang】DockerでGo言語を導入してみた](https://zenn.dev/joho0724/articles/sankaku0724-newcreate14)
 - [リレーション定義のないDBからも自動でER図を作成したい！（SchemaSpyを応用してみる）](https://zenn.dev/taroshun32/articles/schemaspy-auto-relation)
-- [曜日によってVSCodeのテーマを変える](https://zenn.dev/anozon/articles/theme-switch-day)
 
 ### 20240511
 
@@ -772,6 +802,20 @@ GitHub Actionsで定期的にRSSを購読する[osmos::feed](https://github.com/
 
 
 ## Python
+
+### 20240528
+
+- [5月下旬〜6月中旬しんどい理由の仮説を検証したけど外れてた、けどPythonの便利さ実感した話](https://qiita.com/t2murata/items/89fd6e83a0d1877ee426)
+- [【生成AIアプリ100チャレンジ】（22）競馬予想アプリ](https://qiita.com/weeeveeee/items/93c2a9fba4013aaffafa)
+- [分類タスクの評価指標](https://qiita.com/yh0072/items/b38f3176ed329f78bdc2)
+- [式「3x2x5=30」をsympyでastモジュールを使って。](https://qiita.com/mrrclb48z/items/ae154b77f0f06ea5c2f1)
+- [DALL-E 3のAPIの使い方-【python】](https://zenn.dev/headwaters/articles/e8dce38c7b4521)
+- [ハッカソンでAI×おすすめレシピ提案のアプリを開発した](https://zenn.dev/hato_72/articles/4f58ab54f20b31)
+- [ショートカットでJupyterマスターに！最高の作業効率を手に入れよう](https://zenn.dev/yareyare/articles/3af2a7afe14d39)
+- [M2 MacでGiNZAのja-ginza-bert-largeを使ってみた](https://zenn.dev/ncdc/articles/824c6c9bbbf93a)
+- [[OpenAI API] ストリーミングレスポンスの構造を理解してトークン数を取得する](https://zenn.dev/tomodo_ysys/articles/openai-streaming-token-count)
+- [Robustel R1520でGPSデータをとってみた](https://zenn.dev/takao2704/articles/6b2f68a43c1cec)
+- [Amplify で Cognito のトークンを発行し、React/Python 双方から操作する](https://zenn.dev/poetrainy/articles/d5029c52d4aa47)
 
 ### 20240527
 
@@ -1037,6 +1081,42 @@ GitHub Actionsで定期的にRSSを購読する[osmos::feed](https://github.com/
 
 
 ## Web
+
+### 20240528
+
+- [[Rails7]application.bootstrap.scssの変更が反映されない](https://qiita.com/ruby_of_pokemon/items/f8f67385082a3cb3d267)
+- [【CSS】被写界深度を再現してみた](https://qiita.com/hayuse/items/2beb7db0bd2a63741f94)
+- [[T-DASH] CSSカスタマイズしたフォームをテスト自動化する](https://qiita.com/emurin/items/bfc985c35f215f4a48d2)
+- [CSS – 縦の行数指定をして省略する例](https://qiita.com/YumaInaura/items/ff1fa5b5ebae49e6e8a6)
+- [PythonでPowerPoint PPT/PPTXをHTMLに変換する](https://qiita.com/rafluctua702101/items/8bf1b10f03df5e891e1d)
+- [JavaScriptの関数呼び出し前後にログ出力処理を追加する方法(Proxy)](https://qiita.com/murasuke/items/05b8e3c97029d0bbb373)
+- [Splideでスライドの高さをコンテンツごとに可変させる](https://qiita.com/mei331/items/107fe99d1478cabc152f)
+- [毎日16時に心にひびく名言を届けたい](https://qiita.com/chihirot134/items/5544d62d71fae2927e76)
+- [[Rails7] Popper.js Popper__namespace.createPopper is not a function エラー解決方法](https://qiita.com/ruby_of_pokemon/items/2a5452bcd5db0d12a230)
+- [Vite×React×TypeScript×React Routerで、URLパラメータを取得して表示するサンプル](https://qiita.com/nyakako13/items/66487e6268547758b25c)
+- [【Typescript】イミュータブルオブジェクトの不変性の担保範囲](https://qiita.com/Yasu20220812/items/895ffd75e41670e7e465)
+- [TypeScriptって「構造的部分型」なんだ。っていう話](https://qiita.com/SP-ya/items/b3cc156cc0898915d8c5)
+- [[TS]TypeChallengesからTypeScriptを復習しましょう_1](https://qiita.com/qian_yu/items/ce6a8faf5f0c56b83567)
+- [CSSアニメーションを実装してみよう](https://zenn.dev/haruchu/articles/d93af1a2323ecb)
+- [Reactのチュートリアルその2](https://zenn.dev/sikmi_tech/articles/159261e0fd5390)
+- [Figmaのカラーバリアブルをベースコードに反映するプラグイン CSS/SCSS Variables Colorizer](https://zenn.dev/hello_taichi/articles/ac5bf7fd4cbbfe)
+- [Google Apps ScriptでHTML入力フォームを作成する方法](https://zenn.dev/querier/articles/75a5516be06480)
+- [GASでHTMLからGoogleスプレッドシートに値を受け渡す方法](https://zenn.dev/querier/articles/a2b920b16fdb3c)
+- [JavaScriptでエンコードを学ぶ](https://zenn.dev/s_h_i_o_n/articles/6cf009f65adf0e)
+- [React + ViteでGoogle Chromeの拡張機能を作成する](https://zenn.dev/monjara/articles/3b200fa041fbdf)
+- [PuppeteerとCloud Functons for Firebaseでスクレイピング](https://zenn.dev/takamoso/articles/puppeteer-firebase-cloud-functions)
+- [CodeRabbit お試ししたくて面談管理ツールを作ってみる（その19：質問テンプレート画面作成）](https://zenn.dev/wdknwdkn/articles/1f17fd101afdd5)
+- [【cluster】クラフトアイテムでワープ・移動速度等変更](https://zenn.dev/vins/articles/e93b992d1d824c)
+- [Nuxt CLI (Nuxi) を用いて開発体験を向上させる](https://zenn.dev/comm_vue_nuxt/articles/start-nuxt-cli)
+- [Phaser3 Arcade物理エンジンの基礎](https://zenn.dev/hiro256ex/articles/20240528_phaser3collision)
+- [react-hook-formでフォームの値に依存して条件的レンダリング](https://zenn.dev/blackmax/articles/da47ce604199ff)
+- [ChatGPT + Google検索APIで個人ブログ検索サイトを作る](https://zenn.dev/k_zumi_dev/articles/feb1dcec485b9c)
+- [ハッカソンでAI×おすすめレシピ提案のアプリを開発した](https://zenn.dev/hato_72/articles/4f58ab54f20b31)
+- [Effectでサービス間の依存関係をコントロールする](https://zenn.dev/dyama/articles/ee662c8f8367d8)
+- [AmplifyでSQL？ をどうやって解決してくれているのか](https://zenn.dev/ototrip/articles/tech-nextjs-amplify-3)
+- [ObjectからCacheControlの文字列を生成する](https://zenn.dev/reiwa/articles/10a59697085c13)
+- [Remix のドキュメントを Gemini 1.5 Flash で日本語化しました](https://zenn.dev/coji/articles/remix-docs-ja)
+- [Rust製TypeScript Linterにおける型情報Lintルールの模索](https://zenn.dev/kirohi/articles/3c644b614977fe)
 
 ### 20240527
 
@@ -1498,8 +1578,6 @@ GitHub Actionsで定期的にRSSを購読する[osmos::feed](https://github.com/
 - [CSSで三角形など好きな形を作ってみる](https://zenn.dev/somahc/articles/a8397153542a6a)
 - [cssでモーダルの背景をスクロールさせないようにする](https://zenn.dev/rlab/articles/eb7eaaf6d4f9e5)
 - [OBSのブラウザソースで動くものを作るあなたへ](https://zenn.dev/sucotech/articles/9eb68694936d8a)
-- [ハンバーガーメニュー実装時に理解できなかった2つのこと](https://zenn.dev/shuto2828/articles/b54c08b86b4d17)
-- [CodePenで作ったものの振り返り#01](https://zenn.dev/yc_pkg/articles/342401b58f2101)
 - [iOS Safari で HTML Popover が期待通りに閉じない](https://zenn.dev/maltophilia/articles/53c4d955e6f5ff)
 - [ファイルアップロードの挙動確認](https://zenn.dev/regmarmcem/articles/5354b1a8ffe0b1)
 - [Pandocを利用してHTML、PDFを作成する](https://zenn.dev/hoshi_ophiuchus/articles/2016e7234a2852)
@@ -1507,7 +1585,6 @@ GitHub Actionsで定期的にRSSを購読する[osmos::feed](https://github.com/
 - [【React】scriptタグを埋め込んで動かしたい！！](https://zenn.dev/tacchan5424/articles/3cac8c0dd5743e)
 - [リッチリザルトに対応してサイト訪問率を上げよう](https://zenn.dev/koda_momo/articles/c4f64d93dd0815)
 - [doctypeをhtmlにするとtextareaの下に余白ができる？](https://zenn.dev/phpbeginners/articles/82452e63ed58e5)
-- [Blueskyで初めて触れる人向けの、ふんわりoEmbed解説](https://zenn.dev/attakei/articles/oembed-simple-guide)
 
 ### 20240511
 
