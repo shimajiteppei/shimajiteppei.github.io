@@ -11,6 +11,12 @@ GitHub Actionsで定期的にRSSを購読する[osmos::feed](https://github.com/
 
 ## Rust
 
+### 20240530
+
+- [Rust(0) 一覧](https://qiita.com/kaizen_nagoya/items/5e8bb080ba6ca0281927)
+- [まだ手書きでJSONバリデーションしてるの？](https://qiita.com/tomoikey/items/f89441333dbc3409f0b2)
+- [Rustのライフタイム注釈は「いつ」「なぜ」必要なのか](https://qiita.com/plotter/items/693b7a9d3a756f82441d)
+
 ### 20240529
 
 - [RustのSledを使ってとにかくかんたんにキーバリューストアしてみた](https://qiita.com/every-month/items/548dddd47a113a485a33)
@@ -148,6 +154,16 @@ GitHub Actionsで定期的にRSSを購読する[osmos::feed](https://github.com/
 
 
 ## Java
+
+### 20240530
+
+- [Javaで「関係演算子と等価演算子」の動作を確認してみた](https://qiita.com/nori-channel/items/107920be585d816c24b4)
+- [SAP BTP 開発の開発環境（サーバサイド）](https://qiita.com/kojirousan/items/105cb2d61927f7ed57fe)
+- [Java Silver 17 合格体験記](https://qiita.com/sugi-sys/items/6e7fba0de1aad180d0b4)
+- [【Java Silver】2次元配列 length 解説](https://qiita.com/dgyhi/items/ecc4d0fd351103455398)
+- [android studio(kotlin)でメモ帳アプリをつくって見ました。](https://qiita.com/goretzka_/items/52295986d2163f30b11c)
+- [JavaでSpring AIやLangChain4jのLLMアプリを作る "JHipster LLM"](https://zenn.dev/hide212131/articles/078748ece57bcc)
+- [protobufのStructがJSONデータの変換に便利な話](https://zenn.dev/innossh/articles/7002081435b60a)
 
 ### 20240529
 
@@ -376,10 +392,25 @@ GitHub Actionsで定期的にRSSを購読する[osmos::feed](https://github.com/
 - [コズムのバックエンド技術にKotlin,Ktorを選んだ理由その①](https://zenn.dev/cosmcorp/articles/d65c1f3da01ebb)
 - [AndroidからPresigned URLを使ってS3に画像をアップロードする](https://zenn.dev/wansuko_cmd/articles/bdfe7a2490574e)
 - [Jetpack Composeでログイン状態を維持する](https://zenn.dev/joo_hashi/articles/18b8429acba3b1)
-- [[Android] AdMob(バナー広告) + Jetpack Compose](https://zenn.dev/giglancer/articles/1c53c33f45b3ff)
 
 
 ## Linux
+
+### 20240530
+
+- [EC2 上で動くECS Task から外界のインターネットに接続できないときにハマったこと](https://qiita.com/kmr-ergotic/items/ed67ccf5981aec885489)
+- [[Docker] DjangoRESTframeworkとVue.js間の通信ができない問題](https://qiita.com/Haruki140/items/ab253d7a94e3f0b600e6)
+- [RHEL9における環境変数の読み込み順序とスコープ](https://qiita.com/sepa/items/a9163f01296076b9e795)
+- [Pine64 A+ 1GBにUbuntu Mateをインストール](https://qiita.com/bockring/items/6ba420cdf4de24622a4e)
+- [BIOSとは](https://qiita.com/masatom86650860/items/f5eea9de738f4c3de85a)
+- [VSCodeでLinuxサーバにSSH接続して開発する](https://qiita.com/ryochaaan/items/3a579a646c82363a6ebb)
+- [【Kubernetes・GKE】IngressではなくGatewayを利用して、異なるnamespace上のサービスにroutingする](https://zenn.dev/ring_belle/articles/gcp-gke-gateway-namespace)
+- [GatewayとHTTPRouteとManaged Certificateを利用してGKEクラスターで動作するサービスをHttpsで公開する](https://zenn.dev/ring_belle/articles/gcp-gke-gateway-basic)
+- [ECR ✖️ Lambda ランタイムエラー: Runtime.ExitErrorで沼った](https://zenn.dev/bizlink/articles/9f456768a5a424)
+- [ArgoCDからGithubのPrivate Repositoryに対して、SSH keyを使って接続する](https://zenn.dev/ring_belle/articles/argocd-private-ssh-key)
+- [🔰初心者向けrbenvの使い方：Rubyバージョン管理をマスターしよう](https://zenn.dev/take_tech/articles/e7345b04d42f4c)
+- [Ubuntu24.04にFirefly IIIをインストールする②](https://zenn.dev/hellgruen/articles/033ad60367421c)
+- [Ubuntu24.04にFirefly IIIをインストールする①](https://zenn.dev/hellgruen/articles/c20a505b4ceeb1)
 
 ### 20240529
 
@@ -843,6 +874,18 @@ GitHub Actionsで定期的にRSSを購読する[osmos::feed](https://github.com/
 
 ## Python
 
+### 20240530
+
+- [CSVのデータをDjangoのORMでさくっと扱う方法](https://qiita.com/SaitoTsutomu/items/33ceb5f096098f02240e)
+- [LLM × Security  まとめサイトを作成しました！](https://qiita.com/tasuku-revol/items/d2b63573e0011ffbc8bf)
+- [MyCobot 280 ハンドルコントロールガイド](https://qiita.com/kotai2003/items/0dbfc47894a071aed885)
+- [kaggle datasetを使って睡眠障害を予測してみた](https://qiita.com/mokota/items/4f76333e8e4e03ce4844)
+- [Snowflake Notebooks がパブリックプレビューされたので触ってみる](https://zenn.dev/shintaroamaike/articles/7d1a0ca81d4ef1)
+- [「Prompty を読み込んで LangChain と Semantic Kernel で実行するのを試してみた」のコードを書きなおしてみた](https://zenn.dev/microsoft/articles/lets-start-prompty2)
+- [Pythonの Linter Formatter は、もうRuff一択。最短5分でプロジェクトに導入](https://zenn.dev/tk_resilie/articles/python_ruff_setup)
+- [【Signal Processing】Butter Filter Exlpained](https://zenn.dev/yuto_mo/articles/01f4a7efc292ad)
+- [音楽生成AIをM1 MBAで動かす話](https://zenn.dev/aya_eiya/articles/63e51eebb04f8b)
+
 ### 20240529
 
 - [zipファイルを解凍する](https://qiita.com/pikora/items/3708805d9fc93ae8a566)
@@ -1134,6 +1177,35 @@ GitHub Actionsで定期的にRSSを購読する[osmos::feed](https://github.com/
 
 
 ## Web
+
+### 20240530
+
+- [lottieのDOM移動](https://qiita.com/BlueTone/items/a2770e281daf12ea261f)
+- [HTMX：シンプルかつパワフルなフロントエンド開発の新潮流](https://qiita.com/Zakuro890/items/3f59b7d815053742f65c)
+- [AWSの公式ドキュメントが修正されるに至った経緯](https://qiita.com/juner/items/7fd009e350bbabf975f7)
+- [JavaScript で static メソッドと同名のインスタンスメソッドを定義する](https://qiita.com/shinjikuriy/items/bbbde06394de39b75b8d)
+- [CapCutの高品質なTTSを使いたいからラッパーAPIを作ったお話](https://qiita.com/kuwacom/items/741f6073610299eadceb)
+- [スコープ 関数スコープ、ブロックスコープ [JavaScript]](https://qiita.com/shisshi_engineer/items/1989a9287aada9e485bf)
+- [TypeScript勉強してみた⑥](https://qiita.com/mr_noppo/items/71f18d8c73ecff7e4c47)
+- [TypeScriptでJSONをfetchして出力する](https://qiita.com/every-month/items/8b26eaf17d4fd9ed43b1)
+- [Node.jsをインストールしてTypeScriptでコマンドの画面に文字を出すまで](https://qiita.com/every-month/items/8f20dc7fde2b25be386f)
+- [Slack-Azure OpenAI GPT-4ボットを画像入力対応にバージョンアップしました[全コードあり]](https://zenn.dev/jtechjapan_pub/articles/44329d672780fb)
+- [GASのテストについて](https://zenn.dev/bizlink/articles/2596fefc75b471)
+- [CommonJS とESModulesについて・歴史](https://zenn.dev/bizlink/articles/56b2eb309ba394)
+- [kintoneで、E2Eテストをやってみた](https://zenn.dev/bizlink/articles/a478b309fdbda4)
+- [CodeRabbit お試ししたくて面談管理ツールを作ってみる（その20：質問回答画面作成）](https://zenn.dev/wdknwdkn/articles/a211c66600c1bd)
+- [再帰処理とL-Systemであっさりフラクタル](https://zenn.dev/sdkfz181tiger/articles/d33b7527ca2c89)
+- [【Next.js】環境変数にNEXT_PUBLICが必要か不要か](https://zenn.dev/kiwichan101kg/articles/fd6a94b5edc91a)
+- [マーダーミステリー制作ツール「ウズスタジオ」の技術構成](https://zenn.dev/uzu_tech/articles/uzu-studio-architecture)
+- [MIERUNEの地図タイルを支える技術](https://zenn.dev/mierune/articles/d16af7ca873e14)
+- [ReactNative Expo入門](https://zenn.dev/joo_hashi/books/ab1c0feaf143dc)
+- [Container / Presentationalパターン分割指南書](https://zenn.dev/zoma/articles/67b51cd6f1f6df)
+- [GraphQL Schema Design Principles adopted by NEWT](https://zenn.dev/reiwatravel/articles/cf8e8f9fe8789a)
+- [ビルド時にtypescript-eslint/no-unsafe-returnエラーが発生した際の解決策](https://zenn.dev/torakm/articles/dcc36b830a6494)
+- [CypressでBDD](https://zenn.dev/tetoteto/articles/cff1e207d046c3)
+- [できるだけシンプルにPrismaをLambdaで動かす](https://zenn.dev/awwa500/articles/c03f365479a4cf)
+- [「three/examples/jsm/XXXXXX」が「Cannot find module 〜」となりモジュールが見つからなくなった場合](https://zenn.dev/otot_dev/articles/990f1f945d08ab)
+- [【状態管理ライブラリ不使用】 Angularの状態管理パターンまとめ](https://zenn.dev/tkawa01/articles/fd7f2c06505ecb)
 
 ### 20240529
 
