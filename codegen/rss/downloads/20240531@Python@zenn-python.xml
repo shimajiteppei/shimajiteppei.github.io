@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Fri, 31 May 2024 11:10:22 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Pythonにおけるイテレータとジェネレータの使い分けと違い]]></title><description><![CDATA[
+ はじめに
+Pythonには、データを一つずつ取り出すための機能としてイテレータとジェネレータがある。これらは、大量のデータを扱う際のメモリ効率の改善やコードの可読性向上に役立つが、その使い分けと違いについて理解しておくことが重要だ。ここでは、Pythonにおけるイテレータとジェネレータの違いと使い分けについて詳しく解説する。
+
+ イテレータとは
+イテレータは、__iter__()メソッドと__next__()メソッドを持つオブジェクト。__iter__()メソッドはイテレータ自身を返し、__next__()メソッドは次の要素を返す。イテレータは、リストやタプルなどの反復可能なオブジェ...]]></description><link>https://zenn.dev/giba/articles/8f03ba4b1de6b1</link><guid isPermaLink="true">https://zenn.dev/giba/articles/8f03ba4b1de6b1</guid><pubDate>Fri, 31 May 2024 09:18:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dIxIFico--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25AB%25E3%2581%258A%25E3%2581%2591%25E3%2582%258B%25E3%2582%25A4%25E3%2583%2586%25E3%2583%25AC%25E3%2583%25BC%25E3%2582%25BF%25E3%2581%25A8%25E3%2582%25B8%25E3%2582%25A7%25E3%2583%258D%25E3%2583%25AC%25E3%2583%25BC%25E3%2582%25BF%25E3%2581%25AE%25E4%25BD%25BF%25E3%2581%2584%25E5%2588%2586%25E3%2581%2591%25E3%2581%25A8%25E9%2581%2595%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:GIBA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y5MmM4MjdhMmEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>GIBA</dc:creator></item><item><title><![CDATA[ついにSnowflakeにNotebookが搭載された！]]></title><description><![CDATA[
+ 結論
+Snowflake上のデータ分析には、Snowflake Notebooksを使おう。
+
+ SnowflakeにNotebook機能が突然登場した
+2024年5月25日、Snowflakeに突如Notebookという新機能が追加され、データエンジニアリング界隈で話題となりました。
+https://x.com/rakudeji/status/1794177740364726728
+本記事ではそもそもNotebookとはなにか？、なぜ便利なのか？、Snowflake Notebookの優位性はなにか？を解説します。
+
+ そもそもNotebookとは？
+まず、NotebookはSno...]]></description><link>https://zenn.dev/dataheroes/articles/83a88c3f94ff91</link><guid isPermaLink="true">https://zenn.dev/dataheroes/articles/83a88c3f94ff91</guid><pubDate>Fri, 31 May 2024 06:30:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--y2oRhLMc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25ABSnowflake%25E3%2581%25ABNotebook%25E3%2581%258C%25E6%2590%25AD%25E8%25BC%2589%25E3%2581%2595%25E3%2582%258C%25E3%2581%259F%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Kentaro%2520Maeda%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzUxNDFkYTVlNTUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Snowflake%2520Data%2520Heroes%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FjYTJlMzdkM2QuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kentaro Maeda</dc:creator></item><item><title><![CDATA[nまでの素数の{個数, リスト}を求める・またはPythonの並列処理を巡る冒険]]></title><description><![CDATA[なんでだか、Pythonでの並列処理、またはnまでの素数を求めるのにハマってしまった。
+Pythonでの並列処理は、円周率を求めるときにChudnovskyの公式を並列化するのに使ったことがある。
+さいきん「Pythonの並列処理を学ぶのに良いネタはないですかね?」という問いに、「nまでの素数でも求めてみたら」とかいい加減に答えたのだが、その後自分でやってみるとなかなかの学びがあった。というはなし。
+だから、高速にループ回すのになんでPython? とかの突っ込みは、なしの方向で。
+2024年5月頃の3日間の記録。
+
+ 素数とわし
+nまでの素数のリストを求めるのは、この人生でおそらく10...]]></description><link>https://zenn.dev/taroh/articles/58a2eb870aa9c1</link><guid isPermaLink="true">https://zenn.dev/taroh/articles/58a2eb870aa9c1</guid><pubDate>Fri, 31 May 2024 05:48:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Z1S7aIcN--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:n%25E3%2581%25BE%25E3%2581%25A7%25E3%2581%25AE%25E7%25B4%25A0%25E6%2595%25B0%25E3%2581%25AE%257B%25E5%2580%258B%25E6%2595%25B0%252C%2520%25E3%2583%25AA%25E3%2582%25B9%25E3%2583%2588%257D%25E3%2582%2592%25E6%25B1%2582%25E3%2582%2581%25E3%2582%258B%25E3%2583%25BB%25E3%2581%25BE%25E3%2581%259F%25E3%2581%25AFPython%25E3%2581%25AE%25E4%25B8%25A6%25E5%2588%2597%25E5%2587%25A6%25E7%2590%2586%25E3%2582%2592%25E5%25B7%25A1%25E3%2582%258B%25E5%2586%2592%25E9%2599%25BA%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:taroh%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FGZFp1Y3FLVU11eVZVdGdoYUt1aUNyLUhVSzM5eWpGcWJSOWotQU9yeE9DclZBPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>taroh</dc:creator></item><item><title><![CDATA[高齢者の膝高からの身長推定]]></title><description><![CDATA[
+ はじめに
+株式会社Rehab for JAPAN 開発2部サイエンスチームの上田です。
+栄養評価や必要エネルギー量算出には身長や体重の測定値が必須ですが、高齢者の方では歩行や直立が困難であったり、脊椎が湾曲していたりして身長を正しく測定できない場合があります。このような場合、日本では主にChumlea[1]らやMiyazawa[2]らが提唱する身長推定式が利用されています。これらの推定式は膝高と年齢を説明変数に、身長を目的変数とした重回帰式です。
+本記事ではChumleaらの式を例に、重回帰分析による膝高と年齢から身長を推定する式の導出と、同様にLightGBMで回帰分析を行った結果...]]></description><link>https://zenn.dev/rehabforjapan/articles/3ba98d1568bc6d</link><guid isPermaLink="true">https://zenn.dev/rehabforjapan/articles/3ba98d1568bc6d</guid><pubDate>Fri, 31 May 2024 05:20:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--S-SftGSU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E9%25AB%2598%25E9%25BD%25A2%25E8%2580%2585%25E3%2581%25AE%25E8%2586%259D%25E9%25AB%2598%25E3%2581%258B%25E3%2582%2589%25E3%2581%25AE%25E8%25BA%25AB%25E9%2595%25B7%25E6%258E%25A8%25E5%25AE%259A%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Rehab%25E4%25B8%258A%25E7%2594%25B0%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNkYzExOTgzNjguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Rehab%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZkOWZiYmJiMzEuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Rehab上田</dc:creator></item><item><title><![CDATA[Stable Diffusion ControlNet パイプラインを使用して LoRA の重みを有効にする]]></title><description><![CDATA[この記事は、Medium に公開されている「Enable LoRA weights with Stable Diffusion Controlnet Pipeline」の日本語参考訳です。原文は更新される可能性があります。原文と翻訳文の内容が異なる場合は原文を優先してください。
+https://medium.com/openvino-toolkit/enable-lora-weights-with-stable-diffusion-controlnet-pipeline-94fb06c86ea2
+この記事の PDF 版は下記からご利用になれます。
+https://www.isus.jp/...]]></description><link>https://zenn.dev/intel_developer/articles/5cf1aa7d62d21b</link><guid isPermaLink="true">https://zenn.dev/intel_developer/articles/5cf1aa7d62d21b</guid><pubDate>Fri, 31 May 2024 03:56:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qLp6z8Lu--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Stable%2520Diffusion%2520ControlNet%2520%25E3%2583%2591%25E3%2582%25A4%25E3%2583%2597%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%2592%25E4%25BD%25BF%25E7%2594%25A8%25E3%2581%2597%25E3%2581%25A6%2520LoRA%2520%25E3%2581%25AE%25E9%2587%258D%25E3%2581%25BF%25E3%2582%2592%25E6%259C%2589%25E5%258A%25B9%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2586%25E3%2583%25AB%25E3%2583%2587%25E3%2583%2599%25E3%2583%25AD%25E3%2583%2583%25E3%2583%2591%25E3%2583%25BC%25E3%2582%25BE%25E3%2583%25BC%25E3%2583%25B3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZiZThlMTc0MzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>インテルデベロッパーゾーン</dc:creator></item><item><title><![CDATA[Pythonのロギングを極める！logging活用ガイド]]></title><description><![CDATA[ログ出力は、アプリケーションの動作を追跡し、問題の原因を特定するために欠かせない機能です。今回は、Pythonのloggingモジュールを使って、効率的かつ効果的なログ出力を実現する方法をご紹介します。
+
+ loggingモジュールの基本
+loggingモジュールは、Pythonの標準ライブラリとして提供されているロギング機能を提供するモジュールです。ロガー、ハンドラ、フォーマッタを使って、ログの出力先やフォーマットを柔軟に設定できます。
+import logging
+
+# ロガーの作成
+logger = logging.getLogger(__name__)
+
+# ログレベルの設定
+l...]]></description><link>https://zenn.dev/yutabeee/articles/393397d4adecf8</link><guid isPermaLink="true">https://zenn.dev/yutabeee/articles/393397d4adecf8</guid><pubDate>Fri, 31 May 2024 03:27:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--VLzgwzIZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25AE%25E3%2583%25AD%25E3%2582%25AE%25E3%2583%25B3%25E3%2582%25B0%25E3%2582%2592%25E6%25A5%25B5%25E3%2582%2581%25E3%2582%258B%25EF%25BC%2581logging%25E6%25B4%25BB%25E7%2594%25A8%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%2580%25E3%2583%25BC%25E3%2583%259E%25E3%2583%25B3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE5YzFjYWRjOGUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ダーマン</dc:creator></item><item><title><![CDATA[Pydantic aliasでjsonキーを自在に操りたい]]></title><description><![CDATA[
+ モデルのフィールド名とキー名を異なるものにしたい
+pydanticでjsonをモデルに読み込む場合、jsonのキーとモデルのフィールドは一致している必要があります。
+from pydantic import BaseModel
+
+
+class User(BaseModel):
+    name: str
+    age: int
+
+
+# nameキーとageキーが一致している
+data = '{"name": "test_user", "age": 23}'
+
+user = User.model_validate_json(data)
+print(user) # name='test...]]></description><link>https://zenn.dev/nowa0402/articles/d1ede9bc5c494f</link><guid isPermaLink="true">https://zenn.dev/nowa0402/articles/d1ede9bc5c494f</guid><pubDate>Thu, 30 May 2024 23:46:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--X-dOCwu2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Pydantic%2520alias%25E3%2581%25A7json%25E3%2582%25AD%25E3%2583%25BC%25E3%2582%2592%25E8%2587%25AA%25E5%259C%25A8%25E3%2581%25AB%25E6%2593%258D%25E3%2582%258A%25E3%2581%259F%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:N.Wayama%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBlY2U3N2Y2YWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>N.Wayama</dc:creator></item><item><title><![CDATA[綺麗なコードを書くためのTips ~ループとロジックの単純化~]]></title><description><![CDATA[
+ コードの流れを読みやすくする
+
+ 比較の順番を適切にする
+比較文を書く時は，変化する値を左に，定数のようなより安定した値を右に配置する(length&gt;10)
+
+ if/elseブロックの並びを適切にする
+if/elseブロックは適切な並びにする。具体的には肯定系・単純・目立つものを先に処理する。
+　これらの優先順はバッティングすることもある。例えば，否定形の条件であっても単純で関心や注意を引く場合もあるため，そういう場面ではそれを先に処理する
+
+ 深いネストの回避
+深いネストはできるだけ避ける，例えば，早く返り値(return)を返すようにする・「ガード節(関数の上部で単純な条...]]></description><link>https://zenn.dev/giba/articles/9b201d3069abea</link><guid isPermaLink="true">https://zenn.dev/giba/articles/9b201d3069abea</guid><pubDate>Thu, 30 May 2024 14:59:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--u0Xw6RpL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%25B6%25BA%25E9%25BA%2597%25E3%2581%25AA%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2582%2592%25E6%259B%25B8%25E3%2581%258F%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AETips%2520%7E%25E3%2583%25AB%25E3%2583%25BC%25E3%2583%2597%25E3%2581%25A8%25E3%2583%25AD%25E3%2582%25B8%25E3%2583%2583%25E3%2582%25AF%25E3%2581%25AE%25E5%258D%2598%25E7%25B4%2594%25E5%258C%2596%7E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:GIBA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y5MmM4MjdhMmEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>GIBA</dc:creator></item><item><title><![CDATA[Cloud DLP（Data Loss Prevention）で機密情報を検出し置き換え、マスキングしてみる]]></title><description><![CDATA[
+ はじめに
+Cloud DLPを使うと個人情報やカード番号などのセンシティブデータを検出し、それを指定文字列に置き換えたりマスキングできます。
+何をセンシティブデータとして検出するかはinfoType検出器で指定できます。
+多種多様な組み込みのinfoType検出器が用意されており、それだけでなくカスタマイズしたものも指定できます。
+また、Cloud Storageのデータにバッチジョブで適用したり、BigQueryと組み合わせて特定の列のデータに適用するのも可能です。
+本記事ではCloud DLPのAPIを直接呼び出して、センシティブデータの入った文字列に変換をかけてみます。
+
+ C...]]></description><link>https://zenn.dev/iret/articles/cloud-dlp-example</link><guid isPermaLink="true">https://zenn.dev/iret/articles/cloud-dlp-example</guid><pubDate>Thu, 30 May 2024 14:01:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GTDEpkud--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Cloud%2520DLP%25EF%25BC%2588Data%2520Loss%2520Prevention%25EF%25BC%2589%25E3%2581%25A7%25E6%25A9%259F%25E5%25AF%2586%25E6%2583%2585%25E5%25A0%25B1%25E3%2582%2592%25E6%25A4%259C%25E5%2587%25BA%25E3%2581%2597%25E7%25BD%25AE%25E3%2581%258D%25E6%258F%259B%25E3%2581%2588%25E3%2580%2581%25E3%2583%259E%25E3%2582%25B9%25E3%2582%25AD%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:danishi%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA4Y2QzMmUzMzQuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25A2%25E3%2582%25A4%25E3%2583%25AC%25E3%2583%2583%25E3%2583%2588%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI2NDcyYzY4NDIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>danishi</dc:creator></item><item><title><![CDATA[[WSL+VSCode]Windowsでデータ分析環境を構築するための基本手順]]></title><description><![CDATA[
+ はじめに
+本稿では、最も基本的なデータ分析環境をWindows11環境に構築するための手順を解説します。
+目標構成は下記の通りです。
+
+OS: Windows11 Professional
+
+Ubunts @ WSL(Windows Subsystem for Linux)
+
+
+言語: Python (pyenv + venv)
+IDE: Visual Studio Code
+その他: Jupyter Lab
+
+この環境で基本的なデータ分析と可視化については扱えるはずです。ですが、ほぼ最小構成と考えてください。
+さらに本格的に進めるにあたっては、DBの導入やDockerの導入、また、...]]></description><link>https://zenn.dev/hello_stats/articles/67ec7e066e6cf0</link><guid isPermaLink="true">https://zenn.dev/hello_stats/articles/67ec7e066e6cf0</guid><pubDate>Thu, 30 May 2024 12:10:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--mcqLyYFF--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BWSL%252BVSCode%255DWindows%25E3%2581%25A7%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E5%2588%2586%25E6%259E%2590%25E7%2592%25B0%25E5%25A2%2583%25E3%2582%2592%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2599%25E3%2582%258B%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%25E5%259F%25BA%25E6%259C%25AC%25E6%2589%258B%25E9%25A0%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E7%25B5%25B1%25E8%25A8%2588%25E3%2581%25AE%25E6%25A3%25AE%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSjBDN3hfclFMRTFLc040TW96WFFXcWdEeTBLNHFXU3h5VjliQ2JLaDN4akE9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>統計の森</dc:creator></item><item><title><![CDATA[Snowflake Notebooks がパブリックプレビューされたので触ってみる]]></title><description><![CDATA[Snowflakeでjupyter notebookのように使える機能
+Notebooksが5/25にリリースされました。
+サンプルプロジェクトがgithubにアップロードされていました。
+https://github.com/Snowflake-Labs/snowflake-demo-notebooks
+
+
+ Notebookの作成
+Snowflake -&gt; Projects -&gt; Notebooks
+右上の+ Notebookで作成できます。
+
+
+ 権限の付与
+Contact Your admin to get access to a database and schem...]]></description><link>https://zenn.dev/shintaroamaike/articles/7d1a0ca81d4ef1</link><guid isPermaLink="true">https://zenn.dev/shintaroamaike/articles/7d1a0ca81d4ef1</guid><pubDate>Thu, 30 May 2024 07:36:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--EJvQ0hkc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Snowflake%2520Notebooks%2520%25E3%2581%258C%25E3%2583%2591%25E3%2583%2596%25E3%2583%25AA%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2597%25E3%2583%25AC%25E3%2583%2593%25E3%2583%25A5%25E3%2583%25BC%25E3%2581%2595%25E3%2582%258C%25E3%2581%259F%25E3%2581%25AE%25E3%2581%25A7%25E8%25A7%25A6%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ShintaroAmaike%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVmNWYzMmE0MWIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ShintaroAmaike</dc:creator></item><item><title><![CDATA[「Prompty を読み込んで LangChain と Semantic Kernel で実行するのを試してみた」のコードを書きなおしてみた]]></title><description><![CDATA[1 つ前の記事で「Prompty を読み込んで LangChain と Semantic Kernel で実行するのを試してみた」という記事を書きました。
+https://zenn.dev/microsoft/articles/lets-start-prompty
+今回は、その時に書いた Prompty を読み込んで実行するコードをちょっと書きなおしてみました。
+書きなおしたポイントは以下の通りです。
+
+その言語の命名規約の流儀に従う
+
+癖で Python の変数名を camelCase にしてしまっていたので snake_case に修正
+
+
+非同期処理を使うように変更
+LangCha...]]></description><link>https://zenn.dev/microsoft/articles/lets-start-prompty2</link><guid isPermaLink="true">https://zenn.dev/microsoft/articles/lets-start-prompty2</guid><pubDate>Thu, 30 May 2024 05:54:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--i64-JzqI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%258CPrompty%2520%25E3%2582%2592%25E8%25AA%25AD%25E3%2581%25BF%25E8%25BE%25BC%25E3%2582%2593%25E3%2581%25A7%2520LangChain%2520%25E3%2581%25A8%2520Semantic%2520Kernel%2520%25E3%2581%25A7%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%2599%25E3%2582%258B%25E3%2581%25AE%25E3%2582%2592%25E8%25A9%25A6%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25E3%2580%258D...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Kazuki%2520Ota%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MzZDNiN2I3OGYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Microsoft%2520%2528%25E6%259C%2589%25E5%25BF%2597%2529%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhmNzg3NDJjNDQuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kazuki Ota</dc:creator></item><item><title><![CDATA[Pythonの Linter Formatter は、もうRuff一択。最短5分でプロジェクトに導入]]></title><description><![CDATA[
+ 概要
+Python の Linter、Formatter は今まで black, flake8, isort など複数のライブラリを組み合わせて使用することが一般的でしたが、すべてをオールインワン統合した Ruff の登場により、状況が一変しました。
+Ruff は Rust 製の高速な Linter、Formatter で、Python のコードをチェックする際には、もう Ruff 一択と言っても過言ではありません。
+本記事では、基本的な Ruff の導入方法(pre-commit を使用)と、VSCODE での設定方法を紹介します。
+
+ リポジトリ
+本記事の説明に使用しているサンプ...]]></description><link>https://zenn.dev/tk_resilie/articles/python_ruff_setup</link><guid isPermaLink="true">https://zenn.dev/tk_resilie/articles/python_ruff_setup</guid><pubDate>Wed, 29 May 2024 22:46:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BqJyDb-w--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25AE%2520Linter%2520Formatter%2520%25E3%2581%25AF%25E3%2580%2581%25E3%2582%2582%25E3%2581%2586Ruff%25E4%25B8%2580%25E6%258A%259E%25E3%2580%2582%25E6%259C%2580%25E7%259F%25AD5%25E5%2588%2586%25E3%2581%25A7%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E3%2581%25AB%25E5%25B0%258E%25E5%2585%25A5%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E7%25B1%25B3%25E8%25B0%25B7%2520%25E6%2598%2582%2528Python%252FFastAP...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzExMzNhYjJkZjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>米谷 昂(Python/FastAPIプロフェッショナル)</dc:creator></item><item><title><![CDATA[【Signal Processing】Butter Filter Exlpained]]></title><description><![CDATA[
+ 1. What is butter filter?
+The Butterworth filter is a type of signal processing filter that is designed to have as flat a frequency response as possible in the passband. It works as a bandpass(or high pass, low pass) filter, and also known as a maximally flat magnitude filter.
+The filter is nam...]]></description><link>https://zenn.dev/yuto_mo/articles/01f4a7efc292ad</link><guid isPermaLink="true">https://zenn.dev/yuto_mo/articles/01f4a7efc292ad</guid><pubDate>Wed, 29 May 2024 15:54:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--b8iJpbeN--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Signal%2520Processing%25E3%2580%2591Butter%2520Filter%2520Exlpained%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yuu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q0OTcwZWIzMmUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yuu</dc:creator></item><item><title><![CDATA[音楽生成AIをM1 MBAで動かす話]]></title><description><![CDATA[どうもえいやです
+（こちらの記事は 2024年05月18日に Note に投稿したものを改変・転載したものです）
+
+ なんのお話？
+今回は音楽生成AIとして有名な Facebook の MusicGen を非対応環境であるApple Silicon マシン（M1 Macbook Air）で動くようにしてみた話です
+早い話が、Intel マシンエミュレータのLLVMを介してビルドしたら動きますよという話ですので、どうやってか知りたいだけの方はここまで読めば結構です
+
+ どうして音楽生成を？
+先ごろ作ったサービスの一部として投稿している Youtube の動画に音楽を使いたいからです
+
+ な...]]></description><link>https://zenn.dev/aya_eiya/articles/63e51eebb04f8b</link><guid isPermaLink="true">https://zenn.dev/aya_eiya/articles/63e51eebb04f8b</guid><pubDate>Wed, 29 May 2024 15:26:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--JZi3quyv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E9%259F%25B3%25E6%25A5%25BD%25E7%2594%259F%25E6%2588%2590AI%25E3%2582%2592M1%2520MBA%25E3%2581%25A7%25E5%258B%2595%25E3%2581%258B%25E3%2581%2599%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:aya_eiya%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvYS5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>aya_eiya</dc:creator></item><item><title><![CDATA[[AtCoder Daily Training ALL 2024/05/29 16:00start] 参加記録]]></title><description><![CDATA[AtCoder Daily Training ALL 2024/05/29 16:00start に参加しました。
+A ~ F の6完でした。
+残り10分ありましたが、さすがに D 問題を速解きはまだできないので、断念しました。
+
+ A - Edge Checker
+
+もしくは こちら
+
+ 考え方
+a と b の差が 1 ならば少なくとも直接結ばれています。
+注意点として、 1 と 10 が直接結ばれている点です。
+これは差が 9 になるのでそれも判定に含める必要があります。
+実装例(Python)
+def solve(a: int, b: int) -&gt; bool:
+    di...]]></description><link>https://zenn.dev/shizukakokoro/articles/95e09af0543cfa</link><guid isPermaLink="true">https://zenn.dev/shizukakokoro/articles/95e09af0543cfa</guid><pubDate>Wed, 29 May 2024 08:24:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--FGsQgekR--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BAtCoder%2520Daily%2520Training%2520ALL%25202024%252F05%252F29%252016%253A00start%255D%2520%25E5%258F%2582%25E5%258A%25A0%25E8%25A8%2598%25E9%258C%25B2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E9%259D%2599%25E5%25BF%2583%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzViZTJiOTM3MGMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>静心</dc:creator></item><item><title><![CDATA[Prompty を読み込んで LangChain と Semantic Kernel で実行するのを試してみた]]></title><description><![CDATA[Microsoft Build 2024 で発表された Prompty について試してみたのでメモです。
+Visual Studio Code の Prompty 拡張機能 をインストールすることで簡単に使用できます。
+Prompty は プロンプトとプロンプトの概要、パラメーターなどを定義することが出来るファイルです。以下のような感じになっています。
+---
+name: ExamplePrompt
+description: This is an example prompty file for the Python QA.
+authors:
+  - Kazuki Ota
+model:
+...]]></description><link>https://zenn.dev/microsoft/articles/lets-start-prompty</link><guid isPermaLink="true">https://zenn.dev/microsoft/articles/lets-start-prompty</guid><pubDate>Wed, 29 May 2024 05:32:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wFXlKZ8C--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Prompty%2520%25E3%2582%2592%25E8%25AA%25AD%25E3%2581%25BF%25E8%25BE%25BC%25E3%2582%2593%25E3%2581%25A7%2520LangChain%2520%25E3%2581%25A8%2520Semantic%2520Kernel%2520%25E3%2581%25A7%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%2599%25E3%2582%258B%25E3%2581%25AE%25E3%2582%2592%25E8%25A9%25A6%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Kazuki%2520Ota%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MzZDNiN2I3OGYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Microsoft%2520%2528%25E6%259C%2589%25E5%25BF%2597%2529%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhmNzg3NDJjNDQuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kazuki Ota</dc:creator></item><item><title><![CDATA[新しいディレクトリでpoetryのセットアップでどうやんだっけ?]]></title><description><![CDATA[
+ 毎回忘れるからメモ
+新しいディレクトリでPoetryをセットアップする手順は以下の通りです。
+
+
+新しいディレクトリの作成
+mkdir my_new_project
+cd my_new_project
+
+
+
+Poetryの初期化
+poetry init
+
+このコマンドを実行すると、Poetryが対話形式でプロジェクトの設定を行います。以下のような質問に答えることになります：
+This command will guide you through creating your pyproject.toml config.
+
+Package name [my-new-project]: 
+...]]></description><link>https://zenn.dev/ytksato/articles/67fb9add146f5a</link><guid isPermaLink="true">https://zenn.dev/ytksato/articles/67fb9add146f5a</guid><pubDate>Wed, 29 May 2024 05:04:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--i7B_xNGu--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%2596%25B0%25E3%2581%2597%25E3%2581%2584%25E3%2583%2587%25E3%2582%25A3%25E3%2583%25AC%25E3%2582%25AF%25E3%2583%2588%25E3%2583%25AA%25E3%2581%25A7poetry%25E3%2581%25AE%25E3%2582%25BB%25E3%2583%2583%25E3%2583%2588%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%25E3%2581%25A7%25E3%2581%25A9%25E3%2581%2586%25E3%2582%2584%25E3%2582%2593%25E3%2581%25A0%25E3%2581%25A3%25E3%2581%2591%253F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yutaka%2520Sato%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ViZmI0N2E0M2UuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yutaka Sato</dc:creator></item><item><title><![CDATA[書評：「Python FlaskによるWebアプリ開発入門」]]></title><description><![CDATA[
+ 先に結論
+
+公式で報告されているもの以外の大小さまざまな誤植が多い
+Flaskについて日本語でがっつりまとまっている本は多くないので勉強になる
+
+
+ 読んだ本について
+今回読んだ本は表題の通り「Python FlaskによるWebアプリ開発入門　物体検知アプリ＆機械学習APIの作り方」です。
+https://www.shoeisha.co.jp/book/detail/9784798175164
+本題に移る前に上記のページにある正誤表をまず確認しておくことをおすすめします。
+
+ 筆者についての事前情報
+
+Pythonは3年以上は使っている（はず）
+データサイエンスが好きでそれ系の仕事...]]></description><link>https://zenn.dev/argus1/articles/508901d4797015</link><guid isPermaLink="true">https://zenn.dev/argus1/articles/508901d4797015</guid><pubDate>Tue, 28 May 2024 23:15:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_PjuqTdw--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%259B%25B8%25E8%25A9%2595%25EF%25BC%259A%25E3%2580%258CPython%2520Flask%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258BWeb%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E9%2596%258B%25E7%2599%25BA%25E5%2585%25A5%25E9%2596%2580%25E3%2580%258D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E4%25BF%25AE%25E8%25A1%258C%25E5%2583%25A7%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk4ZGRiMDlhNWYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>修行僧</dc:creator></item><item><title><![CDATA[Djangoにおけるmodel,viewの役割]]></title><description><![CDATA[
+ はじめに
+仕事でC#を使って開発をしていることもあり、DjangoにおけるMVC（実際にはMVT）はどのような構造となっていて、どのようにデータがクライアントに返されるかについて触れた記事になります。
+また、記事で触れているコードは以下の記事で作成したAPIのものを使用しています。
+https://zenn.dev/nihiru/articles/47bb11c1282ab5
+様々な言語を扱う上でこの考えは非常に大事だと思いますし、言語モデルを体系的に理解することで本質を理解することにも繋がると思うので、記事にしてみました。
+
+ 全体の構造
+通常、Djangoプロジェクトは以下の構造...]]></description><link>https://zenn.dev/nihiru/articles/7f59e52a6a645e</link><guid isPermaLink="true">https://zenn.dev/nihiru/articles/7f59e52a6a645e</guid><pubDate>Tue, 28 May 2024 22:07:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--AqUh7e2f--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Django%25E3%2581%25AB%25E3%2581%258A%25E3%2581%2591%25E3%2582%258Bmodel%252Cview%25E3%2581%25AE%25E5%25BD%25B9%25E5%2589%25B2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Nihiru%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTEtPVVgwOTdDdGF4S2d1MDdYUnFzNkJrM29VS2xmZmNydXROVFA0RVNwNnE0PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Nihiru</dc:creator></item></channel></rss>
