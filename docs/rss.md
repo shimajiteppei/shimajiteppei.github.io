@@ -11,6 +11,11 @@ GitHub Actionsで定期的にRSSを購読する[osmos::feed](https://github.com/
 
 ## Rust
 
+### 20240602
+
+- [2370. Longest Ideal Subsequence の解き方メモ](https://qiita.com/neko_the_shadow/items/d5795aa3238a0ca6186b)
+- [Rust の CLI 作りに便利そうなクレート](https://zenn.dev/collabostyle/articles/ebd88b46be0f3a)
+
 ### 20240601
 
 - [AtCoder Beginner Contest 355 振り返り](https://qiita.com/flowerhill/items/ceb5b8f8dae560085f99)
@@ -165,6 +170,18 @@ GitHub Actionsで定期的にRSSを購読する[osmos::feed](https://github.com/
 
 
 ## Java
+
+### 20240602
+
+- [Javaで「文字列の連結(+演算子)」の動作を確認してみた](https://qiita.com/nori-channel/items/c05357852fbda651c991)
+- [Mockito & PowerMockitoまとめ（Mock オブジェクト宣言・メソッド定義編）](https://qiita.com/kotacoffee/items/119164b489605453c867)
+- [ADManager Plus から PowerShell を使用して LDAP 情報を Java に送信する方法](https://qiita.com/lightworker0212/items/f87e3a40a2905712abc3)
+- [Java11 学習](https://qiita.com/AsahinaKei/items/5b7bd47576cf005cc6bd)
+- [Kotlin2.0で向上したスマートキャストについて](https://qiita.com/kazaman97/items/7575b707916f391d2bed)
+- [Feed System](https://qiita.com/labyu2020/items/3d4c4c3dd8a0e980ad5e)
+- [Jetpack Composeでcontextを取得する方法](https://qiita.com/Tsubasa12/items/b1cf6839f25197a8d7c6)
+- [Android データクラスをJsonに変換する方法](https://qiita.com/yuta317/items/cc23027ee488cd74a329)
+- [あなたのAndroidアプリにミニゲームを組み込む！Goでミニゲーム開発　Ebitengine](https://zenn.dev/heartrails/articles/f404bb9c988547)
 
 ### 20240601
 
@@ -428,10 +445,29 @@ GitHub Actionsで定期的にRSSを購読する[osmos::feed](https://github.com/
 - [Komapperを使い倒してみる](https://zenn.dev/momosetkn/articles/4f77a5c4bcdd6b)
 - [コズムのバックエンド技術にKotlin,Ktorを選んだ理由その①](https://zenn.dev/cosmcorp/articles/d65c1f3da01ebb)
 - [AndroidからPresigned URLを使ってS3に画像をアップロードする](https://zenn.dev/wansuko_cmd/articles/bdfe7a2490574e)
-- [Jetpack Composeでログイン状態を維持する](https://zenn.dev/joo_hashi/articles/18b8429acba3b1)
 
 
 ## Linux
+
+### 20240602
+
+- [Create a container from docker images 【Mysql】](https://qiita.com/iwasaki-hub/items/9efcea370a90749715c8)
+- [コンテナイメージからLambda関数をデプロイする](https://qiita.com/Pretzelisa/items/0fe43ee157eec98924ed)
+- [2024年版[Docker] `docker`と`docker compose`コマンドを整理_個人用途](https://qiita.com/taigatomonaga/items/42453fb984971c4ba8aa)
+- [Dockerとは](https://qiita.com/drpphr/items/a216dd96574662dff2bf)
+- [【KVM入門④】〜NFSを使って全ての仮想マシンでファイルを共有する〜](https://qiita.com/ryutarom128/items/3d66f1a5d61c3eb4e426)
+- [【KVM入門③】〜DNSとhostsの設定を行う〜](https://qiita.com/ryutarom128/items/7dd3646beddb96dc647a)
+- [Linuxのディレクトリ構造と作用](https://qiita.com/lz910201/items/20b1a6d84490a183eedc)
+- [Arch LinuxでXRDPを使う上で個人的につまづいたこと](https://qiita.com/csnail/items/72c6823fefacd997542a)
+- [【bash】キーで sort された連想配列のループ処理を実装](https://qiita.com/yuk1_sys/items/3b013ab4ac85bf36f771)
+- [MacのWineSkinServerで起動するゲームのCPU優先度を簡単に変更するやつを作った](https://qiita.com/ykmns/items/f2327b8eff35674f88e2)
+- [UbuntuでGRUBのテーマをカスタマイズする方法](https://qiita.com/kawaharu869/items/0e782de6a1a55cce1dc0)
+- [Ubuntuでvimを使おう！](https://qiita.com/kawaharu869/items/ccb076066c6710cb3268)
+- [apt と apt-get、結局どちらを使えばいいのか？](https://qiita.com/skanno/items/3d76d1fbc7b81663360b)
+- [ブックリーダー Kavita を Ubuntu でセットアップして PDF 文献の整理に使ってみる](https://qiita.com/nanbuwks/items/e2a6510461fe850cbfc2)
+- [【初学者向け】Dockerバインドマウントの基礎と実践](https://zenn.dev/joho0724/articles/sankaku0724-newcreate17)
+- [Dockerを使った環境構築について](https://zenn.dev/tteaoocl/articles/06457929d4e933)
+- [LD_PRELOADを駆使してロードする共有ライブラリを動的に変える(dlopen対応)](https://zenn.dev/kurusugawa/articles/hooking-shared-lib)
 
 ### 20240601
 
@@ -956,11 +992,21 @@ GitHub Actionsで定期的にRSSを購読する[osmos::feed](https://github.com/
 - [Kubuntu24.04でterraformのインストールをするまで](https://zenn.dev/oyatsu_karpas/articles/7443c5bafed559)
 - [なんかDockerが2つある？？Ubuntu上のDockerを削除する](https://zenn.dev/ritton/articles/5db876c257f939)
 - [golang コンパイラのブートストラップ](https://zenn.dev/mtmatma/articles/bea380d94cad4c)
-- [update/upgrade、apt/apt-getの違いについて](https://zenn.dev/sotasato97/articles/410e665466398d)
-- [Ubuntu 24.04 で Yocto Linux がビルドコケる問題 (proc/self/uid_map に書き込めない)](https://zenn.dev/tomoki_imai/articles/ee6154db945697)
 
 
 ## Python
+
+### 20240602
+
+- [PythonでOpenCVがpipインストールできない問題](https://qiita.com/yu_bookstore/items/d33c3afdf35b9306624b)
+- [SAによるアップロードファイルをユーザへ共有](https://qiita.com/eno49conan/items/e1e5cad4416d3b623878)
+- [pythonでディレクトリ内のサブディレクトリ名やパスを取得する](https://qiita.com/futurecreatenow/items/7f9dedb9464a23d85501)
+- [【Game A Week：一週目】スライドパズルを作ってみた](https://qiita.com/RUrushi/items/7954e17be462767a2711)
+- [【ワイブル分布】 未知パラメータ推定方法の改良](https://zenn.dev/rami_graciles/articles/a8334f96dce03c)
+- [【ワイブル分布】確率紙による推定と最尤推定によるパラメータ推定方法の精度比較](https://zenn.dev/rami_graciles/articles/98e01be5dc6fd2)
+- [平均ランク、メジアンランク、モードランクの解説と推定精度の比較【累積分布関数の計算】](https://zenn.dev/rami_graciles/articles/7572d0ac947aaf)
+- [Pydanticを使った環境変数の扱い方について](https://zenn.dev/zaspa/articles/43641557dfd5d0)
+- [FlaskでAPIを作成するためのディレクトリ構成とモジュール管理のベストプラクティス](https://zenn.dev/yutabeee/articles/ab630f44a136fc)
 
 ### 20240601
 
@@ -1298,6 +1344,29 @@ GitHub Actionsで定期的にRSSを購読する[osmos::feed](https://github.com/
 
 
 ## Web
+
+### 20240602
+
+- [cocoonのカスタマイズでヘッダー画像の高さをMax800pxにしたとき](https://qiita.com/masaru21/items/878ba2088d1684d4781f)
+- [未経験エンジニアがHTMLとCSSを勉強する①](https://qiita.com/taku_enginner/items/418dc668a95e99688fec)
+- [アロー関数 [JavaScript]](https://qiita.com/shisshi_engineer/items/381f4c5193dcacb1bdfc)
+- [フロントjsでも使えそうなデータ保存方法](https://qiita.com/_wow_/items/2e15a6c12f283cf6b916)
+- [【個人開発】「住所なう！」というブラウザで今自分がいる場所の住所を出すだけのシンプルなアプリを作成しました！](https://qiita.com/ogatomo21/items/81f8b82e79be2bcbb6f6)
+- [次世代JavaScriptランタイム「Bun」でNode-REDを動かしてみた](https://qiita.com/kitazaki/items/82fb1e5a4a953c6b9966)
+- [非情報系の大学生がアプリ開発してみた](https://qiita.com/astom/items/6e7c651ad94b25df25b0)
+- [【初投稿: React + Typescript】複数枚ステージングさせた画像をトリミングしてみよう Part 1](https://qiita.com/Hinata0607/items/ef0d04f3e5c40c9dc1ee)
+- [TypeScriptを5.4に上げるまでの過程](https://qiita.com/yamatai12/items/f06fcadb409b87a3886a)
+- [Reactのhooksについてちゃんと理解する Effect・パフォーマンス・その他編](https://qiita.com/sayyyyyy/items/db0acb78f9d1f988308d)
+- [コード整形ツールを使うときはプリセットに注意しよう](https://zenn.dev/kei615ykhm/articles/linter-setting-mis)
+- [【css】矢印が左から右に抜けて左から帰ってくる](https://zenn.dev/nami_06063/articles/680731a1362604)
+- [JavaScriptのDOMについて（DOM操作の基礎から簡単なアプリ制作まで）](https://zenn.dev/ryo_hajime/articles/9dc46678289f09)
+- [【TypeScript】ローカルストレージにデータを保持するカスタムフックの設計](https://zenn.dev/kubo_programmer/articles/eddfe50ed191a2)
+- [LangChain x TypeScript で Fallbacks](https://zenn.dev/hayato94087/articles/688f78c6b3ead6)
+- [TypeScriptを学習で学生エンジニアがやったこと](https://zenn.dev/nka21/articles/f278800b37193d)
+- [LangChain x TypeScript で 外部からデータを参照（その２）](https://zenn.dev/hayato94087/articles/bb858a6dabb286)
+- [LangChain x TypeScript で 外部からデータを参照（その１）](https://zenn.dev/hayato94087/articles/3026b7ba9aa1c2)
+- [迷路アルゴリズムであっさりダンジョン](https://zenn.dev/sdkfz181tiger/articles/208681ce5a4d87)
+- [ストラテジーパターンを効果的に使おう](https://zenn.dev/roll1226/articles/5af24165d78114)
 
 ### 20240601
 
