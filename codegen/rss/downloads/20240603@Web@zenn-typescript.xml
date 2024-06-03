@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「TypeScript」のフィード]]></title><description><![CDATA[Zennのトピック「TypeScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/typescript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/f13e758fdb.png</url><title>Zennの「TypeScript」のフィード</title><link>https://zenn.dev/topics/typescript</link></image><generator>zenn.dev</generator><lastBuildDate>Mon, 03 Jun 2024 12:03:44 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/typescript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[判別可能なユニオン型を試してみる]]></title><description><![CDATA[TypeScriptにおける判別可能なユニオン型（Discriminated Union Types）は、異なるデータのバリエーションを安全かつ効率的に管理するための強力な抽象化を提供します。
+この記事では、判別可能なユニオン型とは何か、そして React &amp; Next.js の環境でそれをどのように使用するかについて試してみます。具体的な例も提供します。
+
+ 判別可能なユニオン型（Discriminated Union Types）とは？
+TypeScriptにおける判別可能なユニオン型（Discriminated Union Types）とは、複数のバリエーションの値を表現で...]]></description><link>https://zenn.dev/andmorefine/articles/8d55e13f9fc843</link><guid isPermaLink="true">https://zenn.dev/andmorefine/articles/8d55e13f9fc843</guid><pubDate>Sun, 02 Jun 2024 23:57:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--JkbYGkFm--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2588%25A4%25E5%2588%25A5%25E5%258F%25AF%25E8%2583%25BD%25E3%2581%25AA%25E3%2583%25A6%25E3%2583%258B%25E3%2582%25AA%25E3%2583%25B3%25E5%259E%258B%25E3%2582%2592%25E8%25A9%25A6%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:andmorefine%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2d4SWhtd3ZlckNiV1hqRkRZWk9xOEJJSGsyMHFYN3ZqN3lrS0NQd1QwPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>andmorefine</dc:creator></item><item><title><![CDATA[【OSS】こんな私でもOSSに貢献できた！？]]></title><description><![CDATA[
+ はじめに
+どうも、へっぽこミジンコエンジニアのてるし〜です🤪
+エンジニアになって約8ヶ月でOSS(オープンソース)に出会い初めてコミットをしました。
+そこからたま〜〜〜にissueを拾ってコミットをするようになりました。
+どのような経緯でOSS(オープンソース)に手を出し始めたのか、OSSに手を出して何が良かったのかを話していこうかと思います。
+!
+今回は技術というより、日記みたいなものです。
+ちなみにできるエンジニアさんへ
+叩かないでください😢
+叩くなら見ないでください😡
+
+それでは今回もゆっくりしていってください🥰
+
+ 貢献したOSS
+2024/6現在貢献したOSSは2つです。
+...]]></description><link>https://zenn.dev/terusi/articles/773fbbb466f027</link><guid isPermaLink="true">https://zenn.dev/terusi/articles/773fbbb466f027</guid><pubDate>Sun, 02 Jun 2024 16:24:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qM8a_YSS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590OSS%25E3%2580%2591%25E3%2581%2593%25E3%2582%2593%25E3%2581%25AA%25E7%25A7%2581%25E3%2581%25A7%25E3%2582%2582OSS%25E3%2581%25AB%25E8%25B2%25A2%25E7%258C%25AE%25E3%2581%25A7%25E3%2581%258D%25E3%2581%259F%25EF%25BC%2581%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A6%25E3%2582%258B%25E3%2581%2597%25E3%2580%259C%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRlM2M5MzkyNjguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>てるし〜</dc:creator></item><item><title><![CDATA[かわいい犬がタスクを食べてくれるWebアプリを作った話]]></title><description><![CDATA[
+ ご紹介
+「タスクを記録すると、片っ端からかわいい犬が食べてしまうWebアプリ」を思いついたので、Next.js + Tailwind CSS の練習を兼ねて形にしてみました。
+公開したWebアプリはこちら
+https://faveo-systema.net/to-dog-list
+Githubリポジトリはこちらです
+https://github.com/Daiius/to-dog-list
+
+スクリーンショット
+
+ 思い入れのあるポイント
+
+ 1.ダークモード対応
+next-themesを用いた切り替え機能、意外とちゃんと実装するのは結構難しいのですね
+（まだコンソールにエラーが出ま...]]></description><link>https://zenn.dev/daiius/articles/14e62bd0770de3</link><guid isPermaLink="true">https://zenn.dev/daiius/articles/14e62bd0770de3</guid><pubDate>Sun, 02 Jun 2024 15:29:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qvzceMDU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%258B%25E3%2582%258F%25E3%2581%2584%25E3%2581%2584%25E7%258A%25AC%25E3%2581%258C%25E3%2582%25BF%25E3%2582%25B9%25E3%2582%25AF%25E3%2582%2592%25E9%25A3%259F%25E3%2581%25B9%25E3%2581%25A6%25E3%2581%258F%25E3%2582%258C%25E3%2582%258BWeb%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Daiius%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTDJQMDBUcmhBR01Wa3RvMENTY2hJT0o2T1NBQkJqUkVQT0JPQnJjT2REeDRqbW81RFc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Daiius</dc:creator></item><item><title><![CDATA[keyof typeof を使って型を生成する]]></title><description><![CDATA[
+ typeof 型演算子とは
+typeof は変数から型を抽出する型演算子です。
+例として以下のようなオブジェクトがあったとします。
+const person = {
+  name: "John",
+  age: 26,
+};
+上記オブジェクトに対して typeof を使った型は次のような型になります。
+type Person = typeof person;
+type Person = {
+  name: string;
+  age: number;
+};
+
+ keyof 型演算子とは
+keyof はオブジェクトの型からプロパティ名を型として返す型演算子です。
+例として以下のようなオ...]]></description><link>https://zenn.dev/eitaro1230/articles/typescript-keyof-typeof</link><guid isPermaLink="true">https://zenn.dev/eitaro1230/articles/typescript-keyof-typeof</guid><pubDate>Sun, 02 Jun 2024 15:01:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--F3UrnRaY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:keyof%2520typeof%2520%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E5%259E%258B%25E3%2582%2592%25E7%2594%259F%25E6%2588%2590%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:eitaro1230%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVhODEzZWZhM2UuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>eitaro1230</dc:creator></item><item><title><![CDATA[PixiJS v8 + GSAP + Spine2D のテンプレートです]]></title><description><![CDATA[表題の通り、Vite をベースにして PixiJS v8 + GSAP + Spine2D のテンプレートを作成してみました。
+誰のためというわけもなく、ほぼ自分用ですね。
+
+ リポジトリ・サンプルページ
+&gt; リポジトリ:t-tonyo-maru/pub_template_web_pixijs-gsap-spine
+&gt; サンプルページ
+
+サンプルページ スクリーンショット
+
+ 開発環境
+
+
+
+開発環境
+バージョン
+
+
+
+
+node
+&gt;=20
+
+
+
+
+ 主なパッケージ
+
+
+
+パッケージ
+バージョン
+
+
+
+
+dotenv
+^16.4.5
+
+
+typescript
+^5.2....]]></description><link>https://zenn.dev/t_tonyo_maru/articles/b5d96768a38368</link><guid isPermaLink="true">https://zenn.dev/t_tonyo_maru/articles/b5d96768a38368</guid><pubDate>Sun, 02 Jun 2024 14:57:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---_WHKowh--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:PixiJS%2520v8%2520%252B%2520GSAP%2520%252B%2520Spine2D%2520%25E3%2581%25AE%25E3%2583%2586%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AC%25E3%2583%25BC%25E3%2583%2588%25E3%2581%25A7%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A8%25E3%2582%2593%25E3%2582%2588%25E3%2583%25BC%25E3%2580%2582%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NhNjVjZjg3MjguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>とんよー。</dc:creator></item><item><title><![CDATA[【TypeScript】ローカルストレージにデータを保持するカスタムフックの設計]]></title><description><![CDATA[
+ 概要
+本記事では、TypeScriptを用いてデータの保存方法を抽象化し、SessionStorage、LocalStorage、Cookieの3つの異なるストレージに対応可能なStore Managerの実装方法について紹介します。また、Reactのカスタムフックを使って、これらのストレージと連携する方法も説明します。
+
+ Store Managerの実装
+データの管理方法が変更されても対応できるように、共通のインターフェースStoreManagerを定義し、それぞれのストレージに対する具体的な実装を行います。
+
+ インターフェースとファクトリ関数の定義
+// 共通のインターフェー...]]></description><link>https://zenn.dev/kubo_programmer/articles/eddfe50ed191a2</link><guid isPermaLink="true">https://zenn.dev/kubo_programmer/articles/eddfe50ed191a2</guid><pubDate>Sun, 02 Jun 2024 08:50:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--T9z5qZ7R--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590TypeScript%25E3%2580%2591%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25AB%25E3%2583%25AB%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25AC%25E3%2583%25BC%25E3%2582%25B8%25E3%2581%25AB%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%2592%25E4%25BF%259D%25E6%258C%2581%25E3%2581%2599%25E3%2582%258B%25E3%2582%25AB%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%25A0%25E3%2583%2595%25E3%2583%2583%25E3%2582%25AF%25E3%2581%25AE%25E8%25A8%25AD%25E8%25A8%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25AF%25E3%2583%259C%25E5%25A4%25AA%25E9%2583%258E%2520%257C%2520%25E7%25AA%25AA%25E7%2594%25B0%25E7%25A7%2580%25E5%2593%2589%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzgwNzFmOWEyZGEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>クボ太郎 | 窪田秀哉</dc:creator></item><item><title><![CDATA[LangChain で Fallbacks（Node.js）]]></title><description><![CDATA[
+ はじめに
+LLM を利用する場合、レートリミット、API のダウンタイムなど API の利用にまつわる問題が発生します。この記事では、問題が発生した際に対処する方法を記述します。具体的には以下の記事を参考に記述します。
+https://js.langchain.com/v0.2/docs/how_to/fallbacks/
+TypeScript / JavaScript での GitHub リポジトリーを公開している実装例はすくないので記事化しました。作業リポジトリはこちらです。
+ 
+https://github.com/hayato94087/langchain-fallbacks...]]></description><link>https://zenn.dev/hayato94087/articles/688f78c6b3ead6</link><guid isPermaLink="true">https://zenn.dev/hayato94087/articles/688f78c6b3ead6</guid><pubDate>Sun, 02 Jun 2024 06:48:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--w59ENCve--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:LangChain%2520%25E3%2581%25A7%2520Fallbacks%25EF%25BC%2588Node.js%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hayato94087%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU5ZTEyZGJjZTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hayato94087</dc:creator></item><item><title><![CDATA[TypeScriptの学習で学生エンジニアがやったこと]]></title><description><![CDATA[!
+この記事は6月から学習し始めているため、現在も更新中です。
+
+!
+筆者は、プログラミングを学習するのは初めてです。
+
+「JavaScriptとは」「TypeScriptとは」については、ふんわり知っている前提で書いています
+
+ Lv0: JavaScriptの基礎を学んでみよう
+JavaScriptの記述等の学習をしてみます。
+友人から「このサイトは、練習問題が豊富でやってて楽しいんじゃない？」とオススメして頂いたので、こちらの学習を進めてみます！
+https://ja.javascript.info
+学びながら「おもしろいな」と思ったもののみを
+スクラップでアウトプットしてみました...]]></description><link>https://zenn.dev/nka21/articles/f278800b37193d</link><guid isPermaLink="true">https://zenn.dev/nka21/articles/f278800b37193d</guid><pubDate>Sun, 02 Jun 2024 05:25:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--awFXObnP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%25E3%2581%25AE%25E5%25AD%25A6%25E7%25BF%2592%25E3%2581%25A7%25E5%25AD%25A6%25E7%2594%259F%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%25E3%2581%258C%25E3%2582%2584%25E3%2581%25A3%25E3%2581%259F%25E3%2581%2593%25E3%2581%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:naoki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNmOGM3MWM5YTUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>naoki</dc:creator></item><item><title><![CDATA[初めてOSSのコントリビュートをした話]]></title><description><![CDATA[
+ はじめに
+ここ最近、はじめてOSSのコントリビュートをしたので、その際に私が参考にしたサイトや実施したことをまとめたものを記載します。
+OSSのコントリビュートを考えている方のご参考になれば幸いです。
+今回貢献したプルリクエストは下記になります。
+https://github.com/lukasoppermann/html5sortable/pull/956
+
+ OSSに興味を持ったきっかけ
+OSSに興味を持ったきっかけは、「OSSのコントリビュートってなんか難しそう」というイメージが私はありました。その考えを打ち破るべく、今回貢献しました。
+
+ コントリビュートになるまでの流れ
+
+...]]></description><link>https://zenn.dev/kyuki/articles/3e32c89e3659c6</link><guid isPermaLink="true">https://zenn.dev/kyuki/articles/3e32c89e3659c6</guid><pubDate>Sun, 02 Jun 2024 03:36:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lEfPHFPr--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2588%259D%25E3%2582%2581%25E3%2581%25A6OSS%25E3%2581%25AE%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2588%25E3%2583%25AA%25E3%2583%2593%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%2588%25E3%2582%2592%25E3%2581%2597%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yuki%2520katayama%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2k1NHZkWHViS2FrdUktS05aSWFEUWFQT3NadmEwdnpEeEZiMFkxMkE9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yuki katayama</dc:creator></item><item><title><![CDATA[LangChain で外部からデータを参照 後編（Node.js）]]></title><description><![CDATA[
+ はじめに
+この記事では、公式のドキュメントを使いながら LangChain で外部から入力された情報を参照する方法を紹介します。こちらが記事です。チャットモデル以外に知識をあたえるために外部データを読み込ませて応答を拡張できます。本記事ではその方法について記述します。
+https://js.langchain.com/v0.2/docs/how_to/chatbots_retrieval/
+TypeScript / JavaScript での GitHub リポジトリーを公開している実装例はすくないので記事化しました。作業リポジトリはこちらです。
+https://github.com...]]></description><link>https://zenn.dev/hayato94087/articles/bb858a6dabb286</link><guid isPermaLink="true">https://zenn.dev/hayato94087/articles/bb858a6dabb286</guid><pubDate>Sun, 02 Jun 2024 02:58:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Zfh-4ewd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:LangChain%2520%25E3%2581%25A7%25E5%25A4%2596%25E9%2583%25A8%25E3%2581%258B%25E3%2582%2589%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%2592%25E5%258F%2582%25E7%2585%25A7%2520%25E5%25BE%258C%25E7%25B7%25A8%25EF%25BC%2588Node.js%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hayato94087%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU5ZTEyZGJjZTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hayato94087</dc:creator></item><item><title><![CDATA[LangChain で外部からデータを参照 前編（Node.js）]]></title><description><![CDATA[
+ はじめに
+この記事では、公式のドキュメントを使いながら LangChain で外部から入力された情報を参照する方法を紹介します。こちらが記事です。チャットモデル以外に知識をあたえるために外部データを読み込ませて応答を拡張できます。本記事ではその方法について記述します。
+https://js.langchain.com/v0.2/docs/how_to/chatbots_retrieval/
+TypeScript / JavaScript での GitHub リポジトリーを公開している実装例はすくないので記事化しました。作業リポジトリはこちらです。
+https://github.com...]]></description><link>https://zenn.dev/hayato94087/articles/3026b7ba9aa1c2</link><guid isPermaLink="true">https://zenn.dev/hayato94087/articles/3026b7ba9aa1c2</guid><pubDate>Sun, 02 Jun 2024 02:57:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ZjKUGoiv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:LangChain%2520%25E3%2581%25A7%25E5%25A4%2596%25E9%2583%25A8%25E3%2581%258B%25E3%2582%2589%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%2592%25E5%258F%2582%25E7%2585%25A7%2520%25E5%2589%258D%25E7%25B7%25A8%25EF%25BC%2588Node.js%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hayato94087%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU5ZTEyZGJjZTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hayato94087</dc:creator></item><item><title><![CDATA[ストラテジーパターンを効果的に使おう]]></title><description><![CDATA[
+ ストラテジーパターン
+GoF（Gang of Four）デザインパターンの一つになります。
+「同じ処理を複数のアルゴリズムで定義・定義したアルゴリズムを交換して効率的にしよう」というデザインパターンです。
+「良いコード／悪いコードで学ぶ設計入門―保守しやすい　成長し続けるコードの書き方」という書籍を読んでいる際に出来たデザインパターンですが、効率的に使えばコードが読みやすくなるなと感じ記事にして一人でも多く知って頂ければと思いました
+↓「良いコード／悪いコードで学ぶ設計入門―保守しやすい　成長し続けるコードの書き方」を読みたい方は
+https://amzn.asia/d/hUlSJd...]]></description><link>https://zenn.dev/roll1226/articles/5af24165d78114</link><guid isPermaLink="true">https://zenn.dev/roll1226/articles/5af24165d78114</guid><pubDate>Sat, 01 Jun 2024 21:30:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2uhVaOR0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25A9%25E3%2583%2586%25E3%2582%25B8%25E3%2583%25BC%25E3%2583%2591%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%25B3%25E3%2582%2592%25E5%258A%25B9%25E6%259E%259C%25E7%259A%2584%25E3%2581%25AB%25E4%25BD%25BF%25E3%2581%258A%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:roll1226%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzllMTFlOTYwNTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>roll1226</dc:creator></item><item><title><![CDATA[【Dify × Next.js】AIが東京グルメを紹介してくれるアプリを作ってみた]]></title><description><![CDATA[
+ はじめに
+無料で簡単に生成AIが利用できるDifyというサービスをNext.jsでの個人開発アプリに組み込んでみました！生成AIを使ったサービスを作るのはハードルが高いと思っていましたがDifyを使うととても簡単にできたので紹介します。
+こんな感じのアプリです。
+
+
+ Difyとは
+
+DifyはオープンソースのLLMアプリ開発プラットフォームです。
+
+ノーコードで生成AIを利用することができ、OpenAI、Anthropic、Googleなど、さまざまなAIモデルをサポートしています。
+さらに無料で使うことができます。
+
+ Difyセットアップ
+Difyを利用するには2つの方法があり...]]></description><link>https://zenn.dev/kiwichan101kg/articles/8f1b1a5b44774b</link><guid isPermaLink="true">https://zenn.dev/kiwichan101kg/articles/8f1b1a5b44774b</guid><pubDate>Sat, 01 Jun 2024 11:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ozIYBRxO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Dify%2520%25C3%2597%2520Next.js%25E3%2580%2591AI%25E3%2581%258C%25E6%259D%25B1%25E4%25BA%25AC%25E3%2582%25B0%25E3%2583%25AB%25E3%2583%25A1%25E3%2582%2592%25E7%25B4%25B9%25E4%25BB%258B%25E3%2581%2597%25E3%2581%25A6%25E3%2581%258F%25E3%2582%258C%25E3%2582%258B%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kiwichan%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZlYTA3YzU3YzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kiwichan</dc:creator></item><item><title><![CDATA[Reactで滑らかに揺れるUIを作成可能なライブラリを公開しました]]></title><description><![CDATA[
+ はじめに
+今回初めて作ったものをOSSとして公開してみました。
+作ったものはReactで動作するliquidui-animation というライブラリです。
+liquidui-animationは、Raectで揺れ動くアニメーションを持つUIを簡単に作る事を目的としたライブラリです。
+
+ ▼ liquidui-animation
+https://github.com/enumura1/liquidui-animation
+
+ 開発のきっかけ
+開発のきっかけは以前投稿していた下記記事になります。
+毎度CSSでkeyframesを当てるのは面倒なので、簡単に作成できるライブラリがあれば便...]]></description><link>https://zenn.dev/enumura/articles/e0371736e8b7b8</link><guid isPermaLink="true">https://zenn.dev/enumura/articles/e0371736e8b7b8</guid><pubDate>Sat, 01 Jun 2024 07:41:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2gEI-HQR--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%25E3%2581%25A7%25E6%25BB%2591%25E3%2582%2589%25E3%2581%258B%25E3%2581%25AB%25E6%258F%25BA%25E3%2582%258C%25E3%2582%258BUI%25E3%2582%2592%25E4%25BD%259C%25E6%2588%2590%25E5%258F%25AF%25E8%2583%25BD%25E3%2581%25AA%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%25E3%2582%2592%25E5%2585%25AC%25E9%2596%258B%25E3%2581%2597%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:enumura%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JhYWUzMTU3YWMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>enumura</dc:creator></item><item><title><![CDATA[useCallback について【React】]]></title><description><![CDATA[
+ はじめに
+実務でuseCallback について学んだので、自分の学習記録用として記事にしました。
+
+ 開発環境
+
+React
+Typscript
+PHP
+
+
+ useCallback とは
+reactのフックのひとつです。
+公式には以下ように書いてあります。
+
+useCallback は、再レンダー間で関数定義をキャッシュできるようにする React フックです。
+
+useCallback を使用することで、関数コンポーネントの中に定義された関数が不必要に再生成されるのを防いでパフォーマンスを最適化することができます。
+関数インスタンスをキャッシュ（保存）し、依存関係が変わるまで保...]]></description><link>https://zenn.dev/ao_5585/articles/59c644d6e4c434</link><guid isPermaLink="true">https://zenn.dev/ao_5585/articles/59c644d6e4c434</guid><pubDate>Sat, 01 Jun 2024 05:06:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--M33Hq0tJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:useCallback%2520%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E3%2580%2590React%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2582%25E3%2581%258A%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI5Njc1MTg2YzAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>あお</dc:creator></item><item><title><![CDATA[TextAliveAppApiで歌詞・コード・ビートをリアルタイムに取得する。]]></title><description><![CDATA[この記事ではTextAliveAppAPIを使って、楽曲から歌詞・コード・ビートを取得するシンプルな実装を紹介します。
+
+ デモ
+
+
+ 実装
+
+ 環境構築
+TextAliveAppAPIの事前準備
+TextAliveAppApiを使用するには、開発者登録をしてTextAliveアプリを作成し、アプリトークンを取得する必要があります。
+
+viteプロジェクトの作成、npmパッケージのインストール
+npm create vite@latest プロジェクト名 -- --template vanilla-ts
+npm i
+npm i textalive-app-api
+
+ 歌詞・コード・ビート...]]></description><link>https://zenn.dev/makimura3329/articles/textalive-app-basic-20240527</link><guid isPermaLink="true">https://zenn.dev/makimura3329/articles/textalive-app-basic-20240527</guid><pubDate>Sat, 01 Jun 2024 04:40:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--U3-4sftv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TextAliveAppApi%25E3%2581%25A7%25E6%25AD%258C%25E8%25A9%259E%25E3%2583%25BB%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2583%25BB%25E3%2583%2593%25E3%2583%25BC%25E3%2583%2588%25E3%2582%2592%25E3%2583%25AA%25E3%2582%25A2%25E3%2583%25AB%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25A0%25E3%2581%25AB%25E5%258F%2596%25E5%25BE%2597%25E3%2581%2599%25E3%2582%258B%25E3%2580%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%2520Makimura%2520%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ3ZTE1MjMxZmYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>🧟Makimura🧟</dc:creator></item><item><title><![CDATA[actions/github-scriptの型補完でJob Summariesの開発をラクにしよう]]></title><description><![CDATA[
+ Job Summariesの自前実装が辛い
+GitHub Actionsのワークフローで自前のJob Summariesを実装する際に、簡単なサマリーであればワークフローのyamlにインラインでスクリプトを記述すればいいのですが、複雑になってくると実装が辛い。。。
+- name: Generate list using Markdown
+  run: |
+    echo "This is the lead in sentence for the list" &gt;&gt; $GITHUB_STEP_SUMMARY
+    echo "" &gt;&gt; $GITHUB_STEP...]]></description><link>https://zenn.dev/ikoamu/articles/5b4c646376b60e</link><guid isPermaLink="true">https://zenn.dev/ikoamu/articles/5b4c646376b60e</guid><pubDate>Sat, 01 Jun 2024 03:07:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--w2yDVgKp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:actions%252Fgithub-script%25E3%2581%25AE%25E5%259E%258B%25E8%25A3%259C%25E5%25AE%258C%25E3%2581%25A7Job%2520Summaries%25E3%2581%25AE%25E9%2596%258B%25E7%2599%25BA%25E3%2582%2592%25E3%2583%25A9%25E3%2582%25AF%25E3%2581%25AB%25E3%2581%2597%25E3%2582%2588%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ikoamu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhhNDYwNWY1YmIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ikoamu</dc:creator></item><item><title><![CDATA[MapLibre GL JSをvitestでモックする]]></title><description><![CDATA[
+ 背景
+コンポーネントがMapLibre GL JSを含む場合、以下のようなエラーが発生します
+ FAIL  src/routes/map/page.test.ts [ src/routes/map/page.test.ts ]
+TypeError: window.URL.createObjectURL is not a function
+ ❯ define node_modules/maplibre-gl/dist/maplibre-gl.js:34:44
+     32| 
+     33|     if (typeof window !== 'undefined') {
+    ...]]></description><link>https://zenn.dev/mierune/articles/e49de5186640b5</link><guid isPermaLink="true">https://zenn.dev/mierune/articles/e49de5186640b5</guid><pubDate>Fri, 31 May 2024 14:47:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ga58B99D--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:MapLibre%2520GL%2520JS%25E3%2582%2592vitest%25E3%2581%25A7%25E3%2583%25A2%25E3%2583%2583%25E3%2582%25AF%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:IGUCHI%2520Kanahiro%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAyNDdjMTQzMmUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:MIERUNE%25E3%2581%25AEZenn%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dyUWJ4RXRhM0tGZ2F5NVBQMGhCRk04ajFmZ210amNvdXFld2lxPXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>IGUCHI Kanahiro</dc:creator></item><item><title><![CDATA[正しいオブジェクト指向やってると1単語になるよね、って話]]></title><description><![CDATA[
+ まじで1単語になる！！！！
+
+オブジェクト指向とは: 絶対1単語に済ませられるマン！（3~4%の例外あり)
+
+
+ オブジェクト指向のコツ
+オブジェクト指向のコツはむしろ、1単語でなかったら間違ってるかもってことに気づけることかも知れない、、。
+オブジェクト指向間違ってると
+togglePrivatePersonarityNum とかいう長っがいメソッドや変数はやしがち。
+
+リファクタリング途中の.js
+class Members {
+  constructor(usingState, { mine, list }) {
+    [this.states, this.setStates...]]></description><link>https://zenn.dev/llc_starhacks/articles/0f64fea15cfab0</link><guid isPermaLink="true">https://zenn.dev/llc_starhacks/articles/0f64fea15cfab0</guid><pubDate>Fri, 31 May 2024 10:44:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--OGWOL13e--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%25AD%25A3%25E3%2581%2597%25E3%2581%2584%25E3%2582%25AA%25E3%2583%2596%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E6%258C%2587%25E5%2590%2591%25E3%2582%2584%25E3%2581%25A3%25E3%2581%25A6%25E3%2582%258B%25E3%2581%25A81%25E5%258D%2598%25E8%25AA%259E%25E3%2581%25AB%25E3%2581%25AA%25E3%2582%258B%25E3%2582%2588%25E3%2581%25AD%25E3%2580%2581%25E3%2581%25A3%25E3%2581%25A6%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:llc_starhacks%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY4M2QxODAxZjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>llc_starhacks</dc:creator></item><item><title><![CDATA[「個人開発で月30万の売上を3ヶ月で達成！」という目標を掲げた【エンジニア超特化マッチングサービス】のβ版を本日リリース🎉]]></title><description><![CDATA[
+ はじめに
+はじめは勉強がてら、自分の触りたい技術を使って好きなサービスでも作ろうかなと思って開発した個人開発でしたが、気づいたら個人開発の規模を遥かに超えていて、「月30万の売上を3ヶ月で達成する」という大きな目標と、「エンジニアという専門領域で困っている人と教えたい人をもっと簡単にマッチングさせられるような仕組みを世に生み出したい」という強い思いを掲げて「DokuPro(ドクプロ)」というエンジニアに特化したマッチングサービスを開発するに至りました！
+そんなこんなで約半年ちょい開発を行い、2024年5月の頭に先行リリース(ウェイティングリスト登録)を行い、このたび本格的に先生・生徒...]]></description><link>https://zenn.dev/sado/articles/7d1cdc4f698592</link><guid isPermaLink="true">https://zenn.dev/sado/articles/7d1cdc4f698592</guid><pubDate>Fri, 31 May 2024 09:02:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ooCBZ4No--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%258C%25E5%2580%258B%25E4%25BA%25BA%25E9%2596%258B%25E7%2599%25BA%25E3%2581%25A7%25E6%259C%258830%25E4%25B8%2587%25E3%2581%25AE%25E5%25A3%25B2%25E4%25B8%258A%25E3%2582%25923%25E3%2583%25B6%25E6%259C%2588%25E3%2581%25A7%25E9%2581%2594%25E6%2588%2590%25EF%25BC%2581%25E3%2580%258D%25E3%2581%25A8%25E3%2581%2584%25E3%2581%2586%25E7%259B%25AE%25E6%25A8%2599%25E3%2582%2592%25E6%258E%25B2%25E3%2581%2592%25E3%2581%259F%25E3%2580%2590%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%25E8%25B6%2585%25E7%2589%25B9%25E5%258C%2596%25E3%2583%259E%25E3%2583%2583%25E3%2583%2581%25E3%2583%25B3%25E3%2582%25B0%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2593%25E3%2582%25B9%25E3%2580%2591%25E3%2581%25AE%25CE%25B2%25E7%2589%2588%25E3%2582%2592%25E6%259C%25AC%25E6%2597%25A5%25E3%2583%25AA...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Sado%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg1NDMwN2FhY2YuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Sado</dc:creator></item></channel></rss>
