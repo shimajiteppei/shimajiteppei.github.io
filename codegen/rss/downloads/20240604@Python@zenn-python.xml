@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Tue, 04 Jun 2024 11:28:19 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[uvでPython仮想環境を作ってみた]]></title><description><![CDATA[
+ uvとは
+私が少し触った感想は めっちゃ早くて高機能なvenv + pip(pip-tools) です。
+https://astral.sh/blog/uv
+公式の説明を翻訳に投げた結果です。
+
+
+Rust製のPythonパッケージインストーラとリゾルバー（依存関係を解決するもの）
+
+
+従来のpipやpip-toolsのワークフローを置き換えることを目的としてる
+
+
+下記にuvの特徴もいくつか示します。
+
+⚡️ Rustで開発されており、高速かつ信頼性が高い、さらに使いやすい
+
+
+pipおよびpip-tools（pip-compileやpip-syncなど）よりも10〜100倍早い)...]]></description><link>https://zenn.dev/kazu0429/articles/ed5011178d4b85</link><guid isPermaLink="true">https://zenn.dev/kazu0429/articles/ed5011178d4b85</guid><pubDate>Tue, 04 Jun 2024 09:02:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--iqh2oBCG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:uv%25E3%2581%25A7Python%25E4%25BB%25AE%25E6%2583%25B3%25E7%2592%25B0%25E5%25A2%2583%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kazuki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRmNDI0ZGI0MjcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kazuki</dc:creator></item><item><title><![CDATA[FlaskのBasic認証HTTPBasicAuthで401ページをカスタマイズする]]></title><description><![CDATA[
+ TL;DR
+HTTPBasicAuth.error_handler()の引数にwerkzeug.exceptions.Unauthorized.get_body()の文字列を返すメソッドを渡す。
+
+ 背景
+flask_httpauthのBasic認証HTTPBasicAuthをFlaskに適用する際、デフォルトだとUnauthorized(認証失敗)のページは以下のように表示される。
+
+他の404等のエラーページではもう少しリッチな表示になっている一方で、401の時のみただの1行テキストでかなり質素な表示となり味気ない。
+
+ 対策
+HTTPBasicAuth.error_handle...]]></description><link>https://zenn.dev/nondescript/articles/bf0d776e7f4d2a</link><guid isPermaLink="true">https://zenn.dev/nondescript/articles/bf0d776e7f4d2a</guid><pubDate>Tue, 04 Jun 2024 08:38:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--kK1kUiVm--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Flask%25E3%2581%25AEBasic%25E8%25AA%258D%25E8%25A8%25BCHTTPBasicAuth%25E3%2581%25A7401%25E3%2583%259A%25E3%2583%25BC%25E3%2582%25B8%25E3%2582%2592%25E3%2582%25AB%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%259E%25E3%2582%25A4%25E3%2582%25BA%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E7%25B4%25A0%25E4%25BA%25BA%25E3%2581%25AE%25E6%2588%25AF%25E8%25A8%2580%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVmYTVmOTBhM2EuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>素人の戯言</dc:creator></item><item><title><![CDATA[Python + VSCode の環境構築 20240604]]></title><description><![CDATA[作業メモ。モダン Python 速習。
+AI 周りのツールを動かしていたら TypeScript だけでやるには無理が出てきたので、久しぶりに Python の環境構築をする。
+具体的には TestGen LLM を動かしたい。
+https://www.freecodecamp.org/news/automated-unit-testing-with-testgen-llm-and-cover-agent
+Python はたまに触るけど、基本 2.x 時代の知識しかない。
+基本的にこの記事を読みながら、細かいアレンジをしている。
+https://zenn.dev/koki_algebra...]]></description><link>https://zenn.dev/mizchi/articles/setup-python-20240604</link><guid isPermaLink="true">https://zenn.dev/mizchi/articles/setup-python-20240604</guid><pubDate>Tue, 04 Jun 2024 07:57:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--o7BVZ8Ez--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%2520%252B%2520VSCode%2520%25E3%2581%25AE%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%252020240604%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mizchi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2liclRHT052Z3d3ay1fNGxlcVk4TGNGSlNuX0FoWnpEWVlKaXJNcWc9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mizchi</dc:creator></item><item><title><![CDATA[【PyCharm】GCPのTPU/GPU VMにPythonコードをデプロイする方法]]></title><description><![CDATA[
+ GCPのTPU/GPU VMにPythonコードをデプロイする
+ローカルPCで開発中のPythonコードを実際にTPU/GPU VM側で実行したい場合、何らかの方法で、VM側にPythonコードをコピーする必要が出てきます。リリース済みのPythonコードの場合、gitのcloneコマンドでVM側にPythonコードをクローンすることが可能ですが、開発中のコードの場合そうも行きません。gcloud CLIのscpコマンドを使う方法もありますが、今回はPyCharmのデプロイ機能とSSHトンネルを使ってコードをデプロイする一番手間のかからない方法を紹介します。
+!
+PyCharmのデプ...]]></description><link>https://zenn.dev/fukugawa/articles/04d4a4fca04da5</link><guid isPermaLink="true">https://zenn.dev/fukugawa/articles/04d4a4fca04da5</guid><pubDate>Tue, 04 Jun 2024 07:56:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6wd9nLgP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590PyCharm%25E3%2580%2591GCP%25E3%2581%25AETPU%252FGPU%2520VM%25E3%2581%25ABPython%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2582%2592%25E3%2583%2587%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25A4%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:fukugawa%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzczMDE5MDk4MWQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>fukugawa</dc:creator></item><item><title><![CDATA[Strawberry GraphQLでキャッチした例外・エラーを Rollbar にスタックトレース付きでレポートする]]></title><description><![CDATA[Strawberry GraphQL を使ったQuery, Mutation のエラーや例外が Rollbar にレポートされなかったので調べた。公式ドキュメントと、以下のQiitaの記事を参考にしてカスタムスキーマを実装し、オーバライドしたメソッドで rollbar.report_exc_info を実行することでうまくいった。
+
+Strawberry (GraphQL)で特定のエラーのみをエラーログ出力する
+Schema | Strawberry GraphQL
+
+
+ コード
+class CustomSchema(Schema):
+    def __init__(self, *ar...]]></description><link>https://zenn.dev/killinsun/articles/15b1bbece43337</link><guid isPermaLink="true">https://zenn.dev/killinsun/articles/15b1bbece43337</guid><pubDate>Tue, 04 Jun 2024 07:16:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xPL51_-0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Strawberry%2520GraphQL%25E3%2581%25A7%25E3%2582%25AD%25E3%2583%25A3%25E3%2583%2583%25E3%2583%2581%25E3%2581%2597%25E3%2581%259F%25E4%25BE%258B%25E5%25A4%2596%25E3%2583%25BB%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E3%2582%2592%2520Rollbar%2520%25E3%2581%25AB%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2588%25E3%2583%25AC%25E3%2583%25BC%25E3%2582%25B9%25E4%25BB%2598%25E3%2581%258D%25E3%2581%25A7%25E3%2583%25AC%25E3%2583%259D%25E3%2583%25BC%25E3%2583%2588%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E9%25A6%2596%25E7%2584%25A1%25E3%2581%2597%25E3%2582%25AD%25E3%2583%25AA%25E3%2583%25B3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RmYTM3MDU1NGEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>首無しキリン</dc:creator></item><item><title><![CDATA[Slack ペイロードに含まれる response_url を完全に理解する]]></title><description><![CDATA[
+ response_url を理解しよう
+この記事では、Slack アプリを作ったことがある人でもあまり馴染みがないかもしれない response_url という仕組みについて網羅的に説明してみたいと思います [1]。
+response_url は、スラッシュコマンドやショートカットのようなユーザーと Slack アプリの間で直接的なインタラクションが発生する機能のペイロードに含まれるものです。Incoming Webhooks や chat.postMessageで Slack に通知を送るだけの連携からもう一歩進んで、よりインタラクティブな Slack アプリを作るとき、この機能を...]]></description><link>https://zenn.dev/slack/articles/256c916f71b343</link><guid isPermaLink="true">https://zenn.dev/slack/articles/256c916f71b343</guid><pubDate>Mon, 03 Jun 2024 23:00:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--OTXUWkUc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Slack%2520%25E3%2583%259A%25E3%2582%25A4%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2589%25E3%2581%25AB%25E5%2590%25AB%25E3%2581%25BE%25E3%2582%258C%25E3%2582%258B%2520response_url%2520%25E3%2582%2592%25E5%25AE%258C%25E5%2585%25A8%25E3%2581%25AB%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Kazuhiro%2520Sera%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VmOWE2NjUyZWYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Slack%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JjZmEzMWFiM2QuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kazuhiro Sera</dc:creator></item><item><title><![CDATA[Slack API のトークンローテーション完全ガイド]]></title><description><![CDATA[こんにちは、Slack で公式 SDK 開発と日本の DevRel を担当しております @seratch と申します。
+こちらの記事では、今年 Slack がリリースしたトークンローテーションに関する詳細な説明を日本語でチュートリアル形式でやっていきたいと思います。
+
+ トークンローテーションとは
+Slack の OAuth アクセストークンは、長らく refresh token がなく、一度発行した access token は明に無効化（auth.revoke API やワークスペースのアプリ管理画面から revoke できます）しない限り、無期限で使える仕様でした。
+しかし、202...]]></description><link>https://zenn.dev/slack/articles/558ff03de094be</link><guid isPermaLink="true">https://zenn.dev/slack/articles/558ff03de094be</guid><pubDate>Mon, 03 Jun 2024 22:52:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5FD-xdEX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Slack%2520API%2520%25E3%2581%25AE%25E3%2583%2588%25E3%2583%25BC%25E3%2582%25AF%25E3%2583%25B3%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2586%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E5%25AE%258C%25E5%2585%25A8%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Kazuhiro%2520Sera%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VmOWE2NjUyZWYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Slack%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JjZmEzMWFiM2QuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kazuhiro Sera</dc:creator></item><item><title><![CDATA[Slack アプリでのモーダルの使い方完全ガイド]]></title><description><![CDATA[こんにちは、Slack の公式 SDK 開発と日本の Developer Relations を担当している瀬良 (@seratch) と申します 👋
+この記事では、Slack アプリでエンドユーザーからの情報送信を受け付けたり、インタラクティブなインタフェースを提供するために利用できる「モーダル」について知っておくべきことを可能な限り全て網羅していきます。
+
+ この記事で網羅しているトピック
+もし、以下のようなことを疑問に思って Google 検索をしてこの記事にたどり着いたようでしたら、この（長い）記事のどこかにきっと必要な情報があるはずです。該当の箇所を読んでみてください。
+
+モー...]]></description><link>https://zenn.dev/slack/articles/0be424bfec31d9</link><guid isPermaLink="true">https://zenn.dev/slack/articles/0be424bfec31d9</guid><pubDate>Mon, 03 Jun 2024 22:48:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qBFat-PV--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Slack%2520%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2581%25A7%25E3%2581%25AE%25E3%2583%25A2%25E3%2583%25BC%25E3%2583%2580%25E3%2583%25AB%25E3%2581%25AE%25E4%25BD%25BF%25E3%2581%2584%25E6%2596%25B9%25E5%25AE%258C%25E5%2585%25A8%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Kazuhiro%2520Sera%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VmOWE2NjUyZWYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Slack%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JjZmEzMWFiM2QuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kazuhiro Sera</dc:creator></item><item><title><![CDATA[GIS × Python Tutorial Session8 ~ 地上分解能の決め方とRGB画像の作成 ~]]></title><description><![CDATA[この記事は「GIS × Python Tutorial」の関連記事です。
+
+ はじめに
+
+前回の記事では CSF（Cloth Simulation Filter） による点群分類と DTM（Digital Terrain Model） の作成を行いました。
+https://zenn.dev/daidai_daitai/articles/597bd52ed96dfd
+今回は DTM の後処理を行う予定でしたが、地上分解能をさらっと適当に決めていたり、RGB画像を登場させていたので、今回は先にその部分についてを解説していきます。
+
+
+オルソ画像とは
+
+
+点群データを画像化する為の準備
+
+
+R...]]></description><link>https://zenn.dev/daidai_daitai/articles/279022b600960d</link><guid isPermaLink="true">https://zenn.dev/daidai_daitai/articles/279022b600960d</guid><pubDate>Mon, 03 Jun 2024 14:11:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BJGgDvbt--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:GIS%2520%25C3%2597%2520Python%2520Tutorial%2520Session8%2520%7E%2520%25E5%259C%25B0%25E4%25B8%258A%25E5%2588%2586%25E8%25A7%25A3%25E8%2583%25BD%25E3%2581%25AE%25E6%25B1%25BA%25E3%2582%2581%25E6%2596%25B9%25E3%2581%25A8RGB%25E7%2594%25BB%25E5%2583%258F%25E3%2581%25AE%25E4%25BD%259C%25E6%2588%2590%2520%7E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%25A9%2599%25E3%2580%2582%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUxtNXd1MjJMLWoxUDdDS1dHZWJjbmh0YUxmV3BGRGNSTnBDQnZZTGYxYUpqQT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>橙。</dc:creator></item><item><title><![CDATA[Streamlitで簡単なWebアプリを作ってみる]]></title><description><![CDATA[
+ やること
+Streamlitを最近知りました。
+Streamlitで簡単でWebアプリを作ってみようと思います。
+
+ 参考記事
+https://qiita.com/tamura__246/items/366b5581c03dd74f4508
+
+ 環境
+
+windows
+python 3.9.6
+
+
+ Streamlitとは？
+StreamlitはPythonのコードを書くだけで、データサイエンスのダッシュボードやアプリケーションを手軽に作れるツールです。
+https://streamlit.io/
+
+ 簡単なWebアプリを作ってみる
+
+以下のコマンドを実行する
+
+mkdir stre...]]></description><link>https://zenn.dev/headwaters/articles/43b7f61006117c</link><guid isPermaLink="true">https://zenn.dev/headwaters/articles/43b7f61006117c</guid><pubDate>Mon, 03 Jun 2024 14:02:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---m6AFoE5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Streamlit%25E3%2581%25A7%25E7%25B0%25A1%25E5%258D%2598%25E3%2581%25AAWeb%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:takekawa%2520tomoki%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZjNGExY2UxMDYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2598%25E3%2583%2583%25E3%2583%2589%25E3%2582%25A6%25E3%2582%25A9%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%25BC%25E3%2582%25B9%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdmODg5YTRhYzguanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takekawa tomoki</dc:creator></item><item><title><![CDATA[脱 Pandas !〜Ibis, Polars の勧め〜]]></title><description><![CDATA[
+ 脱 Pandas !〜Ibis, Polars の勧め〜
+
+ はじめに
+アイディオットのデータサイエンティスト、佐藤です。
+昨年（2023 年）末ぐらいから polars、Ibis というデータ処理ライブラリを Qiita でよく目にするようになったので、実務で 1 週間ほど触ってみました。
+今回は pandas と比較しての感想、便利に感じた機能などを紹介していきます。
+
+ 対象
+
+pandas で大容量ファイルの読み込みにイライラしている方
+pandas から新しいデータ処理ライブラリへの乗り換えを考えているけど、学習がめんどくさい方
+polars 使ってみたけど、pandas ...]]></description><link>https://zenn.dev/aidiot_dev/articles/20240516-ibis</link><guid isPermaLink="true">https://zenn.dev/aidiot_dev/articles/20240516-ibis</guid><pubDate>Mon, 03 Jun 2024 05:44:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--M3r6fIRx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%2584%25B1%2520Pandas%2520%2521%25E3%2580%259CIbis%252C%2520Polars%2520%25E3%2581%25AE%25E5%258B%25A7%25E3%2582%2581%25E3%2580%259C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25A2%25E3%2582%25A4%25E3%2583%2587%25E3%2582%25A3%25E3%2582%25AA%25E3%2583%2583%25E3%2583%2588DX%25E9%2596%258B%25E7%2599%25BA%25E9%2583%25A8%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NiOGE4ZTE3NjAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>アイディオットDX開発部</dc:creator></item><item><title><![CDATA[PythonでModbus通信を学ぼう：外部機器データ取得ガイド]]></title><description><![CDATA[
+ はじめに
+PythonからMoudbus通信を使ってPLC（Programmable Logic Controller）などの産業用機器からデータを取得した際の備忘録です。
+
+ Modbusとは
+Modbusは主に産業用のデバイス間でデータを交換するために使用されます。
+Modbusはオープンなプロトコルであり、多くの産業用機器やシステムで広く採用されています。以下にModbusの概要を示します。
+
+ 基本構造
+Modbusはマスタ／スレーブアーキテクチャに基づいており、マスタは通信を開始してスレーブはマスタの要求に応答します。
+
+ 通信モード
+Modbusにはいくつかの通信モードが...]]></description><link>https://zenn.dev/secondselection/articles/modbus_from_python</link><guid isPermaLink="true">https://zenn.dev/secondselection/articles/modbus_from_python</guid><pubDate>Mon, 03 Jun 2024 00:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--DKlx4uFY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A7Modbus%25E9%2580%259A%25E4%25BF%25A1%25E3%2582%2592%25E5%25AD%25A6%25E3%2581%25BC%25E3%2581%2586%25EF%25BC%259A%25E5%25A4%2596%25E9%2583%25A8%25E6%25A9%259F%25E5%2599%25A8%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E5%258F%2596%25E5%25BE%2597%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:u_hijiri%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzljNTA3MDMwNTguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2582%25BB%25E3%2582%25AB%25E3%2583%25B3%25E3%2583%2589%25E3%2582%25BB%25E3%2583%25AC%25E3%2582%25AF%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0ZHJ6RHVTRnZUS2pDQ2U2aGxtdC1TbnprX1dIYzhjV1JJWlhxQk1lMUNCalE9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>u_hijiri</dc:creator></item><item><title><![CDATA[PyTorch について考える (1) — nn.CrossEntropyLoss と nn.NLLLoss]]></title><description><![CDATA[
+ 目的
+PyTorch は長らく使っているものの、API を叩くだけということが多いので、多クラス交差エントロピー誤差について少し確認したくなった。
+多分内容的には色々飛ばし過ぎていたり、一般性を損ねた書き方になっているので有識者には怒られてしまうものであろうが、とりあえずは気にしないことにする。
+
+ 多クラス交差エントロピー誤差
+API 的には CrossEntropyLoss と NLLLoss (The negative log likelihood loss) がよく使うところではないかと思う。
+簡単のため、ミニバッチのサイズは 1 とする。
+ニューラルネット（の特に全結合層）...]]></description><link>https://zenn.dev/derwind/articles/dwd-pytorch01</link><guid isPermaLink="true">https://zenn.dev/derwind/articles/dwd-pytorch01</guid><pubDate>Sun, 02 Jun 2024 17:27:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--i0gT_nFk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:PyTorch%2520%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E8%2580%2583%25E3%2581%2588%25E3%2582%258B%2520%25281%2529%2520%25E2%2580%2594%2520nn.CrossEntropyLoss%2520%25E3%2581%25A8%2520nn.NLLLoss%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:derwind%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFiNjBiZDcwMDMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>derwind</dc:creator></item><item><title><![CDATA[［AtCoder］ABC-042｜C - こだわり者いろはちゃん]]></title><description><![CDATA[
+ 設問ページ
+
+🔗ABC-042 C - こだわり者いろはちゃん
+
+
+
+ 提出結果
+def getIntList():
+    return list(map(int, input().split()))
+
+
+def getIntMap():
+    return map(int, input().split())
+
+
+def check_num(data, err_data):
+    for n in set(list(map(int, list(str(data))))):
+        if n in err_data:
+            return False
+  ...]]></description><link>https://zenn.dev/hyperdb/articles/156852a9dd7abf</link><guid isPermaLink="true">https://zenn.dev/hyperdb/articles/156852a9dd7abf</guid><pubDate>Sun, 02 Jun 2024 15:29:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--SWAVMsEP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25EF%25BC%25BBAtCoder%25EF%25BC%25BDABC-042%25EF%25BD%259CC%2520-%2520%25E3%2581%2593%25E3%2581%25A0%25E3%2582%258F%25E3%2582%258A%25E8%2580%2585%25E3%2581%2584%25E3%2582%258D%25E3%2581%25AF%25E3%2581%25A1%25E3%2582%2583%25E3%2582%2593%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AF%25E3%2581%2584%25E3%2581%25B1%25E3%2581%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhODJkODgwMzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>はいぱぁ</dc:creator></item><item><title><![CDATA[Docker × Gradio × FastSAM × Gemini 1.5 Pro で髪色レコメンド web アプリを作ってみた]]></title><description><![CDATA[こんにちは、週4ゲーセン通いの1年目新卒エンジニアのみっちーです。
+今回は新卒研修で生成AIを用いたアプリを作ってみたので、それの共有をさせていただこうかなと思っています。
+お試しになりたい方は、以下のGitHubリポジトリからcloneしてください。
+https://github.com/limich001/hair_color_recommender
+想定読者
+
+業務でPythonを普段メインで用いており、生成AIの使い方の一例を知りたい人
+GradioをDockerで使ってみたい人
+
+
+ 前提知識
+軽くDocker、Gradio、Gemini 1.5 Proについて説明します。
+D...]]></description><link>https://zenn.dev/limich001/articles/b35b765466c9d7</link><guid isPermaLink="true">https://zenn.dev/limich001/articles/b35b765466c9d7</guid><pubDate>Sun, 02 Jun 2024 13:12:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--CGPOIqCf--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%2520%25C3%2597%2520Gradio%2520%25C3%2597%2520FastSAM%2520%25C3%2597%2520Gemini%25201.5%2520Pro%2520%25E3%2581%25A7%25E9%25AB%25AA%25E8%2589%25B2%25E3%2583%25AC%25E3%2582%25B3%25E3%2583%25A1%25E3%2583%25B3%25E3%2583%2589%2520web%2520%25E3%2582%25A2...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:3cheeeeey%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M0ZGExZWNmZGUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>3cheeeeey</dc:creator></item><item><title><![CDATA[ARマーカーで遊んでみる]]></title><description><![CDATA[
+ やること
+ARマーカーを最近知りました。
+ARマーカーの作成から検出までをまとめます。
+
+ 参考記事
+https://less-ar.jp/media/column/marker
+https://qiita.com/koichi_baseball/items/d51373e7fd6dddb57d1f
+https://hituji-ws.com/code/python/python-armarker/
+
+ python/ライブラリーのバージョン
+
+Python 3.9.6
+opencv-contrib-python 4.9.0.80
+opencv-python 4.9.0.80
+
+
+ ...]]></description><link>https://zenn.dev/headwaters/articles/6a04b90d98cf46</link><guid isPermaLink="true">https://zenn.dev/headwaters/articles/6a04b90d98cf46</guid><pubDate>Sun, 02 Jun 2024 12:07:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--KZszkdkS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AR%25E3%2583%259E%25E3%2583%25BC%25E3%2582%25AB%25E3%2583%25BC%25E3%2581%25A7%25E9%2581%258A%25E3%2582%2593%25E3%2581%25A7%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:takekawa%2520tomoki%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZjNGExY2UxMDYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2598%25E3%2583%2583%25E3%2583%2589%25E3%2582%25A6%25E3%2582%25A9%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%25BC%25E3%2582%25B9%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdmODg5YTRhYzguanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takekawa tomoki</dc:creator></item><item><title><![CDATA[ImageNet について考える (1) — Tiny ImageNet]]></title><description><![CDATA[
+ 目的
+ディープラーニングと言えば、MNIST か ImageNet という偏見があって、今回 ImageNet・・・ではなく、その簡易版？的な Tiny ImageNet というデータセットについて考えてみたい。
+
+ Tiny ImageNet
+Tiny ImageNet は Kaggle コンペでも用いられたことがあるデータセットのようだが、Stanford の CS231n: Deep Learning for Computer Vision 関連で作られたデータセットのようで “930.pdf” という pdf に詳細が書かれている。64x64 のサイズの画像で、200 クラス...]]></description><link>https://zenn.dev/derwind/articles/dwd-imagenet01</link><guid isPermaLink="true">https://zenn.dev/derwind/articles/dwd-imagenet01</guid><pubDate>Sun, 02 Jun 2024 11:28:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2-vgI4yX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ImageNet%2520%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E8%2580%2583%25E3%2581%2588%25E3%2582%258B%2520%25281%2529%2520%25E2%2580%2594%2520Tiny%2520ImageNet%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:derwind%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFiNjBiZDcwMDMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>derwind</dc:creator></item><item><title><![CDATA[Pythonで配列を辞書に変換する]]></title><description><![CDATA[
+ すること
+Pythonで配列を辞書に変換する
+
+ 実装方法
+
+ dict()
+
+明示的ではない
+
+# 名前とメールアドレスのペアを格納するリスト
+contacts: list(tuple[str, str]) = [
+    ("Alice", "alice@example.com"),
+    ("Bob", "bob@example.com"),
+    ("Charlie", "charlie@example.com")
+]
+
+# リストを辞書に変換する
+contacts_dict: dict[str, str] = dict(contacts)
+
+# 辞書の内容を出力
+pri...]]></description><link>https://zenn.dev/ishiki_a/articles/98f2f87aea8afc</link><guid isPermaLink="true">https://zenn.dev/ishiki_a/articles/98f2f87aea8afc</guid><pubDate>Sun, 02 Jun 2024 08:06:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---jnxY3_5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A7%25E9%2585%258D%25E5%2588%2597%25E3%2582%2592%25E8%25BE%259E%25E6%259B%25B8%25E3%2581%25AB%25E5%25A4%2589%25E6%258F%259B%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ishiki%2520%257C%2520%25E6%25B2%2596%25E7%25B8%2584IT%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU4Mjc2M2Q5NTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ishiki | 沖縄ITエンジニア</dc:creator></item><item><title><![CDATA[【ワイブル分布】 未知パラメータ推定方法の改良]]></title><description><![CDATA[
+ はじめに
+今回はワイブル分布のパラメータ推定において最尤推定量による方法、確率紙による推定方法を改良した方法について説明します。
+確率紙による推定方法、最尤推定による推定方法には２点問題点があります。
+１点目は形状パラメータ m の推定量は不偏推定量ではないため、期待値 = 真値 とならない点です。
+２点目は尺度パラメータ \eta の推定量も不偏推定量ではなく、m が小さいほど、期待値と真値との誤差が大きくなり、m\rightarrow0 で期待値が発散するという点です。
+今回は、上記２点を改善した推定方法を発見しましたので、解説します。
+
+ 概要
+
+ 前置き
+X を形状パラメータ...]]></description><link>https://zenn.dev/rami_graciles/articles/a8334f96dce03c</link><guid isPermaLink="true">https://zenn.dev/rami_graciles/articles/a8334f96dce03c</guid><pubDate>Sat, 01 Jun 2024 14:34:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--gQag3UmO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E3%2583%25AF%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25AB%25E5%2588%2586%25E5%25B8%2583%25E3%2580%2591%2520%25E6%259C%25AA%25E7%259F%25A5%25E3%2583%2591%25E3%2583%25A9%25E3%2583%25A1%25E3%2583%25BC%25E3%2582%25BF%25E6%258E%25A8%25E5%25AE%259A%25E6%2596%25B9%25E6%25B3%2595%25E3%2581%25AE%25E6%2594%25B9%25E8%2589%25AF%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ragraciles%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSW1JQWJ2cjBWT0t0REYwTm1OTkpOcllscXNmT1kzeGplTC1fN2dXejFQPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ragraciles</dc:creator></item><item><title><![CDATA[【ワイブル分布】確率紙による推定と最尤推定によるパラメータ推定方法の精度比較]]></title><description><![CDATA[
+ はじめに
+今回はワイブル分布のパラメータ推定において、確率紙による方法１と最尤推定を用いた方法２の比較をします。
+結論としては、形状パラメータ m については確率紙による推定方法１が優れ、尺度パラメータ \eta は両方法で大きな違いはありませんが、若干最尤推定による推定方法２の方が優れているという結果になります。
+ただ、両方法についてワイブル分布の形状パラメータ m が 0 に近づくにつれ、 尺度パラメータ \eta の推定量は正の無限大に発散するため、推定精度は低下します。
+最尤推定による推定を改良した場合は両推定方法に勝ります。詳細はこちらの記事をご覧ください。
+
+ 概要
+
+ ...]]></description><link>https://zenn.dev/rami_graciles/articles/98e01be5dc6fd2</link><guid isPermaLink="true">https://zenn.dev/rami_graciles/articles/98e01be5dc6fd2</guid><pubDate>Sat, 01 Jun 2024 14:34:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--N6dlTgc1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E3%2583%25AF%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25AB%25E5%2588%2586%25E5%25B8%2583%25E3%2580%2591%25E7%25A2%25BA%25E7%258E%2587%25E7%25B4%2599%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258B%25E6%258E%25A8%25E5%25AE%259A%25E3%2581%25A8%25E6%259C%2580%25E5%25B0%25A4%25E6%258E%25A8%25E5%25AE%259A%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258B%25E3%2583%2591%25E3%2583%25A9%25E3%2583%25A1%25E3%2583%25BC%25E3%2582%25BF%25E6%258E%25A8%25E5%25AE%259A%25E6%2596%25B9%25E6%25B3%2595%25E3%2581%25AE%25E7%25B2%25BE%25E5%25BA%25A6%25E6%25AF%2594%25E8%25BC%2583%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ragraciles%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSW1JQWJ2cjBWT0t0REYwTm1OTkpOcllscXNmT1kzeGplTC1fN2dXejFQPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ragraciles</dc:creator></item></channel></rss>
