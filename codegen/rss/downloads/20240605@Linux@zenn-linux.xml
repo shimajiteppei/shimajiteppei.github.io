@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Linux」のフィード]]></title><description><![CDATA[Zennのトピック「Linux」のRSSフィードです]]></description><link>https://zenn.dev/topics/linux</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/860a9eb1e4.png</url><title>Zennの「Linux」のフィード</title><link>https://zenn.dev/topics/linux</link></image><generator>zenn.dev</generator><lastBuildDate>Wed, 05 Jun 2024 02:56:16 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/linux/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[【Linux】マニュアル(man)を日本語化する方法]]></title><description><![CDATA[manコマンドを使用したときデフォルトで英語のマニュアルが表示されています。マニュアルページを日本語にする方法をまとめました。必要に応じて変更してみてください。
+
+ 実行環境
+
+WSL2(Windows11)
+Ubuntu
+
+$ cat /etc/os-release
+PRETTY_NAME="Ubuntu 22.04.4 LTS"
+NAME="Ubuntu"
+VERSION_ID="22.04"
+VERSION="22.04.4 LTS (Jammy Jellyfish)"
+VERSION_CODENAME=jammy
+ID=ubuntu
+ID_LIKE=debian
+HOME_URL...]]></description><link>https://zenn.dev/ryu3/articles/bc5269a16fdf47</link><guid isPermaLink="true">https://zenn.dev/ryu3/articles/bc5269a16fdf47</guid><pubDate>Tue, 04 Jun 2024 09:24:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--F1D6UAoS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Linux%25E3%2580%2591%25E3%2583%259E%25E3%2583%258B%25E3%2583%25A5%25E3%2582%25A2%25E3%2583%25AB%2528man%2529%25E3%2582%2592%25E6%2597%25A5%25E6%259C%25AC%25E8%25AA%259E%25E5%258C%2596%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ryu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzcwOWFmODRkNzguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ryu</dc:creator></item><item><title><![CDATA[SOCKSサーバーDante]]></title><description><![CDATA[DanteはフリーのSOCKSサーバーです
+
+ server
+debian12だとこんな感じ
+インストール
+apt install dante-server
+
+起動設定
+systemctl edit --full danted.service 
+
+サービス定義はこんな感じで
+[Unit]
+Description=SOCKS (v4 and v5) proxy daemon (danted)
+Documentation=man:danted(8) man:danted.conf(5)
+After=basic.target
+
+[Service]
+Type=simple
+ExecStart=/...]]></description><link>https://zenn.dev/yaasita/articles/3418628bc41e85</link><guid isPermaLink="true">https://zenn.dev/yaasita/articles/3418628bc41e85</guid><pubDate>Mon, 03 Jun 2024 16:42:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xDVpKCOc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:SOCKS%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BCDante%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yaasita%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ0MDQ4YmMyMjkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yaasita</dc:creator></item><item><title><![CDATA[[Linuxコマンド] 標準出力から該当文字のみハイライトしたい！]]></title><description><![CDATA[
+ はじめに
+
+赤くハイライトされてる。こんなことをしたい
+
+ 動作環境
+  System Version: macOS 14.4 (23E214)
+
+
+ 手順
+
+ grepを使う方法
+% ls -l | grep --color=auto -e '$' -e 'hackathon'
+
+or
+
+% ls -l | grep --color=auto -E "hackathon|$"
+
+ dev-shell-essentials
+% git clone https://github.com/kepkin/dev-shell-essentials.git
+% cd dev-shell-ess...]]></description><link>https://zenn.dev/kotopasi/articles/1666abc4be5dcf</link><guid isPermaLink="true">https://zenn.dev/kotopasi/articles/1666abc4be5dcf</guid><pubDate>Mon, 03 Jun 2024 15:42:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--usP0fLSL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BLinux%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%255D%2520%25E6%25A8%2599%25E6%25BA%2596%25E5%2587%25BA%25E5%258A%259B%25E3%2581%258B%25E3%2582%2589%25E8%25A9%25B2%25E5%25BD%2593%25E6%2596%2587%25E5%25AD%2597%25E3%2581%25AE%25E3%2581%25BF%25E3%2583%258F%25E3%2582%25A4%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2588%25E3%2581%2597%25E3%2581%259F%25E3%2581%2584%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2582%25E3%2581%25BE%25E3%2581%259F%25E3%2581%25A4%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FmOWU0NjBmZDUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>あまたつ</dc:creator></item><item><title><![CDATA[SSH で GUI アプリを実行する]]></title><description><![CDATA[
+ はじめに
+私的なセットアップメモなども兼ねて、 Linux 端末に SSH で接続し GUI アプリ (VS Code など) を使うための設定やコマンドなどをまとめた記事を執筆します。
+筆者の環境が、普段使用するデスクと開発用の Linux 端末の位置が離れており、いちいち移動して作業をするのが面倒なので、その手間を省くために設定や手法を調べました。
+
+ 筆者の環境
+筆者の環境です。
+普段使用しているのは Windows 11 Pro 搭載のディスクトップ PC と Chromebook になります。
+※ いずれも記事執筆時点
+
+ Windows 端末
+
+
+
+OS
+ターミナル
+
+
+...]]></description><link>https://zenn.dev/s_yabu/articles/20240603-ssh-xc-command</link><guid isPermaLink="true">https://zenn.dev/s_yabu/articles/20240603-ssh-xc-command</guid><pubDate>Mon, 03 Jun 2024 03:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fHGn0wR1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:SSH%2520%25E3%2581%25A7%2520GUI%2520%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:S.Yabunaka%255BstrCode%255D%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lQUi1vemN3Vm9DNWl6V3hzNTl2d2c2dDN3dzUxWWw3U25nNzJjWWc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>S.Yabunaka[strCode]</dc:creator></item><item><title><![CDATA[WSL用 GUIが登場]]></title><description><![CDATA[!
+関連記事:
+
+WSL2.2.x で DNS tunnelingがデフォルトに
+WSL2 2.0.0がこっそリリース
+WSLのアップデートでメモリ開放？
+WSL2でvmmem確保メモリを開放する方法
+
+
+
+ GUIよりCUIの方が使いやすいよなぁ
+
+GUIよりCUIの方が使いやすいよなぁ
+
+大学時代にすれ違った人が話していたもので、
+筆者の中では一番印象に残っている。
+GUIの話をすると CUIでよくね？ 論が必ず出てくる。
+筆者は状況によりけりだなぁと思っていて、
+直接操作、スクリプトに組み込むなどはCUIが優れていて、
+俯瞰してものを見たいときはGUIが優れていると思う。
+WSLも...]]></description><link>https://zenn.dev/dozo/articles/42748092e7ccb6</link><guid isPermaLink="true">https://zenn.dev/dozo/articles/42748092e7ccb6</guid><pubDate>Mon, 03 Jun 2024 02:35:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--kvqKEnPn--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:WSL%25E7%2594%25A8%2520GUI%25E3%2581%258C%25E7%2599%25BB%25E5%25A0%25B4%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:dozo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvZC5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>dozo</dc:creator></item><item><title><![CDATA[The battle with Gentoo (ハードウェア検討)]]></title><description><![CDATA[
+ 概要
+10年ぶりに PC を新しく自作して、新規に Gentoo を入れ直す事になったので、事前調査から環境構築までを備忘録として残す事にしました。引っ越してから今まで、長らくの間 MacBook とか WSL2 で頑張ってきましたが、やはり上位モデルで自作したマシンに Gentoo Linux が良いですね☺️
+我が家に Native Linux が帰ってくるのは6年ぶりくらいでしょうか？楽しみです😆ここでは購入を検討しているハードウェアの構成を記録しています
+https://www.gentoo.org/
+
+ 目標
+最初に Gentoo をインストールしたのは、もう20年以上前の...]]></description><link>https://zenn.dev/exelion/articles/c373ae6017fd84</link><guid isPermaLink="true">https://zenn.dev/exelion/articles/c373ae6017fd84</guid><pubDate>Sun, 02 Jun 2024 17:08:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Rw04w3t---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:The%2520battle%2520with%2520Gentoo%2520%2528%25E3%2583%258F%25E3%2583%25BC%25E3%2583%2589%25E3%2582%25A6%25E3%2582%25A7%25E3%2582%25A2%25E6%25A4%259C%25E8%25A8%258E%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kei%2520Sawamura%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI0MWNlZWQ3ZWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kei Sawamura</dc:creator></item><item><title><![CDATA[サクッとSwap領域を用意する]]></title><description><![CDATA[EC2にサクッとSwap領域を用意したかったのでメモとして残しておく。本来はファイルシステムに合わせて領域の確保の仕方が違うっぽいが、今回はとりあえず動くものとして領域を用意するので細かいところはご勘弁を。
+一応ベストプラクティスの範囲内で設定しておきたい
+
+最高 2 GB の物理 RAM に対して、スワップ領域は物理 RAM の 2 倍に相当することがベストプラクティスです。2 GB を超える場合は、物理 RAM を 1 倍追加します。スワップ領域が 32 MB を下回らないようにすることがベストプラクティスです。
+
+https://repost.aws/ja/knowledge-ce...]]></description><link>https://zenn.dev/awonosuke/articles/b17ee9d44a35e9</link><guid isPermaLink="true">https://zenn.dev/awonosuke/articles/b17ee9d44a35e9</guid><pubDate>Sun, 02 Jun 2024 14:03:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--CFKZQuBA--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B5%25E3%2582%25AF%25E3%2583%2583%25E3%2581%25A8Swap%25E9%25A0%2598%25E5%259F%259F%25E3%2582%2592%25E7%2594%25A8%25E6%2584%258F%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:awonosuke%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJhMjljMWI3NWYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>awonosuke</dc:creator></item><item><title><![CDATA[WSLからxdg-openでWindowsの既定ブラウザを開けるようにする]]></title><description><![CDATA[mkdir -p ~/.local/share/applications
+cat &lt;&lt; EOS &gt; ~/.local/share/applications/file-protocol-handler.desktop
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=File Protocol Handler
+NoDisplay=true
+Exec=rundll32.exe url.dll,FileProtocolHandler
+EOS
+
+xdg-settings set default-web-browser file-...]]></description><link>https://zenn.dev/ciffelia/articles/wsl-xdg-open</link><guid isPermaLink="true">https://zenn.dev/ciffelia/articles/wsl-xdg-open</guid><pubDate>Sun, 02 Jun 2024 12:25:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2E6bwdrC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:WSL%25E3%2581%258B%25E3%2582%2589xdg-open%25E3%2581%25A7Windows%25E3%2581%25AE%25E6%2597%25A2%25E5%25AE%259A%25E3%2583%2596%25E3%2583%25A9%25E3%2582%25A6%25E3%2582%25B6%25E3%2582%2592%25E9%2596%258B%25E3%2581%2591%25E3%2582%258B%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Ciffelia%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2hJT3JUR3ZLcmVqQUhJQmFkeFl4MWtGZXplRUxWczV1aVNtcWt1RHc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Ciffelia</dc:creator></item><item><title><![CDATA[LD_PRELOADを駆使してロードする共有ライブラリを動的に変える(dlopen対応)]]></title><description><![CDATA[
+ 概要
+
+共有ライブラリの関数呼び出しをフックする方法について解説
+
+LD_PRELOAD を使用した共有ライブラリのフック方法を紹介
+
+dlopen と dlsym を使用してロードされた関数をフックする方法
+自身をロードして公開するテクニックにより、dlopen もフック可能
+
+https://github.com/tbistr/so-intercept-hands-on
+
+ LD_PRELOADによる共有ライブラリのフック
+Linuxでは、LD_PRELOAD を用いて共有ライブラリの関数をフックすることが一般的です。
+LD_PRELOADに共有ライブラリのパスを指定すると、プロ...]]></description><link>https://zenn.dev/kurusugawa/articles/hooking-shared-lib</link><guid isPermaLink="true">https://zenn.dev/kurusugawa/articles/hooking-shared-lib</guid><pubDate>Sat, 01 Jun 2024 22:08:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Y3Kkp9tx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:LD_PRELOAD%25E3%2582%2592%25E9%25A7%2586%25E4%25BD%25BF%25E3%2581%2597%25E3%2581%25A6%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2589%25E3%2581%2599%25E3%2582%258B%25E5%2585%25B1%25E6%259C%2589%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%25E3%2582%2592%25E5%258B%2595%25E7%259A%2584%25E3%2581%25AB%25E5%25A4%2589%25E3%2581%2588%25E3%2582%258B%2528dlopen%25E5%25AF%25BE%25E5%25BF%259C%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:TSUBOI%2520Shotaro%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzMzNGEwOWE5YzYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%259D%25A5%25E6%25A0%2596%25E5%25B7%259D%25E9%259B%25BB%25E7%25AE%2597%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E1ZjJiZmIzMGUuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>TSUBOI Shotaro</dc:creator></item><item><title><![CDATA[curlコマンドでDBの起動完了を待ってからAPIサーバを実行する]]></title><description><![CDATA[docker-composeで例えばDBサーバ + APIサーバのような構成で複数サービスを起動する際に、DBの起動完了前にAPIサーバがDBにアクセスしてしまい、起動失敗する事があります。
+これを回避するためにはDBに依存するサービス側でDBの起動が完了するまで待機してからプロセスを実行する必要があります。ncコマンドやwait-for-it.shなどのツールを使っている例が多い印象ですが、ほとんどのdocker imageに同梱されているcurlコマンドでも同様のことが行えるので、備忘録としてコマンドを記載しておきます。
+until echo 'quit' | curl telnet...]]></description><link>https://zenn.dev/kterashi02/articles/03e3d1d72ecc9b</link><guid isPermaLink="true">https://zenn.dev/kterashi02/articles/03e3d1d72ecc9b</guid><pubDate>Sat, 01 Jun 2024 10:03:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--tm2PsoTO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:curl%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2581%25A7DB%25E3%2581%25AE%25E8%25B5%25B7%25E5%258B%2595%25E5%25AE%258C%25E4%25BA%2586%25E3%2582%2592%25E5%25BE%2585%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%258B%25E3%2582%2589API%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2582%2592%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kterashi02%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQxZDY4ZTdkMTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kterashi02</dc:creator></item><item><title><![CDATA[LinuC2受験記録]]></title><description><![CDATA[LinuC2に合格したので、その受験記録を残しておこうと思う。
+なお昔社内ブログに書いていた内容を移植したので、内容は若干古目のものになっている。
+
+ 試験概要
+あまり受けたことのある人もいないと思うので、試験概要からお話ししたい。
+試験はLPICというLinux資格の日本版であり、LinuC1, 2, 3の三段階がある。今回受けたのは真ん中のLinuC2。
+内容としてはLinuxと周辺OSSの使い方にフォーカスしたもので、Linuxの仕組みが学べるわけではない。
+過去問が多く試験自体の難易度は低いが、ネットワークやセキュリティ、Linuxの仕組みを知らないと
+本当に丸暗記で終わってしま...]]></description><link>https://zenn.dev/ken_amenomori/articles/d35b1cc8c14a89</link><guid isPermaLink="true">https://zenn.dev/ken_amenomori/articles/d35b1cc8c14a89</guid><pubDate>Sat, 01 Jun 2024 08:55:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lgqkMF2l--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:LinuC2%25E5%258F%2597%25E9%25A8%2593%25E8%25A8%2598%25E9%258C%25B2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Ken%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSmR0NnB5MXdHalVPNDhEbDhJNUJJanhkUXdhbGcxVl9zakhQU3A3c3dMb2RXVEgxWT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Ken</dc:creator></item><item><title><![CDATA[GPT-4oといっしょに作ったLinux入門ガイド【アプリケーション負荷調査編】]]></title><description><![CDATA[
+ はじめに
+話題に事欠かない生成AI界隈ですが、最近リリースされたGPT-4oにLinuxの負荷調査ガイドを作ってもらいました。
+経験的にはお決まりのパターンはあるのですが、いまどきのもっと便利な方法はないかというときに体系的にまとめてくれるのが生成AIのいいところですね。
+あと、「Zipkin」なんかは聞いたこともなかったですが、なかなか面白そうなので今度調べてみようと思います。
+以下、GPT-4oが作ってくれたガイドです。
+※AIはたまに嘘を付きますのでその点はご了承ください。
+
+ Advanced Techniques for Investigating Application ...]]></description><link>https://zenn.dev/en2enzo2/articles/7cd0a1c4ec0eaf</link><guid isPermaLink="true">https://zenn.dev/en2enzo2/articles/7cd0a1c4ec0eaf</guid><pubDate>Sat, 01 Jun 2024 04:53:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6Untc9GM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:GPT-4o%25E3%2581%25A8%25E3%2581%2584%25E3%2581%25A3%25E3%2581%2597%25E3%2582%2587%25E3%2581%25AB%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259FLinux%25E5%2585%25A5%25E9%2596%2580%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%25E3%2580%2590%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E8%25B2%25A0%25E8%258D%25B7%25E8%25AA%25BF%25E6%259F%25BB%25E7%25B7%25A8%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2588%25E3%2582%2593%25E3%2581%259E%25E3%2581%2586%2520%257C%2520IT%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%2528AI%25E6%25B4%25BB...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJiMmYzN2EyZDYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>えんぞう | ITエンジニア(AI活用×ブレインテック)</dc:creator></item><item><title><![CDATA[LinuxのSCHED_BATCHスケジューリングは何をしているのか]]></title><description><![CDATA[※ この内容はkernel 6.10-rc1(2024/5)時点のものです
+Linuxのスケジューリングポリシーの中にSCHED_BATCHというものがあるが一体何をしているのか、という疑問に答える文章になります。
+
+ はじめに
+Linuxのタスクスケジューラーにはいくつかのスケジューリングポリシーがあり、それらの説明はsched(7)のmanページにまとまっています(debianの日本語訳):
+https://man7.org/linux/man-pages/man7/sched.7.html
+ポリシーは以下のように分類されます:
+
+リアルタイムポリシー (通常ポリシーのタスクよりも常...]]></description><link>https://zenn.dev/tmsn/articles/af8116d7ba13da</link><guid isPermaLink="true">https://zenn.dev/tmsn/articles/af8116d7ba13da</guid><pubDate>Sat, 01 Jun 2024 03:08:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--PIpliQWF--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%25E3%2581%25AESCHED_BATCH%25E3%2582%25B9%25E3%2582%25B1%25E3%2582%25B8%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%25AA%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%25AF%25E4%25BD%2595%25E3%2582%2592%25E3%2581%2597%25E3%2581%25A6%25E3%2581%2584%25E3%2582%258B%25E3%2581%25AE%25E3%2581%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tmsn%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2IxMTk1MjM1YjIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tmsn</dc:creator></item><item><title><![CDATA[Linuxシェル上で使えるショートカット]]></title><description><![CDATA[
+ はじめに
+Linuxシェルは、強力で柔軟なツールであり、その真価を発揮するためにはショートカットを活用することが重要。この記事では、Linuxシェル上で使える便利なショートカットを網羅的に紹介する。これらのショートカットを覚えることで、作業効率が大幅に向上する。
+
+ Linuxシェルのショートカット
+
+ 基本操作ショートカット
+
+
+Ctrl + A: 行の先頭にカーソルを移動
+
+Ctrl + E: 行の末尾にカーソルを移動
+
+Ctrl + U: カーソルの左側のすべての文字を削除
+
+Ctrl + K: カーソルの右側のすべての文字を削除
+
+Ctrl + W: カーソルの左側の単語を削...]]></description><link>https://zenn.dev/giba/articles/1c1d4e0d379a80</link><guid isPermaLink="true">https://zenn.dev/giba/articles/1c1d4e0d379a80</guid><pubDate>Fri, 31 May 2024 09:36:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6rJgm84l--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%25E3%2582%25B7%25E3%2582%25A7%25E3%2583%25AB%25E4%25B8%258A%25E3%2581%25A7%25E4%25BD%25BF%25E3%2581%2588%25E3%2582%258B%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25BC%25E3%2583%2588%25E3%2582%25AB%25E3%2583%2583%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:GIBA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y5MmM4MjdhMmEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>GIBA</dc:creator></item><item><title><![CDATA[Movable Type環境のCentOSからRocky Linuxへの移行 SSL Storeの設定: パート2]]></title><description><![CDATA[前回の記事では、Rocky Linux 9.3 のサーバセットアップ手順を説明しました。
+今回の記事では、SSL Storeの証明書を設定していきます。
+https://zenn.dev/hamworks/articles/article12-centos-rocky1
+
+ 環境
+利用環境は、さくらのクラウドを利用しています。
+
+さくらのクラウド
+OS: CentOS 7 → Rocky Linux 9
+
+
+ SSLについて
+https://www.ssl-store.jp/
+SSL Store で購入した証明書を使います。
+この記事では、ドメイン認証のFUJI SSLを利用しています。...]]></description><link>https://zenn.dev/hamworks/articles/article13-ssl-store</link><guid isPermaLink="true">https://zenn.dev/hamworks/articles/article13-ssl-store</guid><pubDate>Fri, 31 May 2024 09:33:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--T0gksd9T--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Movable%2520Type%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25AECentOS%25E3%2581%258B%25E3%2582%2589Rocky%2520Linux%25E3%2581%25B8%25E3%2581%25AE%25E7%25A7%25BB%25E8%25A1%258C%2520SSL%2520Store%25E3%2581%25AE%25E8%25A8%25AD%25E5%25AE%259A%253A%2520%25E3%2583%2591%25E3%2583%25BC%25E3%2583%25882%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:redamoon%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E2N2U3ZWNkMzkuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BEHAMWORKS%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2d6ZHNYSE5HblNoZUhxQXBkNnBoZzhXNEUzUUZhQVFiN1BNS0RhPXMyNTAtYw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>redamoon</dc:creator></item><item><title><![CDATA[【EC2/Linux】ec2-userの鍵認証を無効化する]]></title><description><![CDATA[ec2-userの鍵認証を無効化する手順をまとめます。
+本手順を実行する前に、別のユーザーを使用して環境に接続できることを確認しておくなど、細心の注意を払うようにしましょう。
+
+ 検証環境
+
+Amazon EC2
+Red Hat Enterprise Linux 9.3
+
+
+ 結論：公開鍵（/home/ec2-user/.ssh/authorized_keys）のファイル名を変更する
+ここでは、ファイル名を「authorized_keys」から「authorized_keys_org」に変更します。
+▼ 手順
+ls -l /home/ec2-user/.ssh/
+
+mv /home/ec...]]></description><link>https://zenn.dev/db_tech/articles/05186e148306cd</link><guid isPermaLink="true">https://zenn.dev/db_tech/articles/05186e148306cd</guid><pubDate>Fri, 31 May 2024 05:08:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--frBKbule--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590EC2%252FLinux%25E3%2580%2591ec2-user%25E3%2581%25AE%25E9%258D%25B5%25E8%25AA%258D%25E8%25A8%25BC%25E3%2582%2592%25E7%2584%25A1%25E5%258A%25B9%25E5%258C%2596%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259F%25E3%2581%25A0%25E3%2581%25AEDB%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NkNGUzOTkwM2QuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ただのDBエンジニア</dc:creator></item><item><title><![CDATA[【EC2/Linux】ec2-user以外のユーザーを鍵認証にする方法]]></title><description><![CDATA[ec2-userが使用している公開鍵を他のユーザーにコピーすれば、ec2-userと同じように、鍵認証で環境にアクセスさせることができます。
+
+ 検証環境
+
+Amazon EC2
+Red Hat Enterprise Linux 9.3
+
+
+ 1. ec2-user用の公開鍵が存在すること、testuser用の公開鍵が存在しないことを確認。
+公開鍵の場所は、/home/&lt;ユーザー名&gt;/.sshディレクトリ内の、authorized_keysファイルです。
+[root@ip-172-31-28-156 ~]# ls -l /home/ec2-user/.ssh
+total 4
+...]]></description><link>https://zenn.dev/db_tech/articles/ec0441c4eb8ff3</link><guid isPermaLink="true">https://zenn.dev/db_tech/articles/ec0441c4eb8ff3</guid><pubDate>Fri, 31 May 2024 04:20:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--FCZUcYG9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590EC2%252FLinux%25E3%2580%2591ec2-user%25E4%25BB%25A5%25E5%25A4%2596%25E3%2581%25AE%25E3%2583%25A6%25E3%2583%25BC%25E3%2582%25B6%25E3%2583%25BC%25E3%2582%2592%25E9%258D%25B5%25E8%25AA%258D%25E8%25A8%25BC%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259F%25E3%2581%25A0%25E3%2581%25AEDB%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NkNGUzOTkwM2QuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ただのDBエンジニア</dc:creator></item><item><title><![CDATA[【Linux】ユーザーのsudo使用を許可/禁止する方法]]></title><description><![CDATA[ユーザーにsudoを使用することを許可/禁止する手順を整理します。
+本記事では、ある特定のユーザーを「testuser」とし、パスワードが既に設定されているものとします。
+
+ 検証環境
+
+Amazon EC2
+Red Hat Enterprise Linux 9.3
+
+
+ 1. sudoを"禁止"する手順
+!
+/etc/sudoers.d 配下に、「&lt;ユーザー名&gt; ALL=(ALL) !ALL」が記述されたファイルを作成する。
+
+
+ 1-1. sudoを禁止する設定をファイルに記入します。
+「vi」ではなく、「visudo」を使いましょう。細かい解説は省略しますが、安全にファ...]]></description><link>https://zenn.dev/db_tech/articles/95947ce884066b</link><guid isPermaLink="true">https://zenn.dev/db_tech/articles/95947ce884066b</guid><pubDate>Thu, 30 May 2024 16:50:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9lexWrHQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Linux%25E3%2580%2591%25E3%2583%25A6%25E3%2583%25BC%25E3%2582%25B6%25E3%2583%25BC%25E3%2581%25AEsudo%25E4%25BD%25BF%25E7%2594%25A8%25E3%2582%2592%25E8%25A8%25B1%25E5%258F%25AF%252F%25E7%25A6%2581%25E6%25AD%25A2%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259F%25E3%2581%25A0%25E3%2581%25AEDB%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NkNGUzOTkwM2QuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ただのDBエンジニア</dc:creator></item><item><title><![CDATA[CyberPowerのUPSを導入するよ]]></title><description><![CDATA[おうちで24時間稼働しているサーバを停電、雷から守るため
+CP750PFCLCD JPを購入しました。
+
+ 構成
+UPSが停電を検知してバッテリーに切り替え
+↓
+Proxmoxに常駐しているPowerPanelが、バッテリー残量が一定の基準に低下したことを検知
+↓
+Raspberry PiにshutdownコマンドをSSHで送り、その後にProxmox自身もシャットダウン
+
+ 🛠 準備をしよう
+
+ Powerpanelのインストール
+ProxmoxのホストOSにPowerPanel for Linux 64bit (deb)をダウンロードします。
+下記のコマンドでインストールします。
+s...]]></description><link>https://zenn.dev/gaimo_ch/articles/f7a0bd61ed1073</link><guid isPermaLink="true">https://zenn.dev/gaimo_ch/articles/f7a0bd61ed1073</guid><pubDate>Thu, 30 May 2024 14:40:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hVvMKhs9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:CyberPower%25E3%2581%25AEUPS%25E3%2582%2592%25E5%25B0%258E%25E5%2585%25A5%25E3%2581%2599%25E3%2582%258B%25E3%2582%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258C%25E3%2581%2584%25E3%2582%2582%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI2M2JhZjk2MjEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>がいも</dc:creator></item><item><title><![CDATA[[macOS] macでlocateコマンドを使いたい！]]></title><description><![CDATA[
+ はじめに
+
+ 動作環境
+System Version: macOS 14.4 (23E214)
+
+ 手順
+以下を実行
+% sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.locate.plist
+
+ 参考
+https://qiita.com/soma21/items/bc9079204fb186faf10d
+]]></description><link>https://zenn.dev/kotopasi/articles/8490c4753b05fd</link><guid isPermaLink="true">https://zenn.dev/kotopasi/articles/8490c4753b05fd</guid><pubDate>Thu, 30 May 2024 10:29:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--COlzo3TA--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BmacOS%255D%2520mac%25E3%2581%25A7locate%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2584%25E3%2581%259F%25E3%2581%2584%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2582%25E3%2581%25BE%25E3%2581%259F%25E3%2581%25A4%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FmOWU0NjBmZDUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>あまたつ</dc:creator></item></channel></rss>
