@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Sun, 09 Jun 2024 03:08:06 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[LangChainを用いて大量ファイルをロードするVectorDBを作ってみた(12)]]></title><description><![CDATA[
+
+ はじめに
+大量ファイルを単純にVectorDBに登録して、そのデータベースに対して生成AIに質問をしても、精度の高い回答を得られないことが分かってきました。
+　前回と前々回では、各XMLファイルの中にある「タイトル情報」を基に生成AIによる自動タグ付けを実施し、それをVectorDB (Chroma)の属性として登録することをしてみました。これで、VectorDBに対する準備ができました。
+https://qiita.com/ogi_kimura/items/0d4aa37cef5bd071ea7b
+https://qiita.com/ogi_kimura/items/ac599f...]]></description><link>https://zenn.dev/ogiki/articles/b1c54912d2528e</link><guid isPermaLink="true">https://zenn.dev/ogiki/articles/b1c54912d2528e</guid><pubDate>Sun, 09 Jun 2024 01:44:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--urChz9zN--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:LangChain%25E3%2582%2592%25E7%2594%25A8%25E3%2581%2584%25E3%2581%25A6%25E5%25A4%25A7%25E9%2587%258F%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2592%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2589%25E3%2581%2599%25E3%2582%258BVectorDB%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%252812%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%259C%25A8%25E6%259D%2591%25E3%2581%259F%25E3%2582%258D%25E3%2581%2586%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZkZjNiYWMwZmQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>木村たろう</dc:creator></item><item><title><![CDATA[LangChainを用いて大量ファイルをロードするVectorDBを作ってみた(11)]]></title><description><![CDATA[
+
+ はじめに
+前回は、各XMLファイルの中にある「タイトル情報」を基に「自動タグ付け」して、それをVectorDB (Chroma)の属性として登録することをしてみました。これで、VectorDBに対する準備ができました。
+https://qiita.com/ogi_kimura/items/0d4aa37cef5bd071ea7b
+ただ、この記事を書いた後に大量ファイルをロードしようとしたのですが、処理時間を非常に要することがわかりました。
+　今までは1ファイルの処理に0.01～0.1秒かかる程度だったのですが、「自動タグ付け」処理を追加すると、1ファイルにつき30～40秒かるように...]]></description><link>https://zenn.dev/ogiki/articles/e976d9238ce460</link><guid isPermaLink="true">https://zenn.dev/ogiki/articles/e976d9238ce460</guid><pubDate>Sun, 09 Jun 2024 00:12:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--m61MlC15--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:LangChain%25E3%2582%2592%25E7%2594%25A8%25E3%2581%2584%25E3%2581%25A6%25E5%25A4%25A7%25E9%2587%258F%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2592%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2589%25E3%2581%2599%25E3%2582%258BVectorDB%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%252811%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%259C%25A8%25E6%259D%2591%25E3%2581%259F%25E3%2582%258D%25E3%2581%2586%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZkZjNiYWMwZmQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>木村たろう</dc:creator></item><item><title><![CDATA[python チートシート]]></title><description><![CDATA[
+ 基本構文
+
+ コメント
+# これはコメントです
+
+ 変数
+x = 10       # 整数
+y = 3.14     # 浮動小数点数
+name = "AI"  # 文字列
+is_valid = True  # ブール値
+
+ データ型
+
+# 数値
+int_num = 10
+float_num = 3.14
+
+# 文字列
+string = "Hello, python"
+
+# リスト
+numbers = [1, 2, 3, 4, 5]
+
+# タプル
+coordinates = (10.0, 20.0)
+
+# 辞書
+person = {"name": "Alice", "age": 2...]]></description><link>https://zenn.dev/happy_engineer/articles/4de975f1d85464</link><guid isPermaLink="true">https://zenn.dev/happy_engineer/articles/4de975f1d85464</guid><pubDate>Sat, 08 Jun 2024 21:54:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--o5OIieUN--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:python%2520%25E3%2583%2581%25E3%2583%25BC%25E3%2583%2588%25E3%2582%25B7%25E3%2583%25BC%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25BE%25E3%2583%25BC%25E3%2581%2595%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS3U2U01IV1VwWjRBVVNpdXZUMGxiTVFFM1ZGaVpjYW9nbVhWTDB1djhST3NIeEFtVT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>まーさん</dc:creator></item><item><title><![CDATA[CloudFormationでSecurity Hubのアカウント連携（招待）を実現する]]></title><description><![CDATA[Security Hubのクロスアカウント連携（招待）はCloudFormationの通常のリソースとして作成することはできません。
+そこで、本記事ではカスタムリソースでSecurity Hubの招待を実現する例を紹介します。
+話すこと：
+
+実現方式と実装例
+
+話さないこと：
+
+CloudFormationカスタムリソースとは何か（カスタムリソースについてはこちらもどうぞ：CloudFormationカスタムリソースを最速理解できる簡単な例）
+CloudFormation StackSetsとは何か
+Lambda関数によってIAMロールがどのように使われるか
+Organizationsを...]]></description><link>https://zenn.dev/dannykitadani/articles/dd9a69763adc56</link><guid isPermaLink="true">https://zenn.dev/dannykitadani/articles/dd9a69763adc56</guid><pubDate>Sat, 08 Jun 2024 18:38:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dN0mp5ZQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:CloudFormation%25E3%2581%25A7Security%2520Hub%25E3%2581%25AE%25E3%2582%25A2%25E3%2582%25AB%25E3%2582%25A6%25E3%2583%25B3%25E3%2583%2588%25E9%2580%25A3%25E6%2590%25BA%25EF%25BC%2588%25E6%258B%259B%25E5%25BE%2585%25EF%25BC%2589%25E3%2582%2592%25E5%25AE%259F%25E7%258F%25BE%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Danny%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQwZmU0MzM2NzAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Danny</dc:creator></item><item><title><![CDATA[Neovim起動時にPythonの仮想環境をActivateしたい!]]></title><description><![CDATA[
+ 動機
+Neovim内で定義ジャンプを利用する際に、venv内の外部ライブラリに対してもLSPの機能を利用したかったためです。pyrightの機能としてvenvまでのPATHを記述するオプションがあるようですが、pyrightのためだけにセッティングを書くのが億劫だった(おい)のと起動時にactivateしておくとNeovim内で起動するターミナルに対してもvenv内のpythonにPATHが当たるといった恩恵があります。
+
+ 環境
+macOS Sonoma14.4
+terminal kitty(0.35.1)
+Neovim NVIM v0.10.0
+
+ やり方
+init.luaなどに...]]></description><link>https://zenn.dev/misora/articles/d0e8c244f2f4db</link><guid isPermaLink="true">https://zenn.dev/misora/articles/d0e8c244f2f4db</guid><pubDate>Sat, 08 Jun 2024 15:12:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--rZDqP8Nw--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Neovim%25E8%25B5%25B7%25E5%258B%2595%25E6%2599%2582%25E3%2581%25ABPython%25E3%2581%25AE%25E4%25BB%25AE%25E6%2583%25B3%25E7%2592%25B0%25E5%25A2%2583%25E3%2582%2592Activate%25E3%2581%2597%25E3%2581%259F%25E3%2581%2584%2521%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:RISUman%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzUxZTVhYzUwMzcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>RISUman</dc:creator></item><item><title><![CDATA[Notion を使った英単語クイズアプリ]]></title><description><![CDATA[
+ 機能
+
+ランダムに表示されるが、間違えた数のカウントが多いものほど選ばれる
+解答を自分のタイミングで表示できる
+間違えたらカウントを増やせる
+自分で止めるまで永遠に続けられる
+そもそも英単語帳はNotionで管理されているので、結構自由がきく
+
+
+ これを作った理由
+
+元々英語の勉強をしている時に、わからなかった単語やフレーズを記録していたのですが、その日〜数日間の復習に使っているだけで、あんまり記録している良さがないなと感じ、クイズアプリみたいにランダムにクイズにしたいなと思ったからです
+そのようなWebアプリがないかサッと調べたのですがまだ存在せず、Notionを活用したアプリ作...]]></description><link>https://zenn.dev/ku60/articles/1338e01d9a2b93</link><guid isPermaLink="true">https://zenn.dev/ku60/articles/1338e01d9a2b93</guid><pubDate>Sat, 08 Jun 2024 10:54:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--kHiYiYB4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Notion%2520%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%259F%25E8%258B%25B1%25E5%258D%2598%25E8%25AA%259E%25E3%2582%25AF%25E3%2582%25A4%25E3%2582%25BA%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ku60%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJkMTUxYWU4YjMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ku60</dc:creator></item><item><title><![CDATA[【Python】Socket ServerをCtrl+Cで停止できない問題]]></title><description><![CDATA[
+ Server側でCtrl+Cが効かなくなる
+Socket Serverを稼働して接続待機している間、Ctrl+Cを入力しても停止できなくなるという不具合に遭遇しました。しかしその後接続されると、途端に停止するようです。なんと致命的なことでしょう。
+
+ 有名な不具合
+調べてみれば、先人も同じ不具合に対峙していた記録がみられました。どうやら、既に知れた不具合だったようですね。
+https://stackoverflow.com/questions/74730025/how-to-stop-server-socket-using-ctrlc-in-python
+上の内容に倣いsignalに...]]></description><link>https://zenn.dev/amenaruya/articles/ad9e45fdbe5e32</link><guid isPermaLink="true">https://zenn.dev/amenaruya/articles/ad9e45fdbe5e32</guid><pubDate>Sat, 08 Jun 2024 08:33:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--RBkMRRXY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591Socket%2520Server%25E3%2582%2592Ctrl%252BC%25E3%2581%25A7%25E5%2581%259C%25E6%25AD%25A2%25E3%2581%25A7%25E3%2581%258D%25E3%2581%25AA%25E3%2581%2584%25E5%2595%258F%25E9%25A1%258C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:amenaruya%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZjMjYzMzVmMzMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>amenaruya</dc:creator></item><item><title><![CDATA[[AWS]指定したリージョンの情報を表示するPython3スクリプト]]></title><description><![CDATA[
+ やること
+東京リージョンのCloudShellで、指定したリージョンの情報を表示するスクリプトのサンプルです。いつか作ることになりそうなので備忘録としてここに残します。
+
+ 方法
+別リージョンのリソースにアクセスするには以下のようにregion_nameでリージョンを指定します。以下は、大阪リージョンap-northeast-3を指定しています。
+ec2_client = boto3.client('ec2', region_name='ap-northeast-3')
+
+ スクリプト
+今回つくったスクリプトです。東京リージョン、大阪リージョンの他にスクリプト実行時に指定したリージョ...]]></description><link>https://zenn.dev/zgw426/articles/7a8dbcd3b7f1a6</link><guid isPermaLink="true">https://zenn.dev/zgw426/articles/7a8dbcd3b7f1a6</guid><pubDate>Sat, 08 Jun 2024 07:12:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--UGmdkNuj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BAWS%255D%25E6%258C%2587%25E5%25AE%259A%25E3%2581%2597%25E3%2581%259F%25E3%2583%25AA%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%25A7%25E3%2583%25B3%25E3%2581%25AE%25E6%2583%2585%25E5%25A0%25B1%25E3%2582%2592%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2599%25E3%2582%258BPython3%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:suo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E5OWNjMjMzNTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>suo</dc:creator></item><item><title><![CDATA[Raspberry Pi 5 に TA-Lib をインストールする]]></title><description><![CDATA[
+ pip installではインストールできない
+そのままではinstallに失敗します。
+Building wheels for collected packages: TA-lib
+  Building wheel for TA-lib (pyproject.toml) ... error
+  error: subprocess-exited-with-error
+
+  × Building wheel for TA-lib (pyproject.toml) did not run successfully.
+  │ exit code: 1
+  ╰─&gt; [21 lines ...]]></description><link>https://zenn.dev/kaizin_z/articles/dba9a9714a344b</link><guid isPermaLink="true">https://zenn.dev/kaizin_z/articles/dba9a9714a344b</guid><pubDate>Sat, 08 Jun 2024 06:24:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--y0SA4Yq1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Raspberry%2520Pi%25205%2520%25E3%2581%25AB%2520TA-Lib%2520%25E3%2582%2592%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258B%25E3%2581%2584%25E3%2581%2598%25E3%2582%2593Z%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg3N2M3ZDU1MzguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>かいじんZ</dc:creator></item><item><title><![CDATA[【python】listに対する*演算子の実装]]></title><description><![CDATA[
+ はじめに
+某SNSで、以下のpythonコードが回ってきました :eye:
+In [1]: li = [[0] * 5] * 5
+
+In [2]: li
+Out[2]:
+[[0, 0, 0, 0, 0],
+ [0, 0, 0, 0, 0],
+ [0, 0, 0, 0, 0],
+ [0, 0, 0, 0, 0],
+ [0, 0, 0, 0, 0]]
+
+In [3]: li[0][1] = 10
+
+In [4]: li
+Out[4]:
+[[0, 10, 0, 0, 0],
+ [0, 10, 0, 0, 0],
+ [0, 10, 0, 0, 0],
+ [0, 10, 0, 0, 0],
+ ...]]></description><link>https://zenn.dev/takapy11820/articles/b747706fd006de</link><guid isPermaLink="true">https://zenn.dev/takapy11820/articles/b747706fd006de</guid><pubDate>Sat, 08 Jun 2024 03:37:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--H3-vZmef--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590python%25E3%2580%2591list%25E3%2581%25AB%25E5%25AF%25BE%25E3%2581%2599%25E3%2582%258B%252A%25E6%25BC%2594%25E7%25AE%2597%25E5%25AD%2590%25E3%2581%25AE%25E5%25AE%259F%25E8%25A3%2585%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:takapp%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBmY2U4YzczNGUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takapp</dc:creator></item><item><title><![CDATA[【FastAPI】バリデーションエラーメッセージを日本語化]]></title><description><![CDATA[
+ バリデーションエラーメッセージを日本語化したい
+
+ Pydanticでバリデーションエラーメッセージをカスタマイズ
+FastAPIでバリデーションエラーメッセージを日本語にしたくて、
+FastAPIの公式ドキュメントを漁っていましたが、これといったものが見つからず。。
+あきらめかけていましたが、ゆくゆく考えると、バリデーションを行っている分類はPydanticの機能。
+ということでPydantic（V2）の公式ドキュメントを見ていくとありました。
+Error Handling - Pydantic
+きちんと書いてありました。（以下コード抜粋）
+from typing import D...]]></description><link>https://zenn.dev/ak_yoshimatsu/articles/f096773067e5ba</link><guid isPermaLink="true">https://zenn.dev/ak_yoshimatsu/articles/f096773067e5ba</guid><pubDate>Sat, 08 Jun 2024 03:07:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--63JuNDdx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590FastAPI%25E3%2580%2591%25E3%2583%2590%25E3%2583%25AA%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E3%2583%25A1%25E3%2583%2583%25E3%2582%25BB%25E3%2583%25BC%25E3%2582%25B8%25E3%2582%2592%25E6%2597%25A5%25E6%259C%25AC%25E8%25AA%259E%25E5%258C%2596%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2588%25E3%2581%2597%25E3%2581%25BE%25E3%2581%25A4%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y4ZGYwOTYwZmUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>よしまつ</dc:creator></item><item><title><![CDATA[MojoをMacで動かしてみた]]></title><description><![CDATA[
+ 概要
+この記事の対象者:
+Mojoに興味がある初心者を対象に書いています。
+この記事の内容:
+「Mojo」の特徴、開発経緯、MLIRについての概要、および導入方法について書いています。
+この記事を読むとわかること:
+Mojoの基本的な特徴や利点、開発の背景、MLIRの役割、およびMojoのインストール方法について理解できます。
+
+ 序論
+みなさん、「Mojo」はご存知でしょうか。
+pythonと互換があり、そしてpythonより60000倍早く
+なぜかロゴが火の絵文字🔥の謎の言語「もじゃ？」「もじょ？」
+みたいな物があるらしいと先ほど焼肉🔥を食べていた際、聞きました。
+そんな流れでお...]]></description><link>https://zenn.dev/kei_ninja/articles/4b2a280349b118</link><guid isPermaLink="true">https://zenn.dev/kei_ninja/articles/4b2a280349b118</guid><pubDate>Fri, 07 Jun 2024 21:37:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ivnjh0dO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Mojo%25E3%2582%2592Mac%25E3%2581%25A7%25E5%258B%2595%25E3%2581%258B%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kei%25E5%25BF%258D%25E8%2580%2585%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzIzYTk0NjI3YjYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kei忍者</dc:creator></item><item><title><![CDATA[モールス信号でBedrockとナイショ話する]]></title><description><![CDATA[たくさんの生成AIモデルの台頭により、AIと友達になる…そんな夢も現実味を帯びてきました。
+今回はその一歩としてモールス信号を使った「ひみつの友達」を作ってみました。
+
+ 実現したかったこと
+「AIと信号灯での回光通信」
+ボタン押してでモールス符号を送信したら、数秒後にLEDが光って返答してくれるっていうやつ。
+本当は送信側も回光信号で通信をしたかったのですが、生成AIは光を検知してモールス符号化が難しいため、人間からの入力はボタンで入力としました。
+イメージ↓
+
+光らせたかったのと、Pythonでの開発を前提としていたのでラズパイとLEDを採用。
+またAmazon Bedrockの検証...]]></description><link>https://zenn.dev/kumao/articles/68007d0b447dd9</link><guid isPermaLink="true">https://zenn.dev/kumao/articles/68007d0b447dd9</guid><pubDate>Fri, 07 Jun 2024 15:43:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Csq8ZgTp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%25A2%25E3%2583%25BC%25E3%2583%25AB%25E3%2582%25B9%25E4%25BF%25A1%25E5%258F%25B7%25E3%2581%25A7Bedrock%25E3%2581%25A8%25E3%2583%258A%25E3%2582%25A4%25E3%2582%25B7%25E3%2583%25A7%25E8%25A9%25B1%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kumao%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI5MzA1YjcxZTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kumao</dc:creator></item><item><title><![CDATA[競プロAtcoder_pythonでxy座標を表す]]></title><description><![CDATA[
+ 初めに
+Atcoderで過去に出題されたB問題を解いているときに、xy座標の問題が解けないことが２回あったので本記事で解法をまとめる
+
+ 該当の問題
+以下の問題で、２次元座標に関する問題が出題されている。
+私はどちらも自力でACできませんでした。涙
+
+AtCoder349B_Langton's Takahashi
+AtCoder318B_Overlapping sheets
+
+
+ 解法ポイント：2次元座標（xy座標）は2次元リストを使うのが定石
+# 5*5の2次元平面を表現する
+mp = [[0 for _ in range(5)] for _ in range(5)]
+print(...]]></description><link>https://zenn.dev/rabbit_penguin0/articles/c897db27c3825b</link><guid isPermaLink="true">https://zenn.dev/rabbit_penguin0/articles/c897db27c3825b</guid><pubDate>Fri, 07 Jun 2024 13:51:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--VKLXpvJH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%25AB%25B6%25E3%2583%2597%25E3%2583%25ADAtcoder_python%25E3%2581%25A7xy%25E5%25BA%25A7%25E6%25A8%2599%25E3%2582%2592%25E8%25A1%25A8%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%259A%25E3%2583%25B3%25E3%2582%25AE%25E3%2583%25B3%2520%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk3NjJhYjQ1YTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ペンギン🐧</dc:creator></item><item><title><![CDATA[AtCoder349B_Langton's Takahashi_負の数の余りを効果的に使う]]></title><description><![CDATA[
+ 初めに
+AtCoder349B_Langton's Takahashiで、余りをを効果的に使う問題で興味深かったため記事にしました。
+
+ トーラス状のグリッドとは
+初見で問題を解いたときに、意味不明だったのが以下の問題文
+このグリッドはトーラス状であるとみなします。すなわち、各 1≤i≤H に対して (i,W) の右に (i,1) があり、各 1≤j≤W に対して (H,j) の下に (1,j) があるとします。
+解説動画を見る限り、「グリッドの右端と左端、上端と下端がつながっている」ということを指しているらしい。
+（詳しい説明や定義はググってみたが、私には理解できなかったので割愛）...]]></description><link>https://zenn.dev/rabbit_penguin0/articles/faa70b83f9cfad</link><guid isPermaLink="true">https://zenn.dev/rabbit_penguin0/articles/faa70b83f9cfad</guid><pubDate>Fri, 07 Jun 2024 13:50:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vZ0zYnlI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AtCoder349B_Langton%2527s%2520Takahashi_%25E8%25B2%25A0%25E3%2581%25AE%25E6%2595%25B0%25E3%2581%25AE%25E4%25BD%2599%25E3%2582%258A%25E3%2582%2592%25E5%258A%25B9%25E6%259E%259C%25E7%259A%2584%25E3%2581%25AB%25E4%25BD%25BF%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%259A%25E3%2583%25B3%25E3%2582%25AE%25E3%2583%25B3%2520%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk3NjJhYjQ1YTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ペンギン🐧</dc:creator></item><item><title><![CDATA[東大数学を遺伝的アルゴリズムで解く]]></title><description><![CDATA[
+ はじめに
+こんにちは、コズムの開発部でインターンをしています、鈴木です。
+私は機械学習やアルゴリズムを用いた開発をメインに行っており、その中でも特に思い入れの深いアルゴリズムについて執筆する運びとなりました。
+ということで今回は、プログラムを駆使して東京大学の入試数学を倒します。
+東大生エンジニアも多数在籍する弊社ですが、非東大生である私が日本一の入試問題を解くにはどうしたらよいでしょうか、、、。
+それはやはり、アルゴリズム。とりわけ遺伝的アルゴリズム一択でしょう！
+
+ 遺伝的アルゴリズムってなんだ
+
+ 進化論的考え方
+遺伝的アルゴリズム(genetic algorithm、以下GA...]]></description><link>https://zenn.dev/cosmcorp/articles/2e01cd279f5e63</link><guid isPermaLink="true">https://zenn.dev/cosmcorp/articles/2e01cd279f5e63</guid><pubDate>Fri, 07 Jun 2024 10:30:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lvfuGwrS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%259D%25B1%25E5%25A4%25A7%25E6%2595%25B0%25E5%25AD%25A6%25E3%2582%2592%25E9%2581%25BA%25E4%25BC%259D%25E7%259A%2584%25E3%2582%25A2%25E3%2583%25AB%25E3%2582%25B4%25E3%2583%25AA%25E3%2582%25BA%25E3%2583%25A0%25E3%2581%25A7%25E8%25A7%25A3%25E3%2581%258F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:j_suzuki29%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY2MWZmNjBmZjUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2582%25B3%25E3%2582%25BA%25E3%2583%25A0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc3NjViMDVhMTYuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>j_suzuki29</dc:creator></item><item><title><![CDATA[plotly dashの内部構造]]></title><description><![CDATA[pythonのみでデータ分析のアプリケーションを実装することが出来るwebフレームワークの1つplotly dashの裏側がどうなっているのか
+githubにある次のソースコードを解析してみました。（※Dash Enterpriseのコードではありません）
+https://github.com/plotly/dash
+streamlitと比較して、パフォーマンス・データフォーマットの違いについて触れています。
+streamlitの仕組みについては、こちらを参照ください。
+https://qiita.com/yasudakn/items/089aaf4488fc6a8396ae
+
+ レイア...]]></description><link>https://zenn.dev/yasudakn/articles/08f5ac0202967c</link><guid isPermaLink="true">https://zenn.dev/yasudakn/articles/08f5ac0202967c</guid><pubDate>Fri, 07 Jun 2024 09:14:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--t71Jzr_9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:plotly%2520dash%25E3%2581%25AE%25E5%2586%2585%25E9%2583%25A8%25E6%25A7%258B%25E9%2580%25A0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yasudakn%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJhYjY0Yzg4OWUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yasudakn</dc:creator></item><item><title><![CDATA[「ARC2によるRDFグラフの視覚化」をPythonで利用する]]></title><description><![CDATA[
+ 概要
+神崎正英氏が公開する「ARC2によるRDFグラフの視覚化」をPythonで利用させていただく機会がありましたので、備忘録です。
+「ARC2によるRDFグラフの視覚化」の公開ページは以下です。
+https://www.kanzaki.com/works/2009/pub/graph-draw
+Turtle、RDF/XML、JSON-LD、TriGもしくはMicrodataで記述したRDFを入力として、可視化結果をpngやsvgファイルで取得することができます。
+
+ Pythonでの利用例
+import requests
+
+text = "@prefix ns1: &lt;http...]]></description><link>https://zenn.dev/nakamura196/articles/b8b471d62af4e8</link><guid isPermaLink="true">https://zenn.dev/nakamura196/articles/b8b471d62af4e8</guid><pubDate>Fri, 07 Jun 2024 07:47:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lG5PBWP4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%258CARC2%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258BRDF%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%2595%25E3%2581%25AE%25E8%25A6%2596%25E8%25A6%259A%25E5%258C%2596%25E3%2580%258D%25E3%2582%2592Python%25E3%2581%25A7%25E5%2588%25A9%25E7%2594%25A8%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nakamura196%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pkd3BpX1gzTWIzV3VqTnVnV2tPTlJlU3VsNFNTN1BNMWlPQm9LRm5JPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nakamura196</dc:creator></item><item><title><![CDATA[LangChainを用いて大量ファイルをロードするVectorDBを作ってみた(10)]]></title><description><![CDATA[
+
+ はじめに
+前回は、chainlitをstreamlitに置き換えて、「XMLファイルの名称(10桁の数字)を入力するためのテキストボックス」と「プロンプト入力ボックス」の両方を表示させて入力できるようにしました。
+　今回で10回目の記事投稿なのですが、少しずつ進化しているような気がしています。
+https://qiita.com/ogi_kimura/items/55ed1488ecae8357b614
+今まで、XMLファイルの中で必要なデータのみをデータベースに登録したり、metadataの属性情報をデータベースに追加登録したりしてきました。少しずつ精度は上がっているのですが、こ...]]></description><link>https://zenn.dev/ogiki/articles/86bec8a6ae56f8</link><guid isPermaLink="true">https://zenn.dev/ogiki/articles/86bec8a6ae56f8</guid><pubDate>Fri, 07 Jun 2024 05:54:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--zQt3BlmG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:LangChain%25E3%2582%2592%25E7%2594%25A8%25E3%2581%2584%25E3%2581%25A6%25E5%25A4%25A7%25E9%2587%258F%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2592%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2589%25E3%2581%2599%25E3%2582%258BVectorDB%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%252810%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%259C%25A8%25E6%259D%2591%25E3%2581%259F%25E3%2582%258D%25E3%2581%2586%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZkZjNiYWMwZmQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>木村たろう</dc:creator></item><item><title><![CDATA[venv の activate がなにをやっているか調べる]]></title><description><![CDATA[
+ 調査
+ドキュメントによれば activate すると .venv/bin が PATH に追加される。このパスのインタプリタを使いさえすれば、activate する必要はないらしい。
+.venv/bin/python をみてみると symlink で python のバイナリにリンクしているだけ。
+% ls -l .venv/bin/python
+lrwxr-xr-x  1 labocho  staff    58B  5 23 14:10 python -&gt; /Users/labocho/.anyenv/envs/pyenv/versions/3.12.3/bin/pytho...]]></description><link>https://zenn.dev/labocho/articles/120166df8d4bbd</link><guid isPermaLink="true">https://zenn.dev/labocho/articles/120166df8d4bbd</guid><pubDate>Fri, 07 Jun 2024 02:58:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--sN0zVtBC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:venv%2520%25E3%2581%25AE%2520activate%2520%25E3%2581%258C%25E3%2581%25AA%25E3%2581%25AB%25E3%2582%2592%25E3%2582%2584%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%2584%25E3%2582%258B%25E3%2581%258B%25E8%25AA%25BF%25E3%2581%25B9%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:labocho%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2hsUVdTdXZxd3RRU0xWNnFqUHVfT0NRaFJFMU9lS0xvQlZiMnhsWGc9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>labocho</dc:creator></item></channel></rss>
