@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Tue, 11 Jun 2024 05:49:13 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[macos(zsh)で特定ディレクトリで自動的にconda activateする]]></title><description><![CDATA[お試しで環境を変える際に、conda activateをいちいち打つのがめんどくさいので、conda 環境で特定ディレクトリ配下に移動すると自動的に仮想環境をアクティベートする方法(DevelopersIO)のzsh版を作成しました。基本的には引用記事の通りで、profileをzsh向けに変更しています。
+
+ 設定手順
+任意の仮想環境へ切り替え用の任意の名前のディレクトリを作成します。
+mkdir ~/new_proj
+cd ~/new_proj
+仮想環境名はnew_projと名付けて新規作成後、アクティベートします。既存の仮想環境を利用される場合はアクティベートだけ実行してください。
+...]]></description><link>https://zenn.dev/baremetal/articles/69e611ea48fe68</link><guid isPermaLink="true">https://zenn.dev/baremetal/articles/69e611ea48fe68</guid><pubDate>Mon, 10 Jun 2024 16:41:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Lcju143O--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:macos%2528zsh%2529%25E3%2581%25A7%25E7%2589%25B9%25E5%25AE%259A%25E3%2583%2587%25E3%2582%25A3%25E3%2583%25AC%25E3%2582%25AF%25E3%2583%2588%25E3%2583%25AA%25E3%2581%25A7%25E8%2587%25AA%25E5%258B%2595%25E7%259A%2584%25E3%2581%25ABconda%2520activate%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:baremetal%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZjODc2MjNjNjAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>baremetal</dc:creator></item><item><title><![CDATA[LangchainのStructured OutputとTool Callingを利用して構造化された形式で情報を抽出する]]></title><description><![CDATA[大規模言語モデル（LLM）の活用法の一つに「大量の文書の中から必要な情報を、指定した形式で抽出する」というものがあります。自然言語で回答してもらうのではなく、JSONスキーマなどであらかじめ指定した形式で回答をしてもらうことで、プログラム内での情報の活用につなげることができます。
+この記事では、Langchainと主要なLLMのAPIを用いて、文章中から構造化データの形で必要な情報を抜き出す方法を試してみましたので紹介します。
+
+ 環境と使用するLLM
+いつものように、Windows10上でPythonとLangchainを利用します。Pythonは3.11、Langchainのバージョ...]]></description><link>https://zenn.dev/khisa/articles/82e7d3d33f907d</link><guid isPermaLink="true">https://zenn.dev/khisa/articles/82e7d3d33f907d</guid><pubDate>Mon, 10 Jun 2024 14:44:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5yTRFIqn--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Langchain%25E3%2581%25AEStructured%2520Output%25E3%2581%25A8Tool%2520Calling%25E3%2582%2592%25E5%2588%25A9%25E7%2594%25A8%25E3%2581%2597%25E3%2581%25A6%25E6%25A7%258B%25E9%2580%25A0%25E5%258C%2596%25E3%2581%2595%25E3%2582%258C%25E3%2581%259F%25E5%25BD%25A2%25E5%25BC%258F%25E3%2581%25A7%25E6%2583%2585%25E5%25A0%25B1%25E3%2582%2592...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25B2%25E3%2581%2595%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTHFKaUVHa1VQMkc5WGpIeHlTa3p4bld3Z3JNcHFhT19hUFVKcWEyQ2YxWUZFPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ひさ</dc:creator></item><item><title><![CDATA[【Streamlit×Azure Document intelligence】OCRができるwebアプリを作ってみる]]></title><description><![CDATA[
+ やること
+Azure Document intelligenceとStreamlitでOCRができるwebアプリを作ってみる
+
+ 前提
+
+Document intelligenceを構築済みであること
+
+
+ 参考資料
+https://zenn.dev/headwaters/articles/7865873c67b0ec
+https://zenn.dev/headwaters/articles/8e23a752096c1e
+https://zenn.dev/headwaters/articles/43b7f61006117c
+https://zenn.dev/headwaters/ar...]]></description><link>https://zenn.dev/headwaters/articles/549c86e65ea714</link><guid isPermaLink="true">https://zenn.dev/headwaters/articles/549c86e65ea714</guid><pubDate>Mon, 10 Jun 2024 13:18:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ncluT8Gb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Streamlit%25C3%2597Azure%2520Document%2520intelligence%25E3%2580%2591OCR%25E3%2581%258C%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258Bweb%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:takekawa%2520tomoki%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZjNGExY2UxMDYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2598%25E3%2583%2583%25E3%2583%2589%25E3%2582%25A6%25E3%2582%25A9%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%25BC%25E3%2582%25B9%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdmODg5YTRhYzguanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takekawa tomoki</dc:creator></item><item><title><![CDATA[Flaskでアプリ開発に入門する]]></title><description><![CDATA[
+ やること
+アヤメデータの動的なグラフを表示するWEBアプリを開発する
+
+ 参考文献
+今回アプリを開発するにあたり、以下の文献を参考にしました。
+https://www.shoeisha.co.jp/book/detail/9784798175164
+
+ 前提
+
+ Flaskとは
+FlaskはDjangoと並んで用いられるPythonのフレームワークで、Djangoと比較して軽量、高速、学習コストが低いという利点があるため、近年台頭してきているようです。
+
+ MVTとは
+DjangoやFlaskを用いたアプリのアーキテクチャとしてはMVCやMVTがありますが、今回はMVTで全体の構成を...]]></description><link>https://zenn.dev/headwaters/articles/526d1a9588b754</link><guid isPermaLink="true">https://zenn.dev/headwaters/articles/526d1a9588b754</guid><pubDate>Mon, 10 Jun 2024 12:38:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--zlGAK4Jj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Flask%25E3%2581%25A7%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E9%2596%258B%25E7%2599%25BA%25E3%2581%25AB%25E5%2585%25A5%25E9%2596%2580%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:akihiro%2520nakamura%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZjNGExY2UxMDYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2598%25E3%2583%2583%25E3%2583%2589%25E3%2582%25A6%25E3%2582%25A9%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%25BC%25E3%2582%25B9%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA5MjU4ZWEwY2QuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>akihiro nakamura</dc:creator></item><item><title><![CDATA[［AtCoder］ABC-355｜A - Who Ate the Cake?]]></title><description><![CDATA[
+ 設問ページ
+
+🔗ABC-355 A - Who Ate the Cake?
+
+
+
+ 提出結果
+def getIntMap():
+    return map(int, input().split())
+
+
+def main():
+    a, b = getIntMap()
+
+    if a == b:
+        print(-1)
+    else:
+        print(6 - (a + b))
+
+
+if __name__ == "__main__":
+    main()
+]]></description><link>https://zenn.dev/hyperdb/articles/f99b09992825f2</link><guid isPermaLink="true">https://zenn.dev/hyperdb/articles/f99b09992825f2</guid><pubDate>Mon, 10 Jun 2024 10:36:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--25OYBrta--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25EF%25BC%25BBAtCoder%25EF%25BC%25BDABC-355%25EF%25BD%259CA%2520-%2520Who%2520Ate%2520the%2520Cake%253F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AF%25E3%2581%2584%25E3%2581%25B1%25E3%2581%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhODJkODgwMzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>はいぱぁ</dc:creator></item><item><title><![CDATA[［AtCoder］ABC-355｜B - Piano 2]]></title><description><![CDATA[
+ 設問ページ
+
+🔗ABC-355 B - Piano 2
+
+
+
+ 提出結果
+def getIntMap():
+    return map(int, input().split())
+
+
+def getIntList():
+    return list(map(int, input().split()))
+
+
+def main():
+    n, m = getIntMap()
+    a = getIntList()
+    b = getIntList()
+
+    c = dict()
+    for i in a:
+        c[i] = 'A'
+    for i i...]]></description><link>https://zenn.dev/hyperdb/articles/ec5e753282761b</link><guid isPermaLink="true">https://zenn.dev/hyperdb/articles/ec5e753282761b</guid><pubDate>Mon, 10 Jun 2024 10:36:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--C8_LGUHU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25EF%25BC%25BBAtCoder%25EF%25BC%25BDABC-355%25EF%25BD%259CB%2520-%2520Piano%25202%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AF%25E3%2581%2584%25E3%2581%25B1%25E3%2581%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhODJkODgwMzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>はいぱぁ</dc:creator></item><item><title><![CDATA[［AtCoder］ABC-356｜B - Nutrients]]></title><description><![CDATA[
+ 設問ページ
+
+🔗ABC-356 B - Nutrients
+
+
+
+ 提出結果
+def getIntMap():
+    return map(int, input().split())
+
+
+def getIntList():
+    return list(map(int, input().split()))
+
+
+def getIntListRow(N):
+    return [list(map(int, input().split())) for _ in range(N)]
+
+
+def main():
+    N, M = getIntMap()
+    A = getIntL...]]></description><link>https://zenn.dev/hyperdb/articles/b5520afaff960e</link><guid isPermaLink="true">https://zenn.dev/hyperdb/articles/b5520afaff960e</guid><pubDate>Mon, 10 Jun 2024 10:36:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--StQ_Qml5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25EF%25BC%25BBAtCoder%25EF%25BC%25BDABC-356%25EF%25BD%259CB%2520-%2520Nutrients%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AF%25E3%2581%2584%25E3%2581%25B1%25E3%2581%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhODJkODgwMzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>はいぱぁ</dc:creator></item><item><title><![CDATA[［AtCoder］ABC-354｜B - AtCoder Janken 2]]></title><description><![CDATA[
+ 設問ページ
+
+🔗ABC-354 B - AtCoder Janken 2
+
+
+
+ 提出結果
+def getInt():
+    return int(input())
+
+
+def getStringListRow(N):
+    return [list(input().split()) for _ in range(N)]
+
+
+def main():
+    n = getInt()
+    sc = getStringListRow(n)
+
+    t = 0
+    m = []
+    for s, c in sc:
+        t += int(c)
+        m...]]></description><link>https://zenn.dev/hyperdb/articles/6fd3f03b4ad7aa</link><guid isPermaLink="true">https://zenn.dev/hyperdb/articles/6fd3f03b4ad7aa</guid><pubDate>Mon, 10 Jun 2024 10:36:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---05SzDhn--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25EF%25BC%25BBAtCoder%25EF%25BC%25BDABC-354%25EF%25BD%259CB%2520-%2520AtCoder%2520Janken%25202%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AF%25E3%2581%2584%25E3%2581%25B1%25E3%2581%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhODJkODgwMzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>はいぱぁ</dc:creator></item><item><title><![CDATA[［AtCoder］ABC-354｜A - Exponential Plant]]></title><description><![CDATA[
+ 設問ページ
+
+🔗ABC-354 A - Exponential Plant
+
+
+
+ 提出結果
+def getInt():
+    return int(input())
+
+
+def main():
+    h = getInt()
+
+    d = 0
+    t = 0
+    while h &gt;= t:
+        t += (2 ** d)
+        d += 1
+    print(d)
+
+
+if __name__ == "__main__":
+    main()
+]]></description><link>https://zenn.dev/hyperdb/articles/4d789634ed8e17</link><guid isPermaLink="true">https://zenn.dev/hyperdb/articles/4d789634ed8e17</guid><pubDate>Mon, 10 Jun 2024 10:36:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--zfh5MUIS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25EF%25BC%25BBAtCoder%25EF%25BC%25BDABC-354%25EF%25BD%259CA%2520-%2520Exponential%2520Plant%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AF%25E3%2581%2584%25E3%2581%25B1%25E3%2581%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhODJkODgwMzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>はいぱぁ</dc:creator></item><item><title><![CDATA[［AtCoder］ABC-356｜A - Subsegment Reverse]]></title><description><![CDATA[
+ 設問ページ
+
+🔗ABC-356 A - Subsegment Reverse
+
+
+
+ 提出結果
+def getIntMap():
+    return map(int, input().split())
+
+
+def main():
+    N, L, R = getIntMap()
+
+    a = [i + 1 for i in range(L - 1)]
+    b = [i for i in range(R, L - 1, -1)]
+    c = [i for i in range(R + 1, N + 1)]
+
+    print(" ".join(map(str, a +...]]></description><link>https://zenn.dev/hyperdb/articles/3b95ce300ea661</link><guid isPermaLink="true">https://zenn.dev/hyperdb/articles/3b95ce300ea661</guid><pubDate>Mon, 10 Jun 2024 10:36:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--uVloHI15--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25EF%25BC%25BBAtCoder%25EF%25BC%25BDABC-356%25EF%25BD%259CA%2520-%2520Subsegment%2520Reverse%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AF%25E3%2581%2584%25E3%2581%25B1%25E3%2581%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhODJkODgwMzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>はいぱぁ</dc:creator></item><item><title><![CDATA[【2024-6-8】ニコニコ・カドカワを襲った攻撃の考察【総まとめ】]]></title><description><![CDATA[9日未明、株式会社KADOKAWAは、本社へのサイバー攻撃の被害を受けている旨の声明を発表した。
+
+2024年6月8日（土）未明に発生したシステム障害により、KADOKAWAグループ ポータルサイト（ https://group.kadokawa.co.jp/ ）をはじめ、当社グループの複数のウェブサイトが利用できない&gt;事象が発生しております。これまでの経緯、現在の状況、今後の対応については、こちらをご覧くだ&gt;さい。
+
+
+1.　経緯
+　6月8日（土）未明より、当社グループの複数のサーバーにアクセスできない障害が発生しました。この事実を受け、データ保全のため関連するサーバーを至...]]></description><link>https://zenn.dev/incognito/articles/1c9286f493446b</link><guid isPermaLink="true">https://zenn.dev/incognito/articles/1c9286f493446b</guid><pubDate>Mon, 10 Jun 2024 10:18:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--719vE4RO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%25902024-6-8%25E3%2580%2591%25E3%2583%258B%25E3%2582%25B3%25E3%2583%258B%25E3%2582%25B3%25E3%2583%25BB%25E3%2582%25AB%25E3%2583%2589%25E3%2582%25AB%25E3%2583%25AF%25E3%2582%2592%25E8%25A5%25B2%25E3%2581%25A3%25E3%2581%259F%25E6%2594%25BB%25E6%2592%2583%25E3%2581%25AE%25E8%2580%2583%25E5%25AF%259F%25E3%2580%2590%25E7%25B7%258F%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:incognito%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSlIyWjBITnFKNnBoVTBqQ2U3eXQwa0N4QUcyOGd2ME5vcFdIb2xYRC1LPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>incognito</dc:creator></item><item><title><![CDATA[NoteBookLMを便利に使うためにPEGASUSをPoetry環境で使ってみた]]></title><description><![CDATA[
+ PEGASUSとは？
+
+ウェブスクレイピングと Markdown 変換を自動化する Python パッケージ「PEGASUS」
+
+https://hamaruki.com/pegasus-v0-1-0-release-explanation-automatically-convert-your-website-to-markdown/
+https://github.com/Sunwood-ai-labs/PEGASUS
+
+ やりたい事
+話題のNoteBookLM使ってみたら上手くウェブサイトを読み込めないパターンもあって困っていたんだけど
+ウェブサイトの内容をスクレイピングしてマーク...]]></description><link>https://zenn.dev/ytksato/articles/abfcec395bf5bb</link><guid isPermaLink="true">https://zenn.dev/ytksato/articles/abfcec395bf5bb</guid><pubDate>Mon, 10 Jun 2024 08:05:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--W1bECorw--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:NoteBookLM%25E3%2582%2592%25E4%25BE%25BF%25E5%2588%25A9%25E3%2581%25AB%25E4%25BD%25BF%25E3%2581%2586%25E3%2581%259F%25E3%2582%2581%25E3%2581%25ABPEGASUS%25E3%2582%2592Poetry%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25A7%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yutaka%2520Sato%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ViZmI0N2E0M2UuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yutaka Sato</dc:creator></item><item><title><![CDATA[Python による確率分布の推定と描画]]></title><description><![CDATA[
+東工大情報理工学院 高安研究室 で開催されている新入生向けのプログラミングゼミの資料を一部公開します．
+
+データ解析の現場では，データの統計的性質を把握するために確率分布を確認します．
+本稿ではデータから確率分布を推定し，描画する方法を紹介します．
+
+ 確率変数と確率分布
+はじめに，確率変数について簡単に復習します．確率変数とは，どのような値となるかが確率的に定まっている変数です．数学的には全ての事象に数値を対応させる関数として定義され，各値にはその値を取る事象の割合が確率として乗っています．
+
+全事象を \Omega としましょう．確率変数 X は全事象 \Omega から数値 E ...]]></description><link>https://zenn.dev/zennjouinn/articles/a1b762ba3d7846</link><guid isPermaLink="true">https://zenn.dev/zennjouinn/articles/a1b762ba3d7846</guid><pubDate>Mon, 10 Jun 2024 04:14:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dip1iQN2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%2520%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258B%25E7%25A2%25BA%25E7%258E%2587%25E5%2588%2586%25E5%25B8%2583%25E3%2581%25AE%25E6%258E%25A8%25E5%25AE%259A%25E3%2581%25A8%25E6%258F%258F%25E7%2594%25BB%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E7%25A6%2585%25E5%25AE%259A%25E5%258D%25B0%25E4%25BB%258F%25E5%25BA%25A7%25E5%2583%258F%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS1NxUllBUG5JVzZGcFhFcGUxYmRzMTBxRWZBaUJqMzh2RVNremhVbG41ZEw0PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>禅定印仏座像</dc:creator></item><item><title><![CDATA[CUDAプログラミング(Numba)が学べる神ハンズオン教材]]></title><description><![CDATA[こんにちは。
+株式会社オークンでデータサイエンティストをしています、Nobuです。
+業務ではビッグデータを扱ったシミュレーションを行っており、GPU上で高速計算を行っています。
+その一環で、最近新たにCUDAプログラミングを習得しました。
+学習に利用した教材が大変素晴らしかったのですが、おそらく、あまり知られていないと感じたので、今回はその教材の紹介をしたいと思います！
+
+ ざっくり、CUDAプログラミングとは
+GPU上で高速に計算できるライブラリ群として、NVIDIA RAPIDSがあります。
+例えば、pandasの代わりにcuDFを、numpyの代わりにcupyを利用することで、高速...]]></description><link>https://zenn.dev/okun/articles/e3184d45707c40</link><guid isPermaLink="true">https://zenn.dev/okun/articles/e3184d45707c40</guid><pubDate>Sun, 09 Jun 2024 23:50:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--UgYciUbi--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:CUDA%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%259F%25E3%2583%25B3%25E3%2582%25B0%2528Numba%2529%25E3%2581%258C%25E5%25AD%25A6%25E3%2581%25B9%25E3%2582%258B%25E7%25A5%259E%25E3%2583%258F%25E3%2583%25B3%25E3%2582%25BA%25E3%2582%25AA%25E3%2583%25B3%25E6%2595%2599%25E6%259D%2590%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Nobu%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FiMWVmODg2OWIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:O-KUN%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM3MWUwNGEyYjAuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Nobu</dc:creator></item><item><title><![CDATA[AIエージェントによるサーバ監視と自律的な復旧を目指して - Powered by crewAI]]></title><description><![CDATA[
+ はじめに
+この記事では、AIエージェントが協力してタスクを自律的に解決するフレームワークcrewAIを使って、サーバの監視と自律的な復旧を実現するデモを実装します。
+crewAIは、複数のAIエージェントが協調してタスクを効率的に処理するためのフレームワークです。
+https://docs.crewai.com/
+このフレームワークを利用することで、AIエージェントが協調してタスクをこなす処理を簡単に実装できます。
+うまくいけば、AIエージェントがサーバの監視と復旧をしてくれることで、枕元にある社用携帯が鳴ることに怯える人類を減らせます。減らしたいです。
+とはいえ、まずは小さく始める...]]></description><link>https://zenn.dev/acntechjp/articles/6b031dd2d134bf</link><guid isPermaLink="true">https://zenn.dev/acntechjp/articles/6b031dd2d134bf</guid><pubDate>Sun, 09 Jun 2024 23:45:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1XQYswZp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AI%25E3%2582%25A8%25E3%2583%25BC%25E3%2582%25B8%25E3%2582%25A7%25E3%2583%25B3%25E3%2583%2588%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258B%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E7%259B%25A3%25E8%25A6%2596%25E3%2581%25A8%25E8%2587%25AA%25E5%25BE%258B%25E7%259A%2584%25E3%2581%25AA%25E5%25BE%25A9%25E6%2597%25A7%25E3%2582%2592%25E7%259B%25AE%25E6%258C%2587%25E3%2581%2597%25E3%2581%25A6%2520-%2520Powered%2520by%2520crewAI%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:naoto.a.kimura%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U2ZDA4MDY5ODcuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Accenture%2520Japan%2520%2528%25E6%259C%2589%25E5%25BF%2597%2529%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YlJhd0Eyek1LZU52ZmpiNk5ZYWFMM29mYl9jQktua2d3TUhUTEk9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>naoto.a.kimura</dc:creator></item><item><title><![CDATA[Snowflake×非構造データ ~Notebooksを添えて~]]></title><description><![CDATA[
+ この記事の対象ユーザー
+
+Snowflakeユーザー
+「Snowflakeで非構造データを取り扱う必要ってあるの？」と思っている人
+非構造データから情報を抽出して何らかの仕事に利用している人
+
+
+ 背景
+「Data Cloud Summit 2024の発表見てると、やたらAIとの統合を推しているなぁ・・・」
+弊社がSnowflakeを導入した当時は、「超高速でコスパの良いDWH、それがSnowflake」「データ共有方法が色々あって、特に社外とのデータコラボレーションが便利そう」という印象が強かったです。この印象は今なお変わっていませんが、それに加えて「データサイエンス」「AI」のキ...]]></description><link>https://zenn.dev/parfait/articles/9ffccdb7abaa4e</link><guid isPermaLink="true">https://zenn.dev/parfait/articles/9ffccdb7abaa4e</guid><pubDate>Sun, 09 Jun 2024 16:33:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--XCKSIYSh--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Snowflake%25C3%2597%25E9%259D%259E%25E6%25A7%258B%25E9%2580%25A0%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%2520%7ENotebooks%25E3%2582%2592%25E6%25B7%25BB%25E3%2581%2588%25E3%2581%25A6%7E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:parfait%2528%25E3%2583%2591%25E3%2583%25AB%25E3%2583%2595%25E3%2582%25A7%2529%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JlM2FiM2I3YzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>parfait(パルフェ)</dc:creator></item><item><title><![CDATA[EasyOCRを初めて使ってみた]]></title><description><![CDATA[
+ 注意事項
+OCRや今回使おうとしているEasyOCRについては全くの無知です。
+とりあえず、使ってみようというぐらいの軽い気持ちなので、やっていることが全然違ったり、意味わからないと感じるかもしれないということをご承知おきください。。。
+
+ はじめに
+前述のとおり、自分はOCR技術について「文字データを抽出してデータ化する」というぐらいの認識しか未だにわかっていません。
+自分が読んだ記事のリンクを貼っておきます。。
+https://camp.trainocate.co.jp/magazine/about-easyocr/
+記事内に「人工知能、画像処理の知識がなくても使える」Pytho...]]></description><link>https://zenn.dev/taro_memo/articles/26d05c6b6a0901</link><guid isPermaLink="true">https://zenn.dev/taro_memo/articles/26d05c6b6a0901</guid><pubDate>Sun, 09 Jun 2024 14:18:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qig4jo_Y--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:EasyOCR%25E3%2582%2592%25E5%2588%259D%25E3%2582%2581%25E3%2581%25A6%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:taro%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSS1MMGNtLTdqejBtYXBkUFhRWDB4TFFjRHVmaWh6cHNRa3ZrYXlpVjNicEMwPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>taro</dc:creator></item><item><title><![CDATA[焼きなまし法をグラフで見る]]></title><description><![CDATA[
+ はじめに
+最適化問題の解法として有名な焼きなまし法 (Simulated Annealing) について、
+atcoder の AHC002 Walking Tilesを対象とした、以下の記事で勉強した。原理は分かるのだけど、ランダムでうまくいくのがちょっと納得いかないので収束をグラフ化してみた。
+https://qiita.com/thun-c/items/ecd438fde4d237b1f7bc
+
+ Pythonでの実装
+自分の理解を深めるために、上記の記事そのままでPythonで書き直してみた。基本的に繰り返し回数が効いてくるのでPythonは不利だと思うが、今回はそこまで問題...]]></description><link>https://zenn.dev/attgm/articles/3662df2319098b</link><guid isPermaLink="true">https://zenn.dev/attgm/articles/3662df2319098b</guid><pubDate>Sun, 09 Jun 2024 13:28:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--XiHCaE3q--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%2584%25BC%25E3%2581%258D%25E3%2581%25AA%25E3%2581%25BE%25E3%2581%2597%25E6%25B3%2595%25E3%2582%2592%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%2595%25E3%2581%25A7%25E8%25A6%258B%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:a2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YkpXRWxFaHZNUHZabUNvSGh2QlRHY1VjdmVRSkVfTHJRUVhYU0I0UT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>a2</dc:creator></item><item><title><![CDATA[pyknpで形態素解析と構文解析をする方法]]></title><description><![CDATA[こんにちは。
+aiチャットボットを作る時は自然言語処理（NLP）をする必要があります。
+その自然言語処理には、形態素解析や構文解析、意味解析などの工程があります。
+この記事では形態素解析も構文解析も出来るpyknpの使い方を解説します。
+※インストール方法はネットに載っている情報でお願いします。
+
+ pyknpとは
+pyknpとは、京都大学が作ったknpとjumanをpythonで使うためのライブラリです。
+因みに、knpは構文解析をするためのもので、jumanは形態素解析をするためのものです。
+しかし、knpはjumanに依存しているので、knpだけで形態素解析も構文解析も出来ます（多...]]></description><link>https://zenn.dev/free_eerf/articles/498e485a61368e</link><guid isPermaLink="true">https://zenn.dev/free_eerf/articles/498e485a61368e</guid><pubDate>Sun, 09 Jun 2024 08:53:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--mRrMoa8Y--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:pyknp%25E3%2581%25A7%25E5%25BD%25A2%25E6%2585%258B%25E7%25B4%25A0%25E8%25A7%25A3%25E6%259E%2590%25E3%2581%25A8%25E6%25A7%258B%25E6%2596%2587%25E8%25A7%25A3%25E6%259E%2590%25E3%2582%2592%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:free%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU3OTZjMzI3ODEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>free</dc:creator></item><item><title><![CDATA[Google Colab でSQLクエリを実行する]]></title><description><![CDATA[
+ 要約
+Google Colaboratory (Colab) でSQLクエリを実行できる。
+
+ PostgreSQLサーバーのDBに接続する
+ここでは、既にPostgreSQLサーバーがあるものとして進める。以下のように拡張機能を読み込んだ後、データベースに接続を行う。PostgreSQLサーバーのDB接続情報は以下とする。
+
+ホスト名 (またはIPアドレス): hogehoge.com
+
+ポート番号: 6320
+
+DBユーザー名: postgres
+
+DBパスワード: password
+
+接続データベース名: postgres
+
+
+# SQL拡張機能をロードする
+%reload_e...]]></description><link>https://zenn.dev/maoki/articles/google-colab-sql</link><guid isPermaLink="true">https://zenn.dev/maoki/articles/google-colab-sql</guid><pubDate>Sun, 09 Jun 2024 07:37:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--htYz3Ddx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Google%2520Colab%2520%25E3%2581%25A7SQL%25E3%2582%25AF%25E3%2582%25A8%25E3%2583%25AA%25E3%2582%2592%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:AOKIMICHIHITO%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q4YWE0N2YxOGEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>AOKIMICHIHITO</dc:creator></item></channel></rss>
