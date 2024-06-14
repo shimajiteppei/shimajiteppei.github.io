@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Linux」のフィード]]></title><description><![CDATA[Zennのトピック「Linux」のRSSフィードです]]></description><link>https://zenn.dev/topics/linux</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/860a9eb1e4.png</url><title>Zennの「Linux」のフィード</title><link>https://zenn.dev/topics/linux</link></image><generator>zenn.dev</generator><lastBuildDate>Fri, 14 Jun 2024 01:30:32 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/linux/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[EndlessOS インストールしてみた]]></title><description><![CDATA[EndlessOSなるものがあるらしいです（他人事
+ここ最近本当にいろんなOSがあるんだなと思いますね…、OSを作るって凄すぎる。
+ということで、今回はEndlessOSをインストールしてみました。
+EndlessOSはLinuxの仲間で、イミュータブル…つまりOSとかに対して変更が出来ないこと、
+そして創作系？に強いOSらしい。あと俗にいうラズパイで良く使用例がある。
+こちらもとても使いやすいOSなんだとか。
+早速isoから用意する。以下のページからDLできます。
+https://www.endlessos.org/os
+そのままdownload選択。
+
+画面が推移するけど、これではな...]]></description><link>https://zenn.dev/may15/articles/d5194594e4950a</link><guid isPermaLink="true">https://zenn.dev/may15/articles/d5194594e4950a</guid><pubDate>Thu, 13 Jun 2024 14:13:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--yO3Lamdv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:EndlessOS%2520%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%259F%25E3%2582%25A2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM4Njc5MTUzZDguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ミア</dc:creator></item><item><title><![CDATA[The Battle with Gentoo (インストール)]]></title><description><![CDATA[
+ 概要
+前回の構成のハードウェアに Gentoo をインストールした時の備忘録として残します
+https://zenn.dev/exelion/articles/c373ae6017fd84
+ここでは stage3 (stage1 はなくなって後から emerge --update @world するのが推奨されてる？）からビルドして、カーネルと　X (KDE Plasma)  が起動するまでを構築します。これを書いている時点では 5.27.11 が stable-version みたいです
+出来るだけマニュアルに沿ってインストールする事を心がけています。また推奨値を選び、最適化は次の...]]></description><link>https://zenn.dev/exelion/articles/022014db852916</link><guid isPermaLink="true">https://zenn.dev/exelion/articles/022014db852916</guid><pubDate>Thu, 13 Jun 2024 10:42:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6XZIIBaW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:The%2520Battle%2520with%2520Gentoo%2520%2528%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kei%2520Sawamura%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI0MWNlZWQ3ZWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kei Sawamura</dc:creator></item><item><title><![CDATA[RISC-Vのlinux kernelにおけるcontext switch]]></title><description><![CDATA[備忘録、riscvのコンテキストスイッチ部のレジスタの保存/復元処理を見ていきます。
+arch/ricv/include/asm/switch_to.h
+#define switch_to(prev, next, last)			\
+do {							\
+	struct task_struct *__prev = (prev);		\
+	struct task_struct *__next = (next);		\
+	if (has_fpu())					\
+		__switch_to_fpu(__prev, __next);	\
+	if (has_vector())					\
+	...]]></description><link>https://zenn.dev/eunaseuna/articles/ddcbbe37724c27</link><guid isPermaLink="true">https://zenn.dev/eunaseuna/articles/ddcbbe37724c27</guid><pubDate>Thu, 13 Jun 2024 08:22:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--sVQyWJY2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:RISC-V%25E3%2581%25AElinux%2520kernel%25E3%2581%25AB%25E3%2581%258A%25E3%2581%2591%25E3%2582%258Bcontext%2520switch%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:s0man3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4Wi1sNTI1dVQ3N0p4S1hRaGpORHo4R0xiQ0JkUk90aEZaakpPbV9YZz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>s0man3</dc:creator></item><item><title><![CDATA[Rustで覗き見するLinuxのプロセスとスレッド]]></title><description><![CDATA[『LINUXプログラミングインターフェース』という本を興味本位で読んでいたのですが、プロセスとスレッドに関する記述を読んでいて（いつもRustで使っているスレッドもここでいうスレッドなのかな？）と思い、スレッドモニタ用のプログラムを作成しました。
+Rustプログラムの内容に合わせてLinuxのプロセス・スレッドがどのような挙動をするのかを見ていきます。
+
+ 標準ライブラリを使ったマルチスレッド
+monitor.rsとthread.rsの2つを作成し、以下のようなコマンドを実行することでthread.rsのプロセスと、そのスレッドの状態を監視する仕組みを作りました。
+cargo run -...]]></description><link>https://zenn.dev/texia/articles/3cd35fd8502363</link><guid isPermaLink="true">https://zenn.dev/texia/articles/3cd35fd8502363</guid><pubDate>Wed, 12 Jun 2024 23:41:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5nxCqx53--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25A7%25E8%25A6%2597%25E3%2581%258D%25E8%25A6%258B%25E3%2581%2599%25E3%2582%258BLinux%25E3%2581%25AE%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25BB%25E3%2582%25B9%25E3%2581%25A8%25E3%2582%25B9%25E3%2583%25AC%25E3%2583%2583%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:torohash%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLmRldi9pbWFnZXMvZGVmYXVsdC1wdWJsaWNhdGlvbi1hdmF0YXIucG5n%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2586%25E3%2582%25AF%25E3%2582%25B7%25E3%2582%25A2%25E3%2580%2580%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY0MmYzMDgyMmUuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>torohash</dc:creator></item><item><title><![CDATA[実践！Hyper-Vで開発環境構築! CentOS7+VSCode+Laravel 第３話～centOS7 SSH接続の構築編]]></title><description><![CDATA[
+ はじめに
+これは初めてhyper-VでCentOS7を使用する人向けの記事です
+
+ 前提
+
+
+Hyper-Vにインストール済みのCentOS7(ver: 7.9)
+CentOS7のバージョン確認するにはCentOSを起動して以下コマンドを実行してください。
+
+CentOS7
+cat /etc/centos-release
+
+
+Linux release 7.9.2009 (core)
+と表示されればOKです
+もしそうでなければ、以下記事を参考に導入してから本記事を閲覧頂ければと思います。
+
+
+
+
+構成
+
+
+hyper-V
+ネットワークアダプタ: Default Switch
+
+
+Ce...]]></description><link>https://zenn.dev/kudosho/articles/63a9853ef9dcb9</link><guid isPermaLink="true">https://zenn.dev/kudosho/articles/63a9853ef9dcb9</guid><pubDate>Wed, 12 Jun 2024 14:50:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--HQy0mQ5X--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%25AE%259F%25E8%25B7%25B5%25EF%25BC%2581Hyper-V%25E3%2581%25A7%25E9%2596%258B%25E7%2599%25BA%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%2521%2520CentOS7%252BVSCode%252BLaravel%2520%25E7%25AC%25AC%25EF%25BC%2593%25E8%25A9%25B1%25EF%25BD%259EcentOS7%2520SSH...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kudo%2520sho%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0ZjhjNmZfYWJMMC1NN2FGdVFaUzVxdC1XWlM5QkNycll4MnpydzAwSGs9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kudo sho</dc:creator></item><item><title><![CDATA[ifから考えたシェルスクリプト言語の曖昧さと奥深さ]]></title><description><![CDATA[
+ はじめに
+いわゆるbash, zshなどのPOSIX系シェルスクリプトのif文は、一般に次のような形で使います。
+if [ -d ~/foo/bar ]; then
+    echo hoge
+fi
+これを説明する表現として、ネット上で以下のようなものを結構見るように見えます。
+if [ 条件式 ]; then
+  ....
+fi
+実際、上記の理解の仕方は基本的に使えます。プログラミングはとりあえず使えることが大事だと思うので、その認識で事足りることは多いでしょう。
+大抵のプログラミング言語は海外記事の説明は概ね厳密な解説を書いていることが多い印象が私にはあるのですが、興味深いことに...]]></description><link>https://zenn.dev/shimarisu_121/articles/2fcf684a23c75e</link><guid isPermaLink="true">https://zenn.dev/shimarisu_121/articles/2fcf684a23c75e</guid><pubDate>Wed, 12 Jun 2024 14:21:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hZjiDr3b--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:if%25E3%2581%258B%25E3%2582%2589%25E8%2580%2583%25E3%2581%2588%25E3%2581%259F%25E3%2582%25B7%25E3%2582%25A7%25E3%2583%25AB%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2583%2588%25E8%25A8%2580%25E8%25AA%259E%25E3%2581%25AE%25E6%259B%2596%25E6%2598%25A7%25E3%2581%2595%25E3%2581%25A8%25E5%25A5%25A5%25E6%25B7%25B1%25E3%2581%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:shimarisu_121%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzUyYTA5YjFmMWQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>shimarisu_121</dc:creator></item><item><title><![CDATA[RaspberryPiにTailscaleを導入して外出先から自宅ネットワーク環境にVPN接続する方法]]></title><description><![CDATA[自宅に常設してあるRaspberry Pi に Tailscale をインストールと設定を行い、外出先から自宅ネットワーク環境にVPNアクセスする方法をここに記する。
+
+ 背景
+自宅のRaspberry PiにはPi-VPNを導入して、外出先から自宅へVPN接続していたが、この方法ではVPN用のポートを常時解放する必要があり、接続するためのドメインの動的IPを定期的に更新しなければならない。ドメインとIPを紐づける更新処理はスクリプトで自動化しているので、メンテナンスの手間はないが、ポート解放には少し抵抗を感じてしまう。そして、最近聴いているエンジニアのPodcastはTailscale...]]></description><link>https://zenn.dev/duke13/articles/9d7d16e66b3a850</link><guid isPermaLink="true">https://zenn.dev/duke13/articles/9d7d16e66b3a850</guid><pubDate>Wed, 12 Jun 2024 09:27:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--a5viHtrh--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:RaspberryPi%25E3%2581%25ABTailscale%25E3%2582%2592%25E5%25B0%258E%25E5%2585%25A5%25E3%2581%2597%25E3%2581%25A6%25E5%25A4%2596%25E5%2587%25BA%25E5%2585%2588%25E3%2581%258B%25E3%2582%2589%25E8%2587%25AA%25E5%25AE%2585%25E3%2583%258D%25E3%2583%2583%25E3%2583%2588%25E3%2583%25AF%25E3%2583%25BC%25E3%2582%25AF%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25ABVPN%25E6%258E%25A5%25E7%25B6%259A%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:duke13%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2YyY2E0MDBiYTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>duke13</dc:creator></item><item><title><![CDATA[小さな疑問を大事にしたら次に繋がった話]]></title><description><![CDATA[ちょっとした疑問を放置せずに調査をして解消したら思わぬところで役に立ったという話の共有です。主な対象読者は、IT技術者として成長したいなと思いつつも、どこから初めていいやら困っている人、腰を据えて書籍を読んだりして体系的な知識を身に着けるのとは別の手段があればいいなと思っているような方です。
+本記事は以下動画のテキスト版のようなものです。既にこの動画を見た方は新しいことは書いていないので、とくに見なくていいと思います。
+https://youtu.be/g0OOIDM23oI?feature=shared
+
+ 前置き
+ソフトウェア開発者として生きていると日々大小さまざまな疑問に遭遇します...]]></description><link>https://zenn.dev/satoru_takeuchi/articles/a058836b393e98</link><guid isPermaLink="true">https://zenn.dev/satoru_takeuchi/articles/a058836b393e98</guid><pubDate>Tue, 11 Jun 2024 14:28:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--VfAMCFK0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%25B0%258F%25E3%2581%2595%25E3%2581%25AA%25E7%2596%2591%25E5%2595%258F%25E3%2582%2592%25E5%25A4%25A7%25E4%25BA%258B%25E3%2581%25AB%25E3%2581%2597%25E3%2581%259F%25E3%2582%2589%25E6%25AC%25A1%25E3%2581%25AB%25E7%25B9%258B%25E3%2581%258C%25E3%2581%25A3%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:sat%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2hjeVUzdFlLV3RJeXdsdjJhYm1ac2VpczZrUnp1ODc5ZFNwT0Vub3c9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sat</dc:creator></item><item><title><![CDATA[プロセス、スレッド、非同期、並行、並列を理解する]]></title><description><![CDATA[プロセスやスレッド、そして並行処理や並列処理といったプログラムの処理方式について理解が浅かったため整理する。
+並行処理や並列処理を技術的に正しく理解しようと思った場合、プロセスやスレッドに関する理解が不可欠であるため、一つの文脈状で整理していく。
+
+ プロセスとスレッドを理解する
+
+ 参考
+スレッドとプロセスの違いを完全に理解する
+3.1 スレッドの仕組みと操作（マルチスレッド、並行処理、並列処理、非同期呼び出し、スレッドセーフ、同期化、デッドロック、ウェイトセット、スレッドローカルなど）～Java Advanced編 - Qiita
+
+ プロセス
+プロセスとは、OSレベルで見た際の実行...]]></description><link>https://zenn.dev/t_unity/articles/71d1d8155116ef</link><guid isPermaLink="true">https://zenn.dev/t_unity/articles/71d1d8155116ef</guid><pubDate>Tue, 11 Jun 2024 13:29:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--DRpDT40g--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25BB%25E3%2582%25B9%25E3%2580%2581%25E3%2582%25B9%25E3%2583%25AC%25E3%2583%2583%25E3%2583%2589%25E3%2580%2581%25E9%259D%259E%25E5%2590%258C%25E6%259C%259F%25E3%2580%2581%25E4%25B8%25A6%25E8%25A1%258C%25E3%2580%2581%25E4%25B8%25A6%25E5%2588%2597%25E3%2582%2592%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:T-unity%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VlNmE4OWE4YTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>T-unity</dc:creator></item><item><title><![CDATA[ラズパイ4にChronyでNTPサーバを立てる]]></title><description><![CDATA[
+ 目次
+
+NTPサーバとは
+インストール
+補足
+参考文献
+
+
+ NTPサーバとは
+NTPサーバ(Network Time Protocol server)とは，ネットワーク上で正確な時刻情報を提供をするためのサーバである．
+NTPは，RFC1305とRFC4330で決められている．
+本記事ではNICTの公開NTPサーバにあわせている．
+
+ 環境
+
+
+
+機能
+説明
+
+
+
+
+PC
+RaspberryPi 4
+
+
+OS
+Ubuntu24.04 LTS
+
+
+
+
+ インストール
+
+ OSのアプデートを行う
+この行為を飛ばしていきなりインストールから始める人をたまに見かけるけどよっぽどのことがない...]]></description><link>https://zenn.dev/uma_yuma/articles/345977c763493c</link><guid isPermaLink="true">https://zenn.dev/uma_yuma/articles/345977c763493c</guid><pubDate>Tue, 11 Jun 2024 07:47:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dKCUT6_---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%25A9%25E3%2582%25BA%25E3%2583%2591%25E3%2582%25A44%25E3%2581%25ABChrony%25E3%2581%25A7NTP%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2582%2592%25E7%25AB%258B%25E3%2581%25A6%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:UMA%2528%25E3%2582%2586%25E3%2583%25BC%25E3%2581%25BE%2529%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2UyM2VhOTJkNzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>UMA(ゆーま)</dc:creator></item><item><title><![CDATA[Java版 Minecraft Mod Server を Docker で構築する（Fabric）]]></title><description><![CDATA[コンテナ型仮想環境で、Java版マインクラフトのMODサーバー『Fabric』を構築します。使用するコンテナイメージは Docker 社が運営する公開レジストリの Docker Hub から取得します。
+!
+用語：Fabric【ファブリック】
+Java版マインクラフト用のMODサーバーのひとつで、既存のゲームに独自ルールやダンジョン等の新たな要素を加えてプレイできるようになる。システムを改造するプログラムであるためローカル環境をサーバーと同じ構成に揃えて接続する必要がある。
+
+
+ 🛠️ 事前準備
+デバイスやソフトウェアは以下を用いる。
+
+💻 サーバ機（Ubuntu Server、Dock...]]></description><link>https://zenn.dev/mesgory/articles/490936b78aeb41</link><guid isPermaLink="true">https://zenn.dev/mesgory/articles/490936b78aeb41</guid><pubDate>Tue, 11 Jun 2024 03:21:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0OZMDikE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java%25E7%2589%2588%2520Minecraft%2520Mod%2520Server%2520%25E3%2582%2592%2520Docker%2520%25E3%2581%25A7%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2599%25E3%2582%258B%25EF%25BC%2588Fabric%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E8%25B6%25A3%25E5%2591%25B3%25E3%2581%25AF%25E5%2586%258D%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%2520%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk4MGQyYmQ0MjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>趣味は再インストール🍥</dc:creator></item><item><title><![CDATA[プロキシ環境下でサーバを構築するための設定メモ]]></title><description><![CDATA[企業内などプロキシサーバを経由してインターネットに接続する必要がある環境下でサーバを構築する際にハマったので、その解決策をメモしておく。
+サーバはUbuntuを想定。
+
+ プロキシ設定
+環境変数http_proxy、https_proxyにサーバURLを設定する。
+
+~/.profile
+export http_proxy=http://proxy.example.com:8080
+export https_proxy=http://proxy.example.com:8080
+
+
+ 接続確認
+example.comにリクエストを送信し、応答が返ることを確認する。
+
+
+HTTP
+$ cu...]]></description><link>https://zenn.dev/nmoa/articles/settings-to-use-proxy</link><guid isPermaLink="true">https://zenn.dev/nmoa/articles/settings-to-use-proxy</guid><pubDate>Mon, 10 Jun 2024 15:20:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--MW9cIVHf--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25AD%25E3%2582%25B7%25E7%2592%25B0%25E5%25A2%2583%25E4%25B8%258B%25E3%2581%25A7%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2582%2592%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2599%25E3%2582%258B%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%25E8%25A8%25AD%25E5%25AE%259A%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nmoa%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FGZFp1Y3IwRHJTaTVYbFpseTJrcTFYV3VYLXAyand0QkNWOXl1Q1J3TVRRSlE9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nmoa</dc:creator></item><item><title><![CDATA[VMware Workstation Pro -VM作成(Linux Mint)]]></title><description><![CDATA[前回の記事VMware Workstation Pro インストールでVMを作成する途中までいった。
+今回はその続きとして、LinuxMint(Cinnamon)を使用してみる。（地味に使った事なかったので）
+まずLinuxMint(DKE)のisoをDLする。以下のリンク先から可能。
+https://www.linuxmint.com/
+リンク先で「download」を選択。
+
+Cinnamon Editionがあるので「download」を選択。
+
+「japan」の「repo.jing.rocks」を選択。
+
+DLが完了したら「VMware Workstation Pro」を起動。
+...]]></description><link>https://zenn.dev/may15/articles/03e0ea946dae71</link><guid isPermaLink="true">https://zenn.dev/may15/articles/03e0ea946dae71</guid><pubDate>Mon, 10 Jun 2024 14:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8ngHjzhb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:VMware%2520Workstation%2520Pro%2520-VM%25E4%25BD%259C%25E6%2588%2590%2528Linux%2520Mint%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%259F%25E3%2582%25A2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM4Njc5MTUzZDguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ミア</dc:creator></item><item><title><![CDATA[Java版 Minecraft Plugin Server を Docker で構築する（Paper）]]></title><description><![CDATA[コンテナ型仮想環境で、Java版マインクラフトのプラグインサーバー『Paper』を構築します。使用するコンテナイメージは Docker 社が運営する公開レジストリの Docker Hub から取得します。
+!
+用語：Paper【ペーパー】
+Java版マインクラフト用プラグインサーバーのひとつで、マルチプレイ環境に独自の拡張機能を加えることができる。サーバー用プラグインであるためローカル環境の設定等は必要なく、バニラ(公式)クライアントから接続するだけでプレイできる。
+
+
+ 🛠️ 事前準備
+デバイスやソフトウェアは以下を用いる。
+
+💻 サーバ機（Ubuntu Server、Docker）
+...]]></description><link>https://zenn.dev/mesgory/articles/5ce7ccae11dffe</link><guid isPermaLink="true">https://zenn.dev/mesgory/articles/5ce7ccae11dffe</guid><pubDate>Mon, 10 Jun 2024 02:29:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Dj5An4jw--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java%25E7%2589%2588%2520Minecraft%2520Plugin%2520Server%2520%25E3%2582%2592%2520Docker%2520%25E3%2581%25A7%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2599%25E3%2582%258B%25EF%25BC%2588Paper%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E8%25B6%25A3%25E5%2591%25B3%25E3%2581%25AF%25E5%2586%258D%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%2520%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk4MGQyYmQ0MjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>趣味は再インストール🍥</dc:creator></item><item><title><![CDATA[Java版 Minecraft Proxy Server を Docker で構築する（Velocity + Geyser）]]></title><description><![CDATA[コンテナ型仮想環境で、Java版マインクラフトのプロキシサーバー『Velocity』を構築し、さらに統合版とのクロスプレイを実現する 拡張プラグインを導入する方法について説明します。
+!
+用語：Velocity【ベロシティ】
+Java版マインクラフト用プロキシサーバーのひとつ。プレイヤーはロビーサーバーを入り口に繋がる複数のサーバーを行き来できるようになる。
+
+
+ 🛠️ 事前準備
+デバイスやソフトウェアは以下を用いる。
+
+💻 サーバ機（Ubuntu Server、Docker）
+🌐 Docker Hub
+
+
+💿 itzg/minecraft-server … Minecraft Serv...]]></description><link>https://zenn.dev/mesgory/articles/4f22286eda3b8c</link><guid isPermaLink="true">https://zenn.dev/mesgory/articles/4f22286eda3b8c</guid><pubDate>Sun, 09 Jun 2024 15:08:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--OYrrGrt4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java%25E7%2589%2588%2520Minecraft%2520Proxy%2520Server%2520%25E3%2582%2592%2520Docker%2520%25E3%2581%25A7%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2599%25E3%2582%258B%25EF%25BC%2588Velocity%2520%252B%2520Ge...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E8%25B6%25A3%25E5%2591%25B3%25E3%2581%25AF%25E5%2586%258D%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%2520%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk4MGQyYmQ0MjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>趣味は再インストール🍥</dc:creator></item><item><title><![CDATA[実践！Hyper-Vで開発環境構築! CentOS7+VSCode+Laravel 第２話～centOS7インストール編]]></title><description><![CDATA[
+ はじめに
+これは初めてhyper-VでCentOS7をインストールする人向けの記事です
+
+ 必要なもの
+
+
+windows11 pro (Hyper-Vを動かすために必要)
+windwos10 proでも可
+windows10または11でhomeの場合は基本的にHyper-Vは使用できないようですが
+ググると禁断の魔法があるとかないとか・・・。
+
+
+エラーを克服しようとする根性
+この記事を書いているのは2024年6月7日なのですが
+残念なことにCentOS7のサポートが今月末で終了します。
+もしかすると、本記事で紹介する手順では上手く行かないことが発生するかもしれません。
+そんな時は...]]></description><link>https://zenn.dev/kudosho/articles/1d217667483ac6</link><guid isPermaLink="true">https://zenn.dev/kudosho/articles/1d217667483ac6</guid><pubDate>Sun, 09 Jun 2024 11:03:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--VkQcUBPZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%25AE%259F%25E8%25B7%25B5%25EF%25BC%2581Hyper-V%25E3%2581%25A7%25E9%2596%258B%25E7%2599%25BA%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%2521%2520CentOS7%252BVSCode%252BLaravel%2520%25E7%25AC%25AC%25EF%25BC%2592%25E8%25A9%25B1%25EF%25BD%259EcentOS7%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E7%25B7%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kudo%2520sho%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0ZjhjNmZfYWJMMC1NN2FGdVFaUzVxdC1XWlM5QkNycll4MnpydzAwSGs9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kudo sho</dc:creator></item><item><title><![CDATA[Laravel11に必要なPHP拡張の確認]]></title><description><![CDATA[
+ 解決したいこと
+Laravel11のドキュメントによると、以下のPHP拡張のインストールが必須と記載されている。
+
+Ctype PHP Extension
+cURL PHP Extension
+DOM PHP Extension
+Fileinfo PHP Extension
+Filter PHP Extension
+Hash PHP Extension
+Mbstring PHP Extension
+OpenSSL PHP Extension
+PCRE PHP Extension
+PDO PHP Extension
+Session PHP Extension
+Tokenizer PHP...]]></description><link>https://zenn.dev/casti/articles/ee7592f77c98d3</link><guid isPermaLink="true">https://zenn.dev/casti/articles/ee7592f77c98d3</guid><pubDate>Sun, 09 Jun 2024 05:12:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dyiJMs4K--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Laravel11%25E3%2581%25AB%25E5%25BF%2585%25E8%25A6%2581%25E3%2581%25AAPHP%25E6%258B%25A1%25E5%25BC%25B5%25E3%2581%25AE%25E7%25A2%25BA%25E8%25AA%258D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:emmaru%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NlZTUxYWVmZDcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>emmaru</dc:creator></item><item><title><![CDATA[VMware Workstation Pro インストール]]></title><description><![CDATA[ESXiを利用している企業に大打撃を与えたBroadcomによるVMware買収によって、
+移行先の選定などで急激に忙しくなったエンジニアも多いのではないでしょうか。
+私自身も移行先の選定と、現環境において重要な機能を満たせるのかの検証でクラクラしています。。
+それはさておいて、買収にあたり無償化された「VMware Workstation Pro」を遅らせながら試してみる。
+インストール先は下記リンク。
+https://blogs.vmware.com/workstation/2024/05/vmware-workstation-pro-now-available-free-for-p...]]></description><link>https://zenn.dev/may15/articles/c7343d67cce635</link><guid isPermaLink="true">https://zenn.dev/may15/articles/c7343d67cce635</guid><pubDate>Sun, 09 Jun 2024 04:44:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--QWA9dKNf--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:VMware%2520Workstation%2520Pro%2520%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%259F%25E3%2582%25A2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM4Njc5MTUzZDguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ミア</dc:creator></item><item><title><![CDATA[# wsl2環境を快適にするためのセットアップ（備忘録）]]></title><description><![CDATA[
+ はじめに
+wsl環境の動作を快適にするためのノウハウをまとめる。
+
+ Linuxサブシステム上への開発環境の移行
+
+ wsl2 ubuntu側のセットアップ
+
+WSL2 ubuntuのLinux ディストリビューションを更新する。
+認証局について
+
+Portable VS codeのパスを通す。
+ズームレベルが大きいと感じる場合には、preferences → settings →  Mouse Wheel Zoomを 0か1に設定するのがちょうどよさそう。
+
+
+ 参考ページ
+WSL2を有効化し、動作が遅くなった問題にも対処
+Linux 用 Windows サブシステムで Visua...]]></description><link>https://zenn.dev/daiki_rpython/articles/a996075a665b02</link><guid isPermaLink="true">https://zenn.dev/daiki_rpython/articles/a996075a665b02</guid><pubDate>Sun, 09 Jun 2024 04:12:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--tTZkyxaU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%2523%2520wsl2%25E7%2592%25B0%25E5%25A2%2583%25E3%2582%2592%25E5%25BF%25AB%25E9%2581%25A9%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%25E3%2582%25BB%25E3%2583%2583%25E3%2583%2588%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%25EF%25BC%2588%25E5%2582%2599%25E5%25BF%2598%25E9%258C%25B2%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:deer%2520rpython%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FjNDJkN2EwMWQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>deer rpython</dc:creator></item><item><title><![CDATA[シェルスクリプト基礎あっさり7選]]></title><description><![CDATA[
+ 速習シェルスクリプト
+シェルスクリプトの基本を厳選して7つにまとめます。
+!
+Linuxでの実行を想定しております
+
+
+args
+if文
+case文
+for文
+while文
+function
+seq
+
+
+ シェルスクリプトとは!?
+シェルスクリプトとは、bashシェル等に備わっているスクリプト言語の事です。
+一連のコマンドを一つにまとめる事ができるので、処理の自動化に大いに役立ちます。
+
+ No0: シェルスクリプトの実行
+先ずは一丁目一番地、シェルスクリプトの実行方法についてです。
+次のファイルを用意し、"test.sh"として保存します。
+
+test.sh
+#!/bin/bash...]]></description><link>https://zenn.dev/sdkfz181tiger/articles/e651c4a33dd371</link><guid isPermaLink="true">https://zenn.dev/sdkfz181tiger/articles/e651c4a33dd371</guid><pubDate>Sat, 08 Jun 2024 07:16:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--HPbpCVe7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B7%25E3%2582%25A7%25E3%2583%25AB%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2583%2588%25E5%259F%25BA%25E7%25A4%258E%25E3%2581%2582%25E3%2581%25A3%25E3%2581%2595%25E3%2582%258A7%25E9%2581%25B8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258B%25E3%2581%2598%25E3%2582%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2YxM2MwMGU4MGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>かじる</dc:creator></item></channel></rss>
