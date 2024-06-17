@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「JavaScript」のフィード]]></title><description><![CDATA[Zennのトピック「JavaScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/javascript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/64acd76870.png</url><title>Zennの「JavaScript」のフィード</title><link>https://zenn.dev/topics/javascript</link></image><generator>zenn.dev</generator><lastBuildDate>Mon, 17 Jun 2024 09:35:34 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/javascript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Next-generation pluggable version manager: proto]]></title><description><![CDATA[
+ はじめに
+とってもクール😎なバージョン管理ツール proto の紹介です！
+
+ 対象とする読者
+
+言語・ランタイム・パッケージマネージャのバージョン管理をしたい
+環境を汚したくない
+
+Volta や mise (rtx) との違いを知りたい
+
+
+ proto とは？
+言語・ランタイム・パッケージマネージャ、様々なツールのバージョン管理ができるunified toolchainです。
+
+proto is a pluggable version manager, a unified toolchain.
+
+https://moonrepo.dev/docs/proto
+
+ 対応しているツ...]]></description><link>https://zenn.dev/iput_app/articles/8b2bd627c061a4</link><guid isPermaLink="true">https://zenn.dev/iput_app/articles/8b2bd627c061a4</guid><pubDate>Mon, 17 Jun 2024 08:30:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3ZVHcEe9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Next-generation%2520pluggable%2520version%2520manager%253A%2520proto%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:wiyco%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E1ZTg4M2Q2OTAuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2580%2590IPUT%25E3%2580%2591%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E9%2596%258B%25E7%2599%25BA%25E3%2582%25B5%25E3%2583%25BC%25E3%2582%25AF%25E3%2583%25AB%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2QxMTJiNGUyZmQuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>wiyco</dc:creator></item><item><title><![CDATA[疑似3Dであっさりアウトラン]]></title><description><![CDATA[
+ アウトランとは!?
+アウトランは、1980年代にゲームセンターを大いに賑わせた大人気カーレースゲームです。
+今回は疑似3Dで、アウトランの様なスピード感ある演出に挑戦してみます。(せ〜がぁ〜♬)
+※重要でない箇所は解説を省略しておりますので予めご了承下さい
+
+完成イメージ
+ここでは、描画にOpenProcessingを利用します。
+使い方に関しては、p5.jsをかじる本を参考にして頂けると幸いです。
+
+ 疑似3Dとは
+疑似3Dとは、3D座標(x,y,z)を2D座標(x,y)に変換する手法の事を言います。
+文字通り、"擬似的に3Dを表現する"という意味ですね。
+疑似3Dでは、次の手順に...]]></description><link>https://zenn.dev/sdkfz181tiger/articles/5b96fc307510a3</link><guid isPermaLink="true">https://zenn.dev/sdkfz181tiger/articles/5b96fc307510a3</guid><pubDate>Sun, 16 Jun 2024 21:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--JTXwvyX1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%2596%2591%25E4%25BC%25BC3D%25E3%2581%25A7%25E3%2581%2582%25E3%2581%25A3%25E3%2581%2595%25E3%2582%258A%25E3%2582%25A2%25E3%2582%25A6%25E3%2583%2588%25E3%2583%25A9%25E3%2583%25B3%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258B%25E3%2581%2598%25E3%2582%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2YxM2MwMGU4MGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>かじる</dc:creator></item><item><title><![CDATA[satisfies で exhaustiveness check]]></title><description><![CDATA[
+ TL;DR
+type A = "a" | "b" | "c";
+
+function exhaustive(v: A) {
+  switch (v) {
+    case "a":
+      return "A";
+    case "b":
+      return "B";
+    case "c":
+      return "C";
+    default:
+      return v satisfies never; // check exhaustiveness
+  }
+}
+
+ はじめに
+TypeScriptにsatisfies文が追加されて久しいですね。
+satisf...]]></description><link>https://zenn.dev/ryoppippi/articles/ac1c2b46dcc0ed</link><guid isPermaLink="true">https://zenn.dev/ryoppippi/articles/ac1c2b46dcc0ed</guid><pubDate>Sun, 16 Jun 2024 17:26:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--WgQe9P6S--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:satisfies%2520%25E3%2581%25A7%2520exhaustiveness%2520check%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ryoppippi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MzNDU0MTQ1MTMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ryoppippi</dc:creator></item><item><title><![CDATA[Google Apps Script（GAS）でSlackに当番通知Botを作成！]]></title><description><![CDATA[
+ 目的
+掃除当番、お花の水やり当番、給食当番など色々な当番がありますが、その日の当番って意外と忘れがちで『今日の当番って誰？』ってことありませんか？今の会社では朝会のファシリテーター（進行役）をメンバーで回しているのですが、意外と当番を忘れがちです。今回はそんなことを無くすために当番通知Botを作成してみました！
+
+ 方針
+まず、スプレッドシートに『当番シート』と『祝日シート』を作成し、関数を使い営業日とその日の当番を書いたテーブルを用意します。次に、Slackに通知するためにメンバーとSlackのIDを持つテーブルを用意し、GASで当日の当番を通知するコードを書いていきます。
+
+ 実...]]></description><link>https://zenn.dev/tekuteku_1104/articles/c79e34780c1fbd</link><guid isPermaLink="true">https://zenn.dev/tekuteku_1104/articles/c79e34780c1fbd</guid><pubDate>Sun, 16 Jun 2024 17:24:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1y4rhFYb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Google%2520Apps%2520Script%25EF%25BC%2588GAS%25EF%25BC%2589%25E3%2581%25A7Slack%25E3%2581%25AB%25E5%25BD%2593%25E7%2595%25AA%25E9%2580%259A%25E7%259F%25A5Bot%25E3%2582%2592%25E4%25BD%259C%25E6%2588%2590%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2589%25E3%2581%25A3%25E3%2581%2597%25E3%2583%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUVkRlRwNXpEY2hVU3MzQzNvODYydUZ1dHlmZ1hERUZYRnl0ZWZncnphOHg9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>らっしー</dc:creator></item><item><title><![CDATA[総当たりケース作成]]></title><description><![CDATA[
+ 概要
+Googleスプレッドシートで見出しとケースパターンを記載すると、総当たりの表を作成する処理。
+
+
+
+設定値入力シート
+結果出力シート
+
+
+
+
+
+
+
+
+
+画像の例は子音、母音、濁点の有無でマトリクスを作った場合の入力例。
+「や行」は「い」と「え」の文字が無い、「あ行」は濁点が無い、などの除外条件が思いつきやすく、ケースが3種類あるのでこれをサンプルとした。
+
+ 入力値の仕様
+
+ タイトル
+セルにケースのタイトルを記載する。
+種類を増やす場合は列方向に伸ばしていく。
+
+ ケース
+タイトルに対するケースをセル内改行で複数記載する。
+
+ 除外ケース
+総当たりのためにケースを並べた時点...]]></description><link>https://zenn.dev/modokisealsky/articles/f8e7be20996ce9</link><guid isPermaLink="true">https://zenn.dev/modokisealsky/articles/f8e7be20996ce9</guid><pubDate>Sun, 16 Jun 2024 11:41:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0rc0SZJS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%25B7%258F%25E5%25BD%2593%25E3%2581%259F%25E3%2582%258A%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B9%25E4%25BD%259C%25E6%2588%2590%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E9%2596%258B%25E7%2599%25BA%25E8%2580%2585%25E3%2582%2582%25E3%2581%25A9%25E3%2581%258D%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJkMDI1ZDRiMGYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>開発者もどき</dc:creator></item><item><title><![CDATA[一瞬で理解するHydration]]></title><description><![CDATA[
+ はじめに
+この記事の内容は、以下の動画でも解説しているので是非見てみてください！（動画の方が多分分かりやすいです）
+https://youtu.be/PyXbb8YqaNg?si=tu3MPODwvaQjKe9-
+
+ Hydrationとは？
+Hydration（ハイドレーション）とは、直訳すると「水分補給」という意味です。
+フロントエンドの世界では、静的な HTML に JavaScript を結び付けてインタラクティブにするプロセスのことを指します。
+例えば、React で SSR する場合を考えてみましょう。
+
+SSR では、まずブラウザはサーバーに対して、リクエストを送信しま...]]></description><link>https://zenn.dev/ak/articles/dd60f8b1712628</link><guid isPermaLink="true">https://zenn.dev/ak/articles/dd60f8b1712628</guid><pubDate>Sun, 16 Jun 2024 10:52:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--IjR7rDzQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E4%25B8%2580%25E7%259E%25AC%25E3%2581%25A7%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2599%25E3%2582%258BHydration%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:aki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q3YTNhNmZhNjkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>aki</dc:creator></item><item><title><![CDATA[type と interface の違いがよくわからない]]></title><description><![CDATA[タイトルの通り、違いがよくわからなかったので調べました。
+結論、どちらもできることはほとんど同じで、使うシーンや拡張の方法や少し異なるだけでした。
+
+ 基本的な使い方
+// 基本的な型エイリアス
+type ID = number | string;
+
+// オブジェクト型のエイリアス
+type User = {
+name: string;
+age: number;
+};
+
+// 関数型のエイリアス
+type Greet = (name: string) =&gt; string;
+
+// オブジェクトのインターフェース
+interface User {
+name: string;
+age...]]></description><link>https://zenn.dev/surume3/articles/33cfb159119a84</link><guid isPermaLink="true">https://zenn.dev/surume3/articles/33cfb159119a84</guid><pubDate>Sun, 16 Jun 2024 09:34:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fO4pi6oX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:type%2520%25E3%2581%25A8%2520interface%2520%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%25E3%2581%258C%25E3%2582%2588%25E3%2581%258F%25E3%2582%258F%25E3%2581%258B%25E3%2582%2589%25E3%2581%25AA%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:syumai3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI4MzZlZGI2OWIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>syumai3</dc:creator></item><item><title><![CDATA[! (Non-null assertion )や ?.  (Optional chaining)についてまとめてみる]]></title><description><![CDATA[Javascript や typescript の学習を進めていると、 !  や ? といった演算子がちょくちょく登場するのですが、理解が曖昧のため使い方を整理して理解を深めたいと思います。
+
+ ! (Non-null assertion operator / 非null アサーション)
+これは、型チェックをする際に、null また undefined の可能性を無視することをコンパイラに伝えるものです。
+使い方
+let foo: string | undefined;
+foo = "Hello";
+console.log(foo!.length);  // ! を入れることで、コンパイ...]]></description><link>https://zenn.dev/surume3/articles/70d435329ac363</link><guid isPermaLink="true">https://zenn.dev/surume3/articles/70d435329ac363</guid><pubDate>Sun, 16 Jun 2024 09:00:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--i8KJH_Cd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%2521%2520%2528Non-null%2520assertion%2520%2529%25E3%2582%2584%2520%253F.%2520%2520%2528Optional%2520chaining%2529%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:syumai3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI4MzZlZGI2OWIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>syumai3</dc:creator></item><item><title><![CDATA[あれ？CUID作られないんだけど？]]></title><description><![CDATA[
+ あれ？PostgresでCUID作られないんだけど？
+Nuxt3のアプリケーションでPrismaを使っているときに、PostgresデータベースでCUIDが生成されない問題についてお話しします。
+
+ 前提条件
+
+Nuxt3のアプリケーションでPrismaを使用しています。
+データベースにはPostgresを使用しています。
+ユーザーに自動インクリメントのIDを表示したくない場合があるので、UUIDを使用しています。
+
+
+ 問題の背景
+開発中にDBにSQLクライアントから手動でサンプルデータを追加したいシーンがあると思います。
+ユーザーテーブルにUUIDカラムをdefault cuid...]]></description><link>https://zenn.dev/kosuke_ito/articles/ac5014359221ff</link><guid isPermaLink="true">https://zenn.dev/kosuke_ito/articles/ac5014359221ff</guid><pubDate>Sun, 16 Jun 2024 07:53:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ZyuAJsPp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%2582%25E3%2582%258C%25EF%25BC%259FCUID%25E4%25BD%259C%25E3%2582%2589%25E3%2582%258C%25E3%2581%25AA%25E3%2581%2584%25E3%2582%2593%25E3%2581%25A0%25E3%2581%2591%25E3%2581%25A9%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kosuke%2520ito%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q1ZDE2NTk1ZjkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kosuke ito</dc:creator></item><item><title><![CDATA[JavaScriptクイズ: JSON.parseできるけどJSとして有効でないことはある？]]></title><description><![CDATA[以下のクイズの解説を書きます。
+JavaScriptクイズ: 以下の関数はtrueを返すことがある？
+function quiz(s) {
+  if (typeof s !== 'string') return false;
+  try { JSON.parse(s); } catch { return false; }
+  try { eval('(' + s + ')'); } catch { return true; }
+  return false;
+}
+※ ただし、 JSON や eval を外のスコープから置き換える、といったことは禁止。
+バージョンはES2023 (ECMA...]]></description><link>https://zenn.dev/luma/articles/javascript-quiz-json-but-not-js</link><guid isPermaLink="true">https://zenn.dev/luma/articles/javascript-quiz-json-but-not-js</guid><pubDate>Sun, 16 Jun 2024 06:50:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--cn23pnwY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25E3%2582%25AF%25E3%2582%25A4%25E3%2582%25BA%253A%2520JSON.parse%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258B%25E3%2581%2591%25E3%2581%25A9JS%25E3%2581%25A8%25E3%2581%2597%25E3%2581%25A6%25E6%259C%2589%25E5%258A%25B9%25E3%2581%25A7%25E3%2581%25AA%25E3%2581%2584%25E3%2581%2593%25E3%2581%25A8%25E3%2581%25AF%25E3%2581%2582%25E3%2582%258B%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:luma%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lnRFRSQVhGMGJ1cUs3cXg4NGdUYlVNU3RlZnVVekdiN0p0Q0hWRFE9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>luma</dc:creator></item><item><title><![CDATA[[React]クリックしたらメニューがすぐ側に出現するUXを汎用的なコンポーネントに落とし込んでみた]]></title><description><![CDATA[
+ はじめに
+しばしば見かける以下のようなUXを、誰でも扱えるコンポーネントとして実装してみたので解説します。
+
+
+ 完成系
+
+以下にて、ソースコードを公開しております。
+
+https://github.com/yu-ta-9/yuta9-storybook-v2/tree/main/src/components/tools/MenuModalPortal
+
+ 解説
+
+以下、該当のコンポーネントをMenuModalPortalと呼称します。
+
+
+ Props設計
+&lt;MenuModalPortal
+    buttonElement={
+        &lt;button type...]]></description><link>https://zenn.dev/yu_ta_9/articles/a9e5dce4ca21bd</link><guid isPermaLink="true">https://zenn.dev/yu_ta_9/articles/a9e5dce4ca21bd</guid><pubDate>Sun, 16 Jun 2024 01:44:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9O2R-96i--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BReact%255D%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2583%25E3%2582%25AF%25E3%2581%2597%25E3%2581%259F%25E3%2582%2589%25E3%2583%25A1%25E3%2583%258B%25E3%2583%25A5%25E3%2583%25BC%25E3%2581%258C%25E3%2581%2599%25E3%2581%2590%25E5%2581%25B4%25E3%2581%25AB%25E5%2587%25BA%25E7%258F%25BE%25E3%2581%2599%25E3%2582%258BUX%25E3%2582%2592%25E6%25B1%258E%25E7%2594%25A8%25E7%259A%2584%25E3%2581%25AA%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%259D%25E3%2583%25BC%25E3%2583%258D%25E3%2583%25B3%25E3%2583%2588%25E3%2581%25AB%25E8%2590%25BD%25E3%2581%25A8%25E3%2581%2597%25E8%25BE%25BC%25E3%2582%2593%25E3%2581%25A7%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:YU-TA-9%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2QwNzU2NmM5MzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>YU-TA-9</dc:creator></item><item><title><![CDATA[いまさら、Next.jsを調べてみる]]></title><description><![CDATA[
+ ごあいさつ
+こんにちは！
+オアシステクノロジーズの山本です。
+いまや、フロントエンド開発において必須となっているJavaScriptフレームワークですが、
+デファクトスタンダード（業界標準）となっている！？ReactとNext.jsについて整理してみたいと思います。
+どなたかの製品選定等に役立てば幸いです。
+
+ フロントエンドのデファクトスタンダードなJSライブラリとは
+フロントエンドの開発に携わっているかたで、以下のJSライブラリは聞いたことがあるかと思います。
+
+React（Next.js)
+Vue.js
+Angular
+Svelte
+jQuery
+
+Next.jsはReactの...]]></description><link>https://zenn.dev/oasys/articles/78c7c2d5d7f6ba</link><guid isPermaLink="true">https://zenn.dev/oasys/articles/78c7c2d5d7f6ba</guid><pubDate>Sun, 16 Jun 2024 00:00:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--nigOVW6B--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%2584%25E3%2581%25BE%25E3%2581%2595%25E3%2582%2589%25E3%2580%2581Next.js%25E3%2582%2592%25E8%25AA%25BF%25E3%2581%25B9%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25AA%25E3%2582%25A2%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2582%25AF%25E3%2583%258E%25E3%2583%25AD%25E3%2582%25B8%25E3%2583%25BC%25E3%2582%25BA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQyMGUxYmY0YzcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>オアシステクノロジーズ</dc:creator></item><item><title><![CDATA[エンジニア編: ToDoリストアプリを作成してみた（HTML, CSS, JavaScript）]]></title><description><![CDATA[
+ VSCode
+
+VSCode使ってやっと開発しようかと思ったが、そもそもこのツールの使い方を知らないことが発覚。
+Mac上部のメニュー欄からHelpを選択、Documentationを確認。
+最上部にあった動画を視聴。
+https://youtu.be/B-s71n0dHUk
+・コマンドパレットから&gt;Color Themeと入力することで、色を変えられる
+・⌘Nでファイルを作成できる
+
+ HTML
+
+要素（Element）の構成
+
+サンプルコードをとりあえず書き写してみた。
+・コードを書いてると勝手に「これはHtmlですね」みたいな感じで、右下に表示される
+.&lt;head&...]]></description><link>https://zenn.dev/tetty2525/articles/82b5f6cc381a31</link><guid isPermaLink="true">https://zenn.dev/tetty2525/articles/82b5f6cc381a31</guid><pubDate>Sat, 15 Jun 2024 13:26:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9xBVoR1t--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%25E7%25B7%25A8%253A%2520ToDo%25E3%2583%25AA%25E3%2582%25B9%25E3%2583%2588%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25EF%25BC%2588HTML%252C%2520CSS%252C%2520JavaScript%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Tetty%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJjMTFjNGMyOTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Tetty</dc:creator></item><item><title><![CDATA[JavaScript Interview Preparation]]></title><description><![CDATA[中国語です]]></description><link>https://zenn.dev/ianchen0419/books/2d26cdfbac59c7</link><guid isPermaLink="true">https://zenn.dev/ianchen0419/books/2d26cdfbac59c7</guid><pubDate>Sat, 15 Jun 2024 11:45:43 GMT</pubDate><dc:creator>イーアン</dc:creator></item><item><title><![CDATA[JavaScriptのランタイム構成からイベントループを学ぶ]]></title><description><![CDATA[こんにちは、Yu_riです。
+今回はJavaScriptのイベントループについて以下動画（JavaScript Visualized - Event Loop, Web APIs, (Micro)task Queue）で学んだことを記載していきます。
+https://www.youtube.com/watch?v=eiC58R16hb8&amp;list=PLYiYQVWAjSGMDserRaYZOsYVjsGazJefy&amp;t=51s
+
+ JavaScriptランタイム（実行環境）の構成
+
+ 1. Call Stack（コールスタック）　≒　JavaScriptエンジン
+※Jav...]]></description><link>https://zenn.dev/yyuri/articles/af7586da0982b1</link><guid isPermaLink="true">https://zenn.dev/yyuri/articles/af7586da0982b1</guid><pubDate>Sat, 15 Jun 2024 09:05:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6XfhMBd4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25E3%2581%25AE%25E3%2583%25A9%25E3%2583%25B3%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25A0%25E6%25A7%258B%25E6%2588%2590%25E3%2581%258B%25E3%2582%2589%25E3%2582%25A4%25E3%2583%2599%25E3%2583%25B3%25E3%2583%2588%25E3%2583%25AB%25E3%2583%25BC%25E3%2583%2597%25E3%2582%2592%25E5%25AD%25A6%25E3%2581%25B6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yu_ri%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI5ZTkzMDZmOTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yu_ri</dc:creator></item><item><title><![CDATA[React.memo の Shallow Comparison 回避方法]]></title><description><![CDATA[
+ 概要
+今回は、実務の中で若干詰まった Shallow Comparison の回避方法を、忘れないようメモ程度の記事として残しておこうと思います。
+簡単な内容のため、ほとんど React の公式ドキュメントの内容を自分のわかりやすい言葉に置き換えているだけなので、さわりだけ見ていただいた後は公式を見る方が安全だと思います。
+https://ja.react.dev/reference/react/memo
+!
+React.memo がどのような機能かなどの説明は行なっておりません。
+
+
+ 課題
+コンポーネントを memo 化することで、不要なレンダリングを回避することができます。
+で...]]></description><link>https://zenn.dev/noko_noko/articles/70a85ea0294f50</link><guid isPermaLink="true">https://zenn.dev/noko_noko/articles/70a85ea0294f50</guid><pubDate>Sat, 15 Jun 2024 03:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BzJlYwAx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React.memo%2520%25E3%2581%25AE%2520Shallow%2520Comparison%2520%25E5%259B%259E%25E9%2581%25BF%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A4%25E3%2581%25A1%25E3%2581%25AE%25E3%2581%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRjZDZjM2E1ZmQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>つちのこ</dc:creator></item><item><title><![CDATA[プロトアウトスタジオの授業スタート前チェックリスト]]></title><description><![CDATA[プロトアウトスタジオで行う授業に、自分でも参加できるのだろうか？と不安になる人がよくいます。今回はとりそぎ、授業前に必要な環境やスキルのチェックリストとなっています。「迷ったら飛び込んできて欲しい！」ってのが率直な想いなのですが、なかなかそうともいかないとは思うのでこれが出来る人は問題ないよ！て項目をリストアップしておきます。]]></description><link>https://zenn.dev/protoout/books/protoout-pre-lesson-2024</link><guid isPermaLink="true">https://zenn.dev/protoout/books/protoout-pre-lesson-2024</guid><pubDate>Fri, 14 Jun 2024 13:51:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3afxDGjH--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci8wNTIyMmUxOTdkLnBuZw==%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>プロトアウト</dc:creator></item><item><title><![CDATA[型定義を一括オプショナルにする方法]]></title><description><![CDATA[
+ 自己紹介
+おはこんばんにちは。まだ駆け出しエンジニアの柿です。
+普段はフロントエンド領域を生業としていて、
+個人でなにかやるときには React/Next、仕事では Vue/Nuxt を使用しています。
+
+ はじめに
+今回は業務で TypeScript を使っていて、
+「へー！こんなことできるんだ！」と思ったことをシェアしたいと思います。
+
+ 型定義を一括オプショナルにする方法
+TypeScript では、オブジェクトの型定義を一括でオプショナルにすることができます。
+例えば、次のような型があったとします。
+interface User {
+  name: string;
+  age...]]></description><link>https://zenn.dev/xeiculy/articles/5021831486a403</link><guid isPermaLink="true">https://zenn.dev/xeiculy/articles/5021831486a403</guid><pubDate>Fri, 14 Jun 2024 11:18:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ToYVVw37--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%259E%258B%25E5%25AE%259A%25E7%25BE%25A9%25E3%2582%2592%25E4%25B8%2580%25E6%258B%25AC%25E3%2582%25AA%25E3%2583%2597%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%258A%25E3%2583%25AB%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%259F%25BF%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZhZDQ4ZGE2NDEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>柿</dc:creator></item><item><title><![CDATA[コミットメッセージの体裁を強制してみたお話]]></title><description><![CDATA[
+ 自己紹介
+こんにちは。若手の web エンジニアの柿です！
+フロントエンド領域を生業としています :)
+個人でなにかやるときには React/Next を使いますが、仕事では Vue/Nuxt を使用しています。
+
+ 今回のお話
+今回は、コミットメッセージの体裁を強制してみることを頑張ったときのお話です。
+なぜ頑張ったのかというと、
+「コミットメッセージ、lint できるようにしてみてよ！」
+という大先輩からの一言があったからです。
+チームの課題として、一時期「コミットメッセージの体裁が乱れていたこと」を提起させて頂いた過去があったので、
+これできるようになったらおもろいな、と思った...]]></description><link>https://zenn.dev/xeiculy/articles/60fffa58a8bd36</link><guid isPermaLink="true">https://zenn.dev/xeiculy/articles/60fffa58a8bd36</guid><pubDate>Fri, 14 Jun 2024 09:51:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--YHHVtvB5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B3%25E3%2583%259F%25E3%2583%2583%25E3%2583%2588%25E3%2583%25A1%25E3%2583%2583%25E3%2582%25BB%25E3%2583%25BC%25E3%2582%25B8%25E3%2581%25AE%25E4%25BD%2593%25E8%25A3%2581%25E3%2582%2592%25E5%25BC%25B7%25E5%2588%25B6%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25E3%2581%258A%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%259F%25BF%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZhZDQ4ZGE2NDEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>柿</dc:creator></item><item><title><![CDATA[TypeScriptにおけるクラスのimplementsとextends]]></title><description><![CDATA[implementsとextendsはどちらもクラスに関連していますが、異なる目的で使用されます。
+
+ implementsの概要
+
+
+目的: クラスが特定のインターフェースを実装することを示す。
+
+
+使用方法: クラスがインターフェースで定義されたプロパティやメソッドを持つことを強制する。
+
+
+例:
+interface Animal {
+  name: string;
+  makeSound(): void;
+}
+
+class Dog implements Animal {
+  name: string;
+
+  constructor(name: string) {
+    this....]]></description><link>https://zenn.dev/lyio/articles/fab176ca55d415</link><guid isPermaLink="true">https://zenn.dev/lyio/articles/fab176ca55d415</guid><pubDate>Fri, 14 Jun 2024 08:22:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dh8x_EOF--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%25E3%2581%25AB%25E3%2581%258A%25E3%2581%2591%25E3%2582%258B%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25B9%25E3%2581%25AEimplements%25E3%2581%25A8extends%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:lyio%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvbC5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>lyio</dc:creator></item></channel></rss>
