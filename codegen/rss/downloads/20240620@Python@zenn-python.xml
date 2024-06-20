@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Thu, 20 Jun 2024 12:03:30 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Matplotilb の rcParams を json から読み込む]]></title><description><![CDATA[Maplotlib の図の設定は rcParams で一括調整できます．
+ただ，プログラムの冒頭にずらっと設定を列挙するのは，次の 2 点から微妙です．
+
+Notebook ファイルでは冒頭にタイトルや概要を記述することが多い．
+その直下に全く本質的でない rcParams の情報が並んでいると，情報が不必要に分断される．
+ファイルごとに同じ設定を書くのは避けたい．面倒なのと，設定を変更しにくいので．
+
+そこで，rcParams を json ファイルに書き，それを python から読み込む方法を紹介します．
+
+ 初期コード
+import matplotlib.pyplot as pl...]]></description><link>https://zenn.dev/zennjouinn/articles/694921771660da</link><guid isPermaLink="true">https://zenn.dev/zennjouinn/articles/694921771660da</guid><pubDate>Thu, 20 Jun 2024 07:25:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--EJD0gPb---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Matplotilb%2520%25E3%2581%25AE%2520rcParams%2520%25E3%2582%2592%2520json%2520%25E3%2581%258B%25E3%2582%2589%25E8%25AA%25AD%25E3%2581%25BF%25E8%25BE%25BC%25E3%2582%2580%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E7%25A6%2585%25E5%25AE%259A%25E5%258D%25B0%25E4%25BB%258F%25E5%25BA%25A7%25E5%2583%258F%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS1NxUllBUG5JVzZGcFhFcGUxYmRzMTBxRWZBaUJqMzh2RVNremhVbG41ZEw0PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>禅定印仏座像</dc:creator></item><item><title><![CDATA[PythonでPDFにテキストを書き込む方法]]></title><description><![CDATA[
+ はじめに
+以前業務の自動化をするためにPDFを操作するデスクトップアプリを開発しました。処理内容としては
+
+PDFの中のテキストを読み取る
+1.のテキストデータを元に算出した情報をPDFにテキスト書き込み &amp; ファイル名変更
+2.で変更したファイル名に記載した伝票No.同じPDFを結合
+
+という処理のデスクトップアプリをPythonで開発しました。
+その時に使用したPDFへテキストを書き込む方法を書きます。
+
+ 環境
+
+Windows11
+Python 3.9.13
+
+
+ 処理概要
+前提として処理の内容を理解しておいた方が理解しやすいのでここで説明します。
+主に使用するライブ...]]></description><link>https://zenn.dev/musashi26629/articles/bbaa89c6d51d19</link><guid isPermaLink="true">https://zenn.dev/musashi26629/articles/bbaa89c6d51d19</guid><pubDate>Thu, 20 Jun 2024 03:45:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1ifmhYZD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A7PDF%25E3%2581%25AB%25E3%2583%2586%25E3%2582%25AD%25E3%2582%25B9%25E3%2583%2588%25E3%2582%2592%25E6%259B%25B8%25E3%2581%258D%25E8%25BE%25BC%25E3%2582%2580%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Musashi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJmOTkxZDY1N2YuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Musashi</dc:creator></item><item><title><![CDATA[Pythonのpandasで3営業日後を調べる]]></title><description><![CDATA[
+ Pythonのpandasで3営業日後を調べる
+Pythonで営業日換算するときにpandasの型に営業日換算できる型があったので素振りしました。
+なお、個人的にpolarsというpandasよりも高速処理できるライブラリに移行しようとしていますが、polars側には今回紹介する型がないので自作する必要があります。
+
+ 環境
+
+Python
+
+3.12.3
+
+
+holidays
+
+0.50
+
+
+pandas
+
+2.2.2
+
+
+
+
+ 実装
+
+ 祝日
+日本の祝日を含めて営業日換算する必要があるので、定義する必要があります。
+自分で定義してもよいのですが、今回は日本の祝日も取り扱っているラ...]]></description><link>https://zenn.dev/kirimaru/articles/e13a6528c547f0</link><guid isPermaLink="true">https://zenn.dev/kirimaru/articles/e13a6528c547f0</guid><pubDate>Thu, 20 Jun 2024 03:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vQF24HN5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25AEpandas%25E3%2581%25A73%25E5%2596%25B6%25E6%25A5%25AD%25E6%2597%25A5%25E5%25BE%258C%25E3%2582%2592%25E8%25AA%25BF%25E3%2581%25B9%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258D%25E3%2582%258A%25E4%25B8%25B8%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2Rhcmsvay5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>きり丸</dc:creator></item><item><title><![CDATA[DSPyの紹介: Signal Processing技術を採用したマシンラーニング向けPythonライブラリ→時系列データをサポート、RAG]]></title><description><![CDATA[
+ DSPyの紹介: Signal Processing技術を採用したマシンラーニング向けPythonライブラリ→時系列データをサポート、RAG開発に有効
+
+ Intro to DSPy: Simple Ideas To Improve Your RAG
+参照ネタ：https://pub.towardsai.net/intro-to-dspy-simple-ideas-to-improve-your-rag-eb76914c844d
+
+ DSPyとは？
+DSPy (Differentiable Signal Processing in Python)は、信号処理技術と機械学習モデルを統合...]]></description><link>https://zenn.dev/ippeisuzuki/articles/f0131cacfa0bb7</link><guid isPermaLink="true">https://zenn.dev/ippeisuzuki/articles/f0131cacfa0bb7</guid><pubDate>Thu, 20 Jun 2024 00:57:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ShgA9r5A--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:DSPy%25E3%2581%25AE%25E7%25B4%25B9%25E4%25BB%258B%253A%2520Signal%2520Processing%25E6%258A%2580%25E8%25A1%2593%25E3%2582%2592%25E6%258E%25A1%25E7%2594%25A8%25E3%2581%2597%25E3%2581%259F%25E3%2583%259E%25E3%2582%25B7%25E3%2583%25B3%25E3%2583%25A9%25E3%2583%25BC%25E3%2583%258B%25E3%2583%25B3%25E3%2582%25B0%25E5%2590%2591%25E3%2581%2591Python%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%25E2%2586%2592%25E6%2599%2582%25E7%25B3%25BB...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E9%2588%25B4%25E6%259C%25A8%25E3%2581%2584%25E3%2581%25A3%25E3%2581%25BA%25E3%2581%2584%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTFpERFFsOWlYRnM5elNxRWZ5akxZVkRURGlNcDA0WHNOQmVDWEZhVW5McWNhNXpkOEs9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>鈴木いっぺい</dc:creator></item><item><title><![CDATA[[Python×Lambda] CloudFrontのキャッシュ削除のソースコードとテストコード]]></title><description><![CDATA[
+ 概要
+Lambda（Python）で、CloudFrontのキャッシュ削除するための、ソースコードとそのテストコード（覚え書き）
+関数のパフォーマンスを向上させるため、Lambdaのベストプラクティスに沿って、実行環境の再利用を活用して関数ハンドラー外で SDK クライアントを宣言しています
+
+ コード
+
+言語: Python3
+テストライブラリ: Pytest, moto
+
+
+ ソースコード
+
+lambda_function.py
+import boto3
+import os
+from datetime import datetime
+
+# CloudFrontクライアントとディス...]]></description><link>https://zenn.dev/c_hero/articles/b1156f70be3a62</link><guid isPermaLink="true">https://zenn.dev/c_hero/articles/b1156f70be3a62</guid><pubDate>Wed, 19 Jun 2024 14:27:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--IURYkZMr--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BPython%25C3%2597Lambda%255D%2520CloudFront%25E3%2581%25AE%25E3%2582%25AD%25E3%2583%25A3%25E3%2583%2583%25E3%2582%25B7%25E3%2583%25A5%25E5%2589%258A%25E9%2599%25A4%25E3%2581%25AE%25E3%2582%25BD%25E3%2583%25BC%25E3%2582%25B9%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2581%25A8%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ChiHaRu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk0NjI3ZjQ0OTQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ChiHaRu</dc:creator></item><item><title><![CDATA[VSCode Dev ContainersでJupyter実行環境を作ろう]]></title><description><![CDATA[
+ はじめに
+機械学習の勉強を始めようと思って、色々調べてみると、Jupyter を使って分析等を行うといいということがわかりました。
+しかし、「ローカル環境に Python + Jupyter 環境を構築するのもなぁ...」ということで、Visual Studio Code Dev Containers を使って Jupyter 実行環境を作ってみました。
+本記事では Poetry を使って Python のパッケージ管理を行いますが、お好きなパッケージ管理ツールを使っても構いません。
+また、Jupyter の実行は VS Code の Jupyter 拡張機能を使い、VS Code ...]]></description><link>https://zenn.dev/big_tanukiudon/articles/f26b145b123fb7</link><guid isPermaLink="true">https://zenn.dev/big_tanukiudon/articles/f26b145b123fb7</guid><pubDate>Wed, 19 Jun 2024 13:06:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--PRaF7nqG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:VSCode%2520Dev%2520Containers%25E3%2581%25A7Jupyter%25E5%25AE%259F%25E8%25A1%258C%25E7%2592%25B0%25E5%25A2%2583%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258D%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259F%25E3%2581%25AC%25E3%2581%258D%25E3%2581%2586%25E3%2581%25A9%25E3%2582%2593%25E5%25A4%25A7%25E7%259B%259B%25E3%2582%258A%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U0ZGMwMjI1ZGUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>たぬきうどん大盛り</dc:creator></item><item><title><![CDATA[iiif-prezi3を試す]]></title><description><![CDATA[
+ 概要
+IIIF Presentation API 3が普及しつつありますが、その仕様を理解しつつ、JSONファイルを直接作成することが難しく感じるようになりました。
+そこで、以下のPythonライブラリを使用してみましたので、備忘録です。
+https://github.com/iiif-prezi/iiif-prezi3
+以下の記事で紹介した東寺百合文書WEBで公開されているデータのIIIFへの変換にあたり、本ライブラリを使用しています。
+https://zenn.dev/nakamura196/articles/dce32fda27cc0e
+読みにくいもので恐縮ですが、ソースコード...]]></description><link>https://zenn.dev/nakamura196/articles/c07753e47ab393</link><guid isPermaLink="true">https://zenn.dev/nakamura196/articles/c07753e47ab393</guid><pubDate>Wed, 19 Jun 2024 09:44:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--rsX3eCmP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:iiif-prezi3%25E3%2582%2592%25E8%25A9%25A6%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nakamura196%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pkd3BpX1gzTWIzV3VqTnVnV2tPTlJlU3VsNFNTN1BNMWlPQm9LRm5JPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nakamura196</dc:creator></item><item><title><![CDATA[摂動と平方根の値]]></title><description><![CDATA[
+ はじめに
+(qiita に投稿していたものと完全に同じものです。）
+物理をやっている、あるいはやっていた人なら量子力学で摂動を見たことがあるだろう。この記事では、摂動を理解するための補助輪として、平方根の値を求めるコードを書いてみた。
+
+ メイン
+
+ サンプルコード
+下のコードは Julia のもの。
+function get_square_root(n::Int, x0, RHS) 
+    #nは摂動の最高次数 ε^(n-1)まで展開.
+    #RHSは知りたい平方根の値.
+    #x^2 = RHS+εにおいて、RHSはxが整数になるような数（平方数）でεが摂動項.x0^2...]]></description><link>https://zenn.dev/phlogis/articles/2c4a7ef1f25f9c</link><guid isPermaLink="true">https://zenn.dev/phlogis/articles/2c4a7ef1f25f9c</guid><pubDate>Wed, 19 Jun 2024 07:22:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---epM5Qm_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%2591%2582%25E5%258B%2595%25E3%2581%25A8%25E5%25B9%25B3%25E6%2596%25B9%25E6%25A0%25B9%25E3%2581%25AE%25E5%2580%25A4%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:phlogis%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTFlvaFBPd0F1cUdzcVFvaVNjZEFDYUtncERockx3QnVnNDBvVUFBMVptRUtyR0RnPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>phlogis</dc:creator></item><item><title><![CDATA[【取り扱い注意】偽物のGoogle Chromeの作り方]]></title><description><![CDATA[
+ 概要
+今回は，何も知らない人はほとんど気づかずクリックしちゃう偽アプリを作る方法を紹介します．ただし，Windows限定です．
+※悪用は厳禁です．あくまでエンタメとして見ていただければ幸いです．
+
+ 偽Google Chrome
+さて，今回作ったのは偽のGoogle Chromeです．
+まずは，本物のGoogle Chromeと，今回作成した偽Google Chromeを比較してみましょう．
+
+どちらが偽物だと思いますか？
+正解は，左です！
+この時点でわかった人はどのくらいいるのでしょうか．
+分かった人も，もしこれが二つ並んでいない場合でも，ちゃんと分かりますか？
+
+ 仕組み
+仕組み...]]></description><link>https://zenn.dev/muumin1107/articles/d3a50a4ae2f64e</link><guid isPermaLink="true">https://zenn.dev/muumin1107/articles/d3a50a4ae2f64e</guid><pubDate>Wed, 19 Jun 2024 03:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--r_349xKX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%258F%2596%25E3%2582%258A%25E6%2589%25B1%25E3%2581%2584%25E6%25B3%25A8%25E6%2584%258F%25E3%2580%2591%25E5%2581%25BD%25E7%2589%25A9%25E3%2581%25AEGoogle%2520Chrome%25E3%2581%25AE%25E4%25BD%259C%25E3%2582%258A%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%25A0%25E3%2582%25A6%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSkQ4U0w3dU9LQU4wVkREX2x5QS1FN05RWnk3QXUwTzh5aEo1MjhmUXplVkhrZk5NMmc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ムウ</dc:creator></item><item><title><![CDATA[居眠り検知カメラ（for Zoom）]]></title><description><![CDATA[
+ 0. システム概要
+
+
+ 1. 環境構築
+
+OpenCVのインストール
+
+$ pip install opencv-python
+
+OpenCVとはインテルが開発・公開したオープンソースのコンピュータビジョン向けライブラリ
+
+
+OBS Studioのインストール
+OBS Studio公式ダウンロードページからインストール可能
+
+
+OBS Studio（オービーエススタジオ，OBS，Open Broadcaster Software）は、OBS Projectが開発保守しているフリー・オープンなストリーミング配信・録画ソフトウェア
+
+
+Zoomのインストール
+Zoomデスクトップアプリ...]]></description><link>https://zenn.dev/muumin1107/articles/bc8671e2c51a9e</link><guid isPermaLink="true">https://zenn.dev/muumin1107/articles/bc8671e2c51a9e</guid><pubDate>Wed, 19 Jun 2024 03:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--EH2SLhgY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%25B1%2585%25E7%259C%25A0%25E3%2582%258A%25E6%25A4%259C%25E7%259F%25A5%25E3%2582%25AB%25E3%2583%25A1%25E3%2583%25A9%25EF%25BC%2588for%2520Zoom%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%25A0%25E3%2582%25A6%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSkQ4U0w3dU9LQU4wVkREX2x5QS1FN05RWnk3QXUwTzh5aEo1MjhmUXplVkhrZk5NMmc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ムウ</dc:creator></item><item><title><![CDATA[競馬シミュレーションアプリの作成]]></title><description><![CDATA[
+ はじめに
+プログラムのソースコード自体の説明よりも、どのような機能を実装したのかをユーザーやプログラムの観点から詳しく説明する。
+また、これは静岡大学 峰野研究室の夏休み課題に課すプロジェクトの際に利用しています。
+
+ 動作画面
+・馬券購入画面（AI予想付き）
+
+・レース画面（購入した馬券に色が付く）
+
+・オッズ計算画面（差分を自動計算）
+
+
+ 使用したライブラリ
+インポートした主要ライブラリの使用目的
+
+レース処理用「pandas」
+GUI実装用「PySimpleGUI」
+学習モデル操作用「pickle」
+サウンド再生用「playsound」
+
+※ 以下にインポートした全ライブラリ...]]></description><link>https://zenn.dev/muumin1107/articles/72b197085e8ae0</link><guid isPermaLink="true">https://zenn.dev/muumin1107/articles/72b197085e8ae0</guid><pubDate>Wed, 19 Jun 2024 03:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vBSBX582--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%25AB%25B6%25E9%25A6%25AC%25E3%2582%25B7%25E3%2583%259F%25E3%2583%25A5%25E3%2583%25AC%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2581%25AE%25E4%25BD%259C%25E6%2588%2590%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%25A0%25E3%2582%25A6%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSkQ4U0w3dU9LQU4wVkREX2x5QS1FN05RWnk3QXUwTzh5aEo1MjhmUXplVkhrZk5NMmc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ムウ</dc:creator></item><item><title><![CDATA[定時メール自動送信システムの作成]]></title><description><![CDATA[
+ 定時メール自動送信プログラム
+私の所属する組織には，あるルールがある，それは「毎日，その日の実施内容を全体にメールで送信しなければならない！」というルールである．
+そこで僕は考えた，毎日決まった日時にメールのタイトルとか本文とかいい感じにして送信してくれるシステムを作っちゃおう！と．．．
+
+ 1. システム概要図
+ということで，今回作った定時メール自動送信システムの全体概要図はこんな感じ．
+
+まず，毎日指定した時刻にPythonプログラムが実行されるような仕様となっている．Pythonプログラムは，プログラムが実行されたことを管理者にLINEを介して伝える．
+また，その日の日時や，メ...]]></description><link>https://zenn.dev/muumin1107/articles/f9aef15247415c</link><guid isPermaLink="true">https://zenn.dev/muumin1107/articles/f9aef15247415c</guid><pubDate>Wed, 19 Jun 2024 03:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qxt0jPYz--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%25AE%259A%25E6%2599%2582%25E3%2583%25A1%25E3%2583%25BC%25E3%2583%25AB%25E8%2587%25AA%25E5%258B%2595%25E9%2580%2581%25E4%25BF%25A1%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%25E3%2581%25AE%25E4%25BD%259C%25E6%2588%2590%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%25A0%25E3%2582%25A6%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSkQ4U0w3dU9LQU4wVkREX2x5QS1FN05RWnk3QXUwTzh5aEo1MjhmUXplVkhrZk5NMmc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ムウ</dc:creator></item><item><title><![CDATA[PythonのpypdfでPDFを分割して保存]]></title><description><![CDATA[毎月の事務作業でPDFを分割してリネームするという作業があるのですがPythonを使って自動化してみました。
+PDF操作はPythonの標準ライブラリで対応できないので、今回は「pypdf」を利用します。
+https://pypi.org/project/pypdf/
+まずは以下のコマンドでインストールしておきます。
+pip install pypdf
+Pythonはpdf.pyという名前で以下のように記述しています。
+AABBCCDD.pdfをAA.pdf、BB.pdf、CC.pdf、DD.pdfに分割して書き出すというスクリプトです。
+
+pdf.py
+from pypdf impor...]]></description><link>https://zenn.dev/tor_inc/articles/56b69b6fd240f0</link><guid isPermaLink="true">https://zenn.dev/tor_inc/articles/56b69b6fd240f0</guid><pubDate>Wed, 19 Jun 2024 02:24:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--OwNAyR62--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25AEpypdf%25E3%2581%25A7PDF%25E3%2582%2592%25E5%2588%2586%25E5%2589%25B2%25E3%2581%2597%25E3%2581%25A6%25E4%25BF%259D%25E5%25AD%2598%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E8%25A5%25BF%25E7%2595%2591%25E4%25B8%2580%25E9%25A6%25AC%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg2YWFmMzM0ZWIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2583%2588%25E3%2582%25A5%25E3%2583%25BC%25E3%2582%25A2%25E3%2583%25BC%25E3%2583%25AB%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2hjcTRUQ3g5VWFxZ3VsSktVal9MQXpFVk5MYmxsaGRuYlVGZkxOUUE9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>西畑一馬</dc:creator></item><item><title><![CDATA[初心者のPython3レッスンーーPython3集合（set）]]></title><description><![CDATA[
+ シーリズの目次
+初心者のPython3レッスンをここにまとめています。
+https://zenn.dev/datasciencekun/articles/319e0f4b4021c5
+Pythonの集合（set）は、ユニークな要素の無序コレクションを表します。集合は重複を許さず、順序を保持しません。集合は数学的な集合論に基づく操作（和、積、差など）が可能で、リストやタプルと同様に便利なデータ型です。
+
+ 集合の作成
+集合を作成するには、set() コンストラクタを使うか、中括弧 {} を使います。ただし、空の集合を作成するには、set() を使用しなければなりません（{} は空の辞書...]]></description><link>https://zenn.dev/datasciencekun/articles/ed70c05348bce1</link><guid isPermaLink="true">https://zenn.dev/datasciencekun/articles/ed70c05348bce1</guid><pubDate>Wed, 19 Jun 2024 01:26:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GDu0BtNQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E3%2581%25AEPython3%25E3%2583%25AC%25E3%2583%2583%25E3%2582%25B9%25E3%2583%25B3%25E3%2583%25BC%25E3%2583%25BCPython3%25E9%259B%2586%25E5%2590%2588%25EF%25BC%2588set%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%25B5%25E3%2582%25A4%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B9%25E5%2590%259B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE1MTEwODMxZmQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>データサイエンス君</dc:creator></item><item><title><![CDATA[[C++]Pythonに追いつきたい! subprocessの実装]]></title><description><![CDATA[
+ この記事の対象読者
+Pythonのsubprocessモジュールの使われ方を見たとき、「えっ、こんな手軽な使い方が出来るんだ！」と、感じた事はないでしょうか？C++でも手軽に子プロセスを使いたい、そんな方向けの記事です。Windows固有の非同期IOのアーキテクテャを使っていますので、他のOS向けへの移植は出来ません。OVERLAPPED構造体、ReadFileEx、WriteFileExなど、stdライブラリより下層のAPIを使い、シングルスレッド、ノンプリエンティブマルチタスク向けの、古風な記法で書かれています。
+　また、このプログラムを使ったSSHの接続の仕方の記事を、次回以降...]]></description><link>https://zenn.dev/goldsmith/articles/34a61a41d57641</link><guid isPermaLink="true">https://zenn.dev/goldsmith/articles/34a61a41d57641</guid><pubDate>Tue, 18 Jun 2024 21:00:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4Cksh_8---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BC%252B%252B%255DPython%25E3%2581%25AB%25E8%25BF%25BD%25E3%2581%2584%25E3%2581%25A4%25E3%2581%258D%25E3%2581%259F%25E3%2581%2584%2521%2520subprocess%25E3%2581%25AE%25E5%25AE%259F%25E8%25A3%2585%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:GoldSmith%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS3c5WVdrYnhpV3ZjMC1adW9fN0JibWtxVUZyVU5aaUgwU1BqNWJUemFsajNKQkJRPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>GoldSmith</dc:creator></item><item><title><![CDATA[ryeを使って任意のバージョンのPython仮想環境(venv, pipenv, poetry)を構築するメモ]]></title><description><![CDATA[何を言っているか分からないタイトルになってしまったが、
+ryeをがっつり使うのではなく、ryeの指定した任意のバージョンのPythonをダウンロードして使用できる機能だけを利用して、実際の環境構築・管理は他のツールでやることも出来る、というメモ
+
+ はじめに
+rye:
+https://rye.astral.sh/
+の特徴・利点の一つに、
+https://rye.astral.sh/guide/toolchains/
+に書いてあるように、
+https://github.com/indygreg/python-build-standalone
+を利用して指定したバージョンのCPythonをダ...]]></description><link>https://zenn.dev/junkor/articles/82e5a2f84c2a48</link><guid isPermaLink="true">https://zenn.dev/junkor/articles/82e5a2f84c2a48</guid><pubDate>Tue, 18 Jun 2024 15:59:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fTL-DOYv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:rye%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E4%25BB%25BB%25E6%2584%258F%25E3%2581%25AE%25E3%2583%2590%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%25A7%25E3%2583%25B3%25E3%2581%25AEPython%25E4%25BB%25AE%25E6%2583%25B3%25E7%2592%25B0%25E5%25A2%2583%2528venv%252C%2520pipenv%252C%2520poetry%2529%25E3%2582%2592%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2599%25E3%2582%258B%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:7e%252B8%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2Rhcmsvai5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>7e+8</dc:creator></item><item><title><![CDATA[【力学系超入門】平衡点の分岐：線形安定性解析【Python】]]></title><description><![CDATA[
+ 1. 力学系
+
+ 力学系とは
+力学系（Dynamical System）は、時間ともに動的に変化するシステムを意味する。力学系の目的は、システムの状態がどのように時間発展するかを理解し、そのパターンや特性を解析することである。
+例えば、これまで以下のような分野で応用されてきた。
+
+物理学：天体力学
+工学：制御理論、電気回路
+生物学：生態系のモデリング
+経済学：市場のダイナミクス
+
+上記の内容を見てわかる通り、力学系は連続時間の微分方程式と離散時間の差分方程式で数理モデル化されたシステムについて取り扱う。
+この記事では力学系の分岐について説明する。元ネタは小室元政『新版 基礎からの力学...]]></description><link>https://zenn.dev/hk_ilohas/articles/dynamic-bunki</link><guid isPermaLink="true">https://zenn.dev/hk_ilohas/articles/dynamic-bunki</guid><pubDate>Tue, 18 Jun 2024 14:19:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--StEYUgO0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%258A%259B%25E5%25AD%25A6%25E7%25B3%25BB%25E8%25B6%2585%25E5%2585%25A5%25E9%2596%2580%25E3%2580%2591%25E5%25B9%25B3%25E8%25A1%25A1%25E7%2582%25B9%25E3%2581%25AE%25E5%2588%2586%25E5%25B2%2590%25EF%25BC%259A%25E7%25B7%259A%25E5%25BD%25A2%25E5%25AE%2589%25E5%25AE%259A%25E6%2580%25A7%25E8%25A7%25A3%25E6%259E%2590%25E3%2580%2590Python%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25BF%25E3%2582%2583%25E3%2581%2586%2520%252F%2520HK_ilohas%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE2NjgyYTA0ODguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>みゃう / HK_ilohas</dc:creator></item><item><title><![CDATA[RAGの手法（Self-RAG, Adaptive RAG, CRAG）ざっくりまとめ🌠]]></title><description><![CDATA[
+ 概要
+RAGは新たな手法が様々紹介されています。
+本記事ではLangChainでサンプルコードが紹介されている下記のRAGについて紹介します。
+
+Self-RAG
+Adaptive RAG
+Corrective-RAG (CRAG)
+
+!
+2024/06/17時点の情報を確認しています。
+https://github.com/langchain-ai/langgraph/tree/main/examples/rag
+
+
+ RAGの有用性
+RAGはLLMに対して外部の知識ベースを提供することでLLMの回答精度を良くするために効果的な手法の一つです。例えば企業で内部的にしか使用されていな...]]></description><link>https://zenn.dev/mizunny/articles/a92d95a26da32e</link><guid isPermaLink="true">https://zenn.dev/mizunny/articles/a92d95a26da32e</guid><pubDate>Tue, 18 Jun 2024 09:10:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1FiSu4Rr--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:RAG%25E3%2581%25AE%25E6%2589%258B%25E6%25B3%2595%25EF%25BC%2588Self-RAG%252C%2520Adaptive%2520RAG%252C%2520CRAG%25EF%25BC%2589%25E3%2581%2596%25E3%2581%25A3%25E3%2581%258F%25E3%2582%258A%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%2520%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mizuchan%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg2MGEyODIyYWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mizuchan</dc:creator></item><item><title><![CDATA[初心者のPython3レッスンーーPython3辞書型（dict）]]></title><description><![CDATA[
+ シーリズの目次
+初心者のPython3レッスンをここにまとめています。
+https://zenn.dev/datasciencekun/articles/319e0f4b4021c5
+Pythonの辞書型（dict）は、キーと値のペアを格納するデータ構造です。辞書は変更可能（ミュータブル）で、キーは一意でなければなりませんが、値は重複しても構いません。辞書は以下の特徴を持っています。
+
+キーと値のペア: 辞書はキーと値のペアを持ちます。キーを使って対応する値にアクセスします。
+順序: Python 3.7以降では、辞書の要素は挿入された順序を保持します。
+変更可能: 辞書は作成後に要...]]></description><link>https://zenn.dev/datasciencekun/articles/af3ed9f2bcb50a</link><guid isPermaLink="true">https://zenn.dev/datasciencekun/articles/af3ed9f2bcb50a</guid><pubDate>Tue, 18 Jun 2024 00:53:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--G-fgiyXh--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E3%2581%25AEPython3%25E3%2583%25AC%25E3%2583%2583%25E3%2582%25B9%25E3%2583%25B3%25E3%2583%25BC%25E3%2583%25BCPython3%25E8%25BE%259E%25E6%259B%25B8%25E5%259E%258B%25EF%25BC%2588dict%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%25B5%25E3%2582%25A4%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B9%25E5%2590%259B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE1MTEwODMxZmQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>データサイエンス君</dc:creator></item><item><title><![CDATA[Python Mockを使用したテストの書き方]]></title><description><![CDATA[モック技術は、単体テストや統合テストを行う際に非常に有用です。実際の依存関係を模倣し、予測可能で制御可能な環境でテストを行うことができます。この記事では、モック技術を使用したテストの方法を解説し、具体的なサンプルコードを提供します。
+
+ 目次
+
+モック技術とは
+モック技術の利点
+テストケースの概要
+モックを使ったテストの準備
+テストケースの解説
+サンプルコード
+
+
+ 1. モック技術とは
+モック技術は、テスト中に依存する外部リソース（例えば、データベース、外部API、ファイルシステムなど）を模倣する方法です。モックオブジェクトは、実際のオブジェクトの代わりに使用され、テストが予測可能で制...]]></description><link>https://zenn.dev/sakaki_web/articles/f9a1e78dbc995e</link><guid isPermaLink="true">https://zenn.dev/sakaki_web/articles/f9a1e78dbc995e</guid><pubDate>Tue, 18 Jun 2024 00:31:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bWaxqK71--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%2520Mock%25E3%2582%2592%25E4%25BD%25BF%25E7%2594%25A8%25E3%2581%2597%25E3%2581%259F%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E3%2581%25AE%25E6%259B%25B8%25E3%2581%258D%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:sakaki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ5YjRlYTI3YjcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sakaki</dc:creator></item></channel></rss>

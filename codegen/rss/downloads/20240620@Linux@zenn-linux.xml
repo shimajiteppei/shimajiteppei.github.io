@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Linux」のフィード]]></title><description><![CDATA[Zennのトピック「Linux」のRSSフィードです]]></description><link>https://zenn.dev/topics/linux</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/860a9eb1e4.png</url><title>Zennの「Linux」のフィード</title><link>https://zenn.dev/topics/linux</link></image><generator>zenn.dev</generator><lastBuildDate>Thu, 20 Jun 2024 09:10:40 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/linux/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[【Systemwalker】拡張ユーザ機能を設定してみる]]></title><description><![CDATA[
+ はじめに
+Systemwalker Operation Managerにて拡張ユーザ機能の設定を実施してみます。
+
+ 拡張ユーザ機能とは？
+
+OS上に作成したユーザとは別にSystemwalker Operation Manager独自のユーザを設定・管理できる機能
+UNIX限定(LinuxやSolaris等)
+
+
+ 環境
+
+RHEL9.2
+
+$ cat /etc/redhat-release
+Red Hat Enterprise Linux release 9.2 (Plow)
+$
+
+Systemwalker Operation Manager Standard Edition V...]]></description><link>https://zenn.dev/supersatton/articles/b2697f69050d65</link><guid isPermaLink="true">https://zenn.dev/supersatton/articles/b2697f69050d65</guid><pubDate>Wed, 19 Jun 2024 11:48:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Nm6PYEvB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Systemwalker%25E3%2580%2591%25E6%258B%25A1%25E5%25BC%25B5%25E3%2583%25A6%25E3%2583%25BC%25E3%2582%25B6%25E6%25A9%259F%25E8%2583%25BD%25E3%2582%2592%25E8%25A8%25AD%25E5%25AE%259A%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Massu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdmMzBiMTIwZDEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Massu</dc:creator></item><item><title><![CDATA[Rustのno_stdでHello World!(Linux on aarch64)]]></title><description><![CDATA[
+ no_stdでHello World!をしたい
+libcを使わずに直でシステムコールを呼び出したい欲求はプログラマの三大欲求のうちの一つであるため（？）、
+欲求に従って手元のmacでこちらの記事を参考にシステムコールを呼び出そうとしたところ、archが違うのだから呼び出し規約も違うという現実に突き当たった(そうだねという感じ)
+なんとかなったため、なんとかした方法を紹介する
+(mac上でlinuxシステムコールを呼び出す方法は普通にDockerとかdevcontainerをコネコネした)
+
+ aarch64のsyscall convention
+x86_64ではraxレジスタに呼び出...]]></description><link>https://zenn.dev/maetin/articles/0af71169d67404</link><guid isPermaLink="true">https://zenn.dev/maetin/articles/0af71169d67404</guid><pubDate>Wed, 19 Jun 2024 07:32:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--030yk7C4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25AEno_std%25E3%2581%25A7Hello%2520World%2521%2528Linux%2520on%2520aarch64%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:maetin%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSXdFWlE3dWUxYjlsRUFrZW5GS2JxbmZMX1NPNmxodTh0MG1PX1FhcVBMRzRFT2xvMTg9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>maetin</dc:creator></item><item><title><![CDATA[rsyncでローカルPCのディレクトリをVPSサーバにコピーする]]></title><description><![CDATA[rsyncを利用すれば、２つのコンピュータやリモートサーバとの間で、前回の同期から追加、変更された部分のみを効率よく複製することができます。[1]
+今回はローカルPCのディレクトリをVPSサーバにssh接続で複製する方法を紹介します。
+（複製時間も短く、すごく使い勝手がいいです！個人開発でおすすめかも）
+
+ 環境・構成
+言語習得のために発音を反復練習するアプリを作成しました。
+
+Github
+
+フロントエンド：Sveltekit
+バックエンド：Django, Django Rest Framework
+データベース：PostgreSQL
+サーバー：さくらのVPS Debian Linux...]]></description><link>https://zenn.dev/sakiadachi/articles/806ed45630b99e</link><guid isPermaLink="true">https://zenn.dev/sakiadachi/articles/806ed45630b99e</guid><pubDate>Wed, 19 Jun 2024 05:36:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8pX1VFCg--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:rsync%25E3%2581%25A7%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25AB%25E3%2583%25ABPC%25E3%2581%25AE%25E3%2583%2587%25E3%2582%25A3%25E3%2583%25AC%25E3%2582%25AF%25E3%2583%2588%25E3%2583%25AA%25E3%2582%2592VPS%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2581%25AB%25E3%2582%25B3%25E3%2583%2594%25E3%2583%25BC%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2596%25E3%2581%258D%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFiYWMwZTcxYzguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ざき</dc:creator></item><item><title><![CDATA[Arch Linuxのインストールメディアと同じ環境をインストールする方法]]></title><description><![CDATA[
+ 更新履歴
+
+2024-06-19: Hayao0819さんの指摘を受けて、cp -rを使用した方法から、unsquashfsを使用した手法に変更
+
+
+ はじめに
+初投稿です。（二個書こうとして完成させていない記事があるがどうしようか…）
+archlinuxjpのslackを見て、
+
+
+Arch Linuxのインストールメディアと同じ環境をインストールできれば検証など何かに使えそう
+他人に説明するのに記事という形にするのが良さそう
+
+と思い、出来そうではあったけれど、実際にやってみたら本当にできたので記事にしてみました。
+
+ 前提
+今回は検証目的なので、インストールメディアからの変更点...]]></description><link>https://zenn.dev/naokisz/articles/how-to-install-same-environment-as-arch-linux-cd</link><guid isPermaLink="true">https://zenn.dev/naokisz/articles/how-to-install-same-environment-as-arch-linux-cd</guid><pubDate>Tue, 18 Jun 2024 17:56:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vmuY7WX3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Arch%2520Linux%25E3%2581%25AE%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2583%25A1%25E3%2583%2587%25E3%2582%25A3%25E3%2582%25A2%25E3%2581%25A8%25E5%2590%258C%25E3%2581%2598%25E7%2592%25B0%25E5%25A2%2583%25E3%2582%2592%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:naokisz%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pYNFRQU3VtcjM3bzUwZktFbHJjaTloeXZBU2k5V2ZPd3JrVXR3NG5zPXMyNTAtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>naokisz</dc:creator></item><item><title><![CDATA[Oracle Cloud ComputingにDebian(などのディストリビューション)をインストールする方法]]></title><description><![CDATA[最近Oracle CloudのarmのFree Tierを使えるようになったので使おうとしたのですが、作成時に選べるイメージに使い慣れたDebianがありません。
+オブジェクトストレージにイメージをアップロードすればカスタムイメージを使えるようですが、容量をなるべく使いたくなかったのとインストール時のオプションを変更したいと思い探したところnetboot.xyzというものが使えることがわかったので紹介します。
+ちなみにDebian以外の様々なLinuxを入れることができます。
+参考:
+https://netboot.xyz/docs/kb/providers/oci
+
+ 1. インスタン...]]></description><link>https://zenn.dev/nazo6/articles/oracle-cloud-debian</link><guid isPermaLink="true">https://zenn.dev/nazo6/articles/oracle-cloud-debian</guid><pubDate>Tue, 18 Jun 2024 15:34:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--sE3K0h8r--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Oracle%2520Cloud%2520Computing%25E3%2581%25ABDebian%2528%25E3%2581%25AA%25E3%2581%25A9%25E3%2581%25AE%25E3%2583%2587%25E3%2582%25A3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25AA%25E3%2583%2593%25E3%2583%25A5%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%2529%25E3%2582%2592%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nazo6%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc0YTA4ZjY1ZTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nazo6</dc:creator></item><item><title><![CDATA[web socketを使用してリアルタイムチャットを作成する]]></title><description><![CDATA[
+ 基本知識
+ソケット、Webソケットの基礎的な部分について軽くまとめる。
+
+ 参考資料
+以下のページが個人的には綺麗に整理されている印象。
+TCP/IPとは？通信プロトコルの階層モデルを図解で解説
+
+ ソケットとは
+TCP/IPの層よりも上位レイヤのプログラミング実装が、TCP/IPにアクセスするために必要なのが「ソケット」というインターフェース。
+（アプリケーション層：HTTP, FTP, POP3…）
+アプリケーション層とトランスポート層のインターフェースになるコンポーネント。
+
+ ソケット通信とは
+上記の「ソケット」以下の層、webエンジニアの視点から見ると、TCP/IP層の技術...]]></description><link>https://zenn.dev/t_unity/articles/815bcdc2cbcfb3</link><guid isPermaLink="true">https://zenn.dev/t_unity/articles/815bcdc2cbcfb3</guid><pubDate>Tue, 18 Jun 2024 00:44:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--t9YFJCay--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:web%2520socket%25E3%2582%2592%25E4%25BD%25BF%25E7%2594%25A8%25E3%2581%2597%25E3%2581%25A6%25E3%2583%25AA%25E3%2582%25A2%25E3%2583%25AB%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25A0%25E3%2583%2581%25E3%2583%25A3%25E3%2583%2583%25E3%2583%2588%25E3%2582%2592%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:T-unity%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VlNmE4OWE4YTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>T-unity</dc:creator></item><item><title><![CDATA[環境を汚さすにHunspellを動かす（Mac編）]]></title><description><![CDATA[
+ 概要
+静的なスペルチェックを使ったツールを作りたいと思ったときに、ispell,aspell..系のツールを使おうと思いついた。ただ色々な人やビルドマシンで広くツール化するとしたら環境に依存しない使い方をしたい。
+そのためにツールをバイナリ化して配布するような仕組みが簡単にできそうか調べてみた。Hunspellだと簡単にできそうだったのでその方法をメモしておこうと思う
+（aspellでもできそうな感じはしたがconfigureの中身を読むのが億劫になってしまい断念）
+
+ 環境
+MacOS想定、CPUは関係ない(はず)
+
+ Hunspellをmakeするまで
+公式リポジトリの説明どおり...]]></description><link>https://zenn.dev/masaki_mori72/articles/3b9f55b9c6b5ec</link><guid isPermaLink="true">https://zenn.dev/masaki_mori72/articles/3b9f55b9c6b5ec</guid><pubDate>Mon, 17 Jun 2024 07:53:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--CdvOlSrd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%2592%25B0%25E5%25A2%2583%25E3%2582%2592%25E6%25B1%259A%25E3%2581%2595%25E3%2581%2599%25E3%2581%25ABHunspell%25E3%2582%2592%25E5%258B%2595%25E3%2581%258B%25E3%2581%2599%25EF%25BC%2588Mac%25E7%25B7%25A8%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:masaki%2520mori%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2h0Zy0zeERLZF9VY19OaFA0TVB2S1BqRkNFc2JrV1loSk5aTV9LPXMyNTAtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>masaki mori</dc:creator></item><item><title><![CDATA[dhclient による IP アドレスの再取得]]></title><description><![CDATA[
+ 概要
+Ubuntu 22.04 で有線接続の不具合が発生
+
+
+git clone や git submodule update で重いデータをダウンロードすると有線接続が切れる
+コンピュータの再起動や systemctl restart NetworkManager の実行では解決せず
+
+dhclient で IP アドレスを再取得することで解決したのでメモ
+
+
+ 手順
+
+
+nmcli でプロファイル名を確認$ nmcli
+eno1: connected to Wired connection 1
+        "Intel I219-LM"
+        ...
+
+
+
+dhcl...]]></description><link>https://zenn.dev/g_ohara/articles/dhclient-ip-setting</link><guid isPermaLink="true">https://zenn.dev/g_ohara/articles/dhclient-ip-setting</guid><pubDate>Mon, 17 Jun 2024 05:06:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--TdqCM-02--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:dhclient%2520%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258B%2520IP%2520%25E3%2582%25A2%25E3%2583%2589%25E3%2583%25AC%25E3%2582%25B9%25E3%2581%25AE%25E5%2586%258D%25E5%258F%2596%25E5%25BE%2597%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:g-ohara%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSnkwRUs2OEV1OUtqRG9pTEZXSlg5b3M0RjAtVWpZU3Z6MElyWkpxRlhrdnNUNERpYXU5Zz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>g-ohara</dc:creator></item><item><title><![CDATA[実践！Hyper-Vで開発環境構築! CentOS7+VSCode+Laravel 第４話～centOS7初期セットアップ編]]></title><description><![CDATA[
+ はじめに
+これは初めてhyper-VでCentOS7を使用する人向けの記事です
+
+ 前提
+
+
+Hyper-Vにインストール済みのCentOS7(ver: 7.9)
+この記事ではHyper-VにインストールされたCentOS7での初期セットアップ
+の手順等を解説します。
+CentOS7のバージョン確認するにはCentOSを起動して以下コマンドを実行してください。
+cat /etc/centos-release
+
+Linux release 7.9.2009 (core)
+と表示されればOKです
+もしそうでなければ、以下記事を参考に導入してから本記事を閲覧頂ければと思います。
+
+
+
+
+
+...]]></description><link>https://zenn.dev/kudosho/articles/70e08c82b103e4</link><guid isPermaLink="true">https://zenn.dev/kudosho/articles/70e08c82b103e4</guid><pubDate>Sun, 16 Jun 2024 16:36:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--DSlsH9OF--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%25AE%259F%25E8%25B7%25B5%25EF%25BC%2581Hyper-V%25E3%2581%25A7%25E9%2596%258B%25E7%2599%25BA%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%2521%2520CentOS7%252BVSCode%252BLaravel%2520%25E7%25AC%25AC%25EF%25BC%2594%25E8%25A9%25B1%25EF%25BD%259EcentOS7%25E5%2588%259D%25E6%259C%259F%25E3%2582%25BB%25E3%2583%2583...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kudo%2520sho%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0ZjhjNmZfYWJMMC1NN2FGdVFaUzVxdC1XWlM5QkNycll4MnpydzAwSGs9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kudo sho</dc:creator></item><item><title><![CDATA[Arch linux初心者がArch linuxをインストールする]]></title><description><![CDATA[こんばんわ。
+私はプライベートでは、Linuxを使っています。
+今まではUbuntuを使用していたのですが、
+
+最新のneovimをaptからインストールすることができなかったり
+_aptでエラーが起きた
+ので他のディストリビューションを試そうとして endeavorOSを使用していました。
+
+https://endeavouros.com/
+Arch系でインストールしやすいディストリビューションですごくよかったです。
+Arch系のディストリビューションについては、他の記事を参照してください。
+話が飛びましたが、今回はArch linuxをインストールする手順をまとめていきたいと思います...]]></description><link>https://zenn.dev/hkt100rtkn/articles/effdc2766cb172</link><guid isPermaLink="true">https://zenn.dev/hkt100rtkn/articles/effdc2766cb172</guid><pubDate>Sun, 16 Jun 2024 15:38:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8_rD3xek--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Arch%2520linux%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E3%2581%258CArch%2520linux%25E3%2582%2592%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hkt100rtkn%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2p1S09jSXQxTHJMbWV6Nmk2RFFpeDdQSmJmX1Z0VnRiSmlGQ2p0cFE9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hkt100rtkn</dc:creator></item><item><title><![CDATA[【30days自作OS開発記録】2日目-Part2:Makefileという魔法アイテムを活用してOSを作る。]]></title><description><![CDATA[
+ はじめに
+こんにちは！タクーシュだワン！
+ここ最近、ニコニコ動画やKADOKAWAなど名だたるITサービスや基幹システムのシステム障害が話題になっているが、他人事のように見ているエンジニアはもしその事態が起こった時にどう対応するか考える癖をつけないといざという時の対応に困るので、しっかりネガティブシミュレーションをしておくのだ。
+さて、これまではコマンドを一個一個入力しながらOSを立ち上げていた訳ですが、これをやっているとビルドするファイル数が増えた時ににっちもさっちもいかずかなり時間がかかってめんどくあさいと思わない？
+どうせなら、入力しているコマンドをバッチファイルのように複数の...]]></description><link>https://zenn.dev/taku_philoso32/articles/70b3b62d7d63ca</link><guid isPermaLink="true">https://zenn.dev/taku_philoso32/articles/70b3b62d7d63ca</guid><pubDate>Sun, 16 Jun 2024 14:17:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0VGZuctS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%259030days%25E8%2587%25AA%25E4%25BD%259COS%25E9%2596%258B%25E7%2599%25BA%25E8%25A8%2598%25E9%258C%25B2%25E3%2580%25912%25E6%2597%25A5%25E7%259B%25AE-Part2%253AMakefile%25E3%2581%25A8%25E3%2581%2584%25E3%2581%2586%25E9%25AD%2594%25E6%25B3%2595%25E3%2582%25A2%25E3%2582%25A4%25E3%2583%2586%25E3%2583%25A0%25E3%2582%2592%25E6%25B4%25BB%25E7%2594%25A8%25E3%2581%2597%25E3%2581%25A6OS%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%25E3%2580%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25BF%25E3%2582%25AF%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A5%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y3YzI4YWMzOGYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>タクーシュ</dc:creator></item><item><title><![CDATA[The Battle with Gentoo (環境構築)]]></title><description><![CDATA[
+ 概要
+前回インストールした Gentoo は、ブラウザもなく、日本語も打てない状態ですので、必要なソフトウェアのインストールと設定の備忘録とします。最適化カーネルのリビルドは次のタスクですね
+https://zenn.dev/articles/022014db852916/edit
+
+ Swap
+オンにしてませんでした
+mkswap /dev/nvme0n1p2
+swapon /dev/nvme0n1p2
+swapon --show
+
+ Chromium
+今回は X なので wayland を除外
+USE="-wayland -screencast"
+L10N="ja"
+Chromi...]]></description><link>https://zenn.dev/exelion/articles/34fd4f8f4dd03b</link><guid isPermaLink="true">https://zenn.dev/exelion/articles/34fd4f8f4dd03b</guid><pubDate>Sun, 16 Jun 2024 13:54:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qWwg8zmm--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:The%2520Battle%2520with%2520Gentoo%2520%2528%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kei%2520Sawamura%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI0MWNlZWQ3ZWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kei Sawamura</dc:creator></item><item><title><![CDATA[linuxでsteamのゲームをtype-cで給電しながらやっていたら遅くなった。むしろ給電しないほうが速かった]]></title><description><![CDATA[マジかよって感じ・・・
+nvidia-settingsでPowerMizerの項目を見ていて発見
+Power Sourceの項目がBatteryになっていると、Performance Levelsが1や2を行き来して、Graphics Clockも通常通り。
+ただ、（多分）usb type-cとかで給電して、電力量が少し不足していると、Power SourceがUndersizedになる。
+このままだと、まだPerformance Levelsが1とか2だったりするが、ゲーム等の処理が重いものを起動したタイミングとかでPerformance Levelsが0になって、Graphics C...]]></description><link>https://zenn.dev/suba/articles/3f459586a13614</link><guid isPermaLink="true">https://zenn.dev/suba/articles/3f459586a13614</guid><pubDate>Sat, 15 Jun 2024 16:22:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9m7_c0Gb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:linux%25E3%2581%25A7steam%25E3%2581%25AE%25E3%2582%25B2%25E3%2583%25BC%25E3%2583%25A0%25E3%2582%2592type-c%25E3%2581%25A7%25E7%25B5%25A6%25E9%259B%25BB%25E3%2581%2597%25E3%2581%25AA%25E3%2581%258C%25E3%2582%2589%25E3%2582%2584%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%2584%25E3%2581%259F%25E3%2582%2589%25E9%2581%2585%25E3%2581%258F%25E3%2581%25AA%25E3%2581%25A3%25E3%2581%259F%25E3%2580%2582%25E3%2582%2580%25E3%2581%2597%25E3%2582%258D%25E7%25B5%25A6%25E9%259B%25BB%25E3%2581%2597%25E3%2581%25AA%25E3%2581%2584%25E3%2581%25BB%25E3%2581%2586%25E3%2581%258C%25E9%2580%259F%25E3%2581%258B%25E3%2581%25A3%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:suba%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdkZTQxMzg4NzYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>suba</dc:creator></item><item><title><![CDATA[Docker on Lima を M1 mac で試してみる]]></title><description><![CDATA[
+ 概要
+Docker Desktop for Mac にヘイトが溜まってきたので速いという噂の Lima を使いたい。
+公式から yaml を取ってくる方法がうまくいかなかったので別の方法で試した
+
+ Lima
+https://lima-vm.io/
+
+Lima launches Linux virtual machines with automatic file sharing and port forwarding (similar to WSL2).
+
+mac上で軽量&amp;楽にLinuxを建てられる優れもの。WSL2と同じような使い方ができると思っておいて良さそう
+詳しくは ...]]></description><link>https://zenn.dev/higakin/articles/00824dd8dbb6cb</link><guid isPermaLink="true">https://zenn.dev/higakin/articles/00824dd8dbb6cb</guid><pubDate>Sat, 15 Jun 2024 14:01:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--m7LPiGI5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%2520on%2520Lima%2520%25E3%2582%2592%2520M1%2520mac%2520%25E3%2581%25A7%25E8%25A9%25A6%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:snowindy%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pfalA0RUVIaDhadXlXZy1SbG15WU96R3laVXRMVWZUaEdWNDN4blBzPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>snowindy</dc:creator></item><item><title><![CDATA[HTB Academyに挑戦：WSL2とKali Linuxでサイバーセキュリティの学習環境を作ろう]]></title><description><![CDATA[
+ 概要
+この記事では、Windows Subsystem for Linux 2（WSL2）でKali Linuxをセットアップし、HTB AcademyでのVPNファイルの読み込みとSSHを用いて課題マシンへ接続する方法を解説します。
+
+
+
+ この記事の対象者
+
+HTB Academyで体系的にサイバーセキュリティ理論を学びたい人
+Windows11上でWSL2を使ってKali Linuxを利用したい人
+何から手を付ければいいか分からない未経験者
+上手くいかなくてもすぐに諦めない人
+
+筆者自身が躓いたり疑問に思って調べたことを盛り込んでいます。初心者歓迎です。
+この記事に辿り着いてい...]]></description><link>https://zenn.dev/forwardone/articles/f30a0ee8ffd1c2</link><guid isPermaLink="true">https://zenn.dev/forwardone/articles/f30a0ee8ffd1c2</guid><pubDate>Sat, 15 Jun 2024 08:19:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5Xg5JQ95--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:HTB%2520Academy%25E3%2581%25AB%25E6%258C%2591%25E6%2588%25A6%25EF%25BC%259AWSL2%25E3%2581%25A8Kali%2520Linux%25E3%2581%25A7%25E3%2582%25B5%25E3%2582%25A4%25E3%2583%2590%25E3%2583%25BC%25E3%2582%25BB%25E3%2582%25AD%25E3%2583%25A5%25E3%2583%25AA%25E3%2583%2586%25E3%2582%25A3%25E3%2581%25AE%25E5%25AD%25A6%25E7%25BF%2592%25E7%2592%25B0%25E5%25A2%2583%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258D%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Shin%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q5YjhhZmI2YWIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Shin</dc:creator></item><item><title><![CDATA[Ubuntuでのディスク追加手順(LVM)]]></title><description><![CDATA[
+ はじめに
+Ubuntuにディスクを追加してLVMを構成する手順について紹介する。
+LVMを構成する際は以下の流れで作成する。
+パーティション作成
+PV(Phisical Volume)作成
+VG(Volume Group)作成
+LV(Logical Volume)作成
+
+ 確認
+まずはディスク追加直後の状態を確認する。
+今回は32GBのディスクを2つ追加し、そこにLVMを構成する。
+root@test-ubuntu01:~# lsblk | grep -E 32G
+sda       8:0    0   32G  0 disk
+sdb       8:16   0   32G  0...]]></description><link>https://zenn.dev/pamesan/articles/f52bef3a6a9fc8</link><guid isPermaLink="true">https://zenn.dev/pamesan/articles/f52bef3a6a9fc8</guid><pubDate>Sat, 15 Jun 2024 05:09:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--OG3zM1kL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ubuntu%25E3%2581%25A7%25E3%2581%25AE%25E3%2583%2587%25E3%2582%25A3%25E3%2582%25B9%25E3%2582%25AF%25E8%25BF%25BD%25E5%258A%25A0%25E6%2589%258B%25E9%25A0%2586%2528LVM%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:pamesan%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSjhLWktVMjJQYjF4XzMxNG5ydzNmR2hsZ1AyTHpqNjctYTdrUk5tcU1fRHZIeHgxOD1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>pamesan</dc:creator></item><item><title><![CDATA[OS別コマンド操作あれこれ]]></title><description><![CDATA[windowsコマンドプロンプトとmacOSターミナルとlinuxターミナルを同時に使うと、
+OSでは使えないコマンドをたたいていることに気づかず
+時間をつぶすことが多々あるので備忘録として残します。
+以降コマンドプロンプト＝ターミナルとして書いています。
+macOSはlinuxの系統にいるので、たいていlinuxで使えるコマンドはmacOSでも使えます。
+
+ フォルダ構造をみる
+
+ windows
+ターミナルで実行した場合はこれ。
+dir
+PowerShellの場合はこれでもできる
+# フォルダ構造を全部表示
+ls
+
+ linux/macOS
+# フォルダ構造を全部表示したいとき
+ls...]]></description><link>https://zenn.dev/tanaa/articles/c407b0278f0878</link><guid isPermaLink="true">https://zenn.dev/tanaa/articles/c407b0278f0878</guid><pubDate>Sat, 15 Jun 2024 02:17:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--53dCQoJH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:OS%25E5%2588%25A5%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E6%2593%258D%25E4%25BD%259C%25E3%2581%2582%25E3%2582%258C%25E3%2581%2593%25E3%2582%258C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tana%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2EyY2I1YzE4NzYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tana</dc:creator></item><item><title><![CDATA[MySQLでDBサーバ構築してレプリケーションさせる]]></title><description><![CDATA[参考
+① https://videohub.oracle.com/media/MySQL 8.0 入門セミナー ～インストール編 for Linux &amp; アーキテクチャ編～ (2022年6月16日)/1_ph7s6hxj
+②MySQL公式ドキュメント：https://dev.mysql.com/doc/refman/8.0/ja/linux-installation.html
+
+ 1. MySQLを開始
+
+ 1.1. リポジトリをダウンロード
+この記事では、Oracle Linuxを使用している。
+[opc@mysql-master1 ~]$ cat /etc/oracle-re...]]></description><link>https://zenn.dev/madogiwa_kyoso/articles/a0e06a480a66c1</link><guid isPermaLink="true">https://zenn.dev/madogiwa_kyoso/articles/a0e06a480a66c1</guid><pubDate>Fri, 14 Jun 2024 18:57:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1OTc_6L2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:MySQL%25E3%2581%25A7DB%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2597%25E3%2581%25A6%25E3%2583%25AC%25E3%2583%2597%25E3%2583%25AA%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2581%2595%25E3%2581%259B%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E7%25AA%2593%25E9%259A%259B%25E6%2595%2599%25E7%25A5%2596%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS1NfdS1XQzhjUTJFZk9xc0k2WjhPR2lXTE5FOHJWS01LdWNlM3JtZ2M3YUh2RWctTnhrUT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>窓際教祖</dc:creator></item><item><title><![CDATA[OCIでディスク追加＆Linuxのパーティション/LVM拡張]]></title><description><![CDATA[
+ 1.ディスク追加
+
+ 1.1. 新規ブロックボリュームを作成
+Webコンソールで、
+「ストレージ」＞「ブロックボリューム」
+から新規ディスク作成。
+
+
+ 1.2. インスタンスにアタッチ
+対象インスタンスに移動し、
+「アタッチされたブロックボリューム」＞「ブロックボリュームのアタッチ」
+アタッチメントタイプはiSCSIを選択。
+
+
+ 1.3. アタッチされたディスクをOSに認識させる
+コンソール上で「アタッチ済」になっていてもOSではまだ認識していない。
+
+$ lsblk
+NAME               MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+s...]]></description><link>https://zenn.dev/madogiwa_kyoso/articles/909cc62e63e2b9</link><guid isPermaLink="true">https://zenn.dev/madogiwa_kyoso/articles/909cc62e63e2b9</guid><pubDate>Fri, 14 Jun 2024 18:56:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--HYyRtqR4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:OCI%25E3%2581%25A7%25E3%2583%2587%25E3%2582%25A3%25E3%2582%25B9%25E3%2582%25AF%25E8%25BF%25BD%25E5%258A%25A0%25EF%25BC%2586Linux%25E3%2581%25AE%25E3%2583%2591%25E3%2583%25BC%25E3%2583%2586%25E3%2582%25A3%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%252FLVM%25E6%258B%25A1%25E5%25BC%25B5%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E7%25AA%2593%25E9%259A%259B%25E6%2595%2599%25E7%25A5%2596%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS1NfdS1XQzhjUTJFZk9xc0k2WjhPR2lXTE5FOHJWS01LdWNlM3JtZ2M3YUh2RWctTnhrUT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>窓際教祖</dc:creator></item><item><title><![CDATA[WebArenaのVPSを使ってMQTTやWebサーバを作ってみる]]></title><description><![CDATA[実験用にインターネット上にWebサーバ、MQTTのbrokerを立ち上げた時のメモです。
+VPSにはWebArena Indigoを使いました。
+
+ VPSのインスタンスの準備
+サービスに登録し、コントロールパネルにログインします。
+まず、使用するSSH鍵を生成します。左側のメニューのSSH鍵を選択し、SSH鍵の生成をクリックして作成します。正常に作成が終わると以下のように生成した鍵が表示されます。この鍵を作成知った際に、秘密鍵のファイルが自動でダウンロードされます。秘密鍵は作成時にしかダウンロードできないので注意して保管してください。
+
+次にインスタンスを作成します。左のインスタンスを...]]></description><link>https://zenn.dev/kobayutapon/articles/477229ccff289d</link><guid isPermaLink="true">https://zenn.dev/kobayutapon/articles/477229ccff289d</guid><pubDate>Fri, 14 Jun 2024 10:38:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--d03BFL3U--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:WebArena%25E3%2581%25AEVPS%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6MQTT%25E3%2582%2584Web%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25B3%25E3%2583%2590%25E3%2583%25A6%25E3%2582%25BF%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0Y2J6SVJNTHZLREJYd0NFYUQyaDctMktyYk9rU3F5NjNLSWtodEk3UzlMQmZvPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>コバユタ</dc:creator></item></channel></rss>
