@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Ubuntu」のフィード]]></title><description><![CDATA[Zennのトピック「Ubuntu」のRSSフィードです]]></description><link>https://zenn.dev/topics/ubuntu</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/8c2cdbc5b3.png</url><title>Zennの「Ubuntu」のフィード</title><link>https://zenn.dev/topics/ubuntu</link></image><generator>zenn.dev</generator><lastBuildDate>Sat, 22 Jun 2024 12:03:26 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/ubuntu/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[【Windows Terminal】ぼくのターミナルが最強です。]]></title><description><![CDATA[
+ 概要
+Windows Terminalのカスタム方法を記載します。
+筆者はPowerShellをあまり使わないので、主にUbuntu向けです。
+
+ 前提
+
+WSL + Ubuntu + Windows Terminal がインストール済みであること
+
+
+ 構成
+
+OS：Windows11(PC)、Ubuntu22.04.3
+Editor：Emacs
+terminal multiplexer：tmux
+font：HackGen Console NF
+Theme：Oh My Posh
+
+
+ 設定手順
+
+ Windows Terminal デザイン設定
+
+ 配色（カラースキーム）
+デフォル...]]></description><link>https://zenn.dev/suraud/articles/setup-windows-terminal</link><guid isPermaLink="true">https://zenn.dev/suraud/articles/setup-windows-terminal</guid><pubDate>Sat, 22 Jun 2024 09:06:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--mPABU7Qv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Windows%2520Terminal%25E3%2580%2591%25E3%2581%25BC%25E3%2581%258F%25E3%2581%25AE%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%259F%25E3%2583%258A%25E3%2583%25AB%25E3%2581%258C%25E6%259C%2580%25E5%25BC%25B7%25E3%2581%25A7%25E3%2581%2599%25E3%2580%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%252FUD%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg0NzY3NjU1ODMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>/UD</dc:creator></item><item><title><![CDATA[Kubernetesクラスターでkubectlが通らなくなった【証明書期限切れ】]]></title><description><![CDATA[自宅サーバー(Proxmox)でHA構成のKubernetesクラスターを構築してから早一年が経ちました。 詳しくはこちらの記事でまとめています。
+しかし、久しぶりに様子を見てみるとkubectlなどのコマンドが全く通らなくなってしまいました。今回はそのトラブルシューティングをまとめようと思います。
+
+ エラー内容
+最初はk9sが落ちることに気づき、kubectlコマンドを実行してみてもtimeoutが生じていることが確認できました。
+$ kubectl get nodes
+E0613 09:31:17.589658 26729 memcache.go:265] couldn't get...]]></description><link>https://zenn.dev/eucyt/articles/renew-k8s-cert</link><guid isPermaLink="true">https://zenn.dev/eucyt/articles/renew-k8s-cert</guid><pubDate>Thu, 20 Jun 2024 11:21:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4OBAVGPm--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Kubernetes%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%25BC%25E3%2581%25A7kubectl%25E3%2581%258C%25E9%2580%259A%25E3%2582%2589%25E3%2581%25AA%25E3%2581%258F%25E3%2581%25AA%25E3%2581%25A3%25E3%2581%259F%25E3%2580%2590%25E8%25A8%25BC%25E6%2598%258E%25E6%259B%25B8%25E6%259C%259F%25E9%2599%2590%25E5%2588%2587%25E3%2582%258C%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yuta%2520Euchi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E4OTE2NGFhZDQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yuta Euchi</dc:creator></item><item><title><![CDATA[`kdenlive`の`Effects`のレンダリング一覧]]></title><description><![CDATA[
+ kdenliveのEffectsのレンダリング一覧: List of kdenlive Effect Rendering Demos
+更新：2024年6月16日
+
+ はじめに
+Here are the rendering demos for all kdenlive effects.
+kdenliveにはたいへん高機能な数多くのエフェクトが存在しますが、エフェクト名が特殊であったり数そのものが多いせいで敬遠されがちな印象です。
+また慣れてくると「決まったエフェクトしか使わない」という問題が生じます。（主にわたし）
+kdenliveにはKDEの伝統なのか、しっかりしたドキュメントが存在...]]></description><link>https://zenn.dev/ykesamaru/articles/35de0c41db36d1</link><guid isPermaLink="true">https://zenn.dev/ykesamaru/articles/35de0c41db36d1</guid><pubDate>Sat, 15 Jun 2024 11:27:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qGNiaK6Z--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%2560kdenlive%2560%25E3%2581%25AE%2560Effects%2560%25E3%2581%25AE%25E3%2583%25AC%25E3%2583%25B3%25E3%2583%2580%25E3%2583%25AA%25E3%2583%25B3%25E3%2582%25B0%25E4%25B8%2580%25E8%25A6%25A7%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yKesamaru%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY4MmM3NDMxNjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yKesamaru</dc:creator></item><item><title><![CDATA[Jupyter公式イメージのユーザー切り替え機能だけ抜き出してみた]]></title><description><![CDATA[
+ Jupyter公式イメージのユーザー切り替え機能が便利
+以下の記事でも紹介した Jupyter 公式のノートブックイメージにはユーザーの切り替え機能がついており、環境変数にユーザーの情報を指定するだけでユーザーを作成してくれるので、これが地味に便利です。
+https://zenn.dev/wsuzume/articles/fe8c186a03b4e4
+これがあるだけで複数のユーザーで使用するイメージに関しては docker container run するときにやらねばならないユーザー権限調整周りのハックのレベルが数段下がります。
+というわけで、このユーザー切り替え機能の部分だけを抜...]]></description><link>https://zenn.dev/wsuzume/articles/1be3aee84d1cb2</link><guid isPermaLink="true">https://zenn.dev/wsuzume/articles/1be3aee84d1cb2</guid><pubDate>Sat, 15 Jun 2024 10:14:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--C59AIwVl--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Jupyter%25E5%2585%25AC%25E5%25BC%258F%25E3%2582%25A4%25E3%2583%25A1%25E3%2583%25BC%25E3%2582%25B8%25E3%2581%25AE%25E3%2583%25A6%25E3%2583%25BC%25E3%2582%25B6%25E3%2583%25BC%25E5%2588%2587%25E3%2582%258A%25E6%259B%25BF%25E3%2581%2588%25E6%25A9%259F%25E8%2583%25BD%25E3%2581%25A0%25E3%2581%2591%25E6%258A%259C%25E3%2581%258D%25E5%2587%25BA%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Josh%2520Nobus%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJjZDAzYjNkNzYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Josh Nobus</dc:creator></item><item><title><![CDATA[【今更】`Git`のバッファサイズを変更する]]></title><description><![CDATA[
+ 【今更】Gitのバッファサイズを変更する
+
+ はじめに
+2024-06-14 17:23:03.176 [info] error: RPC failed; HTTP 400 curl 22 The requested URL returned error: 400
+このエラーでGitHubにpush出来ませんでした。
+今更感がありますが、この問題に対処する過程で知った事柄やどのような手順で解決したかを残します。
+
+
+ 環境
+$ inxi -Sxxx --filter
+System:
+  Kernel: 6.5.0-35-generic x86_64 bits: 64 compiler...]]></description><link>https://zenn.dev/ykesamaru/articles/b9f596703aff85</link><guid isPermaLink="true">https://zenn.dev/ykesamaru/articles/b9f596703aff85</guid><pubDate>Fri, 14 Jun 2024 13:12:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--sW-rk6OA--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E4%25BB%258A%25E6%259B%25B4%25E3%2580%2591%2560Git%2560%25E3%2581%25AE%25E3%2583%2590%25E3%2583%2583%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25B5%25E3%2582%25A4%25E3%2582%25BA%25E3%2582%2592%25E5%25A4%2589%25E6%259B%25B4%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yKesamaru%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY4MmM3NDMxNjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yKesamaru</dc:creator></item><item><title><![CDATA[すべてのDockerイメージを削除する]]></title><description><![CDATA[
+ 要約
+すべてのコンテナを停止し、すべてのコンテナを削除し、すべてのイメージを削除する。
+docker stop $(docker ps -aq)
+docker rm $(docker ps -aq)
+docker rmi $(docker images -q)
+
+ 注意点
+必要に応じてsudoが必要になる場合もある。
+sudo docker stop $(sudo docker ps -aq)
+sudo docker rm $(sudo docker ps -aq)
+sudo docker rmi $(sudo docker images -q)
+]]></description><link>https://zenn.dev/maoki/articles/remove-all-docker-images</link><guid isPermaLink="true">https://zenn.dev/maoki/articles/remove-all-docker-images</guid><pubDate>Fri, 14 Jun 2024 05:15:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vqfdxI5L--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%2599%25E3%2581%25B9%25E3%2581%25A6%25E3%2581%25AEDocker%25E3%2582%25A4%25E3%2583%25A1%25E3%2583%25BC%25E3%2582%25B8%25E3%2582%2592%25E5%2589%258A%25E9%2599%25A4%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:AOKIMICHIHITO%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q4YWE0N2YxOGEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>AOKIMICHIHITO</dc:creator></item><item><title><![CDATA[ラズパイ4にChronyでNTPサーバを立てる]]></title><description><![CDATA[
+ 目次
+
+NTPサーバとは
+インストール
+補足
+参考文献
+
+
+ NTPサーバとは
+NTPサーバ(Network Time Protocol server)とは，ネットワーク上で正確な時刻情報を提供をするためのサーバである．
+NTPは，RFC1305とRFC4330で決められている．
+本記事ではNICTの公開NTPサーバにあわせている．
+
+ 環境
+
+
+
+機能
+説明
+
+
+
+
+PC
+RaspberryPi 4
+
+
+OS
+Ubuntu24.04 LTS
+
+
+
+
+ インストール
+
+ OSのアプデートを行う
+この行為を飛ばしていきなりインストールから始める人をたまに見かけるけどよっぽどのことがない...]]></description><link>https://zenn.dev/uma_yuma/articles/345977c763493c</link><guid isPermaLink="true">https://zenn.dev/uma_yuma/articles/345977c763493c</guid><pubDate>Tue, 11 Jun 2024 07:47:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dKCUT6_---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%25A9%25E3%2582%25BA%25E3%2583%2591%25E3%2582%25A44%25E3%2581%25ABChrony%25E3%2581%25A7NTP%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2582%2592%25E7%25AB%258B%25E3%2581%25A6%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:UMA%2528%25E3%2582%2586%25E3%2583%25BC%25E3%2581%25BE%2529%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2UyM2VhOTJkNzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>UMA(ゆーま)</dc:creator></item><item><title><![CDATA[コンテナ内で apt update -y を実行するとエラーが出力される問題の解決方法]]></title><description><![CDATA[
+ 概要
+コンテナ内で必要なモジュールをインストールする前に apt update -y を実行するとエラーが出力された。
+環境固有の問題にも思われたが、その解決策を掲示する。
+
+ 実行環境
+
+Windows 10
+PowerShell 5.1.19041.4412
+Rancher Desktop
+Docker version 24.0.6-rd
+
+
+ 発生した事象
+作成したコンテナ内で apt update -y を事項した際に以下のエラーが出力された。
+Ign:1 http://security.ubuntu.com/ubuntu jammy-security InRelease
+I...]]></description><link>https://zenn.dev/nakashi94/articles/29ed335fc2af43</link><guid isPermaLink="true">https://zenn.dev/nakashi94/articles/29ed335fc2af43</guid><pubDate>Mon, 10 Jun 2024 11:05:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4EHfSmtN--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2586%25E3%2583%258A%25E5%2586%2585%25E3%2581%25A7%2520apt%2520update%2520-y%2520%25E3%2582%2592%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%2599%25E3%2582%258B%25E3%2581%25A8%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E3%2581%258C%25E5%2587%25BA%25E5%258A%259B%25E3%2581%2595%25E3%2582%258C%25E3%2582%258B%25E5%2595%258F%25E9%25A1%258C%25E3%2581%25AE%25E8%25A7%25A3%25E6%25B1%25BA%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nakashi94%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U3MjE3ZDBjNzguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nakashi94</dc:creator></item><item><title><![CDATA[Raspberry Pi + Ubuntuに暗号化LVMを導入]]></title><description><![CDATA[
+ はじめに
+Raspberry Pi Imagerなどを使ってRaspberry PiにUbuntuをインストールした場合、ファイルシステムはmicroSDカード上のパーティションに直接配置される。この記事では、その状態からLUKSによるストレージ暗号化とLVMを用いた構成に移行する手順を述べる。
+本記事では基本的に導入手順のみを扱う。ストレージ暗号化とLVMの利点や欠点、体系的な操作手順などは扱わないので、下記や記事末尾の参考文献を参照されたい。
+
+ストレージ暗号化
+
+ストレージ内のデータを暗号化することで、システム停止中のデータを保護すること
+参照: 保存データ暗号化 - Arch...]]></description><link>https://zenn.dev/masaki_wk/articles/20240609-raspi-ubuntu-lvm-on-luks</link><guid isPermaLink="true">https://zenn.dev/masaki_wk/articles/20240609-raspi-ubuntu-lvm-on-luks</guid><pubDate>Sun, 09 Jun 2024 08:25:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9ElEbBWt--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Raspberry%2520Pi%2520%252B%2520Ubuntu%25E3%2581%25AB%25E6%259A%2597%25E5%258F%25B7%25E5%258C%2596LVM%25E3%2582%2592%25E5%25B0%258E%25E5%2585%25A5%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Masaki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFUWEFKejNwWHVVNGZ6bWVIdFJkNWZISnRaa1FKMU0wRVBoamNxZXliVXY9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Masaki</dc:creator></item><item><title><![CDATA[Windowsで仮想環境をアクティベートしてdockerも使ってみる]]></title><description><![CDATA[環境構築でてこずったので忘備録
+
+ WSLのインストール手順
+
+ 1. WSLの有効化
+
+コントロールパネルを開きます。
+プログラム &gt; Windowsの機能の有効化または無効化 をクリックします。
+Windows Subsystem for Linux にチェックを入れて「OK」をクリックし、PCを再起動します。
+
+
+ 2. WSL 2の有効化（推奨）
+
+WSL 2は、より高速で完全なLinuxカーネルを提供します。
+PowerShellを管理者権限で開きます（「スタート」メニューを右クリックして「Windows -PowerShell（管理者）」を選択）。
+以下のコマンドを入力...]]></description><link>https://zenn.dev/udonmaru/articles/9c67c7f94a20aa</link><guid isPermaLink="true">https://zenn.dev/udonmaru/articles/9c67c7f94a20aa</guid><pubDate>Fri, 07 Jun 2024 14:08:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0Fm-sgQ9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Windows%25E3%2581%25A7%25E4%25BB%25AE%25E6%2583%25B3%25E7%2592%25B0%25E5%25A2%2583%25E3%2582%2592%25E3%2582%25A2%25E3%2582%25AF%25E3%2583%2586%25E3%2582%25A3%25E3%2583%2599%25E3%2583%25BC%25E3%2583%2588%25E3%2581%2597%25E3%2581%25A6docker%25E3%2582%2582%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:udonmaru%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2EwODVjMWI5ODkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>udonmaru</dc:creator></item><item><title><![CDATA[ollamaのリモートアクセスでハマった件]]></title><description><![CDATA[
+ 概要
+ollamaをリモートのUbuntuで動かして、手元のWindowsから 192.168.1.2:11434 でアクセスしても繋がらなかったので対応しました。調べてみると困っている人が沢山いるみたいですね。
+11434ポートで動いているのに、ブラウザからアクセスするとエラーになります。
+sudo lsof -i :11434
+
+COMMAND    PID   USER   FD   TYPE DEVICE SIZE/OFF NODE NAME
+ollama  115348 ollama    3u  IPv6 400889      0t0  TCP *:11434 (LIS...]]></description><link>https://zenn.dev/tatexh/articles/4102a9f0a06dec</link><guid isPermaLink="true">https://zenn.dev/tatexh/articles/4102a9f0a06dec</guid><pubDate>Wed, 05 Jun 2024 13:23:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4nuPDwvV--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ollama%25E3%2581%25AE%25E3%2583%25AA%25E3%2583%25A2%25E3%2583%25BC%25E3%2583%2588%25E3%2582%25A2%25E3%2582%25AF%25E3%2582%25BB%25E3%2582%25B9%25E3%2581%25A7%25E3%2583%258F%25E3%2583%259E%25E3%2581%25A3%25E3%2581%259F%25E4%25BB%25B6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tatefuku%2520hiroshi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQzYTYwMjhhNzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tatefuku hiroshi</dc:creator></item><item><title><![CDATA[Ubuntu(22.04 LTS)におけるSSH環境の構築]]></title><description><![CDATA[
+ はじめに
+レンタルサーバ（ConoHa）を借りて SSH 設定を行ったため、備忘録と知識の整理も兼ねて記録する。
+!
+なお、鍵に関してはこの説明用で作成しており、動作チェック時以外には使用していないことを明示しておく。
+また、サーバに関しては一度設定している都合上、再現用のサーバで再現を行っている。
+
+!
+重要
+本記事を作成するにあたって、内容等について細心の注意を払っておりますが、内容が正確であるか、安全なものであるか等について保証をするものではなく、何らの責任を負うものではありません。
+本記事内容の利用により、万が一ご利用者様に何らかの不都合や損害が発生したとしても、著者や著者の...]]></description><link>https://zenn.dev/kobapc/articles/a47cc1e2f5af8f</link><guid isPermaLink="true">https://zenn.dev/kobapc/articles/a47cc1e2f5af8f</guid><pubDate>Wed, 05 Jun 2024 10:01:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---XBiOn8g--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ubuntu%252822.04%2520LTS%2529%25E3%2581%25AB%25E3%2581%258A%25E3%2581%2591%25E3%2582%258BSSH%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25AE%25E6%25A7%258B%25E7%25AF%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25B3%25E3%2583%2590%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MxZDg2MjcyZTUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>コバ</dc:creator></item><item><title><![CDATA[さくらのVPSのUbuntu24.04でログイン後にcannot change locale (ja_JP.UTF-8)]]></title><description><![CDATA[ログインのメッセージ直後にエラーがでます。
+Last login: Wed Jun  5 15:42:10 2024 from ***.***.***.***
+-bash: warning: setlocale: LC_ALL: cannot change locale (ja_JP.UTF-8)
+To run a command as administrator (user "root"), use "sudo &lt;command&gt;".
+See "man sudo_root" for details.
+恐らくログインスクリプトでロケールを変えてるところでエラーがでます。sud...]]></description><link>https://zenn.dev/gomo/articles/7950f93a2bd110</link><guid isPermaLink="true">https://zenn.dev/gomo/articles/7950f93a2bd110</guid><pubDate>Wed, 05 Jun 2024 07:06:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--mjRRx30x--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%2595%25E3%2581%258F%25E3%2582%2589%25E3%2581%25AEVPS%25E3%2581%25AEUbuntu24.04%25E3%2581%25A7%25E3%2583%25AD%25E3%2582%25B0%25E3%2582%25A4%25E3%2583%25B3%25E5%25BE%258C%25E3%2581%25ABcannot%2520change%2520locale%2520%2528ja_JP.UTF-8%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Masamoto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2gtRjJxMWpOMWJqN1lzb2VDWUYybmlwb21TNk1qcHEzMTdHN3VwPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Masamoto</dc:creator></item><item><title><![CDATA[【Linux】マニュアル(man)を日本語化する方法]]></title><description><![CDATA[manコマンドを使用したときデフォルトで英語のマニュアルが表示されています。マニュアルページを日本語にする方法をまとめました。必要に応じて変更してみてください。
+
+ 実行環境
+
+WSL2(Windows11)
+Ubuntu
+
+$ cat /etc/os-release
+PRETTY_NAME="Ubuntu 22.04.4 LTS"
+NAME="Ubuntu"
+VERSION_ID="22.04"
+VERSION="22.04.4 LTS (Jammy Jellyfish)"
+VERSION_CODENAME=jammy
+ID=ubuntu
+ID_LIKE=debian
+HOME_URL...]]></description><link>https://zenn.dev/ryu3/articles/bc5269a16fdf47</link><guid isPermaLink="true">https://zenn.dev/ryu3/articles/bc5269a16fdf47</guid><pubDate>Tue, 04 Jun 2024 09:24:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--F1D6UAoS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Linux%25E3%2580%2591%25E3%2583%259E%25E3%2583%258B%25E3%2583%25A5%25E3%2582%25A2%25E3%2583%25AB%2528man%2529%25E3%2582%2592%25E6%2597%25A5%25E6%259C%25AC%25E8%25AA%259E%25E5%258C%2596%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ryu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzcwOWFmODRkNzguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ryu</dc:creator></item><item><title><![CDATA[【Wayland】【Ubuntu 24.04】コマンドラインによるマルチモニタとシングルモニタの切り替え]]></title><description><![CDATA[
+ 概要
+Windowsでは「Windowsキー+P」でマルチモニタとシングルモニタの切り替えが可能だが、Ubuntuでも同様のことが出来ないか調べたところgnomeに同様のショートカットキーが無さそうと分かった。
+解像度変更のシェルスクリプトについて以下の記事があったので、この記事ではこれをベースにシェルスクリプトを作成する。
+https://qiita.com/QiitaYkuyo/items/7c8762e8fd5b077a8aa4
+作成したシェルスクリプトをgnomeで任意のショートカットキーに割り当てることでマルチモニタとシングルモニタの切り替えを実現する。
+
+ シェルスクリプ...]]></description><link>https://zenn.dev/fukumen/articles/wayland-monitor-config</link><guid isPermaLink="true">https://zenn.dev/fukumen/articles/wayland-monitor-config</guid><pubDate>Tue, 04 Jun 2024 07:37:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--uCgHc9jE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Wayland%25E3%2580%2591%25E3%2580%2590Ubuntu%252024.04%25E3%2580%2591%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%25B3%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258B%25E3%2583%259E%25E3%2583%25AB%25E3%2583%2581%25E3%2583%25A2%25E3%2583%258B%25E3%2582%25BF%25E3%2581%25A8%25E3%2582%25B7%25E3%2583%25B3%25E3%2582%25B0%25E3%2583%25AB%25E3%2583%25A2%25E3%2583%258B%25E3%2582%25BF%25E3%2581%25AE%25E5%2588%2587%25E3%2582%258A%25E6%259B%25BF%25E3%2581%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E8%25A6%2586%25E9%259D%25A2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSmRBTndCVEtfSHlnamFJejZqRWoxZWJhMDROQ04wV3lBSjc4cFp1R0RiPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>覆面</dc:creator></item><item><title><![CDATA[Raspberry Piで作るアクアリウム管理システム①Raspberry Piの初期設定]]></title><description><![CDATA[
+ はじめに
+我が家では水槽にて各種水棲生物および水草を飼育、栽培しており、環境維持のため日々水温や二酸化炭素、二酸化窒素、亜硝酸塩等の計測を行っています。
+
+|дﾟ)
+長いこと手作業で行っていたためあまり意識していなかったのですが、元来のめんどくさがりな性格もあり、自動化に挑戦してみようと思い至りました。
+日々の計測を自動化することができれば、自分の負担を減らせるだけでなく
+
+データをより正確に記録、管理することができる
+以前から興味のあったRasberry Piが使えそう
+なんか楽しそう
+
+上述の理由から自己学習も兼ねて作ってみることにしました。
+備忘およびアウトプット習慣の一環とし...]]></description><link>https://zenn.dev/rsi_dev/articles/b6a3b5a3da5d06</link><guid isPermaLink="true">https://zenn.dev/rsi_dev/articles/b6a3b5a3da5d06</guid><pubDate>Mon, 03 Jun 2024 00:33:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--LM42_yXV--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Raspberry%2520Pi%25E3%2581%25A7%25E4%25BD%259C%25E3%2582%258B%25E3%2582%25A2%25E3%2582%25AF%25E3%2582%25A2%25E3%2583%25AA%25E3%2582%25A6%25E3%2583%25A0%25E7%25AE%25A1%25E7%2590%2586%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%25E2%2591%25A0Raspberry%2520Pi%25E3%2581%25AE%25E5%2588%259D%25E6%259C%259F%25E8%25A8%25AD%25E5%25AE%259A%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2582%258F%25E3%2581%259F%25E3%2581%25AA%25E3%2581%25B9%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzYxM2ExMDkxYjYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:RSI%25E6%258A%2580%25E8%25A1%2593%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhhYmMxZWFmNjkuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>わたなべ</dc:creator></item><item><title><![CDATA[Ubuntuメモ書き]]></title><description><![CDATA[忘れるのでメモを残す
+
+ 2024/06/02 ファイアウォール
+ufw Uncomplicated Firewall 「複雑じゃないファイアウォール」らしい。
+  495  sudo ufw status  
+  497  sudo ufw allow 80
+  500  sudo ufw allow ssh
+  501  sudo ufw status
+  502  sudo ufw reload
+
+ 2024/06/02 パッケージ更新
+よくやるけどupdateとupgradeの違いを忘れがち
+sudo apt-get update リポジトリの更新
+sudo apt-get up...]]></description><link>https://zenn.dev/taktamur/articles/643e7a398d20ab</link><guid isPermaLink="true">https://zenn.dev/taktamur/articles/643e7a398d20ab</guid><pubDate>Sun, 02 Jun 2024 10:07:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---msYsYA0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:Ubuntu%25E3%2583%25A1%25E3%2583%25A2%25E6%259B%25B8%25E3%2581%258D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:taktamur%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2p0YlAzTVhucmNNWFh5RmMzb0xQWWdQOW1ja2VmbDhoTlYtbk1ZPXMyNTAtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>taktamur</dc:creator></item><item><title><![CDATA[Ubuntu24.04にFirefly IIIをインストールする おまけ]]></title><description><![CDATA[インストール記事のおまけです．
+前記事↓
+https://zenn.dev/hellgruen/articles/033ad60367421c
+間違っている可能性あります．
+
+ ①取引を追加しようとしたらなんか権限関係で怒られた
+画像ないですすみません
+認証関係でエラーみたいな文章でてた.
+原因 : 認証のファイルの所有者がroot
+DB初期化の際にsudoをつけると多分こうなる
+
+解決方法 : 所有者をwww-dataに変更
+確認
+cd /var/www/firefly-iii/storage
+ls -l
+変更
+chown www-data:www-data oauth-p*
+
+ ②取...]]></description><link>https://zenn.dev/hellgruen/articles/bfe7d9b7e22158</link><guid isPermaLink="true">https://zenn.dev/hellgruen/articles/bfe7d9b7e22158</guid><pubDate>Sun, 02 Jun 2024 09:27:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--e4grEOv3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ubuntu24.04%25E3%2581%25ABFirefly%2520III%25E3%2582%2592%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%2599%25E3%2582%258B%2520%25E3%2581%258A%25E3%2581%25BE%25E3%2581%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Hellgr%25C3%25BCn%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNkZDY4ZDRhMGYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Hellgrün</dc:creator></item><item><title><![CDATA[Dockerを使ったUbuntu環境の初期設定]]></title><description><![CDATA[毎回忘れるので備忘録として
+
+ 初期設定
+
+ パッケージリストの更新
+$ apt update
+
+ 最低限必要なツールのインストール
+$ apt install -y sudo vim
+
+ 最新の状態にアップグレード
+$ apt upgrade -y
+
+ ユーザーの追加
+$ useradd -m -s /bin/bash {NEW_USER_NAME}
+$ passwd {NEW_USER_NAME}
+$ usermod -aG sudo {NEW_USER_NAME}
+$ id {NEW_USER_NAME}
+
+ おまけ
+
+ 起動まで
+$ docker pull ubuntu
+$ do...]]></description><link>https://zenn.dev/teasegasugoi/articles/531bd1b779a45b</link><guid isPermaLink="true">https://zenn.dev/teasegasugoi/articles/531bd1b779a45b</guid><pubDate>Fri, 31 May 2024 13:34:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--YyXOEyi---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%259FUbuntu%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25AE%25E5%2588%259D%25E6%259C%259F%25E8%25A8%25AD%25E5%25AE%259A%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Teasegasugoi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzIwZGMwZDE5ZmYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Teasegasugoi</dc:creator></item><item><title><![CDATA[ソフトウェア開発においての、ログまわりの整理・まとめ]]></title><description><![CDATA[
+ ソフトウェア開発においての、ログまわりの整理・まとめ
+
+ はじめに
+
+Ubuntuを日常的に使っていると挙動に不審な点があったり決まったアプリケーションが落ちてしまうなどの機会に遭遇します。
+そういった時にログを簡単に確認できればいいのですが、ちょっとしたことに時間を取られたくなかったり、そもそもログを確認することが生産性と直結しないなど、なかなかログを確認して対策する習慣がつかないのではないでしょうか？
+私は日常的にLinuxで顔認証システムの開発を行っており、普段からUbuntuを使用しています。本記事では、日常の開発や使用時に役立つログ確認のポイントと、効率的にログを確認するた...]]></description><link>https://zenn.dev/ykesamaru/articles/f21e599f10d60d</link><guid isPermaLink="true">https://zenn.dev/ykesamaru/articles/f21e599f10d60d</guid><pubDate>Fri, 31 May 2024 12:20:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--teQ3eKxo--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25BD%25E3%2583%2595%25E3%2583%2588%25E3%2582%25A6%25E3%2582%25A7%25E3%2582%25A2%25E9%2596%258B%25E7%2599%25BA%25E3%2581%25AB%25E3%2581%258A%25E3%2581%2584%25E3%2581%25A6%25E3%2581%25AE%25E3%2580%2581%25E3%2583%25AD%25E3%2582%25B0%25E3%2581%25BE%25E3%2582%258F%25E3%2582%258A%25E3%2581%25AE%25E6%2595%25B4%25E7%2590%2586%25E3%2583%25BB%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yKesamaru%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY4MmM3NDMxNjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yKesamaru</dc:creator></item></channel></rss>

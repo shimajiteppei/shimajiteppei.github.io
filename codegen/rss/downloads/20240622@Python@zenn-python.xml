@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Sat, 22 Jun 2024 09:30:40 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[初心者のPython3レッスンーーPython3条件制御（if-else）]]></title><description><![CDATA[
+ シーリズの目次
+初心者のPython3レッスンをここにまとめています。
+https://zenn.dev/datasciencekun/articles/319e0f4b4021c5
+Pythonの条件制御は、プログラムの実行フローを制御するために使用されます。これは主に、if文、elif文、およびelse文を使用して行われます。
+条件制御の実行手順は次の図で簡単にわかります。
+
+コード実行手順です:
+
+
+ if、elif、else文
+if文は、条件が真（True）の場合に特定のコードブロックを実行します。
+elif文（else ifの略）は、最初のif条件が偽（False）で、他の...]]></description><link>https://zenn.dev/datasciencekun/articles/badf3757c5c55a</link><guid isPermaLink="true">https://zenn.dev/datasciencekun/articles/badf3757c5c55a</guid><pubDate>Sat, 22 Jun 2024 09:12:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--pdzkpGLt--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E3%2581%25AEPython3%25E3%2583%25AC%25E3%2583%2583%25E3%2582%25B9%25E3%2583%25B3%25E3%2583%25BC%25E3%2583%25BCPython3%25E6%259D%25A1%25E4%25BB%25B6%25E5%2588%25B6%25E5%25BE%25A1%25EF%25BC%2588if-else%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%25B5%25E3%2582%25A4%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B9%25E5%2590%259B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE1MTEwODMxZmQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>データサイエンス君</dc:creator></item><item><title><![CDATA[Flaskで作ったアプリのコードレビューをしてもらった話]]></title><description><![CDATA[
+ はじめに
+初めてのZennへの投稿になります！
+以前、ハッカソンで開発したアプリのコードレビューをしていただいたので、そのときに指摘していただいたことのまとめです。
+以下のコードを修正していくという流れで進めていこうと思います！
+サインアップ機能のためのコード
+controllers/signup.py
+from backend import db
+from backend.common.models.user import User
+import datetime
+from flask import Blueprint
+from flask import jsonify
+from ...]]></description><link>https://zenn.dev/yusuke1115/articles/python-code-review</link><guid isPermaLink="true">https://zenn.dev/yusuke1115/articles/python-code-review</guid><pubDate>Sat, 22 Jun 2024 09:08:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--y56aGrYd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Flask%25E3%2581%25A7%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2581%25AE%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2583%25AC%25E3%2583%2593%25E3%2583%25A5%25E3%2583%25BC%25E3%2582%2592%25E3%2581%2597%25E3%2581%25A6%25E3%2582%2582%25E3%2582%2589%25E3%2581%25A3%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:usuke%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y3NWZmYjBiMDkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>usuke</dc:creator></item><item><title><![CDATA[【Heroku+Python+Flask】 HerokuでFlaskのサンプルアプリを起動]]></title><description><![CDATA[
+ 目的
+Python + Flaskで開発したアプリケーションをHerokuにデプロイおよび公開できる。
+
+ 開発環境
+MacOs 14.4.1
+Python 3.12.2
+Flask 3.0.3
+Werkzeug 3.0.2
+
+ 仮想環境
+
+ 仮想環境の作成方法
+プロジェクト直下にmyenvを作成して、作成したディレクトリに移動する
+$ mkdir myenv
+$ cd myenv
+python3 -m venv .を実行すると、myenvディレクトリ内に仮想環境を起動するためのファイルが自動作成されます。
+$ python3 -m venv .
+$ ls
+&gt; bin     ...]]></description><link>https://zenn.dev/yoshi0717/articles/c81c1ff394a962</link><guid isPermaLink="true">https://zenn.dev/yoshi0717/articles/c81c1ff394a962</guid><pubDate>Sat, 22 Jun 2024 08:51:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7P_ySAmN--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Heroku%252BPython%252BFlask%25E3%2580%2591%2520Heroku%25E3%2581%25A7Flask%25E3%2581%25AE%25E3%2582%25B5%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AB%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E8%25B5%25B7%25E5%258B%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2588%25E3%2581%2597%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSjF2M2xYNHpJcDdYQnoxWkpDNGNScnFWMjIxSjhGbmVxaWJyc3JNOExEeUE9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>よし</dc:creator></item><item><title><![CDATA[綺麗なコードを書くためのTips ~プログラムの再構成~]]></title><description><![CDATA[
+ 無関係な下位問題を抽出する
+プロジェクト固有のコードと汎用コードを分けることが重要。これによって，プロジェクトに固有の処理とそれ以外の部分に分離され，プロジェクト固有の処理に集中することができる。
+
+ 低レベルの目標は関数化する
+コード上の無関係の下位問題を積極的に見つけて抽出することで，堅牢で読みやすいコードを作ることができる。コードから無関係の下位問題を抽出したい際，以下を自問すると良い。
+
+関数やコードブロックに対して「このコードの高レベル目標は何か？」
+コードの各行に対して「高レベルの目標に直接的に効果があるのか？もしくは無関係の下位問題を解決しているのか？」
+「無関係の下位...]]></description><link>https://zenn.dev/giba/articles/7ed4c5a8f0772</link><guid isPermaLink="true">https://zenn.dev/giba/articles/7ed4c5a8f0772</guid><pubDate>Sat, 22 Jun 2024 08:10:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--cHozqwZZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%25B6%25BA%25E9%25BA%2597%25E3%2581%25AA%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2582%2592%25E6%259B%25B8%25E3%2581%258F%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AETips%2520%7E%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%25A0%25E3%2581%25AE%25E5%2586%258D%25E6%25A7%258B%25E6%2588%2590%7E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:GIBA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y5MmM4MjdhMmEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>GIBA</dc:creator></item><item><title><![CDATA[python環境を快適にするためのセットアップ]]></title><description><![CDATA[
+ venvの自動起動
+以下のスクリプトを/usr/local/binに配置して、.bashrcからvenvSwitcher.shを読みこむように設定した。
+
+venvSwitcher.sh
+#!/bin/bash
+
+cd() {
+  builtin cd "$@"
+  function activate_venv() {
+          if [[ $(ls -a -U1 pyvenv.cfg |wc -l) &lt; 1 ]]; then
+                echo "There is no virtual env"
+          elif [[ $(ls -...]]></description><link>https://zenn.dev/reprod_x_ngs/articles/564ae72817417a</link><guid isPermaLink="true">https://zenn.dev/reprod_x_ngs/articles/564ae72817417a</guid><pubDate>Sat, 22 Jun 2024 06:17:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--pczNWlzB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:python%25E7%2592%25B0%25E5%25A2%2583%25E3%2582%2592%25E5%25BF%25AB%25E9%2581%25A9%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%25E3%2582%25BB%25E3%2583%2583%25E3%2583%2588%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%2590%25E3%2582%25A4%25E3%2582%25AA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2EzZjFjMjUxNjAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>バイオ</dc:creator></item><item><title><![CDATA[Azure Functions Core ToolsでAzure FunctionsをローカルのVSCode上で開発・テストできるようにする]]></title><description><![CDATA[
+ 執筆日
+2024/06/22
+
+ 概要
+Azure Functionsは、Azure上で実行されるサーバーレスコンピュートサービスです。様々なイベントに基づいてコードを自動的に実行できます。HTTPリクエストへの応答、定期的なスケジュールでのタスク実行、または他のAzureサービスや外部サービスからのイベントに応じた処理などが可能です。
+ですが、開発のデバッグ時点でリソースを作成してコストがかかってしまうのは相当お金に余裕のある人でなければ避けたいと思います。そこで今回はローカルのVSCode上で開発・テストを行う方法を紹介したいと思います。
+
+ 動作環境
+Windows, Mac,...]]></description><link>https://zenn.dev/headwaters/articles/eea7d6e072e9be</link><guid isPermaLink="true">https://zenn.dev/headwaters/articles/eea7d6e072e9be</guid><pubDate>Sat, 22 Jun 2024 03:36:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--tUk0dxeG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Azure%2520Functions%2520Core%2520Tools%25E3%2581%25A7Azure%2520Functions%25E3%2582%2592%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25AB%25E3%2583%25AB%25E3%2581%25AEVSCode%25E4%25B8%258A%25E3%2581%25A7%25E9%2596%258B...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:kodani%2520takushi%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZjNGExY2UxMDYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2598%25E3%2583%2583%25E3%2583%2589%25E3%2582%25A6%25E3%2582%25A9%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%25BC%25E3%2582%25B9%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZmNzIzMThiZjcuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kodani takushi</dc:creator></item><item><title><![CDATA[Python+Reflex+Clerkで認証付きWebアプリを簡単に作る]]></title><description><![CDATA[
+ はじめに
+ここ最近、PythonのみでUI含めたWebアプリが作成できるライブラリが増えてきています。
+https://zenn.dev/neka_nat/articles/f2f5b6ebeb049a
+それらの中で特にReflexが以下の点で優れてきていると感じており、シンプルなプロダクトであればこれで十分作れるのではないかと思っています。
+
+似たようなライブラリであるStreamlitに比べてできることの自由度が高い
+
+サードパーティによるカスタムコンポーネントが豊富
+
+ホスティングサービスがあり、簡単にデプロイできる
+
+この記事では、ReflexとClerkというウェブサービス...]]></description><link>https://zenn.dev/neka_nat/articles/32824920cb6004</link><guid isPermaLink="true">https://zenn.dev/neka_nat/articles/32824920cb6004</guid><pubDate>Fri, 21 Jun 2024 12:46:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--MZRwJbdC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%252BReflex%252BClerk%25E3%2581%25A7%25E8%25AA%258D%25E8%25A8%25BC%25E4%25BB%2598%25E3%2581%258DWeb%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E7%25B0%25A1%25E5%258D%2598%25E3%2581%25AB%25E4%25BD%259C%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2597%25E3%2582%258D%25E3%2581%258F%25E3%2581%25BE%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM0NjU3ODEwYjQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>しろくま</dc:creator></item><item><title><![CDATA[listの先頭に要素を入れていく方法]]></title><description><![CDATA[ただのメモです
+競技プログラミングの勉強をしている中で、なにかしらの処理をした後、結果をlistの先頭に入れていく必要がありました。
+そこで以下のようなコードを使っていました。
+ans=[i]+ans
+ただ、これだとTLE(処理時間超過)してしまいます。
+代わりに以下を使うと問題なく動作しました。
+ans.append(i)
+
+# 最終的に以下のようにして提出
+print(*reversed(ans))
+感覚的にどちらも実行時間は同じなのかなーと思っていましたが、
+最初のやつは、先頭に要素を入れるたびに既存の全ての要素を右にシフトする必要があります。
+これにはO(n) の時間がかかり、挿...]]></description><link>https://zenn.dev/stylishboob/articles/74e252c667828d</link><guid isPermaLink="true">https://zenn.dev/stylishboob/articles/74e252c667828d</guid><pubDate>Fri, 21 Jun 2024 03:18:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--RjCIfCLn--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:list%25E3%2581%25AE%25E5%2585%2588%25E9%25A0%25AD%25E3%2581%25AB%25E8%25A6%2581%25E7%25B4%25A0%25E3%2582%2592%25E5%2585%25A5%25E3%2582%258C%25E3%2581%25A6%25E3%2581%2584%25E3%2581%258F%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:stylishboob%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZjN2E5NGY0NzguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>stylishboob</dc:creator></item><item><title><![CDATA[YOLO-Worldを使って物体検知をする]]></title><description><![CDATA[
+ やること
+YOLO-Worldを使って物体検知をする。
+
+ YoLo-Worldとは？
+2024年1月に発表されたOpen Vocabulary Object Detection技術です。
+YOLO-Worldは、YOLO（You Only Look Once）シリーズを基にした高度な物体検出モデルです。このモデルは、テキスト入力に基づいて幅広いオブジェクトを識別・検出するオープンボキャブラリー物体検出の機能を備えており、追加のトレーニングを必要としません。
+検知したい物体を自然言語で入力するだけで、その物体を検知することができます。（精度は不明）
+
+ 参考記事
+https://ar...]]></description><link>https://zenn.dev/headwaters/articles/6b44458832d6c3</link><guid isPermaLink="true">https://zenn.dev/headwaters/articles/6b44458832d6c3</guid><pubDate>Fri, 21 Jun 2024 01:28:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--RCuofORW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:YOLO-World%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E7%2589%25A9%25E4%25BD%2593%25E6%25A4%259C%25E7%259F%25A5%25E3%2582%2592%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:takekawa%2520tomoki%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZjNGExY2UxMDYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2598%25E3%2583%2583%25E3%2583%2589%25E3%2582%25A6%25E3%2582%25A9%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%25BC%25E3%2582%25B9%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdmODg5YTRhYzguanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takekawa tomoki</dc:creator></item><item><title><![CDATA[Polarsでデータ読み込みでエラーが出た時の対処法]]></title><description><![CDATA[
+ 課題
+例えば、こちらのデータセットを読み込むと次のエラーが出ます。
+https://www.kaggle.com/competitions/house-prices-advanced-regression-techniques/overview
+[in]
+import polars as pl
+df = pl.read_csv('/kaggle/input/house-prices-advanced-regression-techniques/train.csv')
+[out]
+ComputeError: could not parse `NA` as dtype `i64` at ...]]></description><link>https://zenn.dev/waticson/articles/8a6c3ffd1c29ab</link><guid isPermaLink="true">https://zenn.dev/waticson/articles/8a6c3ffd1c29ab</guid><pubDate>Fri, 21 Jun 2024 01:20:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--TRtEKi4P--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Polars%25E3%2581%25A7%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E8%25AA%25AD%25E3%2581%25BF%25E8%25BE%25BC%25E3%2581%25BF%25E3%2581%25A7%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E3%2581%258C%25E5%2587%25BA%25E3%2581%259F%25E6%2599%2582%25E3%2581%25AE%25E5%25AF%25BE%25E5%2587%25A6%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:waticson%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY3NTQxZDI0MzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>waticson</dc:creator></item><item><title><![CDATA[私はこれでテストが書きやすくなりました]]></title><description><![CDATA[
+ はじめに
+テストの書き方を学んだことが一度もなかった私は、以下のパターン化をすることで
+
+どのコードに対して
+どれだけのテストを
+どのように書くか
+
+を意識し、テストが書きやすくなりました。
+自分の書くテストに自信が持てなかったり、既存のコードが何を根拠にテストされているのか分からないような初学者のメンタルモデル構築に役立つことを願っています。
+実装にはPythonとpytestを利用しているため、スコープの有無など一部言語機能に差があります。
+
+ テスト設計
+
+ テストすべき機能の特性
+どのコード（クラスや関数）に対してテストコードを書くか優先順位を付けます。
+カバレッジ100%を...]]></description><link>https://zenn.dev/wisteria30/articles/6ee4d6e055ecef</link><guid isPermaLink="true">https://zenn.dev/wisteria30/articles/6ee4d6e055ecef</guid><pubDate>Fri, 21 Jun 2024 00:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dCuSZBrf--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%25A7%2581%25E3%2581%25AF%25E3%2581%2593%25E3%2582%258C%25E3%2581%25A7%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E3%2581%258C%25E6%259B%25B8%25E3%2581%258D%25E3%2582%2584%25E3%2581%2599%25E3%2581%258F%25E3%2581%25AA%25E3%2582%258A%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258B%25E3%2581%25A3%25E3%2581%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lBT25tc1dwSEdtbzJ1TUItZzFlR2RKOWlLYXJvN0RRa1lfOFRGUGc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>かっか</dc:creator></item><item><title><![CDATA[エントロピー、交差エントロピー、KLダイバージェンス　ってなに]]></title><description><![CDATA[機械学習で何かと出てくる香具師
+丁寧に説明してないから足りないとこは自分で勉強汁
+
+ エントロピー
+確率分布p(x)の乱雑さを表す値
+値が大きいほど予測しにくいらしい。知らんけど。
+
+H(p) = -\sum_{x} p(x) \log p(x)
+
+import numpy as np
+# 確率分布pを定義
+p = np.array([0.4, 0.3, 0.1, 0.1, 0.05, 0.05])
+# エントロピーの計算 1.487798380001651
+ent = -np.sum(p * np.log(p))
+print("エントロピー:", ent)
+
+ 交差エントロピー
+2つの...]]></description><link>https://zenn.dev/happylyrics/articles/3b35525abccad0</link><guid isPermaLink="true">https://zenn.dev/happylyrics/articles/3b35525abccad0</guid><pubDate>Thu, 20 Jun 2024 13:32:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--h9dZc3Ry--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2588%25E3%2583%25AD%25E3%2583%2594%25E3%2583%25BC%25E3%2580%2581%25E4%25BA%25A4%25E5%25B7%25AE%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2588%25E3%2583%25AD%25E3%2583%2594%25E3%2583%25BC%25E3%2580%2581KL%25E3%2583%2580%25E3%2582%25A4%25E3%2583%2590%25E3%2583%25BC%25E3%2582%25B8%25E3%2582%25A7%25E3%2583%25B3%25E3%2582%25B9%25E3%2580%2580%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25AA%25E3%2581%25AB%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:narzissenkreuz%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MxNTllMTNhZDYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>narzissenkreuz</dc:creator></item><item><title><![CDATA[Matplotilb の rcParams を json から読み込む]]></title><description><![CDATA[Maplotlib の図の設定は rcParams で一括調整できます．
+ただ，プログラムの冒頭にずらっと設定を列挙するのは，次の 2 点から微妙です．
+
+Notebook ファイルでは冒頭にタイトルや概要を記述することが多い．
+その直下に全く本質的でない rcParams の情報が並んでいると，情報が不必要に分断される．
+ファイルごとに同じ設定を書くのは避けたい．面倒なのと，設定を変更しにくいので．
+
+そこで，rcParams を json ファイルに書き，それを python から読み込む方法を紹介します．
+
+ 初期コード
+import matplotlib.pyplot as pl...]]></description><link>https://zenn.dev/zennjouinn/articles/694921771660da</link><guid isPermaLink="true">https://zenn.dev/zennjouinn/articles/694921771660da</guid><pubDate>Thu, 20 Jun 2024 07:25:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--EJD0gPb---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Matplotilb%2520%25E3%2581%25AE%2520rcParams%2520%25E3%2582%2592%2520json%2520%25E3%2581%258B%25E3%2582%2589%25E8%25AA%25AD%25E3%2581%25BF%25E8%25BE%25BC%25E3%2582%2580%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E7%25A6%2585%25E5%25AE%259A%25E5%258D%25B0%25E4%25BB%258F%25E5%25BA%25A7%25E5%2583%258F%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS1NxUllBUG5JVzZGcFhFcGUxYmRzMTBxRWZBaUJqMzh2RVNremhVbG41ZEw0PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>禅定印仏座像</dc:creator></item><item><title><![CDATA[PythonでPDFにテキストを書き込む方法]]></title><description><![CDATA[
+ はじめに
+以前業務の自動化をするためにPDFを操作するデスクトップアプリを開発しました。処理内容としては
+
+PDFの中のテキストを読み取る
+1.のテキストデータを元に算出した情報をPDFにテキスト書き込み &amp; ファイル名変更
+2.で変更したファイル名に記載した伝票No.同じPDFを結合
+
+という処理のデスクトップアプリをPythonで開発しました。
+その時に使用したPDFへテキストを書き込む方法を書きます。
+
+ 環境
+
+Windows11
+Python 3.9.13
+
+
+ 処理概要
+前提として処理の内容を理解しておいた方が理解しやすいのでここで説明します。
+主に使用するライブ...]]></description><link>https://zenn.dev/musashi26629/articles/bbaa89c6d51d19</link><guid isPermaLink="true">https://zenn.dev/musashi26629/articles/bbaa89c6d51d19</guid><pubDate>Thu, 20 Jun 2024 03:45:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1ifmhYZD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A7PDF%25E3%2581%25AB%25E3%2583%2586%25E3%2582%25AD%25E3%2582%25B9%25E3%2583%2588%25E3%2582%2592%25E6%259B%25B8%25E3%2581%258D%25E8%25BE%25BC%25E3%2582%2580%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Musashi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJmOTkxZDY1N2YuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Musashi</dc:creator></item><item><title><![CDATA[Pythonのpandasで3営業日後を調べる]]></title><description><![CDATA[
+ Pythonのpandasで3営業日後を調べる
+Pythonで営業日換算するときにpandasの型に営業日換算できる型があったので素振りしました。
+なお、個人的にpolarsというpandasよりも高速処理できるライブラリに移行しようとしていますが、polars側には今回紹介する型がないので自作する必要があります。
+
+ 環境
+
+Python
+
+3.12.3
+
+
+holidays
+
+0.50
+
+
+pandas
+
+2.2.2
+
+
+
+
+ 実装
+
+ 祝日
+日本の祝日を含めて営業日換算する必要があるので、定義する必要があります。
+自分で定義してもよいのですが、今回は日本の祝日も取り扱っているラ...]]></description><link>https://zenn.dev/kirimaru/articles/e13a6528c547f0</link><guid isPermaLink="true">https://zenn.dev/kirimaru/articles/e13a6528c547f0</guid><pubDate>Thu, 20 Jun 2024 03:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vQF24HN5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25AEpandas%25E3%2581%25A73%25E5%2596%25B6%25E6%25A5%25AD%25E6%2597%25A5%25E5%25BE%258C%25E3%2582%2592%25E8%25AA%25BF%25E3%2581%25B9%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258D%25E3%2582%258A%25E4%25B8%25B8%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2Rhcmsvay5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>きり丸</dc:creator></item><item><title><![CDATA[DSPyの紹介: Signal Processing技術を採用したマシンラーニング向けPythonライブラリ→時系列データをサポート、RAG]]></title><description><![CDATA[
+ DSPyの紹介: Signal Processing技術を採用したマシンラーニング向けPythonライブラリ→時系列データをサポート、RAG開発に有効
+
+ Intro to DSPy: Simple Ideas To Improve Your RAG
+参照ネタ：https://pub.towardsai.net/intro-to-dspy-simple-ideas-to-improve-your-rag-eb76914c844d
+
+ DSPyとは？
+DSPy (Differentiable Signal Processing in Python)は、信号処理技術と機械学習モデルを統合...]]></description><link>https://zenn.dev/ippeisuzuki/articles/f0131cacfa0bb7</link><guid isPermaLink="true">https://zenn.dev/ippeisuzuki/articles/f0131cacfa0bb7</guid><pubDate>Thu, 20 Jun 2024 00:57:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ShgA9r5A--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:DSPy%25E3%2581%25AE%25E7%25B4%25B9%25E4%25BB%258B%253A%2520Signal%2520Processing%25E6%258A%2580%25E8%25A1%2593%25E3%2582%2592%25E6%258E%25A1%25E7%2594%25A8%25E3%2581%2597%25E3%2581%259F%25E3%2583%259E%25E3%2582%25B7%25E3%2583%25B3%25E3%2583%25A9%25E3%2583%25BC%25E3%2583%258B%25E3%2583%25B3%25E3%2582%25B0%25E5%2590%2591%25E3%2581%2591Python%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%25E2%2586%2592%25E6%2599%2582%25E7%25B3%25BB...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E9%2588%25B4%25E6%259C%25A8%25E3%2581%2584%25E3%2581%25A3%25E3%2581%25BA%25E3%2581%2584%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTFpERFFsOWlYRnM5elNxRWZ5akxZVkRURGlNcDA0WHNOQmVDWEZhVW5McWNhNXpkOEs9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>鈴木いっぺい</dc:creator></item><item><title><![CDATA[[Python×Lambda] CloudFrontのキャッシュ削除のソースコードとテストコード]]></title><description><![CDATA[
+ 概要
+Lambda（Python）で、CloudFrontのキャッシュ削除するための、ソースコードとそのテストコード（覚え書き）
+関数のパフォーマンスを向上させるため、Lambdaのベストプラクティスに沿って、実行環境の再利用を活用して関数ハンドラー外で SDK クライアントを宣言しています
+
+ コード
+
+言語: Python3
+テストライブラリ: Pytest, moto
+
+
+ ソースコード
+
+lambda_function.py
+import boto3
+import os
+from datetime import datetime
+
+# CloudFrontクライアントとディス...]]></description><link>https://zenn.dev/c_hero/articles/b1156f70be3a62</link><guid isPermaLink="true">https://zenn.dev/c_hero/articles/b1156f70be3a62</guid><pubDate>Wed, 19 Jun 2024 14:27:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--IURYkZMr--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BPython%25C3%2597Lambda%255D%2520CloudFront%25E3%2581%25AE%25E3%2582%25AD%25E3%2583%25A3%25E3%2583%2583%25E3%2582%25B7%25E3%2583%25A5%25E5%2589%258A%25E9%2599%25A4%25E3%2581%25AE%25E3%2582%25BD%25E3%2583%25BC%25E3%2582%25B9%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2581%25A8%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ChiHaRu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk0NjI3ZjQ0OTQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ChiHaRu</dc:creator></item><item><title><![CDATA[VSCode Dev ContainersでJupyter実行環境を作ろう]]></title><description><![CDATA[
+ はじめに
+機械学習の勉強を始めようと思って、色々調べてみると、Jupyter を使って分析等を行うといいということがわかりました。
+しかし、「ローカル環境に Python + Jupyter 環境を構築するのもなぁ...」ということで、Visual Studio Code Dev Containers を使って Jupyter 実行環境を作ってみました。
+本記事では Poetry を使って Python のパッケージ管理を行いますが、お好きなパッケージ管理ツールを使っても構いません。
+また、Jupyter の実行は VS Code の Jupyter 拡張機能を使い、VS Code ...]]></description><link>https://zenn.dev/big_tanukiudon/articles/f26b145b123fb7</link><guid isPermaLink="true">https://zenn.dev/big_tanukiudon/articles/f26b145b123fb7</guid><pubDate>Wed, 19 Jun 2024 13:06:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--PRaF7nqG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:VSCode%2520Dev%2520Containers%25E3%2581%25A7Jupyter%25E5%25AE%259F%25E8%25A1%258C%25E7%2592%25B0%25E5%25A2%2583%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258D%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259F%25E3%2581%25AC%25E3%2581%258D%25E3%2581%2586%25E3%2581%25A9%25E3%2582%2593%25E5%25A4%25A7%25E7%259B%259B%25E3%2582%258A%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U0ZGMwMjI1ZGUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>たぬきうどん大盛り</dc:creator></item><item><title><![CDATA[iiif-prezi3を試す]]></title><description><![CDATA[
+ 概要
+IIIF Presentation API 3が普及しつつありますが、その仕様を理解しつつ、JSONファイルを直接作成することが難しく感じるようになりました。
+そこで、以下のPythonライブラリを使用してみましたので、備忘録です。
+https://github.com/iiif-prezi/iiif-prezi3
+以下の記事で紹介した東寺百合文書WEBで公開されているデータのIIIFへの変換にあたり、本ライブラリを使用しています。
+https://zenn.dev/nakamura196/articles/dce32fda27cc0e
+読みにくいもので恐縮ですが、ソースコード...]]></description><link>https://zenn.dev/nakamura196/articles/c07753e47ab393</link><guid isPermaLink="true">https://zenn.dev/nakamura196/articles/c07753e47ab393</guid><pubDate>Wed, 19 Jun 2024 09:44:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--rsX3eCmP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:iiif-prezi3%25E3%2582%2592%25E8%25A9%25A6%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nakamura196%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pkd3BpX1gzTWIzV3VqTnVnV2tPTlJlU3VsNFNTN1BNMWlPQm9LRm5JPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nakamura196</dc:creator></item><item><title><![CDATA[摂動と平方根の値]]></title><description><![CDATA[
+ はじめに
+(qiita に投稿していたものと完全に同じものです。）
+物理をやっている、あるいはやっていた人なら量子力学で摂動を見たことがあるだろう。この記事では、摂動を理解するための補助輪として、平方根の値を求めるコードを書いてみた。
+
+ メイン
+
+ サンプルコード
+下のコードは Julia のもの。
+function get_square_root(n::Int, x0, RHS) 
+    #nは摂動の最高次数 ε^(n-1)まで展開.
+    #RHSは知りたい平方根の値.
+    #x^2 = RHS+εにおいて、RHSはxが整数になるような数（平方数）でεが摂動項.x0^2...]]></description><link>https://zenn.dev/phlogis/articles/2c4a7ef1f25f9c</link><guid isPermaLink="true">https://zenn.dev/phlogis/articles/2c4a7ef1f25f9c</guid><pubDate>Wed, 19 Jun 2024 07:22:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---epM5Qm_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%2591%2582%25E5%258B%2595%25E3%2581%25A8%25E5%25B9%25B3%25E6%2596%25B9%25E6%25A0%25B9%25E3%2581%25AE%25E5%2580%25A4%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:phlogis%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTFlvaFBPd0F1cUdzcVFvaVNjZEFDYUtncERockx3QnVnNDBvVUFBMVptRUtyR0RnPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>phlogis</dc:creator></item></channel></rss>
