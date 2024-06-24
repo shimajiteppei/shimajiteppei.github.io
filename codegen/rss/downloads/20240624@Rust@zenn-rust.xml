@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Rust」のフィード]]></title><description><![CDATA[Zennのトピック「Rust」のRSSフィードです]]></description><link>https://zenn.dev/topics/rust</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ba09661577.png</url><title>Zennの「Rust」のフィード</title><link>https://zenn.dev/topics/rust</link></image><generator>zenn.dev</generator><lastBuildDate>Mon, 24 Jun 2024 02:52:20 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/rust/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[思考のスピードでコードを書け！！Rust製の次世代エディタ「Zed」]]></title><description><![CDATA[
+ はじめに
+周りとは一味違ったツールを使いたくなるお年頃、皆さんも経験されたことがあるかと思います。
+え、ない？
+今回は「Code at the speed of thought(思考のスピードでコードを書く)」というキャッチコピーを掲げているエディタ「Zed」を発見したので紹介していこうと思います。
+
+ Zed とは
+!
+この記事は2024/06/24時点での最新情報を掲載しています。
+Zedは凄いスピードで開発が進んでいるので今閲覧している情報は古い可能性があります！
+
+テキストエディタであるAtomや解析ライブラリのTree-sitterの開発者によって開発されている、Rust ...]]></description><link>https://zenn.dev/ayuu/articles/c421e752119cee</link><guid isPermaLink="true">https://zenn.dev/ayuu/articles/c421e752119cee</guid><pubDate>Sun, 23 Jun 2024 13:01:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lEKd5cgv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%2580%259D%25E8%2580%2583%25E3%2581%25AE%25E3%2582%25B9%25E3%2583%2594%25E3%2583%25BC%25E3%2583%2589%25E3%2581%25A7%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2582%2592%25E6%259B%25B8%25E3%2581%2591%25EF%25BC%2581%25EF%25BC%2581Rust%25E8%25A3%25BD%25E3%2581%25AE%25E6%25AC%25A1%25E4%25B8%2596%25E4%25BB%25A3%25E3%2582%25A8%25E3%2583%2587%25E3%2582%25A3%25E3%2582%25BF%25E3%2580%258CZed%25E3%2580%258D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Ayuu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2hCRXRzOTYwTHZiRnpjamotQ2ZjLUZlQjRKNy1QaTZPc0FhZVZsPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Ayuu</dc:creator></item><item><title><![CDATA[開発環境管理はとりあえずmiseで]]></title><description><![CDATA[Mac限定です(Windowsサポート外)
+開発しているとpython, nodejs, ruby, perl, golang...といろいろな言語の実行環境が必要になると思います。
+それぞれの言語環境に閉じて見れば、pyenvとかrbenvとか、色々な管理ツールがありますが、それぞれ当然別個のものなのでだんだん混乱してきます。
+そしてそれすら使っていない場合は brew install で乱暴にインストールしてもはやカオスなローカル環境ができがちでした...
+半年前くらいにasdfという開発環境管理ツールを見つけて適当に使っていたのですが、最近ではさらにasdfの課題も解消したmise...]]></description><link>https://zenn.dev/knziiy/articles/fa32a6e6a3aa63</link><guid isPermaLink="true">https://zenn.dev/knziiy/articles/fa32a6e6a3aa63</guid><pubDate>Sun, 23 Jun 2024 08:37:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--UR5aScJL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E9%2596%258B%25E7%2599%25BA%25E7%2592%25B0%25E5%25A2%2583%25E7%25AE%25A1%25E7%2590%2586%25E3%2581%25AF%25E3%2581%25A8%25E3%2582%258A%25E3%2581%2582%25E3%2581%2588%25E3%2581%259Amise%25E3%2581%25A7%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:knziiy%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2QxMTFkYzlkZmEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>knziiy</dc:creator></item><item><title><![CDATA[egui を使って画像を差し替え、再描画させる]]></title><description><![CDATA[
+ はじめに
+本記事は前回の egui というクレートを使って外部の画像を表示させる記事の続編です。
+Github 上の png ファイルを表示させ、さらにそれを再描画（他の画像に差し替える）をやっていければと思います。
+https://zenn.dev/collabostyle/articles/54f81af6df6764
+
+ 下準備
+ここは前回とほとんど同じですが、
+今回は、ランダムな id を生成して、それを使用して再度画像を取得し、描画したいと思いますので、
+randクレートを追加しておきます。
+
+Cargo.toml
+[dependencies]
+eframe = "0.27...]]></description><link>https://zenn.dev/collabostyle/articles/90f87a5e096798</link><guid isPermaLink="true">https://zenn.dev/collabostyle/articles/90f87a5e096798</guid><pubDate>Sun, 23 Jun 2024 07:19:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--R0vIeEu0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:egui%2520%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E7%2594%25BB%25E5%2583%258F%25E3%2582%2592%25E5%25B7%25AE%25E3%2581%2597%25E6%259B%25BF%25E3%2581%2588%25E3%2580%2581%25E5%2586%258D%25E6%258F%258F%25E7%2594%25BB%25E3%2581%2595%25E3%2581%259B%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Iseya%2520Shota%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MxOTFmZDljMTIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25B3%25E3%2583%25A9%25E3%2583%259C%25E3%2582%25B9%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25AB%2520Developers%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YjRyRXVYb0x2SGp5alRaelhENlBCRnZGTzhNTk0zLXlBTWZvM0Q9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Iseya Shota</dc:creator></item><item><title><![CDATA[Hit&Blowで学ぶベイズ推定：理論から実装まで]]></title><description><![CDATA[
+ はじめに
+Hit&amp;Blowは、相手が秘密に設定した3桁の数字を当てるシンプルな推理ゲームです。最近の自分は、ベイズ推定のコードを書けるように、また他の題材に応用できるようになれたら嬉しいと思っています。Hit&amp;Blowを題材にベイズ推定について考えてみることで、知識を定着させます。
+なお、Hit&amp;Blowについては探索木的なアプローチで最短手数を求める先行研究がいくつか見つかりました。ベイズ推定には興味がなく、Hit&amp;Blowにのみ興味がある人は、(確率分布を持ち込まず解く方がアプローチとして素直なので)そちらを参照してください。
+
+ Hit&amp;...]]></description><link>https://zenn.dev/4eta/articles/072132e44e2075</link><guid isPermaLink="true">https://zenn.dev/4eta/articles/072132e44e2075</guid><pubDate>Sun, 23 Jun 2024 03:58:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--O-X1u6wX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Hit%2526Blow%25E3%2581%25A7%25E5%25AD%25A6%25E3%2581%25B6%25E3%2583%2599%25E3%2582%25A4%25E3%2582%25BA%25E6%258E%25A8%25E5%25AE%259A%25EF%25BC%259A%25E7%2590%2586%25E8%25AB%2596%25E3%2581%258B%25E3%2582%2589%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%25BE%25E3%2581%25A7%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:4eta%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSmQ4NWp1bGRIUURYQmg4RmhpbEtHMldOd0phWmlHWlRJUmM0WTNhRURxTmYxbjlmQT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>4eta</dc:creator></item><item><title><![CDATA[簡易的なHTMLパーサーをRustで自作]]></title><description><![CDATA[簡易的な自作ブラウザを作成した際にパーサーを実装したので考え方を共有したいと思います。
+
+ htmlをパースするときの考え方
+&lt;h1&gt; text &lt;/h1&gt;
+例えばこのタグをパースする場合、カーソルを用意し頭から一文字ずつ確認して行きます。
+&lt;h1&gt; text &lt;/h1&gt;
+↑
+一文字目が&lt;であればタグの始まりと認識させます。
+&lt;h1&gt; text &lt;/h1&gt;
+ ↑
+一文字先をみて/で無ければ閉じタグではないので処理を続行させます。
+&lt;h1&gt; text &lt;/h1&gt;
+   ↑
+そして&gt;が...]]></description><link>https://zenn.dev/smartcamp/articles/5a8ec55749df58</link><guid isPermaLink="true">https://zenn.dev/smartcamp/articles/5a8ec55749df58</guid><pubDate>Sun, 23 Jun 2024 02:44:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vEPitfHd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%25B0%25A1%25E6%2598%2593%25E7%259A%2584%25E3%2581%25AAHTML%25E3%2583%2591%25E3%2583%25BC%25E3%2582%25B5%25E3%2583%25BC%25E3%2582%2592Rust%25E3%2581%25A7%25E8%2587%25AA%25E4%25BD%259C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2582%25AC%25E3%2583%25AC%25E3%2583%2590%25E3%2583%25AC%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzUyNGYwMGIzM2MuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:SMARTCAMP%2520Engineer%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY3ZWYwOTllZjMuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ガレバレ</dc:creator></item><item><title><![CDATA[Rust の GUI ライブラリ egui で外部の画像を表示させる]]></title><description><![CDATA[
+ はじめに
+Rust の GUI ライブラリの egui を使って外部の画像表示をするところをやってみました。
+egui は eframe というフレームワークで動作し、Rust で GUI アプリケーションを簡単に構築することができます。
+🔻egui
+https://github.com/emilk/egui
+今回は、egui で外部リンクを実行して、
+ポケモンの画像をそのまま取得して、表示させるところをやってみます。
+（外部APIから取得した画像の表示も確認可能です。）
+https://github.com/PokeAPI/sprites
+
+ 下準備
+egui を動作させるために、...]]></description><link>https://zenn.dev/collabostyle/articles/54f81af6df6764</link><guid isPermaLink="true">https://zenn.dev/collabostyle/articles/54f81af6df6764</guid><pubDate>Sat, 22 Jun 2024 03:11:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--cxarR8d1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%2520%25E3%2581%25AE%2520GUI%2520%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%2520egui%2520%25E3%2581%25A7%25E5%25A4%2596%25E9%2583%25A8%25E3%2581%25AE%25E7%2594%25BB%25E5%2583%258F%25E3%2582%2592%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2595%25E3%2581%259B%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Iseya%2520Shota%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MxOTFmZDljMTIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25B3%25E3%2583%25A9%25E3%2583%259C%25E3%2582%25B9%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25AB%2520Developers%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YjRyRXVYb0x2SGp5alRaelhENlBCRnZGTzhNTk0zLXlBTWZvM0Q9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Iseya Shota</dc:creator></item><item><title><![CDATA[Rustのシンプルで色々できるベンチマークツール：Divanメモ [blessed.rsシリーズ15]]]></title><description><![CDATA[
+ 概要
+https://blessed.rs/crates
+こちらのリストにあるものを見て書いたメモになります。
+今回はDivanについてです。
+https://lib.rs/crates/divan
+
+ Divanとは
+シンプルでかつ色々とできるベンチマークツール
+
+ 参考
+https://nikolaivazquez.com/blog/divan/
+
+ Criterionとの比較
+
+こちらはジェネリック関数のベンチマークができる
+こちらはアロケーションの測定ができる
+よりシンプル（らしい）
+
+一方、分析についてはCriterionの方がしっかりできそう：https://zenn.d...]]></description><link>https://zenn.dev/kotabrog/articles/557abb8f164bce</link><guid isPermaLink="true">https://zenn.dev/kotabrog/articles/557abb8f164bce</guid><pubDate>Sat, 22 Jun 2024 02:00:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--eibp79sl--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25AE%25E3%2582%25B7%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AB%25E3%2581%25A7%25E8%2589%25B2%25E3%2580%2585%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258B%25E3%2583%2599%25E3%2583%25B3%25E3%2583%2581%25E3%2583%259E%25E3%2583%25BC%25E3%2582%25AF%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%25EF%25BC%259ADivan%25E3%2583%25A1%25E3%2583%25A2%2520%255Bblessed.rs%25E3%2582%25B7%25E3%2583%25AA%25E3%2583%25BC%25E3%2582%25BA15%255D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kota%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pndUZyRTdIcS13U3dMRHFoT05pbjFKWVZHOVFZcjBEWXQ2SVZ3WWc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kota</dc:creator></item><item><title><![CDATA[【Rust】優先度付きキュー]]></title><description><![CDATA[
+ 優先度付きキューとは
+優先度付きキュー：優先度の高いものから順に取り出すキュー
+RustではBinaryHeapを利用して実装する。BinaryHeapはヒープと呼ばれるデータ構造を持つので以下で簡単に触れておく。
+
+ ヒープ
+ヒープとはここでは木の一種であり、以下を満たす：
+
+親子ノード間に大小関係が定義されている
+完全二分木（最下層が左から順に、それ以外は完全に埋まっている二分木）
+
+最大ヒープ
+
+親ノード &gt;= 子ノード
+根が最大の要素
+
+最小ヒープ
+
+親ノード &lt;= 子ノード
+根が最小の要素
+
+要素が追加されると、その要素はまず最下層に配置され、親子の大小関係が正...]]></description><link>https://zenn.dev/icedpenguin/articles/26335afd26e98f</link><guid isPermaLink="true">https://zenn.dev/icedpenguin/articles/26335afd26e98f</guid><pubDate>Fri, 21 Jun 2024 14:29:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--IpOK2SUZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Rust%25E3%2580%2591%25E5%2584%25AA%25E5%2585%2588%25E5%25BA%25A6%25E4%25BB%2598%25E3%2581%258D%25E3%2582%25AD%25E3%2583%25A5%25E3%2583%25BC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:icedpenguin%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E1Nzc3NGIxNTcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>icedpenguin</dc:creator></item><item><title><![CDATA[NEAR×Rustでスマートコントラクト！初心者向けステップバイステップ解説]]></title><description><![CDATA[
+ 概要
+この記事の対象者:
+NEARブロックチェーンとRustでスマートコントラクトを学びたい初心者向け。
+この記事の内容:
+NEARテストネットでのスマートコントラクト開発の手順を解説。
+この記事を読むとわかること:
+Rustを使ったスマートコントラクトの作成、テスト、デプロイの方法がわかります。
+
+
+ 方法
+
+ 必要なツールの準備
+
+ NEARのテストネットアカウントを作成
+テストネットは実際のお金を使わないで試せるネットワークです。
+NEARウォレットのサイトでアカウントを作成し、テスト用のNEARトークンを入手します。
+NEARテストネットウォレット
+
+ near-cliのイン...]]></description><link>https://zenn.dev/kei_ninja/articles/c11e7f78fa6610</link><guid isPermaLink="true">https://zenn.dev/kei_ninja/articles/c11e7f78fa6610</guid><pubDate>Fri, 21 Jun 2024 12:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--caXghBd2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:NEAR%25C3%2597Rust%25E3%2581%25A7%25E3%2582%25B9%25E3%2583%259E%25E3%2583%25BC%25E3%2583%2588%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2588%25E3%2583%25A9%25E3%2582%25AF%25E3%2583%2588%25EF%25BC%2581%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E5%2590%2591%25E3%2581%2591%25E3%2582%25B9%25E3%2583%2586%25E3%2583%2583%25E3%2583%2597%25E3%2583%2590%25E3%2582%25A4%25E3%2582%25B9%25E3%2583%2586%25E3%2583%2583%25E3%2583%2597%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kei%25E5%25BF%258D%25E8%2580%2585%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzIzYTk0NjI3YjYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kei忍者</dc:creator></item><item><title><![CDATA[[Rust, Windows11] Can't run Rust on VSCode]]></title><description><![CDATA[When I run "src\main.rs" on VSCode, I got the Error like below.
+
+Path to shell executable "PATH_TO_PROJECT\cargo" does not exist.
+
+Environment: Windows11, VSCode 1.85.1
+
+ details
+Here is my step.
+
+create new project&gt; cargo new projectName
+
+
+open the project on VSCode
+open "src\main.rs" on VSCo...]]></description><link>https://zenn.dev/shunyana/articles/9acb96b248f71a</link><guid isPermaLink="true">https://zenn.dev/shunyana/articles/9acb96b248f71a</guid><pubDate>Fri, 21 Jun 2024 06:57:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2Xr2ArMj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BRust%252C%2520Windows11%255D%2520Can%2527t%2520run%2520Rust%2520on%2520VSCode%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:shunyana%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFUWEFKeGFCOWlNLTJsTkt5MklhdFdpQ1l3WnJyNl85a200WG83U2RINXc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>shunyana</dc:creator></item><item><title><![CDATA[[同期処理]Rust のコードで外部APIを実行する]]></title><description><![CDATA[
+ はじめに
+Rust で外部のAPIをコールする機会はしばしば出てくると思います。
+私もこの辺りほとんど知識がないですが、利用する機会が出てきたのでアウトプットします。
+APIをコールする手段として、Rustではreqwestというクレートを利用することが一般的なようです。
+今回は reqwestを利用した実装方法を書いていきます。
+https://docs.rs/reqwest/latest/reqwest/
+
+ 同期処理でAPIを実行する
+同期的にAPIをコールする方法をやっていきます。
+jsonplaceholderを使ってAPIをコールしていきたいと思います。
+https://...]]></description><link>https://zenn.dev/collabostyle/articles/054c0361c86f07</link><guid isPermaLink="true">https://zenn.dev/collabostyle/articles/054c0361c86f07</guid><pubDate>Wed, 19 Jun 2024 21:30:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--OdX960fB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255B%25E5%2590%258C%25E6%259C%259F%25E5%2587%25A6%25E7%2590%2586%255DRust%2520%25E3%2581%25AE%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2581%25A7%25E5%25A4%2596%25E9%2583%25A8API%25E3%2582%2592%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Iseya%2520Shota%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MxOTFmZDljMTIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25B3%25E3%2583%25A9%25E3%2583%259C%25E3%2582%25B9%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25AB%2520Developers%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YjRyRXVYb0x2SGp5alRaelhENlBCRnZGTzhNTk0zLXlBTWZvM0Q9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Iseya Shota</dc:creator></item><item><title><![CDATA[Rustで𝕏(Twitter)APIをもっとモックする。]]></title><description><![CDATA[
+ 目的
+以前Rustで𝕏(Twitter)APIをモックするという記事を書きました。
+この後ライブラリの仕様を変更して、環境変数で向き先を変えるだけで無く、引数でも向き先を変えられるようにしました。
+それにより、引数で向き先を変える方法は単体テスト向きに使えて、環境変数で向き先を変える方法はシステムテストやE2Eテストで使えそうでとわかりました。
+今回のコードはaoyagikouhei/mock_x_sampleに置いてあります。
+
+ コード
+
+ Rust
+
+Cargo.toml
+[package]
+name = "sample"
+version = "0.1.0"
+edition =...]]></description><link>https://zenn.dev/aoyagikouhei/articles/a5ec547f22c728</link><guid isPermaLink="true">https://zenn.dev/aoyagikouhei/articles/a5ec547f22c728</guid><pubDate>Wed, 19 Jun 2024 08:44:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--UuRorJi1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25A7%25F0%259D%2595%258F%2528Twitter%2529API%25E3%2582%2592%25E3%2582%2582%25E3%2581%25A3%25E3%2581%25A8%25E3%2583%25A2%25E3%2583%2583%25E3%2582%25AF%25E3%2581%2599%25E3%2582%258B%25E3%2580%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E9%259D%2592%25E6%259F%25B3%25E5%25BA%25B7%25E5%25B9%25B3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFjZDA3ZGRhNzguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>青柳康平</dc:creator></item><item><title><![CDATA[Rustのno_stdでHello World!(Linux on aarch64)]]></title><description><![CDATA[
+ no_stdでHello World!をしたい
+libcを使わずに直でシステムコールを呼び出したい欲求はプログラマの三大欲求のうちの一つであるため（？）、
+欲求に従って手元のmacでこちらの記事を参考にシステムコールを呼び出そうとしたところ、archが違うのだから呼び出し規約も違うという現実に突き当たった(そうだねという感じ)
+なんとかなったため、なんとかした方法を紹介する
+(mac上でlinuxシステムコールを呼び出す方法は普通にDockerとかdevcontainerをコネコネした)
+
+ aarch64のsyscall convention
+x86_64ではraxレジスタに呼び出...]]></description><link>https://zenn.dev/maetin/articles/0af71169d67404</link><guid isPermaLink="true">https://zenn.dev/maetin/articles/0af71169d67404</guid><pubDate>Wed, 19 Jun 2024 07:32:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--030yk7C4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25AEno_std%25E3%2581%25A7Hello%2520World%2521%2528Linux%2520on%2520aarch64%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:maetin%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSXdFWlE3dWUxYjlsRUFrZW5GS2JxbmZMX1NPNmxodTh0MG1PX1FhcVBMRzRFT2xvMTg9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>maetin</dc:creator></item><item><title><![CDATA[RustとWebAssemblyによるゲーム開発 ch.2]]></title><description><![CDATA[
+の２章を読み進めて参ります
+いつものように、有識者のまさかり待ってます
+
+ 復習
+
+ 上はビルド通る　下はエラー　何が違う？
+Closure::once(move || {
+    let _ = success_tx.send(());
+};
+Closure::once(move || success_tx.send(()));
+上のコードと下のコードの違いは戻り値
+下のコードでは戻り値がResult&lt;(), T&gt;となる
+ここで、wasm_bindgen::closure::Closure::once()の定義を見てみると
+pub fn once&lt;F, A, R&g...]]></description><link>https://zenn.dev/cp_r/articles/2e66158a92f466</link><guid isPermaLink="true">https://zenn.dev/cp_r/articles/2e66158a92f466</guid><pubDate>Wed, 19 Jun 2024 06:48:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vVSf1TqW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25A8WebAssembly%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258B%25E3%2582%25B2%25E3%2583%25BC%25E3%2583%25A0%25E9%2596%258B%25E7%2599%25BA%2520ch.2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:9kv8xiyi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE1NjljYjFhZGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>9kv8xiyi</dc:creator></item><item><title><![CDATA[AxumでWebSocketを使うときにOpenAPI Generatorのカスタムテンプレートを使用してハンドラーの生成をする知見]]></title><description><![CDATA[最近OpenAPI Generatorにrust-axumが追加されているのを発見し、以前開発していたWebSocketサーバーに適用出来ないか試してみました。
+
+ library
+axumとOpenAPI Generatorのバージョンは以下の指定をしています。
+[dependencies.axum]
+version = '0.7.5'
+features = [
+    'ws',
+]
+OpenAPI Generator: v7.5.0
+
+ Generateに使うYaml
+生成用のYamlは以下でPath Parameterにchannel_idを入れています。
+また、特殊な記述として...]]></description><link>https://zenn.dev/mixi/articles/f6b7e3e205417b</link><guid isPermaLink="true">https://zenn.dev/mixi/articles/f6b7e3e205417b</guid><pubDate>Tue, 18 Jun 2024 13:13:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Se6R2AQP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Axum%25E3%2581%25A7WebSocket%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%25E3%2581%25A8%25E3%2581%258D%25E3%2581%25ABOpenAPI%2520Generator%25E3%2581%25AE%25E3%2582%25AB%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%25A0%25E3%2583%2586%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AC%25E3%2583%25BC%25E3%2583%2588%25E3%2582%2592%25E4%25BD%25BF%25E7%2594%25A8%25E3%2581%2597%25E3%2581%25A6%25E3%2583%258F%25E3%2583%25B3%25E3%2583%2589%25E3%2583%25A9...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Taillook%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2UzY2IwNWVmMTMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:MIXI%2520DEVELOPERS%2520NOTE%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzcxMWRmMzMxNzIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Taillook</dc:creator></item><item><title><![CDATA[Ohkami×Yew TODO - Rust で SPA を作る on Cloudflare Workers]]></title><description><![CDATA[https://zenn.dev/kanal/articles/ohkami-worker-urlshortener
+に続いて、自作 web framework Ohkami の記事です。
+前回は template engine で UI を作っていたのに対して、今回は Yew を使い、Rust で SPA を作りました。
+作ったもの：
+https://ohkami-yew-todo.kanarus.workers.dev/
+https://github.com/kana-rus/ohkami-yew-todo
+
+ 注目ポイント
+
+ Rust だけで SPA を作るメリット
+僕のような ...]]></description><link>https://zenn.dev/kanal/articles/ohkami-yew-todo</link><guid isPermaLink="true">https://zenn.dev/kanal/articles/ohkami-yew-todo</guid><pubDate>Tue, 18 Jun 2024 12:33:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---636V0FL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ohkami%25C3%2597Yew%2520TODO%2520-%2520Rust%2520%25E3%2581%25A7%2520SPA%2520%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%2520on%2520Cloudflare%2520Workers%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kanarus%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc0ZTQ5YjRjOWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kanarus</dc:creator></item><item><title><![CDATA[Rustのベンチマークツール：Criterion.rsメモ [blessed.rsシリーズ14]]]></title><description><![CDATA[
+ 概要
+https://blessed.rs/crates
+こちらのリストにあるものを見て書いたメモになります。
+今回はCriterion.rsについてです。
+https://lib.rs/crates/criterion
+
+ Criterion.rsとは
+統計に基づいたマイクロ・ベンチマーク・ツール
+
+ 参考
+https://bheisler.github.io/criterion.rs/book/criterion_rs.html
+
+ チュートリアル
+https://bheisler.github.io/criterion.rs/book/getting_started.html
+...]]></description><link>https://zenn.dev/kotabrog/articles/bcb72de6ad9849</link><guid isPermaLink="true">https://zenn.dev/kotabrog/articles/bcb72de6ad9849</guid><pubDate>Tue, 18 Jun 2024 10:02:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Q9B17Imo--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25AE%25E3%2583%2599%25E3%2583%25B3%25E3%2583%2581%25E3%2583%259E%25E3%2583%25BC%25E3%2582%25AF%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%25EF%25BC%259ACriterion.rs%25E3%2583%25A1%25E3%2583%25A2%2520%255Bblessed.rs%25E3%2582%25B7%25E3%2583%25AA%25E3%2583%25BC%25E3%2582%25BA14%255D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kota%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pndUZyRTdIcS13U3dMRHFoT05pbjFKWVZHOVFZcjBEWXQ2SVZ3WWc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kota</dc:creator></item><item><title><![CDATA[Rustで作物列画像を二値化処理をする]]></title><description><![CDATA[
+ はじめに
+Rust Ja Docs を一通りやったので、作物列画像から植物体を検出をするための二値化処理を Rust でやってみました。
+
+ 参照
+
+image - Rust crates
+GitHub Code search results for [path:*.rs "use image" open binary NOT is:fork NOT is:archived]
+
+
+ 入出力画像
+
+input.png
+
+output.png (2G - R - B &gt; 60 ? 255 : 1)
+
+ 画像処理
+
+ 二値化処理
+入力画像中の植物体を検出するために簡易的な二値化判別式...]]></description><link>https://zenn.dev/oriverk/articles/432f7c2f17b928</link><guid isPermaLink="true">https://zenn.dev/oriverk/articles/432f7c2f17b928</guid><pubDate>Tue, 18 Jun 2024 05:48:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bUnUkMNc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25A7%25E4%25BD%259C%25E7%2589%25A9%25E5%2588%2597%25E7%2594%25BB%25E5%2583%258F%25E3%2582%2592%25E4%25BA%258C%25E5%2580%25A4%25E5%258C%2596%25E5%2587%25A6%25E7%2590%2586%25E3%2582%2592%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:oriverk%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pWb1Vhc3I2TG1WZ2ZycnEtRlhNUVhya3VSdm85OWFMWkNtS2xEPXMyNTAtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>oriverk</dc:creator></item><item><title><![CDATA[RustとWebAssemblyによるゲーム開発 ch.1]]></title><description><![CDATA[とかいう、欲張りな本を見つけたので読み進めています
+https://www.oreilly.co.jp/books/9784814400393/
+ただ読むだけではあまり定着しないので、理解しておきたい事やつまづいた事を設問形式でまとめました
+
+ 復習
+
+ src/lib.rs内でmain_js()がエントリポイントとなるのはなぜ
+#[wasm_bindgen(start)]がついているとwasm_bidgenがjsのプログラムの起点となるようにコードを生成してくれる
+
+ 気になったところ
+
+ wasmはDOMにアクセス出来ないとあるが、何故だろうか
+web-sysクレートがブラウザのap...]]></description><link>https://zenn.dev/cp_r/articles/6b584f0278a4ef</link><guid isPermaLink="true">https://zenn.dev/cp_r/articles/6b584f0278a4ef</guid><pubDate>Tue, 18 Jun 2024 02:39:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GhzUZd_6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25A8WebAssembly%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258B%25E3%2582%25B2%25E3%2583%25BC%25E3%2583%25A0%25E9%2596%258B%25E7%2599%25BA%2520ch.1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:9kv8xiyi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE1NjljYjFhZGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>9kv8xiyi</dc:creator></item><item><title><![CDATA[【Rust】Railsユーザーが雰囲気で理解した"所有権"]]></title><description><![CDATA[
+ 1. 所有権とは何か
+Railsでは、メモリ管理はガベージコレクションにより自動的に行われます。開発者はメモリ管理についてあまり考えなくても良いです。一方、Rustでは所有権システムというメモリ管理の仕組みがあり、プログラムの安全性とパフォーマンスを保証します。
+
+ 基本的な違い
+
+Rails (Ruby): メモリ管理はガベージコレクターが自動で行う。
+Rust: 所有権システムに基づき、プログラムがメモリの管理を自動で行うが、開発者は所有権のルールを守る必要がある。
+
+
+ 2. Rustの所有権システム
+Rustの所有権システムの基本ルールは次のとおりです：
+
+各値には所有者が1...]]></description><link>https://zenn.dev/kibe/articles/046448608a80d3</link><guid isPermaLink="true">https://zenn.dev/kibe/articles/046448608a80d3</guid><pubDate>Mon, 17 Jun 2024 06:42:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--IzlWF2kP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Rust%25E3%2580%2591Rails%25E3%2583%25A6%25E3%2583%25BC%25E3%2582%25B6%25E3%2583%25BC%25E3%2581%258C%25E9%259B%25B0%25E5%259B%25B2%25E6%25B0%2597%25E3%2581%25A7%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2597%25E3%2581%259F%2522%25E6%2589%2580%25E6%259C%2589%25E6%25A8%25A9%2522%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:k1b3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAwOTYwY2IzNTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>k1b3</dc:creator></item></channel></rss>
