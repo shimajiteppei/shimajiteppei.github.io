@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Sun, 30 Jun 2024 06:50:40 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Pythonでプロファイリングする]]></title><description><![CDATA[
+ はじめに
+とある処理の実行速度を計測したいと思った時に、いつもprint文を仕込むだけだったのですが、
+ハイパフォーマンスPython 第2版 に載っていた方法が便利だったので下記にまとめます。
+
+ 環境
+・M1Mac
+・OS:Ventura13.5
+
+ 事前準備
+sample.py というファイルに下記のsample_funcという関数を定義しました。
+def sample_func():
+    # 計測したい処理
+
+ 1. print文
+import time
+from sample import sample_func
+
+start_time = time.time()
+sa...]]></description><link>https://zenn.dev/enechange_blog/articles/c0053dfbe51beb</link><guid isPermaLink="true">https://zenn.dev/enechange_blog/articles/c0053dfbe51beb</guid><pubDate>Sun, 30 Jun 2024 06:23:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--toVqpIuB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A7%25E3%2583%2597%25E3%2583%25AD%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AA%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Saya%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk5YThmZmY3MzEuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:ENECHANGE%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhhODYxNjRmOTUuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Saya</dc:creator></item><item><title><![CDATA[chromadb使い方メモ]]></title><description><![CDATA[
+ 事前準備
+
+ ライブラリinstall
+pip install charomadb
+
+ 実装
+import chromadb
+
+ クライアント取得
+# inmemoryでクライアント取得
+# chroma_client = chromadb.Client()
+# 永続化データから取得
+chroma_client = chromadb.PersistentClient(path="./db/chromadb")
+
+ コレクション取得。無ければ作成
+collection = chroma_client.get_or_create_collection("testdb")
+永続化データ利用...]]></description><link>https://zenn.dev/y2k/articles/8f59d400bb360b</link><guid isPermaLink="true">https://zenn.dev/y2k/articles/8f59d400bb360b</guid><pubDate>Sun, 30 Jun 2024 05:50:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--K8E5jQ0S--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:chromadb%25E4%25BD%25BF%25E3%2581%2584%25E6%2596%25B9%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:y2k%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFUWEFKejFiTlNlbW1IalRqR2lqY1R5bjhQSDVuM1hfcjJjS01OcVU3c3Qtdz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>y2k</dc:creator></item><item><title><![CDATA[HLS形式の配信動画をローカルに保存する]]></title><description><![CDATA[
+ TL;DR
+
+
+Selenium + undetected_chromedriver使用
+
+ChromeOptions.set_capability("goog:loggingPrefs", {"performance": "ALL"})を設定し、Chrome.get_log("performance")でブラウザのネットワークログを解析してストリームデータのURLを1件ずつ構築し、requestsで保存
+
+ffmpeg-pythonで結合
+スクリプト
+配信ページへのアクセスにログインが必要な場合は先にログインしておく
+ストリームデータ取得に認証が必要なページ非対応
+
+
+ スクリプト...]]></description><link>https://zenn.dev/nondescript/articles/ede2c165236dd8</link><guid isPermaLink="true">https://zenn.dev/nondescript/articles/ede2c165236dd8</guid><pubDate>Sun, 30 Jun 2024 01:48:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--mH-Qnp-n--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:HLS%25E5%25BD%25A2%25E5%25BC%258F%25E3%2581%25AE%25E9%2585%258D%25E4%25BF%25A1%25E5%258B%2595%25E7%2594%25BB%25E3%2582%2592%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25AB%25E3%2583%25AB%25E3%2581%25AB%25E4%25BF%259D%25E5%25AD%2598%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E7%25B4%25A0%25E4%25BA%25BA%25E3%2581%25AE%25E6%2588%25AF%25E8%25A8%2580%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVmYTVmOTBhM2EuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>素人の戯言</dc:creator></item><item><title><![CDATA[Tkinter でルビを表示する]]></title><description><![CDATA[Python の GUI ライブラリである Tkinter でルビを表示したい場面に遭遇しました。Web であれば簡単に表現可能なのですが、残念ながら Tkinter にルビ機能は存在しないため、スペースを用いて擬似的に表現します。
+
+ 親文字用、ルビ用の TextLabel を用意する
+親文字を表示する parentLabel およびルビを表示する rubyLabel を用意します。rubyLabel のフォントサイズは parentLabel の半分にセットします。
+import tkinter as tk
+
+size = 24
+parentLabel = tk.Label(Disp...]]></description><link>https://zenn.dev/inaniwaudon/articles/61d2b3632a3325</link><guid isPermaLink="true">https://zenn.dev/inaniwaudon/articles/61d2b3632a3325</guid><pubDate>Sun, 30 Jun 2024 01:02:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BQrojm0r--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Tkinter%2520%25E3%2581%25A7%25E3%2583%25AB%25E3%2583%2593%25E3%2582%2592%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2584%25E3%2581%25AA%25E3%2581%25AB%25E3%2582%258F%25E3%2581%2586%25E3%2581%25A9%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU0YjlhYjgzNmQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>いなにわうどん</dc:creator></item><item><title><![CDATA[Django触るなら知っとけ -Djangoベストプラクティス-]]></title><description><![CDATA[
+ はじめに
+Djangoを多分2.x頃から触り始めて、なんだかんだで今でもよく使っているのでDjango使うならこの辺知っといた方が良いよなぁみたいな基本的なところをまとめます。
+また、DRFを利用する方が多いと勝手に思っているためserializers.pyのようなものが一部登場しますがDRFのものとなりますのであまり気にせず。
+
+ プロジェクトの作成
+Djangoのプロジェクトを作成する際によく以下のようなコマンドで作成するかと思います。
+django-admin startproject ${application-name}
+上記のようなコマンドで作成すると以下のような構成とな...]]></description><link>https://zenn.dev/yuya_morimoto/articles/80450e19c01e9c</link><guid isPermaLink="true">https://zenn.dev/yuya_morimoto/articles/80450e19c01e9c</guid><pubDate>Sun, 30 Jun 2024 01:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--XIw35xYL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Django%25E8%25A7%25A6%25E3%2582%258B%25E3%2581%25AA%25E3%2582%2589%25E7%259F%25A5%25E3%2581%25A3%25E3%2581%25A8%25E3%2581%2591%2520-Django%25E3%2583%2599%25E3%2582%25B9%25E3%2583%2588%25E3%2583%2597%25E3%2583%25A9%25E3%2582%25AF%25E3%2583%2586%25E3%2582%25A3%25E3%2582%25B9-%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yuya_morimoto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FmYmU3ZjkyNTcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yuya_morimoto</dc:creator></item><item><title><![CDATA[Pythonで簡単に始める！ホットペッパーグルメAPI活用ガイド]]></title><description><![CDATA[近年、データを活用したアプリケーション開発が盛んに行われており、API（アプリケーションプログラミングインターフェース）を利用した開発が増えています。特に、飲食店情報を簡単に取得できる「ホットペッパーグルメAPI」は、便利なデータ提供サービスとして注目されています。しかし、APIの利用方法やPythonでの実装方法については詳しく知らない方も多いのではないでしょうか。この記事では、ホットペッパーグルメAPIをPythonで使用する方法を詳しく解説します。
+
+ 1. ホットペッパーグルメAPIとは？
+
+ APIの概要
+ホットペッパーグルメAPIは、リクルートが提供する飲食店検索サービス「ホ...]]></description><link>https://zenn.dev/shintaro/articles/053fe2ca8b3430</link><guid isPermaLink="true">https://zenn.dev/shintaro/articles/053fe2ca8b3430</guid><pubDate>Sun, 30 Jun 2024 00:47:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--C8M2XZOW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A7%25E7%25B0%25A1%25E5%258D%2598%25E3%2581%25AB%25E5%25A7%258B%25E3%2582%2581%25E3%2582%258B%25EF%25BC%2581%25E3%2583%259B%25E3%2583%2583%25E3%2583%2588%25E3%2583%259A%25E3%2583%2583%25E3%2583%2591%25E3%2583%25BC%25E3%2582%25B0%25E3%2583%25AB%25E3%2583%25A1API%25E6%25B4%25BB%25E7%2594%25A8%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Shintaro%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzkzZDU4NjE5NTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Shintaro</dc:creator></item><item><title><![CDATA[How to use the 'zip()' in python]]></title><description><![CDATA[
+ 1. zip()
+zip() get the array like input as augments, and return the tuple that packed both of input.
+・Example
+# Example lists
+keys = ['a', 'b', 'c']
+values = [1, 2, 3]
+
+# Use zip to combine the lists
+zipped = zip(keys, values)
+
+# Convert the zipped object to a list of tuples and print it
+zipped...]]></description><link>https://zenn.dev/yuto_mo/articles/9c14146c3fd8ca</link><guid isPermaLink="true">https://zenn.dev/yuto_mo/articles/9c14146c3fd8ca</guid><pubDate>Sun, 30 Jun 2024 00:16:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--NbKajfxv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:How%2520to%2520use%2520the%2520%2527zip%2528%2529%2527%2520in%2520python%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yuu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q0OTcwZWIzMmUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yuu</dc:creator></item><item><title><![CDATA[boto3使ったCloudWatch DashBoardのAutoScalingの設定をしているEC2のウィジェットを更新する]]></title><description><![CDATA[
+ 概要
+CloudWatchDashboardのウィジェット(グラフ)のメトリクスデータをboto3を使って更新するためのサンプルコードの紹介です。
+「思ったより簡単できるよ」という事を言いたいのと「月１で何かブログ投稿を」という目標達成したいという自己満のための投稿です。
+何が言いたいか、伝えたいか
+
+Dashboardの更新は思ったより簡単なコードでできますよ
+EC2に限らず他のメトリクスデータ更新の処理にも参考になると思います
+
+(*)注意
+後のコードを見ていただければ分かりますが、全然そのまま使えるものではありません。エラーハンドリングなしの最小限なもので、更新したい内容によっ...]]></description><link>https://zenn.dev/haggar/articles/b73ae63923caec</link><guid isPermaLink="true">https://zenn.dev/haggar/articles/b73ae63923caec</guid><pubDate>Sat, 29 Jun 2024 22:38:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--mEQToqOZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:boto3%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%259FCloudWatch%2520DashBoard%25E3%2581%25AEAutoScaling%25E3%2581%25AE%25E8%25A8%25AD%25E5%25AE%259A%25E3%2582%2592%25E3%2581%2597%25E3%2581%25A6%25E3%2581%2584%25E3%2582%258BEC2%25E3%2581%25AE%25E3%2582%25A6%25E3%2582%25A3%25E3%2582%25B8%25E3%2582%25A7%25E3%2583%2583...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hgtr%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUVkRlRwNjlleE5PaXlCMlY2WmgxcnJQMFRSQzdoYWxOX1lEa3pwak5ZMTEydz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hgtr</dc:creator></item><item><title><![CDATA[pants でスマートな docker build をしよう!]]></title><description><![CDATA[
+ TL;DR
+
+pants は docker をネイティブサポートしている monorepotool の1つであり、git と連携して docker イメージの差分ビルドや、docker イメージ同士の依存性（参照順）を考慮した並列ビルドが可能
+pants のビルド設定ファイルから、docker buildで外部から変数を与えることの可能な--build-argのパラメータや multi-satge build の対象ステージ指定をする--target、イメージのタグ--tagを渡すことができるため、Dockerfile の処理とデータを分離を促進し、柔軟な docker イメージビル...]]></description><link>https://zenn.dev/numagotatu/articles/2024-06-23-pants-build-docker-build</link><guid isPermaLink="true">https://zenn.dev/numagotatu/articles/2024-06-23-pants-build-docker-build</guid><pubDate>Sat, 29 Jun 2024 17:48:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---uxoYBx3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:pants%2520%25E3%2581%25A7%25E3%2582%25B9%25E3%2583%259E%25E3%2583%25BC%25E3%2583%2588%25E3%2581%25AA%2520docker%2520build%2520%25E3%2582%2592%25E3%2581%2597%25E3%2582%2588%25E3%2581%2586%2521%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:ut%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y0NjkyZjZjMzcuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2581%25AC%25E3%2581%25BE%25E3%2581%2594%25E3%2581%259F%25E3%2581%25A4%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI1ZTZiYzAwNjAuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ut</dc:creator></item><item><title><![CDATA[GeminiAPIで作るマルチモーダルチャットアプリ]]></title><description><![CDATA[
+ 概要
+Gemini APIを利用して、デスクトップ上で動作するチャットアプリを作成しました！
+この記事では使用した技術を簡単に紹介します。
+
+ 機能
+
+GUI上で、チャット形式で会話が行える
+メッセージ送信と同時にPCのスクリーンショットも入力に使用する（マルチモーダル）
+これまでの会話履歴を保存する
+テキスト、音声での回答
+
+
+
+ デモ動画
+https://x.com/YoKaU2/status/1807086460253942245
+
+ GitHub
+https://github.com/kngy0306/gemini_gui_app
+
+ 技術構成
+
+
+ FletでGUIを作る
+...]]></description><link>https://zenn.dev/powder/articles/583233b78edc4a</link><guid isPermaLink="true">https://zenn.dev/powder/articles/583233b78edc4a</guid><pubDate>Sat, 29 Jun 2024 16:17:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--LoZ_NT9v--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:GeminiAPI%25E3%2581%25A7%25E4%25BD%259C%25E3%2582%258B%25E3%2583%259E%25E3%2583%25AB%25E3%2583%2581%25E3%2583%25A2%25E3%2583%25BC%25E3%2583%2580%25E3%2583%25AB%25E3%2583%2581%25E3%2583%25A3%25E3%2583%2583%25E3%2583%2588%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2593%25E3%2581%25AA%25E3%2582%2586%25E3%2581%2586%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U3NDA4MTNjOTMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>こなゆう</dc:creator></item><item><title><![CDATA[プログラム、下から作るか？上から作るか？]]></title><description><![CDATA[
+ TL;DR
+
+プログラムは「下から組む方法」と「上から組む方法」がある
+プログラムを組む時は少しずつテストしながら組む
+
+
+ はじめに
+なにかゼロからプログラムを組むとします。そのプログラムのアルゴリズムや、何をやるべきかはなんとなくわかっているけれど、どこから手をつけてよいかがわからず、ChatGPTに全部書かせて、その後修正できずに困る、という事例を何度か観測しています。
+プログラムをゼロから書くのは慣れが必要です。プログラムをゼロから書く場合、小さな部品を一つ一つ作っていって、最後にそれらを組み上げる「下から書く」方法と、「こういう関数が必要であるはず」と外枠から書いていって最...]]></description><link>https://zenn.dev/kaityo256/articles/programming_howto</link><guid isPermaLink="true">https://zenn.dev/kaityo256/articles/programming_howto</guid><pubDate>Sat, 29 Jun 2024 14:27:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6Ez46qOZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%25A0%25E3%2580%2581%25E4%25B8%258B%25E3%2581%258B%25E3%2582%2589%25E4%25BD%259C%25E3%2582%258B%25E3%2581%258B%25EF%25BC%259F%25E4%25B8%258A%25E3%2581%258B%25E3%2582%2589%25E4%25BD%259C%25E3%2582%258B%25E3%2581%258B%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%25AD%25E3%2583%259C%25E5%25A4%25AA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzgzOGNiYTA0OWMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ロボ太</dc:creator></item><item><title><![CDATA[Pythonで一部のキーが存在しない型を定義する]]></title><description><![CDATA[Python 3.8以降では、TypedDictを使用して辞書のキーとその値の型を定義することができます。
+時には、キーが必須ではなく、オプショナルである（キーが存在しない）型を定義したい場合があります。
+TypeScriptにおける次のような型をPythonで定義する方法を考えます。
+type User = {
+    name: string;
+    email?: string;
+}
+
+ Optionalでの実装例と問題点
+Optionalを使用すると、キーは常に存在するが、値がNoneになる可能性を示します。
+そのため、キーが存在することを前提とするコードでは問題が発生します。...]]></description><link>https://zenn.dev/t_yng/articles/bc3d779f4bbb70</link><guid isPermaLink="true">https://zenn.dev/t_yng/articles/bc3d779f4bbb70</guid><pubDate>Sat, 29 Jun 2024 12:57:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--YUCaSc8p--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A7%25E4%25B8%2580%25E9%2583%25A8%25E3%2581%25AE%25E3%2582%25AD%25E3%2583%25BC%25E3%2581%258C%25E5%25AD%2598%25E5%259C%25A8%25E3%2581%2597%25E3%2581%25AA%25E3%2581%2584%25E5%259E%258B%25E3%2582%2592%25E5%25AE%259A%25E7%25BE%25A9%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:t-yng%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzUwNmY2ZWExYmQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>t-yng</dc:creator></item><item><title><![CDATA[AWS Secrets Managerで管理しているAPIキーを取得する方法]]></title><description><![CDATA[
+ はじめに
+現在、個人開発しているWebアプリでAWS LambdaからLINE通知を送る処理を実装中です。 LINE通知するにはLINE Notify APIのアクセストークンが必要で、今まで環境変数にAPIのアクセストークンを設定していました。ですが、今回はせっかくAWSに乗っかっているので、AWS Secrets ManagerでAPIのアクセストークンを管理することにしました。
+
+ AWS Secrets ManagerへAPIのアクセストークンを登録
+AWS Secrets Managerでシークレットの新規作成をします。
+今回は事前に取得したLINE Notify APIの...]]></description><link>https://zenn.dev/ryouta26/articles/502f156b1f6633</link><guid isPermaLink="true">https://zenn.dev/ryouta26/articles/502f156b1f6633</guid><pubDate>Sat, 29 Jun 2024 10:20:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wWaNzomW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AWS%2520Secrets%2520Manager%25E3%2581%25A7%25E7%25AE%25A1%25E7%2590%2586%25E3%2581%2597%25E3%2581%25A6%25E3%2581%2584%25E3%2582%258BAPI%25E3%2582%25AD%25E3%2583%25BC%25E3%2582%2592%25E5%258F%2596%25E5%25BE%2597%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ryouta.js%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI2ZjIyNTZmYmEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ryouta.js</dc:creator></item><item><title><![CDATA[B3]]></title><description><![CDATA[ここ
+import argparse
+
+
+def getIntMap():
+    return map(int, input().split())
+
+def getIntList():
+    return list(map(int, input().split()))
+
+def main():
+    N,A = getIntMap()
+    l = getIntList()
+
+    r = []
+
+    p = l[0] + A
+    r.append(p)
+
+    for i in range(1,N):
+        if p &lt; l[i]:
+        ...]]></description><link>https://zenn.dev/5151/articles/bae81c4b6aa513</link><guid isPermaLink="true">https://zenn.dev/5151/articles/bae81c4b6aa513</guid><pubDate>Sat, 29 Jun 2024 08:25:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6dZ7lAG1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_80:B3%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:miChill%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0Y1ZyUXNzTVRiR2lIcUZBVTJDZWpvajlCWDRTX2NhTGZRZ1pBRWRIYmpLT0E9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>miChill</dc:creator></item><item><title><![CDATA[.NET MAUIでGPTからのレスポンスをストリーミングで受け取る方法]]></title><description><![CDATA[
+ やりたいこと
+GPTからのレスポンスを「ストリーミング形式」で受け取って取得できるのか検証してみます。
+言語によっては難しい場合もあるようですので、.NET MAUIでは出来るのか気になったためです。
+
+ .NET　MAUIとは
+Microsoftが提供するクロスプラットフォーム開発ができるフレームワークです。
+Mac / Windows / iOS / Androidといった別々のOS向けに単一のソースコーでアプリを作ることができます。
+React NativeやFlutterと同じ系統ですね。
+UI側はXAML、ロジック側はC#を使います。
+https://learn.micro...]]></description><link>https://zenn.dev/headwaters/articles/de0537508824b8</link><guid isPermaLink="true">https://zenn.dev/headwaters/articles/de0537508824b8</guid><pubDate>Sat, 29 Jun 2024 06:44:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bIgxzBWd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:.NET%2520MAUI%25E3%2581%25A7GPT%25E3%2581%258B%25E3%2582%2589%25E3%2581%25AE%25E3%2583%25AC%25E3%2582%25B9%25E3%2583%259D%25E3%2583%25B3%25E3%2582%25B9%25E3%2582%2592%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25AA%25E3%2583%25BC%25E3%2583%259F%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%25A7%25E5%258F%2597%25E3%2581%2591%25E5%258F%2596%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:ikebowsan%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZjNGExY2UxMDYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2598%25E3%2583%2583%25E3%2583%2589%25E3%2582%25A6%25E3%2582%25A9%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%25BC%25E3%2582%25B9%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzUyNTM1ZTc4OGYuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ikebowsan</dc:creator></item><item><title><![CDATA[ReportLabでSeabornのグラフをSVGで埋め込む]]></title><description><![CDATA[ReportLabを使ってPDFを作成時の、画像の埋め込みに関する記事です。特にsvgなどのベクタ画像をファイルを介さずに、PDFへ埋め込むスクリプトを紹介します。
+
+ ReportLabだけでグラフ出力・埋め込みを完結させる
+ReportLabでPDFを出力する際に、Pythonのpandasなどで集計してグラフを出力してそのままPDFに埋め込みたいですよね？画像ファイルとして出力して、それを読み込んでみたいな手順を踏むこともできますが、可能ならばファイルを介さない方が楽です。
+上記のことは、ReportLabに備わっている機能で実現できます。
+# see: https://choco...]]></description><link>https://zenn.dev/gsy0911/articles/3d96b6d651104b</link><guid isPermaLink="true">https://zenn.dev/gsy0911/articles/3d96b6d651104b</guid><pubDate>Sat, 29 Jun 2024 02:55:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lJqKiZtQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ReportLab%25E3%2581%25A7Seaborn%25E3%2581%25AE%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%2595%25E3%2582%2592SVG%25E3%2581%25A7%25E5%259F%258B%25E3%2582%2581%25E8%25BE%25BC%25E3%2582%2580%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:gsy0911%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVlMGRlMGE1YTcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>gsy0911</dc:creator></item><item><title><![CDATA[Vertex AI GeminiのContext cachingでプロンプトのコストとパフォーマンスを改善]]></title><description><![CDATA[
+ はじめに
+昨日Vertex AIのアップデートがいくつか発表されました！
+https://cloud.google.com/blog/ja/products/ai-machine-learning/vertex-ai-offers-enterprise-ready-generative-ai/
+その中で「コンテキスト キャッシュ」が個人的に気になったので調べてみました！
+
+本日より、Gemini 1.5 Pro モデルと Gemini 1.5 Flash モデルでコンテキスト キャッシュをパブリック プレビューで展開し、お客様は Gemini の大規模なコンテキスト ウィンドウを効率...]]></description><link>https://zenn.dev/iret/articles/vertex-ai-gemini-context-caching</link><guid isPermaLink="true">https://zenn.dev/iret/articles/vertex-ai-gemini-context-caching</guid><pubDate>Sat, 29 Jun 2024 02:12:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--q8345Ixi--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Vertex%2520AI%2520Gemini%25E3%2581%25AEContext%2520caching%25E3%2581%25A7%25E3%2583%2597%25E3%2583%25AD%25E3%2583%25B3%25E3%2583%2597%25E3%2583%2588%25E3%2581%25AE%25E3%2582%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2581%25A8%25E3%2583%2591%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25BC%25E3%2583%259E%25E3%2583%25B3%25E3%2582%25B9%25E3%2582%2592%25E6%2594%25B9%25E5%2596%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:danishi%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA4Y2QzMmUzMzQuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25A2%25E3%2582%25A4%25E3%2583%25AC%25E3%2583%2583%25E3%2583%2588%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI2NDcyYzY4NDIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>danishi</dc:creator></item><item><title><![CDATA[CpawCTF Level1]]></title><description><![CDATA[
+ はじめに
+
+ サイト
+https://ctf.cpaw.site/index.php
+
+ 環境
+
+macOS
+M1チップ
+
+
+ Q1.[Misc] Test Problem
+
+ 問題
+この問題の答え（FLAG）は、cpaw{this_is_Cpaw_CTF} です。
+下の入力欄にFLAGを入力してSubmitボタンを押して、答えを送信しましょう！
+Enjoy CpawCTF!!!!
+
+ 回答
+cpaw{this_is_Cpaw_CTF} を入力してsubmitするだけ．
+
+こんな感じの表示になったらクリア．
+
+
+ Q6.[Crypto] Classical Cipher
+
+ 問題
+暗...]]></description><link>https://zenn.dev/mattsunkun/articles/85e73179047738</link><guid isPermaLink="true">https://zenn.dev/mattsunkun/articles/85e73179047738</guid><pubDate>Fri, 28 Jun 2024 15:53:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--UxaqiOX1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_80:CpawCTF%2520Level1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mattsunkun%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzMyMGM1NGQ2ODAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mattsunkun</dc:creator></item><item><title><![CDATA[pyenvでラクラク環境構築！LinuxユーザーのためのPython導入ガイド]]></title><description><![CDATA[!
+本記事の執筆者：Claude 3.5 Sonnetさん
+本記事の編集者：Meg
+素のMegの記事が読みたい方はこちら！→Meg Log
+
+Python環境の構築で頭を悩ませていませんか？今回は、pyenvを使って簡単にPython環境を整える方法をご紹介します。
+何番煎じだって感じだけど、環境構築する時毎回作り方忘れちゃうからしょうがない！
+
+ この記事で学べること
+
+pyenvのインストール方法
+pyenvでPythonをインストールする方法
+仮想環境の作り方
+requirements.txtの使い方
+
+
+ 前提条件
+
+Linuxを使っていること
+ターミナルの基本操作ができること
+...]]></description><link>https://zenn.dev/meg_zenn/articles/pyenv-python-setup-guide</link><guid isPermaLink="true">https://zenn.dev/meg_zenn/articles/pyenv-python-setup-guide</guid><pubDate>Fri, 28 Jun 2024 14:00:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--57zte_1I--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:pyenv%25E3%2581%25A7%25E3%2583%25A9%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25AF%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%25EF%25BC%2581Linux%25E3%2583%25A6%25E3%2583%25BC%25E3%2582%25B6%25E3%2583%25BC%25E3%2581%25AE%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AEPython%25E5%25B0%258E%25E5%2585%25A5%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Meg%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVkODAyN2FhZDEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Meg</dc:creator></item><item><title><![CDATA[AsyncElasticsearchの基本操作ガイド：インデックス化とデータ検索の秘訣]]></title><description><![CDATA[
+ AsyncElasticsearchの概要
+AsyncElasticsearchは、ElasticsearchのPythonクライアントにおける非同期I/Oをサポートするためのライブラリです。従来の同期的な処理では、リクエストごとにレスポンスを待つ必要があり、複数のリクエストを順番に処理するため、パフォーマンスが制限されがちです。しかし、非同期I/Oを利用することで、同時に複数のリクエストを処理することが可能となり、システムリソースをより効率的に活用できます。Elasticは公式にこの非同期サポートを提供しており、開発者がパフォーマンス向上を図るための強力なツールとなっています。
+
+...]]></description><link>https://zenn.dev/shintaro/articles/967dcb6ee14b55</link><guid isPermaLink="true">https://zenn.dev/shintaro/articles/967dcb6ee14b55</guid><pubDate>Fri, 28 Jun 2024 12:38:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--OSplQufs--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AsyncElasticsearch%25E3%2581%25AE%25E5%259F%25BA%25E6%259C%25AC%25E6%2593%258D%25E4%25BD%259C%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%25EF%25BC%259A%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2587%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25B9%25E5%258C%2596%25E3%2581%25A8%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E6%25A4%259C%25E7%25B4%25A2%25E3%2581%25AE%25E7%25A7%2598%25E8%25A8%25A3%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Shintaro%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzkzZDU4NjE5NTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Shintaro</dc:creator></item></channel></rss>
