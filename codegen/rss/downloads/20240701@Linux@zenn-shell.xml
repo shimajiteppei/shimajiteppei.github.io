@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「shell」のフィード]]></title><description><![CDATA[Zennのトピック「shell」のRSSフィードです]]></description><link>https://zenn.dev/topics/shell</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/c8d33e6510.jpeg</url><title>Zennの「shell」のフィード</title><link>https://zenn.dev/topics/shell</link></image><generator>zenn.dev</generator><lastBuildDate>Mon, 01 Jul 2024 02:54:39 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/shell/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[mv や cp, rm コマンドで隠しファイルも対象にする方法4選]]></title><description><![CDATA[mv コマンドや cp コマンドで実行対象にワイルドカード ( * ) を使い、ディレクトリ配下の全ファイル・全ディレクトリを指定することがあります。
+mv /path/from/* /path/to/
+しかしワイルドカードを使うと、指定直下（上記の例だと /path/from/ 直下）にある隠しファイル（ファイル名がドットから始まるファイル）は mv や cp, rm の対象になりません。
+ワイルドカードを使うような状況では、隠しファイルも対象に含めたいのが普通だと思うので、いくつかの方法を紹介します。
+以下に実験用に使えるリポジトリを用意しました。clone して from から t...]]></description><link>https://zenn.dev/shuh/articles/mvrm-dotfiles-dotglob</link><guid isPermaLink="true">https://zenn.dev/shuh/articles/mvrm-dotfiles-dotglob</guid><pubDate>Sun, 30 Jun 2024 13:16:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--rHAVxkD9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:mv%2520%25E3%2582%2584%2520cp%252C%2520rm%2520%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2581%25A7%25E9%259A%25A0%25E3%2581%2597%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2582%25E5%25AF%25BE%25E8%25B1%25A1%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%25954%25E9%2581%25B8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:shusch%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk0ODg1Y2EwN2QuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>shusch</dc:creator></item><item><title><![CDATA[FTPサーバからファイルをgetし、S3にputするシェルスクリプト]]></title><description><![CDATA[
+ 背景
+アクティブモードに制限されたFTP用のサーバからファイルを取得する際、固定IPでアクセスする必要がありました。
+定期的にサーバにファイルを取り込み、使用しているS3に置きに行くための簡易的なEC2サーバを立ち上げ、シェルスクリプトをAmazon EventBridgeで定期的に叩く暫定対応を行いました。
+
+ 使用したシェルスクリプトファイル例
+#!/bin/bash
+# $1 = 日付(デフォルトは実行日)
+
+# AWSパラメータストアに接続情報を配置し、そこから取得するようにしています。
+get_ftp_config() {
+    local param_name=$1
+ ...]]></description><link>https://zenn.dev/goals_techblog/articles/fa83d48109d8a8</link><guid isPermaLink="true">https://zenn.dev/goals_techblog/articles/fa83d48109d8a8</guid><pubDate>Thu, 27 Jun 2024 10:29:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--suqn7RUh--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:FTP%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2581%258B%25E3%2582%2589%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2592get%25E3%2581%2597%25E3%2580%2581S3%25E3%2581%25ABput%25E3%2581%2599%25E3%2582%258B%25E3%2582%25B7%25E3%2582%25A7%25E3%2583%25AB%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Yuki%2520Sekine%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY0ZmMzNjliMDYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Goals%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2YxZjZiNmQ0ZmMuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yuki Sekine</dc:creator></item><item><title><![CDATA[シェルスクリプトにおける変数定義]]></title><description><![CDATA[
+ シェルスクリプトにおける変数定義
+シェルスクリプトでは、変数を定義して値を格納し、それらの値を操作することができます。以下に、シェルスクリプトにおける変数定義の基本と応用について説明します。
+
+ 1. 変数の基本
+
+ 変数の定義と代入
+変数を定義するには、変数名と等号 = を使います。等号の前後にはスペースを入れません。
+#!/bin/bash
+
+# 変数の定義
+変数名=値
+
+# 例
+name="John"
+age=25
+
+ 変数の使用
+定義した変数を使用するには、変数名の前に $ を付けます。
+#!/bin/bash
+
+name="John"
+age=25
+
+echo "Name:...]]></description><link>https://zenn.dev/takeo/articles/261374b75d29c7</link><guid isPermaLink="true">https://zenn.dev/takeo/articles/261374b75d29c7</guid><pubDate>Sun, 23 Jun 2024 09:50:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bPGiUrOZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B7%25E3%2582%25A7%25E3%2583%25AB%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2583%2588%25E3%2581%25AB%25E3%2581%258A%25E3%2581%2591%25E3%2582%258B%25E5%25A4%2589%25E6%2595%25B0%25E5%25AE%259A%25E7%25BE%25A9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:takeo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZiNjIxNWNiNzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takeo</dc:creator></item><item><title><![CDATA[シェルスクリプトにおける引数の受け取り方]]></title><description><![CDATA[
+ シェルスクリプトにおける引数の受け取り方
+シェルスクリプトでは、スクリプトに渡された引数を利用することができます。以下に、基本的な引数の受け取り方について説明します。
+
+ 引数の基本
+
+
+$0:
+
+スクリプトの名前を表します。
+
+
+
+$1, $2, ..., $N:
+
+スクリプトに渡されたそれぞれの引数を表します。$1 は最初の引数、$2 は二番目の引数、... $N は N 番目の引数です。
+
+
+
+$#:
+
+スクリプトに渡された引数の数を表します。
+
+
+
+$*:
+
+すべての引数をひとつの文字列として表します。
+
+
+
+$@:
+
+すべての引数を個別の文字列として表します。
+
+
+
+
+ 使...]]></description><link>https://zenn.dev/takeo/articles/df32fbd7413843</link><guid isPermaLink="true">https://zenn.dev/takeo/articles/df32fbd7413843</guid><pubDate>Sun, 23 Jun 2024 09:37:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1_zwEB1H--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B7%25E3%2582%25A7%25E3%2583%25AB%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2583%2588%25E3%2581%25AB%25E3%2581%258A%25E3%2581%2591%25E3%2582%258B%25E5%25BC%2595%25E6%2595%25B0%25E3%2581%25AE%25E5%258F%2597%25E3%2581%2591%25E5%258F%2596%25E3%2582%258A%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:takeo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZiNjIxNWNiNzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takeo</dc:creator></item><item><title><![CDATA[`/usr/bin/bash` と `/bin/bash` の違い]]></title><description><![CDATA[
+ /usr/bin/bash と /bin/bash の違い
+
+ 1. 位置の違い
+
+
+/bin/bash:
+
+
+/bin ディレクトリは、基本的なシステムの実行可能ファイルが格納される場所です。
+システムのブートプロセス中に必要な基本的なコマンドが /bin にあります。
+そのため、/bin/bash は多くのシステムで標準的な Bash シェルの場所とされています。
+
+
+
+/usr/bin/bash:
+
+
+/usr/bin ディレクトリは、ユーザーが使用する多くのプログラムやスクリプトが格納される場所です。
+これは、追加のソフトウェアパッケージやユーザー向けのプログラムが多く配置さ...]]></description><link>https://zenn.dev/takeo/articles/532898d753b6fc</link><guid isPermaLink="true">https://zenn.dev/takeo/articles/532898d753b6fc</guid><pubDate>Sun, 23 Jun 2024 09:34:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--FAoNAFMD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%2560%252Fusr%252Fbin%252Fbash%2560%2520%25E3%2581%25A8%2520%2560%252Fbin%252Fbash%2560%2520%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:takeo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZiNjIxNWNiNzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takeo</dc:creator></item><item><title><![CDATA[シバン（shebang, #!）の有無と挙動]]></title><description><![CDATA[シェルスクリプトにおいて、シバン（shebang, #!）が無いときの挙動について説明します。
+シバンはスクリプトの冒頭に記載される特殊な文字列で、スクリプトを実行する際にどのインタプリタを使用するかを指定します。例えば、以下のように記載します：
+#!/bin/bash
+これは、スクリプトを /bin/bash というバッシュシェルで実行するよう指示しています。
+シバンが無い場合の挙動は以下のようになります：
+
+
+明示的なインタプリタ指定：シェルスクリプトを実行する際に、明示的にインタプリタを指定して実行した場合、指定されたインタプリタが使用されます。
+bash script.sh
+
+こ...]]></description><link>https://zenn.dev/takeo/articles/bcb8a916ec110c</link><guid isPermaLink="true">https://zenn.dev/takeo/articles/bcb8a916ec110c</guid><pubDate>Sun, 23 Jun 2024 09:31:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--XIegOO5V--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B7%25E3%2583%2590%25E3%2583%25B3%25EF%25BC%2588shebang%252C%2520%2523%2521%25EF%25BC%2589%25E3%2581%25AE%25E6%259C%2589%25E7%2584%25A1%25E3%2581%25A8%25E6%258C%2599%25E5%258B%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:takeo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZiNjIxNWNiNzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takeo</dc:creator></item><item><title><![CDATA[sheldonとPowerlevel10kでイカしたターミナルを作る]]></title><description><![CDATA[
+ はじめに
+味気ないシェルを、、
+
+こんな感じにイカした感じにします😎
+
+
+ 使用するツール
+
+ FiraCode Nerd Font
+アイコンを表示するためにNerd Fontが必要になります。
+様々なフォントとの組み合わせがありますが、自分は個人的に気に入っているFiraCodeを使います。
+https://github.com/tonsky/FiraCode
+https://github.com/ryanoasis/nerd-fonts
+
+ sheldon
+sheldonはbashとzshに対応したRust製のプラグインマネージャです。
+シンプルで高速、そして設定が簡単なのが特徴...]]></description><link>https://zenn.dev/taiyaki715/articles/6ce88d49f5485a</link><guid isPermaLink="true">https://zenn.dev/taiyaki715/articles/6ce88d49f5485a</guid><pubDate>Sun, 23 Jun 2024 09:03:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--P5e7BmWf--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:sheldon%25E3%2581%25A8Powerlevel10k%25E3%2581%25A7%25E3%2582%25A4%25E3%2582%25AB%25E3%2581%2597%25E3%2581%259F%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%259F%25E3%2583%258A%25E3%2583%25AB%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259F%25E3%2581%2584%25E3%2582%2584%25E3%2581%258D%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE0NmM1YzRiNzMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>たいやき</dc:creator></item><item><title><![CDATA[cliで日付をyyyy-mm-dd形式で表示する]]></title><description><![CDATA[コマンドラインでは、dateコマンドを使うと日付を表示することができます。
+しかし、普通に実行するとローカライズされたフォーマットで表示されます。他のプログラムで操作する際などにはyyyy-mm-dd形式で出てくれると楽です。
+❯ date
+Sun Jun 23 16:32:11 AEST 2024
+date +%Y-%m-%dのようにフォーマットを指定できるのですが、いつも大文字か小文字かわからなくなって調べていました。日付フォーマットはいろんな言語にありますが、それぞれでフォーマット文字が違ったりするんですよね…。
+先日、helpを表示させたら-Iオプションがあることに気づきました。...]]></description><link>https://zenn.dev/kawarimidoll/articles/f6731a48c9d3d7</link><guid isPermaLink="true">https://zenn.dev/kawarimidoll/articles/f6731a48c9d3d7</guid><pubDate>Sun, 23 Jun 2024 06:51:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--gPdXW_-y--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:cli%25E3%2581%25A7%25E6%2597%25A5%25E4%25BB%2598%25E3%2582%2592yyyy-mm-dd%25E5%25BD%25A2%25E5%25BC%258F%25E3%2581%25A7%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kawarimidoll%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzIzNzlhYzhkODYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kawarimidoll</dc:creator></item><item><title><![CDATA[python環境を快適にするためのセットアップ]]></title><description><![CDATA[
+ venvの自動起動
+以下のスクリプトを/usr/local/binに配置して、.bashrcからvenvSwitcher.shを読みこむように設定した。
+
+venvSwitcher.sh
+#!/bin/bash
+
+cd() {
+  builtin cd "$@"
+  function activate_venv() {
+          if [[ $(ls -a -U1 pyvenv.cfg |wc -l) &lt; 1 ]]; then
+                echo "There is no virtual env"
+          elif [[ $(ls -...]]></description><link>https://zenn.dev/reprod_x_ngs/articles/564ae72817417a</link><guid isPermaLink="true">https://zenn.dev/reprod_x_ngs/articles/564ae72817417a</guid><pubDate>Sat, 22 Jun 2024 06:17:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--N_C6wQQI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:python%25E7%2592%25B0%25E5%25A2%2583%25E3%2582%2592%25E5%25BF%25AB%25E9%2581%25A9%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%25E3%2582%25BB%25E3%2583%2583%25E3%2583%2588%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%2590%25E3%2582%25A4%25E3%2582%25AA%25E3%2582%25B5%25E3%2583%2597%25E3%2583%25AA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2EzZjFjMjUxNjAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>バイオサプリ</dc:creator></item><item><title><![CDATA[LGTM]]></title><description><![CDATA[
+ はじめに
+プルリクをApproveする際にLGTM画像を使ってますか？
+自分は以前LGTMoonさんを利用させていただいていたのですが、ランダムに流れてくる画像の中から今の感情や、PRに適した画像を探していると楽しくなってしまい、いつの間にか画像を選ぶ時間がやたら長くなったり、業務中にふさわしくないようなエロ・グロ画像が流れてきたりして、好ましくなかったので、ある時からLGTMeowさんを利用させていただくようになりました。
+
+LGTMeowでは猫の画像しか流れてこないため癒されるという点と、Cats Random Copy機能があり自分で選ばなくてもランダムな猫ちゃんの画像URLが...]]></description><link>https://zenn.dev/miyasic/articles/lgtm-shellscript</link><guid isPermaLink="true">https://zenn.dev/miyasic/articles/lgtm-shellscript</guid><pubDate>Thu, 20 Jun 2024 12:59:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--E3ZNdvqV--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_80:LGTM%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25BF%25E3%2582%2584%25E3%2582%25B8%25E3%2583%2583%25E3%2582%25AF%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhkYjI4YWExOTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>みやジック</dc:creator></item><item><title><![CDATA[【シェルスクリプト】未定義変数の扱いについてのメモ]]></title><description><![CDATA[
+ 概要
+シェルスクリプトにおいては、未定義の変数であっても処理が行われる動作になるようです。この未定義の変数を参照した際に、どのような結果になるか少し気になったので今回メモ書きします。
+
+ 前提
+
+今回の動作確認は、Macのzshを使用して行なっています。（bashでも同じ結果になると思いますが）
+
+
+ 確認内容
+
+ 【文字列】
+以下の通り、未定義の変数と空文字を比較したところ、結果はtrueとなりました。
+empty_string=""
+if [[ $empty_string = $undefined_val ]]; then
+  echo "equal"
+else
+  echo "...]]></description><link>https://zenn.dev/someone7140/articles/14ff0517e09dc6</link><guid isPermaLink="true">https://zenn.dev/someone7140/articles/14ff0517e09dc6</guid><pubDate>Tue, 18 Jun 2024 15:09:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--PrB5_qGd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E3%2582%25B7%25E3%2582%25A7%25E3%2583%25AB%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2583%2588%25E3%2580%2591%25E6%259C%25AA%25E5%25AE%259A%25E7%25BE%25A9%25E5%25A4%2589%25E6%2595%25B0%25E3%2581%25AE%25E6%2589%25B1%25E3%2581%2584%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E3%2581%25AE%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AA%25E3%2581%258B%25E3%2581%25A4%25E3%2581%258C%25E3%2582%258F%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFhNWRlOTE4YjEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>なかつがわ</dc:creator></item><item><title><![CDATA[Cloud Build「build step exited with non-zero status:」は直前のコマンドが失敗したという意味]]></title><description><![CDATA[クラウドエースの亀梨です。自分では常識だと思っていても、案外、世間ではそうでもなかったりするようです。
+
+ エラーメッセージの検索結果が適切でないように見える
+Google: "build step exited with non-zero status: 2"
+この記事を執筆している時点では、いくつかのブログと Q &amp; A サイトによって、このエラーメッセージの解説記事が提供されています。
+何が問題なのか。それは、書かれている内容が「コマンドの戻り値」について、まったく言及していないことです。
+つまり、誤った解釈の「回答」だけがこの検索結果に表示されている、ということです。
+同...]]></description><link>https://zenn.dev/cloud_ace/articles/e12f2c273e337c</link><guid isPermaLink="true">https://zenn.dev/cloud_ace/articles/e12f2c273e337c</guid><pubDate>Mon, 17 Jun 2024 02:46:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--CtlJnnJF--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Cloud%2520Build%25E3%2580%258Cbuild%2520step%2520exited%2520with%2520non-zero%2520status%253A%25E3%2580%258D%25E3%2581%25AF%25E7%259B%25B4%25E5%2589%258D%25E3%2581%25AE%25E3%2582%25B3...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25A6%25E3%2583%2589%25E3%2582%25A8%25E3%2583%25BC%25E3%2582%25B9%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE2OGMwYmM4MTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>クラウドエース株式会社</dc:creator></item><item><title><![CDATA[#!/usr/bin/env bash をちゃんと理解する]]></title><description><![CDATA[シェルスクリプトを書く際に、ソースコードの一行目に書く記述について。
+#!/usr/bin/env bash
+
+echo "Hello, World!"
+
+ #!
+
+#! から始まる行のことを Shebang(シェバン)と呼ぶ
+
+ハッシュ・バン（hash bang）、シェル・バン（shell bang）、シャープ・バン（sharp bang）とも呼ぶが、これらを縮めたシェバンという呼び方が一般的らしい
+Wiki
+
+
+使用するインタプリタを指定する
+
+インタプリタとコンパイラの違い
+
+インタプリタ：ソースコードを一行ずつバイナリコードへ翻訳して実行する
+
+翻訳と実行が同時に行われる
+プログ...]]></description><link>https://zenn.dev/tsumiki/articles/shebang-env-command-bash</link><guid isPermaLink="true">https://zenn.dev/tsumiki/articles/shebang-env-command-bash</guid><pubDate>Sun, 16 Jun 2024 05:07:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Ym4Y_MFt--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%2523%2521%252Fusr%252Fbin%252Fenv%2520bash%2520%25E3%2582%2592%25E3%2581%25A1%25E3%2582%2583%25E3%2582%2593%25E3%2581%25A8%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Tsumiki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZhMDdkNjA2MjEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Tsumiki</dc:creator></item><item><title><![CDATA[ChatGPTにgitのリポジトリ渡すと全ソースコード.txtをダウンロードさせてくれるやつ〜〜〜〜（AIに食わせるコード一覧が欲しい時用）]]></title><description><![CDATA[!
+クレデンシャル含むソースコードをChatGPT等のクラウドLLMサービスにアップロードしないでください。
+今回のプロンプトはオープンなリポジトリのみを対象としており、シェルスクリプトが実行される環境もChatGPT側のクラウド上のサンドボックス内のみを想定しています。
+ローカル環境では以下のシェルスクリプトをそのまま実行せずに、ご自身が作成したシェルスクリプトを利用してください。
+
+!
+もしこれでうまくいかなかったら
+
+このシェルスクリプトを元にPythonで同じ要件を実装し、それを実行してください
+
+と言った方がうまくいく確率があがります（最初からそれで良いかも）。
+
+
+ Chat...]]></description><link>https://zenn.dev/kazuph/articles/10ce8f068f449d</link><guid isPermaLink="true">https://zenn.dev/kazuph/articles/10ce8f068f449d</guid><pubDate>Sat, 15 Jun 2024 00:38:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--WVvUk_LF--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ChatGPT%25E3%2581%25ABgit%25E3%2581%25AE%25E3%2583%25AA%25E3%2583%259D%25E3%2582%25B8%25E3%2583%2588%25E3%2583%25AA%25E6%25B8%25A1%25E3%2581%2599%25E3%2581%25A8%25E5%2585%25A8%25E3%2582%25BD%25E3%2583%25BC%25E3%2582%25B9%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589.txt%25E3%2582%2592%25E3%2583%2580%25E3%2582%25A6%25E3%2583%25B3%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2589%25E3%2581%2595%25E3%2581%259B%25E3%2581%25A6%25E3%2581%258F%25E3%2582%258C%25E3%2582%258B%25E3%2582%2584%25E3%2581%25A4%25E3%2580%259C%25E3%2580%259C%25E3%2580%259C%25E3%2580%259C%25EF%25BC%2588AI%25E3%2581%25AB%25E9%25A3%259F%25E3%2582%258F%25E3%2581%259B...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kazuph%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFjNmY3ODBlZDYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kazuph</dc:creator></item><item><title><![CDATA[ifから考えたシェルスクリプト言語の曖昧さと奥深さ]]></title><description><![CDATA[
+ はじめに
+いわゆるbash, zshなどのPOSIX系シェルスクリプトのif文は、一般に次のような形で使います。
+if [ -d ~/foo/bar ]; then
+    echo hoge
+fi
+これを説明する表現として、ネット上で以下のようなものを結構見るように見えます。
+if [ 条件式 ]; then
+  ....
+fi
+実際、上記の理解の仕方は基本的に使えます。プログラミングはとりあえず使えることが大事だと思うので、その認識で事足りることは多いでしょう。
+大抵のプログラミング言語は海外記事の説明は概ね厳密な解説を書いていることが多い印象が私にはあるのですが、興味深いことに...]]></description><link>https://zenn.dev/shimarisu_121/articles/2fcf684a23c75e</link><guid isPermaLink="true">https://zenn.dev/shimarisu_121/articles/2fcf684a23c75e</guid><pubDate>Wed, 12 Jun 2024 14:21:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hZjiDr3b--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:if%25E3%2581%258B%25E3%2582%2589%25E8%2580%2583%25E3%2581%2588%25E3%2581%259F%25E3%2582%25B7%25E3%2582%25A7%25E3%2583%25AB%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2583%2588%25E8%25A8%2580%25E8%25AA%259E%25E3%2581%25AE%25E6%259B%2596%25E6%2598%25A7%25E3%2581%2595%25E3%2581%25A8%25E5%25A5%25A5%25E6%25B7%25B1%25E3%2581%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:shimarisu_121%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzUyYTA5YjFmMWQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>shimarisu_121</dc:creator></item><item><title><![CDATA[Rustでシェル自作した話]]></title><description><![CDATA[お久しぶりです。harukunです。
+この記事を書き始めたのは2024年6月1日。
+うちの大学は４学期制なのですが、2年１学期はコンピュータばかり触っていたら単位を全て落としてしまいました。オワタ＼(^o^)／
+単位を犠牲にしながらファミコンエミュレータ作ったりセキュキャン申し込んだり（合否発表は6/3！！）したので、そのあたりもいつか記事にしたいですね。
+!
+セキュキャン落ちてました...
+悔しいいいいい！！！
+
+
+ 作ったもの
+さて今回はシェル自作です。
+完成品はこんな感じ↓
+https://github.com/noharu36/tush
+
+シェルの名前はtushにしました。
+タバ...]]></description><link>https://zenn.dev/haru_blog/articles/32f775bd86d886</link><guid isPermaLink="true">https://zenn.dev/haru_blog/articles/32f775bd86d886</guid><pubDate>Fri, 07 Jun 2024 00:05:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--sdLwk0FL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25A7%25E3%2582%25B7%25E3%2582%25A7%25E3%2583%25AB%25E8%2587%25AA%25E4%25BD%259C%25E3%2581%2597%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:harukun%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBjMjIzNzZjYjYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>harukun</dc:creator></item><item><title><![CDATA[【Linux】マニュアル(man)を日本語化する方法]]></title><description><![CDATA[manコマンドを使用したときデフォルトで英語のマニュアルが表示されています。マニュアルページを日本語にする方法をまとめました。必要に応じて変更してみてください。
+
+ 実行環境
+
+WSL2(Windows11)
+Ubuntu
+
+$ cat /etc/os-release
+PRETTY_NAME="Ubuntu 22.04.4 LTS"
+NAME="Ubuntu"
+VERSION_ID="22.04"
+VERSION="22.04.4 LTS (Jammy Jellyfish)"
+VERSION_CODENAME=jammy
+ID=ubuntu
+ID_LIKE=debian
+HOME_URL...]]></description><link>https://zenn.dev/ryu3/articles/bc5269a16fdf47</link><guid isPermaLink="true">https://zenn.dev/ryu3/articles/bc5269a16fdf47</guid><pubDate>Tue, 04 Jun 2024 09:24:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--F1D6UAoS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Linux%25E3%2580%2591%25E3%2583%259E%25E3%2583%258B%25E3%2583%25A5%25E3%2582%25A2%25E3%2583%25AB%2528man%2529%25E3%2582%2592%25E6%2597%25A5%25E6%259C%25AC%25E8%25AA%259E%25E5%258C%2596%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ryu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzcwOWFmODRkNzguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ryu</dc:creator></item><item><title><![CDATA[commit ID から close された PR を探す]]></title><description><![CDATA[
+ 必要なもの
+
+peco
+gh
+
+をインストールしてください
+
+ できたもの
+# remote repository名を取得
+this-repo(){
+git remote get-url origin | awk -F '[:]' '{print $2}' | sed -e 's/\.git//'
+}
+
+# コミットからprを探す
+fpr(){
+open "https://github.com/$(this-repo)/pull/$(gh search prs -R "$(this-repo)" --state 'closed' --sort 'created' --order 'a...]]></description><link>https://zenn.dev/koakuma_ageha/articles/169eac3880f525</link><guid isPermaLink="true">https://zenn.dev/koakuma_ageha/articles/169eac3880f525</guid><pubDate>Thu, 30 May 2024 09:45:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--n3lwRFKx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:commit%2520ID%2520%25E3%2581%258B%25E3%2582%2589%2520close%2520%25E3%2581%2595%25E3%2582%258C%25E3%2581%259F%2520PR%2520%25E3%2582%2592%25E6%258E%25A2%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:koakuma_ageha%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzliYjMxYTUxNWIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>koakuma_ageha</dc:creator></item><item><title><![CDATA[🔰初心者向けrbenvの使い方：Rubyバージョン管理をマスターしよう]]></title><description><![CDATA[
+ はじめに
+Rubyのインストールが成功した後、Rubyのバージョン管理を行いたい方を対象としています。
+ここでは、rbenvを使用してRubyのバージョンを切り替える方法を詳しく説明します。具体的なエラー解決法についてはこちらの記事をご参照ください。
+https://zenn.dev/take_tech/articles/0e6afb8de90077
+
+ rbenvを使用してRubyのバージョンを切り替える方法
+rbenvを使用することで、複数のRubyバージョン間を簡単に切り替えることができます。以下にその手順を説明します。
+
+ 1. インストールされたRubyバージョンを確認
+r...]]></description><link>https://zenn.dev/take_tech/articles/e7345b04d42f4c</link><guid isPermaLink="true">https://zenn.dev/take_tech/articles/e7345b04d42f4c</guid><pubDate>Wed, 29 May 2024 20:55:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lWTld8p9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%2520%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E5%2590%2591%25E3%2581%2591rbenv%25E3%2581%25AE%25E4%25BD%25BF%25E3%2581%2584%25E6%2596%25B9%25EF%25BC%259ARuby%25E3%2583%2590%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%25A7%25E3%2583%25B3%25E7%25AE%25A1%25E7%2590%2586%25E3%2582%2592%25E3%2583%259E%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%25BC%25E3%2581%2597%25E3%2582%2588%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Take%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzYyNThiNDQ2YTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Take</dc:creator></item><item><title><![CDATA[2020/3/4「OZV勉強会LT」「Linux」niceコマンドで知るプロセスと優先順位]]></title><description><![CDATA[2020年03月04に作成された記事です。
+オズビジョン社内勉強会LT資料です。
+
+
+ Niceとは
+変更したスケジューリング優先度でプログラムを実行する
+man page : https://linuxjm.osdn.jp/html/GNU_coreutils/man1/nice.1.html
+nice [OPTION] [COMMAND [ARG]...]  
+
+-n, --adjustment=N
+優先度に整数値 N を加える (デフォルト: 10)
+
+--help
+この使い方を表示して終了する
+
+--version
+バージョン情報を表示して終了する 
+
+
+ Niceの使い方
+# ...]]></description><link>https://zenn.dev/genie_oh/articles/05f4095aa0a5b8</link><guid isPermaLink="true">https://zenn.dev/genie_oh/articles/05f4095aa0a5b8</guid><pubDate>Fri, 24 May 2024 13:01:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hQG1BdeG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:2020%252F3%252F4%25E3%2580%258COZV%25E5%258B%2589%25E5%25BC%25B7%25E4%25BC%259ALT%25E3%2580%258D%25E3%2580%258CLinux%25E3%2580%258Dnice%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2581%25A7%25E7%259F%25A5%25E3%2582%258B%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25BB%25E3%2582%25B9%25E3%2581%25A8%25E5%2584%25AA%25E5%2585%2588%25E9%25A0%2586%25E4%25BD%258D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:genie_oh%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I2ZTgxNWIyODAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>genie_oh</dc:creator></item></channel></rss>
