@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xml:lang="ja-JP" xmlns="http://www.w3.org/2005/Atom">
+  <id>tag:qiita.com,2005:/tags/java/feed</id>
+  <link rel="alternate" type="text/html" href="https://qiita.com"/>
+  <link rel="self" type="application/atom+xml" href="https://qiita.com/tags/java/feed"/>
+  <title>Javaタグが付けられた新着記事 - Qiita</title>
+  <description>QiitaでJavaタグが付けられた新着記事</description>
+  <updated>2024-07-02T18:08:58+09:00</updated>
+  <link>https://qiita.com/tags/java</link>
+  <entry>
+    <id>tag:qiita.com,2005:PublicArticle/1880657</id>
+    <published>2024-07-02T18:08:58+09:00</published>
+    <updated>2024-07-02T18:08:58+09:00</updated>
+    <link rel="alternate" type="text/html" href="https://qiita.com/pesysyon/items/01342f50451f787eb3a0"/>
+    <url>https://qiita.com/pesysyon/items/01342f50451f787eb3a0</url>
+    <title>配列に対する処理　for, forEach, find, filter</title>
+    <content type="html">新人エンジニアの三上です。
+今回は、配列に対する操作の中で、私が実際に使用したことのあるものをまとめてみようと思う。
+for
+配列の要素をループごとに変数に代入し、そのループ内で変数を使用する。
+以…</content>
+    <author>
+      <name>pesysyon</name>
+    </author>
+  </entry>
+  <entry>
+    <id>tag:qiita.com,2005:PublicArticle/1880534</id>
+    <published>2024-07-02T13:37:41+09:00</published>
+    <updated>2024-07-02T20:05:15+09:00</updated>
+    <link rel="alternate" type="text/html" href="https://qiita.com/sato_ken09/items/88ca620f4b1889802a0b"/>
+    <url>https://qiita.com/sato_ken09/items/88ca620f4b1889802a0b</url>
+    <title>java csv比較ツール</title>
+    <content type="html">比較元と比較先のSJISエンコードされたCSVファイルをSQLiteデータベースにインポートし、その差分をSJISエンコードされたCSVファイルとして出力するSwingベースのアプリケーションです。
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.*;
+import java.sql.*;
+import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
+import com.opencsv.CSVReader;
+import com.opencsv.CSVReaderBuilder;
+import com.opencsv.CSVWriter;
+import com.opencsv.exceptions.CsvValidationException;
+
+public class CsvToSQLiteApp extends JFrame {
+    private static final String DB_URL = "jdbc:sqlite:example.db";
+    private static final int BATCH_SIZE = 1000;
+    private static final int CHUNK_SIZE = 10000;  // 1万件ごとに分割するための定数
+    private JTextField beforeDirPathField;
+    private JTextField afterDirPathField;
+    private JTextField outputDirPathField;
+    private JCheckBox headerCheckBox;
+    private JLabel statusLabel;
+    private JTextArea messageArea;
+    private JProgressBar progressBar;
+
+    public CsvToSQLiteApp() {
+        setTitle("CSV to SQLite App");
+        setSize(700, 500);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+        setLayout(new GridBagLayout());
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(5, 5, 5, 5);
+
+        // GUI components initialization
+        JLabel beforeDirPathLabel = new JLabel("比較元ディレクトリパス:");
+        beforeDirPathField = new JTextField(20);
+        JButton selectBeforeDirButton = new JButton("比較元ディレクトリ選択");
+
+        JLabel afterDirPathLabel = new JLabel("比較先ディレクトリパス:");
+        afterDirPathField = new JTextField(20);
+        JButton selectAfterDirButton = new JButton("比較先ディレクトリ選択");
+
+        JLabel outputDirPathLabel = new JLabel("出力ディレクトリパス:");
+        outputDirPathField = new JTextField(20);
+        JButton selectOutputDirButton = new JButton("出力ディレクトリ選択");
+
+        JButton diffButton = new JButton("差分をCSVにエクスポート");
+
+        headerCheckBox = new JCheckBox("ヘッダー行がある");
+        headerCheckBox.setSelected(true);
+
+        statusLabel = new JLabel("進捗状況:");
+        progressBar = new JProgressBar();
+        progressBar.setStringPainted(true);
+
+        messageArea = new JTextArea(10, 50);
+        messageArea.setEditable(false);
+        JScrollPane messageScrollPane = new JScrollPane(messageArea);
+
+        // Adding components to the layout using GridBagConstraints
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        add(beforeDirPathLabel, gbc);
+
+        gbc.gridx = 1;
+        add(beforeDirPathField, gbc);
+
+        gbc.gridx = 2;
+        add(selectBeforeDirButton, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        add(afterDirPathLabel, gbc);
+
+        gbc.gridx = 1;
+        add(afterDirPathField, gbc);
+
+        gbc.gridx = 2;
+        add(selectAfterDirButton, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        add(outputDirPathLabel, gbc);
+
+        gbc.gridx = 1;
+        add(outputDirPathField, gbc);
+
+        gbc.gridx = 2;
+        add(selectOutputDirButton, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 3;
+        add(diffButton, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 4;
+        add(headerCheckBox, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 5;
+        gbc.gridwidth = 3;
+        add(statusLabel, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 6;
+        add(progressBar, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 7;
+        add(new JLabel("メッセージ:"), gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 8;
+        add(messageScrollPane, gbc);
+
+        // Action listeners for directory selection buttons
+        selectBeforeDirButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFileChooser fileChooser = new JFileChooser();
+                fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+                int result = fileChooser.showOpenDialog(null);
+                if (result == JFileChooser.APPROVE_OPTION) {
+                    File selectedDir = fileChooser.getSelectedFile();
+                    beforeDirPathField.setText(selectedDir.getAbsolutePath());
+                }
+            }
+        });
+
+        selectAfterDirButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFileChooser fileChooser = new JFileChooser();
+                fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+                int result = fileChooser.showOpenDialog(null);
+                if (result == JFileChooser.APPROVE_OPTION) {
+                    File selectedDir = fileChooser.getSelectedFile();
+                    afterDirPathField.setText(selectedDir.getAbsolutePath());
+                }
+            }
+        });
+
+        selectOutputDirButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFileChooser fileChooser = new JFileChooser();
+                fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+                int result = fileChooser.showOpenDialog(null);
+                if (result == JFileChooser.APPROVE_OPTION) {
+                    File selectedDir = fileChooser.getSelectedFile();
+                    outputDirPathField.setText(selectedDir.getAbsolutePath());
+                }
+            }
+        });
+
+        // Action listener for diffButton to export CSV diff
+        diffButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String beforeDirPath = beforeDirPathField.getText();
+                String afterDirPath = afterDirPathField.getText();
+                String outputDirPath = outputDirPathField.getText();
+                boolean hasHeader = headerCheckBox.isSelected();
+
+                // SwingWorker to perform background tasks and update UI
+                SwingWorker&amp;lt;Void, Integer&amp;gt; worker = new SwingWorker&amp;lt;Void, Integer&amp;gt;() {
+                    @Override
+                    protected Void doInBackground() throws Exception {
+                        updateProgress(0);
+
+                        // Delete database file if exists
+                        File dbFile = new File("example.db");
+                        if (dbFile.exists()) {
+                            dbFile.delete();
+                        }
+
+                        try (Connection conn = DriverManager.getConnection(DB_URL)) {
+                            // Import CSV files into SQLite tables
+                            importCsvToTable(conn, beforeDirPath, "before", hasHeader);
+                            publish(33);
+                            importCsvToTable(conn, afterDirPath, "after", hasHeader);
+                            publish(66);
+                            // Create indexes for efficient comparison
+                            createIndexes(conn, "before");
+                            createIndexes(conn, "after");
+                            // Export diff to CSV files
+                            exportDiffToCsv(conn, "before", "after", outputDirPath);
+                            publish(100);
+                        } catch (SQLException ex) {
+                            ex.printStackTrace();
+                            appendMessage("CSVファイルの処理中にエラーが発生しました: " + ex.getMessage());
+                            JOptionPane.showMessageDialog(null, "CSVファイルの処理中にエラーが発生しました: " + ex.getMessage());
+                        }
+
+                        return null;
+                    }
+
+                    @Override
+                    protected void process(List&amp;lt;Integer&amp;gt; chunks) {
+                        int latestProgress = chunks.get(chunks.size() - 1);
+                        updateProgress(latestProgress);
+                    }
+
+                    @Override
+                    protected void done() {
+                        appendMessage("差分をCSVにエクスポートしました: " + outputDirPath);
+                    }
+                };
+
+                worker.execute(); // Execute the SwingWorker
+            }
+        });
+    }
+
+private void importCsvToTable(Connection conn, String csvDirPath, String tableName, boolean hasHeader) throws SQLException {
+    File folder = new File(csvDirPath);
+    File[] listOfFiles = folder.listFiles((dir, name) -&amp;gt; name.endsWith(".csv"));
+
+    if (listOfFiles == null) {
+        JOptionPane.showMessageDialog(null, "指定されたディレクトリにCSVファイルが見つかりません: " + csvDirPath);
+        return;
+    }
+
+    conn.setAutoCommit(false);
+
+    try (Statement stmt = conn.createStatement()) {
+        stmt.execute("DROP TABLE IF EXISTS " + tableName);
+    }
+
+    for (File file : listOfFiles) {
+        try (CSVReader csvReader = new CSVReaderBuilder(new InputStreamReader(new FileInputStream(file), "SJIS"))
+                .withSkipLines(0)
+                .build()) {
+            String[] headers = hasHeader ? csvReader.readNext() : generateDefaultHeaders(csvReader.peek());
+            if (headers == null) {
+                continue;
+            }
+
+            while (headers[0].startsWith("#")) {
+                headers = csvReader.readNext();
+                if (headers == null) {
+                    break;
+                }
+            }
+
+            createTable(conn, tableName, headers);
+
+            String insertSQL = generateInsertSQL(tableName, headers);
+            try (PreparedStatement pstmt = conn.prepareStatement(insertSQL)) {
+                String[] row;
+                int count = 0;
+                while ((row = csvReader.readNext()) != null) {
+                    if (row[0].startsWith("#")) {
+                        continue;
+                    }
+                    for (int i = 0; i &amp;lt; row.length; i++) {
+                        pstmt.setString(i + 1, row[i]);
+                    }
+                    pstmt.addBatch();
+                    if (++count % BATCH_SIZE == 0) {
+                        pstmt.executeBatch();
+                        conn.commit();
+                    }
+                }
+                pstmt.executeBatch(); // 残りのバッチを実行
+                conn.commit();
+            }
+            appendMessage("CSVファイルをインポートしました: " + file.getName());
+        } catch (IOException | CsvValidationException | SQLException e) {
+            conn.rollback();
+            e.printStackTrace();
+            appendMessage("ファイルの処理中にエラーが発生しました " + file.getName() + ": " + e.getMessage());
+        }
+    }
+
+    conn.setAutoCommit(true);
+}
+
+private void createTable(Connection conn, String tableName, String[] headers) throws SQLException {
+    List&amp;lt;String&amp;gt; columns = new ArrayList&amp;lt;&amp;gt;();
+    for (String header : headers) {
+        columns.add("\"" + header.replaceAll("\"", "\"\"") + "\" TEXT");
+    }
+    String sql = String.format("CREATE TABLE IF NOT EXISTS %s (%s)", tableName, String.join(",", columns));
+    try (Statement stmt = conn.createStatement()) {
+        stmt.execute(sql);
+    }
+}
+
+private String generateInsertSQL(String tableName, String[] headers) {
+    String columns = Arrays.stream(headers)
+            .map(header -&amp;gt; "\"" + header.replaceAll("\"", "\"\"") + "\"")
+            .toArray(String[]::new);
+    String placeholders = Arrays.stream(headers)
+            .map(header -&amp;gt; "?")
+            .toArray(String[]::new);
+    return String.format("INSERT INTO %s (%s) VALUES (%s)", tableName, String.join(",", columns), String.join(",", placeholders));
+}
+
+private void exportDiffToCsv(Connection conn, String tableA, String tableB, String outputDirPath) throws SQLException, IOException {
+    String sql = String.format("SELECT * FROM \"%s\" EXCEPT SELECT * FROM \"%s\"", tableA, tableB);
+
+    try (Statement stmt = conn.createStatement();
+         ResultSet rs = stmt.executeQuery(sql)) {
+
+        ResultSetMetaData metaData = rs.getMetaData();
+        int columnCount = metaData.getColumnCount();
+
+        int fileCount = 1;
+        int rowCount = 0;
+
+        File outputDir = new File(outputDirPath);
+        if (!outputDir.exists()) {
+            outputDir.mkdirs();
+        }
+
+        String outputFilePath = String.format("%s/diff_output_%03d.csv", outputDirPath, fileCount);
+        try (CSVWriter writer = new CSVWriter(new OutputStreamWriter(new FileOutputStream(outputFilePath), "SJIS"))) {
+            String[] headerRow = new String[columnCount];
+            for (int i = 1; i &amp;lt;= columnCount; i++) {
+                headerRow[i - 1] = metaData.getColumnName(i);
+            }
+            writer.writeNext(headerRow);
+
+            while (rs.next()) {
+                String[] row = new String[columnCount];
+                for (int i = 1; i &amp;lt;= columnCount; i++) {
+                    row[i - 1] = rs.getString(i);
+                }
+                writer.writeNext(row);
+
+                rowCount++;
+                if (rowCount % CHUNK_SIZE == 0) {
+                    writer.close();
+                    fileCount++;
+                    outputFilePath = String.format("%s/diff_output_%03d.csv", outputDirPath, fileCount);
+                    writer = new CSVWriter(new OutputStreamWriter(new FileOutputStream(outputFilePath), "SJIS"));
+                    writer.writeNext(headerRow);
+                }
+            }
+        }
+        appendMessage("差分をCSVにエクスポートしました: " + outputDirPath);
+    }
+}
+…</content>
+    <author>
+      <name>sato_ken09</name>
+    </author>
+  </entry>
+  <entry>
+    <id>tag:qiita.com,2005:PublicArticle/1880505</id>
+    <published>2024-07-02T12:45:44+09:00</published>
+    <updated>2024-07-02T12:51:33+09:00</updated>
+    <link rel="alternate" type="text/html" href="https://qiita.com/ktst79/items/a3319942b36fb8d472da"/>
+    <url>https://qiita.com/ktst79/items/a3319942b36fb8d472da</url>
+    <title>Javaの利用状況についてのトレンドを知ろう！「 Javaエコシステムの現状」レポート概説 (2024年版)</title>
+    <content type="html">「Javaエコシステムの現状」レポートとは？
+「Javaエコシステムの現状（State of the Java Ecosystem Report）」レポートは、ITシステムにおけるJavaの利用状況…</content>
+    <author>
+      <name>ktst79</name>
+    </author>
+  </entry>
+  <entry>
+    <id>tag:qiita.com,2005:PublicArticle/1880361</id>
+    <published>2024-07-02T02:58:35+09:00</published>
+    <updated>2024-07-02T02:58:35+09:00</updated>
+    <link rel="alternate" type="text/html" href="https://qiita.com/nori-channel/items/4db615b49129f7b23654"/>
+    <url>https://qiita.com/nori-channel/items/4db615b49129f7b23654</url>
+    <title>Javaで「文字列の文字の数(コードポイントの数)を取得する(String.codePointCount)」の動作を確認してみた</title>
+    <content type="html">概要
+Javaで「文字列の文字の数(コードポイントの数)を取得する(String.codePointCount)」の動作を確認してみました。
+以下のページを参考にしました。
+https://www.…</content>
+    <author>
+      <name>nori-channel</name>
+    </author>
+  </entry>
+</feed>

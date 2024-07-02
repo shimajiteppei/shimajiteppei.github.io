@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「JavaScript」のフィード]]></title><description><![CDATA[Zennのトピック「JavaScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/javascript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/64acd76870.png</url><title>Zennの「JavaScript」のフィード</title><link>https://zenn.dev/topics/javascript</link></image><generator>zenn.dev</generator><lastBuildDate>Tue, 02 Jul 2024 10:50:45 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/javascript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[querySelectorでelement直下の要素を指定する]]></title><description><![CDATA[
+ 結論
+CSSの疑似セレクタ :scopeと、直下の要素のみを指定する &gt; を組み合わせて使いましょう。
+例: someElement.querySelector(":scope &gt; .someChild")
+
+ 補足
+以下のような入れ子構造を持つリストを仮定します。
+&lt;ul id="parent"&gt;
+    &lt;li&gt; item1 &lt;/li&gt;
+    &lt;li&gt; item2 &lt;/li&gt;
+    &lt;li&gt; item3
+        &lt;ul&gt;
+            &lt;li&gt; ite...]]></description><link>https://zenn.dev/tanakam/articles/ecce758535bee1</link><guid isPermaLink="true">https://zenn.dev/tanakam/articles/ecce758535bee1</guid><pubDate>Tue, 02 Jul 2024 10:28:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ltrt6S3z--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:querySelector%25E3%2581%25A7element%25E7%259B%25B4%25E4%25B8%258B%25E3%2581%25AE%25E8%25A6%2581%25E7%25B4%25A0%25E3%2582%2592%25E6%258C%2587%25E5%25AE%259A%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:MK%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzlmZWZiNTNmMzAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>MK</dc:creator></item><item><title><![CDATA[Mapbox Newsletter WEEKLY TIPSの解説 -「ホバー時にポップアップを表示」]]></title><description><![CDATA[
+ はじめに
+この記事は、先日配信されたMapbox NewsletterのWEEKLY TIPSで紹介されていた「ホバー時にポップアップを表示」についての解説です。このサンプルではPopupおよびマウスイベントの使い方について例示しています。また、Newsletterの購読はこちらからお申し込みいただけます。
+以下が本サンプルのデモです。
+
+
+ コードを確認
+まずExamplesのコードを見に行きましょう。
+日本語サイト
+
+英語サイト
+
+基本的に同じコードですが、英語版はスタイルがMapbox Streets v12にアップグレードされているのでこちらを使用します。Mapbox Str...]]></description><link>https://zenn.dev/mapbox_japan/articles/08f18ea131656c</link><guid isPermaLink="true">https://zenn.dev/mapbox_japan/articles/08f18ea131656c</guid><pubDate>Tue, 02 Jul 2024 08:54:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--d9uiekPm--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Mapbox%2520Newsletter%2520WEEKLY%2520TIPS%25E3%2581%25AE%25E8%25A7%25A3%25E8%25AA%25AC%2520-%25E3%2580%258C%25E3%2583%259B%25E3%2583%2590%25E3%2583%25BC%25E6%2599%2582%25E3%2581%25AB%25E3%2583%259D%25E3%2583%2583%25E3%2583%2597%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%25E3%2582%2592%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2580%258D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:OttyLab%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RmZWNmNDhhMWMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%259E%25E3%2583%2583%25E3%2583%2597%25E3%2583%259C%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25B9%25E3%2583%25BB%25E3%2582%25B8%25E3%2583%25A3%25E3%2583%2591%25E3%2583%25B3%25E5%2590%2588%25E5%2590%258C%25E4%25BC%259A%25E7%25A4%25BE%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhMGJmZWJmZmQuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>OttyLab</dc:creator></item><item><title><![CDATA[【イラストで分かる】React Hook]]></title><description><![CDATA[
+ はじめに
+こんにちは。
+ソフトウェアエンジニアをしています、Koyaです。
+普段、React周りを勉強してます。
+最近は単に動くものを実装するのではなく、Reactの仕組みを踏まえた実装をするように意識してます。
+そこで今回はReact Hookについて調べましたので、まとめたいと思います。
+また自分の整理を含めて、極力細かく説明していこうと思ってます。
+可能な限り公式ドキュメント等で収集した信頼できる情報を基にまとめていますが、間違いや認識違い等あると思います。
+ぜひコメントで指摘いただければと思います。
+また筆者は視覚優位な特徴(*1)を持ちます。
+同じ視覚優位な特徴を持つ人たち...]]></description><link>https://zenn.dev/koya_tech/articles/595d13699d1cdf</link><guid isPermaLink="true">https://zenn.dev/koya_tech/articles/595d13699d1cdf</guid><pubDate>Tue, 02 Jul 2024 07:44:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--pA_Q3Lkg--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E3%2582%25A4%25E3%2583%25A9%25E3%2582%25B9%25E3%2583%2588%25E3%2581%25A7%25E5%2588%2586%25E3%2581%258B%25E3%2582%258B%25E3%2580%2591React%2520Hook%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:koya%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk4NDk4MGRmYTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>koya</dc:creator></item><item><title><![CDATA[ネット接続なしで動く Chrome Built-in AI]]></title><description><![CDATA[
+ ネット接続なしで動く Chrome Built-in AI
+Chrome Dev もしくは Canary の v127 ＋で Built-in AI が動くらしいという事で試してみました。
+https://developer.chrome.com/docs/ai/built-in
+
+ flag を有効にする
+chrome://flags/
+Prompt API for Gemini Nano:　 enable
+Enables optimization guide on device: enable BypassPrefRequirements
+
+
+ model をダウンロードする
+c...]]></description><link>https://zenn.dev/00/articles/adf9f464f061f5</link><guid isPermaLink="true">https://zenn.dev/00/articles/adf9f464f061f5</guid><pubDate>Tue, 02 Jul 2024 04:06:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--cOQ_qWuA--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%258D%25E3%2583%2583%25E3%2583%2588%25E6%258E%25A5%25E7%25B6%259A%25E3%2581%25AA%25E3%2581%2597%25E3%2581%25A7%25E5%258B%2595%25E3%2581%258F%2520Chrome%2520Built-in%2520AI%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:koji%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NiMzUwY2JlMWIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>koji</dc:creator></item><item><title><![CDATA[【初心者向け】JavaScriptテスト完全ガイド：JestとSupertestで始める7つのステップ]]></title><description><![CDATA[
+ 1. はじめに
+
+ 目的
+この記事の目的は、JavaScriptでテストを簡単に行うための方法を示すことです。特に、JestとSupertestという二つの強力なツールを使用して、テストの基本から応用までをステップバイステップで解説します。これにより、開発者がより効率的に、そして自信を持ってコードをリリースできるようになることを目指しています。
+
+ 対象読者
+この記事は、主にJavaScriptを使用してウェブアプリケーションを開発している開発者を対象としています。特に、Node.jsとExpressフレームワークを使用している開発者にとって有益です。初心者から中級者まで、幅広いレベ...]]></description><link>https://zenn.dev/nomikazu_x/articles/javascript-jest-supertest-basic</link><guid isPermaLink="true">https://zenn.dev/nomikazu_x/articles/javascript-jest-supertest-basic</guid><pubDate>Tue, 02 Jul 2024 03:23:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--gCwtdbQs--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E5%2590%2591%25E3%2581%2591%25E3%2580%2591JavaScript%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E5%25AE%258C%25E5%2585%25A8%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%25EF%25BC%259AJest%25E3%2581%25A8Supertest%25E3%2581%25A7%25E5%25A7%258B%25E3%2582%2581%25E3%2582%258B7%25E3%2581%25A4%25E3%2581%25AE%25E3%2582%25B9%25E3%2583%2586%25E3%2583%2583%25E3%2583%2597%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nomikazu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E5Zjg3ZDg5NmIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nomikazu</dc:creator></item><item><title><![CDATA[React DnDでフレキシブルにリサイズ・移動可能なboxを実装する]]></title><description><![CDATA[
+ 経緯
+Drag &amp; Drop でシームレスに移動することができて、なおかつリサイズ可能な box を実装する必要があったのですが、意外と情報がなかったので備忘録的にまとめました。
+同じような悩みを抱えている人の参考になれば幸いです。
+
+ サンプル
+https://github.com/MatalStone/react-flexible-box-sample
+最終的な動き
+
+
+ 使用ライブラリ
+React の基本的なパッケージ以外で使用しているライブラリは以下の 2 つです。
+
+React DnD: https://github.com/react-dnd/react-dnd
+...]]></description><link>https://zenn.dev/thinkingsinc/articles/ed6033151190f2</link><guid isPermaLink="true">https://zenn.dev/thinkingsinc/articles/ed6033151190f2</guid><pubDate>Tue, 02 Jul 2024 03:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--pjsbku4z--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%2520DnD%25E3%2581%25A7%25E3%2583%2595%25E3%2583%25AC%25E3%2582%25AD%25E3%2582%25B7%25E3%2583%2596%25E3%2583%25AB%25E3%2581%25AB%25E3%2583%25AA%25E3%2582%25B5%25E3%2582%25A4%25E3%2582%25BA%25E3%2583%25BB%25E7%25A7%25BB%25E5%258B%2595%25E5%258F%25AF%25E8%2583%25BD%25E3%2581%25AAbox%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:MetalStone%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ExNDk2MTc4MWYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Thinkings%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E3ZDk5NDUzN2QuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>MetalStone</dc:creator></item><item><title><![CDATA[自分だけの ESLint Config を作る]]></title><description><![CDATA[
+ これはなに
+自身のプロジェクトに適合した ESLint Config の設計および実装方法についてまとめたものです。
+業務や趣味プロに関わらず、 JavaScript / TypeScript でコーディングする際に ESLint は非常に有用なツールであり、広く使われています。ほとんどの場合において ESLint 基盤はプロジェクトごとに必要なパッケージをインストールして設定ファイルを作成し、構築されます。しかしその設定内容がプロジェクト間で重複することは珍しくなく、プロジェクトの数が増えるにつれ冗長となりがちです。そこで、複数プロジェクト間で共通のルールセットを定義して単一の E...]]></description><link>https://zenn.dev/wakamsha/articles/create-eslint-config</link><guid isPermaLink="true">https://zenn.dev/wakamsha/articles/create-eslint-config</guid><pubDate>Tue, 02 Jul 2024 01:27:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--TH5m9sEs--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%2587%25AA%25E5%2588%2586%25E3%2581%25A0%25E3%2581%2591%25E3%2581%25AE%2520ESLint%2520Config%2520%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:wakamsha%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2psYURiOW50NGN1UTUweE54dmxHcW50Rkxsbkg1VThSWUFZOUtBakE9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>wakamsha</dc:creator></item><item><title><![CDATA[JavaScript: ネイティブなビルドインを魔改造しようとした話]]></title><description><![CDATA[
+ Arrayを拡張したContentsクラス
+そのContentsクラスからnewしたcontentsが引数に渡ってきている
+const Messages = ({ room, contents, scrollingRef }) =&gt; {
+  const [messages, setMessages] = useState([]);
+  useEffect(() =&gt; {
+    // INFO: 購読
+    contents.onSnapshot((data) =&gt; {
+      setMessages(data);
+    });
+  }, []);
+
+  /...]]></description><link>https://zenn.dev/llc_starhacks/articles/74d94b46c11576</link><guid isPermaLink="true">https://zenn.dev/llc_starhacks/articles/74d94b46c11576</guid><pubDate>Tue, 02 Jul 2024 00:14:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lqmJBOpI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%253A%2520%25E3%2583%258D%25E3%2582%25A4%25E3%2583%2586%25E3%2582%25A3%25E3%2583%2596%25E3%2581%25AA%25E3%2583%2593%25E3%2583%25AB%25E3%2583%2589%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%2592%25E9%25AD%2594%25E6%2594%25B9%25E9%2580%25A0%25E3%2581%2597%25E3%2582%2588%25E3%2581%2586%25E3%2581%25A8%25E3%2581%2597%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:llc_starhacks%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY4M2QxODAxZjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>llc_starhacks</dc:creator></item><item><title><![CDATA[サッカー国際大会データページを作ってみました。]]></title><description><![CDATA[
+ はじめに
+私はサッカーを観るのが好きです。
+現在、EURO2024とコパ・アメリカが開催されています。
+データを見るのが好きなので、ワールドカップやアジアカップを含めた国ごとの過去大会の成績を横断的に参照したいと思い立ちました。
+大会ごとの成績は、Wikipediaなどのサイトで詳細を確認できますが、国ごとに各大会の成績を横断的に比較できるサイトが見つからなかったので、過去の国ごとの大会成績を横断的に見られるサイトを作ってみました。
+※デザインはいけてなく技術的にも特筆すべき点はありません。ほとんど生成AIに作ってもらいました。
+
+ ソースコード
+https://github.com...]]></description><link>https://zenn.dev/ajimiq/articles/2a135f8cb2ddff</link><guid isPermaLink="true">https://zenn.dev/ajimiq/articles/2a135f8cb2ddff</guid><pubDate>Mon, 01 Jul 2024 14:43:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--aKO6VZi9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B5%25E3%2583%2583%25E3%2582%25AB%25E3%2583%25BC%25E5%259B%25BD%25E9%259A%259B%25E5%25A4%25A7%25E4%25BC%259A%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%259A%25E3%2583%25BC%25E3%2582%25B8%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%25E3%2580%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ajimiq%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRhYjk0YWVhYjcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ajimiq</dc:creator></item><item><title><![CDATA[Slackでの情報共有を効率化！Gemini 1.5 ProとGoogle Apps Script（GAS）で記事要約Botを作ってみた]]></title><description><![CDATA[
+ はじめに
+現代は情報が溢れすぎており、必要な記事や情報を効率的に把握するのが難しくなっています。インターネットやSNSでは膨大な量のコンテンツが日々生成されており、重要な記事を見逃したり、読む時間がないと感じている人も多いのではないでしょうか。
+そこで、今回作成したのが、URLを指定するだけで記事の要約をSlackに投稿できるBotです。
+
+主な機能は次のとおりです。
+
+Slackでのメンション、またはスプレッドシートに記載されたURLからコンテンツを抽出
+抽出したコンテンツをAIで要約
+要約した文章をSlackチャンネルに投稿
+
+このBotを活用することで、Slackのチャンネルの...]]></description><link>https://zenn.dev/toono_f/articles/951fabfb7fca56</link><guid isPermaLink="true">https://zenn.dev/toono_f/articles/951fabfb7fca56</guid><pubDate>Mon, 01 Jul 2024 12:59:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BIdx8TT5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Slack%25E3%2581%25A7%25E3%2581%25AE%25E6%2583%2585%25E5%25A0%25B1%25E5%2585%25B1%25E6%259C%2589%25E3%2582%2592%25E5%258A%25B9%25E7%258E%2587%25E5%258C%2596%25EF%25BC%2581Gemini%25201.5%2520Pro%25E3%2581%25A8Google%2520Apps%2520Script%25EF%25BC%2588GAS%25EF%25BC%2589%25E3%2581%25A7%25E8%25A8%2598%25E4%25BA%258B...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258A%25E3%2581%25A8%25E3%2581%25AE%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZmMGE0NGYzM2QuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>おとの</dc:creator></item><item><title><![CDATA[C++アプリケーションをWebアプリケーションに変換できますか？]]></title><description><![CDATA[
+2023年3月14日更新：Cheerp 3.0をリリースし、Apache 2.0ライセンスに変更しました！ リリースノートはこちら。
+C/C++で書かれた高性能なアプリケーションやライブラリをお持ちで、それをWebアプリにしてより多くの人に使ってもらいたいとお考えではありませんか？
+最近まで、これは非常に難しく、JavaScriptでソフトウェアを完全に書き直す必要があったかもしれません。
+しかし、Cheerpを使えば、ライブラリや完全なアプリケーションを含む既存のコードベースを自動的にHTML5に移植することができ、時間とコストを節約できます。
+
+ Cheerpとは？
+Cheerpは...]]></description><link>https://zenn.dev/leaning_tech_jp/articles/8d2a529c002e33</link><guid isPermaLink="true">https://zenn.dev/leaning_tech_jp/articles/8d2a529c002e33</guid><pubDate>Mon, 01 Jul 2024 12:20:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_z-NAPCi--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:C%252B%252B%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%2592Web%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2581%25AB%25E5%25A4%2589%25E6%258F%259B%25E3%2581%25A7%25E3%2581%258D%25E3%2581%25BE%25E3%2581%2599%25E3%2581%258B%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Leaning%2520Technologi...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc0MmNjYWUyNWQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Leaning Technologies Japan (リーニングテクノロジー)</dc:creator></item><item><title><![CDATA[【初級者向け】fetchとaxiosの違い]]></title><description><![CDATA[こんにちは！現在独学でフロントエンドの勉強をしている駆け出しエンジニアのjaymzzz37です。
+JavaScriptの学習は始めたときは、外部リソースを取得する際にfetchを頻繁に使っていました。Reactの学習を始めてからはaxiosを使う方が多いなという印象を受けました。
+どちらも同じようなことができるけど何が違うの？どっちらを使うべきなの？という疑問が湧いたの自分なりに調べてまとめてみました。
+もしこれは違うのでは？こうなのでは？というご意見があればどしどしコメントをお送りください。
+
+ fetchとaxiosとは
+どちらも使うときのモチベーションは、非同期的に外部リソースから...]]></description><link>https://zenn.dev/kenjh/articles/85b6ebf712b6eb</link><guid isPermaLink="true">https://zenn.dev/kenjh/articles/85b6ebf712b6eb</guid><pubDate>Mon, 01 Jul 2024 11:14:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9lPedKM---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%2588%259D%25E7%25B4%259A%25E8%2580%2585%25E5%2590%2591%25E3%2581%2591%25E3%2580%2591fetch%25E3%2581%25A8axios%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:jaymzzz37%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSzlXWEFIaDloc01GbTF4VUdGMzRUbHZDM0c2SlNxT0c2WjlDX3luRzJMajQ0ZD1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>jaymzzz37</dc:creator></item><item><title><![CDATA[JavaScript：a[1] = 1な配列aでa.map((_, i) => a[i + 1])[0]が1じゃなかった。なぜ？]]></title><description><![CDATA[答え： aが疎配列だったから
+JavaScriptには疎配列という概念があります。
+https://developer.mozilla.org/ja/docs/Web/JavaScript/Guide/Indexed_collections#疎配列
+これは「空のスロット」を格納した配列のことで、具体的には次のように書くと疎配列になります。
+const a = [, 1];
+// a[0] = 空のスロット, a[1] = 1
+この「空のスロット」はnullでもundefinedでもありません。そして、
+https://developer.mozilla.org/ja/docs/Web/J...]]></description><link>https://zenn.dev/iwannatto/articles/f68f9786dfbfec</link><guid isPermaLink="true">https://zenn.dev/iwannatto/articles/f68f9786dfbfec</guid><pubDate>Mon, 01 Jul 2024 07:56:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--LsR18OCW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25EF%25BC%259Aa%255B1%255D%2520%253D%25201%25E3%2581%25AA%25E9%2585%258D%25E5%2588%2597a%25E3%2581%25A7a.map%2528%2528_%252C%2520i%2529%2520%253D%253E%2520a%255Bi%2520%252B%25201%255D%2529%255B0%255D%25E3%2581%258C1%25E3%2581%2598%25E3%2582%2583%25E3%2581%25AA...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E7%25B4%258D%25E8%25B1%2586%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNmMTkzMmI2YWQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>納豆</dc:creator></item><item><title><![CDATA[【JavaScript】reduce メソッドを徹底解説]]></title><description><![CDATA[こんにちは！
+ラブグラフエンジニアのひろです。
+今回は JavaScript の reduce メソッドについて書いていきます。
+reduce メソッドは、配列の各要素に対して関数を適用し、単一の出力値を生成する強力なメソッドです。
+このメソッドは、複雑なデータ構造を単純化したり、異なるデータ形式への変換をおこなう場合に特に有効なので、使い方や気を付けるべきポイントなどについて紹介します。
+
+ reduce メソッドの基本的な使い方
+reduce の基本構文は次の通りです：
+array.reduce(function(accumulator, currentValue, currentI...]]></description><link>https://zenn.dev/lovegraph/articles/a2ebaedbcd03db</link><guid isPermaLink="true">https://zenn.dev/lovegraph/articles/a2ebaedbcd03db</guid><pubDate>Mon, 01 Jul 2024 06:46:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--376aqKF7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590JavaScript%25E3%2580%2591reduce%2520%25E3%2583%25A1%25E3%2582%25BD%25E3%2583%2583%25E3%2583%2589%25E3%2582%2592%25E5%25BE%25B9%25E5%25BA%2595%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E6%25B0%25B4%25E7%2580%25AC%25E3%2581%25B2%25E3%2582%258D%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZmNWYxYmUwYzAuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%25A9%25E3%2583%2596%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%2595%25E3%2581%25AE%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2UwM2I2OTYyN2UuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>水瀬ひろ</dc:creator></item><item><title><![CDATA[JavaScript: デバッグ developerTool #Chrome]]></title><description><![CDATA[
+ traceしたかったら
+console.trace より console.warn が良い。
+コンソールに出てきたlogをクリックして展開するとtraceが見れる。
+
+]]></description><link>https://zenn.dev/llc_starhacks/articles/1cdc18239e67ec</link><guid isPermaLink="true">https://zenn.dev/llc_starhacks/articles/1cdc18239e67ec</guid><pubDate>Mon, 01 Jul 2024 04:41:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--49nbl4oj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%253A%2520%25E3%2583%2587%25E3%2583%2590%25E3%2583%2583%25E3%2582%25B0%2520developerTool%2520%2523Chrome%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:llc_starhacks%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY4M2QxODAxZjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>llc_starhacks</dc:creator></item><item><title><![CDATA[Javascript の配列操作を 破壊的操作と非破壊的操作を意識して整理する]]></title><description><![CDATA[
+ はじめに
+javascriptの配列操作は実務でもよく出てくる重要な操作です。そこで、よく使われる配列操作を破壊的操作（元の配列やオブジェクトを変更する操作）と非破壊的操作（元の配列やオブジェクトを変更せずに新しい配列やオブジェクトを返す操作）の違いを意識しながらまとめてみます。
+
+ 非破壊的操作
+
+ map
+map メソッドは元の配列の要素に対して、処理を加えて新しい配列を作ります。
+const numbers = [1, 2, 3, 4, 5]
+const double = numbers.map((num) =&gt; num * 2)
+
+console.log(double)...]]></description><link>https://zenn.dev/surume3/articles/d2838bb26f98f4</link><guid isPermaLink="true">https://zenn.dev/surume3/articles/d2838bb26f98f4</guid><pubDate>Mon, 01 Jul 2024 00:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--52yhDj5p--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Javascript%2520%25E3%2581%25AE%25E9%2585%258D%25E5%2588%2597%25E6%2593%258D%25E4%25BD%259C%25E3%2582%2592%2520%25E7%25A0%25B4%25E5%25A3%258A%25E7%259A%2584%25E6%2593%258D%25E4%25BD%259C%25E3%2581%25A8%25E9%259D%259E%25E7%25A0%25B4%25E5%25A3%258A%25E7%259A%2584%25E6%2593%258D%25E4%25BD%259C%25E3%2582%2592%25E6%2584%258F%25E8%25AD%2598%25E3%2581%2597%25E3%2581%25A6%25E6%2595%25B4%25E7%2590%2586%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Syumai3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI4MzZlZGI2OWIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Syumai3</dc:creator></item><item><title><![CDATA[class ve function]]></title><description><![CDATA[
+ class vs function
+
+ class
+
+チェーンをきれいに書ける
+
+自分自身をさしたい: class's method
+どんどん手続きを進ませたい: function's return
+
+
+継承できる
+
+
+ 共通
+
+constructor的なもの
+プライベート的なもの
+インスタンスごとの変数の保持: これ意外とfunctionでもできる
+
+function Hoge(n) {
+    return { set(a) { n = a; }, get() { return n } }
+}
+
+const hoge1 = Hoge(1);
+const hoge2 = Hoge(...]]></description><link>https://zenn.dev/llc_starhacks/articles/54a29f57e6a0b7</link><guid isPermaLink="true">https://zenn.dev/llc_starhacks/articles/54a29f57e6a0b7</guid><pubDate>Sun, 30 Jun 2024 16:19:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--28aC5HCZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_76:class%2520ve%2520function%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:llc_starhacks%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY4M2QxODAxZjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>llc_starhacks</dc:creator></item><item><title><![CDATA[linterのruleのドキュメントから学びを得る（Biomeを例に）]]></title><description><![CDATA[
+ はじめに
+linter（リンター）とは、ソースコードを静的解析し、潜在的なバグや、パフォーマンスに関わる問題などを、指摘・修正してくれるツールです。Rustならclippy、Kotlinならktlint、JavaScriptならESLint、というように言語毎に様々なlinterが存在します。
+linterには「xxxという構文はyyyという構文に置き換えられるべきだ」、「xxxしてはいけない」というようなruleと呼ばれるものがあり、複数のruleを静的解析によりチェックする仕組みとなっていますが、こういったruleには当然導入に至った背景・理由があり、公式ドキュメントにまとめられ...]]></description><link>https://zenn.dev/polyomino/articles/linter-rule-doc-reading</link><guid isPermaLink="true">https://zenn.dev/polyomino/articles/linter-rule-doc-reading</guid><pubDate>Sun, 30 Jun 2024 16:14:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ZoBRDHOB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:linter%25E3%2581%25AErule%25E3%2581%25AE%25E3%2583%2589%25E3%2582%25AD%25E3%2583%25A5%25E3%2583%25A1%25E3%2583%25B3%25E3%2583%2588%25E3%2581%258B%25E3%2582%2589%25E5%25AD%25A6%25E3%2581%25B3%25E3%2582%2592%25E5%25BE%2597%25E3%2582%258B%25EF%25BC%2588Biome%25E3%2582%2592%25E4%25BE%258B%25E3%2581%25AB%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Takumi%2520Ishikawa%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFUWEFKeFNacGxwWmh1VUJpYmhVMV9BbG5QMHB2cGZETHh1a3FzenJSWFM9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Takumi Ishikawa</dc:creator></item><item><title><![CDATA[「Use process(css).then(cb) to work with async plugins」の解決]]></title><description><![CDATA[
+ 起こったこと
+NativeWindで開発している時に、
+Use process(css).then(cb) to work with async plugins
+というエラー発生
+
+ やったこと
+https://github.com/nativewind/nativewind/issues/498
+このissueの回答の中にある通りに、package.jsonのtailwindcssのところから「^」を削除した。
+
+package.json
++ "tailwindcss": "3.3.2"
+- "tailwindcss": "^3.3.2"
+
+バージョンを3.3.2に固定することで解...]]></description><link>https://zenn.dev/ttaktt/articles/d293bffdef1f39</link><guid isPermaLink="true">https://zenn.dev/ttaktt/articles/d293bffdef1f39</guid><pubDate>Sun, 30 Jun 2024 13:45:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--UTMLbnhk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%258CUse%2520process%2528css%2529.then%2528cb%2529%2520to%2520work%2520with%2520async%2520plugins%25E3%2580%258D%25E3%2581%25AE%25E8%25A7%25A3%25E6%25B1%25BA%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ttaktt%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc1NmE0YjMyMjYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ttaktt</dc:creator></item><item><title><![CDATA[静的サイトに対する検索にWebブラウザで動作する LLM の利用を試す]]></title><description><![CDATA[
+ はじめに
+ライブラリのドキュメントサイトなどはコンテンツが静的であるため、GitHub Pages など安価なサービスを利用して、静的サイトとして実装することが多い。
+一方で、利用者が求める情報にいち早く到達するためには、静的コンテンツに対する検索機能が有効だが、これは動的な機能だ。
+そこで、pagefind などは、バックエンドサーバを持たずに静的なサイトを検索する機能を提供してくれる。これらはビルドされた静的コンテンツからインデックスデータを生成し、これをサイトと一緒にデプロイすることで、利用者の環境で検索を実行する。
+この機能を利用することで、ユーザは自身の興味のある情報が掲載...]]></description><link>https://zenn.dev/sterashima78/articles/61c346b3c261fa</link><guid isPermaLink="true">https://zenn.dev/sterashima78/articles/61c346b3c261fa</guid><pubDate>Sun, 30 Jun 2024 12:30:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--tXh7mw9C--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E9%259D%2599%25E7%259A%2584%25E3%2582%25B5%25E3%2582%25A4%25E3%2583%2588%25E3%2581%25AB%25E5%25AF%25BE%25E3%2581%2599%25E3%2582%258B%25E6%25A4%259C%25E7%25B4%25A2%25E3%2581%25ABWeb%25E3%2583%2596%25E3%2583%25A9%25E3%2582%25A6%25E3%2582%25B6%25E3%2581%25A7%25E5%258B%2595%25E4%25BD%259C%25E3%2581%2599%25E3%2582%258B%2520LLM%2520%25E3%2581%25AE%25E5%2588%25A9%25E7%2594%25A8%25E3%2582%2592%25E8%25A9%25A6%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:sterashima78%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdmZTM3ODhmMTUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sterashima78</dc:creator></item></channel></rss>

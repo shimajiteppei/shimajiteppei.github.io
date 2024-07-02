@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Kotlin」のフィード]]></title><description><![CDATA[Zennのトピック「Kotlin」のRSSフィードです]]></description><link>https://zenn.dev/topics/kotlin</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/0913f0325d.png</url><title>Zennの「Kotlin」のフィード</title><link>https://zenn.dev/topics/kotlin</link></image><generator>zenn.dev</generator><lastBuildDate>Tue, 02 Jul 2024 03:29:30 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/kotlin/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Android 最速でKtlintを導入する]]></title><description><![CDATA[コードの自動フォーマットやコードスタイルチェックを行うことはプロダクトの品質にも関わるので大事。
+なので最速最低限で導入する。
+毎回忘れるのでメモ
+libs.versions.toml
+[versions]
+ktlint = "11.3.2"
+
+[plugins]
+ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint" }
+ルートのbuild.gradle.kts
+plugins {
+    alias(libs.plugins.ktlint) apply false
+}
+appのbuild.grad...]]></description><link>https://zenn.dev/giglancer/articles/cabd65462043cc</link><guid isPermaLink="true">https://zenn.dev/giglancer/articles/cabd65462043cc</guid><pubDate>Mon, 01 Jul 2024 08:18:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ErGfotaA--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Android%2520%25E6%259C%2580%25E9%2580%259F%25E3%2581%25A7Ktlint%25E3%2582%2592%25E5%25B0%258E%25E5%2585%25A5%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:apollo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBjZmZlZTVlZjQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>apollo</dc:creator></item><item><title><![CDATA[Kotlin Fest 2024の参加レポート]]></title><description><![CDATA[こんにちは。
+株式会社ココナラのアプリ開発グループ、Androidチームのジェレミです。
+今回は6月22日(土)に開催されていたKotlin Fest 2024に参加してきましたのでレポートします。
+
+ Kotlin Festとは
+Kotlin Festは「Kotlinを愛でる」をビジョンに、Kotlin™に関する知見の共有と、Kotlinファンの交流の場を提供する技術カンファレンスです。
+5年ぶりにオフライン形式で開催されました。
+ココナラではAndroid開発にKotlinを採用しています。
+
+ 参加したきっかけ
+オンラインのカンファレンスには参加したことがありましたが、オフラインで...]]></description><link>https://zenn.dev/coconala/articles/45fd022b7ed947</link><guid isPermaLink="true">https://zenn.dev/coconala/articles/45fd022b7ed947</guid><pubDate>Mon, 01 Jul 2024 01:07:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--nJKS38Kg--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Kotlin%2520Fest%25202024%25E3%2581%25AE%25E5%258F%2582%25E5%258A%25A0%25E3%2583%25AC%25E3%2583%259D%25E3%2583%25BC%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2582%25B3%25E3%2582%25B3%25E3%2583%258A%25E3%2583%25A9%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRiNTMxNzlmY2QuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>株式会社ココナラ</dc:creator></item><item><title><![CDATA[[Kotlin]data classとclassの違い＆Javaの何に当たるのか]]></title><description><![CDATA[
+ data classとclassについて
+今回はテーマの通り、
+Kotlinのdata classと通常のclassの違いについてと、
+Javaにはdata classが存在しなかったのに、なぜKotlinにはdata classがあるのか
+(data classはjavaの何に当たるのか)
+について書いていきたいと思います！
+
+ data classとclassはどう違うのか
+最初にそれぞれを一言で言ってしまえば、
+通常のクラスは、オブジェクトの状態と振る舞いをカプセル化するために使用され、
+データクラスは、主にデータの保持と転送を目的としているもので、Kotlin特有の仕様だ。
+...]]></description><link>https://zenn.dev/airiswim/articles/3af3ec0564b315</link><guid isPermaLink="true">https://zenn.dev/airiswim/articles/3af3ec0564b315</guid><pubDate>Sun, 30 Jun 2024 15:21:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--W2srnIcv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BKotlin%255Ddata%2520class%25E3%2581%25A8class%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%25EF%25BC%2586Java%25E3%2581%25AE%25E4%25BD%2595%25E3%2581%25AB%25E5%25BD%2593%25E3%2581%259F%25E3%2582%258B%25E3%2581%25AE%25E3%2581%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Airichan%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI0NGFlNmMyNmYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Airichan</dc:creator></item><item><title><![CDATA[RepositoryやDataSourceでFlowをshareIn/stateInする]]></title><description><![CDATA[
+ 概要
+Android アプリの開発をしていると Repository や DataSource のようなデータレイヤーで SharedFlow や StateFlow を作りたくなることがあります。
+Firebase Firestore、AndroidX Room や Realm のようなデータベースの変更監視を行う場合にこうした状況があるかと思います。
+通常、こうした変更監視ではただの Flow を生成して呼び出し元に返すことは容易にできますが、一方で複数の画面にまたがって共有されるような Shared/StateFlow を返すことはあまり簡単ではありません。
+この記事ではデータ...]]></description><link>https://zenn.dev/crimsonwoods/articles/5faa1278825f21</link><guid isPermaLink="true">https://zenn.dev/crimsonwoods/articles/5faa1278825f21</guid><pubDate>Sat, 29 Jun 2024 06:03:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--JTkN8zOg--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Repository%25E3%2582%2584DataSource%25E3%2581%25A7Flow%25E3%2582%2592shareIn%252FstateIn%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:crimsonwoods%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lYZTFDUW5ydENfQVd4b3Y3a1VpeU5LX3pocEg5cmVMUGJ2bTlRPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>crimsonwoods</dc:creator></item><item><title><![CDATA[Composeのバケツリレーを救いたい]]></title><description><![CDATA[
+ はじめに
+スペースマーケットでAndroidエンジニアをしておりますseoです。
+Jetpack ComposeになってUI作成のスピードが上がったものの、引数の多さには目を背けたくなるときがあります😣
+そこで今回はCompositionLocalを使って、いくつかの引数を消してバケツリレーを少しだけ解消する方法を考えたいと思います。
+
+ CompositionLocalについて
+CompositionLocalは明示的にパラメーターを渡すことなく、下層のComposableにパラメーターを渡すことのできる方法です。
+
+CompositionLocalに値を指定する
+
+https:/...]]></description><link>https://zenn.dev/spacemarket/articles/520e55728698fe</link><guid isPermaLink="true">https://zenn.dev/spacemarket/articles/520e55728698fe</guid><pubDate>Thu, 27 Jun 2024 10:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--JguheXJh--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Compose%25E3%2581%25AE%25E3%2583%2590%25E3%2582%25B1%25E3%2583%2584%25E3%2583%25AA%25E3%2583%25AC%25E3%2583%25BC%25E3%2582%2592%25E6%2595%2591%25E3%2581%2584%25E3%2581%259F%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Baek%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc1NTA1NzM5OGYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25B9%25E3%2583%259A%25E3%2583%25BC%25E3%2582%25B9%25E3%2583%259E%25E3%2583%25BC%25E3%2582%25B1%25E3%2583%2583%25E3%2583%2588%2520Engineer%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzkyNmI2MWE5NzMuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Baek</dc:creator></item><item><title><![CDATA[聖剣よりも強い!? 最弱エンジニアの奇跡のアプリ開発物語 ～異世界転生編～]]></title><description><![CDATA[Qiitaには真面目なものを投稿したのでこちらではAIに「異世界転生」風にパロってもらったものを投稿したいと思います。
+https://qiita.com/ararrararararaarrrr/items/5e28201b9e453150fd5b
+
+ 第一章: 「異世界へ、そして最弱職業へ」
+気がつくと、私は見知らぬ世界に立っていた。周りを見渡すと、中世ヨーロッパを思わせる街並み。そう、これは紛れもない異世界だった。
+「ようこそ、勇者様。あなたの職業を鑑定いたします」
+目の前に現れた神官らしき人物がそう告げる。期待に胸を膨らませる私だったが…
+「あなたの職業は…『システムエンジニア』で...]]></description><link>https://zenn.dev/araaairairai/articles/c539d9a24d0a93</link><guid isPermaLink="true">https://zenn.dev/araaairairai/articles/c539d9a24d0a93</guid><pubDate>Thu, 27 Jun 2024 06:25:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--V6ZR1Lxx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%2581%2596%25E5%2589%25A3%25E3%2582%2588%25E3%2582%258A%25E3%2582%2582%25E5%25BC%25B7%25E3%2581%2584%2521%253F%2520%25E6%259C%2580%25E5%25BC%25B1%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%25E3%2581%25AE%25E5%25A5%2587%25E8%25B7%25A1%25E3%2581%25AE%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E9%2596%258B%25E7%2599%25BA%25E7%2589%25A9%25E8%25AA%259E%2520%25EF%25BD%259E%25E7%2595%25B0%25E4%25B8%2596%25E7%2595%258C%25E8%25BB%25A2%25E7%2594%259F%25E7%25B7%25A8%25EF%25BD%259E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ararrararararaarrrr%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSi01ejQ0aHVid3k0bzdjbmlfSzBEaFpPdjU4N2JlWk9yZlZZcFMyc3c1VXlyWm1jWWs9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ararrararararaarrrr</dc:creator></item><item><title><![CDATA[Android Test Mockk 入門]]></title><description><![CDATA[Mockkはテストダブルを作るためのライブラリ
+他に有名なものにmockitoがある。
+今回はMockkがKotlinベースで作られていることCoroutinesをサポートしていることからMockkの使い方をメモしていく
+
+ 基本
+
+ 依存の追加
+testImplementation("io.mockk:mockk:1.13.11")
+https://github.com/mockk/mockk
+
+ テストの準備
+同期的なクラスと非同期的なクラスを用意する
+同期
+interface ArithmeticCalculator {
+    fun add(a: Int, b: Int): I...]]></description><link>https://zenn.dev/giglancer/articles/ffb0079aeb1ee0</link><guid isPermaLink="true">https://zenn.dev/giglancer/articles/ffb0079aeb1ee0</guid><pubDate>Wed, 26 Jun 2024 16:36:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--EI4peCBM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:Android%2520Test%2520Mockk%2520%25E5%2585%25A5%25E9%2596%2580%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:apollo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBjZmZlZTVlZjQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>apollo</dc:creator></item><item><title><![CDATA[K2コンパイラのベンチマーク]]></title><description><![CDATA[
+ はじめに
+2024年5月にKotlin最新版の2.0.0がリリースされ、K2コンパイラが安定版となりさまざまなプラットフォーム (JVM、ネイティブ、Wasなどなど)でデフォルトとなった。コンパイル速度や性能、開発者の体験などさまざまな改善がもたらされたようだが、かねてより気になっていたコンパイル速度に焦点を当てて検証してみた。
+https://blog.jetbrains.com/ja/kotlin/2024/05/celebrating-kotlin-2-0-fast-smart-and-multiplatform/
+https://github.com/JetBrains/ko...]]></description><link>https://zenn.dev/htnk128/articles/0fa393514298c8</link><guid isPermaLink="true">https://zenn.dev/htnk128/articles/0fa393514298c8</guid><pubDate>Wed, 26 Jun 2024 08:09:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--gU5haze1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:K2%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2591%25E3%2582%25A4%25E3%2583%25A9%25E3%2581%25AE%25E3%2583%2599%25E3%2583%25B3%25E3%2583%2581%25E3%2583%259E%25E3%2583%25BC%25E3%2582%25AF%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:htnk128%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YnRGdzVXaks1aE9kajh0bEVCdFl0ejU5ZHZoWkJmbWFHbWl1cVM9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>htnk128</dc:creator></item><item><title><![CDATA[Kotlin脳内ランタイムクイズ(解答編)]]></title><description><![CDATA[
+ Kotlin 問題集
+この記事は Kotlin Fest 2024 のログラスブースでのクイズ企画の解答です。
+https://www.kotlinfest.dev/
+https://zenn.dev/loglass/articles/kotlin-question
+https://x.com/LoglassPrdTeam/status/1804404958990872792
+
+ 出力は？
+
+null
+NullPointerException が throw される
+
+fun main() {
+    print(null.toString())
+}
+
+ 答え
+
+1 の null
+k...]]></description><link>https://zenn.dev/loglass/articles/kotlin-question-answer</link><guid isPermaLink="true">https://zenn.dev/loglass/articles/kotlin-question-answer</guid><pubDate>Wed, 26 Jun 2024 00:47:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5PjpIHVd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Kotlin%25E8%2584%25B3%25E5%2586%2585%25E3%2583%25A9%25E3%2583%25B3%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25A0%25E3%2582%25AF%25E3%2582%25A4%25E3%2582%25BA%2528%25E8%25A7%25A3%25E7%25AD%2594%25E7%25B7%25A8%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Makoto%2520Kobayashi%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRlNWQ4ZTRjZjguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2582%25B9%2520%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2kyVXd4UEtqVnpsTXV0NklidWhVZ2lmQWlSemJsdGJDQ2NMNVg2YVE9czI1MC1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Makoto Kobayashi</dc:creator></item><item><title><![CDATA[Kotlin Fest 2024 イベントレポート - Kotlinを愛でてきた！]]></title><description><![CDATA[こんにちは！アルダグラムでエンジニアとEMとPdMをしている @sukechannnn です！
+Kotlin Fest 2024 に行ってきたので、見てきたセッションのメモをイベントレポートとして公開します！
+どのセッションもKotlinへの愛を感じ、勉強になることばかりで最高のカンファレンスでした！
+
+ 先にまとめ
+
+Kotlin Multiplatform の勢いがすごい
+
+Compose Multiplatform (iOS) も Production Ready に着実に近づいている
+
+
+サーバーサイド Kotlin はある程度成熟していて、それでいてモダンな開発ができる
+
+ここ...]]></description><link>https://zenn.dev/aldagram_tech/articles/fb9aa85b1b767e</link><guid isPermaLink="true">https://zenn.dev/aldagram_tech/articles/fb9aa85b1b767e</guid><pubDate>Tue, 25 Jun 2024 03:47:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xZgYydXO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Kotlin%2520Fest%25202024%2520%25E3%2582%25A4%25E3%2583%2599%25E3%2583%25B3%25E3%2583%2588%25E3%2583%25AC%25E3%2583%259D%25E3%2583%25BC%25E3%2583%2588%2520-%2520Kotlin%25E3%2582%2592%25E6%2584%259B%25E3%2581%25A7%25E3%2581%25A6%25E3%2581%258D%25E3%2581%259F%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:sukechannnn%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JiM2FkMDk1NzUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25A2%25E3%2583%25AB%25E3%2583%2580%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%25A0%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2QzOTljNjM5YmQuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sukechannnn</dc:creator></item><item><title><![CDATA[Kotlin版Power Assertツール「Power-assert」の紹介]]></title><description><![CDATA[!
+この記事は毎週必ず記事がでるテックブログ"Loglass Tech Blog Sprint"の45週目の記事です！
+1年間連続達成まで残り8週となりました！
+
+
+ はじめに
+株式会社ログラスでエンジニアをしております、中村です。
+既存のアサーションライブラリを使ったテストの書き方には癖があり、検証対象のパターンごとに適切な関数を使い分ける必要があります。世の中にはアサーションライブラリの使い方だけにフォーカスした記事も数多く存在し、これらの記事にお世話になった方も多いのではないでしょうか。かく言う私もお世話になったエンジニアのうちの一人で、テストとは直接関係のないところにコストをかけ...]]></description><link>https://zenn.dev/loglass/articles/a3463d986be0b4</link><guid isPermaLink="true">https://zenn.dev/loglass/articles/a3463d986be0b4</guid><pubDate>Mon, 24 Jun 2024 02:38:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--RtFu0ytq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Kotlin%25E7%2589%2588Power%2520Assert%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%25E3%2580%258CPower-assert%25E3%2580%258D%25E3%2581%25AE%25E7%25B4%25B9%25E4%25BB%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2583%258A%25E3%2582%25AB%25E3%2583%25A0%25E3%2583%25A9%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRlNWQ4ZTRjZjguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2582%25B9%2520%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg4Zjk2YjhhYzIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ナカムラ</dc:creator></item><item><title><![CDATA[kotlin-reflectでプライベート関数のユニットテストを制する]]></title><description><![CDATA[
+ これはなに？
+Kotlinプライベートメソッドのユニットテストの書き方がわかるよ
+
+ Privateメソッドのテスト
+「Privateメソッドは公開I/Fを通じて間接的にテストすべき」が一般的な気がしていますが、それでもプライベートメソッドのユニットテストを書きたいときがあります。
+軽く調べてみたところ、Javaのリフレクションを使ったサンプルはありましたが、KotlinのReflectionを使ったサンプルは見当たらなかったのでそちらを利用してやってみます。
+!
+以下サンプルではJunitとデフォルトのアサーションを使っていますが、Kotest等の他のテストフレームワークでも同様に...]]></description><link>https://zenn.dev/souhub/articles/cae457b85062bc</link><guid isPermaLink="true">https://zenn.dev/souhub/articles/cae457b85062bc</guid><pubDate>Sun, 23 Jun 2024 22:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--DoTp_cnk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:kotlin-reflect%25E3%2581%25A7%25E3%2583%2597%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2599%25E3%2583%25BC%25E3%2583%2588%25E9%2596%25A2%25E6%2595%25B0%25E3%2581%25AE%25E3%2583%25A6%25E3%2583%258B%25E3%2583%2583%25E3%2583%2588%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E3%2582%2592%25E5%2588%25B6%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:souhub%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0ZUxJRUxPa19LaTAzNVg0b2d0UVp5ckVkY1RQeUhaZ2RoT3JTd2tJdFdKPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>souhub</dc:creator></item><item><title><![CDATA[Kotlinの基本概念だけを学習してみた]]></title><description><![CDATA[
+ はじめに
+業務で使用することはない Kotlin ですが、Better Java と言われているので学習してみました。
+
+ Null 安全
+Kotlin では、変数に null 値を代入することが明示的に制御されています。これにより、NullPointerException（NPE）の発生を防ぎます。
+fun main() {
+    var a: String = "abc"
+    // a = null // コンパイルエラー
+    var b: String? = "abc"
+    b = null // OK
+}
+
+ コンパイル時の警告
+main.kt:2:9: war...]]></description><link>https://zenn.dev/tonbi_attack/articles/7dfcd47b899a9b</link><guid isPermaLink="true">https://zenn.dev/tonbi_attack/articles/7dfcd47b899a9b</guid><pubDate>Sun, 23 Jun 2024 12:39:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Amo_kRc9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Kotlin%25E3%2581%25AE%25E5%259F%25BA%25E6%259C%25AC%25E6%25A6%2582%25E5%25BF%25B5%25E3%2581%25A0%25E3%2581%2591%25E3%2582%2592%25E5%25AD%25A6%25E7%25BF%2592%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tonbiattack%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVhZGQ4MThjYjcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tonbiattack</dc:creator></item><item><title><![CDATA[Androidの通知権限取得・チャンネル作成]]></title><description><![CDATA[Androidで通知を送るには権限許可、チャンネル作成の必要があるがAndroid OSバージョンによって挙動が変わる。
+
+ 確認環境
+
+compileSdk = 34
+targetSdk = 34
+minSdk = 29
+
+
+ インストール後の状態
+
+Android12以下
+
+通知設定は自動的オンにになる。
+※ただし通知チャンネルを作成しないと通知は届かない。
+
+
+Android13以上
+
+デフォルトはオフ（明示的に付与する必要がある）
+
+
+
+
+
+
+12以下
+13以上
+
+
+
+
+
+
+
+
+
+
+ 通知権限の付与
+
+ AndroidManifest
+&lt;uses-permission an...]]></description><link>https://zenn.dev/mmddate/articles/90fce54f4ea478</link><guid isPermaLink="true">https://zenn.dev/mmddate/articles/90fce54f4ea478</guid><pubDate>Sun, 23 Jun 2024 02:07:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--DCg59IDl--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Android%25E3%2581%25AE%25E9%2580%259A%25E7%259F%25A5%25E6%25A8%25A9%25E9%2599%2590%25E5%258F%2596%25E5%25BE%2597%25E3%2583%25BB%25E3%2583%2581%25E3%2583%25A3%25E3%2583%25B3%25E3%2583%258D%25E3%2583%25AB%25E4%25BD%259C%25E6%2588%2590%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:date%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZiYjM0NmU2OTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>date</dc:creator></item><item><title><![CDATA[Kotlinを扱う際の心構え]]></title><description><![CDATA[!
+⚠当記事は、銀の弾丸ではありません。各自の目的や状況などを総合的に判断して、自分で責任を持って検討してください。
+
+!
+⚠当記事は、銀の弾丸ではありません。各自の目的や状況などを総合的に判断して、自分で責任を持って検討してください。
+
+※大事なことなので２回書きました
+
+ 様々な分離がしやすい
+様々な分離をすることで、どこでデータが変更されているかがわかりやすくなり、デバッグしやすくなります。
+
+ イミュータブルとミュータブル、再代入可能の明示化
+変数宣言に関しては、varとvalで簡潔に再代入可能かを明示化することができます。
+Javaではfinal修飾子を付与しないといけません。...]]></description><link>https://zenn.dev/momosetkn/articles/50f65c8ccbba16</link><guid isPermaLink="true">https://zenn.dev/momosetkn/articles/50f65c8ccbba16</guid><pubDate>Sat, 22 Jun 2024 01:16:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GFpBTarT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Kotlin%25E3%2582%2592%25E6%2589%25B1%25E3%2581%2586%25E9%259A%259B%25E3%2581%25AE%25E5%25BF%2583%25E6%25A7%258B%25E3%2581%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:momosetkn%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY3YzAxY2Q0MTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>momosetkn</dc:creator></item><item><title><![CDATA[Kotlin脳内ランタイムクイズ]]></title><description><![CDATA[
+ Kotlin 問題集
+この記事は Kotlin Fest 2024 のログラスブースでのクイズ企画です！
+https://www.kotlinfest.dev/
+
+ ルール
+
+皆さんの脳内で Kotlin のコードを実行し、結果を回答してください！
+PC で実行してはいけません
+
+
+ 回答方法
+全問回答できたらブースにお越しください！
+https://x.com/LoglassPrdTeam/status/1804316646691213516
+全問正解者には Anker の充電器や技術書などの景品をご用意しております。
+※ 数に限りがあるため、先着順のお渡しになります
+
+ お願い
+...]]></description><link>https://zenn.dev/loglass/articles/kotlin-question</link><guid isPermaLink="true">https://zenn.dev/loglass/articles/kotlin-question</guid><pubDate>Sat, 22 Jun 2024 00:54:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--MMWPH8JH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Kotlin%25E8%2584%25B3%25E5%2586%2585%25E3%2583%25A9%25E3%2583%25B3%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25A0%25E3%2582%25AF%25E3%2582%25A4%25E3%2582%25BA%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Makoto%2520Kobayashi%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRlNWQ4ZTRjZjguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2582%25B9%2520%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2kyVXd4UEtqVnpsTXV0NklidWhVZ2lmQWlSemJsdGJDQ2NMNVg2YVE9czI1MC1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Makoto Kobayashi</dc:creator></item><item><title><![CDATA[DDDにおける認可の扱いとKotlinでの実装パターン]]></title><description><![CDATA[
+ はじめに
+アドベントカレンダーで書いた認可のベストプラクティスの記事が結構反応を頂けたのですが、最終的な結論が ユースケースによる という投げやりなまとめになってしまっていたのが少し気になっていました。
+https://zenn.dev/loglass/articles/76e559f1a13776
+そこで、ユースケース別の実装パターンをより詳しく解説しようと思い、Kotlin Fest 2024にプロポーザルを出しました。
+が、力及ばずお見送りとなってしまいました。
+https://fortee.jp/kotlin-fest-2024/proposal/f388bc44-95c9-...]]></description><link>https://zenn.dev/loglass/articles/05f59c0957f0b3</link><guid isPermaLink="true">https://zenn.dev/loglass/articles/05f59c0957f0b3</guid><pubDate>Fri, 21 Jun 2024 05:08:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Rl0znkYB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:DDD%25E3%2581%25AB%25E3%2581%258A%25E3%2581%2591%25E3%2582%258B%25E8%25AA%258D%25E5%258F%25AF%25E3%2581%25AE%25E6%2589%25B1%25E3%2581%2584%25E3%2581%25A8Kotlin%25E3%2581%25A7%25E3%2581%25AE%25E5%25AE%259F%25E8%25A3%2585%25E3%2583%2591%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%25B3%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:urmot%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRlNWQ4ZTRjZjguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2582%25B9%2520%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dBUWxiNEN2ZDZBQU1CZklac3p4UnpBNFpsVVRDbE1ONFBaSXBCaHc9czI1MC1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>urmot</dc:creator></item><item><title><![CDATA[検査例外にさよなら！KotlinのRailway Oriented Programming by kotlin-result]]></title><description><![CDATA[
+ はじめに
+惜しくも(?) Kotlin Fest 2024で採択とならなかったセッションの供養を行います。とはいえ、全ての内容を網羅することはせず、かいつまんで話したかった内容を書いていきます。
+https://fortee.jp/kotlin-fest-2024
+
+ Railway Oriented Programmingとは？
+Railway Oriented ProgrammingとはScott Wlaschin氏によって提唱された設計です。
+詳細は全て無料でこちらから見れるのでぜひチェックしてみてください。
+https://fsharpforfunandprofit.com/...]]></description><link>https://zenn.dev/loglass/articles/77e1496ed9bb68</link><guid isPermaLink="true">https://zenn.dev/loglass/articles/77e1496ed9bb68</guid><pubDate>Fri, 21 Jun 2024 05:02:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GDYG2_j3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%25A4%259C%25E6%259F%25BB%25E4%25BE%258B%25E5%25A4%2596%25E3%2581%25AB%25E3%2581%2595%25E3%2582%2588%25E3%2581%25AA%25E3%2582%2589%25EF%25BC%2581Kotlin%25E3%2581%25AERailway%2520Oriented%2520Programming%2520by%2520kotlin-r...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Yuito%2520Sato%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRlNWQ4ZTRjZjguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2582%25B9%2520%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M4NTA0YzQyMGQuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yuito Sato</dc:creator></item><item><title><![CDATA[新しいSonatype Central Portal APIに対応したKotlin Multiplatformライブラリテンプレートを作った]]></title><description><![CDATA[明日6/22に開催されるKotlinFest '24で「2024年に公開するに相応しいKotlin Multiplatformライブラリを構築する」というタイトルでセッションを担当するので、いろいろ下準備をしているところです。「みんなカジュアルにKMPライブラリを作って公開しよう」というメッセージが主な内容です。
+このセッションの1/3くらいで、Maven Centralにパッケージを公開する方法を説明する予定なのですが、ここ数ヶ月でSonatype Nexusがややこしい変更をいろいろ加えていて、これが現状思いのほかややこしい事態をもたらしていて、不本意ながらこの関係の話に重点を置くこ...]]></description><link>https://zenn.dev/atsushieno/articles/d066e757c9640f</link><guid isPermaLink="true">https://zenn.dev/atsushieno/articles/d066e757c9640f</guid><pubDate>Thu, 20 Jun 2024 17:39:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--z_BF6lHH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%2596%25B0%25E3%2581%2597%25E3%2581%2584Sonatype%2520Central%2520Portal%2520API%25E3%2581%25AB%25E5%25AF%25BE%25E5%25BF%259C%25E3%2581%2597%25E3%2581%259FKotlin%2520Multiplatform%25E3%2583%25A9%25E3%2582%25A4...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Atsushi%2520Eno%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2ptVkFPck1hOUFQQ3pGaTR0VUtqMHZXSHZHaWpJQVVvZWRtM3JZVUE9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Atsushi Eno</dc:creator></item><item><title><![CDATA[Android ProjectでKotlin2.0にアップデートするには]]></title><description><![CDATA[
+ はじめに
+個人のAndroid Projectでkotlin2.0に上げたときにやった作業のメモです。
+前提として、上げる前の環境は
+
+kotlin 1.9.24
+AGP 8.5
+compose compier 1.5.14
+ksp導入済み
+
+あたりでしょうか。
+比較的新しいバージョンだと思うので、これらのバージョンではない場合は、この記事以外にも作業が必要かもしれません。
+
+ kotlin 2.0にアップデートする
+
+ kotlinを2.0.0にする
+--- a/gradle/libs.versions.toml
++++ b/gradle/libs.versions.toml
+@@...]]></description><link>https://zenn.dev/yasi/articles/how-to-update-kotlin2-on-android-project</link><guid isPermaLink="true">https://zenn.dev/yasi/articles/how-to-update-kotlin2-on-android-project</guid><pubDate>Tue, 18 Jun 2024 23:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1YB-5-Ni--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Android%2520Project%25E3%2581%25A7Kotlin2.0%25E3%2581%25AB%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%25E3%2583%2587%25E3%2583%25BC%25E3%2583%2588%25E3%2581%2599%25E3%2582%258B%25E3%2581%25AB%25E3%2581%25AF%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yasi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTEd1cFBMTS1wcXlaYVlPcE5Uek9QemJpcXNCU3pMRHlJTlhaMTlTRnQ2RnVVPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yasi</dc:creator></item></channel></rss>
