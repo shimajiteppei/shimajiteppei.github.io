@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「JavaScript」のフィード]]></title><description><![CDATA[Zennのトピック「JavaScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/javascript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/64acd76870.png</url><title>Zennの「JavaScript」のフィード</title><link>https://zenn.dev/topics/javascript</link></image><generator>zenn.dev</generator><lastBuildDate>Thu, 04 Jul 2024 11:32:59 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/javascript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[【cluster】CICrafterとかで使いやすいスクリプト置き場]]></title><description><![CDATA[Unityを使わず、動く床アイテムを作成
+の記事みたいな感じで、CICrafterで使えるスクリプトをただポンポン置いていきます。
+（別にCICrafterでなくても、普通にクラフトアイテムとかで使えますが）
+
+ 01くるくる回転
+
+SubNodeを使う必要があります（SubNodeの入れ方は上記記事参照）。
+hayasaとjikuは変更可能。
+const hayasa = 72.0;
+const jiku = new Vector3(0.0, 1.0, 0.0);
+
+const node = $.subNode("SubNode000");
+
+$.onStart(() =&gt; {
+...]]></description><link>https://zenn.dev/vins/articles/21a1d94ed4b746</link><guid isPermaLink="true">https://zenn.dev/vins/articles/21a1d94ed4b746</guid><pubDate>Thu, 04 Jul 2024 09:30:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--mUodUSAd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590cluster%25E3%2580%2591CICrafter%25E3%2581%25A8%25E3%2581%258B%25E3%2581%25A7%25E4%25BD%25BF%25E3%2581%2584%25E3%2582%2584%25E3%2581%2599%25E3%2581%2584%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2583%2588%25E7%25BD%25AE%25E3%2581%258D%25E5%25A0%25B4%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:vins%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2c0ZERlaWVTamtQcDFmTDYwS1FhTlpYMkpMeTJOOGtfeWRha1F6PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>vins</dc:creator></item><item><title><![CDATA[vue.jsでYouTubeIFramePlayerAPIを使うならVueYoutubeがおすすめ]]></title><description><![CDATA[
+ YIPA（YouTubeIFramePlayerAPI）の使用目的
+複数の動画を読み込み、それぞれに対して用意したボタンから音量操作・再生・停止を行いたい。
+
+ 開発環境
+Vue3のComposition API形式です。
+  "dependencies": {
+    "@vue-youtube/component": "^0.0.6",
+    "@vue-youtube/core": "^0.0.6",
+    "pixi.js": "^8.1.1",
+    "vue": "^3.4.21",
+    "vue-router": "^4.3.0"
+  },
+  "devDep...]]></description><link>https://zenn.dev/210neon/articles/aa294c7ef8f71c</link><guid isPermaLink="true">https://zenn.dev/210neon/articles/aa294c7ef8f71c</guid><pubDate>Wed, 03 Jul 2024 17:54:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4gqPBQhg--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:vue.js%25E3%2581%25A7YouTubeIFramePlayerAPI%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%25E3%2581%25AA%25E3%2582%2589VueYoutube%25E3%2581%258C%25E3%2581%258A%25E3%2581%2599%25E3%2581%2599%25E3%2582%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:NettoNeon%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJlNGZhNmYxMjQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>NettoNeon</dc:creator></item><item><title><![CDATA[TypeScriptのswitch文におけるcaseで複数条件を扱う方法]]></title><description><![CDATA[
+ はじめに
+TypeScriptやJavaScriptのswitch文で複数の条件を一つのcaseで扱いたい場合があります。
+この記事では、その正しい方法と、よくある間違いについて解説します。
+
+ 背景
+APIのあるレスポンスがstringでありつつ、想定する中身はほぼ定まっている(=ほぼenumやん)が、あくまでもstringではあるので例外対応も考慮しないといけないような実装をする必要があったとき。
+テストを先に書いてから実装進めてたら、想定する結果にならず。
+なんでだーと思ったら、間違った方法の後者の方で記載して、実装問題ないよなーと思いつつ、vscodeでもテスト実行時のコンパ...]]></description><link>https://zenn.dev/91works/articles/afe51e4e177daf</link><guid isPermaLink="true">https://zenn.dev/91works/articles/afe51e4e177daf</guid><pubDate>Wed, 03 Jul 2024 15:36:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ZhInlKNU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%25E3%2581%25AEswitch%25E6%2596%2587%25E3%2581%25AB%25E3%2581%258A%25E3%2581%2591%25E3%2582%258Bcase%25E3%2581%25A7%25E8%25A4%2587%25E6%2595%25B0%25E6%259D%25A1%25E4%25BB%25B6%25E3%2582%2592%25E6%2589%25B1%25E3%2581%2586%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:YoshikiAgatsuma%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE5ZDA5N2JmNjIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:91works%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FiMzIwNDk2ZTUuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>YoshikiAgatsuma</dc:creator></item><item><title><![CDATA[電卓の作り方]]></title><description><![CDATA[本書は、簡易的な電卓を作成した際のメモを整理したものです。
+本書で説明する簡易電卓（以降は 電卓 と呼びます）は、下記サイトにて動作を確認することができます。
+
+https://nonaka101.github.io/jig-a/
+
+
+本書は大きく分けて「概要」「設計」「作成」「応用」の４つで構成されており、それぞれ下記のような役割を持ちます。
+
+概要：全体に関する概要です。また参考文献やライセンス等も扱っています。
+設計：コーディングする前段階として、どのような仕組みになるかを考えていきます。
+作成：上記の設計を基に、電卓のコア機能をコードとして起こしていきます。
+応用：コア機能ではない、拡張的な部分の実装を行っていきます。
+
+※ コードは JavaScript を使ってますが、設計に関する部分は他の言語でも使えると思います。]]></description><link>https://zenn.dev/nonaka101/books/howto-create-calculator</link><guid isPermaLink="true">https://zenn.dev/nonaka101/books/howto-create-calculator</guid><pubDate>Wed, 03 Jul 2024 13:58:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Sn1Bv7iV--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci8wMTQ1OWZlNmZmLnBuZw==%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>Nonaka</dc:creator></item><item><title><![CDATA[ブックマークレットを使ってAmazonのアフィリエイト用のHTMLを生成する]]></title><description><![CDATA[Scraps に雑に書いた 【2024−07-01】Amazon アフィ用に商品名・商品サムネイル・価格を含んだ HTML をブックマークレットを使って作成する を記事にしてみた。
+
+ やりたいこと
+React で Markdown を使った記事の投稿画面を作成中、記事の中に Amazon のアフィリンクを入れたくなった。
+ということで、Amazon の商品リンク、サムネイル画像、価格を含んだ HTML を簡単に作成したい。
+
+ 調査
+
+ Amazon が用意してくれているのでは？
+結論、ほしいものはない。
+調べてみると、Amazon アソシエイトツールバーというものを表示し、そこからボ...]]></description><link>https://zenn.dev/saneatsu/articles/generate-amazon-affiliate-html-by-bookmarklet</link><guid isPermaLink="true">https://zenn.dev/saneatsu/articles/generate-amazon-affiliate-html-by-bookmarklet</guid><pubDate>Wed, 03 Jul 2024 09:33:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--nI7FMA9L--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2596%25E3%2583%2583%25E3%2582%25AF%25E3%2583%259E%25E3%2583%25BC%25E3%2582%25AF%25E3%2583%25AC%25E3%2583%2583%25E3%2583%2588%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6Amazon%25E3%2581%25AE%25E3%2582%25A2%25E3%2583%2595%25E3%2582%25A3%25E3%2583%25AA%25E3%2582%25A8%25E3%2582%25A4%25E3%2583%2588%25E7%2594%25A8%25E3%2581%25AEHTML%25E3%2582%2592%25E7%2594%259F%25E6%2588%2590%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:saneatsu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhjZTY2YzgyYTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>saneatsu</dc:creator></item><item><title><![CDATA[SortableJS でドラッグアンドドロップする時にマウスカーソルを変更する]]></title><description><![CDATA[
+ 状況
+
+
+SortableJS を使用して DOM の入れ替え機能を実装した．
+
+
+ドラッグ時にマウスカーソルを grabbing （掴んでる感じのやつ）にしてドラッグしている感を出したい．
+
+
+TailwindCSS を使用しているが，active:cursor-grabbing を使用してもドラッグ中のカーソルが変更されなかった．
+
+
+
+ 解決策
+調べた結果，気合いで解決するしかなかった．
+まず css でクラスを作成しておく．
+.draggable-cursor * {
+  cursor: move !important;
+  cursor: -webkit-grabbing ...]]></description><link>https://zenn.dev/taroosg/articles/20240703152113-1c9e4cd5811b67</link><guid isPermaLink="true">https://zenn.dev/taroosg/articles/20240703152113-1c9e4cd5811b67</guid><pubDate>Wed, 03 Jul 2024 06:31:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--kPLtlfnq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:SortableJS%2520%25E3%2581%25A7%25E3%2583%2589%25E3%2583%25A9%25E3%2583%2583%25E3%2582%25B0%25E3%2582%25A2%25E3%2583%25B3%25E3%2583%2589%25E3%2583%2589%25E3%2583%25AD%25E3%2583%2583%25E3%2583%2597%25E3%2581%2599%25E3%2582%258B%25E6%2599%2582%25E3%2581%25AB%25E3%2583%259E%25E3%2582%25A6%25E3%2582%25B9%25E3%2582%25AB%25E3%2583%25BC%25E3%2582%25BD%25E3%2583%25AB%25E3%2582%2592%25E5%25A4%2589%25E6%259B%25B4%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:taro%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MyOGZiYzgwODUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>taro</dc:creator></item><item><title><![CDATA[CSS が 原因で Google Charts の Tooltips が表示されなかった件]]></title><description><![CDATA[
+ 状況
+
+
+Google Charts でグラフを作成し，表示された．
+
+
+カーソルを当てたときに表示される Tooltips が表示されない．
+
+
+コンソール見てもエラーは出ていない．
+
+
+
+ 原因
+下記の CSS を書いていたのが原因．他のページで svg 要素にクリックイベントを設定するために記述していた．
+svg {
+  pointer-events: none;
+}
+
+ 解決策
+上記 CSS を削除したら解決．別ページのクリックイベント設定部分は別にクラス名を追加して対応すれば OK．
+
+ 感想
+JS の挙動を疑って時間溶かした．最終的に下記の手順で解決．いつもの総当り力技．...]]></description><link>https://zenn.dev/taroosg/articles/20240703151957-057886293343be</link><guid isPermaLink="true">https://zenn.dev/taroosg/articles/20240703151957-057886293343be</guid><pubDate>Wed, 03 Jul 2024 06:31:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ErD0RKXe--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:CSS%2520%25E3%2581%258C%2520%25E5%258E%259F%25E5%259B%25A0%25E3%2581%25A7%2520Google%2520Charts%2520%25E3%2581%25AE%2520Tooltips%2520%25E3%2581%258C%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2595%25E3%2582%258C%25E3%2581%25AA%25E3%2581%258B%25E3%2581%25A3%25E3%2581%259F%25E4%25BB%25B6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:taro%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MyOGZiYzgwODUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>taro</dc:creator></item><item><title><![CDATA[JavaScript で正規表現に変数を用いる方法]]></title><description><![CDATA[
+ 状況
+
+
+配列の中から特定の文字列が含まれた要素を抽出したい．
+
+
+「特定の文字列」は複数あるので，変数や配列を用いて定義したものを使用したい．
+
+
+そもそも複数条件の文字列で抽出するのはどうすればよいのか．．．
+
+
+
+ データ例（適当）
+const array = [
+  {
+    name: "hoge",
+    message: "aaaaa",
+  },
+  {
+    name: "fuga",
+    message: "bbbbb",
+  },
+  {
+    name: "hoge",
+    message: "ccccc",
+  },
+  {
+    name...]]></description><link>https://zenn.dev/taroosg/articles/20240703151517-2a4c038170328c</link><guid isPermaLink="true">https://zenn.dev/taroosg/articles/20240703151517-2a4c038170328c</guid><pubDate>Wed, 03 Jul 2024 06:31:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4WkTIiIM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%2520%25E3%2581%25A7%25E6%25AD%25A3%25E8%25A6%258F%25E8%25A1%25A8%25E7%258F%25BE%25E3%2581%25AB%25E5%25A4%2589%25E6%2595%25B0%25E3%2582%2592%25E7%2594%25A8%25E3%2581%2584%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:taro%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MyOGZiYzgwODUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>taro</dc:creator></item><item><title><![CDATA[【cluster】Unityを使わず、動く床アイテムを作成]]></title><description><![CDATA[かおもさんのCICrafterというツールは、Unityなしでクラフトアイテムをアップロードすることができます（Windows PC用）。
+
+そしてワールドクラフトでは、ついに「動く床の上に乗るとアバターも一緒に動く」設定ができるようになりました。アスレチックワールドやエレベーター機能などに使える「動く床」を作ってみましょう！
+!
+なお独自アイテムをアップロードするにはclusterで「トラベラーミッション」を終わらせて「ビギナー」になっている必要があります。
+
+
+ ダウンロード・解凍・起動
+https://vkao.booth.pm/items/5807825
+まずは↑こちらからCIC...]]></description><link>https://zenn.dev/vins/articles/a58f8717267502</link><guid isPermaLink="true">https://zenn.dev/vins/articles/a58f8717267502</guid><pubDate>Wed, 03 Jul 2024 03:52:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8kD-7h0---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590cluster%25E3%2580%2591Unity%25E3%2582%2592%25E4%25BD%25BF%25E3%2582%258F%25E3%2581%259A%25E3%2580%2581%25E5%258B%2595%25E3%2581%258F%25E5%25BA%258A%25E3%2582%25A2%25E3%2582%25A4%25E3%2583%2586%25E3%2583%25A0%25E3%2582%2592%25E4%25BD%259C%25E6%2588%2590%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:vins%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2c0ZERlaWVTamtQcDFmTDYwS1FhTlpYMkpMeTJOOGtfeWRha1F6PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>vins</dc:creator></item><item><title><![CDATA[モノレポで JavaScript のローカルパッケージをいい感じにできる『tamashii』というツールを作った話]]></title><description><![CDATA[こんにちは。dinii の whatasoda です。モノレポで JavaScript のローカルパッケージをいい感じにできる『tamashii』というツールを作ったので作るに至った背景や機能についてまとめました。
+
+ モノレポとローカルパッケージ
+dinii では開発に用いる言語を TypeScript に統一しています（こちらでご紹介いただいています！）が、ほぼ全てのプロダクトのソースコードをモノレポで管理しているという特色もあります。 dinii が提供している MO-POS-CRM サービスは 10 近くのプロダクト群から出来上がっているため、モノレポであることは一人のエンジニア...]]></description><link>https://zenn.dev/dinii/articles/630e2b2eed29f8</link><guid isPermaLink="true">https://zenn.dev/dinii/articles/630e2b2eed29f8</guid><pubDate>Wed, 03 Jul 2024 03:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4bKPVbc9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%25A2%25E3%2583%258E%25E3%2583%25AC%25E3%2583%259D%25E3%2581%25A7%2520JavaScript%2520%25E3%2581%25AE%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25AB%25E3%2583%25AB%25E3%2583%2591%25E3%2583%2583%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B8%25E3%2582%2592%25E3%2581%2584%25E3%2581%2584%25E6%2584%259F%25E3%2581%2598%25E3%2581%25AB%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258B%25E3%2580%258Etamashii%25E3%2580%258F%25E3%2581%25A8%25E3%2581%2584%25E3%2581%2586%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:whatasoda%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA4ZTc1MWU5MTMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:dinii%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdlZWE3MDkzNTkuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>whatasoda</dc:creator></item><item><title><![CDATA[【JS】NumberとparseIntの違いでハマった]]></title><description><![CDATA[
+ はじめに
+JavaScriptで数値に変換する方法としてよく使用されるNumber関数とparseInt関数ですが、それぞれにnullやundefinedを渡した場合の挙動には違いがあります。
+これで少しハマったので備忘録です。
+
+ Number関数の挙動
+Number関数は、引数を数値に変換しようと試みます。nullやundefinedが渡された場合の挙動は以下の通りです。
+
+ nullが渡された場合
+console.log(Number(null)); // 0
+nullをNumber関数に渡すと、0が返されます。これは、nullが数値に変換される際に0として扱われるためです。
+...]]></description><link>https://zenn.dev/kibe/articles/676ec9db733c98</link><guid isPermaLink="true">https://zenn.dev/kibe/articles/676ec9db733c98</guid><pubDate>Wed, 03 Jul 2024 02:15:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--QgsRmMRt--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590JS%25E3%2580%2591Number%25E3%2581%25A8parseInt%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%25E3%2581%25A7%25E3%2583%258F%25E3%2583%259E%25E3%2581%25A3%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:k1b3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAwOTYwY2IzNTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>k1b3</dc:creator></item><item><title><![CDATA[【javascript】コールバック関数におけるthis]]></title><description><![CDATA[
+ はじめに
+コールバック関数を用いた実装で度々バグが発生しており、仕様について改めて勉強してみた。
+
+ コールバック関数のおさらい
+まず、コールバック関数とは何かおさらいをする。
+コールバック関数とは、たいていの場合ある関数に引数として渡される関数のことを指す。
+具体例で言うと以下の通り。
+
+コールバック関数
+function greeting(name) {
+  alert(`Hello, ${name}`);
+}
+
+function processUserInput(callback) {
+  const name = prompt("Please enter your name....]]></description><link>https://zenn.dev/murimuriko/articles/4b08e3c194f06d</link><guid isPermaLink="true">https://zenn.dev/murimuriko/articles/4b08e3c194f06d</guid><pubDate>Wed, 03 Jul 2024 01:30:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--TTcUXCm3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590javascript%25E3%2580%2591%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%25AB%25E3%2583%2590%25E3%2583%2583%25E3%2582%25AF%25E9%2596%25A2%25E6%2595%25B0%25E3%2581%25AB%25E3%2581%258A%25E3%2581%2591%25E3%2582%258Bthis%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2580%25E3%2582%258A%25E3%2582%2580%25E3%2582%258A%25E3%2581%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FGZFp1Y3JNa0lieEdJMkZGU1hSVURJb09NT1owVG5RNjFHcVNoRGdpdVZRPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>むりむりこ</dc:creator></item><item><title><![CDATA[Wakuで学ぶReact Server Componentsの仕組み：use client編]]></title><description><![CDATA[最近、Wakuのコードにテストを少し追加しました。いや、もっと早くやっておけばよかったと思ってます。Viteのpluginのテストの方法ってよく分からないなと思っていたところ、そもそもpluginとしてテストしなければ良いのだということに気づきました。
+そのテストを見ると、React Server Componentsの内部の仕組み、というかコードがどのように変換されているのかを見ることができるなと思いました。それだけです。
+今回は、use clientディレクティブについてです。大事なのは、これはserver環境(react-server condition)で使うものです。serve...]]></description><link>https://zenn.dev/dai_shi/articles/f37a2174a50a43</link><guid isPermaLink="true">https://zenn.dev/dai_shi/articles/f37a2174a50a43</guid><pubDate>Wed, 03 Jul 2024 00:23:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--67rOcByG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Waku%25E3%2581%25A7%25E5%25AD%25A6%25E3%2581%25B6React%2520Server%2520Components%25E3%2581%25AE%25E4%25BB%2595%25E7%25B5%2584%25E3%2581%25BF%25EF%25BC%259Ause%2520client%25E7%25B7%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:daishi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzcwZGNhM2E2Y2IuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>daishi</dc:creator></item><item><title><![CDATA[箱庭諸島の課題とその手段となる動画素材作成ツールを構築した]]></title><description><![CDATA[
+ 箱庭諸島の課題とは？
+完全新規プレイヤーがなかなか増えない。なぜ増えない？
+→全く知らない人が箱庭諸島を見るとどんな感じなんだ…？
+→これ初見で何やってるか理解できる人絶対いなくない？
+つまり、
+全く知らない人が見ると動いてないように見えるので、知りたくてもどんなゲームかわからないまま去る
+こういうこと(だと思ってる)
+どんなゲームかなんて説明書読めよ！とも思うのだが、やろうと思ってないゲームの説明書なんて読まない。
+3DSソフトのパッケージ版初めて買って中開けたら説明書が入ってないの見た時はびっくりした…してない？
+ゲームはCMを見たり、雑誌でゲーム内容を見たり、かっこいいきれいな...]]></description><link>https://zenn.dev/2jigenfbi0/articles/9d4eb3be7d655b</link><guid isPermaLink="true">https://zenn.dev/2jigenfbi0/articles/9d4eb3be7d655b</guid><pubDate>Tue, 02 Jul 2024 15:18:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6wywrrUi--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%25AE%25B1%25E5%25BA%25AD%25E8%25AB%25B8%25E5%25B3%25B6%25E3%2581%25AE%25E8%25AA%25B2%25E9%25A1%258C%25E3%2581%25A8%25E3%2581%259D%25E3%2581%25AE%25E6%2589%258B%25E6%25AE%25B5%25E3%2581%25A8%25E3%2581%25AA%25E3%2582%258B%25E5%258B%2595%25E7%2594%25BB%25E7%25B4%25A0%25E6%259D%2590%25E4%25BD%259C%25E6%2588%2590%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%25E3%2582%2592%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:RED%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRlYzVjMjM3MGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>RED</dc:creator></item><item><title><![CDATA[dialogを使ったモーダルの作り方]]></title><description><![CDATA[
+dialogを使うと、シンプルなJavaScriptでモーダル（ダイアログ）が実装できます。
+今回は、以下の要件を満たすモーダルを作成します！
+
+閉じるボタンを押したら、モーダルが閉じる
+エスケープキーを押してもモーダルを閉じられる
+モーダル外を押すとモーダルを閉じられる
+モーダルが開いている間は、背景をスクロールさせない
+モーダルが閉じられたら、背景をスクロールできるようにする
+モーダルが複数あったら、開くボタンを押したモーダルに応じてモーダルを開く
+
+
+ HTMLでモーダルを作る
+今回はモーダルがページ内に複数あっても正しく動くように作りたいので、2個dialogを用意します。
+ポ...]]></description><link>https://zenn.dev/928sekine/articles/e688cb5ae3ab23</link><guid isPermaLink="true">https://zenn.dev/928sekine/articles/e688cb5ae3ab23</guid><pubDate>Tue, 02 Jul 2024 13:06:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Zqy6cw7X--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:dialog%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%259F%25E3%2583%25A2%25E3%2583%25BC%25E3%2583%2580%25E3%2583%25AB%25E3%2581%25AE%25E4%25BD%259C%25E3%2582%258A%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259B%25E3%2581%258D%25E3%2581%25AD%25E3%2582%258A%25E3%2581%25AA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAyNDQ3MGIzZjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>せきねりな</dc:creator></item><item><title><![CDATA[JSでQRコードを生成する]]></title><description><![CDATA[シンプルにブラウザだけで実行できるテキストをQRコードにして表示させる機能がほしかった。qrcodeというモジュールを使ってみた。
+
+ qrcodeというモジュールを使ってみる
+これを使ってみる。ブラウザ環境でもnode.js環境でも動くので良さげ。
+https://www.npmjs.com/package/qrcode
+※GitHubのリポジトリにはnode-qrcodeという名前だが、ブラウザ環境でも動く。
+
+ 実際に動くサンプル
+サンプルをCodeSandboxに作った。
+https://codesandbox.io/p/sandbox/qrcode-generator-kpnt...]]></description><link>https://zenn.dev/kwst/articles/d871ce0124d683</link><guid isPermaLink="true">https://zenn.dev/kwst/articles/d871ce0124d683</guid><pubDate>Tue, 02 Jul 2024 11:48:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--zbsvBjAs--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JS%25E3%2581%25A7QR%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2582%2592%25E7%2594%259F%25E6%2588%2590%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kwst%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU4MzI1NjY3YzIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kwst</dc:creator></item><item><title><![CDATA[useEffectの基本的なアンチパターン]]></title><description><![CDATA[
+ はじめに
+私はこれまで何となくuseEffectを使いまくることは良くないという認識でいましたが、具体的にどのようなユースケースでuseEffectを使用すると良くないのかまで理解できていなかったため、今回改めて調べてみようと思いました。
+!
+間違っている説明や解釈などありましたら、ご指摘いただけると幸いです。
+
+
+ useEffectとは
+最初にuseEffectの基本について説明します。
+useEffectはReactのフックの一つで、副作用を管理するために使用されます。このフックを使用することで、コンポーネントのレンダリング後に特定の関数を実行するタイミングを制御することができ...]]></description><link>https://zenn.dev/ippe/articles/a53386986ff236</link><guid isPermaLink="true">https://zenn.dev/ippe/articles/a53386986ff236</guid><pubDate>Tue, 02 Jul 2024 10:52:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qIqYVYrP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:useEffect%25E3%2581%25AE%25E5%259F%25BA%25E6%259C%25AC%25E7%259A%2584%25E3%2581%25AA%25E3%2582%25A2%25E3%2583%25B3%25E3%2583%2581%25E3%2583%2591%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%25B3%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Ippei%2520Shimizu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc0ODUyMDJjY2UuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Ippei Shimizu</dc:creator></item><item><title><![CDATA[querySelectorでelement直下の要素を指定する]]></title><description><![CDATA[
+ 結論
+CSSの疑似セレクタ :scopeと、直下の要素のみを指定する &gt; を組み合わせて使いましょう。
+例: someElement.querySelector(":scope &gt; .someChild")
+
+ 補足
+以下のような入れ子構造を持つリストを仮定します。
+&lt;ul id="parent"&gt;
+    &lt;li&gt; item1 &lt;/li&gt;
+    &lt;li&gt; item2 &lt;/li&gt;
+    &lt;li&gt; item3
+        &lt;ul&gt;
+            &lt;li&gt; ite...]]></description><link>https://zenn.dev/tanakam/articles/ecce758535bee1</link><guid isPermaLink="true">https://zenn.dev/tanakam/articles/ecce758535bee1</guid><pubDate>Tue, 02 Jul 2024 10:28:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ltrt6S3z--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:querySelector%25E3%2581%25A7element%25E7%259B%25B4%25E4%25B8%258B%25E3%2581%25AE%25E8%25A6%2581%25E7%25B4%25A0%25E3%2582%2592%25E6%258C%2587%25E5%25AE%259A%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:MK%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzlmZWZiNTNmMzAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>MK</dc:creator></item><item><title><![CDATA[Mapbox Newsletter WEEKLY TIPSの解説 -「ホバー時にポップアップを表示」]]></title><description><![CDATA[
+ はじめに
+この記事は、先日配信されたMapbox NewsletterのWEEKLY TIPSで紹介されていた「ホバー時にポップアップを表示」についての解説です。このサンプルではPopupおよびマウスイベントの使い方について例示しています。また、Newsletterの購読はこちらからお申し込みいただけます。
+以下が本サンプルのデモです。
+
+
+ コードを確認
+まずExamplesのコードを見に行きましょう。
+日本語サイト
+
+英語サイト
+
+基本的に同じコードですが、英語版はスタイルがMapbox Streets v12にアップグレードされているのでこちらを使用します。Mapbox Str...]]></description><link>https://zenn.dev/mapbox_japan/articles/08f18ea131656c</link><guid isPermaLink="true">https://zenn.dev/mapbox_japan/articles/08f18ea131656c</guid><pubDate>Tue, 02 Jul 2024 08:54:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--d9uiekPm--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Mapbox%2520Newsletter%2520WEEKLY%2520TIPS%25E3%2581%25AE%25E8%25A7%25A3%25E8%25AA%25AC%2520-%25E3%2580%258C%25E3%2583%259B%25E3%2583%2590%25E3%2583%25BC%25E6%2599%2582%25E3%2581%25AB%25E3%2583%259D%25E3%2583%2583%25E3%2583%2597%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%25E3%2582%2592%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2580%258D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:OttyLab%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RmZWNmNDhhMWMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%259E%25E3%2583%2583%25E3%2583%2597%25E3%2583%259C%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25B9%25E3%2583%25BB%25E3%2582%25B8%25E3%2583%25A3%25E3%2583%2591%25E3%2583%25B3%25E5%2590%2588%25E5%2590%258C%25E4%25BC%259A%25E7%25A4%25BE%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhMGJmZWJmZmQuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>OttyLab</dc:creator></item><item><title><![CDATA[【イラストで分かる】React Hook]]></title><description><![CDATA[
+ はじめに
+こんにちは。
+ソフトウェアエンジニアをしています、Koyaです。
+普段、React周りを勉強してます。
+最近は単に動くものを実装するのではなく、Reactの仕組みを踏まえた実装をするように意識してます。
+そこで今回はReact Hookについて調べましたので、まとめたいと思います。
+また自分の整理を含めて、極力細かく説明していこうと思ってます。
+可能な限り公式ドキュメント等で収集した信頼できる情報を基にまとめていますが、間違いや認識違い等あると思います。
+ぜひコメントで指摘いただければと思います。
+また筆者は視覚優位な特徴(*1)を持ちます。
+同じ視覚優位な特徴を持つ人たち...]]></description><link>https://zenn.dev/koya_tech/articles/595d13699d1cdf</link><guid isPermaLink="true">https://zenn.dev/koya_tech/articles/595d13699d1cdf</guid><pubDate>Tue, 02 Jul 2024 07:44:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--pA_Q3Lkg--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E3%2582%25A4%25E3%2583%25A9%25E3%2582%25B9%25E3%2583%2588%25E3%2581%25A7%25E5%2588%2586%25E3%2581%258B%25E3%2582%258B%25E3%2580%2591React%2520Hook%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:koya%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk4NDk4MGRmYTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>koya</dc:creator></item></channel></rss>

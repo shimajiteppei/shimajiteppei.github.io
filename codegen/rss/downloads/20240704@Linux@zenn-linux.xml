@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Linux」のフィード]]></title><description><![CDATA[Zennのトピック「Linux」のRSSフィードです]]></description><link>https://zenn.dev/topics/linux</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/860a9eb1e4.png</url><title>Zennの「Linux」のフィード</title><link>https://zenn.dev/topics/linux</link></image><generator>zenn.dev</generator><lastBuildDate>Thu, 04 Jul 2024 00:57:38 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/linux/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Fedora40 で zabbix を動かす]]></title><description><![CDATA[お家の検証サーバ用の備忘録です。基本 root です。
+
+ 前提
+https://zenn.dev/asterisk9101/articles/fedora40server-1
+
+ PostgreSQL のインストール
+RDBMS は postgresql を使います。インストールできたら、initdb してデータベースクラスタを作ります。後続の作業をするためにサービスを起動しておきます。
+dnf -y install postgresql-server
+postgresql-setup --initdb
+systemctl enable --now postgresql
+postgre...]]></description><link>https://zenn.dev/asterisk9101/articles/fedora40server-2</link><guid isPermaLink="true">https://zenn.dev/asterisk9101/articles/fedora40server-2</guid><pubDate>Wed, 03 Jul 2024 16:06:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--uNZiWG0I--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Fedora40%2520%25E3%2581%25A7%2520zabbix%2520%25E3%2582%2592%25E5%258B%2595%25E3%2581%258B%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25A4%259A%25E7%2594%25B0%25E6%25B0%258F%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFUWEFKd3hvZ1pLNDVtSmdsUDlROUZPUTcyRXg4eV9MeFdmejdma0V1aTA9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>多田氏</dc:creator></item><item><title><![CDATA[Linux/Docker Command CheatSheet]]></title><description><![CDATA[A collection of commands used on Linux and Docker.
+Updates as sometimes.
+
+ Linux
+
+ Create file
+touch filename.txt
+
+ Create directory
+mkdir directory_name
+
+ current directory path
+pwd
+
+ Moving files
+mv file1 directory
+
+ Copy files
+cp dir/file1.txt dir2/file2.txt
+
+ Delete directory/file
+rm -r direc...]]></description><link>https://zenn.dev/yuto_mo/articles/bfe2b9cadbc68e</link><guid isPermaLink="true">https://zenn.dev/yuto_mo/articles/bfe2b9cadbc68e</guid><pubDate>Wed, 03 Jul 2024 12:34:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ZzIB6cun--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:Linux%252FDocker%2520Command%2520CheatSheet%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yuu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q0OTcwZWIzMmUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yuu</dc:creator></item><item><title><![CDATA[ワンライナーで無限ループ]]></title><description><![CDATA[
+ 無限ループ
+shell を叩いていると時々無限ループしたくなる、その時最も短い行で無限ループしたい
+
+ while
+while :; do ./something; done
+最も単純だがちょっと文法が分からなくなりがちな上に、回数制限もかけられない
+
+ for
+for i in {0..42}; do ./something; done
+回数制限を持たせられるが、長い、面倒くさい
+文法は覚えていても良さそう
+for i in {0..42}; do ./something --trial $i; done
+使い道はある。
+
+ yes
+yes ./something | sh
+考える...]]></description><link>https://zenn.dev/genf740/articles/4f1f5995-3b29-411c-a2b4-c6ab45bb38a8</link><guid isPermaLink="true">https://zenn.dev/genf740/articles/4f1f5995-3b29-411c-a2b4-c6ab45bb38a8</guid><pubDate>Wed, 03 Jul 2024 08:40:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--sW1xmu8K--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%25AF%25E3%2583%25B3%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%258A%25E3%2583%25BC%25E3%2581%25A7%25E7%2584%25A1%25E9%2599%2590%25E3%2583%25AB%25E3%2583%25BC%25E3%2583%2597%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:gen740%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pNOGJfSGVlRHJhclh6YllqWnBrQjBWUVZtcExib3ZzRE42WEFoYjdVPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>gen740</dc:creator></item><item><title><![CDATA[メモリをケチったRocky9でdnf install すると終わる件]]></title><description><![CDATA[
+ 状況
+さくらのVPS（メモリ1G）でRocky Linux 9をインストールし、certbotを入れようとepel-releaseをインストールし、dnf updateって打ったらシェルのレスポンスがなくなった。
+コントロールパネルから再起動するしかなくなった。
+
+ 原因究明
+/var/log/yum.log
+2024-07-02T23:51:04+0900 DEBUG repo: downloading from remote: epel
+2024-07-02T23:51:04+0900 DEBUG Failed to retrieve a default SELinux cont...]]></description><link>https://zenn.dev/yuzuhara/articles/802c5379314807</link><guid isPermaLink="true">https://zenn.dev/yuzuhara/articles/802c5379314807</guid><pubDate>Wed, 03 Jul 2024 04:57:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--CzSXEOF6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%25A1%25E3%2583%25A2%25E3%2583%25AA%25E3%2582%2592%25E3%2582%25B1%25E3%2583%2581%25E3%2581%25A3%25E3%2581%259FRocky9%25E3%2581%25A7dnf%2520install%2520%25E3%2581%2599%25E3%2582%258B%25E3%2581%25A8%25E7%25B5%2582%25E3%2582%258F%25E3%2582%258B%25E4%25BB%25B6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yuzuhara%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0M3akYwU09QVWdMb2FDUm1EWmY4dlZzYTBPV0VUS0NocS1UXzYtRFJVbkNMaT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yuzuhara</dc:creator></item><item><title><![CDATA[OpenSSHのヤバそうな脆弱性に対応する【Ubuntu編】]]></title><description><![CDATA[えっと、なんかヤバそうなやつが来ました。
+クラウドエース株式会社様からも注意喚起されているOpenSSHの脆弱性についてです。
+https://zenn.dev/cloud_ace/articles/cve_2024-040
+
+ 本編
+当方はGCE(ubuntu)で複数サーバを運用しており、以下手順でアップグレードしました。
+cd ~
+
+# 現在のバージョン確認
+ssh -V
+# 〜4.4p1であるか、8.5p1〜9.7p1なら以下対応が必要
+
+# アップグレードの準備
+sudo apt-get update
+sudo apt-get install -y aptitude
+sudo a...]]></description><link>https://zenn.dev/fugithora812/articles/e6ece0dc67ffe7</link><guid isPermaLink="true">https://zenn.dev/fugithora812/articles/e6ece0dc67ffe7</guid><pubDate>Tue, 02 Jul 2024 10:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--l-F89hhn--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:OpenSSH%25E3%2581%25AE%25E3%2583%25A4%25E3%2583%2590%25E3%2581%259D%25E3%2581%2586%25E3%2581%25AA%25E8%2584%2586%25E5%25BC%25B1%25E6%2580%25A7%25E3%2581%25AB%25E5%25AF%25BE%25E5%25BF%259C%25E3%2581%2599%25E3%2582%258B%25E3%2580%2590Ubuntu%25E7%25B7%25A8%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Junpei%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvZi5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Junpei</dc:creator></item><item><title><![CDATA[【CVE-2024-6387対策】AlmaLinux 9.4でOpenSSHにpatchを当てて対応した]]></title><description><![CDATA[OpenSSHで深刻な脆弱性（regreSSHion）が見つかったみたいなので、
+取り急ぎこのCVE-2024-6387に対応するための作業をしたので備忘録を。
+https://piyolog.hatenadiary.jp/entry/2024/07/02/032122
+
+ 影響を受けるバージョンか確認
+
+ 対象バージョンについて
+
+8.5p1 &lt;=
+&lt; 9.8p1
+
+
+ 確認してみた
+バッチリ対象です😇
+$ ssh -V
+# =&gt; OpenSSH_8.7p1, OpenSSL 3.0.7 1 Nov 2022
+厳密に確認する場合は sshd のバージョンを確認しましょ...]]></description><link>https://zenn.dev/huuya/articles/e50cbe00189746</link><guid isPermaLink="true">https://zenn.dev/huuya/articles/e50cbe00189746</guid><pubDate>Tue, 02 Jul 2024 01:08:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--r38GtYhw--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590CVE-2024-6387%25E5%25AF%25BE%25E7%25AD%2596%25E3%2580%2591AlmaLinux%25209.4%25E3%2581%25A7OpenSSH%25E3%2581%25ABpatch%25E3%2582%2592%25E5%25BD%2593%25E3%2581%25A6%25E3%2581%25A6%25E5%25AF%25BE%25E5%25BF%259C%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:huuya%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2YzZDJmYTZjYjMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>huuya</dc:creator></item><item><title><![CDATA[C++アプリケーションをWebアプリケーションに変換できますか？]]></title><description><![CDATA[
+2023年3月14日更新：Cheerp 3.0をリリースし、Apache 2.0ライセンスに変更しました！ リリースノートはこちら。
+C/C++で書かれた高性能なアプリケーションやライブラリをお持ちで、それをWebアプリにしてより多くの人に使ってもらいたいとお考えではありませんか？
+最近まで、これは非常に難しく、JavaScriptでソフトウェアを完全に書き直す必要があったかもしれません。
+しかし、Cheerpを使えば、ライブラリや完全なアプリケーションを含む既存のコードベースを自動的にHTML5に移植することができ、時間とコストを節約できます。
+
+ Cheerpとは？
+Cheerpは...]]></description><link>https://zenn.dev/leaning_tech_jp/articles/8d2a529c002e33</link><guid isPermaLink="true">https://zenn.dev/leaning_tech_jp/articles/8d2a529c002e33</guid><pubDate>Mon, 01 Jul 2024 12:20:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_z-NAPCi--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:C%252B%252B%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%2592Web%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2581%25AB%25E5%25A4%2589%25E6%258F%259B%25E3%2581%25A7%25E3%2581%258D%25E3%2581%25BE%25E3%2581%2599%25E3%2581%258B%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Leaning%2520Technologi...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc0MmNjYWUyNWQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Leaning Technologies Japan (リーニングテクノロジー)</dc:creator></item><item><title><![CDATA[mv や cp, rm コマンドで隠しファイルも対象にする方法4選]]></title><description><![CDATA[mv コマンドや cp コマンドで実行対象にワイルドカード ( * ) を使い、ディレクトリ配下の全ファイル・全ディレクトリを指定することがあります。
+mv /path/from/* /path/to/
+しかしワイルドカードを使うと、指定直下（上記の例だと /path/from/ 直下）にある隠しファイル（ファイル名がドットから始まるファイル）は mv や cp, rm の対象になりません。
+ワイルドカードを使うような状況では、隠しファイルも対象に含めたいのが普通だと思うので、いくつかの方法を紹介します。
+以下に実験用に使えるリポジトリを用意しました。clone して from から t...]]></description><link>https://zenn.dev/shuh/articles/mvrm-dotfiles-dotglob</link><guid isPermaLink="true">https://zenn.dev/shuh/articles/mvrm-dotfiles-dotglob</guid><pubDate>Sun, 30 Jun 2024 13:16:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--rHAVxkD9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:mv%2520%25E3%2582%2584%2520cp%252C%2520rm%2520%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2581%25A7%25E9%259A%25A0%25E3%2581%2597%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2582%25E5%25AF%25BE%25E8%25B1%25A1%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%25954%25E9%2581%25B8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:shusch%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk0ODg1Y2EwN2QuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>shusch</dc:creator></item><item><title><![CDATA[Fedora40 検証サーバを作るときに最初にやること]]></title><description><![CDATA[お家の検証サーバ用の備忘録です。基本 root です。
+Proxmox 上の仮想サーバとして構築します。
+
+ 仮想マシンの設定
+基本的に全て任意（既定値）ですが、QEMU エージェントは有効にしておきます。
+また、CPUコアは 2 コアを割り当てておきます。
+
+ OSインストール設定
+言語は**英語(English(United States))**を選択します。日本語だと FreeIPA サーバ(pki-tomcatd)のインストールが失敗したので。
+LOCALIZATION は、日本語キーボードと日本語サポートを選択しておきます。Time &amp; Date は自動的に Asia/...]]></description><link>https://zenn.dev/asterisk9101/articles/fedora40server-1</link><guid isPermaLink="true">https://zenn.dev/asterisk9101/articles/fedora40server-1</guid><pubDate>Sun, 30 Jun 2024 07:16:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GwtvYfD0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Fedora40%2520%25E6%25A4%259C%25E8%25A8%25BC%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%25E3%2581%25A8%25E3%2581%258D%25E3%2581%25AB%25E6%259C%2580%25E5%2588%259D%25E3%2581%25AB%25E3%2582%2584%25E3%2582%258B%25E3%2581%2593%25E3%2581%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25A4%259A%25E7%2594%25B0%25E6%25B0%258F%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFUWEFKd3hvZ1pLNDVtSmdsUDlROUZPUTcyRXg4eV9MeFdmejdma0V1aTA9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>多田氏</dc:creator></item><item><title><![CDATA[【n番煎じ】ローカルDifyでLLMと遊ぶ【無料】]]></title><description><![CDATA[
+ ローカルDifyでLLMと遊ぶ in Linux
+
+ はじめに
+Linux環境でDifyのサーバを立ち上げ，LLMと遊ぶ環境を構築します．
+DifyはオープンソースのLLMアプリ開発アプリケーションです．チャットボットや論文要約アプリなどが手軽に開発できます．
+今回は手元のLinuxマシンで立ち上げたサーバに対してWindows PCからアクセスすることを想定しています．
+
+ 環境構築例
+今回構築する環境は以下の通りです．
+
+OS：Linux（Ubuntu 22.0.4）
+LLM：Groq（2024年6月現在はβ版のため無料）
+サーバ：適当なLinux OSのマシン（今回はRaspb...]]></description><link>https://zenn.dev/xiakou/articles/6ca3cfb377a7c3</link><guid isPermaLink="true">https://zenn.dev/xiakou/articles/6ca3cfb377a7c3</guid><pubDate>Sun, 30 Jun 2024 06:55:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6OA2khFt--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590n%25E7%2595%25AA%25E7%2585%258E%25E3%2581%2598%25E3%2580%2591%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25AB%25E3%2583%25ABDify%25E3%2581%25A7LLM%25E3%2581%25A8%25E9%2581%258A%25E3%2581%25B6%25E3%2580%2590%25E7%2584%25A1%25E6%2596%2599%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:taihui%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzUxMDVmMDQ0OWYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>taihui</dc:creator></item><item><title><![CDATA[Linux 使いになりたい人のための Vagrant と VirtualBox の設定（Ubuntu 22.04 編）]]></title><description><![CDATA[
+ はじめに
+Vagrant は、HashiCorp が開発している OSS（オープンソースソフトウェア）で、これを使うと仮想マシンの作成および管理を簡単にすることができます。
+本記事では、Ubuntu 22.04 に Vagrant をインストールして使う方法について説明します。仮想マシンソフトウェアとしては VirtualBox を使用します。
+Vagrant と VirtualBox をインストールするだけなら簡単にできます。そのため、筆者は Ubuntu 22.04 の apt パッケージで Vagrant と VirtualBox をインストールすれば、すぐに使えるだろうと思っ...]]></description><link>https://zenn.dev/hiro345/articles/20240628_vagrant</link><guid isPermaLink="true">https://zenn.dev/hiro345/articles/20240628_vagrant</guid><pubDate>Sun, 30 Jun 2024 00:28:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--FmS5qFuo--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%2520%25E4%25BD%25BF%25E3%2581%2584%25E3%2581%25AB%25E3%2581%25AA%25E3%2582%258A%25E3%2581%259F%25E3%2581%2584%25E4%25BA%25BA%25E3%2581%25AE%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%2520Vagrant%2520%25E3%2581%25A8%2520VirtualBox%2520%25E3%2581%25AE%25E8%25A8%25AD%25E5%25AE%259A%25EF%25BC%2588Ubuntu%252022.04%2520%25E7%25B7%25A8%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Hiroshi%2520Koyama%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2k5ZzdjLS0xTFk0S2k0LWw3dVFSSFZRdEdQcWZHYTlibVRJYUtFM0E9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Hiroshi Koyama</dc:creator></item><item><title><![CDATA[pyenvでラクラク環境構築！LinuxユーザーのためのPython導入ガイド]]></title><description><![CDATA[!
+本記事の執筆者：Claude 3.5 Sonnetさん
+本記事の編集者：Meg
+素のMegの記事が読みたい方はこちら！→Meg Log
+間違いなどありましたら、コメントで教えて頂けると嬉しいです！
+
+Python環境の構築で頭を悩ませていませんか？今回は、pyenvを使って簡単にPython環境を整える方法をご紹介します。
+何番煎じだって感じだけど、環境構築する時毎回作り方忘れちゃうからしょうがない！
+
+ この記事で学べること
+
+pyenvのインストール方法
+pyenvでPythonをインストールする方法
+仮想環境の作り方
+requirements.txtの使い方
+
+
+ 前提条件
+
+...]]></description><link>https://zenn.dev/meg_zenn/articles/pyenv-python-setup-guide</link><guid isPermaLink="true">https://zenn.dev/meg_zenn/articles/pyenv-python-setup-guide</guid><pubDate>Fri, 28 Jun 2024 14:00:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--57zte_1I--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:pyenv%25E3%2581%25A7%25E3%2583%25A9%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25AF%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%25EF%25BC%2581Linux%25E3%2583%25A6%25E3%2583%25BC%25E3%2582%25B6%25E3%2583%25BC%25E3%2581%25AE%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AEPython%25E5%25B0%258E%25E5%2585%25A5%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Meg%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVkODAyN2FhZDEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Meg</dc:creator></item><item><title><![CDATA[最もシンプルなLinux NVIDIA GPUファン速度制御チュートリアル]]></title><description><![CDATA[
+ はじめに
+Linuxサーバー/PCにNVIDIA GPUが搭載されており、グラフィカルインターフェースなしでSSHを介してファン速度を調整する必要がある場合、これはその目標を達成する最も簡単な方法です。ノイズの低減、効率の向上、またはハードウェアの冷却を目的としているかどうかに関わらず、このガイドは迅速に始めるのに役立ちます。
+（GUI不要、SSHだけでOK）（おそらく最も簡単）
+スクリプトアドレス: https://github.com/RoversX/nvidia_fan_control_linux/
+English Version
+
+
+ クイックスタートガイド
+
+ 環境設定
+
+...]]></description><link>https://zenn.dev/closex/articles/a179489b47fdd3</link><guid isPermaLink="true">https://zenn.dev/closex/articles/a179489b47fdd3</guid><pubDate>Fri, 28 Jun 2024 11:46:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8YXHllji--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%259C%2580%25E3%2582%2582%25E3%2582%25B7%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AB%25E3%2581%25AALinux%2520NVIDIA%2520GPU%25E3%2583%2595%25E3%2582%25A1%25E3%2583%25B3%25E9%2580%259F%25E5%25BA%25A6%25E5%2588%25B6%25E5%25BE%25A1%25E3%2583%2581%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%2588%25E3%2583%25AA%25E3%2582%25A2%25E3%2583%25AB%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:CloseX%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNjMjA1OTBiMjEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>CloseX</dc:creator></item><item><title><![CDATA[AlmaLinuxでfirewalldの設定とポート開放]]></title><description><![CDATA[
+ ファイアーウォールとは
+ファイアウォールとは外部ネットワークと内部ネットワークの境界に設けられた防護壁であり、侵入してくる不正なアクセスを防御するためのシステムです。一般的なファイアウォールは送信されてくるパケットの情報から接続を許可するかを判断しています。これをパケットフィルタリング言います。しかし、外部からのアクセスが全て遮断されては、ネットワークの意味をなしていません。そこで、外部からの通信が指定したポートを経由して内部ネットワークの特定のサービスやアプリケーションにアクセスできるようにするため、ファイアウォールにはポート開放という機能が備わっています。この記事ではLinuxで...]]></description><link>https://zenn.dev/kiyokiyo_tech/articles/f87bba38319963</link><guid isPermaLink="true">https://zenn.dev/kiyokiyo_tech/articles/f87bba38319963</guid><pubDate>Fri, 28 Jun 2024 04:23:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wvhwqscX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AlmaLinux%25E3%2581%25A7firewalld%25E3%2581%25AE%25E8%25A8%25AD%25E5%25AE%259A%25E3%2581%25A8%25E3%2583%259D%25E3%2583%25BC%25E3%2583%2588%25E9%2596%258B%25E6%2594%25BE%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258D%25E3%2582%2588%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS3JvbUtmRmtqYXlxZ1o3MmlxWEphVFdCdWJZN3ZQdDZXZUVzeUtLNEdhbjBNPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>きよ</dc:creator></item><item><title><![CDATA[debian12(Linux) でDockerをインストールして利用する]]></title><description><![CDATA[
+ はじめに
+take64です。
+最近はLinuxを一からセットアップする機会があまりなく、
+Dockerのインストール手順が思い出せなくなったので、備忘録的にメモしておきます。
+
+ 筆者環境
+# lsb_release -a
+No LSB modules are available.
+Distributor ID:	Debian
+Description:	Debian GNU/Linux 12 (bookworm)
+Release:	12
+Codename:	bookworm
+
+ Dockerをインストールする
+
+ 古いバージョンの削除
+sudo apt remove docker d...]]></description><link>https://zenn.dev/take64/articles/360c39899e53ff</link><guid isPermaLink="true">https://zenn.dev/take64/articles/360c39899e53ff</guid><pubDate>Thu, 27 Jun 2024 14:19:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--RJY5mSLI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:debian12%2528Linux%2529%2520%25E3%2581%25A7Docker%25E3%2582%2592%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%2597%25E3%2581%25A6%25E5%2588%25A9%25E7%2594%25A8%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:take64%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSWVGYjRmeDItcGhCSG1QR1JyM2Rxd0lldGJZejRCUi1obUpxaEdTV250TGc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>take64</dc:creator></item><item><title><![CDATA[debian12(Linux) でSSHユーザーを追加して公開鍵認証で接続する]]></title><description><![CDATA[
+ はじめに
+take64です。
+最近はLinuxを一からセットアップする機会があまりなく、
+SSHユーザーの追加手順が思い出せなくなったので、備忘録的にメモしておきます。
+
+ 筆者環境
+# lsb_release -a
+No LSB modules are available.
+Distributor ID:	Debian
+Description:	Debian GNU/Linux 12 (bookworm)
+Release:	12
+Codename:	bookworm
+
+ 事前準備
+エディターにnanoではなくvimを使いたいのでインストールします。
+
+ vimをインストールする
+s...]]></description><link>https://zenn.dev/take64/articles/ad007d987db810</link><guid isPermaLink="true">https://zenn.dev/take64/articles/ad007d987db810</guid><pubDate>Thu, 27 Jun 2024 14:00:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5S1DosoZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:debian12%2528Linux%2529%2520%25E3%2581%25A7SSH%25E3%2583%25A6%25E3%2583%25BC%25E3%2582%25B6%25E3%2583%25BC%25E3%2582%2592%25E8%25BF%25BD%25E5%258A%25A0%25E3%2581%2597%25E3%2581%25A6%25E5%2585%25AC%25E9%2596%258B%25E9%258D%25B5%25E8%25AA%258D%25E8%25A8%25BC%25E3%2581%25A7%25E6%258E%25A5%25E7%25B6%259A%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:take64%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSWVGYjRmeDItcGhCSG1QR1JyM2Rxd0lldGJZejRCUi1obUpxaEdTV250TGc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>take64</dc:creator></item><item><title><![CDATA[diffコマンドのしくみ、知っていますか？]]></title><description><![CDATA[
+ diffコマンドのしくみ、知っていますか？
+
+ はじめに
+こんにちは。株式会社Elithの松山です。ElithではMachine Learning Research Engineerとして、お客様の課題をAIを駆使して解決しています。
+ところでみなさん、「Git」を使いこなしていますか？私もさらなる理解を目指して、最近改めて勉強しています。普段何気なく使っているコマンドですが、その仕組みまで把握できている人は少ないのではないでしょうか。
+そんな中、弊社CTO井上が書いた「実務レベルでわかる/使いこなせるようになるGit入門コマンドライン演習80」が非常に参考になります。この本を通じて...]]></description><link>https://zenn.dev/elith/articles/7a78b239929e8d</link><guid isPermaLink="true">https://zenn.dev/elith/articles/7a78b239929e8d</guid><pubDate>Thu, 27 Jun 2024 04:01:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hnhVDQ8F--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:diff%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2581%25AE%25E3%2581%2597%25E3%2581%258F%25E3%2581%25BF%25E3%2580%2581%25E7%259F%25A5%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%2584%25E3%2581%25BE%25E3%2581%2599%25E3%2581%258B%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%2582%25E3%2582%2580%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk2YjJhYjcyOWIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BEElith%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M5MTY2MjM5NmIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>あむ</dc:creator></item><item><title><![CDATA[Amazon Linux 2023リポジトリにPHP8.3が追加された]]></title><description><![CDATA[
+ Amazon Linux 2023 リリースノート
+https://docs.aws.amazon.com/linux/al2023/release-notes/relnotes-2023.5.20240624.html
+2023.5.20240624のリリースでPHP8.3がAmazon Linux 2023のリポジトリに追加されたようです。
+
+
+ EC2で確認
+
+ Amazon Linux 2023 バージョンアップ
+&gt; sudo dnf update --releasever=2023.5.20240624
+Amazon Linux 2023 repository    ...]]></description><link>https://zenn.dev/casti/articles/c6c5c03ed9ba18</link><guid isPermaLink="true">https://zenn.dev/casti/articles/c6c5c03ed9ba18</guid><pubDate>Thu, 27 Jun 2024 02:00:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--MebpZncg--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Amazon%2520Linux%25202023%25E3%2583%25AA%25E3%2583%259D%25E3%2582%25B8%25E3%2583%2588%25E3%2583%25AA%25E3%2581%25ABPHP8.3%25E3%2581%258C%25E8%25BF%25BD%25E5%258A%25A0%25E3%2581%2595%25E3%2582%258C%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Maru%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NlZTUxYWVmZDcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Maru</dc:creator></item><item><title><![CDATA[徹底解説！Linuxに関する基礎知識とコマンド]]></title><description><![CDATA[
+ Linuxってなに？
+
+OSの一種で、コンピューターを動かすための基本ソフト。
+有料のUnixが、Linuxという形で無料で使えるようになった。
+現在は大変普及しており、サーバー、組み込み、デスクトップなど幅広い用途で使われている。
+特徴
+
+オープンソースなので、誰でも自由に使える。
+品質の高い多くのソフトウェアが利用できる。
+
+
+欠点
+
+商用アプリケーションがあまり存在しない。
+日本語対応されていない部分が多い。
+
+
+
+
+ なぜ学ぶのか
+
+サーバー用、組み込み器用などの幅広い場所で使われており、そういった場所でマシンを操作する時に必要。
+長い時間をかけて、多くのユーザーに検証された...]]></description><link>https://zenn.dev/nomikazu_x/articles/linux-basic-knowledge</link><guid isPermaLink="true">https://zenn.dev/nomikazu_x/articles/linux-basic-knowledge</guid><pubDate>Wed, 26 Jun 2024 06:15:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--WeaPqHkO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%25BE%25B9%25E5%25BA%2595%25E8%25A7%25A3%25E8%25AA%25AC%25EF%25BC%2581Linux%25E3%2581%25AB%25E9%2596%25A2%25E3%2581%2599%25E3%2582%258B%25E5%259F%25BA%25E7%25A4%258E%25E7%259F%25A5%25E8%25AD%2598%25E3%2581%25A8%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nomikazu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E5Zjg3ZDg5NmIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nomikazu</dc:creator></item><item><title><![CDATA[[Ubuntu] How install Chrome on Ubuntu only CLI]]></title><description><![CDATA[
+ 1. Install .deb file
+
+Command
+
+$ wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+or
+
+From Chrome Official
+
+
+
+ 2. Install Chrome
+
+Command
+
+$ sudo apt install ./google-chrome-stable_current_amd64.deb
+If permission denied(error 13), change the permission of .deb file...]]></description><link>https://zenn.dev/yuto_mo/articles/5425fccad72ed9</link><guid isPermaLink="true">https://zenn.dev/yuto_mo/articles/5425fccad72ed9</guid><pubDate>Sun, 23 Jun 2024 13:41:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2hlhWAOi--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BUbuntu%255D%2520How%2520install%2520Chrome%2520on%2520Ubuntu%2520only%2520CLI%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yuu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q0OTcwZWIzMmUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yuu</dc:creator></item></channel></rss>
