@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「CSS」のフィード]]></title><description><![CDATA[Zennのトピック「CSS」のRSSフィードです]]></description><link>https://zenn.dev/topics/css</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/094a9b2a18.png</url><title>Zennの「CSS」のフィード</title><link>https://zenn.dev/topics/css</link></image><generator>zenn.dev</generator><lastBuildDate>Fri, 05 Jul 2024 12:03:58 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/css/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[n行でellipsisにしたいとき... Tailwindのline-clampが最高]]></title><description><![CDATA[Chakra-UIでいうTextのnOfLinesです。
+&lt;p className="max-w-full line-clamp-3"&gt;
+  n行でellipsisにしたい n行でellipsisにしたい n行でellipsisにしたい n行でellipsisにしたい n行でellipsisにしたい n行でellipsisにしたい n行でellipsisにしたい
+&lt;/p&gt;
+とすると...
+
+3行で割愛...されます
+中のCSSはどうなっているかというと...
+.line-clamp-3 {
+  overflow: hidden;
+  display: -webki...]]></description><link>https://zenn.dev/holy_web_dev/articles/26f28f625d1982</link><guid isPermaLink="true">https://zenn.dev/holy_web_dev/articles/26f28f625d1982</guid><pubDate>Thu, 04 Jul 2024 07:54:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--u5cH7Gzf--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:n%25E8%25A1%258C%25E3%2581%25A7ellipsis%25E3%2581%25AB%25E3%2581%2597%25E3%2581%259F%25E3%2581%2584%25E3%2581%25A8%25E3%2581%258D...%2520Tailwind%25E3%2581%25AEline-clamp%25E3%2581%258C%25E6%259C%2580%25E9%25AB%2598%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%2597%25E3%2583%25AA%25E3%2583%25B3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNmNThjMTEzNzMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>プリン</dc:creator></item><item><title><![CDATA[【総まとめ】CSSでHTML要素の位置を変える]]></title><description><![CDATA[|z-index|
+
+ CSSでHTML要素の位置を変更する手順
+要素の位置を動かすときは、以下の3段階を踏みます。
+
+HTML要素を用意する
+
+positionでモードを選択
+
+top,　right,　bottom,　leftで位置を指定する
+
+それぞれ解説します。
+
+ 1. HTML要素を用意する
+HTMLがなければ何も始まりません。
+
+index.html
+&lt;div class="box"&gt;This is box!&lt;/div&gt;
+
+何もCSSが適用されていない、裸のHTMLです。
+
+
+ 2. positionで配置方法を選択
+以下の5つの配置方法があります。1...]]></description><link>https://zenn.dev/yunaimatsu/articles/03688a9b4137ec</link><guid isPermaLink="true">https://zenn.dev/yunaimatsu/articles/03688a9b4137ec</guid><pubDate>Thu, 04 Jul 2024 04:39:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--QwJs_V8T--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E7%25B7%258F%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2580%2591CSS%25E3%2581%25A7HTML%25E8%25A6%2581%25E7%25B4%25A0%25E3%2581%25AE%25E4%25BD%258D%25E7%25BD%25AE%25E3%2582%2592%25E5%25A4%2589%25E3%2581%2588%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:YuNai%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RmOWM5YjQzYWMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>YuNai</dc:creator></item><item><title><![CDATA[@tabler/icons を Web フォントとして使う]]></title><description><![CDATA[フリーアイコンです。各フレームワーク向けのライブラリも提供されています。
+Web フォントとして使用するときにドキュメントに誤りや不足があったのでこの記事に情報を載せておきます。
+コード例は Svelte で記載しますが他のフレームワークでも大体同じだと思われます。
+https://tabler.io/icons
+
+ ドキュメント
+https://tabler.io/docs/icons/webfont
+
+ インストール
+
+ NPM
+npm install @tabler/icons-webfont
+
+ CDN
+app.html か *.svelte の &lt;svelte:head&...]]></description><link>https://zenn.dev/snowcait/articles/bf41977176944b</link><guid isPermaLink="true">https://zenn.dev/snowcait/articles/bf41977176944b</guid><pubDate>Thu, 04 Jul 2024 00:26:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--DG0WFlKa--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%2540tabler%252Ficons%2520%25E3%2582%2592%2520Web%2520%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25B3%25E3%2583%2588%25E3%2581%25A8%25E3%2581%2597%25E3%2581%25A6%25E4%25BD%25BF%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E9%259B%25AA%25E7%258C%25AB%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dsdnpGMmRXRHdxQlZmQ0hHd2Z6bV9PTW5YeTZjVElKVm1WOVV4Tmc9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>雪猫</dc:creator></item><item><title><![CDATA[clamp関数で文字の大きさをいいかんじにする]]></title><description><![CDATA[clamp関数を使うと、PC用・スマホ用で指定していた文字の大きさを一行で表せます。
+画面幅1440px以上（PC）のときは文字の大きさを28pxに、最小サイズ（スマホ）のときは文字の大きさを14pxにしたい場合、以下のようになります。
+画面幅が中途半端なとき（960pxなど）は、画面幅に応じていいかんじに文字サイズを調整してくれます。
+p{
+    font-size: clamp(14px, 1.6vw, 28px);
+}
+
+ 計算方法
+文字サイズの間にある1.6vwは、以下のサイトで計算ができます。
+clamp関数
+今回はこのように計算し1.6vwを求めました。
+
+
+ 計算方法その...]]></description><link>https://zenn.dev/928sekine/articles/4d250b43d0b93b</link><guid isPermaLink="true">https://zenn.dev/928sekine/articles/4d250b43d0b93b</guid><pubDate>Wed, 03 Jul 2024 12:45:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---ItDMcAl--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:clamp%25E9%2596%25A2%25E6%2595%25B0%25E3%2581%25A7%25E6%2596%2587%25E5%25AD%2597%25E3%2581%25AE%25E5%25A4%25A7%25E3%2581%258D%25E3%2581%2595%25E3%2582%2592%25E3%2581%2584%25E3%2581%2584%25E3%2581%258B%25E3%2582%2593%25E3%2581%2598%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259B%25E3%2581%258D%25E3%2581%25AD%25E3%2582%258A%25E3%2581%25AA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAyNDQ3MGIzZjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>せきねりな</dc:creator></item><item><title><![CDATA[CSS – 縦の行数指定をして省略する例]]></title><description><![CDATA[
+ 例
+  &lt;div
+    style="
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 3;
+      overflow: hidden;
+      max-width: 30%;
+      word-wrap: break-word;
+    "
+  &gt;
+    AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA BBBBBBBB CCCCCCCCCCCCCCCCCCCCCCCCCCCC DDDDDDDDDDDDD...]]></description><link>https://zenn.dev/yumainaura/articles/qiita-2024-05-28t08_17_09-09_00</link><guid isPermaLink="true">https://zenn.dev/yumainaura/articles/qiita-2024-05-28t08_17_09-09_00</guid><pubDate>Wed, 03 Jul 2024 10:07:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Uvdx0Iz---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:CSS%2520%25E2%2580%2593%2520%25E7%25B8%25A6%25E3%2581%25AE%25E8%25A1%258C%25E6%2595%25B0%25E6%258C%2587%25E5%25AE%259A%25E3%2582%2592%25E3%2581%2597%25E3%2581%25A6%25E7%259C%2581%25E7%2595%25A5%25E3%2581%2599%25E3%2582%258B%25E4%25BE%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E7%25A8%25B2%25E6%25B5%25A6%25E6%2582%25A0%25E9%25A6%25AC%2520%2528%25E3%2581%2584%25E3%2581%25AA%25E3%2581%2586%25E3%2582%2589%25E3%2582%2586%25E3%2581%2586%25E3%2581%25BE%2529%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FGZFp1Y3BPSm80MUYydFUxV05wb0owWGNCOTBiUGp1MVdxUmtEWjduWmRhSTlZPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>稲浦悠馬 (いなうらゆうま)</dc:creator></item><item><title><![CDATA[SortableJS でドラッグアンドドロップする時にマウスカーソルを変更する]]></title><description><![CDATA[
+ 状況
+
+
+SortableJS を使用して DOM の入れ替え機能を実装した．
+
+
+ドラッグ時にマウスカーソルを grabbing （掴んでる感じのやつ）にしてドラッグしている感を出したい．
+
+
+TailwindCSS を使用しているが，active:cursor-grabbing を使用してもドラッグ中のカーソルが変更されなかった．
+
+
+
+ 解決策
+調べた結果，気合いで解決するしかなかった．
+まず css でクラスを作成しておく．
+.draggable-cursor * {
+  cursor: move !important;
+  cursor: -webkit-grabbing ...]]></description><link>https://zenn.dev/taroosg/articles/20240703152113-1c9e4cd5811b67</link><guid isPermaLink="true">https://zenn.dev/taroosg/articles/20240703152113-1c9e4cd5811b67</guid><pubDate>Wed, 03 Jul 2024 06:31:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--kPLtlfnq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:SortableJS%2520%25E3%2581%25A7%25E3%2583%2589%25E3%2583%25A9%25E3%2583%2583%25E3%2582%25B0%25E3%2582%25A2%25E3%2583%25B3%25E3%2583%2589%25E3%2583%2589%25E3%2583%25AD%25E3%2583%2583%25E3%2583%2597%25E3%2581%2599%25E3%2582%258B%25E6%2599%2582%25E3%2581%25AB%25E3%2583%259E%25E3%2582%25A6%25E3%2582%25B9%25E3%2582%25AB%25E3%2583%25BC%25E3%2582%25BD%25E3%2583%25AB%25E3%2582%2592%25E5%25A4%2589%25E6%259B%25B4%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:taro%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MyOGZiYzgwODUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>taro</dc:creator></item><item><title><![CDATA[CSS が 原因で Google Charts の Tooltips が表示されなかった件]]></title><description><![CDATA[
+ 状況
+
+
+Google Charts でグラフを作成し，表示された．
+
+
+カーソルを当てたときに表示される Tooltips が表示されない．
+
+
+コンソール見てもエラーは出ていない．
+
+
+
+ 原因
+下記の CSS を書いていたのが原因．他のページで svg 要素にクリックイベントを設定するために記述していた．
+svg {
+  pointer-events: none;
+}
+
+ 解決策
+上記 CSS を削除したら解決．別ページのクリックイベント設定部分は別にクラス名を追加して対応すれば OK．
+
+ 感想
+JS の挙動を疑って時間溶かした．最終的に下記の手順で解決．いつもの総当り力技．...]]></description><link>https://zenn.dev/taroosg/articles/20240703151957-057886293343be</link><guid isPermaLink="true">https://zenn.dev/taroosg/articles/20240703151957-057886293343be</guid><pubDate>Wed, 03 Jul 2024 06:31:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ErD0RKXe--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:CSS%2520%25E3%2581%258C%2520%25E5%258E%259F%25E5%259B%25A0%25E3%2581%25A7%2520Google%2520Charts%2520%25E3%2581%25AE%2520Tooltips%2520%25E3%2581%258C%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2595%25E3%2582%258C%25E3%2581%25AA%25E3%2581%258B%25E3%2581%25A3%25E3%2581%259F%25E4%25BB%25B6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:taro%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MyOGZiYzgwODUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>taro</dc:creator></item><item><title><![CDATA[アクセシビリティを考慮したパンくずリストの実装と解説]]></title><description><![CDATA[
+ 結論（全コード）
+
+ HTML
+
+index.html
+&lt;nav class="breadcrumb" aria-label="現在のページ階層"&gt;
+	&lt;ol class="breadcrumb__list-wrapper"&gt;
+		&lt;li class="breadcrumb__list"&gt;
+			&lt;a class="breadcrumb__link" href="../../"&gt;
+				トップページ
+			&lt;/a&gt;
+		&lt;/li&gt;
+		&lt;li class="breadcrumb__list"&gt;
+		...]]></description><link>https://zenn.dev/mogy/articles/fd25e0227fe455</link><guid isPermaLink="true">https://zenn.dev/mogy/articles/fd25e0227fe455</guid><pubDate>Wed, 03 Jul 2024 01:17:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bL7wiZLH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25A2%25E3%2582%25AF%25E3%2582%25BB%25E3%2582%25B7%25E3%2583%2593%25E3%2583%25AA%25E3%2583%2586%25E3%2582%25A3%25E3%2582%2592%25E8%2580%2583%25E6%2585%25AE%25E3%2581%2597%25E3%2581%259F%25E3%2583%2591%25E3%2583%25B3%25E3%2581%258F%25E3%2581%259A%25E3%2583%25AA%25E3%2582%25B9%25E3%2583%2588%25E3%2581%25AE%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%25A8%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mogy%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJmOTRiYzI2MjYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mogy</dc:creator></item><item><title><![CDATA[【CSS】z-index管理の3指針]]></title><description><![CDATA[要素の重なりを制御する時に使うCSSと言えばz-indexですが、単純にその値が上下関係になるとは限らない、少しクセのあるプロパティです。Webサイト上の重なりにはスタッキングコンテキストと呼ばれる仕組みがあり、その関係性によってz-indexの値が1でも9999の上にくることがあり得ます。
+z-indexとスタッキングコンテキストの関係については次の記事にて解説されています。
+https://ics.media/entry/200609/
+この記事では自分の考えたz-index管理についての指針を紹介します。
+
+ グローバルな重なりとローカルな重なり
+Webサイトでの重なり表現には大き...]]></description><link>https://zenn.dev/crayfisher_zari/articles/2e8633a6da3ce9</link><guid isPermaLink="true">https://zenn.dev/crayfisher_zari/articles/2e8633a6da3ce9</guid><pubDate>Tue, 02 Jul 2024 23:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--41R6vrTa--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590CSS%25E3%2580%2591z-index%25E7%25AE%25A1%25E7%2590%2586%25E3%2581%25AE3%25E6%258C%2587%25E9%2587%259D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AB%25E3%2581%2597%25E3%2581%25AF%25E3%2582%2589%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FmN2I2NDVkZTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>にしはら</dc:creator></item><item><title><![CDATA[箱庭諸島の課題とその手段となる動画素材作成ツールを構築した]]></title><description><![CDATA[
+ 箱庭諸島の課題とは？
+完全新規プレイヤーがなかなか増えない。なぜ増えない？
+→全く知らない人が箱庭諸島を見るとどんな感じなんだ…？
+→これ初見で何やってるか理解できる人絶対いなくない？
+つまり、
+全く知らない人が見ると動いてないように見えるので、知りたくてもどんなゲームかわからないまま去る
+こういうこと(だと思ってる)
+どんなゲームかなんて説明書読めよ！とも思うのだが、やろうと思ってないゲームの説明書なんて読まない。
+3DSソフトのパッケージ版初めて買って中開けたら説明書が入ってないの見た時はびっくりした…してない？
+ゲームはCMを見たり、雑誌でゲーム内容を見たり、かっこいいきれいな...]]></description><link>https://zenn.dev/2jigenfbi0/articles/9d4eb3be7d655b</link><guid isPermaLink="true">https://zenn.dev/2jigenfbi0/articles/9d4eb3be7d655b</guid><pubDate>Tue, 02 Jul 2024 15:18:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6wywrrUi--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%25AE%25B1%25E5%25BA%25AD%25E8%25AB%25B8%25E5%25B3%25B6%25E3%2581%25AE%25E8%25AA%25B2%25E9%25A1%258C%25E3%2581%25A8%25E3%2581%259D%25E3%2581%25AE%25E6%2589%258B%25E6%25AE%25B5%25E3%2581%25A8%25E3%2581%25AA%25E3%2582%258B%25E5%258B%2595%25E7%2594%25BB%25E7%25B4%25A0%25E6%259D%2590%25E4%25BD%259C%25E6%2588%2590%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%25E3%2582%2592%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:RED%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRlYzVjMjM3MGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>RED</dc:creator></item><item><title><![CDATA[レスポンシブ対応ってむずい。。レスポンシブを簡単に確認できるおすすめのchrome拡張機能2選]]></title><description><![CDATA[
+ はじめに
+皆さんはレスポンシブの確認どうしていますか。検証ツールから見るという人も多いのではないでしょうか。しかし、検証ツールは少し使いずらかったり、そもそも対応しているデバイスの数も少ないです。そこで普段私が普段使っているおすすめのレスポンシブ確認用のchrome拡張機能を紹介していきます。
+
+ chrome拡張機能2選
+私が普段使っている拡張機能を2つ紹介します。
+
+ モバイルシュミレーター
+https://chromewebstore.google.com/detail/モバイルシミュレーター-レスポンシブテストツール/ckejmhbmlajgoklhgbapkiccekfoc...]]></description><link>https://zenn.dev/y_ta/articles/8c6c9cd896c47b</link><guid isPermaLink="true">https://zenn.dev/y_ta/articles/8c6c9cd896c47b</guid><pubDate>Tue, 02 Jul 2024 09:20:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lh219F_F--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%25AC%25E3%2582%25B9%25E3%2583%259D%25E3%2583%25B3%25E3%2582%25B7%25E3%2583%2596%25E5%25AF%25BE%25E5%25BF%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2582%2580%25E3%2581%259A%25E3%2581%2584%25E3%2580%2582%25E3%2580%2582%25E3%2583%25AC%25E3%2582%25B9%25E3%2583%259D%25E3%2583%25B3%25E3%2582%25B7%25E3%2583%2596%25E3%2582%2592%25E7%25B0%25A1%25E5%258D%2598%25E3%2581%25AB%25E7%25A2%25BA%25E8%25AA%258D%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258B%25E3%2581%258A%25E3%2581%2599%25E3%2581%2599%25E3%2582%2581%25E3%2581%25AEchrome%25E6%258B%25A1%25E5%25BC%25B5%25E6%25A9%259F%25E8%2583%25BD2%25E9%2581%25B8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:y_ta%2540%25E5%25A4%25A7%25E5%25AD%25A6%25E7%2594%259FWeb%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAyMGI4MDJjZDUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>y_ta@大学生Webエンジニア</dc:creator></item><item><title><![CDATA[見出しが飛び出ているtable]]></title><description><![CDATA[
+価格表や比較表で、見出しが飛び出しているtableを作りたいと思ったことはありませんか。
+これは、CSSの擬似要素を使うと簡単に作成できます。
+
+ コード
+    &lt;div class="table-wrap"&gt;
+      &lt;table&gt;
+        &lt;thead&gt;
+          &lt;tr&gt;
+            &lt;th&gt;&lt;/th&gt;
+            &lt;th&gt;見出し1&lt;/th&gt;
+            &lt;th&gt;見出し2&lt;/th&gt;
+          ...]]></description><link>https://zenn.dev/928sekine/articles/094c907f8cd893</link><guid isPermaLink="true">https://zenn.dev/928sekine/articles/094c907f8cd893</guid><pubDate>Mon, 01 Jul 2024 13:34:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--SJ-gWbPt--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%25A6%258B%25E5%2587%25BA%25E3%2581%2597%25E3%2581%258C%25E9%25A3%259B%25E3%2581%25B3%25E5%2587%25BA%25E3%2581%25A6%25E3%2581%2584%25E3%2582%258Btable%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259B%25E3%2581%258D%25E3%2581%25AD%25E3%2582%258A%25E3%2581%25AA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAyNDQ3MGIzZjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>せきねりな</dc:creator></item><item><title><![CDATA[infinity]]></title><description><![CDATA[無限大の値、infinityを使った絶対に崩壊しないカプセル型を書いたので忘備録です。
+これまでカプセル型を保つためには、border-radius: 9999px;など大きな値を指定していたと思います。
+ここで記述を以下のコードに書き換えます。
+.button {
+    border-radius: calc(1px / 0);
+    /* 以下のものでもOK */
+    border-radius: calc(infinity * 1px);
+}
+calc()関数内の算出値がinfinity+'px'になれば問題ないので上下どちらのコードでも大丈夫です。
+これ以外にも使い道がな...]]></description><link>https://zenn.dev/takaa/articles/d8b2faf8595a58</link><guid isPermaLink="true">https://zenn.dev/takaa/articles/d8b2faf8595a58</guid><pubDate>Sun, 30 Jun 2024 14:19:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GID-bUSg--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_80:infinity%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:takaa%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZkZTg4MTMwMTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takaa</dc:creator></item><item><title><![CDATA[文章にインデントを入れるCSS]]></title><description><![CDATA[リストなどで1文字目に記号がある時に簡単に2行目を揃えたいなとずっと思っていたので調べてみることにしました。
+結論としては2行で実装できます。
+使うプロパティはtext-indentとpadding-leftのふたつです。
+text-indentプロパティとは、先頭の文字を字下げするプロパティです。値は数字+単位、または% （パーセント）で指定します。padding-leftは説明しないです。
+以下CSSです。
+.indent {
+  text-indent: -1em;
+  padding-left: 1em;
+}
+コードの解説です。
+text-indentに 負の値(今回は-1em)...]]></description><link>https://zenn.dev/takaa/articles/90c27a873cd350</link><guid isPermaLink="true">https://zenn.dev/takaa/articles/90c27a873cd350</guid><pubDate>Sun, 30 Jun 2024 14:09:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--x8Fh6C0i--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%2596%2587%25E7%25AB%25A0%25E3%2581%25AB%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2587%25E3%2583%25B3%25E3%2583%2588%25E3%2582%2592%25E5%2585%25A5%25E3%2582%258C%25E3%2582%258BCSS%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:takaa%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZkZTg4MTMwMTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takaa</dc:creator></item><item><title><![CDATA[スムーススクロールについて]]></title><description><![CDATA[スムーススクロールをCSSのみで実装する方法を考えてみました。
+ここ最近JSライブラリなどを使わずに独自で実装しているサイトが多いような気がしており、気になって調べてみました。
+今回はscroll-behaviorを使って実装していこうと思いますが、調べていると考慮しなければいけないなと思う点が3つありました。
+
+ページない検索でもアニメーションしてしまう
+リンク先にtabindex属性をつける必要がある
+PCの設定で「視差効果を減らす」に設定していても動いてしまう
+
+この3つを解決して実装していきたいと思います。
+
+ ページない検索でもアニメーションしてしまう
+scroll-behav...]]></description><link>https://zenn.dev/takaa/articles/f5ceffcf7a6cd5</link><guid isPermaLink="true">https://zenn.dev/takaa/articles/f5ceffcf7a6cd5</guid><pubDate>Sun, 30 Jun 2024 13:53:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5nOkF4nP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B9%25E3%2583%25A0%25E3%2583%25BC%25E3%2582%25B9%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:takaa%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZkZTg4MTMwMTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takaa</dc:creator></item><item><title><![CDATA[flexプロパティについて]]></title><description><![CDATA[
+ flexプロパティ
+flexプロパティについて深く知っていないなと思ったので調べて見ることにしました。
+まずflexプロパティとはflexbox子要素に対して、「伸び縮みの比率を指定」できるプロパティです。
+具体的には以下の3つのプロパティをまとめて指定するこおとができます。
+
+flex-grow
+flex-shrink
+flex-basis
+
+これらは比率や幅を制御するプロパティで、それぞれ以下のような意味合いを持っています。
+
+flex-grow　伸長(初期値:0)
+flex-shrink 圧縮(初期値:1)
+flex-basis 幅(初期値:auto)
+
+
+ flex-grow...]]></description><link>https://zenn.dev/takaa/articles/db7f8d98b730ae</link><guid isPermaLink="true">https://zenn.dev/takaa/articles/db7f8d98b730ae</guid><pubDate>Sun, 30 Jun 2024 12:53:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--FRh7d63K--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:flex%25E3%2583%2597%25E3%2583%25AD%25E3%2583%2591%25E3%2583%2586%25E3%2582%25A3%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:takaa%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZkZTg4MTMwMTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takaa</dc:creator></item><item><title><![CDATA[LEAF Writer：CSSのカスタマイズ]]></title><description><![CDATA[
+ 概要
+LEAF Writerのカスタマイズ方法に関する調査記録です。
+https://gitlab.com/calincs/cwrc/leaf-writer/leaf-writer
+今回はCSSによる見た目のカスタマイズ方法に関する備忘録です。これにより、以下のように、縦書き表示にする編集環境の用意などが可能になります。
+
+以下は、カスタマイズ前の表示です。
+
+
+ 方法
+以下のように、スキーマファイルを指定します。
+https://github.com/kouigenjimonogatari/kouigenjimonogatari.github.io/blob/master/xml/...]]></description><link>https://zenn.dev/nakamura196/articles/b2395f62916dce</link><guid isPermaLink="true">https://zenn.dev/nakamura196/articles/b2395f62916dce</guid><pubDate>Fri, 28 Jun 2024 22:14:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--w4Lr6rFw--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:LEAF%2520Writer%25EF%25BC%259ACSS%25E3%2581%25AE%25E3%2582%25AB%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%259E%25E3%2582%25A4%25E3%2582%25BA%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nakamura196%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pkd3BpX1gzTWIzV3VqTnVnV2tPTlJlU3VsNFNTN1BNMWlPQm9LRm5JPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nakamura196</dc:creator></item><item><title><![CDATA[なぜ私の1frはフレックスコンテナをはみ出すのか]]></title><description><![CDATA[CSSのGrid Layoutを書いていて度々悩まされるこんな問題。
+
+1fr で 3 列の等幅な列を作ることがこのレイアウトの意図でしたが、フレックスアイテムのコンテンツが折り返されず、フレックスコンテナを飛び出して横方向のスクロールが発生してしまっています。
+レビューでは、minmax(0, 1fr)にしといてねとか、フレックスアイテムの方にmin-width: 0をつけてねとか言って簡単に済ますんですが、こういうのって経験的に知っているだけで、なんでその問題が起きるのか、そしてなんでこの方法で直るのか、といった細かい理由はよく知らなかったのです。
+まぁ正直理由なんか知らなくても直る...]]></description><link>https://zenn.dev/storehero/articles/31012c944ddb90</link><guid isPermaLink="true">https://zenn.dev/storehero/articles/31012c944ddb90</guid><pubDate>Wed, 26 Jun 2024 23:53:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jT9PvgR7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%25AA%25E3%2581%259C%25E7%25A7%2581%25E3%2581%25AE1fr%25E3%2581%25AF%25E3%2583%2595%25E3%2583%25AC%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25B9%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2586%25E3%2583%258A%25E3%2582%2592%25E3%2581%25AF%25E3%2581%25BF%25E5%2587%25BA%25E3%2581%2599%25E3%2581%25AE%25E3%2581%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:kazukinagata%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y0YjMwZDU1ZmQuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BEStoreHero%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFUWEFKeFVrMkdXQ19ZanFhNHB2ZlFtdlFjZHhWT0htdDZYeWtBRlVUMUM9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kazukinagata</dc:creator></item><item><title><![CDATA[【grid不要】flexの順番がPCとスマホで違う時の対処法]]></title><description><![CDATA[PCのときは画像の横に説明がある、スマホのときは画像の上にテキストを持ってきたい！ということはありませんか？
+【PC】
+
+【スマホ】
+
+しかし、画像の横の説明はすでに別のdivで囲ってしまった…タイトルが画像の上に出てくるのは無理なのでは…と思いますよね。
+display: contents;を使えば、この悩みは解決できます。
+grid不要で、とても簡単にできるので内容を紹介します。
+
+ 順番を変えたいアイテムの親にdisplay: contents;
+
+結論のコードです。
+  &lt;div class="l-container"&gt;
+    &lt;div class="box-...]]></description><link>https://zenn.dev/928sekine/articles/f257d439f21250</link><guid isPermaLink="true">https://zenn.dev/928sekine/articles/f257d439f21250</guid><pubDate>Tue, 25 Jun 2024 13:02:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Ip4X8ix---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590grid%25E4%25B8%258D%25E8%25A6%2581%25E3%2580%2591flex%25E3%2581%25AE%25E9%25A0%2586%25E7%2595%25AA%25E3%2581%258CPC%25E3%2581%25A8%25E3%2582%25B9%25E3%2583%259E%25E3%2583%259B%25E3%2581%25A7%25E9%2581%2595%25E3%2581%2586%25E6%2599%2582%25E3%2581%25AE%25E5%25AF%25BE%25E5%2587%25A6%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259B%25E3%2581%258D%25E3%2581%25AD%25E3%2582%258A%25E3%2581%25AA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAyNDQ3MGIzZjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>せきねりな</dc:creator></item><item><title><![CDATA[「プロの「引き出し」を増やす HTML+CSSコーディングの強化書」を読んで]]></title><description><![CDATA[今回はこちらの本を読んで、気になった点をピックアップしてまとめておきたいと思います。
+かなりかいつまんで書いているので、気になったら是非書籍の購入をおすすめします。
+
+プロの「引き出し」を増やす HTML+CSSコーディングの強化書
+
+https://books.mdn.co.jp/books/3221303016/
+
+ CSSの記述について
+
+ print
+プリントした際の表示についても設定しておく。
+@media screen and (min-width: 768px),print {
+ ...
+}
+
+ inline, block, inline-block
+結構曖昧に使っていると...]]></description><link>https://zenn.dev/koda_momo/articles/24fe55be89768e</link><guid isPermaLink="true">https://zenn.dev/koda_momo/articles/24fe55be89768e</guid><pubDate>Mon, 24 Jun 2024 13:49:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--sOVApZBd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%258C%25E3%2583%2597%25E3%2583%25AD%25E3%2581%25AE%25E3%2580%258C%25E5%25BC%2595%25E3%2581%258D%25E5%2587%25BA%25E3%2581%2597%25E3%2580%258D%25E3%2582%2592%25E5%25A2%2597%25E3%2582%2584%25E3%2581%2599%2520HTML%252BCSS%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2587%25E3%2582%25A3%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%25AE%25E5%25BC%25B7%25E5%258C%2596%25E6%259B%25B8%25E3%2580%258D%25E3%2582%2592%25E8%25AA%25AD%25E3%2582%2593%25E3%2581%25A7%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:koda_momo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE2NDQ3YWVkOGIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>koda_momo</dc:creator></item></channel></rss>
