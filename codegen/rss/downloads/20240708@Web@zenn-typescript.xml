@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「TypeScript」のフィード]]></title><description><![CDATA[Zennのトピック「TypeScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/typescript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/f13e758fdb.png</url><title>Zennの「TypeScript」のフィード</title><link>https://zenn.dev/topics/typescript</link></image><generator>zenn.dev</generator><lastBuildDate>Mon, 08 Jul 2024 11:44:02 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/typescript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[FireStoreのbatch処理  (Vue, Nuxt, Typescript)]]></title><description><![CDATA[
+ FireStoreのbatch処理
+大量のfireStoreのデータを一括で更新処理する必要があり、今回batch処理をする運びとなりました。備忘録としてカキコ
+実際にはこちらの方の記事がわかりやすかったです。
+https://zenn.dev/sgr_ksmt/articles/b5fa4f8b9e0a33ccf609
+もっと簡単にした処理を紹介して頂いてましたが、僕としては下記の方法が分かりやすくかつメンテしやすいという意味で採用しました。
+
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  updateDoc,
+  doc,
+...]]></description><link>https://zenn.dev/rionishino/articles/4f627a7bf67468</link><guid isPermaLink="true">https://zenn.dev/rionishino/articles/4f627a7bf67468</guid><pubDate>Mon, 08 Jul 2024 04:40:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1_7RWasu--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:FireStore%25E3%2581%25AEbatch%25E5%2587%25A6%25E7%2590%2586%2520%2520%2528Vue%252C%2520Nuxt%252C%2520Typescript%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:rio_nishino%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzkwYzg2OWY3YTcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>rio_nishino</dc:creator></item><item><title><![CDATA[[CDK API Gateway] タイムアウトの上限を伸ばせるようになった]]></title><description><![CDATA[CDKで REST API の構築をしている際にバージョンの都合でタイムアウトを伸ばせなかったため、備忘録として残しておきます。
+!
+この記事では以下について触れます。
+
+困ったこと
+解決策
+まとめ
+
+
+では、初めて行きます。
+
+ 困ったこと
+CDK(2.143.0)を使用して、元は HTTP API で構築を行なっていた箇所を、レスポンスのタイムアウトを伸ばす必要があったため、以下のように REST API に切り替えました。
+※ サービスクォータすの上限緩和申請にて29秒のデフォルト値から、120秒にタイムアウト時間を伸ばしました。（Maximum integration timeo...]]></description><link>https://zenn.dev/ncdc/articles/a2fb6b06cee9e7</link><guid isPermaLink="true">https://zenn.dev/ncdc/articles/a2fb6b06cee9e7</guid><pubDate>Mon, 08 Jul 2024 02:07:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--32xzGByN--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BCDK%2520API%2520Gateway%255D%2520%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25A0%25E3%2582%25A2%25E3%2582%25A6%25E3%2583%2588%25E3%2581%25AE%25E4%25B8%258A%25E9%2599%2590%25E3%2582%2592%25E4%25BC%25B8%25E3%2581%25B0%25E3%2581%259B%25E3%2582%258B%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E3%2581%25AA%25E3%2581%25A3%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2582%2588%25E3%2581%25A3%25E3%2581%25A1%25E3%2582%2583%25E3%2582%2593%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNhODZhNDA5ZDMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:NCDC%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VjYmFjOWEzNmYuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>よっちゃん</dc:creator></item><item><title><![CDATA[Prisma Split Schema File]]></title><description><![CDATA[
+ Split your Schema
+Prisma v5.15.0 で Schema ファイルの分割ができるようになりました 🎉
+機能が追加された理由
+これまでは Prisma は、1 つのスキーマファイルしかサポートしていませんでした...
+えっ！今までできなかったの？そうです！今までは、1 つのスキーマファイルに DB のモデルを集約していました。
+今回
+Prisma スキーマファイルを複数のファイルで使用できるようになり、データベーススキーマの管理性と構成性が向上し、大規模なプロジェクトでの作業が容易になりました。
+全てのモデルは全てのファイルを参照することができるので、リレーシ...]]></description><link>https://zenn.dev/asahigamieru/articles/ee3ebba250a14a</link><guid isPermaLink="true">https://zenn.dev/asahigamieru/articles/ee3ebba250a14a</guid><pubDate>Sun, 07 Jul 2024 22:19:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hkV9IXoq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_76:Prisma%2520Split%2520Schema%2520File%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Asa%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE4MWM3ODdmMWQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Asa</dc:creator></item><item><title><![CDATA[TypeScript/Reactのコンテキスト初期値と専用の型]]></title><description><![CDATA[TypeScriptからReactを使う場合を前提とします。
+
+ Reactにおけるコンテキスト
+Reactには コンテキスト(Context) という仕組みがあり、コンポーネントの階層を飛び越えて深い階層にあるコンポーネントとも値をやり取りできます。コンテキストを使うと、コンポーネント階層のあちこちにprops経由で値を引き回す煩雑さを避けられます。
+コンテキストの解説としては、公式ドキュメントがとてもよくまとまっています。
+https://ja.react.dev/learn/passing-data-deeply-with-context
+コンテキストの使い方は、難しいことを考えな...]]></description><link>https://zenn.dev/saka1/articles/0a90470ba89a8a</link><guid isPermaLink="true">https://zenn.dev/saka1/articles/0a90470ba89a8a</guid><pubDate>Sun, 07 Jul 2024 18:29:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--I2X00jyq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%252FReact%25E3%2581%25AE%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2586%25E3%2582%25AD%25E3%2582%25B9%25E3%2583%2588%25E5%2588%259D%25E6%259C%259F%25E5%2580%25A4%25E3%2581%25A8%25E5%25B0%2582%25E7%2594%25A8%25E3%2581%25AE%25E5%259E%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:saka1%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc0OGU0Njk0ZTMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>saka1</dc:creator></item><item><title><![CDATA[[TypeScript] interface vs type（とそれぞれの違いについて）]]></title><description><![CDATA[
+ はじめに
+5000兆回議論されている内容ですが、 TypeScript における interface と type どちらかを使うかについて、「なんとなくどっちかに合わせる」くらいの認識だったので改めて自分なりの答えを出すために調べ直しました。（なお、答えはありません。あくまで私の感想です 🙇）
+調べた結果自分なりの答えは「理由がなければ type を使い、クラスを使う場合（OOP の場合）は interface を使うほうが都合が良い」ですが、プロジェクトの方針に則るのが最優先だと思います。
+
+ プラクティス
+TypeScript Deep Dive と サバイバル TypeScr...]]></description><link>https://zenn.dev/hsato_workman/articles/b9ff07e7619877</link><guid isPermaLink="true">https://zenn.dev/hsato_workman/articles/b9ff07e7619877</guid><pubDate>Sun, 07 Jul 2024 13:56:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--27S7wkoF--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BTypeScript%255D%2520interface%2520vs%2520type%25EF%25BC%2588%25E3%2581%25A8%25E3%2581%259D%25E3%2582%258C%25E3%2581%259E%25E3%2582%258C%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hiroki-sato-workman%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q0NTAxYjFlNmEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hiroki-sato-workman</dc:creator></item><item><title><![CDATA[Fuse: TypeScript API Frameworkを使ってみる]]></title><description><![CDATA[
+ 日本語のしっかりした記事はまだなかったので日本初です
+
+ Fuse: TypeScript API Framework
+https://fusedata.dev/
+https://github.com/StellateHQ/fuse
+
+ 導入
+npx create-fuse-app
+npx fuse dev
+http://localhost:4000/graphql にアクセスするとGraphiQLが起動するようになっている
+デモ用のschema
+type Mutation {
+  _version: String!
+}
+
+interface Node {
+  id: ID!
+}
+
+...]]></description><link>https://zenn.dev/0000_pg/articles/1a7a3ed372b735</link><guid isPermaLink="true">https://zenn.dev/0000_pg/articles/1a7a3ed372b735</guid><pubDate>Sun, 07 Jul 2024 13:52:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--KBTcb-ld--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Fuse%253A%2520TypeScript%2520API%2520Framework%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mochizuki-pg%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhNDFlZTc3ODUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mochizuki-pg</dc:creator></item><item><title><![CDATA[一日一処: TypeScriptでオブジェクトのプロパティに任意のキーと必須のキーを設定し、それぞれのキーによって異なる値の型を設定する]]></title><description><![CDATA[
+ TypeScriptでの型定義
+TSに触れていると、いくつか前例を調べても見つからないパターンがある。また、意図するものが見つかったとしても、適切に動作するとは限らないこともある。
+今回は、TSにおけるオブジェクトで、必須のキーと任意のキーを設定し、それぞれに異なる値の型を与えた苦戦した方法を紹介する。
+この記事は、過去の記事を更に深堀り、より厳密に動作するように改良を加えた作業となる。
+
+ 通常のオブジェクト型定義と記事の前提
+通常、型を定義する場合、typeやinterfaceを使用する。今回は、記事全体を通して、typeでの記法に統一する。
+一般的にUserの型を定義したいとき...]]></description><link>https://zenn.dev/jinkutoriu/articles/d9f5760fa193c9</link><guid isPermaLink="true">https://zenn.dev/jinkutoriu/articles/d9f5760fa193c9</guid><pubDate>Sun, 07 Jul 2024 09:23:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--cV2vYC2c--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E4%25B8%2580%25E6%2597%25A5%25E4%25B8%2580%25E5%2587%25A6%253A%2520TypeScript%25E3%2581%25A7%25E3%2582%25AA%25E3%2583%2596%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E3%2581%25AE%25E3%2583%2597%25E3%2583%25AD%25E3%2583%2591%25E3%2583%2586%25E3%2582%25A3%25E3%2581%25AB%25E4%25BB%25BB%25E6%2584%258F%25E3%2581%25AE%25E3%2582%25AD%25E3%2583%25BC%25E3%2581%25A8%25E5%25BF%2585%25E9%25A0%2588%25E3%2581%25AE%25E3%2582%25AD%25E3%2583%25BC%25E3%2582%2592%25E8%25A8%25AD%25E5%25AE%259A%25E3%2581%2597%25E3%2580%2581%25E3%2581%259D%25E3%2582%258C%25E3%2581%259E%25E3%2582%258C%25E3%2581%25AE%25E3%2582%25AD%25E3%2583%25BC%25E3%2581%25AB%25E3%2582%2588%25E3%2581%25A3%25E3%2581%25A6...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E9%25B3%25A5%25E7%2594%259F%2520%25E7%2594%259A%25E5%258F%25A5%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2IyZTA4MTQ0MTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>鳥生 甚句</dc:creator></item><item><title><![CDATA[JSON.parse(JSON.stringify(x))に型をつけよう]]></title><description><![CDATA[
+ はじめに
+WebバックエンドとクライアントをともにTypeScriptで書くとします。また、バックエンドではJSON.stringifyで値をシリアライズし、クライアントサイドではJSON.parse相当の処理でレスポンスボディを取得すると仮定しましょう[1]。このとき、JSON.stringifyの挙動がわかれば、実際にクライアントにどのような値が返ってきうるかを型で表現できるはずです。例えば、
+console.log(JSON.stringify({ a: undefined })) // =&gt; "{}"
+となるので、{ a: undefined }の型をJSON.stri...]]></description><link>https://zenn.dev/mshaka/articles/8b9d8fdb7a219e</link><guid isPermaLink="true">https://zenn.dev/mshaka/articles/8b9d8fdb7a219e</guid><pubDate>Sun, 07 Jul 2024 09:11:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--rw3PdKN0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JSON.parse%2528JSON.stringify%2528x%2529%2529%25E3%2581%25AB%25E5%259E%258B%25E3%2582%2592%25E3%2581%25A4%25E3%2581%2591%25E3%2582%2588%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25BB%25E3%2581%25A8%25E3%2581%2591%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q2MGMxZmFkMjguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ほとけ</dc:creator></item><item><title><![CDATA[SOLIDの原則を心で理解する - インターフェース分離の原則]]></title><description><![CDATA[さて、SOLIDの原則を心で理解することの探求を続けましょう。その第四の原則は「インターフェース分離の原則」（ISP）であり、Wikipedia(英語版)では以下のようにまとめられています。
+!
+この原則は、いかなるクライアントも使用しないメソッドに依存してはならないということを規定しています。
+したがって、大きなインターフェースをより小さく、より具体的なものに分割し、クライアントが自分に関係のあるメソッドにだけアクセスできるようにする必要があります。
+
+以前のSOLID原則に関する投稿、特に単一責任の原則（SRP）に関するものを読んだことがあるなら、その目的にすでに気付いているかもしれ...]]></description><link>https://zenn.dev/andmorefine/articles/5ae927efe2daba</link><guid isPermaLink="true">https://zenn.dev/andmorefine/articles/5ae927efe2daba</guid><pubDate>Sun, 07 Jul 2024 06:10:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--pRmOY6Xi--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:SOLID%25E3%2581%25AE%25E5%258E%259F%25E5%2589%2587%25E3%2582%2592%25E5%25BF%2583%25E3%2581%25A7%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2599%25E3%2582%258B%2520-%2520%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%2595%25E3%2582%25A7%25E3%2583%25BC%25E3%2582%25B9%25E5%2588%2586%25E9%259B%25A2%25E3%2581%25AE%25E5%258E%259F%25E5%2589%2587%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:andmorefine%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2d4SWhtd3ZlckNiV1hqRkRZWk9xOEJJSGsyMHFYN3ZqN3lrS0NQd1QwPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>andmorefine</dc:creator></item><item><title><![CDATA[カルーセルスライダーライブラリの Embla Carousel が良かった]]></title><description><![CDATA[WEBサイトの開発でカルーセルスライダーを実装する際に、Swiper によくお世話になっています。
+はじめての OSS コントリビュートも Swiper でした。
+https://github.com/nolimits4web/swiper/pull/7228
+https://github.com/nolimits4web/swiper/pull/7319
+Swiperも優れたライブラリで気に入っていますが、React / TypeScript の構成で利用する際にコンポーネントではなくロジックだけ提供するライブラリがないかなと思い調べてみたところ、以下記事で Embla Carouse...]]></description><link>https://zenn.dev/yall/articles/4c7ab236d60553</link><guid isPermaLink="true">https://zenn.dev/yall/articles/4c7ab236d60553</guid><pubDate>Sun, 07 Jul 2024 01:32:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--rapnqGXY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25AB%25E3%2583%25AB%25E3%2583%25BC%25E3%2582%25BB%25E3%2583%25AB%25E3%2582%25B9%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2580%25E3%2583%25BC%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%25E3%2581%25AE%2520Embla%2520Carousel%2520%25E3%2581%258C%25E8%2589%25AF%25E3%2581%258B%25E3%2581%25A3%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yasuhiro%2520Yamamoto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE2ZTM4Njc5YmIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yasuhiro Yamamoto</dc:creator></item><item><title><![CDATA[contentEditable + Reactで簡易的なリッチエディタの自作]]></title><description><![CDATA[みなさんcontentEditable属性を使ったことはありますか？
+使いこなせればリッチエディタの開発ができる反面、奇妙な挙動が大変多いです。
+例えば、キャレット操作を自前実装で対応が求められるなどです。
+更にReactでこの属性をそのまま使うと、子要素をJSXで指定することができません。
+本稿ではこれらの辛いポイントを乗り越えて、簡易的なマークダウン風のリッチエディタを開発することを目指します。
+!
+本稿はPC版のChromeでのみ動作確認をしています。
+他のブラウザでは動かない可能性が高いです。
+
+
+ 対象読者
+
+ライブラリを使用しないリッチエディタ開発に興味がある
+content...]]></description><link>https://zenn.dev/karintou/articles/35e9e314c5579f</link><guid isPermaLink="true">https://zenn.dev/karintou/articles/35e9e314c5579f</guid><pubDate>Sat, 06 Jul 2024 11:18:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--DxlNXXKQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:contentEditable%2520%252B%2520React%25E3%2581%25A7%25E7%25B0%25A1%25E6%2598%2593%25E7%259A%2584%25E3%2581%25AA%25E3%2583%25AA%25E3%2583%2583%25E3%2583%2581%25E3%2582%25A8%25E3%2583%2587%25E3%2582%25A3%25E3%2582%25BF%25E3%2581%25AE%25E8%2587%25AA%25E4%25BD%259C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258B%25E3%2582%258A%25E3%2582%2593%25E3%2581%25A8%25E3%2581%2586%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzcxMjg4ODkyZjMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>かりんとう</dc:creator></item><item><title><![CDATA[Reactでオブジェクト指向やってみる #状態管理ライブラリ一切不要]]></title><description><![CDATA[
+ オブジェクト指向を取り入れると
+
+
+『可読性』『拡張性』『汎用性(=ひいては保守性)』 の三大柱(自称)が担保され、現場でドヤれる
+
+メソッド名やメンバ変数名が1~2単語で済む #ポリモーフィズム
+
+
+主語.動詞(補語 | 目的語) S+V+C、S+V+O の形になる
+
+例1: $(A).appendTo(B)
+
+例2: comment.createdAt: Date
+
+例3: comment.createdBy: User
+
+例4: comment.getCreatedBy(): User
+
+例5: user.medias[n].comments.create({ title, b...]]></description><link>https://zenn.dev/llc_starhacks/articles/929e58b503d6ce</link><guid isPermaLink="true">https://zenn.dev/llc_starhacks/articles/929e58b503d6ce</guid><pubDate>Sat, 06 Jul 2024 09:23:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--RU0LEX7c--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%25E3%2581%25A7%25E3%2582%25AA%25E3%2583%2596%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E6%258C%2587%25E5%2590%2591%25E3%2582%2584%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2520%2523%25E7%258A%25B6%25E6%2585%258B%25E7%25AE%25A1%25E7%2590%2586%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%25E4%25B8%2580%25E5%2588%2587%25E4%25B8%258D%25E8%25A6%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:llc_starhacks%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY4M2QxODAxZjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>llc_starhacks</dc:creator></item><item><title><![CDATA[【2024年7月最新🚀】Azure Functions V4 環境構築 TypeScript編]]></title><description><![CDATA[
+Azure Functions は、Microsoft Azure のサーバーレスコンピューティングサービスです。これを利用することで、インフラ管理を気にすることなくコードを実行することができます。
+この記事では、2024年7月時点の最新情報に基づき、TypeScript で Azure Functions V4 の環境を構築する手順をご紹介します。
+Azure FunctionsでHTTPトリガーを作成します。
+
+ 前提条件
+
+Node.js のインストール (version 16.x 以上推奨 筆者はv20.9.0で実施)
+Azure アカウント
+Visual Studio Cod...]]></description><link>https://zenn.dev/yusu29/articles/azure_functions_introduction</link><guid isPermaLink="true">https://zenn.dev/yusu29/articles/azure_functions_introduction</guid><pubDate>Sat, 06 Jul 2024 05:25:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xJDy_6dE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%25902024%25E5%25B9%25B47%25E6%259C%2588%25E6%259C%2580%25E6%2596%25B0%2520%25E3%2580%2591Azure%2520Functions%2520V4%2520%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%2520TypeScript%25E7%25B7%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yusuke%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzczMjQwNDhhMDkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yusuke</dc:creator></item><item><title><![CDATA[React の学習のためにTodoアプリを作ってみた  その２]]></title><description><![CDATA[
+ はじめに
+4ヶ月ほど前に初めてTodoアプリを作成しました。（こちらの記事）当時は、Reactの公式チュートリアルを終えたばかりで、手探り状態でなんとか完成させたという感じでした。
+あれから時間も経ち、色々学習を進めたのでその時の経験を踏まえ、さらに学びを深めるためにもう一度Todoアプリを作成してみましたので、作業ログを残しておきます。
+
+ 使用する技術
+
+React
+Typescript
+CSS
+
+tailwind
+
+
+Recoil
+
+
+ 仕様
+
+ Todoに持たせる情報
+
+ID
+タイトル
+ステータス
+の3つ
+
+
+ 機能
+
+Todoを追加できる
+Todoを削除できる
+Todoを編...]]></description><link>https://zenn.dev/surume3/articles/9726aeeb969d1e</link><guid isPermaLink="true">https://zenn.dev/surume3/articles/9726aeeb969d1e</guid><pubDate>Sat, 06 Jul 2024 00:16:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--m6bEE5Pv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%2520%25E3%2581%25AE%25E5%25AD%25A6%25E7%25BF%2592%25E3%2581%25AE%25E3%2581%259F%25E3%2582%2581%25E3%2581%25ABTodo%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2520%2520%25E3%2581%259D%25E3%2581%25AE%25EF%25BC%2592%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Syumai3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI4MzZlZGI2OWIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Syumai3</dc:creator></item><item><title><![CDATA[自身で作成した ESLint Config をスナップショットテストする]]></title><description><![CDATA[
+ これはなに
+作成した ESLint Config が期待値通りかどうかをテストする方法についてまとめたものです。
+ESLint は非常に多くのルールを提供しており、これにプラグインも加えるとその数は膨大なものになります。全てのルール設定を自身で記述するには多大なコストを要するため、各種プラグインが提供する configs （≒ プリセット）を取り入れつつ、必要に応じてルール設定を追加するのが一般的です。さらに特定のファイル形式やディレクトリー配下に限定して異なる設定を適用する場合もあるでしょう。こうなると設定の全体像が極めて複雑となり、期待値通りになっているかを目視で確認するのは非常...]]></description><link>https://zenn.dev/wakamsha/articles/test-eslint-config</link><guid isPermaLink="true">https://zenn.dev/wakamsha/articles/test-eslint-config</guid><pubDate>Fri, 05 Jul 2024 01:46:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Qf8VzH4U--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%2587%25AA%25E8%25BA%25AB%25E3%2581%25A7%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2597%25E3%2581%259F%2520ESLint%2520Config%2520%25E3%2582%2592%25E3%2582%25B9%25E3%2583%258A%25E3%2583%2583%25E3%2583%2597%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%2583%25E3%2583%2588%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:wakamsha%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2psYURiOW50NGN1UTUweE54dmxHcW50Rkxsbkg1VThSWUFZOUtBakE9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>wakamsha</dc:creator></item><item><title><![CDATA[ray.soをNeovim/Vimから快適に使えるプラグインを書いた]]></title><description><![CDATA[!
+この記事はVim 駅伝の 7/5 の記事です。
+
+
+https://github.com/ryoppippi/ray-so.vim/
+
+ はじめに
+皆さんはray.soをご存知でしょうか？)
+https://ray.so/
+ray.soは、プログラミング言語のコードを画像に変換してくれるサービスです。
+コードを画像にしてくれるサービスやツールといえば、他にもCarbonやSilicon、Freeze などがありますが、ray.soはブラウザから使えて尚且つとてもかっこいいデザインが特徴です。
+元々RaycastというMacのランチャーアプリを作っている会社が運営しているサービスで、R...]]></description><link>https://zenn.dev/vim_jp/articles/527fe9cea500c5</link><guid isPermaLink="true">https://zenn.dev/vim_jp/articles/527fe9cea500c5</guid><pubDate>Thu, 04 Jul 2024 21:32:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--LHE2quMn--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ray.so%25E3%2582%2592Neovim%252FVim%25E3%2581%258B%25E3%2582%2589%25E5%25BF%25AB%25E9%2581%25A9%25E3%2581%25AB%25E4%25BD%25BF%25E3%2581%2588%25E3%2582%258B%25E3%2583%2597%25E3%2583%25A9%25E3%2582%25B0%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%2592%25E6%259B%25B8%25E3%2581%2584%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:ryoppippi%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU1YzllYzNiYzAuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:vim-jp%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MzNDU0MTQ1MTMuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ryoppippi</dc:creator></item><item><title><![CDATA[drizzle schemaから型を作成し、特定のフィールドを選択・除外・追加する方法]]></title><description><![CDATA[この記事では、drizzle-zodを使ってスキーマから型を作成し、pickやomitを使って特定のフィールドを選択・除外したり、さらにフィールドを追加する方法について解説します。
+
+ 小学生にもわかる説明version
+
+ データの型ってなぁに？
+データの型（種類）というのは、情報がどんな形をしているかを決めるルールのことです。たとえば、数字か、文字か、メールアドレスか、みたいなことを決めます。
+
+ 特定のフィールド（情報の一部）だけを使う方法
+
+ 例: ジョンさんとそのプレゼント
+
+
+基本の情報カード:
+
+
+ジョンさんの情報カードには、次のようなことが書かれています：
+ID: 1
+名...]]></description><link>https://zenn.dev/keishi815/articles/7042d8dabea65d</link><guid isPermaLink="true">https://zenn.dev/keishi815/articles/7042d8dabea65d</guid><pubDate>Thu, 04 Jul 2024 14:35:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Zb0OVbCw--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:drizzle%2520schema%25E3%2581%258B%25E3%2582%2589%25E5%259E%258B%25E3%2582%2592%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2597%25E3%2580%2581%25E7%2589%25B9%25E5%25AE%259A%25E3%2581%25AE%25E3%2583%2595%25E3%2582%25A3%25E3%2583%25BC%25E3%2583%25AB%25E3%2583%2589%25E3%2582%2592%25E9%2581%25B8%25E6%258A%259E%25E3%2583%25BB%25E9%2599%25A4%25E5%25A4%2596%25E3%2583%25BB%25E8%25BF%25BD%25E5%258A%25A0%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2584%25E3%2581%25A3%25E3%2581%25A1%25E3%2583%25BC%25E3%2581%25AEtech%2520blog%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS2Z0anpKTGlDbGVGbUt3UXJhMjhUWEwwZEx6cjM2UDlKai1oRDJPVjByM1c1ZkxfR1Y9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>いっちーのtech blog</dc:creator></item><item><title><![CDATA[Next.js　revalidatePathを簡単にわかりやすく解説]]></title><description><![CDATA[
+ 導入
+next.jsのサーバー側を設定しているときに、revalidateが出てきます。この記事は、「revalidatePathって何？」、「revalidateを日本語にすると再検証と出てきたけど、意味が分からない」という人に向けて書きました。revalidatePathについて理解しましょう。
+
+ revalidatePathとは
+revalidatePathは、指定されたpathのcacheにデータを入れなおす。
+
+ 引数
+revalidatePath(path:string,type?:'page'|'layout');
+path:revalidateつまり、cacheにデ...]]></description><link>https://zenn.dev/maiamitorio/articles/547b7bcc2ae41c</link><guid isPermaLink="true">https://zenn.dev/maiamitorio/articles/547b7bcc2ae41c</guid><pubDate>Thu, 04 Jul 2024 12:07:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--U1p4l6lO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Next.js%25E3%2580%2580revalidatePath%25E3%2582%2592%25E7%25B0%25A1%25E5%258D%2598%25E3%2581%25AB%25E3%2582%258F%25E3%2581%258B%25E3%2582%258A%25E3%2582%2584%25E3%2581%2599%25E3%2581%258F%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:maiamitorio%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzUwZmEwOTA0ZTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>maiamitorio</dc:creator></item><item><title><![CDATA[SaaS企業の成長を支えるバックエンドの裏側で登壇してきました]]></title><description><![CDATA[こんにちは、JicooでCTOをしている小林です。
+2024年6月25日に開催されたSaaS提供企業4社合同のバックエンド勉強会で登壇してきました。
+https://pick.connpass.com/event/320729/
+最近リリースした公開APIに関する技術について発表する機会を頂けて大変ありがたかったです。
+https://x.com/feel_sooo_baaad/status/1805554316486525291
+またご来場いただいた皆様、共同開催していただいたIVRyさん、スペースマーケットさん、Pickさん、ありがとうございました。
+
+ 登壇内容
+発表内容としてはA...]]></description><link>https://zenn.dev/jicoo/articles/73afb8d595b1d3</link><guid isPermaLink="true">https://zenn.dev/jicoo/articles/73afb8d595b1d3</guid><pubDate>Thu, 04 Jul 2024 05:05:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--nRWXg150--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:SaaS%25E4%25BC%2581%25E6%25A5%25AD%25E3%2581%25AE%25E6%2588%2590%25E9%2595%25B7%25E3%2582%2592%25E6%2594%25AF%25E3%2581%2588%25E3%2582%258B%25E3%2583%2590%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2589%25E3%2581%25AE%25E8%25A3%258F%25E5%2581%25B4%25E3%2581%25A7%25E7%2599%25BB%25E5%25A3%2587%25E3%2581%2597%25E3%2581%25A6%25E3%2581%258D%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Haruhiko%2520kobayashi%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzExODMwNTlhODkuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Jicoo%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E2ZDY2ZWE2MjAuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Haruhiko kobayashi</dc:creator></item><item><title><![CDATA[CopilotでTypescriptの型を元にダミーデータを生成するVSCodeの拡張機能を作ってみた]]></title><description><![CDATA[
+ はじめに
+VSCode の 7 月リリースにて、Language ModelとChat extensionsの API がリリースされました。
+https://code.visualstudio.com/api/extension-guides/language-model
+https://code.visualstudio.com/api/extension-guides/chat
+これにより、Copilot の生成 AI を活かす拡張機能を実装可能となりました。これを機に Typescript の型を元にダミーデータを生成してくれる拡張機能とチャットボットを実装してます。
+まずは...]]></description><link>https://zenn.dev/mylifeasjosh/articles/9338bbdc397a55</link><guid isPermaLink="true">https://zenn.dev/mylifeasjosh/articles/9338bbdc397a55</guid><pubDate>Thu, 04 Jul 2024 04:05:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ALUnot6Y--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Copilot%25E3%2581%25A7Typescript%25E3%2581%25AE%25E5%259E%258B%25E3%2582%2592%25E5%2585%2583%25E3%2581%25AB%25E3%2583%2580%25E3%2583%259F%25E3%2583%25BC%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%2592%25E7%2594%259F%25E6%2588%2590%25E3%2581%2599%25E3%2582%258BVSCode%25E3%2581%25AE%25E6%258B%25A1%25E5%25BC%25B5%25E6%25A9%259F%25E8%2583%25BD%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:josh%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzMxMzMyZjFhMDYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>josh</dc:creator></item></channel></rss>
