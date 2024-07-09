@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「JavaScript」のフィード]]></title><description><![CDATA[Zennのトピック「JavaScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/javascript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/64acd76870.png</url><title>Zennの「JavaScript」のフィード</title><link>https://zenn.dev/topics/javascript</link></image><generator>zenn.dev</generator><lastBuildDate>Tue, 09 Jul 2024 12:00:48 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/javascript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Reactで再帰的なコンポーネントを作ってみた]]></title><description><![CDATA[
+ はじめに
+こんにちは！😄
+社内でTypeChallengeを元に勉強会をしているのですが、再帰的に型づけする問題に取り組んでいると、ふとこんなことを思いました。(ちなみに問題はこれです。)
+https://github.com/type-challenges/type-challenges/blob/main/questions/00189-easy-awaited
+「再帰的に型づけしたデータを使って何か作ってみたいなあ。そういえば、再帰的なコンポーネントも実装したことないな…作るか！🔥」
+一見複雑そうに思える再帰的なコンポーネントですが、実装してみると意外と単純な構造であることが分...]]></description><link>https://zenn.dev/gemcook/articles/c635ab529f48c2</link><guid isPermaLink="true">https://zenn.dev/gemcook/articles/c635ab529f48c2</guid><pubDate>Tue, 09 Jul 2024 09:10:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--kLhWE7qO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%25E3%2581%25A7%25E5%2586%258D%25E5%25B8%25B0%25E7%259A%2584%25E3%2581%25AA%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%259D%25E3%2583%25BC%25E3%2583%258D%25E3%2583%25B3%25E3%2583%2588%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:KM%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQyYzJiNzVlZTIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Gemcook%2520Tech%2520Blog%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2EzYjk0ZGQyMWEuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>KM</dc:creator></item><item><title><![CDATA[Mapbox Newsletter WEEKLY TIPSの解説 -「タイムスライダーを作成」]]></title><description><![CDATA[
+ はじめに
+この記事は、先日配信されたMapbox NewsletterのWEEKLY TIPSで紹介されていた「タイムスライダーを作成」についての解説です。このサンプルではMap#setFilterの使い方を例示しています。また、Newsletterの購読はこちらからお申し込みいただけます。
+以下が本サンプルのデモです。
+
+
+ コードを確認
+まずExamplesのコードを見に行きましょう。
+日本語サイト
+
+英語サイト
+
+基本的に同じコードですが、英語版はスタイルとしてMapbox Light v11、プロジェクション（地図投影法）としてヴィンケルトリペル図法を使用しています。プロジェ...]]></description><link>https://zenn.dev/mapbox_japan/articles/d781b17d4df2b9</link><guid isPermaLink="true">https://zenn.dev/mapbox_japan/articles/d781b17d4df2b9</guid><pubDate>Tue, 09 Jul 2024 08:56:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--t2QtA6Nj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Mapbox%2520Newsletter%2520WEEKLY%2520TIPS%25E3%2581%25AE%25E8%25A7%25A3%25E8%25AA%25AC%2520-%25E3%2580%258C%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25A0%25E3%2582%25B9%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2580%25E3%2583%25BC%25E3%2582%2592%25E4%25BD%259C%25E6%2588%2590%25E3%2580%258D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:OttyLab%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RmZWNmNDhhMWMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%259E%25E3%2583%2583%25E3%2583%2597%25E3%2583%259C%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25B9%25E3%2583%25BB%25E3%2582%25B8%25E3%2583%25A3%25E3%2583%2591%25E3%2583%25B3%25E5%2590%2588%25E5%2590%258C%25E4%25BC%259A%25E7%25A4%25BE%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhMGJmZWJmZmQuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>OttyLab</dc:creator></item><item><title><![CDATA[MiniBrowser に JSC のオプションを渡す]]></title><description><![CDATA[オタクの後輩が「ある特定の時刻までのカウントダウンタイマーを作りたい」というので 「Intl.DurationFormat とか Temporal.Duration.compare 使おうぜ」という提案をした。
+Intl.DurationFormat は WebKit にしか実装されていないのだが、対象のOSは Ubuntu であり、Safari を入手することはできなかった。そこで Playwright 経由で WebKit GTK の MiniBrowser を入手し、それを使うことになった。
+MiniBrowser 自体は普通に動き、さらに Intl.DurationFormat ...]]></description><link>https://zenn.dev/sosukesuzuki/articles/8270f9749a0b10</link><guid isPermaLink="true">https://zenn.dev/sosukesuzuki/articles/8270f9749a0b10</guid><pubDate>Tue, 09 Jul 2024 04:47:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6wuxTypG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:MiniBrowser%2520%25E3%2581%25AB%2520JSC%2520%25E3%2581%25AE%25E3%2582%25AA%25E3%2583%2597%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%2592%25E6%25B8%25A1%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Sosuke%2520Suzuki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2kzVm5WZHo2MC1CT3lMTS1VVnZaNmdNSDJlTlp1T0lTa1owT3lyNnc9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Sosuke Suzuki</dc:creator></item><item><title><![CDATA[【NAGOYA TEENS AI CAMP 2024/07 B Course】お料理レシピ生成アプリを作ってみよう]]></title><description><![CDATA[2024年の7月13日と7月14日に開催される NAGOYA TEENS AI CAMP のBコースの講習で使用する教材です。今回の講習では、ChatGPT APIを組み込んだ「お料理レシピ生成アプリ」の作成を体験することで、AIを活用した Web アプリケーション開発についての知識を深めることを目的としています。]]></description><link>https://zenn.dev/gura_8/books/nagoya-ai-event-2024-07_b-course</link><guid isPermaLink="true">https://zenn.dev/gura_8/books/nagoya-ai-event-2024-07_b-course</guid><pubDate>Tue, 09 Jul 2024 04:14:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---MIGcGbI--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci9iZjE2MjE5YzAwLndlYnA=%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>Gura</dc:creator></item><item><title><![CDATA[ActionCable + WebSocketで実装したチャット機能でJavaScriptのファイルが読み込まれない問題]]></title><description><![CDATA[
+ 行いたいこと
+
+ActionCable + WebSocketで実装したチャット機能でJavaScriptのファイルが読み込まれ、メッセージを送信する挙動が正しく行えるようにしたい。
+
+
+ 起こっている問題
+
+
+app/javascript/channels/room_channel.jsを修正しても挙動が全く変わらない。このファイル自体を削除してもチャット機能でメッセージが送信できてしまう。
+本来ならばこのファイルに記載されているDOMContentLoadedがブラウザの挙動で発火してroom_channel.rbのspeakアクションに進むようになっている。
+
+
+ 原因
+
+
+r...]]></description><link>https://zenn.dev/tteaoocl/articles/f8981269e3a8b4</link><guid isPermaLink="true">https://zenn.dev/tteaoocl/articles/f8981269e3a8b4</guid><pubDate>Mon, 08 Jul 2024 16:34:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--TDLczHkn--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ActionCable%2520%252B%2520WebSocket%25E3%2581%25A7%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2597%25E3%2581%259F%25E3%2583%2581%25E3%2583%25A3%25E3%2583%2583%25E3%2583%2588%25E6%25A9%259F%25E8%2583%25BD%25E3%2581%25A7JavaScript%25E3%2581%25AE%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2581%258C%25E8%25AA%25AD%25E3%2581%25BF%25E8%25BE%25BC%25E3%2581%25BE%25E3%2582%258C%25E3%2581%25AA%25E3%2581%2584%25E5%2595%258F%25E9%25A1%258C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hasegawa%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSkYxQWtRaGVBVlJ2Tldac0dZQUVSbFAyX2dQUktEZlZiQUhTMUlIOEM2T3c9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hasegawa</dc:creator></item><item><title><![CDATA[React ドリル #1]]></title><description><![CDATA[Reactを学ぶ前に知っておくとよいJavaScriptの練習問題です。]]></description><link>https://zenn.dev/ryosuketter/books/12970f82316587</link><guid isPermaLink="true">https://zenn.dev/ryosuketter/books/12970f82316587</guid><pubDate>Mon, 08 Jul 2024 13:07:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6NW3QhYO--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci8xMWExZGRjNmVkLmpwZWc=%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>志水 亮介 (Ryosuke Shimizu)</dc:creator></item><item><title><![CDATA[TypeScript/Reactのコンテキスト初期値と専用の型]]></title><description><![CDATA[TypeScriptからReactを使う場合を前提とします。
+
+ Reactにおけるコンテキスト
+Reactには コンテキスト(Context) という仕組みがあり、コンポーネントの階層を飛び越えて深い階層にあるコンポーネントとも値をやり取りできます。コンテキストを使うと、コンポーネント階層のあちこちにprops経由で値を引き回す煩雑さを避けられます。
+コンテキストの解説としては、公式ドキュメントがとてもよくまとまっています。
+https://ja.react.dev/learn/passing-data-deeply-with-context
+コンテキストの使い方は、難しいことを考えな...]]></description><link>https://zenn.dev/saka1/articles/0a90470ba89a8a</link><guid isPermaLink="true">https://zenn.dev/saka1/articles/0a90470ba89a8a</guid><pubDate>Sun, 07 Jul 2024 18:29:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--I2X00jyq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%252FReact%25E3%2581%25AE%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2586%25E3%2582%25AD%25E3%2582%25B9%25E3%2583%2588%25E5%2588%259D%25E6%259C%259F%25E5%2580%25A4%25E3%2581%25A8%25E5%25B0%2582%25E7%2594%25A8%25E3%2581%25AE%25E5%259E%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:saka1%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc0OGU0Njk0ZTMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>saka1</dc:creator></item><item><title><![CDATA[cluster アイテム持ったらプレイヤーについてくるサンプル [ベータ機能]]]></title><description><![CDATA[アイテム持ったら プレイヤーについてくる サンプル
+
+ サンプルワールド
+アイテム持ったらプレイヤーについてくる サンプル
+https://cluster.mu/w/58932bdb-02cb-487f-aa78-3f6e25a79014
+
+ 使うコンポーネント や メソッド
+Creator Kit
+
+Scriptable Item
+Movable Item
+
+ClusterScript
+
+onGrab
+addForceAt (Beta)
+onReceive
+
+ItemHandle
+
+send
+
+
+ ベータを有効にする
+
+addForceAt (Beta) を利用するので、ベータ機能を有...]]></description><link>https://zenn.dev/t_furu/articles/19aeb79bfc7f17</link><guid isPermaLink="true">https://zenn.dev/t_furu/articles/19aeb79bfc7f17</guid><pubDate>Sun, 07 Jul 2024 12:16:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--HFeaewoe--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:cluster%2520%25E3%2582%25A2%25E3%2582%25A4%25E3%2583%2586%25E3%2583%25A0%25E6%258C%2581%25E3%2581%25A3%25E3%2581%259F%25E3%2582%2589%25E3%2583%2597%25E3%2583%25AC%25E3%2582%25A4%25E3%2583%25A4%25E3%2583%25BC%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E3%2581%258F%25E3%2582%258B%25E3%2582%25B5%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AB%2520%255B%25E3%2583%2599%25E3%2583%25BC%25E3%2582%25BF%25E6%25A9%259F%25E8%2583%25BD%255D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:t_furu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2k4WVd1dV9BbEROMFg0RW10NmFhbDc5ZjlENWg1S0RfeXE2ejFGamc9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>t_furu</dc:creator></item><item><title><![CDATA[Kindleのハイライトを一括で消すスクリプトを作った]]></title><description><![CDATA[
+ 背景
+https://read.amazon.co.jp/notebook
+で自身のKindleのメモとハイライトを確認できるのですが、ハイライトを一括で消すような機能は見当たらず、一つ一つポチポチ削除していく必要がありそうでした。
+あまりに面倒なので一括でKindleハイライトを消すためのスクリプトを書いてみました。
+
+ 手順
+https://read.amazon.co.jp/notebook
+でハイライトを一括削除したい本を指定した状態で、
+
+
+.a-popover-triggerを持つ全てのDOM要素を取得する
+
+
+各トリガー要素に対して、以下の操作を順番に実行する：
+
+トリ...]]></description><link>https://zenn.dev/danimal141/articles/1a6ea2373cdee2</link><guid isPermaLink="true">https://zenn.dev/danimal141/articles/1a6ea2373cdee2</guid><pubDate>Sun, 07 Jul 2024 10:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5eKP4ZsX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Kindle%25E3%2581%25AE%25E3%2583%258F%25E3%2582%25A4%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2588%25E3%2582%2592%25E4%25B8%2580%25E6%258B%25AC%25E3%2581%25A7%25E6%25B6%2588%25E3%2581%2599%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2583%2588%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:danimal141%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVlMzc0YjE0N2UuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>danimal141</dc:creator></item><item><title><![CDATA[Supabaseで多対多を取得する]]></title><description><![CDATA[今回はSupabaseで多対多のテーブルを取得する方法を紹介します。
+!
+JavaScript libraryを使用しています。バージョンは ^2.42.7 になります。
+
+
+ ER図
+今回は投稿記事のテーブルposts、タグテーブルtags、中間テーブルposts_tagsを作成している前提で進めます。
+※投稿でタグは任意であるため、0ないし多数になる想定です。
+投稿に関連するタグを取得するためにはどのような記述ができるでしょうか。
+
+ 中間テーブルを明示して取得
+posts_tagsをそのまま明示的に記述すると取得できます。
+しかし、posts_tagsを挟むことでプロパティの扱いが...]]></description><link>https://zenn.dev/k_log24/articles/380a2047a3bdee</link><guid isPermaLink="true">https://zenn.dev/k_log24/articles/380a2047a3bdee</guid><pubDate>Sun, 07 Jul 2024 06:00:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--RCZwIBtp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Supabase%25E3%2581%25A7%25E5%25A4%259A%25E5%25AF%25BE%25E5%25A4%259A%25E3%2582%2592%25E5%258F%2596%25E5%25BE%2597%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kohei.com%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FhYTBhMmFjNTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kohei.com</dc:creator></item><item><title><![CDATA[JSX で map関数を使うときに return を省略できる条件]]></title><description><![CDATA[
+ はじめに
+Javascript のmap関数で関数内のコールバック関数を書く際に、return を省略できるケースについて、理解が曖昧でしたので調べてみました。
+
+ 本題
+アロー関数の省略形として次の挙動については学習済みでした。
+// 1行の場合、returnと{}を省略可能
+todos.map((todo) =&gt; todo.id === id )
+// 引数が1つの場合、returnと () を省略可能
+todos.map(todo =&gt; todo.id ===id )
+
+一方で、React でJSX内に書くケースで考えてみます。
+function TodoPage(...]]></description><link>https://zenn.dev/surume3/articles/51cc2e88661209</link><guid isPermaLink="true">https://zenn.dev/surume3/articles/51cc2e88661209</guid><pubDate>Sun, 07 Jul 2024 05:00:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4PLWaYLp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JSX%2520%25E3%2581%25A7%2520map%25E9%2596%25A2%25E6%2595%25B0%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%25E3%2581%25A8%25E3%2581%258D%25E3%2581%25AB%2520return%2520%25E3%2582%2592%25E7%259C%2581%25E7%2595%25A5%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258B%25E6%259D%25A1%25E4%25BB%25B6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Syumai3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI4MzZlZGI2OWIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Syumai3</dc:creator></item><item><title><![CDATA[jsでオブジェクトを比較する]]></title><description><![CDATA[ふと、オブジェクトを比較した時に、同じはずなのに違うと言われたのでその内容を改めて確認してみた。
+今回何をしていたかというと、元々Dateオブジェクトを利用している箇所を改めて、dayjsに置き換えるというタスクに取り掛かる時にデグレが発生していないかを担保する必要があった。
+その際に前のdateオブジェクトで作成したものと今回利用するdayjs.toDateしたオブジェクトを単純に===で比較すればいいやと思ってそうしてみるとうまく行かない。。
+
+、=== 演算子を使用して日付オブジェクトを比較していることが問題です。JavaScript では、オブジェクト（Date オブジェクトを含...]]></description><link>https://zenn.dev/yukiyuki1126/articles/0eac5c00088099</link><guid isPermaLink="true">https://zenn.dev/yukiyuki1126/articles/0eac5c00088099</guid><pubDate>Sat, 06 Jul 2024 12:27:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Wu6ntHFH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:js%25E3%2581%25A7%25E3%2582%25AA%25E3%2583%2596%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E3%2582%2592%25E6%25AF%2594%25E8%25BC%2583%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yukiyuki1126%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFUWEFKeFhfcjVVM3JqUjJ0WHRwTndZM20wM2J0ejdCSXc0dGcxMUFOcXc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yukiyuki1126</dc:creator></item><item><title><![CDATA[【Next.js】メモ]]></title><description><![CDATA[
+ Shell
+# ----&lt; 作成 &gt;----
+# "https://ja.next-community-docs.dev/docs/app-router/api-reference/create-next-app"
+
+## pt.1 デフォルト (非対話：オプション指定)（"your-project-name"は適宜変更する）
+npx create-next-app@latest your-project-name \
+--ts --tailwind --eslint --src-dir --app --import-alias '@/*'
+
+## pt.2 対話的（"y...]]></description><link>https://zenn.dev/blc/articles/dbfff5bb88d99d</link><guid isPermaLink="true">https://zenn.dev/blc/articles/dbfff5bb88d99d</guid><pubDate>Sat, 06 Jul 2024 11:16:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Q7cZNkss--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:%25E3%2580%2590Next.js%25E3%2580%2591%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yota%2520Suzuki%2520%252F%2520BLC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS3JJQkRZakpBMlJsc2JzUWtCRDhXak9zOGc1cnpoUk5hSXlMcDJpMTkzTk5NamZjaz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yota Suzuki / BLC</dc:creator></item><item><title><![CDATA[Reactでオブジェクト指向やってみる #状態管理ライブラリ一切不要]]></title><description><![CDATA[
+ オブジェクト指向を取り入れると
+
+
+『可読性』『拡張性』『汎用性(=ひいては保守性)』 の三大柱(自称)が担保され、現場でドヤれる
+
+メソッド名やメンバ変数名が1~2単語で済む #ポリモーフィズム
+
+
+主語.動詞(補語 | 目的語) S+V+C、S+V+O の形になる
+
+例1: $(A).appendTo(B)
+
+例2: comment.createdAt: Date
+
+例3: comment.createdBy: User
+
+例4: comment.getCreatedBy(): User
+
+例5: user.medias[n].comments.create({ title, b...]]></description><link>https://zenn.dev/llc_starhacks/articles/929e58b503d6ce</link><guid isPermaLink="true">https://zenn.dev/llc_starhacks/articles/929e58b503d6ce</guid><pubDate>Sat, 06 Jul 2024 09:23:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--RU0LEX7c--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%25E3%2581%25A7%25E3%2582%25AA%25E3%2583%2596%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E6%258C%2587%25E5%2590%2591%25E3%2582%2584%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2520%2523%25E7%258A%25B6%25E6%2585%258B%25E7%25AE%25A1%25E7%2590%2586%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%25E4%25B8%2580%25E5%2588%2587%25E4%25B8%258D%25E8%25A6%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:llc_starhacks%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY4M2QxODAxZjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>llc_starhacks</dc:creator></item><item><title><![CDATA[【JavaScript】defer属性（メモ）]]></title><description><![CDATA[スクール時代からあまり触れてこなかったJavaScript。
+基本的なことから学び吸収するための個人メモです。
+
+ defer属性とは
+defer属性はHTMLの&lt;script&gt;タグに使用され、スクリプトの実行をページの読み込みと表示が完了した後に遅らせることができる属性です。
+簡単にいうと1つの処理の終了を待たずに次の処理を行う非同期化で、Webページの読み込みを速くすることができます。
+
+ defer属性の仕組み
+
+ &lt;head&gt;タグ内でJavaScriptファイルを読み込ませる場合
+通常の流れとしては、HTMLのコードを上から下へ順番に解析する中で、&lt;...]]></description><link>https://zenn.dev/sudoukky/articles/65268af8ff5c51</link><guid isPermaLink="true">https://zenn.dev/sudoukky/articles/65268af8ff5c51</guid><pubDate>Sat, 06 Jul 2024 01:43:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Vxyom5z_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590JavaScript%25E3%2580%2591defer%25E5%25B1%259E%25E6%2580%25A7%25EF%25BC%2588%25E3%2583%25A1%25E3%2583%25A2%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A9%25E3%2581%2585%25E3%2583%25BC%25E3%2581%2599%25E3%2583%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhlOTZlN2FjZGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>どぅーすー</dc:creator></item><item><title><![CDATA[【Ruby on Rails】marked.jsを使用して、リアルプレビュー画面を実装する]]></title><description><![CDATA[
+ はじめに
+今回は、marked.jsを使用しリアルプレビュー画面を実装しましたので、こちら備忘録として書き留めたいと思います。マークダウン記法での出力は、GitHubのstar数/コードのわかりやすさ/マークダウン出力の対応の広さから、gem 'kramdown'とgem 'kramdown-parser-gfm'を使用しています。
+Google検索で「rails プレビュー実装」と検索した中で、こちらの記事が大変わかりやすかったので、こちら参考にしながら実装を進めました。
+（今回、マークダウン記法出力の実装方法は割愛させていただきます。）
+完成イメージは下記となります。
+
+
+ 実装...]]></description><link>https://zenn.dev/s17w09/articles/4ec10c492b64db</link><guid isPermaLink="true">https://zenn.dev/s17w09/articles/4ec10c492b64db</guid><pubDate>Fri, 05 Jul 2024 09:34:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--A1sXDihH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Ruby%2520on%2520Rails%25E3%2580%2591marked.js%25E3%2582%2592%25E4%25BD%25BF%25E7%2594%25A8%25E3%2581%2597%25E3%2581%25A6%25E3%2580%2581%25E3%2583%25AA%25E3%2582%25A2%25E3%2583%25AB%25E3%2583%2597%25E3%2583%25AC%25E3%2583%2593%25E3%2583%25A5%25E3%2583%25BC%25E7%2594%25BB%25E9%259D%25A2%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:asay%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhiNGY1Y2Q0NTUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>asay</dc:creator></item><item><title><![CDATA[自身で作成した ESLint Config をスナップショットテストする]]></title><description><![CDATA[
+ これはなに
+作成した ESLint Config が期待値通りかどうかをテストする方法についてまとめたものです。
+ESLint は非常に多くのルールを提供しており、これにプラグインも加えるとその数は膨大なものになります。全てのルール設定を自身で記述するには多大なコストを要するため、各種プラグインが提供する configs （≒ プリセット）を取り入れつつ、必要に応じてルール設定を追加するのが一般的です。さらに特定のファイル形式やディレクトリー配下に限定して異なる設定を適用する場合もあるでしょう。こうなると設定の全体像が極めて複雑となり、期待値通りになっているかを目視で確認するのは非常...]]></description><link>https://zenn.dev/wakamsha/articles/test-eslint-config</link><guid isPermaLink="true">https://zenn.dev/wakamsha/articles/test-eslint-config</guid><pubDate>Fri, 05 Jul 2024 01:46:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Qf8VzH4U--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%2587%25AA%25E8%25BA%25AB%25E3%2581%25A7%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2597%25E3%2581%259F%2520ESLint%2520Config%2520%25E3%2582%2592%25E3%2582%25B9%25E3%2583%258A%25E3%2583%2583%25E3%2583%2597%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%2583%25E3%2583%2588%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:wakamsha%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2psYURiOW50NGN1UTUweE54dmxHcW50Rkxsbkg1VThSWUFZOUtBakE9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>wakamsha</dc:creator></item><item><title><![CDATA[JavaScript入門]]></title><description><![CDATA[
+ はじめに
+
+このJavaScript入門はエンジニア向けではなく、社内の新卒マーケターや新卒データアナリスト向けに最低限身に着けてほしいJavaScriptの知識に絞ってまとめています
+エンジニアの観点だと物足りない情報も多々あると思いますのでご留意ください
+HTML/JS/CSSは「実際に触ってみる」と覚えが早いと思うので後述のjsFiddleなどのサービスを活用しながら実際に手を動かしながらこの記事を読み進めることをお勧めします。
+
+
+ JavaScriptとは
+JavaScriptとはブラウザを「動かす」ためのプログラム言語です。Web上の処理の動きを行うことができます。
+《例...]]></description><link>https://zenn.dev/jujubkitakd/articles/5b69939aea7b63</link><guid isPermaLink="true">https://zenn.dev/jujubkitakd/articles/5b69939aea7b63</guid><pubDate>Thu, 04 Jul 2024 12:53:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2ETSt1zE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_76:JavaScript%25E5%2585%25A5%25E9%2596%2580%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2584%25E3%2581%2599%25E3%2581%25B5%25E3%2581%258F%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSlh1aXdvZlR4d3NMOWZvUVJBekVCMGxxLURyT0ZmVTBpSi1fd2s1SHM1dUVrWmlKMF92QT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>やすふく</dc:creator></item><item><title><![CDATA[【cluster】CICrafterとかで使いやすいスクリプト置き場]]></title><description><![CDATA[Unityを使わず、動く床アイテムを作成
+の記事みたいな感じで、CICrafterで使えるスクリプトをただポンポン置いていきます。
+（別にCICrafterでなくても、普通にクラフトアイテムとかで使えますが）
+
+ 01くるくる回転
+
+SubNodeを使う必要があります（SubNodeの入れ方は上記記事参照）。
+hayasaとjikuは変更可能。
+const froce = 30;
+const hayasa = 72.0;
+const jiku = new Vector3(0.0, 1.0, 0.0);
+
+const node = $.subNode("SubNode000");
+
+$.o...]]></description><link>https://zenn.dev/vins/articles/21a1d94ed4b746</link><guid isPermaLink="true">https://zenn.dev/vins/articles/21a1d94ed4b746</guid><pubDate>Thu, 04 Jul 2024 09:30:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--mUodUSAd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590cluster%25E3%2580%2591CICrafter%25E3%2581%25A8%25E3%2581%258B%25E3%2581%25A7%25E4%25BD%25BF%25E3%2581%2584%25E3%2582%2584%25E3%2581%2599%25E3%2581%2584%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2583%2588%25E7%25BD%25AE%25E3%2581%258D%25E5%25A0%25B4%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:vins%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2c0ZERlaWVTamtQcDFmTDYwS1FhTlpYMkpMeTJOOGtfeWRha1F6PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>vins</dc:creator></item><item><title><![CDATA[vue.jsでYouTubeIFramePlayerAPIを使うならVueYoutubeがおすすめ]]></title><description><![CDATA[
+ YIPA（YouTubeIFramePlayerAPI）の使用目的
+複数の動画を読み込み、それぞれに対して用意したボタンから音量操作・再生・停止を行いたい。
+
+ 開発環境
+Vue3のComposition API形式です。
+  "dependencies": {
+    "@vue-youtube/component": "^0.0.6",
+    "@vue-youtube/core": "^0.0.6",
+    "pixi.js": "^8.1.1",
+    "vue": "^3.4.21",
+    "vue-router": "^4.3.0"
+  },
+  "devDep...]]></description><link>https://zenn.dev/210neon/articles/aa294c7ef8f71c</link><guid isPermaLink="true">https://zenn.dev/210neon/articles/aa294c7ef8f71c</guid><pubDate>Wed, 03 Jul 2024 17:54:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4gqPBQhg--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:vue.js%25E3%2581%25A7YouTubeIFramePlayerAPI%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%25E3%2581%25AA%25E3%2582%2589VueYoutube%25E3%2581%258C%25E3%2581%258A%25E3%2581%2599%25E3%2581%2599%25E3%2582%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:NettoNeon%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJlNGZhNmYxMjQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>NettoNeon</dc:creator></item></channel></rss>
