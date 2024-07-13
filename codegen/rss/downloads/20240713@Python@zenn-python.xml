@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Sat, 13 Jul 2024 03:00:33 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Assistants.create() got an unexpected keyword argument 'file_ids'の対処方法]]></title><description><![CDATA[
+ 前提
+
+python:3.10.x
+openai:1.35.13
+
+
+ 事象
+以下のDocsを参考にAssitant API を実行しようとした。
+https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/code-interpreter?tabs=python
+
+assistant.py
+import time
+import json
+from openai import AzureOpenAI
+
+client = AzureOpenAI(
+    api_key= "&lt;key&gt;",
+    ap...]]></description><link>https://zenn.dev/headwaters/articles/59da027d895888</link><guid isPermaLink="true">https://zenn.dev/headwaters/articles/59da027d895888</guid><pubDate>Sat, 13 Jul 2024 01:42:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--DZTU7CWC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Assistants.create%2528%2529%2520got%2520an%2520unexpected%2520keyword%2520argument%2520%2527f...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:takekawa%2520tomoki%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZjNGExY2UxMDYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2598%25E3%2583%2583%25E3%2583%2589%25E3%2582%25A6%25E3%2582%25A9%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%25BC%25E3%2582%25B9%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdmODg5YTRhYzguanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takekawa tomoki</dc:creator></item><item><title><![CDATA[Pythonでプログラミングの始め方]]></title><description><![CDATA[
+ 1. はじめに
+この記事では、プログラミング初心者向けにPythonの始め方について説明します。Pythonはシンプルで読みやすいコードを書くことができ、初心者にも優しいプログラミング言語です。
+
+ 2. 準備
+
+ 2.1 必要なツール
+Pythonでプログラミングを始めるためには以下のツールを準備していきます
+
+Python
+テキストエディタ(VSCode）
+pip
+
+
+ 2.2 Pythonのインストール
+作成したプログラミングを実行するのにpythonが必要になります。
+Pythonの公式サイトから最新バージョンをダウンロードし、インストールします。
+
+
+Pythonのダウンロ...]]></description><link>https://zenn.dev/nuinui/articles/d8289762f404c2</link><guid isPermaLink="true">https://zenn.dev/nuinui/articles/d8289762f404c2</guid><pubDate>Fri, 12 Jul 2024 21:57:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0CREfu7a--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A7%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%259F%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%25AE%25E5%25A7%258B%25E3%2582%2581%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AC%25E3%2583%25BC%25E3%2581%2584%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSno2cFRIRmpDc184N0NyTTNyYV9iZnd6LVVLaXAxRHMxZWdFdHl1b0VQY1JCbUVDcz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ぬーい</dc:creator></item><item><title><![CDATA[PySimpleGUI 入門]]></title><description><![CDATA[
+ PySimpleGUI 入門 (1)
+PySimpleGUI は Python で GUI アプリを作るときに便利なライブラリです。
+PySimpleGUI の基本的な使い方については、PySimpleGUI 入門 (PDF) という網羅的で優れた入門記事があるのでそれを参考にして下さい。
+
+ 有償化の話
+PySimpleGUI は version 5 から有償化されたようですが、ホビーユースで個人で使う分には無料で使えるようです。（登録ページから登録してみたら、なんか１年有効なライセンスキーが入手できました。画面表示と、メール送信があります。）
+$ pip3 install --u...]]></description><link>https://zenn.dev/tmiya/articles/87157cbd585cb7</link><guid isPermaLink="true">https://zenn.dev/tmiya/articles/87157cbd585cb7</guid><pubDate>Fri, 12 Jul 2024 12:08:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--F81t23Oi--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:PySimpleGUI%2520%25E5%2585%25A5%25E9%2596%2580%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tmiya%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTDlBbDdyckxtZUtiS1pEcEpCLVhTSkliVWt6c0ZKaXJZcnJ6QlJCYUE3MUhLS1diTT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tmiya</dc:creator></item><item><title><![CDATA[Rye × uvでPython環境と機械学習環境を整える]]></title><description><![CDATA[チューリングのE2E自動運転チームの岩政(@colum2131)です。
+最近、チーム内でPythonを使った開発はRyeとuvを使うことが多くなり、特に機械学習環境もRyeとuvで問題なく開発できるようになりました。社内でのオンボーディング資料としてRyeとuvの操作を整備しようと思い、このテックブログで紹介します。
+
+ 1. Rye × uvとは？
+RyeはPythonの包括的なプロジェクトおよびパッケージ管理のツールです。これまでもPoetryなど管理ツールはありましたが、pyenvなどPythonのバージョン管理ツールが必要でした。Ryeは、Pythonのバージョン管理からパッケー...]]></description><link>https://zenn.dev/turing_motors/articles/0f1a764d14f581</link><guid isPermaLink="true">https://zenn.dev/turing_motors/articles/0f1a764d14f581</guid><pubDate>Fri, 12 Jul 2024 09:04:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3lF7GcpN--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rye%2520%25C3%2597%2520uv%25E3%2581%25A7Python%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25A8%25E6%25A9%259F%25E6%25A2%25B0%25E5%25AD%25A6%25E7%25BF%2592%25E7%2592%25B0%25E5%25A2%2583%25E3%2582%2592%25E6%2595%25B4%25E3%2581%2588%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:colum2131%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhNjYyMDc4ZDMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Tech%2520Blog%2520-%2520Turing%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RhZDZiMjhmMmEuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>colum2131</dc:creator></item><item><title><![CDATA[oktaのパスワードとMFAリセットするSlackBOTを作った]]></title><description><![CDATA[
+ 概要
+本記事の内容は、oktaが日々従業員に使われるようにしていった結果発生した
+🤵‍♂️「パスワードを忘れてしまったのでリセットして欲しい」
+🤵‍♀️ 「スマホを機種変更したらログインできなくなった」
+といった情シスへの問い合わせ頻度No.1(※)の事象に対して、SlackBOTを使って対処してみた話になります
+また、作ったのはかなり前なのでSlack New Platformではなく自分でデプロイするタイプのSlackBOTになっています
+※No.1は適当に書いてますが、よく聞く話ではありますよね😉
+
+ 概要図
+
+
+ 何で作ったか
+
+言語
+
+Python 3.10
+
+
+使ったライ...]]></description><link>https://zenn.dev/ryutag/articles/2a0800c5582869</link><guid isPermaLink="true">https://zenn.dev/ryutag/articles/2a0800c5582869</guid><pubDate>Fri, 12 Jul 2024 08:06:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9XQX8mLN--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:okta%25E3%2581%25AE%25E3%2583%2591%25E3%2582%25B9%25E3%2583%25AF%25E3%2583%25BC%25E3%2583%2589%25E3%2581%25A8MFA%25E3%2583%25AA%25E3%2582%25BB%25E3%2583%2583%25E3%2583%2588%25E3%2581%2599%25E3%2582%258BSlackBOT%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ryuta%2520goto%25E3%2580%2590dely%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2580%2591%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y3YzUzZjlhZGIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ryuta goto【dely株式会社】</dc:creator></item><item><title><![CDATA[Posit Connect Cloud を使ってみる]]></title><description><![CDATA[Posit Connect Cloud というサービスのアルファ版が公開されていたのでちょっとだけ触ってみました。
+
+ Posit Connect Cloud とは？
+データ関連のアプリケーションやドキュメントを公開できるプラットフォームだ、とのことです。現時点でデプロイできるのは以下の7種類のようです。
+
+Quarto
+Shiny
+R Markdown
+Streamlit
+Jupyter Notebook
+Dash
+Bokeh
+
+たぶん Shinyapps.io みたいに、正式リリースされたら、無料枠はありつつ一定以上使うならお金払ってね、って感じになるのかな？という気がしています。今...]]></description><link>https://zenn.dev/yutannihilation/articles/47a7dbf2476fe9</link><guid isPermaLink="true">https://zenn.dev/yutannihilation/articles/47a7dbf2476fe9</guid><pubDate>Fri, 12 Jul 2024 05:57:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dTIKnzOe--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Posit%2520Connect%2520Cloud%2520%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yutannihilation%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2cxWXFZLWt6LTVmNFhSNVdXbjFNOVBpaWxaMkdYNHkwNjdtZy1VOEE9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yutannihilation</dc:creator></item><item><title><![CDATA[旧システムvenvで作成された仮想環境中のプロジェクトをpyenvで動作させる手順]]></title><description><![CDATA[
+ 旧システムvenvで作成された仮想環境中のプロジェクトをpyenvで動作させる手順
+
+ はじめに
+少し前にシステムをUbuntu 20.04からUbuntu 22.04へ移行しました。
+新システムに移行にあたり、Pythonのバージョンが3.8から3.10へ変化しました。
+このとき旧システムのpython仮想環境(venv)で作成されたプロフェクトフォルダをアクティベートしようとすると、新システムのPythonが起動されてしまいます。
+ROOT/bin/python3がシステムPythonへのシンボリックリンクになっているからです。（ROOTはプロジェクトのルートパス）
+旧システムの...]]></description><link>https://zenn.dev/ykesamaru/articles/3afd2686ed998c</link><guid isPermaLink="true">https://zenn.dev/ykesamaru/articles/3afd2686ed998c</guid><pubDate>Fri, 12 Jul 2024 03:08:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--I_n5A31E--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%2597%25A7%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0venv%25E3%2581%25A7%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2595%25E3%2582%258C%25E3%2581%259F%25E4%25BB%25AE%25E6%2583%25B3%25E7%2592%25B0%25E5%25A2%2583%25E4%25B8%25AD%25E3%2581%25AE%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E3%2582%2592pyenv%25E3%2581%25A7%25E5%258B%2595%25E4%25BD%259C%25E3%2581%2595%25E3%2581%259B%25E3%2582%258B%25E6%2589%258B%25E9%25A0%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yKesamaru%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY4MmM3NDMxNjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yKesamaru</dc:creator></item><item><title><![CDATA[Git コマンドを自力で再現する]]></title><description><![CDATA[
+ はじめに
+こんにちは！株式会社 BTM の坂本です！
+私も含め、エンジニアの皆さんなら毎日使っている技術がありますよね？
+そう、Git です。
+毎日使っている Git くんが何をしているか知っていますか？
+毎日 Git くんに感謝していますか？
+バージョン管理してくれるのが当たり前だと思っていませんか？
+今回は Git の内部構造について調査しました。
+Git くんが機嫌を損ねてコマンドが実行できなくなった場合に備えて対処法を学びましょう。
+今回の環境は以下になります。
+
+Git 2.25.1
+Python 3.11.5
+
+!
+本記事内で.git内のファイル直接変更していますが、実際...]]></description><link>https://zenn.dev/b_tm/articles/36222bce247bec</link><guid isPermaLink="true">https://zenn.dev/b_tm/articles/36222bce247bec</guid><pubDate>Fri, 12 Jul 2024 00:49:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7mjGxCqZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Git%2520%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2582%2592%25E8%2587%25AA%25E5%258A%259B%25E3%2581%25A7%25E5%2586%258D%25E7%258F%25BE%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:t.sakamoto%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLmRldi9pbWFnZXMvZGVmYXVsdC1wdWJsaWNhdGlvbi1hdmF0YXIucG5n%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BEBTM%2520%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZlZDViNWJjNTEuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>t.sakamoto</dc:creator></item><item><title><![CDATA[【FastAPI】リクエストとレスポンスのログを出力する]]></title><description><![CDATA[Python の logger モジュールを使ってリクエスト情報とレスポンス情報をログに出力する方法をメモとして残しておく
+APIRoute クラスを使うことで実現できるらしいので調べてみる
+Custom Request and APIRoute class - FastAPI
+
+ユースケース
+・すべてのリクエスト本文を自動的にログに記録します。
+
+
+ APIRoute クラスとは？
+APIRoute は、APIRouter のコンストラクタの route_class に指定できるもの Docs
+これのクラスを継承したクラスを使うことでリクエスト処理の前後に処理を挟むことができる
+Cus...]]></description><link>https://zenn.dev/tamago324/articles/2024-07-12-fastapi-request-response-logging</link><guid isPermaLink="true">https://zenn.dev/tamago324/articles/2024-07-12-fastapi-request-response-logging</guid><pubDate>Thu, 11 Jul 2024 23:44:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--KIM564W---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590FastAPI%25E3%2580%2591%25E3%2583%25AA%25E3%2582%25AF%25E3%2582%25A8%25E3%2582%25B9%25E3%2583%2588%25E3%2581%25A8%25E3%2583%25AC%25E3%2582%25B9%25E3%2583%259D%25E3%2583%25B3%25E3%2582%25B9%25E3%2581%25AE%25E3%2583%25AD%25E3%2582%25B0%25E3%2582%2592%25E5%2587%25BA%25E5%258A%259B%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259F%25E3%2581%25BE%25E3%2581%259F%25E3%2581%25BE%25E3%2581%2594%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MxMGVlMzU5YTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>たまたまご</dc:creator></item><item><title><![CDATA[paizaで学習しようっPython編（最初の一歩～Dランク獲得）]]></title><description><![CDATA[https://paiza.jp/works/mondai
+
+ 目的
+ここにある問題の内容は基本誰もができるので記事が存在しない。ならば作ってしまえというのが今回の主旨。
+記事を作ることで、悩んでいる人が解決に向かうことを祈って。
+
+ 対象
+Pythonの基礎くらいはできる人。でも応用は無理な人。
+持っている技術が『最初の一歩』から『Dランク獲得』までの人。
+
+ 読まなくてもいいあらすじ
+「せっかくpaizaのアカウント作ったから、なにかしら解いてみよう！」
+そう言って早二年。そんなことよりGodotでゲーム開発じゃRustの研究じゃ子供向けの問題じゃと面倒くさくなり忘れ去られる。
+しか...]]></description><link>https://zenn.dev/yuhi_ili/articles/c8c6d08c882efb</link><guid isPermaLink="true">https://zenn.dev/yuhi_ili/articles/c8c6d08c882efb</guid><pubDate>Thu, 11 Jul 2024 22:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--y5xds8jW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:paiza%25E3%2581%25A7%25E5%25AD%25A6%25E7%25BF%2592%25E3%2581%2597%25E3%2582%2588%25E3%2581%2586%25E3%2581%25A3Python%25E7%25B7%25A8%25EF%25BC%2588%25E6%259C%2580%25E5%2588%259D%25E3%2581%25AE%25E4%25B8%2580%25E6%25AD%25A9%25EF%25BD%259ED%25E3%2583%25A9%25E3%2583%25B3%25E3%2582%25AF%25E7%258D%25B2%25E5%25BE%2597%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25A4%2595%25E6%2597%25A5%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2QzOTk2NzgwZTUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>夕日</dc:creator></item><item><title><![CDATA[【Python】Scapy で HTTP/2 フレームを解析する]]></title><description><![CDATA[Scapy はインタラクティブなパケット操作ライブラリである。pip では次のコマンドでインストールできる
+pip install scapy
+REPL を起動させて使ってみる
+&gt;&gt;&gt; from scapy.contrib.http2 import H2Frame, H2_CLIENT_CONNECTION_PREFACE
+&gt;&gt;&gt; H2Frame
+&lt;class 'scapy.contrib.http2.H2Frame'&gt;
+&gt;&gt;&gt; H2_CLIENT_CONNECTION_PREFACE
+b'PRI * HTTP/2.0\r...]]></description><link>https://zenn.dev/masakielastic/articles/8377eae42d4c7e</link><guid isPermaLink="true">https://zenn.dev/masakielastic/articles/8377eae42d4c7e</guid><pubDate>Thu, 11 Jul 2024 21:03:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_6mMfL92--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591Scapy%2520%25E3%2581%25A7%2520HTTP%252F2%2520%25E3%2583%2595%25E3%2583%25AC%25E3%2583%25BC%25E3%2583%25A0%25E3%2582%2592%25E8%25A7%25A3%25E6%259E%2590%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Masaki%2520Kagaya%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc3ODAxZTNiZTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Masaki Kagaya</dc:creator></item><item><title><![CDATA[GIS × Python Tutorial 5.3 ~ 空間検索の為の材料作成 MeshGrid編 ~]]></title><description><![CDATA[
+ はじめに
+
+この記事は「GIS × Python Tutorial」の関連記事です。
+前回の記事ではgeopandasの空間検索メソッドについて紹介しました。geopandas で空間検索を行う場合、例えばある市町村内にあるコンビニの位置を分析するとして、市町村内をいくつかのブロックに分けたり、あるいはグリッドやH3の様なポリゴンメッシュを使用したくなるかもしれません。今回はそんな空間検索で使用する材料作成に焦点をあてて紹介していきます。
+今回の記事を執筆する際に使用した Notebook と Conda 環境ファイルは GitHub に置いてありますので、実際に実行してみたい方はど...]]></description><link>https://zenn.dev/daidai_daitai/articles/ea2d1dfc06a184</link><guid isPermaLink="true">https://zenn.dev/daidai_daitai/articles/ea2d1dfc06a184</guid><pubDate>Thu, 11 Jul 2024 13:40:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--t6Jq0eWj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:GIS%2520%25C3%2597%2520Python%2520Tutorial%25205.3%2520%7E%2520%25E7%25A9%25BA%25E9%2596%2593%25E6%25A4%259C%25E7%25B4%25A2%25E3%2581%25AE%25E7%2582%25BA%25E3%2581%25AE%25E6%259D%2590%25E6%2596%2599%25E4%25BD%259C%25E6%2588%2590%2520MeshGrid%25E7%25B7%25A8%2520%7E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%25A9%2599%25E3%2580%2582%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUxtNXd1MjJMLWoxUDdDS1dHZWJjbmh0YUxmV3BGRGNSTnBDQnZZTGYxYUpqQT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>橙。</dc:creator></item><item><title><![CDATA[GIS × Python Tutorial 5.2 ~ geopandasでの空間検索メソッド ~]]></title><description><![CDATA[
+ はじめに
+
+この記事は「GIS × Python Tutorial」の関連記事です。
+今回はgeopandas.GeoDataFrameでの空間検索メソッドの使い方を解説します。このメソッドは shapely の geometry オブジェクトが使用されているので、shapely のドキュメントを見た方が分かりやすいかもしれません。GeoDataFrameの基本がわからない方は前回の記事もどうぞ。
+この記事を作成する際に使用したNotebookやConda環境設定ファイルはGitHubで公開しています。
+https://github.com/shingo405nagano/Write...]]></description><link>https://zenn.dev/daidai_daitai/articles/925b540e587d33</link><guid isPermaLink="true">https://zenn.dev/daidai_daitai/articles/925b540e587d33</guid><pubDate>Thu, 11 Jul 2024 13:14:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vPxQff8---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:GIS%2520%25C3%2597%2520Python%2520Tutorial%25205.2%2520%7E%2520geopandas%25E3%2581%25A7%25E3%2581%25AE%25E7%25A9%25BA%25E9%2596%2593%25E6%25A4%259C%25E7%25B4%25A2%25E3%2583%25A1%25E3%2582%25BD%25E3%2583%2583%25E3%2583%2589%2520%7E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%25A9%2599%25E3%2580%2582%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUxtNXd1MjJMLWoxUDdDS1dHZWJjbmh0YUxmV3BGRGNSTnBDQnZZTGYxYUpqQT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>橙。</dc:creator></item><item><title><![CDATA[GIS × Python Tutorial 5.1 ~ geopandas ことはじめ GeoDataFrameの基本 ~]]></title><description><![CDATA[
+ はじめに
+
+この記事は「GIS × Python Tutorial」の関連記事です。
+今回はgeopandas.GeoDataFrameの基本について解説します。pythonを使用する方であればpandasを使用した事がある方が多いかと思いますので、分からない部分はgeopandasドキュメントを見て行けば躓かずに理解できるかと思います。またgeopandasのgeometryはshapelyのgeometryオブジェクトが入力されるので、個別のメソッドはshapelyの公式ドキュメント、あるいは前回の記事を参考にしてください。
+https://zenn.dev/daidai_dai...]]></description><link>https://zenn.dev/daidai_daitai/articles/20dd05b0c9aa5a</link><guid isPermaLink="true">https://zenn.dev/daidai_daitai/articles/20dd05b0c9aa5a</guid><pubDate>Thu, 11 Jul 2024 13:13:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--MkKi8fH4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:GIS%2520%25C3%2597%2520Python%2520Tutorial%25205.1%2520%7E%2520geopandas%2520%25E3%2581%2593%25E3%2581%25A8%25E3%2581%25AF%25E3%2581%2598%25E3%2582%2581%2520GeoDataFrame%25E3%2581%25AE...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%25A9%2599%25E3%2580%2582%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUxtNXd1MjJMLWoxUDdDS1dHZWJjbmh0YUxmV3BGRGNSTnBDQnZZTGYxYUpqQT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>橙。</dc:creator></item><item><title><![CDATA[GIS × Python Tutorial 4.3 ~ 時々使うその他のshapelyメソッド ~]]></title><description><![CDATA[
+ はじめに
+
+前回は shapely の Geometry が持つメソッドに関して解説しました。空間検索などのメソッドを紹介します。
+https://shapely.readthedocs.io/en/stable/index.html
+
+ cell 1
+import japanize_matplotlib
+from matplotlib import pyplot as plt
+import numpy as np
+import shapely
+from shapely.plotting import plot_line
+from shapely.plotting import pl...]]></description><link>https://zenn.dev/daidai_daitai/articles/68c3dc83d2dad1</link><guid isPermaLink="true">https://zenn.dev/daidai_daitai/articles/68c3dc83d2dad1</guid><pubDate>Thu, 11 Jul 2024 13:11:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--N4Uo-g77--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:GIS%2520%25C3%2597%2520Python%2520Tutorial%25204.3%2520%7E%2520%25E6%2599%2582%25E3%2580%2585%25E4%25BD%25BF%25E3%2581%2586%25E3%2581%259D%25E3%2581%25AE%25E4%25BB%2596%25E3%2581%25AEshapely%25E3%2583%25A1%25E3%2582%25BD%25E3%2583%2583%25E3%2583%2589%2520%7E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%25A9%2599%25E3%2580%2582%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUxtNXd1MjJMLWoxUDdDS1dHZWJjbmh0YUxmV3BGRGNSTnBDQnZZTGYxYUpqQT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>橙。</dc:creator></item><item><title><![CDATA[GIS × Python Tutorial 4.2 ~ shapely.geometry のメソッドあれこれ ~]]></title><description><![CDATA[
+ はじめに
+
+前回は shapely の Geometry について解説しました。今回は Geometry がもつメソッドの中からよく使うメソッドについて解説していきます。
+https://zenn.dev/daidai_daitai/articles/d0fc874ef21c20
+
+
+ 実行準備
+
+ cell 1
+import japanize_matplotlib
+from matplotlib import pyplot as plt
+import numpy as np
+import shapely
+from shapely.plotting import plot_line
+...]]></description><link>https://zenn.dev/daidai_daitai/articles/f48abfbd73c5b4</link><guid isPermaLink="true">https://zenn.dev/daidai_daitai/articles/f48abfbd73c5b4</guid><pubDate>Thu, 11 Jul 2024 13:10:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--otgjAEjf--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:GIS%2520%25C3%2597%2520Python%2520Tutorial%25204.2%2520%7E%2520shapely.geometry%2520%25E3%2581%25AE%25E3%2583%25A1%25E3%2582%25BD%25E3%2583%2583%25E3%2583%2589%25E3%2581%2582%25E3%2582%258C%25E3%2581%2593%25E3%2582%258C%2520%7E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%25A9%2599%25E3%2580%2582%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUxtNXd1MjJMLWoxUDdDS1dHZWJjbmh0YUxmV3BGRGNSTnBDQnZZTGYxYUpqQT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>橙。</dc:creator></item><item><title><![CDATA[GIS × Python Tutorial 4.1 ~ shapely ことはじめ Geoemtry の種類 ~]]></title><description><![CDATA[
+ はじめに
+
+この記事では python での shapely の使用方法についてを解説していきます。
+
+
+ shapely とは
+
+shapely は幾何学的オブジェクトを操作する python のパッケージです。shapely では面積や距離を計算したり、オブジェクト同士の空間的な関係を簡単に計算する事が出来ます。また、matplotlib を使用して各 Geometry オブジェクトを描画する為のメソッドも用意されています。
+
+
+ コードの実行
+
+ cell 1
+from matplotlib import pyplot as plt
+import numpy as np
+imp...]]></description><link>https://zenn.dev/daidai_daitai/articles/20381a644a59c4</link><guid isPermaLink="true">https://zenn.dev/daidai_daitai/articles/20381a644a59c4</guid><pubDate>Thu, 11 Jul 2024 13:03:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--llofFCDG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:GIS%2520%25C3%2597%2520Python%2520Tutorial%25204.1%2520%7E%2520shapely%2520%25E3%2581%2593%25E3%2581%25A8%25E3%2581%25AF%25E3%2581%2598%25E3%2582%2581%2520Geoemtry%2520%25E3%2581%25AE%25E7%25A8%25AE%25E9%25A1%259E%2520%7E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%25A9%2599%25E3%2580%2582%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUxtNXd1MjJMLWoxUDdDS1dHZWJjbmh0YUxmV3BGRGNSTnBDQnZZTGYxYUpqQT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>橙。</dc:creator></item><item><title><![CDATA[GIS × Python Tutorial 3.0 ~ pyproj ~]]></title><description><![CDATA[
+ はじめに
+
+この記事では python での pyproj の使用方法についてを解説していきます。
+
+ pyproj とは
+
+pyproj は地理空間の変換に使用されるライブラリで、このライブラリを扱う事で異なる座標系間での座標変換を行う事ができます。
+https://pyproj4.github.io/pyproj/stable/
+
+ 座標系とは
+
+地球は完全な球体ではありません。地球の形は「楕円体」であり、これを2次元上に投影する際に、経緯線網とよばれる経度と緯度の線を用いて平面に投影しています。
+
+ 地理座標系
+
+地理座標系の原点は地球の重心にあり、その重心からの角度で座標を表...]]></description><link>https://zenn.dev/daidai_daitai/articles/c8efb8f60e47b1</link><guid isPermaLink="true">https://zenn.dev/daidai_daitai/articles/c8efb8f60e47b1</guid><pubDate>Thu, 11 Jul 2024 13:00:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--kcbTu0j1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:GIS%2520%25C3%2597%2520Python%2520Tutorial%25203.0%2520%7E%2520pyproj%2520%7E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%25A9%2599%25E3%2580%2582%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUxtNXd1MjJMLWoxUDdDS1dHZWJjbmh0YUxmV3BGRGNSTnBDQnZZTGYxYUpqQT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>橙。</dc:creator></item><item><title><![CDATA[ZoteroのAPIとStreamlitを使ったアプリ開発]]></title><description><![CDATA[
+ 概要
+ZoteroのAPIとStreamlitを使ったアプリを試作しました。
+https://nakamura196-zotero.streamlit.app/
+
+本記事は、このアプリ開発におけるメモです。
+
+ Streamlit
+以下の記事がとても参考になりました。
+https://qiita.com/sypn/items/80962d84126be4092d3c
+
+ ZoteroのAPI
+ZoteroのAPIについて、以下で説明されています。
+https://www.zotero.org/support/dev/web_api/v3/start
+今回は上記のページで紹介されている...]]></description><link>https://zenn.dev/nakamura196/articles/4389eb6eb4e08a</link><guid isPermaLink="true">https://zenn.dev/nakamura196/articles/4389eb6eb4e08a</guid><pubDate>Thu, 11 Jul 2024 12:50:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--28zILa0H--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Zotero%25E3%2581%25AEAPI%25E3%2581%25A8Streamlit%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%259F%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E9%2596%258B%25E7%2599%25BA%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nakamura196%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pkd3BpX1gzTWIzV3VqTnVnV2tPTlJlU3VsNFNTN1BNMWlPQm9LRm5JPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nakamura196</dc:creator></item><item><title><![CDATA[DeprecationWarning: pkg_resources is deprecated as an API に対応する]]></title><description><![CDATA[
+ 背景
+Python のライブラリを実装している時にコード内でライブラリに含まれている画像データを参照したい時などに今まで pkg_resources.resource_filename を用いていました。
+import pkg_resources
+
+image_path = pkg_resources.resource_filename('my_package', 'data/image.png')
+
+with open(image_path, 'rb') as f:
+    image_data = f.read()
+しかしこのコードを実行時に以下のエラーが表示されます。
+Depr...]]></description><link>https://zenn.dev/cykinso/articles/b07d905b97931c</link><guid isPermaLink="true">https://zenn.dev/cykinso/articles/b07d905b97931c</guid><pubDate>Thu, 11 Jul 2024 07:50:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Yp1NDPGr--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:DeprecationWarning%253A%2520pkg_resources%2520is%2520deprecated%2520as%2520an%2520API...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:yamasaKit%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFmNTQzYzVhYjguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Cykinso%2527s%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg1ZDc4NDNmZDguanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yamasaKit</dc:creator></item></channel></rss>
