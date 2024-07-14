@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Sun, 14 Jul 2024 03:30:40 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[OAI-PMHリポジトリからPythonでレコードを全件取得する]]></title><description><![CDATA[OAI-PMHリポジトリからPythonでレコードを全件取得するスクリプトです。参考になりましたら幸いです。
+import requests
+from requests import Request
+import xml.etree.ElementTree as ET
+
+# エンドポイントの定義
+base_url = 'https://curation.library.t.u-tokyo.ac.jp/oai'
+
+# OAI-PMH リクエストの初回実行
+params = {
+    'verb': 'ListRecords',
+    'metadataPrefix': 'curatio...]]></description><link>https://zenn.dev/nakamura196/articles/1059ea46013c1f</link><guid isPermaLink="true">https://zenn.dev/nakamura196/articles/1059ea46013c1f</guid><pubDate>Sun, 14 Jul 2024 02:47:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--MWVtX6OJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:OAI-PMH%25E3%2583%25AA%25E3%2583%259D%25E3%2582%25B8%25E3%2583%2588%25E3%2583%25AA%25E3%2581%258B%25E3%2582%2589Python%25E3%2581%25A7%25E3%2583%25AC%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2582%2592%25E5%2585%25A8%25E4%25BB%25B6%25E5%258F%2596%25E5%25BE%2597%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nakamura196%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pkd3BpX1gzTWIzV3VqTnVnV2tPTlJlU3VsNFNTN1BNMWlPQm9LRm5JPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nakamura196</dc:creator></item><item><title><![CDATA[Pythonメモ]]></title><description><![CDATA[自分用のsnippetを集めたもの]]></description><link>https://zenn.dev/shimo_s3/books/abeb3bdf24371f</link><guid isPermaLink="true">https://zenn.dev/shimo_s3/books/abeb3bdf24371f</guid><pubDate>Sun, 14 Jul 2024 00:34:59 GMT</pubDate><dc:creator>shimo</dc:creator></item><item><title><![CDATA[【Python】asyncio と h2 で HTTP/2 サーバーをつくる]]></title><description><![CDATA[サンプルコード（asyncio-server.py）の asyncio に関する部分が古くなっていたので修正することになった。
+pip install h2
+import asyncio
+import io
+import json
+import ssl
+import collections
+from typing import List, Tuple
+
+from h2.config import H2Configuration
+from h2.connection import H2Connection
+from h2.events import (
+    ConnectionTerm...]]></description><link>https://zenn.dev/masakielastic/articles/81f8c83089284d</link><guid isPermaLink="true">https://zenn.dev/masakielastic/articles/81f8c83089284d</guid><pubDate>Sun, 14 Jul 2024 00:01:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_Tz1_SE7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591asyncio%2520%25E3%2581%25A8%2520h2%2520%25E3%2581%25A7%2520HTTP%252F2%2520%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2582%2592%25E3%2581%25A4%25E3%2581%258F%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Masaki%2520Kagaya%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc3ODAxZTNiZTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Masaki Kagaya</dc:creator></item><item><title><![CDATA[DrupalのREST APIを使って、複数のコンテンツを一括削除する]]></title><description><![CDATA[
+ 概要
+DrupalのREST APIを使って、複数のコンテンツを一括削除する機会がありましたので、備忘録です。
+
+ 参考
+REST APIを使用せずにコンテンツを一括削除する方法として、以下も参考にしてください。
+https://zenn.dev/nakamura196/articles/fe78f513919bba
+
+ 準備
+まず、HTTP Basic AuthenticationモジュールとJSON:APIモジュールを有効化します。
+さらに、REST resourcesにおいて、DELETEを有効化します。
+/admin/config/services/rest
+
+
+
+ 実行例
+...]]></description><link>https://zenn.dev/nakamura196/articles/22c23a78fb792a</link><guid isPermaLink="true">https://zenn.dev/nakamura196/articles/22c23a78fb792a</guid><pubDate>Sat, 13 Jul 2024 23:39:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fUjpluZG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Drupal%25E3%2581%25AEREST%2520API%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2580%2581%25E8%25A4%2587%25E6%2595%25B0%25E3%2581%25AE%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2586%25E3%2583%25B3%25E3%2583%2584%25E3%2582%2592%25E4%25B8%2580%25E6%258B%25AC%25E5%2589%258A%25E9%2599%25A4%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nakamura196%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pkd3BpX1gzTWIzV3VqTnVnV2tPTlJlU3VsNFNTN1BNMWlPQm9LRm5JPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nakamura196</dc:creator></item><item><title><![CDATA[DeepFillV2 (Inpaint) をONNX化して、量子化する]]></title><description><![CDATA[
+ 概要
+過去にSI業務にてふと消しゴムマジック的なものに関する要望をいただき、調査した内容
+結局、話は流れたが、その際、業務外で調べた、ONNX化や量子化周りの話が面白かったので、整理する
+(消しゴムマジック的なアプリは個人的に作成して、今年のどこかで公開したい)
+
+ 選定
+
+
+(元論文) Free-Form Image Inpainting with Gated Convolution
+
+
+DeepFillv2
+論文の著者のgithubリポジトリは https://github.com/JiahuiYu/generative_inpainting となる
+但し、tensorflow実...]]></description><link>https://zenn.dev/t_shi/articles/ba5d63e4c96442</link><guid isPermaLink="true">https://zenn.dev/t_shi/articles/ba5d63e4c96442</guid><pubDate>Sat, 13 Jul 2024 15:08:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--flrNyA3W--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:DeepFillV2%2520%2528Inpaint%2529%2520%25E3%2582%2592ONNX%25E5%258C%2596%25E3%2581%2597%25E3%2581%25A6%25E3%2580%2581%25E9%2587%258F%25E5%25AD%2590%25E5%258C%2596%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:t_shi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZlNmVlNjk1YWMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>t_shi</dc:creator></item><item><title><![CDATA[Azure Functions のデプロイテクノロジ]]></title><description><![CDATA[Azure Functions のデプロイテクノロジについて公開ドキュメントにまとまっていますが、実際に手を動かして触ってみようと思います。
+
+
+
+
+
+
+
+ Zip デプロイ
+
+ リモートビルド
+Azure Functions では、zip デプロイ後に受け取ったコードのビルドを自動的に実行できます。これらのビルドの動作は、アプリが Windows と Linux のどちらで実行されているかによって異なります。
+Windows
+Windows 上で実行されている全ての関数アプリには、小規模な管理アプリがあり、これは Kudu によって提供される SCM サイトです。このサイトで、Azur...]]></description><link>https://zenn.dev/pinter/articles/20230905functionspythonworkerarchitecture</link><guid isPermaLink="true">https://zenn.dev/pinter/articles/20230905functionspythonworkerarchitecture</guid><pubDate>Sat, 13 Jul 2024 12:40:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Wx8g5HGj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Azure%2520Functions%2520%25E3%2581%25AE%25E3%2583%2587%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25A4%25E3%2583%2586%25E3%2582%25AF%25E3%2583%258E%25E3%2583%25AD%25E3%2582%25B8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%2581%25E3%2583%25A3%25E3%2583%259E%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pMR2ZhYmNfbmdmS3VFUnJNcVhJNGdQbm1EalZOd3NwTjhKYlRNRkE9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>チャマ</dc:creator></item><item><title><![CDATA[[音声認識]whisperモデルで文字起こし]]></title><description><![CDATA[
+ 🎧はじめに
+本ページで解説させていただくのは、
+音声認識の一分野であるの文字起こし（Audio Transcription）の処理手順です。
+文字起こしは、以下のような場面で活用されています💪
+
+ 1. 議事録作成📝
+
+会議の内容を文字起こしすることで、議事録作成を自動化することに活用されています。
+Nishika株式会社では、「SecureMemo / SecureMemoCloud」を開発し、議事録作成AIを提供しております。
+2024/8/31まで、文字起こしコンペを開催しておりますので、よろしければご参加ください!
+
+
+ 2. 医療分野🏥
+
+医師や看護師が、患者さんとのやり取...]]></description><link>https://zenn.dev/panchoooon/articles/22eeacaa894ceb</link><guid isPermaLink="true">https://zenn.dev/panchoooon/articles/22eeacaa894ceb</guid><pubDate>Sat, 13 Jul 2024 10:59:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--89p60nmO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255B%25E9%259F%25B3%25E5%25A3%25B0%25E8%25AA%258D%25E8%25AD%2598%255Dwhisper%25E3%2583%25A2%25E3%2583%2587%25E3%2583%25AB%25E3%2581%25A7%25E6%2596%2587%25E5%25AD%2597%25E8%25B5%25B7%25E3%2581%2593%25E3%2581%2597%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:pancho%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA1OTAyYWM0NmQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>pancho</dc:creator></item><item><title><![CDATA[PaLMAPI本のコードをGeminiで動かす（1）]]></title><description><![CDATA[「Google Cloudで学ぶ生成AIアプリケーション開発入門」という本を購入して、いろいろと触っています。超面白い。本ではPaLM APIが使われていますが、もちろん新しい言語モデルのGeminiでも試してみたくなる～。
+ということで、自分用メモとして、PaLM API =&gt; Geminiのコード、およびプロンプトの作成過程を残しておきます。この記事では３章のGrammarCorrectionアプリのバックエンドの部分のみをとりあげます。
+元のコードはGithubのmain.pyからチェックできます。
+https://github.com/google-cloud-japan/...]]></description><link>https://zenn.dev/hi/articles/66bcc2c8749918</link><guid isPermaLink="true">https://zenn.dev/hi/articles/66bcc2c8749918</guid><pubDate>Sat, 13 Jul 2024 07:28:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BzJp1Han--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:PaLMAPI%25E6%259C%25AC%25E3%2581%25AE%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2582%2592Gemini%25E3%2581%25A7%25E5%258B%2595%25E3%2581%258B%25E3%2581%2599%25EF%25BC%25881%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvaC5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hi</dc:creator></item><item><title><![CDATA[リリース: Python製作図ライブラリ Drawlib]]></title><description><![CDATA[
+ 概要
+Drawlib というPythonでイラストを描画するための機能豊富なライブラリを作ってリリースしました。
+Pythonを知っていれば新しいことを覚えなくてもすぐに使えますし、IDE(VSCodeなど)がコード補完やヘルプ表示で書くことを支援してくれます。
+GitHub などでドキュメントなどのイラストをコードとして管理するのに便利なはずです。
+Illustration as Code !!
+Drawlib では以下の画像のようにコードからイラストを作成します。
+
+ここでは誰が見ても分かるように円を描画する circle 関数において、どこにどれぐらいの大きさかを書き、その見た...]]></description><link>https://zenn.dev/yuichiito/articles/drawlib_introduction</link><guid isPermaLink="true">https://zenn.dev/yuichiito/articles/drawlib_introduction</guid><pubDate>Sat, 13 Jul 2024 05:18:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lkiLQDKk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%25AA%25E3%2583%25AA%25E3%2583%25BC%25E3%2582%25B9%253A%2520Python%25E8%25A3%25BD%25E4%25BD%259C%25E5%259B%25B3%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%2520Drawlib%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yuichi%2520Ito%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E2MGNiOTM4ZTcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yuichi Ito</dc:creator></item><item><title><![CDATA[PyCharmでインタープリターを初めてちゃんと設定した（venv, poetry）]]></title><description><![CDATA[最近は生成AIや機械学習などの開発をするにあたってPyCharmを使っていますが、インタープリターの設定がどうもめんどくさくて、IDE上でimportのアラートがずっと出ているまま「とりあえず動けばいっか！」で開発していました。
+こんな感じ。
+
+そんな私がPyCharmの設定をちゃんと？やったので、その備忘録もかねて記事にしました。
+「とりあえずエラーが出なくなった！」くらいなので、もっと良い方法があれば教えてください🙇‍♂️
+今回はvenvとpoetryの2つの仮想環境で設定しました。
+
+ PyCarmのインタープリター設定
+PyCharmでインタープリター設定をどうやるのか、さらっと...]]></description><link>https://zenn.dev/ttks/articles/5c8853cc80ffba</link><guid isPermaLink="true">https://zenn.dev/ttks/articles/5c8853cc80ffba</guid><pubDate>Sat, 13 Jul 2024 03:54:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--nPzPlJ41--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:PyCharm%25E3%2581%25A7%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%2597%25E3%2583%25AA%25E3%2582%25BF%25E3%2583%25BC%25E3%2582%2592%25E5%2588%259D%25E3%2582%2581%25E3%2581%25A6%25E3%2581%25A1%25E3%2582%2583%25E3%2582%2593%25E3%2581%25A8%25E8%25A8%25AD%25E5%25AE%259A%25E3%2581%2597%25E3%2581%259F%25EF%25BC%2588venv%252C%2520poetry%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Totsuka%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk4ZmM4NDJkY2IuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Totsuka</dc:creator></item><item><title><![CDATA[【RAG】CohereのRerankerをLangchainで試す]]></title><description><![CDATA[RAGの性能改善手法の一つとして、比較的手軽に実装できるCohereのRerankerを試してみました。いったん、通常のベクトル検索で抽出したチャンクをRerankモデルに入力して、関連度の高い順にRerankする手法です。LangchainのContextual Compression Retrieverを利用すればすぐに実装できます。
+
+ RAGの性能改善手法 Rerank とは？
+RerankはRAGの性能改善手法の一つです。
+Rerankでは、通常のベクトル検索による検索結果に対して再評価を行い、よりクエリとの関連度の高い順序で並べ替えます。ベクトル検索では、大量の候補文書（チャ...]]></description><link>https://zenn.dev/khisa/articles/4e1174cbcaae0d</link><guid isPermaLink="true">https://zenn.dev/khisa/articles/4e1174cbcaae0d</guid><pubDate>Sat, 13 Jul 2024 03:30:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--rxs2fCx1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590RAG%25E3%2580%2591Cohere%25E3%2581%25AEReranker%25E3%2582%2592Langchain%25E3%2581%25A7%25E8%25A9%25A6%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25B2%25E3%2581%2595%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTHFKaUVHa1VQMkc5WGpIeHlTa3p4bld3Z3JNcHFhT19hUFVKcWEyQ2YxWUZFPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ひさ</dc:creator></item><item><title><![CDATA[Assistants.create() got an unexpected keyword argument 'file_ids'の対処方法]]></title><description><![CDATA[
+ 前提
+
+python:3.10.x
+openai:1.35.13
+
+
+ 事象
+以下のDocsを参考にAssitant API を実行しようとした。
+https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/code-interpreter?tabs=python
+
+assistant.py
+import time
+import json
+from openai import AzureOpenAI
+
+client = AzureOpenAI(
+    api_key= "&lt;key&gt;",
+    ap...]]></description><link>https://zenn.dev/headwaters/articles/59da027d895888</link><guid isPermaLink="true">https://zenn.dev/headwaters/articles/59da027d895888</guid><pubDate>Sat, 13 Jul 2024 01:42:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--DZTU7CWC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Assistants.create%2528%2529%2520got%2520an%2520unexpected%2520keyword%2520argument%2520%2527f...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:takekawa%2520tomoki%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZjNGExY2UxMDYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2598%25E3%2583%2583%25E3%2583%2589%25E3%2582%25A6%25E3%2582%25A9%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%25BC%25E3%2582%25B9%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdmODg5YTRhYzguanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takekawa tomoki</dc:creator></item><item><title><![CDATA[Pythonでプログラミングの始め方]]></title><description><![CDATA[
+ 1. はじめに
+この記事では、プログラミング初心者向けにPythonの始め方について説明します。Pythonはシンプルで読みやすいコードを書くことができ、初心者にも優しいプログラミング言語です。
+
+ 2. 準備
+
+ 2.1 必要なツール
+Pythonでプログラミングを始めるためには以下のツールを準備していきます
+
+Python
+テキストエディタ(VSCode）
+pip
+
+
+ 2.2 Pythonのインストール
+作成したプログラミングを実行するのにpythonが必要になります。
+Pythonの公式サイトから最新バージョンをダウンロードし、インストールします。
+
+
+Pythonのダウンロ...]]></description><link>https://zenn.dev/nuinui/articles/d8289762f404c2</link><guid isPermaLink="true">https://zenn.dev/nuinui/articles/d8289762f404c2</guid><pubDate>Fri, 12 Jul 2024 21:57:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0CREfu7a--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A7%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%259F%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%25AE%25E5%25A7%258B%25E3%2582%2581%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AC%25E3%2583%25BC%25E3%2581%2584%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSno2cFRIRmpDc184N0NyTTNyYV9iZnd6LVVLaXAxRHMxZWdFdHl1b0VQY1JCbUVDcz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ぬーい</dc:creator></item><item><title><![CDATA[PySimpleGUI 入門]]></title><description><![CDATA[
+ PySimpleGUI 入門 (1)
+PySimpleGUI は Python で GUI アプリを作るときに便利なライブラリです。
+PySimpleGUI の基本的な使い方については、PySimpleGUI 入門 (PDF) という網羅的で優れた入門記事があるのでそれを参考にして下さい。
+
+ 有償化の話
+PySimpleGUI は version 5 から有償化されたようですが、ホビーユースで個人で使う分には無料で使えるようです。（登録ページから登録してみたら、なんか１年有効なライセンスキーが入手できました。画面表示と、メール送信があります。）
+$ pip3 install --u...]]></description><link>https://zenn.dev/tmiya/articles/87157cbd585cb7</link><guid isPermaLink="true">https://zenn.dev/tmiya/articles/87157cbd585cb7</guid><pubDate>Fri, 12 Jul 2024 12:08:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--F81t23Oi--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:PySimpleGUI%2520%25E5%2585%25A5%25E9%2596%2580%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tmiya%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTDlBbDdyckxtZUtiS1pEcEpCLVhTSkliVWt6c0ZKaXJZcnJ6QlJCYUE3MUhLS1diTT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tmiya</dc:creator></item><item><title><![CDATA[Rye × uvでPython環境と機械学習環境を整える]]></title><description><![CDATA[チューリングのE2E自動運転チームの岩政(@colum2131)です。
+最近、チーム内でPythonを使った開発はRyeとuvを使うことが多くなり、特に機械学習環境もRyeとuvで問題なく開発できるようになりました。社内でのオンボーディング資料としてRyeとuvの操作を整備しようと思い、このテックブログで紹介します。
+
+ 1. Rye × uvとは？
+RyeはPythonの包括的なプロジェクトおよびパッケージ管理のツールです。これまでもPoetryなど管理ツールはありましたが、pyenvなどPythonのバージョン管理ツールが必要でした。Ryeは、Pythonのバージョン管理からパッケー...]]></description><link>https://zenn.dev/turing_motors/articles/0f1a764d14f581</link><guid isPermaLink="true">https://zenn.dev/turing_motors/articles/0f1a764d14f581</guid><pubDate>Fri, 12 Jul 2024 09:04:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3lF7GcpN--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rye%2520%25C3%2597%2520uv%25E3%2581%25A7Python%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25A8%25E6%25A9%259F%25E6%25A2%25B0%25E5%25AD%25A6%25E7%25BF%2592%25E7%2592%25B0%25E5%25A2%2583%25E3%2582%2592%25E6%2595%25B4%25E3%2581%2588%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:colum2131%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhNjYyMDc4ZDMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Tech%2520Blog%2520-%2520Turing%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RhZDZiMjhmMmEuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>colum2131</dc:creator></item><item><title><![CDATA[oktaのパスワードとMFAリセットするSlackBOTを作った]]></title><description><![CDATA[
+ 概要
+本記事の内容は、oktaが日々従業員に使われるようにしていった結果発生した
+🤵‍♂️「パスワードを忘れてしまったのでリセットして欲しい」
+🤵‍♀️ 「スマホを機種変更したらログインできなくなった」
+といった情シスへの問い合わせ頻度No.1(※)の事象に対して、SlackBOTを使って対処してみた話になります
+また、作ったのはかなり前なのでSlack New Platformではなく自分でデプロイするタイプのSlackBOTになっています
+※No.1は適当に書いてますが、よく聞く話ではありますよね😉
+
+ 概要図
+
+
+ 何で作ったか
+
+言語
+
+Python 3.10
+
+
+使ったライ...]]></description><link>https://zenn.dev/ryutag/articles/2a0800c5582869</link><guid isPermaLink="true">https://zenn.dev/ryutag/articles/2a0800c5582869</guid><pubDate>Fri, 12 Jul 2024 08:06:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9XQX8mLN--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:okta%25E3%2581%25AE%25E3%2583%2591%25E3%2582%25B9%25E3%2583%25AF%25E3%2583%25BC%25E3%2583%2589%25E3%2581%25A8MFA%25E3%2583%25AA%25E3%2582%25BB%25E3%2583%2583%25E3%2583%2588%25E3%2581%2599%25E3%2582%258BSlackBOT%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ryuta%2520goto%25E3%2580%2590dely%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2580%2591%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y3YzUzZjlhZGIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ryuta goto【dely株式会社】</dc:creator></item><item><title><![CDATA[Posit Connect Cloud を使ってみる]]></title><description><![CDATA[Posit Connect Cloud というサービスのアルファ版が公開されていたのでちょっとだけ触ってみました。
+
+ Posit Connect Cloud とは？
+データ関連のアプリケーションやドキュメントを公開できるプラットフォームだ、とのことです。現時点でデプロイできるのは以下の7種類のようです。
+
+Quarto
+Shiny
+R Markdown
+Streamlit
+Jupyter Notebook
+Dash
+Bokeh
+
+たぶん Shinyapps.io みたいに、正式リリースされたら、無料枠はありつつ一定以上使うならお金払ってね、って感じになるのかな？という気がしています。今...]]></description><link>https://zenn.dev/yutannihilation/articles/47a7dbf2476fe9</link><guid isPermaLink="true">https://zenn.dev/yutannihilation/articles/47a7dbf2476fe9</guid><pubDate>Fri, 12 Jul 2024 05:57:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dTIKnzOe--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Posit%2520Connect%2520Cloud%2520%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yutannihilation%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2cxWXFZLWt6LTVmNFhSNVdXbjFNOVBpaWxaMkdYNHkwNjdtZy1VOEE9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yutannihilation</dc:creator></item><item><title><![CDATA[旧システムvenvで作成された仮想環境中のプロジェクトをpyenvで動作させる手順]]></title><description><![CDATA[
+ 旧システムvenvで作成された仮想環境中のプロジェクトをpyenvで動作させる手順
+
+ はじめに
+少し前にシステムをUbuntu 20.04からUbuntu 22.04へ移行しました。
+新システムに移行にあたり、Pythonのバージョンが3.8から3.10へ変化しました。
+このとき旧システムのpython仮想環境(venv)で作成されたプロフェクトフォルダをアクティベートしようとすると、新システムのPythonが起動されてしまいます。
+ROOT/bin/python3がシステムPythonへのシンボリックリンクになっているからです。（ROOTはプロジェクトのルートパス）
+旧システムの...]]></description><link>https://zenn.dev/ykesamaru/articles/3afd2686ed998c</link><guid isPermaLink="true">https://zenn.dev/ykesamaru/articles/3afd2686ed998c</guid><pubDate>Fri, 12 Jul 2024 03:08:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--I_n5A31E--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%2597%25A7%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0venv%25E3%2581%25A7%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2595%25E3%2582%258C%25E3%2581%259F%25E4%25BB%25AE%25E6%2583%25B3%25E7%2592%25B0%25E5%25A2%2583%25E4%25B8%25AD%25E3%2581%25AE%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E3%2582%2592pyenv%25E3%2581%25A7%25E5%258B%2595%25E4%25BD%259C%25E3%2581%2595%25E3%2581%259B%25E3%2582%258B%25E6%2589%258B%25E9%25A0%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yKesamaru%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY4MmM3NDMxNjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yKesamaru</dc:creator></item><item><title><![CDATA[Git コマンドを自力で再現する]]></title><description><![CDATA[
+ はじめに
+こんにちは！株式会社 BTM の坂本です！
+私も含め、エンジニアの皆さんなら毎日使っている技術がありますよね？
+そう、Git です。
+毎日使っている Git くんが何をしているか知っていますか？
+毎日 Git くんに感謝していますか？
+バージョン管理してくれるのが当たり前だと思っていませんか？
+今回は Git の内部構造について調査しました。
+Git くんが機嫌を損ねてコマンドが実行できなくなった場合に備えて対処法を学びましょう。
+今回の環境は以下になります。
+
+Git 2.25.1
+Python 3.11.5
+
+!
+本記事内で.git内のファイル直接変更していますが、実際...]]></description><link>https://zenn.dev/b_tm/articles/36222bce247bec</link><guid isPermaLink="true">https://zenn.dev/b_tm/articles/36222bce247bec</guid><pubDate>Fri, 12 Jul 2024 00:49:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7mjGxCqZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Git%2520%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2582%2592%25E8%2587%25AA%25E5%258A%259B%25E3%2581%25A7%25E5%2586%258D%25E7%258F%25BE%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:t.sakamoto%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLmRldi9pbWFnZXMvZGVmYXVsdC1wdWJsaWNhdGlvbi1hdmF0YXIucG5n%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BEBTM%2520%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZlZDViNWJjNTEuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>t.sakamoto</dc:creator></item><item><title><![CDATA[【FastAPI】リクエストとレスポンスのログを出力する]]></title><description><![CDATA[Python の logger モジュールを使ってリクエスト情報とレスポンス情報をログに出力する方法をメモとして残しておく
+APIRoute クラスを使うことで実現できるらしいので調べてみる
+Custom Request and APIRoute class - FastAPI
+
+ユースケース
+・すべてのリクエスト本文を自動的にログに記録します。
+
+
+ APIRoute クラスとは？
+APIRoute は、APIRouter のコンストラクタの route_class に指定できるもの Docs
+これのクラスを継承したクラスを使うことでリクエスト処理の前後に処理を挟むことができる
+Cus...]]></description><link>https://zenn.dev/tamago324/articles/2024-07-12-fastapi-request-response-logging</link><guid isPermaLink="true">https://zenn.dev/tamago324/articles/2024-07-12-fastapi-request-response-logging</guid><pubDate>Thu, 11 Jul 2024 23:44:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--KIM564W---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590FastAPI%25E3%2580%2591%25E3%2583%25AA%25E3%2582%25AF%25E3%2582%25A8%25E3%2582%25B9%25E3%2583%2588%25E3%2581%25A8%25E3%2583%25AC%25E3%2582%25B9%25E3%2583%259D%25E3%2583%25B3%25E3%2582%25B9%25E3%2581%25AE%25E3%2583%25AD%25E3%2582%25B0%25E3%2582%2592%25E5%2587%25BA%25E5%258A%259B%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259F%25E3%2581%25BE%25E3%2581%259F%25E3%2581%25BE%25E3%2581%2594%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MxMGVlMzU5YTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>たまたまご</dc:creator></item></channel></rss>
