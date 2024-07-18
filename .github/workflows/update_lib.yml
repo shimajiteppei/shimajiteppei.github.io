@@ -1,32 +1,36 @@
-name: Generate RSS feed
+name: Update Libraries
 
 on:
     schedule:
-        - cron: "0 12 * * *"
+        - cron: "0 11 * * THU"
     workflow_dispatch:
 
 jobs:
-    generate:
+    update:
         runs-on: ubuntu-latest
         steps:
             - name: Checkout
               uses: actions/checkout@main
             - name: Setup Node
               uses: volta-cli/action@master
-            - name: Generate RSS feed
+            - name: Update package.json
+              run: |
+                  npm install
+                  rm -rf node_modules
+            - name: Build Artifact
               run: |
                   npm install --ignore-scripts
-                  npm run tool:gen_rss
+                  npm run build
             - name: Commit
               run: |
                   if
-                    git diff --quiet .
+                    git diff --quiet package.json
                   then
                     :
                   else
                     git config --global user.email hotarutwitter@gmail.com
                     git config --global user.name shimajiteppei
-                    git add .
-                    git commit -m "autogen rss feed"
+                    git add package.json
+                    git commit -m "update package.json"
                     git push origin main
                   fi
