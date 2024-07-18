@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「CSS」のフィード]]></title><description><![CDATA[Zennのトピック「CSS」のRSSフィードです]]></description><link>https://zenn.dev/topics/css</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/094a9b2a18.png</url><title>Zennの「CSS」のフィード</title><link>https://zenn.dev/topics/css</link></image><generator>zenn.dev</generator><lastBuildDate>Thu, 18 Jul 2024 05:27:31 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/css/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[JavaScript不要！アコーディオンの作り方]]></title><description><![CDATA[
+上記のようなアコーディオンを作ろうとしてGoogleで検索をすると、&lt;div&gt;や&lt;input&gt;を使ったものが多く見つかります。
+divやinputを使うと、セットでJavaScriptを使わなければならない…JavaScripがあまり得意ではない・時間をあまりかけたくないと思う方も多いのではないでしょうか。
+しかし&lt;details&gt;と&lt;summary&gt;を使うと、簡単&amp;以下のメリットがあります。
+
+アクセシビリティ対策になる
+構造がわかりやすい、読みやすいコードになる
+JavaScript不要で開閉ができる
+
+今回は&lt;deta...]]></description><link>https://zenn.dev/928sekine/articles/3fbb221a2a164a</link><guid isPermaLink="true">https://zenn.dev/928sekine/articles/3fbb221a2a164a</guid><pubDate>Wed, 17 Jul 2024 05:37:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Bi9Mb8kx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25E4%25B8%258D%25E8%25A6%2581%25EF%25BC%2581%25E3%2582%25A2%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2587%25E3%2582%25A3%25E3%2582%25AA%25E3%2583%25B3%25E3%2581%25AE%25E4%25BD%259C%25E3%2582%258A%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259B%25E3%2581%258D%25E3%2581%25AD%25E3%2582%258A%25E3%2581%25AA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAyNDQ3MGIzZjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>せきねりな</dc:creator></item><item><title><![CDATA[SVGを使った文字のアニメーションエフェクト]]></title><description><![CDATA[
+ はじめに
+今回はSVGで作った文字をアニメーションで色を変えてみます。CSSのみで実装可能です。
+出来上がりはこちら。
+
+主に対象要素に対してクリッピングパス(切り抜き)を使用して実現しています。
+
+ 実装開始
+
+ データの準備
+今回、Figmaで文字を作成してSVGファイルとして保存しました。これを使ってアニメーションを実現させます。
+用意した文字はこちら。
+
+
+ HTML
+
+index.html
+    &lt;div class="container"&gt;
+    &lt;div class="clip-path-wrapper"&gt;
+      &lt;div cla...]]></description><link>https://zenn.dev/perokichi/articles/a58c691f406b0b</link><guid isPermaLink="true">https://zenn.dev/perokichi/articles/a58c691f406b0b</guid><pubDate>Wed, 17 Jul 2024 02:05:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--SuCJM9eY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:SVG%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%259F%25E6%2596%2587%25E5%25AD%2597%25E3%2581%25AE%25E3%2582%25A2%25E3%2583%258B%25E3%2583%25A1%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%25A8%25E3%2583%2595%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:perokichi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzUzNGY2OTVjMzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>perokichi</dc:creator></item><item><title><![CDATA[備忘：技術をどのように習得していくか]]></title><description><![CDATA[
+ 1.現在の課題
+新しい職場で使われている技術について、
+概念レベルでしか知らない or 概念すら知らないものが多い。
+チームMTGの話についていけないのは勿体なく、
+この機会を活かすために、また自分のスキル習得へ繋げる為に、
+知らない技術の習得方法を確立し、コンスタントに技術を高めていく必要がある。
+
+ 2.前提
+今回はターゲットの言語（仕組み）が決まった上での学習方法を記載する
+残りの課題（忘れないようにメモ）
+・全体アーキテクト的なものの知識の身につけ方は？
+・最新の動向はどのように追う？
+
+
+ 3.結論
+学習は易しい内容から着手し、次第に高度な内容へとステップアップする形で進め...]]></description><link>https://zenn.dev/universe/articles/ed467cc49114ee</link><guid isPermaLink="true">https://zenn.dev/universe/articles/ed467cc49114ee</guid><pubDate>Tue, 16 Jul 2024 14:19:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--kjLkFt5w--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2582%2599%25E5%25BF%2598%25EF%25BC%259A%25E6%258A%2580%25E8%25A1%2593%25E3%2582%2592%25E3%2581%25A9%25E3%2581%25AE%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E7%25BF%2592%25E5%25BE%2597%25E3%2581%2597%25E3%2581%25A6%25E3%2581%2584%25E3%2581%258F%25E3%2581%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:F7%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTDFtOHVCSnVZMVByRGZza3ZnS0Y1X2s3SVIzdldPcm45c1VGcUxwVnZmdEE9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>F7</dc:creator></item><item><title><![CDATA[【完全攻略】imgタグ解体新書]]></title><description><![CDATA[Web制作において一番使われると言っても過言ではないimgタグ。でも気を抜くとすぐに見た目が崩れたり、表示が遅くなったりして困りますよね・・・
+
+そんなimgタグを完全攻略します！この本を読めば、
+・画像を高速で読み込む
+・思った通りのサイズで表示する
+・どんな画面幅でも完璧にレスポンシブ対応
+などimgタグを思い通りに操れます！
+
+imgタグのせいで失った時間を取り戻し、コーディングをスムーズにして案件効率を爆速化！
+
+また、imgタグに関連した実用的テクニックについても解説！
+
+・imgタグのサイズの決まり方
+・imgタグとbackground-imageの完璧な使い分け
+・デバイスに合わせて適切に画像を出し分ける方法
+・サイトの読み込み速度を実質10倍以上にする方法
+・サイズを1/10にする画像圧縮テクニック
+
+と、フリーランス8年間で培ったテクニックを大公開します！]]></description><link>https://zenn.dev/hideki_climax/books/fa10fd5992bd42</link><guid isPermaLink="true">https://zenn.dev/hideki_climax/books/fa10fd5992bd42</guid><pubDate>Tue, 16 Jul 2024 12:20:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--FO6QSawO--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci8wNzNkYWZjMjI1LmpwZWc=%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>hideki_climax</dc:creator></item><item><title><![CDATA[:focus-visible擬似クラスを調べてみた]]></title><description><![CDATA[
+ はじめに
+cssには、:focus-visible擬似クラスが存在する。このクラスは主にブラウザがフォーカスを明示する必要があると判断した時に適応されるものです。
+https://developer.mozilla.org/ja/docs/Web/CSS/:focus-visible
+
+ 使うメリット
+ユーザーの入力（マウスかキーボード）によってフォーカスの表示を変えたりすることができます。
+例えば、input要素はtabキーで移動した場合に今いる場所に対して、ブラウザが規定のスタイルを当ててくれるため、デフォルトで青色の輪郭線が表示されます↓
+
+:focus-visibleの擬似ク...]]></description><link>https://zenn.dev/wahuru/articles/c5e55c6d9ed0d4</link><guid isPermaLink="true">https://zenn.dev/wahuru/articles/c5e55c6d9ed0d4</guid><pubDate>Sun, 14 Jul 2024 11:03:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--w6zRMPng--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%253Afocus-visible%25E6%2593%25AC%25E4%25BC%25BC%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25B9%25E3%2582%2592%25E8%25AA%25BF%25E3%2581%25B9%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:waffle%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM0YWE1YjliNDcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>waffle</dc:creator></item><item><title><![CDATA[SVGのオブジェクトをアニメーションで描く]]></title><description><![CDATA[
+ はじめに
+最近のwebページにはSVGがよく使われており、文字を描くアニメーションやオブジェクトを変形させるなど見かけます。今回はオブジェクトをアニメーションで描いてみます。
+主にCSSを使い表現することができます。
+
+ そもそもsvgとは？
+PNGやJPEGはラスター画像（ビットマップ画像)でピクセルの集合で画像を表現しますが、SVGはベクター画像で数式と座標で図形を描画します。そのため色々なメリットがあります。
+利点
+-高品質：画質を損なうことなくどのようなサイズにも拡大縮小可能。
+-柔軟性：HTMLとCSSでスタイルを指定でき、JavaScriptを使用して操作できる。
+-軽量...]]></description><link>https://zenn.dev/perokichi/articles/21df4852a9b25f</link><guid isPermaLink="true">https://zenn.dev/perokichi/articles/21df4852a9b25f</guid><pubDate>Sun, 14 Jul 2024 03:06:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--rbfrCQ7z--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:SVG%25E3%2581%25AE%25E3%2582%25AA%25E3%2583%2596%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E3%2582%2592%25E3%2582%25A2%25E3%2583%258B%25E3%2583%25A1%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2581%25A7%25E6%258F%258F%25E3%2581%258F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:perokichi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzUzNGY2OTVjMzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>perokichi</dc:creator></item><item><title><![CDATA[React DatePicker(day,week,month)]]></title><description><![CDATA[月毎,週ごとを選択できるDatePickerの使い方がまとまっているといいなと思ったのでメモ
+https://reactdatepicker.com/
+
+ 注意
+
+Nextjs,TS,Chakrauiを使用しています
+デザインの部分は可読性のため削っています
+cssのインポートをしないとぐちゃぐちゃなのが出てくる
+
+import 'react-datepicker/dist/react-datepicker.css'
+
+formatDateの関数はdate-fnsで作ってます
+
+
+ day
+基本的なやつ
+customInputを作成することで見た目を自由に変形できる
+refを受け取れるよ...]]></description><link>https://zenn.dev/hatayk/articles/863640ad25c8e3</link><guid isPermaLink="true">https://zenn.dev/hatayk/articles/863640ad25c8e3</guid><pubDate>Sat, 13 Jul 2024 08:43:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--11o7R4Mp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:React%2520DatePicker%2528day%252Cweek%252Cmonth%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yuki%2520hatamoto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzMwZGE0OTAxNDcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yuki hatamoto</dc:creator></item><item><title><![CDATA[【CSS】URLにのみ下線を引くように設定]]></title><description><![CDATA[
+ はじめに
+現在Ruby on Railsで、ユーザーが記事を投稿できるアプリを作成しています。
+ユーザーによる投稿はマークダウン記法に対応させています。
+他の方にアプリを触っていただいた際に、「URLを投稿した際に下線やホバー等がなくわかりづらい」とFBをいただき、URLにのみ下線を引くようCSSをいじっておりました。
+URLのみに対応させるつもりが、アプリ内のlink_toで設定しているaタグにも反応してしまい対処に少し時間を要してしまったので、今回も備忘録として記載したいと思います。
+参考になりましたら幸いです。
+
+ 環境
+Rails 7.1.3.4
+gem 'kramdown'...]]></description><link>https://zenn.dev/s17w09/articles/85881d45e4916c</link><guid isPermaLink="true">https://zenn.dev/s17w09/articles/85881d45e4916c</guid><pubDate>Sat, 13 Jul 2024 08:37:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Y_sGWaUq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590CSS%25E3%2580%2591URL%25E3%2581%25AB%25E3%2581%25AE%25E3%2581%25BF%25E4%25B8%258B%25E7%25B7%259A%25E3%2582%2592%25E5%25BC%2595%25E3%2581%258F%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E8%25A8%25AD%25E5%25AE%259A%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:asay%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhiNGY1Y2Q0NTUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>asay</dc:creator></item><item><title><![CDATA[ReactとCSSで隣接要素の状態を検知し、動的にスタイルを変更しよう]]></title><description><![CDATA[
+ はじめに
+最近業務で ⬇️ こんな感じのデザインを実装することになりました。
+
+閲覧モードと編集モード（フォーム）を切り替えることができ、編集モードの時は上・下・もしくは上下に境界線を表示させて間隔も広げるといった感じです。
+最初に見た時は、一つ前の要素の状態を知らないといけないから親コンポーネント側で状態管理しないとダメかなーとかぼんやり思っていたんですが、やってみると意外とシンプルに実装する方法があり、学びがあったので記事にすることにしました。
+
+ この記事を読んでほしい人
+
+React を使って、隣接する要素の状態（今回は編集モード or 閲覧モード）に基づいてスタイルを動的に...]]></description><link>https://zenn.dev/shanky/articles/c886ceb8a0aadd</link><guid isPermaLink="true">https://zenn.dev/shanky/articles/c886ceb8a0aadd</guid><pubDate>Sat, 13 Jul 2024 08:30:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qhXHxKjX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%25E3%2581%25A8CSS%25E3%2581%25A7%25E9%259A%25A3%25E6%258E%25A5%25E8%25A6%2581%25E7%25B4%25A0%25E3%2581%25AE%25E7%258A%25B6%25E6%2585%258B%25E3%2582%2592%25E6%25A4%259C%25E7%259F%25A5%25E3%2581%2597%25E3%2580%2581%25E5%258B%2595%25E7%259A%2584%25E3%2581%25AB%25E3%2582%25B9%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2592%25E5%25A4%2589%25E6%259B%25B4%25E3%2581%2597%25E3%2582%2588%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:shanky%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzcwMTM3MTAzNzMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>shanky</dc:creator></item><item><title><![CDATA[WEBサイト制作の手引き  -制作会社と円滑にやりとりするために-]]></title><description><![CDATA[【読んで欲しい人】
+- webサイトやホームページの作成を外部に依頼する人
+- 突然web担当にされてしまい何がなんだかわからない人
+- 制作依頼したものの、制作会社が何を言っているのかわからない人]]></description><link>https://zenn.dev/210neon/books/82e00283f3ca47</link><guid isPermaLink="true">https://zenn.dev/210neon/books/82e00283f3ca47</guid><pubDate>Sat, 13 Jul 2024 00:18:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--K6otl8rc--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci8wZmFiNzU0YmNiLmpwZWc=%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>NettoNeon</dc:creator></item><item><title><![CDATA[Tailwind CSS初心者が絶対ハマる落とし穴]]></title><description><![CDATA[ムーザルちゃんねるのzaruです。今回はムーさんと、Tailwind CSS初心者が絶対ハマる落とし穴について話しました。Tailwind CSSを使い始めた人、あるいはまだ使ったことがない人には是非見てほしいです。すでにこの落とし穴から抜け出している人はあるよねーって感じで眺めてください。
+https://youtu.be/LMixhEfxI9k
+すごいサムネイル…
+
+ ハマるポイント
+
+クラス名の動的指定
+クラス名のコンフリクト
+
+
+ クラス名の動的指定
+例えば、通常は背景を青だけど、エラーの時は赤くしたい。そんなときにJavaScriptでクラス名を組み立てると以下のように書きがち...]]></description><link>https://zenn.dev/moozaru/articles/ce9e7c0ded0fb2</link><guid isPermaLink="true">https://zenn.dev/moozaru/articles/ce9e7c0ded0fb2</guid><pubDate>Thu, 11 Jul 2024 10:18:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---ciePGCV--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Tailwind%2520CSS%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E3%2581%258C%25E7%25B5%25B6%25E5%25AF%25BE%25E3%2583%258F%25E3%2583%259E%25E3%2582%258B%25E8%2590%25BD%25E3%2581%25A8%25E3%2581%2597%25E7%25A9%25B4%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:zaru%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FiNDkwNTdmZTMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%25A0%25E3%2583%25BC%25E3%2582%25B6%25E3%2583%25AB%25E3%2581%25A1%25E3%2582%2583%25E3%2582%2593%25E3%2581%25AD%25E3%2582%258B%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2hTeWVOcHN2TEdOdTdPeUFlU1JEbDhUNkNOX1p3NHBXSHpIRHN2NlBFPXMyNTAtYw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>zaru</dc:creator></item><item><title><![CDATA[CSSにif文が追加されるらしい]]></title><description><![CDATA[CSSワーキンググループ（CSSWG）が
+CSS Values Module Level 5仕様にif()条件を追加することを決定したそうです。
+わりと革命的な気がして、驚いたのでzennにメモを残すことにします。
+まだ提案が承認されたばかりという段階で、
+今後W3CのCSSワーキンググループが仕様策定に取り組むこととなります。
+これが完全に実現するまでには、まだしばらく時間がかかりそうですが、
+未来のCSSスタイリングを大きく変える可能性のある仕様として、大きな注目を集めそうです。
+https://css-tricks.com/if-css-gets-inline-conditiona...]]></description><link>https://zenn.dev/persona/articles/cfbc6a6b9552a6</link><guid isPermaLink="true">https://zenn.dev/persona/articles/cfbc6a6b9552a6</guid><pubDate>Thu, 11 Jul 2024 06:10:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--oS5lZjyE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:CSS%25E3%2581%25ABif%25E6%2596%2587%25E3%2581%258C%25E8%25BF%25BD%25E5%258A%25A0%25E3%2581%2595%25E3%2582%258C%25E3%2582%258B%25E3%2582%2589%25E3%2581%2597%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2597%25E3%2581%2597%25E3%2581%25BE%25E3%2582%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzYyZmZlNmRjZTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ししまる</dc:creator></item><item><title><![CDATA[CSSの擬似要素に代替テキストをつける]]></title><description><![CDATA[!
+※ 投稿時点（2024年07月11日）ではブラウザの実装が揃っていない機能です。
+
+こんにちは、株式会社ナレッジワークの@nakajmgです。
+今回はChrome 127 betaの機能紹介を見て「こんなのあったの？」となった、擬似要素に代替テキストをつける機能について紹介します。
+
+ /で区切って代替テキストが指定できる
+::beforeや::afterのcontentプロパティは、/区切りで代替テキストが指定できます。
+.icon-star::before {
+  content: "⭐️" / "Favorite";
+}
+ここで指定した代替テキストはDevToolsのAcces...]]></description><link>https://zenn.dev/knowledgework/articles/ca475e36c2735b</link><guid isPermaLink="true">https://zenn.dev/knowledgework/articles/ca475e36c2735b</guid><pubDate>Thu, 11 Jul 2024 00:33:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--MFC46x7_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:CSS%25E3%2581%25AE%25E6%2593%25AC%25E4%25BC%25BC%25E8%25A6%2581%25E7%25B4%25A0%25E3%2581%25AB%25E4%25BB%25A3%25E6%259B%25BF%25E3%2583%2586%25E3%2582%25AD%25E3%2582%25B9%25E3%2583%2588%25E3%2582%2592%25E3%2581%25A4%25E3%2581%2591%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:nakajmg%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E4MWZhOWNhZmYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2583%258A%25E3%2583%25AC%25E3%2583%2583%25E3%2582%25B8%25E3%2583%25AF%25E3%2583%25BC%25E3%2582%25AF%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y2MGQwYjIzOTcuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nakajmg</dc:creator></item><item><title><![CDATA[小さく始めるView Transitions API]]></title><description><![CDATA[
+ 0.概要
+2023年3月にリリースされたView Transitions API。トランジション時のリッチなアニメーションを簡単に実装できる手法として、たびたび話題になってます。
+まだChromeしか対応していませんが、いざサポートが拡大した時に取り残されないよう、すこーしだけ導入してみました。
+
+ 対象読者
+
+まだView Transitions APIを触ったことがない人
+触ったことあるけど、実際に導入する手順がぱっと思い浮かばない人
+
+※ 本記事のコードはReactとTypeScriptを前提に書いております。
+今回作ったリポジトリ
+https://github.com/hir...]]></description><link>https://zenn.dev/timetree/articles/6a3ba5ceba51d8</link><guid isPermaLink="true">https://zenn.dev/timetree/articles/6a3ba5ceba51d8</guid><pubDate>Wed, 10 Jul 2024 00:58:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--QoNtJEtl--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%25B0%258F%25E3%2581%2595%25E3%2581%258F%25E5%25A7%258B%25E3%2582%2581%25E3%2582%258BView%2520Transitions%2520API%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Saul%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U1MDU4MGVlNDguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:TimeTree%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSURYM3R2Wnp2Ym12QmJ0ckZTdTNtVHBuMFZFNWVYOEVYaUFQQXZaX29QQkE9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Saul</dc:creator></item><item><title><![CDATA[object-fitとは]]></title><description><![CDATA[https://untype.jp/blog/202401291951
+この記事の内容について勉強した内容です。
+object-fitは置換要素（img要素やvideo要素など）表示領域に合わせて フィットさせることができる CSS プロパティです。画像を挿入すると親要素からはみ出したり拡大縮小されて縦横比が崩れたりすることがある。
+そんな時にobject-fitを利用することで解決できる
+
+ object-fitの値
+
+ fill
+画像は表示領域全体を応用に伸縮し縦横比を無視して埋め尽くされる
+
+ contain
+画像は縦横比を維持したまま表示領域にフィットするように拡大縮小される。必...]]></description><link>https://zenn.dev/yukiyuki1126/articles/b4caf5ba151e6f</link><guid isPermaLink="true">https://zenn.dev/yukiyuki1126/articles/b4caf5ba151e6f</guid><pubDate>Tue, 09 Jul 2024 13:35:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--K8JoD2Fz--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_76:object-fit%25E3%2581%25A8%25E3%2581%25AF%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yukiyuki1126%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFUWEFKeFhfcjVVM3JqUjJ0WHRwTndZM20wM2J0ejdCSXc0dGcxMUFOcXc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yukiyuki1126</dc:creator></item><item><title><![CDATA[【NAGOYA TEENS AI CAMP 2024/07 B Course】お料理レシピ生成アプリを作ってみよう]]></title><description><![CDATA[2024年の7月13日と7月14日に開催される NAGOYA TEENS AI CAMP のBコースの講習で使用する教材です。今回の講習では、ChatGPT APIを組み込んだ「お料理レシピ生成アプリ」の作成を体験することで、AIを活用した Web アプリケーション開発についての知識を深めることを目的としています。]]></description><link>https://zenn.dev/gura_8/books/nagoya-ai-event-2024-07_b-course</link><guid isPermaLink="true">https://zenn.dev/gura_8/books/nagoya-ai-event-2024-07_b-course</guid><pubDate>Tue, 09 Jul 2024 04:14:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---MIGcGbI--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci9iZjE2MjE5YzAwLndlYnA=%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>Gura</dc:creator></item><item><title><![CDATA[CSSで文字に太いフチをつける方法]]></title><description><![CDATA[完成イメージ
+
+CSSで文字にキレイなフチをつける方法について書いていきます。
+「CSS 文字　フチ」や「CSS 文字 枠線」などで検索すると以下のような方法でフチをつけるやり方が出てくると思います。
+
+-webkit-text-strokeを使う
+text-shadowを使う
+
+
+ -webkit-text-stroke
+-webkit-text-strokeを使ってフチをつけてみます
+-webkit-text-stroke: 1px #fff;
+1pxであれば特に崩れることなく表示されます
+
+-webkit-text-stroke: 2px #fff;
+2px、まだ耐えられますがちょ...]]></description><link>https://zenn.dev/ksk2/articles/fc147795837ab0</link><guid isPermaLink="true">https://zenn.dev/ksk2/articles/fc147795837ab0</guid><pubDate>Sun, 07 Jul 2024 08:57:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--WOXpgVr9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:CSS%25E3%2581%25A7%25E6%2596%2587%25E5%25AD%2597%25E3%2581%25AB%25E5%25A4%25AA%25E3%2581%2584%25E3%2583%2595%25E3%2583%2581%25E3%2582%2592%25E3%2581%25A4%25E3%2581%2591%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:SAWA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E3ZmE3NjhhZjEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>SAWA</dc:creator></item><item><title><![CDATA[【n番煎じ】Marpを使ってスライド作成したけど画像の配置が難しかった話【css】]]></title><description><![CDATA[
+ はじめに
+Marpを用いてmarkdownでスライドを作成する方法の備忘録です．css完全に理解した気持ちでした．．．
+現在，私は画像処理に関連する研究を行っています．当初は進捗報告のスライドをMarpで作る予定でしたが，とある理由により断念しました．画像処理の研究では具体例的な定性評価のために画像を表示することが不可欠です．MarpではCSSを用いて画像レイアウトを決定するためcssを完全に理解することが必要です．画像配置の難しさから，私はMarpによるスライド作成を諦めました．
+
+ Marpの利点
+テンプレートに従うだけのため，Googleフォームに解答を入力するような感覚でスラ...]]></description><link>https://zenn.dev/xiakou/articles/635bb2873f55b3</link><guid isPermaLink="true">https://zenn.dev/xiakou/articles/635bb2873f55b3</guid><pubDate>Sun, 07 Jul 2024 05:43:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--u7L-mBLk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590n%25E7%2595%25AA%25E7%2585%258E%25E3%2581%2598%25E3%2580%2591Marp%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2582%25B9%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2589%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2597%25E3%2581%259F%25E3%2581%2591%25E3%2581%25A9%25E7%2594%25BB%25E5%2583%258F%25E3%2581%25AE%25E9%2585%258D%25E7%25BD%25AE%25E3%2581%258C%25E9%259B%25A3%25E3%2581%2597%25E3%2581%258B%25E3%2581%25A3%25E3%2581%259F%25E8%25A9%25B1%25E3%2580%2590css%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:taihui%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzUxMDVmMDQ0OWYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>taihui</dc:creator></item><item><title><![CDATA[CSS命名規範]]></title><description><![CDATA[
+ 1.BEM規範
+
+ BEMとは何か
+BEMとは「Bがブロック（block）で、Eが要素（element）で、Mが修飾子（modifier）です」という三つの元素を使用してCSS名に名乗る命名規範です。
+上記の元素の間に、次の三つの記号（半角スペースの状態で）を使って相互の関係を表します。
+「 - 」：ブロックまたはサブ要素の複数単語間の接続記号を表して、ハイフンとしてのみ使用される中線
+「 __ 」：ブロックとブロックの子要素を接続するための二重アンダースコア
+「 _ 」：ブロックまたはブロックのサブ要素の状態を記述するために使用される単一アンダースコア
+
+ BEMを使用例の対比
+ブ...]]></description><link>https://zenn.dev/ld/articles/839ead927293e4</link><guid isPermaLink="true">https://zenn.dev/ld/articles/839ead927293e4</guid><pubDate>Sat, 06 Jul 2024 10:41:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2nMKdoDM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:CSS%25E5%2591%25BD%25E5%2590%258D%25E8%25A6%258F%25E7%25AF%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%25AA%25E3%2583%25A7%25E3%2582%25A6%25E3%2583%2588%25E3%2582%25A6%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSXFCLUVodWFnNldZQlRRcXpnNDhKX0ZTUnBxdjdoc3lBWHNwMTJaZldsZG5LdWM3Zz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>リョウトウ</dc:creator></item><item><title><![CDATA[【CSS】display:gridとdisplay:contentsを使った柔軟な横並び]]></title><description><![CDATA[横並びのデザインで、左側の一番長いテキストに合わせて、左側のコンテンツ幅を決めたいということってあるんですが、これって私だけ？
+display:gridとdisplay:contentsを使うとシンプルに記述できたのでメモです。
+&lt;div class="list"&gt;
+    &lt;dl class="list__item"&gt;
+        &lt;dt&gt;出身&lt;/dt&gt;
+        &lt;dd&gt;三重県&lt;/dd&gt;
+    &lt;/dl&gt;
+    &lt;dl class="list__item"&gt;
+        ...]]></description><link>https://zenn.dev/holy0306/articles/3a477d1cb9e350</link><guid isPermaLink="true">https://zenn.dev/holy0306/articles/3a477d1cb9e350</guid><pubDate>Sat, 06 Jul 2024 03:27:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fKA5t-OB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590CSS%25E3%2580%2591display%253Agrid%25E3%2581%25A8display%253Acontents%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%259F%25E6%259F%2594%25E8%25BB%259F%25E3%2581%25AA%25E6%25A8%25AA%25E4%25B8%25A6%25E3%2581%25B3%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:holy%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q1NjE4YWUxNGEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>holy</dc:creator></item></channel></rss>

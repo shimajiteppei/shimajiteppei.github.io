@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Linux」のフィード]]></title><description><![CDATA[Zennのトピック「Linux」のRSSフィードです]]></description><link>https://zenn.dev/topics/linux</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/860a9eb1e4.png</url><title>Zennの「Linux」のフィード</title><link>https://zenn.dev/topics/linux</link></image><generator>zenn.dev</generator><lastBuildDate>Thu, 18 Jul 2024 01:01:31 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/linux/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Homebrewで醸造を始めよう！初心者向けガイドと用語解説]]></title><description><![CDATA[
+ はじめに
+Homebrewは、MacやLinuxでソフトウェアを簡単にインストール・管理できるパッケージマネージャーです。まるでビールを自家醸造するように、必要なソフトウェアを“醸造”して、開発環境を構築することができます。
+この記事では、Homebrew初心者のために、基本的な使い方と、よく登場する用語についてわかりやすく解説します。記事を読み終える頃には、あなたもHomebrewを使いこなせるようになっているはずです！
+
+ Homebrewとは？
+Homebrewは、コマンドラインからソフトウェアをインストール・管理できるツールです。パッケージと呼ばれる単位でソフトウェアを管理し...]]></description><link>https://zenn.dev/suuungwoo/articles/75b47b06c3fffd</link><guid isPermaLink="true">https://zenn.dev/suuungwoo/articles/75b47b06c3fffd</guid><pubDate>Wed, 17 Jul 2024 15:45:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4J-YiCoT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Homebrew%25E3%2581%25A7%25E9%2586%25B8%25E9%2580%25A0%25E3%2582%2592%25E5%25A7%258B%25E3%2582%2581%25E3%2582%2588%25E3%2581%2586%25EF%25BC%2581%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E5%2590%2591%25E3%2581%2591%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%25E3%2581%25A8%25E7%2594%25A8%25E8%25AA%259E%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E9%2587%2591%2520%25E6%2588%2590%25E9%259B%25A8%25EF%25BC%2588%25E3%2581%258D%25E3%2582%2580%2520%25E3%2581%259D%25E3%2582%2593%25E3%2581%2586%25EF%25BC%2589%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU5ODZiNWYyMTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>金 成雨（きむ そんう）</dc:creator></item><item><title><![CDATA[UTM のヘッドレスモードで仮想サーバーを起動する方法]]></title><description><![CDATA[
+ UTM とは?
+UTM とは、macOS用の仮想環境構築ソフトウェアのことで、1つのOS内で異なるOSを動かすことができます。
+App Store で提供されてる有料版と無料版がありますが、機能に差分はないので、特に理由なければ、無料版を使いましょう。
+
+ ローカル環境の情報
+PC: M3 Mac
+OS: macOS 14.5
+
+ 仮想環境の設定
+今回は、以下で設定します。
+
+OS: AlmaLinux
+
+メモリ: 2GB
+サイズ: 64GB
+名前: AlmaLinux(後ほど使用するので、個別で設定)
+
+
+詳細な設定については、今回は割愛しますが、設定方法については、以下の記事がお...]]></description><link>https://zenn.dev/nappa/articles/4e8cb7b1cb3899</link><guid isPermaLink="true">https://zenn.dev/nappa/articles/4e8cb7b1cb3899</guid><pubDate>Mon, 15 Jul 2024 13:22:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--i_pMYvR6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:UTM%2520%25E3%2581%25AE%25E3%2583%2598%25E3%2583%2583%25E3%2583%2589%25E3%2583%25AC%25E3%2582%25B9%25E3%2583%25A2%25E3%2583%25BC%25E3%2583%2589%25E3%2581%25A7%25E4%25BB%25AE%25E6%2583%25B3%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2582%2592%25E8%25B5%25B7%25E5%258B%2595%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nappa%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBiZTZlMDkwMDAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nappa</dc:creator></item><item><title><![CDATA[ひとくちメモ：ssh-add するときに error in libcrypto が出る]]></title><description><![CDATA[
+ 結論
+
+
+chmod 600 ~/.ssh/... してないなら、する
+鍵の末尾に改行を入れていないなら、入れる
+改行コードが CRLF とかになっていたら、LF にする
+
+
+ 経緯
+開発用にミニPCを調達して Ubuntu を仕込んだので、1Password 経由で SSH 鍵を移行しようとしたら以下のようなエラーが起きた。
+[21:11:01] mystere@mystere:~/.ssh$ ssh-add ~/.ssh/gh-argiberri
+Error loading key "/home/mystere/.ssh/gh-argiberri": error in libcr...]]></description><link>https://zenn.dev/argi_berri/articles/3e71ad03aa1158</link><guid isPermaLink="true">https://zenn.dev/argi_berri/articles/3e71ad03aa1158</guid><pubDate>Mon, 15 Jul 2024 12:19:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xvYMfW2T--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%25B2%25E3%2581%25A8%25E3%2581%258F%25E3%2581%25A1%25E3%2583%25A1%25E3%2583%25A2%25EF%25BC%259Assh-add%2520%25E3%2581%2599%25E3%2582%258B%25E3%2581%25A8%25E3%2581%258D%25E3%2581%25AB%2520error%2520in%2520libcrypto%2520%25E3%2581%258C%25E5%2587%25BA%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ARGIA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RhYWQwM2NmMzcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ARGIA</dc:creator></item><item><title><![CDATA[Linuxコマンド基礎]]></title><description><![CDATA[業務で使用経験のあるLinuxコマンド一覧。
+]]></description><link>https://zenn.dev/teru_whisky/books/33b85841bf589d</link><guid isPermaLink="true">https://zenn.dev/teru_whisky/books/33b85841bf589d</guid><pubDate>Mon, 15 Jul 2024 09:44:55 GMT</pubDate><dc:creator>teru</dc:creator></item><item><title><![CDATA[【CVE-2024-6409対策】OpenSSHで再びregreSSHionの脆弱性が発見されたので対応方法を確認した]]></title><description><![CDATA[先日、「CVE-2024-6387」の対応を行ったばかりですが、
+「CVE-2024-6409」で新たにregreSSHionの脆弱性が見つかったようなので対応方法を確認しました。
+https://zenn.dev/huuya/articles/e50cbe00189746
+
+ CVE-2024-6409の対象になるバージョンについて
+公式のフォーラムによると
+
+8.7p1以降
+
+が対象のようでした。
+ubuntuの公式ブログには
+
+Potential issue appears to have only been present in
+openssh 8.7p1 and 8.8p1, ...]]></description><link>https://zenn.dev/huuya/articles/03328ddf704638</link><guid isPermaLink="true">https://zenn.dev/huuya/articles/03328ddf704638</guid><pubDate>Mon, 15 Jul 2024 09:24:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Nri-0Hwy--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590CVE-2024-6409%25E5%25AF%25BE%25E7%25AD%2596%25E3%2580%2591OpenSSH%25E3%2581%25A7%25E5%2586%258D%25E3%2581%25B3regreSSHion%25E3%2581%25AE%25E8%2584%2586%25E5%25BC%25B1%25E6%2580%25A7%25E3%2581%258C%25E7%2599%25BA%25E8%25A6%258B%25E3%2581%2595%25E3%2582%258C%25E3%2581%259F%25E3%2581%25AE%25E3%2581%25A7%25E5%25AF%25BE%25E5%25BF%259C%25E6%2596%25B9%25E6%25B3%2595%25E3%2582%2592%25E7%25A2%25BA%25E8%25AA%258D%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:huuya%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2YzZDJmYTZjYjMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>huuya</dc:creator></item><item><title><![CDATA[「Efficient Linux コマンドライン」から学んだこと]]></title><description><![CDATA[
+ はじめに
+本記事では、「Efficient Linux コマンドライン」を読んで、私自身が新たに学んだことについてメモしています。
+私がすでに知っていた情報については本記事に書いていないため、興味があればお手元に買って読んでみてください。この記事には書いていないこともたくさん書いてあります。
+この本の対象読者としては、Linuxの勉強を1からしたい人というよりは、Linuxをそこそこ触ったことがある人になると思います。"そこそこ触ったことがある"のレベルとしては、コマンドでディレクトリを変更したり、プログラムを実行したりしていれば十分です。
+336ページとそこまで長くもなく、またLi...]]></description><link>https://zenn.dev/moz_sec/articles/2a849651de3fe1</link><guid isPermaLink="true">https://zenn.dev/moz_sec/articles/2a849651de3fe1</guid><pubDate>Mon, 15 Jul 2024 08:51:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--tIpAqV0G--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%258CEfficient%2520Linux%2520%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%25B3%25E3%2580%258D%25E3%2581%258B%25E3%2582%2589%25E5%25AD%25A6%25E3%2582%2593%25E3%2581%25A0%25E3%2581%2593%25E3%2581%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:moz-sec%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y3ZWUzN2Q2ZTcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>moz-sec</dc:creator></item><item><title><![CDATA[2024年のオーディオアプリケーション開発技術の動向に関する私的見解 (2)]]></title><description><![CDATA[昨日の続き。今日は「現代的な課題だけど実装がやや追いついていない技術」編。
+
+ MIDI 2.0のadoption
+MIDI 2.0のサポートは、段階的に追加されているものの、その歩みは緩慢だ。
+MIDI 2.0は2023年に大きなアップデートがあり、そのタイミングでLinux ALSAにはUMPサポートが追加された。この時点でプラットフォームAPIとしてMIDI 2.0を十分にサポートしていなかった主要OSはWindowsとAndroidのみだった（ChromeOSは…Web以外で音楽やる気ないし主要OSから外してもいいだろう）。今年になってAndroid 15が仮想MIDI 2.0デ...]]></description><link>https://zenn.dev/atsushieno/articles/2f91dc26a1f37a</link><guid isPermaLink="true">https://zenn.dev/atsushieno/articles/2f91dc26a1f37a</guid><pubDate>Sun, 14 Jul 2024 10:59:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--gRfSLhGN--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:2024%25E5%25B9%25B4%25E3%2581%25AE%25E3%2582%25AA%25E3%2583%25BC%25E3%2583%2587%25E3%2582%25A3%25E3%2582%25AA%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E9%2596%258B%25E7%2599%25BA%25E6%258A%2580%25E8%25A1%2593%25E3%2581%25AE%25E5%258B%2595%25E5%2590%2591%25E3%2581%25AB%25E9%2596%25A2%25E3%2581%2599%25E3%2582%258B%25E7%25A7%2581%25E7%259A%2584%25E8%25A6%258B%25E8%25A7%25A3%2520%25282%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Atsushi%2520Eno%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2ptVkFPck1hOUFQQ3pGaTR0VUtqMHZXSHZHaWpJQVVvZWRtM3JZVUE9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Atsushi Eno</dc:creator></item><item><title><![CDATA[Linux 使いになりたい人向けの Intel N100 ミニ PC で構築する開発環境（１２）- Oh My Posh]]></title><description><![CDATA[
+ はじめに
+これは、Linux 使いになりたい人向けに Intel N100 ミニ PC を使って開発環境を構築する方法を解説する記事の第１２弾です。第１弾はLinux 使いになりたい人向けの Intel N100 ミニ PC で構築する開発環境（１） - 構築する開発環境について にあり、そこから第２弾へと続いています。そちらからご覧ください。
+ここで使用する Intel N100 ミニ PC の仕様は次のものを前提とします。
+
+
+
+項目
+内容
+
+
+
+
+OS
+Windows 11 Pro
+
+
+CPU
+Intel N100
+
+
+メモリ
+16GB
+
+
+ストレージ
+SSD 512 GB
+
+...]]></description><link>https://zenn.dev/hiro345/articles/n100_12_20240714</link><guid isPermaLink="true">https://zenn.dev/hiro345/articles/n100_12_20240714</guid><pubDate>Sun, 14 Jul 2024 09:47:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--UuUVOPRp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%2520%25E4%25BD%25BF%25E3%2581%2584%25E3%2581%25AB%25E3%2581%25AA%25E3%2582%258A%25E3%2581%259F%25E3%2581%2584%25E4%25BA%25BA%25E5%2590%2591%25E3%2581%2591%25E3%2581%25AE%2520Intel%2520N100%2520%25E3%2583%259F%25E3%2583%258B%2520PC%2520%25E3%2581%25A7%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2599%25E3%2582%258B%25E9%2596%258B%25E7%2599%25BA%25E7%2592%25B0%25E5%25A2%2583%25EF%25BC%2588%25EF%25BC%2591%25EF%25BC%2592%25EF%25BC%2589-%2520Oh%2520My%2520Posh%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Hiroshi%2520Koyama%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2k5ZzdjLS0xTFk0S2k0LWw3dVFSSFZRdEdQcWZHYTlibVRJYUtFM0E9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Hiroshi Koyama</dc:creator></item><item><title><![CDATA[公開鍵の作成方法]]></title><description><![CDATA[
+ 公開鍵とは
+
+公開している方の鍵（public key）を先方に送って（もしくはダウンロードして貰って）、その鍵で暗号化して貰い、暗号化されたデータを送って貰う。
+暗号化されたデータの復号（元のデータに戻す）には、秘密鍵（private key）を使う。
+
+
+ 公開鍵の確認
+macOSの場合は、ほとんどの人が既に公開キーを作っていると思う。[1]
+cat ~/.ssh/id_rsa.pub
+上のコマンドを入力すると、以下のように出力されるはず。されなければ存在しないので作成する。
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDMaxy（省略）KhdoE...]]></description><link>https://zenn.dev/tomoakinagahara/articles/dbd5df9944f5e9</link><guid isPermaLink="true">https://zenn.dev/tomoakinagahara/articles/dbd5df9944f5e9</guid><pubDate>Fri, 12 Jul 2024 08:11:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Tv22dwR5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2585%25AC%25E9%2596%258B%25E9%258D%25B5%25E3%2581%25AE%25E4%25BD%259C%25E6%2588%2590%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Tomoaki%2520Nagahara%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2czREt6Z1p1U3hEcGVZaFY1ajhJSjNmTzFZODlMLXg3bVJxcFU1Q0E9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Tomoaki Nagahara</dc:creator></item><item><title><![CDATA[CentOS / Amazon Linux で OpenSSH のバージョンを確認する]]></title><description><![CDATA[
+ まずはOS情報を確認
+cat /etc/os-release
+
+ OpenSSHのバージョンを確認する
+yum info openssh
+こんな風にバージョンが表示される
+Installed Packages
+Name        : openssh
+...
+Version     : x.x.x
+新しいアップデート対象バージョンがある場合はそれも表示される
+Available Packages
+Name        : openssh
+...
+Version     : y.y.y
+
+ アップデート
+まずはrootユーザーになっておく
+sudo su -
+そしてアップデートを実...]]></description><link>https://zenn.dev/yumainaura/articles/qiita-2024-07-04t18_07_22-09_00</link><guid isPermaLink="true">https://zenn.dev/yumainaura/articles/qiita-2024-07-04t18_07_22-09_00</guid><pubDate>Thu, 11 Jul 2024 02:54:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--gDe7JMYb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:CentOS%2520%252F%2520Amazon%2520Linux%2520%25E3%2581%25A7%2520OpenSSH%2520%25E3%2581%25AE%25E3%2583%2590%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%2592%25E7%25A2%25BA%25E8%25AA%258D%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E7%25A8%25B2%25E6%25B5%25A6%25E6%2582%25A0%25E9%25A6%25AC%2520%2528%25E3%2581%2584%25E3%2581%25AA%25E3%2581%2586%25E3%2582%2589%25E3%2582%2586%25E3%2581%2586%25E3%2581%25BE%2529%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FGZFp1Y3BPSm80MUYydFUxV05wb0owWGNCOTBiUGp1MVdxUmtEWjduWmRhSTlZPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>稲浦悠馬 (いなうらゆうま)</dc:creator></item><item><title><![CDATA[完璧に記述しているSSH Configで認証できなかった話]]></title><description><![CDATA[
+ まえがき
+bitbucketでいつもと違うワークスペースにリポジトリを作り、ローカル端末に用意していたリポジトリをプッシュしようとしたら拒否されて４時間ハマったので、解決法を記載します。
+
+ 部分的には完璧にあっていた。
+ググって出てきた答えや、ChatGPTの提案は全て実施しましたが元々なんらミスっていなかったので、全く解決しませんでした。
+そもそも、私がスペースのオーナーから管理者権限を移譲してもらって作ったリポジトリなのにアクセス権限がないのは意味不明でした。
+・・・そう、部分的には完璧だったのです。
+下のような感じです。
+
+~/ssh/config
+265 # bitbuck...]]></description><link>https://zenn.dev/k_tabuchi/articles/66ede77ab0c33d</link><guid isPermaLink="true">https://zenn.dev/k_tabuchi/articles/66ede77ab0c33d</guid><pubDate>Wed, 10 Jul 2024 13:27:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hwLoEPOc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%25AE%258C%25E7%2592%25A7%25E3%2581%25AB%25E8%25A8%2598%25E8%25BF%25B0%25E3%2581%2597%25E3%2581%25A6%25E3%2581%2584%25E3%2582%258BSSH%2520Config%25E3%2581%25A7%25E8%25AA%258D%25E8%25A8%25BC%25E3%2581%25A7%25E3%2581%258D%25E3%2581%25AA%25E3%2581%258B%25E3%2581%25A3%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:k-tabuchi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhkMjhhY2RlZGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>k-tabuchi</dc:creator></item><item><title><![CDATA[パッシブモードの設定を諦めました]]></title><description><![CDATA[
+さくらインターネットのVPSにDebian 12を構築。
+管理画面にてパケットフィルターを設定。
+このパケットフィルターは、32768-65535ポートは全て許可される。
+パケットフィルター標準のFTPを許可（ポートは20-21）。IPアドレス設定あり。
+vsftpdをインストール。
+パッシブモードを設定。
+アクセスできず。
+ufwを停止してもアクセスできず。
+アクティブモードならアクセス可能。
+
+
+ パッシブモードとは
+アクティブモードとパッシブモードについて
+
+ 設定
+パッシブモードの設定方法
+]]></description><link>https://zenn.dev/tomoakinagahara/articles/97ac440ef1593e</link><guid isPermaLink="true">https://zenn.dev/tomoakinagahara/articles/97ac440ef1593e</guid><pubDate>Wed, 10 Jul 2024 09:09:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6Ne7oTgy--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2591%25E3%2583%2583%25E3%2582%25B7%25E3%2583%2596%25E3%2583%25A2%25E3%2583%25BC%25E3%2583%2589%25E3%2581%25AE%25E8%25A8%25AD%25E5%25AE%259A%25E3%2582%2592%25E8%25AB%25A6%25E3%2582%2581%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Tomoaki%2520Nagahara%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2czREt6Z1p1U3hEcGVZaFY1ajhJSjNmTzFZODlMLXg3bVJxcFU1Q0E9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Tomoaki Nagahara</dc:creator></item><item><title><![CDATA[【Linux】sysstat(sar)パッケージ 変更点情報]]></title><description><![CDATA[
+ はじめに
+システムリソースを記録してくれる便利なsarですが、どうも実機を見ているとsysstatパッケージのバージョンによりリソース項目に増減があったり、オプションコマンドが無くなっていたりしているみたいでした。
+しかし、sarコマンドの変更点が記載されているドキュメントになかなか辿り着けず。。。。なので、同じ悩みを抱える方の一助になればと記事を作成しております。
+
+ 結論
+リンク(https://github.com/sysstat/sysstat/blob/master/CHANGES)からsysstatパッケージの変更情報（CHANGES）を得ることができます。
+※下記CHA...]]></description><link>https://zenn.dev/1st_penguin/articles/bea9b5d344b432</link><guid isPermaLink="true">https://zenn.dev/1st_penguin/articles/bea9b5d344b432</guid><pubDate>Tue, 09 Jul 2024 14:59:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--QGWnL0O5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Linux%25E3%2580%2591sysstat%2528sar%2529%25E3%2583%2591%25E3%2583%2583%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B8%2520%25E5%25A4%2589%25E6%259B%25B4%25E7%2582%25B9%25E6%2583%2585%25E5%25A0%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259F%25E3%2581%25AA%25E3%2581%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzIzMTZmYzVhNWUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>たなか</dc:creator></item><item><title><![CDATA[【RHEL9】NVIDIA のグラフィックボードを使う方法]]></title><description><![CDATA[
+ あらすじ
+お久しぶりです、ゆらりです。
+最近 WSL を使って開発をしていたのですが、ポート関係の設定が色々と面倒で Linux に戻ろうと思いました。
+なにを入れようか悩んだのですが、サーバーで RedHat 系 Linux を使っているので RHEL9 (開発者向けに無償で提供されているもの) に決めました。
+しかし NVIDIA のグラフィックボードがうまく動作せず、画面が真っ黒になってしまいました。
+使用しているグラフィックボード RTX4060ti のドライバがうまく当たっていないみたいです。
+
+ いまの環境
+
+OS名: Red Hat Enterprise Linux 9...]]></description><link>https://zenn.dev/yurarin/articles/357f89e4487577</link><guid isPermaLink="true">https://zenn.dev/yurarin/articles/357f89e4487577</guid><pubDate>Tue, 09 Jul 2024 07:49:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0Qb28bb2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590RHEL9%25E3%2580%2591NVIDIA%2520%25E3%2581%25AE%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%2595%25E3%2582%25A3%25E3%2583%2583%25E3%2582%25AF%25E3%2583%259C%25E3%2583%25BC%25E3%2583%2589%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2586%25E3%2582%2589%25E3%2582%258A%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM3MTVkOWI4NGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ゆらり</dc:creator></item><item><title><![CDATA[Fedora40 で Zabbix Agent を動かす]]></title><description><![CDATA[お家の検証サーバ用の備忘録です。基本 root です。
+
+ 前提
+Zabbix Server に Agent をインストールして監視してみます。
+https://zenn.dev/asterisk9101/articles/fedora40server-2
+
+ SELinuxの無効化
+良くないなぁと思いながら無効化します。
+sed -i.bak -E \
+    's/SELINUX=enforcing/SELINUX=disabled/' \
+    /etc/selinux/config
+reboot
+
+ インストール
+zabbix-agent をインストールします。
+dnf -y ...]]></description><link>https://zenn.dev/asterisk9101/articles/fedora40server-3</link><guid isPermaLink="true">https://zenn.dev/asterisk9101/articles/fedora40server-3</guid><pubDate>Mon, 08 Jul 2024 16:25:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3Oh-LdIz--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Fedora40%2520%25E3%2581%25A7%2520Zabbix%2520Agent%2520%25E3%2582%2592%25E5%258B%2595%25E3%2581%258B%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25A4%259A%25E7%2594%25B0%25E6%25B0%258F%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFUWEFKd3hvZ1pLNDVtSmdsUDlROUZPUTcyRXg4eV9MeFdmejdma0V1aTA9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>多田氏</dc:creator></item><item><title><![CDATA[How to install pyenv on Debian]]></title><description><![CDATA[
+ 概要
+Debianにpyenvをインストールする手順について備忘録としてまとめた．
+
+ 対象読者
+Debianを使用し，複数のPythonバージョンを簡単に管理したい人を対象としている．
+
+ pyenvのインストール方法
+
+ 1. 必要なパッケージのインストール
+sudo apt install build-essential curl wget zip git libssl-dev libbz2-dev libffi-dev liblzma-dev libreadline-dev libsqlite3-dev tk-dev
+
+ 2. pyenvのリポジトリをクローン
+git clo...]]></description><link>https://zenn.dev/tomokis/articles/76b1946e94d886</link><guid isPermaLink="true">https://zenn.dev/tomokis/articles/76b1946e94d886</guid><pubDate>Mon, 08 Jul 2024 14:05:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hz9snq1a--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:How%2520to%2520install%2520pyenv%2520on%2520Debian%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tomoki%2520sugiura%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS1FNeFZ3OFVfbUVZNks0aDRPWGZYUGEtZXhJUDBDZk9XUUxoOFBpSFBJV0FubD1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tomoki sugiura</dc:creator></item><item><title><![CDATA[windows で SSM がインストールされている端末にportforwardする]]></title><description><![CDATA[
+ 概要
+windows で SSM がインストールされている端末にportforwardする
+linux はSSMでRDPがサポートされていないのでlinuxにRDPしたい時とかに使う
+
+ 前提
+
+linuxの場合、対象サーバにXRDPがインストールされている
+対象サーバにSSM Agentが入っている
+対象サーバがインターネットに接続できる
+
+
+ 手順
+
+
+AWS CLI install ※してない場合のみ
+https://docs.aws.amazon.com/ja_jp/cli/latest/userguide/getting-started-install.html
+
+
+アクセ...]]></description><link>https://zenn.dev/zuzuzu/articles/ssm_agent_portforward</link><guid isPermaLink="true">https://zenn.dev/zuzuzu/articles/ssm_agent_portforward</guid><pubDate>Mon, 08 Jul 2024 10:54:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--OvmwpfEV--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:windows%2520%25E3%2581%25A7%2520SSM%2520%25E3%2581%258C%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%2595%25E3%2582%258C%25E3%2581%25A6%25E3%2581%2584%25E3%2582%258B%25E7%25AB%25AF%25E6%259C%25AB%25E3%2581%25ABportforward%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:zu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2EwYzkyNjY5ZjcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>zu</dc:creator></item><item><title><![CDATA[vsftpd で chroot する]]></title><description><![CDATA[この作業記録は、さくらインターネットのVPSに、最初はCentOS 8で、その次にDebian 12で作業した記録になります。
+
+ chroot とは
+許可されたディレクトリー以下しか閲覧できなくする機能です。
+FTP接続時に、アカウント毎に閲覧できるディレクリーを変更したい場合に使います。
+
+ 前提
+ここでは、vsftpd で chroot するためだけの設定を説明します。
+vsftpdは、その他の設定により、外部ファイルが、許可リストになったり拒否リストになったり紛らわしいので注意が必要です。
+
+ 設定
+具体的な設定は以下の通り。
+
+vsftpd.conf
+# chrootのlist...]]></description><link>https://zenn.dev/tomoakinagahara/articles/1f18348c1fef08</link><guid isPermaLink="true">https://zenn.dev/tomoakinagahara/articles/1f18348c1fef08</guid><pubDate>Mon, 08 Jul 2024 03:32:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---U4IDrlz--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:vsftpd%2520%25E3%2581%25A7%2520chroot%2520%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Tomoaki%2520Nagahara%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2czREt6Z1p1U3hEcGVZaFY1ajhJSjNmTzFZODlMLXg3bVJxcFU1Q0E9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Tomoaki Nagahara</dc:creator></item><item><title><![CDATA[【WireGuard】拠点間でVPN接続をしてみた]]></title><description><![CDATA[
+ はじめに
+みなさんは、自身でVPNサーバをお持ちでしょうか。私の環境では、自宅で鯖が動いていますが、その鯖達はNATされていたり、物理的な問題もあって、さくらのVPS上にWireGuardを用いてVPN環境を構築しています。しかし、このような環境であると、自宅のネットワークにはルーティングできず、自宅内のホスト全てにWireGuardをインストールするという手間が発生してしまいます。従って、WireGuard鯖と自宅内にある代表の鯖一台同士を拠点間で接続することにしました。
+
+ 構成図
+
+!
+
+さくらのVPSではVPS自体にグローバルのIPアドレスが割り当てられています。
+左側のVP...]]></description><link>https://zenn.dev/tochiman/articles/2af73f9bdb4765</link><guid isPermaLink="true">https://zenn.dev/tochiman/articles/2af73f9bdb4765</guid><pubDate>Sun, 07 Jul 2024 15:48:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--EqJG5pSb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590WireGuard%25E3%2580%2591%25E6%258B%25A0%25E7%2582%25B9%25E9%2596%2593%25E3%2581%25A7VPN%25E6%258E%25A5%25E7%25B6%259A%25E3%2582%2592%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tochiman%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA4NTAzODI5MzAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tochiman</dc:creator></item><item><title><![CDATA[DHCPサーバーを設定する(LinuC202学習)]]></title><description><![CDATA[
+ DHCPの基本情報
+DHCP(Dynamic Host Configuration Protocol)はネットワーク内のIPアドレスを自動で取得、割り当てを行えるプロトコル。
+ネットワーク内にコンピューターが参加したときにDHCP要求を行い、DHCPがそれに応答して利用可能なIPアドレスを提供する。
+RFC2131にて定義。(日本語訳)
+わかりやすい解説：https://milestone-of-se.nesuke.com/nw-basic/grasp-nw/dhcp/
+プロトコルの特徴は、クライアントがIPアドレスの割り当てを求める「DHCP要求」は リミテッドブロードキャストアド...]]></description><link>https://zenn.dev/yoshitomo_t/articles/linuc202_dhcp</link><guid isPermaLink="true">https://zenn.dev/yoshitomo_t/articles/linuc202_dhcp</guid><pubDate>Sun, 07 Jul 2024 10:40:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--LLNL7Szn--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:DHCP%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2582%2592%25E8%25A8%25AD%25E5%25AE%259A%25E3%2581%2599%25E3%2582%258B%2528LinuC202%25E5%25AD%25A6%25E7%25BF%2592%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259F%25E3%2581%25AA%25E3%2581%25B9%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTG43LW5jdVowQS15c2xkeHgyTGxjeHkzWWhaOWo1WE00MGV4cTBBTkQ1Qmc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>たなべ</dc:creator></item></channel></rss>
