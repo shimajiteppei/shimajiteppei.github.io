@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「JavaScript」のフィード]]></title><description><![CDATA[Zennのトピック「JavaScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/javascript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/64acd76870.png</url><title>Zennの「JavaScript」のフィード</title><link>https://zenn.dev/topics/javascript</link></image><generator>zenn.dev</generator><lastBuildDate>Fri, 19 Jul 2024 12:03:42 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/javascript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[upstash の Redis に ioredis で接続する]]></title><description><![CDATA[無料でも使える Redis (を含む)サービス upstash を使ってみている。
+基本は upstash の SDK で接続するようだが、ioredis を使う方法も示されていたので試したのだけど、うまく行かなくて試行錯誤したので、記録しておく。
+https://upstash.com/docs/redis/howto/connectwithtls#node-js には、
+const Redis = require("ioredis");
+
+let client = new Redis("rediss://:YOUR_PASSWORD@YOUR_ENDPOINT:YOUR_PORT")...]]></description><link>https://zenn.dev/amay077/articles/9fa92180be12a0</link><guid isPermaLink="true">https://zenn.dev/amay077/articles/9fa92180be12a0</guid><pubDate>Fri, 19 Jul 2024 09:10:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hNCzNQdI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:upstash%2520%25E3%2581%25AE%2520Redis%2520%25E3%2581%25AB%2520ioredis%2520%25E3%2581%25A7%25E6%258E%25A5%25E7%25B6%259A%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:amay077%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y3NWRjYThjOTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>amay077</dc:creator></item><item><title><![CDATA[JavaScriptの基礎]]></title><description><![CDATA[自分はC,C++,python,C#ぐらいしか触ったことがなく、react触ろうと思ったときに
+JavaScript分からない！となったので基礎をまとめてみました
+https://developer.mozilla.org/ja/docs/Learn/JavaScript/First_steps
+公式を参考にしています
+
+ JavaScriptとは
+
+JavaScript のごく一般的な用途は、Document Object Model API を介して動的に HTML と CSS を変更し、ユーザーインターフェイスを更新することです。
+
+
+
+ブラウザAPI：ウェブブラウザに組み込まれて...]]></description><link>https://zenn.dev/gao3/articles/2e4a0a82be1a88</link><guid isPermaLink="true">https://zenn.dev/gao3/articles/2e4a0a82be1a88</guid><pubDate>Fri, 19 Jul 2024 07:15:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--HSDqPOLT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:JavaScript%25E3%2581%25AE%25E5%259F%25BA%25E7%25A4%258E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:gao3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSkVNVkQ5ZEdOc2lTSEVVczluUktEb0FLQ291UEpDbnZuNlBPN0NKWXpESHh2YVVBPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>gao3</dc:creator></item><item><title><![CDATA[射影変換って結局なにすればええんや]]></title><description><![CDATA[
+ モチベーション
+
+Photoshopの自由変形(ctrl+T)みたいなのを実装したかった
+なぜかJSでネイティブで書きたかった
+
+!
+この記事は2019年にQiitaに投稿した射影変換って結局なにすればええんやの複製記事です。
+
+
+ 概略
+
+ 要件定義
+
+input : 射影前の画像および射影後の4点
+output : 変形した画像
+
+
+ 実装
+
+射影前後の座標の変化から射影関数を求める
+output画像のピクセルの位置に相当する、input画像上の点を上記射影関数の逆写像から求める
+その点は確率1で格子点上にないので、周囲のピクセルから補間を行う
+
+
+ 射影関数
+射影変換の一般系は...]]></description><link>https://zenn.dev/music_shio/articles/09c03463a3008a</link><guid isPermaLink="true">https://zenn.dev/music_shio/articles/09c03463a3008a</guid><pubDate>Fri, 19 Jul 2024 07:03:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--aYY0aIKb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%25B0%2584%25E5%25BD%25B1%25E5%25A4%2589%25E6%258F%259B%25E3%2581%25A3%25E3%2581%25A6%25E7%25B5%2590%25E5%25B1%2580%25E3%2581%25AA%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258C%25E3%2581%25B0%25E3%2581%2588%25E3%2581%2588%25E3%2582%2593%25E3%2582%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Hiromichi%2520Shiozuka%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzkwZjc3NDNlYTcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Hiromichi Shiozuka</dc:creator></item><item><title><![CDATA[react-map-glを使ってみる]]></title><description><![CDATA[
+ はじめに
+Mapbox GL JSは強力なJavaScript用の地図ライブラリですが、公式にはReact用のライブラリはありません。ドキュメントにしたがってReactと組み合わせて使用することはできますが、Reactっぽいコードから逸脱している感は否めません。
+そこでMapbox GL JSをラップしてReact対応したライブラリを探してみるといくつか見つかります。中でもreact-map-glがおすすめです。このライブラリはdeck.glのコンポーネントとして開発されてきたようですが、単独でも使用可能です。
+react-map-glはMapboxが直接開発しているわけではありませ...]]></description><link>https://zenn.dev/mapbox_japan/articles/348b8e229aaab5</link><guid isPermaLink="true">https://zenn.dev/mapbox_japan/articles/348b8e229aaab5</guid><pubDate>Thu, 18 Jul 2024 12:46:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8NTNMoCj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:react-map-gl%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:OttyLab%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RmZWNmNDhhMWMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%259E%25E3%2583%2583%25E3%2583%2597%25E3%2583%259C%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25B9%25E3%2583%25BB%25E3%2582%25B8%25E3%2583%25A3%25E3%2583%2591%25E3%2583%25B3%25E5%2590%2588%25E5%2590%258C%25E4%25BC%259A%25E7%25A4%25BE%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhMGJmZWJmZmQuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>OttyLab</dc:creator></item><item><title><![CDATA[cluster Game HUD v2の始め方（LT資料とその補完）]]></title><description><![CDATA[これは2024/7/18の「GAME PARK LT会」で発表したときのPDF資料です。
+https://vins-jp.sakura.ne.jp/pdf/game_hud_v2.pdf
+
+
+ 上記のPDFの中にあるコード
+PDFでは画像になっているコードを以下に貼り付けます。
+PDFと重複する内容もありますが、少しTipsも書いています。
+$.onRide((isGeton, player) =&gt; {
+  if (isGeton) {
+    $.setPlayerScript(player);
+  }
+});
+!
+乗り物・持ち物などはsetPlayerScriptのタイミングが...]]></description><link>https://zenn.dev/vins/articles/cb61adec97223c</link><guid isPermaLink="true">https://zenn.dev/vins/articles/cb61adec97223c</guid><pubDate>Thu, 18 Jul 2024 12:01:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--TuIISVut--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:cluster%2520Game%2520HUD%2520v2%25E3%2581%25AE%25E5%25A7%258B%25E3%2582%2581%25E6%2596%25B9%25EF%25BC%2588LT%25E8%25B3%2587%25E6%2596%2599%25E3%2581%25A8%25E3%2581%259D%25E3%2581%25AE%25E8%25A3%259C%25E5%25AE%258C%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:vins%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2c0ZERlaWVTamtQcDFmTDYwS1FhTlpYMkpMeTJOOGtfeWRha1F6PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>vins</dc:creator></item><item><title><![CDATA[Node.jsでローカルサーバーを起動する【ホットリロード対応】]]></title><description><![CDATA[
+ はじめに
+
+ この記事について
+Node.js でローカルサーバーを起動するまでを学習したのでアウトプットとして備忘録的に記します。
+
+ 環境
+!
+Node.js や npm はインストール済みであることを前提としています。
+以下のコマンドでバージョン表示されればインストール済みです。
+node -v
+npm -v
+
+
+インストール時に参考にさせていただいた記事
+M1 Macでnvmを使ってnode.jsとnpmをインストール
+https://c-limber.co.jp/blog/2610
+
+
+
+
+カテゴリ
+バージョン
+
+
+
+
+Node.js
+v20.12.2
+
+
+npm
+10.5...]]></description><link>https://zenn.dev/no215/articles/5ab9bb65d76b0f</link><guid isPermaLink="true">https://zenn.dev/no215/articles/5ab9bb65d76b0f</guid><pubDate>Thu, 18 Jul 2024 08:59:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--c_tDp8cv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Node.js%25E3%2581%25A7%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25AB%25E3%2583%25AB%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2582%2592%25E8%25B5%25B7%25E5%258B%2595%25E3%2581%2599%25E3%2582%258B%25E3%2580%2590%25E3%2583%259B%25E3%2583%2583%25E3%2583%2588%25E3%2583%25AA%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2589%25E5%25AF%25BE%25E5%25BF%259C%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:no215%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzYzZmJjYmRlMWIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>no215</dc:creator></item><item><title><![CDATA[javascriptで半分まで行ったら「上へ戻るボタン」を出現させる方法：備忘録]]></title><description><![CDATA[下まで行ったら、上に戻りたいな～って思う時、たまにありますよね。
+そんな時便利なのがTOPへ戻るボタン的なやつです。
+初めて作ってみたのですが意外に簡単だったけど忘れがちなところもあったので、共有します。
+余談：ハローメンターというサービスで模写修行の課題をアレンジしたときに加えました
+
+ 実現したい事
+
+ページの50%、半分まで行ったらこのボタンを出現させる。
+
+ スタイルを整える
+ここはお好みで調整してください。
+矢印は画像です。
+&lt;div class="c_scrollToTop js_scrollToTop"&gt;&lt;/div&gt;
+.c_scrollToTop {...]]></description><link>https://zenn.dev/az0901/articles/3cda50c52db807</link><guid isPermaLink="true">https://zenn.dev/az0901/articles/3cda50c52db807</guid><pubDate>Thu, 18 Jul 2024 08:24:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GWJ7PQUF--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:javascript%25E3%2581%25A7%25E5%258D%258A%25E5%2588%2586%25E3%2581%25BE%25E3%2581%25A7%25E8%25A1%258C%25E3%2581%25A3%25E3%2581%259F%25E3%2582%2589%25E3%2580%258C%25E4%25B8%258A%25E3%2581%25B8%25E6%2588%25BB%25E3%2582%258B%25E3%2583%259C%25E3%2582%25BF%25E3%2583%25B3%25E3%2580%258D%25E3%2582%2592%25E5%2587%25BA%25E7%258F%25BE%25E3%2581%2595%25E3%2581%259B%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%25EF%25BC%259A%25E5%2582%2599%25E5%25BF%2598%25E9%258C%25B2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Azurite0901%2Cx_90%2Cy_121/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Azurite0901</dc:creator></item><item><title><![CDATA[コラボフローでサイン画像を手描きして保存する]]></title><description><![CDATA[
+ はじめに
+コラボフローでサインを手描きして画像保存するカスタマイズを作成してみました。
+（コラボフローJavaScript APIを使ってカスタマイズしています）
+コラボフローを知らない方は、ぜひ こちらを参考にしてみてください！
+
+ 事前準備
+
+ コラボフローの通常フォーム
+必要となるのは以下のパーツです。
+
+画像パーツ
+ラベルパーツ
+
+ラベルパーツの設定情報
+コラボフローのラベルパーツには、HTMLを登録することができます！
+フォーム内にサインを手書きするスペースやサイン画像を保存するボタンを表示させたいので、
+「ラベルの内容」には以下のHTMLを登録しておきます。
+・手書きサイ...]]></description><link>https://zenn.dev/uchimura/articles/6aa167d1f4aa87</link><guid isPermaLink="true">https://zenn.dev/uchimura/articles/6aa167d1f4aa87</guid><pubDate>Thu, 18 Jul 2024 02:05:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--y4kT3pdH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B3%25E3%2583%25A9%25E3%2583%259C%25E3%2583%2595%25E3%2583%25AD%25E3%2583%25BC%25E3%2581%25A7%25E3%2582%25B5%25E3%2582%25A4%25E3%2583%25B3%25E7%2594%25BB%25E5%2583%258F%25E3%2582%2592%25E6%2589%258B%25E6%258F%258F%25E3%2581%258D%25E3%2581%2597%25E3%2581%25A6%25E4%25BF%259D%25E5%25AD%2598%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%2586%2585%25E6%259D%2591%2520%25E5%259C%25AD%25E5%25AE%258F%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzlhNzY4MTQ3ZWUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>内村 圭宏</dc:creator></item><item><title><![CDATA[Typescript これ使ってみて Part 1]]></title><description><![CDATA[
+ はじめに
+TypeScriptには新しい機能がたくさん追加されていて、どれを使うか迷うことがあります。本ブログでは、次の開発にすぐ使えそうなTypeScriptの面白い機能をいくつかピックアップして紹介します。
+
+ using キーワードでリソース管理をシンプルに
+こちらは C# の using や Python の with と同じものです。
+using が導入される前は、以下のようにリソース管理を行いました。
+export function doSomeWork() {
+    const path = ".some_temp_file";
+    const file = fs...]]></description><link>https://zenn.dev/socialplus/articles/fd3092e9b96554</link><guid isPermaLink="true">https://zenn.dev/socialplus/articles/fd3092e9b96554</guid><pubDate>Wed, 17 Jul 2024 10:22:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ws-nIhAa--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Typescript%2520%25E3%2581%2593%25E3%2582%258C%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%25A6%2520Part%25201%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:kailma%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I4Mjg2YmNjMDEuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:SocialPLUS%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSXNXRVZFaTBmMDM2VUhvckNoRzF4UkotZzdtaFpJek8xUkdWcDRjcTBlPXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kailma</dc:creator></item><item><title><![CDATA[TypeScriptでClassの初期化をもっと楽にする]]></title><description><![CDATA[
+ はじめに
+TypeScriptでClassを定義する場合、みなさんはどのように初期化を行っていますか？
+コンストラクタに引数を並べる方法が一般的だと思いますが、引数が多い場合や、引数の順番を間違えるとバグの原因になります。
+class User {
+  public readonly id: number;
+  public readonly firstName: string;
+  public readonly lastName: string;
+  
+  public constructor(id: number, firstName: string, lastName: st...]]></description><link>https://zenn.dev/praha/articles/4ef2bb7ca69e5a</link><guid isPermaLink="true">https://zenn.dev/praha/articles/4ef2bb7ca69e5a</guid><pubDate>Wed, 17 Jul 2024 07:25:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3Hh-EbhE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%25E3%2581%25A7Class%25E3%2581%25AE%25E5%2588%259D%25E6%259C%259F%25E5%258C%2596%25E3%2582%2592%25E3%2582%2582%25E3%2581%25A3%25E3%2581%25A8%25E6%25A5%25BD%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Karibash%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NiNzU1NDliMzkuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25A2%25E3%2582%25AC%25E3%2583%25AB%25E3%2583%25BC%25E3%2583%2588%25E3%2583%2586%25E3%2582%25AF%25E3%2583%258E%25E3%2583%25AD%25E3%2582%25B8%25E3%2583%25BC%25E3%2582%25BA%252FPrAha%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dPMW45d0ZmU3FpV21hNW9HWlAzczc4YnRIN0VBUXE5aDdaOU5VZ3c9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Karibash</dc:creator></item><item><title><![CDATA[JavaScript で、税込み計算をしやすくした]]></title><description><![CDATA[
+ はじめに
+こんにちは、ラブグラフエンジニアの熊谷です。
+JavaScript に限らずですが、税込み計算をおこなう際には、小数を含む計算が必要になります。
+今回は簡単な内容ですが、備忘録としてその方法についてまとめていきたいと思います。
+よろしくお願いします。
+
+ 浮動小数点型の丸め誤差問題
+浮動小数点の計算をプログラムでおこなうと、結果に誤差が出てしまいます。
+JavaScript においても同様です。
+例えば「0.3」が「0.300000000000000...」になったりしてしまいます。
+console.log(0.1 + 0.2); // 出力: 0.300000000000...]]></description><link>https://zenn.dev/lovegraph/articles/b03767df9005e2</link><guid isPermaLink="true">https://zenn.dev/lovegraph/articles/b03767df9005e2</guid><pubDate>Wed, 17 Jul 2024 05:02:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vXO1gFWA--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%2520%25E3%2581%25A7%25E3%2580%2581%25E7%25A8%258E%25E8%25BE%25BC%25E3%2581%25BF%25E8%25A8%2588%25E7%25AE%2597%25E3%2582%2592%25E3%2581%2597%25E3%2582%2584%25E3%2581%2599%25E3%2581%258F%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:kuma%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZmNWYxYmUwYzAuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%25A9%25E3%2583%2596%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%2595%25E3%2581%25AE%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2p6RllZeVdYOGFmbEoxeWd1SXd2cl84N0VZZTJZX0hmMkZBdC1BaHc9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kuma</dc:creator></item><item><title><![CDATA[タッチイベントと干渉するスクロールへの対処]]></title><description><![CDATA[JavaScriptでaddEventListenerを使用しタッチイベントの発生を検知、そのイベントをもとに要素を移動させる（いわゆる、ドラッグアンドドロップ）ことができるページを開発している際に、その動作をiPadで試したところ要素を動かそうとするとそのままページがスクロールしてしまい、意図通りに操作できない事象に直面した。
+　要素を長押しした際にはその要素を移動させ、スクロールは通常通り動作させるのが理想だが、、課題として放っていたが手を付け、結局いい感じに対処できたので途中試した方法も含めメモ。
+
+ うまくいかなかったやつら
+
+ 1. touch-action: none
+初めに...]]></description><link>https://zenn.dev/iwarei/articles/1b7af1a60ff746</link><guid isPermaLink="true">https://zenn.dev/iwarei/articles/1b7af1a60ff746</guid><pubDate>Tue, 16 Jul 2024 15:44:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Vk1zqxgM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25BF%25E3%2583%2583%25E3%2583%2581%25E3%2582%25A4%25E3%2583%2599%25E3%2583%25B3%25E3%2583%2588%25E3%2581%25A8%25E5%25B9%25B2%25E6%25B8%2589%25E3%2581%2599%25E3%2582%258B%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%25B8%25E3%2581%25AE%25E5%25AF%25BE%25E5%2587%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:iwarei%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS2U1VDRnaWhGZU85a3dEOGs2QzJ6Z3RXUmIyYXQzSW5jYkUtbEdwQmVxR3hGMz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>iwarei</dc:creator></item><item><title><![CDATA[備忘：技術をどのように習得していくか]]></title><description><![CDATA[
+ 1.現在の課題
+新しい職場で使われている技術について、
+概念レベルでしか知らない or 概念すら知らないものが多い。
+チームMTGの話についていけないのは勿体なく、
+この機会を活かすために、また自分のスキル習得へ繋げる為に、
+知らない技術の習得方法を確立し、コンスタントに技術を高めていく必要がある。
+
+ 2.前提
+今回はターゲットの言語（仕組み）が決まった上での学習方法を記載する
+残りの課題（忘れないようにメモ）
+・全体アーキテクト的なものの知識の身につけ方は？
+・最新の動向はどのように追う？
+
+
+ 3.結論
+学習は易しい内容から着手し、次第に高度な内容へとステップアップする形で進め...]]></description><link>https://zenn.dev/universe/articles/ed467cc49114ee</link><guid isPermaLink="true">https://zenn.dev/universe/articles/ed467cc49114ee</guid><pubDate>Tue, 16 Jul 2024 14:19:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--kjLkFt5w--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2582%2599%25E5%25BF%2598%25EF%25BC%259A%25E6%258A%2580%25E8%25A1%2593%25E3%2582%2592%25E3%2581%25A9%25E3%2581%25AE%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E7%25BF%2592%25E5%25BE%2597%25E3%2581%2597%25E3%2581%25A6%25E3%2581%2584%25E3%2581%258F%25E3%2581%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:F7%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTDFtOHVCSnVZMVByRGZza3ZnS0Y1X2s3SVIzdldPcm45c1VGcUxwVnZmdEE9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>F7</dc:creator></item><item><title><![CDATA[いろいろなプログラミング言語で NFD の濁音・半濁音を NFC に変換する]]></title><description><![CDATA[いろいろな言語で書いたコードを1つの記事にまとめることにした
+
+ JavaScript
+
+test.js
+str = "は\u{3099}は\u{3099}とハ\u{309A}ハ\u{309A}と神";
+
+console.log(
+    11 === str.length,
+    7 === dakuon_normalize(str).length
+);
+
+function dakuon_normalize(str) {
+    const pattern = /[\p{sc=Hiragana}\p{sc=Katakana}]\p{gc=Mn}/gu;
+    return str....]]></description><link>https://zenn.dev/masakielastic/articles/8e3ed94f81d5dc</link><guid isPermaLink="true">https://zenn.dev/masakielastic/articles/8e3ed94f81d5dc</guid><pubDate>Tue, 16 Jul 2024 06:27:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--rJAUtO_D--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%2584%25E3%2582%258D%25E3%2581%2584%25E3%2582%258D%25E3%2581%25AA%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%259F%25E3%2583%25B3%25E3%2582%25B0%25E8%25A8%2580%25E8%25AA%259E%25E3%2581%25A7%2520NFD%2520%25E3%2581%25AE%25E6%25BF%2581%25E9%259F%25B3%25E3%2583%25BB%25E5%258D%258A%25E6%25BF%2581%25E9%259F%25B3%25E3%2582%2592%2520NFC%2520%25E3%2581%25AB%25E5%25A4%2589%25E6%258F%259B%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Masaki%2520Kagaya%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc3ODAxZTNiZTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Masaki Kagaya</dc:creator></item><item><title><![CDATA[次世代Web BandlerのFarmが熱そう]]></title><description><![CDATA[
+ はじめに
+昨今、ビルドツールは様々なものが開発され、いかに高速化するか、開発者体験を上げられるかが注目されているように思います。2024年6月にState of JSが公開され、その中でBuild Toolsはwebpackが最も使用されており、次いでViteがランキングしています。
+
+Viteの伸びがすごいですね...🔥
+ビルドツールも様々ありますが、2024年4月にFarmというWeb Bandlerのv1.0がリリースされました。
+https://www.farmfe.org/
+気になってドキュメントサイトを覗いてみるとなんだか良さげな雰囲気を感じたので、Farmの特長と推せる...]]></description><link>https://zenn.dev/gemcook/articles/480de0e144d5d2</link><guid isPermaLink="true">https://zenn.dev/gemcook/articles/480de0e144d5d2</guid><pubDate>Tue, 16 Jul 2024 05:13:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--tRK-w0in--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%25AC%25A1%25E4%25B8%2596%25E4%25BB%25A3Web%2520Bandler%25E3%2581%25AEFarm%25E3%2581%258C%25E7%2586%25B1%25E3%2581%259D%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%259E%25E3%2581%25AE%25E3%2582%258A%25E3%2582%2587%25E3%2583%25BC%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQyYzJiNzVlZTIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Gemcook%2520Tech%2520Blog%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M3NzU3NTlmZWYuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ぞのりょー</dc:creator></item><item><title><![CDATA[【React】useOptimisticってどうなの？調べてみました！]]></title><description><![CDATA[React 19系から追加されたuseOptimisticというAPIを弄った所感を述べていきます。
+
+ 楽観的更新とは
+楽観的更新とは、フロントエンドの操作を通してサーバーへの反映を行うとき、そのレスポンスを待たずにUIを更新する手法です。
+
+通常の更新: UIを操作 → サーバーにリクエスト → レスポンスが返る → UIに反映
+楽観的更新: UIを操作 → サーバーにリクエスト → 想定したレスポンスが返った場合のUIを反映 → レスポンスが返り、その結果に応じて後続処理を行う。(例: エラーの場合はもとに戻すなど)
+
+身近な場合としては、Twitterでいいねボタンやフォローボタ...]]></description><link>https://zenn.dev/yhase_rqp/articles/7685facb67cb22</link><guid isPermaLink="true">https://zenn.dev/yhase_rqp/articles/7685facb67cb22</guid><pubDate>Tue, 16 Jul 2024 00:30:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dj5m71fC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590React%25E3%2580%2591useOptimistic%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25A9%25E3%2581%2586%25E3%2581%25AA%25E3%2581%25AE%25EF%25BC%259F%25E8%25AA%25BF%25E3%2581%25B9%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yha%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY3YmU3ZDM3N2IuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yha</dc:creator></item><item><title><![CDATA[頼む、リアクティブな値に対して.valueを忘れたときに警告してくれ]]></title><description><![CDATA[
+ はじめに
+今回は、Vue のリアクティブな値に対して .value を忘れた場合に警告を出す ESLint のカスタムルールを作ってみた話です。
+正直内容が拙いと思いますが、ぜひ目を通していただけると幸いです。
+Vue や Nuxt ではリアクティブな値に対してアクセスする時は reactiveValue.value といった感じで、.value をつける必要があります。
+これを忘れるとバグの原因になるのですが、よく忘れられるんですよね。私に。
+リアクティブな値に対して .value をつけてアクセスしなければならないという仕様は、個人的にはバグの温床であると思っていて、これを防ぐた...]]></description><link>https://zenn.dev/xeiculy/articles/62ce028dc6eb7a</link><guid isPermaLink="true">https://zenn.dev/xeiculy/articles/62ce028dc6eb7a</guid><pubDate>Tue, 16 Jul 2024 00:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2CSiovJp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E9%25A0%25BC%25E3%2582%2580%25E3%2580%2581%25E3%2583%25AA%25E3%2582%25A2%25E3%2582%25AF%25E3%2583%2586%25E3%2582%25A3%25E3%2583%2596%25E3%2581%25AA%25E5%2580%25A4%25E3%2581%25AB%25E5%25AF%25BE%25E3%2581%2597%25E3%2581%25A6.value%25E3%2582%2592%25E5%25BF%2598%25E3%2582%258C%25E3%2581%259F%25E3%2581%25A8%25E3%2581%258D%25E3%2581%25AB%25E8%25AD%25A6%25E5%2591%258A%25E3%2581%2597%25E3%2581%25A6%25E3%2581%258F%25E3%2582%258C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%259F%25BF%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZhZDQ4ZGE2NDEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>柿</dc:creator></item><item><title><![CDATA[Swiftでmapを使う]]></title><description><![CDATA[
+ 🎁mapを使う場面
+mapメソッドは、配列やコレクションの各要素に対して同じ操作を適用し、その結果から新しい配列を生成する場合に適しています。主に、元の配列の各要素を変換して新しい配列を作成したい場合に使用します。以下にmapの使用例を示します。
+使用例: 各要素を2倍にする
+let numbers = [1, 2, 3, 4, 5]
+let doubledNumbers = numbers.map { $0 * 2 }
+print(doubledNumbers) // 出力: [2, 4, 6, 8, 10]
+JavaScriptだったらこんな感じかな。$0がないから、混乱した💦
+...]]></description><link>https://zenn.dev/jboysan/articles/e6f6fbe374ea3b</link><guid isPermaLink="true">https://zenn.dev/jboysan/articles/e6f6fbe374ea3b</guid><pubDate>Mon, 15 Jul 2024 13:44:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--zSRAbduE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:Swift%25E3%2581%25A7map%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Jboy422%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSWdWR3pBSmgxTVNfZEJZaG55M3BLSVhqam01M0hHVExvbXFsQ21pdjc3RG1uVkZCVT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Jboy422</dc:creator></item><item><title><![CDATA[Nuxt 3・Nuxt 4 の useFetch() を完全に理解する（したい）]]></title><description><![CDATA[以前（まだ Nuxt 3 がベータリリースだった頃）に『Nuxt 3 の useFetch() と useAsyncData() の使い方』という記事を書きました。
+その後、より多機能になり、またベストプラクティス的な使い方が分かってきたこともあり、改めて useFetch() についてまとめてみたいと思います。
+
+ はじめに
+ここ数年、一貫して Nuxt 3 を使用している僕ですが、主要なコンポーザブルである useFetch については当初の理解が違っていたものもありました。
+少しずつ修正しながら、都度コードを書き換えてきたのですが、その過程で得られた知見を共有したいと思います。
+な...]]></description><link>https://zenn.dev/comm_vue_nuxt/articles/nuxt-use-fetch-guide</link><guid isPermaLink="true">https://zenn.dev/comm_vue_nuxt/articles/nuxt-use-fetch-guide</guid><pubDate>Mon, 15 Jul 2024 08:16:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dMMsjJUn--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Nuxt%25203%25E3%2583%25BBNuxt%25204%2520%25E3%2581%25AE%2520useFetch%2528%2529%2520%25E3%2582%2592%25E5%25AE%258C%25E5%2585%25A8%25E3%2581%25AB%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2599%25E3%2582%258B%25EF%25BC%2588%25E3%2581%2597%25E3%2581%259F%25E3%2581%2584%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:coedo%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU5MTZlOWFlNjguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Vue%25E3%2583%25BBNuxt%2520%25E6%2583%2585%25E5%25A0%25B1%25E3%2581%258C%25E9%259B%2586%25E3%2581%25BE%25E3%2582%258B%25E5%25BA%2583%25E5%25A0%25B4%2520%252F%2520P...%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2c4STBvUEtWYXpIUGdWdUFwVFNiaFdXUGVZd0l2Rkd3QlV0alAwaHc9czI1MC1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>coedo</dc:creator></item><item><title><![CDATA[2024年7月 最新版 Eslint & prettier & Typescript セットアップ方法]]></title><description><![CDATA[
+ 背景
+新しくプロジェクトを立ち上げるたびに、eslintのバージョンが上がっていたりして、毎回セットアップ方法が変わるので、毎回調べる人が多いと思います。今どきはめちゃくちゃ簡単になっているので、ここにおいておきます。
+
+ 内容
+プロジェクト内のディレクトリで、次のコマンドを実行します。yarnを使っていても、このコマンドで大丈夫です。
+npm init @eslint/config@latest
+そこから、こんな感じの質問がされるので、それらを回答します
+✔ How would you like to use ESLint? · problems
+✔ What type of mo...]]></description><link>https://zenn.dev/szkyk/articles/31904c47a494a4</link><guid isPermaLink="true">https://zenn.dev/szkyk/articles/31904c47a494a4</guid><pubDate>Mon, 15 Jul 2024 07:22:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--B1PFWIib--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:2024%25E5%25B9%25B47%25E6%259C%2588%2520%25E6%259C%2580%25E6%2596%25B0%25E7%2589%2588%2520Eslint%2520%2526%2520prettier%2520%2526%2520Typescript%2520%25E3%2582%25BB%25E3%2583%2583%25E3%2583%2588%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:szkyk%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSTRfd2RMa2hRNjlsYl9SdkpNckNSQ3gxVE9OYlNqdU9mTl9DTENPWlFjY0M0c3BRPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>szkyk</dc:creator></item></channel></rss>

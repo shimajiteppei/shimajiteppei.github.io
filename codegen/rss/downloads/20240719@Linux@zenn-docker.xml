@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Docker」のフィード]]></title><description><![CDATA[Zennのトピック「Docker」のRSSフィードです]]></description><link>https://zenn.dev/topics/docker</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/01c7f20365.png</url><title>Zennの「Docker」のフィード</title><link>https://zenn.dev/topics/docker</link></image><generator>zenn.dev</generator><lastBuildDate>Fri, 19 Jul 2024 09:00:22 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/docker/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Docker + OpenCV Python の module *** has no attribute *** のエラー回避]]></title><description><![CDATA[
+ 概要
+dockerにおける、OpenCV Python の module *** has no attribute *** のエラー回避方法を説明する。
+
+ 環境
+
+Ubuntu 20.04.5 LTS
+Docker 20.10.18
+
+
+ 原因とエラー回避方法
+原因はpythonのopencvに関係するモジュールのバージョンに不整合が起こっているためであるため、以下のDockerfileのようにopencvに関係するモジュールのバージョンを統一すればエラーを回避できる。
+
+Dockerfile
+FROM python:3.9
+
+ARG OPENCV_PYTHON_VERSION=4...]]></description><link>https://zenn.dev/room_208/articles/4045781ed7821e</link><guid isPermaLink="true">https://zenn.dev/room_208/articles/4045781ed7821e</guid><pubDate>Fri, 19 Jul 2024 06:54:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Q-YjpP9D--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%2520%252B%2520OpenCV%2520Python%2520%25E3%2581%25AE%2520module%2520%252A%252A%252A%2520has%2520no%2520attribute%2520%252A%252A%252A%2520...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:room_208%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q2MmRkNTEzN2IuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>room_208</dc:creator></item><item><title><![CDATA[DevContainerで予稿を執筆しよう]]></title><description><![CDATA[
+ TL;DR
+DevContainer内で \LaTeX の執筆環境テンプレートを作りました
+https://github.com/SoRA-X7/latex-devcontainer-termpaper
+
+ メリット
+
+構築が楽、TeX Live をローカルにインストールしなくて済む
+パッケージ追加もDockerfileを編集するだけ
+LaTeX Workshopが自動でconfig込みで入るので、コンパイルを気にする必要がない
+
+
+ LaTeXの実行環境
+アカデミックな分野で論文を執筆する場合は、WordやPages、Google Docsよりも\LaTeXを利用することが多いです...]]></description><link>https://zenn.dev/lirais/articles/6b28a6b1c3e918</link><guid isPermaLink="true">https://zenn.dev/lirais/articles/6b28a6b1c3e918</guid><pubDate>Fri, 19 Jul 2024 05:08:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--WiEpUk0D--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:DevContainer%25E3%2581%25A7%25E4%25BA%2588%25E7%25A8%25BF%25E3%2582%2592%25E5%259F%25B7%25E7%25AD%2586%25E3%2581%2597%25E3%2582%2588%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:SoRA_X7%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FGZFp1Y3FLWGFMQkVjUUxfbW5kYmNrN3AxSk81UTVDdjhhVGlBZ2k1RDVjSXc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>SoRA_X7</dc:creator></item><item><title><![CDATA[MySQL9.0の新機能 Saving JSON output from EXPLAIN ANALYZE INTO を触ってみる]]></title><description><![CDATA[
+ MySQL9.0 登場！
+2024/07/01にMySQL9.0がOracleよりリリースされました。イノベーションリリースの最新版です。
+https://dev.mysql.com/doc/refman/9.0/en/mysql-nutshell.html
+
+ 主な新機能
+
+JavaScript stored programs(エンプラのみ)
+VECTOR type suport
+Saving JSON output from EXPLAIN ANALYZE INTO
+
+新機能の中でも、Saving JSON output from EXPLAIN ANALYZE INTOは気軽に...]]></description><link>https://zenn.dev/gmomedia/articles/1f29fa8933d47d</link><guid isPermaLink="true">https://zenn.dev/gmomedia/articles/1f29fa8933d47d</guid><pubDate>Fri, 19 Jul 2024 02:58:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9CUi55Vs--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:MySQL9.0%25E3%2581%25AE%25E6%2596%25B0%25E6%25A9%259F%25E8%2583%25BD%2520Saving%2520JSON%2520output%2520from%2520EXPLAIN%2520ANALYZE%2520INTO...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%2584%25E3%2581%2597%25E3%2581%258B%25E3%2581%259A%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzMzOGEzNzc5MTMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:GMO%25E3%2583%25A1%25E3%2583%2587%25E3%2582%25A3%25E3%2582%25A2%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzlkNzQwY2NhMDMuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>いしかず</dc:creator></item><item><title><![CDATA[Docker + PostgreSQLで環境構築して、パーティションについて学ぶ]]></title><description><![CDATA[
+ はじめに
+実務でn千万からn億レコードのテーブルがあり、その過程でパーティション構成について考える機会がありました。
+パーティションって単語は知っているけど、実際なんなん？というふわっとした理解だったので改めて内容をまとめてアウトプットするのが目的です。
+テーブルはPostgreSQLを使用しDockerで環境構築します。
+
+ 環境構築
+※Dockerは既にインストール済みのため省略します。
+公式ドキュメントに従い、PostgreSQLのイメージを使用します。
+postgres - Official Image | Docker Hub
+公式ドキュメントから2024/07/11時点の...]]></description><link>https://zenn.dev/sui_water/articles/6bd9e98c4c82bf</link><guid isPermaLink="true">https://zenn.dev/sui_water/articles/6bd9e98c4c82bf</guid><pubDate>Thu, 18 Jul 2024 14:22:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ebLtFz4x--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%2520%252B%2520PostgreSQL%25E3%2581%25A7%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2597%25E3%2581%25A6%25E3%2580%2581%25E3%2583%2591%25E3%2583%25BC%25E3%2583%2586%25E3%2582%25A3%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E5%25AD%25A6%25E3%2581%25B6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25B9%25E3%2582%25A4%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M4MGQ1MWNkOTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>スイ</dc:creator></item><item><title><![CDATA[DockerでOpen3DのGUIを使えるようにする]]></title><description><![CDATA[Open3D ViewerなどのGUIアプリケーションの使い方は参考文献に詳しく載っているので、この記事では簡単にまとめる。
+
+ 環境
+
+Ubuntu: 20.04
+Open3D: 0.16.0
+Docker: 20.10.21
+Docker Compose: 2.4.1
+
+
+ 設定方法
+
+ 1.  Xサーバへのアクセスを許可
+下記コマンドでXサーバへのアクセスを許可する。また、Xサーバの現在の設定の確認はxhost、ローカルホストの削除はxhost -local:でできる。
+xhost +local:
+
+ 2. Open3D Viewer Dockerの設定
+docker runに以下...]]></description><link>https://zenn.dev/nonashi/articles/cfbae03b5023c9</link><guid isPermaLink="true">https://zenn.dev/nonashi/articles/cfbae03b5023c9</guid><pubDate>Thu, 18 Jul 2024 12:52:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8JBL-r7R--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%25E3%2581%25A7Open3D%25E3%2581%25AEGUI%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2588%25E3%2582%258B%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nounashi-pochigoro%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZjNDMyN2IyNWMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nounashi-pochigoro</dc:creator></item><item><title><![CDATA[DockerとDocker Composeをproxy環境下で使用する]]></title><description><![CDATA[DockerとDocker Composeをproxy環境下で使用するための設定をまとめる。
+
+ 環境
+
+Ubuntu: 20.04
+Docker: 20.10.21
+Docker Compose: 2.4.1
+
+
+ Dockerの設定
+
+ 1. systemdに環境変数を設定する
+/etc/systemd/system/docker.service.d/override.confに下記を書き込む。
+[Service]
+Environment = 'http_proxy=&lt;proxy_url&gt;:&lt;port&gt;' 'https_proxy=&lt;proxy_url&...]]></description><link>https://zenn.dev/nonashi/articles/f72c5fb702f137</link><guid isPermaLink="true">https://zenn.dev/nonashi/articles/f72c5fb702f137</guid><pubDate>Thu, 18 Jul 2024 12:43:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3-BUqJDG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%25E3%2581%25A8Docker%2520Compose%25E3%2582%2592proxy%25E7%2592%25B0%25E5%25A2%2583%25E4%25B8%258B%25E3%2581%25A7%25E4%25BD%25BF%25E7%2594%25A8%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nounashi-pochigoro%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZjNDMyN2IyNWMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nounashi-pochigoro</dc:creator></item><item><title><![CDATA[Dockerのphpmyadminのアップロードサイズをあげた]]></title><description><![CDATA[
+ はじめに
+Dockerでいれたphpmyadminでサイズの大きなファイルを
+インポートしようとしたところ､次のエラーがでました｡
+
+アップロードのサイズ設定に問題があるようです｡
+このままだとインポートができないので対応します｡
+
+ 変更する値
+
+ upload_max_filesize
+
+https://www.php.net/manual/ja/ini.core.php#ini.upload-max-filesize
+アップロードされるファイルの最大サイズ。
+post_max_size には、 この値より大きな値を指定しなければいけません。
+intを使用する際、 その値はバイト...]]></description><link>https://zenn.dev/sakamotokenji/articles/4f8c88854a94a9</link><guid isPermaLink="true">https://zenn.dev/sakamotokenji/articles/4f8c88854a94a9</guid><pubDate>Thu, 18 Jul 2024 12:25:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ZRBUu7zO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%25E3%2581%25AEphpmyadmin%25E3%2581%25AE%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2589%25E3%2582%25B5%25E3%2582%25A4%25E3%2582%25BA%25E3%2582%2592%25E3%2581%2582%25E3%2581%2592%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:SAKAMOTO%2520Kenji%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSUVUTDA5b2NNakxvYlphSC1GX0xiMHU3RHdXSkNjbElvMWdQY0F3THkzRDNtTzdLTG49czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>SAKAMOTO Kenji</dc:creator></item><item><title><![CDATA[WSL2新バージョンで６系Linuxカーネルバイナリがリリース]]></title><description><![CDATA[
+ 5.15から6.6に大幅更新
+!
+関連記事:
+
+WSL2 2.2.x正式版がこっそリリース
+WSL2.2.x で DNS tunnelingがデフォルトに
+WSL2 2.0.0がこっそリリース
+WSLのアップデートでメモリ開放？
+WSL2でvmmem確保メモリを開放する方法
+
+
+WSLの2.3.11がリリースされた
+
+https://github.com/microsoft/WSL/releases/tag/2.3.11
+アップデート情報をチェックしていたが興味深いものがあった。
+
+Update Kernel to 6.6.36.3
+
+こんな記事がある
+https://forest....]]></description><link>https://zenn.dev/dozo/articles/3fd0793e71199a</link><guid isPermaLink="true">https://zenn.dev/dozo/articles/3fd0793e71199a</guid><pubDate>Thu, 18 Jul 2024 03:15:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--pCP6WwPL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:WSL2%25E6%2596%25B0%25E3%2583%2590%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%25A7%25E3%2583%25B3%25E3%2581%25A7%25EF%25BC%2596%25E7%25B3%25BBLinux%25E3%2582%25AB%25E3%2583%25BC%25E3%2583%258D%25E3%2583%25AB%25E3%2583%2590%25E3%2582%25A4%25E3%2583%258A%25E3%2583%25AA%25E3%2581%258C%25E3%2583%25AA%25E3%2583%25AA%25E3%2583%25BC%25E3%2582%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:dozo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvZC5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>dozo</dc:creator></item><item><title><![CDATA[[AWS SAM]Devcontainer上でAWS-SAMを使用する際に躓いたこと]]></title><description><![CDATA[
+ 概要
+こんにちは。
+インターンシップでAWSを触り始めて頭を痛めているたくみです。
+現在aws-sam(以降はsamと表記)とDevcontainerを使用しています。その中で躓いた点があったのでまとめます。
+
+ 環境
+Ubuntu: 20.04.2 LTS(HyperV)
+Docker: 20.10.7
+docker-compose: 1.25.0
+SAM CLI: 1.120.0
+Devcontainer: v0.238.3 (色々あって古いバージョンを使っています)
+
+ 躓いたこと一覧
+
+その１. どうやってDevcontainer上にDockerのコンテナを立てるの？
+その２...]]></description><link>https://zenn.dev/uniformnext/articles/642762fd0dce29</link><guid isPermaLink="true">https://zenn.dev/uniformnext/articles/642762fd0dce29</guid><pubDate>Thu, 18 Jul 2024 02:32:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--SPLUOV1y--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BAWS%2520SAM%255DDevcontainer%25E4%25B8%258A%25E3%2581%25A7AWS-SAM%25E3%2582%2592%25E4%25BD%25BF%25E7%2594%25A8%25E3%2581%2599%25E3%2582%258B%25E9%259A%259B%25E3%2581%25AB%25E8%25BA%2593%25E3%2581%2584%25E3%2581%259F%25E3%2581%2593%25E3%2581%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:takumi%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VjMTE2MTQ2NWYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%25A6%25E3%2583%258B%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25BC%25E3%2583%25A0%25E3%2583%258D%25E3%2582%25AF%25E3%2582%25B9%25E3%2583%2588%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQzYjM5OWJmOGMuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takumi</dc:creator></item><item><title><![CDATA[Docker版OpenProjectでDemo project削除後の再起動不可への対処法]]></title><description><![CDATA[
+ TL;DR
+
+
+/app/app/seeders/demo_data_seeder.rbのdata_seeder_classesの要素をすべてコメントアウト
+永続化したい場合は、compose.yamlで以下のように記述
+compose.yaml
+services:
+  openproject:
+    image: openproject/openproject:14.2.0
+    entrypoint: []
+    command:
+      [
+        "bash",
+        "-c",
+        "sed -i -r 's/^(\\s+)(Demo...]]></description><link>https://zenn.dev/nondescript/articles/e4fbabdc925e9c</link><guid isPermaLink="true">https://zenn.dev/nondescript/articles/e4fbabdc925e9c</guid><pubDate>Wed, 17 Jul 2024 15:21:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--enCltzU5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%25E7%2589%2588OpenProject%25E3%2581%25A7Demo%2520project%25E5%2589%258A%25E9%2599%25A4%25E5%25BE%258C%25E3%2581%25AE%25E5%2586%258D%25E8%25B5%25B7%25E5%258B%2595%25E4%25B8%258D%25E5%258F%25AF%25E3%2581%25B8%25E3%2581%25AE%25E5%25AF%25BE%25E5%2587%25A6%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E7%25B4%25A0%25E4%25BA%25BA%25E3%2581%25AE%25E6%2588%25AF%25E8%25A8%2580%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVmYTVmOTBhM2EuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>素人の戯言</dc:creator></item><item><title><![CDATA[Google CloudのContainer-Optimized OSでコンテナにディスクをマウントしようとしてハマった]]></title><description><![CDATA[
+ 背景
+以下のような構成を取ろうとしたら、ディスクのマウントが完了する前にコンテナが起動してしまい意図する動作をしないという問題にぶつかったのでメモ。
+
+Google Compute EngineでContainer-Optimized OSを利用。
+データを永続化するため追加ディスクを作成し、インスタンスにアタッチ。
+bootcmdを利用してディスクをインスタンスにマウント(参考)、およびコンテナのボリュームとして利用。
+
+
+ 対応策
+インスタンスの設定としてコンテナをデプロイするのではなく、cloud-init の例 についてのドキュメントを参考に、自身でコンテナをサービスとして起...]]></description><link>https://zenn.dev/suzukenz/articles/2be52af7ad39aa</link><guid isPermaLink="true">https://zenn.dev/suzukenz/articles/2be52af7ad39aa</guid><pubDate>Wed, 17 Jul 2024 15:11:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--rygbKfFZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Google%2520Cloud%25E3%2581%25AEContainer-Optimized%2520OS%25E3%2581%25A7%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2586%25E3%2583%258A%25E3%2581%25AB%25E3%2583%2587%25E3%2582%25A3%25E3%2582%25B9%25E3%2582%25AF%25E3%2582%2592%25E3%2583%259E%25E3%2582%25A6%25E3%2583%25B3%25E3%2583%2588%25E3%2581%2597%25E3%2582%2588%25E3%2581%2586%25E3%2581%25A8%25E3%2581%2597%25E3%2581%25A6%25E3%2583%258F%25E3%2583%259E%25E3%2581%25A3%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kenji%2520Suzuki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dxcERIME1Edlp5X3hOQTdwVmVtRHBMd2NhVUE3b1M4U21NZ0x2Mmc9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kenji Suzuki</dc:creator></item><item><title><![CDATA[Docker ComposeでBedrock Engineerを使う方法：完全ガイド]]></title><description><![CDATA[
+
+ はじめに
+こんにちは！今回は、最新のAI技術を活用したソフトウェア開発支援ツール「Bedrock Engineer」をDocker Composeを使って簡単に始める方法をご紹介します。
+このガイドでは、DockerやDocker Composeについての基本的な説明から、Bedrock Engineerの具体的な設定方法まで、ステップバイステップで解説していきます。
+技術に詳しくない方でも理解できるよう、できるだけ分かりやすい言葉で説明していきますので、ぜひ最後までお付き合いください！
+
+ デモ動画
+
+
+ Bedrock Engineerとは
+まずは、Bedrock Engine...]]></description><link>https://zenn.dev/sunwood_ai_labs/articles/b64dcfed050c4a</link><guid isPermaLink="true">https://zenn.dev/sunwood_ai_labs/articles/b64dcfed050c4a</guid><pubDate>Wed, 17 Jul 2024 10:40:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--CVIh302c--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%2520Compose%25E3%2581%25A7Bedrock%2520Engineer%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%25E6%2596%25B9%25E6%25B3%2595%25EF%25BC%259A%25E5%25AE%258C%25E5%2585%25A8%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Maki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTDdpSmVyNldLVlpKLUd4N054QWVuSFVtYXQ3MUhhd1NXaU5hRG5FTnZiMXZZdHBIaGs9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Maki</dc:creator></item><item><title><![CDATA[【Rails7.1】Docker環境でCouldn't find database client: mysql, mysql5.の対処法]]></title><description><![CDATA[個人開発をしていた際、rails dbconsoleを実行したところ、以下のエラーが出ました。
+Couldn't find database client: mysql, mysql5. Check your $PATH and try again.
+原因がわかったので解決方法を備忘録としてまとめます。
+!
+バージョンはRuby 3.2.2, Rails 7.1.2, MySQL 8.0です。
+
+
+ 問題
+環境構築後、Railsのマイグレーションで不整合が発生したため、調査のためにMySQLの中身を見ようとしていました。
+しかし、rails dbconsoleを実行したところ、Could...]]></description><link>https://zenn.dev/i_kazuya/articles/6152d2a1931816</link><guid isPermaLink="true">https://zenn.dev/i_kazuya/articles/6152d2a1931816</guid><pubDate>Tue, 16 Jul 2024 22:43:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vlect2sU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Rails7.1%25E3%2580%2591Docker%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25A7Couldn%2527t%2520find%2520database%2520client%253A%2520mysql%252C%2520...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258B%25E3%2581%259A%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzYzMWEwNmYxM2UuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>かず</dc:creator></item><item><title><![CDATA[Dockerのvolumeの中身をコマンドで確認する]]></title><description><![CDATA[
+ やり方
+# ボリューム名を調べる
+$ docker volume ls
+
+# 新規コンテナにvolumeをマウントして中身を確認
+$ docker run --rm -v 調べたボリューム名:/tmp/volume busybox ls /tmp/volume
+
+ 解説
+新規コンテナを立てて、そこに調査対象のvolumeをマウントし ls コマンドで中身を確認します。
+
+ busybox
+最低限のLinuxユーティリティを提供する軽量(4mbほど)なイメージです。
+今回はlsコマンドの実行だけのため、こちらで十分です。
+
+ -rm
+起動が完了したらコンテナを削除します。
+コマンド実行...]]></description><link>https://zenn.dev/tanakam/articles/14dbead6165a22</link><guid isPermaLink="true">https://zenn.dev/tanakam/articles/14dbead6165a22</guid><pubDate>Tue, 16 Jul 2024 11:16:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--YFUDBRyZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%25E3%2581%25AEvolume%25E3%2581%25AE%25E4%25B8%25AD%25E8%25BA%25AB%25E3%2582%2592%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2581%25A7%25E7%25A2%25BA%25E8%25AA%258D%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:MK%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzlmZWZiNTNmMzAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>MK</dc:creator></item><item><title><![CDATA[Web サービスをフロントもバックも TypeScript で作る時の構成例]]></title><description><![CDATA[せっかくなのでフロントもバックも TypeScript を使おう、ということで、アレコレ考えて作った構成を共有します。何かの参考になれば幸いです。
+下記の Web サービスを開発するときに使いました。
+https://nc.harmonicom.jp/
+
+ システム構成
+ランタイム：Bun
+フレームワーク： Express
+ORM：Drizzle ORM
+インフラ：Docker
+私的にはバックエンド中心で処理・出力し、そのうえでフロントエンドを使うのが好きです。
+
+ ディレクトリ・ファイル構成の例
+あまり深くディレクトリを掘りたくなかったので、ルートに散在しています。
+├── asset...]]></description><link>https://zenn.dev/yamakazoo/articles/b497bfdf91c13b</link><guid isPermaLink="true">https://zenn.dev/yamakazoo/articles/b497bfdf91c13b</guid><pubDate>Mon, 15 Jul 2024 05:47:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--SbWckMxm--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Web%2520%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2593%25E3%2582%25B9%25E3%2582%2592%25E3%2583%2595%25E3%2583%25AD%25E3%2583%25B3%25E3%2583%2588%25E3%2582%2582%25E3%2583%2590%25E3%2583%2583%25E3%2582%25AF%25E3%2582%2582%2520TypeScript%2520%25E3%2581%25A7%25E4%25BD%259C%25E3%2582%258B%25E6%2599%2582%25E3%2581%25AE%25E6%25A7%258B%25E6%2588%2590%25E4%25BE%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yamakazoo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk0YTM5ODY2NDIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yamakazoo</dc:creator></item><item><title><![CDATA[[Rails 7.0.8]Missing `secret_key_base` for ‘production’ environment...]]></title><description><![CDATA[
+ はじめに
+アプリのRailsバージョンを7.1から7.0.8にバージョンダウンし、ディプロイしたらタイトルのエラーが出たのでメモとして残します。
+
+Dockerfileエラー
+1.109 (See full trace by running task with --trace) ------ Dockerfile:51 -------------------- 49 | 50 | # Precompiling assets for production without requiring secret RAILS_MASTER_KEY 51 | &gt;&gt;&gt; RUN SE...]]></description><link>https://zenn.dev/redheadchloe/articles/060841ff42cbcf</link><guid isPermaLink="true">https://zenn.dev/redheadchloe/articles/060841ff42cbcf</guid><pubDate>Mon, 15 Jul 2024 04:55:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8JipXwTH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BRails%25207.0.8%255DMissing%2520%2560secret_key_base%2560%2520for%2520%25E2%2580%2598production%25E2%2580%2599%2520e...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%2520%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U1M2NmNTI3NWMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>🦓</dc:creator></item><item><title><![CDATA[Hugo+BlowfishなポートフォリオをGitHub Pagesにデプロイしよう！]]></title><description><![CDATA[
+ 始めに
+ポートフォリオのソースはGitHubで管理しています。
+https://github.com/zen96k/enoshima-escar
+デプロイしたポートフォリオはこちらです。
+https://zen96k.github.io/enoshima-escar
+余談
+いきなり余談を書くな。本当にすみません。
+でも、ふざけていないと正気に戻って狂いそうになります。
+「早く行きたいなら一人で行け、遠くに行きたいなら皆で行け。」
+最近この言葉が気に入っています。上司の受け売りですが。
+気になった技術を調査したり試したりして、記事を書いてアウトプットすることで、巡り巡って遠くに行けたら...]]></description><link>https://zenn.dev/jolly96k/articles/f8d0e5eb247bf0</link><guid isPermaLink="true">https://zenn.dev/jolly96k/articles/f8d0e5eb247bf0</guid><pubDate>Sun, 14 Jul 2024 20:45:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ZC4tv6-X--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Hugo%252BBlowfish%25E3%2581%25AA%25E3%2583%259D%25E3%2583%25BC%25E3%2583%2588%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25AA%25E3%2582%25AA%25E3%2582%2592GitHub%2520Pages%25E3%2581%25AB%25E3%2583%2587%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25A4%25E3%2581%2597%25E3%2582%2588%25E3%2581%2586%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:zen96k%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzMyMmMwYjZjMTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>zen96k</dc:creator></item><item><title><![CDATA[AWSなんもわからん - DockerをAWS上で動かしてみよう]]></title><description><![CDATA[
+ この記事の目的
+AWS未経験者が、とりあえずDockerイメージをAWS上で動かすことを目標にやったことをまとめました。
+
+ 筆者のレベル感
+
+以前オンプレミス環境でDockerに触れる機会があり、とりあえず動かすことができる。
+仕事でGCPに触れる機会があり、とりあえず動かすことができる。
+DockerにしろCloudにしろ、詳しいことはあまりわからない。
+
+
+ DockerをAWS上で動かしてみよう
+
+ AWSアカウントの作成とIAMユーザの作成
+AWSアカウントの作成とIAMユーザの作成については、こちらの記事で紹介されていた下記動画を参考にさせていただきました。全10項目あり...]]></description><link>https://zenn.dev/hatognss/articles/1cca0912365f63</link><guid isPermaLink="true">https://zenn.dev/hatognss/articles/1cca0912365f63</guid><pubDate>Sun, 14 Jul 2024 09:53:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wyxqgXa1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AWS%25E3%2581%25AA%25E3%2582%2593%25E3%2582%2582%25E3%2582%258F%25E3%2581%258B%25E3%2582%2589%25E3%2582%2593%2520-%2520Docker%25E3%2582%2592AWS%25E4%25B8%258A%25E3%2581%25A7%25E5%258B%2595%25E3%2581%258B%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%2588%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:HatoGnss%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ4MWI4MzNkMTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>HatoGnss</dc:creator></item><item><title><![CDATA[Linux 使いになりたい人向けの Intel N100 ミニ PC で構築する開発環境（１２）- Oh My Posh]]></title><description><![CDATA[
+ はじめに
+これは、Linux 使いになりたい人向けに Intel N100 ミニ PC を使って開発環境を構築する方法を解説する記事の第１２弾です。第１弾はLinux 使いになりたい人向けの Intel N100 ミニ PC で構築する開発環境（１） - 構築する開発環境について にあり、そこから第２弾へと続いています。そちらからご覧ください。
+ここで使用する Intel N100 ミニ PC の仕様は次のものを前提とします。
+
+
+
+項目
+内容
+
+
+
+
+OS
+Windows 11 Pro
+
+
+CPU
+Intel N100
+
+
+メモリ
+16GB
+
+
+ストレージ
+SSD 512 GB
+
+...]]></description><link>https://zenn.dev/hiro345/articles/n100_12_20240714</link><guid isPermaLink="true">https://zenn.dev/hiro345/articles/n100_12_20240714</guid><pubDate>Sun, 14 Jul 2024 09:47:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--UuUVOPRp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%2520%25E4%25BD%25BF%25E3%2581%2584%25E3%2581%25AB%25E3%2581%25AA%25E3%2582%258A%25E3%2581%259F%25E3%2581%2584%25E4%25BA%25BA%25E5%2590%2591%25E3%2581%2591%25E3%2581%25AE%2520Intel%2520N100%2520%25E3%2583%259F%25E3%2583%258B%2520PC%2520%25E3%2581%25A7%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2599%25E3%2582%258B%25E9%2596%258B%25E7%2599%25BA%25E7%2592%25B0%25E5%25A2%2583%25EF%25BC%2588%25EF%25BC%2591%25EF%25BC%2592%25EF%25BC%2589-%2520Oh%2520My%2520Posh%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Hiroshi%2520Koyama%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2k5ZzdjLS0xTFk0S2k0LWw3dVFSSFZRdEdQcWZHYTlibVRJYUtFM0E9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Hiroshi Koyama</dc:creator></item><item><title><![CDATA[OpenWebUIで組織独自のChatGPT環境を構築してみた]]></title><description><![CDATA[
+ 自己紹介
+EC系サービスでSREエンジニアをしています。また、秋葉原で中高生向けのプログラミング教室でクラスマネージャーを務めている@andex_tokyoです。
+
+ 背景
+私たちの教室では、クリエイティビティーを高めるために生成AIの利活用を推進しています。中高生に最新のモデルであるGPT-4oに触れて活用して欲しいと考えています。しかし、ChatGPTのProプランは月額USD20がかかり、利用規約上の年齢制限もあるため、中高生が使うにはハードルが高いという現状があります。
+
+ アプローチ
+OpenWebUIを自サーバーでホスティングし、OpenAPIのAPIキーを経由してGPT...]]></description><link>https://zenn.dev/lit_akb/articles/134406db0a429d</link><guid isPermaLink="true">https://zenn.dev/lit_akb/articles/134406db0a429d</guid><pubDate>Sun, 14 Jul 2024 03:27:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--MOa-8J7r--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:OpenWebUI%25E3%2581%25A7%25E7%25B5%2584%25E7%25B9%2594%25E7%258B%25AC%25E8%2587%25AA%25E3%2581%25AEChatGPT%25E7%2592%25B0%25E5%25A2%2583%25E3%2582%2592%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Yuki%2520Tsuchida%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZkZTVjMjE2NjYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:AkihabaraSchool%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2o4Z042VVJJMlVjSk4wMnl0WkNnZkotZ0NYczlJSnB5Z3hiSW1Dd05VPXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yuki Tsuchida</dc:creator></item></channel></rss>
