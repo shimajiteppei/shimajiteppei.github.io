@@ -42,8 +42,7 @@ markdown_extensions:
     - tables
     - toc:
           permalink: true
-    - pymdownx.arithmatex:
-          generic: true
+    # do not use pymdownx.arithmatex for rendering KaTeX by extra.js
     - pymdownx.betterem:
           smart_enable: all
     - pymdownx.caret
@@ -51,6 +50,11 @@ markdown_extensions:
           use_pygments: true
           linenums: true
           anchor_linenums: true
+          stripnl: false
+          pygments_lang_class: true
+          extend_pygments_lang:
+              - name: math
+                lang: text
     - pymdownx.inlinehilite
     - pymdownx.magiclink
     - pymdownx.saneheaders
@@ -58,6 +62,9 @@ markdown_extensions:
           custom_fences:
               - name: mermaid
                 class: mermaid
+                format: !!python/name:pymdownx.superfences.fence_code_format
+              - name: math
+                class: language-math
                 format: !!python/name:pymdownx.superfences.fence_div_format
     - pymdownx.tasklist:
           custom_checkbox: true
@@ -74,6 +81,7 @@ plugins:
     - search:
           lang:
               - ja
+    - table-reader
     - tags:
           tags_file: category.md
     - minify:
@@ -91,14 +99,14 @@ use_directory_urls: false
 site_dir: site
 
 extra_css:
+    - https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css
     - stylesheets/extra.css
     - stylesheets/xp.css
-    - https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined
-    # - https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.css
 
 extra_javascript:
-    - https://code.jquery.com/jquery-3.6.4.slim.min.js
+    - https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js
+    - https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js
+    - https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/copy-tex.min.js
+    - https://cdn.jsdelivr.net/npm/tablesort@5.3.0/dist/tablesort.min.js
+    - https://cdn.jsdelivr.net/npm/tablesort@5.3.0/dist/sorts/tablesort.number.min.js
     - javascripts/extra.js
-    # - https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js
-    # - https://polyfill.io/v3/polyfill.min.js?features=es6
-    # - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js

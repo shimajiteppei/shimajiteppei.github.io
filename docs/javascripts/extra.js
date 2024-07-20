@@ -1,19 +1,28 @@
-// 記事ページのHeadingに章番号を自動で振る
-$(document).ready(function () {
+// https://github.com/squidfunk/mkdocs-material/issues/6196
+document$.subscribe(function () {
+    // 記事ページのHeadingに章番号を自動で振る
     const isArticle = document.location.pathname.startsWith("/article");
     if (isArticle) {
-        $("h1").addClass("article-page");
-        $("h2").addClass("article-page");
-        $("h3").addClass("article-page");
-        $("h4").addClass("article-page");
-        $("h5").addClass("article-page");
-        $("h6").addClass("article-page");
+        document
+            .querySelectorAll("h1, h2, h3, h4, h5, h6")
+            .forEach((it, index) => {
+                it.classList.add("article-page");
+            });
     }
-});
 
-// 外部リンクを新しいタブで開く
-$(document).ready(function () {
-    $('a[href^="http"]')
-        .attr("target", "_blank")
-        .attr("rel", "noopener noreferrer");
+    // 外部リンクを新しいタブで開く
+    document.querySelectorAll("a[href^='http']").forEach((it) => {
+        it.setAttribute("target", "_blank");
+        it.setAttribute("rel", "noopener noreferrer");
+    });
+
+    // テーブルソート https://github.com/tristen/tablesort
+    document
+        .querySelectorAll("article table:not([class])")
+        .forEach((it) => new Tablesort(it));
+
+    // katex
+    document.querySelectorAll(".language-math").forEach((it) => {
+        window.renderMathInElement(it, { ignoredTags: [] });
+    });
 });
