@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Sat, 20 Jul 2024 05:54:40 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[「一般的」とやらのGitのブランチの使い方]]></title><description><![CDATA[
+ はじめに
+本記事の目的は「一般的」とやらのgitflowのワークフローがどの程度、「一般的」なのかを調査することです。
+この記事ではgitflowなどのブランチ戦略の是非は一切言及しません。
+なお、初めてgitflowについて調べる人は、拡散されている情報ではなくて必ず作者本人のページを確認することをお勧めします。
+https://nvie.com/posts/a-successful-git-branching-model/
+
+ 調査方法
+gitflowの特徴として、頻繁に開発を行うdevelopブランチと、安定した内容を保持するmaster(main)ブランチを両方保持しています...]]></description><link>https://zenn.dev/mima_ita/articles/ad153418f1c7ab</link><guid isPermaLink="true">https://zenn.dev/mima_ita/articles/ad153418f1c7ab</guid><pubDate>Sat, 20 Jul 2024 05:48:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xLWnOJL_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%258C%25E4%25B8%2580%25E8%2588%25AC%25E7%259A%2584%25E3%2580%258D%25E3%2581%25A8%25E3%2582%2584%25E3%2582%2589%25E3%2581%25AEGit%25E3%2581%25AE%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25B3%25E3%2583%2581%25E3%2581%25AE%25E4%25BD%25BF%25E3%2581%2584%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mima_ita%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pjcDFUQmpUT3lBUnl4aHM3aVk1MEg2b0JZZ3FrRzFjTTZVblJMPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mima_ita</dc:creator></item><item><title><![CDATA[【Python】openpyxlライブラリについて詳しく解説]]></title><description><![CDATA[
+ 1. はじめに
+openpyxlは、PythonでExcelファイル（.xlsx形式）を読み書きするためのライブラリです。Excelファイルをプログラムで操作する際に非常に便利なツールで、多くの機能を備えています。本記事では、openpyxlのコンポーネント、フォルダ構成、__init__.pyの中身、およびメソッドと属性について詳しく解説します。
+
+ 2. openpyxlのインストール
+openpyxlを使用するには、まずライブラリをインストールする必要があります。以下のコマンドを使用してインストールします：
+pip install openpyxl
+
+ 3. openpyxlの...]]></description><link>https://zenn.dev/nuinui/articles/633e37024902f9</link><guid isPermaLink="true">https://zenn.dev/nuinui/articles/633e37024902f9</guid><pubDate>Sat, 20 Jul 2024 00:30:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dD1RmFl0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591openpyxl%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E8%25A9%25B3%25E3%2581%2597%25E3%2581%258F%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AC%25E3%2583%25BC%25E3%2581%2584%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSno2cFRIRmpDc184N0NyTTNyYV9iZnd6LVVLaXAxRHMxZWdFdHl1b0VQY1JCbUVDcz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ぬーい</dc:creator></item><item><title><![CDATA[【Python】メソッドや属性とモジュール・ライブラリ・パッケージとの関わりについて詳しく解説]]></title><description><![CDATA[
+ 1. はじめに
+Pythonのプログラムを構築する際に、メソッドや属性、そしてモジュール、ライブラリ、パッケージという概念が重要になります。これらの概念は互いにどのように関わっているのかを理解することは、効率的なコードの書き方やデバッグに役立ちます。本記事では、それぞれの概念を解説し、具体的な例を用いてその関係を説明します。
+
+ 2. メソッドと属性
+
+ 2.1 メソッドとは
+メソッドは、特定のオブジェクトに関連付けられた関数です。メソッドは、そのオブジェクトのデータを操作したり、オブジェクトに対する操作を実行します。例えば、以下のような例があります：
+class MyClass:
+...]]></description><link>https://zenn.dev/nuinui/articles/100d61d48deb46</link><guid isPermaLink="true">https://zenn.dev/nuinui/articles/100d61d48deb46</guid><pubDate>Fri, 19 Jul 2024 14:13:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--erPAK-g4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591%25E3%2583%25A1%25E3%2582%25BD%25E3%2583%2583%25E3%2583%2589%25E3%2582%2584%25E5%25B1%259E%25E6%2580%25A7%25E3%2581%25A8%25E3%2583%25A2%25E3%2582%25B8%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%25AB%25E3%2583%25BB%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%25E3%2583%25BB%25E3%2583%2591%25E3%2583%2583%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B8%25E3%2581%25A8%25E3%2581%25AE%25E9%2596%25A2%25E3%2582%258F%25E3%2582%258A%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E8%25A9%25B3%25E3%2581%2597%25E3%2581%258F%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AC%25E3%2583%25BC%25E3%2581%2584%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSno2cFRIRmpDc184N0NyTTNyYV9iZnd6LVVLaXAxRHMxZWdFdHl1b0VQY1JCbUVDcz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ぬーい</dc:creator></item><item><title><![CDATA[【Python】コンボボックスのオプションと使い方]]></title><description><![CDATA[
+ 1. はじめに
+PythonのGUIプログラミングでよく使用されるライブラリにTkinterがあります。その中でも、コンボボックス（Combobox）はユーザーに選択肢を提供するための便利なウィジェットです。本記事では、Tkinterのコンボボックスのオプションと使い方について詳しく解説します。
+
+ 2. コンボボックスの基本構造
+まず、コンボボックスを使用するために必要な基本的なインポートと設定を行います。
+import tkinter as tk
+from tkinter import ttk
+
+root = tk.Tk()
+root.title("コンボボックスの例")
+roo...]]></description><link>https://zenn.dev/nuinui/articles/f9267bfe849d27</link><guid isPermaLink="true">https://zenn.dev/nuinui/articles/f9267bfe849d27</guid><pubDate>Fri, 19 Jul 2024 14:06:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wNRREfql--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%259C%25E3%2583%259C%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25B9%25E3%2581%25AE%25E3%2582%25AA%25E3%2583%2597%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2581%25A8%25E4%25BD%25BF%25E3%2581%2584%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AC%25E3%2583%25BC%25E3%2581%2584%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSno2cFRIRmpDc184N0NyTTNyYV9iZnd6LVVLaXAxRHMxZWdFdHl1b0VQY1JCbUVDcz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ぬーい</dc:creator></item><item><title><![CDATA[【Python】パッケージ・ライブラリ・モジュールをimportしたときの挙動と仕組み]]></title><description><![CDATA[
+ 1. はじめに
+Pythonでプログラムを作成する際、さまざまな外部コードをimport文で取り込むことがあります。これにはモジュール、パッケージ、ライブラリのインポートが含まれます。それぞれをインポートする際の挙動や仕組みについて詳しく解説します。
+
+ 2. importの基本構造
+Pythonのimport文には基本的に以下の構造があります。
+
+
+モジュールのインポート:
+import module_name
+
+
+
+パッケージのインポート:
+import package_name.module_name
+
+
+
+ライブラリのインポート:
+import library_name
+
+
+...]]></description><link>https://zenn.dev/nuinui/articles/781928d575f528</link><guid isPermaLink="true">https://zenn.dev/nuinui/articles/781928d575f528</guid><pubDate>Fri, 19 Jul 2024 13:57:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--WDQzope5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591%25E3%2583%2591%25E3%2583%2583%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%25BB%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%25E3%2583%25BB%25E3%2583%25A2%25E3%2582%25B8%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%25AB%25E3%2582%2592import%25E3%2581%2597%25E3%2581%259F%25E3%2581%25A8%25E3%2581%258D%25E3%2581%25AE%25E6%258C%2599%25E5%258B%2595%25E3%2581%25A8%25E4%25BB%2595%25E7%25B5%2584%25E3%2581%25BF%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AC%25E3%2583%25BC%25E3%2581%2584%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSno2cFRIRmpDc184N0NyTTNyYV9iZnd6LVVLaXAxRHMxZWdFdHl1b0VQY1JCbUVDcz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ぬーい</dc:creator></item><item><title><![CDATA[【Python】import文でライブラリ・パッケージ・モジュールを見分ける方法]]></title><description><![CDATA[
+ 1. はじめに
+Pythonのimport文を使用する際、どれがライブラリ、パッケージ、モジュールなのか判断がつかないことがあります。本記事では、これらの用語を明確に区別し、インポート文だけでは判断が難しい場合の見分け方も解説します。
+
+ 2. 用語の定義
+
+ 2.1 モジュール (Module)
+
+
+定義: モジュールは、Pythonのコードが書かれた単一のファイル（拡張子 .py）。
+
+例: math.pyというファイルがモジュール。
+
+
+ 2.2 パッケージ (Package)
+
+
+定義: パッケージは、複数のモジュールをまとめたディレクトリ。ディレクトリには__init__....]]></description><link>https://zenn.dev/nuinui/articles/56ccafe0cdb229</link><guid isPermaLink="true">https://zenn.dev/nuinui/articles/56ccafe0cdb229</guid><pubDate>Fri, 19 Jul 2024 13:45:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3_YatAQb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591import%25E6%2596%2587%25E3%2581%25A7%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%25E3%2583%25BB%25E3%2583%2591%25E3%2583%2583%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%25BB%25E3%2583%25A2%25E3%2582%25B8%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%25AB%25E3%2582%2592%25E8%25A6%258B%25E5%2588%2586%25E3%2581%2591%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AC%25E3%2583%25BC%25E3%2581%2584%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSno2cFRIRmpDc184N0NyTTNyYV9iZnd6LVVLaXAxRHMxZWdFdHl1b0VQY1JCbUVDcz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ぬーい</dc:creator></item><item><title><![CDATA[Azure AI SpeechのFast Transcription API (preview)で長時間音声データの文字起こしを試す]]></title><description><![CDATA[2024年5月のMicrosoft Buildで発表された「Fast Transcription API」がパブリックプレビューになっていたので試してみました。
+
+ Fast Transcription APIとは
+Fast Transcription APIとは、Azure AI Speechファミリーの一部で、
+
+長さ: 2時間未満
+サイズ: 200MB未満
+
+の音声やビデオの文字起こしを高速に行うことが出来ます。
+公式ブログによると、以下のようなユースケースを想定しているようです。
+
+コール センターで働く一般的なエージェントは、通話ごとに 3 ～ 5 分かけてメモを作成します。F...]]></description><link>https://zenn.dev/smartcamp/articles/695a422ccf3265</link><guid isPermaLink="true">https://zenn.dev/smartcamp/articles/695a422ccf3265</guid><pubDate>Fri, 19 Jul 2024 11:20:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--HsmYqD2h--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Azure%2520AI%2520Speech%25E3%2581%25AEFast%2520Transcription%2520API%2520%2528preview%2529%25E3%2581%25A7%25E9%2595%25B7%25E6%2599%2582%25E9%2596%2593%25E9%259F%25B3%25E5%25A3%25B0%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E4%25BF%25A1%25E7%258E%2584%25E9%25A4%2585%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzUyNGYwMGIzM2MuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:SMARTCAMP%2520Engineer%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk0OTAzNjAyZTQuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>信玄餅</dc:creator></item><item><title><![CDATA[GIMPのPythonスクリプトで画像生成：初心者向け完全ガイド]]></title><description><![CDATA[
+ はじめに
+GIMPは強力な画像編集ソフトウェアですが、Pythonスクリプトを使用することで、その機能をさらに拡張できます。本記事では、GIMPのPythonスクリプトを使って、カスタムメッセージを含む画像を自動生成する方法を解説します。
+このガイドは、プログラミング初心者でも理解できるよう、ステップバイステップで説明していきます。
+
+ デモ動画
+
+
+ GIMPとPythonスクリプトの基礎
+GIMPでPythonスクリプトを使用すると、画像処理を自動化できます。以下は、GIMPとPythonスクリプトの関係を示す簡単な図です。
+
+
+GIMP: 画像編集ソフトウェア
+
+Python-...]]></description><link>https://zenn.dev/sunwood_ai_labs/articles/generate-images-with-gimp-python-scripts-complet</link><guid isPermaLink="true">https://zenn.dev/sunwood_ai_labs/articles/generate-images-with-gimp-python-scripts-complet</guid><pubDate>Fri, 19 Jul 2024 10:58:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--X5EduXvg--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:GIMP%25E3%2581%25AEPython%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2583%2588%25E3%2581%25A7%25E7%2594%25BB%25E5%2583%258F%25E7%2594%259F%25E6%2588%2590%25EF%25BC%259A%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E5%2590%2591%25E3%2581%2591%25E5%25AE%258C%25E5%2585%25A8%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Maki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTDdpSmVyNldLVlpKLUd4N054QWVuSFVtYXQ3MUhhd1NXaU5hRG5FTnZiMXZZdHBIaGs9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Maki</dc:creator></item><item><title><![CDATA[Pythonで自身の親クラスを調べる方法]]></title><description><![CDATA[
+ はじめに
+Pythonでクラスの継承関係を理解することは、オブジェクト指向プログラミングにおいて重要です。
+この記事では、Pythonで自身の親クラスを調べるための主な方法を紹介します。
+ちなみに筆者は直近LangChainのクラス周りで__mro__にお世話になりました。
+
+ 方法
+
+
+__bases__属性を使用する
+__bases__属性は、クラスの直接の親クラスをタプルとして返します。
+
+class Parent:
+    pass
+
+class Child(Parent):
+    pass
+
+
+print(Child.__bases__)  # 出力: (&lt;clas...]]></description><link>https://zenn.dev/sergicalsix/articles/15ccaa5fe047f3</link><guid isPermaLink="true">https://zenn.dev/sergicalsix/articles/15ccaa5fe047f3</guid><pubDate>Fri, 19 Jul 2024 08:38:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--C3YDd1d_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A7%25E8%2587%25AA%25E8%25BA%25AB%25E3%2581%25AE%25E8%25A6%25AA%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25B9%25E3%2582%2592%25E8%25AA%25BF%25E3%2581%25B9%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:sergicalsix%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZlNzliZWZhNmIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sergicalsix</dc:creator></item><item><title><![CDATA[【Python】pythonコマンドとpython3コマンドの違いを徹底解説]]></title><description><![CDATA[
+ 1. はじめに
+Pythonは人気のあるプログラミング言語であり、バージョンごとに異なる特徴を持っています。特に、Python 2とPython 3の間には多くの違いがあり、これに関連してpythonコマンドとpython3コマンドが存在します。この記事では、これらのコマンドの違いについて詳しく解説します。
+
+ 2. Pythonのバージョン
+
+ 2.1 Python 2とPython 3
+
+
+Python 2: 2000年にリリースされ、長い間広く使用されてきました。しかし、2020年1月1日をもって公式サポートが終了しました。
+
+Python 3: 2008年にリリースされ、Py...]]></description><link>https://zenn.dev/nuinui/articles/82b32e206b3fc3</link><guid isPermaLink="true">https://zenn.dev/nuinui/articles/82b32e206b3fc3</guid><pubDate>Fri, 19 Jul 2024 08:12:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--nC87_PXx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591python%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2581%25A8python3%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%25E3%2582%2592%25E5%25BE%25B9%25E5%25BA%2595%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AC%25E3%2583%25BC%25E3%2581%2584%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSno2cFRIRmpDc184N0NyTTNyYV9iZnd6LVVLaXAxRHMxZWdFdHl1b0VQY1JCbUVDcz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ぬーい</dc:creator></item><item><title><![CDATA[【Python】システムの環境変数(パス設定)のやり方]]></title><description><![CDATA[
+ 1. はじめに
+この記事では、Windows環境でPythonをインストールした際に「Add Python to PATH」にチェックを入れ忘れた場合の対処法として、手動でシステムの環境変数にパスを設定する方法を説明します。Pythonは既にインストールされているが、コマンドプロンプトでpythonやpipコマンドを実行できない場合、この手順を実行してください。
+
+ 2. システムの環境変数とは？
+システムの環境変数は、オペレーティングシステムとアプリケーションが特定の設定やパス情報を共有するための仕組みです。特に「PATH」環境変数には、コマンドラインでプログラムを簡単に実行するた...]]></description><link>https://zenn.dev/nuinui/articles/df2bf96843e04f</link><guid isPermaLink="true">https://zenn.dev/nuinui/articles/df2bf96843e04f</guid><pubDate>Fri, 19 Jul 2024 08:03:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--KFEom7gV--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%25E3%2581%25AE%25E7%2592%25B0%25E5%25A2%2583%25E5%25A4%2589%25E6%2595%25B0%2528%25E3%2583%2591%25E3%2582%25B9%25E8%25A8%25AD%25E5%25AE%259A%2529%25E3%2581%25AE%25E3%2582%2584%25E3%2582%258A%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AC%25E3%2583%25BC%25E3%2581%2584%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSno2cFRIRmpDc184N0NyTTNyYV9iZnd6LVVLaXAxRHMxZWdFdHl1b0VQY1JCbUVDcz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ぬーい</dc:creator></item><item><title><![CDATA[[ Future ] 並行処理の際のログについて考えてみた]]></title><description><![CDATA[python の futures を使用して並行処理を実施した際のログの扱い方についての備忘録として記事に残します。
+!
+この記事では以下について触れます。
+
+今回やること
+要件
+考えたこと
+困ったこと
+解決策
+まとめ
+
+
+では、初めて行きます。
+
+ 今回やること
+
+以下をローカル（ターミナルでコマンドを叩いて）で実行する
+
+ローカル（自身のPC）に存在するcsvファイルをparquet形式で S3 に保存する
+
+
+
+
+ 要件
+
+1000個のデータに区切ってファイルを配置する → つまり1ファイル1000個のデータとなる
+同期処理では時間がかかるため、非同期処理で処理を行う
+
+
+ 考えた...]]></description><link>https://zenn.dev/ncdc/articles/2f2a8ec5746a6e</link><guid isPermaLink="true">https://zenn.dev/ncdc/articles/2f2a8ec5746a6e</guid><pubDate>Fri, 19 Jul 2024 07:02:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--tPmkhVm_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255B%2520Future%2520%255D%2520%25E4%25B8%25A6%25E8%25A1%258C%25E5%2587%25A6%25E7%2590%2586%25E3%2581%25AE%25E9%259A%259B%25E3%2581%25AE%25E3%2583%25AD%25E3%2582%25B0%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E8%2580%2583%25E3%2581%2588%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2582%2588%25E3%2581%25A3%25E3%2581%25A1%25E3%2582%2583%25E3%2582%2593%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNhODZhNDA5ZDMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:NCDC%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VjYmFjOWEzNmYuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>よっちゃん</dc:creator></item><item><title><![CDATA[Docker + OpenCV Python の module *** has no attribute *** のエラー回避]]></title><description><![CDATA[
+ 概要
+dockerにおける、OpenCV Python の module *** has no attribute *** のエラー回避方法を説明する。
+
+ 環境
+
+Ubuntu 20.04.5 LTS
+Docker 20.10.18
+
+
+ 原因とエラー回避方法
+原因はpythonのopencvに関係するモジュールのバージョンに不整合が起こっているためであるため、以下のDockerfileのようにopencvに関係するモジュールのバージョンを統一すればエラーを回避できる。
+
+Dockerfile
+FROM python:3.9
+
+ARG OPENCV_PYTHON_VERSION=4...]]></description><link>https://zenn.dev/room_208/articles/4045781ed7821e</link><guid isPermaLink="true">https://zenn.dev/room_208/articles/4045781ed7821e</guid><pubDate>Fri, 19 Jul 2024 06:54:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Q-YjpP9D--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%2520%252B%2520OpenCV%2520Python%2520%25E3%2581%25AE%2520module%2520%252A%252A%252A%2520has%2520no%2520attribute%2520%252A%252A%252A%2520...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:room_208%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q2MmRkNTEzN2IuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>room_208</dc:creator></item><item><title><![CDATA[実は知らないPythonのraise]]></title><description><![CDATA[Pythonのraiseといえば当然書いててよく出てくるんですが・・・
+これに限らず基本的な文法って基本的すぎて実はドキュメントの詳細を読んだことがない人が多かったりして、自分も含めて詳細を知らないことが多いんですよね。
+なんで今回はふと書いてて疑問に思ったraiseの仕様の詳細を紹介していこうと思います。
+!
+たぶんあんまり役には立ちません・・・
+
+
+ raise
+Pythonでraiseするとき、通常はおそらくこんな感じで書いてるはずですが・・・
+raise ValueError()
+実はこうかけます。
+raise ValueError
+
+ raiseはインスタンスじゃなくていい
+そ...]]></description><link>https://zenn.dev/tektek/articles/9b8fd47e2cac4f</link><guid isPermaLink="true">https://zenn.dev/tektek/articles/9b8fd47e2cac4f</guid><pubDate>Fri, 19 Jul 2024 01:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--f_IkjS0y--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%25AE%259F%25E3%2581%25AF%25E7%259F%25A5%25E3%2582%2589%25E3%2581%25AA%25E3%2581%2584Python%25E3%2581%25AEraise%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tektek%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvdC5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tektek</dc:creator></item><item><title><![CDATA[PythonとExcelによるXBRL解析　株式投資に役立つ財務分析の準備]]></title><description><![CDATA[この本は、PythonやEDINETのAPIを利用してXBRLデータを取得し、そのデータをcsvやxlsxで見やすい形に変換することについて記述しています。
+
+プログラミングの内容についてはすべて動作確認を行っていますが、筆者は非エンジニアであるため、ソースコードの内容についてはほとんどChatGPTの手を借りています。そのため、効率的ではないところや間違っているところがあるかもしれませんので、ご注意ください。
+
+]]></description><link>https://zenn.dev/mikamori/books/e6f27147118197</link><guid isPermaLink="true">https://zenn.dev/mikamori/books/e6f27147118197</guid><pubDate>Thu, 18 Jul 2024 15:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lkhBF4mA--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci9hZmJiZmRhNDRhLmpwZWc=%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>Mikamori</dc:creator></item><item><title><![CDATA[【RAG】LangChainでつくるRAGチャットボット ～会話履歴を考慮する～]]></title><description><![CDATA[RAG (Retrieval-Augmented Generation) に関しては、ドキュメントのチャンク分割方法やデータベースからの検索方法などがよく論じられます。一方で、チャットボットとして提供するのであれば、会話履歴付きチャット機能をどのように実現するかも重要だと感じています。そこで、RAGベースのチャットボットにおいて、会話履歴をどのように管理すべきか、また、ナレッジの検索を毎回するのかなど、複数回の会話のやり取りを前提としたRAGチャットボットの実現方法について、いろいろと試してみました。
+なお、前回の記事で、LCEL記法での会話履歴付きチャットボットの作り方をまとめました。...]]></description><link>https://zenn.dev/khisa/articles/1f368c79570b17</link><guid isPermaLink="true">https://zenn.dev/khisa/articles/1f368c79570b17</guid><pubDate>Thu, 18 Jul 2024 12:53:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--kn7yA2ip--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590RAG%25E3%2580%2591LangChain%25E3%2581%25A7%25E3%2581%25A4%25E3%2581%258F%25E3%2582%258BRAG%25E3%2583%2581%25E3%2583%25A3%25E3%2583%2583%25E3%2583%2588%25E3%2583%259C%25E3%2583%2583%25E3%2583%2588%2520%25EF%25BD%259E%25E4%25BC%259A%25E8%25A9%25B1%25E5%25B1%25A5%25E6%25AD%25B4%25E3%2582%2592%25E8%2580%2583%25E6%2585%25AE%25E3%2581%2599%25E3%2582%258B%25EF%25BD%259E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25B2%25E3%2581%2595%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTHFKaUVHa1VQMkc5WGpIeHlTa3p4bld3Z3JNcHFhT19hUFVKcWEyQ2YxWUZFPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ひさ</dc:creator></item><item><title><![CDATA[【Python】アンインストールの仕方をとことん解説 (Mac版)]]></title><description><![CDATA[
+ 1. はじめに
+この記事では、MacでPythonおよび関連する環境（pipなど）を完全にアンインストールする方法について詳しく説明します。Pythonのバージョン管理や再インストールのために、一度すべてをクリーンにする必要がある場合などに役立ちます。
+
+ 2. Pythonのアンインストール
+
+ 2.1 インストールディレクトリの確認
+まず、Pythonがインストールされているディレクトリを確認します。一般的に、Pythonは以下のディレクトリにインストールされています。
+
+/Library/Frameworks/Python.framework
+/usr/local/bin/
+
+...]]></description><link>https://zenn.dev/nuinui/articles/08d2d5d29d833e</link><guid isPermaLink="true">https://zenn.dev/nuinui/articles/08d2d5d29d833e</guid><pubDate>Thu, 18 Jul 2024 11:04:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--tKSN7TAI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591%25E3%2582%25A2%25E3%2583%25B3%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%25AE%25E4%25BB%2595%25E6%2596%25B9%25E3%2582%2592%25E3%2581%25A8%25E3%2581%2593%25E3%2581%25A8%25E3%2582%2593%25E8%25A7%25A3%25E8%25AA%25AC%2520%2528Mac%25E7%2589%2588%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AC%25E3%2583%25BC%25E3%2581%2584%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSno2cFRIRmpDc184N0NyTTNyYV9iZnd6LVVLaXAxRHMxZWdFdHl1b0VQY1JCbUVDcz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ぬーい</dc:creator></item><item><title><![CDATA[【Python】asyncio と h2 で HTTP/2 クライアントをつくる]]></title><description><![CDATA[h2 の examples の中に asyncio の HTTP/2 クライアントのコードの例がなかったのでつくった。
+
+client.py
+import asyncio
+from h2.config import H2Configuration
+from h2.connection import H2Connection
+from h2.errors import ErrorCodes
+from h2.events import (
+    SettingsAcknowledged, ResponseReceived, DataReceived, StreamEnded
+)
+
+# 古い...]]></description><link>https://zenn.dev/masakielastic/articles/97b179ba71574d</link><guid isPermaLink="true">https://zenn.dev/masakielastic/articles/97b179ba71574d</guid><pubDate>Thu, 18 Jul 2024 10:43:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--n1XCYx3_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591asyncio%2520%25E3%2581%25A8%2520h2%2520%25E3%2581%25A7%2520HTTP%252F2%2520%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25A4%25E3%2582%25A2%25E3%2583%25B3%25E3%2583%2588%25E3%2582%2592%25E3%2581%25A4%25E3%2581%258F%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Masaki%2520Kagaya%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc3ODAxZTNiZTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Masaki Kagaya</dc:creator></item><item><title><![CDATA[【Python】asyncio で HTTP/1 クライアントをつくる]]></title><description><![CDATA[公式マニュアルのサンプルコードをコピペして送るメッセージを修正すれば HTTP/1 クライアントになる
+
+client.py
+import asyncio
+
+# https://docs.python.org/ja/3/library/asyncio-stream.html#tcp-echo-client-using-streams
+
+async def tcp_client(host, port, message):
+    reader, writer = await asyncio.open_connection(
+    host, port)
+
+    print(f'Send...]]></description><link>https://zenn.dev/masakielastic/articles/657385616ddf30</link><guid isPermaLink="true">https://zenn.dev/masakielastic/articles/657385616ddf30</guid><pubDate>Thu, 18 Jul 2024 09:48:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--yCG0lZhu--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591asyncio%2520%25E3%2581%25A7%2520HTTP%252F1%2520%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25A4%25E3%2582%25A2%25E3%2583%25B3%25E3%2583%2588%25E3%2582%2592%25E3%2581%25A4%25E3%2581%258F%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Masaki%2520Kagaya%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc3ODAxZTNiZTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Masaki Kagaya</dc:creator></item><item><title><![CDATA[【Python】プログラミングの始め方 (Mac版)]]></title><description><![CDATA[
+ 1. はじめに
+この記事では、Macユーザー向けにPythonの始め方について説明します。Pythonはシンプルで読みやすいコードを書くことができ、初心者にも優しいプログラミング言語です。Macでの環境構築方法をステップバイステップで解説します。
+
+ 2. 準備
+
+ 2.1 必要なツール
+Pythonでプログラミングを始めるためには以下のツールを準備します：
+
+Python
+テキストエディタ (VS Code)
+pip
+
+
+ 2.2 Pythonのインストール
+作成したプログラムを実行するのにPythonが必要になります。Pythonの公式サイトから最新バージョンをダウンロードし、イ...]]></description><link>https://zenn.dev/nuinui/articles/873866b3f8753e</link><guid isPermaLink="true">https://zenn.dev/nuinui/articles/873866b3f8753e</guid><pubDate>Thu, 18 Jul 2024 08:11:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--IGi8_iec--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%259F%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%25AE%25E5%25A7%258B%25E3%2582%2581%25E6%2596%25B9%2520%2528Mac%25E7%2589%2588%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AC%25E3%2583%25BC%25E3%2581%2584%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSno2cFRIRmpDc184N0NyTTNyYV9iZnd6LVVLaXAxRHMxZWdFdHl1b0VQY1JCbUVDcz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ぬーい</dc:creator></item></channel></rss>
