@@ -1,6 +1,6 @@
-<link rel="stylesheet" href="/stylesheets/xp.css">
-
 # ライフゲーム（高校時代版）
+
+<link rel="stylesheet" href="/stylesheets/xp.css">
 
 <div class="xp-css" style="width: 100%; display: flex; flex-direction: column;">
   <div class="window">
