@@ -66,9 +66,15 @@ markdown_extensions:
               - name: math
                 class: language-math
                 format: !!python/name:pymdownx.superfences.fence_div_format
+              - name: python
+                class: language-python
+                validator: !!python/name:markdown_exec.validator
+                format: !!python/name:markdown_exec.formatter
     - pymdownx.tasklist:
           custom_checkbox: true
     - pymdownx.tilde
+    - pymdownx.tabbed:
+          alternate_style: true
 
 plugins:
     - glightbox
@@ -81,6 +87,8 @@ plugins:
     - search:
           lang:
               - ja
+    - markdown-exec:
+          ansi: required
     - table-reader
     - tags:
           tags_file: category.md

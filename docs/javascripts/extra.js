@@ -1,5 +1,5 @@
 // https://github.com/squidfunk/mkdocs-material/issues/6196
-document$.subscribe(function () {
+document$.subscribe(() => {
     // 記事ページのHeadingに章番号を自動で振る
     const isArticle = document.location.pathname.startsWith("/article");
     if (isArticle) {
@@ -18,7 +18,7 @@ document$.subscribe(function () {
 
     // テーブルソート https://github.com/tristen/tablesort
     document
-        .querySelectorAll("article table:not([class])")
+        .querySelectorAll("article table:not(.highlight)")
         .forEach((it) => new Tablesort(it));
 
     // katex

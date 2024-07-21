@@ -4,3 +4,4 @@ RUN pip install \
     mkdocs-awesome-pages-plugin \
     mkdocs-glightbox \
     mkdocs-table-reader-plugin \
+    markdown-exec[ansi] \
