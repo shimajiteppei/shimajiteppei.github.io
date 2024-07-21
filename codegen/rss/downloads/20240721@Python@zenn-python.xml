@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Sun, 21 Jul 2024 09:00:40 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[【Python】Ryeのフォルダ構成についてとことん解説]]></title><description><![CDATA[
+ はじめに
+Pythonでデスクトップアプリケーションを開発する際に、仮想環境の管理は非常に重要です。特に、複数のプロジェクトを並行して進める場合、各プロジェクトの依存関係を分離することでトラブルを避けることができます。この記事では、Ryeを使用したプロジェクトのフォルダ構成について詳しく解説します。今回は、tkinterとopenpyxlを使用したデスクトップアプリケーションのプロジェクトを例に説明します。
+
+ Ryeとは？
+RyeはPythonの仮想環境管理ツールで、プロジェクトの依存関係や環境管理を簡素化します。Ryeを使用することで、各プロジェクトごとに独立した仮想環境を作成し...]]></description><link>https://zenn.dev/nuinui/articles/04e5a7912ab579</link><guid isPermaLink="true">https://zenn.dev/nuinui/articles/04e5a7912ab579</guid><pubDate>Sun, 21 Jul 2024 06:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4H2MaslS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591Rye%25E3%2581%25AE%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25AB%25E3%2583%2580%25E6%25A7%258B%25E6%2588%2590%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E3%2581%25A8%25E3%2581%2593%25E3%2581%25A8%25E3%2582%2593%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AC%25E3%2583%25BC%25E3%2581%2584%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSno2cFRIRmpDc184N0NyTTNyYV9iZnd6LVVLaXAxRHMxZWdFdHl1b0VQY1JCbUVDcz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ぬーい</dc:creator></item><item><title><![CDATA[【Python】Ryeについてとことん解説]]></title><description><![CDATA[
+ はじめに
+Ryeは新しいPythonの仮想環境管理ツールで、プロジェクトの依存関係や環境管理を簡素化します。この記事では、Ryeの基本的な説明と、Ryeの使用前後のフォルダ構成の変化、Ryeを使った仮想環境の構築方法について詳しく解説します。
+
+ Ryeとは？
+RyeはPythonプロジェクトの仮想環境管理と依存関係の管理を一体化したツールです。従来のツール（venvやvirtualenv、pipenvなど）と同様に、プロジェクトごとに独立した環境を作成し、他のプロジェクトとの依存関係の競合を防ぐことができます。Ryeは特に以下の点で優れています：
+
+
+簡単なインストールとセットアッ...]]></description><link>https://zenn.dev/nuinui/articles/dbadda040cc6fc</link><guid isPermaLink="true">https://zenn.dev/nuinui/articles/dbadda040cc6fc</guid><pubDate>Sun, 21 Jul 2024 05:45:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--UqSPsPQ6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591Rye%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E3%2581%25A8%25E3%2581%2593%25E3%2581%25A8%25E3%2582%2593%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AC%25E3%2583%25BC%25E3%2581%2584%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSno2cFRIRmpDc184N0NyTTNyYV9iZnd6LVVLaXAxRHMxZWdFdHl1b0VQY1JCbUVDcz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ぬーい</dc:creator></item><item><title><![CDATA[【Python】仮想環境の種類と構築の仕方、メリットデメリットを詳しく解説]]></title><description><![CDATA[
+ はじめに
+仮想環境は、Pythonプロジェクトごとに依存関係を管理し、他のプロジェクトに影響を与えないようにするための重要なツールです。この記事では、仮想環境の種類とその構築方法、メリット・デメリットについて詳しく解説します。特におすすめの仮想環境ツールとして、Ryeを紹介します。
+
+ 1. 仮想環境の種類
+
+
+
+仮想環境ツール
+説明
+
+
+
+
+Rye
+最新のツールで、仮想環境の作成とパッケージ管理が簡単。
+
+
+venv
+Python標準ライブラリで、軽量かつ使いやすい。
+
+
+virtualenv
+venvの前身で、多機能。古いPythonバージョンもサポート。
+
+
+Conda
+Pyt...]]></description><link>https://zenn.dev/nuinui/articles/89e4c090477e94</link><guid isPermaLink="true">https://zenn.dev/nuinui/articles/89e4c090477e94</guid><pubDate>Sun, 21 Jul 2024 04:42:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--68jiB345--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591%25E4%25BB%25AE%25E6%2583%25B3%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25AE%25E7%25A8%25AE%25E9%25A1%259E%25E3%2581%25A8%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%25AE%25E4%25BB%2595%25E6%2596%25B9%25E3%2580%2581%25E3%2583%25A1%25E3%2583%25AA%25E3%2583%2583%25E3%2583%2588%25E3%2583%2587%25E3%2583%25A1%25E3%2583%25AA%25E3%2583%2583%25E3%2583%2588%25E3%2582%2592%25E8%25A9%25B3%25E3%2581%2597%25E3%2581%258F%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AC%25E3%2583%25BC%25E3%2581%2584%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSno2cFRIRmpDc184N0NyTTNyYV9iZnd6LVVLaXAxRHMxZWdFdHl1b0VQY1JCbUVDcz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ぬーい</dc:creator></item><item><title><![CDATA[7/1~7/21までに技術的にやったこと]]></title><description><![CDATA[
+ クリーンアーキテクチャについて
+クリーンアーキテクチャとは？
+!
+機能を実現しているコアな部分をフレームワークやDBな度に依存しない状態（関心事の分離）にすることで、他が変わってもコアな部分への影響を無くし、変更や拡張に強くすることができるアーキテクチャのこと
+
+
+ 最近このアーキテクチャで実装を行っていて感じたこと
+
+コードが追いやすい
+どんな設計思想で書いているかを明確にすることで、どこに何が置かれていてどんな実装をしているかパッとコードを見ただけでわかる。内部ロジックがなんでそうなっているかは別として。
+
+!
+だから、dbでエラーが起きている→repository層だな
+500...]]></description><link>https://zenn.dev/zi_matsu/articles/e6c038d98ee426</link><guid isPermaLink="true">https://zenn.dev/zi_matsu/articles/e6c038d98ee426</guid><pubDate>Sun, 21 Jul 2024 01:17:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Xn7yKVRV--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:7%252F1%7E7%252F21%25E3%2581%25BE%25E3%2581%25A7%25E3%2581%25AB%25E6%258A%2580%25E8%25A1%2593%25E7%259A%2584%25E3%2581%25AB%25E3%2582%2584%25E3%2581%25A3%25E3%2581%259F%25E3%2581%2593%25E3%2581%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Matsuzaki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzcyNzNkNzczYTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Matsuzaki</dc:creator></item><item><title><![CDATA[【M1 Mac】AnyLabelingからX-AnyLabelingに乗り換えよう]]></title><description><![CDATA[
+ なぜ乗り換え？
+モデルの豊富さや，COCO形式へのExportなど，本家よりも便利機能が充実しています．基本的にはクローンなので使い勝手はそのままです．
+https://github.com/CVHub520/X-AnyLabeling
+
+ 環境構築
+基本的には公式のQuick Start Guideに則ります．
+git clone https://github.com/CVHub520/X-AnyLabeling.git
+cd X-AnyLabeling
+pip install -U pip
+pip install -r requirements-macos-dev.txt
+はい，...]]></description><link>https://zenn.dev/watanko/articles/67c4511b3c2e85</link><guid isPermaLink="true">https://zenn.dev/watanko/articles/67c4511b3c2e85</guid><pubDate>Sun, 21 Jul 2024 00:41:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--l1uE-1vx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590M1%2520Mac%25E3%2580%2591AnyLabeling%25E3%2581%258B%25E3%2582%2589X-AnyLabeling%25E3%2581%25AB%25E4%25B9%2597%25E3%2582%258A%25E6%258F%259B%25E3%2581%2588%25E3%2582%2588%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:watanko%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2UzMDAzYTExYjMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>watanko</dc:creator></item><item><title><![CDATA[[オフライン環境] Flask + uWSGI でアプリケーションを構築する]]></title><description><![CDATA[以前書いた記事（Flaskを理解する）の続きです。
+https://zenn.dev/plum_tt/articles/a1eb75cb364bdb
+
+
+ 1.uWSGI を採用する理由
+Flaskには組み込みサーバ（Werkzeug）があるので、特別な環境構築を行うことなくAPサーバを立ち上げることが出来ますが、組み込みサーバを本番環境で使用することは推奨されていません。
+開発用なので効率性・安定性・セキュリティを特別意識して設計されておらず、次のようなデメリットがあるためです。
+
+・パフォーマンスがかなり悪い
+・複数リクエストが同時に来たときの挙動が怪しい
+・死活監視しないためプロセ...]]></description><link>https://zenn.dev/plum_tt/articles/7b8dc2fea4ea64</link><guid isPermaLink="true">https://zenn.dev/plum_tt/articles/7b8dc2fea4ea64</guid><pubDate>Sat, 20 Jul 2024 16:51:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fZG8GFCn--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255B%25E3%2582%25AA%25E3%2583%2595%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%25B3%25E7%2592%25B0%25E5%25A2%2583%255D%2520Flask%2520%252B%2520uWSGI%2520%25E3%2581%25A7%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%2592%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:satoshi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSkNMekpyR05WY3B6OEJJTXZqQ1dCc0tKV2RmOWVDM0pJOHpEazBDLUk9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>satoshi</dc:creator></item><item><title><![CDATA[Python で 湯婆婆を実装しよう]]></title><description><![CDATA[
+ 元ネタ様
+元ネタ様は下記記事です。文章も面白いのでぜひ呼んでみてください。
+Javaで湯婆婆を実装してみる #ネタ - Qiita
+
+ やったこと
+コードはgithubにあげています。
+https://github.com/2323-code/yubaba-python
+
+ 結果
+試しに動かしてみました。
+伸ばし棒だけ抜かれちゃいましたね！！なんて発音したらいいんでしょうこの場合。
+
+
+ 最後に
+湯婆婆、実装も楽ですしめちゃくちゃ楽しいです。
+何より色々名前を変えて遊べるのも楽しいですし、好きなキャラクターの口調を真似て呼んでもらったりしても面白そうですね。
+@Nemesis さん、...]]></description><link>https://zenn.dev/2323_code/articles/5c8bcf0efe0c35</link><guid isPermaLink="true">https://zenn.dev/2323_code/articles/5c8bcf0efe0c35</guid><pubDate>Sat, 20 Jul 2024 15:19:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--x2vhKNaX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%2520%25E3%2581%25A7%2520%25E6%25B9%25AF%25E5%25A9%2586%25E5%25A9%2586%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2597%25E3%2582%2588%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25B5%25E3%2581%25BF%25E3%2581%25B5%25E3%2581%25BF%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZkZGFlNGU3NmIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ふみふみ</dc:creator></item><item><title><![CDATA[【Python】多重構造になっているディレクトリ内のファイルを根こそぎ再起的に探索してprefix付きで一つのディレクトリにコピーする]]></title><description><![CDATA[
+ お求めのものがこちら
+import os
+import shutil
+
+def copy_files_with_prefix(src_dir, dst_dir):
+    if not os.path.exists(dst_dir):
+        os.makedirs(dst_dir)
+
+    for root, _, files in os.walk(src_dir):
+        for file in files:
+            src_file_path = os.path.join(root, file)
+
+            relative_p...]]></description><link>https://zenn.dev/watanko/articles/5d37e5c5bd43da</link><guid isPermaLink="true">https://zenn.dev/watanko/articles/5d37e5c5bd43da</guid><pubDate>Sat, 20 Jul 2024 13:53:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7qRuts7v--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591%25E5%25A4%259A%25E9%2587%258D%25E6%25A7%258B%25E9%2580%25A0%25E3%2581%25AB%25E3%2581%25AA%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%2584%25E3%2582%258B%25E3%2583%2587%25E3%2582%25A3%25E3%2583%25AC%25E3%2582%25AF%25E3%2583%2588%25E3%2583%25AA%25E5%2586%2585%25E3%2581%25AE%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2592%25E6%25A0%25B9%25E3%2581%2593%25E3%2581%259D%25E3%2581%258E%25E5%2586%258D%25E8%25B5%25B7%25E7%259A%2584%25E3%2581%25AB%25E6%258E%25A2%25E7%25B4%25A2%25E3%2581%2597%25E3%2581%25A6prefix%25E4%25BB%2598%25E3%2581%258D%25E3%2581%25A7%25E4%25B8%2580%25E3%2581%25A4%25E3%2581%25AE%25E3%2583%2587%25E3%2582%25A3...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:watanko%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2UzMDAzYTExYjMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>watanko</dc:creator></item><item><title><![CDATA[Pythonで環境変数の取り扱いの自分なりのベストプラクティス]]></title><description><![CDATA[
+ まえがき
+Pythonで環境変数を取り扱うことがよくあるが、自分なりによく使っていてベストプラクティスな方法があるため、残しておく
+
+ 早速実装方法
+TwitterのAPIを活用したときの実装で使用した方法を記載する。
+まずは、.envに定数を定義する。
+
+.env
+API_KEY=*****
+API_KEY_SECRET=*****
+ACCESS_TOKEN=*****
+ACCESS_TOKEN_SECRET=*****
+
+TwitterAPIに必要な定数を定義して値をセットしておく。
+次にconfig.pyを作り、dotenvというライブラリを使い、load_dotenv()を実...]]></description><link>https://zenn.dev/yslius/articles/b7e117b478fcfc</link><guid isPermaLink="true">https://zenn.dev/yslius/articles/b7e117b478fcfc</guid><pubDate>Sat, 20 Jul 2024 12:44:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--uYMqhiFg--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A7%25E7%2592%25B0%25E5%25A2%2583%25E5%25A4%2589%25E6%2595%25B0%25E3%2581%25AE%25E5%258F%2596%25E3%2582%258A%25E6%2589%25B1%25E3%2581%2584%25E3%2581%25AE%25E8%2587%25AA%25E5%2588%2586%25E3%2581%25AA%25E3%2582%258A%25E3%2581%25AE%25E3%2583%2599%25E3%2582%25B9%25E3%2583%2588%25E3%2583%2597%25E3%2583%25A9%25E3%2582%25AF%25E3%2583%2586%25E3%2582%25A3%25E3%2582%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yslius%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FkZjRkMTIxN2EuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yslius</dc:creator></item><item><title><![CDATA[【Python】初心者に向けた依存関係の解説と仮想環境を構築するメリットについて]]></title><description><![CDATA[
+ はじめに
+Pythonプログラミングを始めると、さまざまなライブラリやパッケージを利用することになります。しかし、プロジェクトごとに必要なライブラリのバージョンが異なる場合があり、それらを適切に管理することが重要です。この記事では、依存関係と仮想環境について詳しく解説し、仮想環境を構築するメリットを紹介します。
+
+ 依存関係とは？
+依存関係とは、あるソフトウェアが動作するために必要な他のソフトウェアやライブラリの関係を指します。例えば、Pythonのプロジェクトで特定の機能を実現するために、外部のライブラリを利用する場合、そのライブラリが依存関係となります。
+
+ 依存関係の例
+imp...]]></description><link>https://zenn.dev/nuinui/articles/4d6bf787305bc6</link><guid isPermaLink="true">https://zenn.dev/nuinui/articles/4d6bf787305bc6</guid><pubDate>Sat, 20 Jul 2024 11:59:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5VIEd8aH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E3%2581%25AB%25E5%2590%2591%25E3%2581%2591%25E3%2581%259F%25E4%25BE%259D%25E5%25AD%2598%25E9%2596%25A2%25E4%25BF%2582%25E3%2581%25AE%25E8%25A7%25A3%25E8%25AA%25AC%25E3%2581%25A8%25E4%25BB%25AE%25E6%2583%25B3%25E7%2592%25B0%25E5%25A2%2583%25E3%2582%2592%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2599%25E3%2582%258B%25E3%2583%25A1%25E3%2583%25AA%25E3%2583%2583%25E3%2583%2588%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AC%25E3%2583%25BC%25E3%2581%2584%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSno2cFRIRmpDc184N0NyTTNyYV9iZnd6LVVLaXAxRHMxZWdFdHl1b0VQY1JCbUVDcz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ぬーい</dc:creator></item><item><title><![CDATA[【Python】絶対必要なVS Codeの拡張機能について詳しく解説]]></title><description><![CDATA[
+ 1. はじめに
+Pythonを使ってプログラミングを始める際に、効率的にコーディングを行うためには適切なツールと環境を整えることが重要です。Visual Studio Code（VS Code）は、軽量で強力なエディタで、多くの拡張機能が利用可能です。ここでは、Pythonプログラミングに必須のVS Code拡張機能について詳しく解説します。
+
+ 2. VS Codeのインストール
+まずはVS Codeをインストールしましょう。公式サイト（Visual Studio Code）からダウンロードしてインストールします。
+
+ 3. Pythonプログラミングに必須の拡張機能
+以下に、Py...]]></description><link>https://zenn.dev/nuinui/articles/e82f0a7a941261</link><guid isPermaLink="true">https://zenn.dev/nuinui/articles/e82f0a7a941261</guid><pubDate>Sat, 20 Jul 2024 11:42:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--y62vMgZX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591%25E7%25B5%25B6%25E5%25AF%25BE%25E5%25BF%2585%25E8%25A6%2581%25E3%2581%25AAVS%2520Code%25E3%2581%25AE%25E6%258B%25A1%25E5%25BC%25B5%25E6%25A9%259F%25E8%2583%25BD%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E8%25A9%25B3%25E3%2581%2597%25E3%2581%258F%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AC%25E3%2583%25BC%25E3%2581%2584%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSno2cFRIRmpDc184N0NyTTNyYV9iZnd6LVVLaXAxRHMxZWdFdHl1b0VQY1JCbUVDcz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ぬーい</dc:creator></item><item><title><![CDATA[Elasticsearch 入門(1)]]></title><description><![CDATA[
+ Elasticsearch 入門(1)
+Elasticsearch 8.14 を Mac 上の Docker で動かしてみます。
+基本的に、Run Elasticsearch locally in Docker (without security) という手順書の通りにやってみるだけです。
+なお、M2 Mac 上で MacOS (Ventura) を使っています。
+
+ Decker Desktop の準備
+https://www.docker.com/products/docker-desktop/ から Docker Desktop を導入します。（私の場合、Apple Silic...]]></description><link>https://zenn.dev/tmiya/articles/c91def9d04adca</link><guid isPermaLink="true">https://zenn.dev/tmiya/articles/c91def9d04adca</guid><pubDate>Sat, 20 Jul 2024 09:18:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--FVwgbHpS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:Elasticsearch%2520%25E5%2585%25A5%25E9%2596%2580%25281%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tmiya%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTDlBbDdyckxtZUtiS1pEcEpCLVhTSkliVWt6c0ZKaXJZcnJ6QlJCYUE3MUhLS1diTT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tmiya</dc:creator></item><item><title><![CDATA[cfiler（内骨格）個人用設定まとめ]]></title><description><![CDATA[最新状況（日々更新中）
+https://github.com/AWtnb/cfiler
+
+結構なカスタマイズになったので備忘録として。
+以下、基本的に公式のソースを参考に config.py を書いていきます。
+https://github.com/crftwr/cfiler
+https://github.com/crftwr/ckit
+
+ 事前準備
+
+ 各種インポート
+コード内で使用するライブラリを読み込んでおきましょう。
+コメントで付記しているように、できるだけ型ヒントを書くために（＆エディタの警告を減らすために）ソースを参考に追加で色々読み込んでおきます。
+cfiler_~~ 関連...]]></description><link>https://zenn.dev/awtnb/articles/1ae661166f10c8</link><guid isPermaLink="true">https://zenn.dev/awtnb/articles/1ae661166f10c8</guid><pubDate>Sat, 20 Jul 2024 07:54:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bd2Scuxy--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:cfiler%25EF%25BC%2588%25E5%2586%2585%25E9%25AA%25A8%25E6%25A0%25BC%25EF%25BC%2589%25E5%2580%258B%25E4%25BA%25BA%25E7%2594%25A8%25E8%25A8%25AD%25E5%25AE%259A%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:AWtnb%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E2MTdhZTAxZjQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>AWtnb</dc:creator></item><item><title><![CDATA[Vertex AI Vector Searchを使って類似画像検索を構築してみた]]></title><description><![CDATA[
+ はじめに
+こんにちは！逆転オセロニアのYouTubeチャンネル「まこちゃんねる」の中の人です。
+本稿ではVertex AIのサービスの1つである、Vector Searchを使って、類似画像検索の構築からAPIエンドポイントへのデプロイまでを実施していきたいと思います！
+
+ Vector Searchとは？
+Vector Searchは、テキストや画像データを数値ベクトルとして表現し、その間の類似度を計算することで、関連性の高いデータを検索する手法です。Google Cloudでは、Vertex AIと呼ばれるGoogle Cloud上に構築されている機械学習プラットフォームを介して...]]></description><link>https://zenn.dev/makochan/articles/baf89362e23f2c</link><guid isPermaLink="true">https://zenn.dev/makochan/articles/baf89362e23f2c</guid><pubDate>Sat, 20 Jul 2024 07:08:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--VT0LhLhH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Vertex%2520AI%2520Vector%2520Search%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E9%25A1%259E%25E4%25BC%25BC%25E7%2594%25BB%25E5%2583%258F%25E6%25A4%259C%25E7%25B4%25A2%25E3%2582%2592%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25BE%25E3%2581%2593%25E3%2581%25A1%25E3%2582%2583%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q3ZDE2MTk1MTMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>まこちゃん</dc:creator></item><item><title><![CDATA[【Python】openpyxlライブラリについて詳しく解説]]></title><description><![CDATA[
+ 1. はじめに
+openpyxlは、PythonでExcelファイル（.xlsx形式）を読み書きするためのライブラリです。Excelファイルをプログラムで操作する際に非常に便利なツールで、多くの機能を備えています。本記事では、openpyxlのコンポーネント、フォルダ構成、__init__.pyの中身、およびメソッドと属性について詳しく解説します。
+
+ 2. openpyxlのインストール
+openpyxlを使用するには、まずライブラリをインストールする必要があります。以下のコマンドを使用してインストールします：
+pip install openpyxl
+
+ 3. openpyxlの...]]></description><link>https://zenn.dev/nuinui/articles/633e37024902f9</link><guid isPermaLink="true">https://zenn.dev/nuinui/articles/633e37024902f9</guid><pubDate>Sat, 20 Jul 2024 00:30:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dD1RmFl0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591openpyxl%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E8%25A9%25B3%25E3%2581%2597%25E3%2581%258F%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AC%25E3%2583%25BC%25E3%2581%2584%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSno2cFRIRmpDc184N0NyTTNyYV9iZnd6LVVLaXAxRHMxZWdFdHl1b0VQY1JCbUVDcz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ぬーい</dc:creator></item><item><title><![CDATA[【Python】メソッドや属性とモジュール・ライブラリ・パッケージとの関わりについて詳しく解説]]></title><description><![CDATA[
+ 1. はじめに
+Pythonのプログラムを構築する際に、メソッドや属性、そしてモジュール、ライブラリ、パッケージという概念が重要になります。これらの概念は互いにどのように関わっているのかを理解することは、効率的なコードの書き方やデバッグに役立ちます。本記事では、それぞれの概念を解説し、具体的な例を用いてその関係を説明します。
+
+ 2. メソッドと属性
+
+ 2.1 メソッドとは
+メソッドは、特定のオブジェクトに関連付けられた関数です。メソッドは、そのオブジェクトのデータを操作したり、オブジェクトに対する操作を実行します。例えば、以下のような例があります：
+class MyClass:
+...]]></description><link>https://zenn.dev/nuinui/articles/100d61d48deb46</link><guid isPermaLink="true">https://zenn.dev/nuinui/articles/100d61d48deb46</guid><pubDate>Fri, 19 Jul 2024 14:13:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--erPAK-g4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591%25E3%2583%25A1%25E3%2582%25BD%25E3%2583%2583%25E3%2583%2589%25E3%2582%2584%25E5%25B1%259E%25E6%2580%25A7%25E3%2581%25A8%25E3%2583%25A2%25E3%2582%25B8%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%25AB%25E3%2583%25BB%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%25E3%2583%25BB%25E3%2583%2591%25E3%2583%2583%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B8%25E3%2581%25A8%25E3%2581%25AE%25E9%2596%25A2%25E3%2582%258F%25E3%2582%258A%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E8%25A9%25B3%25E3%2581%2597%25E3%2581%258F%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AC%25E3%2583%25BC%25E3%2581%2584%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSno2cFRIRmpDc184N0NyTTNyYV9iZnd6LVVLaXAxRHMxZWdFdHl1b0VQY1JCbUVDcz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ぬーい</dc:creator></item><item><title><![CDATA[【Python】コンボボックスのオプションと使い方]]></title><description><![CDATA[
+ 1. はじめに
+PythonのGUIプログラミングでよく使用されるライブラリにTkinterがあります。その中でも、コンボボックス（Combobox）はユーザーに選択肢を提供するための便利なウィジェットです。本記事では、Tkinterのコンボボックスのオプションと使い方について詳しく解説します。
+
+ 2. コンボボックスの基本構造
+まず、コンボボックスを使用するために必要な基本的なインポートと設定を行います。
+import tkinter as tk
+from tkinter import ttk
+
+root = tk.Tk()
+root.title("コンボボックスの例")
+roo...]]></description><link>https://zenn.dev/nuinui/articles/f9267bfe849d27</link><guid isPermaLink="true">https://zenn.dev/nuinui/articles/f9267bfe849d27</guid><pubDate>Fri, 19 Jul 2024 14:06:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wNRREfql--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%259C%25E3%2583%259C%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25B9%25E3%2581%25AE%25E3%2582%25AA%25E3%2583%2597%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2581%25A8%25E4%25BD%25BF%25E3%2581%2584%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AC%25E3%2583%25BC%25E3%2581%2584%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSno2cFRIRmpDc184N0NyTTNyYV9iZnd6LVVLaXAxRHMxZWdFdHl1b0VQY1JCbUVDcz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ぬーい</dc:creator></item><item><title><![CDATA[【Python】パッケージ・ライブラリ・モジュールをimportしたときの挙動と仕組み]]></title><description><![CDATA[
+ 1. はじめに
+Pythonでプログラムを作成する際、さまざまな外部コードをimport文で取り込むことがあります。これにはモジュール、パッケージ、ライブラリのインポートが含まれます。それぞれをインポートする際の挙動や仕組みについて詳しく解説します。
+
+ 2. importの基本構造
+Pythonのimport文には基本的に以下の構造があります。
+
+
+モジュールのインポート:
+import module_name
+
+
+
+パッケージのインポート:
+import package_name.module_name
+
+
+
+ライブラリのインポート:
+import library_name
+
+
+...]]></description><link>https://zenn.dev/nuinui/articles/781928d575f528</link><guid isPermaLink="true">https://zenn.dev/nuinui/articles/781928d575f528</guid><pubDate>Fri, 19 Jul 2024 13:57:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--WDQzope5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591%25E3%2583%2591%25E3%2583%2583%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%25BB%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%25E3%2583%25BB%25E3%2583%25A2%25E3%2582%25B8%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%25AB%25E3%2582%2592import%25E3%2581%2597%25E3%2581%259F%25E3%2581%25A8%25E3%2581%258D%25E3%2581%25AE%25E6%258C%2599%25E5%258B%2595%25E3%2581%25A8%25E4%25BB%2595%25E7%25B5%2584%25E3%2581%25BF%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AC%25E3%2583%25BC%25E3%2581%2584%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSno2cFRIRmpDc184N0NyTTNyYV9iZnd6LVVLaXAxRHMxZWdFdHl1b0VQY1JCbUVDcz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ぬーい</dc:creator></item><item><title><![CDATA[【Python】import文でライブラリ・パッケージ・モジュールを見分ける方法]]></title><description><![CDATA[
+ 1. はじめに
+Pythonのimport文を使用する際、どれがライブラリ、パッケージ、モジュールなのか判断がつかないことがあります。本記事では、これらの用語を明確に区別し、インポート文だけでは判断が難しい場合の見分け方も解説します。
+
+ 2. 用語の定義
+
+ 2.1 モジュール (Module)
+
+
+定義: モジュールは、Pythonのコードが書かれた単一のファイル（拡張子 .py）。
+
+例: math.pyというファイルがモジュール。
+
+
+ 2.2 パッケージ (Package)
+
+
+定義: パッケージは、複数のモジュールをまとめたディレクトリ。ディレクトリには__init__....]]></description><link>https://zenn.dev/nuinui/articles/56ccafe0cdb229</link><guid isPermaLink="true">https://zenn.dev/nuinui/articles/56ccafe0cdb229</guid><pubDate>Fri, 19 Jul 2024 13:45:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3_YatAQb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591import%25E6%2596%2587%25E3%2581%25A7%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%25E3%2583%25BB%25E3%2583%2591%25E3%2583%2583%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%25BB%25E3%2583%25A2%25E3%2582%25B8%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%25AB%25E3%2582%2592%25E8%25A6%258B%25E5%2588%2586%25E3%2581%2591%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AC%25E3%2583%25BC%25E3%2581%2584%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSno2cFRIRmpDc184N0NyTTNyYV9iZnd6LVVLaXAxRHMxZWdFdHl1b0VQY1JCbUVDcz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ぬーい</dc:creator></item><item><title><![CDATA[Azure AI SpeechのFast Transcription API (preview)で長時間音声データの文字起こしを試す]]></title><description><![CDATA[2024年5月のMicrosoft Buildで発表された「Fast Transcription API」がパブリックプレビューになっていたので試してみました。
+
+ Fast Transcription APIとは
+Fast Transcription APIとは、Azure AI Speechファミリーの一部で、
+
+長さ: 2時間未満
+サイズ: 200MB未満
+
+の音声やビデオの文字起こしを高速に行うことが出来ます。
+公式ブログによると、以下のようなユースケースを想定しているようです。
+
+コール センターで働く一般的なエージェントは、通話ごとに 3 ～ 5 分かけてメモを作成します。F...]]></description><link>https://zenn.dev/smartcamp/articles/695a422ccf3265</link><guid isPermaLink="true">https://zenn.dev/smartcamp/articles/695a422ccf3265</guid><pubDate>Fri, 19 Jul 2024 11:20:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--HsmYqD2h--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Azure%2520AI%2520Speech%25E3%2581%25AEFast%2520Transcription%2520API%2520%2528preview%2529%25E3%2581%25A7%25E9%2595%25B7%25E6%2599%2582%25E9%2596%2593%25E9%259F%25B3%25E5%25A3%25B0%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E4%25BF%25A1%25E7%258E%2584%25E9%25A4%2585%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzUyNGYwMGIzM2MuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:SMARTCAMP%2520Engineer%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk0OTAzNjAyZTQuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>信玄餅</dc:creator></item></channel></rss>
