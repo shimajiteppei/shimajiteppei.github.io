@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="/stylesheets/xp.css">
+
 # ファミコンエミュレータ
 
 <div class="xp-css" style="width: 100%; display: flex; flex-direction: column;">
