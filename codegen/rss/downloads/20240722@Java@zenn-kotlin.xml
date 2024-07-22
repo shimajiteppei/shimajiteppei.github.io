@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Kotlin」のフィード]]></title><description><![CDATA[Zennのトピック「Kotlin」のRSSフィードです]]></description><link>https://zenn.dev/topics/kotlin</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/0913f0325d.png</url><title>Zennの「Kotlin」のフィード</title><link>https://zenn.dev/topics/kotlin</link></image><generator>zenn.dev</generator><lastBuildDate>Mon, 22 Jul 2024 00:23:33 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/kotlin/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[新規参加メンバーにも優しいKotlinによる型安全な世界]]></title><description><![CDATA[!
+この記事は毎週必ず記事がでるテックブログ"Loglass Tech Blog Sprint"の49週目の記事です！
+1年間連続達成まで 残り 4 週 となりました！
+
+はじめまして、5月にログラスに入社した三田(@eichisanden)です。
+ログラスに入社してから、型の恩恵を強く感じる場面が多くありました。
+今回は、私が特に良いと感じた実装方法をいくつか紹介したいと思います。
+※この記事のコードは、説明のために書いたサンプルコードになります
+
+ sealed クラスによるパターンマッチで実装漏れを防ぐ
+Kotlinのsealedクラスとインターフェース(以下「sealedクラス」...]]></description><link>https://zenn.dev/loglass/articles/1e75f6d390f694</link><guid isPermaLink="true">https://zenn.dev/loglass/articles/1e75f6d390f694</guid><pubDate>Sun, 21 Jul 2024 23:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--oedfZ7g1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%2596%25B0%25E8%25A6%258F%25E5%258F%2582%25E5%258A%25A0%25E3%2583%25A1%25E3%2583%25B3%25E3%2583%2590%25E3%2583%25BC%25E3%2581%25AB%25E3%2582%2582%25E5%2584%25AA%25E3%2581%2597%25E3%2581%2584Kotlin%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258B%25E5%259E%258B%25E5%25AE%2589%25E5%2585%25A8%25E3%2581%25AA%25E4%25B8%2596%25E7%2595%258C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:eichisanden%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRlNWQ4ZTRjZjguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2582%25B9%2520%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2doeW1zUWtTdzc2YndfNFZiNVFnTW5FS2V2QmZTMGtwdXZ5RGJEWEE9czI1MC1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>eichisanden</dc:creator></item><item><title><![CDATA[【Android】KtorでHTTPクライアント実装]]></title><description><![CDATA[
+ はじめに
+今回はKtorを使ったAndroidアプリでのHTTPクライアントのセットアップ〜簡単な実装までの記事になります。
+
+ ライブラリの候補
+Ktorを試す前にそもそもAndroidアプリでHTTPクライアントを扱う場合、どのようなライブラリが候補にあるのか調べてみました。
+
+ 1. Retrofit
+https://square.github.io/retrofit/
+
+Retrofitは、Squareが提供する人気の高いHTTPクライアントライブラリです。APIエンドポイントをインターフェースとして定義し、アノテーションを使用してHTTPメソッドやURLパスを指定できます。...]]></description><link>https://zenn.dev/slowhand/articles/d6f08410c6d698</link><guid isPermaLink="true">https://zenn.dev/slowhand/articles/d6f08410c6d698</guid><pubDate>Sun, 21 Jul 2024 04:36:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jqdXavxH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Android%25E3%2580%2591Ktor%25E3%2581%25A7HTTP%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25A4%25E3%2582%25A2%25E3%2583%25B3%25E3%2583%2588%25E5%25AE%259F%25E8%25A3%2585%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:slowhand%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzEwY2YzMGUzMDAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>slowhand</dc:creator></item><item><title><![CDATA[Androidアプリ開発: 複雑なC++関数のJNI呼び出し]]></title><description><![CDATA[
+ はじめに
+Androidアプリ開発においてJNI（Java Native Interface）を使用することで、C++をJavaやKotlinから利用することが可能です。ここでは、stable-diffusion.cppの具体的なC++関数を例にJNIを通じてKotlinから呼び出す方法を解説します。
+
+ C++関数の定義
+以下に示すのは、sd_ctx_t*型のポインタを返すC++関数です。この関数は、様々なパラメータを受け取り、画像生成のためのコンテキストを設定します。ここではパラメータの意味などは理解する必要はありません。複数の文字列パラメータと数値、およびブール値を受け取り、何...]]></description><link>https://zenn.dev/kmitsunami/articles/0818832c89b1fb</link><guid isPermaLink="true">https://zenn.dev/kmitsunami/articles/0818832c89b1fb</guid><pubDate>Sat, 20 Jul 2024 22:18:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--o-10ZVR_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Android%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E9%2596%258B%25E7%2599%25BA%253A%2520%25E8%25A4%2587%25E9%259B%2591%25E3%2581%25AAC%252B%252B%25E9%2596%25A2%25E6%2595%25B0%25E3%2581%25AEJNI%25E5%2591%25BC%25E3%2581%25B3%25E5%2587%25BA%25E3%2581%2597%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Koki%2520Mitsunami%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTHlURXRRN0JKWXhFMFBVUC10NHY0OWtrejBuT25BOFRnLXJuMW85dzZLVHNkTmFnPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Koki Mitsunami</dc:creator></item><item><title><![CDATA[KotlinとC++のブリッジング: AndroidアプリへのC/C++コードの追加]]></title><description><![CDATA[
+ 背景
+Androidアプリ開発ではJavaやKotlinが主に使われますが、パフォーマンスが重要な部分ではC++を利用することがあります。この記事では、Android Studioを使用してKotlinとC++を統合し、JNI（Java Native Interface）を利用して両者間のブリッジを構築する方法を解説します。
+
+ 1. Android StudioとC++のセットアップ
+Android StudioでC++のサポートを追加するには、まずNDK（Native Development Kit）とCMakeをインストールする必要があります。これらはAndroid Studi...]]></description><link>https://zenn.dev/kmitsunami/articles/89fe4c7b7b9fa0</link><guid isPermaLink="true">https://zenn.dev/kmitsunami/articles/89fe4c7b7b9fa0</guid><pubDate>Thu, 18 Jul 2024 05:19:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--C1hFWTVj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Kotlin%25E3%2581%25A8C%252B%252B%25E3%2581%25AE%25E3%2583%2596%25E3%2583%25AA%25E3%2583%2583%25E3%2582%25B8%25E3%2583%25B3%25E3%2582%25B0%253A%2520Android%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2581%25B8%25E3%2581%25AEC%252FC%252B%252B%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2581%25AE%25E8%25BF%25BD%25E5%258A%25A0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Koki%2520Mitsunami%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTHlURXRRN0JKWXhFMFBVUC10NHY0OWtrejBuT25BOFRnLXJuMW85dzZLVHNkTmFnPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Koki Mitsunami</dc:creator></item><item><title><![CDATA[【Kotlin】スクリプトとして実行する]]></title><description><![CDATA[mise で導入した
+mise plugin add kotlin
+mise install kotlin@2.0.0
+mise global kotlin@2.0.0
+プログラムコードの拡張子を kts として保存する
+
+hello.kts
+println("Hello, World!")
+
+実行する
+ kotlinc -script hello.kts
+]]></description><link>https://zenn.dev/masakielastic/articles/af994f174b0253</link><guid isPermaLink="true">https://zenn.dev/masakielastic/articles/af994f174b0253</guid><pubDate>Wed, 17 Jul 2024 22:34:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2lWgtDCk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Kotlin%25E3%2580%2591%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2583%2588%25E3%2581%25A8%25E3%2581%2597%25E3%2581%25A6%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Masaki%2520Kagaya%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc3ODAxZTNiZTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Masaki Kagaya</dc:creator></item><item><title><![CDATA[いろいろなプログラミング言語で NFD の濁音・半濁音を NFC に変換する・その2]]></title><description><![CDATA[
+ Go
+package main
+
+import (
+    "regexp"
+    "golang.org/x/text/unicode/norm"
+    "unicode/utf8"
+)
+
+func dakuon_normalize(str string) string {
+    re := regexp.MustCompile(`[\p{Hiragana}\p{Katakana}]\p{Mn}`)
+    return re.ReplaceAllStringFunc(str, func(m string) string {
+        return norm.NFC.S...]]></description><link>https://zenn.dev/masakielastic/articles/463b696e7f6c67</link><guid isPermaLink="true">https://zenn.dev/masakielastic/articles/463b696e7f6c67</guid><pubDate>Wed, 17 Jul 2024 21:16:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Z3umy99b--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%2584%25E3%2582%258D%25E3%2581%2584%25E3%2582%258D%25E3%2581%25AA%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%259F%25E3%2583%25B3%25E3%2582%25B0%25E8%25A8%2580%25E8%25AA%259E%25E3%2581%25A7%2520NFD%2520%25E3%2581%25AE%25E6%25BF%2581%25E9%259F%25B3%25E3%2583%25BB%25E5%258D%258A%25E6%25BF%2581%25E9%259F%25B3%25E3%2582%2592%2520NFC%2520%25E3%2581%25AB%25E5%25A4%2589%25E6%258F%259B%25E3%2581%2599%25E3%2582%258B%25E3%2583%25BB%25E3%2581%259D%25E3%2581%25AE2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Masaki%2520Kagaya%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc3ODAxZTNiZTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Masaki Kagaya</dc:creator></item><item><title><![CDATA[IDEAの文字コードでcom.github.johnrengelman.shadowでCould not create taskになった]]></title><description><![CDATA[
+ 環境
+
+Windows 10
+Android Studio Iguana 2023.2.1 #AI-232.10227.8.2321.11479570
+Java 17
+Gradle 7.6
+com.github.johnrengelman.shadow 7.1.2
+
+
+ 背景
+com.github.johnrengelman.shadowを導入したGradleプロジェクトを作っていた。
+
+build.gradle.kts
+...
+plugins {
+    ...
+    id("com.github.johnrengelman.shadow") version "7.1.2"
+}
+...]]></description><link>https://zenn.dev/i8v8c32ftf0ixdj/articles/971e54c95821d1</link><guid isPermaLink="true">https://zenn.dev/i8v8c32ftf0ixdj/articles/971e54c95821d1</guid><pubDate>Wed, 17 Jul 2024 05:08:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--T8CV09G4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:IDEA%25E3%2581%25AE%25E6%2596%2587%25E5%25AD%2597%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2581%25A7com.github.johnrengelman.shadow%25E3%2581%25A7Could%2520not%2520crea...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:_%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdhMGYyMTQ1NWMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>_</dc:creator></item><item><title><![CDATA[Javaで学ぶOOP基礎(クラス,継承,ポリモーフィズム,カプセル化)]]></title><description><![CDATA[
+ オブジェクト指向プログラミング（OOP）を理解する
+~前書き~
+前書き: 私のOOP学習きっかけ
+去年私はJavaを少ししか触らずして、kotlinでの開発がはじまりました。
+しかし、理解しようとしてもJavaが、OOPが、わかんないからなのか?理解できないと
+感じることが多かったです。
+そこでやったのが、Javaに戻ってJavaでOOPを改めて学ぶ！
+そしてそれはKotlinではどう変化した?KotlinのこれはJavaの何に当たるのか?
+というふうに学ぶに変更しました。
+(人によってはルート違うかも？いろんな方法がありそう!)
+ということでアウトプットとして、OOPについて学んで...]]></description><link>https://zenn.dev/airiswim/articles/195c4bb80b4e2f</link><guid isPermaLink="true">https://zenn.dev/airiswim/articles/195c4bb80b4e2f</guid><pubDate>Mon, 15 Jul 2024 08:39:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1fY5b5Eq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java%25E3%2581%25A7%25E5%25AD%25A6%25E3%2581%25B6OOP%25E5%259F%25BA%25E7%25A4%258E%2528%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25B9%252C%25E7%25B6%2599%25E6%2589%25BF%252C%25E3%2583%259D%25E3%2583%25AA%25E3%2583%25A2%25E3%2583%25BC%25E3%2583%2595%25E3%2582%25A3%25E3%2582%25BA%25E3%2583%25A0%252C%25E3%2582%25AB%25E3%2583%2597%25E3%2582%25BB%25E3%2583%25AB%25E5%258C%2596%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Airichan%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI0NGFlNmMyNmYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Airichan</dc:creator></item><item><title><![CDATA[[Android/Kotlin]時刻を扱う時の知識をまとめてみた]]></title><description><![CDATA[
+ 時刻に関連する言葉を理解しよう
+-UTC（協定世界時）
+-GMTGMT(グリニッジ標準時)
+-UNIX時間
+-タイムゾーン
+-サマータイム
+
+ UTC（協定世界時）
+世界で標準時として使っている時間。日本時間から9時間引いた時刻です。
+UTCがあるのは、世界中の人とコミュニケーションをとるのに、 共通の時間が必要だから。
+例えば、友達とオンラインゲームをする時、 住んでる場所が違うと時間も違いますよね？日本で夜8時にゲームを始めようとしても、 アメリカに住んでる友達はまだ朝だったりする。 そんな時、UTCっていう共通の時間があれば、 「 UTCの午後3時に始めよう！ 」 って約束でき...]]></description><link>https://zenn.dev/rikigohan/articles/a023d3d884a3a1</link><guid isPermaLink="true">https://zenn.dev/rikigohan/articles/a023d3d884a3a1</guid><pubDate>Sun, 14 Jul 2024 01:10:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8AFjAU6p--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BAndroid%252FKotlin%255D%25E6%2599%2582%25E5%2588%25BB%25E3%2582%2592%25E6%2589%25B1%25E3%2581%2586%25E6%2599%2582%25E3%2581%25AE%25E7%259F%25A5%25E8%25AD%2598%25E3%2582%2592%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:RikiGohan%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk4NzE2ZDY0NDUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>RikiGohan</dc:creator></item><item><title><![CDATA[Kotlinで前方互換性をもった列挙可能な型を定義する]]></title><description><![CDATA[
+ 列挙型と前方互換性
+Kotlinでコードを書いていてよく遭遇する問題のひとつに、「Web API の JSON に含まれる列挙型のとる値がある日突然増えたせいで JSON のパースができなくなって正常に動作しなくなる」というものがあります。
+この問題は多くの場合 JSON に含まれるフィールドをシンプルに enum class として扱うような設計になっていることに起因して発生します。設計的に前方互換性が考慮できていないということですね。
+こうした問題を起こさないように前方互換性を維持できるような列挙可能な型を定義することはできないでしょうか？
+
+ 列挙可能 = 網羅性
+「列挙可能で...]]></description><link>https://zenn.dev/crimsonwoods/articles/77f2a117837e7f</link><guid isPermaLink="true">https://zenn.dev/crimsonwoods/articles/77f2a117837e7f</guid><pubDate>Fri, 12 Jul 2024 15:00:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wtWTnQQi--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Kotlin%25E3%2581%25A7%25E5%2589%258D%25E6%2596%25B9%25E4%25BA%2592%25E6%258F%259B%25E6%2580%25A7%25E3%2582%2592%25E3%2582%2582%25E3%2581%25A3%25E3%2581%259F%25E5%2588%2597%25E6%258C%2599%25E5%258F%25AF%25E8%2583%25BD%25E3%2581%25AA%25E5%259E%258B%25E3%2582%2592%25E5%25AE%259A%25E7%25BE%25A9%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:crimsonwoods%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lYZTFDUW5ydENfQVd4b3Y3a1VpeU5LX3pocEg5cmVMUGJ2bTlRPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>crimsonwoods</dc:creator></item><item><title><![CDATA[Kotlin DataFrameを使えばCSVやJSONをいい感じに扱えそう]]></title><description><![CDATA[
+ Kotlin DataFrame とは
+JetBrains社純正のデータ操作ライブラリです。CSV,JSONなどをいい感じに扱えるようです。
+https://kotlin.github.io/dataframe/overview.html
+ということで、この記事では手始めにCSVで検証してみようと思います。
+
+ 導入
+https://kotlin.github.io/dataframe/gettingstartedgradle.html#update-gradle-dependencies
+今回はKotlin DSLで検証を行うため、以下の設定をbuild.gradle.ktsに追加...]]></description><link>https://zenn.dev/yskn_sid25/articles/5f690bf86cad25</link><guid isPermaLink="true">https://zenn.dev/yskn_sid25/articles/5f690bf86cad25</guid><pubDate>Fri, 12 Jul 2024 03:46:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--mDJxyOh1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Kotlin%2520DataFrame%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2588%25E3%2581%25B0CSV%25E3%2582%2584JSON%25E3%2582%2592%25E3%2581%2584%25E3%2581%2584%25E6%2584%259F%25E3%2581%2598%25E3%2581%25AB%25E6%2589%25B1%25E3%2581%2588%25E3%2581%259D%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kanon%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U2MWQ5MmViYmQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kanon</dc:creator></item><item><title><![CDATA[Compose MultiplatformでDesktop版のComposable関数のPreviewを表示する]]></title><description><![CDATA[
+ 参考にしたページ
+https://stackoverflow.com/questions/73088362/how-to-enable-preview-for-kotlin-desktop-compose-demo-project
+
+ 手順
+
+
+Android Studioで Compose Multiplatform IDE Supportをインストール
+
+
+
+@Previewアノテーションのimportでandroidx.compose.desktop.ui.tooling.previewの方を選択する
+
+
+
+@Previewアノテーションの付いた関数の横にアイコンが表示されるの...]]></description><link>https://zenn.dev/takema223/articles/0a05f29788eb1b</link><guid isPermaLink="true">https://zenn.dev/takema223/articles/0a05f29788eb1b</guid><pubDate>Thu, 11 Jul 2024 15:57:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--s4Oxvf2t--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Compose%2520Multiplatform%25E3%2581%25A7Desktop%25E7%2589%2588%25E3%2581%25AEComposable%25E9%2596%25A2%25E6%2595%25B0%25E3%2581%25AEPreview%25E3%2582%2592%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25AE%259A%25E7%25A9%25BA%25E9%2596%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NhYjJiM2VhYmMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>定空間</dc:creator></item><item><title><![CDATA[ExposedとjOOQ、2つのORMでトランザクションを共有して無理矢理併用する方法]]></title><description><![CDATA[こんにちは。株式会社ヘンリー でソフトウェアエンジニアをしている @agatan です。
+jOOQ と Exposed はどちらも Kolin から使える ORM ライブラリです。（jOOQはJavaメインで、Exposedは最初からKotlin向けに書かれているという違いはある）
+業務で書いているKotlin製APIサーバでは Exposed を使っているのですが、いろいろと事情があり、jOOQ などの別のライブラリへの移行を検討しています。
+まだ個人レベルでうっすら検討し始めただけなのですが、そもそも Exposed から jOOQ に移行するって現実的なんだろうか、というのをはっき...]]></description><link>https://zenn.dev/agatan/articles/831e0115f5010c</link><guid isPermaLink="true">https://zenn.dev/agatan/articles/831e0115f5010c</guid><pubDate>Mon, 08 Jul 2024 03:33:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---MfV04tB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Exposed%25E3%2581%25A8jOOQ%25E3%2580%25812%25E3%2581%25A4%25E3%2581%25AEORM%25E3%2581%25A7%25E3%2583%2588%25E3%2583%25A9%25E3%2583%25B3%25E3%2582%25B6%25E3%2582%25AF%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%2592%25E5%2585%25B1%25E6%259C%2589%25E3%2581%2597%25E3%2581%25A6%25E7%2584%25A1%25E7%2590%2586%25E7%259F%25A2%25E7%2590%2586%25E4%25BD%25B5%25E7%2594%25A8%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Naomichi%2520Agata%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRhZjhmZTczMzMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Naomichi Agata</dc:creator></item><item><title><![CDATA[コーヒーを題材にSOLID原則を学ぶ]]></title><description><![CDATA[
+ SOLID原則とは
+オブジェクト指向プログラミングにおいて、簡素かつ柔軟に保守することを目的とした設計原則の1つである。
+「Clean Architecture 達人に学ぶソフトウェアの構造と設計」などの著者として知られるロバート・C. マーチンが提唱した数々の設計原則の中から、ミカエル・フェザーズが5原則の頭文字を取りSOLID原則として普及させた。
+
+ 5つの原則
+
+
+S : Single responsibility principle（単一責任の原則）
+
+O : Open/closed principle（オープン・クローズドの原則）
+
+L : Liskov substitu...]]></description><link>https://zenn.dev/tnakano/articles/c10d86e22cd26c</link><guid isPermaLink="true">https://zenn.dev/tnakano/articles/c10d86e22cd26c</guid><pubDate>Fri, 05 Jul 2024 11:58:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--K71H_nzx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2592%25E3%2583%25BC%25E3%2582%2592%25E9%25A1%258C%25E6%259D%2590%25E3%2581%25ABSOLID%25E5%258E%259F%25E5%2589%2587%25E3%2582%2592%25E5%25AD%25A6%25E3%2581%25B6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2588%25E3%2582%2589%25E5%2591%25BC%25E5%2590%25B8%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQzM2FlZTI5Y2EuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>えら呼吸</dc:creator></item><item><title><![CDATA[Kotlin Spring GraphQL]]></title><description><![CDATA[
+ 対象者
+
+Kotlin Springに興味ある人
+IntelliJ IDEAを操作したことがある人
+
+サーバーサイド　Kotlinなるものに興味があってやってみた✨
+今回は、　GraphQLを使ってみる!
+チュートリアル通りにやれば進めることはできる。
+https://www.youtube.com/watch?v=1hGdovDwhPA
+こちらのサイトでプロジェクトのテンプレートを作成する。
+https://start.spring.io/
+zipファイルをダウンロードして、IDEで開く。ダウンロードしてない人はこちら
+https://www.jetbrains.com/ja-jp...]]></description><link>https://zenn.dev/joo_hashi/articles/2fb8bc3115ff3b</link><guid isPermaLink="true">https://zenn.dev/joo_hashi/articles/2fb8bc3115ff3b</guid><pubDate>Tue, 02 Jul 2024 12:20:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--U9fbaKvD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_76:Kotlin%2520Spring%2520GraphQL%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:JboyHashimoto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNjOTBiY2M0M2YuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>JboyHashimoto</dc:creator></item><item><title><![CDATA[[Kotlin/JVM] SQLを書くのが好きな人のための Kuery Client の紹介]]></title><description><![CDATA[
+ はじめに
+
+repository
+
+https://github.com/be-hase/kuery-client
+
+
+ドキュメント
+
+https://kuery-client.hsbrysk.dev/
+
+
+
+
+ どんなふうに書けるの？
+前置きから書きたいところですが、まずは雰囲気だけ紹介します。
+suspend fun search(status: String, vip: Boolean?): List&lt;User&gt; = kueryClient
+    .sql {
+        +"""
+        SELECT * FROM users
+        WHE...]]></description><link>https://zenn.dev/be_hase/articles/7bce96932de079</link><guid isPermaLink="true">https://zenn.dev/be_hase/articles/7bce96932de079</guid><pubDate>Tue, 02 Jul 2024 03:45:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--eR3bQzGl--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BKotlin%252FJVM%255D%2520SQL%25E3%2582%2592%25E6%259B%25B8%25E3%2581%258F%25E3%2581%25AE%25E3%2581%258C%25E5%25A5%25BD%25E3%2581%258D%25E3%2581%25AA%25E4%25BA%25BA%25E3%2581%25AE%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%2520Kuery%2520Client%2520%25E3%2581%25AE%25E7%25B4%25B9%25E4%25BB%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:be-hase%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dNaVhNZnFBWE9yTXdHZVdBMEpmaE5OX3FJRVExUWQzRUw2MVJtM0E9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>be-hase</dc:creator></item><item><title><![CDATA[Android 最速でKtlintを導入する]]></title><description><![CDATA[コードの自動フォーマットやコードスタイルチェックを行うことはプロダクトの品質にも関わるので大事。
+なので最速最低限で導入する。
+毎回忘れるのでメモ
+libs.versions.toml
+[versions]
+ktlint = "11.3.2"
+
+[plugins]
+ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint" }
+ルートのbuild.gradle.kts
+plugins {
+    alias(libs.plugins.ktlint) apply false
+}
+appのbuild.grad...]]></description><link>https://zenn.dev/giglancer/articles/cabd65462043cc</link><guid isPermaLink="true">https://zenn.dev/giglancer/articles/cabd65462043cc</guid><pubDate>Mon, 01 Jul 2024 08:18:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ErGfotaA--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Android%2520%25E6%259C%2580%25E9%2580%259F%25E3%2581%25A7Ktlint%25E3%2582%2592%25E5%25B0%258E%25E5%2585%25A5%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:apollo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBjZmZlZTVlZjQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>apollo</dc:creator></item><item><title><![CDATA[Kotlin Fest 2024の参加レポート]]></title><description><![CDATA[こんにちは。
+株式会社ココナラのアプリ開発グループ、Androidチームのジェレミです。
+今回は6月22日(土)に開催されていたKotlin Fest 2024に参加してきましたのでレポートします。
+
+ Kotlin Festとは
+Kotlin Festは「Kotlinを愛でる」をビジョンに、Kotlin™に関する知見の共有と、Kotlinファンの交流の場を提供する技術カンファレンスです。
+5年ぶりにオフライン形式で開催されました。
+ココナラではAndroid開発にKotlinを採用しています。
+
+ 参加したきっかけ
+オンラインのカンファレンスには参加したことがありましたが、オフラインで...]]></description><link>https://zenn.dev/coconala/articles/45fd022b7ed947</link><guid isPermaLink="true">https://zenn.dev/coconala/articles/45fd022b7ed947</guid><pubDate>Mon, 01 Jul 2024 01:07:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--nJKS38Kg--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Kotlin%2520Fest%25202024%25E3%2581%25AE%25E5%258F%2582%25E5%258A%25A0%25E3%2583%25AC%25E3%2583%259D%25E3%2583%25BC%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2582%25B3%25E3%2582%25B3%25E3%2583%258A%25E3%2583%25A9%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRiNTMxNzlmY2QuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>株式会社ココナラ</dc:creator></item><item><title><![CDATA[[Kotlin]data classとclassの違い＆Javaの何に当たるのか]]></title><description><![CDATA[
+ data classとclassについて
+今回はテーマの通り、
+Kotlinのdata classと通常のclassの違いについてと、
+Javaにはdata classが存在しなかったのに、なぜKotlinにはdata classがあるのか
+(data classはjavaの何に当たるのか)
+について書いていきたいと思います！
+
+ data classとclassはどう違うのか
+最初にそれぞれを一言で言ってしまえば、
+通常のクラスは、オブジェクトの状態と振る舞いをカプセル化するために使用され、
+データクラスは、主にデータの保持と転送を目的としているもので、Kotlin特有の仕様だ。
+...]]></description><link>https://zenn.dev/airiswim/articles/3af3ec0564b315</link><guid isPermaLink="true">https://zenn.dev/airiswim/articles/3af3ec0564b315</guid><pubDate>Sun, 30 Jun 2024 15:21:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--W2srnIcv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BKotlin%255Ddata%2520class%25E3%2581%25A8class%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%25EF%25BC%2586Java%25E3%2581%25AE%25E4%25BD%2595%25E3%2581%25AB%25E5%25BD%2593%25E3%2581%259F%25E3%2582%258B%25E3%2581%25AE%25E3%2581%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Airichan%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI0NGFlNmMyNmYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Airichan</dc:creator></item><item><title><![CDATA[RepositoryやDataSourceでFlowをshareIn/stateInする]]></title><description><![CDATA[
+ 概要
+Android アプリの開発をしていると Repository や DataSource のようなデータレイヤーで SharedFlow や StateFlow を作りたくなることがあります。
+Firebase Firestore、AndroidX Room や Realm のようなデータベースの変更監視を行う場合にこうした状況があるかと思います。
+通常、こうした変更監視ではただの Flow を生成して呼び出し元に返すことは容易にできますが、一方で複数の画面にまたがって共有されるような Shared/StateFlow を返すことはあまり簡単ではありません。
+この記事ではデータ...]]></description><link>https://zenn.dev/crimsonwoods/articles/5faa1278825f21</link><guid isPermaLink="true">https://zenn.dev/crimsonwoods/articles/5faa1278825f21</guid><pubDate>Sat, 29 Jun 2024 06:03:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--JTkN8zOg--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Repository%25E3%2582%2584DataSource%25E3%2581%25A7Flow%25E3%2582%2592shareIn%252FstateIn%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:crimsonwoods%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lYZTFDUW5ydENfQVd4b3Y3a1VpeU5LX3pocEg5cmVMUGJ2bTlRPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>crimsonwoods</dc:creator></item></channel></rss>
