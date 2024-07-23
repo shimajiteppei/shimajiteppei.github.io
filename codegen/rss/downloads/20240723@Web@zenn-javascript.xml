@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「JavaScript」のフィード]]></title><description><![CDATA[Zennのトピック「JavaScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/javascript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/64acd76870.png</url><title>Zennの「JavaScript」のフィード</title><link>https://zenn.dev/topics/javascript</link></image><generator>zenn.dev</generator><lastBuildDate>Tue, 23 Jul 2024 03:00:25 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/javascript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[ファイル名を index.〇〇にすると何が良いのか]]></title><description><![CDATA[
+ はじめに
+プログラミングを学習していると、index.〇〇というファイル名が当たり前のように出てきますが、改めて何が良いのかを調べてみました。以下では、React + TypeScript で使用する tsx 拡張子を例に説明します。
+
+ import 文がスッキリする
+index.tsx ファイルがあるディレクトリを指定するだけで、そのディレクトリの index.tsx ファイルがインポートされるため、インポート文が短くなり、コードがスッキリします。
+// Headerというディレクトリの index.tsx を指定
+import Header from './components...]]></description><link>https://zenn.dev/surume3/articles/a08081943c57a0</link><guid isPermaLink="true">https://zenn.dev/surume3/articles/a08081943c57a0</guid><pubDate>Tue, 23 Jul 2024 01:01:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Jq9CZo8b--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E5%2590%258D%25E3%2582%2592%2520index.%25E3%2580%2587%25E3%2580%2587%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%25E3%2581%25A8%25E4%25BD%2595%25E3%2581%258C%25E8%2589%25AF%25E3%2581%2584%25E3%2581%25AE%25E3%2581%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Syumai3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI4MzZlZGI2OWIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Syumai3</dc:creator></item><item><title><![CDATA[【リファクタリング】HTML・CSS・JSでSRPGを作りたい part1 --- マス生成 ~ コマの移動 ---]]></title><description><![CDATA[
+ リファクタリング
+前回作成したSRPG part1をリファクタリングしました。
+前回記事
+https://zenn.dev/mogy/articles/5f3641ffdc2b84
+
+ 状態管理の改善
+
+ js(main.js)
+
+main.js
+// 状態管理
+const gameState = {
+	boardSize: 8,
+	selectedUnit: null,
+	players: [],
+	enemies: []
+};
+
+
+グローバルスコープの汚染を最小限にする。
+全体で管理する値を追加。（各関数で解説します。）
+
+
+ マスの位置取得の改善
+
+ js(main.js)
+
+...]]></description><link>https://zenn.dev/mogy/articles/794d267ede3480</link><guid isPermaLink="true">https://zenn.dev/mogy/articles/794d267ede3480</guid><pubDate>Mon, 22 Jul 2024 23:53:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--41rdBaCq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E3%2583%25AA%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25AF%25E3%2582%25BF%25E3%2583%25AA%25E3%2583%25B3%25E3%2582%25B0%25E3%2580%2591HTML%25E3%2583%25BBCSS%25E3%2583%25BBJS%25E3%2581%25A7SRPG%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258A%25E3%2581%259F%25E3%2581%2584%2520part1%2520---%2520%25E3%2583%259E%25E3%2582%25B9%25E7%2594%259F%25E6%2588%2590%2520%7E%2520%25E3%2582%25B3%25E3%2583%259E%25E3%2581%25AE%25E7%25A7%25BB%25E5%258B%2595%2520---%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E7%25B5%25B6%25E6%259C%259B%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2580%25E3%2583%25BC%2520a.k.a.%2520%25E3%2582%25B3%25E3%2583%2594%25E3%2583%259A%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2580%25E3%2583%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJmOTRiYzI2MjYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>絶望コーダー a.k.a. コピペコーダー</dc:creator></item><item><title><![CDATA[HTML・CSS・JSでSRPGを作りたい part1 --- マス生成 ~ プレイヤーコマの移動 ---]]></title><description><![CDATA[はじめに
+こんにちは、絶望コーダー a.k.a. コピペコーダーです。
+私はSRPGが大好きです。シミュレーションロールプレイングゲームです。
+有名どころではファイアーエムブレムとか、タクティクスオウガとかでしょうか。
+ボード上のマス目を移動して戦うゲームです。
+ふと、ブラウザ上で動くSRPG作りたいな～と思ったので記録に残します。
+最近SRPG始めたからかも。
+本記事では、「思考→コードを書く」というステップを細かく追っていく構成です。
+では、ご覧ください。
+※コードのみ見たい方は↑目次から。
+
+ 思考1:まぁ、マス目はいるよな
+SRPG作りたいとは思ったけど、何から始めるかなぁ......]]></description><link>https://zenn.dev/mogy/articles/5f3641ffdc2b84</link><guid isPermaLink="true">https://zenn.dev/mogy/articles/5f3641ffdc2b84</guid><pubDate>Mon, 22 Jul 2024 06:12:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--txSD6aHN--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:HTML%25E3%2583%25BBCSS%25E3%2583%25BBJS%25E3%2581%25A7SRPG%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258A%25E3%2581%259F%25E3%2581%2584%2520part1%2520---%2520%25E3%2583%259E%25E3%2582%25B9%25E7%2594%259F%25E6%2588%2590%2520%7E%2520%25E3%2583%2597%25E3%2583%25AC%25E3%2582%25A4%25E3%2583%25A4%25E3%2583%25BC%25E3%2582%25B3%25E3%2583%259E%25E3%2581%25AE%25E7%25A7%25BB%25E5%258B%2595%2520---%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E7%25B5%25B6%25E6%259C%259B%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2580%25E3%2583%25BC%2520a.k.a.%2520%25E3%2582%25B3%25E3%2583%2594%25E3%2583%259A%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2580%25E3%2583%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJmOTRiYzI2MjYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>絶望コーダー a.k.a. コピペコーダー</dc:creator></item><item><title><![CDATA[storybook8をプロダクトに導入して起きた問題と解決策をまとめてみた]]></title><description><![CDATA[こんにちは、株式会社 Rehab for JAPAN エンジニアのもじゃ(@moja_moja)です。
+私の携わっているプロダクトで storybook 8 を導入しました。
+私自身、これまで storybook を実務で使用したことがなかったため、導入して色々な問題やエラーに遭遇しました。
+今回は、導入時に起きた問題と解決策について紹介していきたいと思います。
+これから storybook 8 の導入・検討をする方々の参考になると幸いです。
+
+ 導入する恩恵について
+問題と解決策を紹介する前に、プロダクトに storybook を導入するメリットや恩恵について紹介しようと思います。
+様...]]></description><link>https://zenn.dev/rehabforjapan/articles/045a3d4c0d3bc6</link><guid isPermaLink="true">https://zenn.dev/rehabforjapan/articles/045a3d4c0d3bc6</guid><pubDate>Mon, 22 Jul 2024 03:12:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hGUEoaWN--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:storybook8%25E3%2582%2592%25E3%2583%2597%25E3%2583%25AD%25E3%2583%2580%25E3%2582%25AF%25E3%2583%2588%25E3%2581%25AB%25E5%25B0%258E%25E5%2585%25A5%25E3%2581%2597%25E3%2581%25A6%25E8%25B5%25B7%25E3%2581%258D%25E3%2581%259F%25E5%2595%258F%25E9%25A1%258C%25E3%2581%25A8%25E8%25A7%25A3%25E6%25B1%25BA%25E7%25AD%2596%25E3%2582%2592%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2582%2582%25E3%2581%2598%25E3%2582%2583%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNkYzExOTgzNjguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Rehab%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzlmZGEwZmUzZDYuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>もじゃ</dc:creator></item><item><title><![CDATA[neovim-lspconfig + Biome で保存時に import の整理をする]]></title><description><![CDATA[
+ 3行まとめ
+
+neovim-lspconfig で Biome の LSP Proxy を起動できる
+
+textDocument/codeAction で source.organizeImports と source.fixAll を実行することで、import の整理が可能
+codeAction の同期実行は gopls のドキュメントを参考にする
+
+
+ 前提1: Biome と import
+Biome には import に関連する機能が2つ存在する。
+
+Analyzer の Imports Sorting
+
+import をいい感じに並び替えてくれる機能
+
+
+eslint-...]]></description><link>https://zenn.dev/izumin/articles/b8046e64eaa2b5</link><guid isPermaLink="true">https://zenn.dev/izumin/articles/b8046e64eaa2b5</guid><pubDate>Mon, 22 Jul 2024 02:43:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1mJmIznZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:neovim-lspconfig%2520%252B%2520Biome%2520%25E3%2581%25A7%25E4%25BF%259D%25E5%25AD%2598%25E6%2599%2582%25E3%2581%25AB%2520import%2520%25E3%2581%25AE%25E6%2595%25B4%25E7%2590%2586%25E3%2582%2592%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Masayuki%2520Izumi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pLQnhYeEszZEtUbG80dkZXU04zbWNpU0lvNlRFckpid1M3WUdoeFE9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Masayuki Izumi</dc:creator></item><item><title><![CDATA[管理画面やサービスを簡易的に多言語化しつつ、ユビキタス言語も守りたい]]></title><description><![CDATA[サービス・システムの多言語化を皆さんどうやっていますか？
+サイトのシステム構成にもよると思いますが、多言語化には色々なベンダーのSaaSや、各種ライブラリ等を使用して実施しているかと思います。
+今回の記事では、多言語化するまでの取り組みと、ちょっとモヤモヤする部分の手助けができればと思います。
+この記事で説明すること
+
+多言語化するプロセス
+多言語化するための翻訳ファイルを生成するプログラムの説明
+
+この記事で説明しないこと
+
+JavaScriptの書き方
+i18nライブラリ等の仕様
+
+環境など
+
+GoogleAppsScript(GAS)
+
+
+ 痒いところに手が届かない多言語化問題（翻...]]></description><link>https://zenn.dev/ysit/articles/mimum-multilingualization</link><guid isPermaLink="true">https://zenn.dev/ysit/articles/mimum-multilingualization</guid><pubDate>Mon, 22 Jul 2024 01:43:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--CTZT2gfK--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%25AE%25A1%25E7%2590%2586%25E7%2594%25BB%25E9%259D%25A2%25E3%2582%2584%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2593%25E3%2582%25B9%25E3%2582%2592%25E7%25B0%25A1%25E6%2598%2593%25E7%259A%2584%25E3%2581%25AB%25E5%25A4%259A%25E8%25A8%2580%25E8%25AA%259E%25E5%258C%2596%25E3%2581%2597%25E3%2581%25A4%25E3%2581%25A4%25E3%2580%2581%25E3%2583%25A6%25E3%2583%2593%25E3%2582%25AD%25E3%2582%25BF%25E3%2582%25B9%25E8%25A8%2580%25E8%25AA%259E%25E3%2582%2582%25E5%25AE%2588%25E3%2582%258A%25E3%2581%259F%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ys%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVhNjUxOTk1NTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ys</dc:creator></item><item><title><![CDATA[TypeScript コーディングテクニック #3 【関数編その1】]]></title><description><![CDATA[
+ はじめに
+TypeScript のコーディングテクニックを紹介するシリーズの第 3 回です。
+前回で内容を予告していたのですが、ほぼ半年ぶりの投稿になってしまいました。またゆっくり投稿していこうと思います。
+想定する読者は、プログラミングをある程度経験したうえでさらにコード品質を高めたい方です。初心者向けではないと思います。
+第 3 回は、関数でどのようなことができるかを整理していきます。TypeScript と題していますが、 TypeScript に限らずあらゆるプログラミング言語に通ずる考え方だと思います。
+
+ 関数でできること
+
+ 処理の抽象化
+一連の処理を関数にまとめて名前...]]></description><link>https://zenn.dev/somnicattus/articles/9c1ac15f9a9589</link><guid isPermaLink="true">https://zenn.dev/somnicattus/articles/9c1ac15f9a9589</guid><pubDate>Mon, 22 Jul 2024 01:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--uLSpRcYu--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%2520%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2587%25E3%2582%25A3%25E3%2583%25B3%25E3%2582%25B0%25E3%2583%2586%25E3%2582%25AF%25E3%2583%258B%25E3%2583%2583%25E3%2582%25AF%2520%25233%2520%25E3%2580%2590%25E9%2596%25A2%25E6%2595%25B0%25E7%25B7%25A8%25E3%2581%259D%25E3%2581%25AE1%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:somnicattus%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSlNvNXE3eXJhZTY5OHVBWGpCN05EYTVOZVRxanpMQ2hBakhaek85RmZSPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>somnicattus</dc:creator></item><item><title><![CDATA[Supabaseでリアルタイムチャットアプリを作る]]></title><description><![CDATA[SupabaseにはRealtime APIがあります。接続しているクライアントとのメッセージを送受信できるAPIになります。
+このAPIを使用して簡単なリアルタイムチャットアプリを作ってみました。
+コード全体はこちらを参考にしてください。
+https://github.com/k-logic563/supabase-chat-app
+使用モジュールのバージョンは以下の通りです。
+主要なモジュールのみ載せていますので、その他はリポジトリのpackage.jsonを参考にしてください。
+"vite": "^5.3.4"
+"vue": "^3.4.31"
+"typescript": "^5....]]></description><link>https://zenn.dev/k_log24/articles/1912d857cc54f3</link><guid isPermaLink="true">https://zenn.dev/k_log24/articles/1912d857cc54f3</guid><pubDate>Sun, 21 Jul 2024 23:47:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--EaIpt8T4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Supabase%25E3%2581%25A7%25E3%2583%25AA%25E3%2582%25A2%25E3%2583%25AB%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25A0%25E3%2583%2581%25E3%2583%25A3%25E3%2583%2583%25E3%2583%2588%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kohei.com%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FhYTBhMmFjNTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kohei.com</dc:creator></item><item><title><![CDATA[【中級編】MapLibre GL JSを使ったWebGIS作成]]></title><description><![CDATA[オープンソースの地図ライブラリの「MapLibre GL JS」を使った様々なデータの表示方法やレイヤの表示切替方法をまとめました。]]></description><link>https://zenn.dev/asahina820/books/071ba23476fdc4</link><guid isPermaLink="true">https://zenn.dev/asahina820/books/071ba23476fdc4</guid><pubDate>Sun, 21 Jul 2024 09:08:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--I4o6jnco--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci83MjVjMTUzNjJjLmpwZWc=%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>あさひな</dc:creator></item><item><title><![CDATA[JavaScriptにおけるビルドの仕組みを考える]]></title><description><![CDATA[
+ はじめに
+これまでビルドについては、『トランスパイルしてバンドルして〜』と言ったように何となく雰囲気で捉えていました。しかし、設定ファイルを修正するにあたり理解が足りない箇所があったため、ビルドプロセス全体について調べてみました。今回は『具体的にビルドは何をしてくれるの？』と言った疑問を解消することを目的に記事を書いてみます。
+
+ ビルドとは
+そもそも”ビルド”とはどのようなプロセスを表しているのでしょうか？
+JavaScriptにおけるビルドプロセスは、開発中のコードを本番環境で効率よく実行できる形に「変換」するための一連のステップを指します。このプロセスには、コードの最適化や変換...]]></description><link>https://zenn.dev/atusi/articles/02754c98953061</link><guid isPermaLink="true">https://zenn.dev/atusi/articles/02754c98953061</guid><pubDate>Sun, 21 Jul 2024 07:20:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--W8I8rGKJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25E3%2581%25AB%25E3%2581%258A%25E3%2581%2591%25E3%2582%258B%25E3%2583%2593%25E3%2583%25AB%25E3%2583%2589%25E3%2581%25AE%25E4%25BB%2595%25E7%25B5%2584%25E3%2581%25BF%25E3%2582%2592%25E8%2580%2583%25E3%2581%2588%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Atsushi%2520hatakeyama%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdjYWE3ODNjN2IuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Atsushi hatakeyama</dc:creator></item><item><title><![CDATA[useReducer(): 基本操作と実装例]]></title><description><![CDATA[React v16.8.0 以降で導入された useReducer は、複雑な状態管理に適した React のフック。現在の状態とアクションを受け取り、新しい状態を返すリデューサー関数で状態を管理する。useReducer を使用することで、複数の状態遷移を一つの関数内に集約し、状態管理のロジックを明確に保つことができる。
+
+CounterReducer.js
+// 1. 状態の初期値を設定する
+const initialState = { count: 0 };
+
+// 2. 現在の状態とアクションを受け取り、新しい状態を返すリデューサー関数を作成する
+const reducer = ...]]></description><link>https://zenn.dev/kkoisland/articles/16f008a2a0e7cd</link><guid isPermaLink="true">https://zenn.dev/kkoisland/articles/16f008a2a0e7cd</guid><pubDate>Sun, 21 Jul 2024 01:07:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qS6TQTnq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:useReducer%2528%2529%253A%2520%25E5%259F%25BA%25E6%259C%25AC%25E6%2593%258D%25E4%25BD%259C%25E3%2581%25A8%25E5%25AE%259F%25E8%25A3%2585%25E4%25BE%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kkoisland%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E2MzIwYmQ0NDQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kkoisland</dc:creator></item><item><title><![CDATA[useContext(): 基本操作とuseReducerを使ったコンテキスト作成]]></title><description><![CDATA[React v16.8.0 以降で導入された useContext は、React のフックの一つで、コンポーネントツリー全体にデータを渡すためのもの。useContext を使用すると、コンテキストを直接利用できるため、深くネストされたコンポーネントでも簡単にデータを取得できる。以下に、useContext の含めた作成手順は以下の通り。
+
+ 1. コンテキストの作成
+コンテキストを作成には React.createContext を使用する。使用には、Provider コンポーネントが必要で、value プロパティを通じてコンテキストの値を渡す。
+
+MyContext.js
+impo...]]></description><link>https://zenn.dev/kkoisland/articles/1a1f5aa7011f78</link><guid isPermaLink="true">https://zenn.dev/kkoisland/articles/1a1f5aa7011f78</guid><pubDate>Sun, 21 Jul 2024 00:01:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--RWAlk3x---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:useContext%2528%2529%253A%2520%25E5%259F%25BA%25E6%259C%25AC%25E6%2593%258D%25E4%25BD%259C%25E3%2581%25A8useReducer%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%259F%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2586%25E3%2582%25AD%25E3%2582%25B9%25E3%2583%2588%25E4%25BD%259C%25E6%2588%2590%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kkoisland%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E2MzIwYmQ0NDQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kkoisland</dc:creator></item><item><title><![CDATA[clusterイージースクリプト 関数一覧]]></title><description><![CDATA[まだ「clusterイージースクリプト」のインストールが済んでいない人は先に済ませてくださいね。
+こちらの記事からどうぞ。
+以下はclusterイージースクリプトの関数一覧です。
+
+ 「_基本イージー」に含まれる関数
+※内部でしか使っていない関数は書いてありません。
+
+ 何かが起きたときの関数
+
+
+ee.start(): アイテムができたときに呼ばれます。
+
+ee.main(): 毎フレーム（毎回）呼ばれます。いわゆるメインループです。移動などの多くの処理はここに書かれます。
+
+ee.receive(): 何かのメッセージが送られてきたときに呼ばれます。
+
+ee.playerLost()...]]></description><link>https://zenn.dev/vins/articles/f5c2f6aa09b323</link><guid isPermaLink="true">https://zenn.dev/vins/articles/f5c2f6aa09b323</guid><pubDate>Sat, 20 Jul 2024 17:47:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--LwDGt0jL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:cluster%25E3%2582%25A4%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%25BC%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2583%2588%2520%25E9%2596%25A2%25E6%2595%25B0%25E4%25B8%2580%25E8%25A6%25A7%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:vins%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2c0ZERlaWVTamtQcDFmTDYwS1FhTlpYMkpMeTJOOGtfeWRha1F6PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>vins</dc:creator></item><item><title><![CDATA[clusterイージースクリプト 05テキスト表示するNPC]]></title><description><![CDATA[まだ「clusterイージースクリプト」のインストールが済んでいない人は先に済ませてくださいね。
+こちらの記事からどうぞ。
+
+ NPCサンプル
+「イージースクリプト」フォルダの「NPCサンプル」プレハブをシーンにドラッグアンドドロップしましょう。
+
+こんな感じに調整
+床に埋もれがちなので、シーン上か「インスペクター」から位置を調整してあげてください。
+
+近づくとプレイヤーの方を向いて、ランダムで3つのあいさつが表示されます。
+
+ NPCスクリプトの内容は？
+「NPCスクリプト.js」はそれなりに長いです。1つ1つ見ていきましょう。
+setSub(["obj"]);
+
+ee.start =...]]></description><link>https://zenn.dev/vins/articles/519bd77ba4ba3f</link><guid isPermaLink="true">https://zenn.dev/vins/articles/519bd77ba4ba3f</guid><pubDate>Sat, 20 Jul 2024 12:46:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--gwEbDWOQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:cluster%25E3%2582%25A4%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%25BC%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2583%2588%252005%25E3%2583%2586%25E3%2582%25AD%25E3%2582%25B9%25E3%2583%2588%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2599%25E3%2582%258BNPC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:vins%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2c0ZERlaWVTamtQcDFmTDYwS1FhTlpYMkpMeTJOOGtfeWRha1F6PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>vins</dc:creator></item><item><title><![CDATA[clusterイージースクリプト 04銃と的編]]></title><description><![CDATA[まだ「clusterイージースクリプト」のインストールが済んでいない人は先に済ませてくださいね。
+こちらの記事からどうぞ。
+
+ 銃と的のサンプル
+今回はイージースクリプトの中でも中級者向けと言えるかもしれません。
+アイテムとアイテムの間の通信要素があります。
+「イージースクリプト」フォルダの「銃サンプル」と「撃たれるサンプル」プレハブをシーンにドラッグアンドドロップしましょう。
+
+こんな感じに調整
+このとき「撃たれるサンプル」は床に埋もれがちなので、シーン上か「インスペクター」から位置を調整してあげてください。
+
+銃を持って「使う」と弾が出ます。
+的に当たると「ダメージ」の数値が増えてい...]]></description><link>https://zenn.dev/vins/articles/8eea5bbb88fe1c</link><guid isPermaLink="true">https://zenn.dev/vins/articles/8eea5bbb88fe1c</guid><pubDate>Sat, 20 Jul 2024 10:07:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--rPtJNbqi--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:cluster%25E3%2582%25A4%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%25BC%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2583%2588%252004%25E9%258A%2583%25E3%2581%25A8%25E7%259A%2584%25E7%25B7%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:vins%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2c0ZERlaWVTamtQcDFmTDYwS1FhTlpYMkpMeTJOOGtfeWRha1F6PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>vins</dc:creator></item><item><title><![CDATA[clusterイージースクリプト 03乗り物編]]></title><description><![CDATA[まだ「clusterイージースクリプト」のインストールが済んでいない人は先に済ませてくださいね。
+こちらの記事からどうぞ。
+
+ 乗り物サンプル
+「イージースクリプト」フォルダの「乗り物サンプル」プレハブをシーンにドラッグアンドドロップし、Unityの再生ボタンを押してください。
+
+前後左右で移動、Space/Shiftで上昇下降ができます。
+なお、床まで下降するとそれ以上さがりません。これはYの下限を0にしているからです。
+（なお座ったポーズにはなりませんが、clusterにアップロードするとちゃんと座ります）
+!
+ただ、モノにぶつかったり、床がないところから落下するといったことには対応...]]></description><link>https://zenn.dev/vins/articles/e1cf30fc51e9c8</link><guid isPermaLink="true">https://zenn.dev/vins/articles/e1cf30fc51e9c8</guid><pubDate>Sat, 20 Jul 2024 08:58:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--uGUsIrZi--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:cluster%25E3%2582%25A4%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%25BC%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2583%2588%252003%25E4%25B9%2597%25E3%2582%258A%25E7%2589%25A9%25E7%25B7%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:vins%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2c0ZERlaWVTamtQcDFmTDYwS1FhTlpYMkpMeTJOOGtfeWRha1F6PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>vins</dc:creator></item><item><title><![CDATA[JSCOnlyを実行するスクリプト]]></title><description><![CDATA[ただのメモ。
+Macで ./Tools/Scripts/build-jsc でビルドする場合は成果物ができる場所が異なるので注意。自分は Linux で ./Tools/Scripts/build-webkit --jsc-only --debug でビルドしている。
+WebKitの./Tools/Scripts/run-jsc --jsc-only ./WebKitBuild/JSCOnly/Debug/test.jsとやっていたけどめんどくさい（実際には ./Tools/Scripts にパスが通っているので run-jsc --jsc-only ./WebKitBuild/JSCO...]]></description><link>https://zenn.dev/sosukesuzuki/articles/8d22b3ebbcef2c</link><guid isPermaLink="true">https://zenn.dev/sosukesuzuki/articles/8d22b3ebbcef2c</guid><pubDate>Sat, 20 Jul 2024 04:49:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--WIR4_314--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JSCOnly%25E3%2582%2592%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%2599%25E3%2582%258B%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Sosuke%2520Suzuki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2kzVm5WZHo2MC1CT3lMTS1VVnZaNmdNSDJlTlp1T0lTa1owT3lyNnc9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Sosuke Suzuki</dc:creator></item><item><title><![CDATA[URL の結合を完全に理解する]]></title><description><![CDATA[URL の結合をよく理解していなかったので、それに対する備忘録です。
+例えば
+&lt;a href="/top"&gt;Top&lt;/a&gt;
+みたいな HTML の anchor タグを使う時、現在の URL と/top を結合した URL に遷移するわけです。
+これは、JavaScript の API にもあり、
+const merged = new URL('/top', 'https://example.com/profile') // 'https://example.com/top'
+のようにして結合することもできます。
+この結合は Deno などの JavaScript...]]></description><link>https://zenn.dev/nakasyou/articles/how_to_merge_url</link><guid isPermaLink="true">https://zenn.dev/nakasyou/articles/how_to_merge_url</guid><pubDate>Sat, 20 Jul 2024 03:45:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7EiD5xRP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:URL%2520%25E3%2581%25AE%25E7%25B5%2590%25E5%2590%2588%25E3%2582%2592%25E5%25AE%258C%25E5%2585%25A8%25E3%2581%25AB%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nakasyou%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI3NTAyNDNlNjAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nakasyou</dc:creator></item><item><title><![CDATA[「clusterイージースクリプト」02持ち物編]]></title><description><![CDATA[まだ「clusterイージースクリプト」のインストールが済んでいない人は先に済ませてくださいね。
+こちらの記事からどうぞ。
+
+ 持ち物サンプル
+
+「持ち物サンプル」プレハブをシーンにドラッグアンドドロップし、Unityの再生ボタンを押してください。
+左クリックすると、プレイヤーが前＆上空にワープします。
+プレイヤーの回転（向き）によってちゃんと「前」が変わるのがポイントですね。
+固定である方向に飛んで行くわけではありません。
+
+ スクリプトの内容は？
+ee.use = (isOn) =&gt; {
+	if(isOn){
+		warpPlayerShift(0,2,2);
+	}
+}
+「持ち...]]></description><link>https://zenn.dev/vins/articles/39a85179ef0951</link><guid isPermaLink="true">https://zenn.dev/vins/articles/39a85179ef0951</guid><pubDate>Fri, 19 Jul 2024 22:58:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bXwsWFtS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%258Ccluster%25E3%2582%25A4%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%25BC%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2583%2588%25E3%2580%258D02%25E6%258C%2581%25E3%2581%25A1%25E7%2589%25A9%25E7%25B7%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:vins%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2c0ZERlaWVTamtQcDFmTDYwS1FhTlpYMkpMeTJOOGtfeWRha1F6PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>vins</dc:creator></item><item><title><![CDATA[「clusterイージースクリプト」01ボタン編と音機能]]></title><description><![CDATA[まだ「clusterイージースクリプト」のインストールが済んでいない人は先に済ませてくださいね。
+こちらの記事からどうぞ。
+
+ ボタンサンプル
+
+「ボタンサンプル」プレハブをシーンにドラッグアンドドロップし、再生ボタンを押してください。
+
+ボタンをクリックするとヘンな音が鳴ります。
+
+ スクリプトの内容は？
+setSound(1);
+
+ee.press = () =&gt; {
+	playSound(0);
+}
+「ボタンスクリプト.js」を開くと、こんな感じです。短いですね。
+
+ 音の部分
+関数の外にsetSound(1);とありますが、これは音を1つ登録しろという意味です。
+
+ボタンと...]]></description><link>https://zenn.dev/vins/articles/df8616bcdcfad3</link><guid isPermaLink="true">https://zenn.dev/vins/articles/df8616bcdcfad3</guid><pubDate>Fri, 19 Jul 2024 22:32:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---y0Dwp18--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%258Ccluster%25E3%2582%25A4%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%25BC%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2583%2588%25E3%2580%258D01%25E3%2583%259C%25E3%2582%25BF%25E3%2583%25B3%25E7%25B7%25A8%25E3%2581%25A8%25E9%259F%25B3%25E6%25A9%259F%25E8%2583%25BD%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:vins%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2c0ZERlaWVTamtQcDFmTDYwS1FhTlpYMkpMeTJOOGtfeWRha1F6PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>vins</dc:creator></item></channel></rss>
