@@ -7,7 +7,7 @@ import re
 # https://docs.python.org/3/library/html.parser.html#html.parser.HTMLParser
 class HTMLProcessor(html.parser.HTMLParser):
     def __init__(self):
-        super().__init__()
+        super().__init__(convert_charrefs=False)
         self.modified_html = []
 
     def handle_starttag(self, tag, attrs):
