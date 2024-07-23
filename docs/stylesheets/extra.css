@@ -18,8 +18,8 @@
 
     scrollbar-width: thin;
 
-    --md-text-font: "M PLUS 1p";
-    --md-code-font: "Roboto Mono";
+    --md-text-font: system-ui;
+    --md-code-font: monospace;
 
     body {
         --site-max-width: 1600px;
@@ -132,6 +132,11 @@
 
 /** article */
 body main .md-content article {
+    font-size: 16px;
+    p, li, li > ul, li > ol, dd {
+        margin: 0;
+    }
+
     /** external link */
     a[target="_blank"] {
         padding: 0 2px;
@@ -191,7 +196,7 @@ body main .md-content article {
     }
     h2 {
         padding-bottom: 4px;
-        border-bottom: solid black 1px;
+        border-bottom: solid var(--md-default-fg-color--lighter) 1px;
     }
 
     /* article */

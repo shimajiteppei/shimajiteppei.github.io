@@ -1,9 +1,3 @@
-WebFont.load({
-    google: {
-        families: ['M PLUS 1p:400,700', 'Roboto Mono']
-    }
-});
-
 // https://github.com/squidfunk/mkdocs-material/issues/6196
 document$.subscribe(() => {
     // テーブルソート
