@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Linux」のフィード]]></title><description><![CDATA[Zennのトピック「Linux」のRSSフィードです]]></description><link>https://zenn.dev/topics/linux</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/860a9eb1e4.png</url><title>Zennの「Linux」のフィード</title><link>https://zenn.dev/topics/linux</link></image><generator>zenn.dev</generator><lastBuildDate>Wed, 24 Jul 2024 02:11:20 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/linux/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[CentOS7 で yum update ができない 2024-07-24]]></title><description><![CDATA[
+ CentOS7は2024-6-30にEOL
+
+CentOS7は既にサポート期間を過ぎているので、CentOS7の利用自体おすすめしません
+とはいえ様々な事情があると思うので…そんな僕みたいな境遇の人へ書き残します
+
+
+ /etc/yum.repos.d/CentOS-Base.repo
+
+CentOS7のEOLに伴いベースパッケージのリポジトリURLが機能しませんでした
+CentOS-Base.repoを下記の「DEFAULT」から「CORRECT」に変更しました
+
+
+ DEFAULT
+
+
+mirrorlist.centos.org mirror.centos.org が使えないよう...]]></description><link>https://zenn.dev/stnr_kai/articles/5b2131dc5f533f</link><guid isPermaLink="true">https://zenn.dev/stnr_kai/articles/5b2131dc5f533f</guid><pubDate>Wed, 24 Jul 2024 01:54:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--btRp1u3M--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:CentOS7%2520%25E3%2581%25A7%2520yum%2520update%2520%25E3%2581%258C%25E3%2581%25A7%25E3%2581%258D%25E3%2581%25AA%25E3%2581%2584%25202024-07-24%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kai%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ4ZDRkZjAyYzIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kai</dc:creator></item><item><title><![CDATA[スレッドメモ]]></title><description><![CDATA[
+ スレッドの開始
+int pthread_create(pthread_t *thread, const pthread_attr_t *attr,
+void *(*start)(void *), void *arg);
+thread: pthread_t(スレッドID)へのポインタ
+attr: pthread_attr_t(スレッド属性設定)へのポインタ
+start: スレッドの実行はstartに指定された関数をコールするところから始まる。
+arg: startの引数。start(arg)から始まる。
+
+ スレッドの終了
+スレッドの終了パターンは4つ
+
+スレッド関数がリターンする
+ス...]]></description><link>https://zenn.dev/regmarmcem/articles/1751bfa73f0f55</link><guid isPermaLink="true">https://zenn.dev/regmarmcem/articles/1751bfa73f0f55</guid><pubDate>Tue, 23 Jul 2024 13:46:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bXJililK--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B9%25E3%2583%25AC%25E3%2583%2583%25E3%2583%2589%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:regmarmcem%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFhZWJjN2Y0ZDUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>regmarmcem</dc:creator></item><item><title><![CDATA[コンテナ自作メモ]]></title><description><![CDATA[
+ コンテナ技術入門
+以下をやってみたメモ
+https://eh-career.com/engineerhub/entry/2019/02/05/103000/?PK=492D00
+
+ コマンド実行
+$ CMD="/bin/sh"
+$ cgexec -g cpu,memory:$UUID \
+  unshare -muinpfr /bin/sh -c "
+    mount -t proc proc $ROOTFS/proc &amp;&amp;
+    touch $ROOTFS$(tty); mount --bind $(tty) $ROOTFS$(tty) &amp;&amp;
+ ...]]></description><link>https://zenn.dev/regmarmcem/articles/3820dfe35d341a</link><guid isPermaLink="true">https://zenn.dev/regmarmcem/articles/3820dfe35d341a</guid><pubDate>Tue, 23 Jul 2024 13:44:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--kHS8YA8s--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2586%25E3%2583%258A%25E8%2587%25AA%25E4%25BD%259C%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:regmarmcem%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFhZWJjN2Y0ZDUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>regmarmcem</dc:creator></item><item><title><![CDATA[IPCメモ]]></title><description><![CDATA[
+ pipe
+同じパイプに対して親子プロセスがともに読み取ろうとすることはまずない。
+2プロセスが同時にパイプから読み取ると、どちらかが成功するかが保証できない競合状態になる。これを回避するには何らかの同期が必要。
+双方向通信するなら、2つのパイプを作って、1つを送信用、1つを受信用とする方が楽。
+ただし、デッドロックに注意
+読み取りプロセスが書き込み口をクローズする理由は、書き込みプロセスが書き込み終わって書き込み口をクローズ後にEOFを読み取れない。
+書き込みプロセスが読み取り側をクローズするのはwrite()がbroken pipeエラーになった時の対応を実装するため。
+書き込もう...]]></description><link>https://zenn.dev/regmarmcem/articles/6e7d7da4f294e1</link><guid isPermaLink="true">https://zenn.dev/regmarmcem/articles/6e7d7da4f294e1</guid><pubDate>Tue, 23 Jul 2024 12:43:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8Way-f9U--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_76:IPC%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:regmarmcem%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFhZWJjN2Y0ZDUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>regmarmcem</dc:creator></item><item><title><![CDATA[環境変数とシェル変数の入口]]></title><description><![CDATA[Bash などのシェルには、2つの変数が備わっています。
+それは、環境変数とシェル変数です。
+- 環境変数とは
+現在のシェルで定義され、子プロセスやシェルに継承される変数のこと
+- シェル変数とは
+定義されたシェルにのみ含まれる変数のこと
+これらに、どのような役割や違いがあるかを知るために、コマンドラインを使いながら見ていきます。
+(筆者環境: MacOS Big Sur ver11.2.3 Bash)
+!
+変数や以下で紹介するコマンドの挙動は設定されているシェルに依存します。
+
+
+ 使用するコマンド
+
+
+printenv
+すべて、または特定の環境変数とその値を表示します。
+例えば、pr...]]></description><link>https://zenn.dev/yururi/articles/env-shell-var</link><guid isPermaLink="true">https://zenn.dev/yururi/articles/env-shell-var</guid><pubDate>Mon, 22 Jul 2024 11:31:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--YaFjm9ir--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%2592%25B0%25E5%25A2%2583%25E5%25A4%2589%25E6%2595%25B0%25E3%2581%25A8%25E3%2582%25B7%25E3%2582%25A7%25E3%2583%25AB%25E5%25A4%2589%25E6%2595%25B0%25E3%2581%25AE%25E5%2585%25A5%25E5%258F%25A3%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:sks%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzUwODM4MTExYzMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sks</dc:creator></item><item><title><![CDATA[BINDによるDNS キャッシュサーバーの構築]]></title><description><![CDATA[
+ はじめに
+こんにちは！今回は、Linuc202の試験に向けて理解を深めるために、DNS キャッシュサーバーを AWS EC2 上で構築しました。実際に環境を構築しながら学習することで、試験対策と実務でのスキルアップを目指のが今回の目的です。
+
+ 前提知識
+
+ DNS とは
+インターネット上で Web サイトにアクセスする際、私たちは通常ドメイン名（例：google.co.jp）を使います。しかし、実際に通信を行うためには IP アドレスが必要です。DNS（Domain Name System）は、このドメイン名と IP アドレスを関連付けるシステムです。簡単に言えば、DNS はドメイ...]]></description><link>https://zenn.dev/shz/articles/d27da94f5023eb</link><guid isPermaLink="true">https://zenn.dev/shz/articles/d27da94f5023eb</guid><pubDate>Sun, 21 Jul 2024 15:49:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--gFTxGoxT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:BIND%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258BDNS%2520%25E3%2582%25AD%25E3%2583%25A3%25E3%2583%2583%25E3%2582%25B7%25E3%2583%25A5%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2581%25AE%25E6%25A7%258B%25E7%25AF%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:shz%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZlODBiNGM3OTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>shz</dc:creator></item><item><title><![CDATA[BINDについて(LinuC202学習)]]></title><description><![CDATA[
+ BINDとは
+https://www.isc.org/bind/
+Berkeley Internet Name Domain、略してBIND。DNS権威サーバーおよびキャッシュサーバーとして機能するソフトウェア。
+DNSソフトウェアとしては最もトラディショナルかつ一般的だが、インターネットの前面に位置するサーバーという性質と近年の脆弱性の多発と、Amazon Route53やAzure DNSというマネージドサービスを利用したそれらDNS起因のセキュリティ責任のオフロードの動機から、触れる機会は減っていると思われる。
+一方で触れることでDNSの内部の働きを体感し、理解を深めることには...]]></description><link>https://zenn.dev/yoshitomo_t/articles/linuc_bind_202407</link><guid isPermaLink="true">https://zenn.dev/yoshitomo_t/articles/linuc_bind_202407</guid><pubDate>Sun, 21 Jul 2024 03:10:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--k8wBmqSM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:BIND%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2528LinuC202%25E5%25AD%25A6%25E7%25BF%2592%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259F%25E3%2581%25AA%25E3%2581%25B9%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTG43LW5jdVowQS15c2xkeHgyTGxjeHkzWWhaOWo1WE00MGV4cTBBTkQ1Qmc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>たなべ</dc:creator></item><item><title><![CDATA[SadServers解説#20 "Kihei": Surely Not Another Disk Space Scenario]]></title><description><![CDATA[https://ja.wikipedia.org/wiki/キヘイ
+
+ 問題概要
+
+ シナリオ
+まさか、またディスク容量の問題ではないだろうか
+
+ 問題詳細
+/home/admin/kiheiプログラムがあります。このプログラム実行が成功するように必要な変更を行ってください。ただし、/home/admin/datafileファイルを削除しないようにしてください。
+
+ 解決判定
+問題が解決したら、Check My Solutionボタンをクリックしてください。
+解答が正解かどうか、コマンドプロンプト上で確認することも可能です。次のコマンドを実行して、以下と同じ出力が得られた場合は正解です。...]]></description><link>https://zenn.dev/comf_nakamura/articles/sadservers_19</link><guid isPermaLink="true">https://zenn.dev/comf_nakamura/articles/sadservers_19</guid><pubDate>Sat, 20 Jul 2024 14:36:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--UiwR88YM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:SadServers%25E8%25A7%25A3%25E8%25AA%25AC%252320%2520%2522Kihei%2522%253A%2520Surely%2520Not%2520Another%2520Disk%2520Space%2520Sc...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25BC%25E3%2583%2588%25E3%2582%25BE%25E3%2583%25BC%25E3%2583%25B3%25E4%25B8%25AD%25E6%259D%2591%25EF%25BD%259C%25E6%2596%25B0%25E4%25BA%25BA%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25A6%25E3%2583%2589...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU1OGFjNDI2M2QuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>コンフォートゾーン中村｜新人クラウドエンジニア</dc:creator></item><item><title><![CDATA[Linuxをちょっと理解する]]></title><description><![CDATA[LinuxやUbuntuとは何かを理解して、windows環境でLinuxを触れる環境を作るまでを行う。
+またLinuxの勉強を始めるにあたって躓く部分を整理する
+
+ Linuxとは
+OSの1つ
+OSSでサーバーサイドだけではなく、デスクトップやタブレット、組み込みシステムなど用途は多岐にわたる
+
+ よく聞くRedhat系やDebian系とは
+以下のNOTEを参照して整理する
+https://note.com/_chibisuke/n/n0ae85ead39cd
+
+ Redhat系
+Redhat社が開発しているRed Hat Enterprise Linuxから派生したディストリビューシ...]]></description><link>https://zenn.dev/hokoripon/articles/00975eadadfcdc</link><guid isPermaLink="true">https://zenn.dev/hokoripon/articles/00975eadadfcdc</guid><pubDate>Fri, 19 Jul 2024 04:41:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--By-TM16c--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%25E3%2582%2592%25E3%2581%25A1%25E3%2582%2587%25E3%2581%25A3%25E3%2581%25A8%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25BB%25E3%2581%2593%25E3%2582%258A%25E3%2581%25BD%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2EyNjk2MDc5ODMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ほこりぽん</dc:creator></item><item><title><![CDATA[WSL2新バージョンで６系Linuxカーネルバイナリがリリース]]></title><description><![CDATA[
+ 5.15から6.6に大幅更新
+!
+関連記事:
+
+WSL2 2.2.x正式版がこっそリリース
+WSL2.2.x で DNS tunnelingがデフォルトに
+WSL2 2.0.0がこっそリリース
+WSLのアップデートでメモリ開放？
+WSL2でvmmem確保メモリを開放する方法
+
+
+WSLの2.3.11がリリースされた
+
+https://github.com/microsoft/WSL/releases/tag/2.3.11
+アップデート情報をチェックしていたが興味深いものがあった。
+
+Update Kernel to 6.6.36.3
+
+こんな記事がある
+https://forest....]]></description><link>https://zenn.dev/dozo/articles/3fd0793e71199a</link><guid isPermaLink="true">https://zenn.dev/dozo/articles/3fd0793e71199a</guid><pubDate>Thu, 18 Jul 2024 03:15:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--pCP6WwPL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:WSL2%25E6%2596%25B0%25E3%2583%2590%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%25A7%25E3%2583%25B3%25E3%2581%25A7%25EF%25BC%2596%25E7%25B3%25BBLinux%25E3%2582%25AB%25E3%2583%25BC%25E3%2583%258D%25E3%2583%25AB%25E3%2583%2590%25E3%2582%25A4%25E3%2583%258A%25E3%2583%25AA%25E3%2581%258C%25E3%2583%25AA%25E3%2583%25AA%25E3%2583%25BC%25E3%2582%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:dozo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvZC5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>dozo</dc:creator></item><item><title><![CDATA[サーバー起動エラー「EADDRINUSE: address already in use」解決方法]]></title><description><![CDATA[
+ はじめに
+こんにちは、Takeです。都内の自社開発企業でエンジニアとして働いています。
+
+ エラー内容
+yarn devを実行した際、サーバーが起動しないエラーが発生しました。
+$ yarn dev
+yarn run v1.22.19
+$ next dev -p 3000
+ ⨯ Failed to start server
+Error: listen EADDRINUSE: address already in use :::3000
+    at Server.setupListenHandle 〜
+    at listenInCluster 〜
+     {
+  code: '...]]></description><link>https://zenn.dev/take_tech/articles/d16f3d11a8da75</link><guid isPermaLink="true">https://zenn.dev/take_tech/articles/d16f3d11a8da75</guid><pubDate>Thu, 18 Jul 2024 01:47:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--opz1qnir--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E8%25B5%25B7%25E5%258B%2595%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E3%2580%258CEADDRINUSE%253A%2520address%2520already%2520in%2520use%25E3%2580%258D%25E8%25A7%25A3%25E6%25B1%25BA%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Take%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzYyNThiNDQ2YTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Take</dc:creator></item><item><title><![CDATA[Homebrewで醸造を始めよう！初心者向けガイドと用語解説]]></title><description><![CDATA[
+ はじめに
+Homebrewは、MacやLinuxでソフトウェアを簡単にインストール・管理できるパッケージマネージャーです。まるでビールを自家醸造するように、必要なソフトウェアを“醸造”して、開発環境を構築することができます。
+この記事では、Homebrew初心者のために、基本的な使い方と、よく登場する用語についてわかりやすく解説します。記事を読み終える頃には、あなたもHomebrewを使いこなせるようになっているはずです！
+
+ Homebrewとは？
+Homebrewは、コマンドラインからソフトウェアをインストール・管理できるツールです。パッケージと呼ばれる単位でソフトウェアを管理し...]]></description><link>https://zenn.dev/suuungwoo/articles/75b47b06c3fffd</link><guid isPermaLink="true">https://zenn.dev/suuungwoo/articles/75b47b06c3fffd</guid><pubDate>Wed, 17 Jul 2024 15:45:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4J-YiCoT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Homebrew%25E3%2581%25A7%25E9%2586%25B8%25E9%2580%25A0%25E3%2582%2592%25E5%25A7%258B%25E3%2582%2581%25E3%2582%2588%25E3%2581%2586%25EF%25BC%2581%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E5%2590%2591%25E3%2581%2591%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%25E3%2581%25A8%25E7%2594%25A8%25E8%25AA%259E%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E9%2587%2591%2520%25E6%2588%2590%25E9%259B%25A8%25EF%25BC%2588%25E3%2581%258D%25E3%2582%2580%2520%25E3%2581%259D%25E3%2582%2593%25E3%2581%2586%25EF%25BC%2589%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU5ODZiNWYyMTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>金 成雨（きむ そんう）</dc:creator></item><item><title><![CDATA[UTM のヘッドレスモードで仮想サーバーを起動する方法]]></title><description><![CDATA[
+ UTM とは?
+UTM とは、macOS用の仮想環境構築ソフトウェアのことで、1つのOS内で異なるOSを動かすことができます。
+App Store で提供されてる有料版と無料版がありますが、機能に差分はないので、特に理由なければ、無料版を使いましょう。
+
+ ローカル環境の情報
+PC: M3 Mac
+OS: macOS 14.5
+
+ 仮想環境の設定
+今回は、以下で設定します。
+
+OS: AlmaLinux
+
+メモリ: 2GB
+サイズ: 64GB
+名前: AlmaLinux(後ほど使用するので、個別で設定)
+
+
+詳細な設定については、今回は割愛しますが、設定方法については、以下の記事がお...]]></description><link>https://zenn.dev/nappa/articles/4e8cb7b1cb3899</link><guid isPermaLink="true">https://zenn.dev/nappa/articles/4e8cb7b1cb3899</guid><pubDate>Mon, 15 Jul 2024 13:22:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--i_pMYvR6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:UTM%2520%25E3%2581%25AE%25E3%2583%2598%25E3%2583%2583%25E3%2583%2589%25E3%2583%25AC%25E3%2582%25B9%25E3%2583%25A2%25E3%2583%25BC%25E3%2583%2589%25E3%2581%25A7%25E4%25BB%25AE%25E6%2583%25B3%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2582%2592%25E8%25B5%25B7%25E5%258B%2595%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nappa%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBiZTZlMDkwMDAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nappa</dc:creator></item><item><title><![CDATA[ひとくちメモ：ssh-add するときに error in libcrypto が出る]]></title><description><![CDATA[
+ 結論
+
+
+chmod 600 ~/.ssh/... してないなら、する
+鍵の末尾に改行を入れていないなら、入れる
+改行コードが CRLF とかになっていたら、LF にする
+
+
+ 経緯
+開発用にミニPCを調達して Ubuntu を仕込んだので、1Password 経由で SSH 鍵を移行しようとしたら以下のようなエラーが起きた。
+[21:11:01] mystere@mystere:~/.ssh$ ssh-add ~/.ssh/gh-argiberri
+Error loading key "/home/mystere/.ssh/gh-argiberri": error in libcr...]]></description><link>https://zenn.dev/argi_berri/articles/3e71ad03aa1158</link><guid isPermaLink="true">https://zenn.dev/argi_berri/articles/3e71ad03aa1158</guid><pubDate>Mon, 15 Jul 2024 12:19:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xvYMfW2T--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%25B2%25E3%2581%25A8%25E3%2581%258F%25E3%2581%25A1%25E3%2583%25A1%25E3%2583%25A2%25EF%25BC%259Assh-add%2520%25E3%2581%2599%25E3%2582%258B%25E3%2581%25A8%25E3%2581%258D%25E3%2581%25AB%2520error%2520in%2520libcrypto%2520%25E3%2581%258C%25E5%2587%25BA%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ARGIA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RhYWQwM2NmMzcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ARGIA</dc:creator></item><item><title><![CDATA[Linuxコマンド基礎]]></title><description><![CDATA[業務で使用経験のあるLinuxコマンド一覧。
+]]></description><link>https://zenn.dev/teru_whisky/books/33b85841bf589d</link><guid isPermaLink="true">https://zenn.dev/teru_whisky/books/33b85841bf589d</guid><pubDate>Mon, 15 Jul 2024 09:44:55 GMT</pubDate><dc:creator>teru</dc:creator></item><item><title><![CDATA[【CVE-2024-6409対策】OpenSSHで再びregreSSHionの脆弱性が発見されたので対応方法を確認した]]></title><description><![CDATA[先日、「CVE-2024-6387」の対応を行ったばかりですが、
+「CVE-2024-6409」で新たにregreSSHionの脆弱性が見つかったようなので対応方法を確認しました。
+https://zenn.dev/huuya/articles/e50cbe00189746
+
+ CVE-2024-6409の対象になるバージョンについて
+公式のフォーラムによると
+
+8.7p1以降
+
+が対象のようでした。
+ubuntuの公式ブログには
+
+Potential issue appears to have only been present in
+openssh 8.7p1 and 8.8p1, ...]]></description><link>https://zenn.dev/huuya/articles/03328ddf704638</link><guid isPermaLink="true">https://zenn.dev/huuya/articles/03328ddf704638</guid><pubDate>Mon, 15 Jul 2024 09:24:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Nri-0Hwy--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590CVE-2024-6409%25E5%25AF%25BE%25E7%25AD%2596%25E3%2580%2591OpenSSH%25E3%2581%25A7%25E5%2586%258D%25E3%2581%25B3regreSSHion%25E3%2581%25AE%25E8%2584%2586%25E5%25BC%25B1%25E6%2580%25A7%25E3%2581%258C%25E7%2599%25BA%25E8%25A6%258B%25E3%2581%2595%25E3%2582%258C%25E3%2581%259F%25E3%2581%25AE%25E3%2581%25A7%25E5%25AF%25BE%25E5%25BF%259C%25E6%2596%25B9%25E6%25B3%2595%25E3%2582%2592%25E7%25A2%25BA%25E8%25AA%258D%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:huuya%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2YzZDJmYTZjYjMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>huuya</dc:creator></item><item><title><![CDATA[「Efficient Linux コマンドライン」から学んだこと]]></title><description><![CDATA[
+ はじめに
+本記事では、「Efficient Linux コマンドライン」を読んで、私自身が新たに学んだことについてメモしています。
+私がすでに知っていた情報については本記事に書いていないため、興味があればお手元に買って読んでみてください。この記事には書いていないこともたくさん書いてあります。
+この本の対象読者としては、Linuxの勉強を1からしたい人というよりは、Linuxをそこそこ触ったことがある人になると思います。"そこそこ触ったことがある"のレベルとしては、コマンドでディレクトリを変更したり、プログラムを実行したりしていれば十分です。
+336ページとそこまで長くもなく、またLi...]]></description><link>https://zenn.dev/moz_sec/articles/2a849651de3fe1</link><guid isPermaLink="true">https://zenn.dev/moz_sec/articles/2a849651de3fe1</guid><pubDate>Mon, 15 Jul 2024 08:51:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--tIpAqV0G--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%258CEfficient%2520Linux%2520%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%25B3%25E3%2580%258D%25E3%2581%258B%25E3%2582%2589%25E5%25AD%25A6%25E3%2582%2593%25E3%2581%25A0%25E3%2581%2593%25E3%2581%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:moz-sec%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y3ZWUzN2Q2ZTcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>moz-sec</dc:creator></item><item><title><![CDATA[2024年のオーディオアプリケーション開発技術の動向に関する私的見解 (2)]]></title><description><![CDATA[昨日の続き。今日は「現代的な課題だけど実装がやや追いついていない技術」編。
+
+ MIDI 2.0のadoption
+MIDI 2.0のサポートは、段階的に追加されているものの、その歩みは緩慢だ。
+MIDI 2.0は2023年に大きなアップデートがあり、そのタイミングでLinux ALSAにはUMPサポートが追加された。この時点でプラットフォームAPIとしてMIDI 2.0を十分にサポートしていなかった主要OSはWindowsとAndroidのみだった（ChromeOSは…Web以外で音楽やる気ないし主要OSから外してもいいだろう）。今年になってAndroid 15が仮想MIDI 2.0デ...]]></description><link>https://zenn.dev/atsushieno/articles/2f91dc26a1f37a</link><guid isPermaLink="true">https://zenn.dev/atsushieno/articles/2f91dc26a1f37a</guid><pubDate>Sun, 14 Jul 2024 10:59:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--gRfSLhGN--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:2024%25E5%25B9%25B4%25E3%2581%25AE%25E3%2582%25AA%25E3%2583%25BC%25E3%2583%2587%25E3%2582%25A3%25E3%2582%25AA%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E9%2596%258B%25E7%2599%25BA%25E6%258A%2580%25E8%25A1%2593%25E3%2581%25AE%25E5%258B%2595%25E5%2590%2591%25E3%2581%25AB%25E9%2596%25A2%25E3%2581%2599%25E3%2582%258B%25E7%25A7%2581%25E7%259A%2584%25E8%25A6%258B%25E8%25A7%25A3%2520%25282%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Atsushi%2520Eno%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2ptVkFPck1hOUFQQ3pGaTR0VUtqMHZXSHZHaWpJQVVvZWRtM3JZVUE9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Atsushi Eno</dc:creator></item><item><title><![CDATA[Linux 使いになりたい人向けの Intel N100 ミニ PC で構築する開発環境（１２）- Oh My Posh]]></title><description><![CDATA[
+ はじめに
+これは、Linux 使いになりたい人向けに Intel N100 ミニ PC を使って開発環境を構築する方法を解説する記事の第１２弾です。第１弾はLinux 使いになりたい人向けの Intel N100 ミニ PC で構築する開発環境（１） - 構築する開発環境について にあり、そこから第２弾へと続いています。そちらからご覧ください。
+ここで使用する Intel N100 ミニ PC の仕様は次のものを前提とします。
+
+
+
+項目
+内容
+
+
+
+
+OS
+Windows 11 Pro
+
+
+CPU
+Intel N100
+
+
+メモリ
+16GB
+
+
+ストレージ
+SSD 512 GB
+
+...]]></description><link>https://zenn.dev/hiro345/articles/n100_12_20240714</link><guid isPermaLink="true">https://zenn.dev/hiro345/articles/n100_12_20240714</guid><pubDate>Sun, 14 Jul 2024 09:47:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--UuUVOPRp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%2520%25E4%25BD%25BF%25E3%2581%2584%25E3%2581%25AB%25E3%2581%25AA%25E3%2582%258A%25E3%2581%259F%25E3%2581%2584%25E4%25BA%25BA%25E5%2590%2591%25E3%2581%2591%25E3%2581%25AE%2520Intel%2520N100%2520%25E3%2583%259F%25E3%2583%258B%2520PC%2520%25E3%2581%25A7%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2599%25E3%2582%258B%25E9%2596%258B%25E7%2599%25BA%25E7%2592%25B0%25E5%25A2%2583%25EF%25BC%2588%25EF%25BC%2591%25EF%25BC%2592%25EF%25BC%2589-%2520Oh%2520My%2520Posh%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Hiroshi%2520Koyama%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2k5ZzdjLS0xTFk0S2k0LWw3dVFSSFZRdEdQcWZHYTlibVRJYUtFM0E9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Hiroshi Koyama</dc:creator></item><item><title><![CDATA[公開鍵の作成方法]]></title><description><![CDATA[
+ 公開鍵とは
+
+公開している方の鍵（public key）を先方に送って（もしくはダウンロードして貰って）、その鍵で暗号化して貰い、暗号化されたデータを送って貰う。
+暗号化されたデータの復号（元のデータに戻す）には、秘密鍵（private key）を使う。
+
+
+ 公開鍵の確認
+macOSの場合は、ほとんどの人が既に公開キーを作っていると思う。[1]
+cat ~/.ssh/id_rsa.pub
+上のコマンドを入力すると、以下のように出力されるはず。されなければ存在しないので作成する。
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDMaxy（省略）KhdoE...]]></description><link>https://zenn.dev/tomoakinagahara/articles/dbd5df9944f5e9</link><guid isPermaLink="true">https://zenn.dev/tomoakinagahara/articles/dbd5df9944f5e9</guid><pubDate>Fri, 12 Jul 2024 08:11:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Tv22dwR5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2585%25AC%25E9%2596%258B%25E9%258D%25B5%25E3%2581%25AE%25E4%25BD%259C%25E6%2588%2590%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Tomoaki%2520Nagahara%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2czREt6Z1p1U3hEcGVZaFY1ajhJSjNmTzFZODlMLXg3bVJxcFU1Q0E9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Tomoaki Nagahara</dc:creator></item></channel></rss>

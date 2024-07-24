@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Docker」のフィード]]></title><description><![CDATA[Zennのトピック「Docker」のRSSフィードです]]></description><link>https://zenn.dev/topics/docker</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/01c7f20365.png</url><title>Zennの「Docker」のフィード</title><link>https://zenn.dev/topics/docker</link></image><generator>zenn.dev</generator><lastBuildDate>Wed, 24 Jul 2024 02:28:27 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/docker/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Dockerを使用したLaravelの開発環境構築手順【Laravel Sailなし】]]></title><description><![CDATA[
+ 1. はじめに
+今回はDockerを使ったLaravelの環境構築について学んだので、その備忘録を残しておきます。
+Dockerでの環境構築には、公式ドキュメントでおすすめされているLaravel Sailを使った方法もあります。Laravel Sailを使用した環境構築もコマンドで手軽にできるので良いのですが、デプロイする際にDockerfileやdocker-compose.yml、.env等を書き換える必要があるため中々の手間であることに気がつきました。
+※初心者ゆえに、誤った情報が含まれている可能性もありますが、ご了承ください。もし間違いに気づかれた方は、ぜひコメントで教えて...]]></description><link>https://zenn.dev/fire_arlo/articles/b6d62474675124</link><guid isPermaLink="true">https://zenn.dev/fire_arlo/articles/b6d62474675124</guid><pubDate>Tue, 23 Jul 2024 23:46:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--VI_5Aub0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%25E3%2582%2592%25E4%25BD%25BF%25E7%2594%25A8%25E3%2581%2597%25E3%2581%259FLaravel%25E3%2581%25AE%25E9%2596%258B%25E7%2599%25BA%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%25E6%2589%258B%25E9%25A0%2586%25E3%2580%2590Laravel%2520Sail%25E3%2581%25AA%25E3%2581%2597%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2582%25E3%2583%25BC%25E3%2582%258D%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA5ZDhlOThkNTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>あーろ</dc:creator></item><item><title><![CDATA[WindowsのDockerが異常に重かったので原因を調べて改善した話]]></title><description><![CDATA[以前開発中にDockerの動作が重すぎて話にならなかったので開発環境を見直した時の備忘録です。
+
+ 参考記事
+https://qiita.com/minato-naka/items/84508472c04f628e576e
+基本的にはこの記事に書いてあることが全てです。
+
+ 重かった原因
+まず、参考記事にも書いてある通り、WindowsでのDockerの使用にはHyper-VではなくWSLを使った方がいいことは知っていました。僕の環境で問題だったのはDockerに使用していたディストリビューションでした。
+wsl -lでインストールされているディストリビューションを確認すると、docke...]]></description><link>https://zenn.dev/togo_asai/articles/b66be89ab58666</link><guid isPermaLink="true">https://zenn.dev/togo_asai/articles/b66be89ab58666</guid><pubDate>Tue, 23 Jul 2024 23:15:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1arJ9vWn--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Windows%25E3%2581%25AEDocker%25E3%2581%258C%25E7%2595%25B0%25E5%25B8%25B8%25E3%2581%25AB%25E9%2587%258D%25E3%2581%258B%25E3%2581%25A3%25E3%2581%259F%25E3%2581%25AE%25E3%2581%25A7%25E5%258E%259F%25E5%259B%25A0%25E3%2582%2592%25E8%25AA%25BF%25E3%2581%25B9%25E3%2581%25A6%25E6%2594%25B9%25E5%2596%2584%25E3%2581%2597%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Togo%2528%2540asaitogo%2529%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTFNTbm55LXhXOWJrR1ZJUWd3cnp6RXk5R3pPd3d6bWtRT0pNby1KbzNMUHl2MlpRPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Togo(@asaitogo)</dc:creator></item><item><title><![CDATA[コンテナ上でgo buildをすると error obtaining VCS status: exit status 128 が出る問題]]></title><description><![CDATA[
+ 概要
+Dockerコンテナ上でgo buildをおこなったところ、以下のようなエラーが出た。
+web-1       | error obtaining VCS status: exit status 128
+web-1       | 	Use -buildvcs=false to disable VCS stamping.
+web-1       | failed to build, error: exit status 128
+このエラーを解消する方法を探す。
+
+ 原因究明
+
+ そもそもVCSとは
+VCSはVersion Control Systemの略で、バージョン管理システ...]]></description><link>https://zenn.dev/zurukumo/articles/064df0878c73b0</link><guid isPermaLink="true">https://zenn.dev/zurukumo/articles/064df0878c73b0</guid><pubDate>Tue, 23 Jul 2024 23:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--FcfUy09k--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2586%25E3%2583%258A%25E4%25B8%258A%25E3%2581%25A7go%2520build%25E3%2582%2592%25E3%2581%2599%25E3%2582%258B%25E3%2581%25A8%2520error%2520obtaining%2520VCS%2520status%253A%2520exit%2520statu...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A4%25E3%2582%258B%25E3%2581%258F%25E3%2582%2582%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhkMjQyOWEzZjguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>つるくも</dc:creator></item><item><title><![CDATA[ノートブックIDEアンチがKaggleで初submitするまで]]></title><description><![CDATA[
+ 概要
+KaggleではKaggle Notebookとかいうふざけた開発環境がデフォルトになっています。私はノートブック形開発環境アンチです。ここではどうにかノートブックの嫌なところを回避してコンペにコード提出までやろうとした方法を紹介します。ただ、結局はノートブックやKaggleカーネルの仕様に付き合っている部分が多いです。やったこととしては以下です。
+
+Pythonスクリプトをローカルのエディタで作る
+
+複数モジュールを用いる(自作モジュールのimportをする)場合はkaggle側の設定が必要になる
+
+
+動作確認をKaggleのDockerイメージで行う
+
+筆者環境がM2 Ma...]]></description><link>https://zenn.dev/montagna_fiume/articles/bb8c7b3b500bc9</link><guid isPermaLink="true">https://zenn.dev/montagna_fiume/articles/bb8c7b3b500bc9</guid><pubDate>Tue, 23 Jul 2024 17:45:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Y9RBRyQQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%258E%25E3%2583%25BC%25E3%2583%2588%25E3%2583%2596%25E3%2583%2583%25E3%2582%25AFIDE%25E3%2582%25A2%25E3%2583%25B3%25E3%2583%2581%25E3%2581%258CKaggle%25E3%2581%25A7%25E5%2588%259Dsubmit%25E3%2581%2599%25E3%2582%258B%25E3%2581%25BE%25E3%2581%25A7%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2582%25E3%2581%258D%25E3%2582%2585%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNlNzk3OTliN2QuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>もきゅ</dc:creator></item><item><title><![CDATA[UbuntuにDockerをインストールする方法]]></title><description><![CDATA[
+ 概要
+UbuntuにDockerをインストールする方法。
+https://docs.docker.com/engine/install/ubuntu/
+上記の内容をほぼコピペしただけの記事だが、自分のよく行う作業が自分のzennにまとまっていると便利なので。
+
+ 手順
+
+ 1. 古いバージョンのDockerを削除する(必要なら)
+もし古いバージョンのDockerがインストールされている場合は、以下のコマンドで削除する。
+for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker cont...]]></description><link>https://zenn.dev/zurukumo/articles/037f5c49de3ca1</link><guid isPermaLink="true">https://zenn.dev/zurukumo/articles/037f5c49de3ca1</guid><pubDate>Tue, 23 Jul 2024 17:35:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--PfWlxeAZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ubuntu%25E3%2581%25ABDocker%25E3%2582%2592%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A4%25E3%2582%258B%25E3%2581%258F%25E3%2582%2582%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhkMjQyOWEzZjguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>つるくも</dc:creator></item><item><title><![CDATA[DynamoDBのLocal環境を整える。理解する。]]></title><description><![CDATA[
+ ゴールの絵
+
+
+LocalでDynamoDBを動かす環境を整えます。GUI環境も合わせて作ります。
+Localで動かしてみます。GUI、CLI、Pythonの3種類で。
+
+
+ docker-compose.yaml
+
+docker-compose.yaml
+services:
+  # DynamoDB Local is a client-side database that supports the complete DynamoDB API, but doesn't manipulate any tables or data in DynamoDB itself.
+  dynamo...]]></description><link>https://zenn.dev/icck/articles/5707ef0dbff544</link><guid isPermaLink="true">https://zenn.dev/icck/articles/5707ef0dbff544</guid><pubDate>Tue, 23 Jul 2024 14:33:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--VP9F7_aL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:DynamoDB%25E3%2581%25AELocal%25E7%2592%25B0%25E5%25A2%2583%25E3%2582%2592%25E6%2595%25B4%25E3%2581%2588%25E3%2582%258B%25E3%2580%2582%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2599%25E3%2582%258B%25E3%2580%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:icck%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRmYTRiZDQ3YzcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>icck</dc:creator></item><item><title><![CDATA[コンテナ自作メモ]]></title><description><![CDATA[
+ コンテナ技術入門
+以下をやってみたメモ
+https://eh-career.com/engineerhub/entry/2019/02/05/103000/?PK=492D00
+
+ コマンド実行
+$ CMD="/bin/sh"
+$ cgexec -g cpu,memory:$UUID \
+  unshare -muinpfr /bin/sh -c "
+    mount -t proc proc $ROOTFS/proc &amp;&amp;
+    touch $ROOTFS$(tty); mount --bind $(tty) $ROOTFS$(tty) &amp;&amp;
+ ...]]></description><link>https://zenn.dev/regmarmcem/articles/3820dfe35d341a</link><guid isPermaLink="true">https://zenn.dev/regmarmcem/articles/3820dfe35d341a</guid><pubDate>Tue, 23 Jul 2024 13:44:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--kHS8YA8s--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2586%25E3%2583%258A%25E8%2587%25AA%25E4%25BD%259C%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:regmarmcem%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFhZWJjN2Y0ZDUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>regmarmcem</dc:creator></item><item><title><![CDATA[Docker Desktop → Orbstack移行時のHasura接続問題に立ち向かう]]></title><description><![CDATA[
+ 対象読者
+
+Docker Desktop を使用していて、Orbstackに乗り換えを検討している方
+HasuraやGraphQL環境を構築している方
+
+
+ 要約
+問題
+Docker DesktopからOrbStackへの移行後、HasuraからバックエンドサービスへのAction呼び出しが失敗。
+原因
+Hasuraの環境変数がDocker Desktop特有の設定（gateway.docker.internal）を使用していた。
+解決策
+docker-compose.ymlファイル内のHasura環境変数を環境非依存の設定（http://web:1324）に変更。
+
+ 1. 問題の...]]></description><link>https://zenn.dev/taizo_pro/articles/2d928128f6cf8b</link><guid isPermaLink="true">https://zenn.dev/taizo_pro/articles/2d928128f6cf8b</guid><pubDate>Tue, 23 Jul 2024 10:07:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Uc4G1yVS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%2520Desktop%2520%25E2%2586%2592%2520Orbstack%25E7%25A7%25BB%25E8%25A1%258C%25E6%2599%2582%25E3%2581%25AEHasura%25E6%258E%25A5%25E7%25B6%259A%25E5%2595%258F%25E9%25A1%258C%25E3%2581%25AB%25E7%25AB%258B%25E3%2581%25A1%25E5%2590%2591%25E3%2581%258B%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:taizo-%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E5MDI1ZmVkYTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>taizo-</dc:creator></item><item><title><![CDATA[【Laravel10】 Inertia + React で「追加・変更・削除・閲覧」機能をつくる（その6）]]></title><description><![CDATA[
+ 概要
+【Laravel10】 Inertia + React で「追加・変更・削除・閲覧」機能をつくる（その5）の続編です。
+現在、削除以外の実装が完了してる状態です。今回はdeleteアクションを実装して、完了とします。
+
+ バージョン情報
+その1から同じなので、割愛
+
+ PostController::deleteを実装
+
+ コントローラ側
+
+ app/UseCases/Post/DeleteAction.phpを編集
+
+app/UseCases/Post/DeleteAction.php
+&lt;?php
+
+namespace App\UseCases\Post;
+
+use A...]]></description><link>https://zenn.dev/dragonarrow/articles/4b583956df18d8</link><guid isPermaLink="true">https://zenn.dev/dragonarrow/articles/4b583956df18d8</guid><pubDate>Tue, 23 Jul 2024 03:44:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0VOQ9vn7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Laravel10%25E3%2580%2591%2520Inertia%2520%252B%2520React%2520%25E3%2581%25A7%25E3%2580%258C%25E8%25BF%25BD%25E5%258A%25A0%25E3%2583%25BB%25E5%25A4%2589%25E6%259B%25B4%25E3%2583%25BB%25E5%2589%258A%25E9%2599%25A4%25E3%2583%25BB%25E9%2596%25B2%25E8%25A6%25A7%25E3%2580%258D%25E6%25A9%259F%25E8%2583%25BD%25E3%2582%2592%25E3%2581%25A4%25E3%2581%258F%25E3%2582%258B%25EF%25BC%2588%25E3%2581%259D%25E3%2581%25AE6%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:napojin%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUl0YnZtbFhOc2dJVFkzb0FRVnF3X2JlZXBxVDNIWE1VWWxJSy1qQjVvblg9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>napojin</dc:creator></item><item><title><![CDATA[【Laravel10】 Inertia + React で「追加・変更・削除・閲覧」機能をつくる（その5）]]></title><description><![CDATA[
+ 概要
+【Laravel10】 Inertia + React で「追加・変更・削除・閲覧」機能をつくる（その4）の続編です。
+現在、index,new,store,showアクションの実装が完了してる状態です。今回はedit,updateアクションを実装します。
+
+ バージョン情報
+その1から同じなので、割愛
+
+ PostController::editを実装
+
+ コントローラ側
+
+ app/Http/Controllers/PostController.phpを編集
+
+PostController.php
+&lt;?php
+
+namespace App\Http\Controlle...]]></description><link>https://zenn.dev/dragonarrow/articles/3bad998c69b4f7</link><guid isPermaLink="true">https://zenn.dev/dragonarrow/articles/3bad998c69b4f7</guid><pubDate>Tue, 23 Jul 2024 03:43:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--yq1xE8_e--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Laravel10%25E3%2580%2591%2520Inertia%2520%252B%2520React%2520%25E3%2581%25A7%25E3%2580%258C%25E8%25BF%25BD%25E5%258A%25A0%25E3%2583%25BB%25E5%25A4%2589%25E6%259B%25B4%25E3%2583%25BB%25E5%2589%258A%25E9%2599%25A4%25E3%2583%25BB%25E9%2596%25B2%25E8%25A6%25A7%25E3%2580%258D%25E6%25A9%259F%25E8%2583%25BD%25E3%2582%2592%25E3%2581%25A4%25E3%2581%258F%25E3%2582%258B%25EF%25BC%2588%25E3%2581%259D%25E3%2581%25AE5%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:napojin%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUl0YnZtbFhOc2dJVFkzb0FRVnF3X2JlZXBxVDNIWE1VWWxJSy1qQjVvblg9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>napojin</dc:creator></item><item><title><![CDATA[【Laravel10】 Inertia + React で「追加・変更・削除・閲覧」機能をつくる（その4）]]></title><description><![CDATA[
+ 概要
+【Laravel10】 Inertia + React で「追加・変更・削除・閲覧」機能をつくる（その3）の続編です。
+現在、indexとnew,storeアクションの実装が完了してる状態です。今回はcreateアクションを実装します。
+
+ バージョン情報
+その1と同じなので、割愛
+
+ PostController::showを実装
+
+ コントローラ側
+
+ app/Http/Requests/Post/FindRequest.phpを作成
+php artisan make:request Post/FindRequest
+
+app/Http/Requests/Post/Find...]]></description><link>https://zenn.dev/dragonarrow/articles/7e6ce4bc7e042e</link><guid isPermaLink="true">https://zenn.dev/dragonarrow/articles/7e6ce4bc7e042e</guid><pubDate>Tue, 23 Jul 2024 03:43:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fbkk5cuI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Laravel10%25E3%2580%2591%2520Inertia%2520%252B%2520React%2520%25E3%2581%25A7%25E3%2580%258C%25E8%25BF%25BD%25E5%258A%25A0%25E3%2583%25BB%25E5%25A4%2589%25E6%259B%25B4%25E3%2583%25BB%25E5%2589%258A%25E9%2599%25A4%25E3%2583%25BB%25E9%2596%25B2%25E8%25A6%25A7%25E3%2580%258D%25E6%25A9%259F%25E8%2583%25BD%25E3%2582%2592%25E3%2581%25A4%25E3%2581%258F%25E3%2582%258B%25EF%25BC%2588%25E3%2581%259D%25E3%2581%25AE4%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:napojin%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUl0YnZtbFhOc2dJVFkzb0FRVnF3X2JlZXBxVDNIWE1VWWxJSy1qQjVvblg9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>napojin</dc:creator></item><item><title><![CDATA[【Laravel10】 Inertia + React で「追加・変更・削除・閲覧」機能をつくる（その3）]]></title><description><![CDATA[
+ 概要
+【Laravel10】 Inertia + React で「追加・変更・削除・閲覧」機能をつくる（その2）の続編です。
+現在、indexとnewアクションの実装が完了してる状態です。今回はcreateアクションを実装します。
+
+ バージョン情報
+その2から同じなので、割愛
+
+ PostController::storeを実装
+
+ コントローラ側
+
+ app/Http/Requests/Post/StoreRequest.phpを作成
+
+下記コマンドでRequestファイルを生成。
+
+php artisan make:request Post/StoreRequest
+以下のよう...]]></description><link>https://zenn.dev/dragonarrow/articles/657f40a5aca153</link><guid isPermaLink="true">https://zenn.dev/dragonarrow/articles/657f40a5aca153</guid><pubDate>Tue, 23 Jul 2024 03:42:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--KEo1QDmr--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Laravel10%25E3%2580%2591%2520Inertia%2520%252B%2520React%2520%25E3%2581%25A7%25E3%2580%258C%25E8%25BF%25BD%25E5%258A%25A0%25E3%2583%25BB%25E5%25A4%2589%25E6%259B%25B4%25E3%2583%25BB%25E5%2589%258A%25E9%2599%25A4%25E3%2583%25BB%25E9%2596%25B2%25E8%25A6%25A7%25E3%2580%258D%25E6%25A9%259F%25E8%2583%25BD%25E3%2582%2592%25E3%2581%25A4%25E3%2581%258F%25E3%2582%258B%25EF%25BC%2588%25E3%2581%259D%25E3%2581%25AE3%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:napojin%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUl0YnZtbFhOc2dJVFkzb0FRVnF3X2JlZXBxVDNIWE1VWWxJSy1qQjVvblg9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>napojin</dc:creator></item><item><title><![CDATA[【Laravel10】 Inertia + React で「追加・変更・削除・閲覧」機能をつくる（その1）]]></title><description><![CDATA[
+ 概要
+以前、Inertiaを使ったLaravel 10 + Reactのベストチュートリアルで、Laravel 10を用いて、Inertia + Reactの動作環境とログイン機能をつくってみましたが、今回もその流れで基本的な「追加・変更・削除・閲覧」部分（いわゆる CRUD）をつくってみることにしました。
+CRUDを理解すれば、よくある基本的な機能の開発は問題なく行うことができるようになるので、教材として最適です。
+
+ バージョン情報
+
+Laravel 10.0.0
+手元の作業PC: Apple M1 Pro
+Docker: 20.10.21
+
+イメージ: php:8.1-apac...]]></description><link>https://zenn.dev/dragonarrow/articles/7cd8915a68f57b</link><guid isPermaLink="true">https://zenn.dev/dragonarrow/articles/7cd8915a68f57b</guid><pubDate>Tue, 23 Jul 2024 03:41:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--VdfoJbJV--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Laravel10%25E3%2580%2591%2520Inertia%2520%252B%2520React%2520%25E3%2581%25A7%25E3%2580%258C%25E8%25BF%25BD%25E5%258A%25A0%25E3%2583%25BB%25E5%25A4%2589%25E6%259B%25B4%25E3%2583%25BB%25E5%2589%258A%25E9%2599%25A4%25E3%2583%25BB%25E9%2596%25B2%25E8%25A6%25A7%25E3%2580%258D%25E6%25A9%259F%25E8%2583%25BD%25E3%2582%2592%25E3%2581%25A4%25E3%2581%258F%25E3%2582%258B%25EF%25BC%2588%25E3%2581%259D%25E3%2581%25AE1%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:napojin%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUl0YnZtbFhOc2dJVFkzb0FRVnF3X2JlZXBxVDNIWE1VWWxJSy1qQjVvblg9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>napojin</dc:creator></item><item><title><![CDATA[ローカルの PostgreSQL コンテナでスロークエリを発見する方法]]></title><description><![CDATA[こんにちは。わいけいです。
+今回はローカル環境で DB に対して発行されているスロークエリを発見する手順について書いていきたいと思います。
+アプリケーションが育ってくると、サーバーのパフォーマンスのボトルネックになりやすいのが DB です。
+クラウドが浸透した現在では、アプリケーションサーバーの方はお金さえ払えば比較的自由に（水平・垂直に）スケーリングできます。
+これに対して、RDB の方は相対的にスケーリングが難しい傾向にあります。（クラウドのパワーによって金でゴリ押し可能な面が増えてきてはいますが）
+そういった背景から、極力非効率な SQL は投げたくないものです。
+とはいえ、現実的...]]></description><link>https://zenn.dev/spiralai/articles/65db8a78ea31d4</link><guid isPermaLink="true">https://zenn.dev/spiralai/articles/65db8a78ea31d4</guid><pubDate>Tue, 23 Jul 2024 02:41:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--enpA76vL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25AB%25E3%2583%25AB%25E3%2581%25AE%2520PostgreSQL%2520%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2586%25E3%2583%258A%25E3%2581%25A7%25E3%2582%25B9%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25AF%25E3%2582%25A8%25E3%2583%25AA%25E3%2582%2592%25E7%2599%25BA%25E8%25A6%258B%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2582%258F%25E3%2581%2584%25E3%2581%2591%25E3%2581%2584%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJhNDE5NGY4ZmYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:SpiralAI%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2YwZDg4ZGFlNWYuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>わいけい</dc:creator></item><item><title><![CDATA[BazelからCloud Native BuildpacksへDockerイメージのビルドを移行した話]]></title><description><![CDATA[
+ 現在のリポジトリの構成
+こんにちは、バックエンドエンジニアのSです。
+弊社ではGoで実装されたアプリケーションのDockerイメージをBazelにてビルドしていましたが、この度、Cloud Native Buildpacksへ移行しました。その経緯と移行に辺り工夫した点をご紹介いたします。
+
+ Bazelの概要
+弊社ではrules_dockerを使用することにより、Dockerイメージをアプリケーションのエンドポイント毎にビルドしていました。Bazelのビルド設定となるBUILD.bazelファイルに関してはGazelleにより、自動生成します。エンドポイント毎に複数のDockerf...]]></description><link>https://zenn.dev/sprocket/articles/cbcbb5ffd3c6a0</link><guid isPermaLink="true">https://zenn.dev/sprocket/articles/cbcbb5ffd3c6a0</guid><pubDate>Tue, 23 Jul 2024 00:22:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--XwboJtB_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Bazel%25E3%2581%258B%25E3%2582%2589Cloud%2520Native%2520Buildpacks%25E3%2581%25B8Docker%25E3%2582%25A4%25E3%2583%25A1%25E3%2583%25BC%25E3%2582%25B8%25E3%2581%25AE%25E3%2583%2593%25E3%2583%25AB%25E3%2583%2589%25E3%2582%2592%25E7%25A7%25BB%25E8%25A1%258C%25E3%2581%2597%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Sprocket%2520Zenn%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA1ZWQxMjFmN2UuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Sprocket%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzMyY2UxY2ZlNWYuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Sprocket Zenn</dc:creator></item><item><title><![CDATA[最強Wordpress環境 (Docker, PHP8, Gulp, apache, MariaDB, SCSS)]]></title><description><![CDATA[
+ 開発環境（使用ツールやスキル）
+このプロジェクトは、WordPressのカスタムテーマとプラグインを開発するための環境を構築するものです。主に以下のツールとスキルを使用します。
+
+Docker
+Docker Compose
+Node.js
+Gulp
+BrowserSync
+WordPress
+PHP
+MySQL (MariaDB)
+SCSS
+TypeScript
+Rollup
+
+
+ 開発環境構築の目的
+開発環境を統一し、異なる環境での動作を保証するためにDockerを利用して一貫性のある環境を提供します。これにより、開発チーム内での環境差異による問題を最小限に抑えます。
+
+ 1. な...]]></description><link>https://zenn.dev/maki_1003/articles/f1035a817d7a22</link><guid isPermaLink="true">https://zenn.dev/maki_1003/articles/f1035a817d7a22</guid><pubDate>Mon, 22 Jul 2024 16:38:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--b1mRW1vz--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%259C%2580%25E5%25BC%25B7Wordpress%25E7%2592%25B0%25E5%25A2%2583%2520%2528Docker%252C%2520PHP8%252C%2520Gulp%252C%2520apache%252C%2520MariaDB%252C%2520SCSS%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Maki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhNjNlNzM3ODcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Maki</dc:creator></item><item><title><![CDATA[Electronの開発用Dockerコンテナ作成]]></title><description><![CDATA[
+ 環境
+OS: Ubuntu 22.04.4 LTS
+コンテナベースイメージ： Ubuntu:22.04
+Docker: 27.0.3
+docker-compose: v2.10.0
+GPU:
++---------------------------------------------------------------------------------------+
+| NVIDIA-SMI 545.29.06              Driver Version: 545.29.06    CUDA Version: 12.3     |
+|------------------...]]></description><link>https://zenn.dev/masakitanaka/articles/c926e2bcf3c037</link><guid isPermaLink="true">https://zenn.dev/masakitanaka/articles/c926e2bcf3c037</guid><pubDate>Mon, 22 Jul 2024 11:15:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fxBAX4pj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Electron%25E3%2581%25AE%25E9%2596%258B%25E7%2599%25BA%25E7%2594%25A8Docker%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2586%25E3%2583%258A%25E4%25BD%259C%25E6%2588%2590%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mt%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI0OWYyOGMyMWQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mt</dc:creator></item><item><title><![CDATA[Dockerで動くNestJSのbuildをSWCを使って速くする]]></title><description><![CDATA[
+ 概要
+
+DockerでNestJSを動かしています。ホットリロードが重いので、SWCを導入してbuildを速くしたいと思います。
+
+
+ 設定内容
+
+基本的にNestJS公式(下記参考に記載)と同じやり方です。
+
+SWCのインストールは公式を参照してください。
+
+
+各種ファイル設定は以下です。
+
+
+ package.json
+"scripts": {
+    "build": "npx swc src -d dist",
+    "start:dev": "nest start -b swc -w",
+}
+
+
+ nest-cli.json
+{
+  "$schema": "https:/...]]></description><link>https://zenn.dev/emily_mz/articles/42115ccf9235b3</link><guid isPermaLink="true">https://zenn.dev/emily_mz/articles/42115ccf9235b3</guid><pubDate>Mon, 22 Jul 2024 02:34:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--puBgBb3X--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%25E3%2581%25A7%25E5%258B%2595%25E3%2581%258FNestJS%25E3%2581%25AEbuild%25E3%2582%2592SWC%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E9%2580%259F%25E3%2581%258F%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25B5%25E3%2582%258B%25E3%2581%2588%25E3%2582%258B%25E3%2581%25BA%25E3%2582%2593%25E3%2581%258E%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQyMzY0OTg2Y2IuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ふるえるぺんぎん</dc:creator></item><item><title><![CDATA[Docker触ってみた]]></title><description><![CDATA[https://qiita.com/etaroid/items/b1024c7d200a75b992fc
+この記事良さそうなのでこの記事を元に学習していきたいと思います。
+
+ Dockerとは？
+コンテナ型仮想化技術
+仮想化？
+PCやサーバといったマシンにインストールされているOS(ホストOS)の上に、別のマシンを仮想的に立ち上げる事
+簡単に言うと「パソコンの中に仮想パソコンを起動する」のが仮想化です。
+コンテナ型仮想化。
+従来のホスト型仮想化とは異なり、ゲストOSを起動せずにホストOSの上に動作しているDockerエンジンからコンデナと呼ばれるミドルウェアの環境を構築された実行環境を作...]]></description><link>https://zenn.dev/yukiyuki1126/articles/04a15bd6fa3c5d</link><guid isPermaLink="true">https://zenn.dev/yukiyuki1126/articles/04a15bd6fa3c5d</guid><pubDate>Sun, 21 Jul 2024 12:12:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--iKm2oL7---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%25E8%25A7%25A6%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yukiyuki1126%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFUWEFKeFhfcjVVM3JqUjJ0WHRwTndZM20wM2J0ejdCSXc0dGcxMUFOcXc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yukiyuki1126</dc:creator></item><item><title><![CDATA[docker composeの`version` is obsolete]]></title><description><![CDATA[
+ まとめ
+
+docker composeのversionがv2.25.0以降から出始めた様子
+
+https://github.com/docker/compose/issues/11628
+
+
+docker composeのversionの確認の仕方
+
+docker compose version
+
+
+
+obsolete ってなに
+
+「廃れた」とか「陳腐化した」とか、もう使われなくなったような意
+ひとえに「廃止」とだけ認識しないほうがよさそう
+https://eow.alc.co.jp/search?q=obsolete
+発音記号は「ɑ̀bsəlíːt」
+
+
+元々19.03.0から不...]]></description><link>https://zenn.dev/jksan/articles/docker_compose-version_is_obsolate</link><guid isPermaLink="true">https://zenn.dev/jksan/articles/docker_compose-version_is_obsolate</guid><pubDate>Sun, 21 Jul 2024 01:58:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hfkMljwd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:docker%2520compose%25E3%2581%25AE%2560version%2560%2520is%2520obsolete%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:jksan%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFUWEFKd0xVQWlydjJhMzlyQVNFN1AzaXdydlB1aG9SSXA2a3Njem1xUVA9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>jksan</dc:creator></item></channel></rss>

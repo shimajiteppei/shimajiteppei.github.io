@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「JavaScript」のフィード]]></title><description><![CDATA[Zennのトピック「JavaScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/javascript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/64acd76870.png</url><title>Zennの「JavaScript」のフィード</title><link>https://zenn.dev/topics/javascript</link></image><generator>zenn.dev</generator><lastBuildDate>Wed, 24 Jul 2024 10:28:51 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/javascript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[JavaScriptでinputフォームに最大３桁の自然数のみ受け付ける]]></title><description><![CDATA[最大３桁の自然数のみを受け付けるinputフォームの実装方法をメモ。
+
+ html
+&lt;input
+  type="text"
+  inputmode="numeric"
+  onchange="value = only3Numbers(value)"
+/&gt;
+
+ JavaScript
+//全角数字を半角数字に変換-&gt;
+//数字以外を削除-&gt;
+//先頭の"0"を削除-&gt;
+//初めの３文字だけ切り取る。
+const only3Numbers = (n) =&gt; {
+  return n
+    .replace(/[０-９]/g, (s) =&gt; Stri...]]></description><link>https://zenn.dev/rosataku/articles/dda61c6b0d7a75</link><guid isPermaLink="true">https://zenn.dev/rosataku/articles/dda61c6b0d7a75</guid><pubDate>Wed, 24 Jul 2024 07:10:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ywRH1XAq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25E3%2581%25A7input%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25BC%25E3%2583%25A0%25E3%2581%25AB%25E6%259C%2580%25E5%25A4%25A7%25EF%25BC%2593%25E6%25A1%2581%25E3%2581%25AE%25E8%2587%25AA%25E7%2584%25B6%25E6%2595%25B0%25E3%2581%25AE%25E3%2581%25BF%25E5%258F%2597%25E3%2581%2591%25E4%25BB%2598%25E3%2581%2591%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%258D%25E3%2581%2595%25E3%2581%259F%25E3%2581%258F%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc3YmQwOTVhZDkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ろさたく</dc:creator></item><item><title><![CDATA[reactとnext.jsで実装するSummernoteエディタ]]></title><description><![CDATA[下記コードをコピペすれば動作します（多分。。）
+
+app/sample/page.jsx
+"use client";
+import React, { useEffect, useRef, useState } from 'react';
+import { useRouter } from 'next/navigation';
+
+
+const MyComponent = () =&gt; {
+  // Summernoteエディタへの参照
+  const editorRef = useRef(null);
+
+  // テキストエリアの内容とボタンの有効/無効状態を管理するための状態
+  c...]]></description><link>https://zenn.dev/dsr/articles/c675a933132ae2</link><guid isPermaLink="true">https://zenn.dev/dsr/articles/c675a933132ae2</guid><pubDate>Wed, 24 Jul 2024 03:13:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--17e3xLV6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:react%25E3%2581%25A8next.js%25E3%2581%25A7%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2599%25E3%2582%258BSummernote%25E3%2582%25A8%25E3%2583%2587%25E3%2582%25A3%25E3%2582%25BF%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:dsr%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNhNmI4ZjQwMjkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>dsr</dc:creator></item><item><title><![CDATA[表示中の画面をワンクリックでPDFダウンロードする]]></title><description><![CDATA[こんにちは！株式会社ココナラのプロダクト開発部フロントエンド開発グループ所属の飯塚です。
+ココナラでは、一定の条件を満たすと「納品書」等の帳票がダウンロードできます。
+各帳票は、Webサイト上で確認したうえでワンクリックでPDFダウンロードできるようになっています。
+以下は実際の納品書画面になります。
+
+今回は、その ワンクリックでPDFダウンロード の実装方法についてご紹介します！
+
+ 要件
+実装にあたり、要件は以下の通りでした。
+
+ブラウザの「印刷」からPDFダウンロードすることは可能だが、手間なのでワンクリックでPDFダウンロードしたい
+ヘッダーやフッターなど、帳票に関係ない要素は...]]></description><link>https://zenn.dev/coconala/articles/945f50223c1a20</link><guid isPermaLink="true">https://zenn.dev/coconala/articles/945f50223c1a20</guid><pubDate>Wed, 24 Jul 2024 01:37:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--QTpISikI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%25A1%25A8%25E7%25A4%25BA%25E4%25B8%25AD%25E3%2581%25AE%25E7%2594%25BB%25E9%259D%25A2%25E3%2582%2592%25E3%2583%25AF%25E3%2583%25B3%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2583%25E3%2582%25AF%25E3%2581%25A7PDF%25E3%2583%2580%25E3%2582%25A6%25E3%2583%25B3%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2589%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2582%25B3%25E3%2582%25B3%25E3%2583%258A%25E3%2583%25A9%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRiNTMxNzlmY2QuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>株式会社ココナラ</dc:creator></item><item><title><![CDATA[バックエンドエンジニアがフロントエンド技術をキャッチアップしてみた]]></title><description><![CDATA[
+ 目標
+
+バックエンドとフロントエンドの連携を実装できるように、フロントエンドの技術を勉強する。
+
+
+ 勉強方針
+
+細かいフロントエンドの技術を勉強するというより、エッセンスとなる概念・考え方を勉強する。
+以下の順番で勉強する
+
+JavaScriptの基本
+モダンJavaScriptの基本
+Reactの基本
+
+
+
+
+ Javascriptの基本
+以下の教材で勉強
+はじめてのJavaScriptプログラミング入門
+
+ Javascriptの基本文法など
+
+ 基本文法
+基本文法として以下を学習。
+概ねバックエンド言語と基本文法と同じなので、時間をかけずにさっと学習
+
+データ型、
+演算子
+条...]]></description><link>https://zenn.dev/rabbit_penguin0/articles/b46ffffb652e65</link><guid isPermaLink="true">https://zenn.dev/rabbit_penguin0/articles/b46ffffb652e65</guid><pubDate>Wed, 24 Jul 2024 01:19:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--zlmZ3TmF--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2590%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2589%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%25E3%2581%258C%25E3%2583%2595%25E3%2583%25AD%25E3%2583%25B3%25E3%2583%2588%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2589%25E6%258A%2580%25E8%25A1%2593%25E3%2582%2592%25E3%2582%25AD%25E3%2583%25A3%25E3%2583%2583%25E3%2583%2581%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%259A%25E3%2583%25B3%25E3%2582%25AE%25E3%2583%25B3%2520%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk3NjJhYjQ1YTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ペンギン🐧</dc:creator></item><item><title><![CDATA[Jotai v2.9.1をリリースしました]]></title><description><![CDATA[その前にv2.9.0をリリースしていたわけですが、そのバージョンでは内部のstore.tsというコードを刷新しました。何週間かそれ以上かけて書き直したのですが、かなり大変でした。Jotaiの複雑さはほぼこの1ファイルに収まっていて、逆に周辺のコードは比較的簡単です。store.tsを書き直そうと思った理由は、書き直す前のコードはJotai v0時代の設計で、無駄に複雑な部分があったからです。これまでstore.tsはほぼ私一人で書いてきましたが、将来的にはみんなでいじれるようになるべきと思い、書き直しを決断しました。結果、なんとか動くものはできました。が、当初期待していたほどシンプルには...]]></description><link>https://zenn.dev/dai_shi/articles/cf1af600e7bba5</link><guid isPermaLink="true">https://zenn.dev/dai_shi/articles/cf1af600e7bba5</guid><pubDate>Wed, 24 Jul 2024 00:07:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--EybAb6Zb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Jotai%2520v2.9.1%25E3%2582%2592%25E3%2583%25AA%25E3%2583%25AA%25E3%2583%25BC%25E3%2582%25B9%25E3%2581%2597%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:daishi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzcwZGNhM2E2Y2IuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>daishi</dc:creator></item><item><title><![CDATA[clusterイージースクリプト（ベータ用）関数一覧]]></title><description><![CDATA[まだ「clusterイージースクリプト」のインストールが済んでいない人は先に済ませてくださいね。
+こちらの記事からどうぞ。
+ベータ用の追加パッケージはこちらの記事からどうぞ。
+
+ ベータ用の関数（_ベータ基本イージー.js）
+これはScriptableItemにつけるものです。
+なお、一部はPlayerScriptに_pl基本イージー.jsをつけていないと機能しません。サンプルではその辺りの設定が済んでいるので、それを改変していくといいでしょう。
+
+ 何かが起きたときの関数
+
+
+ee.collide(obj): オブジェクトが衝突したときに実行される関数。衝突相手に応じて処理を行います。...]]></description><link>https://zenn.dev/vins/articles/25ba9397b090c7</link><guid isPermaLink="true">https://zenn.dev/vins/articles/25ba9397b090c7</guid><pubDate>Tue, 23 Jul 2024 22:46:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--87SC0htZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:cluster%25E3%2582%25A4%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%25BC%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2583%2588%25EF%25BC%2588%25E3%2583%2599%25E3%2583%25BC%25E3%2582%25BF%25E7%2594%25A8%25EF%25BC%2589%25E9%2596%25A2%25E6%2595%25B0%25E4%25B8%2580%25E8%25A6%25A7%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:vins%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2c0ZERlaWVTamtQcDFmTDYwS1FhTlpYMkpMeTJOOGtfeWRha1F6PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>vins</dc:creator></item><item><title><![CDATA[clusterイージースクリプト・ベータ用部分0.20]]></title><description><![CDATA[まだ「clusterイージースクリプト」のインストールが済んでいない人は先に済ませてくださいね。
+こちらの記事からどうぞ。
+
+ ベータ用部分のインストール
+https://vins-jp.sakura.ne.jp/pack/020_beta_easyscript.unitypackage
+unitypackageをまたUnityのプロジェクトの適当なとこにドラッグアンドドロップし、「インポート」してください。
+あくまで　「clusterイージースクリプト」にプラスとして追加するものなので、先にイージースクリプトをインストールしておいてください。
+
+ ベータ機能などをONにする
+
+まず「C...]]></description><link>https://zenn.dev/vins/articles/a6fdde0c57148b</link><guid isPermaLink="true">https://zenn.dev/vins/articles/a6fdde0c57148b</guid><pubDate>Tue, 23 Jul 2024 22:24:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--gccKfBBV--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:cluster%25E3%2582%25A4%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%25BC%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2583%2588%25E3%2583%25BB%25E3%2583%2599%25E3%2583%25BC%25E3%2582%25BF%25E7%2594%25A8%25E9%2583%25A8%25E5%2588%25860.20%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:vins%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2c0ZERlaWVTamtQcDFmTDYwS1FhTlpYMkpMeTJOOGtfeWRha1F6PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>vins</dc:creator></item><item><title><![CDATA[CanvasRenderingContext2D関連メソッド一覧]]></title><description><![CDATA[『RPGツクールMZ』関連記事 目次
+
+ はじめに
+『RPGツクールMZ』のJavaScriptで図形を描くという記事で Canvas API について調べたのですが、長くなりすぎたので、メソッド・プロパティを表にしたところを別記事にしました。
+なので、このページは純粋に JavaScript(というか Web API)の情報で『RPGツクールMZ』と直接の関係はない情報です。
+MDNのページに全部解説はしてあるんですが、一覧性が良くないというか、自分がなかなか把握できなかったのでメモがてら。
+
+ 基本情報
+
+
+CanvasクラスでgetContext("2d")すると2D描画するための...]]></description><link>https://zenn.dev/tonbi/articles/c1060c77f321cc</link><guid isPermaLink="true">https://zenn.dev/tonbi/articles/c1060c77f321cc</guid><pubDate>Tue, 23 Jul 2024 13:22:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GjSoWw8l--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:CanvasRenderingContext2D%25E9%2596%25A2%25E9%2580%25A3%25E3%2583%25A1%25E3%2582%25BD%25E3%2583%2583%25E3%2583%2589%25E4%25B8%2580%25E8%25A6%25A7%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A8%25E3%2582%2593%25E3%2581%25B3%2540%25E9%25B3%25B6%25E5%25B6%258B%25E5%25B7%25A5%25E6%2588%25BF%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pBYl9FRlAtZm9RQU1pN1VoM3hzYkNyQXZUSTZjUDFkZGJJMWJrPXMyNTAtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>とんび@鳶嶋工房</dc:creator></item><item><title><![CDATA[『RPGツクールMZ』のJavaScriptで図形を描く]]></title><description><![CDATA[『RPGツクールMZ』関連記事 目次
+
+ はじめに
+『RPGツクールMZ』でJavaScriptを使い画像をベクター描画する方法を調べました。
+ベクター描画ができると、二点間に線を引いたりできるのでシステムの幅が広がります。
+リアルタイムに描画できるので、さまざまなインタフェースの形を状況に合わせて書き換えることもできます。
+たとえばゲージの形も融通が効くようになります。
+常に理屈の上でできることと、実際できることに隔たりはありますが(笑)
+例によって適宜、次のリファレンスに、クラスなどリンクしていこうと思います。
+
+『RPGツクールMZ』非公式JavaScriptリファレンス
+MDN ...]]></description><link>https://zenn.dev/tonbi/articles/8921d43593f3b2</link><guid isPermaLink="true">https://zenn.dev/tonbi/articles/8921d43593f3b2</guid><pubDate>Tue, 23 Jul 2024 13:21:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7XsxwD8A--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%258ERPG%25E3%2583%2584%25E3%2582%25AF%25E3%2583%25BC%25E3%2583%25ABMZ%25E3%2580%258F%25E3%2581%25AEJavaScript%25E3%2581%25A7%25E5%259B%25B3%25E5%25BD%25A2%25E3%2582%2592%25E6%258F%258F%25E3%2581%258F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A8%25E3%2582%2593%25E3%2581%25B3%2540%25E9%25B3%25B6%25E5%25B6%258B%25E5%25B7%25A5%25E6%2588%25BF%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pBYl9FRlAtZm9RQU1pN1VoM3hzYkNyQXZUSTZjUDFkZGJJMWJrPXMyNTAtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>とんび@鳶嶋工房</dc:creator></item><item><title><![CDATA[Remix入門【はじめからそうやって教えてくれればいいのに！】]]></title><description><![CDATA[
+ はじめに
+この記事の内容は、以下の動画でも解説しています。アニメーションでわかりやすくなっているので、ぜひ見てみてください。他にもWebに関する解説動画を投稿しているので、気になる人はチャンネル登録よろしくお願いします！
+https://youtu.be/jLBuwRKG6tM?si=Mbzv1LAPUOfqaU4-
+
+ Remixとは？
+Remix とは、公式サイト によると、React ベースのフルスタックの Web フレームワーク のことです。
+
+Remix is a full stack web framework that lets you focus on the use...]]></description><link>https://zenn.dev/ak/articles/cef68c1b67a314</link><guid isPermaLink="true">https://zenn.dev/ak/articles/cef68c1b67a314</guid><pubDate>Tue, 23 Jul 2024 12:16:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--OD9Hf7Q5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Remix%25E5%2585%25A5%25E9%2596%2580%25E3%2580%2590%25E3%2581%25AF%25E3%2581%2598%25E3%2582%2581%25E3%2581%258B%25E3%2582%2589%25E3%2581%259D%25E3%2581%2586%25E3%2582%2584%25E3%2581%25A3%25E3%2581%25A6%25E6%2595%2599%25E3%2581%2588%25E3%2581%25A6%25E3%2581%258F%25E3%2582%258C%25E3%2582%258C%25E3%2581%25B0%25E3%2581%2584%25E3%2581%2584%25E3%2581%25AE%25E3%2581%25AB%25EF%25BC%2581%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:aki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q3YTNhNmZhNjkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>aki</dc:creator></item><item><title><![CDATA[React.lazyとは一体？？]]></title><description><![CDATA[
+ はじめに
+今までReact.lazy使ったことなかったんですけど、パフォーマンスの重要に対して意識を持つようになってから、React.lazyが役立つって知りました。なので今回学んだことをまとめてみました！
+
+ React.lazyは何をしているのか
+React.lazyを使うと、初回のレンダリング負担を軽減できます。どういうことかというと、必要なときにだけコンポーネントを読み込むんです。これによって、最初にアプリがロードされるときのスピードが上がり、ユーザー体験が向上します。
+また、React.lazyは、アプリのパーツを分けて、それぞれ必要なときにだけ読み込む「コードスプリッティ...]]></description><link>https://zenn.dev/gemcook/articles/66eb923e761a90</link><guid isPermaLink="true">https://zenn.dev/gemcook/articles/66eb923e761a90</guid><pubDate>Tue, 23 Jul 2024 09:20:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ebfXieBV--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React.lazy%25E3%2581%25A8%25E3%2581%25AF%25E4%25B8%2580%25E4%25BD%2593%25EF%25BC%259F%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%25A6%25E3%2582%2593%25E3%2582%2580%25E3%2581%2599%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQyYzJiNzVlZTIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Gemcook%2520Tech%2520Blog%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pDOVl3NGNrMndZZXFVWWE1eWZrdkpHUURmNFJCNGFwN1FIUGVLPXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>てんむす</dc:creator></item><item><title><![CDATA[ファイル名を index.〇〇にすると何が良いのか]]></title><description><![CDATA[
+ はじめに
+プログラミングを学習していると、index.〇〇というファイル名が当たり前のように出てきますが、改めて何が良いのかを調べてみました。以下では、React + TypeScript で使用する tsx 拡張子を例に説明します。
+
+ import 文がスッキリする
+index.tsx ファイルがあるディレクトリを指定するだけで、そのディレクトリの index.tsx ファイルがインポートされるため、インポート文が短くなり、コードがスッキリします。
+// Headerというディレクトリの index.tsx を指定
+import Header from './components...]]></description><link>https://zenn.dev/surume3/articles/a08081943c57a0</link><guid isPermaLink="true">https://zenn.dev/surume3/articles/a08081943c57a0</guid><pubDate>Tue, 23 Jul 2024 01:01:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Jq9CZo8b--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E5%2590%258D%25E3%2582%2592%2520index.%25E3%2580%2587%25E3%2580%2587%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%25E3%2581%25A8%25E4%25BD%2595%25E3%2581%258C%25E8%2589%25AF%25E3%2581%2584%25E3%2581%25AE%25E3%2581%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Syumai3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI4MzZlZGI2OWIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Syumai3</dc:creator></item><item><title><![CDATA[【リファクタリング】HTML・CSS・JSでSRPGを作りたい part1 --- マス生成 ~ コマの移動 ---]]></title><description><![CDATA[
+ リファクタリング
+前回作成したSRPG part1をリファクタリングしました。
+前回記事
+https://zenn.dev/mogy/articles/5f3641ffdc2b84
+
+ 状態管理の改善
+
+ js(main.js)
+
+main.js
+// 状態管理
+const gameState = {
+	boardSize: 8,
+	selectedUnit: null,
+	players: [],
+	enemies: []
+};
+
+
+グローバルスコープの汚染を最小限にする。
+全体で管理する値を追加。（各関数で解説します。）
+
+
+ マスの位置取得の改善
+
+ js(main.js)
+
+...]]></description><link>https://zenn.dev/mogy/articles/794d267ede3480</link><guid isPermaLink="true">https://zenn.dev/mogy/articles/794d267ede3480</guid><pubDate>Mon, 22 Jul 2024 23:53:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--41rdBaCq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E3%2583%25AA%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25AF%25E3%2582%25BF%25E3%2583%25AA%25E3%2583%25B3%25E3%2582%25B0%25E3%2580%2591HTML%25E3%2583%25BBCSS%25E3%2583%25BBJS%25E3%2581%25A7SRPG%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258A%25E3%2581%259F%25E3%2581%2584%2520part1%2520---%2520%25E3%2583%259E%25E3%2582%25B9%25E7%2594%259F%25E6%2588%2590%2520%7E%2520%25E3%2582%25B3%25E3%2583%259E%25E3%2581%25AE%25E7%25A7%25BB%25E5%258B%2595%2520---%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E7%25B5%25B6%25E6%259C%259B%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2580%25E3%2583%25BC%2520a.k.a.%2520%25E3%2582%25B3%25E3%2583%2594%25E3%2583%259A%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2580%25E3%2583%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJmOTRiYzI2MjYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>絶望コーダー a.k.a. コピペコーダー</dc:creator></item><item><title><![CDATA[HTML・CSS・JSでSRPGを作りたい part1 --- マス生成 ~ プレイヤーコマの移動 ---]]></title><description><![CDATA[はじめに
+こんにちは、絶望コーダー a.k.a. コピペコーダーです。
+私はSRPGが大好きです。シミュレーションロールプレイングゲームです。
+有名どころではファイアーエムブレムとか、タクティクスオウガとかでしょうか。
+ボード上のマス目を移動して戦うゲームです。
+ふと、ブラウザ上で動くSRPG作りたいな～と思ったので記録に残します。
+最近SRPG始めたからかも。
+本記事では、「思考→コードを書く」というステップを細かく追っていく構成です。
+では、ご覧ください。
+※コードのみ見たい方は↑目次から。
+
+ 思考1:まぁ、マス目はいるよな
+SRPG作りたいとは思ったけど、何から始めるかなぁ......]]></description><link>https://zenn.dev/mogy/articles/5f3641ffdc2b84</link><guid isPermaLink="true">https://zenn.dev/mogy/articles/5f3641ffdc2b84</guid><pubDate>Mon, 22 Jul 2024 06:12:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--txSD6aHN--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:HTML%25E3%2583%25BBCSS%25E3%2583%25BBJS%25E3%2581%25A7SRPG%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258A%25E3%2581%259F%25E3%2581%2584%2520part1%2520---%2520%25E3%2583%259E%25E3%2582%25B9%25E7%2594%259F%25E6%2588%2590%2520%7E%2520%25E3%2583%2597%25E3%2583%25AC%25E3%2582%25A4%25E3%2583%25A4%25E3%2583%25BC%25E3%2582%25B3%25E3%2583%259E%25E3%2581%25AE%25E7%25A7%25BB%25E5%258B%2595%2520---%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E7%25B5%25B6%25E6%259C%259B%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2580%25E3%2583%25BC%2520a.k.a.%2520%25E3%2582%25B3%25E3%2583%2594%25E3%2583%259A%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2580%25E3%2583%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJmOTRiYzI2MjYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>絶望コーダー a.k.a. コピペコーダー</dc:creator></item><item><title><![CDATA[storybook8をプロダクトに導入して起きた問題と解決策をまとめてみた]]></title><description><![CDATA[こんにちは、株式会社 Rehab for JAPAN エンジニアのもじゃ(@moja_moja)です。
+私の携わっているプロダクトで storybook 8 を導入しました。
+私自身、これまで storybook を実務で使用したことがなかったため、導入して色々な問題やエラーに遭遇しました。
+今回は、導入時に起きた問題と解決策について紹介していきたいと思います。
+これから storybook 8 の導入・検討をする方々の参考になると幸いです。
+
+ 導入する恩恵について
+問題と解決策を紹介する前に、プロダクトに storybook を導入するメリットや恩恵について紹介しようと思います。
+様...]]></description><link>https://zenn.dev/rehabforjapan/articles/045a3d4c0d3bc6</link><guid isPermaLink="true">https://zenn.dev/rehabforjapan/articles/045a3d4c0d3bc6</guid><pubDate>Mon, 22 Jul 2024 03:12:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hGUEoaWN--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:storybook8%25E3%2582%2592%25E3%2583%2597%25E3%2583%25AD%25E3%2583%2580%25E3%2582%25AF%25E3%2583%2588%25E3%2581%25AB%25E5%25B0%258E%25E5%2585%25A5%25E3%2581%2597%25E3%2581%25A6%25E8%25B5%25B7%25E3%2581%258D%25E3%2581%259F%25E5%2595%258F%25E9%25A1%258C%25E3%2581%25A8%25E8%25A7%25A3%25E6%25B1%25BA%25E7%25AD%2596%25E3%2582%2592%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2582%2582%25E3%2581%2598%25E3%2582%2583%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNkYzExOTgzNjguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Rehab%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzlmZGEwZmUzZDYuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>もじゃ</dc:creator></item><item><title><![CDATA[neovim-lspconfig + Biome で保存時に import の整理をする]]></title><description><![CDATA[
+ 3行まとめ
+
+neovim-lspconfig で Biome の LSP Proxy を起動できる
+
+textDocument/codeAction で source.organizeImports と source.fixAll を実行することで、import の整理が可能
+codeAction の同期実行は gopls のドキュメントを参考にする
+
+
+ 前提1: Biome と import
+Biome には import に関連する機能が2つ存在する。
+
+Analyzer の Imports Sorting
+
+import をいい感じに並び替えてくれる機能
+
+
+eslint-...]]></description><link>https://zenn.dev/izumin/articles/b8046e64eaa2b5</link><guid isPermaLink="true">https://zenn.dev/izumin/articles/b8046e64eaa2b5</guid><pubDate>Mon, 22 Jul 2024 02:43:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1mJmIznZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:neovim-lspconfig%2520%252B%2520Biome%2520%25E3%2581%25A7%25E4%25BF%259D%25E5%25AD%2598%25E6%2599%2582%25E3%2581%25AB%2520import%2520%25E3%2581%25AE%25E6%2595%25B4%25E7%2590%2586%25E3%2582%2592%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Masayuki%2520Izumi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pLQnhYeEszZEtUbG80dkZXU04zbWNpU0lvNlRFckpid1M3WUdoeFE9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Masayuki Izumi</dc:creator></item><item><title><![CDATA[管理画面やサービスを簡易的に多言語化しつつ、ユビキタス言語も守りたい]]></title><description><![CDATA[サービス・システムの多言語化を皆さんどうやっていますか？
+サイトのシステム構成にもよると思いますが、多言語化には色々なベンダーのSaaSや、各種ライブラリ等を使用して実施しているかと思います。
+今回の記事では、多言語化するまでの取り組みと、ちょっとモヤモヤする部分の手助けができればと思います。
+この記事で説明すること
+
+多言語化するプロセス
+多言語化するための翻訳ファイルを生成するプログラムの説明
+
+この記事で説明しないこと
+
+JavaScriptの書き方
+i18nライブラリ等の仕様
+
+環境など
+
+GoogleAppsScript(GAS)
+
+
+ 痒いところに手が届かない多言語化問題（翻...]]></description><link>https://zenn.dev/ysit/articles/mimum-multilingualization</link><guid isPermaLink="true">https://zenn.dev/ysit/articles/mimum-multilingualization</guid><pubDate>Mon, 22 Jul 2024 01:43:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--CTZT2gfK--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%25AE%25A1%25E7%2590%2586%25E7%2594%25BB%25E9%259D%25A2%25E3%2582%2584%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2593%25E3%2582%25B9%25E3%2582%2592%25E7%25B0%25A1%25E6%2598%2593%25E7%259A%2584%25E3%2581%25AB%25E5%25A4%259A%25E8%25A8%2580%25E8%25AA%259E%25E5%258C%2596%25E3%2581%2597%25E3%2581%25A4%25E3%2581%25A4%25E3%2580%2581%25E3%2583%25A6%25E3%2583%2593%25E3%2582%25AD%25E3%2582%25BF%25E3%2582%25B9%25E8%25A8%2580%25E8%25AA%259E%25E3%2582%2582%25E5%25AE%2588%25E3%2582%258A%25E3%2581%259F%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ys%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVhNjUxOTk1NTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ys</dc:creator></item><item><title><![CDATA[TypeScript コーディングテクニック #3 【関数編その1】]]></title><description><![CDATA[
+ はじめに
+TypeScript のコーディングテクニックを紹介するシリーズの第 3 回です。
+前回で内容を予告していたのですが、ほぼ半年ぶりの投稿になってしまいました。またゆっくり投稿していこうと思います。
+想定する読者は、プログラミングをある程度経験したうえでさらにコード品質を高めたい方です。初心者向けではないと思います。
+第 3 回は、関数でどのようなことができるかを整理していきます。TypeScript と題していますが、 TypeScript に限らずあらゆるプログラミング言語に通ずる考え方だと思います。
+
+ 関数でできること
+
+ 処理の抽象化
+一連の処理を関数にまとめて名前...]]></description><link>https://zenn.dev/somnicattus/articles/9c1ac15f9a9589</link><guid isPermaLink="true">https://zenn.dev/somnicattus/articles/9c1ac15f9a9589</guid><pubDate>Mon, 22 Jul 2024 01:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--uLSpRcYu--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%2520%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2587%25E3%2582%25A3%25E3%2583%25B3%25E3%2582%25B0%25E3%2583%2586%25E3%2582%25AF%25E3%2583%258B%25E3%2583%2583%25E3%2582%25AF%2520%25233%2520%25E3%2580%2590%25E9%2596%25A2%25E6%2595%25B0%25E7%25B7%25A8%25E3%2581%259D%25E3%2581%25AE1%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:somnicattus%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSlNvNXE3eXJhZTY5OHVBWGpCN05EYTVOZVRxanpMQ2hBakhaek85RmZSPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>somnicattus</dc:creator></item><item><title><![CDATA[Supabaseでリアルタイムチャットアプリを作る]]></title><description><![CDATA[SupabaseにはRealtime APIがあります。接続しているクライアントとのメッセージを送受信できるAPIになります。
+このAPIを使用して簡単なリアルタイムチャットアプリを作ってみました。
+コード全体はこちらを参考にしてください。
+https://github.com/k-logic563/supabase-chat-app
+使用モジュールのバージョンは以下の通りです。
+主要なモジュールのみ載せていますので、その他はリポジトリのpackage.jsonを参考にしてください。
+"vite": "^5.3.4"
+"vue": "^3.4.31"
+"typescript": "^5....]]></description><link>https://zenn.dev/k_log24/articles/1912d857cc54f3</link><guid isPermaLink="true">https://zenn.dev/k_log24/articles/1912d857cc54f3</guid><pubDate>Sun, 21 Jul 2024 23:47:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--EaIpt8T4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Supabase%25E3%2581%25A7%25E3%2583%25AA%25E3%2582%25A2%25E3%2583%25AB%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25A0%25E3%2583%2581%25E3%2583%25A3%25E3%2583%2583%25E3%2583%2588%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kohei.com%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FhYTBhMmFjNTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kohei.com</dc:creator></item><item><title><![CDATA[【中級編】MapLibre GL JSを使ったWebGIS作成]]></title><description><![CDATA[オープンソースの地図ライブラリの「MapLibre GL JS」を使った様々なデータの表示方法やレイヤの表示切替方法をまとめました。]]></description><link>https://zenn.dev/asahina820/books/071ba23476fdc4</link><guid isPermaLink="true">https://zenn.dev/asahina820/books/071ba23476fdc4</guid><pubDate>Sun, 21 Jul 2024 09:08:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--I4o6jnco--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci83MjVjMTUzNjJjLmpwZWc=%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>あさひな</dc:creator></item></channel></rss>
