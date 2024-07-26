@@ -24,8 +24,8 @@
     font-size: 125%;
 
     body {
-        --site-max-width: 1360px;
-        --article-max-width: 780px;
+        --site-max-width: 1330px;
+        --article-max-width: 750px;
 
         header {
             box-shadow: unset !important;
@@ -77,7 +77,7 @@
                     background-color: var(--md-default-bg-color);
                     max-width: var(--article-max-width);
                     margin: 0 auto !important;
-                    padding: 32px;
+                    padding: 16px;
                     padding-bottom: 64px;
 
                     article {
@@ -92,18 +92,19 @@
                 }
 
                 .md-sidebar {
-                    nav > label.md-nav__title {
-                        color: inherit !important;
-                        background-color: transparent !important;
+                    /* Hide navigation */
+                    @media screen and (min-width: 76.25em) {
+                        nav label[for="__drawer"] {
+                            background-color: transparent;
+                        }
+                    }
+
+                    nav label[for="__toc"] {
+                        background-color: transparent;
+                    }
+
+                    nav label {
                         box-shadow: unset !important;
-                    }
-
-                    nav > label[for="__drawer"].md-nav__title {
-                        font-size: 0;
-                    }
-
-                    nav > label[for="__toc"].md-nav__title {
-                        font-size: 0;
                     }
 
                     * {
@@ -136,6 +137,8 @@
 
 /** article */
 body main .md-content article {
+    min-height: 100vh;
+
     p,
     li,
     li > ul,

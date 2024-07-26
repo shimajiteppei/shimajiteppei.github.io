@@ -4,6 +4,15 @@ site_description: 島地の部屋
 site_author: Shimaji Teppei
 copyright: Copyright &copy; 2022 - Shimaji Teppei
 
+nav:
+    - ホーム: index.md
+    - コンピュータ: article/category/computer.html
+    - ゲーム: article/category/game.html
+    - 物理: article/category/physics.html
+    - 数学: article/category/math.html
+    - カテゴリー: article/index.md
+    - RSSリンク: rss.html
+
 theme:
     name: material
     palette:
@@ -78,11 +87,20 @@ markdown_extensions:
 plugins:
     - glightbox
     - git-revision-date-localized
-    - awesome-pages:
-          filename: .index.yaml
-          order: desc
-          sort_type: natural
-          order_by: filename
+    - blog:
+          enabled: true
+          blog_dir: article
+          blog_toc: true
+          archive: true
+          archive_name: アーカイブ
+          archive_date_format: yyyy
+          archive_url_format: "archive/{date}"
+          categories: true
+          categories_name: カテゴリー
+          categories_url_format: "category/{slug}"
+          authors: false
+          pagination: false
+          pagination_keep_content: false
     - search:
           lang:
               - ja
@@ -90,7 +108,7 @@ plugins:
           ansi: required
     - table-reader
     - tags:
-          tags_file: category.md
+          tags_file: article/index.md
     - minify:
           minify_html: true
           minify_js: true
