@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Fri, 26 Jul 2024 03:29:27 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[OpenAPIで確認するFastAPIの正しいスキーマ定義]]></title><description><![CDATA[スキーマのプロパティで、必須か任意かのプロパティを含める場合があると思いますが、
+厳密に区別すると、必須か任意かの2パターンではなく、以下の4パターンあります。
+
+プロパティが存在し、nullではない。
+プロパティが存在し、nullでも良い。
+プロパティが存在しなくても良いが、存在するならnullではない。
+プロパティが存在しなくても良く、nullでも良い。
+
+この4パターンの正しい定義ができているか確認するために、今回はOpenAPI Generatorを使って、フロントエンド(typescript)のコードを自動生成し、正しく定義できているか確認していきます。
+
+ OpenAPI G...]]></description><link>https://zenn.dev/noknmgc/articles/fastapi-schema-definition</link><guid isPermaLink="true">https://zenn.dev/noknmgc/articles/fastapi-schema-definition</guid><pubDate>Fri, 26 Jul 2024 02:58:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--rAY4hOt4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:OpenAPI%25E3%2581%25A7%25E7%25A2%25BA%25E8%25AA%258D%25E3%2581%2599%25E3%2582%258BFastAPI%25E3%2581%25AE%25E6%25AD%25A3%25E3%2581%2597%25E3%2581%2584%25E3%2582%25B9%25E3%2582%25AD%25E3%2583%25BC%25E3%2583%259E%25E5%25AE%259A%25E7%25BE%25A9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%258E%25E3%2583%2583%25E3%2582%25AF%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFmZGMwNGUwYTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ノック</dc:creator></item><item><title><![CDATA[【MotionBuilder】Python SDK 入門 第3回『Python関連のシステム』]]></title><description><![CDATA[
+ はじめに
+この記事は、Python SDK 入門の第3回目の記事です。以下を目標に解説します。
+
+MotionBuilderのPythonスクリプト環境と起動時の動作を知る
+mobupyの使用方法を知る
+
+
+
+
+第1回　導入
+第2回　サンプル・ドキュメントの活用
+第3回　Python関連のシステム
+第4回　MotionBuilder内部の概念
+第5回　よく使うクラスの解説と使用例
+第6回　MotionBuilder VScode Extensionの活用
+第7回　Pyside6によるUI作成-基礎編
+第8回　Pyside6によるUI作成-実践編
+
+
+ 第3回 Python関連のシステ...]]></description><link>https://zenn.dev/nadegata_memo/articles/cfe0eead792a68</link><guid isPermaLink="true">https://zenn.dev/nadegata_memo/articles/cfe0eead792a68</guid><pubDate>Thu, 25 Jul 2024 22:11:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--b1_77o9t--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590MotionBuilder%25E3%2580%2591Python%2520SDK%2520%25E5%2585%25A5%25E9%2596%2580%2520%25E7%25AC%25AC3%25E5%259B%259E%25E3%2580%258EPython%25E9%2596%25A2%25E9%2580%25A3%25E3%2581%25AE%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%25E3%2580%258F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Ndgt%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA3ZmZmZWFmYWUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Ndgt</dc:creator></item><item><title><![CDATA[GitHub Copilotハンズオン~AzureOpenAIを使ったチャットアプリを作る~]]></title><description><![CDATA[
+ GitHub Copilotについて
+GitHub Copilotは名前の通り、あくまでも「副操縦士」ですのでハンドリングは自分自身で行う必要があります。
+「プログラミング経験が全くない人でもCopilotを使えばアプリを作ることができる」というわけではありません。
+たまにコードを間違えますし、最新のアップデート情報を取り込めてなくてバグが発生することもあります。
+また、Copilotからの提案コードは複数ありますので、自分で最適なものを選択していく必要があります。
+それでもエンジニアが今まで1からルーティーンのように書いていたコードやテストコードといった箇所をCopilotに自動生...]]></description><link>https://zenn.dev/headwaters/articles/5697c4d727c4a0</link><guid isPermaLink="true">https://zenn.dev/headwaters/articles/5697c4d727c4a0</guid><pubDate>Thu, 25 Jul 2024 16:00:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9W9ef5T---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:GitHub%2520Copilot%25E3%2583%258F%25E3%2583%25B3%25E3%2582%25BA%25E3%2582%25AA%25E3%2583%25B3%7EAzureOpenAI%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%259F%25E3%2583%2581%25E3%2583%25A3%25E3%2583%2583%25E3%2583%2588%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%7E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:ikebowsan%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZjNGExY2UxMDYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2598%25E3%2583%2583%25E3%2583%2589%25E3%2582%25A6%25E3%2582%25A9%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%25BC%25E3%2582%25B9%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzUyNTM1ZTc4OGYuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ikebowsan</dc:creator></item><item><title><![CDATA[手元の音源を分割してマルコフ連鎖で無限ループ再生]]></title><description><![CDATA[
+ 事前準備
+
+音源
+ffmpeg
+ライブラリインストールpip install pydub==0.25.1 pygame==2.5.2
+
+
+
+
+ スクリプト
+
+markov.py
+from __future__ import annotations
+
+import random
+import time
+import traceback
+from argparse import ArgumentParser, Namespace
+from collections import defaultdict
+from dataclasses import dataclass
+from pathl...]]></description><link>https://zenn.dev/nondescript/articles/bfaa5252cd09e7</link><guid isPermaLink="true">https://zenn.dev/nondescript/articles/bfaa5252cd09e7</guid><pubDate>Thu, 25 Jul 2024 15:12:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dJc6mR7m--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%2589%258B%25E5%2585%2583%25E3%2581%25AE%25E9%259F%25B3%25E6%25BA%2590%25E3%2582%2592%25E5%2588%2586%25E5%2589%25B2%25E3%2581%2597%25E3%2581%25A6%25E3%2583%259E%25E3%2583%25AB%25E3%2582%25B3%25E3%2583%2595%25E9%2580%25A3%25E9%258E%2596%25E3%2581%25A7%25E7%2584%25A1%25E9%2599%2590%25E3%2583%25AB%25E3%2583%25BC%25E3%2583%2597%25E5%2586%258D%25E7%2594%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E7%25B4%25A0%25E4%25BA%25BA%25E3%2581%25AE%25E6%2588%25AF%25E8%25A8%2580%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVmYTVmOTBhM2EuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>素人の戯言</dc:creator></item><item><title><![CDATA[DJMusicMixerクラス：音楽ファイルを自動でDJミックス]]></title><description><![CDATA[
+ はじめに
+音楽制作やDJプレイに興味がある方、そして音楽ファイルを自動的にミックスしたい方に朗報です！今回は、Pythonで実装されたDJMusicMixerクラスについて詳しく解説します。このクラスを使えば、複数の音楽ファイルを自動的にDJ風にミックスすることができます。
+
+ デモ動画
+
+
+ DJMusicMixerクラスの概要
+DJMusicMixerクラスは、以下の主要な機能を提供します：
+
+複数の音楽ファイルの読み込み
+トラックのミキシング
+エフェクトの適用
+クロスフェード
+音声の長さ調整
+
+これらの機能を使って、プロフェッショナルなDJのようなミックスを自動的に作成できます...]]></description><link>https://zenn.dev/sunwood_ai_labs/articles/dj-music-mixer-class</link><guid isPermaLink="true">https://zenn.dev/sunwood_ai_labs/articles/dj-music-mixer-class</guid><pubDate>Thu, 25 Jul 2024 11:44:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Mxa_d7F1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:DJMusicMixer%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25B9%25EF%25BC%259A%25E9%259F%25B3%25E6%25A5%25BD%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2592%25E8%2587%25AA%25E5%258B%2595%25E3%2581%25A7DJ%25E3%2583%259F%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Maki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTDdpSmVyNldLVlpKLUd4N054QWVuSFVtYXQ3MUhhd1NXaU5hRG5FTnZiMXZZdHBIaGs9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Maki</dc:creator></item><item><title><![CDATA[【MotionBuilder】Python SDK 入門 第2回 『サンプル・ドキュメントの活用』]]></title><description><![CDATA[
+ はじめに
+この記事は、Python SDK 入門の第2回目の記事です。以下を目標に解説します。
+
+Python Editorでのスクリプトの入力・実行に慣れる
+サンプルの実行の仕方を紹介し、その活用方法を知る
+ドキュメントの読み方・活用方法を知る
+
+
+
+
+第1回　導入
+第2回　サンプル・ドキュメントの活用
+第3回　Python関連のシステム
+第4回　MotionBuilder内部の概念
+第5回　よく使うクラスの解説と使用例
+第6回　MotionBuilder VScode Extensionの活用
+第7回　Pyside6によるUI作成-基礎編
+第8回　Pyside6によるUI作成-実...]]></description><link>https://zenn.dev/nadegata_memo/articles/e06fa6ee32ee60</link><guid isPermaLink="true">https://zenn.dev/nadegata_memo/articles/e06fa6ee32ee60</guid><pubDate>Thu, 25 Jul 2024 05:00:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2xSCqNse--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590MotionBuilder%25E3%2580%2591Python%2520SDK%2520%25E5%2585%25A5%25E9%2596%2580%2520%25E7%25AC%25AC2%25E5%259B%259E%2520%25E3%2580%258E%25E3%2582%25B5%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AB%25E3%2583%25BB%25E3%2583%2589%25E3%2582%25AD%25E3%2583%25A5%25E3%2583%25A1%25E3%2583%25B3%25E3%2583%2588%25E3%2581%25AE%25E6%25B4%25BB%25E7%2594%25A8%25E3%2580%258F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Ndgt%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA3ZmZmZWFmYWUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Ndgt</dc:creator></item><item><title><![CDATA[【RAG】LangChainのAgentでRAGチャットボットをつくる]]></title><description><![CDATA[ここしばらく、LangChainでRAGチャットボットを作って動かしています。これまで、RetrievalQA Chainを利用してきましたが、Agentを利用してRAGチャットボットを構築することもできます。今回は、LangChainのAgentを利用して、RAGチャットボットを作ってみます。
+
+ Agentを用いたRAGチャットボット
+これまで実装してきたRAGチャットボットは、RetrievalQA Chain を利用したものです。RetrievalQA Chainは、ユーザーの入力（質問）に対して、ナレッジ（ベクトルDB）から関連情報を検索し、検索した情報をプロンプトに付与してL...]]></description><link>https://zenn.dev/khisa/articles/b9cb7602f8702e</link><guid isPermaLink="true">https://zenn.dev/khisa/articles/b9cb7602f8702e</guid><pubDate>Thu, 25 Jul 2024 02:01:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4XHrs86V--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590RAG%25E3%2580%2591LangChain%25E3%2581%25AEAgent%25E3%2581%25A7RAG%25E3%2583%2581%25E3%2583%25A3%25E3%2583%2583%25E3%2583%2588%25E3%2583%259C%25E3%2583%2583%25E3%2583%2588%25E3%2582%2592%25E3%2581%25A4%25E3%2581%258F%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25B2%25E3%2581%2595%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTHFKaUVHa1VQMkc5WGpIeHlTa3p4bld3Z3JNcHFhT19hUFVKcWEyQ2YxWUZFPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ひさ</dc:creator></item><item><title><![CDATA[FastAPIとSQLModelを用いたレイヤーを跨ぐトランザクション管理]]></title><description><![CDATA[
+ 要約
+https://fastapi.tiangolo.com/tutorial/dependencies/sub-dependencies/#using-the-same-dependency-multiple-times
+上記のドキュメントを信じると単一リクエスト内部では同じ依存関係を呼び出した時にキャッシュされるため呼び出し結果はリクエストに対して一つになる
+そのため、セッション取得関数を作成をして、リクエストで呼ばれる階層ごとのクラスにDIすれば以下のようなシナリオも対応可能。
+class UseCase:
+    def __init__(self, db_session:...]]></description><link>https://zenn.dev/nicopin/articles/2c3c56cf1dc5b2</link><guid isPermaLink="true">https://zenn.dev/nicopin/articles/2c3c56cf1dc5b2</guid><pubDate>Thu, 25 Jul 2024 01:54:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Z7n3arH2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:FastAPI%25E3%2581%25A8SQLModel%25E3%2582%2592%25E7%2594%25A8%25E3%2581%2584%25E3%2581%259F%25E3%2583%25AC%25E3%2582%25A4%25E3%2583%25A4%25E3%2583%25BC%25E3%2582%2592%25E8%25B7%25A8%25E3%2581%2590%25E3%2583%2588%25E3%2583%25A9%25E3%2583%25B3%25E3%2582%25B6%25E3%2582%25AF%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E7%25AE%25A1%25E7%2590%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nicopin%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc3YjM5ZDNhN2MuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nicopin</dc:creator></item><item><title><![CDATA[FastAPIとSQLModelを用いた非同期セッション管理]]></title><description><![CDATA[このガイドでは、FastAPIとSQLModelを用いて非同期セッションを管理する方法について解説します。async_generatorとasynccontextmanagerを利用したセッション管理の実装方法について詳しく見ていきます。
+
+ 非同期ジェネレータを用いたセッション管理
+非同期セッションを管理するために、まずは非同期ジェネレータを使用してセッションを管理する関数を定義します。
+
+database.py
+from sqlalchemy.ext.asyncio import create_async_engine
+from sqlmodel.ext.asyncio.sessio...]]></description><link>https://zenn.dev/nicopin/articles/f81a8f78b2874b</link><guid isPermaLink="true">https://zenn.dev/nicopin/articles/f81a8f78b2874b</guid><pubDate>Thu, 25 Jul 2024 01:31:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--O_9R-1Kd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:FastAPI%25E3%2581%25A8SQLModel%25E3%2582%2592%25E7%2594%25A8%25E3%2581%2584%25E3%2581%259F%25E9%259D%259E%25E5%2590%258C%25E6%259C%259F%25E3%2582%25BB%25E3%2583%2583%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E7%25AE%25A1%25E7%2590%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nicopin%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc3YjM5ZDNhN2MuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nicopin</dc:creator></item><item><title><![CDATA[[StepFunctions]実行中のステートマシン内から実行ARN、もしくは実行名を取得したかった話]]></title><description><![CDATA[
+ はじめに
+前回に引き続き、GitHub Copilotに聞いて解決した問題になります。
+よろしければ、前回の記事も合わせてご覧ください。
+https://zenn.dev/goals_techblog/articles/2221037d5e628c
+
+ やりたいこと
+今回も記事のタイトル通りですが、、、
+実行中のStepFunctionsの実行ARN(executionArn)、もしくは実行名(name)を取得しようとしました。
+
+ 背景
+やりたいことの背景としては、既存運用では以下の対応（後述のGitHub Copilot提案の方法2のパターン）をしていました。
+しかし、StepF...]]></description><link>https://zenn.dev/goals_techblog/articles/e9d38cce66da75</link><guid isPermaLink="true">https://zenn.dev/goals_techblog/articles/e9d38cce66da75</guid><pubDate>Thu, 25 Jul 2024 01:13:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--g-YUZjDH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BStepFunctions%255D%25E5%25AE%259F%25E8%25A1%258C%25E4%25B8%25AD%25E3%2581%25AE%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25BC%25E3%2583%2588%25E3%2583%259E%25E3%2582%25B7%25E3%2583%25B3%25E5%2586%2585%25E3%2581%258B%25E3%2582%2589%25E5%25AE%259F%25E8%25A1%258CARN%25E3%2580%2581%25E3%2582%2582%25E3%2581%2597%25E3%2581%258F%25E3%2581%25AF%25E5%25AE%259F%25E8%25A1%258C%25E5%2590%258D%25E3%2582%2592%25E5%258F%2596%25E5%25BE%2597%25E3%2581%2597%25E3%2581%259F%25E3%2581%258B%25E3%2581%25A3%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E4%25BB%258A%25E6%259D%2591%25E5%2585%2589%25E5%25B8%258C%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY0ZmMzNjliMDYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Goals%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzkxZjQ4ODNjMjkuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>今村光希</dc:creator></item><item><title><![CDATA[面倒な分析はGoogle Colabにやらせよう]]></title><description><![CDATA[
+ これはなに？
+ちょっとした分析の用事で久しぶりにGoogle Colaboratory (以下 Colab) を触ったら結構良くなってました。Cursorでコード書くのも快適だけど、面倒なデータ分析やるならやっぱColabの方が便利だなぁと再認識しました。
+そこで、最近Colabに追加されて便利になったと思う機能を簡単にまとめてみました。(見てわかる通りタイトルはもちろん話題のあの本のオマージュです😇)
+
+ 最近のColab便利機能を使おう
+粒度まちまちですがざーっと書いていきます。「最近」の定義は曖昧なのでご容赦ください。
+
+ Github Copilot的なコード補完を使おう
+G...]]></description><link>https://zenn.dev/ml_bear/articles/d8093959482c81</link><guid isPermaLink="true">https://zenn.dev/ml_bear/articles/d8093959482c81</guid><pubDate>Wed, 24 Jul 2024 23:05:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ZpEx1Xxc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E9%259D%25A2%25E5%2580%2592%25E3%2581%25AA%25E5%2588%2586%25E6%259E%2590%25E3%2581%25AFGoogle%2520Colab%25E3%2581%25AB%25E3%2582%2584%25E3%2582%2589%25E3%2581%259B%25E3%2582%2588%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ML_Bear%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2YzMzQ3NmZjMjkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ML_Bear</dc:creator></item><item><title><![CDATA[【MotionBuilder】Python SDK 入門 第1回 『導入』]]></title><description><![CDATA[
+ はじめに
+この記事は、サークル部員向けの講習資料作成を兼ね、自身の知識を整理したものです。今後投稿する一連の記事を通して以下を伝えることを目標としています。
+
+Pythonスクリプトの実行方法
+Pythonスクリプトの活用の仕方
+スクリプト作成に役立つMotionBuilderの内部の概念
+PySide6を用いた独自のUI作成とその活用
+
+私自身は専門学生でもない現場未経験のただの学生ゆえ記事で紹介できる内容には偏りがあり、知識不足ゆえに見苦しい記述をお見せしてしまうかもしれません。誤謬等ございましたらご指摘いただけますと幸いです。また、この記事が少しでもどなたかの学習の一助になれば...]]></description><link>https://zenn.dev/nadegata_memo/articles/77a0fbce3b3387</link><guid isPermaLink="true">https://zenn.dev/nadegata_memo/articles/77a0fbce3b3387</guid><pubDate>Wed, 24 Jul 2024 21:27:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--skC-UZMK--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590MotionBuilder%25E3%2580%2591Python%2520SDK%2520%25E5%2585%25A5%25E9%2596%2580%2520%25E7%25AC%25AC1%25E5%259B%259E%2520%25E3%2580%258E%25E5%25B0%258E%25E5%2585%25A5%25E3%2580%258F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Ndgt%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA3ZmZmZWFmYWUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Ndgt</dc:creator></item><item><title><![CDATA[GitHubプロジェクトとPythonを連携！コミットからIssue自動生成＆ボード管理を完全自動化！]]></title><description><![CDATA[GitHub でのプロジェクト管理、もっと効率化したいと思いませんか？
+本記事では、Python と GitHub API を駆使して、コミット情報から自動的に Issue を作成し、指定のプロジェクトボードへ追加するだけでなく、 ステータス変更や期日設定までをも自動化する 方法を徹底解説します。
+しかも、GitHub Project の Draft Issue 機能を使って、より安全に Issue を管理するテクニックも紹介します。
+この自動化により、面倒な作業ログ記録や進捗管理の手間を大幅に削減し、開発に集中できる環境を手に入れましょう！
+
+ 自動化の全体像
+今回の自動化スクリプトで...]]></description><link>https://zenn.dev/sunwood_ai_labs/articles/github-project-python-integration</link><guid isPermaLink="true">https://zenn.dev/sunwood_ai_labs/articles/github-project-python-integration</guid><pubDate>Wed, 24 Jul 2024 14:49:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--J3skmGLV--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:GitHub%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E3%2581%25A8Python%25E3%2582%2592%25E9%2580%25A3%25E6%2590%25BA%25EF%25BC%2581%25E3%2582%25B3%25E3%2583%259F%25E3%2583%2583%25E3%2583%2588%25E3%2581%258B%25E3%2582%2589Issue%25E8%2587%25AA%25E5%258B%2595%25E7%2594%259F%25E6%2588%2590%25EF%25BC%2586%25E3%2583%259C%25E3%2583%25BC%25E3%2583%2589%25E7%25AE%25A1%25E7%2590%2586%25E3%2582%2592%25E5%25AE%258C%25E5%2585%25A8%25E8%2587%25AA%25E5%258B%2595%25E5%258C%2596%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Maki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTDdpSmVyNldLVlpKLUd4N054QWVuSFVtYXQ3MUhhd1NXaU5hRG5FTnZiMXZZdHBIaGs9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Maki</dc:creator></item><item><title><![CDATA[「しかのこのこのここしたんたん」を読み上げさせたい！！]]></title><description><![CDATA[最近、「しかのこのこのここしたんたん」というリズミカルなフレーズが巷で話題です。このフレーズがマルコフモデルにより生成されると考えた時、非常に低い確率であることを体験できるデモサイトを構築してみました。ぜひ、実際に体験してください。
+
+ マルコフモデルとは
+マルコフ連鎖（マルコフモデル）とは、状態の遷移が確率的に決定されるモデルのことです。言い換えれば、過去の状態にのみ基づいて未来の状態が決まるという概念です。この特性を利用して、自然言語処理の分野では文章やテキストの生成に活用されています。
+
+
+ 「しかのこのこのここしたんたん」での具体例
+
+ このフレーズを選んだ理由
+このフレーズは短...]]></description><link>https://zenn.dev/k_takumi/articles/markov-chain-text-generator</link><guid isPermaLink="true">https://zenn.dev/k_takumi/articles/markov-chain-text-generator</guid><pubDate>Wed, 24 Jul 2024 12:40:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6yUxniLt--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%258C%25E3%2581%2597%25E3%2581%258B%25E3%2581%25AE%25E3%2581%2593%25E3%2581%25AE%25E3%2581%2593%25E3%2581%25AE%25E3%2581%2593%25E3%2581%2593%25E3%2581%2597%25E3%2581%259F%25E3%2582%2593%25E3%2581%259F%25E3%2582%2593%25E3%2580%258D%25E3%2582%2592%25E8%25AA%25AD%25E3%2581%25BF%25E4%25B8%258A%25E3%2581%2592%25E3%2581%2595%25E3%2581%259B%25E3%2581%259F%25E3%2581%2584%25EF%25BC%2581%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tk%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ4NGJmZGZiOTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tk</dc:creator></item><item><title><![CDATA[Gemini APIをPythonから実行するまで]]></title><description><![CDATA[ChatGPTのAPIを勉強で使いたかったのですが無料枠が終わっていました。
+そこで無料枠のあるGemini APIを今回使うことにしました。
+
+ Gemini Flashの無料枠でできること
+https://ai.google.dev/pricing?hl=ja
+
+ 15RPM(Request Per Minute)（1分あたりのリクエスト数）
+1分間に15回までのリクエスト。
+
+ 100万TPM(Token Per Minute)（1分あたりのトークン数）
+こちらどのくらいのことができるのかイメージがつかなかったのでgeminiに聞いてみました。
+100万トークンは、約750,000...]]></description><link>https://zenn.dev/kojimaro/articles/c25523bf0529be</link><guid isPermaLink="true">https://zenn.dev/kojimaro/articles/c25523bf0529be</guid><pubDate>Wed, 24 Jul 2024 04:04:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2BMkkeHk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Gemini%2520API%25E3%2582%2592Python%25E3%2581%258B%25E3%2582%2589%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%2599%25E3%2582%258B%25E3%2581%25BE%25E3%2581%25A7%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kojimaro%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBiODMyYWI2ZmMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kojimaro</dc:creator></item><item><title><![CDATA[社内ロボット開発企画の紹介]]></title><description><![CDATA[
+ はじめに
+はじめまして。データアナリティクスラボ株式会社 データソリューション事業部の力岡と申します。普段はデータサイエンティストとして、データ分析や機械学習モデルの構築、生成AIアプリの開発などを行っています。
+今回は、社内で進めているロボット開発企画についてご紹介します。本記事では、技術的内容というよりも、社内の取り組みに焦点を当てて、紹介していきたいと思います。
+
+ ロボット開発企画とは
+一言でいうと、最近話題の生成AI技術をロボットに組み込み、実際に勉強してみようという企画です。
+通常、生成AIはChatGPTのように画面上で文字を入力して使用することが多いですが、現在はマル...]]></description><link>https://zenn.dev/dalab/articles/839d85f303035f</link><guid isPermaLink="true">https://zenn.dev/dalab/articles/839d85f303035f</guid><pubDate>Wed, 24 Jul 2024 04:01:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--XkKUNd6H--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%25A4%25BE%25E5%2586%2585%25E3%2583%25AD%25E3%2583%259C%25E3%2583%2583%25E3%2583%2588%25E9%2596%258B%25E7%2599%25BA%25E4%25BC%2581%25E7%2594%25BB%25E3%2581%25AE%25E7%25B4%25B9%25E4%25BB%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Tomokazu%2520Rikioka%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y4MmEwNzVhNjAuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:DAL%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU1YjY1MjNkYWIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Tomokazu Rikioka</dc:creator></item><item><title><![CDATA[【Python】openpyxlのフォルダ構成とそれぞれの役割]]></title><description><![CDATA[
+ 1. はじめに
+openpyxlは、PythonでExcelファイルを操作するための強力なライブラリです。本記事では、openpyxlの詳細なフォルダ構成とそれぞれの役割、さらに各フォルダ内の主要なメソッドの使われ方とオプションについて解説します。
+
+ 2. openpyxlの詳細なフォルダ構成
+openpyxlの詳細なフォルダ構成は以下の通りです：
+openpyxl/
+├── __init__.py
+├── cell/
+│   ├── __init__.py
+│   ├── cell.py
+│   ├── read_only.py
+│   └── text.py
+├── chart...]]></description><link>https://zenn.dev/nuinui/articles/29e9e6880eb50e</link><guid isPermaLink="true">https://zenn.dev/nuinui/articles/29e9e6880eb50e</guid><pubDate>Tue, 23 Jul 2024 21:34:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ck33XshL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591openpyxl%25E3%2581%25AE%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25AB%25E3%2583%2580%25E6%25A7%258B%25E6%2588%2590%25E3%2581%25A8%25E3%2581%259D%25E3%2582%258C%25E3%2581%259E%25E3%2582%258C%25E3%2581%25AE%25E5%25BD%25B9%25E5%2589%25B2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AC%25E3%2583%25BC%25E3%2581%2584%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSno2cFRIRmpDc184N0NyTTNyYV9iZnd6LVVLaXAxRHMxZWdFdHl1b0VQY1JCbUVDcz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ぬーい</dc:creator></item><item><title><![CDATA[英語でのプレゼンのための発音アクセント&質疑対策アプリを作った話]]></title><description><![CDATA[
+ アプリの概要
+
+今回は，英語でのプレゼン準備のためのアプリを作成しました．
+作成したアプリの機能は2つです．
+
+パワーポイントをuploadすることで，スピーカーメモを音声化してくれる機能
+プレゼン資料のpdfをuploadすることで，GPT-4oによる質疑対策ができる機能
+
+これらの機能で，プレゼンの発音やアクセントを確認することができます．さらに，質疑対策も行うことができ，スムーズな発表に繋げることを目的としています．
+ソースコード
+https://github.com/kokist/presentation_checker
+デモ
+https://presentation-che...]]></description><link>https://zenn.dev/kokist/articles/dccf1782ab8c97</link><guid isPermaLink="true">https://zenn.dev/kokist/articles/dccf1782ab8c97</guid><pubDate>Tue, 23 Jul 2024 15:52:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vi7MLXnv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%258B%25B1%25E8%25AA%259E%25E3%2581%25A7%25E3%2581%25AE%25E3%2583%2597%25E3%2583%25AC%25E3%2582%25BC%25E3%2583%25B3%25E3%2581%25AE%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%25E7%2599%25BA%25E9%259F%25B3%25E3%2582%25A2%25E3%2582%25AF%25E3%2582%25BB%25E3%2583%25B3%25E3%2583%2588%2526%25E8%25B3%25AA%25E7%2596%2591%25E5%25AF%25BE%25E7%25AD%2596%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kokist%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzUzMmJjOTY2ZDMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kokist</dc:creator></item><item><title><![CDATA[Python ファイル操作]]></title><description><![CDATA[
+ os.scandir(path)
+with os.scandir("sub") as it:     # 引数が空の場合、カレントディレクトリ
+    files = [a.name for a in it]  # ディレクトリも含む
+]]></description><link>https://zenn.dev/nacht/articles/f8399de326b741</link><guid isPermaLink="true">https://zenn.dev/nacht/articles/f8399de326b741</guid><pubDate>Tue, 23 Jul 2024 15:37:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--v2xrMEX---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%2520%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E6%2593%258D%25E4%25BD%259C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nacht%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I4ZWQ2ZGNjZDYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nacht</dc:creator></item><item><title><![CDATA[[Python]SAMでLambdaをデプロイしてみた]]></title><description><![CDATA[
+ 
+
+ 記事を書く経緯
+
+業務で特定のWAFルールの削除、再作成を自動化するというタスクがあり自身のメモとしての記事です。
+GithubActionsでの対応も検討していますが、一旦以下のようにSAMを用いたAWS Lambdaで対応しようと考えています。
+コード自体もまだまだ改善の余地があるのですが、途中経過で備忘録として残すために公開しているため適宜修正します。
+
+
+ 前提
+
+SAM CLIをインストール済みであること。
+Pythonの基本的な文法を押さえていること。
+IAMロールの作成を行うので、AWS CLI or Terraformを扱える状態にあること。
+(本記事ではTer...]]></description><link>https://zenn.dev/takesaya/articles/sam_python_waf</link><guid isPermaLink="true">https://zenn.dev/takesaya/articles/sam_python_waf</guid><pubDate>Tue, 23 Jul 2024 15:27:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Rvyp-nUZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BPython%255DSAM%25E3%2581%25A7Lambda%25E3%2582%2592%25E3%2583%2587%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25A4%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259F%25E3%2581%2591%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2UyOTExOTY4MzEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>たけ</dc:creator></item></channel></rss>
