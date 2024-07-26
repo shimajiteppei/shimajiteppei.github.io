@@ -1,6 +1,6 @@
 ---
 categories:
-    - computer
+    - game
     - math
 tags:
     - Java

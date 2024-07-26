@@ -19,13 +19,11 @@
 
   <h4 style="color: var(--md-primary-fg-color)">★作ったもの★</h4>
   <p style="padding-bottom: 24px">
-    <a href="/game/nes.html">ファミコンエミュレータ</a>
-    <br />
-    <a href="https://shimajiteppei.github.io/gemini/">ついったー高度検索</a>
+    <a href="/article/posts/nes-demo.html">ファミコンエミュレータ</a>
     <br />
     <a href="https://github.com/shimajiteppei/MasterThesis/blob/master/thesis/thesis.pdf">修士論文</a>
     <br />
-    <a href="/game/life-jar.html">ライフゲーム（高校時代版）</a>
+    <a href="/article/posts/conways-game-of-life-jar.html">ライフゲーム（高校時代版）</a>
   </p>
 
   <h4 style="color: var(--md-primary-fg-color)">★貢献★</h4>
