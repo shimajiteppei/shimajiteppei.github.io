@@ -9,7 +9,7 @@ date: 2023-09-11
 
 # ファミコンエミュレータ
 
-<link rel="stylesheet" href="/stylesheets/xp.css">
+<link rel="stylesheet" href="/static/stylesheets/xp.css">
 
 <div class="xp-css" style="width: 100%; display: flex; flex-direction: column;">
   <div class="window">
@@ -26,7 +26,7 @@ date: 2023-09-11
     </div>
     <div class="window-body" style="margin: 16px;">
       <canvas id="canvas" width="256" height="240" style="width: 100%"></canvas>
-      <script type="module" src="/javascripts/nes/index.js"></script>
+      <script type="module" src="/static/javascripts/nes/index.js"></script>
     </div>
   </div>
 </div>

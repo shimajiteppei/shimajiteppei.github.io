@@ -9,7 +9,7 @@ date: 2023-10-01
 
 # ライフゲーム（高校時代版）
 
-<link rel="stylesheet" href="/stylesheets/xp.css">
+<link rel="stylesheet" href="/static/stylesheets/xp.css">
 
 <div class="xp-css" style="width: 100%; display: flex; flex-direction: column;">
   <div class="window">
@@ -27,7 +27,7 @@ date: 2023-10-01
     <div class="window-body" style="margin: 16px;">
       <iframe
         id="life-jar_content"
-        src="/javascripts/life-jar/index.html"
+        src="/static/javascripts/life-jar/index.html"
         width="100%"
         height="600"
         loading="lazy"
@@ -39,7 +39,7 @@ date: 2023-10-01
 
 2012年、高校2年生のときにJava 7のSwingで作ったライフゲームです。
 
-いまではブラウザでJavaを動かせなくなってしまいましたが、このページでは[CheerpJ](https://leaningtech.com/cheerpj/)というJavaのGUI環境を提供するWasmライブラリを使って表示しています。jarを[こちら](/javascripts/life-jar/Life.jar)からダウンロードしてデスクトップアプリとしても実行できます。
+いまではブラウザでJavaを動かせなくなってしまいましたが、このページでは[CheerpJ](https://leaningtech.com/cheerpj/)というJavaのGUI環境を提供するWasmライブラリを使って表示しています。jarを[こちら](/static/javascripts/life-jar/Life.jar)からダウンロードしてデスクトップアプリとしても実行できます。
 
 ## 昔話
 
