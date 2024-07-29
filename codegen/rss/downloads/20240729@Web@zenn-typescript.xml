@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「TypeScript」のフィード]]></title><description><![CDATA[Zennのトピック「TypeScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/typescript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/f13e758fdb.png</url><title>Zennの「TypeScript」のフィード</title><link>https://zenn.dev/topics/typescript</link></image><generator>zenn.dev</generator><lastBuildDate>Mon, 29 Jul 2024 05:08:20 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/typescript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Bunで環境変数を型安全に使う]]></title><description><![CDATA[環境変数が undefined の可能性をいちいち考慮するのめんどくさいですよね
+Bun で実行毎に環境変数を検証する方法を紹介します
+
+ 手順
+
+zod をインストール
+
+bun add zod
+
+env.ts 作成
+
+
+env.ts
+import { z } from 'zod'
+
+const zVar = z.string().min(1)
+const zEnv = z.object({
+  // ここで必要な環境変数とそのスキーマを定義する
+  DISCORD_CLIENT_ID: zVar,
+  DISCORD_GUILD_ID: zVar,
+  DISCORD_TOKEN: ...]]></description><link>https://zenn.dev/shallow90125/articles/b0dcfc89aa1d92</link><guid isPermaLink="true">https://zenn.dev/shallow90125/articles/b0dcfc89aa1d92</guid><pubDate>Mon, 29 Jul 2024 00:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---RXaTKCf--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Bun%25E3%2581%25A7%25E7%2592%25B0%25E5%25A2%2583%25E5%25A4%2589%25E6%2595%25B0%25E3%2582%2592%25E5%259E%258B%25E5%25AE%2589%25E5%2585%25A8%25E3%2581%25AB%25E4%25BD%25BF%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:shallow90125%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ4OGYzYTdlYzAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>shallow90125</dc:creator></item><item><title><![CDATA[ReactでGoogle Maps JavaScript APIを組み込む]]></title><description><![CDATA[React+TypeScriptでGoogle Mapsを組み込んだページを作る際、これまではreact-google-mapsのようなライブラリを組み込んで実装してきました。
+久しぶりにGoogle Mapsを使ったReactアプリケーションを作るにあたって現在の状況を調べてみたところ、公式のドキュメントにReact アプリケーションに Map と Marker を追加するというページがあり、@googlemaps/react-wrapperというものを使って組み込む方法が紹介されていました。
+これまでサードパーティーのラッパーライブラリを使ってきた際、Google Mapの細かい制御...]]></description><link>https://zenn.dev/iseebi/articles/react_google_maps</link><guid isPermaLink="true">https://zenn.dev/iseebi/articles/react_google_maps</guid><pubDate>Sun, 28 Jul 2024 16:46:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--P9wKgxHU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%25E3%2581%25A7Google%2520Maps%2520JavaScript%2520API%25E3%2582%2592%25E7%25B5%2584%25E3%2581%25BF%25E8%25BE%25BC%25E3%2582%2580%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Nobuhiro%2520Ito%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzlhMzdjMDc4YzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Nobuhiro Ito</dc:creator></item><item><title><![CDATA[Vue.js v-tokyo Meetup #21で学んだこと・所感]]></title><description><![CDATA[7月26日（金）に開催されたVue.jsの勉強会に参加してきたのでメモした内容を振り返りながらまとめていく記事になっております。
+
+ oxc
+全然知らないワードが初手から来た　笑
+oxcは爆速なコンパイラーらしい。
+パフォーマンス問題についてもバグ扱いすることがoxcの開発ポリシーの１つとしてある。
+最近気に入って使ってるBiomeの内部でもoxcが動作している？みたい。
+今後、Nuxt.jsについてゴリゴリに学んでいく予定なのでその中で触れることがあったら詳しく調べてみよう。
+
+ VueUse
+ここでお馴染みの内容が来てホッとした。
+VueUseマジで便利ですよね~、大好き。
+ちなみに...]]></description><link>https://zenn.dev/kjmboy/articles/de9732f9e24e34</link><guid isPermaLink="true">https://zenn.dev/kjmboy/articles/de9732f9e24e34</guid><pubDate>Sun, 28 Jul 2024 12:47:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--PuwOOGey--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Vue.js%2520v-tokyo%2520Meetup%2520%252321%25E3%2581%25A7%25E5%25AD%25A6%25E3%2582%2593%25E3%2581%25A0%25E3%2581%2593%25E3%2581%25A8%25E3%2583%25BB%25E6%2589%2580%25E6%2584%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25BE%25E3%2581%2598%25E3%2581%2593%25E3%2581%2598%25E3%2581%25BE%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FGZFp1Y3FWcVpXYktUQjUyTm4taldPVnNtYVMyWkMwSl9RQWdPTjl2MU5aMHc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>まじこじま</dc:creator></item><item><title><![CDATA[Prisma で schema.prisma で書いたコメントをデータベースへも反映する]]></title><description><![CDATA[Prisma では、schema.prisma でトリプルスラッシュ(///)でコメントを書くと、抽象構文木(AST)に情報として含まれるようになります。
+
+https://www.prisma.io/docs/orm/prisma-schema/overview#comments
+
+生成されたクライアントのコードにも、このコメントを含んでくれます。(といっても一部だけのようで、もう少しサポートして欲しい気も..)
+これがデータベース側のコメントとしても設定されると、SchemaSpy のような、データベースの内容からドキュメントを作るようなツールでも利用できる情報になって便利なのですが...]]></description><link>https://zenn.dev/onozaty/articles/prisma-comment</link><guid isPermaLink="true">https://zenn.dev/onozaty/articles/prisma-comment</guid><pubDate>Sun, 28 Jul 2024 11:44:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--gk-1DkUC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Prisma%2520%25E3%2581%25A7%2520schema.prisma%2520%25E3%2581%25A7%25E6%259B%25B8%25E3%2581%2584%25E3%2581%259F%25E3%2582%25B3%25E3%2583%25A1%25E3%2583%25B3%25E3%2583%2588%25E3%2582%2592%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%2599%25E3%2583%25BC%25E3%2582%25B9%25E3%2581%25B8%25E3%2582%2582%25E5%258F%258D%25E6%2598%25A0%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:onozaty%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA0NjRiMDVlZmYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>onozaty</dc:creator></item><item><title><![CDATA[【Angular】Materialのmat-selectを共通化してみる]]></title><description><![CDATA[Angularは好きなんだけど、本音を言うとReactがいいなと思っている泉（@izumin_0401）です。
+
+ Angular Materialのプルダウンを共通化したい
+ってことで、今回はmat-selectを共通化してみたンゴ。
+
+ ブログ記事はこちら
+https://traveler0401.com/angular-mat-select-common/
+
+ ソースコード
+
+ 共通mat-selectコンポーネント
+
+pull-down.component.ts
+import { CommonModule } from '@angular/common';
+import { Co...]]></description><link>https://zenn.dev/izumin_0401/articles/ee40d352fe31ec</link><guid isPermaLink="true">https://zenn.dev/izumin_0401/articles/ee40d352fe31ec</guid><pubDate>Sun, 28 Jul 2024 10:50:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jKSZ02rc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Angular%25E3%2580%2591Material%25E3%2581%25AEmat-select%25E3%2582%2592%25E5%2585%25B1%25E9%2580%259A%25E5%258C%2596%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%25B3%2589%25E6%25B5%25A9%25E5%2585%25B5%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ExNTljYmRlNDIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>泉浩兵</dc:creator></item><item><title><![CDATA[TypeScriptの標準ライブラリで使われているdeclaration mergingのテクニック]]></title><description><![CDATA[TypeScriptの標準ライブラリとは、TypeScriptに組み込みで備わっている型定義のことです。ECMAScript仕様で定義されているJavaScriptの言語機能に対する型定義が含まれています。また、ブラウザに組み込まれているWeb標準のAPIに対する型定義も含まれています。
+TypeScriptの標準ライブラリでは、declaration mergingというテクニックが使われています。皆さんが普段書くアプリケーションコードではあまり使う機会がないかもしれませんが、TypeScriptの型定義、とりわけ標準ライブラリの型定義においては重要なテクニックです。
+この記事では、d...]]></description><link>https://zenn.dev/uhyo/articles/typescript-lib-declaration-merging</link><guid isPermaLink="true">https://zenn.dev/uhyo/articles/typescript-lib-declaration-merging</guid><pubDate>Sun, 28 Jul 2024 09:58:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--o80psio_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%25E3%2581%25AE%25E6%25A8%2599%25E6%25BA%2596%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%25E3%2581%25A7%25E4%25BD%25BF%25E3%2582%258F%25E3%2582%258C%25E3%2581%25A6%25E3%2581%2584%25E3%2582%258Bdeclaration%2520merging%25E3%2581%25AE%25E3%2583%2586%25E3%2582%25AF%25E3%2583%258B%25E3%2583%2583%25E3%2582%25AF%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:uhyo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVjYjFlMDJlNGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>uhyo</dc:creator></item><item><title><![CDATA[Vitestでfetchのmockを作成し、Fixtureとして分離する]]></title><description><![CDATA[
+ 始めに
+Vitest で API リクエストのテストコードを作成する際に、
+fetch 関数の mock の作成や、それらを beforeAllやbeforeEachなどを用いて、
+Fixture として分離する方法を調べたのでまとめてみます。
+API リクエストのテストをしたいが、実際の API にはリクエストできない場合、
+Vitest で fetch 関数を偽装して指定したレスポンスを返すといったやり方があると思います。
+describe('get', () =&gt; {
+  it('APIリクエスト成功', async () =&gt; {
+    //fetchが指定した...]]></description><link>https://zenn.dev/blueschnauzer/articles/create-vitest-suite-hooks-fixture</link><guid isPermaLink="true">https://zenn.dev/blueschnauzer/articles/create-vitest-suite-hooks-fixture</guid><pubDate>Sun, 28 Jul 2024 09:32:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2xHee-HO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Vitest%25E3%2581%25A7fetch%25E3%2581%25AEmock%25E3%2582%2592%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2597%25E3%2580%2581Fixture%25E3%2581%25A8%25E3%2581%2597%25E3%2581%25A6%25E5%2588%2586%25E9%259B%25A2%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:BlueSchnauzer%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJjNzJlMmQ2N2IuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>BlueSchnauzer</dc:creator></item><item><title><![CDATA[Next.jsでフォーマットした日付を表示させたい]]></title><description><![CDATA[Next.jsで2023年5月5日（金）のように表示させたかったので、その時の実装メモ。
+
+ フォーマットした日付をNext.jsで実装する
+以下のようにコードを書くと、2023年5月5日（金）のように表示できる
+export const formatDate = () =&gt; {
+  const now = new Date();
+　　　　const year = now.getFullYear();
+  const month = now.getMonth() + 1;
+  const date = now.getDate();
+  const day = now.getDay(...]]></description><link>https://zenn.dev/tomoyuki_kato/articles/551d0798a43106</link><guid isPermaLink="true">https://zenn.dev/tomoyuki_kato/articles/551d0798a43106</guid><pubDate>Sun, 28 Jul 2024 08:41:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--SxSYd0wE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Next.js%25E3%2581%25A7%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25BC%25E3%2583%259E%25E3%2583%2583%25E3%2583%2588%25E3%2581%2597%25E3%2581%259F%25E6%2597%25A5%25E4%25BB%2598%25E3%2582%2592%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2595%25E3%2581%259B%25E3%2581%259F%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Tomoyuki%2520Kato%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2YyOTU0YTUzNzguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Tomoyuki Kato</dc:creator></item><item><title><![CDATA[Nestjs で @angular/ssr すると ES Module 周りでエラーが出る話]]></title><description><![CDATA[
+ はじめに
+Nestjs は2024年7月現在、ES Moduleの対応がないので @angular/ssr がそのまま import できないよ。という話です。
+https://github.com/nestjs/nest/issues/13319
+
+ やりたい構成
+Angularは標準のCLIから生成されるSSRのコードはexpressベースです。
+ただし、@angular/ssr 自体にフレームワーク依存があるわけではないので、NestJSでも使いたくなるわけです。
+今回はNestjsのプロジェクト内にAngularのプロジェクトを入れ込み localhost:3000/ にアク...]]></description><link>https://zenn.dev/nao50/articles/nestjs-in-angular18-with-ssr</link><guid isPermaLink="true">https://zenn.dev/nao50/articles/nestjs-in-angular18-with-ssr</guid><pubDate>Sun, 28 Jul 2024 06:42:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Pmw_dc0j--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Nestjs%2520%25E3%2581%25A7%2520%2540angular%252Fssr%2520%25E3%2581%2599%25E3%2582%258B%25E3%2581%25A8%2520ES%2520Module%2520%25E5%2591%25A8%25E3%2582%258A%25E3%2581%25A7%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E3%2581%258C%25E5%2587%25BA%25E3%2582%258B%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nao%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRiY2YzZDIyYTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nao</dc:creator></item><item><title><![CDATA[Hono + Microsoft Azure FunctionsでCRUDしてみたメモ]]></title><description><![CDATA[
+ 概要
+Honoなるフレームワークがあるということで試してみた。
+デプロイ結果 ... 無料のSQL Serverにつないでいるので初回は寝てて動かないかも。失敗したらコーヒー淹れて戻ってくるくらいで見れるようになるはず。
+ソースコード
+
+ バックエンド
+API一覧
+インフラ ( Functions に CORS 設定 )
+
+infra/bin/.env
+RESOURCE_GROUP_NAME='resource-group-hogehoge'
+PL_APP_REPO=https://user@dev.azure.com/user/reponamefuga/_git/async-ttr...]]></description><link>https://zenn.dev/hibo/articles/0c53545c9f80a6</link><guid isPermaLink="true">https://zenn.dev/hibo/articles/0c53545c9f80a6</guid><pubDate>Sun, 28 Jul 2024 03:19:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--siIgAaRG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Hono%2520%252B%2520Microsoft%2520Azure%2520Functions%25E3%2581%25A7CRUD%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hibo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvaC5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hibo</dc:creator></item><item><title><![CDATA[Next.js + Storybook(Webpack5) + TypeScriptでsvgファイルを表示する]]></title><description><![CDATA[
+ 環境
+
+
+
+技術
+バージョン
+
+
+
+
+React.js
+^18
+
+
+Next.js
+14.0.3
+
+
+Storybook
+^7.6.6
+
+
+svgr
+^8.1.0
+
+
+Webpack @ Storybook
+5
+
+
+
+
+ 問題
+Storybookを起動すると、ビルドは成功するが、Failed to execute 'createElement' on 'Document': The tag name provided ('static/media/public/images/icons/check.svg') is not a valid name.のエラーが出てしまう。
+
+ 前提
+...]]></description><link>https://zenn.dev/kosuke_iwasaki/articles/4ea10280174b39</link><guid isPermaLink="true">https://zenn.dev/kosuke_iwasaki/articles/4ea10280174b39</guid><pubDate>Sun, 28 Jul 2024 01:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--70vQc4bA--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Next.js%2520%252B%2520Storybook%2528Webpack5%2529%2520%252B%2520TypeScript%25E3%2581%25A7svg%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2592%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:trancore%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUxtNXd1Mmc4S1FYa2ZxWFBHelFJZlBDRXBTbC1vbHBIdV9KbkVLV3RTOD1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>trancore</dc:creator></item><item><title><![CDATA[RemixをESLint v9 に対応させる]]></title><description><![CDATA[ESLint v9 では、設定方式に大きな変更が加えられ、Flat Configが導入されました。従来の ESLint 設定ファイル（.eslintrc.js など）では、設定が階層的に構造化されていましたが、flat config では設定がより直感的でシンプルになります。これにより、設定の競合や複雑な継承構造を避け、開発者がより簡単に設定を管理できるようになります。
+Remix使ってサクッとアプリ作るかーと思っていたらESLintの設定をしていたっていうよくある時間の使い方をしました。v9の勉強になったのでいいか（？）。
+ではRemixをv9に対応してきましょう。
+本稿の設定ファイル...]]></description><link>https://zenn.dev/nickel/articles/f02db334167937</link><guid isPermaLink="true">https://zenn.dev/nickel/articles/f02db334167937</guid><pubDate>Sat, 27 Jul 2024 22:28:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--UVaAJhYR--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Remix%25E3%2582%2592ESLint%2520v9%2520%25E3%2581%25AB%25E5%25AF%25BE%25E5%25BF%259C%25E3%2581%2595%25E3%2581%259B%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Ryosuke%2520Mori%2520%2520in%2520N...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2IyMjEyZjYzYmIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Ryosuke Mori  in Nickel Lab. 合同会社(代表)</dc:creator></item><item><title><![CDATA[例外処理コードレビュー集]]></title><description><![CDATA[最近、よく他の方が書いたコードをレビューしているのですが、なぜか同じようなレビューコメントをするケースが多いので自分の中で整理のためにまとめてみました。TypeScriptです。
+
+ 1.catchしたエラーをそのままthrowするやつ
+
+ 元コード
+catchした例外をそのままthrowするだけのコード。catch句でなにか重要な処理をしているのかと期待して思って読み進めると結局何もやってなかった。インデントが増えただけ、みたいな状況。
+try {
+    : // なにか処理
+} catch (error) {
+    // catchしたエラーをそのままthrowするだけ
+    ...]]></description><link>https://zenn.dev/awwa500/articles/c99e56cc49412e</link><guid isPermaLink="true">https://zenn.dev/awwa500/articles/c99e56cc49412e</guid><pubDate>Sat, 27 Jul 2024 14:30:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--LZSGMY39--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E4%25BE%258B%25E5%25A4%2596%25E5%2587%25A6%25E7%2590%2586%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2583%25AC%25E3%2583%2593%25E3%2583%25A5%25E3%2583%25BC%25E9%259B%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AA%25E3%2581%25AB%25E3%2581%258C%25E3%2581%25A7%25E3%2582%258B%25E3%2581%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSnZMTnlJNldNM1Mwd1dDSUZ6MklZVTFlUm1RdzQzUTRDdV9ObXowVURsSFBzPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>なにがでるか</dc:creator></item><item><title><![CDATA[【GraphQL】boolean以外のvariableの値に応じてfieldを呼ぶか決めたい(できないっぽい)]]></title><description><![CDATA[
+ 頭出し
+GraphQL APIをバックエンドにしているフロントエンドアプリケーションを開発する際は、gqlリテラルをよく書くかと思います。
+普通のユースケースであれば、fieldを書いてcodegen!ってやっていれば特段問題ないかと思います。
+ですが、まれに「variableの値に応じてfieldを呼ぶか決めたい」ケースがあるかと思います。
+このvariableがboolean型であれば特に問題ありません。
+GraphQLではDirectivesがサポートされていて、こんな感じ↓でboolの値をfieldの前(この例で言うとfriendsの@includeの後)につけてあげればOK...]]></description><link>https://zenn.dev/monicle/articles/b6008a4a4819bf</link><guid isPermaLink="true">https://zenn.dev/monicle/articles/b6008a4a4819bf</guid><pubDate>Sat, 27 Jul 2024 12:35:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9FJju0-d--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590GraphQL%25E3%2580%2591boolean%25E4%25BB%25A5%25E5%25A4%2596%25E3%2581%25AEvariable%25E3%2581%25AE%25E5%2580%25A4%25E3%2581%25AB%25E5%25BF%259C%25E3%2581%2598%25E3%2581%25A6field%25E3%2582%2592%25E5%2591%25BC%25E3%2581%25B6%25E3%2581%258B%25E6%25B1%25BA%25E3%2582%2581%25E3%2581%259F%25E3%2581%2584%2528%25E3%2581%25A7%25E3%2581%258D%25E3%2581%25AA%25E3%2581%2584%25E3%2581%25A3%25E3%2581%25BD%25E3%2581%2584%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2582%2588%25E3%2581%2586%25E3%2581%25B8%25E3%2581%2584%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhhMWExNjBjOWQuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2583%25A2%25E3%2583%258B%25E3%2582%25AF%25E3%2583%25AB%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVjYjk0ZmQ3NGMuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ようへい</dc:creator></item><item><title><![CDATA[僕の好みを一方的に決めつける審議用Botに物申すための機能追加をしました]]></title><description><![CDATA[こんにちは。ダイの大冒険ガチ勢のbun913と申します。
+私は前回の記事で「同僚から勧められるアニメ作品を私が視聴するべきかどうか」を判定するChatBotを作成しました。
+https://zenn.dev/moneyforward/articles/3eadb58169f235
+ただし音楽性の違いでこのBot:審議マンとはうまくやっていけそうにないことがわかったので、以下のような構成に変更し、彼には対話の重要性を覚えてもらうことにしました。
+
+なお、今回の記事は以下の記事の構成やコードを大いに参考にさせていただいておりますが、構成を App Runner から Lambda + API...]]></description><link>https://zenn.dev/moneyforward/articles/2bb1a314d04063</link><guid isPermaLink="true">https://zenn.dev/moneyforward/articles/2bb1a314d04063</guid><pubDate>Sat, 27 Jul 2024 09:18:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9xXa5Qf4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2583%2595%25E3%2581%25AE%25E5%25A5%25BD%25E3%2581%25BF%25E3%2582%2592%25E4%25B8%2580%25E6%2596%25B9%25E7%259A%2584%25E3%2581%25AB%25E6%25B1%25BA%25E3%2582%2581%25E3%2581%25A4%25E3%2581%2591%25E3%2582%258B%25E5%25AF%25A9%25E8%25AD%25B0%25E7%2594%25A8Bot%25E3%2581%25AB%25E7%2589%25A9%25E7%2594%25B3%25E3%2581%2599%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%25E6%25A9%259F%25E8%2583%25BD%25E8%25BF%25BD%25E5%258A%25A0%25E3%2582%2592%25E3%2581%2597%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:bun913%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzUwOTQ4MTI2ZjguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Money%2520Forward%2520Developers%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzcxNGVhMDEyMDQuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>bun913</dc:creator></item><item><title><![CDATA[[初心者歓迎] npmに自分のパッケージを登録する方法]]></title><description><![CDATA[はじめまして、初心者向けにnpmに自分が作成したプログラムを登録し公開するまでの手順を教えます。]]></description><link>https://zenn.dev/arucraft2022/books/3ea743672b25a1</link><guid isPermaLink="true">https://zenn.dev/arucraft2022/books/3ea743672b25a1</guid><pubDate>Fri, 26 Jul 2024 23:19:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ELhoG3sQ--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci8xOTRmOWI3YWUyLnBuZw==%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>アルク</dc:creator></item><item><title><![CDATA[【index.ts】そのVSCodeタブ名、わかりづらくない？【page.tsx】]]></title><description><![CDATA[
+ はじめに
+VSCodeで、index.tsやpage.tsxなど、同名のファイルを複数同時に開いてしまい、わからなくなってしまったことはありませんか？
+
+実はよく見ると同一名称のファイルを開いているときには右側にディレクトリ名も表示されているのですが、薄い文字かつ、目線移動が必要で分かりづらいです。
+この記事では、VSCodeの設定を変更することで、タブ表示名にディレクトリ名を含めて表示する方法を紹介します。
+
+ 設定方法
+VSCodeの設定ファイルsettings.jsonに以下の設定を追加します。
+  "workbench.editor.customLabels.patterns...]]></description><link>https://zenn.dev/bmth/articles/vscode-tab-display-name-alias</link><guid isPermaLink="true">https://zenn.dev/bmth/articles/vscode-tab-display-name-alias</guid><pubDate>Fri, 26 Jul 2024 17:23:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bQJeWRE5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590index.ts%25E3%2580%2591%25E3%2581%259D%25E3%2581%25AEVSCode%25E3%2582%25BF%25E3%2583%2596%25E5%2590%258D%25E3%2580%2581%25E3%2582%258F%25E3%2581%258B%25E3%2582%258A%25E3%2581%25A5%25E3%2582%2589%25E3%2581%258F%25E3%2581%25AA%25E3%2581%2584%25EF%25BC%259F%25E3%2580%2590page.tsx%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2598%25E3%2582%2587%25E3%2581%2586%25E3%2581%2592%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YTVpY3FhSGVfOXQyWjc3YjBWV1RfWlM0MFF3MExBbS1zclhIRWtydDA9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>じょうげん</dc:creator></item><item><title><![CDATA[Property-Based Testing with TypeScript & fast-check]]></title><description><![CDATA[Originally published at here .
+Have you ever heard about Property-Based Testing (PBT)? Before diving into PBT, let’s take a moment to recall our usual approach to testing.
+
+ Overview: What is PBT? Why PBT?
+When developers write test code, they typically think of specific input values and the expe...]]></description><link>https://zenn.dev/samuraikun/articles/property-based-testing-in-typescript</link><guid isPermaLink="true">https://zenn.dev/samuraikun/articles/property-based-testing-in-typescript</guid><pubDate>Fri, 26 Jul 2024 15:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4njcKCI9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Property-Based%2520Testing%2520with%2520TypeScript%2520%2526%2520fast-check%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:samuraikun%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBjOGVjZGQ2NDQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>samuraikun</dc:creator></item><item><title><![CDATA[オブジェクトのデストラクチャリングに型を追加する方法]]></title><description><![CDATA[フォームコンポーネントを作成しているとします。ユーザーに名前とメールアドレスを入力させ、その値をサーバーに送信してニュースレターに登録するような機能を持たせる場合を考えます。
+では、フォームの値をデストラクチャリングする際に型を付けたい場合はどうするでしょうか？
+通常のTypeScriptの構文は、ES6のデストラクチャリングとリネーム機能と競合します。
+const { firstName: string, email: string } = formValues;
+これは動作しません。
+
+ デストラクチャリングされたオブジェクトに型を付ける
+デストラクチャリングされた個々の値に型を付け...]]></description><link>https://zenn.dev/nomikazu_x/articles/typescript-add-types-to-an-object-destructuring</link><guid isPermaLink="true">https://zenn.dev/nomikazu_x/articles/typescript-add-types-to-an-object-destructuring</guid><pubDate>Fri, 26 Jul 2024 13:34:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--PwPDHUSB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25AA%25E3%2583%2596%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E3%2581%25AE%25E3%2583%2587%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25A9%25E3%2582%25AF%25E3%2583%2581%25E3%2583%25A3%25E3%2583%25AA%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%25AB%25E5%259E%258B%25E3%2582%2592%25E8%25BF%25BD%25E5%258A%25A0%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nomikazu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E5Zjg3ZDg5NmIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nomikazu</dc:creator></item><item><title><![CDATA[【Angular】Materialのmat-inputを共通化してみる]]></title><description><![CDATA[オッス、俺泉（@izumin_0401）！！
+
+ Angular Materialのinputコンポーネントを共通化したい
+mat-inputをとにかく共通化したいお年頃。
+
+ ソースコード
+
+ 共通inputコンポーネント
+
+input.component.ts
+import { CommonModule } from '@angular/common';
+import { Component, Input } from '@angular/core';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';...]]></description><link>https://zenn.dev/izumin_0401/articles/6c66f07665b631</link><guid isPermaLink="true">https://zenn.dev/izumin_0401/articles/6c66f07665b631</guid><pubDate>Fri, 26 Jul 2024 12:02:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--639-vB95--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Angular%25E3%2580%2591Material%25E3%2581%25AEmat-input%25E3%2582%2592%25E5%2585%25B1%25E9%2580%259A%25E5%258C%2596%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%25B3%2589%25E6%25B5%25A9%25E5%2585%25B5%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ExNTljYmRlNDIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>泉浩兵</dc:creator></item></channel></rss>
