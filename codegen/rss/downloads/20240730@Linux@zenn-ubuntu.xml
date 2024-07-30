@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Ubuntu」のフィード]]></title><description><![CDATA[Zennのトピック「Ubuntu」のRSSフィードです]]></description><link>https://zenn.dev/topics/ubuntu</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/8c2cdbc5b3.png</url><title>Zennの「Ubuntu」のフィード</title><link>https://zenn.dev/topics/ubuntu</link></image><generator>zenn.dev</generator><lastBuildDate>Tue, 30 Jul 2024 03:01:12 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/ubuntu/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Ubuntu 24.04 LTSで開発環境を整える1]]></title><description><![CDATA[
+ パッケージ管理ソフトの選択
+Homebrewと悩むところではあるが、以下の理由からasdfを選択した。
+
+asdfは最初からUnix系OS全般で使用できるように設計されている
+asdfでは.tool-versionsファイルを使用してプロジェクトごとに異なるバージョンを設定可能
+
+
+ asdfのインストール
+https://asdf-vm.com/guide/getting-started.html
+git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.14.0
+bashrcに設定を追加vim ~/.bas...]]></description><link>https://zenn.dev/7shpaper/articles/51c1892c4318c7</link><guid isPermaLink="true">https://zenn.dev/7shpaper/articles/51c1892c4318c7</guid><pubDate>Sat, 27 Jul 2024 23:42:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BsLGmgSa--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ubuntu%252024.04%2520LTS%25E3%2581%25A7%25E9%2596%258B%25E7%2599%25BA%25E7%2592%25B0%25E5%25A2%2583%25E3%2582%2592%25E6%2595%25B4%25E3%2581%2588%25E3%2582%258B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:7shpaper%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSUNMUE9HM3FJLUNZRlV2YzNCY2RuRzNuY2VaX0c0M2JEWDRKVlhPM0xreDd5azdYbz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>7shpaper</dc:creator></item><item><title><![CDATA[ひとくちメモ：Ubuntu 24.04 +  4K 環境で分数スケーリングに近いことを分数スケーリングなしで実現する]]></title><description><![CDATA[
+ tl;dr
+以下のことをやると、GNOME の HiDPI 環境でもまともなインタフェースの大きさで文字を読めるようになる。Snap / Flatpak アプリが分数スケーリング環境でブラーされる問題も解消される。
+
+GNOME Tweaks のフォント倍率を 1.5 倍にする
+GNOME 設定のアクセシビリティ → Seeing → 「大きな文字」を有効にする
+GNOME 設定のアクセシビリティ → Seeing → 「Cursor Size」を大きい奴にする
+GNOME 設定の Ubuntu Desktop → Icon Size を 64 とかにする
+
+
+ 前提
+
+Ubuntu...]]></description><link>https://zenn.dev/argi_berri/articles/424edf2916f7bf</link><guid isPermaLink="true">https://zenn.dev/argi_berri/articles/424edf2916f7bf</guid><pubDate>Sat, 27 Jul 2024 15:40:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--AfrwXsyR--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%25B2%25E3%2581%25A8%25E3%2581%258F%25E3%2581%25A1%25E3%2583%25A1%25E3%2583%25A2%25EF%25BC%259AUbuntu%252024.04%2520%252B%2520%25204K%2520%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25A7%25E5%2588%2586%25E6%2595%25B0%25E3%2582%25B9%25E3%2582%25B1%25E3%2583%25BC%25E3%2583%25AA%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%25AB%25E8%25BF%2591%25E3%2581%2584%25E3%2581%2593%25E3%2581%25A8%25E3%2582%2592%25E5%2588%2586%25E6%2595%25B0%25E3%2582%25B9%25E3%2582%25B1%25E3%2583%25BC%25E3%2583%25AA%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%25AA%25E3%2581%2597%25E3%2581%25A7%25E5%25AE%259F%25E7%258F%25BE%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ARGIA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RhYWQwM2NmMzcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ARGIA</dc:creator></item><item><title><![CDATA[ubuntu の背景を単色に変更する]]></title><description><![CDATA[
+ 1. INTRODUCTION
+
+ubuntu で背景を変更する、デフォルトの画像も悪くはないが単色がいい
+が、GUI設定からは変更不可だったたので、その時のメモ
+
+
+ 2. Enviroment
+
+OS: Ubuntu 20.04.6 LTS
+
+
+ 3. command
+gsettings set org.gnome.desktop.background picture-uri ''
+gsettings set org.gnome.desktop.background color-shading-type 'solid'
+gsettings set org.gnome.deskto...]]></description><link>https://zenn.dev/kousukeota_ds/articles/4d9f1c5f91408c</link><guid isPermaLink="true">https://zenn.dev/kousukeota_ds/articles/4d9f1c5f91408c</guid><pubDate>Sat, 27 Jul 2024 09:27:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--cFLtJBxe--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ubuntu%2520%25E3%2581%25AE%25E8%2583%258C%25E6%2599%25AF%25E3%2582%2592%25E5%258D%2598%25E8%2589%25B2%25E3%2581%25AB%25E5%25A4%2589%25E6%259B%25B4%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kousukeota_ds%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VmMGQyMDEyMjguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kousukeota_ds</dc:creator></item><item><title><![CDATA[非公式シラバス作ってたら大学に雇用されて公認サイトになった話]]></title><description><![CDATA[
+ この話の概要
+大阪公立大学 工学部 情報工学科3年のボクが大学1年の夏に作った非公式シラバス「裏バス」が「大阪公立大学 授業カタログ」として、omu.ac.jp ドメイン下で公開することになった経緯をお話します。
+
+このようなサイトです。
+👇ぜひアクセスしてみてください。
+https://catalog.sp.omu.ac.jp
+
+ 制作した動機と既存シラバスの問題点
+既存のシラバスには以下のような問題がありました。
+
+検索が遅い
+授業ごとに固有のリンクがないので友人などに共有することができない
+戻るボタンや再読み込みボタンすら使えない
+
+それを解決するために、スクレイピングしてシラ...]]></description><link>https://zenn.dev/omu_tryangle/articles/d3dfb4f369403d</link><guid isPermaLink="true">https://zenn.dev/omu_tryangle/articles/d3dfb4f369403d</guid><pubDate>Fri, 26 Jul 2024 08:11:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1-4NBjkJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E9%259D%259E%25E5%2585%25AC%25E5%25BC%258F%25E3%2582%25B7%25E3%2583%25A9%25E3%2583%2590%25E3%2582%25B9%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%259F%25E3%2582%2589%25E5%25A4%25A7%25E5%25AD%25A6%25E3%2581%25AB%25E9%259B%2587%25E7%2594%25A8%25E3%2581%2595%25E3%2582%258C%25E3%2581%25A6%25E5%2585%25AC%25E8%25AA%258D%25E3%2582%25B5%25E3%2582%25A4%25E3%2583%2588%25E3%2581%25AB%25E3%2581%25AA%25E3%2581%25A3%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:tomo0611%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAwMmVhYjg4YTkuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Tryangle%2540%25E5%25A4%25A7%25E9%2598%25AA%25E5%2585%25AC%25E7%25AB%258B%25E5%25A4%25A7%25E5%25AD%25A6%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI0ZDc1YjBkNGEuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tomo0611</dc:creator></item><item><title><![CDATA[ApacheでInvalid command 'Header'エラーが出る時の対処法]]></title><description><![CDATA[
+ 使用環境
+Ubuntu 22.04
+Apache2.4.52
+
+ エラー内容
+ページにアクセスしようとするとエラーで開けなかったので、ログを確認
+/var/log/apache2/error.log
+ Invalid command 'Header', perhaps misspelled or defined by a module not included in the server configuration
+どうやらmod_headersが無効になっているようです。
+mod_headersとは
+mod_headersとは、HTTP リクエストヘッダとレスポンスヘッダを操作でき...]]></description><link>https://zenn.dev/snake12379/articles/94ed7aa5299aa1</link><guid isPermaLink="true">https://zenn.dev/snake12379/articles/94ed7aa5299aa1</guid><pubDate>Wed, 24 Jul 2024 22:51:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--eN3l5YVj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Apache%25E3%2581%25A7Invalid%2520command%2520%2527Header%2527%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E3%2581%258C%25E5%2587%25BA%25E3%2582%258B%25E6%2599%2582%25E3%2581%25AE%25E5%25AF%25BE%25E5%2587%25A6%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:wataru%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2gweVJaYUR2UVp5bW9XbFZ2T3o0X0ZGZ0JrSnhFM0xBb2lGVUl3PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>wataru</dc:creator></item><item><title><![CDATA[WindowsのDockerが異常に重かったので原因を調べて改善した話]]></title><description><![CDATA[以前開発中にDockerの動作が重すぎて話にならなかったので開発環境を見直した時の備忘録です。
+
+ 参考記事
+https://qiita.com/minato-naka/items/84508472c04f628e576e
+基本的にはこの記事に書いてあることが全てです。
+
+ 重かった原因
+まず、参考記事にも書いてある通り、WindowsでのDockerの使用にはHyper-VではなくWSLを使った方がいいことは知っていました。僕の環境で問題だったのはDockerに使用していたディストリビューションでした。
+wsl -lでインストールされているディストリビューションを確認すると、docke...]]></description><link>https://zenn.dev/togo_asai/articles/b66be89ab58666</link><guid isPermaLink="true">https://zenn.dev/togo_asai/articles/b66be89ab58666</guid><pubDate>Tue, 23 Jul 2024 23:15:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1arJ9vWn--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Windows%25E3%2581%25AEDocker%25E3%2581%258C%25E7%2595%25B0%25E5%25B8%25B8%25E3%2581%25AB%25E9%2587%258D%25E3%2581%258B%25E3%2581%25A3%25E3%2581%259F%25E3%2581%25AE%25E3%2581%25A7%25E5%258E%259F%25E5%259B%25A0%25E3%2582%2592%25E8%25AA%25BF%25E3%2581%25B9%25E3%2581%25A6%25E6%2594%25B9%25E5%2596%2584%25E3%2581%2597%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Togo%2528%2540asaitogo%2529%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTFNTbm55LXhXOWJrR1ZJUWd3cnp6RXk5R3pPd3d6bWtRT0pNby1KbzNMUHl2MlpRPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Togo(@asaitogo)</dc:creator></item><item><title><![CDATA[UbuntuにDockerをインストールする方法]]></title><description><![CDATA[
+ 概要
+UbuntuにDockerをインストールする方法。
+https://docs.docker.com/engine/install/ubuntu/
+上記の内容をほぼコピペしただけの記事だが、自分のよく行う作業が自分のzennにまとまっていると便利なので。
+
+ 手順
+
+ 1. 古いバージョンのDockerを削除する(必要なら)
+もし古いバージョンのDockerがインストールされている場合は、以下のコマンドで削除する。
+for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker cont...]]></description><link>https://zenn.dev/zurukumo/articles/037f5c49de3ca1</link><guid isPermaLink="true">https://zenn.dev/zurukumo/articles/037f5c49de3ca1</guid><pubDate>Tue, 23 Jul 2024 17:35:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--PfWlxeAZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ubuntu%25E3%2581%25ABDocker%25E3%2582%2592%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A4%25E3%2582%258B%25E3%2581%258F%25E3%2582%2582%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhkMjQyOWEzZjguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>つるくも</dc:creator></item><item><title><![CDATA[Electronの開発用Dockerコンテナ作成]]></title><description><![CDATA[
+ 環境
+OS: Ubuntu 22.04.4 LTS
+コンテナベースイメージ： Ubuntu:22.04
+Docker: 27.0.3
+docker-compose: v2.10.0
+GPU:
++---------------------------------------------------------------------------------------+
+| NVIDIA-SMI 545.29.06              Driver Version: 545.29.06    CUDA Version: 12.3     |
+|------------------...]]></description><link>https://zenn.dev/masakitanaka/articles/c926e2bcf3c037</link><guid isPermaLink="true">https://zenn.dev/masakitanaka/articles/c926e2bcf3c037</guid><pubDate>Mon, 22 Jul 2024 11:15:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fxBAX4pj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Electron%25E3%2581%25AE%25E9%2596%258B%25E7%2599%25BA%25E7%2594%25A8Docker%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2586%25E3%2583%258A%25E4%25BD%259C%25E6%2588%2590%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mt%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI0OWYyOGMyMWQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mt</dc:creator></item><item><title><![CDATA[仮想環境でAnsibleサーバを作成してみた（前編）]]></title><description><![CDATA[
+ 今回の内容はざっくりこんな感じ
+今回の記事は仮想環境でAnsibleサーバを構築する記事です。(後編もあり)
+仮想環境：VirtualBox 7.0.8
+ホストOS：Windows10
+ゲストOS：Ubuntu 24.04 LTS Server
+作成するサーバ：Ansibleサーバ
+
+ 対象読者
+
+サーバー構築初心者の方
+UbuntuにAnsibleサーバを構築したい人
+
+
+ VirtualBoxとは
+以下の記事が丁寧に記載されています。
+https://www.kagoya.jp/howto/it-glossary/server/virtualbox/
+
+ VirtualBoxイン...]]></description><link>https://zenn.dev/mayuka_free/articles/707f0329ec1f1e</link><guid isPermaLink="true">https://zenn.dev/mayuka_free/articles/707f0329ec1f1e</guid><pubDate>Mon, 22 Jul 2024 07:57:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ALrxiEyW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E4%25BB%25AE%25E6%2583%25B3%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25A7Ansible%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2582%2592%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25EF%25BC%2588%25E5%2589%258D%25E7%25B7%25A8%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mayuka%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FmYTRmZDBmYTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mayuka</dc:creator></item><item><title><![CDATA[55万円のオンプレ環境でAI開発]]></title><description><![CDATA[
+ 1.はじめに
+AIの研究や開発、データ分析をするときにはGPU環境が必要になります。クラウドでGPUを使う方法も良いですが、今回はオンプレミスでGPU環境を構築したいと思います。オンプレミスのGPU環境の導入を検討されている方の一助になれば幸いです。
+また、OSはUbuntu Desktop 24.04 LTSを使用し、PCにインストール済みのところから始めます。
+
+
+ 2.自作PCのパーツ一覧
+
+
+
+番号
+パーツ名
+品名
+金額(円)
+
+
+
+
+1
+グラボ
+Palit GeForce RTX 4090 GameRock OC 24GB
+297,000
+
+
+2
+マザーボード
+ASUS T...]]></description><link>https://zenn.dev/eiden0029/articles/my-custom-pc</link><guid isPermaLink="true">https://zenn.dev/eiden0029/articles/my-custom-pc</guid><pubDate>Sun, 21 Jul 2024 14:49:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Xk44fk0h--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:55%25E4%25B8%2587%25E5%2586%2586%25E3%2581%25AE%25E3%2582%25AA%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AC%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25A7AI%25E9%2596%258B%25E7%2599%25BA%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:eidensuke%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0ZGNFb0hqNmxwWWNaUmUzTU5GOElRRWVfd0N4SGpFa0kyVEdYTUpQS0R5V3c9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>eidensuke</dc:creator></item><item><title><![CDATA[BINDについて(LinuC202学習)]]></title><description><![CDATA[
+ BINDとは
+https://www.isc.org/bind/
+Berkeley Internet Name Domain、略してBIND。DNS権威サーバーおよびキャッシュサーバーとして機能するソフトウェア。
+DNSソフトウェアとしては最もトラディショナルかつ一般的だが、インターネットの前面に位置するサーバーという性質と近年の脆弱性の多発と、Amazon Route53やAzure DNSというマネージドサービスを利用したそれらDNS起因のセキュリティ責任のオフロードの動機から、触れる機会は減っていると思われる。
+一方で触れることでDNSの内部の働きを体感し、理解を深めることには...]]></description><link>https://zenn.dev/yoshitomo_t/articles/linuc_bind_202407</link><guid isPermaLink="true">https://zenn.dev/yoshitomo_t/articles/linuc_bind_202407</guid><pubDate>Sun, 21 Jul 2024 03:10:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--k8wBmqSM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:BIND%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2528LinuC202%25E5%25AD%25A6%25E7%25BF%2592%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259F%25E3%2581%25AA%25E3%2581%25B9%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTG43LW5jdVowQS15c2xkeHgyTGxjeHkzWWhaOWo1WE00MGV4cTBBTkQ1Qmc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>たなべ</dc:creator></item><item><title><![CDATA[未経験者による未経験者のための、Ubuntuのターミナルコマンド講座！【ls編】]]></title><description><![CDATA[こんにちは！株式会社ヘッドウォータースの新卒１年目のやのと申します！最近、Ubuntuを使い始めたばかりですが、その中で学んだターミナルコマンドであるlsについて説明したいと思います。この記事では、基本的な使い方や応用方法を紹介します。ぜひ参考にしてみてください！
+＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
+
+ ls コマンドとは何か？
+lsコマンドとは、ディレクトリの内容を表示するコマンドです。
+ターミナルでlsコマンドを入力すると、ディレクトリ内のファイルを表示させることが出来ます。
+以下のようなディレクトリ構造の場合、
+/home/...]]></description><link>https://zenn.dev/headwaters/articles/8c453614502d9f</link><guid isPermaLink="true">https://zenn.dev/headwaters/articles/8c453614502d9f</guid><pubDate>Thu, 18 Jul 2024 00:36:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Wb1whagL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%259C%25AA%25E7%25B5%258C%25E9%25A8%2593%25E8%2580%2585%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258B%25E6%259C%25AA%25E7%25B5%258C%25E9%25A8%2593%25E8%2580%2585%25E3%2581%25AE%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%25E3%2580%2581Ubuntu%25E3%2581%25AE%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%259F%25E3%2583%258A%25E3%2583%25AB%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E8%25AC%259B%25E5%25BA%25A7%25EF%25BC%2581%25E3%2580%2590ls%25E7%25B7%25A8%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E7%259F%25A2%25E9%2587%258E%25E3%2580%2580%25E9%2599%25BD%25E8%25BC%259D%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZjNGExY2UxMDYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2598%25E3%2583%2583%25E3%2583%2589%25E3%2582%25A6%25E3%2582%25A9%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%25BC%25E3%2582%25B9%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSlVhV2x5S1Rkc0NXVEVrV20wREF0UEx0dnN0VXpsaTBIQU1LZVZySzFaOXI1WmNRPXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>矢野　陽輝</dc:creator></item><item><title><![CDATA[nginx: command not foundとなるとき]]></title><description><![CDATA[ラズベリーパイでnginxをインストールしたものの、ターミナルで
+nginx
+を実行しても
+nginx: command not found
+というエラーが出てしまい、なかなかこれを解決できませんでした。
+結論、/usr/sbinのパスを通すことで解決できました。
+私はシェルにfishを使っているため、~/.config/fish/config.fishに
+# ~/.config/fish/config.fish
+set PATH -x /usr/sbin $PATH
+を追加して、fishコマンドを実行して.config/fish/config.fishを反映させることで無事に動きました...]]></description><link>https://zenn.dev/efficientyk/articles/8ce7508052aa8b</link><guid isPermaLink="true">https://zenn.dev/efficientyk/articles/8ce7508052aa8b</guid><pubDate>Sun, 14 Jul 2024 03:34:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--KAuOgELi--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:nginx%253A%2520command%2520not%2520found%25E3%2581%25A8%25E3%2581%25AA%25E3%2582%258B%25E3%2581%25A8%25E3%2581%258D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:YK%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NmMjg1YTc5NzguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>YK</dc:creator></item><item><title><![CDATA[Docker: 開発用コンテナで sshd を起動してサーバー化する]]></title><description><![CDATA[
+ はじめに
+私はねぇ、システムの Python 環境に直接 pip install をかましまくった後で、クリーンな状態に戻そうと思い /usr/lib/python3/dist-packages の中身を全部削除して、システムを破壊したことがあるんだ。それはとても甘美な経験だったと記憶しているよ。
+しかしそれ以来、すべての開発環境を仮想環境にインストールしないと安心できない呪いにかかってしまったんだ。
+実際のところ、本記事の内容は DevContainer を使えばよりドラマチックかつエロティックに解決できるのだが、私は頭が悪くナウでヤングなツールのツールに振り回されるのが大嫌いな老...]]></description><link>https://zenn.dev/wsuzume/articles/7e61ed60bb8e78</link><guid isPermaLink="true">https://zenn.dev/wsuzume/articles/7e61ed60bb8e78</guid><pubDate>Sun, 14 Jul 2024 03:10:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--p_c4WpDu--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%253A%2520%25E9%2596%258B%25E7%2599%25BA%25E7%2594%25A8%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2586%25E3%2583%258A%25E3%2581%25A7%2520sshd%2520%25E3%2582%2592%25E8%25B5%25B7%25E5%258B%2595%25E3%2581%2597%25E3%2581%25A6%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E5%258C%2596%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Josh%2520Nobus%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJjZDAzYjNkNzYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Josh Nobus</dc:creator></item><item><title><![CDATA[旧システムvenvで作成された仮想環境中のプロジェクトをpyenvで動作させる手順]]></title><description><![CDATA[
+ 旧システムvenvで作成された仮想環境中のプロジェクトをpyenvで動作させる手順
+
+ はじめに
+少し前にシステムをUbuntu 20.04からUbuntu 22.04へ移行しました。
+新システムに移行にあたり、Pythonのバージョンが3.8から3.10へ変化しました。
+このとき旧システムのpython仮想環境(venv)で作成されたプロフェクトフォルダをアクティベートしようとすると、新システムのPythonが起動されてしまいます。
+ROOT/bin/python3がシステムPythonへのシンボリックリンクになっているからです。（ROOTはプロジェクトのルートパス）
+旧システムの...]]></description><link>https://zenn.dev/ykesamaru/articles/3afd2686ed998c</link><guid isPermaLink="true">https://zenn.dev/ykesamaru/articles/3afd2686ed998c</guid><pubDate>Fri, 12 Jul 2024 03:08:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--I_n5A31E--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%2597%25A7%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0venv%25E3%2581%25A7%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2595%25E3%2582%258C%25E3%2581%259F%25E4%25BB%25AE%25E6%2583%25B3%25E7%2592%25B0%25E5%25A2%2583%25E4%25B8%25AD%25E3%2581%25AE%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E3%2582%2592pyenv%25E3%2581%25A7%25E5%258B%2595%25E4%25BD%259C%25E3%2581%2595%25E3%2581%259B%25E3%2582%258B%25E6%2589%258B%25E9%25A0%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yKesamaru%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY4MmM3NDMxNjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yKesamaru</dc:creator></item><item><title><![CDATA[UbuntuのDockerにDMARC-Visualizer構築]]></title><description><![CDATA[
+ はじめに
+
+ 環境
+
+ 参考
+
+ DMARC-Visualizerインストール
+
+ DMARC-Visualizer取得
+git clone https://github.com/debricked/dmarc-visualizer
+
+ Dockerイメージ作成用iniファイル作成
+cd dmarc-visualizer
+ls -l parsedmarc/*.ini
+cp -pi parsedmarc/parsedmarc.sample.ini parsedmarc/parsedmarc.ini
+ls -l parsedmarc/*.ini
+
+ DMARC-VisualizerのDo...]]></description><link>https://zenn.dev/heihey/articles/1d2551d34664ca</link><guid isPermaLink="true">https://zenn.dev/heihey/articles/1d2551d34664ca</guid><pubDate>Wed, 10 Jul 2024 16:04:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--zVCZ5bsb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ubuntu%25E3%2581%25AEDocker%25E3%2581%25ABDMARC-Visualizer%25E6%25A7%258B%25E7%25AF%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:heihey%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQyOWQ2OTUyNDYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>heihey</dc:creator></item><item><title><![CDATA[UbuntuにDocker環境を構築]]></title><description><![CDATA[
+ はじめに
+
+ 環境
+
+
+
+Head
+Head
+
+
+
+
+text
+text
+
+
+実行ユーザー
+user1
+
+
+
+
+ 参考
+Docker コマンド リファレンス https://docs.docker.jp/engine/reference/commandline/toc.html
+
+ Dockerインストール
+
+ リポジトリ用GPGキー追加
+ls -l /usr/share/keyrings/docker*
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/...]]></description><link>https://zenn.dev/heihey/articles/9ae1b8b1ed8bb7</link><guid isPermaLink="true">https://zenn.dev/heihey/articles/9ae1b8b1ed8bb7</guid><pubDate>Wed, 10 Jul 2024 15:55:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Qwtq0psz--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ubuntu%25E3%2581%25ABDocker%25E7%2592%25B0%25E5%25A2%2583%25E3%2582%2592%25E6%25A7%258B%25E7%25AF%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:heihey%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQyOWQ2OTUyNDYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>heihey</dc:creator></item><item><title><![CDATA[簡単なサウンド機能テスター]]></title><description><![CDATA[!
+社内向け：手順書として日本語で記載
+
+!
+If you are not Japanese, Please refer to Github repository
+
+https://github.com/mi-kaneyon/soundtester/tree/main
+
+ たまに使うフロント(デスクトップ）のサウンドコネクタ
+
+ ノートPCのサウンドコネクタもあるかも・・・
+
+ループバックケーブルを使用して、正常に音のやり取りができているを検査
+先にサンプルサウンドを作り、それを再生・録音することで、異常がないかを確認
+最後に統計データを出して異常が無いことを確認
+
+
+ ノイズバリバリ
+...]]></description><link>https://zenn.dev/manyan3/articles/0200fae2752c0f</link><guid isPermaLink="true">https://zenn.dev/manyan3/articles/0200fae2752c0f</guid><pubDate>Mon, 08 Jul 2024 07:16:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--oSb23wfs--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%25B0%25A1%25E5%258D%2598%25E3%2581%25AA%25E3%2582%25B5%25E3%2582%25A6%25E3%2583%25B3%25E3%2583%2589%25E6%25A9%259F%25E8%2583%25BD%25E3%2583%2586%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%25BC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Manyan3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRhOGIwMTUwYzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Manyan3</dc:creator></item><item><title><![CDATA[【WireGuard】拠点間でVPN接続をしてみた]]></title><description><![CDATA[
+ はじめに
+みなさんは、自身でVPNサーバをお持ちでしょうか。私の環境では、自宅で鯖が動いていますが、その鯖達はNATされていたり、物理的な問題もあって、さくらのVPS上にWireGuardを用いてVPN環境を構築しています。しかし、このような環境であると、自宅のネットワークにはルーティングできず、自宅内のホスト全てにWireGuardをインストールするという手間が発生してしまいます。従って、WireGuard鯖と自宅内にある代表の鯖一台同士を拠点間で接続することにしました。
+
+ 構成図
+
+!
+
+さくらのVPSではVPS自体にグローバルのIPアドレスが割り当てられています。
+左側のVP...]]></description><link>https://zenn.dev/tochiman/articles/2af73f9bdb4765</link><guid isPermaLink="true">https://zenn.dev/tochiman/articles/2af73f9bdb4765</guid><pubDate>Sun, 07 Jul 2024 15:48:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--EqJG5pSb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590WireGuard%25E3%2580%2591%25E6%258B%25A0%25E7%2582%25B9%25E9%2596%2593%25E3%2581%25A7VPN%25E6%258E%25A5%25E7%25B6%259A%25E3%2582%2592%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tochiman%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA4NTAzODI5MzAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tochiman</dc:creator></item><item><title><![CDATA[【C/C++】Ubuntu環境とGCCでHello World]]></title><description><![CDATA[
+ はじめに
+Ubuntu環境でC/C++を始めるための備忘録
+コンパイラにはGCCを使用した
+
+ 環境構築
+ビルド・コンパイルのためbuild-essentialをaptでインストールしておく
+バージョン確認でインストールを確認
+sudo apt install build-essential
+
+#インストール完了確認
+gcc --version
+
+ コードの実装
+コードはただ"Hello World!"をprintするだけの単純なものだが掲載しておく
+CとC++の両方を掲載しておく
+Cの場合
+
+hello_world.c
+#include &lt;stdio.h&gt;
+ 
+void...]]></description><link>https://zenn.dev/hajime9109/articles/f3dab5eb893a7d</link><guid isPermaLink="true">https://zenn.dev/hajime9109/articles/f3dab5eb893a7d</guid><pubDate>Sun, 07 Jul 2024 13:02:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--muJygvr1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590C%252FC%252B%252B%25E3%2580%2591Ubuntu%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25A8GCC%25E3%2581%25A7Hello%2520World%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:HajimeTahara%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NkOTNhZjAyYzcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>HajimeTahara</dc:creator></item></channel></rss>
