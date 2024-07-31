@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「TypeScript」のフィード]]></title><description><![CDATA[Zennのトピック「TypeScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/typescript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/f13e758fdb.png</url><title>Zennの「TypeScript」のフィード</title><link>https://zenn.dev/topics/typescript</link></image><generator>zenn.dev</generator><lastBuildDate>Wed, 31 Jul 2024 03:00:18 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/typescript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[最高のCSS-in-JS体験！vanilla-extractで実現するZero-Runtimeと型安全なCSS]]></title><description><![CDATA[
+ はじめに
+vanilla-extract を利用することによって、Zero-Runtimeかつ型安全なCSS-in-JS体験が可能です。
+今回はApp Router時代のスタイリング戦略で最高のCSS-in-JSライブラリ、vanilla-extractにDeepDiveしていきます。
+
+
+ vanilla-extract の生い立ち
+vanilla-extract についてしっかりと理解していくために、まずは、どうして vanilla-extract ができたのか、 vanilla-extract の開発者であるMark Dalgleis氏はどのような人物なのかについて、みていきた...]]></description><link>https://zenn.dev/blueish/articles/d989369fe4a220</link><guid isPermaLink="true">https://zenn.dev/blueish/articles/d989369fe4a220</guid><pubDate>Wed, 31 Jul 2024 01:56:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--A9c4OEit--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%259C%2580%25E9%25AB%2598%25E3%2581%25AECSS-in-JS%25E4%25BD%2593%25E9%25A8%2593%25EF%25BC%2581vanilla-extract%25E3%2581%25A7%25E5%25AE%259F%25E7%258F%25BE%25E3%2581%2599%25E3%2582%258BZero-Runtime%25E3%2581%25A8%25E5%259E%258B%25E5%25AE%2589%25E5%2585%25A8%25E3%2581%25AACSS%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%258A%25E3%2581%2595%25E3%2581%2595%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg5YWRmNjMzNzkuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2596%25E3%2583%25AB%25E3%2583%25BC%25E3%2582%25A4%25E3%2583%2583%25E3%2582%25B7%25E3%2583%25A5%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc3MDYwNjU5YWIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>おささ</dc:creator></item><item><title><![CDATA[Next.jsで対象ユーザのnpmパッケージリストを作成しSSRでOGPも作る]]></title><description><![CDATA[
+ npm のパッケージリスト
+npm にパッケージを公開し続けていたら、気がつくと 50 を超えるパッケージを公開していました。これらのパッケージのダウンロード状態などを個別に把握するのは辛いので、一覧表示するページを作成しました。
+https://next-npm.vercel.app/?name=sora_kumo&amp;sort=3
+
+
+ データの取得方法
+
+ npm パッケージの検索
+以下のアドレスで GET リクエストを送ると、指定したユーザがメンテナしているパッケージの一覧を取得できます。
+https://registry.npmjs.org/-/v1/search?te...]]></description><link>https://zenn.dev/sora_kumo/articles/npm-packages</link><guid isPermaLink="true">https://zenn.dev/sora_kumo/articles/npm-packages</guid><pubDate>Wed, 31 Jul 2024 00:11:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GRNBhDXz--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Next.js%25E3%2581%25A7%25E5%25AF%25BE%25E8%25B1%25A1%25E3%2583%25A6%25E3%2583%25BC%25E3%2582%25B6%25E3%2581%25AEnpm%25E3%2583%2591%25E3%2583%2583%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%25AA%25E3%2582%25B9%25E3%2583%2588%25E3%2582%2592%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2597SSR%25E3%2581%25A7OGP%25E3%2582%2582%25E4%25BD%259C%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E7%25A9%25BA%25E9%259B%25B2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VlZTgzMDYyMDQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>空雲</dc:creator></item><item><title><![CDATA[【Vue Test Utils】mountとshallowMountの違いと使い分け]]></title><description><![CDATA[
+ mountとshallowMountの違い
+
+ mount
+指定したVueコンポーネントの子コンポーネントまでを全てレンダリングするAPI。
+import { mount } from '@vue/test-utils';
+import ParentComponent from '@/components/ParentComponent.vue';
+
+const wrapper = mount(ParentComponent);
+console.log(wrapper.html());
+出力例
+&lt;div&gt;
+  &lt;h1&gt;Parent Component&lt;/...]]></description><link>https://zenn.dev/t0daaay/articles/3110ac21975364</link><guid isPermaLink="true">https://zenn.dev/t0daaay/articles/3110ac21975364</guid><pubDate>Tue, 30 Jul 2024 14:25:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--LmgzqVde--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Vue%2520Test%2520Utils%25E3%2580%2591mount%25E3%2581%25A8shallowMount%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%25E3%2581%25A8%25E4%25BD%25BF%25E3%2581%2584%25E5%2588%2586%25E3%2581%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A4%25E3%2581%2598%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2EzZjZlYWU1ZjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>つじ</dc:creator></item><item><title><![CDATA[【Node.js】画像がえっちかAIで判定してみた]]></title><description><![CDATA[
+ はじめに
+ChatGPTをはじめとするAIの有用性が知れ渡り、検索エンジンや問い合わせフォーム、果ては手元にあるスマホ上など、ありとあらゆる場所への採用が検討されているこの大AI時代。火付け役こそChatGPTのような大規模言語モデルやStable Diffusionのような画像生成AIでしたが、世の中にはそれ以外にも様々なAIがあって、それぞれ複雑なタスクをこなすことができます。コンテンツモデレーションもその一つ。X（旧Twitter）などのSNSに投稿された画像は、本当に投稿・共有して大丈夫なものなのか、AIによって判別されていると言われています。
+……で、実はMisskeyとい...]]></description><link>https://zenn.dev/okayurisotto/articles/544e4e2432c317</link><guid isPermaLink="true">https://zenn.dev/okayurisotto/articles/544e4e2432c317</guid><pubDate>Tue, 30 Jul 2024 13:54:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--WbUPTwPZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Node.js%25E3%2580%2591%25E7%2594%25BB%25E5%2583%258F%25E3%2581%258C%25E3%2581%2588%25E3%2581%25A3%25E3%2581%25A1%25E3%2581%258BAI%25E3%2581%25A7%25E5%2588%25A4%25E5%25AE%259A%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258A%25E3%2581%258B%25E3%2582%2586%25E3%2582%258A%25E3%2581%259E%25E3%2581%25A3%25E3%2581%25A8%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJiOWIzMjQwMDYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>おかゆりぞっと</dc:creator></item><item><title><![CDATA[配列からユニオン型を作成する方法]]></title><description><![CDATA[
+ 配列からユニオン型を作成する
+プログラムが処理できる一連の アクション を含む配列があるとします。
+// 推論された型: string[]
+const actions = ['increase', 'decrease', 'reset'];
+この配列の推論された型は string[] であり、非常に広範な型です。このままではあまり活用できません。配列の推論された型の広がりを防ぐために as const を使用できます。
+
+ 推論された型の固定化
+// 推論された型: readonly ['increase', 'decrease', 'reset']
+const actions = ...]]></description><link>https://zenn.dev/nomikazu_x/articles/typescript-create-union-type-from-an-array</link><guid isPermaLink="true">https://zenn.dev/nomikazu_x/articles/typescript-create-union-type-from-an-array</guid><pubDate>Tue, 30 Jul 2024 11:00:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--NQiGrPR1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E9%2585%258D%25E5%2588%2597%25E3%2581%258B%25E3%2582%2589%25E3%2583%25A6%25E3%2583%258B%25E3%2582%25AA%25E3%2583%25B3%25E5%259E%258B%25E3%2582%2592%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nomikazu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E5Zjg3ZDg5NmIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nomikazu</dc:creator></item><item><title><![CDATA[[備忘録] Nextjs/TypeScript環境でJest/Testing Libraryを用いたテスト実施]]></title><description><![CDATA[
+ 前提
+自分のプロジェクトにjestとtesting libraryを入れていきます。
+app routerのプロジェクトになります。
+jestとtesting libraryの導入は基本的にnextjs公式doc Setting up Jest with Next.jsの通りに実施します。
+一部エラーになったりしたので、それをmemoするための記事になっています。
+
+ 参考資料
+
+testing Library公式doc
+nextjs 公式doc
+
+
+ セットアップ
+
+npm install -D jest jest-environment-jsdom @testing-librar...]]></description><link>https://zenn.dev/kon_kon_nok/articles/a08a64dda64deb</link><guid isPermaLink="true">https://zenn.dev/kon_kon_nok/articles/a08a64dda64deb</guid><pubDate>Tue, 30 Jul 2024 10:11:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--czCZ_IQ8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255B%25E5%2582%2599%25E5%25BF%2598%25E9%258C%25B2%255D%2520Nextjs%252FTypeScript%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25A7Jest%252FTesting%2520Library%25E3%2582%2592%25E7%2594%25A8%25E3%2581%2584%25E3%2581%259F%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E5%25AE%259F%25E6%2596%25BD%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:NOK%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzYzOGRjOTRmMzguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>NOK</dc:creator></item><item><title><![CDATA[Expoでアプリ開発]]></title><description><![CDATA[この本は、React Native(Expo)でネイティブアプリを開発する方法を理解することを目的としています。
+
+Expoでの開発方法の初歩的なところをまず説明し、その後実際の簡単なTODOアプリ開発を行っていきます。
+
+技術スタックは下記になります。
+・React Native
+・Expo
+・TypeScript
+・NativeWind
+・Bun
+・Supabase
+
+対象読者
+・ReactやNext.jsでの開発経験があるフロントエンドエンジニアの方
+・React Native(Expo)でネイティブアプリを開発してみたい方
+]]></description><link>https://zenn.dev/keisuke333/books/109bfd5bf5ddf9</link><guid isPermaLink="true">https://zenn.dev/keisuke333/books/109bfd5bf5ddf9</guid><pubDate>Tue, 30 Jul 2024 07:56:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fFYmkJsM--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci8wMzhjZWEwOTBkLmpwZWc=%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>keisuke-333</dc:creator></item><item><title><![CDATA[Angular CDKで可変サイズや逆方向の仮想スクロールを実装するOSSを作った話]]></title><description><![CDATA[タイトルのままですが、 @rdlabo/ngx-cdk-scroll-strategies をOSSとしてリリースしました。 Angular公式では
+
+固定サイズの仮想スクロール: FixedSizeVirtualScrollStrategy
+
+可変サイズの仮想スクロール: AutoSizeVirtualScrollStrategy（Experimental）
+
+のふたつが用意されています。固定サイズは（UI設計が固定サイズにできる場合は）問題なく使えるのですが、私の環境では可変サイズはスクロールがカクついたりジャンプしたりとうまく動かなかったんですよね。またソースコードを読んだところ、...]]></description><link>https://zenn.dev/rdlabo/articles/ee3c566ef29e34</link><guid isPermaLink="true">https://zenn.dev/rdlabo/articles/ee3c566ef29e34</guid><pubDate>Tue, 30 Jul 2024 07:04:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--McwsauGq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Angular%2520CDK%25E3%2581%25A7%25E5%258F%25AF%25E5%25A4%2589%25E3%2582%25B5%25E3%2582%25A4%25E3%2582%25BA%25E3%2582%2584%25E9%2580%2586%25E6%2596%25B9%25E5%2590%2591%25E3%2581%25AE%25E4%25BB%25AE%25E6%2583%25B3%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%25AB%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2599%25E3%2582%258BOSS%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%25A6%258A%25E5%258E%259F%25E6%2598%258C%25E5%25BD%25A6%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2hPaXJOMUlrUWZNc0J2Vlljc1NzOGRGYW9USjV1TnZNTHF5TUp4cWc9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>榊原昌彦</dc:creator></item><item><title><![CDATA[【React/MUI/CSS】複数行かつ溢れたら3 点リーダーを付けれるコンポーネントを作ろう！]]></title><description><![CDATA[
+ てんてんてん(..., 3点リーダー)をいい感じにしたい！
+フロントエンドの画面表示を実装していて、「数行(コンポーネントを使う側から指定)かつ溢れたら3点リーダーを付けれるコンポーネント」を実装したくなることがあるかと思います。この記事ではそのやり方をメモ程度にまとめていきます。
+
+ 具体的なUI
+こちらは実装後のStorybookのキャプチャです。
+
+
+ どうやるの？実際のコードは？
+React, MUIを用いて.tsxに実装する場合の一例を残しておきます。
+MUIでなくても、コードを適宜修正すればchakraなどでも大体同じようにして使えるはず！
+追記：chakraにはnoOf...]]></description><link>https://zenn.dev/monicle/articles/0116443a071b3c</link><guid isPermaLink="true">https://zenn.dev/monicle/articles/0116443a071b3c</guid><pubDate>Tue, 30 Jul 2024 05:41:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fT3zhEZO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590React%252FMUI%252FCSS%25E3%2580%2591%25E8%25A4%2587%25E6%2595%25B0%25E8%25A1%258C%25E3%2581%258B%25E3%2581%25A4%25E6%25BA%25A2%25E3%2582%258C%25E3%2581%259F%25E3%2582%25893%2520%25E7%2582%25B9%25E3%2583%25AA%25E3%2583%25BC%25E3%2583%2580%25E3%2583%25BC%25E3%2582%2592%25E4%25BB%2598%25E3%2581%2591%25E3%2582%258C%25E3%2582%258B%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%259D%25E3%2583%25BC%25E3%2583%258D%25E3%2583%25B3%25E3%2583%2588%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258D%25E3%2581%2586%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2582%2588%25E3%2581%2586%25E3%2581%25B8%25E3%2581%2584%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhhMWExNjBjOWQuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2583%25A2%25E3%2583%258B%25E3%2582%25AF%25E3%2583%25AB%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVjYjk0ZmQ3NGMuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ようへい</dc:creator></item><item><title><![CDATA[SolidJSでサクッと作るGithubPagesサイト]]></title><description><![CDATA[こんにちは。FEチームのMapleです。私たちのチームは、現在のシステムアーキテクチャを見直し、Reactを用いた新しいアーキテクチャへの移行を検討しています。
+他のフレームワークも視野を広げたいので、今回はSolidJSでサクッとGithubPagesにデプロイを行っていこうと思います。
+
+ リポジトリ
+https://github.com/fuuki12/maple-dev
+
+ SolidJSとは
+SolidJSは、JavaScriptライブラリの一つで、シンプルで高性能なユーザーインターフェースを構築するために設計されています。以下にSolidJSの特徴をいくつか挙げます。
+
+リア...]]></description><link>https://zenn.dev/team_soda/articles/d8d6c637923cd4</link><guid isPermaLink="true">https://zenn.dev/team_soda/articles/d8d6c637923cd4</guid><pubDate>Tue, 30 Jul 2024 01:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vdJH64h8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:SolidJS%25E3%2581%25A7%25E3%2582%25B5%25E3%2582%25AF%25E3%2583%2583%25E3%2581%25A8%25E4%25BD%259C%25E3%2582%258BGithubPages%25E3%2582%25B5%25E3%2582%25A4%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E7%2599%25BD%25E8%2589%25B2%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NmYTM5ODQ3MWIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:SODA%2520Engineering%2520Blog%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzEyM2Y1N2EwYTMuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>白色</dc:creator></item><item><title><![CDATA[openapi-typescriptのCLIオプション、全部見る]]></title><description><![CDATA[
+ はじめに
+openapi-typescript は OpenAPI 3.0,3.1 のスキーマを TypeScript に変換するツールです。
+以下のようにスキーマファイルのパスと出力ファイルのパスを指定することで、スキーマを TS に変換できます。
+npx openapi-typescript ./path/to/my/schema.yaml -o ./path/to/my/schema.ts
+CLI オプションというのは、上記例の「-o」のように、スキーマから TS に変換する際の振る舞いを制御できる仕組みです.
+この記事では、openapi-typescript で使用できるオ...]]></description><link>https://zenn.dev/funteractiveinc/articles/a275f9302c7183</link><guid isPermaLink="true">https://zenn.dev/funteractiveinc/articles/a275f9302c7183</guid><pubDate>Tue, 30 Jul 2024 00:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--YJUwsKbb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:openapi-typescript%25E3%2581%25AECLI%25E3%2582%25AA%25E3%2583%2597%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2580%2581%25E5%2585%25A8%25E9%2583%25A8%25E8%25A6%258B%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:yoshino%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I4YmI2YjY4NDMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2595%25E3%2582%25A1%25E3%2583%25B3%25E3%2582%25BF%25E3%2583%25A9%25E3%2582%25AF%25E3%2583%2586%25E3%2582%25A3%25E3%2583%2596%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzczYTNmZDBlMGUuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yoshino</dc:creator></item><item><title><![CDATA[Typescriptのdeclareってなんでするの？]]></title><description><![CDATA[
+ はじめに
+NextJSにて自作ウェブサービスを作成していると、どうしても使用しているライブラリの中身が気になって読むことが多いのですが、typescriptの構文をそんなに理解してないことに気付かされました.
+今回は、declareについて疑問点を解消していけたらと思います
+
+ declareの意味
+意外と単語の意味を理解することで、すんなり解決するなんてこともあります.
+weblioでdeclareを調べると宣言するという意味が出てきました.
+https://ejje.weblio.jp/content/declare
+
+ typescriptのdeclareの意味
+typescr...]]></description><link>https://zenn.dev/norinoriver/articles/bd5ac35175bf01</link><guid isPermaLink="true">https://zenn.dev/norinoriver/articles/bd5ac35175bf01</guid><pubDate>Mon, 29 Jul 2024 14:35:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--SnIzGwId--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Typescript%25E3%2581%25AEdeclare%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25AA%25E3%2582%2593%25E3%2581%25A7%25E3%2581%2599%25E3%2582%258B%25E3%2581%25AE%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nori%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E1YjI5NDBlMjAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nori</dc:creator></item><item><title><![CDATA[【Angular】HttpClientのObservableはunsubscribe不要]]></title><description><![CDATA[rxjsって難しいけど、うまく書けた時ガッツポーズを決めちゃう泉（@izumin_0401）です。
+
+ ブログ記事はこちら
+https://traveler0401.com/angular-httpclient-observable-unsubscribe
+
+ unsubscribeしてる？
+Angularでは何かとObservableを扱うと思います。
+で、一般的にObservableはngOnDestroyとかでunsubscribeすることが多いと思います。
+で、気になって色々調べてみたわけです。
+
+ Observableには有限と無限がある
+こんなマニアックな情報知ってる人少ない...]]></description><link>https://zenn.dev/izumin_0401/articles/143930f181f138</link><guid isPermaLink="true">https://zenn.dev/izumin_0401/articles/143930f181f138</guid><pubDate>Mon, 29 Jul 2024 13:57:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--60cO6CXd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Angular%25E3%2580%2591HttpClient%25E3%2581%25AEObservable%25E3%2581%25AFunsubscribe%25E4%25B8%258D%25E8%25A6%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%25B3%2589%25E6%25B5%25A9%25E5%2585%25B5%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ExNTljYmRlNDIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>泉浩兵</dc:creator></item><item><title><![CDATA[Node.jsで作ったcliアプリをnpmに公開する]]></title><description><![CDATA[Node.js で作成したパッケージを npm に公開することで、別のプロジェクトから関数などを使うことができます。
+TypeScript で CLI アプリケーションを作成しましたので軽く紹介してから npm publish の方法を説明します。
+https://github.com/diskszk/blog-template-cli
+pnpm run blog-template-cli &lt;outDirectory&gt; &lt;filename&gt;
+第一引数に指定したディレクトリへ、第二引数に指定した文字列の markdown ファイルを作成するだけのツールです。
+
+ t...]]></description><link>https://zenn.dev/su_chan/articles/0f537e367fa673</link><guid isPermaLink="true">https://zenn.dev/su_chan/articles/0f537e367fa673</guid><pubDate>Mon, 29 Jul 2024 12:21:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---1lt1OfE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Node.js%25E3%2581%25A7%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259Fcli%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592npm%25E3%2581%25AB%25E5%2585%25AC%25E9%2596%258B%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:uretano%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2liSkpodXBMM2l1TFVuMldLZF9mcGM3b1lDX1VaZlV6emt4T0l5OFE9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>uretano</dc:creator></item><item><title><![CDATA[GithubのPRが作成されてから閉じるまでの時間を集計する]]></title><description><![CDATA[
+ 概要
+開発チームでエンジニアリングマネージャーをしているいずりょーです。
+今回は開発チームの開発生産性を計測しようとする中で、Githubのプルリクエスト(以下PR)が作成されてからマージされるまでの時間を計測したいなーとなったので、GithubGraphQLAPIを使って、指定した期間のPRを取得して、それらが作成されてからマージされるまでの時間の平均を取得するスクリプトを作成しました。
+
+ 必要なもの
+
+GithubへアクセスするToken
+
+今回はPersonal Access Tokenを使っていますが、それ以外の方法の場合は認証する部分を置き換えてください
+
+
+
+
+ 簡単に...]]></description><link>https://zenn.dev/sprocket/articles/8762863fe5708e</link><guid isPermaLink="true">https://zenn.dev/sprocket/articles/8762863fe5708e</guid><pubDate>Mon, 29 Jul 2024 08:38:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--yu94d5-v--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Github%25E3%2581%25AEPR%25E3%2581%258C%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2595%25E3%2582%258C%25E3%2581%25A6%25E3%2581%258B%25E3%2582%2589%25E9%2596%2589%25E3%2581%2598%25E3%2582%258B%25E3%2581%25BE%25E3%2581%25A7%25E3%2581%25AE%25E6%2599%2582%25E9%2596%2593%25E3%2582%2592%25E9%259B%2586%25E8%25A8%2588%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:is_ryo%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA1ZWQxMjFmN2UuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Sprocket%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2hpbG5ydzFtdldreWw1NlFsMnhYLW9EMTgwczhkWWw2eEl4YTVYPXMyNTAtYw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>is_ryo</dc:creator></item><item><title><![CDATA[Bunで環境変数を型安全に使う]]></title><description><![CDATA[環境変数が undefined の可能性をいちいち考慮するのめんどくさいですよね
+Bun で実行毎に環境変数を検証する方法を紹介します
+
+ 手順
+
+zod をインストール
+
+bun add zod
+
+env.ts 作成
+
+
+env.ts
+import { z } from 'zod'
+
+const zVar = z.string().min(1)
+const zEnv = z.object({
+  // ここで必要な環境変数とそのスキーマを定義する
+  DISCORD_CLIENT_ID: zVar,
+  DISCORD_GUILD_ID: zVar,
+  DISCORD_TOKEN: ...]]></description><link>https://zenn.dev/shallow90125/articles/b0dcfc89aa1d92</link><guid isPermaLink="true">https://zenn.dev/shallow90125/articles/b0dcfc89aa1d92</guid><pubDate>Mon, 29 Jul 2024 00:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---RXaTKCf--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Bun%25E3%2581%25A7%25E7%2592%25B0%25E5%25A2%2583%25E5%25A4%2589%25E6%2595%25B0%25E3%2582%2592%25E5%259E%258B%25E5%25AE%2589%25E5%2585%25A8%25E3%2581%25AB%25E4%25BD%25BF%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:shallow90125%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ4OGYzYTdlYzAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>shallow90125</dc:creator></item><item><title><![CDATA[ReactでGoogle Maps JavaScript APIを組み込む]]></title><description><![CDATA[React+TypeScriptでGoogle Mapsを組み込んだページを作る際、これまではreact-google-mapsのようなライブラリを組み込んで実装してきました。
+久しぶりにGoogle Mapsを使ったReactアプリケーションを作るにあたって現在の状況を調べてみたところ、公式のドキュメントにReact アプリケーションに Map と Marker を追加するというページがあり、@googlemaps/react-wrapperというものを使って組み込む方法が紹介されていました。
+これまでサードパーティーのラッパーライブラリを使ってきた際、Google Mapの細かい制御...]]></description><link>https://zenn.dev/iseebi/articles/react_google_maps</link><guid isPermaLink="true">https://zenn.dev/iseebi/articles/react_google_maps</guid><pubDate>Sun, 28 Jul 2024 16:46:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--P9wKgxHU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%25E3%2581%25A7Google%2520Maps%2520JavaScript%2520API%25E3%2582%2592%25E7%25B5%2584%25E3%2581%25BF%25E8%25BE%25BC%25E3%2582%2580%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Nobuhiro%2520Ito%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzlhMzdjMDc4YzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Nobuhiro Ito</dc:creator></item><item><title><![CDATA[Vue.js v-tokyo Meetup #21で学んだこと・所感]]></title><description><![CDATA[7月26日（金）に開催されたVue.jsの勉強会に参加してきたのでメモした内容を振り返りながらまとめていく記事になっております。
+
+ oxc
+全然知らないワードが初手から来た　笑
+oxcは爆速なコンパイラーらしい。
+パフォーマンス問題についてもバグ扱いすることがoxcの開発ポリシーの１つとしてある。
+最近気に入って使ってるBiomeの内部でもoxcが動作している？みたい。
+今後、Nuxt.jsについてゴリゴリに学んでいく予定なのでその中で触れることがあったら詳しく調べてみよう。
+
+ VueUse
+ここでお馴染みの内容が来てホッとした。
+VueUseマジで便利ですよね~、大好き。
+ちなみに...]]></description><link>https://zenn.dev/kjmboy/articles/de9732f9e24e34</link><guid isPermaLink="true">https://zenn.dev/kjmboy/articles/de9732f9e24e34</guid><pubDate>Sun, 28 Jul 2024 12:47:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--PuwOOGey--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Vue.js%2520v-tokyo%2520Meetup%2520%252321%25E3%2581%25A7%25E5%25AD%25A6%25E3%2582%2593%25E3%2581%25A0%25E3%2581%2593%25E3%2581%25A8%25E3%2583%25BB%25E6%2589%2580%25E6%2584%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25BE%25E3%2581%2598%25E3%2581%2593%25E3%2581%2598%25E3%2581%25BE%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FGZFp1Y3FWcVpXYktUQjUyTm4taldPVnNtYVMyWkMwSl9RQWdPTjl2MU5aMHc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>まじこじま</dc:creator></item><item><title><![CDATA[Prisma で schema.prisma で書いたコメントをデータベースへも反映する]]></title><description><![CDATA[Prisma では、schema.prisma でトリプルスラッシュ(///)でコメントを書くと、抽象構文木(AST)に情報として含まれるようになります。
+
+https://www.prisma.io/docs/orm/prisma-schema/overview#comments
+
+生成されたクライアントのコードにも、このコメントを含んでくれます。(といっても一部だけのようで、もう少しサポートして欲しい気も..)
+これがデータベース側のコメントとしても設定されると、SchemaSpy のような、データベースの内容からドキュメントを作るようなツールでも利用できる情報になって便利なのですが...]]></description><link>https://zenn.dev/onozaty/articles/prisma-comment</link><guid isPermaLink="true">https://zenn.dev/onozaty/articles/prisma-comment</guid><pubDate>Sun, 28 Jul 2024 11:44:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--gk-1DkUC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Prisma%2520%25E3%2581%25A7%2520schema.prisma%2520%25E3%2581%25A7%25E6%259B%25B8%25E3%2581%2584%25E3%2581%259F%25E3%2582%25B3%25E3%2583%25A1%25E3%2583%25B3%25E3%2583%2588%25E3%2582%2592%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%2599%25E3%2583%25BC%25E3%2582%25B9%25E3%2581%25B8%25E3%2582%2582%25E5%258F%258D%25E6%2598%25A0%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:onozaty%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA0NjRiMDVlZmYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>onozaty</dc:creator></item><item><title><![CDATA[【Angular】Materialのmat-selectを共通化してみる]]></title><description><![CDATA[Angularは好きなんだけど、本音を言うとReactがいいなと思っている泉（@izumin_0401）です。
+
+ Angular Materialのプルダウンを共通化したい
+ってことで、今回はmat-selectを共通化してみたンゴ。
+
+ ブログ記事はこちら
+https://traveler0401.com/angular-mat-select-common/
+
+ ソースコード
+
+ 共通mat-selectコンポーネント
+
+pull-down.component.ts
+import { CommonModule } from '@angular/common';
+import { Co...]]></description><link>https://zenn.dev/izumin_0401/articles/ee40d352fe31ec</link><guid isPermaLink="true">https://zenn.dev/izumin_0401/articles/ee40d352fe31ec</guid><pubDate>Sun, 28 Jul 2024 10:50:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jKSZ02rc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Angular%25E3%2580%2591Material%25E3%2581%25AEmat-select%25E3%2582%2592%25E5%2585%25B1%25E9%2580%259A%25E5%258C%2596%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%25B3%2589%25E6%25B5%25A9%25E5%2585%25B5%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ExNTljYmRlNDIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>泉浩兵</dc:creator></item></channel></rss>
