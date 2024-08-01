@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「JavaScript」のフィード]]></title><description><![CDATA[Zennのトピック「JavaScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/javascript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/64acd76870.png</url><title>Zennの「JavaScript」のフィード</title><link>https://zenn.dev/topics/javascript</link></image><generator>zenn.dev</generator><lastBuildDate>Thu, 01 Aug 2024 00:48:47 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/javascript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[react-map-gl + Search JS (React)]]></title><description><![CDATA[
+ はじめに
+前回に続き、react-map-glを試します。今回は以下の記事でご紹介したReact実装のSearch JSを組み合わせてみます。
+https://zenn.dev/ottylab/articles/ab629f6696e865
+以下がデモです。SafariやFirefoxを使用されている方はデモが実行されない可能性があります。Chromeで表示するか、 https://stackblitz.com/edit/vitejs-vite-rf15vg を直接ご参照ください。
+
+
+ おさらい
+Search JSのReact実装の使い方をおさらいしましょう。以下のようにprops...]]></description><link>https://zenn.dev/mapbox_japan/articles/58389712ce7aa2</link><guid isPermaLink="true">https://zenn.dev/mapbox_japan/articles/58389712ce7aa2</guid><pubDate>Wed, 31 Jul 2024 14:19:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Ugjd4iBF--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:react-map-gl%2520%252B%2520Search%2520JS%2520%2528React%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:OttyLab%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RmZWNmNDhhMWMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%259E%25E3%2583%2583%25E3%2583%2597%25E3%2583%259C%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25B9%25E3%2583%25BB%25E3%2582%25B8%25E3%2583%25A3%25E3%2583%2591%25E3%2583%25B3%25E5%2590%2588%25E5%2590%258C%25E4%25BC%259A%25E7%25A4%25BE%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhMGJmZWJmZmQuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>OttyLab</dc:creator></item><item><title><![CDATA[コピペをするな！コピペしろ！]]></title><description><![CDATA[
+ まえがき
+新入社員の方はプログラマーになってから、コピペは良くないと言われたことあるでしょうか？
+おそらく聞いたことはあると思います。
+一方、常駐先に入るとコピペしろって怒られる事も出てくると思います。
+さて、全く逆の教えですがどういう事でしょうか？
+それぞれ見ていきましょう。
+
+ コピペが良くないパターン
+厳密に言うとコピペしてはいけない事などありません。
+コピペはコンピュータの最も素晴らしい機能の１つであり、活用しない手はありません。
+それはプログラミングの世界でも同じです。
+
+ 考える事をやめてしまう
+じゃあ、なんでダメだって言われるのかというと、自分が何をやっているのか理解し...]]></description><link>https://zenn.dev/k_tabuchi/articles/940cf1c2dee5a2</link><guid isPermaLink="true">https://zenn.dev/k_tabuchi/articles/940cf1c2dee5a2</guid><pubDate>Wed, 31 Jul 2024 12:12:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--s8g7hi1---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B3%25E3%2583%2594%25E3%2583%259A%25E3%2582%2592%25E3%2581%2599%25E3%2582%258B%25E3%2581%25AA%25EF%25BC%2581%25E3%2582%25B3%25E3%2583%2594%25E3%2583%259A%25E3%2581%2597%25E3%2582%258D%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:k-tabuchi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhkMjhhY2RlZGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>k-tabuchi</dc:creator></item><item><title><![CDATA[Object.difinePropertyが色々と強力すぎる件]]></title><description><![CDATA[
+ はじめに
+たまたま出会ったObject.difinePropertyが中々に、強すぎたので紹介していきます.
+
+ Object.difineProperty
+javascriptの標準組み込みオブジェクトのObjectのメソッドの一つになります.
+https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty
+簡単なサンプルコードを書いていきたいと思います.
+const obj = {}
+obj.entity = 10
+Object.difinePr...]]></description><link>https://zenn.dev/norinoriver/articles/c71d9a08e86015</link><guid isPermaLink="true">https://zenn.dev/norinoriver/articles/c71d9a08e86015</guid><pubDate>Wed, 31 Jul 2024 01:28:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8rTfqf1P--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Object.difineProperty%25E3%2581%258C%25E8%2589%25B2%25E3%2580%2585%25E3%2581%25A8%25E5%25BC%25B7%25E5%258A%259B%25E3%2581%2599%25E3%2581%258E%25E3%2582%258B%25E4%25BB%25B6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nori%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E1YjI5NDBlMjAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nori</dc:creator></item><item><title><![CDATA[カーリー化ってどこで使うん？？？？🧐]]></title><description><![CDATA[
+ はじめに
+NextJSにて、自作のWebアプリを作っているのですが
+毎度、使用しているライブラリのコードリーディングで躓くことがあります.
+自分の場合はカーリー化のリーディングが、未だにすんなり出来ません.
+そもそも、カーリー化で書く意味がわかっていないので、今回はカーリー化の利点について触れていきたいと思います.
+
+ そもそもカーリー化とは何ぞや?
+wikipediaからの引用ですが
+
+https://ja.wikipedia.org/wiki/カリー化
+だそうです.
+これだけでは、意味不明なので簡単なサンプルコードで見ていきます.
+const funcA = (a) =&gt; ...]]></description><link>https://zenn.dev/norinoriver/articles/52b8cf11ad4c00</link><guid isPermaLink="true">https://zenn.dev/norinoriver/articles/52b8cf11ad4c00</guid><pubDate>Wed, 31 Jul 2024 01:09:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--c0xNlJ6d--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25AB%25E3%2583%25BC%25E3%2583%25AA%25E3%2583%25BC%25E5%258C%2596%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25A9%25E3%2581%2593%25E3%2581%25A7%25E4%25BD%25BF%25E3%2581%2586%25E3%2582%2593%25EF%25BC%259F%25EF%25BC%259F%25EF%25BC%259F%25EF%25BC%259F%2520%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nori%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E1YjI5NDBlMjAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nori</dc:creator></item><item><title><![CDATA[【Vue Test Utils】mountとshallowMountの違いと使い分け]]></title><description><![CDATA[
+ mountとshallowMountの違い
+
+ mount
+指定したVueコンポーネントの子コンポーネントまでを全てレンダリングするAPI。
+import { mount } from '@vue/test-utils';
+import ParentComponent from '@/components/ParentComponent.vue';
+
+const wrapper = mount(ParentComponent);
+console.log(wrapper.html());
+出力例
+&lt;div&gt;
+  &lt;h1&gt;Parent Component&lt;/...]]></description><link>https://zenn.dev/t0daaay/articles/3110ac21975364</link><guid isPermaLink="true">https://zenn.dev/t0daaay/articles/3110ac21975364</guid><pubDate>Tue, 30 Jul 2024 14:25:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--LmgzqVde--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Vue%2520Test%2520Utils%25E3%2580%2591mount%25E3%2581%25A8shallowMount%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%25E3%2581%25A8%25E4%25BD%25BF%25E3%2581%2584%25E5%2588%2586%25E3%2581%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A4%25E3%2581%2598%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2EzZjZlYWU1ZjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>つじ</dc:creator></item><item><title><![CDATA[#12　【入門】Javadocまとめ]]></title><description><![CDATA[
+ Javadocとは
+Javaのクラスやフィールド、メソッドに記述したコメントからドキュメントを生成するツールです。
+Javadocに要素の説明や引数、戻り値に関する情報などコメントを記載することで、HTML形式のドキュメントを生成することができます。
+
+ 利点
+
+可読性の向上
+IDEでメソッドにカーソルを合わせたときJavadocが表示されるようになる
+コマンドを使い、各説明をHTMLファイルに出力したAPIドキュメントを作成できる
+
+
+ 書き方
+要素の宣言前、「/** ～ */」の間にコメントを記述します。
+
+ 主なタグ
+
+
+
+タグ
+用途
+
+
+
+
+@￰author 名前
+クラスやメ...]]></description><link>https://zenn.dev/nxted_sapporo/articles/9a8d34884085b4</link><guid isPermaLink="true">https://zenn.dev/nxted_sapporo/articles/9a8d34884085b4</guid><pubDate>Tue, 30 Jul 2024 08:38:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4lXG7gbk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%252312%25E3%2580%2580%25E3%2580%2590%25E5%2585%25A5%25E9%2596%2580%25E3%2580%2591Javadoc%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:NXTEDCo.%252C%2520Ltd.%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBmZjQzOTVhYzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>NXTEDCo., Ltd.</dc:creator></item><item><title><![CDATA[Chrome拡張 チートシート]]></title><description><![CDATA[
+ 目的
+Chrome拡張は情報盗む修正が混ざりこんでることが多いとニュースで聞いて怖いから、簡単なものなら自作で対応するために作り方を調べた
+
+ 概要
+最小限必要なファイルmanifest.json、service_worker.js、管理画面をポップアップするならindex.html
+
+ フォルダ構成
+root
+  &gt; manifest.json
+  &gt; service_worker.js
+  &gt; index.html
+
+ manifest.json の書き方
+
+ manifest.jsonの例
+
+manifest.json
+{
+  "manifest_versio...]]></description><link>https://zenn.dev/mazumazu/articles/5159cb3c6bd2e9</link><guid isPermaLink="true">https://zenn.dev/mazumazu/articles/5159cb3c6bd2e9</guid><pubDate>Tue, 30 Jul 2024 07:02:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--nRSJx5CW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Chrome%25E6%258B%25A1%25E5%25BC%25B5%2520%25E3%2583%2581%25E3%2583%25BC%25E3%2583%2588%25E3%2582%25B7%25E3%2583%25BC%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mazumazu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBjY2U0Yjg4Y2QuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mazumazu</dc:creator></item><item><title><![CDATA[React.js 例外処理の設計2 (画面に表示する)]]></title><description><![CDATA[
+ 概要
+下記のような、場当たり的な例外処理をやめたいので、例外処理の設計を考えてみました。
+この記事ではReact.jsを対象としています。
+※ちなみ「例外」と「エラー」を同じ意味で使っています。
+https://zenn.dev/rsugi/articles/7778f06b30f728
+で記載した内容の続きで、「エラーを画面に表示させる」までをまとめます。
+
+ 対象読者
+
+JavaScriptのフレームワークを使って開発している方
+例外処理を雑に処理している方
+エラーの表示方法に困っている方
+
+
+ いいね！してね
+この記事の事例は必要に応じて今後追記していく予定です！
+「新しい事例...]]></description><link>https://zenn.dev/rsugi/articles/d5dd11f3150eae</link><guid isPermaLink="true">https://zenn.dev/rsugi/articles/d5dd11f3150eae</guid><pubDate>Tue, 30 Jul 2024 03:49:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--T3I0bHOP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React.js%2520%25E4%25BE%258B%25E5%25A4%2596%25E5%2587%25A6%25E7%2590%2586%25E3%2581%25AE%25E8%25A8%25AD%25E8%25A8%25882%2520%2528%25E7%2594%25BB%25E9%259D%25A2%25E3%2581%25AB%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2599%25E3%2582%258B%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:r-sugi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M0YTAwZTQ1YmIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>r-sugi</dc:creator></item><item><title><![CDATA[React.js 例外処理の設計1（捕捉して変換する）]]></title><description><![CDATA[
+ 概要
+下記のような、場当たり的な例外処理をやめたいので、例外処理の設計を考えてみました。
+この記事ではReact.jsを対象としています。
+※ちなみ「例外」と「エラー」を同じ意味で使っています。
+例:
+
+ファイル名
+try {
+  await mutation() // REST API POST処理 or GraphQL　Mutation処理
+  await router.push('/path/to/page')
+} catch (e) {
+  console.error(e); // コンソールエラー出力して終わっていたり、
+  HogeErrorHandler(e as Ho...]]></description><link>https://zenn.dev/rsugi/articles/7778f06b30f728</link><guid isPermaLink="true">https://zenn.dev/rsugi/articles/7778f06b30f728</guid><pubDate>Mon, 29 Jul 2024 15:28:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--USFKOhiA--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React.js%2520%25E4%25BE%258B%25E5%25A4%2596%25E5%2587%25A6%25E7%2590%2586%25E3%2581%25AE%25E8%25A8%25AD%25E8%25A8%25881%25EF%25BC%2588%25E6%258D%2595%25E6%258D%2589%25E3%2581%2597%25E3%2581%25A6%25E5%25A4%2589%25E6%258F%259B%25E3%2581%2599%25E3%2582%258B%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:r-sugi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M0YTAwZTQ1YmIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>r-sugi</dc:creator></item><item><title><![CDATA[Javascriptのカンマ演算子って知ってる?]]></title><description><![CDATA[
+ はじめに
+個人サービスを作っていく上で、使用しているライブラリのコードリーティングするとは非常に技術力を上げるにも大切だと思っています.
+今回は、自分はコーディングしているときには絶対に使用してこなかったカンマ演算子について触れていきたいと思います.
+
+ このコードの動きをあなたは理解できますか？
+あなたは、以下の出力が何か分かりますか？
+const FuncA = (name) =&gt; {
+    return `Hello ${name}`;
+}
+
+const FuncB = (name) =&gt; {
+    return `GoodBye ${name}`;
+}
+con...]]></description><link>https://zenn.dev/norinoriver/articles/49b77dfd4db79e</link><guid isPermaLink="true">https://zenn.dev/norinoriver/articles/49b77dfd4db79e</guid><pubDate>Mon, 29 Jul 2024 15:19:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--y7nzqz1V--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Javascript%25E3%2581%25AE%25E3%2582%25AB%25E3%2583%25B3%25E3%2583%259E%25E6%25BC%2594%25E7%25AE%2597%25E5%25AD%2590%25E3%2581%25A3%25E3%2581%25A6%25E7%259F%25A5%25E3%2581%25A3%25E3%2581%25A6%25E3%2582%258B%253F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nori%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E1YjI5NDBlMjAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nori</dc:creator></item><item><title><![CDATA[IntersectionObserver を使用して要素の背景色を変更する]]></title><description><![CDATA[
+ 目的:IntersectionObserver APIの使用方法を学ぶ
+要素がビューポートに入ったときに特定のアクションを実行する。
+
+ 課題詳細
+
+下記のHTMLで、.target-element クラスを持つ要素がビューポートに入ったときに背景色が緑色に変わるように、IntersectionObserverを使用してJavaScriptコードを記述してください。以下のヒントを参考にしてください。
+
+
+IntersectionObserverのオプションを設定して、ビューポートに対して相対的に監視する。
+要素がビューポートに入ったときに、entry.isIntersectingプロ...]]></description><link>https://zenn.dev/3582/articles/4f71b616e42817</link><guid isPermaLink="true">https://zenn.dev/3582/articles/4f71b616e42817</guid><pubDate>Mon, 29 Jul 2024 14:39:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--WzA20R2g--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:IntersectionObserver%2520%25E3%2582%2592%25E4%25BD%25BF%25E7%2594%25A8%25E3%2581%2597%25E3%2581%25A6%25E8%25A6%2581%25E7%25B4%25A0%25E3%2581%25AE%25E8%2583%258C%25E6%2599%25AF%25E8%2589%25B2%25E3%2582%2592%25E5%25A4%2589%25E6%259B%25B4%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:y%2520w%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvMy5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>y w</dc:creator></item><item><title><![CDATA[Typescriptのdeclareってなんでするの？]]></title><description><![CDATA[
+ はじめに
+NextJSにて自作ウェブサービスを作成していると、どうしても使用しているライブラリの中身が気になって読むことが多いのですが、typescriptの構文をそんなに理解してないことに気付かされました.
+今回は、declareについて疑問点を解消していけたらと思います
+
+ declareの意味
+意外と単語の意味を理解することで、すんなり解決するなんてこともあります.
+weblioでdeclareを調べると宣言するという意味が出てきました.
+https://ejje.weblio.jp/content/declare
+
+ typescriptのdeclareの意味
+typescr...]]></description><link>https://zenn.dev/norinoriver/articles/bd5ac35175bf01</link><guid isPermaLink="true">https://zenn.dev/norinoriver/articles/bd5ac35175bf01</guid><pubDate>Mon, 29 Jul 2024 14:35:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--SnIzGwId--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Typescript%25E3%2581%25AEdeclare%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25AA%25E3%2582%2593%25E3%2581%25A7%25E3%2581%2599%25E3%2582%258B%25E3%2581%25AE%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nori%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E1YjI5NDBlMjAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nori</dc:creator></item><item><title><![CDATA[Mapbox Newsletter WEEKLY TIPSの解説 -「生成アイコンをマップに追加」]]></title><description><![CDATA[
+ はじめに
+この記事は、先日配信されたMapbox NewsletterのWEEKLY TIPSで紹介されていた「生成アイコンをマップに追加」についての解説です。このサンプルではMap#loadImageおよびMap#addImageの使い方について例示しています。また、Newsletterの購読はこちらからお申し込みいただけます。
+以下が本サンプルのデモです。
+
+
+ コードを確認
+まずExamplesのコードを見に行きましょう。
+日本語サイト
+
+英語サイト
+
+基本的に同じコードですが、英語版はスタイルがMapbox Dark v11にアップグレードされているのでこちらを使用します。M...]]></description><link>https://zenn.dev/mapbox_japan/articles/3d1e07ffac70e4</link><guid isPermaLink="true">https://zenn.dev/mapbox_japan/articles/3d1e07ffac70e4</guid><pubDate>Mon, 29 Jul 2024 12:55:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0LFWvHwt--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Mapbox%2520Newsletter%2520WEEKLY%2520TIPS%25E3%2581%25AE%25E8%25A7%25A3%25E8%25AA%25AC%2520-%25E3%2580%258C%25E7%2594%259F%25E6%2588%2590%25E3%2582%25A2%25E3%2582%25A4%25E3%2582%25B3%25E3%2583%25B3%25E3%2582%2592%25E3%2583%259E%25E3%2583%2583%25E3%2583%2597%25E3%2581%25AB%25E8%25BF%25BD%25E5%258A%25A0%25E3%2580%258D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:OttyLab%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RmZWNmNDhhMWMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%259E%25E3%2583%2583%25E3%2583%2597%25E3%2583%259C%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25B9%25E3%2583%25BB%25E3%2582%25B8%25E3%2583%25A3%25E3%2583%2591%25E3%2583%25B3%25E5%2590%2588%25E5%2590%258C%25E4%25BC%259A%25E7%25A4%25BE%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhMGJmZWJmZmQuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>OttyLab</dc:creator></item><item><title><![CDATA[react-map-glのレイヤーを試してみる]]></title><description><![CDATA[
+ はじめに
+前回に続き、react-map-glを試します。今回はGeoJSONレイヤーを追加します。東京駅を表現したポリゴンを追加します。
+以下がデモです。SafariやFirefoxを使用されている方はデモが実行されない可能性があります。Chromeで表示するか、 https://stackblitz.com/edit/vitejs-vite-fi2kyj を直接ご参照ください。
+
+
+ コードを確認
+以下が今回作成したコードです。YOUR_MAPBOX_ACCESS_TOKENはご自身のMapboxのパブリックトークンを使用してください。
+
+App.jsx
+import Map, ...]]></description><link>https://zenn.dev/mapbox_japan/articles/4e9e1fd64c4478</link><guid isPermaLink="true">https://zenn.dev/mapbox_japan/articles/4e9e1fd64c4478</guid><pubDate>Mon, 29 Jul 2024 12:42:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--XaF5p7v7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:react-map-gl%25E3%2581%25AE%25E3%2583%25AC%25E3%2582%25A4%25E3%2583%25A4%25E3%2583%25BC%25E3%2582%2592%25E8%25A9%25A6%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:OttyLab%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RmZWNmNDhhMWMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%259E%25E3%2583%2583%25E3%2583%2597%25E3%2583%259C%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25B9%25E3%2583%25BB%25E3%2582%25B8%25E3%2583%25A3%25E3%2583%2591%25E3%2583%25B3%25E5%2590%2588%25E5%2590%258C%25E4%25BC%259A%25E7%25A4%25BE%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhMGJmZWJmZmQuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>OttyLab</dc:creator></item><item><title><![CDATA[パンダと戦う画像圧縮サイトを開発した話]]></title><description><![CDATA[先日、Joke Jobというサイトを作成したという記事を書いたyosiです。
+https://zenn.dev/yosipy/articles/e42bb21ce2f6bf
+そして7月25日にまた新しいサービスをリリースしたので、今回はその話をしようと思います。
+ちなみに開発を始めたのが22日ごろからなので3日くらいで作ったことになります。
+
+ 作ったサービス
+「ImgRoller」という画像を圧縮したり、リサイズを行うサイトです。
+https://yosidev.com/tools/imgroller/ja/
+機能の紹介記事も書いてますので良ければどうぞ。
+https://note.c...]]></description><link>https://zenn.dev/yosipy/articles/817c07f267ddde</link><guid isPermaLink="true">https://zenn.dev/yosipy/articles/817c07f267ddde</guid><pubDate>Mon, 29 Jul 2024 08:41:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jBl9PMHN--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2591%25E3%2583%25B3%25E3%2583%2580%25E3%2581%25A8%25E6%2588%25A6%25E3%2581%2586%25E7%2594%25BB%25E5%2583%258F%25E5%259C%25A7%25E7%25B8%25AE%25E3%2582%25B5%25E3%2582%25A4%25E3%2583%2588%25E3%2582%2592%25E9%2596%258B%25E7%2599%25BA%25E3%2581%2597%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yosi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZlM2Q3MTk0MzMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yosi</dc:creator></item><item><title><![CDATA[SharePoint サイトのタイムゾーンを取得する方法]]></title><description><![CDATA[SharePoint サイトのタイムゾーンを確認するには、「サイトの設定」にアクセスする方法がありますが、もしあなたに「サイトの設定」にアクセスする権限がない場合は、 JavaScript を使って確認することができます。
+
+ JavaScript コードとその使い方
+タイムゾーンを確認したい SharePoint Online サイトにアクセスし、そのサイトにあるなにかしらのリストにアクセスします。
+そして、ブラウザの DevTools を開き、以下のスクリプトを実行します。
+(async function(){
+  let response = await fetch(
+    _s...]]></description><link>https://zenn.dev/koichiakamine/articles/dc17a6a0f6cc00</link><guid isPermaLink="true">https://zenn.dev/koichiakamine/articles/dc17a6a0f6cc00</guid><pubDate>Mon, 29 Jul 2024 04:05:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--tV_nLqOf--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:SharePoint%2520%25E3%2582%25B5%25E3%2582%25A4%25E3%2583%2588%25E3%2581%25AE%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25A0%25E3%2582%25BE%25E3%2583%25BC%25E3%2583%25B3%25E3%2582%2592%25E5%258F%2596%25E5%25BE%2597%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Koichi%2520Akamine%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dhcUpSbEEtUkhXUmh6MWI2bmc2RW5NcWVKN2tfRElNYTRrRkhwUWNRPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Koichi Akamine</dc:creator></item><item><title><![CDATA[[NextJS]Core Web Vitalsを理解してNextJSで改善する機能を調べる]]></title><description><![CDATA[
+ 概要
+Core Web Vitalsがそれぞれどういった指標であるかが曖昧で、それをNextJsの機能を使ってどのように改善できるのかが気になったので、軽く調べた際のメモになります。
+
+ Core Web Vitalsとは
+Web Vitalsは、Googleが提供するウェブサイトのユーザーエクスペリエンスを評価するための一連の指標のことであり、Core Web Vitals は、その中でも特に重要なLargest Contentful Paint（LCP）、First Input Delay（FID）、Cumulative Layout Shift（CLS）からなる3つの指標のこと...]]></description><link>https://zenn.dev/reds/articles/19523e24cf5c53</link><guid isPermaLink="true">https://zenn.dev/reds/articles/19523e24cf5c53</guid><pubDate>Sun, 28 Jul 2024 15:31:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--JtY1Kb43--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BNextJS%255DCore%2520Web%2520Vitals%25E3%2582%2592%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2597%25E3%2581%25A6NextJS%25E3%2581%25A7%25E6%2594%25B9%25E5%2596%2584%25E3%2581%2599%25E3%2582%258B%25E6%25A9%259F%25E8%2583%25BD%25E3%2582%2592%25E8%25AA%25BF%25E3%2581%25B9%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2586%25E3%2583%25BC%25E3%2581%25A8%25E3%2581%258A%25E3%2581%2598%25E3%2581%2595%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE2OWM4YzQwOGEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ゆーとおじさん</dc:creator></item><item><title><![CDATA[Next.jsでフォーマットした日付を表示させたい]]></title><description><![CDATA[Next.jsで2023年5月5日（金）のように表示させたかったので、その時の実装メモ。
+
+ フォーマットした日付をNext.jsで実装する
+以下のようにコードを書くと、2023年5月5日（金）のように表示できる
+export const formatDate = () =&gt; {
+  const now = new Date();
+　　　　const year = now.getFullYear();
+  const month = now.getMonth() + 1;
+  const date = now.getDate();
+  const day = now.getDay(...]]></description><link>https://zenn.dev/tomoyuki_kato/articles/551d0798a43106</link><guid isPermaLink="true">https://zenn.dev/tomoyuki_kato/articles/551d0798a43106</guid><pubDate>Sun, 28 Jul 2024 08:41:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--SxSYd0wE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Next.js%25E3%2581%25A7%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25BC%25E3%2583%259E%25E3%2583%2583%25E3%2583%2588%25E3%2581%2597%25E3%2581%259F%25E6%2597%25A5%25E4%25BB%2598%25E3%2582%2592%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2595%25E3%2581%259B%25E3%2581%259F%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Tomoyuki%2520Kato%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2YyOTU0YTUzNzguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Tomoyuki Kato</dc:creator></item><item><title><![CDATA[なんか数字を選んでくれるやつを作った]]></title><description><![CDATA[
+ 記事概要
+MAXの数値を指定すると1からMAXの中からランダムに数字を選んでくれる、非常に簡素なツールをJavaScriptの勉強がてらに作りました。
+
+ 想定される使用場面
+・何か数字を選ばざるを得ない状況に直面した時
+・あとひとつ数字を選ぶとしたら何がいいかを機械的に選びたい時
+
+ 筆者のスキル
+HTML/CSS
+10年ほどの業務経験。課題点について自分で調査&amp;実装することができる。
+JavaScript
+10年ほど見ている。見ているだけ。本格的な開発では他の人のヘルプが必要。
+
+ GitHubページ
+なんか数字を選んでくれるやつは、下記のGitHubページにて公開してい...]]></description><link>https://zenn.dev/shomi_nijo/articles/e3a9d4d29e4d18</link><guid isPermaLink="true">https://zenn.dev/shomi_nijo/articles/e3a9d4d29e4d18</guid><pubDate>Sun, 28 Jul 2024 06:03:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--63melj3---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%25AA%25E3%2582%2593%25E3%2581%258B%25E6%2595%25B0%25E5%25AD%2597%25E3%2582%2592%25E9%2581%25B8%25E3%2582%2593%25E3%2581%25A7%25E3%2581%258F%25E3%2582%258C%25E3%2582%258B%25E3%2582%2584%25E3%2581%25A4%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E4%25BA%258C%25E6%259D%25A1%25E6%25AD%25A3%25E5%25AE%259F%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2IwNDczODgwMDIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>二条正実</dc:creator></item><item><title><![CDATA[<Outlet>の使い方]]></title><description><![CDATA[
+ &lt;Outlet&gt;の機能説明
+&lt;Outlet&gt;は、React Routerを使用する際に、親コンポーネント内で子コンポーネントを表示するためのプレースホルダー（占有位置）として機能します。具体的には、親ルートが一致したときに、その場所に対応する子ルートがレンダリングされます。
+
+ 詳細な説明
+
+親コンポーネント内に&lt;Outlet&gt;を配置することで、その場所に子コンポーネントがレンダリングされるようにします。
+例えば、/aboutパスにアクセスすると、&lt;Outlet&gt;はAboutコンポーネントを表示します。
+
+
+ イメージ
+具体的なコードは...]]></description><link>https://zenn.dev/atusi/articles/406fb9e3486f2b</link><guid isPermaLink="true">https://zenn.dev/atusi/articles/406fb9e3486f2b</guid><pubDate>Sat, 27 Jul 2024 17:37:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--E8_jK62D--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:%253COutlet%253E%25E3%2581%25AE%25E4%25BD%25BF%25E3%2581%2584%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Atsushi%2520hatakeyama%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdjYWE3ODNjN2IuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Atsushi hatakeyama</dc:creator></item></channel></rss>
