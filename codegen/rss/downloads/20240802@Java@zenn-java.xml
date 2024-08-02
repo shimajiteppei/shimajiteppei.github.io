@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Java」のフィード]]></title><description><![CDATA[Zennのトピック「Java」のRSSフィードです]]></description><link>https://zenn.dev/topics/java</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/5c47bb8423.png</url><title>Zennの「Java」のフィード</title><link>https://zenn.dev/topics/java</link></image><generator>zenn.dev</generator><lastBuildDate>Fri, 02 Aug 2024 11:29:22 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/java/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[JNIのGetStringUTFChars関数の使い方と注意点]]></title><description><![CDATA[Java Native Interface（JNI）は、Java/Kotlinとネイティブプログラミング言語（主にCやC++）間の相互運用を可能にするフレームワークです。JNIを使用することで、Javaアプリケーション内からネイティブコードを呼び出したり、その逆を行ったりすることができます。この記事では、JNIで提供されるGetStringUTFChars関数の使い方と注意点に焦点を当てます。
+
+ GetStringUTFChars関数とは
+GetStringUTFCharsは、JavaのStringオブジェクトをネイティブコードで使用できるCスタイルの文字列（char*）に変換するため...]]></description><link>https://zenn.dev/kmitsunami/articles/e7de1abcec791b</link><guid isPermaLink="true">https://zenn.dev/kmitsunami/articles/e7de1abcec791b</guid><pubDate>Thu, 01 Aug 2024 22:18:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--RlJJUMhB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JNI%25E3%2581%25AEGetStringUTFChars%25E9%2596%25A2%25E6%2595%25B0%25E3%2581%25AE%25E4%25BD%25BF%25E3%2581%2584%25E6%2596%25B9%25E3%2581%25A8%25E6%25B3%25A8%25E6%2584%258F%25E7%2582%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Koki%2520Mitsunami%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTHlURXRRN0JKWXhFMFBVUC10NHY0OWtrejBuT25BOFRnLXJuMW85dzZLVHNkTmFnPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Koki Mitsunami</dc:creator></item><item><title><![CDATA[Springサービス層の基本: アノテーションとメソッド一覧]]></title><description><![CDATA[
+ サービス層で使用されるアノテーション
+
+ @Service
+サービスクラスをSpringコンテナにサービスとして登録します。ビジネスロジックを実装するために使用されます。
+例:
+@Service
+public class MyService {
+    // ビジネスロジックの実装
+}
+
+ @Autowired
+Springの依存性注入機能を使用して、他のBeanを自動的にインジェクションします。
+例:
+@Autowired
+private MyRepository myRepository;
+
+ @Transactional
+メソッドまたはクラスにトランザクション管理を適用します。...]]></description><link>https://zenn.dev/jk447/articles/a8dedffc3efc6a</link><guid isPermaLink="true">https://zenn.dev/jk447/articles/a8dedffc3efc6a</guid><pubDate>Thu, 01 Aug 2024 13:22:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--uzqbU9OH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Spring%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2593%25E3%2582%25B9%25E5%25B1%25A4%25E3%2581%25AE%25E5%259F%25BA%25E6%259C%25AC%253A%2520%25E3%2582%25A2%25E3%2583%258E%25E3%2583%2586%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2581%25A8%25E3%2583%25A1%25E3%2582%25BD%25E3%2583%2583%25E3%2583%2589%25E4%25B8%2580%25E8%25A6%25A7%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:JK447%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E0YTQ1YzQwNjkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>JK447</dc:creator></item><item><title><![CDATA[Spring Bootを学習したので忘れたくない]]></title><description><![CDATA[
+ Spring Frameworkとは？
+
+Dependency Injection
+Spring系のエコシステム
+@component, @Autowired, component scanとか
+
+
+ Spring MVCとは？
+
+web appやREST APIアプリを作成するためのもの
+@Controller, @RestController, @RequestMapping,,,
+
+
+ Spring Bootとは
+
+素早く簡単に本番環境のようなアプリを作成できる。
+Spring inicializerというやつですぐプロジェクトを作成できる
+Spring Frameworkとか...]]></description><link>https://zenn.dev/biki/articles/bb8c816a5a7be3</link><guid isPermaLink="true">https://zenn.dev/biki/articles/bb8c816a5a7be3</guid><pubDate>Thu, 01 Aug 2024 11:33:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--m59pCG73--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Spring%2520Boot%25E3%2582%2592%25E5%25AD%25A6%25E7%25BF%2592%25E3%2581%2597%25E3%2581%259F%25E3%2581%25AE%25E3%2581%25A7%25E5%25BF%2598%25E3%2582%258C%25E3%2581%259F%25E3%2581%258F%25E3%2581%25AA%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:biki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS2RyZVNIN19CcEZUOVN1eUFvNlZfMW12dS00c3hIX3V2ZUdEYTZHQUFKT05KWFV3VUw9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>biki</dc:creator></item><item><title><![CDATA[Javaからシェルを呼び出したら終了ステータスが141だったので調査した]]></title><description><![CDATA[おはこんばんにちわ
+狸です
+今日も20年以上前に作られた古代の遺物をどうにかして修正して動かすみたいな仕事しています。
+今回の内容はタイトル通りです
+
+ 調べることになった発端
+ソースの作成者も設計書も今は亡きソースを改修してるときに以下のようなコードを見つけました
+ProcessBuilder processBuilder = new ProcessBuilder(command);
+Process process = processBuilder.start();
+～なんかやたら冗長なコード～
+int exitCode = process.waitFor();
+if (exitCod...]]></description><link>https://zenn.dev/tantan_tanuki/articles/1cd49965f9a0ff</link><guid isPermaLink="true">https://zenn.dev/tantan_tanuki/articles/1cd49965f9a0ff</guid><pubDate>Thu, 01 Aug 2024 09:18:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--RZLTASuI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java%25E3%2581%258B%25E3%2582%2589%25E3%2582%25B7%25E3%2582%25A7%25E3%2583%25AB%25E3%2582%2592%25E5%2591%25BC%25E3%2581%25B3%25E5%2587%25BA%25E3%2581%2597%25E3%2581%259F%25E3%2582%2589%25E7%25B5%2582%25E4%25BA%2586%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%25B9%25E3%2581%258C141%25E3%2581%25A0%25E3%2581%25A3%25E3%2581%259F%25E3%2581%25AE%25E3%2581%25A7%25E8%25AA%25BF%25E6%259F%25BB%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%259D%25A6%25E3%2580%2585%25E7%258B%25B8%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FjMjMxNDA1ZDMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>坦々狸</dc:creator></item><item><title><![CDATA[[Minecraft Mod] Java,Gradleのインストールまで]]></title><description><![CDATA[
+ Minecraft Mod作成の開発環境
+MinecraftのMod開発環境にはJavaの開発環境が必要になります。そこで今回はMod開発に入る前のJavaとそのビルドツールであるGradleのインストールおよび、環境構築まで解説します。
+
+ Java,Gradle をインストールする上で
+
+ 動作環境
+
+
+
+
+
+
+
+
+
+OS
+Windows10 home
+
+
+CPU
+Intel core i7-10700
+
+
+
+!
+本記事はWindowsを対象としています。
+
+
+ 対象
+以下のバージョンをインストールしていきます。
+
+
+
+item
+version
+
+
+
+
+Java
+22.0.2
+
+...]]></description><link>https://zenn.dev/dawnzlight/articles/java-gradle-install-coco9122</link><guid isPermaLink="true">https://zenn.dev/dawnzlight/articles/java-gradle-install-coco9122</guid><pubDate>Wed, 31 Jul 2024 15:26:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xDO4401a--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BMinecraft%2520Mod%255D%2520Java%252CGradle%25E3%2581%25AE%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%25BE%25E3%2581%25A7%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:CoCo9122%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLmRldi9pbWFnZXMvZGVmYXVsdC1wdWJsaWNhdGlvbi1hdmF0YXIucG5n%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Dawn%2527z%2520Light%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2hLY1FkbTlXblJabGVYLTBPeE5sM0tBTmpXNDVwcGpPU3pwMXdrPXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>CoCo9122</dc:creator></item><item><title><![CDATA[コピペをするな！コピペしろ！]]></title><description><![CDATA[
+ まえがき
+新入社員の方はプログラマーになってから、コピペは良くないと言われたことあるでしょうか？
+おそらく聞いたことはあると思います。
+一方、常駐先に入るとコピペしろって怒られる事も出てくると思います。
+さて、全く逆の教えですがどういう事でしょうか？
+それぞれ見ていきましょう。
+
+ コピペが良くないパターン
+厳密に言うとコピペしてはいけない事などありません。
+コピペはコンピュータの最も素晴らしい機能の１つであり、活用しない手はありません。
+それはプログラミングの世界でも同じです。
+
+ 考える事をやめてしまう
+じゃあ、なんでダメだって言われるのかというと、自分が何をやっているのか理解し...]]></description><link>https://zenn.dev/k_tabuchi/articles/940cf1c2dee5a2</link><guid isPermaLink="true">https://zenn.dev/k_tabuchi/articles/940cf1c2dee5a2</guid><pubDate>Wed, 31 Jul 2024 12:12:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--s8g7hi1---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B3%25E3%2583%2594%25E3%2583%259A%25E3%2582%2592%25E3%2581%2599%25E3%2582%258B%25E3%2581%25AA%25EF%25BC%2581%25E3%2582%25B3%25E3%2583%2594%25E3%2583%259A%25E3%2581%2597%25E3%2582%258D%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:k-tabuchi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhkMjhhY2RlZGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>k-tabuchi</dc:creator></item><item><title><![CDATA[【Java】クラス解説41・列挙型]]></title><description><![CDATA[
+ 列挙型
+列挙型（enum）は、定数の集合を扱うための特殊なクラスです。列挙型を使うことで、コードの可読性と保守性が向上し、誤った値の使用を防ぐことができます。
+また、列挙型の値である定数を列挙子と呼び、一般的に、その列挙子の記述方法は大文字で記述し、単語の区切りにはアンダースコア（ _ ）を使用します。
+そして、各列挙子は、列挙型のインスタンスでもあります。
+
+ 列挙型の定義方法と列挙子を出力するコード例
+public class Main {
+
+    // Plants という列挙型を定義
+    enum Plants {
+        FUZI,
+        SAKUR...]]></description><link>https://zenn.dev/goriki/articles/080-type-of-enum</link><guid isPermaLink="true">https://zenn.dev/goriki/articles/080-type-of-enum</guid><pubDate>Wed, 31 Jul 2024 09:09:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BjLEb6fC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Java%25E3%2580%2591%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25B9%25E8%25A7%25A3%25E8%25AA%25AC41%25E3%2583%25BB%25E5%2588%2597%25E6%258C%2599%25E5%259E%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E8%2597%25A4%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNhZTBkYWY1NTMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>藤</dc:creator></item><item><title><![CDATA[#12　【入門】Javadocまとめ]]></title><description><![CDATA[
+ Javadocとは
+Javaのクラスやフィールド、メソッドに記述したコメントからドキュメントを生成するツールです。
+Javadocに要素の説明や引数、戻り値に関する情報などコメントを記載することで、HTML形式のドキュメントを生成することができます。
+
+ 利点
+
+可読性の向上
+IDEでメソッドにカーソルを合わせたときJavadocが表示されるようになる
+コマンドを使い、各説明をHTMLファイルに出力したAPIドキュメントを作成できる
+
+
+ 書き方
+要素の宣言前、「/** ～ */」の間にコメントを記述します。
+
+ 主なタグ
+
+
+
+タグ
+用途
+
+
+
+
+@￰author 名前
+クラスやメ...]]></description><link>https://zenn.dev/nxted_sapporo/articles/9a8d34884085b4</link><guid isPermaLink="true">https://zenn.dev/nxted_sapporo/articles/9a8d34884085b4</guid><pubDate>Tue, 30 Jul 2024 08:38:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4lXG7gbk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%252312%25E3%2580%2580%25E3%2580%2590%25E5%2585%25A5%25E9%2596%2580%25E3%2580%2591Javadoc%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:NXTEDCo.%252C%2520Ltd.%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBmZjQzOTVhYzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>NXTEDCo., Ltd.</dc:creator></item><item><title><![CDATA[Java21 + Windowsにおける文字化け対策の設定のまとめ]]></title><description><![CDATA[Java21 + Windowsにおける文字化け対策の設定について整理しました。
+Java8についてはこちら
+以下のリポジトリに作成したMarkdownからの抜粋です。
+https://github.com/leoninja256/java-garbled-verification
+もっと簡単な方法があればコメント頂けると助かります！
+
+ 前提条件
+
+ソースコード、コンパイル時のエンコーディングはUTF-8とする
+実行時のfile.encodingはUTF-8とする
+
+
+ ソフトウェアバージョン
+
+
+
+ソフトウェア
+バージョン
+
+
+
+
+Oracle JDK
+21.0.3+7-LTS-15...]]></description><link>https://zenn.dev/leoninja/articles/10831509338169</link><guid isPermaLink="true">https://zenn.dev/leoninja/articles/10831509338169</guid><pubDate>Sat, 27 Jul 2024 09:05:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hNLc1grQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java21%2520%252B%2520Windows%25E3%2581%25AB%25E3%2581%258A%25E3%2581%2591%25E3%2582%258B%25E6%2596%2587%25E5%25AD%2597%25E5%258C%2596%25E3%2581%2591%25E5%25AF%25BE%25E7%25AD%2596%25E3%2581%25AE%25E8%25A8%25AD%25E5%25AE%259A%25E3%2581%25AE%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Leoninja%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dCdXV5SmNKbTFaZWRXWGNha3gxVllBOU1wQmhjeTE5TnBCUUV6PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Leoninja</dc:creator></item><item><title><![CDATA[Java Master Perfect Guide]]></title><description><![CDATA[プログラミングの基本要素、変数、データ型、制御構文、メソッドから始め、Javaの強力なオブジェクト指向の特徴を学びます。さらに、ラムダ式やStream APIといった応用範囲もカバーします。基本的なプログラミングを固めながら、実践的なスキルを身につけることが可能です。]]></description><link>https://zenn.dev/mojyamojya/books/java-master-programming</link><guid isPermaLink="true">https://zenn.dev/mojyamojya/books/java-master-programming</guid><pubDate>Fri, 26 Jul 2024 08:30:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--TyrpSGkr--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci82ZDNhYTNjYmQ0LmpwZWc=%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>AKIHIKO Sato</dc:creator></item><item><title><![CDATA[旅行会社のサイトを作ろう！JDBC編~Javaからデータベースを操作する方法~(執筆途中)]]></title><description><![CDATA[※執筆途中のため、内容・動作の保証はありません。ご了承下さいますと幸いです
+
+この講座ではJavaからデータベースを操作する方法について学びます
+書き方は決まっているので、書き方を学んで書くだけです！
+
+★講座で使用しているバージョンは、Windows11になります 。
+　Macの場合は操作方法が異なる事がありますのでご了承頂けますと幸いです
+
+★Javaの知識(出来ればオブジェクト指向まで。
+https://zenn.dev/codek2/books/63c880c460c21e
+https://zenn.dev/codek2/articles/22dce36b4ad458
+
+講座ではEclipseを使用します
+Eclipseを使用しますのでお持ちでない方はインストールをお願いします
+インストールの方法は↓
+https://zenn.dev/codek2/articles/8e9295c77866d4
+
+★PostgreSQLの知識
+https://zenn.dev/codek2/articles/e8e52c0d5817be
+
+インストールの方法は↓
+https://zenn.dev/codek2/articles/7acb27a52cb2d1]]></description><link>https://zenn.dev/codek2/books/cc252354d94052</link><guid isPermaLink="true">https://zenn.dev/codek2/books/cc252354d94052</guid><pubDate>Fri, 26 Jul 2024 03:22:04 GMT</pubDate><dc:creator>Udemy・企業・オンラインプログラミングスクール講師♪codek2</dc:creator></item><item><title><![CDATA[QuPathスクリプトを使ってバーチャルスライドの画像解析 1]]></title><description><![CDATA[QuPathは各社スライドスキャナーのファイル形式に対応した無料のviewer & analyzerである。扱いやすいROI作成ツールに加え、陽性面積や細胞検出などをwhole slide imageの大容量データで簡単に行うことができる。
+もちろん通常の顕微鏡画像も扱うことができるうえ、ImageJよりも分かりやすいインターフェイスであるためその汎用性は高い。
+
+QuPathにはメニュー画面には無い隠れた機能が豊富に存在する。それらを操るにはGroovy言語によるscriptingが必要となる。
+QuPath scriptingに馴染むことができれば、一連の解析パイプラインを作成し、それを複数データに一括でバッチ処理することが可能になる。それ以上に、機能のカスタムやImageJとの連携、拡張機能など解析の自由度が格段に増すことになる。
+
+かく言う私もQuPathを使うためにGroovyを使い始めた。QuPath自体はJavaで書かれているためQuPathのコマンドを解説する上でJavaの説明も伴うが、私自身Javaは初心者である。しかし特に理解せずともスクリプトは書ける。
+
+本書では、開発者のPete BankheadがYoutubeで紹介している内容や、公式ドキュメント、image.sc等での議論を基に私が作成したスクリプトや解析例を紹介する。非常に多機能なQuPathの全てを網羅する必要はない。章の順番も気にせず自身の解析に必要そうな章だけを読んでいただければよい。
+
+なお本書は2023年7月時点で最新のversionであるv0.4.3のQuPathを使用する。
+
+-----------------------------------------
+240726 チャプター数が限界に達したため本を分けることにします。
+
+こちらはQuPathを主にマウス操作で扱う入門編から、スクリプト操作に必要な事前情報、簡単な処理例を紹介します。
+
+より発展的な使用は次の本を参照してください。
+https://zenn.dev/rchiji/books/51fbb88213582d]]></description><link>https://zenn.dev/rchiji/books/0025385037d794</link><guid isPermaLink="true">https://zenn.dev/rchiji/books/0025385037d794</guid><pubDate>Fri, 26 Jul 2024 01:38:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1iPTMdXR--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci8yOTc2NGI3Y2MwLmpwZWc=%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>Ryota Chijimatsu</dc:creator></item><item><title><![CDATA[疑問解消編③]]></title><description><![CDATA[お久しぶりです！
+オアシステクノロジーズの中村です。
+疑問点や知らない単語をChatGPTに聞いてみた！編Part3です。
+
+ 今回のトピック
+
+AP基盤
+SSR
+CSR
+
+
+ AP基盤
+「AP基盤ってなんですか？」
+ChatGPT君
+
+AP基盤は、ITシステムにおけるアプリケーション（ソフトウェア）の実行環境を提供する基盤のことです。これは、アプリケーションが動作するためのハードウェア、ソフトウェア、ネットワーク、データベースなどの要素で構成されます。以下に、AP基盤に関連するいくつかの重要な要素を示します。
+
+
+
+
+ハードウェア: AP基盤は、アプリケーションが動作するためのサーバー...]]></description><link>https://zenn.dev/oasys/articles/7f64c99202775a</link><guid isPermaLink="true">https://zenn.dev/oasys/articles/7f64c99202775a</guid><pubDate>Thu, 25 Jul 2024 13:05:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jEQ-jLST--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%2596%2591%25E5%2595%258F%25E8%25A7%25A3%25E6%25B6%2588%25E7%25B7%25A8%25E2%2591%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25AA%25E3%2582%25A2%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2582%25AF%25E3%2583%258E%25E3%2583%25AD%25E3%2582%25B8%25E3%2583%25BC%25E3%2582%25BA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQyMGUxYmY0YzcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>オアシステクノロジーズ</dc:creator></item><item><title><![CDATA[【Java】クラス解説40・スタティックネステッドクラス]]></title><description><![CDATA[
+ スタティックネステッドクラス
+スタティックネステッドクラスとは、staticが付与されたネストクラスです。
+特徴は、staticが付与されているので、外部クラスのインスタンスに依存しません。また、外部クラスのstaticなフィールド及びメソッドのみアクセスすることが可能です。
+
+ スタティックネステッドクラスのインスタンス化するコード例
+public class Main {
+    public static void main(String... args) {
+        // 外側のクラスのインスタンス化
+        Fuzi fz = new Fuzi();
+   ...]]></description><link>https://zenn.dev/goriki/articles/079-static-nested-class</link><guid isPermaLink="true">https://zenn.dev/goriki/articles/079-static-nested-class</guid><pubDate>Tue, 23 Jul 2024 06:59:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4Tl7HtEY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Java%25E3%2580%2591%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25B9%25E8%25A7%25A3%25E8%25AA%25AC40%25E3%2583%25BB%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%2586%25E3%2582%25A3%25E3%2583%2583%25E3%2582%25AF%25E3%2583%258D%25E3%2582%25B9%25E3%2583%2586%25E3%2583%2583%25E3%2583%2589%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E8%2597%25A4%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNhZTBkYWY1NTMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>藤</dc:creator></item><item><title><![CDATA[近況報告]]></title><description><![CDATA[
+ 近況報告
+およそ２か月ほど記事の更新を滞らせてしまい申し訳ありませんでした。
+５月の下旬から私個人の状況に変化があり、新しい事にチャレンジしておりました。
+そのため、記事を更新することができませんでした。
+チャレンジの結果については、8月上旬には出るはずです。結果如何によっては、このブログの方向性も決まるかと思います。
+中途半端な報告ですが、結果が出るまでは、このままクラスの解説の記事をあげていこうと思っています。
+]]></description><link>https://zenn.dev/goriki/articles/078-status-report</link><guid isPermaLink="true">https://zenn.dev/goriki/articles/078-status-report</guid><pubDate>Tue, 23 Jul 2024 06:59:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--CTDMoWqi--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:%25E8%25BF%2591%25E6%25B3%2581%25E5%25A0%25B1%25E5%2591%258A%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E8%2597%25A4%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNhZTBkYWY1NTMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>藤</dc:creator></item><item><title><![CDATA[formとentityとdtoの違いについて]]></title><description><![CDATA[
+ Form
+
+画面の入力値を保持しておくオブジェクト
+従業員を入力する簡単なTodoアプリがあったとして、htmlのformから渡ってきた情報を格納します。
+
+
+ TodoForm
+@Data //lombok
+@AllArgsConstructor
+public class TodoForm {
+
+    @NotNull("タイトルを入力してください")
+    @Size(min = 1, max = 20, message="20文字以内で記述してください")
+    private String title;
+
+    @NotNull("説明を入力してください")
+    ...]]></description><link>https://zenn.dev/anti_15/articles/2753a489623091</link><guid isPermaLink="true">https://zenn.dev/anti_15/articles/2753a489623091</guid><pubDate>Mon, 22 Jul 2024 16:51:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--TXxNJYfS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:form%25E3%2581%25A8entity%25E3%2581%25A8dto%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2595%25E3%2581%258B%25E3%2581%25AA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0ZExFQW5ubW9MelJ4c2ZzWmNLOVA3eWZ2Y0g2VHh4S3ZJVER3MUZKT0E9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>さかな</dc:creator></item><item><title><![CDATA[いまさら Apache Ant に入門してみる]]></title><description><![CDATA[
+ はじめに
+現在行っているプロジェクトでは Apache Ant (以下 Ant )が使われており、途中参加だったのですでにある build.xml を多少眺めるくらいで保守は他のメンバーに任せっきりになっていました😅
+そもそも Java 自体もプロジェクトに参加してから触るようになったのでちゃんと理解して使えるようにならないと！
+ということで学習していきます💨
+
+ Antとは？
+Ant は、Java ベースのビルドツールで、プロジェクトのビルド、テスト、デプロイなどの自動化をサポートします。Ant は XML 形式のビルドファイル（ build.xml ）を使用してタスクを定義し、そ...]]></description><link>https://zenn.dev/rescuenow/articles/e2aaf985fcc271</link><guid isPermaLink="true">https://zenn.dev/rescuenow/articles/e2aaf985fcc271</guid><pubDate>Mon, 22 Jul 2024 01:52:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Zsoosx45--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%2584%25E3%2581%25BE%25E3%2581%2595%25E3%2582%2589%2520Apache%2520Ant%2520%25E3%2581%25AB%25E5%2585%25A5%25E9%2596%2580%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:takeuchi_kazuya%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E0NWI1N2NlZmMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%25AC%25E3%2582%25B9%25E3%2582%25AD%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%258A%25E3%2582%25A6%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNmZGM2NTEzMmUuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takeuchi_kazuya</dc:creator></item><item><title><![CDATA[Java・PHPプログラマーがポインタを勉強してみた]]></title><description><![CDATA[
+ はじめに
+してみた・・といいつつ、全く初めて覚えたわけでもありませんが、アドレスの考え方が必要な業務がありましたので、改めてC言語の入門書を読み直したりしていました。
+そこで、JavaやPHP・JavascriptプログラマーなどでもC言語のポインタを知っておくとより深くプログラミングが分かるという事を書いてみました。
+
+ ポインタとは
+ポインタとは変数のアドレスを扱うものです。
+はるか昔から非常に難解で高度な技術と言われてきました。
+しかし、実はC言語のポインタ構文自体はJavaをひと通り扱えるレベルであればすぐ覚えられるものです。
+
+main.c
+#include &lt;std...]]></description><link>https://zenn.dev/k_tabuchi/articles/a5ee3c9bbf43a0</link><guid isPermaLink="true">https://zenn.dev/k_tabuchi/articles/a5ee3c9bbf43a0</guid><pubDate>Thu, 18 Jul 2024 12:01:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6jkol3d---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java%25E3%2583%25BBPHP%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%259E%25E3%2583%25BC%25E3%2581%258C%25E3%2583%259D%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25BF%25E3%2582%2592%25E5%258B%2589%25E5%25BC%25B7%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:k-tabuchi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhkMjhhY2RlZGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>k-tabuchi</dc:creator></item><item><title><![CDATA[【JavaFX】WebViewを使用してGoogle APIのOAuth同意画面を表示する方法]]></title><description><![CDATA[JavaFX の WebView を使用して Google API の OAuth 同意画面を表示する方法をまとめました。
+
+ 1. 動作環境
+
+macOS 14.5
+Java 21.0.3
+JavaFX 21.0.3
+google-api-client 2.6.0
+google-oauth-client-jetty 1.36.0
+google-api-services-drive v3-rev20240628-2.0.0
+
+
+ 2. サンプルプロジェクト
+GitHub でサンプルプロジェクトを公開しています。
+https://github.com/iwazou-dev/javafxgo...]]></description><link>https://zenn.dev/iwazou/articles/javafx-googleapi-auth-1af5ddc356e296</link><guid isPermaLink="true">https://zenn.dev/iwazou/articles/javafx-googleapi-auth-1af5ddc356e296</guid><pubDate>Thu, 18 Jul 2024 07:38:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fsuCFdyb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590JavaFX%25E3%2580%2591WebView%25E3%2582%2592%25E4%25BD%25BF%25E7%2594%25A8%25E3%2581%2597%25E3%2581%25A6Google%2520API%25E3%2581%25AEOAuth%25E5%2590%258C%25E6%2584%258F%25E7%2594%25BB%25E9%259D%25A2%25E3%2582%2592%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2584%25E3%2582%258F%25E3%2581%259E%25E3%2581%2586%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSUlKUmg4NHc5a2k5Y3p0YmtZN0dqd2hwd1V3Yk1vbTFFYUJkaTBsNC1hPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>いわぞう</dc:creator></item><item><title><![CDATA[Semantic Kernel で Text-To-Speech と Speech-To-Text を試す]]></title><description><![CDATA[前回に引き続いて Java 版の Semantic Kernel を試したいと思います。掲題の通りに Text-To-Speech と Speech-To-Text を試したいと思いますが、それぞれ個別の AI モデルを利用します。具体的には以下となります。
+
+Text-To-Speech: tts モデルを利用　https://learn.microsoft.com/ja-jp/azure/ai-services/openai/text-to-speech-quickstart?tabs=command-line
+
+Speech-To-Text: Whisper モデルを利用 http...]]></description><link>https://zenn.dev/microsoft/articles/semantickernel-java-02</link><guid isPermaLink="true">https://zenn.dev/microsoft/articles/semantickernel-java-02</guid><pubDate>Thu, 18 Jul 2024 04:58:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6U-cpBIO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Semantic%2520Kernel%2520%25E3%2581%25A7%2520Text-To-Speech%2520%25E3%2581%25A8%2520Speech-To-Text%2520%25E3%2582%2592%25E8%25A9%25A6%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Daichi%2520Isami%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MzZDNiN2I3OGYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Microsoft%2520%2528%25E6%259C%2589%25E5%25BF%2597%2529%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTGF2NkRDRXVKdXRUN2VRRmI0ZDdKcmJycURONXBQNmdxNVI1NGdkZFhoY0o2Mj1zOTYtYw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Daichi Isami</dc:creator></item></channel></rss>
