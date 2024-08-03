@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Sat, 03 Aug 2024 09:00:21 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[ケツリカ(結論から理解)する　Class内用語集]]></title><description><![CDATA[自分が分からなくなったとき用のやつです
+
+ inheritance and extends (継承と拡張)
+継承とは
+!
+
+ 既存のクラスの機能を引き継ぎ、新しいクラスを作成する仕組み
+
+拡張とは
+!
+
+ 拡張は継承の一種であり、既存のクラスの機能に新しい機能を追加する仕組み
+
+最小限の例(java)// 基底クラス
+class Animal {
+    void makeSound() {
+        System.out.println("Some sound");
+    }
+}
+
+// 派生クラス
+class Dog extends Animal {
+    void mak...]]></description><link>https://zenn.dev/wh_space/articles/5c05b94c36248d</link><guid isPermaLink="true">https://zenn.dev/wh_space/articles/5c05b94c36248d</guid><pubDate>Sat, 03 Aug 2024 08:49:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ZW5Nwpad--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B1%25E3%2583%2584%25E3%2583%25AA%25E3%2582%25AB%2528%25E7%25B5%2590%25E8%25AB%2596%25E3%2581%258B%25E3%2582%2589%25E7%2590%2586%25E8%25A7%25A3%2529%25E3%2581%2599%25E3%2582%258B%25E3%2580%2580Class%25E5%2586%2585%25E7%2594%25A8%25E8%25AA%259E%25E9%259B%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:wh.space%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTE1YT3l1VDlvdnVSZ250aXFna0xpMUVjYUxSRjlEYzA4M3RrSnFoYm85d1JZQTJoVT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>wh.space</dc:creator></item><item><title><![CDATA[OpenCVで画像をAA風にしてみた]]></title><description><![CDATA[
+ こんにちは
+mitsuiJaoです
+PythonでAA風にするプログラムを作りました。誰かに見せたいとかじゃないけど自分が生きた証としてこの記事を残します🌟
+
+実行結果　（遠目から見たほうがいいよ）
+今回AAを作成したコードは、勉強の意を含め他の方のコードは直接使用してないです。（もちろん、パーツ事には参考にしていますが）
+
+ 概要
+画像または動画を入力し、プロンプトに文字列を出力します。OpenCVでの簡単な実装になっているのでコードも単純なものになっています。
+Gitにもリポジトリありますぞよ
+ソースはいっちゃん最後に貼っときます
+
+ ライブラリ
+opencv-python   ...]]></description><link>https://zenn.dev/mitsuijao/articles/e57b448f25620e</link><guid isPermaLink="true">https://zenn.dev/mitsuijao/articles/e57b448f25620e</guid><pubDate>Fri, 02 Aug 2024 18:51:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4PScDBMY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:OpenCV%25E3%2581%25A7%25E7%2594%25BB%25E5%2583%258F%25E3%2582%2592AA%25E9%25A2%25A8%25E3%2581%25AB%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mitsuiJao%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJiZjc0NmZlNmYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mitsuiJao</dc:creator></item><item><title><![CDATA[Pythonで再現する標準ベイズ統計学2章]]></title><description><![CDATA[
+ はじめに
+本記事では、Peter D. Hoff著『A First Course in Bayesian Statistical Methods』（邦訳：「標準ベイズ統計学」）の内容をベースに、ベイズ統計学の基本概念をPythonで実装する方法を紹介します。この連載では、イントロの1章を飛ばし、書籍の2章から始めます。各章で扱う内容を簡潔に解説し、それに対応するPythonコードを提供することで、理論と実践の橋渡しのお手伝いができればと考えています。本記事は、ベイズ統計学に興味がある方、Pythonでデータ分析を行いたい方、そして理論を実践に移したい方々に向けて書いています。ただし、...]]></description><link>https://zenn.dev/dmmdata/articles/bayes_chapter2</link><guid isPermaLink="true">https://zenn.dev/dmmdata/articles/bayes_chapter2</guid><pubDate>Fri, 02 Aug 2024 09:03:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--V7DtYSjV--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A7%25E5%2586%258D%25E7%258F%25BE%25E3%2581%2599%25E3%2582%258B%25E6%25A8%2599%25E6%25BA%2596%25E3%2583%2599%25E3%2582%25A4%25E3%2582%25BA%25E7%25B5%25B1%25E8%25A8%2588%25E5%25AD%25A62%25E7%25AB%25A0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:stochi%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU4MjQ4ZWRhNzUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:DMM%2520Data%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSjJabEF0Q0JnbUNtSFlYZjQ4UHdUaHFUX1d2eUdNbEJDYUxKWnhHdkgxPXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>stochi</dc:creator></item><item><title><![CDATA[コピペとコマンド実行のみでSentryのIssuesをCSV形式で書き出す]]></title><description><![CDATA[こんにちは
+It's summerですね🍉
+
+ 導入
+みなさまエラー監視ツールは何を使われてますでしょうか。
+弊社はモバイルアプリにSentryを使っています。
+まだ部分的にしか適用しておらず、エラー数もそこまで多くないためDeveloperプラン（$0）で利用しています。
+当該プランの場合、コンソール画面からのCSV書き出しに対応していないためAPI経由で取得する必要があります。
+
+ 事前準備
+正味、ChatGPT先生がはき出してくれたコードなので大きな顔はできませんが備忘録として
+api_token, organization_slug, project_slugはSentryのSe...]]></description><link>https://zenn.dev/kz422/articles/b60baa69246e6d</link><guid isPermaLink="true">https://zenn.dev/kz422/articles/b60baa69246e6d</guid><pubDate>Fri, 02 Aug 2024 05:43:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jen1mwiP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B3%25E3%2583%2594%25E3%2583%259A%25E3%2581%25A8%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%25AE%25E3%2581%25BF%25E3%2581%25A7Sentry%25E3%2581%25AEIssues%25E3%2582%2592CSV%25E5%25BD%25A2%25E5%25BC%258F%25E3%2581%25A7%25E6%259B%25B8%25E3%2581%258D%25E5%2587%25BA%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kz422%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFkMzNiNmFiOTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kz422</dc:creator></item><item><title><![CDATA[動画や音声をサクッと翻訳して字幕をつける]]></title><description><![CDATA[
+ 経緯
+動画の文字起こしツールって乱立していて大量にあるんですが、API を使っているからなのか有料のものが多いようです。使い勝手を考え出すと大変ですが、基本的な部分は割と簡単に実装できそうだったので試しに実装してみました。
+DeepL の API key を取得すれば誰でも使えます。
+
+ つくったもの
+以下のツールを実装します。
+
+動画を文字起こしして字幕をつけるツール
+動画に DeepL で翻訳した字幕をつけるツール
+
+まず動画の文字起こしを行い、次に文字起こししたデータを翻訳します。
+字幕(srt)、テキストファイル(txt)を翻訳前と翻訳後でそれぞれ出力します。
+
+ 使用技術
+...]]></description><link>https://zenn.dev/thinkingsinc/articles/1fd5c803e37c0a</link><guid isPermaLink="true">https://zenn.dev/thinkingsinc/articles/1fd5c803e37c0a</guid><pubDate>Fri, 02 Aug 2024 03:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ReI8LM0g--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%258B%2595%25E7%2594%25BB%25E3%2582%2584%25E9%259F%25B3%25E5%25A3%25B0%25E3%2582%2592%25E3%2582%25B5%25E3%2582%25AF%25E3%2583%2583%25E3%2581%25A8%25E7%25BF%25BB%25E8%25A8%25B3%25E3%2581%2597%25E3%2581%25A6%25E5%25AD%2597%25E5%25B9%2595%25E3%2582%2592%25E3%2581%25A4%25E3%2581%2591%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:MetalStone%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ExNDk2MTc4MWYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Thinkings%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E3ZDk5NDUzN2QuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>MetalStone</dc:creator></item><item><title><![CDATA[Maya rendersetup メモ]]></title><description><![CDATA[
+ Maya rendersetup メモ
+業務でMayaのRendersetupを触ったが、使う機会が少なそうなので備忘録としてメモ。
+
+ rendersetupとは
+概要はこの動画がわかりやすい。
+https://www.youtube.com/watch?v=R3eROhXRfng
+display layerの後継機能。ビューポートやレンダリングでのレイヤー作成を行うことができる。
+レイヤー内では、
+
+オブジェクトの表示・非表示
+シェーディングの変更
+attributeの変更
+などの設定が可能。
+
+Layer, Collection, Overrideの3つの要素で構成されている。...]]></description><link>https://zenn.dev/hph/articles/ddcf4a9a62229e</link><guid isPermaLink="true">https://zenn.dev/hph/articles/ddcf4a9a62229e</guid><pubDate>Fri, 02 Aug 2024 01:54:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--N6ygwtJS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:Maya%2520rendersetup%2520%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:wef%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA0OWM2NjQ2YjIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>wef</dc:creator></item><item><title><![CDATA[OASIS Web UI: インストールから使用まで]]></title><description><![CDATA[
+ はじめに
+OASIS（Optimized Article Sorting Intelligent System）の最新バージョンv0.8.0では、ユーザーフレンドリーなWeb UIが導入されました。この記事では、OASISのインストール方法から、新しいWeb UIの使用方法まで、順を追って解説します。
+
+ デモ動画
+
+
+ インストール方法
+
+ Pythonのインストール
+OASISはPythonで開発されているため、まずPythonをインストールする必要があります。Pythonの公式サイトから、最新版のPython（3.7以上推奨）をダウンロードしてインストールしてください。
+
+ O...]]></description><link>https://zenn.dev/sunwood_ai_labs/articles/oasis-web-ui-guide</link><guid isPermaLink="true">https://zenn.dev/sunwood_ai_labs/articles/oasis-web-ui-guide</guid><pubDate>Thu, 01 Aug 2024 14:20:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--NXYI8jFY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:OASIS%2520Web%2520UI%253A%2520%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%258B%25E3%2582%2589%25E4%25BD%25BF%25E7%2594%25A8%25E3%2581%25BE%25E3%2581%25A7%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Maki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTDdpSmVyNldLVlpKLUd4N054QWVuSFVtYXQ3MUhhd1NXaU5hRG5FTnZiMXZZdHBIaGs9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Maki</dc:creator></item><item><title><![CDATA[python-build-standaloneとDockerによるポータブルなPython環境の構築]]></title><description><![CDATA[こんにちは。今回は、Linux, macOS, Windows/x86,arm に対応した
+ポータブルなPython環境を展開可能なpython-build-standaloneについて紹介します。
+https://github.com/indygreg/python-build-standalone
+https://gregoryszorc.com/docs/python-build-standalone/main/
+
+ 概要
+Githubで公開されているリポジトリであるpython-build-standaloneでは、
+各OS, CPUアーキテクチャに対応したビルド済みのPytho...]]></description><link>https://zenn.dev/mjun0812/articles/2f1a769e23b2bb</link><guid isPermaLink="true">https://zenn.dev/mjun0812/articles/2f1a769e23b2bb</guid><pubDate>Thu, 01 Aug 2024 13:09:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--IO5NahzT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:python-build-standalone%25E3%2581%25A8Docker%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258B%25E3%2583%259D%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%2596%25E3%2583%25AB%25E3%2581%25AAPython%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25AE%25E6%25A7%258B%25E7%25AF%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2582%25E3%2582%258A%25E3%2582%258A%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY1NmNjYzA5MTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>もりりん</dc:creator></item><item><title><![CDATA[【Docker環境】SAM2でVideo Object Segmentationをしよう]]></title><description><![CDATA[
+ SAM2の衝撃
+これはすごい！
+https://github.com/facebookresearch/segment-anything-2
+しかしながら公式のvideo demoコードが分かりにくいので，この記事で一通り動かせるようにします．
+
+ 1. Docker環境
+Dockerfile
+ARG PYTORCH="2.3.1"
+ARG CUDA="12.1"
+ARG CUDNN="8"
+
+FROM pytorch/pytorch:${PYTORCH}-cuda${CUDA}-cudnn${CUDNN}-devel
+
+ENV DEBIAN_FRONTEND noninteract...]]></description><link>https://zenn.dev/watanko/articles/5dcefee7be9c26</link><guid isPermaLink="true">https://zenn.dev/watanko/articles/5dcefee7be9c26</guid><pubDate>Thu, 01 Aug 2024 12:15:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fR6bKEpL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Docker%25E7%2592%25B0%25E5%25A2%2583%25E3%2580%2591SAM2%25E3%2581%25A7Video%2520Object%2520Segmentation%25E3%2582%2592%25E3%2581%2597%25E3%2582%2588%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:watanko%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2UzMDAzYTExYjMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>watanko</dc:creator></item><item><title><![CDATA[Prompt Flowを使ってプロンプトのテストフローを構築する]]></title><description><![CDATA[
+ はじめに
+viagate株式会社でインターンをしている羽戸（はと）です。普段はChat InsightというAIインタビューサービスの開発を担当しています。
+近年、大規模言語モデル（LLM）の活用が広がる中で、プロンプトの設計とテストはますます重要になっています。プロンプトの質はアウトプットに大きな影響を与えるため、迅速かつ正確にプロンプトを評価することが求められます。そこで「Prompt Flow」を用いることでプロンプトのテストフローを驚くほど簡単に構築できます💪
+Prompt Flowとは、Microsoft社が提供するAIアプリケーション開発ツールの1つです。
+以下はMicr...]]></description><link>https://zenn.dev/viagate_tech/articles/f48c85519a9481</link><guid isPermaLink="true">https://zenn.dev/viagate_tech/articles/f48c85519a9481</guid><pubDate>Thu, 01 Aug 2024 07:12:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--SGPOuw70--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Prompt%2520Flow%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2583%2597%25E3%2583%25AD%25E3%2583%25B3%25E3%2583%2597%25E3%2583%2588%25E3%2581%25AE%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E3%2583%2595%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%2592%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:y-hato%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA5NzljMjMxYmEuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%25B4%25E3%2582%25A3%25E3%2582%25A2%25E3%2582%25B2%25E3%2583%25BC%25E3%2583%2588%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%2520Tech%25E3%2583%2581%25E3%2583%25BC%25E3%2583%25A0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzkxZDNjMTJjYjIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>y-hato</dc:creator></item><item><title><![CDATA[PydanticでQueueメッセージを型定義する]]></title><description><![CDATA[みてね事業部 Data Engineeringグループに所属しているkittchyです。
+MLエンジニアとして、ML解析器の整備、精度改善などの業務に携わっています。
+
+ 家族アルバムみてね
+「家族アルバム みてね」（以下「みてね」）は、スマホで撮った子どもの写真や動画をかんたん共有、整理でき、家族で楽しく会話したり成長をふりかえることができるサービスです。
+みてねData Engineeringグループでは顔検出や画像の分類情報など、Machine Learning (ML) の技術を利用してアップロードされた画像を解析し、みてねのさまざまな機能に活用しています。
+
+ ML解析器につい...]]></description><link>https://zenn.dev/mixi/articles/50f7bc313bc7c1</link><guid isPermaLink="true">https://zenn.dev/mixi/articles/50f7bc313bc7c1</guid><pubDate>Thu, 01 Aug 2024 07:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--rBgoHztG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Pydantic%25E3%2581%25A7Queue%25E3%2583%25A1%25E3%2583%2583%25E3%2582%25BB%25E3%2583%25BC%25E3%2582%25B8%25E3%2582%2592%25E5%259E%258B%25E5%25AE%259A%25E7%25BE%25A9%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:kitchy%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2UzY2IwNWVmMTMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:MIXI%2520DEVELOPERS%2520NOTE%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E4MGM0ZTc3NmIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kitchy</dc:creator></item><item><title><![CDATA[Pythonで便利なファイル選択関数を作る]]></title><description><![CDATA[
+ 目的
+ファイルパスを定義する手間を省きたい。
+データを扱う仕事をしていて、大量のファイルと向き合うことが増えてきました。中間データが山ほど生まれますし、元データもバージョンがどんどん増えていき、名称の長いファイルがフォルダにあふれることになります。そしてファイルが増えるたびに、ハードコードしたファイルパスを書き換えていたのですが、次第に面倒を覚えるようになりました。
+そこでファイルを特定のディレクトリに突っ込んでおけば、コードを書き換えなくともコンソール上で簡単に選択できるような仕組みを作ることにしました。
+
+ 関数
+from pathlib import Path
+
+def sel...]]></description><link>https://zenn.dev/crandim_r_and_d/articles/58022460d25a2b</link><guid isPermaLink="true">https://zenn.dev/crandim_r_and_d/articles/58022460d25a2b</guid><pubDate>Thu, 01 Aug 2024 03:12:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--RJp8LqZV--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A7%25E4%25BE%25BF%25E5%2588%25A9%25E3%2581%25AA%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E9%2581%25B8%25E6%258A%259E%25E9%2596%25A2%25E6%2595%25B0%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:nambaaa%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLmRldi9pbWFnZXMvZGVmYXVsdC1wdWJsaWNhdGlvbi1hdmF0YXIucG5n%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2582%25AF%25E3%2583%25A9%25E3%2583%25B3%25E3%2583%2587%25E3%2582%25A3%25E3%2583%25A0R%2526D%25E9%2583%25A8%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q5MDU4Y2FiMmYuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nambaaa</dc:creator></item><item><title><![CDATA[PythonによるNaCl型結晶のマーデルング定数の実装]]></title><description><![CDATA[授業の課題で計算面倒くさかったので、NaCl型結晶のマーデルング定数(Madelung constant)をPythonで実装してみました。
+
+ マーデルング定数とは
+マーデルング定数
+イオン結晶におけるあるイオン(原子)の周りにあるイオン達の静電エネルギーの和
+
+M =  \frac{d}{Z_i Z_j}\sum_{j \neq i} \frac{Z_i Z_j}{r_{ij}}
+
+参考：　初歩から学ぶ固体物理学(KS物理専門書) p.89
+何の変数かはまた今度更新します。
+
+ アルゴリズム
+
+一対のイオン-イオン間のマーデルング定数を計算する
+上の計算を全てのイオン-イオン間につい...]]></description><link>https://zenn.dev/reggae_punch/articles/e7ea4732426f63</link><guid isPermaLink="true">https://zenn.dev/reggae_punch/articles/e7ea4732426f63</guid><pubDate>Wed, 31 Jul 2024 19:24:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--kB5LXZlb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258BNaCl%25E5%259E%258B%25E7%25B5%2590%25E6%2599%25B6%25E3%2581%25AE%25E3%2583%259E%25E3%2583%25BC%25E3%2583%2587%25E3%2583%25AB%25E3%2583%25B3%25E3%2582%25B0%25E5%25AE%259A%25E6%2595%25B0%25E3%2581%25AE%25E5%25AE%259F%25E8%25A3%2585%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%25AC%25E3%2582%25B2%25E3%2582%25A8%25E3%2583%2591%25E3%2583%25B3%25E3%2583%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTGh5aDRRZU9nSk9XWU1uMU9ONGxSUkFqd29JbjUtYWFkSFZvMHlfZHd1blVnZlhQOD1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>レゲエパンチ</dc:creator></item><item><title><![CDATA[PythonでBM25のスコアを算出してみる]]></title><description><![CDATA[
+ やること
+フルテキスト検索で使われるBM25のスコアをPythonで求める
+
+ 背景
+AI Searchには様々なドキュメント検索の手法があり、代表的なものとしてフルテキスト検索があります。フルテキスト検索ではtf-idfを発展させたBM25というアルゴリズムが使われています。
+
+ 参考記事
+マイクロソフトの公式に説明があります。
+https://learn.microsoft.com/ja-jp/azure/search/index-ranking-similarity
+
+ 理論
+BM25の数式は一見難解ですが以下の記事がわかりやすかったです。
+https://qiita.com/...]]></description><link>https://zenn.dev/headwaters/articles/7db94f0fb46a69</link><guid isPermaLink="true">https://zenn.dev/headwaters/articles/7db94f0fb46a69</guid><pubDate>Wed, 31 Jul 2024 14:50:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--UEBKxmxc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A7BM25%25E3%2581%25AE%25E3%2582%25B9%25E3%2582%25B3%25E3%2582%25A2%25E3%2582%2592%25E7%25AE%2597%25E5%2587%25BA%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:akihiro%2520nakamura%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZjNGExY2UxMDYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2598%25E3%2583%2583%25E3%2583%2589%25E3%2582%25A6%25E3%2582%25A9%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%25BC%25E3%2582%25B9%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA5MjU4ZWEwY2QuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>akihiro nakamura</dc:creator></item><item><title><![CDATA[numpy.cov(X.T) 分散共分散行列について]]></title><description><![CDATA[
+ 背景
+dataframeをndarrayへと変換した後、分散教分散行列を求める方法が調べても見つからなかったため、以下に方法を示す。
+（見つからなかっただけで、絶対にどこかの記事に書いてあると思う...）
+
+ 分散共分散行列
+import numpy as np
+x = np.array([1,2,3,4,5,6,7,8,9])
+y = np.array([9,8,7,6,5,4,3,2,1])
+上記のデータxおよびyの分散共分散行列はどのように求めることができるだろうか。
+np.cov(x,y)
+
+上記の通り書くことで分散共分散行列を求めることができる。
+では、一方で以下のようなデ...]]></description><link>https://zenn.dev/kry_river/articles/c5a7a422bb37a2</link><guid isPermaLink="true">https://zenn.dev/kry_river/articles/c5a7a422bb37a2</guid><pubDate>Wed, 31 Jul 2024 13:06:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--zu3aDJyV--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:numpy.cov%2528X.T%2529%2520%25E5%2588%2586%25E6%2595%25A3%25E5%2585%25B1%25E5%2588%2586%25E6%2595%25A3%25E8%25A1%258C%25E5%2588%2597%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kry_river%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI0ZjFjMjdjNmYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kry_river</dc:creator></item><item><title><![CDATA[【MotionBuilder】Python SDK 入門 第7回 『UI・ツール開発-基礎編』]]></title><description><![CDATA[この記事は、Python SDK 入門の第7回目の記事です。
+今回から、MotionBuilderでのUI・ツール開発について解説していきます。第1回でも書いた通り、今回から3回に分けて『UI・ツール開発』をテーマに、SDKのみで完結する方法、Qt(PySide)を利用する方法、PySideの使用例の3つを解説します。
+
+ UIの概説
+MotionBuilderのUIがどんな構成で、各部がどんな名称をもつのか解説します。
+
+ MainWindow
+パソコンで開く一つ一つのアプリケーションの”窓”としてのウィンドウと同じ。
+
+MainWindow。赤枠で囲った部分
+
+ Window
+Mai...]]></description><link>https://zenn.dev/nadegata_memo/articles/da64bcc16f8cfd</link><guid isPermaLink="true">https://zenn.dev/nadegata_memo/articles/da64bcc16f8cfd</guid><pubDate>Wed, 31 Jul 2024 11:07:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--n24Ve5f---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590MotionBuilder%25E3%2580%2591Python%2520SDK%2520%25E5%2585%25A5%25E9%2596%2580%2520%25E7%25AC%25AC7%25E5%259B%259E%2520%25E3%2580%258EUI%25E3%2583%25BB%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%25E9%2596%258B%25E7%2599%25BA-%25E5%259F%25BA%25E7%25A4%258E%25E7%25B7%25A8%25E3%2580%258F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Ndgt%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA3ZmZmZWFmYWUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Ndgt</dc:creator></item><item><title><![CDATA[【Python】ファイルの冒頭に書くべき内容とその構成]]></title><description><![CDATA[
+ 1. はじめに
+Pythonファイルの冒頭には、コードの可読性と保守性を高めるためにいくつかの重要な情報を記述することが推奨されます。この記事では、Pythonファイルの冒頭に書くべき内容とその書き方について、具体的な例を交えて説明します。
+
+ 2. エンコーディング指定
+非ASCII文字を含む場合、ファイルの先頭にエンコーディング指定を記述します。これはPython 3ではほとんど必要ありませんが、Python 2との互換性を考慮する場合や、特定のエディタでの表示を考慮する場合に使用します。
+# -*- coding: utf-8 -*-
+
+ 3. ドキュメンテーション文字列（do...]]></description><link>https://zenn.dev/nuinui/articles/fe942394d8b305</link><guid isPermaLink="true">https://zenn.dev/nuinui/articles/fe942394d8b305</guid><pubDate>Wed, 31 Jul 2024 08:48:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--OTw0eiv9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2581%25AE%25E5%2586%2592%25E9%25A0%25AD%25E3%2581%25AB%25E6%259B%25B8%25E3%2581%258F%25E3%2581%25B9%25E3%2581%258D%25E5%2586%2585%25E5%25AE%25B9%25E3%2581%25A8%25E3%2581%259D%25E3%2581%25AE%25E6%25A7%258B%25E6%2588%2590%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AC%25E3%2583%25BC%25E3%2581%2584%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSno2cFRIRmpDc184N0NyTTNyYV9iZnd6LVVLaXAxRHMxZWdFdHl1b0VQY1JCbUVDcz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ぬーい</dc:creator></item><item><title><![CDATA[踏み台サーバーから jupyter lab を立ち上げる方法]]></title><description><![CDATA[
+ 前提条件
+client ↔ middle server ↔ target server
+のように middle server を経由して target server にアクセスする場合の設定方法について解説する。
+
+ ssh の設定
+
+ssh の key を登録する。
+
+
+~/.ssh/middle と ~/.ssh/target は手元に置いておく
+
+
+
+~/.ssh/config を設定する
+
+
+~/.ssh/config
+Host MiddleServer
+        HostName        middle-address
+        User          ...]]></description><link>https://zenn.dev/genf740/articles/573ffa39-c0d5-45c4-ad39-b1afbfefbbfb</link><guid isPermaLink="true">https://zenn.dev/genf740/articles/573ffa39-c0d5-45c4-ad39-b1afbfefbbfb</guid><pubDate>Wed, 31 Jul 2024 05:57:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--AzivWopg--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%25B8%258F%25E3%2581%25BF%25E5%258F%25B0%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2581%258B%25E3%2582%2589%2520jupyter%2520lab%2520%25E3%2582%2592%25E7%25AB%258B%25E3%2581%25A1%25E4%25B8%258A%25E3%2581%2592%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:gen740%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pNOGJfSGVlRHJhclh6YllqWnBrQjBWUVZtcExib3ZzRE42WEFoYjdVPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>gen740</dc:creator></item><item><title><![CDATA[ローカルLLMにRAGASの評価させてみた]]></title><description><![CDATA[
+ はじめに
+RAGASの評価はローカルLLMで可能なのか検証してみたいと思います。
+各メトリクスで、質問、回答、コンテキスト、GroundTruthのいずれかをインプットに
+LLMに評価させる仕組みとなっているため、インプットが長文だとトークン代がかかります。
+私はGPTに評価させているのですが、データセット(質問、回答、コンテキスト、GroundTruth)だけでも何千トークンもあって、さらに何十件もあるため、コストが痛くないわけではないです。
+そこでローカルLLMに評価させることで、節約できないかと考えたのが背景です。
+即結果を出すことは求められてはいないため、速度はある程度は許容...]]></description><link>https://zenn.dev/headwaters/articles/74e23c1dae2da5</link><guid isPermaLink="true">https://zenn.dev/headwaters/articles/74e23c1dae2da5</guid><pubDate>Wed, 31 Jul 2024 05:50:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--eyato9SH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25AB%25E3%2583%25ABLLM%25E3%2581%25ABRAGAS%25E3%2581%25AE%25E8%25A9%2595%25E4%25BE%25A1%25E3%2581%2595%25E3%2581%259B%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:mshiba%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZjNGExY2UxMDYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2598%25E3%2583%2583%25E3%2583%2589%25E3%2582%25A6%25E3%2582%25A9%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%25BC%25E3%2582%25B9%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzIxNGI2ZTQ2MzguanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mshiba</dc:creator></item><item><title><![CDATA[[Python] オリジナルコマンドを実装する]]></title><description><![CDATA[
+ はじめに
+Pythonで書いた処理を自分のマシン専用でCLIツールとして利用したい
+例として、引数にhelloという文字列を返すコマンドを実装する
+
+ hello.py
+#! /usr/bin/env python3
+
+import sys
+arg=sys.argv[1]
+
+print(hello+arg)
+
+
+ 手順
+
+実行権限を付与する
+パスを通す
+
+
+ 実行権限を付与する
+% chmod u+x hello.py
+
+ パスを通す
+% echo export PATH="$PATH:$HOME/hello.py/" &gt;&gt; ~/.zshrc
+% source ~/.zs...]]></description><link>https://zenn.dev/kotopasi/articles/33f648f3e99482</link><guid isPermaLink="true">https://zenn.dev/kotopasi/articles/33f648f3e99482</guid><pubDate>Tue, 30 Jul 2024 17:26:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--aiJnCp2a--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BPython%255D%2520%25E3%2582%25AA%25E3%2583%25AA%25E3%2582%25B8%25E3%2583%258A%25E3%2583%25AB%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2582%25E3%2581%25BE%25E3%2581%259F%25E3%2581%25A4%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FmOWU0NjBmZDUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>あまたつ</dc:creator></item></channel></rss>

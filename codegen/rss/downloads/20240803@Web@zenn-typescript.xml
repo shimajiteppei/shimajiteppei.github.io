@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「TypeScript」のフィード]]></title><description><![CDATA[Zennのトピック「TypeScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/typescript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/f13e758fdb.png</url><title>Zennの「TypeScript」のフィード</title><link>https://zenn.dev/topics/typescript</link></image><generator>zenn.dev</generator><lastBuildDate>Sat, 03 Aug 2024 12:03:19 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/typescript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[【REST API / gRPC / tRPC】徹底比較！どれを選ぶべきか？]]></title><description><![CDATA[
+ はじめに
+API設計のアーキテクチャスタイルには、REST API、GraphQL、gRPC、tRPCなど、複数の選択肢があります。
+私はこれまでに、実務や個人開発でREST API、gRPC、tRPCを使用してきました。その上で今回は、それぞれの特徴と開発の流れについて紹介します。さらに、それぞれのメリット・デメリットを挙げ、特定のケースに適した選択について考察してみました。
+API設計のアーキテクチャスタイルの選択に悩んでいる方に、少しでも参考になれば幸いです。
+
+ REST API
+
+ RESTとは
+まずRESTとはシンプルなWEB全体のアーキテクチャスタイルのことです。RES...]]></description><link>https://zenn.dev/kiwichan101kg/articles/35250c1de570ea</link><guid isPermaLink="true">https://zenn.dev/kiwichan101kg/articles/35250c1de570ea</guid><pubDate>Sat, 03 Aug 2024 10:31:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--TFP_bumI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590REST%2520API%2520%252F%2520gRPC%2520%252F%2520tRPC%25E3%2580%2591%25E5%25BE%25B9%25E5%25BA%2595%25E6%25AF%2594%25E8%25BC%2583%25EF%25BC%2581%25E3%2581%25A9%25E3%2582%258C%25E3%2582%2592%25E9%2581%25B8%25E3%2581%25B6%25E3%2581%25B9%25E3%2581%258D%25E3%2581%258B%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kiwichan%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZlYTA3YzU3YzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kiwichan</dc:creator></item><item><title><![CDATA[Next.js の App Router の  Parallel Routes をサンプルアプリを使って理解しよう！]]></title><description><![CDATA[
+Next.jsには強力なルーティング機能があります。App Routerにはさまざまなパターンの規約が用意されており、それぞれの特性を活かしてアプリケーションを構築できます。今回はその中でもParallel Routesに焦点を当てて探っていきたいと思います。
+理解を深めるために、また読者が気になった点を自分でコードを変更させながら確かめられるという利点から、サンプルアプリを用意しました。サンプルアプリを実際に動かしながら記事を読んでいただくことで、この機能についてより一層の理解が深まると思いますので、ぜひお試しください。
+今回使用するサンプルアプリは以下となります。
+https://...]]></description><link>https://zenn.dev/hiraoku/articles/7542711422e94a</link><guid isPermaLink="true">https://zenn.dev/hiraoku/articles/7542711422e94a</guid><pubDate>Sat, 03 Aug 2024 09:37:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vspUWoIC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Next.js%2520%25E3%2581%25AE%2520App%2520Router%2520%25E3%2581%25AE%2520%2520Parallel%2520Routes%2520%25E3%2582%2592%25E3%2582%25B5%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AB%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2597%25E3%2582%2588%25E3%2581%2586%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hiraoku%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNiOWI5ZTNjNGIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hiraoku</dc:creator></item><item><title><![CDATA[【React】react-scriptsからviteへの移行]]></title><description><![CDATA[
+ 背景
+react-scriptsを使っているとreact-scriptsのバージョンが古すぎて他のパッケージと競合が起きる問題が発生しました
+create-react-app がどうやらメンテされなくなったようで react-script が邪魔をして TypeScript を5以降にバージョンアップできなくなった。そのため、create-react-app で作成されたアプリケーションを Vite に移行することにしました
+
+ Vite
+Reactでアプリケーションを開発する際、デフォルトではCreate React App（CRA）を使用することが一般的です。CRAは非常に便利で...]]></description><link>https://zenn.dev/xronotech/articles/11e671bf0315e7</link><guid isPermaLink="true">https://zenn.dev/xronotech/articles/11e671bf0315e7</guid><pubDate>Sat, 03 Aug 2024 01:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--pcyGXHVu--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590React%25E3%2580%2591react-scripts%25E3%2581%258B%25E3%2582%2589vite%25E3%2581%25B8%25E3%2581%25AE%25E7%25A7%25BB%25E8%25A1%258C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:mizukich%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdmMTJiODY3MzAuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BEXronotech%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS2Q2bUgzdERkMVhVWlI3TU5obG1PcWRRSlNMWVVKbE9KNWQ3dXhhRWVxQXJDbDJoVDQ9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mizukich</dc:creator></item><item><title><![CDATA[TypeScriptで初めてのCleanArchitecture]]></title><description><![CDATA[
+ TypeScriptで初めてのClean Architecture
+
+ はじめに
+ソフトウェア開発において、アーキテクチャは非常に重要な要素です。特に、アプリケーションが大規模化するにつれて、コードの可読性や保守性が求められます。Clean Architecture（クリーンアーキテクチャ）は、これらの課題に対処するための設計原則の一つです。本記事では、TypeScriptを用いてClean Architectureを実装する方法について詳しく解説します。
+Clean Architectureは、ロバート・C・マーチン（通称ボブ・マーチン）によって提唱されました。このアーキテクチャは...]]></description><link>https://zenn.dev/llm_robot/articles/20240731-cleanarchitecture-typescript</link><guid isPermaLink="true">https://zenn.dev/llm_robot/articles/20240731-cleanarchitecture-typescript</guid><pubDate>Fri, 02 Aug 2024 22:08:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xJ4kAqjl--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%25E3%2581%25A7%25E5%2588%259D%25E3%2582%2581%25E3%2581%25A6%25E3%2581%25AECleanArchitecture%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:AIZAWA%2520version%253A0.0.1%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAwMTE3MGM1NDcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>AIZAWA version:0.0.1</dc:creator></item><item><title><![CDATA[[Playwight] TSで動的サイトをスクレイピング]]></title><description><![CDATA[
+
+ はじめに
+動的なサイトとは、JSによるDOMの更新が行われるサイト。
+静的なサイトと違って、URLを指定してHTMLを取得し、スクレイピングをしようとしてもうまくいかない。(その時点ではJSにより生成される本体のコードを取得できていないから)
+よって、Playwrightやpuppeteer、seleniumなどのヘッドレスブラウザを操作するライブラリを使って実際にサイトにアクセスすることで、DOM操作後のHTMLが取得できます。
+今回は、
+
+シンプル
+動作の軽さ
+の点から、Playwrightを使用します。
+
+
+ 動作環境
+
+
+mac: System Version: macOS...]]></description><link>https://zenn.dev/kotopasi/articles/efbf8580fd2311</link><guid isPermaLink="true">https://zenn.dev/kotopasi/articles/efbf8580fd2311</guid><pubDate>Fri, 02 Aug 2024 20:34:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--JhW0WSLJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BPlaywight%255D%2520TS%25E3%2581%25A7%25E5%258B%2595%25E7%259A%2584%25E3%2582%25B5%25E3%2582%25A4%25E3%2583%2588%25E3%2582%2592%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AC%25E3%2582%25A4%25E3%2583%2594%25E3%2583%25B3%25E3%2582%25B0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2582%25E3%2581%25BE%25E3%2581%259F%25E3%2581%25A4%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FmOWU0NjBmZDUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>あまたつ</dc:creator></item><item><title><![CDATA[Vite (ヴィート) で1分環境構築【React + TypeScript】]]></title><description><![CDATA[
+ Reactのアプリを作るぞ！
+ってなったら、あなたはまず何をしますか？
+そう、「環境構築」ですね。
+その環境構築の中でも今回扱うのが「ビルド」です！
+ReactとかTypeScript、Node.jsって、そのままの状態ではブラウザで動きません（= ブラウザで動くのは素のままのJavaScriptです）。それを動くようにするためにいざ、変換。これが「ビルド」です。
+
+ 代表的な3つのビルドシステム
+
+ 1. Create React App
+
+
+"Create React App"（CRA）は2022年4月を最後に更新が止まっています。（少し前の記事や教材でよく見かけるシロモノですね...]]></description><link>https://zenn.dev/reasemi/articles/6869cebde469aa</link><guid isPermaLink="true">https://zenn.dev/reasemi/articles/6869cebde469aa</guid><pubDate>Fri, 02 Aug 2024 16:08:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--74ht-otF--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Vite%2520%2528%25E3%2583%25B4%25E3%2582%25A3%25E3%2583%25BC%25E3%2583%2588%2529%2520%25E3%2581%25A71%25E5%2588%2586%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%25E3%2580%2590React%2520%252B%2520TypeScript%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2582%2584%25E3%2581%25BE%25E3%2581%25B4%25E3%2583%25BC%2520%252F%2520YAMAGUCHI%2520T...%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NlNDM5OTIyYTYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%258A%25E3%2581%2582%25E3%2582%25BC%25E3%2583%259F%25EF%25BC%2581%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzEwZGM5MGNmNzUuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>やまぴー / YAMAGUCHI Tomohisa</dc:creator></item><item><title><![CDATA[Firebase Genkit アプリを Functions へ手軽にデプロイする]]></title><description><![CDATA[備考: 以下英語記事の翻訳版なので、日本語として言い回し変なところあるかもですが、ご了承ください。
+https://medium.com/@yukinagae/deploying-your-firebase-genkit-application-with-firebase-functions-99c7d0044964
+
+この投稿では、Firebase Genkit アプリケーションを Firebase Functions にデプロイする手順をステップバイステップで説明します。
+まずは、以下のリポジトリをクローンして、実際に手を動かしてみましょう：
+git clone https://gi...]]></description><link>https://zenn.dev/cureapp/articles/e8f0dd47641bfd</link><guid isPermaLink="true">https://zenn.dev/cureapp/articles/e8f0dd47641bfd</guid><pubDate>Fri, 02 Aug 2024 14:11:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--a3MuQB0R--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Firebase%2520Genkit%2520%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%2520Functions%2520%25E3%2581%25B8%25E6%2589%258B%25E8%25BB%25BD%25E3%2581%25AB%25E3%2583%2587%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25A4%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:yukinagae%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M1MThkMWZlMzkuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:CureApp%2520%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dJaGJ0cmVPNThxQ2UyVnd5S3lRTC02MTEtejJaUDVsTUQwVkpNMUE9czI1MC1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yukinagae</dc:creator></item><item><title><![CDATA[空ではない配列型を作成する方法]]></title><description><![CDATA[
+ 空ではない配列型の作成
+配列型（例えば、Array&lt;string&gt;）はデフォルトで空の配列を許可します。しかし、配列が空で宣言されないようにする静的型チェックを行うカスタム配列型を定義することができます。
+これを実現するために、配列型には少なくとも1つのアイテムがあることを指定し、さらに残りの配列の要素をスプレッド演算子で表現します。
+type NonEmptyArray&lt;T&gt; = [T, ...T[]];
+
+ アイテムがない NonEmptyArray を宣言する場合
+以下のように NonEmptyArray をアイテムなしで宣言すると：
+const sta...]]></description><link>https://zenn.dev/nomikazu_x/articles/typescript-create-non-empty-array-type</link><guid isPermaLink="true">https://zenn.dev/nomikazu_x/articles/typescript-create-non-empty-array-type</guid><pubDate>Fri, 02 Aug 2024 11:00:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--B0yLVtgJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%25A9%25BA%25E3%2581%25A7%25E3%2581%25AF%25E3%2581%25AA%25E3%2581%2584%25E9%2585%258D%25E5%2588%2597%25E5%259E%258B%25E3%2582%2592%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nomikazu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E5Zjg3ZDg5NmIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nomikazu</dc:creator></item><item><title><![CDATA[【2024年夏】ブラウザ拡張機能開発を加速するフレームワーク・ツール3選をコードベース付きで紹介！]]></title><description><![CDATA[!
+この記事は、CYBOZU SUMMER BLOG FES '24 (Frontend Stage) DAY 2の記事です。
+
+本記事では、ブラウザ拡張機能開発を加速させる、個人的に注目な3つの拡張機能開発フレームワーク・ツール（WXT、Plasmo、Extension.js）を紹介します。
+サンプル拡張機能の実装を通して、それぞれの特徴、セットアップ方法、実際の開発フローを見ていきます。お好みの拡張機能開発ツールが見つかれば嬉しいです。
+
+ 各フレームワーク・ツールの紹介
+
+ WXT
+https://wxt.dev/
+WXTは、Viteベースのブラウザ拡張フレームワークです。次のよう...]]></description><link>https://zenn.dev/cybozu_frontend/articles/introduction-browser-extensions-tools</link><guid isPermaLink="true">https://zenn.dev/cybozu_frontend/articles/introduction-browser-extensions-tools</guid><pubDate>Fri, 02 Aug 2024 08:50:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--DLKfWhw2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%25902024%25E5%25B9%25B4%25E5%25A4%258F%25E3%2580%2591%25E3%2583%2596%25E3%2583%25A9%25E3%2582%25A6%25E3%2582%25B6%25E6%258B%25A1%25E5%25BC%25B5%25E6%25A9%259F%25E8%2583%25BD%25E9%2596%258B%25E7%2599%25BA%25E3%2582%2592%25E5%258A%25A0%25E9%2580%259F%25E3%2581%2599%25E3%2582%258B%25E3%2583%2595%25E3%2583%25AC%25E3%2583%25BC%25E3%2583%25A0%25E3%2583%25AF%25E3%2583%25BC%25E3%2582%25AF%25E3%2583%25BB%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB3%25E9%2581%25B8%25E3%2582%2592%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2583%2599%25E3%2583%25BC%25E3%2582%25B9%25E4%25BB%2598%25E3%2581%258D%25E3%2581%25A7%25E7%25B4%25B9%25E4%25BB%258B%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:daiki%2520%252F%2520%25E3%2581%258D%25E3%2581%25A1%25E3%2581%258F%25E3%2582%258A%25E3%2581%2599%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VjOTA1OThlNjEuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25B5%25E3%2582%25A4%25E3%2583%259C%25E3%2582%25A6%25E3%2582%25BA%2520%25E3%2583%2595%25E3%2583%25AD%25E3%2583%25B3%25E3%2583%2588%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2589%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzkzN2NiNjM1NWYuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>daiki / きちくりす</dc:creator></item><item><title><![CDATA[Vuetify3のスライダを対数スケールで使えるようにしてみた]]></title><description><![CDATA[
+数値計算を行うページを作る機会があり、パラメータの入力に Vuetify3 の VSlider を使っています。値によってはリニアスケールよりも対数スケールでスライダが動かせると都合がいいものがあります。今回は標準の VSlider をベースにして対数スケール対応のスライダを作ってみました。
+
+ 前提条件
+
+Vue 3.4.34
+Vuetify 3.6.13
+TypeScript 5.5.4
+
+
+ コンポーネントのプログラム
+以下が対数スケールに対応したスライダのプログラムになります。
+
+LogSlider.vue
+&lt;script setup lang="ts"&gt;
+impo...]]></description><link>https://zenn.dev/nanase_t/articles/9d2b17018938a8</link><guid isPermaLink="true">https://zenn.dev/nanase_t/articles/9d2b17018938a8</guid><pubDate>Fri, 02 Aug 2024 06:19:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1MuIUrY6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Vuetify3%25E3%2581%25AE%25E3%2582%25B9%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2580%25E3%2582%2592%25E5%25AF%25BE%25E6%2595%25B0%25E3%2582%25B9%25E3%2582%25B1%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%25A7%25E4%25BD%25BF%25E3%2581%2588%25E3%2582%258B%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E4%25B8%2583%25E7%2580%25AC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JmZDc4M2MzOGIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>七瀬</dc:creator></item><item><title><![CDATA[yup￤日付の相関チェックなど少し込み入ったバリデーションをする]]></title><description><![CDATA[
+ はじめに
+yupで少し複雑なバリデーションをしたいときにやり方を調べるのにやや苦戦したのでそのまとめになります。
+
+ やりたいこと
+
+ふたつの入力値を比較するバリデーション
+
+開始日と終了日の入力欄を比較する
+
+
+入力可能な文字が決まっているバリデーション
+
+任意入力項目
+
+
+配列で選択肢から選択しているかを確認するバリデーション
+
+
+ 環境
+
+
+
+ライブラリなど
+バージョン
+
+
+
+
+React
+18.2.0
+
+
+TypeScript
+5.0.4
+
+
+yup
+1.0.2
+
+
+date-fns
+2.29.3
+
+
+
+
+ 実装
+
+ ふたつの入力値を比較するバリデーション
+開始日と終了日の入...]]></description><link>https://zenn.dev/fuwakani/articles/7809775e5a724d</link><guid isPermaLink="true">https://zenn.dev/fuwakani/articles/7809775e5a724d</guid><pubDate>Fri, 02 Aug 2024 05:35:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--O3MfT2Vh--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:yup%25EF%25BF%25A4%25E6%2597%25A5%25E4%25BB%2598%25E3%2581%25AE%25E7%259B%25B8%25E9%2596%25A2%25E3%2583%2581%25E3%2582%25A7%25E3%2583%2583%25E3%2582%25AF%25E3%2581%25AA%25E3%2581%25A9%25E5%25B0%2591%25E3%2581%2597%25E8%25BE%25BC%25E3%2581%25BF%25E5%2585%25A5%25E3%2581%25A3%25E3%2581%259F%25E3%2583%2590%25E3%2583%25AA%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%2592%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:fuwakani%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzczMmI4OGFiYTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>fuwakani</dc:creator></item><item><title><![CDATA[monorepo × vitestでプロジェクト全体のカバレッジを計測する]]></title><description><![CDATA[こんにちは、エンジニアの籏野です。
+アプリケーション開発において、テストを書くということは非常に重要です。
+テストを書く際の一つの指標としてカバレッジを計測することがあると思います。
+弊社でもカバレッジの計測を行っているのですが、モノレポ構成のプロジェクトでプロジェクト全体のカバレッジを計測したいという要望がありました。
+プロジェクト内に存在する複数のパッケージ/アプリケーションそれぞれでのテスト実行・カバレッジ計測はできていたのですが、プロジェクト全体のカバレッジ計測は行ったことがなかったので今回調べました。
+テストランナーにはvitestを使用しており、vitestのWorkspac...]]></description><link>https://zenn.dev/forcia_tech/articles/2024_hatano_vitest_workspace</link><guid isPermaLink="true">https://zenn.dev/forcia_tech/articles/2024_hatano_vitest_workspace</guid><pubDate>Fri, 02 Aug 2024 04:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--IvPB4sAJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:monorepo%2520%25C3%2597%2520vitest%25E3%2581%25A7%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E5%2585%25A8%25E4%25BD%2593%25E3%2581%25AE%25E3%2582%25AB%25E3%2583%2590%25E3%2583%25AC%25E3%2583%2583%25E3%2582%25B8%25E3%2582%2592%25E8%25A8%2588%25E6%25B8%25AC%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:FORCIA%2520Tech%2520Blog%2520%25E9%2581%258B...%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2QyMDIwOGYzMDMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:FORCIA%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NkZmRkZTQ5MGUuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>FORCIA Tech Blog 運営チーム</dc:creator></item><item><title><![CDATA[Codemod PlatformでCodemodがより身近になる日が来るかもしれない]]></title><description><![CDATA[
+ Codemod Platform とは
+Codemod Platform は codemod の開発とシェアに特化したプラットフォームです。
+様々な開発者が開発した codemod を VSCode の拡張機能・コマンドラインから実行できることで以下のような作業の効率化を目指しています。
+
+フレームワークのアップグレード
+大規模なリファクタリング
+定型的なプログラミング作業
+
+
+ どんな codemod が公開されているのか
+公開されている codemod の数 は 160 個ほどです。また、ほとんどがこのツールの開発元自身が作成・公開しているものになっています。（2024/08/0...]]></description><link>https://zenn.dev/funteractiveinc/articles/cb6246203380b4</link><guid isPermaLink="true">https://zenn.dev/funteractiveinc/articles/cb6246203380b4</guid><pubDate>Fri, 02 Aug 2024 00:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Pqp1LhaR--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Codemod%2520Platform%25E3%2581%25A7Codemod%25E3%2581%258C%25E3%2582%2588%25E3%2582%258A%25E8%25BA%25AB%25E8%25BF%2591%25E3%2581%25AB%25E3%2581%25AA%25E3%2582%258B%25E6%2597%25A5%25E3%2581%258C%25E6%259D%25A5%25E3%2582%258B%25E3%2581%258B%25E3%2582%2582%25E3%2581%2597%25E3%2582%258C%25E3%2581%25AA%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:yoshino%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I4YmI2YjY4NDMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2595%25E3%2582%25A1%25E3%2583%25B3%25E3%2582%25BF%25E3%2583%25A9%25E3%2582%25AF%25E3%2583%2586%25E3%2582%25A3%25E3%2583%2596%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzczYTNmZDBlMGUuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yoshino</dc:creator></item><item><title><![CDATA[GitHub IssuesとGitHub DiscussionsをMarkdownで出力するCLIコマンドをつくってみた]]></title><description><![CDATA[
+ はじめに
+GitHub Issuesで作成した複数のIssueたちを一括でエクスポートして、GenAI(生成AI)にコンテキストとしてくわせてなにかしたいというときに何かと面倒だったのでCLIコマンド化してみました。
+
+ やりたいこと
+とあるIssueに別のIssueが紐付いているような状況で、再帰的に取得を繰り返してMarkdownとして出力するスクリプトです。
+Issue内にGitHub Discussionsが紐付いている場合も取得できるようにしています。
+ローカルで試した出力した結果です。
+issue1にissue2とissue3が紐付いている例で、ちゃんとMarkdownと...]]></description><link>https://zenn.dev/nakaaa/articles/2831793ccf2964</link><guid isPermaLink="true">https://zenn.dev/nakaaa/articles/2831793ccf2964</guid><pubDate>Thu, 01 Aug 2024 15:46:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--FWM390Ri--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:GitHub%2520Issues%25E3%2581%25A8GitHub%2520Discussions%25E3%2582%2592Markdown%25E3%2581%25A7%25E5%2587%25BA%25E5%258A%259B%25E3%2581%2599%25E3%2582%258BCLI%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2582%2592%25E3%2581%25A4%25E3%2581%258F%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:drumnistnakano%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y0MWJmNmZlZmMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>drumnistnakano</dc:creator></item><item><title><![CDATA[Cloudflare WorkersでGCSの署名付きURLを作成する]]></title><description><![CDATA[GCS に画像をアップロードする場合サーバー側で Google Cloud SDK を使って署名付き URL を作成すれば簡単に実装できます。
+import {Storage} from '@google-cloud/storage';
+
+const options = {
+  version: 'v4',
+  action: 'write',
+  expires: Date.now() + 15 * 60 * 1000, // 15 minutes
+  contentType: 'image/png',
+};
+
+const [url] = await storage
+  .bucket...]]></description><link>https://zenn.dev/ria/articles/4ee9b2c88482d3b22856</link><guid isPermaLink="true">https://zenn.dev/ria/articles/4ee9b2c88482d3b22856</guid><pubDate>Thu, 01 Aug 2024 14:50:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GnIOm8XO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Cloudflare%2520Workers%25E3%2581%25A7GCS%25E3%2581%25AE%25E7%25BD%25B2%25E5%2590%258D%25E4%25BB%2598%25E3%2581%258DURL%25E3%2582%2592%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Ria%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzkzZTZhNzliYWMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Ria</dc:creator></item><item><title><![CDATA[定数からユニオン型を作成する方法]]></title><description><![CDATA[
+ 定数にマジック文字列をキャプチャする利点
+コード内で頻繁に使用する特定の文字列を定数（実際には変数）としてキャプチャすることを好みます。こうすることで、その文字列の値に何か変更があった場合、単一の場所で更新するだけで済むため、メンテナンスが最小限で済みます。
+この再利用の概念を型システムにも拡張したいと考えています。
+
+ 定数からユニオン型を作成する
+例えば、以下のような定数を定義しているとします。
+const UPGRADE = "upgrade";
+const DOWNGRADE = "downgrade";
+これらの値からユニオン型を作成するために、typeof演算子を使用しま...]]></description><link>https://zenn.dev/nomikazu_x/articles/typescript-create-union-type-from-constants</link><guid isPermaLink="true">https://zenn.dev/nomikazu_x/articles/typescript-create-union-type-from-constants</guid><pubDate>Thu, 01 Aug 2024 11:00:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--gIBH6mhi--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%25AE%259A%25E6%2595%25B0%25E3%2581%258B%25E3%2582%2589%25E3%2583%25A6%25E3%2583%258B%25E3%2582%25AA%25E3%2583%25B3%25E5%259E%258B%25E3%2582%2592%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nomikazu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E5Zjg3ZDg5NmIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nomikazu</dc:creator></item><item><title><![CDATA[OpenSearch へのリクエストビルダーを Builder パターンで実装した]]></title><description><![CDATA[
+ はじめに
+レバテック開発部の瀬尾です。
+OpenSearch への検索を担うシステムの運用保守をしています。
+今回は、Search API へのリクエストで、そのシステムがこれまで対応していなかった Aggregations（集計）に追加対応させるにあたり、既存のリクエスト生成処理を Builder パターンでの実装に変更したので、短いですが記事にしてみます。
+
+ 背景
+レバテックには案件検索ページがあります。
+「案件」とは、サービス利用者のITフリーランスの方々が契約するためのものです。
+このページの検索は、案件データを格納してある OpenSearch に「案件マイクロサービス」...]]></description><link>https://zenn.dev/levtech/articles/a5e06a97b534b2</link><guid isPermaLink="true">https://zenn.dev/levtech/articles/a5e06a97b534b2</guid><pubDate>Thu, 01 Aug 2024 10:30:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--b_i6OhPN--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:OpenSearch%2520%25E3%2581%25B8%25E3%2581%25AE%25E3%2583%25AA%25E3%2582%25AF%25E3%2582%25A8%25E3%2582%25B9%25E3%2583%2588%25E3%2583%2593%25E3%2583%25AB%25E3%2583%2580%25E3%2583%25BC%25E3%2582%2592%2520Builder%2520%25E3%2583%2591%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%25B3%25E3%2581%25A7%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:seoink%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY1YzcxZDY5NDkuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%25AC%25E3%2583%2590%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E9%2596%258B%25E7%2599%25BA%25E9%2583%25A8%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhiODRiZWE5YzYuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>seoink</dc:creator></item><item><title><![CDATA[Storybook + Vite + React のインタラクションテストでモジュールモックする]]></title><description><![CDATA[
+ @storybook/nextjs使用時のインタラクションテストとモジュールモック
+Storybook でインタラクションテストを使用すると、コンポーネントの動作を GUI で確認しつつテストを書くことが出来ます。Jest や Vitest の CUI 上で表示確認無しでテストを書くのに比べると、圧倒的に楽にテストを書くことが可能です。ただし問題があって、Jest や Vitest から専用コマンドでテストを呼び出すときには、依存パッケージなどを関数単位で簡単にモック化できますが、Storybook のインタラクションテストではそうではありません。以下のようなファイル単位でのモックが...]]></description><link>https://zenn.dev/sora_kumo/articles/storybook-addon-vite-mock</link><guid isPermaLink="true">https://zenn.dev/sora_kumo/articles/storybook-addon-vite-mock</guid><pubDate>Thu, 01 Aug 2024 03:06:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Xgjhvjpo--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Storybook%2520%252B%2520Vite%2520%252B%2520React%2520%25E3%2581%25AE%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25BF%25E3%2583%25A9%25E3%2582%25AF%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E3%2581%25A7%25E3%2583%25A2%25E3%2582%25B8%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%25AB%25E3%2583%25A2%25E3%2583%2583%25E3%2582%25AF%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E7%25A9%25BA%25E9%259B%25B2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VlZTgzMDYyMDQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>空雲</dc:creator></item><item><title><![CDATA[Nextron(Next.js+Electron)を使ってデスクトップアプリの作成を試してみたので共有]]></title><description><![CDATA[デスクトップアプリを作ったことがなかったものの作業効率化のツールをなるべく時間をかけずに作りたいと思ったので、今回作りました。
+成果物は以下の通り
+https://prompt-bird.com/
+
+PromptBirdは、生成AI向けのプロンプトを管理・記録するためのメモアプリです。ユーザーはカスタマイズ可能なタブを使用してプロンプトや結果を整理でき、生産性と効率を向上させます。主な機能には、CSV形式でのデータエクスポート、お気に入りのプロンプトのフィルタリング、デスクトップ向けの使いやすいインターフェースがあります。
+
+
+ Nextronとは
+https://github.com/...]]></description><link>https://zenn.dev/masakasuno1/articles/af7771f25ff1bc</link><guid isPermaLink="true">https://zenn.dev/masakasuno1/articles/af7771f25ff1bc</guid><pubDate>Thu, 01 Aug 2024 00:55:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--A01tcSPh--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Nextron%2528Next.js%252BElectron%2529%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2583%2587%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%2588%25E3%2583%2583%25E3%2583%2597%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2581%25AE%25E4%25BD%259C%25E6%2588%2590%25E3%2582%2592%25E8%25A9%25A6%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25E3%2581%25AE%25E3%2581%25A7%25E5%2585%25B1%25E6%259C%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:masakasu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJjNDg1NWZlYzAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>masakasu</dc:creator></item><item><title><![CDATA[JestとTypeScriptで始めるモックを使用したテスト駆動開発（TDD）]]></title><description><![CDATA[
+ JestとTypeScriptで始めるモックを使用したテスト駆動開発（TDD）
+
+ はじめに
+テスト駆動開発（TDD）は、ソフトウェア開発における重要な手法であり、コードの品質を向上させるための強力なアプローチです。特に、JavaScriptやTypeScriptのエコシステムでは、Jestというテストフレームワークが広く使用されています。本記事では、JestとTypeScriptを用いたモックを使用したTDDの実践方法について詳しく解説します。
+
+ TDDの基本概念
+テスト駆動開発は、以下のサイクルで進行します。
+
+
+テストを書く: まず、実装する機能に対するテストを作成します。こ...]]></description><link>https://zenn.dev/llm_robot/articles/20240731-jest-typescript-tdd-mock</link><guid isPermaLink="true">https://zenn.dev/llm_robot/articles/20240731-jest-typescript-tdd-mock</guid><pubDate>Wed, 31 Jul 2024 22:08:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--pvZfYJIn--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Jest%25E3%2581%25A8TypeScript%25E3%2581%25A7%25E5%25A7%258B%25E3%2582%2581%25E3%2582%258B%25E3%2583%25A2%25E3%2583%2583%25E3%2582%25AF%25E3%2582%2592%25E4%25BD%25BF%25E7%2594%25A8%25E3%2581%2597%25E3%2581%259F%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E9%25A7%2586%25E5%258B%2595%25E9%2596%258B%25E7%2599%25BA%25EF%25BC%2588TDD%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:AIZAWA%2520version%253A0.0.1%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAwMTE3MGM1NDcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>AIZAWA version:0.0.1</dc:creator></item></channel></rss>
