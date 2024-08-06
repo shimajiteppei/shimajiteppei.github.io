@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Tue, 06 Aug 2024 06:48:43 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[ColabからVertex AI / GeminiをつかってPDFを要約する]]></title><description><![CDATA[Google Cloud Next Tokyo 24に参加してきました。いろんなことが聞けて良かったです。開発頑張ろうと思いました。特に進展の速い生成AI領域では、めちゃいいものが出ていてもそれを知らないなんてことがあるので、ああいうイベントに参加するのはマストだなと思いました。あと、クラウドの進化も早いので情報収集に参加はマストですね（動画が公開されてても見ないことが多いので）。
+この記事では、google ColabからVertex AI =&gt; Geminiにグーグルドライブに入ったPDFを渡すってことをやってみます（ついでに画像も）。
+利用環境:
+python 3.10.12...]]></description><link>https://zenn.dev/hi/articles/bf27c734c7f6e2</link><guid isPermaLink="true">https://zenn.dev/hi/articles/bf27c734c7f6e2</guid><pubDate>Tue, 06 Aug 2024 02:30:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5GzpCQWx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Colab%25E3%2581%258B%25E3%2582%2589Vertex%2520AI%2520%252F%2520Gemini%25E3%2582%2592%25E3%2581%25A4%25E3%2581%258B%25E3%2581%25A3%25E3%2581%25A6PDF%25E3%2582%2592%25E8%25A6%2581%25E7%25B4%2584%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvaC5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hi</dc:creator></item><item><title><![CDATA[Pythonで再現する標準ベイズ統計学4章]]></title><description><![CDATA[
+ はじめに
+本記事では標準ベイズ統計学の4章で掲載されている図表やモデルをPythonで実装する方法に関して説明します。
+
+ 4章：モンテカルロ近似
+この章ではモンテカルロ法を紹介しています。例えば、モンテカルロ法は以下のような複雑な状況で活躍します。
+1.特定の条件を満たすパラメータの確率を知りたい場合
+2.パラメータの複雑な関数の平均や標準偏差を計算したい場合
+3.欠測データや未観測データの予測に興味がある場合
+4.複数の母集団を比較し、その差や比、最大値の分布を調べたい場合
+本ブログでは、モンテカルロ法をPythonで実装していきます。
+
+ gamma(68,45)分布のモンテカ...]]></description><link>https://zenn.dev/dmmdata/articles/bayes_chapter4</link><guid isPermaLink="true">https://zenn.dev/dmmdata/articles/bayes_chapter4</guid><pubDate>Tue, 06 Aug 2024 00:30:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xMNNWF1A--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A7%25E5%2586%258D%25E7%258F%25BE%25E3%2581%2599%25E3%2582%258B%25E6%25A8%2599%25E6%25BA%2596%25E3%2583%2599%25E3%2582%25A4%25E3%2582%25BA%25E7%25B5%25B1%25E8%25A8%2588%25E5%25AD%25A64%25E7%25AB%25A0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:stochi%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU4MjQ4ZWRhNzUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:DMM%2520Data%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzIwYjk2MWM1NjQuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>stochi</dc:creator></item><item><title><![CDATA[Houdini houモジュールの入力補完の為のStubファイル生成メモ]]></title><description><![CDATA[下記の記事の内容を追えば叶う。
+https://pakreht.com/houdini/configure-vscode-for-python/
+情報を足しつつメモ
+VSCodeでProfileを作成してExtensionとsetting.jsonが他の設定と競合しないようにしておく。
+VSCodeなどのIDEから参照すべきパスを出力させるPythonコードをHoudiniで実行。
+出力された文字列をsetting.jsonにコピペ。
+houモジュールのスタブファイルを生成して型情報を参照できるようにする。
+スタブ生成はmypyのstubgenでやろうとしたが失敗した。もうちょっとちゃん...]]></description><link>https://zenn.dev/kajitaj63b3/articles/2a1e3ac9356284</link><guid isPermaLink="true">https://zenn.dev/kajitaj63b3/articles/2a1e3ac9356284</guid><pubDate>Mon, 05 Aug 2024 23:38:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--d5q9-xD4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Houdini%2520hou%25E3%2583%25A2%25E3%2582%25B8%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%25AE%25E5%2585%25A5%25E5%258A%259B%25E8%25A3%259C%25E5%25AE%258C%25E3%2581%25AE%25E7%2582%25BA%25E3%2581%25AEStub%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E7%2594%259F%25E6%2588%2590%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kajitaj63b3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FGZFp1Y3BsdmUyNmxQUDROTXc3VUg2YTVlUFNfbVA5T01iVVhDNEtPckFaLUE9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kajitaj63b3</dc:creator></item><item><title><![CDATA[Local LLM に入門してみた]]></title><description><![CDATA[
+ TL;DR
+
+ローカル LLM はクラウド上の LLM に比べてプライバシー保護や応答速度の面で優れている。
+モデルの量子化を行うことで、推論時間を短縮したり、スペックの高くないハードウェア上で動作させたりすることができる。
+LLM をローカルで簡単に動かすために様々なツールがあり、商業利用できるものとして Ollama がある。
+
+
+ クラウド LLM とローカル LLM の比較
+ローカル LLM はクラウド上にホストされ、サービス提供されている LLM と比較して大きくプライバシーや即時応答性などの観点で利点がある。
+
+ プライバシー
+サービス提供されている LLM では当然のこ...]]></description><link>https://zenn.dev/cha9ro/articles/2024_local_llm_beginning</link><guid isPermaLink="true">https://zenn.dev/cha9ro/articles/2024_local_llm_beginning</guid><pubDate>Mon, 05 Aug 2024 14:51:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--p5C5Kxbi--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Local%2520LLM%2520%25E3%2581%25AB%25E5%2585%25A5%25E9%2596%2580%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Takuro%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FGZFp1Y3BDbXRMZFRhOEp0Znl2WUZrSF9KRjllS0xVbkVlQnFfWDRobmlreEZzPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Takuro</dc:creator></item><item><title><![CDATA[Djangoポートフォリオリニューアル日記Part.2：シンプルなapiを作成してpostmanでテストしてみる]]></title><description><![CDATA[
+ 元美容師のDjangoポートフォリオリニューアル日記Part.2
+
+ はじめに
+こんにちは！前回の記事で紹介した「SalonLink」リニューアルプロジェクトを本格的に開始したので少しずつアウトプットとして記事にしていきます！今回は、GitHubにリポジトリを作成するところからバックエンドを担うDjangoのセットアップ、シンプルなAPIを作成、そして作成したAPIをPostmanでテストするところまで記載します！
+なぜこの開発を始めたかはPart.1をご覧ください。
+また記事についてですが、知識のある方なら当たり前と思うような説明も記載しておりますがご了承下さい。
+これは、僕自身が...]]></description><link>https://zenn.dev/jenny/articles/a12098c87b1ad0</link><guid isPermaLink="true">https://zenn.dev/jenny/articles/a12098c87b1ad0</guid><pubDate>Mon, 05 Aug 2024 14:30:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jZzXJOZg--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Django%25E3%2583%259D%25E3%2583%25BC%25E3%2583%2588%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25AA%25E3%2582%25AA%25E3%2583%25AA%25E3%2583%258B%25E3%2583%25A5%25E3%2583%25BC%25E3%2582%25A2%25E3%2583%25AB%25E6%2597%25A5%25E8%25A8%2598Part.2%25EF%25BC%259A%25E3%2582%25B7%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AB%25E3%2581%25AAapi%25E3%2582%2592%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2597%25E3%2581%25A6postman%25E3%2581%25A7%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2584%25E3%2581%258E%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE0Y2NlYzgwYTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>やぎ</dc:creator></item><item><title><![CDATA[apple storeのアプリレビューを感情分析するコード書いてみた]]></title><description><![CDATA[
+ 概要
+amazon comprehendのことを知って、とりあえず思いつきで実装しました。
+apple storeのPCサイトのレビューをスクレイピングし、レビュー評価と評価文の感情分析結果をプロットします。
+現時点はレビュー評価通りの評価文になっているかくらいしか確認できないが、今後の展望の通り今後拡張していけば利用価値があるかもと妄想中です。
+https://github.com/yuu-misaki/review-analyzer/tree/main
+以下のように、レビューの評価と評価文の感情分析結果の相関を比較できます。
+N数少ないですが、3以下NEGATIVE（負の感情）、...]]></description><link>https://zenn.dev/yuu7751/articles/fff068d812daa2</link><guid isPermaLink="true">https://zenn.dev/yuu7751/articles/fff068d812daa2</guid><pubDate>Mon, 05 Aug 2024 13:16:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jqH_grlW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:apple%2520store%25E3%2581%25AE%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2583%25AC%25E3%2583%2593%25E3%2583%25A5%25E3%2583%25BC%25E3%2582%2592%25E6%2584%259F%25E6%2583%2585%25E5%2588%2586%25E6%259E%2590%25E3%2581%2599%25E3%2582%258B%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E6%259B%25B8%25E3%2581%2584%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yu-min%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFUWEFKeUV1MllxOFphT3JNRXlacEFNOFBYelhtZ0x1Z29fM2hKU0J1TTA9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yu-min</dc:creator></item><item><title><![CDATA[LangGraphでSubGraphとPydanticを使った場合のハマりどころ]]></title><description><![CDATA[
+ はじめに
+この記事では、LangGraphでSubGraphと呼ばれるネスト構造を使った際に発生した問題点について、事例を紹介しています。
+LangGraphについての詳細な説明は割愛しますので、LangGraphが何か知りたい方は、ぜひ次の記事を御覧ください。
+https://zenn.dev/pharmax/articles/8796b892eed183
+
+ 環境
+この記事執筆時点では、以下のバージョンで実施しています。特にLangChain周りは非常に開発速度が早いため、最新バージョンを合わせてご確認ください。
+
+langgraph: 0.1.14
+Python: 3.10.1...]]></description><link>https://zenn.dev/pharmax/articles/5a1cfba82a5ed5</link><guid isPermaLink="true">https://zenn.dev/pharmax/articles/5a1cfba82a5ed5</guid><pubDate>Mon, 05 Aug 2024 11:13:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Dyy06Bcp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:LangGraph%25E3%2581%25A7SubGraph%25E3%2581%25A8Pydantic%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%259F%25E5%25A0%25B4%25E5%2590%2588%25E3%2581%25AE%25E3%2583%258F%25E3%2583%259E%25E3%2582%258A%25E3%2581%25A9%25E3%2581%2593%25E3%2582%258D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:hakotensan%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2QxNTUyMTlkOTUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:PharmaX%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2YzNGM1MmE4MWMuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hakotensan</dc:creator></item><item><title><![CDATA[オウム返しdiscordボットを作る方法【python】]]></title><description><![CDATA[
+ はじめに
+こんにちは。
+まず最初にdiscordボットを作るときテストとして、オウム返しdiscordボットなどを作りますよね。
+この記事では、pythonでそのオウム返しdiscordボットを作る方法を解説します。
+
+ 「あなたは日本語を喋れますか」に「私は日本語を喋れません」と返すボット
+まず、「あなたは日本語を喋れますか」というメッセージに対して「私は日本語を喋れません」と返すdiscordボットを作りましょう。
+コード↓
+#インポート
+import discord
+
+TOKEN = "YOUR_TOKEN"
+
+intents = discord.Intents.default...]]></description><link>https://zenn.dev/free_eerf/articles/21e7ba7e0cb4d3</link><guid isPermaLink="true">https://zenn.dev/free_eerf/articles/21e7ba7e0cb4d3</guid><pubDate>Mon, 05 Aug 2024 08:51:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--VI7IX5HV--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25AA%25E3%2582%25A6%25E3%2583%25A0%25E8%25BF%2594%25E3%2581%2597discord%25E3%2583%259C%25E3%2583%2583%25E3%2583%2588%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%25E3%2580%2590python%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:free104%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU3OTZjMzI3ODEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>free104</dc:creator></item><item><title><![CDATA[discord.pyでロールパネルを実装する方法]]></title><description><![CDATA[二次配布禁止
+discord.pyでロールパネルを実装したいと思って調べても出てこない人のためにこの本を書いています]]></description><link>https://zenn.dev/952490802574164/books/1372bb2b086d48</link><guid isPermaLink="true">https://zenn.dev/952490802574164/books/1372bb2b086d48</guid><pubDate>Mon, 05 Aug 2024 03:28:28 GMT</pubDate><dc:creator>まるた</dc:creator></item><item><title><![CDATA[LocalStack 実践入門 | AWS アプリケーション開発ワークショップ]]></title><description><![CDATA[📕 この Zenn Book について
+LocalStack はローカル環境や CI 環境で実行できる AWS エミュレーターです。この Zenn Book は、LocalStack に実践的に入門するワークショップです。LocalStack の基礎から LocalStack を使った AWS アプリケーション開発（Python コード実行・pytest 単体テスト実行）まで体験できます。
+
+🚀 環境構築不要
+ワークショップでは GitHub Codespaces を使うため、ラップトップ上に環境構築をする必要がなく、ブラウザですぐに試せます。
+
+⭐️ 登場する AWS サービス（順不同）
+・Amazon SQS
+・Amazon S3
+・AWS CloudFormation
+・AWS SAM
+・AWS Lambda
+・Amazon CloudWatch Logs
+・Amazon API Gateway
+
+🎁 完全無料
+このワークショップは完全無料です。Chapter.1 から Chapter.7 まで、ワークショップのすべてのコンテンツを公開しています。Chapter.8 は応援購入のための付録です。このワークショップに関連する小ネタを紹介しています。応援もよろしくお願いします😃]]></description><link>https://zenn.dev/kakakakakku/books/aws-application-workshop-using-localstack</link><guid isPermaLink="true">https://zenn.dev/kakakakakku/books/aws-application-workshop-using-localstack</guid><pubDate>Sun, 04 Aug 2024 22:46:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--UOB5gr63--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci9mZThmMWE5YzNmLnBuZw==%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>kakakakakku</dc:creator></item><item><title><![CDATA[RDBしか知らない奴がBigQueryを触ってみた]]></title><description><![CDATA[
+ RDBしか知らない奴がBigQueryを触ってみた
+RDBしか知らない奴がBigQueryを触った際のメモ
+メモなので正確性はない。
+基本的に公式ページとGoogle BigQuery:The Definitive Guideを参考にしている。
+手っ取り早く要点を掴む本としてはGoogle BigQuery:The Definitive Guideが一番マシに感じた。
+しかしながら、2019年11月発売 2020年6月に最終更新なため、それ以降の情報は入っていない。
+一旦本に目を通してReleaseノートで重要そうなものを閲覧するのが良さそう。
+https://cloud.googl...]]></description><link>https://zenn.dev/mima_ita/articles/a005daec6daa2f</link><guid isPermaLink="true">https://zenn.dev/mima_ita/articles/a005daec6daa2f</guid><pubDate>Sun, 04 Aug 2024 15:31:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4sq2Q6Ux--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:RDB%25E3%2581%2597%25E3%2581%258B%25E7%259F%25A5%25E3%2582%2589%25E3%2581%25AA%25E3%2581%2584%25E5%25A5%25B4%25E3%2581%258CBigQuery%25E3%2582%2592%25E8%25A7%25A6%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mima_ita%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pjcDFUQmpUT3lBUnl4aHM3aVk1MEg2b0JZZ3FrRzFjTTZVblJMPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mima_ita</dc:creator></item><item><title><![CDATA[AWS Lambda の Container Runtime を GitHub Actions で E2E テストしたい時の備忘録]]></title><description><![CDATA[
+ AWS Lambda の Container Runtime を GitHub Actions で E2E テストしたい時の備忘録
+
+ はじめに
+機械学習のAPI提供として AWS Lambda の Container Runtime を使うことがよくあります。
+pytest などを用いて開発環境で unit test はよく行いますが、さらにDocker Container としての成果物の E2E テストをすることでより安全性を高めることができます。
+今回はこの E2E テストを GitHub Acitons 上で行うための備忘録です。
+ほとんどの内容は以下のブログ記事を参考にし...]]></description><link>https://zenn.dev/nnc496/articles/54ced2bf154d2c</link><guid isPermaLink="true">https://zenn.dev/nnc496/articles/54ced2bf154d2c</guid><pubDate>Sun, 04 Aug 2024 13:34:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--SrcUb8Rc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AWS%2520Lambda%2520%25E3%2581%25AE%2520Container%2520Runtime%2520%25E3%2582%2592%2520GitHub%2520Actions%2520%25E3%2581%25A7%2520E2E%2520%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%2590%258D%25E7%2584%25A1%25E3%2581%2597%25E3%2580%2582%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q2ZDI2ODRlNzYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>名無し。</dc:creator></item><item><title><![CDATA[PySimpleGUI 入門 (3)]]></title><description><![CDATA[前回、YAML から画面を定義するライブラリ https://github.com/tmiya/tmiya.github.io/tree/main/python/sg_yaml を作って公開した、という話をしました。
+実はちょっとだけ機能を追加して、Widget 全部に対して key=widgetのkパラメータ、value=widget自身、という dictionary も YAML 解析時に生成する様にしました。これによってイベントループからwidgetの値の修正が楽になります。
+という訳で今回は実際に動くアプリを作ってみます。
+
+一目見て分かる人は何のためのツールなのか分かると思いま...]]></description><link>https://zenn.dev/tmiya/articles/61119f09aecf36</link><guid isPermaLink="true">https://zenn.dev/tmiya/articles/61119f09aecf36</guid><pubDate>Sun, 04 Aug 2024 08:16:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--T08urVjV--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:PySimpleGUI%2520%25E5%2585%25A5%25E9%2596%2580%2520%25283%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tmiya%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTDlBbDdyckxtZUtiS1pEcEpCLVhTSkliVWt6c0ZKaXJZcnJ6QlJCYUE3MUhLS1diTT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tmiya</dc:creator></item><item><title><![CDATA[Pythonの学習方法と資格試験について]]></title><description><![CDATA[
+ はじめに
+初めまして！
+この度(2024年5月)、Python3エンジニア認定実践試験に合格したので、今回は資格とその勉強方法について解説します！
+Python3エンジニア試験は「基礎試験」と「実践試験」の2種類があり、どちらを受験すれば良いか悩んでいる方の参考になれば幸いです！
+
+ 対象者
+
+Pythonの勉強方法について悩んでいる方
+Python3エンジニア認定実践試験もしくは基礎試験の受験を検討している方
+
+
+ この記事を読むメリット
+
+Pythonの学習方法について知ることができる
+Python3エンジニア認定試験のどちらを受験するべきかを知ることができる
+
+
+ 結論
+受験資...]]></description><link>https://zenn.dev/hirozoo/articles/zenn-article-1st-python</link><guid isPermaLink="true">https://zenn.dev/hirozoo/articles/zenn-article-1st-python</guid><pubDate>Sun, 04 Aug 2024 06:47:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--H4H6bks9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25AE%25E5%25AD%25A6%25E7%25BF%2592%25E6%2596%25B9%25E6%25B3%2595%25E3%2581%25A8%25E8%25B3%2587%25E6%25A0%25BC%25E8%25A9%25A6%25E9%25A8%2593%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25B2%25E3%2582%258D%25E3%2581%259E%25E3%2583%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JiYTkyZTgxZGEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ひろぞー</dc:creator></item><item><title><![CDATA[競プロJupyter Notebook勢のためのlogging設定考察]]></title><description><![CDATA[
+ TL;DR
+from logging import basicConfig, root, DEBUG, WARNING
+
+def some_algorithm():
+    basicConfig(level=DEBUG if 'get_ipython' in globals() else WARNING)
+    root.debug('hello')
+
+some_algorithm()
+
+ 動機
+テストの書きやすさや、単純に好みから、Jupyter Notebookで競技プログラミングに出ています。
+しかし、ロギングは競プロではただでさえ気を使うのに、Jupyter Notebo...]]></description><link>https://zenn.dev/hiroga/articles/jupyter-logging-for-contest</link><guid isPermaLink="true">https://zenn.dev/hiroga/articles/jupyter-logging-for-contest</guid><pubDate>Sun, 04 Aug 2024 06:02:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GHDdcn_3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%25AB%25B6%25E3%2583%2597%25E3%2583%25ADJupyter%2520Notebook%25E5%258B%25A2%25E3%2581%25AE%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AElogging%25E8%25A8%25AD%25E5%25AE%259A%25E8%2580%2583%25E5%25AF%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hiroga%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pfZHF2VHk5OFdpTG1EZ1Q1Ry1jLVNmWjRwaEdCcGdncGVKSjhqUzhzPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hiroga</dc:creator></item><item><title><![CDATA[サロゲートキーと型の問題に悩む]]></title><description><![CDATA[python特有の問題（型がない事が原因のひとつ）ではなく、トラブルシューティングの記事になります。何かの気付きになればと思います。
+
+ よくある実装
+# request_booksリストの中でsearched_book_Idsに属するものを選択
+target = [book for book in request_books if book.id in searched_book_ids]
+# targetに対して処理する
+上記のようなよくある処理を書いていましたがドハマリしました。
+処理自体はエラーにならないのですが、並行して書いていたテストケースで対象の数が合わなくなり、その原因の...]]></description><link>https://zenn.dev/jun1026/articles/a794e007ef132c</link><guid isPermaLink="true">https://zenn.dev/jun1026/articles/a794e007ef132c</guid><pubDate>Sun, 04 Aug 2024 04:33:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_vtwyCGD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B5%25E3%2583%25AD%25E3%2582%25B2%25E3%2583%25BC%25E3%2583%2588%25E3%2582%25AD%25E3%2583%25BC%25E3%2581%25A8%25E5%259E%258B%25E3%2581%25AE%25E5%2595%258F%25E9%25A1%258C%25E3%2581%25AB%25E6%2582%25A9%25E3%2582%2580%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:jlmn1026%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBlZjRjZWY2YTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>jlmn1026</dc:creator></item><item><title><![CDATA[【Python】Apschedulerで定期処理を行いたい]]></title><description><![CDATA[
+ はじめに
+Pythonw使ったバックエンド開発を最近始めましたが、裏側で定期的にタスクを実行したいケースが出てきました。そこで、今回はAPScheduler (Advanced Python Scheduler) を使い、定期処理を行う方法について解説します。
+
+ 前提
+python:3.12.4
+APScheduler:3.10.4
+
+ APSchedulerのインストール
+まず、APSchedulerをインストールします。以下のコマンドを使用してインストールできます：
+pip install apscheduler
+
+ 基本的な使用方法
+APSchedulerを使用するためには、...]]></description><link>https://zenn.dev/xronotech/articles/d9bb91174746b6</link><guid isPermaLink="true">https://zenn.dev/xronotech/articles/d9bb91174746b6</guid><pubDate>Sun, 04 Aug 2024 01:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wlIqQM-b--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591Apscheduler%25E3%2581%25A7%25E5%25AE%259A%25E6%259C%259F%25E5%2587%25A6%25E7%2590%2586%25E3%2582%2592%25E8%25A1%258C%25E3%2581%2584%25E3%2581%259F%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:mizukich%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdmMTJiODY3MzAuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BEXronotech%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS2Q2bUgzdERkMVhVWlI3TU5obG1PcWRRSlNMWVVKbE9KNWQ3dXhhRWVxQXJDbDJoVDQ9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mizukich</dc:creator></item><item><title><![CDATA[【Python】コードスタイルガイドのPEP 8について解説]]></title><description><![CDATA[
+ 1. PEP 8とは
+PEP 8（Python Enhancement Proposal 8）は、Pythonコードの書き方に関する標準的なスタイルガイドです。Pythonコミュニティで広く採用されており、可読性の高い一貫したコードを書くための指針を提供しています。
+
+ 2. 歴史と成り立ち
+
+2001年7月5日：Guido van Rossum（Pythonの創始者）とBarry Warsaw によって最初のバージョンが提案されました。
+その後、数回の改訂を経て、Pythonコミュニティの標準的なスタイルガイドとして確立されました。
+PEP 8は、Pythonの哲学である「読みやす...]]></description><link>https://zenn.dev/nuinui/articles/541770997616d1</link><guid isPermaLink="true">https://zenn.dev/nuinui/articles/541770997616d1</guid><pubDate>Sun, 04 Aug 2024 00:58:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Q-JaxKHf--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2582%25B9%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%25E3%2581%25AEPEP%25208%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AC%25E3%2583%25BC%25E3%2581%2584%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSno2cFRIRmpDc184N0NyTTNyYV9iZnd6LVVLaXAxRHMxZWdFdHl1b0VQY1JCbUVDcz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ぬーい</dc:creator></item><item><title><![CDATA[【Python】作成したソースファイルをexe化する方法と種類と特徴]]></title><description><![CDATA[
+ はじめに
+Pythonで開発したプログラムを、Python環境のない端末でも実行できるようにEXE化することは、多くの開発者にとって重要なスキルです。本記事では、Pythonスクリプトをexe化するための主要なツール、その特徴、使用方法、そして適切な使い分けについて詳しく解説します。
+
+ 1. PythonをEXE化する主要なツール
+
+ 1.1 PyInstaller
+PyInstallerは、多くのPython開発者に愛用されている人気のEXE化ツールです。
+
+ 特徴
+
+マルチプラットフォーム対応（Windows、Linux、macOS）
+簡単なコマンドラインインターフェース
+依存...]]></description><link>https://zenn.dev/nuinui/articles/ccb660cdee7ec4</link><guid isPermaLink="true">https://zenn.dev/nuinui/articles/ccb660cdee7ec4</guid><pubDate>Sat, 03 Aug 2024 23:40:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Kbas7PZf--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2597%25E3%2581%259F%25E3%2582%25BD%25E3%2583%25BC%25E3%2582%25B9%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2592exe%25E5%258C%2596%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%25E3%2581%25A8%25E7%25A8%25AE%25E9%25A1%259E%25E3%2581%25A8%25E7%2589%25B9%25E5%25BE%25B4%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AC%25E3%2583%25BC%25E3%2581%2584%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSno2cFRIRmpDc184N0NyTTNyYV9iZnd6LVVLaXAxRHMxZWdFdHl1b0VQY1JCbUVDcz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ぬーい</dc:creator></item><item><title><![CDATA[pyenv-winを使ってWindows上にPython環境を構築する]]></title><description><![CDATA[
+ １．はじめに
+pyenv-winを使用することで以下のことができます。
+
+Windows環境で簡単にPythonを導入することができる
+複数のPythonのバージョンを管理することができる
+Pythonのバージョンを簡単に切り替えることができる
+
+
+本記事では以下を実施します。
+
+pyenv-winの導入
+pyenv-winを使ってPythonのバージョンを指定してインストールする
+
+
+ ２．pyenv-winの導入
+以下をベースpyenv-winを導入していきます。
+https://github.com/pyenv-win/pyenv-win/blob/master/docs/in...]]></description><link>https://zenn.dev/is0383kk/articles/09e5fd89cbd30c</link><guid isPermaLink="true">https://zenn.dev/is0383kk/articles/09e5fd89cbd30c</guid><pubDate>Sat, 03 Aug 2024 15:22:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6BVDJTRu--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:pyenv-win%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6Windows%25E4%25B8%258A%25E3%2581%25ABPython%25E7%2592%25B0%25E5%25A2%2583%25E3%2582%2592%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%25A8%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E5ZDIwMDdjOTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ヨ</dc:creator></item></channel></rss>
