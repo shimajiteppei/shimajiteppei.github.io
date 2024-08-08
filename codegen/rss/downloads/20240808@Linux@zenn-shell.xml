@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「shell」のフィード]]></title><description><![CDATA[Zennのトピック「shell」のRSSフィードです]]></description><link>https://zenn.dev/topics/shell</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/c8d33e6510.jpeg</url><title>Zennの「shell」のフィード</title><link>https://zenn.dev/topics/shell</link></image><generator>zenn.dev</generator><lastBuildDate>Thu, 08 Aug 2024 02:45:15 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/shell/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[shells]]></title><description><![CDATA[
+ shells
+
+ shells
+#!/bin/bash
+
+urls=(
+    "https://coinmarketcap.com/ja/currencies/shuffle/"
+)
+
+while true; do
+    url=${urls[$RANDOM % ${#urls[@]}]}
+    sleep_time=$((600 + RANDOM % 1201))
+
+    echo "Accessing: $url"
+    curl -s "$url" &gt; /dev/null
+
+    echo "Sleeping for $sleep_time seconds.....]]></description><link>https://zenn.dev/blockchian/articles/87ecd5d2fb9908</link><guid isPermaLink="true">https://zenn.dev/blockchian/articles/87ecd5d2fb9908</guid><pubDate>Mon, 05 Aug 2024 04:36:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--clUOjAQZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_80:shells%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:meta%2Cx_90%2Cy_121/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>meta</dc:creator></item><item><title><![CDATA[新しい環境で活用！ZshとOh My Zshの設定ガイド（Dockerでのテスト導入も解説）]]></title><description><![CDATA[
+ はじめに
+こんにちは、Kouです。
+CentOSのメンテナンスサポートサポートが終了し、新しいOSへの移行が必要になってきました。
+例えば、Rockey LinuxやAlmaLinuxなどのディストリビューションが注目されています。
+これらの新しいOS環境で、ZshとOh My Zshを使って、より快適な開発環境を整える方法をご紹介します。
+Dockerを使ってテスト導入する方法も解説するので、ぜひお試しください。
+前回は「LaravelでAWS CloudFrontの署名付きCookieを生成・設定してみた」を投稿しました。
+
+
+ Zshとは
+
+
+高度な補完: コマンドや引数の補完...]]></description><link>https://zenn.dev/carenet/articles/zsh_configuration_and_ohmyzsh_setup</link><guid isPermaLink="true">https://zenn.dev/carenet/articles/zsh_configuration_and_ohmyzsh_setup</guid><pubDate>Fri, 02 Aug 2024 06:36:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--q8ENTz-N--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%2596%25B0%25E3%2581%2597%25E3%2581%2584%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25A7%25E6%25B4%25BB%25E7%2594%25A8%25EF%25BC%2581Zsh%25E3%2581%25A8Oh%2520My%2520Zsh%25E3%2581%25AE%25E8%25A8%25AD%25E5%25AE%259A%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%25EF%25BC%2588Docker%25E3%2581%25A7%25E3%2581%25AE%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E5%25B0%258E%25E5%2585%25A5%25E3%2582%2582%25E8%25A7%25A3%25E8%25AA%25AC%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Kou%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE0MTRiZmIwZWQuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:CareNet%2520Engineers%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YjAxZHZYTmpqcFVER2lmaDBXNVRCQjlCcTFWTVpHc3NpSV9yN1A9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kou</dc:creator></item><item><title><![CDATA[踏み台サーバーから jupyter lab を立ち上げる方法]]></title><description><![CDATA[
+ 前提条件
+client ↔ middle server ↔ target server
+のように middle server を経由して target server にアクセスする場合の設定方法について解説する。
+
+ ssh の設定
+
+ssh の key を登録する。
+
+
+~/.ssh/middle と ~/.ssh/target は手元に置いておく
+
+
+
+~/.ssh/config を設定する
+
+
+~/.ssh/config
+Host MiddleServer
+        HostName        middle-address
+        User          ...]]></description><link>https://zenn.dev/genf740/articles/573ffa39-c0d5-45c4-ad39-b1afbfefbbfb</link><guid isPermaLink="true">https://zenn.dev/genf740/articles/573ffa39-c0d5-45c4-ad39-b1afbfefbbfb</guid><pubDate>Wed, 31 Jul 2024 05:57:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--AzivWopg--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%25B8%258F%25E3%2581%25BF%25E5%258F%25B0%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2581%258B%25E3%2582%2589%2520jupyter%2520lab%2520%25E3%2582%2592%25E7%25AB%258B%25E3%2581%25A1%25E4%25B8%258A%25E3%2581%2592%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:gen740%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pNOGJfSGVlRHJhclh6YllqWnBrQjBWUVZtcExib3ZzRE42WEFoYjdVPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>gen740</dc:creator></item><item><title><![CDATA[Sheldon と、入れて嬉しい Zsh Plugin]]></title><description><![CDATA[Shell に限らず、Plugin Manger は迷います。
+迷った挙句、git-submodule で Plugin を管理していました。
+
+.zshrc
+source ${ZDOTDIR}/submodules/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+カッコつけた結果
+意味がわからないなって個人的に思いました。
+
+ Sheldon
+追加するたびに、submodule コマンドを実行して、 .zshrc にパスを追加する。
+という作業は二重管理してる感じも流石に辛いということで Plugin Manager を探すことにしました
+こう...]]></description><link>https://zenn.dev/yanskun/articles/zsh-plugin-manager</link><guid isPermaLink="true">https://zenn.dev/yanskun/articles/zsh-plugin-manager</guid><pubDate>Wed, 31 Jul 2024 01:40:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wbwwTInB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Sheldon%2520%25E3%2581%25A8%25E3%2580%2581%25E5%2585%25A5%25E3%2582%258C%25E3%2581%25A6%25E5%25AC%2589%25E3%2581%2597%25E3%2581%2584%2520Zsh%2520Plugin%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yanskun%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU0Y2I3NTU5ODcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yanskun</dc:creator></item><item><title><![CDATA[シェルスクリプト 配列 スライス操作]]></title><description><![CDATA[
+ 概要
+シェルスクリプトで配列の特定のインデックス以降の要素を取り出すには、以下の方法を使用できます。Bashの配列スライシング機能を利用すると簡単に実現できます。
+
+ 配列スライシングを使用する
+Bashでは、配列のスライシング（部分配列の抽出）がサポートされています。配列のスライシングを使用して、特定のインデックス以降の要素を取り出す方法を以下に示します。
+#!/bin/bash
+
+# 配列の定義
+arr=("apple" "banana" "cherry" "date" "fig" "grape")
+
+# 開始インデックスを定義（例：2 なら "cherry" 以降の要素を取り出...]]></description><link>https://zenn.dev/takeo/articles/ac479960f6c9cd</link><guid isPermaLink="true">https://zenn.dev/takeo/articles/ac479960f6c9cd</guid><pubDate>Sun, 28 Jul 2024 09:47:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--aFbVQBie--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B7%25E3%2582%25A7%25E3%2583%25AB%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2583%2588%2520%25E9%2585%258D%25E5%2588%2597%2520%25E3%2582%25B9%25E3%2583%25A9%25E3%2582%25A4%25E3%2582%25B9%25E6%2593%258D%25E4%25BD%259C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:takeo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZiNjIxNWNiNzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takeo</dc:creator></item><item><title><![CDATA[シェルスクリプト 文字列結合 JOIN]]></title><description><![CDATA[
+ 概要
+シェルスクリプトで文字列の配列を特定の区切り文字で結合し、1つの文字列を生成する方法について調べました。Goのstrings.Joinのようなことです。
+s := []string{"foo", "bar", "baz"}
+fmt.Println(strings.Join(s, ", ")) // foo,bar,baz
+
+ 方法 1: IFS（内部フィールド区切り文字）を使用する
+Bashシェルでは、IFS変数を使用して配列の要素を結合することができます。以下に例を示します。
+#!/bin/bash
+
+# 配列の定義
+arr=("apple" "banana" "cherry...]]></description><link>https://zenn.dev/takeo/articles/14443692d6a621</link><guid isPermaLink="true">https://zenn.dev/takeo/articles/14443692d6a621</guid><pubDate>Sun, 28 Jul 2024 09:30:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--QihLR-db--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B7%25E3%2582%25A7%25E3%2583%25AB%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2583%2588%2520%25E6%2596%2587%25E5%25AD%2597%25E5%2588%2597%25E7%25B5%2590%25E5%2590%2588%2520JOIN%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:takeo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZiNjIxNWNiNzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takeo</dc:creator></item><item><title><![CDATA[MacのTerminalで補完を有効にする]]></title><description><![CDATA[
+ TL; DR
+.zshrcに以下の設定を追加する
+if type brew &amp;&gt;/dev/null
+then
+  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+
+  autoload -Uz compinit
+  compinit
+fi
+
+ 注意
+
+対象のCLIアプリがHomebrewでインストールされていること
+補完が実装されていること（有名なアプリなら大体実装されている）
+
+
+ 説明
+
+
+brewでインストールしたアプリの補完用のファイルは$(brew --prefix)/share/zsh/s...]]></description><link>https://zenn.dev/local/articles/534b2807db2226</link><guid isPermaLink="true">https://zenn.dev/local/articles/534b2807db2226</guid><pubDate>Fri, 26 Jul 2024 04:09:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qoRfpSAH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Mac%25E3%2581%25AETerminal%25E3%2581%25A7%25E8%25A3%259C%25E5%25AE%258C%25E3%2582%2592%25E6%259C%2589%25E5%258A%25B9%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Catfish%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2QzOGQ5MDdiN2EuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Catfish</dc:creator></item><item><title><![CDATA[shellscriptで複数行の文字列をファイルに出力]]></title><description><![CDATA[
+ よく使う方法
+
+ cat
+cat &lt;&lt; 'EOF' &gt;&gt; /output/file.txt
+# 変数展開しません
+$(hostname)
+EOF
+
+cat &lt;&lt; EOF &gt;&gt; /output/file.txt
+# 変数展開します
+$(hostname)
+EOF
+
+ 補足
+
+ echo
+{
+    echo '# echoでもできます'
+    echo "$(hostname)"
+} /output/file.txt
+echo 
+]]></description><link>https://zenn.dev/stnr_kai/articles/68ea85362a5c0c</link><guid isPermaLink="true">https://zenn.dev/stnr_kai/articles/68ea85362a5c0c</guid><pubDate>Wed, 24 Jul 2024 02:18:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--evpSS5Of--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:shellscript%25E3%2581%25A7%25E8%25A4%2587%25E6%2595%25B0%25E8%25A1%258C%25E3%2581%25AE%25E6%2596%2587%25E5%25AD%2597%25E5%2588%2597%25E3%2582%2592%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2581%25AB%25E5%2587%25BA%25E5%258A%259B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kai%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ4ZDRkZjAyYzIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kai</dc:creator></item><item><title><![CDATA[CronでDBのバックアップをとる]]></title><description><![CDATA[
+ 接続イメージ
+
+
+ 状況と流れ
+
+private subnetにpostgresqlがインストールされたEC2(DBとして使っているEC2)があります。
+EC2にセッションマネージャーで接続し、pg_dumpコマンドでDBのバックアップを取ります。
+取得したSQLファイルをS3にアップロードします。
+同時に各コマンドの実行状況をCloudWatchに流します。
+
+
+ Shell Script
+
+EC2内に設置した諸々上記↑を実行するスクリプトです。#!/bin/bash
+
+# PATHを設定
+PATH=&lt;your aws cli command path&gt;
+
+# 環境変数...]]></description><link>https://zenn.dev/emily_mz/articles/d1029b1673f41a</link><guid isPermaLink="true">https://zenn.dev/emily_mz/articles/d1029b1673f41a</guid><pubDate>Tue, 23 Jul 2024 04:44:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dNA9Tai3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Cron%25E3%2581%25A7DB%25E3%2581%25AE%25E3%2583%2590%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%25E3%2582%2592%25E3%2581%25A8%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25B5%25E3%2582%258B%25E3%2581%2588%25E3%2582%258B%25E3%2581%25BA%25E3%2582%2593%25E3%2581%258E%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQyMzY0OTg2Y2IuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ふるえるぺんぎん</dc:creator></item><item><title><![CDATA[環境変数とシェル変数の入口]]></title><description><![CDATA[Bash などのシェルには、2つの変数が備わっています。
+それは、環境変数とシェル変数です。
+- 環境変数とは
+現在のシェルで定義され、子プロセスやシェルに継承される変数のこと
+- シェル変数とは
+定義されたシェルにのみ含まれる変数のこと
+これらに、どのような役割や違いがあるかを知るために、コマンドラインを使いながら見ていきます。
+(筆者環境: MacOS Big Sur ver11.2.3 Bash)
+!
+変数や以下で紹介するコマンドの挙動は設定されているシェルに依存します。
+
+
+ 使用するコマンド
+
+
+printenv
+すべて、または特定の環境変数とその値を表示します。
+例えば、pr...]]></description><link>https://zenn.dev/yururi/articles/env-shell-var</link><guid isPermaLink="true">https://zenn.dev/yururi/articles/env-shell-var</guid><pubDate>Mon, 22 Jul 2024 11:31:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--YaFjm9ir--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%2592%25B0%25E5%25A2%2583%25E5%25A4%2589%25E6%2595%25B0%25E3%2581%25A8%25E3%2582%25B7%25E3%2582%25A7%25E3%2583%25AB%25E5%25A4%2589%25E6%2595%25B0%25E3%2581%25AE%25E5%2585%25A5%25E5%258F%25A3%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:sks%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzUwODM4MTExYzMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sks</dc:creator></item><item><title><![CDATA[【Mac】バッチファイルの内容をシェルスクリプトとして実行する方法]]></title><description><![CDATA[
+ 記事作成の背景
+Macでのバッチファイルの実行方法を調べたところ、シェルスクリプトとして実行することでwindowsで行うようなバッチ処理が可能ということがわかったため、備忘録的な形で残そうと思った。
+もし認識誤りなどあれば、適宜ご指摘いただければ幸いです。
+
+ ①バッチファイルの内容を下記のように修正する
+◾️ 修正前（Windowsでのバッチ処理実行用の内容）
+# PATH環境変数を設定
+set PATH=/Applications/Eclipse_2024-06.app/Contents/java/21/bin;%PATH%
+# ディレクトリを移動
+cd /Applicatio...]]></description><link>https://zenn.dev/keita09/articles/f89e39ee6b1564</link><guid isPermaLink="true">https://zenn.dev/keita09/articles/f89e39ee6b1564</guid><pubDate>Mon, 15 Jul 2024 14:55:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--m5Te-3jx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Mac%25E3%2580%2591%25E3%2583%2590%25E3%2583%2583%25E3%2583%2581%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2581%25AE%25E5%2586%2585%25E5%25AE%25B9%25E3%2582%2592%25E3%2582%25B7%25E3%2582%25A7%25E3%2583%25AB%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2583%2588%25E3%2581%25A8%25E3%2581%2597%25E3%2581%25A6%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:keita%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JjNTc2NjBmNTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>keita</dc:creator></item><item><title><![CDATA[Warpでリモートマシンのシェルがfishだとsshでエラーになる]]></title><description><![CDATA[
+ 背景
+sshしようとするとエラーが出る。
+ssh server
+fish: Unsupported use of '='. In fish, please use 'set hook $(printf "{\"hook\": \"SSH\", \"value\": {\"socket_path\": \"~/.ssh/154\", \"remote_shell\": \"%s\"}}" "${SHELL##*/}" | command od -An -v -tx1 | command tr -d " \n")'.
+hook=$(printf "{\"hook\": \"SSH\", ...]]></description><link>https://zenn.dev/shibata/articles/844498a43717a9</link><guid isPermaLink="true">https://zenn.dev/shibata/articles/844498a43717a9</guid><pubDate>Mon, 15 Jul 2024 03:15:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Q3kYrYtu--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Warp%25E3%2581%25A7%25E3%2583%25AA%25E3%2583%25A2%25E3%2583%25BC%25E3%2583%2588%25E3%2583%259E%25E3%2582%25B7%25E3%2583%25B3%25E3%2581%25AE%25E3%2582%25B7%25E3%2582%25A7%25E3%2583%25AB%25E3%2581%258Cfish%25E3%2581%25A0%25E3%2581%25A8ssh%25E3%2581%25A7%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E3%2581%25AB%25E3%2581%25AA%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Shibata%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FkMzZkZWRiNjMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Shibata</dc:creator></item><item><title><![CDATA[【Docker】コンテナ内でシェルを起動するコマンド一覧]]></title><description><![CDATA[
+ はじめに
+特定のコンテナ内のデータベースの中身やコマンドで処理を実行したい場合は、様々な目的に応じて適切なシェルやクライアントを起動し、コンテナ内の環境とより効果的に対話する必要がある。
+
+ 基本構文
+docker exec -it &lt;コンテナ名&gt; &lt;シェル名&gt;
+
+ Bash シェル（デフォルト）
+docker exec -it &lt;コンテナ名&gt; bash
+
+ Sh シェル
+docker exec -it &lt;コンテナ名&gt; sh
+
+ Zsh シェル
+docker exec -it &lt;コンテナ名&gt; zsh
+
+ Fish シェル
+d...]]></description><link>https://zenn.dev/code_journey_ys/articles/74944eaf9dc370</link><guid isPermaLink="true">https://zenn.dev/code_journey_ys/articles/74944eaf9dc370</guid><pubDate>Fri, 12 Jul 2024 12:16:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fqaqZQNk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Docker%25E3%2580%2591%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2586%25E3%2583%258A%25E5%2586%2585%25E3%2581%25A7%25E3%2582%25B7%25E3%2582%25A7%25E3%2583%25AB%25E3%2582%2592%25E8%25B5%25B7%25E5%258B%2595%25E3%2581%2599%25E3%2582%258B%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E4%25B8%2580%25E8%25A6%25A7%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yusuke%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2QxYmU5MTc2ZTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yusuke</dc:creator></item><item><title><![CDATA[[Mac] 時間がかかる処理をターミナルで実行すると、終わったタイミングで画面に通知する自作コマンド]]></title><description><![CDATA[
+ きっかけ
+Rails で $ bin/rake でテストをすべて走らせると時間がかかるのですが、終わったタイミングで画面に通知してほしいな～とふと思ったので自作コマンドを作りました。
+
+ 通知/ダイアログの出し方
+Macでターミナルから画面に通知を出すやり方を調べたらosascriptコマンドでできました。
+参考
+
+https://qiita.com/uqichi/items/180d9a5ad661268e0007
+https://qiita.com/soh19/items/200f5881ed1fc87665dd
+
+
+ 通知
+$ osascript -e 'display not...]]></description><link>https://zenn.dev/tkmfujise/articles/e8b3a9b9719422</link><guid isPermaLink="true">https://zenn.dev/tkmfujise/articles/e8b3a9b9719422</guid><pubDate>Thu, 11 Jul 2024 20:39:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vIm_X9QR--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BMac%255D%2520%25E6%2599%2582%25E9%2596%2593%25E3%2581%258C%25E3%2581%258B%25E3%2581%258B%25E3%2582%258B%25E5%2587%25A6%25E7%2590%2586%25E3%2582%2592%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%259F%25E3%2583%258A%25E3%2583%25AB%25E3%2581%25A7%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%2599%25E3%2582%258B%25E3%2581%25A8%25E3%2580%2581%25E7%25B5%2582%25E3%2582%258F%25E3%2581%25A3%25E3%2581%259F%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%259F%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%25A7%25E7%2594%25BB%25E9%259D%25A2%25E3%2581%25AB%25E9%2580%259A%25E7%259F%25A5%25E3%2581%2599%25E3%2582%258B%25E8%2587%25AA%25E4%25BD%259C%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tkmfujise%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4WkRseXBFekRMdUdCUEowOWI4XzQ1Z0xSVlNhekEwQm9jR2ZhRWM9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tkmfujise</dc:creator></item><item><title><![CDATA[【Homebrew】メモ]]></title><description><![CDATA[
+shell
+# Homebrewの更新（フォーミュラ（パッケージ）は更新されない）
+brew update
+
+# 更新可能なフォーミュラの一覧を表示
+brew outdated
+
+#インストールしたフォーミュラの更新
+brew upgrade
+
+# キャッシュ削除
+brew cleanup
+
+# brew関連の問題検出
+brew doctor
+
+]]></description><link>https://zenn.dev/blc/articles/e24095b56acc21</link><guid isPermaLink="true">https://zenn.dev/blc/articles/e24095b56acc21</guid><pubDate>Sat, 06 Jul 2024 11:21:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--eNZ3-lvG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:%25E3%2580%2590Homebrew%25E3%2580%2591%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yota%2520Suzuki%2520%252F%2520BLC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS3JJQkRZakpBMlJsc2JzUWtCRDhXak9zOGc1cnpoUk5hSXlMcDJpMTkzTk5NamZjaz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yota Suzuki / BLC</dc:creator></item><item><title><![CDATA[【Next.js】メモ]]></title><description><![CDATA[
+ Shell
+# ----&lt; 作成 &gt;----
+# "https://ja.next-community-docs.dev/docs/app-router/api-reference/create-next-app"
+
+## pt.1 デフォルト (非対話：オプション指定)（"your-project-name"は適宜変更する）
+npx create-next-app@latest your-project-name \
+--ts --tailwind --eslint --src-dir --app --import-alias '@/*'
+
+## pt.2 対話的（"y...]]></description><link>https://zenn.dev/blc/articles/dbfff5bb88d99d</link><guid isPermaLink="true">https://zenn.dev/blc/articles/dbfff5bb88d99d</guid><pubDate>Sat, 06 Jul 2024 11:16:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Q7cZNkss--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:%25E3%2580%2590Next.js%25E3%2580%2591%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yota%2520Suzuki%2520%252F%2520BLC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS3JJQkRZakpBMlJsc2JzUWtCRDhXak9zOGc1cnpoUk5hSXlMcDJpMTkzTk5NamZjaz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yota Suzuki / BLC</dc:creator></item><item><title><![CDATA[macOSのCLIでpdfの全ページを画像(png)に変換するシェルスクリプト]]></title><description><![CDATA[ただの個人メモです。
+ググってると、複数ページのPDFに対応してるものがなかった気がしたので作りました。
+カレントディレクトリに存在する全てのpdfファイルの全ページをpng画像に変換し、pdfファイルごとにディレクトリを作成して格納するスクリプトです。
+ImageMagickをCLIで使えればいいので、たぶんmacOSでなくても使えると思います。
+
+ 手順
+
+ 1. ImageMagickをインストール
+brew でImageMagickをインストールしてください。後述するシェルスクリプトで呼び出して、pdfをpngに変換するために利用します。
+brew install imagema...]]></description><link>https://zenn.dev/t_fukumoto/articles/f162cb8b1d6712</link><guid isPermaLink="true">https://zenn.dev/t_fukumoto/articles/f162cb8b1d6712</guid><pubDate>Fri, 05 Jul 2024 12:09:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GMYNToOb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:macOS%25E3%2581%25AECLI%25E3%2581%25A7pdf%25E3%2581%25AE%25E5%2585%25A8%25E3%2583%259A%25E3%2583%25BC%25E3%2582%25B8%25E3%2582%2592%25E7%2594%25BB%25E5%2583%258F%2528png%2529%25E3%2581%25AB%25E5%25A4%2589%25E6%258F%259B%25E3%2581%2599%25E3%2582%258B%25E3%2582%25B7%25E3%2582%25A7%25E3%2583%25AB%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Teruhisa%2520Fukumoto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pFR3g5OWtnM28tSDRUVGNVQmZjNWhXSmlubDI2bjNJTTAwY0IzT3c9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Teruhisa Fukumoto</dc:creator></item><item><title><![CDATA[JenkinsでNodeがオンラインかどうかを確認する方法]]></title><description><![CDATA[
+ 概要
+
+JenkinsのNodeが時々勝手に途切れてオフラインになることがある
+オフラインを検知して再起動や通知をしたい
+そのための検知方法がないか調べた
+
+
+ 内容
+
+ RestAPIを使用する方法
+以下のようにnodeのJson情報を取ってきてjqで要素だけ取ってくるのがいい
+curl --silent $JENKINS_URL/computer/$JENKINS_NODENAME/api/json | jq .offline
+返ってくるJsonは以下記事が参考になる。
+https://qiita.com/tamikura@github/items/033ab9180561b62...]]></description><link>https://zenn.dev/masaki_mori72/articles/ebd9e7876e04ae</link><guid isPermaLink="true">https://zenn.dev/masaki_mori72/articles/ebd9e7876e04ae</guid><pubDate>Wed, 03 Jul 2024 14:58:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9gPWpUu8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Jenkins%25E3%2581%25A7Node%25E3%2581%258C%25E3%2582%25AA%25E3%2583%25B3%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%25B3%25E3%2581%258B%25E3%2581%25A9%25E3%2581%2586%25E3%2581%258B%25E3%2582%2592%25E7%25A2%25BA%25E8%25AA%258D%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:masaki%2520mori%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2h0Zy0zeERLZF9VY19OaFA0TVB2S1BqRkNFc2JrV1loSk5aTV9LPXMyNTAtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>masaki mori</dc:creator></item><item><title><![CDATA[ワンライナーで無限ループ]]></title><description><![CDATA[
+ 無限ループ
+shell を叩いていると時々無限ループしたくなる、その時最も短い行で無限ループしたい
+
+ while
+while :; do ./something; done
+最も単純だがちょっと文法が分からなくなりがちな上に、回数制限もかけられない
+
+ for
+for i in {0..42}; do ./something; done
+回数制限を持たせられるが、長い、面倒くさい
+文法は覚えていても良さそう
+for i in {0..42}; do ./something --trial $i; done
+使い道はある。
+
+ yes
+yes ./something | sh
+考える...]]></description><link>https://zenn.dev/genf740/articles/4f1f5995-3b29-411c-a2b4-c6ab45bb38a8</link><guid isPermaLink="true">https://zenn.dev/genf740/articles/4f1f5995-3b29-411c-a2b4-c6ab45bb38a8</guid><pubDate>Wed, 03 Jul 2024 08:40:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--sW1xmu8K--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%25AF%25E3%2583%25B3%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%258A%25E3%2583%25BC%25E3%2581%25A7%25E7%2584%25A1%25E9%2599%2590%25E3%2583%25AB%25E3%2583%25BC%25E3%2583%2597%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:gen740%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pNOGJfSGVlRHJhclh6YllqWnBrQjBWUVZtcExib3ZzRE42WEFoYjdVPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>gen740</dc:creator></item><item><title><![CDATA[mv や cp, rm コマンドで隠しファイルも対象にする方法4選]]></title><description><![CDATA[mv コマンドや cp コマンドで実行対象にワイルドカード ( * ) を使い、ディレクトリ配下の全ファイル・全ディレクトリを指定することがあります。
+mv /path/from/* /path/to/
+しかしワイルドカードを使うと、指定直下（上記の例だと /path/from/ 直下）にある隠しファイル（ファイル名がドットから始まるファイル）は mv や cp, rm の対象になりません。
+ワイルドカードを使うような状況では、隠しファイルも対象に含めたいのが普通だと思うので、いくつかの方法を紹介します。
+以下に実験用に使えるリポジトリを用意しました。clone して from から t...]]></description><link>https://zenn.dev/shuh/articles/mvrm-dotfiles-dotglob</link><guid isPermaLink="true">https://zenn.dev/shuh/articles/mvrm-dotfiles-dotglob</guid><pubDate>Sun, 30 Jun 2024 13:16:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--rHAVxkD9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:mv%2520%25E3%2582%2584%2520cp%252C%2520rm%2520%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2581%25A7%25E9%259A%25A0%25E3%2581%2597%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2582%25E5%25AF%25BE%25E8%25B1%25A1%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%25954%25E9%2581%25B8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:shusch%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk0ODg1Y2EwN2QuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>shusch</dc:creator></item></channel></rss>
