@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「TypeScript」のフィード]]></title><description><![CDATA[Zennのトピック「TypeScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/typescript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/f13e758fdb.png</url><title>Zennの「TypeScript」のフィード</title><link>https://zenn.dev/topics/typescript</link></image><generator>zenn.dev</generator><lastBuildDate>Mon, 12 Aug 2024 03:07:42 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/typescript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[【Astro ✖️ React Hook Form】確認画面付きのフォームを作る]]></title><description><![CDATA[
+ はじめに
+Astro で確認画面付きのフォームを作る方法です。
+バリデーションは React Hook Form と Zod、確認画面へのデータの受け渡しは sessionStrage を使用します。
+
+ 完成物
+https://astro-form-ten.vercel.app/
+※ 送信機能は実装していません。
+
+ ファイル構成
+|- components
+| |- Form.tsx
+| |- Confirm.tsx
+|
+|- pages
+| |- index.astro
+| |- confirm.astro
+| |- thanks.astro
+
+ ライブラリのインストール
+As...]]></description><link>https://zenn.dev/fujikawa_dev/articles/astro-confirm-form</link><guid isPermaLink="true">https://zenn.dev/fujikawa_dev/articles/astro-confirm-form</guid><pubDate>Mon, 12 Aug 2024 02:48:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--SpdAODcJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Astro%2520%2520%2520React%2520Hook%2520Form%25E3%2580%2591%25E7%25A2%25BA%25E8%25AA%258D%25E7%2594%25BB%25E9%259D%25A2%25E4%25BB%2598%25E3%2581%258D%25E3%2581%25AE%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25BC%25E3%2583%25A0%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:fuji%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0ZGxLN0NUMkRKV1ZKdTM1dDU5RnpaMWdLcHQxNElnMndUUDZuemRvOEgxMFE9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>fuji</dc:creator></item><item><title><![CDATA[TypeScriptで「選択肢」の定義をEnum的な定数にまとめる――satisfiesとSSoTもあるよ]]></title><description><![CDATA[ソート順の選択プルダウンがある一覧系ページを実装するとき、選択肢たちの管理方法に頭を悩ませることが多いと思います。
+
+商品一覧ページの概要
+
+ソート順プルダウンの選択肢たち
+上の画像に示したような場合だと、
+
+《クエリパラメータ》と《選択肢》の間の相互変換
+
+
+?sort=price&amp;order=desc &lt;--&gt; 「価格が高い順」
+
+
+《select の状態に使うための文字列》と《選択肢》の間の相互変換
+
+&lt;option value={id}&gt;{label}&lt;/option&gt;
+クエリパラメータが sort order の2つあり、それらをその...]]></description><link>https://zenn.dev/yumemi_inc/articles/ts-enum-like-const</link><guid isPermaLink="true">https://zenn.dev/yumemi_inc/articles/ts-enum-like-const</guid><pubDate>Mon, 12 Aug 2024 02:42:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--zsghp4-x--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%25E3%2581%25A7%25E3%2580%258C%25E9%2581%25B8%25E6%258A%259E%25E8%2582%25A2%25E3%2580%258D%25E3%2581%25AE%25E5%25AE%259A%25E7%25BE%25A9%25E3%2582%2592Enum%25E7%259A%2584%25E3%2581%25AA%25E5%25AE%259A%25E6%2595%25B0%25E3%2581%25AB%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2582%258B%25E2%2580%2595%25E2%2580%2595satisfies%25E3%2581%25A8SSoT%25E3%2582%2582%25E3%2581%2582%25E3%2582%258B%25E3%2582%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Honey32%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U2MzAxMTgwMzUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2582%2586%25E3%2582%2581%25E3%2581%25BF%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JjYzg0MmQ4YTAuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Honey32</dc:creator></item><item><title><![CDATA[Google Cloud Managed Service for PrometheusでPrismaのコネクション数をチューニングする]]></title><description><![CDATA[業務で Google Cloud Managed Service for Prometheus を使って Cloud Run で動作するアプリケーションの Prisma のコネクション数をチューニングする機会があったので、備忘録もかねて手順を共有します。
+少しでも同じような状況の方の参考になれば幸いです。
+
+ 環境情報
+
+Prisma: v5.10.2
+NestJS: v10.3.8
+TypeScript: v5.1.6
+Node.js: v20.12.2
+GoogleCloudPlatform/run-gmp-sidecar: v1.1.1
+
+
+ Prisma のコネクションについて
+...]]></description><link>https://zenn.dev/newbee1958/articles/9c23645f3e30ea</link><guid isPermaLink="true">https://zenn.dev/newbee1958/articles/9c23645f3e30ea</guid><pubDate>Sun, 11 Aug 2024 23:04:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Iso-h4wE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Google%2520Cloud%2520Managed%2520Service%2520for%2520Prometheus%25E3%2581%25A7Prisma%25E3%2581%25AE%25E3%2582%25B3%25E3%2583%258D%25E3%2582%25AF%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hidev%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzMzODVhNDg4NjEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hidev</dc:creator></item><item><title><![CDATA[Svelte Writableストア 概説]]></title><description><![CDATA[
+ ストアとは
+Svelteにおいて，変数は通常，単一のコンポーネント内でしか使用できない．しかし，アプリケーションが複雑になるにつれて，複数のコンポーネント間で状態を共有したい場面が出てくる．このような場合，Svelteの「ストア」という仕組みを使用することで，複数のコンポーネント間で変数を簡単に共有することが可能となる．
+Svelteには，用途に応じて使い分けることができるいくつかのストアタイプが用意されている．具体的には，以下の4種類が存在する．
+
+
+Writableストア: 値の参照および更新が可能なストア．最も基本的でよく使われるストアタイプ．
+
+Readableストア: 値の...]]></description><link>https://zenn.dev/serada/articles/20240809-svelte-writable-store</link><guid isPermaLink="true">https://zenn.dev/serada/articles/20240809-svelte-writable-store</guid><pubDate>Sun, 11 Aug 2024 17:47:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--PJerPhiR--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Svelte%2520Writable%25E3%2582%25B9%25E3%2583%2588%25E3%2582%25A2%2520%25E6%25A6%2582%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:srd%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE4ZGIwYzNlZjQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>srd</dc:creator></item><item><title><![CDATA[Prepare for Huckson Internship]]></title><description><![CDATA[
+ TypeScript
+こちらの記事を参考に，TypeScriptの基本的な使い方を学びます．
+
+ 静的型付け
+
+TypeScriptは，静的型付け言語
+
+C言語，Javaも同じ
+コンパイル時に変数の型が定まる言語
+
+型にまつわる問題はプログラムを実行しなくても発見できる
+
+
+
+
+動的型付け言語
+
+Python，Ruby，JavaScript
+実行時に変数の型が定まる言語
+
+型にまつわる問題はプログラムを実行しないと発見できない
+詳しくはこちら：静的型付け
+
+
+
+
+
+
+
+ アロー関数
+https://typescriptbook.jp/reference/functions/arrow...]]></description><link>https://zenn.dev/os515/articles/intern-huckson-mynav</link><guid isPermaLink="true">https://zenn.dev/os515/articles/intern-huckson-mynav</guid><pubDate>Sun, 11 Aug 2024 11:52:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Bapm53qd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:Prepare%2520for%2520Huckson%2520Internship%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:soso%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4WXhTVFZ2dEMxc1c4N3NudWhKSVp0YTVMUWpsMUR5VW1YVTl5UFY2Zz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>soso</dc:creator></item><item><title><![CDATA[TypeScriptでasync関数の戻り値の型を取得する]]></title><description><![CDATA[TypeScriptで開発を行う際、特にPrismaのようなライブラリを使用すると、複雑な型の関数に直面することがよくあります。この記事では、TypeScriptのユーティリティ型を活用して、非同期関数の戻り値の型を取得する方法を紹介します。
+
+ ReturnTypeで関数の戻り値の型を取得する
+まず、TypeScriptのユーティリティ型ReturnTypeを使用して、関数の戻り値の型を取得する方法を見ていきます。以下のようなPrismaを使用した関数があるとします。
+type FuncReturnType = ReturnType&lt;typeof getPostsForUser&...]]></description><link>https://zenn.dev/nomikazu_x/articles/typescript-get-the-return-type-of-async-function</link><guid isPermaLink="true">https://zenn.dev/nomikazu_x/articles/typescript-get-the-return-type-of-async-function</guid><pubDate>Sun, 11 Aug 2024 11:00:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vfDvIU4C--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%25E3%2581%25A7async%25E9%2596%25A2%25E6%2595%25B0%25E3%2581%25AE%25E6%2588%25BB%25E3%2582%258A%25E5%2580%25A4%25E3%2581%25AE%25E5%259E%258B%25E3%2582%2592%25E5%258F%2596%25E5%25BE%2597%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nomikazu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E5Zjg3ZDg5NmIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nomikazu</dc:creator></item><item><title><![CDATA[Redux Toolkitの値を表示する]]></title><description><![CDATA[
+ stateとして持っている値を表示する
+FlutterのRiverpodを使ってる人の感覚だと、なかなか馴染めないが、Reduxと呼ばれてる状態管理ライブラリを使うときに、値を表示するだけやってみたかったが、どうしたらいいものかと思った。useStateだったらすぐわかるのだが、Reduxは難しいと思った。
+クラスで書いてないしな。でも仕組みはなんとなくわかった。stateには、初期値があって、それを操作することができる。状態管理してくれるもの。試しにダミーの値を入れたものを表示するのをやってみた。
+
+ Storeを作成
+アプリケーションの全ての場所から、アクセスすることができるSt...]]></description><link>https://zenn.dev/joo_hashi/articles/8ee99e1a960df4</link><guid isPermaLink="true">https://zenn.dev/joo_hashi/articles/8ee99e1a960df4</guid><pubDate>Sun, 11 Aug 2024 09:53:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ql7QU3EX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Redux%2520Toolkit%25E3%2581%25AE%25E5%2580%25A4%25E3%2582%2592%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:JboyHashimoto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNjOTBiY2M0M2YuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>JboyHashimoto</dc:creator></item><item><title><![CDATA[Reactで、lexicalを使う]]></title><description><![CDATA[
+ リッチエディターを作ってみる
+リッチエディターというテキストを太字にしたり、斜体にするライブラリがあるので、試してみた。公式の通りにやっても良い感じで作れなかったので、AIを力を借りて、見た目だけは、いい感じに作ってみました。
+official
+こちらがリッチエディターが使えるソースコード。TypeScriptで書くと型のエラーでハマるので設定で苦労した。styled-componentで、レイアウトは整えております。
+import { useState, useEffect } from 'react';
+import styled, { keyframes } from 'sty...]]></description><link>https://zenn.dev/joo_hashi/articles/42c7c74ed80824</link><guid isPermaLink="true">https://zenn.dev/joo_hashi/articles/42c7c74ed80824</guid><pubDate>Sun, 11 Aug 2024 07:34:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bJzd6YBi--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%25E3%2581%25A7%25E3%2580%2581lexical%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:JboyHashimoto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNjOTBiY2M0M2YuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>JboyHashimoto</dc:creator></item><item><title><![CDATA[Apollo Clientに入門する]]></title><description><![CDATA[
+ What is Apollo Client?
+official
+Apollo ClientはJavaScriptのための包括的な状態管理ライブラリです。ローカルとリモートの両方のデータをGraphQLで管理できます。アプリケーションデータのフェッチ、キャッシュ、変更に使用し、UIを自動的に更新します。
+Apollo Clientは、経済的で、予測可能で、現代の開発プラクティスに沿った宣言的な方法でコードを構成するのに役立ちます。コアの@apollo/clientライブラリは、Reactとの組み込み統合を提供し、より大規模なApolloコミュニティは、以下を維持します。
+
+ コア機能
+...]]></description><link>https://zenn.dev/joo_hashi/articles/5cd9d8c4306bd9</link><guid isPermaLink="true">https://zenn.dev/joo_hashi/articles/5cd9d8c4306bd9</guid><pubDate>Sun, 11 Aug 2024 05:12:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---K5nSlPC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Apollo%2520Client%25E3%2581%25AB%25E5%2585%25A5%25E9%2596%2580%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:JboyHashimoto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNjOTBiY2M0M2YuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>JboyHashimoto</dc:creator></item><item><title><![CDATA[TypeScript のコーディング環境を作る：プロジェクト作成から esbuild, ESLint などの導入と設定]]></title><description><![CDATA[TypeScript でちょっと何か書きたい！実行したい！
+
+だけどプロジェクトの作成から各種ライブラリの導入や設定はどうすればいいのか。毎回そのあたりで面倒になってしまうそんな自分に向けたメモとして作成しています。
+
+VS Code で TypeScript で何かのスクリプトを書き始めるまでの準備を行うことを目的としています。記載中の項目もありますが、どなたかのお役に立てば幸いです。
+
+チャプター 01 にコマンドや設定などまとめており、基本的にはチャプター 01 のみで準備ができるよう記載しています。以降のチャプターは 01 の手順の詳細、またはメモ書き的な内容が含まれます。よってチャプター 01 の記載内容と相違がある場合があります。]]></description><link>https://zenn.dev/key_luvless/books/54b91f977edf05</link><guid isPermaLink="true">https://zenn.dev/key_luvless/books/54b91f977edf05</guid><pubDate>Sun, 11 Aug 2024 05:07:32 GMT</pubDate><dc:creator>k-ta-yamada</dc:creator></item><item><title><![CDATA[Remix SPA Modeでyamlから履歴書を生成するWebアプリ作った]]></title><description><![CDATA[こんにちは、今回はRemix SPA Modeを使って、yamlから履歴書を生成するWebアプリを作ってみたので紹介していきます。
+
+ 作ったもの
+
+ URL
+https://resume-generator-a21.pages.dev/
+
+ ソースコード
+https://github.com/dl10yr/resume-generator
+
+ 動作イメージ
+
+
+ ざっくりした説明
+
+ Remix SPAモード使った
+今回アプリを作った目的はReactでサクッとSPAを作るときのフレームワークとしてRemixってどうなの？を体感しておくためです。
+
+ yamlで情報管理
+jsonでもya...]]></description><link>https://zenn.dev/dl10yr/articles/resume-generator</link><guid isPermaLink="true">https://zenn.dev/dl10yr/articles/resume-generator</guid><pubDate>Sun, 11 Aug 2024 01:34:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ErcplKW---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Remix%2520SPA%2520Mode%25E3%2581%25A7yaml%25E3%2581%258B%25E3%2582%2589%25E5%25B1%25A5%25E6%25AD%25B4%25E6%259B%25B8%25E3%2582%2592%25E7%2594%259F%25E6%2588%2590%25E3%2581%2599%25E3%2582%258BWeb%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:dl10yr%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvZC5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>dl10yr</dc:creator></item><item><title><![CDATA[Redux Toolkit スライスの基本: 初期状態、リデューサー、extraReducers の使い方]]></title><description><![CDATA[スライスとは、Redux Toolkitが提供する機能の一つで、アプリケーションの状態管理を簡単に行うためのもの。スライスは、機能やドメインに関連する状態、リデューサー、対応するアクションを一つのまとまりとして管理し、特に比較的大規模なアプリケーションでよく使用される。
+Redux Toolkit と RTK Query: 基本概要についてはこちらにまとめました。
+
+ スライスの具体的な機能
+
+ 1. 初期状態の設定
+スライス内で管理する状態の初期値を定義する。
+
+ 2. リデューサーの定義
+状態を変更するための関数（リデューサー）をまとめて定義する。
+
+ 3. extraReducer...]]></description><link>https://zenn.dev/kkoisland/articles/8ba70e2cd8f7a8</link><guid isPermaLink="true">https://zenn.dev/kkoisland/articles/8ba70e2cd8f7a8</guid><pubDate>Sat, 10 Aug 2024 23:36:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--X5jCoAyi--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Redux%2520Toolkit%2520%25E3%2582%25B9%25E3%2583%25A9%25E3%2582%25A4%25E3%2582%25B9%25E3%2581%25AE%25E5%259F%25BA%25E6%259C%25AC%253A%2520%25E5%2588%259D%25E6%259C%259F%25E7%258A%25B6%25E6%2585%258B%25E3%2580%2581%25E3%2583%25AA%25E3%2583%2587%25E3%2583%25A5%25E3%2583%25BC%25E3%2582%25B5%25E3%2583%25BC%25E3%2580%2581extraReducers%2520%25E3%2581%25AE%25E4%25BD%25BF%25E3%2581%2584%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kkoisland%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E2MzIwYmQ0NDQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kkoisland</dc:creator></item><item><title><![CDATA[ReactHookFormとZodで始めるフォームバリデーション]]></title><description><![CDATA[※本記事は生成AIを使用して作成されました。
+AI言語モデル: gpt-4o-mini
+
+
+ React Hook FormとZodで始めるフォームバリデーション
+
+ はじめに
+Webアプリケーションにおいて、フォームはユーザーからのデータを収集する重要な要素です。ユーザーが入力したデータが正しい形式であるか、必須項目が入力されているかを確認することは、アプリケーションの信頼性を高めるために不可欠です。しかし、フォームのバリデーションはしばしば複雑で、開発者にとって頭を悩ませる課題となります。特に、ユーザーが誤った情報を入力した場合、適切なエラーメッセージを表示し、再入力を促すことが求め...]]></description><link>https://zenn.dev/llm_robot/articles/20240811-react-hook-form-zod-validation</link><guid isPermaLink="true">https://zenn.dev/llm_robot/articles/20240811-react-hook-form-zod-validation</guid><pubDate>Sat, 10 Aug 2024 22:07:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--iCsjm-j1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ReactHookForm%25E3%2581%25A8Zod%25E3%2581%25A7%25E5%25A7%258B%25E3%2582%2581%25E3%2582%258B%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25BC%25E3%2583%25A0%25E3%2583%2590%25E3%2583%25AA%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:AIZAWA%2520version%253A0.0.2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAwMTE3MGM1NDcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>AIZAWA version:0.0.2</dc:creator></item><item><title><![CDATA[Webブラウザーで動くシンセサイザーを作る (AudioWorklet)]]></title><description><![CDATA[Webブラウザー上で音声処理を行うAPIにWeb Audio APIがあります．Web Audio APIでは，音源，エフェクト，入出力を行うノードを接続していくことでオーディオグラフを作成し，音声処理を表現します．Web Audio APIを用いることで，Webの技術だけで簡単なシンセサイザーを作成することができます．
+今回はWeb Audio APIで用意されているAudioWorkletを使用して，リアルタイムで波形を生成する簡単なシンセサイザーを作成しました．
+
+ 作成したWebアプリ
+今回作成したWebアプリです．
+https://rerrahkr.github.io/audi...]]></description><link>https://zenn.dev/rerrah/articles/5b649722ffc3c2</link><guid isPermaLink="true">https://zenn.dev/rerrah/articles/5b649722ffc3c2</guid><pubDate>Sat, 10 Aug 2024 13:17:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dK9tfCQ7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Web%25E3%2583%2596%25E3%2583%25A9%25E3%2582%25A6%25E3%2582%25B6%25E3%2583%25BC%25E3%2581%25A7%25E5%258B%2595%25E3%2581%258F%25E3%2582%25B7%25E3%2583%25B3%25E3%2582%25BB%25E3%2582%25B5%25E3%2582%25A4%25E3%2582%25B6%25E3%2583%25BC%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%2520%2528AudioWorklet%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Rerrah%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS2cweTZjdnlzVVVibTYyamhnZ1N5M1pzMGl6Q1ZvU25KRTVTSF9acFFQOVJyRmx1dz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Rerrah</dc:creator></item><item><title><![CDATA[tRPC超基本]]></title><description><![CDATA[
+ はじめに
+最近、公私ともに tRPC を使う機会が増えました。
+一旦、tRPC の基本をまとめておきたいと思い、記事にしました。
+※ 本記事は tRPCv11以上のtRPC ドキュメントを参考にしています。
+
+ tRPC とは
+tRPC(TypeScript Remote Procedure Call) はAPI エンドポイントを型付けし、その型をクライアントとサーバーで共有することで型安全に API を構築するための TypeScript のライブラリです。
+tRPC は REST と GraphQL の概念を組み合わせて作られているようです。
+https://trpc.io/
+ク...]]></description><link>https://zenn.dev/big_tanukiudon/articles/2f5e6efd851686</link><guid isPermaLink="true">https://zenn.dev/big_tanukiudon/articles/2f5e6efd851686</guid><pubDate>Sat, 10 Aug 2024 13:02:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2JjRNao8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:tRPC%25E8%25B6%2585%25E5%259F%25BA%25E6%259C%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259F%25E3%2581%25AC%25E3%2581%258D%25E3%2581%2586%25E3%2581%25A9%25E3%2582%2593%25E5%25A4%25A7%25E7%259B%259B%25E3%2582%258A%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U0ZGMwMjI1ZGUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>たぬきうどん大盛り</dc:creator></item><item><title><![CDATA[[メモ]Rails + React + TypeScript の導入メモ]]></title><description><![CDATA[
+ Rails + React + TypeScript 導入メモ
+この記事は、Rails、React、TypeScriptを組み合わせたプロジェクトの初期セットアップについてのメモです。将来ポートフォリオを作成する際に参考にできるよう作成しました。
+
+ 参考記事
+
+Rails7 + React + TypeScript環境構築
+Rails7でTailwind CSSを使う方法
+
+
+ 1. アプリケーションの作成
+まず、以下のコマンドでRailsアプリケーションを作成します：
+rails new [アプリ名] -d postgresql --javascript=esbuild
+注意：初...]]></description><link>https://zenn.dev/kuma2/articles/1bbeba40016903</link><guid isPermaLink="true">https://zenn.dev/kuma2/articles/1bbeba40016903</guid><pubDate>Sat, 10 Aug 2024 11:58:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--euOWlfjw--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255B%25E3%2583%25A1%25E3%2583%25A2%255DRails%2520%252B%2520React%2520%252B%2520TypeScript%2520%25E3%2581%25AE%25E5%25B0%258E%25E5%2585%25A5%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258F%25E3%2581%25BE%25E3%2581%258F%25E3%2581%25BE%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RkMmRjYmNiODYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>くまくま</dc:creator></item><item><title><![CDATA[TypeScriptでZodスキーマから推論される型を生成する]]></title><description><![CDATA[Zodは、スキーマを定義してランタイムチェックを行うだけでなく、そのスキーマから型を推論して、静的な型チェックに利用することも可能です。この記事では、Zodを使ってスキーマから型を推論する方法を紹介します。
+
+ Zodでスキーマを定義する
+まず、Zodを使ってスキーマを定義します。ここでは、コンタクト情報を表すスキーマを例にします。このスキーマでは、personオブジェクトの中にfirstNameとlastNameという文字列のプロパティがあり、emailはメールアドレス形式の文字列であることを定義しています。
+import {z} from 'zod'
+
+const contactSc...]]></description><link>https://zenn.dev/nomikazu_x/articles/typescript-generate-inferred-type-from-zod-schema</link><guid isPermaLink="true">https://zenn.dev/nomikazu_x/articles/typescript-generate-inferred-type-from-zod-schema</guid><pubDate>Sat, 10 Aug 2024 11:00:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2vShnRAX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%25E3%2581%25A7Zod%25E3%2582%25B9%25E3%2582%25AD%25E3%2583%25BC%25E3%2583%259E%25E3%2581%258B%25E3%2582%2589%25E6%258E%25A8%25E8%25AB%2596%25E3%2581%2595%25E3%2582%258C%25E3%2582%258B%25E5%259E%258B%25E3%2582%2592%25E7%2594%259F%25E6%2588%2590%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nomikazu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E5Zjg3ZDg5NmIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nomikazu</dc:creator></item><item><title><![CDATA[【TypeScript】interfaceで配列の配列(numberとstring含む)を定義する方法]]></title><description><![CDATA[TypeScriptって難しいなっていつも思う泉（@izumin_0401）です。
+業務でAngularを触っているんですが、any型で定義された箇所があったのでinterfaceを作った際の備忘録。
+
+ ブログ記事はこちら
+https://traveler0401.com/typescript-interface-array-of-array
+
+ interfaceで配列の配列(numberとstring含む)を定義する方法
+{
+  "unkos": [
+    [
+      1,
+      "大きいウンコ"
+    ],
+    [
+      2,
+      "小さいウンコ"...]]></description><link>https://zenn.dev/izumin_0401/articles/221c28eac84b1c</link><guid isPermaLink="true">https://zenn.dev/izumin_0401/articles/221c28eac84b1c</guid><pubDate>Sat, 10 Aug 2024 02:52:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--M4D09pfQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590TypeScript%25E3%2580%2591interface%25E3%2581%25A7%25E9%2585%258D%25E5%2588%2597%25E3%2581%25AE%25E9%2585%258D%25E5%2588%2597%2528number%25E3%2581%25A8string%25E5%2590%25AB%25E3%2582%2580%2529%25E3%2582%2592%25E5%25AE%259A%25E7%25BE%25A9%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%25B3%2589%25E6%25B5%25A9%25E5%2585%25B5%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ExNTljYmRlNDIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>泉浩兵</dc:creator></item><item><title><![CDATA[Zustandで型推論をうまく使うには]]></title><description><![CDATA[
+ はじめに
+ZustandはTypeScriptサポートしてますが、あまり書き心地が良いとは言えません（主観）。
+通常は次のような書き方をします。
+import { create } from 'zustand'
+
+interface CountState {
+  count: number
+  increase: (by: number) =&gt; void
+}
+
+const useCounterStore = create&lt;CountState&gt;(
+  (set) =&gt; ({
+    bears: 0,
+    increase: (by) =&gt; set(...]]></description><link>https://zenn.dev/dai_shi/articles/e69c7fd231ed1b</link><guid isPermaLink="true">https://zenn.dev/dai_shi/articles/e69c7fd231ed1b</guid><pubDate>Sat, 10 Aug 2024 01:02:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7tj_f4hL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Zustand%25E3%2581%25A7%25E5%259E%258B%25E6%258E%25A8%25E8%25AB%2596%25E3%2582%2592%25E3%2581%2586%25E3%2581%25BE%25E3%2581%258F%25E4%25BD%25BF%25E3%2581%2586%25E3%2581%25AB%25E3%2581%25AF%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:daishi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzcwZGNhM2E2Y2IuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>daishi</dc:creator></item><item><title><![CDATA[TypeScriptプロジェクトにtsconfig.jsonを生成する方法]]></title><description><![CDATA[
+ TypeScriptプロジェクトにtsconfig.jsonを生成する方法
+TypeScriptプロジェクトを始める際に、TypeScriptコンパイラの設定を行うためのtsconfig.jsonファイルが必要です。このファイルは、プロジェクトのコンパイル設定やエクスポートするJavaScriptのバージョンなどを定義します。この記事では、tsconfig.jsonファイルを簡単に生成する方法を説明します。
+
+ TypeScriptをプロジェクトにインストールする
+まず最初に、プロジェクトにTypeScriptをインストールする必要があります。TypeScriptはtypescrip...]]></description><link>https://zenn.dev/nomikazu_x/articles/typescript-generate-initial-tsconfig-file</link><guid isPermaLink="true">https://zenn.dev/nomikazu_x/articles/typescript-generate-initial-tsconfig-file</guid><pubDate>Sat, 10 Aug 2024 00:31:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dnbb-TRL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E3%2581%25ABtsconfig.json%25E3%2582%2592%25E7%2594%259F%25E6%2588%2590%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nomikazu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E5Zjg3ZDg5NmIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nomikazu</dc:creator></item></channel></rss>
