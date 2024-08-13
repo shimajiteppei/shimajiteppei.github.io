@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「TypeScript」のフィード]]></title><description><![CDATA[Zennのトピック「TypeScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/typescript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/f13e758fdb.png</url><title>Zennの「TypeScript」のフィード</title><link>https://zenn.dev/topics/typescript</link></image><generator>zenn.dev</generator><lastBuildDate>Tue, 13 Aug 2024 12:03:52 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/typescript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[[Node.js]ファイルからデータを読み込み、行単位で処理する]]></title><description><![CDATA[
+exec.ts
+import { readFileSync } from "node:fs";
+
+const animals = readFileSync("./animals.txt", "utf-8").split("\n");
+
+animals.forEach((animal, i) =&gt; {
+  console.log(`${i}: ${animal}`);
+});
+
+
+animals.txt
+犬
+猫
+鶏
+
+実行結果
+1: 犬
+2: 猫
+3: 鶏
+]]></description><link>https://zenn.dev/purratto/articles/0499c4be680961</link><guid isPermaLink="true">https://zenn.dev/purratto/articles/0499c4be680961</guid><pubDate>Tue, 13 Aug 2024 08:15:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bClkQKU4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BNode.js%255D%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2581%258B%25E3%2582%2589%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%2592%25E8%25AA%25AD%25E3%2581%25BF%25E8%25BE%25BC%25E3%2581%25BF%25E3%2580%2581%25E8%25A1%258C%25E5%258D%2598%25E4%25BD%258D%25E3%2581%25A7%25E5%2587%25A6%25E7%2590%2586%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:purratto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNhODdjNTc4MzguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>purratto</dc:creator></item><item><title><![CDATA[[Node.js]CSVの1つのセルの中でJSONデータをインデントをつけてわかりやすく表示する]]></title><description><![CDATA[
+exec.ts
+import { createWriteStream } from "node:fs";
+
+const dogs = [
+  {
+    breed: "セントバーナード",
+    detail: {
+      size: "大型",
+      origin: "スイス",
+      rescueAbility: 100,
+    },
+  },
+  {
+    breed: "プードル",
+    detail: {
+      size: "小型",
+      origin: "フランス",
+      hypoallergenic: true,
+    ...]]></description><link>https://zenn.dev/purratto/articles/ecef8fd8f6bae1</link><guid isPermaLink="true">https://zenn.dev/purratto/articles/ecef8fd8f6bae1</guid><pubDate>Tue, 13 Aug 2024 05:32:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--E75NZgsC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BNode.js%255DCSV%25E3%2581%25AE1%25E3%2581%25A4%25E3%2581%25AE%25E3%2582%25BB%25E3%2583%25AB%25E3%2581%25AE%25E4%25B8%25AD%25E3%2581%25A7JSON%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%2592%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2587%25E3%2583%25B3%25E3%2583%2588%25E3%2582%2592%25E3%2581%25A4%25E3%2581%2591%25E3%2581%25A6%25E3%2582%258F%25E3%2581%258B%25E3%2582%258A%25E3%2582%2584%25E3%2581%2599%25E3%2581%258F%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:purratto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNhODdjNTc4MzguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>purratto</dc:creator></item><item><title><![CDATA[Next.js14 + ReactでSSR/SSG対応のメイソンリーレイアウトを実装する]]></title><description><![CDATA[こんにちは。音楽ディレクターの村上といいます。
+
+ なつかしの「メイソンリーレイアウト」
+一時期（たぶんjQuery時代）、「メイソンリーレイアウト」って流行りましたよね。
+Pintarestのように複数カラムを隙間なく上から埋めていくレイアウトのことです。
+https://www.pinterest.jp/
+利点はスペースの節約になることで、画像ギャラリーなどでよく使われると思います。
+ただしこのレイアウトはCSSGridだけでは不可能で、クライアントサイドで一度高さを算出しないといけないので、SSRやSSGと相性が悪いです。また、モバイルファーストだと関係ないのと、
+パフォーマンスの...]]></description><link>https://zenn.dev/jun_murakami/articles/261a8e5d0d91b7</link><guid isPermaLink="true">https://zenn.dev/jun_murakami/articles/261a8e5d0d91b7</guid><pubDate>Tue, 13 Aug 2024 02:31:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hDb_L7Gv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Next.js14%2520%252B%2520React%25E3%2581%25A7SSR%252FSSG%25E5%25AF%25BE%25E5%25BF%259C%25E3%2581%25AE%25E3%2583%25A1%25E3%2582%25A4%25E3%2582%25BD%25E3%2583%25B3%25E3%2583%25AA%25E3%2583%25BC%25E3%2583%25AC%25E3%2582%25A4%25E3%2582%25A2%25E3%2582%25A6%25E3%2583%2588%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Jun%2520Murakami%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4WUpGeVFIblVsUDZucHhNYXZtX25qUEx3M1JfanJxRldjdEhDSjlodz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Jun Murakami</dc:creator></item><item><title><![CDATA[【React】リッチテキストエディタ（Quill、Tiptap、Slate...）の考え方や前提知識]]></title><description><![CDATA[
+ 概要
+4年ほどProductionで使っていたリッチテキストエディタ（Quill on Nuxt.js v2）をTiptap on Next.jsに移行しました。
+既存のQuillエディタの使い勝手をTiptapで再現しつつ、改善できるところは改善しつつ、既存の4年分のリッチテキストデータが正しく編集できるようにしなければいけませんでした。
+本記事では移行の具体的なプロセスを解説しようと思っていたのですが、リッチテキストエディタは前提知識があまりに多いため、前提となる知識や考え方を解説しているだけでそこそこのボリュームになりました。そこで、一旦考え方や前提知識をまとめた、という体で公...]]></description><link>https://zenn.dev/meijin/articles/rich-text-editor-basis-knowledge</link><guid isPermaLink="true">https://zenn.dev/meijin/articles/rich-text-editor-basis-knowledge</guid><pubDate>Tue, 13 Aug 2024 00:13:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--WclCROsX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590React%25E3%2580%2591%25E3%2583%25AA%25E3%2583%2583%25E3%2583%2581%25E3%2583%2586%25E3%2582%25AD%25E3%2582%25B9%25E3%2583%2588%25E3%2582%25A8%25E3%2583%2587%25E3%2582%25A3%25E3%2582%25BF%25EF%25BC%2588Quill%25E3%2580%2581Tiptap%25E3%2580%2581Slate...%25EF%25BC%2589%25E3%2581%25AE%25E8%2580%2583%25E3%2581%2588%25E6%2596%25B9%25E3%2582%2584%25E5%2589%258D%25E6%258F%2590%25E7%259F%25A5%25E8%25AD%2598%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:meijin%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pPWmtyWk1nS3djRXl5a2w1X2lVTFZFVmtVVUpkNzkzcjlfejhERjRzPXMyNTAtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>meijin</dc:creator></item><item><title><![CDATA[Hats Protocolを理解する！！]]></title><description><![CDATA[
+
+ はじめに
+みなさん、 Hats Protocol というプロトコルを聞いたことがありますか？？
+https://www.hatsprotocol.xyz/
+Hats Protocolについて調べる機会があったのでその結果をブログ記事にまとめました！！
+
+ Hats Protocolとは何か？
+まずは、 Hats Protocol がどういうプロトコルなのか解説します！
+https://docs.hatsprotocol.xyz/
+Hats Protocolとは、組織の役割(ロール)や権限をプログラム可能なデジタルグラフに変換し、オンチェーンで管理できるようにするためのプロトコルです...]]></description><link>https://zenn.dev/mashharuki/articles/4fc8bb038497aa</link><guid isPermaLink="true">https://zenn.dev/mashharuki/articles/4fc8bb038497aa</guid><pubDate>Mon, 12 Aug 2024 11:35:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lZuKSx5b--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Hats%2520Protocol%25E3%2582%2592%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2599%25E3%2582%258B%25EF%25BC%2581%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Haruki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dIaXowNy12WWVodmV1RVRrNGZoU25LaldfYTVFdmJlYnprWG1XPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Haruki</dc:creator></item><item><title><![CDATA[Markdown内部のJavaScriptにもLinterを効かせたい]]></title><description><![CDATA[
+ はじめに
+普段自分が記事を書く時にコードブロック内の記述にLintを効かせたいことがたまにあります。
+実際に動いているコードからコピーしてくる場合などはあまり心配はいらないのですが、サクッと記述例を書く時に不安があったので@eslint/markdownを導入してある程度のチェックは自動で行ってくれるようにしました。
+
+ 導入方法について
+TypeScript向けのLinterルールを構成していきます。
+また、設定ファイルはFlatConfig形式ですので古い設定ファイルの場合は読み替えてください。
+https://eslint.org/docs/latest/use/configu...]]></description><link>https://zenn.dev/ken7253/articles/eslint-for-zenn</link><guid isPermaLink="true">https://zenn.dev/ken7253/articles/eslint-for-zenn</guid><pubDate>Mon, 12 Aug 2024 09:35:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--uJ7TNLME--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Markdown%25E5%2586%2585%25E9%2583%25A8%25E3%2581%25AEJavaScript%25E3%2581%25AB%25E3%2582%2582Linter%25E3%2582%2592%25E5%258A%25B9%25E3%2581%258B%25E3%2581%259B%25E3%2581%259F%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ken7253%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJmNDc1OTM1ZDUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ken7253</dc:creator></item><item><title><![CDATA[dnd kitなるものを使ってみた]]></title><description><![CDATA[
+ Drag&amp;Dropできる機能を提供
+Reactで、ドラッグ＆ドロップする機能を実装したい。dnd kitという便利なパッケージを紹介してもらい使ってみました。
+offical
+add package:
+npm install @dnd-kit/core @dnd-kit/sortable @dnd-kit/utilities
+今回は、ダミーの配列を並び替えるだけですが、TypeScriptで書いているので、データ型の書き方ではまりました。こちらの書き方を参考にしてもらえると、UIに表示されているリストを並び替えるロジックの学習はできます。
+SortableList.tsxを作...]]></description><link>https://zenn.dev/joo_hashi/articles/8170826e75ccd8</link><guid isPermaLink="true">https://zenn.dev/joo_hashi/articles/8170826e75ccd8</guid><pubDate>Mon, 12 Aug 2024 04:31:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--62OeSA3z--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:dnd%2520kit%25E3%2581%25AA%25E3%2582%258B%25E3%2582%2582%25E3%2581%25AE%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:JboyHashimoto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNjOTBiY2M0M2YuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>JboyHashimoto</dc:creator></item><item><title><![CDATA[【Astro ✖️ React Hook Form】確認画面付きのフォームを作る]]></title><description><![CDATA[
+ はじめに
+Astro で確認画面付きのフォームを作る方法です。
+バリデーションは React Hook Form と Zod、確認画面へのデータの受け渡しは sessionStrage を使用します。
+
+ 完成物
+https://astro-form-ten.vercel.app/
+※ 送信機能は実装していません。
+
+ ファイル構成
+|- components
+| |- Form.tsx
+| |- Confirm.tsx
+|
+|- pages
+| |- index.astro
+| |- confirm.astro
+| |- thanks.astro
+
+ ライブラリのインストール
+As...]]></description><link>https://zenn.dev/fujikawa_dev/articles/astro-confirm-form</link><guid isPermaLink="true">https://zenn.dev/fujikawa_dev/articles/astro-confirm-form</guid><pubDate>Mon, 12 Aug 2024 02:48:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--SpdAODcJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Astro%2520%2520%2520React%2520Hook%2520Form%25E3%2580%2591%25E7%25A2%25BA%25E8%25AA%258D%25E7%2594%25BB%25E9%259D%25A2%25E4%25BB%2598%25E3%2581%258D%25E3%2581%25AE%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25BC%25E3%2583%25A0%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:fuji%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0ZGxLN0NUMkRKV1ZKdTM1dDU5RnpaMWdLcHQxNElnMndUUDZuemRvOEgxMFE9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>fuji</dc:creator></item><item><title><![CDATA[TypeScriptで「選択肢」の定義をEnum的な定数にまとめる――satisfiesとSSoTもあるよ]]></title><description><![CDATA[ソート順の選択プルダウンがある一覧系ページを実装するとき、選択肢たちの管理方法に頭を悩ませることが多いと思います。
+
+商品一覧ページの概要
+
+ソート順プルダウンの選択肢たち
+上の画像に示したような場合だと、
+
+《クエリパラメータ》と《選択肢》の間の相互変換
+
+
+?sort=price&amp;order=desc &lt;--&gt; 「価格が高い順」
+
+
+《select の状態に使うための文字列》と《選択肢》の間の相互変換
+
+&lt;option value={id}&gt;{label}&lt;/option&gt;
+クエリパラメータが sort order の2つあり、それらをその...]]></description><link>https://zenn.dev/yumemi_inc/articles/ts-enum-like-const</link><guid isPermaLink="true">https://zenn.dev/yumemi_inc/articles/ts-enum-like-const</guid><pubDate>Mon, 12 Aug 2024 02:42:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--zsghp4-x--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%25E3%2581%25A7%25E3%2580%258C%25E9%2581%25B8%25E6%258A%259E%25E8%2582%25A2%25E3%2580%258D%25E3%2581%25AE%25E5%25AE%259A%25E7%25BE%25A9%25E3%2582%2592Enum%25E7%259A%2584%25E3%2581%25AA%25E5%25AE%259A%25E6%2595%25B0%25E3%2581%25AB%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2582%258B%25E2%2580%2595%25E2%2580%2595satisfies%25E3%2581%25A8SSoT%25E3%2582%2582%25E3%2581%2582%25E3%2582%258B%25E3%2582%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Honey32%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U2MzAxMTgwMzUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2582%2586%25E3%2582%2581%25E3%2581%25BF%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JjYzg0MmQ4YTAuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Honey32</dc:creator></item><item><title><![CDATA[Google Cloud Managed Service for PrometheusでPrismaのコネクション数をチューニングする]]></title><description><![CDATA[業務で Google Cloud Managed Service for Prometheus を使って Cloud Run で動作するアプリケーションの Prisma のコネクション数をチューニングする機会があったので、備忘録もかねて手順を共有します。
+少しでも同じような状況の方の参考になれば幸いです。
+
+ 環境情報
+
+Prisma: v5.10.2
+NestJS: v10.3.8
+TypeScript: v5.1.6
+Node.js: v20.12.2
+GoogleCloudPlatform/run-gmp-sidecar: v1.1.1
+
+
+ Prisma のコネクションについて
+...]]></description><link>https://zenn.dev/newbee1958/articles/9c23645f3e30ea</link><guid isPermaLink="true">https://zenn.dev/newbee1958/articles/9c23645f3e30ea</guid><pubDate>Sun, 11 Aug 2024 23:04:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Iso-h4wE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Google%2520Cloud%2520Managed%2520Service%2520for%2520Prometheus%25E3%2581%25A7Prisma%25E3%2581%25AE%25E3%2582%25B3%25E3%2583%258D%25E3%2582%25AF%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hidev%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzMzODVhNDg4NjEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hidev</dc:creator></item><item><title><![CDATA[Svelte Writableストア 概説]]></title><description><![CDATA[
+ ストアとは
+Svelteにおいて，変数は通常，単一のコンポーネント内でしか使用できない．しかし，アプリケーションが複雑になるにつれて，複数のコンポーネント間で状態を共有したい場面が出てくる．このような場合，Svelteの「ストア」という仕組みを使用することで，複数のコンポーネント間で変数を簡単に共有することが可能となる．
+Svelteには，用途に応じて使い分けることができるいくつかのストアタイプが用意されている．具体的には，以下の4種類が存在する．
+
+
+Writableストア: 値の参照および更新が可能なストア．最も基本的でよく使われるストアタイプ．
+
+Readableストア: 値の...]]></description><link>https://zenn.dev/serada/articles/20240809-svelte-writable-store</link><guid isPermaLink="true">https://zenn.dev/serada/articles/20240809-svelte-writable-store</guid><pubDate>Sun, 11 Aug 2024 17:47:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ZlJPIqEP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Svelte%2520Writable%25E3%2582%25B9%25E3%2583%2588%25E3%2582%25A2%2520%25E6%25A6%2582%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Serada%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE4ZGIwYzNlZjQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Serada</dc:creator></item><item><title><![CDATA[Prepare for Huckson Internship]]></title><description><![CDATA[
+ TypeScript
+こちらの記事を参考に，TypeScript の基本的な使い方を学びます．
+
+ 静的型付け
+
+TypeScript は，静的型付け言語
+
+C 言語，Java も同じ
+コンパイル時に変数の型が定まる言語
+
+型にまつわる問題はプログラムを実行しなくても発見できる
+
+
+
+
+動的型付け言語
+
+Python，Ruby，JavaScript
+実行時に変数の型が定まる言語 - 型にまつわる問題はプログラムを実行しないと発見できない
+詳しくはこちら：静的型付け
+
+
+
+
+
+ アロー関数
+https://typescriptbook.jp/reference/functions/ar...]]></description><link>https://zenn.dev/os515/articles/intern-huckson-mynav</link><guid isPermaLink="true">https://zenn.dev/os515/articles/intern-huckson-mynav</guid><pubDate>Sun, 11 Aug 2024 11:52:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Bapm53qd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:Prepare%2520for%2520Huckson%2520Internship%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:soso%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4WXhTVFZ2dEMxc1c4N3NudWhKSVp0YTVMUWpsMUR5VW1YVTl5UFY2Zz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>soso</dc:creator></item><item><title><![CDATA[TypeScriptでasync関数の戻り値の型を取得する]]></title><description><![CDATA[TypeScriptで開発を行う際、特にPrismaのようなライブラリを使用すると、複雑な型の関数に直面することがよくあります。この記事では、TypeScriptのユーティリティ型を活用して、非同期関数の戻り値の型を取得する方法を紹介します。
+
+ ReturnTypeで関数の戻り値の型を取得する
+まず、TypeScriptのユーティリティ型ReturnTypeを使用して、関数の戻り値の型を取得する方法を見ていきます。以下のようなPrismaを使用した関数があるとします。
+type FuncReturnType = ReturnType&lt;typeof getPostsForUser&...]]></description><link>https://zenn.dev/nomikazu_x/articles/typescript-get-the-return-type-of-async-function</link><guid isPermaLink="true">https://zenn.dev/nomikazu_x/articles/typescript-get-the-return-type-of-async-function</guid><pubDate>Sun, 11 Aug 2024 11:00:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vfDvIU4C--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%25E3%2581%25A7async%25E9%2596%25A2%25E6%2595%25B0%25E3%2581%25AE%25E6%2588%25BB%25E3%2582%258A%25E5%2580%25A4%25E3%2581%25AE%25E5%259E%258B%25E3%2582%2592%25E5%258F%2596%25E5%25BE%2597%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nomikazu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E5Zjg3ZDg5NmIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nomikazu</dc:creator></item><item><title><![CDATA[Redux Toolkitの値を表示する]]></title><description><![CDATA[
+ stateとして持っている値を表示する
+FlutterのRiverpodを使ってる人の感覚だと、なかなか馴染めないが、Reduxと呼ばれてる状態管理ライブラリを使うときに、値を表示するだけやってみたかったが、どうしたらいいものかと思った。useStateだったらすぐわかるのだが、Reduxは難しいと思った。
+クラスで書いてないしな。でも仕組みはなんとなくわかった。stateには、初期値があって、それを操作することができる。状態管理してくれるもの。試しにダミーの値を入れたものを表示するのをやってみた。
+
+ Storeを作成
+アプリケーションの全ての場所から、アクセスすることができるSt...]]></description><link>https://zenn.dev/joo_hashi/articles/8ee99e1a960df4</link><guid isPermaLink="true">https://zenn.dev/joo_hashi/articles/8ee99e1a960df4</guid><pubDate>Sun, 11 Aug 2024 09:53:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ql7QU3EX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Redux%2520Toolkit%25E3%2581%25AE%25E5%2580%25A4%25E3%2582%2592%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:JboyHashimoto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNjOTBiY2M0M2YuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>JboyHashimoto</dc:creator></item><item><title><![CDATA[Reactで、lexicalを使う]]></title><description><![CDATA[
+ リッチエディターを作ってみる
+リッチエディターというテキストを太字にしたり、斜体にするライブラリがあるので、試してみた。公式の通りにやっても良い感じで作れなかったので、AIを力を借りて、見た目だけは、いい感じに作ってみました。
+official
+こちらがリッチエディターが使えるソースコード。TypeScriptで書くと型のエラーでハマるので設定で苦労した。styled-componentで、レイアウトは整えております。
+import { useState, useEffect } from 'react';
+import styled, { keyframes } from 'sty...]]></description><link>https://zenn.dev/joo_hashi/articles/42c7c74ed80824</link><guid isPermaLink="true">https://zenn.dev/joo_hashi/articles/42c7c74ed80824</guid><pubDate>Sun, 11 Aug 2024 07:34:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bJzd6YBi--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%25E3%2581%25A7%25E3%2580%2581lexical%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:JboyHashimoto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNjOTBiY2M0M2YuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>JboyHashimoto</dc:creator></item><item><title><![CDATA[Apollo Clientに入門する]]></title><description><![CDATA[
+ What is Apollo Client?
+official
+Apollo ClientはJavaScriptのための包括的な状態管理ライブラリです。ローカルとリモートの両方のデータをGraphQLで管理できます。アプリケーションデータのフェッチ、キャッシュ、変更に使用し、UIを自動的に更新します。
+Apollo Clientは、経済的で、予測可能で、現代の開発プラクティスに沿った宣言的な方法でコードを構成するのに役立ちます。コアの@apollo/clientライブラリは、Reactとの組み込み統合を提供し、より大規模なApolloコミュニティは、以下を維持します。
+
+ コア機能
+...]]></description><link>https://zenn.dev/joo_hashi/articles/5cd9d8c4306bd9</link><guid isPermaLink="true">https://zenn.dev/joo_hashi/articles/5cd9d8c4306bd9</guid><pubDate>Sun, 11 Aug 2024 05:12:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---K5nSlPC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Apollo%2520Client%25E3%2581%25AB%25E5%2585%25A5%25E9%2596%2580%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:JboyHashimoto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNjOTBiY2M0M2YuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>JboyHashimoto</dc:creator></item><item><title><![CDATA[TypeScript のコーディング環境を作る：プロジェクト作成から esbuild, ESLint などの導入と設定]]></title><description><![CDATA[TypeScript でちょっと何か書きたい！実行したい！
+
+だけどプロジェクトの作成から各種ライブラリの導入や設定はどうすればいいのか。毎回そのあたりで面倒になってしまうそんな自分に向けたメモとして作成しています。
+
+VS Code で TypeScript で何かのスクリプトを書き始めるまでの準備を行うことを目的としています。記載中の項目もありますが、どなたかのお役に立てば幸いです。
+
+チャプター 01 にコマンドや設定などまとめており、基本的にはチャプター 01 のみで準備ができるよう記載しています。以降のチャプターは 01 の手順の詳細、またはメモ書き的な内容が含まれます。よってチャプター 01 の記載内容と相違がある場合があります。]]></description><link>https://zenn.dev/key_luvless/books/54b91f977edf05</link><guid isPermaLink="true">https://zenn.dev/key_luvless/books/54b91f977edf05</guid><pubDate>Sun, 11 Aug 2024 05:07:32 GMT</pubDate><dc:creator>k-ta-yamada</dc:creator></item><item><title><![CDATA[Remix SPA Modeでyamlから履歴書を生成するWebアプリ作った]]></title><description><![CDATA[こんにちは、今回はRemix SPA Modeを使って、yamlから履歴書を生成するWebアプリを作ってみたので紹介していきます。
+
+ 作ったもの
+
+ URL
+https://resume-generator-a21.pages.dev/
+
+ ソースコード
+https://github.com/dl10yr/resume-generator
+
+ 動作イメージ
+
+
+ ざっくりした説明
+
+ Remix SPAモード使った
+今回アプリを作った目的はReactでサクッとSPAを作るときのフレームワークとしてRemixってどうなの？を体感しておくためです。
+
+ yamlで情報管理
+jsonでもya...]]></description><link>https://zenn.dev/dl10yr/articles/resume-generator</link><guid isPermaLink="true">https://zenn.dev/dl10yr/articles/resume-generator</guid><pubDate>Sun, 11 Aug 2024 01:34:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ErcplKW---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Remix%2520SPA%2520Mode%25E3%2581%25A7yaml%25E3%2581%258B%25E3%2582%2589%25E5%25B1%25A5%25E6%25AD%25B4%25E6%259B%25B8%25E3%2582%2592%25E7%2594%259F%25E6%2588%2590%25E3%2581%2599%25E3%2582%258BWeb%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:dl10yr%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvZC5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>dl10yr</dc:creator></item><item><title><![CDATA[Redux Toolkit スライスの基本: 初期状態、リデューサー、extraReducers の使い方]]></title><description><![CDATA[スライスとは、Redux Toolkitが提供する機能の一つで、アプリケーションの状態管理を簡単に行うためのもの。スライスは、機能やドメインに関連する状態、リデューサー、対応するアクションを一つのまとまりとして管理し、特に比較的大規模なアプリケーションでよく使用される。
+Redux Toolkit と RTK Query: 基本概要についてはこちらにまとめました。
+
+ スライスの具体的な機能
+
+ 1. 初期状態の設定
+スライス内で管理する状態の初期値を定義する。
+
+ 2. リデューサーの定義
+状態を変更するための関数（リデューサー）をまとめて定義する。
+
+ 3. extraReducer...]]></description><link>https://zenn.dev/kkoisland/articles/8ba70e2cd8f7a8</link><guid isPermaLink="true">https://zenn.dev/kkoisland/articles/8ba70e2cd8f7a8</guid><pubDate>Sat, 10 Aug 2024 23:36:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--X5jCoAyi--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Redux%2520Toolkit%2520%25E3%2582%25B9%25E3%2583%25A9%25E3%2582%25A4%25E3%2582%25B9%25E3%2581%25AE%25E5%259F%25BA%25E6%259C%25AC%253A%2520%25E5%2588%259D%25E6%259C%259F%25E7%258A%25B6%25E6%2585%258B%25E3%2580%2581%25E3%2583%25AA%25E3%2583%2587%25E3%2583%25A5%25E3%2583%25BC%25E3%2582%25B5%25E3%2583%25BC%25E3%2580%2581extraReducers%2520%25E3%2581%25AE%25E4%25BD%25BF%25E3%2581%2584%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kkoisland%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E2MzIwYmQ0NDQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kkoisland</dc:creator></item><item><title><![CDATA[ReactHookFormとZodで始めるフォームバリデーション]]></title><description><![CDATA[※本記事は生成AIを使用して作成されました。
+AI言語モデル: gpt-4o-mini
+
+
+ React Hook FormとZodで始めるフォームバリデーション
+
+ はじめに
+Webアプリケーションにおいて、フォームはユーザーからのデータを収集する重要な要素です。ユーザーが入力したデータが正しい形式であるか、必須項目が入力されているかを確認することは、アプリケーションの信頼性を高めるために不可欠です。しかし、フォームのバリデーションはしばしば複雑で、開発者にとって頭を悩ませる課題となります。特に、ユーザーが誤った情報を入力した場合、適切なエラーメッセージを表示し、再入力を促すことが求め...]]></description><link>https://zenn.dev/llm_robot/articles/20240811-react-hook-form-zod-validation</link><guid isPermaLink="true">https://zenn.dev/llm_robot/articles/20240811-react-hook-form-zod-validation</guid><pubDate>Sat, 10 Aug 2024 22:07:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--iCsjm-j1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ReactHookForm%25E3%2581%25A8Zod%25E3%2581%25A7%25E5%25A7%258B%25E3%2582%2581%25E3%2582%258B%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25BC%25E3%2583%25A0%25E3%2583%2590%25E3%2583%25AA%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:AIZAWA%2520version%253A0.0.2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAwMTE3MGM1NDcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>AIZAWA version:0.0.2</dc:creator></item></channel></rss>
