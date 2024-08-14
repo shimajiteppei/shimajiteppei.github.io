@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Wed, 14 Aug 2024 07:11:01 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[AI動画解析サービスを試してみる]]></title><description><![CDATA[AmazonのAmazon Rekognition VideoとGoogleのVideo AI(Video Intelligence API)の解析を使用してみて、それぞれどのような結果が得られるのか確認したいと思います。
+今回は1回目ということでAmazon Rekognitionを使うまでの設定とPythonスクリプトを使用した解析を実行して結果をJSONで取得してみます。
+
+ Amazon Rekognitionとは？
+詳しくは公式Webサイト見ていただくのが一番ですが、簡単に言えばAWSのS3に保存してある画像や動画に対して顔検出、テキスト検出、ラベル検出などの解析が行えるサービ...]]></description><link>https://zenn.dev/ubiblog2/articles/018a9b6aeeef36</link><guid isPermaLink="true">https://zenn.dev/ubiblog2/articles/018a9b6aeeef36</guid><pubDate>Wed, 14 Aug 2024 04:48:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--51LRsE3B--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AI%25E5%258B%2595%25E7%2594%25BB%25E8%25A7%25A3%25E6%259E%2590%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2593%25E3%2582%25B9%25E3%2582%2592%25E8%25A9%25A6%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:TechSavvy_24%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ3YTVmZDAwZWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>TechSavvy_24</dc:creator></item><item><title><![CDATA[重回帰分析の勉強に使えそうなダミーデータを生成したい]]></title><description><![CDATA[
+ はじめに
+重回帰分析の勉強に使えそうなダミーデータを作ってみました。また、このダミーデータが期待したデータになっているか確認するスクリプトも作りました。
+
+ モジュール
+スクリプト実行環境のモジュール情報です。
+$ pip list
+Package         Version
+--------------- ------------
+numpy           1.26.3
+pandas          2.2.2
+statsmodels     0.14.2
+
+ ダミーデータを作るスクリプト
+コンソールでpython createDummyDate.pyと実行するとdum...]]></description><link>https://zenn.dev/zgw426/articles/23038bb9cbebea</link><guid isPermaLink="true">https://zenn.dev/zgw426/articles/23038bb9cbebea</guid><pubDate>Tue, 13 Aug 2024 22:37:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--OsyCQWUe--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E9%2587%258D%25E5%259B%259E%25E5%25B8%25B0%25E5%2588%2586%25E6%259E%2590%25E3%2581%25AE%25E5%258B%2589%25E5%25BC%25B7%25E3%2581%25AB%25E4%25BD%25BF%25E3%2581%2588%25E3%2581%259D%25E3%2581%2586%25E3%2581%25AA%25E3%2583%2580%25E3%2583%259F%25E3%2583%25BC%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%2592%25E7%2594%259F%25E6%2588%2590%25E3%2581%2597%25E3%2581%259F%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:suo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E5OWNjMjMzNTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>suo</dc:creator></item><item><title><![CDATA[366C]]></title><description><![CDATA[q = int(input())
+
+cnt = [0]*1000000
+
+ans = 0
+
+for _ in range(q):
+    t,*x = map(int,input().split())
+
+    if t == 1:
+        #インデックスそろえてるだけ？
+        x[0] -= 1
+        cnt[x[0]] += 1
+        if cnt[x[0]] == 1:
+            ans += 1
+
+    elif t == 2:
+        
+        x[0] -= 1
+        cnt[x[0]] -= 1...]]></description><link>https://zenn.dev/5151/articles/77b0b4aba61b34</link><guid isPermaLink="true">https://zenn.dev/5151/articles/77b0b4aba61b34</guid><pubDate>Tue, 13 Aug 2024 14:36:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wwKZEnnk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_80:366C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:miChill%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M2N2EzZjRmNDUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>miChill</dc:creator></item><item><title><![CDATA[TkEasyGUIテーマの変更方法]]></title><description><![CDATA[TkEasyGUIはtkinterをベースに作ってあるので見慣れたテーマかと思います
+
+実行環境
+
+Windows
+Python 3.11.9
+TkEasyGUI 0.2.73
+
+
+!
+TkEasyGUI 0.2.73バージョン時のテーマの変更方法になります。
+バージョンが変わることで仕様が変更されるかもしれません。
+
+https://github.com/kujirahand/tkeasygui-python/blob/main/docs/TkEasyGUI/utils-py.md#set_theme
+
+ テーマに関する関数
+
+ テーマ一覧の取得
+eg.get_tnemes()
+eg....]]></description><link>https://zenn.dev/shiro_toy_box/articles/03ccd3bfa8d62c</link><guid isPermaLink="true">https://zenn.dev/shiro_toy_box/articles/03ccd3bfa8d62c</guid><pubDate>Tue, 13 Aug 2024 12:56:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--pS2OMAq9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TkEasyGUI%25E3%2583%2586%25E3%2583%25BC%25E3%2583%259E%25E3%2581%25AE%25E5%25A4%2589%25E6%259B%25B4%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2597%25E3%2582%258D%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2EyNzY5NDdhMzAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>しろ</dc:creator></item><item><title><![CDATA[Cloud Vision APIでお手軽にゲーム画像からテキスト抽出してみた！]]></title><description><![CDATA[
+ まえがき
+うわーん、ゲーム画像からテキストが抽出したいよー
+でも「画像　テキスト　プログラム」で調べてもOCRエンジンをインストールしたりしなきゃいけないし、精度上げようとすると大変そうだよー
+Googleレンズとかあるし、GoogleがそういうAPI公開してたりしないのー
+https://cloud.google.com/vision/docs?hl=ja
+あるじゃん！！！
+
+ Cloud Visionとは？
+Googleが提供しているクラウドサービス「Google Cloud」で提供されているプロダクトの１つで、画像や動画といったメディアから
+
+テキストを抽出する
+顔認識、ランド...]]></description><link>https://zenn.dev/nanae/articles/062de920ab9ed7</link><guid isPermaLink="true">https://zenn.dev/nanae/articles/062de920ab9ed7</guid><pubDate>Tue, 13 Aug 2024 12:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8i7aM0-H--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Cloud%2520Vision%2520API%25E3%2581%25A7%25E3%2581%258A%25E6%2589%258B%25E8%25BB%25BD%25E3%2581%25AB%25E3%2582%25B2%25E3%2583%25BC%25E3%2583%25A0%25E7%2594%25BB%25E5%2583%258F%25E3%2581%258B%25E3%2582%2589%25E3%2583%2586%25E3%2582%25AD%25E3%2582%25B9%25E3%2583%2588%25E6%258A%25BD%25E5%2587%25BA%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nanae%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzEyOWRhNGI5NzcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nanae</dc:creator></item><item><title><![CDATA[Ragasのライブラリを使ってテストデータを作成する]]></title><description><![CDATA[
+ やりたいこと
+Ragasと言えばRAGの検索・生成精度を定量的に評価できるフレームワークですが、テストデータも作成できることを知ったので、紹介します。
+
+ 背景
+Ragasの公式ドキュメントを見てみましょう。
+https://docs.ragas.io/en/stable/concepts/testset_generation.html
+
+テストデータ生成におけるRagasの違いは？
+Ragasは評価データ生成に斬新なアプローチをとります。理想的な評価データセットは、様々な難易度の問題を含む、本番で出題される様々なタイプの問題を網羅する必要があります。デフォルトのLLMは、共通のパス...]]></description><link>https://zenn.dev/headwaters/articles/c1382c20373cf5</link><guid isPermaLink="true">https://zenn.dev/headwaters/articles/c1382c20373cf5</guid><pubDate>Tue, 13 Aug 2024 11:30:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bxvwb8fH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ragas%25E3%2581%25AE%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%2592%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:akihiro%2520nakamura%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZjNGExY2UxMDYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2598%25E3%2583%2583%25E3%2583%2589%25E3%2582%25A6%25E3%2582%25A9%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%25BC%25E3%2582%25B9%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA5MjU4ZWEwY2QuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>akihiro nakamura</dc:creator></item><item><title><![CDATA[LangGraphでエージェントシステムを簡単に構築]]></title><description><![CDATA[
+ LangGraphでエージェントシステムを簡単に構築
+この記事では、エージェントシステムを簡単に構築するためのツール「LangGraph」を紹介します。LangGraphは、複雑なタスクを効率よく処理するための仕組みを簡潔に実装できるツールです。
+
+ エージェントとは
+エージェントは、AI（LLM）を活用して、ツールを使いこなしながら複雑なタスクを自動で処理するシステムです。例えば、検索やデータ分析など、複数のツールを組み合わせて高度な目標を達成します。
+
+ LLMとエージェントの違い
+
+
+LLM: 単一のタスクに対して、入力された内容を処理し、結果を返します。
+
+エージェント: 複...]]></description><link>https://zenn.dev/niix/articles/26319d33e3ce89</link><guid isPermaLink="true">https://zenn.dev/niix/articles/26319d33e3ce89</guid><pubDate>Tue, 13 Aug 2024 11:18:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--HRiUZFsC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:LangGraph%25E3%2581%25A7%25E3%2582%25A8%25E3%2583%25BC%25E3%2582%25B8%25E3%2582%25A7%25E3%2583%25B3%25E3%2583%2588%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%25E3%2582%2592%25E7%25B0%25A1%25E5%258D%2598%25E3%2581%25AB%25E6%25A7%258B%25E7%25AF%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:n%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFUWEFKekpZM1BNUE4xNjhseThYd2FmeUdkcHpLQzNMY1lZZGNOaHpGdWg9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>n</dc:creator></item><item><title><![CDATA[[統計学] ベータ分布の可視化・期待値・分散・最尤推定・ベイズモデル]]></title><description><![CDATA[
+ 確率密度関数 (probability density function)
+ベータ分布の確率密度関数は以下のように定義される．ただし，xの定義行きに注意せよ．
+
+\begin{align*}
+f_{X}(x) &amp;= B(\alpha, \beta)^{-1} x^{\alpha-1} (1-x)^{\beta-1} \\
+x &amp;\in [0, 1]
+\end{align*}
+
+
+ 可視化
+ベータ分布の確率密度関数を確認する. 初めに a+b=10 に固定しながら a,b の値を変化させる.
+
+次に a/b を固定しながら a,b の絶対値を大きくしていく様子を可視化す...]]></description><link>https://zenn.dev/shundeveloper/articles/67dce99edba5a3</link><guid isPermaLink="true">https://zenn.dev/shundeveloper/articles/67dce99edba5a3</guid><pubDate>Tue, 13 Aug 2024 06:21:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--D4EhvtXx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255B%25E7%25B5%25B1%25E8%25A8%2588%25E5%25AD%25A6%255D%2520%25E3%2583%2599%25E3%2583%25BC%25E3%2582%25BF%25E5%2588%2586%25E5%25B8%2583%25E3%2581%25AE%25E5%258F%25AF%25E8%25A6%2596%25E5%258C%2596%25E3%2583%25BB%25E6%259C%259F%25E5%25BE%2585%25E5%2580%25A4%25E3%2583%25BB%25E5%2588%2586%25E6%2595%25A3%25E3%2583%25BB%25E6%259C%2580%25E5%25B0%25A4%25E6%258E%25A8%25E5%25AE%259A%25E3%2583%25BB%25E3%2583%2599%25E3%2582%25A4%25E3%2582%25BA%25E3%2583%25A2%25E3%2583%2587%25E3%2583%25AB%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:shunsock%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY3Y2U4NzUxNzkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>shunsock</dc:creator></item><item><title><![CDATA[Poetryを使用した仮想環境の有効化とインタープリターの指定]]></title><description><![CDATA[
+ 手順
+
+
+仮想環境の有効化
+poetry shell
+
+このコマンドは新しいシェルセッションを起動し、仮想環境をアクティベートします。
+
+
+仮想環境のアクティベーション（bash以外のシェルの場合）
+emulate bash -c '. /path/to/virtualenv/bin/activate'
+
+/path/to/virtualenv/ は実際の仮想環境のパスに置き換えてください。
+注: このステップはzshなど、bash以外のシェルを使用している場合に必要です。
+
+
+Pythonインタープリターの確認
+which python
+
+このコマンドで、仮想環境内のPythonイ...]]></description><link>https://zenn.dev/ytksato/articles/33e4d9a03fd660</link><guid isPermaLink="true">https://zenn.dev/ytksato/articles/33e4d9a03fd660</guid><pubDate>Tue, 13 Aug 2024 01:40:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Z6KGuO65--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Poetry%25E3%2582%2592%25E4%25BD%25BF%25E7%2594%25A8%25E3%2581%2597%25E3%2581%259F%25E4%25BB%25AE%25E6%2583%25B3%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25AE%25E6%259C%2589%25E5%258A%25B9%25E5%258C%2596%25E3%2581%25A8%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%2597%25E3%2583%25AA%25E3%2582%25BF%25E3%2583%25BC%25E3%2581%25AE%25E6%258C%2587%25E5%25AE%259A%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yutaka%2520Sato%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ViZmI0N2E0M2UuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yutaka Sato</dc:creator></item><item><title><![CDATA[Pythonで再現する標準ベイズ統計学6章]]></title><description><![CDATA[
+ はじめに
+本記事では標準ベイズ統計学の6章で掲載されている図表やモデルをPythonで実装する方法に関して説明します。
+
+ 6章：ギブスサンプラーによる事後分布の近似
+複数のパラメータを持つ統計モデルでは、事後分布の直接的なサンプリングが困難な場合が多いです。しかし、ギブスサンプラーという手法を使えば、この問題を効果的に解決できます。6章ではそのギブスサンプラーに関する説明がされています。
+
+ 離散近似に基づく同時および周辺事後分布
+図6.1では離散近似に基づく同時および周辺事後分布をプロットしています。平均と精度の事後分布を連続的な領域で計算していますが、実際の計算では有限のグリッ...]]></description><link>https://zenn.dev/dmmdata/articles/bayes_chapter6</link><guid isPermaLink="true">https://zenn.dev/dmmdata/articles/bayes_chapter6</guid><pubDate>Tue, 13 Aug 2024 01:03:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--J7CJ9712--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A7%25E5%2586%258D%25E7%258F%25BE%25E3%2581%2599%25E3%2582%258B%25E6%25A8%2599%25E6%25BA%2596%25E3%2583%2599%25E3%2582%25A4%25E3%2582%25BA%25E7%25B5%25B1%25E8%25A8%2588%25E5%25AD%25A66%25E7%25AB%25A0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:stochi%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU4MjQ4ZWRhNzUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:DMM%2520Data%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzIwYjk2MWM1NjQuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>stochi</dc:creator></item><item><title><![CDATA[Deep-Live-Cam を Windows + GPU で動かすガイド]]></title><description><![CDATA[
+ 環境のセットアップ
+Deep-Live-Cam を正しく動作させるためには、適切な環境設定が不可欠です。以下のソフトウェアをインストールしてください：
+
+Python 3.10（重要：3.12 ではエラーが発生するため、必ず 3.10 を使用してください）
+Git（ソースコードの取得に必要）
+ffmpeg（ビデオ処理に使用）
+Visual Studio 2022 ランタイム（Windows での C++ ライブラリのサポートに必要）
+NVIDIA GPU ユーザーの場合：CUDA Toolkit 11.8（GPUに必要）
+
+これらのツールは、Deep-Live-Cam の動作に不可欠...]]></description><link>https://zenn.dev/sunwood_ai_labs/articles/deep-live-cam-windows-gpu-guide</link><guid isPermaLink="true">https://zenn.dev/sunwood_ai_labs/articles/deep-live-cam-windows-gpu-guide</guid><pubDate>Tue, 13 Aug 2024 00:50:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0EbwFBqn--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Deep-Live-Cam%2520%25E3%2582%2592%2520Windows%2520%252B%2520GPU%2520%25E3%2581%25A7%25E5%258B%2595%25E3%2581%258B%25E3%2581%2599%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Maki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTDdpSmVyNldLVlpKLUd4N054QWVuSFVtYXQ3MUhhd1NXaU5hRG5FTnZiMXZZdHBIaGs9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Maki</dc:creator></item><item><title><![CDATA[PythonによるNotionデータベースのページを自動的に作成]]></title><description><![CDATA[
+ 1. 背景
+最近の仕事では、ドキュメントを自動処理し、処理結果をNotionのページ内のデータベースに自動保存し、さらに結果を保存するためのNotionページを自動作成することで、業務フローを加速したいと考えていて、どのように自動化処理を進めればよいでしょうか？
+以下の手順が役に立つことになるなら、嬉しいです！
+
+ 2. Requirements
+
+ Notion API Key
+
+
+取得方法
+
+
+こちらからアクセスする
+
+Integration Nameを作成する
+ワークスペースを選択した上、TypeをInternalを指定する
+
+
+
+
+Capabilitiesを以下のような形で指...]]></description><link>https://zenn.dev/yh007/articles/c3ffa47b04d2bc</link><guid isPermaLink="true">https://zenn.dev/yh007/articles/c3ffa47b04d2bc</guid><pubDate>Mon, 12 Aug 2024 16:06:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--d_AshY_V--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258BNotion%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%2599%25E3%2583%25BC%25E3%2582%25B9%25E3%2581%25AE%25E3%2583%259A%25E3%2583%25BC%25E3%2582%25B8%25E3%2582%2592%25E8%2587%25AA%25E5%258B%2595%25E7%259A%2584%25E3%2581%25AB%25E4%25BD%259C%25E6%2588%2590%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yh007%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSUhFczcxUGg2Njc0YWZiRDlQZDQzVW41M0E4cnpSSnZUZmFkclM0WW5JcWJaRjNRPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yh007</dc:creator></item><item><title><![CDATA[二重倒立振子における制御アルゴリズムの比較]]></title><description><![CDATA[
+ はじめに
+本記事では、物理システムのモデリングをしてシミュレーターの実装を行い、いくつかの主要な制御アルゴリズムを試します。制御応答のグラフを見るだけでなく、実際に物理シミュレーターに制御アルゴリズムを適用する制御工学の一連の流れを体験することで、実践的な基礎知識と各制御手法に対する肌感を身につけることを目的とします。
+今回は制御器の性能をより分かりやすく見るために、不安定系であり、それなりに制御の難しい、1軸トルク入力の二重倒立振子を対象にしました。
+また、本記事で実装されたコードは以下のリポジトリで公開しています。
+https://github.com/kosuke55/cont...]]></description><link>https://zenn.dev/kosuke55/articles/double-pendulum-control-kosuke55</link><guid isPermaLink="true">https://zenn.dev/kosuke55/articles/double-pendulum-control-kosuke55</guid><pubDate>Mon, 12 Aug 2024 12:27:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--FZ0fbvu1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E4%25BA%258C%25E9%2587%258D%25E5%2580%2592%25E7%25AB%258B%25E6%258C%25AF%25E5%25AD%2590%25E3%2581%25AB%25E3%2581%258A%25E3%2581%2591%25E3%2582%258B%25E5%2588%25B6%25E5%25BE%25A1%25E3%2582%25A2%25E3%2583%25AB%25E3%2582%25B4%25E3%2583%25AA%25E3%2582%25BA%25E3%2583%25A0%25E3%2581%25AE%25E6%25AF%2594%25E8%25BC%2583%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kosuke55%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRkMTcyNmZkYWUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kosuke55</dc:creator></item><item><title><![CDATA[Pythonを使用したメール送信スクリプトの作成]]></title><description><![CDATA[
+ はじめに
+この記事では、Pythonを使用してメールを送信するスクリプトの作成方法を紹介します。このスクリプトは、JSONファイルから設定を読み込み、SMTPサーバーを介してメールを送信し、必要に応じてファイルを添付する機能を持っています。
+サンプルコードはGitHubリポジトリで確認できます: python-mail-sender
+
+ 使用するライブラリ
+このスクリプトでは以下のライブラリを使用しています。これらは標準ライブラリに含まれているため、追加のインストールは不要です。
+
+
+json: JSONファイルから設定を読み込むために使用します。
+
+smtplib: SMTPサーバ...]]></description><link>https://zenn.dev/tonbi_attack/articles/98cc69dec3f09c</link><guid isPermaLink="true">https://zenn.dev/tonbi_attack/articles/98cc69dec3f09c</guid><pubDate>Mon, 12 Aug 2024 06:50:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7uQ-VWtp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2582%2592%25E4%25BD%25BF%25E7%2594%25A8%25E3%2581%2597%25E3%2581%259F%25E3%2583%25A1%25E3%2583%25BC%25E3%2583%25AB%25E9%2580%2581%25E4%25BF%25A1%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2583%2588%25E3%2581%25AE%25E4%25BD%259C%25E6%2588%2590%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tonbiattack%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVhZGQ4MThjYjcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tonbiattack</dc:creator></item><item><title><![CDATA[【FastAPI】でMySQLに接続する方法]]></title><description><![CDATA[前回の記事では、FastAPIとDockerを使って簡単なウェブAPIを作成する方法を紹介しました。
+https://zenn.dev/xronotech/articles/273c0bb59173d8
+今回は、その続きとしてFastAPIでMySQLデータベースに接続する方法を紹介します。
+
+ 環境の準備
+まず、MySQLコンテナを追加してDocker Composeで環境を整えます。前回のプロジェクト構成にMySQLコンテナを追加します。
+
+ ディレクトリ構成
+基本的に前回と同じディレクトリ構成を使いますが、docker-compose.ymlにMySQLサービスを追加します。
+fa...]]></description><link>https://zenn.dev/xronotech/articles/46d6dec78a43ce</link><guid isPermaLink="true">https://zenn.dev/xronotech/articles/46d6dec78a43ce</guid><pubDate>Mon, 12 Aug 2024 01:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vqlAFtXF--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590FastAPI%25E3%2580%2591%25E3%2581%25A7MySQL%25E3%2581%25AB%25E6%258E%25A5%25E7%25B6%259A%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:mizukich%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdmMTJiODY3MzAuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BEXronotech%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS2Q2bUgzdERkMVhVWlI3TU5obG1PcWRRSlNMWVVKbE9KNWQ3dXhhRWVxQXJDbDJoVDQ9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mizukich</dc:creator></item><item><title><![CDATA[TerraformでAWS Lambda関数を作成する方法：シンプルな実装ガイド]]></title><description><![CDATA[
+ はじめに
+AWSのサーバーレスコンピューティングサービスであるLambdaは、アプリケーション開発において非常に強力なツールです。本記事では、Terraformを使用してAWS Lambda関数を簡単に作成する方法を、aws-terraform-sandboxプロジェクトのs04_simple_lambdaサンプルを参考に解説します。
+
+
+ プロジェクト構成
+まず、プロジェクトの基本構成を確認しましょう。
+s04_simple_lambda/
+├── main.tf
+├── variables.tf
+├── terraform.tfvars
+├── client.py
+└── lam...]]></description><link>https://zenn.dev/sunwood_ai_labs/articles/create-aws-lambda-function-terraform-simple-guid</link><guid isPermaLink="true">https://zenn.dev/sunwood_ai_labs/articles/create-aws-lambda-function-terraform-simple-guid</guid><pubDate>Sun, 11 Aug 2024 17:29:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--T0SdZKyM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Terraform%25E3%2581%25A7AWS%2520Lambda%25E9%2596%25A2%25E6%2595%25B0%25E3%2582%2592%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%25EF%25BC%259A%25E3%2582%25B7%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AB%25E3%2581%25AA%25E5%25AE%259F%25E8%25A3%2585%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Maki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTDdpSmVyNldLVlpKLUd4N054QWVuSFVtYXQ3MUhhd1NXaU5hRG5FTnZiMXZZdHBIaGs9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Maki</dc:creator></item><item><title><![CDATA[PythonのSQLクエリビルダーPyPikaで動的カスタムSQL文生成方法を考える]]></title><description><![CDATA[
+ TL:DR
+
+
+pypika.terms.Termを継承したクラスを作成
+複数単語のリスト(Type | Any)をインスタンス引数に渡す
+
+__call__()で変数値を辞書として引数に渡し、クラスの型(Type)の単語をそれらで置換したインスタンスを返却
+
+get_sql()で変数値のうちget_sql()が呼べるならget_sql()、それ以外は__str__()を呼び出して" ".join()で結合
+
+
+ 背景
+PyPikaは一般的なINSERTやUPDATEといった基本的なCRUD等はサポートしていて、以下のように記述できる。
+
+qbuild.py
+from pypika ...]]></description><link>https://zenn.dev/nondescript/articles/9314df8cdb20b1</link><guid isPermaLink="true">https://zenn.dev/nondescript/articles/9314df8cdb20b1</guid><pubDate>Sun, 11 Aug 2024 15:10:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Py5a-u5W--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25AESQL%25E3%2582%25AF%25E3%2582%25A8%25E3%2583%25AA%25E3%2583%2593%25E3%2583%25AB%25E3%2583%2580%25E3%2583%25BCPyPika%25E3%2581%25A7%25E5%258B%2595%25E7%259A%2584%25E3%2582%25AB%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%25A0SQL%25E6%2596%2587%25E7%2594%259F%25E6%2588%2590%25E6%2596%25B9%25E6%25B3%2595%25E3%2582%2592%25E8%2580%2583%25E3%2581%2588%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E7%25B4%25A0%25E4%25BA%25BA%25E3%2581%25AE%25E6%2588%25AF%25E8%25A8%2580%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVmYTVmOTBhM2EuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>素人の戯言</dc:creator></item><item><title><![CDATA[OpenVINO™ 生成 AI API を使用して数行のコードで高速な生成 AI アプリを作成する方法]]></title><description><![CDATA[この記事は、Medium に公開されている「How to Build Faster GenAI Apps with Fewer Lines of Code using OpenVINO™ GenAI API」の日本語参考訳です。原文は更新される可能性があります。原文と翻訳文の内容が異なる場合は原文を優先してください。
+この記事の PDF 版は下記からご利用になれます。
+https://www.isus.jp/wp-content/uploads/pdf/openvino_29_how-to-build-faster-genai-apps-using-openvino-genai-api....]]></description><link>https://zenn.dev/intel_developer/articles/36b70c1cbc1624</link><guid isPermaLink="true">https://zenn.dev/intel_developer/articles/36b70c1cbc1624</guid><pubDate>Sun, 11 Aug 2024 07:18:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hCchqds8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:OpenVINO%2520%2520%25E7%2594%259F%25E6%2588%2590%2520AI%2520API%2520%25E3%2582%2592%25E4%25BD%25BF%25E7%2594%25A8%25E3%2581%2597%25E3%2581%25A6%25E6%2595%25B0%25E8%25A1%258C%25E3%2581%25AE%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2581%25A7%25E9%25AB%2598%25E9%2580%259F%25E3%2581%25AA%25E7%2594%259F%25E6%2588%2590%2520AI%2520%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2586%25E3%2583%25AB%25E3%2583%2587%25E3%2583%2599%25E3%2583%25AD%25E3%2583%2583%25E3%2583%2591%25E3%2583%25BC%25E3%2582%25BE%25E3%2583%25BC%25E3%2583%25B3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZiZThlMTc0MzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>インテルデベロッパーゾーン</dc:creator></item><item><title><![CDATA[SQLAlchemyとAlembicによるマイグレーションの使い方(備忘録)]]></title><description><![CDATA[SQLAlchemyでモデル定義を行い、Alembicでマイグレーションを行うやり方のメモ。ちなみにモジュールのインストールとバージョン管理はPoetryを使ってます。
+
+ Alembicのインストール
+Poetryでツールをインストールする。
+&gt; poetry add --dev alembic
+&gt; alembic --version
+alembic 1.13.2
+
+ Alembicの初期設定
+Poetryでプロジェクトを作成した状態からスタートする場合、まずAlembicの初期設定でマイグレーションする環境を整える。
+とりあえずこんなプロジェクト構成として話を進める。mo...]]></description><link>https://zenn.dev/usagi1975/articles/2024-08-11_sqlalchemy_alembic</link><guid isPermaLink="true">https://zenn.dev/usagi1975/articles/2024-08-11_sqlalchemy_alembic</guid><pubDate>Sun, 11 Aug 2024 07:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--LSdK5uSs--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:SQLAlchemy%25E3%2581%25A8Alembic%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258B%25E3%2583%259E%25E3%2582%25A4%25E3%2582%25B0%25E3%2583%25AC%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2581%25AE%25E4%25BD%25BF%25E3%2581%2584%25E6%2596%25B9%2528%25E5%2582%2599%25E5%25BF%2598%25E9%258C%25B2%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:chihiro1234567%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZkYmJlMGFmZmEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>chihiro1234567</dc:creator></item><item><title><![CDATA[AWS Lambda Powertools (Python)の紹介]]></title><description><![CDATA[
+ はじめに
+AWS Lambda Powertools for Python は、サーバーレスアプリケーション開発をより効率的にするために設計された包括的なツールセット。
+このツールセットは、Lambda 関数のロギング、トレーシング、メトリクス収集、パラメータ管理など、多くの便利な機能を提供し、開発者がより迅速に高品質なコードを作成できるようサポートしている。
+AWS Lambda は、多くの企業や開発者がサーバーレスアーキテクチャを構築するために利用しており、その中で効率的なモニタリングやデバッグ、設定管理が求められる。
+Powertools は、これらのニーズに応えるために開発さ...]]></description><link>https://zenn.dev/gakkie555/articles/876d9e4787c7e6</link><guid isPermaLink="true">https://zenn.dev/gakkie555/articles/876d9e4787c7e6</guid><pubDate>Sun, 11 Aug 2024 06:53:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--mXEsTLzb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AWS%2520Lambda%2520Powertools%2520%2528Python%2529%25E3%2581%25AE%25E7%25B4%25B9%25E4%25BB%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Gakkie%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzllNzdkYzg2ODEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Gakkie</dc:creator></item></channel></rss>
