@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「HTML」のフィード]]></title><description><![CDATA[Zennのトピック「HTML」のRSSフィードです]]></description><link>https://zenn.dev/topics/html</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/171432f5a6.png</url><title>Zennの「HTML」のフィード</title><link>https://zenn.dev/topics/html</link></image><generator>zenn.dev</generator><lastBuildDate>Thu, 15 Aug 2024 09:08:01 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/html/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[はじめてのフロントエンドパフォーマンス改善: 画像ファイル編]]></title><description><![CDATA[
+ この記事に関して
+この記事では、画像関連のフォーマンス改善策を紹介します。
+React.jsやVue.jsなどのフレームワークにおけるパフォーマンス向上の基礎としても役立つになるかと思われます。
+この記事を以下の本を参考にしています。
+https://gihyo.jp/book/2017/978-4-7741-8967-3
+
+ この記事の対象者
+
+フロントエンドのパフォーマンスに興味のある
+
+
+ 関連記事
+レンダリングとは？に関しては下記記事をご覧ください
+https://qiita.com/miumi/items/3f612f00b370e40dcbc4
+
+ PNG VS JPEG...]]></description><link>https://zenn.dev/miumi/articles/faf7b2323caeb7</link><guid isPermaLink="true">https://zenn.dev/miumi/articles/faf7b2323caeb7</guid><pubDate>Thu, 15 Aug 2024 02:56:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--81zqx3Kx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%25AF%25E3%2581%2598%25E3%2582%2581%25E3%2581%25A6%25E3%2581%25AE%25E3%2583%2595%25E3%2583%25AD%25E3%2583%25B3%25E3%2583%2588%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2589%25E3%2583%2591%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25BC%25E3%2583%259E%25E3%2583%25B3%25E3%2582%25B9%25E6%2594%25B9%25E5%2596%2584%253A%2520%25E7%2594%25BB%25E5%2583%258F%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E7%25B7%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%259F%25E3%2582%25AB%25E3%2582%25A4%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y4YjgwZTkyZmEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ミカイ</dc:creator></item><item><title><![CDATA[【CSS】ナビゲーションで隣り合うタブの枠線の重なりを直す]]></title><description><![CDATA[
+ はじめに
+みなさんはCSSでナビゲーションを実装する際、隣り合うタブの枠線が重なり、にごって見えてしまった経験はありますか？
+
+上の例では"gnaviの"と"枠線が"の間にある線の太さが2倍分になっていますし、"枠線が"と"にごる"の間も色がにごって見えています
+枠線の太さも揃えたいし、色味もにごらないのが理想ですよね！
+この記事ではなんとも言い表せないモヤモヤを解消するために格闘した話を解説しています
+
+ 対象読者
+ナビゲーションのCSS記述に悩む方
+
+ モヤモヤするコード
+まずは現状のHTMLとCSSを確認しましょう
+
+HTML
+&lt;nav class="gnavi"&gt;...]]></description><link>https://zenn.dev/itch/articles/7dcad365297084</link><guid isPermaLink="true">https://zenn.dev/itch/articles/7dcad365297084</guid><pubDate>Wed, 14 Aug 2024 14:59:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--77jVeKb9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590CSS%25E3%2580%2591%25E3%2583%258A%25E3%2583%2593%25E3%2582%25B2%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2581%25A7%25E9%259A%25A3%25E3%2582%258A%25E5%2590%2588%25E3%2581%2586%25E3%2582%25BF%25E3%2583%2596%25E3%2581%25AE%25E6%259E%25A0%25E7%25B7%259A%25E3%2581%25AE%25E9%2587%258D%25E3%2581%25AA%25E3%2582%258A%25E3%2582%2592%25E7%259B%25B4%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Higuchi%2520Taichi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FGZFp1Y3JJY01KZHZZQm0xX0stNTZEa3JHQlQtSjZkNDVXRDlMNGhNd1ZqPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Higuchi Taichi</dc:creator></item><item><title><![CDATA[【HTML】特殊文字を使用し、"<",">"を期待通りにブラウザ上に出力する]]></title><description><![CDATA[
+ はじめに
+現在スクールの卒業制作へ向けてPFを作成しています。
+htmlファイル内で "&lt;" や "&gt;" を書くとタグの開始とみなされてしまい、ブラウザ上で期待していた出力がされない箇所がありました。
+そのため、今回初めてhtmlの特殊文字を使用してタグを期待通りに出力させました。
+タグの開始以外にも、クウォーテーションや空白などもhtmlの特殊文字があるとわかりましたので、備忘録のためにも記事に残しておきたいと思います。
+参考になりましたら幸いです。
+
+ htmlの特殊文字とは？
+そもそも特殊文字とは、HTMLのタグとして認識されてしまったり、文字コードの違いで"&lt...]]></description><link>https://zenn.dev/s17w09/articles/10fbc223603bf7</link><guid isPermaLink="true">https://zenn.dev/s17w09/articles/10fbc223603bf7</guid><pubDate>Wed, 14 Aug 2024 09:27:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--mwWD2sRk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590HTML%25E3%2580%2591%25E7%2589%25B9%25E6%25AE%258A%25E6%2596%2587%25E5%25AD%2597%25E3%2582%2592%25E4%25BD%25BF%25E7%2594%25A8%25E3%2581%2597%25E3%2580%2581%2522%253C%2522%252C%2522%253E%2522%25E3%2582%2592%25E6%259C%259F%25E5%25BE%2585%25E9%2580%259A%25E3%2582%258A%25E3%2581%25AB%25E3%2583%2596%25E3%2583%25A9%25E3%2582%25A6%25E3%2582%25B6%25E4%25B8%258A%25E3%2581%25AB%25E5%2587%25BA%25E5%258A%259B%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:asay%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhiNGY1Y2Q0NTUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>asay</dc:creator></item><item><title><![CDATA[[HTML]iframeタグでPDFのページを指定する方法]]></title><description><![CDATA[
+ はじめに
+デフォルトの開始ページを指定できます。
+指定ページ以外表示しない。ということではありません。
+
+ 指定なし
+
+ コード
+&lt;iframe src="./Fragile/Fragile.pdf" width="600" height="332" frameborder="0" style="border:none;"&gt;&lt;/iframe&gt;
+
+ 参考画像
+
+
+ ページ指定あり
+
+ コード
+&lt;iframe src="./Fragile/Fragile.pdf#page=2" width="600" height="332" frameborder="0"...]]></description><link>https://zenn.dev/twinturbo/articles/1d79dc72a2a850</link><guid isPermaLink="true">https://zenn.dev/twinturbo/articles/1d79dc72a2a850</guid><pubDate>Tue, 13 Aug 2024 06:51:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--K-2vjFYd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BHTML%255Diframe%25E3%2582%25BF%25E3%2582%25B0%25E3%2581%25A7PDF%25E3%2581%25AE%25E3%2583%259A%25E3%2583%25BC%25E3%2582%25B8%25E3%2582%2592%25E6%258C%2587%25E5%25AE%259A%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Shiroshita%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FDTlBFdS1OX09WQmJ0OEV1TzE1RDV5S3hDbk8xQ2tRMk5OaGR5UmxENFg2R1E9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Shiroshita</dc:creator></item><item><title><![CDATA[【いらすとや図解】はじめてのレンダリング]]></title><description><![CDATA[
+ この記事に関して
+ブラウザのレンダリングについて書いていきます。
+細かい仕様とかは抜きにしてざっくり概要を書いていきますのでわかりやすくなっているかなと思います。
+ブラウザのレンダリングから、具体的な問題への対処法、将来を見越した設計の基本などを今後書いていく予定です。
+この記事は下記の本をベースとして書いています
+https://gihyo.jp/book/2017/978-4-7741-8967-3
+
+ この記事の対象者
+
+レンダリングってなんですか？という方
+フロントエンドのパフォーマンスになんとなく意識(興味)を持った方
+
+
+ この記事で取り扱わないこと
+
+React.jsや...]]></description><link>https://zenn.dev/miumi/articles/c718d484f32ba4</link><guid isPermaLink="true">https://zenn.dev/miumi/articles/c718d484f32ba4</guid><pubDate>Mon, 12 Aug 2024 23:16:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--c-fDO7pJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E3%2581%2584%25E3%2582%2589%25E3%2581%2599%25E3%2581%25A8%25E3%2582%2584%25E5%259B%25B3%25E8%25A7%25A3%25E3%2580%2591%25E3%2581%25AF%25E3%2581%2598%25E3%2582%2581%25E3%2581%25A6%25E3%2581%25AE%25E3%2583%25AC%25E3%2583%25B3%25E3%2583%2580%25E3%2583%25AA%25E3%2583%25B3%25E3%2582%25B0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%259F%25E3%2582%25AB%25E3%2582%25A4%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y4YjgwZTkyZmEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ミカイ</dc:creator></item><item><title><![CDATA[なぜローソンのデータだけが400エラー?LINE Messaging APIで学ぶエンコードの重要性]]></title><description><![CDATA[
+ 概要
+Hono + LINE Messaging APIを使ってコンビニスイーツをランダムに提供するLINE BOTを動かしていたら、あるときローソンの新商品が取得できない事象が発生しました。
+
+ローソンの新商品と入力すれば、新商品が返信されるのに返信されない
+LINE Messaging APIのエラーレスポンスを見ると下記メッセージが送信されており、リクエストボディの内容が不正だったことが分かります。
+A message (messages[0]) in the request body is invalid
+(訳 : リクエストボディのメッセージ（messages[0]）が無効...]]></description><link>https://zenn.dev/sui_water/articles/8fa196c2b3e019</link><guid isPermaLink="true">https://zenn.dev/sui_water/articles/8fa196c2b3e019</guid><pubDate>Mon, 12 Aug 2024 03:20:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4x-BELPj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%25AA%25E3%2581%259C%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25BD%25E3%2583%25B3%25E3%2581%25AE%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2581%25A0%25E3%2581%2591%25E3%2581%258C400%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%253FLINE%2520Messaging%2520API%25E3%2581%25A7%25E5%25AD%25A6%25E3%2581%25B6%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2581%25AE%25E9%2587%258D%25E8%25A6%2581%25E6%2580%25A7%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25B9%25E3%2582%25A4%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M4MGQ1MWNkOTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>スイ</dc:creator></item><item><title><![CDATA[HTMLにて文字化けを発生させない方法]]></title><description><![CDATA[
+ 結論
+HTMLにて文字化けを発生させない方法の一つは、
+以下の２点を同じにすることです。
+
+ファイル作成時に用いるテキストエディタの文字符号化方式
+
+Visual Studio Codeであれば最下部にカーソルを合わせると出てくる「エンコードの選択」で設定できます
+
+
+HTMLファイル内のcharset属性値
+
+
+
+
+ 文字化けしない例
+ファイル作成時にUTF-8でエンコードし、
+ファイル閲覧時にブラウザにてUTF-8でデコードする場合を例に説明します
+
+①HTMLファイルを作成する
+
+テキストエディタの設定にて、文字符号化方式をUTF-8にする
+→HTMLファイルの文字符号化方式が...]]></description><link>https://zenn.dev/417yr/articles/9089f6c47a1e8d</link><guid isPermaLink="true">https://zenn.dev/417yr/articles/9089f6c47a1e8d</guid><pubDate>Sun, 11 Aug 2024 14:25:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--tTBPK8IM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:HTML%25E3%2581%25AB%25E3%2581%25A6%25E6%2596%2587%25E5%25AD%2597%25E5%258C%2596%25E3%2581%2591%25E3%2582%2592%25E7%2599%25BA%25E7%2594%259F%25E3%2581%2595%25E3%2581%259B%25E3%2581%25AA%25E3%2581%2584%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:417yr%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y3ZDQ5MjM1NmUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>417yr</dc:creator></item><item><title><![CDATA[HTMLのcontenteditableの使い方]]></title><description><![CDATA[こんにちは。博麗霊夢です。
+今回は、HTMLのcontenteditableの使い方を紹介します。
+contenteditableとは、要素が編集可能なのかを表す属性です。
+
+ 文法
+contenteditable=""
+
+ 種類
+
+
+ 表示結果
+
+]]></description><link>https://zenn.dev/reimu59549/articles/d1607f0b3221e1</link><guid isPermaLink="true">https://zenn.dev/reimu59549/articles/d1607f0b3221e1</guid><pubDate>Sun, 11 Aug 2024 07:00:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_SGKQq_G--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:HTML%25E3%2581%25AEcontenteditable%25E3%2581%25AE%25E4%25BD%25BF%25E3%2581%2584%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%258D%259A%25E9%25BA%2597%25E9%259C%258A%25E5%25A4%25A2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTHRyV2cxY19BUnQtOVVZMmRUbmFoMnp0TG9lWUJWWmw3a0x4M3pxMDBLSEpBTHM5bz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>博麗霊夢</dc:creator></item><item><title><![CDATA[HTMLRewriterを使う]]></title><description><![CDATA[Next.jsのApp Routerを使ってサーバサイドでコードを実行させているとたまに「DOMを解析したい」という気持ちになることがある。従来のNode.js系のサーバならJSDOMを使えばいいのだが、エッジサイドコンピューティングで同じようなことをしようとすると通らない
+なぜならJSDOMが利用しているパッケージにNode.jsのhttp/httpsのAPIが使われているからである。これはfsのAPIと同様に互換モードでもエッジサイドで動かないAPIである
+終わった。と思ったら別の方法があった。HTMLRewriterなるパッケージである
+
+ HTMLRewriterとは
+Cloud...]]></description><link>https://zenn.dev/maretol/articles/ad576aff797513</link><guid isPermaLink="true">https://zenn.dev/maretol/articles/ad576aff797513</guid><pubDate>Sat, 10 Aug 2024 04:01:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--YbZfun4e--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:HTMLRewriter%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Maretol%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2hHd3ROUEQtTzQxSkszUmNIbmUtel9hb1hhQ3d2M2phWlBJVzlDPXMyNTAtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Maretol</dc:creator></item><item><title><![CDATA[FontAwesomeインストール時の意外な落とし穴：fortawesomeのスペルミス注意]]></title><description><![CDATA[
+ インストール時の注意点
+FontAwesomeをReactプロジェクトにインストールする際、以下のコマンドを使用します。
+$ npm install @fortawesome/react-fontawesome
+注目すべきは@fortawesomeの部分です。直感的にはfontawesomeと書きたくなりますが、正しくはfortawesomeです。fontではなくfort。
+
+ なぜ”fort”なのか？
+FontAwesomeの公式ドキュメントでは次のように説明されています。https://docs.fontawesome.com/web/setup/packages
+
+Wait, ...]]></description><link>https://zenn.dev/hocitron/articles/9323eac44c2b40</link><guid isPermaLink="true">https://zenn.dev/hocitron/articles/9323eac44c2b40</guid><pubDate>Fri, 09 Aug 2024 06:54:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9xvMdk16--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:FontAwesome%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E6%2599%2582%25E3%2581%25AE%25E6%2584%258F%25E5%25A4%2596%25E3%2581%25AA%25E8%2590%25BD%25E3%2581%25A8%25E3%2581%2597%25E7%25A9%25B4%25EF%25BC%259Afortawesome%25E3%2581%25AE%25E3%2582%25B9%25E3%2583%259A%25E3%2583%25AB%25E3%2583%259F%25E3%2582%25B9%25E6%25B3%25A8%25E6%2584%258F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hocitron%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2YxMjlkMjBlZDAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hocitron</dc:creator></item><item><title><![CDATA[5日でおぼえるHTML]]></title><description><![CDATA[「5日でおぼえるHTML」は、HTMLの基礎からしっかりと学べる入門書です。
+
+本書の構成は以下の通りです。
+
+【第1章 HTMLとは】
+HTMLの概要から学びます。Webページの仕組み、HTMLの基本構造、HTMLタグの書き方など、HTMLを理解する上での基礎知識を押さえます。
+
+【第2章 テキストの表示】
+見出しタグ、段落タグ、強調タグ、改行タグなど、Webページにテキストを表示するためのタグを解説します。
+
+【第3章 リンクとリスト】
+リンクタグ、リストタグについて学びます。絶対パスと相対パスの違い、順序付きリスト、順序なしリストなど、実例を交えながらリンクとリストの作り方を詳しく説明します。
+
+【第4章 画像とマルチメディア】  
+画像タグ、動画タグ、オーディオタグの使い方を解説します。画像のフォーマットの違いや、マルチメディアコンテンツを効果的に活用するポイントも押さえます。
+
+【第5章 テーブルとフォーム】
+テーブルタグ、フォームタグの書き方について学びます。テーブルのスタイル設定、入力欄の種類、フォームのレイアウトなど、実践を意識した内容となっています。
+
+【付録】
+HTMLのバージョン、文字コード、よく使うHTMLエンティティについて解説しています。
+
+「5日でおぼえるHTML」は、HTMLに関する基本から応用までを、豊富な実例とともに解説しています。分かりやすい書き方で、初心者の方でもHTMLの基礎をしっかりと身につけることができる1冊です。]]></description><link>https://zenn.dev/shunkus/books/bd5df6fe54637f</link><guid isPermaLink="true">https://zenn.dev/shunkus/books/bd5df6fe54637f</guid><pubDate>Thu, 08 Aug 2024 16:53:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--g7cmOdH6--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci9kZDhiYzhiOTJjLmpwZWc=%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>shunku</dc:creator></item><item><title><![CDATA[YouTubeの埋め込みコードがいつもの方法で取れない、解決方法]]></title><description><![CDATA[
+ はじめに
+YouTubeの埋め込みコードが「共有」から取得できない現象が起きました。
+多分何かの拡張機能が原因だと思われますが、原因は不明です。（時間を見つけてきちんと解決しようと思います...）
+普段は以下ページの方法で取得していましたが、これが出来なくなっています。
+https://support.google.com/youtube/answer/171780?hl=ja
+
+ 解決方法
+動画を右クリックするとウィンドウが表示されるので、その中の「埋め込みコードをコピー」をクリックすると、iframeの埋め込みコードを取得出来ます。
+
+]]></description><link>https://zenn.dev/fujikawa_dev/articles/3fc8321332f9e1</link><guid isPermaLink="true">https://zenn.dev/fujikawa_dev/articles/3fc8321332f9e1</guid><pubDate>Wed, 07 Aug 2024 01:16:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--caTfgtkF--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:YouTube%25E3%2581%25AE%25E5%259F%258B%25E3%2582%2581%25E8%25BE%25BC%25E3%2581%25BF%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2581%258C%25E3%2581%2584%25E3%2581%25A4%25E3%2582%2582%25E3%2581%25AE%25E6%2596%25B9%25E6%25B3%2595%25E3%2581%25A7%25E5%258F%2596%25E3%2582%258C%25E3%2581%25AA%25E3%2581%2584%25E3%2580%2581%25E8%25A7%25A3%25E6%25B1%25BA%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:fuji%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0ZGxLN0NUMkRKV1ZKdTM1dDU5RnpaMWdLcHQxNElnMndUUDZuemRvOEgxMFE9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>fuji</dc:creator></item><item><title><![CDATA[SPデザインのみのLPでデバイス毎にviewportを設定する]]></title><description><![CDATA[
+ はじめに
+SP デザインのみの LP で PC 版のデザインは存在しない LP 作成が最近続いていたので、meta タグの設定を行う記述を紹介します。
+
+ 完成物
+https://sample-lp-weld.vercel.app/
+以下コードを head タグ内に設置します。
+function addMeta() {
+  var _UA = navigator.userAgent;
+  var meta = document.createElement("meta");
+  meta.name = "viewport";
+  if (
+    _UA.indexOf("iPhone...]]></description><link>https://zenn.dev/fujikawa_dev/articles/91b8f3b932798b</link><guid isPermaLink="true">https://zenn.dev/fujikawa_dev/articles/91b8f3b932798b</guid><pubDate>Mon, 05 Aug 2024 14:10:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9Gj3stJU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:SP%25E3%2583%2587%25E3%2582%25B6%25E3%2582%25A4%25E3%2583%25B3%25E3%2581%25AE%25E3%2581%25BF%25E3%2581%25AELP%25E3%2581%25A7%25E3%2583%2587%25E3%2583%2590%25E3%2582%25A4%25E3%2582%25B9%25E6%25AF%258E%25E3%2581%25ABviewport%25E3%2582%2592%25E8%25A8%25AD%25E5%25AE%259A%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:fuji%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0ZGxLN0NUMkRKV1ZKdTM1dDU5RnpaMWdLcHQxNElnMndUUDZuemRvOEgxMFE9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>fuji</dc:creator></item><item><title><![CDATA[HTML <dialog> タグの理解：実装、使用法、およびブラウザーサポート]]></title><description><![CDATA[
+
+ はじめに
+HTML &lt;dialog&gt; タグはHTML5に導入され、ダイアログボックスを標準化された方法で作成する手段を提供します。この記事では、その実装の歴史、使用例、および現在のブラウザーサポートを探ります。
+
+ 実装の歴史
+&lt;dialog&gt; 要素はHTML5で最初に導入され、2014年頃から主要なブラウザーに実装されました。主な目的は、開発者が長年頼りにしてきたカスタムJavaScriptソリューションを不要にし、モーダルダイアログのネイティブソリューションを提供することでした。2022年3月以降、この機能は最新のデバイスおよびブラウザーバージョンで動作...]]></description><link>https://zenn.dev/luizfigueiredo/articles/448ddbc6169a63</link><guid isPermaLink="true">https://zenn.dev/luizfigueiredo/articles/448ddbc6169a63</guid><pubDate>Sun, 04 Aug 2024 21:39:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--b2_8tAZx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:HTML%2520%253Cdialog%253E%2520%25E3%2582%25BF%25E3%2582%25B0%25E3%2581%25AE%25E7%2590%2586%25E8%25A7%25A3%25EF%25BC%259A%25E5%25AE%259F%25E8%25A3%2585%25E3%2580%2581%25E4%25BD%25BF%25E7%2594%25A8%25E6%25B3%2595%25E3%2580%2581%25E3%2581%258A%25E3%2582%2588%25E3%2581%25B3%25E3%2583%2596%25E3%2583%25A9%25E3%2582%25A6%25E3%2582%25B6%25E3%2583%25BC%25E3%2582%25B5%25E3%2583%259D%25E3%2583%25BC%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Luiz%2520Figueiredo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZhYjk5MWI0OGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Luiz Figueiredo</dc:creator></item><item><title><![CDATA[【Emmet】HTMLの雛形と、おすすめのカスタマイズ方法！【HTML5/テンプレート/OGP】]]></title><description><![CDATA[
+ Emmet で展開できる HTML の雛形についての詳しい解説と、おすすめのカスタマイズ方法
+
+おはこんばんにちは！
+今日は、Emmet (エメット省略記法) を使って HTML の雛形を展開する方法と、そのおすすめのカスタマイズについて詳しく解説していきます。
+Emmet は、HTML や CSS を書く際にコーディングを効率化するとっても便利なツールですが、最初は少し戸惑うかもしれません。
+でも、心配はいりません！ わかりやすく、楽しく学んでいきましょう！
+HTML や CSS のコーディングが、ぐっと楽になりますよ。
+では、さっそく見ていきましょう！
+
+
+ デフォルトの HTM...]]></description><link>https://zenn.dev/yukun369/articles/e8a3715ac5b503</link><guid isPermaLink="true">https://zenn.dev/yukun369/articles/e8a3715ac5b503</guid><pubDate>Sat, 03 Aug 2024 08:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ZhUdf7sc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Emmet%25E3%2580%2591HTML%25E3%2581%25AE%25E9%259B%259B%25E5%25BD%25A2%25E3%2581%25A8%25E3%2580%2581%25E3%2581%258A%25E3%2581%2599%25E3%2581%2599%25E3%2582%2581%25E3%2581%25AE%25E3%2582%25AB%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%259E%25E3%2582%25A4%25E3%2582%25BA%25E6%2596%25B9%25E6%25B3%2595%25EF%25BC%2581%25E3%2580%2590HTML5%252F%25E3%2583%2586%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AC%25E3%2583%25BC%25E3%2583%2588%252FOGP%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yukun%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZiODE5OGRjZGEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yukun</dc:creator></item><item><title><![CDATA[デジタル庁公開のデザインをhtml/cssに落とし込んでみた。]]></title><description><![CDATA[
+ はじめに
+デジタル庁が公開したデザインシステムがよさそうなデザインでしたので、適当に遊ぼうかと思いました。
+html/cssで公開してくれればすぐに使いやすいと思ったんですが、どうやらFigmaでしか配っていない。。
+ということでhtml/cssに落とし込んでみました。
+https://www.digital.go.jp/policies/servicedesign/designsystem/
+
+ 注意事項
+
+作成時は初学者でした。先輩からの厳しいコメントを受け、最低限修正したつもりです。
+趣味程度に作ったものを、使いたい人がいればどうぞというものです。
+細かい部分は間違っていること...]]></description><link>https://zenn.dev/arakiyahoo/articles/985157549e419e</link><guid isPermaLink="true">https://zenn.dev/arakiyahoo/articles/985157549e419e</guid><pubDate>Sat, 03 Aug 2024 04:46:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_Lgq2eu9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2587%25E3%2582%25B8%25E3%2582%25BF%25E3%2583%25AB%25E5%25BA%2581%25E5%2585%25AC%25E9%2596%258B%25E3%2581%25AE%25E3%2583%2587%25E3%2582%25B6%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%2592html%252Fcss%25E3%2581%25AB%25E8%2590%25BD%25E3%2581%25A8%25E3%2581%2597%25E8%25BE%25BC%25E3%2582%2593%25E3%2581%25A7%25E3%2581%25BF%25E3%2581%259F%25E3%2580%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Araki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSjhUcjVLWkNBZ2xfRFFDaDdNLWhxU3Q0cTItYWlHMEFyczRzU3pkT0VwOXZyeFp0SW09czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Araki</dc:creator></item><item><title><![CDATA[Jinja2を使ったテンプレート記法メモる]]></title><description><![CDATA[
+ 概要
+いろいろなフレームワークで使われているJinja2テンプレート、使い方は難しくはないもののその場しのぎで利用している気がしてきたためフレームワークに依存しない使い方についてまとめる。
+
+ 組み込めるフレームワークの例
+個人的に使いそうな範囲だと
+
+Flask
+Django
+FastAPI
+
+FlaskとDjangoはJinjaのページに記載されていた[1]。Integrationということだから、追加で設定しなくても使えるということなのだろうと思う。
+
+ 準備
+インストールのコマンド
+pip install Jinja2
+
+ コード
+
+ テンプレート
+### template....]]></description><link>https://zenn.dev/slowman/articles/40f1a822bccc5e</link><guid isPermaLink="true">https://zenn.dev/slowman/articles/40f1a822bccc5e</guid><pubDate>Fri, 02 Aug 2024 12:03:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--yTNRWPvM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Jinja2%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%259F%25E3%2583%2586%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AC%25E3%2583%25BC%25E3%2583%2588%25E8%25A8%2598%25E6%25B3%2595%25E3%2583%25A1%25E3%2583%25A2%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:slowman%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NhOGUzMDdkM2UuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>slowman</dc:creator></item><item><title><![CDATA[何故 jQuery ではなく React/Vue/Svelte が流行するのか？]]></title><description><![CDATA[こんにちは。 jQuery から商業プログラミングに入門したやまゆです。
+なぜ jQuery だと古い、ダメだと言われるのでしょうか？いいじゃん。 $.ajax で簡単にデータ引っ張ってこれるし、 $("#btn").click(function () { alert("押した！"); }); は誰が見ても何が起こるか一瞬で分かる Simple さがあるじゃん。なんでわざわざ React/Vue/Svelte その他 jQuery ではないライブラリを使わなければならないんでしょうか？ 100 億回言われてきたことだと思いますが、私なりに振り返ってみます。
+
+ 手続き型 UI と宣言型 ...]]></description><link>https://zenn.dev/yamayuski/articles/fd7e3eb29473e4</link><guid isPermaLink="true">https://zenn.dev/yamayuski/articles/fd7e3eb29473e4</guid><pubDate>Thu, 01 Aug 2024 21:21:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0lITVnk1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E4%25BD%2595%25E6%2595%2585%2520jQuery%2520%25E3%2581%25A7%25E3%2581%25AF%25E3%2581%25AA%25E3%2581%258F%2520React%252FVue%252FSvelte%2520%25E3%2581%258C%25E6%25B5%2581%25E8%25A1%258C%25E3%2581%2599%25E3%2582%258B%25E3%2581%25AE%25E3%2581%258B%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2584%25E3%2581%25BE%25E3%2582%2586%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pVWkFuSVloZ2NmMkJYb2tkWGpYODhWR2Y3MnVyWE9qN1dXOE56R0E9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>やまゆ</dc:creator></item><item><title><![CDATA[input type="date"でplaceholderが効かないので強引に楽な方法で対処する]]></title><description><![CDATA[[input type="date"]の場合、placeholderを指定しても基本的に反映されないことを知った。
+&lt;app-form-input
+    type="date"
+    :placeholder="$filter.message('placeholder_date')"/&gt;
+
+実現する方法を模索した結果
+
+デフォルトを「input type="text"」にしてplaceholderを有効にし、
+「onfocus」イベントと「onblur」イベントを使ってfocusが当たっているときだけ input
+type="date" に切り替える。
+
+&lt;app-...]]></description><link>https://zenn.dev/lovekumo/articles/4dea080ca61688</link><guid isPermaLink="true">https://zenn.dev/lovekumo/articles/4dea080ca61688</guid><pubDate>Tue, 30 Jul 2024 08:40:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2S73YioT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:input%2520type%253D%2522date%2522%25E3%2581%25A7placeholder%25E3%2581%258C%25E5%258A%25B9%25E3%2581%258B%25E3%2581%25AA%25E3%2581%2584%25E3%2581%25AE%25E3%2581%25A7%25E5%25BC%25B7%25E5%25BC%2595%25E3%2581%25AB%25E6%25A5%25BD%25E3%2581%25AA%25E6%2596%25B9%25E6%25B3%2595%25E3%2581%25A7%25E5%25AF%25BE%25E5%2587%25A6%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:KUMO%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTFdEMHd1VC1BcVVrWTRKLUZmQlNYWU1xMTlUSHNDd1dTWGpCeHhZQ2s5a0MzLVI1MD1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>KUMO</dc:creator></item><item><title><![CDATA[【可変に対応】絶対にズレないabsolute]]></title><description><![CDATA[
+実現したいのはいつでも要素の左上にあって、親要素に少しだけかぶっており右にずれている要素です。
+absoluteで位置を指定すればいい！と思いますが、テキストが増えると…このように崩れてしまいます。
+
+今回は、親要素のサイズが変わってもズレないabsolute要素の設定方法を紹介します。
+
+ CSSの解説
+今回のポイントは  transform: translate(20px,-20px);です。
+ふだんabsoluteを使って要素の位置を指定するときは以下のように指定すると思います。
+ちょっと上にあって、左にずれたデザインはtopとleftで実現できますね。
+.box__inner-...]]></description><link>https://zenn.dev/928sekine/articles/2bb89146d65703</link><guid isPermaLink="true">https://zenn.dev/928sekine/articles/2bb89146d65703</guid><pubDate>Mon, 29 Jul 2024 12:10:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7R5kwaca--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%258F%25AF%25E5%25A4%2589%25E3%2581%25AB%25E5%25AF%25BE%25E5%25BF%259C%25E3%2580%2591%25E7%25B5%25B6%25E5%25AF%25BE%25E3%2581%25AB%25E3%2582%25BA%25E3%2583%25AC%25E3%2581%25AA%25E3%2581%2584absolute%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259B%25E3%2581%258D%25E3%2581%25AD%25E3%2582%258A%25E3%2581%25AA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAyNDQ3MGIzZjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>せきねりな</dc:creator></item></channel></rss>

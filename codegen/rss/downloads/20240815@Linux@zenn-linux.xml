@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Linux」のフィード]]></title><description><![CDATA[Zennのトピック「Linux」のRSSフィードです]]></description><link>https://zenn.dev/topics/linux</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/860a9eb1e4.png</url><title>Zennの「Linux」のフィード</title><link>https://zenn.dev/topics/linux</link></image><generator>zenn.dev</generator><lastBuildDate>Thu, 15 Aug 2024 06:16:27 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/linux/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Ubuntu 24.04で、CapsLockキーをHyperキーとして動作させる - tweaks/xkb]]></title><description><![CDATA[
+ Ubuntu 24.04で、CapsLockキーをHyperキーとして動作させる
+
+ ※自分用メモです。
+
+ 環境情報
+
+ OS
+Ubuntu 24.04 LTS
+
+ 導入パッケージ
+
+gnome-tweaks
+
+
+ 設定
+gnome-tweaksのインストール
+apt install gnome-tweaks -y
+Tweaksから、CapsLockを追加のHyperキーにする
+キーボード - 追加のレイアウトオプション - Caps Lock behavior
+
+xkbのCapsLock設定ファイルを変更
+vi /usr/share/X11/xkb/symbols/capsloc...]]></description><link>https://zenn.dev/kuyt_ayn/articles/abb9c7c390dcd0</link><guid isPermaLink="true">https://zenn.dev/kuyt_ayn/articles/abb9c7c390dcd0</guid><pubDate>Thu, 15 Aug 2024 04:48:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--RkY8G3JL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ubuntu%252024.04%25E3%2581%25A7%25E3%2580%2581CapsLock%25E3%2582%25AD%25E3%2583%25BC%25E3%2582%2592Hyper%25E3%2582%25AD%25E3%2583%25BC%25E3%2581%25A8%25E3%2581%2597%25E3%2581%25A6%25E5%258B%2595%25E4%25BD%259C%25E3%2581%2595%25E3%2581%259B%25E3%2582%258B%2520-%2520tweaks%252Fxkb%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kuyt%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS3VITzYtV1NGX3U1ZVNzbVhDRHAyODdwVHFxaHI1QUdkN1pGNXhfWm5LQ293c2VVWWI9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kuyt</dc:creator></item><item><title><![CDATA[Macの仮想化はTartがよかった]]></title><description><![CDATA[
+ 最初に
+Apple Silicon Mac で仮想マシンを使うときといえば、GUI なら UTM や VMWare Fusion、VirtualBuddy, Parallels Desktop が有名です｡CUI なら Multipass や OrbStack などがあげられるでしょう｡どれも良いものですが、個人的には GUI のアプリケーションはターミナルから起動するのがやや面倒で、CUI のものは GUI のセットアップが面倒でした｡
+そこで、今回紹介するのが、Tart です｡
+cirruslabs/tart は Apple Silicon 上で macOS および Linux ...]]></description><link>https://zenn.dev/hal227/articles/e85f5d9ae97b24</link><guid isPermaLink="true">https://zenn.dev/hal227/articles/e85f5d9ae97b24</guid><pubDate>Thu, 15 Aug 2024 01:19:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--UGekTmsh--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Mac%25E3%2581%25AE%25E4%25BB%25AE%25E6%2583%25B3%25E5%258C%2596%25E3%2581%25AFTart%25E3%2581%258C%25E3%2582%2588%25E3%2581%258B%25E3%2581%25A3%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:HAL%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MwMWZmYTI1ODYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>HAL</dc:creator></item><item><title><![CDATA[【Linux Basics】ファイルタイプ]]></title><description><![CDATA[ls -l コマンドを実行した際に、行の一番左に表示される文字が、ファイルタイプを示している。
+$ ls -l
+total 4
+brw-r--r-- 1 root   root   101, 101 Aug 14 22:52 block
+crw-r--r-- 1 root   root   100, 100 Aug 14 22:52 char
+drwxrwxr-x 2 ubuntu ubuntu     4096 Aug 14 22:47 directory
+lrwxrwxrwx 1 ubuntu ubuntu        7 Aug 14 22:47 link -&gt; regul...]]></description><link>https://zenn.dev/zulinx86/articles/linux-basics_file-type</link><guid isPermaLink="true">https://zenn.dev/zulinx86/articles/linux-basics_file-type</guid><pubDate>Wed, 14 Aug 2024 22:55:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--aur8vIjL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Linux%2520Basics%25E3%2580%2591%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%2597%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:zulinx86%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQyZjYzMDk2NjEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>zulinx86</dc:creator></item><item><title><![CDATA[Kernel 開発環境の構築 on Ubuntu]]></title><description><![CDATA[
+ 環境
+
+CPU: x86_64
+OS: Ubuntu 24.04
+
+
+ Linux kernel のビルド
+$ cd ${WORKDIR}
+$ git clone git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
+$ sudo apt install make gcc flex bison libelf-dev libssl-dev -y
+$ cd linux-next
+$ make defconfig
+$ make -j$(nproc)
+
+ Buildroot のビルド
+$ cd ${WORKDIR}
+$ ...]]></description><link>https://zenn.dev/zulinx86/articles/kernel-devenv-setup</link><guid isPermaLink="true">https://zenn.dev/zulinx86/articles/kernel-devenv-setup</guid><pubDate>Wed, 14 Aug 2024 22:36:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jN_xAPsg--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Kernel%2520%25E9%2596%258B%25E7%2599%25BA%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25AE%25E6%25A7%258B%25E7%25AF%2589%2520on%2520Ubuntu%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:zulinx86%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQyZjYzMDk2NjEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>zulinx86</dc:creator></item><item><title><![CDATA[Dockerで鍵認証によるAnsibleとansible_specの実行環境を構築]]></title><description><![CDATA[
+ はじめに
+
+ 概要
+本記事では以下の手順でハンズオンを行います。
+
+DockerでAnsibleのコントロールノード1台(Ubuntu)とターゲットホスト1台(Ubuntu)を構築
+Ansibleでapache2のインストール及び起動
+ansible_specでapche2のインストール確認
+
+
+ 対象読者
+
+DockerでAnsibleの実行環境を作ってみたい人
+Dockerでrbenvを使ってRubyの実行環境を作ってみたい人
+ansible_specを使ってみたい人
+Ansibleで鍵認証によるplaybookの実行をしたい人
+
+!
+
+基本的なDocker, Linuxコマンド...]]></description><link>https://zenn.dev/popokobe/articles/ubuntu-ansible</link><guid isPermaLink="true">https://zenn.dev/popokobe/articles/ubuntu-ansible</guid><pubDate>Wed, 14 Aug 2024 07:23:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--clUeyNVx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%25E3%2581%25A7%25E9%258D%25B5%25E8%25AA%258D%25E8%25A8%25BC%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258BAnsible%25E3%2581%25A8ansible_spec%25E3%2581%25AE%25E5%25AE%259F%25E8%25A1%258C%25E7%2592%25B0%25E5%25A2%2583%25E3%2582%2592%25E6%25A7%258B%25E7%25AF%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:popokobe%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dmdzhoOGlkTkwyckdvakxBMXduYy1zanVpX21Helc4MmlvbXFJVGJFPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>popokobe</dc:creator></item><item><title><![CDATA[Linux 使いになりたい人向けの Intel N100 ミニ PC で構築する開発環境（１６）- Ubuntu]]></title><description><![CDATA[
+ はじめに
+!
+ここでは手軽に Windows と Ubuntu のデュアルブートをする方法について説明をしています。ただし、そのために、物理的にディスクを取り外すようにしています。このとき、ミスがあると、ディスクにダメージを与える場合があります。Windows が使えなくなると困る場合は回復作業ができるように、十分な対策をしてから作業するようにしてください。リカバリー用パーティションを含めたバックアップ、回復起動ディスクの用意などをしてあれば、復旧できるはずです。
+
+これは、Linux 使いになりたい人向けに Intel N100 ミニ PC を使って開発環境を構築する方法を解説する...]]></description><link>https://zenn.dev/hiro345/articles/n100_16_20240814</link><guid isPermaLink="true">https://zenn.dev/hiro345/articles/n100_16_20240814</guid><pubDate>Wed, 14 Aug 2024 01:11:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--c9VTMpaL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%2520%25E4%25BD%25BF%25E3%2581%2584%25E3%2581%25AB%25E3%2581%25AA%25E3%2582%258A%25E3%2581%259F%25E3%2581%2584%25E4%25BA%25BA%25E5%2590%2591%25E3%2581%2591%25E3%2581%25AE%2520Intel%2520N100%2520%25E3%2583%259F%25E3%2583%258B%2520PC%2520%25E3%2581%25A7%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2599%25E3%2582%258B%25E9%2596%258B%25E7%2599%25BA%25E7%2592%25B0%25E5%25A2%2583%25EF%25BC%2588%25EF%25BC%2591%25EF%25BC%2596%25EF%25BC%2589-%2520Ubuntu%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Hiroshi%2520Koyama%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2k5ZzdjLS0xTFk0S2k0LWw3dVFSSFZRdEdQcWZHYTlibVRJYUtFM0E9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Hiroshi Koyama</dc:creator></item><item><title><![CDATA[『Linuxのしくみ』を読んだ勢いで『UNIXという考え方』も読んでみた]]></title><description><![CDATA[https://www.ohmsha.co.jp/book/9784274064067/
+以前、『Linuxのしくみ―実験と図解で学ぶOS、仮想マシン、コンテナの基礎知識』を読んだ流れで、『UNIXという考え方』を読んでみたので、その感想と学びを記しておきたいと思います。
+Linuxのしくみの記事はこちら
+
+ 感想
+
+個人的に、OSなどのソフトウェアがこれまでどのように発展してきたのかという背景をほぼ知らなかったので、少しでもそこに触れられたのは教養として良かった
+原著が1994年と、自分が生まれるより前の本なのに、現代でも通ずる設計思想を持っていたのがすごい
+1~4章あたりは特に実践に...]]></description><link>https://zenn.dev/tkhr_tech/articles/d21136bdd14cc9</link><guid isPermaLink="true">https://zenn.dev/tkhr_tech/articles/d21136bdd14cc9</guid><pubDate>Mon, 12 Aug 2024 22:56:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--oKJOR810--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%258ELinux%25E3%2581%25AE%25E3%2581%2597%25E3%2581%258F%25E3%2581%25BF%25E3%2580%258F%25E3%2582%2592%25E8%25AA%25AD%25E3%2582%2593%25E3%2581%25A0%25E5%258B%25A2%25E3%2581%2584%25E3%2581%25A7%25E3%2580%258EUNIX%25E3%2581%25A8%25E3%2581%2584%25E3%2581%2586%25E8%2580%2583%25E3%2581%2588%25E6%2596%25B9%25E3%2580%258F%25E3%2582%2582%25E8%25AA%25AD%25E3%2582%2593%25E3%2581%25A7%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tkhr_tech%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRjODA5MWI5ZDEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tkhr_tech</dc:creator></item><item><title><![CDATA[セキュアブート+LUKS+TPM2でカーネルアップデート時の鍵更新を自動化する]]></title><description><![CDATA[
+ はじめに
+LinuxではLUKSを使用することでフルディスク暗号化を実現できます。さらに、TPMに鍵を保存することで起動時に自動で復号することができます[1]。
+TPMに鍵を保存するとき、同じPCでも別のOS[2]からは復号用の鍵を読み取れないようにしたいと考えるかもしれません。そのような場合にはTPMへの鍵設定時にPCR[4]を設定することで特定のカーネルでない場合は鍵を読み取れないようにします（具体的な話は後述します）。
+しかしこのような設定をした場合は、カーネルのアップデートのたびにそのカーネルに合わせてTPMの鍵を更新する必要があります。この手順は具体的にはカーネル更新、再起...]]></description><link>https://zenn.dev/syuzuki/articles/20240812-secboot-luks-tpm-updating</link><guid isPermaLink="true">https://zenn.dev/syuzuki/articles/20240812-secboot-luks-tpm-updating</guid><pubDate>Mon, 12 Aug 2024 14:55:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Rj_11RGM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25BB%25E3%2582%25AD%25E3%2583%25A5%25E3%2582%25A2%25E3%2583%2596%25E3%2583%25BC%25E3%2583%2588%252BLUKS%252BTPM2%25E3%2581%25A7%25E3%2582%25AB%25E3%2583%25BC%25E3%2583%258D%25E3%2583%25AB%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%25E3%2583%2587%25E3%2583%25BC%25E3%2583%2588%25E6%2599%2582%25E3%2581%25AE%25E9%258D%25B5%25E6%259B%25B4%25E6%2596%25B0%25E3%2582%2592%25E8%2587%25AA%25E5%258B%2595%25E5%258C%2596%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:syuzuki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFUWEFKeXZuWmNhSmlpbG9NQjlOT2l4eTRsSEZtXzNKdXU0UEtYU2hCSVc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>syuzuki</dc:creator></item><item><title><![CDATA[【Linux】sudoers管理向けの設定を自動化する]]></title><description><![CDATA[
+ 目的
+
+新規で作成するユーザーにsudoers権限を追加したい。
+
+
+ sudoers権限とは
+
+他ユーザーの権限を実行して、非特権ユーザーがコマンドを実行する。
+ROOTユーザーで操作はしたくないので、非特権ユーザーに一時的に強力な権限を付与したい。
+
+
+ sudoers設定について
+管理者は/etc/sudoers.d/に設定ファイルを置けば、非特権ユーザーが特定のコマンドを入力できるようにすることができる。直接/etc/sudoersを触らなくても良いという利点もある。
+
+12章 sudoアクセスの管理
+
+
+ 設定内容の解説
+具体例として、sudoers権限を持つvagrant...]]></description><link>https://zenn.dev/karasunomori/articles/b8a5dcaade8f42</link><guid isPermaLink="true">https://zenn.dev/karasunomori/articles/b8a5dcaade8f42</guid><pubDate>Mon, 12 Aug 2024 03:46:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7SeyFHdc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Linux%25E3%2580%2591sudoers%25E7%25AE%25A1%25E7%2590%2586%25E5%2590%2591%25E3%2581%2591%25E3%2581%25AE%25E8%25A8%25AD%25E5%25AE%259A%25E3%2582%2592%25E8%2587%25AA%25E5%258B%2595%25E5%258C%2596%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%25A8%25AA%25E6%25B5%259C%25E3%2583%2599%25E3%2582%25A4%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%25BC%25E3%2582%25BA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzUwMjg0NzQ0YmUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>横浜ベイスターズ</dc:creator></item><item><title><![CDATA[書籍「仕組みと使い方がわかる Docker＆Kubernetesのきほんのきほん」レビュー]]></title><description><![CDATA[今後業務でDocker/kubernetes(以降k8s)を使うことが予想されるので購入してみました。
+↓書籍「仕組みと使い方がわかる Docker＆Kubernetesのきほんのきほん」
+https://amzn.asia/d/cE5cV2X
+名前は聞いたことあるし「コンテナ」や「pod」「イメージ」など、
+それらに付随するワードについても耳にしているものの、
+特に触ったこともないというレベル感から始めた感じになります。
+【結論として】
+素人でも全く問題ないレベル、総じて良書です。少し高いですがその分の価値はあります。
+ただし、k8sについては全体の1割程度のボリュームなので、k8sを...]]></description><link>https://zenn.dev/may15/articles/58dd279e1a6139</link><guid isPermaLink="true">https://zenn.dev/may15/articles/58dd279e1a6139</guid><pubDate>Mon, 12 Aug 2024 03:44:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2xf4Mtzv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%259B%25B8%25E7%25B1%258D%25E3%2580%258C%25E4%25BB%2595%25E7%25B5%2584%25E3%2581%25BF%25E3%2581%25A8%25E4%25BD%25BF%25E3%2581%2584%25E6%2596%25B9%25E3%2581%258C%25E3%2582%258F%25E3%2581%258B%25E3%2582%258B%2520Docker%25EF%25BC%2586Kubernetes%25E3%2581%25AE%25E3%2581%258D%25E3%2581%25BB%25E3%2582%2593%25E3%2581%25AE%25E3%2581%258D%25E3%2581%25BB%25E3%2582%2593%25E3%2580%258D%25E3%2583%25AC%25E3%2583%2593%25E3%2583%25A5%25E3%2583%25BC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%259F%25E3%2582%25A2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM4Njc5MTUzZDguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ミア</dc:creator></item><item><title><![CDATA[VScodeでのzennの記事の書き方メモ]]></title><description><![CDATA[久しぶりに記事を書こうとすると忘れてるので備忘録
+前提としてgithubにzennのリポジトリは作っている状態とする
+
+ 記事作成の流れ
+
+githubからVSCodeに環境をコピー（clone&amp;pull)
+記事をコマンドで作成
+コミットする(コミットしてプッシュ)
+
+
+ githubを使って記事を作成する
+参考 https://zenn.dev/eguchi244_dev/articles/github-zenn-linkage-20230501
+まずはgithubからローカル環境にコピーする
+そのやり方としてクローンとプルがある
+とりあえずクローンしとく
+!
+clone：ファ...]]></description><link>https://zenn.dev/dollaga_saiore/articles/how_to_write_zenn_article</link><guid isPermaLink="true">https://zenn.dev/dollaga_saiore/articles/how_to_write_zenn_article</guid><pubDate>Mon, 12 Aug 2024 02:33:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vOhm62L7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:VScode%25E3%2581%25A7%25E3%2581%25AEzenn%25E3%2581%25AE%25E8%25A8%2598%25E4%25BA%258B%25E3%2581%25AE%25E6%259B%25B8%25E3%2581%258D%25E6%2596%25B9%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A9%25E3%2582%258B%25E3%2581%2582%25E3%2581%258C%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzcyZDYzM2JmMzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>どるあが</dc:creator></item><item><title><![CDATA[Linux, shell 同字が2回以上繰返(連続)した文字列を含む行をgrep]]></title><description><![CDATA[
+ Linux, shell 同字が2回以上繰返(連続)した文字列を含む行をgrep
+2024-08-11
+
+
+ (1).何がしたかったか
+
+textファイル(文献)の中で、繰返して(連続して)使用されている「字」をgrepしたかった。
+
+桃之夭夭　灼灼其華
+之子于歸　宜其室家
+このような羅列が6000行もあり、繰返して(連続して)使用されている「字」を知りたかった。この例なら「夭夭」「灼灼」
+
+
+ (2).結論
+
+できた。
+
+grep でいける
+sed でもいける
+
+
+
+
+
+ (3).環境
+
+Ubuntu 22.04
+GNU grep 3.7
+GNU sed 4.8
+
+
+
+ (4).g...]]></description><link>https://zenn.dev/sorehaomosiroi/articles/sorehaomosiroi-20240811_linux_grep_dup_char</link><guid isPermaLink="true">https://zenn.dev/sorehaomosiroi/articles/sorehaomosiroi-20240811_linux_grep_dup_char</guid><pubDate>Sat, 10 Aug 2024 23:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ipfcG5uo--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%252C%2520shell%2520%25E5%2590%258C%25E5%25AD%2597%25E3%2581%258C2%25E5%259B%259E%25E4%25BB%25A5%25E4%25B8%258A%25E7%25B9%25B0%25E8%25BF%2594%2528%25E9%2580%25A3%25E7%25B6%259A%2529%25E3%2581%2597%25E3%2581%259F%25E6%2596%2587%25E5%25AD%2597%25E5%2588%2597%25E3%2582%2592%25E5%2590%25AB%25E3%2582%2580%25E8%25A1%258C%25E3%2582%2592grep%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2584%25E3%2581%2584%25E3%2581%25AD%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2YyMDNkNWJiZDcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>いいね</dc:creator></item><item><title><![CDATA[Minecraft Backup Server を Docker で構築する]]></title><description><![CDATA[コンテナ型仮想環境で、マインクラフト用バックアップサーバーを構築します。使用するコンテナイメージは Docker 社が運営する公開レジストリの Docker Hub から取得します。
+
+ 🛠️ 事前準備
+デバイスやソフトウェアは以下を用いる。
+
+💻 サーバ機（Ubuntu Server、Docker）
+🌐 Docker Hub
+
+
+💿 kaiede/minecraft-bedrock-backup … Backup container service for Minecraft
+
+
+
+
+ 1. Docker のインストール
+以下の記事より Docker のインストールを済ませておく。
+h...]]></description><link>https://zenn.dev/mesgory/articles/8f11b72121fb89</link><guid isPermaLink="true">https://zenn.dev/mesgory/articles/8f11b72121fb89</guid><pubDate>Sat, 10 Aug 2024 12:38:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--k44oVM2U--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Minecraft%2520Backup%2520Server%2520%25E3%2582%2592%2520Docker%2520%25E3%2581%25A7%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E8%25B6%25A3%25E5%2591%25B3%25E3%2581%25AF%25E5%2586%258D%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%2520%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFjMTAyZjVlMTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>趣味は再インストール🍥</dc:creator></item><item><title><![CDATA[Linux 使いになりたい人向けの Intel N100 ミニ PC で構築する開発環境（１５）- VirtualBox]]></title><description><![CDATA[
+ はじめに
+これは、Linux 使いになりたい人向けに Intel N100 ミニ PC を使って開発環境を構築する方法を解説する記事の第１５弾です。第１弾はLinux 使いになりたい人向けの Intel N100 ミニ PC で構築する開発環境（１） - 構築する開発環境について にあり、そこから第２弾へと続いています。そちらからご覧ください。
+ここで使用する Intel N100 ミニ PC の仕様は次のものを前提とします。
+
+
+
+項目
+内容
+
+
+
+
+OS
+Windows 11 Pro
+
+
+CPU
+Intel N100
+
+
+メモリ
+16GB
+
+
+ストレージ
+SSD 512 GB
+
+...]]></description><link>https://zenn.dev/hiro345/articles/n100_15_20240807</link><guid isPermaLink="true">https://zenn.dev/hiro345/articles/n100_15_20240807</guid><pubDate>Sat, 10 Aug 2024 02:45:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ce2pKrz9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%2520%25E4%25BD%25BF%25E3%2581%2584%25E3%2581%25AB%25E3%2581%25AA%25E3%2582%258A%25E3%2581%259F%25E3%2581%2584%25E4%25BA%25BA%25E5%2590%2591%25E3%2581%2591%25E3%2581%25AE%2520Intel%2520N100%2520%25E3%2583%259F%25E3%2583%258B%2520PC%2520%25E3%2581%25A7%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2599%25E3%2582%258B%25E9%2596%258B%25E7%2599%25BA%25E7%2592%25B0%25E5%25A2%2583%25EF%25BC%2588%25EF%25BC%2591%25EF%25BC%2595%25EF%25BC%2589-%2520VirtualBox%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Hiroshi%2520Koyama%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2k5ZzdjLS0xTFk0S2k0LWw3dVFSSFZRdEdQcWZHYTlibVRJYUtFM0E9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Hiroshi Koyama</dc:creator></item><item><title><![CDATA[Network Namespace (NS)の基礎]]></title><description><![CDATA[
+ 概要
+Network Namespace（ネットワークネームスペース、以下NS）は、Linuxカーネルの機能の一つで、複数のネットワークスタックを分離して管理することができます。同一OSシステムの中で異なるネットワーク環境を提供するために広く利用されており、コンテナにおける個別ネットワークの提供のためや仮想ネットワークの作成に利用されています。スタック自体が分離されるため深いリソースの分離が可能になる反面で柔軟な利用ができない場面もあるので利用時には最適な技術の利用の検討が必要です。
+
+ 使い方
+NSの使い方はシンプルで、いくつかの基本的なコマンドを用いて管理することができます。以下...]]></description><link>https://zenn.dev/kanehori/articles/8518bde08ab2b7</link><guid isPermaLink="true">https://zenn.dev/kanehori/articles/8518bde08ab2b7</guid><pubDate>Thu, 08 Aug 2024 11:19:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dGphCbvx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Network%2520Namespace%2520%2528NS%2529%25E3%2581%25AE%25E5%259F%25BA%25E7%25A4%258E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:horihori%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSWFHOXh3eEZaMHJ4Yi1NQXp3TTNJVkdjc3BienFiZHFNc1NURmxhU29GNUstZDlBPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>horihori</dc:creator></item><item><title><![CDATA[Minecraft Bedrock Server を Docker で構築する（Official）]]></title><description><![CDATA[コンテナ型仮想環境で、統合版のマインクラフトサーバーを構築します。使用するコンテナイメージは Docker 社が運営する公開レジストリの Docker Hub から取得します。
+
+ 🛠️ 事前準備
+デバイスやソフトウェアは以下を用いる。
+
+💻 サーバ機（Ubuntu Server、Docker）
+🌐 Docker Hub
+
+
+💿 itzg/minecraft-bedrock-server … Minecraft Server on Docker (Bedrock Edition)
+
+
+
+
+ 1. Docker のインストール
+以下の記事より Docker のインストールを済ませておく。
+...]]></description><link>https://zenn.dev/mesgory/articles/0fb74c53ceebf6</link><guid isPermaLink="true">https://zenn.dev/mesgory/articles/0fb74c53ceebf6</guid><pubDate>Thu, 08 Aug 2024 09:36:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Ib8R9ZBC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Minecraft%2520Bedrock%2520Server%2520%25E3%2582%2592%2520Docker%2520%25E3%2581%25A7%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2599%25E3%2582%258B%25EF%25BC%2588Official%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E8%25B6%25A3%25E5%2591%25B3%25E3%2581%25AF%25E5%2586%258D%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%2520%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFjMTAyZjVlMTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>趣味は再インストール🍥</dc:creator></item><item><title><![CDATA[【Linux】早く知りたかったmanコマンドの使い方]]></title><description><![CDATA[
+ はじめに
+Linuxに存在するmanコマンドについて、C言語でプログラミングをしている身として早く知りたかったことを書きました。
+
+ 結論
+こう書くと幸せになれます。
+
+伝えたい書式
+$ man [セクション番号] &lt;プログラム&gt;
+
+知りたかったセクション番号はこちら。
+
+
+
+セクション番号
+説明
+
+
+
+
+2
+システムコール
+
+
+3
+ライブラリ関数
+
+
+
+だいたい
+$ man 2 write
+とか
+$ man 3 printf
+というように書けば、望む説明を見られます。
+
+ 説明
+$ man printf
+この書き方の場合、manコマンドはセクション番号1から順に探して、...]]></description><link>https://zenn.dev/bot_2662/articles/25f436f8d11584</link><guid isPermaLink="true">https://zenn.dev/bot_2662/articles/25f436f8d11584</guid><pubDate>Tue, 06 Aug 2024 15:40:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--TdqLKwBI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Linux%25E3%2580%2591%25E6%2597%25A9%25E3%2581%258F%25E7%259F%25A5%25E3%2582%258A%25E3%2581%259F%25E3%2581%258B%25E3%2581%25A3%25E3%2581%259Fman%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2581%25AE%25E4%25BD%25BF%25E3%2581%2584%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25BC%25E3%2581%25A3%25E3%2581%25A8%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAwMDU3MWY4ZTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ぼっと</dc:creator></item><item><title><![CDATA[Proxmox VE 8.2でRealtek RTL8126を使えるようにする]]></title><description><![CDATA[
+ はじめに
+最近ミニPCを使って遊んでる中で、試しにProxmox VEをインストールしてみたところRealtek RTL8126（NIC）を認識してくれなかったので、使えるようにするまでの備忘録です。
+
+ やったこと
+以下の方法でドライバをインストールしただけで無事動きました😌
+
+ドライバと必要なパッケージの収集
+Proxmox VEでドライバのインストール
+NICの設定
+
+なお、作業用PCにはM2 MacBookを使用しています。
+
+ 1. ドライバと必要なパッケージの収集
+Proxmox VEで apt-get install …と書きたいところですが、残念ながらNICを認識して...]]></description><link>https://zenn.dev/vol1003/articles/c03e5c60681d34</link><guid isPermaLink="true">https://zenn.dev/vol1003/articles/c03e5c60681d34</guid><pubDate>Mon, 05 Aug 2024 06:14:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--YbjVB8gs--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Proxmox%2520VE%25208.2%25E3%2581%25A7Realtek%2520RTL8126%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2588%25E3%2582%258B%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:vol1003%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VkNGI4ZDgzNjQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>vol1003</dc:creator></item><item><title><![CDATA[Wineで日本語フォントが正しく表示されるようにする]]></title><description><![CDATA[Wineを使用していると、日本語フォントが正しく表示されないことがあります。
+以下の手順を実行することで、この問題を解決できます。
+
+
+ 結論
+まず、最初に結論を示します。以下のコマンドを実行することで、日本語フォントの表示問題を解決することができます。
+winetricks cjkfonts
+
+ 詳細な手順
+※既にWineがインストールされていることを前提にします。
+Manjaro Linuxでの手順を解説します
+
+ 1. Winetricksのインストール
+まず、Winetricksをインストールします。Winetricksは、Wine上で動作するアプリケーションの設定を簡単に行うた...]]></description><link>https://zenn.dev/nemolize/articles/26c21148286705</link><guid isPermaLink="true">https://zenn.dev/nemolize/articles/26c21148286705</guid><pubDate>Sun, 04 Aug 2024 06:00:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3VdqykSF--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Wine%25E3%2581%25A7%25E6%2597%25A5%25E6%259C%25AC%25E8%25AA%259E%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25B3%25E3%2583%2588%25E3%2581%258C%25E6%25AD%25A3%25E3%2581%2597%25E3%2581%258F%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2595%25E3%2582%258C%25E3%2582%258B%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nemolize%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2p0LTFnMWt6X2ZxbWM4Q2lhWnpEU2JOamZMeDhPelNYRHkyaTZjPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nemolize</dc:creator></item><item><title><![CDATA[no_proxyの書き方 サブドメインは含まれるか]]></title><description><![CDATA[Linuxの環境変数no_proxyはどう書けば良いのでしょうか？
+
+ 前提
+環境変数no_proxyがどう解釈されるかについては、統一された仕様はなく、ツールや言語の実装に依存しています。したがって、最も正確なno_proxyの書き方は、「使いたいツールや言語の実装に合わせて書く」ということになりますが、ここでは一般的にどういう傾向があるかを記載します。
+
+ 大文字か小文字か
+小文字no_proxyと大文字NO_PROXYのどちらを使うべきかについては、基本的には小文字no_proxyで問題ありません。念のためと思う場合は、小文字と大文字の両方を設定しておくこともできます。
+参考：
+h...]]></description><link>https://zenn.dev/dannykitadani/articles/824ebd43548343</link><guid isPermaLink="true">https://zenn.dev/dannykitadani/articles/824ebd43548343</guid><pubDate>Sun, 04 Aug 2024 05:15:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--MaJHyRvT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:no_proxy%25E3%2581%25AE%25E6%259B%25B8%25E3%2581%258D%25E6%2596%25B9%2520%25E3%2582%25B5%25E3%2583%2596%25E3%2583%2589%25E3%2583%25A1%25E3%2582%25A4%25E3%2583%25B3%25E3%2581%25AF%25E5%2590%25AB%25E3%2581%25BE%25E3%2582%258C%25E3%2582%258B%25E3%2581%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Danny%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQwZmU0MzM2NzAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Danny</dc:creator></item></channel></rss>
