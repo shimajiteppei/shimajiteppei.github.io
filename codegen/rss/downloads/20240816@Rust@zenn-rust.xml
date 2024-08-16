@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Rust」のフィード]]></title><description><![CDATA[Zennのトピック「Rust」のRSSフィードです]]></description><link>https://zenn.dev/topics/rust</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ba09661577.png</url><title>Zennの「Rust」のフィード</title><link>https://zenn.dev/topics/rust</link></image><generator>zenn.dev</generator><lastBuildDate>Fri, 16 Aug 2024 09:09:06 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/rust/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Rust言語入門：安全性と高速性を兼ね備えた次世代プログラミング言語]]></title><description><![CDATA[
+ Rust言語入門：安全性と高速性を兼ね備えた次世代プログラミング言語
+
+ はじめに
+Rustは、Mozillaによって開発されたシステムプログラミング言語であり、特に安全性とパフォーマンスを重視しています。CやC++と同様に低レベルの操作が可能でありながら、メモリ安全性を保証するための独自の仕組みを持っています。これにより、開発者はバグやセキュリティの脆弱性を減少させることができ、効率的なプログラムを作成することが可能です。
+本記事では、Rustの基本的な概念、特徴、実用的な例を通じて、Rustがどのようにして安全性と高速性を両立させているのかを探ります。また、Rustのエコシステム...]]></description><link>https://zenn.dev/llm_robot/articles/20240816-rust-ownership-borrowing-cargo</link><guid isPermaLink="true">https://zenn.dev/llm_robot/articles/20240816-rust-ownership-borrowing-cargo</guid><pubDate>Thu, 15 Aug 2024 22:08:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bmdoBKAp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E8%25A8%2580%25E8%25AA%259E%25E5%2585%25A5%25E9%2596%2580%25EF%25BC%259A%25E5%25AE%2589%25E5%2585%25A8%25E6%2580%25A7%25E3%2581%25A8%25E9%25AB%2598%25E9%2580%259F%25E6%2580%25A7%25E3%2582%2592%25E5%2585%25BC%25E3%2581%25AD%25E5%2582%2599%25E3%2581%2588%25E3%2581%259F%25E6%25AC%25A1%25E4%25B8%2596%25E4%25BB%25A3%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%259F%25E3%2583%25B3%25E3%2582%25B0%25E8%25A8%2580%25E8%25AA%259E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:AIZAWA%2520version%253A0.0.2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAwMTE3MGM1NDcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>AIZAWA version:0.0.2</dc:creator></item><item><title><![CDATA[Rust を試してみる]]></title><description><![CDATA[
+ 概要
+世の中で徐々に C/C++ から Rust への移行が始まっているので、Rust を試してみようと思い、環境構築から試してみました。
+同じような記事はネットで沢山あがっていますが、当然ながら古い記事もあり、少しハマりました・・・。
+この記事の内容は 2024/08/15 に試しています。
+
+ 環境
+OS: Windows 10
+Rust: 1.80.1
+
+ インストール
+参考にしたサイト：
+https://www.rust-lang.org/tools/install
+https://qiita.com/rfukudome/items/76fd9251f4885de69edd
+...]]></description><link>https://zenn.dev/kconcon/articles/009a08400449b2</link><guid isPermaLink="true">https://zenn.dev/kconcon/articles/009a08400449b2</guid><pubDate>Thu, 15 Aug 2024 12:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--f4V3LPEz--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%2520%25E3%2582%2592%25E8%25A9%25A6%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kcon%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS2J3dThiblhQNFVPck5ESVA2MTRHamVOUEIteU52U2lpUzZnZXhKeEUzPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kcon</dc:creator></item><item><title><![CDATA[Rust | axumにCSRF対応のトークンを組み込む]]></title><description><![CDATA[
+ 概要
+「Rust | axumでモノリシックなWEBサイトを作るための色々」の続き
+axumでモノリシックなWEBサイトを作る際に使えそうなネタのメモ。
+今回はCSRF対策について
+試すクレートは下記２点
+
+axum_csrf
+csrf
+
+!
+環境情報
+Rust: 1.80.1
+axum: 0.7.5
+
+
+ axum_csrfクレートでCSRFトークンを追加する
+axum_csrfを利用してCSRFトークンを利用できるようにする
+Cargo.tomlへ下記を追加
+axum_csrf = { version = "0.9.0", features = ["layer"] }
+main....]]></description><link>https://zenn.dev/systemkd/articles/0663af773ab08e</link><guid isPermaLink="true">https://zenn.dev/systemkd/articles/0663af773ab08e</guid><pubDate>Thu, 15 Aug 2024 08:47:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--b-3Dq53I--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%2520%257C%2520axum%25E3%2581%25ABCSRF%25E5%25AF%25BE%25E5%25BF%259C%25E3%2581%25AE%25E3%2583%2588%25E3%2583%25BC%25E3%2582%25AF%25E3%2583%25B3%25E3%2582%2592%25E7%25B5%2584%25E3%2581%25BF%25E8%25BE%25BC%25E3%2582%2580%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:systemkd%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS2JqVUtvRnp1U1gtd2NSaU5FZVN5bkdYLWJLeXM3eW90OGJzQVM1WVl3M1E9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>systemkd</dc:creator></item><item><title><![CDATA[Nimのメモリ管理を理解する⑥ ー Rustと比較して]]></title><description><![CDATA[この記事はNimのメモリ管理を理解するシリーズの6作目になります。Nimではコンパイラがソースコードを解析し、スコープと所有権に基づくメモリ管理を開発者が考える必要がなく自動で行います。今回は同じ処理をRustで実装し、それがNimではどう書けるのか、コンパイラはそれをどう変化させるのかを見ていきます。
+
+〜Nimのメモリ管理を理解するシリーズ〜
+
+Nimのメモリ管理を理解する① ― Nimの新しいGC、ARCについて
+Nimのメモリ管理を理解する② ― Nimのムーブセマンティクス
+Nimのメモリ管理を理解する③ ― GCなしのNim
+Nimのメモリ管理を理解する④ ― ORC - ア...]]></description><link>https://zenn.dev/dumblepy/articles/d17f07bd973c6b</link><guid isPermaLink="true">https://zenn.dev/dumblepy/articles/d17f07bd973c6b</guid><pubDate>Wed, 14 Aug 2024 14:08:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--DBawS476--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Nim%25E3%2581%25AE%25E3%2583%25A1%25E3%2583%25A2%25E3%2583%25AA%25E7%25AE%25A1%25E7%2590%2586%25E3%2582%2592%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2599%25E3%2582%258B%25E2%2591%25A5%2520%25E3%2583%25BC%2520Rust%25E3%2581%25A8%25E6%25AF%2594%25E8%25BC%2583%25E3%2581%2597%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:medy%2520%2520%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg3NTI2MzJiNDEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>medy🐍👑</dc:creator></item><item><title><![CDATA[wasm-opt で [parse exception: expected more elements in list] エラーが発生した]]></title><description><![CDATA[wasm-bindgen を使用したプロジェクトで表題のようなエラーが出て苦しんだので備忘録として解決法を残しておきます。
+
+ TL;DR
+pkg/ ディレクトリにある XXX_bg.wasm-opt.wasm を削除してリビルドします。
+
+ 環境
+
+macOS Sonoma 14.2
+MacBook Air M2, 2022
+rustc 1.80.0 (051478957 2024-07-21)
+cargo 1.80.0 (376290515 2024-07-16)
+
+
+ Cargo.toml
+[package]
+edition = "2021"
+
+[lib]
+crate-type =...]]></description><link>https://zenn.dev/itsu_dev/articles/3ff4b61fac7959</link><guid isPermaLink="true">https://zenn.dev/itsu_dev/articles/3ff4b61fac7959</guid><pubDate>Mon, 12 Aug 2024 18:23:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--VjzcG0D8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:wasm-opt%2520%25E3%2581%25A7%2520%255Bparse%2520exception%253A%2520expected%2520more%2520elements%2520in%2520li...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A1%25E3%2582%2585%25E3%2582%258B%25E3%2582%258A%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FkNGNhZjgxZDUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ちゅるり</dc:creator></item><item><title><![CDATA[Rustで湯婆婆を作ってみた]]></title><description><![CDATA[
+ 元ネタ様
+https://qiita.com/Nemesis/items/c7192a7c510788d2cba2
+
+ 実際に動かすとこんな感じ
+
+
+ コードはこちら
+https://github.com/2323-code/yubaba-rust
+ほとんどThe bookを参考にしました。
+（ioやrand、変数を String::new()で宣言するなど）
+
+ main()
+start_yubaba()を呼び出すだけです。
+fn main() {
+    start_yubaba(); // start_yubaba()を呼び出すだけ
+}
+
+ start_yubaba()
+今回の...]]></description><link>https://zenn.dev/2323_code/articles/8efd8a79c224e1</link><guid isPermaLink="true">https://zenn.dev/2323_code/articles/8efd8a79c224e1</guid><pubDate>Mon, 12 Aug 2024 16:00:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--G_y6GGGn--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25A7%25E6%25B9%25AF%25E5%25A9%2586%25E5%25A9%2586%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25B5%25E3%2581%25BF%25E3%2581%25B5%25E3%2581%25BF%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZkZGFlNGU3NmIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ふみふみ</dc:creator></item><item><title><![CDATA[Actix Web と slqx を使って TiDB Serverless にアクセスする]]></title><description><![CDATA[
+ はじめに
+今更ながら、ゼルダの時のオカリナにハマっている Shota ですw
+今回は、Rust の webフレームワークの Actix Web ✖︎ sqlx ✖︎ TiDB で簡易的なAPIサーバーを構築しましたので、紹介をしていきます！
+他の参考記事もほとんどなかったので、ぜひ本記事が参考になれば嬉しいです。
+Actix Web については以前に公開した記事がありますので、こちらも参考になればと。
+https://zenn.dev/collabostyle/articles/77f4f8528ded1c
+🔻Actix Web
+https://actix.rs/
+🔻sqlx
+htt...]]></description><link>https://zenn.dev/collabostyle/articles/1ca9677d9c9777</link><guid isPermaLink="true">https://zenn.dev/collabostyle/articles/1ca9677d9c9777</guid><pubDate>Mon, 12 Aug 2024 11:20:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--tji7yt9W--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Actix%2520Web%2520%25E3%2581%25A8%2520slqx%2520%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%2520TiDB%2520Serverless%2520%25E3%2581%25AB%25E3%2582%25A2%25E3%2582%25AF%25E3%2582%25BB%25E3%2582%25B9%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Shota%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzViM2I3NTQxYzUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25B3%25E3%2583%25A9%25E3%2583%259C%25E3%2582%25B9%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25AB%2520Developers%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MwNGNlNzQxNTYuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Shota</dc:creator></item><item><title><![CDATA[chrono から serde を使った Serialize できない場合の対処]]></title><description><![CDATA[
+ はじめに
+DB内の created_at、updated_atを参照する機会は少なくないと思いますが、
+これらを Rust の chrono クレートを使って参照し、最終的に serde クレートの Serialize をしようとした時にプチハマりしたことをつらつら書いていきます。
+
+ エラー内容
+以下のような構造体を定義し、属性マクロに Serialize を定義します。
+#[derive(Serialize)]
+struct Todos {
+    id: String,
+    title: String,
+    description: Option&lt;String&g...]]></description><link>https://zenn.dev/collabostyle/articles/5a01a8ba60552a</link><guid isPermaLink="true">https://zenn.dev/collabostyle/articles/5a01a8ba60552a</guid><pubDate>Mon, 12 Aug 2024 08:10:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ATLRxLxT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:chrono%2520%25E3%2581%258B%25E3%2582%2589%2520serde%2520%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%259F%2520Serialize%2520%25E3%2581%25A7%25E3%2581%258D%25E3%2581%25AA%25E3%2581%2584%25E5%25A0%25B4%25E5%2590%2588%25E3%2581%25AE%25E5%25AF%25BE%25E5%2587%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Shota%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzViM2I3NTQxYzUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25B3%25E3%2583%25A9%25E3%2583%259C%25E3%2582%25B9%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25AB%2520Developers%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MwNGNlNzQxNTYuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Shota</dc:creator></item><item><title><![CDATA[Tauri上でSpotifyの再生中の曲情報をリアルタイムで取得し表示する]]></title><description><![CDATA[
+ 導入
+今回は、Tauriを使用してSpotifyから再生中の曲情報をリアルタイムで取得する方法を紹介します。環境はmacOSです、悪しからず。
+フロントのフレームワークはReactです。
+
+
+ AppleScriptを使ったSpotifyトラック情報の取得
+macOSでは、Spotify APIを使わずともAppleScriptを使用してSpotifyから現在再生中の曲情報を取得することができます。以下のようなAppleScriptを作成し、Rustのコードから呼び出します。
+tell application "Spotify"
+    if player state is play...]]></description><link>https://zenn.dev/ocat/articles/e7a22ac0f658f7</link><guid isPermaLink="true">https://zenn.dev/ocat/articles/e7a22ac0f658f7</guid><pubDate>Mon, 12 Aug 2024 01:57:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9RgqFroS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Tauri%25E4%25B8%258A%25E3%2581%25A7Spotify%25E3%2581%25AE%25E5%2586%258D%25E7%2594%259F%25E4%25B8%25AD%25E3%2581%25AE%25E6%259B%25B2%25E6%2583%2585%25E5%25A0%25B1%25E3%2582%2592%25E3%2583%25AA%25E3%2582%25A2%25E3%2583%25AB%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25A0%25E3%2581%25A7%25E5%258F%2596%25E5%25BE%2597%25E3%2581%2597%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Ocat%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc0OTdhYmZiZDEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Ocat</dc:creator></item><item><title><![CDATA[GopherがRust入門したので違いをまとめてみた]]></title><description><![CDATA[
+ はじめに
+ウホウホ。
+Rustを使い始めてちょうど2年くらい経って、すこしRustのことがわかってきたので、改めてGoとRustのそれぞれの違いを整理したいなと思いこの記事を書きました。
+筆者はウェブ開発の経験しかないので、ウェブを中心にまとめています。
+気づいたらかなりな量になってしまったのとGopher向けにRustを紹介するような記事になってしまいましたが、よければ読んでみてください。
+
+ 筆者について
+Goを使い始めて7年ほど経っていて、これまでCLI/TUIツールをいくつか作ってきました。
+スペシャリストではないですが、プロダクトでGoを書く分には特に問題ないレベルかなと思...]]></description><link>https://zenn.dev/skanehira/articles/2024-08-12-go-rust-pros-cons</link><guid isPermaLink="true">https://zenn.dev/skanehira/articles/2024-08-12-go-rust-pros-cons</guid><pubDate>Mon, 12 Aug 2024 00:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--D4U1hcns--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Gopher%25E3%2581%258CRust%25E5%2585%25A5%25E9%2596%2580%25E3%2581%2597%25E3%2581%259F%25E3%2581%25AE%25E3%2581%25A7%25E9%2581%2595%25E3%2581%2584%25E3%2582%2592%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25B4%25E3%2583%25AA%25E3%2583%25A9%2540%25E6%2599%2582%25E4%25BB%25A3%25E3%2581%25AFRust%25E3%2581%25A7%25E3%2581%2599%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdlNGE3Zjg2ODIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ゴリラ@時代はRustです</dc:creator></item><item><title><![CDATA[Rustの勉強3]]></title><description><![CDATA[こんにちは!kirigayaです。
+この記事を書いているタイミングは夏休みです！
+ダラダラしているともったいないのでしっかり記事書いてアウトプットしていきます。
+今回は3回目の記事です。(・ω・)
+
+ printの違い
+print!()
+テキストを改行なしで出力します。
+print!("こんにちは");
+print!("こんばんは");
+println!()
+テキストを出力した後、自動的に改行します。
+println!("こんにちは");
+println!("こんばんは");
+
+ 変数のスコープ
+
+スコープ (Scope):
+スコープとは、変数が有効である範囲を指します。Rustでは、ス...]]></description><link>https://zenn.dev/iwatagumi/articles/5ef2c5e21327e9</link><guid isPermaLink="true">https://zenn.dev/iwatagumi/articles/5ef2c5e21327e9</guid><pubDate>Sun, 11 Aug 2024 17:27:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--QPbvw5iv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:Rust%25E3%2581%25AE%25E5%258B%2589%25E5%25BC%25B73%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:kirigaya%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U1MjI0YmNkMDYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E5%25B2%25A9%25E7%2594%25B0%25E7%25B5%2584%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JmNGYxNzkwNDMuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kirigaya</dc:creator></item><item><title><![CDATA[Rustの特徴]]></title><description><![CDATA[こんにちはkirigayaです。
+Rustの特徴をまとめました。
+
+ メモリ安全性
+
+
+
+概念
+説明
+
+
+
+
+借用
+Rustでは、値、別の変数、または関数への一時的なアクセスを借用として許可し、参照が寿命を超えないようにします。
+
+
+参照
+不変参照（&amp;T）とミュータブル参照（&amp;mut T）の2つのタイプがあります。
+
+
+可変借用
+Rustは常にオブジェクトの可変借用が他の借用と競合しないことを保証します。
+
+
+メモリ安全性エラー
+Rustはコンパイル時にNullポインター逆参照、セグメンテーション違反、ダングリングポインター、バッファオーバーフローを防止します。
+
+
+イテ...]]></description><link>https://zenn.dev/iwatagumi/articles/6f1756a3a164e1</link><guid isPermaLink="true">https://zenn.dev/iwatagumi/articles/6f1756a3a164e1</guid><pubDate>Sun, 11 Aug 2024 14:20:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--cnfF3Qnf--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:Rust%25E3%2581%25AE%25E7%2589%25B9%25E5%25BE%25B4%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:kirigaya%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U1MjI0YmNkMDYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E5%25B2%25A9%25E7%2594%25B0%25E7%25B5%2584%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JmNGYxNzkwNDMuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kirigaya</dc:creator></item><item><title><![CDATA[Rustの勉強2]]></title><description><![CDATA[こんにちは！kirigayaです。
+今回は第2回です。
+ん？と感じたことをまとめています。
+
+ 標準ライブラリを使う時
+
+
+プロシージャ形式
+モジュール名::関数名
+fn main(){
+  print!("{}", str::len("abc"));
+}
+
+
+
+オブジェクト形式(推奨らしい)
+オブジェクト名::メソッド名
+fn main(){
+  print!("{}", "abc".len());
+}
+
+
+
+
+ 条件式
+{}波カッコで囲まれた部分をブロックと呼ぶ
+書き方1
+fn main(){
+    let n = 5;
+    if n == 3{
+        print!(...]]></description><link>https://zenn.dev/iwatagumi/articles/13f13064c73031</link><guid isPermaLink="true">https://zenn.dev/iwatagumi/articles/13f13064c73031</guid><pubDate>Sun, 11 Aug 2024 14:08:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--rB5Pqoom--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:Rust%25E3%2581%25AE%25E5%258B%2589%25E5%25BC%25B72%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:kirigaya%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U1MjI0YmNkMDYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E5%25B2%25A9%25E7%2594%25B0%25E7%25B5%2584%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JmNGYxNzkwNDMuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kirigaya</dc:creator></item><item><title><![CDATA[wasi2icコマンド]]></title><description><![CDATA[
+ Canisterとは
+ICP（Internet Computer Protocol）のCanisterは、Smart Contractの一種であり、WebAssemblyのプログラムを実行できます。
+Wasmランタイムとしてwasmtimeが使用されていて、2024年8月時点ではwasm32-unknown-unknownに対応しています。WASI (WebAssembly System Interface)やWASM 64ビットは計画されているものの、現時点では未対応という状況です。
+現状Canisterに向けにはIC独自のSystem APIが用意されており、ストレージに相当する...]]></description><link>https://zenn.dev/halifax/articles/ic_rust_04_wasi2ic</link><guid isPermaLink="true">https://zenn.dev/halifax/articles/ic_rust_04_wasi2ic</guid><pubDate>Sun, 11 Aug 2024 10:16:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8e88tkpt--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:wasi2ic%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:halifax%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JhNWUxM2Q5YzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>halifax</dc:creator></item><item><title><![CDATA[[Rust] VSCode のテストエクスプローラに表示させる方法]]></title><description><![CDATA[
+ TL;DR
+rust-analyzer をインストールし、設定画面で rust-analyzer.testExplorer にチェックを入れるとできます 😁
+
+
+
+ 参考
+しれっと feat: Add test explorer で追加されていたけどデフォルトだとオフになっていたぽい
+]]></description><link>https://zenn.dev/shusann01116/articles/6e5926b56ba0fa</link><guid isPermaLink="true">https://zenn.dev/shusann01116/articles/6e5926b56ba0fa</guid><pubDate>Sat, 10 Aug 2024 12:49:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1avCVuy3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BRust%255D%2520VSCode%2520%25E3%2581%25AE%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E3%2582%25A8%25E3%2582%25AF%25E3%2582%25B9%25E3%2583%2597%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%25A9%25E3%2581%25AB%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2595%25E3%2581%259B%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:shusann%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2l3SkJWWjBoeVZwODJwMmJRRjZfMWZmZkd2U1V0Z29pZ0U0M1dsRExzPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>shusann</dc:creator></item><item><title><![CDATA[アプリ開発したことない人がRustで冷蔵庫管理Webアプリ開発に挑戦した話]]></title><description><![CDATA[
+ はじめに
+私は現在，機械系の大学生です。大学でC言語を学び，picやarduinoで簡単な組み込みを行っていました。その途中でWeb関係に興味を持ち，何かアプリ開発をしてみたく，Rustでアプリ開発をしてみました。
+この記事では詳しいコードのことは書かず，学んだことや感想を書いていきたいと思います。
+
+ 作成したもの
+作ったリポジトリは以下のものです。
+コードが汚いですが，ご容赦ください。(リファクタリングしたい)
+
+ 冷蔵庫管理アプリ
+冷蔵庫の中身にある食品と賞味期限を管理するアプリケーションです。
+フロントエンドはReact(typescript)，バックエンドはRustでAxu...]]></description><link>https://zenn.dev/ryo_nakaya/articles/20873a13e2c123</link><guid isPermaLink="true">https://zenn.dev/ryo_nakaya/articles/20873a13e2c123</guid><pubDate>Sat, 10 Aug 2024 09:52:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bdsdw7vi--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E9%2596%258B%25E7%2599%25BA%25E3%2581%2597%25E3%2581%259F%25E3%2581%2593%25E3%2581%25A8%25E3%2581%25AA%25E3%2581%2584%25E4%25BA%25BA%25E3%2581%258CRust%25E3%2581%25A7%25E5%2586%25B7%25E8%2594%25B5%25E5%25BA%25AB%25E7%25AE%25A1%25E7%2590%2586Web%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E9%2596%258B%25E7%2599%25BA%25E3%2581%25AB%25E6%258C%2591%25E6%2588%25A6%25E3%2581%2597%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nakaryo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg4MDVhNjgyY2QuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nakaryo</dc:creator></item><item><title><![CDATA[RustプロジェクトのキャッシュをするGitHub Action：Rust Cacheメモ [blessed.rsシリーズ24]]]></title><description><![CDATA[
+ 概要
+https://blessed.rs/crates
+こちらのリストにあるものを見て書いたメモになります。
+今回はRust Cacheについてです。
+https://github.com/Swatinem/rust-cache
+
+ Rust Cacheとは
+Rustプロジェクト用のキャッシュを簡単に設定できるGitHub Action
+
+ できること
+Rustプロジェクトに適した形でのキャッシュを簡単に設定できる。
+例えば以下のように利用することができる。
+name: Rust CI
+on: [push, pull_request]
+
+jobs:
+  test:
+    name...]]></description><link>https://zenn.dev/kotabrog/articles/a3c3033f96e9ec</link><guid isPermaLink="true">https://zenn.dev/kotabrog/articles/a3c3033f96e9ec</guid><pubDate>Sat, 10 Aug 2024 06:03:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--eckZDvXQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E3%2581%25AE%25E3%2582%25AD%25E3%2583%25A3%25E3%2583%2583%25E3%2582%25B7%25E3%2583%25A5%25E3%2582%2592%25E3%2581%2599%25E3%2582%258BGitHub%2520Action%25EF%25BC%259ARust%2520Cache%25E3%2583%25A1%25E3%2583%25A2%2520%255Bblessed.rs...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kota%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pndUZyRTdIcS13U3dMRHFoT05pbjFKWVZHOVFZcjBEWXQ2SVZ3WWc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kota</dc:creator></item><item><title><![CDATA[＃25　Implementing Elliptic Curves in Rust: A Comprehensive Guide]]></title><description><![CDATA[
+
+ Introduction
+In the last blog, we learned about finite field and implemented it in Rust programming language.
+In this blog post, we are going to learn Elliptic Curves. Like last blog, I will explain the defintion of elliptic curve and will implement in Rust programming language.
+Let's get star...]]></description><link>https://zenn.dev/nxted_sapporo/articles/542476973d1752</link><guid isPermaLink="true">https://zenn.dev/nxted_sapporo/articles/542476973d1752</guid><pubDate>Fri, 09 Aug 2024 02:30:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--EMP7Zi33--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25EF%25BC%258325%25E3%2580%2580Implementing%2520Elliptic%2520Curves%2520in%2520Rust%253A%2520A%2520Comprehensive...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:NXTEDCo.%252C%2520Ltd.%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBmZjQzOTVhYzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>NXTEDCo., Ltd.</dc:creator></item><item><title><![CDATA[FlutterエンジニアのためのRust製TUIツール「flx」を作りました]]></title><description><![CDATA[米国株が200円から買えるwoodstock.clubというアプリを開発する会社で働いているitomeです。
+https://woodstock.club
+会社のzenn Publicationを作ったのでこれからじゃんじゃん更新していく所存です。
+先日のFlutterNinjasというイベントで発表したのですが、flxというFlutter開発者向けRust製TUIツールを作ったのでその紹介をします。
+https://github.com/itome/flx
+
+ flxとは
+こんな感じでターミナルの中でFlutterのDevToolsのような機能にアクセスできるTUIツールです。
+
+TU...]]></description><link>https://zenn.dev/woodstock_tech/articles/c31415b0284fb9</link><guid isPermaLink="true">https://zenn.dev/woodstock_tech/articles/c31415b0284fb9</guid><pubDate>Thu, 08 Aug 2024 07:41:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--W06rESdy--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Flutter%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%25E3%2581%25AE%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AERust%25E8%25A3%25BDTUI%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%25E3%2580%258Cflx%25E3%2580%258D%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258A%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Takeshi%2520Tsukamoto%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E5MTQzNDllZDIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:woodstock.club%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NmMDM0ODM0YzMuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Takeshi Tsukamoto</dc:creator></item><item><title><![CDATA[＃20　Implementing Finite Field Arithmetic in Rust]]></title><description><![CDATA[
+ Introduction
+Finite fields, also known as Galois fields, are algebraic structures that have a finite number of elements and follow specific mathematical rules. They play a fundamental role in various areas of mathematics, computer science, and cryptography.
+Significance of Finite Fields in Comp...]]></description><link>https://zenn.dev/nxted_sapporo/articles/7065a1ab2000bd</link><guid isPermaLink="true">https://zenn.dev/nxted_sapporo/articles/7065a1ab2000bd</guid><pubDate>Wed, 07 Aug 2024 02:45:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--I93OwYuU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25EF%25BC%258320%25E3%2580%2580Implementing%2520Finite%2520Field%2520Arithmetic%2520in%2520Rust%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:NXTEDCo.%252C%2520Ltd.%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBmZjQzOTVhYzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>NXTEDCo., Ltd.</dc:creator></item></channel></rss>
