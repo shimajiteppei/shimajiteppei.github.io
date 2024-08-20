@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Linux」のフィード]]></title><description><![CDATA[Zennのトピック「Linux」のRSSフィードです]]></description><link>https://zenn.dev/topics/linux</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/860a9eb1e4.png</url><title>Zennの「Linux」のフィード</title><link>https://zenn.dev/topics/linux</link></image><generator>zenn.dev</generator><lastBuildDate>Tue, 20 Aug 2024 03:03:53 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/linux/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[LinuxにおけるVRF基礎]]></title><description><![CDATA[
+ 概要
+VRF（Virtual Routing and Forwarding）は、単一のルータやサーバにおいて複数のルーティングテーブルを使用できる技術になります。通常Linuxでデフォルトで使用するのはグローバルのルーティングテーブルになりますが、VRFはそれとは別に独立したルーティングテーブルを持ち、独立したVRFに基づいてパケットを分離、ルーティングすることができます。
+VRFと類似の機能にNetwork Namespaceがありますが、目的と使い方に違いがあるため用途に合わせて使い分けることが必要です。Network Namespaceは、カーネルレベルでネットワークスタック全...]]></description><link>https://zenn.dev/kanehori/articles/5d3ef0e85031fb</link><guid isPermaLink="true">https://zenn.dev/kanehori/articles/5d3ef0e85031fb</guid><pubDate>Mon, 19 Aug 2024 10:36:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3ZzylTSP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%25E3%2581%25AB%25E3%2581%258A%25E3%2581%2591%25E3%2582%258BVRF%25E5%259F%25BA%25E7%25A4%258E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:horihori%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAyMzFhNTg4MmEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>horihori</dc:creator></item><item><title><![CDATA[iptablesの基礎、基本操作、D-NAT/S-NATの構成方法]]></title><description><![CDATA[
+ 概要
+iptablesは、Linuxシステムでネットワークトラフィックを制御するための強力なツールです。本記事では、iptablesの基本概念、基本操作、DNAT（Destination Network Address Translation）、SNAT（Source Network Address Translation）について詳しく解説します。
+
+ 目次
+IPTablesの基礎
+IPTablesの基本操作
+実際の使用例
+ネットワーク構成例
+まとめ
+
+ IPTablesの基礎
+IPTablesは、パケットフィルタリングとNAT（ネットワークアドレス変換）を実現するためのコマンドラ...]]></description><link>https://zenn.dev/kanehori/articles/4c1212c0ba477e</link><guid isPermaLink="true">https://zenn.dev/kanehori/articles/4c1212c0ba477e</guid><pubDate>Mon, 19 Aug 2024 10:26:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bpWemTi8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:iptables%25E3%2581%25AE%25E5%259F%25BA%25E7%25A4%258E%25E3%2580%2581%25E5%259F%25BA%25E6%259C%25AC%25E6%2593%258D%25E4%25BD%259C%25E3%2580%2581D-NAT%252FS-NAT%25E3%2581%25AE%25E6%25A7%258B%25E6%2588%2590%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:horihori%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAyMzFhNTg4MmEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>horihori</dc:creator></item><item><title><![CDATA[VMware fusionでparrotOSを作成]]></title><description><![CDATA[intel macbook pro からM2 macbook air にしてからVirtual Boxが使えなくて困ってたが、dockerではできないことも多いしやっぱりVMは必要だなってことで個人利用無料になったVMwareを試してみる。
+目的はセキュリティの勉強用、CTFを始めるにあたりparrotOSのGUI環境を作ること。
+他 VMware fusion のVM作成の役に立てば。
+スクショやログ撮り忘れてたのでまた作り直したりしたら情報追加修正するかも、です。
+
+ 環境
+
+M2 macbook air
+メモリ8GB
+Sonoma 14.6.1
+homebrew 構築済み
+
+
+ V...]]></description><link>https://zenn.dev/yufuworks/articles/33769833d38122</link><guid isPermaLink="true">https://zenn.dev/yufuworks/articles/33769833d38122</guid><pubDate>Sun, 18 Aug 2024 16:48:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--g7UuiXT9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:VMware%2520fusion%25E3%2581%25A7parrotOS%25E3%2582%2592%25E4%25BD%259C%25E6%2588%2590%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hiro%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dOeXhkbTFIXzlYdHcxdGpHb1lDQmJQVXZya2xMd3VvNmR0eXY2PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hiro</dc:creator></item><item><title><![CDATA[WSL2 環境構築の手順]]></title><description><![CDATA[
+ WSL2 (Windows Subsystem for Linux 2)
+WindowsのLinux仮想マシン (Ubuntu)。
+VirtualBoxより軽量、起動も高速。
+
+ 1. WSL2のインストール
+
+ 2-1. Windows Terminalをインストール
+まずは使いやすいターミナルを準備。
+Microsoft Storeから、Microsoft公式のWindows Terminal のアプリをインストール。
+Win + X のショートカットキーからターミナルを選択で開く。
+
+
+
+
+
+
+
+
+
+ 2-2. WSL2のインストール
+
+
+インストール
+$ wsl --inst...]]></description><link>https://zenn.dev/tatsujin/articles/6938b76c084e4d</link><guid isPermaLink="true">https://zenn.dev/tatsujin/articles/6938b76c084e4d</guid><pubDate>Sun, 18 Aug 2024 12:15:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0oRdrIHv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:WSL2%2520%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%25AE%25E6%2589%258B%25E9%25A0%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tatsujin%2520craft%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS1BKcnZWYWhYWm9KT2ZSOTc4VW95Y296cnJpNFE4Rk9IcDZQYzgzVE5rOHBSd3FrRT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tatsujin craft</dc:creator></item><item><title><![CDATA[Chromebookを快適な開発環境にするためのプチノウハウ群（2024年8月版）]]></title><description><![CDATA[Chromebook歴も10年ぐらいになりました
+https://x.com/komde/status/1759053887313785329
+https://x.com/komde/status/1199976220777009154
+自分は仕事においてアルゴリズム作成3割、プログラム実装4割、資料作成2割、コミュニケーション割ぐらいで、いろんなところからきたものや自分が実装したものをテストしてまた情報を展開する、的な仕事をメインにしています。最近はWebツールでIn/Outできることが多く、WindowsやMacだとCorei7+NVMeバリバリの化け物マシンでしか出せないようなブラ...]]></description><link>https://zenn.dev/komde/articles/f19c0568405269</link><guid isPermaLink="true">https://zenn.dev/komde/articles/f19c0568405269</guid><pubDate>Sun, 18 Aug 2024 07:55:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fKtMz3AX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Chromebook%25E3%2582%2592%25E5%25BF%25AB%25E9%2581%25A9%25E3%2581%25AA%25E9%2596%258B%25E7%2599%25BA%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%25E3%2583%2597%25E3%2583%2581%25E3%2583%258E%25E3%2582%25A6%25E3%2583%258F%25E3%2582%25A6%25E7%25BE%25A4%25EF%25BC%25882024%25E5%25B9%25B48%25E6%259C%2588%25E7%2589%2588%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Taiki%2520Komoda%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFUWEFKeHVSdWhURVRQOWVLeHRzUmViSFB4MHpMcWc2cjRpQl9icjlwXzk9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Taiki Komoda</dc:creator></item><item><title><![CDATA[TCP keepalive は再送中のパケットがある場合は動作を開始しないことの確認]]></title><description><![CDATA[以下記事で出てきたTCP keepalive機能の動作確認です。
+https://blog.cybozu.io/entry/2015/11/26/170019
+過去に記事を見て「へー」と思っていたんですけれども、「実際に見もせずにわかった気になるのはよくないな！」と記事を読んでから5年後くらいの今、突然思い立って動作確認することにしました。確認したかったのは、タイトル通り「TCP keepalive は再送中のパケットがある場合は動作を開始しない」ことです。こういう挙動だと何がまずいのかとかいう詳しいところは元記事を参照してほしいです。
+
+ 実験環境
+マシンは以下2つを使いました。
+
+c...]]></description><link>https://zenn.dev/satoru_takeuchi/articles/a8b434a08f327b</link><guid isPermaLink="true">https://zenn.dev/satoru_takeuchi/articles/a8b434a08f327b</guid><pubDate>Sat, 17 Aug 2024 14:55:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0ARocDEW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TCP%2520keepalive%2520%25E3%2581%25AF%25E5%2586%258D%25E9%2580%2581%25E4%25B8%25AD%25E3%2581%25AE%25E3%2583%2591%25E3%2582%25B1%25E3%2583%2583%25E3%2583%2588%25E3%2581%258C%25E3%2581%2582%25E3%2582%258B%25E5%25A0%25B4%25E5%2590%2588%25E3%2581%25AF%25E5%258B%2595%25E4%25BD%259C%25E3%2582%2592%25E9%2596%258B%25E5%25A7%258B%25E3%2581%2597%25E3%2581%25AA%25E3%2581%2584%25E3%2581%2593%25E3%2581%25A8%25E3%2581%25AE%25E7%25A2%25BA%25E8%25AA%258D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:sat%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2hjeVUzdFlLV3RJeXdsdjJhYm1ac2VpczZrUnp1ODc5ZFNwT0Vub3c9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sat</dc:creator></item><item><title><![CDATA[unarで解決：日本語ファイル名を含むZIPファイルの解凍問題]]></title><description><![CDATA[
+ はじめに
+多くの開発者や管理者が、WindowsでZIP化したファイルをMacやLinuxで開いた際に、日本語のファイル名が文字化けする問題に直面しています。この記事では、この問題を効果的に解決できる「unar」というツールについて解説します。
+
+ 7-Zipの限界
+7-Zipでは、以下のようなコマンドで対処することがあります
+7z x -mcp=932 -ohoge hoge.zip
+https://qiita.com/DaikichiDaze/items/4754352da1652d03dc85
+しかし、このアプローチには以下のような問題があります
+
+完全な解決策ではない（一部の...]]></description><link>https://zenn.dev/nisaji/articles/9a21745e91cd34</link><guid isPermaLink="true">https://zenn.dev/nisaji/articles/9a21745e91cd34</guid><pubDate>Sat, 17 Aug 2024 08:09:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--URzaRg00--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:unar%25E3%2581%25A7%25E8%25A7%25A3%25E6%25B1%25BA%25EF%25BC%259A%25E6%2597%25A5%25E6%259C%25AC%25E8%25AA%259E%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E5%2590%258D%25E3%2582%2592%25E5%2590%25AB%25E3%2582%2580ZIP%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2581%25AE%25E8%25A7%25A3%25E5%2587%258D%25E5%2595%258F%25E9%25A1%258C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nisaji%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NiNDk0YTBlOGYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nisaji</dc:creator></item><item><title><![CDATA[スワップファイルのサイズを変更する]]></title><description><![CDATA[
+ この記事は
+Linux上で一度作成したスワップファイルのサイズを後から変更する方法です。Ubuntu 24.04の手順を説明します。
+以下のように/swapfileというサイズ1Gのスワップファイルが割り当てられている状態で、スワップファイルのサイズを2Gに拡張します。
+$ sudo swapon -s
+Filename    Type  Size     Used    Priority
+/swapfile   file  1048572  497664  -2
+
+ やり方
+
+ メモリーの使用状況を確認する
+スワップファイルのサイズを変更するためには、一旦スワップファイルの登録を解...]]></description><link>https://zenn.dev/haru_iida/articles/change_swapfile_size</link><guid isPermaLink="true">https://zenn.dev/haru_iida/articles/change_swapfile_size</guid><pubDate>Fri, 16 Aug 2024 15:11:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jxfGE5pc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B9%25E3%2583%25AF%25E3%2583%2583%25E3%2583%2597%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2581%25AE%25E3%2582%25B5%25E3%2582%25A4%25E3%2582%25BA%25E3%2582%2592%25E5%25A4%2589%25E6%259B%25B4%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:haru_iida%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2g1dnZCTVV6aGszeVZpSEVxbmdKQ0tsM0lIUmczR2lKX19SN25Dc2RNPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>haru_iida</dc:creator></item><item><title><![CDATA[Dockerをコマンド１発インストール]]></title><description><![CDATA[
+ 一言で言うと
+Linux系OSなら以下のコマンド１発でDockerをインストールできます。
+curl https://get.docker.com | sudo sh
+https://get.docker.com で配布されているDockerインストール用shellスクリプトが、OSを判断してそのOSに合った手順でインストールを実行してくれます。
+でもDisributionによっては使えないものもあります（後述）。
+
+ Ubuntuの例
+Ubuntuで手順を踏んでDockerをインストールしようとすると以下の流れになると思います。
+
+事前準備で使うパッケージのインストール
+apt用キ...]]></description><link>https://zenn.dev/haru_iida/articles/docker_one_liner_install</link><guid isPermaLink="true">https://zenn.dev/haru_iida/articles/docker_one_liner_install</guid><pubDate>Fri, 16 Aug 2024 05:57:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---LCJM99g--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%25E3%2582%2592%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25EF%25BC%2591%25E7%2599%25BA%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:haru_iida%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2g1dnZCTVV6aGszeVZpSEVxbmdKQ0tsM0lIUmczR2lKX19SN25Dc2RNPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>haru_iida</dc:creator></item><item><title><![CDATA[Ubuntu 24.04で、CapsLockキーをHyperキーとして動作させる - tweaks/xkb]]></title><description><![CDATA[
+ Ubuntu 24.04で、CapsLockキーをHyperキーとして動作させる
+
+ ※自分用メモです。
+
+ 環境情報
+
+ OS
+Ubuntu 24.04 LTS
+
+ 導入パッケージ
+
+gnome-tweaks
+
+
+ 設定
+gnome-tweaksのインストール
+apt install gnome-tweaks -y
+Tweaksから、CapsLockを追加のHyperキーにする
+キーボード - 追加のレイアウトオプション - Caps Lock behavior
+
+xkbのCapsLock設定ファイルを変更
+vi /usr/share/X11/xkb/symbols/capsloc...]]></description><link>https://zenn.dev/kuyt_ayn/articles/abb9c7c390dcd0</link><guid isPermaLink="true">https://zenn.dev/kuyt_ayn/articles/abb9c7c390dcd0</guid><pubDate>Thu, 15 Aug 2024 04:48:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--RkY8G3JL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ubuntu%252024.04%25E3%2581%25A7%25E3%2580%2581CapsLock%25E3%2582%25AD%25E3%2583%25BC%25E3%2582%2592Hyper%25E3%2582%25AD%25E3%2583%25BC%25E3%2581%25A8%25E3%2581%2597%25E3%2581%25A6%25E5%258B%2595%25E4%25BD%259C%25E3%2581%2595%25E3%2581%259B%25E3%2582%258B%2520-%2520tweaks%252Fxkb%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kuyt%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS3VITzYtV1NGX3U1ZVNzbVhDRHAyODdwVHFxaHI1QUdkN1pGNXhfWm5LQ293c2VVWWI9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kuyt</dc:creator></item><item><title><![CDATA[Macの仮想化はTartがよかった]]></title><description><![CDATA[
+ 最初に
+Apple Silicon Mac で仮想マシンを使うときといえば、GUI なら UTM や VMWare Fusion、VirtualBuddy, Parallels Desktop が有名です｡CUI なら Multipass や OrbStack などがあげられるでしょう｡どれも良いものですが、個人的には GUI のアプリケーションはターミナルから起動するのがやや面倒で、CUI のものは GUI のセットアップが面倒でした｡
+そこで、今回紹介するのが、Tart です｡
+cirruslabs/tart は Apple Silicon 上で macOS および Linux ...]]></description><link>https://zenn.dev/hal227/articles/e85f5d9ae97b24</link><guid isPermaLink="true">https://zenn.dev/hal227/articles/e85f5d9ae97b24</guid><pubDate>Thu, 15 Aug 2024 01:19:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--YsTrotsC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Mac%25E3%2581%25AE%25E4%25BB%25AE%25E6%2583%25B3%25E5%258C%2596%25E3%2581%25AFTart%25E3%2581%258C%25E3%2582%2588%25E3%2581%258B%25E3%2581%25A3%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:HAL%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzUzOWI1M2NlNzAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>HAL</dc:creator></item><item><title><![CDATA[【Linux Basics】ファイルタイプ]]></title><description><![CDATA[ls -l コマンドを実行した際に、行の一番左に表示される文字が、ファイルタイプを示している。
+$ ls -l
+total 4
+brw-r--r-- 1 root   root   101, 101 Aug 14 22:52 block
+crw-r--r-- 1 root   root   100, 100 Aug 14 22:52 char
+drwxrwxr-x 2 ubuntu ubuntu     4096 Aug 14 22:47 directory
+lrwxrwxrwx 1 ubuntu ubuntu        7 Aug 14 22:47 link -&gt; regul...]]></description><link>https://zenn.dev/zulinx86/articles/linux-basics_file-type</link><guid isPermaLink="true">https://zenn.dev/zulinx86/articles/linux-basics_file-type</guid><pubDate>Wed, 14 Aug 2024 22:55:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--aur8vIjL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Linux%2520Basics%25E3%2580%2591%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%2597%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:zulinx86%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQyZjYzMDk2NjEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>zulinx86</dc:creator></item><item><title><![CDATA[Kernel 開発環境の構築 on Ubuntu]]></title><description><![CDATA[
+ 環境
+
+CPU: x86_64
+OS: Ubuntu 24.04
+
+
+ Linux kernel のビルド
+$ cd ${WORKDIR}
+$ git clone git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
+$ sudo apt install make gcc flex bison libelf-dev libssl-dev -y
+$ cd linux
+$ make defconfig
+$ make -j$(nproc)
+
+ Buildroot のビルド
+$ cd ${WORKDIR}
+$ git c...]]></description><link>https://zenn.dev/zulinx86/articles/kernel-devenv-setup</link><guid isPermaLink="true">https://zenn.dev/zulinx86/articles/kernel-devenv-setup</guid><pubDate>Wed, 14 Aug 2024 22:36:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jN_xAPsg--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Kernel%2520%25E9%2596%258B%25E7%2599%25BA%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25AE%25E6%25A7%258B%25E7%25AF%2589%2520on%2520Ubuntu%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:zulinx86%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQyZjYzMDk2NjEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>zulinx86</dc:creator></item><item><title><![CDATA[Dockerで鍵認証によるAnsibleとansible_specの実行環境を構築]]></title><description><![CDATA[
+ はじめに
+
+ 概要
+本記事では以下の手順でハンズオンを行います。
+
+DockerでAnsibleのコントロールノード1台(Ubuntu)とターゲットホスト1台(Ubuntu)を構築
+Ansibleでapache2のインストール及び起動
+ansible_specでapche2のインストール確認
+
+
+ 対象読者
+
+DockerでAnsibleの実行環境を作ってみたい人
+Dockerでrbenvを使ってRubyの実行環境を作ってみたい人
+ansible_specを使ってみたい人
+Ansibleで鍵認証によるplaybookの実行をしたい人
+
+!
+
+基本的なDocker, Linuxコマンド...]]></description><link>https://zenn.dev/popokobe/articles/ubuntu-ansible</link><guid isPermaLink="true">https://zenn.dev/popokobe/articles/ubuntu-ansible</guid><pubDate>Wed, 14 Aug 2024 07:23:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--clUeyNVx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%25E3%2581%25A7%25E9%258D%25B5%25E8%25AA%258D%25E8%25A8%25BC%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258BAnsible%25E3%2581%25A8ansible_spec%25E3%2581%25AE%25E5%25AE%259F%25E8%25A1%258C%25E7%2592%25B0%25E5%25A2%2583%25E3%2582%2592%25E6%25A7%258B%25E7%25AF%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:popokobe%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dmdzhoOGlkTkwyckdvakxBMXduYy1zanVpX21Helc4MmlvbXFJVGJFPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>popokobe</dc:creator></item><item><title><![CDATA[Linux 使いになりたい人向けの Intel N100 ミニ PC で構築する開発環境（１６）- Ubuntu]]></title><description><![CDATA[
+ はじめに
+!
+ここでは手軽に Windows と Ubuntu のデュアルブートをする方法について説明をしています。ただし、そのために、物理的にディスクを取り外すようにしています。このとき、ミスがあると、ディスクにダメージを与える場合があります。Windows が使えなくなると困る場合は回復作業ができるように、十分な対策をしてから作業するようにしてください。リカバリー用パーティションを含めたバックアップ、回復起動ディスクの用意などをしてあれば、復旧できるはずです。
+
+これは、Linux 使いになりたい人向けに Intel N100 ミニ PC を使って開発環境を構築する方法を解説する...]]></description><link>https://zenn.dev/hiro345/articles/n100_16_20240814</link><guid isPermaLink="true">https://zenn.dev/hiro345/articles/n100_16_20240814</guid><pubDate>Wed, 14 Aug 2024 01:11:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--c9VTMpaL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%2520%25E4%25BD%25BF%25E3%2581%2584%25E3%2581%25AB%25E3%2581%25AA%25E3%2582%258A%25E3%2581%259F%25E3%2581%2584%25E4%25BA%25BA%25E5%2590%2591%25E3%2581%2591%25E3%2581%25AE%2520Intel%2520N100%2520%25E3%2583%259F%25E3%2583%258B%2520PC%2520%25E3%2581%25A7%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2599%25E3%2582%258B%25E9%2596%258B%25E7%2599%25BA%25E7%2592%25B0%25E5%25A2%2583%25EF%25BC%2588%25EF%25BC%2591%25EF%25BC%2596%25EF%25BC%2589-%2520Ubuntu%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Hiroshi%2520Koyama%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2k5ZzdjLS0xTFk0S2k0LWw3dVFSSFZRdEdQcWZHYTlibVRJYUtFM0E9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Hiroshi Koyama</dc:creator></item><item><title><![CDATA[『Linuxのしくみ』を読んだ勢いで『UNIXという考え方』も読んでみた]]></title><description><![CDATA[https://www.ohmsha.co.jp/book/9784274064067/
+以前、『Linuxのしくみ―実験と図解で学ぶOS、仮想マシン、コンテナの基礎知識』を読んだ流れで、『UNIXという考え方』を読んでみたので、その感想と学びを記しておきたいと思います。
+Linuxのしくみの記事はこちら
+
+ 感想
+
+個人的に、OSなどのソフトウェアがこれまでどのように発展してきたのかという背景をほぼ知らなかったので、少しでもそこに触れられたのは教養として良かった
+原著が1994年と、自分が生まれるより前の本なのに、現代でも通ずる設計思想を持っていたのがすごい
+1~4章あたりは特に実践に...]]></description><link>https://zenn.dev/tkhr_tech/articles/d21136bdd14cc9</link><guid isPermaLink="true">https://zenn.dev/tkhr_tech/articles/d21136bdd14cc9</guid><pubDate>Mon, 12 Aug 2024 22:56:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--oKJOR810--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%258ELinux%25E3%2581%25AE%25E3%2581%2597%25E3%2581%258F%25E3%2581%25BF%25E3%2580%258F%25E3%2582%2592%25E8%25AA%25AD%25E3%2582%2593%25E3%2581%25A0%25E5%258B%25A2%25E3%2581%2584%25E3%2581%25A7%25E3%2580%258EUNIX%25E3%2581%25A8%25E3%2581%2584%25E3%2581%2586%25E8%2580%2583%25E3%2581%2588%25E6%2596%25B9%25E3%2580%258F%25E3%2582%2582%25E8%25AA%25AD%25E3%2582%2593%25E3%2581%25A7%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tkhr_tech%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRjODA5MWI5ZDEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tkhr_tech</dc:creator></item><item><title><![CDATA[セキュアブート+LUKS+TPM2でカーネルアップデート時の鍵更新を自動化する]]></title><description><![CDATA[
+ はじめに
+LinuxではLUKSを使用することでフルディスク暗号化を実現できます。さらに、TPMに鍵を保存することで起動時に自動で復号することができます[1]。
+TPMに鍵を保存するとき、同じPCでも別のOS[2]からは復号用の鍵を読み取れないようにしたいと考えるかもしれません。そのような場合にはTPMへの鍵設定時にPCR[4]を設定することで特定のカーネルでない場合は鍵を読み取れないようにします（具体的な話は後述します）。
+しかしこのような設定をした場合は、カーネルのアップデートのたびにそのカーネルに合わせてTPMの鍵を更新する必要があります。この手順は具体的にはカーネル更新、再起...]]></description><link>https://zenn.dev/syuzuki/articles/20240812-secboot-luks-tpm-updating</link><guid isPermaLink="true">https://zenn.dev/syuzuki/articles/20240812-secboot-luks-tpm-updating</guid><pubDate>Mon, 12 Aug 2024 14:55:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Rj_11RGM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25BB%25E3%2582%25AD%25E3%2583%25A5%25E3%2582%25A2%25E3%2583%2596%25E3%2583%25BC%25E3%2583%2588%252BLUKS%252BTPM2%25E3%2581%25A7%25E3%2582%25AB%25E3%2583%25BC%25E3%2583%258D%25E3%2583%25AB%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%25E3%2583%2587%25E3%2583%25BC%25E3%2583%2588%25E6%2599%2582%25E3%2581%25AE%25E9%258D%25B5%25E6%259B%25B4%25E6%2596%25B0%25E3%2582%2592%25E8%2587%25AA%25E5%258B%2595%25E5%258C%2596%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:syuzuki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFUWEFKeXZuWmNhSmlpbG9NQjlOT2l4eTRsSEZtXzNKdXU0UEtYU2hCSVc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>syuzuki</dc:creator></item><item><title><![CDATA[【Linux】sudoers管理向けの設定を自動化する]]></title><description><![CDATA[
+ 目的
+
+新規で作成するユーザーにsudoers権限を追加したい。
+
+
+ sudoers権限とは
+
+他ユーザーの権限を実行して、非特権ユーザーがコマンドを実行する。
+ROOTユーザーで操作はしたくないので、非特権ユーザーに一時的に強力な権限を付与したい。
+
+
+ sudoers設定について
+管理者は/etc/sudoers.d/に設定ファイルを置けば、非特権ユーザーが特定のコマンドを入力できるようにすることができる。直接/etc/sudoersを触らなくても良いという利点もある。
+
+12章 sudoアクセスの管理
+
+
+ 設定内容の解説
+具体例として、sudoers権限を持つvagrant...]]></description><link>https://zenn.dev/karasunomori/articles/b8a5dcaade8f42</link><guid isPermaLink="true">https://zenn.dev/karasunomori/articles/b8a5dcaade8f42</guid><pubDate>Mon, 12 Aug 2024 03:46:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7SeyFHdc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Linux%25E3%2580%2591sudoers%25E7%25AE%25A1%25E7%2590%2586%25E5%2590%2591%25E3%2581%2591%25E3%2581%25AE%25E8%25A8%25AD%25E5%25AE%259A%25E3%2582%2592%25E8%2587%25AA%25E5%258B%2595%25E5%258C%2596%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%25A8%25AA%25E6%25B5%259C%25E3%2583%2599%25E3%2582%25A4%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%25BC%25E3%2582%25BA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzUwMjg0NzQ0YmUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>横浜ベイスターズ</dc:creator></item><item><title><![CDATA[書籍「仕組みと使い方がわかる Docker＆Kubernetesのきほんのきほん」レビュー]]></title><description><![CDATA[今後業務でDocker/kubernetes(以降k8s)を使うことが予想されるので購入してみました。
+↓書籍「仕組みと使い方がわかる Docker＆Kubernetesのきほんのきほん」
+https://amzn.asia/d/cE5cV2X
+名前は聞いたことあるし「コンテナ」や「pod」「イメージ」など、
+それらに付随するワードについても耳にしているものの、
+特に触ったこともないというレベル感から始めた感じになります。
+【結論として】
+素人でも全く問題ないレベル、総じて良書です。少し高いですがその分の価値はあります。
+ただし、k8sについては全体の1割程度のボリュームなので、k8sを...]]></description><link>https://zenn.dev/may15/articles/58dd279e1a6139</link><guid isPermaLink="true">https://zenn.dev/may15/articles/58dd279e1a6139</guid><pubDate>Mon, 12 Aug 2024 03:44:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2xf4Mtzv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%259B%25B8%25E7%25B1%258D%25E3%2580%258C%25E4%25BB%2595%25E7%25B5%2584%25E3%2581%25BF%25E3%2581%25A8%25E4%25BD%25BF%25E3%2581%2584%25E6%2596%25B9%25E3%2581%258C%25E3%2582%258F%25E3%2581%258B%25E3%2582%258B%2520Docker%25EF%25BC%2586Kubernetes%25E3%2581%25AE%25E3%2581%258D%25E3%2581%25BB%25E3%2582%2593%25E3%2581%25AE%25E3%2581%258D%25E3%2581%25BB%25E3%2582%2593%25E3%2580%258D%25E3%2583%25AC%25E3%2583%2593%25E3%2583%25A5%25E3%2583%25BC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%259F%25E3%2582%25A2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM4Njc5MTUzZDguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ミア</dc:creator></item><item><title><![CDATA[VScodeでのzennの記事の書き方メモ]]></title><description><![CDATA[久しぶりに記事を書こうとすると忘れてるので備忘録
+前提としてgithubにzennのリポジトリは作っている状態とする
+
+ 記事作成の流れ
+
+githubからVSCodeに環境をコピー（clone&amp;pull)
+記事をコマンドで作成
+コミットする(コミットしてプッシュ)
+
+
+ githubを使って記事を作成する
+参考 https://zenn.dev/eguchi244_dev/articles/github-zenn-linkage-20230501
+まずはgithubからローカル環境にコピーする
+そのやり方としてクローンとプルがある
+とりあえずクローンしとく
+!
+clone：ファ...]]></description><link>https://zenn.dev/dollaga_saiore/articles/how_to_write_zenn_article</link><guid isPermaLink="true">https://zenn.dev/dollaga_saiore/articles/how_to_write_zenn_article</guid><pubDate>Mon, 12 Aug 2024 02:33:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vOhm62L7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:VScode%25E3%2581%25A7%25E3%2581%25AEzenn%25E3%2581%25AE%25E8%25A8%2598%25E4%25BA%258B%25E3%2581%25AE%25E6%259B%25B8%25E3%2581%258D%25E6%2596%25B9%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A9%25E3%2582%258B%25E3%2581%2582%25E3%2581%258C%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzcyZDYzM2JmMzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>どるあが</dc:creator></item></channel></rss>
