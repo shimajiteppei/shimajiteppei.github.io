@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Wed, 21 Aug 2024 07:31:15 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[DockerでPython Selenium環境のセットアップ]]></title><description><![CDATA[Google Chrome と Chrome Driver のセットアップで苦労したので共有します…
+
+ Dockerfile の例
+
+wget などのインストールコマンドのインストール
+Google Chrome のインストール
+Chrome Driver のインストール
+Selenium を pip でインストール
+
+FROM python:3.12-slim
+WORKDIR /app/
+COPY . /app/
+RUN apt-get update &amp;&amp; apt-get install -y \
+    curl \
+    wget \
+    unzip \
+ ...]]></description><link>https://zenn.dev/metalmental/articles/20240821_docker-python-selenium</link><guid isPermaLink="true">https://zenn.dev/metalmental/articles/20240821_docker-python-selenium</guid><pubDate>Tue, 20 Aug 2024 18:28:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--g2NrWFNz--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%25E3%2581%25A7Python%2520Selenium%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25AE%25E3%2582%25BB%25E3%2583%2583%25E3%2583%2588%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:metalmental%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSzJYbHgtVTZpT1J6VWI0WVZiYjlTUWNoa1FMRzZnalktdmFiZl9YYjJocHd3dk01NHY9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>metalmental</dc:creator></item><item><title><![CDATA[【python】日本語の文章をPDFファイルにし、Blob Storageに保存する]]></title><description><![CDATA[
+ そもそも
+日本語の文章をPDFファイルにし、Blobに保存する機会がありました。
+文字化けやBlobにアップロードできなかったりと、四苦八苦しました。
+同じことで苦労している方がいるかもしれないので、まとめます。
+
+ 参考記事
+https://mori-memo.hateblo.jp/entry/2024/04/21/171759
+
+ バージョン
+
+python:3.11.9
+azure-storage-blob:12.22.0
+reportlab:4.2.2
+
+
+ ライブラリーをinstall
+pip install azure-storage-blob reportlab   
+...]]></description><link>https://zenn.dev/headwaters/articles/6e2765926ee2f0</link><guid isPermaLink="true">https://zenn.dev/headwaters/articles/6e2765926ee2f0</guid><pubDate>Tue, 20 Aug 2024 12:23:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--J17YwilL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590python%25E3%2580%2591%25E6%2597%25A5%25E6%259C%25AC%25E8%25AA%259E%25E3%2581%25AE%25E6%2596%2587%25E7%25AB%25A0%25E3%2582%2592PDF%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2581%25AB%25E3%2581%2597%25E3%2580%2581Blob%2520Storage%25E3%2581%25AB%25E4%25BF%259D%25E5%25AD%2598%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:takekawa%2520tomoki%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZjNGExY2UxMDYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2598%25E3%2583%2583%25E3%2583%2589%25E3%2582%25A6%25E3%2582%25A9%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%25BC%25E3%2582%25B9%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdmODg5YTRhYzguanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takekawa tomoki</dc:creator></item><item><title><![CDATA[VSCode - Format Notebook]]></title><description><![CDATA[vscode でノートブック(.ipynb)を使う際に，オートフォーマットの設定を適応する方法について説明します．
+
+設定を開く
+
+
+Ctrl + , で設定を開く(Mac の場合は Cmd + ,)
+
+
+検索バーに format notebook と入力
+Formatter を選択
+
+Format on Save にチェックを入れる
+
+
+
+]]></description><link>https://zenn.dev/os515/articles/tips-vscode-notebook</link><guid isPermaLink="true">https://zenn.dev/os515/articles/tips-vscode-notebook</guid><pubDate>Tue, 20 Aug 2024 10:06:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--CL-K6QsZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_76:VSCode%2520-%2520Format%2520Notebook%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:soso%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4WXhTVFZ2dEMxc1c4N3NudWhKSVp0YTVMUWpsMUR5VW1YVTl5UFY2Zz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>soso</dc:creator></item><item><title><![CDATA[gensim3.8をpython3.9以降で動かす2024年夏]]></title><description><![CDATA[
+ 1. この記事は
+gensim3.8(古い)をpython3.9以降(新しい)で動かす方法について記載しています。
+インストール直後は動かそうとするとエラーが出ます。それら1つずつ調べると出てきますが、まとまっている情報を見つけられなかったので記事にしました。(スクラップでも良いのかもしれませんが)
+なお、動機は次の記事にある楽しそうな内容を試してみたかったからです。
+https://zenn.dev/robes/articles/c251dd89a0e47f
+
+ 2. インストールと編集作業
+イレギュラーな操作をするので仮想環境を作った方が良いです。
+仮想環境の例：
+python3...]]></description><link>https://zenn.dev/dzonesasaki/articles/eba660de8349ce</link><guid isPermaLink="true">https://zenn.dev/dzonesasaki/articles/eba660de8349ce</guid><pubDate>Tue, 20 Aug 2024 09:01:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_EXZhkiC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:gensim3.8%25E3%2582%2592python3.9%25E4%25BB%25A5%25E9%2599%258D%25E3%2581%25A7%25E5%258B%2595%25E3%2581%258B%25E3%2581%25992024%25E5%25B9%25B4%25E5%25A4%258F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Daizo%2520Sasaki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JmZGE0MTI0Y2EuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Daizo Sasaki</dc:creator></item><item><title><![CDATA[Azure App Serviceのデプロイスロットを試す]]></title><description><![CDATA[
+ PoetryによるDjangoアプリケーションのAzure App Serviceテスト手順（完全版）
+
+ 1. 環境準備
+
+ 1.1 Poetryのインストール（まだの場合）
+curl -sSL https://install.python-poetry.org | python3 -
+
+ 1.2 プロジェクトの初期化
+mkdir django-azure-project
+cd django-azure-project
+poetry init -n
+
+ 1.3 必要なパッケージのインストール
+poetry add django gunicorn
+poetry add --dev p...]]></description><link>https://zenn.dev/ytksato/articles/73ed9d19b7038c</link><guid isPermaLink="true">https://zenn.dev/ytksato/articles/73ed9d19b7038c</guid><pubDate>Tue, 20 Aug 2024 06:42:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--SUynb2UD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Azure%2520App%2520Service%25E3%2581%25AE%25E3%2583%2587%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25A4%25E3%2582%25B9%25E3%2583%25AD%25E3%2583%2583%25E3%2583%2588%25E3%2582%2592%25E8%25A9%25A6%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yutaka%2520Sato%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ViZmI0N2E0M2UuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yutaka Sato</dc:creator></item><item><title><![CDATA[Webサイトでスクレイピングが禁止されているかどうか確認する方法]]></title><description><![CDATA[こちらの記事でスクレイピングの概要を記述しました。
+実際にスクレイピングの禁止チェックをする方法があります。
+今回は、プログラムでチェックする方法を紹介します。
+
+ ソースコード
+
+sample.py
+import requests
+
+def check_robots_txt(url):
+    robots_url = url.rstrip('/') + '/robots.txt'
+    try:
+        response = requests.get(robots_url)
+        if response.status_code == 200:
+          ...]]></description><link>https://zenn.dev/shuto2828/articles/6a0769e20dd0c7</link><guid isPermaLink="true">https://zenn.dev/shuto2828/articles/6a0769e20dd0c7</guid><pubDate>Tue, 20 Aug 2024 06:19:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--NwSCL-p9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Web%25E3%2582%25B5%25E3%2582%25A4%25E3%2583%2588%25E3%2581%25A7%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AC%25E3%2582%25A4%25E3%2583%2594%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%258C%25E7%25A6%2581%25E6%25AD%25A2%25E3%2581%2595%25E3%2582%258C%25E3%2581%25A6%25E3%2581%2584%25E3%2582%258B%25E3%2581%258B%25E3%2581%25A9%25E3%2581%2586%25E3%2581%258B%25E7%25A2%25BA%25E8%25AA%258D%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2597%25E3%2582%2585%25E3%2583%25BC%25E3%2581%25A8%25EF%25BD%259C30%25E4%25BB%25A3%25E3%2581%258B%25E3%2582%2589Web%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNlMWJmNjg1NTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>しゅーと｜30代からWebエンジニア</dc:creator></item><item><title><![CDATA[［AtCoder］ABC-364｜B - Grid Walk]]></title><description><![CDATA[
+ 設問ページ
+
+🔗ABC-364 B - Grid Walk
+
+
+
+ 提出結果
+# ABC-364 B - Grid Walk
+# https://atcoder.jp/contests/abc364/tasks/abc364_b
+#
+def getIntMap():
+    return map(int, input().split())
+
+
+def getIntList():
+    return list(map(int, input().split()))
+
+
+def getStringListRow(N):
+    return [list(input()) for _ in...]]></description><link>https://zenn.dev/hyperdb/articles/b691d239d47f47</link><guid isPermaLink="true">https://zenn.dev/hyperdb/articles/b691d239d47f47</guid><pubDate>Tue, 20 Aug 2024 04:48:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--rlPoZxGZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25EF%25BC%25BBAtCoder%25EF%25BC%25BDABC-364%25EF%25BD%259CB%2520-%2520Grid%2520Walk%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AF%25E3%2581%2584%25E3%2581%25B1%25E3%2581%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhODJkODgwMzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>はいぱぁ</dc:creator></item><item><title><![CDATA[［AtCoder］ABC-364｜A - Glutton Takahashi]]></title><description><![CDATA[
+ 設問ページ
+
+🔗ABC-364 A - Glutton Takahashi
+
+
+
+ 提出結果
+def getInt():
+    return int(input())
+
+
+def getStringRow(N):
+    return [input() for _ in range(N)]
+
+
+def main():
+    N = getInt()
+    S = getStringRow(N)
+
+    r = True
+    for i in range(1, N - 1):
+        if S[i] == "sweet" and S[i] == S[i - 1]:
+...]]></description><link>https://zenn.dev/hyperdb/articles/40f1015cd0f8e9</link><guid isPermaLink="true">https://zenn.dev/hyperdb/articles/40f1015cd0f8e9</guid><pubDate>Tue, 20 Aug 2024 04:48:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--kz8dQKjo--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25EF%25BC%25BBAtCoder%25EF%25BC%25BDABC-364%25EF%25BD%259CA%2520-%2520Glutton%2520Takahashi%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AF%25E3%2581%2584%25E3%2581%25B1%25E3%2581%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhODJkODgwMzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>はいぱぁ</dc:creator></item><item><title><![CDATA[オンプレExchange - 階層型アドレス帳取得]]></title><description><![CDATA[
+ はじめに
+Hello, Zenn World!
+初めまして。大阪公立大学 工学部 航空宇宙工学科 3年の田上満喜 (たのうえみつき)です。
+今回は、オンプレミスの Exchange Server にて階層型アドレス帳のデータ取得を行う方法を共有したいと思います。
+
+ この記事を書こうと思った理由
+勤務先の大学で用いられているExchangeがオンプレ環境であり、Graph APIが使えずに困っていました。EWSのAPIが複雑なため、Pythonのexchangelibライブラリを用いたデータ抽出を行います。
+https://github.com/ecederstrand/exchan...]]></description><link>https://zenn.dev/omu_tryangle/articles/dd7e14b596ee92</link><guid isPermaLink="true">https://zenn.dev/omu_tryangle/articles/dd7e14b596ee92</guid><pubDate>Tue, 20 Aug 2024 04:45:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5itkaTsV--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25AA%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25ACExchange%2520-%2520%25E9%259A%258E%25E5%25B1%25A4%25E5%259E%258B%25E3%2582%25A2%25E3%2583%2589%25E3%2583%25AC%25E3%2582%25B9%25E5%25B8%25B3%25E5%258F%2596%25E5%25BE%2597%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Mitsuki%2520Tanoue%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAwMmVhYjg4YTkuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Tryangle%2540%25E5%25A4%25A7%25E9%2598%25AA%25E5%2585%25AC%25E7%25AB%258B%25E5%25A4%25A7%25E5%25AD%25A6%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSndQUWdGdGlJSmVSRVVhNU0tZXZYQUhDNkVuQzBfaTJVSmUtSWdpanJoWkhuZ0psUT1zOTYtYw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Mitsuki Tanoue</dc:creator></item><item><title><![CDATA[意図的にゼロ埋めできるか試すためのオブジェクトを作る]]></title><description><![CDATA[import datetime
+class DateWithZeroPadding(datetime.date):
+def str(self):
+return self.strftime("%Y-%m-%d")
+特定の日付のDateWithZeroPaddingオブジェクトを作成
+custom_date = DateWithZeroPadding(2024, 8, 20)
+出力
+print("Custom date with zero padding:", custom_date)
+]]></description><link>https://zenn.dev/udonmaru/articles/c894bca99f827b</link><guid isPermaLink="true">https://zenn.dev/udonmaru/articles/c894bca99f827b</guid><pubDate>Tue, 20 Aug 2024 03:18:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--zZXkuEL7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%2584%258F%25E5%259B%25B3%25E7%259A%2584%25E3%2581%25AB%25E3%2582%25BC%25E3%2583%25AD%25E5%259F%258B%25E3%2582%2581%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258B%25E3%2581%258B%25E8%25A9%25A6%25E3%2581%2599%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%25E3%2582%25AA%25E3%2583%2596%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:udonmaru%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2EwODVjMWI5ODkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>udonmaru</dc:creator></item><item><title><![CDATA[Python のユニットテストやってみる]]></title><description><![CDATA[
+ 概要
+業務で Python を最近触りだしてみているので、Python のユニットテストをやってみました。
+ユニットテスト用のフレームワークはいくつかあるようなのですが、今回は標準の unittest を使って試してみました。
+なお、このドキュメントの内容は 2024/08/19 に試しています。
+
+ 環境
+Ubuntu 20.04
+Python 3.8
+
+ コード
+階層構造：
+Test1
+├── calculator
+│   └── calculator1.py
+└── tests
+    └── test_calculator.py
+calculator1.py
+テスト対象のクラ...]]></description><link>https://zenn.dev/kconcon/articles/2919d18a208dd3</link><guid isPermaLink="true">https://zenn.dev/kconcon/articles/2919d18a208dd3</guid><pubDate>Mon, 19 Aug 2024 12:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--cZpmNsvX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%2520%25E3%2581%25AE%25E3%2583%25A6%25E3%2583%258B%25E3%2583%2583%25E3%2583%2588%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E3%2582%2584%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kcon%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS2J3dThiblhQNFVPck5ESVA2MTRHamVOUEIteU52U2lpUzZnZXhKeEUzPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kcon</dc:creator></item><item><title><![CDATA[［AtCoder］ABC-361｜B - Intersection of Cuboids]]></title><description><![CDATA[
+ 設問ページ
+
+🔗ABC-361 B - Intersection of Cuboids
+
+
+
+ 提出結果
+def getIntMap():
+    return map(int, input().split())
+
+
+def main():
+    a, b, c, d, e, f = getIntMap()
+    g, h, i, j, k, l = getIntMap()
+
+    r = True
+    if max(a, g) &gt;= min(d, j):
+        r = False
+    elif max(b, h) &gt;= min(e, k):
+  ...]]></description><link>https://zenn.dev/hyperdb/articles/eba143356aa42b</link><guid isPermaLink="true">https://zenn.dev/hyperdb/articles/eba143356aa42b</guid><pubDate>Mon, 19 Aug 2024 09:48:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--eM0nkQ2L--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25EF%25BC%25BBAtCoder%25EF%25BC%25BDABC-361%25EF%25BD%259CB%2520-%2520Intersection%2520of%2520Cuboids%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AF%25E3%2581%2584%25E3%2581%25B1%25E3%2581%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhODJkODgwMzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>はいぱぁ</dc:creator></item><item><title><![CDATA[［AtCoder］ABC-363｜A - Piling Up]]></title><description><![CDATA[
+ 設問ページ
+
+🔗ABC-363 A - Piling Up
+
+
+
+ 提出結果
+def getInt():
+    return int(input())
+
+
+def main():
+    R = getInt()
+
+    print(100 - R % 100)
+
+
+if __name__ == "__main__":
+    main()
+
+]]></description><link>https://zenn.dev/hyperdb/articles/eac6131b47b4b2</link><guid isPermaLink="true">https://zenn.dev/hyperdb/articles/eac6131b47b4b2</guid><pubDate>Mon, 19 Aug 2024 09:48:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---npikkdy--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25EF%25BC%25BBAtCoder%25EF%25BC%25BDABC-363%25EF%25BD%259CA%2520-%2520Piling%2520Up%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AF%25E3%2581%2584%25E3%2581%25B1%25E3%2581%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhODJkODgwMzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>はいぱぁ</dc:creator></item><item><title><![CDATA[［AtCoder］ABC-363｜B - Japanese Cursed Doll]]></title><description><![CDATA[
+ 設問ページ
+
+🔗ABC-363 B - Japanese Cursed Doll
+
+
+
+ 提出結果
+def getIntMap():
+    return map(int, input().split())
+
+
+def getIntList():
+    return list(map(int, input().split()))
+
+
+def main():
+    N, T, P = getIntMap()
+    L = getIntList()
+    L.sort()
+    L.reverse()
+
+    x = L[P - 1]
+    print(0 if x &gt...]]></description><link>https://zenn.dev/hyperdb/articles/e57ebe2ea73cf7</link><guid isPermaLink="true">https://zenn.dev/hyperdb/articles/e57ebe2ea73cf7</guid><pubDate>Mon, 19 Aug 2024 09:48:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--i4l1-UQy--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25EF%25BC%25BBAtCoder%25EF%25BC%25BDABC-363%25EF%25BD%259CB%2520-%2520Japanese%2520Cursed%2520Doll%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AF%25E3%2581%2584%25E3%2581%25B1%25E3%2581%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhODJkODgwMzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>はいぱぁ</dc:creator></item><item><title><![CDATA[［AtCoder］ABC-362｜B - Right Triangle]]></title><description><![CDATA[
+ 設問ページ
+
+🔗ABC-362 B - Right Triangle
+
+
+
+ 提出結果
+def getIntListRow(N):
+    return [list(map(int, input().split())) for _ in range(N)]
+
+
+def dist(x1, y1, x2, y2):
+    return (x1 - x2) ** 2 + (y1 - y2) ** 2
+
+
+def main():
+    p = getIntListRow(3)
+    d = [
+        dist(p[0][0], p[0][1], p[1][0], p[1][1...]]></description><link>https://zenn.dev/hyperdb/articles/c73dd95cb4dda8</link><guid isPermaLink="true">https://zenn.dev/hyperdb/articles/c73dd95cb4dda8</guid><pubDate>Mon, 19 Aug 2024 09:48:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--FAg_EBqz--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25EF%25BC%25BBAtCoder%25EF%25BC%25BDABC-362%25EF%25BD%259CB%2520-%2520Right%2520Triangle%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AF%25E3%2581%2584%25E3%2581%25B1%25E3%2581%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhODJkODgwMzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>はいぱぁ</dc:creator></item><item><title><![CDATA[［AtCoder］ABC-360｜B - Vertical Reading]]></title><description><![CDATA[
+ 設問ページ
+
+🔗ABC-360 B - Vertical Reading
+
+
+
+ 提出結果
+def getStringMap():
+    return input().split()
+
+
+def splitStr(s, n):
+    i = 0
+    j = n
+    x, y = divmod(len(s), n)
+
+    result = []
+
+    for _ in range(x):
+        result.append(s[i:j])
+        i += n
+        j += n
+
+    if y &gt; 0:
+        resu...]]></description><link>https://zenn.dev/hyperdb/articles/ac0992070b13e8</link><guid isPermaLink="true">https://zenn.dev/hyperdb/articles/ac0992070b13e8</guid><pubDate>Mon, 19 Aug 2024 09:48:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---0Gd-56r--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25EF%25BC%25BBAtCoder%25EF%25BC%25BDABC-360%25EF%25BD%259CB%2520-%2520Vertical%2520Reading%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AF%25E3%2581%2584%25E3%2581%25B1%25E3%2581%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhODJkODgwMzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>はいぱぁ</dc:creator></item><item><title><![CDATA[［AtCoder］ABC-360｜A Healthy Breakfast]]></title><description><![CDATA[
+ 設問ページ
+
+🔗ABC-360 A - A Healthy Breakfast
+
+
+
+ 提出結果
+def getString():
+    return input()
+
+
+def main():
+    S = getString()
+
+    print('Yes' if S.find('R') &lt; S.find('M') else 'No')
+
+
+if __name__ == "__main__":
+    main()
+
+]]></description><link>https://zenn.dev/hyperdb/articles/5d49f164c0f293</link><guid isPermaLink="true">https://zenn.dev/hyperdb/articles/5d49f164c0f293</guid><pubDate>Mon, 19 Aug 2024 09:48:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GJsNwOus--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25EF%25BC%25BBAtCoder%25EF%25BC%25BDABC-360%25EF%25BD%259CA%2520Healthy%2520Breakfast%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AF%25E3%2581%2584%25E3%2581%25B1%25E3%2581%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhODJkODgwMzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>はいぱぁ</dc:creator></item><item><title><![CDATA[［AtCoder］ABC-362｜A - Buy a Pen]]></title><description><![CDATA[
+ 設問ページ
+
+🔗ABC-362 A - Buy a Pen
+
+
+
+ 提出結果
+def getIntList():
+    return list(map(int, input().split()))
+
+
+def getString():
+    return input()
+
+
+def main():
+    RGB = getIntList()
+    C = getString()
+
+    cname = ["Red", "Green", "Blue"]
+    x = cname.index(C)
+    RGB[x] = 100
+
+    print(min(RGB))
+
+...]]></description><link>https://zenn.dev/hyperdb/articles/472f624d7801fe</link><guid isPermaLink="true">https://zenn.dev/hyperdb/articles/472f624d7801fe</guid><pubDate>Mon, 19 Aug 2024 09:48:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8tJIVOL2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25EF%25BC%25BBAtCoder%25EF%25BC%25BDABC-362%25EF%25BD%259CA%2520-%2520Buy%2520a%2520Pen%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AF%25E3%2581%2584%25E3%2581%25B1%25E3%2581%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhODJkODgwMzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>はいぱぁ</dc:creator></item><item><title><![CDATA[［AtCoder］ABC-361｜A - Insert]]></title><description><![CDATA[
+ 設問ページ
+
+🔗ABC-361 A - Insert
+
+
+
+ 提出結果
+def getIntMap():
+    return map(int, input().split())
+
+
+def getIntList():
+    return list(map(int, input().split()))
+
+
+def main():
+    N, K, X = getIntMap()
+    A = getIntList()
+
+    b = A[:K] + [X] + A[K:]
+    print(" ".join(map(str, b)))
+
+
+if __name__ == "_...]]></description><link>https://zenn.dev/hyperdb/articles/1fe06f1e749f36</link><guid isPermaLink="true">https://zenn.dev/hyperdb/articles/1fe06f1e749f36</guid><pubDate>Mon, 19 Aug 2024 09:48:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--WUQJQtbr--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25EF%25BC%25BBAtCoder%25EF%25BC%25BDABC-361%25EF%25BD%259CA%2520-%2520Insert%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AF%25E3%2581%2584%25E3%2581%25B1%25E3%2581%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhODJkODgwMzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>はいぱぁ</dc:creator></item><item><title><![CDATA[Thonnyを使ってCoDrone EDUを制御する(準備編)]]></title><description><![CDATA[
+
+ はじめに
+この記事ではRobolink社の教育用プログラミングドローンCoDrone EDUをThonnyを使ってPythonプログラムで制御する方法について解説します。
+Thonnyはすでにインストールされているものとして解説をしますので、インストール方法については他の記事を参照してください。
+!
+この記事は動作を保証するものではありませんので、あくまで、自己責任でお願いします。
+
+
+ CoDrone EDUとは
+CoDrone EDUはドローン本体とコントローラがセットになって販売されています。
+コントローラにはジョイスティックやボタン、スクリーンなどが装備されていて、コントロ...]]></description><link>https://zenn.dev/iot101/articles/327aff6109522f</link><guid isPermaLink="true">https://zenn.dev/iot101/articles/327aff6109522f</guid><pubDate>Mon, 19 Aug 2024 09:34:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Uzyu3Fgc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Thonny%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6CoDrone%2520EDU%25E3%2582%2592%25E5%2588%25B6%25E5%25BE%25A1%25E3%2581%2599%25E3%2582%258B%2528%25E6%25BA%2596%25E5%2582%2599%25E7%25B7%25A8%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:iot101%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2EzODBhMGM3MzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>iot101</dc:creator></item></channel></rss>

@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「TypeScript」のフィード]]></title><description><![CDATA[Zennのトピック「TypeScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/typescript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/f13e758fdb.png</url><title>Zennの「TypeScript」のフィード</title><link>https://zenn.dev/topics/typescript</link></image><generator>zenn.dev</generator><lastBuildDate>Wed, 21 Aug 2024 00:45:22 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/typescript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Waku v0.21.0をリリースしました！Server Actionsも完全サポートのRSCフレームワーク]]></title><description><![CDATA[v0.21に向けたアイデアはv0.20を開発中からありました。v0.20.0をリリースしたのが2024年3月なので、もう5ヶ月も経過してしまいました。これは想定外で当初は6月末頃のリリースを目指していました。遅れた原因は大きく二つあって、一つはServer Actionsのサポートがかなり大きなものであること、もう一つはそれに加えてさまざまなリファクタリングを実施し、それに伴い不具合対応が発生しました。以前から存在していた不具合も多くありそれらも対応したため、全体的な改善度合いは高いです。チーム開発をする中で、メンバーの忙しさにも左右される場面もありました。やっとv0.21.0のリリース...]]></description><link>https://zenn.dev/dai_shi/articles/0fdfec9a3bf075</link><guid isPermaLink="true">https://zenn.dev/dai_shi/articles/0fdfec9a3bf075</guid><pubDate>Tue, 20 Aug 2024 14:56:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--sYEXRTJM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Waku%2520v0.21.0%25E3%2582%2592%25E3%2583%25AA%25E3%2583%25AA%25E3%2583%25BC%25E3%2582%25B9%25E3%2581%2597%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%25EF%25BC%2581Server%2520Actions%25E3%2582%2582%25E5%25AE%258C%25E5%2585%25A8%25E3%2582%25B5%25E3%2583%259D%25E3%2583%25BC%25E3%2583%2588%25E3%2581%25AERSC%25E3%2583%2595%25E3%2583%25AC%25E3%2583%25BC%25E3%2583%25A0%25E3%2583%25AF%25E3%2583%25BC%25E3%2582%25AF%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:daishi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzcwZGNhM2E2Y2IuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>daishi</dc:creator></item><item><title><![CDATA[flatMapという概念を理解してみる]]></title><description><![CDATA[JSのArrayメソッドでよく見かけるflatMapですが、正直よくわかりません。
+実際に使われているコードを見ても、結局flatMapの結果がどのデータ型で返ってくるかなどを読み解けませんでした。
+よって、まとめてみながら徐々に理解していきます。
+
+ 公式ドキュメント
+
+ flatMap
+
+flatMap() は Array インスタンスのメソッドで、最初にマッピング関数を使用してそれぞれの要素をマップした後、結果を新しい配列内に平坦化します。これは、 map() の後に深さ 1 の flat() を行うのと同じですが (arr.map(...args).flat())、これら 2 つ...]]></description><link>https://zenn.dev/shunsuke108m/articles/769abb0f6762d2</link><guid isPermaLink="true">https://zenn.dev/shunsuke108m/articles/769abb0f6762d2</guid><pubDate>Tue, 20 Aug 2024 13:18:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--rNuWNSOp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:flatMap%25E3%2581%25A8%25E3%2581%2584%25E3%2581%2586%25E6%25A6%2582%25E5%25BF%25B5%25E3%2582%2592%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25AE%25AE%25E7%2594%25B0%25E5%25B3%25BB%25E8%25BC%2594%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTG9Jdy1QSHNvSW1WVGpKTmxFbkhnZkRyZ0pBVlRSQzhIaWMweDVJUmZLS3hlUjZnPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>宮田峻輔</dc:creator></item><item><title><![CDATA[React(TS)のユニオン×リテラル型を用いて単一コンポーネントから複数のCSSを出し分ける]]></title><description><![CDATA[
+ まえがき
+ReactやTypeScriptでの開発において、コンポーネントのスタイリングを効率的に管理することは重要です。特に、テーマカラーやバリエーションを持つコンポーネントの場合、スタイルの一貫性を保ちながら柔軟にカスタマイズできる仕組みが求められます。今回の記事では、TypeScriptのユニオン×リテラル型を活用して、単一コンポーネントからCSSのクラスをPropsで出し分ける実装について解説します。(tailwindを使用)
+ユニオン×リテラル型の関連記事↓
+https://zenn.dev/gamuprog/articles/61a43181d43bd7
+
+ コードの概要...]]></description><link>https://zenn.dev/gamuprog/articles/8edda19d0e1954</link><guid isPermaLink="true">https://zenn.dev/gamuprog/articles/8edda19d0e1954</guid><pubDate>Tue, 20 Aug 2024 08:32:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---bOYvEKT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%2528TS%2529%25E3%2581%25AE%25E3%2583%25A6%25E3%2583%258B%25E3%2582%25AA%25E3%2583%25B3%25C3%2597%25E3%2583%25AA%25E3%2583%2586%25E3%2583%25A9%25E3%2583%25AB%25E5%259E%258B%25E3%2582%2592%25E7%2594%25A8%25E3%2581%2584%25E3%2581%25A6%25E5%258D%2598%25E4%25B8%2580%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%259D%25E3%2583%25BC%25E3%2583%258D%25E3%2583%25B3%25E3%2583%2588%25E3%2581%258B%25E3%2582%2589%25E8%25A4%2587%25E6%2595%25B0%25E3%2581%25AECSS%25E3%2582%2592%25E5%2587%25BA%25E3%2581%2597%25E5%2588%2586%25E3%2581%2591%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258C%25E3%2582%2580%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VmYTNjODM0OTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>がむ</dc:creator></item><item><title><![CDATA[【TS】satisfiesじゃないとできないこと。~無駄な変数を撲滅する~。]]></title><description><![CDATA[こんにちは!
+satisfies大好きな筆者です。
+https://zenn.dev/gemcook/articles/c1916975cf6ce6
+この記事に引き続いてsatisfiesにしかできないことをもう一つ紹介したいと思います。satisfiesのお気に入りの使い方その２。です！
+
+ 無駄な変数宣言せずに型をつける
+型注釈は変数の宣言時に行うことでその変数に対し型をつけることができます。その性質上、どうしても変数は宣言する必要があります、しかしsatisfiesはそんなことありません。いつだって使えるのです。
+さて「変数宣言せずに型をつける」とはどういうことでしょうか。実際の使...]]></description><link>https://zenn.dev/gemcook/articles/17f7a25dc88cb9</link><guid isPermaLink="true">https://zenn.dev/gemcook/articles/17f7a25dc88cb9</guid><pubDate>Tue, 20 Aug 2024 03:32:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jgeYZNTN--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590TS%25E3%2580%2591satisfies%25E3%2581%2598%25E3%2582%2583%25E3%2581%25AA%25E3%2581%2584%25E3%2581%25A8%25E3%2581%25A7%25E3%2581%258D%25E3%2581%25AA%25E3%2581%2584%25E3%2581%2593%25E3%2581%25A8%25E3%2580%2582%7E%25E7%2584%25A1%25E9%25A7%2584%25E3%2581%25AA%25E5%25A4%2589%25E6%2595%25B0%25E3%2582%2592%25E6%2592%25B2%25E6%25BB%2585%25E3%2581%2599%25E3%2582%258B%7E%25E3%2580%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%25B2%25E3%2582%2587%25E3%2581%25B7%25E3%2581%25A6%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQyYzJiNzVlZTIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Gemcook%2520Tech%2520Blog%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M1MmQ2ODA0Y2UuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ひょぷて</dc:creator></item><item><title><![CDATA[[TypeScript] Awaited<T>を知っていますか？]]></title><description><![CDATA[先日チームメンバーのコードレビューをしていた際、Awaitedを使ったコードを見つけました。
+個人的にはなんとなく最近追加されたTypeScriptの型ユーティリティだな〜くらいの認識で実務で使ったことがなかったので、せっかくの機会なので調べてみました。
+
+ ユーティリティ Awaited&lt;T&gt;型とは？
+Awaited は、TypeScript 4.5 で導入された型ユーティリティです。Promise の結果を型として抽出するのに役立ちます。つまり、Promise が解決されたときに返される値の型を取得するために使用できます。
+この型は再帰的に定義されており、Promise ...]]></description><link>https://zenn.dev/funteractiveinc/articles/9b30b65871a1b8</link><guid isPermaLink="true">https://zenn.dev/funteractiveinc/articles/9b30b65871a1b8</guid><pubDate>Tue, 20 Aug 2024 02:07:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dQ_v1xdY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BTypeScript%255D%2520Awaited%253CT%253E%25E3%2582%2592%25E7%259F%25A5%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%2584%25E3%2581%25BE%25E3%2581%2599%25E3%2581%258B%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:SHIRO%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I4YmI2YjY4NDMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2595%25E3%2582%25A1%25E3%2583%25B3%25E3%2582%25BF%25E3%2583%25A9%25E3%2582%25AF%25E3%2583%2586%25E3%2582%25A3%25E3%2583%2596%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2p2ZDR0SDNrY3NQOEliejdSdUgtajJZVDNoLThLOTN4aGd1U2s9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>SHIRO</dc:creator></item><item><title><![CDATA[lodash-esよりも軽量かつ高速なes-toolkitに移行してみる]]></title><description><![CDATA[
+ es-toolkitとは
+es-toolkitは配列・数値計算・オブジェクトや文字列操作などの機能を提供するJavaScriptのユーティリティです。公式の紹介文によると、lodashなどの代替品と比較して最大97%のバンドルサイズの削減、実行時パフォーマンスの2～3倍高速化、シンプルかつ堅牢なTypeScriptのサポートを特徴としています。バージョンv1.0.0が2024年5月末と新しいライブラリに関わらず（現在はv1.16.0）、GitHub Starは4.6kと期待のライブラリです。
+
+ 検証内容/前提条件
+今回はlodash（正確にはlodash-es）をあまり利用していな...]]></description><link>https://zenn.dev/est/articles/9aef523ba88fa1</link><guid isPermaLink="true">https://zenn.dev/est/articles/9aef523ba88fa1</guid><pubDate>Mon, 19 Aug 2024 23:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vPaSUbqx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:lodash-es%25E3%2582%2588%25E3%2582%258A%25E3%2582%2582%25E8%25BB%25BD%25E9%2587%258F%25E3%2581%258B%25E3%2581%25A4%25E9%25AB%2598%25E9%2580%259F%25E3%2581%25AAes-toolkit%25E3%2581%25AB%25E7%25A7%25BB%25E8%25A1%258C%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:est%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzgxZTU2ZGFiZjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>est</dc:creator></item><item><title><![CDATA[Vue.js 3とComposition API：状態管理の新しいアプローチ]]></title><description><![CDATA[
+ Vue.js 3とComposition API：状態管理の新しいアプローチ
+
+ はじめに
+Vue.jsは、シンプルで柔軟なフロントエンドフレームワークとして広く利用されています。特に、Vue.js 3では、Composition APIという新しいアプローチが導入され、状態管理やコンポーネントの設計において大きな変革をもたらしました。本記事では、Vue.js 3のComposition APIを中心に、状態管理の新しいアプローチについて詳しく解説します。
+
+ Vue.js 3の概要
+Vue.js 3は、Vue.jsの最新バージョンであり、パフォーマンスの向上、TypeScriptの...]]></description><link>https://zenn.dev/llm_robot/articles/20240820-vuejs3-compositionapi-state</link><guid isPermaLink="true">https://zenn.dev/llm_robot/articles/20240820-vuejs3-compositionapi-state</guid><pubDate>Mon, 19 Aug 2024 22:08:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--boW_dnf2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Vue.js%25203%25E3%2581%25A8Composition%2520API%25EF%25BC%259A%25E7%258A%25B6%25E6%2585%258B%25E7%25AE%25A1%25E7%2590%2586%25E3%2581%25AE%25E6%2596%25B0%25E3%2581%2597%25E3%2581%2584%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:AIZAWA%2520version%253A0.0.2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAwMTE3MGM1NDcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>AIZAWA version:0.0.2</dc:creator></item><item><title><![CDATA[React + TypeScript よく使うコマンドまとめ]]></title><description><![CDATA[プロジェクトのセットアップ
+npx create-react-app my-app --template typescript
+開発サーバーの起動
+npm start
+ビルド
+npm run build
+型チェック
+tsc --noEmit
+テスト
+npm test
+パッケージのインストール
+npm install package-name
+npm install package-name --save-dev
+ESLintの実行
+npx eslint . --ext .ts,.tsx
+Prettierの実行
+npx prettier --write .
+Storybookのセットアップ...]]></description><link>https://zenn.dev/royta/articles/df7e613d5b95c5</link><guid isPermaLink="true">https://zenn.dev/royta/articles/df7e613d5b95c5</guid><pubDate>Mon, 19 Aug 2024 20:41:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qh0bBl2d--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%2520%252B%2520TypeScript%2520%25E3%2582%2588%25E3%2581%258F%25E4%25BD%25BF%25E3%2581%2586%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%25AD%25E3%2582%25A4%25E3%2582%25BF%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ExMTM2YTY5YmYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ロイタ</dc:creator></item><item><title><![CDATA[JavaScriptでネストしたオブジェクトから、キーワード検索]]></title><description><![CDATA[
+ ネストしたオブジェクトから値を取得するにはどうするのか？
+仕事で配列を操作して値を取得するロジックを実装する場面があった。意外と難しかった。入れ子構造になってるオブジェクトから値をキーワード検索で取得する。
+let companies = [
+    {
+        id: 1,
+        name: '株式会社A',
+        member: {
+            age: 20,
+            count: 500,
+        },
+        place: 'TOKYO'
+    },
+    {
+        id: 2,
+    ...]]></description><link>https://zenn.dev/joo_hashi/articles/b768de4d3bb9ec</link><guid isPermaLink="true">https://zenn.dev/joo_hashi/articles/b768de4d3bb9ec</guid><pubDate>Mon, 19 Aug 2024 14:03:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fiEjLLhh--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25E3%2581%25A7%25E3%2583%258D%25E3%2582%25B9%25E3%2583%2588%25E3%2581%2597%25E3%2581%259F%25E3%2582%25AA%25E3%2583%2596%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E3%2581%258B%25E3%2582%2589%25E3%2580%2581%25E3%2582%25AD%25E3%2583%25BC%25E3%2583%25AF%25E3%2583%25BC%25E3%2583%2589%25E6%25A4%259C%25E7%25B4%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:JboyHashimoto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNjOTBiY2M0M2YuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>JboyHashimoto</dc:creator></item><item><title><![CDATA[【Next.js】App RouterとRSCによるアーキテクチャ設計]]></title><description><![CDATA[
+ はじめに
+Next.jsにApp Routerが導入されたことで、開発者にとって便利な機能が増えた一方、App Routerを前提とした設計のベストプラクティスがまだ確立されておらず、設計時にさまざまな検討が必要になっています。
+特に大規模プロジェクトでは、開発が進むにつれてコードが肥大化し、メンテナンス性が損なわれる可能性があります。そのため、コードを細分化して管理し、将来的な保守や拡張を容易にするアプリケーション設計が求められます。
+
+ 今回の記事の項目
+本記事では、App Routerの機能を最大限に活用するための設計について考察します。
+特に以下の項目に焦点を当て、長期にわた...]]></description><link>https://zenn.dev/kiwichan101kg/articles/b44305e3049bac</link><guid isPermaLink="true">https://zenn.dev/kiwichan101kg/articles/b44305e3049bac</guid><pubDate>Mon, 19 Aug 2024 12:42:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--cupbyEpr--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Next.js%25E3%2580%2591App%2520Router%25E3%2581%25A8RSC%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258B%25E3%2582%25A2%25E3%2583%25BC%25E3%2582%25AD%25E3%2583%2586%25E3%2582%25AF%25E3%2583%2581%25E3%2583%25A3%25E8%25A8%25AD%25E8%25A8%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kiwichan%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZlYTA3YzU3YzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kiwichan</dc:creator></item><item><title><![CDATA[【備忘録】TypeScript - 関数の型宣言]]></title><description><![CDATA[
+ 関数の型の宣言
+
+ 型宣言
+
+型エイリアスによる型宣言
+
+type MathOperation = (x: number, y: number) =&gt; number;
+
+様々な構文の型宣言
+
+//　メソッド構文
+type MathOperation = {
+  (x: number, y: number): number;
+};
+//　インターフェース構文
+interface MathOperation = {
+  (x: number, y: number): number;
+};
+//　アロー関数構文
+type MathOperation = (x: number, y: ...]]></description><link>https://zenn.dev/hiro8_hiro8/articles/5c72a0e942f902</link><guid isPermaLink="true">https://zenn.dev/hiro8_hiro8/articles/5c72a0e942f902</guid><pubDate>Mon, 19 Aug 2024 10:36:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5ct6o_Cu--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%2582%2599%25E5%25BF%2598%25E9%258C%25B2%25E3%2580%2591TypeScript%2520-%2520%25E9%2596%25A2%25E6%2595%25B0%25E3%2581%25AE%25E5%259E%258B%25E5%25AE%25A3%25E8%25A8%2580%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Hiro%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSjVRSzFnQVpjV2cwTFJHUXlDcFMtU19uVm5HTlVzNlgwMEN2U2dYTUFmODVMMnFBPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Hiro</dc:creator></item><item><title><![CDATA[JavaScript配列の強力な味方: Array.prototype.reduce()の活用ガイド]]></title><description><![CDATA[
+ Array.prototype.reduce()とは
+Array.prototype.reduce()は、JavaScriptの配列メソッドの中でも特に強力で柔軟性の高いメソッドです。このメソッドは配列の各要素に対して、ユーザーが定義したコールバック関数を実行し、単一の結果値を生成します。
+基本的な構文は以下のようになります：
+array.reduce(callback(accumulator, currentValue, index, array), initialValue)
+
+
+callback: 各要素に対して実行される関数
+
+accumulator: 前回のコールバックの戻...]]></description><link>https://zenn.dev/crebo/articles/article-0005-20240818</link><guid isPermaLink="true">https://zenn.dev/crebo/articles/article-0005-20240818</guid><pubDate>Sun, 18 Aug 2024 12:05:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8M_Z3w_q--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25E9%2585%258D%25E5%2588%2597%25E3%2581%25AE%25E5%25BC%25B7%25E5%258A%259B%25E3%2581%25AA%25E5%2591%25B3%25E6%2596%25B9%253A%2520Array.prototype.reduce%2528%2529%25E3%2581%25AE%25E6%25B4%25BB%25E7%2594%25A8%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2581%258F%25E3%2582%258A%25E3%2581%25BC%25E3%2583%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2IxNzlhZTFjZGIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>株式会社くりぼー</dc:creator></item><item><title><![CDATA[【T3Stack入門】原則と各技術の特徴を理解する]]></title><description><![CDATA[
+ はじめに
+Typescriptでのフルスタック開発の選択肢として、型安全で先進的な開発ポリシーを持つT3 Stackは魅力的な技術スタックです。今回は入門編としてT3 Stackの原則と各技術の特徴を解説します。
+
+ T3 Stackとは？
+https://create.t3.gg/
+T3 Stackは、Theo氏が2021年に発案した、Webアプリケーション構築のための技術スタックです。
+T3 Stackでは simplicity(簡潔さ)、modularity(モジュール性)、full-stack typesafety(フルスタックの型安全)が重視されています。構成要素は下記のと...]]></description><link>https://zenn.dev/maicom/articles/efafe3fc3f40e2</link><guid isPermaLink="true">https://zenn.dev/maicom/articles/efafe3fc3f40e2</guid><pubDate>Sun, 18 Aug 2024 11:54:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8gP-rhSq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590T3Stack%25E5%2585%25A5%25E9%2596%2580%25E3%2580%2591%25E5%258E%259F%25E5%2589%2587%25E3%2581%25A8%25E5%2590%2584%25E6%258A%2580%25E8%25A1%2593%25E3%2581%25AE%25E7%2589%25B9%25E5%25BE%25B4%25E3%2582%2592%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2593%25E3%2581%2586%25E3%2581%25BE%25E3%2581%2584%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NmNjczOTA4MjMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>こうまい</dc:creator></item><item><title><![CDATA[Three.js + glTF + Spine のテンプレートです]]></title><description><![CDATA[表題の通り、Vite をベースに Three.js + glTF + Spine のテンプレートを作成してみました。（Pixi.js のテンプレートに同じく自分用です。）
+Three.js で遊びたいときに便利なテンプレートになっています。
+
+ リポジトリ・サンプルページ
+&gt; リポジトリ:t-tonyo-maru/pub_template_web_threejs-gltf-spine
+&gt; サンプルページ
+
+サンプルページ スクリーンショット
+
+ 開発環境
+
+
+
+開発環境
+バージョン
+
+
+
+
+node
+&gt;=20
+
+
+
+
+ 主なパッケージ
+
+
+
+パッケージ
+バージョン
+
+
+...]]></description><link>https://zenn.dev/t_tonyo_maru/articles/61d4d374c3b5d8</link><guid isPermaLink="true">https://zenn.dev/t_tonyo_maru/articles/61d4d374c3b5d8</guid><pubDate>Sun, 18 Aug 2024 10:46:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wwv3FPFs--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Three.js%2520%252B%2520glTF%2520%252B%2520Spine%2520%25E3%2581%25AE%25E3%2583%2586%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AC%25E3%2583%25BC%25E3%2583%2588%25E3%2581%25A7%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A8%25E3%2582%2593%25E3%2582%2588%25E3%2583%25BC%25E3%2580%2582%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NhNjVjZjg3MjguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>とんよー。</dc:creator></item><item><title><![CDATA[型安全に条件分岐できてない？判別可能なユニオン型で解決！]]></title><description><![CDATA[こんにちは。ソフトウェアエンジニア（志望の26卒）の naotani です！
+大学ではヨーロッパの歴史を学びつつ、課外ではwebアプリケーションの開発(主にフロントエンド)に取り組んでいます。
+実は今回、初めてzennで記事を執筆しています…！
+これからも情報発信活動に力を入れていこうと思っています🔥
+
+ はじめに
+突然ですが、TypeScriptで条件分岐や絞り込みをするとき、
+hogehogeはundefinedの可能性があります。
+型hogehogeを型foobarに割り当てることはできません。
+的なエラーメッセージを見たことがあると思います。
+そして、そのエラーを解消しようとして...]]></description><link>https://zenn.dev/naoya_dev/articles/ts-descriminated-unions</link><guid isPermaLink="true">https://zenn.dev/naoya_dev/articles/ts-descriminated-unions</guid><pubDate>Sun, 18 Aug 2024 09:50:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--smXPjqRo--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%259E%258B%25E5%25AE%2589%25E5%2585%25A8%25E3%2581%25AB%25E6%259D%25A1%25E4%25BB%25B6%25E5%2588%2586%25E5%25B2%2590%25E3%2581%25A7%25E3%2581%258D%25E3%2581%25A6%25E3%2581%25AA%25E3%2581%2584%25EF%25BC%259F%25E5%2588%25A4%25E5%2588%25A5%25E5%258F%25AF%25E8%2583%25BD%25E3%2581%25AA%25E3%2583%25A6%25E3%2583%258B%25E3%2582%25AA%25E3%2583%25B3%25E5%259E%258B%25E3%2581%25A7%25E8%25A7%25A3%25E6%25B1%25BA%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:naotani%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUl0YnZta1FnN1YyNDRTQzRndWQwbUVPSkNoUU1WdzNweld3bEd0Vks0dlA9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>naotani</dc:creator></item><item><title><![CDATA[ポートフォリオサイトを公開しました！]]></title><description><![CDATA[初めての投稿を記念してポートフォリオサイトをご紹介します！
+
+
+ 概要
+TypeScriptとNext.jsを中心に、フロントエンド開発のスキルやプロジェクトをまとめています。技術選定の背景や工夫した点についても今後記事化していく予定ですので、エンジニア仲間の皆さん、ぜひご覧ください！
+🔗https://shunniehub.com
+ver1としてリリースしたので、今後以下のような機能追加を検討しています。
+
+おしゃれなアニメーション追加
+言語切り替え
+ダークテーマ切り替え
+
+
+ 使用技術
+
+TypeScript
+Next.js
+React
+Firebase (App Hosting)
+...]]></description><link>https://zenn.dev/nekonoko2323/articles/f80cc44d66d1c8</link><guid isPermaLink="true">https://zenn.dev/nekonoko2323/articles/f80cc44d66d1c8</guid><pubDate>Sun, 18 Aug 2024 06:57:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9aQPwECE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%259D%25E3%2583%25BC%25E3%2583%2588%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25AA%25E3%2582%25AA%25E3%2582%25B5%25E3%2582%25A4%25E3%2583%2588%25E3%2582%2592%25E5%2585%25AC%25E9%2596%258B%25E3%2581%2597%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AD%25E3%2581%2593%25E3%2581%25AE%25E3%2581%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTEdQNTAyVHBEQV9BbXBmOXUyTDk1aUQ0aHJzNFBnTkxCSTQtMEtabE82LW1CemRjTT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ねこのこ</dc:creator></item><item><title><![CDATA[【React.js】animate()メソッドを使ってコンポーネントのmount/unmount時にfade-in/fade-outさせる]]></title><description><![CDATA[
+ はじめに
+fade-in/fade-outは主にモーダル・ダイアログでよく使用されています。
+fade-inはCSSのtransitionやanimationを用いることで簡単に実装できます。
+fade-outはReactだと不透明度を0にして視覚上見えなくしたり[1]、framer-motionなどの外部ライブラリを頼ることが多いと思います。
+今回はブラウザ標準の機能であるElement.animate()メソッドを使ってmount/unmountに連動してfade-in/fade-outを行うモーダルを実装してみます。
+
+ 前提知識
+
+HTML
+CSS
+JavaScript
+Ty...]]></description><link>https://zenn.dev/katsuo3/articles/d12a29aab02e66</link><guid isPermaLink="true">https://zenn.dev/katsuo3/articles/d12a29aab02e66</guid><pubDate>Sat, 17 Aug 2024 15:41:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--KffYaDEA--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590React.js%25E3%2580%2591animate%2528%2529%25E3%2583%25A1%25E3%2582%25BD%25E3%2583%2583%25E3%2583%2589%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%259D%25E3%2583%25BC%25E3%2583%258D%25E3%2583%25B3%25E3%2583%2588%25E3%2581%25AEmount%252Funmount%25E6%2599%2582%25E3%2581%25ABfade-in...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25AB%25E3%2583%2584%25E3%2582%25AA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTHlHUXlaVGhQNERqUi1DUk03RkdaNlhBUWFkSmNodDNJd1VtQjN2MTc1eUNZWE13PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>カツオ</dc:creator></item><item><title><![CDATA[serverからclient用のschemaとopenAPIを自動生成する]]></title><description><![CDATA[
+ はじめに
+nest.jsをバックエンドとして開発したが、api docは人間の目で確認しながら、作成しました。悲しいと感じながら、人間ミスも多発でした。その現象を解決ために、コードからapi docを生成し、api docからフロントエンド用のschemaを生成するまでに自動化するのは本記事の目的です。
+
+ nest.jsとは
+Nest.jsは、Node.jsのための強力なフレームワークで、効率的なサーバーサイドアプリケーションを構築することを目的としています。TypeScriptをベースになっています。DIコンテナもサポートしております。
+https://docs.nestjs.c...]]></description><link>https://zenn.dev/optimind/articles/1bd33124ceddb4</link><guid isPermaLink="true">https://zenn.dev/optimind/articles/1bd33124ceddb4</guid><pubDate>Sat, 17 Aug 2024 15:15:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--VxK5RPtn--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:server%25E3%2581%258B%25E3%2582%2589client%25E7%2594%25A8%25E3%2581%25AEschema%25E3%2581%25A8openAPI%25E3%2582%2592%25E8%2587%25AA%25E5%258B%2595%25E7%2594%259F%25E6%2588%2590%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Shen%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNjY2ZmM2Q5YzIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:OPTIMIND%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ExM2NlZGY3NjMuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Shen</dc:creator></item><item><title><![CDATA[👨‍💼「並列処理と並行処理の違いはなんですか？JSの非同期処理はどちらに該当しますか？」]]></title><description><![CDATA[
+ まえがき
+こんなこと急に聞かれたら困りますよね(?)。CS専攻じゃないとそこまで気にしたことがない人も多いと思います。名前が似ていてややこしいですが、根本的な違いがあるのでまとめてみました。
+
+ 並列処理と並行処理の違い
+
+ 並列処理
+複数のスレッドでプロセス(タスク)を同時に実行する処理。
+
+
+ 並行処理
+単一のスレッドで、複数のプロセス(タスク)を高速で切り替えながら実行する処理。
+(人間からしたら複数タスクが同時に実行されているように見えるが、実際は高速に切り替えながら一つ一つの処理を交互に行っているので、同時に複数のプロセス(タスク)は実行されていない)
+
+
+ 自己流の覚え方...]]></description><link>https://zenn.dev/gamuprog/articles/4a05d3770a219f</link><guid isPermaLink="true">https://zenn.dev/gamuprog/articles/4a05d3770a219f</guid><pubDate>Sat, 17 Aug 2024 11:25:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fSDKftnf--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%2520%25E3%2580%258C%25E4%25B8%25A6%25E5%2588%2597%25E5%2587%25A6%25E7%2590%2586%25E3%2581%25A8%25E4%25B8%25A6%25E8%25A1%258C%25E5%2587%25A6%25E7%2590%2586%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%25E3%2581%25AF%25E3%2581%25AA%25E3%2582%2593%25E3%2581%25A7%25E3%2581%2599%25E3%2581%258B%25EF%25BC%259FJS%25E3%2581%25AE%25E9%259D%259E%25E5%2590%258C%25E6%259C%259F%25E5%2587%25A6%25E7%2590%2586%25E3%2581%25AF%25E3%2581%25A9%25E3%2581%25A1%25E3%2582%2589%25E3%2581%25AB%25E8%25A9%25B2%25E5%25BD%2593%25E3%2581%2597%25E3%2581%25BE%25E3%2581%2599%25E3%2581%258B%25EF%25BC%259F%25E3%2580%258D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258C%25E3%2582%2580%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VmYTNjODM0OTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>がむ</dc:creator></item><item><title><![CDATA[TypeScript型ガード]]></title><description><![CDATA[
+ 型ガード
+
+変数が特定の型を持っているかどうかを判定する→これをif文などを通して判定していればコンパイラに推論させる
+
+function isString(value: any): value is string {
+  return typeof value === "string";
+}
+
+let x: any = "hello";
+
+if (isString(x)) {
+  console.log(x.toUpperCase()); // 型ガードにより、ここでxはstringとして扱われる
+}
+上記はif文の条件にstring を判定させているため、if文条件をクリアしたも...]]></description><link>https://zenn.dev/momonga_g/articles/cfd6c2e6cdff33</link><guid isPermaLink="true">https://zenn.dev/momonga_g/articles/cfd6c2e6cdff33</guid><pubDate>Sat, 17 Aug 2024 09:44:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--iA7mDvzF--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:TypeScript%25E5%259E%258B%25E3%2582%25AC%25E3%2583%25BC%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2582%25E3%2582%2582%25E3%2582%2593%25E3%2581%258C%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FiZWRkZTc0YzcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ももんが</dc:creator></item></channel></rss>
