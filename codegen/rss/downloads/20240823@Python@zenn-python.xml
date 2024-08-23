@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Fri, 23 Aug 2024 10:33:49 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[RAGに本気で向き合ってみた - 開発の苦労と工夫とヒント]]></title><description><![CDATA[
+ はじめに
+
+みなさんRAG本気でやってます？
+私はここ半年ほどプライベートでRAGに本気で向き合ってみました。
+（※普段の仕事はアプリエンジニアなので、業務でLLMにはほぼ触れていません。）
+RAGで精度が出ないという話はよく聞きます。
+LLMがアプリケーションに載らないと、このままAIブームが終わってしまいます。
+モデルの精度が高まった今、アプリの時代にしなければなりません。
+全てのアプリエンジニアはLLMに目覚めてください。
+この記事では、RAGの精度向上に向けて、自分が試したこととそのコスト・効果について書いていきます。
+
+ RAGとは
+RAGについては、他の多くの記事で解説さ...]]></description><link>https://zenn.dev/immedio/articles/a5fc6dfd9952cf</link><guid isPermaLink="true">https://zenn.dev/immedio/articles/a5fc6dfd9952cf</guid><pubDate>Fri, 23 Aug 2024 10:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wt9J3Ky3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:RAG%25E3%2581%25AB%25E6%259C%25AC%25E6%25B0%2597%25E3%2581%25A7%25E5%2590%2591%25E3%2581%258D%25E5%2590%2588%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2520-%2520%25E9%2596%258B%25E7%2599%25BA%25E3%2581%25AE%25E8%258B%25A6%25E5%258A%25B4%25E3%2581%25A8%25E5%25B7%25A5%25E5%25A4%25AB%25E3%2581%25A8%25E3%2583%2592%25E3%2583%25B3%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:n%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RlZjc0OTgxOWYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:immedio%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE3N2M0MjNmODkuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>n</dc:creator></item><item><title><![CDATA[［AtCoder］ABC-365｜A - Leap Year]]></title><description><![CDATA[
+ 設問ページ
+
+🔗ABC-365 A - Leap Year
+
+
+
+ 提出結果
+def getInt():
+    return int(input())
+
+
+def main():
+    Y = getInt()
+
+    if Y % 4 &gt; 0:
+        print(365)
+    elif Y % 400 == 0:
+        print(366)
+    elif Y % 100 == 0:
+        print(365)
+    else:
+        print(366)
+
+
+if __name__ == "__main__":
+    ...]]></description><link>https://zenn.dev/hyperdb/articles/b9792866750fca</link><guid isPermaLink="true">https://zenn.dev/hyperdb/articles/b9792866750fca</guid><pubDate>Fri, 23 Aug 2024 08:03:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--rXTFQHAv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25EF%25BC%25BBAtCoder%25EF%25BC%25BDABC-365%25EF%25BD%259CA%2520-%2520Leap%2520Year%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AF%25E3%2581%2584%25E3%2581%25B1%25E3%2581%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhODJkODgwMzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>はいぱぁ</dc:creator></item><item><title><![CDATA[［AtCoder］ABC-366｜B - Vertical Writing]]></title><description><![CDATA[
+ 設問ページ
+
+🔗ABC-366 B - Vertical Writing
+
+
+
+ 提出結果
+def getInt():
+    return int(input())
+
+
+def getStringRow(N):
+    return [input() for _ in range(N)]
+
+
+def main():
+    N = getInt()
+    S = getStringRow(N)
+    S.reverse()
+
+    for i in range(max([len(w) for w in S])):
+        T = ""
+        for s in...]]></description><link>https://zenn.dev/hyperdb/articles/8057ce2469f18d</link><guid isPermaLink="true">https://zenn.dev/hyperdb/articles/8057ce2469f18d</guid><pubDate>Fri, 23 Aug 2024 08:03:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--br_O0_rQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25EF%25BC%25BBAtCoder%25EF%25BC%25BDABC-366%25EF%25BD%259CB%2520-%2520Vertical%2520Writing%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AF%25E3%2581%2584%25E3%2581%25B1%25E3%2581%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhODJkODgwMzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>はいぱぁ</dc:creator></item><item><title><![CDATA[［AtCoder］ABC-366｜A - Election 2]]></title><description><![CDATA[
+ 設問ページ
+
+🔗ABC-366 A - Election 2
+
+
+
+ 提出結果
+def getIntMap():
+    return map(int, input().split())
+
+
+def main():
+    N, T, A = getIntMap()
+
+    print("No" if T &lt;= N // 2 and A &lt;= N // 2 else "Yes")
+
+
+if __name__ == "__main__":
+    main()
+]]></description><link>https://zenn.dev/hyperdb/articles/4106071cb789fe</link><guid isPermaLink="true">https://zenn.dev/hyperdb/articles/4106071cb789fe</guid><pubDate>Fri, 23 Aug 2024 08:03:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--719MSfaY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25EF%25BC%25BBAtCoder%25EF%25BC%25BDABC-366%25EF%25BD%259CA%2520-%2520Election%25202%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AF%25E3%2581%2584%25E3%2581%25B1%25E3%2581%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhODJkODgwMzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>はいぱぁ</dc:creator></item><item><title><![CDATA[［AtCoder］ABC-365｜B - Second Best]]></title><description><![CDATA[
+ 設問ページ
+
+🔗ABC-365 B - Second Best
+
+
+
+ 提出結果
+def getInt():
+    return int(input())
+
+
+def getIntList():
+    return list(map(int, input().split()))
+
+
+def main():
+    N = getInt()
+    A = getIntList()
+    B = sorted(A)
+
+    print(A.index(B[N - 2]) + 1)
+
+
+if __name__ == "__main__":
+    main()
+]]></description><link>https://zenn.dev/hyperdb/articles/3b26ad177f67a7</link><guid isPermaLink="true">https://zenn.dev/hyperdb/articles/3b26ad177f67a7</guid><pubDate>Fri, 23 Aug 2024 08:03:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lE1XWXwI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25EF%25BC%25BBAtCoder%25EF%25BC%25BDABC-365%25EF%25BD%259CB%2520-%2520Second%2520Best%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AF%25E3%2581%2584%25E3%2581%25B1%25E3%2581%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhODJkODgwMzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>はいぱぁ</dc:creator></item><item><title><![CDATA[Thonnyを使ってCoDrone EDUを制御する(飛行編 その1)]]></title><description><![CDATA[
+
+ はじめに
+この記事ではCoDrone EDUをPythonでプラグラムして飛行させる方法について解説します。
+以下のサンプルコードで使用しているcodrone_eduライブラリの詳細(英語)は以下のリンクにあります。
+https://docs.robolink.com/docs/CoDroneEDU/Python/Function-Documentation
+!
+この記事は動作を保証するものではありませんので、あくまで、自己責任でお願いします。
+
+!
+ドローンを飛行させる場合は周辺の人や物に十分注意を払い、予期せぬ飛行や危険を感じた場合はパソコンキーボードのCTRL-Cを押してドロ...]]></description><link>https://zenn.dev/iot101/articles/b11c8e681ea373</link><guid isPermaLink="true">https://zenn.dev/iot101/articles/b11c8e681ea373</guid><pubDate>Fri, 23 Aug 2024 07:31:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--IYxPVDd8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Thonny%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6CoDrone%2520EDU%25E3%2582%2592%25E5%2588%25B6%25E5%25BE%25A1%25E3%2581%2599%25E3%2582%258B%2528%25E9%25A3%259B%25E8%25A1%258C%25E7%25B7%25A8%2520%25E3%2581%259D%25E3%2581%25AE1%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:iot101%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2EzODBhMGM3MzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>iot101</dc:creator></item><item><title><![CDATA[[メモ] たくさんあるCSVファイルのヘッダーだけを出力するためのコード]]></title><description><![CDATA[
+ 概要
+メモです。大量にあるファイルのうち一部でヘッダーがないCSVファイルが含まれていたようで，それをPythonコードで一気見できるようにしたくて，下記のようなコードを書きました。
+
+ コード
+# 下記環境で動作確認
+# # MacBook Pro (Apple M1 Pro)
+# # Ventura 13.6
+# # python 3.10.13
+
+import os
+import glob
+import pprint
+
+target_path = "ZZZ"
+# 走査したいパスを指定する
+files_unsorted = [os.path.basename(p) for p i...]]></description><link>https://zenn.dev/awash_shotab/articles/d33ca4b00517c8</link><guid isPermaLink="true">https://zenn.dev/awash_shotab/articles/d33ca4b00517c8</guid><pubDate>Fri, 23 Aug 2024 06:04:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ETH61gtf--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255B%25E3%2583%25A1%25E3%2583%25A2%255D%2520%25E3%2581%259F%25E3%2581%258F%25E3%2581%2595%25E3%2582%2593%25E3%2581%2582%25E3%2582%258BCSV%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2581%25AE%25E3%2583%2598%25E3%2583%2583%25E3%2583%2580%25E3%2583%25BC%25E3%2581%25A0%25E3%2581%2591%25E3%2582%2592%25E5%2587%25BA%25E5%258A%259B%25E3%2581%2599%25E3%2582%258B%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:NAKAGAWA%2520Shota%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4WmhvOGR1b2ZwSlV2MmEwYU8wcGN6NEZnbE5VWWR1b3c1RHVVcElCUT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>NAKAGAWA Shota</dc:creator></item><item><title><![CDATA[Pythonで仮想環境を作るメリットと手順]]></title><description><![CDATA[本日はPythonの仮想環境のアウトプットです。
+仮想環境とは、プロジェクトごとに独立した実行環境を提供する仕組みです。
+Pythonで何かプロジェクトを立ち上げる時は、システム（例えば、自分のクライアントPC）とは別でバーチャル環境で環境構築しましょうって話です。
+
+ 仮想環境のメリット
+
+ 1. 依存関係の分離
+インストールしたライブラリが他のプロジェクトに影響しないことです。依存関係については別途記事にまとめます。
+
+ 2. システム全体への影響
+Python以外の言語でも同様かもしれませんが、プロジェクトごとにライブラリの依存関係を管理することで、他のプロジェクトやシステム全体に...]]></description><link>https://zenn.dev/shuto2828/articles/python-virtual-env-setup-guide</link><guid isPermaLink="true">https://zenn.dev/shuto2828/articles/python-virtual-env-setup-guide</guid><pubDate>Fri, 23 Aug 2024 03:27:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--TK9TULg4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A7%25E4%25BB%25AE%25E6%2583%25B3%25E7%2592%25B0%25E5%25A2%2583%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%25E3%2583%25A1%25E3%2583%25AA%25E3%2583%2583%25E3%2583%2588%25E3%2581%25A8%25E6%2589%258B%25E9%25A0%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2597%25E3%2582%2585%25E3%2583%25BC%25E3%2581%25A8%25EF%25BD%259C30%25E4%25BB%25A3%25E3%2581%258B%25E3%2582%2589Web%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNlMWJmNjg1NTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>しゅーと｜30代からWebエンジニア</dc:creator></item><item><title><![CDATA[Webサイトでスクレイピングが禁止されているかどうか確認する方法]]></title><description><![CDATA[こちらの記事でスクレイピングの概要を記述しました。
+実際にスクレイピングの禁止チェックをする方法があります。
+今回は、プログラムでチェックする方法を紹介します。
+
+ ソースコード
+
+sample.py
+import requests
+
+def check_robots_txt(url):
+    robots_url = url.rstrip('/') + '/robots.txt'
+    try:
+        response = requests.get(robots_url)
+        if response.status_code == 200:
+          ...]]></description><link>https://zenn.dev/shuto2828/articles/ow-to-check-web-scraping-policy</link><guid isPermaLink="true">https://zenn.dev/shuto2828/articles/ow-to-check-web-scraping-policy</guid><pubDate>Fri, 23 Aug 2024 03:18:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--NwSCL-p9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Web%25E3%2582%25B5%25E3%2582%25A4%25E3%2583%2588%25E3%2581%25A7%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AC%25E3%2582%25A4%25E3%2583%2594%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%258C%25E7%25A6%2581%25E6%25AD%25A2%25E3%2581%2595%25E3%2582%258C%25E3%2581%25A6%25E3%2581%2584%25E3%2582%258B%25E3%2581%258B%25E3%2581%25A9%25E3%2581%2586%25E3%2581%258B%25E7%25A2%25BA%25E8%25AA%258D%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2597%25E3%2582%2585%25E3%2583%25BC%25E3%2581%25A8%25EF%25BD%259C30%25E4%25BB%25A3%25E3%2581%258B%25E3%2582%2589Web%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNlMWJmNjg1NTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>しゅーと｜30代からWebエンジニア</dc:creator></item><item><title><![CDATA[データサイエンスに興味がある君へ[環境構築編][Mac]]]></title><description><![CDATA[
+ 目次
+
+Pythonってどうやったら使えるん？
+Anacondaってなに？pipってなに？
+仮想環境ってなに？
+実際の環境構築まで
+
+
+ 1. Pythonってどうやったら使えるん？
+最近何かと話題に上がる生成AIの話題に触発されてなんとなくデータサイエンスを始めたくなった皆さん、もしくはそれに触発された教授に急に機械学習関連の研究テーマを割り振られた残念な大学院生の皆さんこんにちは。授業では散々ソフトウェアやハードウェアの知識を勉強したのに環境構築はできて当たり前みたいな顔で進められている人も多いと思います。そんな方のためにサクッと環境構築が出来るようになる記事になっています。
+
+...]]></description><link>https://zenn.dev/maoya23/articles/7f6713b197b177</link><guid isPermaLink="true">https://zenn.dev/maoya23/articles/7f6713b197b177</guid><pubDate>Fri, 23 Aug 2024 02:36:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--QDBwXFHg--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%25B5%25E3%2582%25A4%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B9%25E3%2581%25AB%25E8%2588%2588%25E5%2591%25B3%25E3%2581%258C%25E3%2581%2582%25E3%2582%258B%25E5%2590%259B%25E3%2581%25B8%255B%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%25E7%25B7%25A8%255D%255BMac%255D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Naoya%2520Matsuo%2Cx_90%2Cy_121/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Naoya Matsuo</dc:creator></item><item><title><![CDATA[psycopg2でスキーマを指定してCOPYする方法]]></title><description><![CDATA[
+ 要約
+業務中に取り組んだ不具合解決のフローを記事にしてみました。
+詳細は下記のとおりです。
+
+PostgreSQLにCSVファイルをCOPYする際、スキーマ指定ができない不具合が発生
+原因はライブラリの更新で、psycopg2 2.9以降ではcopy_from関数でスキーマを指定出来なくなった為
+上記の事象に対して、スキーマ検索パスを設定して解決した
+
+今回は、不具合を再現する所から始め、問題の解決フローをなるべく細かく記事にしてみます！
+
+ 検証手順
+
+COPYの動作を検証するDB・入力データを用意
+古いバージョンのpsycopg2で、copy_fromメソッドが正常に動作すること...]]></description><link>https://zenn.dev/satoshiakatsuka/articles/e0bd200a58249d</link><guid isPermaLink="true">https://zenn.dev/satoshiakatsuka/articles/e0bd200a58249d</guid><pubDate>Thu, 22 Aug 2024 13:30:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Isnsqv3p--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:psycopg2%25E3%2581%25A7%25E3%2582%25B9%25E3%2582%25AD%25E3%2583%25BC%25E3%2583%259E%25E3%2582%2592%25E6%258C%2587%25E5%25AE%259A%25E3%2581%2597%25E3%2581%25A6COPY%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Satoshi%2520Akatsuka%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFjMmQxMmNlNTcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Satoshi Akatsuka</dc:creator></item><item><title><![CDATA[Pythonのリスト内包表記に慣れよう！💪]]></title><description><![CDATA[
+ はじめに
+Pythonのコードを読んでいると内包表記がよく出てくるので慣れるために本記事で使い方をまとめます
+
+ 内包表記とは？
+https://docs.python.org/ja/3/tutorial/datastructures.html#list-comprehensions
+以下のようにifやforを一行で記載できる表記方法です。
+list = [x*2 for x in range(10)]
+print(list)
+
+# [0, 2, 4, 6, 8, 10, 12, 14, 16, 18]
+
+ forとifを1行で書く
+nums = [1,2,3,4,5,6,7,8,9...]]></description><link>https://zenn.dev/rabbit_penguin0/articles/523efda20ee8d9</link><guid isPermaLink="true">https://zenn.dev/rabbit_penguin0/articles/523efda20ee8d9</guid><pubDate>Thu, 22 Aug 2024 09:38:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--y15oFvmr--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25AE%25E3%2583%25AA%25E3%2582%25B9%25E3%2583%2588%25E5%2586%2585%25E5%258C%2585%25E8%25A1%25A8%25E8%25A8%2598%25E3%2581%25AB%25E6%2585%25A3%25E3%2582%258C%25E3%2582%2588%25E3%2581%2586%25EF%25BC%2581%2520%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%259A%25E3%2583%25B3%25E3%2582%25AE%25E3%2583%25B3%2520%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk3NjJhYjQ1YTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ペンギン🐧</dc:creator></item><item><title><![CDATA[Bertをファインチューニングして自然言語処理のコンペに参加してみる]]></title><description><![CDATA[皆さんこんにちは、こんばんは。突然自然言語系のコンペに参加したいと思い立ち、どうせやるならでかいモデルを使ってみたいの一心でBertを使ってみようと思いやってみたのですが、意外と手こずることが多く、備忘録も兼ねて投稿しようと思います。
+
+ はじめに
+紹介するコードの変数のにところどころconfigとありますが、ハイパーパラメータなどをconfig.yamlに保存して実行しているためそのような表記になっています。
+適宜ご自身でパラメータを定めてください
+
+ 1.今回参加するコンペ（使用したデータ）
+データサイエンス系のコンペとして一番有名なのはkaggleなのは疑いようがないのですが、布教...]]></description><link>https://zenn.dev/maoya23/articles/03dbc66ccae5a2</link><guid isPermaLink="true">https://zenn.dev/maoya23/articles/03dbc66ccae5a2</guid><pubDate>Thu, 22 Aug 2024 09:02:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5HJXCzAw--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Bert%25E3%2582%2592%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2581%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%258B%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%2597%25E3%2581%25A6%25E8%2587%25AA%25E7%2584%25B6%25E8%25A8%2580%25E8%25AA%259E%25E5%2587%25A6%25E7%2590%2586%25E3%2581%25AE%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%259A%25E3%2581%25AB%25E5%258F%2582%25E5%258A%25A0%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Naoya%2520Matsuo%2Cx_90%2Cy_121/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Naoya Matsuo</dc:creator></item><item><title><![CDATA[uvだけでPythonプロジェクトを管理する]]></title><description><![CDATA[チューリングのE2E自動運転チームの岩政(@colum2131)です。
+2024年8月20日にuvのマイナーバージョンが0.3.0にアップデートされました。元々、pipの代替として設計されていたuvが、Pythonのバージョン管理からパッケージ管理まで行えると発表されました。
+以前の2024年7月にまとめた記事では、
+
+将来的には、uvがRyeに代替されるよう
+
+と書きましたが、実際、RyeやPoetryなどの代替としてuvのみでPythonのプロジェクト管理が可能になりました。Ryeで行っていた操作同様にuvで実行できるようになった印象もあります。
+https://zenn.dev/t...]]></description><link>https://zenn.dev/turing_motors/articles/594fbef42a36ee</link><guid isPermaLink="true">https://zenn.dev/turing_motors/articles/594fbef42a36ee</guid><pubDate>Thu, 22 Aug 2024 08:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wCNs1QdS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:uv%25E3%2581%25A0%25E3%2581%2591%25E3%2581%25A7Python%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E3%2582%2592%25E7%25AE%25A1%25E7%2590%2586%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:colum2131%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhNjYyMDc4ZDMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Tech%2520Blog%2520-%2520Turing%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RhZDZiMjhmMmEuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>colum2131</dc:creator></item><item><title><![CDATA[uvでPyTorchのCPU / CUDAバージョンを環境ごとに管理する]]></title><description><![CDATA[こんにちは。今回はPythonのパッケージマネージャのuvで、PyTorchのCPU/CUDAのバージョンをLinuxやmacOSなどの環境に応じて切り替えてインストールする方法を紹介します。
+
+ はじめに
+先日リリースされたuvのv0.30.0で、Ryeで実装されていたようなPython自体の管理もできるようになりました。
+https://astral.sh/blog/uv-unified-python-packaging
+https://nikkie-ftnext.hatenablog.com/entry/uv-0.3.0-release-awesome-future-python-...]]></description><link>https://zenn.dev/mjun0812/articles/b22adf3fab1fdd</link><guid isPermaLink="true">https://zenn.dev/mjun0812/articles/b22adf3fab1fdd</guid><pubDate>Wed, 21 Aug 2024 17:22:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--nXWJuRZN--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:uv%25E3%2581%25A7PyTorch%25E3%2581%25AECPU%2520%252F%2520CUDA%25E3%2583%2590%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%2592%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%2594%25E3%2581%25A8%25E3%2581%25AB%25E7%25AE%25A1%25E7%2590%2586%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2582%25E3%2582%258A%25E3%2582%258A%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY1NmNjYzA5MTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>もりりん</dc:creator></item><item><title><![CDATA[Idek ctf 2024 writeup]]></title><description><![CDATA[
+Idek CTF 2024 は94位でした。最近調子よかったのが嘘のように全然解けなかったけど、久しぶりに学びの多いCTFだったと前向きに捉えたいです。
+とりあえず解けた二問のwriteupです。
+
+ ✅ Hello (135 pts 161/1070 クリア率15%)
+
+クエリパラメータに名前を入力すると、「Hello, &lt;名前&gt;」と表示されるだけのページ。
+
+index.php
+&lt;?php
+
+
+function Enhanced_Trim($inp) {
+    $trimmed = array("\r", "\n", "\t", "/", " ");
+    r...]]></description><link>https://zenn.dev/tchen/articles/181add8d6a442d</link><guid isPermaLink="true">https://zenn.dev/tchen/articles/181add8d6a442d</guid><pubDate>Wed, 21 Aug 2024 17:12:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--VuSyp-vK--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_76:Idek%2520ctf%25202024%2520writeup%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:t-chen%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSndGbmw3UUNSVkZRdDdIRXpZYm84alBZQW0xYzhXTXhUc0c2UkgzMXRjV3NsMll3PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>t-chen</dc:creator></item><item><title><![CDATA[uv on Dockerをやってみた]]></title><description><![CDATA[
+ 前置き
+先日Twitterで話題になった，uvでPythonのバージョンを管理できるようになったという内容のニュースを見て使いたくなった．
+元記事: https://astral.sh/blog/uv-unified-python-packaging
+記事によれば，下記のコマンドで uv と Python のインストールができるとのこと．
+$ curl -LsSf https://astral.sh/uv/install.sh | sh
+$ uv python install 3.12
+
+ Docker環境を作ってuv経由でPythonをインストールしてみる
+ここまでくるともはやDo...]]></description><link>https://zenn.dev/shundeveloper/articles/bd90f3677fead1</link><guid isPermaLink="true">https://zenn.dev/shundeveloper/articles/bd90f3677fead1</guid><pubDate>Wed, 21 Aug 2024 16:32:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Ybr9d0yC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:uv%2520on%2520Docker%25E3%2582%2592%25E3%2582%2584%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:shunsock%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY3Y2U4NzUxNzkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>shunsock</dc:creator></item><item><title><![CDATA[【CLI】`argument parser` explained]]></title><description><![CDATA[
+ 1. What is the argument parser
+argument parser(used as argparse) is a Python module that provides a mechanism for parsing command-line arguments.
+You can specify the arguments your program expects and argparse will automatically generate help and usage messages, handle user input, and parse the...]]></description><link>https://zenn.dev/yuto_mo/articles/89e3d7938c51eb</link><guid isPermaLink="true">https://zenn.dev/yuto_mo/articles/89e3d7938c51eb</guid><pubDate>Wed, 21 Aug 2024 15:38:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--UGC4vHlS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590CLI%25E3%2580%2591%2560argument%2520parser%2560%2520explained%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yuu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q0OTcwZWIzMmUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yuu</dc:creator></item><item><title><![CDATA[ReactとDjangoで登録フォームとモーダル画面作ってみた]]></title><description><![CDATA[
+ 元美容師のDjangoポートフォリオリニューアル日記 Part.4：コンポーネント分割とモーダルフォーム編(material-UIも少しだけ)
+こんにちは、やぎです！
+前回の記事では、DjangoとReactを連携させ、データベースに登録されているサロンデータの取得と表示を実装しました。
+今回は、フロントエンドでサロンの登録機能を追加していきます！
+
+ 今回の実装内容
+1.サロン登録機能の追加(単一ファイルで実装)
+まずは前回作成したapp.jsに追加をしてサロン登録機能を作成します。
+2.コンポーネントの分割
+単一ファイルで作成していた機能を、部品ごとに分けてコンポーネント思考で作...]]></description><link>https://zenn.dev/jenny/articles/9a3595f37b6a0b</link><guid isPermaLink="true">https://zenn.dev/jenny/articles/9a3595f37b6a0b</guid><pubDate>Wed, 21 Aug 2024 14:12:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5rqyjN7q--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%25E3%2581%25A8Django%25E3%2581%25A7%25E7%2599%25BB%25E9%258C%25B2%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25BC%25E3%2583%25A0%25E3%2581%25A8%25E3%2583%25A2%25E3%2583%25BC%25E3%2583%2580%25E3%2583%25AB%25E7%2594%25BB%25E9%259D%25A2%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2584%25E3%2581%258E%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE0Y2NlYzgwYTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>やぎ</dc:creator></item><item><title><![CDATA[[Python]グローバル変数を関数内で変更するとエラーが発生する😢]]></title><description><![CDATA[
+ はじめに
+競技プログラミングの問題を解いていて、グローバル変数を関数内で変更するとエラーが発生し
+色々調べたので自分用にまとめます。
+
+ エラーの内容
+実際のコードはロジックが多いので、かなり簡潔にしたコードが以下
+count = 0  # これはグローバル変数
+
+def my_function():
+    count = count + 1  # ここでエラーが発生します
+    print(count)
+
+my_function()
+
+# エラーの内容は以下
+# UnboundLocalError: cannot access local variable 'count'
+# ...]]></description><link>https://zenn.dev/rabbit_penguin0/articles/28b032dd0527a8</link><guid isPermaLink="true">https://zenn.dev/rabbit_penguin0/articles/28b032dd0527a8</guid><pubDate>Wed, 21 Aug 2024 09:04:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--mZrPctp4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BPython%255D%25E3%2582%25B0%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25AB%25E5%25A4%2589%25E6%2595%25B0%25E3%2582%2592%25E9%2596%25A2%25E6%2595%25B0%25E5%2586%2585%25E3%2581%25A7%25E5%25A4%2589%25E6%259B%25B4%25E3%2581%2599%25E3%2582%258B%25E3%2581%25A8%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E3%2581%258C%25E7%2599%25BA%25E7%2594%259F%25E3%2581%2599%25E3%2582%258B%2520%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%259A%25E3%2583%25B3%25E3%2582%25AE%25E3%2583%25B3%2520%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk3NjJhYjQ1YTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ペンギン🐧</dc:creator></item></channel></rss>
