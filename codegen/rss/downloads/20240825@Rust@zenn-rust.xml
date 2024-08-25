@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Rust」のフィード]]></title><description><![CDATA[Zennのトピック「Rust」のRSSフィードです]]></description><link>https://zenn.dev/topics/rust</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ba09661577.png</url><title>Zennの「Rust」のフィード</title><link>https://zenn.dev/topics/rust</link></image><generator>zenn.dev</generator><lastBuildDate>Sun, 25 Aug 2024 09:31:11 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/rust/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[pythonをrustへ変換したときの対応をまとめる]]></title><description><![CDATA[もともとpythonのアプリがあって、それをrustへ書き直す作業をしていたことがありまして、
+この記事ではその際につまづいた変換部分をまとめておきます。（随時追加予定）
+それぞれの言語で特徴や目的が違うので、機能が対応しているわけではないです。
+（例：pythonのdictをrustのstructに対応させるなど）
+・python：処理が最後まで動けばOK。
+・rust：テストが動けばよし。（またrustの経験が浅いので、技術的に難しいものは使っていません）
+注意点
+pythonの動的型付けとrustの静的型付けの違いは大きく、そのまま変換してもうまく動かないことがあります。
+その場合...]]></description><link>https://zenn.dev/pycetra/articles/python_to_rust</link><guid isPermaLink="true">https://zenn.dev/pycetra/articles/python_to_rust</guid><pubDate>Sat, 24 Aug 2024 18:05:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--z4zONPRj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:python%25E3%2582%2592rust%25E3%2581%25B8%25E5%25A4%2589%25E6%258F%259B%25E3%2581%2597%25E3%2581%259F%25E3%2581%25A8%25E3%2581%258D%25E3%2581%25AE%25E5%25AF%25BE%25E5%25BF%259C%25E3%2582%2592%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:pycetra%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y2MjkxZTkyMzIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>pycetra</dc:creator></item><item><title><![CDATA[キーボードの配列と最適化問題への入門]]></title><description><![CDATA[自作キーボード界隈を中心に（？）キーボードのより良い論理配列・物理配列を探求する動きがあるようです。
+筆者は最近ZSA Voyagerを買い、論理配列の最適化について興味を持ったので、界隈でどういう動きがあるようなのか調べたり実装した結果をまとめていこうとしています。
+アルゴリズムの実装には基本的にRustを用いました。Rustを使っているのは書いてみたかったからですが、Pythonだと探索問題の実行時間が遅く、試行錯誤にむしろ向いていないのも大きかったです。ただし、適宜その他のプログラミング言語も使います。
+
+ キーボード配列の問題
+キーボードの物理的な配置自体も様々な工夫が試みられて...]]></description><link>https://zenn.dev/saka1/articles/83e293b6c5e93e</link><guid isPermaLink="true">https://zenn.dev/saka1/articles/83e293b6c5e93e</guid><pubDate>Sat, 24 Aug 2024 16:27:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xhoy65y_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25AD%25E3%2583%25BC%25E3%2583%259C%25E3%2583%25BC%25E3%2583%2589%25E3%2581%25AE%25E9%2585%258D%25E5%2588%2597%25E3%2581%25A8%25E6%259C%2580%25E9%2581%25A9%25E5%258C%2596%25E5%2595%258F%25E9%25A1%258C%25E3%2581%25B8%25E3%2581%25AE%25E5%2585%25A5%25E9%2596%2580%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:saka1%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc0OGU0Njk0ZTMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>saka1</dc:creator></item><item><title><![CDATA[Rustのツールを簡単にインストールするGitHub Action：install-actionメモ [blessed.rsシリーズ25]]]></title><description><![CDATA[
+ 概要
+https://blessed.rs/crates
+こちらのリストにあるものを見て書いたメモになります。
+今回はinstall-actionについてです。
+https://github.com/taiki-e/install-action
+
+ install-actionとは
+Rustのための開発ツールをインストールするためのGitHub Action
+
+ できること
+https://techblog.paild.co.jp/entry/2023/04/10/170218
+GitHub Actionsで使用したいRustのツールをインストールすることができる。
+特に以下の2点で...]]></description><link>https://zenn.dev/kotabrog/articles/7ca3f65af477d2</link><guid isPermaLink="true">https://zenn.dev/kotabrog/articles/7ca3f65af477d2</guid><pubDate>Sat, 24 Aug 2024 05:31:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_F-wq0qH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25AE%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%25E3%2582%2592%25E7%25B0%25A1%25E5%258D%2598%25E3%2581%25AB%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%2599%25E3%2582%258BGitHub%2520Action%25EF%25BC%259Ainstall-action%25E3%2583%25A1%25E3%2583%25A2%2520%255Bbless...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kota%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pndUZyRTdIcS13U3dMRHFoT05pbjFKWVZHOVFZcjBEWXQ2SVZ3WWc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kota</dc:creator></item><item><title><![CDATA[Rustアプリケーションの実装効率と性能評価 – C・Go言語実装との比較]]></title><description><![CDATA[
+Rustは、安全性と高速性の両立を目的にデザインされた言語[1]であり、近年では業務に採用されるプロフェッショナル言語としての、更なる飛躍が期待されています[3][8]。
+ただし、2021年のアンケート結果[3]でも、仕事での利用率は前年の42%から59%に大きく向上している反面、業界での採用実績面の少なさが、Rustの将来性の最大の懸念(38%)に挙げられており、現時点では実績不足な面は否めません。
+今回は、Rustの実用性を判断するために、データベース（Redis）とIoT（ECHONET Lite）の2つ分野の同一アプリケーション実装を評価対象とし、Go言語やCなど他プログラミン...]]></description><link>https://zenn.dev/cybergarage/articles/1ac3e558a90fd7</link><guid isPermaLink="true">https://zenn.dev/cybergarage/articles/1ac3e558a90fd7</guid><pubDate>Fri, 23 Aug 2024 10:02:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--nWiAucpK--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2581%25AE%25E5%25AE%259F%25E8%25A3%2585%25E5%258A%25B9%25E7%258E%2587%25E3%2581%25A8%25E6%2580%25A7%25E8%2583%25BD%25E8%25A9%2595%25E4%25BE%25A1%2520%25E2%2580%2593%2520C%25E3%2583%25BBGo%25E8%25A8%2580%25E8%25AA%259E%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%25A8%25E3%2581%25AE%25E6%25AF%2594%25E8%25BC%2583%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:cybergarage%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2IxNjg5MmZjYjkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>cybergarage</dc:creator></item><item><title><![CDATA[[Rust] 単体テスト、結合テストの書き方]]></title><description><![CDATA[rust でテストを書く時のファイル構成とモジュールの関係について。
+mockついては書きません。
+
+ 単体テストの書き方
+rust で単体テストを書く場合はテストしたいコードとテストコードをまとめて一つのファイルに書くというのが、rustのイディオムということらしいです。
+
+lib.rs
+fn f() -&gt; i32 {
+    1
+}
+#[cfg(test)]
+mod tests{
+    use super::*;
+    #[test]
+    fn should_return_1()
+    {
+        assert_eq!(f(),1);
+    }
+}
+
+mod...]]></description><link>https://zenn.dev/itskey/articles/8e70cc17768a5c</link><guid isPermaLink="true">https://zenn.dev/itskey/articles/8e70cc17768a5c</guid><pubDate>Fri, 23 Aug 2024 03:40:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--XJO3JRCl--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BRust%255D%2520%25E5%258D%2598%25E4%25BD%2593%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E3%2580%2581%25E7%25B5%2590%25E5%2590%2588%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E3%2581%25AE%25E6%259B%25B8%25E3%2581%258D%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Itskey%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSU9Uc0lDMDFqTDhzVW4wQVhUUy1IVjZDdmhBcVktZlRTcjVEbm5EZG9vSXZoUkhQMTk9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Itskey</dc:creator></item><item><title><![CDATA[TS使っている人のRust 0から勉強日記1]]></title><description><![CDATA[こんにちは！普段TypeScriptを使ってフロントエンド開発をしている人です🙌
+最近、上司に「TypeScript(ちょっとは)書けるようになったからRustやってみようか^^」と言われ、言われるがままやってみたものの何をやっているんだ状態…
+ZennにはたくさんのRustの基礎となる部分の記事や本があったため、同じような内容にはなりますが、この記事の内容は基礎の基礎(+TypeScriptとの比較？)で自分の勉強の記録用に書いています。
+
+
+ Rustってなんだ
+そもそもRustってなんなんだから始まったので、とりあえずドキュメントを。
+https://www.rust-lang.o...]]></description><link>https://zenn.dev/maru_contents/articles/rust_ownership</link><guid isPermaLink="true">https://zenn.dev/maru_contents/articles/rust_ownership</guid><pubDate>Fri, 23 Aug 2024 00:40:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vNZCS0z3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TS%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%2584%25E3%2582%258B%25E4%25BA%25BA%25E3%2581%25AERust%25200%25E3%2581%258B%25E3%2582%2589%25E5%258B%2589%25E5%25BC%25B7%25E6%2597%25A5%25E8%25A8%25981%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:maru%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQyZDVlZjUxOGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>maru</dc:creator></item><item><title><![CDATA[Clap製CLIツールでtab補完スクリプトを生成して.debでインストールできるようにする]]></title><description><![CDATA[Clap製CLIツールでtab補完スクリプトを生成して.debでインストールできるようにする記事です。
+
+ tab補完スクリプトを生成する
+今回は例としてこんな感じのツールのtab補完スクリプトを生成してみようと思います。
+
+src/main.rs
+use std::path::PathBuf;
+
+use clap::{Parser, Subcommand, ValueEnum};
+
+#[derive(Parser)]
+struct Cli {
+    #[clap(subcommand)]
+    command: Commands,
+}
+
+#[derive(Subcommand)]
+...]]></description><link>https://zenn.dev/1step621/articles/90fa90e8bac191</link><guid isPermaLink="true">https://zenn.dev/1step621/articles/90fa90e8bac191</guid><pubDate>Thu, 22 Aug 2024 14:55:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--FIJuzlUN--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Clap%25E8%25A3%25BDCLI%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%25A7tab%25E8%25A3%259C%25E5%25AE%258C%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2583%2588%25E3%2582%2592%25E7%2594%259F%25E6%2588%2590%25E3%2581%2597%25E3%2581%25A6.deb%25E3%2581%25A7%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258B%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:1Step621%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JjOGNhMmYxYTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>1Step621</dc:creator></item><item><title><![CDATA[Viddy v1.0.0 リリース: Go から Rust への移行]]></title><description><![CDATA[
+ はじめに
+この記事では、私が開発している TUI(Text-based User Interfaces) ツール Viddy の v1.0.0 のリリースにあたって、 Go から Rust で再実装した際の経験や感想について書きたいと思います。Viddy はモダンな watch コマンドとして当初は Go で実装されていましたが、今回、Rust による再実装に挑戦しました。この記事が、同じように Rust での開発に興味がある人の参考になると嬉しいです。
+
+ Viddy について
+https://github.com/sachaos/viddy
+Viddy は、Unix 系 OS の...]]></description><link>https://zenn.dev/sachaos/articles/82e1ab3ce3213b</link><guid isPermaLink="true">https://zenn.dev/sachaos/articles/82e1ab3ce3213b</guid><pubDate>Thu, 22 Aug 2024 05:09:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8cbHy7bF--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Viddy%2520v1.0.0%2520%25E3%2583%25AA%25E3%2583%25AA%25E3%2583%25BC%25E3%2582%25B9%253A%2520Go%2520%25E3%2581%258B%25E3%2582%2589%2520Rust%2520%25E3%2581%25B8%25E3%2581%25AE%25E7%25A7%25BB%25E8%25A1%258C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Takumasa%2520Sakao%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RmZmYwNGJmMjkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Takumasa Sakao</dc:creator></item><item><title><![CDATA[RustのActix WebでClean Architectureをやってみた]]></title><description><![CDATA[初めまして。
+zenn.devでというか、ブログ自体も初めて書きます。
+私はこれまでクリーンアーキテクチャで開発をやったことがなかったため、手探りでやってみた記録を書きます。この話に限らず日本語でRustの情報はまだまだ少ないと思うので、Rustで何か記事を書いてみようというモチベーションです。
+
+ 本記事で取り上げないこと
+
+クリーンアーキテクチャとは何か、前提部分
+Rustやフレームワークの詳細
+
+ちゃんと説明しろと言われても私もまだまだできません。
+有名なクリーンアーキテクチャの本を読んでかみ砕いた結果、実践的に落とし込んだらこうなるんじゃないか、という点に重きを置きたいと思います...]]></description><link>https://zenn.dev/penysho/articles/f1d406c2fbc4de</link><guid isPermaLink="true">https://zenn.dev/penysho/articles/f1d406c2fbc4de</guid><pubDate>Wed, 21 Aug 2024 15:15:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Tb11gAc_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25AEActix%2520Web%25E3%2581%25A7Clean%2520Architecture%25E3%2582%2592%25E3%2582%2584%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2593%25E3%2581%2598%25E3%2582%258D%25E3%2581%2586%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI2ZWRiMmQ4NDcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>こじろう</dc:creator></item><item><title><![CDATA[Rustでaxumとreqwestを使用したロギングの実装]]></title><description><![CDATA[
+ 背景
+最近はRustの勉強にはまっており、個人アプリをつくりながら学習しています。
+Rustは主にWeb API Backendの用途で使っています。
+APIをつくっていると、loggingしたいですが自分で設定していく必要があります。
+今回はその実装時に調べたことを記事にしました。
+
+ はじめに
+RustのWebフレームワークaxumと、HTTPクライアントライブラリreqwestを使用する際のロギング実装について説明します。トレーシングとロギングを適切に設定することで、アプリケーションの動作を詳細に把握し、デバッグや性能分析を効果的に行うことができます。
+
+ axumでのロギング...]]></description><link>https://zenn.dev/taiyop/articles/7ef2a06a2c7922</link><guid isPermaLink="true">https://zenn.dev/taiyop/articles/7ef2a06a2c7922</guid><pubDate>Wed, 21 Aug 2024 02:37:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--v0BQ60lN--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25A7axum%25E3%2581%25A8reqwest%25E3%2582%2592%25E4%25BD%25BF%25E7%2594%25A8%25E3%2581%2597%25E3%2581%259F%25E3%2583%25AD%25E3%2582%25AE%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%25AE%25E5%25AE%259F%25E8%25A3%2585%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:taiyop%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzYyMmNhODE0YzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>taiyop</dc:creator></item><item><title><![CDATA[＃34　Unraveling Asynchronous Programming: Why, What, and How]]></title><description><![CDATA[
+ Introduction
+In today's fast-paced digital age, we often expect our devides and applications to perform seamlessly, reacting instantaneously to our inputs, even when managing multiple tasks. Imagine typing into a search bar and waiting miniutes, or even seconds, for auto-suggestions to appear. ...]]></description><link>https://zenn.dev/nxted_sapporo/articles/c80f62331ad6ee</link><guid isPermaLink="true">https://zenn.dev/nxted_sapporo/articles/c80f62331ad6ee</guid><pubDate>Wed, 21 Aug 2024 01:41:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--cSYYyEgl--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25EF%25BC%258334%25E3%2580%2580Unraveling%2520Asynchronous%2520Programming%253A%2520Why%252C%2520What%252C%2520and%2520How%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:NXTEDCo.%252C%2520Ltd.%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBmZjQzOTVhYzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>NXTEDCo., Ltd.</dc:creator></item><item><title><![CDATA[tauriのフロントエンド部分でwindow.confirmを使用した部分をtauriのdialogで書いてみた]]></title><description><![CDATA[[経緯]
+tauriで作成したアプリケーションでダイアログの確認をした後に、バックエンドの処理を呼ぶため、window.confirmを使用した。
+ただtauriのdialogも使用できるようなので使ってみた。
+[結論]
+window.confirmだと最小限のカスタマイズしかできないが、tauriのdialogならタイトルなどさまざまな変更が可能である。MUIなどで実装する程でもないと言う時に使用できるかもしれないと思いました。
+変更前
+import { invoke } from "@tauri-apps/api/tauri";
+
+const executeCommands = ()...]]></description><link>https://zenn.dev/amana/articles/b6452ad9871e32</link><guid isPermaLink="true">https://zenn.dev/amana/articles/b6452ad9871e32</guid><pubDate>Mon, 19 Aug 2024 14:53:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--AgYPHxHW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:tauri%25E3%2581%25AE%25E3%2583%2595%25E3%2583%25AD%25E3%2583%25B3%25E3%2583%2588%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2589%25E9%2583%25A8%25E5%2588%2586%25E3%2581%25A7window.confirm%25E3%2582%2592%25E4%25BD%25BF%25E7%2594%25A8%25E3%2581%2597%25E3%2581%259F%25E9%2583%25A8%25E5%2588%2586%25E3%2582%2592tauri%25E3%2581%25AEdialog%25E3%2581%25A7%25E6%259B%25B8%25E3%2581%2584%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nk_work%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSXl5YnE2MF9NVW5SaXNqUm15RGs2YVpFcmxQM1pKYlhQOER3aWI4NXdqPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nk_work</dc:creator></item><item><title><![CDATA[The Embedonomiconでハマったことあれこれ(3章まで)]]></title><description><![CDATA[
+ はじめに
+
+ これからThe Embedonomiconを始める方々へ
+こちらのはてなブログをベースに進めていくことを推奨します。本家はクセが強い（これから書くソースコードを、編集後のファイルをcat、head、tail、sedで表示する形で表すのはどこぞのコミュニティでのデファクトスタンダードなのか？最初、はて？となってしまった）上に致命的なミスが放置されているせいか、その置き換えを狙ったのではないかと思うほどよく書かれているし、問題が発生する箇所のフォローもしている。実行環境の構築は本家を参照し、それ以降はこのブログで読み進めつつ本家の内容を確認する方法が、スムーズに進めるために...]]></description><link>https://zenn.dev/mabe/articles/69468ac7c4ddfa</link><guid isPermaLink="true">https://zenn.dev/mabe/articles/69468ac7c4ddfa</guid><pubDate>Mon, 19 Aug 2024 11:43:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5xhZhMSz--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:The%2520Embedonomicon%25E3%2581%25A7%25E3%2583%258F%25E3%2583%259E%25E3%2581%25A3%25E3%2581%259F%25E3%2581%2593%25E3%2581%25A8%25E3%2581%2582%25E3%2582%258C%25E3%2581%2593%25E3%2582%258C%25283%25E7%25AB%25A0%25E3%2581%25BE%25E3%2581%25A7%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Mabby%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFUWEFKeC1qa21DSW1TaXZobGl6RmFzZ0RXalgyeDhxdktnd0pORUg2V1o9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Mabby</dc:creator></item><item><title><![CDATA[curlでgRPC-WEBのRequestをする方法]]></title><description><![CDATA[
+ アンサー
+printf '\x00\x00\x00\x00\x05\n\x03aaa' \
+     | curl 'http://localhost:50051/greeting.Greeter/SayHello' \
+      -X POST \
+      -H 'content-type: application/grpc-web+proto' \
+      --data-binary '@-' \
+      --output -
+ポイントとしては、
+
+--data-binaryにデータを渡す場合、空文字化を防ぐため標準入力から渡す必要がある
+
+細かい理由は後述
+--d...]]></description><link>https://zenn.dev/daijinload/articles/102a1e7df8b73c</link><guid isPermaLink="true">https://zenn.dev/daijinload/articles/102a1e7df8b73c</guid><pubDate>Mon, 19 Aug 2024 09:38:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--pf8tuYUz--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:curl%25E3%2581%25A7gRPC-WEB%25E3%2581%25AERequest%25E3%2582%2592%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:daijinload%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSTVLVGMxQWhOTXo1cnhrSkFmYmdmRmF1SGwxRGFwX0o3NnpXQ1oxMHpTTGc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>daijinload</dc:creator></item><item><title><![CDATA[TauriとLeptosで作るデスクトップアプリ（3）バックエンドを呼び出す]]></title><description><![CDATA[
+ はじめに
+TauriとLeptosでデスクトップアプリを作っていきます。今回は、LeptosフロントエンドからTauriバックエンドのコマンドを呼び出します。あわせて、デバッグ用にフロントエンドのコンソールにログを表示できるようにします。
+関連記事
+https://zenn.dev/daizutabi/articles/tauri-leptos-01
+https://zenn.dev/daizutabi/articles/tauri-leptos-02
+
+環境
+
+Windows 11 Home
+Rust 1.80
+Tauri 2.0.0-rc
+
+https://v2.tauri.ap...]]></description><link>https://zenn.dev/daizutabi/articles/tauri-leptos-03</link><guid isPermaLink="true">https://zenn.dev/daizutabi/articles/tauri-leptos-03</guid><pubDate>Sun, 18 Aug 2024 23:13:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wx7NYT7t--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Tauri%25E3%2581%25A8Leptos%25E3%2581%25A7%25E4%25BD%259C%25E3%2582%258B%25E3%2583%2587%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%2588%25E3%2583%2583%25E3%2583%2597%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25EF%25BC%25883%25EF%25BC%2589%25E3%2583%2590%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2589%25E3%2582%2592%25E5%2591%25BC%25E3%2581%25B3%25E5%2587%25BA%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:daizutabi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdmMTMzM2MwY2MuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>daizutabi</dc:creator></item><item><title><![CDATA[麻雀アプリ(GUI)をフルRustで書いてみた]]></title><description><![CDATA[
+ はじめに
+前回の投稿で麻雀のエンジンを Rust で組む話をしました。今回は夏休みの宿題的に GUI アプリケーションを Rust で組んだので、技術選定の経緯や実際に書いた感触を話します。
+
+ なぜ Rust で GUI アプリケーションを作るのか
+麻雀のロジックを Rust で組み上げていて、当初は DLL に書き出して C#で GUI を作ったり、WASM にして React で書くことを構想していましたが、まだロジック部分が未完成の段階でデバッグを繰り返しながら完成させていくことを考えると、DLL や WASM などといったインタフェースでは非常にデバッグがしづらく開発のスピ...]]></description><link>https://zenn.dev/kacky/articles/226aa22183a60e</link><guid isPermaLink="true">https://zenn.dev/kacky/articles/226aa22183a60e</guid><pubDate>Sun, 18 Aug 2024 23:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qU0EAuqt--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E9%25BA%25BB%25E9%259B%2580%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%2528GUI%2529%25E3%2582%2592%25E3%2583%2595%25E3%2583%25ABRust%25E3%2581%25A7%25E6%259B%25B8%25E3%2581%2584%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kacky%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzllNDNjY2VhMWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kacky</dc:creator></item><item><title><![CDATA[Rustでフロントエンド with Dioxus ～環境づくり～]]></title><description><![CDATA[ここ数ヶ月、趣味でRustを使ってCLIツールなどを作っていましたが、最近はフロントエンドもRustで書けるということを知り、興味を持ちました。そこで、クロスプラットフォームのWebフレームワークであるDioxusを使ってみることにしました。
+
+ Dioxusって？
+https://dioxuslabs.com/
+Dioxusは、Rustで書かれたWebフレームワークです。WebAssemblyを使ってフロントエンドをRustで書くことができます。また、Dioxusはクロスプラットフォームであるため、Webアプリケーションだけでなく、デスクトップやモバイル、TUI[1]のアプリケーション...]]></description><link>https://zenn.dev/sakai_nako/articles/dioxus-study-01</link><guid isPermaLink="true">https://zenn.dev/sakai_nako/articles/dioxus-study-01</guid><pubDate>Sun, 18 Aug 2024 13:42:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8oJNxIfc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25A7%25E3%2583%2595%25E3%2583%25AD%25E3%2583%25B3%25E3%2583%2588%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2589%2520with%2520Dioxus%2520%25EF%25BD%259E%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25A5%25E3%2581%258F%25E3%2582%258A%25EF%25BD%259E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Sakai-Nako%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI5Yzg4ZjE1MTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Sakai-Nako</dc:creator></item><item><title><![CDATA[TauriとLeptosで作るデスクトップアプリ（2）カウンタコンポーネントを作成する]]></title><description><![CDATA[
+ はじめに
+TauriとLeptosでデスクトップアプリを作っていきます。今回は、シンプルなカウンタを作成します。
+関連記事
+https://zenn.dev/daizutabi/articles/tauri-leptos-01
+https://zenn.dev/daizutabi/articles/tauri-leptos-03
+
+環境
+
+Windows 11 Home
+Rust 1.80
+Tauri 2.0.0-rc
+
+https://v2.tauri.app/
+
+Leptos 0.7.0-beta
+
+https://leptos.dev/
+
+
+ コンポーネントライブラリThaw ...]]></description><link>https://zenn.dev/daizutabi/articles/tauri-leptos-02</link><guid isPermaLink="true">https://zenn.dev/daizutabi/articles/tauri-leptos-02</guid><pubDate>Sun, 18 Aug 2024 12:05:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--smfucJo5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Tauri%25E3%2581%25A8Leptos%25E3%2581%25A7%25E4%25BD%259C%25E3%2582%258B%25E3%2583%2587%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%2588%25E3%2583%2583%25E3%2583%2597%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25EF%25BC%25882%25EF%25BC%2589%25E3%2582%25AB%25E3%2582%25A6%25E3%2583%25B3%25E3%2582%25BF%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%259D%25E3%2583%25BC%25E3%2583%258D%25E3%2583%25B3%25E3%2583%2588%25E3%2582%2592%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:daizutabi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdmMTMzM2MwY2MuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>daizutabi</dc:creator></item><item><title><![CDATA[Tauri2.0 × React のアプリ開発 - TauriのインストールからTailwind 導入まで]]></title><description><![CDATA[少し前からFlutterを使ってアプリ開発を始めていたのですが、Rustとwebフロントの技術を使ってマルチプラットフォーム開発ができるTauriのメジャーバージョンアップの話を聞きつけこちらの開発もやってみることにしました。
+アプリ開発に機械学習の要素も取り入れたかったので、Rustで実現する様子もそのうち記事にしていけたらいいなとおもってます。
+
+ この記事でふれないこと
+
+android仮想環境の構築
+rustのセットアップ
+bunのセットアップ
+
+
+ Tauriのインストール
+https://v2.tauri.app/start/
+まず、Nodeの実行環境はBunを採用しました。...]]></description><link>https://zenn.dev/takisato/articles/ee955f168b3ec1</link><guid isPermaLink="true">https://zenn.dev/takisato/articles/ee955f168b3ec1</guid><pubDate>Sun, 18 Aug 2024 08:29:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--sDBqwuk8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Tauri2.0%2520%25C3%2597%2520React%2520%25E3%2581%25AE%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E9%2596%258B%25E7%2599%25BA%2520-%2520Tauri%25E3%2581%25AE%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%258B%25E3%2582%2589Tailwind%2520%25E5%25B0%258E%25E5%2585%25A5%25E3%2581%25BE%25E3%2581%25A7%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:takisato%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I3OWZiNGE0ZGEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takisato</dc:creator></item><item><title><![CDATA[TauriとLeptosで作るデスクトップアプリ（1）プロジェクトを作成する]]></title><description><![CDATA[
+ はじめに
+TauriとLeptosでデスクトップアプリを作っていきます。
+
+Windows 11 Home
+Rust 1.80
+Tauri 2.0.0-rc
+Leptos 0.7.0-beta
+
+https://v2.tauri.app/
+https://leptos.dev/
+関連記事
+https://zenn.dev/daizutabi/articles/tauri-leptos-02
+https://zenn.dev/daizutabi/articles/tauri-leptos-03
+
+
+ Rustプロジェクトを作成する
+TauriとLeptosを使ったサンプルプロジェクトを...]]></description><link>https://zenn.dev/daizutabi/articles/tauri-leptos-01</link><guid isPermaLink="true">https://zenn.dev/daizutabi/articles/tauri-leptos-01</guid><pubDate>Sun, 18 Aug 2024 06:33:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7M19RdTa--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Tauri%25E3%2581%25A8Leptos%25E3%2581%25A7%25E4%25BD%259C%25E3%2582%258B%25E3%2583%2587%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%2588%25E3%2583%2583%25E3%2583%2597%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25EF%25BC%25881%25EF%25BC%2589%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E3%2582%2592%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:daizutabi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdmMTMzM2MwY2MuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>daizutabi</dc:creator></item></channel></rss>
