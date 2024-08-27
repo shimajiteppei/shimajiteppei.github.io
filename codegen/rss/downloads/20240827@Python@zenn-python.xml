@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Tue, 27 Aug 2024 04:35:57 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Pydanticではミュータブルでもdefault, default_factoryのどっちでもよさそう]]></title><description><![CDATA[
+ 結論
+pydanticではdefaultもdefault_factoryも同等の結果を返却しそう。
+
+ 始めに
+小ネタ記事。Pythonではデフォルト引数にミュータブルな値を指定したうえで、ミュータブルな操作を行うと、同じインスタンスを共有してしまいます。
+def default_param(param: str, result:List[str]=[]) -&gt; List[str]:
+    result.append(param)
+    return result
+
+_ = default_param("1")
+result = default_param("2")
+
+pr...]]></description><link>https://zenn.dev/kirimaru/articles/6648257e51831d</link><guid isPermaLink="true">https://zenn.dev/kirimaru/articles/6648257e51831d</guid><pubDate>Tue, 27 Aug 2024 03:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--eB8msTEC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Pydantic%25E3%2581%25A7%25E3%2581%25AF%25E3%2583%259F%25E3%2583%25A5%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%2596%25E3%2583%25AB%25E3%2581%25A7%25E3%2582%2582default%252C%2520default_factory%25E3%2581%25AE%25E3%2581%25A9%25E3%2581%25A3%25E3%2581%25A1%25E3%2581%25A7%25E3%2582%2582%25E3%2582%2588%25E3%2581%2595%25E3%2581%259D%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258D%25E3%2582%258A%25E4%25B8%25B8%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2Rhcmsvay5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>きり丸</dc:creator></item><item><title><![CDATA[GUIE（Google Universal Image Embedding）の学習済みモデルを使用して類似画像検索を行う]]></title><description><![CDATA[
+ 概要
+GUIE（Google Universal Image Embedding）の学習済みモデルを使用して類似画像検索を行うサンプルプログラムを作成しました。以下からノートブックにアクセスいただけます。
+https://colab.research.google.com/github/nakamura196/000_tools/blob/main/guie_sample.ipynb
+
+ 参考
+以下のノートブックの出力ファイルであるモデルを利用しています。
+https://www.kaggle.com/code/francischen1991/tf-baseline-v2-submi...]]></description><link>https://zenn.dev/nakamura196/articles/ebf7d3923df9df</link><guid isPermaLink="true">https://zenn.dev/nakamura196/articles/ebf7d3923df9df</guid><pubDate>Mon, 26 Aug 2024 23:28:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--WDsRWvxo--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:GUIE%25EF%25BC%2588Google%2520Universal%2520Image%2520Embedding%25EF%25BC%2589%25E3%2581%25AE%25E5%25AD%25A6%25E7%25BF%2592%25E6%25B8%2588%25E3%2581%25BF%25E3%2583%25A2%25E3%2583%2587%25E3%2583%25AB%25E3%2582%2592%25E4%25BD%25BF%25E7%2594%25A8%25E3%2581%2597%25E3%2581%25A6%25E9%25A1%259E%25E4%25BC%25BC%25E7%2594%25BB%25E5%2583%258F%25E6%25A4%259C%25E7%25B4%25A2%25E3%2582%2592%25E8%25A1%258C%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nakamura196%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pkd3BpX1gzTWIzV3VqTnVnV2tPTlJlU3VsNFNTN1BNMWlPQm9LRm5JPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nakamura196</dc:creator></item><item><title><![CDATA[JavaScript で Python の range みたいなやつ]]></title><description><![CDATA[
+ 主題
+JavaScript には Python の range みたいなやつが標準で存在しない。Python で以下のように書けるコードは
+
+Python
+print(list(map(lambda x: x * 2, range(5))))
+# [0, 2, 4, 6, 8]
+
+JavaScript で愚直に書くと、以下のようになってしまう。
+
+JavaScript
+const start = 0;
+const stop = 5;
+const step = 1;
+const length = Math.floor((stop - start) / step);
+const a = ...]]></description><link>https://zenn.dev/paalon/articles/d59819b8e786e9</link><guid isPermaLink="true">https://zenn.dev/paalon/articles/d59819b8e786e9</guid><pubDate>Mon, 26 Aug 2024 12:53:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--JJYfI5FS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%2520%25E3%2581%25A7%2520Python%2520%25E3%2581%25AE%2520range%2520%25E3%2581%25BF%25E3%2581%259F%25E3%2581%2584%25E3%2581%25AA%25E3%2582%2584%25E3%2581%25A4%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Paalon%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE4ZWViZDI3YTcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Paalon</dc:creator></item><item><title><![CDATA[時系列の外れ値検出【季節分解+Sliding Window】]]></title><description><![CDATA[
+ これはなに？
+時系列データの外れ値検出として、季節分解とTime Sliding Windowを組み合わせた手法を試してみました。背景として、飲食店で開催されるイベントやプロモーション日を、売上データから見つけることはできないか、というところで試してみました。
+
+ 季節分解
+季節分解はいつかの記事でも書いたのですが、時系列データを、以下の3成分に分けることです。
+
+季節成分
+時系列データの季節性を表す成分
+トレンド成分
+時系列データの長期的な傾向を表す成分
+残差成分
+上記2成分で表せられなかった成分、ノイズや外れ値(イベント等も含む)
+
+今回、季節分解をおこなった結果の残差成分は、元...]]></description><link>https://zenn.dev/goals_techblog/articles/5b703b569985eb</link><guid isPermaLink="true">https://zenn.dev/goals_techblog/articles/5b703b569985eb</guid><pubDate>Mon, 26 Aug 2024 08:32:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4x8099ER--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%2599%2582%25E7%25B3%25BB%25E5%2588%2597%25E3%2581%25AE%25E5%25A4%2596%25E3%2582%258C%25E5%2580%25A4%25E6%25A4%259C%25E5%2587%25BA%25E3%2580%2590%25E5%25AD%25A3%25E7%25AF%2580%25E5%2588%2586%25E8%25A7%25A3%252BSliding%2520Window%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:ryongyong%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY0ZmMzNjliMDYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Goals%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzEzMTlkMjgyOTIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ryongyong</dc:creator></item><item><title><![CDATA[[Next.js]NoteのRSSフィードを活用してブログ一覧を表示する方法]]></title><description><![CDATA[
+ はじめに
+今回は、Next.jsのAppルーターとRSSフィードを利用して、Noteの記事一覧をWebサイトに表示する方法を紹介します。
+RSSフィードから記事情報を取得し、ブログセクションにサムネイル付きで表示するまでの流れを見ていきます。
+
+ 目次
+
+そもそもRSSフィードとは何か？
+
+RSSフィードとスクレイピングの違い
+
+スクレイピングとは？
+RSSフィードとの違い
+
+
+
+RSSフィードのメリットとデメリット
+
+メリット
+デメリット
+
+
+今回の実装目標
+手順1: RSSフィードを解析するための準備
+手順2: RSSフィードの解析用APIを作成
+手順3: フロントエンドでブログ...]]></description><link>https://zenn.dev/haruki1009/articles/c05617a1b224d2</link><guid isPermaLink="true">https://zenn.dev/haruki1009/articles/c05617a1b224d2</guid><pubDate>Mon, 26 Aug 2024 05:39:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--a43UZuZQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BNext.js%255DNote%25E3%2581%25AERSS%25E3%2583%2595%25E3%2582%25A3%25E3%2583%25BC%25E3%2583%2589%25E3%2582%2592%25E6%25B4%25BB%25E7%2594%25A8%25E3%2581%2597%25E3%2581%25A6%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%25E4%25B8%2580%25E8%25A6%25A7%25E3%2582%2592%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Haruki%2520Inoue%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI5MGI2YjhmZWQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Haruki Inoue</dc:creator></item><item><title><![CDATA[自作でintでenumを継承しなくても、IntEnumが標準化されてた]]></title><description><![CDATA[
+ 始めに
+過去にPythonのenumはint等のプリミティブ型を継承すると便利という記事を投稿していました。
+その後、Python3.11にてIntEnumやStrEnumが標準化されていることを知ったので共有します。
+
+ 環境
+
+Python
+
+3.12.4
+
+
+
+
+ 実装
+intEnumの使用方法は次のとおりです。
+from enum import IntEnum
+
+class IntInheritEnum(IntEnum):
+    ID = 1
+
+
+# 列挙型ではなく、intとして振舞うため1にアクセスできる
+IntInheritEnum.ID
+
+# 本来のアクセス方法
+In...]]></description><link>https://zenn.dev/kirimaru/articles/50cacb8efcaee2</link><guid isPermaLink="true">https://zenn.dev/kirimaru/articles/50cacb8efcaee2</guid><pubDate>Mon, 26 Aug 2024 03:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--rbeAJ9CZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%2587%25AA%25E4%25BD%259C%25E3%2581%25A7int%25E3%2581%25A7enum%25E3%2582%2592%25E7%25B6%2599%25E6%2589%25BF%25E3%2581%2597%25E3%2581%25AA%25E3%2581%258F%25E3%2581%25A6%25E3%2582%2582%25E3%2580%2581IntEnum%25E3%2581%258C%25E6%25A8%2599%25E6%25BA%2596%25E5%258C%2596%25E3%2581%2595%25E3%2582%258C%25E3%2581%25A6%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258D%25E3%2582%258A%25E4%25B8%25B8%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2Rhcmsvay5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>きり丸</dc:creator></item><item><title><![CDATA[3分で完全理解する「ガード節」]]></title><description><![CDATA[
+ はじめに
+「ガード節」というプログラミングのテクニックをご存知でしょうか？
+今回は、駆け出しエンジニアなら知っておきたい「ガード節」について解説します！
+ガード節とはどんなものか、3行に要約してみました。
+
+ガード節とは、条件分岐（IF文）が理解しやすくなるテクニック
+処理の対象外になる条件を、関数の先頭部分に集約してreturnさせる
+コードのネストが浅くなり、理解しやすくなる・読みやすくなる効果がある
+
+サクッと解説していくので、3分で"完全に理解"しちゃいましょう🔥
+
+ ソースコードで分かる「ガード節」
+商品の割引価格を計算するサンプルコードを書いてみました。
+プログラムの仕様...]]></description><link>https://zenn.dev/satoshiakatsuka/articles/55e59ffeb854f7</link><guid isPermaLink="true">https://zenn.dev/satoshiakatsuka/articles/55e59ffeb854f7</guid><pubDate>Mon, 26 Aug 2024 00:30:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--SeWzaTZJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:3%25E5%2588%2586%25E3%2581%25A7%25E5%25AE%258C%25E5%2585%25A8%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2599%25E3%2582%258B%25E3%2580%258C%25E3%2582%25AC%25E3%2583%25BC%25E3%2583%2589%25E7%25AF%2580%25E3%2580%258D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Satoshi%2520Akatsuka%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFjMmQxMmNlNTcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Satoshi Akatsuka</dc:creator></item><item><title><![CDATA[uvでflash-attentionをinstallする]]></title><description><![CDATA[Pythonのバージョン管理およびパッケージ管理を行うuvでflash-attentionがinstallする方法をまとめました。
+この記事ではflash-attentionについての説明は行いません。
+uvに関しては、バージョン0.3.0以降の基本的な操作をまとめました。参考になれば嬉しいです。
+https://zenn.dev/turing_motors/articles/594fbef42a36ee
+なお今回の自分の環境におけるuvおよびCUDA nvccのバージョンは以下の通りです。
+uv -V
+&gt; uv 0.3.1
+nvcc -V
+&gt; nvcc: NVIDIA (R...]]></description><link>https://zenn.dev/colum2131/articles/342b7bdb20c54e</link><guid isPermaLink="true">https://zenn.dev/colum2131/articles/342b7bdb20c54e</guid><pubDate>Sun, 25 Aug 2024 16:29:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--L_JStxr5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:uv%25E3%2581%25A7flash-attention%25E3%2582%2592install%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:colum2131%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RhZDZiMjhmMmEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>colum2131</dc:creator></item><item><title><![CDATA[LeetCode]]></title><description><![CDATA[LeetCode / 問題の解説]]></description><link>https://zenn.dev/halhir/books/ff422d67cb2aa9</link><guid isPermaLink="true">https://zenn.dev/halhir/books/ff422d67cb2aa9</guid><pubDate>Sun, 25 Aug 2024 16:16:45 GMT</pubDate><dc:creator>Haruto</dc:creator></item><item><title><![CDATA[マルコフ連鎖モンテカルロ法のお気持ち（使い道と前提知識編）]]></title><description><![CDATA[
+ はじめに
+
+ ターゲット
+大学の講義でMCMC法が出てきて、かなり理解に苦しんだので同じ気持ちの人の助けになればと思いこの記事を書いています。確率分布の近似的計算に使われるもので、AIとかでも出るお話なので知っておいて説明までできるとどや顔しながら電車に乗れるのでササっと読んでいってください。
+さて、この記事の対象ですが、MCMC法の概要の理解を目的とするためMCMC法がなんなのか、なんでこんなのあるのかよくわからんよっていう初学者に向けたものです。したがって厳密さよりもシンプルさ伝わりやすさを重視しています。眼鏡をかけたプロのMCMC星人は体調を崩さないようにお気を付けください。
+...]]></description><link>https://zenn.dev/kg_filled/articles/169a0dd84c7817</link><guid isPermaLink="true">https://zenn.dev/kg_filled/articles/169a0dd84c7817</guid><pubDate>Sun, 25 Aug 2024 13:37:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--LdN2v6RT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%259E%25E3%2583%25AB%25E3%2582%25B3%25E3%2583%2595%25E9%2580%25A3%25E9%258E%2596%25E3%2583%25A2%25E3%2583%25B3%25E3%2583%2586%25E3%2582%25AB%25E3%2583%25AB%25E3%2583%25AD%25E6%25B3%2595%25E3%2581%25AE%25E3%2581%258A%25E6%25B0%2597%25E6%258C%2581%25E3%2581%25A1%25EF%25BC%2588%25E4%25BD%25BF%25E3%2581%2584%25E9%2581%2593%25E3%2581%25A8%25E5%2589%258D%25E6%258F%2590%25E7%259F%25A5%25E8%25AD%2598%25E7%25B7%25A8%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:KGFilled%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS29PNi1XamQ4ZW54NXdWdHRDUmQ3TTE3cmx0QVJibjZBTVVtdFhhdko0SGZnSXM2cz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>KGFilled</dc:creator></item><item><title><![CDATA[Python パッケージの編集可能インストール]]></title><description><![CDATA[
+ Python パッケージの編集可能インストール
+パッケージ作成時にpip install -e がソースコードを編集可能な状態でインストールでき、
+便利だったので使い方などを書いておく
+簡単に言うと
+インストールする時にコピーを作るのではなくリンクを作るからコードを編集すると即変更が反映される
+ということ
+
+ コマンド
+pip だけでなくsetup.pyにも同じ機能のオプションがある
+    # pip
+    pip install -e &lt;project-path&gt;
+
+    # setup.py
+    python setup.py develop
+-e は --...]]></description><link>https://zenn.dev/ryy_d/articles/5deacb182a3f5e</link><guid isPermaLink="true">https://zenn.dev/ryy_d/articles/5deacb182a3f5e</guid><pubDate>Sun, 25 Aug 2024 13:02:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--MUzZLFyO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%2520%25E3%2583%2591%25E3%2583%2583%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B8%25E3%2581%25AE%25E7%25B7%25A8%25E9%259B%2586%25E5%258F%25AF%25E8%2583%25BD%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ryy_d%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS1FJT2ZlQ0RWaHpwTVlwVnRhVjlZcG9QX2UteVcwSk1wR1QxWlgyTUVQdVpmdW81eWo9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ryy_d</dc:creator></item><item><title><![CDATA[Streamlit + LangChain _ver1_editing]]></title><description><![CDATA[import streamlit as st
+from langchain_openai import ChatOpenAI
+from dotenv import load_dotenv
+from langchain_core.prompts import ChatPromptTemplate
+#from langchain_core.messages import Message
+# 履歴を保存するためにmessegaplaceholderを使う
+from langchain.prompts import PromptTemplate, MessagesPlaceholder
+
+imp...]]></description><link>https://zenn.dev/bluetang/articles/05e7a401ad1203</link><guid isPermaLink="true">https://zenn.dev/bluetang/articles/05e7a401ad1203</guid><pubDate>Sun, 25 Aug 2024 10:07:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--tBA83OUX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:Streamlit%2520%252B%2520LangChain%2520_ver1_editing%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:bluetang%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM3ZDRkMjc1MzAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>bluetang</dc:creator></item><item><title><![CDATA[Azure OpenAIを使用してSQLに自然言語で問い合わせる(NL2SQL)]]></title><description><![CDATA[
+ はじめに
+
+OpenAIで公開されているcookbookを参考に日本語化しながら解説します
+最初に天気を取得する簡単なFunction Callingを実施し、データベースに対して自然言語で問い合わせる仕組みを紹介します
+自然言語からクエリを作成し、Function Callingで外部関数を読み出し、結果を取得することができます
+一般的には、NL2SQL(Natural Language to SQL Queries)で認識されています。
+LangChainのSQL Database Toolkitも同様のことができますが、出力の速度が遅かった(数十秒)のでFunction Cal...]]></description><link>https://zenn.dev/yyteam/articles/nl2sql-first</link><guid isPermaLink="true">https://zenn.dev/yyteam/articles/nl2sql-first</guid><pubDate>Sun, 25 Aug 2024 02:10:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--X3xHhP48--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Azure%2520OpenAI%25E3%2582%2592%25E4%25BD%25BF%25E7%2594%25A8%25E3%2581%2597%25E3%2581%25A6SQL%25E3%2581%25AB%25E8%2587%25AA%25E7%2584%25B6%25E8%25A8%2580%25E8%25AA%259E%25E3%2581%25A7%25E5%2595%258F%25E3%2581%2584%25E5%2590%2588%25E3%2582%258F%25E3%2581%259B%25E3%2582%258B%2528NL2SQL%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yyteam%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U0YmVhOWM3M2EuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yyteam</dc:creator></item><item><title><![CDATA[Zenn記事のリストをスプレッドシートに出力する]]></title><description><![CDATA[
+ はじめに
+私のZenn記事も90件を超えてきました。
+ここで発生するのが、情報量が多すぎてどこになんの記事があるかわからない問題です。
+いろいろやってみようと考えていますが、まずは第一歩としてZenn記事をリストで出力して、その後スプレッドシートに出力するをやってみようと思います。
+スコープですが、私のアカウントだけではつまらないので、「Accenture Japan (有志)」を対象にしようと思います。
+
+ RSSで記事のリストを取得する
+記事の一覧ですが、ZennではRSSが対応しているようなので、RSSで取得しますかぁ。
+下記URLでXML形式で記事のリストが取得されます。
+h...]]></description><link>https://zenn.dev/acntechjp/articles/7b1895f5ac394e</link><guid isPermaLink="true">https://zenn.dev/acntechjp/articles/7b1895f5ac394e</guid><pubDate>Sat, 24 Aug 2024 23:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--saY0MIEt--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Zenn%25E8%25A8%2598%25E4%25BA%258B%25E3%2581%25AE%25E3%2583%25AA%25E3%2582%25B9%25E3%2583%2588%25E3%2582%2592%25E3%2582%25B9%25E3%2583%2597%25E3%2583%25AC%25E3%2583%2583%25E3%2583%2589%25E3%2582%25B7%25E3%2583%25BC%25E3%2583%2588%25E3%2581%25AB%25E5%2587%25BA%25E5%258A%259B%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Masanori%2520Yoshida%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U2ZDA4MDY5ODcuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Accenture%2520Japan%2520%2528%25E6%259C%2589%25E5%25BF%2597%2529%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU5MzkwNDBmYjYuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Masanori Yoshida</dc:creator></item><item><title><![CDATA[pythonをrustへ変換したときの対応をまとめる]]></title><description><![CDATA[もともとpythonのアプリがあって、それをrustへ書き直す作業をしていたことがありまして、
+この記事ではその際につまづいた変換部分をまとめておきます。（随時追加予定）
+それぞれの言語で特徴や目的が違うので、機能が対応しているわけではないです。
+（例：pythonのdictをrustのstructに対応させるなど）
+・python：処理が最後まで動けばOK。
+・rust：テストが動けばよし。（またrustの経験が浅いので、技術的に難しいものは使っていません）
+注意点
+pythonの動的型付けとrustの静的型付けの違いは大きく、そのまま変換してもうまく動かないことがあります。
+その場合...]]></description><link>https://zenn.dev/pycetra/articles/python_to_rust</link><guid isPermaLink="true">https://zenn.dev/pycetra/articles/python_to_rust</guid><pubDate>Sat, 24 Aug 2024 18:05:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--z4zONPRj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:python%25E3%2582%2592rust%25E3%2581%25B8%25E5%25A4%2589%25E6%258F%259B%25E3%2581%2597%25E3%2581%259F%25E3%2581%25A8%25E3%2581%258D%25E3%2581%25AE%25E5%25AF%25BE%25E5%25BF%259C%25E3%2582%2592%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:pycetra%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y2MjkxZTkyMzIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>pycetra</dc:creator></item><item><title><![CDATA[夏休みの宿題でPort Scannerを自作してみた②~開発環境準備編]]></title><description><![CDATA[
+ これまでのお話
+
+夏だし，Port Scannerを自作してみたい。
+
+技術選定編では，Port Scannerを自作するにあたってどのような技術を使うかを考えた。
+今回は，Port Scannerの開発環境を整えつつ，全体設計を考えていきます。
+
+
+
+ 開発環境を整える
+とりあえず，ミニマムでやることを洗い出しました。
+
+GitHubのリポジトリを作る
+pythonのプロジェクトを作る
+Dev ContainerとDockerが動くような環境を整える(VSCodeのExtensionsとかもこのへんでやる)
+
+Dockerfileの準備
+.devcontainer/devconta...]]></description><link>https://zenn.dev/sigma_tom/articles/e9fed37f0da0a6</link><guid isPermaLink="true">https://zenn.dev/sigma_tom/articles/e9fed37f0da0a6</guid><pubDate>Sat, 24 Aug 2024 14:46:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--d7ghYMIA--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%25A4%258F%25E4%25BC%2591%25E3%2581%25BF%25E3%2581%25AE%25E5%25AE%25BF%25E9%25A1%258C%25E3%2581%25A7Port%2520Scanner%25E3%2582%2592%25E8%2587%25AA%25E4%25BD%259C%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25E2%2591%25A1%7E%25E9%2596%258B%25E7%2599%25BA%25E7%2592%25B0%25E5%25A2%2583%25E6%25BA%2596%25E5%2582%2599%25E7%25B7%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:sigma%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS1dYMkRnWUs1akI0RHBxcTN3Y1hwOGV5X0RKbzVxVC12QW5aUHoyOTJyPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sigma</dc:creator></item><item><title><![CDATA[夏休みの宿題でPort Scannerを自作してみた③~実装編~]]></title><description><![CDATA[
+ これまでのお話
+
+夏だし，Port Scannerを自作してみたい --&gt; せっかくなのでmy_portscannerを作る過程を紹介していきます。
+
+技術選定編では，Port Scannerを自作するにあたってどのような技術を使うかを考えました。
+
+開発環境準備編Port Scannerの開発環境を整えた。
+今回は，Port Scannerの実装をしていきます。
+
+
+
+ 実装の前に
+
+ pythonをパッケージ化する
+yt-dlpの構成を真似したらいい感じにパッケージ化できました。
+全体構成としてはこんな感じ
+$ pwd
+/home/tomita/my_portscanner...]]></description><link>https://zenn.dev/sigma_tom/articles/464f2e43420e0c</link><guid isPermaLink="true">https://zenn.dev/sigma_tom/articles/464f2e43420e0c</guid><pubDate>Sat, 24 Aug 2024 14:46:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--G6hWwOPc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%25A4%258F%25E4%25BC%2591%25E3%2581%25BF%25E3%2581%25AE%25E5%25AE%25BF%25E9%25A1%258C%25E3%2581%25A7Port%2520Scanner%25E3%2582%2592%25E8%2587%25AA%25E4%25BD%259C%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25E2%2591%25A2%7E%25E5%25AE%259F%25E8%25A3%2585%25E7%25B7%25A8%7E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:sigma%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS1dYMkRnWUs1akI0RHBxcTN3Y1hwOGV5X0RKbzVxVC12QW5aUHoyOTJyPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sigma</dc:creator></item><item><title><![CDATA[夏休みの宿題でPort Scannerを自作してみた①~技術選定編~]]></title><description><![CDATA[
+ はじめに
+こんにちは。
+世間は夏休み真っ只中ですが、皆さんはいかがお過ごしでしょうか。
+夏休みといえば、宿題がつきものですよね。
+私は夏休みというと，なにか新しいことができそうな謎のワクワク感がするタイプなので，なんか作ってみるかということで，Port Scannerを自作してみました。
+みなさんもぜひ，夏休みの宿題としてPort Scannerを自作してみてはいかがでしょうか。
+本記事では鋭意作成中のmy_portscannerを作る過程を紹介していきます。
+よりよりものにしていきたいので，みなさんのアドバイスやコメントもお待ちしております。
+
+
+ Port Scannerとは
+
+...]]></description><link>https://zenn.dev/sigma_tom/articles/3de59d1f44aa7e</link><guid isPermaLink="true">https://zenn.dev/sigma_tom/articles/3de59d1f44aa7e</guid><pubDate>Sat, 24 Aug 2024 14:46:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--tD_vxBLV--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%25A4%258F%25E4%25BC%2591%25E3%2581%25BF%25E3%2581%25AE%25E5%25AE%25BF%25E9%25A1%258C%25E3%2581%25A7Port%2520Scanner%25E3%2582%2592%25E8%2587%25AA%25E4%25BD%259C%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25E2%2591%25A0%7E%25E6%258A%2580%25E8%25A1%2593%25E9%2581%25B8%25E5%25AE%259A%25E7%25B7%25A8%7E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:sigma%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS1dYMkRnWUs1akI0RHBxcTN3Y1hwOGV5X0RKbzVxVC12QW5aUHoyOTJyPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sigma</dc:creator></item><item><title><![CDATA[DjangoのFormとTailwindの組み合わせについてちゃんと考えてみる]]></title><description><![CDATA[
+ はじめに
+Webの開発をする際にDjango・TailwindCSSという組み合わせをよく採用しています。
+何かを形にするときの手軽さとTailwindCSSの使い勝手の良さがかなりマッチしていると思っているのですが、以前からFormに関しての相性は微妙に思うところがあり、手軽さと便利さをうまく共存させる方法がないか考えてみます。
+※Tailwindはnode環境のCLIでビルドし、生成されたcssを使用する想定です。
+
+ Django Formについて
+Djangoでは簡単にFormを作成する方法としてformクラスが提供されています。
+詳細は以下。
+https://docs.dj...]]></description><link>https://zenn.dev/taltalsource/articles/django-form-tailwind</link><guid isPermaLink="true">https://zenn.dev/taltalsource/articles/django-form-tailwind</guid><pubDate>Sat, 24 Aug 2024 08:28:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8l2ExwVD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Django%25E3%2581%25AEForm%25E3%2581%25A8Tailwind%25E3%2581%25AE%25E7%25B5%2584%25E3%2581%25BF%25E5%2590%2588%25E3%2582%258F%25E3%2581%259B%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E3%2581%25A1%25E3%2582%2583%25E3%2582%2593%25E3%2581%25A8%25E8%2580%2583%25E3%2581%2588%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:taltalsource%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y1ZmVjODFhZDAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>taltalsource</dc:creator></item><item><title><![CDATA[ReflexをCloud Runにデプロイする]]></title><description><![CDATA[
+ はじめに
+ここ最近、Reflexという PythonのみでUI含めたWebアプリが作成できるライブラリ が使ってみていい感じなので、いろいろと触ってみてます。
+https://zenn.dev/neka_nat/articles/f2f5b6ebeb049a
+https://zenn.dev/neka_nat/articles/32824920cb6004
+https://github.com/neka-nat/reflex-firebase
+Reflexには専用のホスティングサービスがあるのですが、環境に入れられるものがpipでインストールできるものに限られてたり、ドメインを自由に...]]></description><link>https://zenn.dev/neka_nat/articles/113c38c0f7aae6</link><guid isPermaLink="true">https://zenn.dev/neka_nat/articles/113c38c0f7aae6</guid><pubDate>Sat, 24 Aug 2024 07:37:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1rKHkfsr--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Reflex%25E3%2582%2592Cloud%2520Run%25E3%2581%25AB%25E3%2583%2587%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25A4%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2597%25E3%2582%258D%25E3%2581%258F%25E3%2581%25BE%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM0NjU3ODEwYjQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>しろくま</dc:creator></item></channel></rss>
