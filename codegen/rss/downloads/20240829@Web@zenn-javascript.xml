@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「JavaScript」のフィード]]></title><description><![CDATA[Zennのトピック「JavaScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/javascript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/64acd76870.png</url><title>Zennの「JavaScript」のフィード</title><link>https://zenn.dev/topics/javascript</link></image><generator>zenn.dev</generator><lastBuildDate>Thu, 29 Aug 2024 02:00:43 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/javascript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[ＤＢの日付、時刻形式の変換]]></title><description><![CDATA[
+ javaScriptで直接変換可能な、日付、時刻形式の種類
+
+DATE: YYYY-MM-DD 形式
+DATETIME: YYYY-MM-DD HH:MM:SS 形式
+TIMESTAMP: 1970-01-01 00:00:01 形式。
+
+
+ 構文
+
+ 例
+const date = new Date('2024-09-01);
+console.log(date.toLocaleString());
+
+ 実践的な例
+const date = new Date(example.publishedAt).toLocaleString();
+
+//&lt;p&gt; 公開日:{date}&l...]]></description><link>https://zenn.dev/hiro_i999/articles/d81bda933b6b77</link><guid isPermaLink="true">https://zenn.dev/hiro_i999/articles/d81bda933b6b77</guid><pubDate>Wed, 28 Aug 2024 15:45:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xE1yuyDL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25EF%25BC%25A4%25EF%25BC%25A2%25E3%2581%25AE%25E6%2597%25A5%25E4%25BB%2598%25E3%2580%2581%25E6%2599%2582%25E5%2588%25BB%25E5%25BD%25A2%25E5%25BC%258F%25E3%2581%25AE%25E5%25A4%2589%25E6%258F%259B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Hiroyuki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSTJxU2lleWt6WmxqaVMwNDdyd3JKLU0yQjVqa3NTOTRtXzJiM0NNbWhfVmwwOHBlRT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Hiroyuki</dc:creator></item><item><title><![CDATA[Dart とJavaScriptで、基礎的な書き方比べてみた]]></title><description><![CDATA[はじめに
+現在、個人開発でIOSアプリFlutterで作成しています。
+仕事では、よくJavaScriptを利用するので、DartとJavaScriptを比べてみました！
+前提たいしたこと書いて無いです！
+
+ JavaScriptエンジニアのためのDart・Flutter入門：基礎編
+今回は、JavaScriptの知識をベースにFlutterの基礎を学んでいきましょう。FlutterはGoogleが開発したクロスプラットフォームのUIフレームワークで、Dartというプログラミング言語を使用します。
+
+ 1. 言語の基本：Dart vs JavaScript
+まずは、DartとJavaSc...]]></description><link>https://zenn.dev/bizlink/articles/f1ae8988590b5f</link><guid isPermaLink="true">https://zenn.dev/bizlink/articles/f1ae8988590b5f</guid><pubDate>Wed, 28 Aug 2024 00:54:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--FXutBImL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Dart%2520%25E3%2581%25A8JavaScript%25E3%2581%25A7%25E3%2580%2581%25E5%259F%25BA%25E7%25A4%258E%25E7%259A%2584%25E3%2581%25AA%25E6%259B%25B8%25E3%2581%258D%25E6%2596%25B9%25E6%25AF%2594%25E3%2581%25B9%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%25A4%25E3%2581%258F%25E3%2581%25A0%25E3%2583%25BC%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzllMzFlOGFkZGMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Bizlink%2520Developers%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0Y1VQWGcyQ29QdWNLcGlsZkNqNlVOT1VDVTRTbkowcDBjZENVNEc9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>つくだー</dc:creator></item><item><title><![CDATA[JavaScript 正規表現]]></title><description><![CDATA[
+ 🔅Tips
+正則表現とは？
+正規表現とは 「正規表現」とは、「検索」や「置換」で指定する文字列をパターン表現する方法で、プログラミング言語やテキストエディタなどで利用できます。
+正規表現を考えた人は誰ですか？
+正規表現は，歴史的には1940年代の形式言語論に由来しますが，C言語とUNIXの開発に貢献したKen Thompson氏が1970年前後にQEDというエディタ・ソフトウエア（エディタ），ついでedと呼ばれるUNIX上のエディタに文字列検索用として組み込んだことから，コンピュータの世界でも利用されるようになりました。
+
+ 正規表現のチートシート
+
+ 基本的なメタ文字
+
+
+
+パター...]]></description><link>https://zenn.dev/joo_hashi/articles/93dfe9528e5cb8</link><guid isPermaLink="true">https://zenn.dev/joo_hashi/articles/93dfe9528e5cb8</guid><pubDate>Tue, 27 Aug 2024 22:26:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--URHspzCq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:JavaScript%2520%25E6%25AD%25A3%25E8%25A6%258F%25E8%25A1%25A8%25E7%258F%25BE%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:JboyHashimoto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNjOTBiY2M0M2YuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>JboyHashimoto</dc:creator></item><item><title><![CDATA[JavaScript matchの使い所]]></title><description><![CDATA[
+ 🔅Tips
+png, jpeg画像ファイルを編集ページで、開くと文字化けしたファイルが表示されてしまう問題があった。HTML, Markdonwといった編集可能なテキストなら、問題なかったので、特定のファイルだけ編集ページで開けるロジックの実装方法を考えた。
+連想配列で、APIからデータは取得するので、この中にあるオブジェクトの配列から、画像は除外して、編集ページの閲覧ができるビジネスロジックを考えてみた。
+JavaScriptのmatchを使うと実現できた。
+https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference...]]></description><link>https://zenn.dev/joo_hashi/articles/b5789708eed34a</link><guid isPermaLink="true">https://zenn.dev/joo_hashi/articles/b5789708eed34a</guid><pubDate>Tue, 27 Aug 2024 22:14:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Oj8B32FZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%2520match%25E3%2581%25AE%25E4%25BD%25BF%25E3%2581%2584%25E6%2589%2580%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:JboyHashimoto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNjOTBiY2M0M2YuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>JboyHashimoto</dc:creator></item><item><title><![CDATA[【JavaScript】簡単でスムーズなページ内リンクのスクロール 【コピペでOK！】]]></title><description><![CDATA[よく使う割にはやり方を忘れることがあったため、備忘録として綴っておきます。
+下記はVue.jsのコードですが、ネイティブのJavaScriptでもmethodsやmounted内をコピペで実装できます。
+
+// HTML
+  &lt;div&gt;
+    &lt;div id="FirstView"&gt;&lt;/div&gt;
+    &lt;div id="SecondView"&gt;&lt;/div&gt;
+    &lt;div id="ThirdView"&gt;&lt;/div&gt;
+    &lt;nav class="header"&gt;
+      &lt;u...]]></description><link>https://zenn.dev/ci/articles/5e9a8a707e832a</link><guid isPermaLink="true">https://zenn.dev/ci/articles/5e9a8a707e832a</guid><pubDate>Tue, 27 Aug 2024 14:42:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Dg8c0TFP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590JavaScript%25E3%2580%2591%25E7%25B0%25A1%25E5%258D%2598%25E3%2581%25A7%25E3%2582%25B9%25E3%2583%25A0%25E3%2583%25BC%25E3%2582%25BA%25E3%2581%25AA%25E3%2583%259A%25E3%2583%25BC%25E3%2582%25B8%25E5%2586%2585%25E3%2583%25AA%25E3%2583%25B3%25E3%2582%25AF%25E3%2581%25AE%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%25AB%2520%25E3%2580%2590%25E3%2582%25B3%25E3%2583%2594%25E3%2583%259A%25E3%2581%25A7OK%25EF%25BC%2581%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Ryuko%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhjMmY5OTdiYTUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Ryuko</dc:creator></item><item><title><![CDATA[Elysia.jsを始める【Path】]]></title><description><![CDATA[※ 主に https://elysiajs.com/ の日本語訳をしているものになっているので、詳細は公式ページを参照のこと
+
+ Elysiaでのパスの構造
+Elysia.jsのパスに関しては、一般的なURLの構造と同じである。
+
+参照ページへのリンク
+ローカル環境で、http://localhost:3000/oozorasubaru/ajimaru?p1=v1#hash というURLがあったとする。
+
+
+
+構造
+構造名
+
+
+
+
+http://localhost:3000
+origin
+
+
+/oozorasubaru/ajimaru
+pathname
+
+
+?p1=v1
+search（q...]]></description><link>https://zenn.dev/69incat/articles/828749220029a9</link><guid isPermaLink="true">https://zenn.dev/69incat/articles/828749220029a9</guid><pubDate>Tue, 27 Aug 2024 11:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--zVsqZxxk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Elysia.js%25E3%2582%2592%25E5%25A7%258B%25E3%2582%2581%25E3%2582%258B%25E3%2580%2590Path%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Rock-in-Cats%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2ljc0VoMTZOeVB2NTRXT3B1Q1BpanRlaWVCWkdNQ21Hay1yN281Q2c9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Rock-in-Cats</dc:creator></item><item><title><![CDATA[Cloudflare Turnstileの導入 と CAPTCHA回避対策]]></title><description><![CDATA[!
+Cloudflare Turnstileの導入は既にできてて、「2captcha」などのCAPTCHA回避サービスで回避されるのを対策する方法だけを知りたいって人は、こちら
+
+
+ Cloudflare Turnstileとは
+簡単に説明するなら
+Cloudflareが提供するCAPTCHA代替ツールで、reCAPTCHAなどのCAPTCHAとは異なり、ユーザーが画像を選択したり文字を入力したりする必要がない代わりに、ユーザーの行動や環境情報を基にリスク評価を行い、人間かボットかを判断する。
+
+ 導入
+Cloudflare Turnstileを導入するための基本的な手順は以下の通りです...]]></description><link>https://zenn.dev/localer/articles/335602817265d3</link><guid isPermaLink="true">https://zenn.dev/localer/articles/335602817265d3</guid><pubDate>Tue, 27 Aug 2024 04:31:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7kkENbbw--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Cloudflare%2520Turnstile%25E3%2581%25AE%25E5%25B0%258E%25E5%2585%25A5%2520%25E3%2581%25A8%2520CAPTCHA%25E5%259B%259E%25E9%2581%25BF%25E5%25AF%25BE%25E7%25AD%2596%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258F%25E3%2582%2582%25E3%2582%258A%25E3%2581%25AB%25E3%2581%258F%25E3%2582%2582%25E3%2581%25A3%25E3%2581%259F%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25A6%25E3%2583%2589%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2593%25E3%2582%25B9lo...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RjZWUxZjI0ZjYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>くもりにくもったクラウドサービスlocaler</dc:creator></item><item><title><![CDATA[状態管理ライブラリ Jotaiの使い方]]></title><description><![CDATA[今回は React アプリケーションの状態管理ライブラリの中でも人気の高い "Jotai" の使い方を記事にしたいと思います。豊富な機能の中から本記事では以下の機能について記載しています。
+
+
+atom, useAtom, useSetAtom, useAtomValue
+
+
+atomWithReset, atomWithLocation ( searchParams )
+
+
+Read Only Atom, Write Only Atom
+
+
+Atom Creator
+
+
+
+ 記事内に掲載しているソースコードは Github でも確認できます。
+https://github.com/tw...]]></description><link>https://zenn.dev/cocomina/articles/how-to-use-jotai</link><guid isPermaLink="true">https://zenn.dev/cocomina/articles/how-to-use-jotai</guid><pubDate>Tue, 27 Aug 2024 02:47:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7yzbCgnV--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%258A%25B6%25E6%2585%258B%25E7%25AE%25A1%25E7%2590%2586%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%2520Jotai%25E3%2581%25AE%25E4%25BD%25BF%25E3%2581%2584%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Twosun%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBmN2EyZWFlZTcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Twosun</dc:creator></item><item><title><![CDATA[VueでGitHubの草を実装してみた]]></title><description><![CDATA[
+ はじめに
+こんにちは、hiro です。
+現在、個人開発でちょっとしたウェブアプリケーションを開発しています。このアプリケーションの機能の一つとして、コンテンツの投稿機能を実装しています。開発を進める中で、ユーザーが投稿した日付や数を可視化できれば、ユーザーのモチベーション向上につながるのではないかと考えました。
+実際、私自身も GitHub の「草」のおかげで、毎日少しでも個人開発にコミットすることができています。
+そこで今回、Cal-Heatmap というライブラリを使用して、GitHub の「草」のような機能を実装した過程を、備忘録的に記事にまとめることにしました。
+この記事が、...]]></description><link>https://zenn.dev/eneosgrandchild/articles/4b9cb3bcc8ec88</link><guid isPermaLink="true">https://zenn.dev/eneosgrandchild/articles/4b9cb3bcc8ec88</guid><pubDate>Tue, 27 Aug 2024 00:22:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Klb_6xyy--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Vue%25E3%2581%25A7GitHub%25E3%2581%25AE%25E8%258D%2589%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hiro%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzlkN2RlNzc2YWUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hiro</dc:creator></item><item><title><![CDATA[JavaScript で Python の range みたいなやつ]]></title><description><![CDATA[
+ 主題
+JavaScript には Python の range みたいなやつが標準で存在しない。Python で以下のように書けるコードは
+
+Python
+print(list(map(lambda x: x * 2, range(5))))
+# [0, 2, 4, 6, 8]
+
+JavaScript で愚直に書くと、以下のようになってしまう。
+
+JavaScript
+const start = 0;
+const stop = 5;
+const step = 1;
+const length = Math.floor((stop - start) / step);
+const a = ...]]></description><link>https://zenn.dev/paalon/articles/d59819b8e786e9</link><guid isPermaLink="true">https://zenn.dev/paalon/articles/d59819b8e786e9</guid><pubDate>Mon, 26 Aug 2024 12:53:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--JJYfI5FS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%2520%25E3%2581%25A7%2520Python%2520%25E3%2581%25AE%2520range%2520%25E3%2581%25BF%25E3%2581%259F%25E3%2581%2584%25E3%2581%25AA%25E3%2582%2584%25E3%2581%25A4%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Paalon%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE4ZWViZDI3YTcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Paalon</dc:creator></item><item><title><![CDATA[vue.js v-app-barとv-navigation-drawerを使ったハンバーガーメニューをレイアウトのコンポーネントとして作成]]></title><description><![CDATA[お手柔らかにお願いします。
+定番のレイアウトだと思います
+vueについてかなり初心者の時に作成してコンポーネントについてかなり勉強になったのでまとめます。
+
+ 成果物
+
+これを作っていきます
+
+ 作りたかったもの
+ページトップに常設のサイトのタイトル、ハンバーガーメニュー
+ナビゲーションドロワーがハンバーガーメニューで出し入れ可能
+この二つをコンポーネント化
+この条件を満たすものを作成していきます。
+
+ フォルダ構造
+app.vue
+L components
+    L layouts
+        L titleAndMenuDrawer.vue
+app.vueが開かれるとき、tit...]]></description><link>https://zenn.dev/kyoten/articles/8f6a27f225f3f0</link><guid isPermaLink="true">https://zenn.dev/kyoten/articles/8f6a27f225f3f0</guid><pubDate>Mon, 26 Aug 2024 11:16:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--PcfAGU1M--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:vue.js%2520v-app-bar%25E3%2581%25A8v-navigation-drawer%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%259F%25E3%2583%258F%25E3%2583%25B3%25E3%2583%2590%25E3%2583%25BC%25E3%2582%25AC%25E3%2583%25BC%25E3%2583%25A1%25E3%2583%258B%25E3%2583%25A5%25E3%2583%25BC%25E3%2582%2592%25E3%2583%25AC%25E3%2582%25A4%25E3%2582%25A2%25E3%2582%25A6%25E3%2583%2588%25E3%2581%25AE...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kyoten%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY2NmY0YjM5YWMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kyoten</dc:creator></item><item><title><![CDATA[Elysia.jsを始める【Route】]]></title><description><![CDATA[※ 主に https://elysiajs.com/ の日本語訳をしているものになっているので、詳細は公式ページを参照のこと
+
+ ElysiaでのRoute（ルーティング）
+https://elysiajs.com/essential/route.html に書いてある通りではあるが、
+import { Elysia } from 'elysia'
+
+const app = new Elysia()
+    .get('/hoshimachi', () =&gt; 'suisei')
+    .get('/sakura', () =&gt; 'miko')
+    .get('/oozo...]]></description><link>https://zenn.dev/69incat/articles/722fe03b3d121e</link><guid isPermaLink="true">https://zenn.dev/69incat/articles/722fe03b3d121e</guid><pubDate>Mon, 26 Aug 2024 11:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--E6SFWBgQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Elysia.js%25E3%2582%2592%25E5%25A7%258B%25E3%2582%2581%25E3%2582%258B%25E3%2580%2590Route%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Rock-in-Cats%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2ljc0VoMTZOeVB2NTRXT3B1Q1BpanRlaWVCWkdNQ21Hay1yN281Q2c9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Rock-in-Cats</dc:creator></item><item><title><![CDATA[obniz x Node-REDマニュアル（プロトアウト授業補助教材）]]></title><description><![CDATA[obnizをNode-REDで扱うマニュアルです。ハンズオン資料ではなく補助として利用します。]]></description><link>https://zenn.dev/protoout/books/node-red-obniz</link><guid isPermaLink="true">https://zenn.dev/protoout/books/node-red-obniz</guid><pubDate>Mon, 26 Aug 2024 09:08:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--TgKeOyad--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci82MThkZjNhYmFkLnBuZw==%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>プロトアウト</dc:creator></item><item><title><![CDATA[証明書を作成してmTLSの環境を作ってみた]]></title><description><![CDATA[会社でmTLSの環境を実装する必要があったので、その前段階として証明書の作成（自己証明書）からmTLSの接続確認についての開発環境用メモ
+
+ 環境
+
+windows11
+node : v20.12.2
+openssl : OpenSSL 3.3.1 4 Jun 2024 (Library: OpenSSL 3.3.1 4 Jun 2024)
+
+
+ 1. 自己CA証明書の作成
+下記のコードを実施し親となるCA証明書を作成
+ここではサーバー証明書・クライアント証明書それぞれに署名する用
+
+認証局（CA）RSA秘密鍵の作成
+
+openssl genrsa -out rootCA.key 409...]]></description><link>https://zenn.dev/suzukinota14231/articles/70ed87ff1373ad</link><guid isPermaLink="true">https://zenn.dev/suzukinota14231/articles/70ed87ff1373ad</guid><pubDate>Mon, 26 Aug 2024 08:49:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--kOhYNOLE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%25A8%25BC%25E6%2598%258E%25E6%259B%25B8%25E3%2582%2592%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2597%25E3%2581%25A6mTLS%25E3%2581%25AE%25E7%2592%25B0%25E5%25A2%2583%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:suzuki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTG9BSkFFZnZfZ0tkaWRyMVFGYWYyWEh3N0s4bmpFejh6RVUwTDJMX1NIUEt0QktBPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>suzuki</dc:creator></item><item><title><![CDATA[[React]基礎・仕組みガイド:ブラウザに表示される流れ]]></title><description><![CDATA[Reactを使ってブラウザにコンテンツを表示するまでの基本的な流れを理解することは、Reactを始める上で非常に重要です。この記事では、そのプロセスを簡単に説明します。
+
+ 全体の流れ
+
+App.js: コンポーネントのJSXが定義される場所。
+index.js: App.jsで定義したコンポーネントをHTMLに変換してブラウザに表示させる場所。
+index.html: 最終的にHTMLを表示する場所であり、ReactのアプリケーションがマウントされるDOM要素が含まれる。
+
+!
+
+ 自分用まとめ
+App.jsに書かれているJSXは最終的にHTMLに変換されて、ブラウザに表示される。
+そ...]]></description><link>https://zenn.dev/takeda_kaho/articles/17cec88b653af8</link><guid isPermaLink="true">https://zenn.dev/takeda_kaho/articles/17cec88b653af8</guid><pubDate>Mon, 26 Aug 2024 08:19:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hb3lIYC9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BReact%255D%25E5%259F%25BA%25E7%25A4%258E%25E3%2583%25BB%25E4%25BB%2595%25E7%25B5%2584%25E3%2581%25BF%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%253A%25E3%2583%2596%25E3%2583%25A9%25E3%2582%25A6%25E3%2582%25B6%25E3%2581%25AB%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2595%25E3%2582%258C%25E3%2582%258B%25E6%25B5%2581%25E3%2582%258C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:takepanda%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAxZWRlZDIyZDYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takepanda</dc:creator></item><item><title><![CDATA[Elysia.jsを始める【概要・Getting Start】]]></title><description><![CDATA[※ 主に https://elysiajs.com/ の日本語訳をしているものになっているので、詳細は公式ページを参照のこと
+
+ Elysia.js is 何？
+TypeScriptをベースとしたJavaScriptフレームワーク。
+Bunで動作し、エンドツーエンドの型安全性、統一された型システムを有している。
+エンドツーエンドの型安全性があるので、フロントエンドからバックエンドへのリクエスト、レスポンスの型が一致するため、型エラーを防ぐことができる。
+そして、統一された型システムを持っているので、フレームワーク全体で一貫した型チェックができるようになっている。
+加えて、人間工学的に直感...]]></description><link>https://zenn.dev/69incat/articles/a9e77401391e9b</link><guid isPermaLink="true">https://zenn.dev/69incat/articles/a9e77401391e9b</guid><pubDate>Sun, 25 Aug 2024 13:22:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wHDqHnX2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Elysia.js%25E3%2582%2592%25E5%25A7%258B%25E3%2582%2581%25E3%2582%258B%25E3%2580%2590%25E6%25A6%2582%25E8%25A6%2581%25E3%2583%25BBGetting%2520Start%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Rock-in-Cats%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2ljc0VoMTZOeVB2NTRXT3B1Q1BpanRlaWVCWkdNQ21Hay1yN281Q2c9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Rock-in-Cats</dc:creator></item><item><title><![CDATA[SUUMOで気になる物件を、全部Googleマップ上に表示する方法]]></title><description><![CDATA[
+ はじめに
+こんにちは！引っ越しの物件選びって大変ですよね。
+そんな中で、物件の場所をマップで確認したいとき、いちいち住所をコピペして調べるのは面倒ですよね。
+なので、気になる物件だけ全部マップ上に表示できるものを作りました(SUUMOに同じ機能があるけどね...)。
+
+ 動作環境
+GoogleChrome:127.0.6533.120（Official Build）（64 ビット）
+OS:Windows10
+CPU:Core i5-1135G7
+メモリ:16GB
+
+ すること
+
+下記3つのコードをコピーし、ブックマークのURLに追加する。名前は何でもよい。
+適当なページをブックマーク...]]></description><link>https://zenn.dev/grimro92/articles/d3cf3dd90b1f95</link><guid isPermaLink="true">https://zenn.dev/grimro92/articles/d3cf3dd90b1f95</guid><pubDate>Sun, 25 Aug 2024 12:36:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Qo45Cw7Q--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:SUUMO%25E3%2581%25A7%25E6%25B0%2597%25E3%2581%25AB%25E3%2581%25AA%25E3%2582%258B%25E7%2589%25A9%25E4%25BB%25B6%25E3%2582%2592%25E3%2580%2581%25E5%2585%25A8%25E9%2583%25A8Google%25E3%2583%259E%25E3%2583%2583%25E3%2583%2597%25E4%25B8%258A%25E3%2581%25AB%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:grimro92%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0Y25TU2lTSXRWZWdDcDY4NzBOd2N2bGFLdllBeTJDOENKQW8xTEVtQ0hyTTRjPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>grimro92</dc:creator></item><item><title><![CDATA[ファミレスでイメージする難しくないJavaScriptの非同期処理：Promise、async/await]]></title><description><![CDATA[!
+この記事は、JavaScriptの基礎をある程度学び終えて、これからNext.jsやReactを学び始める方々と一緒に、非同期処理をもう少し身近なものとして捉えるために書いています。
+
+
+ はじめに
+最近のフロントエンド開発では、このようなNext.js（React）とTypeScriptが組み合わさったコードが当たり前のように使われるようになりましたよね。
+// 非同期処理を含むコンポーネントの例
+export default async function ArticlePage() {
+  const article = await fetchArticle();  // データ...]]></description><link>https://zenn.dev/kei615ykhm/articles/8d4b884889875e</link><guid isPermaLink="true">https://zenn.dev/kei615ykhm/articles/8d4b884889875e</guid><pubDate>Sun, 25 Aug 2024 12:19:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--88ztjuyt--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2595%25E3%2582%25A1%25E3%2583%259F%25E3%2583%25AC%25E3%2582%25B9%25E3%2581%25A7%25E3%2582%25A4%25E3%2583%25A1%25E3%2583%25BC%25E3%2582%25B8%25E3%2581%2599%25E3%2582%258B%25E9%259B%25A3%25E3%2581%2597%25E3%2581%258F%25E3%2581%25AA%25E3%2581%2584JavaScript%25E3%2581%25AE%25E9%259D%259E%25E5%2590%258C%25E6%259C%259F%25E5%2587%25A6%25E7%2590%2586%25EF%25BC%259APromise%25E3%2580%2581async%252Fawait%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kei%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhjNmMzYzFhMmUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kei</dc:creator></item><item><title><![CDATA[[React]ボタンを押した時表示される文字を変えたい！]]></title><description><![CDATA[
+ React(リアクト)とは？
+UIを作ることに特化したJavaScriptライブラリ
+現在、数多くあるJavaScriptのフレームワーク・ライブラリ群の中でも、Webサービスにおいて世界的に圧倒的な導入率を誇るのがReactです。
+
+ Reactの４つの特徴
+
+
+画面の更新が速くてスムーズ
+普通のウェブサイトだと、データが変わるたびに全部の画面を更新しますが、Reactでは「仮想DOM」という仕組みを使います。これにより、変わった部分だけを効率的に更新できるので、画面がスムーズに動きます。
+
+宣言的なView
+Reactでは、「こういう見た目になります」と宣言するようにUIを実装で...]]></description><link>https://zenn.dev/takeda_kaho/articles/18723e35e20a37</link><guid isPermaLink="true">https://zenn.dev/takeda_kaho/articles/18723e35e20a37</guid><pubDate>Sun, 25 Aug 2024 08:59:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--CS0Etr-b--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BReact%255D%25E3%2583%259C%25E3%2582%25BF%25E3%2583%25B3%25E3%2582%2592%25E6%258A%25BC%25E3%2581%2597%25E3%2581%259F%25E6%2599%2582%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2595%25E3%2582%258C%25E3%2582%258B%25E6%2596%2587%25E5%25AD%2597%25E3%2582%2592%25E5%25A4%2589%25E3%2581%2588%25E3%2581%259F%25E3%2581%2584%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:takepanda%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAxZWRlZDIyZDYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takepanda</dc:creator></item><item><title><![CDATA[生年月日から、年齢と経過日数を算出]]></title><description><![CDATA[
+ はじめに
+本記事では「生年月日から、年齢と経過日数を算出する」ことを目的とし、その実装を考えていきます。
+なお 本記事で扱った内容は、下記場所にて確認することができます。
+https://nonaka101.github.io/jig-a/
+
+ 事前準備
+ここでは設計を始める前段階として、目的や条件等を考えていきます。
+
+ 環境の定義
+本記事では JavaScript を使って処理していきます。
+!
+本記事では Date 型を使いますが、下記の機能を実装できれば、他言語でも同じことができます。
+
+
+年, 月, 日, 時間 の情報を持ち、取得・設定できる
+月の末日（例えば 8月は 31...]]></description><link>https://zenn.dev/nonaka101/articles/calculate-age-and-days</link><guid isPermaLink="true">https://zenn.dev/nonaka101/articles/calculate-age-and-days</guid><pubDate>Sun, 25 Aug 2024 07:55:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--w9lQP-Ha--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%2594%259F%25E5%25B9%25B4%25E6%259C%2588%25E6%2597%25A5%25E3%2581%258B%25E3%2582%2589%25E3%2580%2581%25E5%25B9%25B4%25E9%25BD%25A2%25E3%2581%25A8%25E7%25B5%258C%25E9%2581%258E%25E6%2597%25A5%25E6%2595%25B0%25E3%2582%2592%25E7%25AE%2597%25E5%2587%25BA%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Nonaka%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY4YWMyOGJiZWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Nonaka</dc:creator></item></channel></rss>
