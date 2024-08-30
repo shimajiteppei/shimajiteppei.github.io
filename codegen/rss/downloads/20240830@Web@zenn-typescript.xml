@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「TypeScript」のフィード]]></title><description><![CDATA[Zennのトピック「TypeScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/typescript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/f13e758fdb.png</url><title>Zennの「TypeScript」のフィード</title><link>https://zenn.dev/topics/typescript</link></image><generator>zenn.dev</generator><lastBuildDate>Fri, 30 Aug 2024 01:07:22 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/typescript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Redux はじめました #0]]></title><description><![CDATA[
+ Redux はじめました #0
+Reduxを使ってみたい！
+と言うことで Hello World! レベルのプロジェクトを作っていきます。
+
+ 今回の目標
+Reduxを導入して基本的な状態管理の機能を使ってみる
+
+ 構成・使うもの
+
+Docker
+Vite
+React
+TypeScript
+Redux
+
+※ GitHubリポジトリは作りません
+
+ 0. 前提環境
+
+docker composeが動くところからスタート
+macOS上で試してます（難しいコマンドは使ってないので適宜読み換えてください）
+
+
+ 1. Docker
+
+ 1-1. フォルダの準備
+# ルートフォルダ
+mkdir...]]></description><link>https://zenn.dev/hilltop/articles/trial-redux-0</link><guid isPermaLink="true">https://zenn.dev/hilltop/articles/trial-redux-0</guid><pubDate>Fri, 30 Aug 2024 00:10:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--MvT1PJA9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Redux%2520%25E3%2581%25AF%25E3%2581%2598%25E3%2582%2581%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%2520%25230%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:HillTop%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzkxYTg2MzI4MWIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>HillTop</dc:creator></item><item><title><![CDATA[remix使ってハマった💦]]></title><description><![CDATA[
+ Tips 🚨
+remixというフレームワークで、コンポーネントを作成して、importする時に、エラーが出て悩まされた💦
+どうやら、export defaultと書かないようだ。
+
+
+修正するとエラーが消えます。
+
+
+
+ example
+componentディレクトリに、Counter.tsxを作成。
+
+app/component/Counter.tsx
+import { useState } from "react"
+// remixでは、export defaultにしない!
+export const Counter = () =&gt; {
+  const [count, se...]]></description><link>https://zenn.dev/joo_hashi/articles/8d36984b22b9f7</link><guid isPermaLink="true">https://zenn.dev/joo_hashi/articles/8d36984b22b9f7</guid><pubDate>Thu, 29 Aug 2024 14:01:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0-kgb1w4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:remix%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2583%258F%25E3%2583%259E%25E3%2581%25A3%25E3%2581%259F%2520%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:JboyHashimoto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNjOTBiY2M0M2YuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>JboyHashimoto</dc:creator></item><item><title><![CDATA[node v22.7.x で TypeScript をそのまま実行する]]></title><description><![CDATA[node の最新に近いバージョンで TypeScript の実験的なサポートが入っている。ts-node や tsx に頼らず typescript のスクリプトを実行できる。
+https://github.com/nodejs/node/pull/53725
+ロードマップ
+https://github.com/nodejs/loaders/issues/217
+実験的な機能であることは承知の上で、動かしてみる。
+
+ tl;dr
+# ~/.zshrc
+alias nodets="node --experimental-strip-types --experimental-transfor...]]></description><link>https://zenn.dev/mizchi/articles/experimental-node-typescript</link><guid isPermaLink="true">https://zenn.dev/mizchi/articles/experimental-node-typescript</guid><pubDate>Thu, 29 Aug 2024 13:28:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--RDhlbWRk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:node%2520v22.7.x%2520%25E3%2581%25A7%2520TypeScript%2520%25E3%2582%2592%25E3%2581%259D%25E3%2581%25AE%25E3%2581%25BE%25E3%2581%25BE%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mizchi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2liclRHT052Z3d3ay1fNGxlcVk4TGNGSlNuX0FoWnpEWVlKaXJNcWc9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mizchi</dc:creator></item><item><title><![CDATA[空配列に対するArray.prototype.every()の挙動]]></title><description><![CDATA[
+ はじめに
+この記事は、きちんとドキュメントを読まずにメソッドを使用した自分への戒めであり、記事というよりメモ書きのようなものです。
+
+ Array.prototype.every()の基本的な挙動
+Array.prototype.every()は下記のように、配列内の要素が特定の条件に当てはまるかチェックし、条件に合わない場合はfalseを返します。
+const array = [10, 20, 30, 40, 50]
+const result = array.every((a) =&gt; a &lt; 30)
+console.log(result) // false
+逆に言えば、...]]></description><link>https://zenn.dev/ncdc/articles/e110ec7d92a8a1</link><guid isPermaLink="true">https://zenn.dev/ncdc/articles/e110ec7d92a8a1</guid><pubDate>Thu, 29 Aug 2024 13:13:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--CETvJdY5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%25A9%25BA%25E9%2585%258D%25E5%2588%2597%25E3%2581%25AB%25E5%25AF%25BE%25E3%2581%2599%25E3%2582%258BArray.prototype.every%2528%2529%25E3%2581%25AE%25E6%258C%2599%25E5%258B%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:HS%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNhODZhNDA5ZDMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:NCDC%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTHVQY2tqSGFmYmlacHVwTEhvaW50bzVQSFBkbjM1NllVby1Jd2haSFlYa0MtZ1d4SDk9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>HS</dc:creator></item><item><title><![CDATA[TypeORMでカーソル型ページネーションを実装する]]></title><description><![CDATA[
+ はじめに
+TypeORMでは、skipとtakeを使用したオフセット型ページネーションをサポートしていますが、カーソル型のページネーションはサポートしていません。
+そのため、「typeorm-cursor-pagination」というライブラリを使用して実装していきます。
+https://www.npmjs.com/package/typeorm-cursor-pagination
+
+ 実装
+こちらが、カーソル型ページネーションの実装です。
+import { AppDataSource } from "typeorm";
+import { buildPaginator } from ...]]></description><link>https://zenn.dev/ncdc/articles/8abcfda8642e00</link><guid isPermaLink="true">https://zenn.dev/ncdc/articles/8abcfda8642e00</guid><pubDate>Thu, 29 Aug 2024 13:12:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--aSyEkOcp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeORM%25E3%2581%25A7%25E3%2582%25AB%25E3%2583%25BC%25E3%2582%25BD%25E3%2583%25AB%25E5%259E%258B%25E3%2583%259A%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%258D%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:HS%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNhODZhNDA5ZDMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:NCDC%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTHVQY2tqSGFmYmlacHVwTEhvaW50bzVQSFBkbjM1NllVby1Jd2haSFlYa0MtZ1d4SDk9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>HS</dc:creator></item><item><title><![CDATA[祝！Valtio v2リリース]]></title><description><![CDATA[https://x.com/dai_shi/status/1829141648670175491
+本当はReact 19と同時にリリースするつもりだったのですが、もう待ちきれないので、リリースしちゃいました。Valtio v2でpromiseを使う場合はReact 19の use を使う必要があるのですが、React 18向けの react18-use を作ったので、当面はそれで凌いでいただこうと思います。
+]]></description><link>https://zenn.dev/dai_shi/articles/2ec4b8eb6ae88c</link><guid isPermaLink="true">https://zenn.dev/dai_shi/articles/2ec4b8eb6ae88c</guid><pubDate>Thu, 29 Aug 2024 13:08:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--JPL6GXW2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%25A5%259D%25EF%25BC%2581Valtio%2520v2%25E3%2583%25AA%25E3%2583%25AA%25E3%2583%25BC%25E3%2582%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:daishi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzcwZGNhM2E2Y2IuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>daishi</dc:creator></item><item><title><![CDATA[Nuxt3の継続できて辛くないユニットテスト方法]]></title><description><![CDATA[
+ はじめに
+私は普段、Nuxt3でフロントエンド開発をすることが多いのですが、単体テストの方法が確立しておりませんでした。
+最近、自分なりの方法が確立したので、紹介します。
+今回紹介する技術を使ってテストの準備をしていけば、Nuxt3で、効率的かつ継続が辛くないテストコードが書けますので、是非読んで実行してください！
+
+ できること
+
+Nuxt3 × vitestでの単体テストの方法をすることができる。
+テストファイルで、毎回お決まりの設定を書かないで済むようになる。
+Nuxt環境での単体テストは、オートインポートやuseStateなどのモックが辛いが、それをほぼしないで良くなる。
+A...]]></description><link>https://zenn.dev/comm_vue_nuxt/articles/bf98c7af78c4d7</link><guid isPermaLink="true">https://zenn.dev/comm_vue_nuxt/articles/bf98c7af78c4d7</guid><pubDate>Thu, 29 Aug 2024 12:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--IGjRETIR--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Nuxt3%25E3%2581%25AE%25E7%25B6%2599%25E7%25B6%259A%25E3%2581%25A7%25E3%2581%258D%25E3%2581%25A6%25E8%25BE%259B%25E3%2581%258F%25E3%2581%25AA%25E3%2581%2584%25E3%2583%25A6%25E3%2583%258B%25E3%2583%2583%25E3%2583%2588%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:yuu_aoringo%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU5MTZlOWFlNjguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Vue%25E3%2583%25BBNuxt%2520%25E6%2583%2585%25E5%25A0%25B1%25E3%2581%258C%25E9%259B%2586%25E3%2581%25BE%25E3%2582%258B%25E5%25BA%2583%25E5%25A0%25B4%2520%252F%2520P...%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U2MWQzYjIxZDIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yuu_aoringo</dc:creator></item><item><title><![CDATA[[WIP]Amplify and Custom Resources]]></title><description><![CDATA[Amplify Gen 2 を 5 ヶ月ほど使用した感想と現在地について。
+https://docs.amplify.aws/react/
+
+ tl;dr
+
+Custom Resources で全て構成するのは難易度が高い。
+
+
+ Dry run が欲しい
+
+Terraform でいう terraform plan、AWS CDK でいう cdk diff [1] が存在しない。
+deploy はいつも一か八か。
+本番運用を諦めた原因の 1 つ。
+
+
+ CloudFormation が壊れがち。
+
+ご共有いただきましたログに記録されている「current_account-current_...]]></description><link>https://zenn.dev/dannya/articles/ab35c16b660aa4</link><guid isPermaLink="true">https://zenn.dev/dannya/articles/ab35c16b660aa4</guid><pubDate>Thu, 29 Aug 2024 11:40:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1bXCe190--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:%255BWIP%255DAmplify%2520and%2520Custom%2520Resources%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Daisuke%2520Yamamoto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZiNDY0NzBmMTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Daisuke Yamamoto</dc:creator></item><item><title><![CDATA[VSCode の TypeScript のインポート部分をフォーマットする機能]]></title><description><![CDATA[
+ 概要
+VSCode には、TypeScript での以下のフォーマット機能があります。
+
+未使用のインポートの削除
+インポートの並び替え（昇順）
+
+以下、該当コマンドです。
+削除: TypeScript: Remove Unused Imports
+並び替え: TypeScript: Sort Imports
+削除&amp;並び替え： Organize Imports
+なお、入力先（コマンドパレット）は以下のショートカットで開けます。
+Mac: Cmd + Shift + P
+Win: Ctrl + Shift + P
+VSCode: 1.84.2
+
+ コマンドを使用してみる
+コマン...]]></description><link>https://zenn.dev/masani/articles/eac69a28d2779a</link><guid isPermaLink="true">https://zenn.dev/masani/articles/eac69a28d2779a</guid><pubDate>Thu, 29 Aug 2024 11:21:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--TojC78j5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:VSCode%2520%25E3%2581%25AE%2520TypeScript%2520%25E3%2581%25AE%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%259D%25E3%2583%25BC%25E3%2583%2588%25E9%2583%25A8%25E5%2588%2586%25E3%2582%2592%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25BC%25E3%2583%259E%25E3%2583%2583%25E3%2583%2588%25E3%2581%2599%25E3%2582%258B%25E6%25A9%259F%25E8%2583%25BD%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:masani%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSkIzN29iSFVFazgteDh1eEJVTG1JWmtCOHItb3htWGY0ZkNtaUJVcXRTPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>masani</dc:creator></item><item><title><![CDATA[Prisma TypedSQL をクエリビルダとしてのみ運用する]]></title><description><![CDATA[タイトルのこともできることを検証した。（ORM で文句ない人は ORM として使えばいい）
+Prisma は TypeScript の優秀な ORM / QueryBuilder だが、Prisma 以外で運用されていると途中から投入するのが（一応可能ではあるが）面倒だったりする。
+だが Typed SQL によって、既に存在するDBに対して、副作用なくクエリビルダとしてのみ導入することができるのでは、と思いついて試したところ、できた。
+https://www.prisma.io/docs/orm/prisma-client/using-raw-sql/typedsql
+今回はリモートの...]]></description><link>https://zenn.dev/mizchi/articles/prisma-as-query-builder-only</link><guid isPermaLink="true">https://zenn.dev/mizchi/articles/prisma-as-query-builder-only</guid><pubDate>Thu, 29 Aug 2024 08:46:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5iYrK-I_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Prisma%2520TypedSQL%2520%25E3%2582%2592%25E3%2582%25AF%25E3%2582%25A8%25E3%2583%25AA%25E3%2583%2593%25E3%2583%25AB%25E3%2583%2580%25E3%2581%25A8%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25AE%25E3%2581%25BF%25E9%2581%258B%25E7%2594%25A8%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mizchi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2liclRHT052Z3d3ay1fNGxlcVk4TGNGSlNuX0FoWnpEWVlKaXJNcWc9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mizchi</dc:creator></item><item><title><![CDATA[VueとReactの設計思想の違い]]></title><description><![CDATA[
+ VueとReactの設計思想の違い
+
+ 1. アプローチの哲学
+
+
+
+フレームワーク
+アプローチ
+説明
+
+
+
+
+Vue.js
+漸進的フレームワーク
+小規模な部分的導入から始めて徐々に機能を拡張。テンプレートベースでHTMLやCSSに慣れた開発者に直感的。ビュー層の強化に特化。
+
+
+React
+UIライブラリ
+コンポーネントベースで複雑なUIを構築。宣言的UI設計と再利用可能なコンポーネントに重きを置き、UIの状態管理を予測可能に。
+
+
+
+
+ 2. テンプレート vs. JSX
+
+ Vue.jsのテンプレートシンタックス
+
+VueはHTMLベースのテンプレートシンタックスを使用。
+宣言...]]></description><link>https://zenn.dev/kibe/articles/1a7da71a36ea21</link><guid isPermaLink="true">https://zenn.dev/kibe/articles/1a7da71a36ea21</guid><pubDate>Thu, 29 Aug 2024 08:30:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--t7TlpVx9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Vue%25E3%2581%25A8React%25E3%2581%25AE%25E8%25A8%25AD%25E8%25A8%2588%25E6%2580%259D%25E6%2583%25B3%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:k1b3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAwOTYwY2IzNTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>k1b3</dc:creator></item><item><title><![CDATA[SvelteKit で OGP 画像を自動生成する]]></title><description><![CDATA[
+ SvelteKit で OGP 画像を自動生成する
+
+
+ はじめに
+最近、ビジネスアイデアラボ というアプリを作りました。このアプリでは、AI がアイデアを評価したり、市場調査・競合調査をしてくれます。各ポストにはユニークな URL が振られており、内容も異なります。これらのポストを Facebook や X などの外部サイトに公開する際に、内容に基づいた OGP（Open Graph Protocol）画像があれば理想的です。
+しかし、ポスト毎に静的な画像を作成するのは手間がかかります。そこで、自動で OGP 画像を生成する方法を探りました。この記事では、SvelteKit で O...]]></description><link>https://zenn.dev/shapieron/articles/svelte_kit_ssr</link><guid isPermaLink="true">https://zenn.dev/shapieron/articles/svelte_kit_ssr</guid><pubDate>Thu, 29 Aug 2024 04:51:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3fMwE7oJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:SvelteKit%2520%25E3%2581%25A7%2520OGP%2520%25E7%2594%25BB%25E5%2583%258F%25E3%2582%2592%25E8%2587%25AA%25E5%258B%2595%25E7%2594%259F%25E6%2588%2590%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:ekusiadadus%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzkwMzdhMzY3MGMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:BreakAI%2520%25E9%2596%258B%25E7%2599%25BA%25E9%2583%25A8%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2owQTdHV3Q0eUx2U1dIamZ5eVhhSjNMSWpaUVJ4MlNxTFNvMzExPXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ekusiadadus</dc:creator></item><item><title><![CDATA[VueUseのcomputedAsyncについて調べてみた。]]></title><description><![CDATA[実務でVueUseを使う機会があり、これを期に気になっていたcomputedAsyncについて自分なりの知見をまとめようと思います。
+コードベースはほとんど、[ICS MEDIA様]https://ics.media/entry/230606/ のを活用させていただいています。
+
+ computedAsyncとは
+https://vueuse.org/core/computedAsync/#computedasync
+説明
+
+Computed for async functions
+
+公式の英語で書かれている通り、computedでasync関数が使用できますよって事ですね。
+Vueの標...]]></description><link>https://zenn.dev/tamon_kondo/articles/951fc2e58cce17</link><guid isPermaLink="true">https://zenn.dev/tamon_kondo/articles/951fc2e58cce17</guid><pubDate>Thu, 29 Aug 2024 02:45:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--q4dpNzBl--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:VueUse%25E3%2581%25AEcomputedAsync%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E8%25AA%25BF%25E3%2581%25B9%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25E3%2580%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:t.k%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2k1WWoxNXZlTDl0VE9pd0p0VHVZSXUyNENJMkJuOG1MYkhNcjFvN2c9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>t.k</dc:creator></item><item><title><![CDATA[Supabase サードパーティ認証を試してみる 【Supabase + Amazon Cognito】]]></title><description><![CDATA[
+ はじめに
+こんにちは！
+「愛犬との毎日を楽しく便利にするアプリ オトとりっぷ」でエンジニアしています、足立です！
+この記事では、先日の Supabase Launch Week で発表されたサードパーティ認証（Amazon Cognito）を試してみたいと思います。
+https://supabase.com/blog/third-party-auth-mfa-phone-send-hooks
+Supabase + Amazon Cognito の使用感の参考になれば幸いです。
+
+ 準備作業
+公式のドキュメントは以下の通りです。
+https://supabase.com/docs/gu...]]></description><link>https://zenn.dev/ototrip/articles/tech-supabase-cognito-1</link><guid isPermaLink="true">https://zenn.dev/ototrip/articles/tech-supabase-cognito-1</guid><pubDate>Thu, 29 Aug 2024 01:26:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5qNXwSwU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Supabase%2520%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2589%25E3%2583%2591%25E3%2583%25BC%25E3%2583%2586%25E3%2582%25A3%25E8%25AA%258D%25E8%25A8%25BC%25E3%2582%2592%25E8%25A9%25A6%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2520%25E3%2580%2590Supabase%2520%252B%2520Amazon%2520Cognito%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2580%2590%25E5%2585%25AC%25E5%25BC%258F%25E3%2580%2591%25E3%2582%25AA%25E3%2583%2588%25E3%2581%25A8%25E3%2582%258A%25E3%2581%25A3%25E3%2581%25B7%2520-%2520%25E7%258A%25AC%25E5%25B0%2582%25E7%2594%25A8%25E3%2581%25AE%25E9%259F%25B3...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y3NGU5ZTJkYjAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>【公式】オトとりっぷ - 犬専用の音楽アプリ</dc:creator></item><item><title><![CDATA[TypeScript意外と忘れがちな機能]]></title><description><![CDATA[こんにちは。FEチームのMapleです。私たちのチームは、現在のシステムアーキテクチャを見直し、Reactを用いた新しいアーキテクチャへの移行を検討しています。今回は先日TypeScriptの型について解説を行ったので、意外と忘れがちな機能について解説出来たらなと思います。
+
+ はじめに
+
+私が思った意外と忘れがちな機能なので、人によるかもしれません
+今回はコードを長めに実際に導入されそうな感じで記述出来たらなと思います
+
+
+ Conditional Typesの応用
+TypeScriptの条件付き型（Conditional Types）は、型を柔軟に操作する強力なツールです。T ext...]]></description><link>https://zenn.dev/team_soda/articles/6433c26c4b3bad</link><guid isPermaLink="true">https://zenn.dev/team_soda/articles/6433c26c4b3bad</guid><pubDate>Thu, 29 Aug 2024 01:18:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--sQh1jRsB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%25E6%2584%258F%25E5%25A4%2596%25E3%2581%25A8%25E5%25BF%2598%25E3%2582%258C%25E3%2581%258C%25E3%2581%25A1%25E3%2581%25AA%25E6%25A9%259F%25E8%2583%25BD%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E7%2599%25BD%25E8%2589%25B2%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NmYTM5ODQ3MWIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:SODA%2520Engineering%2520Blog%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzEyM2Y1N2EwYTMuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>白色</dc:creator></item><item><title><![CDATA[Momento Topics でマイクロサービス間の状態管理を行い、React アプリケーションで処理状態をプログレスバーで表示する]]></title><description><![CDATA[
+ マイクロサービス間の状態管理
+ユーザーの一括 CSV インポートといったような時間がかかる重たい処理を非同期的に実行するために、マイクロサービスに切り離したとします。
+次の図でいうと、フロントエンドである React アプリケーションからリクエストが送信され、
+最終的に Lambda が重たい処理を非同期で実行します。
+
+この場合、フロントエンドで処理の状態を把握するにはどうするか...
+いくつか方法が考えられると思います。
+例えば、フロントエンドから数秒ごとに定期的にリクエストを送り、
+処理状況を確認し続けるというポーリングする仕組みでも実現できるかと思います。
+ただ、今回は Mo...]]></description><link>https://zenn.dev/collabostyle/articles/8b022480126828</link><guid isPermaLink="true">https://zenn.dev/collabostyle/articles/8b022480126828</guid><pubDate>Wed, 28 Aug 2024 23:55:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--NpHu0GV1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Momento%2520Topics%2520%25E3%2581%25A7%25E3%2583%259E%25E3%2582%25A4%25E3%2582%25AF%25E3%2583%25AD%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2593%25E3%2582%25B9%25E9%2596%2593%25E3%2581%25AE%25E7%258A%25B6%25E6%2585%258B%25E7%25AE%25A1%25E7%2590%2586%25E3%2582%2592%25E8%25A1%258C%25E3%2581%2584%25E3%2580%2581React%2520%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2581%25A7%25E5%2587%25A6%25E7%2590%2586%25E7%258A%25B6%25E6%2585%258B%25E3%2582%2592%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E5%25B1%25B1%25E3%2581%25A8%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzViM2I3NTQxYzUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25B3%25E3%2583%25A9%25E3%2583%259C%25E3%2582%25B9%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25AB%2520Developers%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y5MGU2OTJiOTguanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>山とコード</dc:creator></item><item><title><![CDATA[neverthrowのsafeTryのすゝめ]]></title><description><![CDATA[
+ はじめに
+neverthrowはJavaScript/TypeScriptのResult実装を提供するライブラリです。筆者は2024年6月頃からこのライブラリのメンテナとして活動しています。
+neverthrowでは複数のResultを直列に扱うとき、andThenで繋いだり一度エラーハンドリングをするのが基本のスタイルでしたが、v6.1.0から入ったsafeTryを使うとasync関数やHaskellのdo構文のようなノリで書けるようになります。さらに、執筆時点での最新版であるv7.0.1で型定義が改善され、使いやすさが格段に向上しました。safeTry自体があまり知られていないよ...]]></description><link>https://zenn.dev/mshaka/articles/4fd5873a3fc90f</link><guid isPermaLink="true">https://zenn.dev/mshaka/articles/4fd5873a3fc90f</guid><pubDate>Wed, 28 Aug 2024 15:55:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ItjFzb3M--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:neverthrow%25E3%2581%25AEsafeTry%25E3%2581%25AE%25E3%2581%2599%25E3%2582%259D%25E3%2582%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25BB%25E3%2581%25A8%25E3%2581%2591%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q2MGMxZmFkMjguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ほとけ</dc:creator></item><item><title><![CDATA[Reactの多言語対応を効率化するための辞書管理ベストプラクティス]]></title><description><![CDATA[※言語ごとのオブジェクト(json)のことをこの記事では辞書と呼びます。
+
+ はじめに
+Reactでreact-i18nextを使用して多言語対応をしています。
+そこで使用している辞書運用のベストプラクティスを模索しました。
+導入時の初期設定などは省きます🙇‍♂
+
+ よくある実装(工夫前)
+例えば、日本語と英語対応したいと思ったときに、以下のような実装がよくあると思います。
+
+ ja.json 日本語の辞書
+{
+  "profile": {
+    "name": "名前",
+    "email": "メールアドレス",
+    "password": "パスワード"
+  },
+  "...]]></description><link>https://zenn.dev/x_point_1/articles/2a4046d0ca514e</link><guid isPermaLink="true">https://zenn.dev/x_point_1/articles/2a4046d0ca514e</guid><pubDate>Wed, 28 Aug 2024 12:47:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lCJ8eHpL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%25E3%2581%25AE%25E5%25A4%259A%25E8%25A8%2580%25E8%25AA%259E%25E5%25AF%25BE%25E5%25BF%259C%25E3%2582%2592%25E5%258A%25B9%25E7%258E%2587%25E5%258C%2596%25E3%2581%2599%25E3%2582%258B%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%25E8%25BE%259E%25E6%259B%25B8%25E7%25AE%25A1%25E7%2590%2586%25E3%2583%2599%25E3%2582%25B9%25E3%2583%2588%25E3%2583%2597%25E3%2583%25A9%25E3%2582%25AF%25E3%2583%2586%25E3%2582%25A3%25E3%2582%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Yoshiyuki%2520Sato%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y3YzY4ZjI4ZDcuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25A8%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25B9%25E3%2583%259D%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2588%25E3%2583%25AF%25E3%2583%25B3%25E6%258A%2580%25E8%25A1%2593%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSWdCU1IzQ2hSdzBrcU5QLXRjSEJzYmh4Qm9iZUtBZnBLdkpfTW84aWkzcWVTb1EtZz1zOTYtYw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yoshiyuki Sato</dc:creator></item><item><title><![CDATA[DataTables extensionのデバッグ]]></title><description><![CDATA[最終的にはDataTableSrcをチェックアウトして、テストランナーが揃った環境を揃えることになる。
+本体のテストは DataTableSrc の README に書いてある通り。実は extension のセットアップも本体でできる。
+build/make.sh が多機能で、extension を checkout するところから実行できる。標準では git: scheme になっているので、必要に応じて https: scheme に書き換えておく。extension は extensions ディレクトリ下に clone される。
+bash build/make.sh all
+u...]]></description><link>https://zenn.dev/kwi/articles/91da1068fb5655</link><guid isPermaLink="true">https://zenn.dev/kwi/articles/91da1068fb5655</guid><pubDate>Wed, 28 Aug 2024 01:50:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ohuo4kwk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:DataTables%2520extension%25E3%2581%25AE%25E3%2583%2587%25E3%2583%2590%25E3%2583%2583%25E3%2582%25B0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kwi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2Rhcmsvay5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kwi</dc:creator></item><item><title><![CDATA[50行でGo風味のDeno用のHTTPルーターを作る]]></title><description><![CDATA[
+ はじめに
+!
+GoはHello World程度のプログラムしか書いたことがないので、Goについては誤った説明が含まれている可能性があります。
+
+Goの標準ライブラリのnet/httpパッケージを見ていたら、パスにHTTPメソッドを指定できる機能が1.22から追加されていました。
+mux := http.NewServeMux()
+// GETを指定したハンドラの登録
+mux.HandleFunc("GET /hello", func(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "Hello World")
+})
+...]]></description><link>https://zenn.dev/ryuapp/articles/deno-50-lines-router</link><guid isPermaLink="true">https://zenn.dev/ryuapp/articles/deno-50-lines-router</guid><pubDate>Tue, 27 Aug 2024 23:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--XSwdalXm--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:50%25E8%25A1%258C%25E3%2581%25A7Go%25E9%25A2%25A8%25E5%2591%25B3%25E3%2581%25AEDeno%25E7%2594%25A8%25E3%2581%25AEHTTP%25E3%2583%25AB%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%25BC%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ryu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI0NzUzMTZkNzguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ryu</dc:creator></item></channel></rss>

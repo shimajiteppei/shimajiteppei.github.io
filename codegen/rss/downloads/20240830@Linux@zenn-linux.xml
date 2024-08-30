@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Linux」のフィード]]></title><description><![CDATA[Zennのトピック「Linux」のRSSフィードです]]></description><link>https://zenn.dev/topics/linux</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/860a9eb1e4.png</url><title>Zennの「Linux」のフィード</title><link>https://zenn.dev/topics/linux</link></image><generator>zenn.dev</generator><lastBuildDate>Fri, 30 Aug 2024 03:07:43 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/linux/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Emacs 29.4 インストール（AUR）]]></title><description><![CDATA[Emacs 29.3のときと同じようにソースからビルドしてもよかったけど、せっかくOSを入れ替えたのでAURの作法でやってみました。
+まだaurに不慣れで、変なことしてるかもなのでツッコミよろしくです！
+
+ 完成品
+下記のようなのが入ります。
+$ emacs --batch --eval '(message  (string-replace "\n" "" (emacs-version)))'
+GNU Emacs 29.4 (build 3, x86_64-pc-linux-gnu, GTK+ Version 3.24.43, cairo version 1.18.0) of 2024-...]]></description><link>https://zenn.dev/yakshaver/articles/336dee383299b5</link><guid isPermaLink="true">https://zenn.dev/yakshaver/articles/336dee383299b5</guid><pubDate>Thu, 29 Aug 2024 11:17:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--kFmyPm1D--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Emacs%252029.4%2520%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25EF%25BC%2588AUR%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:zed%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzlkNDNjMjhjNjMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>zed</dc:creator></item><item><title><![CDATA[sudoの設定]]></title><description><![CDATA[
+ Ubuntuでのrootログイン方法
+Ubuntuではrootパスワードが設定されていない。まずは、sudoグループに属する一般ユーザーとしてログインし、
+sudo -i
+する。
+
+ Ubuntuでのユーザのsudoグループへの追加方法
+$ sudo usermod -aG sudo USER名
+
+ sudoでSSH公開鍵認証を使う
+pam_ssh_agent_authモジュールをインストールする。
+$ sudo apt-get install libpam-ssh-agent-auth
+/etc/pam.d/sudoと/etc/pam.d/sudo-iに以下の1行を追加する。
+au...]]></description><link>https://zenn.dev/wistaria/articles/899bdac3750775</link><guid isPermaLink="true">https://zenn.dev/wistaria/articles/899bdac3750775</guid><pubDate>Thu, 29 Aug 2024 08:29:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--v0BroHjH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:sudo%25E3%2581%25AE%25E8%25A8%25AD%25E5%25AE%259A%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Synge%2520Todo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzYzNzg4MzczZmEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Synge Todo</dc:creator></item><item><title><![CDATA[【学習用】Linuxお勉強]]></title><description><![CDATA[
+ 前提
+代表的なLinuxコマンドも知らずに業務をしていたので簡単に自分の学習用にまとめてみました。
+業務で必要になったら都度更新していくイメージで！
+
+ Linux OSの構成
+
+
+カーネル
+
+カーネルは、ハードウェアに直接アクセスできるOSの中核プログラムのこと。
+ちなみにLinuxは本来このカーネルプログラムのことを指す名称だったが、現在ではカーネルプログラム以外のプログラムを含めたOS全般を指してLinuxと呼んでいる。
+
+
+
+ディストリビューション
+
+カーネルだけではOSとして動作することが出来ないため、実際には様々なソフトウェアを組み合わせる必要がある。その作業には高度な知...]]></description><link>https://zenn.dev/faniguy/articles/2839a45554e011</link><guid isPermaLink="true">https://zenn.dev/faniguy/articles/2839a45554e011</guid><pubDate>Thu, 29 Aug 2024 02:18:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Y2mc6EH---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%25AD%25A6%25E7%25BF%2592%25E7%2594%25A8%25E3%2580%2591Linux%25E3%2581%258A%25E5%258B%2589%25E5%25BC%25B7%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nn%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc4ZTNlOWNiOTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nn</dc:creator></item><item><title><![CDATA[Cloud StorageにアップしたtarファイルをCloud Functionで解凍する]]></title><description><![CDATA[
+ はじめに
+
+Cloud StorageにアップしたtarファイルをCloud Functionで解凍する方法をまとめました。
+覚書程度に残してありますので、汚いのはご了承ください😓（要望があれば綺麗にしようかと）
+
+
+ 環境
+
+Cloud Functions（第二世代）
+Cloud Storage
+Node.js
+
+
+ 解凍するコード
+# package.json
+{
+    "@google-cloud/functions-framework": "^3.0.0",
+    "firebase-admin": "^12.0.0",
+    "tar": "^7.0.0"
+  }
+}...]]></description><link>https://zenn.dev/dialbird/articles/fd119434c1d4c3</link><guid isPermaLink="true">https://zenn.dev/dialbird/articles/fd119434c1d4c3</guid><pubDate>Thu, 29 Aug 2024 01:03:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4hH9t68z--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Cloud%2520Storage%25E3%2581%25AB%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%25E3%2581%2597%25E3%2581%259Ftar%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2592Cloud%2520Function%25E3%2581%25A7%25E8%25A7%25A3%25E5%2587%258D%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:dialbird%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lYZl96c2pGMDVnZlVCaUJYR1NwVlB3aXFYZlJKTElqWFlHYkVPdGc9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>dialbird</dc:creator></item><item><title><![CDATA[gdbにglibcやlinuxのソースコードを表示させたい！]]></title><description><![CDATA[
+ やりたいこと
+
+CTFでバイナリとlibcが与えられたときに、gdbにlibcのソースコードを表示させたい
+Linuxのデバッグをするときに、gdbにソースコードを表示させたい
+
+glibcのソースコードを表示させたgdb
+
+linuxのソースコードを表示させたgdb
+
+
+
+ やりかた
+
+ glibcのソースコードを表示させる
+
+ 準備
+
+libcにデバッグ情報をつける (参考: https://satoooon1024.hatenablog.com/entry/2022/06/12/libcにデバッグシンボルを付ける方法と自動化)
+
+glibcのソースコードを適当な場所にクローンす...]]></description><link>https://zenn.dev/rona/articles/b3ea5157bc3711</link><guid isPermaLink="true">https://zenn.dev/rona/articles/b3ea5157bc3711</guid><pubDate>Tue, 27 Aug 2024 22:06:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--u5e5ClBA--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:gdb%25E3%2581%25ABglibc%25E3%2582%2584linux%25E3%2581%25AE%25E3%2582%25BD%25E3%2583%25BC%25E3%2582%25B9%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2582%2592%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2595%25E3%2581%259B%25E3%2581%259F%25E3%2581%2584%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:rona%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc5ZDkyOTBlNjAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>rona</dc:creator></item><item><title><![CDATA[Linux コマンド一覧]]></title><description><![CDATA[
+ ファイル操作コマンド
+
+
+
+コマンド
+説明
+使用例
+
+
+
+
+ls
+ディレクトリの内容を一覧表示
+ls [ディレクトリ]
+
+
+cd
+ディレクトリの移動
+cd [ディレクトリ]
+
+
+pwd
+カレントディレクトリのパスを表示
+pwd
+
+
+cp
+ファイルをコピー
+cp コピー元 コピー先
+
+
+mv
+ファイルを移動または名前を変更
+mv 移動元 移動先
+
+
+rm
+ファイルを削除
+rm ファイル
+
+
+mkdir
+新しいディレクトリを作成
+mkdir [ディレクトリ]
+
+
+rmdir
+空のディレクトリを削除
+rmdir [ディレクトリ]
+
+
+touch
+空のファイルを作成またはタイムスタンプを変更...]]></description><link>https://zenn.dev/jk447/articles/d285b05c8977e4</link><guid isPermaLink="true">https://zenn.dev/jk447/articles/d285b05c8977e4</guid><pubDate>Tue, 27 Aug 2024 11:54:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--E__Gh1sM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%2520%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E4%25B8%2580%25E8%25A6%25A7%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:JK447%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E0YTQ1YzQwNjkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>JK447</dc:creator></item><item><title><![CDATA[【Ubuntu】Linux KVMとCockpitで仮想サーバを構築する]]></title><description><![CDATA[
+ はじめに
+自宅で構築したサーバの台数が増えてきたため、KVM(Kernel-based Virtual Machine)とCockpitを使用して仮想サーバを構築し1つのサーバに統合することにしました。
+KVMを使用すると1つの物理サーバ上に複数の仮想マシンを構築し、稼働させることができます。
+
+ 目標
+
+KVMをインストールする
+Cockpitをインストールする
+Cockpit上でネットワーク設定を行えるようにする
+ブリッジ接続の有効化
+仮想マシン管理用のCockpitプラグインを導入する
+仮想マシンを作成する
+ホストOSのNICとゲストOSの仮想NICをブリッジ接続する
+
+
+ 構...]]></description><link>https://zenn.dev/255kei/articles/e6943f159b80e7</link><guid isPermaLink="true">https://zenn.dev/255kei/articles/e6943f159b80e7</guid><pubDate>Sun, 25 Aug 2024 16:56:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--k_GyyCS1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Ubuntu%25E3%2580%2591Linux%2520KVM%25E3%2581%25A8Cockpit%25E3%2581%25A7%25E4%25BB%25AE%25E6%2583%25B3%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2582%2592%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kei-ta%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I1MzBhMjVmYzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kei-ta</dc:creator></item><item><title><![CDATA[Ubuntu22.04 LTS Serverをセットアップする]]></title><description><![CDATA[
+ はじめに
+Ubuntu22.04 LTS Serverをインストールしたときのセットアップメモです
+
+ パスワードの変更
+初期のユーザ名、パスワードは、
+username: ubuntu
+password: ubuntu
+なので、パスワードを変更する
+$ passwd ubuntu
+
+任意のパスワードに変更
+
+
+ キーマップの変更
+英語キーボードの場合
+$ sudo localectl set-keymap us
+日本語106キーボードの場合
+$ sudo localectl set-keymap jp106
+日本語109キーボードの場合
+$ sudo localectl set-k...]]></description><link>https://zenn.dev/heptapod/articles/ubuntu2204-lts-server-setup</link><guid isPermaLink="true">https://zenn.dev/heptapod/articles/ubuntu2204-lts-server-setup</guid><pubDate>Sun, 25 Aug 2024 15:38:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--XGs9mQm0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ubuntu22.04%2520LTS%2520Server%25E3%2582%2592%25E3%2582%25BB%25E3%2583%2583%25E3%2583%2588%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:heptapod%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzYxOTc5MmM2YzEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>heptapod</dc:creator></item><item><title><![CDATA[syncコマンドのデータ同期タイミングとI/Oエラー検出]]></title><description><![CDATA[syncコマンドはストレージデバイスへのI/Oをキャッシュしているページキャッシュとバッファキャッシュのデータをデバイスに同期(以下「同期」と記載)します。このコマンドについては「syncは同期処理を開始するだけで完了を待たずに終了する」「syncを3回実行すると同期が完了する」などという話が有名です。本記事ではLinux環境においてsyncコマンドの終了時に同期がされるのかについて述べます。syncコマンドはGNU coreutilsが提供するものを対象とします。
+本記事ではsyncコマンドによる同期のタイミングに加えてもう一つ、同期処理の実行中にI/Oエラーが発生した場合に、エラーを...]]></description><link>https://zenn.dev/satoru_takeuchi/articles/248574593145ed</link><guid isPermaLink="true">https://zenn.dev/satoru_takeuchi/articles/248574593145ed</guid><pubDate>Sun, 25 Aug 2024 07:13:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--OoF9FGzc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:sync%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2581%25AE%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E5%2590%258C%25E6%259C%259F%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%259F%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%25A8I%252FO%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E6%25A4%259C%25E5%2587%25BA%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:sat%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2hjeVUzdFlLV3RJeXdsdjJhYm1ac2VpczZrUnp1ODc5ZFNwT0Vub3c9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sat</dc:creator></item><item><title><![CDATA[Vimのswpファイルについて]]></title><description><![CDATA[vimでファイルの中身を確認していたら、誤って強制終了してしまい、その後の挙動が気になったので書くことにした。
+参考: https://nanasi.jp/articles/howto/file/crash-recovery.html
+
+ swpファイルとは
+一言で言うと、excelで言う下の画像やつのvim版
+
+保存していないファイルの変更を一時保存してくれるvimの機能
+再度ファイルを開くと、途中終了したファイルの復元を提案してくれる。
+出力(日本語化済み)
+E325: 注意
+次の名前でスワップファイルを見つけました "自身のホームディレクトリ"/.local/share/nvim/...]]></description><link>https://zenn.dev/tttttttttt/articles/29e3b5f5a8beee</link><guid isPermaLink="true">https://zenn.dev/tttttttttt/articles/29e3b5f5a8beee</guid><pubDate>Sat, 24 Aug 2024 14:32:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--iBiXaNFI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Vim%25E3%2581%25AEswp%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tttttttttt%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2IxZTcyNjQ1MWMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tttttttttt</dc:creator></item><item><title><![CDATA[Ubuntuの再起動が遅い場合の対処法]]></title><description><![CDATA[
+ はじめに
+Rasberry PiにUbuntuを入れていろいろ開発やってるときに再起動が遅いのがいらついたので対処した。
+
+ 環境
+
+Ubuntu 22.04 LTS
+Raspberry Pi 4
+
+
+ 遅い原因
+ブートログを見ると以下のメッセージのところで時間食ってた
+
+ 起動時
+start job is running for wait for network to be configured. (42s / 1min 30)
+
+ 終了時
+A stop job is running for Snap Daemon (57s / 1min 30)
+
+ 対処法
+
+ 起動時
+FYI: ...]]></description><link>https://zenn.dev/bathtimefish/articles/9af56040bdc325</link><guid isPermaLink="true">https://zenn.dev/bathtimefish/articles/9af56040bdc325</guid><pubDate>Sat, 24 Aug 2024 04:16:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--PRDsZ6j_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ubuntu%25E3%2581%25AE%25E5%2586%258D%25E8%25B5%25B7%25E5%258B%2595%25E3%2581%258C%25E9%2581%2585%25E3%2581%2584%25E5%25A0%25B4%25E5%2590%2588%25E3%2581%25AE%25E5%25AF%25BE%25E5%2587%25A6%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:bathtimefish%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhiNjQyNThkN2IuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>bathtimefish</dc:creator></item><item><title><![CDATA[某N社のゲームソフトを検索できる機能を作ったハナシ]]></title><description><![CDATA[
+ はじめに
+
+こういうモノを作りました
+
+https://search-nintendo.wakyadev.com/
+
+製作にあたって得られた知見等を書きます
+サービス公開までを振り返った記事になるためポエム要素と技術的要素入り混じる内容になっています
+
+
+ 対象読者
+
+個人開発初心者の思考が知りたい人
+Webサービス公開までどんな作業があるのかざっくり知りたい人
+dockerの構成に迷ってる人
+
+マネタイズは一切狙ってません。売れるサービス作りという期待には添えませんので、ご了承ください。
+以上、拙い筆致ですが最後までお付き合いください。
+
+ キッカケ
+ゲーム雑誌ファミ通やニンテンド...]]></description><link>https://zenn.dev/wakyadev/articles/78d7277e1196ef</link><guid isPermaLink="true">https://zenn.dev/wakyadev/articles/78d7277e1196ef</guid><pubDate>Sat, 24 Aug 2024 01:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--OifV-xMz--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%259F%2590N%25E7%25A4%25BE%25E3%2581%25AE%25E3%2582%25B2%25E3%2583%25BC%25E3%2583%25A0%25E3%2582%25BD%25E3%2583%2595%25E3%2583%2588%25E3%2582%2592%25E6%25A4%259C%25E7%25B4%25A2%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258B%25E6%25A9%259F%25E8%2583%25BD%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%25E3%2583%258F%25E3%2583%258A%25E3%2582%25B7%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:wakya%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZlYTQ5NTZlY2EuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>wakya</dc:creator></item><item><title><![CDATA[RPF(Reverse Path Forwarding)の概要と動作]]></title><description><![CDATA[
+ RPF(Reverse Path Forwarding)の概要と動作
+
+ 概要
+RPF (Reverse Path Forwarding) には、ユニキャストとマルチキャストの2種類があります。マルチキャストを対象とする mRPF (Multicast Reverse Path Forwarding) は、PIM-SSM (Protocol Independent Multicast - Source-Specific Multicast) や MSDP (Multicast Source Discovery Protocol) とともに、マルチキャスト配信のループを防止するために利...]]></description><link>https://zenn.dev/kanehori/articles/6549faa512cda4</link><guid isPermaLink="true">https://zenn.dev/kanehori/articles/6549faa512cda4</guid><pubDate>Fri, 23 Aug 2024 07:23:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--FlOU3u5j--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:RPF%2528Reverse%2520Path%2520Forwarding%2529%25E3%2581%25AE%25E6%25A6%2582%25E8%25A6%2581%25E3%2581%25A8%25E5%258B%2595%25E4%25BD%259C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:horihori%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAyMzFhNTg4MmEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>horihori</dc:creator></item><item><title><![CDATA[（初心者向け）どん語でわかる！初めてのLinux[Mac コマンド]]]></title><description><![CDATA[
+ そんなもん、オマエ・・
+どん語とは：大阪府出身の元プロ野球選手・監督、岡田彰布氏のセリフ全般を表す表現(引用)
+まずはこちらを御覧ください。
+https://youtu.be/OImyGeCogbI?si=0ObuNF1sTxFWe9W8
+
+ おーん、そらもうアレ（Linux）よ
+なんか、最近訳のわからんAIというの？が流行ってるらしいやんか、みんなああいうの見て自分もやってみたいだとか言うのだけれども、基礎が大事やんか、はっきり言うて。
+基礎って何かって話になったらそれはもう、アレやんか。アレがわかってないとまともにパソコンも触られへんし、サーバーで計算するってなった時にどないした...]]></description><link>https://zenn.dev/maoya23/articles/5b390866293cc3</link><guid isPermaLink="true">https://zenn.dev/maoya23/articles/5b390866293cc3</guid><pubDate>Fri, 23 Aug 2024 05:52:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--sRaWweuu--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25EF%25BC%2588%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E5%2590%2591%25E3%2581%2591%25EF%25BC%2589%25E3%2581%25A9%25E3%2582%2593%25E8%25AA%259E%25E3%2581%25A7%25E3%2582%258F%25E3%2581%258B%25E3%2582%258B%25EF%25BC%2581%25E5%2588%259D%25E3%2582%2581%25E3%2581%25A6%25E3%2581%25AELinux%255BMac%2520%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%255D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Naoya%2520Matsuo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E1ODIyOWM1YzYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Naoya Matsuo</dc:creator></item><item><title><![CDATA[EC2起動時に自動でインスタンスストアをマウントする]]></title><description><![CDATA[
+ はじめに
+EC2のGPUインスタンスでローカルLLMを構築することになりました。
+インスタンスストアはEC2の停止後に削除されます。
+料金やI/Oのためインスタンスストアに環境構築していたのですが、このことをインスタンスの停止後に知りました笑
+お金がかかるインスタンスではEC2は停止しておきたいですが、マウントからGitクローン・poetryの依存関係のインストールなど手動では時間がかかってしまうため、自動でスクリプトを実行することにしました。
+（ユーザーデータでもできるそうですが、Amazon Linux2ではできないと見かけたためこの方法にしました）
+
+ 手順
+
+自動マウントスク...]]></description><link>https://zenn.dev/iharuoru/articles/8eb76aa566315d</link><guid isPermaLink="true">https://zenn.dev/iharuoru/articles/8eb76aa566315d</guid><pubDate>Thu, 22 Aug 2024 10:57:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7Gmj7fko--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:EC2%25E8%25B5%25B7%25E5%258B%2595%25E6%2599%2582%25E3%2581%25AB%25E8%2587%25AA%25E5%258B%2595%25E3%2581%25A7%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%25B3%25E3%2582%25B9%25E3%2582%25B9%25E3%2583%2588%25E3%2582%25A2%25E3%2582%2592%25E3%2583%259E%25E3%2582%25A6%25E3%2583%25B3%25E3%2583%2588%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:iharu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJkYWQyZjhkZTMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>iharu</dc:creator></item><item><title><![CDATA[GNU/LinuxでIntel Arcの性能を最大限引き出す]]></title><description><![CDATA[いつも使用しているデスクトップPCのグラフィックボードを変えたので、Linux側で少し設定いじる必要が出てきました。
+
+ 環境
+
+Arch Linux x86_64
+AMD Ryzen 5 3600 @3.6GHz
+MSI B450 M-A PRO MAX
+玄人志向 Intel Arc A580 8GB GDDR6
+
+
+ ドライバのインストール
+sudo pacman -S mesa vulkan-intel intel-media-driver
+
+ Resizable BARの有効化
+これはマザーボードの設定から行う。設定項目がない場合はBIOSアップデートすれば追加される。
+
+ カー...]]></description><link>https://zenn.dev/donabe8898/articles/67e24b94650267</link><guid isPermaLink="true">https://zenn.dev/donabe8898/articles/67e24b94650267</guid><pubDate>Wed, 21 Aug 2024 08:03:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--FnhG2G7Q--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:GNU%252FLinux%25E3%2581%25A7Intel%2520Arc%25E3%2581%25AE%25E6%2580%25A7%25E8%2583%25BD%25E3%2582%2592%25E6%259C%2580%25E5%25A4%25A7%25E9%2599%2590%25E5%25BC%2595%25E3%2581%258D%25E5%2587%25BA%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Donabe%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FkZTRlY2I4NTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Donabe</dc:creator></item><item><title><![CDATA[リモート開発環境の構築: TailscaleとCode-serverのセットアップ]]></title><description><![CDATA[
+ 目次
+
+目的
+環境
+
+設定手順
+
+Tailscaleのインストール
+Code-serverのインストール
+Code-serverの設定変更
+Tailscale Funnelの設定
+
+
+まとめ
+参考
+
+
+ 目的
+開発対象のインスタンスに毎回sshしたりコードを転送したりするのは煩雑です。TailscaleとCode-serverを使用することで、オンザフライでコードの編集やシェル操作、ブラウザ確認が可能となり、開発効率を大幅に向上させることができます。今回は家庭のネットワークやAWSのVPC内部に存在していて、NATの背後にインスタンスを設置せざる得ないケースにおいても遠隔からのアクセ...]]></description><link>https://zenn.dev/kanehori/articles/d53d71452cff35</link><guid isPermaLink="true">https://zenn.dev/kanehori/articles/d53d71452cff35</guid><pubDate>Tue, 20 Aug 2024 07:51:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--STezCD7g--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%25AA%25E3%2583%25A2%25E3%2583%25BC%25E3%2583%2588%25E9%2596%258B%25E7%2599%25BA%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25AE%25E6%25A7%258B%25E7%25AF%2589%253A%2520Tailscale%25E3%2581%25A8Code-server%25E3%2581%25AE%25E3%2582%25BB%25E3%2583%2583%25E3%2583%2588%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:horihori%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAyMzFhNTg4MmEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>horihori</dc:creator></item><item><title><![CDATA[LinuxにおけるVRF基礎]]></title><description><![CDATA[
+ 概要
+VRF（Virtual Routing and Forwarding）は、単一のルータやサーバにおいて複数のルーティングテーブルを使用できる技術になります。通常Linuxでデフォルトで使用するのはグローバルのルーティングテーブルになりますが、VRFはそれとは別に独立したルーティングテーブルを持ち、独立したVRFに基づいてパケットを分離、ルーティングすることができます。
+VRFと類似の機能にNetwork Namespaceがありますが、目的と使い方に違いがあるため用途に合わせて使い分けることが必要です。Network Namespaceは、カーネルレベルでネットワークスタック全...]]></description><link>https://zenn.dev/kanehori/articles/5d3ef0e85031fb</link><guid isPermaLink="true">https://zenn.dev/kanehori/articles/5d3ef0e85031fb</guid><pubDate>Mon, 19 Aug 2024 10:36:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3ZzylTSP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%25E3%2581%25AB%25E3%2581%258A%25E3%2581%2591%25E3%2582%258BVRF%25E5%259F%25BA%25E7%25A4%258E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:horihori%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAyMzFhNTg4MmEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>horihori</dc:creator></item><item><title><![CDATA[iptablesの基礎、基本操作、D-NAT/S-NAT/フィルタの構成方法]]></title><description><![CDATA[
+ 概要
+iptablesは、Linuxシステムでネットワークトラフィックを制御するための強力なツールです。本記事では、iptablesの基本概念、基本操作、DNAT（Destination Network Address Translation）、SNAT（Source Network Address Translation）について詳しく解説します。
+
+ 目次
+IPTablesの基礎
+IPTablesの基本操作
+実際の使用例
+ネットワーク構成例
+まとめ
+
+ IPTablesの基礎
+IPTablesは、パケットフィルタリングとNAT（ネットワークアドレス変換）を実現するためのコマンドラ...]]></description><link>https://zenn.dev/kanehori/articles/4c1212c0ba477e</link><guid isPermaLink="true">https://zenn.dev/kanehori/articles/4c1212c0ba477e</guid><pubDate>Mon, 19 Aug 2024 10:26:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--OfbUVndW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:iptables%25E3%2581%25AE%25E5%259F%25BA%25E7%25A4%258E%25E3%2580%2581%25E5%259F%25BA%25E6%259C%25AC%25E6%2593%258D%25E4%25BD%259C%25E3%2580%2581D-NAT%252FS-NAT%252F%25E3%2583%2595%25E3%2582%25A3%25E3%2583%25AB%25E3%2582%25BF%25E3%2581%25AE%25E6%25A7%258B%25E6%2588%2590%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:horihori%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAyMzFhNTg4MmEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>horihori</dc:creator></item><item><title><![CDATA[VMware fusionでparrotOSを作成]]></title><description><![CDATA[intel macbook pro からM2 macbook air にしてからVirtual Boxが使えなくて困ってたが、dockerではできないことも多いしやっぱりVMは必要だなってことで個人利用無料になったVMwareを試してみる。
+目的はセキュリティの勉強用、CTFを始めるにあたりparrotOSのGUI環境を作ること。
+他 VMware fusion のVM作成の役に立てば。
+スクショやログ撮り忘れてたのでまた作り直したりしたら情報追加修正するかも、です。
+
+ 環境
+
+M2 macbook air
+メモリ8GB
+Sonoma 14.6.1
+homebrew 構築済み
+
+
+ V...]]></description><link>https://zenn.dev/yufuworks/articles/33769833d38122</link><guid isPermaLink="true">https://zenn.dev/yufuworks/articles/33769833d38122</guid><pubDate>Sun, 18 Aug 2024 16:48:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--g7UuiXT9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:VMware%2520fusion%25E3%2581%25A7parrotOS%25E3%2582%2592%25E4%25BD%259C%25E6%2588%2590%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hiro%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dOeXhkbTFIXzlYdHcxdGpHb1lDQmJQVXZya2xMd3VvNmR0eXY2PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hiro</dc:creator></item></channel></rss>
