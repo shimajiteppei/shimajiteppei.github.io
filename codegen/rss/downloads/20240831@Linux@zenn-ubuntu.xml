@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Ubuntu」のフィード]]></title><description><![CDATA[Zennのトピック「Ubuntu」のRSSフィードです]]></description><link>https://zenn.dev/topics/ubuntu</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/8c2cdbc5b3.png</url><title>Zennの「Ubuntu」のフィード</title><link>https://zenn.dev/topics/ubuntu</link></image><generator>zenn.dev</generator><lastBuildDate>Sat, 31 Aug 2024 06:00:42 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/ubuntu/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[source .bashrc 等でシェルの動作確認するのはやめてほしい]]></title><description><![CDATA[source コマンドを使用したシェルの設定確認はやめてほしいです.
+代わりに,
+exec $SHELL -l
+を使用してください.
+
+ どうして
+.bashrc, .profile, .bash_profile などのシェル設定ファイルやPATH/環境変数の設定を確認する際に, source コマンド(e.g. source .bashrc) を利用するのはおすすめできません.
+既に読み込まれた設定が残っているため, 設定が正しく反映されているかどうかや, 設定の参照状況や優先順位を確認することが難しくなるからです.
+「source コマンドでパスが通ったのが確認できたのでOKだ!」っ...]]></description><link>https://zenn.dev/sashimi/articles/f28f9c00d24e5c</link><guid isPermaLink="true">https://zenn.dev/sashimi/articles/f28f9c00d24e5c</guid><pubDate>Fri, 30 Aug 2024 04:40:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--aCnfbyvK--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:source%2520.bashrc%2520%25E7%25AD%2589%25E3%2581%25A7%25E3%2582%25B7%25E3%2582%25A7%25E3%2583%25AB%25E3%2581%25AE%25E5%258B%2595%25E4%25BD%259C%25E7%25A2%25BA%25E8%25AA%258D%25E3%2581%2599%25E3%2582%258B%25E3%2581%25AE%25E3%2581%25AF%25E3%2582%2584%25E3%2582%2581%25E3%2581%25A6%25E3%2581%25BB%25E3%2581%2597%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:sashimi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2k0dkdSZ0t3ZWRrVWZwYXFnbmt6UHJSQXlfTHJxMHdGZUMycEFLalE9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sashimi</dc:creator></item><item><title><![CDATA[Ubuntu 24 LTSでTPMベースのハードウェアFDE]]></title><description><![CDATA[タイトルの通り。MacからThinkPadに乗り換えたので、OSを入れ替えてみたくなり、挑戦したらハマった。けど無事できたし、問題なく動いた。
+重要
+この記事の中身はデータを全部消し飛ばす前提でやってます。あらかじめデータはバックアップし、Windowsの回復ドライブを作ることを薦めます。この記事の内容が間違っている可能性もあります。コンピュータの重要な部分を色々いじるので、最悪コンピュータが壊れたりしても私は責任を持てません！自己責任でお願いします！特にAbsoluteナントカみたいなハードウェアの深いレベルに絡んでるっぽいセキュリティソリューションは一旦無効にすると有効に戻せない不可...]]></description><link>https://zenn.dev/unnamed/articles/69a302cb05719f</link><guid isPermaLink="true">https://zenn.dev/unnamed/articles/69a302cb05719f</guid><pubDate>Thu, 29 Aug 2024 10:15:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--w6NyzwSR--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ubuntu%252024%2520LTS%25E3%2581%25A7TPM%25E3%2583%2599%25E3%2583%25BC%25E3%2582%25B9%25E3%2581%25AE%25E3%2583%258F%25E3%2583%25BC%25E3%2583%2589%25E3%2582%25A6%25E3%2582%25A7%25E3%2582%25A2FDE%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%2520%2Cx_90%2Cy_121/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>😺</dc:creator></item><item><title><![CDATA[【Ubuntu 24.04】セキュアブートONでmodprobe nvidiaに失敗するようになった話]]></title><description><![CDATA[
+ 概要
+TUF GAMING Z790-PLUS WIFI D4のBIOSをIntel 第13/14世代Coreの対策マイクロコード「0x129」に対応した1663に更新したところmodprobe nvidiaに失敗するようになってしまったときの復帰手順である。
+具体的には以下のようなメッセージが表示されカーネルモジュールのロードに失敗する。
+modprobe: ERROR: could not insert 'nvidia': Key was rejected by service
+
+ 環境
+Ubuntu 24.04の標準カーネルとNVIDIAのドライバを使用した環境。
+
+Ubunt...]]></description><link>https://zenn.dev/fukumen/articles/secureboot-nvidia</link><guid isPermaLink="true">https://zenn.dev/fukumen/articles/secureboot-nvidia</guid><pubDate>Wed, 28 Aug 2024 02:42:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--EJ0_5h_V--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Ubuntu%252024.04%25E3%2580%2591%25E3%2582%25BB%25E3%2582%25AD%25E3%2583%25A5%25E3%2582%25A2%25E3%2583%2596%25E3%2583%25BC%25E3%2583%2588ON%25E3%2581%25A7modprobe%2520nvidia%25E3%2581%25AB%25E5%25A4%25B1%25E6%2595%2597%25E3%2581%2599%25E3%2582%258B%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E3%2581%25AA%25E3%2581%25A3%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E8%25A6%2586%25E9%259D%25A2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSmRBTndCVEtfSHlnamFJejZqRWoxZWJhMDROQ04wV3lBSjc4cFp1R0RiPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>覆面</dc:creator></item><item><title><![CDATA[分散DBの構築 - TiDB / YugabyteDB -]]></title><description><![CDATA[
+ 背景
+趣味で仮想通貨取引所のデータを集めたりしているのですが、その容量がそろそろVPSストレージの限界に近づき、どうしようかと悩んでいます。クラウドに移行すればクラウド側で勝手にスケールしてくれるのでデータ容量を気にしなくて済みますが、いかんせん値段が高くなります。どうにか安く済ませる事ができないものかとネットを調べると、分散DBなるものがOSSで公開されている事を知りました。
+これを自前で用意してやれば、より安く大規模なデータベースが運用でき、スケールも容易なはず。そう考え、タイトルにもある下記２つのサービスについて試してみました。
+
+YugabyteDB
+TiDB
+
+結論から言う...]]></description><link>https://zenn.dev/tanukinet/articles/5512d7f7f8a9a6</link><guid isPermaLink="true">https://zenn.dev/tanukinet/articles/5512d7f7f8a9a6</guid><pubDate>Tue, 27 Aug 2024 16:57:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--DGsvqepD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2588%2586%25E6%2595%25A3DB%25E3%2581%25AE%25E6%25A7%258B%25E7%25AF%2589%2520-%2520TiDB%2520%252F%2520YugabyteDB%2520-%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tanukinet%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I3NjliZjY1YmEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tanukinet</dc:creator></item><item><title><![CDATA[【Ubuntu】Linux KVMとCockpitで仮想サーバを構築する]]></title><description><![CDATA[
+ はじめに
+自宅で構築したサーバの台数が増えてきたため、KVM(Kernel-based Virtual Machine)とCockpitを使用して仮想サーバを構築し1つのサーバに統合することにしました。
+KVMを使用すると1つの物理サーバ上に複数の仮想マシンを構築し、稼働させることができます。
+
+ 目標
+
+KVMをインストールする
+Cockpitをインストールする
+Cockpit上でネットワーク設定を行えるようにする
+ブリッジ接続の有効化
+仮想マシン管理用のCockpitプラグインを導入する
+仮想マシンを作成する
+ホストOSのNICとゲストOSの仮想NICをブリッジ接続する
+
+
+ 構...]]></description><link>https://zenn.dev/255kei/articles/e6943f159b80e7</link><guid isPermaLink="true">https://zenn.dev/255kei/articles/e6943f159b80e7</guid><pubDate>Sun, 25 Aug 2024 16:56:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--k_GyyCS1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Ubuntu%25E3%2580%2591Linux%2520KVM%25E3%2581%25A8Cockpit%25E3%2581%25A7%25E4%25BB%25AE%25E6%2583%25B3%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2582%2592%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kei-ta%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I1MzBhMjVmYzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kei-ta</dc:creator></item><item><title><![CDATA[Ubuntu22.04 LTS Serverをセットアップする]]></title><description><![CDATA[
+ はじめに
+Ubuntu22.04 LTS Serverをインストールしたときのセットアップメモです
+
+ パスワードの変更
+初期のユーザ名、パスワードは、
+username: ubuntu
+password: ubuntu
+なので、パスワードを変更する
+$ passwd ubuntu
+
+任意のパスワードに変更
+
+
+ キーマップの変更
+英語キーボードの場合
+$ sudo localectl set-keymap us
+日本語106キーボードの場合
+$ sudo localectl set-keymap jp106
+日本語109キーボードの場合
+$ sudo localectl set-k...]]></description><link>https://zenn.dev/heptapod/articles/ubuntu2204-lts-server-setup</link><guid isPermaLink="true">https://zenn.dev/heptapod/articles/ubuntu2204-lts-server-setup</guid><pubDate>Sun, 25 Aug 2024 15:38:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--XGs9mQm0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ubuntu22.04%2520LTS%2520Server%25E3%2582%2592%25E3%2582%25BB%25E3%2583%2583%25E3%2583%2588%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:heptapod%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzYxOTc5MmM2YzEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>heptapod</dc:creator></item><item><title><![CDATA[複数のOS環境でのApple HEVC Stereo Videoの制作試み]]></title><description><![CDATA[
+ 背景
+Apple HEVC Stereo Video(以下Apple Spatial Video)を制作し、ストリーミングするサービスを構築する予定です。
+Apple Spatial Videoは左目用動画と右目用動画を別途撮影して合成する形で作成しようとしています。
+ですから動画配信サービスを構築するためには、左目用動画と右目用動画をそれぞれ配信してもらいApple Spatial Videoを自動で制作するサービスが必要です。
+
+ Ubuntu環境でのApple Spatial Video制作の試み
+最近ほとんどのサーバー及びサービスはlinux環境に構築することが大勢であるため...]]></description><link>https://zenn.dev/logic_design/articles/f46c5d1210fdf2</link><guid isPermaLink="true">https://zenn.dev/logic_design/articles/f46c5d1210fdf2</guid><pubDate>Sun, 25 Aug 2024 06:05:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8bbIG8z7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%25A4%2587%25E6%2595%25B0%25E3%2581%25AEOS%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25A7%25E3%2581%25AEApple%2520HEVC%2520Stereo%2520Video%25E3%2581%25AE%25E5%2588%25B6%25E4%25BD%259C%25E8%25A9%25A6%25E3%2581%25BF%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:FC.Lee%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2QzMDVjMmNjMDkuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:VideogLabo%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSVIzLUFSc1ZPQW5ScUozcU5WempEMnNVMVBjYUUtX2VoZXVXQXFScW5ZQnRlRi1BPXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>FC.Lee</dc:creator></item><item><title><![CDATA[【Ubuntu】中古PCにUbuntuをインストールする]]></title><description><![CDATA[
+ 使用機材
+東芝 Dynabook 第4世代 Intel Core i3
+KIOXIA USBメモリ 32GB(推奨:4GB以上)
+
+ 実装手順
+
+ 1.Ubuntu Serverをインストール
+①ubuntuダウンロードページにアクセスし、「Ubuntuのダウンロード」を選択します
+
+② 「日本語Remixイメージのダウンロード」を選択します
+
+日本語Remixイメージだと、日本語で快適に使用できるように加工されています。
+オリジナルバージョンでも問題ありません。
+③ミラーサイトを選択する
+
+「富山大学」と「株式会社アプセル」はhttp接続なので注意
+「株式会社アプセル」を選択すると...]]></description><link>https://zenn.dev/ryo_mz/articles/ubuntuinstall</link><guid isPermaLink="true">https://zenn.dev/ryo_mz/articles/ubuntuinstall</guid><pubDate>Sun, 25 Aug 2024 01:52:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ykEcC89---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Ubuntu%25E3%2580%2591%25E4%25B8%25AD%25E5%258F%25A4PC%25E3%2581%25ABUbuntu%25E3%2582%2592%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%25AA%25E3%2583%25A7%25E3%2582%25A6%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS19Uc3lHdkV3ZzNJY1NTbloxNjB3eUpBWDQtMnJEeVpVaEdFODBZYVVxZTBaMjBxZUo9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>リョウ</dc:creator></item><item><title><![CDATA[Ubuntuの再起動が遅い場合の対処法]]></title><description><![CDATA[
+ はじめに
+Rasberry PiにUbuntuを入れていろいろ開発やってるときに再起動が遅いのがいらついたので対処した。
+
+ 環境
+
+Ubuntu 22.04 LTS
+Raspberry Pi 4
+
+
+ 遅い原因
+ブートログを見ると以下のメッセージのところで時間食ってた
+
+ 起動時
+start job is running for wait for network to be configured. (42s / 1min 30)
+
+ 終了時
+A stop job is running for Snap Daemon (57s / 1min 30)
+
+ 対処法
+
+ 起動時
+FYI: ...]]></description><link>https://zenn.dev/bathtimefish/articles/9af56040bdc325</link><guid isPermaLink="true">https://zenn.dev/bathtimefish/articles/9af56040bdc325</guid><pubDate>Sat, 24 Aug 2024 04:16:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--PRDsZ6j_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ubuntu%25E3%2581%25AE%25E5%2586%258D%25E8%25B5%25B7%25E5%258B%2595%25E3%2581%258C%25E9%2581%2585%25E3%2581%2584%25E5%25A0%25B4%25E5%2590%2588%25E3%2581%25AE%25E5%25AF%25BE%25E5%2587%25A6%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:bathtimefish%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhiNjQyNThkN2IuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>bathtimefish</dc:creator></item><item><title><![CDATA[Ubuntu ServerにHDDを増設する]]></title><description><![CDATA[
+ 概要
+おうちのテレビ録画サーバー(Ubuntu 24.04)の容量が足りなくなってきました。
+※6TBの外付けHDDを使い切った
+今回はバイト代で思い切って16TBのHDDを買ったのでそれを付けていこうと思います。
+
+ 購入
+https://kakaku.com/item/K0001268089/
+16TBの中で最も安いやつです。
+東芝なので良さそうと思って旅行中にポチりました。
+
+ 着弾
+
+
+ 装着
+サーバー用PC(デスクトップパソコン)を開けてSATA3の端子と電源を繋げました。
+
+ 認識してるか
+tomo@tomontu:~$ sudo lsblk -o NAME,FSTYPE...]]></description><link>https://zenn.dev/omu_tryangle/articles/6c381201e7d540</link><guid isPermaLink="true">https://zenn.dev/omu_tryangle/articles/6c381201e7d540</guid><pubDate>Fri, 23 Aug 2024 06:49:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7jaRLn3C--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ubuntu%2520Server%25E3%2581%25ABHDD%25E3%2582%2592%25E5%25A2%2597%25E8%25A8%25AD%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:tomo0611%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAwMmVhYjg4YTkuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Tryangle%2540%25E5%25A4%25A7%25E9%2598%25AA%25E5%2585%25AC%25E7%25AB%258B%25E5%25A4%25A7%25E5%25AD%25A6%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzIwZTgxOTIwMzYuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tomo0611</dc:creator></item><item><title><![CDATA[DifyとOllamaをWSL2が利用できないWindows環境で動かす]]></title><description><![CDATA[Difyをローカルで動作させる方法はいくつかありますが、今回は少し限定的な環境で動作させたかったので
+Windowsかつ、WSL2が利用できないWindows環境でDifyを動作させる手順について記載します。
+
+
+ 環境
+
+Windows 11 Pro
+Virtual Box (Ubuntu)
+MEM 32GB
+
+
+ デメリット
+Windows PCにGPUが搭載されていても、LLMはCPU 動作となってしまう。
+
+ Virtual Boxのインストール
+https://www.virtualbox.org/
+Virtual Box 7.0をインストールしておきます。
+
+ Ubuntu ...]]></description><link>https://zenn.dev/shintaroamaike/articles/8a63bdb7dad992</link><guid isPermaLink="true">https://zenn.dev/shintaroamaike/articles/8a63bdb7dad992</guid><pubDate>Tue, 20 Aug 2024 10:43:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3YZGal9z--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Dify%25E3%2581%25A8Ollama%25E3%2582%2592WSL2%25E3%2581%258C%25E5%2588%25A9%25E7%2594%25A8%25E3%2581%25A7%25E3%2581%258D%25E3%2581%25AA%25E3%2581%2584Windows%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25A7%25E5%258B%2595%25E3%2581%258B%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ShintaroAmaike%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVmNWYzMmE0MWIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ShintaroAmaike</dc:creator></item><item><title><![CDATA[Ubuntu23.10にMySQLサーバを構築しようとしたらrootパスワードを聞かれずに焦った]]></title><description><![CDATA[
+ 概要
+データベースサーバを構築する必要があり、久しぶりにMySQLサーバの構築をしてみました。
+インストール中にrootパスワードの設定がなかったので焦りましたが、あとからrootパスワードの設定ができたので、記録に残しておきたいと思います。
+
+ 環境
+
+サーバ
+
+筐体: Raspberry Pi4
+OS: Ubuntu 23.10
+
+
+作業
+
+Macからssh接続
+
+
+
+
+ インストール
+公式の手順に従ってインストールします。
+https://dev.mysql.com/doc/mysql-apt-repo-quick-guide/en/
+$ sudo apt update
+$ s...]]></description><link>https://zenn.dev/fuku_senta/articles/1cd649ba910339</link><guid isPermaLink="true">https://zenn.dev/fuku_senta/articles/1cd649ba910339</guid><pubDate>Tue, 20 Aug 2024 04:48:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lLINEqnD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ubuntu23.10%25E3%2581%25ABMySQL%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2582%2592%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2597%25E3%2582%2588%25E3%2581%2586%25E3%2581%25A8%25E3%2581%2597%25E3%2581%259F%25E3%2582%2589root%25E3%2583%2591%25E3%2582%25B9%25E3%2583%25AF%25E3%2583%25BC%25E3%2583%2589%25E3%2582%2592%25E8%2581%259E%25E3%2581%258B%25E3%2582%258C%25E3%2581%259A%25E3%2581%25AB%25E7%2584%25A6%25E3%2581%25A3%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:fuku_senta%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUl0YnZta0pVX2h1R0hESlEyU0k5T04zVWxaUFAza3haeG43dVo1VG1XWlg9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>fuku_senta</dc:creator></item><item><title><![CDATA[Ubuntu22.04 HDMIの出力がおかしくなった時の解決策]]></title><description><![CDATA[
+ 概要
+今朝、Ubuntu 22.04で作業を始めようとしたところ、HDMI出力に問題が発生しました。HDMIは正常に認識されていましたが、どのディスプレイに接続しても同じ不具合が生じたため、ドライバを再インストールしたところ、無事に解決しました。過去に同じ症状が発生した際は、対処方法がわからずUbuntuを再インストールしてしまったので、今回はその備忘録として記録します。
+
+
+ 解決策
+参考にした手順はこちらの記事です。
+https://qiita.com/kannkyo/items/c506437704cd62b31077
+
+ その後
+上記の手順に従いドライバを再インストールし、再...]]></description><link>https://zenn.dev/robohase01/articles/241b235480f509</link><guid isPermaLink="true">https://zenn.dev/robohase01/articles/241b235480f509</guid><pubDate>Mon, 19 Aug 2024 00:24:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_G_ydNxg--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ubuntu22.04%2520HDMI%25E3%2581%25AE%25E5%2587%25BA%25E5%258A%259B%25E3%2581%258C%25E3%2581%258A%25E3%2581%258B%25E3%2581%2597%25E3%2581%258F%25E3%2581%25AA%25E3%2581%25A3%25E3%2581%259F%25E6%2599%2582%25E3%2581%25AE%25E8%25A7%25A3%25E6%25B1%25BA%25E7%25AD%2596%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hasegawa%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVmMjc2MmI1MmQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hasegawa</dc:creator></item><item><title><![CDATA[Ubuntuの000-default.confの中身を見てみた]]></title><description><![CDATA[
+ 000-default.confとは
+000-default.confファイルは、Apacheサーバーにおけるデフォルトの仮想ホスト（VirtualHost）の設定を提供するファイルです。このファイルは/etc/apache2/sites-available/ディレクトリに存在し、サーバーの初期設定で利用されます。サーバーを運用する上で、まずはこのファイルの内容を理解することは大切です。
+※VirtualHost・・・1つのサーバーで複数のドメインやサイトをホスティングするための仕組みです。
+
+ 000-default.confの中身
+
+
+ServerAdmin： サーバー管理者のメ...]]></description><link>https://zenn.dev/snake12379/articles/192bf23e96bef2</link><guid isPermaLink="true">https://zenn.dev/snake12379/articles/192bf23e96bef2</guid><pubDate>Sun, 18 Aug 2024 23:39:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--VAHCS72v--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ubuntu%25E3%2581%25AE000-default.conf%25E3%2581%25AE%25E4%25B8%25AD%25E8%25BA%25AB%25E3%2582%2592%25E8%25A6%258B%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:wataru%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2gweVJaYUR2UVp5bW9XbFZ2T3o0X0ZGZ0JrSnhFM0xBb2lGVUl3PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>wataru</dc:creator></item><item><title><![CDATA[WSL2 環境構築の手順]]></title><description><![CDATA[
+ WSL2 (Windows Subsystem for Linux 2)
+WindowsのLinux仮想マシン (Ubuntu)。
+VirtualBoxより軽量、起動も高速。
+
+ 1. WSL2のインストール
+
+ 2-1. Windows Terminalをインストール
+まずは使いやすいターミナルを準備。
+Microsoft Storeから、Microsoft公式のWindows Terminal のアプリをインストール。
+Win + X のショートカットキーからターミナルを選択で開く。
+
+
+
+
+
+
+
+
+
+ 2-2. WSL2のインストール
+
+
+インストール
+$ wsl --inst...]]></description><link>https://zenn.dev/tatsujin/articles/6938b76c084e4d</link><guid isPermaLink="true">https://zenn.dev/tatsujin/articles/6938b76c084e4d</guid><pubDate>Sun, 18 Aug 2024 12:15:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0oRdrIHv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:WSL2%2520%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%25AE%25E6%2589%258B%25E9%25A0%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tatsujin%2520craft%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS1BKcnZWYWhYWm9KT2ZSOTc4VW95Y296cnJpNFE4Rk9IcDZQYzgzVE5rOHBSd3FrRT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tatsujin craft</dc:creator></item><item><title><![CDATA[スワップファイルのサイズを変更する]]></title><description><![CDATA[
+ この記事は
+Linux上で一度作成したスワップファイルのサイズを後から変更する方法です。Ubuntu 24.04の手順を説明します。
+以下のように/swapfileというサイズ1Gのスワップファイルが割り当てられている状態で、スワップファイルのサイズを2Gに拡張します。
+$ sudo swapon -s
+Filename    Type  Size     Used    Priority
+/swapfile   file  1048572  497664  -2
+
+ やり方
+
+ メモリーの使用状況を確認する
+スワップファイルのサイズを変更するためには、一旦スワップファイルの登録を解...]]></description><link>https://zenn.dev/haru_iida/articles/change_swapfile_size</link><guid isPermaLink="true">https://zenn.dev/haru_iida/articles/change_swapfile_size</guid><pubDate>Fri, 16 Aug 2024 15:11:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jxfGE5pc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B9%25E3%2583%25AF%25E3%2583%2583%25E3%2583%2597%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2581%25AE%25E3%2582%25B5%25E3%2582%25A4%25E3%2582%25BA%25E3%2582%2592%25E5%25A4%2589%25E6%259B%25B4%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:haru_iida%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2g1dnZCTVV6aGszeVZpSEVxbmdKQ0tsM0lIUmczR2lKX19SN25Dc2RNPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>haru_iida</dc:creator></item><item><title><![CDATA[ubuntu×Laravel sail×Dockerで環境構築]]></title><description><![CDATA[
+ はじめに
+こんにちは、ばななです。
+laravel sailを使った開発環境構築で苦戦したので、手順を備忘録としてまとめます。
+
+ 概要
+
+ubuntu環境にLaravelプロジェクトを作成する手順
+githubからクローンした時の操作手順
+
+
+ 前提となる環境情報
+windows11 home
+WSL2
+ubuntu 22.04.3LTS
+PHP 8.2
+laravel 10.x
+
+ ubuntu環境にLaravelプロジェクトを作成
+
+ 依存関係の導入
+
+ PHPのインストール
+sudo apt update
+sudo apt install php-cli
+
+ PHP拡張機能の...]]></description><link>https://zenn.dev/akiduki/articles/dc0794e684fef9</link><guid isPermaLink="true">https://zenn.dev/akiduki/articles/dc0794e684fef9</guid><pubDate>Fri, 16 Aug 2024 03:45:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qn82R2ah--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ubuntu%25C3%2597Laravel%2520sail%25C3%2597Docker%25E3%2581%25A7%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:BABABANANA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FGZFp1Y29kUnVpRGxYYTJjUnRKd0E3dTVjQkg4T010eDVKb0o2WE84YnVXPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>BABABANANA</dc:creator></item><item><title><![CDATA[Ubuntu 24.04で、CapsLockキーをHyperキーとして動作させる - tweaks/xkb]]></title><description><![CDATA[
+ Ubuntu 24.04で、CapsLockキーをHyperキーとして動作させる
+
+ ※自分用メモです。
+
+ 環境情報
+
+ OS
+Ubuntu 24.04 LTS
+
+ 導入パッケージ
+
+gnome-tweaks
+
+
+ 設定
+gnome-tweaksのインストール
+apt install gnome-tweaks -y
+Tweaksから、CapsLockを追加のHyperキーにする
+キーボード - 追加のレイアウトオプション - Caps Lock behavior
+
+xkbのCapsLock設定ファイルを変更
+vi /usr/share/X11/xkb/symbols/capsloc...]]></description><link>https://zenn.dev/kuyt_ayn/articles/abb9c7c390dcd0</link><guid isPermaLink="true">https://zenn.dev/kuyt_ayn/articles/abb9c7c390dcd0</guid><pubDate>Thu, 15 Aug 2024 04:48:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--RkY8G3JL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ubuntu%252024.04%25E3%2581%25A7%25E3%2580%2581CapsLock%25E3%2582%25AD%25E3%2583%25BC%25E3%2582%2592Hyper%25E3%2582%25AD%25E3%2583%25BC%25E3%2581%25A8%25E3%2581%2597%25E3%2581%25A6%25E5%258B%2595%25E4%25BD%259C%25E3%2581%2595%25E3%2581%259B%25E3%2582%258B%2520-%2520tweaks%252Fxkb%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kuyt%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS3VITzYtV1NGX3U1ZVNzbVhDRHAyODdwVHFxaHI1QUdkN1pGNXhfWm5LQ293c2VVWWI9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kuyt</dc:creator></item><item><title><![CDATA[Linux 使いになりたい人向けの Intel N100 ミニ PC で構築する開発環境（１６）- Ubuntu]]></title><description><![CDATA[
+ はじめに
+!
+ここでは手軽に Windows と Ubuntu のデュアルブートをする方法について説明をしています。ただし、そのために、物理的にディスクを取り外すようにしています。このとき、ミスがあると、ディスクにダメージを与える場合があります。Windows が使えなくなると困る場合は回復作業ができるように、十分な対策をしてから作業するようにしてください。リカバリー用パーティションを含めたバックアップ、回復起動ディスクの用意などをしてあれば、復旧できるはずです。
+
+これは、Linux 使いになりたい人向けに Intel N100 ミニ PC を使って開発環境を構築する方法を解説する...]]></description><link>https://zenn.dev/hiro345/articles/n100_16_20240814</link><guid isPermaLink="true">https://zenn.dev/hiro345/articles/n100_16_20240814</guid><pubDate>Wed, 14 Aug 2024 01:11:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--c9VTMpaL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%2520%25E4%25BD%25BF%25E3%2581%2584%25E3%2581%25AB%25E3%2581%25AA%25E3%2582%258A%25E3%2581%259F%25E3%2581%2584%25E4%25BA%25BA%25E5%2590%2591%25E3%2581%2591%25E3%2581%25AE%2520Intel%2520N100%2520%25E3%2583%259F%25E3%2583%258B%2520PC%2520%25E3%2581%25A7%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2599%25E3%2582%258B%25E9%2596%258B%25E7%2599%25BA%25E7%2592%25B0%25E5%25A2%2583%25EF%25BC%2588%25EF%25BC%2591%25EF%25BC%2596%25EF%25BC%2589-%2520Ubuntu%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Hiroshi%2520Koyama%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2k5ZzdjLS0xTFk0S2k0LWw3dVFSSFZRdEdQcWZHYTlibVRJYUtFM0E9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Hiroshi Koyama</dc:creator></item><item><title><![CDATA[個人的Ubuntuセットアップメモ]]></title><description><![CDATA[Ubuntu 22.04 Desktop版のセットアップメモ。
+本当はUbuntu 24.04でセットアップしたかったが、WINE安定版がリリースされていないことと、肝心のインストーラがバグっている雰囲気なので導入見送り。
+
+ bcachedを有効化したインストール
+産廃PC＋低容量SSD＋産廃SSHDの組み合わせなのでbcachedを利用してSSDをライトバックキャッシュにする。
+https://kloppenborg.net/blog/installing-ubuntu-20-04-with-bcache/
+セットアップ後はライトスルーなので下記のコマンドでライトバックキャッシュを有...]]></description><link>https://zenn.dev/buttyo_kuny/articles/89ff75e9ad4ac4</link><guid isPermaLink="true">https://zenn.dev/buttyo_kuny/articles/89ff75e9ad4ac4</guid><pubDate>Tue, 13 Aug 2024 15:02:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--sOpnO90t--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2580%258B%25E4%25BA%25BA%25E7%259A%2584Ubuntu%25E3%2582%25BB%25E3%2583%2583%25E3%2583%2588%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:3604k%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JmNTBjZWYyNWYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>3604k</dc:creator></item></channel></rss>
