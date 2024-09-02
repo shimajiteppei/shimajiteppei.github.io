@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「TypeScript」のフィード]]></title><description><![CDATA[Zennのトピック「TypeScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/typescript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/f13e758fdb.png</url><title>Zennの「TypeScript」のフィード</title><link>https://zenn.dev/topics/typescript</link></image><generator>zenn.dev</generator><lastBuildDate>Mon, 02 Sep 2024 01:17:20 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/typescript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[5分で分かる！Next.jsでYAMLファイルを読み込む実践的アプローチ]]></title><description><![CDATA[
+ 1. はじめに
+この記事では、Next.jsアプリケーションでYAMLファイルを読み込み、JavaScriptオブジェクトとして取得する方法について詳しく解説します。具体的には以下の内容を学べます。
+
+Next.jsでYAMLファイルを読み込む方法
+fs、yaml、pathモジュールを使用したファイル操作
+非同期処理を用いたデータ取得の実装
+型安全なデータ操作（TypeScriptの活用）
+プログラミング言語データの効率的な処理方法
+
+
+ 2. Next.jsでYAMLファイルを読み込むコード例
+
+ 2.1 YAMLファイルの内容
+まず、扱うYAMLファイルの内容を見てみましょう。
+...]]></description><link>https://zenn.dev/yuki_fujisawa/articles/dc82fbb0a1f117</link><guid isPermaLink="true">https://zenn.dev/yuki_fujisawa/articles/dc82fbb0a1f117</guid><pubDate>Mon, 02 Sep 2024 00:03:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ZqiC6YLP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:5%25E5%2588%2586%25E3%2581%25A7%25E5%2588%2586%25E3%2581%258B%25E3%2582%258B%25EF%25BC%2581Next.js%25E3%2581%25A7YAML%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2592%25E8%25AA%25AD%25E3%2581%25BF%25E8%25BE%25BC%25E3%2582%2580%25E5%25AE%259F%25E8%25B7%25B5%25E7%259A%2584%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E8%2597%25A4%25E6%25BE%25A4%25E5%258B%2587%25E6%25A8%25B9%2528Yuki%2520Fujisawa%2529%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2YyOWNiMTQyZjcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>藤澤勇樹(Yuki Fujisawa)</dc:creator></item><item><title><![CDATA[【Next.js】備忘録 - part.03 ~認証画面UIの実装~]]></title><description><![CDATA[
+ 前提条件
+この記事はプログラミング初学者、Next.js初学者に向けた記事になります。
+本記事は、part.02の続きです。まだ、見ていない方は、以下から参照してください。
+https://zenn.dev/ko_hei/articles/e7fc4daecb6618
+
+ この記事で学ぶこと
+本記事は、認証系画面のログイン、新規登録の画面実装をしたいと思います。
+
+新規登録画面の実装
+ログイン画面の実装
+
+
+ 1. 新規登録画面の実装
+ユーザの新規登録画面は、以下の要素が必要です。
+
+ユーザ名の入力フォーム
+メールアドレスの入力フォーム
+パスワードの入力フォーム
+新規登録ボタン
+
+ま...]]></description><link>https://zenn.dev/ko_hei/articles/c0f9dd61ac9eb9</link><guid isPermaLink="true">https://zenn.dev/ko_hei/articles/c0f9dd61ac9eb9</guid><pubDate>Sun, 01 Sep 2024 23:53:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--s5hV2f7e--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Next.js%25E3%2580%2591%25E5%2582%2599%25E5%25BF%2598%25E9%258C%25B2%2520-%2520part.03%2520%7E%25E8%25AA%258D%25E8%25A8%25BC%25E7%2594%25BB%25E9%259D%25A2UI%25E3%2581%25AE%25E5%25AE%259F%25E8%25A3%2585%7E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yappi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2Rhcmsvay5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yappi</dc:creator></item><item><title><![CDATA[signiaを使ったワークアラウンドの紹介]]></title><description><![CDATA[
+ はじめに
+Signiaライブラリは状態管理ライブラリの一つであり、legend-stateなどと同じ種類のものとなります。この記事では、状態管理における情報設計の観点に着目して、Signiaライブラリを使った簡単なワークアラウンドを紹介します。状態管理をクラス化できるアプローチを公式ドキュメントで訴求している部分について展開できればと存じます。
+
+ ターゲット読者
+
+Signiaやリアクティブプログラミングに興味があるフロントエンドエンジニア。
+
+ Signiaの基本概念
+
+Signiaは、TypeScript向けの最小限で高速かつスケーラブルなシグナルライブラリです。特定のフレーム...]]></description><link>https://zenn.dev/hitotsu_blog/articles/f58ecf38dde5dd</link><guid isPermaLink="true">https://zenn.dev/hitotsu_blog/articles/f58ecf38dde5dd</guid><pubDate>Sun, 01 Sep 2024 15:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1u43FPLz--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:signia%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%259F%25E3%2583%25AF%25E3%2583%25BC%25E3%2582%25AF%25E3%2582%25A2%25E3%2583%25A9%25E3%2582%25A6%25E3%2583%25B3%25E3%2583%2589%25E3%2581%25AE%25E7%25B4%25B9%25E4%25BB%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:nap5%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY0NjczMDg4NjEuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:HITOTSU%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%2520%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzllNDJkZTZkNGQuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nap5</dc:creator></item><item><title><![CDATA[Bitwardenの実装から学ぶE2EE]]></title><description><![CDATA[
+ この文章はなに?
+本文章は、パスワードマネージャーであるBitwardenが公開しているソースコードを読み、そこでE2EE(End-to-end encryption)がどのように実装されているかについて、私が理解した内容をまとめたものです。
+「E2EEをぼんやり理解してるが、どのように実装されているのかはわからない」という方を主な対象としています。
+E2EEに対する私個人の課題感として、インターネット等から得られる説明が比較的抽象的であり、実装レベルでの理解が難しいというものがあります。
+そこで私自身、そして同じ課題感を持つ方に向けて、E2EEを実践しているアプリケーションの1つで...]]></description><link>https://zenn.dev/murakmii/articles/09fbbcce6ff30b</link><guid isPermaLink="true">https://zenn.dev/murakmii/articles/09fbbcce6ff30b</guid><pubDate>Sun, 01 Sep 2024 11:55:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--HAYp8hJJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Bitwarden%25E3%2581%25AE%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%258B%25E3%2582%2589%25E5%25AD%25A6%25E3%2581%25B6E2EE%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:murakmii%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSU9qbVdjbURHbXFLblNTd0YxbUZjRFBsWnVOZzFiakdVazE4cEM3QUVXWnpUaHJvejE9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>murakmii</dc:creator></item><item><title><![CDATA[Nuxt Auth Utils でサーバーサイドの認証を（OAuth・マジックリンク・ワンタイムパスワード）]]></title><description><![CDATA[Nuxt 3 では Universal Rendering (SSR) によるアプリケーションの開発が難なく可能です。
+Nitro というサーバーサイドのフレームワークにより、Nuxt 3 はサーバー側の処理も簡潔に記述できるようになっています。
+Nuxt Auth Utils はそんな Nuxt の特徴を生かした、SSR のアプリケーションに OAuth 認証を実装できる Nuxt モジュールです。
+執筆時点で GitHub, Google, Discord など 17 の OAuth プロバイダーに対応していますので、通常用途では充分だと思います。
+https://github.co...]]></description><link>https://zenn.dev/comm_vue_nuxt/articles/nuxt-auth-utils-module</link><guid isPermaLink="true">https://zenn.dev/comm_vue_nuxt/articles/nuxt-auth-utils-module</guid><pubDate>Sun, 01 Sep 2024 07:57:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--JpEYALRK--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Nuxt%2520Auth%2520Utils%2520%25E3%2581%25A7%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2582%25B5%25E3%2582%25A4%25E3%2583%2589%25E3%2581%25AE%25E8%25AA%258D%25E8%25A8%25BC%25E3%2582%2592%25EF%25BC%2588OAuth%25E3%2583%25BB%25E3%2583%259E%25E3%2582%25B8%25E3%2583%2583%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%25B3%25E3%2582%25AF%25E3%2583%25BB%25E3%2583%25AF%25E3%2583%25B3%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25A0%25E3%2583%2591%25E3%2582%25B9%25E3%2583%25AF%25E3%2583%25BC%25E3%2583%2589%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:coedo%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU5MTZlOWFlNjguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Vue%25E3%2583%25BBNuxt%2520%25E6%2583%2585%25E5%25A0%25B1%25E3%2581%258C%25E9%259B%2586%25E3%2581%25BE%25E3%2582%258B%25E5%25BA%2583%25E5%25A0%25B4%2520%252F%2520P...%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2c4STBvUEtWYXpIUGdWdUFwVFNiaFdXUGVZd0l2Rkd3QlV0alAwaHc9czI1MC1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>coedo</dc:creator></item><item><title><![CDATA[mysqlを採用したら会社が潰れるという記事の所感]]></title><description><![CDATA[twitterでツラツラと思ったことを書いていたが纏めてみた。
+スマホだど見づらい。長い。
+あとで多少表現や内容をわかりやすくもっとええ感じに直すかも知らん。
+
+ 結論
+ムカつくなら放っておけ。わざわざ「ボクが好きな技術を批判したらから許せない!」と意思表明を
+わざわざ本人にしに行くな。
+人が寄ってたかって自分と違う意見や表現のものを悪役に仕立て上げるな。
+どうしても、変えて欲しければ後述の「お願い」をしろ。
+
+ 経緯で思った所感
+筆者が該当する記事を削除して、アカウントを消したらしく非常に残念な結果である。 -&gt; 復帰して表現ちょっと変えたっぽい。
+javascriptやtype...]]></description><link>https://zenn.dev/oto/articles/71b7997c22a7c0</link><guid isPermaLink="true">https://zenn.dev/oto/articles/71b7997c22a7c0</guid><pubDate>Sun, 01 Sep 2024 06:08:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ewJDwYTF--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:mysql%25E3%2582%2592%25E6%258E%25A1%25E7%2594%25A8%25E3%2581%2597%25E3%2581%259F%25E3%2582%2589%25E4%25BC%259A%25E7%25A4%25BE%25E3%2581%258C%25E6%25BD%25B0%25E3%2582%258C%25E3%2582%258B%25E3%2581%25A8%25E3%2581%2584%25E3%2581%2586%25E8%25A8%2598%25E4%25BA%258B%25E3%2581%25AE%25E6%2589%2580%25E6%2584%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Otogawa%2520Katsutoshi...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRiZTMxMWQ2YmIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Otogawa Katsutoshi(oto)</dc:creator></item><item><title><![CDATA[TanStack Routerでサクッと始める型安全ルーティング]]></title><description><![CDATA[
+ はじめに
+こんにちは。calloc134 です。
+自分は普段 React を利用してフロントエンドの開発をしています。
+SPA のルーティングを実装する上で、TanStack Router を利用することが多いです。
+この使い方について、簡単にまとまったドキュメントが思ったより少なく感じたため、まとめていきたいと思います。
+
+ TanStack Router とは
+TanStack Router は、React のルーティングを行うためのライブラリです。
+当初は React Location として、TanStack の Tanner Linsley 氏によって開発されました。
+ht...]]></description><link>https://zenn.dev/calloc134/articles/6680b272a2c2c5</link><guid isPermaLink="true">https://zenn.dev/calloc134/articles/6680b272a2c2c5</guid><pubDate>Sun, 01 Sep 2024 04:16:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--MRMHtp3E--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TanStack%2520Router%25E3%2581%25A7%25E3%2582%25B5%25E3%2582%25AF%25E3%2583%2583%25E3%2581%25A8%25E5%25A7%258B%25E3%2582%2581%25E3%2582%258B%25E5%259E%258B%25E5%25AE%2589%25E5%2585%25A8%25E3%2583%25AB%25E3%2583%25BC%25E3%2583%2586%25E3%2582%25A3%25E3%2583%25B3%25E3%2582%25B0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:calloc134%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM0MGU4NGU1YjEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>calloc134</dc:creator></item><item><title><![CDATA[neverthrowのsafeTry解体新書]]></title><description><![CDATA[前回の記事では、safeTryの概要と解決している課題についてお話しました。今回は、さらに掘り下げてsafeTryの内部実装を見ていきたいと思います。
+
+ safeTryのおさらい
+前回使ったコード例を再掲します。
+function myFunc(): Result&lt;number, string&gt; {
+    return safeTry(function*() {
+        const value1 = yield* mayFail1()
+                .mapErr(e =&gt; `aborted by an error from 1st fun...]]></description><link>https://zenn.dev/mshaka/articles/843d8087fca7f8</link><guid isPermaLink="true">https://zenn.dev/mshaka/articles/843d8087fca7f8</guid><pubDate>Sun, 01 Sep 2024 03:03:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---ibu__0a--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:neverthrow%25E3%2581%25AEsafeTry%25E8%25A7%25A3%25E4%25BD%2593%25E6%2596%25B0%25E6%259B%25B8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25BB%25E3%2581%25A8%25E3%2581%2591%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q2MGMxZmFkMjguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ほとけ</dc:creator></item><item><title><![CDATA[ReaSemi(Vol.5,6)【2週連続企画カウントアップorクイズゲーム開発】]]></title><description><![CDATA[
+ 企画のきっかけ
+りあゼミ始動して１ヶ月経った頃、早くも２週間お休み疑惑が急浮上しました…
+ぽっかり空いてしまったこの２週間に、何か皆さんが楽しめる企画をしたいなーと思い立ち
+chatGPT先生に相談したのがきっかけでした笑
+React初学者が初めて開発するのに適したテーマということでカウントアップゲーム、
+そして先輩方には少し物足りないかも、カウントアップ作ったことある人のためにクイズゲーム
+の２種類にテーマを絞って制作にチャレンジする２週企画を提案しました🌻
+
+ 企画１週目（りあゼミ5回目）
+以前の仕事の担当で、創業塾の講師の方が話していた考え方を取り入れたいと思っていたし、今すぐ...]]></description><link>https://zenn.dev/reasemi/articles/b4b3cb32e10657</link><guid isPermaLink="true">https://zenn.dev/reasemi/articles/b4b3cb32e10657</guid><pubDate>Sat, 31 Aug 2024 21:29:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qQmmy_Mt--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ReaSemi%2528Vol.5%252C6%2529%25E3%2580%25902%25E9%2580%25B1%25E9%2580%25A3%25E7%25B6%259A%25E4%25BC%2581%25E7%2594%25BB%25E3%2582%25AB%25E3%2582%25A6%25E3%2583%25B3%25E3%2583%2588%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597or%25E3%2582%25AF%25E3%2582%25A4%25E3%2582%25BA%25E3%2582%25B2%25E3%2583%25BC%25E3%2583%25A0%25E9%2596%258B%25E7%2599%25BA%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Mari%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NlNDM5OTIyYTYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%258A%25E3%2581%2582%25E3%2582%25BC%25E3%2583%259F%25EF%25BC%2581%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y2YzE3NTVhYjMuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Mari</dc:creator></item><item><title><![CDATA[Tauriで「デスクトップディレクトリ構成可視化ツール」を試作した話]]></title><description><![CDATA[[概要]
+デスクトップ可視化と聞いて違和感を感じるかもしれない。(デスクトップは目に見えているから)
+ただ最近BIツールをで触ってみて意外とデフォルトでは必要情報が可視化されていないように感じた。
+なので自分用にとりあえずtreeコマンドで出る情報を可視化できるようなアプリを作ろうと思った。
+[URL]
+https://github.com/nkwork9999/tree_viz/tree/vizonly
+※色々将来的に機能を追加予定ではあるが、現在はディレクトリをツリー状に表示し、クリックすると開くだけとなっています。(スライダーは他機能の名残)
+
+[目的]
+個人アプリケーションを作成...]]></description><link>https://zenn.dev/amana/articles/203d6533629704</link><guid isPermaLink="true">https://zenn.dev/amana/articles/203d6533629704</guid><pubDate>Sat, 31 Aug 2024 18:42:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--WEIWp6h9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Tauri%25E3%2581%25A7%25E3%2580%258C%25E3%2583%2587%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%2588%25E3%2583%2583%25E3%2583%2597%25E3%2583%2587%25E3%2582%25A3%25E3%2583%25AC%25E3%2582%25AF%25E3%2583%2588%25E3%2583%25AA%25E6%25A7%258B%25E6%2588%2590%25E5%258F%25AF%25E8%25A6%2596%25E5%258C%2596%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%25E3%2580%258D%25E3%2582%2592%25E8%25A9%25A6%25E4%25BD%259C%25E3%2581%2597%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nk_work%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSXl5YnE2MF9NVW5SaXNqUm15RGs2YVpFcmxQM1pKYlhQOER3aWI4NXdqPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nk_work</dc:creator></item><item><title><![CDATA[TypeScriptの型を使って設計をコードで表現する、宣言的バックエンド実装具体例]]></title><description><![CDATA[こんにちは。
+株式会社CHILLNNという京都のスタートアップにてCTOを担っております永田と申します。
+弊社では、バックエンドをtypescriptで実装しており、「宣言的プログラミング」と「関数型ドメインモデリング」のパラダイムを導入しています。
+この構成は、一休CTOである伊藤さんによる宣言的バックエンド開発の発信に大きく影響を受けており、よく言及されている「関数型ドメインモデリング」も拝読しました。
+どれも非常に興味深く拝見させていただいたのですが、どうしても概念として理解することと、実装に落とし込むことの間には大きなギャップがありました。多くの試行錯誤を繰り返す中で、かなりこれ...]]></description><link>https://zenn.dev/chillnn_tech/articles/implementation-of-declarative-backend</link><guid isPermaLink="true">https://zenn.dev/chillnn_tech/articles/implementation-of-declarative-backend</guid><pubDate>Sat, 31 Aug 2024 17:03:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lcLzIqs_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%25E3%2581%25AE%25E5%259E%258B%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E8%25A8%25AD%25E8%25A8%2588%25E3%2582%2592%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2581%25A7%25E8%25A1%25A8%25E7%258F%25BE%25E3%2581%2599%25E3%2582%258B%25E3%2580%2581%25E5%25AE%25A3%25E8%25A8%2580%25E7%259A%2584%25E3%2583%2590%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2589%25E5%25AE%259F%25E8%25A3%2585%25E5%2585%25B7%25E4%25BD%2593%25E4%25BE%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:ryoNagata001%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JmODdhZGU3ZjcuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:CHILLNN%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE5NmJkNzJjZTMuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ryoNagata001</dc:creator></item><item><title><![CDATA[SSL/TLSの限界を補うハイブリッド暗号化]]></title><description><![CDATA[!
+間違ってる情報等あれば、コメントにお願いします。
+
+
+ ハイブリッド暗号化とは
+AES暗号（共通鍵暗号方式）と RSA暗号（公開鍵暗号方式）の両方を組み合わせて使用する暗号化手法です。
+
+ AES暗号化（Advanced Encryption Standard）
+同じ鍵(共通鍵)を使ってデータの暗号化と復号を行う。
+
+
+メリット
+この方法は、暗号化と復号が高速であるため、大量のデータを効率的に処理するのに適している。
+
+
+デメリット
+鍵の共有に関するセキュリティリスクが伴う。
+(鍵が漏洩すると、暗号化されたデータも容易に解読されてしまう。)
+
+
+
+ RSA暗号化（Rivest-Sha...]]></description><link>https://zenn.dev/localer/articles/7e441bdf585280</link><guid isPermaLink="true">https://zenn.dev/localer/articles/7e441bdf585280</guid><pubDate>Sat, 31 Aug 2024 15:50:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--SzLeTwYc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:SSL%252FTLS%25E3%2581%25AE%25E9%2599%2590%25E7%2595%258C%25E3%2582%2592%25E8%25A3%259C%25E3%2581%2586%25E3%2583%258F%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25AA%25E3%2583%2583%25E3%2583%2589%25E6%259A%2597%25E5%258F%25B7%25E5%258C%2596%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258F%25E3%2582%2582%25E3%2582%258A%25E3%2581%25AB%25E3%2581%258F%25E3%2582%2582%25E3%2581%25A3%25E3%2581%259F%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25A6%25E3%2583%2589%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2593%25E3%2582%25B9lo...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RjZWUxZjI0ZjYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>くもりにくもったクラウドサービスlocaler</dc:creator></item><item><title><![CDATA[node:test で jsdoc `@example` に記述したコードを使ってテストする]]></title><description><![CDATA[
+ はじめに
+私は vitest を使ってテストコードを実装することが多い。vitest は vite と統合されていることで変換処理に vite と同じプラグインが使えるため、開発時に vite を使っていれば追加で必要な設定が少ないという利点があるのだが、私は In-Source Testing という機能が気に入っていることが大きな理由だ。
+これは他の言語でもよくある、実装コードと同じファイル内にテストが記述できるというものだ。
+これにはいくつか利点があるが、その中でも、テストを実装の近くに置くことでテストが実装の説明するという役割を強めるという点がある。
+このテストが実装の説明す...]]></description><link>https://zenn.dev/sterashima78/articles/957e093a566f3b</link><guid isPermaLink="true">https://zenn.dev/sterashima78/articles/957e093a566f3b</guid><pubDate>Sat, 31 Aug 2024 13:59:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--00KuecrU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:node%253Atest%2520%25E3%2581%25A7%2520jsdoc%2520%2560%2540example%2560%2520%25E3%2581%25AB%25E8%25A8%2598%25E8%25BF%25B0%25E3%2581%2597%25E3%2581%259F%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:sterashima78%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdmZTM3ODhmMTUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sterashima78</dc:creator></item><item><title><![CDATA[【Next.js】NextAuth.js、tRPC、Prismaを用いた認証システムの構築]]></title><description><![CDATA[
+ はじめに
+現代のWeb開発において、フロントエンドやバックエンドでTypeScriptを活用し、型安全なアプリケーションを構築することが求められるようになっています。その中で、注目を集めているのが「T3 Stack」という技術スタックです。効率的に型安全なアプリケーションを構築できることから、T3 Stackでの開発を推進しています。
+T3 Stackとは
+T3 Stackとはsimplicity（簡潔さ）、modularity（モジュール性）、full-stack type safety（フルスタックの型安全）を追求した思想に焦点を当てています。
+そしてそれらを実現するために以下6...]]></description><link>https://zenn.dev/kiwichan101kg/articles/2f39ff1fb57009</link><guid isPermaLink="true">https://zenn.dev/kiwichan101kg/articles/2f39ff1fb57009</guid><pubDate>Sat, 31 Aug 2024 13:14:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jPVA6t68--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Next.js%25E3%2580%2591NextAuth.js%25E3%2580%2581tRPC%25E3%2580%2581Prisma%25E3%2582%2592%25E7%2594%25A8%25E3%2581%2584%25E3%2581%259F%25E8%25AA%258D%25E8%25A8%25BC%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%25E3%2581%25AE%25E6%25A7%258B%25E7%25AF%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kiwichan%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZlYTA3YzU3YzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kiwichan</dc:creator></item><item><title><![CDATA[技術選定の成功 2年間を振り返る TypeScript,Hono,Nest.js,React,GraphQL]]></title><description><![CDATA[
+ 技術選定に失敗はない
+技術選定に失敗はありません。
+仮説を立て、検証し、結果の分析からNext Actionを考える。検証の結果がどうであれ、それは過程に過ぎません。
+机上の空論だけで全てを理解できるほど、我々人間は賢くないのです。（注意: これは人類全体を誹謗中傷する意味ではありません。）
+この記事では、この２年間で行った技術選定の成功例をその理由と共に紹介していこうと思います。
+申し訳遅れましたが、私、YadaYadaKonnanYadaといいます。私は今回初めて記事を書いたので、どうぞお手柔らかに。
+Twitterエンジニア垢作りました。エンジニアのお友達がいません。  @un...]]></description><link>https://zenn.dev/uncode_jp/articles/4d2bd36aa03fc8</link><guid isPermaLink="true">https://zenn.dev/uncode_jp/articles/4d2bd36aa03fc8</guid><pubDate>Sat, 31 Aug 2024 12:45:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--PJKlddZi--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%258A%2580%25E8%25A1%2593%25E9%2581%25B8%25E5%25AE%259A%25E3%2581%25AE%25E6%2588%2590%25E5%258A%259F%25202%25E5%25B9%25B4%25E9%2596%2593%25E3%2582%2592%25E6%258C%25AF%25E3%2582%258A%25E8%25BF%2594%25E3%2582%258B%2520TypeScript%252CHono%252CNest.js%252CReact%252CGraphQL%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:YadaYadaKonnanYada%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSTRJWE95cllDY2szU2RtNHktZk45QlhBNDNBeVkzMm5IY1FVWC03WnZxbElOSD1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>YadaYadaKonnanYada</dc:creator></item><item><title><![CDATA[Remixは404ページで最大3つもログを出す]]></title><description><![CDATA[Remixのプロジェクトを作成した直後に、開発環境で404になるページにアクセスすると以下のログが出力されます。
+Error: No route matches URL "/foo" &lt;-- (1)
+    at getInternalRouterError (/home/ubuntu/playground/remix-404-error/node_modules/.pnpm/@remix-run+router@1.15.1/node_modules/@remix-run/router/dist/router.cjs.js:4501:59)
+    at Object.query ...]]></description><link>https://zenn.dev/mkizka/articles/0db9bc30e1f707</link><guid isPermaLink="true">https://zenn.dev/mkizka/articles/0db9bc30e1f707</guid><pubDate>Sat, 31 Aug 2024 10:58:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---0gHyspW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Remix%25E3%2581%25AF404%25E3%2583%259A%25E3%2583%25BC%25E3%2582%25B8%25E3%2581%25A7%25E6%259C%2580%25E5%25A4%25A73%25E3%2581%25A4%25E3%2582%2582%25E3%2583%25AD%25E3%2582%25B0%25E3%2582%2592%25E5%2587%25BA%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mkizka%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dmcTEtdFdzZUczQUFqVmw0dHhWb2xlM2dlY1JKVS1Bdm5WYWNEPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mkizka</dc:creator></item><item><title><![CDATA[【RN Update 2024年8月】React Native v0.75がリリース 他]]></title><description><![CDATA[
+ はじめに
+こんにちは！
+「愛犬との毎日を楽しく便利にするアプリ オトとりっぷ」でエンジニアしています、足立です！
+この記事では、今月の React Native に関連するニュースを紹介します。
+
+ 目次
+
+ライブラリ情報
+
+【React Native】 v0.75 がリリース
+【Expo】 v51 がリリース
+【React Native MMKV】V3 がリリース
+【@react-native-async-storage/async-storage】 v2 がリリース
+
+
+React Native 関連情報
+
+Skip v1.0 がリリース
+
+
+
+
+ ライブラリ情報
+
+ 【Reac...]]></description><link>https://zenn.dev/ototrip/articles/tech-update-202408-rn</link><guid isPermaLink="true">https://zenn.dev/ototrip/articles/tech-update-202408-rn</guid><pubDate>Sat, 31 Aug 2024 07:21:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--iJAtGsTh--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590RN%2520Update%25202024%25E5%25B9%25B48%25E6%259C%2588%25E3%2580%2591React%2520Native%2520v0.75%25E3%2581%258C%25E3%2583%25AA%25E3%2583%25AA%25E3%2583%25BC%25E3%2582%25B9%2520%25E4%25BB%2596%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2580%2590%25E5%2585%25AC%25E5%25BC%258F%25E3%2580%2591%25E3%2582%25AA%25E3%2583%2588%25E3%2581%25A8%25E3%2582%258A%25E3%2581%25A3%25E3%2581%25B7%2520-%2520%25E7%258A%25AC%25E5%25B0%2582%25E7%2594%25A8%25E3%2581%25AE%25E9%259F%25B3...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y3NGU5ZTJkYjAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>【公式】オトとりっぷ - 犬専用の音楽アプリ</dc:creator></item><item><title><![CDATA[SQLに対するバックエンドのアプローチ比較、そしてSafeQLの紹介]]></title><description><![CDATA[
+ はじめに
+こんにちは。calloc134 です。
+バックエンド開発において、DB にデータを保存することはよくあることです。
+DB と接続してデータのやり取りを行う必要がありますが、皆さんはどのようにしてデータを取得していますか？
+ORM やクエリビルダを利用したり、逆に SQL を記述してコード生成を行ったりと、様々な方法があります。
+今回はこれらのアプローチについて比較し、比較的斬新な方針を取っているものとして SafeQL を紹介します。
+https://safeql.dev/
+
+ 注意点
+ここでは、TypeScript のバックエンド開発と、そこで利用されるライブラリを前提と...]]></description><link>https://zenn.dev/calloc134/articles/4a8c1af0eb5aae</link><guid isPermaLink="true">https://zenn.dev/calloc134/articles/4a8c1af0eb5aae</guid><pubDate>Sat, 31 Aug 2024 06:48:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--eR23Knbr--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:SQL%25E3%2581%25AB%25E5%25AF%25BE%25E3%2581%2599%25E3%2582%258B%25E3%2583%2590%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2589%25E3%2581%25AE%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2581%25E6%25AF%2594%25E8%25BC%2583%25E3%2580%2581%25E3%2581%259D%25E3%2581%2597%25E3%2581%25A6SafeQL%25E3%2581%25AE%25E7%25B4%25B9%25E4%25BB%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:calloc134%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM0MGU4NGU1YjEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>calloc134</dc:creator></item><item><title><![CDATA[TypeScriptにおける as const とは]]></title><description><![CDATA[
+ as const とは？
+TypeScriptにおける アサーション（型強制） の一種。
+これを使用すると、オブジェクトや配列の各要素が 「リテラル型」 として扱われ、さらに全てのプロパティが readonly となる。
+
+ リテラル型とは
+「string」「number」などの一般的なデータ型ではなく、 特定の値（リテラル）そのものを型として扱う もの
+
+ a.文字列リテラル型
+Direction 型は string 型なのではなく、具体的に "left" or "right" しか受け付けないので、"up" を代入しようとするとエラーになる
+type Direction = "l...]]></description><link>https://zenn.dev/mami_inuzuka/articles/19197c554c1777</link><guid isPermaLink="true">https://zenn.dev/mami_inuzuka/articles/19197c554c1777</guid><pubDate>Sat, 31 Aug 2024 05:55:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--eDFtylvb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%25E3%2581%25AB%25E3%2581%258A%25E3%2581%2591%25E3%2582%258B%2520as%2520const%2520%25E3%2581%25A8%25E3%2581%25AF%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2584%25E3%2581%25AC%25E3%2581%25A5%25E3%2581%258B%25E3%2581%25BE%25E3%2581%25BF%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U5YjUxNTkwNTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>いぬづかまみ</dc:creator></item><item><title><![CDATA[イラストでそこそこわかる非同期処理、Promise]]></title><description><![CDATA[
+ 同期処理、非同期処理とは
+
+ 同期処理
+一つの作業を終えるまで次の作業を行わない。
+
+ 非同期処理
+1つの作業が終わるのを待たずに他の作業を始める。
+
+ 例え話
+友達（A君、B君）と一緒にケーキを作ることを考えます。作業としてはケーキを焼く、皿の準備をする、トッピングの準備をする、があるとします。
+同期処理の場合：A君がケーキを焼く。焼き終わってから、B君が皿の準備をはじめる。皿の準備が終わった後、自分はトッピングの準備をはじめる。
+
+非同期処理の場合：A君がケーキを焼き始める。それと同時に、B君が皿の準備を始める。自分はトッピングの準備を始める。
+
+上の説明から分かるように、非同期...]]></description><link>https://zenn.dev/maiamitorio/articles/ee68b6467234b3</link><guid isPermaLink="true">https://zenn.dev/maiamitorio/articles/ee68b6467234b3</guid><pubDate>Sat, 31 Aug 2024 00:56:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--J5YCdeV4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25A4%25E3%2583%25A9%25E3%2582%25B9%25E3%2583%2588%25E3%2581%25A7%25E3%2581%259D%25E3%2581%2593%25E3%2581%259D%25E3%2581%2593%25E3%2582%258F%25E3%2581%258B%25E3%2582%258B%25E9%259D%259E%25E5%2590%258C%25E6%259C%259F%25E5%2587%25A6%25E7%2590%2586%25E3%2580%2581Promise%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:maiamitorio%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzUwZmEwOTA0ZTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>maiamitorio</dc:creator></item></channel></rss>

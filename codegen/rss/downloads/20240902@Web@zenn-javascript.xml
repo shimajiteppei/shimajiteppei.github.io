@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「JavaScript」のフィード]]></title><description><![CDATA[Zennのトピック「JavaScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/javascript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/64acd76870.png</url><title>Zennの「JavaScript」のフィード</title><link>https://zenn.dev/topics/javascript</link></image><generator>zenn.dev</generator><lastBuildDate>Mon, 02 Sep 2024 03:10:27 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/javascript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[「UV Study : Vue.js LT会」へ登壇しました！]]></title><description><![CDATA[こんにちは！
+株式会社ココナラ フロントエンド開発グループのよしみんです。
+今回は、8/20（火）にオフラインで開催された「UV Study : Vue.js LT会」へ登壇しましたので、そのレポートです。
+
+ イベント概要
+イベント概要は以下の通りです。
+Vue.jsをテーマにしたLT会です。
+Vue.jsについて、各自興味のあるテーマを持ち寄ることで知識を深めていくことを目的としています。
+発表内容は Vue.jsにまつわる技術情報であればなんでも構いません。
+https://uniquevision.connpass.com/event/326790/
+ユニークビジョン株式会社様が...]]></description><link>https://zenn.dev/coconala/articles/18bb8efe06fb31</link><guid isPermaLink="true">https://zenn.dev/coconala/articles/18bb8efe06fb31</guid><pubDate>Mon, 02 Sep 2024 02:46:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ybTiVs6Z--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%258CUV%2520Study%2520%253A%2520Vue.js%2520LT%25E4%25BC%259A%25E3%2580%258D%25E3%2581%25B8%25E7%2599%25BB%25E5%25A3%2587%25E3%2581%2597%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2582%25B3%25E3%2582%25B3%25E3%2583%258A%25E3%2583%25A9%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRiNTMxNzlmY2QuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>株式会社ココナラ</dc:creator></item><item><title><![CDATA[V8エンジンの最適化戦略]]></title><description><![CDATA[
+ はじめに
+!
+修正や追加等はコメントまたはGitHubで編集リクエストをお待ちしております。
+
+V8エンジンの最適化戦略は、複数の特殊化されたコンパイラを組み合わせることで、JavaScriptの実行性能を極限まで高めています。主要な最適化コンパイラとその特徴は以下の通りです：
+
+Sparkplug：高速な非最適化コンパイラ
+Maglev：中間層の最適化コンパイラ
+TurboFan：高度な最適化コンパイラ
+
+これらのコンパイラについて、詳細に解説していきます。
+
+ Sparkplug：革新的な高速コンパイラ
+Sparkplugは、V8 v9.1で導入された非最適化コンパイラです。その...]]></description><link>https://zenn.dev/gmomedia/articles/63abf44e3082c9</link><guid isPermaLink="true">https://zenn.dev/gmomedia/articles/63abf44e3082c9</guid><pubDate>Mon, 02 Sep 2024 01:57:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--eDavXzkV--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:V8%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%25B3%25E3%2581%25AE%25E6%259C%2580%25E9%2581%25A9%25E5%258C%2596%25E6%2588%25A6%25E7%2595%25A5%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Riya%2520Amemiya%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzMzOGEzNzc5MTMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:GMO%25E3%2583%25A1%25E3%2583%2587%25E3%2582%25A3%25E3%2582%25A2%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzIyOTk0YWYxZDYuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Riya Amemiya</dc:creator></item><item><title><![CDATA[フロントエンドにおけるGraphQLクエリの流れと基本構成]]></title><description><![CDATA[GraphQLの操作を理解するためには、「クエリ」「リゾルバ」「データソース」「スキーマ」の役割を把握することが重要である。それぞれの要素がどのように連携してデータ取得までの流れを構成しているかをまとめた。フォルダ構成はこのページの下をご参照ください。
+
+ GraphQLクエリの基本形
+GraphQLクエリの基本形として、以下のようなクエリを使用して特定のユーザーの情報を取得する
+query GetUser($userId: ID!) {
+  user(id: $userId) {
+    name
+    email
+  }
+}
+
+ 1. GraphQLクエリが送信される
+まず、クライ...]]></description><link>https://zenn.dev/kkoisland/articles/cc314bcb5e60a9</link><guid isPermaLink="true">https://zenn.dev/kkoisland/articles/cc314bcb5e60a9</guid><pubDate>Sun, 01 Sep 2024 21:36:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Jityfq82--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2595%25E3%2583%25AD%25E3%2583%25B3%25E3%2583%2588%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2589%25E3%2581%25AB%25E3%2581%258A%25E3%2581%2591%25E3%2582%258BGraphQL%25E3%2582%25AF%25E3%2582%25A8%25E3%2583%25AA%25E3%2581%25AE%25E6%25B5%2581%25E3%2582%258C%25E3%2581%25A8%25E5%259F%25BA%25E6%259C%25AC%25E6%25A7%258B%25E6%2588%2590%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kkoisland%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E2MzIwYmQ0NDQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kkoisland</dc:creator></item><item><title><![CDATA[Lenisで慣性スクロールを作るメモ]]></title><description><![CDATA[
+ Lenisで慣性スクロールを作るメモ
+Lenis.jsを使用したら、慣性スクロールという挙動が簡単に実装できると聞いたので、お試しにページを作るメモ
+
+ 初期設定
+
+ インストール
+npm i lenis
+
+ CSSファイル
+おすすめでCSSを書く。書いた場合は読み込むのを忘れないようにする
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-preven...]]></description><link>https://zenn.dev/mitate_gengaku/articles/lenis-smooth-scroll</link><guid isPermaLink="true">https://zenn.dev/mitate_gengaku/articles/lenis-smooth-scroll</guid><pubDate>Sun, 01 Sep 2024 15:00:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1dZd6pLh--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Lenis%25E3%2581%25A7%25E6%2585%25A3%25E6%2580%25A7%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%25AB%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25BE%25A1%25E6%25A5%25AF%25E7%258E%2584%25E5%25B6%25BD%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0tQOVRYWHQ5Qm1BLVplcURoLWdxUHl4RVFjMmNsRkhSNk95XzVVSVVhPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>御楯玄嶽</dc:creator></item><item><title><![CDATA[JavaScriptの実行原理について（１）]]></title><description><![CDATA[今日は、JavaScriptが単一スレッドの言語として、どのようにイベントループとタスクキューの仕組みを通じて、効率的に非同期タスクを処理し、ユーザー体験の滑らかさを確保しているかについて説明します。
+この記事では、イベントループ、タスクキュー、そして実際の開発での応用シーンについて詳しく探っていきます。
+
+ イベントループの概要
+イベントループでは、メインスレッドが現在の同期タスクを実施し終えた後、イベントキューに処理すべきイベントがあるがどうかを確認します。もしイベントがあれば、メインスレッドはそのイベントを取り出し、対応するコールバック関数を実施します。この繰り返すのプロセスがイベ...]]></description><link>https://zenn.dev/kyou505/articles/8a8284c6b25a1b</link><guid isPermaLink="true">https://zenn.dev/kyou505/articles/8a8284c6b25a1b</guid><pubDate>Sun, 01 Sep 2024 12:59:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--gx9r4uz5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25E3%2581%25AE%25E5%25AE%259F%25E8%25A1%258C%25E5%258E%259F%25E7%2590%2586%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25EF%25BC%2588%25EF%25BC%2591%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:takabashi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M4ZDNkMTYzMDYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takabashi</dc:creator></item><item><title><![CDATA[JavaScriptでAzureOpenAIのFunctionCalling(Tools)を使う際の注意点]]></title><description><![CDATA[
+ 背景
+!
+OpenAI関連はアップデートが早いため、実装の際は公式ドキュメントを参照してください。
+
+OpenAIには、Function Calling 機能があります。
+後述のようにtoolsプロパティを使って呼び出すのですが、JavaScriptで実装していた際にはまったことがあるので、注意点をまとめておきます。
+!
+結論を先にいうと、OpenAIにリクエストする際のmessageパラメータにて、roleが"tool"の場合は "toolCallId" を指定する必要があります。
+※エラーメッセージでは "tool_call_id" が必須だ。となり気が付きにくいです。
+※pyt...]]></description><link>https://zenn.dev/nomhiro/articles/openai-tools-javascript</link><guid isPermaLink="true">https://zenn.dev/nomhiro/articles/openai-tools-javascript</guid><pubDate>Sun, 01 Sep 2024 12:23:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--tL-FQUNy--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25E3%2581%25A7AzureOpenAI%25E3%2581%25AEFunctionCalling%2528Tools%2529%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%25E9%259A%259B%25E3%2581%25AE%25E6%25B3%25A8%25E6%2584%258F%25E7%2582%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2597%25E3%2582%258D%25E3%2581%258F%25E3%2581%25BE%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q0YmFmOGY4OTUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>しろくま</dc:creator></item><item><title><![CDATA[Express入門~Node.jsのための最小限のWebフレームワーク~]]></title><description><![CDATA[業務で使う前にある程度把握したい方やはじめてプログラミングを学びたい方向けに簡単にまとめてみました。
+全部読む必要がなくて、部分的に読みたい方もいらっしゃると思いますので、サンプルは全て単話形式で載せています。
+記事の途中から読み始めるでも全然OKかと思いますのでお気軽に読んでください！
+概要は不要で、単に実際のコードを試したいだけの方は、記事の最後におすすめハンズオンも載せているのでこちらだけでも試すと良いかもしれません。
+
+ 1.Expressとは
+Expressは、Node.js上で動作するシンプルで柔軟なWebフレームワークです。
+Webアプリケーションの機能（ルーティング、デー...]]></description><link>https://zenn.dev/oku/articles/f55c7d540710bf</link><guid isPermaLink="true">https://zenn.dev/oku/articles/f55c7d540710bf</guid><pubDate>Sun, 01 Sep 2024 08:42:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--yb01-LzW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Express%25E5%2585%25A5%25E9%2596%2580%7ENode.js%25E3%2581%25AE%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%25E6%259C%2580%25E5%25B0%258F%25E9%2599%2590%25E3%2581%25AEWeb%25E3%2583%2595%25E3%2583%25AC%25E3%2583%25BC%25E3%2583%25A0%25E3%2583%25AF%25E3%2583%25BC%25E3%2582%25AF%7E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:oku%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2padGtYRFJITDhFR2RBY21wRzBtU2U5R3BkdzVxN0RIQUxoc0xENVE9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>oku</dc:creator></item><item><title><![CDATA[Nuxt Auth Utils でサーバーサイドの認証を（OAuth・マジックリンク・ワンタイムパスワード）]]></title><description><![CDATA[Nuxt 3 では Universal Rendering (SSR) によるアプリケーションの開発が難なく可能です。
+Nitro というサーバーサイドのフレームワークにより、Nuxt 3 はサーバー側の処理も簡潔に記述できるようになっています。
+Nuxt Auth Utils はそんな Nuxt の特徴を生かした、SSR のアプリケーションに OAuth 認証を実装できる Nuxt モジュールです。
+執筆時点で GitHub, Google, Discord など 17 の OAuth プロバイダーに対応していますので、通常用途では充分だと思います。
+https://github.co...]]></description><link>https://zenn.dev/comm_vue_nuxt/articles/nuxt-auth-utils-module</link><guid isPermaLink="true">https://zenn.dev/comm_vue_nuxt/articles/nuxt-auth-utils-module</guid><pubDate>Sun, 01 Sep 2024 07:57:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--JpEYALRK--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Nuxt%2520Auth%2520Utils%2520%25E3%2581%25A7%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2582%25B5%25E3%2582%25A4%25E3%2583%2589%25E3%2581%25AE%25E8%25AA%258D%25E8%25A8%25BC%25E3%2582%2592%25EF%25BC%2588OAuth%25E3%2583%25BB%25E3%2583%259E%25E3%2582%25B8%25E3%2583%2583%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%25B3%25E3%2582%25AF%25E3%2583%25BB%25E3%2583%25AF%25E3%2583%25B3%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25A0%25E3%2583%2591%25E3%2582%25B9%25E3%2583%25AF%25E3%2583%25BC%25E3%2583%2589%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:coedo%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU5MTZlOWFlNjguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Vue%25E3%2583%25BBNuxt%2520%25E6%2583%2585%25E5%25A0%25B1%25E3%2581%258C%25E9%259B%2586%25E3%2581%25BE%25E3%2582%258B%25E5%25BA%2583%25E5%25A0%25B4%2520%252F%2520P...%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2c4STBvUEtWYXpIUGdWdUFwVFNiaFdXUGVZd0l2Rkd3QlV0alAwaHc9czI1MC1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>coedo</dc:creator></item><item><title><![CDATA[mysqlを採用したら会社が潰れるという記事の所感]]></title><description><![CDATA[twitterでツラツラと思ったことを書いていたが纏めてみた。
+スマホだど見づらい。長い。
+あとで多少表現や内容をわかりやすくもっとええ感じに直すかも知らん。
+
+ 結論
+ムカつくなら放っておけ。わざわざ「ボクが好きな技術を批判したらから許せない!」と意思表明を
+わざわざ本人にしに行くな。
+人が寄ってたかって自分と違う意見や表現のものを悪役に仕立て上げるな。
+どうしても、変えて欲しければ後述の「お願い」をしろ。
+
+ 経緯で思った所感
+筆者が該当する記事を削除して、アカウントを消したらしく非常に残念な結果である。 -&gt; 復帰して表現ちょっと変えたっぽい。
+javascriptやtype...]]></description><link>https://zenn.dev/oto/articles/71b7997c22a7c0</link><guid isPermaLink="true">https://zenn.dev/oto/articles/71b7997c22a7c0</guid><pubDate>Sun, 01 Sep 2024 06:08:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ewJDwYTF--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:mysql%25E3%2582%2592%25E6%258E%25A1%25E7%2594%25A8%25E3%2581%2597%25E3%2581%259F%25E3%2582%2589%25E4%25BC%259A%25E7%25A4%25BE%25E3%2581%258C%25E6%25BD%25B0%25E3%2582%258C%25E3%2582%258B%25E3%2581%25A8%25E3%2581%2584%25E3%2581%2586%25E8%25A8%2598%25E4%25BA%258B%25E3%2581%25AE%25E6%2589%2580%25E6%2584%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Otogawa%2520Katsutoshi...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRiZTMxMWQ2YmIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Otogawa Katsutoshi(oto)</dc:creator></item><item><title><![CDATA[Web 標準と、その限界]]></title><description><![CDATA[JavaScript、たくさんバックエンドで使われてますよね、あなたも使ったことはありませんか？
+そんな バックエンドでも使われている JavaScript。そこに標準で組み込まれている Web 標準な API 。それを考えていきます。
+
+ Web 標準 とは何か
+Web を構成するための技術として、主に HTML/CSS/JavaScript があります。
+どのブラウザでサイトを見ても同じ結果が得られるように、その HTML/CSS/JavaScript をまとめている仕様のことです。
+例えば、 HTML の仕様は HTML Living Standard が主流で、 WHATWG と...]]></description><link>https://zenn.dev/nakasyou/articles/webstandard_and_runtimes</link><guid isPermaLink="true">https://zenn.dev/nakasyou/articles/webstandard_and_runtimes</guid><pubDate>Sun, 01 Sep 2024 02:38:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--FgISMDcv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Web%2520%25E6%25A8%2599%25E6%25BA%2596%25E3%2581%25A8%25E3%2580%2581%25E3%2581%259D%25E3%2581%25AE%25E9%2599%2590%25E7%2595%258C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nakasyou%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI3NTAyNDNlNjAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nakasyou</dc:creator></item><item><title><![CDATA[バンドルってなんだっけとなったので調べました]]></title><description><![CDATA[
+ はじめに
+自分が今参画しているプロジェクト内でES buildが当たり前のように使用されていました。
+これって何だろうかと調べるとバンドルツールの一種とのこと。
+バンドルって何なんだっけ...!?となったので調べてまとめました。
+
+ バンドルとは
+複数のファイルやモジュールを1つのファイルにまとめるプロセスのこと。
+主にJavaScriptやCSSのようなWeb開発において使われる概念。
+他の言語や環境でも使用されることがある。
+
+ バンドルされたコードってどんなの？
+以下が実際にesbuildでバンドルされたコードの一部です。
+どんな処理が書かれているのか全然わからないですね。
+"...]]></description><link>https://zenn.dev/code_sauna_love/articles/1a47a6b245dedb</link><guid isPermaLink="true">https://zenn.dev/code_sauna_love/articles/1a47a6b245dedb</guid><pubDate>Sun, 01 Sep 2024 01:58:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dSNQxEsl--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2590%25E3%2583%25B3%25E3%2583%2589%25E3%2583%25AB%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25AA%25E3%2582%2593%25E3%2581%25A0%25E3%2581%25A3%25E3%2581%2591%25E3%2581%25A8%25E3%2581%25AA%25E3%2581%25A3%25E3%2581%259F%25E3%2581%25AE%25E3%2581%25A7%25E8%25AA%25BF%25E3%2581%25B9%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:masa%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE1MzU5NDIxZTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>masa</dc:creator></item><item><title><![CDATA[Vitest でインタラクティブな CLI のテスト]]></title><description><![CDATA[
+ はじめに
+Node 環境の CLI にはテキストの入力や選択肢からの選択などをインタラクティブに行えるものがよくある
+インタラクション部分は Inquirer や Enquirer などで実装できる
+このような CLI をテストする場合、テキストを入力したり選択肢を矢印キーで選択するようなユーザ操作をどのように再現するか試行錯誤した
+以下のような関数を例とする
+
+cli.ts
+import { input, select } from "@inquirer/prompts";
+
+const greet = async () =&gt; {
+  const name = await i...]]></description><link>https://zenn.dev/mkobayashime/articles/test-interactive-cli</link><guid isPermaLink="true">https://zenn.dev/mkobayashime/articles/test-interactive-cli</guid><pubDate>Sat, 31 Aug 2024 17:23:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--21mFWMrs--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Vitest%2520%25E3%2581%25A7%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25BF%25E3%2583%25A9%25E3%2582%25AF%25E3%2583%2586%25E3%2582%25A3%25E3%2583%2596%25E3%2581%25AA%2520CLI%2520%25E3%2581%25AE%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Masaki%2520Kobayashi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lRRjJQRWpoY1phWW9laGRsWmxtY3BVam1teDJhcUhjNXVjYzdlPXMyNTAtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Masaki Kobayashi</dc:creator></item><item><title><![CDATA[SSL/TLSの限界を補うハイブリッド暗号化]]></title><description><![CDATA[!
+間違ってる情報等あれば、コメントにお願いします。
+
+
+ ハイブリッド暗号化とは
+AES暗号（共通鍵暗号方式）と RSA暗号（公開鍵暗号方式）の両方を組み合わせて使用する暗号化手法です。
+
+ AES暗号化（Advanced Encryption Standard）
+同じ鍵(共通鍵)を使ってデータの暗号化と復号を行う。
+
+
+メリット
+この方法は、暗号化と復号が高速であるため、大量のデータを効率的に処理するのに適している。
+
+
+デメリット
+鍵の共有に関するセキュリティリスクが伴う。
+(鍵が漏洩すると、暗号化されたデータも容易に解読されてしまう。)
+
+
+
+ RSA暗号化（Rivest-Sha...]]></description><link>https://zenn.dev/localer/articles/7e441bdf585280</link><guid isPermaLink="true">https://zenn.dev/localer/articles/7e441bdf585280</guid><pubDate>Sat, 31 Aug 2024 15:50:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--SzLeTwYc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:SSL%252FTLS%25E3%2581%25AE%25E9%2599%2590%25E7%2595%258C%25E3%2582%2592%25E8%25A3%259C%25E3%2581%2586%25E3%2583%258F%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25AA%25E3%2583%2583%25E3%2583%2589%25E6%259A%2597%25E5%258F%25B7%25E5%258C%2596%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258F%25E3%2582%2582%25E3%2582%258A%25E3%2581%25AB%25E3%2581%258F%25E3%2582%2582%25E3%2581%25A3%25E3%2581%259F%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25A6%25E3%2583%2589%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2593%25E3%2582%25B9lo...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RjZWUxZjI0ZjYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>くもりにくもったクラウドサービスlocaler</dc:creator></item><item><title><![CDATA[node:test で jsdoc `@example` に記述したコードを使ってテストする]]></title><description><![CDATA[
+ はじめに
+私は vitest を使ってテストコードを実装することが多い。vitest は vite と統合されていることで変換処理に vite と同じプラグインが使えるため、開発時に vite を使っていれば追加で必要な設定が少ないという利点があるのだが、私は In-Source Testing という機能が気に入っていることが大きな理由だ。
+これは他の言語でもよくある、実装コードと同じファイル内にテストが記述できるというものだ。
+これにはいくつか利点があるが、その中でも、テストを実装の近くに置くことでテストが実装の説明するという役割を強めるという点がある。
+このテストが実装の説明す...]]></description><link>https://zenn.dev/sterashima78/articles/957e093a566f3b</link><guid isPermaLink="true">https://zenn.dev/sterashima78/articles/957e093a566f3b</guid><pubDate>Sat, 31 Aug 2024 13:59:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--00KuecrU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:node%253Atest%2520%25E3%2581%25A7%2520jsdoc%2520%2560%2540example%2560%2520%25E3%2581%25AB%25E8%25A8%2598%25E8%25BF%25B0%25E3%2581%2597%25E3%2581%259F%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:sterashima78%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdmZTM3ODhmMTUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sterashima78</dc:creator></item><item><title><![CDATA[座標点群配列から、各点の近傍(半径100m以内)の点群数を数えて、座標点群配列に追加する]]></title><description><![CDATA[
+ 本記事の分類
+
+学習ノート
+
+
+ 機能
+
+舗装修繕箇所(ポットホールの修繕箇所)の座標データから定量的に舗装修繕回数が多い範囲(部分)を評価する
+
+
+ 想定シーン
+
+舗装修繕箇所の優先順位付けの参考資料を作成する
+
+
+ 仕様
+
+各舗装補修箇所の近傍(半径100m以内)の補修箇所数を数える。
+各点の座標データと補修箇所数を要素とする新しい配列を作成する。
+ラフな精度でも問題ないため地球を球体として計算している。
+
+
+ 参考
+
+高精度を求める場合は別の計算式が必要。https://qiita.com/Yuzu2yan/items/0f312954feeb3c83c70e
+
+
+
+ Code...]]></description><link>https://zenn.dev/hasenori/articles/f3e918b810dc87</link><guid isPermaLink="true">https://zenn.dev/hasenori/articles/f3e918b810dc87</guid><pubDate>Sat, 31 Aug 2024 13:01:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1PAqtUtL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%25BA%25A7%25E6%25A8%2599%25E7%2582%25B9%25E7%25BE%25A4%25E9%2585%258D%25E5%2588%2597%25E3%2581%258B%25E3%2582%2589%25E3%2580%2581%25E5%2590%2584%25E7%2582%25B9%25E3%2581%25AE%25E8%25BF%2591%25E5%2582%258D%2528%25E5%258D%258A%25E5%25BE%2584100m%25E4%25BB%25A5%25E5%2586%2585%2529%25E3%2581%25AE%25E7%2582%25B9%25E7%25BE%25A4%25E6%2595%25B0%25E3%2582%2592%25E6%2595%25B0%25E3%2581%2588%25E3%2581%25A6%25E3%2580%2581%25E5%25BA%25A7%25E6%25A8%2599%25E7%2582%25B9%25E7%25BE%25A4%25E9%2585%258D%25E5%2588%2597%25E3%2581%25AB%25E8%25BF%25BD%25E5%258A%25A0%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hasenori%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTHV3bkhUOHpWVjlPVnBiSDZGWmxRd3JRN2M5SHVnYXpxYzVYZjZ1UkxjTGc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hasenori</dc:creator></item><item><title><![CDATA[TanStack Start(alpha)をはじめよう]]></title><description><![CDATA[フルスタック React フレームワークである TanStack Start の使用方法について解説します。詳細はTanStack Start OverviewやGitHubリポジトリを参照してください。
+
+ TanStack Startとは
+TanStack Startは、TanStack Routerを基盤としたフルスタックReactフレームワークです。サーバーサイドレンダリング（SSR）、ストリーミング、サーバー関数、バンドルなどの機能を提供します。
+https://tanstack.com/start/latest
+
+ プロジェクトのステータス
+TanStack Startは現在...]]></description><link>https://zenn.dev/laiso/articles/5df30bf71db6b7</link><guid isPermaLink="true">https://zenn.dev/laiso/articles/5df30bf71db6b7</guid><pubDate>Sat, 31 Aug 2024 07:54:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7Q6nBpLe--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TanStack%2520Start%2528alpha%2529%25E3%2582%2592%25E3%2581%25AF%25E3%2581%2598%25E3%2582%2581%25E3%2582%2588%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:laiso%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM4Nzc0MDcyMDcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>laiso</dc:creator></item><item><title><![CDATA[[GSAP, Canvas] スクロール時の画像モザイクアニメーション]]></title><description><![CDATA[
+ この記事の概要
+最近CanvasとWebGLの勉強を始めました。拙いコードですが、お手柔らかに。
+まずは完成品をどうぞ。
+GSAPのScrollTriggerとCanvasを使って、スクロール時のアニメーション「画像モザイク→モザイクなし」をやってみました。codePenに載せてます。
+
+
+ GSAPのScrollTrigger
+Canvasの前にこちらをご覧頂きたい。
+
+ ScrollTriggerなんぞや？
+アニメーション実装に特化した神ライブラリ"GSAP"、から提供されるプラグインの１つ。
+ウィンドウスクロール時のイベントを簡単に設定できます。
+自力で実装する場合はInter...]]></description><link>https://zenn.dev/nekoengineer/articles/520efbc5d49ac2</link><guid isPermaLink="true">https://zenn.dev/nekoengineer/articles/520efbc5d49ac2</guid><pubDate>Sat, 31 Aug 2024 06:40:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--SwwLtvjC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BGSAP%252C%2520Canvas%255D%2520%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%25AB%25E6%2599%2582%25E3%2581%25AE%25E7%2594%25BB%25E5%2583%258F%25E3%2583%25A2%25E3%2582%25B6%25E3%2582%25A4%25E3%2582%25AF%25E3%2582%25A2%25E3%2583%258B%25E3%2583%25A1%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E9%2580%259A%25E3%2582%258A%25E3%2581%2599%25E3%2581%258C%25E3%2582%258A%25E3%2581%25AEfuga%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSlhFazRFYzZrUnYwSHRNeWVCZ0JQSEFCdEtBdXFWaUxycHRvYi1JTUNaX19ZaDdVMD1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>通りすがりのfuga</dc:creator></item><item><title><![CDATA[イラストでそこそこわかる非同期処理、Promise]]></title><description><![CDATA[
+ 同期処理、非同期処理とは
+
+ 同期処理
+一つの作業を終えるまで次の作業を行わない。
+
+ 非同期処理
+1つの作業が終わるのを待たずに他の作業を始める。
+
+ 例え話
+友達（A君、B君）と一緒にケーキを作ることを考えます。作業としてはケーキを焼く、皿の準備をする、トッピングの準備をする、があるとします。
+同期処理の場合：A君がケーキを焼く。焼き終わってから、B君が皿の準備をはじめる。皿の準備が終わった後、自分はトッピングの準備をはじめる。
+
+非同期処理の場合：A君がケーキを焼き始める。それと同時に、B君が皿の準備を始める。自分はトッピングの準備を始める。
+
+上の説明から分かるように、非同期...]]></description><link>https://zenn.dev/maiamitorio/articles/ee68b6467234b3</link><guid isPermaLink="true">https://zenn.dev/maiamitorio/articles/ee68b6467234b3</guid><pubDate>Sat, 31 Aug 2024 00:56:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--J5YCdeV4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25A4%25E3%2583%25A9%25E3%2582%25B9%25E3%2583%2588%25E3%2581%25A7%25E3%2581%259D%25E3%2581%2593%25E3%2581%259D%25E3%2581%2593%25E3%2582%258F%25E3%2581%258B%25E3%2582%258B%25E9%259D%259E%25E5%2590%258C%25E6%259C%259F%25E5%2587%25A6%25E7%2590%2586%25E3%2580%2581Promise%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:maiamitorio%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzUwZmEwOTA0ZTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>maiamitorio</dc:creator></item><item><title><![CDATA[clsx入門 - 動的CSSクラス生成のためのJavaScriptユーティリティの紹介]]></title><description><![CDATA[
+ 1. はじめに
+
+clsxとは、JavaScriptやReactで、条件によってCSSのクラス名文字列を動的に生成するための小さな（239B）JavaScriptユーティリティです。
+Next.jsの公式教材で紹介されています。
+
+https://nextjs.org/learn/dashboard-app/css-styling#using-the-clsx-library-to-toggle-class-names
+
+
+この記事では、clsxの基本的な使い方、実践的なコード例を学ぶことができます。
+
+https://github.com/lukeed/clsx
+
+ 2. clsx...]]></description><link>https://zenn.dev/yuki_fujisawa/articles/8f868d46c2bc39</link><guid isPermaLink="true">https://zenn.dev/yuki_fujisawa/articles/8f868d46c2bc39</guid><pubDate>Sat, 31 Aug 2024 00:09:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--FO1sivqv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:clsx%25E5%2585%25A5%25E9%2596%2580%2520-%2520%25E5%258B%2595%25E7%259A%2584CSS%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25B9%25E7%2594%259F%25E6%2588%2590%25E3%2581%25AE%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AEJavaScript%25E3%2583%25A6%25E3%2583%25BC%25E3%2583%2586%25E3%2582%25A3%25E3%2583%25AA%25E3%2583%2586%25E3%2582%25A3%25E3%2581%25AE%25E7%25B4%25B9%25E4%25BB%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E8%2597%25A4%25E6%25BE%25A4%25E5%258B%2587%25E6%25A8%25B9%2528Yuki%2520Fujisawa%2529%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2YyOWNiMTQyZjcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>藤澤勇樹(Yuki Fujisawa)</dc:creator></item><item><title><![CDATA[フロントエンドライブラリ開発におけるpackage.jsonのエントリーポイント設定]]></title><description><![CDATA[フロントエンドライブラリ開発において、package.jsonに設定するエントリーポイントについて、理解しきれずに設定していた状態だったため、公式ドキュメント等を通じて理解を深めました。その内容をまとめた記事です。
+
+ 前提
+フロントエンドライブラリのエントリーポイントは、通常package.jsonに設定します。この設定の基本はNode.jsのドキュメントに記載されています。
+プロジェクトがライブラリを使用する際、そのプロジェクトのバンドラー(webpack, viteなど)はライブラリによって定義されたpackage.jsonのエントリーポイントを参照しますが、その参照方法は個別のバ...]]></description><link>https://zenn.dev/t0daaay/articles/8dd448ec5c960d</link><guid isPermaLink="true">https://zenn.dev/t0daaay/articles/8dd448ec5c960d</guid><pubDate>Sat, 31 Aug 2024 00:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3BZUe1Li--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2595%25E3%2583%25AD%25E3%2583%25B3%25E3%2583%2588%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2589%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%25E9%2596%258B%25E7%2599%25BA%25E3%2581%25AB%25E3%2581%258A%25E3%2581%2591%25E3%2582%258Bpackage.json%25E3%2581%25AE%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2588%25E3%2583%25AA%25E3%2583%25BC%25E3%2583%259D%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2588%25E8%25A8%25AD%25E5%25AE%259A%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A4%25E3%2581%2598%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2EzZjZlYWU1ZjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>つじ</dc:creator></item></channel></rss>
