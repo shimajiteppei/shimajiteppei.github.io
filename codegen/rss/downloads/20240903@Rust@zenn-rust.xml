@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Rust」のフィード]]></title><description><![CDATA[Zennのトピック「Rust」のRSSフィードです]]></description><link>https://zenn.dev/topics/rust</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ba09661577.png</url><title>Zennの「Rust」のフィード</title><link>https://zenn.dev/topics/rust</link></image><generator>zenn.dev</generator><lastBuildDate>Tue, 03 Sep 2024 07:17:17 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/rust/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[【Rust入門】Result型とは？]]></title><description><![CDATA[
+ はじめに
+こんにちは、ファスト株式会社のyutakです！
+今回は、Rustについての記事です。
+弊社では、Web APIの開発言語としてRustを採用しました。
+なぜRustを採用したのかについては、今後の記事で詳しく説明する予定です！
+
+ 本記事について
+どのプログラミング言語でも、プロダクトの実装を進めていくとエラー処理が重要になってきます。
+RustにはResult型という強力なエラー処理の機構があります。
+本記事では、Result型について説明していきます。
+
+ エラーハンドリングの重要性
+エラーハンドリングは、プログラムの信頼性と堅牢性を確保する上で非常に重要です。
+適切な...]]></description><link>https://zenn.dev/fast/articles/rust-result-c34ef2f8c584aa</link><guid isPermaLink="true">https://zenn.dev/fast/articles/rust-result-c34ef2f8c584aa</guid><pubDate>Tue, 03 Sep 2024 07:16:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--S61PcUw1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Rust%25E5%2585%25A5%25E9%2596%2580%25E3%2580%2591Result%25E5%259E%258B%25E3%2581%25A8%25E3%2581%25AF%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:yutak%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzljYTEzZDEyMWEuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:FAST%2520Developers%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MzNjBmNTJkYmUuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yutak</dc:creator></item><item><title><![CDATA[rustのライフタイムをちゃんと理解する]]></title><description><![CDATA[ライフタイム難しいですよね。なので書きます。
+
+ ライフタイムとはなんなのか
+ライフタイムとは参照が有効なスコープのことです。参照はデータが実際に書き込まれているメモリへのアドレスとなるはずなので、参照が有効であるとはデータが書き込まれているメモリが解放されるまでの期間となります。
+rustの場合はメモリの解放のタイミングは、そのデータを生成した関数やブロックを抜けたときかと思います。
+
+ ライフタイムはなんのためにあるのか
+ダングリング参照を発生させないためにあるらしいです。「だんぐりんぐ」という耳慣れない謎ワードが出てきましたね。言葉の意味はよくわかりませんが、とにかくすごい問題です...]]></description><link>https://zenn.dev/sho2/articles/rust-lifetime-understand</link><guid isPermaLink="true">https://zenn.dev/sho2/articles/rust-lifetime-understand</guid><pubDate>Mon, 02 Sep 2024 15:55:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vYOVNt0D--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:rust%25E3%2581%25AE%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2595%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25A0%25E3%2582%2592%25E3%2581%25A1%25E3%2582%2583%25E3%2582%2593%25E3%2581%25A8%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2597%25E3%2582%2587%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzEyZDVjODQ1MWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>しょ</dc:creator></item><item><title><![CDATA[Rustの乱数のクレート：randメモ [blessed.rsシリーズ26]]]></title><description><![CDATA[
+ 概要
+https://blessed.rs/crates
+こちらのリストにあるものを見て書いたメモになります。
+今回はrandについてです。
+https://lib.rs/crates/rand
+
+ randとは
+乱数を生成するための色々な機能がまとめられたクレート。
+
+ この記事の構成
+version 0.8.5のrandについて調査した。
+全体の構成としては以下のようになっている。
+
+乱数とは（ちょっとだけ）
+randクレート群の構成
+各クレート、各機能の詳細な説明（めちゃくちゃある）
+
+そのため、ちょっとだけrandクレートについて知りたいなという場合には、あまり向かない記事に...]]></description><link>https://zenn.dev/kotabrog/articles/dfba345986f501</link><guid isPermaLink="true">https://zenn.dev/kotabrog/articles/dfba345986f501</guid><pubDate>Mon, 02 Sep 2024 15:26:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0luqh8qk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25AE%25E4%25B9%25B1%25E6%2595%25B0%25E3%2581%25AE%25E3%2582%25AF%25E3%2583%25AC%25E3%2583%25BC%25E3%2583%2588%25EF%25BC%259Arand%25E3%2583%25A1%25E3%2583%25A2%2520%255Bblessed.rs%25E3%2582%25B7%25E3%2583%25AA%25E3%2583%25BC%25E3%2582%25BA26%255D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kota%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pndUZyRTdIcS13U3dMRHFoT05pbjFKWVZHOVFZcjBEWXQ2SVZ3WWc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kota</dc:creator></item><item><title><![CDATA[axumでファイルダウンロード処理]]></title><description><![CDATA[
+ はじめに
+プライベートでRustをコツコツ書いてます。
+
+ 概要
+axum(というかRust)でファイルダウンロード機能のサンプル等がググっても見つからなかったので、実装してみました。
+簡単に機能だけざっくり説明すると、DBから取得したデータをJsonに変換し、jsonファイルとしてダウンロードさせるAPIです。
+
+ ライブラリ
+
+ axum
+axumで適当にアプリ作ってるので、そのアプリに実装するため、使いました。
+https://github.com/tokio-rs/axum
+
+ tokio_util
+ストリームとして扱うのに、使用しました。
+https://docs.rs/t...]]></description><link>https://zenn.dev/tshige/articles/9f9a26da3ee8d1</link><guid isPermaLink="true">https://zenn.dev/tshige/articles/9f9a26da3ee8d1</guid><pubDate>Mon, 02 Sep 2024 08:31:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--QOTU2k45--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:axum%25E3%2581%25A7%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2583%2580%25E3%2582%25A6%25E3%2583%25B3%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2589%25E5%2587%25A6%25E7%2590%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:reo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q2Njk1ZWFmOTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>reo</dc:creator></item><item><title><![CDATA[Axum+Cloudflare Workersでつまったところn選]]></title><description><![CDATA[!
+もしあなたが単にWorkerを使いたいだけならTypeScriptを使ってください｡
+RustでかつAxumを使いたい方に同じ点でつまっている方の助けになれば幸いです｡
+
+
+ 1. wranglerでインストールされるworkerが古い
+cargo generate cloudflare/workers-rsでAxumのテンプレートを生成したらまずCargo.tomlのdependencies(依存クレート)を確認してほしい｡
+現時点(2024年9月2日)で記述されるworker,worker-macrosのバージョンが0.2.0になっている場合必ずビルドに失敗する｡
+ログ(長いので...]]></description><link>https://zenn.dev/ahoxa1rx/articles/032776d44e24cb</link><guid isPermaLink="true">https://zenn.dev/ahoxa1rx/articles/032776d44e24cb</guid><pubDate>Mon, 02 Sep 2024 00:15:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xCsVRdt8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Axum%252BCloudflare%2520Workers%25E3%2581%25A7%25E3%2581%25A4%25E3%2581%25BE%25E3%2581%25A3%25E3%2581%259F%25E3%2581%25A8%25E3%2581%2593%25E3%2582%258Dn%25E9%2581%25B8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ahoxa1rx%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2p0cVFMMThkdU9JWXh5NVRhM1JfYWZyUGtWd0U3M2o1aldsSWdhPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ahoxa1rx</dc:creator></item><item><title><![CDATA[Rust | SQLx の macro `sqlx::test` でテストを実装する]]></title><description><![CDATA[
+ SQLx とは
+SQLx は Rust のデーベース接続用のクレートです。
+SQLx の詳細や特徴については、いくつか記事を公開しているので割愛します。
+参考までに...👨‍💻👨‍💻👨‍💻
+
+Rust | SQLx の macro query! と query_as! を使いこなす
+Rust | SQLx の macro query_file! と query_file_as! で複雑な SQL クエリを分離する
+Rust | SQLx で transaction &amp; commit / rollbackを実装する
+
+
+ sqlx::test について
+
+ テスト用のDBを作成...]]></description><link>https://zenn.dev/collabostyle/articles/b8b13870d5ee5b</link><guid isPermaLink="true">https://zenn.dev/collabostyle/articles/b8b13870d5ee5b</guid><pubDate>Sun, 01 Sep 2024 12:55:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--meZmtDkS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%2520%257C%2520SQLx%2520%25E3%2581%25AE%2520macro%2520%2560sqlx%253A%253Atest%2560%2520%25E3%2581%25A7%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E5%25B1%25B1%25E3%2581%25A8%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzViM2I3NTQxYzUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25B3%25E3%2583%25A9%25E3%2583%259C%25E3%2582%25B9%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25AB%2520Developers%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y5MGU2OTJiOTguanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>山とコード</dc:creator></item><item><title><![CDATA[EBNFからFIRST集合を求めるプログラム Rustで書いてみた]]></title><description><![CDATA[ナマステ
+コンパイラ自作の副産物として，EBNFからFIRST集合を求めるプログラムをRustで書いてみたのでその記録を残す．
+ここでは各種用語の解説はしない
+またこの記事中の引用形式では，下部に示した参考書籍からの引用を示しているものとする．
+ソースコードは以下にある．
+https://github.com/neruneruna7/compiler_MPPL/blob/master/src/bin/first.rs
+
+ アルゴリズム
+以下のアルゴリズムに従ってプログラムを構成した．
+
+(0) FIRST(\alpha)を空集合に初期化する．
+以下のステップを，もう付け加えるものがなくな...]]></description><link>https://zenn.dev/neruneruna7/articles/fe0670c1131e74</link><guid isPermaLink="true">https://zenn.dev/neruneruna7/articles/fe0670c1131e74</guid><pubDate>Sun, 01 Sep 2024 12:48:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--SRtC3fVU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:EBNF%25E3%2581%258B%25E3%2582%2589FIRST%25E9%259B%2586%25E5%2590%2588%25E3%2582%2592%25E6%25B1%2582%25E3%2582%2581%25E3%2582%258B%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%25A0%2520Rust%25E3%2581%25A7%25E6%259B%25B8%25E3%2581%2584%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Neruneruna7%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4WjdHT1MzanlRM0dkTGt5WTNNZ2Ewdzl1WjVqcFdBRGJnTW92THQ9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Neruneruna7</dc:creator></item><item><title><![CDATA[[小ネタ] 関数にライフタイム引数を複数定義する必要がある場合の一例]]></title><description><![CDATA[
+ はじめに
+初学者向けです。
+Rustで作るプログラミング言語の項2.5を写経中、関数にライフタイムを2種類明示しているコードがありました。なぜライフタイムを2つ指定する必要があるのか疑問に感じ、揃えたところコンパイルエラーが発生しました。指定に意味があることが分かったため調査することにしました。
+
+ 変更箇所とエラー内容
+
+変更箇所
+-fn parse_block&lt;'src, 'a&gt;(input: &amp;'a [&amp;'src str]) -&gt; (Value&lt;'src&gt;, &amp;'a [&amp;'src str]) {
++fn parse_...]]></description><link>https://zenn.dev/shuntaka/articles/9512231f77adec</link><guid isPermaLink="true">https://zenn.dev/shuntaka/articles/9512231f77adec</guid><pubDate>Sun, 01 Sep 2024 09:09:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--i9PsSwkT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255B%25E5%25B0%258F%25E3%2583%258D%25E3%2582%25BF%255D%2520%25E9%2596%25A2%25E6%2595%25B0%25E3%2581%25AB%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2595%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25A0%25E5%25BC%2595%25E6%2595%25B0%25E3%2582%2592%25E8%25A4%2587%25E6%2595%25B0%25E5%25AE%259A%25E7%25BE%25A9%25E3%2581%2599%25E3%2582%258B%25E5%25BF%2585%25E8%25A6%2581%25E3%2581%258C%25E3%2581%2582%25E3%2582%258B%25E5%25A0%25B4%25E5%2590%2588%25E3%2581%25AE%25E4%25B8%2580%25E4%25BE%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:shuntaka%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBjNzM4MmNiMTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>shuntaka</dc:creator></item><item><title><![CDATA[Tauriで「デスクトップディレクトリ構成可視化ツール」を試作した話]]></title><description><![CDATA[[概要]
+デスクトップ可視化と聞いて違和感を感じるかもしれない。(デスクトップは目に見えているから)
+ただ最近BIツールをで触ってみて意外とデフォルトでは必要情報が可視化されていないように感じた。
+なので自分用にとりあえずtreeコマンドで出る情報を可視化できるようなアプリを作ろうと思った。
+[URL]
+https://github.com/nkwork9999/tree_viz/tree/vizonly
+※色々将来的に機能を追加予定ではあるが、現在はディレクトリをツリー状に表示し、クリックすると開くだけとなっています。(スライダーは他機能の名残)
+
+[目的]
+個人アプリケーションを作成...]]></description><link>https://zenn.dev/amana/articles/203d6533629704</link><guid isPermaLink="true">https://zenn.dev/amana/articles/203d6533629704</guid><pubDate>Sat, 31 Aug 2024 18:42:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--WEIWp6h9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Tauri%25E3%2581%25A7%25E3%2580%258C%25E3%2583%2587%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%2588%25E3%2583%2583%25E3%2583%2597%25E3%2583%2587%25E3%2582%25A3%25E3%2583%25AC%25E3%2582%25AF%25E3%2583%2588%25E3%2583%25AA%25E6%25A7%258B%25E6%2588%2590%25E5%258F%25AF%25E8%25A6%2596%25E5%258C%2596%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%25E3%2580%258D%25E3%2582%2592%25E8%25A9%25A6%25E4%25BD%259C%25E3%2581%2597%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nk_work%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSXl5YnE2MF9NVW5SaXNqUm15RGs2YVpFcmxQM1pKYlhQOER3aWI4NXdqPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nk_work</dc:creator></item><item><title><![CDATA[RustでOllamaにAPIを打つ]]></title><description><![CDATA[
+ はじめに
+対象読者：Rust、Go、C、C++に触れたことがなく、知識もない人
+最近Rustの学習を始めました。
+普段はPythonでプログラムを書いています。
+背景として、Pythonが重いと感じることがあり、軽量な言語も習得したいと考えたためです。
+RustはKernelにも採用される軽い言語です。
+まだまだ学習の途中ですが、途中経過のアウトプットとして、Ollama APIを利用するプログラムをRustで実装しました。
+このプログラムを通じて、Rustについて説明します。
+
+ 環境構築
+Rustには、rustupというpyenvのようなツールがあり、様々なtoolchainを使...]]></description><link>https://zenn.dev/headwaters/articles/68a16c04b05024</link><guid isPermaLink="true">https://zenn.dev/headwaters/articles/68a16c04b05024</guid><pubDate>Sat, 31 Aug 2024 14:54:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--LZnisENa--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25A7Ollama%25E3%2581%25ABAPI%25E3%2582%2592%25E6%2589%2593%25E3%2581%25A4%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:mshiba%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZjNGExY2UxMDYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2598%25E3%2583%2583%25E3%2583%2589%25E3%2582%25A6%25E3%2582%25A9%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%25BC%25E3%2582%25B9%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzIxNGI2ZTQ2MzguanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mshiba</dc:creator></item><item><title><![CDATA[actix_web_validator でバリデーションを実装する]]></title><description><![CDATA[
+ はじめに
+Actix-Web で作ったアプリケーションにバリデーションチェックを実装します。
+サーバーサイド側のバリデーションチェックは何かと必須になってくるところかと思いますので、
+本記事が参考となれば嬉しいです。
+Actix-Web には、actix_web_validator というクレートが存在するので、今回はそちらを使ってやっていきます！
+🔻actix_web_validator
+https://docs.rs/actix-web-validator/latest/actix_web_validator/
+元のソースコードは以下で紹介したものを使っていきます。
+https:...]]></description><link>https://zenn.dev/collabostyle/articles/eb0175aefe8ff4</link><guid isPermaLink="true">https://zenn.dev/collabostyle/articles/eb0175aefe8ff4</guid><pubDate>Sat, 31 Aug 2024 13:34:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jf-hbWFY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:actix_web_validator%2520%25E3%2581%25A7%25E3%2583%2590%25E3%2583%25AA%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Shota%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzViM2I3NTQxYzUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25B3%25E3%2583%25A9%25E3%2583%259C%25E3%2582%25B9%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25AB%2520Developers%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MwNGNlNzQxNTYuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Shota</dc:creator></item><item><title><![CDATA[競プロ解説 [ABC098D]]]></title><description><![CDATA[
+ はじめに
+本記事は、日々の精進で出会った問題の一部を丁寧目に解説することで、筆者と読者のアルゴリズム力を向上させることを目的としています。
+
+ 問題
+
+
+ 考察
+次の定理が成り立ちます。
+
+任意の非負整数 a, b について、a \oplus b \le a + b が成り立つ。等号は a \land b = 0 のときに限り成り立つ。
+
+定理より、a_l \oplus\cdots\oplus a_r = a_l + \cdots a_r が成り立つとき、l \le i \le j \le r を満足する任意の区間 [i, j] について条件が成り立ちます。逆に、区間 [l, r] ...]]></description><link>https://zenn.dev/yatyou/articles/5e7bf7e70955ec</link><guid isPermaLink="true">https://zenn.dev/yatyou/articles/5e7bf7e70955ec</guid><pubDate>Sat, 31 Aug 2024 03:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--RAgEIkoo--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%25AB%25B6%25E3%2583%2597%25E3%2583%25AD%25E8%25A7%25A3%25E8%25AA%25AC%2520%255BABC098D%255D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:qdot3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSjJhZldfVDRNTWJCUzNDeG9YSlpnNFhJbndOeFkxbTB1TWxTWGtCSm9nPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>qdot3</dc:creator></item><item><title><![CDATA[SerdeV - Serde with Validation の紹介と黒魔術解説]]></title><description><![CDATA[Rust で
+#[derive(Deserialize, Debug)]
+#[serde(validate = "Self::validate")]
+struct Point {
+    x: i32,
+    y: i32,
+}
+
+impl Point {
+    fn validate(&amp;self) -&gt; Result&lt;(), impl std::fmt::Display&gt; {
+        if self.x &lt; 0 || self.y &lt; 0 {
+            return Err("x and y must not be neg...]]></description><link>https://zenn.dev/kanal/articles/serdev-the-black-magic</link><guid isPermaLink="true">https://zenn.dev/kanal/articles/serdev-the-black-magic</guid><pubDate>Fri, 30 Aug 2024 19:41:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ozhDQxBH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:SerdeV%2520-%2520Serde%2520with%2520Validation%2520%25E3%2581%25AE%25E7%25B4%25B9%25E4%25BB%258B%25E3%2581%25A8%25E9%25BB%2592%25E9%25AD%2594%25E8%25A1%2593%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kanarus%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc0ZTQ5YjRjOWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kanarus</dc:creator></item><item><title><![CDATA[Asset Canisterの仕様]]></title><description><![CDATA[
+ はじめに
+Internet Computer（IC）は、Blockchain技術を応用した分散型クラウドと言われており、AWS、Google Clooud、Azureなどの特定クラウドプロバイダーに依存することなく、Canisterと呼ばれるSmart Contractを介して、インターネット上でコンピューティングを実現する仕組みを提供しています。
+Blockchain技術によって分散化されたPaaS環境と捉えるとわかりやすいかもしれません。
+CanisterにはWebAssemblyとデータが格納されていて、Cycleという単位の計算リソース使用料を支払うことにより、誰でもCani...]]></description><link>https://zenn.dev/halifax/articles/ic_rust_asset_canister</link><guid isPermaLink="true">https://zenn.dev/halifax/articles/ic_rust_asset_canister</guid><pubDate>Fri, 30 Aug 2024 17:15:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--CsRjhJMC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:Asset%2520Canister%25E3%2581%25AE%25E4%25BB%2595%25E6%25A7%2598%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:halifax%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JhNWUxM2Q5YzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>halifax</dc:creator></item><item><title><![CDATA[競プロ解説 [ABC250E]]]></title><description><![CDATA[
+ はじめに
+本記事は、日々の精進で出会った問題の一部を丁寧目に解説することで、筆者と読者のアルゴリズム力を向上させることを目的としています。
+
+ 問題
+
+
+ 解説
+本問題は集合の比較に関する問題です。2 つの集合を愚直に比較するには、サイズが異なるときは O(1)、一致するときは O(N) の計算量が必要になります。本問題では、集合を高速に比較することが求められています。
+!
+（時間）計算量はプログラムを実行するのに必要な時間を大雑把に比較する手段です。実行時間が N に比例して増大するとき「計算量が O(N)」と表現します。これは複数のプログラムを実行時間で評価する上で有用です。
+N...]]></description><link>https://zenn.dev/yatyou/articles/a8e03eb05dbf1d</link><guid isPermaLink="true">https://zenn.dev/yatyou/articles/a8e03eb05dbf1d</guid><pubDate>Fri, 30 Aug 2024 03:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--aeIaLCQB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%25AB%25B6%25E3%2583%2597%25E3%2583%25AD%25E8%25A7%25A3%25E8%25AA%25AC%2520%255BABC250E%255D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:qdot3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSjJhZldfVDRNTWJCUzNDeG9YSlpnNFhJbndOeFkxbTB1TWxTWGtCSm9nPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>qdot3</dc:creator></item><item><title><![CDATA[Rustエンジニアの救世主：justfileによる開発プロセス自動化の極意]]></title><description><![CDATA[免責事項: このブログは「ChatGPT/Vertex AI/Claude API」によって生成されたものです。
+こんにちは、Rustエンジニアの皆さん！今回は、ソフトウェア開発における生産性を劇的に向上させる強力なツール「Justfile」をご紹介します。Justfileは、そのシンプルさと柔軟性から注目を浴びており、特にMakefileが難解に感じる方々にとっての理想的な代替手段となります。
+
+ Justfileとは？
+Justfileは指示通りにコマンドを実行するためのテキストファイルで、「just」と呼ばれるコマンドランナーと共に使います。これにより、プロジェクトの様々なタスクを...]]></description><link>https://zenn.dev/carenet/articles/2e0bfc9cfb4e47</link><guid isPermaLink="true">https://zenn.dev/carenet/articles/2e0bfc9cfb4e47</guid><pubDate>Fri, 30 Aug 2024 02:02:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--baaLG0VX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%25E3%2581%25AE%25E6%2595%2591%25E4%25B8%2596%25E4%25B8%25BB%25EF%25BC%259Ajustfile%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258B%25E9%2596%258B%25E7%2599%25BA%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25BB%25E3%2582%25B9%25E8%2587%25AA%25E5%258B%2595%25E5%258C%2596%25E3%2581%25AE%25E6%25A5%25B5%25E6%2584%258F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2583%2591%25E3%2583%2591%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE0MTRiZmIwZWQuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:CareNet%2520Engineers%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0Y2JlVTQ5WllSUzRoV2ZJVjFHUDcwOHoyQnNQMS1haDYzZjhWZnJwTGk3Mnc9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>パパ</dc:creator></item><item><title><![CDATA[🚀AlacrittyをHotkeyで立ち上げるLauncherを作った]]></title><description><![CDATA[作ったもの↓
+https://github.com/Masa-Ryu/Alacritty-Hotkey-Launcher
+!
+まだ完成ではないので、利用は自己責任でお願いいたします。
+
+
+ きっかけ
+普段はUbuntuかMacを使って開発しているのですが、最近Ubuntuのターミナルの動作がかなり遅くなってきてました。入力数秒後に表示され、遅延がひどい。原因はわからず困ってました。
+ChatGPTで代替ツールがあるか聞いたところ、Alacrittyがあることを知りました。
+GPUレンダリングを使ってることが特徴のようで、動作はかなり早いです。
+リビングで開発をするときはMacBookPr...]]></description><link>https://zenn.dev/masa_ryu/articles/7febad631c4a28</link><guid isPermaLink="true">https://zenn.dev/masa_ryu/articles/7febad631c4a28</guid><pubDate>Thu, 29 Aug 2024 10:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--a1rjeP42--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%2520Alacritty%25E3%2582%2592Hotkey%25E3%2581%25A7%25E7%25AB%258B%25E3%2581%25A1%25E4%25B8%258A%25E3%2581%2592%25E3%2582%258BLauncher%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Ryu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFlMWNkMWUwYjkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Ryu</dc:creator></item><item><title><![CDATA[＃39　Understanding BitTorrent 1: A Deep Dive into Bencode]]></title><description><![CDATA[
+ Introduction:
+BitTorrent is one of the pioneering and most popular peer-to-peer (P2P) file sharing protocols. In this blog, we'll explore the mechanics of BitTorrent and its unique encoding method, Bencode. Whether you're a tech enthusiast or just curious about how file sharing works, this post...]]></description><link>https://zenn.dev/nxted_sapporo/articles/b18b52727262ec</link><guid isPermaLink="true">https://zenn.dev/nxted_sapporo/articles/b18b52727262ec</guid><pubDate>Thu, 29 Aug 2024 07:53:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--UaG43nhB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25EF%25BC%258339%25E3%2580%2580Understanding%2520BitTorrent%25201%253A%2520A%2520Deep%2520Dive%2520into%2520Bencode%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:NXTEDCo.%252C%2520Ltd.%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBmZjQzOTVhYzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>NXTEDCo., Ltd.</dc:creator></item><item><title><![CDATA[Rust で Client(API Wrapper) を作る方法]]></title><description><![CDATA[
+ 初めに
+Rust SDK がないサービスは結構あるので、Rust を採用した場合に、ライブラリを自作することが多いです。有名なもので言うと、Firebase や Supabase も 公式の　Rust SDK がないです。
+この記事では、Rust で API クライアントを作る手順を紹介します。
+
+ APIを選ぶ
+まずは、API を選びます。
+公開 API がまとまっているサイトとかあるので、そこから選ぶといいかもしれません。
+Rust SDK があまりないと上で述べましたが、有名なサービスで API を公開しているものは、有志で作っていることが結構あります。
+notion とか s...]]></description><link>https://zenn.dev/doctormate/articles/rust-make-client-vasffg</link><guid isPermaLink="true">https://zenn.dev/doctormate/articles/rust-make-client-vasffg</guid><pubDate>Thu, 29 Aug 2024 03:30:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hJZ65rMI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%2520%25E3%2581%25A7%2520Client%2528API%2520Wrapper%2529%2520%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:katayama8000%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VhYjQxOTU5ZmYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2589%25E3%2582%25AF%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%25A1%25E3%2582%25A4%25E3%2583%2588%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FmZmRhNTA5ZmUuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>katayama8000</dc:creator></item><item><title><![CDATA[競プロ解説 [ABC345D]]]></title><description><![CDATA[
+ はじめに
+本記事は、日々の精進で出会った問題の一部を丁寧目に解説することで、筆者と読者のアルゴリズム力を向上させることを目的としています。
+
+ 問題
+
+
+ 方針（全探索）
+タイルを左上から順番に敷き詰めていくことを考えます。タイルを並べる順番の選び方は N! 通りあります。タイルの向きの組み合わせは 2^N 通りです。全ての順番と向きについて左上からタイルを敷き詰めていくことでこの問題を解くことができます。
+
+ タイルを 2 次元配列で管理する
+タイルを管理するデータ構造として一番初めに思いつくのは H \times W の 2 次元配列でしょうか？　これは正しい方法ですが、問題があ...]]></description><link>https://zenn.dev/yatyou/articles/03ca88dbbff7ad</link><guid isPermaLink="true">https://zenn.dev/yatyou/articles/03ca88dbbff7ad</guid><pubDate>Wed, 28 Aug 2024 03:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4163HeUD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%25AB%25B6%25E3%2583%2597%25E3%2583%25AD%25E8%25A7%25A3%25E8%25AA%25AC%2520%255BABC345D%255D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:qdot3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSjJhZldfVDRNTWJCUzNDeG9YSlpnNFhJbndOeFkxbTB1TWxTWGtCSm9nPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>qdot3</dc:creator></item></channel></rss>
