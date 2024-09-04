@@ -1,4 +1,104 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「shell」のフィード]]></title><description><![CDATA[Zennのトピック「shell」のRSSフィードです]]></description><link>https://zenn.dev/topics/shell</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/c8d33e6510.jpeg</url><title>Zennの「shell」のフィード</title><link>https://zenn.dev/topics/shell</link></image><generator>zenn.dev</generator><lastBuildDate>Sat, 03 Aug 2024 12:03:17 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/shell/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[新しい環境で活用！ZshとOh My Zshの設定ガイド（Dockerでのテスト導入も解説）]]></title><description><![CDATA[
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「shell」のフィード]]></title><description><![CDATA[Zennのトピック「shell」のRSSフィードです]]></description><link>https://zenn.dev/topics/shell</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/c8d33e6510.jpeg</url><title>Zennの「shell」のフィード</title><link>https://zenn.dev/topics/shell</link></image><generator>zenn.dev</generator><lastBuildDate>Wed, 04 Sep 2024 03:00:44 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/shell/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Shellを使ったプロセスの非同期実行]]></title><description><![CDATA[
+ Shellを使ったプロセスの非同期実行
+シェルをマルチプロセスで動かす方法ってどんなんがあるか気になったので調査。
+
+ &amp;バックグラウンド実行をwaitを使う
+
+プロセスをバックグラウンドで実行するためにアンパサンドをつける
+直後に$!でプロセスIDを取得
+wait pid を使ってプロセスを待つ
+
+(
+  sleep 3
+  exit 0
+) &amp;
+PID1=$!
+
+(
+  sleep 9
+  exit 0
+) &amp;
+PID2=$!
+
+wait $PID1 $PID2
+
+ execとプロセス置換
+
+exec 3&lt; &lt;(cp largefile1 la...]]></description><link>https://zenn.dev/masaki_mori72/articles/820d267f3e0610</link><guid isPermaLink="true">https://zenn.dev/masaki_mori72/articles/820d267f3e0610</guid><pubDate>Mon, 02 Sep 2024 05:33:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--OtZZPyzm--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Shell%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%259F%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25BB%25E3%2582%25B9%25E3%2581%25AE%25E9%259D%259E%25E5%2590%258C%25E6%259C%259F%25E5%25AE%259F%25E8%25A1%258C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:masaki%2520mori%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2h0Zy0zeERLZF9VY19OaFA0TVB2S1BqRkNFc2JrV1loSk5aTV9LPXMyNTAtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>masaki mori</dc:creator></item><item><title><![CDATA[【備忘録】go installでインストールしたモジュールのパスが通ってないとき]]></title><description><![CDATA[go installでインストールしたモジュールにパスが通ってないことがある。
+その場合はターミナルで以下のコマンドを実行し、GOの環境変数を参照する。
+go env GOPATH
+この階層の下にインストールしたモジュールのディレクトリがあるので、各自のシェルに従ってパスを通す。
+]]></description><link>https://zenn.dev/antapp/articles/8ea596c64c2d8d</link><guid isPermaLink="true">https://zenn.dev/antapp/articles/8ea596c64c2d8d</guid><pubDate>Fri, 30 Aug 2024 09:00:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Oj7FgZbv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%2582%2599%25E5%25BF%2598%25E9%258C%25B2%25E3%2580%2591go%2520install%25E3%2581%25A7%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%2597%25E3%2581%259F%25E3%2583%25A2%25E3%2582%25B8%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%25AE%25E3%2583%2591%25E3%2582%25B9%25E3%2581%258C%25E9%2580%259A%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25AA%25E3%2581%2584%25E3%2581%25A8%25E3%2581%258D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kutsu-4ta%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZkYWE2ZmJlNGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kutsu-4ta</dc:creator></item><item><title><![CDATA[source .bashrc 等でシェルの動作確認するのはやめてほしい]]></title><description><![CDATA[source コマンドを使用したシェルの設定確認はやめてほしいです.
+代わりに,
+exec $SHELL -l
+を使用してください.
+
+ どうして
+.bashrc, .profile, .bash_profile などのシェル設定ファイルやPATH/環境変数の設定を確認する際に, source コマンド(e.g. source .bashrc) を利用するのはおすすめできません.
+既に読み込まれた設定が残っているため, 設定が正しく反映されているかどうかや, 設定の参照状況や優先順位を確認することが難しくなるからです.
+「source コマンドでパスが通ったのが確認できたのでOKだ!」っ...]]></description><link>https://zenn.dev/sashimi/articles/f28f9c00d24e5c</link><guid isPermaLink="true">https://zenn.dev/sashimi/articles/f28f9c00d24e5c</guid><pubDate>Fri, 30 Aug 2024 04:40:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--aCnfbyvK--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:source%2520.bashrc%2520%25E7%25AD%2589%25E3%2581%25A7%25E3%2582%25B7%25E3%2582%25A7%25E3%2583%25AB%25E3%2581%25AE%25E5%258B%2595%25E4%25BD%259C%25E7%25A2%25BA%25E8%25AA%258D%25E3%2581%2599%25E3%2582%258B%25E3%2581%25AE%25E3%2581%25AF%25E3%2582%2584%25E3%2582%2581%25E3%2581%25A6%25E3%2581%25BB%25E3%2581%2597%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:sashimi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2k0dkdSZ0t3ZWRrVWZwYXFnbmt6UHJSQXlfTHJxMHdGZUMycEFLalE9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sashimi</dc:creator></item><item><title><![CDATA[Linux, shell 同字が2回以上繰返(連続)した文字列を含む行をgrep]]></title><description><![CDATA[
+ Linux, shell 同字が2回以上繰返(連続)した文字列を含む行をgrep
+2024-08-11
+
+
+ (1).何がしたかったか
+
+textファイル(文献)の中で、繰返して(連続して)使用されている「字」をgrepしたかった。
+
+桃之夭夭　灼灼其華
+之子于歸　宜其室家
+このような羅列が6000行もあり、繰返して(連続して)使用されている「字」を知りたかった。この例なら「夭夭」「灼灼」
+
+
+ (2).結論
+
+できた。
+
+grep でいける
+sed でもいける
+
+
+
+
+
+ (3).環境
+
+Ubuntu 22.04
+GNU grep 3.7
+GNU sed 4.8
+
+
+
+ (4).g...]]></description><link>https://zenn.dev/sorehaomosiroi/articles/sorehaomosiroi-20240811_linux_grep_dup_char</link><guid isPermaLink="true">https://zenn.dev/sorehaomosiroi/articles/sorehaomosiroi-20240811_linux_grep_dup_char</guid><pubDate>Sat, 10 Aug 2024 23:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ipfcG5uo--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%252C%2520shell%2520%25E5%2590%258C%25E5%25AD%2597%25E3%2581%258C2%25E5%259B%259E%25E4%25BB%25A5%25E4%25B8%258A%25E7%25B9%25B0%25E8%25BF%2594%2528%25E9%2580%25A3%25E7%25B6%259A%2529%25E3%2581%2597%25E3%2581%259F%25E6%2596%2587%25E5%25AD%2597%25E5%2588%2597%25E3%2582%2592%25E5%2590%25AB%25E3%2582%2580%25E8%25A1%258C%25E3%2582%2592grep%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2584%25E3%2581%2584%25E3%2581%25AD%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2YyMDNkNWJiZDcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>いいね</dc:creator></item><item><title><![CDATA[特定のbranch以外を削除するシェルスクリプト]]></title><description><![CDATA[
+ モチベーション
+GitHubを使用して開発の仕事をしていると、手元にブランチが溜まってくるので、必要なブランチ以外はシュッと削除したいことがあります。
+ということで、以下の要件でシェルスクリプトを作成しました。
+
+main、master、staging、カレントブランチは削除しない
+その時々で削除したくないブランチが存在する場合があるので、上記以外に削除しないブランチを柔軟に設定したい（引数で渡せればOK）
+
+
+ シェルスクリプト
+以下のスクリプトを.zshrcに追記しました。
+※こちらはzshでのみ動作確認しています。
+# main,master,staging,カレントブランチ,...]]></description><link>https://zenn.dev/harasho/articles/shell-script-for-delete-git-branches</link><guid isPermaLink="true">https://zenn.dev/harasho/articles/shell-script-for-delete-git-branches</guid><pubDate>Thu, 08 Aug 2024 14:01:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--UYMZOMmq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%2589%25B9%25E5%25AE%259A%25E3%2581%25AEbranch%25E4%25BB%25A5%25E5%25A4%2596%25E3%2582%2592%25E5%2589%258A%25E9%2599%25A4%25E3%2581%2599%25E3%2582%258B%25E3%2582%25B7%25E3%2582%25A7%25E3%2583%25AB%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:harasho%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE0N2IyMDI1NzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>harasho</dc:creator></item><item><title><![CDATA[shells]]></title><description><![CDATA[
+ shells
+
+ shells
+#!/bin/bash
+
+urls=(
+    "https://coinmarketcap.com/ja/currencies/shuffle/"
+)
+
+while true; do
+    url=${urls[$RANDOM % ${#urls[@]}]}
+    sleep_time=$((600 + RANDOM % 1201))
+
+    echo "Accessing: $url"
+    curl -s "$url" &gt; /dev/null
+
+    echo "Sleeping for $sleep_time seconds.....]]></description><link>https://zenn.dev/blockchian/articles/87ecd5d2fb9908</link><guid isPermaLink="true">https://zenn.dev/blockchian/articles/87ecd5d2fb9908</guid><pubDate>Mon, 05 Aug 2024 04:36:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--clUOjAQZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_80:shells%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:meta%2Cx_90%2Cy_121/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>meta</dc:creator></item><item><title><![CDATA[新しい環境で活用！ZshとOh My Zshの設定ガイド（Dockerでのテスト導入も解説）]]></title><description><![CDATA[
  はじめに
 こんにちは、Kouです。
 CentOSのメンテナンスサポートサポートが終了し、新しいOSへの移行が必要になってきました。
@@ -188,86 +288,38 @@ https://qiita.com/soh19/items/200f5881ed1fc87665dd
 
 
  通知
-$ osascript -e 'display not...]]></description><link>https://zenn.dev/tkmfujise/articles/e8b3a9b9719422</link><guid isPermaLink="true">https://zenn.dev/tkmfujise/articles/e8b3a9b9719422</guid><pubDate>Thu, 11 Jul 2024 20:39:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vIm_X9QR--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BMac%255D%2520%25E6%2599%2582%25E9%2596%2593%25E3%2581%258C%25E3%2581%258B%25E3%2581%258B%25E3%2582%258B%25E5%2587%25A6%25E7%2590%2586%25E3%2582%2592%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%259F%25E3%2583%258A%25E3%2583%25AB%25E3%2581%25A7%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%2599%25E3%2582%258B%25E3%2581%25A8%25E3%2580%2581%25E7%25B5%2582%25E3%2582%258F%25E3%2581%25A3%25E3%2581%259F%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%259F%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%25A7%25E7%2594%25BB%25E9%259D%25A2%25E3%2581%25AB%25E9%2580%259A%25E7%259F%25A5%25E3%2581%2599%25E3%2582%258B%25E8%2587%25AA%25E4%25BD%259C%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tkmfujise%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4WkRseXBFekRMdUdCUEowOWI4XzQ1Z0xSVlNhekEwQm9jR2ZhRWM9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tkmfujise</dc:creator></item><item><title><![CDATA[【Homebrew】メモ]]></title><description><![CDATA[
+$ osascript -e 'display not...]]></description><link>https://zenn.dev/tkmfujise/articles/e8b3a9b9719422</link><guid isPermaLink="true">https://zenn.dev/tkmfujise/articles/e8b3a9b9719422</guid><pubDate>Thu, 11 Jul 2024 20:39:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vIm_X9QR--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BMac%255D%2520%25E6%2599%2582%25E9%2596%2593%25E3%2581%258C%25E3%2581%258B%25E3%2581%258B%25E3%2582%258B%25E5%2587%25A6%25E7%2590%2586%25E3%2582%2592%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%259F%25E3%2583%258A%25E3%2583%25AB%25E3%2581%25A7%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%2599%25E3%2582%258B%25E3%2581%25A8%25E3%2580%2581%25E7%25B5%2582%25E3%2582%258F%25E3%2581%25A3%25E3%2581%259F%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%259F%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%25A7%25E7%2594%25BB%25E9%259D%25A2%25E3%2581%25AB%25E9%2580%259A%25E7%259F%25A5%25E3%2581%2599%25E3%2582%258B%25E8%2587%25AA%25E4%25BD%259C%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tkmfujise%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4WkRseXBFekRMdUdCUEowOWI4XzQ1Z0xSVlNhekEwQm9jR2ZhRWM9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tkmfujise</dc:creator></item><item><title><![CDATA[【Homebrew】よく使うコマンド]]></title><description><![CDATA[
+ Homebrewの更新（フォーミュラ（パッケージ）は更新されない）
+
 shell
-# Homebrewの更新（フォーミュラ（パッケージ）は更新されない）
 brew update
 
-# 更新可能なフォーミュラの一覧を表示
+
+
+ 更新可能なフォーミュラの一覧を表示
+
+shell
 brew outdated
 
-#インストールしたフォーミュラの更新
+
+
+ インストールしたフォーミュラの更新
+
+shell
 brew upgrade
 
-# キャッシュ削除
+
+
+ キャッシュ削除
+
+shell
 brew cleanup
 
-# brew関連の問題検出
+
+
+ brew関連の問題検出
+
+shell
 brew doctor
 
-]]></description><link>https://zenn.dev/blc/articles/e24095b56acc21</link><guid isPermaLink="true">https://zenn.dev/blc/articles/e24095b56acc21</guid><pubDate>Sat, 06 Jul 2024 11:21:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--eNZ3-lvG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:%25E3%2580%2590Homebrew%25E3%2580%2591%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yota%2520Suzuki%2520%252F%2520BLC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS3JJQkRZakpBMlJsc2JzUWtCRDhXak9zOGc1cnpoUk5hSXlMcDJpMTkzTk5NamZjaz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yota Suzuki / BLC</dc:creator></item><item><title><![CDATA[【Next.js】メモ]]></title><description><![CDATA[
- Shell
-# ----&lt; 作成 &gt;----
-# "https://ja.next-community-docs.dev/docs/app-router/api-reference/create-next-app"
-
-## pt.1 デフォルト (非対話：オプション指定)（"your-project-name"は適宜変更する）
-npx create-next-app@latest your-project-name \
---ts --tailwind --eslint --src-dir --app --import-alias '@/*'
-
-## pt.2 対話的（"y...]]></description><link>https://zenn.dev/blc/articles/dbfff5bb88d99d</link><guid isPermaLink="true">https://zenn.dev/blc/articles/dbfff5bb88d99d</guid><pubDate>Sat, 06 Jul 2024 11:16:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Q7cZNkss--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:%25E3%2580%2590Next.js%25E3%2580%2591%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yota%2520Suzuki%2520%252F%2520BLC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS3JJQkRZakpBMlJsc2JzUWtCRDhXak9zOGc1cnpoUk5hSXlMcDJpMTkzTk5NamZjaz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yota Suzuki / BLC</dc:creator></item><item><title><![CDATA[macOSのCLIでpdfの全ページを画像(png)に変換するシェルスクリプト]]></title><description><![CDATA[ただの個人メモです。
-ググってると、複数ページのPDFに対応してるものがなかった気がしたので作りました。
-カレントディレクトリに存在する全てのpdfファイルの全ページをpng画像に変換し、pdfファイルごとにディレクトリを作成して格納するスクリプトです。
-ImageMagickをCLIで使えればいいので、たぶんmacOSでなくても使えると思います。
-
- 手順
-
- 1. ImageMagickをインストール
-brew でImageMagickをインストールしてください。後述するシェルスクリプトで呼び出して、pdfをpngに変換するために利用します。
-brew install imagema...]]></description><link>https://zenn.dev/t_fukumoto/articles/f162cb8b1d6712</link><guid isPermaLink="true">https://zenn.dev/t_fukumoto/articles/f162cb8b1d6712</guid><pubDate>Fri, 05 Jul 2024 12:09:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GMYNToOb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:macOS%25E3%2581%25AECLI%25E3%2581%25A7pdf%25E3%2581%25AE%25E5%2585%25A8%25E3%2583%259A%25E3%2583%25BC%25E3%2582%25B8%25E3%2582%2592%25E7%2594%25BB%25E5%2583%258F%2528png%2529%25E3%2581%25AB%25E5%25A4%2589%25E6%258F%259B%25E3%2581%2599%25E3%2582%258B%25E3%2582%25B7%25E3%2582%25A7%25E3%2583%25AB%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Teruhisa%2520Fukumoto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pFR3g5OWtnM28tSDRUVGNVQmZjNWhXSmlubDI2bjNJTTAwY0IzT3c9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Teruhisa Fukumoto</dc:creator></item><item><title><![CDATA[JenkinsでNodeがオンラインかどうかを確認する方法]]></title><description><![CDATA[
- 概要
-
-JenkinsのNodeが時々勝手に途切れてオフラインになることがある
-オフラインを検知して再起動や通知をしたい
-そのための検知方法がないか調べた
-
-
- 内容
-
- RestAPIを使用する方法
-以下のようにnodeのJson情報を取ってきてjqで要素だけ取ってくるのがいい
-curl --silent $JENKINS_URL/computer/$JENKINS_NODENAME/api/json | jq .offline
-返ってくるJsonは以下記事が参考になる。
-https://qiita.com/tamikura@github/items/033ab9180561b62...]]></description><link>https://zenn.dev/masaki_mori72/articles/ebd9e7876e04ae</link><guid isPermaLink="true">https://zenn.dev/masaki_mori72/articles/ebd9e7876e04ae</guid><pubDate>Wed, 03 Jul 2024 14:58:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9gPWpUu8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Jenkins%25E3%2581%25A7Node%25E3%2581%258C%25E3%2582%25AA%25E3%2583%25B3%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%25B3%25E3%2581%258B%25E3%2581%25A9%25E3%2581%2586%25E3%2581%258B%25E3%2582%2592%25E7%25A2%25BA%25E8%25AA%258D%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:masaki%2520mori%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2h0Zy0zeERLZF9VY19OaFA0TVB2S1BqRkNFc2JrV1loSk5aTV9LPXMyNTAtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>masaki mori</dc:creator></item><item><title><![CDATA[ワンライナーで無限ループ]]></title><description><![CDATA[
- 無限ループ
-shell を叩いていると時々無限ループしたくなる、その時最も短い行で無限ループしたい
-
- while
-while :; do ./something; done
-最も単純だがちょっと文法が分からなくなりがちな上に、回数制限もかけられない
-
- for
-for i in {0..42}; do ./something; done
-回数制限を持たせられるが、長い、面倒くさい
-文法は覚えていても良さそう
-for i in {0..42}; do ./something --trial $i; done
-使い道はある。
-
- yes
-yes ./something | sh
-考える...]]></description><link>https://zenn.dev/genf740/articles/4f1f5995-3b29-411c-a2b4-c6ab45bb38a8</link><guid isPermaLink="true">https://zenn.dev/genf740/articles/4f1f5995-3b29-411c-a2b4-c6ab45bb38a8</guid><pubDate>Wed, 03 Jul 2024 08:40:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--sW1xmu8K--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%25AF%25E3%2583%25B3%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%258A%25E3%2583%25BC%25E3%2581%25A7%25E7%2584%25A1%25E9%2599%2590%25E3%2583%25AB%25E3%2583%25BC%25E3%2583%2597%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:gen740%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pNOGJfSGVlRHJhclh6YllqWnBrQjBWUVZtcExib3ZzRE42WEFoYjdVPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>gen740</dc:creator></item><item><title><![CDATA[mv や cp, rm コマンドで隠しファイルも対象にする方法4選]]></title><description><![CDATA[mv コマンドや cp コマンドで実行対象にワイルドカード ( * ) を使い、ディレクトリ配下の全ファイル・全ディレクトリを指定することがあります。
-mv /path/from/* /path/to/
-しかしワイルドカードを使うと、指定直下（上記の例だと /path/from/ 直下）にある隠しファイル（ファイル名がドットから始まるファイル）は mv や cp, rm の対象になりません。
-ワイルドカードを使うような状況では、隠しファイルも対象に含めたいのが普通だと思うので、いくつかの方法を紹介します。
-以下に実験用に使えるリポジトリを用意しました。clone して from から t...]]></description><link>https://zenn.dev/shuh/articles/mvrm-dotfiles-dotglob</link><guid isPermaLink="true">https://zenn.dev/shuh/articles/mvrm-dotfiles-dotglob</guid><pubDate>Sun, 30 Jun 2024 13:16:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--rHAVxkD9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:mv%2520%25E3%2582%2584%2520cp%252C%2520rm%2520%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2581%25A7%25E9%259A%25A0%25E3%2581%2597%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2582%25E5%25AF%25BE%25E8%25B1%25A1%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%25954%25E9%2581%25B8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:shusch%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk0ODg1Y2EwN2QuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>shusch</dc:creator></item><item><title><![CDATA[FTPサーバからファイルをgetし、S3にputするシェルスクリプト]]></title><description><![CDATA[
- 背景
-アクティブモードに制限されたFTP用のサーバからファイルを取得する際、固定IPでアクセスする必要がありました。
-定期的にサーバにファイルを取り込み、使用しているS3に置きに行くための簡易的なEC2サーバを立ち上げ、シェルスクリプトをAmazon EventBridgeで定期的に叩く暫定対応を行いました。
-
- 使用したシェルスクリプトファイル例
-#!/bin/bash
-# $1 = 日付(デフォルトは実行日)
-
-# AWSパラメータストアに接続情報を配置し、そこから取得するようにしています。
-get_ftp_config() {
-    local param_name=$1
- ...]]></description><link>https://zenn.dev/goals_techblog/articles/fa83d48109d8a8</link><guid isPermaLink="true">https://zenn.dev/goals_techblog/articles/fa83d48109d8a8</guid><pubDate>Thu, 27 Jun 2024 10:29:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--suqn7RUh--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:FTP%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2581%258B%25E3%2582%2589%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2592get%25E3%2581%2597%25E3%2580%2581S3%25E3%2581%25ABput%25E3%2581%2599%25E3%2582%258B%25E3%2582%25B7%25E3%2582%25A7%25E3%2583%25AB%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Yuki%2520Sekine%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY0ZmMzNjliMDYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Goals%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2YxZjZiNmQ0ZmMuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yuki Sekine</dc:creator></item></channel></rss>
+]]></description><link>https://zenn.dev/blc/articles/e24095b56acc21</link><guid isPermaLink="true">https://zenn.dev/blc/articles/e24095b56acc21</guid><pubDate>Sat, 06 Jul 2024 11:21:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--eArEn-vW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Homebrew%25E3%2580%2591%25E3%2582%2588%25E3%2581%258F%25E4%25BD%25BF%25E3%2581%2586%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yota%2520Suzuki%2520%252F%2520BLC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS3JJQkRZakpBMlJsc2JzUWtCRDhXak9zOGc1cnpoUk5hSXlMcDJpMTkzTk5NamZjaz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yota Suzuki / BLC</dc:creator></item></channel></rss>
