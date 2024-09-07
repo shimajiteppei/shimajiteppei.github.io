@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Sat, 07 Sep 2024 00:40:40 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[データ分析 python 平均値検定の基礎：母集団と2群間の検定法]]></title><description><![CDATA[
+ 正規分布に従っているかを確認
+まず、比較するデータの正規分布を確認します。
+
+正規分布に従っている場合は、パラメトリック検定
+
+正規分布に従っていない場合は、ノンパラメトリック検定 となります。
+
+データが正規分布に従っているかどうかを確認するには
+
+サンプルサイズが少ない場合は、シャピロ・ウィルク検定（S-W検定） を使用します
+サンプルサイズが多い場合は、コルモゴロフ・スミルノフ検定（K-S検定） を使用します
+
+
+ パラメトリック検定の場合
+
+母集団が1つの場合、1標本のt検定を使用します。
+母順団が2つの場合、
+
+データの対応がある場合は対応のある2標本のt検定を使用します
+...]]></description><link>https://zenn.dev/longbridge/articles/b5abd84b331381</link><guid isPermaLink="true">https://zenn.dev/longbridge/articles/b5abd84b331381</guid><pubDate>Fri, 06 Sep 2024 23:18:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--RFZUexMa--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E5%2588%2586%25E6%259E%2590%2520python%2520%25E5%25B9%25B3%25E5%259D%2587%25E5%2580%25A4%25E6%25A4%259C%25E5%25AE%259A%25E3%2581%25AE%25E5%259F%25BA%25E7%25A4%258E%25EF%25BC%259A%25E6%25AF%258D%25E9%259B%2586%25E5%259B%25A3%25E3%2581%25A82%25E7%25BE%25A4%25E9%2596%2593%25E3%2581%25AE%25E6%25A4%259C%25E5%25AE%259A%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:piyoko%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FlYjQwNDk5NTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>piyoko</dc:creator></item><item><title><![CDATA[データ分析 python 複数のグラフを並べて表示]]></title><description><![CDATA[複数のグラフを左右に並べると、グラフの比較が行いやすくなります。
+
+ 使用したデータ
+使用したデータ
+import pandas as pd
+df = pd.read_csv('/content/drive/MyDrive/webshop_review_data.csv')
+df
+
+
+ データの項目名
+
+お客様の性別
+お客様の年齢
+購入タイプ
+購入目的
+サイトの使いやすさ評価
+配送の利便性評価
+注文のしやすさ評価
+サイトのナビゲーション評価
+商品の品質評価
+ショッピング体験の快適さ評価
+カスタマーサポートの評価
+サービス全般の評価
+商品の梱包状態評価
+総合満足度
+
+
+
+ 左右に配置して見...]]></description><link>https://zenn.dev/longbridge/articles/eeaaee21511b86</link><guid isPermaLink="true">https://zenn.dev/longbridge/articles/eeaaee21511b86</guid><pubDate>Fri, 06 Sep 2024 14:59:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---DouhQUD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E5%2588%2586%25E6%259E%2590%2520python%2520%25E8%25A4%2587%25E6%2595%25B0%25E3%2581%25AE%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%2595%25E3%2582%2592%25E4%25B8%25A6%25E3%2581%25B9%25E3%2581%25A6%25E8%25A1%25A8%25E7%25A4%25BA%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:piyoko%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FlYjQwNDk5NTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>piyoko</dc:creator></item><item><title><![CDATA[【AI_5日目】FastAPI_1冊目]]></title><description><![CDATA[こんにちは投資ロウトです。
+
+ 背景
+AI開発ができるためにwebAPIについて理解を深めていきます。
+※Tailwind CSSとkeycloakは現場でピンチになれば再開します。
+
+ スキーマ
+api/schemas/task.py
+from pydantic import BaseModel, Field
+
+class StockBase(BaseModel):
+    # 共通するフィールドは親クラスに定義
+    stock_name: str | None = Field(None, example="投資ロウト株式会社")
+
+class StockCreate(StockB...]]></description><link>https://zenn.dev/doshirote/articles/44cafffd379ebc</link><guid isPermaLink="true">https://zenn.dev/doshirote/articles/44cafffd379ebc</guid><pubDate>Fri, 06 Sep 2024 14:47:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8QeAuSeu--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590AI_5%25E6%2597%25A5%25E7%259B%25AE%25E3%2580%2591FastAPI_1%25E5%2586%258A%25E7%259B%25AE%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%258A%2595%25E8%25B3%2587%25E3%2583%25AD%25E3%2582%25A6%25E3%2583%2588%25E3%2581%25AE%25E6%258A%2580%25E8%25A1%2593%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM3ODY0NWMwOGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>投資ロウトの技術ブログ</dc:creator></item><item><title><![CDATA[有名アプリをクローンして学ぶ講座一覧]]></title><description><![CDATA[Real World Exampleで学びたい
+
+ トイアプリよりReal World Exampleで学びたい
+新しいプログラミング言語、ジャンルでの開発を学ぶ上で本を読んだり公式ドキュメントを見るのは有用ですが、実際のプロダクションエンジニアとしてのお仕事プログラミングとは乖離があります。
+本についているサンプルコードも一つの参考となりますがコード量は小さく局所的にしか参考にならなかったり、公式ドキュメントはレファレンスに徹底していてチュートリアルがなかったりそれぞれはまりどころがあったりします。
+トイアプリより実際の業務コード(Real World Example)で学びたい！
+最...]]></description><link>https://zenn.dev/hiromichinomata/articles/09dcd455442abe</link><guid isPermaLink="true">https://zenn.dev/hiromichinomata/articles/09dcd455442abe</guid><pubDate>Fri, 06 Sep 2024 13:34:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--IyzranYl--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%259C%2589%25E5%2590%258D%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E3%2582%25AF%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%25B3%25E3%2581%2597%25E3%2581%25A6%25E5%25AD%25A6%25E3%2581%25B6%25E8%25AC%259B%25E5%25BA%25A7%25E4%25B8%2580%25E8%25A6%25A7%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Hiromichi%2520NOMATA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dKVzhiSzBKYjZ4cXc1MDFjSHFXXzJ1cmxiMGFMYmY5T3poY1RPUnc9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Hiromichi NOMATA</dc:creator></item><item><title><![CDATA[データ分析 python 基本のグラフ ヒストグラム]]></title><description><![CDATA[データ分析で使用するグラフを簡単にまとめていきます
+python + google colaboratory で 実行しています
+
+ ヒストグラムとは
+連続する数値データの分布を視覚化します。
+例）
+20人の年齢データがあるとします。
+ビンの個数を5個に設定（＝データを5コの範囲に分割する）し、データがどこに分布しているかをグラフで表示します。
+import pandas as pd
+data = {'Age': [15, 25, 29, 31, 33, 35, 38, 40, 42, 45, 47, 50, 52, 55, 60, 65, 70]}
+df = pd.DataFrame(...]]></description><link>https://zenn.dev/longbridge/articles/70def3d4c3c750</link><guid isPermaLink="true">https://zenn.dev/longbridge/articles/70def3d4c3c750</guid><pubDate>Fri, 06 Sep 2024 12:54:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--QoW-i6vS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E5%2588%2586%25E6%259E%2590%2520python%2520%25E5%259F%25BA%25E6%259C%25AC%25E3%2581%25AE%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%2595%2520%25E3%2583%2592%25E3%2582%25B9%25E3%2583%2588%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%25A0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:piyoko%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FlYjQwNDk5NTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>piyoko</dc:creator></item><item><title><![CDATA[データ分析 python 基本のグラフ 棒グラフ]]></title><description><![CDATA[データ分析で使用するグラフを簡単にまとめていきます
+python + google colaboratory で 実行しています
+
+ 棒グラフとは
+カテゴリデータの値や頻度を視覚化します。
+例）
+こんな売上CSVがあったとします。
+
+
+
+Product
+Sales
+
+
+
+
+Product A
+500
+
+
+Product B
+300
+
+
+Product C
+800
+
+
+Product D
+150
+
+
+Product E
+600
+
+
+
+import pandas as pd
+data = {
+    'Product': ['Product A', 'Product B', 'Product...]]></description><link>https://zenn.dev/longbridge/articles/44cf541bbd6392</link><guid isPermaLink="true">https://zenn.dev/longbridge/articles/44cf541bbd6392</guid><pubDate>Fri, 06 Sep 2024 12:04:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--cW-d7C_b--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E5%2588%2586%25E6%259E%2590%2520python%2520%25E5%259F%25BA%25E6%259C%25AC%25E3%2581%25AE%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%2595%2520%25E6%25A3%2592%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:piyoko%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FlYjQwNDk5NTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>piyoko</dc:creator></item><item><title><![CDATA[テキストデータをGBDTで学習したい！| SentenceTransformers + LightGBM + Polars]]></title><description><![CDATA[
+
+ はじめに
+テキスト列を含む表形式データを解析する必要に迫られた際に，次のような悩みを持つ方がいるかもしれません．
+
+LightGBM や XGBoost などで扱えるようにテキストデータをうまく扱いたい
+データ数が少なく，NNの学習が過剰になりそう
+手間なく，簡単にベースラインを構築したい
+
+そこで，sentence_transformers による文埋め込みベクトルを表データとして見て LightGBM による学習を行う手法を紹介します．
+急いでいる人向けの全文コードimport lightgbm as lgb
+import polars as pl
+import torch
+f...]]></description><link>https://zenn.dev/prgckwb/articles/976f4dbd12a331</link><guid isPermaLink="true">https://zenn.dev/prgckwb/articles/976f4dbd12a331</guid><pubDate>Fri, 06 Sep 2024 11:37:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9adSEAsL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2586%25E3%2582%25AD%25E3%2582%25B9%25E3%2583%2588%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%2592GBDT%25E3%2581%25A7%25E5%25AD%25A6%25E7%25BF%2592%25E3%2581%2597%25E3%2581%259F%25E3%2581%2584%25EF%25BC%2581%257C%2520SentenceTransformers%2520%252B%2520LightGBM%2520%252B%2520Po...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A1%25E3%2581%258F%25E3%2582%258F%25E3%2581%25B6%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU1MWU5MTZhMjguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ちくわぶ</dc:creator></item><item><title><![CDATA[[Python]Atcoderで入茶するために使ったチートシート 🟤]]></title><description><![CDATA[
+ はじめに
+Atcoderで入茶するために作成したチートシートです。(言語はPython)
+
+ 入力
+
+ 1つの値を受け取る
+# 文字列を受け取る場合
+S = input() 
+
+# 整数を受け取る場合
+N = int(input()) 
+
+# 小数を受け取る場合
+F = float(input())
+
+ 複数（決まった個数）の値を1行で受け取る
+# 文字列を受け取る場合
+A, B = input().split()
+
+# 整数を受け取る場合
+X, Y, Z = map(int, input().split())
+
+# 小数を受け取る場合
+H, M, S = map(float, in...]]></description><link>https://zenn.dev/rabbit_penguin0/articles/bcc95f7703124a</link><guid isPermaLink="true">https://zenn.dev/rabbit_penguin0/articles/bcc95f7703124a</guid><pubDate>Fri, 06 Sep 2024 09:55:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--IbnnFnxU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BPython%255DAtcoder%25E3%2581%25A7%25E5%2585%25A5%25E8%258C%25B6%25E3%2581%2599%25E3%2582%258B%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AB%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%259F%25E3%2583%2581%25E3%2583%25BC%25E3%2583%2588%25E3%2582%25B7%25E3%2583%25BC%25E3%2583%2588%2520%2520%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%259A%25E3%2583%25B3%25E3%2582%25AE%25E3%2583%25B3%2520%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk3NjJhYjQ1YTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ペンギン🐧</dc:creator></item><item><title><![CDATA[【2024年版】めっちゃ使いやすいPythonの開発環境をVSCode上で構築する方法]]></title><description><![CDATA[筆者はPythonのパッケージ管理ツールとしてpip、バージョン管理ツール（仮想環境）としてpyenv / virtualenvを利用していますが、
+要求されるパッケージのバージョンが衝突する、全体の環境が汚れていくなど色々不便さを感じています。このような悩みはPythonユーザーあるあるではないでしょうか？
+そこで今回は、2024年時点で非常に使いやすいと噂のRyeやその他ツールを改めて導入し、
+各ツールの利用方法や使い心地などを確認することにしました。
+
+ この記事によってできること
+
+Pythonの新規プロジェクト立ち上げが容易に行える
+
+パッケージ管理、バージョン管理、仮想環境管...]]></description><link>https://zenn.dev/forcia_tech/articles/202409_python_environment_construction</link><guid isPermaLink="true">https://zenn.dev/forcia_tech/articles/202409_python_environment_construction</guid><pubDate>Fri, 06 Sep 2024 04:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--AN1RaMxG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%25902024%25E5%25B9%25B4%25E7%2589%2588%25E3%2580%2591%25E3%2582%2581%25E3%2581%25A3%25E3%2581%25A1%25E3%2582%2583%25E4%25BD%25BF%25E3%2581%2584%25E3%2582%2584%25E3%2581%2599%25E3%2581%2584Python%25E3%2581%25AE%25E9%2596%258B%25E7%2599%25BA%25E7%2592%25B0%25E5%25A2%2583%25E3%2582%2592VSCode%25E4%25B8%258A%25E3%2581%25A7%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:FORCIA%2520Tech%2520Blog%2520%25E9%2581%258B...%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2QyMDIwOGYzMDMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:FORCIA%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NkZmRkZTQ5MGUuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>FORCIA Tech Blog 運営チーム</dc:creator></item><item><title><![CDATA[websocketsでリアルタイム音声処理]]></title><description><![CDATA[
+ はじめに
+アプリケーションから取得した音声をリアルタイムにサーバに送り処理を行う方法としてwebsocketsが使いやすいです。
+例えば下記のような音声対話アプリケーションを考えます。
+
+ユーザはスマートフォンなどの端末から音声を入力し、それをサーバ側で処理を行い、AIからの発話音声をまた端末から出力するようなユースケースを考える場合、AI発話の応答速度を早くするために、ユーザの入力音声をリアルタイムでサーバに送る必要があります。
+もちろん、一旦ユーザの発話が終わるまで待ってから、まとめてAPIなどでサーバに音声を送る方法もありますが、その場合、ユーザの発話が終わるまで処理を行うこと...]]></description><link>https://zenn.dev/asap/articles/47f839550e5535</link><guid isPermaLink="true">https://zenn.dev/asap/articles/47f839550e5535</guid><pubDate>Thu, 05 Sep 2024 21:31:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--PWobMA4M--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:websockets%25E3%2581%25A7%25E3%2583%25AA%25E3%2582%25A2%25E3%2583%25AB%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25A0%25E9%259F%25B3%25E5%25A3%25B0%25E5%2587%25A6%25E7%2590%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:asap%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VhYjVhYTQ1MTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>asap</dc:creator></item><item><title><![CDATA[Difyのコードを読み解く！LLMのAPIキーはどのように保存されているのか？]]></title><description><![CDATA[
+ はじめに
+最近Difyの勉強会も増え、ソースコードを読んでいましたが、気になるところが多すぎる!!! ということで、1つずつ記事にまとめて疑問を潰していこうと思っています。
+今回はOpenAIやAnthropicのAPIキーがどのようにどこに保存されているのか、ソースコードを読み解いたのでまとめてみました。
+
+ これ知りたい!!!のリクエストお待ちしています
+
+この実装気になってるけどどうなってる？
+Difyのここって改善できる？
+
+などありましたら気軽にコメントください。ソッコーで調べて記事にします...（たぶん
+ということで今回は「LLMのAPIキーはどのように保存されているか」...]]></description><link>https://zenn.dev/ttks/articles/dacf1768f4c5c3</link><guid isPermaLink="true">https://zenn.dev/ttks/articles/dacf1768f4c5c3</guid><pubDate>Thu, 05 Sep 2024 14:19:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--15MidHd6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Dify%25E3%2581%25AE%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2582%2592%25E8%25AA%25AD%25E3%2581%25BF%25E8%25A7%25A3%25E3%2581%258F%25EF%25BC%2581LLM%25E3%2581%25AEAPI%25E3%2582%25AD%25E3%2583%25BC%25E3%2581%25AF%25E3%2581%25A9%25E3%2581%25AE%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E4%25BF%259D%25E5%25AD%2598%25E3%2581%2595%25E3%2582%258C%25E3%2581%25A6%25E3%2581%2584%25E3%2582%258B%25E3%2581%25AE%25E3%2581%258B%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Totsuka%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhmYjc3MDZiOWQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Totsuka</dc:creator></item><item><title><![CDATA[discord.pyでtokenを正確に検知する方法]]></title><description><![CDATA[二次配布禁止
+discord.pyでtokenを100%検知する方法をしりたいと思って調べても出てこない人のためにこの本を書いています]]></description><link>https://zenn.dev/952490802574164/books/856999aa67ef83</link><guid isPermaLink="true">https://zenn.dev/952490802574164/books/856999aa67ef83</guid><pubDate>Thu, 05 Sep 2024 13:16:38 GMT</pubDate><dc:creator>くれむのあ</dc:creator></item><item><title><![CDATA[Pythonビットボード：オセロAI開発で使える効率的なボード管理法]]></title><description><![CDATA[
+ はじめに
+最近NovocStudioというwebサービスでオセロAIを開発してみました。そのサービスでは「AI vs AI」しかできなかったので、ローカル上でオセロを作成し、AI対戦できるようにしてみました。ビットボードで作成するほうが高速化できるということだったので、PythonでPygameというライブラリを使用してそれらを実装しました。
+
+ ビットボードとは？
+ビットボードは、ボードゲームの状態をビット列（0と1の並び）で表現する手法です。オセロのような2次元のボードゲームにおいて、各マスの状態を1ビットで表現することで、非常に効率的にゲームの状態を管理できます。
+ビットボード...]]></description><link>https://zenn.dev/student_blog/articles/01fc18519596a0</link><guid isPermaLink="true">https://zenn.dev/student_blog/articles/01fc18519596a0</guid><pubDate>Thu, 05 Sep 2024 13:02:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--nO4DZdjJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2583%2593%25E3%2583%2583%25E3%2583%2588%25E3%2583%259C%25E3%2583%25BC%25E3%2583%2589%25EF%25BC%259A%25E3%2582%25AA%25E3%2582%25BB%25E3%2583%25ADAI%25E9%2596%258B%25E7%2599%25BA%25E3%2581%25A7%25E4%25BD%25BF%25E3%2581%2588%25E3%2582%258B%25E5%258A%25B9%25E7%258E%2587%25E7%259A%2584%25E3%2581%25AA%25E3%2583%259C%25E3%2583%25BC%25E3%2583%2589%25E7%25AE%25A1%25E7%2590%2586%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:IT%2520%25E3%2583%259E%25E3%2583%258A%25E3%2583%2596%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q1MjI3ODg4MmQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>IT マナブ</dc:creator></item><item><title><![CDATA[PythonでAIと連携した多方面な開発をする方法]]></title><description><![CDATA[
+Python（パイソン）とは動的型付けのインタープリター言語という、数字や文字などの型を自動車でいえばオートマチック車のように自動で決めてもらえる、実行速度が早いコンパイル言語（インタープリターが対義語）と違い、初級者向けなプログラミング言語です。
+また動的型付けですので手動な静的型付けのコンパイル言語と違い、手数が少なくて済みそうなので、大規模システムが作りやすいかもしれません。
+
+ Pythonはこれから需要が増える
+AIといったらPythonのみが対応な状況であり、最近は高校などで学習されているようです。実際に仕事で求められるPythonのスキルは、大卒の理数系の専門家のAIを作...]]></description><link>https://zenn.dev/shimada_print/articles/5d53bfc2154727</link><guid isPermaLink="true">https://zenn.dev/shimada_print/articles/5d53bfc2154727</guid><pubDate>Thu, 05 Sep 2024 12:09:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jYziA1pq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A7AI%25E3%2581%25A8%25E9%2580%25A3%25E6%2590%25BA%25E3%2581%2597%25E3%2581%259F%25E5%25A4%259A%25E6%2596%25B9%25E9%259D%25A2%25E3%2581%25AA%25E9%2596%258B%25E7%2599%25BA%25E3%2582%2592%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25B6%258B%25E7%2594%25B0%25E5%258D%25B0%25E5%2588%25B7%2540Web%25E3%2583%25BBUI%252FUX%25E3%2583%2587%25E3%2582%25B6%25E3%2582%25A4%25E3%2583%25B3...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2oxeGszSjZpdFNBMkFFaV9ReWZ0UXJaSDRkMlpfUXVDRXV5aExNPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>嶋田印刷@Web・UI/UXデザインとプログラミングと仮想通貨FXをする人</dc:creator></item><item><title><![CDATA[SeleniumでSafariをテストする方法]]></title><description><![CDATA[SafariのテストをSeleniumで実行する方法をGPTに聞いてみた。
+
+ 1. SafariのWebDriverの設定:
+
+
+
+Safari Technology Previewをインストールします。これは開発者向けのSafariのバージョンで、WebDriverを利用するために必要です。
+macOSにはSafariDriverが標準で含まれているので、追加でインストールする必要はありません。
+
+
+ 2. SafariDriverを有効化:
+
+
+SafariDriverを利用するには、Safariの「開発」メニューから**「リモートオートメーションを許可」**を有効にする必要があり...]]></description><link>https://zenn.dev/aoseal/articles/0dbf5b55c3eef6</link><guid isPermaLink="true">https://zenn.dev/aoseal/articles/0dbf5b55c3eef6</guid><pubDate>Thu, 05 Sep 2024 09:58:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--aFP0Za25--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Selenium%25E3%2581%25A7Safari%25E3%2582%2592%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:aoseal%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS1VDeVFVR09leHVUX3ZrWU43VFRMWGVjeU13alR1LVhwZFpDUFQ2QkN1LXBsWll3PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>aoseal</dc:creator></item><item><title><![CDATA[［AtCoder］ABC-367｜C - Enumerate Sequences]]></title><description><![CDATA[
+ 設問ページ
+
+🔗ABC-367 C - Enumerate Sequences
+
+
+
+ 提出結果
+import itertools
+
+
+def getIntMap():
+    return map(int, input().split())
+
+
+def getIntList():
+    return list(map(int, input().split()))
+
+
+def comb(x, y):
+    c = []
+    for a, b in list(itertools.product(x, y)):
+        a = [a] if type(a) is int ...]]></description><link>https://zenn.dev/hyperdb/articles/a769952ebbb8ca</link><guid isPermaLink="true">https://zenn.dev/hyperdb/articles/a769952ebbb8ca</guid><pubDate>Thu, 05 Sep 2024 06:50:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5nSZdJGE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25EF%25BC%25BBAtCoder%25EF%25BC%25BDABC-367%25EF%25BD%259CC%2520-%2520Enumerate%2520Sequences%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AF%25E3%2581%2584%25E3%2581%25B1%25E3%2581%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhODJkODgwMzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>はいぱぁ</dc:creator></item><item><title><![CDATA[Pytestを使ったSeleniumテスト]]></title><description><![CDATA[こちらchatgptの回答になります。
+Pytestを使ってSeleniumの自動テストを行い、テスト結果を統一的に管理する方法を解説します。Pytestは非常にシンプルかつ柔軟なPython用テストフレームワークで、Seleniumと組み合わせることで効率的にブラウザテストを実行できます。
+
+ Pytestを使ったSeleniumテストの概要
+
+
+Pytestをインストールし、テスト環境を整えます。
+
+SeleniumのテストスクリプトをPytest形式で作成します。
+
+Pytestの機能を活用して、テスト結果のレポートを自動生成します。
+
+
+ 1. Pytestと必要なライブラリのイ...]]></description><link>https://zenn.dev/aoseal/articles/15110d200174dd</link><guid isPermaLink="true">https://zenn.dev/aoseal/articles/15110d200174dd</guid><pubDate>Thu, 05 Sep 2024 06:35:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--JwBjV52T--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Pytest%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%259FSelenium%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:aoseal%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS1VDeVFVR09leHVUX3ZrWU43VFRMWGVjeU13alR1LVhwZFpDUFQ2QkN1LXBsWll3PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>aoseal</dc:creator></item><item><title><![CDATA[SQLModelで親と一緒に子テーブルを削除する(cascade_delete, ondelete)]]></title><description><![CDATA[
+ 始めに
+外部キー制約があるレコードを削除するとき、参照元テーブルよりも参照先テーブルを先に削除する必要があります。
+Railsの場合、次のようにdependentに定義しておくと、Parentテーブルを削除したタイミングでChildテーブルも削除されます。
+class Parent &lt; ApplicationRecord
+  has_one :child, dependent: :destroy
+end
+
+class Child &lt; ApplicationRecord
+  belongs_to :parent
+end
+今回の記事では、PythonのSQLModelを使用し...]]></description><link>https://zenn.dev/kirimaru/articles/3f768fe1a1d9dd</link><guid isPermaLink="true">https://zenn.dev/kirimaru/articles/3f768fe1a1d9dd</guid><pubDate>Thu, 05 Sep 2024 03:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--f66KsYL6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:SQLModel%25E3%2581%25A7%25E8%25A6%25AA%25E3%2581%25A8%25E4%25B8%2580%25E7%25B7%2592%25E3%2581%25AB%25E5%25AD%2590%25E3%2583%2586%25E3%2583%25BC%25E3%2583%2596%25E3%2583%25AB%25E3%2582%2592%25E5%2589%258A%25E9%2599%25A4%25E3%2581%2599%25E3%2582%258B%2528cascade_delete%252C%2520ondelete%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258D%25E3%2582%258A%25E4%25B8%25B8%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2Rhcmsvay5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>きり丸</dc:creator></item><item><title><![CDATA[有償ライセンスの使用状況集計を手伝わせてもらいました]]></title><description><![CDATA[
+ 記事の概要
+今回、大学が貸し出している有償ライセンスの使用状況の集計をさせてもらう機会があり、大量のデータを扱った経験がいままでなかった私にとって貴重な経験ができたため、その話をここに書かせてもらおうと思います。
+
+ 何を集計するのか
+ライセンスの使用状況の集計といっても具体的になにをすればいいのか？今回の目標は、
+
+どのライセンスが何人に貸出されているのかを時間別で知りたい
+同じPCに同じ時間で複数ライセンスが貸し出されているが本来は1つなので重複を避けた場合の貸し出し数が知りたい
+
+この2つです。
+
+ データはどうなってる？
+ライセンスの使用状況はすべてエクセルで保存されていまし...]]></description><link>https://zenn.dev/omu_tryangle/articles/3b4a1eeded7ff9</link><guid isPermaLink="true">https://zenn.dev/omu_tryangle/articles/3b4a1eeded7ff9</guid><pubDate>Thu, 05 Sep 2024 01:47:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qtEjhVKx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%259C%2589%25E5%2584%259F%25E3%2583%25A9%25E3%2582%25A4%25E3%2582%25BB%25E3%2583%25B3%25E3%2582%25B9%25E3%2581%25AE%25E4%25BD%25BF%25E7%2594%25A8%25E7%258A%25B6%25E6%25B3%2581%25E9%259B%2586%25E8%25A8%2588%25E3%2582%2592%25E6%2589%258B%25E4%25BC%259D%25E3%2582%258F%25E3%2581%259B%25E3%2581%25A6%25E3%2582%2582%25E3%2582%2589%25E3%2581%2584%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:yoshi_s%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAwMmVhYjg4YTkuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Tryangle%2540%25E5%25A4%25A7%25E9%2598%25AA%25E5%2585%25AC%25E7%25AB%258B%25E5%25A4%25A7%25E5%25AD%25A6%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg3MWVlOGMwYmIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yoshi_s</dc:creator></item><item><title><![CDATA[zennに初めての投稿をする]]></title><description><![CDATA[
+ はじめに
+はじめまして、この記事は私のzennに初めての投稿となります。
+とりあえず初めの記事なので簡単な自己紹介をしようと思ってます。
+拙い文章ですが、よろしくお願いします。
+
+ 私について
+私はITエンジニアを目指す専門学生です。今は主にPythonをメインにバックエンド、フロントエンドともに勉強しています。
+プログラミングに関してまだまだ勉強中なので、間違いなどあれば指摘していただけると嬉しいです。
+
+ 好きな言語と現在行っている開発について
+好きな言語はPythonで、最近は所属しているサークルでLangChainフレームワークを用いたLLMチャットアプリのバックエンド開発を...]]></description><link>https://zenn.dev/snow7y/articles/0c52c9befe53a7</link><guid isPermaLink="true">https://zenn.dev/snow7y/articles/0c52c9befe53a7</guid><pubDate>Wed, 04 Sep 2024 16:00:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ybmtJPY8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:zenn%25E3%2581%25AB%25E5%2588%259D%25E3%2582%2581%25E3%2581%25A6%25E3%2581%25AE%25E6%258A%2595%25E7%25A8%25BF%25E3%2582%2592%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:snow7y%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZhMmM1ZWIwOWMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>snow7y</dc:creator></item></channel></rss>
