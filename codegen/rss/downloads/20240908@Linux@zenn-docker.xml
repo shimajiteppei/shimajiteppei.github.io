@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Docker」のフィード]]></title><description><![CDATA[Zennのトピック「Docker」のRSSフィードです]]></description><link>https://zenn.dev/topics/docker</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/01c7f20365.png</url><title>Zennの「Docker」のフィード</title><link>https://zenn.dev/topics/docker</link></image><generator>zenn.dev</generator><lastBuildDate>Sun, 08 Sep 2024 03:08:07 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/docker/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Nextjs(custom server)をCloudRunにデプロイする]]></title><description><![CDATA[
+ 前提
+
+Nextjsプロジェクトがdocker化されている。
+GCPアカウントが事前に作成されている。
+
+
+ やりたいこと
+GithubActionsを使ったCloudRunへのCI/CD。
+
+ 手順
+まずはGCPコンソールにて設定を行っていきます。
+
+ CloudRunのAPIを有効化
+CGPコンソールにて
+!
+ハンバーガーメニュー &gt; 有効なAPIとサービス &gt; APIとサービスを有効化する &gt; 検索バーにてCloudRunで検索 &gt; CloudRun有効化
+
+
+
+ サービスアカウントの作成
+CGPコンソールにて
+!
+ハンバーガーメニュー &gt; IAM...]]></description><link>https://zenn.dev/webshoten/articles/cf32f5aa915964</link><guid isPermaLink="true">https://zenn.dev/webshoten/articles/cf32f5aa915964</guid><pubDate>Sat, 07 Sep 2024 07:15:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--SqCv2qBW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Nextjs%2528custom%2520server%2529%25E3%2582%2592CloudRun%25E3%2581%25AB%25E3%2583%2587%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25A4%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:...webshoten%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y1NDlhMGY5MWMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>...webshoten</dc:creator></item><item><title><![CDATA[ViteをWSLのDevcontainerで入門してみた]]></title><description><![CDATA[
+ はじめに
+久しぶりにReact触る機会があったのでせっかくならと思ってVite入門してみました。
+最小構成意識したつもりです。多分。
+ファイル名ごとにどんな設定にしたか書いているので必要に応じてジャンプしてみてください。
+(完全にすべての項目を理解しているかといわれるとちょっと自信なくしますが・・。)
+WSLやDevcontainer内でうまく動かない・ホットリロード問題についてはvite.config.tsで触れてます。
+Twitter(X)やってますのでよかったらお話しましょう。
+https://x.com/_taltalsource_
+
+ 使うものたち
+粒度気にせず列挙しておき...]]></description><link>https://zenn.dev/taltalsource/articles/react-dev-environment</link><guid isPermaLink="true">https://zenn.dev/taltalsource/articles/react-dev-environment</guid><pubDate>Sat, 07 Sep 2024 06:50:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8ot9rHU0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Vite%25E3%2582%2592WSL%25E3%2581%25AEDevcontainer%25E3%2581%25A7%25E5%2585%25A5%25E9%2596%2580%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:taltalsource%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y1ZmVjODFhZDAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>taltalsource</dc:creator></item><item><title><![CDATA[【AI_5日目】FastAPI_1冊目]]></title><description><![CDATA[こんにちは投資ロウトです。
+
+ 背景
+AI開発ができるためにwebAPIについて理解を深めていきます。
+※Tailwind CSSとkeycloakは現場でピンチになれば再開します。
+
+ スキーマ
+api/schemas/task.py
+from pydantic import BaseModel, Field
+
+class StockBase(BaseModel):
+    # 共通するフィールドは親クラスに定義
+    stock_name: str | None = Field(None, example="投資ロウト株式会社")
+
+class StockCreate(StockB...]]></description><link>https://zenn.dev/doshirote/articles/44cafffd379ebc</link><guid isPermaLink="true">https://zenn.dev/doshirote/articles/44cafffd379ebc</guid><pubDate>Fri, 06 Sep 2024 14:47:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8QeAuSeu--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590AI_5%25E6%2597%25A5%25E7%259B%25AE%25E3%2580%2591FastAPI_1%25E5%2586%258A%25E7%259B%25AE%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%258A%2595%25E8%25B3%2587%25E3%2583%25AD%25E3%2582%25A6%25E3%2583%2588%25E3%2581%25AE%25E6%258A%2580%25E8%25A1%2593%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM3ODY0NWMwOGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>投資ロウトの技術ブログ</dc:creator></item><item><title><![CDATA[【laravel-mdpf】導入時のエラー対応ログ]]></title><description><![CDATA[
+ 前提
+
+Docker
+Laravel 10
+PHP 8.3
+
+https://github.com/mccarlosen/laravel-mpdf
+
+ 問題1. 最新バージョン（^2.1）がインストールできない
+
+ 結論
+
+
+mpdfで必要な各種設定をDockerfileに追加する
+
+
+apkで以下のライブラリを追加
+
+freetype-dev
+libjpeg-turbo-dev
+libpng-dev
+
+
+PHP拡張モジュールを追加
+
+GD
+
+
+
+
+
+Dockerfile更新後はdocker-compose up -dで変更の反映を忘れずに
+
+FROM public.ecr.aws/...]]></description><link>https://zenn.dev/watarunakayama/articles/d658d9fb8a8037</link><guid isPermaLink="true">https://zenn.dev/watarunakayama/articles/d658d9fb8a8037</guid><pubDate>Fri, 06 Sep 2024 13:34:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Agwqr5j8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590laravel-mdpf%25E3%2580%2591%25E5%25B0%258E%25E5%2585%25A5%25E6%2599%2582%25E3%2581%25AE%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E5%25AF%25BE%25E5%25BF%259C%25E3%2583%25AD%25E3%2582%25B0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Wataru%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2Rhcmsvdy5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Wataru</dc:creator></item><item><title><![CDATA[FirecrawlでRAG用データ作成を無料でやりたい！（1）構築編]]></title><description><![CDATA[
+ モチベーション
+LLMによるRAGシステムを構築するにあたって、検索データの準備は手間がかかります。元となるデータが綺麗な文書ならよいのですが、PDFにせよWebページにせよ、必ずしも綺麗な文書でないことが多いです。最近Web記事などでよく目にするようになった。FireCrawlを使えば、ローカル環境でもWebページから綺麗なマークダウンを生成してくれそうなので、実際にできるか試してみました。
+
+ 対象読者
+RAGやデータセット作成に興味のある人
+ローカル環境やオンプレミス環境へのLLMシステムのデプロイに興味がある人
+*Dockerをつかったことがある人であればスムーズに読めます
+...]]></description><link>https://zenn.dev/shotatakano/articles/53eb6d1137d67f</link><guid isPermaLink="true">https://zenn.dev/shotatakano/articles/53eb6d1137d67f</guid><pubDate>Fri, 06 Sep 2024 03:28:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--mr1ll_zB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Firecrawl%25E3%2581%25A7RAG%25E7%2594%25A8%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E4%25BD%259C%25E6%2588%2590%25E3%2582%2592%25E7%2584%25A1%25E6%2596%2599%25E3%2581%25A7%25E3%2582%2584%25E3%2582%258A%25E3%2581%259F%25E3%2581%2584%25EF%25BC%2581%25EF%25BC%25881%25EF%25BC%2589%25E6%25A7%258B%25E7%25AF%2589%25E7%25B7%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259F%25E3%2581%25BE%25E3%2581%2594%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc5YmQzMTRkMGUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>たまご</dc:creator></item><item><title><![CDATA[ようやくDockerに入門した件（半分読み物）]]></title><description><![CDATA[エンジニアの皆様お疲れ様です。たぬきの教祖でございます。
+　今回は、これまでかたくなに避けてきたDockerを使用する機会があり、使ってみると割と当初のイメージと違っていた部分もあって、備忘録も兼ねてそのあたり書いていこうと思います。
+私のような頑固なエンジニアの方にはDocker入門、というか心の準備？的な感じで読んでいただければと思います。
+なお、初学者ゆえ間違い等あると思いますが何卒何卒
+
+ 経緯
+さて、私は結局博士号まで取得しましたが、私が大学の情報学部に所属して、つまりこのIT界隈にアクセスしてから、9年が経過しました。学部4年次に起業して、仕事として携わるのもそろそろ7年にな...]]></description><link>https://zenn.dev/tanukikyo/articles/da8398fd806b2c</link><guid isPermaLink="true">https://zenn.dev/tanukikyo/articles/da8398fd806b2c</guid><pubDate>Thu, 05 Sep 2024 19:32:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--UO3IOIvK--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%2588%25E3%2581%2586%25E3%2582%2584%25E3%2581%258FDocker%25E3%2581%25AB%25E5%2585%25A5%25E9%2596%2580%25E3%2581%2597%25E3%2581%259F%25E4%25BB%25B6%25EF%25BC%2588%25E5%258D%258A%25E5%2588%2586%25E8%25AA%25AD%25E3%2581%25BF%25E7%2589%25A9%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259F%25E3%2581%25AC%25E3%2581%258D%25E3%2581%25AE%25E6%2595%2599%25E7%25A5%2596%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzkzNGJmZDI1ZjYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>たぬきの教祖</dc:creator></item><item><title><![CDATA[だから私はDocker Swarmを選ぶ【vs Kubernetes】]]></title><description><![CDATA[
+ はじめに
+自社サービスをコンテナ化するにあたって、負荷分散のためのマルチホスト運用について考えた時、コンテナオーケストレータの概念を知りました。
+
+オーケストレータは、たとえ個々のコンテナや時にはホストさえもがクラッシュした場合でも、コンテナ化されたワークロード同士が互いに適切に通信し、円滑に動作し続けるよう調整します。アプリケーションをコンテナ形式で提供することでシステムがコンテナベースのデプロイメントを迅速に複製し、高い可用性と回復力を得られるためです。
+https://www.creationline.com/tech-blog/cloudnative/mirantis/578...]]></description><link>https://zenn.dev/ransakata/articles/eab74093bcbb5e</link><guid isPermaLink="true">https://zenn.dev/ransakata/articles/eab74093bcbb5e</guid><pubDate>Thu, 05 Sep 2024 01:30:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--yWuAvaTY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%25A0%25E3%2581%258B%25E3%2582%2589%25E7%25A7%2581%25E3%2581%25AFDocker%2520Swarm%25E3%2582%2592%25E9%2581%25B8%25E3%2581%25B6%25E3%2580%2590vs%2520Kubernetes%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ran%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I3NTQxZmNkYWMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ran</dc:creator></item><item><title><![CDATA[Prismaで"Field does not exist on enclosing type" エラーが発生した時の解決方法]]></title><description><![CDATA[こんにちは！ヒロケイと申します。
+今回は、prisma を使ってサーバーの開発をしている時に遭遇した不可解なエラーを解決する方法について紹介します。
+心当たりが無いのに、このようなエラーが発生すること、ありませんか？
+エラー
+Invalid `prisma.User.findUnique()` invocation:
+Failed to validate the query: `Field does not exist on enclosing type. `
+今回このエラーの解決方法を見つけたので、記録しておきます！
+こんな人が読むと役立つ！
+
+
+ブランチを切り替えた途端、prisma...]]></description><link>https://zenn.dev/keigo_hirohara/articles/f397a72b206d65</link><guid isPermaLink="true">https://zenn.dev/keigo_hirohara/articles/f397a72b206d65</guid><pubDate>Mon, 02 Sep 2024 23:29:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--u2_0tT4C--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Prisma%25E3%2581%25A7%2522Field%2520does%2520not%2520exist%2520on%2520enclosing%2520type%2522%2520%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E3%2581%258C%25E7%2599%25BA%25E7%2594%259F%25E3%2581%2597%25E3%2581%259F%25E6%2599%2582...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%2592%25E3%2583%25AD%25E3%2582%25B1%25E3%2582%25A4%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSkt4ams4c2ZjV3hacUttbGNRWE9qYm5YenRfaGpic2JkU0lXMGhxcy1ZRTk0PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ヒロケイ</dc:creator></item><item><title><![CDATA[Self-hosted GitHub Actions runners for automated Amazon ECS deployment]]></title><description><![CDATA[Code の修正を Trigger にした Amazon ECS ( ECS ) への Deploy について。
+参考にしたのは、GitHub の公式。
+https://docs.github.com/ja/actions/use-cases-and-examples/deploying/deploying-to-amazon-elastic-container-service#creating-the-workflow
+構成は、こんな感じ
+
+ Sum up
+
+k8s で ArgoCD などの GitOps で運用している場合、Helm chart の yaml を更新したら終わりのため...]]></description><link>https://zenn.dev/dannya/articles/a44ab75b66bf9f</link><guid isPermaLink="true">https://zenn.dev/dannya/articles/a44ab75b66bf9f</guid><pubDate>Mon, 02 Sep 2024 23:27:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--P1KwI2f4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Self-hosted%2520GitHub%2520Actions%2520runners%2520for%2520automated%2520Amazon%2520E...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Daisuke%2520Yamamoto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZiNDY0NzBmMTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Daisuke Yamamoto</dc:creator></item><item><title><![CDATA[【開発環境構築】PostgreSQLをDockerで動かしてみよう！]]></title><description><![CDATA[こんにちは、今回は PostgreSQL の開発環境を Docker で構築する方法についてまとめていきたいと思います。
+自分も Docker 初心者なので、参考程度に見ていってください。
+
+ 事前準備
+開発環境の構築前に確認することがあるので、見ていきましょう。
+
+ ローカルの PostgreSQL をシャットダウンする
+※既にローカル上に PostgreSQL をインストールしている方への内容です。
+まずローカル上の PostgreSQL を止めていきましょう。
+
+上のように「Running」と表示されていると思います。
+今 PostgreSQL が起動している状態なので、「Stop...]]></description><link>https://zenn.dev/keigo_hirohara/articles/a3bfdebc5f7c9b</link><guid isPermaLink="true">https://zenn.dev/keigo_hirohara/articles/a3bfdebc5f7c9b</guid><pubDate>Mon, 02 Sep 2024 22:18:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--gOSvz5TQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E9%2596%258B%25E7%2599%25BA%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%25E3%2580%2591PostgreSQL%25E3%2582%2592Docker%25E3%2581%25A7%25E5%258B%2595%25E3%2581%258B%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%2588%25E3%2581%2586%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%2592%25E3%2583%25AD%25E3%2582%25B1%25E3%2582%25A4%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSkt4ams4c2ZjV3hacUttbGNRWE9qYm5YenRfaGpic2JkU0lXMGhxcy1ZRTk0PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ヒロケイ</dc:creator></item><item><title><![CDATA[dockerコンテナ起動時に実行する.shファイルの権限]]></title><description><![CDATA[
+ はじめに
+今回コンテナ起動時にまとめてコマンドを実行するために.shファイルを作ったのですがその際パーミッション関係でcompose-up時に.shが起動できなかったので対処法をメモしておきます。
+
+ 問題のコード
+
+entrypoint.sh
+#!/bin/bash
+
+# ディレクトリが存在しない場合のみ作成
+if [ ! -d "/src/server" ]; then
+	mkdir -p /src/server
+fi
+
+# コンテナが終了しないようにするためのコマンド
+tail -f /dev/null
+
+
+ディレクトリがなかったら作成するだけのコードですsrc/script内...]]></description><link>https://zenn.dev/nenfa/articles/f8c2f889a5c285</link><guid isPermaLink="true">https://zenn.dev/nenfa/articles/f8c2f889a5c285</guid><pubDate>Mon, 02 Sep 2024 04:46:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--M4eH4uVG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:docker%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2586%25E3%2583%258A%25E8%25B5%25B7%25E5%258B%2595%25E6%2599%2582%25E3%2581%25AB%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%2599%25E3%2582%258B.sh%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2581%25AE%25E6%25A8%25A9%25E9%2599%2590%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25B9%25B4%25E6%2599%25AE%2540%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdkZDc2ZDJmY2QuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>年普@</dc:creator></item><item><title><![CDATA[公式サンプルを公式Dockerイメージに入れる（MariaDB編）]]></title><description><![CDATA[
+ はじめに
+サンプルデータベースが欲しくなったのですが、最近は見かけないような気がします。
+昔々は、scott/tiger でつないで EMP テーブルで練習するのがお約束でしたが…。
+調べてみることにしました。
+最初は、サンプルデータベースの場所だけの備忘録にしようと思ったのですが、ちょっとデータベースを使ったデモとかテストが必要になったので、サンプルデータベース入りの Docker イメージを作って、イメージを作る材料もイメージも公開しようと思います。
+
+ MariaDB 編
+MySQL には似たような記事がいくつかあります（苦笑）。
+基本的には、以前の PostgreSQL の派...]]></description><link>https://zenn.dev/robon/articles/14e9be71d8d525</link><guid isPermaLink="true">https://zenn.dev/robon/articles/14e9be71d8d525</guid><pubDate>Mon, 02 Sep 2024 01:04:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--b0NELn----/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2585%25AC%25E5%25BC%258F%25E3%2582%25B5%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AB%25E3%2582%2592%25E5%2585%25AC%25E5%25BC%258FDocker%25E3%2582%25A4%25E3%2583%25A1%25E3%2583%25BC%25E3%2582%25B8%25E3%2581%25AB%25E5%2585%25A5%25E3%2582%258C%25E3%2582%258B%25EF%25BC%2588MariaDB%25E7%25B7%25A8%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E8%258D%2592%25E6%259C%25A8%2520%25E5%25B2%25B3%25E5%25A4%25AB%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q3NDIzMjE0NTUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BEROBON%25E3%2581%25AE%25E6%258A%2580%25E8%25A1%2593%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YUpBSVQ1V0NaaVBRUmF6TkswS1dFVkEybkRJMGdaN1lvMjdJdDIyQT1zOTYtYw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>荒木 岳夫</dc:creator></item><item><title><![CDATA[【AI_1日目】FastAPI_1冊目]]></title><description><![CDATA[こんにちは投資ロウトです。
+
+ 背景
+AI開発ができるためにwebAPIについて理解を深めていきます。
+※Tailwind CSSとkeycloakは現場でピンチになれば再開します。
+
+ 進捗状況
+少しずつ進めていっていますが、現在の進捗は以下になっています。
+①要件定義：1冊
+②設計：1冊
+③システムビジネススキル：3冊 + 1冊目(keycloakが進行中)
+④インフラ：3冊
+⑤フロントエンド：0冊、1冊(TailwindCSSが進行中)
+⑥AI：0冊
+
+ FastAPI
+FastAPIは最近流行っているPython軽量のwebフレームのこと。
+【特徴】
+・FastAPIは定義ファイ...]]></description><link>https://zenn.dev/doshirote/articles/5d6e46ba7837e6</link><guid isPermaLink="true">https://zenn.dev/doshirote/articles/5d6e46ba7837e6</guid><pubDate>Sun, 01 Sep 2024 04:22:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_mECjZfU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590AI_1%25E6%2597%25A5%25E7%259B%25AE%25E3%2580%2591FastAPI_1%25E5%2586%258A%25E7%259B%25AE%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%258A%2595%25E8%25B3%2587%25E3%2583%25AD%25E3%2582%25A6%25E3%2583%2588%25E3%2581%25AE%25E6%258A%2580%25E8%25A1%2593%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM3ODY0NWMwOGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>投資ロウトの技術ブログ</dc:creator></item><item><title><![CDATA[WSL2+Ubuntu+Dockerでの環境整備]]></title><description><![CDATA[
+ はじめに
+探せばいくらでも出てくるトピックであるので、特段改めて書く必要性はないのだが、
+自分の備忘録として、構築方法をまとめておこうと思う。
+この記事では、Windows10上でWSL2を使ってUbuntuのインストールとDockerを導入し、
+環境を整備する方法をまとめる。
+初めての投稿なので雑なところは大目に見てください。
+
+ 筆者環境
+
+Windows 10 Home 22H2
+
+
+ WSL2のセットアップ
+※すでにwslを入れた後に書いているので、初めて入れる場合はうまくいかないところがあるかもしれない。
+その時は参考記事を見て解決してください。
+参考記事
+
+WSL を使用...]]></description><link>https://zenn.dev/pion24/articles/wsl2-ubuntu-docker_install</link><guid isPermaLink="true">https://zenn.dev/pion24/articles/wsl2-ubuntu-docker_install</guid><pubDate>Sat, 31 Aug 2024 09:51:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--HW50XTQE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:WSL2%252BUbuntu%252BDocker%25E3%2581%25A7%25E3%2581%25AE%25E7%2592%25B0%25E5%25A2%2583%25E6%2595%25B4%25E5%2582%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tok%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FGZFp1Y3JXSzhKc19kWnN4UHowX2ROZWlseTlFZVdxSy1HR1JxeWJfQ0lSPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tok</dc:creator></item><item><title><![CDATA[Testcontainers を利用したテストが急に動かなくなってハマった件について]]></title><description><![CDATA[ある日突然 Testcontainers を利用しているユニットテストが動かなくなった。
+動かなくなったのはリポジトリ周りのユニットテストだったが、周辺を直していたこともありローカル環境に問題があることに気がつくのが遅れ、半日以上を溶かしてしまった。
+同様の事象が発生している人が Issue 上では見られたので、回避方法を残しておく。
+Rancher Desktop で Testcontainers を利用したテストを動かす場合には以下の設定をすると思うが、今回はどうやらこのあたりがおかしくなったようだ。
+https://golang.testcontainers.org/system_...]]></description><link>https://zenn.dev/htnk128/articles/f18a5a9e763f68</link><guid isPermaLink="true">https://zenn.dev/htnk128/articles/f18a5a9e763f68</guid><pubDate>Fri, 30 Aug 2024 02:39:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--oKpoY4yM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Testcontainers%2520%25E3%2582%2592%25E5%2588%25A9%25E7%2594%25A8%25E3%2581%2597%25E3%2581%259F%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E3%2581%258C%25E6%2580%25A5%25E3%2581%25AB%25E5%258B%2595%25E3%2581%258B%25E3%2581%25AA%25E3%2581%258F%25E3%2581%25AA%25E3%2581%25A3%25E3%2581%25A6%25E3%2583%258F%25E3%2583%259E%25E3%2581%25A3%25E3%2581%259F%25E4%25BB%25B6%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:htnk128%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YnRGdzVXaks1aE9kajh0bEVCdFl0ejU5ZHZoWkJmbWFHbWl1cVM9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>htnk128</dc:creator></item><item><title><![CDATA[Redux はじめました #0]]></title><description><![CDATA[
+ Redux はじめました #0
+Reduxを使ってみたい！
+と言うことで Hello World! レベルのプロジェクトを作っていきます。
+
+ 今回の目標
+Reduxを導入して基本的な状態管理の機能を使ってみる
+
+ 構成・使うもの
+
+Docker
+Vite
+React
+TypeScript
+Redux
+
+※ GitHubリポジトリは作りません
+
+ 0. 前提環境
+
+docker composeが動くところからスタート
+macOS上で試してます（難しいコマンドは使ってないので適宜読み換えてください）
+
+
+ 1. Docker
+
+ 1-1. フォルダの準備
+# ルートフォルダ
+mkdir...]]></description><link>https://zenn.dev/hilltop/articles/trial-redux-0</link><guid isPermaLink="true">https://zenn.dev/hilltop/articles/trial-redux-0</guid><pubDate>Fri, 30 Aug 2024 00:10:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--MvT1PJA9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Redux%2520%25E3%2581%25AF%25E3%2581%2598%25E3%2582%2581%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%2520%25230%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:HillTop%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzkxYTg2MzI4MWIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>HillTop</dc:creator></item><item><title><![CDATA[Dockerのcompose.ymlでenv_fileを定義しても読み込まれない]]></title><description><![CDATA[
+ はじめに
+env_fileの設定オプションで勘違いをしてハマってしまいましたので共有です。
+
+ 経緯
+最初は、.envをルートディレクトリに置き、env_fileを-.envと定義していました。
+そして、APP_PORTの環境変数を8888で設定したところ、問題なくportが8888で動作していました。
+services:
+  app:
+    container_name: "app"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    ports:
+    ...]]></description><link>https://zenn.dev/jin1125/articles/32c0c3cd27c4e9</link><guid isPermaLink="true">https://zenn.dev/jin1125/articles/32c0c3cd27c4e9</guid><pubDate>Thu, 29 Aug 2024 12:47:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xBSoMq8J--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%25E3%2581%25AEcompose.yml%25E3%2581%25A7env_file%25E3%2582%2592%25E5%25AE%259A%25E7%25BE%25A9%25E3%2581%2597%25E3%2581%25A6%25E3%2582%2582%25E8%25AA%25AD%25E3%2581%25BF%25E8%25BE%25BC%25E3%2581%25BE%25E3%2582%258C%25E3%2581%25AA%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:jin%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2EyMWU0YTc2YjIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>jin</dc:creator></item><item><title><![CDATA[【インフラ_24日目】keycloak_1冊目]]></title><description><![CDATA[こんにちは投資ロウトです。
+
+ 背景
+・こちらも急ピッチで理解をしていかなければならない項目となっております。もし自分達でやらなくていいということであれば、概要を理解して終了となるかもしれません。
+
+ 進捗状況
+少しずつ進めていっていますが、現在の進捗は以下になっています。
+①要件定義：1冊
+②設計：1冊
+③システムビジネススキル：3冊
+④インフラ：3冊
+⑤フロントエンド：0冊、1冊(TailwindCSSが進行中)
+
+ keycloakとは
+keycloak・・・Webベースのシステムに認証と認可の機能を組み込むOSS(オープンソースソフトウェア)で、クラウド特有のベンダーロックインも...]]></description><link>https://zenn.dev/doshirote/articles/c4d901679e2103</link><guid isPermaLink="true">https://zenn.dev/doshirote/articles/c4d901679e2103</guid><pubDate>Thu, 29 Aug 2024 09:26:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--B6t2eruu--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2595%25E3%2583%25A9_24%25E6%2597%25A5%25E7%259B%25AE%25E3%2580%2591keycloak_1%25E5%2586%258A%25E7%259B%25AE%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%258A%2595%25E8%25B3%2587%25E3%2583%25AD%25E3%2582%25A6%25E3%2583%2588%25E3%2581%25AE%25E6%258A%2580%25E8%25A1%2593%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM3ODY0NWMwOGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>投資ロウトの技術ブログ</dc:creator></item><item><title><![CDATA[Terraform with docker でGoogle Cloud環境構築する]]></title><description><![CDATA[
+ はじめに
+こんにちは、株式会社COSM エンジニアの藤村です。
+TerraformをDockerコンテナで実行しGoogle Cloudの環境構築をしたことを備忘録として残しておきます。
+IaCを導入する際に少しでも参考になれば幸いです。
+この環境を構築するにあたり2つの記事を参考にさせていただきました。
+
+
+Docker化周り
+
+https://laboratory.kiyono-co.jp/547/gcp/
+
+
+
+entrypointやbashエイリアスなどの便利系設定周り
+
+https://qiita.com/sawa-akabee/items/ddb48f2f5a47988e...]]></description><link>https://zenn.dev/cosmcorp/articles/e7dfd9b51825a0</link><guid isPermaLink="true">https://zenn.dev/cosmcorp/articles/e7dfd9b51825a0</guid><pubDate>Wed, 28 Aug 2024 05:47:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--22b4iCFC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Terraform%2520with%2520docker%2520%25E3%2581%25A7Google%2520Cloud%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:fjmr_sh%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY2MWZmNjBmZjUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2582%25B3%25E3%2582%25BA%25E3%2583%25A0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YkVuQkQyT0pDbUw3aGRtVnF2RmlaUUtOQ21xMXNyck5reUZxd1c9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>fjmr_sh</dc:creator></item><item><title><![CDATA[uv から始まる Python 開発環境構築]]></title><description><![CDATA[
+ 0. はじめに
+株式会社ディー・エヌ・エーに入社し，MLOps エンジニアをやっている @a5chin です．
+
+ 0.1. 背景
+2024/08/20 に Astral 社から以下のブログが発表されました．
+Python のランタイム・パッケージングを uv 一つで置き換えることができるという発表でした．
+
+Today, we're announcing a series of features that extend uv beyond a pip alternative, and into an end-to-end solution for managing Python p...]]></description><link>https://zenn.dev/dena/articles/python_env_with_uv</link><guid isPermaLink="true">https://zenn.dev/dena/articles/python_env_with_uv</guid><pubDate>Wed, 28 Aug 2024 03:20:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dujfEY8C--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:uv%2520%25E3%2581%258B%25E3%2582%2589%25E5%25A7%258B%25E3%2581%25BE%25E3%2582%258B%2520Python%2520%25E9%2596%258B%25E7%2599%25BA%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:a5chin%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ViMjg2MTZiZGIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:DeNA%2520Engineers%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dBNXBkb2hrNGRoWFUzQ0ZXYmNhNHRBZktpTy1xcE5vdUtDRmtBeWc9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>a5chin</dc:creator></item></channel></rss>

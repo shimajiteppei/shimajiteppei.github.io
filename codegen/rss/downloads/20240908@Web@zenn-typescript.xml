@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「TypeScript」のフィード]]></title><description><![CDATA[Zennのトピック「TypeScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/typescript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/f13e758fdb.png</url><title>Zennの「TypeScript」のフィード</title><link>https://zenn.dev/topics/typescript</link></image><generator>zenn.dev</generator><lastBuildDate>Sun, 08 Sep 2024 03:07:38 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/typescript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[【Go+Firebase+TypeScript+レイヤードアーキテクチャ】WebSocketのチャットアプリ開発]]></title><description><![CDATA[こんにちは、Suuです
+久しぶりに個人開発をしたので、備忘録として残したいと思います！
+
+ 作るものと経緯
+新しい技術に挑戦したい、長期インターンで学んだことをアウトプットしたいと思い、表題の通りチャットののwebアプリを作成しました。実装した機能は以下のとおりです。
+
+認証つき
+ログイン後work spaceIDとパスワードを入れて、特定のチャット画面に遷移する
+
+別々のユーザーが、特定のWork spaceで会話ができる
+
+
+WebSocketの利用によって、リアルタイムでのチャットを行う
+
+
+ 技術選定
+
+ バックエンド
+
+Go 1.21.5
+
+
+主要ライブラリ
+
+
+firebas...]]></description><link>https://zenn.dev/mire0726/articles/f0d1145d4a31e5</link><guid isPermaLink="true">https://zenn.dev/mire0726/articles/f0d1145d4a31e5</guid><pubDate>Sun, 08 Sep 2024 02:50:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ISQpgD10--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Go%252BFirebase%252BTypeScript%252B%25E3%2583%25AC%25E3%2582%25A4%25E3%2583%25A4%25E3%2583%25BC%25E3%2583%2589%25E3%2582%25A2%25E3%2583%25BC%25E3%2582%25AD%25E3%2583%2586%25E3%2582%25AF%25E3%2583%2581%25E3%2583%25A3%25E3%2580%2591WebSocket%25E3%2581%25AE%25E3%2583%2581%25E3%2583%25A3%25E3%2583%2583%25E3%2583%2588%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E9%2596%258B%25E7%2599%25BA%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Suu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzEzMDJlODdlMzMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Suu</dc:creator></item><item><title><![CDATA[React公式ドキュメント『「ありえない」stateを解消する』の解答例]]></title><description><![CDATA[
+ 概要
+React公式ドキュメントの「#state を使って入力に反応する」では、フォームを題材に、UIを宣言的に考える方法が解説されています。しかし、解説の中でstateが満たすべき条件として「矛盾が生じないこと」が挙げられていましたが、最終的に提示されたコードには依然として矛盾が生じており、その矛盾の解消は読者への課題として示されたままになっています。
+そこで、この記事では、矛盾が解消されたフォームの解答例を示します。ただし、以下の点に留意してください。
+
+公式ドキュメントでは、useReducerを使用することが推奨されていますが、この記事の実装例ではuseReducerではなく...]]></description><link>https://zenn.dev/nebular/articles/f7a55830e24a61</link><guid isPermaLink="true">https://zenn.dev/nebular/articles/f7a55830e24a61</guid><pubDate>Sun, 08 Sep 2024 02:38:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--SvLTaps---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%25E5%2585%25AC%25E5%25BC%258F%25E3%2583%2589%25E3%2582%25AD%25E3%2583%25A5%25E3%2583%25A1%25E3%2583%25B3%25E3%2583%2588%25E3%2580%258E%25E3%2580%258C%25E3%2581%2582%25E3%2582%258A%25E3%2581%2588%25E3%2581%25AA%25E3%2581%2584%25E3%2580%258Dstate%25E3%2582%2592%25E8%25A7%25A3%25E6%25B6%2588%25E3%2581%2599%25E3%2582%258B%25E3%2580%258F%25E3%2581%25AE%25E8%25A7%25A3%25E7%25AD%2594%25E4%25BE%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25B2%25E3%2582%2589%25E3%2581%25AE%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzcxOWRiODEwYzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ひらの</dc:creator></item><item><title><![CDATA[Reactive Props Destructure を支える技術]]></title><description><![CDATA[みなさんこんにちは, ubugeeei です．
+最近技術発信が全くできていないな〜お前それでも Vue Team Member かよ，と思いつつ，せっかく Vue 3.5 がリリースされたのでそれに関連した機能の記事でも書こうかと思います.
+
+ Vue 3.5.0 がリリースされました
+先日，Vue 3.5.0 (Tengen Toppa Gurren Lagann) がリリースされました.
+https://blog.vuejs.org/posts/vue-3-5
+このリリースでは，Reactivity System の最適化や，新しいコンポーザブルである useTemplateRef，...]]></description><link>https://zenn.dev/comm_vue_nuxt/articles/reactive-props-destructure</link><guid isPermaLink="true">https://zenn.dev/comm_vue_nuxt/articles/reactive-props-destructure</guid><pubDate>Sat, 07 Sep 2024 16:26:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--LoQYhwJx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Reactive%2520Props%2520Destructure%2520%25E3%2582%2592%25E6%2594%25AF%25E3%2581%2588%25E3%2582%258B%25E6%258A%2580%25E8%25A1%2593%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:ubugeeei%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU5MTZlOWFlNjguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Vue%25E3%2583%25BBNuxt%2520%25E6%2583%2585%25E5%25A0%25B1%25E3%2581%258C%25E9%259B%2586%25E3%2581%25BE%25E3%2582%258B%25E5%25BA%2583%25E5%25A0%25B4%2520%252F%2520P...%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSllJZ1JBWjRaUlBLSkExbVdETHBnMUwzLUlpQVNqcHg4OWxfM3RCaXZaZGVRPXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ubugeeei</dc:creator></item><item><title><![CDATA[ViteをWSLのDevcontainerで入門してみた]]></title><description><![CDATA[
+ はじめに
+久しぶりにReact触る機会があったのでせっかくならと思ってVite入門してみました。
+最小構成意識したつもりです。多分。
+ファイル名ごとにどんな設定にしたか書いているので必要に応じてジャンプしてみてください。
+(完全にすべての項目を理解しているかといわれるとちょっと自信なくしますが・・。)
+WSLやDevcontainer内でうまく動かない・ホットリロード問題についてはvite.config.tsで触れてます。
+Twitter(X)やってますのでよかったらお話しましょう。
+https://x.com/_taltalsource_
+
+ 使うものたち
+粒度気にせず列挙しておき...]]></description><link>https://zenn.dev/taltalsource/articles/react-dev-environment</link><guid isPermaLink="true">https://zenn.dev/taltalsource/articles/react-dev-environment</guid><pubDate>Sat, 07 Sep 2024 06:50:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8ot9rHU0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Vite%25E3%2582%2592WSL%25E3%2581%25AEDevcontainer%25E3%2581%25A7%25E5%2585%25A5%25E9%2596%2580%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:taltalsource%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y1ZmVjODFhZDAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>taltalsource</dc:creator></item><item><title><![CDATA[【AWSCDK】CloudFront+S3でOACを使いたい(L2)]]></title><description><![CDATA[今までCloudFront+S3でOACを使いたい場合はL1で細工していたのですが、v2.156.0で晴れてL2でのサポートが行われました！
+早速試していきましょう！
+https://github.com/aws/aws-cdk/releases/tag/v2.156.0
+https://github.com/aws/aws-cdk/issues/21771
+OAIで対応していた時の記事
+https://zenn.dev/thyt_lab/articles/d6423c883882b7
+
+ 前提
+
+AWSCDK v2.156.0がインストールされていること
+
+
+ OAIでの実装
+v2.1...]]></description><link>https://zenn.dev/thyt_lab/articles/385f00cc1ea503</link><guid isPermaLink="true">https://zenn.dev/thyt_lab/articles/385f00cc1ea503</guid><pubDate>Sat, 07 Sep 2024 04:11:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--s5XMqKiH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590AWSCDK%25E3%2580%2591CloudFront%252BS3%25E3%2581%25A7OAC%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2584%25E3%2581%259F%25E3%2581%2584%2528L2%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tHyt-lab%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FDTlBFdS0zbjROdjlrM0V0ODFpS2FUT3VzdDVyV2xxa1NxUzA1WTY5MGN0PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tHyt-lab</dc:creator></item><item><title><![CDATA[Vitest Browser Mode を試す]]></title><description><![CDATA[
+ はじめに
+Vitest 2.0から に新しい E2E テスト機能として Browser Mode が追加されたので試してみました。
+公式ドキュメントを見ても少し詰まった箇所があったので備忘録も兼ねてその導入手順を記事にしました。
+https://vitest.dev/guide/browser/
+Browser Mode は実験的機能ですので、今後の変更があるかもしれません。
+本記事は vitest@2.0.5, pnpm, TypeScript, React, Playwight (Chromium)を使ったテストを前提に書いています。最後にVueのテストも記載しています。
+
+ イ...]]></description><link>https://zenn.dev/toshusai/articles/212ae67ed91302</link><guid isPermaLink="true">https://zenn.dev/toshusai/articles/212ae67ed91302</guid><pubDate>Sat, 07 Sep 2024 01:00:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--a5LG_CsM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Vitest%2520Browser%2520Mode%2520%25E3%2582%2592%25E8%25A9%25A6%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:shu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2QwMzczZWI1OGUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>shu</dc:creator></item><item><title><![CDATA[有名アプリをクローンして学ぶ講座一覧]]></title><description><![CDATA[Real World Exampleで学びたい
+
+ トイアプリよりReal World Exampleで学びたい
+新しいプログラミング言語、ジャンルでの開発を学ぶ上で本を読んだり公式ドキュメントを見るのは有用ですが、実際のプロダクションエンジニアとしてのお仕事プログラミングとは乖離があります。
+本についているサンプルコードも一つの参考となりますがコード量は小さく局所的にしか参考にならなかったり、公式ドキュメントはレファレンスに徹底していてチュートリアルがなかったりそれぞれはまりどころがあったりします。
+トイアプリより実際の業務コード(Real World Example)で学びたい！
+最...]]></description><link>https://zenn.dev/hiromichinomata/articles/09dcd455442abe</link><guid isPermaLink="true">https://zenn.dev/hiromichinomata/articles/09dcd455442abe</guid><pubDate>Fri, 06 Sep 2024 13:34:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--IyzranYl--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%259C%2589%25E5%2590%258D%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E3%2582%25AF%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%25B3%25E3%2581%2597%25E3%2581%25A6%25E5%25AD%25A6%25E3%2581%25B6%25E8%25AC%259B%25E5%25BA%25A7%25E4%25B8%2580%25E8%25A6%25A7%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Hiromichi%2520NOMATA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dKVzhiSzBKYjZ4cXc1MDFjSHFXXzJ1cmxiMGFMYmY5T3poY1RPUnc9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Hiromichi NOMATA</dc:creator></item><item><title><![CDATA[VSCode + ESLint 拡張機能環境で eslint v9以降のフラットコンフィグを採用したらハマった話]]></title><description><![CDATA[
+ TL;DR
+VSCode の設定から eslint.useFlatConfig を検索してチェックを入れる。または設定をリセット（後述）する。
+あるいは .vscode/settings.json に以下の様な設定を加える。
+{
+	"eslint.useFlatConfig": true,
+}
+
+ 経緯
+VSCode も TypeScript も ESLint も 初心者の人間が VSCode のプロジェクトにイマドキの eslint の設定法らしい Flat Config をいきなり導入してみようとしたら変なところでハマった。
+
+ TypeScript 向け eslint の導入手...]]></description><link>https://zenn.dev/tettekete/articles/9d65fd1b0720ca</link><guid isPermaLink="true">https://zenn.dev/tettekete/articles/9d65fd1b0720ca</guid><pubDate>Fri, 06 Sep 2024 02:10:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--LzZ1UDuE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:VSCode%2520%252B%2520ESLint%2520%25E6%258B%25A1%25E5%25BC%25B5%25E6%25A9%259F%25E8%2583%25BD%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25A7%2520eslint%2520v9%25E4%25BB%25A5%25E9%2599%258D%25E3%2581%25AE%25E3%2583%2595%25E3%2583%25A9%25E3%2583%2583%25E3%2583%2588%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2595%25E3%2582%25A3%25E3%2582%25B0%25E3%2582%2592%25E6%258E%25A1%25E7%2594%25A8%25E3%2581%2597%25E3%2581%259F%25E3%2582%2589%25E3%2583%258F%25E3%2583%259E%25E3%2581%25A3%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tettekete%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E5MzMzNDJmNjguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tettekete</dc:creator></item><item><title><![CDATA[Cloudflare Workers / Cron Triggers で定期的にスクレイピング (GitHub Actions デプロイ)]]></title><description><![CDATA[なんだかんだたまにやるスクレイピングを Cloudflare Workers で定期実行する方法で実装してみました。
+なお、Google Apps Script (GAS) でも同様のことができます（実際、最初は GAS でやろうとしていました）。
+GAS での実装方法については以下の記事も参考にしていただけると嬉しいです！
+定額給付金の案内ページを監視して更新があれば Slack に通知するボット #GoogleAppsScript - Qiita
+https://qiita.com/y_k/items/39be3f144bbdd7d4ca89
+
+ 概要
+Cloudflare Work...]]></description><link>https://zenn.dev/y_k/articles/automate-scraping-cloudflare-workers-cron-triggers</link><guid isPermaLink="true">https://zenn.dev/y_k/articles/automate-scraping-cloudflare-workers-cron-triggers</guid><pubDate>Thu, 05 Sep 2024 22:21:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vxJ1pd_I--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Cloudflare%2520Workers%2520%252F%2520Cron%2520Triggers%2520%25E3%2581%25A7%25E5%25AE%259A%25E6%259C%259F%25E7%259A%2584%25E3%2581%25AB%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AC%25E3%2582%25A4%25E3%2583%2594%25E3%2583%25B3%25E3%2582%25B0%2520%2528GitHub%2520A...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:YetAnother_yk%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsveS5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>YetAnother_yk</dc:creator></item><item><title><![CDATA[カラーテーマによるSVGの描画の変化をチェックできるツールを作ってみた]]></title><description><![CDATA[
+SVG内のスタイル指定においても prefers-color-scheme が使え、それを利用してライトテーマ・ダークテーマごとに配色が異なる favicon を一つのSVGファイルで実現できることは既に知られているかと思います。
+favicon 以外でも、GitHubのREADMEページにロゴとなるSVGを配置し、各テーマに対応している例も見かけます。
+しかし各カラーテーマ下のSVGの描画変化を一画面で確認・比較できる方法が見つかりませんでした。Vue と DOM のおさらいも兼ねて確認・比較できるツールページを作成してみました。
+
+ 作ったもの
+https://nanase.cc/...]]></description><link>https://zenn.dev/nanase_t/articles/7c14092b24424c</link><guid isPermaLink="true">https://zenn.dev/nanase_t/articles/7c14092b24424c</guid><pubDate>Thu, 05 Sep 2024 15:31:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--anBE0Z97--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25AB%25E3%2583%25A9%25E3%2583%25BC%25E3%2583%2586%25E3%2583%25BC%25E3%2583%259E%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258BSVG%25E3%2581%25AE%25E6%258F%258F%25E7%2594%25BB%25E3%2581%25AE%25E5%25A4%2589%25E5%258C%2596%25E3%2582%2592%25E3%2583%2581%25E3%2582%25A7%25E3%2583%2583%25E3%2582%25AF%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258B%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E4%25B8%2583%25E7%2580%25AC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JmZDc4M2MzOGIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>七瀬</dc:creator></item><item><title><![CDATA[bunでパッケージにpatchをあててみた]]></title><description><![CDATA[こんにちは〜 NITICのこうちゅけです。
+以前にクラスメイトの@れおはかせがBunでパッチを当てるためにpatch-packageを動かす方法という記事を執筆していました。
+この記事はbun patchコマンドが実装される前に執筆されていて、patch-packageをbunで動かすためにpatch-packageでpatch-packageにpatchを当てるということをした、という記事でした。
+現在はbun patchが実装され、bunだけでpatchが当てられるようになったので実際に使ってみた、という記事です。
+bunの公式ページ
+https://bun.sh/docs/inst...]]></description><link>https://zenn.dev/koutyuke/articles/bun-patch-example</link><guid isPermaLink="true">https://zenn.dev/koutyuke/articles/bun-patch-example</guid><pubDate>Thu, 05 Sep 2024 12:28:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bqnQDs2I--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:bun%25E3%2581%25A7%25E3%2583%2591%25E3%2583%2583%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B8%25E3%2581%25ABpatch%25E3%2582%2592%25E3%2581%2582%25E3%2581%25A6%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2593%25E3%2581%2586%25E3%2581%25A1%25E3%2582%2585%25E3%2581%2591%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pENGRRSUhSYjZWUHhjSzlkMDJKQ0JJUURxV0MzeXhUbzFsdHB4dGc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>こうちゅけ</dc:creator></item><item><title><![CDATA[ReferenceError: Request is not defined]]></title><description><![CDATA[例えば、React Routerが使われたコードをjestでテストすると、タイトルのエラーが発生すると思います。
+原因としては、下記になります。
+https://github.com/jsdom/jsdom/issues/1724
+上を読むとどうやら、単に、jsdomにRequestオブジェクトが実装されてないというだけになるかと思います。
+issue自体も7年前にopenになってますし、RequestやFetch_APIもそんな新しい感じがしないので、jsdom、ちょっと大丈夫かなっていう感じは少しします。
+↑のissue内にも対応方法がいろいろ載ってますが、
+React Router...]]></description><link>https://zenn.dev/sikmi_tech/articles/e5597a5be6135a</link><guid isPermaLink="true">https://zenn.dev/sikmi_tech/articles/e5597a5be6135a</guid><pubDate>Thu, 05 Sep 2024 11:16:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ssGUTg5x--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:ReferenceError%253A%2520Request%2520is%2520not%2520defined%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:na8esin%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhlYzhlY2ZlNDguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2581%2597%25E3%2581%258F%25E3%2581%25BF%25E3%2581%25AE%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2htRnZJU0VZaHpTODM3VVpLRE5tdHNYV2FBazF4WE5GSUt3TG1oPXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>na8esin</dc:creator></item><item><title><![CDATA[Server Actionsではconformを使うのが良さそう@2024/09/05]]></title><description><![CDATA[
+ はじめに
+Next.jsでServer Actionsを使ったフォーム処理を記述していたら実装に手間取ったのと、conformというライブラリが良さそうだったのでメモを残しておきます。
+
+ 結論
+Server Actionsにはconformを使うが良さそうです。なぜ「@2024/09/05」かというと、react-hook-formも今後Server Actionsに対応予定だからです。
+私も含めreact-hook-formのほうが馴染みがある人は多いのではないでしょうか。
+https://github.com/edmundhung/conform
+
+ フォーム要件
+
+フロントで...]]></description><link>https://zenn.dev/ishiyama/articles/725dd443234f8c</link><guid isPermaLink="true">https://zenn.dev/ishiyama/articles/725dd443234f8c</guid><pubDate>Thu, 05 Sep 2024 09:42:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--DjCVqraS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Server%2520Actions%25E3%2581%25A7%25E3%2581%25AFconform%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%25E3%2581%25AE%25E3%2581%258C%25E8%2589%25AF%25E3%2581%2595%25E3%2581%259D%25E3%2581%2586%25402024%252F09%252F05%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ishiyama%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk1ODA5ZmJmZDMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ishiyama</dc:creator></item><item><title><![CDATA[ExcelのシートをJSON形式に変換する際に空行を読み込ませたくない]]></title><description><![CDATA[
+ はじめに
+ExcelからJSON形式に変換する際、Excelのシート上では空のはずが空行で読み込まれる事象に遭遇しました。
+事前に行ごと削除すれば解決できますが、そもそもJSON形式に変換する際は空行を読み込ませたくないと思い、解決方法の備忘録として残します。
+
+ 環境
+
+
+
+ライブラリ
+バージョン
+
+
+
+
+xlsx-js-style
+1.2.0
+
+
+typescript
+5.5.3
+
+
+
+
+ 解決方法
+sheet_to_jsonメソッドのblankrowsオプションをfalseに設定することで空行を読み込ませないようにできます。
+非常にシンプルでした。
+import XLSX fr...]]></description><link>https://zenn.dev/communitio/articles/avoid-empty-rows-with-xlsx-utils-sheet-to-json</link><guid isPermaLink="true">https://zenn.dev/communitio/articles/avoid-empty-rows-with-xlsx-utils-sheet-to-json</guid><pubDate>Thu, 05 Sep 2024 07:23:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dUIeieP3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Excel%25E3%2581%25AE%25E3%2582%25B7%25E3%2583%25BC%25E3%2583%2588%25E3%2582%2592JSON%25E5%25BD%25A2%25E5%25BC%258F%25E3%2581%25AB%25E5%25A4%2589%25E6%258F%259B%25E3%2581%2599%25E3%2582%258B%25E9%259A%259B%25E3%2581%25AB%25E7%25A9%25BA%25E8%25A1%258C%25E3%2582%2592%25E8%25AA%25AD%25E3%2581%25BF%25E8%25BE%25BC%25E3%2581%25BE%25E3%2581%259B%25E3%2581%259F%25E3%2581%258F%25E3%2581%25AA%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Ryosuke-Kawanobe%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZkZjJlMWY1MjUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25B3%25E3%2583%259F%25E3%2583%25A5%25E3%2583%258B%25E3%2583%2586%25E3%2582%25A3%25E3%2582%25AA%2520%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSktyZ2FERFM5ZjB2ZjlkekZuU012U3RkVFhJSWFuYldGS2NXal9uZUtWallQMU1BPXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Ryosuke-Kawanobe</dc:creator></item><item><title><![CDATA[ビット演算でUIを制御したい！ 基礎編]]></title><description><![CDATA[TypeScript/JavaScriptで、ビット演算を使ってUIを制御する実装について書きます！
+今回は基礎編として、入力項目とビットが1対1に対応するパターンについてデモコードを掘り下げながら解説します。
+ビット演算とか二進数って何に使うの？ と疑問に思う方にも知ってもらうことで、実際の現場でビット演算を使った実装がしやすくなればみんなハッピー⭐（多分）。
+
+ やりたいこと
+解説用に👇のような簡単なデモを用意しました！
+実際の動作やコードを確認しながら本文を読んでいただければと思います🙇
+
+
+
+Yes/No で回答する何問かのアンケートを設けたい！
+ユーザーの回答に応じて固有の応答...]]></description><link>https://zenn.dev/tor_inc/articles/2d11a5000c1080</link><guid isPermaLink="true">https://zenn.dev/tor_inc/articles/2d11a5000c1080</guid><pubDate>Thu, 05 Sep 2024 06:38:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--88UsJlfa--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2593%25E3%2583%2583%25E3%2583%2588%25E6%25BC%2594%25E7%25AE%2597%25E3%2581%25A7UI%25E3%2582%2592%25E5%2588%25B6%25E5%25BE%25A1%25E3%2581%2597%25E3%2581%259F%25E3%2581%2584%25EF%25BC%2581%2520%25E5%259F%25BA%25E7%25A4%258E%25E7%25B7%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%25AF%25E3%2582%258A%25E3%2581%25BC%25E3%2581%25A6%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg2YWFmMzM0ZWIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2583%2588%25E3%2582%25A5%25E3%2583%25BC%25E3%2582%25A2%25E3%2583%25BC%25E3%2583%25AB%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VlNWZmNjk4MTYuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>はりぼて</dc:creator></item><item><title><![CDATA[【TypeScript】ユーザー定義型ガードを使って undefined を省いた配列操作を行う]]></title><description><![CDATA[
+ はじめに
+本記事の結論を先に書いておくと「特定のオブジェクト（配列）のfilter操作時にundefinedを省いた形にしたい場合はユーザー定義型ガードを使って明示的に処理を記述（型注釈）したほうが安全」という話です。
+https://typescriptbook.jp/reference/functions/type-guard-functions
+ユーザー定義型ガードについては上記が詳しいので、ここでは端的に説明します。
+ユーザー定義型ガードは「引数名 is 型という記述で、（filter操作など処理の）返り値がtrueの場合「引数名に指定した型」として扱う」という仕組みです。
+...]]></description><link>https://zenn.dev/benjuwan/articles/90e77010d5be8f</link><guid isPermaLink="true">https://zenn.dev/benjuwan/articles/90e77010d5be8f</guid><pubDate>Thu, 05 Sep 2024 03:40:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--uZmjKU6E--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590TypeScript%25E3%2580%2591%25E3%2583%25A6%25E3%2583%25BC%25E3%2582%25B6%25E3%2583%25BC%25E5%25AE%259A%25E7%25BE%25A9%25E5%259E%258B%25E3%2582%25AC%25E3%2583%25BC%25E3%2583%2589%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%2520undefined%2520%25E3%2582%2592%25E7%259C%2581%25E3%2581%2584%25E3%2581%259F%25E9%2585%258D%25E5%2588%2597%25E6%2593%258D%25E4%25BD%259C%25E3%2582%2592%25E8%25A1%258C%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:benjuwan%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSnd2XzJhLTN4SnJmSkN0Ql9wMkkwWUlVaVlTY1ozLTFQZFZoNkxsaUIyRmc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>benjuwan</dc:creator></item><item><title><![CDATA[【JavaScript】BigIntに頼らずにNumber型の限界を超えてみる]]></title><description><![CDATA[!
+ネタです。プロダクションで使用して変になっても知りません
+
+Number型で正常に扱える整数値の上限は、Number.MAX_SAFE_INTEGERで定義される値（一般的には9007199254740991）です。それより大きい整数値を扱うにはBigInt型を利用することになります。
+ですが、今回は数値を文字列型で扱い、BigInt型にすることなくNumber型の限界を超えた計算ができるようにしてみたいと思います。時間の都合上、自然数の足し算だけやってみます。
+
+ どうやるの？
+もちろん、普通の構文でNumber型を超えることはできません。今回は、小学校で習った筆算のアプローチを参...]]></description><link>https://zenn.dev/kakkokari_gtyih/articles/078743287873cd</link><guid isPermaLink="true">https://zenn.dev/kakkokari_gtyih/articles/078743287873cd</guid><pubDate>Thu, 05 Sep 2024 02:49:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lSOla1K---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590JavaScript%25E3%2580%2591BigInt%25E3%2581%25AB%25E9%25A0%25BC%25E3%2582%2589%25E3%2581%259A%25E3%2581%25ABNumber%25E5%259E%258B%25E3%2581%25AE%25E9%2599%2590%25E7%2595%258C%25E3%2582%2592%25E8%25B6%2585%25E3%2581%2588%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25EF%25BC%2588%25E4%25BB%25AE%25EF%25BC%2589%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA4YWViNWU2NjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>（仮）</dc:creator></item><item><title><![CDATA[URLシェアを支える技術 lz-string]]></title><description><![CDATA[WebアプリでURLシェアを実装する際に、URLにすべての情報を持たせてしまいたい場合があります。そのとき、情報をそのままクエリ文字列に渡してしまうとURLの文字数制限に引っかかってしまうかもしれません(厳密にはURLに上限はないようですが、現実はいつもブラウザ実装依存)。
+そんなときURLセーフな文字列形式で圧縮してくれるライブラリがあります。lz-sringです。
+https://github.com/pieroxy/lz-string
+
+ 変換の例
+ライブラリで compressToEncodedURIComponent というAPIが提供されているのでこれを使用します。標準のen...]]></description><link>https://zenn.dev/chot/articles/what-is-lz-string</link><guid isPermaLink="true">https://zenn.dev/chot/articles/what-is-lz-string</guid><pubDate>Thu, 05 Sep 2024 00:47:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---ROl1Mcq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:URL%25E3%2582%25B7%25E3%2582%25A7%25E3%2582%25A2%25E3%2582%2592%25E6%2594%25AF%25E3%2581%2588%25E3%2582%258B%25E6%258A%2580%25E8%25A1%2593%2520lz-string%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%2599%25E3%2581%25A6%25E3%2581%2583%25E3%2582%2593%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAzODVjOWFlYzkuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:chot%2520Inc.%2520tech%2520blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzIzMTEyZmJmM2MuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>すてぃん</dc:creator></item><item><title><![CDATA[＃45　Googleが発表したGeminiを試してみた]]></title><description><![CDATA[
+ 概要
+2023年12月7日にGoogleがGeminiを発表しましたので、言語モデルとして有名なOpenAIのGPTと対話をさせてみてみようと思います
+
+ 実装と定義
+今回は、Geminiに対応するクラスとOpenAI(GPT)に対応するクラスをそれぞれ作成します
+
+ Gemini側の実装
+公式のドキュメントを参考にチャットに必要な部分を実装します
+
+チャットの初期化を行うinitChat()
+メッセージの送信を行うsendChat()
+
+import { ChatSession, GenerativeModel, GoogleGenerativeAI } from "@google...]]></description><link>https://zenn.dev/nxted_sapporo/articles/4c3ad852e16e64</link><guid isPermaLink="true">https://zenn.dev/nxted_sapporo/articles/4c3ad852e16e64</guid><pubDate>Thu, 05 Sep 2024 00:14:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--apC917fb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25EF%25BC%258345%25E3%2580%2580Google%25E3%2581%258C%25E7%2599%25BA%25E8%25A1%25A8%25E3%2581%2597%25E3%2581%259FGemini%25E3%2582%2592%25E8%25A9%25A6%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:NXTEDCo.%252C%2520Ltd.%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBmZjQzOTVhYzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>NXTEDCo., Ltd.</dc:creator></item><item><title><![CDATA[Node.jsでパスを連結する]]></title><description><![CDATA[JavaScript (TypeScript) でパスを連結するとき、文字列を結合して行いがちです。
+const baseUrl = "https://example.com";
+const urlPath = "foo/bar";
+const url = `${baseUrl}/${urlPath}`;
+
+console.log(url); // https://example.com/foo/bar
+上の例では正しいパスが得られましたが、連結する値によっては不都合が生じる場合があります。
+const baseUrl = "https://example.com/";
+const ur...]]></description><link>https://zenn.dev/pupepa/articles/709f81eaaf8d73</link><guid isPermaLink="true">https://zenn.dev/pupepa/articles/709f81eaaf8d73</guid><pubDate>Wed, 04 Sep 2024 23:48:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0OPuZWkO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Node.js%25E3%2581%25A7%25E3%2583%2591%25E3%2582%25B9%25E3%2582%2592%25E9%2580%25A3%25E7%25B5%2590%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:pupepa%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I2NWY5YjY5YmMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>pupepa</dc:creator></item></channel></rss>

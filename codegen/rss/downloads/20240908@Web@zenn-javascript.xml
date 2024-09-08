@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「JavaScript」のフィード]]></title><description><![CDATA[Zennのトピック「JavaScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/javascript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/64acd76870.png</url><title>Zennの「JavaScript」のフィード</title><link>https://zenn.dev/topics/javascript</link></image><generator>zenn.dev</generator><lastBuildDate>Sun, 08 Sep 2024 08:00:07 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/javascript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[なぜ非同期処理？ Node.jsの実装から読み解く Fetch API の response.json()]]></title><description><![CDATA[皆さんはなぜ Fetch API の res.json() が非同期処理なのか、不思議に思ったことはありませんか？
+const response = await fetch("https://jsonplaceholder.typicode.com/todos/");
+console.log(response.headers.get("content-type")); // application/json; charset=utf-8
+const jsonData = await response.json(); // なぜ非同期処理なのか？
+私は最初、JSON パースの処理を Web...]]></description><link>https://zenn.dev/ryomaejii/articles/a55f428609ffc5</link><guid isPermaLink="true">https://zenn.dev/ryomaejii/articles/a55f428609ffc5</guid><pubDate>Sun, 08 Sep 2024 05:24:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--RpQeyiXg--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%25AA%25E3%2581%259C%25E9%259D%259E%25E5%2590%258C%25E6%259C%259F%25E5%2587%25A6%25E7%2590%2586%25EF%25BC%259F%2520Node.js%25E3%2581%25AE%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%258B%25E3%2582%2589%25E8%25AA%25AD%25E3%2581%25BF%25E8%25A7%25A3%25E3%2581%258F%2520Fetch%2520API%2520%25E3%2581%25AE%2520response.json%2528%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ryomaejii%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzgzZTkxNGFjMmYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ryomaejii</dc:creator></item><item><title><![CDATA[LogTape：JavaScript/TypeScript向けのシンプルで柔軟なロギングライブラリの紹介と使い方]]></title><description><![CDATA[こんにちは、皆さん。今回は、JavaScriptとTypeScript向けの新しいロギングライブラリ「LogTape」をご紹介します。
+https://github.com/dahlia/logtape
+ログ出力は開発者にとって欠かせない作業ですが、適切なツールがないと面倒で時間がかかることがあります。LogTapeは、この問題を解決するために設計された、シンプルでありながら強力なロギングライブラリです。
+LogTapeの主な特徴は以下の通りです：
+
+
+依存関係なし：LogTapeには依存関係がありません。LogTapeの依存関係を心配することなく使用できます。
+
+
+ライブラリサポート：...]]></description><link>https://zenn.dev/hongminhee/articles/47e4985e1764fc</link><guid isPermaLink="true">https://zenn.dev/hongminhee/articles/47e4985e1764fc</guid><pubDate>Sun, 08 Sep 2024 03:08:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8Z6unlIq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:LogTape%25EF%25BC%259AJavaScript%252FTypeScript%25E5%2590%2591%25E3%2581%2591%25E3%2581%25AE%25E3%2582%25B7%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AB%25E3%2581%25A7%25E6%259F%2594%25E8%25BB%259F%25E3%2581%25AA%25E3%2583%25AD%25E3%2582%25AE%25E3%2583%25B3%25E3%2582%25B0%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%25E3%2581%25AE%25E7%25B4%25B9%25E4%25BB%258B%25E3%2581%25A8%25E4%25BD%25BF%25E3%2581%2584%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%25B4%25AA%2520%25E6%25B0%2591%25E6%2586%2599%25EF%25BC%2588%25E3%2583%259B%25E3%2583%25B3%25E3%2583%25BB%25E3%2583%259F%25E3%2583%25B3%25E3%2583%2592%25EF%25BC%2589%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE4Yzk5ZDE5YWIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>洪 民憙（ホン・ミンヒ）</dc:creator></item><item><title><![CDATA[Promiseチェーンを可変長にする方法]]></title><description><![CDATA[
+ 背景
+Promiseチェーンは複数の非同期処理を順番に実行するための方法である。
+例えば、以下のようなコードのことを指す。
+const promise = new Promise((resolve, reject) =&gt; {
+    setTimeout(() =&gt; resolve("First"), 1000);
+});
+
+promise
+    .then(result =&gt; {
+        console.log(result); // "First"
+        return "Second";
+    })
+    .then(result =&g...]]></description><link>https://zenn.dev/yaona807/articles/2fe82db3275fe3</link><guid isPermaLink="true">https://zenn.dev/yaona807/articles/2fe82db3275fe3</guid><pubDate>Sat, 07 Sep 2024 07:19:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--SWwFCDC9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Promise%25E3%2583%2581%25E3%2582%25A7%25E3%2583%25BC%25E3%2583%25B3%25E3%2582%2592%25E5%258F%25AF%25E5%25A4%2589%25E9%2595%25B7%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yaona%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS1QxSWFHM1NYaUIxOF9NS1FvTTV4MmpTRHJEeXJfbEFoU3BDTUZWSE5XX1VzRFJSWHU9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yaona</dc:creator></item><item><title><![CDATA[ジュースの自販機にあるくじ引きを作りたい]]></title><description><![CDATA[
+ 作成物
+
+JavaScriptで乱数を作って、クラス名を付与しただけ。
+
+ 参考リンク
+CSSを駆使してDIV要素１つでデジタル数字を作る
+
+
+ 所感
+これじゃない感。アニメーションでセグメントを動かしてくじ引きっぽくしないと。まだまだ。
+]]></description><link>https://zenn.dev/taiyok/articles/6cfced2572d4cb</link><guid isPermaLink="true">https://zenn.dev/taiyok/articles/6cfced2572d4cb</guid><pubDate>Sat, 07 Sep 2024 02:07:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dglq7y3g--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B8%25E3%2583%25A5%25E3%2583%25BC%25E3%2582%25B9%25E3%2581%25AE%25E8%2587%25AA%25E8%25B2%25A9%25E6%25A9%259F%25E3%2581%25AB%25E3%2581%2582%25E3%2582%258B%25E3%2581%258F%25E3%2581%2598%25E5%25BC%2595%25E3%2581%258D%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258A%25E3%2581%259F%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%259E%25E3%2583%2583%25E3%2582%25AF%25E5%25B1%258B%2540%25E3%2582%25BD%25E3%2583%2595%25E3%2583%2588%25E3%2582%25A6%25E3%2582%25A7%25E3%2582%25A2%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU5NmJjOTA0YTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>マック屋@ソフトウェアエンジニア</dc:creator></item><item><title><![CDATA[Mapbox Newsletter WEEKLY TIPSの解説 -「データドリブンプロパティで円を設定」]]></title><description><![CDATA[
+ はじめに
+この記事は、先日配信されたMapbox NewsletterのWEEKLY TIPSで紹介されていた「データドリブンプロパティで円を設定」についての解説です。このサンプルではVectorソースの使い方を例示しています。また、Newsletterの購読はこちらからお申し込みいただけます。
+以下が本サンプルのデモです。
+
+
+ コードを確認
+まずExamplesのコードを見に行きましょう。
+日本語サイト
+
+英語サイト
+
+基本的に同じコードですが、英語版はスタイルがMapbox Light v11にアップグレードされているのでこちらを使用します。Mapbox Light v10では...]]></description><link>https://zenn.dev/mapbox_japan/articles/3f2151f38fc901</link><guid isPermaLink="true">https://zenn.dev/mapbox_japan/articles/3f2151f38fc901</guid><pubDate>Fri, 06 Sep 2024 14:21:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fP7RXo0S--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Mapbox%2520Newsletter%2520WEEKLY%2520TIPS%25E3%2581%25AE%25E8%25A7%25A3%25E8%25AA%25AC%2520-%25E3%2580%258C%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%2589%25E3%2583%25AA%25E3%2583%2596%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AD%25E3%2583%2591%25E3%2583%2586%25E3%2582%25A3%25E3%2581%25A7%25E5%2586%2586%25E3%2582%2592%25E8%25A8%25AD%25E5%25AE%259A%25E3%2580%258D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:OttyLab%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RmZWNmNDhhMWMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%259E%25E3%2583%2583%25E3%2583%2597%25E3%2583%259C%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25B9%25E3%2583%25BB%25E3%2582%25B8%25E3%2583%25A3%25E3%2583%2591%25E3%2583%25B3%25E5%2590%2588%25E5%2590%258C%25E4%25BC%259A%25E7%25A4%25BE%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhMGJmZWJmZmQuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>OttyLab</dc:creator></item><item><title><![CDATA[有名アプリをクローンして学ぶ講座一覧]]></title><description><![CDATA[Real World Exampleで学びたい
+
+ トイアプリよりReal World Exampleで学びたい
+新しいプログラミング言語、ジャンルでの開発を学ぶ上で本を読んだり公式ドキュメントを見るのは有用ですが、実際のプロダクションエンジニアとしてのお仕事プログラミングとは乖離があります。
+本についているサンプルコードも一つの参考となりますがコード量は小さく局所的にしか参考にならなかったり、公式ドキュメントはレファレンスに徹底していてチュートリアルがなかったりそれぞれはまりどころがあったりします。
+トイアプリより実際の業務コード(Real World Example)で学びたい！
+最...]]></description><link>https://zenn.dev/hiromichinomata/articles/09dcd455442abe</link><guid isPermaLink="true">https://zenn.dev/hiromichinomata/articles/09dcd455442abe</guid><pubDate>Fri, 06 Sep 2024 13:34:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--IyzranYl--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%259C%2589%25E5%2590%258D%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E3%2582%25AF%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%25B3%25E3%2581%2597%25E3%2581%25A6%25E5%25AD%25A6%25E3%2581%25B6%25E8%25AC%259B%25E5%25BA%25A7%25E4%25B8%2580%25E8%25A6%25A7%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Hiromichi%2520NOMATA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dKVzhiSzBKYjZ4cXc1MDFjSHFXXzJ1cmxiMGFMYmY5T3poY1RPUnc9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Hiromichi NOMATA</dc:creator></item><item><title><![CDATA[CSR、SSR、SSGの違いを簡単にまとめる]]></title><description><![CDATA[
+ CSR
+クライアント側でjavaScriptを使用してページをレンダリングする。
+初回ロードは速いが、コンテンツの表示には時間がかかることがある。（ユーザーにとっては遅く感じるかも）
+一度ロードされるとページ間の遷移がスムーズです。
+SEOによわい。
+
+ SSR
+サーバー側でHTMLを生成し、クライアントに送信する。
+初回ロードが速く、ユーザーがすぐにコンテンツを見ることができる。javaScriptはあとからロードされる。
+ページ移動時にリクエストが発生するため、遅延が生じることがある。
+SEOにつよい（サーバーで完全なHTMLを生成するため）
+
+ SSG
+ビルド時に静的HTMLを...]]></description><link>https://zenn.dev/vertz/articles/a1855eb1282aea</link><guid isPermaLink="true">https://zenn.dev/vertz/articles/a1855eb1282aea</guid><pubDate>Fri, 06 Sep 2024 02:24:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--pa3Y9Q14--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:CSR%25E3%2580%2581SSR%25E3%2580%2581SSG%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%25E3%2582%2592%25E7%25B0%25A1%25E5%258D%2598%25E3%2581%25AB%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%2590%25E3%2583%25BC%25E3%2583%2584%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzMzODQ3MmM1MjMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>バーツ</dc:creator></item><item><title><![CDATA[Fetch]]></title><description><![CDATA[
+ Fetch
+サーバーからデータやファイルを取得する際に使用するWebAPIの一種。
+fetch関数は非同期処理になる。
+以下はfetchの例。
+async function myFetch() {
+  const response = await fetch("sample.json");
+  const data = await response.json();
+  for (const { key, value } of data) {
+    console.log(key + ":" + value);
+  }
+}
+myFetch();
+
+sample.json
+[
+    ...]]></description><link>https://zenn.dev/kasai/articles/0908da7d0e8a05</link><guid isPermaLink="true">https://zenn.dev/kasai/articles/0908da7d0e8a05</guid><pubDate>Thu, 05 Sep 2024 16:06:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lkOGjm67--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_80:Fetch%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kasai%2520Ukyo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FGZFp1Y3F2dWdUMTdiRFNiQ0NDZ3NJNUNMa190ZUV4S25rWktMcDNiNVZlPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kasai Ukyo</dc:creator></item><item><title><![CDATA[async / await]]></title><description><![CDATA[
+ async
+関数の先頭につけることで非同期関数という特殊な関数を定義できる。
+非同期関数のreturnが返す値は必ずPromiseインスタンスになる。
+仮に非同期関数の戻り地がPromiseでない場合は暗黙的にPromiseでラップされた値が返る。
+returnが定義されていない場合には、undefinedがラップされたPromiseインスタンスが返る。
+//非同期関数の宣言
+async function fn(){...};
+
+ await
+Promiseインスタンスの前に記述することで、Promiseのステータスがfulfilledかrejectedになるまで後続のコードの実行を...]]></description><link>https://zenn.dev/kasai/articles/34a78ded2a2aad</link><guid isPermaLink="true">https://zenn.dev/kasai/articles/34a78ded2a2aad</guid><pubDate>Thu, 05 Sep 2024 15:20:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--poECP7Ty--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_80:async%2520%252F%2520await%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kasai%2520Ukyo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FGZFp1Y3F2dWdUMTdiRFNiQ0NDZ3NJNUNMa190ZUV4S25rWktMcDNiNVZlPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kasai Ukyo</dc:creator></item><item><title><![CDATA[Promiseを使った並列処理]]></title><description><![CDATA[
+ Promiseのステータス一覧
+pending : resolve, rejectが呼び出される前の状態
+fulfilled : resolveが呼び出された状態
+rejected : rejectが呼び出された状態
+
+ Promise.all
+すべての非同期処理を並列に実行し、すべての完了を待ってから次の処理を行う。
+与えられたPromiseインスタンスがfulfilledになった際に続くthenメソッドの処理に移る。その際にthenのコールバック関数の引数に渡されるのは各resolveに設定した実引数が格納された配列。
+一つでもrejectedになればcatchメソッドに移る。
+...]]></description><link>https://zenn.dev/kasai/articles/eb2bc89c28d28f</link><guid isPermaLink="true">https://zenn.dev/kasai/articles/eb2bc89c28d28f</guid><pubDate>Thu, 05 Sep 2024 14:27:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--81eorZF4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Promise%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%259F%25E4%25B8%25A6%25E5%2588%2597%25E5%2587%25A6%25E7%2590%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kasai%2520Ukyo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FGZFp1Y3F2dWdUMTdiRFNiQ0NDZ3NJNUNMa190ZUV4S25rWktMcDNiNVZlPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kasai Ukyo</dc:creator></item><item><title><![CDATA[表形式データを markdown テーブルに変換]]></title><description><![CDATA[
+ はじめに
+本記事では「表計算ソフト（例：Microsoft Excel や Google Sheets など）のデータを、Markdown テーブル に変換する」ことを目的とし、その実装を考えていきます。なお 実際の動き（利用）としては、下記を想定しています。
+
+表データをコピーする
+
+クリップボードを経由して、テキスト形式（≒ tsv）でフォームに貼り付け
+フォーム内容を基に、markdown テーブルを作成
+
+クリップボードについての話は、最下段に補足として乗せておきます。
+
+ その他紹介
+本記事と逆のパターンも用意していますので、興味がある方は下記記事を参照してください。
+!
+...]]></description><link>https://zenn.dev/nonaka101/articles/excel-to-markdown</link><guid isPermaLink="true">https://zenn.dev/nonaka101/articles/excel-to-markdown</guid><pubDate>Thu, 05 Sep 2024 11:45:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--XjKQldDP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%25A1%25A8%25E5%25BD%25A2%25E5%25BC%258F%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%2592%2520markdown%2520%25E3%2583%2586%25E3%2583%25BC%25E3%2583%2596%25E3%2583%25AB%25E3%2581%25AB%25E5%25A4%2589%25E6%258F%259B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Nonaka%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY4YWMyOGJiZWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Nonaka</dc:creator></item><item><title><![CDATA[WixStudioでVeloを使う Step 29 「CMSのサンドボックス」]]></title><description><![CDATA[
+ はじめに
+
+はじめに謝ります。まさかのVeloを使わない記事です。ごめんなさい。ただし、WixStudioにおける開発に全く関係ないというわけではありません。CMSの話です。そして開発に関わる話です。今後開発に取り組む上では役に立つし、お世話になる機能だと思うので記事にします。今回はCMSのサンドボックスに触れてみる。
+
+ サンドボックスとは
+そもそもサンドボックスとは何かって話ですが、平たく言えば検証用の環境。だから、CMSのサンドボックスとは本番公開用のデータではなくて、検証用のデータを管理するための仕組みと捉えればいい。
+
+ 必要？
+必要。基本的にWix,WixStudioは公...]]></description><link>https://zenn.dev/niibori/articles/veloonwixstudio-beginner-0029</link><guid isPermaLink="true">https://zenn.dev/niibori/articles/veloonwixstudio-beginner-0029</guid><pubDate>Thu, 05 Sep 2024 08:01:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--oPNrm_UO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:WixStudio%25E3%2581%25A7Velo%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%2520Step%252029%2520%25E3%2580%258CCMS%25E3%2581%25AE%25E3%2582%25B5%25E3%2583%25B3%25E3%2583%2589%25E3%2583%259C%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25B9%25E3%2580%258D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Niibori%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U4ZDA4Mjg3YTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Niibori</dc:creator></item><item><title><![CDATA[ビット演算でUIを制御したい！ 基礎編]]></title><description><![CDATA[TypeScript/JavaScriptで、ビット演算を使ってUIを制御する実装について書きます！
+今回は基礎編として、入力項目とビットが1対1に対応するパターンについてデモコードを掘り下げながら解説します。
+ビット演算とか二進数って何に使うの？ と疑問に思う方にも知ってもらうことで、実際の現場でビット演算を使った実装がしやすくなればみんなハッピー⭐（多分）。
+
+ やりたいこと
+解説用に👇のような簡単なデモを用意しました！
+実際の動作やコードを確認しながら本文を読んでいただければと思います🙇
+
+
+
+Yes/No で回答する何問かのアンケートを設けたい！
+ユーザーの回答に応じて固有の応答...]]></description><link>https://zenn.dev/tor_inc/articles/2d11a5000c1080</link><guid isPermaLink="true">https://zenn.dev/tor_inc/articles/2d11a5000c1080</guid><pubDate>Thu, 05 Sep 2024 06:38:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--88UsJlfa--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2593%25E3%2583%2583%25E3%2583%2588%25E6%25BC%2594%25E7%25AE%2597%25E3%2581%25A7UI%25E3%2582%2592%25E5%2588%25B6%25E5%25BE%25A1%25E3%2581%2597%25E3%2581%259F%25E3%2581%2584%25EF%25BC%2581%2520%25E5%259F%25BA%25E7%25A4%258E%25E7%25B7%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%25AF%25E3%2582%258A%25E3%2581%25BC%25E3%2581%25A6%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg2YWFmMzM0ZWIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2583%2588%25E3%2582%25A5%25E3%2583%25BC%25E3%2582%25A2%25E3%2583%25BC%25E3%2583%25AB%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VlNWZmNjk4MTYuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>はりぼて</dc:creator></item><item><title><![CDATA[【JavaScript】BigIntに頼らずにNumber型の限界を超えてみる]]></title><description><![CDATA[!
+ネタです。プロダクションで使用して変になっても知りません
+
+Number型で正常に扱える整数値の上限は、Number.MAX_SAFE_INTEGERで定義される値（一般的には9007199254740991）です。それより大きい整数値を扱うにはBigInt型を利用することになります。
+ですが、今回は数値を文字列型で扱い、BigInt型にすることなくNumber型の限界を超えた計算ができるようにしてみたいと思います。時間の都合上、自然数の足し算だけやってみます。
+
+ どうやるの？
+もちろん、普通の構文でNumber型を超えることはできません。今回は、小学校で習った筆算のアプローチを参...]]></description><link>https://zenn.dev/kakkokari_gtyih/articles/078743287873cd</link><guid isPermaLink="true">https://zenn.dev/kakkokari_gtyih/articles/078743287873cd</guid><pubDate>Thu, 05 Sep 2024 02:49:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lSOla1K---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590JavaScript%25E3%2580%2591BigInt%25E3%2581%25AB%25E9%25A0%25BC%25E3%2582%2589%25E3%2581%259A%25E3%2581%25ABNumber%25E5%259E%258B%25E3%2581%25AE%25E9%2599%2590%25E7%2595%258C%25E3%2582%2592%25E8%25B6%2585%25E3%2581%2588%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25EF%25BC%2588%25E4%25BB%25AE%25EF%25BC%2589%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA4YWViNWU2NjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>（仮）</dc:creator></item><item><title><![CDATA[URLシェアを支える技術 lz-string]]></title><description><![CDATA[WebアプリでURLシェアを実装する際に、URLにすべての情報を持たせてしまいたい場合があります。そのとき、情報をそのままクエリ文字列に渡してしまうとURLの文字数制限に引っかかってしまうかもしれません(厳密にはURLに上限はないようですが、現実はいつもブラウザ実装依存)。
+そんなときURLセーフな文字列形式で圧縮してくれるライブラリがあります。lz-sringです。
+https://github.com/pieroxy/lz-string
+
+ 変換の例
+ライブラリで compressToEncodedURIComponent というAPIが提供されているのでこれを使用します。標準のen...]]></description><link>https://zenn.dev/chot/articles/what-is-lz-string</link><guid isPermaLink="true">https://zenn.dev/chot/articles/what-is-lz-string</guid><pubDate>Thu, 05 Sep 2024 00:47:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---ROl1Mcq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:URL%25E3%2582%25B7%25E3%2582%25A7%25E3%2582%25A2%25E3%2582%2592%25E6%2594%25AF%25E3%2581%2588%25E3%2582%258B%25E6%258A%2580%25E8%25A1%2593%2520lz-string%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%2599%25E3%2581%25A6%25E3%2581%2583%25E3%2582%2593%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAzODVjOWFlYzkuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:chot%2520Inc.%2520tech%2520blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzIzMTEyZmJmM2MuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>すてぃん</dc:creator></item><item><title><![CDATA[Node.jsでパスを連結する]]></title><description><![CDATA[JavaScript (TypeScript) でパスを連結するとき、文字列を結合して行いがちです。
+const baseUrl = "https://example.com";
+const urlPath = "foo/bar";
+const url = `${baseUrl}/${urlPath}`;
+
+console.log(url); // https://example.com/foo/bar
+上の例では正しいパスが得られましたが、連結する値によっては不都合が生じる場合があります。
+const baseUrl = "https://example.com/";
+const ur...]]></description><link>https://zenn.dev/pupepa/articles/709f81eaaf8d73</link><guid isPermaLink="true">https://zenn.dev/pupepa/articles/709f81eaaf8d73</guid><pubDate>Wed, 04 Sep 2024 23:48:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0OPuZWkO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Node.js%25E3%2581%25A7%25E3%2583%2591%25E3%2582%25B9%25E3%2582%2592%25E9%2580%25A3%25E7%25B5%2590%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:pupepa%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I2NWY5YjY5YmMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>pupepa</dc:creator></item><item><title><![CDATA[【イラスト付き】Next.jsの通信とRSA【要点一気読み】]]></title><description><![CDATA[
+
+ はじめに
+皆さんこんにちは。
+今回はNext.jsの通信周りの基本的な書き方についてご紹介します。
+Next.jsは通信に関して独自の機能を用意しています。またWebAPI作成も簡単に行うことができます。
+
+ こんな人にオススメ
+
+Next.jsの通信周りの書き方の基本について理解したい
+ブラウザAPIのfetchを使ったことがある
+
+初めて学習する方にも分かるように、丁寧に解説していきます。
+すでに利用している方も、是非一度目を通していただけると嬉しいです。
+😋 Next.jsの通信周りのコードの雰囲気を捉えられるようにご紹介します♪
+
+ 通信とWebAPI
+
+
+ まずポイントを...]]></description><link>https://zenn.dev/peter_norio/articles/40e8fee7c8eac5</link><guid isPermaLink="true">https://zenn.dev/peter_norio/articles/40e8fee7c8eac5</guid><pubDate>Wed, 04 Sep 2024 15:34:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Z9e3PDfM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E3%2582%25A4%25E3%2583%25A9%25E3%2582%25B9%25E3%2583%2588%25E4%25BB%2598%25E3%2581%258D%25E3%2580%2591Next.js%25E3%2581%25AE%25E9%2580%259A%25E4%25BF%25A1%25E3%2581%25A8RSA%25E3%2580%2590%25E8%25A6%2581%25E7%2582%25B9%25E4%25B8%2580%25E6%25B0%2597%25E8%25AA%25AD%25E3%2581%25BF%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%2594%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%25BC%25E3%2581%25AE%25E3%2582%258A%25E3%2581%258A%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSTcwSTlWTjhXNHl3eWRJY1JlYzFWaUJtc3B6S3lfX3JzeTUyYmJhRFh0c29FVzJDZz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ピーターのりお</dc:creator></item><item><title><![CDATA[【イラスト付き】Next.jsの書き方を把握する【要点一気読み】]]></title><description><![CDATA[
+
+ はじめに
+皆さんこんにちは。
+今回はNext.jsのコードの基本的な書き方についてご紹介します。
+Next.jsはReactをベースとしたフレームワークであり、基本的にReactと同様に記述可能ですが、Next.js固有のルールなどもあります。
+
+ こんな人にオススメ
+
+Next.jsの書き方の基本について理解したい
+Reactをの書き方をすでに理解している
+
+初めて学習する方にも分かるように、丁寧に解説していきます。
+すでに利用している方も、是非一度目を通していただけると嬉しいです。
+😋 Next.jsのコードの雰囲気を捉えられるようにご紹介します♪
+
+ ルーティング（App R...]]></description><link>https://zenn.dev/peter_norio/articles/2c5a03770164f2</link><guid isPermaLink="true">https://zenn.dev/peter_norio/articles/2c5a03770164f2</guid><pubDate>Wed, 04 Sep 2024 15:29:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--w225gMYJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E3%2582%25A4%25E3%2583%25A9%25E3%2582%25B9%25E3%2583%2588%25E4%25BB%2598%25E3%2581%258D%25E3%2580%2591Next.js%25E3%2581%25AE%25E6%259B%25B8%25E3%2581%258D%25E6%2596%25B9%25E3%2582%2592%25E6%258A%258A%25E6%258F%25A1%25E3%2581%2599%25E3%2582%258B%25E3%2580%2590%25E8%25A6%2581%25E7%2582%25B9%25E4%25B8%2580%25E6%25B0%2597%25E8%25AA%25AD%25E3%2581%25BF%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%2594%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%25BC%25E3%2581%25AE%25E3%2582%258A%25E3%2581%258A%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSTcwSTlWTjhXNHl3eWRJY1JlYzFWaUJtc3B6S3lfX3JzeTUyYmJhRFh0c29FVzJDZz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ピーターのりお</dc:creator></item><item><title><![CDATA[【イラスト付き】Next.jsの概要を把握する【要点一気読み】]]></title><description><![CDATA[
+
+ はじめに
+皆さんこんにちは。
+今回はNext.jsの概要についてご紹介します。
+Next.jsはReactをベースとしたフレームワークであり、Reactをより簡単に扱うことができます。
+
+ こんな人にオススメ
+
+Next.jsの概要について理解したい
+Next.jsの記述の雰囲気を確認したい
+
+初めて学習する方にも分かるように、丁寧に解説していきます。
+すでに利用している方も、是非一度目を通していただけると嬉しいです。
+😋 Next.jsの輪郭を捉えられるようにご紹介します♪
+
+ Next.jsとは
+
+
+ まずポイントをチェック
+
+フルスタックなReactフレームワーク
+React...]]></description><link>https://zenn.dev/peter_norio/articles/080fee3a662c5b</link><guid isPermaLink="true">https://zenn.dev/peter_norio/articles/080fee3a662c5b</guid><pubDate>Wed, 04 Sep 2024 15:18:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9UQoaRC7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E3%2582%25A4%25E3%2583%25A9%25E3%2582%25B9%25E3%2583%2588%25E4%25BB%2598%25E3%2581%258D%25E3%2580%2591Next.js%25E3%2581%25AE%25E6%25A6%2582%25E8%25A6%2581%25E3%2582%2592%25E6%258A%258A%25E6%258F%25A1%25E3%2581%2599%25E3%2582%258B%25E3%2580%2590%25E8%25A6%2581%25E7%2582%25B9%25E4%25B8%2580%25E6%25B0%2597%25E8%25AA%25AD%25E3%2581%25BF%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%2594%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%25BC%25E3%2581%25AE%25E3%2582%258A%25E3%2581%258A%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSTcwSTlWTjhXNHl3eWRJY1JlYzFWaUJtc3B6S3lfX3JzeTUyYmJhRFh0c29FVzJDZz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ピーターのりお</dc:creator></item><item><title><![CDATA[【イラスト付き】Promiseオブジェクト【丁寧に解説】]]></title><description><![CDATA[
+
+ はじめに
+皆さんこんにちは。
+今回はPromiseオブジェクトについてご紹介します。
+JavaScriptは非同期処理と切っても切り離せません。その非同期処理ではPromiseオブジェクトというものが利用されています。Promiseオブジェクトを理解することで、非同期処理の記述の本質を理解することができます。
+
+ こんな人にオススメ
+
+Promiseオブジェクトについて理解したい
+Promise対応した関数を作成したい
+
+初めて学習する方にも分かるように、丁寧に解説していきます。
+プログラミングに慣れてきた方も、是非一度目を通していただけると嬉しいです。
+😋 Promiseオブジェ...]]></description><link>https://zenn.dev/peter_norio/articles/289927bab5a4d3</link><guid isPermaLink="true">https://zenn.dev/peter_norio/articles/289927bab5a4d3</guid><pubDate>Wed, 04 Sep 2024 15:14:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BpQlpqUt--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E3%2582%25A4%25E3%2583%25A9%25E3%2582%25B9%25E3%2583%2588%25E4%25BB%2598%25E3%2581%258D%25E3%2580%2591Promise%25E3%2582%25AA%25E3%2583%2596%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E3%2580%2590%25E4%25B8%2581%25E5%25AF%25A7%25E3%2581%25AB%25E8%25A7%25A3%25E8%25AA%25AC%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%2594%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%25BC%25E3%2581%25AE%25E3%2582%258A%25E3%2581%258A%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSTcwSTlWTjhXNHl3eWRJY1JlYzFWaUJtc3B6S3lfX3JzeTUyYmJhRFh0c29FVzJDZz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ピーターのりお</dc:creator></item></channel></rss>

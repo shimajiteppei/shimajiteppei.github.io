@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Sun, 08 Sep 2024 02:20:40 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[波と虚数とフーリエ変換]]></title><description><![CDATA[SAR衛星などでつかわれるMicro波といった電気信号は波です。
+そして波を表す数式には当たり前のように虚数の式が出てきます。
+これはいったん何を表しているのか最初まったく理解できませんでした。
+わかりやすく美しい解説、　わかりやすい本　をみつけ、何回も読んでようやく輪郭がつかめてきました。
+
+ 波をあらわす数式は？
+波を表す性質として　どのくらい大きい波かという振幅と、どのくらい細かく揺れるかという周波数が重要になってきます。さらに波の中のどこに位置するかを表すものが位相です。
+波は繰り返しおなじ形がくりかえします。例えば下記のBの位置は何度も発生します。全体のどこにいるかというよりも...]]></description><link>https://zenn.dev/kozayupapa/articles/103612b48bdb37</link><guid isPermaLink="true">https://zenn.dev/kozayupapa/articles/103612b48bdb37</guid><pubDate>Sun, 08 Sep 2024 01:54:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--uIerGaZR--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%25B3%25A2%25E3%2581%25A8%25E8%2599%259A%25E6%2595%25B0%25E3%2581%25A8%25E3%2583%2595%25E3%2583%25BC%25E3%2583%25AA%25E3%2582%25A8%25E5%25A4%2589%25E6%258F%259B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kozayupapa%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M1Y2ZkMTM5ZTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kozayupapa</dc:creator></item><item><title><![CDATA[GA になった Cloud Run で GCS バケットをストレージボリュームとしてマウントする機能を試した]]></title><description><![CDATA[
+ はじめに
+Google Cloud Run の GCS バケットボリュームマウント機能が GA になりました。これにより、Cloud Run で GCS バケットをストレージボリュームとしてマウントし、ファイルシステムとして直接操作することが可能になりました。
+この記事では、Cloud Run で GCS バケットをストレージボリュームとしてマウントする機能を試してみた結果とつまづいたポイントを共有します。
+元記事: Configure Cloud Storage volume mounts for services
+
+ TL;DR
+Cloud Run から GCS バケットに直接ア...]]></description><link>https://zenn.dev/gixo/articles/15022739850911</link><guid isPermaLink="true">https://zenn.dev/gixo/articles/15022739850911</guid><pubDate>Sat, 07 Sep 2024 22:28:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3JtMdIj_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:GA%2520%25E3%2581%25AB%25E3%2581%25AA%25E3%2581%25A3%25E3%2581%259F%2520Cloud%2520Run%2520%25E3%2581%25A7%2520GCS%2520%25E3%2583%2590%25E3%2582%25B1%25E3%2583%2583%25E3%2583%2588%25E3%2582%2592%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25AC%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%259C%25E3%2583%25AA%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%25A0%25E3%2581%25A8%25E3%2581%2597%25E3%2581%25A6%25E3%2583%259E%25E3%2582%25A6%25E3%2583%25B3%25E3%2583%2588%25E3%2581%2599%25E3%2582%258B%25E6%25A9%259F%25E8%2583%25BD%25E3%2582%2592%25E8%25A9%25A6%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Yuji%2520Tsuritani%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVkYTBiZjE4NjMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25AE%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25B9%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JkYzZkZjE2NmMuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yuji Tsuritani</dc:creator></item><item><title><![CDATA[気温が変化したら ずんだもん に教えてもらいたい]]></title><description><![CDATA[気温や積雪量が変化したら「ずんだもん」や「四国めたん」が教えてくれたらうれしいな……
+ということで VOICEVOX の API を利用してしゃべってもらうアプリを書いてみました。
+VOICEVOX-Engine または VOICEVOX が動作している必要があります。
+実装したアプリは以下の GitHub リポジトリで公開しています。
+https://github.com/sharl/amedas
+
+ 概要
+Windows のタスクトレイや Mac のメニューバーに常駐して、10分おきにアメダスをチェックし、気温や積雪量が変化していたら VOICEVOX API を使ってしゃべってもら...]]></description><link>https://zenn.dev/sharl/articles/6e5eff90d70071</link><guid isPermaLink="true">https://zenn.dev/sharl/articles/6e5eff90d70071</guid><pubDate>Sat, 07 Sep 2024 21:48:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--IiVWHmzC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%25B0%2597%25E6%25B8%25A9%25E3%2581%258C%25E5%25A4%2589%25E5%258C%2596%25E3%2581%2597%25E3%2581%259F%25E3%2582%2589%2520%25E3%2581%259A%25E3%2582%2593%25E3%2581%25A0%25E3%2582%2582%25E3%2582%2593%2520%25E3%2581%25AB%25E6%2595%2599%25E3%2581%2588%25E3%2581%25A6%25E3%2582%2582%25E3%2582%2589%25E3%2581%2584%25E3%2581%259F%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2597%25E3%2582%2583%25E3%2581%2582%25E3%2582%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0xuZEM2dlZRUHNRVzBHa1dpdS1DY2trTlVETnVhemF1YjlUVVRkQ3B5dHBqbTBLUXA9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>しゃある</dc:creator></item><item><title><![CDATA[データ分析 python 独立性の検定 カイ二乗検定]]></title><description><![CDATA[今回は独理性の検定について簡単にまとめてみます。
+
+ 独立性の検定とは？
+2つのカテゴリの変数（名義尺度）が統計的に独立しているかを調べる方法です。
+具体的には変数間に関連性があるかどうかを検証します。
+
+ 名義尺度とは？
+データをカテゴリに分類するための尺度で、ただ区別のためだけに使われるラベルや名前であり、順序や数量的な意味がありません。
+具体例として、性別（男性、女性）や、血液型（A型、B型、O型、AB型）などがあります。
+名義尺度以外にも、順序尺度や感覚尺度、比率尺度といった尺度があり、それぞれ適した分析方法があります。
+
+ 独立性の検定の具体例
+
+
+性別と喫煙習が関連しているか...]]></description><link>https://zenn.dev/longbridge/articles/dfedfd028e221c</link><guid isPermaLink="true">https://zenn.dev/longbridge/articles/dfedfd028e221c</guid><pubDate>Sat, 07 Sep 2024 16:23:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Vq9tHBXX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E5%2588%2586%25E6%259E%2590%2520python%2520%25E7%258B%25AC%25E7%25AB%258B%25E6%2580%25A7%25E3%2581%25AE%25E6%25A4%259C%25E5%25AE%259A%2520%25E3%2582%25AB%25E3%2582%25A4%25E4%25BA%258C%25E4%25B9%2597%25E6%25A4%259C%25E5%25AE%259A%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:piyoko%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FlYjQwNDk5NTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>piyoko</dc:creator></item><item><title><![CDATA[【AI_6日目_2回目】FastAPI_1冊目]]></title><description><![CDATA[こんにちは投資ロウトです。
+
+ 背景
+AI開発ができるためにwebAPIについて理解を深めていきます。
+※Tailwind CSSとkeycloakは現場でピンチになれば再開します。
+
+ ORMライブラリを使う
+NodejsにTypeOrmがあるように、Pythonにもsqlalchemyと言うORMライブラリをMySQLの接続のために使うとのことです。
+※他にもPeeweeと言うものにも対応しているとのことです。
+クライアントツールには、pymysqlを使うといいとのことです。
+アプリが起動した段階で、それらのライブラリを入れるとのことです。
+# まずは起動
+docker compos...]]></description><link>https://zenn.dev/doshirote/articles/5d5b6ec2693bec</link><guid isPermaLink="true">https://zenn.dev/doshirote/articles/5d5b6ec2693bec</guid><pubDate>Sat, 07 Sep 2024 12:53:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--DMgPLTH9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590AI_6%25E6%2597%25A5%25E7%259B%25AE_2%25E5%259B%259E%25E7%259B%25AE%25E3%2580%2591FastAPI_1%25E5%2586%258A%25E7%259B%25AE%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%258A%2595%25E8%25B3%2587%25E3%2583%25AD%25E3%2582%25A6%25E3%2583%2588%25E3%2581%25AE%25E6%258A%2580%25E8%25A1%2593%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM3ODY0NWMwOGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>投資ロウトの技術ブログ</dc:creator></item><item><title><![CDATA[データ分析 2群間の代表値の検定 マンホイットニーのU検定/ウィルコクソン順位和検定]]></title><description><![CDATA[以前まとめた2群間の代表値の検定について、具体的な手法を簡単にまとめてみます。
+python + google colaboratory で 実行しています。
+https://zenn.dev/longbridge/articles/b5abd84b331381
+
+ テーマ
+あるカフェチェーンが新しいマーケティングキャンペーンの効果を評価するために、
+2つの異なるキャンペーンを実施しました。
+1つのキャンペーンは「キャンペーンA」、もう1つは「キャンペーンB」と名付けられ、
+それぞれ異なる10店舗で行われました。
+1ヶ月間の売上データを集計した結果、
+キャンペーンAの平均売上は750,0...]]></description><link>https://zenn.dev/longbridge/articles/9d6458b9059c22</link><guid isPermaLink="true">https://zenn.dev/longbridge/articles/9d6458b9059c22</guid><pubDate>Sat, 07 Sep 2024 08:38:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Gr2brgrR--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E5%2588%2586%25E6%259E%2590%25202%25E7%25BE%25A4%25E9%2596%2593%25E3%2581%25AE%25E4%25BB%25A3%25E8%25A1%25A8%25E5%2580%25A4%25E3%2581%25AE%25E6%25A4%259C%25E5%25AE%259A%2520%25E3%2583%259E%25E3%2583%25B3%25E3%2583%259B%25E3%2582%25A4%25E3%2583%2583%25E3%2583%2588%25E3%2583%258B%25E3%2583%25BC%25E3%2581%25AEU%25E6%25A4%259C%25E5%25AE%259A%252F%25E3%2582%25A6%25E3%2582%25A3%25E3%2583%25AB%25E3%2582%25B3%25E3%2582%25AF%25E3%2582%25BD%25E3%2583%25B3%25E9%25A0%2586%25E4%25BD%258D%25E5%2592%258C%25E6%25A4%259C%25E5%25AE%259A%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:piyoko%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FlYjQwNDk5NTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>piyoko</dc:creator></item><item><title><![CDATA[Pythonのenumerateの使い方]]></title><description><![CDATA[
+ Python enumerateの使い方
+for文と一緒に使うと便利なenumerateについて
+
+ 例
+具体的にどう便利かと言うと、
+もっとも簡単な例はfor文で扱うと繰り返しの回数を自分でカウントする必要が無くなる
+    animals = ['lion', 'bear', 'wolf', 'fox']
+
+    for index, animal in enumerate(animals):
+        print(f"index:{index}, animal:{aniaml}")
+
+        # index:0 animal:lion
+        # ind...]]></description><link>https://zenn.dev/ryy_d/articles/4c2729466ab2d9</link><guid isPermaLink="true">https://zenn.dev/ryy_d/articles/4c2729466ab2d9</guid><pubDate>Sat, 07 Sep 2024 07:59:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--LvcZHqYO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25AEenumerate%25E3%2581%25AE%25E4%25BD%25BF%25E3%2581%2584%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ryy_d%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS1FJT2ZlQ0RWaHpwTVlwVnRhVjlZcG9QX2UteVcwSk1wR1QxWlgyTUVQdVpmdW81eWo9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ryy_d</dc:creator></item><item><title><![CDATA[データ分析 python 2群間の代表値の検定 スチューデントのt検定]]></title><description><![CDATA[以前まとめた2群間の代表値の検定について、具体的な手法を簡単にまとめてみます。
+python + google colaboratory で 実行しています。
+https://zenn.dev/longbridge/articles/b5abd84b331381
+
+ テーマ
+あるカフェチェーンの経営者が、
+2種類の新メニュー（メニューAとメニューB）の人気度を比較するため、
+異なる10店舗ずつにメニューAとメニューBを導入しました。
+1ヶ月後、それぞれのメニューの売上を集計したところ、
+メニューAを導入した店舗とメニューBを導入した店舗で平均売上に差があるように見えました。
+この差は統計...]]></description><link>https://zenn.dev/longbridge/articles/1007a02246a756</link><guid isPermaLink="true">https://zenn.dev/longbridge/articles/1007a02246a756</guid><pubDate>Sat, 07 Sep 2024 07:16:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4XmvBVR2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E5%2588%2586%25E6%259E%2590%2520python%25202%25E7%25BE%25A4%25E9%2596%2593%25E3%2581%25AE%25E4%25BB%25A3%25E8%25A1%25A8%25E5%2580%25A4%25E3%2581%25AE%25E6%25A4%259C%25E5%25AE%259A%2520%25E3%2582%25B9%25E3%2583%2581%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%2587%25E3%2583%25B3%25E3%2583%2588%25E3%2581%25AEt%25E6%25A4%259C%25E5%25AE%259A%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:piyoko%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FlYjQwNDk5NTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>piyoko</dc:creator></item><item><title><![CDATA[データ分析 python 2群間の代表値の検定 対応のある2標本のt検定]]></title><description><![CDATA[以前まとめた2群間の代表値の検定について、具体的な手法を簡単にまとめてみます。
+python + google colaboratory で 実行しています。
+https://zenn.dev/longbridge/articles/b5abd84b331381
+
+ テーマ
+あるカフェチェーンでは、新しいコーヒーメニューが売上にどの程度影響を与えるかを検討しています。
+そこで、エリア内の10店舗を無作為に選び、新メニュー導入前と導入後の1週間の売上データを比較しました。
+新メニューの導入は売上に有意な影響を与えたと言えるでしょうか？
+
+ 使用したデータ
+カフェチェーンの売上データを想定し...]]></description><link>https://zenn.dev/longbridge/articles/367f72da50552b</link><guid isPermaLink="true">https://zenn.dev/longbridge/articles/367f72da50552b</guid><pubDate>Sat, 07 Sep 2024 04:26:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--CoOnS6mi--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E5%2588%2586%25E6%259E%2590%2520python%25202%25E7%25BE%25A4%25E9%2596%2593%25E3%2581%25AE%25E4%25BB%25A3%25E8%25A1%25A8%25E5%2580%25A4%25E3%2581%25AE%25E6%25A4%259C%25E5%25AE%259A%2520%25E5%25AF%25BE%25E5%25BF%259C%25E3%2581%25AE%25E3%2581%2582%25E3%2582%258B2%25E6%25A8%2599%25E6%259C%25AC%25E3%2581%25AEt%25E6%25A4%259C%25E5%25AE%259A%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:piyoko%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FlYjQwNDk5NTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>piyoko</dc:creator></item><item><title><![CDATA[【連載】LangChainの公式チュートリアルを1個ずつ地味に、地道にコツコツと【Basic編#3】]]></title><description><![CDATA[
+ はじめに
+こんにちは！「LangChainの公式チュートリアルを1個ずつ地味に、地道にコツコツと」シリーズ第三回、Basic編#3へようこそ。前回の記事では、Azure OpenAIを使ったチャットボット構築の基本を学び、会話履歴の管理やストリーミングなどの応用的な機能を実装しました。今回は、その知識を基に、LangChainの高度な機能である「埋め込み」「キャッシング」「カスタムリトリーバー」を駆使し、ベクトル検索とデータ検索を効率化する方法を解説していきます。
+以下は、公式チュートリアルに対応する連載回と記事の有無をまとめた表です｡どんどん更新予定なので､ぜひ一緒に学びましょう!...]]></description><link>https://zenn.dev/chips0711/articles/25c11940a999a1</link><guid isPermaLink="true">https://zenn.dev/chips0711/articles/25c11940a999a1</guid><pubDate>Sat, 07 Sep 2024 03:31:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--eB_eJ1Fc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E9%2580%25A3%25E8%25BC%2589%25E3%2580%2591LangChain%25E3%2581%25AE%25E5%2585%25AC%25E5%25BC%258F%25E3%2583%2581%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%2588%25E3%2583%25AA%25E3%2582%25A2%25E3%2583%25AB%25E3%2582%25921%25E5%2580%258B%25E3%2581%259A%25E3%2581%25A4%25E5%259C%25B0%25E5%2591%25B3%25E3%2581%25AB%25E3%2580%2581%25E5%259C%25B0%25E9%2581%2593%25E3%2581%25AB%25E3%2582%25B3%25E3%2583%2584%25E3%2582%25B3%25E3%2583%2584%25E3%2581%25A8%25E3%2580%2590Basic%25E7%25B7%25A8%25233%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Naoki%2520Matsumoto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2YxMjVkOWVmNWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Naoki Matsumoto</dc:creator></item><item><title><![CDATA[【Azure OpenAI】Structured Outputsを試してイメージを掴む]]></title><description><![CDATA[
+ はじめに
+8月にOpenAI社からStructured Outputsが発表されました。
+最近、Azure Open AIでも利用できるようになったので試してみる。
+https://techcommunity.microsoft.com/t5/ai-azure-ai-services-blog/introducing-gpt-4o-2024-08-06-api-with-structured-outputs-on/ba-p/4232684
+細かい仕様については、以下の記事を参考にしてください。
+https://zenn.dev/microsoft/articles/azure-ope...]]></description><link>https://zenn.dev/headwaters/articles/c11fd63ceb09cd</link><guid isPermaLink="true">https://zenn.dev/headwaters/articles/c11fd63ceb09cd</guid><pubDate>Sat, 07 Sep 2024 01:11:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--mbK5vDmk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Azure%2520OpenAI%25E3%2580%2591Structured%2520Outputs%25E3%2582%2592%25E8%25A9%25A6%25E3%2581%2597%25E3%2581%25A6%25E3%2582%25A4%25E3%2583%25A1%25E3%2583%25BC%25E3%2582%25B8%25E3%2582%2592%25E6%258E%25B4%25E3%2582%2580%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:takekawa%2520tomoki%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZjNGExY2UxMDYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2598%25E3%2583%2583%25E3%2583%2589%25E3%2582%25A6%25E3%2582%25A9%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%25BC%25E3%2582%25B9%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdmODg5YTRhYzguanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takekawa tomoki</dc:creator></item><item><title><![CDATA[pybotters 1.5 ハイライト]]></title><description><![CDATA[
+ TL;DR
+pybotters 1.5 をリリースしました 🎉
+https://github.com/pybotters/pybotters/releases/tag/v1.5.0
+今回の更新では以下の取引所サポートが追加されました。
+
+OKJ (旧 OKCoinJapan) の API (REST/WebSocket) 認証サポート
+BitTrade (旧 Huobi Japan) の API (REST/WebSocket) 認証サポート
+
+この記事では利用可能になった上記二つの取引所での Private API 呼び出しのサンプルコードを簡単にご紹介します。
+!
+サンプルコード...]]></description><link>https://zenn.dev/mtkn1/articles/pybotters-1-5-highlights</link><guid isPermaLink="true">https://zenn.dev/mtkn1/articles/pybotters-1-5-highlights</guid><pubDate>Sat, 07 Sep 2024 01:02:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--rh9EZ42W--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:pybotters%25201.5%2520%25E3%2583%258F%25E3%2582%25A4%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25BE%25E3%2581%25A1%25E3%2582%2585%25E3%2581%2591%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdhMDE3YTI5NTcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>まちゅけん</dc:creator></item><item><title><![CDATA[データ分析 python 2群間の代表値の検定 基礎]]></title><description><![CDATA[2つの標本集団の平均値や中央値の差が、母集団においても意味のある差なのかを確認するためには、2群間の代表値の検定を行います。
+この検定は、標本集団から得られた差が単なる偶然によるものか、それとも母集団全体においても実際に差があるかを判断するための手法です。
+使用する検定手法は、データの特性や前提条件に応じて異なります。
+代表的な手法を簡単にまとめてみました。
+
+ 正規分布に従っているかを確認
+まず、比較するデータの正規分布を確認します。
+
+正規分布に従っている場合は、パラメトリック検定
+
+正規分布に従っていない場合は、ノンパラメトリック検定 となります。
+
+データが正規分布に従っているか...]]></description><link>https://zenn.dev/longbridge/articles/b5abd84b331381</link><guid isPermaLink="true">https://zenn.dev/longbridge/articles/b5abd84b331381</guid><pubDate>Fri, 06 Sep 2024 23:18:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--XEJ4w5WC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E5%2588%2586%25E6%259E%2590%2520python%25202%25E7%25BE%25A4%25E9%2596%2593%25E3%2581%25AE%25E4%25BB%25A3%25E8%25A1%25A8%25E5%2580%25A4%25E3%2581%25AE%25E6%25A4%259C%25E5%25AE%259A%2520%25E5%259F%25BA%25E7%25A4%258E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:piyoko%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FlYjQwNDk5NTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>piyoko</dc:creator></item><item><title><![CDATA[データ分析 python 複数のグラフを並べて表示]]></title><description><![CDATA[複数のグラフを左右に並べると、グラフの比較が行いやすくなります。
+
+ 使用したデータ
+使用したデータ
+import pandas as pd
+df = pd.read_csv('/content/drive/MyDrive/webshop_review_data.csv')
+df
+
+
+ データの項目名
+
+お客様の性別
+お客様の年齢
+購入タイプ
+購入目的
+サイトの使いやすさ評価
+配送の利便性評価
+注文のしやすさ評価
+サイトのナビゲーション評価
+商品の品質評価
+ショッピング体験の快適さ評価
+カスタマーサポートの評価
+サービス全般の評価
+商品の梱包状態評価
+総合満足度
+
+
+
+ 左右に配置して見...]]></description><link>https://zenn.dev/longbridge/articles/eeaaee21511b86</link><guid isPermaLink="true">https://zenn.dev/longbridge/articles/eeaaee21511b86</guid><pubDate>Fri, 06 Sep 2024 14:59:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---DouhQUD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E5%2588%2586%25E6%259E%2590%2520python%2520%25E8%25A4%2587%25E6%2595%25B0%25E3%2581%25AE%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%2595%25E3%2582%2592%25E4%25B8%25A6%25E3%2581%25B9%25E3%2581%25A6%25E8%25A1%25A8%25E7%25A4%25BA%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:piyoko%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FlYjQwNDk5NTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>piyoko</dc:creator></item><item><title><![CDATA[【AI_5日目】FastAPI_1冊目]]></title><description><![CDATA[こんにちは投資ロウトです。
+
+ 背景
+AI開発ができるためにwebAPIについて理解を深めていきます。
+※Tailwind CSSとkeycloakは現場でピンチになれば再開します。
+
+ スキーマ
+api/schemas/task.py
+from pydantic import BaseModel, Field
+
+class StockBase(BaseModel):
+    # 共通するフィールドは親クラスに定義
+    stock_name: str | None = Field(None, example="投資ロウト株式会社")
+
+class StockCreate(StockB...]]></description><link>https://zenn.dev/doshirote/articles/44cafffd379ebc</link><guid isPermaLink="true">https://zenn.dev/doshirote/articles/44cafffd379ebc</guid><pubDate>Fri, 06 Sep 2024 14:47:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8QeAuSeu--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590AI_5%25E6%2597%25A5%25E7%259B%25AE%25E3%2580%2591FastAPI_1%25E5%2586%258A%25E7%259B%25AE%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%258A%2595%25E8%25B3%2587%25E3%2583%25AD%25E3%2582%25A6%25E3%2583%2588%25E3%2581%25AE%25E6%258A%2580%25E8%25A1%2593%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM3ODY0NWMwOGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>投資ロウトの技術ブログ</dc:creator></item><item><title><![CDATA[有名アプリをクローンして学ぶ講座一覧]]></title><description><![CDATA[Real World Exampleで学びたい
+
+ トイアプリよりReal World Exampleで学びたい
+新しいプログラミング言語、ジャンルでの開発を学ぶ上で本を読んだり公式ドキュメントを見るのは有用ですが、実際のプロダクションエンジニアとしてのお仕事プログラミングとは乖離があります。
+本についているサンプルコードも一つの参考となりますがコード量は小さく局所的にしか参考にならなかったり、公式ドキュメントはレファレンスに徹底していてチュートリアルがなかったりそれぞれはまりどころがあったりします。
+トイアプリより実際の業務コード(Real World Example)で学びたい！
+最...]]></description><link>https://zenn.dev/hiromichinomata/articles/09dcd455442abe</link><guid isPermaLink="true">https://zenn.dev/hiromichinomata/articles/09dcd455442abe</guid><pubDate>Fri, 06 Sep 2024 13:34:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--IyzranYl--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%259C%2589%25E5%2590%258D%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E3%2582%25AF%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%25B3%25E3%2581%2597%25E3%2581%25A6%25E5%25AD%25A6%25E3%2581%25B6%25E8%25AC%259B%25E5%25BA%25A7%25E4%25B8%2580%25E8%25A6%25A7%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Hiromichi%2520NOMATA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dKVzhiSzBKYjZ4cXc1MDFjSHFXXzJ1cmxiMGFMYmY5T3poY1RPUnc9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Hiromichi NOMATA</dc:creator></item><item><title><![CDATA[データ分析 python 基本のグラフ ヒストグラム]]></title><description><![CDATA[データ分析で使用するグラフを簡単にまとめていきます
+python + google colaboratory で 実行しています
+
+ ヒストグラムとは
+連続する数値データの分布を視覚化します。
+例）
+20人の年齢データがあるとします。
+ビンの個数を5個に設定（＝データを5コの範囲に分割する）し、データがどこに分布しているかをグラフで表示します。
+import pandas as pd
+data = {'Age': [15, 25, 29, 31, 33, 35, 38, 40, 42, 45, 47, 50, 52, 55, 60, 65, 70]}
+df = pd.DataFrame(...]]></description><link>https://zenn.dev/longbridge/articles/70def3d4c3c750</link><guid isPermaLink="true">https://zenn.dev/longbridge/articles/70def3d4c3c750</guid><pubDate>Fri, 06 Sep 2024 12:54:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--QoW-i6vS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E5%2588%2586%25E6%259E%2590%2520python%2520%25E5%259F%25BA%25E6%259C%25AC%25E3%2581%25AE%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%2595%2520%25E3%2583%2592%25E3%2582%25B9%25E3%2583%2588%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%25A0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:piyoko%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FlYjQwNDk5NTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>piyoko</dc:creator></item><item><title><![CDATA[データ分析 python 基本のグラフ 棒グラフ]]></title><description><![CDATA[データ分析で使用するグラフを簡単にまとめていきます
+python + google colaboratory で 実行しています
+
+ 棒グラフとは
+カテゴリデータの値や頻度を視覚化します。
+例）
+こんな売上CSVがあったとします。
+
+
+
+Product
+Sales
+
+
+
+
+Product A
+500
+
+
+Product B
+300
+
+
+Product C
+800
+
+
+Product D
+150
+
+
+Product E
+600
+
+
+
+import pandas as pd
+data = {
+    'Product': ['Product A', 'Product B', 'Product...]]></description><link>https://zenn.dev/longbridge/articles/44cf541bbd6392</link><guid isPermaLink="true">https://zenn.dev/longbridge/articles/44cf541bbd6392</guid><pubDate>Fri, 06 Sep 2024 12:04:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--cW-d7C_b--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E5%2588%2586%25E6%259E%2590%2520python%2520%25E5%259F%25BA%25E6%259C%25AC%25E3%2581%25AE%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%2595%2520%25E6%25A3%2592%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:piyoko%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FlYjQwNDk5NTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>piyoko</dc:creator></item><item><title><![CDATA[テキストデータをGBDTで学習したい！| SentenceTransformers + LightGBM + Polars]]></title><description><![CDATA[
+
+ はじめに
+テキスト列を含む表形式データを解析する必要に迫られた際に，次のような悩みを持つ方がいるかもしれません．
+
+LightGBM や XGBoost などで扱えるようにテキストデータをうまく扱いたい
+データ数が少なく，NNの学習が過剰になりそう
+手間なく，簡単にベースラインを構築したい
+
+そこで，sentence_transformers による文埋め込みベクトルを表データとして見て LightGBM による学習を行う手法を紹介します．
+急いでいる人向けの全文コードimport lightgbm as lgb
+import polars as pl
+import torch
+f...]]></description><link>https://zenn.dev/prgckwb/articles/976f4dbd12a331</link><guid isPermaLink="true">https://zenn.dev/prgckwb/articles/976f4dbd12a331</guid><pubDate>Fri, 06 Sep 2024 11:37:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9adSEAsL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2586%25E3%2582%25AD%25E3%2582%25B9%25E3%2583%2588%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%2592GBDT%25E3%2581%25A7%25E5%25AD%25A6%25E7%25BF%2592%25E3%2581%2597%25E3%2581%259F%25E3%2581%2584%25EF%25BC%2581%257C%2520SentenceTransformers%2520%252B%2520LightGBM%2520%252B%2520Po...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A1%25E3%2581%258F%25E3%2582%258F%25E3%2581%25B6%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU1MWU5MTZhMjguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ちくわぶ</dc:creator></item><item><title><![CDATA[[Python]Atcoderで入茶するために使ったチートシート 🟤]]></title><description><![CDATA[
+ はじめに
+Atcoderで入茶するために作成したチートシートです。(言語はPython)
+
+ 入力
+
+ 1つの値を受け取る
+# 文字列を受け取る場合
+S = input() 
+
+# 整数を受け取る場合
+N = int(input()) 
+
+# 小数を受け取る場合
+F = float(input())
+
+ 複数（決まった個数）の値を1行で受け取る
+# 文字列を受け取る場合
+A, B = input().split()
+
+# 整数を受け取る場合
+X, Y, Z = map(int, input().split())
+
+# 小数を受け取る場合
+H, M, S = map(float, in...]]></description><link>https://zenn.dev/rabbit_penguin0/articles/bcc95f7703124a</link><guid isPermaLink="true">https://zenn.dev/rabbit_penguin0/articles/bcc95f7703124a</guid><pubDate>Fri, 06 Sep 2024 09:55:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--IbnnFnxU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BPython%255DAtcoder%25E3%2581%25A7%25E5%2585%25A5%25E8%258C%25B6%25E3%2581%2599%25E3%2582%258B%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AB%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%259F%25E3%2583%2581%25E3%2583%25BC%25E3%2583%2588%25E3%2582%25B7%25E3%2583%25BC%25E3%2583%2588%2520%2520%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%259A%25E3%2583%25B3%25E3%2582%25AE%25E3%2583%25B3%2520%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk3NjJhYjQ1YTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ペンギン🐧</dc:creator></item></channel></rss>
