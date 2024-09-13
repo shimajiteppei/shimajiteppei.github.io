@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Fri, 13 Sep 2024 06:30:54 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[S3バケットにあるzipファイルを解凍して配置する]]></title><description><![CDATA[
+ はじめに
+こんにちは。（心の内では）健康を目指して日々精進しているshimojです。
+普段はデータ分析基盤周りに関する業務を担当しております。
+業務上、S3バケットに連携されたファイルを加工して配置する処理をしたりします。
+今回は連携されたZipファイルを解凍し、ファイル配置までをまとめます。
+
+ 全体像
+処理としては配置されたZipファイルに対してローカル端末（Mac）から「解凍/転送処理」を実行します。
+
+プログラム処理日をオブジェクトキーに含めた形式にするため、取得元/転送先の配置先は以下表になります。
+
+
+
+項目
+オブジェクトキー
+
+
+
+
+zip配置先
+zip_test/so...]]></description><link>https://zenn.dev/shimoj_tech/articles/2_zip_extractor_upload_</link><guid isPermaLink="true">https://zenn.dev/shimoj_tech/articles/2_zip_extractor_upload_</guid><pubDate>Fri, 13 Sep 2024 06:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--nTb0X-lj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:S3%25E3%2583%2590%25E3%2582%25B1%25E3%2583%2583%25E3%2583%2588%25E3%2581%25AB%25E3%2581%2582%25E3%2582%258Bzip%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2592%25E8%25A7%25A3%25E5%2587%258D%25E3%2581%2597%25E3%2581%25A6%25E9%2585%258D%25E7%25BD%25AE%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:shimoj%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSjdXNDRtMERSV3hFQXBFRDRWZlBING5aY1h3d25UTVp3aExfbHdJQ0VGPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>shimoj</dc:creator></item><item><title><![CDATA[pip依存関係を最新版に更新する方法]]></title><description><![CDATA[pip freezeで依存関係も出力されてしまう問題ですが、pip-chillが便利です。
+https://stackoverflow.com/a/40074640
+y@m3pro ~ % pip-chill
+boto3==1.34.75
+bs4==0.0.2
+fqdn==1.5.1
+future==0.18.2
+google-api-python-client==2.133.0
+install==1.3.5
+isoduration==20.11.0
+jsonpointer==2.4
+jupyter==1.0.0
+jupyterlab-vim==4.1.3
+macholib==1.15....]]></description><link>https://zenn.dev/sngw/articles/2ce7a3291fe330</link><guid isPermaLink="true">https://zenn.dev/sngw/articles/2ce7a3291fe330</guid><pubDate>Fri, 13 Sep 2024 04:51:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fZ9h1IL2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:pip%25E4%25BE%259D%25E5%25AD%2598%25E9%2596%25A2%25E4%25BF%2582%25E3%2582%2592%25E6%259C%2580%25E6%2596%25B0%25E7%2589%2588%25E3%2581%25AB%25E6%259B%25B4%25E6%2596%25B0%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:sngw%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUVkRlRwNDZqb3RmdUE3Y0hqc3FZWXBqcGNXUE5NRERsQ1BOd2tKWWduZVA9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sngw</dc:creator></item><item><title><![CDATA[読書メモ『Pythonで体感！医療とAIはじめの一歩』]]></title><description><![CDATA[
+ 概要
+東京医科歯科大学が「データサイエンスリテラシー」の教育のために出版した書籍。
+https://www.yodosha.co.jp/yodobook/book/9784758124188/
+出版の意義は序文に明らか。
+
+例えばX線写真について、X線に関する物理学的知識を全く持たず、ただそこに写った白い影が肺であるとして胸部X線写真を見ている医師と、なぜフィルム上に肺が白く写るのか理解したうえで読影している医師とで、そこから得られる情報に差が出ることは明らかでしょう。AIやデータサイエンスについても同じことが言えます。
+
+なので、この本は「医療データを題材にした、機械学習の入門書」...]]></description><link>https://zenn.dev/tori_rakko/articles/59e98134093cca</link><guid isPermaLink="true">https://zenn.dev/tori_rakko/articles/59e98134093cca</guid><pubDate>Fri, 13 Sep 2024 04:06:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--DMaKqRII--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%25AA%25AD%25E6%259B%25B8%25E3%2583%25A1%25E3%2583%25A2%25E3%2580%258EPython%25E3%2581%25A7%25E4%25BD%2593%25E6%2584%259F%25EF%25BC%2581%25E5%258C%25BB%25E7%2599%2582%25E3%2581%25A8AI%25E3%2581%25AF%25E3%2581%2598%25E3%2582%2581%25E3%2581%25AE%25E4%25B8%2580%25E6%25AD%25A9%25E3%2580%258F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A8%25E3%2582%258A%25E3%2582%2589%25E3%2581%25A3%25E3%2581%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzYzZGRlNGNiYTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>とりらっこ</dc:creator></item><item><title><![CDATA[【dltHub Docs】Tutorial]]></title><description><![CDATA[
+ 概要
+https://dlthub.com/docs/tutorial/intro
+Version: 0.5.4 (latest) の参照メモ
+再出力方法
+https://www.perplexity.ai/
+https://dlthub.com/docs/tutorial/intro
+日本語に翻訳してZenn用のマークダウンに整形して
+
+https://dlthub.com/docs/tutorial/load-data-from-an-api
+日本語に翻訳してZenn用のマークダウンに整形して
+
+https://dlthub.com/docs/tutorial/grouping-...]]></description><link>https://zenn.dev/yuichi_dev/articles/571253644f5f08</link><guid isPermaLink="true">https://zenn.dev/yuichi_dev/articles/571253644f5f08</guid><pubDate>Fri, 13 Sep 2024 02:55:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Ap2OVW-z--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:%25E3%2580%2590dltHub%2520Docs%25E3%2580%2591Tutorial%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yuichi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZiMmI0ZGExMjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yuichi</dc:creator></item><item><title><![CDATA[【Python】vars関数の使い方]]></title><description><![CDATA[Pythonの組み込み関数の1つであるvars関数は、__dict__を返す関数です。__dict__とは、属性を辞書化したものになります。属性は、ドットに続く名前なので、〇〇.△△△の△の部分ですね。
+vars関数は引数の有り無しで動きが変わるので、2種類の使い方を見ていきます。
+組み込み関数 vars() ー Python公式ドキュメント
+
+ vars(object)
+引数がある場合は、その引数の__dict__属性を返します。
+
+In
+class Person:
+    def __init__(self, name, age):
+        self.name = name
+...]]></description><link>https://zenn.dev/python_academia/articles/accbae41cc405e</link><guid isPermaLink="true">https://zenn.dev/python_academia/articles/accbae41cc405e</guid><pubDate>Thu, 12 Sep 2024 21:57:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Mk6xaGzZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591vars%25E9%2596%25A2%25E6%2595%25B0%25E3%2581%25AE%25E4%25BD%25BF%25E3%2581%2584%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Python%25E3%2582%25A2%25E3%2582%25AB%25E3%2583%2587%25E3%2583%259F%25E3%2582%25A2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE5NzE0ZDdkNWYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Pythonアカデミア</dc:creator></item><item><title><![CDATA[半導体エンジニアの便利ツール紹介(2024年現在)]]></title><description><![CDATA[
+ はじめに
+現役半導体エンジニアが使っている便利ツール、プログラミング言語等を紹介します。こうしてみると、いろいろなツールを使っているなあとしみじみ思いました。「私も使っている！」「こういうツールもあるよ」などありましたら、ぜひコメントをお願いします！
+
+ メーラー・カレンダー
+
+Outlook
+→会社用。メールをあまり整理できていないのが悩み。
+日々の業務のため、カレンダーは週間表示にしている。
+Gmail
+→プライベート用。
+Googleカレンダー
+→家族間で共有できるのが◎。プライベート用のため月間表示にしている。
+Jorteカレンダー
+→Googleカレンダーと連携できる。スマ...]]></description><link>https://zenn.dev/series201/articles/8e2530fd71c0e4</link><guid isPermaLink="true">https://zenn.dev/series201/articles/8e2530fd71c0e4</guid><pubDate>Thu, 12 Sep 2024 15:25:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--F-UWKtKD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%258D%258A%25E5%25B0%258E%25E4%25BD%2593%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%25E3%2581%25AE%25E4%25BE%25BF%25E5%2588%25A9%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%25E7%25B4%25B9%25E4%25BB%258B%25282024%25E5%25B9%25B4%25E7%258F%25BE%25E5%259C%25A8%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:series201%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTFpYU1F5NDdJNDMyWmZlY25ROWpkU09KSlVPSEpWU2JHMFVFLVZaUVJVOFZrUnFPRT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>series201</dc:creator></item><item><title><![CDATA[データ分析 python 基本のグラフ　－ヒートマップ－]]></title><description><![CDATA[データ分析で使用するグラフを簡単にまとめていきます
+python + google colaboratory で 実行しています
+
+ ヒートマップとは
+ヒートマップとは、データの数値を色で視覚的に表現するグラフのことです。
+主に行列形式のデータや相関行列などを視覚化するために使われ、色の濃淡や色の違いで数値の大小を示します。
+色の変化によって、データのパターンや傾向を簡単に確認できるため、データの全体像を一目で理解するのに便利です。
+
+ ヒートマップを表示
+ヒートマップは seaborn の heatmap メソッドで表示します。
+
+パラメータ
+
+annot=True は各セルに数値を表...]]></description><link>https://zenn.dev/longbridge/articles/5f98e3276a5b5c</link><guid isPermaLink="true">https://zenn.dev/longbridge/articles/5f98e3276a5b5c</guid><pubDate>Thu, 12 Sep 2024 14:01:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--W_PueCR7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E5%2588%2586%25E6%259E%2590%2520python%2520%25E5%259F%25BA%25E6%259C%25AC%25E3%2581%25AE%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%2595%25E3%2580%2580%25EF%25BC%258D%25E3%2583%2592%25E3%2583%25BC%25E3%2583%2588%25E3%2583%259E%25E3%2583%2583%25E3%2583%2597%25EF%25BC%258D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:piyoko%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FlYjQwNDk5NTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>piyoko</dc:creator></item><item><title><![CDATA[データ分析 python 基本のグラフ　－散布図－]]></title><description><![CDATA[データ分析で使用するグラフを簡単にまとめていきます
+python + google colaboratory で 実行しています
+
+ 散布図とは
+散布図とは、2つの数値データの関係を視覚的に表すためのグラフです。
+
+右肩上がり：正の相関（xが増えるとyも増える）
+右下下がり：負の相関（xが増えるとyは減る）
+ばらばら：無相関（ｘとｙに関係がない）
+
+
+
+
+ 散布図を表示
+matplotlib の scatter メソッド で表示します
+# matplotlibで日本語を使用できるようにする
+!pip install -q japanize-matplotlib
+
+import panda...]]></description><link>https://zenn.dev/longbridge/articles/b7a5d458ed25e3</link><guid isPermaLink="true">https://zenn.dev/longbridge/articles/b7a5d458ed25e3</guid><pubDate>Thu, 12 Sep 2024 13:54:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ap1CzGws--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E5%2588%2586%25E6%259E%2590%2520python%2520%25E5%259F%25BA%25E6%259C%25AC%25E3%2581%25AE%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%2595%25E3%2580%2580%25EF%25BC%258D%25E6%2595%25A3%25E5%25B8%2583%25E5%259B%25B3%25EF%25BC%258D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:piyoko%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FlYjQwNDk5NTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>piyoko</dc:creator></item><item><title><![CDATA[データ分析 python 多変量解析　－相関分析  &  無相関検定]]></title><description><![CDATA[今回は多変量解析のうち単変量解析の相関分析について簡単にまとめてみます。
+python + google colaboratory で 実行しています。
+
+ 多変量解析とは
+多変量解析とは
+複数の変数を同時に分析し、変数間の関係性や構造を理解するための統計手法です。
+多変量解析にはさまざまな解析手法があります。
+多変量解析
+　│
+　├─ 単変量解析・・・1つの変数だけを分析して、その変数の特徴や分布を理解するための方法
+　│　　　├─ 相関分析・・・2つの変数が一緒にどのように変化するかを調べる方法
+　│　　　└─ 単回帰分析・・・1つの独立変数と1つの従属変数を調べる方法
+　└─多変量...]]></description><link>https://zenn.dev/longbridge/articles/70bf17359cd866</link><guid isPermaLink="true">https://zenn.dev/longbridge/articles/70bf17359cd866</guid><pubDate>Thu, 12 Sep 2024 13:43:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Yi-W12hC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E5%2588%2586%25E6%259E%2590%2520python%2520%25E5%25A4%259A%25E5%25A4%2589%25E9%2587%258F%25E8%25A7%25A3%25E6%259E%2590%25E3%2580%2580%25EF%25BC%258D%25E7%259B%25B8%25E9%2596%25A2%25E5%2588%2586%25E6%259E%2590%2520%2520%2526%2520%2520%25E7%2584%25A1%25E7%259B%25B8%25E9%2596%25A2%25E6%25A4%259C%25E5%25AE%259A%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:piyoko%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FlYjQwNDk5NTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>piyoko</dc:creator></item><item><title><![CDATA[0から学ぶ Poetry + Streamlit で Hello World]]></title><description><![CDATA[
+ Streamlitとは
+Streamlitは、Pythonを使ってデータサイエンスや機械学習のアプリケーションを簡単に作成できるWebフレームワークです。データの可視化やインタラクティブなダッシュボードを構築するために設計されており、最小限のコードで素早くWebアプリを作成することができます。
+本記事ではゼロからStreamlitプロジェクトを作成し、Webアプリを立ち上げるまでの手順について解説します。
+
+ Streamlitの特徴
+
+フレームワークに組み込まれたUIコンポーネントがあるのでPythonエンジニアでもいい感じのUIが作れる
+PandasのDataFrameをst.d...]]></description><link>https://zenn.dev/yukito0616/articles/dbfecc5581ee96</link><guid isPermaLink="true">https://zenn.dev/yukito0616/articles/dbfecc5581ee96</guid><pubDate>Thu, 12 Sep 2024 12:51:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--YZ-IGhsI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:0%25E3%2581%258B%25E3%2582%2589%25E5%25AD%25A6%25E3%2581%25B6%2520Poetry%2520%252B%2520Streamlit%2520%25E3%2581%25A7%2520Hello%2520World%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yukito%2520ohira%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2IwMDI2NDc1YmYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yukito ohira</dc:creator></item><item><title><![CDATA[【Heroku+Python+Flask】HerokuでFlaskアプリを起動]]></title><description><![CDATA[
+ 目的
+Flaskアプリでの開発から、ローカル環境及びHerokuで起動できるようになります。
+
+ 前提
+
+Herokuアカウント作成済みであること
+GitHubアカウント作成済みであること
+VSCodeでGitHubの基本的な操作（コミット、プッシュ）ができること
+
+
+ 開発環境
+MacOs 14.4.1
+Python 3.12.2
+Flask 3.0.3
+Werkzeug 3.0.2
+
+ 本記事の流れ
+
+どうやってHerokuでFlaskアプリが起動する？
+開発環境構築
+Flaskアプリ作成
+ローカルでFlaskアプリ起動
+HerokuでFlaskアプリ起動
+
+
+ どうやってHer...]]></description><link>https://zenn.dev/yoshi0717/articles/a68fafd80f730a</link><guid isPermaLink="true">https://zenn.dev/yoshi0717/articles/a68fafd80f730a</guid><pubDate>Thu, 12 Sep 2024 11:43:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--cyEDd59H--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Heroku%252BPython%252BFlask%25E3%2580%2591Heroku%25E3%2581%25A7Flask%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E8%25B5%25B7%25E5%258B%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2588%25E3%2581%2597%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I1OWYwMmQ1ODAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>よし</dc:creator></item><item><title><![CDATA[【テスト_3日目】単体テスト1冊目]]></title><description><![CDATA[こんにちは投資ロウトです。
+
+ 背景
+チームメンバーに自動テストのレクチャーをしていくことにしました。
+※チームメンバーが自動テストができるようになるのがゴールです。
+※週一の会議に向けての資料となるため、週一でこちらの単元は更新しようか検討しております。
+
+ 単体テストのパターン(AAAパターン)
+AAAパターンは
+A・・・Arrange(準備)
+A・・・Act(実行)
+A・・・Assert(確認)
+の上記で実行していくパターンとのこと。
+# 例)
+# 準備
+first = 5
+second = 20
+# インスタンスを生成
+calculator = Calculator(first,...]]></description><link>https://zenn.dev/doshirote/articles/0ee1b1e1022893</link><guid isPermaLink="true">https://zenn.dev/doshirote/articles/0ee1b1e1022893</guid><pubDate>Thu, 12 Sep 2024 11:02:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Wu4-1y6q--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588_3%25E6%2597%25A5%25E7%259B%25AE%25E3%2580%2591%25E5%258D%2598%25E4%25BD%2593%25E3%2583%2586%25E3%2582%25B9%25E3%2583%25881%25E5%2586%258A%25E7%259B%25AE%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%258A%2595%25E8%25B3%2587%25E3%2583%25AD%25E3%2582%25A6%25E3%2583%2588%25E3%2581%25AE%25E6%258A%2580%25E8%25A1%2593%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM3ODY0NWMwOGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>投資ロウトの技術ブログ</dc:creator></item><item><title><![CDATA[Misskey の未読通知をお知らせするアプリを書いた]]></title><description><![CDATA[Misskey API の練習がてら『未読の通知をお知らせする』Python アプリを書いてみました。
+https://github.com/sharl/mnotify
+
+ 概要
+Windows のタスクトレイや Mac のメニューバーに常駐して、未読があるときはアイコンを明るくしてお知らせします。
+未読がある時
+
+未読がない時
+
+
+ 準備からアプリ起動まで
+
+ Misskey のアクセストークンを取得する
+先人の素晴らしい記事がありますので、参考にして取得してください。
+https://zenn.dev/sion_pn/articles/85c22b9cdad159#misskeyアカ...]]></description><link>https://zenn.dev/sharl/articles/0a12437bfccfb7</link><guid isPermaLink="true">https://zenn.dev/sharl/articles/0a12437bfccfb7</guid><pubDate>Thu, 12 Sep 2024 08:13:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--P3yWCFey--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Misskey%2520%25E3%2581%25AE%25E6%259C%25AA%25E8%25AA%25AD%25E9%2580%259A%25E7%259F%25A5%25E3%2582%2592%25E3%2581%258A%25E7%259F%25A5%25E3%2582%2589%25E3%2581%259B%25E3%2581%2599%25E3%2582%258B%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E6%259B%25B8%25E3%2581%2584%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2597%25E3%2582%2583%25E3%2581%2582%25E3%2582%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0xuZEM2dlZRUHNRVzBHa1dpdS1DY2trTlVETnVhemF1YjlUVVRkQ3B5dHBqbTBLUXA9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>しゃある</dc:creator></item><item><title><![CDATA[初心者がDifyでワークフローを作る際に知っておくと便利な5つのこと]]></title><description><![CDATA[
+
+ はじめに
+この記事で想定している読者の方:
+
+Difyの使い方にまだ馴染めていない方
+ワークフローで何か作ってみたい方
+簡単にPythonが書ける方
+
+LLMを用いたアプリケーションをノーコード・ローコードで作成できるサービスである「Dify」がその使いやすさと拡張性の高さから最近注目を集めています。しかし, 「Difyを知っているけどまだ使って何かのアプリケーションを作ったことはない...」という方も多いのではないでしょうか。特に, 自由度が高い様々な機能を持ったノードを組み合わせることでLLMを自在に組み込んだシステムを作成できる「ワークフロー」機能は公式でも「経験豊富なユーザ...]]></description><link>https://zenn.dev/aidemy/articles/bd4a027308ae2c</link><guid isPermaLink="true">https://zenn.dev/aidemy/articles/bd4a027308ae2c</guid><pubDate>Thu, 12 Sep 2024 07:44:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--JH8mCiXC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E3%2581%258CDify%25E3%2581%25A7%25E3%2583%25AF%25E3%2583%25BC%25E3%2582%25AF%25E3%2583%2595%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%25E9%259A%259B%25E3%2581%25AB%25E7%259F%25A5%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%258A%25E3%2581%258F%25E3%2581%25A8%25E4%25BE%25BF%25E5%2588%25A9%25E3%2581%25AA5%25E3%2581%25A4%25E3%2581%25AE%25E3%2581%2593%25E3%2581%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Yuya%2520Fujiwara%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNhNmVhZTQ3ZDkuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Aidemy%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSXFSSWVpLU5oTEhZWEhHUS1hc0duXzRQQjk5NEZsbjBJQjZHQWhjeThkWVE9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yuya Fujiwara</dc:creator></item><item><title><![CDATA[【Dropbox API】Dropboxへのファイル移送などに必要なAPIを取得する]]></title><description><![CDATA[Dropboxへファイルを移送するプログラムを作成する際、以下2つのデータが必要となります。
+
+App key
+App secret
+
+また、プログラム実行のたびに下記のデータが必要となります。下記については定期的に取得をお願いします。
+
+アクセスコード
+
+本記事では、上記3つのデータを取得する方法を解説します。
+
+ App key、App secretの取得
+アプリを作成をクリック
+
+
+Scoped accessをクリック
+Full Dropboxをクリック
+Name your appに任意の名前を入力
+I agree to Dropbox API Terms and Conditio...]]></description><link>https://zenn.dev/eito_blog/articles/6e14e7d261d26b</link><guid isPermaLink="true">https://zenn.dev/eito_blog/articles/6e14e7d261d26b</guid><pubDate>Wed, 11 Sep 2024 13:31:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GJygyhE1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Dropbox%2520API%25E3%2580%2591Dropbox%25E3%2581%25B8%25E3%2581%25AE%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E7%25A7%25BB%25E9%2580%2581%25E3%2581%25AA%25E3%2581%25A9%25E3%2581%25AB%25E5%25BF%2585%25E8%25A6%2581%25E3%2581%25AAAPI%25E3%2582%2592%25E5%258F%2596%25E5%25BE%2597%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25A8%25E3%2582%25A4%25E3%2583%2588%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E1ZTg3MmJkZDUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>エイト</dc:creator></item><item><title><![CDATA[VPN経由の処理を自動化]]></title><description><![CDATA[
+ 背景
+
+VPN制限のある環境でデータ取得する必要がありました
+
+
+ 内容
+最終的な実装コードだけスニペット的に貼り付けておきます。
+Docker + Docker Compose + github actionsでデータ取得するようになっています。
+name: ELT with VPN
+on:
+  workflow_dispatch:
+  schedule:
+    # 毎日 JST 10:30 （UTC 01:30 + 9hour）
+    - cron: "30 1 * * *"
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    defa...]]></description><link>https://zenn.dev/kiwamizamurai/articles/0a25bb85553749</link><guid isPermaLink="true">https://zenn.dev/kiwamizamurai/articles/0a25bb85553749</guid><pubDate>Wed, 11 Sep 2024 13:03:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--36cfi4K6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:VPN%25E7%25B5%258C%25E7%2594%25B1%25E3%2581%25AE%25E5%2587%25A6%25E7%2590%2586%25E3%2582%2592%25E8%2587%25AA%25E5%258B%2595%25E5%258C%2596%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kiwamizamurai%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUVkRlRwNmlfQml4aE1xOXZXUzBiSk5VZ1ZYb2ZDNkVva0toRGNkZXJzSjg9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kiwamizamurai</dc:creator></item><item><title><![CDATA[LangGraphの基本的な要素を日本語でわかりやすくまとめる]]></title><description><![CDATA[
+ はじめに
+LangGraphの基本要素であるgraph,state,node,edgeについてまとめます。
+クイックスタート見ながら雰囲気でやっているけれどそろろそ限界、という方の助けになればと思います。
+!
+私自身、数日前まで雰囲気でやっていたものをドキュメント読んでなんとか自分なりに理解したものです。間違えあればご指摘いただければと思います。
+
+
+ 内容
+LangGraph公式のLow Level Conceptual Guideをもとに、LangGraphの主要要素のgraph,state,node,edgeについてまとめます。
+https://langchain-ai.git...]]></description><link>https://zenn.dev/tomodo_ysys/articles/langgraph-basic-elements</link><guid isPermaLink="true">https://zenn.dev/tomodo_ysys/articles/langgraph-basic-elements</guid><pubDate>Wed, 11 Sep 2024 08:51:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--RHT_BJZO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:LangGraph%25E3%2581%25AE%25E5%259F%25BA%25E6%259C%25AC%25E7%259A%2584%25E3%2581%25AA%25E8%25A6%2581%25E7%25B4%25A0%25E3%2582%2592%25E6%2597%25A5%25E6%259C%25AC%25E8%25AA%259E%25E3%2581%25A7%25E3%2582%258F%25E3%2581%258B%25E3%2582%258A%25E3%2582%2584%25E3%2581%2599%25E3%2581%258F%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A8%25E3%2582%2582%25E3%2581%25A9%2540SIer%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJkY2Y4OTVkMzMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ともど@SIerエンジニア</dc:creator></item><item><title><![CDATA[＃49　Kibelaの記事をBacklogのWikiへ移行する〜Backlog APIを利用する]]></title><description><![CDATA[
+ はじめに
+自社でこれまで作成してきたKibelaの記事をBacklogのWikiページに移行させたい、という要請を受けたため、まとめて記事を移行させるスクリプトをpythonで作成してみました。
+こちらでは備忘録として、移行までの調査内容や実際に作成したコードについて、3部に分けてまとめていきたいと思います。
+記事の第2部にあたる今回は、実際にスクリプトに使用したBacklogが公開しているAPIに関する説明を中心に取り上げます。
+スクリプトとの連携方法からまとめていきますので、初学者の方のご参考になれば幸いです。
+
+第1部の記事をご覧になりたい方は以下から確認できます。
+本記事に関...]]></description><link>https://zenn.dev/nxted_sapporo/articles/29c04d7f516262</link><guid isPermaLink="true">https://zenn.dev/nxted_sapporo/articles/29c04d7f516262</guid><pubDate>Wed, 11 Sep 2024 02:08:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--pOqF-C53--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25EF%25BC%258349%25E3%2580%2580Kibela%25E3%2581%25AE%25E8%25A8%2598%25E4%25BA%258B%25E3%2582%2592Backlog%25E3%2581%25AEWiki%25E3%2581%25B8%25E7%25A7%25BB%25E8%25A1%258C%25E3%2581%2599%25E3%2582%258B%25E3%2580%259CBacklog%2520API%25E3%2582%2592%25E5%2588%25A9%25E7%2594%25A8%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:NXTEDCo.%252C%2520Ltd.%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBmZjQzOTVhYzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>NXTEDCo., Ltd.</dc:creator></item><item><title><![CDATA[STL分解の仕組みを理解してパラメータを適切に設定する]]></title><description><![CDATA[
+ 1. 概要
+本記事では、時系列データをトレンド、季節性、残差の3要素に分解する手法であるSTL分解[1](Seasonal Trend decomposition using Loess)について解説します。STL分解は、複雑な時系列データを理解しやすい要素に分解することで、データの特徴を把握するのに役立ちます。
+本記事の目的は以下の2点です。
+
+STL分解の仕組みとSTLで使われるLoessを理解する
+STL分解のパラメータの意味を知り、適切に設定できるようになる
+
+
+ 2. Loess
+Loess(Locally Estimated Scatterd Smoothing)は局所回...]]></description><link>https://zenn.dev/ryatora/articles/3ac1fcf57bd781</link><guid isPermaLink="true">https://zenn.dev/ryatora/articles/3ac1fcf57bd781</guid><pubDate>Tue, 10 Sep 2024 15:56:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_MaP5xnr--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:STL%25E5%2588%2586%25E8%25A7%25A3%25E3%2581%25AE%25E4%25BB%2595%25E7%25B5%2584%25E3%2581%25BF%25E3%2582%2592%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2597%25E3%2581%25A6%25E3%2583%2591%25E3%2583%25A9%25E3%2583%25A1%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%2592%25E9%2581%25A9%25E5%2588%2587%25E3%2581%25AB%25E8%25A8%25AD%25E5%25AE%259A%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:rnm%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSVhmb2dxTzNUQ2ZWeE9fUElmMW93QjhMeTY0YWlKaTctMmNCeGFGQUpVUzd5WD1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>rnm</dc:creator></item><item><title><![CDATA[小学校区や中学校区のGeoJSONから市区町村を指定して抽出]]></title><description><![CDATA[
+ データをダウンロード
+国土数値情報ダウンロードサイトから小学校区や中学校区のデータをダウンロードします。
+2023年版だとGeoJSON形式のデータが提供されています。
+https://nlftp.mlit.go.jp/ksj/
+
+ 市区町村を指定してGeoJSONのデータを作成
+ダウンロードしたGeoJSONをKMLに変換すると5MBを超えていてGoogleのマイマップで処理することができない場合があります。データのサイズを減らすためにPythonプログラムで市区町村を指定して抽出します。
+以下の例では小学校区のデータを扱っているのでコードがA27ですが、中学校区の場合はA32にな...]]></description><link>https://zenn.dev/kaorumori/articles/8e9635a2965e88</link><guid isPermaLink="true">https://zenn.dev/kaorumori/articles/8e9635a2965e88</guid><pubDate>Tue, 10 Sep 2024 15:36:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fFgSPLu9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%25B0%258F%25E5%25AD%25A6%25E6%25A0%25A1%25E5%258C%25BA%25E3%2582%2584%25E4%25B8%25AD%25E5%25AD%25A6%25E6%25A0%25A1%25E5%258C%25BA%25E3%2581%25AEGeoJSON%25E3%2581%258B%25E3%2582%2589%25E5%25B8%2582%25E5%258C%25BA%25E7%2594%25BA%25E6%259D%2591%25E3%2582%2592%25E6%258C%2587%25E5%25AE%259A%25E3%2581%2597%25E3%2581%25A6%25E6%258A%25BD%25E5%2587%25BA%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kaorumori%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRjZjA1YmY3MzAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kaorumori</dc:creator></item></channel></rss>
