@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Java」のフィード]]></title><description><![CDATA[Zennのトピック「Java」のRSSフィードです]]></description><link>https://zenn.dev/topics/java</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/5c47bb8423.png</url><title>Zennの「Java」のフィード</title><link>https://zenn.dev/topics/java</link></image><generator>zenn.dev</generator><lastBuildDate>Mon, 16 Sep 2024 06:49:10 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/java/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Javaのフレームワークを使用せずに、キューを連結リストで実装]]></title><description><![CDATA[便利なフレームワークがたくさんありますが、今回は基礎理解のためにキューを連結リストで自前実装しました。
+フレームワークの連結リストを使用してしまった方が、簡単で早いのですが内部で何が起こっているのかがわからずブラックボックス化していたので、、、
+私と同じように学習目的であれば自前実装をお勧めしますが、手間がかかる上に長年をかけて最適化されているフレームワークを超えることは難しいので、学習目的以外では普通にフレームワークを使用した方がいいかなと思います。
+以下の実装でスムーズにいかなかった点はまた後日記載しようと思います。
+
+ 今回実装した連結リストによるキュー
+// ノードクラス
+cla...]]></description><link>https://zenn.dev/tech_mico/articles/aae09ebe209126</link><guid isPermaLink="true">https://zenn.dev/tech_mico/articles/aae09ebe209126</guid><pubDate>Mon, 16 Sep 2024 04:19:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--HYu7yvVI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java%25E3%2581%25AE%25E3%2583%2595%25E3%2583%25AC%25E3%2583%25BC%25E3%2583%25A0%25E3%2583%25AF%25E3%2583%25BC%25E3%2582%25AF%25E3%2582%2592%25E4%25BD%25BF%25E7%2594%25A8%25E3%2581%259B%25E3%2581%259A%25E3%2581%25AB%25E3%2580%2581%25E3%2582%25AD%25E3%2583%25A5%25E3%2583%25BC%25E3%2582%2592%25E9%2580%25A3%25E7%25B5%2590%25E3%2583%25AA%25E3%2582%25B9%25E3%2583%2588%25E3%2581%25A7%25E5%25AE%259F%25E8%25A3%2585%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:techmico%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2UxMTBhYmRiNjcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>techmico</dc:creator></item><item><title><![CDATA[JavaとSemantic Kernelで始めるAIプロダクト開発入門]]></title><description><![CDATA[
+ テーマ
+Semantic Kernel + javaで作るAIプロダクト作成の基礎
+
+ 対象とする人
+
+研修等で初めのプログラミング言語としてJavaを学んで、AIプロダクトに興味がある人
+Javaを長年利用してきたが、AIは未経験の人
+
+
+ Scope
+
+
+扱うこと
+
+Semantic KernelとLLMの基礎的な概念
+Semantic Kernelを用いたCUIベースのAIプロダクトの実装
+
+
+
+扱わないこと
+
+AzureやAI Studioの設定方法
+フロントエンドを含めた製品の構成
+
+
+
+
+ Semantic Kernelとは?
+Semantic KernelはWindow...]]></description><link>https://zenn.dev/givery_ai_lab/articles/018d954e5e05b9</link><guid isPermaLink="true">https://zenn.dev/givery_ai_lab/articles/018d954e5e05b9</guid><pubDate>Fri, 13 Sep 2024 07:49:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--QRwSst4g--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java%25E3%2581%25A8Semantic%2520Kernel%25E3%2581%25A7%25E5%25A7%258B%25E3%2582%2581%25E3%2582%258BAI%25E3%2583%2597%25E3%2583%25AD%25E3%2583%2580%25E3%2582%25AF%25E3%2583%2588%25E9%2596%258B%25E7%2599%25BA%25E5%2585%25A5%25E9%2596%2580%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:nadu08%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RlYTVlYjJjNzcuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Givery%2520AI%2520Lab%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVhZDlhZmNjNjIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nadu08</dc:creator></item><item><title><![CDATA[BenesseExtension を使ってみよう]]></title><description><![CDATA[今回は、以前の DchaService に続いて、BenesseExtension を使う方法を解説していきます。
+
+ 前提
+前回同様ですが、
+DchaService は、アプリ であり、
+BenesseExtension は、フレームワーク です。
+また、BenesseExtension は、CT3 の 02.00.000 以降及び、CTX(TAB-A05-BD), CTZ(TAB-A05-BA1) に存在しています。
+DchaService について知りたい場合は、こちらの記事をご覧ください。
+
+ BenesseExtension
+これまた Benesse が開発したものですが、実は...]]></description><link>https://zenn.dev/s1204it/articles/6c0d563a7775e3</link><guid isPermaLink="true">https://zenn.dev/s1204it/articles/6c0d563a7775e3</guid><pubDate>Fri, 13 Sep 2024 05:03:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--I3PZmo3H--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:BenesseExtension%2520%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%2588%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2597%25E3%2582%2585%25E3%2583%25BC%25E3%2581%2594%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUxtNXd1MURKN3dkYjRLclFvRkx2U3hvcEl6X0pYVjFieXRjMVBzdHhxemZDUT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>しゅーご</dc:creator></item><item><title><![CDATA[【Java】移動平均をスライディングウィンドウ法で算出]]></title><description><![CDATA[
+ この記事で分かること
+・移動平均の算出方法
+・スライディングウィンドウ法の考え方
+
+ 前提条件
+Javaの基礎知識（配列）,コレクションクラス(AraayList)の知識
+
+ スライディングウィンドウ法とは
+スライディングウィンドウ法は、連続する部分配列や部分区間に関する問題を効率的に解決するための手法である。この方法は、特に配列やリストの中で部分配列の合計や平均、最大・最小値を求める際に有用
+
+ 使用パターン（どんな時に使うのか）
+ここではざっくりにどんなケースがあるのかを記載する。コーディングは「実装」に記載
+
+ ケース1. 最大または最小の合計を持つ連続部分配列を求めたいとき
+...]]></description><link>https://zenn.dev/tya0116/articles/17c56e92700e7a</link><guid isPermaLink="true">https://zenn.dev/tya0116/articles/17c56e92700e7a</guid><pubDate>Thu, 12 Sep 2024 12:32:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--SHQX8BEG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Java%25E3%2580%2591%25E7%25A7%25BB%25E5%258B%2595%25E5%25B9%25B3%25E5%259D%2587%25E3%2582%2592%25E3%2582%25B9%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2587%25E3%2582%25A3%25E3%2583%25B3%25E3%2582%25B0%25E3%2582%25A6%25E3%2582%25A3%25E3%2583%25B3%25E3%2583%2589%25E3%2582%25A6%25E6%25B3%2595%25E3%2581%25A7%25E7%25AE%2597%25E5%2587%25BA%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A1%25E3%2582%2583%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS3lQYktVNVhIdW9fVWZLdVJyNjNIVnR1cjhjNDUxbHZfQ3Y4YjJ5c1JWT1E9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ちゃ</dc:creator></item><item><title><![CDATA[Java基礎[プリミティブ型とは？/ 文字列 / 変数など]]]></title><description><![CDATA[https://zenn.dev/takeda_kaho/articles/cf68bd3b11851b
+
+ ①Javaの基礎（プリミティブ型について）
+Javaには8つの基本的なデータ型（プリミティブ型）がある。
+
+!
+論理型: boolean（ブーリアン）
+文字型: char（キャラorキャラクター）
+整数型: byte（バイト）, short（ショート）, int（イントorインテジャー）, long（ロング）
+浮動小数点数型: float（フロート）, double（ダブル）
+
+
+ ②Javaの基礎（文字列について）
+Javaの文字列は、String クラスを使用して扱う。（Sは...]]></description><link>https://zenn.dev/takeda_kaho/articles/722773658cf662</link><guid isPermaLink="true">https://zenn.dev/takeda_kaho/articles/722773658cf662</guid><pubDate>Thu, 12 Sep 2024 12:04:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--EXvMH95Q--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java%25E5%259F%25BA%25E7%25A4%258E%255B%25E3%2583%2597%25E3%2583%25AA%25E3%2583%259F%25E3%2583%2586%25E3%2582%25A3%25E3%2583%2596%25E5%259E%258B%25E3%2581%25A8%25E3%2581%25AF%25EF%25BC%259F%252F%2520%25E6%2596%2587%25E5%25AD%2597%25E5%2588%2597%2520%252F%2520%25E5%25A4%2589%25E6%2595%25B0%25E3%2581%25AA%25E3%2581%25A9%255D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:takepanda%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAxZWRlZDIyZDYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takepanda</dc:creator></item><item><title><![CDATA[StreamAPIでリストを分割する]]></title><description><![CDATA[
+ やりたかったこと
+
+StreamAPIで、1つのリストを、条件次第で別々のリストに分けたい
+
+命令的に書くなら、先に作ったArrayの中に.add()で詰め込んでいくだけなので簡単
+だが、Java8以降なのでStreamを使いたい
+
+
+条件による分類は1回で済ませたい
+
+実際に使うときは複雑な条件を適用させる想定
+なので、同じリストに別々の条件を適用してリスト生成、みたいなことはしたくなかった
+
+
+
+
+ 実装
+
+ 2種類に分割
+Collectors.partitioningBy()を使用する
+
+ 2種類に分類
+// 分類対象のIntegerリストを生成
+List&lt;Integer...]]></description><link>https://zenn.dev/netai/articles/20240909_java-divide-list</link><guid isPermaLink="true">https://zenn.dev/netai/articles/20240909_java-divide-list</guid><pubDate>Thu, 12 Sep 2024 11:35:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3QNAuD9f--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:StreamAPI%25E3%2581%25A7%25E3%2583%25AA%25E3%2582%25B9%25E3%2583%2588%25E3%2582%2592%25E5%2588%2586%25E5%2589%25B2%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:netai%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE0MzA2NTU1YmYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>netai</dc:creator></item><item><title><![CDATA[【１分でわかる】SpringBootで環境毎に設定を変更する方法]]></title><description><![CDATA[
+
+ 冒頭
+
+開発環境
+本番環境
+など、そのプロダクトを環境ごとに設定を変更させたい時にその方法に戸惑うことがあると思います。
+そこで今回は
+設定方法
+
+設定が反映されているか確認する方法
+をざっと簡潔に整理してみたいと思います。
+
+
+ 設定方法
+
+
+src/main/java/resources/application.properties以外にも下記のように設定ファイルを増やす
+
+application-*.propertiesの形でファイルを複製することでSpringBootが認識してくれる点には注意が必要
+
+
+src/main/java/resources/application...]]></description><link>https://zenn.dev/daiten/articles/9fec9ae418a0b9</link><guid isPermaLink="true">https://zenn.dev/daiten/articles/9fec9ae418a0b9</guid><pubDate>Thu, 12 Sep 2024 01:30:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--AKlYnllj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25EF%25BC%2591%25E5%2588%2586%25E3%2581%25A7%25E3%2582%258F%25E3%2581%258B%25E3%2582%258B%25E3%2580%2591SpringBoot%25E3%2581%25A7%25E7%2592%25B0%25E5%25A2%2583%25E6%25AF%258E%25E3%2581%25AB%25E8%25A8%25AD%25E5%25AE%259A%25E3%2582%2592%25E5%25A4%2589%25E6%259B%25B4%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:daitenn%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU3MzllZjg1YmIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>daitenn</dc:creator></item><item><title><![CDATA[DchaService を使ってみよう]]></title><description><![CDATA[今回は、あのチャレンジパッドに含まれている、DchaService の機能、依存関係ライブラリの作り方、使い方について解説していきます。
+
+ 前提
+DchaService は、アプリ であり、
+BenesseExtension は、フレームワーク です。
+また、BenesseExtension は、CT3 の 02.00.000 以降及び、CTX(TAB-A05-BD), CTZ(TAB-A05-BA1) に存在しています。
+BenesseExtension については、こちらの記事をご覧ください。
+
+ DchaService
+DchaService とは、Benesse がチャレンジパ...]]></description><link>https://zenn.dev/s1204it/articles/356a8795c1d792</link><guid isPermaLink="true">https://zenn.dev/s1204it/articles/356a8795c1d792</guid><pubDate>Wed, 11 Sep 2024 07:05:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jrdS75U6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:DchaService%2520%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%2588%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2597%25E3%2582%2585%25E3%2583%25BC%25E3%2581%2594%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUxtNXd1MURKN3dkYjRLclFvRkx2U3hvcEl6X0pYVjFieXRjMVBzdHhxemZDUT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>しゅーご</dc:creator></item><item><title><![CDATA[Builderパターン(Effective Java)]]></title><description><![CDATA[GoFのBuiderパターンではなく、Effective Javaに記載されいる方のBuilderパターン。
+よくあるGetter/SetterをJavaBeansパターン、コンストラクタの引数で受けるのをテレスコーピング・コンストラクタというらしい。
+
+ はじめに
+JavaBeansパターンの以下のような課題の解決策にできる。
+
+setterが固まって記述されていないのでコードが読みづらい
+パラメータ上書きがいつでもできるので、
+
+不備の発見が難しくなる
+上書きされていないことの確認が広範囲になる
+
+
+改修時に影響調査が広範囲となり、調査漏れによる障害リスクが大きくなる
+
+
+ 実装例
+...]]></description><link>https://zenn.dev/ngs/articles/516a6e96cf5c1a</link><guid isPermaLink="true">https://zenn.dev/ngs/articles/516a6e96cf5c1a</guid><pubDate>Tue, 10 Sep 2024 14:20:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jaQnxl1q--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Builder%25E3%2583%2591%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%25B3%2528Effective%2520Java%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ngs%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M5NThhMzc4NzguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ngs</dc:creator></item><item><title><![CDATA[PHP5からPHP8へのマイグレ]]></title><description><![CDATA[PHP 5からPHP 8への移行でのポイントを馴染みのJavaを介して説明します。
+以下、chatGPTのサポートにより作成しています。
+
+ 1. 型宣言のサポート
+
+PHP 8では、Javaと同様に厳格な型宣言が強化されています。関数やメソッドの引数、戻り値に型を指定できるようになりました。PHP 5では型を気にせずに書けましたが、PHP 8では厳密な型を使うことで、コードがより明確で安全になります。
+例:
+// PHP 5
+function add($a, $b) {
+    return $a + $b;
+}
+
+// PHP 8
+function add(int $a, int $...]]></description><link>https://zenn.dev/aoseal/articles/69db72c8268e49</link><guid isPermaLink="true">https://zenn.dev/aoseal/articles/69db72c8268e49</guid><pubDate>Mon, 09 Sep 2024 23:20:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--T8qaJxti--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:PHP5%25E3%2581%258B%25E3%2582%2589PHP8%25E3%2581%25B8%25E3%2581%25AE%25E3%2583%259E%25E3%2582%25A4%25E3%2582%25B0%25E3%2583%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:aoseal%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS1VDeVFVR09leHVUX3ZrWU43VFRMWGVjeU13alR1LVhwZFpDUFQ2QkN1LXBsWll3PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>aoseal</dc:creator></item><item><title><![CDATA[Spring Initializrのmaven-wrapper.jarを取り戻す]]></title><description><![CDATA[TL;DR
+$ mvn wrapper:wrapper -Dtype=bin
+https://start.spring.io/
+久しぶりにSpring InitializrでProjectをMavenにしたらmaven-wrapper.jarがなくなっていたので備忘録です。
+$ ls -laR maven-project
+maven-project:
+total 36
+drwxr-xr-x 4 spring spring   105 Sep  9 13:00 .
+drwxr-xr-x 6 spring spring  4096 Sep  9 13:05 ..
+-rw-r--r-- 1 s...]]></description><link>https://zenn.dev/tkithrta/articles/2de050457389bb</link><guid isPermaLink="true">https://zenn.dev/tkithrta/articles/2de050457389bb</guid><pubDate>Mon, 09 Sep 2024 15:00:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8zZu_oWJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Spring%2520Initializr%25E3%2581%25AEmaven-wrapper.jar%25E3%2582%2592%25E5%258F%2596%25E3%2582%258A%25E6%2588%25BB%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E9%25BB%2592%25E3%2583%25B0%25E6%25A8%25B9%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E0NDRlMTA4ZjkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>黒ヰ樹</dc:creator></item><item><title><![CDATA[＃42　SOLID - Interface Segregation Principle]]></title><description><![CDATA[
+ Introduction
+We have already introduced the first three principles of SOLID, and now let's begin with the I - Interface Segregation Principle.
+To revise the Liskov substitution principle, go here.
+
+ Interface Segregation Principle (ISP)
+
+No code should be forced to depend on methods it does not...]]></description><link>https://zenn.dev/nxted_sapporo/articles/3cc4358db45851</link><guid isPermaLink="true">https://zenn.dev/nxted_sapporo/articles/3cc4358db45851</guid><pubDate>Mon, 09 Sep 2024 05:15:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1ZaBallM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25EF%25BC%258342%25E3%2580%2580SOLID%2520-%2520Interface%2520Segregation%2520Principle%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:NXTEDCo.%252C%2520Ltd.%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBmZjQzOTVhYzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>NXTEDCo., Ltd.</dc:creator></item><item><title><![CDATA[JavaのProcessBuilderで外部アプリ(e.g. Python)と「継続的」に連携する方法]]></title><description><![CDATA[JavaのProcessBuilderを使用すると外部アプリを起動してその出力を受け取れます。更にそのアプリに入力してデータ処理結果を受け取る事も出来ます。
+つまりPythonにしか存在しないライブラリをJavaから使用するといった使い方ができます。
+しかし(英語含めて)サンプルコードがあまり無いようなので具体的なコードを紹介します。
+ここではPythonとの連携を考えます(実際には他のものにも使えます)。
+以下ではコードを単純化するため「文字列を2倍にするメソッド」を実装しています。
+# エンコードを明示的にUTF-8にする必要がある
+sys.stdout.reconfigure(en...]]></description><link>https://zenn.dev/lamrongol/articles/dff8ca5d9b906d</link><guid isPermaLink="true">https://zenn.dev/lamrongol/articles/dff8ca5d9b906d</guid><pubDate>Sun, 08 Sep 2024 22:34:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--AGRiHwOs--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java%25E3%2581%25AEProcessBuilder%25E3%2581%25A7%25E5%25A4%2596%25E9%2583%25A8%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%2528e.g.%2520Python%2529%25E3%2581%25A8%25E3%2580%258C%25E7%25B6%2599%25E7%25B6%259A%25E7%259A%2584%25E3%2580%258D%25E3%2581%25AB%25E9%2580%25A3%25E6%2590%25BA%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Lamron%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNmZDBjYmMxYjAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Lamron</dc:creator></item><item><title><![CDATA[再利用・リリース等価の原則とは?]]></title><description><![CDATA[
+ 背景
+コンポーネントの設計を行う際に、再利用とリリースの適切な単位を考えることは、システムの保守性や拡張性を考える上で重要だと思います。どのクラスを一つのコンポーネントにまとめるべきかを考える際の指針となるのが、再利用・リリース等価の原則です。
+
+ 再利用・リリース等価の原則とは?
+私が読んだ書籍では、以下のように定義されていました。
+「再利用の単位とリリースの単位は等価になる」（ロバート・C・マーチン, 2018, 『Clean Architecture 達人に学ぶソフトウェアの構造と設計』, 翔泳社, p.123）
+再利用する単位とリリースする単位を同じにする、つまり、再利用しな...]]></description><link>https://zenn.dev/bananauyu/articles/73866ba5d9561b</link><guid isPermaLink="true">https://zenn.dev/bananauyu/articles/73866ba5d9561b</guid><pubDate>Sun, 08 Sep 2024 12:22:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ldtP26jA--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2586%258D%25E5%2588%25A9%25E7%2594%25A8%25E3%2583%25BB%25E3%2583%25AA%25E3%2583%25AA%25E3%2583%25BC%25E3%2582%25B9%25E7%25AD%2589%25E4%25BE%25A1%25E3%2581%25AE%25E5%258E%259F%25E5%2589%2587%25E3%2581%25A8%25E3%2581%25AF%253F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25B0%25E3%2581%25AA%25E3%2581%25AA%25E3%2581%2586%25E3%2582%2586%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFlMmQ5MjhhOWMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ばななうゆ</dc:creator></item><item><title><![CDATA[Java アルゴリズム問題を解いてみた #2]]></title><description><![CDATA[問題1. 整数num1とnum2がパラメータとして与えられます。二つの数が同じなら1を、違ったら-1をretrunするようにsolution関数を完成させてください。
+class Solution {
+    public int solution(int num1, int num2) {
+        int answer = 0;
+        answer = num1 == num2 ? 1 : -1;
+        return answer;
+    }
+}
+
+ 
+問題2. 1番目の分数の分子と分母を意味するnumer1、denom1、2番目の分数の分子と分母を意味す...]]></description><link>https://zenn.dev/heylee/articles/9c613a5170507f</link><guid isPermaLink="true">https://zenn.dev/heylee/articles/9c613a5170507f</guid><pubDate>Sun, 08 Sep 2024 06:21:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--PJgVGcMT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java%2520%25E3%2582%25A2%25E3%2583%25AB%25E3%2582%25B4%25E3%2583%25AA%25E3%2582%25BA%25E3%2583%25A0%25E5%2595%258F%25E9%25A1%258C%25E3%2582%2592%25E8%25A7%25A3%25E3%2581%2584%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2520%25232%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Rin%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2EzZTlhOWRhZDkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Rin</dc:creator></item><item><title><![CDATA[【完全版】3ヶ月でAndroidエンジニアを目指すためのロードマップ]]></title><description><![CDATA[
+ はじめに
+ご覧いただきありがとうございます。Gonです！
+Androidアプリ開発の世界へようこそ！
+今回は、友人がAndroidエンジニアを目指すと聞いて実践的なロードマップを作ってみることにしました。
+僕自身、Javaのレガシーなシステム開発からキャリアをスタートしましたが、働き方の自由度や仕事の楽しさを求めて、独学でKotlinを学び、Androidアプリ開発へとスキルチェンジしました。
+フリーランスのAndroidエンジニアとしては3年以上働いていますが、基本的にフルリモートで働けるためすごく自由度が高いですし、単価も上がりやすく、何より楽しんで仕事できてます。
+「どこから始...]]></description><link>https://zenn.dev/masashiii/articles/1b5598a089bac5</link><guid isPermaLink="true">https://zenn.dev/masashiii/articles/1b5598a089bac5</guid><pubDate>Sun, 08 Sep 2024 04:07:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bfEn9ASK--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%25AE%258C%25E5%2585%25A8%25E7%2589%2588%25E3%2580%25913%25E3%2583%25B6%25E6%259C%2588%25E3%2581%25A7Android%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%25E3%2582%2592%25E7%259B%25AE%25E6%258C%2587%25E3%2581%2599%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2589%25E3%2583%259E%25E3%2583%2583%25E3%2583%2597%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Gon%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzgyM2JjZmIzMjIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Gon</dc:creator></item><item><title><![CDATA[Java Web アプリ開発で使えるサーバー8選 Tomcat、WildFly、Jetty など - 2024年度版]]></title><description><![CDATA[
+ はじめに
+最近、VS Code のプロファイル機能を使って、プログラミング言語 Java でソフトウェア開発をするときに使う、Java 開発用プロファイルを作成しようと思ったのですが、その時に、先に何を決めておく必要があるかと考えました。
+当然 JDK について決める必要があったので、それについて整理しました。整理したものは次の記事で公開しています。
+
+次に、Java で Web アプリを開発することもあるので、そのときに使用するアプリケーションサーバーについて、何を使うか決めておいた方が良いと考えました。
+ということで、Java で使えるアプリケーションサーバーについて調べて、その...]]></description><link>https://zenn.dev/hiro345/articles/20240907_java_as</link><guid isPermaLink="true">https://zenn.dev/hiro345/articles/20240907_java_as</guid><pubDate>Sat, 07 Sep 2024 06:35:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--M-vpLGUY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java%2520Web%2520%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E9%2596%258B%25E7%2599%25BA%25E3%2581%25A7%25E4%25BD%25BF%25E3%2581%2588%25E3%2582%258B%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC8%25E9%2581%25B8%2520Tomcat%25E3%2580%2581WildFly%25E3%2580%2581Jetty%2520%25E3%2581%25AA%25E3%2581%25A9%2520-%25202024%25E5%25B9%25B4%25E5%25BA%25A6%25E7%2589%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Hiroshi%2520Koyama%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2k5ZzdjLS0xTFk0S2k0LWw3dVFSSFZRdEdQcWZHYTlibVRJYUtFM0E9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Hiroshi Koyama</dc:creator></item><item><title><![CDATA[Spring Bootで作るデモアプリ：開発〜デプロイまで完全ガイド(Mac OS)]]></title><description><![CDATA[こちらでは、Spring Bootを使用してシンプルなタスク管理アプリを開発するためのステップバイステップガイドを提供します。以下の内容を含んでおり、開発からデプロイまでの一連のプロセスを学ぶことができます。
+
+・開発環境の構築:
+・シンプルなタスク管理アプリの作成
+・ログイン機能の実装
+・PostgreSQLの使用
+・Gitによる管理
+・AWSへのデプロイ
+
+***注意***
+それぞれの詳しい解説は省略しています。(Spring Bootのコントローラーとは？やJAVAのクラスとは？git commitはどんな仕組み？など...)。
+とにかく、アプリを本番環境で動くようにさせたい方向けの一連ガイドとなっています。
+まずは一連を体験して楽しさを実感した上で、深掘りしていただければと思っています。
+
+***免責事項***
+この手順書にはAWS関連の手順が含まれています。AWSへのデプロイ手順を理解し、実施するための参考情報を提供することを目的としています。本手順書に従って行動することで発生する可能性のある料金、コスト、またはその他の費用について、作成者は一切の責任を負いません。
+最大限無料枠を使用して進めていますが料金は発生します。
+AWSに自信がない場合や不安のある方はデプロイする章は実行を控えてください。]]></description><link>https://zenn.dev/teru_whisky/books/830962bdd6664e</link><guid isPermaLink="true">https://zenn.dev/teru_whisky/books/830962bdd6664e</guid><pubDate>Sat, 07 Sep 2024 04:37:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--UIdcXbL6--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci9iNjJmNWJiOGFlLmpwZw==%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>taiki</dc:creator></item><item><title><![CDATA[自作したjarファイルを別のプロジェクトに(内部)ライブラリとして追加し利用する方法]]></title><description><![CDATA[
+ はじめに
+この記事は、jarファイルの作成方法と利用方法についてまとめた内容が記載してあります。
+※「jarファイルとは？」について言及する記事ではないのでご容赦ください
+→ jarファイルについて知りたいという方はこちら
+https://docs.oracle.com/javase/jp/7/technotes/guides/jar/jarGuide.html
+
+ この記事の対象者(推奨)
+・ 自作jarファイルの作成方法を知りたいという方
+・ 生成したjarファイルのインポート方法や紐付け方を知りたいという方
+・ 現在javaを勉強されていて、知見を増やしたいという方
+
+ 開発環...]]></description><link>https://zenn.dev/keita09/articles/6abec1e27681f4</link><guid isPermaLink="true">https://zenn.dev/keita09/articles/6abec1e27681f4</guid><pubDate>Thu, 05 Sep 2024 17:48:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ZU9IabxD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%2587%25AA%25E4%25BD%259C%25E3%2581%2597%25E3%2581%259Fjar%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2592%25E5%2588%25A5%25E3%2581%25AE%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E3%2581%25AB%2528%25E5%2586%2585%25E9%2583%25A8%2529%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%25E3%2581%25A8%25E3%2581%2597%25E3%2581%25A6%25E8%25BF%25BD%25E5%258A%25A0%25E3%2581%2597%25E5%2588%25A9%25E7%2594%25A8%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:keita%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JjNTc2NjBmNTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>keita</dc:creator></item><item><title><![CDATA[SeleniumでSafariをテストする方法]]></title><description><![CDATA[SafariのテストをSeleniumで実行する方法をGPTに聞いてみた。
+
+ 1. SafariのWebDriverの設定:
+
+
+
+Safari Technology Previewをインストールします。これは開発者向けのSafariのバージョンで、WebDriverを利用するために必要です。
+macOSにはSafariDriverが標準で含まれているので、追加でインストールする必要はありません。
+
+
+ 2. SafariDriverを有効化:
+
+
+SafariDriverを利用するには、Safariの「開発」メニューから**「リモートオートメーションを許可」**を有効にする必要があり...]]></description><link>https://zenn.dev/aoseal/articles/0dbf5b55c3eef6</link><guid isPermaLink="true">https://zenn.dev/aoseal/articles/0dbf5b55c3eef6</guid><pubDate>Thu, 05 Sep 2024 09:58:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--aFP0Za25--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Selenium%25E3%2581%25A7Safari%25E3%2582%2592%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:aoseal%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS1VDeVFVR09leHVUX3ZrWU43VFRMWGVjeU13alR1LVhwZFpDUFQ2QkN1LXBsWll3PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>aoseal</dc:creator></item></channel></rss>

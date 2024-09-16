@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「shell」のフィード]]></title><description><![CDATA[Zennのトピック「shell」のRSSフィードです]]></description><link>https://zenn.dev/topics/shell</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/c8d33e6510.jpeg</url><title>Zennの「shell」のフィード</title><link>https://zenn.dev/topics/shell</link></image><generator>zenn.dev</generator><lastBuildDate>Mon, 16 Sep 2024 04:30:09 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/shell/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[【警告】AOAIモデルをデプロイしただけで◯万円？PTUなモデルデプロイ有無を一括確認できるようにしてみた話]]></title><description><![CDATA[
+ はじめに
+先日、Azure OpenAI Service（以下、AOAI）でモデルをデプロイしただけで高額な課金が発生するという、ヒヤリとする体験をしました。同様の事例が他の方にも起こっていることを知り、これは対策が必要だと感じました。(せめて横並び確認の自動化くらいは･･･)
+参考にした記事はこちらです：
+https://zenn.dev/umi_mori/articles/aoai-warning-ptu
+この記事では、同じ問題に直面した背景と、その解決策としてテナント内のすべてのAOAIリソースを一括でチェックし、Provisioned-managedなデプロイメントを特定する...]]></description><link>https://zenn.dev/chips0711/articles/63166e84db8ee4</link><guid isPermaLink="true">https://zenn.dev/chips0711/articles/63166e84db8ee4</guid><pubDate>Sat, 14 Sep 2024 04:41:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5NwLdqY---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E8%25AD%25A6%25E5%2591%258A%25E3%2580%2591AOAI%25E3%2583%25A2%25E3%2583%2587%25E3%2583%25AB%25E3%2582%2592%25E3%2583%2587%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25A4%25E3%2581%2597%25E3%2581%259F%25E3%2581%25A0%25E3%2581%2591%25E3%2581%25A7%25E2%2597%25AF%25E4%25B8%2587%25E5%2586%2586%25EF%25BC%259FPTU%25E3%2581%25AA%25E3%2583%25A2%25E3%2583%2587%25E3%2583%25AB%25E3%2583%2587%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25A4%25E6%259C%2589%25E7%2584%25A1%25E3%2582%2592%25E4%25B8%2580%25E6%258B%25AC%25E7%25A2%25BA%25E8%25AA%258D%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258B%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Naoki%2520Matsumoto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2YxMjVkOWVmNWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Naoki Matsumoto</dc:creator></item><item><title><![CDATA[テナント内の全AOAIリソースがちゃんとオプトアウトできているかを一気に確認するスクリプトを書いてみた話]]></title><description><![CDATA[
+ はじめに
+Azure OpenAI Serviceを利用する際、データプライバシーとセキュリティは非常に重要な要素です。Azure OpenAI ServiceにはAbuse Monitoring（悪用監視）機能があり、これによりリソースの使用状況が監視されます。通常、デフォルトで有効化されているこの機能ですが、必要に応じてMicrosoftが用意している申請フォームから申請を出し､承認が得られれば無効化（オプトアウト）することもできます。
+以下の図は､LLMへの入出力データがどのように処理されるかを示しています。
+図の真ん中あたりにAbuse Monitoringの話が記載されてい...]]></description><link>https://zenn.dev/chips0711/articles/dd970558754075</link><guid isPermaLink="true">https://zenn.dev/chips0711/articles/dd970558754075</guid><pubDate>Thu, 12 Sep 2024 14:53:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Q8rkoV6e--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2586%25E3%2583%258A%25E3%2583%25B3%25E3%2583%2588%25E5%2586%2585%25E3%2581%25AE%25E5%2585%25A8AOAI%25E3%2583%25AA%25E3%2582%25BD%25E3%2583%25BC%25E3%2582%25B9%25E3%2581%258C%25E3%2581%25A1%25E3%2582%2583%25E3%2582%2593%25E3%2581%25A8%25E3%2582%25AA%25E3%2583%2597%25E3%2583%2588%25E3%2582%25A2%25E3%2582%25A6%25E3%2583%2588%25E3%2581%25A7%25E3%2581%258D%25E3%2581%25A6%25E3%2581%2584%25E3%2582%258B%25E3%2581%258B%25E3%2582%2592%25E4%25B8%2580%25E6%25B0%2597%25E3%2581%25AB%25E7%25A2%25BA%25E8%25AA%258D%25E3%2581%2599%25E3%2582%258B%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2583%2588%25E3%2582%2592%25E6%259B%25B8%25E3%2581%2584%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Naoki%2520Matsumoto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2YxMjVkOWVmNWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Naoki Matsumoto</dc:creator></item><item><title><![CDATA[ShellScript/Dockerfileの可読性を上げるヒアドキュメントの使い方]]></title><description><![CDATA[
+ これは何?
+shell scriptやDockerfile等を書く時にヒアドキュメントを使うと完結かつ，わかりやすく書くことができます。
+例: ヒアドキュメントを使わないDockerfileのRUN
+RUN apt-get update -y &amp;&amp; \
+    apt-get install -y --no-install-recommends sudo &amp;&amp; \
+    echo 'Creating ${USER_NAME} group.' &amp;&amp; \
+    addgroup ${USER_NAME} &amp;&amp; \
+   ...]]></description><link>https://zenn.dev/sigma_tom/articles/d7fe76cd063320</link><guid isPermaLink="true">https://zenn.dev/sigma_tom/articles/d7fe76cd063320</guid><pubDate>Mon, 09 Sep 2024 06:46:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Xs7g8yeK--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ShellScript%252FDockerfile%25E3%2581%25AE%25E5%258F%25AF%25E8%25AA%25AD%25E6%2580%25A7%25E3%2582%2592%25E4%25B8%258A%25E3%2581%2592%25E3%2582%258B%25E3%2583%2592%25E3%2582%25A2%25E3%2583%2589%25E3%2582%25AD%25E3%2583%25A5%25E3%2583%25A1%25E3%2583%25B3%25E3%2583%2588%25E3%2581%25AE%25E4%25BD%25BF%25E3%2581%2584%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:sigma%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS1dYMkRnWUs1akI0RHBxcTN3Y1hwOGV5X0RKbzVxVC12QW5aUHoyOTJyPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sigma</dc:creator></item><item><title><![CDATA[人生について考えていたら出来上がった、VSCode React開発おすすめ拡張機能一括インストールシェルスクリプト]]></title><description><![CDATA[
+ React.js 開発に役立つ VSCode 拡張機能を一括でインストールするためのシェルスクリプトです。
+パソコンの移行作業をしつつ人生について考えていたら出来上がったのでこちらで公開します。
+https://github.com/DaisukeMinagawa/vscode-react-extensions-install-script
+
+ インストールする拡張機能
+・ES7 React/Redux/GraphQL/React-Native snippets
+・Prettier - Code formatter
+・ESLint
+・Auto Close Tag
+・Auto Rena...]]></description><link>https://zenn.dev/kai00/articles/ba16db8f870afe</link><guid isPermaLink="true">https://zenn.dev/kai00/articles/ba16db8f870afe</guid><pubDate>Sat, 07 Sep 2024 03:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BxHhLQCv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E4%25BA%25BA%25E7%2594%259F%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E8%2580%2583%25E3%2581%2588%25E3%2581%25A6%25E3%2581%2584%25E3%2581%259F%25E3%2582%2589%25E5%2587%25BA%25E6%259D%25A5%25E4%25B8%258A%25E3%2581%258C%25E3%2581%25A3%25E3%2581%259F%25E3%2580%2581VSCode%2520React%25E9%2596%258B%25E7%2599%25BA%25E3%2581%258A%25E3%2581%2599%25E3%2581%2599%25E3%2582%2581%25E6%258B%25A1%25E5%25BC%25B5%25E6%25A9%259F%25E8%2583%25BD%25E4%25B8%2580%25E6%258B%25AC%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2582%25B7%25E3%2582%25A7%25E3%2583%25AB%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kai%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2hxalVERG5JdTFaMzBycVBZeWplblRwMmM0U3dKaGhnWnhiRHVGZ1E9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kai</dc:creator></item><item><title><![CDATA[C#で、.NET ランタイムのインストールが不要な単一実行ファイルを作成し、WindowsとmacOSで動作させる方法]]></title><description><![CDATA[
+ はじめに
+ツールを作成するときに便利な、単一実行ファイルを作成する方法です。
+dotnet環境がインストールされていない環境でも実行できる設定を行なっています。
+シェルスクリプトで対応できない規模のプログラムを作成するときに使用します。
+また、Unityなどで使用しているソースコードやライブラリを共有して使うこともできます。
+dotnet sdk 8.0を使用しています。
+dotnet --info% dotnet --info
+.NET SDK:
+ Version:           8.0.401
+ Commit:            811edcc344
+ Workload...]]></description><link>https://zenn.dev/s_ryuuki/articles/6efc44d1644e4a</link><guid isPermaLink="true">https://zenn.dev/s_ryuuki/articles/6efc44d1644e4a</guid><pubDate>Sat, 07 Sep 2024 02:55:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--maBcAyD_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:C%2523%25E3%2581%25A7%25E3%2580%2581.NET%2520%25E3%2583%25A9%25E3%2583%25B3%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25A0%25E3%2581%25AE%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%258C%25E4%25B8%258D%25E8%25A6%2581%25E3%2581%25AA%25E5%258D%2598%25E4%25B8%2580%25E5%25AE%259F%25E8%25A1%258C%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2592%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2597%25E3%2580%2581Windows%25E3%2581%25A8macOS%25E3%2581%25A7%25E5%258B%2595%25E4%25BD%259C%25E3%2581%2595%25E3%2581%259B%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:s_ryuuki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2h4OTgtUmxVdWxra0JEengtN2pQRE8tX2R6by02cGZNVWxHdTl5R2c9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>s_ryuuki</dc:creator></item><item><title><![CDATA[Laravel開発のVScode用拡張機能を手動で入れるのに頭が来たので一括インストールシェルを書いた]]></title><description><![CDATA[
+ VSCodeのお勧めされているLaravel関連拡張機能一覧
+
+Laravel Blade Snippets
+Laravel 5 Snippets
+Laravel Extra Intellisense
+Laravel Blade Formatter
+Laravel Goto View
+Laravel GoTo Controller
+Laravel Goto Components
+Laravel Extension Pack
+Laravel Goto Config
+
+これらを一括インストールするシェルを書きました。もう環境構築なんて嫌だ！
+https://github.com/Dais...]]></description><link>https://zenn.dev/kai00/articles/88f539a84000df</link><guid isPermaLink="true">https://zenn.dev/kai00/articles/88f539a84000df</guid><pubDate>Sat, 07 Sep 2024 01:01:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--FCOdc8Tj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Laravel%25E9%2596%258B%25E7%2599%25BA%25E3%2581%25AEVScode%25E7%2594%25A8%25E6%258B%25A1%25E5%25BC%25B5%25E6%25A9%259F%25E8%2583%25BD%25E3%2582%2592%25E6%2589%258B%25E5%258B%2595%25E3%2581%25A7%25E5%2585%25A5%25E3%2582%258C%25E3%2582%258B%25E3%2581%25AE%25E3%2581%25AB%25E9%25A0%25AD%25E3%2581%258C%25E6%259D%25A5%25E3%2581%259F%25E3%2581%25AE%25E3%2581%25A7%25E4%25B8%2580%25E6%258B%25AC%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2582%25B7%25E3%2582%25A7%25E3%2583%25AB%25E3%2582%2592%25E6%259B%25B8%25E3%2581%2584%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kai%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2hxalVERG5JdTFaMzBycVBZeWplblRwMmM0U3dKaGhnWnhiRHVGZ1E9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kai</dc:creator></item><item><title><![CDATA[Makefileで赤文字 ( 色付きの文字 ) を標準出力する]]></title><description><![CDATA[
+ コード例
+FONT_RED := $(shell tput setaf 1)
+FONT_RESET := $(shell tput sgr0)
+
+print-test:
+	@printf "$(FONT_RED)red$(FONT_RESET)\n"
+
+
+ 実行例
+make print-test
+
+
+ チャットメンバー募集
+何か質問、悩み事、相談などあればLINEオープンチャットもご利用ください。
+https://line.me/ti/g2/eEPltQ6Tzh3pYAZV8JXKZqc7PJ6L0rpm573dcQ
+
+ プロフィール・経歴
+https://github.com/Yu...]]></description><link>https://zenn.dev/yumainaura/articles/qiita-2024-07-25t11_12_09-09_00</link><guid isPermaLink="true">https://zenn.dev/yumainaura/articles/qiita-2024-07-25t11_12_09-09_00</guid><pubDate>Thu, 05 Sep 2024 12:20:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hmfiSIaw--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Makefile%25E3%2581%25A7%25E8%25B5%25A4%25E6%2596%2587%25E5%25AD%2597%2520%2528%2520%25E8%2589%25B2%25E4%25BB%2598%25E3%2581%258D%25E3%2581%25AE%25E6%2596%2587%25E5%25AD%2597%2520%2529%2520%25E3%2582%2592%25E6%25A8%2599%25E6%25BA%2596%25E5%2587%25BA%25E5%258A%259B%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E7%25A8%25B2%25E6%25B5%25A6%25E6%2582%25A0%25E9%25A6%25AC%2520%2528%25E3%2581%2584%25E3%2581%25AA%25E3%2581%2586%25E3%2582%2589%25E3%2582%2586%25E3%2581%2586%25E3%2581%25BE%2529%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FGZFp1Y3BPSm80MUYydFUxV05wb0owWGNCOTBiUGp1MVdxUmtEWjduWmRhSTlZPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>稲浦悠馬 (いなうらゆうま)</dc:creator></item><item><title><![CDATA[ディレクトリ配下のファイルをキーワード検索して一括置換する]]></title><description><![CDATA[
+ 結論
+ディレクトリ配下のファイルをキーワード検索して一括置換する
+ag -l 'keyword' | xargs perl -pi -e 's/old/new/g'
+
+ 解説
+
+ キーワード検索
+全文検索を使います。
+ag -l 'keyword' 
+-l オプションは、マッチしたファイル名だけを表示します。デフォルトだと、ファイルのキーワードの入っている行を表示してくれます。
+私はSilver Searcherを使っていますが、別のものを使っても良いと思います。
+https://github.com/ggreer/the_silver_searcher
+
+ ファイルごとに置換処理を...]]></description><link>https://zenn.dev/shundeveloper/articles/ec300e0385fe5b</link><guid isPermaLink="true">https://zenn.dev/shundeveloper/articles/ec300e0385fe5b</guid><pubDate>Wed, 04 Sep 2024 11:22:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_9eY3dR4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2587%25E3%2582%25A3%25E3%2583%25AC%25E3%2582%25AF%25E3%2583%2588%25E3%2583%25AA%25E9%2585%258D%25E4%25B8%258B%25E3%2581%25AE%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2592%25E3%2582%25AD%25E3%2583%25BC%25E3%2583%25AF%25E3%2583%25BC%25E3%2583%2589%25E6%25A4%259C%25E7%25B4%25A2%25E3%2581%2597%25E3%2581%25A6%25E4%25B8%2580%25E6%258B%25AC%25E7%25BD%25AE%25E6%258F%259B%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:shunsock%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY3Y2U4NzUxNzkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>shunsock</dc:creator></item><item><title><![CDATA[Shellを使ったプロセスの非同期実行]]></title><description><![CDATA[
+ Shellを使ったプロセスの非同期実行
+シェルをマルチプロセスで動かす方法ってどんなんがあるか気になったので調査。
+
+ &amp;バックグラウンド実行をwaitを使う
+
+プロセスをバックグラウンドで実行するためにアンパサンドをつける
+直後に$!でプロセスIDを取得
+wait pid を使ってプロセスを待つ
+
+(
+  sleep 3
+  exit 0
+) &amp;
+PID1=$!
+
+(
+  sleep 9
+  exit 0
+) &amp;
+PID2=$!
+
+wait $PID1 $PID2
+
+ execとプロセス置換
+
+exec 3&lt; &lt;(cp largefile1 la...]]></description><link>https://zenn.dev/masaki_mori72/articles/820d267f3e0610</link><guid isPermaLink="true">https://zenn.dev/masaki_mori72/articles/820d267f3e0610</guid><pubDate>Mon, 02 Sep 2024 05:33:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--OtZZPyzm--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Shell%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%259F%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25BB%25E3%2582%25B9%25E3%2581%25AE%25E9%259D%259E%25E5%2590%258C%25E6%259C%259F%25E5%25AE%259F%25E8%25A1%258C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:masaki%2520mori%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2h0Zy0zeERLZF9VY19OaFA0TVB2S1BqRkNFc2JrV1loSk5aTV9LPXMyNTAtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>masaki mori</dc:creator></item><item><title><![CDATA[【備忘録】go installでインストールしたモジュールのパスが通ってないとき]]></title><description><![CDATA[go installでインストールしたモジュールにパスが通ってないことがある。
+その場合はターミナルで以下のコマンドを実行し、GOの環境変数を参照する。
+go env GOPATH
+この階層の下にインストールしたモジュールのディレクトリがあるので、各自のシェルに従ってパスを通す。
+]]></description><link>https://zenn.dev/antapp/articles/8ea596c64c2d8d</link><guid isPermaLink="true">https://zenn.dev/antapp/articles/8ea596c64c2d8d</guid><pubDate>Fri, 30 Aug 2024 09:00:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Oj7FgZbv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%2582%2599%25E5%25BF%2598%25E9%258C%25B2%25E3%2580%2591go%2520install%25E3%2581%25A7%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%2597%25E3%2581%259F%25E3%2583%25A2%25E3%2582%25B8%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%25AE%25E3%2583%2591%25E3%2582%25B9%25E3%2581%258C%25E9%2580%259A%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25AA%25E3%2581%2584%25E3%2581%25A8%25E3%2581%258D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kutsu-4ta%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZkYWE2ZmJlNGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kutsu-4ta</dc:creator></item><item><title><![CDATA[source .bashrc 等でシェルの動作確認するのはやめてほしい]]></title><description><![CDATA[source コマンドを使用したシェルの設定確認はやめてほしいです.
+代わりに,
+exec $SHELL -l
+を使用してください.
+
+ どうして
+.bashrc, .profile, .bash_profile などのシェル設定ファイルやPATH/環境変数の設定を確認する際に, source コマンド(e.g. source .bashrc) を利用するのはおすすめできません.
+既に読み込まれた設定が残っているため, 設定が正しく反映されているかどうかや, 設定の参照状況や優先順位を確認することが難しくなるからです.
+「source コマンドでパスが通ったのが確認できたのでOKだ!」っ...]]></description><link>https://zenn.dev/sashimi/articles/f28f9c00d24e5c</link><guid isPermaLink="true">https://zenn.dev/sashimi/articles/f28f9c00d24e5c</guid><pubDate>Fri, 30 Aug 2024 04:40:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--aCnfbyvK--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:source%2520.bashrc%2520%25E7%25AD%2589%25E3%2581%25A7%25E3%2582%25B7%25E3%2582%25A7%25E3%2583%25AB%25E3%2581%25AE%25E5%258B%2595%25E4%25BD%259C%25E7%25A2%25BA%25E8%25AA%258D%25E3%2581%2599%25E3%2582%258B%25E3%2581%25AE%25E3%2581%25AF%25E3%2582%2584%25E3%2582%2581%25E3%2581%25A6%25E3%2581%25BB%25E3%2581%2597%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:sashimi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2k0dkdSZ0t3ZWRrVWZwYXFnbmt6UHJSQXlfTHJxMHdGZUMycEFLalE9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sashimi</dc:creator></item><item><title><![CDATA[Linux, shell 同字が2回以上繰返(連続)した文字列を含む行をgrep]]></title><description><![CDATA[
+ Linux, shell 同字が2回以上繰返(連続)した文字列を含む行をgrep
+2024-08-11
+
+
+ (1).何がしたかったか
+
+textファイル(文献)の中で、繰返して(連続して)使用されている「字」をgrepしたかった。
+
+桃之夭夭　灼灼其華
+之子于歸　宜其室家
+このような羅列が6000行もあり、繰返して(連続して)使用されている「字」を知りたかった。この例なら「夭夭」「灼灼」
+
+
+ (2).結論
+
+できた。
+
+grep でいける
+sed でもいける
+
+
+
+
+
+ (3).環境
+
+Ubuntu 22.04
+GNU grep 3.7
+GNU sed 4.8
+
+
+
+ (4).g...]]></description><link>https://zenn.dev/sorehaomosiroi/articles/sorehaomosiroi-20240811_linux_grep_dup_char</link><guid isPermaLink="true">https://zenn.dev/sorehaomosiroi/articles/sorehaomosiroi-20240811_linux_grep_dup_char</guid><pubDate>Sat, 10 Aug 2024 23:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ipfcG5uo--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%252C%2520shell%2520%25E5%2590%258C%25E5%25AD%2597%25E3%2581%258C2%25E5%259B%259E%25E4%25BB%25A5%25E4%25B8%258A%25E7%25B9%25B0%25E8%25BF%2594%2528%25E9%2580%25A3%25E7%25B6%259A%2529%25E3%2581%2597%25E3%2581%259F%25E6%2596%2587%25E5%25AD%2597%25E5%2588%2597%25E3%2582%2592%25E5%2590%25AB%25E3%2582%2580%25E8%25A1%258C%25E3%2582%2592grep%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2584%25E3%2581%2584%25E3%2581%25AD%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2YyMDNkNWJiZDcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>いいね</dc:creator></item><item><title><![CDATA[特定のbranch以外を削除するシェルスクリプト]]></title><description><![CDATA[
+ モチベーション
+GitHubを使用して開発の仕事をしていると、手元にブランチが溜まってくるので、必要なブランチ以外はシュッと削除したいことがあります。
+ということで、以下の要件でシェルスクリプトを作成しました。
+
+main、master、staging、カレントブランチは削除しない
+その時々で削除したくないブランチが存在する場合があるので、上記以外に削除しないブランチを柔軟に設定したい（引数で渡せればOK）
+
+
+ シェルスクリプト
+以下のスクリプトを.zshrcに追記しました。
+※こちらはzshでのみ動作確認しています。
+# main,master,staging,カレントブランチ,...]]></description><link>https://zenn.dev/harasho/articles/shell-script-for-delete-git-branches</link><guid isPermaLink="true">https://zenn.dev/harasho/articles/shell-script-for-delete-git-branches</guid><pubDate>Thu, 08 Aug 2024 14:01:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--UYMZOMmq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%2589%25B9%25E5%25AE%259A%25E3%2581%25AEbranch%25E4%25BB%25A5%25E5%25A4%2596%25E3%2582%2592%25E5%2589%258A%25E9%2599%25A4%25E3%2581%2599%25E3%2582%258B%25E3%2582%25B7%25E3%2582%25A7%25E3%2583%25AB%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:harasho%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE0N2IyMDI1NzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>harasho</dc:creator></item><item><title><![CDATA[shells]]></title><description><![CDATA[
+ shells
+
+ shells
+#!/bin/bash
+
+urls=(
+    "https://coinmarketcap.com/ja/currencies/shuffle/"
+)
+
+while true; do
+    url=${urls[$RANDOM % ${#urls[@]}]}
+    sleep_time=$((600 + RANDOM % 1201))
+
+    echo "Accessing: $url"
+    curl -s "$url" &gt; /dev/null
+
+    echo "Sleeping for $sleep_time seconds.....]]></description><link>https://zenn.dev/blockchian/articles/87ecd5d2fb9908</link><guid isPermaLink="true">https://zenn.dev/blockchian/articles/87ecd5d2fb9908</guid><pubDate>Mon, 05 Aug 2024 04:36:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--clUOjAQZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_80:shells%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:meta%2Cx_90%2Cy_121/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>meta</dc:creator></item><item><title><![CDATA[新しい環境で活用！ZshとOh My Zshの設定ガイド（Dockerでのテスト導入も解説）]]></title><description><![CDATA[
+ はじめに
+こんにちは、Kouです。
+CentOSのメンテナンスサポートサポートが終了し、新しいOSへの移行が必要になってきました。
+例えば、Rockey LinuxやAlmaLinuxなどのディストリビューションが注目されています。
+これらの新しいOS環境で、ZshとOh My Zshを使って、より快適な開発環境を整える方法をご紹介します。
+Dockerを使ってテスト導入する方法も解説するので、ぜひお試しください。
+前回は「LaravelでAWS CloudFrontの署名付きCookieを生成・設定してみた」を投稿しました。
+
+
+ Zshとは
+
+
+高度な補完: コマンドや引数の補完...]]></description><link>https://zenn.dev/carenet/articles/zsh_configuration_and_ohmyzsh_setup</link><guid isPermaLink="true">https://zenn.dev/carenet/articles/zsh_configuration_and_ohmyzsh_setup</guid><pubDate>Fri, 02 Aug 2024 06:36:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--q8ENTz-N--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%2596%25B0%25E3%2581%2597%25E3%2581%2584%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25A7%25E6%25B4%25BB%25E7%2594%25A8%25EF%25BC%2581Zsh%25E3%2581%25A8Oh%2520My%2520Zsh%25E3%2581%25AE%25E8%25A8%25AD%25E5%25AE%259A%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%25EF%25BC%2588Docker%25E3%2581%25A7%25E3%2581%25AE%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E5%25B0%258E%25E5%2585%25A5%25E3%2582%2582%25E8%25A7%25A3%25E8%25AA%25AC%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Kou%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE0MTRiZmIwZWQuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:CareNet%2520Engineers%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YjAxZHZYTmpqcFVER2lmaDBXNVRCQjlCcTFWTVpHc3NpSV9yN1A9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kou</dc:creator></item><item><title><![CDATA[踏み台サーバーから jupyter lab を立ち上げる方法]]></title><description><![CDATA[
+ 前提条件
+client ↔ middle server ↔ target server
+のように middle server を経由して target server にアクセスする場合の設定方法について解説する。
+
+ ssh の設定
+
+ssh の key を登録する。
+
+
+~/.ssh/middle と ~/.ssh/target は手元に置いておく
+
+
+
+~/.ssh/config を設定する
+
+
+~/.ssh/config
+Host MiddleServer
+        HostName        middle-address
+        User          ...]]></description><link>https://zenn.dev/genf740/articles/573ffa39-c0d5-45c4-ad39-b1afbfefbbfb</link><guid isPermaLink="true">https://zenn.dev/genf740/articles/573ffa39-c0d5-45c4-ad39-b1afbfefbbfb</guid><pubDate>Wed, 31 Jul 2024 05:57:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--AzivWopg--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%25B8%258F%25E3%2581%25BF%25E5%258F%25B0%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2581%258B%25E3%2582%2589%2520jupyter%2520lab%2520%25E3%2582%2592%25E7%25AB%258B%25E3%2581%25A1%25E4%25B8%258A%25E3%2581%2592%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:gen740%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pNOGJfSGVlRHJhclh6YllqWnBrQjBWUVZtcExib3ZzRE42WEFoYjdVPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>gen740</dc:creator></item><item><title><![CDATA[Sheldon と、入れて嬉しい Zsh Plugin]]></title><description><![CDATA[Shell に限らず、Plugin Manger は迷います。
+迷った挙句、git-submodule で Plugin を管理していました。
+
+.zshrc
+source ${ZDOTDIR}/submodules/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+カッコつけた結果
+意味がわからないなって個人的に思いました。
+
+ Sheldon
+追加するたびに、submodule コマンドを実行して、 .zshrc にパスを追加する。
+という作業は二重管理してる感じも流石に辛いということで Plugin Manager を探すことにしました
+こう...]]></description><link>https://zenn.dev/yanskun/articles/zsh-plugin-manager</link><guid isPermaLink="true">https://zenn.dev/yanskun/articles/zsh-plugin-manager</guid><pubDate>Wed, 31 Jul 2024 01:40:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wbwwTInB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Sheldon%2520%25E3%2581%25A8%25E3%2580%2581%25E5%2585%25A5%25E3%2582%258C%25E3%2581%25A6%25E5%25AC%2589%25E3%2581%2597%25E3%2581%2584%2520Zsh%2520Plugin%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yanskun%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU0Y2I3NTU5ODcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yanskun</dc:creator></item><item><title><![CDATA[シェルスクリプト 配列 スライス操作]]></title><description><![CDATA[
+ 概要
+シェルスクリプトで配列の特定のインデックス以降の要素を取り出すには、以下の方法を使用できます。Bashの配列スライシング機能を利用すると簡単に実現できます。
+
+ 配列スライシングを使用する
+Bashでは、配列のスライシング（部分配列の抽出）がサポートされています。配列のスライシングを使用して、特定のインデックス以降の要素を取り出す方法を以下に示します。
+#!/bin/bash
+
+# 配列の定義
+arr=("apple" "banana" "cherry" "date" "fig" "grape")
+
+# 開始インデックスを定義（例：2 なら "cherry" 以降の要素を取り出...]]></description><link>https://zenn.dev/takeo/articles/ac479960f6c9cd</link><guid isPermaLink="true">https://zenn.dev/takeo/articles/ac479960f6c9cd</guid><pubDate>Sun, 28 Jul 2024 09:47:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--aFbVQBie--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B7%25E3%2582%25A7%25E3%2583%25AB%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2583%2588%2520%25E9%2585%258D%25E5%2588%2597%2520%25E3%2582%25B9%25E3%2583%25A9%25E3%2582%25A4%25E3%2582%25B9%25E6%2593%258D%25E4%25BD%259C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:takeo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZiNjIxNWNiNzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takeo</dc:creator></item><item><title><![CDATA[シェルスクリプト 文字列結合 JOIN]]></title><description><![CDATA[
+ 概要
+シェルスクリプトで文字列の配列を特定の区切り文字で結合し、1つの文字列を生成する方法について調べました。Goのstrings.Joinのようなことです。
+s := []string{"foo", "bar", "baz"}
+fmt.Println(strings.Join(s, ", ")) // foo,bar,baz
+
+ 方法 1: IFS（内部フィールド区切り文字）を使用する
+Bashシェルでは、IFS変数を使用して配列の要素を結合することができます。以下に例を示します。
+#!/bin/bash
+
+# 配列の定義
+arr=("apple" "banana" "cherry...]]></description><link>https://zenn.dev/takeo/articles/14443692d6a621</link><guid isPermaLink="true">https://zenn.dev/takeo/articles/14443692d6a621</guid><pubDate>Sun, 28 Jul 2024 09:30:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--QihLR-db--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B7%25E3%2582%25A7%25E3%2583%25AB%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2583%2588%2520%25E6%2596%2587%25E5%25AD%2597%25E5%2588%2597%25E7%25B5%2590%25E5%2590%2588%2520JOIN%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:takeo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZiNjIxNWNiNzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takeo</dc:creator></item><item><title><![CDATA[MacのTerminalで補完を有効にする]]></title><description><![CDATA[
+ TL; DR
+.zshrcに以下の設定を追加する
+if type brew &amp;&gt;/dev/null
+then
+  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+
+  autoload -Uz compinit
+  compinit
+fi
+
+ 注意
+
+対象のCLIアプリがHomebrewでインストールされていること
+補完が実装されていること（有名なアプリなら大体実装されている）
+
+
+ 説明
+
+
+brewでインストールしたアプリの補完用のファイルは$(brew --prefix)/share/zsh/s...]]></description><link>https://zenn.dev/local/articles/534b2807db2226</link><guid isPermaLink="true">https://zenn.dev/local/articles/534b2807db2226</guid><pubDate>Fri, 26 Jul 2024 04:09:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qoRfpSAH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Mac%25E3%2581%25AETerminal%25E3%2581%25A7%25E8%25A3%259C%25E5%25AE%258C%25E3%2582%2592%25E6%259C%2589%25E5%258A%25B9%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Catfish%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2QzOGQ5MDdiN2EuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Catfish</dc:creator></item></channel></rss>

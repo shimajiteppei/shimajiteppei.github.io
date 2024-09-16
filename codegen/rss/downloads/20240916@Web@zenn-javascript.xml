@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「JavaScript」のフィード]]></title><description><![CDATA[Zennのトピック「JavaScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/javascript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/64acd76870.png</url><title>Zennの「JavaScript」のフィード</title><link>https://zenn.dev/topics/javascript</link></image><generator>zenn.dev</generator><lastBuildDate>Mon, 16 Sep 2024 06:39:17 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/javascript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Elysia.jsを始める【Life Cycle】]]></title><description><![CDATA[※ この記事は、https://elysiajs.com/essential/life-cycle.html を日本語に翻訳しながら要点をまとめたものになるので、詳細は公式を確認してください。
+
+ Elysia.jsでのライフサイクル図
+
+
+ Events
+Elysiaでのライフサイクルの大まかな概要は以下となる。
+
+
+
+イベント名
+内容
+
+
+
+
+Request
+新しいイベントを受信した時に通知される。この際、オーバーヘッドを減らすために最小限のコンテキストのみが提供される。
+
+
+Parse
+リクエストのあったbodyを解析し、Context.bodyへ内容を追加する。
+
+
+Transf...]]></description><link>https://zenn.dev/69incat/articles/639cf1d3e3ff8c</link><guid isPermaLink="true">https://zenn.dev/69incat/articles/639cf1d3e3ff8c</guid><pubDate>Mon, 16 Sep 2024 06:04:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--eKTWbHZs--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Elysia.js%25E3%2582%2592%25E5%25A7%258B%25E3%2582%2581%25E3%2582%258B%25E3%2580%2590Life%2520Cycle%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Rock-in-Cats%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2ljc0VoMTZOeVB2NTRXT3B1Q1BpanRlaWVCWkdNQ21Hay1yN281Q2c9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Rock-in-Cats</dc:creator></item><item><title><![CDATA[Jotaiはどのようにして誕生したのか、単なるRecoilの代替手段なのか？]]></title><description><![CDATA[こんにちは、Jotaiの作者です。Jotaiが生まれるまでに様々な取り組みをした歴史を短い記事にしてありますのでよろしければご覧ください。今後のJotaiの発展に期待します。
+https://blog.axlight.com/posts/how-jotai-was-born/
+以下、ChatGPTによる翻訳です。
+
+
+ はじめに
+この投稿では、なぜ私がJotaiの開発を始めたのか、その背景にあるストーリーを共有したいと思います。JotaiはしばしばRecoilと似たような解決策と見なされますが、その開発にはもっと長い歴史があります。
+
+ React Hooks
+React Hooksが最...]]></description><link>https://zenn.dev/dai_shi/articles/f770b771b75f73</link><guid isPermaLink="true">https://zenn.dev/dai_shi/articles/f770b771b75f73</guid><pubDate>Mon, 16 Sep 2024 05:36:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hQUgYi4p--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Jotai%25E3%2581%25AF%25E3%2581%25A9%25E3%2581%25AE%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E3%2581%2597%25E3%2581%25A6%25E8%25AA%2595%25E7%2594%259F%25E3%2581%2597%25E3%2581%259F%25E3%2581%25AE%25E3%2581%258B%25E3%2580%2581%25E5%258D%2598%25E3%2581%25AA%25E3%2582%258BRecoil%25E3%2581%25AE%25E4%25BB%25A3%25E6%259B%25BF%25E6%2589%258B%25E6%25AE%25B5%25E3%2581%25AA%25E3%2581%25AE%25E3%2581%258B%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:daishi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzcwZGNhM2E2Y2IuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>daishi</dc:creator></item><item><title><![CDATA[【JavaScript】なんやこの記法...！「~indexOf()」ビット否定演算子]]></title><description><![CDATA[
+ なんやこの記法...！！
+ある日の業務中、チームメンバーが書いた以下のようなコードが目に止まりました。
+(なんやこの記法...！ String.indexOf() の前にチルダ ~ がついとるで...！)
+if (~text.indexOf(searchText)) {
+  return something
+}
+大変お恥ずかしながら、自分で書いたことはおろか見たこともなく、何が行われているのか全くわかりませんでした。
+
+ 結論
+JavaScriptのチルダ ~ はビット否定演算子で、上記のコードでは indexOf() の返り値の各ビットを反転しているのでした。
+
+
+ ビット否定 (...]]></description><link>https://zenn.dev/takada/articles/js-tilde_usage</link><guid isPermaLink="true">https://zenn.dev/takada/articles/js-tilde_usage</guid><pubDate>Mon, 16 Sep 2024 02:29:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8YQAEv0A--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590JavaScript%25E3%2580%2591%25E3%2581%25AA%25E3%2582%2593%25E3%2582%2584%25E3%2581%2593%25E3%2581%25AE%25E8%25A8%2598%25E6%25B3%2595...%25EF%25BC%2581%25E3%2580%258C%7EindexOf%2528%2529%25E3%2580%258D%25E3%2583%2593%25E3%2583%2583%25E3%2583%2588%25E5%2590%25A6%25E5%25AE%259A%25E6%25BC%2594%25E7%25AE%2597%25E5%25AD%2590%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259F%25E3%2581%258B%25E3%2581%25A0%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzljNTBmMDU1ZGEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>たかだ</dc:creator></item><item><title><![CDATA[関数に引数を渡す場合のイベントハンドラ]]></title><description><![CDATA[「そういえばそうだったな…？」と思い出したのでここに書き留めておく。
+addEventListenerでイベントハンドラに引数を渡したい場合、関数を直接実行してしまうと即時実行されるため、イベント発生前に処理が完了してしまう。
+そのため、無名関数やアロー関数を使ってイベントが発生したときに初めて関数を実行されるようにする必要がある。
+
+ 関数を直接実行する例
+const button = document.querySelector('.js-button');
+const message = document.querySelector('.js-message');
+
+/**
+ * ...]]></description><link>https://zenn.dev/052222/articles/552850bab378c4</link><guid isPermaLink="true">https://zenn.dev/052222/articles/552850bab378c4</guid><pubDate>Sun, 15 Sep 2024 23:46:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--kIcXtGrD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E9%2596%25A2%25E6%2595%25B0%25E3%2581%25AB%25E5%25BC%2595%25E6%2595%25B0%25E3%2582%2592%25E6%25B8%25A1%25E3%2581%2599%25E5%25A0%25B4%25E5%2590%2588%25E3%2581%25AE%25E3%2582%25A4%25E3%2583%2599%25E3%2583%25B3%25E3%2583%2588%25E3%2583%258F%25E3%2583%25B3%25E3%2583%2589%25E3%2583%25A9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Toshi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvMC5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Toshi</dc:creator></item><item><title><![CDATA[Mapbox Newsletter WEEKLY TIPSの解説 -「GeoJSONラインを追加」]]></title><description><![CDATA[
+ はじめに
+この記事は、先日配信されたMapbox NewsletterのWEEKLY TIPSで紹介されていた「GeoJSONラインを追加」についての解説です。このサンプルではGeoJSONソースの使い方を例示しています。また、Newsletterの購読はこちらからお申し込みいただけます。
+以下が本サンプルのデモです。
+
+
+ コードを確認
+まずExamplesのコードを見に行きましょう。
+日本語サイト
+
+英語サイト
+
+基本的に同じコードですが、英語版はスタイルがMapbox Streets v12にアップグレードされているのでこちらを使用します。Mapbox Streets v11で...]]></description><link>https://zenn.dev/mapbox_japan/articles/ef21e5f32d6cbf</link><guid isPermaLink="true">https://zenn.dev/mapbox_japan/articles/ef21e5f32d6cbf</guid><pubDate>Sun, 15 Sep 2024 23:43:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3zP4eJfC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Mapbox%2520Newsletter%2520WEEKLY%2520TIPS%25E3%2581%25AE%25E8%25A7%25A3%25E8%25AA%25AC%2520-%25E3%2580%258CGeoJSON%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%2592%25E8%25BF%25BD%25E5%258A%25A0%25E3%2580%258D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:OttyLab%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RmZWNmNDhhMWMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%259E%25E3%2583%2583%25E3%2583%2597%25E3%2583%259C%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25B9%25E3%2583%25BB%25E3%2582%25B8%25E3%2583%25A3%25E3%2583%2591%25E3%2583%25B3%25E5%2590%2588%25E5%2590%258C%25E4%25BC%259A%25E7%25A4%25BE%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhMGJmZWJmZmQuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>OttyLab</dc:creator></item><item><title><![CDATA[org-babelでJavaScriptを実行しようとすると"command not found: node" エラーになる]]></title><description><![CDATA[Emacsのorg-modeでJavaScriptを実行しようと思い、init.elに以下の記述をしました。
+
+ init.el
+(require 'ob-js)
+(org-babel-do-load-languages 'org-babel-load-languages
+  '((js . t))
+)
+
+そして、orgファイルにjsのコードブロックを記述し、実行してみましたが、
+command not found: node と言われてしまいます。
+
+nodeはインストール済みです。念の為ターミナルで確認しました。
+$ node --version
+v20.6.1
+しかし、org-mo...]]></description><link>https://zenn.dev/ikoamu/articles/c4cf690c4777e3</link><guid isPermaLink="true">https://zenn.dev/ikoamu/articles/c4cf690c4777e3</guid><pubDate>Sun, 15 Sep 2024 16:17:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--AJUF0ZB3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:org-babel%25E3%2581%25A7JavaScript%25E3%2582%2592%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%2597%25E3%2582%2588%25E3%2581%2586%25E3%2581%25A8%25E3%2581%2599%25E3%2582%258B%25E3%2581%25A8%2522command%2520not%2520found%253A%2520node%2522%2520%25E3%2582%25A8...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ikoamu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhiZGM5Y2E2MTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ikoamu</dc:creator></item><item><title><![CDATA[【JavaScript・TypeScript】配列の操作はなるべくfor文を避けるべきと思う理由と代わりに使うメソッドの例]]></title><description><![CDATA[タイトルの通り、配列の操作を行う際は、for文をなるべく用いない方が良いと思っています。
+主な理由はコードの見通しが良くなるためです。
+具体的なコードを用いて解説していきます。
+
+ 配列の要素から1つ条件を満たす要素を返す場合は、find()を用いる
+まず、以下のコードをご覧ください。
+ネストが深すぎて、読むのが嫌になると思います。
+const findValidItem = (items: number[]): number | undefined =&gt; {
+    if (items.length &gt; 0) {
+        for (let i = 0; i &lt;...]]></description><link>https://zenn.dev/ohimusdev46301/articles/960cd3bc35478d</link><guid isPermaLink="true">https://zenn.dev/ohimusdev46301/articles/960cd3bc35478d</guid><pubDate>Sun, 15 Sep 2024 01:05:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--M83gszEs--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590JavaScript%25E3%2583%25BBTypeScript%25E3%2580%2591%25E9%2585%258D%25E5%2588%2597%25E3%2581%25AE%25E6%2593%258D%25E4%25BD%259C%25E3%2581%25AF%25E3%2581%25AA%25E3%2582%258B%25E3%2581%25B9%25E3%2581%258Ffor%25E6%2596%2587%25E3%2582%2592%25E9%2581%25BF%25E3%2581%2591%25E3%2582%258B%25E3%2581%25B9%25E3%2581%258D%25E3%2581%25A8%25E6%2580%259D%25E3%2581%2586%25E7%2590%2586%25E7%2594%25B1%25E3%2581%25A8%25E4%25BB%25A3%25E3%2582%258F%25E3%2582%258A%25E3%2581%25AB%25E4%25BD%25BF%25E3%2581%2586%25E3%2583%25A1%25E3%2582%25BD...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Wataru%2520Takiguchi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdkOTBhM2EyYTcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Wataru Takiguchi</dc:creator></item><item><title><![CDATA[【JavaScript】シャローコピーとディープコピー]]></title><description><![CDATA[
+ シャローコピー（浅いコピー）
+
+シャローコピーを作成するには、スプレッド演算子などが使用できる
+これらの方法では、オブジェクトのトップレベルのプロパティのみがコピーされ、ネストされたオブジェクトは参照のまま
+
+const original = {
+    number: 1,
+    nestedArray: [2, 3]
+};
+
+// シャローコピーを作成
+const shallowCopy = { ...original };
+
+// シャローコピーのネストされたオブジェクトを変更
+shallowCopy.nestedArray[0] = 99;
+
+console.log(ori...]]></description><link>https://zenn.dev/holy0306/articles/489c18a4c58de7</link><guid isPermaLink="true">https://zenn.dev/holy0306/articles/489c18a4c58de7</guid><pubDate>Sat, 14 Sep 2024 10:58:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--cP5G_anu--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590JavaScript%25E3%2580%2591%25E3%2582%25B7%25E3%2583%25A3%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25B3%25E3%2583%2594%25E3%2583%25BC%25E3%2581%25A8%25E3%2583%2587%25E3%2582%25A3%25E3%2583%25BC%25E3%2583%2597%25E3%2582%25B3%25E3%2583%2594%25E3%2583%25BC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:holy%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q1NjE4YWUxNGEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>holy</dc:creator></item><item><title><![CDATA[Zustandって大規模な状態管理に使えるの？Zustand-Slicesを作ったワケ]]></title><description><![CDATA[個人的にはJotaiの方が大規模開発に向いているのではないかと思うのですが、現状だと大規模開発にはZustandの方が優勢のようです。
+https://x.com/dai_shi/status/1826447367429911018
+質問は「大規模」ではなく「複雑」なので、正確性に欠けますが。
+個人的に大規模に向かないと思った一つの理由はSlicingの対応です。もともと、Slicingの仕組みはZustandには備わっておらず、コミュニティによって発展した使い方です。JSの場合はそれほど困らないのですが、TSの場合は型づけが複雑でドキュメントになってはいるものの、自分ではあまり使う気に...]]></description><link>https://zenn.dev/dai_shi/articles/a08d7e819f4d3f</link><guid isPermaLink="true">https://zenn.dev/dai_shi/articles/a08d7e819f4d3f</guid><pubDate>Sat, 14 Sep 2024 08:09:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0-Jl-7YK--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Zustand%25E3%2581%25A3%25E3%2581%25A6%25E5%25A4%25A7%25E8%25A6%258F%25E6%25A8%25A1%25E3%2581%25AA%25E7%258A%25B6%25E6%2585%258B%25E7%25AE%25A1%25E7%2590%2586%25E3%2581%25AB%25E4%25BD%25BF%25E3%2581%2588%25E3%2582%258B%25E3%2581%25AE%25EF%25BC%259FZustand-Slices%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%25E3%2583%25AF%25E3%2582%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:daishi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzcwZGNhM2E2Y2IuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>daishi</dc:creator></item><item><title><![CDATA[App Routerのデータフェッチコロケーションの学びとGraphQL併用で思ったこと]]></title><description><![CDATA[
+ はじめに
+フロントエンド開発において、データフェッチはパフォーマンスと開発体験に大きく影響してきます。
+私自身、データフェッチのパフォーマンスと開発体験を両方を追うという観点で GraphQL のフラグメントコロケーションがとても良いと感じています。実際に業務で扱っている Next.js App Router のプロジェクトでも GraphQL を採用しています。
+しかし、「Next.js の考え方」を読んだ際に Next.js の fetch でコロケーションをすることで、コロケーションの開発体験を活かしつつ、Next.js のパフォーマンスを最大化できる可能性があることに気づきま...]]></description><link>https://zenn.dev/h_yokoyama/articles/nextjs-fetch-colocation</link><guid isPermaLink="true">https://zenn.dev/h_yokoyama/articles/nextjs-fetch-colocation</guid><pubDate>Sat, 14 Sep 2024 06:23:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--686i_xOz--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:App%2520Router%25E3%2581%25AE%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%2595%25E3%2582%25A7%25E3%2583%2583%25E3%2583%2581%25E3%2582%25B3%25E3%2583%25AD%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2581%25AE%25E5%25AD%25A6%25E3%2581%25B3%25E3%2581%25A8GraphQL%25E4%25BD%25B5%25E7%2594%25A8%25E3%2581%25A7%25E6%2580%259D%25E3%2581%25A3%25E3%2581%259F%25E3%2581%2593%25E3%2581%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Hayato%2520Yokoyama%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFiNDg0ZTcyMTUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Hayato Yokoyama</dc:creator></item><item><title><![CDATA[WixStudioでVeloを使う Step 31 「wix-routerで実現するコンテンツの時限公開」]]></title><description><![CDATA[
+ はじめに
+
+まず、安心してください。前回の記事ではVeloを使わない記事でしたが今回は使います。
+今回のテーマは「時限公開」。動的ページに事件公開を仕掛ける。要は、指定した日時以降にページやコンテンツを見られるようにする。この仕組みをwix-routerを利用して実現する。
+https://dev.wix.com/docs/velo/api-reference/wix-router/introduction
+
+ 目的
+CMSのデータと連動する動的ページに時限公開を仕掛ける。CMSにデータを登録する際に日時を指定する。指定された日時以降に該当ページにアクセスが可能となる。また一覧ページ...]]></description><link>https://zenn.dev/niibori/articles/veloonwixstudio-beginner-0031</link><guid isPermaLink="true">https://zenn.dev/niibori/articles/veloonwixstudio-beginner-0031</guid><pubDate>Sat, 14 Sep 2024 02:05:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4O5OEw3K--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:WixStudio%25E3%2581%25A7Velo%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%2520Step%252031%2520%25E3%2580%258Cwix-router%25E3%2581%25A7%25E5%25AE%259F%25E7%258F%25BE%25E3%2581%2599%25E3%2582%258B%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2586%25E3%2583%25B3%25E3%2583%2584%25E3%2581%25AE%25E6%2599%2582%25E9%2599%2590%25E5%2585%25AC%25E9%2596%258B%25E3%2580%258D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Niibori%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U4ZDA4Mjg3YTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Niibori</dc:creator></item><item><title><![CDATA[ハンバーガーメニューの作り方（jQuery・JavaScript）]]></title><description><![CDATA[Webサイト制作の際に、ハンバーガーメニューをコーディングして作成する場面は多いです。
+この記事では、ハンバーガーメニューの作成方法を紹介します。jQueryを用いる場合と、プレーンなJavaScriptで記述する場合の2通りを解説します。
+
+ 今回作成するもの
+右上のハンバーガーメニューをクリックすると、メニューがスライドダウンするようなものを作成します。
+
+
+ jQueryを用いる場合
+コードは以下の通りです。
+
+jQueryは以下のように記述しています。
+
+jQuery
+$(function(){
+  $('#hamburger').on('click',function(){
+ ...]]></description><link>https://zenn.dev/ryo_hajime/articles/e0c23698ad925e</link><guid isPermaLink="true">https://zenn.dev/ryo_hajime/articles/e0c23698ad925e</guid><pubDate>Sat, 14 Sep 2024 01:44:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jkUJveoL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%258F%25E3%2583%25B3%25E3%2583%2590%25E3%2583%25BC%25E3%2582%25AC%25E3%2583%25BC%25E3%2583%25A1%25E3%2583%258B%25E3%2583%25A5%25E3%2583%25BC%25E3%2581%25AE%25E4%25BD%259C%25E3%2582%258A%25E6%2596%25B9%25EF%25BC%2588jQuery%25E3%2583%25BBJavaScript%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Ryoichi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzgxYTIyODY2YzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Ryoichi</dc:creator></item><item><title><![CDATA[Elysia.jsを始める【Context】]]></title><description><![CDATA[※ 主に https://elysiajs.com/essential/context の日本語訳をしつつ、多少わかりやすい表現に直していたり、独自で検証していたりしたものになっているので、詳細は公式ページを参照してください
+Elysia.jsのContextは各リクエストごとにユニークになっている。
+基本、他のリクエストと共有されない。
+ただし、storeはグローバルな可変状態として共有されるようになっている。
+
+ ElysiaのContextの構成要素
+
+ path
+リクエストのパス名を表す。
+ex)/user/123のようなURLパスがそれにあたる
+
+ body
+HTTPメッセージ...]]></description><link>https://zenn.dev/69incat/articles/bf009fc63152a9</link><guid isPermaLink="true">https://zenn.dev/69incat/articles/bf009fc63152a9</guid><pubDate>Fri, 13 Sep 2024 16:10:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bS-yHDIu--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Elysia.js%25E3%2582%2592%25E5%25A7%258B%25E3%2582%2581%25E3%2582%258B%25E3%2580%2590Context%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Rock-in-Cats%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2ljc0VoMTZOeVB2NTRXT3B1Q1BpanRlaWVCWkdNQ21Hay1yN281Q2c9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Rock-in-Cats</dc:creator></item><item><title><![CDATA[DockerでBunを使ってサーバーを立ててみた]]></title><description><![CDATA[
+ はじめに
+この記事では、JavaScriptランタイムであるBunをDockerコンテナ内で使う方法を紹介します。
+その際、DockerからBunでサーバーを立ち上げ、ホストPCからアクセスするというのをやってみました。
+!
+筆者はDocker初心者なので、必ずしも記事の内容が正しいわけではありません。
+他のサイトや記事も参考にすることをお勧めします。
+
+!
+この記事はQiitaとのマルチポストです。ご了承ください。
+
+Bunのホームページはこちら。
+https://bun.sh
+
+ 環境
+
+Docker 25.0.3
+VSCode 1.93.0
+Mac M1
+
+
+ やり方
+やり方は...]]></description><link>https://zenn.dev/nanasi_1/articles/6375c0fbaa3b8d</link><guid isPermaLink="true">https://zenn.dev/nanasi_1/articles/6375c0fbaa3b8d</guid><pubDate>Fri, 13 Sep 2024 06:15:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---Le9ZymQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%25E3%2581%25A7Bun%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2582%2592%25E7%25AB%258B%25E3%2581%25A6%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nanasi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc0MDFiNWU4NjMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nanasi</dc:creator></item><item><title><![CDATA[インテグレーションテスト導入時のエラーと対応]]></title><description><![CDATA[
+ はじめに
+初めまして、株式会社Rehab for JAPAN でデイサービス向け介護請求ソフト レセプトの開発を担当している辻です。
+レセプトのフロントエンドチームではテストコードが少なく、コード変更に伴うバグの懸念や、その修正作業への心理的負荷が大きいことが課題となっていました。
+この課題に対する対応としてTesting Trophyにおけるインテグレーションテストを導入しました。
+以下に、テスト導入時に発生したエラーとその対応内容を列挙します。
+
+ 前提
+構成は、Next.js + Jest + React Testing Library + MSW です。
+Jest によるユニ...]]></description><link>https://zenn.dev/rehabforjapan/articles/59e637194104b6</link><guid isPermaLink="true">https://zenn.dev/rehabforjapan/articles/59e637194104b6</guid><pubDate>Fri, 13 Sep 2024 02:01:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--NVI17b2z--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2586%25E3%2582%25B0%25E3%2583%25AC%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E5%25B0%258E%25E5%2585%25A5%25E6%2599%2582%25E3%2581%25AE%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E3%2581%25A8%25E5%25AF%25BE%25E5%25BF%259C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:tsuji%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNkYzExOTgzNjguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Rehab%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTFhvTkRraFRKbTd2QzVlRHl3QXBlN0dzaGlpSGpWUUVBamUxeEhnYzBld21ZaGhsWT1zOTYtYw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tsuji</dc:creator></item><item><title><![CDATA[【初心者向け】Reactのレンダリングについて学んでみよう！]]></title><description><![CDATA[
+ はじめに
+Reactのレンダリングそのものについての記事は意外と少ないと感じたため、執筆しました！
+Reactのレンダリングメカニズムを理解することは、効率的な開発とパフォーマンス最適化に直結します。
+この記事では、Reactのレンダリングの基本的な概念をお届けし、React開発をよりスムーズにするお手伝いができればと思っています！
+
+ 問題
+以下に、姓と名の入力フィールドで構成されたシンプルなコンポーネントがあります。
+あなたは、このコンポーネントの姓のフィールドに「react」、名のフィールドに「test」と入力しました。
+ここで、次の問いに答えてください。
+
+合計で何回レンダリ...]]></description><link>https://zenn.dev/kiman/articles/30f6d604e95847</link><guid isPermaLink="true">https://zenn.dev/kiman/articles/30f6d604e95847</guid><pubDate>Thu, 12 Sep 2024 05:03:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--E6syrhU1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E5%2590%2591%25E3%2581%2591%25E3%2580%2591React%25E3%2581%25AE%25E3%2583%25AC%25E3%2583%25B3%25E3%2583%2580%25E3%2583%25AA%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E5%25AD%25A6%25E3%2582%2593%25E3%2581%25A7%25E3%2581%25BF%25E3%2582%2588%25E3%2581%2586%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258D%25E3%2582%2593%25E3%2582%2586%25E3%2581%25BE%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ3MmYyZmE3MTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>きんゆまん</dc:creator></item><item><title><![CDATA[broadcast-channel 日本語訳]]></title><description><![CDATA[以下の broadcast-channel の日本語訳です。
+https://github.com/pubkey/broadcast-channel
+
+メモ
+- Deepl による機械翻訳です]]></description><link>https://zenn.dev/hsato_workman/books/fd2b3463f9b069</link><guid isPermaLink="true">https://zenn.dev/hsato_workman/books/fd2b3463f9b069</guid><pubDate>Wed, 11 Sep 2024 18:08:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wT2VKQpu--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci82MmY0NThlZTM2LmpwZWc=%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>hiroki-sato-workman</dc:creator></item><item><title><![CDATA[特定の商品のカートページでチェックボックスを出す【Shopify】]]></title><description><![CDATA[
+ はじめに
+特定の商品（今回はDEMI DO）がカートにある場合、チェックボックスを出現させて、クリックしたら次へ進める実装をしようと思ったのですが、結構つまずいたので備忘録がてら記事にしました。
+
+
+ ループ処理
+今回編集するのはmain-cart-footer.liquidです。
+まずはforで商品をループさせ、DEMI DOコレクションの商品が入っていたらif文で、チェックボックスを表示させるコードを書きます。
+            {% for item in cart.items %}
+                {% for collection in item.pr...]]></description><link>https://zenn.dev/hatopoppo0606/articles/b3ea544ea9fc90</link><guid isPermaLink="true">https://zenn.dev/hatopoppo0606/articles/b3ea544ea9fc90</guid><pubDate>Wed, 11 Sep 2024 16:32:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--WGcK3uS0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%2589%25B9%25E5%25AE%259A%25E3%2581%25AE%25E5%2595%2586%25E5%2593%2581%25E3%2581%25AE%25E3%2582%25AB%25E3%2583%25BC%25E3%2583%2588%25E3%2583%259A%25E3%2583%25BC%25E3%2582%25B8%25E3%2581%25A7%25E3%2583%2581%25E3%2582%25A7%25E3%2583%2583%25E3%2582%25AF%25E3%2583%259C%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25B9%25E3%2582%2592%25E5%2587%25BA%25E3%2581%2599%25E3%2580%2590Shopify%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25AB%25E3%2582%25BA%25E3%2582%25AD%2520%252F%2520Shopify%25E5%25AD%25A6%25E7%25BF%2592%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdjZjhhYjU1NmIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>カズキ / Shopify学習</dc:creator></item><item><title><![CDATA[生成AI(ChatGPT4o mini)を使ってフロントエンドを作って見えた問題点3選]]></title><description><![CDATA[
+ 記事の概要
+最近、生成AIがよく話題に上がります。そこで、私も生成AIを活用してフロントエンドの開発に挑戦してみました。具体的には、ゲームのガチャをシミュレートするサイトを作成してみたのですが、その過程でいくつかの問題が見えてきました。以下に、その問題点を3つ紹介します。
+
+ 問題点
+
+
+データ処理の漏れ
+生成AIに100行程度のデータを処理させたところ、漏れが発生しました。GPT曰く、AIの処理能力には限界があり、大量のデータを一度に処理すると、意図した通りの結果が得られないことがあるのとことです。そのため、この部分はAIに依頼できず、自分でデータを処理する必要がありました。
+
+
+...]]></description><link>https://zenn.dev/nnnto/articles/eda52f5c2d208c</link><guid isPermaLink="true">https://zenn.dev/nnnto/articles/eda52f5c2d208c</guid><pubDate>Wed, 11 Sep 2024 13:09:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--YNYrIgML--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%2594%259F%25E6%2588%2590AI%2528ChatGPT4o%2520mini%2529%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2583%2595%25E3%2583%25AD%25E3%2583%25B3%25E3%2583%2588%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2589%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E8%25A6%258B%25E3%2581%2588%25E3%2581%259F%25E5%2595%258F%25E9%25A1%258C%25E7%2582%25B93%25E9%2581%25B8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2593%25E3%2583%25BC%25E3%2581%25A8%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VlMTQ3MGVmYWIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>んーと</dc:creator></item><item><title><![CDATA[有限オートマトン (FSM) JavaScriptで実装]]></title><description><![CDATA[有限オートマトン（Finite State Machine, FSM）は、コンピュータサイエンスの基本概念であり、限られた数の状態とそれらの状態間の遷移を持つシステムをモデル化するための構造化された方法です。FSMは、ユーザーインターフェイスの管理、ゲームのメカニクス、フォーム送信の処理などで特に有用です。このブログでは、FSMの基本、JavaScriptでの実装方法、そして状態遷移時にロジックを実行するためのアクションをどのように追加するかを探っていきます。
+
+ 有限オートマトン（FSM）とは？
+FSMは次の要素で構成される計算モデルです：
+
+
+状態: システムが存在できる異なる条件や...]]></description><link>https://zenn.dev/socialplus/articles/54463835f3153a</link><guid isPermaLink="true">https://zenn.dev/socialplus/articles/54463835f3153a</guid><pubDate>Wed, 11 Sep 2024 09:49:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--CzAjRbnt--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%259C%2589%25E9%2599%2590%25E3%2582%25AA%25E3%2583%25BC%25E3%2583%2588%25E3%2583%259E%25E3%2583%2588%25E3%2583%25B3%2520%2528FSM%2529%2520JavaScript%25E3%2581%25A7%25E5%25AE%259F%25E8%25A3%2585%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:kailma%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I4Mjg2YmNjMDEuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:SocialPLUS%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSXNXRVZFaTBmMDM2VUhvckNoRzF4UkotZzdtaFpJek8xUkdWcDRjcTBlPXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kailma</dc:creator></item></channel></rss>

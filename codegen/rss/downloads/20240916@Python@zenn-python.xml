@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Mon, 16 Sep 2024 07:13:09 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[[Tips] Fast Map Matching の Docker環境]]></title><description><![CDATA[
+ Map Matching とは
+西田さんの記事を読んでください。
+https://zenn.dev/r_nsd/articles/2938c356eba355
+
+ Map Matching の Docker環境
+以下のDockerfileでビルドして使っています。Python 2系じゃなくて、Python 3系を使うようにしていました。あとは/homeにあるディレクトリとかにデータを置いたり、ホストのディレクトリをマウントするなりして使います。numpyが'&lt;2'がいいかどうかは実装するもの（他のもの）に依存するかもしれません。
+gdalの扱いが結構めんどくさく、まだベストプラ...]]></description><link>https://zenn.dev/takilog/articles/35d52fde4dd8f0</link><guid isPermaLink="true">https://zenn.dev/takilog/articles/35d52fde4dd8f0</guid><pubDate>Mon, 16 Sep 2024 06:51:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--nTL8CF89--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BTips%255D%2520Fast%2520Map%2520Matching%2520%25E3%2581%25AE%2520Docker%25E7%2592%25B0%25E5%25A2%2583%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259F%25E3%2581%258D%25E3%2582%258D%25E3%2581%2590%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzllMzkzOGE3OGUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>たきろぐ</dc:creator></item><item><title><![CDATA[LLMアキネータ対戦環境を作ってみた]]></title><description><![CDATA[
+ はじめに
+
+ どんな人向けの記事？
+
+LLMに興味のある方
+LLMの性能に興味のある方
+LLM同士でアキネータゲームをしたときの挙動が気になる方
+
+
+環境
+Mac Studio（M2 Ultra 128GB）
+
+
+
+ 概要
+今回の記事の概要は下記のとおりです。
+
+LLMの評価を行う方法の一つとして、LLMアキネータ対戦環境を構築
+いくつかのモデルでの検証結果
+所感と今後の課題
+まとめ
+
+
+ 背景
+2つほど前の記事では、LLMに人狼ゲームをしてもらいました。
+https://zenn.dev/robustonian/articles/llm_warewolf_bench
+しかし、人狼ゲ...]]></description><link>https://zenn.dev/robustonian/articles/20_questions_bench</link><guid isPermaLink="true">https://zenn.dev/robustonian/articles/20_questions_bench</guid><pubDate>Mon, 16 Sep 2024 06:11:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--W_UFeTNT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:LLM%25E3%2582%25A2%25E3%2582%25AD%25E3%2583%258D%25E3%2583%25BC%25E3%2582%25BF%25E5%25AF%25BE%25E6%2588%25A6%25E7%2592%25B0%25E5%25A2%2583%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E9%2587%2591%25E3%2581%25AE%25E3%2583%258B%25E3%2583%25AF%25E3%2583%2588%25E3%2583%25AA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ1NmVjZjczNWIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>金のニワトリ</dc:creator></item><item><title><![CDATA[PyMuPDF (PDFtoText) メモ]]></title><description><![CDATA[参考記事の PyMuPDF[1] というツールを利用して、テキスト抽出した時のメモです。
+
+ 1. PDFのツリー構造
+このツールはPDFをこのようなツリー構造[2]に変換し、データ抽出可能がです。
+&lt;page&gt;
+    &lt;text block&gt;
+        &lt;line&gt;
+            &lt;span&gt;
+                &lt;char&gt;
+    &lt;image block&gt;
+        &lt;img&gt;
+
+ 2. PDFの種類による構造の違い
+PDF構造の理解を深めるためにこちらのコード...]]></description><link>https://zenn.dev/ystknsh/articles/748c7489d5fff6</link><guid isPermaLink="true">https://zenn.dev/ystknsh/articles/748c7489d5fff6</guid><pubDate>Mon, 16 Sep 2024 06:02:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Cu8hYIaP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:PyMuPDF%2520%2528PDFtoText%2529%2520%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yasutaka%2520Nishii%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M1ZGU2NjYyZDEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yasutaka Nishii</dc:creator></item><item><title><![CDATA[React + FastAPIでファイルアップロード機能作ってみた]]></title><description><![CDATA[こんにちは、ぴよ太です🐤
+久しぶりにブログ書きます！！
+
+ やったこと
+React + FastAPIでファイルアップロード機能を作成してみました。GitHubにアップしています。
+仕事でファイルアップロードの部分を作ることになりそうで、事前に把握しておこうと思ったのがきっかけです。基本的な内容とは思いますが、誰かの役に立てたらうれしいです🥹
+出来上がったもの
+
+
+ 構成
+SPA風で作りました。最近はSPAの記事をあまり見ない。
+Next.jsやRemixフルスタックが多い気がしている。（NextjsのTutorialやってみたけど、Pages Router便利。）
+
+フロントエンド
+
+...]]></description><link>https://zenn.dev/ttr0108/articles/729636bf9f8b98</link><guid isPermaLink="true">https://zenn.dev/ttr0108/articles/729636bf9f8b98</guid><pubDate>Mon, 16 Sep 2024 05:42:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Vesleu1P--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%2520%252B%2520FastAPI%25E3%2581%25A7%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2589%25E6%25A9%259F%25E8%2583%25BD%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:piyota%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E2MjUyMmU1ODUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>piyota</dc:creator></item><item><title><![CDATA[【ハンズオン】 LINE Bot つくってみた！]]></title><description><![CDATA[
+ はじめに
+Udemyで以下の講座を購入しやってみました。
+Python と AWS で始める!! 感情分析 AI を使った実践的 LINE Bot 開発入門
+
+ わたしについて
+
+AWSの認定資格は所持しているものの、業務経験なし
+現在は主にヘルプデスク業務に従事している。
+
+
+ 開発するLINE Bot
+
+オウム返し Line Bot
+感情分析AI Line Bot(送った画像に写っている人の顔を分析してくれる。)
+
+
+ 使用したAWSサービス
+
+SAM
+Lambda
+API Gateway
+Rekognition (DetectFaces)
+
+
+ やってみた感想
+
+開発環境の準備...]]></description><link>https://zenn.dev/kr_aws/articles/2f3390bb81cd5e</link><guid isPermaLink="true">https://zenn.dev/kr_aws/articles/2f3390bb81cd5e</guid><pubDate>Mon, 16 Sep 2024 03:46:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qwEfx0gL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E3%2583%258F%25E3%2583%25B3%25E3%2582%25BA%25E3%2582%25AA%25E3%2583%25B3%25E3%2580%2591%2520LINE%2520Bot%2520%25E3%2581%25A4%25E3%2581%258F%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25AF%25E3%2582%25B5%25E3%2582%25AB%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZmYTliNzAxNzAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>クサカ</dc:creator></item><item><title><![CDATA[[Python]フォルダー構成を考える]]></title><description><![CDATA[
+ はじめに
+前回の記事でPython開発環境の構築を行った。
+実際にPythonコードを書く前にフォルダー構成を検討しておく。
+　⇒フラットレイアウト or srcレイアウト
+フォルダー構成に合わせてpyprojectの設定についても触れる。
+
+ featureブランチを切る。
+今回フォルダー構成の検討とともにpyproject.tomlを追加するため、featureブランチを作成する。
+ブランチ名はチケット管理ツールと紐づけておくと情報の一元化とブランチ名の統一化ができて綺麗。
+現時点ではチケット管理ツールは使っていないので、暫定的に「feature/issueYYYYMMMDD_X...]]></description><link>https://zenn.dev/xoxo/articles/8c7ef6e1141ddc</link><guid isPermaLink="true">https://zenn.dev/xoxo/articles/8c7ef6e1141ddc</guid><pubDate>Mon, 16 Sep 2024 03:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--JYDhSXsh--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BPython%255D%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25AB%25E3%2583%2580%25E3%2583%25BC%25E6%25A7%258B%25E6%2588%2590%25E3%2582%2592%25E8%2580%2583%25E3%2581%2588%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:xoxo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTGpKNm84X2paQ3JWbjJZVE9xeHdyQmRwU2pCbXdNYWI1bkxtVW9pbmV1U2xPcmxnPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>xoxo</dc:creator></item><item><title><![CDATA[【python-yeelight】discover_bulbs() が [] になる問題を解決する]]></title><description><![CDATA[How to solve discover_bulbs() returns empty list
+
+ yeelight.discover_bulbs() does not work?
+&gt;&gt;&gt; import yeelight
+&gt;&gt;&gt; yeelight.discover_bulbs()
+[]
+too many hackers are confused..
+Yeelight のバルブが検出できない問題
+見つからなくてハマる人多数(自分もハマった)
+
+ My solution
+import yeelight
+import netifaces
+
+def get_...]]></description><link>https://zenn.dev/sharl/articles/db377c400526d1</link><guid isPermaLink="true">https://zenn.dev/sharl/articles/db377c400526d1</guid><pubDate>Sun, 15 Sep 2024 17:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--m1a7q-ol--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590python-yeelight%25E3%2580%2591discover_bulbs%2528%2529%2520%25E3%2581%258C%2520%255B%255D%2520%25E3%2581%25AB%25E3%2581%25AA%25E3%2582%258B%25E5%2595%258F%25E9%25A1%258C%25E3%2582%2592%25E8%25A7%25A3%25E6%25B1%25BA%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2597%25E3%2582%2583%25E3%2581%2582%25E3%2582%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0xuZEM2dlZRUHNRVzBHa1dpdS1DY2trTlVETnVhemF1YjlUVVRkQ3B5dHBqbTBLUXA9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>しゃある</dc:creator></item><item><title><![CDATA[【ChatGPT】MisskeyでTRPG botを作って遊ぶ]]></title><description><![CDATA[ChatGPTでTRPGを遊ぶ記事を見かけて面白そうだと思ったので、運営しているMisskey系サーバーで動くように実装してみました。
+記事はこちら。(記事の有料部分のところは利用してません）
+https://note.com/fladdict/n/nb66db952f992?after_purchase=true
+今回はPython3で実装しましたが、そんなに複雑なことはしてないので他の環境でもすぐ移植できると思います。
+
+ コード
+とりあえずコード全体はこちら。コード部分のライセンスはUnlicense/パブリックドメインとします。
+
+trpgbot.py
+#!/usr/bin/en...]]></description><link>https://zenn.dev/tar_bin/articles/ff6d272ede9fb8</link><guid isPermaLink="true">https://zenn.dev/tar_bin/articles/ff6d272ede9fb8</guid><pubDate>Sun, 15 Sep 2024 10:10:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GNyN-1YD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590ChatGPT%25E3%2580%2591Misskey%25E3%2581%25A7TRPG%2520bot%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E9%2581%258A%25E3%2581%25B6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259F%25E3%2583%25BC%25E3%2581%25B3%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTDQ5ZkZJRzk5OWY0cEh4aE9iMjJnSDZOeHFPUjFZbC1sSlViMlVKQXVyYi14djBRZEU9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>たーびん</dc:creator></item><item><title><![CDATA[PythonでBrainfuckインタプリタを作る]]></title><description><![CDATA[ある程度プログラミングに詳しくなってくると、視界が開けて世の中にはいろんなプログラミング言語があることに気づきます。難解プログラミング言語も例外ではありません。その中でも特にBrainfuckについては基本系はもちろん姿や形を変えて、ことあるごとに話題にあがる一種のプログラミングジョークとしての地位を確立しているように見えます。
+このところは本業とゲームに忙しく、なかなかこういった面白い技術に触れる時間がなかったのですが、最近某所でBrainfuckの投稿を見かけたことがきっかけで、そういえばBrainfuckのインタプリタを作った記憶がないと気づいたことと、過去に私が技術書展で頒布した...]]></description><link>https://zenn.dev/plhr7/articles/7ac5b66085bacc</link><guid isPermaLink="true">https://zenn.dev/plhr7/articles/7ac5b66085bacc</guid><pubDate>Sun, 15 Sep 2024 09:25:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5ZS746gL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A7Brainfuck%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25BF%25E3%2583%2597%25E3%2583%25AA%25E3%2582%25BF%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:PlasticHeart%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2hpaS1NZVRtVDE0bk1OSHJrdGNnRFV6QUpsUUFOdXVNa1NtR01RPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>PlasticHeart</dc:creator></item><item><title><![CDATA[データ分析 重回帰分析 実践1]]></title><description><![CDATA[前回までの記事です
+データ分析 python 相関分析 &amp; 無相関検定
+データ分析 python 単回帰分析
+データ分析 python 重回帰分析
+今回は、別のデータを使用して、より実践ベースで検定を行ってみたいと思います
+
+ 使用したデータ
+あるジュエリーショップのアンケート結果を集めたデータです。
+使用したデータ
+データは適当に作ったものです
+
+
+
+性別
+年齢
+購入形態
+購入の目的
+商品のデザイン
+納品の迅速さ
+サイトの使いやすさ
+価格の妥当性
+商品への満足度
+ショップの雰囲気
+スタッフの対応
+アフターサービス
+包装の状態
+満足度
+
+
+
+
+女性
+50
+プレゼント用
+記念日
+4...]]></description><link>https://zenn.dev/longbridge/articles/c5f8602fddbc2f</link><guid isPermaLink="true">https://zenn.dev/longbridge/articles/c5f8602fddbc2f</guid><pubDate>Sun, 15 Sep 2024 08:59:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_tU1wpWU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E5%2588%2586%25E6%259E%2590%2520%25E9%2587%258D%25E5%259B%259E%25E5%25B8%25B0%25E5%2588%2586%25E6%259E%2590%2520%25E5%25AE%259F%25E8%25B7%25B51%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:piyoko%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FlYjQwNDk5NTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>piyoko</dc:creator></item><item><title><![CDATA[API GatewayとLambdaでReactをホスティングする]]></title><description><![CDATA[
+ はじめに
+AWSでReactデプロイしろって言われたらどうします？
+AWSでこういったSPAをデプロイしようとすると大体S3とCloudfrontに行き着くかと思います。
+今回はReactとおまけにフロントエンドからリクエストするAPIも合わせてAPI GatewayとLambdaにぶち込もうと思います。
+柔軟なインフラ構成ではないので小ネタです。本番環境には適していないのであしからず。
+また、今回使用するサンプルはGithubに置いてありますので、よかったら実際にデプロイしてみてください。
+https://github.com/Tomoaki-Moriya/lambda-react...]]></description><link>https://zenn.dev/t_o_m_o/articles/6c71e03def4346</link><guid isPermaLink="true">https://zenn.dev/t_o_m_o/articles/6c71e03def4346</guid><pubDate>Sun, 15 Sep 2024 08:08:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--O6GwnfNG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:API%2520Gateway%25E3%2581%25A8Lambda%25E3%2581%25A7React%25E3%2582%2592%25E3%2583%259B%25E3%2582%25B9%25E3%2583%2586%25E3%2582%25A3%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tomo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJiZDBiNzc5MTMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tomo</dc:creator></item><item><title><![CDATA[Pydanticで特定のキーの値によってそれ以外のキーに異なるデフォルト値を設定する]]></title><description><![CDATA[
+ 先に結論
+Literalを使って、型定義を使って分岐させる
+
+ モチベーション
+Pythonで設定ファイルから取り出してdictをクラスインスタンスに落とし込むときに、あるキーに応じて、それ以外のキーのデフォルト値を変更したくなった。
+↓こういうイメージ
+zoo = Zoo(
+    **{
+        "animals": [
+            {"type": "dog"}, # 鳴き声をbowに
+            {"type": "cat"}, # 鳴き声をmeowに
+            {"type": "duck"}, # 鳴き声をquackに
+   ...]]></description><link>https://zenn.dev/sirasagi62/articles/841313c53ac724</link><guid isPermaLink="true">https://zenn.dev/sirasagi62/articles/841313c53ac724</guid><pubDate>Sun, 15 Sep 2024 07:28:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2qey-TLV--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Pydantic%25E3%2581%25A7%25E7%2589%25B9%25E5%25AE%259A%25E3%2581%25AE%25E3%2582%25AD%25E3%2583%25BC%25E3%2581%25AE%25E5%2580%25A4%25E3%2581%25AB%25E3%2582%2588%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%259D%25E3%2582%258C%25E4%25BB%25A5%25E5%25A4%2596%25E3%2581%25AE%25E3%2582%25AD%25E3%2583%25BC%25E3%2581%25AB%25E7%2595%25B0%25E3%2581%25AA%25E3%2582%258B%25E3%2583%2587%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25AB%25E3%2583%2588%25E5%2580%25A4%25E3%2582%2592%25E8%25A8%25AD%25E5%25AE%259A%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Sirasagi62%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzcxMzU3MWNlNzcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Sirasagi62</dc:creator></item><item><title><![CDATA[LangChainによるデータ分析レポーティング]]></title><description><![CDATA[
+ やること
+LLMにCSVデータを渡してデータ分析のレポーティングを試みたいと思います。
+
+ 前提
+最近だとKaggleのベースラインを初手ChatGPTにやらせるのは割と普通ですが、出力結果にハルシネーションがあったり、EDAの内容が毎回異なったりでデータ分析の自動化を社会実装するにはまだまだ課題があるかと思います。今回は、LangChainのProptTemplateとAzureChatOpenAIを用いて、出力される内容をある程度定型化したレポーティングをgpt-4o-miniでどこまでできるのかを試してみます。
+
+ 参考文献
+分析結果のレポート項目についてはこちらの書籍を参考に...]]></description><link>https://zenn.dev/headwaters/articles/80b35ff5f096a3</link><guid isPermaLink="true">https://zenn.dev/headwaters/articles/80b35ff5f096a3</guid><pubDate>Sun, 15 Sep 2024 07:10:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hWRNB4y3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:LangChain%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258B%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E5%2588%2586%25E6%259E%2590%25E3%2583%25AC%25E3%2583%259D%25E3%2583%25BC%25E3%2583%2586%25E3%2582%25A3%25E3%2583%25B3%25E3%2582%25B0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:akihiro%2520nakamura%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZjNGExY2UxMDYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2598%25E3%2583%2583%25E3%2583%2589%25E3%2582%25A6%25E3%2582%25A9%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%25BC%25E3%2582%25B9%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA5MjU4ZWEwY2QuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>akihiro nakamura</dc:creator></item><item><title><![CDATA[データ分析 質的変数（カテゴリカル変数）を数値に変換]]></title><description><![CDATA[
+ 質的変数（カテゴリカル変数）とは
+カテゴリカル変数とは、値がカテゴリーやラベルで表される変数のことです。
+これらの変数はカテゴリーごとの区別や分類を目的としています。
+例）
+
+性別：男性、女性
+血液型：A型、B型、O型、AB型
+教育レベル：小学校、中学校、高校、大学
+
+質的変数は 名義尺度 と 順序尺度に分けられます
+質的変数
+　├── 名義尺度 (Nominal scale)
+　└── 順序尺度 (Ordinal scale)
+
+ 名義尺度
+順序がないカテゴリ変数。カテゴリー間に優劣や順序はない。
+性別：男性、女性
+血液型：A型、B型、O型、AB型
+地域：東京、大阪、福岡
+
+ 順序...]]></description><link>https://zenn.dev/longbridge/articles/7207826f3ddee8</link><guid isPermaLink="true">https://zenn.dev/longbridge/articles/7207826f3ddee8</guid><pubDate>Sun, 15 Sep 2024 06:54:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--NlGMJNiL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E5%2588%2586%25E6%259E%2590%2520%25E8%25B3%25AA%25E7%259A%2584%25E5%25A4%2589%25E6%2595%25B0%25EF%25BC%2588%25E3%2582%25AB%25E3%2583%2586%25E3%2582%25B4%25E3%2583%25AA%25E3%2582%25AB%25E3%2583%25AB%25E5%25A4%2589%25E6%2595%25B0%25EF%25BC%2589%25E3%2582%2592%25E6%2595%25B0%25E5%2580%25A4%25E3%2581%25AB%25E5%25A4%2589%25E6%258F%259B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:piyoko%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FlYjQwNDk5NTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>piyoko</dc:creator></item><item><title><![CDATA[[Python]Pythonプロジェクトの作成]]></title><description><![CDATA[
+ はじめに
+Pythonのプロジェクト作成時の手順を書く。
+GitHubにリポジトリを作り、基本的なPython開発設定を行った上でdevelopブランチ作成までを行う。
+
+ 前提
+
+Python インストール済み
+Visual Studio Code インストール済み
+Git for Windows インストール済み
+GitHub アカウント設定済み
+
+
+ GitHub リポジトリ作成
+
+GitHubにログインし、Top repositoriesから[New]をクリック
+
+
+リポジトリ設定
+
+[Repository name]を決める。
+リポジトリの公開設定を決める。(今回は[Pri...]]></description><link>https://zenn.dev/xoxo/articles/631498b25830b9</link><guid isPermaLink="true">https://zenn.dev/xoxo/articles/631498b25830b9</guid><pubDate>Sun, 15 Sep 2024 02:56:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xRHVpViq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BPython%255DPython%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E3%2581%25AE%25E4%25BD%259C%25E6%2588%2590%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:xoxo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTGpKNm84X2paQ3JWbjJZVE9xeHdyQmRwU2pCbXdNYWI1bkxtVW9pbmV1U2xPcmxnPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>xoxo</dc:creator></item><item><title><![CDATA[OCR vs OpenAIで表を解析してみた！精度の比較と課題を徹底検証]]></title><description><![CDATA[
+
+ はじめに
+先日、「OCRとOpenAIの比較」や「宝くじの番号をOCRで一括確認する方法」に関する記事を投稿しました。主に画像内の文字や数字の認識精度を比較した内容です。詳しくは以下の記事をご覧ください。
+https://qiita.com/ogi_kimura/items/f6b8e3426349767e8f7b
+https://qiita.com/ogi_kimura/items/d2dd5466f3e1e125f6e4
+今回は、表形式の画像に焦点を当てて、OCRとOpenAIの認識精度を比較してみようと思います。
+私自身は現在、別の業務の傍ら「特許情報検索システム」の開発を進...]]></description><link>https://zenn.dev/ogiki/articles/cfedae3377f749</link><guid isPermaLink="true">https://zenn.dev/ogiki/articles/cfedae3377f749</guid><pubDate>Sun, 15 Sep 2024 01:43:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_L2c3Lcs--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:OCR%2520vs%2520OpenAI%25E3%2581%25A7%25E8%25A1%25A8%25E3%2582%2592%25E8%25A7%25A3%25E6%259E%2590%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25EF%25BC%2581%25E7%25B2%25BE%25E5%25BA%25A6%25E3%2581%25AE%25E6%25AF%2594%25E8%25BC%2583%25E3%2581%25A8%25E8%25AA%25B2%25E9%25A1%258C%25E3%2582%2592%25E5%25BE%25B9%25E5%25BA%2595%25E6%25A4%259C%25E8%25A8%25BC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%259C%25A8%25E6%259D%2591%25E3%2581%259F%25E3%2582%258D%25E3%2581%2586%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZkZjNiYWMwZmQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>木村たろう</dc:creator></item><item><title><![CDATA[ReactとDjangoでフォームから画像の登録をしてみた]]></title><description><![CDATA[
+ 元美容師のDjangoポートフォリオリニューアル日記Part.6：画像アップロード機能実装編
+こんにちは、やぎです！前回の記事では、サロン情報の編集と削除機能を実装しました。
+今回はサロンデータに画像を登録し、サロン一覧画面で表示する機能を追加します。
+実は画像の登録表示機能はサロン登録機能実装時に含めるはずだったのですが用件定義で完全に漏れていました。。。ER図も後ほど修正します。
+写真を追加することによってサロンの雰囲気がパッとわかるので必須の機能ですよねw
+それでは今回も頑張ります！実装開始！！
+
+ 今回の実装内容
+
+Djangoモデルへ画像フィールドの追加
+Djangoのシリ...]]></description><link>https://zenn.dev/jenny/articles/910b32f4b49202</link><guid isPermaLink="true">https://zenn.dev/jenny/articles/910b32f4b49202</guid><pubDate>Sat, 14 Sep 2024 23:28:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--K2VlBqrk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%25E3%2581%25A8Django%25E3%2581%25A7%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25BC%25E3%2583%25A0%25E3%2581%258B%25E3%2582%2589%25E7%2594%25BB%25E5%2583%258F%25E3%2581%25AE%25E7%2599%25BB%25E9%258C%25B2%25E3%2582%2592%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2584%25E3%2581%258E%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE0Y2NlYzgwYTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>やぎ</dc:creator></item><item><title><![CDATA[雨が降っていたら IoT ランプを点けるアプリを書いてみた]]></title><description><![CDATA[雨雲レーダー 便利ですよね。
+
+いざ「買い物に行くかあ」というときに玄関から出て雨が降っていると、準備をしに戻るのが面倒になります。事前に雨が降っていることがわかっていれば、それなりに準備するのに……
+ということで視覚的に降ってることがわかるように IoT ランプを雨の強さの色で点けるアプリを書いてみました。
+
+↓ タスクトレイでも雨の強さがわかる
+
+
+LAN で制御が簡単な Yeelight LEDスマートランプD2 が異常に安いので(2024/09/15執筆時1897円)
+
+自室と居間に置いて、どちらにも反映するようにしています。
+
+ 色の取得
+雨雲レーダーの画像(1x1ピクセル)を...]]></description><link>https://zenn.dev/sharl/articles/5470311f5617e4</link><guid isPermaLink="true">https://zenn.dev/sharl/articles/5470311f5617e4</guid><pubDate>Sat, 14 Sep 2024 16:35:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--RhFyvYnS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E9%259B%25A8%25E3%2581%258C%25E9%2599%258D%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%2584%25E3%2581%259F%25E3%2582%2589%2520IoT%2520%25E3%2583%25A9%25E3%2583%25B3%25E3%2583%2597%25E3%2582%2592%25E7%2582%25B9%25E3%2581%2591%25E3%2582%258B%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E6%259B%25B8%25E3%2581%2584%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2597%25E3%2582%2583%25E3%2581%2582%25E3%2582%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0xuZEM2dlZRUHNRVzBHa1dpdS1DY2trTlVETnVhemF1YjlUVVRkQ3B5dHBqbTBLUXA9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>しゃある</dc:creator></item><item><title><![CDATA[データ分析 2群間の代表値の検定:実践例2]]></title><description><![CDATA[前回までの記事です
+
+
+データ分析 python 2群間の代表値の検定:基礎
+
+
+
+データ分析 python 2群間の代表値の検定:対応のある2標本のt検定
+
+
+データ分析 python 2群間の代表値の検定:スチューデントのt検定
+
+
+データ分析 2群間の代表値の検定:マンホイットニーのU検定/ウィルコクソン順位和検定
+
+
+データ分析 python 独立性の検定:カイ二乗検定
+
+
+データ分析 2群間の代表値の検定:実践例１
+
+
+前回に続き、より実践ベースでの検定を行ってみたいと思います
+
+ 使用したデータ
+あるジュエリーショップのアンケート結果を集めたデータです。
+使用したデータ
+デー...]]></description><link>https://zenn.dev/longbridge/articles/e7cf2ef63aeb8b</link><guid isPermaLink="true">https://zenn.dev/longbridge/articles/e7cf2ef63aeb8b</guid><pubDate>Sat, 14 Sep 2024 16:20:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--D7XsXZ_p--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E5%2588%2586%25E6%259E%2590%25202%25E7%25BE%25A4%25E9%2596%2593%25E3%2581%25AE%25E4%25BB%25A3%25E8%25A1%25A8%25E5%2580%25A4%25E3%2581%25AE%25E6%25A4%259C%25E5%25AE%259A%253A%25E5%25AE%259F%25E8%25B7%25B5%25E4%25BE%258B2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:piyoko%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FlYjQwNDk5NTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>piyoko</dc:creator></item><item><title><![CDATA[データ分析 2群間の代表値の検定:実践例１]]></title><description><![CDATA[前回までの記事です
+
+
+データ分析 python 2群間の代表値の検定:基礎
+
+
+
+データ分析 python 2群間の代表値の検定:対応のある2標本のt検定
+
+
+データ分析 python 2群間の代表値の検定:スチューデントのt検定
+
+
+データ分析 2群間の代表値の検定:マンホイットニーのU検定/ウィルコクソン順位和検定
+
+
+データ分析 python 独立性の検定:カイ二乗検定
+
+
+今回は、別のデータを使用して、より実践ベースで検定を行ってみたいと思います
+
+ 使用したデータ
+あるジュエリーショップのアンケート結果を集めたデータです。
+使用したデータ
+データは適当に作ったものです
+
+
+
+...]]></description><link>https://zenn.dev/longbridge/articles/2b5569c6b71d73</link><guid isPermaLink="true">https://zenn.dev/longbridge/articles/2b5569c6b71d73</guid><pubDate>Sat, 14 Sep 2024 15:22:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--cqEubLo6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E5%2588%2586%25E6%259E%2590%25202%25E7%25BE%25A4%25E9%2596%2593%25E3%2581%25AE%25E4%25BB%25A3%25E8%25A1%25A8%25E5%2580%25A4%25E3%2581%25AE%25E6%25A4%259C%25E5%25AE%259A%253A%25E5%25AE%259F%25E8%25B7%25B5%25E4%25BE%258B%25EF%25BC%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:piyoko%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FlYjQwNDk5NTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>piyoko</dc:creator></item></channel></rss>
