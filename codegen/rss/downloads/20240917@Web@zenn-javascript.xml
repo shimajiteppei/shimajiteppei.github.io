@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「JavaScript」のフィード]]></title><description><![CDATA[Zennのトピック「JavaScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/javascript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/64acd76870.png</url><title>Zennの「JavaScript」のフィード</title><link>https://zenn.dev/topics/javascript</link></image><generator>zenn.dev</generator><lastBuildDate>Tue, 17 Sep 2024 02:01:58 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/javascript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[CLIのプログレスバーを作ってみた]]></title><description><![CDATA[
+ はじめに
+皆さん、こんにちは。株式会社BTMの風間と申します。
+今回はCLIで動くプログレスバーを作成してみました。
+実際に作ったのはこちら。
+
+コンソール（ターミナル）で、yum、apt、brewなどを利用したパッケージのインストールをされたことがある方は、こういった進行状況の表示をよく見ていると思います。
+この進行状況の表示方法に以前から興味があったので、実際に作ってみて、使った方法をまとめてみました。
+!
+本記事で紹介する実装・実行は以下の環境にて行いました。
+・Windows11
+・WSL2（Ubuntu 22.04.3 LTS）
+・Node.js 20.11.1
+・Git ...]]></description><link>https://zenn.dev/b_tm/articles/14dfbeb21939e3</link><guid isPermaLink="true">https://zenn.dev/b_tm/articles/14dfbeb21939e3</guid><pubDate>Tue, 17 Sep 2024 01:50:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--FYD2nDn6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:CLI%25E3%2581%25AE%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25AC%25E3%2582%25B9%25E3%2583%2590%25E3%2583%25BC%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:m_kazama%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLmRldi9pbWFnZXMvZGVmYXVsdC1wdWJsaWNhdGlvbi1hdmF0YXIucG5n%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BEBTM%2520%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSk1MaVk5U1ljLWp6MXZFSURlR1lFT0ZHOU1RQmxjQzVWbEs2TDBxeU5zWm5uaWdKdz1zOTYtYw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>m_kazama</dc:creator></item><item><title><![CDATA[JavaScript イベントリスナー入門：基本概念から実践的な使い方まで]]></title><description><![CDATA[
+ イベントリスナーの基本：JavaScriptの重要機能を理解する
+こんにちは。今回は、JavaScriptにおいて非常に重要な「イベントリスナー」について、わかりやすく解説します。初心者の方にもイメージしやすいよう、具体例を交えながら説明していきます。
+
+ イベントリスナーとは
+イベントリスナーは、特定の出来事（イベント）が発生したときに実行される関数のことです。例えば、「ボタンがクリックされたらメッセージを表示する」といった動作を設定できます。
+!
+イベントリスナーを使うと、Webページをインタラクティブにし、ユーザーの操作に応じて動的に内容を変更することができます。
+
+
+ add...]]></description><link>https://zenn.dev/crebo_tech/articles/article-0009-20240916</link><guid isPermaLink="true">https://zenn.dev/crebo_tech/articles/article-0009-20240916</guid><pubDate>Tue, 17 Sep 2024 01:34:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--UVm4mkQ---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%2520%25E3%2582%25A4%25E3%2583%2599%25E3%2583%25B3%25E3%2583%2588%25E3%2583%25AA%25E3%2582%25B9%25E3%2583%258A%25E3%2583%25BC%25E5%2585%25A5%25E9%2596%2580%25EF%25BC%259A%25E5%259F%25BA%25E6%259C%25AC%25E6%25A6%2582%25E5%25BF%25B5%25E3%2581%258B%25E3%2582%2589%25E5%25AE%259F%25E8%25B7%25B5%25E7%259A%2584%25E3%2581%25AA%25E4%25BD%25BF%25E3%2581%2584%25E6%2596%25B9%25E3%2581%25BE%25E3%2581%25A7%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2581%258F%25E3%2582%258A%25E3%2581%25BC%25E3%2583%25BC%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLmRldi9pbWFnZXMvZGVmYXVsdC1wdWJsaWNhdGlvbi1hdmF0YXIucG5n%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2581%258F%25E3%2582%258A%25E3%2581%25BC%25E3%2583%25BC%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2IxNzlhZTFjZGIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>株式会社くりぼー</dc:creator></item><item><title><![CDATA[不均衡最適輸送によるフリーハンド確率分布の評価: 確率分布間の相違度定量化手法紹介]]></title><description><![CDATA[
+ はじめに
+こんにちは。ZENKIGENデータサイエンスチーム所属のredteaです。原籍はオムロンソーシアルソリューションズ株式会社 技術創造センタですが、社外出向でZENKIGENに所属しており、数理最適化や機械学習を用いたデータの分析業務、それらの結果に基づいた顧客への提案をしております[1]。
+!
+「はじめに」は駄文なので、技術的な内容が読みたい方はフリーハンド確率分布のスコア化からお読みください。
+
+
+ 正規分布ってフリーハンドで描くの難しくないですか？
+ここで白状しますが、私はペンを用いて字、絵、図を書いたり描いたりすることがとても苦手です[2]。自分の結婚式に来てくれた大...]]></description><link>https://zenn.dev/zenkigen_tech/articles/401463e332bfb7</link><guid isPermaLink="true">https://zenn.dev/zenkigen_tech/articles/401463e332bfb7</guid><pubDate>Tue, 17 Sep 2024 01:30:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--CR2xkSfF--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E4%25B8%258D%25E5%259D%2587%25E8%25A1%25A1%25E6%259C%2580%25E9%2581%25A9%25E8%25BC%25B8%25E9%2580%2581%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258B%25E3%2583%2595%25E3%2583%25AA%25E3%2583%25BC%25E3%2583%258F%25E3%2583%25B3%25E3%2583%2589%25E7%25A2%25BA%25E7%258E%2587%25E5%2588%2586%25E5%25B8%2583%25E3%2581%25AE%25E8%25A9%2595%25E4%25BE%25A1%253A%2520%25E7%25A2%25BA%25E7%258E%2587%25E5%2588%2586%25E5%25B8%2583%25E9%2596%2593%25E3%2581%25AE%25E7%259B%25B8%25E9%2581%2595%25E5%25BA%25A6%25E5%25AE%259A%25E9%2587%258F%25E5%258C%2596%25E6%2589%258B%25E6%25B3%2595%25E7%25B4%25B9%25E4%25BB%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:redtea%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNhNzk4YmFjMTcuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:ZENKIGEN%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzIzM2I4MmRkNzEuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>redtea</dc:creator></item><item><title><![CDATA[JSCのUCDを更新するスクリプト]]></title><description><![CDATA[正規表現のプロパティエスケープなどの実装のために、JavaScriptエンジンはUCD(=Unicode Character Database)に関する情報を知っている必要がある。
+WebKitのJSエンジンであるJavaScriptCoreではUCDを ./Source/JavaScriptCore/ucd 配下にファイルとしてそのまま配置している。
+Unicodeのバージョンが上がるとtest262の方に更新が入るので、それに追従する形でJSエンジンのUCDのバージョンを上げる必要がある。
+前回 15.1 に上げたときはすべて手動でやったが、手動でやるのは面倒くさいのでスクリプトを書...]]></description><link>https://zenn.dev/sosukesuzuki/articles/5a7c0f4b8dedc8</link><guid isPermaLink="true">https://zenn.dev/sosukesuzuki/articles/5a7c0f4b8dedc8</guid><pubDate>Mon, 16 Sep 2024 22:02:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--V4oSLvGM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JSC%25E3%2581%25AEUCD%25E3%2582%2592%25E6%259B%25B4%25E6%2596%25B0%25E3%2581%2599%25E3%2582%258B%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Sosuke%2520Suzuki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2kzVm5WZHo2MC1CT3lMTS1VVnZaNmdNSDJlTlp1T0lTa1owT3lyNnc9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Sosuke Suzuki</dc:creator></item><item><title><![CDATA[semantic-release を使って Node パッケージのリリースワークフローを自動化する]]></title><description><![CDATA[
+ これはなに
+semantic-release の基礎知識と、これを用いて Node パッケージのリリースワークフローを自動化する方法をまとめたものです。
+現代のソフトウェアパッケージにおけるリリースフローには、バージョン番号の管理、変更履歴の記録、リリースノートの作成、各種共有レジストリーへの公開など、多くの手順が要求されます。これらの手順を自動化することでソフトウェア開発者はリリースに費やす時間を短縮し、ヒューマンエラーの削減が期待できます。
+
+ semantic-release とは
+https://semantic-release.gitbook.io/semantic-rel...]]></description><link>https://zenn.dev/wakamsha/articles/learn-semantic-release</link><guid isPermaLink="true">https://zenn.dev/wakamsha/articles/learn-semantic-release</guid><pubDate>Mon, 16 Sep 2024 17:22:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--onfoeGKd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:semantic-release%2520%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%2520Node%2520%25E3%2583%2591%25E3%2583%2583%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B8%25E3%2581%25AE%25E3%2583%25AA%25E3%2583%25AA%25E3%2583%25BC%25E3%2582%25B9%25E3%2583%25AF%25E3%2583%25BC%25E3%2582%25AF%25E3%2583%2595%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%2592%25E8%2587%25AA%25E5%258B%2595%25E5%258C%2596%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:wakamsha%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2psYURiOW50NGN1UTUweE54dmxHcW50Rkxsbkg1VThSWUFZOUtBakE9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>wakamsha</dc:creator></item><item><title><![CDATA[生成AIを活用してChrome拡張機能をサクッと作る]]></title><description><![CDATA[生成AIの助けを借りながら、Chrome拡張機能をはじめて作ってみた時の記録です。
+
+ はじめに
+私はこれまで「拡張機能」というものの開発に興味を持ったことはあるものの、実際に手をつけたことはありませんでした。大抵の場合、自分が使いたい機能は他の誰かが開発していますし、拡張機能の開発方法を一から覚えるのも面倒だからです。
+しかし、今では生成AIの力を借りることで、プロンプトを書けば欲しいプログラムをすぐに出力できるようになりました。
+そこで今回は、ChatGPTを活用してChrome拡張機能を開発するまでの流れを作業メモとして記事にしておきたいと思います。Chrome拡張機能の開発の流れ...]]></description><link>https://zenn.dev/tanny/articles/f90a291b9ece04</link><guid isPermaLink="true">https://zenn.dev/tanny/articles/f90a291b9ece04</guid><pubDate>Mon, 16 Sep 2024 14:37:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vaeCVras--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%2594%259F%25E6%2588%2590AI%25E3%2582%2592%25E6%25B4%25BB%25E7%2594%25A8%25E3%2581%2597%25E3%2581%25A6Chrome%25E6%258B%25A1%25E5%25BC%25B5%25E6%25A9%259F%25E8%2583%25BD%25E3%2582%2592%25E3%2582%25B5%25E3%2582%25AF%25E3%2583%2583%25E3%2581%25A8%25E4%25BD%259C%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Tanny%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ1OGU0Njc0YzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Tanny</dc:creator></item><item><title><![CDATA[[Javascript]エスケープ文字,演算子,制御構造(if | switch | while | for)]]></title><description><![CDATA[
+
+ 学習した目的
+
+メイン業務はインフラ周りですが、TerraformやCloudFormationだけでなく、汎用プログラムも扱えるようになりたいと考え学習しています。自分なりの整理、備忘録としての記事のため、見にくい場合はすみませんmm
+
+
+ 本記事を読み終わった時のゴール
+
+基本的なデータ型,演算子の使い方をある程度イメージできること。
+基礎的な制御構造の仕組みが頭の中でイメージできること。
+ 
+
+
+ 主な演算子
+
+ ■算術演算子
+
+数学的な計算を行うための演算子。
+
+
+
+
+記号
+意味
+
+
+
+
++
+加算
+
+
+-
+減算
+
+
+*
+乗算
+
+
+/
+除算
+
+
+%
+剰余
+
+
+**
+べき乗
+
+...]]></description><link>https://zenn.dev/takehiro1111/articles/js_if_for_while_switch2024_02_25</link><guid isPermaLink="true">https://zenn.dev/takehiro1111/articles/js_if_for_while_switch2024_02_25</guid><pubDate>Mon, 16 Sep 2024 13:05:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--CawBuL2m--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BJavascript%255D%25E3%2582%25A8%25E3%2582%25B9%25E3%2582%25B1%25E3%2583%25BC%25E3%2583%2597%25E6%2596%2587%25E5%25AD%2597%252C%25E6%25BC%2594%25E7%25AE%2597%25E5%25AD%2590%252C%25E5%2588%25B6%25E5%25BE%25A1%25E6%25A7%258B%25E9%2580%25A0%2528if%2520%257C%2520switch%2520%257C%2520while%2520%257C%2520for%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259F%25E3%2581%2591%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY2NDQ2ZjMwNzcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>たけ</dc:creator></item><item><title><![CDATA[[Javascript]配列 | 多次元配列 | 連想配列]]></title><description><![CDATA[
+
+ 本記事を読み終わった時のゴール
+
+配列の概念を理解できる事
+配列の使い方をイメージできる事
+ 
+
+
+ コレクションとは?
+
+広義の意味だと複数の要素を格納できる複合的なデータ構造のこと。
+コレクションの種類として配列が存在する。
+
+
+ 配列
+
+複数のデータを連続的に並べたデータ構造。
+通常は1つの変数につき1つの値が存在するが、配列を使用する事で1つの変数で値を複数定義する事が出来る。
+配列のパーツとして以下がある。
+
+
+ 要素とは？
+
+配列に入っている個々のデータ
+
+
+ 添え字(インデックス)
+
+配列の各要素に振られる番号
+
+
+ 配列の長さ
+
+配列の要素数
+
+
+ 配列の書き方
+l...]]></description><link>https://zenn.dev/takehiro1111/articles/js_array_20240229</link><guid isPermaLink="true">https://zenn.dev/takehiro1111/articles/js_array_20240229</guid><pubDate>Mon, 16 Sep 2024 13:05:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--e5tn1Dwg--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BJavascript%255D%25E9%2585%258D%25E5%2588%2597%2520%257C%2520%25E5%25A4%259A%25E6%25AC%25A1%25E5%2585%2583%25E9%2585%258D%25E5%2588%2597%2520%257C%2520%25E9%2580%25A3%25E6%2583%25B3%25E9%2585%258D%25E5%2588%2597%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259F%25E3%2581%2591%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY2NDQ2ZjMwNzcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>たけ</dc:creator></item><item><title><![CDATA[「ドット記法」と「ブラケット記法」の違いまとめ]]></title><description><![CDATA[
+ ドット記法
+
+ メリット
+ブラケット記法に比べてコード量が少なく読みやすい。
+
+ デメリット
+プロパティ名を変数に使用できない。
+ハイフンや数字で始まるプロパティ名を使用できない。
+
+ ブラケット記法
+
+ メリット
+プロパティ名を変数に使用できる。
+プロパティ名に制限がない。
+
+ デメリット
+ドットよりコード量が多くなる。
+]]></description><link>https://zenn.dev/h_h/articles/b08599036e0823</link><guid isPermaLink="true">https://zenn.dev/h_h/articles/b08599036e0823</guid><pubDate>Mon, 16 Sep 2024 11:45:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--AsHIFchk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%258C%25E3%2583%2589%25E3%2583%2583%25E3%2583%2588%25E8%25A8%2598%25E6%25B3%2595%25E3%2580%258D%25E3%2581%25A8%25E3%2580%258C%25E3%2583%2596%25E3%2583%25A9%25E3%2582%25B1%25E3%2583%2583%25E3%2583%2588%25E8%25A8%2598%25E6%25B3%2595%25E3%2580%258D%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:h_h%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0g1Wm42X2haa0phbnc1UTljMUwwV3JvOU5oUk9kOW1VYXBDc1ZXOVdockE9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>h_h</dc:creator></item><item><title><![CDATA[別タブで開いているページを、リロードすることなく更新したい(理論編)]]></title><description><![CDATA[
+ 概要
+業務にて、以下の技術課題を解決する機会がありました。
+
+目的のページを既に別タブで開いている場合、このタブを表示する
+タブを表示する際、リロードを行わずに画面のデータを更新する
+
+画面のデータ : 上記例で言うと、選択されたチャプター動画の再生位置）
+
+
+
+これらの実装方法について、調査結果を投下します。
+
+ 書くこと/書かないこと
+書くこと : 上記技術課題の解決例
+書かないこと : 実装例（※）
+（※）サンプルコードを交えた実装例は、以下の記事で取り上げます。
+
+https://zenn.dev/t0mmy/articles/no-open-new-tab-and-no-r...]]></description><link>https://zenn.dev/t0mmy/articles/no-open-new-tab-and-no-reload-logic</link><guid isPermaLink="true">https://zenn.dev/t0mmy/articles/no-open-new-tab-and-no-reload-logic</guid><pubDate>Mon, 16 Sep 2024 07:34:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--OAj64a25--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2588%25A5%25E3%2582%25BF%25E3%2583%2596%25E3%2581%25A7%25E9%2596%258B%25E3%2581%2584%25E3%2581%25A6%25E3%2581%2584%25E3%2582%258B%25E3%2583%259A%25E3%2583%25BC%25E3%2582%25B8%25E3%2582%2592%25E3%2580%2581%25E3%2583%25AA%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2589%25E3%2581%2599%25E3%2582%258B%25E3%2581%2593%25E3%2581%25A8%25E3%2581%25AA%25E3%2581%258F%25E6%259B%25B4%25E6%2596%25B0%25E3%2581%2597%25E3%2581%259F%25E3%2581%2584%2528%25E7%2590%2586%25E8%25AB%2596%25E7%25B7%25A8%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:t0mmy%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2cwOV9uUGFwUktkM1E4VnVoc25fY0pSZTEzZmtPZTBseFpEbTNhNGc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>t0mmy</dc:creator></item><item><title><![CDATA[別タブで開いているページを、リロードすることなく更新したい(実装編)]]></title><description><![CDATA[
+ 概要
+拙著 別タブで開いているページを、リロードすることなく更新したい(理論編) にて、以下を実装する際の技術課題を確認しました。
+
+目的のページを既に別タブで開いている場合、このタブを表示する
+タブを表示する際、リロードを行わずに画面のデータを更新する
+
+画面のデータ : 上記例で言うと、選択されたチャプター動画の再生位置）
+
+
+
+本記事では、サンプルコードを作成し、期待した動作が実現できることを確認します。
+
+ 前提
+Next.js にてサンプルコードを実装します。
+
+ 初期状態
+
+ ファイル構成
+.
+└── app
+    ├── fonts
+    ├── intro
+   ...]]></description><link>https://zenn.dev/t0mmy/articles/no-open-new-tab-and-no-reload-impl</link><guid isPermaLink="true">https://zenn.dev/t0mmy/articles/no-open-new-tab-and-no-reload-impl</guid><pubDate>Mon, 16 Sep 2024 07:34:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--L7sIID-w--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2588%25A5%25E3%2582%25BF%25E3%2583%2596%25E3%2581%25A7%25E9%2596%258B%25E3%2581%2584%25E3%2581%25A6%25E3%2581%2584%25E3%2582%258B%25E3%2583%259A%25E3%2583%25BC%25E3%2582%25B8%25E3%2582%2592%25E3%2580%2581%25E3%2583%25AA%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2589%25E3%2581%2599%25E3%2582%258B%25E3%2581%2593%25E3%2581%25A8%25E3%2581%25AA%25E3%2581%258F%25E6%259B%25B4%25E6%2596%25B0%25E3%2581%2597%25E3%2581%259F%25E3%2581%2584%2528%25E5%25AE%259F%25E8%25A3%2585%25E7%25B7%25A8%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:t0mmy%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2cwOV9uUGFwUktkM1E4VnVoc25fY0pSZTEzZmtPZTBseFpEbTNhNGc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>t0mmy</dc:creator></item><item><title><![CDATA[ReactやVueのビルドで何が起こっているか]]></title><description><![CDATA[
+ はじめに
+Web設計はどんどん肥大化と複雑化していくもので、それに抗うための技術が発生するなどして…中々イメージが捉えづらいと思います。
+本記事はそんな捉えづらい概念をご紹介していければと思います。
+書いているうちに長くなってしまったので、とりあえずビルドに関係する部分をまとめました。
+
+ Node.js
+
+Node.jsとは…単にGoogle Chromeをサーバーサイドで動かしてしまおうという技術です。
+今までJavaScriptはブラウザサイドで動くものとして扱ってきました。
+しかしサーバーサイドで動かせるようになるということはサーバー内のファイルにJavaScriptでアクセ...]]></description><link>https://zenn.dev/patatan/articles/6c1ef183cab758</link><guid isPermaLink="true">https://zenn.dev/patatan/articles/6c1ef183cab758</guid><pubDate>Mon, 16 Sep 2024 07:28:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--h6LG38xA--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%25E3%2582%2584Vue%25E3%2581%25AE%25E3%2583%2593%25E3%2583%25AB%25E3%2583%2589%25E3%2581%25A7%25E4%25BD%2595%25E3%2581%258C%25E8%25B5%25B7%25E3%2581%2593%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%2584%25E3%2582%258B%25E3%2581%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%2591%25E3%2582%25BF%25E3%2581%259F%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzUwYzEyYzU4MjYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>パタたん</dc:creator></item><item><title><![CDATA[Elysia.jsを始める【Life Cycle】]]></title><description><![CDATA[※ この記事は、https://elysiajs.com/essential/life-cycle.html を日本語に翻訳しながら要点をまとめたものになるので、詳細は公式を確認してください。
+
+ Elysia.jsでのライフサイクル図
+
+
+ Events
+Elysiaでのライフサイクルの大まかな概要は以下となる。
+
+
+
+イベント名
+内容
+
+
+
+
+Request
+新しいイベントを受信した時に通知される。この際、オーバーヘッドを減らすために最小限のコンテキストのみが提供される。
+
+
+Parse
+リクエストのあったbodyを解析し、Context.bodyへ内容を追加する。
+
+
+Transf...]]></description><link>https://zenn.dev/69incat/articles/639cf1d3e3ff8c</link><guid isPermaLink="true">https://zenn.dev/69incat/articles/639cf1d3e3ff8c</guid><pubDate>Mon, 16 Sep 2024 06:04:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--eKTWbHZs--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Elysia.js%25E3%2582%2592%25E5%25A7%258B%25E3%2582%2581%25E3%2582%258B%25E3%2580%2590Life%2520Cycle%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Rock-in-Cats%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2ljc0VoMTZOeVB2NTRXT3B1Q1BpanRlaWVCWkdNQ21Hay1yN281Q2c9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Rock-in-Cats</dc:creator></item><item><title><![CDATA[Jotaiはどのようにして誕生したのか、単なるRecoilの代替手段なのか？]]></title><description><![CDATA[こんにちは、Jotaiの作者です。Jotaiが生まれるまでに様々な取り組みをした歴史を短い記事にしてありますのでよろしければご覧ください。今後のJotaiの発展に期待します。
+https://blog.axlight.com/posts/how-jotai-was-born/
+以下、ChatGPTによる翻訳です。
+
+
+ はじめに
+この投稿では、なぜ私がJotaiの開発を始めたのか、その背景にあるストーリーを共有したいと思います。JotaiはしばしばRecoilと似たような解決策と見なされますが、その開発にはもっと長い歴史があります。
+
+ React Hooks
+React Hooksが最...]]></description><link>https://zenn.dev/dai_shi/articles/f770b771b75f73</link><guid isPermaLink="true">https://zenn.dev/dai_shi/articles/f770b771b75f73</guid><pubDate>Mon, 16 Sep 2024 05:36:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hQUgYi4p--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Jotai%25E3%2581%25AF%25E3%2581%25A9%25E3%2581%25AE%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E3%2581%2597%25E3%2581%25A6%25E8%25AA%2595%25E7%2594%259F%25E3%2581%2597%25E3%2581%259F%25E3%2581%25AE%25E3%2581%258B%25E3%2580%2581%25E5%258D%2598%25E3%2581%25AA%25E3%2582%258BRecoil%25E3%2581%25AE%25E4%25BB%25A3%25E6%259B%25BF%25E6%2589%258B%25E6%25AE%25B5%25E3%2581%25AA%25E3%2581%25AE%25E3%2581%258B%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:daishi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzcwZGNhM2E2Y2IuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>daishi</dc:creator></item><item><title><![CDATA[【JavaScript】なんやこの記法...！「~indexOf()」ビット否定演算子]]></title><description><![CDATA[
+ なんやこの記法...！！
+ある日の業務中、チームメンバーが書いた以下のようなコードが目に止まりました。
+(なんやこの記法...！ String.indexOf() の前にチルダ ~ がついとるで...！)
+if (~text.indexOf(searchText)) {
+  return something
+}
+大変お恥ずかしながら、自分で書いたことはおろか見たこともなく、何が行われているのか全くわかりませんでした。
+
+ 結論
+JavaScriptのチルダ ~ はビット否定演算子で、上記のコードでは indexOf() の返り値の各ビットを反転しているのでした。
+
+
+ ビット否定 (...]]></description><link>https://zenn.dev/takada/articles/js-tilde_usage</link><guid isPermaLink="true">https://zenn.dev/takada/articles/js-tilde_usage</guid><pubDate>Mon, 16 Sep 2024 02:29:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8YQAEv0A--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590JavaScript%25E3%2580%2591%25E3%2581%25AA%25E3%2582%2593%25E3%2582%2584%25E3%2581%2593%25E3%2581%25AE%25E8%25A8%2598%25E6%25B3%2595...%25EF%25BC%2581%25E3%2580%258C%7EindexOf%2528%2529%25E3%2580%258D%25E3%2583%2593%25E3%2583%2583%25E3%2583%2588%25E5%2590%25A6%25E5%25AE%259A%25E6%25BC%2594%25E7%25AE%2597%25E5%25AD%2590%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259F%25E3%2581%258B%25E3%2581%25A0%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzljNTBmMDU1ZGEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>たかだ</dc:creator></item><item><title><![CDATA[関数に引数を渡す場合のイベントハンドラ]]></title><description><![CDATA[addEventListenerでイベントハンドラに引数を渡したい場合、関数を直接実行してしまうと即時実行されるため、イベント発生前に処理が完了してしまう。
+そのため、無名関数やアロー関数を使ってイベントが発生したときに初めて関数を実行されるようにする必要がある。
+
+ 関数を直接実行する例
+const button = document.querySelector('.js-button');
+const message = document.querySelector('.js-message');
+
+/**
+ * 関数を定義
+ * @param {string} text - 表示す...]]></description><link>https://zenn.dev/052222/articles/552850bab378c4</link><guid isPermaLink="true">https://zenn.dev/052222/articles/552850bab378c4</guid><pubDate>Sun, 15 Sep 2024 23:46:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--kIcXtGrD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E9%2596%25A2%25E6%2595%25B0%25E3%2581%25AB%25E5%25BC%2595%25E6%2595%25B0%25E3%2582%2592%25E6%25B8%25A1%25E3%2581%2599%25E5%25A0%25B4%25E5%2590%2588%25E3%2581%25AE%25E3%2582%25A4%25E3%2583%2599%25E3%2583%25B3%25E3%2583%2588%25E3%2583%258F%25E3%2583%25B3%25E3%2583%2589%25E3%2583%25A9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Toshi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvMC5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Toshi</dc:creator></item><item><title><![CDATA[Mapbox Newsletter WEEKLY TIPSの解説 -「GeoJSONラインを追加」]]></title><description><![CDATA[
+ はじめに
+この記事は、先日配信されたMapbox NewsletterのWEEKLY TIPSで紹介されていた「GeoJSONラインを追加」についての解説です。このサンプルではGeoJSONソースの使い方を例示しています。また、Newsletterの購読はこちらからお申し込みいただけます。
+以下が本サンプルのデモです。
+
+
+ コードを確認
+まずExamplesのコードを見に行きましょう。
+日本語サイト
+
+英語サイト
+
+基本的に同じコードですが、英語版はスタイルがMapbox Streets v12にアップグレードされているのでこちらを使用します。Mapbox Streets v11で...]]></description><link>https://zenn.dev/mapbox_japan/articles/ef21e5f32d6cbf</link><guid isPermaLink="true">https://zenn.dev/mapbox_japan/articles/ef21e5f32d6cbf</guid><pubDate>Sun, 15 Sep 2024 23:43:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3zP4eJfC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Mapbox%2520Newsletter%2520WEEKLY%2520TIPS%25E3%2581%25AE%25E8%25A7%25A3%25E8%25AA%25AC%2520-%25E3%2580%258CGeoJSON%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%2592%25E8%25BF%25BD%25E5%258A%25A0%25E3%2580%258D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:OttyLab%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RmZWNmNDhhMWMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%259E%25E3%2583%2583%25E3%2583%2597%25E3%2583%259C%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25B9%25E3%2583%25BB%25E3%2582%25B8%25E3%2583%25A3%25E3%2583%2591%25E3%2583%25B3%25E5%2590%2588%25E5%2590%258C%25E4%25BC%259A%25E7%25A4%25BE%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhMGJmZWJmZmQuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>OttyLab</dc:creator></item><item><title><![CDATA[org-babelでJavaScriptを実行しようとすると"command not found: node" エラーになる]]></title><description><![CDATA[Emacsのorg-modeでJavaScriptを実行しようと思い、init.elに以下の記述をしました。
+
+ init.el
+(require 'ob-js)
+(org-babel-do-load-languages 'org-babel-load-languages
+  '((js . t))
+)
+
+そして、orgファイルにjsのコードブロックを記述し、実行してみましたが、
+command not found: node と言われてしまいます。
+
+nodeはインストール済みです。念の為ターミナルで確認しました。
+$ node --version
+v20.6.1
+しかし、org-mo...]]></description><link>https://zenn.dev/ikoamu/articles/c4cf690c4777e3</link><guid isPermaLink="true">https://zenn.dev/ikoamu/articles/c4cf690c4777e3</guid><pubDate>Sun, 15 Sep 2024 16:17:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--AJUF0ZB3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:org-babel%25E3%2581%25A7JavaScript%25E3%2582%2592%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%2597%25E3%2582%2588%25E3%2581%2586%25E3%2581%25A8%25E3%2581%2599%25E3%2582%258B%25E3%2581%25A8%2522command%2520not%2520found%253A%2520node%2522%2520%25E3%2582%25A8...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ikoamu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhiZGM5Y2E2MTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ikoamu</dc:creator></item><item><title><![CDATA[【JavaScript・TypeScript】配列の操作はなるべくfor文を避けるべきと思う理由と代わりに使うメソッドの例]]></title><description><![CDATA[タイトルの通り、配列の操作を行う際は、for文をなるべく用いない方が良いと思っています。
+主な理由はコードの見通しが良くなるためです。
+具体的なコードを用いて解説していきます。
+
+ 配列の要素から1つ条件を満たす要素を返す場合は、find()を用いる
+まず、以下のコードをご覧ください。
+ネストが深すぎて、読むのが嫌になると思います。
+const findValidItem = (items: number[]): number | undefined =&gt; {
+    if (items.length &gt; 0) {
+        for (let i = 0; i &lt;...]]></description><link>https://zenn.dev/ohimusdev46301/articles/960cd3bc35478d</link><guid isPermaLink="true">https://zenn.dev/ohimusdev46301/articles/960cd3bc35478d</guid><pubDate>Sun, 15 Sep 2024 01:05:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--M83gszEs--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590JavaScript%25E3%2583%25BBTypeScript%25E3%2580%2591%25E9%2585%258D%25E5%2588%2597%25E3%2581%25AE%25E6%2593%258D%25E4%25BD%259C%25E3%2581%25AF%25E3%2581%25AA%25E3%2582%258B%25E3%2581%25B9%25E3%2581%258Ffor%25E6%2596%2587%25E3%2582%2592%25E9%2581%25BF%25E3%2581%2591%25E3%2582%258B%25E3%2581%25B9%25E3%2581%258D%25E3%2581%25A8%25E6%2580%259D%25E3%2581%2586%25E7%2590%2586%25E7%2594%25B1%25E3%2581%25A8%25E4%25BB%25A3%25E3%2582%258F%25E3%2582%258A%25E3%2581%25AB%25E4%25BD%25BF%25E3%2581%2586%25E3%2583%25A1%25E3%2582%25BD...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Wataru%2520Takiguchi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdkOTBhM2EyYTcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Wataru Takiguchi</dc:creator></item><item><title><![CDATA[【JavaScript】シャローコピーとディープコピー]]></title><description><![CDATA[
+ シャローコピー（浅いコピー）
+
+シャローコピーを作成するには、スプレッド演算子などが使用できる
+これらの方法では、オブジェクトのトップレベルのプロパティのみがコピーされ、ネストされたオブジェクトは参照のまま
+
+const original = {
+    number: 1,
+    nestedArray: [2, 3]
+};
+
+// シャローコピーを作成
+const shallowCopy = { ...original };
+
+// シャローコピーのネストされたオブジェクトを変更
+shallowCopy.nestedArray[0] = 99;
+
+console.log(ori...]]></description><link>https://zenn.dev/holy0306/articles/489c18a4c58de7</link><guid isPermaLink="true">https://zenn.dev/holy0306/articles/489c18a4c58de7</guid><pubDate>Sat, 14 Sep 2024 10:58:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--cP5G_anu--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590JavaScript%25E3%2580%2591%25E3%2582%25B7%25E3%2583%25A3%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25B3%25E3%2583%2594%25E3%2583%25BC%25E3%2581%25A8%25E3%2583%2587%25E3%2582%25A3%25E3%2583%25BC%25E3%2583%2597%25E3%2582%25B3%25E3%2583%2594%25E3%2583%25BC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:holy%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q1NjE4YWUxNGEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>holy</dc:creator></item></channel></rss>

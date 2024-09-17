@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Linux」のフィード]]></title><description><![CDATA[Zennのトピック「Linux」のRSSフィードです]]></description><link>https://zenn.dev/topics/linux</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/860a9eb1e4.png</url><title>Zennの「Linux」のフィード</title><link>https://zenn.dev/topics/linux</link></image><generator>zenn.dev</generator><lastBuildDate>Tue, 17 Sep 2024 12:03:50 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/linux/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Linux ディストリビューション]]></title><description><![CDATA[
+ はじめに
+このページでは、Dockerイメージとしてよく使われるLinuxディストリビューションについて記述します。
+
+ Linux ディストリビューションとは
+Linuxディストリビューション（ディストロ）は、Linuxカーネルをベースにして、追加のソフトウェアやツールを組み合わせて構成されたオペレーティングシステムです。Linuxディストリビューションには、用途やユーザーのニーズに合わせて異なる構成が提供されています。以下では、Linuxディストリビューションの基本的な要素について解説します。
+
+ 1. Linuxカーネル
+Linuxカーネルは、Linuxオペレーティングシステム...]]></description><link>https://zenn.dev/skrikzts/articles/9cb502a06f73e2</link><guid isPermaLink="true">https://zenn.dev/skrikzts/articles/9cb502a06f73e2</guid><pubDate>Tue, 17 Sep 2024 05:59:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--DMKHfaEu--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%2520%25E3%2583%2587%25E3%2582%25A3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25AA%25E3%2583%2593%25E3%2583%25A5%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:skrikzts%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA2OTdkMjhmMmMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>skrikzts</dc:creator></item><item><title><![CDATA[Ubuntu 24.04サーバー構築入門]]></title><description><![CDATA[私がUbuntu 24.04でサーバーを構築した時の手順を解説したものです。似たことに取り組む方の参考になればと思って書きました。]]></description><link>https://zenn.dev/uchidaryo/books/ubuntu-2404-server-book</link><guid isPermaLink="true">https://zenn.dev/uchidaryo/books/ubuntu-2404-server-book</guid><pubDate>Tue, 17 Sep 2024 00:45:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--szLe-i_i--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci9mNWQ4NDZlMDMxLmpwZw==%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>UR</dc:creator></item><item><title><![CDATA[rsyslogを使って特定の文字列を含むログを特定のログファイルに出力する]]></title><description><![CDATA[
+ はじめに
+この記事はrsyslogのconfigについて理解を深めることを目的とした備忘録です。
+タイトル通りのことを実現したいのであれば以下のような記述にすればOKです。今回はこの記述の意味を理解していこうと思います。
+:msg, contains, "hogehoge" -/var/log/hogehoge.log
+&amp; stop
+大雑把に表現すると、任意のアプリケーションが吐いたログにhogehogeという文字列が含まれていた場合に、hogehoge.logに書き込むための記載です。
+iptablesのログをDROP, ACCEPT単位で出し分けたりする場合などに使うかな...]]></description><link>https://zenn.dev/nian/articles/11601dde44e92e</link><guid isPermaLink="true">https://zenn.dev/nian/articles/11601dde44e92e</guid><pubDate>Mon, 16 Sep 2024 14:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--JShp7Gt2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:rsyslog%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E7%2589%25B9%25E5%25AE%259A%25E3%2581%25AE%25E6%2596%2587%25E5%25AD%2597%25E5%2588%2597%25E3%2582%2592%25E5%2590%25AB%25E3%2582%2580%25E3%2583%25AD%25E3%2582%25B0%25E3%2582%2592%25E7%2589%25B9%25E5%25AE%259A%25E3%2581%25AE%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2581%25AB%25E5%2587%25BA%25E5%258A%259B%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:oniku%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZhNzQzMWFlNmYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>oniku</dc:creator></item><item><title><![CDATA[[AWS/Linux]EBSボリュームを追加でEC2インスタンスへアタッチ,マウントする]]></title><description><![CDATA[
+
+ 目的
+
+EC２インスタンスに追加でEBSボリュームをアタッチし、EC2の中でマウントする事でOSにもデバイス(EBSボリューム)を認識させる。
+ 
+
+
+ 前提の環境
+
+OS:Amazon Linux2
+
+ストレージ:EBSボリューム
+
+ファイルシステム:ext4,xfs
+
+ブロックデバイス:/dev/xvdh,/dev/xvdf1
+
+EC2インスタンスは作成済みでSSHやセッションマネージャーでログインが可能である状態。
+ファイルシステムでext4,xfsの2種類を試したかったため、アタッチするEBSボリュームを2つ作成しています。
+ 
+
+
+ EBSボリュームのアタッチ
+
+ Ter...]]></description><link>https://zenn.dev/takehiro1111/articles/ebs_additional</link><guid isPermaLink="true">https://zenn.dev/takehiro1111/articles/ebs_additional</guid><pubDate>Mon, 16 Sep 2024 13:05:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qRRo4AkG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BAWS%252FLinux%255DEBS%25E3%2583%259C%25E3%2583%25AA%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%25A0%25E3%2582%2592%25E8%25BF%25BD%25E5%258A%25A0%25E3%2581%25A7EC2%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%25B3%25E3%2582%25B9%25E3%2581%25B8%25E3%2582%25A2%25E3%2582%25BF%25E3%2583%2583%25E3%2583%2581%252C%25E3%2583%259E%25E3%2582%25A6%25E3%2583%25B3%25E3%2583%2588%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259F%25E3%2581%2591%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY2NDQ2ZjMwNzcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>たけ</dc:creator></item><item><title><![CDATA[[AWS/Linux]EBSボリュームのリサイズ方法]]></title><description><![CDATA[
+
+ 記事を書いた経緯
+
+エンジニアになって初案件がオンプレからAWSへの移行でその際に対応したのですが、手順をほぼ忘れたなと思いブログに残したいと思ったためです。
+ 
+
+
+ 目的
+
+EC2インスタンスにアタッチしているEBSボリュームのサイズ変更をOS側に適用したい。
+ 
+
+
+ 前提の環境
+
+OS:Amazon Linux2
+ストレージ:EBSボリューム
+ファイルシステム:xfs
+ブロックデバイス:/dev/xvda1
+サイズ:20GB→30GBへの変更
+EC2インスタンスは作成済みでSSHやセッションマネージャーでログインが可能である状態。
+ 
+
+
+ AWS Management C...]]></description><link>https://zenn.dev/takehiro1111/articles/ebs-resize_20240204</link><guid isPermaLink="true">https://zenn.dev/takehiro1111/articles/ebs-resize_20240204</guid><pubDate>Mon, 16 Sep 2024 13:05:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--06RAA7xv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BAWS%252FLinux%255DEBS%25E3%2583%259C%25E3%2583%25AA%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%25A0%25E3%2581%25AE%25E3%2583%25AA%25E3%2582%25B5%25E3%2582%25A4%25E3%2582%25BA%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259F%25E3%2581%2591%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY2NDQ2ZjMwNzcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>たけ</dc:creator></item><item><title><![CDATA[[Terraform/AWS]direnvでAWS IAM IdentityCenterの認証情報を取得する方法]]></title><description><![CDATA[
+
+ 記事を書いた経緯
+
+業務中、ふと手が空いたタイミングでREADMEを確認した際に、direnvに関する記述を見つけたためです。
+それと同時にREADMEは隅々まで読んでおくべきだなと改めて感じた瞬間でした。
+ 
+
+
+ 本記事を読み終わった時のゴール
+
+direnvを使用してAWSの認証情報(access_key,secret_access_key,session_token)を取得し、
+各modulleでterraformプロジェクトを実行できる事。
+ 
+
+
+ 前提の環境
+
+インストール方法やシェルの種類が全体的にMacOS向けの説明になっています。
+AWS IAM Identit...]]></description><link>https://zenn.dev/takehiro1111/articles/direnv_20240203</link><guid isPermaLink="true">https://zenn.dev/takehiro1111/articles/direnv_20240203</guid><pubDate>Mon, 16 Sep 2024 13:05:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--heyQdLeL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BTerraform%252FAWS%255Ddirenv%25E3%2581%25A7AWS%2520IAM%2520IdentityCenter%25E3%2581%25AE%25E8%25AA%258D%25E8%25A8%25BC%25E6%2583%2585%25E5%25A0%25B1%25E3%2582%2592%25E5%258F%2596%25E5%25BE%2597%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259F%25E3%2581%2591%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY2NDQ2ZjMwNzcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>たけ</dc:creator></item><item><title><![CDATA[Windows PC上でDocker Desktopを利用してLinuxの開発環境を構築するまでの仕組み]]></title><description><![CDATA[Windows PC上でDocker Desktopを利用してLinuxの開発環境を構築する場合、ホスト型仮想化（仮想マシン）とコンテナ型仮想化（コンテナ）の両方が組み合わさって動作します。それぞれの役割と技術的背景を説明します。
+
+ 1. Docker Desktopの仕組み
+Docker Desktopは、Windows上でコンテナを利用するためのツールですが、WindowsとLinuxでは動作するOSカーネルが異なります。DockerコンテナはLinuxカーネルの機能に依存しているため、Windows上でそのまま動作させることはできません。このため、Docker Desktopは内...]]></description><link>https://zenn.dev/skrikzts/articles/55f7744ee82aa9</link><guid isPermaLink="true">https://zenn.dev/skrikzts/articles/55f7744ee82aa9</guid><pubDate>Mon, 16 Sep 2024 09:30:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--m15ySu00--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Windows%2520PC%25E4%25B8%258A%25E3%2581%25A7Docker%2520Desktop%25E3%2582%2592%25E5%2588%25A9%25E7%2594%25A8%25E3%2581%2597%25E3%2581%25A6Linux%25E3%2581%25AE%25E9%2596%258B%25E7%2599%25BA%25E7%2592%25B0%25E5%25A2%2583%25E3%2582%2592%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2599%25E3%2582%258B%25E3%2581%25BE%25E3%2581%25A7%25E3%2581%25AE%25E4%25BB%2595%25E7%25B5%2584%25E3%2581%25BF%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:skrikzts%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA2OTdkMjhmMmMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>skrikzts</dc:creator></item><item><title><![CDATA[QEMU で x86_64 Linux 環境を構築する]]></title><description><![CDATA[
+ TL;DR
+# QEMU のインストール
+brew install qemu
+
+# ディスクイメージの作成
+qemu-img create -f qcow2 ubuntu-disk.img 32G
+
+# Ubuntu Server のインストール
+wget https://ubuntu.com/download/server/thank-you?version=24.04.1&amp;architecture=amd64&amp;lts=true
+qemu-system-x86_64 -accel tcg -boot menu=on -cdrom ubuntu-24.04-live-...]]></description><link>https://zenn.dev/sankantsu/articles/e213afb3eb76c7</link><guid isPermaLink="true">https://zenn.dev/sankantsu/articles/e213afb3eb76c7</guid><pubDate>Mon, 16 Sep 2024 04:06:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--V4R173dd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:QEMU%2520%25E3%2581%25A7%2520x86_64%2520Linux%2520%25E7%2592%25B0%25E5%25A2%2583%25E3%2582%2592%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:sankantsu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRmOTc0Nzk2ODEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sankantsu</dc:creator></item><item><title><![CDATA[【自分用】過去使用したリンクまとめ]]></title><description><![CDATA[申し訳ないのですが、本記事は自分のメモのために使用しています。
+業務や勉強の中で調べた物事やリンクがどこかに行きがちなので、
+次回以降調べる際に効率的に調べたり、
+前回どんなことを学んだか忘れないようにしたりするためにまとめていきます。
+随時更新予定です。
+
+ AWS
+
+ Azure
+
+ Windows
+
+ ADサーバ
+ドメインユーザー追加後のリモートのリモートデスクトップ許可設定
+
+ その他
+SSH接続する際にパーミッションエラーが発生した場合の秘密鍵の権限変更方法
+
+ Linux
+]]></description><link>https://zenn.dev/gapteeth/articles/4bbed0584e2120</link><guid isPermaLink="true">https://zenn.dev/gapteeth/articles/4bbed0584e2120</guid><pubDate>Mon, 16 Sep 2024 00:52:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_pRZl-Bi--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E8%2587%25AA%25E5%2588%2586%25E7%2594%25A8%25E3%2580%2591%25E9%2581%258E%25E5%258E%25BB%25E4%25BD%25BF%25E7%2594%25A8%25E3%2581%2597%25E3%2581%259F%25E3%2583%25AA%25E3%2583%25B3%25E3%2582%25AF%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%2589%258D%25E6%25AD%25AF%25E3%2581%2599%25E3%2581%258D%25E3%2581%25A3%25E6%25AD%25AF%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZjZTI5ODhkNzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>前歯すきっ歯</dc:creator></item><item><title><![CDATA[📝 Redmine 環境構築手順]]></title><description><![CDATA[
+ はじめに
+
+ この記事の対象
+redmine の環境構築方法が知りたい方
+redmine のバージョンアップ方法が知りたい方
+
+ ここでやること
+ローカルサーバーにSSH経由でredmine環境構築
+構築したredmineのバージョンアップ
+
+ 環境情報
+Ubuntu Server 24.04
+
+ 作業開始
+
+ 1. パッケージのインストール
+ubuntu のパッケージリポジトリから必要なものをインストールしましょう
+$ sudo apt update
+$ sudo apt install -y build-essential libssl-dev libreadline-dev z...]]></description><link>https://zenn.dev/kotetsu_muscle/articles/ad0aefe1cda8e3</link><guid isPermaLink="true">https://zenn.dev/kotetsu_muscle/articles/ad0aefe1cda8e3</guid><pubDate>Mon, 16 Sep 2024 00:24:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--mog8HRRV--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%2520%2520Redmine%2520%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%25E6%2589%258B%25E9%25A0%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Tora_muscle%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA4ODQwNDM2YjcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Tora_muscle</dc:creator></item><item><title><![CDATA[今更マインクラフト]]></title><description><![CDATA[世界中で3億本以上売れた大人気ゲーム『Minecraft』は、2009年にパソコン向けに公開され、その後も定期的なコンテンツ追加やアップデートによって進化し続けています。素朴なグラフィックとシンプルな操作性、無限の自由度で、多くの世代に親しまれているこのゲーム。本書では、Minecraftの魅力や楽しみ方、そしてサーバーの運用や拡張について、初心者からベテランまで役立つ情報を解説します。]]></description><link>https://zenn.dev/mesgory/books/3ced52c710021e</link><guid isPermaLink="true">https://zenn.dev/mesgory/books/3ced52c710021e</guid><pubDate>Mon, 09 Sep 2024 01:00:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--M8P0JXWG--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci9kNDc2ZmQ3OWM3LmpwZw==%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>趣味は再インストール🍥</dc:creator></item><item><title><![CDATA[惰性でArchLinuxを使っていたが、必要に駆られてNixOSを使い出した]]></title><description><![CDATA[
+ 始めに
+エンジニア転職する少し前から、ArchLinuxをメインのOSと使い出して2年経過しました。
+ArchLinuxにこれと言った不満は無く、「困ったことがあればインストールしなおしたらよいではないか」、という運用を続けていました。
+実際、ネットワーク環境が整っていれば、パッケージダウンロードを含めて2時間程度で復旧できることが分かったので、惰性の運用をしていました。
+ただ、最近のディストロ界隈とvim-jpの流行の波があり、世間は許してくれませんでした。
+必要に駆られたため、現在はNixOSに移行して通常の作業が可能になっています。
+1か月程NixOSをカスタマイズしたので、参...]]></description><link>https://zenn.dev/yasunori_kirin/articles/0013-nixos-first-setup</link><guid isPermaLink="true">https://zenn.dev/yasunori_kirin/articles/0013-nixos-first-setup</guid><pubDate>Sat, 07 Sep 2024 11:38:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--zqvfDaui--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%2583%25B0%25E6%2580%25A7%25E3%2581%25A7ArchLinux%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%2584%25E3%2581%259F%25E3%2581%258C%25E3%2580%2581%25E5%25BF%2585%25E8%25A6%2581%25E3%2581%25AB%25E9%25A7%2586%25E3%2582%2589%25E3%2582%258C%25E3%2581%25A6NixOS%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2584%25E5%2587%25BA%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yasunori0418%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdjN2Y1NzkxNDYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yasunori0418</dc:creator></item><item><title><![CDATA[glibc をビルドしてみよう]]></title><description><![CDATA[
+ TL;DR
+# ソースの入手
+wget https://ftp.gnu.org/gnu/glibc/glibc-2.39.tar.gz
+tar zxf glibc-2.39.tar.gz
+
+# ディレクトリの準備
+mkdir glibc-build glibc-install  # ビルド, インストール用にソースと別ディレクトリが必要
+cd glibc-build
+
+# ビルド・インストール
+../glibc-2.39/configure --prefix=`realpath ../glibc-install` CFLAGS="-O2 -D_FORTIFY_SOURCE=2"  #...]]></description><link>https://zenn.dev/sankantsu/articles/e127e297534d5f</link><guid isPermaLink="true">https://zenn.dev/sankantsu/articles/e127e297534d5f</guid><pubDate>Sat, 07 Sep 2024 10:06:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--XibMrASs--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:glibc%2520%25E3%2582%2592%25E3%2583%2593%25E3%2583%25AB%25E3%2583%2589%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%2588%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:sankantsu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRmOTc0Nzk2ODEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sankantsu</dc:creator></item><item><title><![CDATA[SadServers解説#11 "Gitega": Find the Bad Git Commit]]></title><description><![CDATA[https://ja.wikipedia.org/wiki/ギテガ
+
+ 問題概要
+
+ シナリオ
+失敗したGitコミットを見つける
+
+ 問題詳細
+/home/admin/gitディレクトリには、Golangプログラムとそのテストを含むGitリポジトリがあります。
+このgitディレクトリからテストを実行するには、go testコマンドを実行します。現在のHEAD（最後のコミット）はテストに失敗します。最初のコミットはテストに合格していたと仮定してください。
+
+ 解決判定
+最初にテストを壊したコミットの（長いハッシュの）IDを見つけ、それを/home/admin/solutionファイルに入力...]]></description><link>https://zenn.dev/comf_nakamura/articles/sadservers_11-2</link><guid isPermaLink="true">https://zenn.dev/comf_nakamura/articles/sadservers_11-2</guid><pubDate>Sat, 07 Sep 2024 07:52:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--sO8kS75H--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:SadServers%25E8%25A7%25A3%25E8%25AA%25AC%252311%2520%2522Gitega%2522%253A%2520Find%2520the%2520Bad%2520Git%2520Commit%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25BC%25E3%2583%2588%25E3%2582%25BE%25E3%2583%25BC%25E3%2583%25B3%25E4%25B8%25AD%25E6%259D%2591%25EF%25BD%259C%25E6%2596%25B0%25E4%25BA%25BA%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25A6%25E3%2583%2589...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU1OGFjNDI2M2QuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>コンフォートゾーン中村｜新人クラウドエンジニア</dc:creator></item><item><title><![CDATA[環境構築がもう嫌になって、oh-my-zshおすすめプラグインの一括インストールシェルを書いた]]></title><description><![CDATA[毎回oh-my-zshをインストールしたあとにプラグインを手作業で入れるのが面倒なので、.shファイルとしてまとめた。
+インストールされるプラグインは以下：
+
+aliases
+copypath
+history
+docker
+github
+composer
+laravel
+brew
+zsh-completions
+zsh-autosuggestions
+zsh-syntax-highlighting
+
+https://github.com/DaisukeMinagawa/oh-my-zsh-recommended-plugins-auto-installer
+
+]]></description><link>https://zenn.dev/kai00/articles/45751887b3f704</link><guid isPermaLink="true">https://zenn.dev/kai00/articles/45751887b3f704</guid><pubDate>Sat, 07 Sep 2024 03:00:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--yaCJvVjs--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%258C%25E3%2582%2582%25E3%2581%2586%25E5%25AB%258C%25E3%2581%25AB%25E3%2581%25AA%25E3%2581%25A3%25E3%2581%25A6%25E3%2580%2581oh-my-zsh%25E3%2581%258A%25E3%2581%2599%25E3%2581%2599%25E3%2582%2581%25E3%2583%2597%25E3%2583%25A9%25E3%2582%25B0%25E3%2582%25A4%25E3%2583%25B3%25E3%2581%25AE%25E4%25B8%2580%25E6%258B%25AC%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2582%25B7%25E3%2582%25A7%25E3%2583%25AB%25E3%2582%2592%25E6%259B%25B8%25E3%2581%2584%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kai%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2hxalVERG5JdTFaMzBycVBZeWplblRwMmM0U3dKaGhnWnhiRHVGZ1E9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kai</dc:creator></item><item><title><![CDATA[Laravel開発のVScode用拡張機能を手動で入れるのに頭が来たので一括インストールシェルを書いた]]></title><description><![CDATA[
+ VSCodeのお勧めされているLaravel関連拡張機能一覧
+
+Laravel Blade Snippets
+Laravel 5 Snippets
+Laravel Extra Intellisense
+Laravel Blade Formatter
+Laravel Goto View
+Laravel GoTo Controller
+Laravel Goto Components
+Laravel Extension Pack
+Laravel Goto Config
+
+これらを一括インストールするシェルを書きました。もう環境構築なんて嫌だ！
+https://github.com/Dais...]]></description><link>https://zenn.dev/kai00/articles/88f539a84000df</link><guid isPermaLink="true">https://zenn.dev/kai00/articles/88f539a84000df</guid><pubDate>Sat, 07 Sep 2024 01:01:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--FCOdc8Tj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Laravel%25E9%2596%258B%25E7%2599%25BA%25E3%2581%25AEVScode%25E7%2594%25A8%25E6%258B%25A1%25E5%25BC%25B5%25E6%25A9%259F%25E8%2583%25BD%25E3%2582%2592%25E6%2589%258B%25E5%258B%2595%25E3%2581%25A7%25E5%2585%25A5%25E3%2582%258C%25E3%2582%258B%25E3%2581%25AE%25E3%2581%25AB%25E9%25A0%25AD%25E3%2581%258C%25E6%259D%25A5%25E3%2581%259F%25E3%2581%25AE%25E3%2581%25A7%25E4%25B8%2580%25E6%258B%25AC%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2582%25B7%25E3%2582%25A7%25E3%2583%25AB%25E3%2582%2592%25E6%259B%25B8%25E3%2581%2584%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kai%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2hxalVERG5JdTFaMzBycVBZeWplblRwMmM0U3dKaGhnWnhiRHVGZ1E9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kai</dc:creator></item><item><title><![CDATA[Linuxコマンドチート集]]></title><description><![CDATA[
+ はじめに
+このページではLinuxコマンドのチート集について記述します。
+
+ 基本的なLinuxコマンド
+Linuxのターミナルでよく使われるコマンドをまとめました。ファイルやディレクトリの操作、システム情報の確認、ネットワーク操作など、日常的な作業に役立つコマンドを幅広く紹介します。
+
+ 1. ファイルとディレクトリの操作
+
+ ls コマンド
+ディレクトリ内のファイルとディレクトリを表示します。
+ls           # 現在のディレクトリ内の内容を表示
+ls -l        # 詳細情報を表示 (long format)
+ls -a        # 隠しファイルも含めて...]]></description><link>https://zenn.dev/skrikzts/articles/966792a9d44f8e</link><guid isPermaLink="true">https://zenn.dev/skrikzts/articles/966792a9d44f8e</guid><pubDate>Fri, 06 Sep 2024 13:06:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hq81gHWH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2583%2581%25E3%2583%25BC%25E3%2583%2588%25E9%259B%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:skrikzts%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA2OTdkMjhmMmMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>skrikzts</dc:creator></item><item><title><![CDATA[新しいファイルシステム Bcachefs]]></title><description><![CDATA[自宅サーバーを再構築するにあたり、以前利用していたZFSからBcachefsに乗り換えました。
+私が利用しているArch Linuxの場合、ZFSは通常のリポジトリ経由では取得できず、またカーネルを更新する際にZFSが対応しているか事前に調査が必要など、管理面でのコストが発生しており多少不満を感じていました。Bcachefsはカーネルにマージされているので、その不満の解消が期待できます。
+
+ はじめに
+この記事は下記のユーザーガイドと手元で構築したBcachefsの実際の挙動をもとに書いています。
+
+User manual - bcachefs.org
+
+新たにBcachefsを始めたい...]]></description><link>https://zenn.dev/kznrluk/articles/117729018970af</link><guid isPermaLink="true">https://zenn.dev/kznrluk/articles/117729018970af</guid><pubDate>Fri, 06 Sep 2024 10:29:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--w0mjgTeH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%2596%25B0%25E3%2581%2597%25E3%2581%2584%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%2520Bcachefs%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E7%25AC%25B9%2520%25E5%2592%258C%25E6%2588%2590%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2k4WjI4Um5oRmRuUUFMczBfTVVoZVZ2Y3NBNEVyZldlVFRpcHgyb0VrPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>笹 和成</dc:creator></item><item><title><![CDATA[要約：新年度のはじまりに学ぶ！Linux基礎知識60 -雑誌『Software Design 2024年4月号』]]></title><description><![CDATA[
+ 記事の概要
+この記事は
+雑誌『Software Design 2024年4月号』
+第1特集 新年度のはじまりに学ぶ！ Linux基礎知識60
+https://gihyo.jp/magazine/SD/archive/2024/202404
+の要約になります。
+
+ ディレクトリ構造とファイルシステム
+
+Linuxではパーティションとファイルシステムの概念が重要
+LVMを使用して柔軟なストレージ管理が可能
+ファイルシステムのマウントとアンマウントの方法
+
+
+ プロセス管理
+
+プロセスIDやステータスなど、プロセスの基本的な属性
+ps、top、pstreeなどのプロセス情報取得コマンド
+プ...]]></description><link>https://zenn.dev/kconcon/articles/29262e52ffaba9</link><guid isPermaLink="true">https://zenn.dev/kconcon/articles/29262e52ffaba9</guid><pubDate>Fri, 06 Sep 2024 03:51:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xPsXXQ_Y--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%25A6%2581%25E7%25B4%2584%25EF%25BC%259A%25E6%2596%25B0%25E5%25B9%25B4%25E5%25BA%25A6%25E3%2581%25AE%25E3%2581%25AF%25E3%2581%2598%25E3%2581%25BE%25E3%2582%258A%25E3%2581%25AB%25E5%25AD%25A6%25E3%2581%25B6%25EF%25BC%2581Linux%25E5%259F%25BA%25E7%25A4%258E%25E7%259F%25A5%25E8%25AD%259860%2520-%25E9%259B%2591%25E8%25AA%258C%25E3%2580%258ESoftware%2520Design%25202024%25E5%25B9%25B44%25E6%259C%2588%25E5%258F%25B7%25E3%2580%258F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kcon%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS2J3dThiblhQNFVPck5ESVA2MTRHamVOUEIteU52U2lpUzZnZXhKeEUzPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kcon</dc:creator></item><item><title><![CDATA[メモリアクセスのレイテンシ測定]]></title><description><![CDATA[本記事は CPU (プログラム) が何らかのメモリアクセスを行ってから、実際にデータが CPU に届くまでのメモリアクセスのレイテンシ測定についてまとめています。
+
+ メモリアクセス時の遅延要因
+パッと思いつくものでも以下の要因が考えられます。
+
+L1/L2キャッシュのサイズ
+キャッシュミス (大きなデータをランダムにアクセスすればするほどキャッシュミスは起きる)
+チップ内部のバス (CPU -&gt; DRAM) で消費するサイクル
+DRAM コントローラや DRAM 自体の遅延
+
+
+ 連結リスト (Linked List) を使った測定
+自分が知る限り、自身でプログラムを作成してメモ...]]></description><link>https://zenn.dev/hidenori3/articles/9dee2c54d599b8</link><guid isPermaLink="true">https://zenn.dev/hidenori3/articles/9dee2c54d599b8</guid><pubDate>Wed, 04 Sep 2024 13:47:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--rgHePvxp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%25A1%25E3%2583%25A2%25E3%2583%25AA%25E3%2582%25A2%25E3%2582%25AF%25E3%2582%25BB%25E3%2582%25B9%25E3%2581%25AE%25E3%2583%25AC%25E3%2582%25A4%25E3%2583%2586%25E3%2583%25B3%25E3%2582%25B7%25E6%25B8%25AC%25E5%25AE%259A%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Hidenori%2540%25E4%25BD%258E%25E3%2583%25AC%25E3%2582%25A4%25E3%2583%25A4%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RkMjk0NGM5N2QuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Hidenori@低レイヤ</dc:creator></item></channel></rss>
