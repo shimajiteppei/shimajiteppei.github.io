@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Ubuntu」のフィード]]></title><description><![CDATA[Zennのトピック「Ubuntu」のRSSフィードです]]></description><link>https://zenn.dev/topics/ubuntu</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/8c2cdbc5b3.png</url><title>Zennの「Ubuntu」のフィード</title><link>https://zenn.dev/topics/ubuntu</link></image><generator>zenn.dev</generator><lastBuildDate>Wed, 18 Sep 2024 10:52:30 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/ubuntu/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[ubuntu環境でpython3のバージョンを3.8.10-->3.10に更新する際のメモ（Aptを利用してインストール）]]></title><description><![CDATA[
+ 現在のバージョンの確認
+
+
+ Aptを利用してインストール
+次のようなコマンドで必要なプログラムをインストールします。
+$ sudo apt update
+$ sudo apt install software-properties-common
+次のコマンドでRepositoryを登録します。
+$ sudo add-apt-repository ppa:deadsnakes/ppa
+次のコマンドでPython 3.10をインストールします。
+$ sudo apt install python3.10
+次のコマンドで python 3.10がインストールされてパスを確認することができ...]]></description><link>https://zenn.dev/hovinci/articles/499cb856a7affc</link><guid isPermaLink="true">https://zenn.dev/hovinci/articles/499cb856a7affc</guid><pubDate>Tue, 17 Sep 2024 08:59:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--oG5NLOza--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ubuntu%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25A7python3%25E3%2581%25AE%25E3%2583%2590%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%25923.8.10--%253E3.10%25E3%2581%25AB%25E6%259B%25B4%25E6%2596%25B0%25E3%2581%2599%25E3%2582%258B%25E9%259A%259B%25E3%2581%25AE%25E3%2583%25A1%25E3%2583%25A2%25EF%25BC%2588Apt%25E3%2582%2592%25E5%2588%25A9%25E7%2594%25A8%25E3%2581%2597%25E3%2581%25A6%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%259B%25E3%2583%25B4%25E3%2582%25A3%25E3%2583%25B3%25E3%2583%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzIzYTE5NmI1NDYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ホヴィンチ</dc:creator></item><item><title><![CDATA[Ubuntu 24.04サーバー構築入門]]></title><description><![CDATA[私がUbuntu 24.04でサーバーを構築した時の手順を解説したものです。似たことに取り組む方の参考になればと思って書きました。]]></description><link>https://zenn.dev/uchidaryo/books/ubuntu-2404-server-book</link><guid isPermaLink="true">https://zenn.dev/uchidaryo/books/ubuntu-2404-server-book</guid><pubDate>Tue, 17 Sep 2024 00:45:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--szLe-i_i--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci9mNWQ4NDZlMDMxLmpwZw==%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>UR</dc:creator></item><item><title><![CDATA[AWXでUbuntuサーバーの初期設定をやってしまおう]]></title><description><![CDATA[
+ はじめに
+前回までAnsibleTowerやAWXを現在のバージョンで建てることをやりました。 なので、今回はAWXを使って、Linuxをサーバー運用するときの初期設定をやっちゃえば少し楽なんじゃないかと思ったので、それを実際にやってみようと思います。
+
+ ローカル環境
+機種: M1 Macbook Air(2020)
+OS: MacOS Sonoma 14.6.1
+メモリ: 16GB
+AWX: ver.24.6.1
+AWX operator: ver.2.19.1
+minikube: v1.33.1
+
+ VM環境
+OS: Linux (ubuntu 24.04)
+サイズ: Stan...]]></description><link>https://zenn.dev/emp_tech_blog/articles/ab2119ae4faa1c</link><guid isPermaLink="true">https://zenn.dev/emp_tech_blog/articles/ab2119ae4faa1c</guid><pubDate>Sat, 14 Sep 2024 02:45:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8dP3cwaA--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AWX%25E3%2581%25A7Ubuntu%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2581%25AE%25E5%2588%259D%25E6%259C%259F%25E8%25A8%25AD%25E5%25AE%259A%25E3%2582%2592%25E3%2582%2584%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%2597%25E3%2581%25BE%25E3%2581%258A%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:ssnay%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FhYTMzODRhNGEuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:EMP%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0Y0tXeWUzaDhOdk5LQWJ0Qk1XZnhhYXBobktNYXY0NGpqY1c1NmM9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ssnay</dc:creator></item><item><title><![CDATA[NEC IX2215とUbuntu24.04 LTSでL2TP/IPsec接続を行う]]></title><description><![CDATA[当環境は、もともとL2TP/Wireguardという形で拠点間接続を行っていました。
+最近、自宅ネットワーク環境の見直しを行うに伴ってNEC UNIVERGEシリーズのIX2215というVPN対応の業務用ルーターを購入しました。世間的にはIX2106のほうが人気なのかな..？
+VRF対応でポート数も多く、CLIがCiscoのIOSライクな構文であることが決め手です。
+また、VPN接続で最大1.3Gbpsという自宅で使うには十分なスペックを持っています。
+せっかくハードウェアでVPNが使えるので、別拠点のUbuntu VMとの拠点間接続をL2TP/IPSecで行う環境を構築しました。
+トン...]]></description><link>https://zenn.dev/naxii/articles/379ea290254c0b</link><guid isPermaLink="true">https://zenn.dev/naxii/articles/379ea290254c0b</guid><pubDate>Fri, 13 Sep 2024 17:12:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--RPmRXTJ9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:NEC%2520IX2215%25E3%2581%25A8Ubuntu24.04%2520LTS%25E3%2581%25A7L2TP%252FIPsec%25E6%258E%25A5%25E7%25B6%259A%25E3%2582%2592%25E8%25A1%258C%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Naxii%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E3MGI3M2NkNTUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Naxii</dc:creator></item><item><title><![CDATA[Ubuntu 22.04にPostgreSQL16を入れる話]]></title><description><![CDATA[
+ 概要
+
+Ubuntu22.04にPostgreSQL16を入れる
+Windows11上のA5M2から接続することを目標とする
+
+
+ 注意
+
+コマンド類は誤字の無いようにしてますがご自身でも確認の上実行してください。
+sudoは付けない状態でコマンドを記載する人が多いのでそれに倣っています。
+2024年9月初頭時点での情報です。
+
+
+ インストール
+良くあるコマンドはこれ
+
+bash
+apt install postgresql postgresql-contrib
+
+実際にはこのコマンドを実行するとPostgreSQL14がインストールされます。
+これはUbuntu公式のパッケージア...]]></description><link>https://zenn.dev/yuyujan/articles/cd5ad7bfff3b9e</link><guid isPermaLink="true">https://zenn.dev/yuyujan/articles/cd5ad7bfff3b9e</guid><pubDate>Fri, 13 Sep 2024 12:23:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3zfHrBXQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ubuntu%252022.04%25E3%2581%25ABPostgreSQL16%25E3%2582%2592%25E5%2585%25A5%25E3%2582%258C%25E3%2582%258B%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2586%25E3%2582%2586%25E3%2581%2598%25E3%2582%2583%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS2RjZlpyWVdleGo0NDJPWkhLc2xIQ255bFpDOW5aVXRtSW00YS1PUmUyUVFZPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ゆゆじゃん</dc:creator></item><item><title><![CDATA[X11 ForwardingによるMacでのGUI表示]]></title><description><![CDATA[
+ はじめに
+自分で作業をするときに以下のQiitaの記事の情報が古くなっていることに気づいたので、内容をアップデートしてみました。
+https://qiita.com/loftkun/items/37340745f211ea5d7ece
+
+ サーバでの準備
+ここではUbuntuでの例を上げます。
+sshdの設定ファイルを変更し、sshdを再起動します。
+sudo vim /etc/ssh/sshd_config
+# 以下の設定を行う、（自分の環境では一部はデフォルトで設定されていた）
+# X11Forwarding yes
+# X11DisplayOffset 10
+# X11UseL...]]></description><link>https://zenn.dev/kinakomochi5250/articles/x11forwarding-mac</link><guid isPermaLink="true">https://zenn.dev/kinakomochi5250/articles/x11forwarding-mac</guid><pubDate>Thu, 12 Sep 2024 13:45:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8E_QEY7o--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:X11%2520Forwarding%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258BMac%25E3%2581%25A7%25E3%2581%25AEGUI%25E8%25A1%25A8%25E7%25A4%25BA%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258D%25E3%2581%25AA%25E7%25B2%2589%25E9%25A4%2585%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRlYjczYzVlYjQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>きな粉餅</dc:creator></item><item><title><![CDATA[snapを使ったパッケージのインストール方法]]></title><description><![CDATA[
+ snapを使ったパッケージのインストール
+Ubuntuでパッケージ管理ソフトのsnapを使ったパッケージの更新方法。
+大抵のものはGUIまたはaptから入れると思うが、たまたまfirefoxとvscodeをsnapから入れてみたのでその方法を書き留めておく
+
+ snapとは
+Canonicalが設計および開発したパッケージ管理/ソフトウェア展開ツール。
+もとはubuntuとその派生システムで使用できるように設計されたものらしいが今ではいろいろなlinuxディストリビューションで使える。
+実態はsnapdというデーモンサービズで叩いているsnapコマンドはクライアントアプリケーションに...]]></description><link>https://zenn.dev/ryy_d/articles/b739f8ede8d604</link><guid isPermaLink="true">https://zenn.dev/ryy_d/articles/b739f8ede8d604</guid><pubDate>Thu, 12 Sep 2024 13:10:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--kJE1Uhrt--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:snap%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%259F%25E3%2583%2591%25E3%2583%2583%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B8%25E3%2581%25AE%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ryy_d%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS1FJT2ZlQ0RWaHpwTVlwVnRhVjlZcG9QX2UteVcwSk1wR1QxWlgyTUVQdVpmdW81eWo9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ryy_d</dc:creator></item><item><title><![CDATA[【Windows10Pro】Hyper-V移行]]></title><description><![CDATA[お疲れ様です
+Jimmyです。
+
+ はじめに
+先日Windows11Proに入れていたHyper-VがPCもろとも死んでしまいました。
+そのあたりの経緯は下記に記載しています。
+https://zenn.dev/jinsights/articles/c6071aec871113
+SSDとメモリだけ取って、処分しましたが、
+Hyper-Vを再稼働するときがやってきました！
+
+ Windows10ProにHyper-Vインストール
+MMOやSteamゲーム用で使っているWindows10ProでHyper-Vをインストール。
+やり方などは下記を参考にさせてもらいました。
+https://ze...]]></description><link>https://zenn.dev/jinsights/articles/19a42226c78177</link><guid isPermaLink="true">https://zenn.dev/jinsights/articles/19a42226c78177</guid><pubDate>Thu, 12 Sep 2024 08:21:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_F7fAfzt--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Windows10Pro%25E3%2580%2591Hyper-V%25E7%25A7%25BB%25E8%25A1%258C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Hiromitsu%2520Jin%252FJimmy%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI5NTdkNmRkYmQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Hiromitsu Jin/Jimmy</dc:creator></item><item><title><![CDATA[爆速！デスクトップアプリの切り替え！（Ubuntu対象）]]></title><description><![CDATA[どうも、最近Ubuntuデビューをしました効率厨です🤖
+
+ はじめに
+以前このような記事を書きました
+https://zenn.dev/yokojp/articles/a4939e92c3fc31
+
+
+
+Before
+After
+
+
+
+
+
+
+
+
+
+Afterのように「特定のキーを叩くことで、キーに紐づくデスクトップアプリへ切り替えを行う」といったものです
+ただ、当時使用していたツールであるhammerspoonはMac限定だったため、
+Ubuntuでも同じことを実現するぜというモチベです
+
+ やること
+
+アプリの表示/非表示を行うScriptを作る
+それをショートカットキーの入力時に実行...]]></description><link>https://zenn.dev/yokojp/articles/6395c5f0a5a4ae</link><guid isPermaLink="true">https://zenn.dev/yokojp/articles/6395c5f0a5a4ae</guid><pubDate>Sun, 08 Sep 2024 09:12:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bN3S0wtB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%2588%2586%25E9%2580%259F%25EF%25BC%2581%25E3%2583%2587%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%2588%25E3%2583%2583%25E3%2583%2597%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2581%25AE%25E5%2588%2587%25E3%2582%258A%25E6%259B%25BF%25E3%2581%2588%25EF%25BC%2581%25EF%25BC%2588Ubuntu%25E5%25AF%25BE%25E8%25B1%25A1%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yoko%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2hMVmxVUDhLeFcycFhSM1VGRWlhLWdiYjh4NGhqM01zODFxQnRKamc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yoko</dc:creator></item><item><title><![CDATA[環境構築がもう嫌になって、oh-my-zshおすすめプラグインの一括インストールシェルを書いた]]></title><description><![CDATA[毎回oh-my-zshをインストールしたあとにプラグインを手作業で入れるのが面倒なので、.shファイルとしてまとめた。
+インストールされるプラグインは以下：
+
+aliases
+copypath
+history
+docker
+github
+composer
+laravel
+brew
+zsh-completions
+zsh-autosuggestions
+zsh-syntax-highlighting
+
+https://github.com/DaisukeMinagawa/oh-my-zsh-recommended-plugins-auto-installer
+
+]]></description><link>https://zenn.dev/kai00/articles/45751887b3f704</link><guid isPermaLink="true">https://zenn.dev/kai00/articles/45751887b3f704</guid><pubDate>Sat, 07 Sep 2024 03:00:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--yaCJvVjs--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%258C%25E3%2582%2582%25E3%2581%2586%25E5%25AB%258C%25E3%2581%25AB%25E3%2581%25AA%25E3%2581%25A3%25E3%2581%25A6%25E3%2580%2581oh-my-zsh%25E3%2581%258A%25E3%2581%2599%25E3%2581%2599%25E3%2582%2581%25E3%2583%2597%25E3%2583%25A9%25E3%2582%25B0%25E3%2582%25A4%25E3%2583%25B3%25E3%2581%25AE%25E4%25B8%2580%25E6%258B%25AC%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2582%25B7%25E3%2582%25A7%25E3%2583%25AB%25E3%2582%2592%25E6%259B%25B8%25E3%2581%2584%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kai%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2hxalVERG5JdTFaMzBycVBZeWplblRwMmM0U3dKaGhnWnhiRHVGZ1E9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kai</dc:creator></item><item><title><![CDATA[WSLのUbuntu 22.04 LTSを24.04にアップグレードする]]></title><description><![CDATA[Ubuntu 24.04.1 LTSがリリースされ、do-release-upgradeでのアップグレードも可能になったようなので、アップグレードしつつ手順を残しておきます。
+22.04もまだまだサポート期間は残っているので、自分のような新しいもの好きでなければ急いでアップグレードする必要は無いです。
+あと、移行する内容が無い場合であれば、24.04を新規にインストールするほうが良いです。
+
+ do-release-upgrade で簡単アップグレード
+アップグレードはdo-release-upgradeコマンドを利用して、簡単に済ませます。
+
+ とりあえず現状の確認
+$ cat /et...]]></description><link>https://zenn.dev/playree/articles/6682c5aa4c4722</link><guid isPermaLink="true">https://zenn.dev/playree/articles/6682c5aa4c4722</guid><pubDate>Wed, 04 Sep 2024 23:55:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3sflleze--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:WSL%25E3%2581%25AEUbuntu%252022.04%2520LTS%25E3%2582%259224.04%25E3%2581%25AB%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%25E3%2582%25B0%25E3%2583%25AC%25E3%2583%25BC%25E3%2583%2589%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:playree%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSzc1OVNMOTM4THJqcFl0OUxnSUZKS2NlYThMTVEwbkwyS3oteFBxbUcyQTB3PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>playree</dc:creator></item><item><title><![CDATA[Kubuntu]]></title><description><![CDATA[十数年ぶりにデスクトップ環境を Kubuntu にしてみた。
+
+ インストール
+sudo apt install kubuntu-desktop
+
+ 起動時スプラッシュ画像を変更
+sudo update-alternatives --config default.plymouth
+/usr/share/plymouth/themes/kubuntu-logo/kubuntu-logo.plymouth を選択
+sudo update-alternatives --config text.plymouth
+/usr/share/plymouth/themes/kubuntu-text/ku...]]></description><link>https://zenn.dev/tmtms/articles/202409-kubuntu</link><guid isPermaLink="true">https://zenn.dev/tmtms/articles/202409-kubuntu</guid><pubDate>Mon, 02 Sep 2024 11:52:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--S8lvKlPl--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_80:Kubuntu%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A8%25E3%2581%25BF%25E3%2581%259F%25E3%2581%25BE%25E3%2581%2595%25E3%2581%25B2%25E3%2582%258D%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2o3UVVHOE5NdEJhRmZqWFZ4RmFmMUNnSkJTQ21MRW1LRWVKbHQtd1E9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>とみたまさひろ</dc:creator></item><item><title><![CDATA["いまさら" Raspberry Pi 4でUbuntu Server 24.04 LTSを立ち上げる]]></title><description><![CDATA[余っていたRaspberry Pi4にUbuntu Server 24.04.1 LTSをインストールしたので、その工程のメモ。
+!
+この手順を実行したPCはDebian 12 (Bookworm)
+
+
+ UbuntuのイメージをSDカードに書き込む
+世の中的には rpi-imagerというアプリを使うようだが、ddコマンドでSDカードにイメージを作る方が楽なので、Ubuntuのサイトからイメージファイルをダウンロードし、ddコマンドを使ってSDカードにイメージを作る。
+UbuntuのRaspberry Pi用イメージは、ありがたいことにUbuntuが提供してくれている。今回は、これをそ...]]></description><link>https://zenn.dev/spacelogic/articles/5901557b0e010b</link><guid isPermaLink="true">https://zenn.dev/spacelogic/articles/5901557b0e010b</guid><pubDate>Mon, 02 Sep 2024 10:45:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--trpg-ivI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%2522%25E3%2581%2584%25E3%2581%25BE%25E3%2581%2595%25E3%2582%2589%2522%2520Raspberry%2520Pi%25204%25E3%2581%25A7Ubuntu%2520Server%252024.04%2520LTS%25E3%2582%2592%25E7%25AB%258B%25E3%2581%25A1%25E4%25B8%258A%25E3%2581%2592%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:spacelogic%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E4ZmJkNTkzMjMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>spacelogic</dc:creator></item><item><title><![CDATA[Linux (Ubuntu 24.02) でキーボードリマッピング]]></title><description><![CDATA[
+ Ubuntuを使いやすくするために
+最近新卒で入った会社の社用ノートPC(Ubuntu)を使いやすく（Macっぽく）するために調べたので共有します。具体的には以下を設定しました。
+
+
+Cmd⌘キーの実装
+Ubuntuでは同じショートカット Ctrl + C がターミナルでは強制終了、その他のアプリケーションではコピーに割り振られているので、アプリによって使うショートカットが変わって不便です。Macでは Ctrl⌃ キーの他に、Cmd⌘キーがあり Ctrl⌃ + C で強制終了、Cmd⌘ + C でコピーとどのアプリケーションでも同じように動作するのでこれを設定します。
+
+
+CapsL...]]></description><link>https://zenn.dev/ly9988/articles/15a0044fae141e</link><guid isPermaLink="true">https://zenn.dev/ly9988/articles/15a0044fae141e</guid><pubDate>Sun, 01 Sep 2024 23:40:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--gLalp3m4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%2520%2528Ubuntu%252024.02%2529%2520%25E3%2581%25A7%25E3%2582%25AD%25E3%2583%25BC%25E3%2583%259C%25E3%2583%25BC%25E3%2583%2589%25E3%2583%25AA%25E3%2583%259E%25E3%2583%2583%25E3%2583%2594%25E3%2583%25B3%25E3%2582%25B0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Ly9988%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzkzOGMwYzBhNGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Ly9988</dc:creator></item><item><title><![CDATA[1つのNICにmacvlanで複数の仮想NICを作成する！]]></title><description><![CDATA[
+ はじめに
+今回、とある目的のためにRaspberryPiに複数のネットワークを割り当てたくなりました。
+しかしながら、RaspberryPiには一つのNICしかなく、複数のネットワークを持つためには、物理NICを別途購入するか仮想的にNICを作成するしかありません。
+そのときに、macvlanを用いて仮想NICを作成する方法があることを知り、その備忘録を残すために本記事を作成しました。間違っている点や気になる点があれば、コメントの方へお願いします。
+
+ 構築
+
+ ネットワーク構成
+!
+ここで、Allied Telesis x210はL2のスイッチであり、VLAN1とVLAN2を持って...]]></description><link>https://zenn.dev/tochiman/articles/0d1ef4690dd1db</link><guid isPermaLink="true">https://zenn.dev/tochiman/articles/0d1ef4690dd1db</guid><pubDate>Sun, 01 Sep 2024 07:14:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--cLoHffqv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:1%25E3%2581%25A4%25E3%2581%25AENIC%25E3%2581%25ABmacvlan%25E3%2581%25A7%25E8%25A4%2587%25E6%2595%25B0%25E3%2581%25AE%25E4%25BB%25AE%25E6%2583%25B3NIC%25E3%2582%2592%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2599%25E3%2582%258B%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tochiman%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA4NTAzODI5MzAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tochiman</dc:creator></item><item><title><![CDATA[vivaldiをubuntuにインストール]]></title><description><![CDATA[
+ vivaldiをubuntuへインストールする方法
+ubuntu22.04でレポジトリのセットアップをしてvivaldiをインストールする方法。
+基本的に公式サイトを見てそのとおりに実行するだけ。
+まずdebパッケージをダウンロード。
+そしてそのファイルをインストール。
+curl -O https://downloads.vivaldi.com/stable/vivaldi-stable_6.8.3381.55-1_amd64.deb
+
+sudo apt install -y vivaldi-stable*.deb
+ダウンロードは別にコマンドではなくても問題はない。普通にブラウザから...]]></description><link>https://zenn.dev/ryy_d/articles/075fee2373468d</link><guid isPermaLink="true">https://zenn.dev/ryy_d/articles/075fee2373468d</guid><pubDate>Sun, 01 Sep 2024 05:40:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ZREKJ80E--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:vivaldi%25E3%2582%2592ubuntu%25E3%2581%25AB%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ryy_d%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS1FJT2ZlQ0RWaHpwTVlwVnRhVjlZcG9QX2UteVcwSk1wR1QxWlgyTUVQdVpmdW81eWo9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ryy_d</dc:creator></item><item><title><![CDATA[Ubuntu 24.04.1 upgrade後の不具合？など]]></title><description><![CDATA[
+ Ubuntu 24.04.1 upgrade後の不具合？など
+2024-09-01
+※追加・\overset{\scriptsize \text{へんこう}}{\small \text{變更}}
+
+20240902追加： screengrab \overset{\scriptsize \text{たいさく}}{\small \text{對策}}
+
+20240904追加： mlterm、terminal上のselections
+20240904訂正： libの名前とpurge
+20240907追加： opensc-pkcs11 Libreoffice 根本\overset{\scrip...]]></description><link>https://zenn.dev/sorehaomosiroi/articles/sorehaomosiroi-20240901_ubuntu2404</link><guid isPermaLink="true">https://zenn.dev/sorehaomosiroi/articles/sorehaomosiroi-20240901_ubuntu2404</guid><pubDate>Sat, 31 Aug 2024 23:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3LeFyOll--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ubuntu%252024.04.1%2520upgrade%25E5%25BE%258C%25E3%2581%25AE%25E4%25B8%258D%25E5%2585%25B7%25E5%2590%2588%25EF%25BC%259F%25E3%2581%25AA%25E3%2581%25A9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2584%25E3%2581%2584%25E3%2581%25AD%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2YyMDNkNWJiZDcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>いいね</dc:creator></item><item><title><![CDATA[PostgreSQLをソースコードからインストールしてみる]]></title><description><![CDATA[マイヅラーです。
+DBの勉強用に自身の端末にソースコードからPostgreSQLをインストールしたので、手順を記載します。
+※前提としてWindows端末からWSLを動かしているので、Ubuntuのコマンドでの手順となります。
+
+ 下準備
+PostgreSQLインストールに必要なライブラリをインストールしておきます。
+# apt-get update
+# apt install gcc
+# apt install make
+# apt install zlib1g-dev
+# apt install libreadline-dev
+
+ ユーザーの作成
+PostgreSQLを操作するユーザ...]]></description><link>https://zenn.dev/maiduraaa/articles/8745ad245c2c2d</link><guid isPermaLink="true">https://zenn.dev/maiduraaa/articles/8745ad245c2c2d</guid><pubDate>Sat, 31 Aug 2024 15:06:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--LV8NyTBB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:PostgreSQL%25E3%2582%2592%25E3%2582%25BD%25E3%2583%25BC%25E3%2582%25B9%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2581%258B%25E3%2582%2589%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%259E%25E3%2582%25A4%25E3%2583%2585%25E3%2583%25A9%25E3%2583%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk3NDdiYzdkOTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>マイヅラー</dc:creator></item><item><title><![CDATA[WSL2+Ubuntu+Dockerでの環境整備]]></title><description><![CDATA[
+ はじめに
+探せばいくらでも出てくるトピックであるので、特段改めて書く必要性はないのだが、
+自分の備忘録として、構築方法をまとめておこうと思う。
+この記事では、Windows10上でWSL2を使ってUbuntuのインストールとDockerを導入し、
+環境を整備する方法をまとめる。
+初めての投稿なので雑なところは大目に見てください。
+
+ 筆者環境
+
+Windows 10 Home 22H2
+
+
+ WSL2のセットアップ
+※すでにwslを入れた後に書いているので、初めて入れる場合はうまくいかないところがあるかもしれない。
+その時は参考記事を見て解決してください。
+参考記事
+
+WSL を使用...]]></description><link>https://zenn.dev/pion24/articles/wsl2-ubuntu-docker_install</link><guid isPermaLink="true">https://zenn.dev/pion24/articles/wsl2-ubuntu-docker_install</guid><pubDate>Sat, 31 Aug 2024 09:51:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--HW50XTQE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:WSL2%252BUbuntu%252BDocker%25E3%2581%25A7%25E3%2581%25AE%25E7%2592%25B0%25E5%25A2%2583%25E6%2595%25B4%25E5%2582%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tok%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FGZFp1Y3JXSzhKc19kWnN4UHowX2ROZWlseTlFZVdxSy1HR1JxeWJfQ0lSPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tok</dc:creator></item><item><title><![CDATA[source .bashrc 等でシェルの動作確認するのはやめてほしい]]></title><description><![CDATA[source コマンドを使用したシェルの設定確認はやめてほしいです.
+代わりに,
+exec $SHELL -l
+を使用してください.
+
+ どうして
+.bashrc, .profile, .bash_profile などのシェル設定ファイルやPATH/環境変数の設定を確認する際に, source コマンド(e.g. source .bashrc) を利用するのはおすすめできません.
+既に読み込まれた設定が残っているため, 設定が正しく反映されているかどうかや, 設定の参照状況や優先順位を確認することが難しくなるからです.
+「source コマンドでパスが通ったのが確認できたのでOKだ!」っ...]]></description><link>https://zenn.dev/sashimi/articles/f28f9c00d24e5c</link><guid isPermaLink="true">https://zenn.dev/sashimi/articles/f28f9c00d24e5c</guid><pubDate>Fri, 30 Aug 2024 04:40:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--aCnfbyvK--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:source%2520.bashrc%2520%25E7%25AD%2589%25E3%2581%25A7%25E3%2582%25B7%25E3%2582%25A7%25E3%2583%25AB%25E3%2581%25AE%25E5%258B%2595%25E4%25BD%259C%25E7%25A2%25BA%25E8%25AA%258D%25E3%2581%2599%25E3%2582%258B%25E3%2581%25AE%25E3%2581%25AF%25E3%2582%2584%25E3%2582%2581%25E3%2581%25A6%25E3%2581%25BB%25E3%2581%2597%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:sashimi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2k0dkdSZ0t3ZWRrVWZwYXFnbmt6UHJSQXlfTHJxMHdGZUMycEFLalE9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sashimi</dc:creator></item></channel></rss>

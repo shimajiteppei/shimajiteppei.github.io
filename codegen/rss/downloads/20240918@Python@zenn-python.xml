@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Wed, 18 Sep 2024 07:45:22 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[【SQLAlchemy】Modelの循環インポートを撲滅する]]></title><description><![CDATA[
+ FastAPIとSQLAlchemyにおける循環インポート問題の解決策
+
+ 循環参照が発生した
+FastAPIとSQLAlchemyを用いたWebアプリケーション開発において、以下のようなエラーメッセージに遭遇することがあります。
+ImportError: cannot import name 'User' from partially initialized module 'app.models.user' (most likely due to a circular import)
+このエラーは「循環インポート問題」として知られており、モデル間の相互参照によって引き起こされます。...]]></description><link>https://zenn.dev/xronotech/articles/1422840061125e</link><guid isPermaLink="true">https://zenn.dev/xronotech/articles/1422840061125e</guid><pubDate>Wed, 18 Sep 2024 06:13:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hyxNo1MY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590SQLAlchemy%25E3%2580%2591Model%25E3%2581%25AE%25E5%25BE%25AA%25E7%2592%25B0%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%259D%25E3%2583%25BC%25E3%2583%2588%25E3%2582%2592%25E6%2592%25B2%25E6%25BB%2585%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E7%258E%2589%25E6%259D%2591%2520%25E7%25B4%2594%25E4%25B8%2580%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdmMTJiODY3MzAuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BEXronotech%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJjYzRjMjFhMDguanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>玉村 純一</dc:creator></item><item><title><![CDATA[LangGraph Cloud(ベータ版)の基本機能を試してみた]]></title><description><![CDATA[
+ はじめに
+こんにちは。PharmaXでエンジニアをしている諸岡（@hakoten）です。
+今回は、LangGraphの クラウドホスティング環境であるLangGraph Cloudについて紹介します。
+LangGraph Cloudは現在ベータ版ですが、すでに多くの機能が利用可能です。弊社では、既にLangSmithを運用していることもあり、LangGraph Cloudの採用を視野に基本的な機能を試してみました。今回はその内容をシェアしたいと思います。
+LangGraph Cloudに興味がある方の参考になれば幸いです。
+
+ LangGraph Cloudとは
+https://ww...]]></description><link>https://zenn.dev/pharmax/articles/7d20bfe258c51b</link><guid isPermaLink="true">https://zenn.dev/pharmax/articles/7d20bfe258c51b</guid><pubDate>Wed, 18 Sep 2024 00:32:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--s4JeT4yy--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:LangGraph%2520Cloud%2528%25E3%2583%2599%25E3%2583%25BC%25E3%2582%25BF%25E7%2589%2588%2529%25E3%2581%25AE%25E5%259F%25BA%25E6%259C%25AC%25E6%25A9%259F%25E8%2583%25BD%25E3%2582%2592%25E8%25A9%25A6%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:hakotensan%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2QxNTUyMTlkOTUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:PharmaX%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2YzNGM1MmE4MWMuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hakotensan</dc:creator></item><item><title><![CDATA[Python in Excel が正式リリースされたので触ってみる]]></title><description><![CDATA[!
+内容は、2024/09/18 現在の内容であり、内容は随時、更新される可能性があります
+
+
+ Python in Excel が GA (General Release)
+Microsoft 365 Insider Program で公開されていた Python in Excel が一般提供開始され、Windows 版 Excel アプリで利用できるようになったので、試してみた。
+https://techcommunity.microsoft.com/t5/excel-blog/python-in-excel-available-now/ba-p/4240212
+https://su...]]></description><link>https://zenn.dev/ymasaoka/articles/trying-out-python-in-excel-it-has-been-ga</link><guid isPermaLink="true">https://zenn.dev/ymasaoka/articles/trying-out-python-in-excel-it-has-been-ga</guid><pubDate>Tue, 17 Sep 2024 15:26:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--kzVB_hlb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%2520in%2520Excel%2520%25E3%2581%258C%25E6%25AD%25A3%25E5%25BC%258F%25E3%2583%25AA%25E3%2583%25AA%25E3%2583%25BC%25E3%2582%25B9%25E3%2581%2595%25E3%2582%258C%25E3%2581%259F%25E3%2581%25AE%25E3%2581%25A7%25E8%25A7%25A6%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25BE%25E3%2581%25A3%25E3%2581%25B4%25E3%2581%2583%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2IxMjU1M2JlZDguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>まっぴぃ</dc:creator></item><item><title><![CDATA[Stable Diffusion で遊んでみる (7) — FLUX.1 を試してみる]]></title><description><![CDATA[
+ 目的
+世間で black-forest-labs/FLUX.1-dev が流行っているらしいので、N 番煎じで動かして自己満足したまとめ。
+
+ FLUX.1-dev-gguf
+噂では巨大なモデルらしいので、恐る恐るということで量子化されたバージョンからいきたい。gguf ファイルは diffusers では直接ロードできず、leejet/stable-diffusion.cpp を経由する必要があるらしいのでこれで試す。
+念のため VRAM 24 GB の NVIDIA L4 を使ったが、12359MiB くらいの消費量のようだったので、たぶんそこまで VRAM を使っていないのでは...]]></description><link>https://zenn.dev/derwind/articles/dwd-stable-diffusion07</link><guid isPermaLink="true">https://zenn.dev/derwind/articles/dwd-stable-diffusion07</guid><pubDate>Tue, 17 Sep 2024 13:05:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--i2CU1cY3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Stable%2520Diffusion%2520%25E3%2581%25A7%25E9%2581%258A%25E3%2582%2593%25E3%2581%25A7%25E3%2581%25BF%25E3%2582%258B%2520%25287%2529%2520%25E2%2580%2594%2520FLUX.1%2520%25E3%2582%2592%25E8%25A9%25A6%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:derwind%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFiNjBiZDcwMDMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>derwind</dc:creator></item><item><title><![CDATA[［AtCoder］ABC-368｜C - Triple Attack]]></title><description><![CDATA[
+ 設問ページ
+
+🔗ABC-368 C - Triple Attack
+
+
+
+ 提出結果
+def getInt():
+    return int(input())
+
+
+def getIntList():
+    return list(map(int, input().split()))
+
+
+def main():
+    N = getInt()
+    H = getIntList()
+
+    T = 0
+    for i in range(N):
+        d, m = divmod(H[i], 5)
+        T += d * 3
+        while m...]]></description><link>https://zenn.dev/hyperdb/articles/01fe20624cc1e6</link><guid isPermaLink="true">https://zenn.dev/hyperdb/articles/01fe20624cc1e6</guid><pubDate>Tue, 17 Sep 2024 10:46:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--A6qfDiI3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25EF%25BC%25BBAtCoder%25EF%25BC%25BDABC-368%25EF%25BD%259CC%2520-%2520Triple%2520Attack%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AF%25E3%2581%2584%25E3%2581%25B1%25E3%2581%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhODJkODgwMzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>はいぱぁ</dc:creator></item><item><title><![CDATA[jailCTF 2024 - writeup]]></title><description><![CDATA[
+jailCTF楽しかった！なんと9位と国際的な大会で始めて一桁順位とFirst Blood(2 calls)が取れました！
+あえて言うならpyjailが多くてjs jailが二問しかなかったのが残念でした。EXECJsで学んだことあんまり活かせず...
+
+ ✅ blind-calc (103pts 176/715solves クリア率25%)
+数式を送ると計算結果が返ってくる
+$ nc challs1.pyjail.club 5838
+
+Enter math &gt; 3*3
+9
+無効な数式を送ると、エラー文が返ってくる。
+Enter math &gt; 0/0
+./blind.sh:...]]></description><link>https://zenn.dev/tchen/articles/5c446d9dbd9920</link><guid isPermaLink="true">https://zenn.dev/tchen/articles/5c446d9dbd9920</guid><pubDate>Tue, 17 Sep 2024 09:01:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--FJgylPmY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_76:jailCTF%25202024%2520-%2520writeup%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:t-chen%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSndGbmw3UUNSVkZRdDdIRXpZYm84alBZQW0xYzhXTXhUc0c2UkgzMXRjV3NsMll3PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>t-chen</dc:creator></item><item><title><![CDATA[ubuntu環境でpython3のバージョンを3.8.10-->3.10に更新する際のメモ（Aptを利用してインストール）]]></title><description><![CDATA[
+ 現在のバージョンの確認
+
+
+ Aptを利用してインストール
+次のようなコマンドで必要なプログラムをインストールします。
+$ sudo apt update
+$ sudo apt install software-properties-common
+次のコマンドでRepositoryを登録します。
+$ sudo add-apt-repository ppa:deadsnakes/ppa
+次のコマンドでPython 3.10をインストールします。
+$ sudo apt install python3.10
+次のコマンドで python 3.10がインストールされてパスを確認することができ...]]></description><link>https://zenn.dev/hovinci/articles/499cb856a7affc</link><guid isPermaLink="true">https://zenn.dev/hovinci/articles/499cb856a7affc</guid><pubDate>Tue, 17 Sep 2024 08:59:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--oG5NLOza--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ubuntu%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25A7python3%25E3%2581%25AE%25E3%2583%2590%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%25923.8.10--%253E3.10%25E3%2581%25AB%25E6%259B%25B4%25E6%2596%25B0%25E3%2581%2599%25E3%2582%258B%25E9%259A%259B%25E3%2581%25AE%25E3%2583%25A1%25E3%2583%25A2%25EF%25BC%2588Apt%25E3%2582%2592%25E5%2588%25A9%25E7%2594%25A8%25E3%2581%2597%25E3%2581%25A6%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%259B%25E3%2583%25B4%25E3%2582%25A3%25E3%2583%25B3%25E3%2583%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzIzYTE5NmI1NDYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ホヴィンチ</dc:creator></item><item><title><![CDATA[［AtCoder］ABC-369｜A - 369]]></title><description><![CDATA[
+ 設問ページ
+
+🔗ABC-369 A - 369
+
+
+
+ 提出結果
+def getIntMap():
+    return map(int, input().split())
+
+
+def main():
+    A, B = getIntMap()
+
+    print(1 if A == B else 3 if abs(A - B) % 2 == 0 else 2)
+
+
+if __name__ == "__main__":
+    main()
+]]></description><link>https://zenn.dev/hyperdb/articles/d240bfa2323841</link><guid isPermaLink="true">https://zenn.dev/hyperdb/articles/d240bfa2323841</guid><pubDate>Tue, 17 Sep 2024 05:52:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--HzJ_UYLz--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25EF%25BC%25BBAtCoder%25EF%25BC%25BDABC-369%25EF%25BD%259CA%2520-%2520369%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AF%25E3%2581%2584%25E3%2581%25B1%25E3%2581%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhODJkODgwMzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>はいぱぁ</dc:creator></item><item><title><![CDATA[［AtCoder］ABC-369｜B - Piano 3]]></title><description><![CDATA[
+ 設問ページ
+
+🔗ABC-369 B - Piano 3
+
+
+
+ 提出結果
+def getInt():
+    return int(input())
+
+
+def getStringListRow(N):
+    return [list(input().split()) for _ in range(N)]
+
+
+def main():
+    N = getInt()
+    AS = getStringListRow(N)
+
+    L = [int(AS[i][0]) for i in range(N) if AS[i][1] == "L"]
+    R = [int(AS[i]...]]></description><link>https://zenn.dev/hyperdb/articles/ab09d8f803eb69</link><guid isPermaLink="true">https://zenn.dev/hyperdb/articles/ab09d8f803eb69</guid><pubDate>Tue, 17 Sep 2024 05:52:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2cYYxbuD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25EF%25BC%25BBAtCoder%25EF%25BC%25BDABC-369%25EF%25BD%259CB%2520-%2520Piano%25203%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AF%25E3%2581%2584%25E3%2581%25B1%25E3%2581%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhODJkODgwMzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>はいぱぁ</dc:creator></item><item><title><![CDATA[［AtCoder］ABC-368｜A - Cut]]></title><description><![CDATA[
+ 設問ページ
+
+🔗ABC-368 A - Cut
+
+
+
+ 提出結果
+def getIntMap():
+    return map(int, input().split())
+
+
+def getStringList():
+    return list(input().split())
+
+
+def main():
+    N, K = getIntMap()
+    A = getStringList()
+
+    print(" ".join((A[(-1 * K) :] + A[: (N - K)])))
+
+
+if __name__ == "__main__":
+    main()
+]]></description><link>https://zenn.dev/hyperdb/articles/7c64c0d539de54</link><guid isPermaLink="true">https://zenn.dev/hyperdb/articles/7c64c0d539de54</guid><pubDate>Tue, 17 Sep 2024 05:52:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ZmEuJS9G--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25EF%25BC%25BBAtCoder%25EF%25BC%25BDABC-368%25EF%25BD%259CA%2520-%2520Cut%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AF%25E3%2581%2584%25E3%2581%25B1%25E3%2581%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhODJkODgwMzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>はいぱぁ</dc:creator></item><item><title><![CDATA[［AtCoder］ABC-368｜B - Decrease 2 max elements]]></title><description><![CDATA[
+ 設問ページ
+
+🔗ABC-368 B - Decrease 2 max elements
+
+
+
+ 提出結果
+def getInt():
+    return int(input())
+
+
+def getIntList():
+    return list(map(int, input().split()))
+
+
+def checker(x):
+    return len([i for i in x if i &gt; 0])
+
+
+def main():
+    N = getInt()
+    A = getIntList()
+
+    c = 0
+    while checker...]]></description><link>https://zenn.dev/hyperdb/articles/1be1c20d89dc98</link><guid isPermaLink="true">https://zenn.dev/hyperdb/articles/1be1c20d89dc98</guid><pubDate>Tue, 17 Sep 2024 05:52:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--eb9v2USO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25EF%25BC%25BBAtCoder%25EF%25BC%25BDABC-368%25EF%25BD%259CB%2520-%2520Decrease%25202%2520max%2520elements%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AF%25E3%2581%2584%25E3%2581%25B1%25E3%2581%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhODJkODgwMzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>はいぱぁ</dc:creator></item><item><title><![CDATA[End-to-End OCRのDonutで名刺画像を構造化データに変換してみる]]></title><description><![CDATA[
+ 概要
+株式会社mutexの熊澤です。
+2022年に、End-to-End OCRモデルのDonutがリリースされ、弊社内でも実験的に使っていました。
+
+
+Donutは、Transformerベースのモデルで、画像からテキストを抽出するOCRタスクに特化しています。
+今回は、Donutを使って、以下のような簡単な実験をしていきたいと思います。
+
+名刺画像をランダムに作成
+Donutのベースモデルをファインチューニング
+結果の確認
+
+
+ 名刺画像をランダムに作成
+
+ 名刺の形式
+名刺の形式は以下の通りです。
+
+会社名
+氏名
+メールアドレス
+電話番号
+住所
+
+DonutはテキストをXML形...]]></description><link>https://zenn.dev/mutex_inc/articles/demonstrate-donut</link><guid isPermaLink="true">https://zenn.dev/mutex_inc/articles/demonstrate-donut</guid><pubDate>Tue, 17 Sep 2024 02:50:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xOiowmjx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:End-to-End%2520OCR%25E3%2581%25AEDonut%25E3%2581%25A7%25E5%2590%258D%25E5%2588%25BA%25E7%2594%25BB%25E5%2583%258F%25E3%2582%2592%25E6%25A7%258B%25E9%2580%25A0%25E5%258C%2596%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2581%25AB%25E5%25A4%2589%25E6%258F%259B%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:dfc22%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE2NmRjMzU1MTIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:mutex%2520Official%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBmODQxZTcyNzEuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>dfc22</dc:creator></item><item><title><![CDATA[LLMファクトリークラスを実装してLangchainのモデル変更を簡単にした話]]></title><description><![CDATA[tips: 9割Claudeで記述してます。すごく便利です！
+
+ はじめに
+大規模言語モデル（LLM）の急速な発展により、多くの開発者が複数のLLMプロバイダーやモデルを使用するようになっています。しかし、これらの異なるAPIや設定を管理することは、しばしば煩雑になります。この記事では、この課題に対処するための効果的なソリューション、LLMファクトリークラスの実装について解説します。
+
+ LLMファクトリークラスの概要
+LLMファクトリークラスは、ファクトリーパターンを応用した設計手法です。このアプローチにより、異なるLLMプロバイダーやモデルを統一的なインターフェースで扱うことができ、...]]></description><link>https://zenn.dev/titabash/articles/b596ae00356c8d</link><guid isPermaLink="true">https://zenn.dev/titabash/articles/b596ae00356c8d</guid><pubDate>Tue, 17 Sep 2024 02:14:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--PLv9mgpt--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:LLM%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25AF%25E3%2583%2588%25E3%2583%25AA%25E3%2583%25BC%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25B9%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2597%25E3%2581%25A6Langchain%25E3%2581%25AE%25E3%2583%25A2%25E3%2583%2587%25E3%2583%25AB%25E5%25A4%2589%25E6%259B%25B4%25E3%2582%2592%25E7%25B0%25A1%25E5%258D%2598%25E3%2581%25AB%25E3%2581%2597%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:TKNR%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc3MWFjNGQ3Y2EuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>TKNR</dc:creator></item><item><title><![CDATA[Pythonユニットテストのモック徹底解説：仕組みから実践的な使い方まで]]></title><description><![CDATA[
+ はじめに
+
+ 目的
+unittest, pytest でモックするときに使う、 unittest.mock 実装を確認して、どのようにモックを実現しているか理解し、ベストプラクティスを見つける
+
+ 背景
+
+Python でユニットテストを書く時にモックオブジェクトをふんわり使うのをやめたい
+自信を持ってモックしたい
+
+以上の理由から、腹落ちするまで調べることにしました。
+
+ 知りたい疑問
+
+Pythonにおける "モックオブジェクト" とは何か？
+どのようにしてモックを実現しているのか？
+モックオブジェクト使用のベストプラクティスは？
+
+
+ 対象読者
+
+unittest, pytes...]]></description><link>https://zenn.dev/knowledgework/articles/mechanism-pytest-mock</link><guid isPermaLink="true">https://zenn.dev/knowledgework/articles/mechanism-pytest-mock</guid><pubDate>Tue, 17 Sep 2024 01:27:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8ImkMJz---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2583%25A6%25E3%2583%258B%25E3%2583%2583%25E3%2583%2588%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E3%2581%25AE%25E3%2583%25A2%25E3%2583%2583%25E3%2582%25AF%25E5%25BE%25B9%25E5%25BA%2595%25E8%25A7%25A3%25E8%25AA%25AC%25EF%25BC%259A%25E4%25BB%2595%25E7%25B5%2584%25E3%2581%25BF%25E3%2581%258B%25E3%2582%2589%25E5%25AE%259F%25E8%25B7%25B5%25E7%259A%2584%25E3%2581%25AA%25E4%25BD%25BF%25E3%2581%2584%25E6%2596%25B9%25E3%2581%25BE%25E3%2581%25A7%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%2596%25E3%2582%258F%25E3%2581%258D%25E3%2582%2593%252Fzawakin%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E4MWZhOWNhZmYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2583%258A%25E3%2583%25AC%25E3%2583%2583%25E3%2582%25B8%25E3%2583%25AF%25E3%2583%25BC%25E3%2582%25AF%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBjYzlmYzFmMjIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ざわきん/zawakin</dc:creator></item><item><title><![CDATA[Cloud Run Job を使って並列バッチ処理を楽に実装する]]></title><description><![CDATA[
+ はじめに
+バッチ処理の実装において、依存関係のない処理を高速化するために並列化することは一般的です。
+しかし、Cloud Run Service を使って、並列処理を実装するとなると、実装が複雑になりがちです。そこで、使ったことのなかった Cloud Run Job を使って並列バッチ処理を簡単に実装できるか検証してみました。
+
+ TL;DR
+Cloud Run には、HTTP リクエストを受け付ける Cloud RUn サービスと、定期的なジョブを実行する Cloud Run ジョブ の 2 つのモードがあります。このリポジトリでは、バッチ処理のモードである Cloud Run J...]]></description><link>https://zenn.dev/gixo/articles/83f6fb09f4aeea</link><guid isPermaLink="true">https://zenn.dev/gixo/articles/83f6fb09f4aeea</guid><pubDate>Mon, 16 Sep 2024 23:00:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--YNKJ3wFt--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Cloud%2520Run%2520Job%2520%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E4%25B8%25A6%25E5%2588%2597%25E3%2583%2590%25E3%2583%2583%25E3%2583%2581%25E5%2587%25A6%25E7%2590%2586%25E3%2582%2592%25E6%25A5%25BD%25E3%2581%25AB%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Yuji%2520Tsuritani%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVkYTBiZjE4NjMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25AE%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25B9%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JkYzZkZjE2NmMuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yuji Tsuritani</dc:creator></item><item><title><![CDATA[PythonでMQTTについて学ぼう（devcontainerによる開発環境構築付き）]]></title><description><![CDATA[
+ はじめに
+この記事は、「MQTTとはなにか」から実際にPythonを使ってMQTTを用いたデータ通信の方法について記載しています。
+
+ MQTTとは
+MQTTとは、非同期に1対多の通信ができるプロトコルで、IoTシステムなどで多数のデバイス間で短いメッセージを頻繁に送受信するようなシーンで利用されています。
+
+
+
+用語
+説明
+
+
+
+
+トピック (Topic)
+メッセージ送受信のキー情報 (/を使って階層構造を表現できる)
+
+
+メッセージ (Message)
+デバイス間で交換される情報
+
+
+ブローカー (Broker)
+・MQTTにおけるサーバーの役割・サブスクライバーとパブリッシャー...]]></description><link>https://zenn.dev/secondselection/articles/mqtt_from_python</link><guid isPermaLink="true">https://zenn.dev/secondselection/articles/mqtt_from_python</guid><pubDate>Mon, 16 Sep 2024 21:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ozXOnK-G--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A7MQTT%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E5%25AD%25A6%25E3%2581%25BC%25E3%2581%2586%25EF%25BC%2588devcontainer%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258B%25E9%2596%258B%25E7%2599%25BA%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%25E4%25BB%2598%25E3%2581%258D%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:u_hijiri%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzljNTA3MDMwNTguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25BB%25E3%2582%25AB%25E3%2583%25B3%25E3%2583%2589%25E3%2582%25BB%25E3%2583%25AC%25E3%2582%25AF%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0ZHJ6RHVTRnZUS2pDQ2U2aGxtdC1TbnprX1dIYzhjV1JJWlhxQk1lMUNCalE9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>u_hijiri</dc:creator></item><item><title><![CDATA[ABC371-E DP解法]]></title><description><![CDATA[公式解説では主客転倒 + 余事象を使った解き方が紹介されていましたが、少し違うアプローチ（分類するならDP?）で解いたのでそれをまとめておきたいと思います。
+
+ 問題
+https://atcoder.jp/contests/abc371/tasks/abc371_e
+
+ 問題概要
+長さ Nの整数列A=(A_{1}, \dots, A_{N})に対し、f(l, r) \ (1\leq l \leq r \leq N)を、「集合\{A_{l}, A_{l+1}, \dots, A_{r-1}, A_{r}\} の要素数」と定める。このとき
+\sum_{i=1}^{N}\sum_{j=i}^{...]]></description><link>https://zenn.dev/kmmtkm/articles/46760298b7c9c8</link><guid isPermaLink="true">https://zenn.dev/kmmtkm/articles/46760298b7c9c8</guid><pubDate>Mon, 16 Sep 2024 16:14:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--iCd2Zavc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:ABC371-E%2520DP%25E8%25A7%25A3%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kmmtkm%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZhMGFiZDkwZmIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kmmtkm</dc:creator></item><item><title><![CDATA[3D座標変換の基礎まとめ]]></title><description><![CDATA[
+ はじめに
+座標変換関連の処理を業務で触ることになったのですが、触れるのが大学受験勉強以来だったので、基礎的な要素も含めて自分の復習用まとめます。
+この記事はあくまでも個人的なメモとして作成されています。そのため、使用したライブラリやツールのバージョンについては特に記載しておりません。コードの動作環境に依存する可能性があるため、ご利用の際はご自身の環境に合わせたバージョンで適切にインストールしてお使いください。
+以下の基本的な処理をpythonとcppの両方でまとめます。
+
+オイラー角 -&gt; 回転行列
+オイラー角 -&gt; transform matrix
+transform ...]]></description><link>https://zenn.dev/nyanchu/articles/3d_coordinate_transformation_math_cb462a0a593b4e</link><guid isPermaLink="true">https://zenn.dev/nyanchu/articles/3d_coordinate_transformation_math_cb462a0a593b4e</guid><pubDate>Mon, 16 Sep 2024 15:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--HTTNLzrE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:3D%25E5%25BA%25A7%25E6%25A8%2599%25E5%25A4%2589%25E6%258F%259B%25E3%2581%25AE%25E5%259F%25BA%25E7%25A4%258E%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nyanchu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2EwZmQ5Njk4NzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nyanchu</dc:creator></item><item><title><![CDATA[pythonのtqdm(プログレスバー)メモ]]></title><description><![CDATA[プログレスバーはPCが行っている作業の進捗や残り時間・見積を可視化してくれるヤツ。
+機械学習や深層学習を行う場合は、学習に長時間かかることもあることから、あとどれくらいで学習が終了するのか、どれくらい学習に時間がかかったのかを可視化できると、終了時間の目安がわかる上に実際に終了した時間もわかるので非常に便利。
+例えばpytorchでセグメンテーションを行う場合、以下の様に実装できる。(autocastやgradscalerなどを含めている)
+progress_bar = tqdm.tqdm(train_set, desc=f'Epoch {e}')
+for process, (image...]]></description><link>https://zenn.dev/tttttttttt/articles/38ba83cb39497d</link><guid isPermaLink="true">https://zenn.dev/tttttttttt/articles/38ba83cb39497d</guid><pubDate>Mon, 16 Sep 2024 14:02:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_eU8RZ0O--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:python%25E3%2581%25AEtqdm%2528%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25AC%25E3%2582%25B9%25E3%2583%2590%25E3%2583%25BC%2529%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tttttttttt%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2IxZTcyNjQ1MWMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tttttttttt</dc:creator></item><item><title><![CDATA[[Python]SAMでWAFの特定ルールを削除、作成するLambdaをデプロイしてみた]]></title><description><![CDATA[
+ 
+
+ 要件
+
+
+
+アプリ審査時にWAFの地域制限のルールを外したい。
+この作業を開発チームで完結させたいため、Terraform等のインフラ寄りのツールではなく、
+開発側に馴染みのあるLambda関数を用いて実現したい。
+ 
+
+
+現状は開発チームとSRE間で適宜コミュニケーションを取りながら対応しているが、
+非同期でも共通認識を持てるようにするために処理完了後にSlack通知する。
+
+
+
+ 前提
+
+SAM CLIをインストール済みであること。
+Pythonの基本的な文法を押さえていること。
+IAMロールの作成を行うので、AWS CLI or Terraformを扱える状態にあること。...]]></description><link>https://zenn.dev/takehiro1111/articles/sam_python_waf</link><guid isPermaLink="true">https://zenn.dev/takehiro1111/articles/sam_python_waf</guid><pubDate>Mon, 16 Sep 2024 13:05:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jUxBleHW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BPython%255DSAM%25E3%2581%25A7WAF%25E3%2581%25AE%25E7%2589%25B9%25E5%25AE%259A%25E3%2583%25AB%25E3%2583%25BC%25E3%2583%25AB%25E3%2582%2592%25E5%2589%258A%25E9%2599%25A4%25E3%2580%2581%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2599%25E3%2582%258BLambda%25E3%2582%2592%25E3%2583%2587%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25A4%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259F%25E3%2581%2591%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY2NDQ2ZjMwNzcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>たけ</dc:creator></item></channel></rss>

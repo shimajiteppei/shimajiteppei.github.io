@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「CSS」のフィード]]></title><description><![CDATA[Zennのトピック「CSS」のRSSフィードです]]></description><link>https://zenn.dev/topics/css</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/094a9b2a18.png</url><title>Zennの「CSS」のフィード</title><link>https://zenn.dev/topics/css</link></image><generator>zenn.dev</generator><lastBuildDate>Wed, 18 Sep 2024 07:10:49 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/css/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[スクロールすると表示・非表示が切り替わるヘッダーのテンプレート | HTML, CSS(SCSS), JS]]></title><description><![CDATA[
+ 概要
+スクロールすると表示・非表示が切り替わるヘッダーのテンプレート. 下にスクロールすると、ヘッダーが画面上部に消えていって、上にバックスクロールすると、ヘッダーが画面上部から出現する
+よく使うのでテンプレートにしました
+
+
+ 前提
+ファイル構造
+/
+├ logo-256x512.png
+├ index.html
+├ style.css
+└ script.js
+
+ コード
+
+ HTML / index.html
+
+index.html
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta chars...]]></description><link>https://zenn.dev/bbsfish/articles/30a78f5a37f342</link><guid isPermaLink="true">https://zenn.dev/bbsfish/articles/30a78f5a37f342</guid><pubDate>Wed, 18 Sep 2024 03:32:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9js1iuZm--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%2599%25E3%2582%258B%25E3%2581%25A8%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2583%25BB%25E9%259D%259E%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%258C%25E5%2588%2587%25E3%2582%258A%25E6%259B%25BF%25E3%2582%258F%25E3%2582%258B%25E3%2583%2598%25E3%2583%2583%25E3%2583%2580%25E3%2583%25BC%25E3%2581%25AE%25E3%2583%2586%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AC%25E3%2583%25BC%25E3%2583%2588%2520%257C%2520HTML%252C%2520CSS%2528SCSS%2529%252C%2520JS%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Y.%2520HSD%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSS1ZeDZXOGNtbm1hTFhWM25SNC1QYnFWbTdDVkJ3RXdrT2czUlNnWjlOPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Y. HSD</dc:creator></item><item><title><![CDATA[Vanilla.JSで作るハンバーガーメニュー]]></title><description><![CDATA[
+ ハンバーガーメニューをJSで作ろう
+コピペで済ませがちなハンバーガーメニューをVanilla.JSで作りました。
+こんなハンバーガーメニューです。
+
+ハンバーガーメニューを開いている間、背景は固定
+画面幅を検知して、背景固定を解除する
+スムーズなスクロール
+ヘッダーの高さぶん自動でずれるページ内リンク
+
+
+ コード
+長いので折りたたんでいます。
+この下からポイントをしぼって解説しています。
+HTML&lt;header class="header"&gt;
+      &lt;div class="header__inner"&gt;
+        &lt;nav class="h...]]></description><link>https://zenn.dev/928sekine/articles/1336d250e5235e</link><guid isPermaLink="true">https://zenn.dev/928sekine/articles/1336d250e5235e</guid><pubDate>Tue, 17 Sep 2024 10:59:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6s_4u4VX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Vanilla.JS%25E3%2581%25A7%25E4%25BD%259C%25E3%2582%258B%25E3%2583%258F%25E3%2583%25B3%25E3%2583%2590%25E3%2583%25BC%25E3%2582%25AC%25E3%2583%25BC%25E3%2583%25A1%25E3%2583%258B%25E3%2583%25A5%25E3%2583%25BC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259B%25E3%2581%258D%25E3%2581%25AD%25E3%2582%258A%25E3%2581%25AA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAyNDQ3MGIzZjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>せきねりな</dc:creator></item><item><title><![CDATA[こういうデザイン (Augmented UI? 拡張 UI？) を CSS で実装する方法]]></title><description><![CDATA[
+ はじめに
+言葉では説明しにくいので、以下の画像を見ていただいたほうが早いです。
+
+このように、画像の一部が切り抜かれたようなデザイン。
+このようなデザインを指す特定な名称は見つかりませんでしたが、個人的には Augmented UI (拡張 UI) がもっとも近いような気がします。
+
+ Augmented UI
+Augmented UI とは、サイバーパンクなどでよく見る以下のような形を CSS で再現するライブラリの名称です。
+
+augmented-ui - Integrate your apps with technology
+https://augmented-ui.com/
+...]]></description><link>https://zenn.dev/ixkaito/articles/augmented-ui</link><guid isPermaLink="true">https://zenn.dev/ixkaito/articles/augmented-ui</guid><pubDate>Tue, 17 Sep 2024 00:41:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--V88lUSF0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%2593%25E3%2581%2586%25E3%2581%2584%25E3%2581%2586%25E3%2583%2587%25E3%2582%25B6%25E3%2582%25A4%25E3%2583%25B3%2520%2528Augmented%2520UI%253F%2520%25E6%258B%25A1%25E5%25BC%25B5%2520UI%25EF%25BC%259F%2529%2520%25E3%2582%2592%2520CSS%2520%25E3%2581%25A7%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kite%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dVd0RFM2dGcXRNYjJpUmRMLWxEaHNwdjgzaVBjSG9ZZEpRX0hKWlE9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kite</dc:creator></item><item><title><![CDATA[Panda.cssを触ってみてのメモです]]></title><description><![CDATA[
+ Panda.cssを触ってみてのメモです
+誰かの助けになればと！あと自分の復習用
+以下使用したバージョンです。
+
+
+
+使用したフレームワーク/ライブラリ
+バージョン
+
+
+
+
+next
+14.2.8
+
+
+@pandacss/dev
+0.45.2
+
+
+
+
+ 関数的にまとめ対象別に変数を渡せるのか？
+結論できた
+// tsx
+&lt;div className={css(ball('-.14s'))}&gt;s&lt;/div&gt;
+&lt;div className={css(ball('-70ms'))}&gt;&lt;/div&gt;
+&lt;div className={css(...]]></description><link>https://zenn.dev/tmo_taka/articles/421df41856d0b4</link><guid isPermaLink="true">https://zenn.dev/tmo_taka/articles/421df41856d0b4</guid><pubDate>Mon, 16 Sep 2024 13:25:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--69SbxJWB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Panda.css%25E3%2582%2592%25E8%25A7%25A6%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%25A6%25E3%2581%25AE%25E3%2583%25A1%25E3%2583%25A2%25E3%2581%25A7%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tmo-taka%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM3ODU2NDc0M2EuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tmo-taka</dc:creator></item><item><title><![CDATA[2024年CSSで新しく追加された「垂直方向の中央揃え」機能]]></title><description><![CDATA[https://developer.mozilla.org/en-US/docs/Web/CSS/align-content
+対応バージョン: Chrome 123、Firefox 125、Safari 17.4
+ついに縦中央揃え機能が追加された。これまで、横方向の中央揃えは簡単に行えたが、
+縦方向の中央揃えには専用の機能がなかったため、display: flexやalign-items: centerといった少し複雑な方法を使う必要があった。
+今はたった1行の align-content: center だけで縦方向の中央揃えができるようになった。
+もうwrapperや複雑な設定なしで...]]></description><link>https://zenn.dev/sunnyheee/articles/3255c3a555ff51</link><guid isPermaLink="true">https://zenn.dev/sunnyheee/articles/3255c3a555ff51</guid><pubDate>Mon, 16 Sep 2024 07:05:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--51Cgub7e--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:2024%25E5%25B9%25B4CSS%25E3%2581%25A7%25E6%2596%25B0%25E3%2581%2597%25E3%2581%258F%25E8%25BF%25BD%25E5%258A%25A0%25E3%2581%2595%25E3%2582%258C%25E3%2581%259F%25E3%2580%258C%25E5%259E%2582%25E7%259B%25B4%25E6%2596%25B9%25E5%2590%2591%25E3%2581%25AE%25E4%25B8%25AD%25E5%25A4%25AE%25E6%258F%2583%25E3%2581%2588%25E3%2580%258D%25E6%25A9%259F%25E8%2583%25BD%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25BD%25E3%2583%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0ZG1Ec0lUUDNzcXVpOVg0c0ZGUmFTRF9zYzVXUlJJbmVQRFdsVnM9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ソニ</dc:creator></item><item><title><![CDATA[ハンバーガーメニューの作り方（jQuery・JavaScript）]]></title><description><![CDATA[Webサイト制作の際に、ハンバーガーメニューをコーディングして作成する場面は多いです。
+この記事では、ハンバーガーメニューの作成方法を紹介します。jQueryを用いる場合と、プレーンなJavaScriptで記述する場合の2通りを解説します。
+
+ 今回作成するもの
+右上のハンバーガーメニューをクリックすると、メニューがスライドダウンするようなものを作成します。
+
+
+ jQueryを用いる場合
+コードは以下の通りです。
+
+jQueryは以下のように記述しています。
+
+jQuery
+$(function(){
+  $('#hamburger').on('click',function(){
+ ...]]></description><link>https://zenn.dev/ryo_hajime/articles/e0c23698ad925e</link><guid isPermaLink="true">https://zenn.dev/ryo_hajime/articles/e0c23698ad925e</guid><pubDate>Sat, 14 Sep 2024 01:44:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jkUJveoL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%258F%25E3%2583%25B3%25E3%2583%2590%25E3%2583%25BC%25E3%2582%25AC%25E3%2583%25BC%25E3%2583%25A1%25E3%2583%258B%25E3%2583%25A5%25E3%2583%25BC%25E3%2581%25AE%25E4%25BD%259C%25E3%2582%258A%25E6%2596%25B9%25EF%25BC%2588jQuery%25E3%2583%25BBJavaScript%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Ryoichi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzgxYTIyODY2YzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Ryoichi</dc:creator></item><item><title><![CDATA[デザインがときめくPico CSSの魔法]]></title><description><![CDATA[
+ Intro
+最近私はPico CSSをよく使っているので紹介したいと思います。
+https://picocss.com/
+
+セマンティックな構文を優先し、すべてのHTML要素をデフォルトでレスポンシブかつエレガントにする、ミニマルで軽量なスターターキットです。
+HTMLを書き、Pico CSSを追加して、出来上がり！
+
+!
+公式ドキュメントのコードや内容を引用しています。
+www.DeepL.com/Translator（無料版）で翻訳しました。
+Code licensed MIT, docs CC BY-SA 4.0. Currently v2.0.6.
+
+例えば最近流行りのユーテ...]]></description><link>https://zenn.dev/tkithrta/articles/7472b34cae3279</link><guid isPermaLink="true">https://zenn.dev/tkithrta/articles/7472b34cae3279</guid><pubDate>Thu, 12 Sep 2024 10:58:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--YwgTiEQ4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2587%25E3%2582%25B6%25E3%2582%25A4%25E3%2583%25B3%25E3%2581%258C%25E3%2581%25A8%25E3%2581%258D%25E3%2582%2581%25E3%2581%258FPico%2520CSS%25E3%2581%25AE%25E9%25AD%2594%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E9%25BB%2592%25E3%2583%25B0%25E6%25A8%25B9%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E0NDRlMTA4ZjkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>黒ヰ樹</dc:creator></item><item><title><![CDATA[line-height における数値指定とパーセント指定の違い]]></title><description><![CDATA[
+ はじめに
+CSSのline-heightプロパティを使うと、行の高さを調整できますが、数値とパーセントの指定で挙動が異なることをご存知でしょうか？
+私自身、 line-height をパーセント指定して思わぬレイアウト崩れが発生する問題に悩まされました。今回は、このような問題を防ぐために、数値指定とパーセント指定の違いについて紹介します。
+
+ 例
+
+
+最初の div 要素では、line-height: 180% が指定されています。この場合、 line-height はその要素自身のフォントサイズ（ 14px ）に対して 180% の割合が適用されます。結果として、 line-hei...]]></description><link>https://zenn.dev/chot/articles/27c9056678359d</link><guid isPermaLink="true">https://zenn.dev/chot/articles/27c9056678359d</guid><pubDate>Thu, 12 Sep 2024 02:32:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--FahY_9Ec--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:line-height%2520%25E3%2581%25AB%25E3%2581%258A%25E3%2581%2591%25E3%2582%258B%25E6%2595%25B0%25E5%2580%25A4%25E6%258C%2587%25E5%25AE%259A%25E3%2581%25A8%25E3%2583%2591%25E3%2583%25BC%25E3%2582%25BB%25E3%2583%25B3%25E3%2583%2588%25E6%258C%2587%25E5%25AE%259A%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:kdntiaoao%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAzODVjOWFlYzkuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:chot%2520Inc.%2520tech%2520blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q1NjA0Y2NjM2YuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kdntiaoao</dc:creator></item><item><title><![CDATA[生成AI(ChatGPT4o mini)を使ってフロントエンドを作って見えた問題点3選]]></title><description><![CDATA[
+ 記事の概要
+最近、生成AIがよく話題に上がります。そこで、私も生成AIを活用してフロントエンドの開発に挑戦してみました。具体的には、ゲームのガチャをシミュレートするサイトを作成してみたのですが、その過程でいくつかの問題が見えてきました。以下に、その問題点を3つ紹介します。
+
+ 問題点
+
+
+データ処理の漏れ
+生成AIに100行程度のデータを処理させたところ、漏れが発生しました。GPT曰く、AIの処理能力には限界があり、大量のデータを一度に処理すると、意図した通りの結果が得られないことがあるのとことです。そのため、この部分はAIに依頼できず、自分でデータを処理する必要がありました。
+
+
+...]]></description><link>https://zenn.dev/nnnto/articles/eda52f5c2d208c</link><guid isPermaLink="true">https://zenn.dev/nnnto/articles/eda52f5c2d208c</guid><pubDate>Wed, 11 Sep 2024 13:09:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--YNYrIgML--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%2594%259F%25E6%2588%2590AI%2528ChatGPT4o%2520mini%2529%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2583%2595%25E3%2583%25AD%25E3%2583%25B3%25E3%2583%2588%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2589%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E8%25A6%258B%25E3%2581%2588%25E3%2581%259F%25E5%2595%258F%25E9%25A1%258C%25E7%2582%25B93%25E9%2581%25B8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2593%25E3%2583%25BC%25E3%2581%25A8%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VlMTQ3MGVmYWIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>んーと</dc:creator></item><item><title><![CDATA[CSSで固定背景画像をセクションごとに切り替えるパララックス実装]]></title><description><![CDATA[
+ はじめに
+実装したいのはこんなパララックスです。
+
+各セクション間に背景画像が見えていて、セクションごとに異なる画像に切り替わります。
+これを2通りの方法で実装してみます。
+
+
+background-attachment: fixed で実装
+
+position: fixed + clip-path で実装
+
+先に書いておくと、background-attachment: fixed を使う方法はiOS Safariでうまく動かなかった（2024年9月時点）ため、実際のプロダクトでは後者の方法で実装しました。
+必要に応じて前者は読み飛ばしてください。
+
+ 1. background-...]]></description><link>https://zenn.dev/zozotech/articles/0cfab3a164b072</link><guid isPermaLink="true">https://zenn.dev/zozotech/articles/0cfab3a164b072</guid><pubDate>Wed, 11 Sep 2024 05:18:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xB-PNlTm--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:CSS%25E3%2581%25A7%25E5%259B%25BA%25E5%25AE%259A%25E8%2583%258C%25E6%2599%25AF%25E7%2594%25BB%25E5%2583%258F%25E3%2582%2592%25E3%2582%25BB%25E3%2582%25AF%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2581%2594%25E3%2581%25A8%25E3%2581%25AB%25E5%2588%2587%25E3%2582%258A%25E6%259B%25BF%25E3%2581%2588%25E3%2582%258B%25E3%2583%2591%25E3%2583%25A9%25E3%2583%25A9%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25B9%25E5%25AE%259F%25E8%25A3%2585%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:hito%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY0ZmQ2ZmJhZjQuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BEZOZO%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzUxZTE5MTg2ZWUuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hito</dc:creator></item><item><title><![CDATA[【CSS】:has()セレクタ × WordPress実践的な具体例]]></title><description><![CDATA[
+ はじめに
+最近インプットしたCSS擬似クラス:has()の実際に現場で使用した具体例のアウトプットです。
+今回の実装を通して改めて:has()の強力さを実感したので、まだhas()を使用していない方はぜひ機会があれば使用してみていただきたい、感動します！
+インプットで参考にしたサイトは下記になります。
+https://coliss.com/articles/build-websites/operation/css/css-has-pseudo-class.html
+
+ 今回使用した具体的な使用方法
+WordPressカスタム投稿・カスタムフィールドで複数の会社情報を管理、Google...]]></description><link>https://zenn.dev/tomy_dev/articles/0e3dc637ae12e6</link><guid isPermaLink="true">https://zenn.dev/tomy_dev/articles/0e3dc637ae12e6</guid><pubDate>Wed, 11 Sep 2024 02:52:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--QpThmYet--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590CSS%25E3%2580%2591%253Ahas%2528%2529%25E3%2582%25BB%25E3%2583%25AC%25E3%2582%25AF%25E3%2582%25BF%2520%25C3%2597%2520WordPress%25E5%25AE%259F%25E8%25B7%25B5%25E7%259A%2584%25E3%2581%25AA%25E5%2585%25B7%25E4%25BD%2593%25E4%25BE%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tomy_dev%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBkZDRjZDlmZDQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tomy_dev</dc:creator></item><item><title><![CDATA[【2024】iOSでモーダル表示時に背面のスクロールを固定・抑制する【iOS17.6.1】]]></title><description><![CDATA[定期的に同じことを考えている気がする…
+
+ 結論
+iOS17.6.1現在
+
+
+
+方法
+結果
+
+
+
+
+
+&lt;body&gt;要素にoverflow: hidden
+
+×
+
+
+
+&lt;html&gt;要素, &lt;body&gt;要素にoverflow: hidden
+
+×
+
+
+
+position: fixed+抑制解除時にスクロール位置を元の位置に戻す
+〇
+
+
+react-remove-scroll ※{passive: false}を使用
+〇
+
+
+
+
+ はじめに
+
+ 問題の背景
+モーダルを実装する際、UXの観点から背面のスクロールの抑制を求められることが多いです。
+
+ユーザーの関...]]></description><link>https://zenn.dev/nihashi/articles/4db670877ee5fe</link><guid isPermaLink="true">https://zenn.dev/nihashi/articles/4db670877ee5fe</guid><pubDate>Sun, 08 Sep 2024 05:01:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--R1gMBO53--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%25902024%25E3%2580%2591iOS%25E3%2581%25A7%25E3%2583%25A2%25E3%2583%25BC%25E3%2583%2580%25E3%2583%25AB%25E8%25A1%25A8%25E7%25A4%25BA%25E6%2599%2582%25E3%2581%25AB%25E8%2583%258C%25E9%259D%25A2%25E3%2581%25AE%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%25AB%25E3%2582%2592%25E5%259B%25BA%25E5%25AE%259A%25E3%2583%25BB%25E6%258A%2591%25E5%2588%25B6%25E3%2581%2599%25E3%2582%258B%25E3%2580%2590iOS17.6.1%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nihashi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M3MzM4MjNhMGIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nihashi</dc:creator></item><item><title><![CDATA[ジュースの自販機にあるくじ引きを作りたい]]></title><description><![CDATA[
+ 作成物
+
+JavaScriptで乱数を作って、クラス名を付与しただけ。
+
+ 参考リンク
+CSSを駆使してDIV要素１つでデジタル数字を作る
+
+
+ 所感
+これじゃない感。アニメーションでセグメントを動かしてくじ引きっぽくしないと。まだまだ。
+]]></description><link>https://zenn.dev/taiyok/articles/6cfced2572d4cb</link><guid isPermaLink="true">https://zenn.dev/taiyok/articles/6cfced2572d4cb</guid><pubDate>Sat, 07 Sep 2024 02:07:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dglq7y3g--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B8%25E3%2583%25A5%25E3%2583%25BC%25E3%2582%25B9%25E3%2581%25AE%25E8%2587%25AA%25E8%25B2%25A9%25E6%25A9%259F%25E3%2581%25AB%25E3%2581%2582%25E3%2582%258B%25E3%2581%258F%25E3%2581%2598%25E5%25BC%2595%25E3%2581%258D%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258A%25E3%2581%259F%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%259E%25E3%2583%2583%25E3%2582%25AF%25E5%25B1%258B%2540%25E3%2582%25BD%25E3%2583%2595%25E3%2583%2588%25E3%2582%25A6%25E3%2582%25A7%25E3%2582%25A2%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU5NmJjOTA0YTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>マック屋@ソフトウェアエンジニア</dc:creator></item><item><title><![CDATA[Chrome 129 Betaで追加されたCSSプロパティinterpolate-sizeとcalc-size()とは？]]></title><description><![CDATA[https://developer.chrome.com/blog/chrome-129-beta
+!
+本記事で取り上げているCodepenは2024-09-06現在、Chrome 129 Betaでのみ動作します。
+
+
+ Chrome 129 Beta
+Chrome 129 Betaが2024-08-21にリリースされました。
+position-area の名称変更や Intl.DurationFormat の追加といったアップデートが盛り込まれています。
+本記事では、アップデートの中でも特に実験的な機能のひとつである interpolate-size と calc-size() につ...]]></description><link>https://zenn.dev/cybozu_frontend/articles/20240906_chrome129beta</link><guid isPermaLink="true">https://zenn.dev/cybozu_frontend/articles/20240906_chrome129beta</guid><pubDate>Fri, 06 Sep 2024 02:39:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--DMzmnXyI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Chrome%2520129%2520Beta%25E3%2581%25A7%25E8%25BF%25BD%25E5%258A%25A0%25E3%2581%2595%25E3%2582%258C%25E3%2581%259FCSS%25E3%2583%2597%25E3%2583%25AD%25E3%2583%2591%25E3%2583%2586%25E3%2582%25A3interpolate-size%25E3%2581%25A8calc-size%2528%2529%25E3%2581%25A8%25E3%2581%25AF%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:BaHo%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VjOTA1OThlNjEuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25B5%25E3%2582%25A4%25E3%2583%259C%25E3%2582%25A6%25E3%2582%25BA%2520%25E3%2583%2595%25E3%2583%25AD%25E3%2583%25B3%25E3%2583%2588%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2589%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FGZFp1Y3JobXRZYWJMVzRVNEJBNEVtRnJ6WXZHc2ptMEpqemI5YU1MSFBPZFE9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>BaHo</dc:creator></item><item><title><![CDATA[Tailwind CSS の flex between で要素を左端・右端の左右に配置する例]]></title><description><![CDATA[
+ 両端に表示する例
+  &lt;div class="flex justify-between"&gt;
+    &lt;div&gt;AAAA&lt;/div&gt;
+    &lt;div&gt;BBB&lt;/div&gt;
+  &lt;/div&gt;
+
+
+ ちなみに要素が3個になると
+  &lt;div class="flex justify-between"&gt;
+    &lt;div&gt;AAAA&lt;/div&gt;
+    &lt;div&gt;BBB&lt;/div&gt;
+    &lt;div&gt;CCC&lt;/div&gt;
+  &lt;/div&...]]></description><link>https://zenn.dev/yumainaura/articles/qiita-2024-08-01t10_10_50-09_00</link><guid isPermaLink="true">https://zenn.dev/yumainaura/articles/qiita-2024-08-01t10_10_50-09_00</guid><pubDate>Thu, 05 Sep 2024 00:20:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---1PHABKi--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Tailwind%2520CSS%2520%25E3%2581%25AE%2520flex%2520between%2520%25E3%2581%25A7%25E8%25A6%2581%25E7%25B4%25A0%25E3%2582%2592%25E5%25B7%25A6%25E7%25AB%25AF%25E3%2583%25BB%25E5%258F%25B3%25E7%25AB%25AF%25E3%2581%25AE%25E5%25B7%25A6%25E5%258F%25B3%25E3%2581%25AB%25E9%2585%258D%25E7%25BD%25AE%25E3%2581%2599%25E3%2582%258B%25E4%25BE%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E7%25A8%25B2%25E6%25B5%25A6%25E6%2582%25A0%25E9%25A6%25AC%2520%2528%25E3%2581%2584%25E3%2581%25AA%25E3%2581%2586%25E3%2582%2589%25E3%2582%2586%25E3%2581%2586%25E3%2581%25BE%2529%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FGZFp1Y3BPSm80MUYydFUxV05wb0owWGNCOTBiUGp1MVdxUmtEWjduWmRhSTlZPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>稲浦悠馬 (いなうらゆうま)</dc:creator></item><item><title><![CDATA[Modal系のライブラリはどう作られているのか調べてみた]]></title><description><![CDATA[こんにちは。株式会社 Sally エンジニアの @piesukeです。
+最近面白かったマーダーミステリーは、カモメのピースが揃う時 です。
+弊社ではマーダーミステリーを遊べるアプリ「ウズ」と、マーダーミステリーを制作してウズ上で遊べるアプリ「ウズスタジオ」を開発しています。
+絶賛エンジニア募集中です！詳しくは こちら をご覧ください。
+
+ はじめに
+弊社は Web の再利用可能なコンポーネントは出来るだけ共通コンポーネントを作成するようにしています。そして、共通コンポーネントは出来るだけサードパーティーライブラリを使わず、自前で作成するようにしています。
+しかし、モーダルのような UI ...]]></description><link>https://zenn.dev/uzu_tech/articles/how-to-create-modal-library</link><guid isPermaLink="true">https://zenn.dev/uzu_tech/articles/how-to-create-modal-library</guid><pubDate>Wed, 04 Sep 2024 03:23:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jR_j8RNy--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Modal%25E7%25B3%25BB%25E3%2581%25AE%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%25E3%2581%25AF%25E3%2581%25A9%25E3%2581%2586%25E4%25BD%259C%25E3%2582%2589%25E3%2582%258C%25E3%2581%25A6%25E3%2581%2584%25E3%2582%258B%25E3%2581%25AE%25E3%2581%258B%25E8%25AA%25BF%25E3%2581%25B9%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:piesuke%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI5NjI5NGIwZmUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:UZU%2520%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhjNDgyMGY2MzAuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>piesuke</dc:creator></item><item><title><![CDATA[【Chrome129】ScrollSnapイベントがやってくる！]]></title><description><![CDATA[
+ はじめに
+こんにちは！😄
+Chrome129より、JavaScriptのScrollSnapに関するイベントを使用できるようになりますね！今回はこれらのイベントについてご紹介していきたいと思います。
+https://developer.chrome.com/blog/scroll-snap-events?hl=ja&amp;authuser=5
+
+ ScrollSnapとは
+そもそも「ScrollSnapってなんやねん。」という方もいるかと思います。百聞は一見に如かずということで以下のような操作のことを指します。
+
+cssプロパティscroll-snap-typeを指定することでSc...]]></description><link>https://zenn.dev/gemcook/articles/1e8ab252f5057e</link><guid isPermaLink="true">https://zenn.dev/gemcook/articles/1e8ab252f5057e</guid><pubDate>Tue, 03 Sep 2024 03:35:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--YvHGouZV--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Chrome129%25E3%2580%2591ScrollSnap%25E3%2582%25A4%25E3%2583%2599%25E3%2583%25B3%25E3%2583%2588%25E3%2581%258C%25E3%2582%2584%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%258F%25E3%2582%258B%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:KM%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQyYzJiNzVlZTIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Gemcook%2520Tech%2520Blog%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2EzYjk0ZGQyMWEuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>KM</dc:creator></item><item><title><![CDATA[【Tailwind CSS】他要素の状態によってスタイリングを制御する方法]]></title><description><![CDATA[
+ 解決前状態
+緑の四角がホバーされた時、鉛筆マークの色を青色にしたい場合
+
+&lt;div className="relative flex items-center w-80 h-80 bg-green1 rounded-3xl ml-10 mb-10"&gt;
+      &lt;p className=" text-white text-xs mx-5 break-words line-clamp-4"&gt;
+        testTask
+      &lt;/p&gt;
+      &lt;Edit2
+        onClick={() =&gt; editTaskM...]]></description><link>https://zenn.dev/keigo_hirohara/articles/e799867abfe2b3</link><guid isPermaLink="true">https://zenn.dev/keigo_hirohara/articles/e799867abfe2b3</guid><pubDate>Mon, 02 Sep 2024 22:34:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--A4UZcPFG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Tailwind%2520CSS%25E3%2580%2591%25E4%25BB%2596%25E8%25A6%2581%25E7%25B4%25A0%25E3%2581%25AE%25E7%258A%25B6%25E6%2585%258B%25E3%2581%25AB%25E3%2582%2588%25E3%2581%25A3%25E3%2581%25A6%25E3%2582%25B9%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25AA%25E3%2583%25B3%25E3%2582%25B0%25E3%2582%2592%25E5%2588%25B6%25E5%25BE%25A1%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%2592%25E3%2583%25AD%25E3%2582%25B1%25E3%2582%25A4%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSkt4ams4c2ZjV3hacUttbGNRWE9qYm5YenRfaGpic2JkU0lXMGhxcy1ZRTk0PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ヒロケイ</dc:creator></item><item><title><![CDATA[CSS Anchor Positioning API を使って吹き出しの▼位置を可変にする]]></title><description><![CDATA[!
+2024年9月2日現在、主要ブラウザでは Chrome と Edge でのみ動作します。
+また、上記ブラウザでもまだ実験的機能の位置付けにあるため、将来的に仕様変更により記事のソースでは動作しなくなる可能性があります。
+
+!
+本稿は、 ZOZOTOWN 開発本部のフロントエンドエンジニア有志で開催されている、スタイル分科会にて挙がったテーマを記事にしたものです。
+
+
+ この記事で分かること
+画像のように、吹き出しまわりのテキストが動的や可変になる UI において、吹き出しの ▼ の位置を特定の要素に追従させる方法が分かります。
+
+
+
+
+ デモ
+テキストと吹き出しの内容を変更できるよう...]]></description><link>https://zenn.dev/zozotech/articles/71e0133d0460de</link><guid isPermaLink="true">https://zenn.dev/zozotech/articles/71e0133d0460de</guid><pubDate>Mon, 02 Sep 2024 03:15:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fMYMlKv9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:CSS%2520Anchor%2520Positioning%2520API%2520%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E5%2590%25B9%25E3%2581%258D%25E5%2587%25BA%25E3%2581%2597%25E3%2581%25AE%25E2%2596%25BC%25E4%25BD%258D%25E7%25BD%25AE%25E3%2582%2592%25E5%258F%25AF%25E5%25A4%2589%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%25BF%25E3%2581%258B%25E3%2581%25A1%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY0ZmQ2ZmJhZjQuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BEZOZO%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVjMmFmZWUzNDUuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>みかち</dc:creator></item><item><title><![CDATA[Chrome DevToolsを使いこなしてフロントエンド開発を加速させる]]></title><description><![CDATA[Chrome DevTools（以下、開発者ツール）は開発者にとって欠かせないツールですが、改めて使い方を調べたことは少ないのではないでしょうか？
+この記事では開発者ツールの便利な機能をまとめて紹介します！筆者はChromeをメインで使用しているのでChrome DevTools前提ですが、一部拡張機能や他のブラウザの便利な機能を含みます。
+
+ スクリーンショットをキャプチャする
+端末の機能でもスクリーンショットをキャプチャすることはできますが、開発者ツールではより便利なスクリーンショットの機能が提供されています。
+
+ 特定のノードのスクリーンショットをキャプチャする
+
+Elements...]]></description><link>https://zenn.dev/praha/articles/1b5097407ee6b4</link><guid isPermaLink="true">https://zenn.dev/praha/articles/1b5097407ee6b4</guid><pubDate>Sun, 01 Sep 2024 23:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ecOe5dMZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Chrome%2520DevTools%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2584%25E3%2581%2593%25E3%2581%25AA%25E3%2581%2597%25E3%2581%25A6%25E3%2583%2595%25E3%2583%25AD%25E3%2583%25B3%25E3%2583%2588%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2589%25E9%2596%258B%25E7%2599%25BA%25E3%2582%2592%25E5%258A%25A0%25E9%2580%259F%25E3%2581%2595%25E3%2581%259B%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E8%25BF%2591%25E8%2597%25A4%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NiNzU1NDliMzkuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25A2%25E3%2582%25AC%25E3%2583%25AB%25E3%2583%25BC%25E3%2583%2588%25E3%2583%2586%25E3%2582%25AF%25E3%2583%258E%25E3%2583%25AD%25E3%2582%25B8%25E3%2583%25BC%25E3%2582%25BA%252FPrAha%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU2ZWM4OTJmZjguanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>近藤</dc:creator></item></channel></rss>
