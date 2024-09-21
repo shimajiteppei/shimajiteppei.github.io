@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Sat, 21 Sep 2024 02:41:54 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[NordvpnをDocker上で動かしてproxyにする]]></title><description><![CDATA[
+ 背景
+スクレイピングをする際にnordvpnのWindowsソフトを使用してPCをVPNを繋いでいた
+この方法だとスクレイピングではない通信もVPN経由となる為、通信速度が遅くなったりゲームとの接続が切れたり、Googleに接続できないなどの問題に悩まされる。その解消方法の一案としてスクレイピングをNordVPNのProxy経由で行うことにした。
+こうすることによりスクレイピングしながらも普通にゲームが出来てGoogle検索もできるのでHappy
+
+ 手順
+
+ 使用するDocker Image
+Docker hubにあるjeroenslot/nordvpn-proxyを使用する。gi...]]></description><link>https://zenn.dev/holndal/articles/0a707bc5a4935a</link><guid isPermaLink="true">https://zenn.dev/holndal/articles/0a707bc5a4935a</guid><pubDate>Sat, 21 Sep 2024 00:50:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GBIzh02k--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Nordvpn%25E3%2582%2592Docker%25E4%25B8%258A%25E3%2581%25A7%25E5%258B%2595%25E3%2581%258B%25E3%2581%2597%25E3%2581%25A6proxy%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:holndal%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNmODIzYzU4MGYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>holndal</dc:creator></item><item><title><![CDATA[sqlalchemyで検索値指定によるテーブルリレーションを動的に行う方法]]></title><description><![CDATA[
+ はじめに
+sqlalchemyを使用して、リクエストで検索値のカラムを文字列で指定する場合、その対象のテーブルをリレーションして値を参照しに行く必要があります。
+それをclassを使って動的に実装する方法を紹介します。
+
+ 実際のコード
+まずは検索値をpythonのenumモジュールを使ってあらかじめ定義しておきます。
+
+enum.py
+from enum import Enum
+
+class SearchItem(Enum):
+    USER_NAME = "userName" # UserInfoテーブルのカラム
+    ORDER_ITEM = "orderItem" # O...]]></description><link>https://zenn.dev/takati_pro/articles/6b159b1ffc3c2c</link><guid isPermaLink="true">https://zenn.dev/takati_pro/articles/6b159b1ffc3c2c</guid><pubDate>Fri, 20 Sep 2024 15:29:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6GxU_Sv6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:sqlalchemy%25E3%2581%25A7%25E6%25A4%259C%25E7%25B4%25A2%25E5%2580%25A4%25E6%258C%2587%25E5%25AE%259A%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258B%25E3%2583%2586%25E3%2583%25BC%25E3%2583%2596%25E3%2583%25AB%25E3%2583%25AA%25E3%2583%25AC%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%2592%25E5%258B%2595%25E7%259A%2584%25E3%2581%25AB%25E8%25A1%258C%25E3%2581%2586%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25BF%25E3%2582%25AB%25E3%2581%25A1%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0ttcko3MFRxSjFCVU1ybjd5VmU1amZKSnYzc0dwS1ZOeFBQOHlUM19NanNHVTVYVT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>タカち</dc:creator></item><item><title><![CDATA[【PowerBI】同日or同曜日比較どちらが正解？]]></title><description><![CDATA[
+ はじめに
+こんにちは！株式会社コズムでデータアナリストをしている岸本です。
+今回は、Power BIで昨対比を行う際のお話をさせていただきます。
+ある日、日課の如く前年比較を行っていた際に思ってしまったのです。「同日比較と同曜日比較。結局どっちが正解なの？」
+データ分析を行う中で、前年と当年のデータを比較することからは決して逃れられないのです。日別比較の際に重要となるのが「同じ日付を比較するのか、同じ曜日を比較するのか」という点です。
+この記事では、同日比較と同曜日比較のどちらが適切なのか、どのように使い分けるべきかを具体例とともに説明します。
+
+ 1. 同日比較 vs 同曜日比較:...]]></description><link>https://zenn.dev/skishimoto/articles/d66b4d2bbc8b3b</link><guid isPermaLink="true">https://zenn.dev/skishimoto/articles/d66b4d2bbc8b3b</guid><pubDate>Fri, 20 Sep 2024 08:43:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--p4xdP848--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590PowerBI%25E3%2580%2591%25E5%2590%258C%25E6%2597%25A5or%25E5%2590%258C%25E6%259B%259C%25E6%2597%25A5%25E6%25AF%2594%25E8%25BC%2583%25E3%2581%25A9%25E3%2581%25A1%25E3%2582%2589%25E3%2581%258C%25E6%25AD%25A3%25E8%25A7%25A3%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25B2%25B8%25E6%259C%25AC%25E8%2592%25BC%25E5%258F%25B2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS3dKVnhLNU1VeVpNX05HY3hhOUpESTZCdFJkLWhCbDc0eG9VM0ZiODJXOE5QOU80cz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>岸本蒼史</dc:creator></item><item><title><![CDATA[【Rust】Pythonライブラリを超簡単に作れるツールを作った]]></title><description><![CDATA[
+ はじめに
+最近になってRustを勉強し始めて、何か作ってみようということでpyinitを開発しました。この記事では開発の背景や手こずった点を紹介していこうと思います。
+https://github.com/t3tra-dev/pyinit
+ツール自体のインストール方法や使い方についてはGitHubリポジトリのREADME.ja.mdを参照してください。
+
+ 開発背景
+Pythonのライブラリ開発において、プロジェクトの初期セットアップには多くの手順が伴います。README.mdやsetup.py、__init__.py、ライセンスファイルなど、プロジェクトごとにこれらのファイルを毎回...]]></description><link>https://zenn.dev/t3tra/articles/fe69de7a8ddda5</link><guid isPermaLink="true">https://zenn.dev/t3tra/articles/fe69de7a8ddda5</guid><pubDate>Fri, 20 Sep 2024 01:59:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--JOMdN_qZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Rust%25E3%2580%2591Python%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%25E3%2582%2592%25E8%25B6%2585%25E7%25B0%25A1%25E5%258D%2598%25E3%2581%25AB%25E4%25BD%259C%25E3%2582%258C%25E3%2582%258B%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:t3tra%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ2MDdkNzY3ZTMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>t3tra</dc:creator></item><item><title><![CDATA[ReactとDjangoで認証機能作ってみた(1.サインアップ機能編)]]></title><description><![CDATA[
+ 元美容師のDjangoポートフォリオリニューアル日記Part.7：認証機能(サインアップ機能編)
+こんにちは、やぎです！前回の記事では、サロン情報に画像の登録ができるような実装をしました。
+今回は認証機能の第一回目としてまずはサインアップ機能の追加をしてみます！
+本当はログインやアクセス権限なども一気にやりたいのですが記事のボリュームが大きくなりすぎてしまう為、分けることにしました。
+気長にお待ちください。。。
+それでは今回も頑張ります！実装開始！！
+
+ 既存のApp.jsのコードを別のコンポーネントに移植
+※この部分は前回までの記事での実装内容の変更についてですので、本題とは少しず...]]></description><link>https://zenn.dev/jenny/articles/3b48e993d5c987</link><guid isPermaLink="true">https://zenn.dev/jenny/articles/3b48e993d5c987</guid><pubDate>Fri, 20 Sep 2024 00:01:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---fMmG3So--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%25E3%2581%25A8Django%25E3%2581%25A7%25E8%25AA%258D%25E8%25A8%25BC%25E6%25A9%259F%25E8%2583%25BD%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25281.%25E3%2582%25B5%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%25E6%25A9%259F%25E8%2583%25BD%25E7%25B7%25A8%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2584%25E3%2581%258E%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE0Y2NlYzgwYTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>やぎ</dc:creator></item><item><title><![CDATA[FastAPI のクエリパラメータの宣言に Pydantic モデルが正式に使えるようになった | TrustHub テックブログ]]></title><description><![CDATA[トラストハブ AI チームの中村です。
+つい先日、FastAPI から v0.115.0 がリリースされました。
+https://github.com/fastapi/fastapi/releases/tag/0.115.0
+これにより、FastAPI のクエリパラメータの宣言に Pydantic モデルが使えるようになりました。
+本記事では、今回リリースされた新機能の具体的な使用方法を、それが特に威力を発揮できそうなユースケースに沿って解説していこうと思います。
+
+ 新機能の概要
+今回のリリースで、FastAPI のクエリパラメータの指定に Pydantic モデルが使えるようになりま...]]></description><link>https://zenn.dev/trusthub/articles/3a0d2a1dc450d3</link><guid isPermaLink="true">https://zenn.dev/trusthub/articles/3a0d2a1dc450d3</guid><pubDate>Fri, 20 Sep 2024 00:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--tCnh0DJf--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:FastAPI%2520%25E3%2581%25AE%25E3%2582%25AF%25E3%2582%25A8%25E3%2583%25AA%25E3%2583%2591%25E3%2583%25A9%25E3%2583%25A1%25E3%2583%25BC%25E3%2582%25BF%25E3%2581%25AE%25E5%25AE%25A3%25E8%25A8%2580%25E3%2581%25AB%2520Pydantic%2520%25E3%2583%25A2%25E3%2583%2587%25E3%2583%25AB%25E3%2581%258C%25E6%25AD%25A3%25E5%25BC%258F%25E3%2581%25AB%25E4%25BD%25BF%25E3%2581%2588%25E3%2582%258B%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E3%2581%25AA%25E3%2581%25A3%25E3%2581%259F%2520%257C%2520TrustHu...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Shinichiro%2520NAKAMURA%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI1NzlhZmI5YTguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:TrustHub%2520%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg4NWRjMDhiZjQuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Shinichiro NAKAMURA</dc:creator></item><item><title><![CDATA[Djangoでフォーム送信後に遷移したページでブラウザリロードをしたときにフォームの再送信をしないようにする]]></title><description><![CDATA[Djangoを使ったWebアプリを作っている時に、Form送信後のページでブラウザリロードしたらフォーム再送信の警告が出てしまい解決するのに微妙に悩んだので備忘として書いておく。
+（これまでdjangorestframeworkを使うことが多かったので今更な感じですね...）
+
+ 結論
+PRGパターン(Post Redirect Get)に沿ってフォーム送信後の処理の終わりで遷移先のページにRedirectしてあげればいいらしい。
+つまり、OKパターンのような処理の流れにすればいい。
+NGパターンだとブラウザリロードをするとフォームを再送信してしまう。
+OKパターン
+
+POST(フォーム...]]></description><link>https://zenn.dev/nelsia/articles/0729d3c20d91f0</link><guid isPermaLink="true">https://zenn.dev/nelsia/articles/0729d3c20d91f0</guid><pubDate>Thu, 19 Sep 2024 15:43:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--O6WPbAK---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Django%25E3%2581%25A7%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25BC%25E3%2583%25A0%25E9%2580%2581%25E4%25BF%25A1%25E5%25BE%258C%25E3%2581%25AB%25E9%2581%25B7%25E7%25A7%25BB%25E3%2581%2597%25E3%2581%259F%25E3%2583%259A%25E3%2583%25BC%25E3%2582%25B8%25E3%2581%25A7%25E3%2583%2596%25E3%2583%25A9%25E3%2582%25A6%25E3%2582%25B6%25E3%2583%25AA%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2589%25E3%2582%2592%25E3%2581%2597%25E3%2581%259F%25E3%2581%25A8%25E3%2581%258D%25E3%2581%25AB%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25BC%25E3%2583%25A0%25E3%2581%25AE%25E5%2586%258D%25E9%2580%2581%25E4%25BF%25A1%25E3%2582%2592%25E3%2581%2597%25E3%2581%25AA%25E3%2581%2584%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nelsia%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2Rhcmsvbi5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nelsia</dc:creator></item><item><title><![CDATA[【ドラゴンクエストXオンライン】Misskey の表示名に現在の職業とレベルを反映する]]></title><description><![CDATA[
+仕組みは単純でマイページに相当するキャラクター ID 入りのページから情報を取得して
+https://hiroba.dqx.jp/sc/character/667538238772/
+Misskey.py で API を叩いて反映しているだけです。
+https://misskeypy.readthedocs.io/ja/latest/api/misskey.html#misskey.Misskey.i_update
+
+ 情報取得の準備
+
+ キャラクター ID 入りのページはどこ?
+マイページをログインしていない状態で開くとログインへと促すリダイレクトページ
+$ curl -I http...]]></description><link>https://zenn.dev/sharl/articles/e9cba6bf4bd2b8</link><guid isPermaLink="true">https://zenn.dev/sharl/articles/e9cba6bf4bd2b8</guid><pubDate>Thu, 19 Sep 2024 14:24:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--K083_0Hy--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E3%2583%2589%25E3%2583%25A9%25E3%2582%25B4%25E3%2583%25B3%25E3%2582%25AF%25E3%2582%25A8%25E3%2582%25B9%25E3%2583%2588X%25E3%2582%25AA%25E3%2583%25B3%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%25B3%25E3%2580%2591Misskey%2520%25E3%2581%25AE%25E8%25A1%25A8%25E7%25A4%25BA%25E5%2590%258D%25E3%2581%25AB%25E7%258F%25BE%25E5%259C%25A8%25E3%2581%25AE%25E8%2581%25B7%25E6%25A5%25AD%25E3%2581%25A8%25E3%2583%25AC%25E3%2583%2599%25E3%2583%25AB%25E3%2582%2592%25E5%258F%258D%25E6%2598%25A0%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2597%25E3%2582%2583%25E3%2581%2582%25E3%2582%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0xuZEM2dlZRUHNRVzBHa1dpdS1DY2trTlVETnVhemF1YjlUVVRkQ3B5dHBqbTBLUXA9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>しゃある</dc:creator></item><item><title><![CDATA[【ドラゴンクエストXオンライン】つよさ予報からアストルティア防衛軍の全兵団襲撃を抽出する]]></title><description><![CDATA[ゲーム内や冒険者のおでかけ超便利ツールで見ることができる情報ですが
+テキスト情報になっているといろいろ便利ですよね
+
+ 実行例
+$ dqxraid
+本日のアストルティア防衛軍 全兵団は 7:00 11:00 16:00 20:00 1:00 5:00 です
+
+ 書いてみた
+# -*- coding: utf-8 -*-
+#
+# つよさ予報からアストルティア防衛軍の全兵団襲撃を抽出
+import sys
+import datetime as dt
+
+import requests
+from bs4 import BeautifulSoup
+
+base_url = 'https://hiro...]]></description><link>https://zenn.dev/sharl/articles/5a324d4a360c7f</link><guid isPermaLink="true">https://zenn.dev/sharl/articles/5a324d4a360c7f</guid><pubDate>Thu, 19 Sep 2024 14:08:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--tqH4_qdY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E3%2583%2589%25E3%2583%25A9%25E3%2582%25B4%25E3%2583%25B3%25E3%2582%25AF%25E3%2582%25A8%25E3%2582%25B9%25E3%2583%2588X%25E3%2582%25AA%25E3%2583%25B3%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%25B3%25E3%2580%2591%25E3%2581%25A4%25E3%2582%2588%25E3%2581%2595%25E4%25BA%2588%25E5%25A0%25B1%25E3%2581%258B%25E3%2582%2589%25E3%2582%25A2%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25AB%25E3%2583%2586%25E3%2582%25A3%25E3%2582%25A2%25E9%2598%25B2%25E8%25A1%259B%25E8%25BB%258D%25E3%2581%25AE%25E5%2585%25A8%25E5%2585%25B5%25E5%259B%25A3%25E8%25A5%25B2%25E6%2592%2583%25E3%2582%2592%25E6%258A%25BD%25E5%2587%25BA%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2597%25E3%2582%2583%25E3%2581%2582%25E3%2582%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0xuZEM2dlZRUHNRVzBHa1dpdS1DY2trTlVETnVhemF1YjlUVVRkQ3B5dHBqbTBLUXA9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>しゃある</dc:creator></item><item><title><![CDATA[非線形システムの最適制御を勾配法のJAX実装で解く]]></title><description><![CDATA[
+ はじめに
+https://www.coronasha.co.jp/np/isbn/9784339033182/
+の7.2節の勉強ノートです.
+https://zenn.dev/takuya_fukatsu/articles/0b9c8df4a51042
+によるとJAXにより非線形最適制御が効率良く解けるとのことだったので, シンプルな勾配法（最急降下法・共役勾配法）での実装にチャレンジしてみました！
+
+ 問題設定
+状態ベクトルの次元 n=2, 入力制御ベクトルの次元 m=1 とし, 線形システム
+ \dot{x}(t) = f(x(t),u(t)), \quad t\in (0,T)...]]></description><link>https://zenn.dev/wakabame/articles/bf247195993efa</link><guid isPermaLink="true">https://zenn.dev/wakabame/articles/bf247195993efa</guid><pubDate>Thu, 19 Sep 2024 13:13:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--65wNSkj5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E9%259D%259E%25E7%25B7%259A%25E5%25BD%25A2%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%25E3%2581%25AE%25E6%259C%2580%25E9%2581%25A9%25E5%2588%25B6%25E5%25BE%25A1%25E3%2582%2592%25E5%258B%25BE%25E9%2585%258D%25E6%25B3%2595%25E3%2581%25AEJAX%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%25A7%25E8%25A7%25A3%25E3%2581%258F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%258F%25E3%2581%258B%25E3%2581%25B0%25E3%2582%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2Rhcmsvdy5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>わかばめ</dc:creator></item><item><title><![CDATA[変数と定数]]></title><description><![CDATA[主要なプログラミング言語における変数と定数の宣言方法
+
+
+
+言語
+型
+変数宣言
+定数宣言
+
+
+
+
+C++
+静的型付け
+なし
+const
+
+
+Java
+静的型付け
+なし
+final
+
+
+PHP
+動的型付け
+なし
+const
+
+
+JavaScript
+動的型付け
+let
+const
+
+
+Python
+動的型付け
+なし
+なし
+
+
+
+
+ Python には定数が存在しない。
+
+ 大文字の変数であっても再代入することができる。
+]]></description><link>https://zenn.dev/milbon/articles/47d5968ac837bf</link><guid isPermaLink="true">https://zenn.dev/milbon/articles/47d5968ac837bf</guid><pubDate>Thu, 19 Sep 2024 12:39:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_WaZ6UZp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:%25E5%25A4%2589%25E6%2595%25B0%25E3%2581%25A8%25E5%25AE%259A%25E6%2595%25B0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258F%25E3%2581%25BF%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzllMjg1Mjc4ZjYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>くみ</dc:creator></item><item><title><![CDATA[Mesopの基本コードとGradioとの比較]]></title><description><![CDATA[
+ 始めに
+マシンラーニング・ソリューションズアルバイトの吉田岳史です。機械学習を用いたPythonによるAIアプリの構築、共有を行う際にはGradioというフレームワークが有名です。本ブログでは新たにGoogleが開発したAIアプリ開発に適したフレームワークであるMesopを解説します。本ブログを読むことで、Mesopの始め方や簡単な使い方、そして、Gradioとの違いを理解することが目的です。
+
+ Mesopとは
+MesopのGitHubに
+
+Create web apps without the complexity of frontend development.
+Used at...]]></description><link>https://zenn.dev/machinelearning/articles/mesop-comp-use</link><guid isPermaLink="true">https://zenn.dev/machinelearning/articles/mesop-comp-use</guid><pubDate>Thu, 19 Sep 2024 12:37:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--F42LNO_B--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Mesop%25E3%2581%25AE%25E5%259F%25BA%25E6%259C%25AC%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2581%25A8Gradio%25E3%2581%25A8%25E3%2581%25AE%25E6%25AF%2594%25E8%25BC%2583%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2583%259E%25E3%2582%25B7%25E3%2583%25B3%25E3%2583%25A9%25E3%2583%25BC%25E3%2583%258B%25E3%2583%25B3%25E3%2582%25B0%25E3%2583%25BB%25E3%2582%25BD%25E3%2583%25AA%25E3%2583%25A5%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%25BA%2520%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJjMzJhZTNlOGUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%259E%25E3%2582%25B7%25E3%2583%25B3%25E3%2583%25A9%25E3%2583%25BC%25E3%2583%258B%25E3%2583%25B3%25E3%2582%25B0%25E3%2583%25BB%25E3%2582%25BD%25E3%2583%25AA%25E3%2583%25A5%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%25BA%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhjMGQ2MTg0YjguanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>マシンラーニング・ソリューションズ ブログ</dc:creator></item><item><title><![CDATA[データ分析 主成分分析１]]></title><description><![CDATA[今回は主成分分析の基礎についてまとめてみます。
+
+ 主成分分析とは
+主成分分析は次元削減に用いられる多変量解析の手法の 1 つです。
+データに含まれる多くの次元（列）を、できるだけ元のデータの情報を失わないように新しい軸を作り直して次元を縮小する方法です。
+これにより、データのばらつきや重要な特徴を少ない次元で表現でき、データの処理や解釈が容易になります。
+簡単に言えば、
+データの中で最もばらつきが大きい方向（分散が最大の方向）に軸をとり、それをx軸に代わる新しい軸（第一主成分軸）とします。
+次に、ばらつきが次に大きい方向に軸をとり（第一主成分軸に直交する方向になる）y軸に代わる新しい軸...]]></description><link>https://zenn.dev/longbridge/articles/3cf9c917a610d5</link><guid isPermaLink="true">https://zenn.dev/longbridge/articles/3cf9c917a610d5</guid><pubDate>Thu, 19 Sep 2024 12:12:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--H2tCWQ2q--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E5%2588%2586%25E6%259E%2590%2520%25E4%25B8%25BB%25E6%2588%2590%25E5%2588%2586%25E5%2588%2586%25E6%259E%2590%25EF%25BC%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:piyoko%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FlYjQwNDk5NTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>piyoko</dc:creator></item><item><title><![CDATA[rye → uv移行を検討する（注意点有り！）]]></title><description><![CDATA[
+ uvがryeの機能を対応し始めた
+1ヶ月ほど前にuvがPythonプロジェクトをスムーズに管理出来るようになった記事が公開されました
+https://astral.sh/blog/uv-unified-python-packaging
+私はこれまでrye + uvでプロジェクト管理していましたが、この機会にuvに移行できないものかと考えました。
+今回はryeからuvに移行できるか検証します。
+
+ 結論
+スクリプト機能rye run {script}を使っていないのであれば移行可能
+使っている人は様子見安定。
+
+ 移行できるか検討する
+では、ryeからuvに移行できるか検証してみます。...]]></description><link>https://zenn.dev/nowa0402/articles/e84d3598001c9c</link><guid isPermaLink="true">https://zenn.dev/nowa0402/articles/e84d3598001c9c</guid><pubDate>Thu, 19 Sep 2024 07:36:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9cD-Mnn0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:rye%2520%25E2%2586%2592%2520uv%25E7%25A7%25BB%25E8%25A1%258C%25E3%2582%2592%25E6%25A4%259C%25E8%25A8%258E%25E3%2581%2599%25E3%2582%258B%25EF%25BC%2588%25E6%25B3%25A8%25E6%2584%258F%25E7%2582%25B9%25E6%259C%2589%25E3%2582%258A%25EF%25BC%2581%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:N.Wayama%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBlY2U3N2Y2YWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>N.Wayama</dc:creator></item><item><title><![CDATA[Python製APIをCloud Runへデプロイする方法 PoC環境]]></title><description><![CDATA[
+ Python製APIをCloud Runへデプロイする方法
+今回は、高速で手軽にAPIを作成できるPythonのフレームワークであるFastAPIを使って作成したAPIを、GCPのCloud Runにデプロイする手順をまとめました。
+
+ FastAPIとは？
+FastAPIは、2018年12月に登場した比較的新しいPythonのWEBフレームワークです。Djangoに比べて小規模なAPIを開発するのに適しており、人気を集めています。
+特徴
+
+
+API作成の手軽さ : .pyファイル1つでAPIを作成できます。
+
+高速な動作:  ASGI(Asynchronous Server Gat...]]></description><link>https://zenn.dev/nowly/articles/9e8fede8c907f5</link><guid isPermaLink="true">https://zenn.dev/nowly/articles/9e8fede8c907f5</guid><pubDate>Thu, 19 Sep 2024 03:35:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ZjPgi2R9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E8%25A3%25BDAPI%25E3%2582%2592Cloud%2520Run%25E3%2581%25B8%25E3%2583%2587%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25A4%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2520PoC%25E7%2592%25B0%25E5%25A2%2583%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:mattun%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLmRldi9pbWFnZXMvZGVmYXVsdC1wdWJsaWNhdGlvbi1hdmF0YXIucG5n%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Nowly%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk5MzlkNzMxNGQuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mattun</dc:creator></item><item><title><![CDATA[WindowsでYDLIDARを使う]]></title><description><![CDATA[
+ はじめに
+こんにちは、大学4年のAkkunlabです！
+主にプログラミングや電子工作などをしています。
+今回は、WindowsでYDLIDARで扱う際の手順について、記事にしていきたいと思います。
+間違いや不明点があれば、ご指摘いただけると幸いです！
+
+ 用語
+
+
+
+言葉
+意味
+
+
+
+
+SDK
+Software Development Kitの略で、開発に必要なツール、ライブラリ、ドキュメントなどをまとめたもの
+
+
+vcpkg
+Windows用のC++パッケージマネージャー
+
+
+CMake
+CMakeは、コンパイラに依存しないオープンソースのビルドシステム
+
+
+
+
+ SDK
+Wind...]]></description><link>https://zenn.dev/akkunlab/articles/e7e92983f2d11c</link><guid isPermaLink="true">https://zenn.dev/akkunlab/articles/e7e92983f2d11c</guid><pubDate>Thu, 19 Sep 2024 02:32:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--QctuDHUE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:Windows%25E3%2581%25A7YDLIDAR%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Akkun%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUVkRlRwN1hKME90UW9KdWRZRXJFTnJIbzhPZTRlYnBuN1ZIZmZZYXJDeGI9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Akkun</dc:creator></item><item><title><![CDATA[discord.pyでnsfw画像を検知する方法]]></title><description><![CDATA[NSFWコンテンツ管理ボットの紹介
+このボットは、Discordサーバー内でのNSFWコンテンツの管理を効率的に行うために設計されています。以下の主要な機能を提供しています：
+NSFW保護機能:
+チャンネルごとの設定: 特定のチャンネルでNSFW保護を有効または無効にできます。
+全チャンネルの設定: サーバー内の全てのチャンネルでNSFW保護を一括管理できます。
+コンテンツ検出と処理:
+画像の分析: 添付された画像を自動で分析し、NSFWコンテンツを検出します。
+画像のぼかし: NSFWコンテンツが検出された場合、画像をぼかしてから送信します。
+タイムアウト設定:
+コンテンツのタイムアウ...]]></description><link>https://zenn.dev/952490802574164/articles/1d232b574c7900</link><guid isPermaLink="true">https://zenn.dev/952490802574164/articles/1d232b574c7900</guid><pubDate>Wed, 18 Sep 2024 12:45:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4WGun_Eh--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:discord.py%25E3%2581%25A7nsfw%25E7%2594%25BB%25E5%2583%258F%25E3%2582%2592%25E6%25A4%259C%25E7%259F%25A5%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258F%25E3%2582%258C%25E3%2582%2580%25E3%2581%25AE%25E3%2581%2582%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAxNTY0NDA0MGUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>くれむのあ</dc:creator></item><item><title><![CDATA[discord.pyでスコアボード機能を実装する]]></title><description><![CDATA[📊 スコア＆レベル管理ボットのご紹介!
+あなたのDiscordサーバーに新しい楽しさを加えましょう！このボットは、サーバー内のユーザーがメッセージを送信することでスコアを獲得し、レベルアップするシステムを提供します。以下の機能を備えています：
+スコア加算: メッセージの長さに応じてスコアを自動で加算。長いメッセージほど高得点！
+レベルアップ通知: ユーザーが新しいレベルに到達すると、専用の通知メッセージが送信され、達成感を演出します。
+リーダーボード表示: サーバー内の上位ユーザーを一目で確認できるリーダーボード機能。競争心をかき立てます！
+スコアリセット: スコアをリセットして、新たな...]]></description><link>https://zenn.dev/952490802574164/articles/d82a5a078ff672</link><guid isPermaLink="true">https://zenn.dev/952490802574164/articles/d82a5a078ff672</guid><pubDate>Wed, 18 Sep 2024 12:23:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Mzo3H3vh--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:discord.py%25E3%2581%25A7%25E3%2582%25B9%25E3%2582%25B3%25E3%2582%25A2%25E3%2583%259C%25E3%2583%25BC%25E3%2583%2589%25E6%25A9%259F%25E8%2583%25BD%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258F%25E3%2582%258C%25E3%2582%2580%25E3%2581%25AE%25E3%2581%2582%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAxNTY0NDA0MGUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>くれむのあ</dc:creator></item><item><title><![CDATA[discord.pyでスコアボード機能を実装する]]></title><description><![CDATA[discord.pyでスコアボードを実装するコードです]]></description><link>https://zenn.dev/952490802574164/books/e3f762b9f75345</link><guid isPermaLink="true">https://zenn.dev/952490802574164/books/e3f762b9f75345</guid><pubDate>Wed, 18 Sep 2024 12:21:46 GMT</pubDate><dc:creator>くれむのあ</dc:creator></item><item><title><![CDATA[［AtCoder］ABC-370｜A - Raise Both Hands]]></title><description><![CDATA[
+ 設問ページ
+
+🔗ABC-370 A - Raise Both Hands
+
+
+
+ 提出結果
+def getIntMap():
+    return map(int, input().split())
+
+
+def main():
+    L, R = getIntMap()
+
+    h = L + R * 2
+
+    print("Yes" if h == 1 else "No" if h == 2 else "Invalid")
+
+
+if __name__ == "__main__":
+    main()
+]]></description><link>https://zenn.dev/hyperdb/articles/ed81fe6227580b</link><guid isPermaLink="true">https://zenn.dev/hyperdb/articles/ed81fe6227580b</guid><pubDate>Wed, 18 Sep 2024 08:12:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--pRCt8-BF--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25EF%25BC%25BBAtCoder%25EF%25BC%25BDABC-370%25EF%25BD%259CA%2520-%2520Raise%2520Both%2520Hands%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AF%25E3%2581%2584%25E3%2581%25B1%25E3%2581%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhODJkODgwMzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>はいぱぁ</dc:creator></item></channel></rss>
