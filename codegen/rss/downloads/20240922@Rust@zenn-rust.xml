@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Rust」のフィード]]></title><description><![CDATA[Zennのトピック「Rust」のRSSフィードです]]></description><link>https://zenn.dev/topics/rust</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ba09661577.png</url><title>Zennの「Rust」のフィード</title><link>https://zenn.dev/topics/rust</link></image><generator>zenn.dev</generator><lastBuildDate>Sun, 22 Sep 2024 02:27:23 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/rust/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[【AHC】Rustのモジュールを単一ファイルにバンドルするスクリプトを作ってみた]]></title><description><![CDATA[長期のAHCに参加していると、コードがどんどん肥大化していって、提出のために単一ファイルでコード書くのが結構しんどいです。
+モジュール毎にコードを書きたくなるのですが、手動で単一ファイルにまとめるのも大分しんどいです。
+これを解決するためにcargo equipを使用する手があるのですが、以下の理由からスクリプトを自作することにしました。
+
+使い方に癖がありそう。実際使ってないので、そうではないかもしれないが、使い方に慣れるぐらいなら自作した方が早そう。
+自由度がほしい。ビジュアライザのコードも埋め込んで、そのまま提出したいので、ローカル環境だけで動かすフィーチャーフラグを付与したい、な...]]></description><link>https://zenn.dev/tipstar0125/articles/d423d391a55b6a</link><guid isPermaLink="true">https://zenn.dev/tipstar0125/articles/d423d391a55b6a</guid><pubDate>Sat, 21 Sep 2024 09:47:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ZxTJN5dt--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590AHC%25E3%2580%2591Rust%25E3%2581%25AE%25E3%2583%25A2%25E3%2582%25B8%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%25AB%25E3%2582%2592%25E5%258D%2598%25E4%25B8%2580%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2581%25AB%25E3%2583%2590%25E3%2583%25B3%25E3%2583%2589%25E3%2583%25AB%25E3%2581%2599%25E3%2582%258B%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2583%2588%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tipstar0125%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FlMDRiN2Q5N2EuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tipstar0125</dc:creator></item><item><title><![CDATA[Amazon DynamoDB で実現するイベントソーシングと非同期処理]]></title><description><![CDATA[
+ はじめに
+以前書いた Rust で Event Sourcing を試してみた ~ AWS のブログを参考に模倣する ~ ではイベントストア (イベントを保存するデータベース) に MySQL を利用しました。MySQL 単体では非同期にクエリモデルの更新処理やイベントを別サービスに伝搬して処理するには一工夫必要なため、今回は Amazon DynamoDB をイベントストアとして利用してシンプルに非同期処理を実現する方法を紹介します。
+用語の簡単な説明:
+
+イベントソーシング: データの状態をイベントとして記録する設計手法 (対してデータの最終的な状態を記録するのをステートソーシン...]]></description><link>https://zenn.dev/pyama2000/articles/5651e19c85618c</link><guid isPermaLink="true">https://zenn.dev/pyama2000/articles/5651e19c85618c</guid><pubDate>Sat, 21 Sep 2024 05:47:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Ta97KOYb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Amazon%2520DynamoDB%2520%25E3%2581%25A7%25E5%25AE%259F%25E7%258F%25BE%25E3%2581%2599%25E3%2582%258B%25E3%2582%25A4%25E3%2583%2599%25E3%2583%25B3%25E3%2583%2588%25E3%2582%25BD%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%25A8%25E9%259D%259E%25E5%2590%258C%25E6%259C%259F%25E5%2587%25A6%25E7%2590%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:pyama2000%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvcC5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>pyama2000</dc:creator></item><item><title><![CDATA[Rust製コマンドで意味付けされた終了ステータスを返す]]></title><description><![CDATA[
+ はじめに
+Rustで&lt;sysexits.h&gt;で定義されている終了ステータスを使えるようにするクレートを開発しているので紹介します。
+https://github.com/sorairolake/sysexits-rs
+
+ &lt;sysexits.h&gt;とは
+&lt;sysexits.h&gt;はBSD系に由来する定義付けされた終了ステータスです。
+64から78までの終了ステータスの意味が定義されています。
+https://github.com/freebsd/freebsd-src/blob/9046ecff409c45205aad34ef8d959d79dd20c...]]></description><link>https://zenn.dev/sorairolake/articles/return-meaningful-exit-code-in-rust</link><guid isPermaLink="true">https://zenn.dev/sorairolake/articles/return-meaningful-exit-code-in-rust</guid><pubDate>Fri, 20 Sep 2024 23:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qQsgEN7V--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E8%25A3%25BD%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2581%25A7%25E6%2584%258F%25E5%2591%25B3%25E4%25BB%2598%25E3%2581%2591%25E3%2581%2595%25E3%2582%258C%25E3%2581%259F%25E7%25B5%2582%25E4%25BA%2586%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%25B9%25E3%2582%2592%25E8%25BF%2594%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:SorairoLake%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzEyZGZiOGQyM2QuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>SorairoLake</dc:creator></item><item><title><![CDATA[Rustのreqwestライブラリのエラーハンドリングでハマった件]]></title><description><![CDATA[
+ 正常形
+let url = "https://jsonplaceholder.typicode.com/users/1";
+let response = reqwest::get(url).await;
+println!("{:?}", response); // Result型はOKで帰ってくる
+
+ 異常形（存在しないドメイン）
+let url = "https://unkown.example.com/";
+let response = reqwest::get(url).await;
+println!("{:?}", response); // Result型はErrで帰ってく...]]></description><link>https://zenn.dev/daijinload/articles/72af0ea95eedfe</link><guid isPermaLink="true">https://zenn.dev/daijinload/articles/72af0ea95eedfe</guid><pubDate>Fri, 20 Sep 2024 09:26:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--F_kgq-h7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25AEreqwest%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%25E3%2581%25AE%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E3%2583%258F%25E3%2583%25B3%25E3%2583%2589%25E3%2583%25AA%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%25A7%25E3%2583%258F%25E3%2583%259E%25E3%2581%25A3%25E3%2581%259F%25E4%25BB%25B6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:daijinload%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSTVLVGMxQWhOTXo1cnhrSkFmYmdmRmF1SGwxRGFwX0o3NnpXQ1oxMHpTTGc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>daijinload</dc:creator></item><item><title><![CDATA[【Rust】Pythonライブラリを超簡単に作れるツールを作った]]></title><description><![CDATA[
+ はじめに
+最近になってRustを勉強し始めて、何か作ってみようということでpyinitを開発しました。この記事では開発の背景や手こずった点を紹介していこうと思います。
+https://github.com/t3tra-dev/pyinit
+ツール自体のインストール方法や使い方についてはGitHubリポジトリのREADME.ja.mdを参照してください。
+
+ 開発背景
+Pythonのライブラリ開発において、プロジェクトの初期セットアップには多くの手順が伴います。README.mdやsetup.py、__init__.py、ライセンスファイルなど、プロジェクトごとにこれらのファイルを毎回...]]></description><link>https://zenn.dev/t3tra/articles/fe69de7a8ddda5</link><guid isPermaLink="true">https://zenn.dev/t3tra/articles/fe69de7a8ddda5</guid><pubDate>Fri, 20 Sep 2024 01:59:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--JOMdN_qZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Rust%25E3%2580%2591Python%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%25E3%2582%2592%25E8%25B6%2585%25E7%25B0%25A1%25E5%258D%2598%25E3%2581%25AB%25E4%25BD%259C%25E3%2582%258C%25E3%2582%258B%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:t3tra%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ2MDdkNzY3ZTMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>t3tra</dc:creator></item><item><title><![CDATA[Rustの乱数生成器はどんな型で受けるのが正解なのか]]></title><description><![CDATA[
+ 背景
+Rustは静的型付言語であり、型に関しては厳密である一方で自由度を担保する仕組みも豊富にあります。その一つがtrait objectと呼ばれるものであり dyn TraitA の様に型が宣言されます。
+fn f(x: &amp;dyn TraitA)
+と書くとxはTraitAを実装した型の参照であればなんでもいいということになります。似たような概念に impl というものがあり
+fn f(x: &amp;impl TraitA)
+のように使われます。これはGenericsの別構文であり
+fn f&lt;A: TraitA&gt;(x: &amp;A)
+と全く等価です。Gener...]]></description><link>https://zenn.dev/lucidfrontier45/articles/658d84ee76a62e</link><guid isPermaLink="true">https://zenn.dev/lucidfrontier45/articles/658d84ee76a62e</guid><pubDate>Thu, 19 Sep 2024 11:07:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0LU9JVmg--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25AE%25E4%25B9%25B1%25E6%2595%25B0%25E7%2594%259F%25E6%2588%2590%25E5%2599%25A8%25E3%2581%25AF%25E3%2581%25A9%25E3%2582%2593%25E3%2581%25AA%25E5%259E%258B%25E3%2581%25A7%25E5%258F%2597%25E3%2581%2591%25E3%2582%258B%25E3%2581%25AE%25E3%2581%258C%25E6%25AD%25A3%25E8%25A7%25A3%25E3%2581%25AA%25E3%2581%25AE%25E3%2581%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:lucidfrontier45%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzcxY2RkYzI0MmUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>lucidfrontier45</dc:creator></item><item><title><![CDATA[Cloudflareを使って自宅Webサーバー(axum)をhttpsで無料公開したメモ]]></title><description><![CDATA[
+色々調べている時にCloudflareを調べていると、どうも自宅サーバーをWebサーバーとして無料で公開できるらしいことを知りました(ドメイン登録は有料)。これを使うとAWSのLightsailや他のVPS,レンタルサーバーとは比較にならない程の低ランニングコストで公開できることになります。それを実現しつつhttpsで公開する際につまづいたところも含めメモとして残しておきます。Webサーバーはaxumで自作しています。Cloudflareの画面構成が変わるため、スクショはありません。
+
+ 前提
+
+まだドメインを登録していない
+
+Cloudflareでドメインを登録する
+
+
+自宅サーバー...]]></description><link>https://zenn.dev/scirexs/articles/33f34194033f51</link><guid isPermaLink="true">https://zenn.dev/scirexs/articles/33f34194033f51</guid><pubDate>Wed, 18 Sep 2024 21:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--DEIvIEFR--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Cloudflare%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E8%2587%25AA%25E5%25AE%2585Web%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%2528axum%2529%25E3%2582%2592https%25E3%2581%25A7%25E7%2584%25A1%25E6%2596%2599%25E5%2585%25AC%25E9%2596%258B%25E3%2581%2597%25E3%2581%259F%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:scirexs%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FGZFp1Y3BiazJHVGtaaklCQV9TTzVGSW55bVU0TFNuaGtlanZ3aW15OUhBPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>scirexs</dc:creator></item><item><title><![CDATA[Rustでのデータ処理をrayonクレートで高速化してみる]]></title><description><![CDATA[単純なシーケンシャル処理でコードを書いていた部分あったのですが、より高速化する方法ないものかと調べていた所rayonクレートなるもので簡単にできるようで、備忘録も兼ねてまとめておこうという記事です。
+
+ rayonの導入方法
+Cargo.tomlファイルに以下を追記します。
+[dependencies]
+rayon = "1.10"
+もしくはcargo add rayon
+
+ サンプルコード
+use rayon::prelude::*;
+
+fn main() {
+    let numbers: Vec&lt;u32&gt; = (1..101).collect();
+    let d...]]></description><link>https://zenn.dev/texia/articles/9834770536990f</link><guid isPermaLink="true">https://zenn.dev/texia/articles/9834770536990f</guid><pubDate>Wed, 18 Sep 2024 13:17:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--FS3-tth_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25A7%25E3%2581%25AE%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E5%2587%25A6%25E7%2590%2586%25E3%2582%2592rayon%25E3%2582%25AF%25E3%2583%25AC%25E3%2583%25BC%25E3%2583%2588%25E3%2581%25A7%25E9%25AB%2598%25E9%2580%259F%25E5%258C%2596%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:torohash%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y5YmI1NzQ4MmYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2586%25E3%2582%25AF%25E3%2582%25B7%25E3%2582%25A2%25E3%2580%2580%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY0MmYzMDgyMmUuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>torohash</dc:creator></item><item><title><![CDATA[Rustのarm64Linux,x64Windows向けクロスコンパイル設定]]></title><description><![CDATA[
+ラズパイ向けにコンパイルする際に少し調べたりしたので、今後の備忘のために残しておきます。おまけとしてWindows向けも残しておきます。
+
+ 前提
+
+ コンパイル環境
+$ cat /etc/os-release
+PRETTY_NAME="Debian GNU/Linux 12 (bookworm)"
+NAME="Debian GNU/Linux"
+VERSION_ID="12"
+VERSION="12 (bookworm)"
+VERSION_CODENAME=bookworm
+ID=debian
+HOME_URL="https://www.debian.org/"
+SUPPORT_UR...]]></description><link>https://zenn.dev/scirexs/articles/e1b32959e9a867</link><guid isPermaLink="true">https://zenn.dev/scirexs/articles/e1b32959e9a867</guid><pubDate>Tue, 17 Sep 2024 21:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--HsSdhc57--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25AEarm64Linux%252Cx64Windows%25E5%2590%2591%25E3%2581%2591%25E3%2582%25AF%25E3%2583%25AD%25E3%2582%25B9%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2591%25E3%2582%25A4%25E3%2583%25AB%25E8%25A8%25AD%25E5%25AE%259A%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:scirexs%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FGZFp1Y3BiazJHVGtaaklCQV9TTzVGSW55bVU0TFNuaGtlanZ3aW15OUhBPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>scirexs</dc:creator></item><item><title><![CDATA[Rust のテンプレートエンジン askama を使ってみた]]></title><description><![CDATA[
+ 背景、お久しぶりでございます
+Rust でテンプレートエンジンを使ってコードの自動生成をしてみることにしました。Rust なのはただの趣味です。意味はない。
+で、Rust テンプレートエンジンって調べると、なんだかいっぱいあるっぽい。何を使うのが良いのだろうか。
+Rust template engine benchmarks をみると Handlebars, Liquid, Sailfish, Markup というのが早いっぽい。
+これを眺めてて気になったのが、 Askama と Sailfish 。これらのテンプレートエンジンは、どうやらコンパイル時にテンプレートをプログラムに埋め...]]></description><link>https://zenn.dev/nodamushi/articles/a30e347eeb68db</link><guid isPermaLink="true">https://zenn.dev/nodamushi/articles/a30e347eeb68db</guid><pubDate>Tue, 17 Sep 2024 16:42:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--l4_v-4C---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%2520%25E3%2581%25AE%25E3%2583%2586%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AC%25E3%2583%25BC%25E3%2583%2588%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%25B3%2520askama%2520%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nodamushi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y1OGJmMTkwNjEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nodamushi</dc:creator></item><item><title><![CDATA[Rust | cargo build --release のバイナリサイズを削減する！]]></title><description><![CDATA[
+ バイナリサイズを削減したい
+cargo build --release では、リリースモードでバイナリをビルドすることができます。
+cargo build は開発時の dev 仕様なので、最適化はされていません。
+また、デバッグに関する情報も含まれています。
+今回は、mocks という CLI ツールをビルドしてバイナリサイズを計測してみます。
+https://github.com/mocks-rs/mocks
+使用している外部クレートは以下です。
+
+
+axum
+
+Web フレームワーク
+
+
+
+clap
+
+CLI ツールのインターフェースを構築
+
+
+
+serde_json
+
+JSON...]]></description><link>https://zenn.dev/collabostyle/articles/9ef563c290f3b2</link><guid isPermaLink="true">https://zenn.dev/collabostyle/articles/9ef563c290f3b2</guid><pubDate>Tue, 17 Sep 2024 09:56:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--aOfPh0hk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%2520%257C%2520cargo%2520build%2520--release%2520%25E3%2581%25AE%25E3%2583%2590%25E3%2582%25A4%25E3%2583%258A%25E3%2583%25AA%25E3%2582%25B5%25E3%2582%25A4%25E3%2582%25BA%25E3%2582%2592%25E5%2589%258A%25E6%25B8%259B%25E3%2581%2599%25E3%2582%258B%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E5%25B1%25B1%25E3%2581%25A8%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzViM2I3NTQxYzUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25B3%25E3%2583%25A9%25E3%2583%259C%25E3%2582%25B9%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25AB%2520Developers%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y5MGU2OTJiOTguanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>山とコード</dc:creator></item><item><title><![CDATA[axumを静的ウェブサイトホストサーバーにするための基本形メモ (Rust)]]></title><description><![CDATA[
+ウェブサイトのバックエンドはRustで構築したいと思っており、何となくaxumを使いたいと思っていました。ただ、具体的にaxumは一体何を担うのか等よく理解できておらず、公式の"Hello World"のコードで微妙にわかった気がしても、静的ウェブサイトホスティングとしてはどうなのかがわからないままでした。例としても公式のexamples以外にあまり見当たらず、その例も後から見ると色々な内容が載っており親切なのですが、最初の私にとっては逆に最小構成が埋もれておりパッと見では全体像が見えませんでした。ある程度把握するのに若干苦労したので備忘として残しておきます。おまけでWebAPIサーバ...]]></description><link>https://zenn.dev/scirexs/articles/bcf695494632dc</link><guid isPermaLink="true">https://zenn.dev/scirexs/articles/bcf695494632dc</guid><pubDate>Mon, 16 Sep 2024 21:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jm1pRqdh--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:axum%25E3%2582%2592%25E9%259D%2599%25E7%259A%2584%25E3%2582%25A6%25E3%2582%25A7%25E3%2583%2596%25E3%2582%25B5%25E3%2582%25A4%25E3%2583%2588%25E3%2583%259B%25E3%2582%25B9%25E3%2583%2588%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%25E5%259F%25BA%25E6%259C%25AC%25E5%25BD%25A2%25E3%2583%25A1%25E3%2583%25A2%2520%2528Rust%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:scirexs%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FGZFp1Y3BiazJHVGtaaklCQV9TTzVGSW55bVU0TFNuaGtlanZ3aW15OUhBPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>scirexs</dc:creator></item><item><title><![CDATA[RustでUSB Mass Storage Class Bulk-Only Transportを実装する]]></title><description><![CDATA[掲題の通り Rust で USB Mass Storage Class (MSC) Bulk-Only Transport を実装した。
+RAM 上の値を Disk Drive に見せかけたデバイスとして Windows から認識できるようになったので要所を書き残す。
+実装には Rust を使用し、 Raspberry pi pico (rp2040) 上で動作確認を行っている。実装の Framework には embassy-rs を使用した。
+
+ USB 通信の構成・設定
+Mass Storage Bulk Only 1.0 - usb.org に基づいて実装する。具体的に以下の通信...]]></description><link>https://zenn.dev/wipeseals/articles/a57b29bd9acd84</link><guid isPermaLink="true">https://zenn.dev/wipeseals/articles/a57b29bd9acd84</guid><pubDate>Mon, 16 Sep 2024 15:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---TBcsZ8V--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25A7USB%2520Mass%2520Storage%2520Class%2520Bulk-Only%2520Transport%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:wipeseals%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSm5QbXhfekNrMmgwRUFDUkp4NXhGREZwQ25ZOWxpN2hxZ1hpYTZZSmNZNWIyUzFhND1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>wipeseals</dc:creator></item><item><title><![CDATA[chip3.5. bevyの名前付きカラー]]></title><description><![CDATA[
+ はじめに
+2024/09/16時点の内容です。
+
+rustc 1.81.0
+bevy 0.14.2
+bevyは開発初期段階のOSSで、まだまだ破壊的なアップデートが入ります。
+でも、面白いですよ。
+
+
+ 前回
+chip3. "Hello, world!"の見た目をいじる
+
+ bevyのカラー
+bevyはv0.14の時に色に関する設計を改めました。
+0.13までは、CSSゆずりの名前付きカラー(Color::YELLOW等)で色を指定する流儀でしたが、もっと詳細・正確に色空間を扱えるように色システムが拡張されました。
+https://bevyengine.org/news/bevy-0...]]></description><link>https://zenn.dev/hyoi/articles/ebc61972d7d1f3</link><guid isPermaLink="true">https://zenn.dev/hyoi/articles/ebc61972d7d1f3</guid><pubDate>Mon, 16 Sep 2024 14:36:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--57EaYXdP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:chip3.5.%2520bevy%25E3%2581%25AE%25E5%2590%258D%25E5%2589%258D%25E4%25BB%2598%25E3%2581%258D%25E3%2582%25AB%25E3%2583%25A9%25E3%2583%25BC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hyoi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2o3d2VRb3N6YndjY3ZuWE5kM1JuRHFVTWxVZWVVbDlzYjUtS1lKPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hyoi</dc:creator></item><item><title><![CDATA[Tauri アプリケーションで Wasmtime を使用して Wasm をロードするプラグインシステムを自作する]]></title><description><![CDATA[Tauri アプリケーションに Wasmtime を組み込み、Wasm モジュールを動的にロードして実行するプラグインシステムを作成する方法を解説します。
+
+ Tauri と Wasmtime のセットアップ
+
+ 1. 新規 Tauri プロジェクトを作成
+まず、cargo create-tauri-app コマンドまたは Tauri CLI を使用して、新しい Tauri プロジェクトを作成します。
+cargo install tauri-cli
+cargo tauri dev
+
+ 2. Wasmtime を Tauri アプリの依存関係に追加
+次に、Cargo.toml ファイルに ...]]></description><link>https://zenn.dev/laiso/articles/41317813d41b3a</link><guid isPermaLink="true">https://zenn.dev/laiso/articles/41317813d41b3a</guid><pubDate>Mon, 16 Sep 2024 12:53:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--SRw0Tu3W--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Tauri%2520%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2581%25A7%2520Wasmtime%2520%25E3%2582%2592%25E4%25BD%25BF%25E7%2594%25A8%25E3%2581%2597%25E3%2581%25A6%2520Wasm%2520%25E3%2582%2592%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2589%25E3%2581%2599%25E3%2582%258B%25E3%2583%2597%25E3%2583%25A9%25E3%2582%25B0%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%25E3%2582%2592%25E8%2587%25AA%25E4%25BD%259C%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:laiso%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM4Nzc0MDcyMDcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>laiso</dc:creator></item><item><title><![CDATA[Rust で実装したモック用 REST API サーバーを実行できる CLI を crates.io と Homebrew で公開する]]></title><description><![CDATA[
+ CLI ツールを公開・配布する
+Rust で実装した CLI ツールを公開・配布したいなと思い、crates.io と Homebrew で公開・配布する方法を試してみました！！！！
+!
+mocks というツール名なので、公開手順のコマンドに mocks という単語が含まれています。
+試す際は、適宜置き換えて実行してください！
+
+
+ ripgrep から学ぶ
+Rust 実装の有名なツールとして、ripgrep (rg) という 正規表現でディレクトリを再帰的に grep できる ツールがあります。
+次のコマンドを実行すると、特定の glob にマッチするファイルの中から、マッチする単...]]></description><link>https://zenn.dev/collabostyle/articles/c59ce7e2fad2a3</link><guid isPermaLink="true">https://zenn.dev/collabostyle/articles/c59ce7e2fad2a3</guid><pubDate>Mon, 16 Sep 2024 10:53:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bMJ3C10t--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%2520%25E3%2581%25A7%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2597%25E3%2581%259F%25E3%2583%25A2%25E3%2583%2583%25E3%2582%25AF%25E7%2594%25A8%2520REST%2520API%2520%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2582%2592%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258B%2520CLI%2520%25E3%2582%2592%2520crates.io%2520%25E3%2581%25A8%2520Home...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E5%25B1%25B1%25E3%2581%25A8%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzViM2I3NTQxYzUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25B3%25E3%2583%25A9%25E3%2583%259C%25E3%2582%25B9%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25AB%2520Developers%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y5MGU2OTJiOTguanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>山とコード</dc:creator></item><item><title><![CDATA[cargo-wasixでファイルの読み書きをするWasmプログラムを作成する]]></title><description><![CDATA[この記事では、cargo-wasixを使用して、ファイルの読み書きを行うWebAssemblyプログラムを作成する方法を説明します。
+https://github.com/wasix-org/cargo-wasix
+cargo-wasixは、コマンドラインツールで、これは、WASIXをターゲットにしたアプリケーションのビルドが簡単できます。
+WASIXは、WASI (WebAssembly System Interface) の機能を拡張し、ネットワーキングやスレッドなどの追加機能を含むWebAssembly (WASM) の拡張仕様です。Wasmer社によって開発されています。
+car...]]></description><link>https://zenn.dev/laiso/articles/c675d3a8762a58</link><guid isPermaLink="true">https://zenn.dev/laiso/articles/c675d3a8762a58</guid><pubDate>Sun, 15 Sep 2024 15:08:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--36JNnoaq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:cargo-wasix%25E3%2581%25A7%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2581%25AE%25E8%25AA%25AD%25E3%2581%25BF%25E6%259B%25B8%25E3%2581%258D%25E3%2582%2592%25E3%2581%2599%25E3%2582%258BWasm%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%25A0%25E3%2582%2592%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:laiso%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM4Nzc0MDcyMDcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>laiso</dc:creator></item><item><title><![CDATA[RustのDockerイメージビルドを高速にする]]></title><description><![CDATA[
+ 要約
+以下を参考にしましょう。
+https://docs.docker.com/guides/language/rust/develop/
+
+ はじめに
+Rustは素晴らしい言語ですが、弱点もあります。その弱点の一つが、コンパイルが遅いことです。
+特にDockerイメージのビルドにおいては、キャッシュをうまく使わないと、依存関係を含めて毎回すべてをビルドすることになってしまいます。
+本稿ではDockerイメージのビルドを高速化する方法について解説します。
+
+ 従来の方法とその問題点
+
+ レイヤーキャッシュの利用
+Dockerにはレイヤーキャッシュが存在します。これは入力が全く同じであ...]]></description><link>https://zenn.dev/htlsne/articles/rust-build-image-faster</link><guid isPermaLink="true">https://zenn.dev/htlsne/articles/rust-build-image-faster</guid><pubDate>Sun, 15 Sep 2024 12:52:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--f7Xkr5x2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25AEDocker%25E3%2582%25A4%25E3%2583%25A1%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%2593%25E3%2583%25AB%25E3%2583%2589%25E3%2582%2592%25E9%25AB%2598%25E9%2580%259F%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hiterm%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBiZGY0NzgyMjEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hiterm</dc:creator></item><item><title><![CDATA[Rust 向けのテンプレートエンジン minijinja を使い始めたので]]></title><description><![CDATA[
+ tl;dr
+
+mitsuhiko/minijinja: MiniJinja is a powerful but minimal dependency template engine for Rust compatible with Jinja/Jinja2
+1バイナリで jinja2 互換のテンプレートエンジンを探していた
+更新頻度の低いものを避けた
+性能や機能の比較はできていないので、他にいいものがあったら教えて欲しい
+
+
+ テンプレートエンジンを探す旅
+
+仕事用に軽量、簡潔なテンプレートエンジンとして、{{ mustache }} の bash版 を使っていた
+言語に依存しないツ...]]></description><link>https://zenn.dev/raki/articles/2024-09-15_minijinja</link><guid isPermaLink="true">https://zenn.dev/raki/articles/2024-09-15_minijinja</guid><pubDate>Sat, 14 Sep 2024 19:45:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--CnS-ONAt--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%2520%25E5%2590%2591%25E3%2581%2591%25E3%2581%25AE%25E3%2583%2586%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AC%25E3%2583%25BC%25E3%2583%2588%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%25B3%2520minijinja%2520%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2584%25E5%25A7%258B%25E3%2582%2581%25E3%2581%259F%25E3%2581%25AE%25E3%2581%25A7%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:raki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dLekxDZzlSWjJVT0VQSlhhdUJiazBnS29DYVR2cVpoVmVEUlNFa3c9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>raki</dc:creator></item><item><title><![CDATA[#53 Understanding BitTorrent 4: Peer handshake]]></title><description><![CDATA[
+ Introduction
+In our last exploration, we delved into the intricacies of communicating with a BitTorrent tracker, breaking down the request components essential for successful peer discovery. Building on that foundation, we now advance to establishing direct communication with peers. In this ins...]]></description><link>https://zenn.dev/nxted_sapporo/articles/2d2a90977044af</link><guid isPermaLink="true">https://zenn.dev/nxted_sapporo/articles/2d2a90977044af</guid><pubDate>Fri, 13 Sep 2024 05:12:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--eeq0lrGW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%252353%2520Understanding%2520BitTorrent%25204%253A%2520Peer%2520handshake%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:NXTEDCo.%252C%2520Ltd.%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBmZjQzOTVhYzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>NXTEDCo., Ltd.</dc:creator></item></channel></rss>

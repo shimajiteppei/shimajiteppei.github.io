@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「TypeScript」のフィード]]></title><description><![CDATA[Zennのトピック「TypeScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/typescript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/f13e758fdb.png</url><title>Zennの「TypeScript」のフィード</title><link>https://zenn.dev/topics/typescript</link></image><generator>zenn.dev</generator><lastBuildDate>Sun, 22 Sep 2024 02:29:20 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/typescript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[VRTで毎回ログインを避ける方法]]></title><description><![CDATA[テスト自動化を行う際、毎回ログイン処理を挟むのは手間がかかり、テストの実行時間も増えてしまいます。そこで、ログインを一度だけ行い、そのセッション情報を再利用する方法をご紹介します。
+
+ 背景
+Playwrightを使用してE2Eテストやビジュアルリグレッションテスト（VRT）を行っていると、各テストごとにログイン処理を実装するのは煩雑です。特に複数のテストケースがある場合、ログイン処理が繰り返され、テスト全体のパフォーマンスにも影響を与えます。
+
+ 解決策：認証状態の共有
+PlaywrightのstorageState機能を利用することで、一度ログインした認証状態を保存し、他のテストで再...]]></description><link>https://zenn.dev/minami0601/articles/ecb1447a570d81</link><guid isPermaLink="true">https://zenn.dev/minami0601/articles/ecb1447a570d81</guid><pubDate>Sat, 21 Sep 2024 19:54:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--KZbj-UJ6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:VRT%25E3%2581%25A7%25E6%25AF%258E%25E5%259B%259E%25E3%2583%25AD%25E3%2582%25B0%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%2592%25E9%2581%25BF%25E3%2581%2591%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25BF%25E3%2581%25AA%25E3%2581%25BF%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RlNTgwMDA1Y2YuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>みなみ</dc:creator></item><item><title><![CDATA[【Next.js】外部サイトのOGPを取得する方法]]></title><description><![CDATA[
+ はじめに
+Next.jsで開発をしていた時にOGPを取得する用途があり、調べたのでまとめました。
+
+ OGPとは
+OGPとは、Open Graph Protocol の略で、ウェブサイトのコンテンツをソーシャルメディア（LINEやFacebookやXなど）で共有する際に、どのように表示されるかを指定するためのプロトコルです。
+ソーシャルメディアでリンクとして共有されたときに、タイトル、画像、説明文などをカスタマイズすることで、視覚的にリッチなプレビューを提供できます。
+この記事ではOGPの取得、つまりURLからその外部ウェブサイトのコンテンツ情報（タイトル、説明、画像など）を取得する...]]></description><link>https://zenn.dev/kiwichan101kg/articles/5023bb8288f720</link><guid isPermaLink="true">https://zenn.dev/kiwichan101kg/articles/5023bb8288f720</guid><pubDate>Sat, 21 Sep 2024 15:27:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Gvvqp-a1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Next.js%25E3%2580%2591%25E5%25A4%2596%25E9%2583%25A8%25E3%2582%25B5%25E3%2582%25A4%25E3%2583%2588%25E3%2581%25AEOGP%25E3%2582%2592%25E5%258F%2596%25E5%25BE%2597%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kiwichan%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZlYTA3YzU3YzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kiwichan</dc:creator></item><item><title><![CDATA[ts-remove-unusedというTypeScriptの不要なコードを自動で削除するツールをつくった]]></title><description><![CDATA[ts-remove-unusedというTypeScriptの不要なコードを自動で削除するツールを開発しています。
+https://github.com/line/ts-remove-unused
+あるTypeScriptファイルについて、ファイル内で参照されていない定義を検知することはtscやESLintなど既存のツールで実現できます。一方で、 export の存在を考慮してプロジェクト全体から見た不要なものを判定することはより複雑な問題です。ts-remove-unusedはプロジェクト全体から見た不要なコードを検知するだけではなく、自動でファイルの編集まで行ってくれます。削除の機能ま...]]></description><link>https://zenn.dev/kazushikonosu/articles/ts-remove-unused</link><guid isPermaLink="true">https://zenn.dev/kazushikonosu/articles/ts-remove-unused</guid><pubDate>Sat, 21 Sep 2024 13:25:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Szl_JULl--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ts-remove-unused%25E3%2581%25A8%25E3%2581%2584%25E3%2581%2586TypeScript%25E3%2581%25AE%25E4%25B8%258D%25E8%25A6%2581%25E3%2581%25AA%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2582%2592%25E8%2587%25AA%25E5%258B%2595%25E3%2581%25A7%25E5%2589%258A%25E9%2599%25A4%25E3%2581%2599%25E3%2582%258B%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%25E3%2582%2592%25E3%2581%25A4%25E3%2581%258F%25E3%2581%25A3%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kazushi%2520Konosu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzgwMTgzYTdmN2YuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kazushi Konosu</dc:creator></item><item><title><![CDATA[[Jest] Typescript環境でカバレッジレポートを表示する]]></title><description><![CDATA[
+ やり方
+
+ 1. jestに必要な物をインストール
+npm install --save-dev @types/jest jest ts-jest
+
+ 2. jestの設定ファイルの作成
+下記コマンドを実行します
+npm init jest@latest
+実行結果を確認する$ npm init jest@latest
+
+The following questions will help Jest to create a suitable configuration for your project
+
+√ Would you like to use Typescript for the...]]></description><link>https://zenn.dev/aew2sbee/articles/jest-coverage</link><guid isPermaLink="true">https://zenn.dev/aew2sbee/articles/jest-coverage</guid><pubDate>Sat, 21 Sep 2024 11:24:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BoFLe4fA--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BJest%255D%2520Typescript%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25A7%25E3%2582%25AB%25E3%2583%2590%25E3%2583%25AC%25E3%2583%2583%25E3%2582%25B8%25E3%2583%25AC%25E3%2583%259D%25E3%2583%25BC%25E3%2583%2588%25E3%2582%2592%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25B5%25E3%2582%258B%25E3%2581%259F%2520%25E3%2581%25AA%25E3%2581%258A%25E3%2581%258D%2520%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YTFYdHhmWGZPVmpKek9sTnQ0cDZmaWQyeENLMTlKOEl0akpQczZiZz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ふるた なおき🥝</dc:creator></item><item><title><![CDATA[AWS CDKでメタトランザクション用サーバーレスAPIを実装してみた！]]></title><description><![CDATA[
+
+ はじめに
+2024 年 9 月 21 日〜22 日にかけて開催されている ServerlessDays Tokyo 2024 に参加して触発されてこの記事を執筆しました！！
+https://serverless.connpass.com/event/325659/
+サーバーレスこそ至高！！！！
+そんな思いが芽生えてきました・・！！
+今回は AWS と Web3 両方の技術スタックにまたがる記事となっています！！
+ぜひ最後まで読んでいってください！！
+
+ 関連用語解説
+
+ AWS CDK
+AWS CDK は、 CloudFormation を 1 段階抽象化させた IasC のツール...]]></description><link>https://zenn.dev/mashharuki/articles/aws_cdk_relayer</link><guid isPermaLink="true">https://zenn.dev/mashharuki/articles/aws_cdk_relayer</guid><pubDate>Sat, 21 Sep 2024 11:12:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--NZJ0Ju8H--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AWS%2520CDK%25E3%2581%25A7%25E3%2583%25A1%25E3%2582%25BF%25E3%2583%2588%25E3%2583%25A9%25E3%2583%25B3%25E3%2582%25B6%25E3%2582%25AF%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E7%2594%25A8%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2583%25AC%25E3%2582%25B9API%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Haruki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dIaXowNy12WWVodmV1RVRrNGZoU25LaldfYTVFdmJlYnprWG1XPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Haruki</dc:creator></item><item><title><![CDATA[ローカルのD1をDrizzle Studioで開く]]></title><description><![CDATA[現バージョンではCloudflareのD1でDrizzle Studioを開こうとすると以下のようなエラーが発生します。
+ちなみにDrizzle Studioとはこちらのことです。
+https://orm.drizzle.team/drizzle-studio/overview
+Error: 7003: Could not route to /client/v4/accounts/account-id/d1/database/database-id/query, perhaps your object identifier is invalid?
+    at _ (https://lo...]]></description><link>https://zenn.dev/fjimiz/articles/1946ed01c183ef</link><guid isPermaLink="true">https://zenn.dev/fjimiz/articles/1946ed01c183ef</guid><pubDate>Sat, 21 Sep 2024 09:43:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--X0PGQakX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25AB%25E3%2583%25AB%25E3%2581%25AED1%25E3%2582%2592Drizzle%2520Studio%25E3%2581%25A7%25E9%2596%258B%25E3%2581%258F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:F%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0YzdMQW5BNWdQMXE0QThZQkxpWkZJdTFVUlU3TDh4WjlDTTRXaDNmRTloPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>F</dc:creator></item><item><title><![CDATA[モバイル判定ライブラリ ismobilejs]]></title><description><![CDATA[
+ what is ismobilejs?
+モバイルかどうかをbooleanを返却する形で判定してくれるライブラリ。
+https://www.npmjs.com/package/ismobilejs
+
+ たまにうまく動作しない可能性がある件
+今自分が参加しているPJでは、Next.jsにおいてモバイルかどうかを判定するためにismobilejsを使用しているのだが、Chrome等の検証ツールで動作を確認してみると、iPad Air, iPad Proではモバイルであるにも関わらずfalse（モバイルではない判定）を返してくる。しかしiPad MiniではTrueを返す。（モバイル判定）
+...]]></description><link>https://zenn.dev/senakobayashi/articles/1f373107ce253f</link><guid isPermaLink="true">https://zenn.dev/senakobayashi/articles/1f373107ce253f</guid><pubDate>Sat, 21 Sep 2024 08:35:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--b1eIr-cn--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%25A2%25E3%2583%2590%25E3%2582%25A4%25E3%2583%25AB%25E5%2588%25A4%25E5%25AE%259A%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%2520ismobilejs%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Sena%2520Kobayashi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzcwYzUwMzJjZTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Sena Kobayashi</dc:creator></item><item><title><![CDATA[numberの範囲を指定するIntRange型を設ける]]></title><description><![CDATA[
+ tl;dr;
+
+出来るだけ FE, BE で共通の規格を使いたい。
+それが叶わない場合の対応として、曜日の対応数字の範囲に対するIntRange&lt;&gt;での表現を試みます。
+
+
+https://stackoverflow.com/a/39495173 より
+
+
+
+
+ 事象
+FE 側から曜日情報を伴うリクエストを投げているものの、特定のケースでBE側で期待しない結果として処理されるケースが存在しました。
+調べてみると、日曜日(0)が絡むリクエストで意図しない状態になるようです。
+// こんな感じだと
+{
+  settingDayTypes: [0, 1, 2, 3, 4];
+}...]]></description><link>https://zenn.dev/iruk/articles/ca25bda6eb5682</link><guid isPermaLink="true">https://zenn.dev/iruk/articles/ca25bda6eb5682</guid><pubDate>Sat, 21 Sep 2024 08:16:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--NwL8-S4j--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:number%25E3%2581%25AE%25E7%25AF%2584%25E5%259B%25B2%25E3%2582%2592%25E6%258C%2587%25E5%25AE%259A%25E3%2581%2599%25E3%2582%258BIntRange%25E5%259E%258B%25E3%2582%2592%25E8%25A8%25AD%25E3%2581%2591%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2584%25E3%2582%258B%25E3%2581%258F%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2djUnNDeWRaVXJqVXB6RHQxU2FweEJjZGNmNDN5SHhkT01aX3RGUm9JPXMyNTAtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>いるく</dc:creator></item><item><title><![CDATA[Valueオブジェクトの===を防ぐeslintルール]]></title><description><![CDATA[
+ なんの記事？
+Value Object(以下VO)をtypescriptでclassとして実装するとき、値の比較にはisEqual,equalsのようなメソッドを作成して用いることが一般的です。
+class VO {
+  private readonly _value: string;
+
+  constructor(value: string) {
+    this._value = value;
+  }
+
+  get value(): string {
+    return this._value;
+  }
+  isEqual(input: VO) {
+    // よしなに実装す...]]></description><link>https://zenn.dev/ratmie/articles/eslint-no-equal</link><guid isPermaLink="true">https://zenn.dev/ratmie/articles/eslint-no-equal</guid><pubDate>Sat, 21 Sep 2024 05:50:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--yQ2QiRhq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Value%25E3%2582%25AA%25E3%2583%2596%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E3%2581%25AE%253D%253D%253D%25E3%2582%2592%25E9%2598%25B2%25E3%2581%2590eslint%25E3%2583%25AB%25E3%2583%25BC%25E3%2583%25AB%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ratmie%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2Rhcmsvci5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ratmie</dc:creator></item><item><title><![CDATA[【JavaScript】正規表現を手軽に扱うための基礎入門]]></title><description><![CDATA[
+ モチベーション
+
+正規表現を敬遠していたが扱えるようになりたい
+文字列一致しているかを実装する時に使いたい
+
+郵便番号や電話番号
+HTMLパース
+ログ解析
+など
+
+
+VSCodeなどのエディタで検索する時に使えると便利
+
+
+ 環境
+
+macOS: Sonoma
+言語: JavaScript
+
+※プログラム言語によって仕様が異なる部分があるので、よく使うことが多そうなJavascriptを用いて検証していきます
+
+
+node: 21.4.0
+
+
+ 指定した文字列に一致
+文字列
+console.log(/abc/.test("aaaa"))
+// false
+console.log(/a...]]></description><link>https://zenn.dev/takuty/articles/7938a319a45077</link><guid isPermaLink="true">https://zenn.dev/takuty/articles/7938a319a45077</guid><pubDate>Sat, 21 Sep 2024 03:49:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--uZjvh9lD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590JavaScript%25E3%2580%2591%25E6%25AD%25A3%25E8%25A6%258F%25E8%25A1%25A8%25E7%258F%25BE%25E3%2582%2592%25E6%2589%258B%25E8%25BB%25BD%25E3%2581%25AB%25E6%2589%25B1%25E3%2581%2586%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%25E5%259F%25BA%25E7%25A4%258E%25E5%2585%25A5%25E9%2596%2580%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Takuty%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JjYjE0OTVjMjQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Takuty</dc:creator></item><item><title><![CDATA[TypeScriptの新しいデコレータを使ってみる]]></title><description><![CDATA[TypeScriptの5.0で新しいデコレータに対応しました（ずいぶん前の話ですが・・・）
+そろそろ使ってみるかということで、試してみたので、ここにまとめていきます。
+
+ デコレータとは
+こういう記述を見たことはありませんか？
+class Foo {
+  @bar // &lt;-- これ
+  hoge() {
+    ...
+  }
+}
+@bar という記述で関数に対してなんかこう、色々便利にやってくれるものです。これはメソッドデコレータといって、メソッドの定義を差し替えたり、処理の前後に追加処理を入れてみたりすることができます。
+いわゆる黒魔術とか言われる、裏で何かやってるけど詳しい...]]></description><link>https://zenn.dev/kojiroueda/articles/67949de07a5860</link><guid isPermaLink="true">https://zenn.dev/kojiroueda/articles/67949de07a5860</guid><pubDate>Sat, 21 Sep 2024 02:43:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--eGksrXYh--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%25E3%2581%25AE%25E6%2596%25B0%25E3%2581%2597%25E3%2581%2584%25E3%2583%2587%25E3%2582%25B3%25E3%2583%25AC%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E4%25B8%258A%25E7%2594%25B0%25E5%25B0%258F%25E6%25AC%25A1%25E9%2583%258E%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JlMDZmYjJmYmIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>上田小次郎</dc:creator></item><item><title><![CDATA[演算子 '>=' は、型 'boolean' および 'number' には適用できません。typescript(2365)]]></title><description><![CDATA[
+ perator '&gt;=' cannot be applied to types 'boolean' and 'number'.typescript(2365)って言われた。
+function getClass(width:number): string{
+    ・・・中略
+    else if(992 &gt; screenWidth &gt;= 768) return "sm"; 　⬅️ここ
+    else if(1200 &gt; screenWidth &gt;= 992) return "xs";　⬅️ここ
+    ・・・中略
+}
+
+ 解決
+複合比較演算子（チェー...]]></description><link>https://zenn.dev/milbon/articles/fba1ad13ff4a22</link><guid isPermaLink="true">https://zenn.dev/milbon/articles/fba1ad13ff4a22</guid><pubDate>Sat, 21 Sep 2024 02:30:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Sgy01BE8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%25BC%2594%25E7%25AE%2597%25E5%25AD%2590%2520%2527%253E%253D%2527%2520%25E3%2581%25AF%25E3%2580%2581%25E5%259E%258B%2520%2527boolean%2527%2520%25E3%2581%258A%25E3%2582%2588%25E3%2581%25B3%2520%2527number%2527%2520%25E3%2581%25AB%25E3%2581%25AF%25E9%2581%25A9%25E7%2594%25A8%25E3%2581%25A7%25E3%2581%258D%25E3%2581%25BE%25E3%2581%259B%25E3%2582%2593%25E3%2580%2582typescript%2528...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258F%25E3%2581%25BF%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzllMjg1Mjc4ZjYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>くみ</dc:creator></item><item><title><![CDATA[[Next.js] Root layoutファイルでheaderタグとfooterタグを共通化する]]></title><description><![CDATA[
+ はじめに
+Next.jsの学習の為に、下記書籍を読みました。
+下記書籍のRoot layoutファイルについて学びがあったので、記事として記録します。
+
+
+ Root layoutファイルとは
+
+「app」ディレクトリー直下に配置したlayout.tsxのことで
+複数の画面間で共有されるUIを実装するファイルです。
+
+src
+└── app
+    ├── sample
+    │   └── page.tsx
+    ├── favicon.ico
+    ├── globals.css
+    ├── layout.tsx  &lt;- Root layoutファイル
+    └...]]></description><link>https://zenn.dev/aew2sbee/articles/nextjs-root-layout-file</link><guid isPermaLink="true">https://zenn.dev/aew2sbee/articles/nextjs-root-layout-file</guid><pubDate>Sat, 21 Sep 2024 01:38:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--N4csB0M7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BNext.js%255D%2520Root%2520layout%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2581%25A7header%25E3%2582%25BF%25E3%2582%25B0%25E3%2581%25A8footer%25E3%2582%25BF%25E3%2582%25B0%25E3%2582%2592%25E5%2585%25B1%25E9%2580%259A%25E5%258C%2596%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25B5%25E3%2582%258B%25E3%2581%259F%2520%25E3%2581%25AA%25E3%2581%258A%25E3%2581%258D%2520%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YTFYdHhmWGZPVmpKek9sTnQ0cDZmaWQyeENLMTlKOEl0akpQczZiZz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ふるた なおき🥝</dc:creator></item><item><title><![CDATA[Ginco One Platformを使ってスマコンをデプロイしてみよう！]]></title><description><![CDATA[
+
+ はじめに
+みなさん、こんにちは！
+今回は、Ginco 社が提供しているブロックチェーン用の API エンドポイントサービスを使ってスマコンをデプロイしてみましたのでその内容を共有したいと思います！
+制限がありますが、今は無料で使えるようになっています！
+
+ Ginco 社について
+Ginco 社はウォレットやインデクサーなど Web3 アプリ開発に必須となる Web3 インフラ機能を提供している会社です。
+https://ginco.co.jp/company/
+先日国際的なセキュリティ認証の証として知られる SOC2 Type-Ⅱ を取得されたことが発表されてたりしています。
+h...]]></description><link>https://zenn.dev/mashharuki/articles/5155a02ce0e763</link><guid isPermaLink="true">https://zenn.dev/mashharuki/articles/5155a02ce0e763</guid><pubDate>Sat, 21 Sep 2024 00:50:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ESVLDJzc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ginco%2520One%2520Platform%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2582%25B9%25E3%2583%259E%25E3%2582%25B3%25E3%2583%25B3%25E3%2582%2592%25E3%2583%2587%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25A4%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%2588%25E3%2581%2586%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Haruki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dIaXowNy12WWVodmV1RVRrNGZoU25LaldfYTVFdmJlYnprWG1XPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Haruki</dc:creator></item><item><title><![CDATA[PostgreSQLクライアント自作した.ts]]></title><description><![CDATA[
+ 役に立ちません
+このチュートリアルをやってもあなたの生涯収入は１円も上がりません。
+鼻毛でも抜いてた方が鼻毛一本分ぐらいは儲かるんじゃないでしょうか。
+AI に生成させたコードをいじりながら雰囲気を味わってみて、ついでにチュートリアル形式の記事にしてみました。
+人に読んでもらうためというより自分の日記感覚で書いている。
+前回と違いすかしっぺのような内容なのであまり期待しないでください。まあ前回はデカすぎて引火して大変なことになったが。
+twitterやってます。
+https://x.com/uncode_jp
+
+ 準備
+nodejs18 以上入れとけばいいんじゃないですか。(適当)
+...]]></description><link>https://zenn.dev/uncode_jp/articles/81c554f8d48f97</link><guid isPermaLink="true">https://zenn.dev/uncode_jp/articles/81c554f8d48f97</guid><pubDate>Fri, 20 Sep 2024 16:42:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--tpmLOBay--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:PostgreSQL%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25A4%25E3%2582%25A2%25E3%2583%25B3%25E3%2583%2588%25E8%2587%25AA%25E4%25BD%259C%25E3%2581%2597%25E3%2581%259F.ts%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:YadaYadaKonnanYada%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSTRJWE95cllDY2szU2RtNHktZk45QlhBNDNBeVkzMm5IY1FVWC03WnZxbElOSD1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>YadaYadaKonnanYada</dc:creator></item><item><title><![CDATA[持続可能なReactを書くための簡易チェックリスト✅]]></title><description><![CDATA[
+ どんな人が読むと良い記事か？
+Reactで実装はできるけど、もう一段階良いコードを書きたいと思っている方向けです。
+
+ 扱わない内容
+
+フックについて
+ESLintの設定で概ねルール化できるかつ、React公式でわかりやすく解説されているので、チェックリストには入れませんでした。
+
+https://ja.react.dev/reference/rules/rules-of-hooks
+
+useMemo、useCallback、memoなどのメモ化について
+メモ化することによってのパフォーマンス上の影響はそこまで大きくなく、優先的に実施するものではないと思ったので、チェックリストには入...]]></description><link>https://zenn.dev/x_point_1/articles/632bbe3ac9b105</link><guid isPermaLink="true">https://zenn.dev/x_point_1/articles/632bbe3ac9b105</guid><pubDate>Fri, 20 Sep 2024 15:30:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jXktzf6D--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%258C%2581%25E7%25B6%259A%25E5%258F%25AF%25E8%2583%25BD%25E3%2581%25AAReact%25E3%2582%2592%25E6%259B%25B8%25E3%2581%258F%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%25E7%25B0%25A1%25E6%2598%2593%25E3%2583%2581%25E3%2582%25A7%25E3%2583%2583%25E3%2582%25AF%25E3%2583%25AA%25E3%2582%25B9%25E3%2583%2588%2520%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Yoshiyuki%2520Sato%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y3YzY4ZjI4ZDcuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25A8%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25B9%25E3%2583%259D%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2588%25E3%2583%25AF%25E3%2583%25B3%25E6%258A%2580%25E8%25A1%2593%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSWdCU1IzQ2hSdzBrcU5QLXRjSEJzYmh4Qm9iZUtBZnBLdkpfTW84aWkzcWVTb1EtZz1zOTYtYw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yoshiyuki Sato</dc:creator></item><item><title><![CDATA[ZustandとValtioの夢の共演、Zustand-ValtioはImmerの代わりになれるのか]]></title><description><![CDATA[Zustand-Valtioはライブラリ名の名前としてはイマイチと言われてもいるんですが、ひとまずそれはおいておいて、
+https://github.com/zustandjs/zustand-valtio
+がそのライブラリです。これは、Zustandのライブラリの位置付けなのでzustandjs配下にあります。
+そもそも、私の中では、Zustandはimmutable state用のライブラリで、Valtioはmutable state用のライブラリです。なので、Zustandでimmerを使うのは心理的に合いませんし、そもそも使う必要もないと思っています。ただ、Zustandでimm...]]></description><link>https://zenn.dev/dai_shi/articles/055a8a5a6e22ba</link><guid isPermaLink="true">https://zenn.dev/dai_shi/articles/055a8a5a6e22ba</guid><pubDate>Fri, 20 Sep 2024 05:40:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--TYW8AqOE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Zustand%25E3%2581%25A8Valtio%25E3%2581%25AE%25E5%25A4%25A2%25E3%2581%25AE%25E5%2585%25B1%25E6%25BC%2594%25E3%2580%2581Zustand-Valtio%25E3%2581%25AFImmer%25E3%2581%25AE%25E4%25BB%25A3%25E3%2582%258F%25E3%2582%258A%25E3%2581%25AB%25E3%2581%25AA%25E3%2582%258C%25E3%2582%258B%25E3%2581%25AE%25E3%2581%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:daishi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzcwZGNhM2E2Y2IuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>daishi</dc:creator></item><item><title><![CDATA[Vite + Createjs + TypeScriptの環境構築]]></title><description><![CDATA[
+ 結論
+
+createjs-moduleを使う
+
+
+ vite
+$ npm create vite@latest
+
+vannilaを選択
+typescriptを選択
+https://ja.vitejs.dev/guide/#最初の-vite-プロジェクトを生成する
+
+
+
+ createjs
+npm install createjs-module --save
+https://www.npmjs.com/package/createjs-module
+!
+npm install --save @types/createjs
+
+https://www.npmjs.com/package...]]></description><link>https://zenn.dev/teba_eleven/articles/2035020cda8a5c</link><guid isPermaLink="true">https://zenn.dev/teba_eleven/articles/2035020cda8a5c</guid><pubDate>Fri, 20 Sep 2024 05:00:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xZ-zFzWb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Vite%2520%252B%2520Createjs%2520%252B%2520TypeScript%25E3%2581%25AE%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%2589%258B%25E7%25BE%25BD%25E5%2585%2588%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY2NjRmMWJiZDYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>手羽先</dc:creator></item><item><title><![CDATA[ReactとDjangoで認証機能作ってみた(1.サインアップ機能編)]]></title><description><![CDATA[
+ 元美容師のDjangoポートフォリオリニューアル日記Part.7：認証機能(サインアップ機能編)
+こんにちは、やぎです！前回の記事では、サロン情報に画像の登録ができるような実装をしました。
+今回は認証機能の第一回目としてまずはサインアップ機能の追加をしてみます！
+本当はログインやアクセス権限なども一気にやりたいのですが記事のボリュームが大きくなりすぎてしまう為、分けることにしました。
+気長にお待ちください。。。
+それでは今回も頑張ります！実装開始！！
+
+ 既存のApp.jsのコードを別のコンポーネントに移植
+※この部分は前回までの記事での実装内容の変更についてですので、本題とは少しず...]]></description><link>https://zenn.dev/jenny/articles/3b48e993d5c987</link><guid isPermaLink="true">https://zenn.dev/jenny/articles/3b48e993d5c987</guid><pubDate>Fri, 20 Sep 2024 00:01:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---fMmG3So--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%25E3%2581%25A8Django%25E3%2581%25A7%25E8%25AA%258D%25E8%25A8%25BC%25E6%25A9%259F%25E8%2583%25BD%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25281.%25E3%2582%25B5%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%25E6%25A9%259F%25E8%2583%25BD%25E7%25B7%25A8%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2584%25E3%2581%258E%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE0Y2NlYzgwYTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>やぎ</dc:creator></item><item><title><![CDATA[AWS CDK で CloudFront + S3 を使った Web サイト配信環境をサクッと構築する方法]]></title><description><![CDATA[
+ これは何
+
+AWS CDK で CloudFront + S3 構成で Web サイトを配信する環境を構築するメモ
+構成
+
+S3 Bucket 自体の Web Site Hosting は利用しない
+CloudFront から S3 へのアクセスは OAC を利用して制御する
+
+
+
+
+ CDK App のプロジェクトを用意
+mkdir my-project &amp;&amp; cd my-project
+npx aws-cdk init app --language typescript ./
+
+ ホストする html ファイルとディレクトリを作成
+mkdir website-di...]]></description><link>https://zenn.dev/noid11/articles/143d4c79fced54</link><guid isPermaLink="true">https://zenn.dev/noid11/articles/143d4c79fced54</guid><pubDate>Thu, 19 Sep 2024 10:41:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--QoESHx5d--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AWS%2520CDK%2520%25E3%2581%25A7%2520CloudFront%2520%252B%2520S3%2520%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%259F%2520Web%2520%25E3%2582%25B5%25E3%2582%25A4%25E3%2583%2588%25E9%2585%258D%25E4%25BF%25A1%25E7%2592%25B0%25E5%25A2%2583%25E3%2582%2592%25E3%2582%25B5%25E3%2582%25AF%25E3%2583%2583%25E3%2581%25A8%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:noid11%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJlOWYzOTk2MDQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>noid11</dc:creator></item></channel></rss>
