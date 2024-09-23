@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「TypeScript」のフィード]]></title><description><![CDATA[Zennのトピック「TypeScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/typescript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/f13e758fdb.png</url><title>Zennの「TypeScript」のフィード</title><link>https://zenn.dev/topics/typescript</link></image><generator>zenn.dev</generator><lastBuildDate>Mon, 23 Sep 2024 02:41:44 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/typescript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[ファイルのアップロード機能：ファイル名の設定]]></title><description><![CDATA[Next.jsとsupabaseで個人開発をしています。その中で、ファイルをアップロードする機能を作成しています。アップロードできないファイル名(eapⅡ.mp4など)があったため解決方法をまとめました。
+
+ ファイル名の設定
+
+index.ts
+const sanitizedFileName=file.name.replace(/[^a-z0-9]/gi,'_').toLowerCase();
+//aからz,0から9,アンダースコアなどの文字列を以外の文字を除外する
+const lastDotIndex=sanitizedFileName.lastIndexOf('.');//sani...]]></description><link>https://zenn.dev/maiamitorio/articles/b1764f7265ae09</link><guid isPermaLink="true">https://zenn.dev/maiamitorio/articles/b1764f7265ae09</guid><pubDate>Mon, 23 Sep 2024 01:26:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jWjXHUP_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2581%25AE%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2589%25E6%25A9%259F%25E8%2583%25BD%25EF%25BC%259A%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E5%2590%258D%25E3%2581%25AE%25E8%25A8%25AD%25E5%25AE%259A%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:maiamitorio%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzUwZmEwOTA0ZTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>maiamitorio</dc:creator></item><item><title><![CDATA[Cloudflare WorkersとHono🔥を学ぶ]]></title><description><![CDATA[
+ はじめに
+Cloudflare Workersをキャッチアップします。Cloudflare Workers上で動くHonoというフレームワークの評判がとても良いです。
+せっかくなのでクラウドフレアのドキュメントを読みつつ、Honoのソースコードを読みつつの、Honoっぽいフレームワークを作成してキャッチアップしていきたいと思います。
+
+ Cloudflareとは
+CDNの提供から始まり、強力なWAFを提供している企業というイメージでした。最近はCloudflare Workersというエッジコンピューティングが人気を集めており、それ以外にもドメインレジストラ、オブジェクトストレージ、...]]></description><link>https://zenn.dev/ishiyama/articles/af73667c076dd2</link><guid isPermaLink="true">https://zenn.dev/ishiyama/articles/af73667c076dd2</guid><pubDate>Sun, 22 Sep 2024 22:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--tnL1OeBw--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Cloudflare%2520Workers%25E3%2581%25A8Hono%2520%25E3%2582%2592%25E5%25AD%25A6%25E3%2581%25B6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ishiyama%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk1ODA5ZmJmZDMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ishiyama</dc:creator></item><item><title><![CDATA[[TypeScript] メンテしやすいコードの書き方]]></title><description><![CDATA[
+ はじめに
+この記事では、TypeScriptのメンテしやすいコードの書き方を解説します。
+参考資料
+
+
+
+ 1. 小さくまとめてわかりやすくする
+
+ わかりやすい名前を使う
+!
+a, b の変数ではどんな値で掛け算しているか不明
+let basePrice: number = a * b;
+
+何の略語なのか分からない
+let basePrice: number = qty * up;
+
+
+!
+変数を意味の分かる quantity(数量) unitPrice(単価)を単語にすると事で、メソッドが理解しやすい
+let basePrice: number = quantity * unit...]]></description><link>https://zenn.dev/aew2sbee/articles/typescript-object-orientation</link><guid isPermaLink="true">https://zenn.dev/aew2sbee/articles/typescript-object-orientation</guid><pubDate>Sun, 22 Sep 2024 13:11:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9Av1ai64--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BTypeScript%255D%2520%25E3%2583%25A1%25E3%2583%25B3%25E3%2583%2586%25E3%2581%2597%25E3%2582%2584%25E3%2581%2599%25E3%2581%2584%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2581%25AE%25E6%259B%25B8%25E3%2581%258D%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25B5%25E3%2582%258B%25E3%2581%259F%2520%25E3%2581%25AA%25E3%2581%258A%25E3%2581%258D%2520%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YTFYdHhmWGZPVmpKek9sTnQ0cDZmaWQyeENLMTlKOEl0akpQczZiZz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ふるた なおき🥝</dc:creator></item><item><title><![CDATA[[TypeScript] オブジェクト指向らしい設計にする方法]]></title><description><![CDATA[
+ はじめに
+この記事では、TypeScriptでオブジェクト指向らしい設計にする方法を解説します。
+参考資料
+
+
+
+ 1. １つのメソッドのインデントは1つまで
+1番深いインデントの処理をメソッドを抽出し、次のインデントをさらにメソッドに抽出するパターンです。
+インデントは、1つの処理単位であり、その単位をメソッドとか、クラスに抽出して部品化すること
+
+ 2. else句を使わない
+else句はif文を複雑にして読みにくく、変更に対応しにくいです。
+ガード節と早期リターンを組み込み、else句を回避する
+function calculateDiscount(price: number)...]]></description><link>https://zenn.dev/aew2sbee/articles/typescript-coding-rule-object</link><guid isPermaLink="true">https://zenn.dev/aew2sbee/articles/typescript-coding-rule-object</guid><pubDate>Sun, 22 Sep 2024 13:11:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8tYAEnPW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BTypeScript%255D%2520%25E3%2582%25AA%25E3%2583%2596%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E6%258C%2587%25E5%2590%2591%25E3%2582%2589%25E3%2581%2597%25E3%2581%2584%25E8%25A8%25AD%25E8%25A8%2588%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25B5%25E3%2582%258B%25E3%2581%259F%2520%25E3%2581%25AA%25E3%2581%258A%25E3%2581%258D%2520%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YTFYdHhmWGZPVmpKek9sTnQ0cDZmaWQyeENLMTlKOEl0akpQczZiZz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ふるた なおき🥝</dc:creator></item><item><title><![CDATA[[TypeScript] 残りの引数(...hoge)を配列に格納する]]></title><description><![CDATA[
+ はじめに
+この記事では、コードをシンプルに書けるparameterを解説します。
+参考資料
+
+
+
+ 結論
+!
+最後の引数に「...」を追加すると、1 つの配列に全ての値が格納される
+const foodList = (...foods: string[]) =&gt; foods;
+
+
+
+ 1.全ての引数を配列にする
+全ての引数(...foods)を配列に格納する
+const foodList = (...foods: string[]) =&gt; foods;
+console.log(foodList('たまご', '納豆', '豆腐', 'ゼリー', 'めかぶ'));
+実行結果...]]></description><link>https://zenn.dev/aew2sbee/articles/typescript-rest-parameter</link><guid isPermaLink="true">https://zenn.dev/aew2sbee/articles/typescript-rest-parameter</guid><pubDate>Sun, 22 Sep 2024 12:42:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Wjyn2uZ---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BTypeScript%255D%2520%25E6%25AE%258B%25E3%2582%258A%25E3%2581%25AE%25E5%25BC%2595%25E6%2595%25B0%2528...hoge%2529%25E3%2582%2592%25E9%2585%258D%25E5%2588%2597%25E3%2581%25AB%25E6%25A0%25BC%25E7%25B4%258D%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25B5%25E3%2582%258B%25E3%2581%259F%2520%25E3%2581%25AA%25E3%2581%258A%25E3%2581%258D%2520%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YTFYdHhmWGZPVmpKek9sTnQ0cDZmaWQyeENLMTlKOEl0akpQczZiZz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ふるた なおき🥝</dc:creator></item><item><title><![CDATA[[TypeScript] インターフェース(interface)を継承する]]></title><description><![CDATA[
+ はじめに
+この記事では、コードをシンプルに書けるインターフェース(interface)を継承する方法を解説します。
+参考資料
+
+
+
+ 結論
+!
+interface 継承元 {
+  変数名1: データ型;
+}
+
+interface 継承先 extends 継承元 {
+  変数名2: データ型;
+}
+
+メリット
+
+似たようなコードを複数書くことが軽減する事が可能
+
+デメリット
+
+注意: 継承が深い場合など可読性がバグに繋がる可能性がある
+
+
+
+ 1. 問題がないパターン
+!
+Writingが継承されて構文エラーが発生していない
+
+interface Writing {
+  title: ...]]></description><link>https://zenn.dev/aew2sbee/articles/typescript-interface</link><guid isPermaLink="true">https://zenn.dev/aew2sbee/articles/typescript-interface</guid><pubDate>Sun, 22 Sep 2024 12:42:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9cnn0pXE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BTypeScript%255D%2520%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%2595%25E3%2582%25A7%25E3%2583%25BC%25E3%2582%25B9%2528interface%2529%25E3%2582%2592%25E7%25B6%2599%25E6%2589%25BF%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25B5%25E3%2582%258B%25E3%2581%259F%2520%25E3%2581%25AA%25E3%2581%258A%25E3%2581%258D%2520%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YTFYdHhmWGZPVmpKek9sTnQ0cDZmaWQyeENLMTlKOEl0akpQczZiZz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ふるた なおき🥝</dc:creator></item><item><title><![CDATA[[TypeScript] 処理しない関数には、戻り値の型(never)を使う]]></title><description><![CDATA[
+ はじめに
+この記事では、コードの安全性を高めるneverを解説します。
+参考資料
+
+
+
+ 結論
+!
+neverとは、「return 文を持たない」 や 「処理しない関数」 の場合、
+戻り値の型を使う事ができる型です。
+
+
+ 1. return 文を持たない
+const fail = (message: string): never =&gt; {
+  throw new Error(`${message}`);
+};
+
+ 2. return 文を持つ
+!
+return 文を持つ関数(何かしらの処理を有する)ような関数では、下記のようなエラーが発生する
+(※ 値を返さない return...]]></description><link>https://zenn.dev/aew2sbee/articles/typescript-return-type-never</link><guid isPermaLink="true">https://zenn.dev/aew2sbee/articles/typescript-return-type-never</guid><pubDate>Sun, 22 Sep 2024 12:32:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ocfjxY-b--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BTypeScript%255D%2520%25E5%2587%25A6%25E7%2590%2586%25E3%2581%2597%25E3%2581%25AA%25E3%2581%2584%25E9%2596%25A2%25E6%2595%25B0%25E3%2581%25AB%25E3%2581%25AF%25E3%2580%2581%25E6%2588%25BB%25E3%2582%258A%25E5%2580%25A4%25E3%2581%25AE%25E5%259E%258B%2528never%2529%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25B5%25E3%2582%258B%25E3%2581%259F%2520%25E3%2581%25AA%25E3%2581%258A%25E3%2581%258D%2520%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YTFYdHhmWGZPVmpKek9sTnQ0cDZmaWQyeENLMTlKOEl0akpQczZiZz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ふるた なおき🥝</dc:creator></item><item><title><![CDATA[[Jest] mockモジュールを使ってテストを行う]]></title><description><![CDATA[
+ はじめに
+この記事では、Jestでmockモジュールを活用する方法を解説します。
+参考資料
+
+
+
+ 未定義の関数を定義する
+
+ 1. テスト対象になるサンプル関数を作成する
+export function greet(name: string) {
+  return `Hello! ${name}.`;
+}
+
+export function sayGoodBye(name: string) {
+  throw new Error("未実装");
+}
+
+ 2. サンプル関数をテストコードを作成する
+import { greet, sayGoodBye } from '../../src...]]></description><link>https://zenn.dev/aew2sbee/articles/typescript-jest-mock</link><guid isPermaLink="true">https://zenn.dev/aew2sbee/articles/typescript-jest-mock</guid><pubDate>Sun, 22 Sep 2024 12:27:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--pfHNnbxk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BJest%255D%2520mock%25E3%2583%25A2%25E3%2582%25B8%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%25AB%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E3%2582%2592%25E8%25A1%258C%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25B5%25E3%2582%258B%25E3%2581%259F%2520%25E3%2581%25AA%25E3%2581%258A%25E3%2581%258D%2520%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YTFYdHhmWGZPVmpKek9sTnQ0cDZmaWQyeENLMTlKOEl0akpQczZiZz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ふるた なおき🥝</dc:creator></item><item><title><![CDATA[[TypeScript] 何も返さない関数には、戻り値の型(void)を使う]]></title><description><![CDATA[
+ はじめに
+この記事では、コードの安全性を高めるvoidを解説します。
+参考資料
+
+
+
+ 結論
+!
+void とは、return 文を持たないや値を返さない return 文を有する関数の場合、
+戻り値の型を使う事ができる型です。
+
+
+ 1. return 文を持たない
+const log = (): void =&gt; {
+  console.log('Hello Word');
+};
+
+ 2. 値を返さない return 文
+const log = (): void =&gt; {
+  console.log('Hello Word');
+  return;
+};
+
+ 3. 値を...]]></description><link>https://zenn.dev/aew2sbee/articles/typescript-return-type-void</link><guid isPermaLink="true">https://zenn.dev/aew2sbee/articles/typescript-return-type-void</guid><pubDate>Sun, 22 Sep 2024 12:23:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Ys0OutSx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BTypeScript%255D%2520%25E4%25BD%2595%25E3%2582%2582%25E8%25BF%2594%25E3%2581%2595%25E3%2581%25AA%25E3%2581%2584%25E9%2596%25A2%25E6%2595%25B0%25E3%2581%25AB%25E3%2581%25AF%25E3%2580%2581%25E6%2588%25BB%25E3%2582%258A%25E5%2580%25A4%25E3%2581%25AE%25E5%259E%258B%2528void%2529%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25B5%25E3%2582%258B%25E3%2581%259F%2520%25E3%2581%25AA%25E3%2581%258A%25E3%2581%258D%2520%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YTFYdHhmWGZPVmpKek9sTnQ0cDZmaWQyeENLMTlKOEl0akpQczZiZz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ふるた なおき🥝</dc:creator></item><item><title><![CDATA[[TypeScript] 配列の末尾の値を取得する]]></title><description><![CDATA[
+ はじめに
+この記事では、コードをシンプルに書ける配列の末尾の値を取得する方法を解説します。
+参考資料
+
+
+
+ 結論
+!
+下記コードで配列の末尾の値を取得する可能です。
+const hoge = list.at(-1);
+
+
+
+ 1. length を使う
+const numList: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+console.log(numList[numList.length - 1]);
+実行結果を確認する10
+
+
+ 2. .at()を使う
+!
+.at()は、ECMAScript 2022 に追加されてました。
+Pro...]]></description><link>https://zenn.dev/aew2sbee/articles/typescript-list-end</link><guid isPermaLink="true">https://zenn.dev/aew2sbee/articles/typescript-list-end</guid><pubDate>Sun, 22 Sep 2024 12:01:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--HuxyCQHB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BTypeScript%255D%2520%25E9%2585%258D%25E5%2588%2597%25E3%2581%25AE%25E6%259C%25AB%25E5%25B0%25BE%25E3%2581%25AE%25E5%2580%25A4%25E3%2582%2592%25E5%258F%2596%25E5%25BE%2597%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25B5%25E3%2582%258B%25E3%2581%259F%2520%25E3%2581%25AA%25E3%2581%258A%25E3%2581%258D%2520%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YTFYdHhmWGZPVmpKek9sTnQ0cDZmaWQyeENLMTlKOEl0akpQczZiZz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ふるた なおき🥝</dc:creator></item><item><title><![CDATA[大学生が数式を入力できる数学Q&Aサイトを作った話 (機能編)]]></title><description><![CDATA[
+ はじめに
+現在、独学でReactを勉強している大学2年です。
+今回Latexで数式を入力できる数学質問サイトをリリースしたので紹介します。
+
+ 開発したサイト
+開発したサイトは以下の「UI Math」というサイトです。
+
+https://ui-math.site/
+
+ 開発のきっかけ
+数式をきれいに表示できるQ&amp;Aサイトがなく、Latexでの入力やソフトウェアキーボードで数式を入力できるサイトがあったら便利だと思い開発しました。
+
+ サイトの紹介
+
+ 質問の投稿
+質問はメニューの質問するから投稿できます。
+ログインしていない場合はログイン画面にリダイレクトされます。
+質問は投...]]></description><link>https://zenn.dev/muscatto/articles/2cae2488947cc3</link><guid isPermaLink="true">https://zenn.dev/muscatto/articles/2cae2488947cc3</guid><pubDate>Sun, 22 Sep 2024 11:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--G7Mx5-Yg--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%25A4%25A7%25E5%25AD%25A6%25E7%2594%259F%25E3%2581%258C%25E6%2595%25B0%25E5%25BC%258F%25E3%2582%2592%25E5%2585%25A5%25E5%258A%259B%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258B%25E6%2595%25B0%25E5%25AD%25A6Q%2526A%25E3%2582%25B5%25E3%2582%25A4%25E3%2583%2588%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%25E8%25A9%25B1%2520%2528%25E6%25A9%259F%25E8%2583%25BD%25E7%25B7%25A8%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%259E%25E3%2582%25B9%25E3%2582%25AB%25E3%2583%2583%25E3%2583%2588%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTGVqZl9HSkhEUHpVWjhxMWVZaXoxd0ZsNUFOSHdKX2p4TTg1amJCcy1nRWc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>マスカット</dc:creator></item><item><title><![CDATA[vercel ai で書き捨ての Deno CLI を書き直した (OpenAI, AnthropicAI, Google Gemini)]]></title><description><![CDATA[Claude or ChatGPT + Tools やモデルの組み合わせで対応パターンが膨大で面倒だったのを、 Deno + ai-sdk(Vercel) で書き直したらだいぶ楽になった。
+この辺を参照した。
+https://vercel.com/blog/introducing-the-vercel-ai-sdk
+https://zenn.dev/laiso/articles/a6a7b4864a713f
+OpenAI と AnthropicAI の Tools の叩き方を確認したが、 Gemini はそこを省いている。
+
+ 前提
+まず、 AI 周りの CLI ツールは専用の面倒臭さが...]]></description><link>https://zenn.dev/mizchi/articles/deno-cli-ai-sdk-tools-template</link><guid isPermaLink="true">https://zenn.dev/mizchi/articles/deno-cli-ai-sdk-tools-template</guid><pubDate>Sun, 22 Sep 2024 09:31:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--J1Qu1ti4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:vercel%2520ai%2520%25E3%2581%25A7%25E6%259B%25B8%25E3%2581%258D%25E6%258D%25A8%25E3%2581%25A6%25E3%2581%25AE%2520Deno%2520CLI%2520%25E3%2582%2592%25E6%259B%25B8%25E3%2581%258D%25E7%259B%25B4%25E3%2581%2597%25E3%2581%259F%2520%2528OpenAI%252C%2520AnthropicAI%252C%2520Go...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mizchi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2liclRHT052Z3d3ay1fNGxlcVk4TGNGSlNuX0FoWnpEWVlKaXJNcWc9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mizchi</dc:creator></item><item><title><![CDATA[React のダブルクリック（多重クリック）対策一覧]]></title><description><![CDATA[
+ 概要
+React アプリにおけるダブルクリック（多重クリック）対策の実装とそのデモを一覧でまとめてみました。コーディングのヒントになれば幸いです。
+※本記事で紹介する実装は React SPA アプリを想定し、ボタンに対するダブルクリックに焦点を当てています。
+
+ ダブルクリックの問題点
+ダブルクリックで問題となるのがクリックアクションに紐づく API 呼び出しが複数回行われてしまうことです。
+API 側で問題にならないよう設計されてれば安心ですが（トークンを利用するなど）、そうでなかったりそもそも API 側で対策すること自体が難しい場合もあるかもしれません。
+今回は TODO ア...]]></description><link>https://zenn.dev/k0rosuke/articles/eab514e4920778</link><guid isPermaLink="true">https://zenn.dev/k0rosuke/articles/eab514e4920778</guid><pubDate>Sun, 22 Sep 2024 07:48:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9KYl4ARF--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%2520%25E3%2581%25AE%25E3%2583%2580%25E3%2583%2596%25E3%2583%25AB%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2583%25E3%2582%25AF%25EF%25BC%2588%25E5%25A4%259A%25E9%2587%258D%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2583%25E3%2582%25AF%25EF%25BC%2589%25E5%25AF%25BE%25E7%25AD%2596%25E4%25B8%2580%25E8%25A6%25A7%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:korosuke%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFmODcxM2MxMTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>korosuke</dc:creator></item><item><title><![CDATA[[TypeScript] Jsonファイルを直接インポートする]]></title><description><![CDATA[
+ はじめに
+この記事では、Jsonファイルを直接インポートする方法 をまとめております。
+参考資料
+
+
+
+ 結論
+!
+tsconfig.json の "resolveJsonModule": true, を追加する
+{
+  "compilerOptions": {
+    "resolveJsonModule": true
+    // 他のオプション...
+  }
+}
+
+
+
+ 0. 前提条件：ディレクトリー構成
+.
+├── data.json
+├── resolveJsonModule.ts
+└── tsconfig.json
+
+
+ 1. tsconfig.json の設定
+"res...]]></description><link>https://zenn.dev/aew2sbee/articles/typescript-import-json</link><guid isPermaLink="true">https://zenn.dev/aew2sbee/articles/typescript-import-json</guid><pubDate>Sun, 22 Sep 2024 04:39:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---TyOt2Ob--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BTypeScript%255D%2520Json%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2592%25E7%259B%25B4%25E6%258E%25A5%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%259D%25E3%2583%25BC%25E3%2583%2588%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25B5%25E3%2582%258B%25E3%2581%259F%2520%25E3%2581%25AA%25E3%2581%258A%25E3%2581%258D%2520%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YTFYdHhmWGZPVmpKek9sTnQ0cDZmaWQyeENLMTlKOEl0akpQczZiZz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ふるた なおき🥝</dc:creator></item><item><title><![CDATA[[TypeScript] 関数の引数を必須ではなくオプションにする]]></title><description><![CDATA[
+ はじめに
+今回は下記書籍でTypeScriptについて学習しました。
+下記内容まで解説します。
+
+
+parameter について
+
+
+
+ 結論
+!
+型アノテーションの中で「:」の前に「?」を追加する
+オプションパラメーターにした引数は、「 | undefined」が追加された合併型になる
+const add = (x: number, y?: number) =&gt; x + y;
+
+
+
+ 前提
+オプションパラメーターは、常に暗黙で「undefined」になる可能性がある
+const announceSong = (song: string, singer?: string) =&...]]></description><link>https://zenn.dev/aew2sbee/articles/typescript-option-parameter</link><guid isPermaLink="true">https://zenn.dev/aew2sbee/articles/typescript-option-parameter</guid><pubDate>Sun, 22 Sep 2024 04:31:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hImWgiKm--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BTypeScript%255D%2520%25E9%2596%25A2%25E6%2595%25B0%25E3%2581%25AE%25E5%25BC%2595%25E6%2595%25B0%25E3%2582%2592%25E5%25BF%2585%25E9%25A0%2588%25E3%2581%25A7%25E3%2581%25AF%25E3%2581%25AA%25E3%2581%258F%25E3%2582%25AA%25E3%2583%2597%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25B5%25E3%2582%258B%25E3%2581%259F%2520%25E3%2581%25AA%25E3%2581%258A%25E3%2581%258D%2520%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YTFYdHhmWGZPVmpKek9sTnQ0cDZmaWQyeENLMTlKOEl0akpQczZiZz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ふるた なおき🥝</dc:creator></item><item><title><![CDATA[[TypeScript] 合併型の配列(複数の型が含まれているを配列)の型定義]]></title><description><![CDATA[
+ はじめに
+今回は下記書籍でTypeScriptについて学習しました。
+下記内容まで解説します。
+
+合併型の配列(複数の型が含まれているを配列)の型定義方法について
+
+
+
+ 結論
+!
+文字列と数値の混合の配列のあ場合、(number | string)[]を指定する
+
+
+ 1. 文字列のみの配列
+const stgList: string[] = ['1', '2', '3', '4', '5'];
+
+console.log(stgList);
+実行結果を確認する
+["1", "2", "3", "4", "5"]
+
+ 2. 数値のみの配列
+const numList: number[...]]></description><link>https://zenn.dev/aew2sbee/articles/typescript-list-multi-type</link><guid isPermaLink="true">https://zenn.dev/aew2sbee/articles/typescript-list-multi-type</guid><pubDate>Sun, 22 Sep 2024 04:31:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--o4h_g0ij--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BTypeScript%255D%2520%25E5%2590%2588%25E4%25BD%25B5%25E5%259E%258B%25E3%2581%25AE%25E9%2585%258D%25E5%2588%2597%2528%25E8%25A4%2587%25E6%2595%25B0%25E3%2581%25AE%25E5%259E%258B%25E3%2581%258C%25E5%2590%25AB%25E3%2581%25BE%25E3%2582%258C%25E3%2581%25A6%25E3%2581%2584%25E3%2582%258B%25E3%2582%2592%25E9%2585%258D%25E5%2588%2597%2529%25E3%2581%25AE%25E5%259E%258B%25E5%25AE%259A%25E7%25BE%25A9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25B5%25E3%2582%258B%25E3%2581%259F%2520%25E3%2581%25AA%25E3%2581%258A%25E3%2581%258D%2520%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YTFYdHhmWGZPVmpKek9sTnQ0cDZmaWQyeENLMTlKOEl0akpQczZiZz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ふるた なおき🥝</dc:creator></item><item><title><![CDATA[[TypeScript] Jsonファイルを直接インポートする]]></title><description><![CDATA[
+ はじめに
+TypeScriptをより深く理解したく下記書籍を読みました。
+下記書籍のJsonファイルを直接インポートする方法について学びがあったので、記事として記録します。
+
+
+ 結論
+!
+tsconfig.jsonの"resolveJsonModule": true,を追加する
+
+tsconfig.json
+{
+  "compilerOptions": {
+    "resolveJsonModule": true,
+    // 他のオプション...
+  }
+}
+
+
+
+
+ 準備
+
+ 1. ディレクトリー構成の確認
+.
+├── data.json
+├── resolveJsonMo...]]></description><link>https://zenn.dev/aew2sbee/articles/typescript-json-file-import</link><guid isPermaLink="true">https://zenn.dev/aew2sbee/articles/typescript-json-file-import</guid><pubDate>Sun, 22 Sep 2024 04:31:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---TyOt2Ob--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BTypeScript%255D%2520Json%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2592%25E7%259B%25B4%25E6%258E%25A5%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%259D%25E3%2583%25BC%25E3%2583%2588%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25B5%25E3%2582%258B%25E3%2581%259F%2520%25E3%2581%25AA%25E3%2581%258A%25E3%2581%258D%2520%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YTFYdHhmWGZPVmpKek9sTnQ0cDZmaWQyeENLMTlKOEl0akpQczZiZz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ふるた なおき🥝</dc:creator></item><item><title><![CDATA[[Jest] Typescript環境でカバレッジレポートを表示する]]></title><description><![CDATA[
+ やり方
+
+ 1. jestに必要な物をインストール
+npm install --save-dev @types/jest jest ts-jest
+
+ 2. jestの設定ファイルの作成
+下記コマンドを実行します
+npm init jest@latest
+実行結果を確認する$ npm init jest@latest
+
+The following questions will help Jest to create a suitable configuration for your project
+
+√ Would you like to use Typescript for the...]]></description><link>https://zenn.dev/aew2sbee/articles/typescript-jest-coverage</link><guid isPermaLink="true">https://zenn.dev/aew2sbee/articles/typescript-jest-coverage</guid><pubDate>Sun, 22 Sep 2024 04:31:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BoFLe4fA--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BJest%255D%2520Typescript%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25A7%25E3%2582%25AB%25E3%2583%2590%25E3%2583%25AC%25E3%2583%2583%25E3%2582%25B8%25E3%2583%25AC%25E3%2583%259D%25E3%2583%25BC%25E3%2583%2588%25E3%2582%2592%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25B5%25E3%2582%258B%25E3%2581%259F%2520%25E3%2581%25AA%25E3%2581%258A%25E3%2581%258D%2520%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YTFYdHhmWGZPVmpKek9sTnQ0cDZmaWQyeENLMTlKOEl0akpQczZiZz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ふるた なおき🥝</dc:creator></item><item><title><![CDATA[[TypeScript] インターフェース(interface)と型エイリアス(type)の違い]]></title><description><![CDATA[
+ はじめに
+TypeScriptをより深く理解したく下記書籍を読みました。
+インターフェース(interface)と型エイリアス(type)の違いについて情報を整理したかったので、執筆します。
+
+
+ 結論
+!
+interfaceの方が優れているので、interfaceの利用を推奨します
+
+
+ 1. interface同士で継承できる
+
+組み込みグローバルインターフェースやnpmパッケージなどのサードパーティコードを扱う時に便利
+
+interface 継承元 {
+  変数名1: データ型;
+}
+
+interface 継承先 extends 継承元 {
+  変数名2: データ型;
+}
+
+ ...]]></description><link>https://zenn.dev/aew2sbee/articles/typescript-interface-vs-type</link><guid isPermaLink="true">https://zenn.dev/aew2sbee/articles/typescript-interface-vs-type</guid><pubDate>Sun, 22 Sep 2024 04:31:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--aToUilwp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BTypeScript%255D%2520%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%2595%25E3%2582%25A7%25E3%2583%25BC%25E3%2582%25B9%2528interface%2529%25E3%2581%25A8%25E5%259E%258B%25E3%2582%25A8%25E3%2582%25A4%25E3%2583%25AA%25E3%2582%25A2%25E3%2582%25B9%2528type%2529%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25B5%25E3%2582%258B%25E3%2581%259F%2520%25E3%2581%25AA%25E3%2581%258A%25E3%2581%258D%2520%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YTFYdHhmWGZPVmpKek9sTnQ0cDZmaWQyeENLMTlKOEl0akpQczZiZz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ふるた なおき🥝</dc:creator></item><item><title><![CDATA[[TypeScript] インターフェース(interface)で読み取り専用にする]]></title><description><![CDATA[
+ はじめに
+TypeScriptをより深く理解したく下記書籍を読みました。
+インターフェース(interface)で読み取り専用にするについて情報を整理したかったので、執筆します。
+
+
+ 結論
+!
+下記がテンプレートになります。
+interface インターフェース名 {
+  readonly 変数名: データ型;
+}
+
+
+
+ 1. 読み取り専用(readonly)を使用しない
+letなので値の上書きが可能です
+interface Writing {
+  title: string;
+}
+
+let book: Writing = {
+  title: '初めての',
+}
+
+book.t...]]></description><link>https://zenn.dev/aew2sbee/articles/typescript-interface-readonly</link><guid isPermaLink="true">https://zenn.dev/aew2sbee/articles/typescript-interface-readonly</guid><pubDate>Sun, 22 Sep 2024 04:31:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Bx6KiV4r--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BTypeScript%255D%2520%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%2595%25E3%2582%25A7%25E3%2583%25BC%25E3%2582%25B9%2528interface%2529%25E3%2581%25A7%25E8%25AA%25AD%25E3%2581%25BF%25E5%258F%2596%25E3%2582%258A%25E5%25B0%2582%25E7%2594%25A8%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25B5%25E3%2582%258B%25E3%2581%259F%2520%25E3%2581%25AA%25E3%2581%258A%25E3%2581%258D%2520%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YTFYdHhmWGZPVmpKek9sTnQ0cDZmaWQyeENLMTlKOEl0akpQczZiZz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ふるた なおき🥝</dc:creator></item></channel></rss>

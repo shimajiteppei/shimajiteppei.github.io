@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Mon, 23 Sep 2024 03:12:36 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Databricks上からDuckDBを触ってみた]]></title><description><![CDATA[
+ 触ってみるったら触ってみるんだ
+このまえDAISでデモもしてたし動くはず。
+
+ セットアップ
+まずはモジュールインストール。
+%pip install duckdb==1.0.0 pandas deltalake
+dbutils.library.restartPython()
+なんか、version 1.1.0のレポジトリにはuc_catalogのモジュールが取り込まれてないっぽいので1.0.0で試す。
+そして読み込み
+import duckdb
+import pyarrow.dataset as ds
+from deltalake import DeltaTable
+
+ まずS3上...]]></description><link>https://zenn.dev/akuwano/articles/d71b50718be6f5</link><guid isPermaLink="true">https://zenn.dev/akuwano/articles/d71b50718be6f5</guid><pubDate>Mon, 23 Sep 2024 02:39:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--F2O6jY0---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Databricks%25E4%25B8%258A%25E3%2581%258B%25E3%2582%2589DuckDB%25E3%2582%2592%25E8%25A7%25A6%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:akuwano%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lEaElObFY5V1NqVlVhOGVpMjAzY193bDFNOF9IckhmRWZRdVNxeHg0PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>akuwano</dc:creator></item><item><title><![CDATA[【Python】lambda（ラムダ式）の使い方]]></title><description><![CDATA[Pythonのlambda（ラムダ式）をご紹介。
+最初はラムダじゃなくて、「ラムブダ」って呼んでました...涙
+
+ lambda（ラムダ式)とは？
+Pythonではdef文で関数を定義しますが、lambdaを使うことで、名前を持たない無名関数を作成することができます。
+def文による関数定義と、それに相当するラムダ式での無名関数の対応関係は以下のようになります。
+▼ def文
+def 名前(引数, 引数, ...):
+    return 式
+▼ ラムダ式
+名前 = lambda 引数, 引数, ...: 式
+具体例は以下のようになります。
+add = lambda x, y: x + ...]]></description><link>https://zenn.dev/hovinci/articles/b19977fd145669</link><guid isPermaLink="true">https://zenn.dev/hovinci/articles/b19977fd145669</guid><pubDate>Mon, 23 Sep 2024 01:37:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--tYrPc8AK--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591lambda%25EF%25BC%2588%25E3%2583%25A9%25E3%2583%25A0%25E3%2583%2580%25E5%25BC%258F%25EF%25BC%2589%25E3%2581%25AE%25E4%25BD%25BF%25E3%2581%2584%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%259B%25E3%2583%25B4%25E3%2582%25A3%25E3%2583%25B3%25E3%2583%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzIzYTE5NmI1NDYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ホヴィンチ</dc:creator></item><item><title><![CDATA[Python パッケージ開発の気の抜けたtip(s)]]></title><description><![CDATA[こんにちは、沙代です。
+ちょっとPythonパッケージを作ってみようかなというときに、動作を試してみたいことってありますよね。
+そのときにimportの仕方が難しくてエラーが出てしまったりするので、そのときに使った限られた状況で使えるtipsを投稿してみようと思います。
+環境
+MacOS: macOS Montery 12.6.2 (Apple M1 Pro)
+iTerm2: 3.5.4
+Python: 3.7.0
+
+ TL; DR
+mypackage/の親ディレクトリ下で実行する。
+
+ 準備
+$ cd ~
+$ tree mypackage
+mypackage
+├── __init__....]]></description><link>https://zenn.dev/syitsk/articles/cbf666a8efb453</link><guid isPermaLink="true">https://zenn.dev/syitsk/articles/cbf666a8efb453</guid><pubDate>Sun, 22 Sep 2024 17:54:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--m6sfA6Yp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%2520%25E3%2583%2591%25E3%2583%2583%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B8%25E9%2596%258B%25E7%2599%25BA%25E3%2581%25AE%25E6%25B0%2597%25E3%2581%25AE%25E6%258A%259C%25E3%2581%2591%25E3%2581%259Ftip%2528s%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:sayo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSndiUTdqNDNzempPRWU3aWQ1SjVPRlNTUzV0SnhqLWZIZEVNTUFIRnNHSE14Z0RBPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sayo</dc:creator></item><item><title><![CDATA[listで実装されたNodeに素早く到達する(Python)]]></title><description><![CDATA[こんにちは、沙代です。
+Nodeのkeyとなる値が与えられた時、Nodeに素早く到達したいことってありますよね。そのための簡易な実装を示します。（使う人いるのかな？）
+環境
+MacOS: macOS Montery 12.6.2 (Apple M1 Pro)
+iTerm2: 3.5.4
+Python: 3.7.0
+
+ TL;DR
+{key: Node}のような辞書を作成しておけばOKです。
+
+ 詳しく
+
+ 問題
+[prev, next, key, content]のようなlistとして実装されたNodeを、
+keyから取り出します。
+
+ 解決策
+Nodeのリストの他に、{key: Nod...]]></description><link>https://zenn.dev/syitsk/articles/dfd3c6f4aa0d1a</link><guid isPermaLink="true">https://zenn.dev/syitsk/articles/dfd3c6f4aa0d1a</guid><pubDate>Sun, 22 Sep 2024 17:40:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Bd0QgzRA--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:list%25E3%2581%25A7%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2595%25E3%2582%258C%25E3%2581%259FNode%25E3%2581%25AB%25E7%25B4%25A0%25E6%2597%25A9%25E3%2581%258F%25E5%2588%25B0%25E9%2581%2594%25E3%2581%2599%25E3%2582%258B%2528Python%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:sayo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSndiUTdqNDNzempPRWU3aWQ1SjVPRlNTUzV0SnhqLWZIZEVNTUFIRnNHSE14Z0RBPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sayo</dc:creator></item><item><title><![CDATA[自分自身を参照するNodeのlistでの実装(Python)]]></title><description><![CDATA[こんにちは、沙代です。
+PythonでNodeをlistで実装するときに、自分自身を参照させたい時ってありますよね。
+ちょっと試してみたので、まとめてみました。
+環境
+MacOS: macOS Montery 12.6.2 (Apple M1 Pro)
+iTerm2: 3.5.4
+Python: 3.7.0
+
+ TL;DR
+&gt;&gt;&gt; a = [None, 'generation0']  # 単にa = [] でも可
+&gt;&gt;&gt; a[:] = [a, 'generation0']  # 単にa[0] = a でも可
+&gt;&gt;&gt; a
+[[...],...]]></description><link>https://zenn.dev/syitsk/articles/71e3dea980e037</link><guid isPermaLink="true">https://zenn.dev/syitsk/articles/71e3dea980e037</guid><pubDate>Sun, 22 Sep 2024 17:36:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ItSfbNmi--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%2587%25AA%25E5%2588%2586%25E8%2587%25AA%25E8%25BA%25AB%25E3%2582%2592%25E5%258F%2582%25E7%2585%25A7%25E3%2581%2599%25E3%2582%258BNode%25E3%2581%25AElist%25E3%2581%25A7%25E3%2581%25AE%25E5%25AE%259F%25E8%25A3%2585%2528Python%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:sayo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSndiUTdqNDNzempPRWU3aWQ1SjVPRlNTUzV0SnhqLWZIZEVNTUFIRnNHSE14Z0RBPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sayo</dc:creator></item><item><title><![CDATA[numpy.stackのaxis=-1について調べてみた]]></title><description><![CDATA[こんにちは、沙代です。
+axis=-1ってよく分からなくなってしまうことありますよね。今回はそれについて調べてみました。
+環境
+MacOS: macOS Montery 12.6.2 (Apple M1 Pro)
+iTerm2: 3.5.4
+Python: 3.10.0
+numpy: 1.22.4
+
+ ドキュメントを見てみます
+
+numpy.stack(arrays, axis=0, out=None)
+Join a sequence of arrays along a new axis.
+The axis parameter specifies the index of the new...]]></description><link>https://zenn.dev/syitsk/articles/a8a0cd4ab2021d</link><guid isPermaLink="true">https://zenn.dev/syitsk/articles/a8a0cd4ab2021d</guid><pubDate>Sun, 22 Sep 2024 17:31:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--JuEJ6XNS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:numpy.stack%25E3%2581%25AEaxis%253D-1%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E8%25AA%25BF%25E3%2581%25B9%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:sayo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSndiUTdqNDNzempPRWU3aWQ1SjVPRlNTUzV0SnhqLWZIZEVNTUFIRnNHSE14Z0RBPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sayo</dc:creator></item><item><title><![CDATA[Streamlit in Snowflake (SiS) で画像検索を実現しよう Part1 -画像ギャラリーアプリを作る-]]></title><description><![CDATA[
+ はじめに
+世の中にはドキュメントや画像、動画、音声データなどの非構造化データが大量にあります。データ活用の世界においてこれらの非構造化データをそのまま利用することは少なく、メタデータなどを抽出して構造化データ化してから活用することが多いのではないかと思います。
+今回は Streamlit in Snowflake を用いて画像検索を実現していきたいと思います。まずはその第一歩として画像ギャラリーアプリを作成し、Streamlit in Snowflake で画像データを簡単に活用できることを確認していきましょう。
+!
+本記事は私個人の発信となります。Snowflake を代表しての発...]]></description><link>https://zenn.dev/tsubasa_tech/articles/1e6dd562777481</link><guid isPermaLink="true">https://zenn.dev/tsubasa_tech/articles/1e6dd562777481</guid><pubDate>Sun, 22 Sep 2024 12:36:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Wku4nFwB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Streamlit%2520in%2520Snowflake%2520%2528SiS%2529%2520%25E3%2581%25A7%25E7%2594%25BB%25E5%2583%258F%25E6%25A4%259C%25E7%25B4%25A2%25E3%2582%2592%25E5%25AE%259F%25E7%258F%25BE%25E3%2581%2597%25E3%2582%2588%25E3%2581%2586%2520Part1%2520-%25E7%2594%25BB%25E5%2583%258F%25E3%2582%25AE%25E3%2583%25A3%25E3%2583%25A9%25E3%2583%25AA%25E3%2583%25BC%25E3%2582%25A2%25E3%2583%2597...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tsubasa%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2EyYmI4NWM0ZjEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tsubasa</dc:creator></item><item><title><![CDATA[ResponseValidationErrorが出たときは【FastAPI】]]></title><description><![CDATA[私がFastAPIで開発していて、デバッグする際にResponseValidationErrorというのがエラーの中ではよく出たので、このエラーの原因と解決策について自分の備忘録としてまとめてみました。
+!
+この記事でわかること
+ResponseValidationErrorの原因と解決策
+
+
+ エラー文のイメージ
+
+
+ 前提
+
+
+言語: Python 3.12.2
+
+フレームワーク: FastAPI 0.110.0
+
+仮想環境: Dockerを用いた環境構築
+
+データベース: MySQL
+
+ORMツール: SQLAlchemy 2.0.28
+
+データベースマイグレーションツール: Al...]]></description><link>https://zenn.dev/xronotech/articles/d1ba1675dce636</link><guid isPermaLink="true">https://zenn.dev/xronotech/articles/d1ba1675dce636</guid><pubDate>Sun, 22 Sep 2024 10:56:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--IxdjtmNb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ResponseValidationError%25E3%2581%258C%25E5%2587%25BA%25E3%2581%259F%25E3%2581%25A8%25E3%2581%258D%25E3%2581%25AF%25E3%2580%2590FastAPI%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%258B%25E3%2582%2581%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdmMTJiODY3MzAuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BEXronotech%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FkNzc4OWVlZjIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>かめ</dc:creator></item><item><title><![CDATA[Macでscrapy clawl コマンドを打ったらMemory Error]]></title><description><![CDATA[scrapyをMacで学習していたところ、Memory Errorに沼ってしまいましたが、以下の記事で一発で解決しました。
+https://qiita.com/yujimny/items/326d339689c1182c30fb
+同じようなエラーに出会した方がいましたら、参考にしてみてください。
+]]></description><link>https://zenn.dev/daino/articles/878b0cde1e5bab</link><guid isPermaLink="true">https://zenn.dev/daino/articles/878b0cde1e5bab</guid><pubDate>Sun, 22 Sep 2024 08:53:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ZqmUUgIi--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Mac%25E3%2581%25A7scrapy%2520clawl%2520%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2582%2592%25E6%2589%2593%25E3%2581%25A3%25E3%2581%259F%25E3%2582%2589Memory%2520Error%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:dainouesuketarou%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzEyZTVmYTMxYmEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>dainouesuketarou</dc:creator></item><item><title><![CDATA[【Python】リスト内包表記 (List Comprehension)とは？]]></title><description><![CDATA[
+ リスト内包表記とは？
+リスト内包表記は、新しいリストを簡潔に作成するためのPythonの強力な機能です。
+for文と同様の処理を1行で記述できるため、コードの可読性を高め、実行速度も向上させることができます。
+
+ 基本的な構文:
+new_list = [expression for item in iterable if condition]
+expression: 新しいリストの要素となる値を表す式
+item: イテラブルオブジェクト(リスト、タプル、文字列など)の要素を表す変数
+iterable: イテラブルなオブジェクト
+condition: (省略可能) 要素を追加する条件
+...]]></description><link>https://zenn.dev/hovinci/articles/c85846e82faf06</link><guid isPermaLink="true">https://zenn.dev/hovinci/articles/c85846e82faf06</guid><pubDate>Sun, 22 Sep 2024 08:32:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--la1xP7TZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591%25E3%2583%25AA%25E3%2582%25B9%25E3%2583%2588%25E5%2586%2585%25E5%258C%2585%25E8%25A1%25A8%25E8%25A8%2598%2520%2528List%2520Comprehension%2529%25E3%2581%25A8%25E3%2581%25AF%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%259B%25E3%2583%25B4%25E3%2582%25A3%25E3%2583%25B3%25E3%2583%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzIzYTE5NmI1NDYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ホヴィンチ</dc:creator></item><item><title><![CDATA[データ分析 スケーリング(標準化)]]></title><description><![CDATA[
+ スケーリングの基準
+
+ 1.データの大きさが違うとき
+
+変数A: 0〜10の範囲
+変数B: 0〜100の範囲
+
+このケースでは、変数Bの範囲がAに比べて10倍大きいため、変数Bが分析結果に過度に影響を与えることになります。
+特に距離ベースのアルゴリズムでは、変数Bの値が大きいほど、変数Aよりも重要視されてしまいます。
+なぜ標準化が必要？
+変数間のバランスを取るため。スケーリングを行って、両方の変数が同じスケールにそろえられることで、どちらか一方の変数が結果に不均衡に影響しないようにします。
+
+ 2.データの始点が違うとき
+
+変数A: 0〜10の範囲
+変数B: 1〜11の範囲
+
+このケ...]]></description><link>https://zenn.dev/longbridge/articles/e4eee1bb2e3524</link><guid isPermaLink="true">https://zenn.dev/longbridge/articles/e4eee1bb2e3524</guid><pubDate>Sun, 22 Sep 2024 00:55:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9PRNEb0X--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E5%2588%2586%25E6%259E%2590%2520%25E3%2582%25B9%25E3%2582%25B1%25E3%2583%25BC%25E3%2583%25AA%25E3%2583%25B3%25E3%2582%25B0%2528%25E6%25A8%2599%25E6%25BA%2596%25E5%258C%2596%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:piyoko%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FlYjQwNDk5NTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>piyoko</dc:creator></item><item><title><![CDATA[HuggingFace datasetsのBuilder classを使ってデータセットを自作する]]></title><description><![CDATA[こんにちは。今回はHuggingFace datasetsから
+呼び出せる形式でデータセットを自作する方法を紹介します。この記事では特にBuilder classを用いた方法について書いていきます。
+やっていることは以下と同様です。
+https://huggingface.co/docs/datasets/dataset_script
+https://github.com/huggingface/datasets/tree/main/templates
+
+ 前提: HuggingFaceでデータセットを作成する方法
+HuggingFaceのデータセットを自作する方法は、大きく分けて以下の...]]></description><link>https://zenn.dev/mjun0812/articles/cfe4b7346ba6b4</link><guid isPermaLink="true">https://zenn.dev/mjun0812/articles/cfe4b7346ba6b4</guid><pubDate>Sat, 21 Sep 2024 22:09:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--sO1U6Quj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:HuggingFace%2520datasets%25E3%2581%25AEBuilder%2520class%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%25BB%25E3%2583%2583%25E3%2583%2588%25E3%2582%2592%25E8%2587%25AA%25E4%25BD%259C%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2582%25E3%2582%258A%25E3%2582%258A%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY1NmNjYzA5MTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>もりりん</dc:creator></item><item><title><![CDATA[OCR調査（簡易版）]]></title><description><![CDATA[
+ OCRに関する技術調査（簡易版）
+
+ 0. はじめに
+お疲れ様です。STARAI社員の中岸です！
+最近仕事柄OCR（光学文字認識（こうがくもじにんしき、英: Optical character recognition）：活字、手書きテキストの画像を文字コードの列に変換する技術）に触れることが多かったので、色々と調査してものまとめてみました。
+本記事は、今回触ってみた様々なモデルについてまとめていくわけですが、
+それぞれの技術単体を深く調査してまとめたようなものではなく、
+シンプルにまとめて（1モデル1セクション：概要、サンプルコード（処理対象は日本語、デフォルトでの使い方のみ、オプシ...]]></description><link>https://zenn.dev/starai/articles/8f99d760acfe34</link><guid isPermaLink="true">https://zenn.dev/starai/articles/8f99d760acfe34</guid><pubDate>Sat, 21 Sep 2024 18:00:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Um3_ImAU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:OCR%25E8%25AA%25BF%25E6%259F%25BB%25EF%25BC%2588%25E7%25B0%25A1%25E6%2598%2593%25E7%2589%2588%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%2520STAR%2520AI%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI3YmI3MTFhYjIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>株式会社 STAR AI</dc:creator></item><item><title><![CDATA[微地形図を生成するQGISプラグインを公開しました。]]></title><description><![CDATA[
+ 1. はじめに
+森林などの地形変化に富んだ場所を見るのには DTM や陰影起伏図だけでは情報量が足りません。等高線ももちろん素晴らしいデータですが、等高線を見慣れていない方にとっては、尾根を表しているのか、あるいは谷を表しているのかを判断するのは難しいかもしれません。
+
+今回は微地形図を作成する QGIS のプラグインを作成しましたので、紹介していきたいと思います。
+
+https://github.com/shingo405nagano/generating_topoglaphic_maps
+
+ 2. 微地形図とは
+微地形図とは尾根や谷、起伏など地形の微細な特徴を表す図の事です。微地...]]></description><link>https://zenn.dev/daidai_daitai/articles/3716eb4fab6905</link><guid isPermaLink="true">https://zenn.dev/daidai_daitai/articles/3716eb4fab6905</guid><pubDate>Sat, 21 Sep 2024 14:14:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--gKOi0ajI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%25BE%25AE%25E5%259C%25B0%25E5%25BD%25A2%25E5%259B%25B3%25E3%2582%2592%25E7%2594%259F%25E6%2588%2590%25E3%2581%2599%25E3%2582%258BQGIS%25E3%2583%2597%25E3%2583%25A9%25E3%2582%25B0%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%2592%25E5%2585%25AC%25E9%2596%258B%25E3%2581%2597%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%25E3%2580%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%25A9%2599%25E3%2580%2582%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUxtNXd1MjJMLWoxUDdDS1dHZWJjbmh0YUxmV3BGRGNSTnBDQnZZTGYxYUpqQT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>橙。</dc:creator></item><item><title><![CDATA[ISCE2 で Sentinel-1 の干渉SARをやってみる]]></title><description><![CDATA[
+ 概要
+干渉SARを計算するツールであるISCE2を使用して、Sentinel-1の干渉SARを計算する。本記事では検証に使用したisce2-insarのリポジトリを使用して説明する。
+
+ 環境
+
+Ubuntu 20.04 LTS
+Docker 27.1.2
+Docker Compose v2.7.0
+VSCode 1.92.2
+ISCE2 2.6.3
+
+
+ ISCE2のドキュメント
+環境構築についてはISCE2のREADME.mdに記載してあるが、isce/isce2 - Docker Imageという環境構築済みのDockerイメージがあるためこれを使用する。ここでツールの実際的な...]]></description><link>https://zenn.dev/room_208/articles/28424585523f0a</link><guid isPermaLink="true">https://zenn.dev/room_208/articles/28424585523f0a</guid><pubDate>Sat, 21 Sep 2024 14:07:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--l0yu6f8G--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ISCE2%2520%25E3%2581%25A7%2520Sentinel-1%2520%25E3%2581%25AE%25E5%25B9%25B2%25E6%25B8%2589SAR%25E3%2582%2592%25E3%2582%2584%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:room_208%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q2MmRkNTEzN2IuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>room_208</dc:creator></item><item><title><![CDATA[Python+AWS serverless+DDDでのAPI開発環境構築の自分の方針]]></title><description><![CDATA[
+ 概要＆動機
+Python + AWS serverlessでのAPI開発のテンプレートレポジトリを作った。
+gRPCを使った開発もやってみたくなり、Lambdaの開発から少し離れそうなので、開発環境方針の自分用メモとしてもまとめてみた。
+ただし、全然いけてない点も多々あるがこだわり続けても終わりがないので、プロジェクトごとにカスタマイズしながら使う前提のベース的なテンプレートとして作成した。
+とりあえず、API Gateway/Lambda/DynamoDBでの構成。
+あとは、記事書いたことがなかったので、とりあえず何かしら記事を書いてみたかった。
+
+ 重視した点
+
+できるだけシンプ...]]></description><link>https://zenn.dev/fujiwaki/articles/serverless_python_sample</link><guid isPermaLink="true">https://zenn.dev/fujiwaki/articles/serverless_python_sample</guid><pubDate>Sat, 21 Sep 2024 13:10:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Lqzm6WWx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%252BAWS%2520serverless%252BDDD%25E3%2581%25A7%25E3%2581%25AEAPI%25E9%2596%258B%25E7%2599%25BA%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%25AE%25E8%2587%25AA%25E5%2588%2586%25E3%2581%25AE%25E6%2596%25B9%25E9%2587%259D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Fujiwaki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I2YmYxZjQ3OTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Fujiwaki</dc:creator></item><item><title><![CDATA[AWS API GatewayとLambdaでシンプルなREST APIを作る]]></title><description><![CDATA[こんにちは。株式会社DeLTの栗田です。
+シンプルなAPIを作りたいけど、環境構築が面倒であったり維持費をかけたくない、けどローカルでも動かしたい場合に私がAWS Lambdaを使ってよく行う方法をメモしておきます。
+
+ 環境
+開発言語
+
+python 11
+ryeでパッケージ管理
+ローカルの環境変数管理は.envrcを使用
+
+AWS
+
+lambda
+API Gateway
+
+
+ コード
+とりあえずOpenAIのAPIを叩くだけのシンプルなコードを用意します。
+https://github.com/mk1018/SampleLambdaFunction
+POST想定で、inputというパ...]]></description><link>https://zenn.dev/mkurita/articles/9533acfa90a55a</link><guid isPermaLink="true">https://zenn.dev/mkurita/articles/9533acfa90a55a</guid><pubDate>Sat, 21 Sep 2024 11:14:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2ypJ4M0S--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AWS%2520API%2520Gateway%25E3%2581%25A8Lambda%25E3%2581%25A7%25E3%2582%25B7%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AB%25E3%2581%25AAREST%2520API%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%25A0%2597%25E7%2594%25B0%2520%25E5%259F%25BA%25E6%2588%2590%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdjN2Q4ZTFiODUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>栗田 基成</dc:creator></item><item><title><![CDATA[Pythonで第三者レポジトリを再現する時の個人的ルーチン]]></title><description><![CDATA[こんにちは、沙代です。
+Pythonで他人のレポジトリを再現するときの個人的ルーチンをまとめてみます。
+（しばしば自分でもコマンド忘れたりするからです）
+環境
+MacOS: macOS Montery 12.6.2 (Apple M1 Pro)
+iTerm2: 3.5.4
+pyenv: 2.4.10
+
+ 手順
+
+ (READMEを読む)
+今回は、https://github.com/tae898/erc を試しに使ってみます。
+Prerequisitesに必要事項が書いてあります。
+(READMEよりスクリーンショット)
+
+
+ git cloneする
+目的のレポジトリをクローンします。
+...]]></description><link>https://zenn.dev/syitsk/articles/383f0881710fb0</link><guid isPermaLink="true">https://zenn.dev/syitsk/articles/383f0881710fb0</guid><pubDate>Sat, 21 Sep 2024 09:01:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--mY7MIRAa--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A7%25E7%25AC%25AC%25E4%25B8%2589%25E8%2580%2585%25E3%2583%25AC%25E3%2583%259D%25E3%2582%25B8%25E3%2583%2588%25E3%2583%25AA%25E3%2582%2592%25E5%2586%258D%25E7%258F%25BE%25E3%2581%2599%25E3%2582%258B%25E6%2599%2582%25E3%2581%25AE%25E5%2580%258B%25E4%25BA%25BA%25E7%259A%2584%25E3%2583%25AB%25E3%2583%25BC%25E3%2583%2581%25E3%2583%25B3%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:sayo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSndiUTdqNDNzempPRWU3aWQ1SjVPRlNTUzV0SnhqLWZIZEVNTUFIRnNHSE14Z0RBPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sayo</dc:creator></item><item><title><![CDATA[データ分析 主成分分析2]]></title><description><![CDATA[前回の データ分析 主成分分析１に続き、もう少し実践的なデータで主成分分析を行ってみます。
+
+ 関連する記事
+データ分析 主成分分析１
+データ分析 python 基本のグラフ　－散布図－
+
+ 前準備
+必要なライブラリを読み込んでおきます
+!pip install -q japanize_matplotlib
+import pandas as pd
+import matplotlib.pyplot as plt
+import japanize_matplotlib
+import seaborn as sns
+import numpy as np
+
+from sklearn.preproce...]]></description><link>https://zenn.dev/longbridge/articles/e2d36f40b19ddd</link><guid isPermaLink="true">https://zenn.dev/longbridge/articles/e2d36f40b19ddd</guid><pubDate>Sat, 21 Sep 2024 08:55:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xVjKRjlB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E5%2588%2586%25E6%259E%2590%2520%25E4%25B8%25BB%25E6%2588%2590%25E5%2588%2586%25E5%2588%2586%25E6%259E%25902%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:piyoko%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FlYjQwNDk5NTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>piyoko</dc:creator></item><item><title><![CDATA[Windows の位置情報 API を利用して Python でおおよその現在地を取得する]]></title><description><![CDATA[2024/09/21 時点での情報です
+
+ 概要
+
+Windows SDK python binding winsdk で緯度経度を取得
+無料の reverse geocoding API サービス HeartRails Geo API
+
+を組み合わせて地名を取得します。
+https://github.com/pywinrt/python-winsdk
+!
+出典:「位置参照情報」(国土交通省)の加工情報・「HeartRails Geo API」(HeartRails Inc.)
+
+
+ サンプルソース
+
+sample.py
+import json
+import asyncio
+
+impor...]]></description><link>https://zenn.dev/sharl/articles/8dd5fffb369f02</link><guid isPermaLink="true">https://zenn.dev/sharl/articles/8dd5fffb369f02</guid><pubDate>Sat, 21 Sep 2024 08:51:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--MV6iZwwU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Windows%2520%25E3%2581%25AE%25E4%25BD%258D%25E7%25BD%25AE%25E6%2583%2585%25E5%25A0%25B1%2520API%2520%25E3%2582%2592%25E5%2588%25A9%25E7%2594%25A8%25E3%2581%2597%25E3%2581%25A6%2520Python%2520%25E3%2581%25A7%25E3%2581%258A%25E3%2581%258A%25E3%2582%2588%25E3%2581%259D%25E3%2581%25AE%25E7%258F%25BE%25E5%259C%25A8%25E5%259C%25B0%25E3%2582%2592%25E5%258F%2596%25E5%25BE%2597%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2597%25E3%2582%2583%25E3%2581%2582%25E3%2582%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0xuZEM2dlZRUHNRVzBHa1dpdS1DY2trTlVETnVhemF1YjlUVVRkQ3B5dHBqbTBLUXA9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>しゃある</dc:creator></item></channel></rss>
