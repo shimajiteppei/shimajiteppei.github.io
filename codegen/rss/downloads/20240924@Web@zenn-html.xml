@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「HTML」のフィード]]></title><description><![CDATA[Zennのトピック「HTML」のRSSフィードです]]></description><link>https://zenn.dev/topics/html</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/171432f5a6.png</url><title>Zennの「HTML」のフィード</title><link>https://zenn.dev/topics/html</link></image><generator>zenn.dev</generator><lastBuildDate>Tue, 24 Sep 2024 12:03:41 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/html/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[純粋な静的ファイルのサイトで共通レイアウトを実現する]]></title><description><![CDATA[
+ モチベーション
+情報の表示が中心のシンプルなサイトを作っていると、フロントエンドのフレームワークやビルドプロセスが過剰に感じて、純粋な静的HTMLファイルだけでサイトを構築したい衝動にかられます。しかしその場合に難しくなるが共通レイアウトの適用です。
+フレームワークのように共通レイアウトのHTMLを定義したひとつのファイルを各ページに適用させることは、たんに表示させるだけなら難しくはないが、遅延やちらつきなく表示させるとなるとちょっと難しい。
+ということで外部ファイル化した共通レイアウトの取得して遅延・ちらつきなく表示するライブラリを作ってみました。
+デモ https://ksk10...]]></description><link>https://zenn.dev/sizznami/articles/f5775fb885a2f7</link><guid isPermaLink="true">https://zenn.dev/sizznami/articles/f5775fb885a2f7</guid><pubDate>Tue, 24 Sep 2024 05:46:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--XoV1f7tw--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%25B4%2594%25E7%25B2%258B%25E3%2581%25AA%25E9%259D%2599%25E7%259A%2584%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2581%25AE%25E3%2582%25B5%25E3%2582%25A4%25E3%2583%2588%25E3%2581%25A7%25E5%2585%25B1%25E9%2580%259A%25E3%2583%25AC%25E3%2582%25A4%25E3%2582%25A2%25E3%2582%25A6%25E3%2583%2588%25E3%2582%2592%25E5%25AE%259F%25E7%258F%25BE%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ksk1015%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA1YWZkZTlkZDcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ksk1015</dc:creator></item><item><title><![CDATA[[JavaScript] チェックボックスによるボタンの活性/非活性の切り替え]]></title><description><![CDATA[
+ はじめに
+この記事では、Webサイトの「利用規約への同意」等で使用される、チェックボックスによるボタンの活性/非活性の切り替えのJavaScriptでの実装方法をまとめていきます。
+
+ 1. HTMLファイルの編集
+&lt;input type="checkbox" id="agreement-check"&gt;
+&lt;label for="agreement-check"&gt;&lt;a href="#" target="_brank"&gt;利用規約&lt;/a&gt;に同意する&lt;/label&gt;
+&lt;button type="submit" value="登...]]></description><link>https://zenn.dev/aew2sbee/articles/javascript-checkbox</link><guid isPermaLink="true">https://zenn.dev/aew2sbee/articles/javascript-checkbox</guid><pubDate>Sun, 22 Sep 2024 13:11:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--PqQMyY6l--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BJavaScript%255D%2520%25E3%2583%2581%25E3%2582%25A7%25E3%2583%2583%25E3%2582%25AF%25E3%2583%259C%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25B9%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258B%25E3%2583%259C%25E3%2582%25BF%25E3%2583%25B3%25E3%2581%25AE%25E6%25B4%25BB%25E6%2580%25A7%252F%25E9%259D%259E%25E6%25B4%25BB%25E6%2580%25A7%25E3%2581%25AE%25E5%2588%2587%25E3%2582%258A%25E6%259B%25BF%25E3%2581%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25B5%25E3%2582%258B%25E3%2581%259F%2520%25E3%2581%25AA%25E3%2581%258A%25E3%2581%258D%2520%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YTFYdHhmWGZPVmpKek9sTnQ0cDZmaWQyeENLMTlKOEl0akpQczZiZz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ふるた なおき🥝</dc:creator></item><item><title><![CDATA[[JavaScript] 一文字ずつ時間差で表示するアニメーション]]></title><description><![CDATA[
+ はじめに
+この記事では、Webページ上でテキストを一文字ずつ表示するアニメーションの実装方法をまとめます。
+
+ 結論
+JavaScriptによって指定した要素を一文字ずつspanで囲い、styleを変更(opacityの値を0→1に)することで、一文字ずつ表示するアニメーションを実装しました。
+この記事では、Webページ上でテキストを一文字ずつ表示するアニメーションの実装方法をまとめます。
+
+ やり方
+
+ 1. HTMLファイルの編集
+&lt;div&gt;
+    &lt;p class="js-text"&gt;Welcome to TECHLOG.&lt;/p&gt;
+&lt;...]]></description><link>https://zenn.dev/aew2sbee/articles/javascript-timelag-animation</link><guid isPermaLink="true">https://zenn.dev/aew2sbee/articles/javascript-timelag-animation</guid><pubDate>Sat, 21 Sep 2024 11:24:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--k6e_n-5t--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BJavaScript%255D%2520%25E4%25B8%2580%25E6%2596%2587%25E5%25AD%2597%25E3%2581%259A%25E3%2581%25A4%25E6%2599%2582%25E9%2596%2593%25E5%25B7%25AE%25E3%2581%25A7%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2599%25E3%2582%258B%25E3%2582%25A2%25E3%2583%258B%25E3%2583%25A1%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25B5%25E3%2582%258B%25E3%2581%259F%2520%25E3%2581%25AA%25E3%2581%258A%25E3%2581%258D%2520%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YTFYdHhmWGZPVmpKek9sTnQ0cDZmaWQyeENLMTlKOEl0akpQczZiZz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ふるた なおき🥝</dc:creator></item><item><title><![CDATA[Drag & Drop APIのイベントの整理]]></title><description><![CDATA[業務の中で、ドラッグ&amp;ドロップを実装する機会があり、
+イベントの種類がそこそこあったので、知識を整理しておきます。
+この記事では、HTMLのDrag &amp; Drop APIの定義を整理した上で、
+最後に実際に動かして理解できるコードを書くという流れにします。
+
+ Drag &amp; Drop APIの各種イベント
+主要なイベントについて整理します。
+以下の表のようになります。
+
+
+
+イベント
+定義
+備考
+
+
+
+
+drag
+ドラッグ対象の要素がドラッグされている間に発生し続ける
+数百ミリ秒間隔で発生するので、常に発生している感覚
+
+
+dragstart
+ドラッグ対象の要素を...]]></description><link>https://zenn.dev/ohimusdev46301/articles/31694de152daf9</link><guid isPermaLink="true">https://zenn.dev/ohimusdev46301/articles/31694de152daf9</guid><pubDate>Sat, 21 Sep 2024 10:16:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--o0CXZbbq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Drag%2520%2526%2520Drop%2520API%25E3%2581%25AE%25E3%2582%25A4%25E3%2583%2599%25E3%2583%25B3%25E3%2583%2588%25E3%2581%25AE%25E6%2595%25B4%25E7%2590%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Wataru%2520Takiguchi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdkOTBhM2EyYTcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Wataru Takiguchi</dc:creator></item><item><title><![CDATA[最大寸法に制限されずにスクロール可能なcanvasを描画する方法]]></title><description><![CDATA[
+ 背景
+canvasには描画領域の最大寸法が存在する。
+この寸法を超えた場合、canvasが利用できなくなる。
+以下はMDNのこちらのページから引用。
+この表を見ると、x軸方向とy軸方向ともに最大30000px程度しか利用できない。
+※IEはサポート終了のため。
+最大面積も設定されているため、正方形に近い形で利用するならx軸方向とy軸方向ともに最大16000px程度となる。
+
+
+
+ブラウザー
+最大高
+最大幅
+最大面積
+
+
+
+
+Chrome
+32,767 pixels
+32,767 pixels
+268,435,456 pixels (つまり 16,384 x 16,384)
+
+
+
+Fi...]]></description><link>https://zenn.dev/yaona807/articles/a1864ff0ac2e88</link><guid isPermaLink="true">https://zenn.dev/yaona807/articles/a1864ff0ac2e88</guid><pubDate>Sat, 21 Sep 2024 09:26:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--UZXcj61W--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%259C%2580%25E5%25A4%25A7%25E5%25AF%25B8%25E6%25B3%2595%25E3%2581%25AB%25E5%2588%25B6%25E9%2599%2590%25E3%2581%2595%25E3%2582%258C%25E3%2581%259A%25E3%2581%25AB%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%25AB%25E5%258F%25AF%25E8%2583%25BD%25E3%2581%25AAcanvas%25E3%2582%2592%25E6%258F%258F%25E7%2594%25BB%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yaona%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS1QxSWFHM1NYaUIxOF9NS1FvTTV4MmpTRHJEeXJfbEFoU3BDTUZWSE5XX1VzRFJSWHU9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yaona</dc:creator></item><item><title><![CDATA[フローティングバナーの作り方]]></title><description><![CDATA[サイトの下部に、追従してくるバナーを見たことはありませんか。
+フローティングバナーなどと呼ばれているこの要素は、とても少ない JavaScript で実装できます。
+
+ コード
+
+
+ HTML
+close-buttonの中にあるspanで×印を作っています。
+&lt;div class="l-container"&gt;
+  &lt;div class="floating-banner"&gt;
+    &lt;div class="floating-banner__inner"&gt;
+      &lt;img class="ebi" src="./img/ebi.png" alt=...]]></description><link>https://zenn.dev/928sekine/articles/8bf94df6de6b68</link><guid isPermaLink="true">https://zenn.dev/928sekine/articles/8bf94df6de6b68</guid><pubDate>Sat, 21 Sep 2024 03:31:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--AQ8pScfM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2595%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2586%25E3%2582%25A3%25E3%2583%25B3%25E3%2582%25B0%25E3%2583%2590%25E3%2583%258A%25E3%2583%25BC%25E3%2581%25AE%25E4%25BD%259C%25E3%2582%258A%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259B%25E3%2581%258D%25E3%2581%25AD%25E3%2582%258A%25E3%2581%25AA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAyNDQ3MGIzZjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>せきねりな</dc:creator></item><item><title><![CDATA[css / scss + と ~ について]]></title><description><![CDATA[
+ はじめに
+いまさらcssの隣接兄弟結合子､一般兄弟結合子について知りました｡
+css +　や css ~ と検索してもヒットしなかったので投稿します。
+
+ +（隣接兄弟結合子）
+ある要素に続くすぐ次の兄弟要素を選択するときに使います。記号は + で表されます。
+最初の &lt;p&gt; 要素に続く2つ目以降の &lt;p&gt; 要素だけにスタイルを適用しています。
+&lt;article&gt;
+    &lt;h1&gt;こんにちは&lt;/h1&gt;
+    &lt;p&gt;hoge&lt;/p&gt;
+    &lt;p&gt;fuga&lt;/p&gt;
+    &l...]]></description><link>https://zenn.dev/imael/articles/3eca753e62e9e8</link><guid isPermaLink="true">https://zenn.dev/imael/articles/3eca753e62e9e8</guid><pubDate>Fri, 20 Sep 2024 00:08:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--XmY_Wsbr--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:css%2520%252F%2520scss%2520%252B%2520%25E3%2581%25A8%2520%7E%2520%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Imael%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc2ZDEwYmI1Y2YuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Imael</dc:creator></item><item><title><![CDATA[The width of the textarea is incorrect: textareaの横幅が狂う]]></title><description><![CDATA[
+ The width of the textarea is incorrect.
+フォームのtextareaタグの横幅が狂う問題。
+解決策は色々あるが、一番シンプルなのは、doctypeからhtmlを削除すること。（html5じゃなくす）
+&lt;!doctype&gt;
+&lt;html&gt;
+	&lt;head&gt;
+		&lt;title&gt;The width of the textarea is incorrect&lt;/title&gt;
+		&lt;style&gt;
+			input[type="text"] {
+				width: 200px;
+			}
+	...]]></description><link>https://zenn.dev/tomoakinagahara/articles/1457d43efe893b</link><guid isPermaLink="true">https://zenn.dev/tomoakinagahara/articles/1457d43efe893b</guid><pubDate>Thu, 19 Sep 2024 07:04:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2PhX84j1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:The%2520width%2520of%2520the%2520textarea%2520is%2520incorrect%253A%2520textarea%25E3%2581%25AE%25E6%25A8%25AA%25E5%25B9%2585%25E3%2581%258C%25E7%258B%2582%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Tomoaki%2520Nagahara%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2czREt6Z1p1U3hEcGVZaFY1ajhJSjNmTzFZODlMLXg3bVJxcFU1Q0E9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Tomoaki Nagahara</dc:creator></item><item><title><![CDATA[はじめてのWebアプリ開発入門ブログ：プログラミングの楽しさを知ろう]]></title><description><![CDATA[みなさん、こんにちは！
+今日は、プログラミング初心者の方々に向けて、Webアプリ開発の世界に飛び込むためのガイドを書いていきます。プログラミングに少しでも興味を持っている中学生や高校生、あるいは大人の方でも、これを読んで「プログラミングって楽しいな！」と思ってもらえたら嬉しいです。
+プログラミングは、最初は「難しそう…」と感じるかもしれませんが、やればやるほど楽しくなってくるものです。今回は、初心者でも理解できるように、わかりやすく説明しつつ、Webアプリ開発という分野を通じて、自分のアイデアを形にする楽しさを一緒に体験していきましょう！
+
+ 1. プログラミングって何？ Webアプリっ...]]></description><link>https://zenn.dev/aoikoala/articles/f977e4304e9f91</link><guid isPermaLink="true">https://zenn.dev/aoikoala/articles/f977e4304e9f91</guid><pubDate>Wed, 18 Sep 2024 17:49:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_FndbZXt--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%25AF%25E3%2581%2598%25E3%2582%2581%25E3%2581%25A6%25E3%2581%25AEWeb%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E9%2596%258B%25E7%2599%25BA%25E5%2585%25A5%25E9%2596%2580%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%25EF%25BC%259A%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%259F%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%25AE%25E6%25A5%25BD%25E3%2581%2597%25E3%2581%2595%25E3%2582%2592%25E7%259F%25A5%25E3%2582%258D%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E9%259D%2592%25E3%2581%2584%25E3%2582%25B3%25E3%2582%25A2%25E3%2583%25A9%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzgwODM0ZTEwNTcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>青いコアラ</dc:creator></item><item><title><![CDATA[【初心者向け】CSSが上手くなるちょっとしたポイント]]></title><description><![CDATA[
+ はじめに
+CSSの基本的な文法を学んで、いざWebサイトを作ろうとスタイリングするものの思った位置に要素を配置できないといった経験誰もがしてきていると思います。実際私もかなり苦戦していました。（なんなら今も苦戦してます。）しかし、いくつかのポイントを押さえることで、以前よりグッとスタイリングは上手くなりました。この記事ではそんなポイントを3つご紹介します。
+!
+これは私がCSSを学んできた上で思ったポイントなので、もしかしたら人によって全然違うと感じるかもしれません。それを前提に読んでいただけると幸いです。
+
+
+ 対象者
+
+CSSの基本文法を学んだ方
+思うようにスタイリングができない...]]></description><link>https://zenn.dev/y_ta/articles/10a95c2fcaadf4</link><guid isPermaLink="true">https://zenn.dev/y_ta/articles/10a95c2fcaadf4</guid><pubDate>Wed, 18 Sep 2024 08:31:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--FpQNBdzu--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E5%2590%2591%25E3%2581%2591%25E3%2580%2591CSS%25E3%2581%258C%25E4%25B8%258A%25E6%2589%258B%25E3%2581%258F%25E3%2581%25AA%25E3%2582%258B%25E3%2581%25A1%25E3%2582%2587%25E3%2581%25A3%25E3%2581%25A8%25E3%2581%2597%25E3%2581%259F%25E3%2583%259D%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:y_ta%2540%25E5%25A4%25A7%25E5%25AD%25A6%25E7%2594%259FWeb%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAyMGI4MDJjZDUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>y_ta@大学生Webエンジニア</dc:creator></item><item><title><![CDATA[スクロールすると表示・非表示が切り替わるヘッダーのテンプレート | HTML, CSS(SCSS), JS]]></title><description><![CDATA[
+ 概要
+スクロールすると表示・非表示が切り替わるヘッダーのテンプレート. 下にスクロールすると、ヘッダーが画面上部に消えていって、上にバックスクロールすると、ヘッダーが画面上部から出現する
+よく使うのでテンプレートにしました
+サンプルページ
+
+
+ 前提
+ファイル構造
+/
+├ logo-256x512.png
+├ index.html
+├ style.css
+└ script.js
+
+ コード
+
+ HTML / index.html
+
+index.html
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;me...]]></description><link>https://zenn.dev/bbsfish/articles/30a78f5a37f342</link><guid isPermaLink="true">https://zenn.dev/bbsfish/articles/30a78f5a37f342</guid><pubDate>Wed, 18 Sep 2024 03:32:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9js1iuZm--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%2599%25E3%2582%258B%25E3%2581%25A8%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2583%25BB%25E9%259D%259E%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%258C%25E5%2588%2587%25E3%2582%258A%25E6%259B%25BF%25E3%2582%258F%25E3%2582%258B%25E3%2583%2598%25E3%2583%2583%25E3%2583%2580%25E3%2583%25BC%25E3%2581%25AE%25E3%2583%2586%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AC%25E3%2583%25BC%25E3%2583%2588%2520%257C%2520HTML%252C%2520CSS%2528SCSS%2529%252C%2520JS%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Y.%2520HSD%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSS1ZeDZXOGNtbm1hTFhWM25SNC1QYnFWbTdDVkJ3RXdrT2czUlNnWjlOPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Y. HSD</dc:creator></item><item><title><![CDATA[aria-labelとaria-labelledbyを併用する場合とは]]></title><description><![CDATA[アクセシビリティを考慮したマークアップをした経験がある方は、aria-labelやaria-labelledbyについてご存じでしょう。これらは、要素にラベル付けするためのWAI-ARIAプロパティです。多くの場合、要素のアクセシブルな名前 (accessible name) を決めるために使われます。
+aria-labelはラベルを直接文字列として指定するプロパティで、aria-labelledbyはIDを通じて他の要素をラベルとして指定するプロパティです。その使い分けについては、仕様書[1]で以下のように説明されています。つまり、可能な場合はaria-labelledbyに寄せるべき...]]></description><link>https://zenn.dev/uhyo/articles/aria-label-and-labelledby</link><guid isPermaLink="true">https://zenn.dev/uhyo/articles/aria-label-and-labelledby</guid><pubDate>Tue, 17 Sep 2024 12:56:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5D9x78Rf--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:aria-label%25E3%2581%25A8aria-labelledby%25E3%2582%2592%25E4%25BD%25B5%25E7%2594%25A8%25E3%2581%2599%25E3%2582%258B%25E5%25A0%25B4%25E5%2590%2588%25E3%2581%25A8%25E3%2581%25AF%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:uhyo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVjYjFlMDJlNGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>uhyo</dc:creator></item><item><title><![CDATA[Vanilla.JSで作るハンバーガーメニュー]]></title><description><![CDATA[
+ ハンバーガーメニューをJSで作ろう
+コピペで済ませがちなハンバーガーメニューをVanilla.JSで作りました。
+こんなハンバーガーメニューです。
+
+
+ハンバーガーメニューを開いている間、背景は固定
+画面幅を検知して、背景固定を解除する
+スムーズなスクロール
+ヘッダーの高さぶん自動でずれるページ内リンク
+
+
+ コード
+長いので折りたたんでいます。
+この下からポイントをしぼって解説しています。
+HTML&lt;header class="header"&gt;
+      &lt;div class="header__inner"&gt;
+        &lt;nav class="...]]></description><link>https://zenn.dev/928sekine/articles/1336d250e5235e</link><guid isPermaLink="true">https://zenn.dev/928sekine/articles/1336d250e5235e</guid><pubDate>Tue, 17 Sep 2024 10:59:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6s_4u4VX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Vanilla.JS%25E3%2581%25A7%25E4%25BD%259C%25E3%2582%258B%25E3%2583%258F%25E3%2583%25B3%25E3%2583%2590%25E3%2583%25BC%25E3%2582%25AC%25E3%2583%25BC%25E3%2583%25A1%25E3%2583%258B%25E3%2583%25A5%25E3%2583%25BC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259B%25E3%2581%258D%25E3%2581%25AD%25E3%2582%258A%25E3%2581%25AA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAyNDQ3MGIzZjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>せきねりな</dc:creator></item><item><title><![CDATA[Gitlab Pages と Wordpress で 静的HTMLサイト公開環境を作ろう]]></title><description><![CDATA[
+
+ はじめに
+Wordpressで作成したホームページから静的HTMLサイトを作成し、Gitlab Pagesで公開したい。
+
+ 公開日
+2024年09月16日
+
+ 開発環境
+
+Gitlab
+Rancher Desktop(Docker)
+Wordpress(Local@Docker)
+WSL(#データ取得用)
+OS:windows11
+Auther:Baker S(GitlabもHTMLもBeginner)
+Supporter:Baker T(Ex.)
+
+
+ Wordpressを作成
+以下のDocker compose YAMLを利用し、
+ローカル環境でWordpressを構築しホー...]]></description><link>https://zenn.dev/baker_link_lab/articles/00cd1de28a73de</link><guid isPermaLink="true">https://zenn.dev/baker_link_lab/articles/00cd1de28a73de</guid><pubDate>Mon, 16 Sep 2024 07:06:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xBEzSrqQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Gitlab%2520Pages%2520%25E3%2581%25A8%2520Wordpress%2520%25E3%2581%25A7%2520%25E9%259D%2599%25E7%259A%2584HTML%25E3%2582%25B5%25E3%2582%25A4%25E3%2583%2588%25E5%2585%25AC%25E9%2596%258B%25E7%2592%25B0%25E5%25A2%2583%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258D%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Baker%2520link.%2520Lab%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FkNzkyZGRhODEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Baker link. Lab</dc:creator></item><item><title><![CDATA[【Web】How to preview a HTML file without building a server]]></title><description><![CDATA[This time, I introduce the way to check the HTML file without building a server.
+It is easy, let's start!
+
+ 1. Preview on Browser
+
+
+Install the Live Server on VSCode.
+
+
+
+Open a directory that includes an HTML file
+
+
+
+Click the Go Live
+After the file opens, the Go Live shows the right-bottom of VS...]]></description><link>https://zenn.dev/yuto_mo/articles/8155ae05d9be02</link><guid isPermaLink="true">https://zenn.dev/yuto_mo/articles/8155ae05d9be02</guid><pubDate>Sun, 15 Sep 2024 05:05:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ZvqNm7aX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Web%25E3%2580%2591How%2520to%2520preview%2520a%2520HTML%2520file%2520without%2520building%2520a%2520server%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yuto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VkZTU2N2E0NDcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yuto</dc:creator></item><item><title><![CDATA[Formspreeでコンタクトフォームを実装する]]></title><description><![CDATA[
+ はじめに
+近年、Github Pagesでホームページを作成する人は少なくないでしょう。
+Github Pagesは静的ウェブサイトのホスティングに最適ですが、サーバーサイドの処理ができないため、コンタクトフォームの実装が難しいと思われがちです。
+しかし、Formspreeを利用することで、簡単にコンタクトフォームを実装することができます。
+
+ Formspreeってなんやねん
+Formspreeは、静的ウェブサイトにフォーム機能を追加するためのサービスです。HTMLフォームを作成し、Formspreeが提供するエンドポイントにデータを送信するだけで、メールでフォームの内容を受け取る...]]></description><link>https://zenn.dev/joho0724/articles/sankaku0724-newcreate27</link><guid isPermaLink="true">https://zenn.dev/joho0724/articles/sankaku0724-newcreate27</guid><pubDate>Sat, 14 Sep 2024 03:01:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fem4sTNf--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Formspree%25E3%2581%25A7%25E3%2582%25B3%25E3%2583%25B3%25E3%2582%25BF%25E3%2582%25AF%25E3%2583%2588%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25BC%25E3%2583%25A0%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2595%25E3%2582%2593%25E3%2581%258B%25E3%2581%258F%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JkODI3MDRjMmQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>さんかく</dc:creator></item><item><title><![CDATA[ハンバーガーメニューの作り方（jQuery・JavaScript）]]></title><description><![CDATA[Webサイト制作の際に、ハンバーガーメニューをコーディングして作成する場面は多いです。
+この記事では、ハンバーガーメニューの作成方法を紹介します。jQueryを用いる場合と、プレーンなJavaScriptで記述する場合の2通りを解説します。
+
+ 今回作成するもの
+右上のハンバーガーメニューをクリックすると、メニューがスライドダウンするようなものを作成します。
+
+
+ jQueryを用いる場合
+コードは以下の通りです。
+
+jQueryは以下のように記述しています。
+
+jQuery
+$(function(){
+  $('#hamburger').on('click',function(){
+ ...]]></description><link>https://zenn.dev/ryo_hajime/articles/e0c23698ad925e</link><guid isPermaLink="true">https://zenn.dev/ryo_hajime/articles/e0c23698ad925e</guid><pubDate>Sat, 14 Sep 2024 01:44:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jkUJveoL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%258F%25E3%2583%25B3%25E3%2583%2590%25E3%2583%25BC%25E3%2582%25AC%25E3%2583%25BC%25E3%2583%25A1%25E3%2583%258B%25E3%2583%25A5%25E3%2583%25BC%25E3%2581%25AE%25E4%25BD%259C%25E3%2582%258A%25E6%2596%25B9%25EF%25BC%2588jQuery%25E3%2583%25BBJavaScript%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Ryoichi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzgxYTIyODY2YzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Ryoichi</dc:creator></item><item><title><![CDATA[デザインがときめくPico CSSの魔法]]></title><description><![CDATA[
+ Intro
+最近私はPico CSSをよく使っているので紹介したいと思います。
+https://picocss.com/
+
+セマンティックな構文を優先し、すべてのHTML要素をデフォルトでレスポンシブかつエレガントにする、ミニマルで軽量なスターターキットです。
+HTMLを書き、Pico CSSを追加して、出来上がり！
+
+!
+公式ドキュメントのコードや内容を引用しています。
+www.DeepL.com/Translator（無料版）で翻訳しました。
+Code licensed MIT, docs CC BY-SA 4.0. Currently v2.0.6.
+
+例えば最近流行りのユーテ...]]></description><link>https://zenn.dev/tkithrta/articles/7472b34cae3279</link><guid isPermaLink="true">https://zenn.dev/tkithrta/articles/7472b34cae3279</guid><pubDate>Thu, 12 Sep 2024 10:58:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--YwgTiEQ4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2587%25E3%2582%25B6%25E3%2582%25A4%25E3%2583%25B3%25E3%2581%258C%25E3%2581%25A8%25E3%2581%258D%25E3%2582%2581%25E3%2581%258FPico%2520CSS%25E3%2581%25AE%25E9%25AD%2594%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E9%25BB%2592%25E3%2583%25B0%25E6%25A8%25B9%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E0NDRlMTA4ZjkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>黒ヰ樹</dc:creator></item><item><title><![CDATA[インターンで思いっきり失敗した話]]></title><description><![CDATA[こんにちは！ラブグラフ開発インターンの筒井です！
+タイトル通りおぞましい話なのですが、あれはラブグラフでインターンを始めてから約1ヶ月が経とうとしていた頃でした…
+
+ アサインされたタスク
+画像をアップロードするコンポーネントでファイルをドラッグ&amp;ドロップもしくはドラッグ&amp;ドロップできる範囲内をクリックすることで、ファイル参照ダイアログから選択できるはずだったのですが、どうやらドラッグ&amp;ドロップが反応しないとのことでそこを修正するタスクにアサインされました。
+ざっくりコードはこんな感じ。
+
+hoge.vue
+&lt;div&gt;
+    &lt;div&gt;
+...]]></description><link>https://zenn.dev/lovegraph/articles/6a479166eb48cd</link><guid isPermaLink="true">https://zenn.dev/lovegraph/articles/6a479166eb48cd</guid><pubDate>Thu, 12 Sep 2024 08:04:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--x95H5yIj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%25B3%25E3%2581%25A7%25E6%2580%259D%25E3%2581%2584%25E3%2581%25A3%25E3%2581%258D%25E3%2582%258A%25E5%25A4%25B1%25E6%2595%2597%25E3%2581%2597%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Kaito%2520Tsutsui%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZmNWYxYmUwYzAuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%25A9%25E3%2583%2596%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%2595%25E3%2581%25AE%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzYwMjA4M2Y5ZDMuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kaito Tsutsui</dc:creator></item><item><title><![CDATA[生成AI(ChatGPT4o mini)を使ってフロントエンドを作って見えた問題点3選]]></title><description><![CDATA[
+ 記事の概要
+最近、生成AIがよく話題に上がります。そこで、私も生成AIを活用してフロントエンドの開発に挑戦してみました。具体的には、ゲームのガチャをシミュレートするサイトを作成してみたのですが、その過程でいくつかの問題が見えてきました。以下に、その問題点を3つ紹介します。
+
+ 問題点
+
+
+データ処理の漏れ
+生成AIに100行程度のデータを処理させたところ、漏れが発生しました。GPT曰く、AIの処理能力には限界があり、大量のデータを一度に処理すると、意図した通りの結果が得られないことがあるのとことです。そのため、この部分はAIに依頼できず、自分でデータを処理する必要がありました。
+
+
+...]]></description><link>https://zenn.dev/nnnto/articles/eda52f5c2d208c</link><guid isPermaLink="true">https://zenn.dev/nnnto/articles/eda52f5c2d208c</guid><pubDate>Wed, 11 Sep 2024 13:09:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--YNYrIgML--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%2594%259F%25E6%2588%2590AI%2528ChatGPT4o%2520mini%2529%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2583%2595%25E3%2583%25AD%25E3%2583%25B3%25E3%2583%2588%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2589%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E8%25A6%258B%25E3%2581%2588%25E3%2581%259F%25E5%2595%258F%25E9%25A1%258C%25E7%2582%25B93%25E9%2581%25B8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2593%25E3%2583%25BC%25E3%2581%25A8%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VlMTQ3MGVmYWIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>んーと</dc:creator></item></channel></rss>
