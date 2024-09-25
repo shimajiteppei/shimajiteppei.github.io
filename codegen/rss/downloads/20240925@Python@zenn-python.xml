@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Wed, 25 Sep 2024 02:47:27 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[今更人に聞けないPythonの基本の用語を、PHPと比較しながらまとめてみる。]]></title><description><![CDATA[
+ 始めに。
+今回業務で、バックエンド側の言語としてFastAPIを使用しました。
+これまでLaravelがメインだったため、
+Pythonのことからよくわからず、苦戦しました。
+そこで、今回は今更人に聞けないけど、
+自分でまだわかっていない用語を深掘りしていきたいと思います。
+これまでがPHPだったので、折角なので二つを比較しながらまとめてみようと思います。
+自分がわからないのはFastAPIの用語だと思っていたけど、
+ほぼほぼPythonの用語がわかっていなさそうなことがわかりました。
+不勉強すぎる。
+
+ 今回の基本用語達。
+
+ dict
+私にはあまり馴染みがない用語だったのですが、...]]></description><link>https://zenn.dev/arsaga/articles/e4fe73447495c4</link><guid isPermaLink="true">https://zenn.dev/arsaga/articles/e4fe73447495c4</guid><pubDate>Wed, 25 Sep 2024 02:35:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--MSbcnO28--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E4%25BB%258A%25E6%259B%25B4%25E4%25BA%25BA%25E3%2581%25AB%25E8%2581%259E%25E3%2581%2591%25E3%2581%25AA%25E3%2581%2584Python%25E3%2581%25AE%25E5%259F%25BA%25E6%259C%25AC%25E3%2581%25AE%25E7%2594%25A8%25E8%25AA%259E%25E3%2582%2592%25E3%2580%2581PHP%25E3%2581%25A8%25E6%25AF%2594%25E8%25BC%2583%25E3%2581%2597%25E3%2581%25AA%25E3%2581%258C%25E3%2582%2589%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%25E3%2580%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E6%259F%258A%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VhNmM2Njk2YTcuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Arsaga%2520Developers%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVlNTNhZjcxZjQuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>柊</dc:creator></item><item><title><![CDATA[Webアプリケーションにおけるタイムアウトについて]]></title><description><![CDATA[
+ なぜ調べたか
+実務でWebアプリケーションの開発をしていると、主にエラーハンドリングの文脈で タイムアウト という概念が度々登場します
+Wikipediaの当該記事 を読むと、以下のような説明がなされています
+
+一定時間に処理が完了しなかった時に、制御を打ち切って中止するための機構
+処理完了までに永遠、または非常に長い時間がかかってしまうケースにおいて、計算資源の占有を抑止する
+
+https://ja.wikipedia.org/wiki/タイムアウト_(コンピュータ)
+これは、タイムアウト制御の必要性とそれが解決する問題について端的に説明していますが、
+具体的な対応方法や、実務にお...]]></description><link>https://zenn.dev/yktakaha4/articles/learn_about_web_application_timeouts</link><guid isPermaLink="true">https://zenn.dev/yktakaha4/articles/learn_about_web_application_timeouts</guid><pubDate>Wed, 25 Sep 2024 02:11:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9BPljtdh--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Web%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2581%25AB%25E3%2581%258A%25E3%2581%2591%25E3%2582%258B%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25A0%25E3%2582%25A2%25E3%2582%25A6%25E3%2583%2588%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yuuki%2520Takahashi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2huMEtJWDdJZzVrRm9aVVlkai1yWDZfYk1UNDhEUXE5WE53YUVsPXMyNTAtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yuuki Takahashi</dc:creator></item><item><title><![CDATA[#60　書式化演算子%とformatメソッドを比較してみた〜構文と書式設定]]></title><description><![CDATA[
+ はじめに
+以前ブログで書式化演算子%とformatメソッドについて触れる機会がありましたが、当時の記事の本題からは逸れてしまう内容だったため深く取り上げることができませんでした。
+
+書式化演算子%とformatメソッドは共に「数値や文字列に対して新しい書式を設定し、新しく文字列を作成する」ものですが、書式化演算子%は以前の形式であり、より高機能な書式設定として現在はformatメソッドが使用されています。
+
+本記事では、以前の形式である書式化演算子%とformatメソッドそれぞれについて取り上げ、その機能について比較してみたいと思います。
+
+
+ 本記事に関連するブログ記事
+
+Kibe...]]></description><link>https://zenn.dev/nxted_sapporo/articles/e2fb303d1f9384</link><guid isPermaLink="true">https://zenn.dev/nxted_sapporo/articles/e2fb303d1f9384</guid><pubDate>Wed, 25 Sep 2024 01:22:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--84i3q9jS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%252360%25E3%2580%2580%25E6%259B%25B8%25E5%25BC%258F%25E5%258C%2596%25E6%25BC%2594%25E7%25AE%2597%25E5%25AD%2590%2525%25E3%2581%25A8format%25E3%2583%25A1%25E3%2582%25BD%25E3%2583%2583%25E3%2583%2589%25E3%2582%2592%25E6%25AF%2594%25E8%25BC%2583%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25E3%2580%259C%25E6%25A7%258B%25E6%2596%2587%25E3%2581%25A8%25E6%259B%25B8%25E5%25BC%258F%25E8%25A8%25AD%25E5%25AE%259A%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:NXTEDCo.%252C%2520Ltd.%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBmZjQzOTVhYzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>NXTEDCo., Ltd.</dc:creator></item><item><title><![CDATA[DjangoのORMについて実装を読んで理解を深めたい]]></title><description><![CDATA[こんにちは。Ultimate Hacking Keyboardが繋がっていなければ、もう何の仕事もやる気が起きない程UHKを愛しすぎた男、天地人エンジニアリングマネージャの高瀬（@k_tacafe）です。
+私たち天地人では、天地人コンパス（Tenchijin COMPASS）という地図アプリと、天地人コンパスのアプリケーション上で展開される「天地人コンパス 宇宙水道局」（以下、宇宙水道局）という、自治体様向けの水道管漏水リスク評価ソリューションを開発しております。
+つい先日の2024年9月5日、宇宙水道局では、累計契約自治体数が20を超えた実績を糧に、水道業務への理解度をより高いレベルに...]]></description><link>https://zenn.dev/tenchijin/articles/202409_django_orm_source_reading_1</link><guid isPermaLink="true">https://zenn.dev/tenchijin/articles/202409_django_orm_source_reading_1</guid><pubDate>Wed, 25 Sep 2024 01:00:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--iAzXSgeb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Django%25E3%2581%25AEORM%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E5%25AE%259F%25E8%25A3%2585%25E3%2582%2592%25E8%25AA%25AD%25E3%2582%2593%25E3%2581%25A7%25E7%2590%2586%25E8%25A7%25A3%25E3%2582%2592%25E6%25B7%25B1%25E3%2582%2581%25E3%2581%259F%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:JAXA%25E3%2583%2599%25E3%2583%25B3%25E3%2583%2581%25E3%2583%25A3%25E3%2583%25BC%25EF%25BC%2588%25E6%25A0%25AA%25EF%25BC%2589%25E5%25A4%25A9%25E5%259C%25B0%25E4%25BA%25BA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU1NDZmZjY5N2EuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>JAXAベンチャー（株）天地人</dc:creator></item><item><title><![CDATA[【Python】型ヒント]]></title><description><![CDATA[Python は動的型付け言語として有名であり、実行時に変数の型が決定される。
+これによって、非常に楽にコーディングができる一方で、コンパイルしないために実行時になって初めてエラーが検出されるといった欠点もある。
+
+ 関数アノテーション
+Python 3.0 から PEP 3107 で関数アノテーションが導入された。
+https://peps.python.org/pep-3107/
+
+
+Function annotations, both for parameters and return values, are completely optional.
+
+
+関数アノテーションは、引数...]]></description><link>https://zenn.dev/zulinx86/articles/python-type_hint</link><guid isPermaLink="true">https://zenn.dev/zulinx86/articles/python-type_hint</guid><pubDate>Tue, 24 Sep 2024 13:52:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Oqn4Wz6s--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591%25E5%259E%258B%25E3%2583%2592%25E3%2583%25B3%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:zulinx86%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQyZjYzMDk2NjEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>zulinx86</dc:creator></item><item><title><![CDATA[AWS Lambda PythonのJSON形式のログの例]]></title><description><![CDATA[2023年11月、Lambdaの高度なログ記録コントロール機能がリリースされ、JSON形式のログを簡単にCloudWatch Logsに出力できるようになりました。
+https://aws.amazon.com/jp/blogs/news/introducing-advanced-logging-controls-for-aws-lambda-functions/
+Pythonの場合は具体的にどのようなログになるのか気になったので、実行してみました。
+使用したランタイムはPython 3.12です。
+
+ JSON形式のログの例
+サンプルコード：
+import json
+import lo...]]></description><link>https://zenn.dev/dannykitadani/articles/870e57974dcbc2</link><guid isPermaLink="true">https://zenn.dev/dannykitadani/articles/870e57974dcbc2</guid><pubDate>Tue, 24 Sep 2024 12:56:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7_fA-1K5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AWS%2520Lambda%2520Python%25E3%2581%25AEJSON%25E5%25BD%25A2%25E5%25BC%258F%25E3%2581%25AE%25E3%2583%25AD%25E3%2582%25B0%25E3%2581%25AE%25E4%25BE%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Danny%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY4OGMzMjk5YzAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Danny</dc:creator></item><item><title><![CDATA[【簡単】Streamlit でデータ可視化アプを開発]]></title><description><![CDATA[
+ はじめに
+
+
+交通事故を可視化したマップです。
+北海道の統計
+
+
+
+年度
+件数
+死者数
+負傷者数
+
+
+
+
+2019
+9595
+152
+11046
+
+
+2020
+7898
+144
+9043
+
+
+2021
+8304
+120
+9598
+
+
+2022
+8457
+115
+9785
+
+
+2023
+9082
+131
+10601
+
+
+
+オープンデータとして公開されている 2019 年からのデータを簡単な表にしたのですが、多いですね……。お互い安全運転を心がけましょう…………。
+というわけで、このデータと Streamlit の st.map を使って地図にプロットしたいと思います。
+データは以下から...]]></description><link>https://zenn.dev/pfirsich/articles/2610798ddfab07</link><guid isPermaLink="true">https://zenn.dev/pfirsich/articles/2610798ddfab07</guid><pubDate>Tue, 24 Sep 2024 08:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--U6DeRi18--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E7%25B0%25A1%25E5%258D%2598%25E3%2580%2591Streamlit%2520%25E3%2581%25A7%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E5%258F%25AF%25E8%25A6%2596%25E5%258C%2596%25E3%2582%25A2%25E3%2583%2597%25E3%2582%2592%25E9%2596%258B%25E7%2599%25BA%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Pfirsich%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4Wmtodk13dmVKbW8wbWRDeUtmM2tpUWNINFVvcGhBb2VuVGlnVmhndz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Pfirsich</dc:creator></item><item><title><![CDATA[Pathlib と os.path の使いやすさを比較してみる]]></title><description><![CDATA[
+
+ TD;LR
+Python はファイルシステムを操作するための 2 つの主要なモジュール pathlib と os.path を提供している。
+どちらのモジュールも、ファイルやディレクトリの発見、作成、変更、削除を行う機能を提供するが、コードの可読性や理解のしやすさの観点でどちらが扱いやすいかを比較した。
+pathlib の方がコードを簡潔に記述できるため、扱いやすいと感じた。
+
+ os.path モジュール
+os.path モジュールは、Python でファイルパスを操作するためのツールを提供します。主な機能には、ファイルやディレクトリの存在確認（os.path.exists）、絶...]]></description><link>https://zenn.dev/gixo/articles/211529ae6c2158</link><guid isPermaLink="true">https://zenn.dev/gixo/articles/211529ae6c2158</guid><pubDate>Tue, 24 Sep 2024 01:30:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xl5BOjql--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Pathlib%2520%25E3%2581%25A8%2520os.path%2520%25E3%2581%25AE%25E4%25BD%25BF%25E3%2581%2584%25E3%2582%2584%25E3%2581%2599%25E3%2581%2595%25E3%2582%2592%25E6%25AF%2594%25E8%25BC%2583%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Yuji%2520Tsuritani%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVkYTBiZjE4NjMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25AE%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25B9%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JkYzZkZjE2NmMuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yuji Tsuritani</dc:creator></item><item><title><![CDATA[関数型プログラミングをPythonで実践しよう - #1 まずは書いてみる -]]></title><description><![CDATA[
+change log
+2024/09/24 初版公開
+
+
+
+ はじめに
+筆者の周りで ちらほら 関数型プログラミングの話を聞くようになりました。それも、ドメイン駆動開発と合わせた形で耳に入ることが多い気がします。
+https://youtu.be/qBf910_YiqA?si=z-CQxLv-FpcB48j4
+TypeScriptを使ったバックエンド開発を題材に、関数型プログラミングとドメインの考え方について説明されています。わかりやすく、ワクワクできるのでぜひ！
+色々と調べていると、自分で書いてみたくなる...。
+ということで、本記事では、Pythonを用いて関数型プログラミングの基...]]></description><link>https://zenn.dev/acntechjp/articles/67c336eb4f92e2</link><guid isPermaLink="true">https://zenn.dev/acntechjp/articles/67c336eb4f92e2</guid><pubDate>Mon, 23 Sep 2024 23:45:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--pzYHAQ6_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E9%2596%25A2%25E6%2595%25B0%25E5%259E%258B%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%259F%25E3%2583%25B3%25E3%2582%25B0%25E3%2582%2592Python%25E3%2581%25A7%25E5%25AE%259F%25E8%25B7%25B5%25E3%2581%2597%25E3%2582%2588%25E3%2581%2586%2520-%2520%25231%2520%25E3%2581%25BE%25E3%2581%259A%25E3%2581%25AF%25E6%259B%25B8%25E3%2581%2584%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2520-%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:naoto.a.kimura%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U2ZDA4MDY5ODcuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Accenture%2520Japan%2520%2528%25E6%259C%2589%25E5%25BF%2597%2529%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE2YTRiM2QwYWEuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>naoto.a.kimura</dc:creator></item><item><title><![CDATA[【Python】threading]]></title><description><![CDATA[Python でスレッドの使い方をざっくりと把握していきます。
+
+ 使ってみる
+
+ １スレッド
+まずはともあれスレッドを作成、実行していきます。
+import time
+import datetime
+import threading
+
+def func():
+    print(
+        "Thread:",
+        threading.current_thread().name,
+        "starting at",
+        datetime.datetime.now()
+    )
+
+    # sleep 3 seconds
+    time.sl...]]></description><link>https://zenn.dev/zulinx86/articles/python-threading</link><guid isPermaLink="true">https://zenn.dev/zulinx86/articles/python-threading</guid><pubDate>Mon, 23 Sep 2024 15:13:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3xdiE5B0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:%25E3%2580%2590Python%25E3%2580%2591threading%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:zulinx86%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQyZjYzMDk2NjEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>zulinx86</dc:creator></item><item><title><![CDATA[【Django】ブログアプリを作ろう！2]]></title><description><![CDATA[
+ はじめに
+!
+推敲しようと思ったら永遠に上げられない気がしたので、8 割方メモ状態で無理やりアップしました。
+ご了承ください。
+
+この記事を書くきっかけは、Django の勉強を始めて、いざブログアプリを作ろうとしたらどうにもうまくいかなかったことにあります。
+初学者なので間違っている部分、効率の悪い部分などあるかもしれませんがご了承ください。
+勉強しながら、ブログアプリを作りながらこれを書いているので、おそらくなぞっていけば私と同じように進められるはずです。
+こちらの記事の続編です。一度完成まで持っていったブログアプリに、新しい機能をつけてみましょう！
+
+ 要件
+今回追加する機能は...]]></description><link>https://zenn.dev/ramu_k/articles/20240923-django-blog-image</link><guid isPermaLink="true">https://zenn.dev/ramu_k/articles/20240923-django-blog-image</guid><pubDate>Mon, 23 Sep 2024 14:08:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--oZbh18we--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Django%25E3%2580%2591%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258D%25E3%2581%2586%25EF%25BC%25812%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Ramu%2520Karita%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc4Y2U2NjJiMWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Ramu Karita</dc:creator></item><item><title><![CDATA[PythonによるWINフォーマット地震波形の読み込みモジュール]]></title><description><![CDATA[
+柔軟性・コード作成効率が高いPythonで，WINに特化したライブラリを作成した．
+WINシステムをインストールしていない環境でも，Pythonユーザーであれば容易にデータを読み込み，プロット，処理できる．
+
+ 背景
+
+ 知識
+
+WINシステム:
+WINフォーマットのデータを扱うためのC, Fortranのプログラム群．
+WINフォーマット:
+日本国内で実質的な共通規格として用いられている，地震波形データのフォーマット．
+
+
+ 現状の問題点
+
+Pythonの地震波形処理ライブラリObsPyによるWINの読み込みは不十分．
+
+年の処理(90年代のデータが「2090年」のように誤解釈される...]]></description><link>https://zenn.dev/kigishi/articles/818ab782dbbfa1</link><guid isPermaLink="true">https://zenn.dev/kigishi/articles/818ab782dbbfa1</guid><pubDate>Mon, 23 Sep 2024 13:48:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--OysUHwDo--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258BWIN%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25BC%25E3%2583%259E%25E3%2583%2583%25E3%2583%2588%25E5%259C%25B0%25E9%259C%2587%25E6%25B3%25A2%25E5%25BD%25A2%25E3%2581%25AE%25E8%25AA%25AD%25E3%2581%25BF%25E8%25BE%25BC%25E3%2581%25BF%25E3%2583%25A2%25E3%2582%25B8%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%25AB%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kei%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NmNWJlODc0MzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kei</dc:creator></item><item><title><![CDATA[【Python】pipコマンドが使えない... 対処法]]></title><description><![CDATA[
+ ぼくの状況
+使用環境はubuntu。
+以下のようにpythonはインストール済みでした。
+➜ python --version
+Python 3.10.15
+しかし、pip install ｛何か｝コマンドを押すと、そこで止まってしまっていました。
+ctrl + Cを押すまで、フリーズしたままです。
+
+ pipのバージョンをアップデート
+以下のコマンドを使って、pipのバージョンをアップデートすると、使えるようになりました。
+curl -sS https://bootstrap.pypa.io/get-pip.py | python3.10
+
+ おまけ
+pipはインストールしているが...]]></description><link>https://zenn.dev/hovinci/articles/45d56267a3d098</link><guid isPermaLink="true">https://zenn.dev/hovinci/articles/45d56267a3d098</guid><pubDate>Mon, 23 Sep 2024 12:19:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lbNxA4cf--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591pip%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2581%258C%25E4%25BD%25BF%25E3%2581%2588%25E3%2581%25AA%25E3%2581%2584...%2520%25E5%25AF%25BE%25E5%2587%25A6%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%259B%25E3%2583%25B4%25E3%2582%25A3%25E3%2583%25B3%25E3%2583%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzIzYTE5NmI1NDYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ホヴィンチ</dc:creator></item><item><title><![CDATA[AtCoder - Cross Sum -]]></title><description><![CDATA[
+ AtCoder Cross Sum
+
+ 問題リンク
+AtCoder Typical90 D
+
+ 解法
+この問題では、各マスに対して、同じ行または同じ列にあるマスの値の合計を求める必要があります。以下のアプローチで解きます。
+
+ アプローチ
+
+
+行ごとの合計と列ごとの合計を計算
+
+各行の合計をrow_sumsに格納します。
+各列の合計をcol_sumsに格納します。
+
+
+
+各マスの答えを計算
+
+マス(i, j)の答えは「行iの合計」＋「列jの合計」から「マス(i, j)」の値を引いたものです。
+
+
+
+
+ ステップ
+
+行ごとの合計を計算する。
+列ごとの合計を計算する。
+マス(i, j)に...]]></description><link>https://zenn.dev/sakai13/articles/bc97beec225912</link><guid isPermaLink="true">https://zenn.dev/sakai13/articles/bc97beec225912</guid><pubDate>Mon, 23 Sep 2024 11:55:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--YTzZKe5b--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_76:AtCoder%2520-%2520Cross%2520Sum%2520-%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Sakai%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I2OWI1OWY3NGUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Sakai</dc:creator></item><item><title><![CDATA[AtCoder - Score Sum Queries -]]></title><description><![CDATA[
+ AtCoder - Score Sum Queries
+
+ 問題リンク
+AtCoder Typical90 J
+
+ 解法
+この問題は、範囲クエリに対する累積和（prefix sum）の応用で解くことができます。
+
+ アプローチ
+
+
+累積和の事前計算
+
+各クラスごとに累積和を計算します。
+
+
+
+効率的な範囲内合計の計算
+
+各クエリに対して、事前に計算した累積和を用いて範囲内の合計を求めます。
+
+
+
+
+ ステップ
+
+1組と2組の生徒それぞれの点数に対する累積和を別々に持つ配列を作成します。
+各クエリに対して、指定された範囲で累積和を使い、合計を計算します。
+
+
+ 実装
+# 入力の読み込み...]]></description><link>https://zenn.dev/sakai13/articles/dd8f25f40ee293</link><guid isPermaLink="true">https://zenn.dev/sakai13/articles/dd8f25f40ee293</guid><pubDate>Mon, 23 Sep 2024 11:53:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--PGfIobi3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:AtCoder%2520-%2520Score%2520Sum%2520Queries%2520-%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Sakai%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I2OWI1OWY3NGUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Sakai</dc:creator></item><item><title><![CDATA[AtCoder - Cubic Cake -]]></title><description><![CDATA[
+ 問題リンク
+AtCoder Typical90 V
+
+ 考え方
+幅 ( A )、奥行き ( B )、高さ ( C ) の直方体をすべて立方体にするための最小の立方体の辺の長さは、( A )、( B )、( C ) の最大公約数（GCD）を求め、それを基準に切断すれば良いです。
+
+例えば、( A=2, B=2, C=3 ) の場合、最大公約数は 1 なので、全てのピースを ( 1 × 1 × 1 ) の立方体にする必要があります。
+( A=4, B=4, C=2 ) の場合、最大公約数は 2 なので、全てのピースは ( 2 × 2 × 2 ) の立方体にできます。
+
+
+ 解法
+
+直方体...]]></description><link>https://zenn.dev/sakai13/articles/7886dc85f50cd8</link><guid isPermaLink="true">https://zenn.dev/sakai13/articles/7886dc85f50cd8</guid><pubDate>Mon, 23 Sep 2024 11:50:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Y0GanuHu--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_76:AtCoder%2520-%2520Cubic%2520Cake%2520-%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Sakai%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I2OWI1OWY3NGUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Sakai</dc:creator></item><item><title><![CDATA[AtCoder - Sign Up Requests -]]></title><description><![CDATA[
+ 問題リンク
+AtCoder Typical90 D
+
+ 解法
+この問題では、ユーザー名の重複を防いで、初めて受理された日を記録するというタスクを効率的に処理します。
+
+ 1. ユーザ名の管理
+
+ユーザー名がすでに登録されているかどうかを高速に確認するために、set（集合）を使います。setは要素の追加・検索が平均 ( O(1) ) で行えるので、数が多くても高速に処理できます。
+
+ 2. 処理の流れ
+
+
+ユーザー名の一覧を1日ずつ確認し、まだ登録されていないユーザー名なら、その名前をsetに追加し、初めて受理された日（インデックス + 1）を記録します。
+最終的に、記録された日をリス...]]></description><link>https://zenn.dev/sakai13/articles/8761828d871858</link><guid isPermaLink="true">https://zenn.dev/sakai13/articles/8761828d871858</guid><pubDate>Mon, 23 Sep 2024 11:48:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--d3t1F4IH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:AtCoder%2520-%2520Sign%2520Up%2520Requests%2520-%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Sakai%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I2OWI1OWY3NGUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Sakai</dc:creator></item><item><title><![CDATA[206. Reverse Linked Listの解き方について]]></title><description><![CDATA[
+ 問題文
+
+Given the head of a singly linked list, reverse the list, and return the reversed list.
+
+Input: head = [1,2,3,4,5]
+Output: [5,4,3,2,1]
+
+
+ 考え方
+
+prevとcurrをそれぞれ宣言し、上記のようなイメージで配置させます。
+prev = None
+curr = head
+
+currとcurr.nextのリンクを切り、currとprevを繋ぎます。
+
+prevをcurrの位置に持ってきます。
+
+currを次のポイントに持ってきます。
+これをc...]]></description><link>https://zenn.dev/daiten/articles/0679ab808b71c2</link><guid isPermaLink="true">https://zenn.dev/daiten/articles/0679ab808b71c2</guid><pubDate>Mon, 23 Sep 2024 11:46:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3h4xm8ng--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:206.%2520Reverse%2520Linked%2520List%25E3%2581%25AE%25E8%25A7%25A3%25E3%2581%258D%25E6%2596%25B9%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:daitenn%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU3MzllZjg1YmIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>daitenn</dc:creator></item><item><title><![CDATA[AsanaAPIでプロキシを通過できずにハマった話]]></title><description><![CDATA[※まえがき：タイトルに偽りはないのですが、実は単純なurllib3のお話だったりするかも
+はじめまして。最近はAWS認定試験にお熱の大吉（だいきち）です。
+先週、プロキシサーバを経由しなければ問題なくプログラムは動作するが、プロキシサーバを経由させた途端に全く動かなくなる（どう動かなくなるのかは後ほど）…という現象に苛まされておりました。
+さて突然ですが、私の勤務先ではAsanaというタスク管理ツールを利用しています。
+RedmineやJIRA、Backlogみたいな類のやつです。
+大学を卒業してから3年と少しの期間 お世話になった会社を退職すると同時に、ビ◯◯ーチを通じてご縁のあった会...]]></description><link>https://zenn.dev/daikichi7/articles/5e6ff1935d5a94</link><guid isPermaLink="true">https://zenn.dev/daikichi7/articles/5e6ff1935d5a94</guid><pubDate>Mon, 23 Sep 2024 10:26:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BPpfQRQb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AsanaAPI%25E3%2581%25A7%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25AD%25E3%2582%25B7%25E3%2582%2592%25E9%2580%259A%25E9%2581%258E%25E3%2581%25A7%25E3%2581%258D%25E3%2581%259A%25E3%2581%25AB%25E3%2583%258F%25E3%2583%259E%25E3%2581%25A3%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25A4%25A7%25E5%2590%2589%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc4NjFhYTQ3MGIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>大吉</dc:creator></item><item><title><![CDATA[楽天商品の価格通知アプリをつくりました]]></title><description><![CDATA[
+ 概要
+個人開発で楽天商品のお買い得情報をLINE通知するWebアプリを作りました。
+
+楽天価格通知アプリ
+ソースコード
+
+このアプリは自分がほしいものリストに追加した楽天の商品がセールなどで安くなったら、LINE 通知してくれる web アプリケーションです。
+
+ 想定ユーザー
+自分用に作ったのでユーザーは自分だけです。
+なので今のところ認証機能はありません。
+
+ 使用技術
+
+ フロントエンド
+
+TypeScript 4.5.4
+
+Next.js 14.0.4
+
+MUI 5.15.20
+
+
+
+ バックエンド
+
+Python 3.12
+
+
+
+ インフラ
+
+Docker
+AWS
+
+Lam...]]></description><link>https://zenn.dev/ryouta26/articles/0bfda1e6c22e36</link><guid isPermaLink="true">https://zenn.dev/ryouta26/articles/0bfda1e6c22e36</guid><pubDate>Mon, 23 Sep 2024 10:11:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--AJd0YJpo--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%25A5%25BD%25E5%25A4%25A9%25E5%2595%2586%25E5%2593%2581%25E3%2581%25AE%25E4%25BE%25A1%25E6%25A0%25BC%25E9%2580%259A%25E7%259F%25A5%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E3%2581%25A4%25E3%2581%258F%25E3%2582%258A%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ryouta.js%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI2ZjIyNTZmYmEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ryouta.js</dc:creator></item></channel></rss>
