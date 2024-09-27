@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「JavaScript」のフィード]]></title><description><![CDATA[Zennのトピック「JavaScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/javascript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/64acd76870.png</url><title>Zennの「JavaScript」のフィード</title><link>https://zenn.dev/topics/javascript</link></image><generator>zenn.dev</generator><lastBuildDate>Fri, 27 Sep 2024 05:46:26 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/javascript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[続・URLシェアを支える技術 CompressionStream]]></title><description><![CDATA[以前TypeScript PlaygroundやReact Compiler PlaygroundがURLシェア時のソースコードの圧縮に使用している、lz-stringというライブラリを紹介しました。
+https://zenn.dev/chot/articles/what-is-lz-string
+すると、jser.infoで有名なazuさんから次のような反応をいただきました。
+https://x.com/azu_re/status/1832249554517029209
+確かに！
+しかし、CompressionStreamは文字列から圧縮済み文字列を返す単純なAPIではないため、lz-...]]></description><link>https://zenn.dev/chot/articles/lz-string-vs-compression-stream</link><guid isPermaLink="true">https://zenn.dev/chot/articles/lz-string-vs-compression-stream</guid><pubDate>Fri, 27 Sep 2024 02:40:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ZOr9kPee--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%25B6%259A%25E3%2583%25BBURL%25E3%2582%25B7%25E3%2582%25A7%25E3%2582%25A2%25E3%2582%2592%25E6%2594%25AF%25E3%2581%2588%25E3%2582%258B%25E6%258A%2580%25E8%25A1%2593%2520CompressionStream%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%2599%25E3%2581%25A6%25E3%2581%2583%25E3%2582%2593%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAzODVjOWFlYzkuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:chot%2520Inc.%2520tech%2520blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzIzMTEyZmJmM2MuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>すてぃん</dc:creator></item><item><title><![CDATA[Vue.jsの v-model 正しく活用できていますか？]]></title><description><![CDATA[
+ はじめに
+こんにちは、からころです。
+今回は、Vue.js でよく利用される v-model の記事について保守性などの観点から書いていこうと思います。想定している読者としては、Vue.js を触ったこと、見たことがある方全般です。v-model は利用方法を誤ると痛手を負いがちですが、非常に強力な味方だよということをお伝えできればと思います。また、Vue.js のバージョンは、記事執筆時点で最新の 3.5.8 を想定しています。
+
+ v-model とは
+さて、v-model とはなんでしょうか？公式ドキュメントには、
+
+コンポーネント上で v-model を使用すると双方向バイン...]]></description><link>https://zenn.dev/comm_vue_nuxt/articles/7ad7338080482f</link><guid isPermaLink="true">https://zenn.dev/comm_vue_nuxt/articles/7ad7338080482f</guid><pubDate>Fri, 27 Sep 2024 00:29:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--sKW1oUMD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Vue.js%25E3%2581%25AE%2520v-model%2520%25E6%25AD%25A3%25E3%2581%2597%25E3%2581%258F%25E6%25B4%25BB%25E7%2594%25A8%25E3%2581%25A7%25E3%2581%258D%25E3%2581%25A6%25E3%2581%2584%25E3%2581%25BE%25E3%2581%2599%25E3%2581%258B%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%258B%25E3%2582%2589%25E3%2581%2593%25E3%2582%258D%2520%252F%2520karacoro%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU5MTZlOWFlNjguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Vue%25E3%2583%25BBNuxt%2520%25E6%2583%2585%25E5%25A0%25B1%25E3%2581%258C%25E9%259B%2586%25E3%2581%25BE%25E3%2582%258B%25E5%25BA%2583%25E5%25A0%25B4%2520%252F%2520P...%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MwNmQwMjRkZGIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>からころ / karacoro</dc:creator></item><item><title><![CDATA[【JavaScript】変数参照時のパターンについて]]></title><description><![CDATA[
+ 【JavaScript】変数参照時まとめ
+
+変数は、参照するより前の行で宣言も代入もしない状態だと、ReferenceErrorとなってしまう
+参照するより前の行にて宣言さえすれば、ReferenceErrorを回避できる
+(参照結果はundefinedとなる)
+
+
+ 概要
+変数は3つの操作が行われる
+
+宣言
+代入
+参照
+
+参照時のパターンA,B,Cの挙動を整理する
+
+
+ パターンA
+
+宣言と代入どちらも実施
+
+
+ パターンA-1
+以下の順番
+
+宣言
+代入
+参照
+
+
+test.js
+let status = "ok";
+console.log(status);
+
+//出力：ok
+
+
+...]]></description><link>https://zenn.dev/417yr/articles/603e20cf3de971</link><guid isPermaLink="true">https://zenn.dev/417yr/articles/603e20cf3de971</guid><pubDate>Thu, 26 Sep 2024 17:59:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jfbMUfHD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590JavaScript%25E3%2580%2591%25E5%25A4%2589%25E6%2595%25B0%25E5%258F%2582%25E7%2585%25A7%25E6%2599%2582%25E3%2581%25AE%25E3%2583%2591%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%25B3%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:417yr%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM0NmMyZTY3ZDYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>417yr</dc:creator></item><item><title><![CDATA[JavaScriptで要素を順番にフェードイン]]></title><description><![CDATA[
+要素を順番にフェードインさせる方法はjQueryを使っているものが多かったので、JavaScriptで同じアニメーションが作成したくて試しました。
+ある要素の中の画像を、左から順番にフェードインさせます。
+このアニメーションの使い所は以下のような場所におすすめです。
+
+ファーストビューで横に並んでいる複数の画像
+リスト要素
+カード部分
+
+
+ コード
+結論のコードです。
+ポイントはのちほど解説します。
+    &lt;div class="l-container"&gt;
+      &lt;p&gt;左から順番にフェードイン&lt;/p&gt;
+      &lt;div class=...]]></description><link>https://zenn.dev/928sekine/articles/0b402c94a3790c</link><guid isPermaLink="true">https://zenn.dev/928sekine/articles/0b402c94a3790c</guid><pubDate>Thu, 26 Sep 2024 14:36:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--F1nhJDa2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25E3%2581%25A7%25E8%25A6%2581%25E7%25B4%25A0%25E3%2582%2592%25E9%25A0%2586%25E7%2595%25AA%25E3%2581%25AB%25E3%2583%2595%25E3%2582%25A7%25E3%2583%25BC%25E3%2583%2589%25E3%2582%25A4%25E3%2583%25B3%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259B%25E3%2581%258D%25E3%2581%25AD%25E3%2582%258A%25E3%2581%25AA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAyNDQ3MGIzZjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>せきねりな</dc:creator></item><item><title><![CDATA[[TypeScript]取得したプロパティ名とは別の名前（変数)として値を取得する値を取得する方法]]></title><description><![CDATA[
+ はじめに
+分割代入は、オブジェクトや配列の要素を簡単に取り出すために使われる便利な機能です。TypeScriptでは、分割代入を使ってオブジェクトのプロパティを取り出す際に、そのプロパティ名とは別の名前の変数として、そのプロパティ名の値を取得することができます。この記事では、その具体的な使い方を解説していきます。
+
+ 1. 基本的なオブジェクトの分割代入
+まず、基本的な分割代入について説明します。以下の例では、fruitとageというプロパティを持つオブジェクトobjを分割代入で取り出しています。
+const obj = { fruit: "apple", age: 18, flag...]]></description><link>https://zenn.dev/kingdom0927/articles/9ef33481394c10</link><guid isPermaLink="true">https://zenn.dev/kingdom0927/articles/9ef33481394c10</guid><pubDate>Thu, 26 Sep 2024 09:44:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--XzTpF_w1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BTypeScript%255D%25E5%258F%2596%25E5%25BE%2597%25E3%2581%2597%25E3%2581%259F%25E3%2583%2597%25E3%2583%25AD%25E3%2583%2591%25E3%2583%2586%25E3%2582%25A3%25E5%2590%258D%25E3%2581%25A8%25E3%2581%25AF%25E5%2588%25A5%25E3%2581%25AE%25E5%2590%258D%25E5%2589%258D%25EF%25BC%2588%25E5%25A4%2589%25E6%2595%25B0%2529%25E3%2581%25A8%25E3%2581%2597%25E3%2581%25A6%25E5%2580%25A4%25E3%2582%2592%25E5%258F%2596%25E5%25BE%2597%25E3%2581%2599%25E3%2582%258B%25E5%2580%25A4%25E3%2582%2592%25E5%258F%2596%25E5%25BE%2597%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:parapone1005%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FiZWZlYWI5M2UuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>parapone1005</dc:creator></item><item><title><![CDATA[[JavaScript]WHILE文について（備忘録）]]></title><description><![CDATA[
+ １．はじめに
+指定した条件が真である限り、回数を指定せず処理を繰り返し実行できる制御構文です。
+
+ ２．サンプルプログラム
+〇例１：変数が0になると終了するプログラム
+
+Sample_1.js
+// constを使用すると再代入できないので、letを使用
+let a = 2
+while (a != 0) {
+  console.log(a);
+  a--;
+}
+
+別の書き方をすると、、、
+
+Sample_1.js
+let a = 2;
+while (a) {
+  console.log(a);
+  a--;
+}
+
+〇例２：breakを使用したプログラム
+
+Sample_2.js
+le...]]></description><link>https://zenn.dev/yama_kawa/articles/b077839fb4ac3f</link><guid isPermaLink="true">https://zenn.dev/yama_kawa/articles/b077839fb4ac3f</guid><pubDate>Thu, 26 Sep 2024 08:27:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--CKZoQNPL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BJavaScript%255DWHILE%25E6%2596%2587%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25EF%25BC%2588%25E5%2582%2599%25E5%25BF%2598%25E9%258C%25B2%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%25A9%25E3%2582%25B6%25E3%2583%258B%25E3%2582%25A2%25E3%2583%2591%25E3%2583%25B3%25E3%2582%25B5%25E3%2583%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M1ZjYyZjIwYTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ラザニアパンサー</dc:creator></item><item><title><![CDATA[Cocoon用Amazon短縮リンク生成Chrome拡張機能を作ってみた]]></title><description><![CDATA[
+ 3行まとめ
+
+Cocoonテーマ用のAmazonアフィリエイトリンクを簡単に生成するChrome拡張機能を開発
+ワンクリックで商品ASINとキーワードを含むショートコードを生成
+除外キーワード機能で、不要な文字列を自動的に削除可能
+
+https://github.com/matsubo/cocoon-amazon-shortcode
+
+ 背景
+WordPressのCocoonテーマを使用している方々にとって、Amazonの商品リンクを記事に挿入するのは日常的な作業です。しかし、この作業は意外と手間がかかり、特に多くの商品リンクを扱う場合は生産性の低下につながります。
+
+ 問題
+従来の...]]></description><link>https://zenn.dev/matsubokkuri/articles/cocoon-affiliate-code-chrome-extension</link><guid isPermaLink="true">https://zenn.dev/matsubokkuri/articles/cocoon-affiliate-code-chrome-extension</guid><pubDate>Thu, 26 Sep 2024 02:14:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--nvU7sLm3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Cocoon%25E7%2594%25A8Amazon%25E7%259F%25AD%25E7%25B8%25AE%25E3%2583%25AA%25E3%2583%25B3%25E3%2582%25AF%25E7%2594%259F%25E6%2588%2590Chrome%25E6%258B%25A1%25E5%25BC%25B5%25E6%25A9%259F%25E8%2583%25BD%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Matsukura%2520Yuki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2diQWZWd2dLbmhzWjJZdGgyY2k1c2hveDdQWHl5UUVaN0MyV2JkQ0E9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Matsukura Yuki</dc:creator></item><item><title><![CDATA[Fedify 1.0.0のリリース]]></title><description><![CDATA[ActivityPubフレームワークのFedifyがついに最初の正式バージョン1.0.0をリリースしました！
+
+ Fedifyとは？
+FedifyはActivityPubプロトコルをベースにした連合型（federated）サーバーアプリケーションを簡単に作成できるようにするTypeScriptライブラリです。ActivityPubはソーシャルネットワーキングサービスが相互に通信できるようにするオープンな標準プロトコルで、これを通じて様々なサービス間でユーザーが互いにコミュニケーションを取れる分散型ソーシャルネットワークであるフェディバース（fediverse）を構成します。
+Fedify...]]></description><link>https://zenn.dev/hongminhee/articles/c913bbf8030412</link><guid isPermaLink="true">https://zenn.dev/hongminhee/articles/c913bbf8030412</guid><pubDate>Thu, 26 Sep 2024 00:30:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--zAK7fFJV--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Fedify%25201.0.0%25E3%2581%25AE%25E3%2583%25AA%25E3%2583%25AA%25E3%2583%25BC%25E3%2582%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%25B4%25AA%2520%25E6%25B0%2591%25E6%2586%2599%25EF%25BC%2588%25E3%2583%259B%25E3%2583%25B3%25E3%2583%25BB%25E3%2583%259F%25E3%2583%25B3%25E3%2583%2592%25EF%25BC%2589%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE4Yzk5ZDE5YWIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>洪 民憙（ホン・ミンヒ）</dc:creator></item><item><title><![CDATA[postMessageを使用した親・子(iframe)間のクロスドメイン通信の実現方法]]></title><description><![CDATA[
+ はじめに
+この記事では、postMessageの使い方や処理の流れをシンプルに確認する方法を記載しています。
+記載内容に誤りなどございましたら、お手数ですがご指摘いただけますと幸いです。
+
+ この記事の対象者
+・クロスドメインについて何となく知りたい方
+・postMessageについて何となく知りたい方
+・実際に環境を作り、手を動かしながら処理の内容や流れを確認してみたい方
+
+ クロスドメインとは？
+1つのサイトで複数のドメインがまたがっている状態を指します。
+【参考記事】
+https://liskul.com/cross-domain-14330
+
+ postMessageとは？
+...]]></description><link>https://zenn.dev/keita09/articles/5e8899149a0eef</link><guid isPermaLink="true">https://zenn.dev/keita09/articles/5e8899149a0eef</guid><pubDate>Wed, 25 Sep 2024 17:23:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--58HWNEPS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:postMessage%25E3%2582%2592%25E4%25BD%25BF%25E7%2594%25A8%25E3%2581%2597%25E3%2581%259F%25E8%25A6%25AA%25E3%2583%25BB%25E5%25AD%2590%2528iframe%2529%25E9%2596%2593%25E3%2581%25AE%25E3%2582%25AF%25E3%2583%25AD%25E3%2582%25B9%25E3%2583%2589%25E3%2583%25A1%25E3%2582%25A4%25E3%2583%25B3%25E9%2580%259A%25E4%25BF%25A1%25E3%2581%25AE%25E5%25AE%259F%25E7%258F%25BE%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:K%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JjNTc2NjBmNTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>K</dc:creator></item><item><title><![CDATA[date-fns/tzを触ってみた]]></title><description><![CDATA[
+ はじめに
+https://blog.date-fns.org/v40-with-time-zone-support/
+date-fnsのv4.0でタイムゾーンがサポートされました。
+今までdate-fnsを導入したプロジェクトでタイムゾーンを考慮した日時を扱う場合は、外部パッケージのdate-fns-tzと組み合わせて実装していましたが、今回のアップデートでdate-fns/tzという新しいパッケージとして使用できるようになりました。
+この記事では、時刻表記に関する知識と、それを踏まえたdata-fns/tzの使い方を見ていきます。
+
+ 時刻表記について
+JavaScriptのDat...]]></description><link>https://zenn.dev/chot/articles/11edd3d6424211</link><guid isPermaLink="true">https://zenn.dev/chot/articles/11edd3d6424211</guid><pubDate>Wed, 25 Sep 2024 05:05:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--UFE_7fZt--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:date-fns%252Ftz%25E3%2582%2592%25E8%25A7%25A6%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Yuki%2520Shibata%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAzODVjOWFlYzkuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:chot%2520Inc.%2520tech%2520blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2d2MzE1ZG9sR0hXOGd4Zi1iZjVXZnQwMk1sdVoway13QnBhWDlTQ1E9czI1MC1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yuki Shibata</dc:creator></item><item><title><![CDATA[JavaScriptにおける同期処理と非同期処理について]]></title><description><![CDATA[最近、業務でJavaScriptを扱う機会が増えたので、まずな基礎の基から学習しました✏️
+
+ 同期処理と非同期処理とは？
+[同期処理]
+
+タスクが順番に実行される
+一つのタスクが終わるまで、次のタスクは待機する
+
+[非同期処理]
+
+タスクが並行して実行される
+時間のかかるタスクを待たずに、次のタスクを実行できる
+
+非同期処理が必要になるタイミング
+
+クライアントがサーバに情報をとりに行く時
+API通信で情報取得している時
+
+
+ 非同期処理の実装方法
+
+ コールバック関数
+
+非同期処理が完了したときに呼び出される関数
+
+function getData(callback) {
+  set...]]></description><link>https://zenn.dev/funxxfun/articles/c426127c8ae7e0</link><guid isPermaLink="true">https://zenn.dev/funxxfun/articles/c426127c8ae7e0</guid><pubDate>Tue, 24 Sep 2024 23:12:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--sbkFCZqH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25E3%2581%25AB%25E3%2581%258A%25E3%2581%2591%25E3%2582%258B%25E5%2590%258C%25E6%259C%259F%25E5%2587%25A6%25E7%2590%2586%25E3%2581%25A8%25E9%259D%259E%25E5%2590%258C%25E6%259C%259F%25E5%2587%25A6%25E7%2590%2586%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Fumi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZjMzU5ZTAzMGMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Fumi</dc:creator></item><item><title><![CDATA[個人的にReact Hook Formで気をつけていること]]></title><description><![CDATA[
+ はじめに
+React Hook Formの特徴や個人的に気をつけていることをまとめました💫
+
+ React Hook Formの特徴
+
+レンダリング回数を減らすことができる
+バンドルサイズの軽減が可能
+
+
+ レンダリングについて
+通常のReactでは、stateで値を管理し、stateを更新（setState）するたびに再レンダリングが発生します。
+一方、React Hook Formでは、値の管理にstateではなくrefを使用するため、再レンダリングを抑制できます。
+この仕組みにより、フォーム操作時に不要な再レンダリングを減らすことが可能です。
+詳細は公式ドキュメントにも記載され...]]></description><link>https://zenn.dev/kiman/articles/e9ded457ead731</link><guid isPermaLink="true">https://zenn.dev/kiman/articles/e9ded457ead731</guid><pubDate>Tue, 24 Sep 2024 14:01:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--m9E7gY8G--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2580%258B%25E4%25BA%25BA%25E7%259A%2584%25E3%2581%25ABReact%2520Hook%2520Form%25E3%2581%25A7%25E6%25B0%2597%25E3%2582%2592%25E3%2581%25A4%25E3%2581%2591%25E3%2581%25A6%25E3%2581%2584%25E3%2582%258B%25E3%2581%2593%25E3%2581%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258D%25E3%2582%2593%25E3%2582%2586%25E3%2581%25BE%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ3MmYyZmE3MTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>きんゆまん</dc:creator></item><item><title><![CDATA[[react calendar] カレンダーを使って予約機能を作ろう＿１]]></title><description><![CDATA[韓国のIT教室に通い始めて３ヶ月が経った。
+そして、みんなが心配していたチームプロジェクトが始まった。
+第１プロゼクトのテーマは「リアルタイムで病院の予約システムを作る」
+そこで私はメインの機能である予約ページを担当することになった。
+この３ヶ月間で習ったこと以外のものを調べて作り上げなきゃいけなくなった。
+最初はどんなページにすればいいのか頭に浮かばなくてボッとしていたが、とりあえずカレンダーが必要なのではないかと気づいた。
+カレンダーを作ったこのは一度もなく、とりあえず「react calendar」と検索してみたらそのままのライブラリーが出てきた。
+ライブラリーを使ったこともない。...]]></description><link>https://zenn.dev/hyoni/articles/2ff9d50b3a0a6e</link><guid isPermaLink="true">https://zenn.dev/hyoni/articles/2ff9d50b3a0a6e</guid><pubDate>Tue, 24 Sep 2024 13:55:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--W_9xvjLa--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255Breact%2520calendar%255D%2520%25E3%2582%25AB%25E3%2583%25AC%25E3%2583%25B3%25E3%2583%2580%25E3%2583%25BC%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E4%25BA%2588%25E7%25B4%2584%25E6%25A9%259F%25E8%2583%25BD%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258D%25E3%2581%2586%25EF%25BC%25BF%25EF%25BC%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%2592%25E3%2583%25A7%25E3%2583%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0sxdWxlU2pkSzlwbDVxZnp3QVlUcFhCNk9xUEhkZGpKWjRUVlRPTl9lMHdYODhLdkg9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ヒョニ</dc:creator></item><item><title><![CDATA[package.jsonの全貌：プロジェクト管理の要]]></title><description><![CDATA[
+ package.jsonの全貌：プロジェクト管理の要
+package.jsonはNode.jsプロジェクトの心臓部とも言えるファイルです。このファイルには、プロジェクトの依存関係や設定、スクリプトなど、プロジェクト管理に不可欠な情報が記述されています。今回は、package.jsonの主要な要素と、効果的な使用方法について詳しく見ていきましょう。
+
+ 1. package.jsonの基本構造
+まず、典型的なpackage.jsonの構造を見てみましょう：
+{
+  "name": "my-awesome-project",
+  "version": "1.0.0",
+  "descri...]]></description><link>https://zenn.dev/crebo_tech/articles/article-0010-20240924</link><guid isPermaLink="true">https://zenn.dev/crebo_tech/articles/article-0010-20240924</guid><pubDate>Tue, 24 Sep 2024 11:11:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--VqUxZLwz--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:package.json%25E3%2581%25AE%25E5%2585%25A8%25E8%25B2%258C%25EF%25BC%259A%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E7%25AE%25A1%25E7%2590%2586%25E3%2581%25AE%25E8%25A6%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2581%258F%25E3%2582%258A%25E3%2581%25BC%25E3%2583%25BC%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLmRldi9pbWFnZXMvZGVmYXVsdC1wdWJsaWNhdGlvbi1hdmF0YXIucG5n%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2581%258F%25E3%2582%258A%25E3%2581%25BC%25E3%2583%25BC%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2IxNzlhZTFjZGIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>株式会社くりぼー</dc:creator></item><item><title><![CDATA[useSyncExternalStoreを使った音声状態管理]]></title><description><![CDATA[Reactアプリケーションで音声の再生状態を管理する際、どのような方法を使っていますか？useState や useEffect を用いて状態を管理することが多いかもしれません。しかし、これらの方法では状態が不安定になったり、管理が複雑になったりすることがあります。
+この記事では、音声状態管理のいくつかのアプローチを紹介し、最終的にuseSyncExternalStore を使った最も信頼性の高い方法を提案します。
+
+ useSyncExternalStore とは？
+ useSyncExternalStore は、React 18で導入されたフックで、外部ストアの状態をReactコンポ...]]></description><link>https://zenn.dev/ryomaejii/articles/81ba8b58f7b95d</link><guid isPermaLink="true">https://zenn.dev/ryomaejii/articles/81ba8b58f7b95d</guid><pubDate>Tue, 24 Sep 2024 08:14:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--OhINhhPT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:useSyncExternalStore%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%259F%25E9%259F%25B3%25E5%25A3%25B0%25E7%258A%25B6%25E6%2585%258B%25E7%25AE%25A1%25E7%2590%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ryomaejii%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzgzZTkxNGFjMmYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ryomaejii</dc:creator></item><item><title><![CDATA[LogTape 0.6.0のリリース：何が変わったのか？]]></title><description><![CDATA[JavaScript及びTypeScript用のゼロ依存構造化ロギングライブラリであるLogTapeがv0.6.0をリリースしました。何が変わったのでしょうか？
+
+ 親ロガーのシンクをオーバーライド可能に
+LogTapeの特徴の一つは、階層的カテゴリを通じたシンクの継承です。例えば、以下のように2つのロガーを設定した場合：
+import { configure, getConsoleSink, getFileSink } from "@logtape/logtape";
+
+await configure({
+  sinks: {
+    console: getConsoleSink()...]]></description><link>https://zenn.dev/hongminhee/articles/f9310365580c10</link><guid isPermaLink="true">https://zenn.dev/hongminhee/articles/f9310365580c10</guid><pubDate>Tue, 24 Sep 2024 07:49:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qqxDjbhm--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:LogTape%25200.6.0%25E3%2581%25AE%25E3%2583%25AA%25E3%2583%25AA%25E3%2583%25BC%25E3%2582%25B9%25EF%25BC%259A%25E4%25BD%2595%25E3%2581%258C%25E5%25A4%2589%25E3%2582%258F%25E3%2581%25A3%25E3%2581%259F%25E3%2581%25AE%25E3%2581%258B%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%25B4%25AA%2520%25E6%25B0%2591%25E6%2586%2599%25EF%25BC%2588%25E3%2583%259B%25E3%2583%25B3%25E3%2583%25BB%25E3%2583%259F%25E3%2583%25B3%25E3%2583%2592%25EF%25BC%2589%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE4Yzk5ZDE5YWIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>洪 民憙（ホン・ミンヒ）</dc:creator></item><item><title><![CDATA[(React)コンテナー・プレゼンテーションパターンの設計を完全に理解した]]></title><description><![CDATA[
+ 概要
+業務委託で4社以上経験がありますが、だいたいどこの現場でも、フロントエンドの設計は、「雰囲気で運用している」ことが多かったです。
+なので、今回はコンテナープレゼンテーションパターンについて、本気出して考えてみました！
+Reactの設計についてはこの動画がよかったです！
+コンテナープレゼンテーションパターンは、この記事が一番しっくりきました。
+https://zenn.dev/morinokami/books/learning-patterns-1/viewer/presentational-container-pattern#コンテナ・プレゼンテーションパターン
+
+React ...]]></description><link>https://zenn.dev/rsugi/articles/1c200186e3a0e3</link><guid isPermaLink="true">https://zenn.dev/rsugi/articles/1c200186e3a0e3</guid><pubDate>Tue, 24 Sep 2024 05:55:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Y8KrWt97--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%2528React%2529%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2586%25E3%2583%258A%25E3%2583%25BC%25E3%2583%25BB%25E3%2583%2597%25E3%2583%25AC%25E3%2582%25BC%25E3%2583%25B3%25E3%2583%2586%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2583%2591%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%25B3%25E3%2581%25AE%25E8%25A8%25AD%25E8%25A8%2588%25E3%2582%2592%25E5%25AE%258C%25E5%2585%25A8%25E3%2581%25AB%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:r-sugi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M0YTAwZTQ1YmIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>r-sugi</dc:creator></item><item><title><![CDATA[純粋な静的ファイルのサイトで共通レイアウトを実現する]]></title><description><![CDATA[
+ モチベーション
+情報の表示が中心のシンプルなサイトを作っていると、フロントエンドのフレームワークやビルドプロセスが過剰に感じて、純粋な静的HTMLファイルだけでサイトを構築したい衝動にかられます。しかしその場合に難しくなるが共通レイアウトの適用です。
+フレームワークのように共通レイアウトのHTMLを定義したひとつのファイルを各ページに適用させることは、たんに表示させるだけなら難しくはないが、遅延やちらつきなく表示させるとなるとちょっと難しい。
+ということで外部ファイル化した共通レイアウトの取得して遅延・ちらつきなく表示するライブラリを作ってみました。
+デモ https://ksk10...]]></description><link>https://zenn.dev/sizznami/articles/f5775fb885a2f7</link><guid isPermaLink="true">https://zenn.dev/sizznami/articles/f5775fb885a2f7</guid><pubDate>Tue, 24 Sep 2024 05:46:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--XoV1f7tw--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%25B4%2594%25E7%25B2%258B%25E3%2581%25AA%25E9%259D%2599%25E7%259A%2584%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2581%25AE%25E3%2582%25B5%25E3%2582%25A4%25E3%2583%2588%25E3%2581%25A7%25E5%2585%25B1%25E9%2580%259A%25E3%2583%25AC%25E3%2582%25A4%25E3%2582%25A2%25E3%2582%25A6%25E3%2583%2588%25E3%2582%2592%25E5%25AE%259F%25E7%258F%25BE%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ksk1015%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA1YWZkZTlkZDcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ksk1015</dc:creator></item><item><title><![CDATA[React ダイアログ(モーダル)コンポーネントでも window.confirm の使い心地を実現]]></title><description><![CDATA[
+ 概要
+window.confirm はすごく便利な API です。自動で確認ダイアログを出し、ユーザーが承認またはキャンセルするまで処理を待機し、確定したら結果を教えてくれます。
+しかし実際の開発ではデザイナーさんが考えて作ってくれたデザインを実現するために window.confirm は利用せず、自前で確認ダイアログ(モーダル)を用意する、、、なんて場合も多いのではないでしょうか？
+本記事では React のダイアログコンポーネントで window.confirm のような使い心地を実現する方法(デモあり)を紹介します。
+今回は TODO アプリのタスク削除機能を想定し、タスクの...]]></description><link>https://zenn.dev/k0rosuke/articles/0ee743045a346c</link><guid isPermaLink="true">https://zenn.dev/k0rosuke/articles/0ee743045a346c</guid><pubDate>Tue, 24 Sep 2024 04:36:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--DOXM29Pz--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%2520%25E3%2583%2580%25E3%2582%25A4%25E3%2582%25A2%25E3%2583%25AD%25E3%2582%25B0%2528%25E3%2583%25A2%25E3%2583%25BC%25E3%2583%2580%25E3%2583%25AB%2529%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%259D%25E3%2583%25BC%25E3%2583%258D%25E3%2583%25B3%25E3%2583%2588%25E3%2581%25A7%25E3%2582%2582%2520window.confirm%2520%25E3%2581%25AE%25E4%25BD%25BF%25E3%2581%2584%25E5%25BF%2583%25E5%259C%25B0%25E3%2582%2592%25E5%25AE%259F%25E7%258F%25BE%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:korosuke%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFmODcxM2MxMTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>korosuke</dc:creator></item><item><title><![CDATA[semantic-release による継続的デリバリー（CD）の最適な設計を考える]]></title><description><![CDATA[
+ これはなに
+semantic-release と GitHub を使ってソフトウェアパッケージの継続的デリバリー（CD）を構築するうえで留意すべきポイントと、それらを踏まえた最適なリリースワークフローを考えるものです。
+
+ 背景情報
+一般的に Node.js といったソフトウェアパッケージのリリースプロセスには、次のバージョン番号の決定、CHANGELOGやリリースノートの生成、パッケージの公開など、多くのステップが必要です。 semantic-releaseは、Semantic Versioning（SemVer2）に基づいてこれらのリリース・プロセスを自動化するツールですが、これ...]]></description><link>https://zenn.dev/wakamsha/articles/optimal-architecture-for-cd-with-semantic-release</link><guid isPermaLink="true">https://zenn.dev/wakamsha/articles/optimal-architecture-for-cd-with-semantic-release</guid><pubDate>Tue, 24 Sep 2024 03:31:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--OavJCq0_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:semantic-release%2520%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258B%25E7%25B6%2599%25E7%25B6%259A%25E7%259A%2584%25E3%2583%2587%25E3%2583%25AA%25E3%2583%2590%25E3%2583%25AA%25E3%2583%25BC%25EF%25BC%2588CD%25EF%25BC%2589%25E3%2581%25AE%25E6%259C%2580%25E9%2581%25A9%25E3%2581%25AA%25E8%25A8%25AD%25E8%25A8%2588%25E3%2582%2592%25E8%2580%2583%25E3%2581%2588%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:wakamsha%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2psYURiOW50NGN1UTUweE54dmxHcW50Rkxsbkg1VThSWUFZOUtBakE9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>wakamsha</dc:creator></item></channel></rss>

@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Fri, 27 Sep 2024 11:35:17 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[【Python】WSL2 の ubuntuで Matplotlibを使い、画像を表示できない... X Serverの設定の問題だった]]></title><description><![CDATA[
+ 背景
+Matplotlibのimshow()を使って画像を表示するプログラムをつくっていたのですが、コマンドラインで実行した後に、いくらたっても画像は表示されませんでした。
+最初は、imshow()や、plt.show()の使い方に問題があるのかと思い、いろいろと探っていたのですが、じつは、Windowsで画像を表示するX Serverの設定自体がおかしかったことが分かりました。
+ここに気づくのに時間がかかってしまったので、反省...
+
+ 結論：X Serverの設定がおかしかった
+描画用の「X Server」はすでにインストール済みで、いままでも使用したことがあったので安心していた...]]></description><link>https://zenn.dev/hovinci/articles/a6fd59afc9040b</link><guid isPermaLink="true">https://zenn.dev/hovinci/articles/a6fd59afc9040b</guid><pubDate>Fri, 27 Sep 2024 10:06:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--11digvV6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591WSL2%2520%25E3%2581%25AE%2520ubuntu%25E3%2581%25A7%2520Matplotlib%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2584%25E3%2580%2581%25E7%2594%25BB%25E5%2583%258F%25E3%2582%2592%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%25A7%25E3%2581%258D%25E3%2581%25AA%25E3%2581%2584...%2520X%2520Serve...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%259B%25E3%2583%25B4%25E3%2582%25A3%25E3%2583%25B3%25E3%2583%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzIzYTE5NmI1NDYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ホヴィンチ</dc:creator></item><item><title><![CDATA[Pythonでのユニットテストの基本と実践（サンプルコードあり）]]></title><description><![CDATA[
+ はじめに
+Pythonでのユニットテストは、コードの品質を保つために非常に重要です。
+この記事では、基本的なユニットテストの書き方と、具体的なサンプルコードを紹介します。
+
+ ユニットテストとは？
+ユニットテストは、プログラムの最小単位である「ユニット」（関数やメソッド）が正しく動作するかを検証するテストです。これにより、バグの早期発見やコードのリファクタリング時の安心感を得ることができます。
+
+ やってみよう
+
+ 1. テスト対象のコードを作成
+まず、テスト対象のコードを作成します。ここでは、基本的な数学関数を実装した
+math_functions.py を用意します。
+math_...]]></description><link>https://zenn.dev/mstng/articles/106966d966a503</link><guid isPermaLink="true">https://zenn.dev/mstng/articles/106966d966a503</guid><pubDate>Fri, 27 Sep 2024 09:51:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4NoK1wjf--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A7%25E3%2581%25AE%25E3%2583%25A6%25E3%2583%258B%25E3%2583%2583%25E3%2583%2588%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E3%2581%25AE%25E5%259F%25BA%25E6%259C%25AC%25E3%2581%25A8%25E5%25AE%259F%25E8%25B7%25B5%25EF%25BC%2588%25E3%2582%25B5%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AB%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2581%2582%25E3%2582%258A%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mstng%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSlVrUWI4S2o0cnl1WHhNZ1FBeXJleTFmOW5JTW1iRmN6UVRzaC1YYk1udWQtNEotYkF2Zz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mstng</dc:creator></item><item><title><![CDATA[【小ネタ】Windows の位置情報 API を利用して現在地から一番近いアメダス観測所を探す]]></title><description><![CDATA[
+ 概要
+https://zenn.dev/sharl/articles/8dd5fffb369f02
+でおおよその現在地の緯度経度が取れるようになったので、現在地から一番近いアメダス観測所を探してみたいと思います。
+上記の記事から現在地の緯度経度を取得する部分をコピってきて、アメダス観測所テーブルの JSON から各観測地点の緯度経度との距離が一番近いものを取得してみます。
+
+ 現在地の緯度経度を取得
+lat, lng = getLocation()
+それぞれ十進数で返ってきます。
+
+ JSON 構造
+アメダス観測所テーブルの JSON は https://www.jma.go.jp/...]]></description><link>https://zenn.dev/sharl/articles/c79eb7e02ca33f</link><guid isPermaLink="true">https://zenn.dev/sharl/articles/c79eb7e02ca33f</guid><pubDate>Fri, 27 Sep 2024 08:36:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--honjbjB4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%25B0%258F%25E3%2583%258D%25E3%2582%25BF%25E3%2580%2591Windows%2520%25E3%2581%25AE%25E4%25BD%258D%25E7%25BD%25AE%25E6%2583%2585%25E5%25A0%25B1%2520API%2520%25E3%2582%2592%25E5%2588%25A9%25E7%2594%25A8%25E3%2581%2597%25E3%2581%25A6%25E7%258F%25BE%25E5%259C%25A8%25E5%259C%25B0%25E3%2581%258B%25E3%2582%2589%25E4%25B8%2580%25E7%2595%25AA%25E8%25BF%2591%25E3%2581%2584%25E3%2582%25A2%25E3%2583%25A1%25E3%2583%2580%25E3%2582%25B9%25E8%25A6%25B3%25E6%25B8%25AC%25E6%2589%2580%25E3%2582%2592%25E6%258E%25A2%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2597%25E3%2582%2583%25E3%2581%2582%25E3%2582%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0xuZEM2dlZRUHNRVzBHa1dpdS1DY2trTlVETnVhemF1YjlUVVRkQ3B5dHBqbTBLUXA9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>しゃある</dc:creator></item><item><title><![CDATA[現場で困らない！相手から『S3バケットはこちらで用意する、IAMはそちらで準備してarnを教えてほしい』と言われたときの対処法]]></title><description><![CDATA[
+ 自社サーバーから他社S3バケットへの安全なファイル転送
+こんにちは、CareNetのエンジニアのKYです。
+自社のサーバーから他社S3バケットにファイルを送信する際、相手からIAMユーザーのアクセスキーIDやシークレットアクセスキーを受け取り、直接送信する方法は手軽ですが、相手側のセキュリティポリシーによってそれが不可能な場合があります。
+その場合、自社のAWS IAMユーザーを使ってファイルを送信することになるのですが、その権限設定や、相手が必要とする自社IAMユーザー情報、またそれに伴う相手のバケット設定情報等を考慮する必要があります。
+本ブログでは、IAMユーザーとバケット設定...]]></description><link>https://zenn.dev/carenet/articles/e1ad4cb479e850</link><guid isPermaLink="true">https://zenn.dev/carenet/articles/e1ad4cb479e850</guid><pubDate>Fri, 27 Sep 2024 08:13:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--nfzSDmtW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%258F%25BE%25E5%25A0%25B4%25E3%2581%25A7%25E5%259B%25B0%25E3%2582%2589%25E3%2581%25AA%25E3%2581%2584%25EF%25BC%2581%25E7%259B%25B8%25E6%2589%258B%25E3%2581%258B%25E3%2582%2589%25E3%2580%258ES3%25E3%2583%2590%25E3%2582%25B1%25E3%2583%2583%25E3%2583%2588%25E3%2581%25AF%25E3%2581%2593%25E3%2581%25A1%25E3%2582%2589%25E3%2581%25A7%25E7%2594%25A8%25E6%2584%258F%25E3%2581%2599%25E3%2582%258B%25E3%2580%2581IAM%25E3%2581%25AF%25E3%2581%259D%25E3%2581%25A1%25E3%2582%2589%25E3%2581%25A7%25E6%25BA%2596%25E5%2582%2599%25E3%2581%2597%25E3%2581%25A6arn%25E3%2582%2592%25E6%2595%2599%25E3%2581%2588%25E3%2581%25A6%25E3%2581%25BB%25E3%2581%2597%25E3%2581%2584%25E3%2580%258F%25E3%2581%25A8%25E8%25A8%2580%25E3%2582%258F%25E3%2582%258C%25E3%2581%259F...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:KY%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE0MTRiZmIwZWQuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:CareNet%2520Engineers%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YU9KTVBTLWFmTWx1dHFZc2lJaU5PY3AwSVpxUUF5YjdCekRHcmI9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>KY</dc:creator></item><item><title><![CDATA[Docker+FastAPI+CatBoostで回帰モデルを手軽に構築して、評価まで行ってみた！CPU過負荷による学習停止にも対処！]]></title><description><![CDATA[
+ はじめに
+こんにちは！CareNetのYTです。
+今回はDocker+FastAPI+CatBoostを使用して、手軽に回帰モデルを構築し、評価まで行う方法をご紹介します。
+このアーキテクチャはさまざまなデータに対して汎用的に適用可能です。学習や推論を評価するためのコードや学習時に発生したコンテナクラッシュへの対応策についても内容に含めておりますので、回帰モデルを試す際の初手として、ご参考になりますと幸いです。
+なお、以下の点は本記事の対象外としておりますので、ご留意ください。
+
+特徴量を作成する前処理部分
+各技術や指標の詳細な解説
+
+
+ なぜDocker + FastAPI + C...]]></description><link>https://zenn.dev/carenet/articles/642df1c9b34e27</link><guid isPermaLink="true">https://zenn.dev/carenet/articles/642df1c9b34e27</guid><pubDate>Fri, 27 Sep 2024 07:11:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4-YDFr1C--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%252BFastAPI%252BCatBoost%25E3%2581%25A7%25E5%259B%259E%25E5%25B8%25B0%25E3%2583%25A2%25E3%2583%2587%25E3%2583%25AB%25E3%2582%2592%25E6%2589%258B%25E8%25BB%25BD%25E3%2581%25AB%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2597%25E3%2581%25A6%25E3%2580%2581%25E8%25A9%2595%25E4%25BE%25A1%25E3%2581%25BE%25E3%2581%25A7%25E8%25A1%258C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25EF%25BC%2581CPU%25E9%2581%258E%25E8%25B2%25A0%25E8%258D%25B7%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258B...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:YT%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE0MTRiZmIwZWQuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:CareNet%2520Engineers%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSkpqSGk2b3lTUUxvWFA5N1JYZVJPMXZOMnZYTHphWDdFR05QcEh3ZDJfR0FBRERBPXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>YT</dc:creator></item><item><title><![CDATA[初めてのDjango環境構築]]></title><description><![CDATA[最近CourseraのMeta Backend Developper Certificateと言うプログラムに参加しているのですが、そこでDjangoを使ってバックエンドについて学んでいます。ここでは自分のメモに近いのですが、Djangoとして最低限のWebで何か表示できるところまでをまとめています。
+なお、普段はFlutterでの開発がメインであり、バックエンドは詳しくありません。ご了承ください。
+
+ Courseraとは
+学習プラットフォームです。大学の講義などを受講できるのですが、GoogleやMeta、IBMなど企業によるものもあり、コースを終了すると修了証がもらえます。なお、内...]]></description><link>https://zenn.dev/osanaiks/articles/c7f6df0807cc52</link><guid isPermaLink="true">https://zenn.dev/osanaiks/articles/c7f6df0807cc52</guid><pubDate>Fri, 27 Sep 2024 05:49:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lKTgoHq1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2588%259D%25E3%2582%2581%25E3%2581%25A6%25E3%2581%25AEDjango%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:osanaiks%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2h5cmlKSzJlWFJyN2FIcVptOUhvUTUwTEpfS3BiX3dZVDNYVTN0eWc4PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>osanaiks</dc:creator></item><item><title><![CDATA[グラフデータベースと機械学習を用いたレコメンドシステムについて]]></title><description><![CDATA[
+ グラフデータベースと機械学習を用いたレコメンドシステムの開発と応用
+
+ 現状決定している研究内容まとめ
+
+ 1. 研究テーマ
+
+
+テーマ: グラフデータベースと機械学習を用いたレコメンドシステムの開発と応用
+
+
+ 2. 研究目的
+
+ユーザーやアイテムの関係をより正確に捉えることで、精度の高いレコメンドを実現することを目指す。
+グラフデータベースを活用し、ユーザーやアイテム間の複雑な関係を効果的にモデル化する。
+
+
+ 3. 使用する技術とツール
+
+
+グラフデータベース: Neo4j
+
+グラフ構造を用いてユーザー・アイテムの関係性を管理。
+
+
+
+プログラミング言語: Python
+
+機械...]]></description><link>https://zenn.dev/aki_paint/articles/8e9791089012ff</link><guid isPermaLink="true">https://zenn.dev/aki_paint/articles/8e9791089012ff</guid><pubDate>Fri, 27 Sep 2024 03:42:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--CIw4ci4h--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%2595%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%2599%25E3%2583%25BC%25E3%2582%25B9%25E3%2581%25A8%25E6%25A9%259F%25E6%25A2%25B0%25E5%25AD%25A6%25E7%25BF%2592%25E3%2582%2592%25E7%2594%25A8%25E3%2581%2584%25E3%2581%259F%25E3%2583%25AC%25E3%2582%25B3%25E3%2583%25A1%25E3%2583%25B3%25E3%2583%2589%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Aki_paint%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTDJLZkIwaUJ5ZVJMR09GbXZmd1FPUDZfZTZGV1JOSHVEd0ZxTnF2ZEVKeTVKNGhBPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Aki_paint</dc:creator></item><item><title><![CDATA[LangChainとNeo4jでシステム連携図を自動生成する方法（２）]]></title><description><![CDATA[
+すみません、文章が今までのトーン違うのは、ChatGPTに「技術者が楽しくなるような文章にして」というオーダーを出したためです。ご了承ください・・・
+
+ はじめに
+前回の記事では、テキストファイルの内容を「LangChain」で処理し、「Neo4j」のクエリに変換してグラフ描画を行うまでの流れを紹介しました。
+https://qiita.com/ogi_kimura/items/1e03b29bb245b553be26
+今回はさらに一歩進めて、インプットを「テキストファイル」から「画像」に変えて、どこまで精度の高い解析ができるか試してみます！
+GPTシリーズの画像認識性能には驚くべきも...]]></description><link>https://zenn.dev/ogiki/articles/841875de29fb11</link><guid isPermaLink="true">https://zenn.dev/ogiki/articles/841875de29fb11</guid><pubDate>Fri, 27 Sep 2024 02:45:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--j8JgQu2q--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:LangChain%25E3%2581%25A8Neo4j%25E3%2581%25A7%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%25E9%2580%25A3%25E6%2590%25BA%25E5%259B%25B3%25E3%2582%2592%25E8%2587%25AA%25E5%258B%2595%25E7%2594%259F%25E6%2588%2590%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%25EF%25BC%2588%25EF%25BC%2592%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%259C%25A8%25E6%259D%2591%25E3%2581%259F%25E3%2582%258D%25E3%2581%2586%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZkZjNiYWMwZmQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>木村たろう</dc:creator></item><item><title><![CDATA[LangChainとNeo4jでシステム連携図を自動生成する方法（１）]]></title><description><![CDATA[
+
+ 初めに
+社内でシステムの管理をしていると、各システムの連携を図や表で表す必要が出てくることがよくあります。しかし、人間は細かい管理には向いておらず、定期的なメンテナンスや最新化、そして統一された粒度（レベル）の管理を続けるのは非常に困難です。
+
+そんな中で、最近「Neo4j」というグラフ描画ツールの存在を知りました。「LangChain」と「Neo4j」を使って効率的にグラフを作成する記事を目にし、これが私が求めていた「システム連携図の自動生成ツール」になるのではないかと考えました。そこで今回は、「LangChain」と「Neo4j」を実際に試してみました。
+
+ 「Neo4j」と「...]]></description><link>https://zenn.dev/ogiki/articles/d99debb8fc0978</link><guid isPermaLink="true">https://zenn.dev/ogiki/articles/d99debb8fc0978</guid><pubDate>Fri, 27 Sep 2024 00:18:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--33lWrsI8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:LangChain%25E3%2581%25A8Neo4j%25E3%2581%25A7%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%25E9%2580%25A3%25E6%2590%25BA%25E5%259B%25B3%25E3%2582%2592%25E8%2587%25AA%25E5%258B%2595%25E7%2594%259F%25E6%2588%2590%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%25EF%25BC%2588%25EF%25BC%2591%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%259C%25A8%25E6%259D%2591%25E3%2581%259F%25E3%2582%258D%25E3%2581%2586%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZkZjNiYWMwZmQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>木村たろう</dc:creator></item><item><title><![CDATA[【Python】.startswith()と.endswith()はタプルも受け付ける]]></title><description><![CDATA[
+ はじめに
+Pythonの文字列操作において、.startswith()と.endswith()は非常に便利なメソッドです
+特定の文字列で始まっているか、終わっているかを判定する際に頻繁に使用されます。
+しかも、これらのメソッドはタプルを受けることが可能！
+本記事では、.startswith()と.endswith()がタプルを受け付ける具体的な使い方について、サンプルコードを交えてくわしく解説します。
+
+ .startswith()の例
+.startswith()メソッドは、文字列が特定の文字列で始まっているかどうかを判定します。
+一般的には、一つの文字列を指定しますが、タプルを渡す...]]></description><link>https://zenn.dev/hovinci/articles/00474e67d9f3db</link><guid isPermaLink="true">https://zenn.dev/hovinci/articles/00474e67d9f3db</guid><pubDate>Thu, 26 Sep 2024 12:16:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--TT5LJ-Uz--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591.startswith%2528%2529%25E3%2581%25A8.endswith%2528%2529%25E3%2581%25AF%25E3%2582%25BF%25E3%2583%2597%25E3%2583%25AB%25E3%2582%2582%25E5%258F%2597%25E3%2581%2591%25E4%25BB%2598%25E3%2581%2591%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%259B%25E3%2583%25B4%25E3%2582%25A3%25E3%2583%25B3%25E3%2583%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzIzYTE5NmI1NDYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ホヴィンチ</dc:creator></item><item><title><![CDATA[【Python】例外処理の使い分けについて：raise文、assert文、try-except文]]></title><description><![CDATA[
+ はじめに
+Pythonにおける例外処理は、プログラムの実行中に発生するエラーを適切に捕捉し、処理を継続したり、エラーの原因を特定したりするために不可欠な仕組みです。
+raise文、assert文、try-except文という3つの主要な要素がありますが、これらをどのように使い分けるべきか、混乱する方も多いのではないでしょうか。
+本記事では、これらの文法要素の役割を詳しく解説し、とくにraise文とassert文に、try-except文を使うべきかどうかという点について、具体的なコード例を交えて深堀りします。
+
+ raise文とは？
+raise文は、プログラマが意図的に例外を発生させ...]]></description><link>https://zenn.dev/hovinci/articles/3d608096c03811</link><guid isPermaLink="true">https://zenn.dev/hovinci/articles/3d608096c03811</guid><pubDate>Thu, 26 Sep 2024 06:27:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--br1C7YUs--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591%25E4%25BE%258B%25E5%25A4%2596%25E5%2587%25A6%25E7%2590%2586%25E3%2581%25AE%25E4%25BD%25BF%25E3%2581%2584%25E5%2588%2586%25E3%2581%2591%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25EF%25BC%259Araise%25E6%2596%2587%25E3%2580%2581assert%25E6%2596%2587%25E3%2580%2581try-except%25E6%2596%2587%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%259B%25E3%2583%25B4%25E3%2582%25A3%25E3%2583%25B3%25E3%2583%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzIzYTE5NmI1NDYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ホヴィンチ</dc:creator></item><item><title><![CDATA[Kivyフレームワークの特徴]]></title><description><![CDATA[
+ はじめに
+PythonにはKivy以外にも有効なGUIフレームワークが存在します。それらと比較したKivyの強味や特徴について知っておくと、GUIアプリを作成するときに開発を有利に進められそうです。この記事ではKivyの概要・特徴の紹介、そして他のGUIフレームワークとの比較をおこないます。
+
+ Kivyの概要
+Kivyは、Pythonでクロスプラットフォームのアプリケーションを開発するためのオープンソースのGUIフレームワークです。デスクトップ（Windows、Mac、Linux）だけでなく、モバイル（iOS、Android）でも動作するアプリを一つのコードベースで作成できるのが特...]]></description><link>https://zenn.dev/zenn24yykiitos/articles/c47b5a21027e31</link><guid isPermaLink="true">https://zenn.dev/zenn24yykiitos/articles/c47b5a21027e31</guid><pubDate>Thu, 26 Sep 2024 05:27:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ZBHPJokN--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Kivy%25E3%2583%2595%25E3%2583%25AC%25E3%2583%25BC%25E3%2583%25A0%25E3%2583%25AF%25E3%2583%25BC%25E3%2582%25AF%25E3%2581%25AE%25E7%2589%25B9%25E5%25BE%25B4%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:zenn_kiitos%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhkYTcwNzc1MzkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>zenn_kiitos</dc:creator></item><item><title><![CDATA[Kivyのインストールと環境設定]]></title><description><![CDATA[
+ はじめに
+Kivyは、Pythonでモバイルアプリを作成できるGUIフレームワークです。モバイル（iOS、Android）だけでなく、デスクトップ（Windows、Mac、Linux）でも動作できるアプリを１つのコードベースで開発できるのが特徴です。
+この記事は、Kivyを始めるための最初のステップとして、Kivyのインストール方法や、開発環境のセットアップ方法（Pythonのバージョン、必要なライブラリのインストール）を説明します。
+Kivyについての詳しい説明はこちら（別の記事に飛びます）
+Kivyフレームワークの特徴
+
+ Kivyのインストール
+Kivyのインストールは、Pyt...]]></description><link>https://zenn.dev/zenn24yykiitos/articles/443518e3fe0a11</link><guid isPermaLink="true">https://zenn.dev/zenn24yykiitos/articles/443518e3fe0a11</guid><pubDate>Thu, 26 Sep 2024 05:11:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--juAxHB-o--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Kivy%25E3%2581%25AE%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%25A8%25E7%2592%25B0%25E5%25A2%2583%25E8%25A8%25AD%25E5%25AE%259A%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:zenn_kiitos%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhkYTcwNzc1MzkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>zenn_kiitos</dc:creator></item><item><title><![CDATA[PydanticのJsonはそのまま使わないほうがいい]]></title><description><![CDATA[
+ 始めに
+PydanticにはJsonという便利な型があります。便利ではあるのですが、素のJson型では開発しづらい点があったので自分のアプリケーションでは拡張して使っています。
+今回の記事では何に困ったのか、どのように拡張したのかを記載します。
+
+ 環境
+
+Python
+
+3.12.4
+
+
+FastAPI
+
+0.114.2
+
+
+Pydantic
+
+2.9.1
+
+
+
+
+ ユースケース
+
+フロントで自由なデータ構造を定義してバックエンドとしては単純に保存する。また、フロントで取り出せるようにバックエンドで保存したデータ構造をフロントに返却する。
+
+
+ 困ったケース
+PydanticのJs...]]></description><link>https://zenn.dev/kirimaru/articles/5b1d7445d5d5b6</link><guid isPermaLink="true">https://zenn.dev/kirimaru/articles/5b1d7445d5d5b6</guid><pubDate>Thu, 26 Sep 2024 03:00:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--eOV8wHhk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Pydantic%25E3%2581%25AEJson%25E3%2581%25AF%25E3%2581%259D%25E3%2581%25AE%25E3%2581%25BE%25E3%2581%25BE%25E4%25BD%25BF%25E3%2582%258F%25E3%2581%25AA%25E3%2581%2584%25E3%2581%25BB%25E3%2581%2586%25E3%2581%258C%25E3%2581%2584%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258D%25E3%2582%258A%25E4%25B8%25B8%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2Rhcmsvay5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>きり丸</dc:creator></item><item><title><![CDATA[画像結合のためのアルゴリズムを考えてみた]]></title><description><![CDATA[
+ はじめに
+撮りたい対象が非常に大きい時、一枚の写真では収まりきらないケースというのはよくあります。そのような時に、複数の写真を結合して一枚の写真にしなければ、画像として視認性が低くなってしまいます。この記事では、そのようなケースに対応するための画像結合のためのアルゴリズムを考え、Pythonで実装してみました。提案アルゴリズムは、「入力画像の共通部分を事前情報なしで検出し、自動的に結合する」ことが可能です。
+作成したソースコードについてはGitHubにて公開しています。興味のある方は以下のリンクからご覧ください。
+https://github.com/C-Naoki/image-st...]]></description><link>https://zenn.dev/naoki0103/articles/image-stitcher-application</link><guid isPermaLink="true">https://zenn.dev/naoki0103/articles/image-stitcher-application</guid><pubDate>Wed, 25 Sep 2024 06:23:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4D92SXtd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%2594%25BB%25E5%2583%258F%25E7%25B5%2590%25E5%2590%2588%25E3%2581%25AE%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%25E3%2582%25A2%25E3%2583%25AB%25E3%2582%25B4%25E3%2583%25AA%25E3%2582%25BA%25E3%2583%25A0%25E3%2582%2592%25E8%2580%2583%25E3%2581%2588%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Naoki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFUWEFKeWxCWERuLXJiTnA3UzRCb0gzQldFTGh6RlNWQkxhcTIyelQzYW89czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Naoki</dc:creator></item><item><title><![CDATA[【Python】main関数の定義は、なぜ必要なのか？]]></title><description><![CDATA[
+ 背景
+現在 42Tokyo にて、Python の課題に挑戦中。
+そこで困ったのが、「main関数を含めるべきかどうか？」ということです。
+課題の要件には、「必ずmain関数を定義せよ」とあります。
+しかし Python は、main関数を定義しなくても動きます。
+課題には、指定された関数を定義すればそれで済むものも含まれており、mainが必要だとは思えませんでした。
+そして、作ったプログラムを試す用のテストプログラムがすでに用意されている場合、main関数を入れるべきなのかどうかということが分かりませんでした。
+（そのテストプログラムを実行しる際に、作ったプログラムはimportさ...]]></description><link>https://zenn.dev/hovinci/articles/21559b2ecd1233</link><guid isPermaLink="true">https://zenn.dev/hovinci/articles/21559b2ecd1233</guid><pubDate>Wed, 25 Sep 2024 05:43:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--USBH2tn8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591main%25E9%2596%25A2%25E6%2595%25B0%25E3%2581%25AE%25E5%25AE%259A%25E7%25BE%25A9%25E3%2581%25AF%25E3%2580%2581%25E3%2581%25AA%25E3%2581%259C%25E5%25BF%2585%25E8%25A6%2581%25E3%2581%25AA%25E3%2581%25AE%25E3%2581%258B%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%259B%25E3%2583%25B4%25E3%2582%25A3%25E3%2583%25B3%25E3%2583%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzIzYTE5NmI1NDYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ホヴィンチ</dc:creator></item><item><title><![CDATA[#65　Pythonで辞書型のリストをCSVファイルに出力してみた]]></title><description><![CDATA[
+ はじめに
+今回は、Pythonのcsvモジュールを使用し、辞書型のリストのデータをCSVファイルとして出力させてみました。
+CSVでのデータ出力はよく使われると思いますので、よかったら参考にしてみてください。
+
+ コード
+# csvモジュールをインポート
+import csv
+
+# 辞書型のデータ
+data = [
+    {'Name': 'Ａさん', 'Age': 25, 'City': '札幌'},
+    {'Name': 'Ｂさん', 'Age': 30, 'City': '小樽'},
+    {'Name': 'Ｃさん', 'Age': 35, 'City': '函館'}...]]></description><link>https://zenn.dev/nxted_sapporo/articles/53c9475dfa7d52</link><guid isPermaLink="true">https://zenn.dev/nxted_sapporo/articles/53c9475dfa7d52</guid><pubDate>Wed, 25 Sep 2024 04:18:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--r-I9EX3Y--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%252365%25E3%2580%2580Python%25E3%2581%25A7%25E8%25BE%259E%25E6%259B%25B8%25E5%259E%258B%25E3%2581%25AE%25E3%2583%25AA%25E3%2582%25B9%25E3%2583%2588%25E3%2582%2592CSV%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2581%25AB%25E5%2587%25BA%25E5%258A%259B%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:NXTEDCo.%252C%2520Ltd.%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBmZjQzOTVhYzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>NXTEDCo., Ltd.</dc:creator></item><item><title><![CDATA[#64　書式化演算子%とformatメソッドを比較してみた〜処理速度]]></title><description><![CDATA[
+ はじめに
+前回、予定より文量が多くなってしまったため記載できなかった実際の処理の観点から、書式化演算子％とformatメソッドを比較していきたいと思います。
+
+以前のブログで作成した処理をベースに、書式化演算子％とformatメソッドを用いたパターンに修正して、それぞれの処理速度には差があるのかを検証していきます。
+合わせて、formatメソッドをformat済み文字列リテラルにした場合についても少し触れていこうと思います。
+
+ 本記事に関連するブログ記事
+
+以前のブログ：Kibelaの記事をBacklogのWikiへ移行する〜Backlog APIを利用する
+
+前回のブログ：書式化...]]></description><link>https://zenn.dev/nxted_sapporo/articles/68d56e268755d1</link><guid isPermaLink="true">https://zenn.dev/nxted_sapporo/articles/68d56e268755d1</guid><pubDate>Wed, 25 Sep 2024 04:14:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--iZqQ21hQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%252364%25E3%2580%2580%25E6%259B%25B8%25E5%25BC%258F%25E5%258C%2596%25E6%25BC%2594%25E7%25AE%2597%25E5%25AD%2590%2525%25E3%2581%25A8format%25E3%2583%25A1%25E3%2582%25BD%25E3%2583%2583%25E3%2583%2589%25E3%2582%2592%25E6%25AF%2594%25E8%25BC%2583%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25E3%2580%259C%25E5%2587%25A6%25E7%2590%2586%25E9%2580%259F%25E5%25BA%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:NXTEDCo.%252C%2520Ltd.%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBmZjQzOTVhYzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>NXTEDCo., Ltd.</dc:creator></item><item><title><![CDATA[このブログの目的]]></title><description><![CDATA[netatmoウェザーステーションですが、やっと次の国内代理店が決まったようで、アマゾンでも正規品としての取り扱いが再開されました。
+IoT界隈で4-5年前に流行ったのでご存じの方も多いと思いますが、親機は屋内、子機は屋外(他)に設置して、それぞれの気象観測データをクラウドに記録していくものです。観測データの確認はメーカのダッシュボードから行いますが、APIで値を得ることも可能です。
+アマゾンの評価は2024年9月25日現在★3.3と低めですが、私のところにあるものは設置から7年が過ぎており、その間故障をすること無く粛々と記録してくれてます(親機子機に限れば、可動部分は無いので・・)。
+...]]></description><link>https://zenn.dev/hatorin/articles/ca009279304eb3</link><guid isPermaLink="true">https://zenn.dev/hatorin/articles/ca009279304eb3</guid><pubDate>Wed, 25 Sep 2024 04:00:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6stjmHIs--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%2593%25E3%2581%25AE%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%25E3%2581%25AE%25E7%259B%25AE%25E7%259A%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AF%25E3%2581%25A8%25E3%2582%258A%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q5MGY5MWM5OWQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>はとりん</dc:creator></item><item><title><![CDATA[文字検索]]></title><description><![CDATA[
+ はじめに
+文字検索のプログラミング課題を解きました
+
+ 問題
+
+不要な広告メールばかりで、重要なメールを見逃しがちなあなたは、特定のワード S がタイトルに含ま&gt;れるメールを全て広告と判定して、自動で削除することにしました。
+
+
+広告と判定するワード S と、N 件のメールのタイトルが与えられるので、それぞれのメールについて、広告と判定されるときは Yes と、そうでないときは No と出力するプログラムを作成してください。広告と判定するワードが含まれているかの判定では、大文字と小文字を区別してください。
+
+
+広告と判定されるワードは英数字からなりますが、メールタイトルには英数...]]></description><link>https://zenn.dev/nogizakapython/articles/d33c98508f889a</link><guid isPermaLink="true">https://zenn.dev/nogizakapython/articles/d33c98508f889a</guid><pubDate>Wed, 25 Sep 2024 03:50:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--j-XsxYSl--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:%25E6%2596%2587%25E5%25AD%2597%25E6%25A4%259C%25E7%25B4%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E4%25B9%2583%25E6%259C%25A8%25E5%259D%2582%25E5%25A5%25BD%25E3%2581%258D%25E3%2581%25AEIT%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2UzYWU0ZjI1OWYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>乃木坂好きのITエンジニア</dc:creator></item></channel></rss>
