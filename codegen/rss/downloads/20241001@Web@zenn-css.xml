@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「CSS」のフィード]]></title><description><![CDATA[Zennのトピック「CSS」のRSSフィードです]]></description><link>https://zenn.dev/topics/css</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/094a9b2a18.png</url><title>Zennの「CSS」のフィード</title><link>https://zenn.dev/topics/css</link></image><generator>zenn.dev</generator><lastBuildDate>Tue, 01 Oct 2024 00:12:35 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/css/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[[TailwindCSS]グリッドレイアウトで行頭を美しく整える]]></title><description><![CDATA[
+ はじめに
+今回は、Tailwind CSSを使って、要素が不揃いだったレイアウトを整然とした美しいデザインに改善する方法を紹介します。記事の流れとして、まず初めに改善前のコードを見ていただき、その後、どのようにして現在のコードに改善していったのかを解説していきます。
+
+ 改善前のコード
+まず、こちらが改善前のコードです。このコードでは、項目名とその内容がバラバラに表示されており、統一感がありませんでした。
+
+TypeScript
+import React from "react";
+
+const LegalNotice = () =&gt; {
+  return (
+    &lt;...]]></description><link>https://zenn.dev/haruki1009/articles/bd7bac7a117234</link><guid isPermaLink="true">https://zenn.dev/haruki1009/articles/bd7bac7a117234</guid><pubDate>Mon, 30 Sep 2024 05:38:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ZSc3M2UQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BTailwindCSS%255D%25E3%2582%25B0%25E3%2583%25AA%25E3%2583%2583%25E3%2583%2589%25E3%2583%25AC%25E3%2582%25A4%25E3%2582%25A2%25E3%2582%25A6%25E3%2583%2588%25E3%2581%25A7%25E8%25A1%258C%25E9%25A0%25AD%25E3%2582%2592%25E7%25BE%258E%25E3%2581%2597%25E3%2581%258F%25E6%2595%25B4%25E3%2581%2588%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Haruki%2520Inoue%2520%257C%2520Not...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI5MGI2YjhmZWQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Haruki Inoue | Notionキャンパスリーダー</dc:creator></item><item><title><![CDATA[Webの印刷ダイアログ周り知識まとめ]]></title><description><![CDATA[仕事で、javascriptのwindow.print()を使う機会がありました
+そこら辺周りの知識がすっぽりなかったので、色々調べた自分用備忘録です
+
+ window.print()とは
+Web画面に表示されているものを印刷するために、印刷ダイアログを開きます
+windowは省略可能なので、print()だけでも動きます
+サンプルコード
+&lt;button type="button" id="sample"&gt;印刷する&lt;/button&gt;
+&lt;div&gt;
+&lt;h1&gt;サンプル報告書&lt;/h1&gt;
+&lt;h2&gt;サンプル項目1&lt;/h2&...]]></description><link>https://zenn.dev/find/articles/1f80d376afce04</link><guid isPermaLink="true">https://zenn.dev/find/articles/1f80d376afce04</guid><pubDate>Sun, 29 Sep 2024 10:21:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dgsDmQjC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Web%25E3%2581%25AE%25E5%258D%25B0%25E5%2588%25B7%25E3%2583%2580%25E3%2582%25A4%25E3%2582%25A2%25E3%2583%25AD%25E3%2582%25B0%25E5%2591%25A8%25E3%2582%258A%25E7%259F%25A5%25E8%25AD%2598%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2583%2594%25E3%2583%2583%25E3%2582%25AF%25E3%2583%25AB%25E5%25BD%25A9%25E4%25B9%2583%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U1ODc5ZGEzMTcuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BEfind%2520%257C%2520%25E8%2590%25BD%25E3%2581%25A8%25E3%2581%2597%25E7%2589%25A9%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25A6%25E3%2583%2589%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFhNTRmNDRjMjIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ピックル彩乃</dc:creator></item><item><title><![CDATA[HTMLのselect要素がCSSでカスタマイズ可能になる]]></title><description><![CDATA[
+ select 要素がカスタマイズできるようになる
+これまで HTML の&lt;select&gt;要素はカスタマイズが難しい部分でした。各ブラウザのデフォルトスタイルに依存しデザインや機能を統一するのが困難でした。かといってオリジナルのセレクトボックスを作成するとなると CSS と JavaScript でイチから作成する必要がありました。
+しかし今後、HTML ネイティブの&lt;select&gt;要素に柔軟にスタイルを加えることができるようになるようです。イチから作成したセレクトボックスをネイティブのselect要素と同等レベルでアクセシビリティやパフォーマンスに配慮して、各...]]></description><link>https://zenn.dev/h_yokoyama/articles/html-select-style</link><guid isPermaLink="true">https://zenn.dev/h_yokoyama/articles/html-select-style</guid><pubDate>Sun, 29 Sep 2024 04:25:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Q8nwMhtj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:HTML%25E3%2581%25AEselect%25E8%25A6%2581%25E7%25B4%25A0%25E3%2581%258CCSS%25E3%2581%25A7%25E3%2582%25AB%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%259E%25E3%2582%25A4%25E3%2582%25BA%25E5%258F%25AF%25E8%2583%25BD%25E3%2581%25AB%25E3%2581%25AA%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Hayato%2520Yokoyama%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFiNDg0ZTcyMTUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Hayato Yokoyama</dc:creator></item><item><title><![CDATA[VueのTransitionタグを理解する]]></title><description><![CDATA[Vueには、CSSのtransitionプロパティを制御する&lt;Transition&gt;タグがあります。この&lt;Transition&gt;タグの使い方と、代替となるTailwindを使った書き方を見ていきます。
+
+ CSSのtransitionプロパティとは
+要素のフェードイン/アウト、スライドイン/アウトなど、単純なアニメーションの記述に使用できるプロパティ。CSSのあるパラメータが動的に変化するとき（要素の表示/非表示切り替えや、hover時の背景色の変化など）に、その変化を補完するアニメーションを記述するものです。
+
+ opacityが動的に変化する例（トランジション...]]></description><link>https://zenn.dev/find/articles/f748dcaabacd79</link><guid isPermaLink="true">https://zenn.dev/find/articles/f748dcaabacd79</guid><pubDate>Sat, 28 Sep 2024 09:57:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Lg-66Jlz--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Vue%25E3%2581%25AETransition%25E3%2582%25BF%25E3%2582%25B0%25E3%2582%2592%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%25BF%25E3%2582%2584%25E3%2581%2597%25E3%2583%25BC%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U1ODc5ZGEzMTcuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BEfind%2520%257C%2520%25E8%2590%25BD%25E3%2581%25A8%25E3%2581%2597%25E7%2589%25A9%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25A6%25E3%2583%2589%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2IyYmM0ODA2MjYuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>みやしー</dc:creator></item><item><title><![CDATA[ノンデザイナーが色を選ぶとき]]></title><description><![CDATA[エンジニアが「管理画面作っておいてよ、デザインはないけど」と言われたときや「自分のウェブサイトを作りたいなあ」と思ったとき、デザイナーではないけど色を選ばないといけない。
+しかし、色選びというのはロジカルなデザインの中でもセンスに依存しやすい領域。
+「センスには自信がないけれども、ロジックには自信があるからエンジニアをやってるぜ！」という僕のような人間は毎回困ってしまうのである。
+しかし、色選びがセンスに依存しやすいとはいえ、ロジックで決められる部分も多くあるので、そのへんについて書いておきたい。
+
+ プライマリーカラー（テーマカラー）の色相
+実行ボタンやリンクの色としてなど採用されるこ...]]></description><link>https://zenn.dev/15/articles/50448b3c8cd68b</link><guid isPermaLink="true">https://zenn.dev/15/articles/50448b3c8cd68b</guid><pubDate>Sat, 28 Sep 2024 06:47:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--j9B2en86--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%258E%25E3%2583%25B3%25E3%2583%2587%25E3%2582%25B6%25E3%2582%25A4%25E3%2583%258A%25E3%2583%25BC%25E3%2581%258C%25E8%2589%25B2%25E3%2582%2592%25E9%2581%25B8%25E3%2581%25B6%25E3%2581%25A8%25E3%2581%258D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:15%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lCd2p5Q0htOUYzcmF6SW9SNU1jcXVidDc1cFdBUzdlQlRJYnpiYWc9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>15</dc:creator></item><item><title><![CDATA[CSSとBootstrapとTailwindCSSの違い]]></title><description><![CDATA[CSSとBootstrap、そしてTailwind CSSは、ウェブサイトやウェブアプリケーションの見た目やレイアウトをデザインするための技術やフレームワークです。しかし、それぞれに特徴や使い方の違いがあります。以下に、それぞれの概要と簡単なコード例を交えながら説明します。
+
+ 1. CSS（Cascading Style Sheets）
+
+ 概要：
+CSSはウェブページのスタイルを定義するための基本的なスタイルシート言語です。HTML要素に対して色、フォント、レイアウトなどのデザインを指定するために使用されます。
+
+ 特徴：
+
+
+基本的なスタイル定義：ウェブデザインの基礎となる。
+
+柔...]]></description><link>https://zenn.dev/sousquared/articles/a029dcc7e2cd41</link><guid isPermaLink="true">https://zenn.dev/sousquared/articles/a029dcc7e2cd41</guid><pubDate>Sat, 28 Sep 2024 06:18:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3KvPVfBe--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:CSS%25E3%2581%25A8Bootstrap%25E3%2581%25A8TailwindCSS%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:sousquared%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lXYTF2cDBWNTdEM3hXUExZZ0puLTIyaHZ4U0pEQWxPbzFpX1h2PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sousquared</dc:creator></item><item><title><![CDATA[リンクの未訪問と訪問済みを表す技術]]></title><description><![CDATA[ヤコブ・ニールセン博士が 2004 年に言っているように、未訪問のリンクと訪問済みのリンクは色などで違いがわかると嬉しい。
+https://u-site.jp/alertbox/20040503
+とはいえ、デフォルトの :link と :visited の色をそのまま使うとサイトの雰囲気に合わないことがあるので色々変えてみたい
+
+ ブラウザデフォルト
+多少の明度や彩度の調整をして使われることもある。
+
+
+ underline なし
+Google の検索結果のタイトル部分などで使われているパターン。
+リンクであることは文脈でほぼ明示的だが、テキストカラーとは区別をつけたいというような場合。...]]></description><link>https://zenn.dev/15/articles/1d21eba86ae1ff</link><guid isPermaLink="true">https://zenn.dev/15/articles/1d21eba86ae1ff</guid><pubDate>Fri, 27 Sep 2024 11:44:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--M1IE9wNZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%25AA%25E3%2583%25B3%25E3%2582%25AF%25E3%2581%25AE%25E6%259C%25AA%25E8%25A8%25AA%25E5%2595%258F%25E3%2581%25A8%25E8%25A8%25AA%25E5%2595%258F%25E6%25B8%2588%25E3%2581%25BF%25E3%2582%2592%25E8%25A1%25A8%25E3%2581%2599%25E6%258A%2580%25E8%25A1%2593%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:15%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lCd2p5Q0htOUYzcmF6SW9SNU1jcXVidDc1cFdBUzdlQlRJYnpiYWc9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>15</dc:creator></item><item><title><![CDATA[CSS Anchor Positioning 仕様の紹介]]></title><description><![CDATA[CSS Anchor Positioning は、要素の配置を制御する新しい仕様で、指定した要素（アンカー要素）の位置を基準に、要素を配置できます。
+ポップオーバーやツールチップ、トーストなどをはじめとした、さまざまな UI コンポーネントの実装に利用できます。
+特に CSS Anchor Positioning による要素の配置には、「配置する要素が表示領域に収まらない場合の挙動を制御できる」「Popover API などによって Top Layer に配置される要素であっても、アンカー要素を基準にその位置を制御できる」といった特徴があります。
+これまでは、JavaScript を用い...]]></description><link>https://zenn.dev/d_kawaguchi/articles/css-anchor-positioning-294aa71a7f77fc</link><guid isPermaLink="true">https://zenn.dev/d_kawaguchi/articles/css-anchor-positioning-294aa71a7f77fc</guid><pubDate>Thu, 26 Sep 2024 07:30:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--zHbMNk6d--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:CSS%2520Anchor%2520Positioning%2520%25E4%25BB%2595%25E6%25A7%2598%25E3%2581%25AE%25E7%25B4%25B9%25E4%25BB%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:d-kawaguchi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzliMjUzZTlmOTQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>d-kawaguchi</dc:creator></item><item><title><![CDATA[CSS設計初心者がBEMを使ってみて、理解しておいた方が良いと思ったところ、こうしていれば良かったかもしれないところ]]></title><description><![CDATA[CSS設計をやったことがない私がBEMを実際プロジェクトで使ってみて、こういう場合どうすれば良いの？と迷ったところが何点かあり、その経験をもとにBEMにおいて理解しておいた方が良いと思ったところをBEMの公式を確認しながらまとめます。
+また、実際使ってみてこうした方が良かったかもしれない点についても述べたいと思います。
+BEMを採用するに当たってBEMの記事をいろいろ読みましたが、おれおれBEMのような内容の記事も多いことから考えると、BEMそのもののメリットは大きいのでBEMのルールをベースにしつつ、厳密にやろうとすると不便に感じるところがあるので別のルールも追加するみたいな感じかと思...]]></description><link>https://zenn.dev/unkeleven/articles/e8973e8c4a377e</link><guid isPermaLink="true">https://zenn.dev/unkeleven/articles/e8973e8c4a377e</guid><pubDate>Thu, 26 Sep 2024 01:48:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--k1WwNmGO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:CSS%25E8%25A8%25AD%25E8%25A8%2588%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E3%2581%258CBEM%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%25A6%25E3%2580%2581%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2597%25E3%2581%25A6%25E3%2581%258A%25E3%2581%2584%25E3%2581%259F%25E6%2596%25B9%25E3%2581%258C%25E8%2589%25AF%25E3%2581%2584%25E3%2581%25A8%25E6%2580%259D%25E3%2581%25A3%25E3%2581%259F%25E3%2581%25A8%25E3%2581%2593%25E3%2582%258D%25E3%2580%2581%25E3%2581%2593%25E3%2581%2586%25E3%2581%2597%25E3%2581%25A6%25E3%2581%2584%25E3%2582%258C%25E3%2581%25B0%25E8%2589%25AF%25E3%2581%258B%25E3%2581%25A3%25E3%2581%259F%25E3%2581%258B%25E3%2582%2582%25E3%2581%2597%25E3%2582%258C%25E3%2581%25AA%25E3%2581%2584%25E3%2581%25A8%25E3%2581%2593%25E3%2582%258D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:unk%2520eleven%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFlNWI0NGI3MzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>unk eleven</dc:creator></item><item><title><![CDATA[absoluteを使わない中央寄せ]]></title><description><![CDATA[
+要素を中央寄せするとき、これまでは親要素にposition: relative;をしてposition:absolute;で位置を指定していました。
+これまで通りabsoluteを使って中央寄せをしてもいいのですが、もっと簡単な書き方がないのか探したところgridを使うと実現できそうなので試してみました。以下のようなメリットがあります。
+
+親要素のことを考えなくて良い
+absoluteにすると要素の高さが消えるが、gridなら消えない
+absoluteよりも短い記述で中央寄せを実装できる
+
+
+ display:gridで中央寄せ
+結論のコードです。
+このあと解説をしています。
+    ...]]></description><link>https://zenn.dev/928sekine/articles/2c11704aef149d</link><guid isPermaLink="true">https://zenn.dev/928sekine/articles/2c11704aef149d</guid><pubDate>Wed, 25 Sep 2024 11:38:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2QEu6vGG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:absolute%25E3%2582%2592%25E4%25BD%25BF%25E3%2582%258F%25E3%2581%25AA%25E3%2581%2584%25E4%25B8%25AD%25E5%25A4%25AE%25E5%25AF%2584%25E3%2581%259B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259B%25E3%2581%258D%25E3%2581%25AD%25E3%2582%258A%25E3%2581%25AA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAyNDQ3MGIzZjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>せきねりな</dc:creator></item><item><title><![CDATA[CSS変数で柔軟なマージン設定を実現しよう]]></title><description><![CDATA[要素（またはコンポーネント）自体にはマージンを持たせたくないですよね。要素が自身にマージンを持っていると他の場所で再利用した際に予期しない余白が生じレイアウトの調整が難しくなるからです。
+しかし、状況に応じて各要素に異なるマージンを適用したい場合も多くあります。
+この記事では要素自体にマージンを持たせず柔軟にマージンを設定する方法をご紹介します。
+
+ フクロウセレクタを使った基本的なマージン設定
+フクロウセレクタ* + *を使用して、兄弟要素間のマージンを統一的に管理します。
+* + * {
+  margin-top: var(--_spacer, 50px);
+}
+
+
+* + *は任意...]]></description><link>https://zenn.dev/dumbledore/articles/5d15016a7e3aff</link><guid isPermaLink="true">https://zenn.dev/dumbledore/articles/5d15016a7e3aff</guid><pubDate>Wed, 25 Sep 2024 05:07:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--eckGAyN8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:CSS%25E5%25A4%2589%25E6%2595%25B0%25E3%2581%25A7%25E6%259F%2594%25E8%25BB%259F%25E3%2581%25AA%25E3%2583%259E%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%25B3%25E8%25A8%25AD%25E5%25AE%259A%25E3%2582%2592%25E5%25AE%259F%25E7%258F%25BE%25E3%2581%2597%25E3%2582%2588%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%25B3%25A2%25E8%25A1%2597%25E7%2594%25BA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I3N2NhOTE1OWIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>波街町</dc:creator></item><item><title><![CDATA[[react calendar] カレンダーを使って予約機能を作ろう＿１]]></title><description><![CDATA[韓国のIT教室に通い始めて３ヶ月が経った。
+そして、みんなが心配していたチームプロジェクトが始まった。
+第１プロゼクトのテーマは「リアルタイムで病院の予約システムを作る」
+そこで私はメインの機能である予約ページを担当することになった。
+この３ヶ月間で習ったこと以外のものを調べて作り上げなきゃいけなくなった。
+最初はどんなページにすればいいのか頭に浮かばなくてボッとしていたが、とりあえずカレンダーが必要なのではないかと気づいた。
+カレンダーを作ったこのは一度もなく、とりあえず「react calendar」と検索してみたらそのままのライブラリーが出てきた。
+ライブラリーを使ったこともない。...]]></description><link>https://zenn.dev/hyoni/articles/2ff9d50b3a0a6e</link><guid isPermaLink="true">https://zenn.dev/hyoni/articles/2ff9d50b3a0a6e</guid><pubDate>Tue, 24 Sep 2024 13:55:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--W_9xvjLa--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255Breact%2520calendar%255D%2520%25E3%2582%25AB%25E3%2583%25AC%25E3%2583%25B3%25E3%2583%2580%25E3%2583%25BC%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E4%25BA%2588%25E7%25B4%2584%25E6%25A9%259F%25E8%2583%25BD%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258D%25E3%2581%2586%25EF%25BC%25BF%25EF%25BC%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%2592%25E3%2583%25A7%25E3%2583%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0sxdWxlU2pkSzlwbDVxZnp3QVlUcFhCNk9xUEhkZGpKWjRUVlRPTl9lMHdYODhLdkg9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ヒョニ</dc:creator></item><item><title><![CDATA[[JavaScript] チェックボックスによるボタンの活性/非活性の切り替え]]></title><description><![CDATA[
+ はじめに
+この記事では、Webサイトの「利用規約への同意」等で使用される、チェックボックスによるボタンの活性/非活性の切り替えのJavaScriptでの実装方法をまとめていきます。
+
+ 1. HTMLファイルの編集
+&lt;input type="checkbox" id="agreement-check"&gt;
+&lt;label for="agreement-check"&gt;&lt;a href="#" target="_brank"&gt;利用規約&lt;/a&gt;に同意する&lt;/label&gt;
+&lt;button type="submit" value="登...]]></description><link>https://zenn.dev/aew2sbee/articles/javascript-checkbox</link><guid isPermaLink="true">https://zenn.dev/aew2sbee/articles/javascript-checkbox</guid><pubDate>Sun, 22 Sep 2024 13:11:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--PqQMyY6l--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BJavaScript%255D%2520%25E3%2583%2581%25E3%2582%25A7%25E3%2583%2583%25E3%2582%25AF%25E3%2583%259C%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25B9%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258B%25E3%2583%259C%25E3%2582%25BF%25E3%2583%25B3%25E3%2581%25AE%25E6%25B4%25BB%25E6%2580%25A7%252F%25E9%259D%259E%25E6%25B4%25BB%25E6%2580%25A7%25E3%2581%25AE%25E5%2588%2587%25E3%2582%258A%25E6%259B%25BF%25E3%2581%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25B5%25E3%2582%258B%25E3%2581%259F%2520%25E3%2581%25AA%25E3%2581%258A%25E3%2581%258D%2520%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YTFYdHhmWGZPVmpKek9sTnQ0cDZmaWQyeENLMTlKOEl0akpQczZiZz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ふるた なおき🥝</dc:creator></item><item><title><![CDATA[Firefox で Chrome のように、オーディオ再生中に元アイコンが表示されるようにする]]></title><description><![CDATA[
+ Caution
+※ 以下の文章はリンクの要約
+・リンク：https://chatgpt.com/share/66efc32a-3b28-8003-a57d-de70af5b9dd4
+・また、Chromeと同じく、スピーカーアイコンを一番右に行かせたかったですが、上手くいきませんでした
+・そのため、横に出してます
+・loading時、重なって表示されてしまいます
+
+ やり方
+・カスタムCSSを使う
+・Firefoxでは、カスタムCSSを使ってタブやそのアイコンの見た目を変えられる
+
+以下にアクセスし、 プロファイルフォルダー を開く（about:support内でプロファイルフォルダー...]]></description><link>https://zenn.dev/naimonon77/articles/f269e91ca20614</link><guid isPermaLink="true">https://zenn.dev/naimonon77/articles/f269e91ca20614</guid><pubDate>Sun, 22 Sep 2024 08:12:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--NJ5XRjdV--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Firefox%2520%25E3%2581%25A7%2520Chrome%2520%25E3%2581%25AE%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E3%2580%2581%25E3%2582%25AA%25E3%2583%25BC%25E3%2583%2587%25E3%2582%25A3%25E3%2582%25AA%25E5%2586%258D%25E7%2594%259F%25E4%25B8%25AD%25E3%2581%25AB%25E5%2585%2583%25E3%2582%25A2%25E3%2582%25A4%25E3%2582%25B3%25E3%2583%25B3%25E3%2581%258C%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2595%25E3%2582%258C%25E3%2582%258B%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:naimonon77%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS3FTaG9Dd3IweTFWblBjMk4zQ2lXZ3ZSWTJkTHJoR2tpMGEwcFpxdEtKMXBJPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>naimonon77</dc:creator></item><item><title><![CDATA[[JavaScript] 一文字ずつ時間差で表示するアニメーション]]></title><description><![CDATA[
+ はじめに
+この記事では、Webページ上でテキストを一文字ずつ表示するアニメーションの実装方法をまとめます。
+
+ 結論
+JavaScriptによって指定した要素を一文字ずつspanで囲い、styleを変更(opacityの値を0→1に)することで、一文字ずつ表示するアニメーションを実装しました。
+この記事では、Webページ上でテキストを一文字ずつ表示するアニメーションの実装方法をまとめます。
+
+ やり方
+
+ 1. HTMLファイルの編集
+&lt;div&gt;
+    &lt;p class="js-text"&gt;Welcome to TECHLOG.&lt;/p&gt;
+&lt;...]]></description><link>https://zenn.dev/aew2sbee/articles/javascript-timelag-animation</link><guid isPermaLink="true">https://zenn.dev/aew2sbee/articles/javascript-timelag-animation</guid><pubDate>Sat, 21 Sep 2024 11:24:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--k6e_n-5t--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BJavaScript%255D%2520%25E4%25B8%2580%25E6%2596%2587%25E5%25AD%2597%25E3%2581%259A%25E3%2581%25A4%25E6%2599%2582%25E9%2596%2593%25E5%25B7%25AE%25E3%2581%25A7%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2599%25E3%2582%258B%25E3%2582%25A2%25E3%2583%258B%25E3%2583%25A1%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25B5%25E3%2582%258B%25E3%2581%259F%2520%25E3%2581%25AA%25E3%2581%258A%25E3%2581%258D%2520%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YTFYdHhmWGZPVmpKek9sTnQ0cDZmaWQyeENLMTlKOEl0akpQczZiZz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ふるた なおき🥝</dc:creator></item><item><title><![CDATA[Normalize.css と modern-normalize の差分比較まとめ]]></title><description><![CDATA[
+ はじめに
+人気のノーマライズCSSである Normalize.css とそれを参考に作られた modern-normalize の差分が気になったのでまとめました。
+早く差分を見たい方はこちら
+
+ ノーマライズCSSとは
+ChromeやFirefoxなど異なるブラウザ間でのデフォルトスタイルの差異を解消し、一貫した表示を実現するためのCSSです。これを使用することで、HTML要素がどのブラウザでも同じように表示されるようになり、ブラウザごとのスタイルの違いに悩まされることがなくなります。
+
+ Normalize.css とは
+Normalize.cssは、現在様々なWebサイトで使用...]]></description><link>https://zenn.dev/kg98ztd/articles/60725049c54ad7</link><guid isPermaLink="true">https://zenn.dev/kg98ztd/articles/60725049c54ad7</guid><pubDate>Sat, 21 Sep 2024 11:00:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--OpWXyKr8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Normalize.css%2520%25E3%2581%25A8%2520modern-normalize%2520%25E3%2581%25AE%25E5%25B7%25AE%25E5%2588%2586%25E6%25AF%2594%25E8%25BC%2583%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259F%25E3%2581%259F%25E3%2581%259F%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2IzYjQxMzMzN2YuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>たたた</dc:creator></item><item><title><![CDATA[modern-normalize と tailwindcss Preflight の差分比較まとめ]]></title><description><![CDATA[
+ はじめに
+modern-normalize のルールを独自で拡張していたところ、既に拡張されている tailwindcss Preflight（以下、Preflight）を見つけ、差分が気になったのでまとめました。
+早く差分を見たい方はこちら
+
+ ノーマライズCSSとは
+ChromeやFirefoxなど異なるブラウザ間でのデフォルトスタイルの差異を解消し、一貫した表示を実現するためのCSSです。これを使用することで、HTML要素がどのブラウザでも同じように表示されるようになり、ブラウザごとのスタイルの違いに悩まされることがなくなります。
+
+ modern-normalize とは
+m...]]></description><link>https://zenn.dev/kg98ztd/articles/11e58c6b765e18</link><guid isPermaLink="true">https://zenn.dev/kg98ztd/articles/11e58c6b765e18</guid><pubDate>Sat, 21 Sep 2024 08:55:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lQENLOe0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:modern-normalize%2520%25E3%2581%25A8%2520tailwindcss%2520Preflight%2520%25E3%2581%25AE%25E5%25B7%25AE%25E5%2588%2586%25E6%25AF%2594%25E8%25BC%2583%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259F%25E3%2581%259F%25E3%2581%259F%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2IzYjQxMzMzN2YuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>たたた</dc:creator></item><item><title><![CDATA[フローティングバナーの作り方]]></title><description><![CDATA[サイトの下部に、追従してくるバナーを見たことはありませんか。
+フローティングバナーなどと呼ばれているこの要素は、とても少ない JavaScript で実装できます。
+
+ コード
+
+
+ HTML
+close-buttonの中にあるspanで×印を作っています。
+&lt;div class="l-container"&gt;
+  &lt;div class="floating-banner"&gt;
+    &lt;div class="floating-banner__inner"&gt;
+      &lt;img class="ebi" src="./img/ebi.png" alt=...]]></description><link>https://zenn.dev/928sekine/articles/8bf94df6de6b68</link><guid isPermaLink="true">https://zenn.dev/928sekine/articles/8bf94df6de6b68</guid><pubDate>Sat, 21 Sep 2024 03:31:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--AQ8pScfM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2595%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2586%25E3%2582%25A3%25E3%2583%25B3%25E3%2582%25B0%25E3%2583%2590%25E3%2583%258A%25E3%2583%25BC%25E3%2581%25AE%25E4%25BD%259C%25E3%2582%258A%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259B%25E3%2581%258D%25E3%2581%25AD%25E3%2582%258A%25E3%2581%25AA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAyNDQ3MGIzZjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>せきねりな</dc:creator></item><item><title><![CDATA[文字間を自動で詰めるCSS]]></title><description><![CDATA[イラレやフォトショでデザインをするとき、文字間を調整して見栄えをよくする作業を「カーニング」と呼びます。
+紙のデザインをするときには当たり前の作業ですが、Web でもカーニングができたらいいのにと思ったことはありませんか？
+CSS に 1 行追加するだけで、文字間を整えられます。
+
+p {
+  font-feature-settings: "palt";
+}
+
+ 約物類を半角にする
+約物とは、句読点や疑問符、かっこなどを指します。
+これらのみ半角にして文字を詰めたいときはfont-feature-settings: "halt"を使います。
+
+
+ font-feature-setting...]]></description><link>https://zenn.dev/928sekine/articles/b6be7eeee0248b</link><guid isPermaLink="true">https://zenn.dev/928sekine/articles/b6be7eeee0248b</guid><pubDate>Fri, 20 Sep 2024 10:23:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jYGeyWoG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%2596%2587%25E5%25AD%2597%25E9%2596%2593%25E3%2582%2592%25E8%2587%25AA%25E5%258B%2595%25E3%2581%25A7%25E8%25A9%25B0%25E3%2582%2581%25E3%2582%258BCSS%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259B%25E3%2581%258D%25E3%2581%25AD%25E3%2582%258A%25E3%2581%25AA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAyNDQ3MGIzZjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>せきねりな</dc:creator></item><item><title><![CDATA[css / scss + と ~ について]]></title><description><![CDATA[
+ はじめに
+いまさらcssの隣接兄弟結合子､一般兄弟結合子について知りました｡
+css +　や css ~ と検索してもヒットしなかったので投稿します。
+
+ +（隣接兄弟結合子）
+ある要素に続くすぐ次の兄弟要素を選択するときに使います。記号は + で表されます。
+最初の &lt;p&gt; 要素に続く2つ目以降の &lt;p&gt; 要素だけにスタイルを適用しています。
+&lt;article&gt;
+    &lt;h1&gt;こんにちは&lt;/h1&gt;
+    &lt;p&gt;hoge&lt;/p&gt;
+    &lt;p&gt;fuga&lt;/p&gt;
+    &l...]]></description><link>https://zenn.dev/imael/articles/3eca753e62e9e8</link><guid isPermaLink="true">https://zenn.dev/imael/articles/3eca753e62e9e8</guid><pubDate>Fri, 20 Sep 2024 00:08:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--XmY_Wsbr--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:css%2520%252F%2520scss%2520%252B%2520%25E3%2581%25A8%2520%7E%2520%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Imael%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc2ZDEwYmI1Y2YuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Imael</dc:creator></item></channel></rss>
