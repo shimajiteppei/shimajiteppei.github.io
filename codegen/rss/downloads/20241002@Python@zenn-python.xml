@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Wed, 02 Oct 2024 11:48:43 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Safetensors のヘッダーを読む]]></title><description><![CDATA[
+ Safetensors とは
+Safetensors は HuggingFace が開発している、主にテンソルを安全・高速に読み書きできるファイルフォーマットと、それを扱うためのライブラリです。
+https://github.com/huggingface/safetensors
+提供されている Python ライブラリでは、PyTorch や Tensorflow などとの互換性があるほか、pickle 形式のような任意のコードを実行する機能がなく比較的安全なため、最近の深層学習系のモデルはこの形式で配布されることが多くなりました。
+
+ 構造
+
+Safetensorsのファイル構造...]]></description><link>https://zenn.dev/platina/articles/e65c73cb01a900</link><guid isPermaLink="true">https://zenn.dev/platina/articles/e65c73cb01a900</guid><pubDate>Wed, 02 Oct 2024 11:24:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--CIGmC82I--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Safetensors%2520%25E3%2581%25AE%25E3%2583%2598%25E3%2583%2583%25E3%2583%2580%25E3%2583%25BC%25E3%2582%2592%25E8%25AA%25AD%25E3%2582%2580%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Plat%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk0MWUzM2RiMjguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Plat</dc:creator></item><item><title><![CDATA[LangGraphにおけるStateの分割方法]]></title><description><![CDATA[
+ はじめに
+こんにちは。PharmaXでエンジニアをしている諸岡（@hakoten）です。
+今回は、LLMアプリケーション開発をサポートするグラフ管理ツールであるLangGraphのStateの管理方法について、いくつかの事例を交えながらご紹介します。
+なお、LangGraphそのものの使い方に興味のある方は、こちらの記事もぜひご参照ください。
+https://zenn.dev/pharmax/articles/8796b892eed183
+
+ 環境
+この記事執筆時点では、以下のバージョンで実施しています。
+とくにLangChain周りは非常に開発速度が早いため、現在の最新バージョンを...]]></description><link>https://zenn.dev/pharmax/articles/a9b9762c2c384e</link><guid isPermaLink="true">https://zenn.dev/pharmax/articles/a9b9762c2c384e</guid><pubDate>Wed, 02 Oct 2024 07:37:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--CE2Tjikk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:LangGraph%25E3%2581%25AB%25E3%2581%258A%25E3%2581%2591%25E3%2582%258BState%25E3%2581%25AE%25E5%2588%2586%25E5%2589%25B2%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:hakotensan%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2QxNTUyMTlkOTUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:PharmaX%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2YzNGM1MmE4MWMuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hakotensan</dc:creator></item><item><title><![CDATA[FlaskとDockerのさわりだけやってみた]]></title><description><![CDATA[
+ 🌟 はじめに
+おぐまです。
+Pythonの軽量WebフレームワークであるFlaskで公式Quickスタート[1]の初めのWebアプリケーション開発の部分と、Dockerを使ってコンテナ化してみました。将来的にはより複雑なアプリケーションの開発やデプロイメントに活かしていきます！
+
+ 👷‍♂️ 事前準備
+
+
+必要なツールやライブラリ: Python、Flask、Docker
+
+基本的な知識要件やスキルセット: Pythonプログラミング、基本的なWeb開発の理解、コンテナの基礎知識
+
+
+ 💻 開発環境
+
+Python 3.9
+Flask 2.0.1
+Docker 20.10.7
+
+
+ ...]]></description><link>https://zenn.dev/ap_com/articles/flask-setup-and-docker-guide</link><guid isPermaLink="true">https://zenn.dev/ap_com/articles/flask-setup-and-docker-guide</guid><pubDate>Wed, 02 Oct 2024 03:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xED509Qs--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Flask%25E3%2581%25A8Docker%25E3%2581%25AE%25E3%2581%2595%25E3%2582%258F%25E3%2582%258A%25E3%2581%25A0%25E3%2581%2591%25E3%2582%2584%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:9mak%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA5N2NlMjBhZWIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2582%25A8%25E3%2583%25BC%25E3%2583%2594%25E3%2583%25BC%25E3%2582%25B3%25E3%2583%259F%25E3%2583%25A5%25E3%2583%258B%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%25BA%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U5YTdiNjViNmIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>9mak</dc:creator></item><item><title><![CDATA[[memo] pythonのパッケージ管理ryeを使ってみた（スクラップの転記）]]></title><description><![CDATA[ライと読むらしい（たぶん）
+
+ インストール
+curl -sSf https://rye-up.com/get | bash
+
+homebrewもありました。
+https://formulae.brew.sh/formula/rye
+
+ パスを通す
+echo 'source "$HOME/.rye/env"' &gt;&gt; ~/.zshrc
+source ~/.zshrc
+
+ 新規プロジェクトの作成
+rye init test-project
+
+プロジェクトはこんな感じ
+$ tree test-project 
+test-project
+├── README.md
+├── pypro...]]></description><link>https://zenn.dev/mkurita/articles/b64a1f39cb48e6</link><guid isPermaLink="true">https://zenn.dev/mkurita/articles/b64a1f39cb48e6</guid><pubDate>Wed, 02 Oct 2024 02:50:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--H0YHHdps--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255Bmemo%255D%2520python%25E3%2581%25AE%25E3%2583%2591%25E3%2583%2583%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B8%25E7%25AE%25A1%25E7%2590%2586rye%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25EF%25BC%2588%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25A9%25E3%2583%2583%25E3%2583%2597%25E3%2581%25AE%25E8%25BB%25A2%25E8%25A8%2598%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%25A0%2597%25E7%2594%25B0%2520%25E5%259F%25BA%25E6%2588%2590%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdjN2Q4ZTFiODUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>栗田 基成</dc:creator></item><item><title><![CDATA[LeetCode #414 Third Maximum Number]]></title><description><![CDATA[
+ 問題概要
+入力値：nums
+出力値：num
+return the third distinct maximum number in this array
+If the third maximum does not exist, return the maximum number
+問題のリンク
+
+ 入力例
+nums: [1,2,3]
+answer: 1
+nums: [1,1,2]
+answer: 2
+
+ 解答例1
+計算量：O(n)
+Python
+class Solution(object):
+    def thirdMax(self, nums):
+        """
+     ...]]></description><link>https://zenn.dev/pirika/articles/fee285b18e920e</link><guid isPermaLink="true">https://zenn.dev/pirika/articles/fee285b18e920e</guid><pubDate>Tue, 01 Oct 2024 23:52:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BSDuBKtC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:LeetCode%2520%2523414%2520Third%2520Maximum%2520Number%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%2594%25E3%2583%25AA%25E3%2582%25AB%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U0YmI4OWIzOGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ピリカ</dc:creator></item><item><title><![CDATA[LeetCode #1668 Maximum Repeating Substring]]></title><description><![CDATA[
+ 問題概要
+入力値：sentence, word
+出力値：number
+return number of substring word of sentence
+問題のリンク
+
+ 入力例
+sentence: "abaaba"
+word: "aba"
+answer: 2
+
+ 解答例1
+計算量：O(n*m)
+Python
+class Solution(object):
+    def maxRepeating(self, sequence, word):
+        """
+        :type sequence: str
+        :type word: str
+     ...]]></description><link>https://zenn.dev/pirika/articles/4286e3cd8e9fa3</link><guid isPermaLink="true">https://zenn.dev/pirika/articles/4286e3cd8e9fa3</guid><pubDate>Tue, 01 Oct 2024 23:26:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9jh7JH9F--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:LeetCode%2520%25231668%2520Maximum%2520Repeating%2520Substring%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%2594%25E3%2583%25AA%25E3%2582%25AB%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U0YmI4OWIzOGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ピリカ</dc:creator></item><item><title><![CDATA[wikiextractorでXMLデータの展開中に"global flags not ..."のエラーが発生した場合の対処]]></title><description><![CDATA[
+ はじめに
+Wikipediaの全文のファイルを展開するライブラリとしてwikiextractorがあります。
+https://github.com/attardi/wikiextractor
+WikipediaからファイルをダウンロードしてXMLデータを展開する場合は次のように使用します。
+$ wget https://dumps.wikimedia.org/jawiki/latest/jawiki-latest-pages-articles.xml.bz2
+$ pip install wikiextractor
+$ python -m wikiextractor.WikiExtra...]]></description><link>https://zenn.dev/t_yng/articles/9a1cf968544aaa</link><guid isPermaLink="true">https://zenn.dev/t_yng/articles/9a1cf968544aaa</guid><pubDate>Tue, 01 Oct 2024 21:38:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--RoVfBKlu--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:wikiextractor%25E3%2581%25A7XML%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2581%25AE%25E5%25B1%2595%25E9%2596%258B%25E4%25B8%25AD%25E3%2581%25AB%2522global%2520flags%2520not%2520...%2522%25E3%2581%25AE%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E3%2581%258C%25E7%2599%25BA%25E7%2594%259F%25E3%2581%2597%25E3%2581%259F%25E5%25A0%25B4...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:t-yng%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzUwNmY2ZWExYmQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>t-yng</dc:creator></item><item><title><![CDATA[【Python】Fletで最初に設定しておいた方がよさそうなこと]]></title><description><![CDATA[fletでソフトを作っていて、個人的に「これは最初に設定しておいた方がいいな」と思ったことをまとめておきます。
+
+ サンプルコード
+import flet as ft
+import os
+
+def main(page: ft.Page):
+    # ページタイトルの設定
+    page.title = "ページタイトル"
+
+    # コントロール配置の設定
+    page.vertical_alignment = ft.MainAxisAlignment.START
+
+    # ウィンドウサイズの設定
+    page.window.width = 1200
+    page....]]></description><link>https://zenn.dev/oyashiro846/articles/ec1084acfa599c</link><guid isPermaLink="true">https://zenn.dev/oyashiro846/articles/ec1084acfa599c</guid><pubDate>Tue, 01 Oct 2024 13:04:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--KEboEn8---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591Flet%25E3%2581%25A7%25E6%259C%2580%25E5%2588%259D%25E3%2581%25AB%25E8%25A8%25AD%25E5%25AE%259A%25E3%2581%2597%25E3%2581%25A6%25E3%2581%258A%25E3%2581%2584%25E3%2581%259F%25E6%2596%25B9%25E3%2581%258C%25E3%2582%2588%25E3%2581%2595%25E3%2581%259D%25E3%2581%2586%25E3%2581%25AA%25E3%2581%2593%25E3%2581%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yashiro%2520Hairi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSjlXclR1SVRrSHZTQWJKaWp4bnhaR2hlcTNrNTdiUkVOSC1rbEFXaHNKU1E9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yashiro Hairi</dc:creator></item><item><title><![CDATA[【Python】Unittestで__init__を定義したらエラーになった]]></title><description><![CDATA[
+ 事象
+Pythonでテストコードを実行するためのフレームワークunittestを使ってテストを実行した際に、
+'TestPreProcess' object has no attribute '_testMethodName'
+というエラーが発生した。
+
+ 原因
+__init__メソッドを定義したことで、継承したクラス(unittest.TestCase)のコンストラクタを適切に呼び出せていない。
+class TestSample(unittest.TestCase):
+    def __init__(self):
+        # 初期化コード
+
+ 解決方法
+__init__の...]]></description><link>https://zenn.dev/oyashiro846/articles/1a9e8dd62262ab</link><guid isPermaLink="true">https://zenn.dev/oyashiro846/articles/1a9e8dd62262ab</guid><pubDate>Tue, 01 Oct 2024 12:47:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--TpYQHjMf--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591Unittest%25E3%2581%25A7__init__%25E3%2582%2592%25E5%25AE%259A%25E7%25BE%25A9%25E3%2581%2597%25E3%2581%259F%25E3%2582%2589%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E3%2581%25AB%25E3%2581%25AA%25E3%2581%25A3%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yashiro%2520Hairi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSjlXclR1SVRrSHZTQWJKaWp4bnhaR2hlcTNrNTdiUkVOSC1rbEFXaHNKU1E9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yashiro Hairi</dc:creator></item><item><title><![CDATA[Streamlitとは何ぞや??!! Part1]]></title><description><![CDATA[
+ 本記事に関して
+
+ 対象読者：Streamlitって何ぞやと感じている人に向けて
+
+ 概要
+Streamlitを触る機会があったので、このタイミングで基礎的な知識や実装方法に関して簡単にまとめてみることにしました！
+本記事ではStreamlit基礎レベルの用語、概念 を記載しております。
+全2部構成でPart1の本記事では、概要、知識面を、Part2では実装方法を記載していく予定です！
+
+ Streamlitとは
+
+Python知識のみで実装可能でHTML,CSS,JavaScript等のフロントエンドの知識は必要ない
+グラフやチャートなどのデータの可視化に対応
+事前に準備されたUI...]]></description><link>https://zenn.dev/headwaters/articles/893d8604f35198</link><guid isPermaLink="true">https://zenn.dev/headwaters/articles/893d8604f35198</guid><pubDate>Tue, 01 Oct 2024 11:35:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BXo7mVRU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Streamlit%25E3%2581%25A8%25E3%2581%25AF%25E4%25BD%2595%25E3%2581%259E%25E3%2582%2584%253F%253F%2521%2521%2520Part1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:KoH%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZjNGExY2UxMDYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2598%25E3%2583%2583%25E3%2583%2589%25E3%2582%25A6%25E3%2582%25A9%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%25BC%25E3%2582%25B9%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2YwYWIyMjM0ZDUuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>KoH</dc:creator></item><item><title><![CDATA[LLMの効率的な実行方法:ThreadPoolExecutorとasyncio.gather]]></title><description><![CDATA[
+ はじめに
+近年、LLM（大規模言語モデル）を利用する機会が増えています。しかし、複数のリクエストを順次実行すると、処理時間が長くなり効率的ではありません。本記事では、PythonのThreadPoolExecutorとasyncio.gatherを使用して、LLMの複数実行を効率化する方法を解説します。
+
+ LLMの基本的な実行方法
+今回は簡単のためLangChainを使います。
+ドキュメントは以下です。
+https://python.langchain.com/docs/integrations/llms/openai/
+まず環境変数OPENAI_API_KEYを設定し、langc...]]></description><link>https://zenn.dev/sergicalsix/articles/895437035e4e82</link><guid isPermaLink="true">https://zenn.dev/sergicalsix/articles/895437035e4e82</guid><pubDate>Tue, 01 Oct 2024 11:02:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6kZRbxkI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:LLM%25E3%2581%25AE%25E5%258A%25B9%25E7%258E%2587%25E7%259A%2584%25E3%2581%25AA%25E5%25AE%259F%25E8%25A1%258C%25E6%2596%25B9%25E6%25B3%2595%253AThreadPoolExecutor%25E3%2581%25A8asyncio.gather%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:sergicalsix%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZlNzliZWZhNmIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sergicalsix</dc:creator></item><item><title><![CDATA[［AtCoder］ABC-372｜A - delete .]]></title><description><![CDATA[
+ 設問ページ
+
+🔗ABC-372 A - delete .
+
+
+
+ 提出結果
+def getString():
+    return input()
+
+
+def main():
+    S = getString()
+
+    print(S.replace(".", ""))
+
+
+if __name__ == "__main__":
+    main()
+]]></description><link>https://zenn.dev/hyperdb/articles/b8673b1b3cac1b</link><guid isPermaLink="true">https://zenn.dev/hyperdb/articles/b8673b1b3cac1b</guid><pubDate>Tue, 01 Oct 2024 08:19:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ZbHgtkZV--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25EF%25BC%25BBAtCoder%25EF%25BC%25BDABC-372%25EF%25BD%259CA%2520-%2520delete%2520.%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AF%25E3%2581%2584%25E3%2581%25B1%25E3%2581%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhODJkODgwMzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>はいぱぁ</dc:creator></item><item><title><![CDATA[［AtCoder］ABC-372｜B - 3^A]]></title><description><![CDATA[
+ 設問ページ
+
+🔗ABC-372 B - 3^A
+
+
+
+ 提出結果
+def getInt():
+    return int(input())
+
+
+def main():
+    M = getInt()
+    C = []
+    A = []
+
+    while M &gt; 0:
+        M, m = divmod(M, 3)
+        C.append(m)
+
+    for i in range(len(C)):
+        j = C[i]
+        if j &gt; 0:
+            for _ in range(j):
+    ...]]></description><link>https://zenn.dev/hyperdb/articles/03a8ed3b60cb3c</link><guid isPermaLink="true">https://zenn.dev/hyperdb/articles/03a8ed3b60cb3c</guid><pubDate>Tue, 01 Oct 2024 08:19:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--A6k8LDzS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25EF%25BC%25BBAtCoder%25EF%25BC%25BDABC-372%25EF%25BD%259CB%2520-%25203%255EA%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AF%25E3%2581%2584%25E3%2581%25B1%25E3%2581%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhODJkODgwMzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>はいぱぁ</dc:creator></item><item><title><![CDATA[PythonでWebAPIを使ってみよう]]></title><description><![CDATA[WebAPIを使ったPythonプログラミング入門です]]></description><link>https://zenn.dev/kwaka1208/books/python-with-webapi</link><guid isPermaLink="true">https://zenn.dev/kwaka1208/books/python-with-webapi</guid><pubDate>Tue, 01 Oct 2024 06:21:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--AZ0vVNfk--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci9hNWI2YjU2MDgzLnBuZw==%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>Kenichi Wakabayashi</dc:creator></item><item><title><![CDATA[NetworkXを使ってみる(描画編)(Python)]]></title><description><![CDATA[こんにちは、沙代です。
+秋っぽい日も増えて参りましたね。
+グラフを画像化するのをあまりやったことがなかったので、まとめてみようと思いました。
+MacOS Montery 12.6.2 (M1 Pro)
+Python 3.10.0
+matplotlib 3.9.2
+networkx 3.3
+
+ 環境構築してみる
+分離して、使い捨てする場合、仮想環境を構築します。
+mkdir tmp &amp;&amp; cd tmp
+pyenv local 3.10.0
+python -m venv venv
+. venv/bin/activate
+pip install --upgrade pip
+pi...]]></description><link>https://zenn.dev/syitsk/articles/94023042d95bba</link><guid isPermaLink="true">https://zenn.dev/syitsk/articles/94023042d95bba</guid><pubDate>Tue, 01 Oct 2024 06:03:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--oeXhO8E0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:NetworkX%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2528%25E6%258F%258F%25E7%2594%25BB%25E7%25B7%25A8%2529%2528Python%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:sayo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSndiUTdqNDNzempPRWU3aWQ1SjVPRlNTUzV0SnhqLWZIZEVNTUFIRnNHSE14Z0RBPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sayo</dc:creator></item><item><title><![CDATA[PubMedのAPIを使用して、検索したりメタデータを取得したりする]]></title><description><![CDATA[こんにちは、沙代です。
+たまにAPIで論文を得たりしたいことって、ありますよね。汗
+しばしば忘れるので、備忘録のためにもメモしてみようと思います。
+Python 3.11.1
+
+ 検索する
+import requests
+
+def fetch_pubmed_papers(term, retmax=100) -&gt; dict:
+    url = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi"
+    params = {"db": "pubmed", "term": term, "retmax": retmax...]]></description><link>https://zenn.dev/syitsk/articles/5996523886d266</link><guid isPermaLink="true">https://zenn.dev/syitsk/articles/5996523886d266</guid><pubDate>Tue, 01 Oct 2024 05:17:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jtgD2KPH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:PubMed%25E3%2581%25AEAPI%25E3%2582%2592%25E4%25BD%25BF%25E7%2594%25A8%25E3%2581%2597%25E3%2581%25A6%25E3%2580%2581%25E6%25A4%259C%25E7%25B4%25A2%25E3%2581%2597%25E3%2581%259F%25E3%2582%258A%25E3%2583%25A1%25E3%2582%25BF%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%2592%25E5%258F%2596%25E5%25BE%2597%25E3%2581%2597%25E3%2581%259F%25E3%2582%258A%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:sayo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSndiUTdqNDNzempPRWU3aWQ1SjVPRlNTUzV0SnhqLWZIZEVNTUFIRnNHSE14Z0RBPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sayo</dc:creator></item><item><title><![CDATA[【Python】requestsライブラリを使ってLINEのメッセージを送る]]></title><description><![CDATA[!
+この記事内のコードは、すべて動作確認をしていますが、万が一エラーが起きたりした場合は、報告お願いします。
+
+
+ 更新履歴
+2024/10/1
+記事を公開
+
+ 初めに
+今回は、LINE Notifyについての記事を書きたいと思います。
+環境によって、エラーが起きてしまうかもしれないので私の環境を書いておきます。
+
+
+
+OS
+pythonのバージョン
+テキストエディタ
+
+
+
+
+windows11
+3.12.5
+visual studio code
+
+
+
+!
+当記事は、Pythonはインストール済みという前提で進んでいきますので、インストールしていない方は、以下の手順を参考にしてインストー...]]></description><link>https://zenn.dev/mikann_260/articles/mikann-260_articles_001</link><guid isPermaLink="true">https://zenn.dev/mikann_260/articles/mikann-260_articles_001</guid><pubDate>Tue, 01 Oct 2024 03:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ccDcyFVQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591requests%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6LINE%25E3%2581%25AE%25E3%2583%25A1%25E3%2583%2583%25E3%2582%25BB%25E3%2583%25BC%25E3%2582%25B8%25E3%2582%2592%25E9%2580%2581%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mikann-260%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FmYjgyNjc1NDMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mikann-260</dc:creator></item><item><title><![CDATA[Airflow の Trigger Rules を理解しよう]]></title><description><![CDATA[
+ 本記事の目的
+ナウキャストでデータエンジニアをしている大森です！
+これまで Airflow で DAG を作成することは何度かあったものの Trigger Rules にあまり向き合ったこともなかったため、 最近組んだ DAG で苦闘した部分も含めて自分なりにまとめてみようと思います。
+今回作った DAG がベストプラクティスとは限らないので、もっと良いあり方があればぜひコメントいただけると嬉しいです！
+
+ 結論
+DAG を作成する時は Trigger Rules を活用し、まずは下流のタスクで制御できないか考えよう
+
+ 最近組んだ DAG
+今回題材にする DAG を紹介します。
+
+...]]></description><link>https://zenn.dev/finatext/articles/8454b8f225e869</link><guid isPermaLink="true">https://zenn.dev/finatext/articles/8454b8f225e869</guid><pubDate>Tue, 01 Oct 2024 00:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--va9vdd9u--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Airflow%2520%25E3%2581%25AE%2520Trigger%2520Rules%2520%25E3%2582%2592%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2597%25E3%2582%2588%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%2597%25E3%2582%2583%25E3%2583%25BC%25E3%2581%258F%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NjOTE1NmJhMjEuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Finatext%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVjODhjNzU5MmQuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>しゃーく</dc:creator></item><item><title><![CDATA[Ruby on Railsにはない一般攻撃魔法]]></title><description><![CDATA[他言語のフレームワークとRailsを比べてみる
+
+ Railsにはたくさんゾルトラークがある
+葬送のフリーレンという作品にはゾルトラークという魔法が出てきます。当初はその強力性から稀有な魔法と認識されていたものの、解析や研究が進んだ結果誰もが使える魔法となり一般攻撃魔法と認識されるようになりました。
+Ruby on Railsというフレームワークも同様にファイルアップロードのActive Storage、複数データベース接続、コンポーネントでviewを管理できるViewComponentなど従来はgemで実現していたものの一部が組み込み化され一般攻撃魔法になっています。
+コアが大きくなっ...]]></description><link>https://zenn.dev/hiromichinomata/articles/553eaf94b71f95</link><guid isPermaLink="true">https://zenn.dev/hiromichinomata/articles/553eaf94b71f95</guid><pubDate>Mon, 30 Sep 2024 16:52:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--NnxjH7fE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ruby%2520on%2520Rails%25E3%2581%25AB%25E3%2581%25AF%25E3%2581%25AA%25E3%2581%2584%25E4%25B8%2580%25E8%2588%25AC%25E6%2594%25BB%25E6%2592%2583%25E9%25AD%2594%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Hiromichi%2520NOMATA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dKVzhiSzBKYjZ4cXc1MDFjSHFXXzJ1cmxiMGFMYmY5T3poY1RPUnc9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Hiromichi NOMATA</dc:creator></item><item><title><![CDATA[32bitバイナリが用意されていないPythonライブラリをpip installする(Windows)]]></title><description><![CDATA[
+ 概要
+
+ 32bitと64bitの共存の方法
+
+32bitと64bitのpython環境を共存するにはvitualenvで仮想環境を作るのがよさそう。
+
+
+ 32bit pythonでpip installエラーの解消
+
+32bit版でpip installするとerror: metadata-generation-failedでエラーを起こすときは32bit版の事前にビルドされたPythonパッケージがないようなので自分でビルドする必要がある。
+難しいかと思ったら意外と簡単で以下の手順で可能
+
+
+Visual Studioをインストールする。(自分の場合はVS2022をインストール...]]></description><link>https://zenn.dev/nozele/articles/2bac4c809b188a</link><guid isPermaLink="true">https://zenn.dev/nozele/articles/2bac4c809b188a</guid><pubDate>Mon, 30 Sep 2024 16:10:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BwlR6lhT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:32bit%25E3%2583%2590%25E3%2582%25A4%25E3%2583%258A%25E3%2583%25AA%25E3%2581%258C%25E7%2594%25A8%25E6%2584%258F%25E3%2581%2595%25E3%2582%258C%25E3%2581%25A6%25E3%2581%2584%25E3%2581%25AA%25E3%2581%2584Python%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%25E3%2582%2592pip%2520install%25E3%2581%2599%25E3%2582%258B%2528Windows%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nozele%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I4MTdhZDJkMjQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nozele</dc:creator></item></channel></rss>
