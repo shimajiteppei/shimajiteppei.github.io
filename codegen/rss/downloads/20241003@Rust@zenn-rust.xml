@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Rust」のフィード]]></title><description><![CDATA[Zennのトピック「Rust」のRSSフィードです]]></description><link>https://zenn.dev/topics/rust</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ba09661577.png</url><title>Zennの「Rust」のフィード</title><link>https://zenn.dev/topics/rust</link></image><generator>zenn.dev</generator><lastBuildDate>Thu, 03 Oct 2024 12:00:20 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/rust/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Engineの設計方針]]></title><description><![CDATA[
+ エンジン設計方針
+
+ ECS（Entity Component System）
+ECSを採用し、コンポーネントごとに機能を分けることで柔軟性とパフォーマンスを両立。オブジェクトの状態管理を効率化し、大規模プロジェクトにも対応可能な設計を目指します。
+
+ マルチプラットフォーム対応
+異なるプラットフォームでも同じコードベースで動作できるように設計。これにより、PC、モバイル、コンソールなど多様なデバイスでのゲーム開発がスムーズになります。
+
+ IPC（プロセス間通信）
+エディタとランタイム間でのIPCを活用し、データ共有や同期を円滑に。リアルタイムのフィードバックやデバッグが容易になり...]]></description><link>https://zenn.dev/tikuwabu/articles/435d19e3c35208</link><guid isPermaLink="true">https://zenn.dev/tikuwabu/articles/435d19e3c35208</guid><pubDate>Thu, 03 Oct 2024 08:51:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--KpdVY3Ww--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Engine%25E3%2581%25AE%25E8%25A8%25AD%25E8%25A8%2588%25E6%2596%25B9%25E9%2587%259D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A1%25E3%2581%258F%25E3%2582%258F%25E3%2581%25B6%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzMxMjdmZjRiODAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ちくわぶ</dc:creator></item><item><title><![CDATA[軽い自己紹介と、開発の目標]]></title><description><![CDATA[
+ 自己紹介
+はじめまして！ゲーム開発者として活動しているちくわぶです。主にRustやUnity、Unreal Engineを用いて、エンジン開発やゲーム制作に取り組んでいます。特にECS（Entity Component System）の設計や、DirectXやVulkanを用いた低レベルのレンダリングAPIに興味があります。
+
+ 開発の目標
+現在、私は独自のゲームエンジン「HorizonNova(仮)」を開発しています。
+(形から入るタイプなので、イキって名前とアイコンまで作成してしまった)
+このエンジンは、革新的でパフォーマンスを重視しながら、プラットフォームに依存せず柔軟に機能を...]]></description><link>https://zenn.dev/tikuwabu/articles/c8b45cba38e027</link><guid isPermaLink="true">https://zenn.dev/tikuwabu/articles/c8b45cba38e027</guid><pubDate>Thu, 03 Oct 2024 08:43:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--AbnGOca_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%25BB%25BD%25E3%2581%2584%25E8%2587%25AA%25E5%25B7%25B1%25E7%25B4%25B9%25E4%25BB%258B%25E3%2581%25A8%25E3%2580%2581%25E9%2596%258B%25E7%2599%25BA%25E3%2581%25AE%25E7%259B%25AE%25E6%25A8%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A1%25E3%2581%258F%25E3%2582%258F%25E3%2581%25B6%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzMxMjdmZjRiODAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ちくわぶ</dc:creator></item><item><title><![CDATA[RustでAWS公式のsdkを使ってMinioを操作する.md]]></title><description><![CDATA[
+ 1. 結論
+今回の開発では、RustでAWS SDKを使用してMinioに接続し、S3互換のバケット操作を行うことに成功しました。resolver を利用してMinioのエンドポイントを指定し、非同期プログラミングのためにTokioを使用しています。
+以下は、Minioに接続してバケットを作成する際の重要なコードです。
+use aws_sdk_s3::{Client, Credentials, Region};
+use aws_sdk_s3::config::Builder;
+use aws_sdk_s3::endpoint::{Endpoint, ResolveEndpoint, ...]]></description><link>https://zenn.dev/rururu/articles/536330e23e2f8a</link><guid isPermaLink="true">https://zenn.dev/rururu/articles/536330e23e2f8a</guid><pubDate>Wed, 02 Oct 2024 22:27:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--DeAd_LeB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25A7AWS%25E5%2585%25AC%25E5%25BC%258F%25E3%2581%25AEsdk%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6Minio%25E3%2582%2592%25E6%2593%258D%25E4%25BD%259C%25E3%2581%2599%25E3%2582%258B.md%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yuunag1%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VlY2E4N2JhNWIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yuunag1</dc:creator></item><item><title><![CDATA[Safetensors のヘッダーを読む]]></title><description><![CDATA[
+ Safetensors とは
+Safetensors は HuggingFace が開発している、主にテンソルを安全・高速に読み書きできるファイルフォーマットと、それを扱うためのライブラリです。
+https://github.com/huggingface/safetensors
+提供されている Python ライブラリでは、PyTorch や Tensorflow などとの互換性があるほか、pickle 形式のような任意のコードを実行する機能がなく比較的安全なため、最近の深層学習系のモデルはこの形式で配布されることが多くなりました。
+
+ 構造
+
+Safetensorsのファイル構造...]]></description><link>https://zenn.dev/platina/articles/e65c73cb01a900</link><guid isPermaLink="true">https://zenn.dev/platina/articles/e65c73cb01a900</guid><pubDate>Wed, 02 Oct 2024 11:24:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--CIGmC82I--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Safetensors%2520%25E3%2581%25AE%25E3%2583%2598%25E3%2583%2583%25E3%2583%2580%25E3%2583%25BC%25E3%2582%2592%25E8%25AA%25AD%25E3%2582%2580%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Plat%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk0MWUzM2RiMjguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Plat</dc:creator></item><item><title><![CDATA[Amazon SQS を AWS SDK for Rust で操作してみる]]></title><description><![CDATA[
+ 記事の概要
+こんにちは！
+ファスト株式会社の yutak です。
+今回はAWSが提供しているマネージド型メッセージキューサービスのAmazon SQSをRustから操作していきたいと思います。
+クレートに関しては、AWSが提供しているAWS SDK for Rustを利用していきます。
+
+ 前提条件
+前提条件は以下です。
+
+Rustとcargoがインストールされていること
+AWSのアクセスキーやシークレットなどのクレデンシャルが作成されていること
+
+
+ 動作環境
+今回は、以下の環境で動作させました。
+
+Rustバージョン: 1.81.0
+
+利用するクレートは以下です。
+
+aws-sd...]]></description><link>https://zenn.dev/fast/articles/0b0199f403b521</link><guid isPermaLink="true">https://zenn.dev/fast/articles/0b0199f403b521</guid><pubDate>Wed, 02 Oct 2024 04:43:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2ulPTOny--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Amazon%2520SQS%2520%25E3%2582%2592%2520AWS%2520SDK%2520for%2520Rust%2520%25E3%2581%25A7%25E6%2593%258D%25E4%25BD%259C%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Yutak%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzljYTEzZDEyMWEuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:FAST%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MzNjBmNTJkYmUuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yutak</dc:creator></item><item><title><![CDATA[GStreamerの概要とRustでの呼び出し方]]></title><description><![CDATA[GStreamerは、オープンソースのマルチメディアフレームワークであり、音声や動画のストリーミング、編集などを柔軟に行うことができます。噛み砕いて言うと「プログラマブルなFFmpeg」みたいな感じです。
+8月に弊社で開催された開発合宿というイベントにて、AI対話ボットを作成するために利用しました。近いうちにAI対話ボットについてもご紹介できればと思っています。
+本稿では、GStreamerの概要、Rustでの呼び出し方を紹介します。
+環境はmacOS@12.7.4、GStreamer@1.24.6、Rust@1.79.0です。
+
+ インストール
+!
+Homebrew経由だとwebrtc...]]></description><link>https://zenn.dev/micin/articles/2024-10-02_rikson_gstreamer-for-rustacean</link><guid isPermaLink="true">https://zenn.dev/micin/articles/2024-10-02_rikson_gstreamer-for-rustacean</guid><pubDate>Wed, 02 Oct 2024 02:12:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8vz08lN6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:GStreamer%25E3%2581%25AE%25E6%25A6%2582%25E8%25A6%2581%25E3%2581%25A8Rust%25E3%2581%25A7%25E3%2581%25AE%25E5%2591%25BC%25E3%2581%25B3%25E5%2587%25BA%25E3%2581%2597%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Riku%2520Takeuchi%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRmZDEzMmY4YTMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BEMICIN%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2IxYzNlZGUwNTYuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Riku Takeuchi</dc:creator></item><item><title><![CDATA[ド・モルガンの法則を Rust で証明してみた - const 編]]></title><description><![CDATA[ド・モルガンの法則を Rust で証明してみた の続編というか補足です。元記事
+https://zenn.dev/mutex_inc/articles/de-morgan-ts
+の冒頭に挙げられている、実行結果をもって証明とするコード：
+
+TypeScript
+const booleans = [true, false]
+
+booleans.forEach(
+  p =&gt;
+    booleans.forEach(
+      q =&gt; {
+        console.assert(!(p || q) === !p &amp;&amp; !q)
+        conso...]]></description><link>https://zenn.dev/kanal/articles/de-morgan-rust-const</link><guid isPermaLink="true">https://zenn.dev/kanal/articles/de-morgan-rust-const</guid><pubDate>Tue, 01 Oct 2024 21:34:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--aXDsXhQo--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2589%25E3%2583%25BB%25E3%2583%25A2%25E3%2583%25AB%25E3%2582%25AC%25E3%2583%25B3%25E3%2581%25AE%25E6%25B3%2595%25E5%2589%2587%25E3%2582%2592%2520Rust%2520%25E3%2581%25A7%25E8%25A8%25BC%25E6%2598%258E%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2520-%2520const%2520%25E7%25B7%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kanarus%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc0ZTQ5YjRjOWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kanarus</dc:creator></item><item><title><![CDATA[言語処理系のツボ：制御フロー (WIP)]]></title><description><![CDATA[!
+未完成記事です　残しておかないと存在を忘れてしまう……
+
+『コンパイラ 原理・技法・ツール（第 2 版）』の、制御フローに関する部分の基本をおさえた以下の短いコードについて、説明する記事を書きます（予定）
+fn main() {
+    let input = "
+      a b c
+      if x
+        d e
+      else
+        f g
+      end
+      h i j
+      if y
+        k l
+        if z
+          m
+        else
+          n o
+       ...]]></description><link>https://zenn.dev/toga/articles/control-flow</link><guid isPermaLink="true">https://zenn.dev/toga/articles/control-flow</guid><pubDate>Tue, 01 Oct 2024 13:07:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--tzTC5yrw--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%25A8%2580%25E8%25AA%259E%25E5%2587%25A6%25E7%2590%2586%25E7%25B3%25BB%25E3%2581%25AE%25E3%2583%2584%25E3%2583%259C%25EF%25BC%259A%25E5%2588%25B6%25E5%25BE%25A1%25E3%2583%2595%25E3%2583%25AD%25E3%2583%25BC%2520%2528WIP%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A8%25E3%2581%258C%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q1NTBlNjIzOTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>とが</dc:creator></item><item><title><![CDATA[[Rust] sqlxで再利用可能なクエリを使う]]></title><description><![CDATA[
+ はじめに
+Sqlxはとても柔軟性が高く、細かい要件が必要な場合等にとても重宝します
+（生SQLを書くのだから当たり前）
+しかしながら、Sqlxにもいくつか問題点があります。
+今回はsqlxを導入後１年程度経って顕在化してきた問題とその解決策について書いていきます。
+sqlxを使う場合、sqlx::query!マクロ、あるいはsqlx::query_as!マクロを使うのが一般的です。
+このマクロを使うことでクエリをコンパイル時に検証し、強力な型チェックを利用することができます。
+しかしながらプロジェクトの成長に伴って行数、関わる人数が増えてきたときにこのマクロによって以下の問題が発生し...]]></description><link>https://zenn.dev/sakura/articles/bf5c8f818c6f39</link><guid isPermaLink="true">https://zenn.dev/sakura/articles/bf5c8f818c6f39</guid><pubDate>Mon, 30 Sep 2024 22:56:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Pj9xR89X--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BRust%255D%2520sqlx%25E3%2581%25A7%25E5%2586%258D%25E5%2588%25A9%25E7%2594%25A8%25E5%258F%25AF%25E8%2583%25BD%25E3%2581%25AA%25E3%2582%25AF%25E3%2582%25A8%25E3%2583%25AA%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:sakura%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNjMTBmYTE3YTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sakura</dc:creator></item><item><title><![CDATA[ド・モルガンの法則を Rust で証明してみた]]></title><description><![CDATA[
+ はじめに
+本記事は、mutex Official Tech Blog さんの
+https://zenn.dev/mutex_inc/articles/de-morgan-ts
+の パクリ Rust バージョンです ( 湯婆婆 みたいにいろんな言語でやってくれる人たちが出てきたら面白いなーという期待も込めて ) 。
+コードは https://github.com/kanarus/rust_de_morgan にあるので必要に応じて参照してください。
+以下、元記事の流れに沿って進めますが、nightly 前提なのと、筆者の好みにより元記事の略語命名は略される前の単語に変更してます。
+
+ ...]]></description><link>https://zenn.dev/kanal/articles/de-morgan-rust</link><guid isPermaLink="true">https://zenn.dev/kanal/articles/de-morgan-rust</guid><pubDate>Mon, 30 Sep 2024 19:17:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--XTkmFZ2W--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2589%25E3%2583%25BB%25E3%2583%25A2%25E3%2583%25AB%25E3%2582%25AC%25E3%2583%25B3%25E3%2581%25AE%25E6%25B3%2595%25E5%2589%2587%25E3%2582%2592%2520Rust%2520%25E3%2581%25A7%25E8%25A8%25BC%25E6%2598%258E%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kanarus%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc0ZTQ5YjRjOWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kanarus</dc:creator></item><item><title><![CDATA[Rust | Dioxus で始める TODO アプリ開発]]></title><description><![CDATA[
+ はじめに
+本記事では Rust の Dioxus というライブラリを使って、webフロントエンドの開発を行っていきます。
+以前、Yew というライブラリを使って、似たような記事を執筆しましたが、今回は新たに Dioxus というライブラリを発見したため、使いながら記事を書いていこうと思います！
+https://dioxuslabs.com/
+
+ Dioxus のセットアップ
+まずは、Dioxus CLI をインストールしていきます。
+!
+※ Rust のインストールができていない場合、cargoコマンドが実行できないかと思いますので、
+良ければこちらの記事を参考に、事前にインストール...]]></description><link>https://zenn.dev/collabostyle/articles/833b80a3692928</link><guid isPermaLink="true">https://zenn.dev/collabostyle/articles/833b80a3692928</guid><pubDate>Mon, 30 Sep 2024 14:12:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--zTk-kmRa--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%2520%257C%2520Dioxus%2520%25E3%2581%25A7%25E5%25A7%258B%25E3%2582%2581%25E3%2582%258B%2520TODO%2520%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E9%2596%258B%25E7%2599%25BA%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Shota%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzViM2I3NTQxYzUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25B3%25E3%2583%25A9%25E3%2583%259C%25E3%2582%25B9%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25AB%2520Developers%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MwNGNlNzQxNTYuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Shota</dc:creator></item><item><title><![CDATA[Rusty V8 で JavaScript のコードを実行する]]></title><description><![CDATA[
+ Announcing Stable V8 Bindings for Rust
+先日、Announcing Stable V8 Bindings for Rust というブログが公開され、JavaScriptエンジン 「V8」のバインディングライブラリ「Rusty V8」で初の安定版 129.0.0 をリリースしたと Deno の Ryan Dahl 氏が発表しました。
+
+ V8 とは
+まず、V8 JavaScript engine について、簡単に説明します。
+V8 は Google が提供するオープンソースの JavaScript エンジンで、C++ で実装されており、主に Chr...]]></description><link>https://zenn.dev/codemountains/articles/f097d233af87f6</link><guid isPermaLink="true">https://zenn.dev/codemountains/articles/f097d233af87f6</guid><pubDate>Mon, 30 Sep 2024 13:38:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--NkA3YMz2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rusty%2520V8%2520%25E3%2581%25A7%2520JavaScript%2520%25E3%2581%25AE%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2582%2592%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25B1%25B1%25E3%2581%25A8%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y5MGU2OTJiOTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>山とコード</dc:creator></item><item><title><![CDATA[Rust | Arc<RwLock<T>> と Arc<Mutex<T>> で並行処理の読み取りと書き込みを実装する]]></title><description><![CDATA[
+ Rc と Arc
+よく似たような文脈で登場することがあるので、
+Arc に触れる前に Rc にも触れておきたいと思います！！！
+いずれも、データを複数の所有者で共有したい場合に使用するという共通点があります。
+
+ std::rc::Rc
+Rc は Reference Counted の略で、シングルスレッドの参照カウントポインタです。
+シングルスレッド内でのみ使用可能という制限がありますが、メモリ使用量は Arc よりも少ないという特徴があります。
+デフォルトでは Rc で包まれたデータは読み取り専用です。
+また、循環参照を作成することが可能ですが、メモリリークの原因となる可能性があ...]]></description><link>https://zenn.dev/codemountains/articles/75948b2ede1ba6</link><guid isPermaLink="true">https://zenn.dev/codemountains/articles/75948b2ede1ba6</guid><pubDate>Mon, 30 Sep 2024 08:35:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--RTsSnZOI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%2520%257C%2520Arc%253CRwLock%253CT%253E%253E%2520%25E3%2581%25A8%2520Arc%253CMutex%253CT%253E%253E%2520%25E3%2581%25A7%25E4%25B8%25A6%25E8%25A1%258C%25E5%2587%25A6%25E7%2590%2586%25E3%2581%25AE%25E8%25AA%25AD%25E3%2581%25BF%25E5%258F%2596%25E3%2582%258A%25E3%2581%25A8%25E6%259B%25B8%25E3%2581%258D%25E8%25BE%25BC%25E3%2581%25BF%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25B1%25B1%25E3%2581%25A8%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y5MGU2OTJiOTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>山とコード</dc:creator></item><item><title><![CDATA[worker-rsからSlackに投稿する]]></title><description><![CDATA[use worker::*;
+use reqwest;
+use std::collections::HashMap;
+
+async fn post_slack(channel: &amp;str, token: &amp;str, message: &amp;str) -&gt; Result&lt;Response&gt; {
+    let url = "https://slack.com/api/chat.postMessage";
+
+    let mut payload = HashMap::new();
+    payload.insert("channel", channe...]]></description><link>https://zenn.dev/t4nih4ru/articles/f2d8c887e54a8f</link><guid isPermaLink="true">https://zenn.dev/t4nih4ru/articles/f2d8c887e54a8f</guid><pubDate>Sun, 29 Sep 2024 09:17:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--49HPPHyn--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:worker-rs%25E3%2581%258B%25E3%2582%2589Slack%25E3%2581%25AB%25E6%258A%2595%25E7%25A8%25BF%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:TTT%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRmMWU1YTExNGEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>TTT</dc:creator></item><item><title><![CDATA[各言語の日本語文字変換ライブラリ一覧]]></title><description><![CDATA[（随時更新中、補足や他の言語についてはコメント欄で教えて下さい）
+
+ 凡例
+
+ 列名
+
+
+名前：ライブラリ名（リンクはレジストリまたはレポジトリのホームページ）
+
+作者：作者名・作者ID（リンクはGitHub等のリンク）
+
+利用：利用ライセンス
+
+（言語名）：サポートされている言語のバージョン
+
+ひ⇆カ：ひらがなとカタカナの相互変換
+
+ｶ⇆カ：半角カタカナと全角カタカナの相互変換
+
+a1⇆Ａ１：半角英数字と全角英数字の相互変換
+
+ひカ⇆R：ひらかな・カタカナとローマ字の相互変換
+
+漢⇆かA：漢字と仮名やローマ字の相互変換（読み仮名）
+
+
+ 記号
+
+✅　サポートされている
+🔺　部分的にサポ...]]></description><link>https://zenn.dev/mkpoli/articles/07dd3a0d961058</link><guid isPermaLink="true">https://zenn.dev/mkpoli/articles/07dd3a0d961058</guid><pubDate>Sat, 28 Sep 2024 15:37:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--u0-uO0bC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2590%2584%25E8%25A8%2580%25E8%25AA%259E%25E3%2581%25AE%25E6%2597%25A5%25E6%259C%25AC%25E8%25AA%259E%25E6%2596%2587%25E5%25AD%2597%25E5%25A4%2589%25E6%258F%259B%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%25E4%25B8%2580%25E8%25A6%25A7%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mkpoli%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhhNjVjYTVjMTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mkpoli</dc:creator></item><item><title><![CDATA[Rustを使って大きなファイルを分割してGCSにアップロードする]]></title><description><![CDATA[
+ 背景
+前回の記事: https://zenn.dev/harui/articles/9143558098c454 では、GCEのVMに溜まっていくファイルを定期的にGCSにアップロードしたうえで削除するプログラムをRustで書いたのでした。
+しかし、そのプログラムではアップロードするファイルをメモリに一度に読み込むためメモリに載らないほど大きなファイルを扱うことはできませんでした。
+この記事では、大きなファイルを小さなチャンクに分けてアップロードすることで、大きなファイルでもGCSにアップロードできるようなプログラムにしていきます。
+
+ 実現方法
+前回と同じく、google-clou...]]></description><link>https://zenn.dev/harui/articles/87dc293b6b706e</link><guid isPermaLink="true">https://zenn.dev/harui/articles/87dc293b6b706e</guid><pubDate>Sat, 28 Sep 2024 15:28:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--28JrRkYq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E5%25A4%25A7%25E3%2581%258D%25E3%2581%25AA%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2592%25E5%2588%2586%25E5%2589%25B2%25E3%2581%2597%25E3%2581%25A6GCS%25E3%2581%25AB%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2589%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Harui%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSS1VaExIUDlyTFBxTWlsQU1EUnEwTUN1UDhwSnYwYk9hYkNpMDJ4eFdhYXpOLUdzYz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Harui</dc:creator></item><item><title><![CDATA[色変記事：実質2.5ヶ月でRubyとRustを使って入緑した話]]></title><description><![CDATA[くぅ～疲れましたw これにて入緑です！
+
+ちゃんとAtCoderを始めてから2.5ヶ月。ABC373で水パフォ（1297）を出して入緑しました！嬉しい！
+と言うわけで何か書いてみようと思います。
+
+ スペック
+
+17歳（高3）
+プログラミングは9~10年ほど
+普段はVoicevoxのエディタを開発している
+AtCoderはアルゴリズム何も知らない状態でやったのが15回ほど（グラフの左半分）
+
+灰パフォなのでノーカンということで…
+
+
+
+
+ 言語
+基本的にはRuby、計算量が重そうな場合はRustを使っています。最近はCrystalも気になっています。
+Rubyは競プロでも使える便利メソッ...]]></description><link>https://zenn.dev/mnonamer/articles/atcoder-green</link><guid isPermaLink="true">https://zenn.dev/mnonamer/articles/atcoder-green</guid><pubDate>Sat, 28 Sep 2024 14:33:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--RgkQ0X9C--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%2589%25B2%25E5%25A4%2589%25E8%25A8%2598%25E4%25BA%258B%25EF%25BC%259A%25E5%25AE%259F%25E8%25B3%25AA2.5%25E3%2583%25B6%25E6%259C%2588%25E3%2581%25A7Ruby%25E3%2581%25A8Rust%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E5%2585%25A5%25E7%25B7%2591%25E3%2581%2597%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%2590%258D%25E7%2584%25A1%25E3%2581%2597%25E3%2580%2582%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZmMjI1ZGZkZDYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>名無し。</dc:creator></item><item><title><![CDATA[GCEのVM上のファイルを定期的にGCSへアップロードして削除する with Rust]]></title><description><![CDATA[!
+この記事のプログラムの持つ欠陥を改善した記事もあわせて参照してください : https://zenn.dev/harui/articles/87dc293b6b706e
+
+
+ 想定する読者
+
+
+GCEのVM上のファイルを定期的にGCSへアップロードしたい！という人
+
+
+仮想通貨取引所の約定履歴や板情報を全部保存するなんてストレージがいくらあっても足りないから無理だよ～～～と思っている人
+
+
+
+ 背景(botter向け)
+botterの皆さんは当然取引所から配信されるデータをすべて保存したいと思っているはずです。
+しかし、実際にすべて保存していると、大変な量のストレージを圧迫することに...]]></description><link>https://zenn.dev/harui/articles/9143558098c454</link><guid isPermaLink="true">https://zenn.dev/harui/articles/9143558098c454</guid><pubDate>Sat, 28 Sep 2024 02:14:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--K2a2LUwL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:GCE%25E3%2581%25AEVM%25E4%25B8%258A%25E3%2581%25AE%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2592%25E5%25AE%259A%25E6%259C%259F%25E7%259A%2584%25E3%2581%25ABGCS%25E3%2581%25B8%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2589%25E3%2581%2597%25E3%2581%25A6%25E5%2589%258A%25E9%2599%25A4%25E3%2581%2599%25E3%2582%258B%2520with%2520Rust%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Harui%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSS1VaExIUDlyTFBxTWlsQU1EUnEwTUN1UDhwSnYwYk9hYkNpMDJ4eFdhYXpOLUdzYz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Harui</dc:creator></item><item><title><![CDATA[【Bevyでゲーム作り】BevyとLDtkで2Dゲームを作る]]></title><description><![CDATA[この記事ではRustで作られたゲームエンジンBevyと、2DレベルエディタであるLDtkを組み合わせたゲームの作り方について解説しています。
+
+ この記事は？
+bevy_ecs_ldtkパッケージを使えばいい感じにBevyでゲームを作れることは書いてたが、
+Bevyでどうやってゲームの制御面を作れば良いかのことは探してもなかったので、
+自分で書いてみました。
+
+ 使用技術
+今回ゲーム開発に使用した技術は以下の通り。
+https://bevyengine.org/
+https://ldtk.io/
+https://github.com/Trouv/bevy_ecs_ldtk
+
+ ソースコー...]]></description><link>https://zenn.dev/ittoku_ky73/articles/bevy-ldtk-setup</link><guid isPermaLink="true">https://zenn.dev/ittoku_ky73/articles/bevy-ldtk-setup</guid><pubDate>Fri, 27 Sep 2024 11:29:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4pPf5QbY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Bevy%25E3%2581%25A7%25E3%2582%25B2%25E3%2583%25BC%25E3%2583%25A0%25E4%25BD%259C%25E3%2582%258A%25E3%2580%2591Bevy%25E3%2581%25A8LDtk%25E3%2581%25A72D%25E3%2582%25B2%25E3%2583%25BC%25E3%2583%25A0%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ittokunvim%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FGZFp1Y3BCQXEzTW1mRWhOc3RMcUk5ZjQySGhwWE8tcmhrVjFFYUY3azhCPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ittokunvim</dc:creator></item><item><title><![CDATA[Rustでテーブル変更に対して壊れにくいテストを書く]]></title><description><![CDATA[
+ 目的
+少しの変更で壊れやすいテストのことをFragile Test(壊れやすいテスト)といいます。色々な理由で壊れやすいテストが生まれますが、ここではテーブル変更で壊れやすいテストについて考えます。
+カラムを全部指定するようにテストを書いていると、カラムが追加されると、すべてのテストを書き直す必要がでてきます。なるべくカラムを書かないようにテストを作るのが重要になります。
+
+ テーブル
+ユーザーの情報を格納するusersテーブルを作成します。
+
+ users
+
+users.sql
+CREATE TABLE public.users (
+  uuid UUID NOT NULL
+  ,...]]></description><link>https://zenn.dev/aoyagikouhei/articles/89991ee2fc92dd</link><guid isPermaLink="true">https://zenn.dev/aoyagikouhei/articles/89991ee2fc92dd</guid><pubDate>Wed, 25 Sep 2024 22:43:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--mQ-BIbqs--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25A7%25E3%2583%2586%25E3%2583%25BC%25E3%2583%2596%25E3%2583%25AB%25E5%25A4%2589%25E6%259B%25B4%25E3%2581%25AB%25E5%25AF%25BE%25E3%2581%2597%25E3%2581%25A6%25E5%25A3%258A%25E3%2582%258C%25E3%2581%25AB%25E3%2581%258F%25E3%2581%2584%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E3%2582%2592%25E6%259B%25B8%25E3%2581%258F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E9%259D%2592%25E6%259F%25B3%25E5%25BA%25B7%25E5%25B9%25B3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFjZDA3ZGRhNzguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>青柳康平</dc:creator></item></channel></rss>
