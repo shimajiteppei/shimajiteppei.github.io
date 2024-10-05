@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「TypeScript」のフィード]]></title><description><![CDATA[Zennのトピック「TypeScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/typescript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/f13e758fdb.png</url><title>Zennの「TypeScript」のフィード</title><link>https://zenn.dev/topics/typescript</link></image><generator>zenn.dev</generator><lastBuildDate>Sat, 05 Oct 2024 03:00:21 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/typescript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[カリー化と分割代入で作る、TypeScriptの関数型DDDとDIアプローチ]]></title><description><![CDATA[
+ はじめに
+この記事では、TypeScriptを使ったカリー化と分割代入を活用したDDDとDIの実装方法を紹介します。
+この手法を使うことで関数型プログラミングにおける依存性注入がシンプルになり、コードの再利用性やメンテナンス性が向上するのではないかと思います。
+
+ 前提
+DDDでアプリケーションを実装する場合いくつか重要なポイントがありますが、特徴的なのはDIによってドメイン層とインフラ層の依存関係が逆転していることではないでしょうか。
+TypeScriptの有名なDIライブラリとしてはTSyringe等がありますが、これらはオブジェクト指向に基づいています。
+近年では、TypeSc...]]></description><link>https://zenn.dev/sert/articles/47566a33bee3f3</link><guid isPermaLink="true">https://zenn.dev/sert/articles/47566a33bee3f3</guid><pubDate>Fri, 04 Oct 2024 16:51:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1LDRD6SZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25AB%25E3%2583%25AA%25E3%2583%25BC%25E5%258C%2596%25E3%2581%25A8%25E5%2588%2586%25E5%2589%25B2%25E4%25BB%25A3%25E5%2585%25A5%25E3%2581%25A7%25E4%25BD%259C%25E3%2582%258B%25E3%2580%2581TypeScript%25E3%2581%25AE%25E9%2596%25A2%25E6%2595%25B0%25E5%259E%258BDDD%25E3%2581%25A8DI%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2595%25E3%2581%25A8%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ4YjQ3YzllNzIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>さと</dc:creator></item><item><title><![CDATA[Intersection型(A & B)で合成された配列はアクセス方法によって取り出した要素の型が変わる]]></title><description><![CDATA[const a, const b の型を想像してみて欲しい
+type C0 = { employees: E1[] };
+type CX = C0 &amp; { employees: E2[] };
+
+function test1(company: CX) {
+    const a = company.employees[0];
+    const b = company.employees.map((x) =&gt; x)[0];
+}
+
+a の型は E1 &amp; E2 // それはそう
+b の型は E1 // なんでェ.....
+
+🤔🤔🤔 嘘だろ... なんで... なんでなん...]]></description><link>https://zenn.dev/tomlla/articles/2d9d08389d0ec6</link><guid isPermaLink="true">https://zenn.dev/tomlla/articles/2d9d08389d0ec6</guid><pubDate>Fri, 04 Oct 2024 14:10:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--g4DbOWPA--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Intersection%25E5%259E%258B%2528A%2520%2526%2520B%2529%25E3%2581%25A7%25E5%2590%2588%25E6%2588%2590%25E3%2581%2595%25E3%2582%258C%25E3%2581%259F%25E9%2585%258D%25E5%2588%2597%25E3%2581%25AF%25E3%2582%25A2%25E3%2582%25AF%25E3%2582%25BB%25E3%2582%25B9%25E6%2596%25B9%25E6%25B3%2595%25E3%2581%25AB%25E3%2582%2588%25E3%2581%25A3%25E3%2581%25A6%25E5%258F%2596%25E3%2582%258A%25E5%2587%25BA%25E3%2581%2597%25E3%2581%259F%25E8%25A6%2581%25E7%25B4%25A0%25E3%2581%25AE%25E5%259E%258B%25E3%2581%258C%25E5%25A4%2589%25E3%2582%258F%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tomlla%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2g2bmpKRDV4SjlDb2xEdGZQMzZWZVV2QWNZUHk4ZEl2cVhKTU9nWlE9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tomlla</dc:creator></item><item><title><![CDATA[Nextjs + TypeScript + MUI 最小プロジェクトで作る]]></title><description><![CDATA[
+ Nextjs + TypeScript + MUI 最小プロジェクトで作る
+
+ 概要
+現状最新の環境下で構築する上での最小プロジェクト（サンプル）を共有。
+公式のドキュメントを活用して導入しているので、ほぼ間違いはないと思う。
+以下が現時点（2024.10）での最新バージョン
+
+
+
+対象
+バージョン
+
+
+
+
+Nextjs
+v14.2.x
+
+
+TypeScript
+v5.x.x
+
+
+MUI
+v6.1.x
+
+
+
+※ MUIは、旧Material-UIのこと
+
+ 手順
+
+ 1. プロジェクトを構築
+npx create-next-app@latest --typescript
+上記を入力後...]]></description><link>https://zenn.dev/yamamoto_11709/articles/c893c38fabcdf8</link><guid isPermaLink="true">https://zenn.dev/yamamoto_11709/articles/c893c38fabcdf8</guid><pubDate>Fri, 04 Oct 2024 04:48:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hIbQLhw4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Nextjs%2520%252B%2520TypeScript%2520%252B%2520MUI%2520%25E6%259C%2580%25E5%25B0%258F%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E3%2581%25A7%25E4%25BD%259C%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%2588%259D%25E5%25BF%2583%25E8%25A6%259A%25E6%259B%25B8%2520-%2520%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%259F%25E3%2583%25B3%25E3%2582%25B0%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTDBFMmlKNXEyTGFEYTRadS1wZWp2cEFNLXJpVkdiaEU2OWN5ZUlHWWlkPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>初心覚書 - プログラミング</dc:creator></item><item><title><![CDATA[サーバーサイドTypeScriptを関数で書く理由]]></title><description><![CDATA[
+ この記事は？
+著者はNode環境でのサーバーサイドTypeScriptを専門としているエンジニアです。この記事では、サーバーサイドTypeScriptをClassではなく関数的に書く 理由について書きます。
+
+ 比較対象
+テスタブルなコードを書くための手法に、DI(Dependency Injection) があります。ClassでDIをする場合と比べ、関数でDIをする場合にどのような感じになるか？をみてみましょう。
+Repository/ Application Service/ Use Caseの3つの層で見てみましょう。
+
+ 関数で書くと？
+注釈) 関数を引数に受け取ったり、関...]]></description><link>https://zenn.dev/rio_dev/articles/4b6076001724ba</link><guid isPermaLink="true">https://zenn.dev/rio_dev/articles/4b6076001724ba</guid><pubDate>Fri, 04 Oct 2024 04:22:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--uEKNdJud--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2582%25B5%25E3%2582%25A4%25E3%2583%2589TypeScript%25E3%2582%2592%25E9%2596%25A2%25E6%2595%25B0%25E3%2581%25A7%25E6%259B%25B8%25E3%2581%258F%25E7%2590%2586%25E7%2594%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ojisan%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzUyNjFiMjI0YTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ojisan</dc:creator></item><item><title><![CDATA[prisma migrationを途中から導入した話]]></title><description><![CDATA[
+ 目的
+以前は、ローカルで開発をしており、データベースを更新する際は、npx prism db push(prisma_shema の型を強制的に DB に反映させること)をしていた。しかし、デプロイ後、DB を npx primsa db push で更新するとデータが消える恐れがあった。そこでマイグレーションを導入することにした。今回は、ローカル環境とデプロイ環境を分けて説明をすることにした。
+
+ マイグレーションとは
+データベースのスキーマやデータ構造を新しいバージョンに更新する作業のこと。。これにより、データベースの構造や内容を安全に変更・移行することが可能です。たとえば、新し...]]></description><link>https://zenn.dev/naginagi124/articles/prisma-db-migartion</link><guid isPermaLink="true">https://zenn.dev/naginagi124/articles/prisma-db-migartion</guid><pubDate>Fri, 04 Oct 2024 02:51:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--kiLvTnap--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:prisma%2520migration%25E3%2582%2592%25E9%2580%2594%25E4%25B8%25AD%25E3%2581%258B%25E3%2582%2589%25E5%25B0%258E%25E5%2585%25A5%25E3%2581%2597%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AA%25E3%2581%258E%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdlOTYzNTQwYzYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>なぎ</dc:creator></item><item><title><![CDATA[クロスオリジンな画像をキレイにして、Canvasに描画する]]></title><description><![CDATA[
+ 結論
+こちらの StackOverFlow で示される手順の通り、Object URLを経由します。
+
+ Tainted Canvas（汚染されたキャンバス）問題
+セキュリティの観点から、クロスオリジンから取得した画像を CanvasRenderingContext2d に対して描画すると、その canvas 要素からは画像を取得できなくなります。
+getImageData、toBlob等の再取得系メソッドは軒並みエラーを投げるようになります。
+これを回避するために、取得した画像そのものを汚染されていない画像にする処理を施します。
+いわゆるオリジンロンダリングをします（そんな言葉はあ...]]></description><link>https://zenn.dev/ihasq/articles/4a0ad7cae01300</link><guid isPermaLink="true">https://zenn.dev/ihasq/articles/4a0ad7cae01300</guid><pubDate>Fri, 04 Oct 2024 01:58:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Qoj9xzKH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25AF%25E3%2583%25AD%25E3%2582%25B9%25E3%2582%25AA%25E3%2583%25AA%25E3%2582%25B8%25E3%2583%25B3%25E3%2581%25AA%25E7%2594%25BB%25E5%2583%258F%25E3%2582%2592%25E3%2582%25AD%25E3%2583%25AC%25E3%2582%25A4%25E3%2581%25AB%25E3%2581%2597%25E3%2581%25A6%25E3%2580%2581Canvas%25E3%2581%25AB%25E6%258F%258F%25E7%2594%25BB%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ihasq%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I3YWEyZmFhZmMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ihasq</dc:creator></item><item><title><![CDATA[io-tsと反変・共変]]></title><description><![CDATA[前の記事では、サブタイピング機能を備える静的型付け言語につきものの、抽象度が高く難しい概念「反変」と「共変」について解説しました。この記事では、前回の記事を書く動機となった気づきについてお話します。最初に前提として「反変」と「共変」を組み合わせた概念である「不変」を紹介し、その上で「不変」であることによって発覚した、その「気づき」について解説します。
+
+ 不変: 関数の引数として受け取り、かつ戻り値として返す場合
+ある型の型引数が、関数の戻り値であれば共変になり、関数の引数であれば反変になるということは、型引数が関数の戻り値と引数両方で使用されていた場合はどうなるでしょうか。そうした場合...]]></description><link>https://zenn.dev/igrep/articles/2024-10-2-io-ts</link><guid isPermaLink="true">https://zenn.dev/igrep/articles/2024-10-2-io-ts</guid><pubDate>Thu, 03 Oct 2024 12:06:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--S2Abkdb2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:io-ts%25E3%2581%25A8%25E5%258F%258D%25E5%25A4%2589%25E3%2583%25BB%25E5%2585%25B1%25E5%25A4%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:YAMAMOTO%2520Yuji%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2QzNWJhYTQ2ZWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>YAMAMOTO Yuji</dc:creator></item><item><title><![CDATA[筒で理解する反変・共変]]></title><description><![CDATA[この記事では、Java、Scala、TypeScriptなど、サブタイピング（subtyping）をサポートする言語であれば間違いなくサポートしているであろう「反変（contravariant）」・「共変（covariant）」について、視覚的なアナロジーを用いつつ解説したいと思います。コード例を含め全てTypeScriptを前提とした説明ですが、同様の機能を持った言語であれば概ね同じことが言えるはずです。
+
+ そもそもサブタイピングとは
+サブタイピングとは、型と型との間にサブタイプ（subtype）・スーパータイプ（supertype）という関係を定めて、スーパータイプである型の代わり...]]></description><link>https://zenn.dev/igrep/articles/2024-10-1-variance</link><guid isPermaLink="true">https://zenn.dev/igrep/articles/2024-10-1-variance</guid><pubDate>Thu, 03 Oct 2024 12:06:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--YcilUqM1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%25AD%2592%25E3%2581%25A7%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2599%25E3%2582%258B%25E5%258F%258D%25E5%25A4%2589%25E3%2583%25BB%25E5%2585%25B1%25E5%25A4%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:YAMAMOTO%2520Yuji%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2QzNWJhYTQ2ZWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>YAMAMOTO Yuji</dc:creator></item><item><title><![CDATA[iOSでexpo-secure-storeに保存したデータがアンインストール後も消えない問題]]></title><description><![CDATA[はじめまして！ファンタラクティブのyanoです。
+社内プロジェクトではじめてモバイルアプリ開発に挑戦中なので、発生した問題や取り組みを備忘録として残していきます。
+
+ はじめに
+タイトルに記載のとおりですが、
+「プラットフォームにおけるデータ保持の仕組みを理解していないと気づかない＆Androidと挙動が異なる」という点で意外と気づきにくいです。
+
+ きっかけ
+アプリ内でストレージ情報に基づいてスクリーンを出し分けするという処理があるのですが、再インストール後にiOSだけスクリーン表示がリセットされていないということが発覚したためです。
+
+ やりたいこと
+Androidの挙動に合わせたい...]]></description><link>https://zenn.dev/funteractiveinc/articles/9f6d420fe3952e</link><guid isPermaLink="true">https://zenn.dev/funteractiveinc/articles/9f6d420fe3952e</guid><pubDate>Thu, 03 Oct 2024 11:53:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--NDh2sMeZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:iOS%25E3%2581%25A7expo-secure-store%25E3%2581%25AB%25E4%25BF%259D%25E5%25AD%2598%25E3%2581%2597%25E3%2581%259F%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2581%258C%25E3%2582%25A2%25E3%2583%25B3%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E5%25BE%258C%25E3%2582%2582%25E6%25B6%2588%25E3%2581%2588%25E3%2581%25AA%25E3%2581%2584%25E5%2595%258F%25E9%25A1%258C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:yano%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I4YmI2YjY4NDMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2595%25E3%2582%25A1%25E3%2583%25B3%25E3%2582%25BF%25E3%2583%25A9%25E3%2582%25AF%25E3%2583%2586%25E3%2582%25A3%25E3%2583%2596%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I2YjZhNzRhZDQuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yano</dc:creator></item><item><title><![CDATA[OpenAI の Text to Speech API を使って音声を再生]]></title><description><![CDATA[
+ はじめに
+この記事では、OpenAI の Text to Speech API を使って、入力されたテキストを音声に変換して再生する方法を紹介します。
+
+ 完成品
+今回は、こちらを作成します。
+https://www.youtube.com/watch?v=S2JaD7G-Bdw
+
+ リポジトリ
+作業リポジトリはこちらです。
+https://github.com/hayato94087/next-speech-synthesis-demo
+
+ プロジェクトの作成
+まずは、Next.js プロジェクトを作成します。
+npx create-next-app@latest next-spe...]]></description><link>https://zenn.dev/hayato94087/articles/1903eef755125e</link><guid isPermaLink="true">https://zenn.dev/hayato94087/articles/1903eef755125e</guid><pubDate>Thu, 03 Oct 2024 04:31:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--eO-xF-dF--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:OpenAI%2520%25E3%2581%25AE%2520Text%2520to%2520Speech%2520API%2520%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E9%259F%25B3%25E5%25A3%25B0%25E3%2582%2592%25E5%2586%258D%25E7%2594%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hayato94087%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU5ZTEyZGJjZTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hayato94087</dc:creator></item><item><title><![CDATA[Next.jsでBundle analyzerを使う方法 (windowsの人)]]></title><description><![CDATA[javascriptのバンドルサイズを測るためのモジュールbundle-analyzerを使うために公式ドキュメント通りにコードを書きましたが、うまくいきませんでした。
+エラー
+
+requireが使えない
+ANALYZEが見つからない
+
+
+ 解決策
+まず、next.config.jsファイルなのか、next.config.mjsファイルなのかを確認してください。1.next.config.jsファイルの場合は、公式ドキュメント通りに実装します。
+2.next.config.mjsの場合は、以下のように設定します。
+
+next.config.mjs
+/** @type {import('n...]]></description><link>https://zenn.dev/maiamitorio/articles/2f3b4adc5d79c2</link><guid isPermaLink="true">https://zenn.dev/maiamitorio/articles/2f3b4adc5d79c2</guid><pubDate>Wed, 02 Oct 2024 05:43:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wTSozyBQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Next.js%25E3%2581%25A7Bundle%2520analyzer%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%25E6%2596%25B9%25E6%25B3%2595%2520%2528windows%25E3%2581%25AE%25E4%25BA%25BA%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:maiamitorio%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzUwZmEwOTA0ZTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>maiamitorio</dc:creator></item><item><title><![CDATA[TS 5.7の --rewriteRelativeImportExtensions オプションを使う前に読む記事]]></title><description><![CDATA[TypeScript 5.7で追加される --rewriteRelativeImportExtensions オプションは、その使用にあたって注意が必要なオプションです。
+!
+この記事の公開時点ではこのオプションはまだ正式リリースされていませんが、すでに実装がマージされているため次のリリース（TS 5.7）で利用可能になると思われます。
+
+背景としては、このオプションに関して最近英語圏のTSエヴァンジェリストのような人が積極的な活用を推奨する投稿をしました。一方で、TypeScriptチームはこのオプションを使うのは限定的な場合に限るべきとしています。
+この記事ではTypeScriptチ...]]></description><link>https://zenn.dev/uhyo/articles/rewrite-relative-import-extensions-read-before-use</link><guid isPermaLink="true">https://zenn.dev/uhyo/articles/rewrite-relative-import-extensions-read-before-use</guid><pubDate>Tue, 01 Oct 2024 14:06:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---c98a08m--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TS%25205.7%25E3%2581%25AE%2520--rewriteRelativeImportExtensions%2520%25E3%2582%25AA%25E3%2583%2597%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%25E5%2589%258D%25E3%2581%25AB%25E8%25AA%25AD%25E3%2582%2580%25E8%25A8%2598%25E4%25BA%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:uhyo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVjYjFlMDJlNGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>uhyo</dc:creator></item><item><title><![CDATA[package.jsonのscriptsを深堀りしてみた。]]></title><description><![CDATA[
+ はじめに
+2024年現在、cssやjsを使う多くのプロジェクトでpackage.jsonを見ることになると思います。
+サーバサイド主体のプログラマーでも全く知らないと環境構築できないため必須の知識となっています。
+しかし、ほとんどの人はコピペでコマンドを動かしていて、npm run が何をやっているのか知らないのではないでしょうか？
+深堀してみましょう。
+
+ scriptsはショートカット
+
+package.json
+{
+    "private": true,
+    "scripts": {
+        "dev": "npm run development",
+      ...]]></description><link>https://zenn.dev/k_tabuchi/articles/76acdabaaeaf1d</link><guid isPermaLink="true">https://zenn.dev/k_tabuchi/articles/76acdabaaeaf1d</guid><pubDate>Tue, 01 Oct 2024 12:37:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--WNLRL-EK--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:package.json%25E3%2581%25AEscripts%25E3%2582%2592%25E6%25B7%25B1%25E5%25A0%2580%25E3%2582%258A%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25E3%2580%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:k-tabuchi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhkMjhhY2RlZGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>k-tabuchi</dc:creator></item><item><title><![CDATA[Valtioはどのように生まれたか、3つ目のライブラリは必要だったのか？]]></title><description><![CDATA[こんにちは、Valtioの作者です。Zustand、Jotaiに続いて3つ目のライブラリも開発したわけですが、Valtioが生まれた経緯を記事にしてますので、よろしければご覧ください。
+https://blog.axlight.com/posts/how-valtio-was-born/
+以下、ChatGPTによる翻訳です。
+
+
+ はじめに
+Zustand v3と新しいJotaiをリリースした後、チーム内でグローバルステート用の別のライブラリを開発できるかどうかについて議論がありました。
+この投稿では、Valtioの開発の始まりとそのAPIデザインについて振り返ります。
+
+ 最初のためら...]]></description><link>https://zenn.dev/dai_shi/articles/25eb34b1f1926b</link><guid isPermaLink="true">https://zenn.dev/dai_shi/articles/25eb34b1f1926b</guid><pubDate>Tue, 01 Oct 2024 05:39:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--f2rv2GR_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Valtio%25E3%2581%25AF%25E3%2581%25A9%25E3%2581%25AE%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E7%2594%259F%25E3%2581%25BE%25E3%2582%258C%25E3%2581%259F%25E3%2581%258B%25E3%2580%25813%25E3%2581%25A4%25E7%259B%25AE%25E3%2581%25AE%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%25E3%2581%25AF%25E5%25BF%2585%25E8%25A6%2581%25E3%2581%25A0%25E3%2581%25A3%25E3%2581%259F%25E3%2581%25AE%25E3%2581%258B%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:daishi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzcwZGNhM2E2Y2IuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>daishi</dc:creator></item><item><title><![CDATA[Prisma 入門]]></title><description><![CDATA[ゼロから Prisma の利用を学べます。
+
+【読者】
+・Prisma の初学者
+・Webアプリ開発者で Prisma に興味ある方
+
+【特徴は】
+・Prismaの使用にフォーカスした説明
+・Prismaを利用するにあたりVSCodeの設定の説明
+・リポジトリの公開
+
+【本書籍がカバーする技術】
+・Prisma
+・Supabase
+・TypeScript
+
+【その他】
+「いいね」してくれたらモチベーションあがります🚀 ]]></description><link>https://zenn.dev/hayato94087/books/e9c2721ff22ac7</link><guid isPermaLink="true">https://zenn.dev/hayato94087/books/e9c2721ff22ac7</guid><pubDate>Tue, 01 Oct 2024 04:57:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--f-hTeCLO--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci83OTI1MzU0Y2QwLnBuZw==%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>hayato94087</dc:creator></item><item><title><![CDATA[Ruby on Railsにはない一般攻撃魔法]]></title><description><![CDATA[他言語のフレームワークとRailsを比べてみる
+
+ Railsにはたくさんゾルトラークがある
+葬送のフリーレンという作品にはゾルトラークという魔法が出てきます。当初はその強力性から稀有な魔法と認識されていたものの、解析や研究が進んだ結果誰もが使える魔法となり一般攻撃魔法と認識されるようになりました。
+Ruby on Railsというフレームワークも同様にファイルアップロードのActive Storage、複数データベース接続など従来はgemで実現していたものの一部が組み込み化され一般攻撃魔法になっています。
+コアが大きくなったのでとあるバージョンから別ライブラリーに切り出しますというライ...]]></description><link>https://zenn.dev/hiromichinomata/articles/553eaf94b71f95</link><guid isPermaLink="true">https://zenn.dev/hiromichinomata/articles/553eaf94b71f95</guid><pubDate>Mon, 30 Sep 2024 16:52:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--NnxjH7fE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ruby%2520on%2520Rails%25E3%2581%25AB%25E3%2581%25AF%25E3%2581%25AA%25E3%2581%2584%25E4%25B8%2580%25E8%2588%25AC%25E6%2594%25BB%25E6%2592%2583%25E9%25AD%2594%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Hiromichi%2520NOMATA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dKVzhiSzBKYjZ4cXc1MDFjSHFXXzJ1cmxiMGFMYmY5T3poY1RPUnc9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Hiromichi NOMATA</dc:creator></item><item><title><![CDATA[typeとinterfaceって結局どう使い分ければ良いの？]]></title><description><![CDATA[TypeScriptではtype alias syntax（型エイリアス構文）とinterface declaration（インターフェース宣言）を使って型を定義できます。
+おおよそ両者同じことができるので、どちらを使うか迷います。
+両者の使い分けに関する記事は沢山あります。
+https://zenn.dev/luvmini511/articles/6c6f69481c2d17
+https://mosya.dev/blog/type-interface
+これらの記事を読んで基本的にはtypeを使えば良いと思っていました。
+ですが最近以下のことがあり、typeとinterfaceの使い分け...]]></description><link>https://zenn.dev/atamaplus/articles/755d090abb0a9a</link><guid isPermaLink="true">https://zenn.dev/atamaplus/articles/755d090abb0a9a</guid><pubDate>Mon, 30 Sep 2024 09:00:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5hng6tVb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:type%25E3%2581%25A8interface%25E3%2581%25A3%25E3%2581%25A6%25E7%25B5%2590%25E5%25B1%2580%25E3%2581%25A9%25E3%2581%2586%25E4%25BD%25BF%25E3%2581%2584%25E5%2588%2586%25E3%2581%2591%25E3%2582%258C%25E3%2581%25B0%25E8%2589%25AF%25E3%2581%2584%25E3%2581%25AE%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:yutake27%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RjOTM3M2I1YWUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:atama%2520plus%2520techblog%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQyNTc2ZTM0OTQuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yutake27</dc:creator></item><item><title><![CDATA[【RN Update 2024年9月】 Expo ImageにonDisplayイベントが追加 他]]></title><description><![CDATA[
+ はじめに
+こんにちは！
+「愛犬との毎日を楽しく便利にするアプリ オトとりっぷ」でエンジニアしています、足立です！
+この記事では、今月の React Native に関連するニュースを紹介します。
+
+ 目次
+
+ライブラリ情報
+
+【Expo Image】 onDisplay イベントが追加
+【react-native-device-info】 v12, v13 がリリース
+【Expo FileSystem】 同期的なファイル操作をサポート (next)
+
+
+React Native 関連情報
+
+React Native Core Contributor Summit 開催
+
+
+
+
+ ライ...]]></description><link>https://zenn.dev/ototrip/articles/tech-update-202409-rn</link><guid isPermaLink="true">https://zenn.dev/ototrip/articles/tech-update-202409-rn</guid><pubDate>Mon, 30 Sep 2024 08:09:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--LYz-k_9N--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590RN%2520Update%25202024%25E5%25B9%25B49%25E6%259C%2588%25E3%2580%2591%2520Expo%2520Image%25E3%2581%25ABonDisplay%25E3%2582%25A4%25E3%2583%2599%25E3%2583%25B3%25E3%2583%2588%25E3%2581%258C%25E8%25BF%25BD%25E5%258A%25A0%2520%25E4%25BB%2596%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2580%2590%25E5%2585%25AC%25E5%25BC%258F%25E3%2580%2591%25E3%2582%25AA%25E3%2583%2588%25E3%2581%25A8%25E3%2582%258A%25E3%2581%25A3%25E3%2581%25B7%2520-%2520%25E7%258A%25AC%25E5%25B0%2582%25E7%2594%25A8%25E3%2581%25AE%25E9%259F%25B3...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y3NGU5ZTJkYjAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>【公式】オトとりっぷ - 犬専用の音楽アプリ</dc:creator></item><item><title><![CDATA[[TailwindCSS]グリッドレイアウトで行頭を美しく整える]]></title><description><![CDATA[
+ はじめに
+今回は、Tailwind CSSを使って、要素が不揃いだったレイアウトを整然とした美しいデザインに改善する方法を紹介します。記事の流れとして、まず初めに改善前のコードを見ていただき、その後、どのようにして現在のコードに改善していったのかを解説していきます。
+
+ 改善前のコード
+まず、こちらが改善前のコードです。このコードでは、項目名とその内容がバラバラに表示されており、統一感がありませんでした。
+
+TypeScript
+import React from "react";
+
+const LegalNotice = () =&gt; {
+  return (
+    &lt;...]]></description><link>https://zenn.dev/haruki1009/articles/bd7bac7a117234</link><guid isPermaLink="true">https://zenn.dev/haruki1009/articles/bd7bac7a117234</guid><pubDate>Mon, 30 Sep 2024 05:38:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ZSc3M2UQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BTailwindCSS%255D%25E3%2582%25B0%25E3%2583%25AA%25E3%2583%2583%25E3%2583%2589%25E3%2583%25AC%25E3%2582%25A4%25E3%2582%25A2%25E3%2582%25A6%25E3%2583%2588%25E3%2581%25A7%25E8%25A1%258C%25E9%25A0%25AD%25E3%2582%2592%25E7%25BE%258E%25E3%2581%2597%25E3%2581%258F%25E6%2595%25B4%25E3%2581%2588%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Haruki%2520Inoue%2520%257C%2520Not...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI5MGI2YjhmZWQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Haruki Inoue | Notion公認キャンパスリーダー</dc:creator></item><item><title><![CDATA[社内でやっている Good & New（グッドアンドニュー）についてと Good & New 用 Web アプリを作った話]]></title><description><![CDATA[
+ はじめに
+みなさんは「Good &amp; New（グッドアンドニュー）」をご存知でしょうか？
+Good &amp; New は、チーム内のメンバーが最近あった「よかったこと（Good）」や「新しい発見（New）」を共有する取り組みです。
+弊社では、週 1 の全社定例の初めで Good &amp; New を行っています。ちなみに弊社は全社員合わせて 6 名ほどの会社で、全員がエンジニアです。
+今回は、Good &amp; New の啓蒙と Good &amp; New を円滑に進めるための Web アプリを紹介したいと思います。
+https://good-and-new.unrea...]]></description><link>https://zenn.dev/taichifukumoto/articles/good-and-new</link><guid isPermaLink="true">https://zenn.dev/taichifukumoto/articles/good-and-new</guid><pubDate>Mon, 30 Sep 2024 05:17:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--EfIXpUnK--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%25A4%25BE%25E5%2586%2585%25E3%2581%25A7%25E3%2582%2584%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%2584%25E3%2582%258B%2520Good%2520%2526%2520New%25EF%25BC%2588%25E3%2582%25B0%25E3%2583%2583%25E3%2583%2589%25E3%2582%25A2%25E3%2583%25B3%25E3%2583%2589%25E3%2583%258B%25E3%2583%25A5%25E3%2583%25BC%25EF%25BC%2589%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E3%2581%25A8%2520Good%2520%2526%2520New%2520%25E7%2594%25A8%2520Web%2520%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:taichi%2520fukumoto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RiZTU1OWFmNjIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>taichi fukumoto</dc:creator></item></channel></rss>
