@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Sun, 06 Oct 2024 03:22:02 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[pyenv+venv→uvへの乗り換え]]></title><description><![CDATA[
+ 群雄割拠 pythonパッケージ管理
+poetryが流行ったと思ったらryeが現れ，その次はuv？
+貴様らどんだけ浮気性なんじゃ！と思い，実験環境ではpyenv+venv，デプロイではdockerfileにpip install ベタ書き，と言う構成を頑なに使い続けていたのですが，試しに使ってみたuvがfaster and simpler と感じたので乗り換えることにしました．以下最小限の置き換えです．その他の便利機能は色々あるみたいですが，僕には扱いきれそうもないので他記事を参照してください．
+
+ 環境
+ubuntu 20.04/22.04
+
+ インストール
+curl -LsSf ...]]></description><link>https://zenn.dev/watanko/articles/8400df75e4aab5</link><guid isPermaLink="true">https://zenn.dev/watanko/articles/8400df75e4aab5</guid><pubDate>Sun, 06 Oct 2024 02:34:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_0NT1V-X--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:pyenv%252Bvenv%25E2%2586%2592uv%25E3%2581%25B8%25E3%2581%25AE%25E4%25B9%2597%25E3%2582%258A%25E6%258F%259B%25E3%2581%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:watanko%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2UzMDAzYTExYjMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>watanko</dc:creator></item><item><title><![CDATA[【初心者向け】Python入門：プログラミングの世界へようこそ！]]></title><description><![CDATA[
+ Pythonってどんな言語？
+Pythonは、シンプルで読みやすいコードが特徴のプログラミング言語です。AIやデータ分析、Web開発など、幅広い分野で活躍しています。初心者でも学びやすく、高い生産性を実現できることから、世界中で人気を集めています。
+
+ Pythonで遊ぼう！
+
+ Hello, World!
+プログラミングの定番、「Hello, World!」を出力してみましょう。
+print("Hello, World!")
+実行すると、コンソールに「Hello, World!」と表示されます。
+
+ 変数とデータ型
+Pythonでは、変数を使って値を保存します。
+# 整数
+num ...]]></description><link>https://zenn.dev/yogurt/articles/d29fc60c37acfa</link><guid isPermaLink="true">https://zenn.dev/yogurt/articles/d29fc60c37acfa</guid><pubDate>Sat, 05 Oct 2024 12:59:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9xTy2JQg--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E5%2590%2591%25E3%2581%2591%25E3%2580%2591Python%25E5%2585%25A5%25E9%2596%2580%25EF%25BC%259A%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%259F%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%25AE%25E4%25B8%2596%25E7%2595%258C%25E3%2581%25B8%25E3%2582%2588%25E3%2581%2586%25E3%2581%2593%25E3%2581%259D%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%25A8%25E3%2583%25BC%25E3%2582%25B0%25E3%2583%25AB%25E3%2583%2588%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzViZmFiYWU4NDUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ヨーグルト</dc:creator></item><item><title><![CDATA[arXivの気になるカテゴリの最新の論文をdiscordに共有する]]></title><description><![CDATA[
+ はじめに
+新しい技術を追っていると高頻度でarXivの論文を見ていることがあります。XのTLに流れてきているものを見ていますが、探すのも大変なのでDiscordに送ってしまおうと思いました
+
+ Demo
+今は以下の画像のように WebHookを使って定期的に共有しています。
+
+
+ arXivから情報を取得
+以下のコードにて、カテゴリを コンピューターサイエンス に限定して5時間以内に更新されたものを取得します
+import urllib.parse
+import feedparser
+from datetime import datetime, timedelta
+import re...]]></description><link>https://zenn.dev/midra_lab/articles/f2d55c2e0cebf9</link><guid isPermaLink="true">https://zenn.dev/midra_lab/articles/f2d55c2e0cebf9</guid><pubDate>Sat, 05 Oct 2024 12:15:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--KGrYONnW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:arXiv%25E3%2581%25AE%25E6%25B0%2597%25E3%2581%25AB%25E3%2581%25AA%25E3%2582%258B%25E3%2582%25AB%25E3%2583%2586%25E3%2582%25B4%25E3%2583%25AA%25E3%2581%25AE%25E6%259C%2580%25E6%2596%25B0%25E3%2581%25AE%25E8%25AB%2596%25E6%2596%2587%25E3%2582%2592discord%25E3%2581%25AB%25E5%2585%25B1%25E6%259C%2589%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:ayousanz%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MwMGI0ZTBiOTUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:MidraLab%2528%25E3%2583%259F%25E3%2583%2589%25E3%2583%25A9%25E3%2583%259C%2529%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ5OTljMWRhOGIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ayousanz</dc:creator></item><item><title><![CDATA[QRコード作成＋QRコード画像から情報の取り出し]]></title><description><![CDATA[
+ 雑談
+QRコードといえば「囲碁から着想を得た」という豆知識がよくクイズで出されている印象があります。囲碁の碁盤からQRコードを思いつくなんて…すごい発想力ですよね！
+QRコードは扱う情報の種類によって保持できる情報量が異なるようです。QRコードの最大情報量は以下のようになっています。
+
+数字のみ: 最大 7,089文字
+英数字（数字と英字の組み合わせ）: 最大 4,296文字
+バイト（バイナリデータ）: 最大 2,953バイト
+漢字: 最大 1,817文字
+
+ちなみにバーコードは12～13桁の数字データが限界です。QRコードはバーコードの数百倍の情報量を持っているわけです。QRコード...]]></description><link>https://zenn.dev/zenn24yykiitos/articles/d5baac26bf3ec2</link><guid isPermaLink="true">https://zenn.dev/zenn24yykiitos/articles/d5baac26bf3ec2</guid><pubDate>Sat, 05 Oct 2024 11:12:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qYagjIkK--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:QR%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E4%25BD%259C%25E6%2588%2590%25EF%25BC%258BQR%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E7%2594%25BB%25E5%2583%258F%25E3%2581%258B%25E3%2582%2589%25E6%2583%2585%25E5%25A0%25B1%25E3%2581%25AE%25E5%258F%2596%25E3%2582%258A%25E5%2587%25BA%25E3%2581%2597%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:zenn_kiitos%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhkYTcwNzc1MzkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>zenn_kiitos</dc:creator></item><item><title><![CDATA[【Python】NumPy配列（画像データなど）の色を反転させる方法]]></title><description><![CDATA[
+ はじめに
+PythonのNumPyは、数値計算を高速に行うための強力なライブラリです。
+画像処理においても広く利用されており、NumPy配列で画像データを表現できます。
+今回は、NumPy配列で表された画像データの色を反転させる方法について解説します。
+
+ 色を反転（Invert）
+画像データをNumPy配列で扱う場合、各画素は0から255までの数値で表されます。
+この数値は、その画素の色を表しており、一般的に0が黒、255が白に対応します。
+色を反転させるには、各画素の値を255からその値を引くことで、白と黒を反転させることができます。
+import numpy as np
+
+# ...]]></description><link>https://zenn.dev/hovinci/articles/c593642ec51f75</link><guid isPermaLink="true">https://zenn.dev/hovinci/articles/c593642ec51f75</guid><pubDate>Sat, 05 Oct 2024 08:54:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fTvC1RR3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591NumPy%25E9%2585%258D%25E5%2588%2597%25EF%25BC%2588%25E7%2594%25BB%25E5%2583%258F%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2581%25AA%25E3%2581%25A9%25EF%25BC%2589%25E3%2581%25AE%25E8%2589%25B2%25E3%2582%2592%25E5%258F%258D%25E8%25BB%25A2%25E3%2581%2595%25E3%2581%259B%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%259B%25E3%2583%25B4%25E3%2582%25A3%25E3%2583%25B3%25E3%2583%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzIzYTE5NmI1NDYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ホヴィンチ</dc:creator></item><item><title><![CDATA[【Python】NumPy配列（画像データなど）にカラーフィルターをかける方法（赤、緑、青、グレー）]]></title><description><![CDATA[
+ はじめに
+PythonのNumPyは、数値計算や画像処理において非常に強力なライブラリです。
+とくに、画像データをNumPy配列として扱うことで、さまざまな画像処理を効率的に行うことができます。
+本記事では、NumPy配列（画像データなど）から特定の色のチャンネル、赤色、緑色、青色、そしてグレースケールへの変換についても触れ、NumPyの画像処理の基礎を理解するための手助けとします。
+
+ 赤色のカラーフィルター
+NumPy配列で表される画像データは、一般的に3次元配列で、各次元は高さ、幅、そして色チャンネル（RGB）に対応しています。
+赤色チャンネルのみを抽出するには、この3次元配列...]]></description><link>https://zenn.dev/hovinci/articles/8d87eb4eeec1c0</link><guid isPermaLink="true">https://zenn.dev/hovinci/articles/8d87eb4eeec1c0</guid><pubDate>Sat, 05 Oct 2024 08:37:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hjixtUPj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591NumPy%25E9%2585%258D%25E5%2588%2597%25EF%25BC%2588%25E7%2594%25BB%25E5%2583%258F%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2581%25AA%25E3%2581%25A9%25EF%25BC%2589%25E3%2581%25AB%25E3%2582%25AB%25E3%2583%25A9%25E3%2583%25BC%25E3%2583%2595%25E3%2582%25A3%25E3%2583%25AB%25E3%2582%25BF%25E3%2583%25BC%25E3%2582%2592%25E3%2581%258B%25E3%2581%2591%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%25EF%25BC%2588%25E8%25B5%25A4%25E3%2580%2581%25E7%25B7%2591%25E3%2580%2581%25E9%259D%2592%25E3%2580%2581%25E3%2582%25B0%25E3%2583%25AC%25E3%2583%25BC%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%259B%25E3%2583%25B4%25E3%2582%25A3%25E3%2583%25B3%25E3%2583%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzIzYTE5NmI1NDYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ホヴィンチ</dc:creator></item><item><title><![CDATA[AITuberごみちゃんを作ったらみんなでAIゲーム開発することになった話]]></title><description><![CDATA[
+ はじめに
+こんにちは！AIギャルを開発しているyasunaです。
+なんと11月にサルドラさんハヤカワ五味さんと生成AIなんでも展示会に出展することになりました！
+https://x.com/yasun_ai/status/1839898559875035420
+https://x.com/hayakawagomi/status/1840027423884325012
+https://x.com/sald_ra/status/1840026249147887812
+https://x.com/sald_ra/status/1840022543429972293
+まだ申し込めるようなので...]]></description><link>https://zenn.dev/yasuna/articles/0c383eb1b13c54</link><guid isPermaLink="true">https://zenn.dev/yasuna/articles/0c383eb1b13c54</guid><pubDate>Sat, 05 Oct 2024 06:45:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--PSgyi3Zw--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AITuber%25E3%2581%2594%25E3%2581%25BF%25E3%2581%25A1%25E3%2582%2583%25E3%2582%2593%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%25E3%2582%2589%25E3%2581%25BF%25E3%2582%2593%25E3%2581%25AA%25E3%2581%25A7AI%25E3%2582%25B2%25E3%2583%25BC%25E3%2583%25A0%25E9%2596%258B%25E7%2599%25BA%25E3%2581%2599%25E3%2582%258B%25E3%2581%2593%25E3%2581%25A8%25E3%2581%25AB%25E3%2581%25AA%25E3%2581%25A3%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yasuna%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQwOTAxZWQ3NTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yasuna</dc:creator></item><item><title><![CDATA[魚の画像判定LINE Botを作ってみた]]></title><description><![CDATA[
+ はじめに
+ここ最近、LINE Bot開発について学んでおりました。
+【ハンズオン】 LINE Bot つくってみた！
+【LINE Bot開発】CI/CD環境を構築してみた。
+学んだことを使って何か作りたいと思い、いろいろ検索してたところ、
+awsのbuilders.flashで魚の画像判定LINE BOTが紹介されていたので挑戦してみました！
+
+ 参考
+以下の記事を参考に作ってみました！
+機械学習を使って魚の画像判定アプリを作ってみた!
+参考サイトでは、CI/CD パイプラインをGitLabとAWSのCode シリーズを用いてセットアップされていますが、今回はGitHub Actio...]]></description><link>https://zenn.dev/kr_aws/articles/169afd843db55c</link><guid isPermaLink="true">https://zenn.dev/kr_aws/articles/169afd843db55c</guid><pubDate>Sat, 05 Oct 2024 05:56:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Cv7oQ3fd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E9%25AD%259A%25E3%2581%25AE%25E7%2594%25BB%25E5%2583%258F%25E5%2588%25A4%25E5%25AE%259ALINE%2520Bot%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25AF%25E3%2582%25B5%25E3%2582%25AB%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZmYTliNzAxNzAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>クサカ</dc:creator></item><item><title><![CDATA[Python 組み込み関数大全]]></title><description><![CDATA[本書はPythonの全組み込み関数（2024年10月時点で71個）の使い方を解説します。
+随時更新していきますので「いいね」でブックマークしていただけると幸いです。
+]]></description><link>https://zenn.dev/python_academia/books/e671d97f090c50</link><guid isPermaLink="true">https://zenn.dev/python_academia/books/e671d97f090c50</guid><pubDate>Fri, 04 Oct 2024 23:09:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9JhtfS6T--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci81NTFiYTliZDA2LmpwZWc=%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>Pythonアカデミア</dc:creator></item><item><title><![CDATA[[memo] Fast APIで個人的によく使うSwagger docsの書き方]]></title><description><![CDATA[最近利用することが多いのでメモをしておきます。
+FastAPIでは標準でOpenAPIのAPIドキュメントを生成する機能が用意されています。
+
+Swagger : docs
+
+ReDoc : redoc
+
+
+これらのドキュメントは、コードの内容に応じて自動的に生成され、インタラクティブに使用することができます。Swaggerは特に、APIのエンドポイントを実際にテストするためのUIを提供しています。
+https://fastapi.tiangolo.com/ja/features/
+
+ サンプル
+from fastapi import APIRouter, Depends, Reques...]]></description><link>https://zenn.dev/mkurita/articles/4980af5b2c5b76</link><guid isPermaLink="true">https://zenn.dev/mkurita/articles/4980af5b2c5b76</guid><pubDate>Fri, 04 Oct 2024 15:39:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--VRzhy9OK--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255Bmemo%255D%2520Fast%2520API%25E3%2581%25A7%25E5%2580%258B%25E4%25BA%25BA%25E7%259A%2584%25E3%2581%25AB%25E3%2582%2588%25E3%2581%258F%25E4%25BD%25BF%25E3%2581%2586Swagger%2520docs%25E3%2581%25AE%25E6%259B%25B8%25E3%2581%258D%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%25A0%2597%25E7%2594%25B0%2520%25E5%259F%25BA%25E6%2588%2590%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdjN2Q4ZTFiODUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>栗田 基成</dc:creator></item><item><title><![CDATA[PythonからVoiceVoxの話者一覧を取得する]]></title><description><![CDATA[こちらの記事ではPythonを経由してVoiceVoxで音声ファイルを出力する方法を紹介しました。
+https://zenn.dev/zenn24yykiitos/articles/fff3c954ddf42c
+このプログラムの中で「どのキャラクターに喋ってもらうか」は、speakerとしてID指定する必要がありました。しかしどのキャラクターのどのスタイル（あまあま、ノーマル、ツンツンなど）がどのIDに紐づいているかは、バージョンによって異なる場合があります。そこで各キャラクターとスタイルに紐づけられたIDを取得する方法をご紹介します。
+
+ VoiceVoxの話者とスタイル一覧を取得する...]]></description><link>https://zenn.dev/zenn24yykiitos/articles/f3e983fe650e08</link><guid isPermaLink="true">https://zenn.dev/zenn24yykiitos/articles/f3e983fe650e08</guid><pubDate>Fri, 04 Oct 2024 13:12:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--sfJkoQL9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%258B%25E3%2582%2589VoiceVox%25E3%2581%25AE%25E8%25A9%25B1%25E8%2580%2585%25E4%25B8%2580%25E8%25A6%25A7%25E3%2582%2592%25E5%258F%2596%25E5%25BE%2597%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:zenn_kiitos%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhkYTcwNzc1MzkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>zenn_kiitos</dc:creator></item><item><title><![CDATA[Python経由でVoiceVoxの音声ファイルを作成する方法]]></title><description><![CDATA[
+ VOICEVOXありがとう…
+VOICEVOX、便利ですよね！ずんだもんや春日部つむぎさんなどの可愛い声で自然な音声合成ができる神フリーソフトウェアです。動画編集されていたら、お世話になった方も多いのではないでしょうか？そんなVOICEVOXですが、ローカルで動作するため、APIを利用してPythonで音声を生成することができます。
+より具体的には、VOICEVOXには、ローカルサーバーを起動してHTTPリクエストを通じて音声を生成できるAPIが提供されています。PythonからこのAPIにアクセスして、テキストを渡すことで音声ファイルを生成することが可能です。今回はその方法について...]]></description><link>https://zenn.dev/zenn24yykiitos/articles/fff3c954ddf42c</link><guid isPermaLink="true">https://zenn.dev/zenn24yykiitos/articles/fff3c954ddf42c</guid><pubDate>Fri, 04 Oct 2024 12:50:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--P2TJ5d32--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E7%25B5%258C%25E7%2594%25B1%25E3%2581%25A7VoiceVox%25E3%2581%25AE%25E9%259F%25B3%25E5%25A3%25B0%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2592%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:zenn_kiitos%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhkYTcwNzc1MzkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>zenn_kiitos</dc:creator></item><item><title><![CDATA[Azureを使ってRealTime APIのAudio RAGを試す]]></title><description><![CDATA[
+ はじめに
+OpenAI DevDayでchatGPTのAdvanced Voice ModeのAPI版ことRealTime APIが発表されました。
+Azure OpenAIでも利用可能となり、Azure Ai Serachと組み合わせてVoice to VoiceでRAGを試せるサンプルアプリが公開されているのでこれを試します。
+以下のリポジトリです。
+https://github.com/Azure-Samples/aisearch-openai-rag-audio
+ちなみに以下のようになります（公式のサンプル動画）****。
+https://youtu.be/vXJka8xZ9...]]></description><link>https://zenn.dev/tomodo_ysys/articles/azure-audio-rag-sample</link><guid isPermaLink="true">https://zenn.dev/tomodo_ysys/articles/azure-audio-rag-sample</guid><pubDate>Fri, 04 Oct 2024 12:46:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6JYDt1nQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Azure%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6RealTime%2520API%25E3%2581%25AEAudio%2520RAG%25E3%2582%2592%25E8%25A9%25A6%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A8%25E3%2582%2582%25E3%2581%25A9%2540SIer%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJkY2Y4OTVkMzMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ともど@SIerエンジニア</dc:creator></item><item><title><![CDATA[uv 0.4によるPython環境構築]]></title><description><![CDATA[こんにちは。この度、開発マシンを新しくしたため、数年ぶりにPython環境を１から構築する機会がありました。個人開発での利用がメインなので、pyenv+pipというシンプルな組み合わせでもともと利用していました。最近のベストプラクティスは何なんだろうと調べていくうちに、ちょうど2024年8月にあったuv 0.3.0のリリースから、プロジェクト管理ツールの機能が加わってきたことで、uvが熱いという流れがありそうです。
+折角なので、uvだけを使って新しくPython環境構築をしてみました。
+
+ uvとは
+Ultra violetではないようです。Rustで開発されたPythonにおけるプロジ...]]></description><link>https://zenn.dev/daikichidaze/articles/573d8003a55e84</link><guid isPermaLink="true">https://zenn.dev/daikichidaze/articles/573d8003a55e84</guid><pubDate>Fri, 04 Oct 2024 09:18:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_6gGWlWP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:uv%25200.4%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258BPython%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:TakumaYoshioka%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2hNc0l4SXJQR1VHeHoxQmx2UnpkcW5lVFFoRnZNOEU0M0lzalJzPXMyNTAtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>TakumaYoshioka</dc:creator></item><item><title><![CDATA[Google ColabからEdge TTSを利用して音声合成する方法]]></title><description><![CDATA[
+ 自分がこれまで利用してきた音声合成の方法
+動画コンテンツの作成などで音声合成を利用することがあります。数年前まではAWSやGoogleのクラウドサービスを利用していました。
+https://aws.amazon.com/jp/polly/
+https://cloud.google.com/text-to-speech?hl=ja
+少し前にはESPnetを使って、無料で音声合成できるのはいいなと思っていました。
+https://github.com/espnet/espnet
+ただ、ESPnetをGoogle Colabから利用しようとすると、モデルのロードなどでセットアップに時間がか...]]></description><link>https://zenn.dev/kaorumori/articles/a69b19bc5802db</link><guid isPermaLink="true">https://zenn.dev/kaorumori/articles/a69b19bc5802db</guid><pubDate>Fri, 04 Oct 2024 01:20:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--JpN1lH4J--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Google%2520Colab%25E3%2581%258B%25E3%2582%2589Edge%2520TTS%25E3%2582%2592%25E5%2588%25A9%25E7%2594%25A8%25E3%2581%2597%25E3%2581%25A6%25E9%259F%25B3%25E5%25A3%25B0%25E5%2590%2588%25E6%2588%2590%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kaorumori%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRjZjA1YmY3MzAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kaorumori</dc:creator></item><item><title><![CDATA[LeetCode #94 Binary Tree Inorder Traversal]]></title><description><![CDATA[
+ 問題概要
+入力値：root (num array)
+出力値：num array
+return the inorder traversal
+問題のリンク
+
+ 入力例
+root: [1,null,2,3]
+answer: [1,3,2]
+
+ 解答例1
+計算量：O(n)
+DFS using recursion
+Python
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, val=0, left=None, right=None):
+#         self.v...]]></description><link>https://zenn.dev/pirika/articles/abe4766bad43b1</link><guid isPermaLink="true">https://zenn.dev/pirika/articles/abe4766bad43b1</guid><pubDate>Thu, 03 Oct 2024 23:59:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fCBu8eFB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:LeetCode%2520%252394%2520Binary%2520Tree%2520Inorder%2520Traversal%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%2594%25E3%2583%25AA%25E3%2582%25AB%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U0YmI4OWIzOGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ピリカ</dc:creator></item><item><title><![CDATA[pythonを使ってcvatのデータを操作する]]></title><description><![CDATA[
+ 概要
+pythonを使ってcvatのデータを操作する機会がありましたので、備忘録です。
+
+ セットアップ
+今回はDockerを使って起動します。
+git clone https://github.com/cvat-ai/cvat --depth 1
+cd cvat
+docker compose up -d
+
+ アカウントの作成
+http://localhost:8080にアクセスして、アカウントを作成します。
+
+ Pythonによる操作
+まず、以下のライブラリをインストールします。
+pip install cvat-sdk
+アカウントの情報を.envに記載します。
+host=http...]]></description><link>https://zenn.dev/nakamura196/articles/93a19fbbf0161c</link><guid isPermaLink="true">https://zenn.dev/nakamura196/articles/93a19fbbf0161c</guid><pubDate>Thu, 03 Oct 2024 23:20:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--JmfiOXtF--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:python%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6cvat%25E3%2581%25AE%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%2592%25E6%2593%258D%25E4%25BD%259C%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nakamura196%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pkd3BpX1gzTWIzV3VqTnVnV2tPTlJlU3VsNFNTN1BNMWlPQm9LRm5JPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nakamura196</dc:creator></item><item><title><![CDATA[【イベント参加レポート】PyCon JP 2024]]></title><description><![CDATA[2024/9/27, 28 に行われた PyCon JP 2024 の感想です。
+２日目のみの参加です。
+
+ Pythonで日本語処理 入門〜フリガナプログラムを作ろう〜
+https://x.com/takanory/status/1839835716190192009
+
+ 感想
+
+来月会社の勉強会で形態素解析について扱うので発表資料作成の参考になった
+
+rubyタグの存在を初めて知った
+これまでMecab + neologdを使っていたが、辞書を考慮するとSudachiの使用も検討してみたい
+
+
+ 参考
+
+sudachi.rs
+
+
+ Pythonの数学機能を学ぼう！その仕組みも学ぼう！...]]></description><link>https://zenn.dev/adverdest/articles/pycon_jp_2024_review</link><guid isPermaLink="true">https://zenn.dev/adverdest/articles/pycon_jp_2024_review</guid><pubDate>Thu, 03 Oct 2024 23:09:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fB5VwKxU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E3%2582%25A4%25E3%2583%2599%25E3%2583%25B3%25E3%2583%2588%25E5%258F%2582%25E5%258A%25A0%25E3%2583%25AC%25E3%2583%259D%25E3%2583%25BC%25E3%2583%2588%25E3%2580%2591PyCon%2520JP%25202024%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:philosophynote%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E5NzI1YzFiNTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>philosophynote</dc:creator></item><item><title><![CDATA[[Python]指定したWEBページからテキストを取得して音読してもらう[pyttsx3]]]></title><description><![CDATA[pyttsx3 を使えばPythonでも簡単に、しかもオフラインの環境でもテキストの音読できるスクリプトができました。しかし読み上げ対象となるテキストを毎回どこからかコピペしてきて指定するのは、正直言って面倒くさいですよね。なので、WEBページを指定して、そこから本文を自動的に抽出し、音読してもらうように改良しました。
+pyttsx3を使った音声読み上げに関する基本の記事はこちらです。
+https://zenn.dev/zenn24yykiitos/articles/c3ad2101993805
+
+ 手順の概要
+
+ウェブスクレイピングで記事取得
+取得した記事の読み上げ
+
+読み上げ対象とな...]]></description><link>https://zenn.dev/zenn24yykiitos/articles/037a9dbb3ff54f</link><guid isPermaLink="true">https://zenn.dev/zenn24yykiitos/articles/037a9dbb3ff54f</guid><pubDate>Thu, 03 Oct 2024 13:44:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fWtJu1M_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BPython%255D%25E6%258C%2587%25E5%25AE%259A%25E3%2581%2597%25E3%2581%259FWEB%25E3%2583%259A%25E3%2583%25BC%25E3%2582%25B8%25E3%2581%258B%25E3%2582%2589%25E3%2583%2586%25E3%2582%25AD%25E3%2582%25B9%25E3%2583%2588%25E3%2582%2592%25E5%258F%2596%25E5%25BE%2597%25E3%2581%2597%25E3%2581%25A6%25E9%259F%25B3%25E8%25AA%25AD%25E3%2581%2597%25E3%2581%25A6%25E3%2582%2582%25E3%2582%2589%25E3%2581%2586%255Bpyttsx3%255D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:zenn_kiitos%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhkYTcwNzc1MzkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>zenn_kiitos</dc:creator></item><item><title><![CDATA[Pythonでも音声読み上げしてもらいたい]]></title><description><![CDATA[
+ 動機
+家事をしている最中、YouTubeをラジオ感覚で聞いているのですが、動画コンテンツはやはりビジュアルがメインなので、音声だけだと得られる情報が限られてしまいます。物足りないですし、製作者にも失礼だなと常々思っておりました。テキストベースの媒体であればその問題が解消されます。特に、個人的に興味のあるジャンルのニュース記事やブログ記事ならば、情報収集もでき、また再生時間もさほど長くありません。
+優れた読み上げツールは世に存在しますし、読み上げ機能のあるブラウザや、拡張機能で読み上げ機能を付与することもできますが、暇だしPythonでやってみよう… という試みです。今回は pytts...]]></description><link>https://zenn.dev/zenn24yykiitos/articles/c3ad2101993805</link><guid isPermaLink="true">https://zenn.dev/zenn24yykiitos/articles/c3ad2101993805</guid><pubDate>Thu, 03 Oct 2024 13:09:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--THCaGBm3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A7%25E3%2582%2582%25E9%259F%25B3%25E5%25A3%25B0%25E8%25AA%25AD%25E3%2581%25BF%25E4%25B8%258A%25E3%2581%2592%25E3%2581%2597%25E3%2581%25A6%25E3%2582%2582%25E3%2582%2589%25E3%2581%2584%25E3%2581%259F%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:zenn_kiitos%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhkYTcwNzc1MzkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>zenn_kiitos</dc:creator></item></channel></rss>
