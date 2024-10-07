@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Mon, 07 Oct 2024 02:10:40 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[[LangChain] with_structured_output を使用して、Pydanticのクラスをレスポンスとして受け取る]]></title><description><![CDATA[
+ はじめに
+こんにちは。PharmaXでエンジニアをしている諸岡（@hakoten）です。
+LangChainには、各LLMモデルのレスポンスをあらかじめ決まった構造のクラスで受け取ることができるwith_structured_output というメソッドがあります。
+この記事では、with_structured_outputを使用してPydanticのクラスをレスポンスとして受け取る方法についてをご紹介します。変換の仕組みについても簡単に解説していますので、よければぜひ一読ください。
+!
+
+この記事ではOpenAIのモデル(ChatOpenAI)を使用した with_structur...]]></description><link>https://zenn.dev/pharmax/articles/8ed156e9ec9a68</link><guid isPermaLink="true">https://zenn.dev/pharmax/articles/8ed156e9ec9a68</guid><pubDate>Mon, 07 Oct 2024 01:40:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xkcbiwQ_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BLangChain%255D%2520with_structured_output%2520%25E3%2582%2592%25E4%25BD%25BF%25E7%2594%25A8%25E3%2581%2597%25E3%2581%25A6%25E3%2580%2581Pydantic%25E3%2581%25AE%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25B9%25E3%2582%2592%25E3%2583%25AC%25E3%2582%25B9%25E3%2583%259D...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:hakotensan%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2QxNTUyMTlkOTUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:PharmaX%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2YzNGM1MmE4MWMuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hakotensan</dc:creator></item><item><title><![CDATA[【Dify】ハンズオン：じゃんけんゲーム]]></title><description><![CDATA[こんにちは。三菱UFJインフォメーションテクノロジーの小林と申します。
+生成AIアプリを作って生産性を向上させたい！と思う方は一定数いらっしゃると思います。
+しかし、自分でコーディングをするのは難しいと感じる方も多いでしょう。
+そのような方のためにDifyがあります。
+この記事では、Difyとは何かを実際にアプリを作りながら学んでいきます。
+
+ この記事の趣旨
+
+Difyは生成AIアプリを簡単に作れる
+WebアプリもAPIも利用できる
+一度試してみると概観がつかめるので、この記事を参考にしてやってみてください
+
+
+ Difyとは
+公式には以下の記載があります。（日本語があるのが嬉しいです...]]></description><link>https://zenn.dev/muit_techblog/articles/4b6e10749ad181</link><guid isPermaLink="true">https://zenn.dev/muit_techblog/articles/4b6e10749ad181</guid><pubDate>Sun, 06 Oct 2024 23:50:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--YgNtDLzM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Dify%25E3%2580%2591%25E3%2583%258F%25E3%2583%25B3%25E3%2582%25BA%25E3%2582%25AA%25E3%2583%25B3%25EF%25BC%259A%25E3%2581%2598%25E3%2582%2583%25E3%2582%2593%25E3%2581%2591%25E3%2582%2593%25E3%2582%25B2%25E3%2583%25BC%25E3%2583%25A0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E5%25B0%258F%25E6%259E%2597%25E8%25AB%2592%25E7%25A5%2590%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzIxZGYyYTRkNjIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E4%25B8%2589%25E8%258F%25B1UFJ%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25A1%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2583%2586%25E3%2582%25AF%25E3%2583%258E%25E3%2583%25AD%25E3%2582%25B8%25E3%2583%25BC%25E3%2583%2586...%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSktSaXVLMVFSZlFhN0g4Q1R1ejN4WEVaU1A4a1dDbVdJeG1TaEhvVzMwPXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>小林諒祐</dc:creator></item><item><title><![CDATA[【個人開発】PDFからAIが重要単語を検出し、ファイルに直接穴埋め問題と解答を埋め込んでくれる暗記学習webサービスをつくってみた。]]></title><description><![CDATA[
+ はじめに
+こんにちは、Necoと申します。
+https://twitter.com/Neco1773400
+駆け出しエンジニアです。
+現在大学在学中で、最近趣味でプログラミングを始めました。
+主にPythonでweb関連の学習をしております。
+はじめてのZenn記事を投稿します。
+初めてのサービス公開ということで完成度は低いですが、ひとまず形にはなったのでサービスの使いかたなどを共有したいと思います。
+自分のコーディングの練習もかねてPDF暗記学習サービス「Fill MAKER」のプロトタイプを開発・公開しました！
+https://www.fillmaker.com/
+PDF暗記ツー...]]></description><link>https://zenn.dev/neco_develop/articles/91a0c8ba8b9489</link><guid isPermaLink="true">https://zenn.dev/neco_develop/articles/91a0c8ba8b9489</guid><pubDate>Sun, 06 Oct 2024 23:24:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--39ptFabd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%2580%258B%25E4%25BA%25BA%25E9%2596%258B%25E7%2599%25BA%25E3%2580%2591PDF%25E3%2581%258B%25E3%2582%2589AI%25E3%2581%258C%25E9%2587%258D%25E8%25A6%2581%25E5%258D%2598%25E8%25AA%259E%25E3%2582%2592%25E6%25A4%259C%25E5%2587%25BA%25E3%2581%2597%25E3%2580%2581%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2581%25AB%25E7%259B%25B4%25E6%258E%25A5%25E7%25A9%25B4%25E5%259F%258B%25E3%2582%2581%25E5%2595%258F%25E9%25A1%258C%25E3%2581%25A8%25E8%25A7%25A3%25E7%25AD%2594%25E3%2582%2592%25E5%259F%258B%25E3%2582%2581%25E8%25BE%25BC%25E3%2582%2593%25E3%2581%25A7%25E3%2581%258F%25E3%2582%258C%25E3%2582%258B%25E6%259A%2597%25E8%25A8%2598%25E5%25AD%25A6%25E7%25BF%2592web%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2593...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Neco%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2IyNGI5ODM4MGIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Neco</dc:creator></item><item><title><![CDATA[AlpacaHack Round 4 - pytecode]]></title><description><![CDATA[お仕事のためリアタイできなかったですが、pytecode面白そうだったのでupsolveしました。
+(アセンブリではないバイトコードやpickleを変換することを「ディスアセンブル」「デコンパイル」と呼ぶことが正確かどうかはよく知らないですが、この記事では可読性のためにラベル付けを行うことを「ディスアセンブル」、実行可能なpythonコードに変換することを「デコンパイル」と呼ぶことにします。)
+
+ Step 1: Pickleの解析
+Pickleのデコンパイラといえば、fickling。とりあえず一度デコンパイルしてみよう。
+
+disasm.py
+from fickling import...]]></description><link>https://zenn.dev/tchen/articles/7579d0c8f831bc</link><guid isPermaLink="true">https://zenn.dev/tchen/articles/7579d0c8f831bc</guid><pubDate>Sun, 06 Oct 2024 17:38:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--YnK7WzyF--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:AlpacaHack%2520Round%25204%2520-%2520pytecode%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:t-chen%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSndGbmw3UUNSVkZRdDdIRXpZYm84alBZQW0xYzhXTXhUc0c2UkgzMXRjV3NsMll3PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>t-chen</dc:creator></item><item><title><![CDATA[備忘録; 取り込んだExcelファイルのシートを表示するアプリケーション]]></title><description><![CDATA[Flaskをバックエンド、フロントエンドをhtmlにして、読み込んだExcelファイルのsheetを表示,
+sheetにデータを記入するwebアプリケーションを作成しました。その備忘録です。
+Flask Backend
+from flask import Flask, render_template, request, send_file
+import pandas as pd
+from openpyxl import load_workbook
+import selenium.webdriver as webdriver
+from selenium.webdriver.common.b...]]></description><link>https://zenn.dev/miseuser/articles/54324cbee93660</link><guid isPermaLink="true">https://zenn.dev/miseuser/articles/54324cbee93660</guid><pubDate>Sun, 06 Oct 2024 14:41:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--VxHZuu5B--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2582%2599%25E5%25BF%2598%25E9%258C%25B2%253B%2520%25E5%258F%2596%25E3%2582%258A%25E8%25BE%25BC%25E3%2582%2593%25E3%2581%25A0Excel%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2581%25AE%25E3%2582%25B7%25E3%2583%25BC%25E3%2583%2588%25E3%2582%2592%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2599%25E3%2582%258B%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:user%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTDZXb1czOEUtNHpaS18yM1kwR2tGTnJBR3BNTEUzNjJPMGlPR0UyY19keG81WDhBPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>user</dc:creator></item><item><title><![CDATA[LSTMとLightGBMを用いた時系列分析]]></title><description><![CDATA[
+ 概要
+今回は、時系列データにおける異常検知を目的としLSTMとLightGBMの動作確認を行います。どちらも時系列データの分析に使われる手法ですが、それぞれの特徴や動作の違いを実感しながら進めていきます。
+
+ 前提条件
+まず、LSTMとLightGBMを実行する環境をMac M1に用意しました。tensorflowとlightgbmのバージョンは以下の通りです。
+import tensorflow as tf; print(tf.__version__)
+2.12.0
+import lightgbm as lgb; print(lgb.__version__)
+4.5.0
+使用するデ...]]></description><link>https://zenn.dev/kanehori/articles/cbf9b216ad6d37</link><guid isPermaLink="true">https://zenn.dev/kanehori/articles/cbf9b216ad6d37</guid><pubDate>Sun, 06 Oct 2024 13:19:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--rq6NTjbv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:LSTM%25E3%2581%25A8LightGBM%25E3%2582%2592%25E7%2594%25A8%25E3%2581%2584%25E3%2581%259F%25E6%2599%2582%25E7%25B3%25BB%25E5%2588%2597%25E5%2588%2586%25E6%259E%2590%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:horihori%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAyMzFhNTg4MmEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>horihori</dc:creator></item><item><title><![CDATA[Neo4jの自前構築に挑戦 - 無償版期限切れの対応]]></title><description><![CDATA[
+ 背景・目的
+以前投稿した記事では、グラフ描画にNeo4j Auraを使用していましたが、無償版の有効期限が切れてしまい、サービスを利用できなくなりました。そこで今回は、Neo4jを自前で構築し、運用することにしました。また、以前の記事では実現できなかった、作成したグラフに対してChainlitで質問を行う機能にも挑戦してみました。
+参考にした記事はこちらです：
+https://qiita.com/ogi_kimura/items/1e03b29bb245b553be26
+https://qiita.com/ogi_kimura/items/5e51dfbf31ef4f117a9a
+h...]]></description><link>https://zenn.dev/ogiki/articles/edefbcded68419</link><guid isPermaLink="true">https://zenn.dev/ogiki/articles/edefbcded68419</guid><pubDate>Sun, 06 Oct 2024 12:09:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7v6rXJzd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Neo4j%25E3%2581%25AE%25E8%2587%25AA%25E5%2589%258D%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%25AB%25E6%258C%2591%25E6%2588%25A6%2520-%2520%25E7%2584%25A1%25E5%2584%259F%25E7%2589%2588%25E6%259C%259F%25E9%2599%2590%25E5%2588%2587%25E3%2582%258C%25E3%2581%25AE%25E5%25AF%25BE%25E5%25BF%259C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%259C%25A8%25E6%259D%2591%25E3%2581%259F%25E3%2582%258D%25E3%2581%2586%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZkZjNiYWMwZmQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>木村たろう</dc:creator></item><item><title><![CDATA[【paizaラーニング】構造体の検索【Python】]]></title><description><![CDATA[
+ はじめに
+本記事はpaizaラーニングでBランク獲得に役立つレベルアップ問題集のうち、構造体の検索という問題における私の解答です。
+備忘録も兼ねて記録することにしました。
+
+ 問題
+問題はチケットを消費しなくても確認することができるためリンクを貼っておきます。
+構造体の検索 (paizaランク C 相当) 
+
+ 解答
+クリックで解答を表示N = int(input())  # クラスの人数
+member_list = [] # クラスのメンバーリスト
+for i in range(N):
+    member_data = list(input().split()) # メンバーの情...]]></description><link>https://zenn.dev/mi_s_h_u/articles/df5fd511cfc1bb</link><guid isPermaLink="true">https://zenn.dev/mi_s_h_u/articles/df5fd511cfc1bb</guid><pubDate>Sun, 06 Oct 2024 10:07:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--VSgOmgII--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590paiza%25E3%2583%25A9%25E3%2583%25BC%25E3%2583%258B%25E3%2583%25B3%25E3%2582%25B0%25E3%2580%2591%25E6%25A7%258B%25E9%2580%25A0%25E4%25BD%2593%25E3%2581%25AE%25E6%25A4%259C%25E7%25B4%25A2%25E3%2580%2590Python%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Shu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E0NDZlZjc5Y2EuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Shu</dc:creator></item><item><title><![CDATA[【paizaラーニング】構造体の作成 【Python】]]></title><description><![CDATA[
+ はじめに
+本記事はpaizaラーニングでBランク獲得に役立つレベルアップ問題集のうち、構造体の作成という問題における私の解答です。
+備忘録も兼ねて記録することにしました。
+
+
+ 問題
+問題はチケットを消費しなくても確認することができるためリンクを貼っておきます。
+構造体の作成 (paizaランク C 相当) 
+
+ 解答
+クリックで解答を表示N = int(input())  # クラスの人数
+member_list = [] # クラスのメンバーリスト
+for i in range(N):
+    member_data = list(input().split()) #メンバーの情...]]></description><link>https://zenn.dev/mi_s_h_u/articles/78c590b4acf077</link><guid isPermaLink="true">https://zenn.dev/mi_s_h_u/articles/78c590b4acf077</guid><pubDate>Sun, 06 Oct 2024 09:18:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vjr2oy7n--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590paiza%25E3%2583%25A9%25E3%2583%25BC%25E3%2583%258B%25E3%2583%25B3%25E3%2582%25B0%25E3%2580%2591%25E6%25A7%258B%25E9%2580%25A0%25E4%25BD%2593%25E3%2581%25AE%25E4%25BD%259C%25E6%2588%2590%2520%25E3%2580%2590Python%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Shu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E0NDZlZjc5Y2EuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Shu</dc:creator></item><item><title><![CDATA[ブログ記事の更新が必要な個所を指摘してくれるツールを作ってみた]]></title><description><![CDATA[しばらくRAGをいじっていましたが、今回はちょっと趣向を変えて、ブログ記事の更新が必要な個所を指摘してくれるツールを作ってみました。特に難しい技術を使っているわけではありませんが、生成AIの応用編ということで簡単に紹介します。
+
+ ブログ記事の情報最新化は面倒
+鉄道関連のブログを個人で運営しているのですが、新たな記事を書くのはともかく、既存の記事の情報を最新化する作業にかなりの時間を取られています。
+具体的には、割引きっぷやフリーパスのようなお得なきっぷの情報や、観光列車・臨時列車の運転情報などです。これらの情報は数か月もすると古くなってしまいます。例えば、フリーパスは定期的に鉄道会社か...]]></description><link>https://zenn.dev/khisa/articles/3253dc4cd8f424</link><guid isPermaLink="true">https://zenn.dev/khisa/articles/3253dc4cd8f424</guid><pubDate>Sun, 06 Oct 2024 08:49:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5RmG_9_G--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%25E8%25A8%2598%25E4%25BA%258B%25E3%2581%25AE%25E6%259B%25B4%25E6%2596%25B0%25E3%2581%258C%25E5%25BF%2585%25E8%25A6%2581%25E3%2581%25AA%25E5%2580%258B%25E6%2589%2580%25E3%2582%2592%25E6%258C%2587%25E6%2591%2598%25E3%2581%2597%25E3%2581%25A6%25E3%2581%258F%25E3%2582%258C%25E3%2582%258B%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25B2%25E3%2581%2595%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTHFKaUVHa1VQMkc5WGpIeHlTa3p4bld3Z3JNcHFhT19hUFVKcWEyQ2YxWUZFPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ひさ</dc:creator></item><item><title><![CDATA[ローカルのファイルすべてにサクッとフォーマットかけたい]]></title><description><![CDATA[
+ はじめに
+pythonなどでプログラムで実行して出力したファイルがある。
+わざわざVSCodeで開いてフォーマットかけるのは大変。
+サクッとすべてのファイルにフォーマットかけたい。
+
+ 前提
+Node.jsがインストールされていること
+
+ 方法
+拡張子が.htmlだった場合。
+整形したいファイル拡張子に応じてよしなに変更してください。
+npm install -g prettier
+cd output_dir # ファイルが存在するディレクトリへ移動
+npx prettier --write "*.html"
+]]></description><link>https://zenn.dev/takaha4k/articles/0e6aa39ae14e60</link><guid isPermaLink="true">https://zenn.dev/takaha4k/articles/0e6aa39ae14e60</guid><pubDate>Sun, 06 Oct 2024 07:47:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9uBwlHaI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25AB%25E3%2583%25AB%25E3%2581%25AE%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2581%2599%25E3%2581%25B9%25E3%2581%25A6%25E3%2581%25AB%25E3%2582%25B5%25E3%2582%25AF%25E3%2583%2583%25E3%2581%25A8%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25BC%25E3%2583%259E%25E3%2583%2583%25E3%2583%2588%25E3%2581%258B%25E3%2581%2591%25E3%2581%259F%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:takaha4k%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzViZDg4YTkzZTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takaha4k</dc:creator></item><item><title><![CDATA[pytest:monkeypatchは直接呼び出し時に無効化される？]]></title><description><![CDATA[
+ 概要
+pytestのmonkeypatchを使っていると、パッチを当てたはずの関数を呼び出した際にパッチが当たっていない現象に遭遇した。
+状況を調べていると、その現象はパッチを当てた関数を直接呼び出した際に起こっていることがわかった。
+そのため状況を簡略化してmonkeypatchのパッチすり抜け問題を検証した。
+
+ 条件
+関数f()にmonkeypatchを適応。
+関数 g は関数 f を利用している。
+ここで関数 f にmonkeypatchを適応した場合、関数f と g の挙動はどうなるのだろうか？
+
+ 呼び出し元
+# infra.api.hoge.fooモジュール内部
+
+de...]]></description><link>https://zenn.dev/stalin/articles/95f680a4495383</link><guid isPermaLink="true">https://zenn.dev/stalin/articles/95f680a4495383</guid><pubDate>Sun, 06 Oct 2024 07:30:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0fT5wagI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:pytest%253Amonkeypatch%25E3%2581%25AF%25E7%259B%25B4%25E6%258E%25A5%25E5%2591%25BC%25E3%2581%25B3%25E5%2587%25BA%25E3%2581%2597%25E6%2599%2582%25E3%2581%25AB%25E7%2584%25A1%25E5%258A%25B9%25E5%258C%2596%25E3%2581%2595%25E3%2582%258C%25E3%2582%258B%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%259F%2590%25E6%259B%25B8%25E8%25A8%2598%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA3YWIwMTM0ZTQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>某書記</dc:creator></item><item><title><![CDATA[【初心者向け】Python超入門：練習問題を解いてみる]]></title><description><![CDATA[
+ 前回の記事で出した練習問題を解いてみる
+前回の記事で出題したPythonの練習問題、皆さん解くことはできましたか？ 今回は、私が解いてみたその解答とGeminiでの解答を見ていきましょう。
+
+ 問題1：
+自分の年齢を入力し、20歳以上かどうかを判定するプログラムを作成してください。
+
+ わたしの解答1：
+def Otona(x):
+    if x &gt;= 20:
+        return True
+    else:
+        return False
+
+x = 20
+if Otona(x):
+    print('２０以上ですね。')
+else:
+    print...]]></description><link>https://zenn.dev/yogurt/articles/ec57ab0e34c1e9</link><guid isPermaLink="true">https://zenn.dev/yogurt/articles/ec57ab0e34c1e9</guid><pubDate>Sun, 06 Oct 2024 06:43:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--u-lksjpW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E5%2590%2591%25E3%2581%2591%25E3%2580%2591Python%25E8%25B6%2585%25E5%2585%25A5%25E9%2596%2580%25EF%25BC%259A%25E7%25B7%25B4%25E7%25BF%2592%25E5%2595%258F%25E9%25A1%258C%25E3%2582%2592%25E8%25A7%25A3%25E3%2581%2584%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%25A8%25E3%2583%25BC%25E3%2582%25B0%25E3%2583%25AB%25E3%2583%2588%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzViZmFiYWU4NDUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ヨーグルト</dc:creator></item><item><title><![CDATA[【Web App】拡張3目並べ]]></title><description><![CDATA[
+ はじめに
+友人とn次元の3目並べについて話題になったので、通常の3目並べを拡張し、2次元のn目並べと3次元のn目並べを実装してみました。
+単純に遊びたい方は以下にアクセスしてください（デサインは最低限しかいじってないので目をつぶってもらえると助かります）。動作に不具合などがあれば教えて下さい。
+https://tictactoe-app.reflex.run/tictactoe
+
+ コード
+プロジェクト全体のコードは以下となっています。
+https://github.com/maki8maki/WebTicTacToe
+3目並べの実装の中身はこちらとなっています。上記のコードでサブモ...]]></description><link>https://zenn.dev/kinakomochi5250/articles/web-tictactoe</link><guid isPermaLink="true">https://zenn.dev/kinakomochi5250/articles/web-tictactoe</guid><pubDate>Sun, 06 Oct 2024 05:12:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--sr31E5cN--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Web%2520App%25E3%2580%2591%25E6%258B%25A1%25E5%25BC%25B53%25E7%259B%25AE%25E4%25B8%25A6%25E3%2581%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258D%25E3%2581%25AA%25E7%25B2%2589%25E9%25A4%2585%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRlYjczYzVlYjQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>きな粉餅</dc:creator></item><item><title><![CDATA[pyenv+venv→uvへの乗り換え]]></title><description><![CDATA[
+ 群雄割拠 pythonパッケージ管理
+poetryが流行ったと思ったらryeが現れ，その次はuv？
+貴様らどんだけ浮気性なんじゃ！と思い，実験環境ではpyenv+venv，デプロイではdockerfileにpip install ベタ書き，と言う構成を頑なに使い続けていたのですが，試しに使ってみたuvがfaster and simpler と感じたので乗り換えることにしました．以下最小限の置き換えです．その他の便利機能は色々あるみたいですが，僕には扱いきれそうもないので他記事を参照してください．
+
+ 環境
+ubuntu 20.04/22.04
+
+ インストール
+curl -LsSf ...]]></description><link>https://zenn.dev/watanko/articles/8400df75e4aab5</link><guid isPermaLink="true">https://zenn.dev/watanko/articles/8400df75e4aab5</guid><pubDate>Sun, 06 Oct 2024 02:34:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_0NT1V-X--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:pyenv%252Bvenv%25E2%2586%2592uv%25E3%2581%25B8%25E3%2581%25AE%25E4%25B9%2597%25E3%2582%258A%25E6%258F%259B%25E3%2581%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:watanko%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2UzMDAzYTExYjMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>watanko</dc:creator></item><item><title><![CDATA[【初心者向け】Python超入門：プログラミングの世界へようこそ！]]></title><description><![CDATA[
+ Pythonってどんな言語？
+Pythonは、シンプルで読みやすいコードが特徴のプログラミング言語です。AIやデータ分析、Web開発など、幅広い分野で活躍しています。初心者でも学びやすく、高い生産性を実現できることから、世界中で人気を集めています。
+
+ Pythonで遊ぼう！
+
+ Hello, World!
+プログラミングの定番、「Hello, World!」を出力してみましょう。
+print("Hello, World!")
+実行すると、コンソールに「Hello, World!」と表示されます。
+
+ 変数とデータ型
+Pythonでは、変数を使って値を保存します。
+# 整数
+num ...]]></description><link>https://zenn.dev/yogurt/articles/d29fc60c37acfa</link><guid isPermaLink="true">https://zenn.dev/yogurt/articles/d29fc60c37acfa</guid><pubDate>Sat, 05 Oct 2024 12:59:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dt9oCRSE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E5%2590%2591%25E3%2581%2591%25E3%2580%2591Python%25E8%25B6%2585%25E5%2585%25A5%25E9%2596%2580%25EF%25BC%259A%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%259F%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%25AE%25E4%25B8%2596%25E7%2595%258C%25E3%2581%25B8%25E3%2582%2588%25E3%2581%2586%25E3%2581%2593%25E3%2581%259D%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%25A8%25E3%2583%25BC%25E3%2582%25B0%25E3%2583%25AB%25E3%2583%2588%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzViZmFiYWU4NDUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ヨーグルト</dc:creator></item><item><title><![CDATA[arXivの気になるカテゴリの最新の論文をdiscordに共有する]]></title><description><![CDATA[
+ はじめに
+新しい技術を追っていると高頻度でarXivの論文を見ていることがあります。XのTLに流れてきているものを見ていますが、探すのも大変なのでDiscordに送ってしまおうと思いました
+
+ Demo
+今は以下の画像のように WebHookを使って定期的に共有しています。
+
+
+ arXivから情報を取得
+以下のコードにて、カテゴリを コンピューターサイエンス に限定して5時間以内に更新されたものを取得します
+import urllib.parse
+import feedparser
+from datetime import datetime, timedelta
+import re...]]></description><link>https://zenn.dev/midra_lab/articles/f2d55c2e0cebf9</link><guid isPermaLink="true">https://zenn.dev/midra_lab/articles/f2d55c2e0cebf9</guid><pubDate>Sat, 05 Oct 2024 12:15:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--KGrYONnW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:arXiv%25E3%2581%25AE%25E6%25B0%2597%25E3%2581%25AB%25E3%2581%25AA%25E3%2582%258B%25E3%2582%25AB%25E3%2583%2586%25E3%2582%25B4%25E3%2583%25AA%25E3%2581%25AE%25E6%259C%2580%25E6%2596%25B0%25E3%2581%25AE%25E8%25AB%2596%25E6%2596%2587%25E3%2582%2592discord%25E3%2581%25AB%25E5%2585%25B1%25E6%259C%2589%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:ayousanz%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MwMGI0ZTBiOTUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:MidraLab%2528%25E3%2583%259F%25E3%2583%2589%25E3%2583%25A9%25E3%2583%259C%2529%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ5OTljMWRhOGIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ayousanz</dc:creator></item><item><title><![CDATA[QRコード作成＋QRコード画像から情報の取り出し]]></title><description><![CDATA[
+ 雑談
+QRコードといえば「囲碁から着想を得た」という豆知識がよくクイズで出されている印象があります。囲碁の碁盤からQRコードを思いつくなんて…すごい発想力ですよね！
+QRコードは扱う情報の種類によって保持できる情報量が異なるようです。QRコードの最大情報量は以下のようになっています。
+
+数字のみ: 最大 7,089文字
+英数字（数字と英字の組み合わせ）: 最大 4,296文字
+バイト（バイナリデータ）: 最大 2,953バイト
+漢字: 最大 1,817文字
+
+ちなみにバーコードは12～13桁の数字データが限界です。QRコードはバーコードの数百倍の情報量を持っているわけです。QRコード...]]></description><link>https://zenn.dev/zenn24yykiitos/articles/d5baac26bf3ec2</link><guid isPermaLink="true">https://zenn.dev/zenn24yykiitos/articles/d5baac26bf3ec2</guid><pubDate>Sat, 05 Oct 2024 11:12:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qYagjIkK--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:QR%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E4%25BD%259C%25E6%2588%2590%25EF%25BC%258BQR%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E7%2594%25BB%25E5%2583%258F%25E3%2581%258B%25E3%2582%2589%25E6%2583%2585%25E5%25A0%25B1%25E3%2581%25AE%25E5%258F%2596%25E3%2582%258A%25E5%2587%25BA%25E3%2581%2597%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:zenn_kiitos%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhkYTcwNzc1MzkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>zenn_kiitos</dc:creator></item><item><title><![CDATA[【Python】NumPy配列（画像データなど）の色を反転させる方法]]></title><description><![CDATA[
+ はじめに
+PythonのNumPyは、数値計算を高速に行うための強力なライブラリです。
+画像処理においても広く利用されており、NumPy配列で画像データを表現できます。
+今回は、NumPy配列で表された画像データの色を反転させる方法について解説します。
+
+ 色を反転（Invert）
+画像データをNumPy配列で扱う場合、各画素は0から255までの数値で表されます。
+この数値は、その画素の色を表しており、一般的に0が黒、255が白に対応します。
+色を反転させるには、各画素の値を255からその値を引くことで、白と黒を反転させることができます。
+import numpy as np
+
+# ...]]></description><link>https://zenn.dev/hovinci/articles/c593642ec51f75</link><guid isPermaLink="true">https://zenn.dev/hovinci/articles/c593642ec51f75</guid><pubDate>Sat, 05 Oct 2024 08:54:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ZmFoXMES--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591NumPy%25E9%2585%258D%25E5%2588%2597%25EF%25BC%2588%25E7%2594%25BB%25E5%2583%258F%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2581%25AA%25E3%2581%25A9%25EF%25BC%2589%25E3%2581%25AE%25E8%2589%25B2%25E3%2582%2592%25E5%258F%258D%25E8%25BB%25A2%25E3%2581%2595%25E3%2581%259B%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%259B%25E3%2583%25B4%25E3%2582%25A3%25E3%2583%25B3%25E3%2583%2581%25EF%25BD%259C%25E6%259C%25AC%25E3%2581%25A5%25E3%2581%258F%25E3%2582%258A%25E3%2581%25AE%25E3%2583%2580%25E3%2583%25B4%25E3%2582%25A3%25E3%2583%25B3%25E3%2583%2581%25E3%2581%25AB%25E3%2581%25AA%25E3%2582%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzIzYTE5NmI1NDYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ホヴィンチ｜本づくりのダヴィンチになる</dc:creator></item><item><title><![CDATA[【Python】NumPy配列（画像データなど）にカラーフィルターをかける方法（赤、緑、青、グレー）]]></title><description><![CDATA[
+ はじめに
+PythonのNumPyは、数値計算や画像処理において非常に強力なライブラリです。
+とくに、画像データをNumPy配列として扱うことで、さまざまな画像処理を効率的に行うことができます。
+本記事では、NumPy配列（画像データなど）から特定の色のチャンネル、赤色、緑色、青色、そしてグレースケールへの変換についても触れ、NumPyの画像処理の基礎を理解するための手助けとします。
+
+ 赤色のカラーフィルター
+NumPy配列で表される画像データは、一般的に3次元配列で、各次元は高さ、幅、そして色チャンネル（RGB）に対応しています。
+赤色チャンネルのみを抽出するには、この3次元配列...]]></description><link>https://zenn.dev/hovinci/articles/8d87eb4eeec1c0</link><guid isPermaLink="true">https://zenn.dev/hovinci/articles/8d87eb4eeec1c0</guid><pubDate>Sat, 05 Oct 2024 08:37:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wEb6Ir6F--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591NumPy%25E9%2585%258D%25E5%2588%2597%25EF%25BC%2588%25E7%2594%25BB%25E5%2583%258F%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2581%25AA%25E3%2581%25A9%25EF%25BC%2589%25E3%2581%25AB%25E3%2582%25AB%25E3%2583%25A9%25E3%2583%25BC%25E3%2583%2595%25E3%2582%25A3%25E3%2583%25AB%25E3%2582%25BF%25E3%2583%25BC%25E3%2582%2592%25E3%2581%258B%25E3%2581%2591%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%25EF%25BC%2588%25E8%25B5%25A4%25E3%2580%2581%25E7%25B7%2591%25E3%2580%2581%25E9%259D%2592%25E3%2580%2581%25E3%2582%25B0%25E3%2583%25AC%25E3%2583%25BC%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%259B%25E3%2583%25B4%25E3%2582%25A3%25E3%2583%25B3%25E3%2583%2581%25EF%25BD%259C%25E6%259C%25AC%25E3%2581%25A5%25E3%2581%258F%25E3%2582%258A%25E3%2581%25AE%25E3%2583%2580%25E3%2583%25B4%25E3%2582%25A3%25E3%2583%25B3%25E3%2583%2581%25E3%2581%25AB%25E3%2581%25AA%25E3%2582%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzIzYTE5NmI1NDYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ホヴィンチ｜本づくりのダヴィンチになる</dc:creator></item></channel></rss>
