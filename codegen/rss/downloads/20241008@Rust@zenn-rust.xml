@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Rust」のフィード]]></title><description><![CDATA[Zennのトピック「Rust」のRSSフィードです]]></description><link>https://zenn.dev/topics/rust</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ba09661577.png</url><title>Zennの「Rust」のフィード</title><link>https://zenn.dev/topics/rust</link></image><generator>zenn.dev</generator><lastBuildDate>Tue, 08 Oct 2024 12:04:03 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/rust/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[RustのResult型とOption型のエラーチェックがコードレビュー後にスッキリした話]]></title><description><![CDATA[
+ 初期実装（unwrapで例外を処理していないので非推奨）
+let cookie_data: Option&lt;&amp;MetadataValue&lt;Ascii&gt;&gt; = request.metadata().get("cookie");
+
+if cookie_data.is_none() {
+    return Err("cookieがありません");
+}
+
+let cookie: &amp;str = cookie_data.unwrap().to_str().unwrap();
+println!("{}", cookie);
+
+ unwrap無しにした版
+le...]]></description><link>https://zenn.dev/daijinload/articles/6b956af8b26da4</link><guid isPermaLink="true">https://zenn.dev/daijinload/articles/6b956af8b26da4</guid><pubDate>Tue, 08 Oct 2024 08:16:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1ToQ40yQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25AEResult%25E5%259E%258B%25E3%2581%25A8Option%25E5%259E%258B%25E3%2581%25AE%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E3%2583%2581%25E3%2582%25A7%25E3%2583%2583%25E3%2582%25AF%25E3%2581%258C%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2583%25AC%25E3%2583%2593%25E3%2583%25A5%25E3%2583%25BC%25E5%25BE%258C%25E3%2581%25AB%25E3%2582%25B9%25E3%2583%2583%25E3%2582%25AD%25E3%2583%25AA%25E3%2581%2597%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:daijinload%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSTVLVGMxQWhOTXo1cnhrSkFmYmdmRmF1SGwxRGFwX0o3NnpXQ1oxMHpTTGc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>daijinload</dc:creator></item><item><title><![CDATA[Dart/FlutterにRustのResult型を導入する]]></title><description><![CDATA[
+ はじめに
+Dartの例外処理にはtry-catchが採用されていますが、エラーハンドリングが煩雑に感じたことはないでしょうか。
+try-catchでは、メソッドを呼び出す際にエラーが発生するかどうかや、どんなエラーが起こり得るかは中のコードを詳細に見なければわかりません。
+また、大域脱出が可能なため、try-catchを多用しないとエラーがどこまで伝播するのかが不明瞭になりがちです。[1]
+そこで、より安全で表現力の高いエラーハンドリングを実現するために、Result型を導入する方法があります。
+Result型は複数のプログラミング言語で採用されていますが、その中でも特にRustのR...]]></description><link>https://zenn.dev/kentt8046/articles/20241007-dart-result</link><guid isPermaLink="true">https://zenn.dev/kentt8046/articles/20241007-dart-result</guid><pubDate>Mon, 07 Oct 2024 15:15:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--PnMipwKj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Dart%252FFlutter%25E3%2581%25ABRust%25E3%2581%25AEResult%25E5%259E%258B%25E3%2582%2592%25E5%25B0%258E%25E5%2585%25A5%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kentt%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2Rhcmsvay5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kentt</dc:creator></item><item><title><![CDATA[【Rust】自作GameEngine　~logger編~]]></title><description><![CDATA[
+ はじめに
+今回はマクロを使用したloggerを作成しようと思います。
+主な機能としては、ログのレベル別の記録、ファイル出力、コンソール出力です
+
+ Crateの構成
+log/
+　├──src/
+　|　　├──impls/
+  │　　│    └──console_logger.rs
+　│　　├──lib.rs 　　　　　//ライブラリのエントリ
+　│　　├──log_global.rs   //クレート内でのみ使用できるグローバル変数がある
+  │　　├──log_level.rs    //ログのレベルを定義するenumがある
+  │　　├──log_macro.rs    //ロ...]]></description><link>https://zenn.dev/tikuwabu/articles/dc3bd87e72e4a9</link><guid isPermaLink="true">https://zenn.dev/tikuwabu/articles/dc3bd87e72e4a9</guid><pubDate>Mon, 07 Oct 2024 10:46:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Ts8XMQIa--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Rust%25E3%2580%2591%25E8%2587%25AA%25E4%25BD%259CGameEngine%25E3%2580%2580%7Elogger%25E7%25B7%25A8%7E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A1%25E3%2581%258F%25E3%2582%258F%25E3%2581%25B6%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzMxMjdmZjRiODAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ちくわぶ</dc:creator></item><item><title><![CDATA[Rustで処理したデータをJSON形式で返却する]]></title><description><![CDATA[新しくRustを学習し、フロントとバックエンドを別々にして自作WEBアプリを作りました。
+製作過程で、フロントからリクエストを受けてRust, axumで加工したデータを最終的にフロントへJSON形式で返す、という処理をやっていて今後似たようなものを作るときのためにメモ代わりとして残しておきたいと思ったので書き留めておきます。
+
+ 最終的にフロントに返す形はこのようにしたい
+
+
+ ※以下内容は省略します
+
+Rust, axumのセットアップ方法
+ベクタやHashMapの細かい説明
+ライブラリのインポート文
+
+
+ 実際の処理
+pub async fn  handler(extract::Q...]]></description><link>https://zenn.dev/yone5/articles/99bf4529fdaa42</link><guid isPermaLink="true">https://zenn.dev/yone5/articles/99bf4529fdaa42</guid><pubDate>Mon, 07 Oct 2024 06:32:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5xfg2QTD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25A7%25E5%2587%25A6%25E7%2590%2586%25E3%2581%2597%25E3%2581%259F%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%2592JSON%25E5%25BD%25A2%25E5%25BC%258F%25E3%2581%25A7%25E8%25BF%2594%25E5%258D%25B4%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yoneko%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RhN2NkNWJjNTQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yoneko</dc:creator></item><item><title><![CDATA[GATsでreborrowがtrait化できるんじゃないか？　(完全には無理)]]></title><description><![CDATA[
+ 概要
+reborrowできる型(&amp;mut Tなど)を一般に(例えば(&amp;mut T, &amp;mut U)などを)取って構造体に格納し、さらに他のtrait(Iteratorなど)と一緒に運用したい場合がある。しかし現状reborrowをそのままtraitにしようとすると、reborrow後の型が寿命を短くした自分自身であると保証できないため、他のtrait実装の保証を失ってしまう。
+代わりにGATsを用いてSelf::Target&lt;'borrow&gt;をreborrowされる型に設定すれば、selfを取る代わりにSelf::Target&lt;'borrow...]]></description><link>https://zenn.dev/momota1029/articles/c8a0743ee90880</link><guid isPermaLink="true">https://zenn.dev/momota1029/articles/c8a0743ee90880</guid><pubDate>Sun, 06 Oct 2024 22:12:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--od8yj9UO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:GATs%25E3%2581%25A7reborrow%25E3%2581%258Ctrait%25E5%258C%2596%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258B%25E3%2582%2593%25E3%2581%2598%25E3%2582%2583%25E3%2581%25AA%25E3%2581%2584%25E3%2581%258B%25EF%25BC%259F%25E3%2580%2580%2528%25E5%25AE%258C%25E5%2585%25A8%25E3%2581%25AB%25E3%2581%25AF%25E7%2584%25A1%25E7%2590%2586%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2593%25E3%2581%25AA%25E3%2581%2597%25E3%2581%25BF%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ4ZDk4NmE4ZWUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>こなしみ</dc:creator></item><item><title><![CDATA[[Rust] 自作言語で配列への代入にはまった時、左辺値が助けてくれるかも]]></title><description><![CDATA[Rust で作るプログラミング言語シリーズです。
+https://www.amazon.co.jp/dp/4297141922
+今回の記事は、 Mascal プログラミング言語を作るにあたって私がはまった集成体型(Aggregate type[1])の更新方法に関してです。
+書籍で作った言語 (Ruscal) は集成体型をサポートしていないので今回の課題は当てはまりませんが、実用的な言語を目指したら配列などをサポートする際問題になる確率が高いです。
+本稿は AST インタプリタ型言語とバイトコードコンパイラの両方に当てはまります。
+
+ 問題
+ここでいう集成体型とは、配列や構造体など、「部...]]></description><link>https://zenn.dev/msakuta/articles/592c0f70734372</link><guid isPermaLink="true">https://zenn.dev/msakuta/articles/592c0f70734372</guid><pubDate>Sun, 06 Oct 2024 14:58:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--eL5IYFNW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BRust%255D%2520%25E8%2587%25AA%25E4%25BD%259C%25E8%25A8%2580%25E8%25AA%259E%25E3%2581%25A7%25E9%2585%258D%25E5%2588%2597%25E3%2581%25B8%25E3%2581%25AE%25E4%25BB%25A3%25E5%2585%25A5%25E3%2581%25AB%25E3%2581%25AF%25E3%2581%25BE%25E3%2581%25A3%25E3%2581%259F%25E6%2599%2582%25E3%2580%2581%25E5%25B7%25A6%25E8%25BE%25BA%25E5%2580%25A4%25E3%2581%258C%25E5%258A%25A9%25E3%2581%2591%25E3%2581%25A6%25E3%2581%258F%25E3%2582%258C%25E3%2582%258B%25E3%2581%258B%25E3%2582%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:msakuta%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFUWEFKeG5tZ0ZYQlJsZjJpZVh1QWlwOG9LaFdpT2FSczg2dXRzWlcwN3o9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>msakuta</dc:creator></item><item><title><![CDATA[Capn' ProtoのRPCの仕組みを説明する]]></title><description><![CDATA[
+ まえがき
+Capn' ProtoはRPCを実現するためのフレームワークです
+マイナーであるため、そのコンセプトや仕組みを解説しているドキュメントが少ないです
+このため、以下のような疑問をもつことが多いです
+
+なんでgRPCとかじゃなくてCapn' Proto使ってんだっけ？
+CapablityとかPipelineって何だっけ？
+これ本当にgRPCに比べて速いんか？
+
+この疑問を解決するため、このドキュメントは以下の内容を説明します
+
+Capn' Protoのコンセプト
+Capn' ProtoのRPCの仕組み(概要レベル)
+
+逆に、このドキュメントは以下の内容を説明しません
+
+Capn...]]></description><link>https://zenn.dev/ggpy/articles/a7e62a2375f56c</link><guid isPermaLink="true">https://zenn.dev/ggpy/articles/a7e62a2375f56c</guid><pubDate>Sun, 06 Oct 2024 11:55:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Ivhws5Yw--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Capn%2527%2520Proto%25E3%2581%25AERPC%25E3%2581%25AE%25E4%25BB%2595%25E7%25B5%2584%25E3%2581%25BF%25E3%2582%2592%25E8%25AA%25AC%25E6%2598%258E%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:AngryMane%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFjMmMzMmMxYzMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>AngryMane</dc:creator></item><item><title><![CDATA[Capnproto公式要約 - Encoding]]></title><description><![CDATA[
+ 概要
+Cap'n Protoが通信する際の最も基本的な単位の概念(Struct/Listなど)とそのメモリ上のレイアウトを定義する
+Cap'n Protoがやり取りするメッセージのバイナリのフォーマットを説明する
+(元のドキュメントは公式ドキュメント 参照)
+
+ データ構造
+
+ 64-bit words
+
+Capn'Protoでは Word は8byte
+全てのObject(Struct/List/Capabilityなど)は Word 境界にパディングで揃えられる(C++の構造体のパディングと一緒)
+
+&lt;a id="anchor1"&gt;&lt;/a&gt;
+アンカー
+
+ ...]]></description><link>https://zenn.dev/ggpy/articles/6707f1fb2574ef</link><guid isPermaLink="true">https://zenn.dev/ggpy/articles/6707f1fb2574ef</guid><pubDate>Sun, 06 Oct 2024 11:55:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--HJL1FF6W--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Capnproto%25E5%2585%25AC%25E5%25BC%258F%25E8%25A6%2581%25E7%25B4%2584%2520-%2520Encoding%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:AngryMane%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFjMmMzMmMxYzMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>AngryMane</dc:creator></item><item><title><![CDATA[[Baker link. Dev] RustとRP2040マイコンでLチカしてみた-Lチカ編-]]></title><description><![CDATA[
+ はじめに
+本記事はBaker link. Tutrial を参考にしています。詳細については、そちらをご確認ください。
+
+ Baker link. Envについて
+Baker linkプロジェクトでは、Baker link. Devを用いたRust言語での組み込み開発環境をBaker link. Envによって簡単に構築することができます。本記事は、ソフトウェアに詳しくない著者が体験してみた記事です。
+
+ Baker link. Envのインストール
+こちらの記事を参考にしてください。
+
+ Baker link. Envの使い方
+Baker link. Envは、3つの機能があります...]]></description><link>https://zenn.dev/baker_link_lab/articles/02c984ec0c5d16</link><guid isPermaLink="true">https://zenn.dev/baker_link_lab/articles/02c984ec0c5d16</guid><pubDate>Sun, 06 Oct 2024 10:52:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--XVSGUfbX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BBaker%2520link.%2520Dev%255D%2520Rust%25E3%2581%25A8RP2040%25E3%2583%259E%25E3%2582%25A4%25E3%2582%25B3%25E3%2583%25B3%25E3%2581%25A7L%25E3%2583%2581%25E3%2582%25AB%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F-L%25E3%2583%2581%25E3%2582%25AB%25E7%25B7%25A8-%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Baker%2520link.%2520Lab%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FkNzkyZGRhODEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Baker link. Lab</dc:creator></item><item><title><![CDATA[[Baker link. Dev] RustとRP2040マイコンでLチカしてみた-環境構築編-]]></title><description><![CDATA[
+ はじめに
+本記事はBaker link. Tutrial を参考にしています。詳細については、そちらをご確認ください。
+
+ 開発環境
+Baker link. Dev
+Docker ( Rancher Desktop by SUSE)
+Visual Studio Code
+probe-rs
+
+ 環境構築の流れ
+
+ Rancher DesktopとVisual Stdio Codeのインストール
+Rancher Desktop、Visual Studio Codeは、公式リンクのインストーラーでインストールできます。
+Rancher Desktop 公式リンク
+Visual Studio...]]></description><link>https://zenn.dev/baker_link_lab/articles/c7e7b271f021a4</link><guid isPermaLink="true">https://zenn.dev/baker_link_lab/articles/c7e7b271f021a4</guid><pubDate>Sun, 06 Oct 2024 09:36:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wEFzxRhc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BBaker%2520link.%2520Dev%255D%2520Rust%25E3%2581%25A8RP2040%25E3%2583%259E%25E3%2582%25A4%25E3%2582%25B3%25E3%2583%25B3%25E3%2581%25A7L%25E3%2583%2581%25E3%2582%25AB%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F-%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%25E7%25B7%25A8-%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Baker%2520link.%2520Lab%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FkNzkyZGRhODEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Baker link. Lab</dc:creator></item><item><title><![CDATA[[rust] 2. Add Two Numbers/60 questions to solve]]></title><description><![CDATA[Leet Codeのおすすめされていた60問を解いた自己学習メモです。
+Leet Codeのリスト機能
+https://leetcode.com/list/xo2bgr0r
+おすすめされていた元記事
+https://1kohei1.com/leetcode/
+前回の記事
+https://zenn.dev/yut_wq/articles/8b7199ad27333b
+
+ 2. Add Two Numbers
+
+ 一言まとめ
+LinkedListでnodeをたどる際には、nodeの現在位置を控えておく。
+LinkedListの先頭にダミーnodeを入れておくと、プログラムが簡易になることがあ...]]></description><link>https://zenn.dev/yut_wq/articles/533fabd12bf4af</link><guid isPermaLink="true">https://zenn.dev/yut_wq/articles/533fabd12bf4af</guid><pubDate>Sun, 06 Oct 2024 08:39:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--YcxBoFHl--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255Brust%255D%25202.%2520Add%2520Two%2520Numbers%252F60%2520questions%2520to%2520solve%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:YT%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTHhoaTdpLUpwaHdzY21VRFRSMGh0ZzFGd1ZXMDA1S3IyeV9RVzZFWXZNNEU2YndxVjg9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>YT</dc:creator></item><item><title><![CDATA[【Rust】自作GameEngine　~依存関係編~]]></title><description><![CDATA[
+ はじめに
+フレームワークやアプリケーションを作成する際、依存関係の解決は非常に重要です。初期段階で適切なルールや方針を決めておかないと、後々、開発の進行に支障をきたす可能性があります。
+今回は、自作ゲームエンジンにおける依存関係のルールを決定し、その概要を共有します。
+
+ おおまかな依存関係
+依存関係を4つのレベルに分類しました。それぞれのレベルは、以下の順序で依存関係が少なく、上位のレベルに依存できる構造です：
+
+utility
+core
+coreplugin
+userplugin
+
+各レベルの概要を以下に説明します。
+
+ utility
+このレベルでは、サードパーティー製ライブラ...]]></description><link>https://zenn.dev/tikuwabu/articles/b25621d519c478</link><guid isPermaLink="true">https://zenn.dev/tikuwabu/articles/b25621d519c478</guid><pubDate>Sun, 06 Oct 2024 05:50:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--d-TKXTvT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Rust%25E3%2580%2591%25E8%2587%25AA%25E4%25BD%259CGameEngine%25E3%2580%2580%7E%25E4%25BE%259D%25E5%25AD%2598%25E9%2596%25A2%25E4%25BF%2582%25E7%25B7%25A8%7E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A1%25E3%2581%258F%25E3%2582%258F%25E3%2581%25B6%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzMxMjdmZjRiODAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ちくわぶ</dc:creator></item><item><title><![CDATA[[rust] 1. Two Sum/60 questions to solve]]></title><description><![CDATA[Leet Codeのおすすめされていた60問を解いた自己学習メモです。
+Leet Codeのリスト機能
+https://leetcode.com/list/xo2bgr0r
+おすすめされていた元記事
+https://1kohei1.com/leetcode/
+
+ 1. Two Sum
+https://leetcode.com/problems/two-sum/description/?envType=problem-list-v2&amp;envId=xo2bgr0r
+
+ 一言まとめ
+同じリストに対して2回以上ループを回すときは、HashMapに登録しておくと、2回目以降のループの際の効...]]></description><link>https://zenn.dev/yut_wq/articles/8b7199ad27333b</link><guid isPermaLink="true">https://zenn.dev/yut_wq/articles/8b7199ad27333b</guid><pubDate>Sat, 05 Oct 2024 21:26:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--RZVm-Wcx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255Brust%255D%25201.%2520Two%2520Sum%252F60%2520questions%2520to%2520solve%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:YT%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTHhoaTdpLUpwaHdzY21VRFRSMGh0ZzFGd1ZXMDA1S3IyeV9RVzZFWXZNNEU2YndxVjg9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>YT</dc:creator></item><item><title><![CDATA[[Rust] 引数の有無で read 対象(ファイル・標準入力)を切り替える]]></title><description><![CDATA[
+
+ 概要
+Rustで作成したプログラムの動作を、以下のようにしたかった。
+
+引数にファイルが指定されている場合、ファイルの内容を読み込む。
+引数にファイルが指定されていない場合、標準入力の内容を読み込む。
+
+上記の動作を実現した方法を記載します。
+
+ 使用するプログラム
+説明では、ファイルの内容を表示し、行頭に行数を表示するプログラムを使用します。
+説明で使用するプログラムのソースコードは、以下にあります。
+https://github.com/shu-kitamura/BufRead_sample
+プログラムの引数にファイル名が指定されている場合、ファイルの内容を表示します。
+$ c...]]></description><link>https://zenn.dev/shu_kitamura/articles/a2491733fb43f1</link><guid isPermaLink="true">https://zenn.dev/shu_kitamura/articles/a2491733fb43f1</guid><pubDate>Sat, 05 Oct 2024 15:31:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5uPhZWW6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BRust%255D%2520%25E5%25BC%2595%25E6%2595%25B0%25E3%2581%25AE%25E6%259C%2589%25E7%2584%25A1%25E3%2581%25A7%2520read%2520%25E5%25AF%25BE%25E8%25B1%25A1%2528%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2583%25BB%25E6%25A8%2599%25E6%25BA%2596%25E5%2585%25A5%25E5%258A%259B%2529%25E3%2582%2592%25E5%2588%2587%25E3%2582%258A%25E6%259B%25BF%25E3%2581%2588%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Skit%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FjZjhiN2M4YmEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Skit</dc:creator></item><item><title><![CDATA[【Rust】スマートポインタ/ボックス について]]></title><description><![CDATA[
+ 要点
+
+ 概要
+
+スタックではなくヒープにデータを格納することができる
+スタックに残るのは、 ヒープデータへのポインタである
+
+スタック                ヒープ
++-----------+         +-------------------+
+| Box&lt;T&gt;    |  -----&gt; | データ（ヒープ）     |
+| ポインタ   |         | 例えば、大きな構造体  |
++-----------+         +-------------------+
+
+ 使い所
+
+コンパイル時にはサイズを知ることができない型があり、正確な...]]></description><link>https://zenn.dev/nekoninaritai/articles/71401318e59f44</link><guid isPermaLink="true">https://zenn.dev/nekoninaritai/articles/71401318e59f44</guid><pubDate>Sat, 05 Oct 2024 13:27:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--C8x9gsUd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Rust%25E3%2580%2591%25E3%2582%25B9%25E3%2583%259E%25E3%2583%25BC%25E3%2583%2588%25E3%2583%259D%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25BF%252F%25E3%2583%259C%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25B9%2520%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:svun%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E2ODg0YTdhNTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>svun</dc:creator></item><item><title><![CDATA[tauri-store-plugin 2.0.0 正式版アップデート後の静的解析エラー解消]]></title><description><![CDATA[
+ 2.0.0 正式版アップデートで発生した静的解析エラー
+私の場合、tauri-store-pluginを2.0.0-rc.3から2.0.1にアップデートした際、最初に静的解析でエラーが発生しました。以前のバージョンで使用していたいくつかのメソッドが、2.0.1では動作しなくなっていたためです。特に、ストアの値を更新する際に使っていたinsertメソッドや、ストアの初期化方法に変更が加えられていました。
+最初はコードのロジックに問題があるのではと考えましたが、実際にはAPIの変更が原因でした。さらに、これらの変更がドキュメント(crates.io)にまだ明確に記載されていなかったため、...]]></description><link>https://zenn.dev/takisato/articles/378f8140a4e2b2</link><guid isPermaLink="true">https://zenn.dev/takisato/articles/378f8140a4e2b2</guid><pubDate>Sat, 05 Oct 2024 07:14:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4rk2hQpp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:tauri-store-plugin%25202.0.0%2520%25E6%25AD%25A3%25E5%25BC%258F%25E7%2589%2588%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%25E3%2583%2587%25E3%2583%25BC%25E3%2583%2588%25E5%25BE%258C%25E3%2581%25AE%25E9%259D%2599%25E7%259A%2584%25E8%25A7%25A3%25E6%259E%2590%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E8%25A7%25A3%25E6%25B6%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:takisato%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI0NWE1NWQwZWYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takisato</dc:creator></item><item><title><![CDATA[TauriとLeptosで作るデスクトップアプリ（4）イベントを送受信する]]></title><description><![CDATA[
+ はじめに
+TauriとLeptosでデスクトップアプリを作っていきます。今回は、LeptosフロントエンドとTauriバックエンドの間でイベントを送受信します。
+関連記事
+https://zenn.dev/daizutabi/articles/tauri-leptos-01
+https://zenn.dev/daizutabi/articles/tauri-leptos-02
+https://zenn.dev/daizutabi/articles/tauri-leptos-03
+
+環境
+
+Windows 11 Home
+Rust 1.81
+Tauri 2.0.1
+
+https://t...]]></description><link>https://zenn.dev/daizutabi/articles/tauri-leptos-04</link><guid isPermaLink="true">https://zenn.dev/daizutabi/articles/tauri-leptos-04</guid><pubDate>Sat, 05 Oct 2024 02:51:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vvb22Mqd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Tauri%25E3%2581%25A8Leptos%25E3%2581%25A7%25E4%25BD%259C%25E3%2582%258B%25E3%2583%2587%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%2588%25E3%2583%2583%25E3%2583%2597%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25EF%25BC%25884%25EF%25BC%2589%25E3%2582%25A4%25E3%2583%2599%25E3%2583%25B3%25E3%2583%2588%25E3%2582%2592%25E9%2580%2581%25E5%258F%2597%25E4%25BF%25A1%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:daizutabi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdmMTMzM2MwY2MuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>daizutabi</dc:creator></item><item><title><![CDATA[ESP32向けRust開発環境をNixで構築する]]></title><description><![CDATA[
+ 急いでいる方向け
+次の手順で構築からビルドまで可能です(direnvを導入している必要があります)
+nix flake new -t github:turtton/flake-templates#esp32-idf &lt;appname&gt;
+作成されたフォルダ内でDirenvを有効にしてから(direnv allow)、以下を実行します
+cargo generate --init esp-rs/esp-idf-template cargo # See: https://github.com/esp-rs/esp-idf-template
+Build environmentに入り...]]></description><link>https://zenn.dev/watagame/articles/esp32-rust-nix</link><guid isPermaLink="true">https://zenn.dev/watagame/articles/esp32-rust-nix</guid><pubDate>Fri, 04 Oct 2024 23:27:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--NHn_PzIy--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ESP32%25E5%2590%2591%25E3%2581%2591Rust%25E9%2596%258B%25E7%2599%25BA%25E7%2592%25B0%25E5%25A2%2583%25E3%2582%2592Nix%25E3%2581%25A7%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:turtton%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2QxMDFjODE1ZTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>turtton</dc:creator></item><item><title><![CDATA[Rust で正規表現エンジンを実装した話 その④]]></title><description><![CDATA[
+ 概要
+その①でVM型の正規表現エンジンは以下の3つの処理を行っていると説明しました。
+
+パターンをパースし、抽象構文木(AST)を生成する
+ASTから命令列を生成する
+文字列がパターンと一致するか評価する
+
+今回、解説するのは「3. 文字列がパターンと一致するか評価する」処理です。
+evaluator モジュール(evaluator.rs)に命令列と文字列を受け取り、評価を実施する関数を定義します。
+また、実際にパターンマッチする関数をmain.rsに定義して、実行するところも記載します。
+
+ evaluator の実装
+evaluator モジュールの中に、evaluate関数を定...]]></description><link>https://zenn.dev/shu_kitamura/articles/09f068b8193141</link><guid isPermaLink="true">https://zenn.dev/shu_kitamura/articles/09f068b8193141</guid><pubDate>Fri, 04 Oct 2024 16:42:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--A40SWf3f--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%2520%25E3%2581%25A7%25E6%25AD%25A3%25E8%25A6%258F%25E8%25A1%25A8%25E7%258F%25BE%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%25B3%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2597%25E3%2581%259F%25E8%25A9%25B1%2520%25E3%2581%259D%25E3%2581%25AE%25E2%2591%25A3%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Skit%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FjZjhiN2M4YmEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Skit</dc:creator></item><item><title><![CDATA[Rust で正規表現エンジンを実装した話 その③]]></title><description><![CDATA[
+ 概要
+その①でVM型の正規表現エンジンは以下の3つの処理を行っていると説明しました。
+
+パターンをパースし、抽象構文木(AST)を生成する
+ASTから命令列を生成する
+文字列がパターンと一致するか評価する
+
+今回、解説するのは「2. ASTから命令列を生成する」処理です。
+compiler モジュール(compiler.rs)に 命令列を表す型と、AST から命令列を生成する関数を実装します。
+
+ 命令列と処理順所
+compiler モジュールでは、ASTを解析して、命令の実行位置を示すプログラムカウンタと命令列を生成します。
+命令には以下の４種類があります。
+
+Char : 文字列...]]></description><link>https://zenn.dev/shu_kitamura/articles/600bf6de8e0a70</link><guid isPermaLink="true">https://zenn.dev/shu_kitamura/articles/600bf6de8e0a70</guid><pubDate>Fri, 04 Oct 2024 16:41:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--zBDKpVpm--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%2520%25E3%2581%25A7%25E6%25AD%25A3%25E8%25A6%258F%25E8%25A1%25A8%25E7%258F%25BE%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%25B3%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2597%25E3%2581%259F%25E8%25A9%25B1%2520%25E3%2581%259D%25E3%2581%25AE%25E2%2591%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Skit%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FjZjhiN2M4YmEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Skit</dc:creator></item></channel></rss>
