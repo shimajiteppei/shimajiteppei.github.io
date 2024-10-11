@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Java」のフィード]]></title><description><![CDATA[Zennのトピック「Java」のRSSフィードです]]></description><link>https://zenn.dev/topics/java</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/5c47bb8423.png</url><title>Zennの「Java」のフィード</title><link>https://zenn.dev/topics/java</link></image><generator>zenn.dev</generator><lastBuildDate>Fri, 11 Oct 2024 09:00:22 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/java/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[【最新版】JavaでNullPointerExceptionっていうエラーが出たときの対処法]]></title><description><![CDATA[
+ はじめに
+こんにちは。RaimuProjectのやむぅです。
+今回は、Javaのコーディング中に起きたエラー「NullPointerException」の解説や対処法についてお話ししていきます。
+どんな不具合なのか、どうやって調査・対処すればいいの？という人向けに書いたものです。ぜひ読んで見ていただけると嬉しいです。
+※ ちょこっと紹介！
+現役エンジニアの僕が教える、フルスタックエンジニアを目指せるスクールを運営しています。
+プログラミング初心者の方やリスキリングを考えている方にぜひ！
+https://programing-factory.raimuproject.com/lp
+
+ ...]]></description><link>https://zenn.dev/yamu_official/articles/2bd6b6b0032cae</link><guid isPermaLink="true">https://zenn.dev/yamu_official/articles/2bd6b6b0032cae</guid><pubDate>Fri, 11 Oct 2024 08:08:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GLCJ0c39--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E6%259C%2580%25E6%2596%25B0%25E7%2589%2588%25E3%2580%2591Java%25E3%2581%25A7NullPointerException%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%2584%25E3%2581%2586%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E3%2581%258C%25E5%2587%25BA%25E3%2581%259F%25E3%2581%25A8%25E3%2581%258D%25E3%2581%25AE%25E5%25AF%25BE%25E5%2587%25A6%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2584%25E3%2582%2580%25E3%2581%2585%25E3%2580%2582%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzExMmY3NzRmNzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>やむぅ。</dc:creator></item><item><title><![CDATA[【最新版】JavaでArrayIndexOutOfBoundsExceptionっていうエラーが出たときの対処法]]></title><description><![CDATA[
+ はじめに
+こんにちは。RaimuProjectのやむぅです。
+今回は、Javaのコーディング中に起きたエラー「java.lang.ArrayIndexOutOfBoundsException」の解説や対処法についてお話ししていきます。
+どんな不具合なのか、どうやって調査・対処すればいいの？という人向けに書いたものです。ぜひ読んで見ていただけると嬉しいです。
+※ ちょこっと紹介！
+現役エンジニアの僕が教える、フルスタックエンジニアを目指せるスクールを運営しています。
+プログラミング初心者の方やリスキリングを考えている方にぜひ！
+https://programing-factory.ra...]]></description><link>https://zenn.dev/yamu_official/articles/8edd0cecc3554b</link><guid isPermaLink="true">https://zenn.dev/yamu_official/articles/8edd0cecc3554b</guid><pubDate>Fri, 11 Oct 2024 08:07:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--CaBiozIQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E6%259C%2580%25E6%2596%25B0%25E7%2589%2588%25E3%2580%2591Java%25E3%2581%25A7ArrayIndexOutOfBoundsException%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%2584%25E3%2581%2586%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E3%2581%258C%25E5%2587%25BA%25E3%2581%259F%25E3%2581%25A8%25E3%2581%258D%25E3%2581%25AE%25E5%25AF%25BE%25E5%2587%25A6%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2584%25E3%2582%2580%25E3%2581%2585%25E3%2580%2582%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzExMmY3NzRmNzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>やむぅ。</dc:creator></item><item><title><![CDATA[Spring boot＋dockerで webアプリケーション環境構築]]></title><description><![CDATA[
+ はじめに
+dockerとspring bootを用いたwebアプリケーションの環境構築について、説明します。
+
+ 階層図
+project-root
+├── gradle
+│   └── wrapper
+│       ├── gradle-wrapper.jar
+│       └── gradle-wrapper.properties
+├── src
+│   ├── main
+│   │   ├── java
+│   │   │   └── com
+│   │   │       └── example
+│   │   │           └── demo
+│   │   │ ...]]></description><link>https://zenn.dev/maru8118/articles/6602edab2b3da3</link><guid isPermaLink="true">https://zenn.dev/maru8118/articles/6602edab2b3da3</guid><pubDate>Tue, 08 Oct 2024 11:21:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--zea9sCxI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Spring%2520boot%25EF%25BC%258Bdocker%25E3%2581%25A7%2520web%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:marus8118%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFkYjllYmNlNWUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>marus8118</dc:creator></item><item><title><![CDATA[🐵「public static変数とpublic変数の違いってなんや？」【Apex学習】]]></title><description><![CDATA[
+ 最初の疑問
+🐵「staticがつくと、同じクラス内で共有されることは理解できたワ！」
+🐵「ただ、publicがつけば全体に共有されるから、わざわざ同じクラスで共有するためのstaticなんていらんはずなんや」
+🐵「それでも、あえてpublicにstaticを付け加える理由ってなんや？？」
+🐵「ChatGPT！教えてくれや！」カタカタ…ッツパーーン！
+
+ 回答
+🤖「public static と単なる public には、アクセスレベルだけでなく、アクセスの方法とメンバーの扱い方に違いがあります。どちらも public なので同じクラスや他のクラスからアクセス可能ですが、static ...]]></description><link>https://zenn.dev/deiriguchi/articles/4f7df77dbd1f3b</link><guid isPermaLink="true">https://zenn.dev/deiriguchi/articles/4f7df77dbd1f3b</guid><pubDate>Mon, 07 Oct 2024 12:16:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vhjR0ogc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%2520%25E3%2580%258Cpublic%2520static%25E5%25A4%2589%25E6%2595%25B0%25E3%2581%25A8public%25E5%25A4%2589%25E6%2595%25B0%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25AA%25E3%2582%2593%25E3%2582%2584%25EF%25BC%259F%25E3%2580%258D%25E3%2580%2590Apex%25E5%25AD%25A6%25E7%25BF%2592%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A7%25E3%2581%2584%25E3%2582%258A%25E3%2581%2590%25E3%2581%25A1%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzMyZDExNTcyZmQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>でいりぐち</dc:creator></item><item><title><![CDATA[Javaのパッケージ名に"-"ハイフンが入ってしまうときの対処法]]></title><description><![CDATA[Javaのパッケージ名は慣習で他の人と被らないようにする為、ドメインを逆さまにして使用することが多い
+そしてJavaではパッケージ名に-を使用することができない
+
+ 対処法
+すべての-(ハイフン)を_(アンダースコア)に置き換える
+例:
+io.github.monax-owo.&lt;package name&gt;-&gt;io.github.monax_owo.&lt;package name&gt;
+「他の人と被らないの？」と心配になったが
+rfc的にはアンダースコアは使わないほうがいい、ということになっている
+(が、rfcはごちゃごちゃしてるのでよくわからない)
+]]></description><link>https://zenn.dev/energyzunda/articles/dd9b3a18f6cd63</link><guid isPermaLink="true">https://zenn.dev/energyzunda/articles/dd9b3a18f6cd63</guid><pubDate>Mon, 07 Oct 2024 05:51:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jXCQyFwi--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java%25E3%2581%25AE%25E3%2583%2591%25E3%2583%2583%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B8%25E5%2590%258D%25E3%2581%25AB%2522-%2522%25E3%2583%258F%25E3%2582%25A4%25E3%2583%2595%25E3%2583%25B3%25E3%2581%258C%25E5%2585%25A5%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%2597%25E3%2581%25BE%25E3%2581%2586%25E3%2581%25A8%25E3%2581%258D%25E3%2581%25AE%25E5%25AF%25BE%25E5%2587%25A6%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:monax%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FmNGY1Yjc4NTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>monax</dc:creator></item><item><title><![CDATA[[趣味開発]タスク管理通知アプリの開発 アプリ編]]></title><description><![CDATA[
+ [趣味開発]タスク管理通知アプリの開発 アプリ編
+
+ はじめに
+https://zenn.dev/yydevelop/articles/82a42a3f3b8c6e
+の続き
+
+ チェックリスト管理画面の追加
+MainActivity.kt
+package com.example.taskreminder
+
+import android.appwidget.AppWidgetManager
+import android.content.ComponentName
+import android.content.Context
+import android.content.SharedPr...]]></description><link>https://zenn.dev/yydevelop/articles/dabc8532fe8500</link><guid isPermaLink="true">https://zenn.dev/yydevelop/articles/dabc8532fe8500</guid><pubDate>Sun, 06 Oct 2024 11:26:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--EoqOlpVd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255B%25E8%25B6%25A3%25E5%2591%25B3%25E9%2596%258B%25E7%2599%25BA%255D%25E3%2582%25BF%25E3%2582%25B9%25E3%2582%25AF%25E7%25AE%25A1%25E7%2590%2586%25E9%2580%259A%25E7%259F%25A5%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2581%25AE%25E9%2596%258B%25E7%2599%25BA%2520%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E7%25B7%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yydevelop%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzcwNDBiZDVjYWQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yydevelop</dc:creator></item><item><title><![CDATA[Dependency Injection: 依存性の注入？]]></title><description><![CDATA[
+ DI（Dependency Injection、依存性注入）
+DI（依存性注入）は、オブジェクト間の依存関係を外部から注入して管理するデザインパターンです。Springでは、DIコンテナを使ってオブジェクトの生成と依存関係の解決を自動でやってくれます。
+
+ 依存性とは
+dependencyを「依存性」と訳さず、オブジェクト注入と解釈する
+つまり、言い換えると
+与えられたオブジェクトと渡す
+ってことかな？
+
+ メリット
+
+
+疎結合: オブジェクト同士の結びつきがゆるくなります。これにより、特定の実装に縛られない設計ができて、コードの変更や拡張がしやすくなります。
+
+テストが楽: 依存す...]]></description><link>https://zenn.dev/yama44/articles/20e32f2273f918</link><guid isPermaLink="true">https://zenn.dev/yama44/articles/20e32f2273f918</guid><pubDate>Sun, 06 Oct 2024 09:08:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--UJUMN22i--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Dependency%2520Injection%253A%2520%25E4%25BE%259D%25E5%25AD%2598%25E6%2580%25A7%25E3%2581%25AE%25E6%25B3%25A8%25E5%2585%25A5%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yama44%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFUWEFKd3Y0ZXJwVkdjWW56Y25YWXppSDh5V2ZvdFNWZHFBZkxXV0pYcy09czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yama44</dc:creator></item><item><title><![CDATA[ドメイン層を純粋に〜リポジトリ都合の実装をドメイン層から剥がす〜]]></title><description><![CDATA[
+ DDDでリポジトリの実装の都合がドメイン層に書かれてしまう問題
+ドメイン駆動設計（DDD）では、リポジトリの実装の都合がドメイン層に書かれてしまうと、ドメインで表現したかったことにシステムの都合が混在する形になり、DDDのメリットを100%発揮できなくなってしまいます。
+この問題を解決するために、Javaの関数型インターフェース、特にConsumerを使ったリファクタリング方法を紹介します。Consumerとラムダ式を使うことで、ドメイン層とリポジトリの実装を引き離し、堅牢な設計が可能になります。
+具体的な例を使って、コードの改善プロセスを一緒に見ていきましょう。
+
+ Consume...]]></description><link>https://zenn.dev/kakiageseiro/articles/aa692151bd72db</link><guid isPermaLink="true">https://zenn.dev/kakiageseiro/articles/aa692151bd72db</guid><pubDate>Sat, 05 Oct 2024 21:41:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1JbHqtfc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2589%25E3%2583%25A1%25E3%2582%25A4%25E3%2583%25B3%25E5%25B1%25A4%25E3%2582%2592%25E7%25B4%2594%25E7%25B2%258B%25E3%2581%25AB%25E3%2580%259C%25E3%2583%25AA%25E3%2583%259D%25E3%2582%25B8%25E3%2583%2588%25E3%2583%25AA%25E9%2583%25BD%25E5%2590%2588%25E3%2581%25AE%25E5%25AE%259F%25E8%25A3%2585%25E3%2582%2592%25E3%2583%2589%25E3%2583%25A1%25E3%2582%25A4%25E3%2583%25B3%25E5%25B1%25A4%25E3%2581%258B%25E3%2582%2589%25E5%2589%25A5%25E3%2581%258C%25E3%2581%2599%25E3%2580%259C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258B%25E3%2581%258D%25E3%2581%2582%25E3%2581%2592%25E3%2581%259B%25E3%2581%2584%25E3%2582%258D%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dvdnctN1oxY0JnclBjLXRsWlh3OEhpTDFtUjZqQ3RvZjJLcVdEPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>かきあげせいろ</dc:creator></item><item><title><![CDATA[[react calendar] カレンダーを使って予約機能を作ろう＿3]]></title><description><![CDATA[今回の時間では、予約された時間を照会し、その時間のボタンを無効にする機能と会員情報を保存する機能について説明します。
+参考までに、予約に必要な情報は次のとおりです。(データベース)
+必須入力が必要なデータは、医師番号、会員番号、診療科番号、予約年、月、日、予約時間です。
+予約番号は自動的に数字が保存されるように設定されており、症状は必須入力ではありません。
+また、予約状態は予約をするとYにデフォルト値が設定されている状態です。
+受付日も現在の日付にデフォルト値が設定されています。
+CREATE TABLE MEDICAL_SCHEDULE(
+        SCH_NUM INT PRI...]]></description><link>https://zenn.dev/hyoni/articles/305279d9075ff1</link><guid isPermaLink="true">https://zenn.dev/hyoni/articles/305279d9075ff1</guid><pubDate>Sat, 05 Oct 2024 13:15:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hpLveW8A--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255Breact%2520calendar%255D%2520%25E3%2582%25AB%25E3%2583%25AC%25E3%2583%25B3%25E3%2583%2580%25E3%2583%25BC%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E4%25BA%2588%25E7%25B4%2584%25E6%25A9%259F%25E8%2583%25BD%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258D%25E3%2581%2586%25EF%25BC%25BF3%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%2592%25E3%2583%25A7%25E3%2583%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0sxdWxlU2pkSzlwbDVxZnp3QVlUcFhCNk9xUEhkZGpKWjRUVlRPTl9lMHdYODhLdkg9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ヒョニ</dc:creator></item><item><title><![CDATA[Docker環境でJavaをデコンパイルする。]]></title><description><![CDATA[Windows11のDocker環境上でJava Decompiler（https://github.com/eikendev/java-decompiler）を使ってjarをデコンパイルします。
+※以下のJavaのデコンパイルツールが使われています。
+
+CFR
+Fernflower
+Krakatau
+Procyon
+
+
+ 環境
+Windows 11 Pro 23H2
+WLS 2.1.5.0（Ubuntu 22.04.1 LTS）
+Docker Desktop 4.29.0
+Visual Studio Code
+
+ １．docker runコマンドで実行する場合
+
+ ①フォルダ構成
+以下...]]></description><link>https://zenn.dev/zenn369/articles/4295640a43081f</link><guid isPermaLink="true">https://zenn.dev/zenn369/articles/4295640a43081f</guid><pubDate>Sat, 05 Oct 2024 05:25:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0M6z6kGL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25A7Java%25E3%2582%2592%25E3%2583%2587%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2591%25E3%2582%25A4%25E3%2583%25AB%25E3%2581%2599%25E3%2582%258B%25E3%2580%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:zenn369%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTHFuU0doMi1rRTZzTk1KVnk5VzZBal9sZWZJZE1OV01DX183YTlVUW4zPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>zenn369</dc:creator></item><item><title><![CDATA[UnicodeとUTF-8: 文字エンコーディングとJavaによるファイル内容出力処理の実装]]></title><description><![CDATA[
+ はじめに
+今回は、Javaを用いてファイルの内容を標準出力する方法と、文字コードに関する基礎知識について解説します。
+
+ Unicodeについて
+
+ Unicodeとは？
+Unicodeは、世界中の文字を一つの標準で統一し、国際化対応のアプリケーションを容易にするための重要な技術です。さまざまなエンコーディング方式があり、開発者はその特性に応じて最適な方式を選択して文字データを扱います。
+
+ UTF-8とは
+UTF-8は、Unicodeで割り振ったコードポイントをコンピュータが理解できる別の16進数の数字(符号)に変換する方法の1つです。
+「コードポイント → 符号」に変換する方法 ...]]></description><link>https://zenn.dev/maru8118/articles/2b3a68ce4a452b</link><guid isPermaLink="true">https://zenn.dev/maru8118/articles/2b3a68ce4a452b</guid><pubDate>Thu, 03 Oct 2024 09:00:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--kV5lnPRb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Unicode%25E3%2581%25A8UTF-8%253A%2520%25E6%2596%2587%25E5%25AD%2597%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2587%25E3%2582%25A3%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%25A8Java%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258B%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E5%2586%2585%25E5%25AE%25B9%25E5%2587%25BA%25E5%258A%259B%25E5%2587%25A6%25E7%2590%2586%25E3%2581%25AE%25E5%25AE%259F%25E8%25A3%2585%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:marus8118%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFkYjllYmNlNWUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>marus8118</dc:creator></item><item><title><![CDATA[[react calendar] カレンダーを使って予約機能を作ろう＿2]]></title><description><![CDATA[病院のウェブサイトで予約をするためには、必ず診療科目を選択しなければならない。そこで、今回のプロジェクトでは6つの診療科目を作成し、それぞれに担当医を1人だけ登録して機能を実装してみた。まず、担当医テーブルに診療科目の番号をFKとして結びつけ、担当医と診療科目を同時に呼び出せるように設定した。
+診療科目情報（DB)
+CREATE TABLE medical_dept(
+	DEPT_NUM INT PRIMARY KEY AUTO_INCREMENT
+	,DEPT_NAME VARCHAR(30) NOT NULL
+);
+医者情報
+CREATE TABLE MEDICAL_DOCTOR(
+...]]></description><link>https://zenn.dev/hyoni/articles/33338a124ff43d</link><guid isPermaLink="true">https://zenn.dev/hyoni/articles/33338a124ff43d</guid><pubDate>Thu, 03 Oct 2024 07:01:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hQ87PkzE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255Breact%2520calendar%255D%2520%25E3%2582%25AB%25E3%2583%25AC%25E3%2583%25B3%25E3%2583%2580%25E3%2583%25BC%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E4%25BA%2588%25E7%25B4%2584%25E6%25A9%259F%25E8%2583%25BD%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258D%25E3%2581%2586%25EF%25BC%25BF2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%2592%25E3%2583%25A7%25E3%2583%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0sxdWxlU2pkSzlwbDVxZnp3QVlUcFhCNk9xUEhkZGpKWjRUVlRPTl9lMHdYODhLdkg9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ヒョニ</dc:creator></item><item><title><![CDATA[クソコードを読む上でのコールスタックの重要性]]></title><description><![CDATA[
+ はじめに
+プログラミングをしていると、どうしても「クソコード」に出会うことがあります。メンテナンス性が低く、可読性が悪いコードを静的に読んで理解しようとすると、多くのエンジニアが頭を抱えます。そんなときに役立つのが「コールスタック」です。これをうまく活用すれば、クソコードのバグや問題箇所を効率的に見つけ出し、解決に導くことができます。
+この記事では、コールスタックの基本的な説明と、それがクソコードの理解にどのように役立つかを解説します。
+
+ コールスタックとは
+コールスタックは、プログラムが実行される中で関数やメソッドの呼び出し順序を管理するメモリ領域です。各関数が呼び出されるたびに...]]></description><link>https://zenn.dev/tonbi_attack/articles/3f885f502e006f</link><guid isPermaLink="true">https://zenn.dev/tonbi_attack/articles/3f885f502e006f</guid><pubDate>Tue, 01 Oct 2024 14:15:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fR40ed_M--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25AF%25E3%2582%25BD%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2582%2592%25E8%25AA%25AD%25E3%2582%2580%25E4%25B8%258A%25E3%2581%25A7%25E3%2581%25AE%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%25AB%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%2583%25E3%2582%25AF%25E3%2581%25AE%25E9%2587%258D%25E8%25A6%2581%25E6%2580%25A7%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tonbiattack%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVhZGQ4MThjYjcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tonbiattack</dc:creator></item><item><title><![CDATA[Java23の新機能を学ぶ]]></title><description><![CDATA[Java23でJavaDocがMarkdownで書けるという噂を耳にし、これを機に新機能を学んでみる。
+（Java23と銘打ってはいるが、実際にはもっと前のバージョンでプレビュー機能になったものも多い。）
+
+ Java23について
+https://www.oracle.com/jp/news/announcement/oracle-releases-java-23-2024-09-17/
+2024/9/17にリリースされ、すでにAmazon Correttoなどのディストリビューションで利用可能のようだ。
+プレスリリース内に登場する単語を調べてみる。
+
+Project Amber
+htt...]]></description><link>https://zenn.dev/nadg/articles/4202b4027ae7dd</link><guid isPermaLink="true">https://zenn.dev/nadg/articles/4202b4027ae7dd</guid><pubDate>Mon, 30 Sep 2024 18:12:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--y5uOqzo9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java23%25E3%2581%25AE%25E6%2596%25B0%25E6%25A9%259F%25E8%2583%25BD%25E3%2582%2592%25E5%25AD%25A6%25E3%2581%25B6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nadg%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSmVzaE93WlJUMXRvN2FjMHR2TWFzSzBsSnpkM2RGMmFMUlU4V2dLbEczbnRwMFJnPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nadg</dc:creator></item><item><title><![CDATA[Javaの歴史と仕様概要]]></title><description><![CDATA[こんにちは、$@(ダラ～っと)です(๑Ò﹃ Ó๑)ゝ
+
+ はじめに
+諸般の事情で、Javaの案件に携わり続けることになったので、基本的なところから勉強しなおそうかと思い立ちました。
+今更！？ってことが多いと思うところもあるだろうけど、備忘録がてらストックしていこうと思います。
+
+ 何がわかる？
+
+Javaの歴史（概要）
+Javaの仕様
+
+
+ Javaの歴史（概要）
+Javaの歴史を時系列でまとめると、以下のようになります。
+
+ 時系列
+
+1995年 - Java 1.0 リリース
+1998年 - Java 2（J2SE、J2EE、J2ME）の登場。JCP設立
+1999年 - 最初の JS...]]></description><link>https://zenn.dev/splusl_at/articles/java-history-specification</link><guid isPermaLink="true">https://zenn.dev/splusl_at/articles/java-history-specification</guid><pubDate>Mon, 30 Sep 2024 08:51:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9c9U-nYT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java%25E3%2581%25AE%25E6%25AD%25B4%25E5%258F%25B2%25E3%2581%25A8%25E4%25BB%2595%25E6%25A7%2598%25E6%25A6%2582%25E8%25A6%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%2580%25E3%2583%25A9%25E3%2583%25BC%25E3%2581%25A3%25E3%2581%25A8%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzUxMTIyMzVhYWMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ダラーっと</dc:creator></item><item><title><![CDATA[Intellijを使用して上手に問題に対処する方法]]></title><description><![CDATA[
+ はじめに
+このページは、
+普段バックエンドのコードを書いてる私が何か問題が発生したときにJetbrainsのIDEを使用して速やかに発生元を突き止め、対処する方法を書いたものです。
+言い換えると、問題が起きたときにコードを眺める際の私のルーチンワークを紹介します。
+Java、Kotlin、PHPしか仕事では使わないので他は不明ですが、多分一緒です。
+これを書いてる端末がmacなのでキーはmacです。
+graphql-kotlinのコードを使いながら書いていこうと思います。
+
+ なぜ書くのか
+問題が発生したときに、その機能の入口からコードに潜る人を観測したため。
+入口から特定しに行くな...]]></description><link>https://zenn.dev/moneyforward/articles/df0b1f8199aa81</link><guid isPermaLink="true">https://zenn.dev/moneyforward/articles/df0b1f8199aa81</guid><pubDate>Mon, 30 Sep 2024 06:25:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--MTgpyuJr--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Intellij%25E3%2582%2592%25E4%25BD%25BF%25E7%2594%25A8%25E3%2581%2597%25E3%2581%25A6%25E4%25B8%258A%25E6%2589%258B%25E3%2581%25AB%25E5%2595%258F%25E9%25A1%258C%25E3%2581%25AB%25E5%25AF%25BE%25E5%2587%25A6%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:sh-ogawa%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzUwOTQ4MTI2ZjguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Money%2520Forward%2520Developers%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dQMUxWY0xrRDB3M0E3clJtNWdQRWxmUVA2aDBUdjdDakpoLXRQU3c9czI1MC1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sh-ogawa</dc:creator></item><item><title><![CDATA[SpringBoot３(最新版）➀]]></title><description><![CDATA[A.Springでの開発方法
+1.Spring Boot CLI
+コマンドベースの開発
+2.Spring Boot Suite
+EclipseやVscode
+3.Spring Initializer
+サイトでプロジェクトを作成してくれる
+→解凍して使用（よくつかう）
+B.プロジェクト作成後のpom.xmlについて
+→
+　　&lt;parent&gt;
+&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+&lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;
+...]]></description><link>https://zenn.dev/koounosuke/articles/eb1071cf348ada</link><guid isPermaLink="true">https://zenn.dev/koounosuke/articles/eb1071cf348ada</guid><pubDate>Mon, 30 Sep 2024 05:55:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--pMoUd-j7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:SpringBoot%25EF%25BC%2593%2528%25E6%259C%2580%25E6%2596%25B0%25E7%2589%2588%25EF%25BC%2589%25E2%259E%2580%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:JavaJava%25E7%2594%25B7%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTHBqUDlLS2pjOGRlQ050RUQyVmYyOEZZVUU0TWFkQVZoRS1GNXpDLXd3YmJnYXZnPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>JavaJava男</dc:creator></item><item><title><![CDATA[【Spring for GraphQL】Uploadされたファイルを受け取りたい]]></title><description><![CDATA[
+ 概要
+GraphQLではスキーマにUploadの型を設定して、ファイルをアップロードするような手法を取ると思いますが、Spring for GraphQLでファイルをどのように受け取るかというメモ書きです。
+
+ 対応方針
+Spring for GraphQLのServer Transportsのドキュメントによると、2024年9月時点では標準の機能では対応してなさそうです。別途multipart-spring-graphqlを使用するように案内されているので、今回はこのライブラリを使用します。
+
+ 前提等
+
+使用したspring-boot-starter-graphqlのバージョンは...]]></description><link>https://zenn.dev/someone7140/articles/b35ed738b56a84</link><guid isPermaLink="true">https://zenn.dev/someone7140/articles/b35ed738b56a84</guid><pubDate>Fri, 27 Sep 2024 12:08:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--B6pcq9fs--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Spring%2520for%2520GraphQL%25E3%2580%2591Upload%25E3%2581%2595%25E3%2582%258C%25E3%2581%259F%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2592%25E5%258F%2597%25E3%2581%2591%25E5%258F%2596%25E3%2582%258A%25E3%2581%259F%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AA%25E3%2581%258B%25E3%2581%25A4%25E3%2581%258C%25E3%2582%258F%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFhNWRlOTE4YjEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>なかつがわ</dc:creator></item><item><title><![CDATA[Java プログラム開発時に知っておきたい IDE 4選 - 2024年度版]]></title><description><![CDATA[
+ はじめに
+Java プログラム開発時に知っておきたい IDE (統合開発環境) について、選択肢としては下記があります。
+
+Visual Studio Code
+Eclipse IDE
+JetBrains IntelliJ IDEA Community Edition
+Apache NetBeans
+
+Visual Studio Code (VS Code) は高機能エディタですが拡張機能を利用することで IDE 相当のものとして使えるようになります。Java 専用の IDE の方が使い勝手が良く、高機能ですが、普段から VS Code を使っている人の場合は、本格的な Java プ...]]></description><link>https://zenn.dev/hiro345/articles/20240926_java_ide</link><guid isPermaLink="true">https://zenn.dev/hiro345/articles/20240926_java_ide</guid><pubDate>Thu, 26 Sep 2024 23:23:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GxeZkBqr--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java%2520%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%25A0%25E9%2596%258B%25E7%2599%25BA%25E6%2599%2582%25E3%2581%25AB%25E7%259F%25A5%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%258A%25E3%2581%258D%25E3%2581%259F%25E3%2581%2584%2520IDE%25204%25E9%2581%25B8%2520-%25202024%25E5%25B9%25B4%25E5%25BA%25A6%25E7%2589%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Hiroshi%2520Koyama%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2k5ZzdjLS0xTFk0S2k0LWw3dVFSSFZRdEdQcWZHYTlibVRJYUtFM0E9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Hiroshi Koyama</dc:creator></item><item><title><![CDATA[Java 本番環境デプロイ手順書]]></title><description><![CDATA[本書は、Javaアプリケーションを本番環境にデプロイする際の標準的な手順を解説することを目的としています。
+JAR、WARファイル、クラスファイルを使用したデプロイ方法を中心に、コンテナ技術やクラウドベースのデプロイも少し解説します。]]></description><link>https://zenn.dev/teru_whisky/books/4f6edb84657449</link><guid isPermaLink="true">https://zenn.dev/teru_whisky/books/4f6edb84657449</guid><pubDate>Thu, 26 Sep 2024 15:46:09 GMT</pubDate><dc:creator>taiki</dc:creator></item></channel></rss>
