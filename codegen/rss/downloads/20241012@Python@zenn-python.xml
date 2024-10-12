@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Sat, 12 Oct 2024 06:30:41 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[EC2とRDSを週末に全部止める]]></title><description><![CDATA[今日のところは動作未確認。
+!
+RDSは1週間の一時的な停止のみ可能であることに注意してください。この記事の方法で継続的に停止することはおそらく不可能です。
+
+
+ Lambda関数（Python）
+import os
+import logging
+import boto3
+
+excluded_tag_key = os.getenv('EXCLUDED_TAG_KEY')
+excluded_tag_value = os.getenv('EXCLUDED_TAG_VALUE')
+
+logger = logging.getLogger()
+logger.setLevel(logging.INF...]]></description><link>https://zenn.dev/dannykitadani/articles/3c91ca17ed7824</link><guid isPermaLink="true">https://zenn.dev/dannykitadani/articles/3c91ca17ed7824</guid><pubDate>Sat, 12 Oct 2024 06:00:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--sv166mBE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:EC2%25E3%2581%25A8RDS%25E3%2582%2592%25E9%2580%25B1%25E6%259C%25AB%25E3%2581%25AB%25E5%2585%25A8%25E9%2583%25A8%25E6%25AD%25A2%25E3%2582%2581%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Danny%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY4OGMzMjk5YzAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Danny</dc:creator></item><item><title><![CDATA[LeetCode #700 Search in a Binary Search Tree]]></title><description><![CDATA[
+ 問題概要
+入力値：root(BST), val(int)
+出力値：root
+Find the node in the BST that the node's value equals val and return the subtree rooted with that node. If such a node does not exist, return null.
+問題のリンク
+
+ 入力例
+Input: root=[4,2,7,1,3], val=2
+Output: [2,1,3]
+
+ 解答例1
+計算量：O(n)
+Recursion
+Python
+class Solution(o...]]></description><link>https://zenn.dev/pirika/articles/bc33ee64320674</link><guid isPermaLink="true">https://zenn.dev/pirika/articles/bc33ee64320674</guid><pubDate>Sat, 12 Oct 2024 01:52:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--WrdMteZi--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:LeetCode%2520%2523700%2520Search%2520in%2520a%2520Binary%2520Search%2520Tree%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%2594%25E3%2583%25AA%25E3%2582%25AB%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U0YmI4OWIzOGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ピリカ</dc:creator></item><item><title><![CDATA[PythonによるNaCl型結晶のマーデルング定数の実装(改)]]></title><description><![CDATA[前回の記事で実装したマーデルング定数のプログラムに以下課題があったので、作り直しました。
+
+実行速度
+原因：for文の使用
+なぜかis_insideが全部Trueになる。→ outermostが小さいほど、誤差が大きくなる
+原因：分からず!!悔しい
+
+
+ 3次元マーデルング定数の実装 (改)
+import numpy as np
+
+outermost = int(input())
+
+# 座標を作成
+x, y, z = np.meshgrid(
+    np.arange(-outermost, outermost + 1),
+    np.arange(-outermost, outer...]]></description><link>https://zenn.dev/reggae_punch/articles/5db9895001f095</link><guid isPermaLink="true">https://zenn.dev/reggae_punch/articles/5db9895001f095</guid><pubDate>Sat, 12 Oct 2024 01:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--VpuUtqvk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258BNaCl%25E5%259E%258B%25E7%25B5%2590%25E6%2599%25B6%25E3%2581%25AE%25E3%2583%259E%25E3%2583%25BC%25E3%2583%2587%25E3%2583%25AB%25E3%2583%25B3%25E3%2582%25B0%25E5%25AE%259A%25E6%2595%25B0%25E3%2581%25AE%25E5%25AE%259F%25E8%25A3%2585%2528%25E6%2594%25B9%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%25AC%25E3%2582%25B2%25E3%2582%25A8%25E3%2583%2591%25E3%2583%25B3%25E3%2583%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTGh5aDRRZU9nSk9XWU1uMU9ONGxSUkFqd29JbjUtYWFkSFZvMHlfZHd1blVnZlhQOD1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>レゲエパンチ</dc:creator></item><item><title><![CDATA[Ansible を uv で管理する環境に移行した]]></title><description><![CDATA[
+ tl;dr
+
+
+astral-sh/uv で Python 自体を管理可能になったと聞いた
+rye を使いこなせなくて Python 環境が微妙になっていたので乗り換え
+Ansible を綺麗に移行できたのでメモ
+
+
+ 細けえこたぁいいんだよ（AA略
+cd my-examples-ansible
+uv init -p 3.10
+uv run hello.py
+uv add requests
+uv add boto3
+uv add ansible
+uv sync
+source .venv/bin/activate
+ansible --version
+
+uv のインストールは各自好きにど...]]></description><link>https://zenn.dev/raki/articles/2024-10-12_ansible_with_uv</link><guid isPermaLink="true">https://zenn.dev/raki/articles/2024-10-12_ansible_with_uv</guid><pubDate>Fri, 11 Oct 2024 21:30:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ZhpqMRyl--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ansible%2520%25E3%2582%2592%2520uv%2520%25E3%2581%25A7%25E7%25AE%25A1%25E7%2590%2586%25E3%2581%2599%25E3%2582%258B%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25AB%25E7%25A7%25BB%25E8%25A1%258C%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:raki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dLekxDZzlSWjJVT0VQSlhhdUJiazBnS29DYVR2cVpoVmVEUlNFa3c9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>raki</dc:creator></item><item><title><![CDATA[J-Quantsから上場銘柄一覧を取得する]]></title><description><![CDATA[
+ J-Quantsから上場銘柄一覧を取得する方法
+今回は、J-QuantsのAPIを使用して、上場銘柄の一覧を取得する方法について詳しく紹介します。Pythonを使って、J-QuantsのAPIから必要なデータを簡単に取得できる手順を解説していきます。株式取引に興味がある方や、Pythonで自動化を進めたい方に役立つ内容です。
+
+
+ 必要な準備
+J-QuantsのAPIを使用するためには、事前に以下の準備が必要です。
+J-Quantsアカウントの作成: J-Quantsの公式サイトでアカウントを作成し、ログイン情報を取得してください。
+
+ Pythonコードで上場銘柄一覧を取得する
+以...]]></description><link>https://zenn.dev/ririkabu/articles/ac974aa5ffb44f</link><guid isPermaLink="true">https://zenn.dev/ririkabu/articles/ac974aa5ffb44f</guid><pubDate>Fri, 11 Oct 2024 14:16:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--f-N5g8LG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:J-Quants%25E3%2581%258B%25E3%2582%2589%25E4%25B8%258A%25E5%25A0%25B4%25E9%258A%2598%25E6%259F%2584%25E4%25B8%2580%25E8%25A6%25A7%25E3%2582%2592%25E5%258F%2596%25E5%25BE%2597%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%258A%25E3%2583%25BC%25E3%2582%258A%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y3Y2ZjMmNjZDAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>りーり</dc:creator></item><item><title><![CDATA[［AtCoder］ABC-372｜C - Count ABC Again]]></title><description><![CDATA[
+ 設問ページ
+
+🔗ABC-372 C - Count ABC Again
+
+
+
+ 提出結果
+import re
+
+
+def getIntMap():
+    return map(int, input().split())
+
+
+def getString():
+    return input()
+
+
+def getStringListRow(N):
+    return [list(input().split()) for _ in range(N)]
+
+
+def main():
+    N, Q = getIntMap()
+    S = [""] + list(getString...]]></description><link>https://zenn.dev/hyperdb/articles/8bdda9f331ce0d</link><guid isPermaLink="true">https://zenn.dev/hyperdb/articles/8bdda9f331ce0d</guid><pubDate>Fri, 11 Oct 2024 09:28:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Bs0jLKrQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25EF%25BC%25BBAtCoder%25EF%25BC%25BDABC-372%25EF%25BD%259CC%2520-%2520Count%2520ABC%2520Again%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AF%25E3%2581%2584%25E3%2581%25B1%25E3%2581%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhODJkODgwMzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>はいぱぁ</dc:creator></item><item><title><![CDATA[Slack API：search.messagesにてbot投稿を除外する]]></title><description><![CDATA[
+ 内容
+Slack API の search.messages で bot を除外する方法が Zenn になかったので、備忘録のために記述します。
+公式の API リファレンスに記載がなかったので、公式でサポートされてるものではないですかね。
+やり方は簡単で、search_exclude_bots というパラメータを追加するだけです。
+以下にPythonでサンプルコードを載せておきます。
+
+sample.py
+import os
+from slack_sdk import WebClient
+
+user_token: str = os.environ["SLACK_USER_TOKEN...]]></description><link>https://zenn.dev/lnest_knowledge/articles/e43a2d69f742a0</link><guid isPermaLink="true">https://zenn.dev/lnest_knowledge/articles/e43a2d69f742a0</guid><pubDate>Fri, 11 Oct 2024 09:04:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BxDzSbiM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Slack%2520API%25EF%25BC%259Asearch.messages%25E3%2581%25AB%25E3%2581%25A6bot%25E6%258A%2595%25E7%25A8%25BF%25E3%2582%2592%25E9%2599%25A4%25E5%25A4%2596%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:stray%2520dog%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAyMmQwMzlmODguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%25AA%25E3%2583%2590%25E3%2583%258A%25E3%2583%25AC%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBjYzhmZDAzMGYuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>stray dog</dc:creator></item><item><title><![CDATA[多重共線性、相関から見るか？VIFから見るか？]]></title><description><![CDATA[
+ これはなに？
+先日、多重共線性の除去手法についての記事を書きました。因みにこれです。
+https://zenn.dev/goals_techblog/articles/3fe8c2f63c23e6
+この記事では、多重共線性に対処する方法として、以下を挙げました。
+
+相関係数から変数を消去する
+VIFから変数を消去する
+主成分分析
+Ridge回帰
+
+これを見たときに『変数を消去するって二つあるけど、どっちがいいんですか？』ってなりませんか。書いておいてなんですが、私はなります。
+結果としては多変量解析なのであれば、二変数間の関係しかみない相関係数ではなく、VIFを使わないと本当に多重共...]]></description><link>https://zenn.dev/goals_techblog/articles/638c8718373c1d</link><guid isPermaLink="true">https://zenn.dev/goals_techblog/articles/638c8718373c1d</guid><pubDate>Fri, 11 Oct 2024 02:42:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--iiM_Cgx1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%25A4%259A%25E9%2587%258D%25E5%2585%25B1%25E7%25B7%259A%25E6%2580%25A7%25E3%2580%2581%25E7%259B%25B8%25E9%2596%25A2%25E3%2581%258B%25E3%2582%2589%25E8%25A6%258B%25E3%2582%258B%25E3%2581%258B%25EF%25BC%259FVIF%25E3%2581%258B%25E3%2582%2589%25E8%25A6%258B%25E3%2582%258B%25E3%2581%258B%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:ryongyong%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY0ZmMzNjliMDYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Goals%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzEzMTlkMjgyOTIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ryongyong</dc:creator></item><item><title><![CDATA[施策実行支援でデータアナリストが考えていること]]></title><description><![CDATA[
+ はじめに
+データアナリストとして仕事を始めて3年が経ちました。この3年間で、施策の立案やテストの設計、効果測定といったデータを活用とした施策実行支援のプロセスを数多く経験させていただいた中で、自分がデータアナリストとして気をつけていることをまとめてみました。自分の考えていることをほぼ全て書き起こしたので、少し冗長かもしれません。
+想定読者はデータアナリスト1年目と施策立案や企画を行うビジネスマンを想定しています。
+また、これは筆者の働くWeb系企業の自社プロダクト改善における話になりますので、予めご了承ください。
+
+ まとめ
+思いのほか長文になってしまったので、時間のない人向けに先に...]]></description><link>https://zenn.dev/dmmdata/articles/71bf581a19dae3</link><guid isPermaLink="true">https://zenn.dev/dmmdata/articles/71bf581a19dae3</guid><pubDate>Fri, 11 Oct 2024 00:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--34xLxQWI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%2596%25BD%25E7%25AD%2596%25E5%25AE%259F%25E8%25A1%258C%25E6%2594%25AF%25E6%258F%25B4%25E3%2581%25A7%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%25A2%25E3%2583%258A%25E3%2583%25AA%25E3%2582%25B9%25E3%2583%2588%25E3%2581%258C%25E8%2580%2583%25E3%2581%2588%25E3%2581%25A6%25E3%2581%2584%25E3%2582%258B%25E3%2581%2593%25E3%2581%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:hanata%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU4MjQ4ZWRhNzUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:DMM%2520Data%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI4ZWRhZjgwZGIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hanata</dc:creator></item><item><title><![CDATA[Azure OpenAI ServiceのGPT-4o Realtime Audioを使ってみよう]]></title><description><![CDATA[2024年10月1日に新しいモデルが登場しましたので、早速使ってみました。
+
+ GPT-4o Realtime Audioとは
+GPT-4oモデルの一つであり、音声入力→音声出力を実現する新しいモデルです。
+低遅延でリアルタイムな会話を実現するように設計されており、AIアシスタントやリアルタイム翻訳などに活用されることが予測されています。
+今まではAzure Speech to TeztやWhisperを使って一度音声を文字化、GPTが生成したテキストをAzure Text to Speechを使って音声合成する必要がありました。
+少なからずタイムラグが発生していたので、音声だけでやり取...]]></description><link>https://zenn.dev/headwaters/articles/44d4152b85cac1</link><guid isPermaLink="true">https://zenn.dev/headwaters/articles/44d4152b85cac1</guid><pubDate>Thu, 10 Oct 2024 15:51:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--M82EXZtd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Azure%2520OpenAI%2520Service%25E3%2581%25AEGPT-4o%2520Realtime%2520Audio%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%2588%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:ikebowsan%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZjNGExY2UxMDYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2598%25E3%2583%2583%25E3%2583%2589%25E3%2582%25A6%25E3%2582%25A9%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%25BC%25E3%2582%25B9%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzUyNTM1ZTc4OGYuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ikebowsan</dc:creator></item><item><title><![CDATA[図書館システムで学ぶ "責任の分離"]]></title><description><![CDATA[今回は、ソフトウェア設計の重要な原則の一つ「責任の分離」について、図書館システムの例を用いてまとめてみようと思います。
+
+ 「責任の分離」って何？
+「責任の分離」とは、プログラムの各部分（クラスやモジュール）が特定の役割（責任）だけを持つようにする設計原則です。
+「一つのことは一つの場所で行う」ということですね。
+
+ 具体例：図書館システム
+図書館システムを例に考えてみましょう。
+このシステムは本の貸し出し、返却、検索などの機能を持っています。
+
+ 改善前のコード
+はじめは、こんな感じでコードを書いていたとしましょう：
+
+library_router.py
+class LibraryRo...]]></description><link>https://zenn.dev/n_haru2/articles/7778a677319dba</link><guid isPermaLink="true">https://zenn.dev/n_haru2/articles/7778a677319dba</guid><pubDate>Thu, 10 Oct 2024 15:38:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dCIoD9z4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%259B%25B3%25E6%259B%25B8%25E9%25A4%25A8%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%25E3%2581%25A7%25E5%25AD%25A6%25E3%2581%25B6%2520%2522%25E8%25B2%25AC%25E4%25BB%25BB%25E3%2581%25AE%25E5%2588%2586%25E9%259B%25A2%2522%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:pen2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzUzYzA2OTVkMmUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>pen2</dc:creator></item><item><title><![CDATA[サーバレスGPUにModalがいいぞ！]]></title><description><![CDATA[GPUを使いたいこと、あると思います。
+ただしご家庭に強いGPUはないこともあるでしょうし、かといってGPU搭載したインスタンスを立て続けているととてつもないお金がかかります。
+そんなあなたにサーバレスGPU、使った秒数分だけ課金が発生するので、いきなりすごい金額がかかることにはならず手軽にGPUを使ったプログラミングが始められます。
+私は今の所ModalとRunPodを試したのですが、ModalのDXが良すぎるため今回イントロ記事を書く筆を取りました。
+https://modal.com/
+始めにざっくりいいところを述べると
+
+一つのファイルで完結する。
+
+RunPodとの比較だと「R...]]></description><link>https://zenn.dev/seya/articles/6ba2d58d01306f</link><guid isPermaLink="true">https://zenn.dev/seya/articles/6ba2d58d01306f</guid><pubDate>Thu, 10 Oct 2024 13:29:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bc2xSfbP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25AC%25E3%2582%25B9GPU%25E3%2581%25ABModal%25E3%2581%258C%25E3%2581%2584%25E3%2581%2584%25E3%2581%259E%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:seya%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2QzODg4YjM0MzEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>seya</dc:creator></item><item><title><![CDATA[【Python】return文 try-except構文 使い方ガイド]]></title><description><![CDATA[Pythonにおいて、return文、try-except構文は重要な制御フロー要素です。
+この記事では、Pythonを学び始めの方向けにreturn文とtry-except構文、それぞれの役割と基本的な使い方を解説します。
+
+ 1. return文
+return文は関数の中で使います。関数の実行を終わらせて、結果を返すためのものです。
+
+ どんな時に使う？
+
+計算結果を返したいとき
+関数の途中で終了させたいとき
+
+
+ 例1
+def 挨拶(名前):
+    return f"こんにちは、{名前}さん！"
+
+メッセージ = 挨拶("太郎")
+print(メッセージ)  # 出力: こんにち...]]></description><link>https://zenn.dev/n_haru2/articles/2fd6238c51312d</link><guid isPermaLink="true">https://zenn.dev/n_haru2/articles/2fd6238c51312d</guid><pubDate>Thu, 10 Oct 2024 11:13:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2fHur_-V--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591return%25E6%2596%2587%2520try-except%25E6%25A7%258B%25E6%2596%2587%2520%25E4%25BD%25BF%25E3%2581%2584%25E6%2596%25B9%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:pen2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzUzYzA2OTVkMmUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>pen2</dc:creator></item><item><title><![CDATA[【Python】浮動小数点の計算による誤差とnumpy.allcloseを用いた誤差を考慮した配列比較]]></title><description><![CDATA[
+ はじめに
+浮動小数点の計算では誤差が生じることがあります．
+そのため，同じ値だと考えられるものでも，プログラム上では等しくないものとして扱われることがあります．
+具体的な例は以下です
+import numpy as np
+
+array1 = np.array([0.1 + 0.2, 0.3 + 0.3])
+array2 = np.array([0.3, 0.6])
+
+print(array1 == array2)
+## 出力
+# [False  True]
+どちらのarrayも1つ目の要素が0.3, 2つ目の要素が0.6であり，それぞれ等しいように見えます．しかし，計算時に誤差が生じ...]]></description><link>https://zenn.dev/enken/articles/enken-python-floating-point-array-comparison</link><guid isPermaLink="true">https://zenn.dev/enken/articles/enken-python-floating-point-array-comparison</guid><pubDate>Thu, 10 Oct 2024 10:48:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--v9yFFoID--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591%25E6%25B5%25AE%25E5%258B%2595%25E5%25B0%258F%25E6%2595%25B0%25E7%2582%25B9%25E3%2581%25AE%25E8%25A8%2588%25E7%25AE%2597%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258B%25E8%25AA%25A4%25E5%25B7%25AE%25E3%2581%25A8numpy.allclose%25E3%2582%2592%25E7%2594%25A8%25E3%2581%2584%25E3%2581%259F%25E8%25AA%25A4%25E5%25B7%25AE%25E3%2582%2592%25E8%2580%2583%25E6%2585%25AE%25E3%2581%2597%25E3%2581%259F%25E9%2585%258D%25E5%2588%2597%25E6%25AF%2594%25E8%25BC%2583%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:enken%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSUZUUk1GUjNZZS1Mb2lhQWg4TFo4SXVCV2laWGNxZmo2NEpzdjh5S3poR0k5VXMyaz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>enken</dc:creator></item><item><title><![CDATA[【LangChain】チャットボットの会話履歴をRedisで管理する]]></title><description><![CDATA[以前、LangChainのMemory機能を使って、チャットボットの会話履歴を管理する機能について記事を投稿しました。
+https://zenn.dev/khisa/articles/7f56f4e66cae43
+このときは、LangChainの会話履歴を管理するクラスChatMessageHistoryのインスタンスをグローバル変数として管理していました。
+ところが、実際にAIチャットボットのバックエンドとして実装し、APIを経由してアクセスするような現実的な構成を考慮すると、プロセスが保持するグローバル変数で会話履歴を管理するわけにもいきません。規模がそれなりになれば、当然のことなが...]]></description><link>https://zenn.dev/khisa/articles/fbfed2f10c1ad7</link><guid isPermaLink="true">https://zenn.dev/khisa/articles/fbfed2f10c1ad7</guid><pubDate>Thu, 10 Oct 2024 10:00:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--czr0Low4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590LangChain%25E3%2580%2591%25E3%2583%2581%25E3%2583%25A3%25E3%2583%2583%25E3%2583%2588%25E3%2583%259C%25E3%2583%2583%25E3%2583%2588%25E3%2581%25AE%25E4%25BC%259A%25E8%25A9%25B1%25E5%25B1%25A5%25E6%25AD%25B4%25E3%2582%2592Redis%25E3%2581%25A7%25E7%25AE%25A1%25E7%2590%2586%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25B2%25E3%2581%2595%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTHFKaUVHa1VQMkc5WGpIeHlTa3p4bld3Z3JNcHFhT19hUFVKcWEyQ2YxWUZFPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ひさ</dc:creator></item><item><title><![CDATA[pythonのvenvの使い方]]></title><description><![CDATA[
+新しい環境の作成
+
+cd [project dir]
+python3 -m venv [newenvname]
+
+
+activate
+
+source [newenvname]/bin/activate
+
+パッケージのインストール
+
+([newenvname])$ pip install [package name]
+
+deactivate
+
+([newenvname])$ deactivate
+]]></description><link>https://zenn.dev/nonononoka/articles/a63ed0b7c99261</link><guid isPermaLink="true">https://zenn.dev/nonononoka/articles/a63ed0b7c99261</guid><pubDate>Thu, 10 Oct 2024 07:24:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_PnalSq2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:python%25E3%2581%25AEvenv%25E3%2581%25AE%25E4%25BD%25BF%25E3%2581%2584%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:momomomoko%2Cx_90%2Cy_121/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>momomomoko</dc:creator></item><item><title><![CDATA[プログラミングの基礎を習得（python）]]></title><description><![CDATA[
+ python基礎
+
+ 【実行環境】
+https://paiza.io/ja/projects/new
+
+ 【データの型】
+文字型：ダブルクォーテーション(“”)もしくはシングルクォーテーション(‘’)で囲まれたもの
+print("hello")
+# 出力：hello
+print("123")
+# 出力：123
+整数型：ただの数字
+print(123)
+# 出力：123
+# 見た目は同じだけどこっちは数字
+りスト型：[]の中にカンマ区切りで文字や数字を入れられる
+print(["りんご","みかん","ぶどう"])
+# 出力：["りんご", "みかん", "ぶどう"]
+
+ (算術演算子...]]></description><link>https://zenn.dev/kate0418/articles/71571900d9b751</link><guid isPermaLink="true">https://zenn.dev/kate0418/articles/71571900d9b751</guid><pubDate>Thu, 10 Oct 2024 06:38:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--u0nzirtu--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%259F%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%25AE%25E5%259F%25BA%25E7%25A4%258E%25E3%2582%2592%25E7%25BF%2592%25E5%25BE%2597%25EF%25BC%2588python%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2591%25E3%2581%2583%25E3%2581%25A8%25EF%25BE%2583%25EF%25BE%259E%25EF%25BD%25BD%25E3%2580%2582%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU3OWNhMjkxZTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>けぃとﾃﾞｽ。</dc:creator></item><item><title><![CDATA[Pandasでは実はlistもDataFrameの要素にできる(+explode)]]></title><description><![CDATA[こんにちは、沙代です。
+DataFrameで1行を複数行に展開しようとした時に、実はpandasは文字列数値だけでなく、listも要素にできることに気づきました。
+環境
+MacOS Montery 12.6.2 (M1 Pro)
+Python 3.9.1
+pandas 2.2.3
+
+ 確認用コード
+
+example1.py
+import pandas as pd
+df = pd.DataFrame({"A": [[1,2,3],"hello", [4,5]], "B": [1,2,3]})
+print(df)
+print(df.dtypes)
+print()
+print(df["A"][...]]></description><link>https://zenn.dev/syitsk/articles/d64336a9db8890</link><guid isPermaLink="true">https://zenn.dev/syitsk/articles/d64336a9db8890</guid><pubDate>Thu, 10 Oct 2024 06:08:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Lm1vYk28--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Pandas%25E3%2581%25A7%25E3%2581%25AF%25E5%25AE%259F%25E3%2581%25AFlist%25E3%2582%2582DataFrame%25E3%2581%25AE%25E8%25A6%2581%25E7%25B4%25A0%25E3%2581%25AB%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258B%2528%252Bexplode%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:sayo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSndiUTdqNDNzempPRWU3aWQ1SjVPRlNTUzV0SnhqLWZIZEVNTUFIRnNHSE14Z0RBPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sayo</dc:creator></item><item><title><![CDATA[Pythonでgroup_byしたいならdefaultdictを使う]]></title><description><![CDATA[
+ 始めに
+Pythonでデータをグループ化する際、defaultdictを使用すると簡単かつ効率的に実装できます。この記事では、defaultdictを使ったgroup_byの実装方法と、itertools.groupbyとの違いについて解説します。
+
+ 環境
+
+Python 3.12.6
+
+
+ 実装
+defaultdictを使用すればシンプルに実装できます。
+from collections import defaultdict
+
+class TestGroupBy:
+    class _Test:
+        def __init__(self, user_id, group...]]></description><link>https://zenn.dev/kirimaru/articles/fc4797313c3ab5</link><guid isPermaLink="true">https://zenn.dev/kirimaru/articles/fc4797313c3ab5</guid><pubDate>Thu, 10 Oct 2024 03:00:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--f_z_-q4---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A7group_by%25E3%2581%2597%25E3%2581%259F%25E3%2581%2584%25E3%2581%25AA%25E3%2582%2589defaultdict%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258D%25E3%2582%258A%25E4%25B8%25B8%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2Rhcmsvay5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>きり丸</dc:creator></item><item><title><![CDATA[LeetCode  #100 Same Tree]]></title><description><![CDATA[
+ 問題概要
+入力値：p(binary tree), q(binary tree)
+出力値：boolean
+return whether p and q are same
+問題のリンク
+
+ 入力例
+arr1: [1,2,3]
+arr2: [1,2,3]
+result: true
+
+ 解答例1
+計算量：O(n)
+Python
+class Solution(object):
+    def isSameTree(self, p, q):
+        """
+        :type p: TreeNode
+        :type q: TreeNode
+        :rtype...]]></description><link>https://zenn.dev/pirika/articles/5b22fda517f57c</link><guid isPermaLink="true">https://zenn.dev/pirika/articles/5b22fda517f57c</guid><pubDate>Wed, 09 Oct 2024 23:50:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hSConFHH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:LeetCode%2520%2520%2523100%2520Same%2520Tree%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%2594%25E3%2583%25AA%25E3%2582%25AB%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U0YmI4OWIzOGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ピリカ</dc:creator></item></channel></rss>

@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「JavaScript」のフィード]]></title><description><![CDATA[Zennのトピック「JavaScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/javascript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/64acd76870.png</url><title>Zennの「JavaScript」のフィード</title><link>https://zenn.dev/topics/javascript</link></image><generator>zenn.dev</generator><lastBuildDate>Sat, 12 Oct 2024 06:11:08 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/javascript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Nest.js+TypeORM+PostgreSQLで実装してみた]]></title><description><![CDATA[
+ 概要
+最近、業務でNest.jsを使用しており、理解を深めるために、Nest.jsとTypeScriptのライブラリであるTypeORMを使ってデータベース操作を実践してみたいと思います。内容が少し複雑で難しい部分があるため、できる限り解説を挟んでいきますが、不十分な説明や知識不足の箇所があるかもしれません。その点、ご了承いただけると幸いです。
+
+ 機能
+Nest.js
+
+TypeScriptベースでNode.jsのフレームワーク
+モジュール構造
+https://nestjs.com/
+
+
+TypeORM
+
+クエリを直接書く必要がない(今回はベタ書きします)
+エンティティ
+DBマイグ...]]></description><link>https://zenn.dev/you_ik/articles/a8bcbba6e32ef4</link><guid isPermaLink="true">https://zenn.dev/you_ik/articles/a8bcbba6e32ef4</guid><pubDate>Sat, 12 Oct 2024 06:04:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Dq72-wct--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Nest.js%252BTypeORM%252BPostgreSQL%25E3%2581%25A7%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2586%25E3%2581%2586%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNjYTY1YmYwYWYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ゆう</dc:creator></item><item><title><![CDATA[【Deno 2.0】動かなくなった File Server を再インストールする]]></title><description><![CDATA[
+ 結論
+Deno Third Party Modules（以下TPM）の代わりに JSR から再インストールします。
+
+ 従来の file_server は Deno 2.0 以降では動かない
+Deno 2.0 以降のネイティブ API に破壊的変更が入ったため、TPM からインストールしたスクリプトが Deno 本体のアップグレード後に動かなくなる場合があります。
+今回はその一例として、既にスタンドアロンとしてインストールした file_server を、Deno 標準ライブラリの新しいリポジトリである JSR から再インストールしてみます。
+
+ コマンド
+今回インストールする fi...]]></description><link>https://zenn.dev/ihasq/articles/42fd60af795241</link><guid isPermaLink="true">https://zenn.dev/ihasq/articles/42fd60af795241</guid><pubDate>Sat, 12 Oct 2024 05:22:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ZhEMWYJ6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Deno%25202.0%25E3%2580%2591%25E5%258B%2595%25E3%2581%258B%25E3%2581%25AA%25E3%2581%258F%25E3%2581%25AA%25E3%2581%25A3%25E3%2581%259F%2520File%2520Server%2520%25E3%2582%2592%25E5%2586%258D%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ihasq%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I3YWEyZmFhZmMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ihasq</dc:creator></item><item><title><![CDATA[Reactのコンポーネントに引数付きの関数を渡したら思ってたのと違う挙動になった]]></title><description><![CDATA[こんにちは！
+普段Webアプリの開発を行っているn-kokiと申します。
+タイトルの通り、Reactのコンポーネントにpropsで引数付きの関数を渡したら、思っていたのと違う挙動をしたので、その内容と解決策について紹介します。
+
+ 何がしたかったのか
+Reactのpropsで変数の他に、関数も渡すことができることは、多くの方がご存じかと思います。私はこれを使って、ボタンのコンポーネントに対してonClickで発火する関数を渡そうとしました。引数の無い関数では思い通りに動くのですが、引数をつけるとボタンを押さずともページが読み込まれた瞬間に実行されていしました...
+
+App.js
+imp...]]></description><link>https://zenn.dev/n_koki/articles/d44e2dbdc930f0</link><guid isPermaLink="true">https://zenn.dev/n_koki/articles/d44e2dbdc930f0</guid><pubDate>Fri, 11 Oct 2024 14:09:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--pFp1XRX_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%25E3%2581%25AE%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%259D%25E3%2583%25BC%25E3%2583%258D%25E3%2583%25B3%25E3%2583%2588%25E3%2581%25AB%25E5%25BC%2595%25E6%2595%25B0%25E4%25BB%2598%25E3%2581%258D%25E3%2581%25AE%25E9%2596%25A2%25E6%2595%25B0%25E3%2582%2592%25E6%25B8%25A1%25E3%2581%2597%25E3%2581%259F%25E3%2582%2589%25E6%2580%259D%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%259F%25E3%2581%25AE%25E3%2581%25A8%25E9%2581%2595%25E3%2581%2586%25E6%258C%2599%25E5%258B%2595%25E3%2581%25AB%25E3%2581%25AA%25E3%2581%25A3%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:n-koki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I5NTMzODIyMTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>n-koki</dc:creator></item><item><title><![CDATA[オブジェクトのプロパティに別名をつけた分割代入]]></title><description><![CDATA[
+ 記事の要約
+オブジェクトのプロパティに別名をつけた分割代入を使うと、プロパティ名を変更して代入することができます。
+これにより、コードの可読性が向上し、衝突を避けられます。
+特に関数の引数に対して使うと便利です。
+
+ オブジェクトのプロパティに別名をつけた分割代入
+JavaScript には 「オブジェクトのプロパティに別名（リネーム）をつけた分割代入」 という便利な書き方があります。
+
+ 前提条件としてのコード例
+例えば、次のようなオブジェクトがあるとします。
+const student = {
+  name: "Ken",
+  grade: 2,
+  points: {
+    ...]]></description><link>https://zenn.dev/gakkie555/articles/8fa9abd696458f</link><guid isPermaLink="true">https://zenn.dev/gakkie555/articles/8fa9abd696458f</guid><pubDate>Fri, 11 Oct 2024 13:45:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--l8EHWKTM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25AA%25E3%2583%2596%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E3%2581%25AE%25E3%2583%2597%25E3%2583%25AD%25E3%2583%2591%25E3%2583%2586%25E3%2582%25A3%25E3%2581%25AB%25E5%2588%25A5%25E5%2590%258D%25E3%2582%2592%25E3%2581%25A4%25E3%2581%2591%25E3%2581%259F%25E5%2588%2586%25E5%2589%25B2%25E4%25BB%25A3%25E5%2585%25A5%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Gakkie%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzllNzdkYzg2ODEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Gakkie</dc:creator></item><item><title><![CDATA[JavaScript で extends 節に式が来れる話の深掘り]]></title><description><![CDATA[先日次のようなツイートをしました。
+https://x.com/chururi_/status/1842223766920954093
+いくつかご指摘のあった通り、正確には 500ms ごとに新しいクラスを定義しているだけなので 1 秒おきに親クラスが変わっているわけではないのですが、あくまでも構文として extends 節に式が生起できることに着目していました。
+さて、このような構文が書ける JavaScript ですが、構文から利用例まで、様々な観点からこの仕様について眺めてみたので、それをまとめていきます。
+
+ 背景
+例えば、JavaScript では次のようなコードを書くことがで...]]></description><link>https://zenn.dev/itsu_dev/articles/376ff3992fdc7f</link><guid isPermaLink="true">https://zenn.dev/itsu_dev/articles/376ff3992fdc7f</guid><pubDate>Fri, 11 Oct 2024 09:25:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--cS000c2V--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%2520%25E3%2581%25A7%2520extends%2520%25E7%25AF%2580%25E3%2581%25AB%25E5%25BC%258F%25E3%2581%258C%25E6%259D%25A5%25E3%2582%258C%25E3%2582%258B%25E8%25A9%25B1%25E3%2581%25AE%25E6%25B7%25B1%25E6%258E%2598%25E3%2582%258A%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A1%25E3%2582%2585%25E3%2582%258B%25E3%2582%258A%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FkNGNhZjgxZDUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ちゅるり</dc:creator></item><item><title><![CDATA[Deno 2 正式版リリース！公式アナウンス内容を完全分解]]></title><description><![CDATA[Deno 2 正式版が10月9日にリリースされました。
+
+Deno 2が目指すビジョンや詳しい変更内容については、公式ブログのアナウンス記事で詳しく説明されています。
+https://deno.com/blog/v2.0
+今回はブログ記事と同名のタイトルで公開されたYouTube動画について、内容をチャプターごとに解説します。
+内容そのものも興味深いので（特に最初の2分半）、ぜひ本記事を参考に視聴してみてください。
+
+ Announcing Deno 2
+https://www.youtube.com/watch?v=d35SlRgVxT8
+
+ 00:00 コールドオープン
+
+Ryan ...]]></description><link>https://zenn.dev/silloi/articles/e0428d8d29125f</link><guid isPermaLink="true">https://zenn.dev/silloi/articles/e0428d8d29125f</guid><pubDate>Fri, 11 Oct 2024 08:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7Ji_csVI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Deno%25202%2520%25E6%25AD%25A3%25E5%25BC%258F%25E7%2589%2588%25E3%2583%25AA%25E3%2583%25AA%25E3%2583%25BC%25E3%2582%25B9%25EF%25BC%2581%25E5%2585%25AC%25E5%25BC%258F%25E3%2582%25A2%25E3%2583%258A%25E3%2582%25A6%25E3%2583%25B3%25E3%2582%25B9%25E5%2586%2585%25E5%25AE%25B9%25E3%2582%2592%25E5%25AE%258C%25E5%2585%25A8%25E5%2588%2586%25E8%25A7%25A3%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nishiyama%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y1NDZjYzE0NDQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nishiyama</dc:creator></item><item><title><![CDATA[suffix（サフィックス）の活用で、SVGアニメーションにレスポンシブに対応する]]></title><description><![CDATA[SVGアニメーションは、ウェブサイトに動きと魅力を加える素晴らしい方法です。しかし、異なる画面サイズに対応するレスポンシブデザインでは、SVGアニメーションの実装が難しくなることがあります。今回は、「suffix（サフィックス）」を使って、レスポンシブなSVGアニメーションを簡単に実現する方法を紹介します。
+
+ suffixとは？
+suffixとは、単語や文字列の末尾に付け加える部分のことです。今回のコンテキストでは、モバイル用のSVG要素のIDに付ける「_sp」という文字列がsuffixになります。
+
+ レスポンシブSVGアニメーションの基本戦略
+
+デスクトップ用とモバイル用に異なるS...]]></description><link>https://zenn.dev/sarap422/articles/5d630622290e99</link><guid isPermaLink="true">https://zenn.dev/sarap422/articles/5d630622290e99</guid><pubDate>Fri, 11 Oct 2024 03:57:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--VuMX84GV--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:suffix%25EF%25BC%2588%25E3%2582%25B5%25E3%2583%2595%25E3%2582%25A3%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25B9%25EF%25BC%2589%25E3%2581%25AE%25E6%25B4%25BB%25E7%2594%25A8%25E3%2581%25A7%25E3%2580%2581SVG%25E3%2582%25A2%25E3%2583%258B%25E3%2583%25A1%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2581%25AB%25E3%2583%25AC%25E3%2582%25B9%25E3%2583%259D%25E3%2583%25B3%25E3%2582%25B7%25E3%2583%2596%25E3%2581%25AB%25E5%25AF%25BE%25E5%25BF%259C%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:sarap422%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2Rhcmsvcy5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sarap422</dc:creator></item><item><title><![CDATA[Node.js 22の--experimental-require-moduleで、NestJSからESM Onlyライブラリを使ってみる]]></title><description><![CDATA[
+ はじめに
+JavaScriptにはCommonJS / ECMA Script Modules（以下ESM）の二つのモジュールシステムがあり、ライブラリには両方サポートするもの（Dual Package）もあれば、ESMのみをサポートするものもあります。（本記事では後者をESM Onlyライブラリと呼称します。）
+バックエンドフレームワークとして人気のあるNestJSはCommonJSの世界で動いており、ESM非対応です。具体的な問題としてNestJSではESM Onlyのライブラリを通常のimportで使おうとするとERR_REQUIRE_ESMが出ます。たとえば下記の記事が一例。...]]></description><link>https://zenn.dev/ptna/articles/28b20f303a3cfb</link><guid isPermaLink="true">https://zenn.dev/ptna/articles/28b20f303a3cfb</guid><pubDate>Thu, 10 Oct 2024 23:15:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BqXRtYT---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Node.js%252022%25E3%2581%25AE--experimental-require-module%25E3%2581%25A7%25E3%2580%2581NestJS%25E3%2581%258B%25E3%2582%2589ESM%2520Onl...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:hosaka313%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZjNDZkNWFmNTAuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E5%2585%25A8%25E6%2597%25A5%25E6%259C%25AC%25E3%2583%2594%25E3%2582%25A2%25E3%2583%258E%25E6%258C%2587%25E5%25B0%258E%25E8%2580%2585%25E5%258D%2594%25E4%25BC%259A%25EF%25BC%2588%25E3%2583%2594%25E3%2583%2586%25E3%2582%25A3%25E3%2583%258A%25EF%25BC%2589%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lvTjJRYzJRN1V1ZnM1X29EblNkWkt4OFNPSWUzOTBaQTRSTDVOPXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hosaka313</dc:creator></item><item><title><![CDATA[【JavaScriptの備忘録】ブックマークしておきたいJavaScript]]></title><description><![CDATA[
+ はじめに
+こんにちは！
+JavaScriptの面白さに気づいたアヤノです。
+この記事では、痒い所に手が届くブックマークしておきたいJavaScriptを紹介します。
+私が見つけたワケでもないため、そのJavaScriptの説明と、見つけた記事/リンクを紹介します。
+
+ １．ブラウザをメモ帳にするJavaScript
+このJavaScriptは、一時的にブラウザのタブをメモ帳のように使えるようにするモノです。これをブラウザのURLバーに入力すると、入力したタブ全体が書き込み可能な状態になります。一時的にメモを取る場合におすすめなJavaScriptです。
+data:text/html,...]]></description><link>https://zenn.dev/yuki_ayano/articles/memorandum-js_browser</link><guid isPermaLink="true">https://zenn.dev/yuki_ayano/articles/memorandum-js_browser</guid><pubDate>Thu, 10 Oct 2024 15:52:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--J6iG8_lt--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590JavaScript%25E3%2581%25AE%25E5%2582%2599%25E5%25BF%2598%25E9%258C%25B2%25E3%2580%2591%25E3%2583%2596%25E3%2583%2583%25E3%2582%25AF%25E3%2583%259E%25E3%2583%25BC%25E3%2582%25AF%25E3%2581%2597%25E3%2581%25A6%25E3%2581%258A%25E3%2581%258D%25E3%2581%259F%25E3%2581%2584JavaScript%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E9%259B%25AA%25E6%25A1%259C%25E3%2582%25A2%25E3%2583%25A4%25E3%2583%258E%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI4ZmJmNTk0YzAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>雪桜アヤノ</dc:creator></item><item><title><![CDATA[Deno v2.0 が発表されたので入門してみる]]></title><description><![CDATA[
+ はじめに
+先日 Deno v.2.0 がリリースされました。それに伴い Zenn や X などで Deno に関する様々な記事や発信が投稿され、現在非常にホットです。それらを見て、私もこれを機に Deno を触ってみようと思い立ちこの記事を書いています。まずは入門編ということで、インストールやプロジェクトのセットアップ、Deno CLI の使い方などを見ていこうと思います。
+以下のドキュメントに沿って進めていきます。
+https://docs.deno.com
+
+ インストール
+
+Mac
+
+curl -fsSL https://deno.land/install.sh | sh
+# ...]]></description><link>https://zenn.dev/kterada/articles/091971d0df3f5d</link><guid isPermaLink="true">https://zenn.dev/kterada/articles/091971d0df3f5d</guid><pubDate>Thu, 10 Oct 2024 14:20:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--OUXbGdXg--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Deno%2520v2.0%2520%25E3%2581%258C%25E7%2599%25BA%25E8%25A1%25A8%25E3%2581%2595%25E3%2582%258C%25E3%2581%259F%25E3%2581%25AE%25E3%2581%25A7%25E5%2585%25A5%25E9%2596%2580%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kterada%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2YyODkzYzViMWIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kterada</dc:creator></item><item><title><![CDATA[Javascriptでブラウザバックされたくないときに特定の処理を入れ込む方法]]></title><description><![CDATA[記事作成にようやく本腰が入ってきました！mike_nekoです。
+皆さんはブラウザバックに悩まされた経験はありませんか？
+ブラウザバックで戻られるといつもと挙動が違う。
+画面にHTML,CSSで表示している戻るボタンで戻ると普通の挙動なのに。。
+など、そんな状況山ほどありますよね。
+しかも現代は、ブラウザの戻るボタンを押さなくてもマウスのボタン一つで戻れる時代です！
+慣れている人だと反射的にマウスの戻るボタンを押す人も多いかと思います。
+今回はブラウザバックをしたときに意図した処理にすり替える方法をご紹介します！
+
+ そもそもブラウザバックは完全に無効化できるのか？
+できないっぽいです。...]]></description><link>https://zenn.dev/haru507/articles/2024-10-10_zenn</link><guid isPermaLink="true">https://zenn.dev/haru507/articles/2024-10-10_zenn</guid><pubDate>Thu, 10 Oct 2024 13:14:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Di_E1Hux--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Javascript%25E3%2581%25A7%25E3%2583%2596%25E3%2583%25A9%25E3%2582%25A6%25E3%2582%25B6%25E3%2583%2590%25E3%2583%2583%25E3%2582%25AF%25E3%2581%2595%25E3%2582%258C%25E3%2581%259F%25E3%2581%258F%25E3%2581%25AA%25E3%2581%2584%25E3%2581%25A8%25E3%2581%258D%25E3%2581%25AB%25E7%2589%25B9%25E5%25AE%259A%25E3%2581%25AE%25E5%2587%25A6%25E7%2590%2586%25E3%2582%2592%25E5%2585%25A5%25E3%2582%258C%25E8%25BE%25BC%25E3%2582%2580%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mike_neko%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VmN2YyNTQ0ZjkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mike_neko</dc:creator></item><item><title><![CDATA[【JavaScript】スクロールで半透明になるヘッダー]]></title><description><![CDATA[
+ページをスクロールすると半透明になるヘッダーはよく見かけるし、見やすくて便利ですよね。
+作り方を調べたら jQuery の方法がたくさん出てきたので、JavaScript で同じ挙動を再現してみました。JavaScript で実装したい方の参考になれば幸いです。
+作るのはこんなヘッダーです。
+
+画面最上部にいるときは背景色あり
+1px でもスクロールしたら半透明
+半透明のときはヘッダー内部の文字色を変える
+
+
+ コード
+結論のコードです。
+    &lt;header class="header"&gt;
+        &lt;div class="header__inner"&gt...]]></description><link>https://zenn.dev/928sekine/articles/6d36ac808ae6b0</link><guid isPermaLink="true">https://zenn.dev/928sekine/articles/6d36ac808ae6b0</guid><pubDate>Thu, 10 Oct 2024 12:25:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--iLxRXHuS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590JavaScript%25E3%2580%2591%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%25A7%25E5%258D%258A%25E9%2580%258F%25E6%2598%258E%25E3%2581%25AB%25E3%2581%25AA%25E3%2582%258B%25E3%2583%2598%25E3%2583%2583%25E3%2583%2580%25E3%2583%25BC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259B%25E3%2581%258D%25E3%2581%25AD%25E3%2582%258A%25E3%2581%25AA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAyNDQ3MGIzZjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>せきねりな</dc:creator></item><item><title><![CDATA[fullPage.js - クイックチュートリアル]]></title><description><![CDATA[
+もし、モダンで美しいウェブサイトを超速で作りたいなら、fullPage.jsをチェックしてみてください。
+fullPage.jsはJavaScriptライブラリで、React、Vue、Angular用のバージョンもあり、わずか数分で全画面のスクロールスナップサイトを作成できます。
+こちらが例です。でも、それだけじゃありません。すべての機能を知りたいなら、もっと多くの例もチェックしてみてください。
+では、fullPage.jsの使い方を簡単に説明しましょう。
+
+ 何を創るのでしょうか？
+
+このチュートリアルでは、4つのセクションがあるページを作成します。
+3つは全画面で表示され、最後のセ...]]></description><link>https://zenn.dev/alvarotrigo/articles/128176ec7e03f6</link><guid isPermaLink="true">https://zenn.dev/alvarotrigo/articles/128176ec7e03f6</guid><pubDate>Thu, 10 Oct 2024 11:35:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_g9wFCJw--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:fullPage.js%2520-%2520%25E3%2582%25AF%25E3%2582%25A4%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2581%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%2588%25E3%2583%25AA%25E3%2582%25A2%25E3%2583%25AB%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Alvaro%2520Trigo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAzZTc5MDBkNTQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Alvaro Trigo</dc:creator></item><item><title><![CDATA[[JavaScript]SWITCH と IF の使い分けについて（備忘録）]]></title><description><![CDATA[
+ １．はじめに
+・特定のデータに対し、単純かつ多くの条件で分岐処理を行いたい場合は、switch文を使用します。
+・複雑な分岐処理・比較演算子を使用した範囲指定・ネストしたい場合は、if文を使用します。
+
+ ２．サンプルプログラム
+〇例１：switch文を使用した方が良い場合
+
+Sample_1.js
+let result = 2;
+
+switch(result) {
+    case 1:
+        console.log('金メダル');
+        break;
+    case 2:
+        console.log('銀メダル');
+        break...]]></description><link>https://zenn.dev/yama_kawa/articles/1603332bf0739b</link><guid isPermaLink="true">https://zenn.dev/yama_kawa/articles/1603332bf0739b</guid><pubDate>Thu, 10 Oct 2024 04:56:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--XPx0FzAU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BJavaScript%255DSWITCH%2520%25E3%2581%25A8%2520IF%2520%25E3%2581%25AE%25E4%25BD%25BF%25E3%2581%2584%25E5%2588%2586%25E3%2581%2591%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25EF%25BC%2588%25E5%2582%2599%25E5%25BF%2598%25E9%258C%25B2%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%25A9%25E3%2582%25B6%25E3%2583%258B%25E3%2582%25A2%25E3%2583%2591%25E3%2583%25B3%25E3%2582%25B5%25E3%2583%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M1ZjYyZjIwYTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ラザニアパンサー</dc:creator></item><item><title><![CDATA[fetch() で取得したレスポンスを読んでもいいのは1回だけ]]></title><description><![CDATA[!
+備忘録
+
+
+ 結論から
+タイトル通り。
+-&gt; どうしても読み取る必要がある場合は clone() で複製したものを読み取ればいい。
+
+ 問題
+fetch で取得したレスポンスを text() で一度読み取った後に、別の場所で改めて arrayBuffer() で読み取ろうとしたところエラーが発生し、解決策をググってもなかなかヒットせずややハマった。
+
+ 解決
+MDN の fetch API に、ちょうど自分がやろうとしていることに関しての注意事項があった。
+
+ロックされ妨害されたストリーム
+（中略）
+これは、同じレスポンス（またはリクエスト）本体を複数回読み取ることは不可能であ...]]></description><link>https://zenn.dev/toybox19/articles/0816e61e2a2381</link><guid isPermaLink="true">https://zenn.dev/toybox19/articles/0816e61e2a2381</guid><pubDate>Wed, 09 Oct 2024 15:35:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--pUiqDICB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:fetch%2528%2529%2520%25E3%2581%25A7%25E5%258F%2596%25E5%25BE%2597%25E3%2581%2597%25E3%2581%259F%25E3%2583%25AC%25E3%2582%25B9%25E3%2583%259D%25E3%2583%25B3%25E3%2582%25B9%25E3%2582%2592%25E8%25AA%25AD%25E3%2582%2593%25E3%2581%25A7%25E3%2582%2582%25E3%2581%2584%25E3%2581%2584%25E3%2581%25AE%25E3%2581%25AF1%25E5%259B%259E%25E3%2581%25A0%25E3%2581%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kai%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y3OTUwYzEyNDYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kai</dc:creator></item><item><title><![CDATA[Deno v2 が来たので何が変わったのか紹介]]></title><description><![CDATA[
+ はじめに
+遂に待望のDeno v2がリリースされました。
+混乱の元となっていたwindowオブジェクトを削除し、Node.jsとの互換性を高めるためにprocessオブジェクトがグローバルに導入されるなど、多くのアップデートが施されました。
+この記事では重要な変更からminorな変更までを追っていきます。
+下記のコマンドで、v2にアップグレード出来ます。
+$ deno upgrade
+
+
+ 大きな変更
+
+ windowオブジェクトの削除と、processオブジェクトの導入
+サーバーサイドであるのに、windowオブジェクトが定義されている影響で、ブラウザ環境と誤認してしまうなど、多く...]]></description><link>https://zenn.dev/ame_x/articles/d1742e77fa1351</link><guid isPermaLink="true">https://zenn.dev/ame_x/articles/d1742e77fa1351</guid><pubDate>Wed, 09 Oct 2024 14:32:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7ANDUgQ0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Deno%2520v2%2520%25E3%2581%258C%25E6%259D%25A5%25E3%2581%259F%25E3%2581%25AE%25E3%2581%25A7%25E4%25BD%2595%25E3%2581%258C%25E5%25A4%2589%25E3%2582%258F%25E3%2581%25A3%25E3%2581%259F%25E3%2581%25AE%25E3%2581%258B%25E7%25B4%25B9%25E4%25BB%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ame-x%2540amex2189%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQzYjRiNTcyYTcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ame-x@amex2189</dc:creator></item><item><title><![CDATA[イテレータを分岐させるとどうなる？　Iterator Helpersに見るJavaScriptのイテレータの挙動]]></title><description><![CDATA[2024年10月のTC39ミーティングでは、Iterator HelpersがStage 4となり、ECMAScriptの仕様に追加されることが決定しました。Iterator HelpersはすでにGoogle Chromeなどで試すことができます。
+Iterator Helpersは概してわかりやすい機能群ではありますが、やはり元々がJavaScriptということで、直観的には理解しがたい挙動もあります。そのような挙動は、とくにイテレータを分岐させたときに見られます。
+ということで、この記事ではイテレータを分岐させた場合の挙動を見ていきましょう。Iterator Helpersそのもの...]]></description><link>https://zenn.dev/uhyo/articles/iterator-helpers-iterator-close</link><guid isPermaLink="true">https://zenn.dev/uhyo/articles/iterator-helpers-iterator-close</guid><pubDate>Wed, 09 Oct 2024 12:35:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--gBFDP-_J--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25A4%25E3%2583%2586%25E3%2583%25AC%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%2592%25E5%2588%2586%25E5%25B2%2590%25E3%2581%2595%25E3%2581%259B%25E3%2582%258B%25E3%2581%25A8%25E3%2581%25A9%25E3%2581%2586%25E3%2581%25AA%25E3%2582%258B%25EF%25BC%259F%25E3%2580%2580Iterator%2520Helpers%25E3%2581%25AB%25E8%25A6%258B%25E3%2582%258BJavaScript%25E3%2581%25AE%25E3%2582%25A4%25E3%2583%2586%25E3%2583%25AC%25E3%2583%25BC%25E3%2582%25BF%25E3%2581%25AE%25E6%258C%2599%25E5%258B%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:uhyo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVjYjFlMDJlNGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>uhyo</dc:creator></item><item><title><![CDATA[サクッと始めるウェブアプリ開発【Next.js / TypeScript】]]></title><description><![CDATA[この本では、初心者・入門者の方に向けて、Next.jsの知識や使い方を体系的にまとめました。
+ 
+ 【概要】
+ ・内容：HTML・CSS・JavaScriptとは？、Next.jsとは？、アプリを作る上での環境を整えよう！、Next.jsのプロジェクトを作ろう！、チャットアプリのパーツを作ろう！、オウム返しAPIを作ろう！、MUIを使ってリッチにしよう！、Vercelにデプロイしよう！、【余談】Joy.uiによるUIの変更
+ ・所要時間：約3時間
+ ・必須条件：HTMLの知識、CSSの知識、JavaScriptの知識
+ ・推奨OS：macOS / windows(WSL2)
+ ・レベル：★★☆☆☆
+ ]]></description><link>https://zenn.dev/umi_mori/books/next-js-typescript</link><guid isPermaLink="true">https://zenn.dev/umi_mori/books/next-js-typescript</guid><pubDate>Wed, 09 Oct 2024 06:10:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3lCoDJ92--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci8wZDk4NWMxYmJkLnBuZw==%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>ますみ / 生成AIエンジニア</dc:creator></item><item><title><![CDATA[filterメソッド]]></title><description><![CDATA[
+ 基本構文
+array.filter(callbackFn, thisArg)
+
+ 引数
+第一引数に callback 関数（3つの引数を取る）、第二引数にthisArg。
+
+
+callback: 各要素に対して実行される関数。次の3つの引数を取ります。
+
+
+currentValue: 配列の現在の要素。
+currentIndex (オプション): 現在の要素のインデックス。
+array (オプション): filter() が呼び出された配列。
+
+
+thisArg (オプション): callback が実行される際に this として使用する値。
+
+
+ 戻り値
+callback が t...]]></description><link>https://zenn.dev/kimascript/articles/4db93adafab80f</link><guid isPermaLink="true">https://zenn.dev/kimascript/articles/4db93adafab80f</guid><pubDate>Wed, 09 Oct 2024 06:08:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--OMTudOPB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:filter%25E3%2583%25A1%25E3%2582%25BD%25E3%2583%2583%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ2N2UwMmQyNDEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>...</dc:creator></item><item><title><![CDATA[mapメソッド]]></title><description><![CDATA[
+ 基本構文
+array.map(callbackFn, thisArg)
+
+ 引数
+第一引数に callback 関数（3つの引数を取る）、第二引数にthisArg。
+
+
+callback: 各要素に対して実行される関数。次の3つの引数を取ります。
+
+
+currentValue: 配列の現在の要素。
+currentIndex (オプション): 現在の要素のインデックス。
+array (オプション): map() が呼び出された配列。
+
+
+thisArg (オプション): callback が実行される際に this として使用する値。
+
+
+ 戻り値
+各要素に対して callback を...]]></description><link>https://zenn.dev/kimascript/articles/6f5f3564aca61e</link><guid isPermaLink="true">https://zenn.dev/kimascript/articles/6f5f3564aca61e</guid><pubDate>Wed, 09 Oct 2024 05:32:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--eVS7izZS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:map%25E3%2583%25A1%25E3%2582%25BD%25E3%2583%2583%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ2N2UwMmQyNDEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>...</dc:creator></item></channel></rss>
