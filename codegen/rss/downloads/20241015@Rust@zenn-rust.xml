@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Rust」のフィード]]></title><description><![CDATA[Zennのトピック「Rust」のRSSフィードです]]></description><link>https://zenn.dev/topics/rust</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ba09661577.png</url><title>Zennの「Rust」のフィード</title><link>https://zenn.dev/topics/rust</link></image><generator>zenn.dev</generator><lastBuildDate>Tue, 15 Oct 2024 00:36:21 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/rust/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[ゴリラでもわかるSA-IS]]></title><description><![CDATA[
+ 初めに
+SA-IS[1]は接尾字配列を線形時間[2]で構築できるアルゴリズムの1つです。他の線形時間アルゴリズムと比較して高速かつ省メモリであり、コードもコンパクトです。
+
+
+ SA-KA
+SA-ISはSA-KA[3]を改良したものです。そこで、SA-ISの解説に入る前にSA-KAを概観します。なお、SA-KAという名称は一般的ではないかもしれません。
+以下では、文字列Sのi文字目をS[i]と表記します。また、部分文字列S[i]..S[j]をS[i..j]と略記します。とくに、接尾字はS[i..n]です。
+Sは辞書順最小の（ユニークな）番兵\#を末尾に持ちます。これは証明の見通しをよ...]]></description><link>https://zenn.dev/yatyou/articles/f96972c7edeac7</link><guid isPermaLink="true">https://zenn.dev/yatyou/articles/f96972c7edeac7</guid><pubDate>Mon, 14 Oct 2024 14:12:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--zFkhxDwX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B4%25E3%2583%25AA%25E3%2583%25A9%25E3%2581%25A7%25E3%2582%2582%25E3%2582%258F%25E3%2581%258B%25E3%2582%258BSA-IS%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:qdot3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSjJhZldfVDRNTWJCUzNDeG9YSlpnNFhJbndOeFkxbTB1TWxTWGtCSm9nPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>qdot3</dc:creator></item><item><title><![CDATA[RustでUEFIのBIOSにHello World!を出す]]></title><description><![CDATA[
+ はじめに
+UEFI仕様のBIOSにHello World!を表示するブートファイルをRustで作成します。
+今回使用した開発環境は以下です。
+
+CPUのアーキテクチャ：x86_64
+開発環境のホストOS：Windows11
+実行環境：devcontainer
+エミュレーター：QEMU
+
+
+ 環境構築
+実行環境にはvscodeの拡張機能「devcontainer」を使っています。
+検証はしておりませんが、devcontainerを使わない場合でも必要なものをインストールすれば、各自の環境でも開発は可能と思われます。
+devcontainerの説明は割愛し、設定ファイルのみ公開します。
+...]]></description><link>https://zenn.dev/usuijuice/articles/50a4ca0d035fdd</link><guid isPermaLink="true">https://zenn.dev/usuijuice/articles/50a4ca0d035fdd</guid><pubDate>Mon, 14 Oct 2024 13:39:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---A11Tyg---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25A7UEFI%25E3%2581%25AEBIOS%25E3%2581%25ABHello%2520World%2521%25E3%2582%2592%25E5%2587%25BA%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2598%25E3%2582%2585%25E3%2581%2586%25E3%2581%2599%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzlmOTYwYTE4N2IuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>じゅうす</dc:creator></item><item><title><![CDATA[RustでWindowsサービスを作成するメモ]]></title><description><![CDATA[出来れば常時起動しておきたいコンソールアプリをRustで作って居ました。
+ふと思ったのですが、Windowsで常駐させるならサービスじゃぁないかぁと。
+そんなわけでWindowsサービスアプリケーション化を行ってみました。
+プログラム自体はもっと良い書き方があると思うのですが、自分の備忘録ともしサービス作る人の一助になればと思い公開します。
+
+ 使用パッケージについて
+
+cargo.toml
+anyhow = "1.0.89"
+clap = { version = "4.5.18", features = ["derive"] }
+dotenvy = "0.15.7"
+file-rota...]]></description><link>https://zenn.dev/upopon/articles/25af9ae99e1b43</link><guid isPermaLink="true">https://zenn.dev/upopon/articles/25af9ae99e1b43</guid><pubDate>Mon, 14 Oct 2024 07:45:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--mA1OiSdQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25A7Windows%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2593%25E3%2582%25B9%25E3%2582%2592%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2599%25E3%2582%258B%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2586%25E3%2581%25BD%25E3%2581%25BD%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lXS3dNU1FXY2FFamZFTjBVSDlfXy01MXotRDZwTTlpQ1NJNUxabGc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>うぽぽん</dc:creator></item><item><title><![CDATA[Tauri 2.0 で ネイティブモジュール作成(Android版) [MLKitでオンデバイス翻訳]]]></title><description><![CDATA[
+ 1.はじめに
+
+ Tauri 2.0 が StableRelease になった!
+Tauri 2.0 が StableRelease になったんですが、これがモバイルアプリも作成できるとのこと。
+https://forest.watch.impress.co.jp/docs/news/1628498.html
+
+
+モバイルサポート。デスクトップだけでなく、iOS/Android向けのアプリも「Tauri」で(上記リンクより引用)
+
+
+
+ Tauri 2.0 って？（個人的な理解）
+ざっくり、 "Tauri" はクロスプラットフォーム対応のアプリフレームワークで、
+バージョン 2.0 ...]]></description><link>https://zenn.dev/sh1r4s4g1/articles/843a21340b1dfd</link><guid isPermaLink="true">https://zenn.dev/sh1r4s4g1/articles/843a21340b1dfd</guid><pubDate>Mon, 14 Oct 2024 05:41:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--tChq2xvd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Tauri%25202.0%2520%25E3%2581%25A7%2520%25E3%2583%258D%25E3%2582%25A4%25E3%2583%2586%25E3%2582%25A3%25E3%2583%2596%25E3%2583%25A2%25E3%2582%25B8%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%25AB%25E4%25BD%259C%25E6%2588%2590%2528Android%25E7%2589%2588%2529%2520%255BMLKit%25E3%2581%25A7%25E3%2582%25AA%25E3%2583%25B3%25E3%2583%2587%25E3%2583%2590%25E3%2582%25A4%25E3%2582%25B9%25E7%25BF%25BB%25E8%25A8%25B3%255D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:SH1R4S4G1%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSk1YQmtDLVREWUhYTFY1NVFOQkM4NmNPZXdiM09vN1l4ZUNQSmNTckRXN2c9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>SH1R4S4G1</dc:creator></item><item><title><![CDATA[Tauri 2.0 & Next.js 14の環境を作成してみる]]></title><description><![CDATA[Electronの代替と期待されている「Tauri 2.0」の正式版がリリースされたということで、早速触れてみました。
+TauriはRustで構築された、軽量、高速、安全なクロスプラットフォームのアプリを開発できるフレームワークとのことです。
+https://v2.tauri.app/
+Rustにも興味があったものの、なかなか触れる切っ掛けが無かったのでちょうど良い機会かなと。
+一応自分もこれから触れていくところなので、まずは立ち上げの手順を残しておきます。
+
+ 目標
+
+フロントとしてNext.jsを採用してみる
+自分はWeb系でNext.jsをメインで利用しているので。
+Tailwin...]]></description><link>https://zenn.dev/playree/articles/966ebafc3d11f8</link><guid isPermaLink="true">https://zenn.dev/playree/articles/966ebafc3d11f8</guid><pubDate>Mon, 14 Oct 2024 00:00:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4uXFqs9V--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Tauri%25202.0%2520%2526%2520Next.js%252014%25E3%2581%25AE%25E7%2592%25B0%25E5%25A2%2583%25E3%2582%2592%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:playree%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSzc1OVNMOTM4THJqcFl0OUxnSUZKS2NlYThMTVEwbkwyS3oteFBxbUcyQTB3PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>playree</dc:creator></item><item><title><![CDATA[RustでCPUを自作して動くまで📝]]></title><description><![CDATA[
+ はじめに
+CPUの名前は CC8R（ちみ's CPU 8bit RISC) ！
+お仕事のお勉強のメモ📝に近いかも🦆
+【サマリー】
+
+8bitCPUの設計
+
+RustでCPUを実装（※）
+自作CPUで(5+3)x2=16を計算
+
+※C++版も実装しました🥳
+
+ 成果物（できたもの）
+!
+
+Rust版、C++版 ... MITライセンス
+
+
+MITライセンスの範囲でお使いください🥳
+
+
+
+ Rustでの実装
+https://github.com/Chimipupu/cc8r_zenn
+
+ C++での実装
+https://github.com/Chimipupu/cc8r_zenn_cpp...]]></description><link>https://zenn.dev/chimipupu/articles/e0af6451e0cab9</link><guid isPermaLink="true">https://zenn.dev/chimipupu/articles/e0af6451e0cab9</guid><pubDate>Sun, 13 Oct 2024 22:37:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--B-MD--Pp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25A7CPU%25E3%2582%2592%25E8%2587%25AA%25E4%25BD%259C%25E3%2581%2597%25E3%2581%25A6%25E5%258B%2595%25E3%2581%258F%25E3%2581%25BE%25E3%2581%25A7%2520%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A1%25E3%2581%25BF%25E3%2581%25AB%25E3%2582%2583%2520%2520%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NlYjgxZjQ2ODQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ちみにゃ👾💜</dc:creator></item><item><title><![CDATA[ECDH鍵交換を用いた共通鍵暗号の検証 (Rust)]]></title><description><![CDATA[
+ はじめに
+ECDH (Elliptic-curve Diffie–Hellman)鍵交換という仕組みを使うことにより、自分の秘密鍵と相手の公開鍵から共通鍵が生成できると教わったので、Rustで試してみました。
+ECDH鍵交換アルゴリズムと共通鍵暗号のRust実装は、すでに専門の方々によって行われCrateとして公開されていますので、こちらを使用することにします。
+
+ 1. ECDH鍵交換
+
+ (1) プロジェクト作成
+cargo newコマンドを実行して、プロジェクトを作成します。
+ECDH鍵交換のため、secp256k1を使用します。
+$ cargo new ecdhtest
+$ ...]]></description><link>https://zenn.dev/halifax/articles/rust_crypto_ecdh_aes</link><guid isPermaLink="true">https://zenn.dev/halifax/articles/rust_crypto_ecdh_aes</guid><pubDate>Sun, 13 Oct 2024 12:16:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5PkS0WUF--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ECDH%25E9%258D%25B5%25E4%25BA%25A4%25E6%258F%259B%25E3%2582%2592%25E7%2594%25A8%25E3%2581%2584%25E3%2581%259F%25E5%2585%25B1%25E9%2580%259A%25E9%258D%25B5%25E6%259A%2597%25E5%258F%25B7%25E3%2581%25AE%25E6%25A4%259C%25E8%25A8%25BC%2520%2528Rust%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:halifax%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JhNWUxM2Q5YzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>halifax</dc:creator></item><item><title><![CDATA[chip8. タッチ操作でカメラを動かす(追加)]]></title><description><![CDATA[
+ はじめに
+2024/10/12時点の内容です。
+
+rustc 1.81.0
+bevy 0.14.2
+bevyは開発初期段階のOSSで、まだまだ破壊的なアップデートが入ります。
+でも、面白いですよ。
+
+
+ 前回
+chip7. キー、マウス、ゲームパッドでカメラを動かす
+
+ タッチ操作を追加
+入力の4つ目としてタッチ操作を追加しました。カメラの動きとの対応は下表のとおりです。
+
+
+
+カメラの動き
+キー
+マウス
+タッチ
+ゲームパッド
+
+
+
+
+仰角アップ
+上矢印
+右ボタン＆下へ移動
+一本指を下へ
+十字ボタン上 ／ 左スティック上
+
+
+仰角ダウン
+下矢印
+右ボタン＆上へ移動
+一本指を上へ
+十字...]]></description><link>https://zenn.dev/hyoi/articles/1569b0192a4b0e</link><guid isPermaLink="true">https://zenn.dev/hyoi/articles/1569b0192a4b0e</guid><pubDate>Sat, 12 Oct 2024 13:21:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ao_ydm4k--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:chip8.%2520%25E3%2582%25BF%25E3%2583%2583%25E3%2583%2581%25E6%2593%258D%25E4%25BD%259C%25E3%2581%25A7%25E3%2582%25AB%25E3%2583%25A1%25E3%2583%25A9%25E3%2582%2592%25E5%258B%2595%25E3%2581%258B%25E3%2581%2599%2528%25E8%25BF%25BD%25E5%258A%25A0%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hyoi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2o3d2VRb3N6YndjY3ZuWE5kM1JuRHFVTWxVZWVVbDlzYjUtS1lKPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hyoi</dc:creator></item><item><title><![CDATA[Rust | Axum の axum-valid を使ってバリデーションを実装する]]></title><description><![CDATA[
+ はじめに
+本記事では Rust の Axum という Webフレームワークを使ってクエリー、ボディのバリデーションを実装してみたいと思います！
+Axum のバリデーションには、axum-valid と呼ばれるクレートが存在しますので、今回はそちらを使ってバリデーションのロジックを書いていきます。
+意外にも紹介している人が少なめかつ、本クレートを利用することで非常に便利なバリデーションを実施することができますので、ぜひ、手元でも動かしてもらえると理解しやすいと思います。
+
+ Axum のプロジェクトを作成する
+まずは Axum のプロジェクトを作ります。
+$ cargo new axu...]]></description><link>https://zenn.dev/collabostyle/articles/89d5a957406cee</link><guid isPermaLink="true">https://zenn.dev/collabostyle/articles/89d5a957406cee</guid><pubDate>Sat, 12 Oct 2024 12:33:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--X05IE421--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%2520%257C%2520Axum%2520%25E3%2581%25AE%2520axum-valid%2520%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2583%2590%25E3%2583%25AA%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Shota%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzViM2I3NTQxYzUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25B3%25E3%2583%25A9%25E3%2583%259C%25E3%2582%25B9%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25AB%2520Developers%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MwNGNlNzQxNTYuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Shota</dc:creator></item><item><title><![CDATA[【Rust】SELECTしたデータの特定のカラムを値が空文字orNullの場合のみアクションさせる]]></title><description><![CDATA[
+ この記事を書くにあたって
+Rustで自作アプリを作っている際、データベースから取得してきたデータの中で特定のカラムにデータがないとき(空文字orNull)にのみ別の処理をさせる（一般的にNullチェックと言われているような）プログラムを実装しましたが、想定より難しかったため、今後似たような実装をするときのために簡単な手順書として残しておきたいと思ったのでここに書き留めておきます。
+
+ この記事で説明しないこと
+
+DBからのSELECT処理
+インポート文
+
+
+ 実演
+
+ データベース、エンティティ確認
+DBから取得するデータは以下になります。
+
+今回は、画像内のレコードすべてを取得し、...]]></description><link>https://zenn.dev/yone5/articles/f34959aa5e42c5</link><guid isPermaLink="true">https://zenn.dev/yone5/articles/f34959aa5e42c5</guid><pubDate>Sat, 12 Oct 2024 09:48:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--QiMpwuC_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Rust%25E3%2580%2591SELECT%25E3%2581%2597%25E3%2581%259F%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2581%25AE%25E7%2589%25B9%25E5%25AE%259A%25E3%2581%25AE%25E3%2582%25AB%25E3%2583%25A9%25E3%2583%25A0%25E3%2582%2592%25E5%2580%25A4%25E3%2581%258C%25E7%25A9%25BA%25E6%2596%2587%25E5%25AD%2597orNull%25E3%2581%25AE%25E5%25A0%25B4%25E5%2590%2588%25E3%2581%25AE%25E3%2581%25BF%25E3%2582%25A2%25E3%2582%25AF%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2581%2595%25E3%2581%259B%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yoneko%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RhN2NkNWJjNTQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yoneko</dc:creator></item><item><title><![CDATA[bit全探索]]></title><description><![CDATA[NOTE#001
+
+ 背景
+AtCoderでの解法としてのメモ(abc374_c)
+
+ 実装
+配列からすべての組み合わせを探索するなどで使用。
+
+ 2のx乗
+1 &lt;&lt; x
+
+ AND演算
+2つの値に対して対応するbitを比較し、両方のbitが1である場合にだけ1になる演算。
+
+
+
+ビットA
+ビットB
+結果（A &amp; B）
+
+
+
+
+0
+0
+0
+
+
+0
+1
+0
+
+
+1
+0
+0
+
+
+1
+1
+1
+
+
+
+例: 12 &amp; 7
+
+
+12は2進数で1100。
+
+7は2進数で0111。
+結果は0100。つまり十進数で4。
+
+
+ AND演算の使い方
+AND演算はbit操作において多...]]></description><link>https://zenn.dev/nichika/articles/f856543407eee0</link><guid isPermaLink="true">https://zenn.dev/nichika/articles/f856543407eee0</guid><pubDate>Sat, 12 Oct 2024 04:32:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--LUh8PU5z--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_76:bit%25E5%2585%25A8%25E6%258E%25A2%25E7%25B4%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:koichini%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dpcWRpaFVEZG1vREZYeThLVDZjLS1odjVnRWJMNmotWk05VlJ6ckE9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>koichini</dc:creator></item><item><title><![CDATA[asdfからmiseに乗り換える時のtips]]></title><description><![CDATA[いろいろ事情があり、asdfからmiseに変える機会があった。
+その時のtipsを書いてみよう。
+
+ asdfバイバイ
+アンインストール
+
+ terminal
+$ brew uninstall asdf
+
+.zshrc のasdf関連のものを削除（隠しファイルは人による）
+
+ .zshrc
+. /opt/homebrew/opt/asdf/libexec/asdf.sh
+
+アンインストールされたか
+$ which asdf
+
+asdf not found
+.asdf のディレクトリを削除
+$ rm -rf ~/.asdf
+ちなみに、
+asdf local &lt;&gt; で設定する時に...]]></description><link>https://zenn.dev/jin237/articles/1b7d294b6a5a83</link><guid isPermaLink="true">https://zenn.dev/jin237/articles/1b7d294b6a5a83</guid><pubDate>Sat, 12 Oct 2024 02:35:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4d7zUv-8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:asdf%25E3%2581%258B%25E3%2582%2589mise%25E3%2581%25AB%25E4%25B9%2597%25E3%2582%258A%25E6%258F%259B%25E3%2581%2588%25E3%2582%258B%25E6%2599%2582%25E3%2581%25AEtips%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2598%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ4NjMwOWVhMDcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>じん</dc:creator></item><item><title><![CDATA[SeaORMを使い既存のDBのテーブルからエンティティファイルを生成する]]></title><description><![CDATA[
+ この記事を書くにあたって
+Rustで自作アプリを作っている際、データベースの操作するために、ORMにSeaORMを使いました。
+　SeaORMのコマンドを利用して、既存のテーブルからエンティティファイルを作成しました。今後似たような実装をするときのために簡単な手順書として残しておきたいと思ったのでここに書き留めておきます。
+
+ この記事で説明しないこと
+
+ORMのインストール、セットアップ方法
+エンティティファイルの説明
+DBの操作方法
+
+
+ 実演
+
+ データベースの状況確認
+エンティティの元になるテーブルの状況はこのようになります。
+※ staffs(子)のdepartment_i...]]></description><link>https://zenn.dev/yone5/articles/da7a8da0abf6b9</link><guid isPermaLink="true">https://zenn.dev/yone5/articles/da7a8da0abf6b9</guid><pubDate>Fri, 11 Oct 2024 13:41:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5AkJp11w--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:SeaORM%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2584%25E6%2597%25A2%25E5%25AD%2598%25E3%2581%25AEDB%25E3%2581%25AE%25E3%2583%2586%25E3%2583%25BC%25E3%2583%2596%25E3%2583%25AB%25E3%2581%258B%25E3%2582%2589%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2586%25E3%2582%25A3%25E3%2583%2586%25E3%2582%25A3%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2592%25E7%2594%259F%25E6%2588%2590%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yoneko%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RhN2NkNWJjNTQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yoneko</dc:creator></item><item><title><![CDATA[Rustで外部コマンドでパイプを使う方法]]></title><description><![CDATA[以下のような感じでできる。テキストファイルを入力にすることもできるみたい。
+use std::process::{Command, Stdio};
+use std::fs::File;
+
+fn main() {
+    // echo '1+2+3+4' | bc
+    let echo = Command::new("echo")
+        .arg("1+2+3+4")
+        .stdout(Stdio::piped())
+        .spawn()
+        .unwrap();
+
+    let bc1 = Command::new("bc")
+  ...]]></description><link>https://zenn.dev/masaemon/articles/8133ca5f3e2972</link><guid isPermaLink="true">https://zenn.dev/masaemon/articles/8133ca5f3e2972</guid><pubDate>Thu, 10 Oct 2024 18:02:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6qIndmSU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25A7%25E5%25A4%2596%25E9%2583%25A8%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2581%25A7%25E3%2583%2591%25E3%2582%25A4%25E3%2583%2597%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:masaemon%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2YxYzJkMWVlYmIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>masaemon</dc:creator></item><item><title><![CDATA[Wasm Component Model や WASI の概要を調べる]]></title><description><![CDATA[WASMの前提知識がない者が WebAssembly Component Model の概要を知ろうとするメモです。
+
+ トピック概観
+基盤になっているものから順に：
+
+
+WebAssembly (Core) Specification 2.0
+
+Wasmのコア仕様（Core Wasm）はかなり低水準なインタフェースしか提供しない。各々のWasmを支援するツールチェインがその言語側やブラウザ側などに独自のバインディング用コードをたくさん生成することで機能している。Wasmモジュール間の相互運用性は乏しい。
+
+
+
+WebAssembly Component Model
+
+Wasmのための標...]]></description><link>https://zenn.dev/mierune/articles/2ea6dc72a7dd58</link><guid isPermaLink="true">https://zenn.dev/mierune/articles/2ea6dc72a7dd58</guid><pubDate>Thu, 10 Oct 2024 16:42:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--nnobIwmj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Wasm%2520Component%2520Model%2520%25E3%2582%2584%2520WASI%2520%25E3%2581%25AE%25E6%25A6%2582%25E8%25A6%2581%25E3%2582%2592%25E8%25AA%25BF%25E3%2581%25B9%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:ciscorn%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAyNDdjMTQzMmUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:MIERUNE%25E3%2581%25AEZenn%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q2YWYyNzI0M2QuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ciscorn</dc:creator></item><item><title><![CDATA[C++erのRust入門5：ツヨツヨなCLIを作りたい1]]></title><description><![CDATA[
+ 背景
+時代遅れなおっさんには GUI の画面はカラフルでコワイ。恐怖で GUI を見ると変な汗が出るし、そもそもとしておっさんにはマウスの使い方が分からない。回し車に入れておけばいいのだろうか？
+でも、 GUI 並みにツヨツヨな CLI プログラムを作りたい。
+tmux のように画面分割したり、 emacs のようにキーバインドを組んだり。そんなことがしたい。
+std::cout なんて 設計者のオナニー 設計に失敗してる遺物で画面に出力してるだけではちょっとしんどいのです。
+というわけで、 Rataui に触ってみました。
+
+ Rataui
+Rataui のページを見てもらうのが早...]]></description><link>https://zenn.dev/nodamushi/articles/fa66b1fc52a748</link><guid isPermaLink="true">https://zenn.dev/nodamushi/articles/fa66b1fc52a748</guid><pubDate>Wed, 09 Oct 2024 17:40:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--cGnCvi5J--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:C%252B%252Ber%25E3%2581%25AERust%25E5%2585%25A5%25E9%2596%25805%25EF%25BC%259A%25E3%2583%2584%25E3%2583%25A8%25E3%2583%2584%25E3%2583%25A8%25E3%2581%25AACLI%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258A%25E3%2581%259F%25E3%2581%25841%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nodamushi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y1OGJmMTkwNjEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nodamushi</dc:creator></item><item><title><![CDATA[TS使っている人のRust 0から勉強日記1]]></title><description><![CDATA[こんにちは！普段TypeScriptを使ってフロントエンド開発をしている人です🙌
+最近、上司に「TypeScript(ちょっとは)書けるようになったからRustやってみようか^^」と言われ、言われるがままやってみたものの何をやっているんだ状態…
+ZennにはたくさんのRustの基礎となる部分の記事や本があったため、同じような内容にはなりますが、この記事の内容は基礎の基礎(+TypeScriptとの比較？)で自分の勉強の記録用に書いています。
+
+
+ Rustってなんだ
+そもそもRustってなんなんだから始まったので、とりあえずドキュメントを。
+https://www.rust-lang.o...]]></description><link>https://zenn.dev/maru_contents/articles/rust_initial</link><guid isPermaLink="true">https://zenn.dev/maru_contents/articles/rust_initial</guid><pubDate>Wed, 09 Oct 2024 06:22:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vNZCS0z3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TS%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%2584%25E3%2582%258B%25E4%25BA%25BA%25E3%2581%25AERust%25200%25E3%2581%258B%25E3%2582%2589%25E5%258B%2589%25E5%25BC%25B7%25E6%2597%25A5%25E8%25A8%25981%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:maru%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQyZDVlZjUxOGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>maru</dc:creator></item><item><title><![CDATA[Rustのgardeトレイトを使うときはUnvalidatedを使いたい]]></title><description><![CDATA[
+ gardeトレイトの概要
+gardeトレイトはVaridateというマクロを提供しており、structのフィールドの検証を行えます。
+公式ドキュメントに記載されている下記の例ではUserというstructのフィールドの文字列がASCII文字列であるかどうか、と長さが適切かどうかを検証しています。
+use garde::{Validate, Valid};
+
+#[derive(Validate)]
+struct User&lt;'a&gt; {
+    #[garde(ascii, length(min=3, max=25))]
+    username: &amp;'a str,
+ ...]]></description><link>https://zenn.dev/mj2mkt/articles/2024-10-08-rust-parse-dont-validate</link><guid isPermaLink="true">https://zenn.dev/mj2mkt/articles/2024-10-08-rust-parse-dont-validate</guid><pubDate>Tue, 08 Oct 2024 23:59:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ea84IWdE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25AEgarde%25E3%2583%2588%25E3%2583%25AC%25E3%2582%25A4%25E3%2583%2588%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%25E3%2581%25A8%25E3%2581%258D%25E3%2581%25AFUnvalidated%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2584%25E3%2581%259F%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25BE%25E3%2581%2598%25E3%2581%25BE%25E3%2581%25A3%25E3%2581%25A1%25E3%2582%2587%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM0YjdjMTQwODEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>まじまっちょ</dc:creator></item><item><title><![CDATA[Rust版のpolarsでhive形式のparquetファイルの読み書きを行うメモ(ver: rs-0.43.1)]]></title><description><![CDATA[※この記事は不完全な部分を含む、ワークアラウンド的なところがあるのでご容赦ください
+(polarsのアップデートで将来的に色々変わるかも?)
+
+ はじめに
+最近pandasの対抗として台頭してきたpolars:
+https://github.com/pola-rs/polars
+について、
+
+PythonではなくRustで使いたい
+
+hive形式(パーティションあり)で分散されたparquetファイルを読み書きしたい
+
+といったことがあり調べていた。
+Python版ではユーザーガイドのIO/Hiveのページ:
+https://docs.pola.rs/user-guide/io/hive...]]></description><link>https://zenn.dev/junkor/articles/8394e9593b337d</link><guid isPermaLink="true">https://zenn.dev/junkor/articles/8394e9593b337d</guid><pubDate>Tue, 08 Oct 2024 15:39:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--FMFNnYJj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E7%2589%2588%25E3%2581%25AEpolars%25E3%2581%25A7hive%25E5%25BD%25A2%25E5%25BC%258F%25E3%2581%25AEparquet%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2581%25AE%25E8%25AA%25AD%25E3%2581%25BF%25E6%259B%25B8%25E3%2581%258D%25E3%2582%2592%25E8%25A1%258C%25E3%2581%2586%25E3%2583%25A1%25E3%2583%25A2%2528ver%253A%2520rs-0.43.1%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:7e%252B8%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2Rhcmsvai5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>7e+8</dc:creator></item><item><title><![CDATA[RustのResult型とOption型のエラーチェックがコードレビュー後にスッキリした話]]></title><description><![CDATA[
+ 初期実装（unwrapで例外を処理していないので非推奨）
+let cookie_data: Option&lt;&amp;MetadataValue&lt;Ascii&gt;&gt; = request.metadata().get("cookie");
+
+if cookie_data.is_none() {
+    return Err("cookieがありません");
+}
+
+let cookie: &amp;str = cookie_data.unwrap().to_str().unwrap();
+println!("{}", cookie);
+
+ unwrap無しにした版
+le...]]></description><link>https://zenn.dev/daijinload/articles/6b956af8b26da4</link><guid isPermaLink="true">https://zenn.dev/daijinload/articles/6b956af8b26da4</guid><pubDate>Tue, 08 Oct 2024 08:16:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1ToQ40yQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25AEResult%25E5%259E%258B%25E3%2581%25A8Option%25E5%259E%258B%25E3%2581%25AE%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E3%2583%2581%25E3%2582%25A7%25E3%2583%2583%25E3%2582%25AF%25E3%2581%258C%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2583%25AC%25E3%2583%2593%25E3%2583%25A5%25E3%2583%25BC%25E5%25BE%258C%25E3%2581%25AB%25E3%2582%25B9%25E3%2583%2583%25E3%2582%25AD%25E3%2583%25AA%25E3%2581%2597%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:daijinload%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSTVLVGMxQWhOTXo1cnhrSkFmYmdmRmF1SGwxRGFwX0o3NnpXQ1oxMHpTTGc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>daijinload</dc:creator></item></channel></rss>

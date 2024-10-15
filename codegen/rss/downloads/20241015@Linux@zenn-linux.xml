@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Linux」のフィード]]></title><description><![CDATA[Zennのトピック「Linux」のRSSフィードです]]></description><link>https://zenn.dev/topics/linux</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/860a9eb1e4.png</url><title>Zennの「Linux」のフィード</title><link>https://zenn.dev/topics/linux</link></image><generator>zenn.dev</generator><lastBuildDate>Tue, 15 Oct 2024 02:35:12 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/linux/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[LinuxでダミーのIPをローカルに付ける時のメモ]]></title><description><![CDATA[おはこんばんにちわ
+狸です
+さっそく本題ですがレガシーな開発をしていると以下のように設定ファイルで
+hoge_server_ip=xxx.xxx.xxx.xxx
+こんな風に直接商用のIPが書かれてるから、ローカルでテストする時にはlocalhostに設定しなおして、ローカルにダミーのサーバ建てて実行してね。
+みたいな雑な指示をよく見かけます。
+私は現在、開発環境を案件毎にWSL上に分けて構築しているので暇がある時ならIPを割り振ったDockerコンテナを動かして対応するのですが、ちょろっと動作確認する為だけの時は面倒臭いのでローカルにIPを生やして対応しています、これはその時のメモです。...]]></description><link>https://zenn.dev/tantan_tanuki/articles/8af0d7227b6260</link><guid isPermaLink="true">https://zenn.dev/tantan_tanuki/articles/8af0d7227b6260</guid><pubDate>Tue, 15 Oct 2024 01:17:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Bh1gOciS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%25E3%2581%25A7%25E3%2583%2580%25E3%2583%259F%25E3%2583%25BC%25E3%2581%25AEIP%25E3%2582%2592%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25AB%25E3%2583%25AB%25E3%2581%25AB%25E4%25BB%2598%25E3%2581%2591%25E3%2582%258B%25E6%2599%2582%25E3%2581%25AE%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%259D%25A6%25E3%2580%2585%25E7%258B%25B8%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FjMjMxNDA1ZDMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>坦々狸</dc:creator></item><item><title><![CDATA[仮想環境入門：Windows11とWSL2でUbuntu環境をVSCODE 上で構築]]></title><description><![CDATA[
+ はじめに
+これまで趣味のKaggleやデータ分析ではGoogle colablatoryやKaggle karnelなどの環境構築不要な環境ばかりでコーディングしていて、ローカルでの環境構築から逃げ続けてきましたが、実務でWindows上の環境構築が必要になり勉強したので備忘録と詰まった点を残しておきます。
+
+ やりたいこと
+Windows11とWSL2でUbuntu環境を構築し、VSCODE上でUbuntuを使用できるようにする。
+
+ 前提知識
+
+ Linuxとは
+・狭義のLinux：LinuxカーネルのことardWareとプロセスの間の制御を行うもの。OSの中核、土台の役割。
+
+...]]></description><link>https://zenn.dev/sa_tech/articles/254d54fb79f6e4</link><guid isPermaLink="true">https://zenn.dev/sa_tech/articles/254d54fb79f6e4</guid><pubDate>Mon, 14 Oct 2024 14:39:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--op3sbMX0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E4%25BB%25AE%25E6%2583%25B3%25E7%2592%25B0%25E5%25A2%2583%25E5%2585%25A5%25E9%2596%2580%25EF%25BC%259AWindows11%25E3%2581%25A8WSL2%25E3%2581%25A7Ubuntu%25E7%2592%25B0%25E5%25A2%2583%25E3%2582%2592VSCODE%2520%25E4%25B8%258A%25E3%2581%25A7%25E6%25A7%258B%25E7%25AF%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:onaga%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2UwNDYzODc4YjEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>onaga</dc:creator></item><item><title><![CDATA[Manjaro LinuxをLUKS暗号化ディスクにインストール＋Secure Bootを設定する]]></title><description><![CDATA[
+ はじめに
+大学の研究に使っているLinuxラップトップについて、共同研究契約の関係でPCのストレージ暗号化が要求されるようになったためセットアップを行いました。これはその備忘録です。
+なお、実際のセットアップの際には以下の記事を参考にさせていただきました。
+
+【Linux】セキュリティを考えたarch linux install メモ
+Manjaro Linuxで自動復号化のディスク暗号化と休止状態の実現方法
+
+
+ 今回設定した要件
+
+Linuxシステムの入っているパーティションはフルディスク暗号化されている
+TPM2デバイスによって暗号化ディスクが自動復号され、パスフレーズを入力す...]]></description><link>https://zenn.dev/t0d4/articles/2a8c36c811ad1d</link><guid isPermaLink="true">https://zenn.dev/t0d4/articles/2a8c36c811ad1d</guid><pubDate>Mon, 14 Oct 2024 14:33:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--n4IX1UL5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Manjaro%2520Linux%25E3%2582%2592LUKS%25E6%259A%2597%25E5%258F%25B7%25E5%258C%2596%25E3%2583%2587%25E3%2582%25A3%25E3%2582%25B9%25E3%2582%25AF%25E3%2581%25AB%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25EF%25BC%258BSecure%2520Boot%25E3%2582%2592%25E8%25A8%25AD%25E5%25AE%259A%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:t0d4%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE4OGZiNjlkZWQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>t0d4</dc:creator></item><item><title><![CDATA[Fedora40 で fail2ban を動かす]]></title><description><![CDATA[お家の検証サーバ用の備忘録です。基本 root です。
+
+ 前提
+続きです。
+https://zenn.dev/asterisk9101/articles/fedora40server-5
+
+ インストールする
+dnf -y install fail2ban
+systemctl enable --now fail2ban
+systemctl status fail2ban
+以上（気休め？）
+]]></description><link>https://zenn.dev/asterisk9101/articles/fedora40server-7</link><guid isPermaLink="true">https://zenn.dev/asterisk9101/articles/fedora40server-7</guid><pubDate>Mon, 14 Oct 2024 09:45:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--EHmRMmzt--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Fedora40%2520%25E3%2581%25A7%2520fail2ban%2520%25E3%2582%2592%25E5%258B%2595%25E3%2581%258B%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25A4%259A%25E7%2594%25B0%25E6%25B0%258F%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFUWEFKd3hvZ1pLNDVtSmdsUDlROUZPUTcyRXg4eV9MeFdmejdma0V1aTA9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>多田氏</dc:creator></item><item><title><![CDATA[Linux 使いになりたい人のための GParted 入門 - ディスク操作用ツール -]]></title><description><![CDATA[本書は、ディスク操作用ツール GParted を使って、Linux マシン用のディスク操作ができるようになりたいと思っている Linux ユーザー向けの書籍です。GParted の使い方について説明しています。]]></description><link>https://zenn.dev/hiro345/books/lets-start-gparted</link><guid isPermaLink="true">https://zenn.dev/hiro345/books/lets-start-gparted</guid><pubDate>Mon, 14 Oct 2024 09:31:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--eUAgg-wb--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci8xNWFhZWYyM2IxLnBuZw==%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>Hiroshi Koyama</dc:creator></item><item><title><![CDATA[Fedora40 でリバプロを動かす]]></title><description><![CDATA[お家の検証サーバ用の備忘録です。基本 root です。
+
+ 前提
+続きです。
+https://zenn.dev/asterisk9101/articles/fedora40server-5
+
+ SELinux の許可
+これを許可しないと Permission Deny になる。
+setsebool -P httpd_can_network_connect on
+
+ FQDN の設定など
+read -p 'FQDN?&gt;' FQDN
+read -p 'IP?&gt;' IP
+read -p 'PORT?&gt;' PORT
+
+ WebScoket 用の設定の追加
+今回、後ろのサーバは ...]]></description><link>https://zenn.dev/asterisk9101/articles/fedora40server-6</link><guid isPermaLink="true">https://zenn.dev/asterisk9101/articles/fedora40server-6</guid><pubDate>Mon, 14 Oct 2024 09:20:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ISZlqK4p--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Fedora40%2520%25E3%2581%25A7%25E3%2583%25AA%25E3%2583%2590%25E3%2583%2597%25E3%2583%25AD%25E3%2582%2592%25E5%258B%2595%25E3%2581%258B%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25A4%259A%25E7%2594%25B0%25E6%25B0%258F%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFUWEFKd3hvZ1pLNDVtSmdsUDlROUZPUTcyRXg4eV9MeFdmejdma0V1aTA9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>多田氏</dc:creator></item><item><title><![CDATA[flarectl で DDNS する]]></title><description><![CDATA[お家の検証サーバ用の備忘録です。基本 root です。
+
+ 前提
+Zero Trust Access Tunnel あれば要らんやんという話もありつつ flarectl を使ってみる感じで。
+
+ flarectlをインストール
+dnf -y install go
+go install github.com/cloudflare/cloudflare-go/cmd/flarectl@latest
+./go/bin/flarectl --version
+# =&gt; flarectl version dev
+
+ API Token を取得
+Cloudflare に登録しているゾーンの編集権...]]></description><link>https://zenn.dev/asterisk9101/articles/cloudflare-1</link><guid isPermaLink="true">https://zenn.dev/asterisk9101/articles/cloudflare-1</guid><pubDate>Mon, 14 Oct 2024 07:03:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--HI1oPQ30--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:flarectl%2520%25E3%2581%25A7%2520DDNS%2520%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25A4%259A%25E7%2594%25B0%25E6%25B0%258F%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFUWEFKd3hvZ1pLNDVtSmdsUDlROUZPUTcyRXg4eV9MeFdmejdma0V1aTA9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>多田氏</dc:creator></item><item><title><![CDATA[sha256sumを用いてファイルの検証をする]]></title><description><![CDATA[
+ 課題
+
+ファイルの内容が同じものかどうかを検査する。
+
+
+ 解決策
+
+ sha256sumコマンドを使用してハッシュ値を取得する
+sha256sumコマンドを使用することで、対象ファイルのハッシュ値を取得することができます。
+対象ファイルの中身が異なる場合にはハッシュ値が異なります。
+試しにテキストファイルを1件作成して動作確認をします。
+$ touch sample.txt
+sha256sumコマンドでハッシュ値を出力します。
+$ sha256sum sample.txt
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991...]]></description><link>https://zenn.dev/kotouchable/articles/a092e46688fd31</link><guid isPermaLink="true">https://zenn.dev/kotouchable/articles/a092e46688fd31</guid><pubDate>Sun, 13 Oct 2024 14:54:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BROLyd-x--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:sha256sum%25E3%2582%2592%25E7%2594%25A8%25E3%2581%2584%25E3%2581%25A6%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2581%25AE%25E6%25A4%259C%25E8%25A8%25BC%25E3%2582%2592%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kotouchable%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJmNzVkNjUxYzAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kotouchable</dc:creator></item><item><title><![CDATA[Fedora40 で HTTPS のウェブサーバを動かす]]></title><description><![CDATA[お家の検証サーバ用の備忘録です。基本 root です。
+
+ 前提
+続きです。
+https://zenn.dev/asterisk9101/articles/fedora40server-1
+
+ ファイアウォールの許可
+http と https のサービスを許可します。
+firewall-cmd --add-service=http --permanent
+firewall-cmd --add-service=https --permanent
+firewall-cmd --reload
+
+ nginx のインストール
+起動して動作確認をします。http で応答があればOK。
+dnf -y...]]></description><link>https://zenn.dev/asterisk9101/articles/fedora40server-5</link><guid isPermaLink="true">https://zenn.dev/asterisk9101/articles/fedora40server-5</guid><pubDate>Sun, 13 Oct 2024 11:10:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6KFMJb9S--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Fedora40%2520%25E3%2581%25A7%2520HTTPS%2520%25E3%2581%25AE%25E3%2582%25A6%25E3%2582%25A7%25E3%2583%2596%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2582%2592%25E5%258B%2595%25E3%2581%258B%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25A4%259A%25E7%2594%25B0%25E6%25B0%258F%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFUWEFKd3hvZ1pLNDVtSmdsUDlROUZPUTcyRXg4eV9MeFdmejdma0V1aTA9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>多田氏</dc:creator></item><item><title><![CDATA[Fedora40 サーバを FreeIPA クライアントにするときのメモ]]></title><description><![CDATA[お家の検証サーバ用の備忘録です。基本 root です。
+
+ 前提
+続きです。
+https://zenn.dev/asterisk9101/articles/fedora40server-1
+Free IPA サーバについては、以下を参照。
+https://zenn.dev/asterisk9101/articles/fedora38server-2
+192.168.1.24 24-fedora40.localdomain.intra が FreeIPA サーバであるとします。
+
+ FreeIPA ドメインへの参加
+Free IPA ドメインの管理者のパスワードを入力します。
+read -...]]></description><link>https://zenn.dev/asterisk9101/articles/fedora40server-4</link><guid isPermaLink="true">https://zenn.dev/asterisk9101/articles/fedora40server-4</guid><pubDate>Sun, 13 Oct 2024 11:10:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--JNhJe9TX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Fedora40%2520%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2582%2592%2520FreeIPA%2520%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25A4%25E3%2582%25A2%25E3%2583%25B3%25E3%2583%2588%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%25E3%2581%25A8%25E3%2581%258D%25E3%2581%25AE%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25A4%259A%25E7%2594%25B0%25E6%25B0%258F%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFUWEFKd3hvZ1pLNDVtSmdsUDlROUZPUTcyRXg4eV9MeFdmejdma0V1aTA9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>多田氏</dc:creator></item><item><title><![CDATA[ジャンクPCにProxmox VEを導入した]]></title><description><![CDATA[
+ はじめに
+最近、コンテナとかVMとかを雑に立てられる環境が欲しいと感じるようになったので、ヤフオクで買ったジャンクのノートPCにProxmox VEを導入しました。
+ある程度使えるようになるまでに行った設定を記録しておきたいと思います。
+
+ヤフオクで買ったジャンクのLet's note（基板のみ）
+余談ですが、購入したのはLet's note CF-SV8 シリーズのマザーボードで、スペックは以下の通りです。
+
+CPU : Core i5-8365U
+RAM : 8GB
+SSD : 256GB（別途購入）
+
+マザーボードをヤフオクにて3000円程度で落札し、これに加えてACアダプタ（...]]></description><link>https://zenn.dev/mikiken/articles/proxmox-introduction</link><guid isPermaLink="true">https://zenn.dev/mikiken/articles/proxmox-introduction</guid><pubDate>Sun, 13 Oct 2024 09:48:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fc1nDbWE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B8%25E3%2583%25A3%25E3%2583%25B3%25E3%2582%25AFPC%25E3%2581%25ABProxmox%2520VE%25E3%2582%2592%25E5%25B0%258E%25E5%2585%25A5%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mikiken%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MwNWE5NjgyMzcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mikiken</dc:creator></item><item><title><![CDATA[[Ubuntu Server] Netplanで仮想ブリッジを作成し、LXCコンテナを外部NWに接続する]]></title><description><![CDATA[
+ やりたいこと
+macvlanのようにコンテナをL2レベルで露出させた上で、ホスト&lt;-&gt;コンテナ間通信を自由に行いたい。
+つまり、Hyper-VでいうところのExternal Switchを構成したい。VMwareでいうところの普通の仮想スイッチ。
+もしも下記に該当する場合は他のやり方で。どちらも仮想ブリッジを挟まないため早い(らしい)です
+
+ホスト&lt;-&gt;コンテナ間の通信が不要: macvlanを使う
+ホストマシンでSR-IOVが使える: SR-IOVを使う
+
+
+ やること
+作成の段階でネットワークが切断されるので注意。直接コンソール接続できる環境でやるのが安心...]]></description><link>https://zenn.dev/note_kdia/articles/56201d7d157bf3</link><guid isPermaLink="true">https://zenn.dev/note_kdia/articles/56201d7d157bf3</guid><pubDate>Sun, 13 Oct 2024 07:58:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4skMk9Pe--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BUbuntu%2520Server%255D%2520Netplan%25E3%2581%25A7%25E4%25BB%25AE%25E6%2583%25B3%25E3%2583%2596%25E3%2583%25AA%25E3%2583%2583%25E3%2582%25B8%25E3%2582%2592%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2597%25E3%2580%2581LXC%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2586%25E3%2583%258A%25E3%2582%2592%25E5%25A4%2596%25E9%2583%25A8NW%25E3%2581%25AB%25E6%258E%25A5%25E7%25B6%259A%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:note_kdia%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0ZnpWX2VBbk5xMUc4T3A5VDZUaE5BSTRRYjljWnZ6NGxLelpNWFcxeE09czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>note_kdia</dc:creator></item><item><title><![CDATA[ローカルAI(Llama)でエラー文を自動で解説させてみた]]></title><description><![CDATA[
+ はじめに
+エラー文を毎回chatGPTにコピペするのが面倒なので、コマンド一発で解説してもらえるようにした。
+chatGPTのAPIを使うと有料になるらしいので、ローカルかつ無料で動かせるLlamaを使った。
+実際のコード↓
+GitHub - LlamaErrorExplainer
+
+ 動作 (2倍速)
+以下のようにシェルにeeと打つことで直前に出たエラーの解説をさせた。
+
+※ GPU使えばもうちょい早くなるかも？
+
+ 環境
+
+
+OS: Windows 10
+
+Dockerコンテナ: Ubuntu 20.04
+
+Ollamaモデル: elyza:jp8b
+
+CPU: 12th Gen...]]></description><link>https://zenn.dev/mentsuyu/articles/dca805568d564e</link><guid isPermaLink="true">https://zenn.dev/mentsuyu/articles/dca805568d564e</guid><pubDate>Sat, 12 Oct 2024 09:21:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4kPg_49n--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25AB%25E3%2583%25ABAI%2528Llama%2529%25E3%2581%25A7%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E6%2596%2587%25E3%2582%2592%25E8%2587%25AA%25E5%258B%2595%25E3%2581%25A7%25E8%25A7%25A3%25E8%25AA%25AC%25E3%2581%2595%25E3%2581%259B%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mentsuyu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS3RFR0ZoS2NmVmFxQlE5SEhUM2lUVm15dm54V1F6N0FVNUM5VEVxN0tkUUJDdj1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mentsuyu</dc:creator></item><item><title><![CDATA[ホスティグ業務で活用しているツールやサービス]]></title><description><![CDATA[この記事は「【ショップオーナー向け】ホスティングサービスの裏側ご紹介 | EC-CUBE名古屋 vol.108」の登壇資料です
+EC-CUBEと切っても切れない関係なのがサーバーです。
+EC-CUBEの開発をする傍らサーバーの運用もするのですが、運用効率向上のために様々なツールを利用しています。
+今回は、EC-CUBEのホスティングサービスでどんなツールやアプリを活用し、日々の保守運用をしているかを、社会見学のようにご説明したいと思います。
+
+ インフラ環境
+
+Microsoft Azure の仮想マシン(IaaS)を使用
+AlmaLinux8 または 9 を利用して、最大10年間のセキ...]]></description><link>https://zenn.dev/nanasess/articles/hosting-tools</link><guid isPermaLink="true">https://zenn.dev/nanasess/articles/hosting-tools</guid><pubDate>Fri, 11 Oct 2024 14:29:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hq6utG7y--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%259B%25E3%2582%25B9%25E3%2583%2586%25E3%2582%25A3%25E3%2582%25B0%25E6%25A5%25AD%25E5%258B%2599%25E3%2581%25A7%25E6%25B4%25BB%25E7%2594%25A8%25E3%2581%2597%25E3%2581%25A6%25E3%2581%2584%25E3%2582%258B%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%25E3%2582%2584%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2593%25E3%2582%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kentaro%2520Ohkouchi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU3ZTBiYjEwMDcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kentaro Ohkouchi</dc:creator></item><item><title><![CDATA[What is Linux VPS? Uses and Benefits Explained]]></title><description><![CDATA[Linux is one of the most versatile and reliable operating systems available today. Its efficiency and adaptability have made it a popular choice in the web hosting industry. Ubuntu, a distribution of Linux, currently holds over 32% of the server OS market share.
+Linux is seen as an ideal web serv...]]></description><link>https://zenn.dev/lulucky/articles/689fc290c54079</link><guid isPermaLink="true">https://zenn.dev/lulucky/articles/689fc290c54079</guid><pubDate>Fri, 11 Oct 2024 10:18:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--09ACVl1h--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:What%2520is%2520Linux%2520VPS%253F%2520Uses%2520and%2520Benefits%2520Explained%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:VPS%2520Pro%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzljMWE1ODU5ZTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>VPS Pro</dc:creator></item><item><title><![CDATA[2023 年10月以降の Mozc に対する主な変更]]></title><description><![CDATA[初稿: 2024-10-10
+小松弘幸 (@komatsuh:bsky, @komatsuh:twitter)
+2023 年 10 月以降の Mozc に対する主な変更をまとめました。ドキュメントやコミットログ、 Issues に書かれているものをまとめただけで新しい情報はありません。抜けているものがあれば後で追記します。
+Mozc の問題の報告や機能の要望等は、GitHub の Issues や Discussions へお願いします。
+
+ 関連記事
+
+2022 年 10 月以降の Mozc に対する主な変更
+2021 年 10 月以降の Mozc に対する主な変更
+2020 年以降の...]]></description><link>https://zenn.dev/komatsuh/articles/komatsuh_mozc_updates_from_2023_10</link><guid isPermaLink="true">https://zenn.dev/komatsuh/articles/komatsuh_mozc_updates_from_2023_10</guid><pubDate>Thu, 10 Oct 2024 14:00:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--WQjsyEfT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:2023%2520%25E5%25B9%25B410%25E6%259C%2588%25E4%25BB%25A5%25E9%2599%258D%25E3%2581%25AE%2520Mozc%2520%25E3%2581%25AB%25E5%25AF%25BE%25E3%2581%2599%25E3%2582%258B%25E4%25B8%25BB%25E3%2581%25AA%25E5%25A4%2589%25E6%259B%25B4%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Hiroyuki%2520Komatsu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RjYTQ4NTllODguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Hiroyuki Komatsu</dc:creator></item><item><title><![CDATA[ECSでNginxコンテナを起動時のexec /docker-entrypoint.sh: exec format error対応]]></title><description><![CDATA[
+ GOAL
+以前、ECRからNginxのイメージを取得して、ECS環境を立ち上げました。
+https://zenn.dev/osachi/articles/5f124f9ca84e25
+次のステップとして、Local環境で利用していたNginxコンテナをイメージ化して、ECS上でひとまず動かすことをGOALとしました。しかし、そこでエラーとなったため、デバッグと解決方法を探しました。
+
+ 前提
+NginxのイメージをBuildして、ECRにPUSHしておく必要があります。
+非常に単純なNginxコンテナ環境を用意します.
+Dockerファイル
+FROM nginx:stable-alp...]]></description><link>https://zenn.dev/osachi/articles/32f61afe7f350f</link><guid isPermaLink="true">https://zenn.dev/osachi/articles/32f61afe7f350f</guid><pubDate>Thu, 10 Oct 2024 06:47:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_PsGPniX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ECS%25E3%2581%25A7Nginx%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2586%25E3%2583%258A%25E3%2582%2592%25E8%25B5%25B7%25E5%258B%2595%25E6%2599%2582%25E3%2581%25AEexec%2520%252Fdocker-entrypoint.sh%253A%2520exec%2520format...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:osachi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS1dQbG9ta3VENjRseUgxcHZnX3BHMjA5cEZQTjM2UGZtN3lzLTNIUVJGPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>osachi</dc:creator></item><item><title><![CDATA[Arch Linux で、誤って amd-ucode パッケージを削除した場合]]></title><description><![CDATA[うっかり amd-ucode パッケージを削除したら、「amd-ucode.img がないぞ!」といったエラーで起動しなくなりました。
+その時のメモです。
+
+
+ Arch Linux の USB メモリから起動
+公式 のやつ。
+
+ まずは、対象のディスクをマウント
+# mkdir /mnt/root
+# mount /dev/nvme0n1p2 /mnt/root
+# mount /dev/nvme0n1p1 /mnt/root/boot
+
+ マウントした環境に chroot で入る
+# arch-chroot /mnt/root
+
+ ついでに、入ったままだった intel-ucode ...]]></description><link>https://zenn.dev/anekos/articles/6bc123f928a635</link><guid isPermaLink="true">https://zenn.dev/anekos/articles/6bc123f928a635</guid><pubDate>Tue, 08 Oct 2024 13:05:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ZtMLp4wO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Arch%2520Linux%2520%25E3%2581%25A7%25E3%2580%2581%25E8%25AA%25A4%25E3%2581%25A3%25E3%2581%25A6%2520amd-ucode%2520%25E3%2583%2591%25E3%2583%2583%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B8%25E3%2582%2592%25E5%2589%258A%25E9%2599%25A4%25E3%2581%2597%25E3%2581%259F%25E5%25A0%25B4%25E5%2590%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:anekos%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dvaWJELTBtZGZDTmswUmFqSTUwaFNEX0c1clowOTV4WFdoZDFCSnc9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>anekos</dc:creator></item><item><title><![CDATA[cronで仮想環境venvのpythonが実行できなかった]]></title><description><![CDATA[
+ 環境
+$ lsb_release -a
+No LSB modules are available.
+Distributor ID: Ubuntu
+Description:    Ubuntu 24.04 LTS
+Release:        24.04
+Codename:       noble
+
+$ python --version
+Python 3.12.3
+
+ やろうとしたこと
+cronでAM10:00にpythonスクリプトを自動実行したかった
+実行したいスクリプトの場所は/home/user/project/script.py
+venvの場所は/home/user/pro...]]></description><link>https://zenn.dev/kaki_xxx/articles/dd2d8664ac7e44</link><guid isPermaLink="true">https://zenn.dev/kaki_xxx/articles/dd2d8664ac7e44</guid><pubDate>Tue, 08 Oct 2024 06:26:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ARuI6Qi_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:cron%25E3%2581%25A7%25E4%25BB%25AE%25E6%2583%25B3%25E7%2592%25B0%25E5%25A2%2583venv%25E3%2581%25AEpython%25E3%2581%258C%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%25A7%25E3%2581%258D%25E3%2581%25AA%25E3%2581%258B%25E3%2581%25A3%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kaki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVhYjc4N2YxNDQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kaki</dc:creator></item><item><title><![CDATA[EndeavourOS の CUI 環境を整えて作業効率を高める]]></title><description><![CDATA[
+ zsh の導入
+$ pacman -Ss zsh
+extra/grml-zsh-config 0.19.2-1
+    grml's zsh setup
+extra/zsh 5.9-1
+    A very advanced and programmable command interpreter (shell) for UNIX
+extra/zsh-doc 5.9-1
+    Info, HTML and PDF format of the ZSH documentation
+community/powerline 2.8.2-4
+    Statusline plugin for...]]></description><link>https://zenn.dev/ymidori/articles/40e021549a7d35</link><guid isPermaLink="true">https://zenn.dev/ymidori/articles/40e021549a7d35</guid><pubDate>Tue, 08 Oct 2024 04:11:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5XDJpDLG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:EndeavourOS%2520%25E3%2581%25AE%2520CUI%2520%25E7%2592%25B0%25E5%25A2%2583%25E3%2582%2592%25E6%2595%25B4%25E3%2581%2588%25E3%2581%25A6%25E4%25BD%259C%25E6%25A5%25AD%25E5%258A%25B9%25E7%258E%2587%25E3%2582%2592%25E9%25AB%2598%25E3%2582%2581%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ymidori%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZlNTMxM2UzOTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ymidori</dc:creator></item></channel></rss>
