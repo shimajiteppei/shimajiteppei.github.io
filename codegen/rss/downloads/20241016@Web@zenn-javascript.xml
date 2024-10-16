@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「JavaScript」のフィード]]></title><description><![CDATA[Zennのトピック「JavaScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/javascript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/64acd76870.png</url><title>Zennの「JavaScript」のフィード</title><link>https://zenn.dev/topics/javascript</link></image><generator>zenn.dev</generator><lastBuildDate>Wed, 16 Oct 2024 00:18:35 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/javascript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[JavaScriptのプロトタイプチェーンをちょっと理解する]]></title><description><![CDATA[
+ 1. はじめに
+JavaScriptはプロトタイプベースのオブジェクト指向言語であり、そのコアにはプロトタイプチェーンという概念が存在します。上級者として、プロトタイプチェーンの内部メカニズムを深く理解することで、コードのパフォーマンス最適化や高度なデザインパターンの実装が可能になります。本記事では、プロトタイプチェーンの詳細とその応用について解説します。
+
+ 2. プロトタイプの基本概念
+
+ __proto__とprototypeの違い
+
+
+__proto__：各オブジェクトが持つ内部プロパティで、そのオブジェクトのプロトタイプを参照します。
+
+prototype：関数オブジェクト...]]></description><link>https://zenn.dev/tcool/articles/a13eb7b43dd7e8</link><guid isPermaLink="true">https://zenn.dev/tcool/articles/a13eb7b43dd7e8</guid><pubDate>Tue, 15 Oct 2024 13:25:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ik4wh32u--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25E3%2581%25AE%25E3%2583%2597%25E3%2583%25AD%25E3%2583%2588%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%2597%25E3%2583%2581%25E3%2582%25A7%25E3%2583%25BC%25E3%2583%25B3%25E3%2582%2592%25E3%2581%25A1%25E3%2582%2587%25E3%2581%25A3%25E3%2581%25A8%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:t-cool%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2liVmViMFdEdFlWcUtvVDRvYktNeDNTUGZvRTVFOW9rNUV0c21Dc2RvPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>t-cool</dc:creator></item><item><title><![CDATA[BunでC言語のコードを実行するFFIの使い方]]></title><description><![CDATA[
+ はじめに
+JavaScriptはウェブ開発で広く使われていますが、場合によっては低レベルの処理や高性能な計算が必要になることがあります。そんなときに役立つのが、C言語との連携です。Bunは高速なJavaScriptランタイムであり、FFI（Foreign Function Interface）をサポートしています。本記事では、JavaScriptプログラマ向けにBunを使ってC言語のコードを実行する方法を解説します。
+
+ FFI（Foreign Function Interface）とは
+FFIは、あるプログラミング言語から別の言語で書かれた関数やライブラリを呼び出すための仕組みです...]]></description><link>https://zenn.dev/tcool/articles/4525aece77bcaf</link><guid isPermaLink="true">https://zenn.dev/tcool/articles/4525aece77bcaf</guid><pubDate>Tue, 15 Oct 2024 13:18:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--yWwmfrD6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Bun%25E3%2581%25A7C%25E8%25A8%2580%25E8%25AA%259E%25E3%2581%25AE%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2582%2592%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%2599%25E3%2582%258BFFI%25E3%2581%25AE%25E4%25BD%25BF%25E3%2581%2584%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:t-cool%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2liVmViMFdEdFlWcUtvVDRvYktNeDNTUGZvRTVFOW9rNUV0c21Dc2RvPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>t-cool</dc:creator></item><item><title><![CDATA[Vueについて②（ファイル、JSのデータ表示方法）]]></title><description><![CDATA[では今回から数回にわたってVueの特徴を見ていきます。
+まず初めにメインファイルはindex.htmlで、その中の
+ &lt;script type="module" src="/src/main.js"&gt;&lt;/script&gt;
+でsrcフォルダのmain.jsのJavaScriptが実行されます。
+ここまでは普通のJavaScript。
+そしてmain.jsの内容は最初に名前付きimport文で
+import { createApp } from 'vue'
+を書き込みます。
+これはViteがnode_modulesの中にあるVueフォルダの中のcreateAppからim...]]></description><link>https://zenn.dev/y_usausa/articles/05d8157740b35a</link><guid isPermaLink="true">https://zenn.dev/y_usausa/articles/05d8157740b35a</guid><pubDate>Tue, 15 Oct 2024 12:35:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_ztc7nRL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Vue%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E2%2591%25A1%25EF%25BC%2588%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2580%2581JS%25E3%2581%25AE%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E8%25A1%25A8%25E7%25A4%25BA%25E6%2596%25B9%25E6%25B3%2595%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nyan_pro%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y2NGRiZDM2ZmIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nyan_pro</dc:creator></item><item><title><![CDATA[JavaScript の Map 型って美味しいの？]]></title><description><![CDATA[
+ JavaScriptのMap型をやさしく解説：初心者向けガイド
+JavaScriptでデータを管理するとき、キーと値のペアを扱うことがよくあります。その際に便利なのが**Map型**です。Mapは、従来のObjectと似ていますが、より柔軟で強力な機能を持っています。
+この記事では、Mapの基本的な使い方から、オブジェクトや配列をキーにする方法、そしてWebプログラミングでの実践的な活用例まで、具体的な例を使ってわかりやすく解説します。
+
+
+ 1. Mapとは何か？
+Mapは、キーと値のペアを管理するデータ構造です。Objectと似ていますが、次のような特徴があります。
+
+
+あらゆる...]]></description><link>https://zenn.dev/tcool/articles/228edb365b1a3a</link><guid isPermaLink="true">https://zenn.dev/tcool/articles/228edb365b1a3a</guid><pubDate>Tue, 15 Oct 2024 12:33:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---IovVdk5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%2520%25E3%2581%25AE%2520Map%2520%25E5%259E%258B%25E3%2581%25A3%25E3%2581%25A6%25E7%25BE%258E%25E5%2591%25B3%25E3%2581%2597%25E3%2581%2584%25E3%2581%25AE%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:t-cool%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2liVmViMFdEdFlWcUtvVDRvYktNeDNTUGZvRTVFOW9rNUV0c21Dc2RvPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>t-cool</dc:creator></item><item><title><![CDATA[JavaScript の Date オブジェクトについてのメモ]]></title><description><![CDATA[
+ 誰向けの記事か
+
+JavaScript 初心者
+タイムゾーンや時差の扱いに困っている方
+
+
+ 結論
+
+Date の実態はタイムゾーンを持たない特定の瞬間
+比較する際には getTime()する
+
+
+ 1. Javascript の Date とは
+注意：個人的な理解に基づいて説明しています。細部で誤りがある可能性があります。
+
+JavaScriptのDate型の実態は、世界協定時間(UTC)の1970年1月1日0時0分0秒から経過したミリ秒数である
+タイムゾーン情報は持たない
+特定の瞬間を表す
+
+MDN の説明：
+
+JavaScript の日付は基本的に、元期として定義される UTC...]]></description><link>https://zenn.dev/t_aburasoba/articles/68562f85e0b4fb</link><guid isPermaLink="true">https://zenn.dev/t_aburasoba/articles/68562f85e0b4fb</guid><pubDate>Tue, 15 Oct 2024 10:14:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--DlM8gQH_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%2520%25E3%2581%25AE%2520Date%2520%25E3%2582%25AA%25E3%2583%2596%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E3%2581%25AE%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:T%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc5YjkzZDVmMWQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>T</dc:creator></item><item><title><![CDATA[Next.jsのエラーハンドリング: サーバーからクライアントまで]]></title><description><![CDATA[
+ 前置き
+Next.js の AppRouter を使いましたが、エラーハンドリング周りでかなり頭を悩ませました。
+調べたりベストな方法がわかりませんでしたが、調べ実際に実装したエラーハンドリングについて記載します。
+もしこうした方が良いなどアイデア等ございましたらご指摘頂けますと幸いです。
+
+ 誰向けの記事か
+Next.js の AppRouter を使っていてエラーハンドリングの方法に迷っている方
+
+ 環境
+"next": "14.2.4"
+"react": "18",
+"typescript": "5",
+
+ 結論
+以下のように実装しました（ベストプラクティスかどうかは分かりませ...]]></description><link>https://zenn.dev/t_aburasoba/articles/63cd8b0b724c7b</link><guid isPermaLink="true">https://zenn.dev/t_aburasoba/articles/63cd8b0b724c7b</guid><pubDate>Tue, 15 Oct 2024 10:10:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0p3QI2Ef--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Next.js%25E3%2581%25AE%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E3%2583%258F%25E3%2583%25B3%25E3%2583%2589%25E3%2583%25AA%25E3%2583%25B3%25E3%2582%25B0%253A%2520%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2581%258B%25E3%2582%2589%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25A4%25E3%2582%25A2%25E3%2583%25B3%25E3%2583%2588%25E3%2581%25BE%25E3%2581%25A7%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:T%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc5YjkzZDVmMWQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>T</dc:creator></item><item><title><![CDATA[JavaScriptで作る！ミニ言語のインタプリタ（５）〜JSONでプログラムを書く〜]]></title><description><![CDATA[
+ はじめに
+前回の記事では、組み込み関数の実装を行い、インタプリタが標準出力などを扱えるように拡張しました。今回は前回予告していた通り、JSON形式のプログラムを読み込んで実行できるようにします。
+これまではJavaScriptで直に抽象構文木を記述していたため、「自作言語のプログラム」を外部に記述することは（evalなどを使わない限り）できませんでした。しかし、今回の拡張によってJSONとしてプログラムを記述しておき、必要に応じて読み込むことができるようになります。
+
+ プログラムの記述例
+まず、前回の記事で扱ったプログラムを再掲します。
+const program = new Pr...]]></description><link>https://zenn.dev/nextbeat/articles/4fba4a70c2a6c3</link><guid isPermaLink="true">https://zenn.dev/nextbeat/articles/4fba4a70c2a6c3</guid><pubDate>Tue, 15 Oct 2024 02:38:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--mamgptHW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25E3%2581%25A7%25E4%25BD%259C%25E3%2582%258B%25EF%25BC%2581%25E3%2583%259F%25E3%2583%258B%25E8%25A8%2580%25E8%25AA%259E%25E3%2581%25AE%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25BF%25E3%2583%2597%25E3%2583%25AA%25E3%2582%25BF%25EF%25BC%2588%25EF%25BC%2595%25EF%25BC%2589%25E3%2580%259CJSON%25E3%2581%25A7%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%25A0%25E3%2582%2592%25E6%259B%25B8%25E3%2581%258F%25E3%2580%259C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:kmizu%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q3MzM5NTFkZmMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:nextbeat%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YlNka1h3ZXdRZENWdDRvbHk0OUkyNkgyNi1IS2k0R2phNGdJdno9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kmizu</dc:creator></item><item><title><![CDATA[学習のすすめになるJS（TypeScript）ライブラリ2選]]></title><description><![CDATA[
+ 素朴なライブラリを読むのは学習に大変おすすめ
+ReactやVueのない純粋なJavaScriptコードを見るのであればこれらの素朴なライブラリをチェックするのは学習の面からとても大変おすすめです。
+そんな初心者や読みやすく、意外に知られていない（筆者も今日知りました）ライブラリをいくつか紹介します。
+これらのコードは1ファイル、index.ts を読むだけで、いわゆるフロントエンドフレームワークやライブラリに左右されない素朴なTypeScript(JavaScript)のコードを見ることができます。
+知られていないといっても開発元はGitHubであり、一定の品質は担保されていると思っ...]]></description><link>https://zenn.dev/osiro/articles/f6bb1748305ce5</link><guid isPermaLink="true">https://zenn.dev/osiro/articles/f6bb1748305ce5</guid><pubDate>Tue, 15 Oct 2024 01:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--EfnsM7KO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%25AD%25A6%25E7%25BF%2592%25E3%2581%25AE%25E3%2581%2599%25E3%2581%2599%25E3%2582%2581%25E3%2581%25AB%25E3%2581%25AA%25E3%2582%258BJS%25EF%25BC%2588TypeScript%25EF%25BC%2589%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA2%25E9%2581%25B8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:webuilder240%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzYxNWM3OGQwOWMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:OSIRO%2520%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE5OWUzODgyNWUuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>webuilder240</dc:creator></item><item><title><![CDATA[今日から使える！TSで簡単に型システムを破壊する方法〜Objectへの動的なアクセス編〜]]></title><description><![CDATA[
+ 前置き
+https://mametter.hatenablog.com/entry/2024/10/07/095302
+こちらの記事を拝見させていただいた後、すぐにTSの型安全じゃない場面に遭遇したのでメモ代わりに。
+今日突然、TSの型システムを破壊したい衝動に駆られた方向けの記事でもあります。
+
+ 簡単に型システムを破壊する例
+type User = {
+  name: string;
+  age: number;
+}
+
+const setAnyKeyToUser = (user: User, key: string, value: string): User =&gt; {
+  ...]]></description><link>https://zenn.dev/yumemi_inc/articles/a0763bd7922830</link><guid isPermaLink="true">https://zenn.dev/yumemi_inc/articles/a0763bd7922830</guid><pubDate>Tue, 15 Oct 2024 00:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---HThEGoO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E4%25BB%258A%25E6%2597%25A5%25E3%2581%258B%25E3%2582%2589%25E4%25BD%25BF%25E3%2581%2588%25E3%2582%258B%25EF%25BC%2581TS%25E3%2581%25A7%25E7%25B0%25A1%25E5%258D%2598%25E3%2581%25AB%25E5%259E%258B%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%25E3%2582%2592%25E7%25A0%25B4%25E5%25A3%258A%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%25E3%2580%259CObject%25E3%2581%25B8%25E3%2581%25AE%25E5%258B%2595%25E7%259A%2584%25E3%2581%25AA%25E3%2582%25A2%25E3%2582%25AF%25E3%2582%25BB%25E3%2582%25B9%25E7%25B7%25A8%25E3%2580%259C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%258A%25E3%2582%2584%25E3%2581%25B3%25E3%2582%2593%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U2MzAxMTgwMzUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2582%2586%25E3%2582%2581%25E3%2581%25BF%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q0MDE2ODAyZjYuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>おやびん</dc:creator></item><item><title><![CDATA[Deno v2がリリース🎉 - Deno v1.0.0の頃からの変化と現在のプラクティスについて]]></title><description><![CDATA[Deno v2が正式にリリースされました🎉
+https://deno.com/blog/v2.0
+https://www.youtube.com/watch?v=d35SlRgVxT8
+この記事では、Deno v1.0.0リリース時点からDeno v2.0.0までのリリースに渡って起きた大きな変更などについて、当時の状況と比較しつつまとめます。
+
+ GoスタイルAPIの見直し - Web標準への準拠を高める
+
+ Deno v1.0.0時点でのDenoのAPIの設計について
+Deno v1.0.0の時点ではDenoにおける様々なAPIやコマンドなどがGoの影響を強く受けていました:
+例)
+...]]></description><link>https://zenn.dev/uki00a/articles/deno-v2-what-has-changed-from-v1</link><guid isPermaLink="true">https://zenn.dev/uki00a/articles/deno-v2-what-has-changed-from-v1</guid><pubDate>Mon, 14 Oct 2024 23:21:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--h-ughzyX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Deno%2520v2%25E3%2581%258C%25E3%2583%25AA%25E3%2583%25AA%25E3%2583%25BC%25E3%2582%25B9%2520%2520-%2520Deno%2520v1.0.0%25E3%2581%25AE%25E9%25A0%2583%25E3%2581%258B%25E3%2582%2589%25E3%2581%25AE%25E5%25A4%2589%25E5%258C%2596%25E3%2581%25A8%25E7%258F%25BE%25E5%259C%25A8%25E3%2581%25AE%25E3%2583%2597%25E3%2583%25A9%25E3%2582%25AF%25E3%2583%2586%25E3%2582%25A3%25E3%2582%25B9%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:uki00a%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhlMzg5NzFkZjkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>uki00a</dc:creator></item><item><title><![CDATA[高階関数(map/filter)]]></title><description><![CDATA[
+ map
+各要素を変更したい配列.map(各要素を変更したい配列の各要素 =&gt; 変更処理);
+→戻り値は、各要素に変更処理が加えられた新しい配列
+
+
+test.js
+let list1 = [1, 2, 3, 4, 5, 6, 7];
+
+console.log(list1.map(x =&gt; x * x));
+// [1, 4, 9, 16, 25, 36,49]
+
+console.log(list1);
+// [1, 2, 3, 4, 5, 6, 7]
+
+
+ filter
+検索対象の配列.filter(検索対象の配列の各要素 =&gt; bool値を返す関数);
+→戻り値は...]]></description><link>https://zenn.dev/417yr/articles/5faa18d4a729c6</link><guid isPermaLink="true">https://zenn.dev/417yr/articles/5faa18d4a729c6</guid><pubDate>Mon, 14 Oct 2024 17:35:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fW1ydlOG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E9%25AB%2598%25E9%259A%258E%25E9%2596%25A2%25E6%2595%25B0%2528map%252Ffilter%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:417yr%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY5NDJhY2ViOTMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>417yr</dc:creator></item><item><title><![CDATA[Biomeを調査してみた。]]></title><description><![CDATA[
+ Biomeとは何か
+公式ドキュメントの最初のページにはこのように書いてありました。
+
+Web開発のためのたった1つのツールチェーン
+
+ざっと見た感じだと、以下のような特徴を持つ。
+
+JavaScript、TypeScript、JSX、JSON、CSS、GraphQLのためのformatter
+Rust製故にかなり高速なformatter
+Prettierとの互換性が97%
+シンプルなオプション設定
+
+公式ドキュメントのトップページスクショしてみた↓
+
+何か良さそうな感じが、ぷんぷんするので早速触ってみます。
+
+ Biomeの導入
+使用FW：Next.js
+IDE：VSCode
+パッケ...]]></description><link>https://zenn.dev/nifumafu/articles/d70f1ea990fe68</link><guid isPermaLink="true">https://zenn.dev/nifumafu/articles/d70f1ea990fe68</guid><pubDate>Mon, 14 Oct 2024 14:49:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--SVx6rF6x--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Biome%25E3%2582%2592%25E8%25AA%25BF%25E6%259F%25BB%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25E3%2580%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Nifumafu%2520%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUVkRlRwNXZVb3ktcF9Nb3FTc3JnQnNIblU1ekN0MnItNWFkRDZoXzNSRGE9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Nifumafu🍊</dc:creator></item><item><title><![CDATA[JavaScript 入門： reducer とは？]]></title><description><![CDATA[JavaScript を勉強していると、reducer(リデューサー) という言葉に出会うことがあります。
+初めて聞いたときは、「これって何？」と思うかもしれませんが、難しいものではありません。
+この記事では、reducer について説明します。
+
+
+ reducer って何？
+「reduce」には「減らす」という意味があります。ここに「-er」が付くことで、「減らすもの」という意味になりますが、具体的には何を減らすのでしょうか？
+JavaScript における reducer は、配列内の複数の要素を1つの値にまとめるための関数です。複数の要素を「まとめる」イメージが、最終的に1つの値...]]></description><link>https://zenn.dev/tcool/articles/18a9291cb35859</link><guid isPermaLink="true">https://zenn.dev/tcool/articles/18a9291cb35859</guid><pubDate>Mon, 14 Oct 2024 14:20:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--WTgY-dEx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%2520%25E5%2585%25A5%25E9%2596%2580%25EF%25BC%259A%2520reducer%2520%25E3%2581%25A8%25E3%2581%25AF%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:t-cool%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2liVmViMFdEdFlWcUtvVDRvYktNeDNTUGZvRTVFOW9rNUV0c21Dc2RvPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>t-cool</dc:creator></item><item><title><![CDATA[Array.slice から始める関数型プログラミング]]></title><description><![CDATA[
+ 関数型プログラミングってなに？
+関数型プログラミング（FP）について簡単に説明します。
+
+
+不変性（Immutability）：データを直接変更せず、新しいデータを作ること。
+
+純粋関数（Pure Function）：同じ入力に対して常に同じ出力を返し、他のデータに影響を与えない関数。
+
+関数型プログラミングでは、不変性を保つことでコードの予測がしやすくなり、バグを減らすことができます。
+
+ なぜ配列をコピーする必要があるの？
+配列を直接変更すると、思わぬところで問題が起きることがあります。
+例：
+const numbers = [1, 2, 3];
+
+function addNum...]]></description><link>https://zenn.dev/tcool/articles/bca2db1f713640</link><guid isPermaLink="true">https://zenn.dev/tcool/articles/bca2db1f713640</guid><pubDate>Mon, 14 Oct 2024 13:19:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--PqrXwrL_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Array.slice%2520%25E3%2581%258B%25E3%2582%2589%25E5%25A7%258B%25E3%2582%2581%25E3%2582%258B%25E9%2596%25A2%25E6%2595%25B0%25E5%259E%258B%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%259F%25E3%2583%25B3%25E3%2582%25B0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:t-cool%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2liVmViMFdEdFlWcUtvVDRvYktNeDNTUGZvRTVFOW9rNUV0c21Dc2RvPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>t-cool</dc:creator></item><item><title><![CDATA[JavaScript 入門 - Array.from]]></title><description><![CDATA[本記事では、JavaScript の Array.fromの使い方を解説します。
+
+ 結論： Array.fromとは？
+まず結論をいうと、JavaScript の Array.fromメソッドは、配列のようなオブジェクトを本物の配列に変換するためのメソッドです。
+配列のようなオプジェクトとは、以下のようなオブジェクトです。
+
+
+配列風のオブジェクト：argumentsオブジェクトやNodeListなど。
+
+
+反復可能なオブジェクト：SetやMapなど。
+
+
+Array.fromは、ES6（ECMAScript 2015）で導入された静的なメソッドで、次のような用途で使用されます：
+
+ ...]]></description><link>https://zenn.dev/tcool/articles/0095a923db51ab</link><guid isPermaLink="true">https://zenn.dev/tcool/articles/0095a923db51ab</guid><pubDate>Mon, 14 Oct 2024 12:11:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--k3Ts5IuD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:JavaScript%2520%25E5%2585%25A5%25E9%2596%2580%2520-%2520Array.from%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:t-cool%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2liVmViMFdEdFlWcUtvVDRvYktNeDNTUGZvRTVFOW9rNUV0c21Dc2RvPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>t-cool</dc:creator></item><item><title><![CDATA[Cache の match() は O(N) の場合がある]]></title><description><![CDATA[
+ tl; dr
+Chrome の Cache の match() に { ignoreSearch: true } を渡すと実行時間が O(N) になる。
+
+ 詳細
+Cache はHTTPレスポンスを端末内にキャッシュする時に使われるインターフェースです。Cache の match() メソッドは、リクエストをキーにしてレスポンスを検索し、該当するレスポンスがあればそれを返します。通常、クエリストリングが異なる 2 つのリクエストは異なるものとして扱われますが、オプションとして { ignoreSearch: true } を渡すとクエリストリングの違いを無視して一致判定が行われます。...]]></description><link>https://zenn.dev/ykiu/articles/749531360473e8</link><guid isPermaLink="true">https://zenn.dev/ykiu/articles/749531360473e8</guid><pubDate>Mon, 14 Oct 2024 07:32:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--M01FCWNP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Cache%2520%25E3%2581%25AE%2520match%2528%2529%2520%25E3%2581%25AF%2520O%2528N%2529%2520%25E3%2581%25AE%25E5%25A0%25B4%25E5%2590%2588%25E3%2581%258C%25E3%2581%2582%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ykiu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsveS5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ykiu</dc:creator></item><item><title><![CDATA[JavaScriptのProxyを使うときに気をつけること]]></title><description><![CDATA[本稿では、Proxyを使う際はオブジェクトの原理をよく理解した上で、PreventExtensions時の挙動とPrivate Identifierに気をつけましょうという話をします。
+
+ そもそもProxyは何なのか
+Proxy は Reflect と対をなすプリミティブAPIで、オブジェクトの低レベルプロトコルの操作を提供します。
+
+Proxyは、オブジェクトの低レベルプロトコルをユーザーが実装できるようにします。
+Reflectは、オブジェクトの低レベルプロトコルをユーザーが利用できるようにします。
+
+そのため、Proxyを理解するにはまずオブジェクトの低レベルプロトコルを理解する...]]></description><link>https://zenn.dev/qnighy/articles/5562746d52712f</link><guid isPermaLink="true">https://zenn.dev/qnighy/articles/5562746d52712f</guid><pubDate>Mon, 14 Oct 2024 06:03:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5vquzDn2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25E3%2581%25AEProxy%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%25E3%2581%25A8%25E3%2581%258D%25E3%2581%25AB%25E6%25B0%2597%25E3%2582%2592%25E3%2581%25A4%25E3%2581%2591%25E3%2582%258B%25E3%2581%2593%25E3%2581%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Masaki%2520Hara%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2l3aEI4dTM5cFZyM09sWVFLcUU5Z1ozV2d3MHlsMS03cUZad0huYWc9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Masaki Hara</dc:creator></item><item><title><![CDATA[Cloudflare環境ではNode.jsに依存したモジュールは使えない]]></title><description><![CDATA[まあその通りっちゃその通りなのですが、先日特に何も確認せずにbcryptをimportした状態でビルドし、wrangler pages devを行うと下記のエラーが発生しました。
+
+ ⛅️ wrangler 3.80.0 (update available 3.80.4)
+-------------------------------------------------------
+
+✘ [ERROR] Could not resolve "fs"
+
+    ../node_modules/.pnpm/@mapbox+node-pre-gyp@1.0.11/node_modules/@m...]]></description><link>https://zenn.dev/matty5791/articles/351f160e7224ef</link><guid isPermaLink="true">https://zenn.dev/matty5791/articles/351f160e7224ef</guid><pubDate>Mon, 14 Oct 2024 05:18:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qfqY88c6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Cloudflare%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25A7%25E3%2581%25AFNode.js%25E3%2581%25AB%25E4%25BE%259D%25E5%25AD%2598%25E3%2581%2597%25E3%2581%259F%25E3%2583%25A2%25E3%2582%25B8%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%25AF%25E4%25BD%25BF%25E3%2581%2588%25E3%2581%25AA%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Matthew%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzcyZDEyYjhmN2YuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Matthew</dc:creator></item><item><title><![CDATA[画像をドラッグ&ドロップした際に、ダウンロードさせない方法]]></title><description><![CDATA[アップロードした画像が横一列に並んでいて、それをドラッグ&amp;ドロップで並び替えるUIを実装する機会がありました。
+ライブラリを使わずに実装したのですが、ハマった箇所があったのでメモ書きがてら書き残しておきます。
+※業務で実装した際ははReactで実装していますが、解決策がhtml並びにcssの問題なので、
+今回の記事ではReactを使わずに実装をしています。
+
+ 完成形
+こちら(playcode.io)でコード並びにUIが見れます。
+※ハマった箇所が画像をアップロードするところではなく、
+ドラッグ&amp;ドロップの挙動を作る箇所でしたので、
+画像がドラッグ&amp;ドロップで移動...]]></description><link>https://zenn.dev/ohimusdev46301/articles/1e0452489b37c7</link><guid isPermaLink="true">https://zenn.dev/ohimusdev46301/articles/1e0452489b37c7</guid><pubDate>Mon, 14 Oct 2024 02:40:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2x99WnXW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%2594%25BB%25E5%2583%258F%25E3%2582%2592%25E3%2583%2589%25E3%2583%25A9%25E3%2583%2583%25E3%2582%25B0%2526%25E3%2583%2589%25E3%2583%25AD%25E3%2583%2583%25E3%2583%2597%25E3%2581%2597%25E3%2581%259F%25E9%259A%259B%25E3%2581%25AB%25E3%2580%2581%25E3%2583%2580%25E3%2582%25A6%25E3%2583%25B3%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2589%25E3%2581%2595%25E3%2581%259B%25E3%2581%25AA%25E3%2581%2584%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Wataru%2520Takiguchi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdkOTBhM2EyYTcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Wataru Takiguchi</dc:creator></item><item><title><![CDATA[可変オブジェクトと不変オブジェクト]]></title><description><![CDATA[
+ 【概要】
+オブジェクトには可変オブジェクトと不変オブジェクトがある
+可変オブジェクト（mutable object）：オブジェクト自体に変更を加えることができる
+不変オブジェクト（immutable object）：オブジェクト自体に変更を加えることができない
+
+
+ 【不変オブジェクトについて】
+不変オブジェクトの一つである、JavaScriptの文字列オブジェクトを例とする
+
+JavaScriptの文字列は不変です。つまり、一度文字列が作成されると、それを変更することはできません。文字列メソッドは、現在の文字列の内容に基づいて新しい文字列を作成します。
+
+
+ 不変オブジェクトの場合...]]></description><link>https://zenn.dev/417yr/articles/01a7a236ee71fe</link><guid isPermaLink="true">https://zenn.dev/417yr/articles/01a7a236ee71fe</guid><pubDate>Sun, 13 Oct 2024 08:28:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--KaijgNJH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%258F%25AF%25E5%25A4%2589%25E3%2582%25AA%25E3%2583%2596%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E3%2581%25A8%25E4%25B8%258D%25E5%25A4%2589%25E3%2582%25AA%25E3%2583%2596%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:417yr%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY5NDJhY2ViOTMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>417yr</dc:creator></item></channel></rss>
