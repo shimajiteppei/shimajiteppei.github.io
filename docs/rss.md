@@ -11,6 +11,15 @@ GitHub Actionsで定期的にRSSを購読する[osmos::feed](https://github.com/
 
 ## Rust
 
+### 20241017
+
+- [Dev ContainerでTauriの開発環境を作る](https://zenn.dev/hkthirano/articles/122b36a6585120)
+- [Rustの時間に関するクレート2：chronoメモ [blessed.rsシリーズ28]](https://zenn.dev/kotabrog/articles/739fca6419153a)
+- [備忘録: Diesel入門](https://zenn.dev/oksongh/articles/hello-diesel)
+- [開発用適当ツールは Rust で作るのもオススメ](https://zenn.dev/codemountains/articles/0d3831c10c46b8)
+- [#03 Rust &amp; WebAssembly 構築メモ](https://zenn.dev/yurioka/articles/3649c5190e33bc)
+- [RustでDFS(深さ優先探索)](https://zenn.dev/ahoxa1rx/articles/0126aea8f474ed)
+
 ### 20241016
 
 - [RustでDFS(深さ優先探索)](https://qiita.com/raiga0310/items/07cb3c56049b8b93ad66)
@@ -236,12 +245,21 @@ GitHub Actionsで定期的にRSSを購読する[osmos::feed](https://github.com/
 - [Rust＋Locoでサービス開発してShuttleにデプロイまで試してみる](https://qiita.com/goosys/items/c71b0e5c26b93bb16054)
 - [axumで単一パラメータのQueryパースに失敗する](https://qiita.com/hrtk91/items/f6cc1fdc573f5abd13d7)
 - [AVR-Rust 開発環境構築 2 (avr-hal, ATmega 編)](https://qiita.com/BerandaMegane/items/8d92111170d78d9343ad)
-- [BoundRef&lt;&#39;_, &#39;_, PyType&gt; not implemented](https://qiita.com/chiveslimey/items/3e501fce6c102423afbb)
-- [cargo-wasixでファイルの読み書きをするWasmプログラムを作成する](https://zenn.dev/laiso/articles/c675d3a8762a58)
-- [RustのDockerイメージビルドを高速にする](https://zenn.dev/htlsne/articles/rust-build-image-faster)
 
 
 ## Java
+
+### 20241017
+
+- [【Java】Stringクラスのメソッド](https://qiita.com/mozuku_com/items/3ed9bf3676bd65557da4)
+- [Yellowfin9.13からのカスタム日付関数の作成](https://qiita.com/celery/items/50c3d9c150e8b9141bbc)
+- [[最新LTS] Java 21 では何が変わったのか？新機能3つを紹介](https://qiita.com/e-tak/items/13d49a772f474c2dc4e3)
+- [引数指定時に条件判定](https://qiita.com/pesysyon/items/f603afef3604ce7221f2)
+- [KotlinでUnion-Find木を実装](https://qiita.com/kitasann-blog/items/00153672bcbf645d30ca)
+- [[Kotlin]インターバルタイマーを作ってみた！ part3 タイマー処理編[初心者]](https://qiita.com/Progress_Satetu-Hokkairo/items/b1052c287a0cf474e0f0)
+- [Java spring bootログ出力 Apache Log4j2](https://zenn.dev/sanagi/articles/e8e95ed2af9139)
+- [KotlinのCIをキャッシュと実行制御で60%削減した](https://zenn.dev/loglass/articles/refactor-kotlin-ci)
+- [[趣味開発]タスク管理通知アプリの開発 実機確認編](https://zenn.dev/yydevelop/articles/8190a6e8ed24a9)
 
 ### 20241016
 
@@ -551,13 +569,31 @@ GitHub Actionsで定期的にRSSを購読する[osmos::feed](https://github.com/
 - [Stack (データ構造）](https://qiita.com/sss2013/items/623a7fff156e95fe029a)
 - [User Managed ID を使用してセキュアに Azure Container Apps から Azure OpenAI へ接続](https://qiita.com/yoshioterada/items/412de31e3f79d3875823)
 - [TextFieldの下線の幅(長さ)を変更したい](https://qiita.com/naka-toString/items/d49b9bc63d7696755c22)
-- [Kotlin/Native で生成したSwiftコード を Xcodeプロジェクトに取り入れてみる](https://qiita.com/kk__777/items/4113d798035f5cb465fc)
-- [ラベルの使い方](https://qiita.com/yuta-10112022/items/c0855c06a76b10f91976)
-- [TextFieldのPlaceholderを表示させたい](https://qiita.com/naka-toString/items/26520314269f8c01ba91)
 - [Javaのフレームワークを使用せずに、キューを連結リストで実装](https://zenn.dev/tech_mico/articles/aae09ebe209126)
 
 
 ## Linux
+
+### 20241017
+
+- [Cloudflare tunnelとミニPCを使ってGoogleフォトライクな写真管理サーバをセルフホストする](https://qiita.com/muhi111/items/7a3a5aa2217fed9adb06)
+- [Laravel環境を作るときにLaravelのバージョンを指定する方法](https://qiita.com/curacao/items/7ee3049e2e67fd706220)
+- [地域インターネットレジストリデータをネットワークアドレスに変換する](https://qiita.com/pipito-yukio/items/b90b34daf09d455ddee1)
+- [【個人開発】カレンダーの予定ごとにチャットすることができるアプリ開発 【Next.js, TypeScript, Python, Flask, Docker】](https://qiita.com/ryoma_itngineer/items/1a45121a2317b47d2003)
+- [linuxとcmdのコマンド比較について(著者: chatGPT-o1-mini)](https://qiita.com/garchomp_otoka/items/8adf631e3d5eb461e5fc)
+- [テキストインターフェイス By Python](https://qiita.com/kawamo55/items/9a1ffb7a5de6ce288be3)
+- [Linux Server環境にAnaonda3のインストール手順](https://qiita.com/tikeda123/items/800e3348fb31bfeb0bc0)
+- [コマンドのPATHが通っていない時に確認すること](https://qiita.com/hoyat4967/items/3e1846aa3a0fdae2ebf8)
+- [【2024年度】私の最強のdotfilesとセットアップ方法](https://qiita.com/Rockreeee/items/e59b1c4c764d4079c657)
+- [シェルスクリプトの文字列に色をつけよう](https://qiita.com/s_horikoshi/items/5b41dfcfb63133cbc38f)
+- [【Mac】コマンドで動画をGIFに変換する方法](https://qiita.com/P-man_Brown/items/7778cb0df5a76fd38045)
+- [Ubuntu マシンを 簡単にルーター化](https://qiita.com/nanbuwks/items/4396aaa627b3f6ee9c80)
+- [AWS EC2インスタンスのUbuntu初期セットアップガイド](https://qiita.com/tikeda123/items/2f59a30c8af6bce466c5)
+- [非スーパーユーザでも Docker コマンドを実行する方法](https://qiita.com/Natu_ja/items/3482f0382988810357ae)
+- [WSLにおけるCUDAのインストール](https://qiita.com/sophytoeat/items/4c1de042c85e859c7cc8)
+- [Dev ContainerでTauriの開発環境を作る](https://zenn.dev/hkthirano/articles/122b36a6585120)
+- [【vultr×Dify】でプライベートなAI環境構築](https://zenn.dev/antapp/articles/383660cf919090)
+- [sudoを忘れて怒られてしまったら、びっくり（!!）すればいい](https://zenn.dev/harupong/articles/24df32dc6826cb)
 
 ### 20241016
 
@@ -1119,9 +1155,6 @@ GitHub Actionsで定期的にRSSを購読する[osmos::feed](https://github.com/
 ### 20240916
 
 - [node.jsのDocker環境を作成する](https://qiita.com/Yt330110713/items/0191ebaddeddad906b84)
-- [LaravelとReactで画像アップロードを作成する](https://qiita.com/keitaMax/items/8046b1ff563437293aed)
-- [GitHub Actionsをローカル実行できるactについて簡易解説](https://qiita.com/kaminuma/items/37838dd31aca91944453)
-- [Dockerの基本コマンド](https://qiita.com/nana-solid/items/6e21302e60b23c4e24d0)
 - [linuxシステムでリバース・エンジニアリング](https://qiita.com/fygar256/items/34f0cc8d4989ffb4f3d0)
 - [Arch Linuxでキーマップをカスタマイズする](https://qiita.com/gee/items/c950241e0634bb6b32f9)
 - [qemu](https://qiita.com/ikegami-t/items/2a29d54bd426c41eff77)
@@ -1130,23 +1163,29 @@ GitHub Actionsで定期的にRSSを購読する[osmos::feed](https://github.com/
 - [ssh接続時に表示される最終ログイン情報を増やしたい](https://qiita.com/qb96messy/items/b8b512f02b54717b4d7c)
 - [Windows -&gt; Ubuntu pingは飛ぶのにsshできないとき](https://qiita.com/kazunosuke1108/items/fe2791cd2d3d04bcf607)
 - [C++ の勉強 ⑥ またまた配列。でも、新しめのarray、mapを使ってみた](https://qiita.com/jamjam/items/d3292de1dfcca20a0a6f)
-- [EC2 amazon linux にPythonを入れてみよう　入門](https://qiita.com/Code-999waltz/items/cc86cba84b3e4c52ef45)
-- [Ubuntu24.04でIsacSimを動かそうとした話② サンプル読み込み編](https://qiita.com/Dennou_yugi/items/92d511e71b780773d2d1)
 - [docker runで-itオプションをつけてもコンテナが終了する理由](https://zenn.dev/nanasi_1/articles/31bd0243c0c02e)
 - [[Tips] Fast Map Matching の Docker環境](https://zenn.dev/takilog/articles/35d52fde4dd8f0)
 - [Dockerfileについてやる](https://zenn.dev/shobute/articles/6f53cc8b7f32d5)
 - [Podman Desktop（Windows）のコンテナを docker コマンドで操作する](https://zenn.dev/negokaz/articles/8e0e3cadd20246)
-- [【簡単3分】Rails ConsoleでRedisにセッションデータを確認する具体例を紹介‼️🍜](https://zenn.dev/take_tech/articles/d1de725fd9d482)
-- [NGINX +PHP-FPM (Laravel)を仮想マシンで動かす場合と仮想マシンの上でコンテナ立てて動かす時のレスポンスタイム比較](https://zenn.dev/coffee_r/articles/f704f6460f2fa5)
-- [RustのDockerイメージビルドを高速にする](https://zenn.dev/htlsne/articles/rust-build-image-faster)
-- [Next.js × Nest.jsの環境をDockerで作成する](https://zenn.dev/deguchihi/articles/406610ceb2fb1f)
-- [API GatewayとLambdaでReactをホスティングする](https://zenn.dev/t_o_m_o/articles/6c71e03def4346)
 - [QEMU で x86_64 Linux 環境を構築する](https://zenn.dev/sankantsu/articles/e213afb3eb76c7)
 - [【自分用】過去使用したリンクまとめ](https://zenn.dev/gapteeth/articles/4bbed0584e2120)
 - [📝 Redmine 環境構築手順](https://zenn.dev/kotetsu_muscle/articles/ad0aefe1cda8e3)
 
 
 ## Python
+
+### 20241017
+
+- [cannot import name　の解決方法一覧　（特に別フォルダのモジュールを参照したい時）](https://qiita.com/hayasheesh/items/cf79d196cb2a3a9473b7)
+- [「令和5年二級建築士試験学科Ⅲ（建築構造）〔Ｎｏ．３〕」単純梁の一部にかかる等分布荷重をsympyのBeamでやってみた。](https://qiita.com/mrrclb48z/items/10617ab842c25bbfcfaf)
+- [[python]Flaskで作る簡単な連絡先管理アプリと、HTML・CSS分離によるコードの管理](https://qiita.com/mnoguchi/items/1a4181b5a46d931c3a01)
+- [地域インターネットレジストリデータをネットワークアドレスに変換する](https://qiita.com/pipito-yukio/items/b90b34daf09d455ddee1)
+- [LeetCode #21 Merge Two Sorted Lists](https://zenn.dev/pirika/articles/a2351120bfd63e)
+- [LeetCode #257 Binary Tree Paths](https://zenn.dev/pirika/articles/2140a96deb614f)
+- [Pythonにおけるログ出力について - print関数とloggingモジュールの比較 -](https://zenn.dev/ykmra/articles/f23beef0294790)
+- [uv で poetry の virtualenvs.create false と同じことをする](https://zenn.dev/yamasakit/articles/0493168d963376)
+- [【初心者向け】Pythonの無名関数（ラムダ式）をわかりやすく解説（map関数、filter関数、sorted関数の説明も）](https://zenn.dev/yogurt/articles/d28d862eed8ddf)
+- [[LangChain] Tool Calling 入門](https://zenn.dev/pharmax/articles/1b351b730eef61)
 
 ### 20241016
 
@@ -1648,19 +1687,27 @@ GitHub Actionsで定期的にRSSを購読する[osmos::feed](https://github.com/
 - [React + FastAPIでファイルアップロード機能作ってみた](https://zenn.dev/ttr0108/articles/729636bf9f8b98)
 - [【ハンズオン】 LINE Bot つくってみた！](https://zenn.dev/kr_aws/articles/2f3390bb81cd5e)
 - [[Python]フォルダー構成を考える](https://zenn.dev/xoxo/articles/8c7ef6e1141ddc)
-- [【python-yeelight】discover_bulbs() が [] になる問題を解決する](https://zenn.dev/sharl/articles/db377c400526d1)
-- [【ChatGPT】MisskeyでTRPG botを作って遊ぶ](https://zenn.dev/tar_bin/articles/ff6d272ede9fb8)
-- [PythonでBrainfuckインタプリタを作る](https://zenn.dev/plhr7/articles/7ac5b66085bacc)
-- [データ分析 重回帰分析 実践1](https://zenn.dev/longbridge/articles/c5f8602fddbc2f)
-- [API GatewayとLambdaでReactをホスティングする](https://zenn.dev/t_o_m_o/articles/6c71e03def4346)
-- [Pydanticで特定のキーの値によってそれ以外のキーに異なるデフォルト値を設定する](https://zenn.dev/sirasagi62/articles/841313c53ac724)
-- [LangChainによるデータ分析レポーティング](https://zenn.dev/headwaters/articles/80b35ff5f096a3)
-- [データ分析 質的変数（カテゴリカル変数）を数値に変換](https://zenn.dev/longbridge/articles/7207826f3ddee8)
-- [[Python]Pythonプロジェクトの作成](https://zenn.dev/xoxo/articles/631498b25830b9)
-- [OCR vs OpenAIで表を解析してみた！精度の比較と課題を徹底検証](https://zenn.dev/ogiki/articles/cfedae3377f749)
 
 
 ## Web
+
+### 20241017
+
+- [[python]Flaskで作る簡単な連絡先管理アプリと、HTML・CSS分離によるコードの管理](https://qiita.com/mnoguchi/items/1a4181b5a46d931c3a01)
+- [【アクセシビリティ】　tabindexを使ってタブキーでフォーカス移動できるようにする方法](https://qiita.com/ogawa_slj/items/8ce5339277aebc8a302c)
+- [Storybookのストーリー数の数え方](https://qiita.com/ljourm/items/191db17b9bc78755a040)
+- [TypeScriptの型まとめ(2024年10月) - ちょっとだけkintone](https://qiita.com/IshigiwaKenichiro/items/dbbbd0d6bee111cc48ca)
+- [Vue.js3で「ctrl+z」「ctrl+shift+z」の処理を実装する](https://qiita.com/shin-gee/items/4b7818105c5b20d8ed28)
+- [Reactで、Featuresにスタイルを持たないようにしてみた](https://qiita.com/dbxkazuxdb/items/3b6a39ed35527ca88494)
+- [【個人開発】カレンダーの予定ごとにチャットすることができるアプリ開発 【Next.js, TypeScript, Python, Flask, Docker】](https://qiita.com/ryoma_itngineer/items/1a45121a2317b47d2003)
+- [Reactでブログサイトを構築してみるー技術選定までー](https://qiita.com/otaruit/items/fee22efa04c77f90b86c)
+- [CSS gridでネストした&lt;div&gt;を使っても良い](https://zenn.dev/richardimaoka/articles/73dac7140d18e5)
+- [【CSS】便利だなと思ったCSS Gridの使い方を紹介！](https://zenn.dev/lifemap/articles/css-grid-tips)
+- [Vueについて③（クリック時の処理とリアクティビティ）](https://zenn.dev/y_usausa/articles/bc10e76a7e8a7e)
+- [Programmable Search Engineで入力欄が複数](https://zenn.dev/cyocun/articles/e70aed9e62045b)
+- [k6 DevTools recorder を使ってみた](https://zenn.dev/z63d/articles/0da90534fe5964)
+- [その js の設定ファイル補完効くかもよ](https://zenn.dev/k0rosuke/articles/35e1fbd83719a0)
+- [【TypeScript】ユーティリティ型のReturnTypeをConditional Typesで再定義してinferを理解する](https://zenn.dev/ujita/articles/b88a5d513c2f27)
 
 ### 20241016
 
@@ -2450,11 +2497,8 @@ GitHub Actionsで定期的にRSSを購読する[osmos::feed](https://github.com/
 
 - [初学者向け text-alignについて](https://qiita.com/toke04/items/3ccbaac8726925be02d9)
 - [入力フォームを画面中央に縦に配置する方法](https://qiita.com/toke04/items/5002e979f98872c96bd2)
-- [CSSでバツの描き方](https://qiita.com/hiderits8/items/22afbb34714f1ebefb21)
 - [Angular のスタイルカプセル化とinnerHTML のサニタイズについて少し理解を深めるまで](https://qiita.com/magurouhiru/items/afa7eaba4562f208a984)
 - [role属性とは、aria-*属性とは、WAI-ARIAとは、いったい何なのか、いつ使うべきなのか](https://qiita.com/ymrl/items/6c9c059208ea11e6d7bc)
-- [[CSS] backdrop-filterを設定する場所に気を付ける　backdrop-filterの適用にラグがあるときの改善策](https://qiita.com/ya_n_n/items/5bd5fc75466c1bd3cb54)
-- [プログラミング学習とテレビゲームの戦い方の共通点～初学者の知恵～](https://qiita.com/pila-suzuki/items/2404ae12020689a2c77b)
 - [シンプルでありながら強力な方法。Three.js使用によるカスタムシェーダーの実装。](https://qiita.com/muratatetsutaka84/items/ba73cc251e3ee6ac01c0)
 - [【TypeScript + Vite】今すぐ誰でも、ローカルで GoogleAppsScript の開発を始められるテンプレート (初心者向け)](https://qiita.com/Ryo-Nakano/items/6aef637ecb0b77746f73)
 - [wikidata からmermaid記法で家系図を作成（ブラウザ版）](https://qiita.com/wonox/items/87501b36b59ccead9f5b)
@@ -2462,23 +2506,12 @@ GitHub Actionsで定期的にRSSを購読する[osmos::feed](https://github.com/
 - [Vitest テストで表示を検証する際に注意すること](https://qiita.com/Bucchi7/items/60f9433c9c1cdcb4c040)
 - [【expo】expo-locationの位置情報取得が遅い問題](https://qiita.com/Mayoneeeez/items/d97313fdde76fbbb7230)
 - [Typescript✖️Reactのプロジェクトを作成する](https://qiita.com/masa_code/items/e6a1ded7a3967a821822)
-- [【Web】How to preview a HTML file without building a server](https://zenn.dev/yuto_mo/articles/8155ae05d9be02)
 - [Elysia.jsを始める【Life Cycle】](https://zenn.dev/69incat/articles/639cf1d3e3ff8c)
 - [Jotaiはどのようにして誕生したのか、単なるRecoilの代替手段なのか？](https://zenn.dev/dai_shi/articles/f770b771b75f73)
 - [【JavaScript】なんやこの記法...！「~indexOf()」ビット否定演算子](https://zenn.dev/takada/articles/js-tilde_usage)
-- [関数に引数を渡す場合のイベントハンドラ](https://zenn.dev/052222/articles/552850bab378c4)
-- [Mapbox Newsletter WEEKLY TIPSの解説 -「GeoJSONラインを追加」](https://zenn.dev/mapbox_japan/articles/ef21e5f32d6cbf)
-- [org-babelでJavaScriptを実行しようとすると&#34;command not found: node&#34; エラーになる](https://zenn.dev/ikoamu/articles/c4cf690c4777e3)
-- [【JavaScript・TypeScript】配列の操作はなるべくfor文を避けるべきと思う理由と代わりに使うメソッドの例](https://zenn.dev/ohimusdev46301/articles/960cd3bc35478d)
 - [はじめてのGmailアドオン：Apps ScriptとVertex AI (Gemini)でメール要約AIアシスタントを作ろう](https://zenn.dev/hosaka313/books/6092471ac8bf38)
 - [React + FastAPIでファイルアップロード機能作ってみた](https://zenn.dev/ttr0108/articles/729636bf9f8b98)
 - [TypeScriptでポリモーフィズム入門〜関数型スタイル編〜](https://zenn.dev/trape_inc/articles/98769cb21e2741)
 - [Vue3×TypeScriptでポケモン図鑑作ってみた](https://zenn.dev/souemon/books/2054148f022328)
-- [canvasを動的にリサイズさせる](https://zenn.dev/rerrah/articles/2195b607c7af98)
-- [Angular（RxJS）でよく使っているオペレータたち](https://zenn.dev/ryoooosk/articles/9e180ce27633e0)
-- [ESLintからBiomeへの移行時に特に差分があったexhaustive-depsの挙動について](https://zenn.dev/okkun/articles/9fd3cc710d6bc1)
-- [Prismaのクエリ情報から型定義を取得する](https://zenn.dev/yasuakiomokawa/articles/afa2a0e1f49c06)
-- [ChatGPT (o1-preview) にテストを渡してコードを実装させるとどうなるか試した](https://zenn.dev/sterashima78/articles/2b6fafc86415b6)
-- [Prisma開発者必見！zod-prisma-typesが生成する3つのスキーマの使い方](https://zenn.dev/yuki_fujisawa/articles/62186a5492bdb9)
 
 

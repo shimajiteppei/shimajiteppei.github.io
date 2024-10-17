@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「HTML」のフィード]]></title><description><![CDATA[Zennのトピック「HTML」のRSSフィードです]]></description><link>https://zenn.dev/topics/html</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/171432f5a6.png</url><title>Zennの「HTML」のフィード</title><link>https://zenn.dev/topics/html</link></image><generator>zenn.dev</generator><lastBuildDate>Thu, 17 Oct 2024 03:30:34 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/html/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[画像をドラッグ&ドロップした際に、ダウンロードさせない方法]]></title><description><![CDATA[アップロードした画像が横一列に並んでいて、それをドラッグ&amp;ドロップで並び替えるUIを実装する機会がありました。
+ライブラリを使わずに実装したのですが、ハマった箇所があったのでメモ書きがてら書き残しておきます。
+※業務で実装した際ははReactで実装していますが、解決策がhtml並びにcssの問題なので、
+今回の記事ではReactを使わずに実装をしています。
+
+ 完成形
+こちら(playcode.io)でコード並びにUIが見れます。
+※ハマった箇所が画像をアップロードするところではなく、
+ドラッグ&amp;ドロップの挙動を作る箇所でしたので、
+画像がドラッグ&amp;ドロップで移動...]]></description><link>https://zenn.dev/ohimusdev46301/articles/1e0452489b37c7</link><guid isPermaLink="true">https://zenn.dev/ohimusdev46301/articles/1e0452489b37c7</guid><pubDate>Mon, 14 Oct 2024 02:40:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2x99WnXW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%2594%25BB%25E5%2583%258F%25E3%2582%2592%25E3%2583%2589%25E3%2583%25A9%25E3%2583%2583%25E3%2582%25B0%2526%25E3%2583%2589%25E3%2583%25AD%25E3%2583%2583%25E3%2583%2597%25E3%2581%2597%25E3%2581%259F%25E9%259A%259B%25E3%2581%25AB%25E3%2580%2581%25E3%2583%2580%25E3%2582%25A6%25E3%2583%25B3%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2589%25E3%2581%2595%25E3%2581%259B%25E3%2581%25AA%25E3%2581%2584%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Wataru%2520Takiguchi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdkOTBhM2EyYTcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Wataru Takiguchi</dc:creator></item><item><title><![CDATA[[html] alt]]></title><description><![CDATA[
+ 意味
+
+画像の説明
+
+
+ 例
+&lt;img
+  src="images/dinosaur.jpg"
+  alt="The head and torso of a dinosaur skeleton;
+          it has a large head with long sharp teeth" /&gt;
+
+画像を見ることができない・画像の読み込みが遅い場合などに、使用される。
+
+ Source
+
+https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Images_in_H...]]></description><link>https://zenn.dev/apo_zenn/articles/de5c3a021e18f4</link><guid isPermaLink="true">https://zenn.dev/apo_zenn/articles/de5c3a021e18f4</guid><pubDate>Sun, 13 Oct 2024 08:56:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--sxSIUVFb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_80:%255Bhtml%255D%2520alt%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:apo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVhNmY0NWNjMjcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>apo</dc:creator></item><item><title><![CDATA[[html] void element]]></title><description><![CDATA[
+ 意味
+
+子要素を持たない
+閉じタグを持たない
+
+
+ 代表的な例
+&lt;img&gt;
+ほかにも、&lt;area&gt; &lt;base&gt; &lt;br&gt; &lt;col&gt; &lt;embed&gt; &lt;hr&gt; &lt;img&gt; &lt;input&gt; &lt;link&gt; &lt;meta&gt; &lt;param&gt; Deprecated &lt;source&gt; &lt;track&gt; &lt;wbr&gt;などがあります。
+
+ Source
+
+https://developer.mozilla.org/en-US/...]]></description><link>https://zenn.dev/apo_zenn/articles/6458ca75fe3b24</link><guid isPermaLink="true">https://zenn.dev/apo_zenn/articles/6458ca75fe3b24</guid><pubDate>Sun, 13 Oct 2024 06:50:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--RPnei6W1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_76:%255Bhtml%255D%2520void%2520element%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:apo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVhNmY0NWNjMjcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>apo</dc:creator></item><item><title><![CDATA[Railsで、cssの更新がローカルに反映されなかったとき]]></title><description><![CDATA[今まで普通にcssの変更は即反映されていたのが、cssを更新してローカルをリロードしても何も更新されなくなった。
+技術選定は以下の通り
+
+Railsフレームワーク
+フロントエンド：HTML,CSS,JS
+
+原因と解決手順
+profile.cssのファイルを使っているとしたら、
+&lt;link rel="stylesheet" href="profile.css"&gt;
+HTMLのheadのこのコードを
+&lt;%= stylesheet_link_tag 'profile', media: 'all' %&gt;
+にすればOK。
+拍子抜け。めちゃくちゃ単純だった。
+]]></description><link>https://zenn.dev/hibiki_ceo/articles/3177b368ab18b5</link><guid isPermaLink="true">https://zenn.dev/hibiki_ceo/articles/3177b368ab18b5</guid><pubDate>Sun, 13 Oct 2024 03:30:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vkSEn9YJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rails%25E3%2581%25A7%25E3%2580%2581css%25E3%2581%25AE%25E6%259B%25B4%25E6%2596%25B0%25E3%2581%258C%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25AB%25E3%2583%25AB%25E3%2581%25AB%25E5%258F%258D%25E6%2598%25A0%25E3%2581%2595%25E3%2582%258C%25E3%2581%25AA%25E3%2581%258B%25E3%2581%25A3%25E3%2581%259F%25E3%2581%25A8%25E3%2581%258D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hibiki%2540FutureHR%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSmVsaTJyaHZ4OF9qMmpJUDR4ekNHYTFVV3UtQlFkNVBxcG55Z1ZCQzBxNGZUNHRIODJNZz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hibiki@FutureHR</dc:creator></item><item><title><![CDATA[【手順・考え方紹介】デザインカンプからのコーディング方法]]></title><description><![CDATA[サイト模写や LP を制作するときに、デザインカンプをもとにコーディングをすると思います。
+どんな順番でコーディングを進めているか、手順（考え方）を示す記事って意外と見当たらなかったので書いてみました。
+こんな方におすすめです。
+
+HTML や CSS の知識はあるけど、カンプからコーディングしよう！と思うと手が止まってしまう
+デザインカンプからのコーディングが初めて
+他の人のコーディング手順が知りたい方
+
+記事の内容は以下の通りです。
+
+カンプから大枠の大きさを測る
+使いまわせそうなパーツがないか探す
+レスポンシブ対応・微調整
+
+今回は以下のデザインカンプからどうやってコーディングする...]]></description><link>https://zenn.dev/928sekine/articles/af2ab2a4b48b09</link><guid isPermaLink="true">https://zenn.dev/928sekine/articles/af2ab2a4b48b09</guid><pubDate>Fri, 11 Oct 2024 12:15:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1wc7ixYq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E6%2589%258B%25E9%25A0%2586%25E3%2583%25BB%25E8%2580%2583%25E3%2581%2588%25E6%2596%25B9%25E7%25B4%25B9%25E4%25BB%258B%25E3%2580%2591%25E3%2583%2587%25E3%2582%25B6%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25AB%25E3%2583%25B3%25E3%2583%2597%25E3%2581%258B%25E3%2582%2589%25E3%2581%25AE%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2587%25E3%2582%25A3%25E3%2583%25B3%25E3%2582%25B0%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259B%25E3%2581%258D%25E3%2581%25AD%25E3%2582%258A%25E3%2581%25AA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAyNDQ3MGIzZjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>せきねりな</dc:creator></item><item><title><![CDATA[webサーバーにFlutter webをアップしたら白紙になってる場合の対処]]></title><description><![CDATA[まずhttps://url/manifest.jsonにアクセスしてみてください。JSONのデータが表示される場合はディレクトリの変更が必要です。
+次にindex.html の中身を確認します。以下の要素を &lt;head&gt; タグの中で探し、書き換えます。
+&lt;base href="/"&gt;
+&lt;link rel="manifest" href="manifest.json"&gt;
+&lt;body&gt;タグの中にある以下の要素も探して書き換えていきます。
+&lt;script src="flutter_bootstrap.js" async&gt;&lt;/sc...]]></description><link>https://zenn.dev/tolto/articles/e2704f6653a819</link><guid isPermaLink="true">https://zenn.dev/tolto/articles/e2704f6653a819</guid><pubDate>Thu, 10 Oct 2024 07:28:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--sYA33LOR--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:web%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2581%25ABFlutter%2520web%25E3%2582%2592%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%25E3%2581%2597%25E3%2581%259F%25E3%2582%2589%25E7%2599%25BD%25E7%25B4%2599%25E3%2581%25AB%25E3%2581%25AA%25E3%2581%25A3%25E3%2581%25A6%25E3%2582%258B%25E5%25A0%25B4%25E5%2590%2588%25E3%2581%25AE%25E5%25AF%25BE%25E5%2587%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tolto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JhOGVmY2QxOWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tolto</dc:creator></item><item><title><![CDATA[CSS苦手を克服！基礎から学ぶCSS講座]]></title><description><![CDATA[最初の頃は`margin`や`padding`、`display:flex`が難しく、CSSに苦手意識を持つ方々が多くいるかと思います。 そんな苦手意識を払拭するような、誰かを補助できる本を目指して書いてみました。
+
+もっとわかりやすくなるよう更新していくつもりです。
+
+学べること
+・HTML、CSSの基礎（すこし）
+・margin
+・height
+・padding
+・margin
+・border]]></description><link>https://zenn.dev/youtuber/books/4781843d234022</link><guid isPermaLink="true">https://zenn.dev/youtuber/books/4781843d234022</guid><pubDate>Tue, 08 Oct 2024 11:52:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--doEuQJXl--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci82Yjk1NGJhNTJhLmpwZWc=%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>ハロゲン（フルスタック）</dc:creator></item><item><title><![CDATA[電子公文書(XML+XSL)をChromeで表示する]]></title><description><![CDATA[
+ 電子公文書とは
+電子公文書とは、電子的な形式で作成、保存、管理される公文書のことを指します。これには、政府機関や企業が発行する公式な文書が含まれます。電子公文書は、紙の文書と同様に法的効力を持つ場合があり、デジタル署名や暗号化技術を用いることで、その信頼性や安全性が確保されます。
+この電子公文書の中には、XML+XSL 形式で作成されたものがあります。XML は、データを構造化して記述するためのマークアップ言語であり、XSL は、XML 文書を別の形式に変換するためのスタイルシート言語です。XML+XSL 形式の電子公文書は、Web ブラウザで表示することができますが、その表示方法に...]]></description><link>https://zenn.dev/sora_kumo/articles/xsl-viewer-html</link><guid isPermaLink="true">https://zenn.dev/sora_kumo/articles/xsl-viewer-html</guid><pubDate>Mon, 07 Oct 2024 23:51:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0yrXSzrN--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E9%259B%25BB%25E5%25AD%2590%25E5%2585%25AC%25E6%2596%2587%25E6%259B%25B8%2528XML%252BXSL%2529%25E3%2582%2592Chrome%25E3%2581%25A7%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E7%25A9%25BA%25E9%259B%25B2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VlZTgzMDYyMDQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>空雲</dc:creator></item><item><title><![CDATA[Emmet の基本的な使い方と便利なショートカット]]></title><description><![CDATA[
+ Emmet とは？
+Emmet は、HTML や CSS のコーディングを効率化するためのツールです。特に、コードの補完機能が強力で、開発者の作業を大幅にスピードアップします。ここでは、Emmet の基本的な使い方と便利なショートカットを紹介します。
+
+ 基本的な使い方
+
+ リストの生成
+ul&gt;li と入力して補完すると、以下のような HTML 構造が生成されます。
+&lt;ul&gt;
+  &lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;
+ol&gt;li*3 と入力して補完すると、以下のような HTML 構造が生成されます。
+&lt;ol&gt;
+  &l...]]></description><link>https://zenn.dev/electnoob/articles/0b82594c2d531d</link><guid isPermaLink="true">https://zenn.dev/electnoob/articles/0b82594c2d531d</guid><pubDate>Sat, 05 Oct 2024 09:41:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_xMsLMid--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Emmet%2520%25E3%2581%25AE%25E5%259F%25BA%25E6%259C%25AC%25E7%259A%2584%25E3%2581%25AA%25E4%25BD%25BF%25E3%2581%2584%25E6%2596%25B9%25E3%2581%25A8%25E4%25BE%25BF%25E5%2588%25A9%25E3%2581%25AA%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25BC%25E3%2583%2588%25E3%2582%25AB%25E3%2583%2583%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:TK%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM5MmM4NjE3YTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>TK</dc:creator></item><item><title><![CDATA[クロスオリジンな画像をキレイにして、Canvasに描画する]]></title><description><![CDATA[
+ 最新情報
+こちらの方法が最も高効率かつ高速でした。
+
+ 結論
+こちらの StackOverFlow で示される手順の通り、Object URLを経由します。
+
+ Tainted Canvas（汚染されたキャンバス）問題
+セキュリティの観点から、クロスオリジンから取得した画像を CanvasRenderingContext2d に対して描画すると、その canvas 要素からは画像を取得できなくなります。
+getImageData、toBlob等の再取得系メソッドは軒並みエラーを投げるようになります。
+これを回避するために、取得した画像そのものを汚染されていない画像にする処理を施します...]]></description><link>https://zenn.dev/ihasq/articles/4a0ad7cae01300</link><guid isPermaLink="true">https://zenn.dev/ihasq/articles/4a0ad7cae01300</guid><pubDate>Fri, 04 Oct 2024 01:58:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Qoj9xzKH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25AF%25E3%2583%25AD%25E3%2582%25B9%25E3%2582%25AA%25E3%2583%25AA%25E3%2582%25B8%25E3%2583%25B3%25E3%2581%25AA%25E7%2594%25BB%25E5%2583%258F%25E3%2582%2592%25E3%2582%25AD%25E3%2583%25AC%25E3%2582%25A4%25E3%2581%25AB%25E3%2581%2597%25E3%2581%25A6%25E3%2580%2581Canvas%25E3%2581%25AB%25E6%258F%258F%25E7%2594%25BB%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ihasq%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I3YWEyZmFhZmMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ihasq</dc:creator></item><item><title><![CDATA[HTMLの<table>要素]]></title><description><![CDATA[表（HTMLの&lt;table&gt;要素）を使ってデータを一覧表示する考え方について、以下のポイントに沿って詳しく説明します。
+
+ 1. 表の基本構造
+HTMLの表は、以下の基本要素から構成されています。
+
+
+&lt;table&gt;: 表全体を囲む要素。
+
+&lt;thead&gt;: 表のヘッダー部分を囲む要素（列名など）。
+
+&lt;tbody&gt;: 表のボディ部分を囲む要素（データ行）。
+
+&lt;tr&gt;: 表の行を定義する要素（ヘッダー行やデータ行）。
+
+&lt;th&gt;: 表のヘッダーセルを定義する要素。
+
+&lt;td&gt;: 表のデータセルを定義する...]]></description><link>https://zenn.dev/kaishigaki/articles/1122f833884ad9</link><guid isPermaLink="true">https://zenn.dev/kaishigaki/articles/1122f833884ad9</guid><pubDate>Fri, 04 Oct 2024 01:00:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vH8sYZrh--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:HTML%25E3%2581%25AE%253Ctable%253E%25E8%25A6%2581%25E7%25B4%25A0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258B%25E3%2581%2584%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M0MjQ2ZmVjOWIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>かい</dc:creator></item><item><title><![CDATA[aタグを入れ子にしてはいけないことを知らずに3時間費やした件]]></title><description><![CDATA[
+ 記事のカードコンポネント作成の際に...
+記事のコンポネント作成の際に、画像、タイトル、本文、ビュー数...などとコンポネントごとにファイルを分けて、ブロックで...とやっていたのですが、
+カードの中にタグを表示させようとし、そのタグをカード以外の場所でも再利用しようとしたため、&lt;a&gt;を用いたのですが、そこで悲劇が起きました。
+検証ツールを除いたところ、なぜか囲んでいたはずのブロックの外に空の&lt;a&gt;タグが生成されているのです。
+
+ なぜこのようなことが起きるのか
+HTML において、マークアップの際にコンテンツモデルというものがあるようです。
+そのルールの中で...]]></description><link>https://zenn.dev/dashubei/articles/a_tag_not_in</link><guid isPermaLink="true">https://zenn.dev/dashubei/articles/a_tag_not_in</guid><pubDate>Thu, 03 Oct 2024 08:27:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--IbOSOhsW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:a%25E3%2582%25BF%25E3%2582%25B0%25E3%2582%2592%25E5%2585%25A5%25E3%2582%258C%25E5%25AD%2590%25E3%2581%25AB%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25AF%25E3%2581%2584%25E3%2581%2591%25E3%2581%25AA%25E3%2581%2584%25E3%2581%2593%25E3%2581%25A8%25E3%2582%2592%25E7%259F%25A5%25E3%2582%2589%25E3%2581%259A%25E3%2581%25AB3%25E6%2599%2582%25E9%2596%2593%25E8%25B2%25BB%25E3%2582%2584%25E3%2581%2597%25E3%2581%259F%25E4%25BB%25B6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:dashu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSXRHdEx4bGJPVkpNbktfQ0VfamlFUGM1OXRmeU1jczVhcTFSZXNUaDgyOFBfWEpfVT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>dashu</dc:creator></item><item><title><![CDATA[<title>タグの内容が必ずしもタイトルにならない件について]]></title><description><![CDATA[
+ &lt;title&gt;タグで囲んだ内容がサイトのタイトルにならないこともあるようです
+どういうことかといいますと、HTML の&lt;head&gt;タグ内の&lt;title&gt;タグの内容が検索結果のタイトルとして表示されるのですが、どうやら Google の検索エンジンにおいては必ずしも、それが適用されるとは限らないようです。
+https://developers.google.com/search/blog/2021/09/more-info-about-titles?hl=ja#half-empty-titles
+2021 年の更新内容では、従来の&lt;title&...]]></description><link>https://zenn.dev/dashubei/articles/google_title</link><guid isPermaLink="true">https://zenn.dev/dashubei/articles/google_title</guid><pubDate>Wed, 02 Oct 2024 05:34:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--JzfdAXql--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%253Ctitle%253E%25E3%2582%25BF%25E3%2582%25B0%25E3%2581%25AE%25E5%2586%2585%25E5%25AE%25B9%25E3%2581%258C%25E5%25BF%2585%25E3%2581%259A%25E3%2581%2597%25E3%2582%2582%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%2588%25E3%2583%25AB%25E3%2581%25AB%25E3%2581%25AA%25E3%2582%2589%25E3%2581%25AA%25E3%2581%2584%25E4%25BB%25B6%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:dashu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSXRHdEx4bGJPVkpNbktfQ0VfamlFUGM1OXRmeU1jczVhcTFSZXNUaDgyOFBfWEpfVT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>dashu</dc:creator></item><item><title><![CDATA[WebP拡張子に変換して画像ファイルを圧縮しよう]]></title><description><![CDATA[
+ WebP（ウェッピー）ってなに
+まず、これウェッピーって読むらしいです。（私はウェブピーと読んでました笑）
+2010 年に Google が開発した画像の形式らしいです。普段利用する画像の形式である、jpgやpngなどよりも圧縮率が高く、さらに特に画質が劣化する印象もないらしい！！
+WebP に変換するツールとして、Google が開発した、Squoosh(スクワッシュ)というものがあり、プレビューなどをみながら変換することができるので、圧縮しすぎると粗くなってしまいますが、適度に圧縮すると特に見た感じ影響はなさそうです。
+https://squoosh.app/
+ただ、こちらは画像...]]></description><link>https://zenn.dev/dashubei/articles/e46c5cc47e80b1</link><guid isPermaLink="true">https://zenn.dev/dashubei/articles/e46c5cc47e80b1</guid><pubDate>Tue, 01 Oct 2024 09:25:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--gxamVlEj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:WebP%25E6%258B%25A1%25E5%25BC%25B5%25E5%25AD%2590%25E3%2581%25AB%25E5%25A4%2589%25E6%258F%259B%25E3%2581%2597%25E3%2581%25A6%25E7%2594%25BB%25E5%2583%258F%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2592%25E5%259C%25A7%25E7%25B8%25AE%25E3%2581%2597%25E3%2582%2588%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:dashu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSXRHdEx4bGJPVkpNbktfQ0VfamlFUGM1OXRmeU1jczVhcTFSZXNUaDgyOFBfWEpfVT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>dashu</dc:creator></item><item><title><![CDATA[すぐ消えてしまう要素をDevToolsで確認するTips集]]></title><description><![CDATA[
+ はじめに
+こんばんは！
+皆さんは以下のようなすぐ消えてしまう要素をDevToolsで確認したいときはどうしますか？
+
+常に表示されるようにわざわざコードを修正してから、DevToolsで要素を確認したりしていませんか？DevToolsをうまく使うことで、わざわざコードの修正をせずとも簡単に要素の確認をできるのでそのちょっとしたTipsのご紹介です！
+
+ ① CSSイベントでの確認方法
+まずはCSSイベントで要素の表示制御を行っているパターンでの確認方法です。以下のようにCSSイベントのhoverで表示制御をしている要素を例にDevToolsで確認する方法を見ていきましょう！
+impo...]]></description><link>https://zenn.dev/gemcook/articles/3e90d883100140</link><guid isPermaLink="true">https://zenn.dev/gemcook/articles/3e90d883100140</guid><pubDate>Tue, 01 Oct 2024 04:57:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---HLOwpa2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%2599%25E3%2581%2590%25E6%25B6%2588%25E3%2581%2588%25E3%2581%25A6%25E3%2581%2597%25E3%2581%25BE%25E3%2581%2586%25E8%25A6%2581%25E7%25B4%25A0%25E3%2582%2592DevTools%25E3%2581%25A7%25E7%25A2%25BA%25E8%25AA%258D%25E3%2581%2599%25E3%2582%258BTips%25E9%259B%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:KM%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQyYzJiNzVlZTIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Gemcook%2520Tech%2520Blog%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2EzYjk0ZGQyMWEuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>KM</dc:creator></item><item><title><![CDATA[[TailwindCSS]グリッドレイアウトで行頭を美しく整える]]></title><description><![CDATA[
+ はじめに
+今回は、Tailwind CSSを使って、要素が不揃いだったレイアウトを整然とした美しいデザインに改善する方法を紹介します。記事の流れとして、まず初めに改善前のコードを見ていただき、その後、どのようにして現在のコードに改善していったのかを解説していきます。
+
+ 改善前のコード
+まず、こちらが改善前のコードです。このコードでは、項目名とその内容がバラバラに表示されており、統一感がありませんでした。
+
+TypeScript
+import React from "react";
+
+const LegalNotice = () =&gt; {
+  return (
+    &lt;...]]></description><link>https://zenn.dev/haruki1009/articles/bd7bac7a117234</link><guid isPermaLink="true">https://zenn.dev/haruki1009/articles/bd7bac7a117234</guid><pubDate>Mon, 30 Sep 2024 05:38:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ZSc3M2UQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BTailwindCSS%255D%25E3%2582%25B0%25E3%2583%25AA%25E3%2583%2583%25E3%2583%2589%25E3%2583%25AC%25E3%2582%25A4%25E3%2582%25A2%25E3%2582%25A6%25E3%2583%2588%25E3%2581%25A7%25E8%25A1%258C%25E9%25A0%25AD%25E3%2582%2592%25E7%25BE%258E%25E3%2581%2597%25E3%2581%258F%25E6%2595%25B4%25E3%2581%2588%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Haruki%2520Inoue%2520%257C%2520Not...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI5MGI2YjhmZWQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Haruki Inoue | Notion公認キャンパスリーダー</dc:creator></item><item><title><![CDATA[HTMLのselect要素がCSSでカスタマイズ可能になる]]></title><description><![CDATA[
+ select 要素がカスタマイズできるようになる
+これまで HTML の&lt;select&gt;要素はカスタマイズが難しい部分でした。各ブラウザのデフォルトスタイルに依存しデザインや機能を統一するのが困難でした。かといってオリジナルのセレクトボックスを作成するとなると CSS と JavaScript でイチから作成する必要がありました。
+しかし今後、HTML ネイティブの&lt;select&gt;要素に柔軟にスタイルを加えることができるようになるようです。イチから作成したセレクトボックスをネイティブのselect要素と同等レベルでアクセシビリティやパフォーマンスに配慮して、各...]]></description><link>https://zenn.dev/h_yokoyama/articles/html-select-style</link><guid isPermaLink="true">https://zenn.dev/h_yokoyama/articles/html-select-style</guid><pubDate>Sun, 29 Sep 2024 04:25:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Q8nwMhtj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:HTML%25E3%2581%25AEselect%25E8%25A6%2581%25E7%25B4%25A0%25E3%2581%258CCSS%25E3%2581%25A7%25E3%2582%25AB%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%259E%25E3%2582%25A4%25E3%2582%25BA%25E5%258F%25AF%25E8%2583%25BD%25E3%2581%25AB%25E3%2581%25AA%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Hayato%2520Yokoyama%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFiNDg0ZTcyMTUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Hayato Yokoyama</dc:creator></item><item><title><![CDATA[リンクの未訪問と訪問済みを表す技術]]></title><description><![CDATA[ヤコブ・ニールセン博士が 2004 年に言っているように、未訪問のリンクと訪問済みのリンクは色などで違いがわかると嬉しい。
+https://u-site.jp/alertbox/20040503
+とはいえ、デフォルトの :link と :visited の色をそのまま使うとサイトの雰囲気に合わないことがあるので色々変えてみたい
+
+ ブラウザデフォルト
+多少の明度や彩度の調整をして使われることもある。
+
+
+ underline なし
+Google の検索結果のタイトル部分などで使われているパターン。
+リンクであることは文脈でほぼ明示的だが、テキストカラーとは区別をつけたいというような場合。...]]></description><link>https://zenn.dev/15/articles/1d21eba86ae1ff</link><guid isPermaLink="true">https://zenn.dev/15/articles/1d21eba86ae1ff</guid><pubDate>Fri, 27 Sep 2024 11:44:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--M1IE9wNZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%25AA%25E3%2583%25B3%25E3%2582%25AF%25E3%2581%25AE%25E6%259C%25AA%25E8%25A8%25AA%25E5%2595%258F%25E3%2581%25A8%25E8%25A8%25AA%25E5%2595%258F%25E6%25B8%2588%25E3%2581%25BF%25E3%2582%2592%25E8%25A1%25A8%25E3%2581%2599%25E6%258A%2580%25E8%25A1%2593%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:15%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lCd2p5Q0htOUYzcmF6SW9SNU1jcXVidDc1cFdBUzdlQlRJYnpiYWc9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>15</dc:creator></item><item><title><![CDATA[CSS Anchor Positioning 仕様の紹介]]></title><description><![CDATA[CSS Anchor Positioning は、要素の配置を制御する新しい仕様で、指定した要素（アンカー要素）の位置を基準に、要素を配置できます。
+ポップオーバーやツールチップ、トーストなどをはじめとした、さまざまな UI コンポーネントの実装に利用できます。
+特に CSS Anchor Positioning による要素の配置には、「配置する要素が表示領域に収まらない場合の挙動を制御できる」「Popover API などによって Top Layer に配置される要素であっても、アンカー要素を基準にその位置を制御できる」といった特徴があります。
+これまでは、JavaScript を用い...]]></description><link>https://zenn.dev/d_kawaguchi/articles/css-anchor-positioning-294aa71a7f77fc</link><guid isPermaLink="true">https://zenn.dev/d_kawaguchi/articles/css-anchor-positioning-294aa71a7f77fc</guid><pubDate>Thu, 26 Sep 2024 07:30:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--zHbMNk6d--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:CSS%2520Anchor%2520Positioning%2520%25E4%25BB%2595%25E6%25A7%2598%25E3%2581%25AE%25E7%25B4%25B9%25E4%25BB%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:d-kawaguchi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzliMjUzZTlmOTQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>d-kawaguchi</dc:creator></item><item><title><![CDATA[CSS設計初心者がBEMを使ってみて、理解しておいた方が良いと思ったところ、こうしていれば良かったかもしれないところ]]></title><description><![CDATA[CSS設計をやったことがない私がBEMを実際プロジェクトで使ってみて、こういう場合どうすれば良いの？と迷ったところが何点かあり、その経験をもとにBEMにおいて理解しておいた方が良いと思ったところをBEMの公式を確認しながらまとめます。
+また、実際使ってみてこうした方が良かったかもしれない点についても述べたいと思います。
+BEMを採用するに当たってBEMの記事をいろいろ読みましたが、おれおれBEMのような内容の記事も多いことから考えると、BEMそのもののメリットは大きいのでBEMのルールをベースにしつつ、厳密にやろうとすると不便に感じるところがあるので別のルールも追加するみたいな感じかと思...]]></description><link>https://zenn.dev/unkeleven/articles/e8973e8c4a377e</link><guid isPermaLink="true">https://zenn.dev/unkeleven/articles/e8973e8c4a377e</guid><pubDate>Thu, 26 Sep 2024 01:48:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--k1WwNmGO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:CSS%25E8%25A8%25AD%25E8%25A8%2588%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E3%2581%258CBEM%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%25A6%25E3%2580%2581%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2597%25E3%2581%25A6%25E3%2581%258A%25E3%2581%2584%25E3%2581%259F%25E6%2596%25B9%25E3%2581%258C%25E8%2589%25AF%25E3%2581%2584%25E3%2581%25A8%25E6%2580%259D%25E3%2581%25A3%25E3%2581%259F%25E3%2581%25A8%25E3%2581%2593%25E3%2582%258D%25E3%2580%2581%25E3%2581%2593%25E3%2581%2586%25E3%2581%2597%25E3%2581%25A6%25E3%2581%2584%25E3%2582%258C%25E3%2581%25B0%25E8%2589%25AF%25E3%2581%258B%25E3%2581%25A3%25E3%2581%259F%25E3%2581%258B%25E3%2582%2582%25E3%2581%2597%25E3%2582%258C%25E3%2581%25AA%25E3%2581%2584%25E3%2581%25A8%25E3%2581%2593%25E3%2582%258D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:unk%2520eleven%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFlNWI0NGI3MzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>unk eleven</dc:creator></item></channel></rss>
