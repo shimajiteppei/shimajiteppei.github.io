@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「TypeScript」のフィード]]></title><description><![CDATA[Zennのトピック「TypeScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/typescript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/f13e758fdb.png</url><title>Zennの「TypeScript」のフィード</title><link>https://zenn.dev/topics/typescript</link></image><generator>zenn.dev</generator><lastBuildDate>Sun, 20 Oct 2024 00:48:37 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/typescript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[React で ToDo アプリを作って遊んでみた]]></title><description><![CDATA[
+ はじめに
+フロントエンド周りの勉強もぼちぼちやりたいと思って最近少しずつ勉強している。今回の記事は勉強の結果をまとめたものであり、React で以下のような簡単な Todo アプリを作って遊ぶ。
+
+今回作るアプリのリポジトリは以下。今回作成するソースコードはすべて Unlicense で配布しているのでご自由にご活用ください。一部チュートリアルなどから取得しているコードにはコード中に出典を明記しておりますので、そこだけ気をつけてください。
+https://github.com/wsuzume/rabit
+
+ 技術選定
+私はそこまで頭がよくないので、本業の片手間の勉強でフルスタックのフ...]]></description><link>https://zenn.dev/wsuzume/articles/850952f2145182</link><guid isPermaLink="true">https://zenn.dev/wsuzume/articles/850952f2145182</guid><pubDate>Sat, 19 Oct 2024 15:18:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--yi5gWinW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%2520%25E3%2581%25A7%2520ToDo%2520%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E9%2581%258A%25E3%2582%2593%25E3%2581%25A7%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Josh%2520Nobus%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJjZDAzYjNkNzYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Josh Nobus</dc:creator></item><item><title><![CDATA[位置エン本のサンプルを TypeScript で行うためのメモ]]></title><description><![CDATA[位置エン本のサンプルコードはすべて JavaScript で記述されている。
+TypeScript でこれらのサンプルを写経する際、.js ファイルを .ts に置き換え、型情報を変数や関数の引数に追加するだけでは動かない部分があるため、この記事では動かない部分と対策をまとめた。
+
+ 4章
+
+ サンプル全般
+位置エン本のサンプルでは HTML 内に JavaScript を直接記述する形になっている。TypeScript を使う都合上、&lt;script&gt; タグを使って TypeScript を変換した JavaScript ファイルを呼び出す形にする。
+使用するライブラリは、M...]]></description><link>https://zenn.dev/tom_konda/articles/1622d2a7415f3b</link><guid isPermaLink="true">https://zenn.dev/tom_konda/articles/1622d2a7415f3b</guid><pubDate>Sat, 19 Oct 2024 11:52:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Xz0nkhoq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E4%25BD%258D%25E7%25BD%25AE%25E3%2582%25A8%25E3%2583%25B3%25E6%259C%25AC%25E3%2581%25AE%25E3%2582%25B5%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AB%25E3%2582%2592%2520TypeScript%2520%25E3%2581%25A7%25E8%25A1%258C%25E3%2581%2586%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Tom%2520Konda%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RhZWM0N2UwYzAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Tom Konda</dc:creator></item><item><title><![CDATA[[Typescript] SheetAPI で GoogleSpreadSheet を簡単読み込み]]></title><description><![CDATA[
+ 事前準備
+
+Typescriptの環境
+GoogleCloudのアカウント作成
+
+は完了しているものとします。
+
+ Typescript 環境構築
+tsconfigなど必要なものを追加
+$ mkdir sample &amp;&amp; cd sample
+$ npm init -y &amp;&amp; tsc --init
+tsconfigに以下を追加
+    "rootDir": "./src",
+必要なライブラリのインストール
+$ npm install googleapis
+main.tsファイルの作成・書き込み
+$ mkdir src &amp;&amp; touch s...]]></description><link>https://zenn.dev/kamite/articles/3290537b51dfba</link><guid isPermaLink="true">https://zenn.dev/kamite/articles/3290537b51dfba</guid><pubDate>Sat, 19 Oct 2024 11:40:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hCIch-fu--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BTypescript%255D%2520SheetAPI%2520%25E3%2581%25A7%2520GoogleSpreadSheet%2520%25E3%2582%2592%25E7%25B0%25A1%25E5%258D%2598%25E8%25AA%25AD%25E3%2581%25BF%25E8%25BE%25BC%25E3%2581%25BF%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kamite%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q2ZmUzNWU1MzcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kamite</dc:creator></item><item><title><![CDATA[Voltaを使ってpnpmを環境構築する]]></title><description><![CDATA[
+ 📕Overview
+pnpmとは公式によると...
+高速、かつディスク容量効率が良いパッケージマネージャー
+https://pnpm.io/ja/
+私はVoltaを使っているのでこちらでNode.jsをインストールしてください。バージョン管理は楽になります。
+https://zenn.dev/joo_hashi/articles/5f8e584348abe3
+
+ 🧷summary
+Voltaで環境構築をしてnpmv installして環境構築する方法をご紹介いたします。普通のNode.jsでもnodebrewでも良いですが。
+https://pnpm.io/ja/installati...]]></description><link>https://zenn.dev/joo_hashi/articles/9fc3050208c40f</link><guid isPermaLink="true">https://zenn.dev/joo_hashi/articles/9fc3050208c40f</guid><pubDate>Sat, 19 Oct 2024 10:02:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--uP1_lhFy--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Volta%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6pnpm%25E3%2582%2592%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:JboyHashimoto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNjOTBiY2M0M2YuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>JboyHashimoto</dc:creator></item><item><title><![CDATA[Express認証付きスターターセット①: Docker×Prisma×JWTで始めるバックエンド構築]]></title><description><![CDATA[
+ はじめに
+TypeScriptで認証付きのバックエンドを実装する機会があったため、今回その手順を記事にまとめてみました。この記事では、Dockerを使ったMySQLデータベースの管理、Prismaを用いたデータ操作、そしてJWTによる認証機能の実装について書いてます。
+この記事の続編として、スキーマの設計やコードの整形、自動化されたテストの導入といった内容も取り上げていく予定です。
+
+ 目次
+
+はじめに
+関連記事
+該当ソースコード
+プロジェクトの初期設定
+Expressのセットアップ
+Dockerの環境構築
+Prisma設定
+ユーザー作成仮実装
+ユーザー登録とログイン
+認証ミドルウェ...]]></description><link>https://zenn.dev/miumi/articles/812c7038e92b8f</link><guid isPermaLink="true">https://zenn.dev/miumi/articles/812c7038e92b8f</guid><pubDate>Sat, 19 Oct 2024 09:23:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--LeA_a-NT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Express%25E8%25AA%258D%25E8%25A8%25BC%25E4%25BB%2598%25E3%2581%258D%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%25BC%25E3%2582%25BB%25E3%2583%2583%25E3%2583%2588%25E2%2591%25A0%253A%2520Docker%25C3%2597Prisma%25C3%2597JWT%25E3%2581%25A7%25E5%25A7%258B%25E3%2582%2581%25E3%2582%258B%25E3%2583%2590%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2589%25E6%25A7%258B%25E7%25AF%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%259F%25E3%2582%25AB%25E3%2582%25A4%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y4YjgwZTkyZmEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ミカイ</dc:creator></item><item><title><![CDATA[対応漏れを防ぐために：GitHubと連携するツールを開発してみた]]></title><description><![CDATA[プロジェクト管理ツールが会社に欲しいとずっと思っていました。
+最近始まったプロジェクトでプロジェクト管理に課題を感じたので簡単なツールを個人開発して解決していこうとしている取り組みについて共有したいと思います。
+
+ 背景
+社内で利用されているプロジェクト管理ツールはあるにはあるのですが、工数を入力して月末に費用があっているのかを確認するツールとして利用されており、プロジェクトを管理できているとは言い難いもので役に立っていませんでした。
+最近始まったプロジェクトでは非技術職の方との協業が増えており、コミュニケーションツール(Mattermost)を利用したやり取りで以下のような課題を感じて...]]></description><link>https://zenn.dev/ryosuke_horie/articles/b372a6a1db11cd</link><guid isPermaLink="true">https://zenn.dev/ryosuke_horie/articles/b372a6a1db11cd</guid><pubDate>Sat, 19 Oct 2024 06:28:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--D62QTGbR--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%25AF%25BE%25E5%25BF%259C%25E6%25BC%258F%25E3%2582%258C%25E3%2582%2592%25E9%2598%25B2%25E3%2581%2590%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AB%25EF%25BC%259AGitHub%25E3%2581%25A8%25E9%2580%25A3%25E6%2590%25BA%25E3%2581%2599%25E3%2582%258B%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%25E3%2582%2592%25E9%2596%258B%25E7%2599%25BA%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ryosuke-horie%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MxMTExODBjOGIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ryosuke-horie</dc:creator></item><item><title><![CDATA[E2E自動テストを理解したい]]></title><description><![CDATA[
+ E2E テストとは？
+ユーザーの使用シナリオに基づいて、アプリケーションの開始から終了までの全プロセスをテストする手法です。
+全プロセスをテストする？？
+Web アプリケーションは、以下にある様々なモジュールを組み合わせて実装されています。
+
+ライブラリが提供する関数
+ロジックを担う関数
+UI を表現する関数
+Web API クライアント
+API サーバー
+DB サーバー
+Web ブラウザ
+
+E2E 自動テストは、1〜7 までを「ヘッドレスブラウザ」+「UI オートメーション」の組み合わせを中心に構成されたテスティングフレームワークを用いて、検証します。
+
+!
+E2E テストの定義は...]]></description><link>https://zenn.dev/yuu104/articles/what-is-e2e-test</link><guid isPermaLink="true">https://zenn.dev/yuu104/articles/what-is-e2e-test</guid><pubDate>Sat, 19 Oct 2024 04:02:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--JXMsvMh0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:E2E%25E8%2587%25AA%25E5%258B%2595%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E3%2582%2592%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2597%25E3%2581%259F%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yuu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RjMGVjMzFlNzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yuu</dc:creator></item><item><title><![CDATA[AWS CDKでundefined関係の型エラーが出る時の対処法]]></title><description><![CDATA[
+ 前書き
+この記事を書いている途中でエラーメッセージに思いっきり原因が書かれていることに気付いたのですが、自分みたいな不注意な人間が他にも 1 人くらいはいるかもしれないので一応公開します
+（だって今まで exactOptionalPropertyTypes 使ってなかったんだもん 😭）
+
+ 結論
+tsconfig の exactOptionalPropertyTypes: true が悪さをしているかもしれないのでこいつをどうにかしよう
+
+ 問題
+以下のような IAM Role を作成して Lambda に紐付けるという簡単な Stack ですが、2 箇所でエラーが発生します
+imp...]]></description><link>https://zenn.dev/yu_yunagi/articles/0b90992c009ac9</link><guid isPermaLink="true">https://zenn.dev/yu_yunagi/articles/0b90992c009ac9</guid><pubDate>Sat, 19 Oct 2024 03:04:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--j_6YJFUb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AWS%2520CDK%25E3%2581%25A7undefined%25E9%2596%25A2%25E4%25BF%2582%25E3%2581%25AE%25E5%259E%258B%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E3%2581%258C%25E5%2587%25BA%25E3%2582%258B%25E6%2599%2582%25E3%2581%25AE%25E5%25AF%25BE%25E5%2587%25A6%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:YuNG%25EF%25BC%2588%25E3%2582%2586%25E3%2581%2586%25E3%2581%25AA%25E3%2581%258E%25EF%25BC%2589%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg1MGM0YjE0NGIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>YuNG（ゆうなぎ）</dc:creator></item><item><title><![CDATA[TypeScriptのassertNeverで型安全性を極める：switch文の完全ガイド]]></title><description><![CDATA[
+ はじめに
+TypeScriptを使う上で、型安全性は常に重要なトピックです。特に、列挙型（enum）やユニオン型を扱うswitch文では、すべてのケースを漏れなく処理することが求められます。この記事では、assertNever関数を使って型安全性を高める方法を、switch文を中心に詳しく解説します。
+
+ assertNeverとは
+assertNeverは、コンパイル時に到達してはいけないコードパスを明示的に示すための関数です。基本的な実装は以下のとおりです。
+function assertNever(x: never): never {
+    throw new Error("...]]></description><link>https://zenn.dev/asamin/articles/4996ed844ebaa1</link><guid isPermaLink="true">https://zenn.dev/asamin/articles/4996ed844ebaa1</guid><pubDate>Sat, 19 Oct 2024 02:59:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---E3elKI9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%25E3%2581%25AEassertNever%25E3%2581%25A7%25E5%259E%258B%25E5%25AE%2589%25E5%2585%25A8%25E6%2580%25A7%25E3%2582%2592%25E6%25A5%25B5%25E3%2582%2581%25E3%2582%258B%25EF%25BC%259Aswitch%25E6%2596%2587%25E3%2581%25AE%25E5%25AE%258C%25E5%2585%25A8%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:asami%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk0YWMyYjMxNjEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>asami</dc:creator></item><item><title><![CDATA[React Hook FormのonBlurがDatePicker（MUI）に効かない時の解決方法]]></title><description><![CDATA[
+ はじめに
+useForm の mode を onBlur に設定した際に発生した DatePicker コンポーネントの挙動不良について調査した結果をまとめてみました。
+
+ 問題について
+useForm の mode を onBlur に設定したところ、DatePicker コンポーネントが正しく動作しないことに気づきました。
+調査を進めた結果、DatePicker にはそもそも onBlur プロパティが存在しないことがわかりました。
+type Props&lt;T extends FieldValues&gt; = {
+  control: ControlForm&lt;T&gt...]]></description><link>https://zenn.dev/kiman/articles/70093eeff2c6db</link><guid isPermaLink="true">https://zenn.dev/kiman/articles/70093eeff2c6db</guid><pubDate>Sat, 19 Oct 2024 02:37:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xvCb1iPW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%2520Hook%2520Form%25E3%2581%25AEonBlur%25E3%2581%258CDatePicker%25EF%25BC%2588MUI%25EF%25BC%2589%25E3%2581%25AB%25E5%258A%25B9%25E3%2581%258B%25E3%2581%25AA%25E3%2581%2584%25E6%2599%2582%25E3%2581%25AE%25E8%25A7%25A3%25E6%25B1%25BA%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258D%25E3%2582%2593%25E3%2582%2586%25E3%2581%25BE%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ3MmYyZmE3MTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>きんゆまん</dc:creator></item><item><title><![CDATA[Next.jsにcodegenを導入した際に詰まった際の対応まとめ]]></title><description><![CDATA[
+ はじめに
+GaraphQL初心者のため詰まった点などをメモしておきます。
+環境は以下です。
+"graphql": "^16.9.0",
+"@apollo/client": "^3.11.8",
+"@graphql-codegen/cli": "^5.0.2",
+"@graphql-codegen/client-preset": "^4.3.3",
+"@parcel/watcher": "^2.4.1",
+
+"typescript": "^5.5.4",
+"next": "^14.2.8",
+"react": "^18.3.1",
+
+
+
+種別
+選定技術
+
+
+
+
+GraphQLクライアン...]]></description><link>https://zenn.dev/tmo_taka/articles/b400b8373c3337</link><guid isPermaLink="true">https://zenn.dev/tmo_taka/articles/b400b8373c3337</guid><pubDate>Sat, 19 Oct 2024 01:05:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5jSxA-Lv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Next.js%25E3%2581%25ABcodegen%25E3%2582%2592%25E5%25B0%258E%25E5%2585%25A5%25E3%2581%2597%25E3%2581%259F%25E9%259A%259B%25E3%2581%25AB%25E8%25A9%25B0%25E3%2581%25BE%25E3%2581%25A3%25E3%2581%259F%25E9%259A%259B%25E3%2581%25AE%25E5%25AF%25BE%25E5%25BF%259C%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tmo-taka%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM3ODU2NDc0M2EuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tmo-taka</dc:creator></item><item><title><![CDATA[【個人開発】Chatendarのカレンダー機能を深掘り：Next.jsとTypeScriptでの実装を解説]]></title><description><![CDATA[
+ はじめに
+このブログでは、IT未経験で独学の私が開発したアプリである「Chatendar」の主要な機能について解説していきます。
+今回は、カレンダー機能に焦点を当て、どのように実装しているかをご紹介します。
+アプリの全体像を知りたい方は、以下のサイトにアクセスしてみてください。
+https://qiita.com/ryoma_itngineer/items/1a45121a2317b47d2003
+
+ カレンダー画面
+
+
+ 紹介する機能
+・カレンダーの表示。(正確な曜日と日付の紐付け)
+・矢印アイコンで月を切り替える。
+・Todayボタンを押すと、現在の日付が含まれる月にジャンプする...]]></description><link>https://zenn.dev/ryoma_itngineer/articles/2eff5031d08295</link><guid isPermaLink="true">https://zenn.dev/ryoma_itngineer/articles/2eff5031d08295</guid><pubDate>Fri, 18 Oct 2024 22:53:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lx69k4eK--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%2580%258B%25E4%25BA%25BA%25E9%2596%258B%25E7%2599%25BA%25E3%2580%2591Chatendar%25E3%2581%25AE%25E3%2582%25AB%25E3%2583%25AC%25E3%2583%25B3%25E3%2583%2580%25E3%2583%25BC%25E6%25A9%259F%25E8%2583%25BD%25E3%2582%2592%25E6%25B7%25B1%25E6%258E%2598%25E3%2582%258A%25EF%25BC%259ANext.js%25E3%2581%25A8TypeScript%25E3%2581%25A7%25E3%2581%25AE%25E5%25AE%259F%25E8%25A3%2585%25E3%2582%2592%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Ryoma%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSjFHanlSZjhuOU5ZcUlMVmNMT3hIZ1dCTWZKU2FiQWZ0OFBwRHhHZUxnWEFCMEF2bDBwUT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Ryoma</dc:creator></item><item><title><![CDATA[ElysiaJSをVercelで使う時にハマったこと [2024年令和最新版]]]></title><description><![CDATA[
+ あらすじ
+サーバーレスで使えるいい感じのフレームワークがないかと探していたところ、ElysiaJS というプロジェクトに出会いました。
+https://elysiajs.com/
+公式ページにアクセスするなりかわいいロゴがお出迎えしてくれます。かなり若いプロジェクトで活発に開発されていますが、1.xの安定版のリリースまで到達しており趣味で基本的な機能を使う分には十分安定していそうです。
+若干off-topic
+Elysia（エリシア）の由来は崩壊3rdに登場する同名のキャラクターかと思われます。公式サイトのブランディングカラーもエリシアのイメージカラーに似た配色になっている上、バージ...]]></description><link>https://zenn.dev/nexryai/articles/8388fba47ef22e</link><guid isPermaLink="true">https://zenn.dev/nexryai/articles/8388fba47ef22e</guid><pubDate>Fri, 18 Oct 2024 11:33:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1lTrDOwn--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ElysiaJS%25E3%2582%2592Vercel%25E3%2581%25A7%25E4%25BD%25BF%25E3%2581%2586%25E6%2599%2582%25E3%2581%25AB%25E3%2583%258F%25E3%2583%259E%25E3%2581%25A3%25E3%2581%259F%25E3%2581%2593%25E3%2581%25A8%2520%255B2024%25E5%25B9%25B4%25E4%25BB%25A4%25E5%2592%258C%25E6%259C%2580%25E6%2596%25B0%25E7%2589%2588%255D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nexryai%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzYxZDUzMzM2YjEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nexryai</dc:creator></item><item><title><![CDATA[JavaScript(TypeScript)の ’==’ と ’＝＝＝’ の違いについて @初心者]]></title><description><![CDATA[
+ javascriptの　’==’ と ’＝＝＝’ の演算子について
+== と　=== の違いを聞かれたらパッと答えることができますか？
+僕はできません。。。
+ただ、ほぼほぼ業務では === の方をつかっていました。
+改めて今回違いについて調べました。
+
+ ==（等価演算子）
+== は、等価演算子といい、簡単に言うとゆるい比較になります。
+== は「等価演算子」と呼ばれ、比較する値の 型が違っても 自動的に型変換を行って比較します。
+型変換が発生。
+比較前に、JavaScriptが両方の値を同じ型に変換します。
+console.log(5 == '5'); // 出力: true
+数字...]]></description><link>https://zenn.dev/rionishino/articles/72f350ba330d24</link><guid isPermaLink="true">https://zenn.dev/rionishino/articles/72f350ba330d24</guid><pubDate>Fri, 18 Oct 2024 09:06:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vonlJbOX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%2528TypeScript%2529%25E3%2581%25AE%2520%25E2%2580%2599%253D%253D%25E2%2580%2599%2520%25E3%2581%25A8%2520%25E2%2580%2599%25EF%25BC%259D%25EF%25BC%259D%25EF%25BC%259D%25E2%2580%2599%2520%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2520%2540%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:rio_nishino%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzkwYzg2OWY3YTcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>rio_nishino</dc:creator></item><item><title><![CDATA[靴をなくしたので、アプリを作ることにした vol2]]></title><description><![CDATA[
+ 前回の記事
+前回の記事はこちら。
+https://zenn.dev/tattu/articles/lost-and-found-1
+閲覧数や、Like の割に、フォローしてくれる人が多かったので、記事を書くモチベーションになりました。ありがとうございます。
+
+ 靴
+は、まだ見つかっていない。ジムでなくした可能性が高いので、電話番号を伝えてきた。あと、安い靴を注文した。1500円。なくしても、そんなに悲しくない。
+話は変わるけど、X で Youtube で配信しながら開発することを、配信駆動開発と名付けていた方がいた。であれば、記事を書きながら開発するのは、記事執筆駆動開発とでも読んだ...]]></description><link>https://zenn.dev/tattu/articles/lost-and-found-2</link><guid isPermaLink="true">https://zenn.dev/tattu/articles/lost-and-found-2</guid><pubDate>Fri, 18 Oct 2024 08:56:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--TyFuUHJb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E9%259D%25B4%25E3%2582%2592%25E3%2581%25AA%25E3%2581%258F%25E3%2581%2597%25E3%2581%259F%25E3%2581%25AE%25E3%2581%25A7%25E3%2580%2581%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%25E3%2581%2593%25E3%2581%25A8%25E3%2581%25AB%25E3%2581%2597%25E3%2581%259F%2520vol2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:katayama8000%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FmZmRhNTA5ZmUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>katayama8000</dc:creator></item><item><title><![CDATA[vscodeでprettierとeslintを設定しているディレクトリ以外のディレクトリーでも走ってしまう]]></title><description><![CDATA[
+ 前提
+
+frontend(nextjs)と backend(nest)で異なるリポジトリーで管理をしている。
+異なる repository で異なる eslint,prettier を設定
+vscode は frontend と backend ディレクトリーの親ディレクトリーを開いている
+
+.
+├── backend
+│   ├── .eslintrc.js
+│   └── .prettierrc
+└── frontend
+    ├── .eslintrc
+    ├── .prettierignore
+    └── .prettierrc
+vscode(一部抜粋)
+
+
+ 問題...]]></description><link>https://zenn.dev/naginagi124/articles/pretter-eslint-vscode-miss</link><guid isPermaLink="true">https://zenn.dev/naginagi124/articles/pretter-eslint-vscode-miss</guid><pubDate>Fri, 18 Oct 2024 07:43:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--e_NUlJJY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:vscode%25E3%2581%25A7prettier%25E3%2581%25A8eslint%25E3%2582%2592%25E8%25A8%25AD%25E5%25AE%259A%25E3%2581%2597%25E3%2581%25A6%25E3%2581%2584%25E3%2582%258B%25E3%2583%2587%25E3%2582%25A3%25E3%2583%25AC%25E3%2582%25AF%25E3%2583%2588%25E3%2583%25AA%25E4%25BB%25A5%25E5%25A4%2596%25E3%2581%25AE%25E3%2583%2587%25E3%2582%25A3%25E3%2583%25AC%25E3%2582%25AF%25E3%2583%2588%25E3%2583%25AA%25E3%2583%25BC%25E3%2581%25A7%25E3%2582%2582%25E8%25B5%25B0%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%2597%25E3%2581%25BE%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AA%25E3%2581%258E%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdlOTYzNTQwYzYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>なぎ</dc:creator></item><item><title><![CDATA[ローカルのDifyとSlackを使った社内用語回答Botの開発]]></title><description><![CDATA[
+ はじめに
+こんにちは、AxelspaceのDX基盤本部 DevOps&amp;AIソリューションユニットに所属する橋本(@r-hashi01)です。
+社内のDXにつながるツール開発などを担当しています。
+今回はSlack Boltとローカル環境におけるDify(v0.8.3)を使って、Slackから質問できる社内用語回答Botを作ってリリースしたので、その開発について話したいと思います。
+
+ 今回の仕組み
+今回は「Slackで質問したら回答する」という仕組みです。
+
+ 社内用語回答Botの要件
+
+社内用語を答えられるようにする
+回答はユーザーのSlackの言語設定に合わせた言語で回答...]]></description><link>https://zenn.dev/axelspace/articles/342cc27b6a3854</link><guid isPermaLink="true">https://zenn.dev/axelspace/articles/342cc27b6a3854</guid><pubDate>Fri, 18 Oct 2024 01:34:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--HoMHADdS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25AB%25E3%2583%25AB%25E3%2581%25AEDify%25E3%2581%25A8Slack%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%259F%25E7%25A4%25BE%25E5%2586%2585%25E7%2594%25A8%25E8%25AA%259E%25E5%259B%259E%25E7%25AD%2594Bot%25E3%2581%25AE%25E9%2596%258B%25E7%2599%25BA%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2582%25A2%25E3%2582%25AF%25E3%2582%25BB%25E3%2583%25AB%25E3%2582%25B9%25E3%2583%259A%25E3%2583%25BC%25E3%2582%25B9%2520%25E6%25A9%258B%25E6%259C%25AC%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZhYjFkMmNjYjIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Axelspace%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2IyMGIyMTY5ZmEuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>アクセルスペース 橋本</dc:creator></item><item><title><![CDATA[Serverless Framework v4でLambdaの実装にTypeScript+ESMを使う]]></title><description><![CDATA[
+ 概要
+Serverless Framework v4 では TypeScript がネイティブにサポートされ、
+serverless-esbuild 等のプラグインも含めずに本体が直接 ESBuild 経由でトランスパイルを行うことが出来ます。
+v4.4.6 の時点では、serverless.ts をドキュメントに沿って書いているだけでは、
+TypeScript + ESM で記述した関数を Lambda にデプロイしても ESM 形式の JS を処理できずエラーになってしまったため、どう対処したかを残しておこうと思います。
+
+ 結論
+v4 で ESBuild でトランスパイルを行う...]]></description><link>https://zenn.dev/tristar/articles/use-typescript-esm-serverless-v4</link><guid isPermaLink="true">https://zenn.dev/tristar/articles/use-typescript-esm-serverless-v4</guid><pubDate>Thu, 17 Oct 2024 15:01:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Onq0chfH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Serverless%2520Framework%2520v4%25E3%2581%25A7Lambda%25E3%2581%25AE%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%25ABTypeScript%252BESM%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tristar%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2g4NGF5cUZVU1haNkluYXBZdGNLenRkSEpWQjVyclViWFN3cThiRmc9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tristar</dc:creator></item><item><title><![CDATA[マツコの知らないJavascriptと派生言語の世界]]></title><description><![CDATA[
+ JavaScriptの歴史
+JavaScriptは1995年にBrendan Eichによって開発されました。最初はNetscape Navigatorというウェブブラウザに組み込まれ、インタラクティブなウェブページを作成するためのスクリプト言語として設計されました。当初は「Mocha」という名前でしたが、後に「LiveScript」、そして最終的に「JavaScript」と改名されました。名前の由来には、当時人気があったプログラミング言語「Java」の名前を借りてマーケティング効果を狙った背景がありますが、技術的にはJavaとは異なる言語です。
+
+ ECMAScriptとの関係
+J...]]></description><link>https://zenn.dev/qitaaa/articles/4c7c12e5a1c17d</link><guid isPermaLink="true">https://zenn.dev/qitaaa/articles/4c7c12e5a1c17d</guid><pubDate>Thu, 17 Oct 2024 14:07:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--HKgGUTya--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%259E%25E3%2583%2584%25E3%2582%25B3%25E3%2581%25AE%25E7%259F%25A5%25E3%2582%2589%25E3%2581%25AA%25E3%2581%2584Javascript%25E3%2581%25A8%25E6%25B4%25BE%25E7%2594%259F%25E8%25A8%2580%25E8%25AA%259E%25E3%2581%25AE%25E4%25B8%2596%25E7%2595%258C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:qitar%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVmZGNmMTg3OTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>qitar</dc:creator></item><item><title><![CDATA[Next.jsとFirebaseとTypsScriptで構成されたリポジトリにJestを導入した記録]]></title><description><![CDATA[
+ 概要
+Next.js（App Router）、Firebase、TypsScriptという組み合わせの環境でJestを導入した内容を忘れないようにメモしました。
+Next.js公式の手順をベースにenvファイルの値を読み込めない事象に対応しています。
+
+ 開発環境など
+
+Next.js(App Router) v14.2.7
+TypeScript
+Firebase Auth
+Cloud Firestore
+Node.js v20.15.0
+
+
+ 追加したnpmパッケージ
+
+@testing-library/jest-dom ^6.5.0
+@testing-library/react ...]]></description><link>https://zenn.dev/hossy000/articles/428767370d14a1</link><guid isPermaLink="true">https://zenn.dev/hossy000/articles/428767370d14a1</guid><pubDate>Thu, 17 Oct 2024 13:04:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--U4oQIWil--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Next.js%25E3%2581%25A8Firebase%25E3%2581%25A8TypsScript%25E3%2581%25A7%25E6%25A7%258B%25E6%2588%2590%25E3%2581%2595%25E3%2582%258C%25E3%2581%259F%25E3%2583%25AA%25E3%2583%259D%25E3%2582%25B8%25E3%2583%2588%25E3%2583%25AA%25E3%2581%25ABJest%25E3%2582%2592%25E5%25B0%258E%25E5%2585%25A5%25E3%2581%2597%25E3%2581%259F%25E8%25A8%2598%25E9%258C%25B2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kouichi.hoshi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NkZWYwNjZlNGYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kouichi.hoshi</dc:creator></item></channel></rss>
