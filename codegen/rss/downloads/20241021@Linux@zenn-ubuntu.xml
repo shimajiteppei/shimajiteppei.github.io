@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Ubuntu」のフィード]]></title><description><![CDATA[Zennのトピック「Ubuntu」のRSSフィードです]]></description><link>https://zenn.dev/topics/ubuntu</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/8c2cdbc5b3.png</url><title>Zennの「Ubuntu」のフィード</title><link>https://zenn.dev/topics/ubuntu</link></image><generator>zenn.dev</generator><lastBuildDate>Mon, 21 Oct 2024 12:04:37 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/ubuntu/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[DockerのubuntuイメージにRuby on Railsをインストールしてみた話]]></title><description><![CDATA[
+ 要目
+dockerのubuntu:latestにRuby on Railsをインストールし、起動確認できるまでの作業まとめです。
+実施日は 2024/10/21 ですので、その時点の最新のubuntuイメージで行っています。
+インストールが必要なものだけ知りたい方は、まとめを参照ください。
+
+ 動機
+普段、開発環境を構築する時は最初からRubyがインストールされたDockerイメージを使ってますが、
+素のubuntuにインストールしたらどうなるのかという興味本位の試みです。
+
+ 用意したもの
+Dockerが実行できる環境（今回はMac）
+
+ 作業記録
+とりあえずubuntuの入ったコ...]]></description><link>https://zenn.dev/fukurozuno/articles/36c3dc01400fab</link><guid isPermaLink="true">https://zenn.dev/fukurozuno/articles/36c3dc01400fab</guid><pubDate>Mon, 21 Oct 2024 06:19:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--PG_o-4og--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%25E3%2581%25AEubuntu%25E3%2582%25A4%25E3%2583%25A1%25E3%2583%25BC%25E3%2582%25B8%25E3%2581%25ABRuby%2520on%2520Rails%25E3%2582%2592%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:rokuen%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JjYmQ4YTBkNTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>rokuen</dc:creator></item><item><title><![CDATA[UbuntuとDebianの深い関係 - Linuxの歴史を紐解く旅！]]></title><description><![CDATA[🌟 今やLinuxディストリビューションの代表格となったUbuntu（ウブントゥ）。
+でも、なぜUbuntuは「Debian系」と呼ばれているのでしょうか？
+今回は、Linuxの歴史を遡りながら、UbuntuとDebianの深い関係性について詳しく解説していきます！ 🚀
+🎯 まずは、Debian誕生の背景から見ていきましょう。
+1993年、イアン・マードックによってDebianプロジェクトが立ち上げられました。
+当時、LinuxディストリビューションといえばSlackwareが主流でしたが、マードックはより体系的で品質の高いディストリビューションを目指しました。
+Debianという名前は...]]></description><link>https://zenn.dev/doremimi/articles/0192ad88-fee9-702b-9d20-862f1e819166</link><guid isPermaLink="true">https://zenn.dev/doremimi/articles/0192ad88-fee9-702b-9d20-862f1e819166</guid><pubDate>Mon, 21 Oct 2024 05:47:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--S1D3IlS---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ubuntu%25E3%2581%25A8Debian%25E3%2581%25AE%25E6%25B7%25B1%25E3%2581%2584%25E9%2596%25A2%25E4%25BF%2582%2520-%2520Linux%25E3%2581%25AE%25E6%25AD%25B4%25E5%258F%25B2%25E3%2582%2592%25E7%25B4%2590%25E8%25A7%25A3%25E3%2581%258F%25E6%2597%2585%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A9%25E3%2582%258C%25E3%2581%25BF%25E3%2581%25BF%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q5YWQyMjA4MWMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>どれみみ</dc:creator></item><item><title><![CDATA[Skopeo で Docker Registry を同期する]]></title><description><![CDATA[
+ 背景
+2つのDocker Registryを同期（コピー）させたい場合、docker pullとdocker pushで同期させることができる。しかしマルチプラットフォームビルドされたイメージを同期させたい場合において、使用しているPCのCPUアーキテクチャのイメージしか同期できないなどの問題がある。そのためskopeoを用いてマルチプラットフォームビルドのイメージの同期を行う。
+
+ 環境
+
+Ubuntu 22.04 LTS
+Docker 24.0.7
+Skopeo 1.4.1
+CPU amd64 (x86_64)
+
+
+ Skopeoのインストール
+Installing Skopeo...]]></description><link>https://zenn.dev/room_208/articles/b8c7a2d8c3ab95</link><guid isPermaLink="true">https://zenn.dev/room_208/articles/b8c7a2d8c3ab95</guid><pubDate>Sun, 20 Oct 2024 08:53:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--freJUDJH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Skopeo%2520%25E3%2581%25A7%2520Docker%2520Registry%2520%25E3%2582%2592%25E5%2590%258C%25E6%259C%259F%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:room_208%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q2MmRkNTEzN2IuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>room_208</dc:creator></item><item><title><![CDATA[geidtでMarkdownを書く]]></title><description><![CDATA[
+ geditでmarkdownを書く
+Markdownを編集しようと思うとプレビューを見れるか否かは結構効率に影響すると思う。
+その際にVScodeを使う程じゃないなということがある。（VScodeは立ち上げると前回編集していた続きが開くがこれを閉じたり放置して新しいファイルを開きたりしたくない）
+utuntuというかgnome系ディストリビューションにデフォルトでインストールされていることの多いgeditにもmarkdownプレビューを追加するプラグインがあったのでこのインストール方法を書き残しておく。
+
+ インストール方法
+
+ 事前準備
+必要なライブラリがいくつかあるのでインストー...]]></description><link>https://zenn.dev/ryy_d/articles/6d7193ef02f230</link><guid isPermaLink="true">https://zenn.dev/ryy_d/articles/6d7193ef02f230</guid><pubDate>Sat, 19 Oct 2024 10:51:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--voA2JC8a--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:geidt%25E3%2581%25A7Markdown%25E3%2582%2592%25E6%259B%25B8%25E3%2581%258F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ryy_d%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS1FJT2ZlQ0RWaHpwTVlwVnRhVjlZcG9QX2UteVcwSk1wR1QxWlgyTUVQdVpmdW81eWo9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ryy_d</dc:creator></item><item><title><![CDATA[Mi○っぽい顔面合成がMediapipeできてしまった]]></title><description><![CDATA[
+ スマホアプリでなにかできないか
+
+プロの方などすごい方のアプリでは本当に優れたものばかり
+かたや自分のアプリはかなりショボい
+UbuntuとAndroid間を簡単に行き来できるMediapipeの出番かな
+前回に続き利用してみます。
+
+!
+
+English explanation is described in the Repository.
+Please access below link.
+If you have better idea, please revise it.
+
+
+
+ face detection
+
+顔面をメッシュにして各パーツが連動してヌルヌルに動く
+これならGP...]]></description><link>https://zenn.dev/manyan3/articles/cac941fdf0e049</link><guid isPermaLink="true">https://zenn.dev/manyan3/articles/cac941fdf0e049</guid><pubDate>Thu, 17 Oct 2024 08:05:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--R8eV794N--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Mi%25E2%2597%258B%25E3%2581%25A3%25E3%2581%25BD%25E3%2581%2584%25E9%25A1%2594%25E9%259D%25A2%25E5%2590%2588%25E6%2588%2590%25E3%2581%258CMediapipe%25E3%2581%25A7%25E3%2581%258D%25E3%2581%25A6%25E3%2581%2597%25E3%2581%25BE%25E3%2581%25A3%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Manyan3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRhOGIwMTUwYzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Manyan3</dc:creator></item><item><title><![CDATA[WSL2でHomebrewを入れ直す]]></title><description><![CDATA[
+ TL;DR
+wsl2にデフォルトとは異なるHOMEBREW_PREFIXでHomebrewをインストールしていたため、再インストールしました。
+
+ 動機
+WSL2にHomebrewを入れて運用していたところ、設定がおかしくなっていたことが分かりました。
+# 診断用コマンドのアウトプット（抜粋）
+/mnt/c/Users/hiroga$ brew doctor
+
+# ...省略...
+Warning: Your Homebrew's prefix is not /home/linuxbrew/.linuxbrew.
+LinuxのHomebrewでは HOMEBREW_PREFIX が ...]]></description><link>https://zenn.dev/hiroga/articles/wsl2-reinstall-homebrew</link><guid isPermaLink="true">https://zenn.dev/hiroga/articles/wsl2-reinstall-homebrew</guid><pubDate>Wed, 16 Oct 2024 03:36:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7oclxPcp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:WSL2%25E3%2581%25A7Homebrew%25E3%2582%2592%25E5%2585%25A5%25E3%2582%258C%25E7%259B%25B4%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hiroga%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pfZHF2VHk5OFdpTG1EZ1Q1Ry1jLVNmWjRwaEdCcGdncGVKSjhqUzhzPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hiroga</dc:creator></item><item><title><![CDATA[古いノートパソコン (Surface Go) に Ubuntu 24.04 LTS をインストール]]></title><description><![CDATA[
+ はじめに
+Surface Go では Windows11 をインストールできないので Ubuntu をインストールすることにしました。Windows10 だと重くて使いづらかったのですが Ubuntu だとかなり快適です！
+
+ 用意したもの
+
+Surface Go
+USBメモリ(4GB以上)
+
+
+ Ubuntu のインストール
+
+Ubuntu イメージをダウンロード
+
+https://ubuntu.com/download/desktop
+
+
+Ubuntu イメージを USB メモリに Rufus で書き込む
+
+Rufus はここからダウンロードしました
+
+https://fores...]]></description><link>https://zenn.dev/15bluefortran/articles/d160739180ce8d</link><guid isPermaLink="true">https://zenn.dev/15bluefortran/articles/d160739180ce8d</guid><pubDate>Tue, 15 Oct 2024 09:43:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--EhI6ZI9R--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%258F%25A4%25E3%2581%2584%25E3%2583%258E%25E3%2583%25BC%25E3%2583%2588%25E3%2583%2591%25E3%2582%25BD%25E3%2582%25B3%25E3%2583%25B3%2520%2528Surface%2520Go%2529%2520%25E3%2581%25AB%2520Ubuntu%252024.04%2520LTS%2520%25E3%2582%2592%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:K%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSXlKaklHWTlqc3JjcFhuZFctLVlvVlJxNkFROXlicmhiN1AxVlV2aHJxT0VzPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>K</dc:creator></item><item><title><![CDATA[Ubuntu 24.10+fcitx5+Chromeでインプットメソッドの変換候補ウィンドウの表示位置がおかしい問題の対処法]]></title><description><![CDATA[
+ 概要
+うちの以下の環境でインプットメソッドの変換候補ウィンドウの表示位置がおかしな位置になってしまう問題が起きていた。
+・Ubuntu 24.10
+・Waylandセッション
+・fcitx5
+・Google Chrome バージョン129
+・Preferred Ozone platform: X11（Waylandだと問題無し）
+
+ (その場しのぎの)対処法
+うちの環境では.local/share/applications/google-chrome.desktopのコマンドオプションに–-gtk-version=4オプションがついていた。これを外してやりgtk 3が使われるようにし...]]></description><link>https://zenn.dev/fukumen/articles/ubuntu-fcitx5-chrome</link><guid isPermaLink="true">https://zenn.dev/fukumen/articles/ubuntu-fcitx5-chrome</guid><pubDate>Tue, 15 Oct 2024 09:31:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Pwg3AnBz--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ubuntu%252024.10%252Bfcitx5%252BChrome%25E3%2581%25A7%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2597%25E3%2583%2583%25E3%2583%2588%25E3%2583%25A1%25E3%2582%25BD%25E3%2583%2583%25E3%2583%2589%25E3%2581%25AE%25E5%25A4%2589%25E6%258F%259B%25E5%2580%2599%25E8%25A3%259C%25E3%2582%25A6%25E3%2582%25A3%25E3%2583%25B3%25E3%2583%2589%25E3%2582%25A6%25E3%2581%25AE%25E8%25A1%25A8%25E7%25A4%25BA%25E4%25BD%258D%25E7%25BD%25AE%25E3%2581%258C%25E3%2581%258A%25E3%2581%258B%25E3%2581%2597%25E3%2581%2584%25E5%2595%258F...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E8%25A6%2586%25E9%259D%25A2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSmRBTndCVEtfSHlnamFJejZqRWoxZWJhMDROQ04wV3lBSjc4cFp1R0RiPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>覆面</dc:creator></item><item><title><![CDATA[仮想環境入門：Windows11とWSL2でUbuntu環境をVSCODE 上で構築]]></title><description><![CDATA[
+ はじめに
+これまで趣味のKaggleやデータ分析ではGoogle colablatoryやKaggle karnelなどの環境構築不要な環境ばかりでコーディングしていて、ローカルでの環境構築から逃げ続けてきましたが、実務でWindows上の環境構築が必要になり勉強したので備忘録として残します。
+
+ やりたいこと
+Windows11とWSL2でUbuntu環境を構築し、VSCODE上でUbuntuを使用できる状態まで行います。
+
+ 前提知識
+
+ Linuxとは
+Linuxという単語には狭義と広義で二つの意味があるらしい。狭義ではLinuxカーネル単体のこと。広義ではカーネルとディストリ...]]></description><link>https://zenn.dev/sa_tech/articles/254d54fb79f6e4</link><guid isPermaLink="true">https://zenn.dev/sa_tech/articles/254d54fb79f6e4</guid><pubDate>Mon, 14 Oct 2024 14:39:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--op3sbMX0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E4%25BB%25AE%25E6%2583%25B3%25E7%2592%25B0%25E5%25A2%2583%25E5%2585%25A5%25E9%2596%2580%25EF%25BC%259AWindows11%25E3%2581%25A8WSL2%25E3%2581%25A7Ubuntu%25E7%2592%25B0%25E5%25A2%2583%25E3%2582%2592VSCODE%2520%25E4%25B8%258A%25E3%2581%25A7%25E6%25A7%258B%25E7%25AF%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:onaga%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2UwNDYzODc4YjEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>onaga</dc:creator></item><item><title><![CDATA[MacからUbuntuに移行してやったこと]]></title><description><![CDATA[
+ 背景
+42tokyoのiMacが全てUbuntuに移行した為、環境構築中(2024.10.14現在)。
+
+ キーボードショートカットの変更
+使用キーボード: Magic Keyboard US
+
+Settings
+└── Keyboard
+    └── Keyboard Shortcuts
+        ├── Launchers
+        │   └── Search(alt + space)
+        ├── Screenshots
+        │   ├── Take_a_screenshot(Shift + Super + #)
+        │   └...]]></description><link>https://zenn.dev/mum26/articles/7d8b875cd9f884</link><guid isPermaLink="true">https://zenn.dev/mum26/articles/7d8b875cd9f884</guid><pubDate>Mon, 14 Oct 2024 13:51:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8cBMGVFj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Mac%25E3%2581%258B%25E3%2582%2589Ubuntu%25E3%2581%25AB%25E7%25A7%25BB%25E8%25A1%258C%25E3%2581%2597%25E3%2581%25A6%25E3%2582%2584%25E3%2581%25A3%25E3%2581%259F%25E3%2581%2593%25E3%2581%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%258D%25E3%2581%25B6%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSkhqVGx0SGJLUVpadllrTWpWNFplbnd4X3l6Nzl5aDBmektjYkhPZDY3bWxfbUxnPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ろぶ</dc:creator></item><item><title><![CDATA[Linux 使いになりたい人のための GParted 入門 - ディスク操作用ツール -]]></title><description><![CDATA[本書は、ディスク操作用ツール GParted を使って、Linux マシン用のディスク操作ができるようになりたいと思っている Linux ユーザー向けの書籍です。GParted の使い方について説明しています。]]></description><link>https://zenn.dev/hiro345/books/lets-start-gparted</link><guid isPermaLink="true">https://zenn.dev/hiro345/books/lets-start-gparted</guid><pubDate>Mon, 14 Oct 2024 09:31:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--eUAgg-wb--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci8xNWFhZWYyM2IxLnBuZw==%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>Hiroshi Koyama</dc:creator></item><item><title><![CDATA[[Ubuntu Server] Netplanで仮想ブリッジを作成し、LXCコンテナを外部NWに接続する]]></title><description><![CDATA[
+ やりたいこと
+macvlanのようにコンテナをL2レベルで露出させた上で、ホスト&lt;-&gt;コンテナ間通信を自由に行いたい。
+つまり、Hyper-VでいうところのExternal Switchを構成したい。VMwareでいうところの普通の仮想スイッチ。
+もしも下記に該当する場合は他のやり方で。どちらも仮想ブリッジを挟まないため早い(らしい)です
+
+ホスト&lt;-&gt;コンテナ間の通信が不要: macvlanを使う
+ホストマシンでSR-IOVが使える: SR-IOVを使う
+
+
+ やること
+作成の段階でネットワークが切断されるので注意。直接コンソール接続できる環境でやるのが安心...]]></description><link>https://zenn.dev/note_kdia/articles/56201d7d157bf3</link><guid isPermaLink="true">https://zenn.dev/note_kdia/articles/56201d7d157bf3</guid><pubDate>Sun, 13 Oct 2024 07:58:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4skMk9Pe--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BUbuntu%2520Server%255D%2520Netplan%25E3%2581%25A7%25E4%25BB%25AE%25E6%2583%25B3%25E3%2583%2596%25E3%2583%25AA%25E3%2583%2583%25E3%2582%25B8%25E3%2582%2592%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2597%25E3%2580%2581LXC%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2586%25E3%2583%258A%25E3%2582%2592%25E5%25A4%2596%25E9%2583%25A8NW%25E3%2581%25AB%25E6%258E%25A5%25E7%25B6%259A%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:note_kdia%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0ZnpWX2VBbk5xMUc4T3A5VDZUaE5BSTRRYjljWnZ6NGxLelpNWFcxeE09czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>note_kdia</dc:creator></item><item><title><![CDATA[Windowsが入ったSSDとHDDを新しい2台のSSDにクローンしてみた]]></title><description><![CDATA[常時利用しているWindowsマシンのSSDとHDDがともに寿命を迎え、新たに2台のSSDを用意してOSごとクローンして引っ越しました。無事成功したので作業の手順をここに記録しておきます。
+
+ 新旧の構成
+
+
+
+
+旧構成
+新構成
+
+
+
+
+Cドライブ  ブートドライブ
+SSD 500GB  Crucial CT500MX500SSD1  2.5インチ, SATA3
+SSD 500GB  Crucial CT500P3SSD8  M.2 (2280), NVMe, PCIe Gen3 x4
+
+
+Dドライブ
+HDD 1TB  WesternDigital WD Blue WD10EZEX  3...]]></description><link>https://zenn.dev/nanase_t/articles/d5021bf69b5304</link><guid isPermaLink="true">https://zenn.dev/nanase_t/articles/d5021bf69b5304</guid><pubDate>Sat, 12 Oct 2024 01:50:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--VWM-pagw--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Windows%25E3%2581%258C%25E5%2585%25A5%25E3%2581%25A3%25E3%2581%259FSSD%25E3%2581%25A8HDD%25E3%2582%2592%25E6%2596%25B0%25E3%2581%2597%25E3%2581%25842%25E5%258F%25B0%25E3%2581%25AESSD%25E3%2581%25AB%25E3%2582%25AF%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%25B3%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E4%25B8%2583%25E7%2580%25AC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JmZDc4M2MzOGIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>七瀬</dc:creator></item><item><title><![CDATA[Ubuntu on Raspberry Pi で ネットワークを NetWorkManager で管理するための netplan]]></title><description><![CDATA[
+ あらすじ
+
+古い Raspberry Pi には 5 GHz の Wi-Fi アクセスポイントに対応していません。
+
+systemd.networkd でも別にいいんですけど、nmtui になれているので…
+
+
+ 環境
+$ lsb-release -a
+Distributor ID:	Ubuntu
+Description:	Ubuntu 24.04.1 LTS
+Release:	24.04
+Codename:	noble
+
+ NetWorkManager
+
+ NetworkManager のインストール
+apt で入れられます。
+sudo apt install network-ma...]]></description><link>https://zenn.dev/sasakulari/articles/fc3343fc2d6a4b</link><guid isPermaLink="true">https://zenn.dev/sasakulari/articles/fc3343fc2d6a4b</guid><pubDate>Tue, 08 Oct 2024 14:23:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--zYqZjnUi--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ubuntu%2520on%2520Raspberry%2520Pi%2520%25E3%2581%25A7%2520%25E3%2583%258D%25E3%2583%2583%25E3%2583%2588%25E3%2583%25AF%25E3%2583%25BC%25E3%2582%25AF%25E3%2582%2592%2520NetWorkManager%2520%25E3%2581%25A7%25E7%25AE%25A1%25E7%2590%2586%25E3%2581%2599%25E3%2582%258B%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%2520...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2595%25E3%2581%2595%25E3%2581%258F%25E3%2582%2589%25E3%2582%258A%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2EyYzk0ZGQ3YWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ささくらり</dc:creator></item><item><title><![CDATA[cronで仮想環境venvのpythonが実行できなかった]]></title><description><![CDATA[
+ 環境
+$ lsb_release -a
+No LSB modules are available.
+Distributor ID: Ubuntu
+Description:    Ubuntu 24.04 LTS
+Release:        24.04
+Codename:       noble
+
+$ python --version
+Python 3.12.3
+
+ やろうとしたこと
+cronでAM10:00にpythonスクリプトを自動実行したかった
+実行したいスクリプトの場所は/home/user/project/script.py
+venvの場所は/home/user/pro...]]></description><link>https://zenn.dev/kaki_xxx/articles/dd2d8664ac7e44</link><guid isPermaLink="true">https://zenn.dev/kaki_xxx/articles/dd2d8664ac7e44</guid><pubDate>Tue, 08 Oct 2024 06:26:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ARuI6Qi_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:cron%25E3%2581%25A7%25E4%25BB%25AE%25E6%2583%25B3%25E7%2592%25B0%25E5%25A2%2583venv%25E3%2581%25AEpython%25E3%2581%258C%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%25A7%25E3%2581%258D%25E3%2581%25AA%25E3%2581%258B%25E3%2581%25A3%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kaki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVhYjc4N2YxNDQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kaki</dc:creator></item><item><title><![CDATA[Azure仮想マシン(Ubuntu)が起動しなくなったので作り直した]]></title><description><![CDATA[
+ はじめに
+普段Azure上では仮想マシン(Ubuntu)上にDockerサービスを入れて、コンテナ上で個人的なサービスを動かしています。
+なぜContainer AppsやContainer InstancesなどのAzure PaaSを使わないのかというと、普段からLinuxに触れる機会を常に維持するのが目的です。(お仕事だったら無論PaaSをフル活用します！)
+先日カーネルアップデートや設定変更を繰り返していたらrootボリュームがマウントできなくなり、OSが起動しなくなったのでその対応をしました。
+
+ この記事でわかること、わからないこと
+
+OSが起動するように修復する方法はこ...]]></description><link>https://zenn.dev/yotan/articles/a3ee6a9715cf98</link><guid isPermaLink="true">https://zenn.dev/yotan/articles/a3ee6a9715cf98</guid><pubDate>Thu, 03 Oct 2024 23:38:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--JVmSEzXU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Azure%25E4%25BB%25AE%25E6%2583%25B3%25E3%2583%259E%25E3%2582%25B7%25E3%2583%25B3%2528Ubuntu%2529%25E3%2581%258C%25E8%25B5%25B7%25E5%258B%2595%25E3%2581%2597%25E3%2581%25AA%25E3%2581%258F%25E3%2581%25AA%25E3%2581%25A3%25E3%2581%259F%25E3%2581%25AE%25E3%2581%25A7%25E4%25BD%259C%25E3%2582%258A%25E7%259B%25B4%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2588%25E3%2581%259F%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ViYTdmNDg2NGUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>よたん</dc:creator></item><item><title><![CDATA[Linuxのマルチブート環境を作る]]></title><description><![CDATA[
+ なんの記事？
+Windows PCからUbuntuのマルチブート環境を作成したときに詰まったポイントのメモ。
+
+ 必要なもの
+
+インストール体調のディスク（今回はSSD）
+イメージを焼くディスク（今回はUSBメモリ）
+有線マウス・キーボード
+
+
+ 手順
+
+ Ubuntuのイメージを入手する
+
+検索して出てくる最新のデスクトップ版をダウンロードする
+https://www.ubuntulinux.jp/download
+
+
+ イメージを焼く
+
+isoイメージファイルをディスクに焼く
+今回はRufusを使用する
+とくに設定はいじらず、対象ディスクを選択（目的デバイスが表示されていない場合...]]></description><link>https://zenn.dev/ncdc/articles/multiboot-ubuntu</link><guid isPermaLink="true">https://zenn.dev/ncdc/articles/multiboot-ubuntu</guid><pubDate>Thu, 03 Oct 2024 12:15:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--MI4EM8tx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%25E3%2581%25AE%25E3%2583%259E%25E3%2583%25AB%25E3%2583%2581%25E3%2583%2596%25E3%2583%25BC%25E3%2583%2588%25E7%2592%25B0%25E5%25A2%2583%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:ratmie%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNhODZhNDA5ZDMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:NCDC%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2Rhcmsvci5wbmc=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ratmie</dc:creator></item><item><title><![CDATA[Ubuntu（WSL2）でyarnをセットアップ]]></title><description><![CDATA[
+ はじめに
+数年ぶりに yarn を使おうとセットアップしたらハマった。
+
+ 解決策
+前提
+
+Ubuntu 22.04
+nodenv 1.4.1
+
+公式どおりインストール手順実施
+corepack -v
+corepack enable
+yarnのパスを通す設定を入れる。
+vi ~/.bashrc
+
+.bashrc
+# yarn
+export PATH="`yarn global bin`:$PATH"
+
+yarn -v
+]]></description><link>https://zenn.dev/takaha4k/articles/80f8e2c3bc408d</link><guid isPermaLink="true">https://zenn.dev/takaha4k/articles/80f8e2c3bc408d</guid><pubDate>Tue, 01 Oct 2024 09:34:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--15QSulHE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ubuntu%25EF%25BC%2588WSL2%25EF%25BC%2589%25E3%2581%25A7yarn%25E3%2582%2592%25E3%2582%25BB%25E3%2583%2583%25E3%2583%2588%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:takaha4k%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzViZDg4YTkzZTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takaha4k</dc:creator></item><item><title><![CDATA[フォレンジック向けLinux「C.A.IN.E.」を用いたディスク保全]]></title><description><![CDATA[
+ 概要
+C.A.IN.E. (Computer Aided Investigative Environment) は名前の通り、PCを対象とした調査支援環境です。
+フォレンジック向けのLinuxはいくつかありますが、明確にそれのみを目的として設計されているので直感的に使えるし、ドキュメントも整備されているので個人的にはおすすめです。
+本記事では、このC.A.IN.E.を使ってフォレンジック調査対象機器のディスクイメージを保全する方法について取り上げます。
+https://www.caine-live.net/
+ちなみに、C.A.IN.E.はUbuntuベースのOSです。
+
+ 起動
+本記...]]></description><link>https://zenn.dev/sum3sh1/articles/a497f834ce1bbc</link><guid isPermaLink="true">https://zenn.dev/sum3sh1/articles/a497f834ce1bbc</guid><pubDate>Fri, 27 Sep 2024 23:34:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hj2LOwxT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25AC%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%2583%25E3%2582%25AF%25E5%2590%2591%25E3%2581%2591Linux%25E3%2580%258CC.A.IN.E.%25E3%2580%258D%25E3%2582%2592%25E7%2594%25A8%25E3%2581%2584%25E3%2581%259F%25E3%2583%2587%25E3%2582%25A3%25E3%2582%25B9%25E3%2582%25AF%25E4%25BF%259D%25E5%2585%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:sumeshi_kun%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzYwM2EzNzkyNzEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sumeshi_kun</dc:creator></item><item><title><![CDATA[Ubuntuの起動時に実行される`zram`スワップを恒久的に無効化する方法]]></title><description><![CDATA[
+ 動機
+Ubuntu 22.04でKubernetesを動かしているが、起動時にzramのスワップが有効になってしまう。毎回swapoff -aを手動実行するのも面倒なので実行されている箇所を特定してこれを無効にしたい。
+
+ スワップを確認する
+swaponを実行すると現在使用可能なスワップの一覧を確認できます。
+&gt; swapon
+NAME       TYPE      SIZE USED PRIO
+/dev/zram0 partition 7.8G   0B  100
+/dev/zram0が有効になっています。swapoff -aを実行すれば一旦は無効になりますが、マシンを再...]]></description><link>https://zenn.dev/matoruru/articles/cce6633f2a5f1f</link><guid isPermaLink="true">https://zenn.dev/matoruru/articles/cce6633f2a5f1f</guid><pubDate>Thu, 26 Sep 2024 14:51:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qFPfxUNK--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ubuntu%25E3%2581%25AE%25E8%25B5%25B7%25E5%258B%2595%25E6%2599%2582%25E3%2581%25AB%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%2595%25E3%2582%258C%25E3%2582%258B%2560zram%2560%25E3%2582%25B9%25E3%2583%25AF%25E3%2583%2583%25E3%2583%2597%25E3%2582%2592%25E6%2581%2592%25E4%25B9%2585%25E7%259A%2584%25E3%2581%25AB%25E7%2584%25A1%25E5%258A%25B9%25E5%258C%2596%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:matoruru%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q1ODFmMzcwZmYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>matoruru</dc:creator></item></channel></rss>
