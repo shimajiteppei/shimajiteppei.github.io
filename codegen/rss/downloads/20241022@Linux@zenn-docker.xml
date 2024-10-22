@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Docker」のフィード]]></title><description><![CDATA[Zennのトピック「Docker」のRSSフィードです]]></description><link>https://zenn.dev/topics/docker</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/01c7f20365.png</url><title>Zennの「Docker」のフィード</title><link>https://zenn.dev/topics/docker</link></image><generator>zenn.dev</generator><lastBuildDate>Tue, 22 Oct 2024 11:26:46 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/docker/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Getting started with Testcontainers for Java をやってみる]]></title><description><![CDATA[
+ はじめに
+Testcontainers というのを知ったので試しに Java でやってみようと思います。
+
+ Testcontainers とは？
+https://testcontainers.com/
+公式では以下のように書かれています。
+実際の依存関係を持つユニットテスト
+Testcontainersは、データベース、メッセージブローカー、ウェブブラウザなど、Dockerコンテナ
+で実行できるものなら何でも、使い捨ての軽量インスタンスを提供するためのオープンソースライブラリ
+です。
+また Getting started with Testcontainers for Java の...]]></description><link>https://zenn.dev/rescuenow/articles/ad57b1637f206a</link><guid isPermaLink="true">https://zenn.dev/rescuenow/articles/ad57b1637f206a</guid><pubDate>Tue, 22 Oct 2024 02:17:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Zg5UdX4D--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Getting%2520started%2520with%2520Testcontainers%2520for%2520Java%2520%25E3%2582%2592%25E3%2582%2584%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:takeuchi_kazuya%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E0NWI1N2NlZmMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%25AC%25E3%2582%25B9%25E3%2582%25AD%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%258A%25E3%2582%25A6%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNmZGM2NTEzMmUuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takeuchi_kazuya</dc:creator></item><item><title><![CDATA[VSCode DevContainerでSysML v2の開発環境を構築する🛠️]]></title><description><![CDATA[
+ はじめに
+システムズエンジニアリングの分野で注目を集めているSysML v2。この記事では、VSCode DevContainerを使用してSysML v2の開発環境を構築する方法を紹介します。
+この記事の内容は、gorenje氏のSysMLv2 Jupyter Docker環境を参考にしています。gorenje氏の素晴らしい環境構築に感謝すると共に、VSCodeのDevContainer環境に適応させるためにいくつかの修正を加えています。
+また、この記事で紹介する環境構築のためのコードは、私のGitHubリポジトリで公開しています。実際の設定ファイルやDockerfileをご覧いた...]]></description><link>https://zenn.dev/chantakan/articles/8f0d5f564b7aec</link><guid isPermaLink="true">https://zenn.dev/chantakan/articles/8f0d5f564b7aec</guid><pubDate>Mon, 21 Oct 2024 18:30:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--VX_oPaiW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:VSCode%2520DevContainer%25E3%2581%25A7SysML%2520v2%25E3%2581%25AE%25E9%2596%258B%25E7%2599%25BA%25E7%2592%25B0%25E5%25A2%2583%25E3%2582%2592%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2599%25E3%2582%258B%2520%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Tom%2520Python%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk3NDlhYTY2ZWQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Tom Python</dc:creator></item><item><title><![CDATA[Docker環境でNext.jsのhot reloadが効かない]]></title><description><![CDATA[
+ はじめに
+新卒で入社して半年過ぎました。早いです、、、
+最近、技術ブログの方を更新してなくて反省です。
+業務では、RailsとNext.jsを扱った案件で新卒ながらバックからフロント、Dockerの構築からAWSまでと結構色々な業務に携わらせてもらってとてもありがたい感じです。
+新しくNext.jsの導入作業や新機能を開発してたりとドタバタしてました。
+今回は、業務中にあったDockerでNext.jsを構築した際に起きるhot reloadが効かないというものについての対処法を記述していきたいと思います。
+
+ ホットリロードとは
+ホットリロードとは、開発中にコードを変更したときにリ...]]></description><link>https://zenn.dev/rrr068/articles/fd0f7b630231ee</link><guid isPermaLink="true">https://zenn.dev/rrr068/articles/fd0f7b630231ee</guid><pubDate>Mon, 21 Oct 2024 14:38:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_MVAgqBU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25A7Next.js%25E3%2581%25AEhot%2520reload%25E3%2581%258C%25E5%258A%25B9%25E3%2581%258B%25E3%2581%25AA%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E4%25BA%2594%25E5%258F%25B3%25E8%25A1%259B%25E9%2596%2580%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ExY2Y0YjhkYTQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>五右衛門</dc:creator></item><item><title><![CDATA[[Docker]volumesのパスがアプリを読み込む範囲だと知らなかった]]></title><description><![CDATA[docker-compose.ymlのvolumes設定について✐
+
+ ■volumesのこと
+ボリュームの一番の役割はデータの永続化ができること。
+dockerコンテナはデータをコンテナ内に残すことはできないのでコンテナ削除するときにデータも消えてしまう。
+そこで、ボリュームを設定してコンテナ起動時にローカルにあるデータをコンテナ内に取り入れてデータを保持しているように扱える。
+
+docker-compose.yml
+    volumes:
+      - ./var/www/html:/var/www/html
+
+左辺の「./var/www/html:」はローカルのフォルダパス（ア...]]></description><link>https://zenn.dev/tamae/articles/7aa417d2f45929</link><guid isPermaLink="true">https://zenn.dev/tamae/articles/7aa417d2f45929</guid><pubDate>Mon, 21 Oct 2024 11:30:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0y-KlV6N--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BDocker%255Dvolumes%25E3%2581%25AE%25E3%2583%2591%25E3%2582%25B9%25E3%2581%258C%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E8%25AA%25AD%25E3%2581%25BF%25E8%25BE%25BC%25E3%2582%2580%25E7%25AF%2584%25E5%259B%25B2%25E3%2581%25A0%25E3%2581%25A8%25E7%259F%25A5%25E3%2582%2589%25E3%2581%25AA%25E3%2581%258B%25E3%2581%25A3%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:madoka%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRmNGUxNDkyYTMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>madoka</dc:creator></item><item><title><![CDATA[[個人開発] 立て替え管理アプリを開発しました]]></title><description><![CDATA[
+ 概要
+個人開発でiOSアプリを作りました。開発開始から半年程度経過しているため忘れている部分は多いですが、思い出しながら背景や使用した技術などを書いていきます！
+
+ 作ったアプリ: Tateca - ずっと使える立て替え管理アプリ
+Tatecaは、友達やカップルとの立て替えを簡単に管理できるアプリです。一度グループを作成すれば、そのまま長期的に使い続けられます。グループ内で立て替えの記録を追加し合うことで、実質的な返済を行います。
+個人的にはかなりアイコンがお気に入りです！
+
+
+ App Store
+ダウンロードはこちら
+https://apps.apple.com/app/id65...]]></description><link>https://zenn.dev/taka_noiri/articles/9d5dd2197f1bac</link><guid isPermaLink="true">https://zenn.dev/taka_noiri/articles/9d5dd2197f1bac</guid><pubDate>Mon, 21 Oct 2024 09:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--116W1ouc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255B%25E5%2580%258B%25E4%25BA%25BA%25E9%2596%258B%25E7%2599%25BA%255D%2520%25E7%25AB%258B%25E3%2581%25A6%25E6%259B%25BF%25E3%2581%2588%25E7%25AE%25A1%25E7%2590%2586%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E9%2596%258B%25E7%2599%25BA%25E3%2581%2597%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Taka%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBlZjBhN2YzMWMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Taka</dc:creator></item><item><title><![CDATA[DockerのubuntuイメージにRuby on Railsをインストールしてみた話]]></title><description><![CDATA[
+ 要目
+dockerのubuntu:latestにRuby on Railsをインストールし、起動確認できるまでの作業まとめです。
+実施日は 2024/10/21 ですので、その時点の最新のubuntuイメージで行っています。
+インストールが必要なものだけ知りたい方は、まとめを参照ください。
+
+ 動機
+普段、開発環境を構築する時は最初からRubyがインストールされたDockerイメージを使ってますが、
+素のubuntuにインストールしたらどうなるのかという興味本位の試みです。
+
+ 用意したもの
+Dockerが実行できる環境（今回はMac）
+
+ 作業記録
+とりあえずubuntuの入ったコ...]]></description><link>https://zenn.dev/fukurozuno/articles/36c3dc01400fab</link><guid isPermaLink="true">https://zenn.dev/fukurozuno/articles/36c3dc01400fab</guid><pubDate>Mon, 21 Oct 2024 06:19:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--PG_o-4og--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%25E3%2581%25AEubuntu%25E3%2582%25A4%25E3%2583%25A1%25E3%2583%25BC%25E3%2582%25B8%25E3%2581%25ABRuby%2520on%2520Rails%25E3%2582%2592%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:rokuen%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JjYmQ4YTBkNTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>rokuen</dc:creator></item><item><title><![CDATA[Next.jsアプリケーションで実行時に環境変数を設定する]]></title><description><![CDATA[今やReactを使ってアプリケーションを作る時に、一番最初に思い浮かぶのがNext.jsというほど、どこでも使われているフレームワークがNext.jsです。
+私の会社でも例に漏れずNext.jsを使用してアプリケーションを開発していますが、デプロイ時に起こった問題が
+
+ Next.jsはビルド時に成果物に環境変数を埋め込む
+ということです。
+実際にビルドされた.nextを見てみると
+
+このように、環境変数として設定している値が埋め込まれているのがわかります。
+そして、実行時にはこの埋め込まれた環境変数がそのまま使われます。
+これの何が問題になるかというと、ビルドしたファイルをそのまま複数...]]></description><link>https://zenn.dev/minato86/articles/138b4604044b9f</link><guid isPermaLink="true">https://zenn.dev/minato86/articles/138b4604044b9f</guid><pubDate>Sun, 20 Oct 2024 21:54:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--SnO3RAOQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Next.js%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2581%25A7%25E5%25AE%259F%25E8%25A1%258C%25E6%2599%2582%25E3%2581%25AB%25E7%2592%25B0%25E5%25A2%2583%25E5%25A4%2589%25E6%2595%25B0%25E3%2582%2592%25E8%25A8%25AD%25E5%25AE%259A%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25B7%25B3%25E6%25B3%25A2%25E3%2581%25BF%25E3%2581%25AA%25E3%2581%25A8%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y2Y2Y5MmRhNmMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>巳波みなと</dc:creator></item><item><title><![CDATA[Azure App ServiceでマネージドIDを使ってコンテナレジストリのイメージをpullする]]></title><description><![CDATA[私の働いている会社では、Azure App Service Web App for Containersでアプリケーションをホストしています。
+Azure App Serviceには、Azure PipelinesでビルドしたDocker imageをAzure Container Registryにpushしてデプロイしてるのですが、以下のようなエラーでAzure App Serviceからのpullができませんでした。
+2021-03-23T21:26:19.442Z ERROR - DockerApiException: Docker API responded with stat...]]></description><link>https://zenn.dev/minato86/articles/bdfe6c0c6f725b</link><guid isPermaLink="true">https://zenn.dev/minato86/articles/bdfe6c0c6f725b</guid><pubDate>Sun, 20 Oct 2024 19:55:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--F-cYtgBD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Azure%2520App%2520Service%25E3%2581%25A7%25E3%2583%259E%25E3%2583%258D%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%2589ID%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2586%25E3%2583%258A%25E3%2583%25AC%25E3%2582%25B8%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25AA%25E3%2581%25AE%25E3%2582%25A4%25E3%2583%25A1%25E3%2583%25BC%25E3%2582%25B8%25E3%2582%2592pull%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25B7%25B3%25E6%25B3%25A2%25E3%2581%25BF%25E3%2581%25AA%25E3%2581%25A8%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y2Y2Y5MmRhNmMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>巳波みなと</dc:creator></item><item><title><![CDATA[Skopeo で Docker Registry を同期する]]></title><description><![CDATA[
+ 背景
+2つのDocker Registryを同期（コピー）させたい場合、docker pullとdocker pushで同期させることができる。しかしマルチプラットフォームビルドされたイメージを同期させたい場合において、使用しているPCのCPUアーキテクチャのイメージしか同期できないなどの問題がある。そのためskopeoを用いてマルチプラットフォームビルドのイメージの同期を行う。
+
+ 環境
+
+Ubuntu 22.04 LTS
+Docker 24.0.7
+Skopeo 1.4.1
+CPU amd64 (x86_64)
+
+
+ Skopeoのインストール
+Installing Skopeo...]]></description><link>https://zenn.dev/room_208/articles/b8c7a2d8c3ab95</link><guid isPermaLink="true">https://zenn.dev/room_208/articles/b8c7a2d8c3ab95</guid><pubDate>Sun, 20 Oct 2024 08:53:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--freJUDJH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Skopeo%2520%25E3%2581%25A7%2520Docker%2520Registry%2520%25E3%2582%2592%25E5%2590%258C%25E6%259C%259F%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:room_208%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q2MmRkNTEzN2IuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>room_208</dc:creator></item><item><title><![CDATA[[Docker]DBを共有している２つのサービスを設定するyml🍕]]></title><description><![CDATA[
+ 今回やりたかったこと
+１つのDBを共有する、２つのサービス（Webサイト画面と、そのWebサイトの管理画面）をローカル環境構築する。
+
+ ２つのサービスについて
+・Webサイトとその管理画面には、共有ディレクトリを持っている
+・設定内容はドキュメントルート以外同じ
+
+ docker-compose.ymlの設定
+サービスを２つ立てる場合に、docker-compose.ymlで変更する設定条件
+　・サービス名
+　・コンテナ名（同じコンテナ名は使用することはできない）
+　・port番号（同じポート番号を設定していると同時にブラウザ表示できない）
+　・ドキュメントルート（Dcokrefi...]]></description><link>https://zenn.dev/tamae/articles/5bc60e146c7c0f</link><guid isPermaLink="true">https://zenn.dev/tamae/articles/5bc60e146c7c0f</guid><pubDate>Sun, 20 Oct 2024 06:30:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--CL9yP2mr--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BDocker%255DDB%25E3%2582%2592%25E5%2585%25B1%25E6%259C%2589%25E3%2581%2597%25E3%2581%25A6%25E3%2581%2584%25E3%2582%258B%25EF%25BC%2592%25E3%2581%25A4%25E3%2581%25AE%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2593%25E3%2582%25B9%25E3%2582%2592%25E8%25A8%25AD%25E5%25AE%259A%25E3%2581%2599%25E3%2582%258Byml%2520%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:madoka%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRmNGUxNDkyYTMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>madoka</dc:creator></item><item><title><![CDATA[Homebrew付きAlpine LinuxをDockerで作る]]></title><description><![CDATA[
+ 記事の背景
+元々は開発環境をWSL上のUbuntu &amp; Homebrewで構築していましたが、
+色々なファイルを誤って削除してしまったりで起動できなくなり、
+都度初期化し作り直していたため、構築時間がかさみ、非常に面倒だと感じていました。
+その中で2年程前にDockerとAlpine Linuxの存在を知ったことで、
+ミニマルな開発環境をイメージ化しておいて、壊れたらコンテナごと削除して作り直す
+という構想が出来ました。
+しかし、当時はAlpine LinuxにHomebrewを入れるのが至難の業で、そのままでは導入できず、
+フォルダをコマンドで作成し、Rubyを一からコンパ...]]></description><link>https://zenn.dev/solitarywalker/articles/89a1e0c80b06a5</link><guid isPermaLink="true">https://zenn.dev/solitarywalker/articles/89a1e0c80b06a5</guid><pubDate>Sat, 19 Oct 2024 13:25:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dSkVI1Sy--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Homebrew%25E4%25BB%2598%25E3%2581%258DAlpine%2520Linux%25E3%2582%2592Docker%25E3%2581%25A7%25E4%25BD%259C%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:solitarywalker%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSUszVUxxTzJDMEFQUTVaM1hvNHBhUUlPWmtBOWZ0cklteEtDbzFnQUFZWEpBZHlnPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>solitarywalker</dc:creator></item><item><title><![CDATA[Express認証付きスターターセット: Docker×Prisma×JWTで始めるバックエンド構築]]></title><description><![CDATA[
+ はじめに
+TypeScriptで認証付きのバックエンドを実装する機会があったため、今回その手順を記事にまとめてみました。この記事では、Dockerを使ったMySQLデータベースの管理、Prismaを用いたデータ操作、そしてJWTによる認証機能の実装について書いてます。
+
+ 目次
+
+はじめに
+関連記事
+該当ソースコード
+プロジェクトの初期設定
+Expressのセットアップ
+Dockerの環境構築
+Prisma設定
+ユーザー作成仮実装
+ユーザー登録とログイン
+認証ミドルウェアの実装
+ログアウトの実装
+おわりに
+
+
+ 該当ソースコード
+https://github.com/mikaijun...]]></description><link>https://zenn.dev/miumi/articles/812c7038e92b8f</link><guid isPermaLink="true">https://zenn.dev/miumi/articles/812c7038e92b8f</guid><pubDate>Sat, 19 Oct 2024 09:23:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--uMDJwKbI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Express%25E8%25AA%258D%25E8%25A8%25BC%25E4%25BB%2598%25E3%2581%258D%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%25BC%25E3%2582%25BB%25E3%2583%2583%25E3%2583%2588%253A%2520Docker%25C3%2597Prisma%25C3%2597JWT%25E3%2581%25A7%25E5%25A7%258B%25E3%2582%2581%25E3%2582%258B%25E3%2583%2590%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2589%25E6%25A7%258B%25E7%25AF%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%259F%25E3%2582%25AB%25E3%2582%25A4%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y4YjgwZTkyZmEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ミカイ</dc:creator></item><item><title><![CDATA[Docker設定ファイルの基本メモ✐]]></title><description><![CDATA[docker-compose.yml
+Dockerコンテナは、dockerイメージから作られる。
+dockerイメージは、Dockerfileから作られる。
+
+ docker-compose.ymlは？
+Docker Composeを使用するための設定ファイル
+Docker Composeでは複数のコンテナを生成、アプリの実行ができる。
+Dockerfileとの違い
+Docerfileは１つのコンテナに対する設定ファイルだけど、
+docker-compose.ymlでは複数のコンテナの設定が可能で、
+コンテナ間の関係についても設定できる。
+
+ ■ドキュメントルートの設定について
+環境構築...]]></description><link>https://zenn.dev/tamae/articles/9d24bf07e13343</link><guid isPermaLink="true">https://zenn.dev/tamae/articles/9d24bf07e13343</guid><pubDate>Sat, 19 Oct 2024 06:30:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2AQ68oh1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%25E8%25A8%25AD%25E5%25AE%259A%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2581%25AE%25E5%259F%25BA%25E6%259C%25AC%25E3%2583%25A1%25E3%2583%25A2%25E2%259C%2590%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:madoka%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRmNGUxNDkyYTMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>madoka</dc:creator></item><item><title><![CDATA[【Docker】【AWS】ECRへpushするまでの作業]]></title><description><![CDATA[                                 ＜大まかな手順＞
+1 EC2インスタンス上にdockerをインストール
+    A dnf install docker
+2 localで起動確認したDockerfileをdockerhubへpush
+    A locakでDockerfileを起動確認
+    B dockerhubへpush
+3 dockerhubから1で作成したEC2インスタンスに2で作成したdockerimageをpullする作業
+    A 1のEC2インスタンスへ入り、下記の作業
+4 AWSのECSの画面から、ECRのプライベートリポジトリを...]]></description><link>https://zenn.dev/jun202407060017/articles/3ff7208354a205</link><guid isPermaLink="true">https://zenn.dev/jun202407060017/articles/3ff7208354a205</guid><pubDate>Sat, 19 Oct 2024 02:43:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--HZ_1xRUU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Docker%25E3%2580%2591%25E3%2580%2590AWS%25E3%2580%2591ECR%25E3%2581%25B8push%25E3%2581%2599%25E3%2582%258B%25E3%2581%25BE%25E3%2581%25A7%25E3%2581%25AE%25E4%25BD%259C%25E6%25A5%25AD%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:jun%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSllvVHVxY2k3QVJ4R01lckE0OEtsRmRZS2FMYXhJbUQxOEFFbmFzMDhUakl1UlYybmY9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>jun</dc:creator></item><item><title><![CDATA[Docker コンテナ上の RuboCop LSP を使って Ruby コードをフォーマットする]]></title><description><![CDATA[masaki です。
+Ruby を使ったプロジェクトでは、フォーマッターとして RuboCop を使用していることが多いと思います。
+また、RuboCop は LSP（Language Server Protocol）に対応しているため、エディタに組み込んで利用している開発者も多いのではないでしょうか。
+本記事では RuboCop LSP を Docker コンテナ上で起動し、ホスト側のエディタで Ruby コードをフォーマットする設定について解説します。
+
+ この記事の対象者
+
+RuboCop を日常的に使用している Ruby 開発者
+LSP（Language Server Proto...]]></description><link>https://zenn.dev/socialplus/articles/fa0eac39bfa174</link><guid isPermaLink="true">https://zenn.dev/socialplus/articles/fa0eac39bfa174</guid><pubDate>Fri, 18 Oct 2024 09:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--RLVG9yGe--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%2520%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2586%25E3%2583%258A%25E4%25B8%258A%25E3%2581%25AE%2520RuboCop%2520LSP%2520%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%2520Ruby%2520%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2582%2592%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25BC%25E3%2583%259E%25E3%2583%2583%25E3%2583%2588%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:masaki%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I4Mjg2YmNjMDEuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:SocialPLUS%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU3YWM1MjkxMTEuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>masaki</dc:creator></item><item><title><![CDATA[Cloud Workstations・Gemini Code Assistを活用した開発環境構築]]></title><description><![CDATA[
+ Cloud Workstations・Gemini Code Assistを活用した開発環境構築
+
+
+ はじめに
+こんにちは。バンダイナムネクサス データ戦略部の山野です。
+今回は、Google Cloudのサービスを活用してエンジニア向けの開発環境を刷新した事例をご紹介します。私たちの課題と、それをどう解決したかについて、具体的なポイントを深掘りしていきます。
+
+ 経緯と背景
+
+エンジニア向けの開発環境を、ユーザーと管理者の両方にとってより使いやすく、効率的にしたいという要望がありました。そのため、以下の点に注目して改善を試みました。
+
+
+マネージドサービスを活用した運用の効率化：...]]></description><link>https://zenn.dev/bnx_techblog/articles/f4193a163a4f19</link><guid isPermaLink="true">https://zenn.dev/bnx_techblog/articles/f4193a163a4f19</guid><pubDate>Fri, 18 Oct 2024 06:47:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--rhgSf_s2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Cloud%2520Workstations%25E3%2583%25BBGemini%2520Code%2520Assist%25E3%2582%2592%25E6%25B4%25BB%25E7%2594%25A8%25E3%2581%2597%25E3%2581%259F%25E9%2596%258B%25E7%2599%25BA%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2583%2590%25E3%2583%25B3%25E3%2583%2580%25E3%2582%25A4%25E3%2583%258A%25E3%2583%25A0%25E3%2582%25B3%25E3%2583%258D%25E3%2582%25AF%25E3%2582%25B5%25E3%2582%25B9%25E5%25BA%2583%25E5%25A0%25B1%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzEwYWRlOTIzMzUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2590%25E3%2583%25B3%25E3%2583%2580%25E3%2582%25A4%25E3%2583%258A%25E3%2583%25A0%25E3%2582%25B3%25E3%2583%258D%25E3%2582%25AF%25E3%2582%25B5%25E3%2582%25B9%25EF%25BC%258FTechBlog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSkt4NDB3Qk1XbG52c3ZmdlRvQ3M4SXVNbUZkb0RxXzlaVDlvOGJ5THNJdzBXcUx3PXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>バンダイナムコネクサス広報</dc:creator></item><item><title><![CDATA[DevContainersでSpringBootアプリ開発 ~ Podman Desktop × VSCode × SpringBoot ~]]></title><description><![CDATA[
+ 本記事の主目的
+近年、開発環境のセットアップにかかる時間や複雑さを軽減するための技術が数多く登場しています。その中でも、Visual Studio Code Dev Containers（以降DevContainersと呼称します）は、開発環境をコードとして定義し、チーム全体で一貫した環境を提供するための強力なツールです。本記事では、Podman DesktopとVisual Studio Code（VSCode）を活用し、Spring Bootアプリケーションの開発を簡潔かつ効率的に行う方法を紹介します。
+Dockerに代わるコンテナランタイムとして注目されているPodmanを使用...]]></description><link>https://zenn.dev/muit_techblog/articles/23a65f47c5893a</link><guid isPermaLink="true">https://zenn.dev/muit_techblog/articles/23a65f47c5893a</guid><pubDate>Fri, 18 Oct 2024 02:50:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ioVSIJFg--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:DevContainers%25E3%2581%25A7SpringBoot%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E9%2596%258B%25E7%2599%25BA%2520%7E%2520Podman%2520Desktop%2520%25C3%2597%2520VSCode%2520%25C3%2597...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E9%2585%2592%25E4%25BA%2595%2520%25EF%25BC%2588%25E9%259A%2586%25EF%25BC%2589%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzIxZGYyYTRkNjIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E4%25B8%2589%25E8%258F%25B1UFJ%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25A1%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2583%2586%25E3%2582%25AF%25E3%2583%258E%25E3%2583%25AD%25E3%2582%25B8%25E3%2583%25BC%25E3%2583%2586...%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FiODY4OTJjNjIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>酒井 （隆）</dc:creator></item><item><title><![CDATA[コンテナイメージを使用してpuppeteerをAWS Lambdaで動かす]]></title><description><![CDATA[こんにちは。株式会社スペースマーケットでフロントエンドエンジニアをしておりますwado63です。
+puppeteerをコンテナイメージを使ったlambdaで動かそうとした際にかなり苦戦したので、その際のtipsを共有できればと思います。
+AWS, Lambda, Puppeteer, Dockerをそれぞれ使ったことあるような方向けの記事となっておりますのでご了承ください。
+
+ ざっくりまとめ
+
+Macのarm64環境でdocker buildしてpuppeteerは動かせますがversion指定が行いづらい
+chromeはimageを小さくするためにchrome-headless-sh...]]></description><link>https://zenn.dev/spacemarket/articles/lambda-puppeteer-image</link><guid isPermaLink="true">https://zenn.dev/spacemarket/articles/lambda-puppeteer-image</guid><pubDate>Fri, 18 Oct 2024 01:37:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--mXe-tdNw--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2586%25E3%2583%258A%25E3%2582%25A4%25E3%2583%25A1%25E3%2583%25BC%25E3%2582%25B8%25E3%2582%2592%25E4%25BD%25BF%25E7%2594%25A8%25E3%2581%2597%25E3%2581%25A6puppeteer%25E3%2582%2592AWS%2520Lambda%25E3%2581%25A7%25E5%258B%2595%25E3%2581%258B%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:wado63%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc1NTA1NzM5OGYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25B9%25E3%2583%259A%25E3%2583%25BC%25E3%2582%25B9%25E3%2583%259E%25E3%2583%25BC%25E3%2582%25B1%25E3%2583%2583%25E3%2583%2588%2520Engineer%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2UzZjFkZDk3NmYuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>wado63</dc:creator></item><item><title><![CDATA[Windows+git bash環境でdocker -vがうまく動かない件]]></title><description><![CDATA[タイトルの通り。Windows+git bash環境だと -v でうまくマウントができなくて困った。
+
+ 結論
+パス指定の先頭に /$(pwd) をつければ解決
+docker run -v /$(pwd)/tmp:/home/tmp &lt;イメージ名&gt;
+
+ 参考記事
+https://stackoverflow.com/questions/45971412/docker-volume-format-for-windows
+]]></description><link>https://zenn.dev/keit0728/articles/6cb70463bbacfb</link><guid isPermaLink="true">https://zenn.dev/keit0728/articles/6cb70463bbacfb</guid><pubDate>Fri, 18 Oct 2024 00:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--TL0e_nj4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Windows%252Bgit%2520bash%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25A7docker%2520-v%25E3%2581%258C%25E3%2581%2586%25E3%2581%25BE%25E3%2581%258F%25E5%258B%2595%25E3%2581%258B%25E3%2581%25AA%25E3%2581%2584%25E4%25BB%25B6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:keit%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzIyOTZlMjAyNTcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>keit</dc:creator></item><item><title><![CDATA[Dev ContainerでTauriの開発環境を作る]]></title><description><![CDATA[以下のDev Containerの設定ファイルを使う。ポイントは、Desktop (Lightweight)を使ってWebブラウザ上でUbuntu画面を表示し、その画面上でTauriのGUIを表示する。
+
+devcontainer.json
+{
+	"name": "Ubuntu",
+	"image": "mcr.microsoft.com/devcontainers/base:jammy",
+	"features": {
+		"ghcr.io/devcontainers/features/desktop-lite:1": {
+			"version": "latest",
+			"noV...]]></description><link>https://zenn.dev/hkthirano/articles/122b36a6585120</link><guid isPermaLink="true">https://zenn.dev/hkthirano/articles/122b36a6585120</guid><pubDate>Wed, 16 Oct 2024 13:43:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--K76cGT9y--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Dev%2520Container%25E3%2581%25A7Tauri%25E3%2581%25AE%25E9%2596%258B%25E7%2599%25BA%25E7%2592%25B0%25E5%25A2%2583%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AE%25E3%2583%25BC%25E3%2581%25BE%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VlNThkMzViZTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>のーまん</dc:creator></item></channel></rss>
