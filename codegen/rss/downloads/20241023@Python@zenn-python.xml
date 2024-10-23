@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Wed, 23 Oct 2024 00:46:55 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[【個人開発】Chatendarの友達検索機能を深掘り：Next.js(TS)とFlask(Python)での実装を解説]]></title><description><![CDATA[
+ はじめに
+このブログでは、IT未経験で独学の私が開発したアプリである「Chatendar」の主要な機能について解説していきます。今回は、友達検索機能に焦点を当て、その具体的な実装方法をご紹介します。
+!
+ここで紹介するコードやファイルは、友達検索機能を実装する一部にすぎません。そのため、この記事に掲載されているコードだけでは、完全な実装はできない点をご了承ください。
+
+もし、全体のコードをご覧になりたい方は、私のGitHubにて公開していますので、そちらからご確認いただけます。
+https://github.com/R-koma/calendar-chat
+アプリの全体像や概要を知り...]]></description><link>https://zenn.dev/ryoma_itngineer/articles/17388144860a72</link><guid isPermaLink="true">https://zenn.dev/ryoma_itngineer/articles/17388144860a72</guid><pubDate>Wed, 23 Oct 2024 00:19:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--AvZ-iruP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%2580%258B%25E4%25BA%25BA%25E9%2596%258B%25E7%2599%25BA%25E3%2580%2591Chatendar%25E3%2581%25AE%25E5%258F%258B%25E9%2581%2594%25E6%25A4%259C%25E7%25B4%25A2%25E6%25A9%259F%25E8%2583%25BD%25E3%2582%2592%25E6%25B7%25B1%25E6%258E%2598%25E3%2582%258A%25EF%25BC%259ANext.js%2528TS%2529%25E3%2581%25A8Flask%2528Python%2529%25E3%2581%25A7%25E3%2581%25AE%25E5%25AE%259F%25E8%25A3%2585%25E3%2582%2592%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Ryoma%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSjFHanlSZjhuOU5ZcUlMVmNMT3hIZ1dCTWZKU2FiQWZ0OFBwRHhHZUxnWEFCMEF2bDBwUT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Ryoma</dc:creator></item><item><title><![CDATA[Act 05. Pythonの関数とモジュール]]></title><description><![CDATA[
+ はじめに
+Act 01. AIで外国為替を自動売買するまでの道のりをベースに学習を進めて行く。
+今回はPythonの関数とモジュールについて書こうと思う。
+以前自分で書いた記事「Act 02. WindowsでPythonの環境構築とバージョン管理を行う
+」の環境で試す。
+Pythonのバージョンは3.12.7
+
+ 関数とモジュールの違い
+まずは一応Pythonの関数とモジュールの違いについて。
+
+ 関数
+
+
+定義: 関数は、特定のタスクを実行するための再利用可能なコードのブロック
+
+特徴:
+
+入力（引数）を受け取り、処理を行い、結果（戻り値）を返す
+他の関数やプログラムから呼び出し...]]></description><link>https://zenn.dev/onishi_ai_lad/articles/683eebfcd1a34c</link><guid isPermaLink="true">https://zenn.dev/onishi_ai_lad/articles/683eebfcd1a34c</guid><pubDate>Tue, 22 Oct 2024 13:33:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--zM1N3eZc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Act%252005.%2520Python%25E3%2581%25AE%25E9%2596%25A2%25E6%2595%25B0%25E3%2581%25A8%25E3%2583%25A2%25E3%2582%25B8%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%25AB%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258A%25E3%2581%25AB%25E3%2581%2597%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFlYzRlYjFmNjguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>おにし</dc:creator></item><item><title><![CDATA[研究関連お役立ち記事]]></title><description><![CDATA[
+ この記事について
+AI系の研究室に配属された初心者向けのちょっとしたお役立ちメモへのリンクを以下に置いている。参考程度に「ふーん」くらいの気持ちで眺めてもらうと良いだろう。個人的な思想や思いが節々に出てしまっているだろうが悪しからず。
+
+Python環境構築
+サーバー計算
+ディレクトリ構成
+数式系統
+文献管理
+
+
+ 途中のもの
+
+ssh接続
+
+
+ 執筆検討中の内容
+
+おすすめ教科書まとめ
+おすすめ論文まとめ
+おすすめスライドまとめ
+klatexformulaの環境構築手順について
+
+]]></description><link>https://zenn.dev/tsei/articles/c9238d66bc095b</link><guid isPermaLink="true">https://zenn.dev/tsei/articles/c9238d66bc095b</guid><pubDate>Tue, 22 Oct 2024 13:23:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vIVef6zp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%25A0%2594%25E7%25A9%25B6%25E9%2596%25A2%25E9%2580%25A3%25E3%2581%258A%25E5%25BD%25B9%25E7%25AB%258B%25E3%2581%25A1%25E8%25A8%2598%25E4%25BA%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:T_Tsei%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSUlxaXhLT25rekZkallxMnBVMHg5ZXZvUWdwc0FrSVY2RTFsalZmV0RpNHNhWkpBPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>T_Tsei</dc:creator></item><item><title><![CDATA[Python：Authlibを使用して，pem形式の証明書からJWK（JWKS）を生成する．]]></title><description><![CDATA[
+ はじめに
+
+pem形式の公開鍵証明書ファイルから，JWKを生成するプログラムをpython3で記述しました．
+この記事で紹介するプログラムは，jwk中のx5c（証明書チェーン）の設定も加味しています．ですので，実行する際はサーバー証明書，中間証明書，ルート証明書を用意していることを前提としています．
+また，kidは，Authlibを使用してRFC 7638で策定されたJSON Web Key (JWK) Thumbprintになるよう設定しています．
+※私の方で試した証明書の公開鍵はRSA公開鍵です．
+
+
+ プログラムについて
+
+ ライブラリ（インストールする必要があるもの）
+
+py...]]></description><link>https://zenn.dev/tiktaksick/articles/e955a48e7bbc9d</link><guid isPermaLink="true">https://zenn.dev/tiktaksick/articles/e955a48e7bbc9d</guid><pubDate>Tue, 22 Oct 2024 11:03:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--UBpzKGFX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25EF%25BC%259AAuthlib%25E3%2582%2592%25E4%25BD%25BF%25E7%2594%25A8%25E3%2581%2597%25E3%2581%25A6%25EF%25BC%258Cpem%25E5%25BD%25A2%25E5%25BC%258F%25E3%2581%25AE%25E8%25A8%25BC%25E6%2598%258E%25E6%259B%25B8%25E3%2581%258B%25E3%2582%2589JWK%25EF%25BC%2588JWKS%25EF%25BC%2589%25E3%2582%2592%25E7%2594%259F%25E6%2588%2590%25E3%2581%2599%25E3%2582%258B%25EF%25BC%258E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:TikTakSick%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBlMDZjYTQzM2EuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>TikTakSick</dc:creator></item><item><title><![CDATA[［AtCoder］ABC-375｜B - Traveling Takahashi Problem]]></title><description><![CDATA[
+ 設問ページ
+
+🔗ABC-375 B - Traveling Takahashi Problem
+
+
+
+ 提出結果
+import math
+
+
+def getInt():
+    return int(input())
+
+
+def getIntListRow(N):
+    return [list(map(int, input().split())) for _ in range(N)]
+
+
+def main():
+    N = getInt()
+    XY = [[0, 0]] + getIntListRow(N) + [[0, 0]]
+
+    d = 0.0
+    for...]]></description><link>https://zenn.dev/hyperdb/articles/e7e3c305921c15</link><guid isPermaLink="true">https://zenn.dev/hyperdb/articles/e7e3c305921c15</guid><pubDate>Tue, 22 Oct 2024 10:28:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xj3kB7yY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25EF%25BC%25BBAtCoder%25EF%25BC%25BDABC-375%25EF%25BD%259CB%2520-%2520Traveling%2520Takahashi%2520Problem%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AF%25E3%2581%2584%25E3%2581%25B1%25E3%2581%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhODJkODgwMzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>はいぱぁ</dc:creator></item><item><title><![CDATA[［AtCoder］ABC-375｜A - Seats]]></title><description><![CDATA[
+ 設問ページ
+
+🔗ABC-375 A - Seats
+
+
+
+ 提出結果
+def getInt():
+    return int(input())
+
+
+def getString():
+    return input()
+
+
+def main():
+    N = getInt()
+    S = list(getString())
+
+    c = 0
+    for i in range(1, N - 1):
+        if S[i] != ".":
+            continue
+        if S[i - 1] == S[i + 1] == "#":
+ ...]]></description><link>https://zenn.dev/hyperdb/articles/caa7e7ec337f3a</link><guid isPermaLink="true">https://zenn.dev/hyperdb/articles/caa7e7ec337f3a</guid><pubDate>Tue, 22 Oct 2024 10:28:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---44q1M1n--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25EF%25BC%25BBAtCoder%25EF%25BC%25BDABC-375%25EF%25BD%259CA%2520-%2520Seats%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AF%25E3%2581%2584%25E3%2581%25B1%25E3%2581%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhODJkODgwMzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>はいぱぁ</dc:creator></item><item><title><![CDATA[DiscordのチャットからBacklogに課題を追加する]]></title><description><![CDATA[この記事では、DiscordのチャットからBacklogにタスクを追加できるBotの作り方について紹介していきます。
+
+ こんな方におすすめ
+
+Backlogを利用している
+Discordを社内チャットとして運用している
+Pythonで社内ツールをつくってみたい
+※Backlogは有料のサービスであり、契約していない場合には利用できません。また、APIキーなどの取得には管理者権限が必要になるため、管理者に確認をとってから始めましょう。
+
+
+ 完成イメージ
+このBotをサーバーに導入すると、「/task」コマンドでタスクの追加を行うことができます。タスクのタイトルと概要を入力ボックス内のハ...]]></description><link>https://zenn.dev/kyomutsugoroad/articles/137b23e99b9812</link><guid isPermaLink="true">https://zenn.dev/kyomutsugoroad/articles/137b23e99b9812</guid><pubDate>Tue, 22 Oct 2024 09:45:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--eTSOflWX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Discord%25E3%2581%25AE%25E3%2583%2581%25E3%2583%25A3%25E3%2583%2583%25E3%2583%2588%25E3%2581%258B%25E3%2582%2589Backlog%25E3%2581%25AB%25E8%25AA%25B2%25E9%25A1%258C%25E3%2582%2592%25E8%25BF%25BD%25E5%258A%25A0%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kyo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSkgzTWo4RFk4SXJsWnlCNlV2TE0wWGg0N0xBQ3VtZTJERGNNZV8zbWV6U2k4Qj1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kyo</dc:creator></item><item><title><![CDATA[私流d.pyでモーダルの作り方]]></title><description><![CDATA[超急ぎで書いてるので結構適当です
+
+ 完成品
+/オウム返し でモーダルが出現、内容を入力し送信すると内容をそのまま返してくれるコードです。
+
+モーダル画面
+
+コマンドの同期と、オウム返し
+
+ コード全体
+import discord
+
+from discord import app_commands
+
+
+intents = discord.Intents.all()
+client = discord.Client(intents=intents)
+guild = discord.Object(id=GUILD_ID)
+tree = discord.app_commands.Command...]]></description><link>https://zenn.dev/luv/articles/c47769db32131b</link><guid isPermaLink="true">https://zenn.dev/luv/articles/c47769db32131b</guid><pubDate>Tue, 22 Oct 2024 09:42:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3ccas8pE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%25A7%2581%25E6%25B5%2581d.py%25E3%2581%25A7%25E3%2583%25A2%25E3%2583%25BC%25E3%2583%2580%25E3%2583%25AB%25E3%2581%25AE%25E4%25BD%259C%25E3%2582%258A%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:lovespaces%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NjZmRjMjg2MGIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>lovespaces</dc:creator></item><item><title><![CDATA[多次元のデータを「フラット化する」とは]]></title><description><![CDATA[
+ データの「フラット化」
+「フラット化する」とは，多次元のデータ（PyTorchのテンソルなど）の形状を変更し，データの次元数を減らし，一つの次元にまとめる操作を指します．具体的には，複数の次元を一つの次元に統合し，データを扱いやすい形状に変換します．
+
+ フラット化の具体例
+ここでは，yの形状を仮定し，yとyをフラット化したy_flatについて具体的に形状を書きます．yの形状を以下のように仮定します．
+yの形状：[batch_size, seq_len, input_dim]
+
+batch_size : バッチサイズ（データのグループ数）
+seq_len : シーケンスの長さ（時系列...]]></description><link>https://zenn.dev/minoda_kohei/articles/356cdfef77449f</link><guid isPermaLink="true">https://zenn.dev/minoda_kohei/articles/356cdfef77449f</guid><pubDate>Tue, 22 Oct 2024 06:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0SkUIVOW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%25A4%259A%25E6%25AC%25A1%25E5%2585%2583%25E3%2581%25AE%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%2592%25E3%2580%258C%25E3%2583%2595%25E3%2583%25A9%25E3%2583%2583%25E3%2583%2588%25E5%258C%2596%25E3%2581%2599%25E3%2582%258B%25E3%2580%258D%25E3%2581%25A8%25E3%2581%25AF%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E7%25B0%2591%25E7%2594%25B0%25E5%25BA%25B7%25E5%25B9%25B3%2520%252F%2520Minoda%2520Kohei%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTGFYbWU1cWpyWHV3Q1BUX21ad2VnZjdTaE9vSGlSQjE5dnJVTW42a3NuMy02RzB2VEc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>簑田康平 / Minoda Kohei</dc:creator></item><item><title><![CDATA[Causalasを開発している因果探索チームの技術ブログを開設しました]]></title><description><![CDATA[初めまして。因果探索アプリケーションCausalasの開発チームに所属する井手です。
+この度、弊社で開発しているCausalas、そして因果探索に関する技術について、広く人に知っていただくために開発ブログを開設することに致しました。
+このブログでは、既存のユーザー様はもちろん、Causalasの導入を検討されている皆様にも、私たちがどのようなプロダクトを提供し、どのような技術を使用しているかを分かりやすくお伝えできればと思っています。
+
+ Causalasとは
+Causalas（コーザラス）は統計的因果探索を用いて、表形式のデータから自動的に変数間の因果関係を推定するソフトウェアです。因...]]></description><link>https://zenn.dev/as_causal/articles/1d4b7912d62abd</link><guid isPermaLink="true">https://zenn.dev/as_causal/articles/1d4b7912d62abd</guid><pubDate>Tue, 22 Oct 2024 03:14:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9rspVBGQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Causalas%25E3%2582%2592%25E9%2596%258B%25E7%2599%25BA%25E3%2581%2597%25E3%2581%25A6%25E3%2581%2584%25E3%2582%258B%25E5%259B%25A0%25E6%259E%259C%25E6%258E%25A2%25E7%25B4%25A2%25E3%2583%2581%25E3%2583%25BC%25E3%2583%25A0%25E3%2581%25AE%25E6%258A%2580%25E8%25A1%2593%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%25E3%2582%2592%25E9%2596%258B%25E8%25A8%25AD%25E3%2581%2597%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E4%25BA%2595%25E6%2589%258B%2520%25E9%25BA%25BB%25E5%258F%258B%25E7%25BE%258E%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRlNDhjNDQ5MDQuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:SCREEN%2520AS%2520%25E5%259B%25A0%25E6%259E%259C%25E6%258E%25A2%25E7%25B4%25A2%25E3%2583%2581%25E3%2583%25BC%25E3%2583%25A0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTEJja2JDb2wtY3MyNG56dUZkT0tNOEVWVU5JeXNXbmhPbGZ5LTJIdU9BUkMwVmR3PXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>井手 麻友美</dc:creator></item><item><title><![CDATA[Llama3.2の使い方とファインチューニングの方法]]></title><description><![CDATA[
+ 内容
+2024年9月25日にMetaから新たなLlama3.2が発表された．Llama3.2シリーズにはテキストモデルである1B・3B，画像を理解し指示に応答できる11B・90Bのビジョンモデルが含まれている．これらのモデルは自然言語処理や画像認識タスクに対応しており，高度な応答生成や画像理解の能力を備えている．
+今回は，特にビジョンモデルである「Llama-3.2-11B-Vision-Instruct」について，その使い方とファインチューニングの手順を詳しく解説する．
+
+ 参考
+
+https://zenn.dev/protoout/articles/73-hugging-face...]]></description><link>https://zenn.dev/tasiten/articles/ccc6adad12f792</link><guid isPermaLink="true">https://zenn.dev/tasiten/articles/ccc6adad12f792</guid><pubDate>Mon, 21 Oct 2024 20:19:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--d5VlOh7x--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Llama3.2%25E3%2581%25AE%25E4%25BD%25BF%25E3%2581%2584%25E6%2596%25B9%25E3%2581%25A8%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2581%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%258B%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%25AE%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tasiten%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2EyYzQwMzJlNWMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tasiten</dc:creator></item><item><title><![CDATA[uvでPyTorchのCPU / CUDAバージョンを環境ごとに管理する その2]]></title><description><![CDATA[こんにちは。今回は前回の記事に引き続き、Pythonのパッケージマネージャのuvを使ってPyTorchをインストールする方法について紹介します。
+前回の記事
+https://zenn.dev/mjun0812/articles/b22adf3fab1fdd
+uv v0.4.23のアップデートで、1つのパッケージについて複数のindex-urlを指定する機能が追加されました。
+https://github.com/astral-sh/uv/releases/tag/0.4.23
+この機能を使うと、環境/パッケージごとに参照するindex-urlを変更できるため、より確実にPyTorchのイ...]]></description><link>https://zenn.dev/mjun0812/articles/b32f870bb3cdbf</link><guid isPermaLink="true">https://zenn.dev/mjun0812/articles/b32f870bb3cdbf</guid><pubDate>Mon, 21 Oct 2024 17:08:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--eACXP1Ny--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:uv%25E3%2581%25A7PyTorch%25E3%2581%25AECPU%2520%252F%2520CUDA%25E3%2583%2590%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%2592%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%2594%25E3%2581%25A8%25E3%2581%25AB%25E7%25AE%25A1%25E7%2590%2586%25E3%2581%2599%25E3%2582%258B%2520%25E3%2581%259D%25E3%2581%25AE2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2582%25E3%2582%258A%25E3%2582%258A%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY1NmNjYzA5MTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>もりりん</dc:creator></item><item><title><![CDATA[深夜に簡単なB問題やろうとしたら，久しぶりで何もできなかった]]></title><description><![CDATA[今回は，AtCoder Beginner Contest 373 B 問題を解いた際につまずいたポイントに関するメモを残しておきます．
+久しぶりに AtCoder をやろうとしたら，B 問題すら解けなかったので，反省点をまとめておきます．
+
+ AtCoder Beginner Contest 373 B
+
+https://atcoder.jp/contests/abc373/tasks/abc373_b
+
+ 回答
+s = input()
+
+x = [0] * 26
+for i in range(26):
+    x[ord(s[i]) - ord("A")] = i # ord("A")...]]></description><link>https://zenn.dev/os515/articles/atcoder-abc373-b</link><guid isPermaLink="true">https://zenn.dev/os515/articles/atcoder-abc373-b</guid><pubDate>Mon, 21 Oct 2024 15:48:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_CL3z3Wc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%25B7%25B1%25E5%25A4%259C%25E3%2581%25AB%25E7%25B0%25A1%25E5%258D%2598%25E3%2581%25AAB%25E5%2595%258F%25E9%25A1%258C%25E3%2582%2584%25E3%2582%258D%25E3%2581%2586%25E3%2581%25A8%25E3%2581%2597%25E3%2581%259F%25E3%2582%2589%25EF%25BC%258C%25E4%25B9%2585%25E3%2581%2597%25E3%2581%25B6%25E3%2582%258A%25E3%2581%25A7%25E4%25BD%2595%25E3%2582%2582%25E3%2581%25A7%25E3%2581%258D%25E3%2581%25AA%25E3%2581%258B%25E3%2581%25A3%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:soso%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4WXhTVFZ2dEMxc1c4N3NudWhKSVp0YTVMUWpsMUR5VW1YVTl5UFY2Zz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>soso</dc:creator></item><item><title><![CDATA[AtCoder - Vacation Together]]></title><description><![CDATA[今回は，AtCoder Beginner Contest 311 B 問題を解いた際につまずいたポイントに関するメモを残しておきます．
+
+ Vacation Together
+
+https://atcoder.jp/contests/abc311/tasks/abc311_b
+
+ 自分の回答
+n, d = map(int, input().split())
+s = []
+for _ in range(n):
+    s.append(input())
+tmp = []
+for j in range(d):
+    ok = True
+    for i in range(n):
+    ...]]></description><link>https://zenn.dev/os515/articles/atcoder-abc311-b</link><guid isPermaLink="true">https://zenn.dev/os515/articles/atcoder-abc311-b</guid><pubDate>Mon, 21 Oct 2024 15:48:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dMu0_uV7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:AtCoder%2520-%2520Vacation%2520Together%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:soso%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4WXhTVFZ2dEMxc1c4N3NudWhKSVp0YTVMUWpsMUR5VW1YVTl5UFY2Zz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>soso</dc:creator></item><item><title><![CDATA[AtCoder - Coloring Matrix]]></title><description><![CDATA[今回は，AtCoder Beginner Contest 311 B 問題を解いた際につまずいたポイントに関するメモを残しておきます．
+Coloring Matrix
+https://atcoder.jp/contests/abc311/tasks/abc311_b
+
+ 自分の回答
+N = int(input())
+A, B = [], []
+for _ in range(N):
+    A.append(list(map(int, input().split())))
+for _ in range(N):
+    B.append(list(map(int, input().split...]]></description><link>https://zenn.dev/os515/articles/atcoder-abc298-b</link><guid isPermaLink="true">https://zenn.dev/os515/articles/atcoder-abc298-b</guid><pubDate>Mon, 21 Oct 2024 15:48:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--A92je71W--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:AtCoder%2520-%2520Coloring%2520Matrix%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:soso%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4WXhTVFZ2dEMxc1c4N3NudWhKSVp0YTVMUWpsMUR5VW1YVTl5UFY2Zz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>soso</dc:creator></item><item><title><![CDATA[cdk でデプロイ可能な uv 管理の AWS Lambda コンテナイメージのスケルトン]]></title><description><![CDATA[普段、pythonで書いたLambdaをStepfunctionsなどにして、cdkでIaCすることで楽に色々な仕組みを作っています。特にLambdaは、コンテナイメージとして開発することで、関数1つあたりのパッケージサイズや、アカウント全体のアーカイブやレイヤーサイズの総計に関するクォータの低さに縛られない開発ができますし、ECSなどへの転用もしやすくなります。
+また、python言語は使える人が多い一方で、パッケージやプロジェクト管理ツールがいくつもあるので色々なスタイルがあってメンバー間でツールの統一に少し困ります。あまり古いものをずっと使っていると、他のメンバーの足を引っ張ってし...]]></description><link>https://zenn.dev/snowsheep/articles/3b65a9f0f7deb6</link><guid isPermaLink="true">https://zenn.dev/snowsheep/articles/3b65a9f0f7deb6</guid><pubDate>Mon, 21 Oct 2024 15:18:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Me3WqlPH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:cdk%2520%25E3%2581%25A7%25E3%2583%2587%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25A4%25E5%258F%25AF%25E8%2583%25BD%25E3%2581%25AA%2520uv%2520%25E7%25AE%25A1%25E7%2590%2586%25E3%2581%25AE%2520AWS%2520Lambda%2520%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2586%25E3%2583%258A%25E3%2582%25A4%25E3%2583%25A1%25E3%2583%25BC%25E3%2582%25B8%25E3%2581%25AE%25E3%2582%25B9%25E3%2582%25B1%25E3%2583%25AB%25E3%2583%2588%25E3%2583%25B3%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yuki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M2MDIzODliNzYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yuki</dc:creator></item><item><title><![CDATA[Python loggingメモ]]></title><description><![CDATA[[loggers]
+keys=root,module1,module2
+
+[handlers]
+keys=consoleHandler,fileHandler
+
+[formatters]
+keys=standardFormatter
+
+[logger_root]
+level=DEBUG
+handlers=consoleHandler,fileHandler
+
+[logger_module1]
+level=INFO
+handlers=consoleHandler
+qualname=module1
+propagate=0
+
+[logger_module2]
+level=ERROR
+handl...]]></description><link>https://zenn.dev/asebi/articles/6ce37385c3c9ea</link><guid isPermaLink="true">https://zenn.dev/asebi/articles/6ce37385c3c9ea</guid><pubDate>Mon, 21 Oct 2024 14:37:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Gz5LgsLp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:Python%2520logging%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:asebi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS2xDeGtmaXVJNkF4QnVzSkQ2UERkbENfdnRDWXJmZ2dEclRFWi15eUNkPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>asebi</dc:creator></item><item><title><![CDATA[Azure OpenAI ServiceのRealtime Audioを使ってVoice to Voiceを実現]]></title><description><![CDATA[
+ やること
+10月にAzure OpenAI ServiceのGPT-4oモデルの一つであるRealtime Audioが発表されました。
+現在JavaScriptとPythonとC#のサンプルコードが提供されています。
+https://github.com/Azure-Samples/aoai-realtime-audio-sdk/tree/main/python/samples
+Pythonのサンプルコードはバックエンドでの動作確認としてしか使えないので、API化してクライアント側から叩けるようにします。
+Voice to Voiceはモバイルアプリでの利用されることが多そうなので...]]></description><link>https://zenn.dev/headwaters/articles/c4028cd8dffd01</link><guid isPermaLink="true">https://zenn.dev/headwaters/articles/c4028cd8dffd01</guid><pubDate>Mon, 21 Oct 2024 13:38:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ZD67pbo7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Azure%2520OpenAI%2520Service%25E3%2581%25AERealtime%2520Audio%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6Voice%2520to%2520Voice%25E3%2582%2592%25E5%25AE%259F%25E7%258F%25BE%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:ikebowsan%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZjNGExY2UxMDYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2598%25E3%2583%2583%25E3%2583%2589%25E3%2582%25A6%25E3%2582%25A9%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%25BC%25E3%2582%25B9%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzUyNTM1ZTc4OGYuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ikebowsan</dc:creator></item><item><title><![CDATA[【discord.py】モーダルの使い方]]></title><description><![CDATA[初めましての方は初めまして。ap12と申します。
+記事を書くのは初めてなので、拙い部分等が多いと思います。
+大目に見てやってください()
+
+ 1.まずモーダルって何?
+discordのモーダルは以下のようなものを指します。
+
+簡単に言えば、テキスト入力欄がある画面です。
+上のテキストボックスは1行のみ、下のテキストボックスは複数行入力できます。
+
+ 2.どのように実装するの?
+なにはともあれ、まずは実際のコードを見てみましょう。
+import discord
+from discord.ext import commands
+
+# 変数botを作成する
+bot = commands.Bot...]]></description><link>https://zenn.dev/ap12/articles/1188c946447d5b</link><guid isPermaLink="true">https://zenn.dev/ap12/articles/1188c946447d5b</guid><pubDate>Mon, 21 Oct 2024 13:38:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--gHXJm0kh--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590discord.py%25E3%2580%2591%25E3%2583%25A2%25E3%2583%25BC%25E3%2583%2580%25E3%2583%25AB%25E3%2581%25AE%25E4%25BD%25BF%25E3%2581%2584%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ap12%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I0ZGQxOGJkNjQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ap12</dc:creator></item><item><title><![CDATA[Atcoder茶色🟤になるまでの勉強法、振り返り]]></title><description><![CDATA[
+ はじめに
+最近、競技プログラミングAtcoderで茶色になりました。
+茶色のレベル感としては、他サイトから引用すると以下のとおりです。
+
+Rating 400以上 (茶色)
+AtCoderにおける分布(2023/11/20現在)
+実レーティング分布： 上位28.462%
+内部レーティング分布： 上位45.928%
+期待できる能力
+コーディングへの安心感がある程度持てます。学生や派遣社員などが茶色のレーティングを持っていたら、とても喜ばしいです。
+基礎的なアルゴリズムへの理解があります。典型的な処理であれば、動的計画法、二分探索などのメジャーなアルゴリズムを適用することが出来ます。一方...]]></description><link>https://zenn.dev/rabbit_penguin0/articles/d1f2835a07eb98</link><guid isPermaLink="true">https://zenn.dev/rabbit_penguin0/articles/d1f2835a07eb98</guid><pubDate>Mon, 21 Oct 2024 11:51:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bX9fTHSf--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Atcoder%25E8%258C%25B6%25E8%2589%25B2%2520%25E3%2581%25AB%25E3%2581%25AA%25E3%2582%258B%25E3%2581%25BE%25E3%2581%25A7%25E3%2581%25AE%25E5%258B%2589%25E5%25BC%25B7%25E6%25B3%2595%25E3%2580%2581%25E6%258C%25AF%25E3%2582%258A%25E8%25BF%2594%25E3%2582%258A%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%259A%25E3%2583%25B3%25E3%2582%25AE%25E3%2583%25B3%2520%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk3NjJhYjQ1YTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ペンギン🐧</dc:creator></item></channel></rss>

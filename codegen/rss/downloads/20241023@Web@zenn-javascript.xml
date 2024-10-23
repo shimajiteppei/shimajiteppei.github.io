@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「JavaScript」のフィード]]></title><description><![CDATA[Zennのトピック「JavaScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/javascript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/64acd76870.png</url><title>Zennの「JavaScript」のフィード</title><link>https://zenn.dev/topics/javascript</link></image><generator>zenn.dev</generator><lastBuildDate>Wed, 23 Oct 2024 04:26:50 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/javascript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[SSRFとはなんぞや]]></title><description><![CDATA[
+ はじめに
+2024年8月12日に、Webアプリケーション開発でよく使用されるHTTPクライアントライブラリ「axios」に脆弱性が発見されました。
+(NVDの報告詳細)[https://nvd.nist.gov/vuln/detail/CVE-2024-39338#range-13199434]
+この脆弱性（CVE-2024-39338）は、Server-Side Request Forgery（SSRF）と呼ばれる攻撃を可能にするものでした。
+NVDによれば、この脆弱性は1.3.2以降から1.7.4(修正対応版)まで続いているとされ、結構長い間気づかれずにいたということになります。...]]></description><link>https://zenn.dev/castingone_dev/articles/suke-axios-ssrf</link><guid isPermaLink="true">https://zenn.dev/castingone_dev/articles/suke-axios-ssrf</guid><pubDate>Wed, 23 Oct 2024 00:37:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bSEN2Hy6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:SSRF%25E3%2581%25A8%25E3%2581%25AF%25E3%2581%25AA%25E3%2582%2593%25E3%2581%259E%25E3%2582%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:CastingONE%2520Tech%2520Blog%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NiOTg1ODI2NjEuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:CastingONE%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE3YjQ5ZGY1Y2MuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>CastingONE Tech Blog</dc:creator></item><item><title><![CDATA[JestでReact MarkdownとRemark GFMのエラーを無理やり回避するメモ]]></title><description><![CDATA[
+ JestでReact MarkdownとRemark GFMのエラーを無理やり回避するメモ
+
+ 環境
+"next": "^14.2.15",
+"react": "^18",
+"react-dom": "^18",
+"react-markdown": "^9.0.1",
+"remark-gfm": "^4.0.0",
+
+ エラー
+jestでreact-markdown、remark-gfmをテストしようとすると、下記のようなエラーが発生する。原因はesmモジュールをCommonJS環境で実行しようとしているかららしい。
+FAIL  ~
+  ● Test suite failed to ...]]></description><link>https://zenn.dev/mitate_gengaku/articles/jest-with-react-markdown-and-remark-gfm</link><guid isPermaLink="true">https://zenn.dev/mitate_gengaku/articles/jest-with-react-markdown-and-remark-gfm</guid><pubDate>Tue, 22 Oct 2024 13:56:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--WlJFDzuZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Jest%25E3%2581%25A7React%2520Markdown%25E3%2581%25A8Remark%2520GFM%25E3%2581%25AE%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E3%2582%2592%25E7%2584%25A1%25E7%2590%2586%25E3%2582%2584%25E3%2582%258A%25E5%259B%259E%25E9%2581%25BF%25E3%2581%2599%25E3%2582%258B%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25BE%25A1%25E6%25A5%25AF%25E7%258E%2584%25E5%25B6%25BD%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0tQOVRYWHQ5Qm1BLVplcURoLWdxUHl4RVFjMmNsRkhSNk95XzVVSVVhPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>御楯玄嶽</dc:creator></item><item><title><![CDATA[JestとReact Testing Libraryでscreen.debugが省略されてしまう]]></title><description><![CDATA[
+ JestとReact Testing Libraryでscreen.debugが省略されてしまう
+screen.debugを使用してUIをconsole上で見たくても途中で省略されてしまう。debugの引数を見ていたらmaxLengthというのがあり、それに数値を渡したら省略されてしまう問題が解決した。
+おそらく下記で40000行までプリントできるという意味になるはず
+screen.debug(undefined, 40000)
+
+ 最後に
+間違っていることがあればコメントに書いていただけると幸いです。
+よろしくお願いいたします。
+]]></description><link>https://zenn.dev/mitate_gengaku/articles/jest-testing-library-screen-debug-depth</link><guid isPermaLink="true">https://zenn.dev/mitate_gengaku/articles/jest-testing-library-screen-debug-depth</guid><pubDate>Tue, 22 Oct 2024 13:56:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_FOObQtB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Jest%25E3%2581%25A8React%2520Testing%2520Library%25E3%2581%25A7screen.debug%25E3%2581%258C%25E7%259C%2581%25E7%2595%25A5%25E3%2581%2595%25E3%2582%258C%25E3%2581%25A6%25E3%2581%2597%25E3%2581%25BE%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25BE%25A1%25E6%25A5%25AF%25E7%258E%2584%25E5%25B6%25BD%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0tQOVRYWHQ5Qm1BLVplcURoLWdxUHl4RVFjMmNsRkhSNk95XzVVSVVhPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>御楯玄嶽</dc:creator></item><item><title><![CDATA[【kintone】計算された数値の前に、条件によって文字を入力する。]]></title><description><![CDATA[
+ 【やりたいこと】
+
+今回はとある小売店にて、店舗の在庫状況を管理するkintoneのアプリを作ることになりました。
+今までその小売店では、Excelを用いて在庫管理を行っており、Excelでは不足している物品について、
+不足数の前に△をつけて見やすくしていました。
+そこで今回開発するkintoneのアプリでも同様な仕様でアプリを作って欲しい！との依頼が来ています。
+
+
+ 【用意するフィールド】
+今回は以下のフィールドを「店舗在庫状況」というテーブルに含めている。
+
+物品名：文字列（1行）
+実在個数：数値
+台帳在庫数：数値
+不足数：文字列（1行）
+
+
+ 【手順】
+
+ １：実在個数のフィ...]]></description><link>https://zenn.dev/yuyu506/articles/37ca33695fb6b5</link><guid isPermaLink="true">https://zenn.dev/yuyu506/articles/37ca33695fb6b5</guid><pubDate>Tue, 22 Oct 2024 13:36:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7d2WnxRp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590kintone%25E3%2580%2591%25E8%25A8%2588%25E7%25AE%2597%25E3%2581%2595%25E3%2582%258C%25E3%2581%259F%25E6%2595%25B0%25E5%2580%25A4%25E3%2581%25AE%25E5%2589%258D%25E3%2581%25AB%25E3%2580%2581%25E6%259D%25A1%25E4%25BB%25B6%25E3%2581%25AB%25E3%2582%2588%25E3%2581%25A3%25E3%2581%25A6%25E6%2596%2587%25E5%25AD%2597%25E3%2582%2592%25E5%2585%25A5%25E5%258A%259B%25E3%2581%2599%25E3%2582%258B%25E3%2580%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:506%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VmODg1M2UyMjAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>506</dc:creator></item><item><title><![CDATA[Typescriptで颯爽にJWT認証を実装する]]></title><description><![CDATA[
+ はじめに
+普段はモバイルアプリの開発をメインにしていますが、サーバーサイドの認証技術を深く理解するために、TypeScriptを使ってJWT認証を実装しました。この記事では、JWT認証そのものの詳細な説明は省略し、TypeScriptを用いた具体的な実装方法に焦点を当てて説明します。JWTについての基本的な説明は他の参考資料をご覧ください。
+
+ 開発環境
+
+OS: macOS Sonoma 14.5
+Node.js: v20.9.0
+npm: v10.1.0
+
+
+ 必要なパッケージをインストール
+Express.jsとjwtのライブラリをインストールします。
+npm install ...]]></description><link>https://zenn.dev/yamazaking/articles/jwt-get-started-typescript</link><guid isPermaLink="true">https://zenn.dev/yamazaking/articles/jwt-get-started-typescript</guid><pubDate>Tue, 22 Oct 2024 13:16:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--l0hQLICg--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Typescript%25E3%2581%25A7%25E9%25A2%25AF%25E7%2588%25BD%25E3%2581%25ABJWT%25E8%25AA%258D%25E8%25A8%25BC%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yamazaking%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAyNDE1MWFkZDkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yamazaking</dc:creator></item><item><title><![CDATA[Insomnia入門：エラーパラメーターを修正する方法]]></title><description><![CDATA[
+Insomniaは、APIの設計、デバッグ、自動テスト、負荷テストを行うための強力なツールです。しかし、Insomniaのインポートに関する特定の問題として、パスパラメーターの環境変数が適切に設定されていない場合があります。この問題により、環境でこれらの変数が見つからず、エラーが発生することがあります。
+
+ パラメーターの修正手順
+
+ ステップ1: URLの編集
+
+まず、エラーパラメーターを修正するためにURLを編集します。具体的には、次の手順に従います。
+
+
+URLからエラー変数を削除する: バックスペースキーを押し、環境変数として認識されていないパスパラメーターを削除します。
+
+パ...]]></description><link>https://zenn.dev/rokuinu/articles/baebaa13b5c1a8</link><guid isPermaLink="true">https://zenn.dev/rokuinu/articles/baebaa13b5c1a8</guid><pubDate>Tue, 22 Oct 2024 11:48:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--mWGw4p2z--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Insomnia%25E5%2585%25A5%25E9%2596%2580%25EF%25BC%259A%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E3%2583%2591%25E3%2583%25A9%25E3%2583%25A1%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%25BC%25E3%2582%2592%25E4%25BF%25AE%25E6%25AD%25A3%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Rokuinu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FkZDY0M2MzZTQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Rokuinu</dc:creator></item><item><title><![CDATA[Insomnia入門：コレクションのエクスポートと公開方法]]></title><description><![CDATA[InsomniaはAPI開発者にとって非常に便利なツールですが、コレクションを他のチームメンバーと共有し、公開できるようにする方法は少し複雑かもしれなせん。ここでは、コレクションをエクスポートし、公開する手順を詳しくご説明いたします。
+
+
+ 1. コレクションのエクスポート
+まずは、Insomniaのコレクションをエクスポートする方法をご説明いたします。
+
+
+Insomniaを開き、エクスポートしたいコレクションを選択します。
+コレクション名の右上にある三点リーダーをクリックし、「Export (JSON)」を選択します。
+ダイアログが表示されるので、適切な場所にJSONファイルを保存す...]]></description><link>https://zenn.dev/ayakasweet/articles/daf9b74c860086</link><guid isPermaLink="true">https://zenn.dev/ayakasweet/articles/daf9b74c860086</guid><pubDate>Tue, 22 Oct 2024 11:40:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--aFYXOVU1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Insomnia%25E5%2585%25A5%25E9%2596%2580%25EF%25BC%259A%25E3%2582%25B3%25E3%2583%25AC%25E3%2582%25AF%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2581%25AE%25E3%2582%25A8%25E3%2582%25AF%25E3%2582%25B9%25E3%2583%259D%25E3%2583%25BC%25E3%2583%2588%25E3%2581%25A8%25E5%2585%25AC%25E9%2596%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:AyakaSweet%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RlYjVlNTc2ODkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>AyakaSweet</dc:creator></item><item><title><![CDATA[Reactで頭の片隅に置いておきたいイベント一覧]]></title><description><![CDATA[
+ はじめに
+この記事はReactで使用できるイベントの一覧をまとめた記事です．
+
+ 本文
+
+ アニメーション系
+onAnimationStart: CSSアニメーションが開始するとき
+onAnimationIteration: CSSアニメーションが繰り返されるたび
+onAnimationEnd: CSSアニメーションが終了するとき
+
+ クリップボード系
+onCopy: ユーザーがコンテンツをコピーするとき（例えば、Ctrl+Cを使用するとき）
+onCut: ユーザーがコンテンツを切り取るとき（例えば、Ctrl+Xを使用するとき）
+onPaste: ユーザーがコンテンツを貼り付けるとき...]]></description><link>https://zenn.dev/gostachan/articles/4db88ccb4cec8a</link><guid isPermaLink="true">https://zenn.dev/gostachan/articles/4db88ccb4cec8a</guid><pubDate>Tue, 22 Oct 2024 01:26:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0D3daIdQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%25E3%2581%25A7%25E9%25A0%25AD%25E3%2581%25AE%25E7%2589%2587%25E9%259A%2585%25E3%2581%25AB%25E7%25BD%25AE%25E3%2581%2584%25E3%2581%25A6%25E3%2581%258A%25E3%2581%258D%25E3%2581%259F%25E3%2581%2584%25E3%2582%25A4%25E3%2583%2599%25E3%2583%25B3%25E3%2583%2588%25E4%25B8%2580%25E8%25A6%25A7%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:gostachan%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RkNDMxNTU2NGYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>gostachan</dc:creator></item><item><title><![CDATA[Vue基本⑧（イベント修飾子）]]></title><description><![CDATA[では今回からイベント修飾子です。
+VueにはpreventDefault()やstopPropagation()といったメソッドがあります。
+preventDefault()はデフォルトの挙動を防ぐメソッドです。
+使い方は例えば&lt;a&gt;タグでクリックイベントに入れるとクリックしても画面遷移しないというデフォルトの挙動が発生しなくなります。
+ &lt;a href="https://zenn.dev/articles"  @click="$event.preventDefault()"&gt;Zenn&lt;/a&gt;
+
+クリックしても遷移しません。
+stopPropagati...]]></description><link>https://zenn.dev/y_usausa/articles/a7eb3025449ead</link><guid isPermaLink="true">https://zenn.dev/y_usausa/articles/a7eb3025449ead</guid><pubDate>Tue, 22 Oct 2024 00:27:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--R1Zpe9R1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Vue%25E5%259F%25BA%25E6%259C%25AC%25E2%2591%25A7%25EF%25BC%2588%25E3%2582%25A4%25E3%2583%2599%25E3%2583%25B3%25E3%2583%2588%25E4%25BF%25AE%25E9%25A3%25BE%25E5%25AD%2590%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nyan_pro%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y2NGRiZDM2ZmIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nyan_pro</dc:creator></item><item><title><![CDATA[JS基礎いろいろーPrototype]]></title><description><![CDATA[
+ クイズ
+久々のJS基礎いろいろシリーズです。
+以下のアウトプットが正しく言えるかどうか、まずテストしてみましょう。
+// 問題1
+function Vehicle() {}
+Vehicle.prototype.wheels = 4;
+
+const car = new Vehicle();
+const anotherCar = new Vehicle();
+console.log(car.wheels); // ?
+console.log(anotherCar.wheels); // ?
+Vehicle.prototype.wheels = 2;
+console.log(car.whe...]]></description><link>https://zenn.dev/convers39/articles/js-fundamentals-prototype</link><guid isPermaLink="true">https://zenn.dev/convers39/articles/js-fundamentals-prototype</guid><pubDate>Mon, 21 Oct 2024 14:37:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lPY8jrFW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JS%25E5%259F%25BA%25E7%25A4%258E%25E3%2581%2584%25E3%2582%258D%25E3%2581%2584%25E3%2582%258D%25E3%2583%25BCPrototype%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:convers39%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE5MDY4Y2U3NTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>convers39</dc:creator></item><item><title><![CDATA[Vue Fes Japan 2024 に参加してきた]]></title><description><![CDATA[こんにちは。
+コワーキングスペース茅場町 Co-Edo の田中弘治です。
+ここ数年、土日にCo-Edo以外で行われるイベントの参加はできていなかったのですが、ことしは参加できることになり、念願の Vue Fes Japan に参加してきました。
+https://vuefes.jp/2024/
+ちなみに昨年は個人スポンサーとしての費用は払いつつ、当日の参加チケットを購入しないという（おそらく僕だけであろう）形で応援していました。
+そんなこんなで、はじめて参加できることになった Vue Fes Japan 2024
+たっぷり楽しんできましたので、その一部をレポートいたします。
+!
+僕は基本的...]]></description><link>https://zenn.dev/coedo/articles/vue-fes-japan-2024-report</link><guid isPermaLink="true">https://zenn.dev/coedo/articles/vue-fes-japan-2024-report</guid><pubDate>Mon, 21 Oct 2024 12:13:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--63XAc3AN--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Vue%2520Fes%2520Japan%25202024%2520%25E3%2581%25AB%25E5%258F%2582%25E5%258A%25A0%25E3%2581%2597%25E3%2581%25A6%25E3%2581%258D%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:coedo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2c4STBvUEtWYXpIUGdWdUFwVFNiaFdXUGVZd0l2Rkd3QlV0alAwaHc9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>coedo</dc:creator></item><item><title><![CDATA[Insomniaを始めるには: サインアップとダウンロードガイド]]></title><description><![CDATA[
+ InsomniaでAPIとの旅を始める
+
+APIの動き方を理解するには、2つの主なステップがあります。まず、APIが実際にどう動くかを観察することです。次に、テストリクエストを送り、実際に動かせることです。一方、SDKがあればコードサンプルを利用する人もいますが、Insomniaなどインタラクティブ・ツールがより便利だと考えている人もいます。
+
+ Insomniaとは？
+Insomniaは使いやすいAPIクライアントです。Insomniaを通じて、APIのリクエストとレスポンスのコレクションを作成し、導入することができます。お気に入りのウェブページをブックマークするように、こちらはA...]]></description><link>https://zenn.dev/nekosu/articles/c4cce97deaf6ab</link><guid isPermaLink="true">https://zenn.dev/nekosu/articles/c4cce97deaf6ab</guid><pubDate>Mon, 21 Oct 2024 12:12:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--C-l5agPk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Insomnia%25E3%2582%2592%25E5%25A7%258B%25E3%2582%2581%25E3%2582%258B%25E3%2581%25AB%25E3%2581%25AF%253A%2520%25E3%2582%25B5%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%25E3%2581%25A8%25E3%2583%2580%25E3%2582%25A6%25E3%2583%25B3%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2589%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Nekosu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY1YzIyNmI2ZDMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Nekosu</dc:creator></item><item><title><![CDATA[エラー「MarkerClusterer is not defined」の対処 & MarkerClusterを新しいライブラリへ移行]]></title><description><![CDATA[GoogleMapsにMarkerClustererというライブラリを使ってクラスター表示を実装していたのですが、ある日クラスターが表示されていないことに気づきました。
+気になってコンソールを覗くと、こんなエラーログが。
+Uncaught (in promise) ReferenceError: MarkerClusterer is not defined
+MarkerClustererが存在しない…？🤔
+というわけで、この記事では上記エラーを解決するまでの道のりを備忘録がてらまとめていきます。
+
+ 対象読者
+
+エラーについて調べてたら本記事に辿り着いた方
+MarkerClusterer...]]></description><link>https://zenn.dev/yuckey1123/articles/f284c075e98758</link><guid isPermaLink="true">https://zenn.dev/yuckey1123/articles/f284c075e98758</guid><pubDate>Mon, 21 Oct 2024 10:42:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---yNDp3fy--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E3%2580%258CMarkerClusterer%2520is%2520not%2520defined%25E3%2580%258D%25E3%2581%25AE%25E5%25AF%25BE%25E5%2587%25A6%2520%2526%2520MarkerCluster%25E3%2582%2592%25E6%2596%25B0%25E3%2581%2597...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yuckey%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE1Nzk3Zjk2YWMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yuckey</dc:creator></item><item><title><![CDATA[Jestで返り値が配列かテストする方法のメモ]]></title><description><![CDATA[
+ Jestで返り値が配列かテストする方法のメモ
+Array.isArrayで配列かどうかを判別し、bool値が一致するかを確かめる
+const func = () =&gt; {
+  return ["1", "2"]
+}
+
+test("返り値が配列かどうかをテストする", () =&gt; {
+  expect(Array.isArray(func())).toBeTruthy();
+})
+]]></description><link>https://zenn.dev/mitate_gengaku/articles/jest-expect-array</link><guid isPermaLink="true">https://zenn.dev/mitate_gengaku/articles/jest-expect-array</guid><pubDate>Mon, 21 Oct 2024 10:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--H0SUljt---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Jest%25E3%2581%25A7%25E8%25BF%2594%25E3%2582%258A%25E5%2580%25A4%25E3%2581%258C%25E9%2585%258D%25E5%2588%2597%25E3%2581%258B%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%25E3%2581%25AE%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25BE%25A1%25E6%25A5%25AF%25E7%258E%2584%25E5%25B6%25BD%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0tQOVRYWHQ5Qm1BLVplcURoLWdxUHl4RVFjMmNsRkhSNk95XzVVSVVhPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>御楯玄嶽</dc:creator></item><item><title><![CDATA[Jestでファイルを使うテストのメモ]]></title><description><![CDATA[
+ Jestでファイルを使うテストのメモ
+Markdownファイルを解析する関数のテストを行ったときの解析用のファイルの準備を忘れないためにメモ。
+describe("正常系", () =&gt; {
+  const text = `---
+title: テストタイトル
+subTitle: テストタイトル
+---
+# テスト
+`
+  // textが記入されたファイルを作成
+  const file = new File([text], "test.md", {
+    type: "text/markdown"
+  });
+
+  it("ファイルを使うテスト", () =&gt; {
+...]]></description><link>https://zenn.dev/mitate_gengaku/articles/jest-test-with-file</link><guid isPermaLink="true">https://zenn.dev/mitate_gengaku/articles/jest-test-with-file</guid><pubDate>Mon, 21 Oct 2024 10:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--K8lR8qYe--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Jest%25E3%2581%25A7%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E3%2581%25AE%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25BE%25A1%25E6%25A5%25AF%25E7%258E%2584%25E5%25B6%25BD%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0tQOVRYWHQ5Qm1BLVplcURoLWdxUHl4RVFjMmNsRkhSNk95XzVVSVVhPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>御楯玄嶽</dc:creator></item><item><title><![CDATA[JavaScriptのイベントループ内のMacrotasksとMicrotasksについて]]></title><description><![CDATA[
+ まずは下記コードの実行順を考えてみてほしい。
+setTimeout(() =&gt; console.log("timeout"));
+
+Promise.resolve()
+  .then(() =&gt; console.log("promise"));
+
+console.log("code");
+答えは code promise timeout の順番となる。
+仮にPromiseとsetTimeoutが同じタスクに積まれるなら、順番は code timeout promise となるはず。
+そうなっていないのは別のタスクに積まれるため。
+
+ タスクはMacrotasksとMicr...]]></description><link>https://zenn.dev/daijinload/articles/493b82cafca6bd</link><guid isPermaLink="true">https://zenn.dev/daijinload/articles/493b82cafca6bd</guid><pubDate>Mon, 21 Oct 2024 04:58:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qOsHwQs6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25E3%2581%25AE%25E3%2582%25A4%25E3%2583%2599%25E3%2583%25B3%25E3%2583%2588%25E3%2583%25AB%25E3%2583%25BC%25E3%2583%2597%25E5%2586%2585%25E3%2581%25AEMacrotasks%25E3%2581%25A8Microtasks%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:daijinload%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSTVLVGMxQWhOTXo1cnhrSkFmYmdmRmF1SGwxRGFwX0o3NnpXQ1oxMHpTTGc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>daijinload</dc:creator></item><item><title><![CDATA[contentful-typescript-codegenからcf-content-types-generatorに移行する]]></title><description><![CDATA[
+ cf-content-types-generatorへ移行した理由
+typescript環境でContent Delivery APIを使用してコンテンツを取得するとき、取得したコンテンツの型をモデルの数だけ定義するのは手間がかかります。
+幸いにもコンテンツの型を自動で生成するライブラリはいくつかあり、私はcontentful-typescript-codegenを愛用していました。
+このライブラリを採用したのは2022年初頭くらいで、この頃のcontentful.jsのパッケージのバージョンはv9でした。
+しかし、このライブラリのメンテナンスが最近行われておらず、2024年の10月...]]></description><link>https://zenn.dev/nagatsukey/articles/0b4c2e3c1bd9e7</link><guid isPermaLink="true">https://zenn.dev/nagatsukey/articles/0b4c2e3c1bd9e7</guid><pubDate>Mon, 21 Oct 2024 02:31:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hWXwFvGa--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:contentful-typescript-codegen%25E3%2581%258B%25E3%2582%2589cf-content-types-generator...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nagatsukey%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2p4NmpCYnVoYjA5VHFhcGdzTUpmeXM0bXp0YmktdTNPRFo4VlgyPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nagatsukey</dc:creator></item><item><title><![CDATA[🔰 RailsでJavaScriptを読み込むには？ Webpackとjsbundling-railsを使う方法]]></title><description><![CDATA[
+ はじめに
+Ruby on Railsは非常に強力なWebフレームワークですが、JavaScriptと組み合わせて使う場合、適切な設定が必要です。
+本記事では、importmap-railsからwebpack + jsbundling-railsにリプレイスして、RailsでJavaScriptを利用できるようにする手順を具体的なコードとともに解説します。
+
+ なぜimportmap-railsからwebpack + jsbundling-railsに切り替えるのか？
+Rails 7以降、importmap-railsという新しいJavaScriptモジュール管理ツールが導入されました...]]></description><link>https://zenn.dev/take_tech/articles/fe37ba3f3a32a6</link><guid isPermaLink="true">https://zenn.dev/take_tech/articles/fe37ba3f3a32a6</guid><pubDate>Sun, 20 Oct 2024 19:57:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wHgrZQS2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%2520%2520Rails%25E3%2581%25A7JavaScript%25E3%2582%2592%25E8%25AA%25AD%25E3%2581%25BF%25E8%25BE%25BC%25E3%2582%2580%25E3%2581%25AB%25E3%2581%25AF%25EF%25BC%259F%2520Webpack%25E3%2581%25A8jsbundling-rails%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Take%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzYyNThiNDQ2YTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Take</dc:creator></item><item><title><![CDATA[GAS・スプレッドシートにゼロ埋め数字を転記する方法]]></title><description><![CDATA[ゼロ埋めの数字（文字列）、文字列、数値の配列データを用意します。
+[ [ '00001', 'yamada', 27, true ],
+  [ '00003', 'suzuki', 33, false ],
+  [ '00029', 'tanaka', 50, false ],
+  [ '00501', 'harada', 60, false ],
+  [ '00773', 'kaneko', 29, false ] ]
+GASを使って配列データをスプレッドシートに転記します。
+  let data = [[ '00001', 'yamada', 27, true ],
+        ...]]></description><link>https://zenn.dev/kijitora/articles/b4322eb1185bd0</link><guid isPermaLink="true">https://zenn.dev/kijitora/articles/b4322eb1185bd0</guid><pubDate>Sun, 20 Oct 2024 11:45:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--puPRBipS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:GAS%25E3%2583%25BB%25E3%2582%25B9%25E3%2583%2597%25E3%2583%25AC%25E3%2583%2583%25E3%2583%2589%25E3%2582%25B7%25E3%2583%25BC%25E3%2583%2588%25E3%2581%25AB%25E3%2582%25BC%25E3%2583%25AD%25E5%259F%258B%25E3%2582%2581%25E6%2595%25B0%25E5%25AD%2597%25E3%2582%2592%25E8%25BB%25A2%25E8%25A8%2598%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kijitora%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2Rhcmsvay5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kijitora</dc:creator></item><item><title><![CDATA[【ハンズオンで学ぶ】Next.js14, TypeScript, Redux Toolkitでショッピングカート機能]]></title><description><![CDATA[
+ はじめに
+Reactの状態管理方法の一つであるReduxを実務でよく用いられる技術スタックと合わせて
+機能開発しながら学んでいきます。
+
+
+ 学べる技術スタック
+
+Next.js14(app router)
+TypeScript
+Tailwind css
+Redux Toolkit
+
+
+ Redux Toolkitドキュメント
+https://redux-toolkit.js.org/
+
+ React icon
+https://react-icons.github.io/react-icons/
+
+ 完成品デモ
+
+
+ プロジェクトリポジトリ
+https://github.com/Kr...]]></description><link>https://zenn.dev/dragon1208/articles/1ae9784f22be07</link><guid isPermaLink="true">https://zenn.dev/dragon1208/articles/1ae9784f22be07</guid><pubDate>Sun, 20 Oct 2024 07:54:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--OrHXYyMT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E3%2583%258F%25E3%2583%25B3%25E3%2582%25BA%25E3%2582%25AA%25E3%2583%25B3%25E3%2581%25A7%25E5%25AD%25A6%25E3%2581%25B6%25E3%2580%2591Next.js14%252C%2520TypeScript%252C%2520Redux%2520Toolkit%25E3%2581%25A7%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%2583%25E3%2583%2594%25E3%2583%25B3%25E3%2582%25B0%25E3%2582%25AB%25E3%2583%25BC%25E3%2583%2588%25E6%25A9%259F%25E8%2583%25BD%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Nao8%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBiMzE3YTE0ODIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Nao8</dc:creator></item></channel></rss>
