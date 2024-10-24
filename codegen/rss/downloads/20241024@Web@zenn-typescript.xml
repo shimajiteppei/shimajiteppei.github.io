@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「TypeScript」のフィード]]></title><description><![CDATA[Zennのトピック「TypeScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/typescript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/f13e758fdb.png</url><title>Zennの「TypeScript」のフィード</title><link>https://zenn.dev/topics/typescript</link></image><generator>zenn.dev</generator><lastBuildDate>Thu, 24 Oct 2024 01:06:51 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/typescript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Angular18 と Hono で SSR と RPC を試す]]></title><description><![CDATA[
+ はじめに
+HonoとAngularでSSRとRPC機能を試してみます。
+Angularはv19でSSR/SSG周りの大きなアップデートを予定しているようですが、今回はv18で素振りをしておきましょう。
+
+ Angular を Hono で SSR
+Angularはプロジェクト生成時にSSRを指定することでexpressベースのサーバーコードが生成されます。
+$ ng new --ssr
+生成されたサーバーコード
+server.ts
+import { APP_BASE_HREF } from '@angular/common';
+import { CommonEngine } from...]]></description><link>https://zenn.dev/nao50/articles/angular18-hono-ssr</link><guid isPermaLink="true">https://zenn.dev/nao50/articles/angular18-hono-ssr</guid><pubDate>Wed, 23 Oct 2024 22:45:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3OU4VnFI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Angular18%2520%25E3%2581%25A8%2520Hono%2520%25E3%2581%25A7%2520SSR%2520%25E3%2581%25A8%2520RPC%2520%25E3%2582%2592%25E8%25A9%25A6%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nao%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRiY2YzZDIyYTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nao</dc:creator></item><item><title><![CDATA[Claudeでゲームの装備生成エミュレータを5時間で作った話]]></title><description><![CDATA[
+ こんなものを作りました
+https://hiraikyo.github.io/wizardry-daphne-emulator/
+
+
+
+ 作った経緯
+つい1週間ほど前に Wizardry Variants Daphne というゲームが出たので楽しく遊んでます。
+このゲームはかの有名なローグライクRPG「Wizardry」の系譜で、より強い装備を掘り当てていくタイプのゲームです。
+Diablo 系のゲームをやった事のある方なら分かるのですが、この手のゲームのアイテム生成はかなり複雑です。
+特に装備の付与効果まわりは理解に苦しく、教えてと言われてもどこから教えれば…となりがちです。
+例え...]]></description><link>https://zenn.dev/kyoizmy/articles/b5f3e9c44a546c</link><guid isPermaLink="true">https://zenn.dev/kyoizmy/articles/b5f3e9c44a546c</guid><pubDate>Wed, 23 Oct 2024 20:30:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--j4Xv7jvH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Claude%25E3%2581%25A7%25E3%2582%25B2%25E3%2583%25BC%25E3%2583%25A0%25E3%2581%25AE%25E8%25A3%2585%25E5%2582%2599%25E7%2594%259F%25E6%2588%2590%25E3%2582%25A8%25E3%2583%259F%25E3%2583%25A5%25E3%2583%25AC%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%25925%25E6%2599%2582%25E9%2596%2593%25E3%2581%25A7%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:HiraiKyo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2UxZWI5OTE3MWYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>HiraiKyo</dc:creator></item><item><title><![CDATA[Graceful shutdownについての実験結果]]></title><description><![CDATA[Typescriptでバッチを書いていてGraceful shutdownについて勉強しながら実験をしてみました。
+
+ 実現したいこと
+処理の途中に終了コマンドを送ったとしても、処理を最後まで終えたい
+
+ パターン1 : 何も考えずに実装してみた
+export const action = async () =&gt; {
+  console.log('1');
+  await new Promise((resolve) =&gt; setTimeout(resolve, 5000));
+  console.log('2');
+};
+
+action().catch((error) =&g...]]></description><link>https://zenn.dev/gosutesu/articles/70b43394d8e4ec</link><guid isPermaLink="true">https://zenn.dev/gosutesu/articles/70b43394d8e4ec</guid><pubDate>Wed, 23 Oct 2024 11:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--d9dbthA4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Graceful%2520shutdown%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E3%2581%25AE%25E5%25AE%259F%25E9%25A8%2593%25E7%25B5%2590%25E6%259E%259C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:gosutesu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZiMTM2YjUzNDYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>gosutesu</dc:creator></item><item><title><![CDATA[Vue Fes Japan行って、知らなかったこと調べてみた]]></title><description><![CDATA[
+ はじめに
+こんにちは、きむです!
+今回Vue Fes Japan2024に一人で行ってきました!!（誘った人みんな用事ありました😭)
+一人で楽しめるかな...と不安だったのですが、めちゃめちゃ楽しかったです！知らない概念や今後活用できそうなことがたくさんあったので、ちょっとだけ深ぼってアウトプットしようと思います！(間違ってるところあったら教えてください🙇)
+https://vuefes.jp/2024/ja
+
+ 初めて知ったこと、今後活用できそうなこと
+
+ 天元突破グレンラガン（Tengen Toppa Gurren Lagann）
+はい、いきなりなんだって感じですよね。英語分かる...]]></description><link>https://zenn.dev/kimu0531/articles/1b5acb5842f9f3</link><guid isPermaLink="true">https://zenn.dev/kimu0531/articles/1b5acb5842f9f3</guid><pubDate>Wed, 23 Oct 2024 10:58:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--t31cmciG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Vue%2520Fes%2520Japan%25E8%25A1%258C%25E3%2581%25A3%25E3%2581%25A6%25E3%2580%2581%25E7%259F%25A5%25E3%2582%2589%25E3%2581%25AA%25E3%2581%258B%25E3%2581%25A3%25E3%2581%259F%25E3%2581%2593%25E3%2581%25A8%25E8%25AA%25BF%25E3%2581%25B9%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kimu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY4ZmZhZTljNDcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kimu</dc:creator></item><item><title><![CDATA[TeamsJS で Cannot read properties of undefined (reading 'fd') エラーになる]]></title><description><![CDATA[Teams JavaScript クライアント ライブラリ (TeamsJS) を 2.29.0 に上げたら突然動かなくなりました。
+Uncaught TypeError: Cannot read properties of undefined (reading 'fd')
+    at n20.useColors (@microsoft_teams-js.js?v=3fe307ba:1390:104)
+    at Function.t14 (@microsoft_teams-js.js?v=3fe307ba:153:55)
+    at @microsoft_teams-js.js?...]]></description><link>https://zenn.dev/karamem0/articles/2024_10_23_190000</link><guid isPermaLink="true">https://zenn.dev/karamem0/articles/2024_10_23_190000</guid><pubDate>Wed, 23 Oct 2024 10:00:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Jkyz_8Hb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TeamsJS%2520%25E3%2581%25A7%2520Cannot%2520read%2520properties%2520of%2520undefined%2520%2528reading%2520%2527f...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:karamem0%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2c2bGhUVmNMR1VWelRPcHRJSFdCdDRJRDVmREpQVnlxNHJyUkNKbEE9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>karamem0</dc:creator></item><item><title><![CDATA[JAWS-UG CDK支部 vol.17 トーク用コンテンツ]]></title><description><![CDATA[https://jawsug-cdk.connpass.com/event/331430/
+
+ はじめに
+第17回のメインテーマである「大規模」にはそれほど関連してません（ごめんなさい）
+CDK と TypeScript の初学者向け、かつ技術選定以前の話などが含まれます。あとは複数アカウントへの横展開を意識したような話が出てきますが、時間ある限りお話しできればと
+
+ 自己紹介
+
+hassaku_63
+
+X Space にて、CDK に関する野良トーク番組 "CDK Chatting" をやっています (Connpass, #cdkchatting)
+社内で啓蒙とか知見共有を目的とした ...]]></description><link>https://zenn.dev/hassaku63/articles/a3c850256d9b3b</link><guid isPermaLink="true">https://zenn.dev/hassaku63/articles/a3c850256d9b3b</guid><pubDate>Wed, 23 Oct 2024 10:00:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--zf-7K1HW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JAWS-UG%2520CDK%25E6%2594%25AF%25E9%2583%25A8%2520vol.17%2520%25E3%2583%2588%25E3%2583%25BC%25E3%2582%25AF%25E7%2594%25A8%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2586%25E3%2583%25B3%25E3%2583%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hassaku63%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJhNDM3YWIzZTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hassaku63</dc:creator></item><item><title><![CDATA[Figmaでポイント集計するプラグインを作成した話]]></title><description><![CDATA[
+ はじめに
+Figma Plugin　に入門してみました。
+"はじめて" のプラグイン開発でも非常に入りやすかったので
+所感などまとめてみました。
+
+ Figma Plugin 周りの説明
+公式のドキュメントはこちら
+https://www.figma.com/plugin-docs/
+概要やTipsについてはkiteさんや島袋恵さんの記事などが非常に参考になります。
+→ありがとうございます。
+https://zenn.dev/ixkaito/articles/how-to-make-a-figma-plugin
+https://zenn.dev/monicle/articles/ca...]]></description><link>https://zenn.dev/tetoteto/articles/point-ameba-figma</link><guid isPermaLink="true">https://zenn.dev/tetoteto/articles/point-ameba-figma</guid><pubDate>Wed, 23 Oct 2024 09:34:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--QVr8v1wg--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Figma%25E3%2581%25A7%25E3%2583%259D%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2588%25E9%259B%2586%25E8%25A8%2588%25E3%2581%2599%25E3%2582%258B%25E3%2583%2597%25E3%2583%25A9%25E3%2582%25B0%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%2592%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2597%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:TetoTeto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSXlIN1NhY21HVFFmR3hWQ1d2R01nX29ETVR0WU82UXJ6WGg1Z3dZOUs4VWRJPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>TetoTeto</dc:creator></item><item><title><![CDATA[社内の蔵書管理ツールを Slack Workflow apps で実装した話]]></title><description><![CDATA[
+ はじめに
+社員が持っている技術書などをインターン生に貸し出せたら良いなと思い、社内に置いてある共有本の蔵書と貸出を管理するツールを Slack のワークフローとして TypeScript で実装しました。この記事では、Slack Workflow apps を用いて、分岐を伴う処理をインタラクティブなフォームで実現する方法を紹介します。
+私自身、Slack Workflow apps を実装するのは初めてでしたが、公式ドキュメントに則ることでスムーズに開発を行うことができました。
+開発したアプリは以下のリポジトリで公開しているのでぜひ参照してください。
+https://github....]]></description><link>https://zenn.dev/genda_jp/articles/50c21bf41c735e</link><guid isPermaLink="true">https://zenn.dev/genda_jp/articles/50c21bf41c735e</guid><pubDate>Wed, 23 Oct 2024 04:22:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bMl2JR-j--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%25A4%25BE%25E5%2586%2585%25E3%2581%25AE%25E8%2594%25B5%25E6%259B%25B8%25E7%25AE%25A1%25E7%2590%2586%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%25E3%2582%2592%2520Slack%2520Workflow%2520apps%2520%25E3%2581%25A7%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2597%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Kento%2520Nishio%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNiM2M1MjhkNjguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:GENDA%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M5ZTQxMzYwZWIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kento Nishio</dc:creator></item><item><title><![CDATA[【個人開発】Chatendarの友達検索機能を深掘り：Next.js(TS)とFlask(Python)での実装を解説]]></title><description><![CDATA[
+ はじめに
+このブログでは、IT未経験で独学の私が開発したアプリである「Chatendar」の主要な機能について解説していきます。今回は、友達検索機能に焦点を当て、その具体的な実装方法をご紹介します。
+!
+ここで紹介するコードやファイルは、友達検索機能を実装する一部にすぎません。そのため、この記事に掲載されているコードだけでは、完全な実装はできない点をご了承ください。
+
+もし、全体のコードをご覧になりたい方は、私のGitHubにて公開していますので、そちらからご確認いただけます。
+https://github.com/R-koma/calendar-chat
+アプリの全体像や概要を知り...]]></description><link>https://zenn.dev/ryoma_itngineer/articles/17388144860a72</link><guid isPermaLink="true">https://zenn.dev/ryoma_itngineer/articles/17388144860a72</guid><pubDate>Wed, 23 Oct 2024 00:19:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--AvZ-iruP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%2580%258B%25E4%25BA%25BA%25E9%2596%258B%25E7%2599%25BA%25E3%2580%2591Chatendar%25E3%2581%25AE%25E5%258F%258B%25E9%2581%2594%25E6%25A4%259C%25E7%25B4%25A2%25E6%25A9%259F%25E8%2583%25BD%25E3%2582%2592%25E6%25B7%25B1%25E6%258E%2598%25E3%2582%258A%25EF%25BC%259ANext.js%2528TS%2529%25E3%2581%25A8Flask%2528Python%2529%25E3%2581%25A7%25E3%2581%25AE%25E5%25AE%259F%25E8%25A3%2585%25E3%2582%2592%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Ryoma%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSjFHanlSZjhuOU5ZcUlMVmNMT3hIZ1dCTWZKU2FiQWZ0OFBwRHhHZUxnWEFCMEF2bDBwUT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Ryoma</dc:creator></item><item><title><![CDATA[はじめてのCognitoとExpressで実装するユーザー認証]]></title><description><![CDATA[
+ はじめに
+Amazon Cognitoを利用して、Expressを使ったバックエンドアプリケーションに認証機能を実装する方法書きます。Amazon Cognitoは、ユーザーサインインやサインアップを簡単かつセキュアに行えるサービスで、ユーザー管理を手軽に実現できます。
+TypeScriptでバックエンド開発したい！という方の参考になれば幸いです。
+
+ 必要な前提条件
+この記事を進めるには以下の準備が必要です。
+
+Node.jsとnpmのインストール
+AWSアカウントの作成
+
+
+ 該当リポジトリ
+https://github.com/mikaijun/cognito-express-...]]></description><link>https://zenn.dev/miumi/articles/f9c8923ec4f3ab</link><guid isPermaLink="true">https://zenn.dev/miumi/articles/f9c8923ec4f3ab</guid><pubDate>Tue, 22 Oct 2024 22:33:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--nw2djeco--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%25AF%25E3%2581%2598%25E3%2582%2581%25E3%2581%25A6%25E3%2581%25AECognito%25E3%2581%25A8Express%25E3%2581%25A7%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2599%25E3%2582%258B%25E3%2583%25A6%25E3%2583%25BC%25E3%2582%25B6%25E3%2583%25BC%25E8%25AA%258D%25E8%25A8%25BC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%259F%25E3%2582%25AB%25E3%2582%25A4%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y4YjgwZTkyZmEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ミカイ</dc:creator></item><item><title><![CDATA[[Tauri v2]ts-rsクレートを使ってRust(Tauri)とTypeScript(フロントエンド)で型の共有を行う]]></title><description><![CDATA[
+ 概要
+Tauri:
+https://v2.tauri.app/
+を使うと、アプリの本体部分をRustで記述することができ、
+UI(フロントエンド)部分はWebサイトのノウハウを使って記述できる。
+すなわち、後者はTypeScriptベースのフレームワークやツールを使って作成できる。
+(使わないことも出来るが、ここではTSベースの何かを使うものとする)
+ここで、UI側(TS)とアプリ本体側(Rust)で、IPC通信などで情報をやり取りすることがあるが、
+異なる言語をまたいでいるため、スキーマ定義がやや大変なところがある。
+つまり、
+
+フロントエンド用に、TypeScriptの型定義を記...]]></description><link>https://zenn.dev/junkor/articles/98f2f0e6a9ea23</link><guid isPermaLink="true">https://zenn.dev/junkor/articles/98f2f0e6a9ea23</guid><pubDate>Tue, 22 Oct 2024 15:19:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--o_hEkGi2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BTauri%2520v2%255Dts-rs%25E3%2582%25AF%25E3%2583%25AC%25E3%2583%25BC%25E3%2583%2588%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6Rust%2528Tauri%2529%25E3%2581%25A8TypeScript%2528%25E3%2583%2595%25E3%2583%25AD%25E3%2583%25B3%25E3%2583%2588%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2589%2529%25E3%2581%25A7%25E5%259E%258B%25E3%2581%25AE...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:7e%252B8%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2Rhcmsvai5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>7e+8</dc:creator></item><item><title><![CDATA[JestでReact MarkdownとRemark GFMのエラーを無理やり回避するメモ]]></title><description><![CDATA[
+ JestでReact MarkdownとRemark GFMのエラーを無理やり回避するメモ
+
+ 環境
+"next": "^14.2.15",
+"react": "^18",
+"react-dom": "^18",
+"react-markdown": "^9.0.1",
+"remark-gfm": "^4.0.0",
+
+ エラー
+jestでreact-markdown、remark-gfmをテストしようとすると、下記のようなエラーが発生する。原因はesmモジュールをCommonJS環境で実行しようとしているかららしい。
+FAIL  ~
+  ● Test suite failed to ...]]></description><link>https://zenn.dev/mitate_gengaku/articles/jest-with-react-markdown-and-remark-gfm</link><guid isPermaLink="true">https://zenn.dev/mitate_gengaku/articles/jest-with-react-markdown-and-remark-gfm</guid><pubDate>Tue, 22 Oct 2024 13:56:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--WlJFDzuZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Jest%25E3%2581%25A7React%2520Markdown%25E3%2581%25A8Remark%2520GFM%25E3%2581%25AE%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E3%2582%2592%25E7%2584%25A1%25E7%2590%2586%25E3%2582%2584%25E3%2582%258A%25E5%259B%259E%25E9%2581%25BF%25E3%2581%2599%25E3%2582%258B%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25BE%25A1%25E6%25A5%25AF%25E7%258E%2584%25E5%25B6%25BD%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0tQOVRYWHQ5Qm1BLVplcURoLWdxUHl4RVFjMmNsRkhSNk95XzVVSVVhPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>御楯玄嶽</dc:creator></item><item><title><![CDATA[JestとReact Testing Libraryでscreen.debugが省略されてしまう]]></title><description><![CDATA[
+ JestとReact Testing Libraryでscreen.debugが省略されてしまう
+screen.debugを使用してUIをconsole上で見たくても途中で省略されてしまう。debugの引数を見ていたらmaxLengthというのがあり、それに数値を渡したら省略されてしまう問題が解決した。
+おそらく下記で40000行までプリントできるという意味になるはず
+screen.debug(undefined, 40000)
+
+ 最後に
+間違っていることがあればコメントに書いていただけると幸いです。
+よろしくお願いいたします。
+]]></description><link>https://zenn.dev/mitate_gengaku/articles/jest-testing-library-screen-debug-depth</link><guid isPermaLink="true">https://zenn.dev/mitate_gengaku/articles/jest-testing-library-screen-debug-depth</guid><pubDate>Tue, 22 Oct 2024 13:56:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_FOObQtB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Jest%25E3%2581%25A8React%2520Testing%2520Library%25E3%2581%25A7screen.debug%25E3%2581%258C%25E7%259C%2581%25E7%2595%25A5%25E3%2581%2595%25E3%2582%258C%25E3%2581%25A6%25E3%2581%2597%25E3%2581%25BE%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25BE%25A1%25E6%25A5%25AF%25E7%258E%2584%25E5%25B6%25BD%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0tQOVRYWHQ5Qm1BLVplcURoLWdxUHl4RVFjMmNsRkhSNk95XzVVSVVhPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>御楯玄嶽</dc:creator></item><item><title><![CDATA[Typescriptで颯爽にJWT認証を実装する]]></title><description><![CDATA[
+ はじめに
+普段はモバイルアプリの開発をメインにしていますが、サーバーサイドの認証技術を深く理解するために、TypeScriptを使ってJWT認証を実装しました。この記事では、JWT認証そのものの詳細な説明は省略し、TypeScriptを用いた具体的な実装方法に焦点を当てて説明します。JWTについての基本的な説明は他の参考資料をご覧ください。
+
+ 開発環境
+
+OS: macOS Sonoma 14.5
+Node.js: v20.9.0
+npm: v10.1.0
+
+
+ 必要なパッケージをインストール
+Express.jsとjwtのライブラリをインストールします。
+npm install ...]]></description><link>https://zenn.dev/yamazaking/articles/jwt-get-started-typescript</link><guid isPermaLink="true">https://zenn.dev/yamazaking/articles/jwt-get-started-typescript</guid><pubDate>Tue, 22 Oct 2024 13:16:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--l0hQLICg--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Typescript%25E3%2581%25A7%25E9%25A2%25AF%25E7%2588%25BD%25E3%2581%25ABJWT%25E8%25AA%258D%25E8%25A8%25BC%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yamazaking%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAyNDE1MWFkZDkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yamazaking</dc:creator></item><item><title><![CDATA[Array型とTuple型【個人学習まとめ】]]></title><description><![CDATA[
+ Array型
+他のプログラミング言語同様の配列。
+これまで同様に、型を指定しなければ型推論する。
+const suuti = [1, 2, 3, 4, 5];//number[]型(型推論)
+const kojinNames = ["太郎", "次郎", "三郎"];//string[]型(型推論)
+指定された型以外の値を配列に格納しようとするとエラー。
+suuti.push("6");
+
+型注釈を行うには変数名:型名[]とする。
+let fruits: string[] //型注釈によるArray型の指定
+fruits = ["Apple", "Grape", "Banana", ...]]></description><link>https://zenn.dev/o0rororo0o/articles/182dd2897b1a9b</link><guid isPermaLink="true">https://zenn.dev/o0rororo0o/articles/182dd2897b1a9b</guid><pubDate>Tue, 22 Oct 2024 11:06:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--v3ob8wUh--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Array%25E5%259E%258B%25E3%2581%25A8Tuple%25E5%259E%258B%25E3%2580%2590%25E5%2580%258B%25E4%25BA%25BA%25E5%25AD%25A6%25E7%25BF%2592%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%258D%25E3%2582%258D%25E3%2582%258D%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ2ZTZjOWM4YmMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ろろろ</dc:creator></item><item><title><![CDATA[1番使いやすいWebタイマーアプリを作りました]]></title><description><![CDATA[
+ はじめに
+この度、Web タイマーアプリ「UnTimer」を作成しました。とは言っても、実際に実装したのは弊社の新人エンジニアです。
+https://untimer.unreact.jp?from=zenn
+この記事では、Web タイマーを作った理由や、使いやすいタイマーについて考えたことやこだわった点について紹介していきたいと思います。
+
+ 今さら Web タイマーを作った理由
+そもそも、なぜ今さら掃いて捨てるほどある Web タイマーを作ろうかと思ったのかについて言い訳させてください。
+理由は主に 2 つあります。
+
+ブラウザで上位にヒットする Web タイマーの UI がイマイ...]]></description><link>https://zenn.dev/taichifukumoto/articles/timer-untimer</link><guid isPermaLink="true">https://zenn.dev/taichifukumoto/articles/timer-untimer</guid><pubDate>Tue, 22 Oct 2024 06:06:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--LqHYFt3S--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:1%25E7%2595%25AA%25E4%25BD%25BF%25E3%2581%2584%25E3%2582%2584%25E3%2581%2599%25E3%2581%2584Web%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%259E%25E3%2583%25BC%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258A%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:taichi%2520fukumoto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RiZTU1OWFmNjIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>taichi fukumoto</dc:creator></item><item><title><![CDATA[Next.js@15 の AppRouter で Client Component のみの SSR を行う]]></title><description><![CDATA[
+サンプルリポジトリ
+
+https://github.com/SoraKumo001/next-approuter-ssr
+
+実行確認
+
+https://next-approuter-ssr.vercel.app/
+
+ ServerComponents に疲れていませんか？
+Next.js のバージョン 15 のリリースを迎えた昨今 AppRouter を中心に据えられるようになり、SSR を行うには ServerComponents が避けて通れません。しかし Pages Router を使っていた頃と比べると、大きく使い勝手が変わってしまったため、この変更に対応する対処に疲れてはいな...]]></description><link>https://zenn.dev/sora_kumo/articles/next-approuter-ssr</link><guid isPermaLink="true">https://zenn.dev/sora_kumo/articles/next-approuter-ssr</guid><pubDate>Tue, 22 Oct 2024 02:57:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--HPp-bx67--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Next.js%254015%2520%25E3%2581%25AE%2520AppRouter%2520%25E3%2581%25A7%2520Client%2520Component%2520%25E3%2581%25AE%25E3%2581%25BF%25E3%2581%25AE%2520SSR%2520%25E3%2582%2592%25E8%25A1%258C%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E7%25A9%25BA%25E9%259B%25B2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VlZTgzMDYyMDQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>空雲</dc:creator></item><item><title><![CDATA[Reactで頭の片隅に置いておきたいイベント一覧]]></title><description><![CDATA[
+ はじめに
+この記事はReactで使用できるイベントの一覧をまとめた記事です．
+
+ 本文
+
+ アニメーション系
+onAnimationStart: CSSアニメーションが開始するとき
+onAnimationIteration: CSSアニメーションが繰り返されるたび
+onAnimationEnd: CSSアニメーションが終了するとき
+
+ クリップボード系
+onCopy: ユーザーがコンテンツをコピーするとき（例えば、Ctrl+Cを使用するとき）
+onCut: ユーザーがコンテンツを切り取るとき（例えば、Ctrl+Xを使用するとき）
+onPaste: ユーザーがコンテンツを貼り付けるとき...]]></description><link>https://zenn.dev/gostachan/articles/4db88ccb4cec8a</link><guid isPermaLink="true">https://zenn.dev/gostachan/articles/4db88ccb4cec8a</guid><pubDate>Tue, 22 Oct 2024 01:26:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0D3daIdQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%25E3%2581%25A7%25E9%25A0%25AD%25E3%2581%25AE%25E7%2589%2587%25E9%259A%2585%25E3%2581%25AB%25E7%25BD%25AE%25E3%2581%2584%25E3%2581%25A6%25E3%2581%258A%25E3%2581%258D%25E3%2581%259F%25E3%2581%2584%25E3%2582%25A4%25E3%2583%2599%25E3%2583%25B3%25E3%2583%2588%25E4%25B8%2580%25E8%25A6%25A7%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:gostachan%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RkNDMxNTU2NGYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>gostachan</dc:creator></item><item><title><![CDATA[はじめてのtsoa×Expressで学ぶOpenAPI自動生成]]></title><description><![CDATA[
+ はじめに
+API開発では、コードとAPI仕様を常に一致させることが大きな課題です。
+tsoaを使うと、TypeScriptのデコレーター機能を活用して、コードから自動的にAPIドキュメントを生成できるため、コードと仕様の一貫性を保ちやすくなります。
+今回公式ドキュメトを軸にスムーズにTsoaを用いたTypeScript環境構築ができるような記事を書いてみました。
+https://tsoa-community.github.io/docs/introduction.html
+
+ 目次
+
+はじめに
+関連記事
+プロジェクトの初期設定
+APIドキュメント自動生成
+エラーハンドリング
+Midd...]]></description><link>https://zenn.dev/miumi/articles/e4e4fca9861ac9</link><guid isPermaLink="true">https://zenn.dev/miumi/articles/e4e4fca9861ac9</guid><pubDate>Mon, 21 Oct 2024 22:11:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lz3RCz0c--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%25AF%25E3%2581%2598%25E3%2582%2581%25E3%2581%25A6%25E3%2581%25AEtsoa%25C3%2597Express%25E3%2581%25A7%25E5%25AD%25A6%25E3%2581%25B6OpenAPI%25E8%2587%25AA%25E5%258B%2595%25E7%2594%259F%25E6%2588%2590%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%259F%25E3%2582%25AB%25E3%2582%25A4%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y4YjgwZTkyZmEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ミカイ</dc:creator></item><item><title><![CDATA[Apollo clientで送信する前にリクエストボディを確認する方法]]></title><description><![CDATA[送信前に何を送るのかを確認したかったので備忘録
+
+ 結論
+ApolloLink の operation から確認できる
+import { ApolloClient, ApolloLink, HttpLink, InMemoryCache } from "@apollo/client";
+import { print } from "graphql";
+
+const httpLink = new HttpLink({
+  uri: `http://localhost:8000/graphql`,
+});
+
+const authLink = new ApolloLink((operation...]]></description><link>https://zenn.dev/keit0728/articles/f32182f184a6d4</link><guid isPermaLink="true">https://zenn.dev/keit0728/articles/f32182f184a6d4</guid><pubDate>Mon, 21 Oct 2024 22:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--tTzbp6wo--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Apollo%2520client%25E3%2581%25A7%25E9%2580%2581%25E4%25BF%25A1%25E3%2581%2599%25E3%2582%258B%25E5%2589%258D%25E3%2581%25AB%25E3%2583%25AA%25E3%2582%25AF%25E3%2582%25A8%25E3%2582%25B9%25E3%2583%2588%25E3%2583%259C%25E3%2583%2587%25E3%2582%25A3%25E3%2582%2592%25E7%25A2%25BA%25E8%25AA%258D%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:keit%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzIyOTZlMjAyNTcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>keit</dc:creator></item></channel></rss>
