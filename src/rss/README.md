@@ -6,4 +6,5 @@ Motivated with https://github.com/osmoscraft/osmosfeed
 
 ```shell
 code .
+uv run ./generate.py
 ```
