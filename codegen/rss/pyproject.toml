@@ -1,22 +1,20 @@
-[tool.poetry]
+[project]
 name = "rss"
-version = "0.0.0"
-description = ""
-authors = []
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "feedparser>=6.0.11",
+    "jinja2>=3.1.4",
+    "pyyaml>=6.0.2",
+    "requests>=2.32.3",
+]
 
-[tool.poetry.dependencies]
-python = "^3.10"
-feedparser = "^6.0.11"
-jinja2 = "^3.1.4"
-requests = "^2.31.0"
-pyyaml = "^6.0.1"
-
-[tool.poetry.group.dev.dependencies]
-ruff = "^0.4.4"
-mypy = "^1.10.0"
-types-requests = "^2.31.0.20240406"
-types-pyyaml = "^6.0.12.20240311"
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+[tool.uv]
+dev-dependencies = [
+    "mypy>=1.13.0",
+    "ruff>=0.7.1",
+    "types-pyyaml>=6.0.12.20240917",
+    "types-requests>=2.32.0.20241016",
+]

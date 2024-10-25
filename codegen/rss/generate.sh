@@ -3,10 +3,10 @@ set -e
 
 ORIGIN=$(pwd)
 
-HERE=$(dirname $0)
-cd $HERE
+HERE=$(dirname "$0")
+cd "$HERE"
 
 docker build -t my-blog-rss-generator:latest .
-docker run --rm --user $(id -u):$(id -g) -v ${PWD}:/home my-blog-rss-generator python /home/generate.py
+docker run --rm --user "$(id -u):$(id -g)" -v "${PWD}":/home my-blog-rss-generator python /home/generate.py
 
-cd $ORIGIN
+cd "$ORIGIN"
