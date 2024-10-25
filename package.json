@@ -1,7 +1,9 @@
 {
     "private": true,
     "scripts": {
-        "install": "run-s tool:update_node tool:update_package tool:build_docker",
+        "preinstall": "rm -rf ./node_modules",
+        "install": "npm install --ignore-scripts",
+        "postinstall": "run-s tool:build_docker",
         "start": "run-s tool:gen_xp-css docs:start_serve",
         "stop": "run-s docs:stop_serve",
         "test": "run-s -c tool:format tool:lint tool:check_dead_link",
@@ -11,8 +13,6 @@
         "docs:stop_serve": "docker stop my-blog-mkdocs-material-dev",
         "docs:build": "docker run --rm --user $(id -u):$(id -g) -e EXCLUDE_DOCS='drafts/' -v ${PWD}:/docs my-blog-mkdocs-material build",
         "docs:preview": "http-server ./site -p 8001",
-        "tool:update_node": "volta pin node@latest && volta pin npm@latest",
-        "tool:update_package": "npm update",
         "tool:build_docker": "docker build -t my-blog-mkdocs-material:latest .",
         "tool:gen_xp-css": "sh codegen/xp-css/generate.sh && sass --no-source-map codegen/xp-css/xp.scss docs/static/stylesheets/xp.css",
         "tool:gen_rss": "sh codegen/rss/generate.sh && mv codegen/rss/dist/rss.md docs/rss.md",

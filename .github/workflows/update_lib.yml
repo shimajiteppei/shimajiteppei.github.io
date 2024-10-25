@@ -15,11 +15,10 @@ jobs:
               uses: volta-cli/action@master
             - name: Update package.json
               run: |
+                  volta pin node@latest && volta pin npm@latest
                   npm install
-                  rm -rf node_modules
             - name: Build Artifact
               run: |
-                  npm install --ignore-scripts
                   npm run build
             - name: Commit
               run: |
