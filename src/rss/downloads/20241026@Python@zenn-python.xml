@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Sat, 26 Oct 2024 00:55:38 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[誤差逆伝播法（バックプロパゲーション）]]></title><description><![CDATA[
+ 誤差逆伝播法（Backpropagation）
+誤差逆伝播法（Backpropagation）は，ニューラルネットワークの学習において，重みとバイアスを更新するための効率的な方法です．このアルゴリズムは，ネットワークの出力と期待される出力との間の「誤差」を計算し，その誤差を逆方向に伝播させて，各層のパラメータの勾配を求めます．
+以下では，具体的な数式とPythonコードを用いて，誤差逆伝播法の仕組みを詳しく解説します．
+
+ 誤差逆伝播法と数式
+まずはシンプルな，「入力層」「隠れ層」「出力層」のニューラルネットワークを考えます．
+
+入力層：\mathbf{x}
+
+隠れ層：\mathbf...]]></description><link>https://zenn.dev/minoda_kohei/articles/7f1b5ec1f2ea6a</link><guid isPermaLink="true">https://zenn.dev/minoda_kohei/articles/7f1b5ec1f2ea6a</guid><pubDate>Sat, 26 Oct 2024 00:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--K0v0y-aN--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%25AA%25A4%25E5%25B7%25AE%25E9%2580%2586%25E4%25BC%259D%25E6%2592%25AD%25E6%25B3%2595%25EF%25BC%2588%25E3%2583%2590%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2597%25E3%2583%25AD%25E3%2583%2591%25E3%2582%25B2%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E7%25B0%2591%25E7%2594%25B0%25E5%25BA%25B7%25E5%25B9%25B3%2520%252F%2520Minoda%2520Kohei%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTGFYbWU1cWpyWHV3Q1BUX21ad2VnZjdTaE9vSGlSQjE5dnJVTW42a3NuMy02RzB2VEc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>簑田康平 / Minoda Kohei</dc:creator></item><item><title><![CDATA[[Jupyter notebook] autoreroad]]></title><description><![CDATA[pythonファイルをノートブックを使用しながら作成する時、いちいちimportし直さずとも最新版をとりに行ってくれる機能。最初に回すだけ。
+%load_ext autoreload
+%autoreload 2
+]]></description><link>https://zenn.dev/meina/articles/b7a5a614c47b86</link><guid isPermaLink="true">https://zenn.dev/meina/articles/b7a5a614c47b86</guid><pubDate>Fri, 25 Oct 2024 15:41:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--G8_HHCG1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:%255BJupyter%2520notebook%255D%2520autoreroad%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:meina%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc5Y2EzMDJiYTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>meina</dc:creator></item><item><title><![CDATA[FASTAファイルの制御文字（"^A"）連結問題を解決するPythonプログラムの実装と解説]]></title><description><![CDATA[
+ 制御文字とキャレット表記について
+
+ キャレット表記の基本
+キャレット表記は、ASCIIコードにおける制御文字を視覚的に表現するための記法です。
+
+
+表記方法
+
+
+^ (キャレット) + アルファベット大文字
+例：^A = 制御コード1（Start of Heading：ヘッダ開始）
+ASCIIコード0-31の範囲の制御文字を表現
+ASCIIコード一覧表
+
+
+
+主な使用場面
+
+プログラミング環境でのデバッグ（テキストエディタやプログラミング環境では、特定の制御文字を簡単に参照するためにこの表記が使われます。）
+テキスト処理における制御文字の表現
+文書校正や特殊文字の確認
+
+
+
+
+ 今...]]></description><link>https://zenn.dev/d_treasure0712/articles/4ac9b5aec4cf02</link><guid isPermaLink="true">https://zenn.dev/d_treasure0712/articles/4ac9b5aec4cf02</guid><pubDate>Fri, 25 Oct 2024 15:26:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6s_Tq1Dn--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:FASTA%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2581%25AE%25E5%2588%25B6%25E5%25BE%25A1%25E6%2596%2587%25E5%25AD%2597%25EF%25BC%2588%2522%255EA%2522%25EF%25BC%2589%25E9%2580%25A3%25E7%25B5%2590%25E5%2595%258F%25E9%25A1%258C%25E3%2582%2592%25E8%25A7%25A3%25E6%25B1%25BA%25E3%2581%2599%25E3%2582%258BPython%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%25A0%25E3%2581%25AE%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%25A8%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259F%25E3%2581%258B%25E3%2582%2589%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSnR4b0JVYlhZeklpamlxN181cGc1bXhtSC00dl9HTmFPVGpId1NtQTlqU3I2eW0xZUQ9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>たから</dc:creator></item><item><title><![CDATA[Act06. Pythonでデータ処理を行う]]></title><description><![CDATA[
+ はじめに
+Act 01. AIで外国為替を自動売買するまでの道のりをベースに学習を進めて行く。
+Pythonを用いて機械学習を行う場合、データの前処理が必要らしい。
+Pythonではデータ処理を行うための様々なライブラリが提供されている。
+結構なボリュームになりそうだが挫けずに勉強しようと思う。
+そもそも何を勉強すれば良いか分からないため、ChatGPTさんに質問してみた。
+どうやら為替などの時系列データを扱う場合は以下を学んだ方がよいらしい。
+以下、ChatGPTさんの回答
+
+
+Pandas
+時系列データの前処理において最も一般的なライブラリです。データのクリーニング、欠損値の処理...]]></description><link>https://zenn.dev/onishi_ai_lad/articles/3a1698fd170a03</link><guid isPermaLink="true">https://zenn.dev/onishi_ai_lad/articles/3a1698fd170a03</guid><pubDate>Fri, 25 Oct 2024 14:47:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Cy4hTcSf--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Act06.%2520Python%25E3%2581%25A7%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E5%2587%25A6%25E7%2590%2586%25E3%2582%2592%25E8%25A1%258C%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258A%25E3%2581%25AB%25E3%2581%2597%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFlYzRlYjFmNjguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>おにし</dc:creator></item><item><title><![CDATA[【因果推論】ATEからCATEへ ~教育訓練RCTデータをCausal Forestを用いてPythonで効果検証~]]></title><description><![CDATA[
+ はじめに
+ある施策の効果を検証するためにA/Bテストが行われています。また経済学の文脈でも、ランダム化比較実験を行って政府の施策(教育、労働訓練など)の効果を検証する論文がトップジャーナルに多く掲載されています。
+こうした効果検証において、ビジネスで往々にして議題に挙がるのは、平均処置効果ではなく条件付き平均処置効果(CATE)、すなわち 「属性ごとの施策効果の異質性」 ではないでしょうか。実験の結果を次のアクションに落としこむ際に、より収益性の高いユーザーに施策を絞ろうとするのはとても自然だと思います。
+本記事では、条件付き平均処置効果を推定するためのフレームワークの一つであるCa...]]></description><link>https://zenn.dev/ka_ichi/articles/65a3dd6db5bb8f</link><guid isPermaLink="true">https://zenn.dev/ka_ichi/articles/65a3dd6db5bb8f</guid><pubDate>Fri, 25 Oct 2024 13:31:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--XI282Cuv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%259B%25A0%25E6%259E%259C%25E6%258E%25A8%25E8%25AB%2596%25E3%2580%2591ATE%25E3%2581%258B%25E3%2582%2589CATE%25E3%2581%25B8%2520%7E%25E6%2595%2599%25E8%2582%25B2%25E8%25A8%2593%25E7%25B7%25B4RCT%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%2592Causal%2520Forest%25E3%2582%2592%25E7%2594%25A8%25E3%2581%2584%25E3%2581%25A6Python%25E3%2581%25A7%25E5%258A%25B9%25E6%259E%259C%25E6%25A4%259C%25E8%25A8%25BC%7E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ka_ichi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTG51OU9CcTdWcElqcmxTSnZvUFZuOVdCamoxN3B2dTVKWFI2eTFiY2w2Y1h6NGVrTTc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ka_ichi</dc:creator></item><item><title><![CDATA[LeetCode #1233 Remove Sub-Folders from the Filesystem]]></title><description><![CDATA[
+ 問題概要
+入力値：folder ([string])
+出力値：[string]
+Given a list of folders folder, return the folders after removing all sub-folders in those folders. You may return the answer in any order.
+問題のリンク
+
+ 入力例
+Input: folder = ["/a","/a/b","/c/d","/c/d/e","/c/f"]
+Output: ["/a","/c/d","/c/f"]
+
+ 解答例1
+計算量：O(n)
+Pyth...]]></description><link>https://zenn.dev/pirika/articles/4306e7728ff3da</link><guid isPermaLink="true">https://zenn.dev/pirika/articles/4306e7728ff3da</guid><pubDate>Fri, 25 Oct 2024 13:31:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3wo_i47m--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:LeetCode%2520%25231233%2520Remove%2520Sub-Folders%2520from%2520the%2520Filesystem%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%2594%25E3%2583%25AA%25E3%2582%25AB%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U0YmI4OWIzOGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ピリカ</dc:creator></item><item><title><![CDATA[【Azure Document intelligence/python】- カスタムモデルをAPIで実行する方法]]></title><description><![CDATA[
+ 執筆日
+2024/10/25
+
+ 前提
+
+Azure Document intelligenceでカスタムモデルを構築済みであること
+ローカルにドキュメントがあること
+
+
+ code
+
+以下のコマンドを実行し、ライブラリーをinstall
+
+pip install azure-ai-formrecognizer
+
+以下を実行
+
+
+main.py
+from azure.ai.formrecognizer import DocumentAnalysisClient
+from azure.core.credentials import AzureKeyCredential
+
+# Azure...]]></description><link>https://zenn.dev/headwaters/articles/e768f7d9a76bed</link><guid isPermaLink="true">https://zenn.dev/headwaters/articles/e768f7d9a76bed</guid><pubDate>Fri, 25 Oct 2024 09:48:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--pwmFqsVs--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Azure%2520Document%2520intelligence%252Fpython%25E3%2580%2591-%2520%25E3%2582%25AB%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%25A0%25E3%2583%25A2%25E3%2583%2587%25E3%2583%25AB%25E3%2582%2592API%25E3%2581%25A7%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:takekawa%2520tomoki%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZjNGExY2UxMDYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2598%25E3%2583%2583%25E3%2583%2589%25E3%2582%25A6%25E3%2582%25A9%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%25BC%25E3%2582%25B9%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdmODg5YTRhYzguanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takekawa tomoki</dc:creator></item><item><title><![CDATA[Slurm + Pyxis/enroot環境でJupyter Notebookを起動させる手順]]></title><description><![CDATA[この手順書では、Slurmによるリソース配分の恩恵を受けながら、コンテナを利用してJupyter Notebookを起動する方法を解説します。コンテナを使用することで、環境の依存関係や破壊リスクが少なくなり、簡単にJupyterの実行環境を構築できます。
+
+ 前提条件と注意事項
+
+
+Pyxis と enroot は、GPUクラスタ上でコンテナを扱うためのツールです。本手順では、これらを用いてコンテナをSlurm上で実行し、Jupyter Notebookを起動します。
+
+必要な権限：ヘッドノードにrootでアクセスできることが前提です。
+
+利用するコンテナ：Jupyterの公式コンテナイ...]]></description><link>https://zenn.dev/yasu_oh/articles/4106c1512a5eaf</link><guid isPermaLink="true">https://zenn.dev/yasu_oh/articles/4106c1512a5eaf</guid><pubDate>Fri, 25 Oct 2024 09:18:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--YkbpMtVB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Slurm%2520%252B%2520Pyxis%252Fenroot%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25A7Jupyter%2520Notebook%25E3%2582%2592%25E8%25B5%25B7%25E5%258B%2595%25E3%2581%2595%25E3%2581%259B%25E3%2582%258B%25E6%2589%258B%25E9%25A0%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25A4%25A7%25E9%2587%258E%25E6%25B3%25B0%25E5%25BC%2598%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhNDFjMDRiZTcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>大野泰弘</dc:creator></item><item><title><![CDATA[LLM開発にSLAの原則を適応してTDDで進める]]></title><description><![CDATA[
+ はじめに
+LLMを自前でファインチューニングするにあたり
+Trainingの実装をSLAの原則を取り入れて快適にした話
+
+ 環境
+
+Python
+HuggingFace
+
+
+ SLA Principle
+一般的にはSLA(Single Level of Abstraction)もしくはSLAP(Single Level of Abstraction Principle)と呼ばれている原則
+各メソッドは、単一の抽象レベルで記述することが大切だよと伝えてくれています
+Robert C. Martin (a.k.a Uncle Bob) の人気書籍『Clean Code』（2009年）にも...]]></description><link>https://zenn.dev/tetoteto/articles/single_level_absolution_principle</link><guid isPermaLink="true">https://zenn.dev/tetoteto/articles/single_level_absolution_principle</guid><pubDate>Fri, 25 Oct 2024 08:51:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--v1McFQAJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:LLM%25E9%2596%258B%25E7%2599%25BA%25E3%2581%25ABSLA%25E3%2581%25AE%25E5%258E%259F%25E5%2589%2587%25E3%2582%2592%25E9%2581%25A9%25E5%25BF%259C%25E3%2581%2597%25E3%2581%25A6TDD%25E3%2581%25A7%25E9%2580%25B2%25E3%2582%2581%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:TetoTeto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSXlIN1NhY21HVFFmR3hWQ1d2R01nX29ETVR0WU82UXJ6WGg1Z3dZOUs4VWRJPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>TetoTeto</dc:creator></item><item><title><![CDATA[LINE Messaging APIを使ってBotからPUSH通知を送る [Python]]]></title><description><![CDATA[こんにちは！
+こちらの記事
+
+にある通り初めて自分自身でLINE Messaging APIを使ったbotを作成したので，PUSH通知の送り方について備忘録を残したいと思います！不明点や間違っている点があれば教えてください．
+この記事では，APIキーは取得済みであるとし，特定のトークルームにPUSHメッセージを送信するところまでを説明します．
+参考にしたサイトは随時記事内に示し，まとめて記事の一番下にも再掲いたします．
+
+この記事でわかること
+
+LINEのトークルームのIDを取得する方法
+Pythonを使って特定のトークルームにメッセージを送信する方法
+
+
+
+ おことわり
+
+本記事は，あ...]]></description><link>https://zenn.dev/sayaka_nakamoto/articles/09e084e45e2096</link><guid isPermaLink="true">https://zenn.dev/sayaka_nakamoto/articles/09e084e45e2096</guid><pubDate>Fri, 25 Oct 2024 07:59:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0ZsGsjWt--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:LINE%2520Messaging%2520API%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6Bot%25E3%2581%258B%25E3%2582%2589PUSH%25E9%2580%259A%25E7%259F%25A5%25E3%2582%2592%25E9%2580%2581%25E3%2582%258B%2520%255BPython%255D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E4%25B8%25AD%25E6%259C%25AC%25E3%2581%2595%25E3%2582%2584%25E9%25A6%2599%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSWtVQ1I5b1h6Ull1NTQ1T01zX3J5VFBpN0lfTFFjVV9TaVZMdlVHMU5GOWNlRERsbXk9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>中本さや香</dc:creator></item><item><title><![CDATA[WebRTCリアルタイムライブカメラを作る！]]></title><description><![CDATA[本書では、WebRTCを使用したリアルタイムライブカメラを作成します。
+
+WebRTC(Web Real-Time Communication)とは、ZoomやGoogle MeetなどのTV会議システムで使用されているP2P(Peer to Peer)で映像/音声/データを低遅延で送受信できるネットワークの規格です。
+
+通常は双方向のTV会議システム等で使用されるWebRTCですが、これを監視カメラで利用することで、低遅延なリアルタイムライブ監視カメラを作ることができます。
+
+このWebRTCの機能を一から開発するのは非常に大変ですが、現在では、様々なライブラリやソフトウェアが公開されており、それらを利用することで比較的容易にシステムを構築することが可能になってきています。
+
+本書では、ビューワー側は、JavaScriptのWebRTC APIを使用してHTMLページとして作成します。また、ライブカメラ側には、JanusサーバーとFFmpegを使用してPythonでプログラミングしていきます。
+
+また、最後にはRaspberry PIを使用したリアルタイムライブカメラBoxを作っていきたいと思います。
+
+本書を購入してくださった方には全ソースコードが公開されますので、必ず動くものが作れると思います。（コードが記載されていないチャプターは無料公開しています）
+
+しかし、本書の目指すところは、ただサービスが出来上がる、というところではなく、設計検討のポイントや、技術内容の説明なども加えながら、インターネット上の動画配信技術の基本的な知識と実装方法の習得にあります。
+
+本書をきっかけに、多くのプログラマーが次のステージに進めることを願っています。
+
+
+]]></description><link>https://zenn.dev/daddy_yukio/books/43790f0b74d317</link><guid isPermaLink="true">https://zenn.dev/daddy_yukio/books/43790f0b74d317</guid><pubDate>Fri, 25 Oct 2024 06:57:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5uP6zBgf--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci80ODhlNjk1NTE2LmpwZWc=%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>Yukio Ichikawa</dc:creator></item><item><title><![CDATA[ずんだもんでしゃべるローカルLLMで遊びたい]]></title><description><![CDATA[
+最近、Pythonをちょこっと始めました。
+Pythonといえば生成AIですが、自分にはハードルが高いなぁと思っていたところ、ローカルLLMが簡単に扱える環境があることを知り、せっかくだからずんだもんの声で喋るようにさせてみたいと思い、挑戦してみました。
+当方の環境は、
+
+Macbook Pro 16inch 2021
+メモリ32GB
+Mac OS 14.7
+
+
+ ローカルLLMを準備する
+Ollamaをインストールします。
+https://ollama.com
+
+ モデルをインストール
+言語モデルをインストールします。今回は、llama3-elyza-jp-8bを利用しました。
+ht...]]></description><link>https://zenn.dev/kadoyan/articles/a03cc6d7e3d337</link><guid isPermaLink="true">https://zenn.dev/kadoyan/articles/a03cc6d7e3d337</guid><pubDate>Fri, 25 Oct 2024 03:17:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--P4DF8HD5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%259A%25E3%2582%2593%25E3%2581%25A0%25E3%2582%2582%25E3%2582%2593%25E3%2581%25A7%25E3%2581%2597%25E3%2582%2583%25E3%2581%25B9%25E3%2582%258B%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25AB%25E3%2583%25ABLLM%25E3%2581%25A7%25E9%2581%258A%25E3%2581%25B3%25E3%2581%259F%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:KADOYAN%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzlhYzU2YWVlNjkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>KADOYAN</dc:creator></item><item><title><![CDATA[はじめてのGeoPandas~Docker環境構築~]]></title><description><![CDATA[
+ 概要
+GeoPandasをローカル環境で実行するためのDocker環境構築方法を紹介します。
+「環境構築とか面倒！実行環境だけ欲しい！」という場合は、GoogleColabを使うのが一番手っ取り早いです。
+Google Colabを使ったサンプルコードはこちらです。
+GeoPandasとFoliumで地図表示.ipynb
+
+ GeoPandasとは
+GeoPandasは、地理空間データを扱うためのオープンソースです。PandasとShapelyを拡張し、地理空間データの分析や可視化を可能にします。
+
+ jupyter notebookの環境構築
+次のDockerfileとcompos...]]></description><link>https://zenn.dev/yamadamadamada/articles/1ad8a918c9466f</link><guid isPermaLink="true">https://zenn.dev/yamadamadamada/articles/1ad8a918c9466f</guid><pubDate>Fri, 25 Oct 2024 02:27:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hWmYxlxV--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%25AF%25E3%2581%2598%25E3%2582%2581%25E3%2581%25A6%25E3%2581%25AEGeoPandas%7EDocker%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%7E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258B%25E3%2581%25AE%25E3%2581%258B%25E3%2581%25AE%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdmZGNmMjJiZDAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>かのかの</dc:creator></item><item><title><![CDATA[クラウドでも使えるインテル® Xeon® プロセッサーの AI を加速するインテル® AMX]]></title><description><![CDATA[【開発と活用を推進するインテルの AI】
+インテルはクラウドからデータセンター、エッジにおいて、あらゆる場所での AI 活用を目指す、ソフトウェアやハードウェアでの AI 開発、さらには AI ソリューションへの活用を動画で解説するWebサイトを公開しています。
+https://www.intel.co.jp/content/www/jp/ja/artificial-intelligence/ai-development-and-utilization.html
+＜AI 活用を動画で学ぶ＞
+インテルのエキスパートたちが、ソフトウェアやハードウェア、AI ソリューションに関してのノウハウを...]]></description><link>https://zenn.dev/intel_developer/articles/b45c96666de462</link><guid isPermaLink="true">https://zenn.dev/intel_developer/articles/b45c96666de462</guid><pubDate>Fri, 25 Oct 2024 00:29:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BHAIwz18--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25A6%25E3%2583%2589%25E3%2581%25A7%25E3%2582%2582%25E4%25BD%25BF%25E3%2581%2588%25E3%2582%258B%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2586%25E3%2583%25AB%2520%2520Xeon%2520%2520%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25BB%25E3%2583%2583%25E3%2582%25B5%25E3%2583%25BC%25E3%2581%25AE%2520AI%2520%25E3%2582%2592%25E5%258A%25A0%25E9%2580%259F%25E3%2581%2599%25E3%2582%258B%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2586%25E3%2583%25AB%2520%2520AMX%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2586%25E3%2583%25AB%25E3%2583%2587%25E3%2583%2599%25E3%2583%25AD%25E3%2583%2583%25E3%2583%2591%25E3%2583%25BC%25E3%2582%25BE%25E3%2583%25BC%25E3%2583%25B3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZiZThlMTc0MzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>インテルデベロッパーゾーン</dc:creator></item><item><title><![CDATA[線形回帰(平均二乗誤差)]]></title><description><![CDATA[線形回帰によって、単純なデータ群を予測することができる。
+まず、予測値を決めてから、正解の値との差を最小値にすることだ。
+
+二乗誤差 (MSE: Mean Squared Error)
+
+
+L(y, \hat{y}) = \frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2
+
+
+\text{二乗誤差の数式は、単なる関数ではあるが、その関数をどうやって求めるかがポイントだ。}
+\\
+\hat{y}_i = \beta_0 + \beta_1
+
+以下シンプルな数値たちがあるとする。
+これが通常なら、部屋数(x)家賃(y)や、勉強時間(x)点数(y)とな...]]></description><link>https://zenn.dev/masarudoglove/articles/583c34dca5ae22</link><guid isPermaLink="true">https://zenn.dev/masarudoglove/articles/583c34dca5ae22</guid><pubDate>Thu, 24 Oct 2024 14:45:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--RMmcvief--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%25B7%259A%25E5%25BD%25A2%25E5%259B%259E%25E5%25B8%25B0%2528%25E5%25B9%25B3%25E5%259D%2587%25E4%25BA%258C%25E4%25B9%2597%25E8%25AA%25A4%25E5%25B7%25AE%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25BE%25E3%2581%2595%25E3%2582%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzkwMWNjMmQ1MmQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>まさる</dc:creator></item><item><title><![CDATA[Raspberry pi5とVoicevoxを使った遊び]]></title><description><![CDATA[
+ はじめに
+Raspberrypi, Transcribe, VoiceVox, ChatGPTを使って遊んでみたのでまとめました。
+Raspberry piに接続したマイクに音声入力して音声合成で返答するアプリもどきです。
+各要素を使ってみたかっただけなので当該コードを実行すると「10秒ほど音声入力を録音した後に文字起こし、返答作成、VoiceVoxの音声読み上げ」の流れを1回行います。
+
+ 概要
+Raspberrypiにマイク、スピーカーを接続。
+マイクから入力された音声を録音し、AWS Transcribeで録音した音声をテキストに変換、
+Transcribeから得られたテキスト...]]></description><link>https://zenn.dev/rexloupe/articles/8ad56142d7311e</link><guid isPermaLink="true">https://zenn.dev/rexloupe/articles/8ad56142d7311e</guid><pubDate>Thu, 24 Oct 2024 11:12:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bfyZQggO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Raspberry%2520pi5%25E3%2581%25A8Voicevox%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%259F%25E9%2581%258A%25E3%2581%25B3%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Oath%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM1YWQ1NjZkMmIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Oath</dc:creator></item><item><title><![CDATA[実案件で学ぶ ! 超実践 Django アプリ開発【ECサイト編】]]></title><description><![CDATA[実際のプロジェクトをもとにしたリアルな架空案件に取り組みながら、本格的なWEBアプリを開発していきます。
+
+全 34 章構成、14 万文字を超える大ボリュームな内容であり、初心者向けのチュートリアルや入門書籍とは一線を画します。
+
+実務レベルのコーディングスキルを身につけ、即戦力として活躍したい方にピッタリな本です。]]></description><link>https://zenn.dev/louismiyanaga/books/81b785e64ddd12</link><guid isPermaLink="true">https://zenn.dev/louismiyanaga/books/81b785e64ddd12</guid><pubDate>Thu, 24 Oct 2024 10:11:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--guYlhngn--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci85YWJjMzUyYzcyLmpwZWc=%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>Louis MIYANAGA</dc:creator></item><item><title><![CDATA[【Python】pngをPDFに変換する]]></title><description><![CDATA[
+ 執筆日
+2024/10/24
+
+ code
+
+必要なライブラリをインストール
+
+pip install Pillow reportlab
+
+以下を実行する
+
+
+main.py
+from PIL import Image
+from reportlab.pdfgen import canvas
+
+def png_to_pdf(png_path, pdf_path):
+    # 画像を読み込み
+    image = Image.open(png_path)
+
+    # 画像のサイズを取得
+    width, height = image.size
+
+    # PDFを作成
+   ...]]></description><link>https://zenn.dev/headwaters/articles/560c34d0dfa60b</link><guid isPermaLink="true">https://zenn.dev/headwaters/articles/560c34d0dfa60b</guid><pubDate>Thu, 24 Oct 2024 09:00:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---Y_x0ype--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591png%25E3%2582%2592PDF%25E3%2581%25AB%25E5%25A4%2589%25E6%258F%259B%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:takekawa%2520tomoki%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZjNGExY2UxMDYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2598%25E3%2583%2583%25E3%2583%2589%25E3%2582%25A6%25E3%2582%25A9%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%25BC%25E3%2582%25B9%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdmODg5YTRhYzguanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takekawa tomoki</dc:creator></item><item><title><![CDATA[ニューラルネットワークにおける活性化関数]]></title><description><![CDATA[
+ 活性化関数
+活性化関数とは，ニューロンへ入力された信号の和をa，そのニューロンから出力される信号をyとしたときの，aからyへの変換のために用いられる関数です．
+
+ 活性化関数の具体的な形の例と選択基準
+ここでは，活性化関数の具体例を紹介します．実装例は記事の後半で紹介しています．
+
+ 恒等関数
+恒等関数とは，入力値をそのまま出力するシンプルな活性化関数です．
+
+f(x)=x
+
+主に回帰問題の出力層で使用され，「入力値をそのまま出力する」ことのメリットとしては，モデルが入力から直接的な数値予測を行うことができます．
+
+ ジグモイド関数
+シグモイド関数とは、入力値を0から1の範囲にマッピ...]]></description><link>https://zenn.dev/minoda_kohei/articles/64e41b2c6d5be3</link><guid isPermaLink="true">https://zenn.dev/minoda_kohei/articles/64e41b2c6d5be3</guid><pubDate>Thu, 24 Oct 2024 09:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--AjFn1aEm--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%258B%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%25A9%25E3%2583%25AB%25E3%2583%258D%25E3%2583%2583%25E3%2583%2588%25E3%2583%25AF%25E3%2583%25BC%25E3%2582%25AF%25E3%2581%25AB%25E3%2581%258A%25E3%2581%2591%25E3%2582%258B%25E6%25B4%25BB%25E6%2580%25A7%25E5%258C%2596%25E9%2596%25A2%25E6%2595%25B0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E7%25B0%2591%25E7%2594%25B0%25E5%25BA%25B7%25E5%25B9%25B3%2520%252F%2520Minoda%2520Kohei%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTGFYbWU1cWpyWHV3Q1BUX21ad2VnZjdTaE9vSGlSQjE5dnJVTW42a3NuMy02RzB2VEc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>簑田康平 / Minoda Kohei</dc:creator></item><item><title><![CDATA[Pydanticの拡張クラスで小文字化まで行う]]></title><description><![CDATA[
+ 始めに
+PydanticでEmailStrを拡張するという記事を書きました。今回の記事では、PydanticでEmailStrを拡張するで行ったことをさらに拡張して、大文字小文字のどちらでもパラメータを受け取りつつ、小文字化してアプリケーションで受け取れるようにさらに拡張します。
+
+ 環境
+
+Python
+
+3.12.7
+
+
+Pydantic
+
+2.9.2
+
+
+
+
+ 実装
+以前に追加したロジックでvalidate_half_and_full_emailのレスポンスを小文字化します。
+from typing import Type, Any
+import re
+
+from pydant...]]></description><link>https://zenn.dev/kirimaru/articles/c3df563b82d36a</link><guid isPermaLink="true">https://zenn.dev/kirimaru/articles/c3df563b82d36a</guid><pubDate>Thu, 24 Oct 2024 03:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ZK1GQoos--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Pydantic%25E3%2581%25AE%25E6%258B%25A1%25E5%25BC%25B5%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25B9%25E3%2581%25A7%25E5%25B0%258F%25E6%2596%2587%25E5%25AD%2597%25E5%258C%2596%25E3%2581%25BE%25E3%2581%25A7%25E8%25A1%258C%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258D%25E3%2582%258A%25E4%25B8%25B8%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM1OTcxNmNjNDMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>きり丸</dc:creator></item></channel></rss>
