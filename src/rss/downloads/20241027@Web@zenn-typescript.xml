@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「TypeScript」のフィード]]></title><description><![CDATA[Zennのトピック「TypeScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/typescript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/f13e758fdb.png</url><title>Zennの「TypeScript」のフィード</title><link>https://zenn.dev/topics/typescript</link></image><generator>zenn.dev</generator><lastBuildDate>Sun, 27 Oct 2024 01:13:39 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/typescript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[bufで.protoファイルからNestJSのソースコードを生成する]]></title><description><![CDATA[
+ 対象読者
+
+gRPCを使用してプログラム間通信を行っている。
+コマンドラインでprotocの生成コマンドを打っている。
+開発言語はTypescriptでNestJS &amp; NodeJSを利用している。
+
+
+ 今まで
+プロトコルバッファの.protoファイルをprotocコマンドで開発言語のインターフェイスファイルを生成していました。
+protoc \
+--ts_proto_opt=esModuleInterop=true,env=node,nestJs=true,forceLong=string \
+--plugin=../../node_modules/.bin/protoc...]]></description><link>https://zenn.dev/kobachiki/articles/50274cfce35901</link><guid isPermaLink="true">https://zenn.dev/kobachiki/articles/50274cfce35901</guid><pubDate>Sat, 26 Oct 2024 09:41:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--tC6tCYDy--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:buf%25E3%2581%25A7.proto%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2581%258B%25E3%2582%2589NestJS%25E3%2581%25AE%25E3%2582%25BD%25E3%2583%25BC%25E3%2582%25B9%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2582%2592%25E7%2594%259F%25E6%2588%2590%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2593%25E3%2581%25B0%25E3%2581%25A1%25E3%2581%258D%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2hQRHV5LUdWTEdKMXlmaE81SUVtY2JzMVlFT2JOYjZ4SHpQN2xtMWc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>こばちき</dc:creator></item><item><title><![CDATA[TAURI でも最新の Angular が使いたい]]></title><description><![CDATA[
+ はじめに
+TAURI v2.0が安定版としてリリースされました。
+TAURIで最新版のAngularを使う初期設定をまとめます。
+https://v2.tauri.app/
+
+ TAURI の初期設定
+TAURIの初期設定には2種類あリます。
+https://v2.tauri.app/start/create-project/
+
+ create-tauri-app コマンドを使う方法
+create-tauri-appコマンドを使うとターミナル上から開発環境やフレームワークを選択できます。
+$ npm create tauri-app@latest
+✔ Project name · t...]]></description><link>https://zenn.dev/nao50/articles/tauri2-angular</link><guid isPermaLink="true">https://zenn.dev/nao50/articles/tauri2-angular</guid><pubDate>Sat, 26 Oct 2024 00:16:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--YJwmqiSZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TAURI%2520%25E3%2581%25A7%25E3%2582%2582%25E6%259C%2580%25E6%2596%25B0%25E3%2581%25AE%2520Angular%2520%25E3%2581%258C%25E4%25BD%25BF%25E3%2581%2584%25E3%2581%259F%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nao%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRiY2YzZDIyYTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nao</dc:creator></item><item><title><![CDATA[Next.js 15 で ESLint 9（Flat config）を使う]]></title><description><![CDATA[
+ はじめに
+先日リリースされた Next.js 15 では ESLint 9 に対応しました。
+互換性はまだ維持されているため、従来の設定ファイルのままでも動作しますが、せっかくなので Flat config を使ってみましょう。
+（create-next-app で作成したプロジェクトでは、依然として ESLint 8 のままです。）
+
+ インストール
+以下の追加の依存関係が必要です。
+pnpm install -D @eslint/compat
+
+ 設定ファイル
+create-next-app --eslint --typescript で作成したプロジェクトの .eslintrc...]]></description><link>https://zenn.dev/k_taro56/articles/next-js-with-eslint9</link><guid isPermaLink="true">https://zenn.dev/k_taro56/articles/next-js-with-eslint9</guid><pubDate>Fri, 25 Oct 2024 13:46:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--DhgwRfOC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Next.js%252015%2520%25E3%2581%25A7%2520ESLint%25209%25EF%25BC%2588Flat%2520config%25EF%25BC%2589%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:k-taro56%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzViNmFkZWY0ZjcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>k-taro56</dc:creator></item><item><title><![CDATA[ServerActionを使ってクライアント側の値を元にRSCを再レンダリングさせる]]></title><description><![CDATA[
+ はじめに
+弊社ではApp Routerを使用していますがサーバ/クライアントという境界線の扱いが難しく、何が最適解なのか模索しながら開発する毎日です。
+いろいろと苦戦していますが、中でも「stateなどクライアント側の値によってRSCを再レンダリングさせ、（サーバ側で）データを取得し表示を更新する」の実現でかなり苦戦したので、今日はこの点について知見を共有したいと思います。
+
+ まとめ
+少し長いので先にこちらの考えをお伝えしておくと、
+
+サーバ → クライアントというレンダリングフローのため、クライアントの値を元にRSCを再レンダリングさせるのは現状難しい
+無理やりServer Ac...]]></description><link>https://zenn.dev/ficilcom/articles/652c8a01c55eee</link><guid isPermaLink="true">https://zenn.dev/ficilcom/articles/652c8a01c55eee</guid><pubDate>Fri, 25 Oct 2024 12:00:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BdR69CBb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ServerAction%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25A4%25E3%2582%25A2%25E3%2583%25B3%25E3%2583%2588%25E5%2581%25B4%25E3%2581%25AE%25E5%2580%25A4%25E3%2582%2592%25E5%2585%2583%25E3%2581%25ABRSC%25E3%2582%2592%25E5%2586%258D%25E3%2583%25AC%25E3%2583%25B3%25E3%2583%2580%25E3%2583%25AA%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%2595%25E3%2581%259B%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Hyo%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE3MmFmNGJkODAuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2595%25E3%2582%25A3%25E3%2582%25B7%25E3%2583%25AB%25E3%2582%25B3%25E3%2583%25A0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E1NmIyZDY5MzUuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Hyo</dc:creator></item><item><title><![CDATA[インターセクション型【個人学習まとめ】]]></title><description><![CDATA[
+ インターセクション型
+組み合わされたすべての型の特性を持つ。記法としては「AかつB」の型だと考えるとよい。
+type MultiType = TypeA &amp; TypeB &amp; TypeC;
+
+//ダミー
+type TypeA = {
+    type_a: string
+}
+type TypeB = {
+    type_b: number
+}
+type TypeC = {
+    type_c: boolean
+}
+Cpu型とMemory型の2つの型をインターセクション型を使って結合して、Pc型を作成。
+Pc型は、Cpu型とMemory型の両方がもつプロパティを含む必...]]></description><link>https://zenn.dev/o0rororo0o/articles/8c0199982850ec</link><guid isPermaLink="true">https://zenn.dev/o0rororo0o/articles/8c0199982850ec</guid><pubDate>Fri, 25 Oct 2024 11:02:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--CQzlxLTJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25BF%25E3%2583%25BC%25E3%2582%25BB%25E3%2582%25AF%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E5%259E%258B%25E3%2580%2590%25E5%2580%258B%25E4%25BA%25BA%25E5%25AD%25A6%25E7%25BF%2592%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%258D%25E3%2582%258D%25E3%2582%258D%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ2ZTZjOWM4YmMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ろろろ</dc:creator></item><item><title><![CDATA[Laravelでサクッとはじめる型安全なAPI開発]]></title><description><![CDATA[
+ はじめに
+私はスタートアップ企業のひとりエンジニアとして日々開発業務を行っています。
+dedoc/Scrambleを使用してサクッと型安全なAPI開発プロセスを導入できたのでまとめます。
+
+ なぜ型安全にしたいのか
+弊サービスではざっくり以下の構成で開発しています。
+
+フロントエンド: React,Typescript
+バックエンド: Laravel
+
+バックエンドはWeb APIとして動かしていて、フロントエンドでaxiosなどを使用してバックエンドから問い合わせる流れです。
+ある程度サービスが育っていく中で、開発の課題として以下の認識がありました。
+
+ フロントエンドとバックエン...]]></description><link>https://zenn.dev/ransakata/articles/8fd94bce0e5fbf</link><guid isPermaLink="true">https://zenn.dev/ransakata/articles/8fd94bce0e5fbf</guid><pubDate>Fri, 25 Oct 2024 09:21:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_ruethLm--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Laravel%25E3%2581%25A7%25E3%2582%25B5%25E3%2582%25AF%25E3%2583%2583%25E3%2581%25A8%25E3%2581%25AF%25E3%2581%2598%25E3%2582%2581%25E3%2582%258B%25E5%259E%258B%25E5%25AE%2589%25E5%2585%25A8%25E3%2581%25AAAPI%25E9%2596%258B%25E7%2599%25BA%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ran%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I3NTQxZmNkYWMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ran</dc:creator></item><item><title><![CDATA[Playwright でファイルアップロードできないときの回避方法]]></title><description><![CDATA[
+ はじめに
+こんにちは、クラウドエース 第 2 開発部の坂本です。
+最近、Playwright で E2E テストを書いていて、ファイルアップロードのテストで少し詰まりました。
+具体的には、react-dropzone を使用してファイルアップロードを実装している場合に、Playwright の 公式ドキュメント に記載されている filechooser イベントを使った方法で、タイムアウトが発生しました。
+そこで、本記事ではこの問題の回避方法をご紹介します。
+!
+react-dropzone と Playwright を組み合わせたファイルアップロードのテストにおいて、 filech...]]></description><link>https://zenn.dev/cloud_ace/articles/playwright-fileupload-error-workaround</link><guid isPermaLink="true">https://zenn.dev/cloud_ace/articles/playwright-fileupload-error-workaround</guid><pubDate>Fri, 25 Oct 2024 06:49:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--oJVh7TGR--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Playwright%2520%25E3%2581%25A7%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2589%25E3%2581%25A7%25E3%2581%258D%25E3%2581%25AA%25E3%2581%2584%25E3%2581%25A8%25E3%2581%258D%25E3%2581%25AE%25E5%259B%259E%25E9%2581%25BF%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25A6%25E3%2583%2589%25E3%2582%25A8%25E3%2583%25BC%25E3%2582%25B9%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE2OGMwYmM4MTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>クラウドエース株式会社</dc:creator></item><item><title><![CDATA[VS Codeが参照するTypeScriptのバージョンを変更する]]></title><description><![CDATA[TypeScriptを利用している場合に、npm run lintなどではエラーになるけどVS Codeではエラーにならないという経験があるひとは多いと思います。
+そういった状況が発生する原因はVS Codeが参照しているTypeScriptのバージョンとnpm run lint時に参照されるプロジェクトのTypeScriptのバージョンが違っているためです。
+
+ 異なるTypeScriptのバージョンのプロジェクトを作成
+確認するため空のプロジェクトを作成して以下のコマンドでpackage.jsonとfoo.tsを作成しましょう。
+npm init -y
+npm install typ...]]></description><link>https://zenn.dev/tor_inc/articles/51e28305ccf29c</link><guid isPermaLink="true">https://zenn.dev/tor_inc/articles/51e28305ccf29c</guid><pubDate>Fri, 25 Oct 2024 02:12:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--mLbwe2ki--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:VS%2520Code%25E3%2581%258C%25E5%258F%2582%25E7%2585%25A7%25E3%2581%2599%25E3%2582%258BTypeScript%25E3%2581%25AE%25E3%2583%2590%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%2592%25E5%25A4%2589%25E6%259B%25B4%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E8%25A5%25BF%25E7%2595%2591%25E4%25B8%2580%25E9%25A6%25AC%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg2YWFmMzM0ZWIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2583%2588%25E3%2582%25A5%25E3%2583%25BC%25E3%2582%25A2%25E3%2583%25BC%25E3%2583%25AB%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2hjcTRUQ3g5VWFxZ3VsSktVal9MQXpFVk5MYmxsaGRuYlVGZkxOUUE9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>西畑一馬</dc:creator></item><item><title><![CDATA[Googleカレンダーのスケジュールから「以下の日程でご都合いかがでしょうか？」を自動生成するアプリを作りました]]></title><description><![CDATA[
+ はじめに
+この度、Google カレンダーと連携したご都合いかがでしょうかメーカー「UnSchedule」を作成しました。
+https://unschedule.unreact.jp/?from=zenn
+このアプリを使うと、Google カレンダーの空きスケジュールを取得して、以下のような日程調整用のテキストを生成することができます。
+以下の日程でご都合いかがでしょうか。
+10月25日（金）10:00〜18:00
+10月28日（月）10:00〜14:00, 16:00〜18:00
+10月29日（火）10:00〜18:00
+この記事では、アプリを作成した背景やアプリの機能、アプリの実...]]></description><link>https://zenn.dev/taichifukumoto/articles/unschedule-gotsugouikagadeshouka</link><guid isPermaLink="true">https://zenn.dev/taichifukumoto/articles/unschedule-gotsugouikagadeshouka</guid><pubDate>Fri, 25 Oct 2024 00:49:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3LIwTTia--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Google%25E3%2582%25AB%25E3%2583%25AC%25E3%2583%25B3%25E3%2583%2580%25E3%2583%25BC%25E3%2581%25AE%25E3%2582%25B9%25E3%2582%25B1%25E3%2582%25B8%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%258B%25E3%2582%2589%25E3%2580%258C%25E4%25BB%25A5%25E4%25B8%258B%25E3%2581%25AE%25E6%2597%25A5%25E7%25A8%258B%25E3%2581%25A7%25E3%2581%2594%25E9%2583%25BD%25E5%2590%2588%25E3%2581%2584%25E3%2581%258B%25E3%2581%258C%25E3%2581%25A7%25E3%2581%2597%25E3%2582%2587%25E3%2581%2586%25E3%2581%258B%25EF%25BC%259F%25E3%2580%258D%25E3%2582%2592%25E8%2587%25AA%25E5%258B%2595%25E7%2594%259F%25E6%2588%2590%25E3%2581%2599%25E3%2582%258B%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258A%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:taichi%2520fukumoto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RiZTU1OWFmNjIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>taichi fukumoto</dc:creator></item><item><title><![CDATA[axiosのinterceptorを使って、submitするdataを全てスネークケースにする方法]]></title><description><![CDATA[
+ はじめに
+みなさん、こんにちは torihaziです
+今日は実務でタイトルのことをやる機会があって、
+色々と調べたのでそれを書き残そうかと思って今書いてます
+
+ 経緯
+frontendとbackendでキャメルケースかスネークケースかで違うと思います。
+frontはuserDataみたいなキャメルで、backはrailsだとuser_dataみたいな
+スネークケースですよね。
+今までもスネークケースにする処理はfrontでやっていたり、
+それか
+user_data: {
+  name: data.hoge
+  age: data.age
+  ・・・
+}
+みたいにしてわざわざベタ書きし...]]></description><link>https://zenn.dev/torihazi/articles/56b407b0464d01</link><guid isPermaLink="true">https://zenn.dev/torihazi/articles/56b407b0464d01</guid><pubDate>Fri, 25 Oct 2024 00:36:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--yNpbOwrO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:axios%25E3%2581%25AEinterceptor%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2580%2581submit%25E3%2581%2599%25E3%2582%258Bdata%25E3%2582%2592%25E5%2585%25A8%25E3%2581%25A6%25E3%2582%25B9%25E3%2583%258D%25E3%2583%25BC%25E3%2582%25AF%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B9%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:torihazi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RlNDM1MGFkNGYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>torihazi</dc:creator></item><item><title><![CDATA[Next.js AppRouter x NextAuth で Google ログインを実装してみる]]></title><description><![CDATA[
+ はじめに
+今回は Next.js AppRouter で NextAuth を使用し、サクッと Google ログインを実装しようと思います。
+というのも、個人開発で Youtube Data API v3 を呼ぶのに NextAuth でとれる access_token を使用しようと思ったところ、AppRouter で NextAuth を使用している記事があまり出てこずに苦労したのでここに備忘録として記述しておこうと思います。
+
+ 環境
+
+next: 15.0.1
+next-auth 4.24.9
+
+!
+next-auth が 4.24.8 だと sync-dynamic-ap...]]></description><link>https://zenn.dev/suzuki3jp/articles/nextauth-approuter-google-20241025</link><guid isPermaLink="true">https://zenn.dev/suzuki3jp/articles/nextauth-approuter-google-20241025</guid><pubDate>Thu, 24 Oct 2024 22:26:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--S0JnI5Sg--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Next.js%2520AppRouter%2520x%2520NextAuth%2520%25E3%2581%25A7%2520Google%2520%25E3%2583%25AD%25E3%2582%25B0%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E9%2588%25B4%25E6%259C%25A8%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzczYWZjNjdmZGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>鈴木</dc:creator></item><item><title><![CDATA[ロジックを追いながらNext.jsのディレクトリ構成について理解を深めてみる]]></title><description><![CDATA[https://www.amazon.co.jp/TypeScriptとReact-Next-jsでつくる実践Webアプリケーション開発-手島-拓也/dp/4297129167/ref=sr_1_1?dib=eyJ2IjoiMSJ9.Wb1w0ddvLhlqjXBArC2pSppf_oZKRbbc7_QZ2-FqmCeSvguYsMWcuTHPOakTPi_szgxYS_368H-MS3mcOYT-d46PCDLEFtDTsDBcOEyr9xABiQPEEHYroeLx4u5zmfEjDs4eFR5tcaFuR_ASdChR8nhCdl46QHcPcX_mzZo8KBck2c2RCqw-...]]></description><link>https://zenn.dev/atsumu22/articles/acc6966a6d6d26</link><guid isPermaLink="true">https://zenn.dev/atsumu22/articles/acc6966a6d6d26</guid><pubDate>Thu, 24 Oct 2024 14:43:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Bfrth9W---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%25AD%25E3%2582%25B8%25E3%2583%2583%25E3%2582%25AF%25E3%2582%2592%25E8%25BF%25BD%25E3%2581%2584%25E3%2581%25AA%25E3%2581%258C%25E3%2582%2589Next.js%25E3%2581%25AE%25E3%2583%2587%25E3%2582%25A3%25E3%2583%25AC%25E3%2582%25AF%25E3%2583%2588%25E3%2583%25AA%25E6%25A7%258B%25E6%2588%2590%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E7%2590%2586%25E8%25A7%25A3%25E3%2582%2592%25E6%25B7%25B1%25E3%2582%2581%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2582%25E3%2581%25A4%25E3%2582%2580%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RkMTVhNTAzMmUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>あつむ</dc:creator></item><item><title><![CDATA[TypeScriptのコーディング規約を策定してみた！]]></title><description><![CDATA[
+ はじめに
+少し前の話ですが、TypeScriptのコーディング規約を策定する機会がありました。
+そこで、チームで実際に採用しているルールを具体例も交えながら紹介します！💫
+また、もしこの記事を読んで別の観点や改善点があれば、ぜひアドバイスを頂きたいです！
+
+ 経緯
+私たちのチームは急速に拡大しており、ルールや規約の整備が追いついていない状況でした。
+その結果、開発者によってコードの書き方がバラバラになり、可読性やメンテナンス性を損なう懸念が生じていました。
+このような背景から、コーディングスタイルを確立し、全員が共通のルールに従って作業できるようにする必要性を感じ、規約の策定に取り組...]]></description><link>https://zenn.dev/kiman/articles/db95ceeb925fe4</link><guid isPermaLink="true">https://zenn.dev/kiman/articles/db95ceeb925fe4</guid><pubDate>Thu, 24 Oct 2024 14:41:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jEpPoItU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%25E3%2581%25AE%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2587%25E3%2582%25A3%25E3%2583%25B3%25E3%2582%25B0%25E8%25A6%258F%25E7%25B4%2584%25E3%2582%2592%25E7%25AD%2596%25E5%25AE%259A%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258D%25E3%2582%2593%25E3%2582%2586%25E3%2581%25BE%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ3MmYyZmE3MTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>きんゆまん</dc:creator></item><item><title><![CDATA[Chakra UIからmantineに置き換える準備をする]]></title><description><![CDATA[Chakra UIのv3がリリースされ、スニペットをデフォルトとするなどかなり使い勝手が変わった。
+個人的にv3以降Chakra UIから恩恵を得られない可能性が高まってきたので、他のライブラリとの共存、移植の方法を試したい。
+今回、mantineを移植先として、どちらにも存在するPopoverのコンポーネントを移植する場合の手順を記載する。
+npm trendsで比較的利用数が近く、使い勝手も近いmantineを選択したが、他のライブラリでもほとんど同じような手順になるだろう
+また、今回は「それなりに機能が近い」ぐらいを目標として、見た目が完全に一致することは求めないレベルで考える
+
+...]]></description><link>https://zenn.dev/terrierscript/articles/2024-10-24-chakra-ui-mantine</link><guid isPermaLink="true">https://zenn.dev/terrierscript/articles/2024-10-24-chakra-ui-mantine</guid><pubDate>Thu, 24 Oct 2024 13:23:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--G_zy9orQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Chakra%2520UI%25E3%2581%258B%25E3%2582%2589mantine%25E3%2581%25AB%25E7%25BD%25AE%25E3%2581%258D%25E6%258F%259B%25E3%2581%2588%25E3%2582%258B%25E6%25BA%2596%25E5%2582%2599%25E3%2582%2592%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:terrierscript%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RhNzJjMjE0Y2QuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>terrierscript</dc:creator></item><item><title><![CDATA[Angular18 と Hono で SSR と RPC を試す]]></title><description><![CDATA[
+ はじめに
+HonoとAngularでSSRとRPC機能を試してみます。
+Angularはv19でSSR/SSG周りの大きなアップデートを予定しているようですが、今回はv18で素振りをしておきましょう。
+
+ Angular を Hono で SSR
+Angularはプロジェクト生成時にSSRを指定することでexpressベースのサーバーコードが生成されます。
+$ ng new --ssr
+生成されたサーバーコード
+server.ts
+import { APP_BASE_HREF } from '@angular/common';
+import { CommonEngine } from...]]></description><link>https://zenn.dev/nao50/articles/angular18-hono-ssr</link><guid isPermaLink="true">https://zenn.dev/nao50/articles/angular18-hono-ssr</guid><pubDate>Wed, 23 Oct 2024 22:45:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3OU4VnFI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Angular18%2520%25E3%2581%25A8%2520Hono%2520%25E3%2581%25A7%2520SSR%2520%25E3%2581%25A8%2520RPC%2520%25E3%2582%2592%25E8%25A9%25A6%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nao%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRiY2YzZDIyYTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nao</dc:creator></item><item><title><![CDATA[Claudeでゲームの装備生成エミュレータを5時間で作った話]]></title><description><![CDATA[
+ こんなものを作りました
+https://hiraikyo.github.io/wizardry-daphne-emulator/
+
+
+
+ 作った経緯
+つい1週間ほど前に Wizardry Variants Daphne というゲームが出たので楽しく遊んでます。
+このゲームはかの有名なローグライクRPG「Wizardry」の系譜で、より強い装備を掘り当てていくタイプのゲームです。
+Diablo 系のゲームをやった事のある方なら分かるのですが、この手のゲームのアイテム生成はかなり複雑です。
+特に装備の付与効果まわりは理解に苦しく、教えてと言われてもどこから教えれば…となりがちです。
+例え...]]></description><link>https://zenn.dev/kyoizmy/articles/b5f3e9c44a546c</link><guid isPermaLink="true">https://zenn.dev/kyoizmy/articles/b5f3e9c44a546c</guid><pubDate>Wed, 23 Oct 2024 20:30:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--j4Xv7jvH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Claude%25E3%2581%25A7%25E3%2582%25B2%25E3%2583%25BC%25E3%2583%25A0%25E3%2581%25AE%25E8%25A3%2585%25E5%2582%2599%25E7%2594%259F%25E6%2588%2590%25E3%2582%25A8%25E3%2583%259F%25E3%2583%25A5%25E3%2583%25AC%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%25925%25E6%2599%2582%25E9%2596%2593%25E3%2581%25A7%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:HiraiKyo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2UxZWI5OTE3MWYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>HiraiKyo</dc:creator></item><item><title><![CDATA[Graceful shutdownについての実験結果]]></title><description><![CDATA[Typescriptでバッチを書いていてGraceful shutdownについて勉強しながら実験をしてみました。
+
+ 実現したいこと
+処理の途中に終了コマンドを送ったとしても、処理を最後まで終えたい
+
+ パターン1 : 何も考えずに実装してみた
+export const action = async () =&gt; {
+  console.log('1');
+  await new Promise((resolve) =&gt; setTimeout(resolve, 5000));
+  console.log('2');
+};
+
+action().catch((error) =&g...]]></description><link>https://zenn.dev/gosutesu/articles/70b43394d8e4ec</link><guid isPermaLink="true">https://zenn.dev/gosutesu/articles/70b43394d8e4ec</guid><pubDate>Wed, 23 Oct 2024 11:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--d9dbthA4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Graceful%2520shutdown%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E3%2581%25AE%25E5%25AE%259F%25E9%25A8%2593%25E7%25B5%2590%25E6%259E%259C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:gosutesu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZiMTM2YjUzNDYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>gosutesu</dc:creator></item><item><title><![CDATA[Vue Fes Japan行って、知らなかったこと調べてみた]]></title><description><![CDATA[
+ はじめに
+こんにちは、きむです!
+今回Vue Fes Japan2024に一人で行ってきました!!（誘った人みんな用事ありました😭)
+一人で楽しめるかな...と不安だったのですが、めちゃめちゃ楽しかったです！知らない概念や今後活用できそうなことがたくさんあったので、ちょっとだけ深ぼってアウトプットしようと思います！(間違ってるところあったら教えてください🙇)
+https://vuefes.jp/2024/ja
+
+ 初めて知ったこと、今後活用できそうなこと
+
+ 天元突破グレンラガン（Tengen Toppa Gurren Lagann）
+はい、いきなりなんだって感じですよね。英語分かる...]]></description><link>https://zenn.dev/kimu0531/articles/1b5acb5842f9f3</link><guid isPermaLink="true">https://zenn.dev/kimu0531/articles/1b5acb5842f9f3</guid><pubDate>Wed, 23 Oct 2024 10:58:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--t31cmciG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Vue%2520Fes%2520Japan%25E8%25A1%258C%25E3%2581%25A3%25E3%2581%25A6%25E3%2580%2581%25E7%259F%25A5%25E3%2582%2589%25E3%2581%25AA%25E3%2581%258B%25E3%2581%25A3%25E3%2581%259F%25E3%2581%2593%25E3%2581%25A8%25E8%25AA%25BF%25E3%2581%25B9%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kimu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY4ZmZhZTljNDcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kimu</dc:creator></item><item><title><![CDATA[TeamsJS で Cannot read properties of undefined (reading 'fd') エラーになる]]></title><description><![CDATA[Teams JavaScript クライアント ライブラリ (TeamsJS) を 2.29.0 に上げたら突然動かなくなりました。
+Uncaught TypeError: Cannot read properties of undefined (reading 'fd')
+    at n20.useColors (@microsoft_teams-js.js?v=3fe307ba:1390:104)
+    at Function.t14 (@microsoft_teams-js.js?v=3fe307ba:153:55)
+    at @microsoft_teams-js.js?...]]></description><link>https://zenn.dev/karamem0/articles/2024_10_23_190000</link><guid isPermaLink="true">https://zenn.dev/karamem0/articles/2024_10_23_190000</guid><pubDate>Wed, 23 Oct 2024 10:00:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Jkyz_8Hb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TeamsJS%2520%25E3%2581%25A7%2520Cannot%2520read%2520properties%2520of%2520undefined%2520%2528reading%2520%2527f...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:karamem0%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2c2bGhUVmNMR1VWelRPcHRJSFdCdDRJRDVmREpQVnlxNHJyUkNKbEE9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>karamem0</dc:creator></item><item><title><![CDATA[JAWS-UG CDK支部 vol.17 トーク用コンテンツ]]></title><description><![CDATA[https://jawsug-cdk.connpass.com/event/331430/
+
+ はじめに
+第17回のメインテーマである「大規模」にはそれほど関連してません（ごめんなさい）
+CDK と TypeScript の初学者向け、かつ技術選定以前の話などが含まれます。あとは複数アカウントへの横展開を意識したような話が出てきますが、時間ある限りお話しできればと
+
+ 自己紹介
+
+hassaku_63
+
+X Space にて、CDK に関する野良トーク番組 "CDK Chatting" をやっています (Connpass, #cdkchatting)
+社内で啓蒙とか知見共有を目的とした ...]]></description><link>https://zenn.dev/hassaku63/articles/a3c850256d9b3b</link><guid isPermaLink="true">https://zenn.dev/hassaku63/articles/a3c850256d9b3b</guid><pubDate>Wed, 23 Oct 2024 10:00:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--zf-7K1HW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JAWS-UG%2520CDK%25E6%2594%25AF%25E9%2583%25A8%2520vol.17%2520%25E3%2583%2588%25E3%2583%25BC%25E3%2582%25AF%25E7%2594%25A8%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2586%25E3%2583%25B3%25E3%2583%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hassaku63%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJhNDM3YWIzZTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hassaku63</dc:creator></item></channel></rss>
