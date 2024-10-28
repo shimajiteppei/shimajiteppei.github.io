@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「HTML」のフィード]]></title><description><![CDATA[Zennのトピック「HTML」のRSSフィードです]]></description><link>https://zenn.dev/topics/html</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/171432f5a6.png</url><title>Zennの「HTML」のフィード</title><link>https://zenn.dev/topics/html</link></image><generator>zenn.dev</generator><lastBuildDate>Mon, 28 Oct 2024 05:33:38 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/html/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[CSSセレクター詳細度とは]]></title><description><![CDATA[「プロパティを書いてるのにスタイルが反映されない…」とつまずいた筆者が、原因を探る中でたどり着いたのがCSSの詳細度でした。この記事は、プログラミング初心者である筆者が、学習の過程でつまずいた経験をもとに備忘録としてまとめたものです。
+
+ CSSセレクター詳細度とは？
+
+引用文
+詳細度とは、ある要素にどのプロパティの値を使用するかを決めるために、ブラウザーが使用するアルゴリズムです。複数のスタイルブロックに、同じプロパティを異なる値で設定する異なるセレクターがあり、同じ要素を対象としている場合、その要素に適用されるプロパティの値は、詳細度によって決定されます。詳細度とは、基本的にセレクタ...]]></description><link>https://zenn.dev/risagoto/articles/6c95b61fe99641</link><guid isPermaLink="true">https://zenn.dev/risagoto/articles/6c95b61fe99641</guid><pubDate>Sat, 26 Oct 2024 12:00:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6DxlLh0Q--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:CSS%25E3%2582%25BB%25E3%2583%25AC%25E3%2582%25AF%25E3%2582%25BF%25E3%2583%25BC%25E8%25A9%25B3%25E7%25B4%25B0%25E5%25BA%25A6%25E3%2581%25A8%25E3%2581%25AF%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Risa._.%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk4YWJjZWY3NzIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Risa._.</dc:creator></item><item><title><![CDATA[[[wikilink]]をHTMLリンクに変換するプラグイン【SSG-PJ-05】]]></title><description><![CDATA[
+ これまでの流れ
+Markdown→HTMLのSSGを作りたい！
+
+Markdown→HTMLのSSGを作ってみた！
+
+タイトルを抽出するプラグインを作ってみた！
+
+YAMLタグを変換するプラグインを作ってみた！
+
+
+ アウトプットイメージ
+Obsidian内ではノートとノートの間を繋げるのに wikilink を使います。Wikilinkは普通のmarkdownでは使われないため、今のままだとただのテキストとして変換されてしまいます。なので今回はノート内の wikilink をHTMLリンクに変換するプラグインを作成しましょう！
+# HEADER 1 
+content content...]]></description><link>https://zenn.dev/megshinagawa/articles/markdown-to-html-ssg-pj-05</link><guid isPermaLink="true">https://zenn.dev/megshinagawa/articles/markdown-to-html-ssg-pj-05</guid><pubDate>Sat, 26 Oct 2024 05:16:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--g6bcM5Yy--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255B%255Bwikilink%255D%255D%25E3%2582%2592HTML%25E3%2583%25AA%25E3%2583%25B3%25E3%2582%25AF%25E3%2581%25AB%25E5%25A4%2589%25E6%258F%259B%25E3%2581%2599%25E3%2582%258B%25E3%2583%2597%25E3%2583%25A9%25E3%2582%25B0%25E3%2582%25A4%25E3%2583%25B3%25E3%2580%2590SSG-PJ-05%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2581%25E3%2581%2590%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRlZWJkZDBjMDcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>めぐ</dc:creator></item><item><title><![CDATA[YAMLタグをHTML bodyに入れるプラグイン【SSG-PJ-04】]]></title><description><![CDATA[
+ これまでの流れ
+Markdown→HTMLのSSGを作りたい！
+
+Markdown→HTMLのSSGを作ってみた！
+
+タイトルを抽出するプラグインを作ってみた！
+
+
+ アウトプットイメージ
+自分はObsidianのタグ機能は使わず、自作のtopicaltagsをYAML内で使っています。topicaltagsはタグ自体が他のメモへのリンクなので、HTMLに変換後もリンクとして扱う必要があります。イメージはこんな感じです：
+---
+topicaltags:
+	- [[tag1]]
+	- [[tag2]]
+---
+
+# HEADER 1 
+
+content content content...]]></description><link>https://zenn.dev/megshinagawa/articles/markdown-to-html-ssg-pj-04</link><guid isPermaLink="true">https://zenn.dev/megshinagawa/articles/markdown-to-html-ssg-pj-04</guid><pubDate>Sat, 26 Oct 2024 05:16:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--J5NEGza8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:YAML%25E3%2582%25BF%25E3%2582%25B0%25E3%2582%2592HTML%2520body%25E3%2581%25AB%25E5%2585%25A5%25E3%2582%258C%25E3%2582%258B%25E3%2583%2597%25E3%2583%25A9%25E3%2582%25B0%25E3%2582%25A4%25E3%2583%25B3%25E3%2580%2590SSG-PJ-04%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2581%25E3%2581%2590%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRlZWJkZDBjMDcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>めぐ</dc:creator></item><item><title><![CDATA[H1をHTMLファイルのタイトルにするプラグイン【SSG-PJ-03】]]></title><description><![CDATA[
+ 今までの流れ
+Markdown→HTMLのSSGを作りたい！
+
+Markdown→HTMLのSSGを作ってみた！
+
+
+ titleをYAMLに入れたくない（どうでもいい）こだわり
+めんどくさがりやの自分はtitleをわざわざYAMLに書き出すのが面倒だと思ってます。（だからプラグイン作るはめになってるけど、どっちの方がめんどくさいの？っていうツッコミは置いといて・・・）データが二重になるし、なんかやなんですよね。なので、markdown内のh1を自動的にHTMLのtitleに変換してくれるプラグインを作りました。
+
+ アウトプットイメージ
+# This is the title 
+c...]]></description><link>https://zenn.dev/megshinagawa/articles/markdown-to-html-ssg-pj-03</link><guid isPermaLink="true">https://zenn.dev/megshinagawa/articles/markdown-to-html-ssg-pj-03</guid><pubDate>Sat, 26 Oct 2024 04:32:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BWbhFTm5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:H1%25E3%2582%2592HTML%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2581%25AE%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%2588%25E3%2583%25AB%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%25E3%2583%2597%25E3%2583%25A9%25E3%2582%25B0%25E3%2582%25A4%25E3%2583%25B3%25E3%2580%2590SSG-PJ-03%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2581%25E3%2581%2590%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRlZWJkZDBjMDcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>めぐ</dc:creator></item><item><title><![CDATA[MarkdownメモをHTMLに変換するSSG作ってみた【SSG-PJ-02】]]></title><description><![CDATA[
+ このプロジェクトのそもそも
+Markdown→HTMLのSSGを作りたい！
+
+
+ プロジェクト初期設定
+プロジェクトには Node.js を使うので、一緒に作成したい方は Node.js がインストールされているか確認してください。（まだの場合はこちらから。）
+node -v 
+インストール確認後、プロジェクト用のフォルダを作成して、初期設定を行いましょう。
+mkdir obsidian-ssg-pj
+cd obsidian-ssg-pj
+npm init -y
+
+ 必要と思われるライブラリをインストール
+今回使うと思われるライブラリはこんな感じ：
+
+
+markdown-it: Ma...]]></description><link>https://zenn.dev/megshinagawa/articles/markdown-to-html-ssg-pj-02</link><guid isPermaLink="true">https://zenn.dev/megshinagawa/articles/markdown-to-html-ssg-pj-02</guid><pubDate>Sat, 26 Oct 2024 04:32:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--OsDtALj_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Markdown%25E3%2583%25A1%25E3%2583%25A2%25E3%2582%2592HTML%25E3%2581%25AB%25E5%25A4%2589%25E6%258F%259B%25E3%2581%2599%25E3%2582%258BSSG%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25E3%2580%2590SSG-PJ-02%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2581%25E3%2581%2590%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRlZWJkZDBjMDcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>めぐ</dc:creator></item><item><title><![CDATA[[JavaScript]マウスポインタに補助画像を描画する]]></title><description><![CDATA[
+ はじめに
+Webサイトにて、マウスポインタに補助画像を描画するスクリプトを作りました。
+スクリプトは以下を参考にさせていただきました。
+https://coding-memo.work/css_js/1096/
+
+ 完成したもの
+あとで紹介するsample.htmlをブラウザで開くとこのようになります。
+
+ボタン１をクリックすると、マウスポインタの周りに緑の円が表示されます。
+
+ボタン２をクリックすると、マウスポインタの周りに赤の円が表示されます。
+
+
+ デモ動画
+実際に動かしている様子です。
+https://youtu.be/CrpAVaTY8xY
+
+ スクリプト
+スクリプトの紹介...]]></description><link>https://zenn.dev/zgw426/articles/4e8dce9b450312</link><guid isPermaLink="true">https://zenn.dev/zgw426/articles/4e8dce9b450312</guid><pubDate>Fri, 25 Oct 2024 16:11:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--zMVhQK2X--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BJavaScript%255D%25E3%2583%259E%25E3%2582%25A6%25E3%2582%25B9%25E3%2583%259D%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25BF%25E3%2581%25AB%25E8%25A3%259C%25E5%258A%25A9%25E7%2594%25BB%25E5%2583%258F%25E3%2582%2592%25E6%258F%258F%25E7%2594%25BB%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:suo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E5OWNjMjMzNTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>suo</dc:creator></item><item><title><![CDATA[ブロックレベル要素とインライン要素の理解と注意点]]></title><description><![CDATA[
+ ブロックレベル要素とインライン要素の理解と注意点
+この記事は、プログラミング初心者である筆者が、学習の過程でつまずいた経験をもとに備忘録としてまとめたものです。ブロック要素とインライン要素の理解不足から、CSSで思い通りのデザインができなかった経験に焦点を当てています。この内容が、似たような状況で困っている方の手助けになれば幸いです。
+
+ 
+
+ 1. ブロックレベル要素とは？
+Webページの各パーツをグループ化し、ページ全体のレイアウトを構成する要素です。
+（箱のようなイメージ📦）
+・横幅・高さの指定ができる
+・親要素の横幅と同じ初期値になる
+・高さの初期値は内容に依存する
+・改行さ...]]></description><link>https://zenn.dev/risagoto/articles/b8559123b76160</link><guid isPermaLink="true">https://zenn.dev/risagoto/articles/b8559123b76160</guid><pubDate>Fri, 25 Oct 2024 14:46:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--VnbpW6Bq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2596%25E3%2583%25AD%25E3%2583%2583%25E3%2582%25AF%25E3%2583%25AC%25E3%2583%2599%25E3%2583%25AB%25E8%25A6%2581%25E7%25B4%25A0%25E3%2581%25A8%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%25B3%25E8%25A6%2581%25E7%25B4%25A0%25E3%2581%25AE%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%25A8%25E6%25B3%25A8%25E6%2584%258F%25E7%2582%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Risa._.%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk4YWJjZWY3NzIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Risa._.</dc:creator></item><item><title><![CDATA[MarkdownをHTMLに変換するSSGを作りたい【SSG-PJ-01】]]></title><description><![CDATA[
+ ことの始まり
+ADHDの自分はどうしてもメモったものを無くします。なのでウェブ上に自分のナレッジベースをアウトプットすることでいつでも見つけられる状態にしておきたいと思ったのがことの始まりです。そうなると、自分の書き慣れているMarkdownでメモをとってそれをWebサイトか何かにアップするのがいいだろうとなりました。イメージしている理想のフローはこんな感じ：
+
+
+ 既存ツールじゃダメなの？
+実はこれってもういろんな形で存在しているんですよね。Obsidianのコミュニティで有名なのはObsidian公式の Obsidian Publish とか、サードパーティだと Quartz と...]]></description><link>https://zenn.dev/megshinagawa/articles/markdown-to-html-ssg-pj-01</link><guid isPermaLink="true">https://zenn.dev/megshinagawa/articles/markdown-to-html-ssg-pj-01</guid><pubDate>Thu, 24 Oct 2024 08:43:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2m0aTJhx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Markdown%25E3%2582%2592HTML%25E3%2581%25AB%25E5%25A4%2589%25E6%258F%259B%25E3%2581%2599%25E3%2582%258BSSG%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258A%25E3%2581%259F%25E3%2581%2584%25E3%2580%2590SSG-PJ-01%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2581%25E3%2581%2590%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRlZWJkZDBjMDcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>めぐ</dc:creator></item><item><title><![CDATA[画像クリックでのモーダル表示の実装]]></title><description><![CDATA[とあるWEB制作で画像をスライダーで流れるようにしつつ、画像をクリックした際にはモーダルで画像と説明文を表示させたい。という要望があったので備忘録として残しておきます。
+ちなみに、ここでのWEBサイトはwordpressで構築を行なっています。ですが、基本的にはhtml/cssで作ったページに対して、jqueryとcssだけでうまく工夫をしながらアニメーションなどの動きを作成しています。
+reactなどを用いてWEB制作を行えばもっと楽に動きの多いサイトを作ることができるとは思いますが、あくまで初心者やhtml/cssと少しのjsが理解できる人向けに作成しています。
+
+ 概要
+まずは完成...]]></description><link>https://zenn.dev/gtteeknzi/articles/77567154b8f665</link><guid isPermaLink="true">https://zenn.dev/gtteeknzi/articles/77567154b8f665</guid><pubDate>Thu, 17 Oct 2024 14:19:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Nn_SigAb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%2594%25BB%25E5%2583%258F%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2583%25E3%2582%25AF%25E3%2581%25A7%25E3%2581%25AE%25E3%2583%25A2%25E3%2583%25BC%25E3%2583%2580%25E3%2583%25AB%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%25AE%25E5%25AE%259F%25E8%25A3%2585%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:gtteeknzi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MxMDhlODcwNzAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>gtteeknzi</dc:creator></item><item><title><![CDATA[画像をドラッグ&ドロップした際に、ダウンロードさせない方法]]></title><description><![CDATA[アップロードした画像が横一列に並んでいて、それをドラッグ&amp;ドロップで並び替えるUIを実装する機会がありました。
+ライブラリを使わずに実装したのですが、ハマった箇所があったのでメモ書きがてら書き残しておきます。
+※業務で実装した際ははReactで実装していますが、解決策がhtml並びにcssの問題なので、
+今回の記事ではReactを使わずに実装をしています。
+
+ 完成形
+こちら(playcode.io)でコード並びにUIが見れます。
+※ハマった箇所が画像をアップロードするところではなく、
+ドラッグ&amp;ドロップの挙動を作る箇所でしたので、
+画像がドラッグ&amp;ドロップで移動...]]></description><link>https://zenn.dev/ohimusdev46301/articles/1e0452489b37c7</link><guid isPermaLink="true">https://zenn.dev/ohimusdev46301/articles/1e0452489b37c7</guid><pubDate>Mon, 14 Oct 2024 02:40:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2x99WnXW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%2594%25BB%25E5%2583%258F%25E3%2582%2592%25E3%2583%2589%25E3%2583%25A9%25E3%2583%2583%25E3%2582%25B0%2526%25E3%2583%2589%25E3%2583%25AD%25E3%2583%2583%25E3%2583%2597%25E3%2581%2597%25E3%2581%259F%25E9%259A%259B%25E3%2581%25AB%25E3%2580%2581%25E3%2583%2580%25E3%2582%25A6%25E3%2583%25B3%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2589%25E3%2581%2595%25E3%2581%259B%25E3%2581%25AA%25E3%2581%2584%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Wataru%2520Takiguchi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdkOTBhM2EyYTcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Wataru Takiguchi</dc:creator></item><item><title><![CDATA[[html] alt]]></title><description><![CDATA[
+ 意味
+
+画像の説明
+
+
+ 例
+&lt;img
+  src="images/dinosaur.jpg"
+  alt="The head and torso of a dinosaur skeleton;
+          it has a large head with long sharp teeth" /&gt;
+
+画像を見ることができない・画像の読み込みが遅い場合などに、使用される。
+
+ Source
+
+https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Images_in_H...]]></description><link>https://zenn.dev/apo_zenn/articles/de5c3a021e18f4</link><guid isPermaLink="true">https://zenn.dev/apo_zenn/articles/de5c3a021e18f4</guid><pubDate>Sun, 13 Oct 2024 08:56:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--sxSIUVFb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_80:%255Bhtml%255D%2520alt%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:apo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVhNmY0NWNjMjcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>apo</dc:creator></item><item><title><![CDATA[[html] void element]]></title><description><![CDATA[
+ 意味
+
+子要素を持たない
+閉じタグを持たない
+
+
+ 代表的な例
+&lt;img&gt;
+ほかにも、&lt;area&gt; &lt;base&gt; &lt;br&gt; &lt;col&gt; &lt;embed&gt; &lt;hr&gt; &lt;img&gt; &lt;input&gt; &lt;link&gt; &lt;meta&gt; &lt;param&gt; Deprecated &lt;source&gt; &lt;track&gt; &lt;wbr&gt;などがあります。
+
+ Source
+
+https://developer.mozilla.org/en-US/...]]></description><link>https://zenn.dev/apo_zenn/articles/6458ca75fe3b24</link><guid isPermaLink="true">https://zenn.dev/apo_zenn/articles/6458ca75fe3b24</guid><pubDate>Sun, 13 Oct 2024 06:50:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--RPnei6W1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_76:%255Bhtml%255D%2520void%2520element%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:apo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVhNmY0NWNjMjcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>apo</dc:creator></item><item><title><![CDATA[Railsで、cssの更新がローカルに反映されなかったとき]]></title><description><![CDATA[今まで普通にcssの変更は即反映されていたのが、cssを更新してローカルをリロードしても何も更新されなくなった。
+技術選定は以下の通り
+
+Railsフレームワーク
+フロントエンド：HTML,CSS,JS
+
+原因と解決手順
+profile.cssのファイルを使っているとしたら、
+&lt;link rel="stylesheet" href="profile.css"&gt;
+HTMLのheadのこのコードを
+&lt;%= stylesheet_link_tag 'profile', media: 'all' %&gt;
+にすればOK。
+拍子抜け。めちゃくちゃ単純だった。
+]]></description><link>https://zenn.dev/hibiki_ceo/articles/3177b368ab18b5</link><guid isPermaLink="true">https://zenn.dev/hibiki_ceo/articles/3177b368ab18b5</guid><pubDate>Sun, 13 Oct 2024 03:30:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vkSEn9YJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rails%25E3%2581%25A7%25E3%2580%2581css%25E3%2581%25AE%25E6%259B%25B4%25E6%2596%25B0%25E3%2581%258C%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25AB%25E3%2583%25AB%25E3%2581%25AB%25E5%258F%258D%25E6%2598%25A0%25E3%2581%2595%25E3%2582%258C%25E3%2581%25AA%25E3%2581%258B%25E3%2581%25A3%25E3%2581%259F%25E3%2581%25A8%25E3%2581%258D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hibiki%2540FutureHR%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSmVsaTJyaHZ4OF9qMmpJUDR4ekNHYTFVV3UtQlFkNVBxcG55Z1ZCQzBxNGZUNHRIODJNZz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hibiki@FutureHR</dc:creator></item><item><title><![CDATA[【手順・考え方紹介】デザインカンプからのコーディング方法]]></title><description><![CDATA[サイト模写や LP を制作するときに、デザインカンプをもとにコーディングをすると思います。
+どんな順番でコーディングを進めているか、手順（考え方）を示す記事って意外と見当たらなかったので書いてみました。
+こんな方におすすめです。
+
+HTML や CSS の知識はあるけど、カンプからコーディングしよう！と思うと手が止まってしまう
+デザインカンプからのコーディングが初めて
+他の人のコーディング手順が知りたい方
+
+記事の内容は以下の通りです。
+
+カンプから大枠の大きさを測る
+使いまわせそうなパーツがないか探す
+レスポンシブ対応・微調整
+
+今回は以下のデザインカンプからどうやってコーディングする...]]></description><link>https://zenn.dev/928sekine/articles/af2ab2a4b48b09</link><guid isPermaLink="true">https://zenn.dev/928sekine/articles/af2ab2a4b48b09</guid><pubDate>Fri, 11 Oct 2024 12:15:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1wc7ixYq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E6%2589%258B%25E9%25A0%2586%25E3%2583%25BB%25E8%2580%2583%25E3%2581%2588%25E6%2596%25B9%25E7%25B4%25B9%25E4%25BB%258B%25E3%2580%2591%25E3%2583%2587%25E3%2582%25B6%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25AB%25E3%2583%25B3%25E3%2583%2597%25E3%2581%258B%25E3%2582%2589%25E3%2581%25AE%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2587%25E3%2582%25A3%25E3%2583%25B3%25E3%2582%25B0%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259B%25E3%2581%258D%25E3%2581%25AD%25E3%2582%258A%25E3%2581%25AA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAyNDQ3MGIzZjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>せきねりな</dc:creator></item><item><title><![CDATA[webサーバーにFlutter webをアップしたら白紙になってる場合の対処]]></title><description><![CDATA[まずhttps://url/manifest.jsonにアクセスしてみてください。JSONのデータが表示される場合はディレクトリの変更が必要です。
+次にindex.html の中身を確認します。以下の要素を &lt;head&gt; タグの中で探し、書き換えます。
+&lt;base href="/"&gt;
+&lt;link rel="manifest" href="manifest.json"&gt;
+&lt;body&gt;タグの中にある以下の要素も探して書き換えていきます。
+&lt;script src="flutter_bootstrap.js" async&gt;&lt;/sc...]]></description><link>https://zenn.dev/tolto/articles/e2704f6653a819</link><guid isPermaLink="true">https://zenn.dev/tolto/articles/e2704f6653a819</guid><pubDate>Thu, 10 Oct 2024 07:28:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--sYA33LOR--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:web%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2581%25ABFlutter%2520web%25E3%2582%2592%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%25E3%2581%2597%25E3%2581%259F%25E3%2582%2589%25E7%2599%25BD%25E7%25B4%2599%25E3%2581%25AB%25E3%2581%25AA%25E3%2581%25A3%25E3%2581%25A6%25E3%2582%258B%25E5%25A0%25B4%25E5%2590%2588%25E3%2581%25AE%25E5%25AF%25BE%25E5%2587%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tolto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JhOGVmY2QxOWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tolto</dc:creator></item><item><title><![CDATA[CSS苦手を克服！基礎から学ぶCSS講座]]></title><description><![CDATA[最初の頃は`margin`や`padding`、`display:flex`が難しく、CSSに苦手意識を持つ方々が多くいるかと思います。 そんな苦手意識を払拭するような、誰かを補助できる本を目指して書いてみました。
+
+内容は追加、更新していきます
+
+学べること
+・HTML、CSSの基礎（すこし）
+・margin
+・height
+・padding
+・margin
+・border
+・display:block、display:inline、display:inline-block
+]]></description><link>https://zenn.dev/youtuber/books/4781843d234022</link><guid isPermaLink="true">https://zenn.dev/youtuber/books/4781843d234022</guid><pubDate>Tue, 08 Oct 2024 11:52:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--td8EEn6G--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci82YmFmOGY0Mzc1LnBuZw==%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>ハロゲン（フルスタック）</dc:creator></item><item><title><![CDATA[電子公文書(XML+XSL)をChromeで表示する]]></title><description><![CDATA[
+ 電子公文書とは
+電子公文書とは、電子的な形式で作成、保存、管理される公文書のことを指します。これには、政府機関や企業が発行する公式な文書が含まれます。電子公文書は、紙の文書と同様に法的効力を持つ場合があり、デジタル署名や暗号化技術を用いることで、その信頼性や安全性が確保されます。
+この電子公文書の中には、XML+XSL 形式で作成されたものがあります。XML は、データを構造化して記述するためのマークアップ言語であり、XSL は、XML 文書を別の形式に変換するためのスタイルシート言語です。XML+XSL 形式の電子公文書は、Web ブラウザで表示することができますが、その表示方法に...]]></description><link>https://zenn.dev/sora_kumo/articles/xsl-viewer-html</link><guid isPermaLink="true">https://zenn.dev/sora_kumo/articles/xsl-viewer-html</guid><pubDate>Mon, 07 Oct 2024 23:51:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0yrXSzrN--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E9%259B%25BB%25E5%25AD%2590%25E5%2585%25AC%25E6%2596%2587%25E6%259B%25B8%2528XML%252BXSL%2529%25E3%2582%2592Chrome%25E3%2581%25A7%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E7%25A9%25BA%25E9%259B%25B2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VlZTgzMDYyMDQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>空雲</dc:creator></item><item><title><![CDATA[Emmet の基本的な使い方と便利なショートカット]]></title><description><![CDATA[
+ Emmet とは？
+Emmet は、HTML や CSS のコーディングを効率化するためのツールです。特に、コードの補完機能が強力で、開発者の作業を大幅にスピードアップします。ここでは、Emmet の基本的な使い方と便利なショートカットを紹介します。
+
+ 基本的な使い方
+
+ リストの生成
+ul&gt;li と入力して補完すると、以下のような HTML 構造が生成されます。
+&lt;ul&gt;
+  &lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;
+ol&gt;li*3 と入力して補完すると、以下のような HTML 構造が生成されます。
+&lt;ol&gt;
+  &l...]]></description><link>https://zenn.dev/electnoob/articles/0b82594c2d531d</link><guid isPermaLink="true">https://zenn.dev/electnoob/articles/0b82594c2d531d</guid><pubDate>Sat, 05 Oct 2024 09:41:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_xMsLMid--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Emmet%2520%25E3%2581%25AE%25E5%259F%25BA%25E6%259C%25AC%25E7%259A%2584%25E3%2581%25AA%25E4%25BD%25BF%25E3%2581%2584%25E6%2596%25B9%25E3%2581%25A8%25E4%25BE%25BF%25E5%2588%25A9%25E3%2581%25AA%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25BC%25E3%2583%2588%25E3%2582%25AB%25E3%2583%2583%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:TK%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM5MmM4NjE3YTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>TK</dc:creator></item><item><title><![CDATA[クロスオリジンな画像をキレイにして、Canvasに描画する]]></title><description><![CDATA[
+ 最新情報
+こちらの方法が最も高効率かつ高速でした。
+
+ 結論
+こちらの StackOverFlow で示される手順の通り、Object URLを経由します。
+
+ Tainted Canvas（汚染されたキャンバス）問題
+セキュリティの観点から、クロスオリジンから取得した画像を CanvasRenderingContext2d に対して描画すると、その canvas 要素からは画像を取得できなくなります。
+getImageData、toBlob等の再取得系メソッドは軒並みエラーを投げるようになります。
+これを回避するために、取得した画像そのものを汚染されていない画像にする処理を施します...]]></description><link>https://zenn.dev/ihasq/articles/4a0ad7cae01300</link><guid isPermaLink="true">https://zenn.dev/ihasq/articles/4a0ad7cae01300</guid><pubDate>Fri, 04 Oct 2024 01:58:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Qoj9xzKH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25AF%25E3%2583%25AD%25E3%2582%25B9%25E3%2582%25AA%25E3%2583%25AA%25E3%2582%25B8%25E3%2583%25B3%25E3%2581%25AA%25E7%2594%25BB%25E5%2583%258F%25E3%2582%2592%25E3%2582%25AD%25E3%2583%25AC%25E3%2582%25A4%25E3%2581%25AB%25E3%2581%2597%25E3%2581%25A6%25E3%2580%2581Canvas%25E3%2581%25AB%25E6%258F%258F%25E7%2594%25BB%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ihasq%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I3YWEyZmFhZmMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ihasq</dc:creator></item><item><title><![CDATA[HTMLの<table>要素]]></title><description><![CDATA[表（HTMLの&lt;table&gt;要素）を使ってデータを一覧表示する考え方について、以下のポイントに沿って詳しく説明します。
+
+ 1. 表の基本構造
+HTMLの表は、以下の基本要素から構成されています。
+
+
+&lt;table&gt;: 表全体を囲む要素。
+
+&lt;thead&gt;: 表のヘッダー部分を囲む要素（列名など）。
+
+&lt;tbody&gt;: 表のボディ部分を囲む要素（データ行）。
+
+&lt;tr&gt;: 表の行を定義する要素（ヘッダー行やデータ行）。
+
+&lt;th&gt;: 表のヘッダーセルを定義する要素。
+
+&lt;td&gt;: 表のデータセルを定義する...]]></description><link>https://zenn.dev/kaishigaki/articles/1122f833884ad9</link><guid isPermaLink="true">https://zenn.dev/kaishigaki/articles/1122f833884ad9</guid><pubDate>Fri, 04 Oct 2024 01:00:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vH8sYZrh--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:HTML%25E3%2581%25AE%253Ctable%253E%25E8%25A6%2581%25E7%25B4%25A0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258B%25E3%2581%2584%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M0MjQ2ZmVjOWIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>かい</dc:creator></item></channel></rss>
