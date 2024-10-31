@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Linux」のフィード]]></title><description><![CDATA[Zennのトピック「Linux」のRSSフィードです]]></description><link>https://zenn.dev/topics/linux</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/860a9eb1e4.png</url><title>Zennの「Linux」のフィード</title><link>https://zenn.dev/topics/linux</link></image><generator>zenn.dev</generator><lastBuildDate>Thu, 31 Oct 2024 09:00:22 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/linux/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[EC2（Amazon Linux2023）におけるOpenSSLのバージョンアップ対応手順まとめ]]></title><description><![CDATA[EC2（Amazon Linux2023）にデフォルトで入っているOpenSSLのバージョンアップの対応手順をまとめました。
+
+ ゴール
+OpenSSL 3.4.0
+
+ 現状
+OpenSSL 3.0.8
+
+ 対応手順
+
+ 1. OpenSSL公式HPから対象のソースコードをダウンロードして展開する
+cd /usr/local/src/
+sudo wget https://www.openssl.org/source/openssl-3.4.0.tar.gz
+sudo tar xvf openssl-3.4.0.tar.gz
+
+ 2. 必要なPerl周りのモジュールをインストールしておく
+...]]></description><link>https://zenn.dev/yazan/articles/92dbaef53b97fd</link><guid isPermaLink="true">https://zenn.dev/yazan/articles/92dbaef53b97fd</guid><pubDate>Thu, 31 Oct 2024 03:03:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--52yAb1UR--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:EC2%25EF%25BC%2588Amazon%2520Linux2023%25EF%25BC%2589%25E3%2581%25AB%25E3%2581%258A%25E3%2581%2591%25E3%2582%258BOpenSSL%25E3%2581%25AE%25E3%2583%2590%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%25E5%25AF%25BE%25E5%25BF%259C%25E6%2589%258B%25E9%25A0%2586%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yazan%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q5NTJlMzRlMDMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yazan</dc:creator></item><item><title><![CDATA[Linux...]]></title><description><![CDATA[わからない事だらけすぎて、働けるのかなぁ〜と不安に潰されそう。
+
+ Linuxとは
+OSのひとつ。(MacOSとか、WindowsOSとか)
+MacOSやWindowsOSは直感的に操作できるが、
+Linuxは、コマンドラインで操作することが多い。(CUI操作)
+無償で使える上に、安定していてセキュリティも高い！
+画面で操作できる、GUI
+コマンドで操作する、CUIがあり、CUIが一般的で、
+GUIの場合は、初心者には使いやすいけど、目視で確認して操作になるが、
+CUIの場合は、コマンドを書けばいいので、目視で確認する時間が少なく効率がいい。
+!
+CUIのメリット
+
+1行のコマンドで操作...]]></description><link>https://zenn.dev/azukidayo/articles/ff89ae13832f1e</link><guid isPermaLink="true">https://zenn.dev/azukidayo/articles/ff89ae13832f1e</guid><pubDate>Wed, 30 Oct 2024 15:35:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--VdZsBVHd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_80:Linux...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:azuki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y2YTFiMDlmMDcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>azuki</dc:creator></item><item><title><![CDATA[Linuxのリダイレクト]]></title><description><![CDATA[
+ Linuxのリダイレクトコマンドを完全に理解したい！
+
+※図内の数字はファイルディスクプリタといいそれぞれ対応する入出力を表す。0と1は省略することができる
+
+
+
+記号
+説明
+
+
+
+
+＜
+標準入力の入力元を指定　0＜
+
+
+＜＜
+標準入力元を指定し、終了文字まで入力　0＜＜
+
+
+＞
+標準出力の出力先を指定
+
+
+＞＞
+標準出力の出力先を指定し、出力先に追記
+
+
+2＞
+標準出力の出力先を指定
+
+
+2＞＞
+標準エラーの出力先を指定し、出力先に追記
+
+
+＞＆2
+標準出力の出力先を、標準エラー出力の出力先と同じにする1＞&amp;2　標準（1）から入って、エラー（2）で出るイメージ
+
+
+2＞＆1...]]></description><link>https://zenn.dev/pecopeco/articles/b822b200dace64</link><guid isPermaLink="true">https://zenn.dev/pecopeco/articles/b822b200dace64</guid><pubDate>Wed, 30 Oct 2024 13:15:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--huOYnAjn--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%25E3%2581%25AE%25E3%2583%25AA%25E3%2583%2580%25E3%2582%25A4%25E3%2583%25AC%25E3%2582%25AF%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:peco%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y0OGNhMTlmOTQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>peco</dc:creator></item><item><title><![CDATA[Linuxでsshすると入力補完で[^M]がついてしまう件について]]></title><description><![CDATA[
+ はじめに
+LinuxPCからssh接続をするために今まで使用していたwindowsPCから.ssh/configファイルを移行したときの話。
+configに設定しておくとLinuxではhost名をTABキーで予測変換できるので大変便利なのだが末尾に[^M]がついてしまい変に不便になってしまった。
+
+ 本題
+結論からいうと改行コードの違いによるものだった。
+https://atmarkit.itmedia.co.jp/flinux/rensai/linuxtips/164linendm.html
+https://qiita.com/nullpo24/items/4b1dd3571031...]]></description><link>https://zenn.dev/kudosho/articles/dec54a0e2cf0bb</link><guid isPermaLink="true">https://zenn.dev/kudosho/articles/dec54a0e2cf0bb</guid><pubDate>Tue, 29 Oct 2024 16:54:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--psJ_Oyer--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%25E3%2581%25A7ssh%25E3%2581%2599%25E3%2582%258B%25E3%2581%25A8%25E5%2585%25A5%25E5%258A%259B%25E8%25A3%259C%25E5%25AE%258C%25E3%2581%25A7%255B%255EM%255D%25E3%2581%258C%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E3%2581%2597%25E3%2581%25BE%25E3%2581%2586%25E4%25BB%25B6%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kudo%2520sho%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0ZjhjNmZfYWJMMC1NN2FGdVFaUzVxdC1XWlM5QkNycll4MnpydzAwSGs9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kudo sho</dc:creator></item><item><title><![CDATA[Linux & Git Command Cheat Sheet]]></title><description><![CDATA[
+ Linuxコマンド
+
+
+
+Command
+Description
+Common Options
+
+
+
+
+ls
+現在のディレクトリ内のファイルとディレクトリを一覧表示します。
+
+-l（詳細表示）, -a（隠しファイルも表示）
+
+
+cd
+ディレクトリを移動します。
+
+..（1つ上のディレクトリへ移動）
+
+
+pwd
+現在の作業ディレクトリを表示します。
+なし
+
+
+mkdir
+新しいディレクトリを作成します。
+
+-p（親ディレクトリもまとめて作成）
+
+
+rmdir
+空のディレクトリを削除します。
+なし
+
+
+rm
+ファイルやディレクトリを削除します。
+
+-r（再帰的に削除）, -f（強制的に削...]]></description><link>https://zenn.dev/tech_bata/articles/958a03f9a434c8</link><guid isPermaLink="true">https://zenn.dev/tech_bata/articles/958a03f9a434c8</guid><pubDate>Tue, 29 Oct 2024 03:39:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BrgC7wA4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:Linux%2520%2526%2520Git%2520Command%2520Cheat%2520Sheet%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:bata%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTGZxYkxQakU2QWZWTHU0QXRpZkV6UVRQTWdWSk1tUnZwMDhfdlhyNHZiZHJwZkp3PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>bata</dc:creator></item><item><title><![CDATA[【UTM】Macbook AirにLinux(Ubuntu)の仮想環境を構築してみる]]></title><description><![CDATA[
+ はじめに
+こんにちは！
+connectome.designでインターン中のSeitaです。先日、業務で自身のMacbook AirにLinuxの仮想環境を構築する機会があったため、忘備録も兼ねて記事(写真多め)にしておこうと思います。
+VirtualBoxをはじめ、他にもいろいろなやり方があるっぽいですが、個人的にはUTMを使用した方法が一番シンプルでしっくりきました。ということで、今回はUTMを使ってLinux(Ubuntu)の仮想環境構築からLinux上でターミナルを開くまでの手順をテンポよく説明していきます。
+
+ 使用するMacbookのスペック
+MacBook Air (13...]]></description><link>https://zenn.dev/connectome/articles/9345eaac9e4608</link><guid isPermaLink="true">https://zenn.dev/connectome/articles/9345eaac9e4608</guid><pubDate>Mon, 28 Oct 2024 23:35:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--yas_YFkk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590UTM%25E3%2580%2591Macbook%2520Air%25E3%2581%25ABLinux%2528Ubuntu%2529%25E3%2581%25AE%25E4%25BB%25AE%25E6%2583%25B3%25E7%2592%25B0%25E5%25A2%2583%25E3%2582%2592%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Seita%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q3MDM5YjgyZmEuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:COD%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzlhOWRmNjBlNDguanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Seita</dc:creator></item><item><title><![CDATA[SSH のリバースポートフォワード]]></title><description><![CDATA[
+ はじめに
+最近、SSH のリバースポートフォワードの設定をしたので、備忘録として説明を書いておきます。
+
+ SSH のリバースポートフォワード
+ラズパイなどをモニタレスで使いたいときに、ssh ログインができるように設定して、リモートから管理できるようにしています。
+このとき、ラズパイは LAN 環境に置いてあるとします。これをゲスト用のネットワークに接続しているユーザーが使えるようにしたいとします。
+LAN 環境からはゲスト用のネットワークへはアクセスできますが、ゲスト用のネットワークからは LAN 環境へは基本的には接続ができないようになっているとします。完全には遮断していません...]]></description><link>https://zenn.dev/hiro345/articles/20241028_ssh_reverse_port_forward</link><guid isPermaLink="true">https://zenn.dev/hiro345/articles/20241028_ssh_reverse_port_forward</guid><pubDate>Mon, 28 Oct 2024 11:42:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--TFtkkV1f--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:SSH%2520%25E3%2581%25AE%25E3%2583%25AA%25E3%2583%2590%25E3%2583%25BC%25E3%2582%25B9%25E3%2583%259D%25E3%2583%25BC%25E3%2583%2588%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25AF%25E3%2583%25BC%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Hiroshi%2520Koyama%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2k5ZzdjLS0xTFk0S2k0LWw3dVFSSFZRdEdQcWZHYTlibVRJYUtFM0E9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Hiroshi Koyama</dc:creator></item><item><title><![CDATA[ハードリンクとシンボリックリンクを説明できるようになる]]></title><description><![CDATA[
+ 前提
+今回はUbuntuで説明します
+$ cat /etc/lsb-release
+DISTRIB_ID=Ubuntu
+DISTRIB_RELEASE=24.04
+DISTRIB_CODENAME=noble
+DISTRIB_DESCRIPTION="Ubuntu 24.04.1 LTS"
+
+ 説明
+
+ ハードリンク
+ハードリンクとは、「ファイル名と保存されているデータを紐づけるもの」です。
+つまり、「保存されたデータに名前を付けるもの」です。
+また、ハードリンクは同一ファイルシステムの保存されたデータに紐づける必要があります。
+
+Every file on the Linux fi...]]></description><link>https://zenn.dev/levtech/articles/hard-symbolic-link</link><guid isPermaLink="true">https://zenn.dev/levtech/articles/hard-symbolic-link</guid><pubDate>Mon, 28 Oct 2024 02:11:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GmROKLJE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%258F%25E3%2583%25BC%25E3%2583%2589%25E3%2583%25AA%25E3%2583%25B3%25E3%2582%25AF%25E3%2581%25A8%25E3%2582%25B7%25E3%2583%25B3%25E3%2583%259C%25E3%2583%25AA%25E3%2583%2583%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%25B3%25E3%2582%25AF%25E3%2582%2592%25E8%25AA%25AC%25E6%2598%258E%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258B%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E3%2581%25AA%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:higakit%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY1YzcxZDY5NDkuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%25AC%25E3%2583%2590%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E9%2596%258B%25E7%2599%25BA%25E9%2583%25A8%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFUWEFKd0hmM3hqWWdudWEtQ0R0dmlWd0txSHV0cDNjWUhqY1NLNnllaWY9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>higakit</dc:creator></item><item><title><![CDATA[Linuxから接続するsshのconfigファイルをwindowsから移植したらハマった話]]></title><description><![CDATA[
+ はじめに
+一般的にはwindowsPCないしmacPCからLinuxへのsshをすることが多いと思う。
+しかし、今回はLinuxPCからsshでサーバー等に接続する上でハマったことを書いていく
+
+ 想定ケース
+私はメインPCはWindowsであり、それを使用してサーバー等の接続用に
+/user/.ssh/configにそれらの定義を設定している。
+そして今回は新しく用意したLinuxPCにも同様にssh接続が出来るようにするためにそれらをコピーした。
+そして、それは上手くいかずハマってしまった。
+
+ 本題
+結論から言えば権限の問題であった。
+# これやればOK
+chmod 600 /...]]></description><link>https://zenn.dev/kudosho/articles/ede6b7a071b50e</link><guid isPermaLink="true">https://zenn.dev/kudosho/articles/ede6b7a071b50e</guid><pubDate>Sun, 27 Oct 2024 14:07:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--CNyavvc---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%25E3%2581%258B%25E3%2582%2589%25E6%258E%25A5%25E7%25B6%259A%25E3%2581%2599%25E3%2582%258Bssh%25E3%2581%25AEconfig%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2592windows%25E3%2581%258B%25E3%2582%2589%25E7%25A7%25BB%25E6%25A4%258D%25E3%2581%2597%25E3%2581%259F%25E3%2582%2589%25E3%2583%258F%25E3%2583%259E%25E3%2581%25A3%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kudo%2520sho%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0ZjhjNmZfYWJMMC1NN2FGdVFaUzVxdC1XWlM5QkNycll4MnpydzAwSGs9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kudo sho</dc:creator></item><item><title><![CDATA[ロケールを無視して並べ替える(Unicode異体字など)]]></title><description><![CDATA[sortコマンドはロケールを考慮してくれます。そのため異体字などが含まれる場合、並べ替えた順番が必ずしも同じにならないかもしれません。複数のファイルを全て同じ基準で並べ替えて比較したい場合には、それが妨げになる場合もあります。
+そういう場合にはロケール(locale)を無視して、sortするように、ちょっとだけ工夫します。
+LC_ALL=C sort file.txt
+LC_ALL=C.utf8ではありません。LC_ALL=Cです。これによりutf-8などのロケール(locale)を考慮しない並べ替えになります。
+以上です。
+]]></description><link>https://zenn.dev/phoepsilonix/articles/binary-sort-and-locale</link><guid isPermaLink="true">https://zenn.dev/phoepsilonix/articles/binary-sort-and-locale</guid><pubDate>Sun, 27 Oct 2024 11:28:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3hgvsGee--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%25AD%25E3%2582%25B1%25E3%2583%25BC%25E3%2583%25AB%25E3%2582%2592%25E7%2584%25A1%25E8%25A6%2596%25E3%2581%2597%25E3%2581%25A6%25E4%25B8%25A6%25E3%2581%25B9%25E6%259B%25BF%25E3%2581%2588%25E3%2582%258B%2528Unicode%25E7%2595%25B0%25E4%25BD%2593%25E5%25AD%2597%25E3%2581%25AA%25E3%2581%25A9%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:epsilon%2520phoenix%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvcC5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>epsilon phoenix</dc:creator></item><item><title><![CDATA[DockerでOpenGL開発環境]]></title><description><![CDATA[
+ はじめに
+この記事ではDockerでOpenGLを使ったプログラミングができる環境を構築する方法を説明していきます。今回作成する環境はGUIアプリを表示するための環境としても使用可能です。
+
+ なぜDocker
+
+Dockerを使うことで、OpenGL開発環境の構築において環境依存の問題を軽減し、異なるシステム間でも同一の環境を簡単に再現可能にします。これにより、開発者間での動作の一貫性を保つことで、効率的に共同開発することができます。また、初心者の方のトラブルを解決しやすくすることができます。
+
+ 本題
+
+ Dockefile
+
+Dockerfile
+FROM debian:boo...]]></description><link>https://zenn.dev/harukigoda/articles/5033bcb7206ab0</link><guid isPermaLink="true">https://zenn.dev/harukigoda/articles/5033bcb7206ab0</guid><pubDate>Sun, 27 Oct 2024 08:06:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--91e6sOmG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%25E3%2581%25A7OpenGL%25E9%2596%258B%25E7%2599%25BA%25E7%2592%25B0%25E5%25A2%2583%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:HarukiGoda%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSjRpajJYSTdYZ1hiNGdwR0lBYVdyWU02UHMyVmdUWU12WE1NMnIxUFRHaU1HSjZ3PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>HarukiGoda</dc:creator></item><item><title><![CDATA[フロントエンドエンジニア　linux 苦手を克服したい]]></title><description><![CDATA[
+ su
+これでroot 権限に入ることができる
+
+ 権限まわりについて
+]]></description><link>https://zenn.dev/nebeee29/articles/2925281fb7210f</link><guid isPermaLink="true">https://zenn.dev/nebeee29/articles/2925281fb7210f</guid><pubDate>Sat, 26 Oct 2024 07:07:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_H6hW_JW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2595%25E3%2583%25AD%25E3%2583%25B3%25E3%2583%2588%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2589%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%25E3%2580%2580linux%2520%25E8%258B%25A6%25E6%2589%258B%25E3%2582%2592%25E5%2585%258B%25E6%259C%258D%25E3%2581%2597%25E3%2581%259F%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:iwasan%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzljM2M0YTdkMTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>iwasan</dc:creator></item><item><title><![CDATA[Linux入門 (LFS101-JP)触れてみた]]></title><description><![CDATA[
+ 概要
+Linux Foundationという非営利団体が無料オンラインコース「Linux入門 (LFS101-JP)」を公開したとのことで、少し様子を見てみました。
+これはPCを使えてある程度機械的なことが分かってるよ、でもLinux触ったことないわ～っていう人向けな、Linux初心者向けのコースです。
+アクセス先は下記URLです。
+https://training.linuxfoundation.org/ja/training/introduction-to-linux-lfs101-jp/
+アクセス先ではこのようなページ。
+
+基本的な部分を網羅的に紹介してくれてそうです。
+
+
+ ...]]></description><link>https://zenn.dev/may15/articles/021c722d0555ec</link><guid isPermaLink="true">https://zenn.dev/may15/articles/021c722d0555ec</guid><pubDate>Sat, 26 Oct 2024 03:21:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--VNBXz--g--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%25E5%2585%25A5%25E9%2596%2580%2520%2528LFS101-JP%2529%25E8%25A7%25A6%25E3%2582%258C%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%259F%25E3%2582%25A2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM4Njc5MTUzZDguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ミア</dc:creator></item><item><title><![CDATA[リナックスとはなにか]]></title><description><![CDATA[
+ Linuxとは
+Linuxとは、OSのことです。無料で使えるオープンソースのOSで、サーバーサイドのコンピュータで動作させるのに都合の良い特徴を持っているため、サーバーサイドでは事実上の標準となっています。
+
+ サーバーでのOS選択
+WindowsやmacOSをサーバーサイドで使わない理由：
+
+Windowsはライセンス費用が高額
+macOSはApple製のハードウェアでしか動作せず、Appleはサーバー市場から撤退している
+どちらもサーバー用途に最適化されていない
+
+
+ 家庭用PCでの状況
+Linuxが家庭用PCであまり使われない主な理由：
+
+PCの多くが最初からWindowsがイ...]]></description><link>https://zenn.dev/texia/articles/9259f8cf759c4f</link><guid isPermaLink="true">https://zenn.dev/texia/articles/9259f8cf759c4f</guid><pubDate>Fri, 25 Oct 2024 15:13:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--osDZAayO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%25AA%25E3%2583%258A%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25B9%25E3%2581%25A8%25E3%2581%25AF%25E3%2581%25AA%25E3%2581%25AB%25E3%2581%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2583%258A%25E3%2583%25B3%25E3%2583%2590%25E3%2583%25BC%25E3%2583%2586%25E3%2583%25B3%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y5YmI1NzQ4MmYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2586%25E3%2582%25AF%25E3%2582%25B7%25E3%2582%25A2%25E3%2580%2580%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdmMGIxNTFjZGEuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ナンバーテン</dc:creator></item><item><title><![CDATA[【Kernel】/proc/cpuinfo]]></title><description><![CDATA[
+ Kernel Code (v6.11.5)
+
+ struct proc_ops
+
+https://elixir.bootlin.com/linux/v6.11.5/source/include/linux/proc_fs.h#L29
+struct proc_ops {
+	unsigned int proc_flags;
+	int	(*proc_open)(struct inode *, struct file *);
+	ssize_t	(*proc_read)(struct file *, char __user *, size_t, loff_t *);
+	ssize_t (*pr...]]></description><link>https://zenn.dev/zulinx86/articles/kernel-proc_cpuinfo</link><guid isPermaLink="true">https://zenn.dev/zulinx86/articles/kernel-proc_cpuinfo</guid><pubDate>Fri, 25 Oct 2024 09:49:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--S6ZnqH9m--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:%25E3%2580%2590Kernel%25E3%2580%2591%252Fproc%252Fcpuinfo%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:zulinx86%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQyZjYzMDk2NjEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>zulinx86</dc:creator></item><item><title><![CDATA[LVM on LUKS なディスクをWSLにマウントする]]></title><description><![CDATA[
+ LVM on LUKS とは？
+大容量かつ安全な(暗号化された)ディスクを構成したいときの選択肢の1つ。
+WindowsでいうBitLockerみたいなやつのLinux版のソリューションです。
+https://wiki.archlinux.jp/index.php/Dm-crypt/システム全体の暗号化#LVM_on_LUKS
+このWIKIを参考にして、私は以下のような構成にしました。
+(今考えると、LUKS on LVMの方が私の用途に合っていたように思いますが、多分WIKIを誤読しました)
++--------------------------------------------...]]></description><link>https://zenn.dev/yuki37/articles/ce74ac2f0438d1</link><guid isPermaLink="true">https://zenn.dev/yuki37/articles/ce74ac2f0438d1</guid><pubDate>Fri, 25 Oct 2024 08:09:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--rd_8mWHT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:LVM%2520on%2520LUKS%2520%25E3%2581%25AA%25E3%2583%2587%25E3%2582%25A3%25E3%2582%25B9%25E3%2582%25AF%25E3%2582%2592WSL%25E3%2581%25AB%25E3%2583%259E%25E3%2582%25A6%25E3%2583%25B3%25E3%2583%2588%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yuki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFhMDczODNjZTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yuki</dc:creator></item><item><title><![CDATA[Podman のネットワークから外に出たい ～プライマリ→セカンダリへの通信～]]></title><description><![CDATA[
+ 背景
+Podman や Docker 内にサブネット設定ありの network を作成し、組み込み機器達のテスト環境があるとします。
+その中から一つだけ、実際に物理的に外にある機器にしたい場合、どうすれば簡単にできるでしょうか？という問題にぶち当たりました。
+以下の図の状態です。
+
+今回はセカンダリ機器だけを物理的なデバイスにして外に出る場合です。
+!
+機器 D は受信（サーバー）だけであり、能動的にコンテナ内の機器に接続しにいかないものとする。
+
+
+ Netfilter でアドレスのエイリアスを張る
+面倒くさいのは、内部のネットワークを 192.168.1.0/24 で繋いでいるた...]]></description><link>https://zenn.dev/nodamushi/articles/821031ca5d528e</link><guid isPermaLink="true">https://zenn.dev/nodamushi/articles/821031ca5d528e</guid><pubDate>Thu, 24 Oct 2024 01:38:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6lI3C7WR--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Podman%2520%25E3%2581%25AE%25E3%2583%258D%25E3%2583%2583%25E3%2583%2588%25E3%2583%25AF%25E3%2583%25BC%25E3%2582%25AF%25E3%2581%258B%25E3%2582%2589%25E5%25A4%2596%25E3%2581%25AB%25E5%2587%25BA%25E3%2581%259F%25E3%2581%2584%2520%25EF%25BD%259E%25E3%2583%2597%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%259E%25E3%2583%25AA%25E2%2586%2592%25E3%2582%25BB%25E3%2582%25AB%25E3%2583%25B3%25E3%2583%2580%25E3%2583%25AA%25E3%2581%25B8%25E3%2581%25AE%25E9%2580%259A%25E4%25BF%25A1%25EF%25BD%259E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nodamushi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y1OGJmMTkwNjEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nodamushi</dc:creator></item><item><title><![CDATA[SSH接続について]]></title><description><![CDATA[
+ いままでわかりそうで分からなかったことを解決していくSSH接続
+LinuCの勉強を始めた新卒！
+
+ SSH通信とは
+・リモートホストにログインするとき使われる
+・公開鍵暗号方式が用いられる
+・Open SSHのクライアントコマンドであり、サーバーはsshd
+
+ ローカルホストとリモートホストとは
+ローカルホスト
+sshコマンドを実行するホスト
+例:GCPComputeに接続するときのターミナル
+リモートホスト
+リモートログイン先のホスト
+例:GCPのCompute側
+
+ サーバー・ホスト認証とユーザ認証
+サーバー・ホスト認証
+始めの一回しか行われない。
+サーバーを認可したら、know...]]></description><link>https://zenn.dev/pecopeco/articles/7c0c409e535052</link><guid isPermaLink="true">https://zenn.dev/pecopeco/articles/7c0c409e535052</guid><pubDate>Tue, 22 Oct 2024 16:15:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--zNboTI5a--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:SSH%25E6%258E%25A5%25E7%25B6%259A%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:peco%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y0OGNhMTlmOTQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>peco</dc:creator></item><item><title><![CDATA[Docker環境のファイル所有者・proccess 実行ユーザーを調べてみた@USER命令 / コンテナ実行 / マウント時の]]></title><description><![CDATA[
+ はじめに
+Docker環境のファイル所有者・proccess 実行ユーザーについて実験したことを取り留めなく調べたことを記述していきます。Dockerのことについては詳しく触れていきません。
+
+ 構成
+Nginxコンテナ -&gt; Laravelコンテナ という２つのコンテナを起動します。
+
+ Dockerfile/docker-compose.ymlのベース部分
+繰り返し表示することになってしまうので、ベース部分を先に表示します。
+各Caseでは、差分のみを後述します
+
+ dockerfile
+FROM php:8.2-fpm
+
+COPY ./docker/env/local/a...]]></description><link>https://zenn.dev/osachi/articles/8bcad59ba2ac0d</link><guid isPermaLink="true">https://zenn.dev/osachi/articles/8bcad59ba2ac0d</guid><pubDate>Tue, 22 Oct 2024 11:56:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ydNi07iU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25AE%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E6%2589%2580%25E6%259C%2589%25E8%2580%2585%25E3%2583%25BBproccess%2520%25E5%25AE%259F%25E8%25A1%258C%25E3%2583%25A6%25E3%2583%25BC%25E3%2582%25B6%25E3%2583%25BC%25E3%2582%2592%25E8%25AA%25BF%25E3%2581%25B9%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2540USER%25E5%2591%25BD%25E4%25BB%25A4%2520%252F%2520%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2586%25E3%2583%258A%25E5%25AE%259F%25E8%25A1%258C%2520%252F%2520...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:osachi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS1dQbG9ta3VENjRseUgxcHZnX3BHMjA5cEZQTjM2UGZtN3lzLTNIUVJGPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>osachi</dc:creator></item><item><title><![CDATA[NeXTSTEPの移植性の高さが、Mac/iPhone/iPad/AppleWatchへと繋げた/現在のmacOSはUNIX系列のOS]]></title><description><![CDATA[
+ [背景]
+Appleについて、調べるのが個人的に好きなのですが、今回はMacOSの変遷について調べてみました！
+
+ [変遷について]
+
+ MacOSとは？
+・macOSのベースになっているのはDarwin
+・DarwinというのはAppleが買収したスティーブ・ジョブズの会社NeXTが作っていたOS、NeXTSTEPをベースにAppleが作ったオープンソースOS
+・そのコアはMachという、CMU（カーネギーメロン大学）が開発したマイクロカーネル
+
+ MacOSの土台になっているUNIXとは？
+・UNIXというのはAT&amp;T（携帯電話会社である今とはだいぶ様相が違う、IBMと並...]]></description><link>https://zenn.dev/cdad123/articles/8b7b0a8345c0e0</link><guid isPermaLink="true">https://zenn.dev/cdad123/articles/8b7b0a8345c0e0</guid><pubDate>Mon, 21 Oct 2024 14:55:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bCaCIa_8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:NeXTSTEP%25E3%2581%25AE%25E7%25A7%25BB%25E6%25A4%258D%25E6%2580%25A7%25E3%2581%25AE%25E9%25AB%2598%25E3%2581%2595%25E3%2581%258C%25E3%2580%2581Mac%252FiPhone%252FiPad%252FAppleWatch%25E3%2581%25B8%25E3%2581%25A8%25E7%25B9%258B%25E3%2581%2592%25E3%2581%259F%252F%25E7%258F%25BE%25E5%259C%25A8%25E3%2581%25AEmacOS...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:huru%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFlZGUzMDFjMWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>huru</dc:creator></item></channel></rss>
