@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Mon, 04 Nov 2024 07:10:40 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[pythonでコンソール表示に色をつけたり書き換えたりする]]></title><description><![CDATA[何気なく使っているprintやpprintですが、これらはコンソール画面で時系列に流れていってしまうため、見づらいときがあります。
+コンソールに色をつけたり書き換えたりすることで、格段に見やすくなります
+$ python -V
+python3.12.7
+
+ pythonでカーソルを操作する
+コンソール画面で、Enterキーや矢印キーを押すとカーソル位置を移動させることができますが、pythonからでもこれを実行できます。
+やり方としては、sys.stdout.write()を用いて、引数にANSIエクケープシーケンスを入れます。
+import sys
+
+# カーソルをひとつ上に移動
+sy...]]></description><link>https://zenn.dev/yuta_enginner/articles/aa6d4e9b84a49d</link><guid isPermaLink="true">https://zenn.dev/yuta_enginner/articles/aa6d4e9b84a49d</guid><pubDate>Mon, 04 Nov 2024 04:31:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7UNHpuhT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:python%25E3%2581%25A7%25E3%2582%25B3%25E3%2583%25B3%25E3%2582%25BD%25E3%2583%25BC%25E3%2583%25AB%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%25AB%25E8%2589%25B2%25E3%2582%2592%25E3%2581%25A4%25E3%2581%2591%25E3%2581%259F%25E3%2582%258A%25E6%259B%25B8%25E3%2581%258D%25E6%258F%259B%25E3%2581%2588%25E3%2581%259F%25E3%2582%258A%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yuta%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA5Zjg0OWY4OWMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yuta</dc:creator></item><item><title><![CDATA[Python基礎認定試験]]></title><description><![CDATA[typescriptを復習しながら、バックエンド言語も学びたいと思い、Python基礎認定試験を受けました！そして、合格できました～！その学習期間等を共有します！
+
+ 学習期間と学習方法
+
+学習時間は、一週間くらいでした。
+
+入門（Youtube：2日）
+過去問（1日４ｈ×５日）
+
+
+学習方法は、typescriptの知識があったので、コストも考え、Youtubeを活用。
+入門を学習後、下記教材を解いて、間違った箇所をチュートリアルやネットで理解を深める方法で学習を進めました。
+https://www.youtube.com/watch?v=W1cnEb8LwVU
+
+
+
+ 教材
+
+教材は...]]></description><link>https://zenn.dev/milbon/articles/4028c56abb78a2</link><guid isPermaLink="true">https://zenn.dev/milbon/articles/4028c56abb78a2</guid><pubDate>Mon, 04 Nov 2024 04:23:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9UuGQsLd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E5%259F%25BA%25E7%25A4%258E%25E8%25AA%258D%25E5%25AE%259A%25E8%25A9%25A6%25E9%25A8%2593%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:milbon%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzllMjg1Mjc4ZjYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>milbon</dc:creator></item><item><title><![CDATA[pythonのスレッドと状態管理の工夫]]></title><description><![CDATA[ReactやVueのように変数をウォッチし、変数が変化した時に特定の関数を実行するようにします。
+useStateやwatchみたいな感じです。
+
+ 1.前後の状態を比較する方法①
+自作関数watch_chat_historyで、変数chat_historyをウォッチしています。
+chat_historyに変化が生じる（この場合はchatが追加される）と、show_consoleが発火するようにしています。
+    """チャット表示"""
+    message_list = [
+        "はい喜んで",
+        "あなた方のため",
+        "はい謹んで",
+...]]></description><link>https://zenn.dev/yuta_enginner/articles/b584b99218c9b8</link><guid isPermaLink="true">https://zenn.dev/yuta_enginner/articles/b584b99218c9b8</guid><pubDate>Mon, 04 Nov 2024 04:00:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ovCvv3E6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:python%25E3%2581%25AE%25E3%2582%25B9%25E3%2583%25AC%25E3%2583%2583%25E3%2583%2589%25E3%2581%25A8%25E7%258A%25B6%25E6%2585%258B%25E7%25AE%25A1%25E7%2590%2586%25E3%2581%25AE%25E5%25B7%25A5%25E5%25A4%25AB%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yuta%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA5Zjg0OWY4OWMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yuta</dc:creator></item><item><title><![CDATA[【備忘録】Django-htmlのformatterにdjLintを使用する]]></title><description><![CDATA[
+ 背景
+普段formatterにPrettierを使用しているが、Django-html(正式名称はDjango Template Language?)ではうまくformatできず困っていた。
+以下で紹介する方法が正しいかわからないが、とりあえずうまくいったので備忘録として残しておく。
+
+ 流れ
+
+デフォルトのformatterにはPrettierを指定する
+
+Django-htmlではdjLintを指定する
+初期状態では、両者の拡張機能をインストールしただけではPrettierが干渉してdjLintが有効にならない
+
+Django-htmlではPrettierを無効にし、djLint...]]></description><link>https://zenn.dev/hiro8_hiro8/articles/3364e11da37660</link><guid isPermaLink="true">https://zenn.dev/hiro8_hiro8/articles/3364e11da37660</guid><pubDate>Mon, 04 Nov 2024 03:33:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--CSACeKBH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%2582%2599%25E5%25BF%2598%25E9%258C%25B2%25E3%2580%2591Django-html%25E3%2581%25AEformatter%25E3%2581%25ABdjLint%25E3%2582%2592%25E4%25BD%25BF%25E7%2594%25A8%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Hiro%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSjVRSzFnQVpjV2cwTFJHUXlDcFMtU19uVm5HTlVzNlgwMEN2U2dYTUFmODVMMnFBPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Hiro</dc:creator></item><item><title><![CDATA[【ポートフォリオ】SeekWords Creator]]></title><description><![CDATA[
+ はじめに
+こんにちは！
+第35回高専プロコン奈良大会後もデスマをしたアヤノです。
+今回は、授業の一環で開発した「SeekWords Creator（失語症患者のリハビリテーション教材作成支援のためのWebアプリ）」を紹介します。
+今までは開発したものを紹介してこなかったのですが、開発した時の思いが風化するのが嫌で今回から記事として記録を残すことにしました。今後もこのような記事を投稿すると思いますが、温かい目で見守って下さい m(_ _;)m
+
+ 概要
+
+SeekWords Creatorは、失語症患者のリハビリテーション教材作成支援のためのWebアプリです。
+このアプリでは、与えられ...]]></description><link>https://zenn.dev/yuki_ayano/articles/portfolio-seekwords_creator</link><guid isPermaLink="true">https://zenn.dev/yuki_ayano/articles/portfolio-seekwords_creator</guid><pubDate>Mon, 04 Nov 2024 03:33:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wzFDq7qr--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E3%2583%259D%25E3%2583%25BC%25E3%2583%2588%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25AA%25E3%2582%25AA%25E3%2580%2591SeekWords%2520Creator%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E9%259B%25AA%25E6%25A1%259C%25E3%2582%25A2%25E3%2583%25A4%25E3%2583%258E%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI4ZmJmNTk0YzAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>雪桜アヤノ</dc:creator></item><item><title><![CDATA[「共通テスト用プログラミング表記」のインタプリタを作った話]]></title><description><![CDATA[
+ 作ったもの
+https://natsuakane.pythonanywhere.com/DNCLInterpreter/
+
+ 作った理由
+DNCL(共通テスト手順記述標準言語)に関連するサイトはあっても、その後継として作られた「共通テスト用プログラミング表記」に関するサイトはないように思われたので作りました。（ちゃんと調べてないですあったらすいません）
+あと、pythonでWebサイトを作リたくなってdjangoを入れてみたので、djangoで作りました。
+
+ 見た目
+
+制御文もできます。
+
+
+ プログラム
+https://github.com/natsuakane/DNCLInte...]]></description><link>https://zenn.dev/natsuakane/articles/4d06552b13edfb</link><guid isPermaLink="true">https://zenn.dev/natsuakane/articles/4d06552b13edfb</guid><pubDate>Mon, 04 Nov 2024 00:45:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--LB9WCa8G--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%258C%25E5%2585%25B1%25E9%2580%259A%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E7%2594%25A8%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%259F%25E3%2583%25B3%25E3%2582%25B0%25E8%25A1%25A8%25E8%25A8%2598%25E3%2580%258D%25E3%2581%25AE%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25BF%25E3%2583%2597%25E3%2583%25AA%25E3%2582%25BF%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Natsuakane%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2IyMWY2OTJjZmIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Natsuakane</dc:creator></item><item><title><![CDATA[プログラミング(python)を学ぶためのロードマップ]]></title><description><![CDATA[このページでは、プログラミング(python)の理論的な事柄として、どのようなものを学ぶ必要があるのかについて概略を記載します。
+自分がプログラミング(python)を学ぶうえで必要だと思ったことを、自分の記録のために、まとめました。
+その時々で伝えたいことをブログを書くよりも、体系的にまとめて本とする方が好きです。ここに書かれている内容に需要があったら、本を書くかもしれません。
+↓以下、本文です。
+
+ 0. はじめに
+プログラミングの学習は、遅延評価勉強法が良いのかもしれない。
+私自身、遅延評価勉強法でpythonを学んだ。
+
+遅延評価（ちえんひょうか）とは、プログラミングやコンピュー...]]></description><link>https://zenn.dev/poclab_techblog/articles/python-lecture</link><guid isPermaLink="true">https://zenn.dev/poclab_techblog/articles/python-lecture</guid><pubDate>Sun, 03 Nov 2024 23:16:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wY4d5o5K--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%259F%25E3%2583%25B3%25E3%2582%25B0%2528python%2529%25E3%2582%2592%25E5%25AD%25A6%25E3%2581%25B6%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2589%25E3%2583%259E%25E3%2583%2583%25E3%2583%2597%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:poclabweb%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLmRldi9pbWFnZXMvZGVmYXVsdC1wdWJsaWNhdGlvbi1hdmF0YXIucG5n%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Poclab%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUl0YnZtbHhTZjZ6Mjg5SW1NeXI1QXY0OFk5UmJ5dU1qbENvN3VoOFZTTXM9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>poclabweb</dc:creator></item><item><title><![CDATA[Cloud Monitoring のメトリクス (値) をプログラムで取得してみる]]></title><description><![CDATA[
+ 概要
+Cloud Monitoring のメトリクス (値) を毎回目視で見ていませんか ??
+実はその値はプログラムを使って取得することが出来ます :D
+メトリクス (値) をプログラムで取得することで、以下のメリットがあります
+
+正確な値を取得することが出来る
+特定の時間の複数のメトリクスを一気に取得するが出来る
+
+もちろん、目視でもある程度は正確に確認することは可能ですが、定期的な作業の場合はプログラムを用いて自動化することで、 トイルの削減 を意識しましょう
+典型的なトイルの例
+
+Cloud SQL の CPU 使用率/Memory 使用率を 1 時間毎に定期的にメールをする...]]></description><link>https://zenn.dev/iganari/articles/gcp--monitoring--metrics-explorer--get-metrics</link><guid isPermaLink="true">https://zenn.dev/iganari/articles/gcp--monitoring--metrics-explorer--get-metrics</guid><pubDate>Sun, 03 Nov 2024 19:05:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--PXwxnQGn--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Cloud%2520Monitoring%2520%25E3%2581%25AE%25E3%2583%25A1%25E3%2583%2588%25E3%2583%25AA%25E3%2582%25AF%25E3%2582%25B9%2520%2528%25E5%2580%25A4%2529%2520%25E3%2582%2592%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%25A0%25E3%2581%25A7%25E5%258F%2596%25E5%25BE%2597%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:iganari%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lYWWliR2ozd2NIbElBNjBCdXdNU0gyTDdTczNqakJ2YXB0RnRRN3c9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>iganari</dc:creator></item><item><title><![CDATA[LambdaでS3に画像をアップロードしたらリサイズする処理（Python）]]></title><description><![CDATA[AWS 便利ですよねー。
+私はほとんど経験がないのですが必要に駆られて最近触ってます。その中でも苦戦したのが表題の Lambda による画像のリサイズ処理です。
+コードは Python で書かれていますが専門ではないのでこの記事はメモの意味も含めて作成しています。そのため、詳しい解説などはありません。予めご了承ください。
+
+ S3 フォルダ構成
+今回の開発環境では S3 のフォルダ構成は下記のようになっています。
+単純に bucket/contents 配下に画像などを格納しているだけです。
+/bucket名/
+  ┗ contents
+      ├ abc.jpg
+      ├ x...]]></description><link>https://zenn.dev/cocomina/articles/lambda-image-resize</link><guid isPermaLink="true">https://zenn.dev/cocomina/articles/lambda-image-resize</guid><pubDate>Sun, 03 Nov 2024 17:12:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9bYelpgt--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Lambda%25E3%2581%25A7S3%25E3%2581%25AB%25E7%2594%25BB%25E5%2583%258F%25E3%2582%2592%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2589%25E3%2581%2597%25E3%2581%259F%25E3%2582%2589%25E3%2583%25AA%25E3%2582%25B5%25E3%2582%25A4%25E3%2582%25BA%25E3%2581%2599%25E3%2582%258B%25E5%2587%25A6%25E7%2590%2586%25EF%25BC%2588Python%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Twosun%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBmN2EyZWFlZTcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Twosun</dc:creator></item><item><title><![CDATA[ExcelからCloudFormationテンプレートを生成]]></title><description><![CDATA[
+ 概要
+AWS EC2構築用のExcelパラメータシートをPythonでCloudFormationテンプレートに変換する方法について紹介します
+
+ 使用するPythonライブラリ
+
+
+Jinja
+変数やif、for文を使用して、HTMLやYAMLなどのファイルを動的に生成可能
+日本語の変数名が使用可能
+
+OpenPyXL
+Excelファイルの読み書きが可能
+名前の定義 機能を使用
+
+
+ 例
+元のExcelパラメータシート
+
+Jinjaテンプレート
+
+if文
+
+EBSのIOPSは、gp2の場合は指定できず、gp3の場合に指定可能です
+
+
+for文
+
+Tagの数は可変であるため、動的に処...]]></description><link>https://zenn.dev/metalmental/articles/20241103_jinja-cloudformation</link><guid isPermaLink="true">https://zenn.dev/metalmental/articles/20241103_jinja-cloudformation</guid><pubDate>Sun, 03 Nov 2024 08:40:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dJa3w4Kt--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Excel%25E3%2581%258B%25E3%2582%2589CloudFormation%25E3%2583%2586%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AC%25E3%2583%25BC%25E3%2583%2588%25E3%2582%2592%25E7%2594%259F%25E6%2588%2590%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:metalmental%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSzJYbHgtVTZpT1J6VWI0WVZiYjlTUWNoa1FMRzZnalktdmFiZl9YYjJocHd3dk01NHY9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>metalmental</dc:creator></item><item><title><![CDATA[poetryで始めるLangGraphセットアップ]]></title><description><![CDATA[
+ このセクションで説明しないこと
+
+pythonやpoetryなどのインストールの仕方
+ディレクトリや作業箇所の作成の仕方
+エディタのインストールなど
+セットアップ後の実装
+など。
+この記事では、セットアップのみになります。
+
+
+ 用意するもの
+
+エディタ
+
+VSCode, Cursor, PyCharmなど
+
+
+
+
+ poetry初期化
+まずは、作業ディレクトリで、poetryを初期化しましょう。
+
+poetryを初期化
+
+poetry init
+
+設定
+
+Package name [02]:  任意
+Version [0.1.0]:
+Description []:
+Author [...]]></description><link>https://zenn.dev/o_kai/articles/43c6d0d5c04138</link><guid isPermaLink="true">https://zenn.dev/o_kai/articles/43c6d0d5c04138</guid><pubDate>Sun, 03 Nov 2024 08:26:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Qkfc-Z8g--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:poetry%25E3%2581%25A7%25E5%25A7%258B%25E3%2582%2581%25E3%2582%258BLangGraph%25E3%2582%25BB%25E3%2583%2583%25E3%2583%2588%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:o_kai%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2YzNTk5NDA1MjguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>o_kai</dc:creator></item><item><title><![CDATA[【python】zeroxのAI OCR試してみる！]]></title><description><![CDATA[
+ はじめに
+以下のGithubリポジトリで公開されているzeroxというライブラリにより、マルチモーダルLLMを活用したOCRができるとのことで試してみました。
+https://github.com/getomni-ai/zerox
+python×streamlitでpdfファイルをアップロードして、テキスト化するまでをこの記事では説明します。
+ライブラリについて、隅々まで把握したわけではないですが、自分が調べてわかった内容などをまとめますので、同じライブラリを活用して、資料をテキスト化したい方の参考になれば幸いです。
+!
+情報は2024年11月3日時点での情報です。最新の情報は公式の...]]></description><link>https://zenn.dev/peishim/articles/13e92f1682551d</link><guid isPermaLink="true">https://zenn.dev/peishim/articles/13e92f1682551d</guid><pubDate>Sun, 03 Nov 2024 07:57:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0AnrNaPG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590python%25E3%2580%2591zerox%25E3%2581%25AEAI%2520OCR%25E8%25A9%25A6%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:peishim%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdlNmIxNjYxMDkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>peishim</dc:creator></item><item><title><![CDATA[設定ファイル内容を一元管理できる! pyconfviewer]]></title><description><![CDATA[
+ はじめに
+色々自分で作っているとどのプログラミング言語でもアプリケーションを作る場合に .env なども含め様々な設定ファイルが必要になると思います。
+これが1つのファイルで済むなら管理も簡単なのですが、複数ファイルにまたがると設定を一括で見れるものはないな.. なんて思うことがあります。
+できれば、開発用と本番用で設定ファイルは同じだけど、中身が違うのでその差分も見たいな... なんて思うこともありました。
+それを解決するために設定ファイルの内容を HTML に出力し、閲覧できる Python ライブラリを作成しました。
+それが pyconfviewer です!
+
+ pyconfv...]]></description><link>https://zenn.dev/apo_space81/articles/99134d65b83029</link><guid isPermaLink="true">https://zenn.dev/apo_space81/articles/99134d65b83029</guid><pubDate>Sun, 03 Nov 2024 02:34:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--aq1up9j8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%25A8%25AD%25E5%25AE%259A%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E5%2586%2585%25E5%25AE%25B9%25E3%2582%2592%25E4%25B8%2580%25E5%2585%2583%25E7%25AE%25A1%25E7%2590%2586%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258B%2521%2520pyconfviewer%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:pkaiy81%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZkNjY4MzNlYzYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>pkaiy81</dc:creator></item><item><title><![CDATA[XBRLから抽出した財務諸表をもとに自分用のExcel表をつくる 後編]]></title><description><![CDATA[
+ 好きな勘定科目を抜粋したり、指標が入った表をつくる
+XBRLから抽出した財務諸表をもとに、自分の好きな勘定科目だけを抜粋する、あるいはそこに指標を混ぜるということで、GPT-4oを使ってコードを書いていきます。後編です。
+!
+再びの宣伝ですが、XBRLから財務諸表の項目を抽出するために、拙作「PythonとExcelによるXBRL解析　株式投資に役立つ財務分析の準備」で作成したアプリっぽいものを使用しています。
+
+
+抽出した10年分の財務諸表
+
+ calculate_metrics.pyのコードを書く
+前編ではdata_extraction.pyのコードを書いたので、後編では各種計算...]]></description><link>https://zenn.dev/mikamori/articles/501cd9f0507349</link><guid isPermaLink="true">https://zenn.dev/mikamori/articles/501cd9f0507349</guid><pubDate>Sat, 02 Nov 2024 12:51:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--iyE4jdbm--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:XBRL%25E3%2581%258B%25E3%2582%2589%25E6%258A%25BD%25E5%2587%25BA%25E3%2581%2597%25E3%2581%259F%25E8%25B2%25A1%25E5%258B%2599%25E8%25AB%25B8%25E8%25A1%25A8%25E3%2582%2592%25E3%2582%2582%25E3%2581%25A8%25E3%2581%25AB%25E8%2587%25AA%25E5%2588%2586%25E7%2594%25A8%25E3%2581%25AEExcel%25E8%25A1%25A8%25E3%2582%2592%25E3%2581%25A4%25E3%2581%258F%25E3%2582%258B%2520%25E5%25BE%258C%25E7%25B7%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Mikamori%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVkYTJlNWU4YWYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Mikamori</dc:creator></item><item><title><![CDATA[XBRLから抽出した財務諸表をもとに自分用のExcel表をつくる 前編]]></title><description><![CDATA[
+ 好きな勘定科目を抜粋したり、指標が入った表をつくる
+XBRLから抽出した財務諸表をもとに、自分の好きな勘定科目だけを抜粋する、あるいはそこに指標を混ぜるということで、GPT-4oを使ってコードを書いていきます。前編です。
+!
+XBRLから財務諸表の項目を抽出するために、拙作「PythonとExcelによるXBRL解析　株式投資に役立つ財務分析の準備」で作成したアプリっぽいものを使用しています。(宣伝)
+
+
+抽出した10年分の財務諸表
+
+ MasterファイルをExcelで作成する
+好みの表を作るためのリストとして「Master_Analytics.xlsx」というExcelファイルを...]]></description><link>https://zenn.dev/mikamori/articles/9349d940a132f9</link><guid isPermaLink="true">https://zenn.dev/mikamori/articles/9349d940a132f9</guid><pubDate>Sat, 02 Nov 2024 12:50:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--zz8y_uWf--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:XBRL%25E3%2581%258B%25E3%2582%2589%25E6%258A%25BD%25E5%2587%25BA%25E3%2581%2597%25E3%2581%259F%25E8%25B2%25A1%25E5%258B%2599%25E8%25AB%25B8%25E8%25A1%25A8%25E3%2582%2592%25E3%2582%2582%25E3%2581%25A8%25E3%2581%25AB%25E8%2587%25AA%25E5%2588%2586%25E7%2594%25A8%25E3%2581%25AEExcel%25E8%25A1%25A8%25E3%2582%2592%25E3%2581%25A4%25E3%2581%258F%25E3%2582%258B%2520%25E5%2589%258D%25E7%25B7%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Mikamori%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVkYTJlNWU4YWYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Mikamori</dc:creator></item><item><title><![CDATA[Azure AI Searchの検索結果にベクトルデータが出ないようにする方法]]></title><description><![CDATA[
+ 課題
+AI Searchで登録しているインデックスにベクトルデータがあると、↓のように検索結果に含まれるからめちゃくちゃ邪魔です。
+
+
+Azure Portal上でインデックスを作る場合は、フィールドタブに遷移して対象のスキーマの「取得可能」のチェックを外すだけで解決します。
+しかし運用するにあたってインデックスの登録はコードで自動化させたいです。
+
+
+ 実装
+結論、対象のSearchFieldクラスのhiddenパラメータをTrueにする。
+
+create_index.py
+SearchField(
+    name="フィールド名",
+    # ↓追加する
+    hidden...]]></description><link>https://zenn.dev/headwaters/articles/bbe571d85497cc</link><guid isPermaLink="true">https://zenn.dev/headwaters/articles/bbe571d85497cc</guid><pubDate>Sat, 02 Nov 2024 12:16:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hPfxcPoD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Azure%2520AI%2520Search%25E3%2581%25AE%25E6%25A4%259C%25E7%25B4%25A2%25E7%25B5%2590%25E6%259E%259C%25E3%2581%25AB%25E3%2583%2599%25E3%2582%25AF%25E3%2583%2588%25E3%2583%25AB%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2581%258C%25E5%2587%25BA%25E3%2581%25AA%25E3%2581%2584%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:ikebowsan%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZjNGExY2UxMDYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2598%25E3%2583%2583%25E3%2583%2589%25E3%2582%25A6%25E3%2582%25A9%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%25BC%25E3%2582%25B9%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzUyNTM1ZTc4OGYuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ikebowsan</dc:creator></item><item><title><![CDATA[会社の資料を今すぐDifyで要約しよう！]]></title><description><![CDATA[
+
+ はじめに
+最近、Qiitaに投稿される記事を見ていると、「Dify」という単語をよく目にするようになりました。記事の内容から、自分のPC上でChatGPTのような「チャットボット」を簡単に作成できるツールのようだと感じたため、今回はDifyの構築方法や操作感について確認してみることにしました。
+
+ Difyのインストール
+Difyのインストールと環境設定は、公式サイトの以下のページを参考に進めました。
+https://docs.dify.ai/ja-jp/getting-started/install-self-hosted/docker-compose
+今回はWindows OS...]]></description><link>https://zenn.dev/ogiki/articles/612beb9357fba2</link><guid isPermaLink="true">https://zenn.dev/ogiki/articles/612beb9357fba2</guid><pubDate>Sat, 02 Nov 2024 11:50:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--eHf1erpM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E4%25BC%259A%25E7%25A4%25BE%25E3%2581%25AE%25E8%25B3%2587%25E6%2596%2599%25E3%2582%2592%25E4%25BB%258A%25E3%2581%2599%25E3%2581%2590Dify%25E3%2581%25A7%25E8%25A6%2581%25E7%25B4%2584%25E3%2581%2597%25E3%2582%2588%25E3%2581%2586%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%259C%25A8%25E6%259D%2591%25E3%2581%259F%25E3%2582%258D%25E3%2581%2586%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZkZjNiYWMwZmQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>木村たろう</dc:creator></item><item><title><![CDATA[Alexa献立発表スキル作ってみた]]></title><description><![CDATA[僕は寮生なので毎日のご飯は寮食堂で食べています。給食みたいなもんです。そこで寮食堂の献立を発表するAlexaスキルを作ってみました。製作期間は大体3週間くらいです。この記事は思った事の殴り書きです。あまり技術的なことは書いていないですぜよ
+
+ Alexaスキルとは
+
+Alexaスキルは、Alexa搭載端末に機能を追加する音声起動アプリです。
+
+
+スキルを使用して機能を追加することで、Alexaでの新しい体験が可能になります。スキルには次のようなさまざまなカテゴリーがあります。
+
+とのことでAlexaに追加できる拡張機能のようなものですな
+
+ 作ろう
+大まかな流れを書き留めておくだけなので...]]></description><link>https://zenn.dev/mitsuijao/articles/7973ac16c6e82f</link><guid isPermaLink="true">https://zenn.dev/mitsuijao/articles/7973ac16c6e82f</guid><pubDate>Sat, 02 Nov 2024 09:31:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ab9yU7Mv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Alexa%25E7%258C%25AE%25E7%25AB%258B%25E7%2599%25BA%25E8%25A1%25A8%25E3%2582%25B9%25E3%2582%25AD%25E3%2583%25AB%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mitsuiJao%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJiZjc0NmZlNmYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mitsuiJao</dc:creator></item><item><title><![CDATA[Django の select_related と prefetch_related を SQL で理解しよう]]></title><description><![CDATA[
+ 概要
+Django の ORM を SQL で理解しておきたいのでここに記載する。
+
+ 対象者
+SQL はちょっとわかるけど、Django の ORM はよくわからん！という方向け。
+
+ select_related
+
+select_related はすなわち、INNER JOIN である。
+Model 定義は以下であったとする。
+from django.db import models
+
+
+class City(models.Model):
+    # ...
+    pass
+
+
+class Person(models.Model):
+    # ...
+    hometown...]]></description><link>https://zenn.dev/higakin/articles/bd957e5308ef61</link><guid isPermaLink="true">https://zenn.dev/higakin/articles/bd957e5308ef61</guid><pubDate>Sat, 02 Nov 2024 07:20:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hfir_lEq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Django%2520%25E3%2581%25AE%2520select_related%2520%25E3%2581%25A8%2520prefetch_related%2520%25E3%2582%2592%2520SQL%2520%25E3%2581%25A7%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2597%25E3%2582%2588%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:snowindy%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pfalA0RUVIaDhadXlXZy1SbG15WU96R3laVXRMVWZUaEdWNDN4blBzPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>snowindy</dc:creator></item><item><title><![CDATA[pythonの仮想環境の作成]]></title><description><![CDATA[仮想環境の作成
+python -m venv .venv
+仮想環境の有効化
+venv\Scripts\activate
+]]></description><link>https://zenn.dev/oota_12/articles/b7c231b2a3036f</link><guid isPermaLink="true">https://zenn.dev/oota_12/articles/b7c231b2a3036f</guid><pubDate>Sat, 02 Nov 2024 05:49:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--roc4lA7R--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:python%25E3%2581%25AE%25E4%25BB%25AE%25E6%2583%25B3%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25AE%25E4%25BD%259C%25E6%2588%2590%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hokke%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc4NWYxNzA0NzcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hokke</dc:creator></item></channel></rss>
