@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「HTML」のフィード]]></title><description><![CDATA[Zennのトピック「HTML」のRSSフィードです]]></description><link>https://zenn.dev/topics/html</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/171432f5a6.png</url><title>Zennの「HTML」のフィード</title><link>https://zenn.dev/topics/html</link></image><generator>zenn.dev</generator><lastBuildDate>Tue, 05 Nov 2024 12:04:17 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/html/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[背景スクロールの抑制]]></title><description><![CDATA[
+ はじめに
+モーダルなどを表示する際に、背景のスクロールを止める実装をすることがあると思います。
+理由としては以下のような感じで実装を求められるかなと思います。
+
+ユーザーの視線をモーダルに集中させるため
+モーダル自身にスクロールがある場合でも、モーダルのみをスクロールできるためユーザーの期待通りの操作ができ質が向上する
+
+その際によくやるのがbodyにoverflow: hidden;を付与する方法でした。
+しかし、ios18ではこの方法では完全に止めることができなくなりました。※ios17でも完全に抑制はできてはないです。
+
+ 調査結果
+以下の実装方法を検証しました。
+
+bodyに...]]></description><link>https://zenn.dev/takaa/articles/45e694a0af03df</link><guid isPermaLink="true">https://zenn.dev/takaa/articles/45e694a0af03df</guid><pubDate>Mon, 04 Nov 2024 09:05:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vyM-25ke--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%2583%258C%25E6%2599%25AF%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%25AE%25E6%258A%2591%25E5%2588%25B6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:takaa%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZkZTg4MTMwMTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takaa</dc:creator></item><item><title><![CDATA[Flexboxの理解と使用頻度が高そうなプロパティ一覧]]></title><description><![CDATA[使用頻度が高そうなFlexboxのプロパティを整理してみました。
+この記事は、プログラミング初心者である筆者が、学習の過程でつまずいた経験をもとに備忘録としてまとめたものです。
+
+ フレックスボックスとは？
+
+引用文
+フレキシブルボックスレイアウトモジュールは、通常フレックスボックスと呼ばれ、一次元のレイアウトモデルとして、またインターフェイス中のアイテム間で余白の分配をする機能と強力な位置合わせをする機能を提供するものとして設計されました。（中略）フレックスボックスが一次元であることは、フレックスボックスが一つの次元、つまり行か列のいずれかの方向にしかレイアウトしないことを述べています...]]></description><link>https://zenn.dev/risagoto/articles/e74e95cee9d8dc</link><guid isPermaLink="true">https://zenn.dev/risagoto/articles/e74e95cee9d8dc</guid><pubDate>Mon, 04 Nov 2024 08:10:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Pcsgyzy0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Flexbox%25E3%2581%25AE%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%25A8%25E4%25BD%25BF%25E7%2594%25A8%25E9%25A0%25BB%25E5%25BA%25A6%25E3%2581%258C%25E9%25AB%2598%25E3%2581%259D%25E3%2581%2586%25E3%2581%25AA%25E3%2583%2597%25E3%2583%25AD%25E3%2583%2591%25E3%2583%2586%25E3%2582%25A3%25E4%25B8%2580%25E8%25A6%25A7%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Risa._.%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk4YWJjZWY3NzIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Risa._.</dc:creator></item><item><title><![CDATA[設定ファイル内容を一元管理できる! pyconfviewer]]></title><description><![CDATA[
+ はじめに
+色々自分で作っているとどのプログラミング言語でもアプリケーションを作る場合に .env なども含め様々な設定ファイルが必要になると思います。
+これが1つのファイルで済むなら管理も簡単なのですが、複数ファイルにまたがると設定を一括で見れるものはないな.. なんて思うことがあります。
+できれば、開発用と本番用で設定ファイルは同じだけど、中身が違うのでその差分も見たいな... なんて思うこともありました。
+それを解決するために設定ファイルの内容を HTML に出力し、閲覧できる Python ライブラリを作成しました。
+それが pyconfviewer です!
+
+ pyconfv...]]></description><link>https://zenn.dev/apo_space81/articles/99134d65b83029</link><guid isPermaLink="true">https://zenn.dev/apo_space81/articles/99134d65b83029</guid><pubDate>Sun, 03 Nov 2024 02:34:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--aq1up9j8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%25A8%25AD%25E5%25AE%259A%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E5%2586%2585%25E5%25AE%25B9%25E3%2582%2592%25E4%25B8%2580%25E5%2585%2583%25E7%25AE%25A1%25E7%2590%2586%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258B%2521%2520pyconfviewer%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:pkaiy81%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZkNjY4MzNlYzYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>pkaiy81</dc:creator></item><item><title><![CDATA[Rustを使ってサーバーを構築する！]]></title><description><![CDATA[nodejsでもやったから次はRustどと思いました
+環境:
+OS: MacOS
+editor: vscode
+!
+同じWiFiにつながってないと他のパソコンや端末からアクセスできません！
+
+
+ デレクトリ
+.
+├── Cargo.lock
+├── Cargo.toml
+├── src
+│   └── main.rs
+└── static
+    └── index.html
+
+3 directories, 4 files
+
+ コード
+cargo new server
+cargo.toml
+cargo.toml
+[package]
+name = "Server"
+version = "0...]]></description><link>https://zenn.dev/nyanchu_program/articles/dd64ab605367ca</link><guid isPermaLink="true">https://zenn.dev/nyanchu_program/articles/dd64ab605367ca</guid><pubDate>Sun, 03 Nov 2024 01:43:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--XEf8yJv9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2582%2592%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2599%25E3%2582%258B%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nyanchu%2520-%2520okabe%2Cx_90%2Cy_121/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nyanchu - okabe</dc:creator></item><item><title><![CDATA[NodeJSで遠隔操作してみた]]></title><description><![CDATA[暇だったので、nodeで簡単な遠隔操作をしてみることにしました
+環境:
+OS: MacOS
+editor: vscode
+!
+同じWiFiにつながってないと他のパソコンや端末からアクセスできません！
+
+
+
+ デレクトリ：
+.
+├── test.mp3 &lt;= 3
+├── index.html &lt;= 2
+└── server.js &lt;= 1
+
+1 directory, 5 files
+
+
+ ソースコード：
+index.htmlとserver.jsを作成してください
+1のコード
+main.js
+const http = require("http");
+const fs = ...]]></description><link>https://zenn.dev/nyanchu_program/articles/ded885eb51ec7d</link><guid isPermaLink="true">https://zenn.dev/nyanchu_program/articles/ded885eb51ec7d</guid><pubDate>Sun, 03 Nov 2024 00:46:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--F-2UJGjg--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:NodeJS%25E3%2581%25A7%25E9%2581%25A0%25E9%259A%2594%25E6%2593%258D%25E4%25BD%259C%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nyanchu%2520-%2520okabe%2Cx_90%2Cy_121/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nyanchu - okabe</dc:creator></item><item><title><![CDATA[Bulma で Navbar のメニューを中央寄せする]]></title><description><![CDATA[Bulma を使用して Web サイトを構築している際にタイトルのところで詰まったので備忘録として残します。
+
+ 作りたかったもの
+こういうやつです。
+ブランドロゴが最も左側にあって、右側にまたアイテムがあって中央にメニューがおいてある感じのやつです。
+
+
+ 前提
+最初は以下のように実装していました。
+&lt;nav class="navbar" role="navigation" aria-label="main navigation"&gt;
+  &lt;div class="navbar-brand"&gt;
+    &lt;a class="navbar-item" href="...]]></description><link>https://zenn.dev/ndjndj/articles/892a610b61bf27</link><guid isPermaLink="true">https://zenn.dev/ndjndj/articles/892a610b61bf27</guid><pubDate>Fri, 01 Nov 2024 12:55:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5nj5Zpls--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Bulma%2520%25E3%2581%25A7%2520Navbar%2520%25E3%2581%25AE%25E3%2583%25A1%25E3%2583%258B%25E3%2583%25A5%25E3%2583%25BC%25E3%2582%2592%25E4%25B8%25AD%25E5%25A4%25AE%25E5%25AF%2584%25E3%2581%259B%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ndj%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FmOGFkYjRiMGEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ndj</dc:creator></item><item><title><![CDATA[HTML/CSS - display:flex も子要素も使えない制約で、要素内のテキストを縦方向の中央に配置する方法]]></title><description><![CDATA[
+ はじめに
+先日、とあるサンプル Web アプリの作成中に、display:flex もレイアウト調整用の子要素も使えない制約の下、要素内のテキストを縦方向の中央に配置する必要に迫られました。とりあえず四苦八苦しながら実装はできました。これが本当に最適解なのかどうか確信ないのですが、その点も含めて共有します。
+!
+2024/11/04 追記
+その後、𝕏 上で助言頂いて、本記事投稿時より簡潔・洗練された方法を実現できました。
+
+
+ 要件
+以下のようなスプリッターコンテナコンポーネントのサンプルプログラムを作っておりました。
+
+ここで、以下のようないくつかの要件・こだわりがありました。
+
+...]]></description><link>https://zenn.dev/j_sakamoto/articles/a1dae285f2ec31</link><guid isPermaLink="true">https://zenn.dev/j_sakamoto/articles/a1dae285f2ec31</guid><pubDate>Fri, 01 Nov 2024 11:44:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--MNdAnwff--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:HTML%252FCSS%2520-%2520display%253Aflex%2520%25E3%2582%2582%25E5%25AD%2590%25E8%25A6%2581%25E7%25B4%25A0%25E3%2582%2582%25E4%25BD%25BF%25E3%2581%2588%25E3%2581%25AA%25E3%2581%2584%25E5%2588%25B6%25E7%25B4%2584%25E3%2581%25A7%25E3%2580%2581%25E8%25A6%2581%25E7%25B4%25A0%25E5%2586%2585%25E3%2581%25AE%25E3%2583%2586%25E3%2582%25AD%25E3%2582%25B9%25E3%2583%2588%25E3%2582%2592%25E7%25B8%25A6%25E6%2596%25B9%25E5%2590%2591%25E3%2581%25AE%25E4%25B8%25AD%25E5%25A4%25AE%25E3%2581%25AB%25E9%2585%258D%25E7%25BD%25AE%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%2540jsakamoto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dVX243dnJ5ZFlLb2NxdUhSUkIxSGZ4NGpVekNsdGNmZ290R2hfNWc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>@jsakamoto</dc:creator></item><item><title><![CDATA[Astro+MDX+Web Componentでハマったと思ったらHTMLの知識不足だった]]></title><description><![CDATA[Astroのバグかと思ったらHTMLの仕様でした。
+
+ 発生したバグ
+AstroのMDXインテグレーションには、指定したHTML要素をカスタムコンポーネントに差し替える機能があります。
+MarkdownとMDX | Docs
+具体的にはこんなことができます。めちゃくちゃ便利です。
+
+index.astro
+---
+import { getEntry } from "astro:content";
+import HogeComponent from "../components/HogeComponent.astro";
+
+const post = await getEntry('post...]]></description><link>https://zenn.dev/yayo1/articles/5f15ee2c70d78f</link><guid isPermaLink="true">https://zenn.dev/yayo1/articles/5f15ee2c70d78f</guid><pubDate>Thu, 31 Oct 2024 17:18:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--XmEKul1k--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Astro%252BMDX%252BWeb%2520Component%25E3%2581%25A7%25E3%2583%258F%25E3%2583%259E%25E3%2581%25A3%25E3%2581%259F%25E3%2581%25A8%25E6%2580%259D%25E3%2581%25A3%25E3%2581%259F%25E3%2582%2589HTML%25E3%2581%25AE%25E7%259F%25A5%25E8%25AD%2598%25E4%25B8%258D%25E8%25B6%25B3%25E3%2581%25A0%25E3%2581%25A3%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2584%25E3%2582%2588%25E3%2581%2584%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2QxMGRkYTUwMWQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>やよい</dc:creator></item><item><title><![CDATA[HTTPメソッドの理解：PUTとPOSTの徹底解説ガイド]]></title><description><![CDATA[HTTPメソッド、特にPUTとPOSTは、Webアプリケーションでのリソース管理の基盤となるものです。このガイドでは、これらのメソッドについて徹底的に解説し、その違いやAPIセットアップにおける使い分けを詳しく見ていきます。
+
+ PUT HTTPメソッドとは？
+PUTメソッドは、指定したURLにリソースを「更新」または「作成」するために使用されます。以下がPUTメソッドの主な特徴です。
+
+
+リソースの識別：URLそのものがリソースのIDとして扱われます。
+
+リクエストボディ：更新されたリソース全体を含みます。
+
+冪等性：同じPUTリクエストを何度送っても結果は変わりません。
+
+リソースの...]]></description><link>https://zenn.dev/nekosu/articles/600e6994ae4465</link><guid isPermaLink="true">https://zenn.dev/nekosu/articles/600e6994ae4465</guid><pubDate>Thu, 31 Oct 2024 15:37:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--zosYg_Qt--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:HTTP%25E3%2583%25A1%25E3%2582%25BD%25E3%2583%2583%25E3%2583%2589%25E3%2581%25AE%25E7%2590%2586%25E8%25A7%25A3%25EF%25BC%259APUT%25E3%2581%25A8POST%25E3%2581%25AE%25E5%25BE%25B9%25E5%25BA%2595%25E8%25A7%25A3%25E8%25AA%25AC%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Nekosu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY1YzIyNmI2ZDMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Nekosu</dc:creator></item><item><title><![CDATA[CSSだけでカルーセルを実装してみる]]></title><description><![CDATA[こんにちは！アルダグラムでエンジニアをしている柴田です。
+
+ はじめに
+最近はCSSの進化が著しく、JavaScriptを使わずともCSSで高度なUIコンポーネントを実装できるようになってきました。特にカルーセルのようなUIもCSSだけで実現できることを知り、最新技術をキャッチアップしておきたいと感じました。
+そこで今回は、CSSのscroll-snapプロパティを活用して、３種類のカルーセルを実装する方法をご紹介します。
+
+ scroll-snapプロパティの紹介
+scroll-snapプロパティとは、スクロール時に要素を特定の位置でピタリと止めることができるCSSの機能です。これによ...]]></description><link>https://zenn.dev/aldagram_tech/articles/7d7e6124e3a0fe</link><guid isPermaLink="true">https://zenn.dev/aldagram_tech/articles/7d7e6124e3a0fe</guid><pubDate>Thu, 31 Oct 2024 00:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--riDmKYfT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:CSS%25E3%2581%25A0%25E3%2581%2591%25E3%2581%25A7%25E3%2582%25AB%25E3%2583%25AB%25E3%2583%25BC%25E3%2582%25BB%25E3%2583%25AB%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Shibata%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JiM2FkMDk1NzUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25A2%25E3%2583%25AB%25E3%2583%2580%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%25A0%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVkZTMwMDdmMmQuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Shibata</dc:creator></item><item><title><![CDATA[Thunder Client の使い方：CLIマスターの究極ガイド]]></title><description><![CDATA[2021年に、VS Code用のThunder Client拡張機能のリリースにより、APIテストが革新されました。この革新的なツールは、VS Code内で初めてGUIベースのAPIクライアントを導入し、APIテストの体験を大幅に改善しました。その成功を基に、さらにThunder Client CLIという強力なコマンドラインツールが導入され、開発者のためのAPIテストを一層効率化しています。
+
+
+ Thunder Client CLIの主要機能
+Thunder Client CLIは有料バージョンでのみ利用可能ですが、多くの高度な機能を提供します：
+
+
+簡単＆使いやすい：シンプルで直感...]]></description><link>https://zenn.dev/rokuinu/articles/cad8320d2f1173</link><guid isPermaLink="true">https://zenn.dev/rokuinu/articles/cad8320d2f1173</guid><pubDate>Mon, 28 Oct 2024 11:10:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--I5E_4mAz--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Thunder%2520Client%2520%25E3%2581%25AE%25E4%25BD%25BF%25E3%2581%2584%25E6%2596%25B9%25EF%25BC%259ACLI%25E3%2583%259E%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%25BC%25E3%2581%25AE%25E7%25A9%25B6%25E6%25A5%25B5%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Rokuinu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FkZDY0M2MzZTQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Rokuinu</dc:creator></item><item><title><![CDATA[CSSセレクター詳細度とは]]></title><description><![CDATA[「プロパティを書いてるのにスタイルが反映されない…」とつまずいた筆者が、原因を探る中でたどり着いたのがCSSの詳細度でした。この記事は、プログラミング初心者である筆者が、学習の過程でつまずいた経験をもとに備忘録としてまとめたものです。
+
+ CSSセレクター詳細度とは？
+
+引用文
+詳細度とは、ある要素にどのプロパティの値を使用するかを決めるために、ブラウザーが使用するアルゴリズムです。複数のスタイルブロックに、同じプロパティを異なる値で設定する異なるセレクターがあり、同じ要素を対象としている場合、その要素に適用されるプロパティの値は、詳細度によって決定されます。詳細度とは、基本的にセレクタ...]]></description><link>https://zenn.dev/risagoto/articles/6c95b61fe99641</link><guid isPermaLink="true">https://zenn.dev/risagoto/articles/6c95b61fe99641</guid><pubDate>Sat, 26 Oct 2024 12:00:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6DxlLh0Q--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:CSS%25E3%2582%25BB%25E3%2583%25AC%25E3%2582%25AF%25E3%2582%25BF%25E3%2583%25BC%25E8%25A9%25B3%25E7%25B4%25B0%25E5%25BA%25A6%25E3%2581%25A8%25E3%2581%25AF%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Risa._.%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk4YWJjZWY3NzIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Risa._.</dc:creator></item><item><title><![CDATA[[[wikilink]]をHTMLリンクに変換するプラグイン【SSG-PJ-05】]]></title><description><![CDATA[
+ これまでの流れ
+Markdown→HTMLのSSGを作りたい！
+
+Markdown→HTMLのSSGを作ってみた！
+
+タイトルを抽出するプラグインを作ってみた！
+
+YAMLタグを変換するプラグインを作ってみた！
+
+
+ アウトプットイメージ
+Obsidian内ではノートとノートの間を繋げるのに wikilink を使います。Wikilinkは普通のmarkdownでは使われないため、今のままだとただのテキストとして変換されてしまいます。なので今回はノート内の wikilink をHTMLリンクに変換するプラグインを作成しましょう！
+# HEADER 1 
+content content...]]></description><link>https://zenn.dev/megshinagawa/articles/markdown-to-html-ssg-pj-05</link><guid isPermaLink="true">https://zenn.dev/megshinagawa/articles/markdown-to-html-ssg-pj-05</guid><pubDate>Sat, 26 Oct 2024 05:16:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--g6bcM5Yy--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255B%255Bwikilink%255D%255D%25E3%2582%2592HTML%25E3%2583%25AA%25E3%2583%25B3%25E3%2582%25AF%25E3%2581%25AB%25E5%25A4%2589%25E6%258F%259B%25E3%2581%2599%25E3%2582%258B%25E3%2583%2597%25E3%2583%25A9%25E3%2582%25B0%25E3%2582%25A4%25E3%2583%25B3%25E3%2580%2590SSG-PJ-05%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2581%25E3%2581%2590%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRlZWJkZDBjMDcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>めぐ</dc:creator></item><item><title><![CDATA[YAMLタグをHTML bodyに入れるプラグイン【SSG-PJ-04】]]></title><description><![CDATA[
+ これまでの流れ
+Markdown→HTMLのSSGを作りたい！
+
+Markdown→HTMLのSSGを作ってみた！
+
+タイトルを抽出するプラグインを作ってみた！
+
+
+ アウトプットイメージ
+自分はObsidianのタグ機能は使わず、自作のtopicaltagsをYAML内で使っています。topicaltagsはタグ自体が他のメモへのリンクなので、HTMLに変換後もリンクとして扱う必要があります。イメージはこんな感じです：
+---
+topicaltags:
+	- [[tag1]]
+	- [[tag2]]
+---
+
+# HEADER 1 
+
+content content content...]]></description><link>https://zenn.dev/megshinagawa/articles/markdown-to-html-ssg-pj-04</link><guid isPermaLink="true">https://zenn.dev/megshinagawa/articles/markdown-to-html-ssg-pj-04</guid><pubDate>Sat, 26 Oct 2024 05:16:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--J5NEGza8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:YAML%25E3%2582%25BF%25E3%2582%25B0%25E3%2582%2592HTML%2520body%25E3%2581%25AB%25E5%2585%25A5%25E3%2582%258C%25E3%2582%258B%25E3%2583%2597%25E3%2583%25A9%25E3%2582%25B0%25E3%2582%25A4%25E3%2583%25B3%25E3%2580%2590SSG-PJ-04%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2581%25E3%2581%2590%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRlZWJkZDBjMDcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>めぐ</dc:creator></item><item><title><![CDATA[H1をHTMLファイルのタイトルにするプラグイン【SSG-PJ-03】]]></title><description><![CDATA[
+ 今までの流れ
+Markdown→HTMLのSSGを作りたい！
+
+Markdown→HTMLのSSGを作ってみた！
+
+
+ titleをYAMLに入れたくない（どうでもいい）こだわり
+めんどくさがりやの自分はtitleをわざわざYAMLに書き出すのが面倒だと思ってます。（だからプラグイン作るはめになってるけど、どっちの方がめんどくさいの？っていうツッコミは置いといて・・・）データが二重になるし、なんかやなんですよね。なので、markdown内のh1を自動的にHTMLのtitleに変換してくれるプラグインを作りました。
+
+ アウトプットイメージ
+# This is the title 
+c...]]></description><link>https://zenn.dev/megshinagawa/articles/markdown-to-html-ssg-pj-03</link><guid isPermaLink="true">https://zenn.dev/megshinagawa/articles/markdown-to-html-ssg-pj-03</guid><pubDate>Sat, 26 Oct 2024 04:32:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BWbhFTm5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:H1%25E3%2582%2592HTML%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2581%25AE%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%2588%25E3%2583%25AB%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%25E3%2583%2597%25E3%2583%25A9%25E3%2582%25B0%25E3%2582%25A4%25E3%2583%25B3%25E3%2580%2590SSG-PJ-03%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2581%25E3%2581%2590%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRlZWJkZDBjMDcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>めぐ</dc:creator></item><item><title><![CDATA[MarkdownメモをHTMLに変換するSSG作ってみた【SSG-PJ-02】]]></title><description><![CDATA[
+ このプロジェクトのそもそも
+Markdown→HTMLのSSGを作りたい！
+
+
+ プロジェクト初期設定
+プロジェクトには Node.js を使うので、一緒に作成したい方は Node.js がインストールされているか確認してください。（まだの場合はこちらから。）
+node -v 
+インストール確認後、プロジェクト用のフォルダを作成して、初期設定を行いましょう。
+mkdir obsidian-ssg-pj
+cd obsidian-ssg-pj
+npm init -y
+
+ 必要と思われるライブラリをインストール
+今回使うと思われるライブラリはこんな感じ：
+
+
+markdown-it: Ma...]]></description><link>https://zenn.dev/megshinagawa/articles/markdown-to-html-ssg-pj-02</link><guid isPermaLink="true">https://zenn.dev/megshinagawa/articles/markdown-to-html-ssg-pj-02</guid><pubDate>Sat, 26 Oct 2024 04:32:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--OsDtALj_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Markdown%25E3%2583%25A1%25E3%2583%25A2%25E3%2582%2592HTML%25E3%2581%25AB%25E5%25A4%2589%25E6%258F%259B%25E3%2581%2599%25E3%2582%258BSSG%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25E3%2580%2590SSG-PJ-02%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2581%25E3%2581%2590%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRlZWJkZDBjMDcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>めぐ</dc:creator></item><item><title><![CDATA[[JavaScript]マウスポインタに補助画像を描画する]]></title><description><![CDATA[
+ はじめに
+Webサイトにて、マウスポインタに補助画像を描画するスクリプトを作りました。
+スクリプトは以下を参考にさせていただきました。
+https://coding-memo.work/css_js/1096/
+
+ 完成したもの
+あとで紹介するsample.htmlをブラウザで開くとこのようになります。
+
+ボタン１をクリックすると、マウスポインタの周りに緑の円が表示されます。
+
+ボタン２をクリックすると、マウスポインタの周りに赤の円が表示されます。
+
+
+ デモ動画
+実際に動かしている様子です。
+https://youtu.be/CrpAVaTY8xY
+
+ スクリプト
+スクリプトの紹介...]]></description><link>https://zenn.dev/zgw426/articles/4e8dce9b450312</link><guid isPermaLink="true">https://zenn.dev/zgw426/articles/4e8dce9b450312</guid><pubDate>Fri, 25 Oct 2024 16:11:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--zMVhQK2X--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BJavaScript%255D%25E3%2583%259E%25E3%2582%25A6%25E3%2582%25B9%25E3%2583%259D%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25BF%25E3%2581%25AB%25E8%25A3%259C%25E5%258A%25A9%25E7%2594%25BB%25E5%2583%258F%25E3%2582%2592%25E6%258F%258F%25E7%2594%25BB%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:suo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E5OWNjMjMzNTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>suo</dc:creator></item><item><title><![CDATA[ブロックレベル要素とインライン要素の理解と注意点]]></title><description><![CDATA[
+ ブロックレベル要素とインライン要素の理解と注意点
+この記事は、プログラミング初心者である筆者が、学習の過程でつまずいた経験をもとに備忘録としてまとめたものです。ブロック要素とインライン要素の理解不足から、CSSで思い通りのデザインができなかった経験に焦点を当てています。この内容が、似たような状況で困っている方の手助けになれば幸いです。
+
+ 
+
+ 1. ブロックレベル要素とは？
+Webページの各パーツをグループ化し、ページ全体のレイアウトを構成する要素です。
+（箱のようなイメージ📦）
+・横幅・高さの指定ができる
+・親要素の横幅と同じ初期値になる
+・高さの初期値は内容に依存する
+・改行さ...]]></description><link>https://zenn.dev/risagoto/articles/b8559123b76160</link><guid isPermaLink="true">https://zenn.dev/risagoto/articles/b8559123b76160</guid><pubDate>Fri, 25 Oct 2024 14:46:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--VnbpW6Bq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2596%25E3%2583%25AD%25E3%2583%2583%25E3%2582%25AF%25E3%2583%25AC%25E3%2583%2599%25E3%2583%25AB%25E8%25A6%2581%25E7%25B4%25A0%25E3%2581%25A8%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%25B3%25E8%25A6%2581%25E7%25B4%25A0%25E3%2581%25AE%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%25A8%25E6%25B3%25A8%25E6%2584%258F%25E7%2582%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Risa._.%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk4YWJjZWY3NzIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Risa._.</dc:creator></item><item><title><![CDATA[MarkdownをHTMLに変換するSSGを作りたい【SSG-PJ-01】]]></title><description><![CDATA[
+ ことの始まり
+ADHDの自分はどうしてもメモったものを無くします。なのでウェブ上に自分のナレッジベースをアウトプットすることでいつでも見つけられる状態にしておきたいと思ったのがことの始まりです。そうなると、自分の書き慣れているMarkdownでメモをとってそれをWebサイトか何かにアップするのがいいだろうとなりました。イメージしている理想のフローはこんな感じ：
+
+
+ 既存ツールじゃダメなの？
+実はこれってもういろんな形で存在しているんですよね。Obsidianのコミュニティで有名なのはObsidian公式の Obsidian Publish とか、サードパーティだと Quartz と...]]></description><link>https://zenn.dev/megshinagawa/articles/markdown-to-html-ssg-pj-01</link><guid isPermaLink="true">https://zenn.dev/megshinagawa/articles/markdown-to-html-ssg-pj-01</guid><pubDate>Thu, 24 Oct 2024 08:43:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2m0aTJhx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Markdown%25E3%2582%2592HTML%25E3%2581%25AB%25E5%25A4%2589%25E6%258F%259B%25E3%2581%2599%25E3%2582%258BSSG%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258A%25E3%2581%259F%25E3%2581%2584%25E3%2580%2590SSG-PJ-01%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2581%25E3%2581%2590%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRlZWJkZDBjMDcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>めぐ</dc:creator></item><item><title><![CDATA[画像クリックでのモーダル表示の実装]]></title><description><![CDATA[とあるWEB制作で画像をスライダーで流れるようにしつつ、画像をクリックした際にはモーダルで画像と説明文を表示させたい。という要望があったので備忘録として残しておきます。
+ちなみに、ここでのWEBサイトはwordpressで構築を行なっています。ですが、基本的にはhtml/cssで作ったページに対して、jqueryとcssだけでうまく工夫をしながらアニメーションなどの動きを作成しています。
+reactなどを用いてWEB制作を行えばもっと楽に動きの多いサイトを作ることができるとは思いますが、あくまで初心者やhtml/cssと少しのjsが理解できる人向けに作成しています。
+
+ 概要
+まずは完成...]]></description><link>https://zenn.dev/gtteeknzi/articles/77567154b8f665</link><guid isPermaLink="true">https://zenn.dev/gtteeknzi/articles/77567154b8f665</guid><pubDate>Thu, 17 Oct 2024 14:19:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Nn_SigAb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%2594%25BB%25E5%2583%258F%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2583%25E3%2582%25AF%25E3%2581%25A7%25E3%2581%25AE%25E3%2583%25A2%25E3%2583%25BC%25E3%2583%2580%25E3%2583%25AB%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%25AE%25E5%25AE%259F%25E8%25A3%2585%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:gtteeknzi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MxMDhlODcwNzAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>gtteeknzi</dc:creator></item></channel></rss>

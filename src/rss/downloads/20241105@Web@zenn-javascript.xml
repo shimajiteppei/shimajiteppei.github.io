@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「JavaScript」のフィード]]></title><description><![CDATA[Zennのトピック「JavaScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/javascript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/64acd76870.png</url><title>Zennの「JavaScript」のフィード</title><link>https://zenn.dev/topics/javascript</link></image><generator>zenn.dev</generator><lastBuildDate>Tue, 05 Nov 2024 11:39:06 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/javascript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[変数および定数宣言方法とデータ型]]></title><description><![CDATA[JavaScriptでは、変数を宣言する際にvar、let、constという3種類の演算子を使います。それぞれの特徴と使い方、またJavaScript特有の「動的型付け」それに付随して「静的型付け」についてもまとめています。
+この記事は、プログラミング初心者である筆者が、学習の過程でつまずいた経験をもとに備忘録としてまとめたものです。
+
+ 変数、定数宣言の基本：var、let、const
+JavaScriptでは、変数の宣言にvar、let、constの3つの方法があります。宣言された変数のスコープ（範囲）や、再代入が可能かどうかに違いがあります。それぞれの特徴を下記に示します。
+
+ v...]]></description><link>https://zenn.dev/risagoto/articles/9a07c41fddcb1c</link><guid isPermaLink="true">https://zenn.dev/risagoto/articles/9a07c41fddcb1c</guid><pubDate>Mon, 04 Nov 2024 14:37:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--O669TZz4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%25A4%2589%25E6%2595%25B0%25E3%2581%258A%25E3%2582%2588%25E3%2581%25B3%25E5%25AE%259A%25E6%2595%25B0%25E5%25AE%25A3%25E8%25A8%2580%25E6%2596%25B9%25E6%25B3%2595%25E3%2581%25A8%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E5%259E%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Risa._.%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk4YWJjZWY3NzIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Risa._.</dc:creator></item><item><title><![CDATA[Vue v3 公式ドキュメントノート]]></title><description><![CDATA[Vue3の公式ドキュメントを写経したノートです。]]></description><link>https://zenn.dev/kosuke_iwasaki/books/7b2b52ef2f1637</link><guid isPermaLink="true">https://zenn.dev/kosuke_iwasaki/books/7b2b52ef2f1637</guid><pubDate>Mon, 04 Nov 2024 12:57:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--YgBrxBza--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci9hYzlhNGQ1ZDliLmpwZWc=%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>trancore</dc:creator></item><item><title><![CDATA[背景スクロールの抑制]]></title><description><![CDATA[
+ はじめに
+モーダルなどを表示する際に、背景のスクロールを止める実装をすることがあると思います。
+理由としては以下のような感じで実装を求められるかなと思います。
+
+ユーザーの視線をモーダルに集中させるため
+モーダル自身にスクロールがある場合でも、モーダルのみをスクロールできるためユーザーの期待通りの操作ができ質が向上する
+
+その際によくやるのがbodyにoverflow: hidden;を付与する方法でした。
+しかし、ios18ではこの方法では完全に止めることができなくなりました。※ios17でも完全に抑制はできてはないです。
+
+ 調査結果
+以下の実装方法を検証しました。
+
+bodyに...]]></description><link>https://zenn.dev/takaa/articles/45e694a0af03df</link><guid isPermaLink="true">https://zenn.dev/takaa/articles/45e694a0af03df</guid><pubDate>Mon, 04 Nov 2024 09:05:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vyM-25ke--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%2583%258C%25E6%2599%25AF%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%25AE%25E6%258A%2591%25E5%2588%25B6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:takaa%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZkZTg4MTMwMTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takaa</dc:creator></item><item><title><![CDATA[【Google Cloud】Cloud Translation API: 通常&用語集で翻訳する方法【GCP】]]></title><description><![CDATA[Cloud Translation APIをJavaScriptで試してみた。
+用語集もしっかり適用された翻訳結果になったので、使い勝手は良さそうです。
+本記事では、
+
+まず用語集を利用しない通常の翻訳方法を説明します
+その後、用語集を使った翻訳方法を説明します
+
+
+ 0.事前準備
+■ CLIのインストール
+下記リンクを参考にgcloud CLI をインストールする
+https://cloud.google.com/sdk/docs/install?hl=ja
+■ gcloudコマンドを実行できることを確認する。
+gcloud --version
+もし利用できない場合はPC再起動などして...]]></description><link>https://zenn.dev/ringo_to/articles/0482b4d32ff1ca</link><guid isPermaLink="true">https://zenn.dev/ringo_to/articles/0482b4d32ff1ca</guid><pubDate>Sun, 03 Nov 2024 12:49:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--sPTnvH_n--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Google%2520Cloud%25E3%2580%2591Cloud%2520Translation%2520API%253A%2520%25E9%2580%259A%25E5%25B8%25B8%2526%25E7%2594%25A8%25E8%25AA%259E%25E9%259B%2586%25E3%2581%25A7%25E7%25BF%25BB%25E8%25A8%25B3%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%25E3%2580%2590GCP%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:akide_su%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NmNmM2YzZkYWIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>akide_su</dc:creator></item><item><title><![CDATA[Next.js App Routerにおけるリンクとナビゲーションの基本]]></title><description><![CDATA[業務でNext.jsに触る機会が多くリンク周りに使える物が多くて混乱したのでドキュメントを読みまとめてみる。
+
+ 概要
+
+Next.jsでリンク遷移やページのナビゲーションをやる方法は以下の四つがある
+
+
+
+&lt;Link&gt;コンポーネント: 基本的にはnext/linkのこれを使うのがパフォーマンス良さそう。ドキュメントでも&lt;Link&gt;コンポーネントの使用を推奨している。
+
+useRouter()hook: ルーティングを柔軟に操作したい場合に使用する。クライアントコンポーネント内で使用できる。
+
+redirectfunction
+ネイティブのHistory API
+...]]></description><link>https://zenn.dev/yamatowani/articles/258297ae8a218c</link><guid isPermaLink="true">https://zenn.dev/yamatowani/articles/258297ae8a218c</guid><pubDate>Sat, 02 Nov 2024 06:08:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--TTJcYgoy--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Next.js%2520App%2520Router%25E3%2581%25AB%25E3%2581%258A%25E3%2581%2591%25E3%2582%258B%25E3%2583%25AA%25E3%2583%25B3%25E3%2582%25AF%25E3%2581%25A8%25E3%2583%258A%25E3%2583%2593%25E3%2582%25B2%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2581%25AE%25E5%259F%25BA%25E6%259C%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%258F%25E3%2581%25AB%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAzNzI4NjhlM2QuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>わに</dc:creator></item><item><title><![CDATA[初心者でもわかる！CSR、SSR、SSG、ISRの違いと選び方]]></title><description><![CDATA[
+ CSR、SSR、SSG、ISRの違いを理解しよう
+Webアプリケーションの開発において、レンダリング手法には様々な種類があり、それぞれの特性を理解することが重要です。この記事では、CSR（Client-Side Rendering）、SSR（Server-Side Rendering）、SSG（Static Site Generation）、ISR（Incremental Static Regeneration） の仕組みや特徴について、そしてそれぞれの経緯やつながりについてわかりやすく解説していきます。さらに、実際の使用例や手法の比較表を交えて、理解を深めましょう。
+
+ CSR（ク...]]></description><link>https://zenn.dev/crebo_tech/articles/article-0013-20241102</link><guid isPermaLink="true">https://zenn.dev/crebo_tech/articles/article-0013-20241102</guid><pubDate>Sat, 02 Nov 2024 05:13:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ZiyiJvI8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E3%2581%25A7%25E3%2582%2582%25E3%2582%258F%25E3%2581%258B%25E3%2582%258B%25EF%25BC%2581CSR%25E3%2580%2581SSR%25E3%2580%2581SSG%25E3%2580%2581ISR%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%25E3%2581%25A8%25E9%2581%25B8%25E3%2581%25B3%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2581%258F%25E3%2582%258A%25E3%2581%25BC%25E3%2583%25BC%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLmRldi9pbWFnZXMvZGVmYXVsdC1wdWJsaWNhdGlvbi1hdmF0YXIucG5n%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2581%258F%25E3%2582%258A%25E3%2581%25BC%25E3%2583%25BC%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2IxNzlhZTFjZGIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>株式会社くりぼー</dc:creator></item><item><title><![CDATA[📝GoogleスプレッドシートとJSでなんちゃってCMSを実装しよう]]></title><description><![CDATA[
+ はじめに
+この記事では、GoogleスプレッドシートとJavaScript, HTMLを使って、簡単なCMS（コンテンツ管理システム）を実装する手順を紹介します。
+対象読者はHTMLやJavaScriptの基礎知識はあるけれど、APIを使ったデータ取得の経験がない方です。APIの基本については、参考記事もいくつか紹介していますので、ぜひそちらも確認してください。
+この記事を読み終わると、GoogleスプレッドシートのデータをJSON形式で取得し、JavaScriptでWebページに表示する流れが理解できます。
+
+ 1. Googleスプレッドシートの内容をJSON形式で取得する
+まず...]]></description><link>https://zenn.dev/nitacwpl/articles/38605cd35921a2</link><guid isPermaLink="true">https://zenn.dev/nitacwpl/articles/38605cd35921a2</guid><pubDate>Sat, 02 Nov 2024 04:35:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--X_zCOrPb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%2520Google%25E3%2582%25B9%25E3%2583%2597%25E3%2583%25AC%25E3%2583%2583%25E3%2583%2589%25E3%2582%25B7%25E3%2583%25BC%25E3%2583%2588%25E3%2581%25A8JS%25E3%2581%25A7%25E3%2581%25AA%25E3%2582%2593%25E3%2581%25A1%25E3%2582%2583%25E3%2581%25A3%25E3%2581%25A6CMS%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2597%25E3%2582%2588%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:QwerTayu%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRjZTQwZDZiOTAuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%2598%258E%25E7%259F%25B3%25E9%25AB%2598%25E5%25B0%2582%2520Web%25E8%25A3%25BD%25E4%25BD%259C%25E7%25A0%2594%25E7%25A9%25B6%25E9%2583%25A8%25EF%25BC%2588Web%25E7%25A0%2594%25EF%25BC%2589%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUVkRlRwNEZ5end1dlhXZXRXek5mY25ITGZqeWpHVmhEYUU2NTNSSE13V2M9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>QwerTayu</dc:creator></item><item><title><![CDATA[[Google Chrome 拡張機能] Code Path Tracker でコードリーディングを効率化 !]]></title><description><![CDATA[
+ Code Path Tracker とは
+Code Path Tracker は OpenGrok などのソースコードの閲覧サイトでクリックした関数をサイドバーの履歴に残し、それらをカスタムテンプレートを使用してコピーができる Google Chrome 拡張機能です。
+!
+OpenGrok はソースコードの関数などを検索/閲覧が行えるツールです。
+
+(追記)簡単に試したい方用に構築方法を記事にしました!
+https://zenn.dev/apo_space81/articles/deab4ed1ad5d35
+ソースコードを読んでいる時には関数名をクリックしてどこからその関数が呼ばれ...]]></description><link>https://zenn.dev/apo_space81/articles/e1a9202bc2f93a</link><guid isPermaLink="true">https://zenn.dev/apo_space81/articles/e1a9202bc2f93a</guid><pubDate>Sat, 02 Nov 2024 03:56:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fRR2YzIJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BGoogle%2520Chrome%2520%25E6%258B%25A1%25E5%25BC%25B5%25E6%25A9%259F%25E8%2583%25BD%255D%2520Code%2520Path%2520Tracker%2520%25E3%2581%25A7%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2583%25AA%25E3%2583%25BC%25E3%2583%2587%25E3%2582%25A3%25E3%2583%25B3%25E3%2582%25B0%25E3%2582%2592%25E5%258A%25B9%25E7%258E%2587%25E5%258C%2596%2520%2521%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:pkaiy81%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZkNjY4MzNlYzYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>pkaiy81</dc:creator></item><item><title><![CDATA[[Javascript 基礎概念] 式と戻り値]]></title><description><![CDATA[Javascriptに於ける式と戻り値について3分で解説する。
+
+ 式
+式は、コードの単位。単語1つでも式として成立し、式同士をつなげて新たな式を作ることもできる。式には必ず戻り値が存在する。
+式は例えば...
+document.querySelector("#hoge")のような関数の実行だったり、或いは100のようなただの数字や、1+1のような数式、5===5のような比較も、
+function piyo() {
+    console.log("Hello")
+}
+のような関数の定義、let a = 1のような変数の定義も式の一種である。式は;によって区切られる。スペースや改行でも区...]]></description><link>https://zenn.dev/ray_chan_dayo/articles/3d94977927d703</link><guid isPermaLink="true">https://zenn.dev/ray_chan_dayo/articles/3d94977927d703</guid><pubDate>Fri, 01 Nov 2024 15:29:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ZBQjm2nY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BJavascript%2520%25E5%259F%25BA%25E7%25A4%258E%25E6%25A6%2582%25E5%25BF%25B5%255D%2520%25E5%25BC%258F%25E3%2581%25A8%25E6%2588%25BB%25E3%2582%258A%25E5%2580%25A4%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E7%258E%25B2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q2NzVkYTA1ZDUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>玲</dc:creator></item><item><title><![CDATA[今どきのフロントエンドのための、郵便番号→住所変換 #jposta]]></title><description><![CDATA[
+ 概要
+入力された郵便番号から住所を自動入力するためのライブラリは無数に存在しますが、今どきのフロントエンドアーキテクチャと親和性の高いライブラリは多くありません。また、メジャーなライブラリの中にも郵便番号と住所の紐づけデータをAPIで外部から取得しているものがあり、エンタープライズで利用しにくいという状況があります。
+そこで、jpostaの紹介です。
+⚡ ES6 / Promiseベース / TypeScript対応
+⚡ 依存ライブラリなし
+⚡ Self-hosted &amp; ダイナミックインポート (暗黙的なAPIコールなし)
+https://www.npmjs.com/pac...]]></description><link>https://zenn.dev/nickichi/articles/df0f1222677313</link><guid isPermaLink="true">https://zenn.dev/nickichi/articles/df0f1222677313</guid><pubDate>Fri, 01 Nov 2024 14:07:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--zRimNtG9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E4%25BB%258A%25E3%2581%25A9%25E3%2581%258D%25E3%2581%25AE%25E3%2583%2595%25E3%2583%25AD%25E3%2583%25B3%25E3%2583%2588%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2589%25E3%2581%25AE%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%25E3%2580%2581%25E9%2583%25B5%25E4%25BE%25BF%25E7%2595%25AA%25E5%258F%25B7%25E2%2586%2592%25E4%25BD%258F%25E6%2589%2580%25E5%25A4%2589%25E6%258F%259B%2520%2523jposta%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:taichika%2528p%2529%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2QzMmU4NjkyOGIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>taichika(p)</dc:creator></item><item><title><![CDATA[いかにして『型』は人を救うか。【ウィトゲンシュタイン / 千葉雅也】]]></title><description><![CDATA[
+話をあらためてシンプルにします。意味からリズムへ、というのがこの本です。
+リズムというのは、デコボコなのでした。
+デコボコというのは、要素がどう並んでいるかです。
+とにかく「並び」が大事なんだ、とも言える。
+千葉雅也『センスの哲学』[1]
+
+
+三・三三
+論理的構文論においては、断じて記号の意味が役割を果たすようなことがあってはならない。
+論理的構文論は記号の意味を論じることなく立てられねばならず、そこではただ諸表現を記述することだけが前提にされうる。
+三・三三一
+この見解に立つと、ラッセルの「タイプ理論」の内実が見えてくる。
+ラッセルの誤りは、記号の規則を立てるのに記号の意味を論じなけ...]]></description><link>https://zenn.dev/purenium/articles/2024_11_01_how_type_systems_can_save_humans</link><guid isPermaLink="true">https://zenn.dev/purenium/articles/2024_11_01_how_type_systems_can_save_humans</guid><pubDate>Fri, 01 Nov 2024 11:29:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--oPZccEfk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%2584%25E3%2581%258B%25E3%2581%25AB%25E3%2581%2597%25E3%2581%25A6%25E3%2580%258E%25E5%259E%258B%25E3%2580%258F%25E3%2581%25AF%25E4%25BA%25BA%25E3%2582%2592%25E6%2595%2591%25E3%2581%2586%25E3%2581%258B%25E3%2580%2582%25E3%2580%2590%25E3%2582%25A6%25E3%2582%25A3%25E3%2583%2588%25E3%2582%25B2%25E3%2583%25B3%25E3%2582%25B7%25E3%2583%25A5%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25B3%2520%252F%2520%25E5%258D%2583%25E8%2591%2589%25E9%259B%2585%25E4%25B9%259F%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E7%2584%25A1%25E5%2590%258D%25E9%259A%25B1%25E8%2580%2585%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FkNTlhNDlkYTMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>無名隱者</dc:creator></item><item><title><![CDATA[GAS Tips]]></title><description><![CDATA[
+ このページの目的
+Gasを初めて書いた身として、作成にあたりつまづいたところや留意しておきたいことをまとめた。一つの挙動を作っただけであるから、網羅的では全くないことに注意。
+忘れると思われる自分、また今後作る人の足がかりになれば。
+作ったものは、slackから情報を取得しspread sheetを更新、notionに反映させるもの。
+
+ js
+
+ function
+
+
+関数。通常(?)の関数として他の関数に組み込むこともできるし、function単位で実行することもできる。(実行方法は多分これだけ)
+function(引数){
+	操作
+	return 戻り値
+};
+
+
+
+UI上では...]]></description><link>https://zenn.dev/meina/articles/0025a59e0a74c9</link><guid isPermaLink="true">https://zenn.dev/meina/articles/0025a59e0a74c9</guid><pubDate>Fri, 01 Nov 2024 03:37:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--F6euanCJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_80:GAS%2520Tips%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:meina%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc5Y2EzMDJiYTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>meina</dc:creator></item><item><title><![CDATA[SheetJSで空の先頭行がデータ範囲に含まれる]]></title><description><![CDATA[
+ 要約
+
+
+SheetJSでExcelを読み取ったとき、空の先頭行がデータ範囲に含まれることがある
+原因は、空行に見えても内部的なデータが残っているため
+解決方法（2種類）
+
+Excel自体から先頭の空行を削除する
+データ範囲を検証し、正しくなければ先頭行を削除する
+
+
+
+
+ 問題点：空の先頭行がデータ範囲に含まれる
+Excelの読み込みを行うシステムでは、あらかじめ決まっているテンプレートに沿ってデータが記載されていることがよくあると思います。
+そしてテンプレートによっては、シートの1行目に何も入力せず、余白として使用する場合があります。
+このケースでは、常に2行目以降をデータ範囲と...]]></description><link>https://zenn.dev/ncdc/articles/07b78c29cb00d9</link><guid isPermaLink="true">https://zenn.dev/ncdc/articles/07b78c29cb00d9</guid><pubDate>Fri, 01 Nov 2024 02:22:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--m6Huo_KL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:SheetJS%25E3%2581%25A7%25E7%25A9%25BA%25E3%2581%25AE%25E5%2585%2588%25E9%25A0%25AD%25E8%25A1%258C%25E3%2581%258C%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E7%25AF%2584%25E5%259B%25B2%25E3%2581%25AB%25E5%2590%25AB%25E3%2581%25BE%25E3%2582%258C%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:K%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNhODZhNDA5ZDMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:NCDC%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE3OTg0NTdlYjQuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>K</dc:creator></item><item><title><![CDATA[コラボフローで承認済みユーザーと承認時刻を特定の項目に表示する　パターン2]]></title><description><![CDATA[
+ はじめに
+コラボフローのJavaScriptカスタマイズを利用して、承認済みユーザーと承認時刻を特定の項目に表示するサンプルをご紹介します。
+コラボフローで承認済みユーザーと承認時刻を特定の項目に表示する　パターン1もあるので参考にして下さい。
+
+ パターン1とパターン2の違い
+
+ パターン1
+申請書を開いたタイミングで、（コラボフロー REST APIで取得した）前の承認者の情報を申請書の項目にセットする
+
+ メリット
+コラボフローREST APIの情報を使用するため、システムとフォーム内の日時が一致します。
+
+ デメリット
+申請書閲覧・判定画面を開いたタイミングで（コラボフロー ...]]></description><link>https://zenn.dev/uchimura/articles/7510ebc0780007</link><guid isPermaLink="true">https://zenn.dev/uchimura/articles/7510ebc0780007</guid><pubDate>Fri, 01 Nov 2024 01:24:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--m4j9B9l4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B3%25E3%2583%25A9%25E3%2583%259C%25E3%2583%2595%25E3%2583%25AD%25E3%2583%25BC%25E3%2581%25A7%25E6%2589%25BF%25E8%25AA%258D%25E6%25B8%2588%25E3%2581%25BF%25E3%2583%25A6%25E3%2583%25BC%25E3%2582%25B6%25E3%2583%25BC%25E3%2581%25A8%25E6%2589%25BF%25E8%25AA%258D%25E6%2599%2582%25E5%2588%25BB%25E3%2582%2592%25E7%2589%25B9%25E5%25AE%259A%25E3%2581%25AE%25E9%25A0%2585%25E7%259B%25AE%25E3%2581%25AB%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2599%25E3%2582%258B%25E3%2580%2580%25E3%2583%2591%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%25B32%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%2586%2585%25E6%259D%2591%2520%25E5%259C%25AD%25E5%25AE%258F%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzlhNzY4MTQ3ZWUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>内村 圭宏</dc:creator></item><item><title><![CDATA[JavaScriptにおける再代入可能な変数の扱い方]]></title><description><![CDATA[
+ 調べたものとは？
+再代入可能な変数を定義し、ある関数が実行されるたびにその変数に任意の数を加算する実装が必要になりました。
+「状態」という概念を用いればhooksやcomposablesの中でuseStateやrefを使い簡単に実装できます。しかし、それを使わないで実装したいな、と思ったのでchatGPTを使って調べてみました。
+
+ 結果
+
+ まず問題あるのか？
+JavaScriptにおいて再代入可能な変数を関数が実行されるたびに変更するのは一般的に問題ありません。
+しかし、その扱いには注意が必要となります。変数が関数の外部にあり、関数実行のたびに更新されるような「状態」を持つ場合、...]]></description><link>https://zenn.dev/kosuke_iwasaki/articles/e409cee55c4603</link><guid isPermaLink="true">https://zenn.dev/kosuke_iwasaki/articles/e409cee55c4603</guid><pubDate>Fri, 01 Nov 2024 01:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--iWgrCEXA--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25E3%2581%25AB%25E3%2581%258A%25E3%2581%2591%25E3%2582%258B%25E5%2586%258D%25E4%25BB%25A3%25E5%2585%25A5%25E5%258F%25AF%25E8%2583%25BD%25E3%2581%25AA%25E5%25A4%2589%25E6%2595%25B0%25E3%2581%25AE%25E6%2589%25B1%25E3%2581%2584%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:trancore%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUxtNXd1Mmc4S1FYa2ZxWFBHelFJZlBDRXBTbC1vbHBIdV9KbkVLV3RTOD1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>trancore</dc:creator></item><item><title><![CDATA[JavaScriptで連想配列とループ処理を活用したAPIリクエスト効率化]]></title><description><![CDATA[APIと連携するWebアプリケーション開発において、効率的なデータのやり取りは欠かせません。JavaScriptでは、連想配列とループ処理を組み合わせることで、APIリクエストを効率化し、開発工数を削減できます。
+
+ 連想配列とループ処理によるAPIリクエスト効率化とは？
+JavaScriptの連想配列は、キーと値のペアでデータを格納する仕組みです。APIリクエストに必要なパラメータをキーとして、対応する値を連想配列に格納することで、管理しやすくなります。さらに、ループ処理を用いることで、複数のAPIリクエストを自動化できます。
+たとえば、複数のユーザー情報を取得する必要がある場合、各ユ...]]></description><link>https://zenn.dev/reskilling_hase/articles/javascript-api-loop-2024-10-31</link><guid isPermaLink="true">https://zenn.dev/reskilling_hase/articles/javascript-api-loop-2024-10-31</guid><pubDate>Thu, 31 Oct 2024 12:37:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fwZcQ5DD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25E3%2581%25A7%25E9%2580%25A3%25E6%2583%25B3%25E9%2585%258D%25E5%2588%2597%25E3%2581%25A8%25E3%2583%25AB%25E3%2583%25BC%25E3%2583%2597%25E5%2587%25A6%25E7%2590%2586%25E3%2582%2592%25E6%25B4%25BB%25E7%2594%25A8%25E3%2581%2597%25E3%2581%259FAPI%25E3%2583%25AA%25E3%2582%25AF%25E3%2582%25A8%25E3%2582%25B9%25E3%2583%2588%25E5%258A%25B9%25E7%258E%2587%25E5%258C%2596%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AF%25E3%2581%259B%25E3%2581%258C%25E3%2582%258F%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg0ZTQwYjJmZDguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>はせがわ</dc:creator></item><item><title><![CDATA[Playwrightを参考にブラウザ内テキスト検索を高速化する (事例紹介:サードパーティスクリプト提供会社)]]></title><description><![CDATA[ブラウザ内テキスト探索の高速化というテーマで改善を行いました。公開許可は頂いていますが、先方の希望で社名は伏せさせていただきます。
+https://gist.github.com/mizchi/b803f6872035248f86309057d6c97ee9
+技術的には「再現性がある木構造のノード探索の条件の生成、その実行の高速化」という少しR&amp;Dっぽいタスクでした。Playwright のコードを参考にしつつ、個別により速いパーツで置き換えていく、というもので非常に興味深いものでした。こういう仕事は楽しいので、いくらでも歓迎です。
+今回は最初はドメイン理解に時間をあてて、その後...]]></description><link>https://zenn.dev/mizchi/articles/fast-dom-text-search</link><guid isPermaLink="true">https://zenn.dev/mizchi/articles/fast-dom-text-search</guid><pubDate>Thu, 31 Oct 2024 09:44:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BarzZH6G--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Playwright%25E3%2582%2592%25E5%258F%2582%25E8%2580%2583%25E3%2581%25AB%25E3%2583%2596%25E3%2583%25A9%25E3%2582%25A6%25E3%2582%25B6%25E5%2586%2585%25E3%2583%2586%25E3%2582%25AD%25E3%2582%25B9%25E3%2583%2588%25E6%25A4%259C%25E7%25B4%25A2%25E3%2582%2592%25E9%25AB%2598%25E9%2580%259F%25E5%258C%2596%25E3%2581%2599%25E3%2582%258B%2520%2528%25E4%25BA%258B%25E4%25BE%258B%25E7%25B4%25B9%25E4%25BB%258B%253A%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2589%25E3%2583%2591%25E3%2583%25BC%25E3%2583%2586%25E3%2582%25A3%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2583%2588%25E6%258F%2590%25E4%25BE%259B%25E4%25BC%259A%25E7%25A4%25BE%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mizchi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2liclRHT052Z3d3ay1fNGxlcVk4TGNGSlNuX0FoWnpEWVlKaXJNcWc9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mizchi</dc:creator></item><item><title><![CDATA[いろんな方法でフィボナッチ数列を書いてみた(Javascriptで)]]></title><description><![CDATA[私がプログラミングを始めた頃にいろいろ教えてくれた人がいて、その人は面接でフィボナッチ数列を書けと言われてうまく書けなかったらしいですが、受かったらしいです。
+と、いうことで、フィボナッチ数列の第n項をいろいんなパターンで求めていきたいと思います。
+フィボナッチ数列を計算することが目的というよりも、フィボナッチ数列を題材にJavascriptでいろんな計算手法を試してみたという感じの記事です。
+本記事は手法をリストすることが主目的なので、各手法に関してある程度の説明はしますが詳しくはしません。また、どれが速いか(計算量)についても基本触れません。
+では、本題に入ります。
+
+ forループ...]]></description><link>https://zenn.dev/unkeleven/articles/777e097c7d633c</link><guid isPermaLink="true">https://zenn.dev/unkeleven/articles/777e097c7d633c</guid><pubDate>Thu, 31 Oct 2024 06:23:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--DMmMJ0NO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%2584%25E3%2582%258D%25E3%2582%2593%25E3%2581%25AA%25E6%2596%25B9%25E6%25B3%2595%25E3%2581%25A7%25E3%2583%2595%25E3%2582%25A3%25E3%2583%259C%25E3%2583%258A%25E3%2583%2583%25E3%2583%2581%25E6%2595%25B0%25E5%2588%2597%25E3%2582%2592%25E6%259B%25B8%25E3%2581%2584%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2528Javascript%25E3%2581%25A7%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:unk%2520eleven%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFlNWI0NGI3MzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>unk eleven</dc:creator></item><item><title><![CDATA[Three.js Cannon.es 調査資料 - javascript でのクラス・派生]]></title><description><![CDATA[
+ この記事のスナップショット
+FRスナップショット
+
+FFスナップショット
+
+4WDスナップショット
+
+ソース
+https://github.com/fnamuoo/webgl/blob/main/025
+動かし方
+
+ソース一式を WEB サーバ上に配置してください
+車の操作法
+
+カーソル上 .. アクセル
+カーソル下 .. バック
+カーソル左、カーソル右 .. ハンドル
+'b' .. ブレーキ
+'c' .. カメラ視点の変更
+'r' .. 姿勢を戻す
+マウス操作 .. カメラ位置の変更
+'1' .. 車変更：FR低出力
+'2' .. 車変更：FR高出力
+'3' .. 車変更：FF低出...]]></description><link>https://zenn.dev/fnamuoo/articles/503e704cf1832b</link><guid isPermaLink="true">https://zenn.dev/fnamuoo/articles/503e704cf1832b</guid><pubDate>Thu, 31 Oct 2024 06:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--F5FqltRF--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Three.js%2520Cannon.es%2520%25E8%25AA%25BF%25E6%259F%25BB%25E8%25B3%2587%25E6%2596%2599%2520-%2520javascript%2520%25E3%2581%25A7%25E3%2581%25AE%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25B9%25E3%2583%25BB%25E6%25B4%25BE%25E7%2594%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:fnamu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSzlINGwtMEpXNk5URF9ORmMybEZ0VDJuVG4zSU1WX2c0WG5OejVzNXhwbXBhcnB3PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>fnamu</dc:creator></item><item><title><![CDATA[Sunoのプロンプトが200文字までなので、DeepL API & 文字数カウンターを作ってみた]]></title><description><![CDATA[
+ はじめに
+DeepL API &amp; 文字数カウンター
+https://gist.github.com/sarap422/b2c0fdff98b14197cc7fd41541b5cf34
+Sunoのプロンプトは200文字までという制限があります。長文を分割するのは手間がかかるので、文字数をカウントしながら翻訳できるツールを作ってみました。DeepL API Freeを使用することで、月50万文字まで無料で高精度な翻訳が利用できます。
+
+ DeepL API Freeの特徴
+
+月間50万文字まで無料
+高精度な機械翻訳
+シンプルなAPI
+多言語対応（28言語以上）
+セキュアな通信（H...]]></description><link>https://zenn.dev/sarap422/articles/e69d806c4e4988</link><guid isPermaLink="true">https://zenn.dev/sarap422/articles/e69d806c4e4988</guid><pubDate>Thu, 31 Oct 2024 05:41:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3SY_I5hj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Suno%25E3%2581%25AE%25E3%2583%2597%25E3%2583%25AD%25E3%2583%25B3%25E3%2583%2597%25E3%2583%2588%25E3%2581%258C200%25E6%2596%2587%25E5%25AD%2597%25E3%2581%25BE%25E3%2581%25A7%25E3%2581%25AA%25E3%2581%25AE%25E3%2581%25A7%25E3%2580%2581DeepL%2520API%2520%2526%2520%25E6%2596%2587%25E5%25AD%2597%25E6%2595%25B0%25E3%2582%25AB%25E3%2582%25A6%25E3%2583%25B3%25E3%2582%25BF%25E3%2583%25BC%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:sarap422%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2Rhcmsvcy5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sarap422</dc:creator></item></channel></rss>
