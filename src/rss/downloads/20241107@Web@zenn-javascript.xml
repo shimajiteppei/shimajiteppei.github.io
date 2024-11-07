@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「JavaScript」のフィード]]></title><description><![CDATA[Zennのトピック「JavaScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/javascript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/64acd76870.png</url><title>Zennの「JavaScript」のフィード</title><link>https://zenn.dev/topics/javascript</link></image><generator>zenn.dev</generator><lastBuildDate>Thu, 07 Nov 2024 10:17:56 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/javascript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[【Vuetify】Fullscreen API使用時にv-menuなどのcomponentが表示されない時の対処]]></title><description><![CDATA[プチTips記事になりますが、VuetifyでFullscreen API使用時にv-menuなどのcomponentが表示されない場合についての対処法になります。
+経緯としては、Video.jsを用いた動画部分があるのですが、そのコントロール部分に速度変更のcomponentがあり、v-menuを使ってドロップダウンで選択するようになっていたのですが、フルスクリーン時に出ないという問題がありました。
+端的に言うと、そちらの再現と解決策はこちらになります。
+https://hiroko-ino.github.io/fullscreen-api-vuetify-component-disp...]]></description><link>https://zenn.dev/run_edge/articles/fullscreen-api-vuetify-component-display-by-attach</link><guid isPermaLink="true">https://zenn.dev/run_edge/articles/fullscreen-api-vuetify-component-display-by-attach</guid><pubDate>Thu, 07 Nov 2024 01:33:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4GmWnlXf--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Vuetify%25E3%2580%2591Fullscreen%2520API%25E4%25BD%25BF%25E7%2594%25A8%25E6%2599%2582%25E3%2581%25ABv-menu%25E3%2581%25AA%25E3%2581%25A9%25E3%2581%25AEcomponent%25E3%2581%258C%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2595%25E3%2582%258C%25E3%2581%25AA%25E3%2581%2584%25E6%2599%2582%25E3%2581%25AE%25E5%25AF%25BE%25E5%2587%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:hiroko_ino%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBkNjVlOTZjYjguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:RUN.EDGE%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzljMGEzYTE4MjYuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hiroko_ino</dc:creator></item><item><title><![CDATA[Tone.jsを使ってみた]]></title><description><![CDATA[
+ Tone.jsとは
+Tone.jsは、Web Audio APIを使いやすくラップしたライブラリです。
+これを使えばブラウザ上で簡単に音を鳴らすことができます。
+ここではTone.jsを主に音程に沿った音を鳴らすために使います。
+他にも音源の再生や加工をすることもできますが、今回は扱いません。
+ドキュメントはこちらです。
+https://tonejs.github.io/docs/15.0.4/index.html
+入門にはこちらやこちら、こちらのブログが参考になりました。
+!
+私は音楽に疎いため、音楽周りの話やTone.jsの解説の精度は非常に低いです。
+上のような記事と合わせて見...]]></description><link>https://zenn.dev/nanasi_1/articles/a599bd96b35aed</link><guid isPermaLink="true">https://zenn.dev/nanasi_1/articles/a599bd96b35aed</guid><pubDate>Wed, 06 Nov 2024 13:14:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lfmFWQby--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Tone.js%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nanasi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc0MDFiNWU4NjMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nanasi</dc:creator></item><item><title><![CDATA[xrpl.jsでAPIバージョンを指定する]]></title><description><![CDATA[
+ xrpl.js
+xrpl.jsはXRP Ledgerとのやりとりを行うためのJavaScript/TypeScriptライブラリです。
+コミュニティによって最も活発に開発が行われているクライアントライブラリの一つであり、XRPL開発を始めるにあたっては一番おすすめのライブラリです。
+
+ APIバージョン
+XRP Ledgerのコアコードであるrippledのバージョン2.0.0においてAPIバージョン2が導入されました。
+https://github.com/XRPLF/rippled/blob/develop/API-CHANGELOG.md#api-version-2
+rippl...]]></description><link>https://zenn.dev/tequ/articles/xrpljs-specify-api-version</link><guid isPermaLink="true">https://zenn.dev/tequ/articles/xrpljs-specify-api-version</guid><pubDate>Wed, 06 Nov 2024 10:30:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--B-KXKuO4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:xrpl.js%25E3%2581%25A7API%25E3%2583%2590%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%2592%25E6%258C%2587%25E5%25AE%259A%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tequ%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lvSjhtbzdCYjZmVkU1b2tsZno4TUtXVUxvN2NfYm5oQTlsc01oPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tequ</dc:creator></item><item><title><![CDATA[Vueでページを特定要素までスクロールさせるボタンを実装してみた]]></title><description><![CDATA[
+ 動機
+LPとかでよくある押すとそのボタンに対応したセクション（要素）までスクロール移動する動作をVueで実現したかったので調べてみ見ました。しかし、検索が下手なのかもしれませんが、ちょうどいい記事が見つけられなかったので今回やってみた実装方法を書いておこうと思います。
+
+ コード
+めちゃ簡単に実装できたので早速サンプルコードです。
+&lt;template&gt;
+  &lt;div&gt;
+    &lt;button @click="scrollToTarget"&gt;Scroll To Target&lt;/button&gt;
+    &lt;div class="cont...]]></description><link>https://zenn.dev/togo_asai/articles/f4c88d5079b255</link><guid isPermaLink="true">https://zenn.dev/togo_asai/articles/f4c88d5079b255</guid><pubDate>Wed, 06 Nov 2024 10:00:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--alIAgJjt--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Vue%25E3%2581%25A7%25E3%2583%259A%25E3%2583%25BC%25E3%2582%25B8%25E3%2582%2592%25E7%2589%25B9%25E5%25AE%259A%25E8%25A6%2581%25E7%25B4%25A0%25E3%2581%25BE%25E3%2581%25A7%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%2595%25E3%2581%259B%25E3%2582%258B%25E3%2583%259C%25E3%2582%25BF%25E3%2583%25B3%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Togo%2528%2540asaitogo%2529%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTFNTbm55LXhXOWJrR1ZJUWd3cnp6RXk5R3pPd3d6bWtRT0pNby1KbzNMUHl2MlpRPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Togo(@asaitogo)</dc:creator></item><item><title><![CDATA[【作ったアプリの宣伝】ストレージの使用状況をサンバースト図により可視化するためのアプリを作成しました]]></title><description><![CDATA[
+ 作ったもの
+https://github.com/fksms/DirWalker
+
+
+
+
+ アプリの特徴
+
+
+ストレージの使用状況をサンバースト図により可視化することができます。サンバースト図のアークを左クリックすると、サンバースト図やリストが自動的に更新されます。アークを右クリックすると、コンテキストメニューが開き、OSの標準ファイルマネージャーで該当のディレクトリを開いたり、該当のディレクトリ・ファイルのパスをクリップボードにコピーしたりすることが可能です。
+
+
+デフォルトでは、OSのルートディレクトリをスキャンする仕様になっていますが、スキャンしたいディレクトリを指定することで...]]></description><link>https://zenn.dev/fksms/articles/2dbe1a2962ba51</link><guid isPermaLink="true">https://zenn.dev/fksms/articles/2dbe1a2962ba51</guid><pubDate>Wed, 06 Nov 2024 09:52:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--V2opvyTe--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2581%25AE%25E5%25AE%25A3%25E4%25BC%259D%25E3%2580%2591%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25AC%25E3%2583%25BC%25E3%2582%25B8%25E3%2581%25AE%25E4%25BD%25BF%25E7%2594%25A8%25E7%258A%25B6%25E6%25B3%2581%25E3%2582%2592%25E3%2582%25B5%25E3%2583%25B3%25E3%2583%2590%25E3%2583%25BC%25E3%2582%25B9%25E3%2583%2588%25E5%259B%25B3%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258A%25E5%258F%25AF%25E8%25A6%2596%25E5%258C%2596%25E3%2581%2599%25E3%2582%258B%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2597%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:fksms%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ5MzEwZTU5N2QuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>fksms</dc:creator></item><item><title><![CDATA[ejsでincludeで読み込んだファイルがエラーになったとき]]></title><description><![CDATA[
+ EJS で class が原因のエラー解消方法と対処法
+EJS（Embedded JavaScript）を使ったテンプレートエンジンで、特定の引数を渡した際にエラーが発生することがあります。今回は、class という引数名を渡した際に発生したエラーとその解決方法について解説します。
+!
+この記事はChatGPTでまとめた内容になるので、一部間違っている箇所があるかもしれません。気づきがありましたらコメント頂けると助かります🙇
+
+
+ エラーの概要
+以下のコードで class というプロパティを引数として include メソッドに渡した際に、予期せぬエラーが発生しました。
+&lt;%-...]]></description><link>https://zenn.dev/tamon_kondo/articles/380a7ffdfb9563</link><guid isPermaLink="true">https://zenn.dev/tamon_kondo/articles/380a7ffdfb9563</guid><pubDate>Wed, 06 Nov 2024 04:54:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vuAnn0z3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ejs%25E3%2581%25A7include%25E3%2581%25A7%25E8%25AA%25AD%25E3%2581%25BF%25E8%25BE%25BC%25E3%2582%2593%25E3%2581%25A0%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2581%258C%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E3%2581%25AB%25E3%2581%25AA%25E3%2581%25A3%25E3%2581%259F%25E3%2581%25A8%25E3%2581%258D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:t.k%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2k1WWoxNXZlTDl0VE9pd0p0VHVZSXUyNENJMkJuOG1MYkhNcjFvN2c9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>t.k</dc:creator></item><item><title><![CDATA[VueFesJapan2024感想]]></title><description><![CDATA[
+ VueFesJapan2024感想
+
+ 参加したセッション
+
+オープニング
+キーノート
+プラチナスポンサーセッション
+
+VueとViteで作るUIコンポーネントライブラリ ~デザインシステムとプロダクトの理想的な分離を目指して~
+IT未経験者をVue.jsで開発できるITコンサルタントに育てあげる秘訣 - フューチャーの新人研修の取り組み
+AIとともに歩んだライブラリアップデートの道のり
+
+
+Nuxtベースの「WXT」で開発用のChrome拡張を作成する
+Vueでサクッと作って試す：Studioでのプロトタイピング開発
+普通のエンジニアが頑張って30万行のNuxt3バージョンアップし...]]></description><link>https://zenn.dev/minato_nanzyou/articles/2d1c1bd1ddbc9f</link><guid isPermaLink="true">https://zenn.dev/minato_nanzyou/articles/2d1c1bd1ddbc9f</guid><pubDate>Wed, 06 Nov 2024 00:45:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---25y_VPf--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:VueFesJapan2024%25E6%2584%259F%25E6%2583%25B3%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25BF%25E3%2581%25AA%25E3%2581%25A8%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTDF6U0VrNjB6Tk9wZFVJb1o3NEpqRHhtM1NUZlQ1LUU0elQ0T3RHLTZQVnc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>みなと</dc:creator></item><item><title><![CDATA[reduceを使って日付一覧から日毎の情報を作成する]]></title><description><![CDATA[こんにちは！
+スペースマーケットでフロントエンドエンジニアをしているwharaguchiです。
+これまで個人的に使用機会が少なかったreduceを使う機会があったため、自分の備忘録を兼ねて記事にしました。
+
+ やりたかったこと
+携わっていた施策で以下のキャプチャのような、日付毎にアコーディオンが開閉するUIを作成する必要がありました。
+
+APIから返ってくるデータは、以下のような各日付の情報が一覧で格納された配列でした。
+// 元となるデータ
+const baseData = [
+  {
+    startedAt: "2024-10-30T10:00:00+09:00",
+    ro...]]></description><link>https://zenn.dev/spacemarket/articles/cec64a21e2545a</link><guid isPermaLink="true">https://zenn.dev/spacemarket/articles/cec64a21e2545a</guid><pubDate>Wed, 06 Nov 2024 00:36:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--LvbmIrLZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:reduce%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E6%2597%25A5%25E4%25BB%2598%25E4%25B8%2580%25E8%25A6%25A7%25E3%2581%258B%25E3%2582%2589%25E6%2597%25A5%25E6%25AF%258E%25E3%2581%25AE%25E6%2583%2585%25E5%25A0%25B1%25E3%2582%2592%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:wharaguchi%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc1NTA1NzM5OGYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25B9%25E3%2583%259A%25E3%2583%25BC%25E3%2582%25B9%25E3%2583%259E%25E3%2583%25BC%25E3%2582%25B1%25E3%2583%2583%25E3%2583%2588%2520Engineer%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFjMmY1NGY2MjEuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>wharaguchi</dc:creator></item><item><title><![CDATA[実務で使えるTypescriptの型8選]]></title><description><![CDATA[
+ ひとこと
+実務に組み込みやすいようにできる限り実例を用いました。react前提です。TS初学者の方の助けになれば
+
+ 解説
+
+ テンプレートリテラル型
+型安全な文字列操作を実現
+
+ 例
+リテラル型で文字列を定義すれば渡した値がnumberであることを型で保証できる
+const requestExternalApi = async ({
+  data,
+}: {
+  data: {
+    offset: `${number}`
+    limit: `${number}`
+  }
+}) =&gt; {
+  const res = await fetch("https://exampl...]]></description><link>https://zenn.dev/ficilcom/articles/940ecce71e45a6</link><guid isPermaLink="true">https://zenn.dev/ficilcom/articles/940ecce71e45a6</guid><pubDate>Wed, 06 Nov 2024 00:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--KAJsO9TJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%25AE%259F%25E5%258B%2599%25E3%2581%25A7%25E4%25BD%25BF%25E3%2581%2588%25E3%2582%258BTypescript%25E3%2581%25AE%25E5%259E%258B8%25E9%2581%25B8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:kenya%2520hayashi%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE3MmFmNGJkODAuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2595%25E3%2582%25A3%25E3%2582%25B7%25E3%2583%25AB%25E3%2582%25B3%25E3%2583%25A0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk5NzE2MGE3YzQuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kenya hayashi</dc:creator></item><item><title><![CDATA[変数および定数宣言方法とデータ型]]></title><description><![CDATA[JavaScriptでは、変数を宣言する際にvar、let、constという3種類の演算子を使います。それぞれの特徴と使い方、またJavaScript特有の「動的型付け」それに付随して「静的型付け」についてもまとめています。
+この記事は、プログラミング初心者である筆者が、学習の過程でつまずいた経験をもとに備忘録としてまとめたものです。
+
+ 変数、定数宣言の基本：var、let、const
+JavaScriptでは、変数の宣言にvar、let、constの3つの方法があります。宣言された変数のスコープ（範囲）や、再代入が可能かどうかに違いがあります。それぞれの特徴を下記に示します。
+
+ v...]]></description><link>https://zenn.dev/risagoto/articles/9a07c41fddcb1c</link><guid isPermaLink="true">https://zenn.dev/risagoto/articles/9a07c41fddcb1c</guid><pubDate>Mon, 04 Nov 2024 14:37:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--O669TZz4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%25A4%2589%25E6%2595%25B0%25E3%2581%258A%25E3%2582%2588%25E3%2581%25B3%25E5%25AE%259A%25E6%2595%25B0%25E5%25AE%25A3%25E8%25A8%2580%25E6%2596%25B9%25E6%25B3%2595%25E3%2581%25A8%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E5%259E%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Risa._.%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk4YWJjZWY3NzIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Risa._.</dc:creator></item><item><title><![CDATA[Vue v3 公式ドキュメントノート]]></title><description><![CDATA[Vue3の公式ドキュメントを写経したノートです。]]></description><link>https://zenn.dev/kosuke_iwasaki/books/7b2b52ef2f1637</link><guid isPermaLink="true">https://zenn.dev/kosuke_iwasaki/books/7b2b52ef2f1637</guid><pubDate>Mon, 04 Nov 2024 12:57:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--YgBrxBza--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci9hYzlhNGQ1ZDliLmpwZWc=%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>trancore</dc:creator></item><item><title><![CDATA[背景スクロールの抑制]]></title><description><![CDATA[
+ はじめに
+モーダルなどを表示する際に、背景のスクロールを止める実装をすることがあると思います。
+理由としては以下のような感じで実装を求められるかなと思います。
+
+ユーザーの視線をモーダルに集中させるため
+モーダル自身にスクロールがある場合でも、モーダルのみをスクロールできるためユーザーの期待通りの操作ができ質が向上する
+
+その際によくやるのがbodyにoverflow: hidden;を付与する方法でした。
+しかし、ios18ではこの方法では完全に止めることができなくなりました。※ios17でも完全に抑制はできてはないです。
+
+ 調査結果
+以下の実装方法を検証しました。
+
+bodyに...]]></description><link>https://zenn.dev/takaa/articles/45e694a0af03df</link><guid isPermaLink="true">https://zenn.dev/takaa/articles/45e694a0af03df</guid><pubDate>Mon, 04 Nov 2024 09:05:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vyM-25ke--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%2583%258C%25E6%2599%25AF%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%25AE%25E6%258A%2591%25E5%2588%25B6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:takaa%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZkZTg4MTMwMTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takaa</dc:creator></item><item><title><![CDATA[【Google Cloud】Cloud Translation API: 通常&用語集で翻訳する方法【GCP】]]></title><description><![CDATA[Cloud Translation APIをJavaScriptで試してみた。
+用語集もしっかり適用された翻訳結果になったので、使い勝手は良さそうです。
+本記事では、
+
+まず用語集を利用しない通常の翻訳方法を説明します
+その後、用語集を使った翻訳方法を説明します
+
+
+ 0.事前準備
+■ CLIのインストール
+下記リンクを参考にgcloud CLI をインストールする
+https://cloud.google.com/sdk/docs/install?hl=ja
+■ gcloudコマンドを実行できることを確認する。
+gcloud --version
+もし利用できない場合はPC再起動などして...]]></description><link>https://zenn.dev/ringo_to/articles/0482b4d32ff1ca</link><guid isPermaLink="true">https://zenn.dev/ringo_to/articles/0482b4d32ff1ca</guid><pubDate>Sun, 03 Nov 2024 12:49:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--sPTnvH_n--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Google%2520Cloud%25E3%2580%2591Cloud%2520Translation%2520API%253A%2520%25E9%2580%259A%25E5%25B8%25B8%2526%25E7%2594%25A8%25E8%25AA%259E%25E9%259B%2586%25E3%2581%25A7%25E7%25BF%25BB%25E8%25A8%25B3%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%25E3%2580%2590GCP%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:akide_su%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NmNmM2YzZkYWIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>akide_su</dc:creator></item><item><title><![CDATA[Next.js App Routerにおけるリンクとナビゲーションの基本]]></title><description><![CDATA[業務でNext.jsに触る機会が多くリンク周りに使える物が多くて混乱したのでドキュメントを読みまとめてみる。
+
+ 概要
+
+Next.jsでリンク遷移やページのナビゲーションをやる方法は以下の四つがある
+
+
+
+&lt;Link&gt;コンポーネント: 基本的にはnext/linkのこれを使うのがパフォーマンス良さそう。ドキュメントでも&lt;Link&gt;コンポーネントの使用を推奨している。
+
+useRouter()hook: ルーティングを柔軟に操作したい場合に使用する。クライアントコンポーネント内で使用できる。
+
+redirectfunction
+ネイティブのHistory API
+...]]></description><link>https://zenn.dev/yamatowani/articles/258297ae8a218c</link><guid isPermaLink="true">https://zenn.dev/yamatowani/articles/258297ae8a218c</guid><pubDate>Sat, 02 Nov 2024 06:08:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--TTJcYgoy--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Next.js%2520App%2520Router%25E3%2581%25AB%25E3%2581%258A%25E3%2581%2591%25E3%2582%258B%25E3%2583%25AA%25E3%2583%25B3%25E3%2582%25AF%25E3%2581%25A8%25E3%2583%258A%25E3%2583%2593%25E3%2582%25B2%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2581%25AE%25E5%259F%25BA%25E6%259C%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%258F%25E3%2581%25AB%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAzNzI4NjhlM2QuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>わに</dc:creator></item><item><title><![CDATA[初心者でもわかる！CSR、SSR、SSG、ISRの違いと選び方]]></title><description><![CDATA[
+ CSR、SSR、SSG、ISRの違いを理解しよう
+Webアプリケーションの開発において、レンダリング手法には様々な種類があり、それぞれの特性を理解することが重要です。この記事では、CSR（Client-Side Rendering）、SSR（Server-Side Rendering）、SSG（Static Site Generation）、ISR（Incremental Static Regeneration） の仕組みや特徴について、そしてそれぞれの経緯やつながりについてわかりやすく解説していきます。さらに、実際の使用例や手法の比較表を交えて、理解を深めましょう。
+
+ CSR（ク...]]></description><link>https://zenn.dev/crebo_tech/articles/article-0013-20241102</link><guid isPermaLink="true">https://zenn.dev/crebo_tech/articles/article-0013-20241102</guid><pubDate>Sat, 02 Nov 2024 05:13:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ZiyiJvI8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E3%2581%25A7%25E3%2582%2582%25E3%2582%258F%25E3%2581%258B%25E3%2582%258B%25EF%25BC%2581CSR%25E3%2580%2581SSR%25E3%2580%2581SSG%25E3%2580%2581ISR%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%25E3%2581%25A8%25E9%2581%25B8%25E3%2581%25B3%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2581%258F%25E3%2582%258A%25E3%2581%25BC%25E3%2583%25BC%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLmRldi9pbWFnZXMvZGVmYXVsdC1wdWJsaWNhdGlvbi1hdmF0YXIucG5n%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2581%258F%25E3%2582%258A%25E3%2581%25BC%25E3%2583%25BC%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2IxNzlhZTFjZGIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>株式会社くりぼー</dc:creator></item><item><title><![CDATA[📝GoogleスプレッドシートとJSでなんちゃってCMSを実装しよう]]></title><description><![CDATA[
+ はじめに
+この記事では、GoogleスプレッドシートとJavaScript, HTMLを使って、簡単なCMS（コンテンツ管理システム）を実装する手順を紹介します。
+※CMSと表記するより、Googleスプレッドシートをデータベースとして配信する、と表現した方が正しいかもしれませんが。
+対象読者はHTMLやJavaScriptの基礎知識はあるけれど、APIを使ったデータ取得の経験がない方です。APIの基本については、参考記事もいくつか紹介していますので、ぜひそちらも確認してください。
+この記事を読み終わると、GoogleスプレッドシートのデータをJSON形式で取得し、JavaScrip...]]></description><link>https://zenn.dev/nitacwpl/articles/38605cd35921a2</link><guid isPermaLink="true">https://zenn.dev/nitacwpl/articles/38605cd35921a2</guid><pubDate>Sat, 02 Nov 2024 04:35:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--X_zCOrPb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%2520Google%25E3%2582%25B9%25E3%2583%2597%25E3%2583%25AC%25E3%2583%2583%25E3%2583%2589%25E3%2582%25B7%25E3%2583%25BC%25E3%2583%2588%25E3%2581%25A8JS%25E3%2581%25A7%25E3%2581%25AA%25E3%2582%2593%25E3%2581%25A1%25E3%2582%2583%25E3%2581%25A3%25E3%2581%25A6CMS%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2597%25E3%2582%2588%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:QwerTayu%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRjZTQwZDZiOTAuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%2598%258E%25E7%259F%25B3%25E9%25AB%2598%25E5%25B0%2582%2520Web%25E8%25A3%25BD%25E4%25BD%259C%25E7%25A0%2594%25E7%25A9%25B6%25E9%2583%25A8%25EF%25BC%2588Web%25E7%25A0%2594%25EF%25BC%2589%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUVkRlRwNEZ5end1dlhXZXRXek5mY25ITGZqeWpHVmhEYUU2NTNSSE13V2M9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>QwerTayu</dc:creator></item><item><title><![CDATA[[Google Chrome 拡張機能] Code Path Tracker でコードリーディングを効率化 !]]></title><description><![CDATA[
+ Code Path Tracker とは
+Code Path Tracker は OpenGrok などのソースコードの閲覧サイトでクリックした関数をサイドバーの履歴に残し、それらをカスタムテンプレートを使用してコピーができる Google Chrome 拡張機能です。
+!
+OpenGrok はソースコードの関数などを検索/閲覧が行えるツールです。
+
+(追記)簡単に試したい方用に構築方法を記事にしました!
+https://zenn.dev/apo_space81/articles/deab4ed1ad5d35
+ソースコードを読んでいる時には関数名をクリックしてどこからその関数が呼ばれ...]]></description><link>https://zenn.dev/apo_space81/articles/e1a9202bc2f93a</link><guid isPermaLink="true">https://zenn.dev/apo_space81/articles/e1a9202bc2f93a</guid><pubDate>Sat, 02 Nov 2024 03:56:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fRR2YzIJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BGoogle%2520Chrome%2520%25E6%258B%25A1%25E5%25BC%25B5%25E6%25A9%259F%25E8%2583%25BD%255D%2520Code%2520Path%2520Tracker%2520%25E3%2581%25A7%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2583%25AA%25E3%2583%25BC%25E3%2583%2587%25E3%2582%25A3%25E3%2583%25B3%25E3%2582%25B0%25E3%2582%2592%25E5%258A%25B9%25E7%258E%2587%25E5%258C%2596%2520%2521%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:pkaiy81%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZkNjY4MzNlYzYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>pkaiy81</dc:creator></item><item><title><![CDATA[[Javascript 基礎概念] 式と戻り値]]></title><description><![CDATA[Javascriptに於ける式と戻り値について3分で解説する。
+
+ 式
+式は、コードの単位。単語1つでも式として成立し、式同士をつなげて新たな式を作ることもできる。式には必ず戻り値が存在する。
+式は例えば...
+document.querySelector("#hoge")のような関数の実行だったり、或いは100のようなただの数字や、1+1のような数式、5===5のような比較も、
+function piyo() {
+    console.log("Hello")
+}
+のような関数の定義、let a = 1のような変数の定義も式の一種である。式は;によって区切られる。スペースや改行でも区...]]></description><link>https://zenn.dev/ray_chan_dayo/articles/3d94977927d703</link><guid isPermaLink="true">https://zenn.dev/ray_chan_dayo/articles/3d94977927d703</guid><pubDate>Fri, 01 Nov 2024 15:29:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ZBQjm2nY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BJavascript%2520%25E5%259F%25BA%25E7%25A4%258E%25E6%25A6%2582%25E5%25BF%25B5%255D%2520%25E5%25BC%258F%25E3%2581%25A8%25E6%2588%25BB%25E3%2582%258A%25E5%2580%25A4%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E7%258E%25B2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q2NzVkYTA1ZDUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>玲</dc:creator></item><item><title><![CDATA[今どきのフロントエンドのための、郵便番号→住所変換 #jposta]]></title><description><![CDATA[
+ 概要
+入力された郵便番号から住所を自動入力するためのライブラリは無数に存在しますが、今どきのフロントエンドアーキテクチャと親和性の高いライブラリは多くありません。また、メジャーなライブラリの中にも郵便番号と住所の紐づけデータをAPIで外部から取得しているものがあり、エンタープライズで利用しにくいという状況があります。
+そこで、jpostaの紹介です。
+⚡ ES6 / Promiseベース / TypeScript対応
+⚡ 依存ライブラリなし
+⚡ Self-hosted &amp; ダイナミックインポート (暗黙的なAPIコールなし)
+https://www.npmjs.com/pac...]]></description><link>https://zenn.dev/nickichi/articles/df0f1222677313</link><guid isPermaLink="true">https://zenn.dev/nickichi/articles/df0f1222677313</guid><pubDate>Fri, 01 Nov 2024 14:07:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--zRimNtG9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E4%25BB%258A%25E3%2581%25A9%25E3%2581%258D%25E3%2581%25AE%25E3%2583%2595%25E3%2583%25AD%25E3%2583%25B3%25E3%2583%2588%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2589%25E3%2581%25AE%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%25E3%2580%2581%25E9%2583%25B5%25E4%25BE%25BF%25E7%2595%25AA%25E5%258F%25B7%25E2%2586%2592%25E4%25BD%258F%25E6%2589%2580%25E5%25A4%2589%25E6%258F%259B%2520%2523jposta%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:taichika%2528p%2529%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2QzMmU4NjkyOGIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>taichika(p)</dc:creator></item><item><title><![CDATA[いかにして『型』は人を救うか。【ウィトゲンシュタイン / 千葉雅也】]]></title><description><![CDATA[
+話をあらためてシンプルにします。意味からリズムへ、というのがこの本です。
+リズムというのは、デコボコなのでした。
+デコボコというのは、要素がどう並んでいるかです。
+とにかく「並び」が大事なんだ、とも言える。
+千葉雅也『センスの哲学』[1]
+
+
+三・三三
+論理的構文論においては、断じて記号の意味が役割を果たすようなことがあってはならない。
+論理的構文論は記号の意味を論じることなく立てられねばならず、そこではただ諸表現を記述することだけが前提にされうる。
+三・三三一
+この見解に立つと、ラッセルの「タイプ理論」の内実が見えてくる。
+ラッセルの誤りは、記号の規則を立てるのに記号の意味を論じなけ...]]></description><link>https://zenn.dev/purenium/articles/2024_11_01_how_type_systems_can_save_humans</link><guid isPermaLink="true">https://zenn.dev/purenium/articles/2024_11_01_how_type_systems_can_save_humans</guid><pubDate>Fri, 01 Nov 2024 11:29:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--oPZccEfk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%2584%25E3%2581%258B%25E3%2581%25AB%25E3%2581%2597%25E3%2581%25A6%25E3%2580%258E%25E5%259E%258B%25E3%2580%258F%25E3%2581%25AF%25E4%25BA%25BA%25E3%2582%2592%25E6%2595%2591%25E3%2581%2586%25E3%2581%258B%25E3%2580%2582%25E3%2580%2590%25E3%2582%25A6%25E3%2582%25A3%25E3%2583%2588%25E3%2582%25B2%25E3%2583%25B3%25E3%2582%25B7%25E3%2583%25A5%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25B3%2520%252F%2520%25E5%258D%2583%25E8%2591%2589%25E9%259B%2585%25E4%25B9%259F%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E7%2584%25A1%25E5%2590%258D%25E9%259A%25B1%25E8%2580%2585%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FkNTlhNDlkYTMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>無名隱者</dc:creator></item></channel></rss>

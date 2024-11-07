@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Thu, 07 Nov 2024 00:39:55 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[レコメンドへの機械学習パイプライン導入とVertex AI Pipelinesの紹介]]></title><description><![CDATA[GENIEE RECOMMENDでインフラとバックエンドを担当している新卒2年目の櫻井です。
+本記事では、GENIEE RECOMMENDにおける機械学習パイプラインの導入とVertexi AI Pipelinesについて紹介します。
+特に、Kubeflow Pipelinesを用いた柔軟なパイプラインの実装について説明します。
+
+ GENIEE RECOMMENDと推薦システム
+GENIEE RECOMMENDは、売上順やPV順など画一的なロジックのみならず、ユーザ一人ひとりの行動をAIが学習・分析し、独自のロジックによりユーザの好みにパーソナライズされた商品提案サービスです。
+
+推薦...]]></description><link>https://zenn.dev/geniee/articles/60c968ac4f6d13</link><guid isPermaLink="true">https://zenn.dev/geniee/articles/60c968ac4f6d13</guid><pubDate>Wed, 06 Nov 2024 23:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7Wcfy5Tg--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%25AC%25E3%2582%25B3%25E3%2583%25A1%25E3%2583%25B3%25E3%2583%2589%25E3%2581%25B8%25E3%2581%25AE%25E6%25A9%259F%25E6%25A2%25B0%25E5%25AD%25A6%25E7%25BF%2592%25E3%2583%2591%25E3%2582%25A4%25E3%2583%2597%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%25B3%25E5%25B0%258E%25E5%2585%25A5%25E3%2581%25A8Vertex%2520AI%2520Pipelines%25E3%2581%25AE%25E7%25B4%25B9%25E4%25BB%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:sakuraik%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQyMmViZTNjMjIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:GENIEE%2520TechBlog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSnVyam8zSUZUV3dhaTlydGFRSENUSDI5Tl9BVnZteVg3R2tGX3ZXYWYydXc9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sakuraik</dc:creator></item><item><title><![CDATA[GitLabとPythonで実現する自動化！簡単にできるハンドブック変更履歴の共有術]]></title><description><![CDATA[
+ はじめに
+社内ではhugoとGitLab Pagesを使ってGitLab Handbookに倣って社内ドキュメント（ハンドブック）を運用しています。
+ただ、毎月1回のハンドブック更新を社内に通知するのは大切なのですが、手動で行うと時間と手間がかかります。
+この記事では、GitLabを使って「ハンドブック更新を社内に通知する」プロセスを自動化する方法を紹介します。
+Pythonスクリプトを使用し、GitLab CI/CDの設定で定期的にタグ付けと変更ログの生成して社内で共有する手順をまとめています。
+
+ 準備
+まず、GitLab APIを使うためにPythonパッケージの python...]]></description><link>https://zenn.dev/secondselection/articles/gitlab_release_notes</link><guid isPermaLink="true">https://zenn.dev/secondselection/articles/gitlab_release_notes</guid><pubDate>Wed, 06 Nov 2024 21:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qfnJnfwX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:GitLab%25E3%2581%25A8Python%25E3%2581%25A7%25E5%25AE%259F%25E7%258F%25BE%25E3%2581%2599%25E3%2582%258B%25E8%2587%25AA%25E5%258B%2595%25E5%258C%2596%25EF%25BC%2581%25E7%25B0%25A1%25E5%258D%2598%25E3%2581%25AB%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258B%25E3%2583%258F%25E3%2583%25B3%25E3%2583%2589%25E3%2583%2596%25E3%2583%2583%25E3%2582%25AF%25E5%25A4%2589%25E6%259B%25B4%25E5%25B1%25A5%25E6%25AD%25B4%25E3%2581%25AE%25E5%2585%25B1%25E6%259C%2589%25E8%25A1%2593%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:u_hijiri%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzljNTA3MDMwNTguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25BB%25E3%2582%25AB%25E3%2583%25B3%25E3%2583%2589%25E3%2582%25BB%25E3%2583%25AC%25E3%2582%25AF%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0ZHJ6RHVTRnZUS2pDQ2U2aGxtdC1TbnprX1dIYzhjV1JJWlhxQk1lMUNCalE9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>u_hijiri</dc:creator></item><item><title><![CDATA[PythonチュートリアルをNotebookLMで要約してみた]]></title><description><![CDATA[公式のPythonチュートリアルをNotebookLMで要約してみました。うまくまとまっているなぁと感心したので、ここで公開したいと思います。
+要約するためのプロンプトは以下の通り。
+以下の "要約条件" に従って要約してください。
+
+# 要約条件
+- 中学生が理解できる文章で要約する
+- 可能な限り箇条書きを使用した要約とする
+- 箇条書きのインデントは空白文字2文字とする
+- 「中学生向け」や「中学生でもわかる」などの言葉は出力しない
+- タイトルは原文のタイトルを変換せずそのまま出力し、接尾辞として「の要約」を出力する
+- 要約を実施した旨の文章は出力しない
+
+ NotebookL...]]></description><link>https://zenn.dev/zundalab/articles/503b99dd0ae2b6</link><guid isPermaLink="true">https://zenn.dev/zundalab/articles/503b99dd0ae2b6</guid><pubDate>Wed, 06 Nov 2024 20:09:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--oHnZQ8fr--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2583%2581%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%2588%25E3%2583%25AA%25E3%2582%25A2%25E3%2583%25AB%25E3%2582%2592NotebookLM%25E3%2581%25A7%25E8%25A6%2581%25E7%25B4%2584%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Zunda%2520Lab.%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2Rhcmsvei5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Zunda Lab.</dc:creator></item><item><title><![CDATA[最速・最軽量・最低コスト？でMLflowを始めたい時のtips]]></title><description><![CDATA[
+ モチベーション
+MLflowの練習環境が欲しい！というモチベーションで作っていこうと思います。
+今回これを立ち上げるのに大体1時間かかってしまいましたが、それくらいできます。
+コストは月々1000円は超えてほしくないですが、ざっくり試算でそれくらいになりそう。。。
+またコストパフォーマンスについては追って記事にしたいと思います。
+ローカルで立ち上げる術もありましたが、久しぶりのイチからの環境構築を m1 macでやるのはしんどそうだという偏見と（3年前の話で本当に不便でしたが、最近はマシなんでしょうか？）、あとはローカルで構築したVMをクラウド環境に向けて開放する方が面倒だと思ったの...]]></description><link>https://zenn.dev/hirayuki/articles/a623122a78d249</link><guid isPermaLink="true">https://zenn.dev/hirayuki/articles/a623122a78d249</guid><pubDate>Wed, 06 Nov 2024 16:20:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_OQOg0ZB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%259C%2580%25E9%2580%259F%25E3%2583%25BB%25E6%259C%2580%25E8%25BB%25BD%25E9%2587%258F%25E3%2583%25BB%25E6%259C%2580%25E4%25BD%258E%25E3%2582%25B3%25E3%2582%25B9%25E3%2583%2588%25EF%25BC%259F%25E3%2581%25A7MLflow%25E3%2582%2592%25E5%25A7%258B%25E3%2582%2581%25E3%2581%259F%25E3%2581%2584%25E6%2599%2582%25E3%2581%25AEtips%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hirayuki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzEzYmU5ZDM0OTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hirayuki</dc:creator></item><item><title><![CDATA[[ローカルLLM] Gemma 2 Baku 2B Instructに対してプロンプトエンジニアリングでどこまで制御できるか試した]]></title><description><![CDATA[
+ はじめに
+
+前回、「Gemma 2 2B」を元に日本語の継続事前学習と指示学習を行ったモデル「Gemma 2 Baku 2B Instruct」の検討を行いました。今回はその続きです。
+このモデルは26億パラメータと小規模なモデルにも関わらず、高い回答性能を持つことが確認できました。
+そこで、今回はプロンプトエンジニアリングのみでどこまで挙動を制御できるのか試しました。
+
+https://zenn.dev/topo/articles/0f4d03ba512e2b
+
+ この記事を読んでほしい人
+
+軽量かつ高性能なLLMを探している人
+「Gemma 2 Baku 2B Instruct」...]]></description><link>https://zenn.dev/topo/articles/fb8cfc48084899</link><guid isPermaLink="true">https://zenn.dev/topo/articles/fb8cfc48084899</guid><pubDate>Wed, 06 Nov 2024 14:03:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7rUa0n4---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255B%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25AB%25E3%2583%25ABLLM%255D%2520Gemma%25202%2520Baku%25202B%2520Instruct%25E3%2581%25AB%25E5%25AF%25BE%25E3%2581%2597%25E3%2581%25A6%25E3%2583%2597%25E3%2583%25AD%25E3%2583%25B3%25E3%2583%2597%25E3%2583%2588%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%25E3%2583%25AA%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%25A7%25E3%2581%25A9%25E3%2581%2593%25E3%2581%25BE%25E3%2581%25A7%25E5%2588%25B6...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ToPo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc3OWM3OWMxYjguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ToPo</dc:creator></item><item><title><![CDATA[Amazon Connectでオペレーション時間の判定にGoogle Calendar (日本の祝日と新規作成）を利用する]]></title><description><![CDATA[
+ 概要
+
+Amazon Connectで 祝日・休日にGoogle Calendar を利用する方法をまとめます。
+
+
+ Amazon Connect
+
+ フローを作成する
+
+ ブロック「AWS Lambda 関数を呼び出す」
+
+Lambda関数を呼び出す
+
+
+ フロック「コンタクト属性を確認する」
+
+祝日・休日の判定結果を受け取る
+名前空間：フロー　キー：statusとする
+
+
+ 次のブロックと接続する
+
+「コンタクト属性を確認する」ブロックを次のブロックと接続する
+
+
+ Google Calendar
+
+ 日本の祝日カレンダー
+
+Amazon Connectで利用するGoogle ...]]></description><link>https://zenn.dev/marchan/articles/91dee3708e44de</link><guid isPermaLink="true">https://zenn.dev/marchan/articles/91dee3708e44de</guid><pubDate>Wed, 06 Nov 2024 07:47:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--YsXFnbx3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Amazon%2520Connect%25E3%2581%25A7%25E3%2582%25AA%25E3%2583%259A%25E3%2583%25AC%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E6%2599%2582%25E9%2596%2593%25E3%2581%25AE%25E5%2588%25A4%25E5%25AE%259A%25E3%2581%25ABGoogle%2520Calendar%2520%2528%25E6%2597%25A5%25E6%259C%25AC%25E3%2581%25AE%25E7%25A5%259D%25E6%2597%25A5%25E3%2581%25A8%25E6%2596%25B0%25E8%25A6%258F%25E4%25BD%259C%25E6%2588%2590%25EF%25BC%2589%25E3%2582%2592...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:marchan%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0Y0dycVlRR3dIVExxMmszMFU5RDBUX2Nma3pqUkstTDJTcTdETmFCNDhkPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>marchan</dc:creator></item><item><title><![CDATA[error: externally-managed-environment]]></title><description><![CDATA[
+ error: externally-managed-environment
+WSLにて、pip install ....を行った際のエラーと対処方法
+
+ エラー内容
+error: externally-managed-environment
+
+× This environment is externally managed
+╰─&gt; To install Python packages system-wide, try apt install
+    python3-xyz, where xyz is the package you are trying to
+    insta...]]></description><link>https://zenn.dev/stsh/articles/7495aba6443890</link><guid isPermaLink="true">https://zenn.dev/stsh/articles/7495aba6443890</guid><pubDate>Wed, 06 Nov 2024 07:21:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lr1prS0V--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:error%253A%2520externally-managed-environment%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:stsh%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTE1ZU0JZbTNid01XOW53SlJHdFI0TUNaZGNGVkQ3U0dZOUlubjVEeHBhR01DVWdBPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>stsh</dc:creator></item><item><title><![CDATA[PythonでFizzBuzz問題を解いてみよう]]></title><description><![CDATA[
+ はじめに
+こんにちは！今回はプログラミングの基本中の基本である「FizzBuzz問題」をPythonで解いてみたいと思います。
+FizzBuzz問題は、簡単ながらも様々な解法があるため、初心者から上級者まで楽しめる問題です。
+
+ FizzBuzz問題とは？
+1から100までの数字を順に表示するプログラムを作成します。ただし、次の条件を満たす場合には数字の代わりに特定の単語を表示します：
+
+数字が3で割り切れる場合は「Fizz」
+数字が5で割り切れる場合は「Buzz」
+数字が3でも5でも割り切れる場合は「FizzBuzz」
+
+では、さっそく基本的な解答例から見ていきましょう。
+
+ 基本...]]></description><link>https://zenn.dev/mstng/articles/3e436ef22d597e</link><guid isPermaLink="true">https://zenn.dev/mstng/articles/3e436ef22d597e</guid><pubDate>Wed, 06 Nov 2024 06:33:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ILXghNzN--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A7FizzBuzz%25E5%2595%258F%25E9%25A1%258C%25E3%2582%2592%25E8%25A7%25A3%25E3%2581%2584%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%2588%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mstng%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSlVrUWI4S2o0cnl1WHhNZ1FBeXJleTFmOW5JTW1iRmN6UVRzaC1YYk1udWQtNEotYkF2Zz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mstng</dc:creator></item><item><title><![CDATA[YOLOv11xと日本古典籍くずし字データセットを用いた文字の検出モデルの構築]]></title><description><![CDATA[
+ 概要
+YOLOv11xと日本古典籍くずし字データセットを用いた文字の検出モデルの構築を行う機会がありましたので、備忘録です。
+http://codh.rois.ac.jp/char-shape/
+
+ 参考
+過去に、YOLOv5を用いて同様のことを行いました。以下のspacesで動作デモや学習済みモデルをご確認いただけます。
+https://huggingface.co/spaces/nakamura196/yolov5-char
+以下は、「国宝　金沢文庫文書データベース」の公開画像に対する適用例です。
+
+YOLOv11を用いることで、文字検出の精度向上を狙うことが目的です。
+
+ デー...]]></description><link>https://zenn.dev/nakamura196/articles/34852511a30e82</link><guid isPermaLink="true">https://zenn.dev/nakamura196/articles/34852511a30e82</guid><pubDate>Wed, 06 Nov 2024 05:06:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--TYAvW2MV--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:YOLOv11x%25E3%2581%25A8%25E6%2597%25A5%25E6%259C%25AC%25E5%258F%25A4%25E5%2585%25B8%25E7%25B1%258D%25E3%2581%258F%25E3%2581%259A%25E3%2581%2597%25E5%25AD%2597%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%25BB%25E3%2583%2583%25E3%2583%2588%25E3%2582%2592%25E7%2594%25A8%25E3%2581%2584%25E3%2581%259F%25E6%2596%2587%25E5%25AD%2597%25E3%2581%25AE%25E6%25A4%259C%25E5%2587%25BA%25E3%2583%25A2%25E3%2583%2587%25E3%2583%25AB%25E3%2581%25AE%25E6%25A7%258B%25E7%25AF%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nakamura196%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pkd3BpX1gzTWIzV3VqTnVnV2tPTlJlU3VsNFNTN1BNMWlPQm9LRm5JPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nakamura196</dc:creator></item><item><title><![CDATA[YOLOv11のクラス分類を試す]]></title><description><![CDATA[
+ 概要
+YOLOv11を用いたクラス分類の学習を行う機会がありましたので、備忘録です。
+
+ データセット
+以下の「くずし字データセット」を対象にします。
+http://codh.rois.ac.jp/char-shape/book/
+
+ データセットの作成
+yoloの形式に合致するようにデータセットを整形します。まず、書名ごとに分かれているデータをフラットにマージします。
+#| export
+class Classification:
+
+    def create_dataset(self, input_file_path, output_dir):
+        # "../da...]]></description><link>https://zenn.dev/nakamura196/articles/8981bc09d49cf4</link><guid isPermaLink="true">https://zenn.dev/nakamura196/articles/8981bc09d49cf4</guid><pubDate>Wed, 06 Nov 2024 03:25:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--PTbKMdJh--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:YOLOv11%25E3%2581%25AE%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25B9%25E5%2588%2586%25E9%25A1%259E%25E3%2582%2592%25E8%25A9%25A6%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nakamura196%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pkd3BpX1gzTWIzV3VqTnVnV2tPTlJlU3VsNFNTN1BNMWlPQm9LRm5JPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nakamura196</dc:creator></item><item><title><![CDATA[GitLabとPythonで実現するハンドブック陳腐化防止！自動棚卸しスクリプト作ってみた]]></title><description><![CDATA[
+ はじめに
+社内ではhugoとGitLab Pagesを使ってGitLab Handbookに倣って社内ドキュメント（ハンドブック）を運用しています。
+社内のハンドブックやリファレンスガイドなどを運用していると、時間とともに内容が古くなり気づけば「これって今も使えるの？」といった問題が発生することも多いです。
+そのため、ドキュメント管理において情報の陳腐化は避けられない課題です。
+本記事では、GitLab上のMarkdownファイルを対象に、3ヶ月以上更新されていないものを自動で洗い出し、「棚卸し対象」としてリストアップするPythonスクリプトを紹介します。
+これにより、定期的な確認...]]></description><link>https://zenn.dev/secondselection/articles/gitlab_inventory</link><guid isPermaLink="true">https://zenn.dev/secondselection/articles/gitlab_inventory</guid><pubDate>Tue, 05 Nov 2024 21:00:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8LLtcdzC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:GitLab%25E3%2581%25A8Python%25E3%2581%25A7%25E5%25AE%259F%25E7%258F%25BE%25E3%2581%2599%25E3%2582%258B%25E3%2583%258F%25E3%2583%25B3%25E3%2583%2589%25E3%2583%2596%25E3%2583%2583%25E3%2582%25AF%25E9%2599%25B3%25E8%2585%2590%25E5%258C%2596%25E9%2598%25B2%25E6%25AD%25A2%25EF%25BC%2581%25E8%2587%25AA%25E5%258B%2595%25E6%25A3%259A%25E5%258D%25B8%25E3%2581%2597%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2583%2588%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:u_hijiri%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzljNTA3MDMwNTguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25BB%25E3%2582%25AB%25E3%2583%25B3%25E3%2583%2589%25E3%2582%25BB%25E3%2583%25AC%25E3%2582%25AF%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0ZHJ6RHVTRnZUS2pDQ2U2aGxtdC1TbnprX1dIYzhjV1JJWlhxQk1lMUNCalE9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>u_hijiri</dc:creator></item><item><title><![CDATA[いろいろな言語に用意されたリソース解放の仕組み]]></title><description><![CDATA[
+ C++
+C++の前身であるC言語の時代から、多くのプログラマがポインタのメモリ解放漏れによるメモリリークに悩まされてきました。しかし、C++でクラスのコンストラクタ／デストラクタが使えるようになり RAII (Resource Acquisition Is Initialization) の考え方が導入されたことで、ようやくプログラマはリソース解放の責任から逃れることができるようになりました。
+もちろん、お作法を守らなければすぐリークしますので要注意なことに変わりはありませんが。
+RAII が取り入れられた代表的なクラスとして、std::unique_ptr std::shared_...]]></description><link>https://zenn.dev/bugph0bia/articles/7de376c407617a</link><guid isPermaLink="true">https://zenn.dev/bugph0bia/articles/7de376c407617a</guid><pubDate>Tue, 05 Nov 2024 13:58:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--G5fKae87--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%2584%25E3%2582%258D%25E3%2581%2584%25E3%2582%258D%25E3%2581%25AA%25E8%25A8%2580%25E8%25AA%259E%25E3%2581%25AB%25E7%2594%25A8%25E6%2584%258F%25E3%2581%2595%25E3%2582%258C%25E3%2581%259F%25E3%2583%25AA%25E3%2582%25BD%25E3%2583%25BC%25E3%2582%25B9%25E8%25A7%25A3%25E6%2594%25BE%25E3%2581%25AE%25E4%25BB%2595%25E7%25B5%2584%25E3%2581%25BF%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:bugph0bia%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MyMDFmZWU2MDguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>bugph0bia</dc:creator></item><item><title><![CDATA[DMARCのレポート解析を作ることができました]]></title><description><![CDATA[私は、DMARCのレポート解析で、dmarc-visualizerを使っていました。
+https://qiita.com/kazuhidet/items/9791e6080ceeb40e8877
+ある日、急に使えなくなってしまったのです。
+調べるとGrafanaのAngularのプラグインが非推奨になったこと
+円グラフのプラグインの機能が、標準機能に入った
+などなどいろいろと動かないと思われる要因が見つかりましたので、Githubのリポジトリをfolkして、修正しようとしました。
+でも、あまりに大変なので、自分で作ろうと思いました。
+ようやく形になりまいたので、記事に書くことができました...]]></description><link>https://zenn.dev/masaru21/articles/de343a76da6199</link><guid isPermaLink="true">https://zenn.dev/masaru21/articles/de343a76da6199</guid><pubDate>Tue, 05 Nov 2024 13:50:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--f8Sbxtn3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:DMARC%25E3%2581%25AE%25E3%2583%25AC%25E3%2583%259D%25E3%2583%25BC%25E3%2583%2588%25E8%25A7%25A3%25E6%259E%2590%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%25E3%2581%2593%25E3%2581%25A8%25E3%2581%258C%25E3%2581%25A7%25E3%2581%258D%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:lonely_creator_m%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2hzOWNVVzBjY3NDOXZPcXFwd0QtZktPblJpbmM4YnFYWG9LVDhVQmxvPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>lonely_creator_m</dc:creator></item><item><title><![CDATA[Omeka Sの特定のvocabularyのプロパティ一覧を取得する]]></title><description><![CDATA[
+ 概要
+Omeka Sの特定のvocabularyのプロパティ一覧を取得する方法です。
+
+ 方法
+以下を対象にします。
+https://uta.u-tokyo.ac.jp/uta/api/properties?vocabulary_id=5
+次のプログラムにより、プロパティ一覧をMS Excelに書き込みます。
+import pandas as pd
+import requests
+
+url = "https://uta.u-tokyo.ac.jp/uta/api/properties?vocabulary_id=5"
+
+page = 1
+
+data_list = []
+
+while ...]]></description><link>https://zenn.dev/nakamura196/articles/fee906ff3eaa04</link><guid isPermaLink="true">https://zenn.dev/nakamura196/articles/fee906ff3eaa04</guid><pubDate>Tue, 05 Nov 2024 11:39:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--uNKuVDKz--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Omeka%2520S%25E3%2581%25AE%25E7%2589%25B9%25E5%25AE%259A%25E3%2581%25AEvocabulary%25E3%2581%25AE%25E3%2583%2597%25E3%2583%25AD%25E3%2583%2591%25E3%2583%2586%25E3%2582%25A3%25E4%25B8%2580%25E8%25A6%25A7%25E3%2582%2592%25E5%258F%2596%25E5%25BE%2597%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nakamura196%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pkd3BpX1gzTWIzV3VqTnVnV2tPTlJlU3VsNFNTN1BNMWlPQm9LRm5JPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nakamura196</dc:creator></item><item><title><![CDATA[ディスプレイ切替で毎回ウィンドウが大暴れ!? そのイライラを一発解消する方法！]]></title><description><![CDATA[
+
+ はじめに
+現在の職場では、私は軽量なモバイルPCを持ち歩き、打ち合わせなどに参加しています。モバイルPCは持ち運びに便利な反面、ディスプレイが小さく、複数のウィンドウを開くと画面がすぐにいっぱいになり、ウィンドウが重なることも多々あります。
+会社ではこの点を配慮し、デスクには大きな外部ディスプレイを設置しています。そのため、デスクで作業するときには、2画面で作業ができ、効率も数倍向上するとの話を書籍で目にしたこともあり、とても快適に仕事を進められています。
+一方で、打ち合わせなどでモバイルPCを持ち歩く際には1画面に戻るため、ウィンドウの位置やサイズが毎回変わってしまいます。私は日...]]></description><link>https://zenn.dev/ogiki/articles/56a14826d81bea</link><guid isPermaLink="true">https://zenn.dev/ogiki/articles/56a14826d81bea</guid><pubDate>Tue, 05 Nov 2024 11:26:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--81eKntbS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2587%25E3%2582%25A3%25E3%2582%25B9%25E3%2583%2597%25E3%2583%25AC%25E3%2582%25A4%25E5%2588%2587%25E6%259B%25BF%25E3%2581%25A7%25E6%25AF%258E%25E5%259B%259E%25E3%2582%25A6%25E3%2582%25A3%25E3%2583%25B3%25E3%2583%2589%25E3%2582%25A6%25E3%2581%258C%25E5%25A4%25A7%25E6%259A%25B4%25E3%2582%258C%2521%253F%2520%25E3%2581%259D%25E3%2581%25AE%25E3%2582%25A4%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%25A9%25E3%2582%2592%25E4%25B8%2580%25E7%2599%25BA%25E8%25A7%25A3%25E6%25B6%2588%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%259C%25A8%25E6%259D%2591%25E3%2581%259F%25E3%2582%258D%25E3%2581%2586%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZkZjNiYWMwZmQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>木村たろう</dc:creator></item><item><title><![CDATA[Pythonで動画編集(Auto-Editor)]]></title><description><![CDATA[
+ なぜPythonで動画編集を行うのか
+
+多くの方は、動画編集にPythonを使用するという発想がないかもしれません。しかし、Pythonは強力なライブラリやツールが豊富で、動画編集の自動化や効率化に非常に適しています。特に以下の点でメリットがあります。
+
+ 1. 自動化と効率化
+
+
+
+繰り返し作業の自動化: 無音部分のカットや特定のエフェクトの適用など、手間のかかる作業をスクリプトで自動化できます。
+
+大量の動画処理: 複数の動画ファイルに対して同じ編集を一括で行うことが可能です。
+
+
+ 2. 柔軟性と拡張性
+
+
+
+カスタマイズ性: Pythonのコードを編集することで、自分のニーズ...]]></description><link>https://zenn.dev/dsgarage/articles/8001425d530a94</link><guid isPermaLink="true">https://zenn.dev/dsgarage/articles/8001425d530a94</guid><pubDate>Tue, 05 Nov 2024 10:34:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wicrcjI7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A7%25E5%258B%2595%25E7%2594%25BB%25E7%25B7%25A8%25E9%259B%2586%2528Auto-Editor%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%259D%259F%25E7%2594%25B0%25E5%25A4%25A7%25E4%25BB%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2l2YUhfSzlrd3Y3dHF2cnRJbjlCMmtDYXBqUWYtNHd5WjBzNGVIM2c9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>束田大介</dc:creator></item><item><title><![CDATA[Pythonでjson形式のログを出力する]]></title><description><![CDATA[
+ 1. loggingモジュール と jsonモジュールを使う
+
+ ソースコード
+import logging
+import json
+
+class JsonFormatter(logging.Formatter):
+    def format(self, record):
+        # JSONに含めたいフィールドを辞書として定義
+        log_record = {
+            "timestamp": self.formatTime(record),
+            "logger": record.name,
+            "lev...]]></description><link>https://zenn.dev/fkzwsoftwaredev/articles/753373f302cecd</link><guid isPermaLink="true">https://zenn.dev/fkzwsoftwaredev/articles/753373f302cecd</guid><pubDate>Tue, 05 Nov 2024 07:08:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--X27Ha9QZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A7json%25E5%25BD%25A2%25E5%25BC%258F%25E3%2581%25AE%25E3%2583%25AD%25E3%2582%25B0%25E3%2582%2592%25E5%2587%25BA%25E5%258A%259B%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%25B7%25B1%25E6%25BE%25A4%25E3%2582%25BD%25E3%2583%2595%25E3%2583%2588%25E3%2582%25A6%25E3%2582%25A7%25E3%2582%25A2%25E9%2596%258B%25E7%2599%25BA%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0ZHQyY0NZb0txM29xUzY4RDcyOThGeFhGYjFWSGIyTkNXWVdETT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>深澤ソフトウェア開発ブログ</dc:creator></item><item><title><![CDATA[チームのRuff設定を見直してみた]]></title><description><![CDATA[
+ はじめに・導入経緯
+Specteeでエンジニアをしている和山と申します！
+私の所属するチームでは、Pythonの静的解析及びフォーマットにRuffを採用しています。
+https://docs.astral.sh/ruff/
+チームへ導入を始めて約1年経つため、メンテナンス含めて設定の見直しを行いました！
+
+ 本記事の結論
+本記事の最終的な設定です。
+
+pyproject.toml
+[tool.ruff]
+# 指定されたPythonバージョンで構文チェックを行う(主にpyupgrade)
+target-version = "py312" # Python &gt;=3.12 or ==...]]></description><link>https://zenn.dev/spectee/articles/spectee-ruff-rule</link><guid isPermaLink="true">https://zenn.dev/spectee/articles/spectee-ruff-rule</guid><pubDate>Tue, 05 Nov 2024 05:13:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---o2atldV--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2581%25E3%2583%25BC%25E3%2583%25A0%25E3%2581%25AERuff%25E8%25A8%25AD%25E5%25AE%259A%25E3%2582%2592%25E8%25A6%258B%25E7%259B%25B4%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:N.Wayama%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzkwYzYyY2ZlNDQuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Spectee%2520Developers%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhkY2ZhN2VlNzguanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>N.Wayama</dc:creator></item><item><title><![CDATA[ヘルシンキ大学のGeoPandas課題を日本版で解いてみた。【ショッピングセンター編】]]></title><description><![CDATA[
+
+ 概要
+ヘルシンキ大学はGeoPandasに関する講義を無料公開しています。サンプルコードや解説、講義動画（英語）も用意され、内容は非常に充実しています。GeoPandasを学ぶ絶好の機会ですので、ぜひ活用してみてください。
+https://autogis-site.readthedocs.io/en/2023/lessons/lesson-3/exercise-3.html
+今回は、レッスン3の「ショッピングセンターのジオコード化」課題を日本のデータで解いていきます。なお、日本のデータ形式に合わせるため、一部内容を改変しています。
+
+ 課題概要
+ショッピングセンターから徒歩圏内に何...]]></description><link>https://zenn.dev/yamadamadamada/articles/285fe45c8cceaa</link><guid isPermaLink="true">https://zenn.dev/yamadamadamada/articles/285fe45c8cceaa</guid><pubDate>Tue, 05 Nov 2024 04:02:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_u_Jo1Qt--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2598%25E3%2583%25AB%25E3%2582%25B7%25E3%2583%25B3%25E3%2582%25AD%25E5%25A4%25A7%25E5%25AD%25A6%25E3%2581%25AEGeoPandas%25E8%25AA%25B2%25E9%25A1%258C%25E3%2582%2592%25E6%2597%25A5%25E6%259C%25AC%25E7%2589%2588%25E3%2581%25A7%25E8%25A7%25A3%25E3%2581%2584%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25E3%2580%2582%25E3%2580%2590%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%2583%25E3%2583%2594%25E3%2583%25B3%25E3%2582%25B0%25E3%2582%25BB%25E3%2583%25B3%25E3%2582%25BF%25E3%2583%25BC%25E7%25B7%25A8%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258B%25E3%2581%25AE%25E3%2581%258B%25E3%2581%25AE%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdmZGNmMjJiZDAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>かのかの</dc:creator></item><item><title><![CDATA[プルリク作成や更新時にMarkdown記事のファイル名をLLMで自動リネームするGitHub Actionsを作った]]></title><description><![CDATA[Azure で ChatGPT / LLM システムの構築を勉強しようと考えています。せっかくなので、その過程を Zenn に記録しようと思いました。そこで、VS Code の拡張機能「Zenn Preview for GitHub.dev」を導入してみました。
+
+この拡張機能では、ファイル名（slug）がランダムな文字列になってしまいます。そのため、VS Code のエクスプローラーでは記事が作成順にソートされません。そこで、タイムスタンプでソートするようにしました。
+
+ランダム文字列のslugだと記事が作成順にソートされない
+
+タイムスタンプでソートする
+Zenn ではデフォルトブラ...]]></description><link>https://zenn.dev/yutorii/articles/20241028_pr-rename-articles-llm</link><guid isPermaLink="true">https://zenn.dev/yutorii/articles/20241028_pr-rename-articles-llm</guid><pubDate>Tue, 05 Nov 2024 01:56:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--N7igZwaz--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2597%25E3%2583%25AB%25E3%2583%25AA%25E3%2582%25AF%25E4%25BD%259C%25E6%2588%2590%25E3%2582%2584%25E6%259B%25B4%25E6%2596%25B0%25E6%2599%2582%25E3%2581%25ABMarkdown%25E8%25A8%2598%25E4%25BA%258B%25E3%2581%25AE%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E5%2590%258D%25E3%2582%2592LLM%25E3%2581%25A7%25E8%2587%25AA%25E5%258B%2595%25E3%2583%25AA%25E3%2583%258D%25E3%2583%25BC%25E3%2583%25A0%25E3%2581%2599%25E3%2582%258BGitHub%2520Actions%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yuji%2520%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQyMjg2YjJlYTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yuji⛩️</dc:creator></item></channel></rss>
