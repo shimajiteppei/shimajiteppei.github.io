@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「TypeScript」のフィード]]></title><description><![CDATA[Zennのトピック「TypeScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/typescript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/f13e758fdb.png</url><title>Zennの「TypeScript」のフィード</title><link>https://zenn.dev/topics/typescript</link></image><generator>zenn.dev</generator><lastBuildDate>Sun, 10 Nov 2024 08:28:05 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/typescript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[React コンポーネントの props の型を呼び出し側で指定する]]></title><description><![CDATA[
+ 🌼 はじめに
+たまにコンポーネントの Props の型を呼び出し側で指定したいときがあります。
+例えば、以下のようにカスタムで作った Dropdown のコンポーネントがあるとしましょう。（スタイリングは省略してます）
+type DropdownProps = {
+  options: { label: string; value: string }[];
+  onSelect?: (value: string) =&gt; void;
+};
+
+export const Dropdown = ({ options, onSelect }: DropdownProps) =&gt; {...]]></description><link>https://zenn.dev/luvmini511/articles/75a92ad84724b0</link><guid isPermaLink="true">https://zenn.dev/luvmini511/articles/75a92ad84724b0</guid><pubDate>Sun, 10 Nov 2024 05:24:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--W3iDusax--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%2520%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%259D%25E3%2583%25BC%25E3%2583%258D%25E3%2583%25B3%25E3%2583%2588%25E3%2581%25AE%2520props%2520%25E3%2581%25AE%25E5%259E%258B%25E3%2582%2592%25E5%2591%25BC%25E3%2581%25B3%25E5%2587%25BA%25E3%2581%2597%25E5%2581%25B4%25E3%2581%25A7%25E6%258C%2587%25E5%25AE%259A%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25BF%25E3%2582%2593%25E3%2581%25A1%25E3%2582%2583%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA3YTQwNzFlZWIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>みんちゃん</dc:creator></item><item><title><![CDATA[TypeScriptにおける日付フォーマットの個人的ベストプラクティス]]></title><description><![CDATA[
+ はじめに
+日付フォーマットって、こんな悩みありませんか？
+
+
+MM と mm のどちらが月でどちらが分だっけ...
+ライブラリ導入すべき？でも必要な機能少ないのに...
+
+私はTypeScriptの場合、ライブラリを使わず、日付フォーマット用の独自メソッドを作っています。
+JSDocを活用することで、↓のようにVSCodeのインテリセンスでフォーマットの一覧と使い方を表示できます
+
+こうすることで、フォーマット指定のミスを防ぎつつ、チーム内での表示形式も統一できます。
+
+ 実装
+さきほどのgifを実現している実装は次のようになります。
+
+dateUtil.ts
+type Suppor...]]></description><link>https://zenn.dev/voiceapplab/articles/10dfe2c892614f</link><guid isPermaLink="true">https://zenn.dev/voiceapplab/articles/10dfe2c892614f</guid><pubDate>Sun, 10 Nov 2024 04:22:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4U6x_iGs--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%25E3%2581%25AB%25E3%2581%258A%25E3%2581%2591%25E3%2582%258B%25E6%2597%25A5%25E4%25BB%2598%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25BC%25E3%2583%259E%25E3%2583%2583%25E3%2583%2588%25E3%2581%25AE%25E5%2580%258B%25E4%25BA%25BA%25E7%259A%2584%25E3%2583%2599%25E3%2582%25B9%25E3%2583%2588%25E3%2583%2597%25E3%2583%25A9%25E3%2582%25AF%25E3%2583%2586%25E3%2582%25A3%25E3%2582%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:arahabica%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I2N2NiOWU4MDYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%259C%25E3%2582%25A4%25E3%2582%25B9%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%25E3%2583%25A9%25E3%2583%259C%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2d1U0llREJ2ODZKdUphVEpwMlFQMlNSU0I4dm53b0E3U0hTQ2h1UXc9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>arahabica</dc:creator></item><item><title><![CDATA[靴をなくしたので、アプリを作ることにした vol3 それって、作る必要ある？]]></title><description><![CDATA[
+ 前回の記事
+前回の記事はこちら。
+https://zenn.dev/tattu/articles/lost-and-found-2
+
+ それ、LINEでできるじゃん
+嫁が、旅行から帰ってきて、アプリを作ることを伝えた。「それ良いけど、LINEのリマインくんでできるよ」と言われた。
+...
+...
+...
+まじか。
+確かに、旅行中に物をなくさないことに特化したアプリはないかインターネッツで探してみたが、もっと汎用的なアプリでできることは考えていなかった。嫁氏、さすがである。早速使ってみたが、僕が求めていることはできなかったし、UX も僕が求めているものとは程遠い。一安心(？)である。
+...]]></description><link>https://zenn.dev/tattu/articles/lost-and-found-3</link><guid isPermaLink="true">https://zenn.dev/tattu/articles/lost-and-found-3</guid><pubDate>Sun, 10 Nov 2024 02:11:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--syeqj4ti--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E9%259D%25B4%25E3%2582%2592%25E3%2581%25AA%25E3%2581%258F%25E3%2581%2597%25E3%2581%259F%25E3%2581%25AE%25E3%2581%25A7%25E3%2580%2581%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%25E3%2581%2593%25E3%2581%25A8%25E3%2581%25AB%25E3%2581%2597%25E3%2581%259F%2520vol3%2520%25E3%2581%259D%25E3%2582%258C%25E3%2581%25A3%25E3%2581%25A6%25E3%2580%2581%25E4%25BD%259C%25E3%2582%258B%25E5%25BF%2585%25E8%25A6%2581%25E3%2581%2582%25E3%2582%258B%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:katayama8000%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FmZmRhNTA5ZmUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>katayama8000</dc:creator></item><item><title><![CDATA[モダンなドラッグ＆ドロップライブラリのdnd-kitを試してみた]]></title><description><![CDATA[
+ dnd-kit とは?
+https://dndkit.com/
+
+Reactのための、軽量、高性能、アクセス可能、拡張可能なドラッグ＆ドロップツールキットです
+
+
+
+機能豊富：衝突検出、ドラッグハンドル、自動スクロールなどカスタマイズ可能。
+
+React対応：useDraggable や useDroppable フックが提供され、再構築不要。
+
+多様な用途に対応：リストやグリッド、複数コンテナ、2Dゲームなどに対応。
+
+依存なし＆モジュール式：10KB未満で、外部依存がない軽量設計。
+
+多入力対応：ポインタ、マウス、タッチ、キーボード入力に対応。
+
+カスタマイズ性：アニメーションや...]]></description><link>https://zenn.dev/slowhand/articles/db961d8c60cf1a</link><guid isPermaLink="true">https://zenn.dev/slowhand/articles/db961d8c60cf1a</guid><pubDate>Sat, 09 Nov 2024 21:25:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--OUiFKEQn--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%25A2%25E3%2583%2580%25E3%2583%25B3%25E3%2581%25AA%25E3%2583%2589%25E3%2583%25A9%25E3%2583%2583%25E3%2582%25B0%25EF%25BC%2586%25E3%2583%2589%25E3%2583%25AD%25E3%2583%2583%25E3%2583%2597%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%25E3%2581%25AEdnd-kit%25E3%2582%2592%25E8%25A9%25A6%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:slowhand%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzEwY2YzMGUzMDAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>slowhand</dc:creator></item><item><title><![CDATA[Object.assignに型をつける]]></title><description><![CDATA[objectを結合するjavascriptのメソッドObject.assignの型はtypescriptでどのように定義されているでしょうか？
+最新のバージョン5.6.3で使ってみます。
+const one = Object.assign({ a: 1 });
+// any
+
+const two = Object.assign({ a: 1 }, { b: 2 });
+// { a: number, b: number }
+
+const three = Object.assign({ a: 1 }, { b: 2 }, { c: 3 });
+// { a: number, b: numb...]]></description><link>https://zenn.dev/yuya333/articles/8844186e236faa</link><guid isPermaLink="true">https://zenn.dev/yuya333/articles/8844186e236faa</guid><pubDate>Sat, 09 Nov 2024 09:42:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--MG3ugg9e--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Object.assign%25E3%2581%25AB%25E5%259E%258B%25E3%2582%2592%25E3%2581%25A4%25E3%2581%2591%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yuya333%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RiZGM1YzI2MjkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yuya333</dc:creator></item><item><title><![CDATA[Console.logでSVGアイコンを表示する小ネタ]]></title><description><![CDATA[
+ Console.logでSVGアイコンを表示する小ネタ
+Web版のInstagramアプリを開発者ツールでふと覗いたら下の画像のような文章がconsoleに表示されていた。
+
+console.logについて調べたら'%c'を付与することでCSSのスタイルがあてられることがわかった。もしかしたらbackground-imageで画像とかが表示できるのではと思い色々やった結果できた
+
+ コード
+paddingで表示領域を広げ、表示領域にいっぱいにアイコンを表示するようにしています。
+アイコンは変数として読み込む方法しか動作しませんでした。(自分の実行環境のせいかも？)
+useEffect...]]></description><link>https://zenn.dev/mitate_gengaku/articles/console-log-with-svg</link><guid isPermaLink="true">https://zenn.dev/mitate_gengaku/articles/console-log-with-svg</guid><pubDate>Fri, 08 Nov 2024 10:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1V4ukWz8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Console.log%25E3%2581%25A7SVG%25E3%2582%25A2%25E3%2582%25A4%25E3%2582%25B3%25E3%2583%25B3%25E3%2582%2592%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2599%25E3%2582%258B%25E5%25B0%258F%25E3%2583%258D%25E3%2582%25BF%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25BE%25A1%25E6%25A5%25AF%25E7%258E%2584%25E5%25B6%25BD%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0tQOVRYWHQ5Qm1BLVplcURoLWdxUHl4RVFjMmNsRkhSNk95XzVVSVVhPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>御楯玄嶽</dc:creator></item><item><title><![CDATA[PrismaでTypeScriptの型を自在に操る！Prisma.validatorの活用]]></title><description><![CDATA[
+ はじめに
+Prismaで取得してきたオブジェクトがTypeScriptの型でバリバリコード補完が効いて「すごい！」と思った人は少なくないはずです。
+ただし、取得してきたそのオブジェクトの型を他で使おうとしたときに「ん？これどうやって定義したら良いんだ？」と思った人も少なくないはず...。
+https://youtu.be/gQ77Q5_-o_4?si=ni2UrDProw-Y0naI
+ということでそんな悩みがある人のためにPrisma.validatorを紹介したいと思います。
+
+ 前提
+まず、以下のようなテーブル構成だったとします。
+
+
+UserはProfileと1:1の関係
+Us...]]></description><link>https://zenn.dev/kenfdev/articles/b823ff35d611e9</link><guid isPermaLink="true">https://zenn.dev/kenfdev/articles/b823ff35d611e9</guid><pubDate>Fri, 08 Nov 2024 06:08:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fOico3Zy--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Prisma%25E3%2581%25A7TypeScript%25E3%2581%25AE%25E5%259E%258B%25E3%2582%2592%25E8%2587%25AA%25E5%259C%25A8%25E3%2581%25AB%25E6%2593%258D%25E3%2582%258B%25EF%25BC%2581Prisma.validator%25E3%2581%25AE%25E6%25B4%25BB%25E7%2594%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kenfdev%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lnVUZOakM0OHNyRHBrdW03SXRrSi11UUg2ZFpvVUNkVUVfeHZsLVE9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kenfdev</dc:creator></item><item><title><![CDATA[Vue 3 + Composition API + useAxiosで動的なAPIリクエストを実現する方法]]></title><description><![CDATA[この記事では、Vue 3のComposition APIと@vueuse/integrationsのuseAxiosを使用して、動的なURLやパラメーターでAPIリクエストを行う方法を紹介します。特にexecuteメソッドを使った柔軟なリクエストの実装方法に注目します。
+
+
+ 準備
+まず、VueUseからuseAxiosをインポートします。これにより、AxiosをVueのComposition APIと統合して、簡単にHTTPリクエストを管理できるようになります。
+# VueUseのインストール（まだインストールしていない場合）
+npm install @vueuse/core
+npm ...]]></description><link>https://zenn.dev/tamon_kondo/articles/0a9903ae333cac</link><guid isPermaLink="true">https://zenn.dev/tamon_kondo/articles/0a9903ae333cac</guid><pubDate>Thu, 07 Nov 2024 23:46:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--SnwNP_uD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Vue%25203%2520%252B%2520Composition%2520API%2520%252B%2520useAxios%25E3%2581%25A7%25E5%258B%2595%25E7%259A%2584%25E3%2581%25AAAPI%25E3%2583%25AA%25E3%2582%25AF%25E3%2582%25A8%25E3%2582%25B9%25E3%2583%2588%25E3%2582%2592%25E5%25AE%259F%25E7%258F%25BE%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:t.k%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2k1WWoxNXZlTDl0VE9pd0p0VHVZSXUyNENJMkJuOG1MYkhNcjFvN2c9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>t.k</dc:creator></item><item><title><![CDATA[AOAI GPT-4o Realtime API で Function Calling を試してみる]]></title><description><![CDATA[
+ 概要
+Azure OpenAI GPT-4o Realtime API で Function Calling (Tools) が使えるようなので SDK 内の JavaScript サンプル アプリに機能追加する形で実装して、その動作を確認してみます。
+
+ Azure OpenAI の GPT-4o Realtime API おさらい
+2024 年 10 月 1 日に Azure OpenAI で GPT-4o Realtime AP モデルがデプロイ可能となりました。
+OpenAI のモデル自体の情報については、npaka さんのこちらの記事が分かりやすいので、詳細は割愛させていた...]]></description><link>https://zenn.dev/momosuke/articles/aoai-gpt-4o-realtime-api-with-function-calling</link><guid isPermaLink="true">https://zenn.dev/momosuke/articles/aoai-gpt-4o-realtime-api-with-function-calling</guid><pubDate>Thu, 07 Nov 2024 16:02:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--kGQfmfLH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AOAI%2520GPT-4o%2520Realtime%2520API%2520%25E3%2581%25A7%2520Function%2520Calling%2520%25E3%2582%2592%25E8%25A9%25A6%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:momosuke%2520%257C%2520Ryosuke...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q5ODc4NmI0NjguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>momosuke | Ryosuke Hyakuta</dc:creator></item><item><title><![CDATA[ElectronとNext.jsでテキストエディタを開発する]]></title><description><![CDATA[Nextron（ElectronとNext.js）を使用してテキストエディタを開発します。
+基本編では単一ファイルを扱い、「新規ファイル」「ファイルに保存する」「ファイルを開く」「メニュー」「ショートカットキー」を実装していきます。応用編ではディレクトリに対応し、シンタックスハイライトやディレクトリ内のファイルの切り替えなどを実装していきます。]]></description><link>https://zenn.dev/jp_ymatsumoto/books/text-editor-by-nextron</link><guid isPermaLink="true">https://zenn.dev/jp_ymatsumoto/books/text-editor-by-nextron</guid><pubDate>Thu, 07 Nov 2024 08:54:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--O73jwXnO--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci9jYjkwNDEwMTU3LnBuZw==%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>松本勇拓</dc:creator></item><item><title><![CDATA[@total-typescript/ts-resetを導入してTypeScriptの痒いところを掻く]]></title><description><![CDATA[
+ TypeScriptの痒いところ
+TypeScriptの型システムは強力ですが、意図した型を推論できないケースもあり、any型や型アサーションを使わざるを得ないことがあります。
+しかし、これらを使用すると型安全性を失い、本来コンパイルエラーとして検出されるべき問題が見逃されてしまい、実行時エラーを引き起こす原因になります。
+コンパイルエラーは開発時に修正できますが、実行時エラーは本番環境で発生すると大きな影響を及ぼす可能性があり、回避したいものです。
+!
+おさらい
+
+any型が型安全性を損なう理由
+any型はすべての型を許容してしまうため、誤った型の利用によるエラーを見逃す原因になり...]]></description><link>https://zenn.dev/x_point_1/articles/957c667e79f889</link><guid isPermaLink="true">https://zenn.dev/x_point_1/articles/957c667e79f889</guid><pubDate>Thu, 07 Nov 2024 03:52:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bhkK5O8p--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%2540total-typescript%252Fts-reset%25E3%2582%2592%25E5%25B0%258E%25E5%2585%25A5%25E3%2581%2597%25E3%2581%25A6TypeScript%25E3%2581%25AE%25E7%2597%2592%25E3%2581%2584%25E3%2581%25A8%25E3%2581%2593%25E3%2582%258D%25E3%2582%2592%25E6%258E%25BB%25E3%2581%258F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Yoshiyuki%2520Sato%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y3YzY4ZjI4ZDcuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25A8%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25B9%25E3%2583%259D%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2588%25E3%2583%25AF%25E3%2583%25B3%25E6%258A%2580%25E8%25A1%2593%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2EzODNlOTg4OTAuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yoshiyuki Sato</dc:creator></item><item><title><![CDATA[性格診断テスト（16Personalities）の相性をチェックして盛り上がろう🥳]]></title><description><![CDATA[
+ はじめに
+皆さんは、性格診断テスト 16Personalities をご存知でしょうか？「MBTI 診断」というほうが通りがいいかもしれません。最近ちょっと流行っている性格診断です。（もう最近の範囲は超えているかもしれませんが。）
+この度、16Personalities の性格診断結果を使って相性をチェックできるツール「UnPersonality」を作成しました。
+https://unpersonality.unreact.jp?from=zenn
+16Personalities は、巷では MBTI などの通称で知られています。ちなみに僕は ESTJ（幹部）です。今回作成した「Un...]]></description><link>https://zenn.dev/taichifukumoto/articles/16-personalities-unpersonality</link><guid isPermaLink="true">https://zenn.dev/taichifukumoto/articles/16-personalities-unpersonality</guid><pubDate>Thu, 07 Nov 2024 02:41:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--CzAnHkqk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%2580%25A7%25E6%25A0%25BC%25E8%25A8%25BA%25E6%2596%25AD%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25EF%25BC%258816Personalities%25EF%25BC%2589%25E3%2581%25AE%25E7%259B%25B8%25E6%2580%25A7%25E3%2582%2592%25E3%2583%2581%25E3%2582%25A7%25E3%2583%2583%25E3%2582%25AF%25E3%2581%2597%25E3%2581%25A6%25E7%259B%259B%25E3%2582%258A%25E4%25B8%258A%25E3%2581%258C%25E3%2582%258D%25E3%2581%2586%2520%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:taichi%2520fukumoto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RiZTU1OWFmNjIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>taichi fukumoto</dc:creator></item><item><title><![CDATA[【Vuetify】Fullscreen API使用時にv-menuなどのcomponentが表示されない時の対処]]></title><description><![CDATA[プチTips記事になりますが、VuetifyでFullscreen API使用時にv-menuなどのcomponentが表示されない場合についての対処法になります。
+経緯としては、Video.jsを用いた動画部分があるのですが、そのコントロール部分に速度変更のcomponentがあり、v-menuを使ってドロップダウンで選択するようになっていたのですが、フルスクリーン時に出ないという問題がありました。
+端的に言うと、そちらの再現と解決策はこちらになります。
+https://hiroko-ino.github.io/fullscreen-api-vuetify-component-disp...]]></description><link>https://zenn.dev/run_edge/articles/fullscreen-api-vuetify-component-display-by-attach</link><guid isPermaLink="true">https://zenn.dev/run_edge/articles/fullscreen-api-vuetify-component-display-by-attach</guid><pubDate>Thu, 07 Nov 2024 01:33:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4GmWnlXf--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Vuetify%25E3%2580%2591Fullscreen%2520API%25E4%25BD%25BF%25E7%2594%25A8%25E6%2599%2582%25E3%2581%25ABv-menu%25E3%2581%25AA%25E3%2581%25A9%25E3%2581%25AEcomponent%25E3%2581%258C%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2595%25E3%2582%258C%25E3%2581%25AA%25E3%2581%2584%25E6%2599%2582%25E3%2581%25AE%25E5%25AF%25BE%25E5%2587%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:hiroko_ino%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBkNjVlOTZjYjguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:RUN.EDGE%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzljMGEzYTE4MjYuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hiroko_ino</dc:creator></item><item><title><![CDATA[railwayデプロイ時リクエストURLが重複？する。]]></title><description><![CDATA[APIリクエスト行う際のエンドポイントがフロントエンドのURLの後に付け加えられてしまう。
+
+nextconfig.mjsを確認(basepathとか)
+環境変数のエンドポイントにhttps://とかつけずにrailwayにアップしてた
+
+自分の場合は後者だった
+]]></description><link>https://zenn.dev/konjikun/articles/4696ef23ebba75</link><guid isPermaLink="true">https://zenn.dev/konjikun/articles/4696ef23ebba75</guid><pubDate>Wed, 06 Nov 2024 15:18:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--RlnARx74--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:railway%25E3%2583%2587%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25A4%25E6%2599%2582%25E3%2583%25AA%25E3%2582%25AF%25E3%2582%25A8%25E3%2582%25B9%25E3%2583%2588URL%25E3%2581%258C%25E9%2587%258D%25E8%25A4%2587%25EF%25BC%259F%25E3%2581%2599%25E3%2582%258B%25E3%2580%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%2596%25B0%25E8%25B0%25B7%25E3%2582%25A2%25E3%2583%25AC%25E3%2583%25B3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM1ZDEwZmM4MGYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>新谷アレン</dc:creator></item><item><title><![CDATA[xrpl.jsでAPIバージョンを指定する]]></title><description><![CDATA[
+ xrpl.js
+xrpl.jsはXRP Ledgerとのやりとりを行うためのJavaScript/TypeScriptライブラリです。
+コミュニティによって最も活発に開発が行われているクライアントライブラリの一つであり、XRPL開発を始めるにあたっては一番おすすめのライブラリです。
+
+ APIバージョン
+XRP Ledgerのコアコードであるrippledのバージョン2.0.0においてAPIバージョン2が導入されました。
+https://github.com/XRPLF/rippled/blob/develop/API-CHANGELOG.md#api-version-2
+rippl...]]></description><link>https://zenn.dev/tequ/articles/xrpljs-specify-api-version</link><guid isPermaLink="true">https://zenn.dev/tequ/articles/xrpljs-specify-api-version</guid><pubDate>Wed, 06 Nov 2024 10:30:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--B-KXKuO4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:xrpl.js%25E3%2581%25A7API%25E3%2583%2590%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%2592%25E6%258C%2587%25E5%25AE%259A%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tequ%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lvSjhtbzdCYjZmVkU1b2tsZno4TUtXVUxvN2NfYm5oQTlsc01oPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tequ</dc:creator></item><item><title><![CDATA[CLIとMakefileで作る、データマイグレーションスクリプト入門]]></title><description><![CDATA[実務でとあるCMSからGoogleCloudへの移行を担当した時に、移行スクリプトをCLIにしたら捗ったので、共有します
+
+ 対象読者
+異なるシステム間でのデータマイグレーションに興味がある人
+
+ データマイグレーションの型
+データのマイグレーションは、複数のオペレーションを組み合わせだとご存知でしょうか？
+オペレーションの基本の型は３つです
+本当に３つで完結するのでしょうか？
+とあるCMSからFirestoreにデータをマイグレーションしてみます
+
+CMSからデータをエクスポート
+Firestoreのフォーマットに書き換える
+Firestoreにインポートする
+
+型通りにいけそうですね...]]></description><link>https://zenn.dev/akira_dev/articles/48db3608b98c8f</link><guid isPermaLink="true">https://zenn.dev/akira_dev/articles/48db3608b98c8f</guid><pubDate>Wed, 06 Nov 2024 03:33:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Yy60F57E--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:CLI%25E3%2581%25A8Makefile%25E3%2581%25A7%25E4%25BD%259C%25E3%2582%258B%25E3%2580%2581%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%259E%25E3%2582%25A4%25E3%2582%25B0%25E3%2583%25AC%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2583%2588%25E5%2585%25A5%25E9%2596%2580%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:akira%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ2MzI2OWI2ODQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>akira</dc:creator></item><item><title><![CDATA[reduceを使って日付一覧から日毎の情報を作成する]]></title><description><![CDATA[こんにちは！
+スペースマーケットでフロントエンドエンジニアをしているwharaguchiです。
+これまで個人的に使用機会が少なかったreduceを使う機会があったため、自分の備忘録を兼ねて記事にしました。
+
+ やりたかったこと
+携わっていた施策で以下のキャプチャのような、日付毎にアコーディオンが開閉するUIを作成する必要がありました。
+
+APIから返ってくるデータは、以下のような各日付の情報が一覧で格納された配列でした。
+// 元となるデータ
+const baseData = [
+  {
+    startedAt: "2024-10-30T10:00:00+09:00",
+    ro...]]></description><link>https://zenn.dev/spacemarket/articles/cec64a21e2545a</link><guid isPermaLink="true">https://zenn.dev/spacemarket/articles/cec64a21e2545a</guid><pubDate>Wed, 06 Nov 2024 00:36:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--LvbmIrLZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:reduce%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E6%2597%25A5%25E4%25BB%2598%25E4%25B8%2580%25E8%25A6%25A7%25E3%2581%258B%25E3%2582%2589%25E6%2597%25A5%25E6%25AF%258E%25E3%2581%25AE%25E6%2583%2585%25E5%25A0%25B1%25E3%2582%2592%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:wharaguchi%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc1NTA1NzM5OGYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25B9%25E3%2583%259A%25E3%2583%25BC%25E3%2582%25B9%25E3%2583%259E%25E3%2583%25BC%25E3%2582%25B1%25E3%2583%2583%25E3%2583%2588%2520Engineer%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFjMmY1NGY2MjEuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>wharaguchi</dc:creator></item><item><title><![CDATA[実務で使えるTypescriptの型8選]]></title><description><![CDATA[
+ ひとこと
+実務に組み込みやすいようにできる限り実例を用いました。react前提です。TS初学者の方の助けになれば
+
+ 解説
+
+ テンプレートリテラル型
+型安全な文字列操作を実現
+
+ 例
+リテラル型で文字列を定義すれば渡した値がnumberであることを型で保証できる
+const requestExternalApi = async ({
+  data,
+}: {
+  data: {
+    offset: `${number}`
+    limit: `${number}`
+  }
+}) =&gt; {
+  const res = await fetch("https://exampl...]]></description><link>https://zenn.dev/ficilcom/articles/940ecce71e45a6</link><guid isPermaLink="true">https://zenn.dev/ficilcom/articles/940ecce71e45a6</guid><pubDate>Wed, 06 Nov 2024 00:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wVUhKq6k--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%25AE%259F%25E5%258B%2599%25E3%2581%25A7%25E4%25BD%25BF%25E3%2581%2588%25E3%2582%258BTypescript%25E3%2581%25AE%25E5%259E%258B8%25E9%2581%25B8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:msickpaler%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE3MmFmNGJkODAuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2595%25E3%2582%25A3%25E3%2582%25B7%25E3%2583%25AB%25E3%2582%25B3%25E3%2583%25A0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk5NzE2MGE3YzQuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>msickpaler</dc:creator></item><item><title><![CDATA[Rechartsで睡眠グラフを作成する]]></title><description><![CDATA[
+ はじめに
+この記事では、チャートライブラリの Recharts を使って睡眠グラフを作成していきます。
+公式の Examples は豊富にあるのですが、欲しかったものが無かったので紹介します。
+https://recharts.org/en-US/
+
+ 作成するグラフ
+今回は以下のようなグラフを作成していきます。
+
+左から「ヘルスケア」、「MOTHER」、「Oura Ring」
+睡眠の状態を4つに分けて表現します。
+
+覚醒
+レム睡眠
+コア睡眠
+深い睡眠
+
+
+ 最終的に完成するもの
+
+最終的なコードimport { CartesianGrid, Line, LineChart, Too...]]></description><link>https://zenn.dev/kaz_z/articles/recharts-sleep</link><guid isPermaLink="true">https://zenn.dev/kaz_z/articles/recharts-sleep</guid><pubDate>Tue, 05 Nov 2024 23:03:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--uMIVznNs--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Recharts%25E3%2581%25A7%25E7%259D%25A1%25E7%259C%25A0%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%2595%25E3%2582%2592%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kazuho%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAwNDIxOGIwNWIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kazuho</dc:creator></item><item><title><![CDATA[実践: await using でリソース開放]]></title><description><![CDATA[
+ 実践
+いつ使うんだこれと思ってたら使う日が来たシリーズ。
+https://zenn.dev/ventus/articles/ts5_2-using-preview
+今回、Deno で使ったんですが、 Node.js やブラウザでも Polyfill を入れれば動きます。
+https://github.com/mizchi/play-ts-using
+
+ try finally で puppeteer を終了したい
+Deno で puppeteer を扱うために、こういうコードを書いてました。
+// original
+import puppeteer from "npm:puppete...]]></description><link>https://zenn.dev/mizchi/articles/practical-await-using</link><guid isPermaLink="true">https://zenn.dev/mizchi/articles/practical-await-using</guid><pubDate>Tue, 05 Nov 2024 15:48:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--yc8JX2uN--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%25AE%259F%25E8%25B7%25B5%253A%2520await%2520using%2520%25E3%2581%25A7%25E3%2583%25AA%25E3%2582%25BD%25E3%2583%25BC%25E3%2582%25B9%25E9%2596%258B%25E6%2594%25BE%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mizchi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2liclRHT052Z3d3ay1fNGxlcVk4TGNGSlNuX0FoWnpEWVlKaXJNcWc9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mizchi</dc:creator></item></channel></rss>
