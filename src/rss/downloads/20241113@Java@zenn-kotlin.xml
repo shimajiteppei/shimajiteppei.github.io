@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Kotlin」のフィード]]></title><description><![CDATA[Zennのトピック「Kotlin」のRSSフィードです]]></description><link>https://zenn.dev/topics/kotlin</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/0913f0325d.png</url><title>Zennの「Kotlin」のフィード</title><link>https://zenn.dev/topics/kotlin</link></image><generator>zenn.dev</generator><lastBuildDate>Wed, 13 Nov 2024 00:36:34 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/kotlin/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[ライブラリでしかお目にかかれない珍しい実装]]></title><description><![CDATA[11/11にGMOメイクアプリ・Sansan モバイル勉強会 in 福岡というイベントでLTをさせてもらったネタなんですが、Xで思いのほか反響があったので記事として書き起こそうとおもいました。
+https://speakerdeck.com/mikanichinose/raiburaridesikaomu-nikakarenaizhen-siishi-zhuang
+たまにComposeやcoroutineの実装を見にいくことがあるのですが、普段のアプリケーション開発ではあまりみない不思議な実装があったので、今回は3つ紹介したいとおもいます
+
+ Avoid using data class...]]></description><link>https://zenn.dev/solenoid/articles/0443ea4758f305</link><guid isPermaLink="true">https://zenn.dev/solenoid/articles/0443ea4758f305</guid><pubDate>Tue, 12 Nov 2024 16:35:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--HFNn9pTC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%25E3%2581%25A7%25E3%2581%2597%25E3%2581%258B%25E3%2581%258A%25E7%259B%25AE%25E3%2581%25AB%25E3%2581%258B%25E3%2581%258B%25E3%2582%258C%25E3%2581%25AA%25E3%2581%2584%25E7%258F%258D%25E3%2581%2597%25E3%2581%2584%25E5%25AE%259F%25E8%25A3%2585%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mikan%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2hxQVhyVFFUVVE1OUt6WUp0RFAyZDd6elV5aHNrVW1KRUlrLVU2TkpzPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mikan</dc:creator></item><item><title><![CDATA[時刻フォーマット hhの罠]]></title><description><![CDATA[ある日、Kotlinで実装している際に時刻フォーマットに関するミスがあったので、同じミスをする人が少しでも減ればと思い、この記事を書いてみました。
+
+ 24時間表記のフォーマット
+2024-11-11T21:53:04を2024/11/11 21:53:04に整形したい場合、以下のようなプログラムを書いた経験はありますか？
+    val dateTime = LocalDateTime.of(2024, 11, 11, 21, 53, 4)
+    val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss")
+  ...]]></description><link>https://zenn.dev/ooooomu/articles/62c3e682e466bc</link><guid isPermaLink="true">https://zenn.dev/ooooomu/articles/62c3e682e466bc</guid><pubDate>Mon, 11 Nov 2024 22:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Vc-kQhy1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%2599%2582%25E5%2588%25BB%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25BC%25E3%2583%259E%25E3%2583%2583%25E3%2583%2588%2520hh%25E3%2581%25AE%25E7%25BD%25A0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Omu%2520%252F%2520%25E3%2581%258A%25E3%2582%2580%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzgwMGNjMzFlYjcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Omu / おむ</dc:creator></item><item><title><![CDATA[KMPで「import shared」が機能しない時の対処法Ⅱ]]></title><description><![CDATA[
+ はじめに
+Android StudioでKotlin Multiplatform(KMP)を使用してiOSアプリを作成し、Xcodeでそのアプリを開いた際にimport sharedでモジュールが正しくインポートされず、「No such module 'shared'」というエラーが発生してしまいました。
+
+
+一度は「KMPで「import shared」が機能しない時の対処法」という記事に記載している方法で問題を解消したのですが、再び同じエラーが発生してしまいました。
+この記事は、私がCocBan開発メンバー達とその問題を解決した方法をまとめたものになります。
+!
+本記事で紹介する...]]></description><link>https://zenn.dev/cocban_blog/articles/sankaku0724-newcreate40</link><guid isPermaLink="true">https://zenn.dev/cocban_blog/articles/sankaku0724-newcreate40</guid><pubDate>Sun, 10 Nov 2024 03:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--uoAKeiIF--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:KMP%25E3%2581%25A7%25E3%2580%258Cimport%2520shared%25E3%2580%258D%25E3%2581%258C%25E6%25A9%259F%25E8%2583%25BD%25E3%2581%2597%25E3%2581%25AA%25E3%2581%2584%25E6%2599%2582%25E3%2581%25AE%25E5%25AF%25BE%25E5%2587%25A6%25E6%25B3%2595%25E2%2585%25A1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%2595%25E3%2582%2593%25E3%2581%258B%25E3%2581%258F%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY0Yzg2ZmE5YTUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:CocBan%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JkODI3MDRjMmQuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>さんかく</dc:creator></item><item><title><![CDATA[[Android] Jetpack Compose Modifier]]></title><description><![CDATA[droidkaigi2014を見たのでメモ
+https://www.youtube.com/watch?v=xemVJ10oW-E
+Modifierは約150種類ある
+https://developer.android.com/develop/ui/compose/modifiers-list
+
+ Action
+
+ clickable
+クリック、タップなどのイベントを検出
+
+ draggable
+単一のOrientationでドラッグする
+
+ selectable
+項目の選択管理、ラジオボタンやチェックボックスのような動作
+
+ combinedClickable
+onClick, onD...]]></description><link>https://zenn.dev/giglancer/articles/07b8b943a32f43</link><guid isPermaLink="true">https://zenn.dev/giglancer/articles/07b8b943a32f43</guid><pubDate>Thu, 07 Nov 2024 03:29:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--UH3kySXW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:%255BAndroid%255D%2520Jetpack%2520Compose%2520Modifier%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:apollo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBjZmZlZTVlZjQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>apollo</dc:creator></item><item><title><![CDATA[[Android] Contextを理解する]]></title><description><![CDATA[droidkaigi2024を見たので復習用にメモ
+https://www.youtube.com/watch?v=1poogS3bGZA
+
+ Contextとは
+アプリがアプリ内外の様々な情報や機能にアクセスするためのインターフェース
+
+ 使用例
+
+ 文字列リソースにアクセス
+contextによって端末のlocaleに応じた文字列リソースを取得することができる
+
+ 通知
+contextを通じてNotificationManagerにアクセスできる、通知作成に必要なリソースも取得できる
+
+ contextの種類と使い分け
+継承しているクラスは多くあるが、重要なのはActivityとApp...]]></description><link>https://zenn.dev/giglancer/articles/9ca5b944e426d9</link><guid isPermaLink="true">https://zenn.dev/giglancer/articles/9ca5b944e426d9</guid><pubDate>Thu, 07 Nov 2024 03:09:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fp2vgS9M--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BAndroid%255D%2520Context%25E3%2582%2592%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:apollo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBjZmZlZTVlZjQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>apollo</dc:creator></item><item><title><![CDATA[Android Jetpack Compose の BottomSheetScaffold で3つの展開状態をやりたい]]></title><description><![CDATA[こちらの記事は、LUUP のTVCM放映に合わせた一足早い「Luup Developers Advent Calendar 2024」の6日目の記事です。
+こんにちは、Luup Androidチーム所属の土谷です。
+みなさん、Android Google マップでやっているあのUI、標準APIでどうやってやるの？と思うこと多いですよね。
+現在地アイコン、ボトムシートの展開状態、など。
+今回はボトムシートの展開状態について焦点を当ててみようかなと思います。
+
+ Android Googleマップのボトムシートの高さが三段階になっているあれをやりたい！
+普段、Android Googleマッ...]]></description><link>https://zenn.dev/luup_developers/articles/android-tsuchiya-20241106</link><guid isPermaLink="true">https://zenn.dev/luup_developers/articles/android-tsuchiya-20241106</guid><pubDate>Wed, 06 Nov 2024 22:33:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_mP0oXYS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Android%2520Jetpack%2520Compose%2520%25E3%2581%25AE%2520BottomSheetScaffold%2520%25E3%2581%25A73%25E3%2581%25A4%25E3%2581%25AE%25E5%25B1%2595%25E9%2596%258B%25E7%258A%25B6%25E6%2585%258B%25E3%2582%2592%25E3%2582%2584%25E3%2582%258A%25E3%2581%259F%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Luup%2520Developers%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNiMTdhMTRjMmUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Luup%2520Developers%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I4NTAyYzg5MzIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Luup Developers</dc:creator></item><item><title><![CDATA[[趣味開発]子供向けの通知アプリの開発 テキスト読み上げ編]]></title><description><![CDATA[
+ [趣味開発]子供向けの通知アプリの開発 テキスト読み上げ編
+
+ はじめに
+最近、子供の朝の準備をサポートするアプリを作りたいと思い、趣味でのAndroidアプリ開発を始めました。特に、子供は時間の管理が難しく、準備が遅れがちです。そこで、毎日決まった時刻に通知を送り、必要な準備をリマインドすることで、朝の支度がスムーズになることを目指しました。また、通知の際にテキストを読み上げることで、文字が読めなくても行動しやすくなるように工夫しています。
+今回の開発は、ChatGPTにアドバイスをもらいながら進め、アラームの設定やテキスト読み上げ機能の実装に挑戦しました。この過程を通じて、And...]]></description><link>https://zenn.dev/yydevelop/articles/84b14ab800df7e</link><guid isPermaLink="true">https://zenn.dev/yydevelop/articles/84b14ab800df7e</guid><pubDate>Mon, 04 Nov 2024 08:30:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--MZICZ35Y--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255B%25E8%25B6%25A3%25E5%2591%25B3%25E9%2596%258B%25E7%2599%25BA%255D%25E5%25AD%2590%25E4%25BE%259B%25E5%2590%2591%25E3%2581%2591%25E3%2581%25AE%25E9%2580%259A%25E7%259F%25A5%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2581%25AE%25E9%2596%258B%25E7%2599%25BA%2520%25E3%2583%2586%25E3%2582%25AD%25E3%2582%25B9%25E3%2583%2588%25E8%25AA%25AD%25E3%2581%25BF%25E4%25B8%258A%25E3%2581%2592%25E7%25B7%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yydevelop%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzcwNDBiZDVjYWQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yydevelop</dc:creator></item><item><title><![CDATA[自動スクロールするLazyColumnを手軽に作成したい!]]></title><description><![CDATA[
+ 概要
+以下の要件を満たすようなリストを出来るだけ手軽に作成する方法を模索しました。
+少し躓いた箇所もあったため備忘録として残しておきます。
+
+項目を追加した際に一番下までスクロールされている状態ならばスクロール
+項目を追加する際にアニメーションをかける
+並び替えや削除などは考慮しない
+
+
+一番下までスクロールされている状態
+
+上にスクロールされている状態ならば自動スクロールはしない
+
+ コード
+最終的なコードimport android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activ...]]></description><link>https://zenn.dev/elm/articles/fc79a4e8906c16</link><guid isPermaLink="true">https://zenn.dev/elm/articles/fc79a4e8906c16</guid><pubDate>Mon, 04 Nov 2024 04:21:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--mkO1gusk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%2587%25AA%25E5%258B%2595%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%2599%25E3%2582%258BLazyColumn%25E3%2582%2592%25E6%2589%258B%25E8%25BB%25BD%25E3%2581%25AB%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2597%25E3%2581%259F%25E3%2581%2584%2521%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:z4kuro%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzczYTQ0YmVkZWIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>z4kuro</dc:creator></item><item><title><![CDATA[KotlinとGoをメインで使うエンジニアから見たRust]]></title><description><![CDATA[業務ではKotlin、個人開発ではGoを中心に開発をしているエンジニアがRustに入門して感じた違いをまとめてみようと思います。
+Rustに関してはまだまだ学習中なので見当違いな内容があればご指摘ください。
+
+ 各言語の違い
+
+ 表現力
+Rustの言語としての表現力について一言で述べると、「丁度いい」だと思います。
+KotlinとGoと比較してみます。
+
+ Kotlin
+Kotlinは非常に表現力が高いです。
+例えばCollections(List・Map・Set・etc...)には欲しいと思ったメソッドは大体用意されています。例えば、filter、map、reduceといった高階関数や...]]></description><link>https://zenn.dev/k1e1n04/articles/56bb19328addbd</link><guid isPermaLink="true">https://zenn.dev/k1e1n04/articles/56bb19328addbd</guid><pubDate>Sun, 03 Nov 2024 06:36:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Rko5UaRZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Kotlin%25E3%2581%25A8Go%25E3%2582%2592%25E3%2583%25A1%25E3%2582%25A4%25E3%2583%25B3%25E3%2581%25A7%25E4%25BD%25BF%25E3%2581%2586%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%25E3%2581%258B%25E3%2582%2589%25E8%25A6%258B%25E3%2581%259FRust%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Ken%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YkR6S0JTWW9ISDJ0Y2c5Z2wzSDlLYXJZcjlHTTlBRHFjcEhPRWM3bDQ9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Ken</dc:creator></item><item><title><![CDATA[Jetpack Compose での多重タップを防ぐコードを考えた]]></title><description><![CDATA[タイトルのとおり、連打されて不具合が起きて困ってたので、防ぐコードを書いた。
+なんとなく動いているが、きちんとできているかはわからない。
+(2024/11/02 14:31 追記 - どうやらうまく動かない場合があるぽい)
+(2024/11/02 23:07 追記 - isClickable を MutableState にすることで改善した)
+
+ ClickState
+タップ可能かどうかを判定する変数がほしかったので State を作った。
+data class ClickState(
+    val recycleTimeMillis: Long = 1000,
+) {
+    va...]]></description><link>https://zenn.dev/t2low/articles/4f96f32c919f27</link><guid isPermaLink="true">https://zenn.dev/t2low/articles/4f96f32c919f27</guid><pubDate>Sat, 02 Nov 2024 02:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--pfD04Nqv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Jetpack%2520Compose%2520%25E3%2581%25A7%25E3%2581%25AE%25E5%25A4%259A%25E9%2587%258D%25E3%2582%25BF%25E3%2583%2583%25E3%2583%2597%25E3%2582%2592%25E9%2598%25B2%25E3%2581%2590%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2582%2592%25E8%2580%2583%25E3%2581%2588%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:t2low%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lObDBlSmY2M3l4SDFDZEhyeFpZNVQ5elFwM2Vtd3Q4NDRfbXJ3TW0wPXMyNTAtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>t2low</dc:creator></item><item><title><![CDATA[依存関係とどう向き合っていくか]]></title><description><![CDATA[
+プロジェクトはゆっくりと、そして容赦なく、手に負えないものとなっていくのです。ソフトウェアにおける惨事のほとんどは、たいていのプロジェクトでは気づかずに通り過ぎてしまうような、気づくには小さすぎるとも思えるものから始まるのです。[1]
+
+
+ はじめに
+現代のモバイルアプリの開発はさまざまな要因の依存関係と向き合う必要があります。
+昔のことを思い出すと今から二十年前のモバイルアプリは Java ME[2] をベースに開発をしていました。アプリケーションのサイズ制限が 100KB[3] ということもあって、依存するものは極力少なくするために、 Java SDK 自体もモバイル向けに軽量化し...]]></description><link>https://zenn.dev/yumemi_inc/articles/dependency-panic</link><guid isPermaLink="true">https://zenn.dev/yumemi_inc/articles/dependency-panic</guid><pubDate>Fri, 01 Nov 2024 18:21:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--glvemlnR--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E4%25BE%259D%25E5%25AD%2598%25E9%2596%25A2%25E4%25BF%2582%25E3%2581%25A8%25E3%2581%25A9%25E3%2581%2586%25E5%2590%2591%25E3%2581%258D%25E5%2590%2588%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%2584%25E3%2581%258F%25E3%2581%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:ykws%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U2MzAxMTgwMzUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2582%2586%25E3%2582%2581%25E3%2581%25BF%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y0M2I0Mzk2NzIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ykws</dc:creator></item><item><title><![CDATA[【iOS/Android】UI要素のキャプチャの撮り方いろいろ]]></title><description><![CDATA[SwiftUI、UIKit、Jetpack Compose、Android Viewにて、とあるUI要素をキャプチャしたい場合にどのように実装すればいいかを書き残しておきます。
+※この記事は技術書典17でWAKE Community本第15章に載せた内容になります。ぜひこちらもよろしくお願いします！
+https://techbookfest.org/product/1Y5sf1TGi79cu7T7uBW74t
+
+ 実行環境
+Xcode: 16.0
+Swift: 5
+Android Studio: Koala Feature Drop | 2024.1.2
+Kotlin: 1.9.0
+
+ ...]]></description><link>https://zenn.dev/akatsuki174/articles/234a92f6c0cada</link><guid isPermaLink="true">https://zenn.dev/akatsuki174/articles/234a92f6c0cada</guid><pubDate>Thu, 31 Oct 2024 04:35:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--gTJzU4Fi--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590iOS%252FAndroid%25E3%2580%2591UI%25E8%25A6%2581%25E7%25B4%25A0%25E3%2581%25AE%25E3%2582%25AD%25E3%2583%25A3%25E3%2583%2597%25E3%2583%2581%25E3%2583%25A3%25E3%2581%25AE%25E6%2592%25AE%25E3%2582%258A%25E6%2596%25B9%25E3%2581%2584%25E3%2582%258D%25E3%2581%2584%25E3%2582%258D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:akatsuki174%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dMVnBHb0x6YlB0WV90YnAzVEN1RDBlaURzWkRPUmtKSE1mWVdCRFE9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>akatsuki174</dc:creator></item><item><title><![CDATA[ARのSNSを作ってみるオブジェクトの操作（移動・回転）編]]></title><description><![CDATA[
+ 初めに
+この記事は以下の記事の続きです。興味があれば見てみてください。
+ https://qiita.com/dd7223dd/items/fe3bb531866872ff57a8
+ARCoreの公式ドキュメントに「コンテンツ操作」としてオブジェクトの移動・回転について触れてはいるのですが、具体的なやり方の説明が一切ないです。その他のネット記事にも私が調べた限りだと見当たりませんでした。sceneformだとオブジェクトの操作が提供されているらしいのですが、開発が終了しているので今回は使いません。なので今回紹介する以外のやり方があったら教えて欲しいです。
+https://develo...]]></description><link>https://zenn.dev/taiseishimizu/articles/ea6b7f13069e50</link><guid isPermaLink="true">https://zenn.dev/taiseishimizu/articles/ea6b7f13069e50</guid><pubDate>Wed, 30 Oct 2024 07:54:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dJ9Ut2ad--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AR%25E3%2581%25AESNS%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%25E3%2582%25AA%25E3%2583%2596%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E3%2581%25AE%25E6%2593%258D%25E4%25BD%259C%25EF%25BC%2588%25E7%25A7%25BB%25E5%258B%2595%25E3%2583%25BB%25E5%259B%259E%25E8%25BB%25A2%25EF%25BC%2589%25E7%25B7%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:shimizu%2520taisei%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSWNkbkpiUTBwWFVtRWpYczBRVmE4MzZsczIteTRQejh6NnQxeDlFWEhjYk90Q2pnPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>shimizu taisei</dc:creator></item><item><title><![CDATA[ARのSNS作ってみる オブジェクト作成～描写編]]></title><description><![CDATA[
+ 完成イメージ
+AR空間にメッセージを投稿でき、投降した内容を自身と他者が端末を介して見ることが出来るという完成イメージをしています。
+
+
+ 技術選定
+フレームワーク：Android Studio
+言語：kotlin
+DB：Cloud SQL
+ライブラリ等：ARCore、Geospatial API、Canvas
+対象端末はAndroidを想定しているので、とりあえずAndroid Studioを使い、言語とDBは気分です。AR機能を使うので、ARCoreを利用し、ユーザが作成したオブジェクトを他ユーザも参照できるようにするため、オブジェクトの絶対位置（緯度、経度、高度）を取得できるG...]]></description><link>https://zenn.dev/taiseishimizu/articles/482ce039992e24</link><guid isPermaLink="true">https://zenn.dev/taiseishimizu/articles/482ce039992e24</guid><pubDate>Wed, 30 Oct 2024 07:50:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--sG3jC0u9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AR%25E3%2581%25AESNS%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2520%25E3%2582%25AA%25E3%2583%2596%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E4%25BD%259C%25E6%2588%2590%25EF%25BD%259E%25E6%258F%258F%25E5%2586%2599%25E7%25B7%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:shimizu%2520taisei%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSWNkbkpiUTBwWFVtRWpYczBRVmE4MzZsczIteTRQejh6NnQxeDlFWEhjYk90Q2pnPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>shimizu taisei</dc:creator></item><item><title><![CDATA[新卒向けログラス短期インターンシップを支える技術]]></title><description><![CDATA[!
+この記事は毎週必ず記事がでるテックブログ "Loglass Tech Blog Sprint" の 63 週目の記事です！
+2年間連続達成まで 残り 43 週 となりました！
+
+
+ 背景
+株式会社ログラスは2024年の夏から新しく新卒エンジニアの採用に向けて短期インターンシップの開催を始めました。
+コンテンツを作成するにあたり、学生の皆さんにとってログラスの魅力が伝わるにはどうしたらいいだろうか、どうしたら学びのあるコンテンツになるだろうかなどさまざまな観点で議論を重ねてきました。
+この記事ではその議論の結果選定した開発手法・言語・フレームワークなどの紹介とその選定理由などについて記...]]></description><link>https://zenn.dev/loglass/articles/2cc6bfe4cc23b4</link><guid isPermaLink="true">https://zenn.dev/loglass/articles/2cc6bfe4cc23b4</guid><pubDate>Tue, 29 Oct 2024 00:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xsb3GpEM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%2596%25B0%25E5%258D%2592%25E5%2590%2591%25E3%2581%2591%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2582%25B9%25E7%259F%25AD%25E6%259C%259F%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%25B3%25E3%2582%25B7%25E3%2583%2583%25E3%2583%2597%25E3%2582%2592%25E6%2594%25AF%25E3%2581%2588%25E3%2582%258B%25E6%258A%2580%25E8%25A1%2593%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:hc0208%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRlNWQ4ZTRjZjguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2582%25B9%2520%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dRa3IxMUk5U3laRFJSUEUyYk5qQ05FcEVSclVrS1ZVSmRBUWhKYkE9czI1MC1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hc0208</dc:creator></item><item><title><![CDATA[KotlinでSQLDelightを使ってデータベース操作を実装する]]></title><description><![CDATA[
+ SQLDelightでデータベース操作を実装する
+
+ はじめに
+SQLDelightは、Kotlinのマルチプラットフォーム対応のSQLフレームワークです。SQLiteデータベースに対して型安全なアクセスを提供し、KMMアプリケーションの開発をサポートします。
+本記事では、実際のTodoアプリケーションのコードを例に、SQLDelightの基本的な使い方からテストの実装までを解説します。
+
+ 目次
+
+SQLDelightの導入
+データベーススキーマの定義
+データベースのセットアップ
+CRUD操作の実装
+ViewModelとの統合
+テストの実装
+
+
+
+ 1. SQLDelightの導入...]]></description><link>https://zenn.dev/tacar/articles/bbcaf15ab04620</link><guid isPermaLink="true">https://zenn.dev/tacar/articles/bbcaf15ab04620</guid><pubDate>Thu, 24 Oct 2024 10:40:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1lVWS4Tb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Kotlin%25E3%2581%25A7SQLDelight%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%2599%25E3%2583%25BC%25E3%2582%25B9%25E6%2593%258D%25E4%25BD%259C%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Taka%2540%25E9%2596%258B%25E7%2599%25BA%25E8%2580%2585%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U1NGQ3N2JjYjAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Taka@開発者</dc:creator></item><item><title><![CDATA[【連載】Compose Multiplatformで自社のクローンアプリを作る - スターターリポジトリの紹介]]></title><description><![CDATA[
+ はじめに
+モバイルアプリをマルチプラットフォーム向けにワンソースで開発する手段はいくつかありますが、その中でもJetBrainsが提供するCompose Multiplatformは、Androidアプリ開発と同じ技術スタックでiOSやDesktop、Web向けに開発でき、Androidエンジニアにとっては学習コストをあまりかけずに導入可能です。また、共通化する範囲も自由に設計可能なため、非常に柔軟性の高いフレームワークになっています。
+https://www.jetbrains.com/ja-jp/compose-multiplatform/
+この連載記事では、Compose Mu...]]></description><link>https://zenn.dev/dely_jp/articles/ce01725bde5ed4</link><guid isPermaLink="true">https://zenn.dev/dely_jp/articles/ce01725bde5ed4</guid><pubDate>Sun, 20 Oct 2024 23:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--rMqfR_gl--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E9%2580%25A3%25E8%25BC%2589%25E3%2580%2591Compose%2520Multiplatform%25E3%2581%25A7%25E8%2587%25AA%25E7%25A4%25BE%25E3%2581%25AE%25E3%2582%25AF%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%25B3%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%2520-%2520%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%25AA%25E3%2583%259D%25E3%2582%25B8%25E3%2583%2588%25E3%2583%25AA%25E3%2581%25AE%25E7%25B4%25B9%25E4%25BB%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Seiya%2520Iwasaki%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y5MGQxMmNiMjkuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:dely%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ViNGI5Yzg0ZGUuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Seiya Iwasaki</dc:creator></item><item><title><![CDATA[ChatGPTで始める日曜開発(メモアプリ編)]]></title><description><![CDATA[
+ はじめに
+今回作りたいアプリは、赤羽雄二氏の著書『ゼロ秒思考』をサポートするものです。赤羽氏は、「考えを整理し、瞬時に行動に移す力」を身につけるために、紙に1分以内で思考を書き出す方法を推奨しています。ただ、出先や移動中など、紙とペンが手元にない状況でも、スマホを使って素早くメモを取りたいと思う場面が多くありますよね。そこで、自分用にアプリを作り、「1分以内に書く」など、ゼロ秒思考のルールを守りながら実践できるようにサポートしてくれるツールを開発したいと考えました。
+私自身、スマホアプリの開発経験はほぼゼロに近いですが、ChatGPTを活用すれば、初心者でもアプリ開発を進められるので...]]></description><link>https://zenn.dev/yydevelop/articles/fc1fef0740a24f</link><guid isPermaLink="true">https://zenn.dev/yydevelop/articles/fc1fef0740a24f</guid><pubDate>Sun, 20 Oct 2024 06:19:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2M0c-pP8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ChatGPT%25E3%2581%25A7%25E5%25A7%258B%25E3%2582%2581%25E3%2582%258B%25E6%2597%25A5%25E6%259B%259C%25E9%2596%258B%25E7%2599%25BA%2528%25E3%2583%25A1%25E3%2583%25A2%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E7%25B7%25A8%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yydevelop%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzcwNDBiZDVjYWQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yydevelop</dc:creator></item><item><title><![CDATA[【Kotlin】byと=の違いってなに？]]></title><description><![CDATA[
+ はじめに
+自分はまだKotlin歴が浅く(1.5ヶ月弱)でアプリ開発未経験から一気にインターンまでやっていてインプットの日々を送っています。
+理解が間違っているかもしれませんが、温かい目で見守って下さい。
+
+ 本題
+
+ by vs =
+僕個人的にはずっとこれに苦しんできました。もともとPythonを使っていたため、変数にプロパティを委譲するなんて考えたことがなく(=で全部何とかなる)ので。
+こんなところで詰まりました。
+
+NG_1
+val testInput by mutableStateOf("")
+testInput = "hoge"
+
+
+NG_2
+val testInput b...]]></description><link>https://zenn.dev/sarusy/articles/93535fe1c45998</link><guid isPermaLink="true">https://zenn.dev/sarusy/articles/93535fe1c45998</guid><pubDate>Sun, 20 Oct 2024 04:29:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--sQVGUMBi--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Kotlin%25E3%2580%2591by%25E3%2581%25A8%253D%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25AA%25E3%2581%25AB%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2595%25E3%2582%258B%25E3%2581%2597%25E3%2581%2583%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y3MmFiZjQwM2UuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>さるしぃ</dc:creator></item><item><title><![CDATA[Androidの画面サイズを取得について]]></title><description><![CDATA[
+ 概要
+各表示領域に関する認識があやふやだったので、ざっとまとめておく
+
+ status bar
+
+端末によってサイズが変化する
+表示/非表示によってサイズが変化する
+
+// status barvar resourceId = applicationContext.resources.getIdentifier("status_bar_height", "dimen", "android")
+val statusBarHeight = applicationContext.resources.getDimensionPixelSize(resourceId)
+Logging.i(LO...]]></description><link>https://zenn.dev/yt_hsgw/articles/f45d3b1996aba1</link><guid isPermaLink="true">https://zenn.dev/yt_hsgw/articles/f45d3b1996aba1</guid><pubDate>Sun, 20 Oct 2024 02:42:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xiGyA2nC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Android%25E3%2581%25AE%25E7%2594%25BB%25E9%259D%25A2%25E3%2582%25B5%25E3%2582%25A4%25E3%2582%25BA%25E3%2582%2592%25E5%258F%2596%25E5%25BE%2597%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yt_hsgw%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RlMDI2NGQ0NWIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yt_hsgw</dc:creator></item></channel></rss>

@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Linux」のフィード]]></title><description><![CDATA[Zennのトピック「Linux」のRSSフィードです]]></description><link>https://zenn.dev/topics/linux</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/860a9eb1e4.png</url><title>Zennの「Linux」のフィード</title><link>https://zenn.dev/topics/linux</link></image><generator>zenn.dev</generator><lastBuildDate>Wed, 13 Nov 2024 11:11:44 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/linux/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[WireGuardのClient越しネットワークへ疎通できるようにする]]></title><description><![CDATA[
+ 最初に
+WireGuardは設定がコンパクトかつ高速なVPNですが、Client越しネットワークに疎通を行いたい場合があると思います。これが少し特殊だったので...
+そこで成功した解決法を書きました。(1年前なのでエラー内容とか忘れました、、、覚えてるやつだけ書いときます、、、)
+
+ 動作環境
+
+動作環境
+Debian11(12でも動作済み)
+
+
+ 状況・説明
+サーバ10.0.7.1からクライアント10.0.7.100越しの192.168.20.0/24へ疎通したいのが目的です。
+                      WireGuard
+|WG_Server|(10.0.7.1...]]></description><link>https://zenn.dev/zerocat/articles/ec80ec95119de2</link><guid isPermaLink="true">https://zenn.dev/zerocat/articles/ec80ec95119de2</guid><pubDate>Wed, 13 Nov 2024 00:35:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--MHlVvaGt--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:WireGuard%25E3%2581%25AEClient%25E8%25B6%258A%25E3%2581%2597%25E3%2583%258D%25E3%2583%2583%25E3%2583%2588%25E3%2583%25AF%25E3%2583%25BC%25E3%2582%25AF%25E3%2581%25B8%25E7%2596%258E%25E9%2580%259A%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258B%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%25AA%25E3%2583%25AA%25E3%2582%25A3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2Rhcmsvei5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>リリィ</dc:creator></item><item><title><![CDATA[isc-dhcp-clientがEOLなのでdhcpcdに移行してみた(Debian12)]]></title><description><![CDATA[
+ 最初に
+Debianユーザーの中で、/etc/network/interfaces(intefaces.d/*)でネットワークとDHCPの設定をしている方がいると思います。IPアドレス取得時に呼び出されているのはisc-dhcp-clientですが、既にEOLとなっています。
+Debian公式は
+
+ISC は isc-dhcp のクライアントおよびリレー部分の維持を止めることを 決定したため、これらは 4.4.3 リリースより後は削除され、サーバコンポーネント のみが残る予定です。isc-dhcp-client (dhclient) の代替品の利用を 検討してください。
+
+と発表して...]]></description><link>https://zenn.dev/zerocat/articles/a0ba39f70b8d1d</link><guid isPermaLink="true">https://zenn.dev/zerocat/articles/a0ba39f70b8d1d</guid><pubDate>Tue, 12 Nov 2024 21:20:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9s_EPgvB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:isc-dhcp-client%25E3%2581%258CEOL%25E3%2581%25AA%25E3%2581%25AE%25E3%2581%25A7dhcpcd%25E3%2581%25AB%25E7%25A7%25BB%25E8%25A1%258C%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2528Debian12%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%25AA%25E3%2583%25AA%25E3%2582%25A3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2Rhcmsvei5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>リリィ</dc:creator></item><item><title><![CDATA[【2024年版】Rundeckのジョブ結果をSlackに通知する方法]]></title><description><![CDATA[Rundeckでジョブ実行の結果をSlackに通知するために、Slack Incoming Webhookプラグインを使って設定する方法を解説します。
+
+ 前提条件
+
+Rundeck バージョン: 5.7.0
+Slack バージョン: プロダクション 4.41.96 64-bit
+rundeck は EC2(amazon_linux_2)にinstall
+
+
+ 手順
+
+ 1. SlackのWebhook URLを取得
+
+
+Slack APIのページにアクセスし、「Create New App」から新しいAppを作成します。
+「Incoming Webhooks」を有効化します。
+「Add...]]></description><link>https://zenn.dev/zuzuzu/articles/slack_rundeck_notify</link><guid isPermaLink="true">https://zenn.dev/zuzuzu/articles/slack_rundeck_notify</guid><pubDate>Tue, 12 Nov 2024 10:46:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--TqqYUq80--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%25902024%25E5%25B9%25B4%25E7%2589%2588%25E3%2580%2591Rundeck%25E3%2581%25AE%25E3%2582%25B8%25E3%2583%25A7%25E3%2583%2596%25E7%25B5%2590%25E6%259E%259C%25E3%2582%2592Slack%25E3%2581%25AB%25E9%2580%259A%25E7%259F%25A5%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:zu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2EwYzkyNjY5ZjcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>zu</dc:creator></item><item><title><![CDATA[/etc/はgitで保存しておく]]></title><description><![CDATA[/etc/はgitで管理するのがお勧め。
+macOSの場合は、/opt/local/etc
+FreeBSDの場合は、/usr/local/etc
+
+ 手順
+
+cd /etc/
+git init
+git add .
+git commit -m "ROMANCE DAWN"
+
+
+ メリット
+
+パッケージのアップデートで、何が変更されたか分かる
+第三者が変更していないか監視できる
+自分がどんな変更をしたか追跡できる
+ブランチを切って変更を試せる
+
+
+ .gitignore
+結構、煩わしい更新もあるので、無視リストに追加しておくとよい。
+
+.gitignore
+letsencrypt/*
+
+De...]]></description><link>https://zenn.dev/tomoakinagahara/articles/eddf95d9c60334</link><guid isPermaLink="true">https://zenn.dev/tomoakinagahara/articles/eddf95d9c60334</guid><pubDate>Mon, 11 Nov 2024 09:54:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0t5PYRya--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%252Fetc%252F%25E3%2581%25AFgit%25E3%2581%25A7%25E4%25BF%259D%25E5%25AD%2598%25E3%2581%2597%25E3%2581%25A6%25E3%2581%258A%25E3%2581%258F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Tomoaki%2520Nagahara%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2czREt6Z1p1U3hEcGVZaFY1ajhJSjNmTzFZODlMLXg3bVJxcFU1Q0E9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Tomoaki Nagahara</dc:creator></item><item><title><![CDATA[systemctlの使い方]]></title><description><![CDATA[
+ サービスの起動
+sudo systemctl start [サービス名]
+
+ ステータスの確認
+active (running)と表示されていれば正常に起動している。
+sudo systemctl status [サービス名]
+
+ サービスの停止
+sudo systemctl stop [サービス名]
+
+ 自動起動
+システムが再起動した際に、自動的にサービスを起動する。
+sudo systemctl enable [サービス名]
+サービスの自動起動を無効にする。
+sudo systemctl disable [サービス名]
+サービスの自動起動が有効か無効か調べる。
+sudo syst...]]></description><link>https://zenn.dev/tomoakinagahara/articles/521a8ffbbedc89</link><guid isPermaLink="true">https://zenn.dev/tomoakinagahara/articles/521a8ffbbedc89</guid><pubDate>Sun, 10 Nov 2024 12:54:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--YcFRI87v--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:systemctl%25E3%2581%25AE%25E4%25BD%25BF%25E3%2581%2584%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Tomoaki%2520Nagahara%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2czREt6Z1p1U3hEcGVZaFY1ajhJSjNmTzFZODlMLXg3bVJxcFU1Q0E9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Tomoaki Nagahara</dc:creator></item><item><title><![CDATA[【network】portcanningで自サーバーの許可ポートを確認]]></title><description><![CDATA[
+ はじめに
+
+ポートスキャンを普段扱っている自分のPCに対して行い、どのポートが空いていて、どう使われているかを知るきっかけにしたいと思ったため、その検証を行います。
+
+ 対象の方
+
+パソコンのルーター、グローバルIP、プロバイダなど、network関連を学び始めた方。
+「もっとネットワーク知りたい！」という方。
+
+ 環境
+
+AWS EC2
+OS : AmazonLinux2023
+macbookpro2019
+OS : Sonoma ver 14.4.1
+
+ 内容
+
+
+ 1 ポートスキャンとは？
+1つのIPに対し、0 ~ 65535 までのポートに縦断的にパケットを送り、返ってくるか...]]></description><link>https://zenn.dev/jun202407060017/articles/74d2eca1098f53</link><guid isPermaLink="true">https://zenn.dev/jun202407060017/articles/74d2eca1098f53</guid><pubDate>Sun, 10 Nov 2024 09:35:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--YxQnsdYb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590network%25E3%2580%2591portcanning%25E3%2581%25A7%25E8%2587%25AA%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2581%25AE%25E8%25A8%25B1%25E5%258F%25AF%25E3%2583%259D%25E3%2583%25BC%25E3%2583%2588%25E3%2582%2592%25E7%25A2%25BA%25E8%25AA%258D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:jun%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSllvVHVxY2k3QVJ4R01lckE0OEtsRmRZS2FMYXhJbUQxOEFFbmFzMDhUakl1UlYybmY9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>jun</dc:creator></item><item><title><![CDATA[ネットワーク関連のコマンド]]></title><description><![CDATA[
+ このインターネット関連のコマンドを覚えるのは難しい、、、なのでChatGptに聞いてみました。
+
+ まずそれぞれのコマンドを簡単に教えてもらえるようにお願い。
+
+
+ ifconfigとssの違いがわからなかったのできいてみた。
+
+ifconfig / ip は「ネットワーク設定」を確認・変更するツールであり、
+ss / netstat は「接続中のネットワーク状態」を調べるツール。
+
+ インターネット関連のファイル
+
+
+ それぞれのコマンドのオプション
+
+
+
+
+
+
+
+
+
+
+ nmcliとは
+Networkmanagerという管理方法を行う
+具体的に行えること
+PWをつかったwifi接...]]></description><link>https://zenn.dev/pecopeco/articles/3f48fa65584d48</link><guid isPermaLink="true">https://zenn.dev/pecopeco/articles/3f48fa65584d48</guid><pubDate>Sun, 10 Nov 2024 01:11:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--YrLe4Q_j--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%258D%25E3%2583%2583%25E3%2583%2588%25E3%2583%25AF%25E3%2583%25BC%25E3%2582%25AF%25E9%2596%25A2%25E9%2580%25A3%25E3%2581%25AE%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:peco%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y0OGNhMTlmOTQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>peco</dc:creator></item><item><title><![CDATA[Zig で LED の色を変えてみた (ASUS Z790 Aura)]]></title><description><![CDATA[
+ 概要
+マザーボードの LED の色をデーモンで制御したい
+
+要件
+
+ASUS Aura を実装した LED を制御する
+
+
+仕様
+
+Daemon として動作する
+温度が上がれば赤く光る
+温度が下がれば青く光る
+閾値は zone2 で30度
+
+
+設計
+
+Aura のクライアントを Zig で書く
+
+https://www.asus.com/motherboards-components/motherboards/csm/prime-z790-a-wifi-csm/
+
+デーモンを Zig で書いてデバイス周りの実装を C ライブラリで書く
+
+https://github.com/libu...]]></description><link>https://zenn.dev/exelion/articles/4ce524e1a6fd16</link><guid isPermaLink="true">https://zenn.dev/exelion/articles/4ce524e1a6fd16</guid><pubDate>Sat, 09 Nov 2024 15:02:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ZMrnairq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Zig%2520%25E3%2581%25A7%2520LED%2520%25E3%2581%25AE%25E8%2589%25B2%25E3%2582%2592%25E5%25A4%2589%25E3%2581%2588%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2520%2528ASUS%2520Z790%2520Aura%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kei%2520Sawamura%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI0MWNlZWQ3ZWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kei Sawamura</dc:creator></item><item><title><![CDATA[ホスト名とドメイン名の違い]]></title><description><![CDATA[なんか混乱したので記す。。。
+chatGPTに聞きました。
+
+]]></description><link>https://zenn.dev/pecopeco/articles/12e342541f19be</link><guid isPermaLink="true">https://zenn.dev/pecopeco/articles/12e342541f19be</guid><pubDate>Sat, 09 Nov 2024 07:57:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--LXCyS4r2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%259B%25E3%2582%25B9%25E3%2583%2588%25E5%2590%258D%25E3%2581%25A8%25E3%2583%2589%25E3%2583%25A1%25E3%2582%25A4%25E3%2583%25B3%25E5%2590%258D%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:peco%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y0OGNhMTlmOTQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>peco</dc:creator></item><item><title><![CDATA[ホームサーバー完全構築ガイド #1 OS導入とインフラ設定]]></title><description><![CDATA[記事シリーズ:
+ホームサーバー完全構築ガイド #0 計画とハードウェア選定
+ホームサーバー完全構築ガイド #2 サービス群の選定
+ホームサーバー完全構築ガイド #3 WordPressのデプロイ
+
+ OSのインストール
+ハードウェアを入手した後、プリインストールされたWindows OSをLinuxに置き換える必要があります。インストール手順は通常のコンピューターと同じです：OSが入ったUSBメモリを挿入し、BIOSでブートドライブを変更し、指示に従ってインストールを完了します。今回選択したLinuxディストリビューションは Ubuntu 22.04 Jammy Jellyfish です...]]></description><link>https://zenn.dev/solitudera/articles/6ebdfdf096b542</link><guid isPermaLink="true">https://zenn.dev/solitudera/articles/6ebdfdf096b542</guid><pubDate>Fri, 08 Nov 2024 16:37:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--tHxexwfL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%259B%25E3%2583%25BC%25E3%2583%25A0%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E5%25AE%258C%25E5%2585%25A8%25E6%25A7%258B%25E7%25AF%2589%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%2520%25231%2520OS%25E5%25B0%258E%25E5%2585%25A5%25E3%2581%25A8%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2595%25E3%2583%25A9%25E8%25A8%25AD%25E5%25AE%259A%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:SolitudeRA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSmQtdWxfWFNVYlQtQ2wwUXNqdFd0N1NGSG5sZkUyUnd3Nk9LU2VCeHpKZVFLYUNiND1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>SolitudeRA</dc:creator></item><item><title><![CDATA[公開鍵認証を用いたssh接続のすすめ]]></title><description><![CDATA[
+ はじめに
+WSL上のubuntuに対して、ホストOS(Windows11)からSSHで接続するまでになります。
+OS：Windows11
+接続先：ubuntu(WSL)
+
+ sshdインストール～パスワード認証でのログインまで
+sshで接続できるようにubuntu側で設定します。
+
+ sshサーバ(ubuntu)がインストールされているか確認
+以下のコマンドを実行してインストールされているか確認します。
+# sudo systemctl status ssh
+次のように表示された場合は、インストールする必要があります。
+Unit ssh.service could not be fo...]]></description><link>https://zenn.dev/hinaraya/articles/7068821b059479</link><guid isPermaLink="true">https://zenn.dev/hinaraya/articles/7068821b059479</guid><pubDate>Fri, 08 Nov 2024 10:12:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5YyODPdO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2585%25AC%25E9%2596%258B%25E9%258D%25B5%25E8%25AA%258D%25E8%25A8%25BC%25E3%2582%2592%25E7%2594%25A8%25E3%2581%2584%25E3%2581%259Fssh%25E6%258E%25A5%25E7%25B6%259A%25E3%2581%25AE%25E3%2581%2599%25E3%2581%2599%25E3%2582%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:JohnSatomura%2Cx_90%2Cy_121/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>JohnSatomura</dc:creator></item><item><title><![CDATA[インフラエンジニアの現場に来てよく使うLinuxコマンド]]></title><description><![CDATA[
+ 「自分は」
+未経験から３０代でIT業界へ転職した者です。
+現場配属していただいて学んだことを備忘録として投稿してます。
+Zennの投稿方法も勉強中
+
+ 今のところめちゃ使うLinuxコマンド
+とにかくよく触るLinux。
+最近だとAWSでサーバー建ててServiceNowのAgentインストールしてテスト等行っている。
+その際によく使うコマンドが以下のコマンド
+
+
+
+コマンド
+説明
+
+
+
+
+sudo -s
+管理者権限に昇格
+
+
+rpm -vi パッケージ名
+パッケージのインストール
+
+
+rpm -ev パッケージ名
+パッケージアンインストール
+
+
+grep *
+特定の文字列がある行を...]]></description><link>https://zenn.dev/komarerial/articles/80eb7d1dcfdc89</link><guid isPermaLink="true">https://zenn.dev/komarerial/articles/80eb7d1dcfdc89</guid><pubDate>Wed, 06 Nov 2024 13:02:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1JrwII7W--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2595%25E3%2583%25A9%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%25E3%2581%25AE%25E7%258F%25BE%25E5%25A0%25B4%25E3%2581%25AB%25E6%259D%25A5%25E3%2581%25A6%25E3%2582%2588%25E3%2581%258F%25E4%25BD%25BF%25E3%2581%2586Linux%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:komarerial%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhkNGFjZWY1ZTcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>komarerial</dc:creator></item><item><title><![CDATA[番外編 centOS7でyumができなくなったときには～ 実践！Hyper-Vで開発環境構築! CentOS7+VSCode+Laravel]]></title><description><![CDATA[
+ はじめに
+これはCentOS7を使い倒そうと思った矢先yumできなくて困った人向けの記事です。
+
+ 本題
+
+ 経緯
+環境構築のため以下のコマンドを実行したらなんかうまく行かなかった。
+
+CentOS7
+# apache入れまーす！
+yum install httpd
+
+
+ 原因
+2024年6月30日で公式サポートが終了したからです。
+
+ 対策
+/etc/yum.repo.d/CentOS-Base.repoを以下のとおりに編集
+
+mirrorlistをコメントアウトする
+baseurlを追記してvault.centos.orgのリポジトリURLを入力
+
+最後にyumのキャッシュをクリ...]]></description><link>https://zenn.dev/kudosho/articles/43eeb2a87d7072</link><guid isPermaLink="true">https://zenn.dev/kudosho/articles/43eeb2a87d7072</guid><pubDate>Wed, 06 Nov 2024 10:54:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--KlVG-Ef---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%2595%25AA%25E5%25A4%2596%25E7%25B7%25A8%2520centOS7%25E3%2581%25A7yum%25E3%2581%258C%25E3%2581%25A7%25E3%2581%258D%25E3%2581%25AA%25E3%2581%258F%25E3%2581%25AA%25E3%2581%25A3%25E3%2581%259F%25E3%2581%25A8%25E3%2581%258D%25E3%2581%25AB%25E3%2581%25AF%25EF%25BD%259E%2520%25E5%25AE%259F%25E8%25B7%25B5%25EF%25BC%2581Hyper-V%25E3%2581%25A7%25E9%2596%258B%25E7%2599%25BA%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%2521%2520CentOS7%252BV...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kudo%2520sho%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0ZjhjNmZfYWJMMC1NN2FGdVFaUzVxdC1XWlM5QkNycll4MnpydzAwSGs9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kudo sho</dc:creator></item><item><title><![CDATA[Linuxディストリビューション]]></title><description><![CDATA[
+ Linuxディストリビューションとは
+
+Linux® ディストリビューションは、Linux カーネルから構築された、インストール可能なオペレーティングシステムで、ユーザープログラム、リポジトリ、ライブラリをサポートしています。
+
+
+カーネルがLinuxカーネルであるOSのことをLinuxディストリビューションと呼ぶ
+オープンソース
+カスタマイズ可能
+
+
+
+
+ Linuxディストリビューションの種類
+
+RedHat系
+
+Red Hat Enterprise Linux（RHEL）
+CentOS
+Fedora
+
+
+Debian系
+
+Debian GNU/Linux
+Ubuntu
+など
+
+...]]></description><link>https://zenn.dev/417yr/articles/273352f61d8e76</link><guid isPermaLink="true">https://zenn.dev/417yr/articles/273352f61d8e76</guid><pubDate>Tue, 05 Nov 2024 10:42:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Cvng6NS0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%25E3%2583%2587%25E3%2582%25A3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25AA%25E3%2583%2593%25E3%2583%25A5%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:417yr%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY5NDJhY2ViOTMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>417yr</dc:creator></item><item><title><![CDATA[SadServers解説#11 "Minneapolis": Break a CSV file]]></title><description><![CDATA[
+ 問題概要
+
+ シナリオ
+CSVファイルを分割する
+
+ 問題詳細
+home/admin/ディレクトリにあるCSVファイルdata\.csvを、サイズがほぼ同じになるように正確に10個の小さなファイルdata-00.csv、data-01.csv、…data-09.csvに分割してください。すべてのファイルは、data\.csvと同じヘッダー（カラム名が書かれた1行目）を持つ必要があります。どの小さなファイルも32KBを超えてはいけません。
+※ファイルが行の途中で区切られても構いません（つまり、ファイルは改行で区切らず、どこでも分割して構いません）。生成されるファイルは、完全なCSVファ...]]></description><link>https://zenn.dev/comf_nakamura/articles/sadservers_11-3</link><guid isPermaLink="true">https://zenn.dev/comf_nakamura/articles/sadservers_11-3</guid><pubDate>Mon, 04 Nov 2024 01:19:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6vT9FB4x--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:SadServers%25E8%25A7%25A3%25E8%25AA%25AC%252311%2520%2522Minneapolis%2522%253A%2520Break%2520a%2520CSV%2520file%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25BC%25E3%2583%2588%25E3%2582%25BE%25E3%2583%25BC%25E3%2583%25B3%25E4%25B8%25AD%25E6%259D%2591%25EF%25BD%259C%25E6%2596%25B0%25E4%25BA%25BA%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25A6%25E3%2583%2589...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU1OGFjNDI2M2QuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>コンフォートゾーン中村｜新人クラウドエンジニア</dc:creator></item><item><title><![CDATA[Linux でも日本語の man page を印刷したい！]]></title><description><![CDATA[
+ 概要
+Ubuntu にデフォルトでインストールされている man コマンド、あるいは、そのための最小限の groff システムでは、日本語を含む man page を PostScript に出力することができません。 この記事では、Ubuntu に groff をインストールし、さらに groff のための日本語フォントをインストールすることによって、日本語の man page を PostScript 経由で印刷できるようにするまでの過程を説明します。
+環境について
+以下の環境で動作を確認しています。 この環境はコンテナの上に作られていますが、通常のインストールでも問題ないはずで...]]></description><link>https://zenn.dev/kusaremkn/articles/1b4bf13e0b938b</link><guid isPermaLink="true">https://zenn.dev/kusaremkn/articles/1b4bf13e0b938b</guid><pubDate>Sun, 03 Nov 2024 17:58:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--FU3syAgI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%2520%25E3%2581%25A7%25E3%2582%2582%25E6%2597%25A5%25E6%259C%25AC%25E8%25AA%259E%25E3%2581%25AE%2520man%2520page%2520%25E3%2582%2592%25E5%258D%25B0%25E5%2588%25B7%25E3%2581%2597%25E3%2581%259F%25E3%2581%2584%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:KusaReMKN%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE4ZTcyNWU2ZmMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>KusaReMKN</dc:creator></item><item><title><![CDATA[WSLのインストール方法]]></title><description><![CDATA[
+ 本記事について
+この記事では，WindowsでLinuxを使用するために，WSLをインストールする方法を記載します．
+
+ WSLとは
+WSL(Windows Subsystem for Linux)とは，Windows上でLinuxの実行環境を構築するサブシステムです．
+WSLでは様々なLinuxディストリビューションを利用することが可能ですが，本記事ではUbuntuを用いた場合を記載します．
+
+ インストール手順
+「Windows Powershell」を使ってWSLをインストールする手順について解説します．
+まず，Windows Powershellを管理者として実行を指定して，...]]></description><link>https://zenn.dev/komdoroid/articles/b863fe02bedf33</link><guid isPermaLink="true">https://zenn.dev/komdoroid/articles/b863fe02bedf33</guid><pubDate>Fri, 01 Nov 2024 13:04:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--p6AS-C2y--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:WSL%25E3%2581%25AE%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kom%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JjMmEzNTUxOWUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kom</dc:creator></item><item><title><![CDATA[Pacman: Landlock関連エラーの調査]]></title><description><![CDATA[
+ What is this
+Pacmanでのパッケージ更新時に出力された表題のエラーについて調査した際のメモ。
+Stackable Linux Security Module(LSM)であるLandlockについても概要をまとめている。
+
+ 背景
+ArchLinuxを使っている中、pacmanでパッケージを更新しようとした際に以下のようなエラーメッセージが出力された。
+error: restricting filesystem access failed because the landlock rule for the temporary download directory cou...]]></description><link>https://zenn.dev/bashi8128/articles/pacman-landlock</link><guid isPermaLink="true">https://zenn.dev/bashi8128/articles/pacman-landlock</guid><pubDate>Fri, 01 Nov 2024 07:16:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6rn9SMZN--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Pacman%253A%2520Landlock%25E9%2596%25A2%25E9%2580%25A3%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E3%2581%25AE%25E8%25AA%25BF%25E6%259F%25BB%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:bashi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUxtNXd1M0pVRy1FT2oxVGxSZ1BxMTNBR1JCb2FSWS1fOUFjMGYwakVpTlo9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>bashi</dc:creator></item><item><title><![CDATA[疑似端末のメモ]]></title><description><![CDATA[O'Reilly Japan - Linuxプログラミングインタフェースの疑似端末の章が詳しい。
+疑似端末とはプロセス間通信(IPC)を実現するための方法のひとつ。パイプのように片方に書いたデータをもう片方から読み取ることができる。
+
+A pseudoterminal (sometimes abbreviated "pty") is a pair of
+virtual character devices that provide a bidirectional
+communication channel.  One end of the channel is called the
+mas...]]></description><link>https://zenn.dev/h_izu/articles/fd9e35f8c9179b</link><guid isPermaLink="true">https://zenn.dev/h_izu/articles/fd9e35f8c9179b</guid><pubDate>Fri, 01 Nov 2024 06:03:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--CgGpVC8X--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%2596%2591%25E4%25BC%25BC%25E7%25AB%25AF%25E6%259C%25AB%25E3%2581%25AE%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:h-izu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU3Mzc0Zjg2ZDMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>h-izu</dc:creator></item><item><title><![CDATA[プロセスグループとセッション関連の用語メモ]]></title><description><![CDATA[プロセスグループとセッションについては「ふつうのLinuxプログラミング」に書いてある文章が一番簡潔で分かりやすい。
+https://blog.shibayu36.org/entry/2017/11/07/193000
+
+
+プロセスグループとセッションの役割 277
+- プロセスグループはパイプでつながれたプロセス群全てにシグナルを送ることが出来るような仕組み
+- セッションはユーザーのログインからログアウトまでの流れを管理するための概念
+
+
+
+ プロセスグループ
+プロセスグループはパイプでつながれたプロセス群に対してシグナルを送るための仕組み。
+
+シェルは、一つのコマンドもしくはパイプ...]]></description><link>https://zenn.dev/h_izu/articles/e5e6c1b1d1055d</link><guid isPermaLink="true">https://zenn.dev/h_izu/articles/e5e6c1b1d1055d</guid><pubDate>Fri, 01 Nov 2024 02:30:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--i_MewtjE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25BB%25E3%2582%25B9%25E3%2582%25B0%25E3%2583%25AB%25E3%2583%25BC%25E3%2583%2597%25E3%2581%25A8%25E3%2582%25BB%25E3%2583%2583%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E9%2596%25A2%25E9%2580%25A3%25E3%2581%25AE%25E7%2594%25A8%25E8%25AA%259E%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:h-izu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU3Mzc0Zjg2ZDMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>h-izu</dc:creator></item></channel></rss>
