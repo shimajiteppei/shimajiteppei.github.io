@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Ubuntu」のフィード]]></title><description><![CDATA[Zennのトピック「Ubuntu」のRSSフィードです]]></description><link>https://zenn.dev/topics/ubuntu</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/8c2cdbc5b3.png</url><title>Zennの「Ubuntu」のフィード</title><link>https://zenn.dev/topics/ubuntu</link></image><generator>zenn.dev</generator><lastBuildDate>Thu, 14 Nov 2024 04:57:41 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/ubuntu/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Ubuntu Server 24.04 を VirtualBox にインストール]]></title><description><![CDATA[VirtualBox7.1がリリースされて、ようやくApple SiliconのPCでもVirtualBoxが利用できるようになりましたので、早速 Ubuntu Server 24.04 をインストールしてみました。
+こちら 「to skip startup.nsh or any other key to continue.」 の対応方法 の記事のようにamdとarmを間違えないようお気をつけください。
+
+ 環境
+
+Chip: Apple M2 Max
+macOS: Sequoia 15.0.1
+VirtualBox: 7.1.4
+Ubuntu: Ubuntu Server 24.04
+...]]></description><link>https://zenn.dev/makaaso/articles/install-ubuntu-2404-virtualbox</link><guid isPermaLink="true">https://zenn.dev/makaaso/articles/install-ubuntu-2404-virtualbox</guid><pubDate>Mon, 11 Nov 2024 06:22:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--h2m6nb4S--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ubuntu%2520Server%252024.04%2520%25E3%2582%2592%2520VirtualBox%2520%25E3%2581%25AB%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:makaaso%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0YzN3ZnZwOVZ6ZGxkMWlrSUlYNFFna0NWUzZSSWJqMDhaSjRlUzI9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>makaaso</dc:creator></item><item><title><![CDATA[systemctlの使い方]]></title><description><![CDATA[
+ サービスの起動
+sudo systemctl start [サービス名]
+
+ ステータスの確認
+active (running)と表示されていれば正常に起動している。
+sudo systemctl status [サービス名]
+
+ サービスの停止
+sudo systemctl stop [サービス名]
+
+ 自動起動
+システムが再起動した際に、自動的にサービスを起動する。
+sudo systemctl enable [サービス名]
+サービスの自動起動を無効にする。
+sudo systemctl disable [サービス名]
+サービスの自動起動が有効か無効か調べる。
+sudo syst...]]></description><link>https://zenn.dev/tomoakinagahara/articles/521a8ffbbedc89</link><guid isPermaLink="true">https://zenn.dev/tomoakinagahara/articles/521a8ffbbedc89</guid><pubDate>Sun, 10 Nov 2024 12:54:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--YcFRI87v--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:systemctl%25E3%2581%25AE%25E4%25BD%25BF%25E3%2581%2584%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Tomoaki%2520Nagahara%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2czREt6Z1p1U3hEcGVZaFY1ajhJSjNmTzFZODlMLXg3bVJxcFU1Q0E9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Tomoaki Nagahara</dc:creator></item><item><title><![CDATA[ホームサーバー完全構築ガイド #1 OS導入とインフラ設定]]></title><description><![CDATA[記事シリーズ:
+ホームサーバー完全構築ガイド #0 計画とハードウェア選定
+ホームサーバー完全構築ガイド #2 サービス群の選定
+ホームサーバー完全構築ガイド #3 WordPressのデプロイ
+
+ OSのインストール
+ハードウェアを入手した後、プリインストールされたWindows OSをLinuxに置き換える必要があります。インストール手順は通常のコンピューターと同じです：OSが入ったUSBメモリを挿入し、BIOSでブートドライブを変更し、指示に従ってインストールを完了します。今回選択したLinuxディストリビューションは Ubuntu 22.04 Jammy Jellyfish です...]]></description><link>https://zenn.dev/solitudera/articles/6ebdfdf096b542</link><guid isPermaLink="true">https://zenn.dev/solitudera/articles/6ebdfdf096b542</guid><pubDate>Fri, 08 Nov 2024 16:37:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--tHxexwfL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%259B%25E3%2583%25BC%25E3%2583%25A0%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E5%25AE%258C%25E5%2585%25A8%25E6%25A7%258B%25E7%25AF%2589%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%2520%25231%2520OS%25E5%25B0%258E%25E5%2585%25A5%25E3%2581%25A8%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2595%25E3%2583%25A9%25E8%25A8%25AD%25E5%25AE%259A%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:SolitudeRA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSmQtdWxfWFNVYlQtQ2wwUXNqdFd0N1NGSG5sZkUyUnd3Nk9LU2VCeHpKZVFLYUNiND1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>SolitudeRA</dc:creator></item><item><title><![CDATA[Github Actionsでubuntu-latestラベルがUbuntu24系になるらしい。]]></title><description><![CDATA[
+ 概要
+2024年11月5日にGithubから以下のような記事がでていました。
+https://github.blog/changelog/2024-11-05-notice-of-breaking-changes-for-github-actions/
+簡単に内容をまとめると、
+
+
+ubuntu-latest ラベルのイメージをUbuntu 24系に変更予定。
+
+actions/upload-artifact actions/download-artifact のv3は終了予定。
+fork時にActionsを実行しないように変更可能。
+WebhookのRatelimitが追加。
+Se...]]></description><link>https://zenn.dev/sirok/articles/c1dcce143e2246</link><guid isPermaLink="true">https://zenn.dev/sirok/articles/c1dcce143e2246</guid><pubDate>Wed, 06 Nov 2024 09:08:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--SPY8i98C--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Github%2520Actions%25E3%2581%25A7ubuntu-latest%25E3%2583%25A9%25E3%2583%2599%25E3%2583%25AB%25E3%2581%258CUbuntu24%25E7%25B3%25BB%25E3%2581%25AB%25E3%2581%25AA%25E3%2582%258B%25E3%2582%2589%25E3%2581%2597%25E3%2581%2584%25E3%2580%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Takumi%2520Sato%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzIzYWMxYjU0OWEuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:sirok%2520engineer%2527s%2520blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRkMGU5ZDNjOTQuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Takumi Sato</dc:creator></item><item><title><![CDATA[【Searge_LLM】ComfyUIでローカルLLMを活用したプロンプト生成]]></title><description><![CDATA[
+ はじめに
+近年、画像生成AIの進化により、より精緻なプロンプト制御が求められています。今回は、ComfyUIにSearge LLMを導入し、ローカルLLMを活用した効率的なプロンプト生成方法をご紹介します。
+ComfyUI_Searge_LLMは、Windows環境での動作を主にテストされていますが、Ubuntu環境でもpip install llama-cpp-pythonを手動でインストールすることで利用可能です。
+
+ Searge LLMの特徴
+
+ローカル環境でLLMを実行可能
+プライバシーを確保しながらプロンプト生成
+低レイテンシーな応答
+カスタマイズ可能なinstructi...]]></description><link>https://zenn.dev/toki_mwc/articles/1937810e390ac6</link><guid isPermaLink="true">https://zenn.dev/toki_mwc/articles/1937810e390ac6</guid><pubDate>Mon, 04 Nov 2024 09:42:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--o2dhx1ED--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Searge_LLM%25E3%2580%2591ComfyUI%25E3%2581%25A7%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25AB%25E3%2583%25ABLLM%25E3%2582%2592%25E6%25B4%25BB%25E7%2594%25A8%25E3%2581%2597%25E3%2581%259F%25E3%2583%2597%25E3%2583%25AD%25E3%2583%25B3%25E3%2583%2597%25E3%2583%2588%25E7%2594%259F%25E6%2588%2590%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:toki_mwc%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzViNzRiNzczNGIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>toki_mwc</dc:creator></item><item><title><![CDATA[「to skip startup.nsh or any other key to continue.」 の対応方法]]></title><description><![CDATA[VirtualBox7.1がリリースされて、ようやくApple SiliconのPCでもVirtualBoxが利用できるようになりました。
+早速 Ubuntu Server 24.04 をインストールしてみると UEFI Interactive Shell v2.2 起動して以下のメッセージが表示されてインストールが開始されませんでした。
+ Press ESC in 1 seconds to skip startup.nsh or any other key to continue.` と表示されて、インストールが始まりませんでした。
+
+ 環境
+
+Chip: Apple M2 Max
+m...]]></description><link>https://zenn.dev/makaaso/articles/to-skip-startup-nsh</link><guid isPermaLink="true">https://zenn.dev/makaaso/articles/to-skip-startup-nsh</guid><pubDate>Sun, 03 Nov 2024 00:43:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wrFm8aak--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%258Cto%2520skip%2520startup.nsh%2520or%2520any%2520other%2520key%2520to%2520continue.%25E3%2580%258D%2520%25E3%2581%25AE%25E5%25AF%25BE%25E5%25BF%259C%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:makaaso%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0YzN3ZnZwOVZ6ZGxkMWlrSUlYNFFna0NWUzZSSWJqMDhaSjRlUzI9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>makaaso</dc:creator></item><item><title><![CDATA[WSLのインストール方法]]></title><description><![CDATA[
+ 本記事について
+この記事では，WindowsでLinuxを使用するために，WSLをインストールする方法を記載します．
+
+ WSLとは
+WSL(Windows Subsystem for Linux)とは，Windows上でLinuxの実行環境を構築するサブシステムです．
+WSLでは様々なLinuxディストリビューションを利用することが可能ですが，本記事ではUbuntuを用いた場合を記載します．
+
+ インストール手順
+「Windows Powershell」を使ってWSLをインストールする手順について解説します．
+まず，Windows Powershellを管理者として実行を指定して，...]]></description><link>https://zenn.dev/komdoroid/articles/b863fe02bedf33</link><guid isPermaLink="true">https://zenn.dev/komdoroid/articles/b863fe02bedf33</guid><pubDate>Fri, 01 Nov 2024 13:04:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--p6AS-C2y--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:WSL%25E3%2581%25AE%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kom%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JjMmEzNTUxOWUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kom</dc:creator></item><item><title><![CDATA[Java版マインクラフトでCloudflare TunnelとVPSを使ってポート開放をせずに外部に公開する]]></title><description><![CDATA[当初自宅サーバーでマイクラ鯖を立て、ngrokやlocaltunnelでポートを転送して複数人で快適にプレイしていたのですが、どちらも転送量1GBや独自IPに制約があり、ちょうど自分が持っていた月額400円のVPSをポート転送に使えるようにしてみました。
+
+ 必要な知識
+・Ubuntuの基本的な操作
+・systemctl
+
+ 自宅サーバー(ミニPC)
+CPU Ryzen7 5700U
+メモリ 16GB
+SSD 512GB
+
+ 月額400円のVPSの性能
+CPU 1vCPU
+メモリ 1GB
+SSD 20GB
+NW 100Mbps上限
+IP IPv4/IPv6
+ポートの転送を行っているだけな...]]></description><link>https://zenn.dev/csdotnet/articles/ac896826ed82e4</link><guid isPermaLink="true">https://zenn.dev/csdotnet/articles/ac896826ed82e4</guid><pubDate>Thu, 31 Oct 2024 13:46:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6rr5zcwW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java%25E7%2589%2588%25E3%2583%259E%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25AF%25E3%2583%25A9%25E3%2583%2595%25E3%2583%2588%25E3%2581%25A7Cloudflare%2520Tunnel%25E3%2581%25A8VPS%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2583%259D%25E3%2583%25BC%25E3%2583%2588%25E9%2596%258B%25E6%2594%25BE%25E3%2582%2592%25E3%2581%259B%25E3%2581%259A%25E3%2581%25AB%25E5%25A4%2596%25E9%2583%25A8%25E3%2581%25AB%25E5%2585%25AC%25E9%2596%258B%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:CSDotNET%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJhMmQwOWJiMjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>CSDotNET</dc:creator></item><item><title><![CDATA[AWS EC2で構築したUbuntuをTeraTermでSSHログインする方法]]></title><description><![CDATA[
+ 前提
+
+Windows PCを使用。
+TeraTermをインストール済みであること
+ElasticIP(グローバルIPアドレス)の割り当て
+パブリック用のサブネットの用意
+パブリック用のルートテーブルの用意
+インターネットゲートウェイの紐づけ
+キーペアを作成し、鍵ファイルをローカルPCにダウンロードすること
+上記の設定をしないと、AWS EC2で構築したUbuntuの環境をWindowsPC等でもSSHログインができるかというと不可能です。上記の設定方法は様々な形で情報として公開されているので今回は割愛します。
+
+
+ 背景
+
+AWS EC2でUbuntuの環境構築をしたもののいきなり...]]></description><link>https://zenn.dev/headwaters/articles/511850064b72be</link><guid isPermaLink="true">https://zenn.dev/headwaters/articles/511850064b72be</guid><pubDate>Thu, 31 Oct 2024 12:55:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ENMRULdD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AWS%2520EC2%25E3%2581%25A7%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2597%25E3%2581%259FUbuntu%25E3%2582%2592TeraTerm%25E3%2581%25A7SSH%25E3%2583%25AD%25E3%2582%25B0%25E3%2582%25A4%25E3%2583%25B3%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:jemiya%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZjNGExY2UxMDYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2598%25E3%2583%2583%25E3%2583%2589%25E3%2582%25A6%25E3%2582%25A9%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%25BC%25E3%2582%25B9%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FlNjlhNTFjMDIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>jemiya</dc:creator></item><item><title><![CDATA[Ubuntu24.04+nginx+php8.3-fpmでサクッとWP構築]]></title><description><![CDATA[ちょうどいい記事がなかったので備忘録的に
+
+ 1. VMを用意
+適当に拾ってきます
+私は転がってたubuntu 22.04を24.04に更新したものを用意しました
+
+ 2. 必要なものをインストール
+
+ nginx
+sudo apt install curl gnupg2 ca-certificates lsb-release ubuntu-keyring
+curl https://nginx.org/keys/nginx_signing.key | gpg --dearmor \
+    | sudo tee /usr/share/keyrings/nginx-archive-keyr...]]></description><link>https://zenn.dev/xpadev/articles/7f1035ddd57284</link><guid isPermaLink="true">https://zenn.dev/xpadev/articles/7f1035ddd57284</guid><pubDate>Thu, 31 Oct 2024 06:27:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ZUaNYA7E--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ubuntu24.04%252Bnginx%252Bphp8.3-fpm%25E3%2581%25A7%25E3%2582%25B5%25E3%2582%25AF%25E3%2583%2583%25E3%2581%25A8WP%25E6%25A7%258B%25E7%25AF%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:xpadev%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzUxM2FmZjY0ZTcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>xpadev</dc:creator></item><item><title><![CDATA[【過去こんなことがあったなシリーズ②】AWS EC2(Ubuntu)がファイアウォール設定のミスでSSHログインが出来なくなった時の対処方法]]></title><description><![CDATA[
+ 過去の出来事
+PaaSに頼り切っているクラウド兼インフラエンジニアです。前回に続き、「過去こんなことがあったなシリーズ」を記事にしたいと思います。
+今回もAWS EC2(Ubuntu)がファイアウォール設定のミスでSSHログインが出来なくなった時の対処方法を取り上げたいと思います。
+
+ 失敗談
+
+前回と同じユーザーと公開鍵&amp;秘密鍵でSSHログインの仕様です。詳細は下記、URLを参照してください。
+まず流れは下記の通り。（スクショは検証環境で再現しました）
+
+
+Ubuntuではデフォルトではファイアウォールは無効設定です。Ubuntuにはデフォルトでufwというファイアウォール...]]></description><link>https://zenn.dev/headwaters/articles/ef8253c6977616</link><guid isPermaLink="true">https://zenn.dev/headwaters/articles/ef8253c6977616</guid><pubDate>Thu, 31 Oct 2024 00:05:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3by9bEN7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E9%2581%258E%25E5%258E%25BB%25E3%2581%2593%25E3%2582%2593%25E3%2581%25AA%25E3%2581%2593%25E3%2581%25A8%25E3%2581%258C%25E3%2581%2582%25E3%2581%25A3%25E3%2581%259F%25E3%2581%25AA%25E3%2582%25B7%25E3%2583%25AA%25E3%2583%25BC%25E3%2582%25BA%25E2%2591%25A1%25E3%2580%2591AWS%2520EC2%2528Ubuntu%2529%25E3%2581%258C%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2582%25A2%25E3%2582%25A6%25E3%2582%25A9%25E3%2583%25BC%25E3%2583%25AB%25E8%25A8%25AD%25E5%25AE%259A%25E3%2581%25AE%25E3%2583%259F%25E3%2582%25B9%25E3%2581%25A7SSH%25E3%2583%25AD%25E3%2582%25B0%25E3%2582%25A4%25E3%2583%25B3%25E3%2581%258C...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:jemiya%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZjNGExY2UxMDYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2598%25E3%2583%2583%25E3%2583%2589%25E3%2582%25A6%25E3%2582%25A9%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%25BC%25E3%2582%25B9%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FlNjlhNTFjMDIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>jemiya</dc:creator></item><item><title><![CDATA[【過去こんなことがあったなシリーズ①】AWS EC2(Ubuntu)がファイアウォール設定のミスでSSHログインが出来なくなった時の対処方法]]></title><description><![CDATA[
+ 過去の出来事
+PaaSに頼り切っているクラウド兼インフラエンジニアです。「過去こんなことがあったなシリーズ」を記事にしたいと思います。
+今回はAWS EC2(Ubuntu)がファイアウォール設定のミスでSSHログインが出来なくなった時の対処方法を取り上げたいと思います。
+
+ 失敗談
+
+ユーザーと公開鍵&amp;秘密鍵でSSHログインの仕様です。まず流れは下記の通り。（スクショは検証環境で再現しました）
+
+
+Ubuntuではデフォルトではファイアウォールは無効設定です。有効化するには下記のコマンドを実行しました。
+
+ufw enable
+
+当時、80番ポートと443番ポートを開けました...]]></description><link>https://zenn.dev/headwaters/articles/f0234e2ed1d718</link><guid isPermaLink="true">https://zenn.dev/headwaters/articles/f0234e2ed1d718</guid><pubDate>Thu, 31 Oct 2024 00:05:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Onx-dxl2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E9%2581%258E%25E5%258E%25BB%25E3%2581%2593%25E3%2582%2593%25E3%2581%25AA%25E3%2581%2593%25E3%2581%25A8%25E3%2581%258C%25E3%2581%2582%25E3%2581%25A3%25E3%2581%259F%25E3%2581%25AA%25E3%2582%25B7%25E3%2583%25AA%25E3%2583%25BC%25E3%2582%25BA%25E2%2591%25A0%25E3%2580%2591AWS%2520EC2%2528Ubuntu%2529%25E3%2581%258C%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2582%25A2%25E3%2582%25A6%25E3%2582%25A9%25E3%2583%25BC%25E3%2583%25AB%25E8%25A8%25AD%25E5%25AE%259A%25E3%2581%25AE%25E3%2583%259F%25E3%2582%25B9%25E3%2581%25A7SSH%25E3%2583%25AD%25E3%2582%25B0%25E3%2582%25A4%25E3%2583%25B3%25E3%2581%258C...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:jemiya%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZjNGExY2UxMDYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2598%25E3%2583%2583%25E3%2583%2589%25E3%2582%25A6%25E3%2582%25A9%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%25BC%25E3%2582%25B9%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FlNjlhNTFjMDIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>jemiya</dc:creator></item><item><title><![CDATA[【UTM】Macbook AirにLinux(Ubuntu)の仮想環境を構築してみる]]></title><description><![CDATA[
+ はじめに
+こんにちは！
+connectome.designでインターン中のSeitaです。先日、業務で自身のMacbook AirにLinuxの仮想環境を構築する機会があったため、忘備録も兼ねて記事(写真多め)にしておこうと思います。
+VirtualBoxをはじめ、他にもいろいろなやり方があるっぽいですが、個人的にはUTMを使用した方法が一番シンプルでしっくりきました。ということで、今回はUTMを使ってLinux(Ubuntu)の仮想環境構築からLinux上でターミナルを開くまでの手順をテンポよく説明していきます。
+
+ 使用するMacbookのスペック
+MacBook Air (13...]]></description><link>https://zenn.dev/connectome/articles/9345eaac9e4608</link><guid isPermaLink="true">https://zenn.dev/connectome/articles/9345eaac9e4608</guid><pubDate>Mon, 28 Oct 2024 23:35:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--yas_YFkk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590UTM%25E3%2580%2591Macbook%2520Air%25E3%2581%25ABLinux%2528Ubuntu%2529%25E3%2581%25AE%25E4%25BB%25AE%25E6%2583%25B3%25E7%2592%25B0%25E5%25A2%2583%25E3%2582%2592%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Seita%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q3MDM5YjgyZmEuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:COD%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzlhOWRmNjBlNDguanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Seita</dc:creator></item><item><title><![CDATA[SSH先のフォルダの中身をUbuntuのGUIファイルアプリでいじりたい！！[備忘録]]]></title><description><![CDATA[
+ 環境
+ホストOS: Ubuntu22.04
+SSH先OS: Ubuntu22.04
+
+ やり方
+
+ 1. Fileアプリを押す
+
+
+ 2. Other Locations(他の場所)をクリック
+
+
+ 3. serverアドレスを入力して接続する
+sftp://ユーザー名@コンピューター名.local
+# example
+# sftp://kangaroo01@kangaroo01.local
+入力後にConnectを押す。
+つながるとssh先のフォルダを操作できる
+
+]]></description><link>https://zenn.dev/robohase01/articles/1074c994b186bd</link><guid isPermaLink="true">https://zenn.dev/robohase01/articles/1074c994b186bd</guid><pubDate>Sat, 26 Oct 2024 07:46:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--IZnByKZU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:SSH%25E5%2585%2588%25E3%2581%25AE%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25AB%25E3%2583%2580%25E3%2581%25AE%25E4%25B8%25AD%25E8%25BA%25AB%25E3%2582%2592Ubuntu%25E3%2581%25AEGUI%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2581%25A7%25E3%2581%2584%25E3%2581%2598%25E3%2582%258A%25E3%2581%259F%25E3%2581%2584%25EF%25BC%2581%25EF%25BC%2581%255B%25E5%2582%2599%25E5%25BF%2598%25E9%258C%25B2%255D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hasegawa%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVmMjc2MmI1MmQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hasegawa</dc:creator></item><item><title><![CDATA[Tomcatのデフォルトページを非表示にしたい]]></title><description><![CDATA[
+ はじめに
+Tomcatのインストール・初期設定を行い、アクセスしたところデフォルトページ（ウェルカムページ）が表示されていました。
+ユーザ側にTomcat使っていることがモロバレでセキュリティ上もあまりよろしくないし、何より格好悪いので非表示にしたいと思います。
+
+ 環境
+
+OS : Ubuntu
+Tomcat : 9.0.58
+
+
+ 結論
+表示元のindex.htmlを空にするだけ！
+
+ やり方
+
+バックアップファイルを作成する
+htmlファイルは/var/lib/tomcat9/webapps/ROOT/index.htmlにありました。
+
+cp /var/lib/tomcat9...]]></description><link>https://zenn.dev/boku_uchujin/articles/dc68a8ebce1f15</link><guid isPermaLink="true">https://zenn.dev/boku_uchujin/articles/dc68a8ebce1f15</guid><pubDate>Thu, 24 Oct 2024 14:01:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--EJ5meyIv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Tomcat%25E3%2581%25AE%25E3%2583%2587%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25AB%25E3%2583%2588%25E3%2583%259A%25E3%2583%25BC%25E3%2582%25B8%25E3%2582%2592%25E9%259D%259E%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%25AB%25E3%2581%2597%25E3%2581%259F%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:boku_uchujin%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RmYWQ4MmM5YjkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>boku_uchujin</dc:creator></item><item><title><![CDATA[古いPCにUbuntu24.04を入れたらネットにつながらなくなった]]></title><description><![CDATA[使っていないノートPCが眠っていたのでUbuntu Serverを入れて遊ぼうと思った時の話です。
+Ubuntu24.04のインストールが完了して、ネットワークの設定をしようと思ったのですがうまくいかず。
+色々調べてみると/etc/netplan配下にあるファイルが設定ファイルとのことで、もともとあった50-cloud-init.yamlというファイルにwifiの設定を記載し、sudo netplan --debug applyを実行するも、何やらエラーが出てうまくいっていない。
+どうやら既存の50-cloud-init.yamlではなく、99-network-config.yamlとい...]]></description><link>https://zenn.dev/miztake/articles/f6b107203f4058</link><guid isPermaLink="true">https://zenn.dev/miztake/articles/f6b107203f4058</guid><pubDate>Thu, 24 Oct 2024 12:15:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--n54Yb6kn--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%258F%25A4%25E3%2581%2584PC%25E3%2581%25ABUbuntu24.04%25E3%2582%2592%25E5%2585%25A5%25E3%2582%258C%25E3%2581%259F%25E3%2582%2589%25E3%2583%258D%25E3%2583%2583%25E3%2583%2588%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%25AA%25E3%2581%258C%25E3%2582%2589%25E3%2581%25AA%25E3%2581%258F%25E3%2581%25AA%25E3%2581%25A3%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mzhkt%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUxtNXd1MnFtT0k1cVlBZXhuSVVJUUR1WXQ5SHJVQVhQZDFfYWhQTm44aW5RUT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mzhkt</dc:creator></item><item><title><![CDATA[UbuntuのローカルPCでComfyUIにFlux.1を導入する方法]]></title><description><![CDATA[
+ はじめに
+この記事では、ローカルPCのUbuntu環境でSSH接続を使用し、Jupyter Labを通じてComfyUIにFlux.1-devモデルを導入する方法を詳しく解説します。Flux.1-devは高品質な画像生成が可能な最新のAIモデルで、ComfyUIと組み合わせることで強力な画像生成ツールとなります。
+
+ 前提条件
+
+UbuntuがインストールされたローカルPC
+SSH接続の設定
+Jupyter Labのインストールと設定
+
+ComfyUIのインストール
+Hugging Faceアカウントとアクセストークン
+
+ComfyUIのGithubリポジトリにあるJupyter N...]]></description><link>https://zenn.dev/toki_mwc/articles/4e88989680f57f</link><guid isPermaLink="true">https://zenn.dev/toki_mwc/articles/4e88989680f57f</guid><pubDate>Tue, 22 Oct 2024 15:26:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--UgOJwCx1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ubuntu%25E3%2581%25AE%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25AB%25E3%2583%25ABPC%25E3%2581%25A7ComfyUI%25E3%2581%25ABFlux.1%25E3%2582%2592%25E5%25B0%258E%25E5%2585%25A5%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:toki_mwc%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzViNzRiNzczNGIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>toki_mwc</dc:creator></item><item><title><![CDATA[Ubuntuサーバー vs Ubuntuデスクトップ：あなたに最適なUbuntuバージョンを選ぶ]]></title><description><![CDATA[
+
+ 1. Ubuntuサーバーとは？
+Ubuntuサーバーは、Ubuntuのサーバー向けバージョンで、主にサーバー環境で使用されるLinuxベースのOSです。以下のような多様なサーバータスクを実行することができます：
+
+Webサーバー（ApacheやNGINXなど）
+メールサーバー
+データベースサーバー（SQLサーバーなど）
+プロキシサーバー
+DNSサーバー
+ゲームサーバー（Minecraftサーバーなど）
+FTPサーバー
+
+Ubuntuサーバーは、KVMやVirtualBox、VMwareなど多くの仮想化技術をサポートしており、ユーザーに柔軟な仮想環境の選択肢を提供します。
+
+ 2....]]></description><link>https://zenn.dev/lulucky/articles/aea2194b586215</link><guid isPermaLink="true">https://zenn.dev/lulucky/articles/aea2194b586215</guid><pubDate>Tue, 22 Oct 2024 10:24:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BRvNH-07--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ubuntu%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%2520vs%2520Ubuntu%25E3%2583%2587%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%2588%25E3%2583%2583%25E3%2583%2597%25EF%25BC%259A%25E3%2581%2582%25E3%2581%25AA%25E3%2581%259F%25E3%2581%25AB%25E6%259C%2580%25E9%2581%25A9%25E3%2581%25AAUbuntu%25E3%2583%2590%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%2592%25E9%2581%25B8%25E3%2581%25B6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:VPS%2520Pro%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzljMWE1ODU5ZTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>VPS Pro</dc:creator></item><item><title><![CDATA[DockerのubuntuイメージにRuby on Railsをインストールしてみた話]]></title><description><![CDATA[
+ 要目
+dockerのubuntu:latestにRuby on Railsをインストールし、起動確認できるまでの作業まとめです。
+実施日は 2024/10/21 ですので、その時点の最新のubuntuイメージで行っています。
+インストールが必要なものだけ知りたい方は、まとめを参照ください。
+
+ 動機
+普段、開発環境を構築する時は最初からRubyがインストールされたDockerイメージを使ってますが、
+素のubuntuにインストールしたらどうなるのかという興味本位の試みです。
+
+ 用意したもの
+Dockerが実行できる環境（今回はMac）
+
+ 作業記録
+とりあえずubuntuの入ったコ...]]></description><link>https://zenn.dev/fukurozuno/articles/36c3dc01400fab</link><guid isPermaLink="true">https://zenn.dev/fukurozuno/articles/36c3dc01400fab</guid><pubDate>Mon, 21 Oct 2024 06:19:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--PG_o-4og--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%25E3%2581%25AEubuntu%25E3%2582%25A4%25E3%2583%25A1%25E3%2583%25BC%25E3%2582%25B8%25E3%2581%25ABRuby%2520on%2520Rails%25E3%2582%2592%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:rokuen%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JjYmQ4YTBkNTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>rokuen</dc:creator></item><item><title><![CDATA[Skopeo で Docker Registry を同期する]]></title><description><![CDATA[
+ 背景
+2つのDocker Registryを同期（コピー）させたい場合、docker pullとdocker pushで同期させることができる。しかしマルチプラットフォームビルドされたイメージを同期させたい場合において、使用しているPCのCPUアーキテクチャのイメージしか同期できないなどの問題がある。そのためskopeoを用いてマルチプラットフォームビルドのイメージの同期を行う。
+
+ 環境
+
+Ubuntu 22.04 LTS
+Docker 24.0.7
+Skopeo 1.4.1
+CPU amd64 (x86_64)
+
+
+ Skopeoのインストール
+Installing Skopeo...]]></description><link>https://zenn.dev/room_208/articles/b8c7a2d8c3ab95</link><guid isPermaLink="true">https://zenn.dev/room_208/articles/b8c7a2d8c3ab95</guid><pubDate>Sun, 20 Oct 2024 08:53:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--freJUDJH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Skopeo%2520%25E3%2581%25A7%2520Docker%2520Registry%2520%25E3%2582%2592%25E5%2590%258C%25E6%259C%259F%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:room_208%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q2MmRkNTEzN2IuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>room_208</dc:creator></item></channel></rss>
