@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「TypeScript」のフィード]]></title><description><![CDATA[Zennのトピック「TypeScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/typescript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/f13e758fdb.png</url><title>Zennの「TypeScript」のフィード</title><link>https://zenn.dev/topics/typescript</link></image><generator>zenn.dev</generator><lastBuildDate>Sat, 16 Nov 2024 08:38:07 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/typescript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[GraphQLのダイエット術 TypeScript Language Service Pluginで未使用フィールドをなくす]]></title><description><![CDATA[
+ はじめに
+GraphQLは、API開発において柔軟性と効率性を提供する強力なツールです。しかし、クエリの記述が自由な分、クライアント側で不用意に多くのフィールドを要求してしまうと、パフォーマンス低下や保守性の悪化につながる可能性があります🥲
+本記事では、TypeScript Language Service Pluginの1つであるGraphQLSPを活用し、GraphQLクエリの"ダイエット"、つまり未使用フィールドの削減を実現する方法を紹介します。
+※ この記事はTSKaigi Kansai 2024で共有した内容を記事にしたものです。
+https://kansai.tskaig...]]></description><link>https://zenn.dev/reiwatravel/articles/9d9551f5a9cee2</link><guid isPermaLink="true">https://zenn.dev/reiwatravel/articles/9d9551f5a9cee2</guid><pubDate>Sat, 16 Nov 2024 06:19:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--se154bsm--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:GraphQL%25E3%2581%25AE%25E3%2583%2580%25E3%2582%25A4%25E3%2582%25A8%25E3%2583%2583%25E3%2583%2588%25E8%25A1%2593%2520TypeScript%2520Language%2520Service%2520Plugin%25E3%2581%25A7%25E6%259C%25AA%25E4%25BD%25BF%25E7%2594%25A8%25E3%2583%2595%25E3%2582%25A3%25E3%2583%25BC%25E3%2583%25AB...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:yamatsum%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M1ZWFiNjc3MGMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E4%25BB%25A4%25E5%2592%258C%25E3%2583%2588%25E3%2583%25A9%25E3%2583%2599%25E3%2583%25AB%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU4YzhjMDMxNTUuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yamatsum</dc:creator></item><item><title><![CDATA[どうせエクスポートするだけなら変数に代入しなくて良くない？]]></title><description><![CDATA[
+ Next.jsのPageコンポーネント
+Next.jsのよくあるPageコンポーネント。
+const Page: FC = () =&gt; {
+    return &lt;div&gt;Page&lt;/div&gt;
+}
+
+export default Page;
+
+// または
+export default function Page() {
+    return &lt;div&gt;Page&lt;/div&gt;
+}
+これで良くないですか？
+
+page.tsx
+export default (() =&gt; {
+    return &lt;div&gt;Page&l...]]></description><link>https://zenn.dev/bmth/articles/satisfies-fc</link><guid isPermaLink="true">https://zenn.dev/bmth/articles/satisfies-fc</guid><pubDate>Fri, 15 Nov 2024 14:03:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--h7RZCSj8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%25A9%25E3%2581%2586%25E3%2581%259B%25E3%2582%25A8%25E3%2582%25AF%25E3%2582%25B9%25E3%2583%259D%25E3%2583%25BC%25E3%2583%2588%25E3%2581%2599%25E3%2582%258B%25E3%2581%25A0%25E3%2581%2591%25E3%2581%25AA%25E3%2582%2589%25E5%25A4%2589%25E6%2595%25B0%25E3%2581%25AB%25E4%25BB%25A3%25E5%2585%25A5%25E3%2581%2597%25E3%2581%25AA%25E3%2581%258F%25E3%2581%25A6%25E8%2589%25AF%25E3%2581%258F%25E3%2581%25AA%25E3%2581%2584%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2598%25E3%2582%2587%25E3%2581%2586%25E3%2581%2592%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YTVpY3FhSGVfOXQyWjc3YjBWV1RfWlM0MFF3MExBbS1zclhIRWtydDA9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>じょうげん</dc:creator></item><item><title><![CDATA[spine-pixi-v8 ランタイムリリース🎉]]></title><description><![CDATA[
+ spine-pixi-v8 ランタイムのリリース
+先日に Esoteric Software 社にて、spine-pixi-v8 ランタイムのリリース ブログが掲載されました！🎉
+これまでは、spine-pixi ランタイムは PixiJS v7 には対応しており、PixiJS v8 への対応は進行中の状況でした。
+PixiJS v8 への対応はもっと時間がかかるのかな。と思っていましたが、メチャクチャ早いスピードで対応されましたね。
+
+ PixiJS v8 + GSAP + Spine のテンプレートもアップデートしました！
+前回に作成した PixiJS v8 + GSAP + S...]]></description><link>https://zenn.dev/t_tonyo_maru/articles/55732c0a26b27a</link><guid isPermaLink="true">https://zenn.dev/t_tonyo_maru/articles/55732c0a26b27a</guid><pubDate>Fri, 15 Nov 2024 13:59:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--VMtbmoyh--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:spine-pixi-v8%2520%25E3%2583%25A9%25E3%2583%25B3%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25A0%25E3%2583%25AA%25E3%2583%25AA%25E3%2583%25BC%25E3%2582%25B9%2520%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A8%25E3%2582%2593%25E3%2582%2588%25E3%2583%25BC%25E3%2580%2582%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NhNjVjZjg3MjguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>とんよー。</dc:creator></item><item><title><![CDATA[Reactでローカル用ガントチャートアプリ作成までの備忘録①]]></title><description><![CDATA[
+ 作成背景
+
+イントラ環境での超ローカル
+Notionは会社ではセキュリティ上、申請とか必要
+
+
+ 作りたいイメージ
+神様を発見
+https://qiita.com/nkitao/items/cd70fc8f0fbc0983ec69
+できるだけ自分の力でやりつつ本当に困ったら神を参考にする
+
+ やったこと記録
+テンプレートを作成
+npx create-react-app my-gantt-app --template typescript
+cd my-gantt-app
+プロジェクト作成後は以下のサイトを参考にtailwind cssを適用
+https://tailwindcss.co...]]></description><link>https://zenn.dev/dokusy/articles/ec0f95c2019afc</link><guid isPermaLink="true">https://zenn.dev/dokusy/articles/ec0f95c2019afc</guid><pubDate>Fri, 15 Nov 2024 13:04:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--EwSjzbue--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%25E3%2581%25A7%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25AB%25E3%2583%25AB%25E7%2594%25A8%25E3%2582%25AC%25E3%2583%25B3%25E3%2583%2588%25E3%2583%2581%25E3%2583%25A3%25E3%2583%25BC%25E3%2583%2588%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E4%25BD%259C%25E6%2588%2590%25E3%2581%25BE%25E3%2581%25A7%25E3%2581%25AE%25E5%2582%2599%25E5%25BF%2598%25E9%258C%25B2%25E2%2591%25A0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A9%25E3%2581%2585%25E3%2581%258F%25E3%2581%2597%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRiYTU0YmQxZDcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>どぅくし</dc:creator></item><item><title><![CDATA[Cursor(VSCode)で ホバー時のTypeScriptのヒントの長さを変更する方法]]></title><description><![CDATA[
+ 🧩 TypeScriptの型ヒントについて
+CursorやVSCodeでは、TypeScriptの型ヒントがホバー時に表示されます。
+デフォルトではその表示文字数が 160文字 に制限されていますが、必要な情報が隠れてしまうことが多いです。
+
+「もっと見れたら良いのに」と思ったことはありませんか？
+以下で設定を変更する手順を詳しく説明します。
+
+
+ ✍ 変更手順
+
+
+ 1. TSの設定ファイルを開く
+
+
+ターミナルを開きます
+以下のコマンドを実行して対象のファイルを開きます（VSCodeの場合はCursorをVSCodeに置き換えてください）
+
+open /Applications/...]]></description><link>https://zenn.dev/natume/articles/b7778a4cf9089e</link><guid isPermaLink="true">https://zenn.dev/natume/articles/b7778a4cf9089e</guid><pubDate>Fri, 15 Nov 2024 10:53:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dGwtAFok--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Cursor%2528VSCode%2529%25E3%2581%25A7%2520%25E3%2583%259B%25E3%2583%2590%25E3%2583%25BC%25E6%2599%2582%25E3%2581%25AETypeScript%25E3%2581%25AE%25E3%2583%2592%25E3%2583%25B3%25E3%2583%2588%25E3%2581%25AE%25E9%2595%25B7%25E3%2581%2595%25E3%2582%2592%25E5%25A4%2589%25E6%259B%25B4%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:natume%2520%252F%2520nakayama%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lta0I0X240N251X0JRNzhOdWxwOHlVODNiUEw0c3YxUmVmdTJuRGc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>natume / nakayama</dc:creator></item><item><title><![CDATA[Stripe Checkout を用いて利用規約同意を実装する]]></title><description><![CDATA[Stripe Checkout を使用してユーザーの支払いフローに利用規約への同意を組み込む方法を解説します。このブログでは、実装の流れや技術的なポイントを解説しつつ、具体的な TypeScript コード例を交えて解説します。
+
+
+ Stripe Checkout とは
+Stripe Checkout は、Stripe が提供する事前構築済みの支払いフローです。数行のコードで以下を実現できます。
+
+ 安全なクレジットカード処理
+Apple Pay や Google Pay などのデジタルウォレット対応
+グローバルな支払い通貨対応
+ユーザーインターフェースの国際化
+Stripe Chec...]]></description><link>https://zenn.dev/json_hardcoder/articles/ca4111b5e639f3</link><guid isPermaLink="true">https://zenn.dev/json_hardcoder/articles/ca4111b5e639f3</guid><pubDate>Fri, 15 Nov 2024 09:41:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9zH-NxkS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Stripe%2520Checkout%2520%25E3%2582%2592%25E7%2594%25A8%25E3%2581%2584%25E3%2581%25A6%25E5%2588%25A9%25E7%2594%25A8%25E8%25A6%258F%25E7%25B4%2584%25E5%2590%258C%25E6%2584%258F%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:jhcoder%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVlODYyMzUyMzEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>jhcoder</dc:creator></item><item><title><![CDATA[Spring AnimationとVanilla JSで始めるFramer Motion]]></title><description><![CDATA[2024 年 11 月 14 日に Framer Motion の作者である、Matt Perry さんが作成した、Motion One と Framer Motion が統合され、Motion という名前になりました。
+統合されたことにより、実質 Framer Motion が Vanilla JS や Vue などのフレームワークに依存しないライブラリとして使えるようになりました。
+https://motion.dev/blog/framer-motion-is-now-independent-introducing-motion
+!
+名前の変更に伴い、npm install fra...]]></description><link>https://zenn.dev/chot/articles/d00d5cf0b3f7d9</link><guid isPermaLink="true">https://zenn.dev/chot/articles/d00d5cf0b3f7d9</guid><pubDate>Fri, 15 Nov 2024 08:21:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--OaXe6D3x--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Spring%2520Animation%25E3%2581%25A8Vanilla%2520JS%25E3%2581%25A7%25E5%25A7%258B%25E3%2582%2581%25E3%2582%258BFramer%2520Motion%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:shouta%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAzODVjOWFlYzkuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:chot%2520Inc.%2520tech%2520blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk0NGEwYzcxNjguanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>shouta</dc:creator></item><item><title><![CDATA[[AWS] CDKでSSM パラメータストアに値をセットする]]></title><description><![CDATA[
+ パラメータストアとは
+
+AWS SSM パラメータストアは、AWSのサービスの設定値やシークレット値、アプリケーションで使用する環境変数等を安全に保存するためのサービスである。
+階層型ストレージである。
+
+
+ CDKでパラメータストアに値をセットする
+早速、CDKでパラメータストアに値をセットしてみる。
+
+environments-stack.ts
+
+import { App, Stack, StackProps } from 'aws-cdk-lib'
+import * as ssm from 'aws-cdk-lib/aws-ssm';
+
+export class Environ...]]></description><link>https://zenn.dev/akira__0924/articles/qiita-20240105-a908127a1248a9eda127</link><guid isPermaLink="true">https://zenn.dev/akira__0924/articles/qiita-20240105-a908127a1248a9eda127</guid><pubDate>Fri, 15 Nov 2024 05:28:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wik_tKrD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BAWS%255D%2520CDK%25E3%2581%25A7SSM%2520%25E3%2583%2591%25E3%2583%25A9%25E3%2583%25A1%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%25B9%25E3%2583%2588%25E3%2582%25A2%25E3%2581%25AB%25E5%2580%25A4%25E3%2582%2592%25E3%2582%25BB%25E3%2583%2583%25E3%2583%2588%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%25B0%25B4%25E5%25B3%25B6%2520%25E3%2582%25A2%25E3%2582%25AD%25E3%2583%25A9%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFUWEFKeTkxY1czdnVSRzJwelpoWWRBV0lmajVqdEYxdS1qYkxabUlFcFIyQT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>水島 アキラ</dc:creator></item><item><title><![CDATA[[AWS] CDKでAppRunnerのカスタムドメインを設定する（カスタムリソース）]]></title><description><![CDATA[
+ CDKでApp Runnerにカスタムドメインを設定することはできない
+https://docs.aws.amazon.com/cdk/api/v2/docs/aws-apprunner-alpha-readme.html
+↑を見てもカスタムドメインを設定することはできなそう...
+実際にGitHubにissueがあり、202４年1月現在、AppRunnerのカスタムドメインはCloudFormationはサポートされていないっぽい。
+https://github.com/aws-cloudformation/cloudformation-coverage-roadmap/issue...]]></description><link>https://zenn.dev/akira__0924/articles/qiita-20240109-9768dc53572a71e9eda9</link><guid isPermaLink="true">https://zenn.dev/akira__0924/articles/qiita-20240109-9768dc53572a71e9eda9</guid><pubDate>Fri, 15 Nov 2024 05:28:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--nhitiBlJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BAWS%255D%2520CDK%25E3%2581%25A7AppRunner%25E3%2581%25AE%25E3%2582%25AB%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%25A0%25E3%2583%2589%25E3%2583%25A1%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%2592%25E8%25A8%25AD%25E5%25AE%259A%25E3%2581%2599%25E3%2582%258B%25EF%25BC%2588%25E3%2582%25AB%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%25A0%25E3%2583%25AA%25E3%2582%25BD%25E3%2583%25BC%25E3%2582%25B9%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%25B0%25B4%25E5%25B3%25B6%2520%25E3%2582%25A2%25E3%2582%25AD%25E3%2583%25A9%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFUWEFKeTkxY1czdnVSRzJwelpoWWRBV0lmajVqdEYxdS1qYkxabUlFcFIyQT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>水島 アキラ</dc:creator></item><item><title><![CDATA[Re: type-challengesから始めるTypeScript実践演習 - 初級編]]></title><description><![CDATA[type-challengesは型システムの仕組みをより深く理解し、独自のユーティリティを記述したり、あるいは単に型パズルを楽しんだりできるOSSプロジェクトです。
+https://github.com/type-challenges/type-challenges
+とはいえ、いきなりtype-challengesに挑むと挫折します。少なくとも私がそうでした。
+なので、この記事ではまず最初にtype-challengesを解くために必要なTypeScriptの知識を解説します。
+その後、実際にtype-challengesの問題を解いてみることで、座学→実践という形式でTypeScrip...]]></description><link>https://zenn.dev/yskn_sid25/articles/1b0b48d0a15426</link><guid isPermaLink="true">https://zenn.dev/yskn_sid25/articles/1b0b48d0a15426</guid><pubDate>Fri, 15 Nov 2024 04:25:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--p4tEkbQn--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Re%253A%2520type-challenges%25E3%2581%258B%25E3%2582%2589%25E5%25A7%258B%25E3%2582%2581%25E3%2582%258BTypeScript%25E5%25AE%259F%25E8%25B7%25B5%25E6%25BC%2594%25E7%25BF%2592%2520-%2520%25E5%2588%259D%25E7%25B4%259A%25E7%25B7%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kanon%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzkzZTJiZmRmZjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kanon</dc:creator></item><item><title><![CDATA[Next.js で i18n 対応するまで]]></title><description><![CDATA[
+ はじめに
+数年前から独学でプログラミングを学び、最近は個人開発をしている鈴木です。
+今回は今開発している PlaylistManager というプロジェクトで、i18n対応するために必要だったことなどをまとめます。
+実際の実装に関するコミットは以下の二つです:
+
+メインの変更
+言語変更のSelectMenuの実装
+
+
+ 前提
+
+すでにあるプロジェクトの i18n 対応なので、破壊的で大きな変更はしたくなかった。
+言語を変更したときに、ほかのコンポーネントの状態は維持したいので、ページ全体のリロードを必要としない。
+
+
+ 実装方針
+
+言語は URLに含まれているクエリ（?lang=ja...]]></description><link>https://zenn.dev/suzuki3jp/articles/nextjs-i18n-20241115</link><guid isPermaLink="true">https://zenn.dev/suzuki3jp/articles/nextjs-i18n-20241115</guid><pubDate>Fri, 15 Nov 2024 04:01:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--OipSl5uv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Next.js%2520%25E3%2581%25A7%2520i18n%2520%25E5%25AF%25BE%25E5%25BF%259C%25E3%2581%2599%25E3%2582%258B%25E3%2581%25BE%25E3%2581%25A7%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E9%2588%25B4%25E6%259C%25A8%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzczYWZjNjdmZGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>鈴木</dc:creator></item><item><title><![CDATA[useEffectの依存配列は自分で決めていいの？]]></title><description><![CDATA[
+ だめです。絶対にやらないでください。
+少し前の僕：「このset関数、このステートが変更された時に実行したいなぁ。依存配列をこうしてっと。ん？なんかlintのerrorがでてる。コメントアウトしたら消えるらしい。これでよし！」
+すべてだめです。
+ただ、Reactに携わっている方なら、一度は依存配列の扱いに悩んだことがあると思います。
+少し前の僕：「じゃあ、どうすればいいの？」
+そうですね、それでは順を追って説明していきます。
+
+ レンダリングについて理解しよう
+少し前の僕：「コンポーネント内の関数がいつ実行されるかわからんから、useEffectで制御してるんだよ！」
+大丈夫です。わか...]]></description><link>https://zenn.dev/kiman/articles/1400b51505ac7e</link><guid isPermaLink="true">https://zenn.dev/kiman/articles/1400b51505ac7e</guid><pubDate>Fri, 15 Nov 2024 03:52:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--t-n4cdCl--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:useEffect%25E3%2581%25AE%25E4%25BE%259D%25E5%25AD%2598%25E9%2585%258D%25E5%2588%2597%25E3%2581%25AF%25E8%2587%25AA%25E5%2588%2586%25E3%2581%25A7%25E6%25B1%25BA%25E3%2582%2581%25E3%2581%25A6%25E3%2581%2584%25E3%2581%2584%25E3%2581%25AE%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258D%25E3%2582%2593%25E3%2582%2586%25E3%2581%25BE%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ3MmYyZmE3MTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>きんゆまん</dc:creator></item><item><title><![CDATA[丸ごとNext.jsでWebアプリケーションを作ってみた話]]></title><description><![CDATA[
+ はじめに
+こんにちは！株式会社マチス教育システムのいけふくろうです。
+実務で商品管理画面を実装する機会があり、その際に得た知見をもとに、設計・実装プロセスや留意点について紹介させていただきます！！
+
+ フェーズ1の完成品
+コスト（人的、予算）及びスケジュールの兼ね合いから、最低限のスコープでミニマムに設計・実装をおこなったため、至らない点は多々ありますが、作ったアプリケーションはこちらです💁
+
+
+ 機能一覧
+
+アカウント管理
+
+ユーザーの管理機能とロール設定機能
+
+
+テナント管理
+
+各オーナーに対して複数のテナントを紐づけ、オーナーごとにテナントを一元管理できる機能
+
+
+商品管理
+
+...]]></description><link>https://zenn.dev/matisse_dev/articles/87508d52dad946</link><guid isPermaLink="true">https://zenn.dev/matisse_dev/articles/87508d52dad946</guid><pubDate>Fri, 15 Nov 2024 01:48:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lWhvyMRp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E4%25B8%25B8%25E3%2581%2594%25E3%2581%25A8Next.js%25E3%2581%25A7Web%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:ikefukurou777%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I2MjVhNGQzOGEuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2583%259E%25E3%2583%2581%25E3%2582%25B9%25E6%2595%2599%25E8%2582%25B2%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%2520%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU0NTFhZjRhYjIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ikefukurou777</dc:creator></item><item><title><![CDATA[tslogで実現するセキュアなメタデータ管理とロギング]]></title><description><![CDATA[こんにちは、sugar-catです。
+
+ はじめに
+皆さんはTypeScriptでバックエンド開発を行う際に、どのようにロギングをしていますか。
+この記事では、TypeScript製のロギングライブラリであるtslogの紹介と、その内部の仕組み、秘匿情報を含むログを出力しないための方法について解説します。
+
+ ログの種類
+この記事ではアプリケーションログを扱います。アプリケーションコンテナで出力された標準出力を収集し、任意の監視ツールに送信し表示されるようなログを指します。
+アクセスログや監査ログ、システムログのようなものは扱いません。
+
+ tslogとは
+tslogはTypeScrip...]]></description><link>https://zenn.dev/king/articles/707a59953a1c95</link><guid isPermaLink="true">https://zenn.dev/king/articles/707a59953a1c95</guid><pubDate>Thu, 14 Nov 2024 23:30:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--C3lRTMlG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:tslog%25E3%2581%25A7%25E5%25AE%259F%25E7%258F%25BE%25E3%2581%2599%25E3%2582%258B%25E3%2582%25BB%25E3%2582%25AD%25E3%2583%25A5%25E3%2582%25A2%25E3%2581%25AA%25E3%2583%25A1%25E3%2582%25BF%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E7%25AE%25A1%25E7%2590%2586%25E3%2581%25A8%25E3%2583%25AD%25E3%2582%25AE%25E3%2583%25B3%25E3%2582%25B0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:sugar-cat%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVlMTllYzU4NDAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sugar-cat</dc:creator></item><item><title><![CDATA[オンラインで自分だけのマンガ本棚を公開できるサービスをつくりました]]></title><description><![CDATA[Ikkimiという、オンラインで自分のマンガ本棚を公開できるサービスを個人開発した話です。
+https://ikki-mi.com
+
+ 内容
+飲食業界から転職活動中の24歳です。
+モダンなフロントエンド技術の習得を目的に、今回React・TypeScriptで初めて作った成果物です。
+制作期間は1ヶ月弱ほどです。
+もしよければ、使ってもらえるとうれしいです！
+
+TypeScript
+React
+Supabase
+Algolia
+Figma
+
+
+ つくったもの
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+自分の好きなマンガをオンラインで記録し、アカウントに保存・共有できるサービスです。SNS...]]></description><link>https://zenn.dev/0221/articles/1ac0c9de1b0c72</link><guid isPermaLink="true">https://zenn.dev/0221/articles/1ac0c9de1b0c72</guid><pubDate>Thu, 14 Nov 2024 20:57:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--peF2Lr-O--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25AA%25E3%2583%25B3%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%25B3%25E3%2581%25A7%25E8%2587%25AA%25E5%2588%2586%25E3%2581%25A0%25E3%2581%2591%25E3%2581%25AE%25E3%2583%259E%25E3%2583%25B3%25E3%2582%25AC%25E6%259C%25AC%25E6%25A3%259A%25E3%2582%2592%25E5%2585%25AC%25E9%2596%258B%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258B%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2593%25E3%2582%25B9%25E3%2582%2592%25E3%2581%25A4%25E3%2581%258F%25E3%2582%258A%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25BF%25E3%2582%2584%25E3%2581%25AF%25E3%2581%25BE%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM1OTY4MGU4MzkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>みやはま</dc:creator></item><item><title><![CDATA[Yamada UIを使ってどうしてもMantineのAppShellを作りたかっただけ]]></title><description><![CDATA[こんにちは！普段フロントエンド開発をしている人です🙌
+最近はUI作成時によくMantineを使用しているのですが、Yamada UIもずうううっと気になっていたので触ってみたところ…
+「え、AppShellない…🥺」ってなりました。
+AppShellってなんだよって方はこちら→Mantineのドキュメント
+もうちょこっと書けばアプリケーションの枠組みができる状態から開発するのに慣れていたため、１から書くのはめんどくさい…ので！
+自分でAppShellっぽいもの作っておけばあとはパラメータ足すだけでいいやんって感じでゆるーく作りました。
+
+
+ まずはみんな大好きYamada UIのご紹介
+...]]></description><link>https://zenn.dev/maru_contents/articles/yamada-ui_appshell</link><guid isPermaLink="true">https://zenn.dev/maru_contents/articles/yamada-ui_appshell</guid><pubDate>Thu, 14 Nov 2024 05:40:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fPOIPHCQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Yamada%2520UI%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25A9%25E3%2581%2586%25E3%2581%2597%25E3%2581%25A6%25E3%2582%2582Mantine%25E3%2581%25AEAppShell%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258A%25E3%2581%259F%25E3%2581%258B%25E3%2581%25A3%25E3%2581%259F%25E3%2581%25A0%25E3%2581%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:maru%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQyZDVlZjUxOGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>maru</dc:creator></item><item><title><![CDATA[ワークスペースにおける TypeScript パッケージの解決戦略]]></title><description><![CDATA[ワークスペースを利用している TypeScript プロジェクトの開発をしているとき、共通パッケージの依存解決の方法には
+
+素直に build 成果物を参照する
+exports フィールドで build 前の TypeScript ファイルを直接参照する
+
+等いくつかの選択肢があります。
+このエントリでは、それぞれのやり方での制約や、開発体験の良し悪し等を比較して状況に応じてどういうアプローチを採用するのが良いか考えてみます。
+
+ 補足資料
+https://zenn.dev/kimuson/scraps/52da20e64f2d51
+上記のスクラップで調べたことがベースになっています。
+...]]></description><link>https://zenn.dev/bm_sms/articles/typescript_workspace_custom_condition</link><guid isPermaLink="true">https://zenn.dev/bm_sms/articles/typescript_workspace_custom_condition</guid><pubDate>Thu, 14 Nov 2024 02:11:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jjsSBJ7T--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%25AF%25E3%2583%25BC%25E3%2582%25AF%25E3%2582%25B9%25E3%2583%259A%25E3%2583%25BC%25E3%2582%25B9%25E3%2581%25AB%25E3%2581%258A%25E3%2581%2591%25E3%2582%258B%2520TypeScript%2520%25E3%2583%2591%25E3%2583%2583%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B8%25E3%2581%25AE%25E8%25A7%25A3%25E6%25B1%25BA%25E6%2588%25A6%25E7%2595%25A5%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%258D%25E3%2582%2580%25E3%2581%259D%25E3%2582%2593%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFjZTAzZGU0MzguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2582%25A8%25E3%2582%25B9%25E3%2583%25BB%25E3%2582%25A8%25E3%2583%25A0%25E3%2583%25BB%25E3%2582%25A8%25E3%2582%25B9%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I1NWE1MzY5MWUuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>きむそん</dc:creator></item><item><title><![CDATA[fake-indexeddbでvi.useFakeTimersを使う]]></title><description><![CDATA[fake-indexeddbを使ってテストを書いている時にvi.useFakeTimersを併用するとハングするケースがあります。その場合以下のようshouldAdvanceTimeオプションを設定すると解決する可能性があります。
+vi.useFakeTimers({shouldAdvanceTime:true});
+]]></description><link>https://zenn.dev/takiuchi/articles/036ec3769b8e92</link><guid isPermaLink="true">https://zenn.dev/takiuchi/articles/036ec3769b8e92</guid><pubDate>Thu, 14 Nov 2024 00:42:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--gXwktjRm--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:fake-indexeddb%25E3%2581%25A7vi.useFakeTimers%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:takiuchi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0NFOHVIcHhmTmR3cHhzemVBWnlmSFg1VG01NVhFNDh6d3RQSkNrc21MY1BCTG5tNTY9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takiuchi</dc:creator></item><item><title><![CDATA[TypeScriptによるDependency Injection入門：DIコンテナを自作して内部構造を理解する]]></title><description><![CDATA[
+ はじめに
+私は初めてDependency Injection（依存性注入）という概念に出会ったのは、NestJSのドキュメントを読んでいるときでした。その時、providerや@Injectable()は何なのか？といった素朴な疑問を感じましたが、ドキュメントを読んでもすぐには理解できず、そのまま一度放置しました。
+最近、業務で触れているAPIサービスではNestJSではなく、InversifyJSというライブラリを使用してDependency Injectionを実装しています。これを機に、DIについてもう一度学び直すことにしました。そして、自分が調べて理解したことをまとめて共有し...]]></description><link>https://zenn.dev/spacemarket/articles/8ddba858aa09c2</link><guid isPermaLink="true">https://zenn.dev/spacemarket/articles/8ddba858aa09c2</guid><pubDate>Wed, 13 Nov 2024 23:30:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Ywm5K6JR--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258BDependency%2520Injection%25E5%2585%25A5%25E9%2596%2580%25EF%25BC%259ADI%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2586%25E3%2583%258A%25E3%2582%2592%25E8%2587%25AA%25E4%25BD%259C%25E3%2581%2597%25E3%2581%25A6%25E5%2586%2585%25E9%2583%25A8%25E6%25A7%258B%25E9%2580%25A0%25E3%2582%2592%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:lei%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc1NTA1NzM5OGYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25B9%25E3%2583%259A%25E3%2583%25BC%25E3%2582%25B9%25E3%2583%259E%25E3%2583%25BC%25E3%2582%25B1%25E3%2583%2583%25E3%2583%2588%2520Engineer%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FGZFp1Y3JNMnlQbTdQZmtlR3FSRGZ6ZVc0UVNLYW1HMGkzVnQ1dE9uaGMzN1E9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>lei</dc:creator></item><item><title><![CDATA[ElectronとNext.jsとSupabaseでフラッシュカードを開発する]]></title><description><![CDATA[Nextron（ElectronとNext.js）とSupabaseとPrismaを使用してフラッシュカードを開発します。
+基本編では「ユーザ認証」「デッキの作成」「デッキの表示」「フラッシュカードで学習する」「デッキの編集」「デッキの削除」を実装していきます。]]></description><link>https://zenn.dev/jp_ymatsumoto/books/flashcard-by-nextron</link><guid isPermaLink="true">https://zenn.dev/jp_ymatsumoto/books/flashcard-by-nextron</guid><pubDate>Wed, 13 Nov 2024 16:24:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--t6zRBTaK--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci8xMzlhYWJmNWRkLnBuZw==%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>松本勇拓</dc:creator></item></channel></rss>
