@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「CSS」のフィード]]></title><description><![CDATA[Zennのトピック「CSS」のRSSフィードです]]></description><link>https://zenn.dev/topics/css</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/094a9b2a18.png</url><title>Zennの「CSS」のフィード</title><link>https://zenn.dev/topics/css</link></image><generator>zenn.dev</generator><lastBuildDate>Sun, 17 Nov 2024 09:23:38 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/css/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[[Tailwind CSS] n行目以降の文章は「...」と表示する]]></title><description><![CDATA[
+ はじめに
+この記事では、長い文章を省略し先頭の文章のみを表示する方法を解説します。
+参考資料
+
+
+前提条件
+
+
+下記サイトを活用して表示しております。
+
+
+
+見やすいようにfont-sizeを200%にしております。
+
+
+html {
+  font-size: 200%;
+}
+
+
+見やすいように下記divで囲っております。
+
+&lt;div class="flex flex-col justify-center min-h-screen mx-10"&gt;
+  &lt;!-- 対象のhtmlを記載 --&gt;
+&lt;/div&gt;
+
+
+
+ 結論
+!
+line-clamp-nを...]]></description><link>https://zenn.dev/aew2sbee/articles/tailwind-css-line-clamp</link><guid isPermaLink="true">https://zenn.dev/aew2sbee/articles/tailwind-css-line-clamp</guid><pubDate>Sat, 16 Nov 2024 05:37:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--oGO97wpm--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BTailwind%2520CSS%255D%2520n%25E8%25A1%258C%25E7%259B%25AE%25E4%25BB%25A5%25E9%2599%258D%25E3%2581%25AE%25E6%2596%2587%25E7%25AB%25A0%25E3%2581%25AF%25E3%2580%258C...%25E3%2580%258D%25E3%2581%25A8%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25B5%25E3%2582%258B%25E3%2581%259F%2520%25E3%2581%25AA%25E3%2581%258A%25E3%2581%258D%2520%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ3Mzc3ZTQyMDIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ふるた なおき🥝</dc:creator></item><item><title><![CDATA[CSSライブラリの選定って、どうしたらいいの？]]></title><description><![CDATA[
+ CSSライブラリの選定、どうしたらいいんだろう？
+私は、Webアプリケーション開発の勉強をしているとき、
+様々なCSSライブラリの話を目にしたりします。
+
+TailwindCSSはいいぞ！
+UIライブラリはデザインがある程度固まってるからやりやすいぞ！
+時代はZeroRuntime CSS in JSだぞ！
+結局どれもCSSのファイルにビルドされるんだから最初からCSSファイルに書けばよくない？
+
+そのどれも間違っていないように見えます。
+インターネット上には、様々な方の私見・所感や、ポジショントークが
+様々な形式で点在しているので、何を信じていいのかわからなくなるときがあります
+そ...]]></description><link>https://zenn.dev/ayaextech_fill/articles/c55e7ff1dda4a6</link><guid isPermaLink="true">https://zenn.dev/ayaextech_fill/articles/c55e7ff1dda4a6</guid><pubDate>Fri, 15 Nov 2024 15:06:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--90-SUTD4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:CSS%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%25E3%2581%25AE%25E9%2581%25B8%25E5%25AE%259A%25E3%2581%25A3%25E3%2581%25A6%25E3%2580%2581%25E3%2581%25A9%25E3%2581%2586%25E3%2581%2597%25E3%2581%259F%25E3%2582%2589%25E3%2581%2584%25E3%2581%2584%25E3%2581%25AE%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%25B3%25A1%25E6%25B2%25AB%25E4%25BA%25AC%25E6%25B0%25B4%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzIzMDA2ZmJiNzkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>泡沫京水</dc:creator></item><item><title><![CDATA[Observerを活用しScroll Eventから移行する。Vanilla Vue React別の実装コード]]></title><description><![CDATA[
+ Observerの活用法：スクロールイベントとの比較と実装例
+ウェブ開発において、ユーザーのスクロール操作に応じてヘッダーや他の要素を表示・非表示にすることは一般的なインタラクションの一つです。 しかし、スクロールイベントを直接使用すると、高頻度でイベントが発火し、パフォーマンスに悪影響を及ぼす可能性があります。
+本記事では、スクロールイベントの課題と、Intersection Observer APIを活用したパフォーマンス最適化の手法について解説します。 また、バニラJavaScript、Vue3、Reactを使用した実装例を紹介し、それぞれのコードを詳しく説明します。
+
+ 目次...]]></description><link>https://zenn.dev/ait/articles/2acce8338ddaac</link><guid isPermaLink="true">https://zenn.dev/ait/articles/2acce8338ddaac</guid><pubDate>Fri, 15 Nov 2024 13:30:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xRDxujyU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Observer%25E3%2582%2592%25E6%25B4%25BB%25E7%2594%25A8%25E3%2581%2597Scroll%2520Event%25E3%2581%258B%25E3%2582%2589%25E7%25A7%25BB%25E8%25A1%258C%25E3%2581%2599%25E3%2582%258B%25E3%2580%2582Vanilla%2520Vue%2520React%25E5%2588%25A5%25E3%2581%25AE%25E5%25AE%259F%25E8%25A3%2585%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:aito%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZlNzFlNDU3YjMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>aito</dc:creator></item><item><title><![CDATA[【ライブラリ】Hover.cssの使い方]]></title><description><![CDATA[
+ Hover.cssとは
+https://ianlunn.github.io/Hover/
+CSSのアニメーションライブラリです。
+サイトにはたくさんのアニメーションデモが並んでいます。
+マウスをホバーすると、アニメーションを確認できます。
+
+
+ いつ使うの？
+
+アニメーションを簡単に実装したいとき
+デザイナーがコーダーへアニメーションの指示をするとき
+
+上記2つが使いどころかと思います。
+
+ 使い方
+トップページ＞Download on GitHub＞Download Zipから一式ダウンロードできます。
+
+
+
+ 使いたいアニメーションを選ぶ
+アニメーションデモの中から、サイトで使用...]]></description><link>https://zenn.dev/928sekine/articles/b191d71ee72337</link><guid isPermaLink="true">https://zenn.dev/928sekine/articles/b191d71ee72337</guid><pubDate>Fri, 15 Nov 2024 11:55:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--D9M7P-6O--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%25E3%2580%2591Hover.css%25E3%2581%25AE%25E4%25BD%25BF%25E3%2581%2584%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259B%25E3%2581%258D%25E3%2581%25AD%25E3%2582%258A%25E3%2581%25AA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAyNDQ3MGIzZjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>せきねりな</dc:creator></item><item><title><![CDATA[CSSでシンプルに省略表示を実現する方法 – 1行/複数行対応のテクニック]]></title><description><![CDATA[
+ はじめに
+Webページを作るとき、長いテキストを整えて表示することってよくありますよね。例えば、タイトルや説明文が決められたスペースからはみ出してしまうと、デザインが崩れてしまうことも。そんなときに役立つのが、CSSで簡単にできる「省略表示」です。指定した行数を超えたテキストを自動的に「...」で省略できるので、コンテンツがすっきりして、読みやすさもアップします。
+この記事では、1行だけの省略表示から複数行の省略まで、現代のブラウザに対応したシンプルな方法をご紹介します。CSSの省略表示テクニックを押さえて、コードの見た目もスッキリ整えてみましょう！
+
+ 1行の省略表示
+CSSでテキ...]]></description><link>https://zenn.dev/chot/articles/e94d2864d83f9e</link><guid isPermaLink="true">https://zenn.dev/chot/articles/e94d2864d83f9e</guid><pubDate>Thu, 14 Nov 2024 07:24:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--68uZg_G2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:CSS%25E3%2581%25A7%25E3%2582%25B7%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AB%25E3%2581%25AB%25E7%259C%2581%25E7%2595%25A5%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2582%2592%25E5%25AE%259F%25E7%258F%25BE%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2520%25E2%2580%2593%25201%25E8%25A1%258C%252F%25E8%25A4%2587%25E6%2595%25B0%25E8%25A1%258C%25E5%25AF%25BE%25E5%25BF%259C%25E3%2581%25AE%25E3%2583%2586%25E3%2582%25AF%25E3%2583%258B%25E3%2583%2583%25E3%2582%25AF%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Shota%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAzODVjOWFlYzkuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:chot%2520Inc.%2520tech%2520blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFUWEFKeFJkOUwxb0xURlUxQlZhRWt6dWpkN0JTRzk4Wk9NWVcwXzhhRU49czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Shota</dc:creator></item><item><title><![CDATA[padding、ｍarginの％はどこを基準にした値？]]></title><description><![CDATA[
+]]></description><link>https://zenn.dev/aogiri/articles/ddb50c627f2d97</link><guid isPermaLink="true">https://zenn.dev/aogiri/articles/ddb50c627f2d97</guid><pubDate>Thu, 14 Nov 2024 06:32:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--MWr8livq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:padding%25E3%2580%2581%25EF%25BD%258Dargin%25E3%2581%25AE%25EF%25BC%2585%25E3%2581%25AF%25E3%2581%25A9%25E3%2581%2593%25E3%2582%2592%25E5%259F%25BA%25E6%25BA%2596%25E3%2581%25AB%25E3%2581%2597%25E3%2581%259F%25E5%2580%25A4%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25A2%25E3%2582%25AA%25E3%2582%25AE%25E3%2583%25AA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzgyNGU5MWMyODguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>アオギリ</dc:creator></item><item><title><![CDATA[position absoluteとかrelativeとか]]></title><description><![CDATA[以下のように指定.
+これで子要素は親要素の相対位置で移動される.
+親要素{
+    position: relative
+}
+
+子要素{
+    position: absolute
+    top: 値
+    right: 値
+    left: 値
+    bottom: 値
+}
+]]></description><link>https://zenn.dev/nonononoka/articles/872c83d8e259e5</link><guid isPermaLink="true">https://zenn.dev/nonononoka/articles/872c83d8e259e5</guid><pubDate>Mon, 11 Nov 2024 01:25:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Y_wVxE0_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:position%2520absolute%25E3%2581%25A8%25E3%2581%258Brelative%25E3%2581%25A8%25E3%2581%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:momomomoko%2Cx_90%2Cy_121/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>momomomoko</dc:creator></item><item><title><![CDATA[CSSで個人的に腹立つ事例]]></title><description><![CDATA[
+ はじめに
+基本的にコーディングは同じ結果、想定の動きをするとしても、「中身が思ったのと違う！」という事は多々あるかと思います。逆も然りで、設定した覚えのない想定外の結果を得て慌てて原因を探しに行くこともしばしば。
+フロントエンド、お前のことだよ。
+今回は実装で私が高確率でやらかす、「こんちくしょー！」となった事例を自戒も込めていくつか挙げていこうと思います。主にCSS多め。フレームワークはnext.jsです。
+
+ 100%になってない奴は誰だ
+横幅100%にすると、何故か親要素の横幅を超えていく。子は親を超えていくものとは言うものの、頼むからこっちが想定してる時だけにしてくれ。
+原因...]]></description><link>https://zenn.dev/okun/articles/1db6e15e2b66ab</link><guid isPermaLink="true">https://zenn.dev/okun/articles/1db6e15e2b66ab</guid><pubDate>Mon, 11 Nov 2024 00:18:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--gUkhDe----/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:CSS%25E3%2581%25A7%25E5%2580%258B%25E4%25BA%25BA%25E7%259A%2584%25E3%2581%25AB%25E8%2585%25B9%25E7%25AB%258B%25E3%2581%25A4%25E4%25BA%258B%25E4%25BE%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:h_725%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FiMWVmODg2OWIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:O-KUN%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA3NWQzNDQ2NmIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>h_725</dc:creator></item><item><title><![CDATA[1から始めるTailwindCSS]]></title><description><![CDATA[＜！注意！＞----------------------------------------------------------------
+・公式の内容を100%網羅しているものではありません。
+・書き方が統一されていないかもしれません。
+・実務でどうあるべきかという領域には踏み込みません。
+・簡単な説明とサンプルコード、実行した結果がメインで構成されています。
+・正しさが担保されているものではありません。
+　誤りを確認した場合はご指摘いただけますと幸いです。
+・v3.4.13を使っています。
+------------------------------------------------------------------------------
+
+TailwindCSSを使用する機会が多々あったものの、うまく扱いきれずきれいにスタイルを整えきれなかったり、実装に時間がかかったりしました。公式見るとスタイルを適用するとどうなるかイメージできるものの、サンプルコードがそのまま動かせるわけではないので、実装面で今一つ掴めない部分がありました。そのため、一度公式の内容をかみ砕いて、動くコードを作ってまとめてみることにしました。
+
+この本ではダークモード等重要なポイントでありながら、動作確認をする上でJavaScriptを実行させる必要があるケースが存在します。そのケースにおいてはReactを使用します。
+
+多くの場合はJavaScriptを必要とせずに、公式で提供しているTailwindCSSの学習環境であるTailwind Playが利用できるため、基本はそちらの使用を推奨します。
+※私自身この本を作成する上でほとんどをTailwind Play上で動作させています。
+https://play.tailwindcss.com/
+
+各章の内容としては関連クラスについてコードと実行結果、必要に応じて解説を載せています。本の最後にはまとめとして学習した内容を使ってZennのホームページを極力再現していきます。
+
+この本で身に着けられるレベル感が確認できると思いますので、先にまとめを流し見していただてもよいかもしれません。
+
+]]></description><link>https://zenn.dev/tacchan5424/books/22d87ed6bc8550</link><guid isPermaLink="true">https://zenn.dev/tacchan5424/books/22d87ed6bc8550</guid><pubDate>Sat, 09 Nov 2024 04:02:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--US9mMNr0--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci8zODA3ZTBkMDI4LmpwZWc=%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>たつや、</dc:creator></item><item><title><![CDATA[複数行もOK！2行以上のインライン要素のunderlineをアニメーションさせる方法]]></title><description><![CDATA[CSSで複数行のテキストに対してunderlineアニメーションを実装する方法を解説します。従来、複数行のインライン要素に対するアニメーション付きunderlineの実装は困難とされてきましたが、CSS backgroundプロパティを活用することで実現可能です。
+
+ 実装のポイント
+
+
+display: inlineの使用
+
+backgroundプロパティによる下線の表現
+
+linear-gradientを使用したアニメーション効果
+適切なtransitionの設定
+
+
+ 基本的な実装
+/* ベーススタイル */
+.hvr-underline {
+  display: inline;
+...]]></description><link>https://zenn.dev/sarap422/articles/48ccad65f224cc</link><guid isPermaLink="true">https://zenn.dev/sarap422/articles/48ccad65f224cc</guid><pubDate>Fri, 08 Nov 2024 18:19:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--myfalvUP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%25A4%2587%25E6%2595%25B0%25E8%25A1%258C%25E3%2582%2582OK%25EF%25BC%25812%25E8%25A1%258C%25E4%25BB%25A5%25E4%25B8%258A%25E3%2581%25AE%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%25B3%25E8%25A6%2581%25E7%25B4%25A0%25E3%2581%25AEunderline%25E3%2582%2592%25E3%2582%25A2%25E3%2583%258B%25E3%2583%25A1%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2581%2595%25E3%2581%259B%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:sarap422%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2Rhcmsvcy5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sarap422</dc:creator></item><item><title><![CDATA[簡単な時計プログラムを作った！！]]></title><description><![CDATA[
+ 始めに
+今回は基礎文法の紹介とは違って僕が書いたコードを紹介します!!
+
+ シンプル時計プログラム（日本時間）
+今回作成したコードは簡単なコードなのですが「日本時間の日にちと時間が表示されるサイトです！！」
+コードは以下記述です！！ ※1 時間は1秒間に1回更新します！！ ※2 時計の読み込みに数秒かかる場合があります！！
+
+ index.html
+&lt;!DOCTYPE html&gt;
+&lt;html lang="ja"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" con...]]></description><link>https://zenn.dev/programtrivia/articles/5d5b257b8b4b23</link><guid isPermaLink="true">https://zenn.dev/programtrivia/articles/5d5b257b8b4b23</guid><pubDate>Fri, 08 Nov 2024 11:29:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--eQvzwOiq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%25B0%25A1%25E5%258D%2598%25E3%2581%25AA%25E6%2599%2582%25E8%25A8%2588%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%25A0%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%25EF%25BC%2581%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:NexusQuantum_%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQwZDc0OGUwNmEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>NexusQuantum_</dc:creator></item><item><title><![CDATA[今Reactを使うならピュアなCSSをサポートするUIフレームワークやライブラリを選定するのがマルそうと思った話]]></title><description><![CDATA[最近個人開発でNext.jsの環境を立ち上げた際に、スタイリングをどうやってやろうかなと迷ったので初心に帰って最近のスタイリングについて調べ直してみました。結構面白かったので、記事にまとめることにしたので、よかったら読んでみてください。
+本記事では以下に触れます。
+
+React界隈におけるスタイリング方法の歴史的変遷
+なぜタイトル通りピュアなCSSをサポートする機構が良いと感じたか
+おすすめのスタイリング機構
+
+!
+執筆地点（2024/11/8）で考慮する、スタイリング以外に主に利用するフレームワーク・ライブラリは以下の通りです。この技術周辺に合うスタイリング方法を探した記事であるため、...]]></description><link>https://zenn.dev/moepyxxx/articles/b9b685c4cf2f4c</link><guid isPermaLink="true">https://zenn.dev/moepyxxx/articles/b9b685c4cf2f4c</guid><pubDate>Fri, 08 Nov 2024 04:05:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fRAWnBED--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E4%25BB%258AReact%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%25E3%2581%25AA%25E3%2582%2589%25E3%2583%2594%25E3%2583%25A5%25E3%2582%25A2%25E3%2581%25AACSS%25E3%2582%2592%25E3%2582%25B5%25E3%2583%259D%25E3%2583%25BC%25E3%2583%2588%25E3%2581%2599%25E3%2582%258BUI%25E3%2583%2595%25E3%2583%25AC%25E3%2583%25BC%25E3%2583%25A0%25E3%2583%25AF%25E3%2583%25BC%25E3%2582%25AF%25E3%2582%2584%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%25E3%2582%2592%25E9%2581%25B8%25E5%25AE%259A%25E3%2581%2599%25E3%2582%258B%25E3%2581%25AE%25E3%2581%258C%25E3%2583%259E%25E3%2583%25AB%25E3%2581%259D%25E3%2581%2586%25E3%2581%25A8%25E6%2580%259D%25E3%2581%25A3%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:moepyxxx%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E0MzA5NDk2MTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>moepyxxx</dc:creator></item><item><title><![CDATA[背景スクロールの抑制]]></title><description><![CDATA[
+ はじめに
+モーダルなどを表示する際に、背景のスクロールを止める実装をすることがあると思います。
+理由としては以下のような感じで実装を求められるかなと思います。
+
+ユーザーの視線をモーダルに集中させるため
+モーダル自身にスクロールがある場合でも、モーダルのみをスクロールできるためユーザーの期待通りの操作ができ質が向上する
+
+その際によくやるのがbodyにoverflow: hidden;を付与する方法でした。
+しかし、ios18ではこの方法では完全に止めることができなくなりました。※ios17でも完全に抑制はできてはないです。
+
+ 調査結果
+以下の実装方法を検証しました。
+
+bodyに...]]></description><link>https://zenn.dev/takaa/articles/45e694a0af03df</link><guid isPermaLink="true">https://zenn.dev/takaa/articles/45e694a0af03df</guid><pubDate>Mon, 04 Nov 2024 09:05:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vyM-25ke--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%2583%258C%25E6%2599%25AF%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%25AE%25E6%258A%2591%25E5%2588%25B6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:takaa%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZkZTg4MTMwMTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takaa</dc:creator></item><item><title><![CDATA[Flexboxの理解と使用頻度が高そうなプロパティ一覧]]></title><description><![CDATA[使用頻度が高そうなFlexboxのプロパティを整理してみました。
+この記事は、プログラミング初心者である筆者が、学習の過程でつまずいた経験をもとに備忘録としてまとめたものです。
+
+ フレックスボックスとは？
+
+引用文
+フレキシブルボックスレイアウトモジュールは、通常フレックスボックスと呼ばれ、一次元のレイアウトモデルとして、またインターフェイス中のアイテム間で余白の分配をする機能と強力な位置合わせをする機能を提供するものとして設計されました。（中略）フレックスボックスが一次元であることは、フレックスボックスが一つの次元、つまり行か列のいずれかの方向にしかレイアウトしないことを述べています...]]></description><link>https://zenn.dev/risagoto/articles/e74e95cee9d8dc</link><guid isPermaLink="true">https://zenn.dev/risagoto/articles/e74e95cee9d8dc</guid><pubDate>Mon, 04 Nov 2024 08:10:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Pcsgyzy0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Flexbox%25E3%2581%25AE%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%25A8%25E4%25BD%25BF%25E7%2594%25A8%25E9%25A0%25BB%25E5%25BA%25A6%25E3%2581%258C%25E9%25AB%2598%25E3%2581%259D%25E3%2581%2586%25E3%2581%25AA%25E3%2583%2597%25E3%2583%25AD%25E3%2583%2591%25E3%2583%2586%25E3%2582%25A3%25E4%25B8%2580%25E8%25A6%25A7%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Risa._.%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk4YWJjZWY3NzIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Risa._.</dc:creator></item><item><title><![CDATA[実務で初めて分かったTailwind CSSのメリット7選]]></title><description><![CDATA[
+ はじめに
+プライベートでTailwind CSSをちょっと書いていた頃、別に言うほど悪くはないけどスタンダードなCSSやSassを置き換えるほど価値があるほどなのかな...と疑っていました。
+しかしTailwind CSSが採用された中〜大規模チームに放り込まれて実装者・レビュアーを経験してから、その威力が次第に手にとってわかるようになりました。
+今回はそこで感じたメリットを7個お伝えしようと思います。
+
+ 備考
+現在も含めた筆者のCSS歴・UIライブラリ歴はこちら。
+
+生CSS
+Bootstrap
+Sass
+Emotion
+MUI
+Tailwind CSS
+shadcn/ui
+
+
+...]]></description><link>https://zenn.dev/yhase_rqp/articles/8f6abd45aa4a90</link><guid isPermaLink="true">https://zenn.dev/yhase_rqp/articles/8f6abd45aa4a90</guid><pubDate>Mon, 04 Nov 2024 01:30:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ZG_zttfT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%25AE%259F%25E5%258B%2599%25E3%2581%25A7%25E5%2588%259D%25E3%2582%2581%25E3%2581%25A6%25E5%2588%2586%25E3%2581%258B%25E3%2581%25A3%25E3%2581%259FTailwind%2520CSS%25E3%2581%25AE%25E3%2583%25A1%25E3%2583%25AA%25E3%2583%2583%25E3%2583%25887%25E9%2581%25B8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yha%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY3YmU3ZDM3N2IuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yha</dc:creator></item><item><title><![CDATA[Astro で Markdown を GitHub っぽく表示する]]></title><description><![CDATA[
+ 概要
+Astro はファイルベースルーティングなので /src/pages/ ディレクトリ内に .md ファイルを配置するだけで、Markdown を HTML に変換してルートに応じたページを作成してくれます。便利ですね！
+Markdown ファイルの内容を HTML に変換はしてくれるものの、スタイル指定が無いので見た目が微妙です。。
+そこで、github-markdown-css というライブラリを使ってスタイルを整えてみたいと思います。このライブラリを使うことで Markdown ファイルの内容を GitHub っぽい見た目で表示できるようになります。最終的な見た目はこんな感...]]></description><link>https://zenn.dev/aono/articles/38b382ba0091df</link><guid isPermaLink="true">https://zenn.dev/aono/articles/38b382ba0091df</guid><pubDate>Mon, 04 Nov 2024 00:48:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--aXthyYXG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Astro%2520%25E3%2581%25A7%2520Markdown%2520%25E3%2582%2592%2520GitHub%2520%25E3%2581%25A3%25E3%2581%25BD%25E3%2581%258F%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:aono%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZmZTVjNjE3ZjMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>aono</dc:creator></item><item><title><![CDATA[CSSの擬似クラスについて学びたい]]></title><description><![CDATA[
+ はじめに
+HITOTSU株式会社の河村康治です。
+今回はCSSの擬似クラスに関して学んでいこうと思います！
+
+ 擬似クラスとは
+擬似クラスは、要素の特定の状態に応じてスタイルを適用するものです。例えば、ユーザーがリンクをホバーしたときや、フォームの入力がフォーカスされているときなどの状況に合わせてスタイルを変更できます。
+
+ 1. hover
+これは有名ですね！ホバー時にのみCSSが変更される処理です
+
+
+index.html
+&lt;!DOCTYPE html&gt;
+&lt;html lang="ja"&gt;
+&lt;head&gt;
+    &lt;meta charset=...]]></description><link>https://zenn.dev/hitotsu_blog/articles/444571efa61238</link><guid isPermaLink="true">https://zenn.dev/hitotsu_blog/articles/444571efa61238</guid><pubDate>Mon, 04 Nov 2024 00:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8mV5ajsv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:CSS%25E3%2581%25AE%25E6%2593%25AC%25E4%25BC%25BC%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25B9%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E5%25AD%25A6%25E3%2581%25B3%25E3%2581%259F%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:koji0705%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY0NjczMDg4NjEuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:HITOTSU%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%2520%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lyQVdJeEpndHlqaGVBcmxLaVBsdHh4Mml1VnBNbjdWTEp0S2RxdWc9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>koji0705</dc:creator></item><item><title><![CDATA[Bulma で Navbar のメニューを中央寄せする]]></title><description><![CDATA[Bulma を使用して Web サイトを構築している際にタイトルのところで詰まったので備忘録として残します。
+
+ 作りたかったもの
+こういうやつです。
+ブランドロゴが最も左側にあって、右側にまたアイテムがあって中央にメニューがおいてある感じのやつです。
+
+
+ 前提
+最初は以下のように実装していました。
+&lt;nav class="navbar" role="navigation" aria-label="main navigation"&gt;
+  &lt;div class="navbar-brand"&gt;
+    &lt;a class="navbar-item" href="...]]></description><link>https://zenn.dev/ndjndj/articles/892a610b61bf27</link><guid isPermaLink="true">https://zenn.dev/ndjndj/articles/892a610b61bf27</guid><pubDate>Fri, 01 Nov 2024 12:55:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5nj5Zpls--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Bulma%2520%25E3%2581%25A7%2520Navbar%2520%25E3%2581%25AE%25E3%2583%25A1%25E3%2583%258B%25E3%2583%25A5%25E3%2583%25BC%25E3%2582%2592%25E4%25B8%25AD%25E5%25A4%25AE%25E5%25AF%2584%25E3%2581%259B%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ndj%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FmOGFkYjRiMGEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ndj</dc:creator></item><item><title><![CDATA[first-childとfirst-of-typeの違い]]></title><description><![CDATA[先頭の要素にだけ色をつけたいとき、first-childを使えばいいと思っていました。
+しかし、CSSでfirst-childを指定しても色がつかない…first-of-typeを指定すると色がつきました。
+first-childとfirst-of-typeの違いって普段全然意識していなかったので、まとめてみます。
+
+ first-childとfirst-of-typeの違い
+違いは「要素の中のどこを見ているか」です。
+
+first-child：親要素の最初の子要素を見ている
+first-of-type：親要素内で特定のタグ名（種類）の最初の要素を見ている
+
+以下は、p:first-ch...]]></description><link>https://zenn.dev/928sekine/articles/0c1d45eca0a0d1</link><guid isPermaLink="true">https://zenn.dev/928sekine/articles/0c1d45eca0a0d1</guid><pubDate>Fri, 01 Nov 2024 12:26:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--MFUjdOX2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:first-child%25E3%2581%25A8first-of-type%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259B%25E3%2581%258D%25E3%2581%25AD%25E3%2582%258A%25E3%2581%25AA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAyNDQ3MGIzZjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>せきねりな</dc:creator></item><item><title><![CDATA[HTML/CSS - display:flex も子要素も使えない制約で、要素内のテキストを縦方向の中央に配置する方法]]></title><description><![CDATA[
+ はじめに
+先日、とあるサンプル Web アプリの作成中に、display:flex もレイアウト調整用の子要素も使えない制約の下、要素内のテキストを縦方向の中央に配置する必要に迫られました。とりあえず四苦八苦しながら実装はできました。これが本当に最適解なのかどうか確信ないのですが、その点も含めて共有します。
+!
+2024/11/04 追記
+その後、𝕏 上で助言頂いて、本記事投稿時より簡潔・洗練された方法を実現できました。
+
+
+ 要件
+以下のようなスプリッターコンテナコンポーネントのサンプルプログラムを作っておりました。
+
+ここで、以下のようないくつかの要件・こだわりがありました。
+
+...]]></description><link>https://zenn.dev/j_sakamoto/articles/a1dae285f2ec31</link><guid isPermaLink="true">https://zenn.dev/j_sakamoto/articles/a1dae285f2ec31</guid><pubDate>Fri, 01 Nov 2024 11:44:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--MNdAnwff--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:HTML%252FCSS%2520-%2520display%253Aflex%2520%25E3%2582%2582%25E5%25AD%2590%25E8%25A6%2581%25E7%25B4%25A0%25E3%2582%2582%25E4%25BD%25BF%25E3%2581%2588%25E3%2581%25AA%25E3%2581%2584%25E5%2588%25B6%25E7%25B4%2584%25E3%2581%25A7%25E3%2580%2581%25E8%25A6%2581%25E7%25B4%25A0%25E5%2586%2585%25E3%2581%25AE%25E3%2583%2586%25E3%2582%25AD%25E3%2582%25B9%25E3%2583%2588%25E3%2582%2592%25E7%25B8%25A6%25E6%2596%25B9%25E5%2590%2591%25E3%2581%25AE%25E4%25B8%25AD%25E5%25A4%25AE%25E3%2581%25AB%25E9%2585%258D%25E7%25BD%25AE%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%2540jsakamoto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dVX243dnJ5ZFlLb2NxdUhSUkIxSGZ4NGpVekNsdGNmZ290R2hfNWc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>@jsakamoto</dc:creator></item></channel></rss>
