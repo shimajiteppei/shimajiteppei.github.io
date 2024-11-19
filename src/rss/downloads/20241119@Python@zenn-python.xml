@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Tue, 19 Nov 2024 01:08:44 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[PythonでSupabaseのテーブルを作成し、Gradio 5のアプリを構築する方法]]></title><description><![CDATA[近年、SupabaseはオープンソースのFirebase代替として注目を集めており、Pythonコミュニティでもその利用が急増しています。本記事では、Pythonを使用してSupabaseのデータベースにテーブルを作成し、そのテーブルと連携するGradio 5のウェブアプリを構築する方法を解説します。
+また、環境変数の管理にはGoogle Colabのuserdataを使用し、セキュアに重要な情報を取り扱います。
+
+
+ 前提条件
+
+
+Python 3.8以上がインストールされていること
+
+Supabaseアカウントとプロジェクトが作成済みであること
+
+SupabaseのプロジェクトURL...]]></description><link>https://zenn.dev/sunwood_ai_labs/articles/python-supabase-gradio5-app</link><guid isPermaLink="true">https://zenn.dev/sunwood_ai_labs/articles/python-supabase-gradio5-app</guid><pubDate>Tue, 19 Nov 2024 00:25:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--OsgaVUK3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A7Supabase%25E3%2581%25AE%25E3%2583%2586%25E3%2583%25BC%25E3%2583%2596%25E3%2583%25AB%25E3%2582%2592%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2597%25E3%2580%2581Gradio%25205%25E3%2581%25AE%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Maki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTDdpSmVyNldLVlpKLUd4N054QWVuSFVtYXQ3MUhhd1NXaU5hRG5FTnZiMXZZdHBIaGs9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Maki</dc:creator></item><item><title><![CDATA[PythonでSlackBotを作成する（📒Google Colabノートブック付）]]></title><description><![CDATA[
+ 環境設定
+最初に必要なライブラリをインストールします。
+!pip install slack-sdk
+
+ Slack APIの設定手順
+
+ アプリケーションの作成
+
+
+Slack API にアクセス
+「Create a custom app」をクリック
+アプリ名とワークスペースを選択
+
+
+ 権限の設定
+
+「OAuth &amp; Permissions」セクションに移動
+以下のBot Token Scopesを追加：
+
+chat:write
+
+
+「Install App to Workspace」をクリック
+
+
+ チャンネルへのBotの追加
+
+Slackワークスペースで対象チャンネル...]]></description><link>https://zenn.dev/sunwood_ai_labs/articles/create-slackbot-python-google-colab</link><guid isPermaLink="true">https://zenn.dev/sunwood_ai_labs/articles/create-slackbot-python-google-colab</guid><pubDate>Tue, 19 Nov 2024 00:25:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--XATTjiR---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A7SlackBot%25E3%2582%2592%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2599%25E3%2582%258B%25EF%25BC%2588%2520Google%2520Colab%25E3%2583%258E%25E3%2583%25BC%25E3%2583%2588%25E3%2583%2596%25E3%2583%2583%25E3%2582%25AF%25E4%25BB%2598%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Maki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTDdpSmVyNldLVlpKLUd4N054QWVuSFVtYXQ3MUhhd1NXaU5hRG5FTnZiMXZZdHBIaGs9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Maki</dc:creator></item><item><title><![CDATA[【自分用】OpenAPI仕様の日本語訳]]></title><description><![CDATA[
+ OpenAPIとは
+OpenAPI仕様（OpenAPI Specification）は、Linux Foundationの協力プロジェクトであるOpenAPI Initiativeが推進するコミュニティ主導のオープン仕様です。
+OASは、HTTP APIの標準的でプログラミング言語に依存しないインターフェース記述を定義します。これにより、ソースコード、追加のドキュメント、ネットワークトラフィックの解析に頼ることなく、人間やコンピュータがサービスの機能を発見し理解することが可能になります。OpenAPIを正しく定義することで、利用者は最小限の実装ロジックでリモートサービスを理解し操作す...]]></description><link>https://zenn.dev/sanpi34/articles/cac36109c6c7c9</link><guid isPermaLink="true">https://zenn.dev/sanpi34/articles/cac36109c6c7c9</guid><pubDate>Mon, 18 Nov 2024 23:55:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--oJrRoRsO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E8%2587%25AA%25E5%2588%2586%25E7%2594%25A8%25E3%2580%2591OpenAPI%25E4%25BB%2595%25E6%25A7%2598%25E3%2581%25AE%25E6%2597%25A5%25E6%259C%25AC%25E8%25AA%259E%25E8%25A8%25B3%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Sanpi34%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJhMTk5ZDkzNTcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Sanpi34</dc:creator></item><item><title><![CDATA[Python3エンジニア認定実践試験の勉強をするよ その1]]></title><description><![CDATA[
+ はじめに
+資格取得に向けた勉強会をすることになったため、
+どうせやるなら、各項目の自分の理解を棚卸しておこうかなと。
+主教材の内容に沿って、「試験合格に必要な情報」と「実務を見据えた情報」の2本立てで、
+整理します。
+
+試験対策
+
+各章の「覚えておくこと」を参照
+本の内容をほぼ並べるだけって時は省略します（意味がないので）
+
+
+実務に向けた情報
+
+各章の「役に立つこと」を参照
+
+
+
+!
+実務に向けた情報は、参考となるサイトへのリンクを置きます。
+気が向いたら自分なりの理解/イメージも別途、記事にして整理しておきたい。
+
+
+ 使用する主教材/実行環境
+
+ 主教材
+
+
+Python実践レ...]]></description><link>https://zenn.dev/pion24/articles/python_cert_practice_no1</link><guid isPermaLink="true">https://zenn.dev/pion24/articles/python_cert_practice_no1</guid><pubDate>Mon, 18 Nov 2024 23:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--CXE9jASI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python3%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%25E8%25AA%258D%25E5%25AE%259A%25E5%25AE%259F%25E8%25B7%25B5%25E8%25A9%25A6%25E9%25A8%2593%25E3%2581%25AE%25E5%258B%2589%25E5%25BC%25B7%25E3%2582%2592%25E3%2581%2599%25E3%2582%258B%25E3%2582%2588%2520%25E3%2581%259D%25E3%2581%25AE1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tok%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FGZFp1Y3JXSzhKc19kWnN4UHowX2ROZWlseTlFZVdxSy1HR1JxeWJfQ0lSPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tok</dc:creator></item><item><title><![CDATA[言語別の使用目的をまとめる]]></title><description><![CDATA[これらは、実際に僕が作ってみてよかったなと思ったものなので、もっといい使い方があったらおしえてください。
+
+
+ Python
+現在の用途:
+
+簡単なアプリケーション
+持ち物アプリを作りました
+パフォーマンスを重視しないゲーム
+プラットフォーマーをつくりました
+画像認識AI
+猫を画像から検出するシステムをつくりました
+サーバー開発
+djangoでsnsをつくりました
+
+
+ 提案:
+
+
+スクリプトの自動化・データ処理:
+Pythonの豊富なライブラリ（pandasやnumpy）を使えば、データ処理や分析が驚くほど簡単にできます。特に、機械学習の前処理やデータのクリーニングに最適です。
+
+
+ゲ...]]></description><link>https://zenn.dev/nyanchu_program/articles/e19d6ddf9de15e</link><guid isPermaLink="true">https://zenn.dev/nyanchu_program/articles/e19d6ddf9de15e</guid><pubDate>Mon, 18 Nov 2024 22:58:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--u4m01rVk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%25A8%2580%25E8%25AA%259E%25E5%2588%25A5%25E3%2581%25AE%25E4%25BD%25BF%25E7%2594%25A8%25E7%259B%25AE%25E7%259A%2584%25E3%2582%2592%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nyanchu%2520-%2520okabe%2Cx_90%2Cy_121/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nyanchu - okabe</dc:creator></item><item><title><![CDATA[MayaでPythonを使ってみよう！②～object操作編～]]></title><description><![CDATA[こんにちはkazinosです。
+前回「pythonはどこに書けばいいの？」「どうやって実行するの？」という内容にフォーカスした内容の記事を書かせていただきました。
+順を追っていけば、スクリプトエディタの起動方法、一通りの基本的な操作が分かる内容になっていますので気になる方は一度目を通してみてください。
+▼前回の記事「MayaでPythonを使ってみよう！」
+https://zenn.dev/kazinos/articles/e599bffb686678
+前回でスクリプトエディタの使い方は説明したので、今回は「Mayaの機能をPytonで操作する」方法について執筆したいと思います。
+
+ 環...]]></description><link>https://zenn.dev/kazinos/articles/55494977b2c322</link><guid isPermaLink="true">https://zenn.dev/kazinos/articles/55494977b2c322</guid><pubDate>Mon, 18 Nov 2024 22:30:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3trYnRvG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Maya%25E3%2581%25A7Python%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%2588%25E3%2581%2586%25EF%25BC%2581%25E2%2591%25A1%25EF%25BD%259Eobject%25E6%2593%258D%25E4%25BD%259C%25E7%25B7%25A8%25EF%25BD%259E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kazinos%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRmODg3NjQ3YTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kazinos</dc:creator></item><item><title><![CDATA[【Python】プログラミング初心者がChat-GPT を使ってシューティングゲームを開発してみた話]]></title><description><![CDATA[
+ 1. はじめに
+いきなりですが、プログラミングを学んで「～を作ってみたい」など開発のアイデアはぱっと思い浮かびますか？
+私自身、プログラミング基礎を勉強したので実際に成果物と呼べるレベルのものを開発してみたい！！とは思うものの、実際に何なら初心者でも作れるのか分からず悩んでいました。。。
+色々調べていたところChat GPT を活用すればコードや画像を生成してゲームを作ることができる！！といった内容の記事を見つけました。
+https://zenn.dev/mistletoe/articles/4a69c46e2c6127
+そこで、Chat GPT に基本的なコードを作ってもらい自身で...]]></description><link>https://zenn.dev/nira123/articles/18551161bfd40c</link><guid isPermaLink="true">https://zenn.dev/nira123/articles/18551161bfd40c</guid><pubDate>Mon, 18 Nov 2024 15:27:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--X8XG0xQI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%259F%25E3%2583%25B3%25E3%2582%25B0%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E3%2581%258CChat-GPT%2520%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2582%25B7%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%2586%25E3%2582%25A3%25E3%2583%25B3%25E3%2582%25B0%25E3%2582%25B2%25E3%2583%25BC%25E3%2583%25A0%25E3%2582%2592%25E9%2596%258B%25E7%2599%25BA%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Amy%2540%25E5%25AD%25A6%25E7%25BF%2592%25E8%25A8%2598%25E9%258C%25B2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y5NTU4NjgwNDcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Amy@学習記録</dc:creator></item><item><title><![CDATA[「もらうDP」と「配るDP」～どっちを使えばいいの？～]]></title><description><![CDATA[
+DPの問題で、もらう形式と配る形式、どっちで実装すればいいの...？🤔
+なんかコンテストでよく見るけど、実際の違いがピンとこない...😅
+使い分けのコツを知りたい
+
+今回はこの2つのアプローチについてできるだけわかりやすく解説していきます
+
+ もらうDPと配るDPって何が違うの？
+
+ 🎁 もらうDP（貰う遷移形式）
+簡単に言うと「今の状態に到達するまでの道筋を考える」方式です。
+例えば、友達の家に行くルートを考えるとき、
+
+「駅からどう来れるかな？」
+「バス停からどう来れるかな？」
+みたいに、目的地から逆算して考えるイメージです。
+
+
+ 📦 配るDP（配る遷移形式）
+こちらは「今の状態...]]></description><link>https://zenn.dev/tn_a/articles/402639a8191bea</link><guid isPermaLink="true">https://zenn.dev/tn_a/articles/402639a8191bea</guid><pubDate>Mon, 18 Nov 2024 10:55:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--d3g0X4uu--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%258C%25E3%2582%2582%25E3%2582%2589%25E3%2581%2586DP%25E3%2580%258D%25E3%2581%25A8%25E3%2580%258C%25E9%2585%258D%25E3%2582%258BDP%25E3%2580%258D%25EF%25BD%259E%25E3%2581%25A9%25E3%2581%25A3%25E3%2581%25A1%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2588%25E3%2581%25B0%25E3%2581%2584%25E3%2581%2584%25E3%2581%25AE%25EF%25BC%259F%25EF%25BD%259E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:sia%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I4MDcxYWUyMWQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sia</dc:creator></item><item><title><![CDATA[FastAPIでアプリを起動する]]></title><description><![CDATA[
+ やること
+FastAPIでアプリを起動してみる
+
+ 前提
+以前こんな記事を書きました。
+https://zenn.dev/headwaters/articles/526d1a9588b754
+その後アプリ開発から遠ざかっていたのですが、改めてバックエンドのキャッチアップをしていきたいということで、以前の記事で扱った書籍をFastAPIで実装していきたいと思います。
+https://www.shoeisha.co.jp/book/detail/9784798175164
+
+ ディレクトリ構成
+一旦のゴールはデータベースを利用したアプリを作るところなんですが、今回の記事で作るのは以下の部...]]></description><link>https://zenn.dev/headwaters/articles/0bab1f241976b3</link><guid isPermaLink="true">https://zenn.dev/headwaters/articles/0bab1f241976b3</guid><pubDate>Mon, 18 Nov 2024 09:34:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--YHwtJv0J--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:FastAPI%25E3%2581%25A7%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E8%25B5%25B7%25E5%258B%2595%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:akihiro%2520nakamura%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZjNGExY2UxMDYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2598%25E3%2583%2583%25E3%2583%2589%25E3%2582%25A6%25E3%2582%25A9%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%25BC%25E3%2582%25B9%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA5MjU4ZWEwY2QuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>akihiro nakamura</dc:creator></item><item><title><![CDATA[【Python】インタープリタとvenvが何者かを理解した]]></title><description><![CDATA[Pythonの学習時にインタープリタとvenvが登場したが、これらが何者なのか分かっていなかったので、調べてまとめます。
+
+ インタープリタとは
+「人間が書いたソースコードを1行ずつ機械語に変換して実行してくれるプログラム」です。
+Pythonのコードは、人間が理解できるように書かれていますが、コンピューターが理解するためにはPythonのコードを実行可能な形式に変換する必要があるので、インタープリタがこの役割を担います。
+
+ venvとは
+「Python 3.3以降に標準ライブラリとして提供されているモジュールで、仮想環境を作成するためのツール」です。
+以下のコマンドを実行することによ...]]></description><link>https://zenn.dev/yuomatsu/articles/f1a07ffd2ce51f</link><guid isPermaLink="true">https://zenn.dev/yuomatsu/articles/f1a07ffd2ce51f</guid><pubDate>Mon, 18 Nov 2024 08:46:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--p-4sXTVD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%2597%25E3%2583%25AA%25E3%2582%25BF%25E3%2581%25A8venv%25E3%2581%258C%25E4%25BD%2595%25E8%2580%2585%25E3%2581%258B%25E3%2582%2592%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2586%25E3%2581%2586%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzgxZGMwNmE4ZTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ゆう</dc:creator></item><item><title><![CDATA[【Dapr/CosmosDB】- state Managementを実装する]]></title><description><![CDATA[
+ 執筆日
+2024/11/18
+
+ やること
+Daprには、State Managementという概念があり、アプリケーションが状態（state）を保存、取得、更新、削除するための統一されたAPIを提供している。
+それを実装してみようかなと。
+
+ 流れ
+
+Dapr CLIのインストール/CosmosDBを構築
+アプリケーションを作成
+
+
+ Dapr CLIのインストール
+Dapr CLI のインストール:
+公式ドキュメントを参考にインストールしてください。
+CosmoDB
+公式ドキュメントを参考にCosmosDB/データベースを構築してください。
+
+ アプリケーション
+dapr/
+├─...]]></description><link>https://zenn.dev/headwaters/articles/6732774ab0a8dd</link><guid isPermaLink="true">https://zenn.dev/headwaters/articles/6732774ab0a8dd</guid><pubDate>Mon, 18 Nov 2024 08:35:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GV57SD7X--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Dapr%252FCosmosDB%25E3%2580%2591-%2520state%2520Management%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:takekawa%2520tomoki%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZjNGExY2UxMDYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2598%25E3%2583%2583%25E3%2583%2589%25E3%2582%25A6%25E3%2582%25A9%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%25BC%25E3%2582%25B9%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdmODg5YTRhYzguanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takekawa tomoki</dc:creator></item><item><title><![CDATA[水入り？空っぽ？コップの中身をYOLOが画像判定！]]></title><description><![CDATA[
+
+ はじめに
+皆さん、突然ですが「このコップ、水が入っているのかな？」と考えたことはありませんか？私はといえば、家にいるときや作業中、ふと目の前のコップを見て「水が入っているか、空なのか」が気になることがあります。そして、あるときQiitaの記事を読んでいて思いつきました。
+「これ、機械に判断させることってできないのかな？」と。
+今回の挑戦はそんな日常の疑問から始まりました。さらに、以前見たRaspberry Piの自動餌やり機の記事がヒントになりました。家で飼っているハムスターの餌がなくなると自動で補充する仕組みでしたが、これはまさに「ある・ない」を判断するシステムです。これを自分の...]]></description><link>https://zenn.dev/ogiki/articles/475d3551852ce1</link><guid isPermaLink="true">https://zenn.dev/ogiki/articles/475d3551852ce1</guid><pubDate>Mon, 18 Nov 2024 06:02:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--tG8xjamO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%25B0%25B4%25E5%2585%25A5%25E3%2582%258A%25EF%25BC%259F%25E7%25A9%25BA%25E3%2581%25A3%25E3%2581%25BD%25EF%25BC%259F%25E3%2582%25B3%25E3%2583%2583%25E3%2583%2597%25E3%2581%25AE%25E4%25B8%25AD%25E8%25BA%25AB%25E3%2582%2592YOLO%25E3%2581%258C%25E7%2594%25BB%25E5%2583%258F%25E5%2588%25A4%25E5%25AE%259A%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%259C%25A8%25E6%259D%2591%25E3%2581%259F%25E3%2582%258D%25E3%2581%2586%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZkZjNiYWMwZmQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>木村たろう</dc:creator></item><item><title><![CDATA[【ABC380】Pythonで文字列結合をする際はjoinを使うこと]]></title><description><![CDATA[
+ 問題C - Move Segment
+https://atcoder.jp/contests/abc380/tasks/abc380_c
+こちらの問題で、アルゴリズム的には適切な時間で実行されるのにも関わらず、PythonだとTLEが出てしまった。
+
+ 問題のコード
+そのときのコードが下記の通り。
+アルゴリズムは「解説」の「コンテスト全体の解説」の動画参照。
+N, K = map(int, input().split())
+S = input()
+
+arr = []
+for i in range(N):
+    ch = S[i]
+    if i &gt; 0 and S[i] =...]]></description><link>https://zenn.dev/hocitron/articles/04041231825c8a</link><guid isPermaLink="true">https://zenn.dev/hocitron/articles/04041231825c8a</guid><pubDate>Mon, 18 Nov 2024 05:16:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2c_fWzOg--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590ABC380%25E3%2580%2591Python%25E3%2581%25A7%25E6%2596%2587%25E5%25AD%2597%25E5%2588%2597%25E7%25B5%2590%25E5%2590%2588%25E3%2582%2592%25E3%2581%2599%25E3%2582%258B%25E9%259A%259B%25E3%2581%25AFjoin%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%25E3%2581%2593%25E3%2581%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hocitron%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2YxMjlkMjBlZDAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hocitron</dc:creator></item><item><title><![CDATA[arize phoenixのspan queryの使い方]]></title><description><![CDATA[
+ 記事の内容
+この記事では、arize phoenixのspan queryの使い方を紹介します。
+公式ドキュメントではわからない、以下の2つについて説明します
+
+SpanQueryで取得可能なデータの確認方法
+SpanQueryの指定パラメータの調べ方
+
+
+ 対象読者
+
+span queryの使い方について、公式ドキュメントを既に読んでいる
+読んだが、解決できなかった方
+
+
+ tl;dr
+
+SpanQueryで取得可能なデータは、phoenix上のjsonデータ
+jsonデータを見れば指定するパラメータもわかる
+jsonデータからSpanQueryを作成する方法を例示
+
+
+ Span...]]></description><link>https://zenn.dev/aidemy/articles/b89862b7555e61</link><guid isPermaLink="true">https://zenn.dev/aidemy/articles/b89862b7555e61</guid><pubDate>Mon, 18 Nov 2024 05:10:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ZxpDycKC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:arize%2520phoenix%25E3%2581%25AEspan%2520query%25E3%2581%25AE%25E4%25BD%25BF%25E3%2581%2584%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:belphegor%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNhNmVhZTQ3ZDkuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Aidemy%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y1NWQyODE0MzIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>belphegor</dc:creator></item><item><title><![CDATA[駆け出しエンジニアのための新規領域の学習方法と実装の流れ]]></title><description><![CDATA[
+ はじめに
+こんにちは、クラウドエース第一開発部所属の上原です。
+本記事では、駆け出しデータエンジニアである私が、会社からの課題である
+データ分析基盤構築課題 (以下、基盤構築課題) に取り組む中で感じたり実践したりした
+おすすめの学習方法と、実際の課題への取り組みについて紹介していきます。
+この記事の目的は、新規領域全般に触れる際のおすすめの学習方法を共有することです。
+ただし、記事の全体として、筆者にとっての新規領域であるデータエンジニアリング
+(基盤構築課題) をベースとした内容になっています。
+!
+紹介する内容はあくまで筆者個人が考えたり実践したものになりますので、
+紹介される...]]></description><link>https://zenn.dev/cloud_ace/articles/f7d0048a79fd06</link><guid isPermaLink="true">https://zenn.dev/cloud_ace/articles/f7d0048a79fd06</guid><pubDate>Mon, 18 Nov 2024 04:33:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Cr3_L5Ib--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E9%25A7%2586%25E3%2581%2591%25E5%2587%25BA%25E3%2581%2597%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%25E3%2581%25AE%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%25E6%2596%25B0%25E8%25A6%258F%25E9%25A0%2598%25E5%259F%259F%25E3%2581%25AE%25E5%25AD%25A6%25E7%25BF%2592%25E6%2596%25B9%25E6%25B3%2595%25E3%2581%25A8%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%25AE%25E6%25B5%2581%25E3%2582%258C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25A6%25E3%2583%2589%25E3%2582%25A8%25E3%2583%25BC%25E3%2582%25B9%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE2OGMwYmM4MTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>クラウドエース株式会社</dc:creator></item><item><title><![CDATA[[Python]Pygameを使って避けるゲームを作ろう！]]></title><description><![CDATA[
+ はじめに
+Pythonを使って簡単なゲームを作りたいと思いませんか？
+今回は、Pygameライブラリを使用して作成できる「避けるゲーム」を紹介します。
+このゲームでは、プレイヤーが矢印キーでキャラクターを動かし、上から落ちてくる敵を避けます。早速始めましょう！
+
+ 必要なライブラリのインストール
+まず、Pygameをインストールしましょう。以下のコマンドをターミナルで実行してください。
+pip install pygame
+
+ コード
+次に、以下のコードをPythonファイルに保存して実行してください。このコードは、避けるゲームの基本的な機能を含んでいます。
+import pygam...]]></description><link>https://zenn.dev/mstng/articles/e362e547c44edf</link><guid isPermaLink="true">https://zenn.dev/mstng/articles/e362e547c44edf</guid><pubDate>Mon, 18 Nov 2024 03:24:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bPh_ZKcc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BPython%255DPygame%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E9%2581%25BF%25E3%2581%2591%25E3%2582%258B%25E3%2582%25B2%25E3%2583%25BC%25E3%2583%25A0%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258D%25E3%2581%2586%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mstng%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSlVrUWI4S2o0cnl1WHhNZ1FBeXJleTFmOW5JTW1iRmN6UVRzaC1YYk1udWQtNEotYkF2Zz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mstng</dc:creator></item><item><title><![CDATA[【Python】__repr__ と __str__ を深掘る]]></title><description><![CDATA[
+ 問題提起
+まず以下のコードをご覧ください。
+from datetime import datetime, timezone
+
+epoch_start = datetime.datetime.fromtimestamp(0, tz=datetime.timezone.utc)
+
+print(epoch_start)
+print([epoch_start])
+出力は以下のようになります。
+1970-01-01 00:00:00+00:00
+[datetime.datetime(1970, 1, 1, 0, 0, tzinfo=datetime.timezone.utc)]
+epoch_s...]]></description><link>https://zenn.dev/mutex_inc/articles/python-repr-str</link><guid isPermaLink="true">https://zenn.dev/mutex_inc/articles/python-repr-str</guid><pubDate>Mon, 18 Nov 2024 02:50:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--rve5gIw5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591__repr__%2520%25E3%2581%25A8%2520__str__%2520%25E3%2582%2592%25E6%25B7%25B1%25E6%258E%2598%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:tony%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE2NmRjMzU1MTIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:mutex%2520Official%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q4YjZmMTNmZDguanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tony</dc:creator></item><item><title><![CDATA[Act 17. Pythonでロジスティック回帰を試す]]></title><description><![CDATA[
+ はじめに
+Act 01. AIで外国為替を自動売買するまでの道のりをベースに学習を進めて行く。
+前回はロジスティック回帰の概要について学習した。
+なので今回は実際にpythonでロジスティック回帰分析をしてみようと思う。
+データセットが必要になるため、pythonで提供されているアヤメという花のデータセット？を使用する。
+
+ ロジスティック回帰分析
+
+ 結論
+まずは結論から。とにかくコードが見たいんじゃ！という人はこれを見て。
+
+Act17.py
+from sklearn.datasets import load_iris
+from sklearn.model_selection i...]]></description><link>https://zenn.dev/onishi_ai_lad/articles/7b1d405afbe02c</link><guid isPermaLink="true">https://zenn.dev/onishi_ai_lad/articles/7b1d405afbe02c</guid><pubDate>Sun, 17 Nov 2024 13:54:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--yZex28Mt--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Act%252017.%2520Python%25E3%2581%25A7%25E3%2583%25AD%25E3%2582%25B8%25E3%2582%25B9%25E3%2583%2586%25E3%2582%25A3%25E3%2583%2583%25E3%2582%25AF%25E5%259B%259E%25E5%25B8%25B0%25E3%2582%2592%25E8%25A9%25A6%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258A%25E3%2581%25AB%25E3%2581%2597%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFlYzRlYjFmNjguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>おにし</dc:creator></item><item><title><![CDATA[【Powertools】Lambdaのベストプラクティス]]></title><description><![CDATA[
+ 概要
+
+Logger、Tracer、Metricsを含む様々なツールをベストプラクティスで提供
+AWS公式Layerであり、Lambdaで簡単に使用可能
+
+!
+2024/11/16現在、AWS公式Layerは、Python 3.13には対応していないため、Python 3.12でLambdaを作成してください
+
+
+ マニュアル
+Pythonだけでなく、TypeScript等の他の言語もサポートされています
+https://docs.powertools.aws.dev/lambda/python/latest/
+https://docs.powertools.aws.dev/lamb...]]></description><link>https://zenn.dev/metalmental/articles/20241116_aws-power-tools</link><guid isPermaLink="true">https://zenn.dev/metalmental/articles/20241116_aws-power-tools</guid><pubDate>Sun, 17 Nov 2024 02:30:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4X1-pqj7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Powertools%25E3%2580%2591Lambda%25E3%2581%25AE%25E3%2583%2599%25E3%2582%25B9%25E3%2583%2588%25E3%2583%2597%25E3%2583%25A9%25E3%2582%25AF%25E3%2583%2586%25E3%2582%25A3%25E3%2582%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:metalmental%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSzJYbHgtVTZpT1J6VWI0WVZiYjlTUWNoa1FMRzZnalktdmFiZl9YYjJocHd3dk01NHY9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>metalmental</dc:creator></item><item><title><![CDATA[Python 動物検知！]]></title><description><![CDATA[
+ PythonでのAI開発
+うまくいているやつ:
+
+
+間違えちゃったやつ:
+
+
+
+ ソース
+.
+├── 78.63170373102054.png
+├── Main.py
+└── input_image.jpg
+
+1 directory, 3 files
+ダウンロード！
+pip install numpy
+pip install pandas
+pip install matplotlib
+pip install opencv-python
+pip install scikit-learn
+
+main.py
+import numpy as np
+import pandas as pd
+i...]]></description><link>https://zenn.dev/nyanchu_program/articles/1ce3956953b849</link><guid isPermaLink="true">https://zenn.dev/nyanchu_program/articles/1ce3956953b849</guid><pubDate>Sun, 17 Nov 2024 00:06:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lVzUQG5u--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%2520%25E5%258B%2595%25E7%2589%25A9%25E6%25A4%259C%25E7%259F%25A5%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nyanchu%2520-%2520okabe%2Cx_90%2Cy_121/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nyanchu - okabe</dc:creator></item></channel></rss>
