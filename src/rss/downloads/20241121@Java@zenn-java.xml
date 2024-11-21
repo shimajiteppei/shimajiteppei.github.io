@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Java」のフィード]]></title><description><![CDATA[Zennのトピック「Java」のRSSフィードです]]></description><link>https://zenn.dev/topics/java</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/5c47bb8423.png</url><title>Zennの「Java」のフィード</title><link>https://zenn.dev/topics/java</link></image><generator>zenn.dev</generator><lastBuildDate>Thu, 21 Nov 2024 09:49:33 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/java/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[初めてのジェネリクス奮闘記]]></title><description><![CDATA[一般的に、クラスやメソッドを作成した場合、何らかのデータを扱う場合が大半かと思います。その際、扱うデータの型は違えど、ロジックはそのまま一般化できると利便性が高まります。ジェネリクスは取り扱うデータ型を動的に指定することができる便利機能を指しています。今回初めてジェネリクスを使った実装を行う中で、個人的に躓いた点や勉強になった部分をまとめてみました。
+
+ 型パラメータ
+Javaでコレクションを扱う場合、public class LinkedList&lt;E&gt;のように&lt;E&gt;でそのクラスやメソッド内で取り扱うデータ型を指定することができます。Eの部分をStringにすれば...]]></description><link>https://zenn.dev/yo__shi/articles/4dc2ef50ec82fc</link><guid isPermaLink="true">https://zenn.dev/yo__shi/articles/4dc2ef50ec82fc</guid><pubDate>Thu, 21 Nov 2024 06:36:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--23b88PNN--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2588%259D%25E3%2582%2581%25E3%2581%25A6%25E3%2581%25AE%25E3%2582%25B8%25E3%2582%25A7%25E3%2583%258D%25E3%2583%25AA%25E3%2582%25AF%25E3%2582%25B9%25E5%25A5%25AE%25E9%2597%2598%25E8%25A8%2598%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yoshi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I4NzJjMTM1NDUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yoshi</dc:creator></item><item><title><![CDATA[【Java】チェイン法を用いたハッシュ法]]></title><description><![CDATA[この記事は、「新・明解Javaで学ぶアルゴリズムとデータ構造」を読んで学んだことを、個人的な備忘録目的でまとめています。
+ただし、本を参考にして自分なりに構成やコードを変更しているためご注意ください。
+アルゴリズムの詳細や解説は是非参考書をお手に取って読まれてください。
+
+【リンク紹介】
+・Javaで学ぶアルゴリズムとデータ構造
+・これまで書いたシリーズ記事一覧
+
+
+ ハッシュ法
+
+package chap03;
+
+//--- チェイン法によるハッシュ ---//
+
+public class ChainHash&lt;K, V&gt; {
+	
+	//--- ハッシュを構成するノード --...]]></description><link>https://zenn.dev/youken/articles/0d9bd89e1ba1e5</link><guid isPermaLink="true">https://zenn.dev/youken/articles/0d9bd89e1ba1e5</guid><pubDate>Tue, 19 Nov 2024 15:17:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7bB8zWyq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Java%25E3%2580%2591%25E3%2583%2581%25E3%2582%25A7%25E3%2582%25A4%25E3%2583%25B3%25E6%25B3%2595%25E3%2582%2592%25E7%2594%25A8%25E3%2581%2584%25E3%2581%259F%25E3%2583%258F%25E3%2583%2583%25E3%2582%25B7%25E3%2583%25A5%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:youken%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M1Mzc2MDk0YWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>youken</dc:creator></item><item><title><![CDATA[Javaのプログラムが実行されるまでの一連の流れ]]></title><description><![CDATA[
+ Javaプログラムの実行プロセス ～JVMとバイトコードの仕組み～
+Javaer(呼び方合ってます？)のみなさん、こんにちは。
+Javaを使用していると、「JVM」や「バイトコード」という用語をよく耳にします。これらはJavaの実行モデルの核となる概念であり、Javaの大きな特徴である「Write Once, Run Anywhere（一度書けば、どこでも実行できる）」を実現する重要な要素です。この記事では、Javaプログラムが実際にどう実行されているのかを自分なりにまとめたいと思います。
+
+ 1. Javaプログラムの実行環境と開発ツール
+
+ 1.1 Javaプログラム実行の流れ
+...]]></description><link>https://zenn.dev/slum_dunk/articles/78eb4e1957775a</link><guid isPermaLink="true">https://zenn.dev/slum_dunk/articles/78eb4e1957775a</guid><pubDate>Tue, 19 Nov 2024 09:26:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--63D96ITz--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java%25E3%2581%25AE%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%25A0%25E3%2581%258C%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%2595%25E3%2582%258C%25E3%2582%258B%25E3%2581%25BE%25E3%2581%25A7%25E3%2581%25AE%25E4%25B8%2580%25E9%2580%25A3%25E3%2581%25AE%25E6%25B5%2581%25E3%2582%258C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Sakuragi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZhNWM2M2IxMDQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Sakuragi</dc:creator></item><item><title><![CDATA[Javaのプリミティブ型の本質に気付いた瞬間]]></title><description><![CDATA[Javaの"Generics"という概念を勉強する中で、自分は「型」というものに対する理解が浅いことに気付きました。そこで、Javaの型について個人的に調査した結果をここに記します。
+
+ 私の&lt;型&gt;への理解
+以前書いたポリモーフィズムとは何か？型とオブジェクトの関係を紐解くという記事の中で、Javaにおける宣言と型の関係について調査をしています。私の理解を端的に述べると次のようになります。
+
+
+宣言: メモリ領域にどのようなデータを保存するかを定める
+型: メモリ領域に格納されたデータをどのように活用するかを定める
+
+
+
+型は目的物をどのように見るかを決めるフィルターレンズの...]]></description><link>https://zenn.dev/yo__shi/articles/10a6562668d85e</link><guid isPermaLink="true">https://zenn.dev/yo__shi/articles/10a6562668d85e</guid><pubDate>Mon, 18 Nov 2024 21:55:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ZiuOLuKg--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java%25E3%2581%25AE%25E3%2583%2597%25E3%2583%25AA%25E3%2583%259F%25E3%2583%2586%25E3%2582%25A3%25E3%2583%2596%25E5%259E%258B%25E3%2581%25AE%25E6%259C%25AC%25E8%25B3%25AA%25E3%2581%25AB%25E6%25B0%2597%25E4%25BB%2598%25E3%2581%2584%25E3%2581%259F%25E7%259E%25AC%25E9%2596%2593%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yoshi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I4NzJjMTM1NDUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yoshi</dc:creator></item><item><title><![CDATA[[初心者向け]javaをもう少し深く理解したい🤓API]]></title><description><![CDATA[
+ そもそもAPIとは...?
+java開発陣が用意してくれている便利なソースコード群のこと！
+いままで普通に使ってきたprintlnもこの1つ！
+このAPI群のおかげで簡単に高度なコードを書くことが出来ている。
+
+ APIの格納場所
+JRE（java実行環境）にある。⇒JVM（処理実行の指令役）の横にAPIがある。
+「JDKフォルダ　&gt;  jre  &gt;  lib  &gt;　rt.jar 」で管理
+ちなみにrt.jarは圧縮ファイルなので解凍が必要！
+
+ インポート
+APIはパッケージと呼ばれるフォルダのようなもので管理されている。
+まずすべてのAPIはjavaというパッケ...]]></description><link>https://zenn.dev/takeda_kaho/articles/df2c45f093a243</link><guid isPermaLink="true">https://zenn.dev/takeda_kaho/articles/df2c45f093a243</guid><pubDate>Mon, 18 Nov 2024 10:12:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--F_D_YVXo--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255B%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E5%2590%2591%25E3%2581%2591%255Djava%25E3%2582%2592%25E3%2582%2582%25E3%2581%2586%25E5%25B0%2591%25E3%2581%2597%25E6%25B7%25B1%25E3%2581%258F%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2597%25E3%2581%259F%25E3%2581%2584%2520API%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:takepanda%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAxZWRlZDIyZDYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takepanda</dc:creator></item><item><title><![CDATA[3コインで学ぶ！新入社員研修向け！旅行会社のサイトを作ろう！Servlet・JSP編~初めてのWebアプリケーション~]]></title><description><![CDATA[この講座は、データベースからデータを取得してWebサイトに表示したり登録したりする方法について学びます！
+https://zenn.dev/codek2/books/eebd2176a8d9fd
+実際に新入社員研修で使われている内容になっていますので、現場に必要な最低限の確実な知識を近道で学んで頂けます！
+書き方は決まっているので、書き方を学んで書くだけです！
+以下の知識と環境が必要です。
+あなたに内容を分かりやすくお伝えするため、講座の中では説明しておりませんのでご注意下さい。
+★講座で使用しているバージョンは、Windows11になります 。
+　Macの場合は操作方法が異なる事があり...]]></description><link>https://zenn.dev/codek2/articles/605fbd849da244</link><guid isPermaLink="true">https://zenn.dev/codek2/articles/605fbd849da244</guid><pubDate>Mon, 18 Nov 2024 04:35:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--A_12UMyd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:3%25E3%2582%25B3%25E3%2582%25A4%25E3%2583%25B3%25E3%2581%25A7%25E5%25AD%25A6%25E3%2581%25B6%25EF%25BC%2581%25E6%2596%25B0%25E5%2585%25A5%25E7%25A4%25BE%25E5%2593%25A1%25E7%25A0%2594%25E4%25BF%25AE%25E5%2590%2591%25E3%2581%2591%25EF%25BC%2581%25E6%2597%2585%25E8%25A1%258C%25E4%25BC%259A%25E7%25A4%25BE%25E3%2581%25AE%25E3%2582%25B5%25E3%2582%25A4%25E3%2583%2588%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258D%25E3%2581%2586%25EF%25BC%2581Servlet%25E3%2583%25BBJSP%25E7%25B7%25A8%7E%25E5%2588%259D%25E3%2582%2581%25E3%2581%25A6%25E3%2581%25AEWeb%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%7E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Udemy%25E3%2583%25BB%25E4%25BC%2581%25E6%25A5%25AD%25E3%2583%25BB%25E3%2582%25AA%25E3%2583%25B3%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSWJNcXYyNnJHY2xGVDEtOURITHVZTjhrWUpWOVN1aTJWYmxkNU9aejljTmtNPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Udemy・企業・オンラインプログラミングスクール講師♪codek2</dc:creator></item><item><title><![CDATA[elasticsearchをビルドしてIntellijからデバッグできるようにする]]></title><description><![CDATA[
+ 概要
+
+elasticsearchをcloneする
+elasticsearchをbuildする
+elasticsearchをdebugする
+
+
+ 実行環境
+
+elasticsearch 8.16.0
+
+$ cat /etc/os-release
+PRETTY_NAME="Ubuntu 22.04.5 LTS"
+NAME="Ubuntu"
+VERSION_ID="22.04"
+VERSION="22.04.5 LTS (Jammy Jellyfish)"
+VERSION_CODENAME=jammy
+ID=ubuntu
+ID_LIKE=debian
+HOME_URL="https://...]]></description><link>https://zenn.dev/hamutarosan_dev/articles/a54217c1f75584</link><guid isPermaLink="true">https://zenn.dev/hamutarosan_dev/articles/a54217c1f75584</guid><pubDate>Sun, 17 Nov 2024 14:59:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--laEN2vfq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:elasticsearch%25E3%2582%2592%25E3%2583%2593%25E3%2583%25AB%25E3%2583%2589%25E3%2581%2597%25E3%2581%25A6Intellij%25E3%2581%258B%25E3%2582%2589%25E3%2583%2587%25E3%2583%2590%25E3%2583%2583%25E3%2582%25B0%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258B%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Pamada%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZjMGMwNDY0OGIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Pamada</dc:creator></item><item><title><![CDATA[【Java】２分探索]]></title><description><![CDATA[この記事は、「新・明解Javaで学ぶアルゴリズムとデータ構造」を読んで学んだことを、個人的な備忘録目的でまとめています。
+ただし、本を参考にして自分なりに構成やコードを変更しているためご注意ください。
+アルゴリズムの詳細や解説は是非参考書をお手に取って読まれてください。
+
+【リンク紹介】
+・Javaで学ぶアルゴリズムとデータ構造
+・これまで書いたシリーズ記事一覧
+
+
+ 2分探索(binary search)
+
+ 基本形
+package chap03;
+
+import java.util.Scanner;
+
+public class BinarySearch {
+	
+	//--- 配列aの...]]></description><link>https://zenn.dev/youken/articles/de1affcd4b46ae</link><guid isPermaLink="true">https://zenn.dev/youken/articles/de1affcd4b46ae</guid><pubDate>Sun, 17 Nov 2024 14:46:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vluQDVl---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Java%25E3%2580%2591%25EF%25BC%2592%25E5%2588%2586%25E6%258E%25A2%25E7%25B4%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:youken%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M1Mzc2MDk0YWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>youken</dc:creator></item><item><title><![CDATA[【Java】線形探索]]></title><description><![CDATA[この記事は、「新・明解Javaで学ぶアルゴリズムとデータ構造」を読んで学んだことを、個人的な備忘録目的でまとめています。
+ただし、本を参考にして自分なりに構成やコードを変更しているためご注意ください。
+アルゴリズムの詳細や解説は是非参考書をお手に取って読まれてください。
+
+【リンク紹介】
+・Javaで学ぶアルゴリズムとデータ構造
+・これまで書いたシリーズ記事一覧
+
+
+ 線形探索(linear search)
+逐次探索(sequential search)ともいう。
+
+ 基本形
+先頭から順番に確認していくというシンプルなアルゴリズム。
+package chap03;
+
+import jav...]]></description><link>https://zenn.dev/youken/articles/c889c5a76d28c5</link><guid isPermaLink="true">https://zenn.dev/youken/articles/c889c5a76d28c5</guid><pubDate>Sun, 17 Nov 2024 14:25:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--v-okxjH3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Java%25E3%2580%2591%25E7%25B7%259A%25E5%25BD%25A2%25E6%258E%25A2%25E7%25B4%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:youken%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M1Mzc2MDk0YWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>youken</dc:creator></item><item><title><![CDATA[elasticsearchをビルドしようとしたらJDKのバージョンが違っていたので対応するJDKを入れる]]></title><description><![CDATA[
+ やること
+以下のコマンドを実行したらJDKのバージョンが違っていたので再インストールする
+./gradlew run --debug-jvm
+（抜粋）
+* What went wrong:
+Error resolving plugin [id: 'com.gradle.develocity', version: '3.18.1']
+&gt; A problem occurred configuring project ':build-tools-internal'.
+   &gt; A problem occurred evaluating project ':build-tools...]]></description><link>https://zenn.dev/hamutarosan_dev/articles/c55337c51e8cd9</link><guid isPermaLink="true">https://zenn.dev/hamutarosan_dev/articles/c55337c51e8cd9</guid><pubDate>Sun, 17 Nov 2024 08:28:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ZcJpjlPN--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:elasticsearch%25E3%2582%2592%25E3%2583%2593%25E3%2583%25AB%25E3%2583%2589%25E3%2581%2597%25E3%2582%2588%25E3%2581%2586%25E3%2581%25A8%25E3%2581%2597%25E3%2581%259F%25E3%2582%2589JDK%25E3%2581%25AE%25E3%2583%2590%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%25A7%25E3%2583%25B3%25E3%2581%258C%25E9%2581%2595%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%2584%25E3%2581%259F%25E3%2581%25AE%25E3%2581%25A7%25E5%25AF%25BE%25E5%25BF%259C%25E3%2581%2599%25E3%2582%258BJDK%25E3%2582%2592%25E5%2585%25A5%25E3%2582%258C%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Pamada%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZjMGMwNDY0OGIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Pamada</dc:creator></item><item><title><![CDATA[ARTLR4を使って四則演算の式を計算する 〜ANTLR入門 その2〜]]></title><description><![CDATA[以前の記事で四則演算の文法を定義して、式を以下のように認識させました。このような認識結果を解析木と呼びます。
+
+今回は、Javaで式をパースして解析木を生成し、その解析木を以下の図のようにスキャンしていきます。スキャンながら各exprに対応する値を計算していって、式全体の値(一番上のexpr)を計算します。
+
+前回のantlr4 -visitor Arithmetic.g4の実行の結果、以下のソースコードが生成されています。
+$ ls *.java
+ArithmeticBaseListener.java  ArithmeticLexer.java     ArithmeticParser...]]></description><link>https://zenn.dev/thorie/articles/548pro-antlr-arithmetic</link><guid isPermaLink="true">https://zenn.dev/thorie/articles/548pro-antlr-arithmetic</guid><pubDate>Sun, 17 Nov 2024 03:35:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hIrkH5-K--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ARTLR4%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E5%259B%259B%25E5%2589%2587%25E6%25BC%2594%25E7%25AE%2597%25E3%2581%25AE%25E5%25BC%258F%25E3%2582%2592%25E8%25A8%2588%25E7%25AE%2597%25E3%2581%2599%25E3%2582%258B%2520%25E3%2580%259CANTLR%25E5%2585%25A5%25E9%2596%2580%2520%25E3%2581%259D%25E3%2581%25AE2%25E3%2580%259C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:horie-t%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RlMGQ4YzRmMjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>horie-t</dc:creator></item><item><title><![CDATA[Junitでjettyサーバーを起動してServletをテストする]]></title><description><![CDATA[
+ やりたいこと
+テストコードでプログラムからサーバーを起動してServletをテスト実行する
+
+ 実施目的
+サーバー経由じゃないと動かないモジュールのテストコードを書きたいため
+スタブやモックライブラリが使えない時の代替案の実現方法を知りたかったため
+
+ ビルドファイル
+jettyサーバーを起動とテストするServletを登録する必要があるため、build.gradleに以下のライブラリを追加する
+testImplementation("org.eclipse.jetty:jetty-server:11.0.15")
+testImplementation("org.eclipse.je...]]></description><link>https://zenn.dev/favopg/articles/720cd35c3b4c53</link><guid isPermaLink="true">https://zenn.dev/favopg/articles/720cd35c3b4c53</guid><pubDate>Sun, 17 Nov 2024 02:15:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--d-Qe0Yhf--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Junit%25E3%2581%25A7jetty%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2582%2592%25E8%25B5%25B7%25E5%258B%2595%25E3%2581%2597%25E3%2581%25A6Servlet%25E3%2582%2592%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25A4%25E3%2583%2583%25E3%2582%25B7%25E3%2583%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M4NWJkZTE0NzMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>イッシー</dc:creator></item><item><title><![CDATA[3コインで学ぶ！新入社員研修向け！旅行会社のサイトを作ろう！JDBC編~Javaからデータベースを操作する方法~(一部動画付き)]]></title><description><![CDATA[https://youtu.be/Fd-fVHXGrLA
+https://youtu.be/PSpWjo9N6-I
+この講座ではJavaからデータベースを操作する方法について学びます！
+※Webサイト作成はServlet/JSP編で行いますので、ここでは作成しておりませんのでご注意ください。
+実際に新入社員研修で使われている内容になっていますので、確実な知識を近道で学んで頂けます！
+書き方は決まっているので、書き方を学んで書くだけです！
+以下の環境と知識が必要です。
+あなたに内容を分かりやすくお伝えするため、講座の中では説明しておりませんのでご注意下さい。
+★講座で使用しているバージョン...]]></description><link>https://zenn.dev/codek2/articles/1598cfbe47b5a6</link><guid isPermaLink="true">https://zenn.dev/codek2/articles/1598cfbe47b5a6</guid><pubDate>Thu, 14 Nov 2024 05:23:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--U733eYr0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:3%25E3%2582%25B3%25E3%2582%25A4%25E3%2583%25B3%25E3%2581%25A7%25E5%25AD%25A6%25E3%2581%25B6%25EF%25BC%2581%25E6%2596%25B0%25E5%2585%25A5%25E7%25A4%25BE%25E5%2593%25A1%25E7%25A0%2594%25E4%25BF%25AE%25E5%2590%2591%25E3%2581%2591%25EF%25BC%2581%25E6%2597%2585%25E8%25A1%258C%25E4%25BC%259A%25E7%25A4%25BE%25E3%2581%25AE%25E3%2582%25B5%25E3%2582%25A4%25E3%2583%2588%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258D%25E3%2581%2586%25EF%25BC%2581JDBC%25E7%25B7%25A8%7EJava%25E3%2581%258B%25E3%2582%2589%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%2599%25E3%2583%25BC%25E3%2582%25B9%25E3%2582%2592%25E6%2593%258D%25E4%25BD%259C%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%7E%2528...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Udemy%25E3%2583%25BB%25E4%25BC%2581%25E6%25A5%25AD%25E3%2583%25BB%25E3%2582%25AA%25E3%2583%25B3%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSWJNcXYyNnJHY2xGVDEtOURITHVZTjhrWUpWOVN1aTJWYmxkNU9aejljTmtNPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Udemy・企業・オンラインプログラミングスクール講師♪codek2</dc:creator></item><item><title><![CDATA[ポリモーフィズムとは何か？型とオブジェクトの関係を紐解く]]></title><description><![CDATA[Javaを勉強していると、ポリモーフィズムという概念に出会いました。自分は具体的な使い方を知る前に、原理的なコンセプトをおさえたい性格なので、自分なりに解釈した結果を記します。
+
+ 私が見聞したポリモーフィズムのよくある説明
+ポリモーフィズムの原義は「多様性」を意味しますが、本記事の文脈では、変数の型がオブジェクトの型と異なっていても、変数とオブジェクトの間に、クラスの親子関係やインターフェースの実装があればエラーを起こさず動作することを指しています。
+
+ 通常の型の一致
+通常、変数の型とオブジェクトの型は一致させます。
+Animal animal = new Animal();
+しかし...]]></description><link>https://zenn.dev/yo__shi/articles/5938be1fe2b114</link><guid isPermaLink="true">https://zenn.dev/yo__shi/articles/5938be1fe2b114</guid><pubDate>Wed, 13 Nov 2024 21:49:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4h0Km8hV--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%259D%25E3%2583%25AA%25E3%2583%25A2%25E3%2583%25BC%25E3%2583%2595%25E3%2582%25A3%25E3%2582%25BA%25E3%2583%25A0%25E3%2581%25A8%25E3%2581%25AF%25E4%25BD%2595%25E3%2581%258B%25EF%25BC%259F%25E5%259E%258B%25E3%2581%25A8%25E3%2582%25AA%25E3%2583%2596%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E3%2581%25AE%25E9%2596%25A2%25E4%25BF%2582%25E3%2582%2592%25E7%25B4%2590%25E8%25A7%25A3%25E3%2581%258F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yoshi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I4NzJjMTM1NDUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yoshi</dc:creator></item><item><title><![CDATA[時刻フォーマット hhの罠]]></title><description><![CDATA[ある日、Kotlinで実装している際に時刻フォーマットに関するミスがあったので、同じミスをする人が少しでも減ればと思い、この記事を書いてみました。
+
+ 24時間表記のフォーマット
+2024-11-11T21:53:04を2024/11/11 21:53:04に整形したい場合、以下のようなプログラムを書いた経験はありますか？
+    val dateTime = LocalDateTime.of(2024, 11, 11, 21, 53, 4)
+    val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss")
+  ...]]></description><link>https://zenn.dev/ooooomu/articles/62c3e682e466bc</link><guid isPermaLink="true">https://zenn.dev/ooooomu/articles/62c3e682e466bc</guid><pubDate>Mon, 11 Nov 2024 22:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Vc-kQhy1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%2599%2582%25E5%2588%25BB%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25BC%25E3%2583%259E%25E3%2583%2583%25E3%2583%2588%2520hh%25E3%2581%25AE%25E7%25BD%25A0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Omu%2520%252F%2520%25E3%2581%258A%25E3%2582%2580%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzgwMGNjMzFlYjcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Omu / おむ</dc:creator></item><item><title><![CDATA[libxposed の導入方法]]></title><description><![CDATA[あくまでも移植の準備だけ。
+詳しいやり方は、下記を参照してね。
+https://github.com/LSPosed/LSPosed/wiki/Develop-Xposed-Modules-Using-Modern-Xposed-API
+
+ 依存関係のビルド
+
+ 概要
+Maven や Google には公開されていないので、ローカルでビルドする必要があります。
+これを Gradle プロジェクトから使うとき、２つの手段があります。
+
+
+mavenLocal() を使用し、ローカルディスクから参照
+ビルドアーティファクトの AAR を使用
+
+常に最新版を使いたいなら前者、手間を省きたい場合...]]></description><link>https://zenn.dev/s1204it/articles/705971b3828418</link><guid isPermaLink="true">https://zenn.dev/s1204it/articles/705971b3828418</guid><pubDate>Sat, 09 Nov 2024 13:31:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dwSKDm1r--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:libxposed%2520%25E3%2581%25AE%25E5%25B0%258E%25E5%2585%25A5%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2597%25E3%2582%2585%25E3%2583%25BC%25E3%2581%2594%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUxtNXd1MURKN3dkYjRLclFvRkx2U3hvcEl6X0pYVjFieXRjMVBzdHhxemZDUT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>しゅーご</dc:creator></item><item><title><![CDATA[初心者がインターフェースの意義を感じた話]]></title><description><![CDATA[Javaを学んでいる中で、インターフェースという概念が出てきました。しかし、インターネットで調べたり、AIに聞いたりしても実装方法や注意点の解説が主で、実際の「存在意義」を理解するには苦労しました。Java初心者として、クラスと絡めて考えるとインターフェースの意義がより明確に理解できたので、ここでそのポイントを共有します。
+
+ クラスとインターフェースの役割
+まず、クラスは「オブジェクトの属性（変数）と動作（メソッド）をまとめて管理」するために使われ、特定の概念や物を表現します。例えば、Baseball、Bowling、Javelin Throwといったスポーツにおいて、それぞれが固有の...]]></description><link>https://zenn.dev/yo__shi/articles/f692fc4c336395</link><guid isPermaLink="true">https://zenn.dev/yo__shi/articles/f692fc4c336395</guid><pubDate>Sat, 09 Nov 2024 06:12:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--EkzaMQcl--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E3%2581%258C%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%2595%25E3%2582%25A7%25E3%2583%25BC%25E3%2582%25B9%25E3%2581%25AE%25E6%2584%258F%25E7%25BE%25A9%25E3%2582%2592%25E6%2584%259F%25E3%2581%2598%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yoshi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I4NzJjMTM1NDUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yoshi</dc:creator></item><item><title><![CDATA[[Java] ジェネリクス文法(3) ジェネリックメソッド]]></title><description><![CDATA[
+ ジェネリクスメソッド
+クラスではなく、一般クラス内のメソッドをジェネリクス化するものである。
+
+ GenericMethod クラスの生成
+
+&lt;span style=color:red&gt;特定のメソッドをジェネリクス化する&lt;/span&gt;
+メソッドのリターンタイプの前に &lt;&gt; ジェネリクス文法を記述します。
+
+staticはジェネリクスメソッドを便利に使うために書かれただけで、ジェネリクスメソッドとは関係ありません！
+→オブジェクトなしで実行するとすぐに実行されます。
+
+メソッド機能の例
+引数としてデータが渡され、そのデータは型が決まっていません。
+こ...]]></description><link>https://zenn.dev/hyoni/articles/6983da51fb7713</link><guid isPermaLink="true">https://zenn.dev/hyoni/articles/6983da51fb7713</guid><pubDate>Fri, 08 Nov 2024 06:36:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--HeIaqtGf--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BJava%255D%2520%25E3%2582%25B8%25E3%2582%25A7%25E3%2583%258D%25E3%2583%25AA%25E3%2582%25AF%25E3%2582%25B9%25E6%2596%2587%25E6%25B3%2595%25283%2529%2520%25E3%2582%25B8%25E3%2582%25A7%25E3%2583%258D%25E3%2583%25AA%25E3%2583%2583%25E3%2582%25AF%25E3%2583%25A1%25E3%2582%25BD%25E3%2583%2583%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%2592%25E3%2583%25A7%25E3%2583%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0sxdWxlU2pkSzlwbDVxZnp3QVlUcFhCNk9xUEhkZGpKWjRUVlRPTl9lMHdYODhLdkg9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ヒョニ</dc:creator></item><item><title><![CDATA[[Java] ジェネリクス(2) 型パラメータ制限]]></title><description><![CDATA[
+ 型パラメータ制限!
+
+ジェネリクス文法はデータ型が決まっていないため、メソッドの実装が制限されます。
+→ ジェネリクスクラスでは望む機能を作成することができません。
+このような問題を解決するために、タイプ引数を制限する文法を使用します。
+&lt;hr/&gt;
+タイプ引数を制限する文法を適用したクラスの例を見てみましょう。
+
+ 電話機能を持つクラスの作成
+
+クラス名: Phone
+
+public class Phone {
+   public void call(){
+       System.out.println("전화");
+   }
+}
+
+class MobliePhone...]]></description><link>https://zenn.dev/hyoni/articles/84f74da8ddfc5b</link><guid isPermaLink="true">https://zenn.dev/hyoni/articles/84f74da8ddfc5b</guid><pubDate>Thu, 07 Nov 2024 06:09:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jANkgG8r--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BJava%255D%2520%25E3%2582%25B8%25E3%2582%25A7%25E3%2583%258D%25E3%2583%25AA%25E3%2582%25AF%25E3%2582%25B9%25282%2529%2520%25E5%259E%258B%25E3%2583%2591%25E3%2583%25A9%25E3%2583%25A1%25E3%2583%25BC%25E3%2582%25BF%25E5%2588%25B6%25E9%2599%2590%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%2592%25E3%2583%25A7%25E3%2583%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0sxdWxlU2pkSzlwbDVxZnp3QVlUcFhCNk9xUEhkZGpKWjRUVlRPTl9lMHdYODhLdkg9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ヒョニ</dc:creator></item><item><title><![CDATA[ANTLR4のインストールとセットアップ　〜ANTLR入門 その1〜]]></title><description><![CDATA[
+ ANTLRとは？
+ANTLR（Another Tool for Language Recognition）は、構文解析器を生成する、パーサジェネレータもしくはコンパイラコンパイラと呼ばれるツールでです。主にプログラミング言語やデータフォーマットのパーサーを作成するために使用されます。ANTLRで文法を定義すると、その文法からJavaなどの構文解析のためのプログラムを自動生成できます。
+
+ ANTLRのターゲット言語
+ANTLRが構文解析器を生成できるターゲット言語は以下の通りです：
+
+Java
+C#
+Python
+JavaScript
+TypeScript
+C++
+Swift
+Go
+...]]></description><link>https://zenn.dev/thorie/articles/548pro-antlr-setup</link><guid isPermaLink="true">https://zenn.dev/thorie/articles/548pro-antlr-setup</guid><pubDate>Wed, 06 Nov 2024 21:29:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--tLHzUjcb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ANTLR4%25E3%2581%25AE%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%25A8%25E3%2582%25BB%25E3%2583%2583%25E3%2583%2588%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%25E3%2580%2580%25E3%2580%259CANTLR%25E5%2585%25A5%25E9%2596%2580%2520%25E3%2581%259D%25E3%2581%25AE1%25E3%2580%259C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:horie-t%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RlMGQ4YzRmMjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>horie-t</dc:creator></item></channel></rss>
