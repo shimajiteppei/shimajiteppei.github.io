@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「JavaScript」のフィード]]></title><description><![CDATA[Zennのトピック「JavaScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/javascript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/64acd76870.png</url><title>Zennの「JavaScript」のフィード</title><link>https://zenn.dev/topics/javascript</link></image><generator>zenn.dev</generator><lastBuildDate>Fri, 22 Nov 2024 04:20:42 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/javascript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[【GSAP】GSAP Practice【#１ GSAP SetUp】]]></title><description><![CDATA[
+ 【#１ GSAP SetUp】
+YouTube: https://youtu.be/rosJcX7Utm4
+https://youtu.be/rosJcX7Utm4
+今回からアニメーションのライブラリ「GSAP」の
+基本的な使い方について解説していきます。
+https://gsap.com/
+デスクトップに「gsap」というフォルダを作成して、
+必要なファイルの作成とライブラリの読み込みを行います。
+
+index.html
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;meta charset=...]]></description><link>https://zenn.dev/web_life_ch/articles/e06f6b078e0507</link><guid isPermaLink="true">https://zenn.dev/web_life_ch/articles/e06f6b078e0507</guid><pubDate>Fri, 22 Nov 2024 03:36:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--OXErklBl--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590GSAP%25E3%2580%2591GSAP%2520Practice%25E3%2580%2590%2523%25EF%25BC%2591%2520GSAP%2520SetUp%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Web%2520Life%2520CH%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUl0YnZtbWNjTWFMM3dyd2x3VE5sVVZjTlhmZHEzZzF2QnJfMUJMSkJrN049czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Web Life CH</dc:creator></item><item><title><![CDATA[背景色の明度によってテキストカラーを白黒に変更するJavaScript]]></title><description><![CDATA[
+ はじめに
+Webサイトのデザインにおいて、背景色に応じて適切なテキストカラーを設定することは重要です。この記事では、JavaScriptを使用して背景色の明度を自動判定し、最適なテキストカラー（黒または白）を設定する方法を解説します。
+
+ 実装方法
+
+ 1. 要素の取得
+まず、テキストカラーを変更したい要素を取得します。
+let arrClrYamadus = Array.prototype.slice.call(document.querySelectorAll(".c-yamadu"));
+
+ 2. 明度計算関数の実装
+背景色の明度を計算する関数を実装します。WCAG 2.0のガ...]]></description><link>https://zenn.dev/sarap422/articles/8755e85467aeae</link><guid isPermaLink="true">https://zenn.dev/sarap422/articles/8755e85467aeae</guid><pubDate>Thu, 21 Nov 2024 16:38:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9fr6xfp7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%2583%258C%25E6%2599%25AF%25E8%2589%25B2%25E3%2581%25AE%25E6%2598%258E%25E5%25BA%25A6%25E3%2581%25AB%25E3%2582%2588%25E3%2581%25A3%25E3%2581%25A6%25E3%2583%2586%25E3%2582%25AD%25E3%2582%25B9%25E3%2583%2588%25E3%2582%25AB%25E3%2583%25A9%25E3%2583%25BC%25E3%2582%2592%25E7%2599%25BD%25E9%25BB%2592%25E3%2581%25AB%25E5%25A4%2589%25E6%259B%25B4%25E3%2581%2599%25E3%2582%258BJavaScript%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:sarap422%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2Rhcmsvcy5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sarap422</dc:creator></item><item><title><![CDATA[複数の 非同期イテレータを 発生順に イテレートしたい場合]]></title><description><![CDATA[
+ 課題
+例えば 非同期イテレータを返すメソッド loop1() があったとします。
+async function* loop1({ signal } = {}) {
+  let num = 0;
+  const milliseconds = 2000;
+  while (!(signal?.aborted ?? false)) {
+    await timeout({ signal, milliseconds });
+    yield `loop1:${num++}:${milliseconds}ms`;
+  }
+}
+例えば loop1() とはまた違ったタイミングの 非同期イテレ...]]></description><link>https://zenn.dev/juners/articles/c315879dd5aff0</link><guid isPermaLink="true">https://zenn.dev/juners/articles/c315879dd5aff0</guid><pubDate>Thu, 21 Nov 2024 16:28:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0bTSWZ3z--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%25A4%2587%25E6%2595%25B0%25E3%2581%25AE%2520%25E9%259D%259E%25E5%2590%258C%25E6%259C%259F%25E3%2582%25A4%25E3%2583%2586%25E3%2583%25AC%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%2592%2520%25E7%2599%25BA%25E7%2594%259F%25E9%25A0%2586%25E3%2581%25AB%2520%25E3%2582%25A4%25E3%2583%2586%25E3%2583%25AC%25E3%2583%25BC%25E3%2583%2588%25E3%2581%2597%25E3%2581%259F%25E3%2581%2584%25E5%25A0%25B4%25E5%2590%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:juner%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pJLTZTZnZQaDFwb0M5dmMxYUpVeTFoelB0R1g1RXRmUHRpQzF4QWR3PXMyNTAtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>juner</dc:creator></item><item><title><![CDATA[（日）The Superior Alternative to Thunder Client with 100% Postman Script]]></title><description><![CDATA[みなさん、こんにちは！
+少し前、Postmanが必須のアカウント登録を求めてきたとき、私はかなりイライラしていました。正直言って、私は単純で余計な手続きがないツールを探していただけで、REST APIのデバッグをしたかったんです。それで、VS Code用のThunder Clientプラグインを見つけたんです。APIデバッグの大半のニーズに関しては、これがぴったりでした。
+ただ、ここで少し問題に直面しました。長年Postmanを使っていたので、事前スクリプトやテスト用のスクリプトの構文にはかなり慣れていたんですが、Thunder Clientに切り替えたとき、その知識があまり役立たないこ...]]></description><link>https://zenn.dev/kasuna/articles/04993d45926897</link><guid isPermaLink="true">https://zenn.dev/kasuna/articles/04993d45926897</guid><pubDate>Thu, 21 Nov 2024 12:06:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--EjBqDmnz--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25EF%25BC%2588%25E6%2597%25A5%25EF%25BC%2589The%2520Superior%2520Alternative%2520to%2520Thunder%2520Client%2520with%2520100%2525%2520P...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kasuna%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2Rhcmsvay5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kasuna</dc:creator></item><item><title><![CDATA[C#プログラマーのためのJavaScriptチートシート]]></title><description><![CDATA[タイトルの通り、C#プログラマーのためのJavaScriptチートシートです。
+C#に慣れているプログラマーがJavaScriptの書き方を効率的に学べるように、2つの言語の書き方をまとめています。LINQ編は別記事で公開します。
+
+ 基本構文
+
+
+
+概要
+C#
+JavaScript
+
+
+
+
+変数宣言
+int x = 10;
+
+let x = 10;const y = 20;
+
+
+
+条件分岐
+if (x &gt; 0) { … }
+if (x &gt; 0) { … }
+
+
+for
+for (int i = 0; i &lt; 10; i++) { … }
+for (let i = 0;...]]></description><link>https://zenn.dev/zead/articles/js-cheat-sheet-for-cs</link><guid isPermaLink="true">https://zenn.dev/zead/articles/js-cheat-sheet-for-cs</guid><pubDate>Thu, 21 Nov 2024 12:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5TvJRfv6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:C%2523%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%259E%25E3%2583%25BC%25E3%2581%25AE%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AEJavaScript%25E3%2583%2581%25E3%2583%25BC%25E3%2583%2588%25E3%2582%25B7%25E3%2583%25BC%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:gushwell%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MzMTI4MzAyMjkuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2582%25B8%25E3%2583%25BC%25E3%2583%2589%2520%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvZy5wbmc=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>gushwell</dc:creator></item><item><title><![CDATA[具体例でDay.jsと標準Dateクラスを比較する]]></title><description><![CDATA[
+ Day.js
+Day.jsはJavascriptの軽量な日付操作ライブラリです。
+シンプルなAPI・Immutable性・i18nを備えており、githubでのスター数は47,000を超えています。
+今回は日付関連のよくありそうな仕様をDay.jsとJavascriptの標準Dateクラスの両方で実装し、比較します。
+簡単な例だと差がわかりにくいので、ある程度現実にありそうな例にします。
+
+ 今年の残り営業日
+与えられた日付に対して、その年の残った平日の日数を返します。簡単のため、祝日などは考えません。
+
+ Day.js
+const getRemainingBusinessDaysD...]]></description><link>https://zenn.dev/koyo_k0/articles/d30b58c782e298</link><guid isPermaLink="true">https://zenn.dev/koyo_k0/articles/d30b58c782e298</guid><pubDate>Thu, 21 Nov 2024 10:08:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xPw76Hs_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2585%25B7%25E4%25BD%2593%25E4%25BE%258B%25E3%2581%25A7Day.js%25E3%2581%25A8%25E6%25A8%2599%25E6%25BA%2596Date%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25B9%25E3%2582%2592%25E6%25AF%2594%25E8%25BC%2583%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:koyo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg4ZDM0MjIwMmQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>koyo</dc:creator></item><item><title><![CDATA[JavaScriptで動物検出AIをやる！]]></title><description><![CDATA[
+
+!
+スペックやネット回線で変わる
+
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;Animal Detection&lt;/title&gt;
+  &lt;script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs...]]></description><link>https://zenn.dev/nyanchu_program/articles/3a19500e9fbb61</link><guid isPermaLink="true">https://zenn.dev/nyanchu_program/articles/3a19500e9fbb61</guid><pubDate>Thu, 21 Nov 2024 01:24:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jzhXsdLf--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25E3%2581%25A7%25E5%258B%2595%25E7%2589%25A9%25E6%25A4%259C%25E5%2587%25BAAI%25E3%2582%2592%25E3%2582%2584%25E3%2582%258B%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nyanchu%2520-%2520okabe%2Cx_90%2Cy_121/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nyanchu - okabe</dc:creator></item><item><title><![CDATA[Promiseオブジェクトとは何か. ~QAで深堀る~]]></title><description><![CDATA[非同期処理を実行する際に利用する Promiseオブジェクト.何となく分かるが、実際にコードを書いてみようとすると困ってしまう。という状況有りませんでしょうか。何かが分かっていないが、何が分かっていないのか....という状況でした。
+疑問として湧いてきたことをベースに、Promiseオブジェクトについてまとめていきたいと思います。
+
+ Q1：Promiseオブジェクトとは?
+Promiseオブジェクトを単純に表現すると、状態を持つオブジェクトです。３つの状態があります。
+
+保留中（pending）
+成功（fulfilled）
+失敗（reject）
+
+Promiseオブジェクトは常に３つの...]]></description><link>https://zenn.dev/osachi/articles/de9d50adbae10b</link><guid isPermaLink="true">https://zenn.dev/osachi/articles/de9d50adbae10b</guid><pubDate>Thu, 21 Nov 2024 00:30:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--T26CNjqH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Promise%25E3%2582%25AA%25E3%2583%2596%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E3%2581%25A8%25E3%2581%25AF%25E4%25BD%2595%25E3%2581%258B.%2520%7EQA%25E3%2581%25A7%25E6%25B7%25B1%25E5%25A0%2580%25E3%2582%258B%7E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:osachi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS1dQbG9ta3VENjRseUgxcHZnX3BHMjA5cEZQTjM2UGZtN3lzLTNIUVJGPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>osachi</dc:creator></item><item><title><![CDATA[【Vue.js】ファイルアップロード時に同じファイル名が反映されない問題を解決する]]></title><description><![CDATA[
+ 問題
+Vue.jsでモーダル内でのファイルアップロード機能を実装しているとき、
+モーダルを閉じてから同じファイルを連続して選択すると、
+ファイル名が画面に反映されない現象に遭遇しました。
+例えば、以下のようなコードでファイルをアップロードする場合です。
+const file = ref&lt;File&gt;(new File([], ''));
+
+function handleFileUpload([uploadedFile]: [File]) {
+  file.value = uploadedFile;
+}
+このコードでは、ユーザーが同じファイルを再度選択しても
+Vueのリアクテ...]]></description><link>https://zenn.dev/ma_me/articles/7c86d763e70d7e</link><guid isPermaLink="true">https://zenn.dev/ma_me/articles/7c86d763e70d7e</guid><pubDate>Wed, 20 Nov 2024 11:08:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--QEgmlaq5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Vue.js%25E3%2580%2591%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2589%25E6%2599%2582%25E3%2581%25AB%25E5%2590%258C%25E3%2581%2598%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E5%2590%258D%25E3%2581%258C%25E5%258F%258D%25E6%2598%25A0%25E3%2581%2595%25E3%2582%258C%25E3%2581%25AA%25E3%2581%2584%25E5%2595%258F%25E9%25A1%258C%25E3%2582%2592%25E8%25A7%25A3%25E6%25B1%25BA%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ma_me%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzMzZjVkODUyNTcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ma_me</dc:creator></item><item><title><![CDATA[Tauri 2.0でローカルファイルを読み込んでみる(plugin-fs)]]></title><description><![CDATA[下記、「ファイルを開く」ダイアログ(plugin-dialog)を利用してみる記事の続き的な内容になります。
+折角、上記でローカルファイルのファイルパスを取得できたので、そのローカルファイルを読み込んでみたいと思います。
+https://zenn.dev/playree/articles/5e2f1386dde48f
+下記tauri-plugin-fsを利用します。
+https://github.com/tauri-apps/tauri-plugin-fs
+
+ プラグインの追加
+フロントとRust側の両方に追加を行います。
+&gt; yarn add @tauri-apps/plugin...]]></description><link>https://zenn.dev/playree/articles/04242346d343e6</link><guid isPermaLink="true">https://zenn.dev/playree/articles/04242346d343e6</guid><pubDate>Wed, 20 Nov 2024 11:05:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5c807pHj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Tauri%25202.0%25E3%2581%25A7%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25AB%25E3%2583%25AB%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2592%25E8%25AA%25AD%25E3%2581%25BF%25E8%25BE%25BC%25E3%2582%2593%25E3%2581%25A7%25E3%2581%25BF%25E3%2582%258B%2528plugin-fs%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:playree%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSzc1OVNMOTM4THJqcFl0OUxnSUZKS2NlYThMTVEwbkwyS3oteFBxbUcyQTB3PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>playree</dc:creator></item><item><title><![CDATA[AxiosとFetch：どちらがHTTPリクエストに最適か？]]></title><description><![CDATA[JavaScriptでHTTPリクエストを行う方法はいくつかありますが、その中で最も人気のある2つはAxiosとネイティブのfetch()APIです。本記事では、これら2つの方法を比較し、それぞれのシナリオにどちらが適しているかを見ていきます。
+
+
+ HTTPリクエストの重要な役割
+HTTPリクエストは、WebアプリケーションでサーバーやAPIと通信するために不可欠です。Axiosとfetch()はどちらも広く使用されており、これらを効果的に利用するための特徴を見ていきましょう。
+
+ Axiosとは？
+Axiosは、HTTPリクエストを行うためのPromiseベースのHTTPクライアント...]]></description><link>https://zenn.dev/kasuna/articles/97c0374b80d812</link><guid isPermaLink="true">https://zenn.dev/kasuna/articles/97c0374b80d812</guid><pubDate>Tue, 19 Nov 2024 12:07:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lnRWQpOS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Axios%25E3%2581%25A8Fetch%25EF%25BC%259A%25E3%2581%25A9%25E3%2581%25A1%25E3%2582%2589%25E3%2581%258CHTTP%25E3%2583%25AA%25E3%2582%25AF%25E3%2582%25A8%25E3%2582%25B9%25E3%2583%2588%25E3%2581%25AB%25E6%259C%2580%25E9%2581%25A9%25E3%2581%258B%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kasuna%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2Rhcmsvay5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kasuna</dc:creator></item><item><title><![CDATA[Firefoxに新機能を追加してみた]]></title><description><![CDATA[
+ はじめに
+この記事は、2024年度の東京大学工学部電気電子工学科・電子情報工学科３年後期実験「大規模ソフトウェアを手探る」の成果報告レポートです。
+
+ firefoxとは
+Firefoxは、Mozillaによって開発されているWebブラウザです。数ある主要ブラウザの中でも比較的ビルドが簡単であったため、今回の実験で手探ることにしました。
+Firefoxのソースコードは、バックエンドが主にC++、フロントエンドが主にJavaScriptで書かれています。C++部分の改変は複雑で敷居が高いため、今回はJavaScript部分を中心に改良を行い、便利な機能を追加することにしました。
+
+ ソ...]]></description><link>https://zenn.dev/rikuto9638/articles/2d47c14501ce93</link><guid isPermaLink="true">https://zenn.dev/rikuto9638/articles/2d47c14501ce93</guid><pubDate>Tue, 19 Nov 2024 08:45:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--npKIZ6tJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Firefox%25E3%2581%25AB%25E6%2596%25B0%25E6%25A9%259F%25E8%2583%25BD%25E3%2582%2592%25E8%25BF%25BD%25E5%258A%25A0%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:rikuto9638%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS096SThHOVNabFRqSnBNbjkwVHBwLVdPNnBYR1Jqak9CWUJvUklRanZ3RVV6S0F3PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>rikuto9638</dc:creator></item><item><title><![CDATA[Tauri 2.0で「ファイルを開く」ダイアログ(plugin-dialog)を使ってみる]]></title><description><![CDATA[Tauri 2.0ではさまざまなAPIがプラグインとして用意されていて、Rust側の実装(コーディング)不要でデスクトップ機能が利用できます。(プラグインとして用意されている機能であれば)
+ただ、2.0だとまだ情報があまりなかったので、自分の為にもまとめておこうかと。
+今回は、「ファイルを開く」ダイアログ(plugin-dialog)を利用してみます。
+一応、Githubにも簡単な手順の記載があります。
+https://github.com/tauri-apps/tauri-plugin-dialog
+
+ 前提
+下記記事でまとめた環境をベースでの解説になります。
+https://zenn...]]></description><link>https://zenn.dev/playree/articles/5e2f1386dde48f</link><guid isPermaLink="true">https://zenn.dev/playree/articles/5e2f1386dde48f</guid><pubDate>Tue, 19 Nov 2024 07:53:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bnputV5W--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Tauri%25202.0%25E3%2581%25A7%25E3%2580%258C%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2592%25E9%2596%258B%25E3%2581%258F%25E3%2580%258D%25E3%2583%2580%25E3%2582%25A4%25E3%2582%25A2%25E3%2583%25AD%25E3%2582%25B0%2528plugin-dialog%2529%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:playree%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSzc1OVNMOTM4THJqcFl0OUxnSUZKS2NlYThMTVEwbkwyS3oteFBxbUcyQTB3PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>playree</dc:creator></item><item><title><![CDATA[[JavaScript] 配列の最小値・最大値を求める]]></title><description><![CDATA[
+ 目的
+以下のように配列があったとして、その中で最も小さい値・最も大きい値を取り出したい。
+[1, 3, 8, 7, 5]   // 最小値は1, 最大値は8
+
+ 解決法
+Array.reduce を使用する。
+const arr = [1, 3, 8, 7, 5];
+
+// Array.reduce に渡すコールバック関数
+const getMin = (a, b) =&gt; Math.min(a, b);
+const getMax = (a, b) =&gt; Math.max(a, b);
+
+// 実際に求める
+const min = arr.reduce(getMin);
+c...]]></description><link>https://zenn.dev/progate_users/articles/c86f2d1fb855e0</link><guid isPermaLink="true">https://zenn.dev/progate_users/articles/c86f2d1fb855e0</guid><pubDate>Tue, 19 Nov 2024 06:08:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--RR_Tzv5H--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BJavaScript%255D%2520%25E9%2585%258D%25E5%2588%2597%25E3%2581%25AE%25E6%259C%2580%25E5%25B0%258F%25E5%2580%25A4%25E3%2583%25BB%25E6%259C%2580%25E5%25A4%25A7%25E5%2580%25A4%25E3%2582%2592%25E6%25B1%2582%25E3%2582%2581%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2582%2588%25E3%2581%25A4%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM2OGUyYmI4YzIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Progate%2520Path%2520%25E3%2582%25B3%25E3%2583%259F%25E3%2583%25A5%25E3%2583%258B%25E3%2583%2586%25E3%2582%25A3%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JiOGNiMGY2NjkuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>よつ</dc:creator></item><item><title><![CDATA[【React】mapメソッドによる「リストのレンダー」を身につけるための練習問題]]></title><description><![CDATA[
+ mapメソッド練習問題
+配列に対するmapメソッドの処理を練習するための4つの問題をご用意しました。
+mapメソッドは、引数として与えられた関数を配列のすべての要素に対して呼び出し、その結果からなる新しい配列を生成します。
+
+
+詳しくは以下のMDNをご覧ください。
+https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/map
+
+
+ 問題1
+以下のnumbers配列の各要素を2倍にした新しい配列を、mapメソッドを用いて作成してください。コンソールへの出力や新たな配列名の定...]]></description><link>https://zenn.dev/yamap_web/articles/6526debda2536d</link><guid isPermaLink="true">https://zenn.dev/yamap_web/articles/6526debda2536d</guid><pubDate>Mon, 18 Nov 2024 08:32:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--v9qT-eqx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590React%25E3%2580%2591map%25E3%2583%25A1%25E3%2582%25BD%25E3%2583%2583%25E3%2583%2589%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258B%25E3%2580%258C%25E3%2583%25AA%25E3%2582%25B9%25E3%2583%2588%25E3%2581%25AE%25E3%2583%25AC%25E3%2583%25B3%25E3%2583%2580%25E3%2583%25BC%25E3%2580%258D%25E3%2582%2592%25E8%25BA%25AB%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2591%25E3%2582%258B%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%25E7%25B7%25B4%25E7%25BF%2592%25E5%2595%258F%25E9%25A1%258C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2584%25E3%2581%25BE%25E3%2581%25B4%25E3%2583%25BC%2520%252F%2520YAMA-P%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FlNTMxZTUyMjIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>やまぴー / YAMA-P</dc:creator></item><item><title><![CDATA[JavaScript のイテレーターを理解する]]></title><description><![CDATA[for...of などを使って反復処理可能なオブジェクトはどういう条件で成立するのか、また、そのような反復処理可能なオブジェクトはどのように実装できるのかを理解するためにイテレーターについて学んだ内容をまとめた記事です。
+
+ イテレーター
+
+ イテレーターとは
+以下の2つのプロパティを返す next() メソッドを持っているオブジェクトのことです。
+
+
+value
+
+オブジェクトの次の値
+
+
+
+done
+
+オブジェクトの要素がまだ残っていれば false、全ての要素を取得し終えると true
+
+
+
+一般的なイテレーターである配列で実際に next() メソッドを呼び出してみます。
+// ...]]></description><link>https://zenn.dev/t0daaay/articles/74b0f9abd84021</link><guid isPermaLink="true">https://zenn.dev/t0daaay/articles/74b0f9abd84021</guid><pubDate>Mon, 18 Nov 2024 01:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--nkjt5tlv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%2520%25E3%2581%25AE%25E3%2582%25A4%25E3%2583%2586%25E3%2583%25AC%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%25BC%25E3%2582%2592%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A4%25E3%2581%2598%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2EzZjZlYWU1ZjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>つじ</dc:creator></item><item><title><![CDATA[JavaScript liタグを作成]]></title><description><![CDATA[liタグを作成してulタグに追加する処理です。
+タスク管理ページにて、タスク入力欄にタスクを入力して、作成をクリックするとタスクの追加が行えるサイトを使ったのでそれについて書いていきます。タスクはulタグで管理していきます。
+まずどのようなサイトかざくっと説明します。
+
+タスク入力欄にタスクを入力して作成ボタンを押すと
+
+タスクが作成されます。
+チェックボックスにチェックを入れると
+
+タスク名に横線が引かれます。
+削除ボタンを押すと
+
+タスクが消えます。
+ざくっとこんな感じ、では説明していきます。
+htmlは以下になります。
+&lt;!DOCTYPE html&gt;
+&lt;html ...]]></description><link>https://zenn.dev/imkei/articles/8f50315f87d891</link><guid isPermaLink="true">https://zenn.dev/imkei/articles/8f50315f87d891</guid><pubDate>Sun, 17 Nov 2024 15:00:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vr0U-33o--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%2520li%25E3%2582%25BF%25E3%2582%25B0%25E3%2582%2592%25E4%25BD%259C%25E6%2588%2590%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:imkei%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M2Mzc4NTBjMzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>imkei</dc:creator></item><item><title><![CDATA[TypeScript のコンパイルと Node.js 実行の流れ]]></title><description><![CDATA[
+ はじめに
+新規プロジェクトで Node.js のベース実装をしているのですが...
+tsconfig.json の設定がよくわからない、そもそもどう動いているのかから怪しいと思い、TypeScript にわかだなと反省したので調べました。
+TypeScript のコンパイルと Node.js 実行の流れについてや tsconfig.json について、実際に手を動かしてコンパイルをしながら学んだことをまとめた内容になっています！
+
+ TypeScript のコンパイルと Node.js 実行の流れ
+
+ そもそも Node.js と TypeScript とは
+Node.js とは J...]]></description><link>https://zenn.dev/kiwichan101kg/articles/c6c8949dde02a4</link><guid isPermaLink="true">https://zenn.dev/kiwichan101kg/articles/c6c8949dde02a4</guid><pubDate>Sun, 17 Nov 2024 03:24:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--nIGj0hsO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%2520%25E3%2581%25AE%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2591%25E3%2582%25A4%25E3%2583%25AB%25E3%2581%25A8%2520Node.js%2520%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%25AE%25E6%25B5%2581%25E3%2582%258C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kiwichan%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZlYTA3YzU3YzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kiwichan</dc:creator></item><item><title><![CDATA[ChromeのDocument Picture-in-Picture APIを試してみた]]></title><description><![CDATA[
+ はじめに
+ChromeにDocument Picture-in-Picture APIという機能が去年追加されました。
+!
+追記
+当初Chrome130から使えると記載がしておりましたが、正しくはChrome116から使用できたようです。
+お詫びして訂正させていただきます。
+
+ピクチャーインピクチャー機能自体はこれまでも存在し、動画をミニプレイヤーとして別ウィンドウで表示することができました。しかし、これまでのピクチャーインピクチャーでは動画コンテンツしか表示できないという制限がありました。Document Picture-in-Picture APIにより、任意のDOM要素をミニプ...]]></description><link>https://zenn.dev/voiceapplab/articles/2b90180c38af9d</link><guid isPermaLink="true">https://zenn.dev/voiceapplab/articles/2b90180c38af9d</guid><pubDate>Sun, 17 Nov 2024 01:26:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Y9Tn-I-g--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Chrome%25E3%2581%25AEDocument%2520Picture-in-Picture%2520API%25E3%2582%2592%25E8%25A9%25A6%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:arahabica%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I2N2NiOWU4MDYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%259C%25E3%2582%25A4%25E3%2582%25B9%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%25E3%2583%25A9%25E3%2583%259C%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2d1U0llREJ2ODZKdUphVEpwMlFQMlNSU0I4dm53b0E3U0hTQ2h1UXc9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>arahabica</dc:creator></item><item><title><![CDATA[obniz x Node-REDマニュアル（プロトアウト授業補助教材）]]></title><description><![CDATA[obnizをNode-REDで扱うマニュアルです。ハンズオン資料ではなく補助として利用します。]]></description><link>https://zenn.dev/protoout/books/07_node-red-obniz</link><guid isPermaLink="true">https://zenn.dev/protoout/books/07_node-red-obniz</guid><pubDate>Sat, 16 Nov 2024 08:04:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--X0OiCd22--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci9iOWM5ZGUxOGQwLnBuZw==%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>プロトアウト</dc:creator></item></channel></rss>
