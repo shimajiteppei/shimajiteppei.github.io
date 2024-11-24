@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Ubuntu」のフィード]]></title><description><![CDATA[Zennのトピック「Ubuntu」のRSSフィードです]]></description><link>https://zenn.dev/topics/ubuntu</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/8c2cdbc5b3.png</url><title>Zennの「Ubuntu」のフィード</title><link>https://zenn.dev/topics/ubuntu</link></image><generator>zenn.dev</generator><lastBuildDate>Sun, 24 Nov 2024 04:00:43 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/ubuntu/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[フォレンジック向けLinux「Paladin」を用いたディスク保全]]></title><description><![CDATA[
+ 概要
+Paladin はフォレンジック目的に開発されたLinuxディストリビューションです。
+Paladin LTSと Paladin Edgeの2種類があります。LTSは名前の通りLong-Term Supportなんでしょう。Edgeはより軽量なのと、32bit版も提供されているので保全に適してるのかなと思います。
+https://sumuri.com/software/paladin/
+また重要なことですが、商用利用する場合Paladin LTSは有償($25以上の寄付が必要)です。
+Edgeは制限として書かれてはいませんが、余裕があれば寄付しましょう。
+本記事では、このPal...]]></description><link>https://zenn.dev/sum3sh1/articles/04f8f0265e8807</link><guid isPermaLink="true">https://zenn.dev/sum3sh1/articles/04f8f0265e8807</guid><pubDate>Sat, 23 Nov 2024 19:16:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--OxSOSHeW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25AC%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%2583%25E3%2582%25AF%25E5%2590%2591%25E3%2581%2591Linux%25E3%2580%258CPaladin%25E3%2580%258D%25E3%2582%2592%25E7%2594%25A8%25E3%2581%2584%25E3%2581%259F%25E3%2583%2587%25E3%2582%25A3%25E3%2582%25B9%25E3%2582%25AF%25E4%25BF%259D%25E5%2585%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:sumeshi_kun%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzYwM2EzNzkyNzEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sumeshi_kun</dc:creator></item><item><title><![CDATA[フォレンジック向けLinux「Tsurugi Linux」を用いたディスク保全]]></title><description><![CDATA[
+ 概要
+Tsurugi Linux はフォレンジック目的に調整されたLinuxディストリビューションです。
+Tsurugi Acquire(軽量な保全用エディション)と Tsurugi Linux[LAB] (多くのツールが搭載された調査用エディション) の2種類があります。
+https://tsurugi-linux.org/
+本記事では、このTsurugiを使ってフォレンジック調査対象機器のディスクイメージを保全する方法について取り上げます。
+別記事にて、C.A.IN.E.とPaladinでの保全についても取り上げています。
+https://zenn.dev/sum3sh1/art...]]></description><link>https://zenn.dev/sum3sh1/articles/c3a40c4977fe48</link><guid isPermaLink="true">https://zenn.dev/sum3sh1/articles/c3a40c4977fe48</guid><pubDate>Sat, 23 Nov 2024 17:59:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--sHYouL-m--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25AC%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%2583%25E3%2582%25AF%25E5%2590%2591%25E3%2581%2591Linux%25E3%2580%258CTsurugi%2520Linux%25E3%2580%258D%25E3%2582%2592%25E7%2594%25A8%25E3%2581%2584%25E3%2581%259F%25E3%2583%2587%25E3%2582%25A3%25E3%2582%25B9%25E3%2582%25AF%25E4%25BF%259D%25E5%2585%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:sumeshi_kun%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzYwM2EzNzkyNzEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sumeshi_kun</dc:creator></item><item><title><![CDATA[Apache2のデフォルトページ・バージョンを非表示にしたい]]></title><description><![CDATA[
+ はじめに
+Apache2のインストールを行ったところ、デフォルトページが表示されていましたので、非表示にしたいと思います。
+
+ 環境
+
+OS : Ubuntu
+
+
+ 結論
+
+000-default.confを無効にする → デフォルトページが非表示になる（404になる）
+security.confの設定を変更する → バージョンが非表示になる
+
+
+ やり方
+まずはデフォルトページの非表示です。
+Apache2には設定の有効・無効を行うためのコマンドが用意されています。今回はそれを利用します。
+ドキュメントルートが記載されている000-default.confファイルを無効にする。
+a...]]></description><link>https://zenn.dev/boku_uchujin/articles/ea56acb2f79ab8</link><guid isPermaLink="true">https://zenn.dev/boku_uchujin/articles/ea56acb2f79ab8</guid><pubDate>Wed, 20 Nov 2024 10:02:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--LPKqDoYF--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Apache2%25E3%2581%25AE%25E3%2583%2587%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25AB%25E3%2583%2588%25E3%2583%259A%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%25BB%25E3%2583%2590%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%2592%25E9%259D%259E%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%25AB%25E3%2581%2597%25E3%2581%259F%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:boku_uchujin%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RmYWQ4MmM5YjkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>boku_uchujin</dc:creator></item><item><title><![CDATA[Wayland環境下のLinux版MSEdgeでタッチパッドジェスチャーとfcitxを使う]]></title><description><![CDATA[
+ 要約
+Microsoft Edgeの起動オプションに以下の項目を追加しよう。
+microsoft-edge --ozone-platform-hint=auto --enable-features=TouchpadOverscrollHistoryNavigation,WaylandTextInputV3
+または
+microsoft-edge --ozone-platform-hint=auto --enable-features=TouchpadOverscrollHistoryNavigation --enable-wayland-ime --wayland-text-input...]]></description><link>https://zenn.dev/sotohi/articles/d1625a6bee485b</link><guid isPermaLink="true">https://zenn.dev/sotohi/articles/d1625a6bee485b</guid><pubDate>Tue, 19 Nov 2024 07:05:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--McnomK9q--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Wayland%25E7%2592%25B0%25E5%25A2%2583%25E4%25B8%258B%25E3%2581%25AELinux%25E7%2589%2588MSEdge%25E3%2581%25A7%25E3%2582%25BF%25E3%2583%2583%25E3%2583%2581%25E3%2583%2591%25E3%2583%2583%25E3%2583%2589%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25B9%25E3%2583%2581%25E3%2583%25A3%25E3%2583%25BC%25E3%2581%25A8fcitx%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Sotohi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSzdqTmF6T1IyVi1jSmJoZ2k2QW40Y29xajlfWGU5WGQtamNqZjJXc0lsRlduNktpZmk9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Sotohi</dc:creator></item><item><title><![CDATA[M5Stack ModuleLLMでUSB-WiFiドングルを使用する。]]></title><description><![CDATA[!
+未だ手探りなので、正確な情報ではないかもしれません。
+システムが壊れる可能性もあるので、自己責任でお願いしますm(_ _)m
+2024/11/19追加
+どうやら、この方法でカーネルを変更するとAXERAのNPU関連のソースが無いためNPUの機能は無くなるようです。ビルド済みのバイナリ(M5StackLLM関連のバイナリ)は動くようですが、linux-sourceが公開されないとダメなようです。。。
+
+
+ ①使用したUSB-WiFiアダプタ
+エレコム WDC-433DU2HBK(Realtek rtl8811au)
+TP-Link Archer T2U Nano (Realtek rt...]]></description><link>https://zenn.dev/mongonta/articles/35b37ee0bc057c</link><guid isPermaLink="true">https://zenn.dev/mongonta/articles/35b37ee0bc057c</guid><pubDate>Sun, 17 Nov 2024 15:44:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--skz_IpYe--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:M5Stack%2520ModuleLLM%25E3%2581%25A7USB-WiFi%25E3%2583%2589%25E3%2583%25B3%25E3%2582%25B0%25E3%2583%25AB%25E3%2582%2592%25E4%25BD%25BF%25E7%2594%25A8%25E3%2581%2599%25E3%2582%258B%25E3%2580%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E7%25B4%2585%25E6%25A8%25B9%25E3%2582%25BF%25E3%2582%25AB%25E3%2582%25AA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pjbkdpaU9JbG9fWlBhM0lTS0cyWjZydVVmLXNucFZFYlUwcG9NSEE9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>紅樹タカオ</dc:creator></item><item><title><![CDATA[Ubuntu24.10での日本語ロケールの設定方法]]></title><description><![CDATA[
+ 概要
+Raspberry Pi4 に Ubuntu Desktop 24.10 をインストールした際に、日本語ロケールに設定しようとして、root権限でlocalectlコマンドを実行したところ、なぜかアクセス拒否されてしまったので、別の方法を試してみた。
+実行したコマンド
+$ sudo localectl set-locale LANG=ja_JP.UTF-8
+Failed to issue method call: Access denied
+アクセス拒否の原因はよくわかりません。
+とりあえず以下のコマンドで設定できたのでご参考まで。
+$ sudo update-locale L...]]></description><link>https://zenn.dev/heptapod/articles/ubuntu2410-locale-settings</link><guid isPermaLink="true">https://zenn.dev/heptapod/articles/ubuntu2410-locale-settings</guid><pubDate>Sun, 17 Nov 2024 09:40:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--zFRqu_IJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ubuntu24.10%25E3%2581%25A7%25E3%2581%25AE%25E6%2597%25A5%25E6%259C%25AC%25E8%25AA%259E%25E3%2583%25AD%25E3%2582%25B1%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%25AE%25E8%25A8%25AD%25E5%25AE%259A%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:heptapod%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzYxOTc5MmM2YzEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>heptapod</dc:creator></item><item><title><![CDATA[elasticsearchを実行しようとするとDockerが必要らしいのでインストールする]]></title><description><![CDATA[
+ elasticsearchを実行しようとするとDockerが必要らしい
+
+ やること
+UbuntuにDocker-Desktopをインストールする
+
+ 実行環境
+# cat /etc/os-release
+PRETTY_NAME="Ubuntu 22.04.5 LTS"
+NAME="Ubuntu"
+VERSION_ID="22.04"
+VERSION="22.04.5 LTS (Jammy Jellyfish)"
+VERSION_CODENAME=jammy
+ID=ubuntu
+ID_LIKE=debian
+HOME_URL="https://www.ubuntu.com/"
+SUP...]]></description><link>https://zenn.dev/hamutarosan_dev/articles/22ec4c4716c491</link><guid isPermaLink="true">https://zenn.dev/hamutarosan_dev/articles/22ec4c4716c491</guid><pubDate>Sun, 17 Nov 2024 08:30:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--C1iQwNTM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:elasticsearch%25E3%2582%2592%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%2597%25E3%2582%2588%25E3%2581%2586%25E3%2581%25A8%25E3%2581%2599%25E3%2582%258B%25E3%2581%25A8Docker%25E3%2581%258C%25E5%25BF%2585%25E8%25A6%2581%25E3%2582%2589%25E3%2581%2597%25E3%2581%2584%25E3%2581%25AE%25E3%2581%25A7%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Pamada%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZjMGMwNDY0OGIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Pamada</dc:creator></item><item><title><![CDATA[elasticsearchをビルドしようとしたらJDKのバージョンが違っていたので対応するJDKを入れる]]></title><description><![CDATA[
+ やること
+以下のコマンドを実行したらJDKのバージョンが違っていたので再インストールする
+./gradlew run --debug-jvm
+（抜粋）
+* What went wrong:
+Error resolving plugin [id: 'com.gradle.develocity', version: '3.18.1']
+&gt; A problem occurred configuring project ':build-tools-internal'.
+   &gt; A problem occurred evaluating project ':build-tools...]]></description><link>https://zenn.dev/hamutarosan_dev/articles/c55337c51e8cd9</link><guid isPermaLink="true">https://zenn.dev/hamutarosan_dev/articles/c55337c51e8cd9</guid><pubDate>Sun, 17 Nov 2024 08:28:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ZcJpjlPN--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:elasticsearch%25E3%2582%2592%25E3%2583%2593%25E3%2583%25AB%25E3%2583%2589%25E3%2581%2597%25E3%2582%2588%25E3%2581%2586%25E3%2581%25A8%25E3%2581%2597%25E3%2581%259F%25E3%2582%2589JDK%25E3%2581%25AE%25E3%2583%2590%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%25A7%25E3%2583%25B3%25E3%2581%258C%25E9%2581%2595%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%2584%25E3%2581%259F%25E3%2581%25AE%25E3%2581%25A7%25E5%25AF%25BE%25E5%25BF%259C%25E3%2581%2599%25E3%2582%258BJDK%25E3%2582%2592%25E5%2585%25A5%25E3%2582%258C%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Pamada%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZjMGMwNDY0OGIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Pamada</dc:creator></item><item><title><![CDATA[Ubuntu Server 24.04のUFW初期設定]]></title><description><![CDATA[Ubuntuにデフォルトでインストールされている、UFW（Uncomplicated FireWall）の利用を検討しました。
+Ubuntu Server 24.04をインストールした後のUFWの初期設定についてまとめておきます。
+
+ 環境
+こちらの記事 Ubuntu Server 24.04 を VirtualBox にインストール の環境が前提
+
+Chip: Apple M2 Max
+macOS: Sequoia 15.0.1
+VirtualBox: 7.1.4
+Ubuntu: Ubuntu Server 24.04
+
+
+ 設定コマンド
+
+ ufw状態確認
+sudo ufw stat...]]></description><link>https://zenn.dev/makaaso/articles/setup-ufw-on-ubuntu-2404</link><guid isPermaLink="true">https://zenn.dev/makaaso/articles/setup-ufw-on-ubuntu-2404</guid><pubDate>Sat, 16 Nov 2024 02:26:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0ctFl-8S--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ubuntu%2520Server%252024.04%25E3%2581%25AEUFW%25E5%2588%259D%25E6%259C%259F%25E8%25A8%25AD%25E5%25AE%259A%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:makaaso%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0YzN3ZnZwOVZ6ZGxkMWlrSUlYNFFna0NWUzZSSWJqMDhaSjRlUzI9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>makaaso</dc:creator></item><item><title><![CDATA[環境構築でミスったことまとめ]]></title><description><![CDATA[
+ 導入
+こんにちは。
+最近Reactの環境構築に成功した高専生です。
+今回は僕が環境構築でミスったことをまとめようと思います。読み進めると「その程度のこと？」と思うかもしれませんが温かい目で見守ってくださると幸いです。
+
+ 構築ルート√
+ここ数日で以下の環境構築を行いました。
+・C/C++をVScodeで使えるようにする
+・node.jsのインストールと設定
+・Reactの環境構築
+上記を見て思うところはあるかもしれませんが、その違和感は後ほど弁明します。
+
+ WSLに嫌われている
+最初に「C/C++をVScodeで使えるようにする」ということを進めました。「今までやっていなかったの？...]]></description><link>https://zenn.dev/jun1013/articles/b8f151b8488662</link><guid isPermaLink="true">https://zenn.dev/jun1013/articles/b8f151b8488662</guid><pubDate>Fri, 15 Nov 2024 13:41:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--XVn-Gp4D--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%25A7%25E3%2583%259F%25E3%2582%25B9%25E3%2581%25A3%25E3%2581%259F%25E3%2581%2593%25E3%2581%25A8%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Juna1013%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk1MjYwNDRhY2QuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Juna1013</dc:creator></item><item><title><![CDATA[Ubuntu Server 24.04のOpenSSH初期設定]]></title><description><![CDATA[Ubuntu Server 24.04をインストールした後のOpenSSHの初期設定についてまとめておきます。
+
+ 環境
+こちらの記事 Ubuntu Server 24.04 を VirtualBox にインストール の環境が前提
+
+Chip: Apple M2 Max
+macOS: Sequoia 15.0.1
+VirtualBox: 7.1.4
+Ubuntu: Ubuntu Server 24.04
+
+
+ 設定コマンド
+
+ パスワード認証の無効化
+sudo vi /etc/ssh/sshd_config.d/50-cloud-init.conf
+----------
+Password...]]></description><link>https://zenn.dev/makaaso/articles/setup-openssh-on-ubuntu-2404</link><guid isPermaLink="true">https://zenn.dev/makaaso/articles/setup-openssh-on-ubuntu-2404</guid><pubDate>Fri, 15 Nov 2024 00:29:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--iWjpb3ic--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ubuntu%2520Server%252024.04%25E3%2581%25AEOpenSSH%25E5%2588%259D%25E6%259C%259F%25E8%25A8%25AD%25E5%25AE%259A%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:makaaso%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0YzN3ZnZwOVZ6ZGxkMWlrSUlYNFFna0NWUzZSSWJqMDhaSjRlUzI9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>makaaso</dc:creator></item><item><title><![CDATA[Space Station OSが公開されたので触ってみた]]></title><description><![CDATA[
+ はじめに
+こんにちは、某SIerでSEをやっている宇宙も好きなnekorush14です✨。
+今回は先日GitHubで公開されたSpace Station OSが面白そうだったので、手元のMacBook上で仮想マシンを作って動かしてみた話をします。
+
+https://github.com/space-station-os/space_station_os
+👆Space Station OSのGitHubリポジトリ
+
+!
+この投稿は個人の見解・アウトプットであり、所属企業や関連する団体と一切関係ありません
+
+
+ 環境
+今回動かした環境は以下の通りです。
+
+Host: MacBook Pr...]]></description><link>https://zenn.dev/nekorush14/articles/0267c09522a09e</link><guid isPermaLink="true">https://zenn.dev/nekorush14/articles/0267c09522a09e</guid><pubDate>Thu, 14 Nov 2024 22:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_PXn_h-O--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Space%2520Station%2520OS%25E3%2581%258C%25E5%2585%25AC%25E9%2596%258B%25E3%2581%2595%25E3%2582%258C%25E3%2581%259F%25E3%2581%25AE%25E3%2581%25A7%25E8%25A7%25A6%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nekorush14%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSk01NHBpbm5jbWlxaG5YLU9HTjFNNEszdk1wM3psa1hUcG9oRG9ZY1lZeE5XS3NlZmI9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nekorush14</dc:creator></item><item><title><![CDATA[Ubuntu Server 24.04 を VirtualBox にインストール]]></title><description><![CDATA[VirtualBox7.1がリリースされて、ようやくApple SiliconのPCでもVirtualBoxが利用できるようになりましたので、早速 Ubuntu Server 24.04 をインストールしてみました。
+こちら 「to skip startup.nsh or any other key to continue.」 の対応方法 の記事のようにamdとarmを間違えないようお気をつけください。
+
+ 環境
+
+Chip: Apple M2 Max
+macOS: Sequoia 15.0.1
+VirtualBox: 7.1.4
+Ubuntu: Ubuntu Server 24.04
+...]]></description><link>https://zenn.dev/makaaso/articles/install-ubuntu-2404-virtualbox</link><guid isPermaLink="true">https://zenn.dev/makaaso/articles/install-ubuntu-2404-virtualbox</guid><pubDate>Mon, 11 Nov 2024 06:22:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--h2m6nb4S--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ubuntu%2520Server%252024.04%2520%25E3%2582%2592%2520VirtualBox%2520%25E3%2581%25AB%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:makaaso%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0YzN3ZnZwOVZ6ZGxkMWlrSUlYNFFna0NWUzZSSWJqMDhaSjRlUzI9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>makaaso</dc:creator></item><item><title><![CDATA[systemctlの使い方]]></title><description><![CDATA[
+ サービスの起動
+sudo systemctl start [サービス名]
+
+ ステータスの確認
+active (running)と表示されていれば正常に起動している。
+sudo systemctl status [サービス名]
+
+ サービスの停止
+sudo systemctl stop [サービス名]
+
+ 自動起動
+システムが再起動した際に、自動的にサービスを起動する。
+sudo systemctl enable [サービス名]
+サービスの自動起動を無効にする。
+sudo systemctl disable [サービス名]
+サービスの自動起動が有効か無効か調べる。
+sudo syst...]]></description><link>https://zenn.dev/tomoakinagahara/articles/521a8ffbbedc89</link><guid isPermaLink="true">https://zenn.dev/tomoakinagahara/articles/521a8ffbbedc89</guid><pubDate>Sun, 10 Nov 2024 12:54:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--YcFRI87v--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:systemctl%25E3%2581%25AE%25E4%25BD%25BF%25E3%2581%2584%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Tomoaki%2520Nagahara%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2czREt6Z1p1U3hEcGVZaFY1ajhJSjNmTzFZODlMLXg3bVJxcFU1Q0E9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Tomoaki Nagahara</dc:creator></item><item><title><![CDATA[ホームサーバー完全構築ガイド #1 OS導入とインフラ設定]]></title><description><![CDATA[記事シリーズ:
+ホームサーバー完全構築ガイド #0 計画とハードウェア選定
+ホームサーバー完全構築ガイド #2 サービス群の選定
+ホームサーバー完全構築ガイド #3 WordPressのデプロイ
+
+ OSのインストール
+ハードウェアを入手した後、プリインストールされたWindows OSをLinuxに置き換える必要があります。インストール手順は通常のコンピューターと同じです：OSが入ったUSBメモリを挿入し、BIOSでブートドライブを変更し、指示に従ってインストールを完了します。今回選択したLinuxディストリビューションは Ubuntu 22.04 Jammy Jellyfish です...]]></description><link>https://zenn.dev/solitudera/articles/6ebdfdf096b542</link><guid isPermaLink="true">https://zenn.dev/solitudera/articles/6ebdfdf096b542</guid><pubDate>Fri, 08 Nov 2024 16:37:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--tHxexwfL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%259B%25E3%2583%25BC%25E3%2583%25A0%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E5%25AE%258C%25E5%2585%25A8%25E6%25A7%258B%25E7%25AF%2589%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%2520%25231%2520OS%25E5%25B0%258E%25E5%2585%25A5%25E3%2581%25A8%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2595%25E3%2583%25A9%25E8%25A8%25AD%25E5%25AE%259A%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:SolitudeRA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSmQtdWxfWFNVYlQtQ2wwUXNqdFd0N1NGSG5sZkUyUnd3Nk9LU2VCeHpKZVFLYUNiND1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>SolitudeRA</dc:creator></item><item><title><![CDATA[Github Actionsでubuntu-latestラベルがUbuntu24系になるらしい。]]></title><description><![CDATA[
+ 概要
+2024年11月5日にGithubから以下のような記事がでていました。
+https://github.blog/changelog/2024-11-05-notice-of-breaking-changes-for-github-actions/
+簡単に内容をまとめると、
+
+
+ubuntu-latest ラベルのイメージをUbuntu 24系に変更予定。
+
+actions/upload-artifact actions/download-artifact のv3は終了予定。
+fork時にActionsを実行しないように変更可能。
+WebhookのRatelimitが追加。
+Se...]]></description><link>https://zenn.dev/sirok/articles/c1dcce143e2246</link><guid isPermaLink="true">https://zenn.dev/sirok/articles/c1dcce143e2246</guid><pubDate>Wed, 06 Nov 2024 09:08:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--SPY8i98C--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Github%2520Actions%25E3%2581%25A7ubuntu-latest%25E3%2583%25A9%25E3%2583%2599%25E3%2583%25AB%25E3%2581%258CUbuntu24%25E7%25B3%25BB%25E3%2581%25AB%25E3%2581%25AA%25E3%2582%258B%25E3%2582%2589%25E3%2581%2597%25E3%2581%2584%25E3%2580%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Takumi%2520Sato%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzIzYWMxYjU0OWEuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:sirok%2520engineer%2527s%2520blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRkMGU5ZDNjOTQuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Takumi Sato</dc:creator></item><item><title><![CDATA[【Searge_LLM】ComfyUIでローカルLLMを活用したプロンプト生成]]></title><description><![CDATA[
+ はじめに
+近年、画像生成AIの進化により、より精緻なプロンプト制御が求められています。今回は、ComfyUIにSearge LLMを導入し、ローカルLLMを活用した効率的なプロンプト生成方法をご紹介します。
+ComfyUI_Searge_LLMは、Windows環境での動作を主にテストされていますが、Ubuntu環境でもpip install llama-cpp-pythonを手動でインストールすることで利用可能です。
+
+ Searge LLMの特徴
+
+ローカル環境でLLMを実行可能
+プライバシーを確保しながらプロンプト生成
+低レイテンシーな応答
+カスタマイズ可能なinstructi...]]></description><link>https://zenn.dev/toki_mwc/articles/1937810e390ac6</link><guid isPermaLink="true">https://zenn.dev/toki_mwc/articles/1937810e390ac6</guid><pubDate>Mon, 04 Nov 2024 09:42:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--o2dhx1ED--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Searge_LLM%25E3%2580%2591ComfyUI%25E3%2581%25A7%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25AB%25E3%2583%25ABLLM%25E3%2582%2592%25E6%25B4%25BB%25E7%2594%25A8%25E3%2581%2597%25E3%2581%259F%25E3%2583%2597%25E3%2583%25AD%25E3%2583%25B3%25E3%2583%2597%25E3%2583%2588%25E7%2594%259F%25E6%2588%2590%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:toki_mwc%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzViNzRiNzczNGIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>toki_mwc</dc:creator></item><item><title><![CDATA[「to skip startup.nsh or any other key to continue.」 の対応方法]]></title><description><![CDATA[VirtualBox7.1がリリースされて、ようやくApple SiliconのPCでもVirtualBoxが利用できるようになりました。
+早速 Ubuntu Server 24.04 をインストールしてみると UEFI Interactive Shell v2.2 起動して以下のメッセージが表示されてインストールが開始されませんでした。
+ Press ESC in 1 seconds to skip startup.nsh or any other key to continue.` と表示されて、インストールが始まりませんでした。
+
+ 環境
+
+Chip: Apple M2 Max
+m...]]></description><link>https://zenn.dev/makaaso/articles/to-skip-startup-nsh</link><guid isPermaLink="true">https://zenn.dev/makaaso/articles/to-skip-startup-nsh</guid><pubDate>Sun, 03 Nov 2024 00:43:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wrFm8aak--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%258Cto%2520skip%2520startup.nsh%2520or%2520any%2520other%2520key%2520to%2520continue.%25E3%2580%258D%2520%25E3%2581%25AE%25E5%25AF%25BE%25E5%25BF%259C%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:makaaso%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0YzN3ZnZwOVZ6ZGxkMWlrSUlYNFFna0NWUzZSSWJqMDhaSjRlUzI9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>makaaso</dc:creator></item><item><title><![CDATA[WSLのインストール方法]]></title><description><![CDATA[
+ 本記事について
+この記事では，WindowsでLinuxを使用するために，WSLをインストールする方法を記載します．
+
+ WSLとは
+WSL(Windows Subsystem for Linux)とは，Windows上でLinuxの実行環境を構築するサブシステムです．
+WSLでは様々なLinuxディストリビューションを利用することが可能ですが，本記事ではUbuntuを用いた場合を記載します．
+
+ インストール手順
+「Windows Powershell」を使ってWSLをインストールする手順について解説します．
+まず，Windows Powershellを管理者として実行を指定して，...]]></description><link>https://zenn.dev/komdoroid/articles/b863fe02bedf33</link><guid isPermaLink="true">https://zenn.dev/komdoroid/articles/b863fe02bedf33</guid><pubDate>Fri, 01 Nov 2024 13:04:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--p6AS-C2y--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:WSL%25E3%2581%25AE%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kom%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JjMmEzNTUxOWUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kom</dc:creator></item><item><title><![CDATA[Java版マインクラフトでCloudflare TunnelとVPSを使ってポート開放をせずに外部に公開する]]></title><description><![CDATA[当初自宅サーバーでマイクラ鯖を立て、ngrokやlocaltunnelでポートを転送して複数人で快適にプレイしていたのですが、どちらも転送量1GBや独自IPに制約があり、ちょうど自分が持っていた月額400円のVPSをポート転送に使えるようにしてみました。
+
+ 必要な知識
+・Ubuntuの基本的な操作
+・systemctl
+
+ 自宅サーバー(ミニPC)
+CPU Ryzen7 5700U
+メモリ 16GB
+SSD 512GB
+
+ 月額400円のVPSの性能
+CPU 1vCPU
+メモリ 1GB
+SSD 20GB
+NW 100Mbps上限
+IP IPv4/IPv6
+ポートの転送を行っているだけな...]]></description><link>https://zenn.dev/csdotnet/articles/ac896826ed82e4</link><guid isPermaLink="true">https://zenn.dev/csdotnet/articles/ac896826ed82e4</guid><pubDate>Thu, 31 Oct 2024 13:46:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6rr5zcwW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java%25E7%2589%2588%25E3%2583%259E%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25AF%25E3%2583%25A9%25E3%2583%2595%25E3%2583%2588%25E3%2581%25A7Cloudflare%2520Tunnel%25E3%2581%25A8VPS%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2583%259D%25E3%2583%25BC%25E3%2583%2588%25E9%2596%258B%25E6%2594%25BE%25E3%2582%2592%25E3%2581%259B%25E3%2581%259A%25E3%2581%25AB%25E5%25A4%2596%25E9%2583%25A8%25E3%2581%25AB%25E5%2585%25AC%25E9%2596%258B%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:CSDotNET%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJhMmQwOWJiMjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>CSDotNET</dc:creator></item></channel></rss>
