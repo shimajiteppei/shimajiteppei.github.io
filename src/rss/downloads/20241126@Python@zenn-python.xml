@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Tue, 26 Nov 2024 03:51:41 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Amazon CloudWatch Logsでjson形式ログを表示する]]></title><description><![CDATA[
+ watchtowerを使ってログをAmazon CloudWatch Logsに送信する
+
+ ライブラリのインストール
+pip install structlog watchtower
+
+ サンプルコード
+import logging
+
+import structlog
+import watchtower
+
+# 標準のロギング設定
+logging.basicConfig(level=logging.INFO)
+
+# watchtowerハンドラーの追加
+cloudwatch_handler = watchtower.CloudWatchLogHandler(log_group='sa...]]></description><link>https://zenn.dev/fkzwsoftwaredev/articles/dc4b15b544f8ac</link><guid isPermaLink="true">https://zenn.dev/fkzwsoftwaredev/articles/dc4b15b544f8ac</guid><pubDate>Tue, 26 Nov 2024 02:53:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--J038zIPs--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Amazon%2520CloudWatch%2520Logs%25E3%2581%25A7json%25E5%25BD%25A2%25E5%25BC%258F%25E3%2583%25AD%25E3%2582%25B0%25E3%2582%2592%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%25B7%25B1%25E6%25BE%25A4%25E3%2582%25BD%25E3%2583%2595%25E3%2583%2588%25E3%2582%25A6%25E3%2582%25A7%25E3%2582%25A2%25E9%2596%258B%25E7%2599%25BA%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0ZHQyY0NZb0txM29xUzY4RDcyOThGeFhGYjFWSGIyTkNXWVdETT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>深澤ソフトウェア開発ブログ</dc:creator></item><item><title><![CDATA[因果探索で推定した因果グラフをPythonで比較する]]></title><description><![CDATA[
+ はじめに
+こんにちは、因果探索アプリケーションCausalas開発の井手です。
+因果探索で推定した因果グラフを評価する方法はいくつかありますが、今回はPythonで因果グラフ同士を比較する方法について説明します。
+本記事で扱う因果グラフは、因果探索の結果として推定された隣接行列を用いて作成したDAG（有向非巡回グラフ）を想定しています。DAGは、ノード（変数）とそれを繋ぐエッジ（因果関係）で構成されています。
+
+ 因果グラフ比較の使いどころ
+因果グラフを比較する場面として、以下を想定しています。
+
+
+因果探索アルゴリズムの性能評価
+真の因果グラフと推定した因果グラフを比較することで、...]]></description><link>https://zenn.dev/as_causal/articles/969362b8c63788</link><guid isPermaLink="true">https://zenn.dev/as_causal/articles/969362b8c63788</guid><pubDate>Tue, 26 Nov 2024 02:08:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_c5aCOb9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%259B%25A0%25E6%259E%259C%25E6%258E%25A2%25E7%25B4%25A2%25E3%2581%25A7%25E6%258E%25A8%25E5%25AE%259A%25E3%2581%2597%25E3%2581%259F%25E5%259B%25A0%25E6%259E%259C%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%2595%25E3%2582%2592Python%25E3%2581%25A7%25E6%25AF%2594%25E8%25BC%2583%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E4%25BA%2595%25E6%2589%258B%2520%25E9%25BA%25BB%25E5%258F%258B%25E7%25BE%258E%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRlNDhjNDQ5MDQuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:SCREEN%2520AS%2520%25E5%259B%25A0%25E6%259E%259C%25E6%258E%25A2%25E7%25B4%25A2%25E3%2583%2581%25E3%2583%25BC%25E3%2583%25A0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTEJja2JDb2wtY3MyNG56dUZkT0tNOEVWVU5JeXNXbmhPbGZ5LTJIdU9BUkMwVmR3PXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>井手 麻友美</dc:creator></item><item><title><![CDATA[VSCode(Cursor)とFastAPIでデバッガを使う]]></title><description><![CDATA[
+ 概要
+FastAPIのVSCodeでの開発時にデバッガを使う方法をまとめます。
+PyCharmなど他のエディタでもデバッガは使用できますが、本記事では割愛し、VSCodeとCursorでのデバッガ方法をまとめます。
+GitHub: https://github.com/hosimesi/code-for-techblogs/tree/main/fastapi_docker_debugger
+
+ デバッガの種類
+Pythonでデバッガを使用したい場合、以下の2つが候補に上がってくると思います。
+
+ 標準デバッガ (pdb)
+Pythonに組み込まれている基本的なデバッガであり、コマンド...]]></description><link>https://zenn.dev/hosimesi/articles/95158c687ec12b</link><guid isPermaLink="true">https://zenn.dev/hosimesi/articles/95158c687ec12b</guid><pubDate>Mon, 25 Nov 2024 23:30:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--XkNDHYd2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:VSCode%2528Cursor%2529%25E3%2581%25A8FastAPI%25E3%2581%25A7%25E3%2583%2587%25E3%2583%2590%25E3%2583%2583%25E3%2582%25AC%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hosimesi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q3MTA3ZjZkMmIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hosimesi</dc:creator></item><item><title><![CDATA[M2チップのMacBook Air上でStable Diffusionを動かしてみる]]></title><description><![CDATA[Web上の画像生成･編集サービスは何かと不便な部分が多いので，ローカルで動作するStable Diffusionの環境を持っておくと便利です
+軽いモデルであればMacBookでも動くので，本記事では動作検証を兼ねて一通り試してみます
+リポジトリ
+https://github.com/tf63/diffusers-apple
+動作環境
+
+MacBook Air M2チップ 16GB
+PyTorch 2.3.0
+
+
+ 所感
+実験したモデルの使用メモリ量と実行速度です．適当な計測なので，あくまで目安です
+
+
+
+モデル
+VRAM
+M2
+NVIDIA RTX A5000
+
+
+
+
+DDPM-cat
+...]]></description><link>https://zenn.dev/tf63/articles/diffusers-apple-tf63-20241126</link><guid isPermaLink="true">https://zenn.dev/tf63/articles/diffusers-apple-tf63-20241126</guid><pubDate>Mon, 25 Nov 2024 22:14:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--khc6FhjG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:M2%25E3%2583%2581%25E3%2583%2583%25E3%2583%2597%25E3%2581%25AEMacBook%2520Air%25E4%25B8%258A%25E3%2581%25A7Stable%2520Diffusion%25E3%2582%2592%25E5%258B%2595%25E3%2581%258B%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tf63%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FmZTY2YTY1ZTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tf63</dc:creator></item><item><title><![CDATA[日本は五季になってしまったのか！？T検定で検証！]]></title><description><![CDATA[
+ はじめに
+「最近の夏はおかしい...暑すぎる...」
+「もはや夏じゃない、別の季節なんじゃ...？」
+こんな声を2024年の夏、耳にする機会が多かったのではないでしょうか（私はそう思いました）。テレビでは連日暑さが伝えられ、「酷暑」という新しい季節ができたなどと騒がれることもありました。そこで、本記事では"夏の中でも特に暑い夏"という「酷暑」が日本の新しい季節として成立するのか、統計的に検証してみたいと思います！
+
+
+ 検証の前に...四季の存在を確認
+大前提として、日本に四季が存在していなければ話が始まりません。そこで別の記事で四季の存在を検証した結果、統計的に四季はしっかり存在し...]]></description><link>https://zenn.dev/yamadamadamada/articles/8a505b79fef3cf</link><guid isPermaLink="true">https://zenn.dev/yamadamadamada/articles/8a505b79fef3cf</guid><pubDate>Mon, 25 Nov 2024 18:47:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Ape1zEsP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%2597%25A5%25E6%259C%25AC%25E3%2581%25AF%25E4%25BA%2594%25E5%25AD%25A3%25E3%2581%25AB%25E3%2581%25AA%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%2597%25E3%2581%25BE%25E3%2581%25A3%25E3%2581%259F%25E3%2581%25AE%25E3%2581%258B%25EF%25BC%2581%25EF%25BC%259FT%25E6%25A4%259C%25E5%25AE%259A%25E3%2581%25A7%25E6%25A4%259C%25E8%25A8%25BC%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258B%25E3%2581%25AE%25E3%2581%258B%25E3%2581%25AE%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NmYmQ1N2QzMGIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>かのかの</dc:creator></item><item><title><![CDATA[日本に四季は存在するのか？気温データで検証してみた！]]></title><description><![CDATA[
+ はじめに
+こちら記事の前章になります。
+https://zenn.dev/yamadamadamada/articles/8a505b79fef3cf
+日本は四季がはっきりしていることが魅力といわれておりますが、最近は温暖化の影響で季節感が薄れている気がしませんか？（体感的には夏と冬めっちゃ長い）
+そこで、本記事では気温データを使って統計的に日本に四季が存在するのか検証していきたいと思います。
+
+ 結論：日本に四季は存在する
+結論から言うと、日本に四季は存在しました。
+
+ 日本に四季は存在したのか？
+では検証していきましょう！
+データは福島県福島市の気温を使用しました。理由は「四季の...]]></description><link>https://zenn.dev/yamadamadamada/articles/35dedbaf985140</link><guid isPermaLink="true">https://zenn.dev/yamadamadamada/articles/35dedbaf985140</guid><pubDate>Mon, 25 Nov 2024 18:36:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--k-MyY8tM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%2597%25A5%25E6%259C%25AC%25E3%2581%25AB%25E5%259B%259B%25E5%25AD%25A3%25E3%2581%25AF%25E5%25AD%2598%25E5%259C%25A8%25E3%2581%2599%25E3%2582%258B%25E3%2581%25AE%25E3%2581%258B%25EF%25BC%259F%25E6%25B0%2597%25E6%25B8%25A9%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2581%25A7%25E6%25A4%259C%25E8%25A8%25BC%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258B%25E3%2581%25AE%25E3%2581%258B%25E3%2581%25AE%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NmYmQ1N2QzMGIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>かのかの</dc:creator></item><item><title><![CDATA[pytestのfixtureとmonkeypatchでモック関数を作成する]]></title><description><![CDATA[
+ はじめに
+本記事ではpytestのfixtureとmonkeypatchを使用し、モックを使った単一の関数のテストを実装していきます。
+
+ 環境構築
+pip install pytest
+https://pypi.org/project/pytest/
+
+ fixture
+fixtureは内部で定義した関数をretrunする事で、モック関数として使用できます。
+@pytest.fixture
+def mock_get_message():
+    def _mock():        # ステップ1: 内部で関数を定義
+        return "モックのメッセージ"
+    ...]]></description><link>https://zenn.dev/enumura/articles/35584b470af3bb</link><guid isPermaLink="true">https://zenn.dev/enumura/articles/35584b470af3bb</guid><pubDate>Mon, 25 Nov 2024 16:52:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jfwSlAwM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:pytest%25E3%2581%25AEfixture%25E3%2581%25A8monkeypatch%25E3%2581%25A7%25E3%2583%25A2%25E3%2583%2583%25E3%2582%25AF%25E9%2596%25A2%25E6%2595%25B0%25E3%2582%2592%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:enumura%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I2Y2NlMmZjN2IuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>enumura</dc:creator></item><item><title><![CDATA[YOLOv5-Nano と labelImg で犬猫検出モデル作ってみた]]></title><description><![CDATA[こんにちは！『麦ちゃーはん』です。
+今回は、軽量で扱いやすい物体検出モデル「YOLOv5-Nano」と、シンプルなアノテーションソフト「labelImg」を使用して、犬と猫を検出できるモデルを作成しました。
+簡易的な物体検出モデルを作成しただけですが、YOLOの学習の流れがつかめる内容になっていると思います。ぜひ最後までご覧ください。
+!
+この記事でわかること
+
+YOLOv5-Nanoの使い方
+データセットのディレクトリ構造
+
+
+
+ labelImgについて
+「labelImg」については、以前の記事で解説していますので、そちらをご覧ください。
+https://zenn.dev/mugi...]]></description><link>https://zenn.dev/mugi_cha/articles/91a2d091fe2c62</link><guid isPermaLink="true">https://zenn.dev/mugi_cha/articles/91a2d091fe2c62</guid><pubDate>Mon, 25 Nov 2024 16:09:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--DWKR7sN7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:YOLOv5-Nano%2520%25E3%2581%25A8%2520labelImg%2520%25E3%2581%25A7%25E7%258A%25AC%25E7%258C%25AB%25E6%25A4%259C%25E5%2587%25BA%25E3%2583%25A2%25E3%2583%2587%25E3%2583%25AB%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Mugicha-han%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNlYzUzNWFjNDMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Mugicha-han</dc:creator></item><item><title><![CDATA[RAG機能付きチャットボットを作ろう-3_chat.completionsでチャット]]></title><description><![CDATA[
+ TL;DR
+本稿ではstreamlitでデータのやりとりを行います。
+
+プロンプト入力欄に入力されたデータを、代入します。
+OpenAIのchat.completionsにデータを渡し、生成文書を取得します。
+
+＊OpenAIのAPIキーは取得済みの想定です。
+
+ 実装イメージ
+
+ chat.completionsでチャット
+
+ 前準備
+main.pyと同じ階層に.envファイルを作成し、以下のようなディレクトリ構造にします。
+windowsでは.envファイルを作成できない場合があるので、適当.txtなどのファイルを作成したあと、名前の変更で.envに変更してください。
+なお、li...]]></description><link>https://zenn.dev/bluetang/articles/chatbot_with_lc_st_chromadb_03</link><guid isPermaLink="true">https://zenn.dev/bluetang/articles/chatbot_with_lc_st_chromadb_03</guid><pubDate>Mon, 25 Nov 2024 15:02:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--QM6Tsmxp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:RAG%25E6%25A9%259F%25E8%2583%25BD%25E4%25BB%2598%25E3%2581%258D%25E3%2583%2581%25E3%2583%25A3%25E3%2583%2583%25E3%2583%2588%25E3%2583%259C%25E3%2583%2583%25E3%2583%2588%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258D%25E3%2581%2586-3_chat.completions%25E3%2581%25A7%25E3%2583%2581%25E3%2583%25A3%25E3%2583%2583%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:bluetang%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM3ZDRkMjc1MzAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>bluetang</dc:creator></item><item><title><![CDATA[元PHPプログラマーがAIについて勉強してAIプロダクト開発ができるようになるか実験してみる[準備編]]]></title><description><![CDATA[
+ 概要
+プログラマー歴1年無職のChoranです。社会の荒波に揉まれ無職となり自分を見つめ直す時間ができたため、AIについて勉強してみようと思います。
+お勉強をするにあたってさまざま調べたところ、国内の人工知能分野で有名な松尾先生の研究室のサイトにAI学習ロードマップがありましたので、こちらに沿って学習を進めていきます。一読した限りでは、目安100~200時間程度で一通りの学習が終えられるイメージを持っています。私個人は２ヶ月くらいを目処にロードマップの内容を消化する予定です。
+** 人工知能を学ぶためのロードマップ **
+https://weblab.t.u-tokyo.ac.jp/...]]></description><link>https://zenn.dev/satonari205/articles/ac547559f9e325</link><guid isPermaLink="true">https://zenn.dev/satonari205/articles/ac547559f9e325</guid><pubDate>Mon, 25 Nov 2024 13:19:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GOgheF3s--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2585%2583PHP%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%259E%25E3%2583%25BC%25E3%2581%258CAI%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E5%258B%2589%25E5%25BC%25B7%25E3%2581%2597%25E3%2581%25A6AI%25E3%2583%2597%25E3%2583%25AD%25E3%2583%2580%25E3%2582%25AF%25E3%2583%2588%25E9%2596%258B%25E7%2599%25BA%25E3%2581%258C%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258B%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E3%2581%25AA%25E3%2582%258B%25E3%2581%258B%25E5%25AE%259F%25E9%25A8%2593%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%255B%25E6%25BA%2596%25E5%2582%2599%25E7%25B7%25A8%255D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A1%25E3%2582%2587%25E3%2582%2589%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJiMjU5NzBhZTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ちょらん</dc:creator></item><item><title><![CDATA[【GitHub】全publicリポジトリを一括でprivateに変更する方法]]></title><description><![CDATA[以前プライベートで使用していたGitHubアカウントを久々に見返したら、過去に練習で作成したpublicリポジトリが何十個もあり、はじめは手動でちまちまprivateに設定したりdeleteしたりしていたのですが、面倒だったので一括でprivateに変更できるスクリプトを作成。
+使えたので記事として残しておこうと思います。
+✅ この記事では、GitHub API を使用して全てのpublicリポジトリを一括でprivateに変更する方法を紹介します。そんなに難しくなく、応用もきくのでよかったら見ていってください。
+
+ 必要な環境
+
+Python
+VSCode（他のエディタでも可）
+Git...]]></description><link>https://zenn.dev/n_haru2/articles/20b1f4f97db939</link><guid isPermaLink="true">https://zenn.dev/n_haru2/articles/20b1f4f97db939</guid><pubDate>Mon, 25 Nov 2024 11:01:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--AAbcnPl1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590GitHub%25E3%2580%2591%25E5%2585%25A8public%25E3%2583%25AA%25E3%2583%259D%25E3%2582%25B8%25E3%2583%2588%25E3%2583%25AA%25E3%2582%2592%25E4%25B8%2580%25E6%258B%25AC%25E3%2581%25A7private%25E3%2581%25AB%25E5%25A4%2589%25E6%259B%25B4%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:pen2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzUzYzA2OTVkMmUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>pen2</dc:creator></item><item><title><![CDATA[Vertex AI Experiments をコードから読み解いてみた]]></title><description><![CDATA[2024 年 11 月 25 日に行われた Jagu'e'r AI/ML 分科会 Meetup#8 に登壇させていただきました。
+現在携わっているプロダクトで MLFlow を利用しているのですが、パフォーマンスが出づらかったりと課題が浮き彫りになったのでリプレイスを検討した話を入りに LT をさせていただきました。
+ここでは、代替プロダクトとして Vertex AI Experiments（以降 VAE と略します、この記事内のみの略称と思ってください）が候補にあがったため調査した結果の一部をまとめていこうと思います。
+
+資料の中で MLFlow と Vertex AI Experim...]]></description><link>https://zenn.dev/t_hayashi/articles/29d2608b79f228</link><guid isPermaLink="true">https://zenn.dev/t_hayashi/articles/29d2608b79f228</guid><pubDate>Mon, 25 Nov 2024 10:30:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--J6Kp0weZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Vertex%2520AI%2520Experiments%2520%25E3%2582%2592%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2581%258B%25E3%2582%2589%25E8%25AA%25AD%25E3%2581%25BF%25E8%25A7%25A3%25E3%2581%2584%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Tomonori%2520Hayashi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4WlphS3JZOGdPbHVBSWpsbU02eUg0VXI4eW5OSnBYSnV0RzBPM255QT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Tomonori Hayashi</dc:creator></item><item><title><![CDATA[［AtCoder］ABC-379｜A - Cyclic]]></title><description><![CDATA[
+ 設問ページ
+
+🔗ABC-379 A - Cyclic
+
+
+
+ 提出結果
+def getInt():
+    return int(input())
+
+
+def shiftL(n):
+    d, m = divmod(n, 100)
+    return m * 10 + d
+
+
+def main():
+    N = getInt()
+
+    a = shiftL(N)
+
+    print(a, shiftL(a))
+
+
+if __name__ == "__main__":
+    main()
+]]></description><link>https://zenn.dev/hyperdb/articles/bc3df81d00e57c</link><guid isPermaLink="true">https://zenn.dev/hyperdb/articles/bc3df81d00e57c</guid><pubDate>Mon, 25 Nov 2024 09:20:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--eWWDqEsL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25EF%25BC%25BBAtCoder%25EF%25BC%25BDABC-379%25EF%25BD%259CA%2520-%2520Cyclic%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AF%25E3%2581%2584%25E3%2581%25B1%25E3%2581%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhODJkODgwMzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>はいぱぁ</dc:creator></item><item><title><![CDATA[［AtCoder］ABC-379｜B - Strawberries]]></title><description><![CDATA[
+ 設問ページ
+
+🔗ABC-379 B - Strawberries
+
+
+
+ 提出結果
+def getIntMap():
+    return map(int, input().split())
+
+
+def getString():
+    return input()
+
+
+def main():
+    N, K = getIntMap()
+    S = getString()
+
+    print(S.count("O" * K))
+
+
+if __name__ == "__main__":
+    main()
+]]></description><link>https://zenn.dev/hyperdb/articles/4e4831c379b9ad</link><guid isPermaLink="true">https://zenn.dev/hyperdb/articles/4e4831c379b9ad</guid><pubDate>Mon, 25 Nov 2024 09:20:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--he3ugY2e--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25EF%25BC%25BBAtCoder%25EF%25BC%25BDABC-379%25EF%25BD%259CB%2520-%2520Strawberries%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AF%25E3%2581%2584%25E3%2581%25B1%25E3%2581%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhODJkODgwMzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>はいぱぁ</dc:creator></item><item><title><![CDATA[遺伝的アルゴリズムの適合度合を見える化する]]></title><description><![CDATA[
+ 遺伝的アルゴリズムの可視化
+以前、pythonで遺伝的アルゴリズムを実装した
+https://zenn.dev/ykmkn/articles/1da3aad454ef87
+今回は、matplotlibで適合度合を可視化してみた
+
+ コード
+コードはこちら
+https://github.com/ykmkn/python/tree/main/ga/matplotlib-visualize
+
+ 結果
+世代を跨ぐにつれて、Fitness Scoreが高くなっていることがわかる
+
+]]></description><link>https://zenn.dev/ykmkn/articles/8532f083b4d4ef</link><guid isPermaLink="true">https://zenn.dev/ykmkn/articles/8532f083b4d4ef</guid><pubDate>Mon, 25 Nov 2024 09:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9eSLLoM5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E9%2581%25BA%25E4%25BC%259D%25E7%259A%2584%25E3%2582%25A2%25E3%2583%25AB%25E3%2582%25B4%25E3%2583%25AA%25E3%2582%25BA%25E3%2583%25A0%25E3%2581%25AE%25E9%2581%25A9%25E5%2590%2588%25E5%25BA%25A6%25E5%2590%2588%25E3%2582%2592%25E8%25A6%258B%25E3%2581%2588%25E3%2582%258B%25E5%258C%2596%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yukimikan%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzliNzExMDJlOTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yukimikan</dc:creator></item><item><title><![CDATA[OTLP-http/python の方法]]></title><description><![CDATA[jaeger で OpenTelemetry Protocol (OTLP) over HTTP (port 4318) なエンドポイントに python instrument されたものを送り込みたいとき。デフォルトでは grpc/https だと思われてしまうので、OTEL_EXPORTER_OTLP_PROTOCOL を指定する（doc）。
+OTEL_EXPORTER_OTLP_ENDPOINT=https://jaeger.endpoint.example.org \
+OTEL_SERVICE_NAME=test \
+OTEL_EXPORTER_OTLP_PROTOCOL=htt...]]></description><link>https://zenn.dev/kwi/articles/d52d3932c49c5f</link><guid isPermaLink="true">https://zenn.dev/kwi/articles/d52d3932c49c5f</guid><pubDate>Mon, 25 Nov 2024 08:17:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--J-1UgW21--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:OTLP-http%252Fpython%2520%25E3%2581%25AE%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kwi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2Rhcmsvay5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kwi</dc:creator></item><item><title><![CDATA[オブジェクト指向プログラミングとクラス]]></title><description><![CDATA[
+ オブジェクト指向プログラミング（OOP）の基本
+オブジェクト指向プログラミング（OOP）は、ソフトウェア開発で広く使われる手法です。ここでは、その基本概念を解説し、具体的な例を紹介します。
+
+ クラスとは？
+クラスはオブジェクトを作成するための「設計図」です。この設計図にはデータ（属性）と、そのデータを扱うための操作（メソッド）が含まれます。
+
+ 属性（プロパティ）
+属性は、オブジェクトが持つ個々のデータや状態を表します。例えば、「車」クラスには「色」や「モデル」といった属性があります。
+
+ メソッド
+メソッドは、オブジェクトが実行できる操作や振る舞いです。車の例でいえば、「走る」や...]]></description><link>https://zenn.dev/channnnsm/articles/82bada1ca72eb3</link><guid isPermaLink="true">https://zenn.dev/channnnsm/articles/82bada1ca72eb3</guid><pubDate>Mon, 25 Nov 2024 04:51:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--OU0QyFRY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25AA%25E3%2583%2596%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E6%258C%2587%25E5%2590%2591%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%259F%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%25A8%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:channnnsm%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJkODNiNmZmODUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>channnnsm</dc:creator></item><item><title><![CDATA[徹底解説：Dify Sandbox]]></title><description><![CDATA[こんにちは。今回はユーザが自由に定義したPythonやNode.jsのコードをセキュアに実行するサンドボックス環境である「Dify Sandbox」を紹介します。
+https://docs.dify.ai/ja-jp/development/backend/sandbox
+Dify Sandboxは名前の通りDify（オープンソースのLLMアプリ開発プラットフォーム）で使用されている実行環境であり、画像のようなユーザが自由に定義したコードをセキュアに実行するものです。
+
+https://docs.dify.ai/ja-jp/guides/workflow/node/code
+
+ はじめに...]]></description><link>https://zenn.dev/aishift/articles/20a1e9a409293b</link><guid isPermaLink="true">https://zenn.dev/aishift/articles/20a1e9a409293b</guid><pubDate>Sun, 24 Nov 2024 23:30:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Vy5aGQsq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%25BE%25B9%25E5%25BA%2595%25E8%25A7%25A3%25E8%25AA%25AC%25EF%25BC%259ADify%2520Sandbox%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:ytaisei%25EF%25BC%2588%25E3%2581%259F%25E3%2581%2584%25E3%2581%259B%25E3%2583%25BC%25EF%25BC%2589%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhhNDQwNmNlMGUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:AI%2520Shift%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZmNTZlNDI3NWQuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ytaisei（たいせー）</dc:creator></item><item><title><![CDATA[AI模擬面接アプリ『Skymock AI』をリリースしました]]></title><description><![CDATA[
+ 1. はじめに
+IT エンジニア向けの模擬面接アプリ「Skymock AI」をリリースしました。
+サインイン不要で、誰でも気軽に利用できます。
+https://skymockai.com/
+Skymock AI は、職種に特化したリアルタイムの模擬面接ができるサービスです。
+本記事では、Skymock AI の機能概要、技術構成について紹介させていただきます。
+
+ 2. 機能概要
+Skymock AI は、現在以下の機能を提供しています。
+
+
+リアルタイム模擬面接: リアルタイムの音声対話を通じて、模擬面接が可能です。現在は以下の職種の面接をサポートしています。
+
+フロントエンドエン...]]></description><link>https://zenn.dev/takiko/articles/6d66671dfa89c5</link><guid isPermaLink="true">https://zenn.dev/takiko/articles/6d66671dfa89c5</guid><pubDate>Sun, 24 Nov 2024 22:00:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Bxri-4On--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AI%25E6%25A8%25A1%25E6%2593%25AC%25E9%259D%25A2%25E6%258E%25A5%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2580%258ESkymock%2520AI%25E3%2580%258F%25E3%2582%2592%25E3%2583%25AA%25E3%2583%25AA%25E3%2583%25BC%25E3%2582%25B9%25E3%2581%2597%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:takigon%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNmZTE0YmI0ZWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takigon</dc:creator></item><item><title><![CDATA[ルールベースで表記揺れを解消するPythonライブラリ「yurenizer」を作成しました]]></title><description><![CDATA[テキストデータを扱う際、同じ意味の言葉でも「パソコン」「パーソナルコンピュータ」「パーソナル・コンピュータ」など、様々な表記が混在することがあります。この表記揺れは、テキスト分析やデータの正規化を難しくする要因の1つです。
+今回、この表記揺れを解消できるPythonライブラリ「yurenizer（ユレナイザー）」を作成しましたので紹介します。
+yurenizerはSudachi同義語辞書を活用し、柔軟な設定で日本語テキストの正規化を実現できます。
+またLLMなどを使うのではなく、完全にルールベースでの実装となっています。
+
+ デモ
+実際の動作を確認したい方は、以下のWebデモをお試しくだ...]]></description><link>https://zenn.dev/sea_turt1e/articles/afbe326366f1e7</link><guid isPermaLink="true">https://zenn.dev/sea_turt1e/articles/afbe326366f1e7</guid><pubDate>Sun, 24 Nov 2024 22:00:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--EaSUJH8w--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%25AB%25E3%2583%25BC%25E3%2583%25AB%25E3%2583%2599%25E3%2583%25BC%25E3%2582%25B9%25E3%2581%25A7%25E8%25A1%25A8%25E8%25A8%2598%25E6%258F%25BA%25E3%2582%258C%25E3%2582%2592%25E8%25A7%25A3%25E6%25B6%2588%25E3%2581%2599%25E3%2582%258BPython%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%25E3%2580%258Cyurenizer%25E3%2580%258D%25E3%2582%2592%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2597%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258B%25E3%2582%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U3NjQzMzU3YTUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>かめ</dc:creator></item></channel></rss>
