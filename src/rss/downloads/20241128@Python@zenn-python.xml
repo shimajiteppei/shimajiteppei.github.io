@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Thu, 28 Nov 2024 04:08:44 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[VS Code+DevContainer+Dockerで最強Python開発環境(Remote編)]]></title><description><![CDATA[!
+本記事は、Aidemy Advent Calendar 2024の投稿です。
+
+
+ 概要
+
+ 本書の内容
+前回の続きで、VS CodeとDockerを利用したPython用開発環境(リモート接続編)の設定/利用方法を説明します。前回の利便性をそのままに、機械学習を目的としたGPUサーバーでの開発等が可能になります。
+本書で実現する開発環境の概略図は以下です。
+
+!
+接続先(RemoteMachine)は、オンプレのGPUサーバー、クラウド上のVM、RaspberryPi などが可能で、多くのケースで利用できます。
+
+
+ 前提
+
+下記のソフトウェアがインストール済みであること
+
+Loc...]]></description><link>https://zenn.dev/aidemy/articles/vscode-env-python-ssh</link><guid isPermaLink="true">https://zenn.dev/aidemy/articles/vscode-env-python-ssh</guid><pubDate>Thu, 28 Nov 2024 03:01:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BwunPFte--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:VS%2520Code%252BDevContainer%252BDocker%25E3%2581%25A7%25E6%259C%2580%25E5%25BC%25B7Python%25E9%2596%258B%25E7%2599%25BA%25E7%2592%25B0%25E5%25A2%2583%2528Remote%25E7%25B7%25A8%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:masa-suke%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNhNmVhZTQ3ZDkuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Aidemy%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhlZWRhMzE2NjYuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>masa-suke</dc:creator></item><item><title><![CDATA[Pythonでflatmapをする]]></title><description><![CDATA[
+ 始めに
+小ネタ。PythonでNestした配列に対して、flatなデータにしたいと思った時の処理を残します。
+
+ 環境
+
+Python 3.13
+
+
+ 実装
+構造が2階層だけならfrom itertools import chainのlist(chain.from_iterable(input_))を使用する。
+from itertools import chain
+
+async def test_01(self):
+    input_ = ["1", ["2", "3"]]
+
+    actual = list(chain.from_iterable(input_))
+
+    ...]]></description><link>https://zenn.dev/kirimaru/articles/5c2b764650aa38</link><guid isPermaLink="true">https://zenn.dev/kirimaru/articles/5c2b764650aa38</guid><pubDate>Thu, 28 Nov 2024 03:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--cl7oROHb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:Python%25E3%2581%25A7flatmap%25E3%2582%2592%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258D%25E3%2582%258A%25E4%25B8%25B8%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM1OTcxNmNjNDMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>きり丸</dc:creator></item><item><title><![CDATA[日本語に特化したOCRとレイアウト解析パッケージ「YomiToku」をM2 Pro Mac miniで動かしてみた]]></title><description><![CDATA[
+ はじめに
+YomiTokuは、日本語に特化したOCR およびレイアウト解析をしてくれるPythonのパッケージです。文書内の文字起こしを行うだけでなく、文書のレイアウト構造や図表の解析機能など、文書画像を解析するため機能があります。パッケージ開発者のKotaro.Kinoshita氏による紹介記事も参照してみてください。
+日本語に特化したOCR、文書画像解析Pythonパッケージ「YomiToku」を公開しました
+この記事では、YomiTokuをM2 ProのMac miniで一通り動かしてみた内容をまとめます。
+
+ パッケージのインストール
+GitHubにあるように、pipでインス...]]></description><link>https://zenn.dev/shakshi3104/articles/207350e1763e27</link><guid isPermaLink="true">https://zenn.dev/shakshi3104/articles/207350e1763e27</guid><pubDate>Thu, 28 Nov 2024 00:13:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--A3iC0SNs--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%2597%25A5%25E6%259C%25AC%25E8%25AA%259E%25E3%2581%25AB%25E7%2589%25B9%25E5%258C%2596%25E3%2581%2597%25E3%2581%259FOCR%25E3%2581%25A8%25E3%2583%25AC%25E3%2582%25A4%25E3%2582%25A2%25E3%2582%25A6%25E3%2583%2588%25E8%25A7%25A3%25E6%259E%2590%25E3%2583%2591%25E3%2583%2583%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B8%25E3%2580%258CYomiToku%25E3%2580%258D%25E3%2582%2592M2%2520Pro%2520Mac%2520mini%25E3%2581%25A7%25E5%258B%2595%25E3%2581%258B%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Shakshi3104%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzExNDMxNTBjODQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Shakshi3104</dc:creator></item><item><title><![CDATA[OpenTelemetry python auto_instrumentation]]></title><description><![CDATA[opentelemetry-instrument コマンドを使って auto-instrumentatin できるけれど、手動計装時に困ったので調べてみた。
+opentelemetry-instrument コマンドは PYTHONPATH に opentelemetry.instrumentation.auto_instrumentation のディレクトリを追加してから引数となるコマンドを起動する。こうするとopentelemetry/instrumentaton/auto_instrumentation/sitecustomize.py が自動的に読み込まれる。これはドキュメントに...]]></description><link>https://zenn.dev/kwi/articles/aeb36419ae328a</link><guid isPermaLink="true">https://zenn.dev/kwi/articles/aeb36419ae328a</guid><pubDate>Wed, 27 Nov 2024 23:44:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--y3uQ6AS4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:OpenTelemetry%2520python%2520auto_instrumentation%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kwi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2Rhcmsvay5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kwi</dc:creator></item><item><title><![CDATA[OpenCVで矢印画像から向いている方角を取得する]]></title><description><![CDATA[
+ はじめに
+OpenCVを使用して、画像内の矢印の向きを取得したので手法をメモ。
+
+ 素材
+前提として事前に2値化(前景:白、背景:黒)が完了していること。
+
+
+ 手順
+
+ 0. インポート
+import cv2
+import numpy as np
+import math
+
+ 1. 画像の読み込み
+# 画像を読み込む（グレースケール）
+image_path = "arrow.png"  # 入力画像のパス
+image = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
+
+ 2. 最大の輪郭を抽出
+# 輪郭を検出
+contours, _ = c...]]></description><link>https://zenn.dev/gigi_aaaaa/articles/bc921b4fa80fa2</link><guid isPermaLink="true">https://zenn.dev/gigi_aaaaa/articles/bc921b4fa80fa2</guid><pubDate>Wed, 27 Nov 2024 23:25:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bcsPtB-K--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:OpenCV%25E3%2581%25A7%25E7%259F%25A2%25E5%258D%25B0%25E7%2594%25BB%25E5%2583%258F%25E3%2581%258B%25E3%2582%2589%25E5%2590%2591%25E3%2581%2584%25E3%2581%25A6%25E3%2581%2584%25E3%2582%258B%25E6%2596%25B9%25E8%25A7%2592%25E3%2582%2592%25E5%258F%2596%25E5%25BE%2597%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:gigi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSTFGNFRDbDNVdEh4Z1pGQXU4Yzc4aEp4TGFkWEhQejJwR0tOM1U4RkJONGtFU1dBPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>gigi</dc:creator></item><item><title><![CDATA[M1/M2対応　Docker+Python開発環境構築手順]]></title><description><![CDATA[
+ あいさつ
+こんにちは。
+最近Python勉強しようかなと密かに企んでるのですが、M1MacBookProでpyenvで開発環境を構築しようとしたけど詰まってできなかったので、もういっそ仮想環境作るかってことで生成AIと話した内容こちらに一応記載しときます。
+正確じゃない内容もあったりすると思うから参考程度に使ってください。
+以下が、M1 MacBookでDockerを使用してPython環境を構築する手順をマークダウン形式で記載した内容です。
+M1 MacでDockerを使ったPython環境構築手順
+
+ 1. Dockerのインストール
+手順
+1.Docker Desktopをダウ...]]></description><link>https://zenn.dev/sanpi34/articles/d7ee30ce659f2c</link><guid isPermaLink="true">https://zenn.dev/sanpi34/articles/d7ee30ce659f2c</guid><pubDate>Wed, 27 Nov 2024 16:30:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--tFnJIVjw--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:M1%252FM2%25E5%25AF%25BE%25E5%25BF%259C%25E3%2580%2580Docker%252BPython%25E9%2596%258B%25E7%2599%25BA%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%25E6%2589%258B%25E9%25A0%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Sanpi34%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJhMTk5ZDkzNTcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Sanpi34</dc:creator></item><item><title><![CDATA[PyAutoGUIでYouTubeのプレイリスト自動再生プログラム作ってみた]]></title><description><![CDATA[
+ TL;DR
+今回は，PyAutoGUI で YouTube のプレイリスト自動再生プログラムを作成する方法を紹介します。
+作成理由としては，勉強する際に自身で Youtube を検索すると，ホーム画面に表示されたおすすめの動画に気を取られてしまい，勉強に集中できないことがあったためです。
+⚠️：動画のサイズ上，圧縮してデモ動画を掲載しているので，動きが遅いですが，実際の動作はもっと速いです。
+
+こちらのリポジトリに，スムーズな動画を掲載しています。
+https://github.com/soso0024/pyautogui-practice
+
+ PyAutoGUI とは
+
+PyAut...]]></description><link>https://zenn.dev/os515/articles/pyautogui-practice-01</link><guid isPermaLink="true">https://zenn.dev/os515/articles/pyautogui-practice-01</guid><pubDate>Wed, 27 Nov 2024 14:11:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--d3T2Esxd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:PyAutoGUI%25E3%2581%25A7YouTube%25E3%2581%25AE%25E3%2583%2597%25E3%2583%25AC%25E3%2582%25A4%25E3%2583%25AA%25E3%2582%25B9%25E3%2583%2588%25E8%2587%25AA%25E5%258B%2595%25E5%2586%258D%25E7%2594%259F%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%25A0%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:soso%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4WXhTVFZ2dEMxc1c4N3NudWhKSVp0YTVMUWpsMUR5VW1YVTl5UFY2Zz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>soso</dc:creator></item><item><title><![CDATA[RAG機能付きチャットボットを作ろう-4_チャット履歴保存]]></title><description><![CDATA[
+ TL;DR
+前回の記事で、OpenAIのクライアントの作成、プロンプトの作成、そして回答の取得までを行いました。本稿では
+
+情報の保存：streamlitのsession_stateを使って、プロンプトや回答を保存します。
+
+
+ 実装イメージ
+
+ streamlitにおける情報の保存
+
+ 情報の保存
+streamlitでプロンプトの入力および回答の出力を行いました。しかしこのままでは、プロンプトを入力しても、回答を出力しても、次のプロンプトを入力すると、前のプロンプトや回答が消えてしまいます。
+そこで、streamlitのsession_stateを使って、プロンプトや回答を保存しま...]]></description><link>https://zenn.dev/bluetang/articles/chatbot_with_lc_st_chromadb_04</link><guid isPermaLink="true">https://zenn.dev/bluetang/articles/chatbot_with_lc_st_chromadb_04</guid><pubDate>Wed, 27 Nov 2024 12:58:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--oGBhAhQn--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:RAG%25E6%25A9%259F%25E8%2583%25BD%25E4%25BB%2598%25E3%2581%258D%25E3%2583%2581%25E3%2583%25A3%25E3%2583%2583%25E3%2583%2588%25E3%2583%259C%25E3%2583%2583%25E3%2583%2588%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258D%25E3%2581%2586-4_%25E3%2583%2581%25E3%2583%25A3%25E3%2583%2583%25E3%2583%2588%25E5%25B1%25A5%25E6%25AD%25B4%25E4%25BF%259D%25E5%25AD%2598%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:bluetang%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM3ZDRkMjc1MzAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>bluetang</dc:creator></item><item><title><![CDATA[PythonとGoogle Chart Toolsで作るシンプルな円グラフアプリ]]></title><description><![CDATA[こんにちは！今回は、PythonとGoogle Chart Toolsを使ってシンプルな円グラフアプリを作成する方法をご紹介します。Flaskを使用してウェブアプリケーションを構築し、Google Chart Toolsでデータを可視化します。
+
+ 目次
+
+Flaskのインストール
+Flaskアプリケーションの作成
+Google Chart Toolsを使った円グラフの表示
+
+HTMLコードの説明
+
+
+アプリケーションの実行
+
+
+ 1. Flaskのインストール
+まず、Flaskをインストールします。ターミナルで以下のコマンドを実行してください。
+pip install Flask
+
+ ...]]></description><link>https://zenn.dev/mstng/articles/eb7767218b51b2</link><guid isPermaLink="true">https://zenn.dev/mstng/articles/eb7767218b51b2</guid><pubDate>Wed, 27 Nov 2024 10:12:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--yBAqS6Ss--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A8Google%2520Chart%2520Tools%25E3%2581%25A7%25E4%25BD%259C%25E3%2582%258B%25E3%2582%25B7%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AB%25E3%2581%25AA%25E5%2586%2586%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%2595%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mstng%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSlVrUWI4S2o0cnl1WHhNZ1FBeXJleTFmOW5JTW1iRmN6UVRzaC1YYk1udWQtNEotYkF2Zz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mstng</dc:creator></item><item><title><![CDATA[Google ColabでLangChainを使ってGitHubリポジトリを学習させる]]></title><description><![CDATA[
+ 🌟 はじめに
+おぐまです。
+Google Colabを使ってLangChainでGitHubリポジトリの内容を学習し、質問に答えられるシステムを作る方法をご紹介します。
+環境構築の心配なく、ブラウザだけで試せるようにしました！😆
+!
+【重要】OpenAI APIの使用には料金が発生します。
+使用前に必ず料金体系を確認し、予期せぬ高額請求を避けるため使用量の上限設定を行ってください。
+本記事の内容を試す際は最小限の使用にとどめることをおすすめします。
+
+
+ 👷‍♂️ Google Colabでの準備
+特にありません！
+以下からLangchain_GithubLoader.ipynbを開...]]></description><link>https://zenn.dev/ap_com/articles/github_repository_langchain_chatgpt</link><guid isPermaLink="true">https://zenn.dev/ap_com/articles/github_repository_langchain_chatgpt</guid><pubDate>Wed, 27 Nov 2024 03:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--q5Tj7uLU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Google%2520Colab%25E3%2581%25A7LangChain%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6GitHub%25E3%2583%25AA%25E3%2583%259D%25E3%2582%25B8%25E3%2583%2588%25E3%2583%25AA%25E3%2582%2592%25E5%25AD%25A6%25E7%25BF%2592%25E3%2581%2595%25E3%2581%259B%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:9mak%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA5N2NlMjBhZWIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2582%25A8%25E3%2583%25BC%25E3%2583%2594%25E3%2583%25BC%25E3%2582%25B3%25E3%2583%259F%25E3%2583%25A5%25E3%2583%258B%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%25BA%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U5YTdiNjViNmIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>9mak</dc:creator></item><item><title><![CDATA[Zenn の新着の記事一覧 RSS が実装されるまでツールを作ってがんばる]]></title><description><![CDATA[RSS を作ってもいいのだが公開するのがめんどくさい
+(github actions でもよかったかも)
+
+ 新着の記事一覧ページのソースを見てみる
+記事の一覧 | Zenn
+なんかいる
+&lt;script id="__NEXT_DATA__" type="application/json" nonce="PJAj/9wGHiv+CsySu3aDR9xyKVqfaOn1gKGAw60xoS8="&gt;{"props":{"pageProps":{"articles":[
+$ curl -s https://zenn.dev/articles | pup '#__NEXT_DATA__...]]></description><link>https://zenn.dev/sharl/articles/8cec33161af804</link><guid isPermaLink="true">https://zenn.dev/sharl/articles/8cec33161af804</guid><pubDate>Tue, 26 Nov 2024 14:35:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--omLSKoR8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Zenn%2520%25E3%2581%25AE%25E6%2596%25B0%25E7%259D%2580%25E3%2581%25AE%25E8%25A8%2598%25E4%25BA%258B%25E4%25B8%2580%25E8%25A6%25A7%2520RSS%2520%25E3%2581%258C%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2595%25E3%2582%258C%25E3%2582%258B%25E3%2581%25BE%25E3%2581%25A7%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%258C%25E3%2582%2593%25E3%2581%25B0%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2597%25E3%2582%2583%25E3%2581%2582%25E3%2582%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0xuZEM2dlZRUHNRVzBHa1dpdS1DY2trTlVETnVhemF1YjlUVVRkQ3B5dHBqbTBLUXA9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>しゃある</dc:creator></item><item><title><![CDATA[SQLAlchemyでデータベース機能を追加する]]></title><description><![CDATA[
+ やること
+FastAPIベースのアプリにデータベース機能を追加する
+
+ 前提
+FastAPIの入門として、データベースを利用したアプリを作成していきます。
+前回の記事はこちら↓
+https://zenn.dev/headwaters/articles/0bab1f241976b3
+
+ SQLAlchemyとは？
+端的に言えば、Pythonでデータベースとやりとりするためのライブラリです。主なメリットは
+・SQL文を書かなくてもPythonのコード内でSQLのクエリを生成できる
+・ORM(Object Relational Mapping)により、DBのテーブルやレコードをオブジェクト...]]></description><link>https://zenn.dev/headwaters/articles/538a1406469e64</link><guid isPermaLink="true">https://zenn.dev/headwaters/articles/538a1406469e64</guid><pubDate>Tue, 26 Nov 2024 13:54:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--PdxGQ_pH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:SQLAlchemy%25E3%2581%25A7%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%2599%25E3%2583%25BC%25E3%2582%25B9%25E6%25A9%259F%25E8%2583%25BD%25E3%2582%2592%25E8%25BF%25BD%25E5%258A%25A0%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:akihiro%2520nakamura%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZjNGExY2UxMDYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2598%25E3%2583%2583%25E3%2583%2589%25E3%2582%25A6%25E3%2582%25A9%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%25BC%25E3%2582%25B9%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA5MjU4ZWEwY2QuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>akihiro nakamura</dc:creator></item><item><title><![CDATA[PythonでFRED、Alpha Vantage、Binanceからデータを取得する方法]]></title><description><![CDATA[この記事では、Pythonを使用してFRED（Federal Reserve Economic Data）、Alpha Vantage、そしてBinanceからデータを取得する方法について解説します。これらのデータソースを活用することで、経済指標や株価、暗号通貨の市場データを効率的に取得・分析することが可能になります。
+
+ 目次
+
+必要なライブラリのインストール
+.envファイルの設定
+FRED APIからのデータ取得
+Alpha Vantage APIからのデータ取得
+ccxtを使用したBinanceからのデータ取得
+実行方法
+まとめ
+
+
+ 必要なライブラリのインストール
+まず、必要な...]]></description><link>https://zenn.dev/relm/articles/e5880db75394ca</link><guid isPermaLink="true">https://zenn.dev/relm/articles/e5880db75394ca</guid><pubDate>Tue, 26 Nov 2024 12:17:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--zLeRIJOZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A7FRED%25E3%2580%2581Alpha%2520Vantage%25E3%2580%2581Binance%25E3%2581%258B%25E3%2582%2589%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%2592%25E5%258F%2596%25E5%25BE%2597%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25AD%25E3%2583%25A3%25E3%2583%2583%25E3%2583%2584%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQzNjU3NjE5OWUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>キャッツ</dc:creator></item><item><title><![CDATA[PythonでAmazon BedrockのAPIを使ってみよう]]></title><description><![CDATA[Amazon Web Services（AWS）が提供する新しい生成AIプラットフォーム、Amazon Bedrockは、機械学習やAIモデルをより簡単に利用できるようにする強力なサービスです。本記事では、Pythonを使ってAmazon BedrockのAPIにアクセスする方法についてご紹介します。特に、開発者やデータサイエンティストが、自身のアプリケーションにAIを組み込む際の最初のステップとして役立つ内容となっています。
+
+ Amazon Bedrockとは？
+Amazon Bedrockは、生成AIモデル（たとえば、テキスト生成や画像生成など）を容易に利用できるようにするAWSの...]]></description><link>https://zenn.dev/udonmaru/articles/7c87ac1a699b23</link><guid isPermaLink="true">https://zenn.dev/udonmaru/articles/7c87ac1a699b23</guid><pubDate>Tue, 26 Nov 2024 12:13:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--EI2CBCE5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A7Amazon%2520Bedrock%25E3%2581%25AEAPI%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%2588%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:udonmaru%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2EwODVjMWI5ODkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>udonmaru</dc:creator></item><item><title><![CDATA[Python Requests: 2025年のJSONデータのPOST送信方法]]></title><description><![CDATA[この包括的なガイドでは、PythonのRequestsライブラリを使用して、JSONデータをPOSTリクエストとして送信する方法を学びます。ステップバイステップの指示と実用的な例を通じて、効率的で効果的なAPI呼び出しを行えるようになります。さあ、Pythonのスキルを向上させましょう！
+
+ Python Requestsの紹介
+Python Requestsは、PythonでHTTPリクエストを送信するための使いやすいライブラリです。GET、POST、PUT、DELETEなど、すべてのHTTPメソッドをサポートしており、Python 3.7以降では、ウェブサービスとのやりとりを簡素化し...]]></description><link>https://zenn.dev/kasuna/articles/8bcd9a3acd68a2</link><guid isPermaLink="true">https://zenn.dev/kasuna/articles/8bcd9a3acd68a2</guid><pubDate>Tue, 26 Nov 2024 11:17:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--LHv3XBjn--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%2520Requests%253A%25202025%25E5%25B9%25B4%25E3%2581%25AEJSON%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2581%25AEPOST%25E9%2580%2581%25E4%25BF%25A1%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kasuna%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2Rhcmsvay5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kasuna</dc:creator></item><item><title><![CDATA[TypeError: can only concatenate str (not "property") to str]]></title><description><![CDATA[TypeError: can only concatenate str (not "property") to str
+または反対だと
+TypeError: unsupported operand type(s) for +: 'property' and 'str'
+コードはこちらです。
+```python
+class Test:
+    @property
+    def test1():
+        return "world"
+    test2 = "hello " + test1
+
+print(Test().test2) # hello world
+ちなみに、これはうまく...]]></description><link>https://zenn.dev/tocot/articles/88b31b35d70b41</link><guid isPermaLink="true">https://zenn.dev/tocot/articles/88b31b35d70b41</guid><pubDate>Tue, 26 Nov 2024 08:47:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8ycmeESH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeError%253A%2520can%2520only%2520concatenate%2520str%2520%2528not%2520%2522property%2522%2529%2520to%2520str%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tOcOt%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg2MTIwNmIzNDUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tOcOt</dc:creator></item><item><title><![CDATA[Pythonのpipを全再インストール(Bash/Zsh/Cmd/Powershell)]]></title><description><![CDATA[site-packages内をいじってしまった時（本当はいじってはいけないけど）などちょっとパッケージ内で不具合が起きた時にすると直ることが多い。
+
+ これでもできる
+venv使ってる人は
+python -m venv env --clear
+
+ ない場合：requirements.txt作成
+pip freeze &gt; requirements.txt
+
+ 全アンインストール
+pip uninstall -y -r &lt;( pip freeze )
+!
+WinのCmd/Powershellなら：
+pip freeze &gt; temp_freeze.txt
+pip unins...]]></description><link>https://zenn.dev/tocot/articles/024592a68a3b50</link><guid isPermaLink="true">https://zenn.dev/tocot/articles/024592a68a3b50</guid><pubDate>Tue, 26 Nov 2024 08:03:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--F2xIVOlt--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25AEpip%25E3%2582%2592%25E5%2585%25A8%25E5%2586%258D%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%2528Bash%252FZsh%252FCmd%252FPowershell%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tOcOt%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg2MTIwNmIzNDUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tOcOt</dc:creator></item><item><title><![CDATA[Blackとflakeのmax-line-lengthのGap問題の修正方法が古い！]]></title><description><![CDATA[Black formatterとflake linterのmax-line-lengthのGap問題の修正方法が古い！
+よくこんな感じで出てきますが
+
+settings.json
+{
+...
+    "python.formatting.blackArgs": [
+        "--line-length=79"
+    ],
+}
+
+これでは、こう出て修正されません。
+Unknown Configuration Setting
+こうするとうまくいきました
+
+settings.json
+ {
+ ...
++    "black-formatter.args": [
++        "-...]]></description><link>https://zenn.dev/tocot/articles/347aa761257971</link><guid isPermaLink="true">https://zenn.dev/tocot/articles/347aa761257971</guid><pubDate>Tue, 26 Nov 2024 07:46:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hGzIu6LP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Black%25E3%2581%25A8flake%25E3%2581%25AEmax-line-length%25E3%2581%25AEGap%25E5%2595%258F%25E9%25A1%258C%25E3%2581%25AE%25E4%25BF%25AE%25E6%25AD%25A3%25E6%2596%25B9%25E6%25B3%2595%25E3%2581%258C%25E5%258F%25A4%25E3%2581%2584%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tOcOt%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg2MTIwNmIzNDUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tOcOt</dc:creator></item><item><title><![CDATA[［AtCoder］ABC-380｜B - Hurdle Parsing]]></title><description><![CDATA[
+ 設問ページ
+
+🔗ABC-380 B - Hurdle Parsing
+
+
+
+ 提出結果
+def getString():
+    return input()
+
+
+def main():
+    S = getString()
+
+    sa = S.split("|")
+
+    a = [len(s) for s in sa if s != ""]
+
+    print(" ".join(map(str, a)))
+
+
+if __name__ == "__main__":
+    main()
+]]></description><link>https://zenn.dev/hyperdb/articles/fdd45843ec3b7e</link><guid isPermaLink="true">https://zenn.dev/hyperdb/articles/fdd45843ec3b7e</guid><pubDate>Tue, 26 Nov 2024 05:34:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dC1iNLm2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25EF%25BC%25BBAtCoder%25EF%25BC%25BDABC-380%25EF%25BD%259CB%2520-%2520Hurdle%2520Parsing%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AF%25E3%2581%2584%25E3%2581%25B1%25E3%2581%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhODJkODgwMzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>はいぱぁ</dc:creator></item><item><title><![CDATA[［AtCoder］ABC-380｜C - Move Segment]]></title><description><![CDATA[
+ 設問ページ
+
+🔗ABC-380 C - Move Segment
+
+
+
+ 提出結果
+def getIntMap():
+    return map(int, input().split())
+
+
+def getString():
+    return input()
+
+
+def swap(a, b):
+    return b, a
+
+
+def main():
+    N, K = getIntMap()
+    S = getString()
+
+    c = 0
+    buf = S[0]
+    sa = []
+    for i in range(N):
+        i...]]></description><link>https://zenn.dev/hyperdb/articles/c83e8cb789bfba</link><guid isPermaLink="true">https://zenn.dev/hyperdb/articles/c83e8cb789bfba</guid><pubDate>Tue, 26 Nov 2024 05:34:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Stj8UNqU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25EF%25BC%25BBAtCoder%25EF%25BC%25BDABC-380%25EF%25BD%259CC%2520-%2520Move%2520Segment%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AF%25E3%2581%2584%25E3%2581%25B1%25E3%2581%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhODJkODgwMzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>はいぱぁ</dc:creator></item></channel></rss>
