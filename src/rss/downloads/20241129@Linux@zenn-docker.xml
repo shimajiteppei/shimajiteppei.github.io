@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Docker」のフィード]]></title><description><![CDATA[Zennのトピック「Docker」のRSSフィードです]]></description><link>https://zenn.dev/topics/docker</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/01c7f20365.png</url><title>Zennの「Docker」のフィード</title><link>https://zenn.dev/topics/docker</link></image><generator>zenn.dev</generator><lastBuildDate>Fri, 29 Nov 2024 10:55:09 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/docker/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[docker環境でLaravel開発環境構築]]></title><description><![CDATA[
+ laravelアプリケーション作成手順
+
+ はじめに
+dockerのインストールは完了している前提で記述
+新たにプロジェクトを作成する
+今回はUbuntuを使用
+
+ アプリケーションの作成
+アプリケーションを作成したいディレクトリで以下のコマンドを実行
+curl -s https://laravel.build/practice | bash
+practiceの部分は好きな名前にしてOK
+
+ Laravel Sailの起動
+アプリケーションが作成されたらアプリケーションディレクトリに移動する
+cd ./practice
+以下のコマンドでsailを起動する
+./vendor/bin/s...]]></description><link>https://zenn.dev/nosho/articles/afaf4ea302a065</link><guid isPermaLink="true">https://zenn.dev/nosho/articles/afaf4ea302a065</guid><pubDate>Thu, 28 Nov 2024 15:16:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jQf3-J2O--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:docker%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25A7Laravel%25E9%2596%258B%25E7%2599%25BA%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:meltulto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzkxZWY2ZTNkNmMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>meltulto</dc:creator></item><item><title><![CDATA[error getting credentials - err: exit status 127, out:の対応]]></title><description><![CDATA[docker build したら死んだ。
+docker build -t cloudbuild-cicd-sample .
+...省略
+--------------------
+   1 |     # ビルドステージ
+   2 | &gt;&gt;&gt; FROM node:18-alpine AS builder
+   3 |     WORKDIR /app
+   4 |     
+--------------------
+ERROR: failed to solve: node:18-alpine: error getting credentials - err: exit s...]]></description><link>https://zenn.dev/okarin_9029/articles/28ad9f5be08309</link><guid isPermaLink="true">https://zenn.dev/okarin_9029/articles/28ad9f5be08309</guid><pubDate>Thu, 28 Nov 2024 14:45:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--pSZAvFtE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:error%2520getting%2520credentials%2520-%2520err%253A%2520exit%2520status%2520127%252C%2520out%253A%25E3%2581%25AE%25E5%25AF%25BE%25E5%25BF%259C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258A%25E3%2581%258B%25E3%2582%258A%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0ZmJ3LTdOdFB0TEJkSTZIa3cyU3BuSlRVNlFINXF2TkxYNUxDMXNnZWlGU0E9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>おかりん</dc:creator></item><item><title><![CDATA[docker コンテナを他の PC にコピーする]]></title><description><![CDATA[!
+docker ぜんぜん詳しくないので、間違ったことしていたら教えてください。
+
+先日、とある開発 PC で稼働中の docker コンテナを、別の開発 PC に移転 (コピー) したい需要が発生しました。プラットフォームは Windows で Docker for Desktop を使っています。docker 詳しくないので Bing Chat に聞いてみながらやってみた結果を、自分の備忘録的に、以下にメモします。
+
+ コピー元 PC での作業
+
+ コンテナをイメージにコミット
+まずは、docker commit コマンドを使用して、移転したいコピー元の docker コンテナのスト...]]></description><link>https://zenn.dev/j_sakamoto/articles/85fbeb26406c8c</link><guid isPermaLink="true">https://zenn.dev/j_sakamoto/articles/85fbeb26406c8c</guid><pubDate>Thu, 28 Nov 2024 14:13:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--NFsyb0rK--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:docker%2520%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2586%25E3%2583%258A%25E3%2582%2592%25E4%25BB%2596%25E3%2581%25AE%2520PC%2520%25E3%2581%25AB%25E3%2582%25B3%25E3%2583%2594%25E3%2583%25BC%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%2540jsakamoto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dVX243dnJ5ZFlLb2NxdUhSUkIxSGZ4NGpVekNsdGNmZ290R2hfNWc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>@jsakamoto</dc:creator></item><item><title><![CDATA[Terraformを使ってGoogleCloud上にKaggle環境をささっと構築する]]></title><description><![CDATA[
+ はじめに
+サクッと Kaggle 環境を構築したいときってありますよね。今回は Terraform を使って Google Cloud Platform 上に Kaggle 環境を構築する方法を紹介します。この記事を読むことで、以下のような複数のインスタンスを立ち上げることができるようになります。
+
+初めから Kaggle API が使える状態
+初めから Docker が使える状態
+初めから GitHub が使える状態
+自身が指定した ssh public key が登録された状態
+GCS へのアクセス権限がある状態
+静的 IP アドレスが割り当てられている状態
+
+以下、リポジトリに...]]></description><link>https://zenn.dev/takayoshi/articles/002-kaggle-iac</link><guid isPermaLink="true">https://zenn.dev/takayoshi/articles/002-kaggle-iac</guid><pubDate>Thu, 28 Nov 2024 13:26:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1iXs0-lY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Terraform%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6GoogleCloud%25E4%25B8%258A%25E3%2581%25ABKaggle%25E7%2592%25B0%25E5%25A2%2583%25E3%2582%2592%25E3%2581%2595%25E3%2581%2595%25E3%2581%25A3%25E3%2581%25A8%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Takayoshi%2520Makabe%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2h6YnFRZlFKcm94eEJGRFN2X191VUhaTi1PYm5SRWJfUEVCVktfPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Takayoshi Makabe</dc:creator></item><item><title><![CDATA[「Dockerってつまり何なの！？」「VirtualBoxとの違いは？」Dockerはパソコンのアパートだ！]]></title><description><![CDATA[
+ 記事を書いた人
+はじめまして🤗
+事務職から未経験でエンジニアに転職した、のえぞうと申します。
+北海道で育ち、現在も北海道に住んでいます。
+未経験で辛かったこと、理解するのが難しかったこと、たくさんありました。
+この記事を読んでくださる皆様のお幸せとご活躍を願い、ほんの少しでもお役に立てれば、
+なまら（北海道弁で「とても」の意）嬉しいです。
+
+ まえがき
+こちらは 🔰初学者向けの易しい記事🔰です
+この記事にたどり着いた方々、
+少なからずDockerについてのモヤモヤ💭を抱えているのではないでしょか？🤨
+また初学者に説明するためのヒントをお探しの方もいるかも知れませんね。
+この記事では
+...]]></description><link>https://zenn.dev/b_tm/articles/978c04a8a8d57e</link><guid isPermaLink="true">https://zenn.dev/b_tm/articles/978c04a8a8d57e</guid><pubDate>Thu, 28 Nov 2024 10:05:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1Oj5gFMp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%258CDocker%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25A4%25E3%2581%25BE%25E3%2582%258A%25E4%25BD%2595%25E3%2581%25AA%25E3%2581%25AE%25EF%25BC%2581%25EF%25BC%259F%25E3%2580%258D%25E3%2580%258CVirtualBox%25E3%2581%25A8%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%25E3%2581%25AF%25EF%25BC%259F%25E3%2580%258DDocker%25E3%2581%25AF%25E3%2583%2591%25E3%2582%25BD%25E3%2582%25B3%25E3%2583%25B3%25E3%2581%25AE%25E3%2582%25A2%25E3%2583%2591%25E3%2583%25BC%25E3%2583%2588%25E3%2581%25A0%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%25AE%25E3%2581%2588%25E3%2581%259E%25E3%2581%2586%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLmRldi9pbWFnZXMvZGVmYXVsdC1wdWJsaWNhdGlvbi1hdmF0YXIucG5n%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BEBTM%2520%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSUhtc1Z1eV9BeU1GMzBGTHpxTmd2dk1mdzBKdDhnRnVJOW54MjBsSmZzYzB2TmNNVT1zOTYtYw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>のえぞう</dc:creator></item><item><title><![CDATA[AIで爆美女を描く方法😍]]></title><description><![CDATA[
+ 生成例
+
+
+
+
+ 必要なもの
+https://github.com/comfyanonymous/ComfyUI
+https://github.com/ltdrdata/ComfyUI-Manager
+https://civitai.com/models/717933/aki-anime
+https://civitai.com/models/684646/lyhanimeflux
+
+VRAMが多いGPU(足りない場合はVRAM使用量を下げる方法調べてみてください)
+
+
+ 画像生成の方法
+以下のworkflowをダウンロードして、ComfyUIで読み込んでください。足りないCustom...]]></description><link>https://zenn.dev/z4q/articles/516bfb43eefa70</link><guid isPermaLink="true">https://zenn.dev/z4q/articles/516bfb43eefa70</guid><pubDate>Thu, 28 Nov 2024 06:29:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--HgK6f59N--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AI%25E3%2581%25A7%25E7%2588%2586%25E7%25BE%258E%25E5%25A5%25B3%25E3%2582%2592%25E6%258F%258F%25E3%2581%258F%25E6%2596%25B9%25E6%25B3%2595%2520%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:z4q%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSkh5WXpJQXQ1WkdDMzloelpvZ01XMXlRekwwOHZUbVd0bVZFck90U2s5NkxhcUt3Zkw9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>z4q</dc:creator></item><item><title><![CDATA[VS Code+DevContainer+Dockerで最強Python開発環境(Remote編)]]></title><description><![CDATA[!
+本記事は、Aidemy Advent Calendar 2024の投稿です。
+
+
+ 概要
+
+ 本書の内容
+前回の続きで、VS CodeとDockerを利用したPython用開発環境(リモート接続編)の設定/利用方法を説明します。前回の利便性をそのままに、機械学習を目的としたGPUサーバーでの開発等が可能になります。
+本書で実現する開発環境の概略図は以下です。
+
+!
+接続先(RemoteMachine)は、オンプレのGPUサーバー、クラウド上のVM、RaspberryPi などが可能で、多くのケースで利用できます。
+
+
+ 前提
+
+下記のソフトウェアがインストール済みであること
+
+Loc...]]></description><link>https://zenn.dev/aidemy/articles/vscode-env-python-ssh</link><guid isPermaLink="true">https://zenn.dev/aidemy/articles/vscode-env-python-ssh</guid><pubDate>Thu, 28 Nov 2024 03:01:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BwunPFte--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:VS%2520Code%252BDevContainer%252BDocker%25E3%2581%25A7%25E6%259C%2580%25E5%25BC%25B7Python%25E9%2596%258B%25E7%2599%25BA%25E7%2592%25B0%25E5%25A2%2583%2528Remote%25E7%25B7%25A8%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:masa-suke%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNhNmVhZTQ3ZDkuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Aidemy%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhlZWRhMzE2NjYuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>masa-suke</dc:creator></item><item><title><![CDATA[M1/M2対応　Docker+Python開発環境構築手順]]></title><description><![CDATA[
+ あいさつ
+こんにちは。
+最近Python勉強しようかなと密かに企んでるのですが、M1MacBookProでpyenvで開発環境を構築しようとしたけど詰まってできなかったので、もういっそ仮想環境作るかってことでそのやり方をまとめました。
+正確じゃない内容もあったりすると思うから参考程度に使ってください。
+
+ M1/M2 MacBookでDockerを使ったPython環境構築手順
+
+ 1. Dockerのインストール
+手順
+1.Docker Desktopをダウンロード
+•公式サイトからDocker Desktopをダウンロードしインストール。
+　•M1/M2 Mac対応版を選択してく...]]></description><link>https://zenn.dev/sanpi34/articles/d7ee30ce659f2c</link><guid isPermaLink="true">https://zenn.dev/sanpi34/articles/d7ee30ce659f2c</guid><pubDate>Wed, 27 Nov 2024 16:30:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--IT3IlYBY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:M1%252FM2%25E5%25AF%25BE%25E5%25BF%259C%25E3%2580%2580Docker%252BPython%25E9%2596%258B%25E7%2599%25BA%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%25E6%2589%258B%25E9%25A0%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Sanpi34%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FiZTM1NzYwZTQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Sanpi34</dc:creator></item><item><title><![CDATA[PostgreSQLをDockerで環境構築しよう！]]></title><description><![CDATA[
+ 概要
+本記事はDockerを使ってPostgreSQLの環境構築の手順を載せてます。
+パソコンにPostgreSQLをインストールしなくてもPostgreSQLを実行できます。
+Web系のエンジニアで知らない人は、ほぼいないくらい大事な技術です🥺
+
+ 対象読者
+
+PostgreSQLの環境構築にかなり苦戦している人
+Dockerを知らない人
+自分の環境を汚したくない人
+
+
+ Dockerとは
+
+資料通りに進めているのに、上手くインストールできない。
+他の人と実行結果が異なってしまう。
+
+こんな問題よくありますよね。
+その原因の一つに互いに実行している環境が違う(環境差異) があります...]]></description><link>https://zenn.dev/urassh/articles/0ccdb9a18924f1</link><guid isPermaLink="true">https://zenn.dev/urassh/articles/0ccdb9a18924f1</guid><pubDate>Wed, 27 Nov 2024 07:55:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--nCu1Rx3F--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:PostgreSQL%25E3%2582%2592Docker%25E3%2581%25A7%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2597%25E3%2582%2588%25E3%2581%2586%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2586%25E3%2582%2589%25E3%2581%25A3%25E3%2581%2597%25E3%2582%2585%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2g1R2ZnUWI2M0JNaXE5UzhJYnZJVV9VakxVaFZEZlhFUS1sLTdzPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>うらっしゅ</dc:creator></item><item><title><![CDATA[Dockerfileのリファクタリング]]></title><description><![CDATA[
+ はじめに
+拙作のFACE01は日本人専用顔学習モデルを備えたオープンソースの顔認証フレームワークです。
+https://github.com/yKesamaru/FACE01_DEV
+
+動画元：アベプラ
+環境構築をしないでも使えるようにDockerイメージをDockerHubに用意しています。
+さてバージョンが上がるたびにDockerイメージを作り直すのですが、自動化しているスクリプトやDockerfileの運用実績はあるものの非効率なコードなため、タイミング的にちょうどよいと思いリファクタリングすることになりました。
+自動化スクリプト: FACE01_DEV/make_Docker...]]></description><link>https://zenn.dev/ykesamaru/articles/85f17a632fd22a</link><guid isPermaLink="true">https://zenn.dev/ykesamaru/articles/85f17a632fd22a</guid><pubDate>Wed, 27 Nov 2024 07:39:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--cxobJwLO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Dockerfile%25E3%2581%25AE%25E3%2583%25AA%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25AF%25E3%2582%25BF%25E3%2583%25AA%25E3%2583%25B3%25E3%2582%25B0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yKesamaru%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY4MmM3NDMxNjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yKesamaru</dc:creator></item><item><title><![CDATA[Dockerにec2-userを作る]]></title><description><![CDATA[dockerでホストと共有したボリュームに対してdocker内からファイルを作成する等のケースにおいて、ホスト側から見た作成したファイルの権限がrootになってしまうなど使い勝手が悪いことがあります。
+dockerとはいえAWSで使っている以上、何かとec2-userを使いたい事って案外あるのではないでしょうか。
+dockerにec2-userを作成して透過的に同じ権限で扱わせる方法です。
+
+ Dockerfile
+ec2-userをDockerに作成します
+FROM debian 
+
+ENV UNAME=ec2-user
+ENV GID=1000
+ENV UID=1000
+
+RUN g...]]></description><link>https://zenn.dev/toytools/articles/449ce89671654d</link><guid isPermaLink="true">https://zenn.dev/toytools/articles/449ce89671654d</guid><pubDate>Wed, 27 Nov 2024 03:05:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dc7GtdFP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:Docker%25E3%2581%25ABec2-user%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:toytools%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTGE5QnJqREgtVHllYlRHbEo4VUFiTVJqQ284anVJbDk1bHgxS0E4dHhyVEtYSG9INlk9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>toytools</dc:creator></item><item><title><![CDATA[GPUを使った機械学習の環境を作るためにすること/しないこと（Ubuntu 22.04/24.04編）]]></title><description><![CDATA[
+ はじめに
+私は2016年から機械学習に関する仕事をしています。
+8年の時を経た現在（2024年11月）でも、NVIDIA製のGPUとPythonを使って機械学習を行うという大きなトレンドは変わっていないと思いますが、その環境の構築方法は少なからず変わっています。
+当時は正しかった情報でも、現在では正しくなかったり、あるいは不要だったりする作業も多く、特にGPU周りは環境が整備されたおかげでかなり楽になっています。
+「環境構築のためにすること」を記した記事は多くありますが「しないこと」を記した記事はあまり見当たりませんでしたので、ここに筆を執ることにしました。
+
+ 対象読者
+本記事は、...]]></description><link>https://zenn.dev/yuyakato/articles/6915e735bc6aa5</link><guid isPermaLink="true">https://zenn.dev/yuyakato/articles/6915e735bc6aa5</guid><pubDate>Wed, 27 Nov 2024 02:48:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--F2umnn31--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:GPU%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%259F%25E6%25A9%259F%25E6%25A2%25B0%25E5%25AD%25A6%25E7%25BF%2592%25E3%2581%25AE%25E7%2592%25B0%25E5%25A2%2583%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%25E3%2581%2593%25E3%2581%25A8%252F%25E3%2581%2597%25E3%2581%25AA%25E3%2581%2584%25E3%2581%2593%25E3%2581%25A8%25EF%25BC%2588Ubuntu%252022.04%252F24.04%25E7%25B7%25A8%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yuya%2520Kato%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dUSUhmX2JGaE1tcVp0aDNYQUI2NFY0aGRnNlJWbE5CbjVhZmQzdXc9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yuya Kato</dc:creator></item><item><title><![CDATA[Ubuntuを使用したWebサーバ構築手順書]]></title><description><![CDATA[
+ はじめに
+この手順書は、Linuxの経験がない初心者を対象に、Ubuntuオペレーティングシステムを使用してWebサーバを構築する方法を詳細に説明します。本ガイドでは、OSのインストールから始まり、Apacheウェブサーバのセットアップ、SSHによるリモートアクセスの設定、さらにDockerを使用した環境の構築まで、段階的に解説します。
+各ステップには、実行するコマンドとその説明、さらに関連する技術的な知識も含まれています。この手順書を順番に従うことで、自分専用のWebサーバを構築し、運用する基礎的なスキルを身につけることができます。
+
+ 生成AIの活用について
+本手順書の作成にあた...]]></description><link>https://zenn.dev/manmaru_ai/articles/79f0d63e079393</link><guid isPermaLink="true">https://zenn.dev/manmaru_ai/articles/79f0d63e079393</guid><pubDate>Mon, 25 Nov 2024 15:12:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--zTUjJsTF--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ubuntu%25E3%2582%2592%25E4%25BD%25BF%25E7%2594%25A8%25E3%2581%2597%25E3%2581%259FWeb%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E6%25A7%258B%25E7%25AF%2589%25E6%2589%258B%25E9%25A0%2586%25E6%259B%25B8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:manmaru%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q4YzkwMDBjOTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>manmaru</dc:creator></item><item><title><![CDATA[dockerを輪講用に勉強し直した話]]></title><description><![CDATA[今回は研究室内で「dockerを輪講しよう」ということで集まった先輩同期含め7名に向けて、dockerってまずなんなの？ みたいなところを自分なりの言葉で説明できるようにしたので、そのことについて記事を書きたいと思います。
+
+ dockerとはどのようなサービスなのか
+まず持っていて欲しい意識としては、チーム開発を行う際にソースコードをGitで共有するように、プロダクトの開発環境を共有するためのツールのように認識しておいて欲しいです。
+Gitを使ってソースコードを共有していた時に
+A「あれこのコード動かないけど...」
+B「え！？自分のPCでは正常に動いたのに...」
+ということが結構起...]]></description><link>https://zenn.dev/riku_takata/articles/9fe72441e67193</link><guid isPermaLink="true">https://zenn.dev/riku_takata/articles/9fe72441e67193</guid><pubDate>Mon, 25 Nov 2024 05:42:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lqhdz5yv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:docker%25E3%2582%2592%25E8%25BC%25AA%25E8%25AC%259B%25E7%2594%25A8%25E3%2581%25AB%25E5%258B%2589%25E5%25BC%25B7%25E3%2581%2597%25E7%259B%25B4%25E3%2581%2597%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:RIKU%2520TAKATA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS3pwR01ZNHB2T1JGNlhIcnlDOVJsUno5NkFrTkZaaHlPdHFPdnd1U29Wa3V3azBmbz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>RIKU TAKATA</dc:creator></item><item><title><![CDATA[Envoy入門（その４）Lua]]></title><description><![CDATA[
+ はじめに
+マイクロサービスやWeb API界隈では、サービス間のネットワークの制御をライブラリではなく、プロキシのコンテナをサイドカーとして使うのだとか。そのデファクトスタンダード的な立ち位置なのが Envoy さん。
+（その３）では、Envoy さんの Sandbox ではなく、Auth0 を使用した JWT 認証にチャレンジしましたが、今回は、（その１）や（その２）と同様、Envoy さんの Sandbox へ戻ります。
+
+ やってみた
+
+ Lua って
+Lua さんです。
+https://www.lua.org/
+聞いたことはありましたが、使ったことはありません。Wikiped...]]></description><link>https://zenn.dev/robon/articles/cc2fece83ba928</link><guid isPermaLink="true">https://zenn.dev/robon/articles/cc2fece83ba928</guid><pubDate>Mon, 25 Nov 2024 04:50:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--CY_V1M5E--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Envoy%25E5%2585%25A5%25E9%2596%2580%25EF%25BC%2588%25E3%2581%259D%25E3%2581%25AE%25EF%25BC%2594%25EF%25BC%2589Lua%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E8%258D%2592%25E6%259C%25A8%2520%25E5%25B2%25B3%25E5%25A4%25AB%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q3NDIzMjE0NTUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BEROBON%25E3%2581%25AE%25E6%258A%2580%25E8%25A1%2593%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YUpBSVQ1V0NaaVBRUmF6TkswS1dFVkEybkRJMGdaN1lvMjdJdDIyQT1zOTYtYw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>荒木 岳夫</dc:creator></item><item><title><![CDATA[VSCode+Dev Containerの開発体験をNeovimで再現する]]></title><description><![CDATA[
+ VSCodeでのDev Container開発体験について
+みなさんはDev Containerというものをご存知でしょうか？
+Dev Containerは、仕様に基づいたdevcontainer.jsonというJSONファイルを用意しておけば、記載された内容に従ったDockerコンテナを立ち上げてくれるツールやその関連仕様群です。docker-compose/docker-compose.ymlと似ていますが、こちらはより開発環境のセットアップに特化したものです。
+これにより開発環境のセットアップ作業が省略でき、環境の再現性も向上するため、複数人での開発で有用です。またOSSプロジ...]]></description><link>https://zenn.dev/momonga/articles/6b95f279b75534</link><guid isPermaLink="true">https://zenn.dev/momonga/articles/6b95f279b75534</guid><pubDate>Mon, 25 Nov 2024 01:31:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--c7mfmqKc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:VSCode%252BDev%2520Container%25E3%2581%25AE%25E9%2596%258B%25E7%2599%25BA%25E4%25BD%2593%25E9%25A8%2593%25E3%2582%2592Neovim%25E3%2581%25A7%25E5%2586%258D%25E7%258F%25BE%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E9%25AD%259A%25EF%25BD%259E%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y3ZGZmZjNiMTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>魚～</dc:creator></item><item><title><![CDATA[VSCode DevContainerでNext.js + TypeScript + Tailwind CSS開発環を作る🐳]]></title><description><![CDATA[
+ DevContainerでNext.js開発環境を作る
+
+ はじめに
+開発環境の構築は、チーム開発において重要かつ面倒な課題です。「自分の環境では動くのに...」という状況を避けるため、DevContainerを使用して統一された開発環境を構築する方法を紹介します。
+ソースコードはgithubに載せてます
+
+
+ DevContainerとは？
+DevContainerは、VSCodeの機能で、Dockerコンテナ内に完全な開発環境を構築できます。これにより：
+
+チーム全員が同じ環境で開発可能
+新メンバーの環境構築が容易
+ホストマシンを汚さない
+プロジェクトごとに独立した環境を維持
+
+...]]></description><link>https://zenn.dev/chantakan/articles/e1a97ba2a58bdd</link><guid isPermaLink="true">https://zenn.dev/chantakan/articles/e1a97ba2a58bdd</guid><pubDate>Sun, 24 Nov 2024 16:32:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hf4U1x37--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:VSCode%2520DevContainer%25E3%2581%25A7Next.js%2520%252B%2520TypeScript%2520%252B%2520Tailwind%2520CSS%25E9%2596%258B%25E7%2599%25BA...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Tom%2520Python%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk3NDlhYTY2ZWQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Tom Python</dc:creator></item><item><title><![CDATA[Keyball のファームウェアを Docker でローカルで簡単にビルドする]]></title><description><![CDATA[QMK の機能のひとつである、コンボキーを Keyball に設定しようとすると、Keyball のファームウェアを自前でビルドしなければいけませんが、本家リポジトリでは GitHub Actions でビルドするようになっており、
+コードの変更 → push → Actions の実行を待つ → 生成物のダウンロード
+と結構手順が煩雑です。一方でローカルでビルドしようとすると、Windows の場合は QMK MSYS をインストールしろ、と公式ドキュメントに書かれていたりします。QMK のためにそんなのインストールしたくないなと思っていたところ、普通に Docker でビルドすること...]]></description><link>https://zenn.dev/tomori_k/articles/735de6e8a7b084</link><guid isPermaLink="true">https://zenn.dev/tomori_k/articles/735de6e8a7b084</guid><pubDate>Sun, 24 Nov 2024 14:23:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--TZzKxB_A--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Keyball%2520%25E3%2581%25AE%25E3%2583%2595%25E3%2582%25A1%25E3%2583%25BC%25E3%2583%25A0%25E3%2582%25A6%25E3%2582%25A7%25E3%2582%25A2%25E3%2582%2592%2520Docker%2520%25E3%2581%25A7%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25AB%25E3%2583%25AB%25E3%2581%25A7%25E7%25B0%25A1%25E5%258D%2598%25E3%2581%25AB%25E3%2583%2593%25E3%2583%25AB%25E3%2583%2589%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tomori-k%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MyYTBlNGI2NjMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tomori-k</dc:creator></item><item><title><![CDATA[rails-new と Dev Container で環境に依存しないプロジェクトを実現]]></title><description><![CDATA[
+ はじめに
+今回は devcontainer と rails-new を使って rails プロジェクトを作成します。
+rails-new は、rails のインストールやプロジェクトの作成をコンテナ内で行うことができるツールです。
+devcontainer は、コンテナ内で開発環境を作成することができる機能です。
+この二つにより、ローカルに rails をインストールしなくても rails プロジェクトを作成することができます。
+複数環境下での環境構築や開発がスムーズに行えるようになり、開発体験の向上につながります。
+
+ 準備
+
+ Docker Desktop をインストール
+コンテ...]]></description><link>https://zenn.dev/irsc/articles/rails-new-with-dev-container</link><guid isPermaLink="true">https://zenn.dev/irsc/articles/rails-new-with-dev-container</guid><pubDate>Sun, 24 Nov 2024 09:30:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7Ppm60Fg--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:rails-new%2520%25E3%2581%25A8%2520Dev%2520Container%2520%25E3%2581%25A7%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25AB%25E4%25BE%259D%25E5%25AD%2598%25E3%2581%2597%25E3%2581%25AA%25E3%2581%2584%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E3%2582%2592%25E5%25AE%259F%25E7%258F%25BE%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:tyamap%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VlYzg5ZmZiMGEuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BEInner%2520Resource%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2owZndMaFF6VC1JS0czVEJNczV1WjUzcDN1V3V6Q3ppTUQzb1BsPXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tyamap</dc:creator></item><item><title><![CDATA[Dockerを利用して、DjangoアプリをAWS（EC2）にデプロイしてみた]]></title><description><![CDATA[大学の授業の作品をデプロイしたときの備忘録
+（間違えている部分があったら教えてください）
+
+ はじめに
+
+デプロイ完了までの所要時間→約3時間
+ローカルでアプリを完成させた状態からデプロイを始め、エラー解決をしながら進めました。
+参考にさせて頂いた記事
+https://zenn.dev/leon0305/articles/8518e520e3b5ca
+
+
+
+ 本題：デプロイに挑戦！！
+AWSでインスタンスを作成済みとします。
+↓↓↓作成方法↓↓↓
+https://zenn.dev/pandaaaaaaa/articles/760aae1a1ed6ac
+!
+コマンドは各自の設定や環境に合わ...]]></description><link>https://zenn.dev/pandaaaaaaa/articles/f60c42e09ffa98</link><guid isPermaLink="true">https://zenn.dev/pandaaaaaaa/articles/f60c42e09ffa98</guid><pubDate>Sun, 24 Nov 2024 03:40:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--mJdRQl46--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%25E3%2582%2592%25E5%2588%25A9%25E7%2594%25A8%25E3%2581%2597%25E3%2581%25A6%25E3%2580%2581Django%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592AWS%25EF%25BC%2588EC2%25EF%25BC%2589%25E3%2581%25AB%25E3%2583%2587%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25A4%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E4%25BC%25B6%25E6%2599%258F%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JlMWM2ODg0MjEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>伶晏</dc:creator></item></channel></rss>

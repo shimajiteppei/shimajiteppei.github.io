@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Fri, 29 Nov 2024 08:38:24 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[[boto3] nextTokenの使い方]]></title><description><![CDATA[
+ 概要
+nextToken の使い方をよく忘れるので備忘録
+
+ 手順
+_describe_metric_filters = []
+next_token = None
+while True:
+  if next_token:
+    results = logs_client.describe_metric_filters(nextToken=next_token)
+  else:
+    results = logs_client.describe_metric_filters()
+  _describe_metric_filters.extend(results['metricFil...]]></description><link>https://zenn.dev/suraud/articles/howto-boto3-next-token</link><guid isPermaLink="true">https://zenn.dev/suraud/articles/howto-boto3-next-token</guid><pubDate>Fri, 29 Nov 2024 08:12:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--YRSyijYP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255Bboto3%255D%2520nextToken%25E3%2581%25AE%25E4%25BD%25BF%25E3%2581%2584%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%252FUD%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg0NzY3NjU1ODMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>/UD</dc:creator></item><item><title><![CDATA[Raspberry Pi OSでのerror: externally-managed-environmentの対処方法]]></title><description><![CDATA[
+ 導入
+Raspberry Piを触っていると、Pythonを扱う際にどこかしらでpip installをしてパッケージインストールをすると思いますが、error: externally-managed-environmentというエラーが発生することがあります。
+その際にどうすれば良いのかを備忘録的に残しておこうと思います。
+
+ 事例
+私は、Raspberry PiにLEDパネルを接続して遊ぼうとしたので、以下のpipコマンドでモジュールをインストールしようとしていました。
+pip install rpi_ws281x adafruit-circuitpython-neopixel
+...]]></description><link>https://zenn.dev/eng_ryosan/articles/a635346a3123d3</link><guid isPermaLink="true">https://zenn.dev/eng_ryosan/articles/a635346a3123d3</guid><pubDate>Fri, 29 Nov 2024 07:20:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--COSVCtsF--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Raspberry%2520Pi%2520OS%25E3%2581%25A7%25E3%2581%25AEerror%253A%2520externally-managed-environment%25E3%2581%25AE%25E5%25AF%25BE%25E5%2587%25A6%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Ryota%2520Asai%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZhNzU4MTZiNDYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Ryota Asai</dc:creator></item><item><title><![CDATA[【Python】プログラミング初心者がChat GPT を活用してサバイバルゲーム開発してみた話]]></title><description><![CDATA[
+ 1. はじめに
+はじめまして、Chat GPT を活用してプログラミング学習中のAmy（エイミー）です。
+具体的にはPythonでゲーム開発をしています。
+少しずつではあるものの自力でコードを書けるかけるようになってきたため、今回は少し難易度を上げて、サバイバルゲームの作成に挑戦しました！
+先に完成品をお見せすると、こんな感じです！どうですか！？オリジナリティ溢れるゲームになったかなと思っています✨
+https://www.youtube.com/watch?v=zPFta-tmf_0
+本記事ではpygameライブラリを使ってPythonで簡単にサバイバルゲームを作成した方法と実際の...]]></description><link>https://zenn.dev/nira123/articles/d1ae4f8ac104cf</link><guid isPermaLink="true">https://zenn.dev/nira123/articles/d1ae4f8ac104cf</guid><pubDate>Fri, 29 Nov 2024 05:35:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_3CWs3H0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%259F%25E3%2583%25B3%25E3%2582%25B0%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E3%2581%258CChat%2520GPT%2520%25E3%2582%2592%25E6%25B4%25BB%25E7%2594%25A8%25E3%2581%2597%25E3%2581%25A6%25E3%2582%25B5%25E3%2583%2590%25E3%2582%25A4%25E3%2583%2590%25E3%2583%25AB%25E3%2582%25B2%25E3%2583%25BC%25E3%2583%25A0%25E9%2596%258B%25E7%2599%25BA%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Amy%2540%25E5%25AD%25A6%25E7%25BF%2592%25E8%25A8%2598%25E9%258C%25B2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y5NTU4NjgwNDcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Amy@学習記録</dc:creator></item><item><title><![CDATA[【Azure Document intelligence】- カスタム分類モデルとは？]]></title><description><![CDATA[
+ 執筆日
+2024/11/29
+
+ やること
+Azure Document intelligenceのカスタム分類モデルについての説明と使い方をまとめます。
+
+ 前提
+
+Azure Document intelligenceのStandardを構築済みであること
+トレーニングデータ（2種類,５枚以上）をBlobのコンテナーに格納していること
+
+
+ カスタム分類モデル とは？
+特定のドキュメントタイプを自動的に識別/分類を行うツールです。
+
+ 使用方法
+
+Document intelligence Studio を開く
+Custom classification model をクリックす...]]></description><link>https://zenn.dev/headwaters/articles/4550857253b652</link><guid isPermaLink="true">https://zenn.dev/headwaters/articles/4550857253b652</guid><pubDate>Fri, 29 Nov 2024 00:14:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--v2eikzbS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Azure%2520Document%2520intelligence%25E3%2580%2591-%2520%25E3%2582%25AB%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%25A0%25E5%2588%2586%25E9%25A1%259E%25E3%2583%25A2%25E3%2583%2587%25E3%2583%25AB%25E3%2581%25A8%25E3%2581%25AF%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:takekawa%2520tomoki%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZjNGExY2UxMDYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2598%25E3%2583%2583%25E3%2583%2589%25E3%2582%25A6%25E3%2582%25A9%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%25BC%25E3%2582%25B9%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdmODg5YTRhYzguanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takekawa tomoki</dc:creator></item><item><title><![CDATA[LLMに関するメモ]]></title><description><![CDATA[
+ 概要
+LLMに関するツールについて、備忘録です。
+
+ LangChain
+https://www.langchain.com/
+以下のように説明されていました。
+
+LangChain is a composable framework to build with LLMs. LangGraph is the orchestration framework for controllable agentic workflows.
+
+
+ LlamaIndex
+https://docs.llamaindex.ai/en/stable/
+以下のように説明されていました。
+
+LlamaIndex...]]></description><link>https://zenn.dev/nakamura196/articles/e6f45fa7930db9</link><guid isPermaLink="true">https://zenn.dev/nakamura196/articles/e6f45fa7930db9</guid><pubDate>Thu, 28 Nov 2024 23:59:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qYp-vWPb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:LLM%25E3%2581%25AB%25E9%2596%25A2%25E3%2581%2599%25E3%2582%258B%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nakamura196%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pkd3BpX1gzTWIzV3VqTnVnV2tPTlJlU3VsNFNTN1BNMWlPQm9LRm5JPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nakamura196</dc:creator></item><item><title><![CDATA[Act 26. Pythonで主成分分析を試す]]></title><description><![CDATA[
+ はじめに
+Act 01. AIで外国為替を自動売買するまでの道のりをベースに学習を進めて行く。
+前回は主成分分析の概要について学習した。
+なので今回は実際にpythonで主成分分析を使ったデータの次元削減を行う。
+また、最後に次元削減後のデータを使って予測しているので、もしよかったら見てね。
+データセットが必要になるため、お馴染みのpythonで提供されているデータセットを使用する。
+今回は特徴量の数が多いワインのデータセット（load_wine）を用いてコードを書いていく。
+
+ 主成分分析（PCA）
+
+ 結論
+まずはいつも通りコードを載せておく。
+
+Act26.py
+from sk...]]></description><link>https://zenn.dev/onishi_ai_lad/articles/01c5c6899c7405</link><guid isPermaLink="true">https://zenn.dev/onishi_ai_lad/articles/01c5c6899c7405</guid><pubDate>Thu, 28 Nov 2024 15:09:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--E9iIN4yr--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Act%252026.%2520Python%25E3%2581%25A7%25E4%25B8%25BB%25E6%2588%2590%25E5%2588%2586%25E5%2588%2586%25E6%259E%2590%25E3%2582%2592%25E8%25A9%25A6%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258A%25E3%2581%25AB%25E3%2581%2597%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFlYzRlYjFmNjguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>おにし</dc:creator></item><item><title><![CDATA[RAG機能付きチャットボットを作ろう-5_チャット表示のMarkdown化]]></title><description><![CDATA[
+ TL;DR
+前回の記事で、streamlitのsession_stateを使って、プロンプトや回答の保存を行いました。本稿では
+
+チャット履歴をMarkdown形式で表示します。
+
+
+ 実装イメージ
+
+ 実装コード
+主な変更点は
+
+
+st.writeからst.markdownに変更
+
+
+
+ コード
+import streamlit as st
+from openai import OpenAI
+from dotenv import load_dotenv
+import os
+
+load_dotenv(".env")
+
+# OpenAIのAPIクライアントを初期化
+# APIキーを環境...]]></description><link>https://zenn.dev/bluetang/articles/chatbot_with_lc_st_chromadb_05</link><guid isPermaLink="true">https://zenn.dev/bluetang/articles/chatbot_with_lc_st_chromadb_05</guid><pubDate>Thu, 28 Nov 2024 14:12:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--uoTAs4NI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:RAG%25E6%25A9%259F%25E8%2583%25BD%25E4%25BB%2598%25E3%2581%258D%25E3%2583%2581%25E3%2583%25A3%25E3%2583%2583%25E3%2583%2588%25E3%2583%259C%25E3%2583%2583%25E3%2583%2588%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258D%25E3%2581%2586-5_%25E3%2583%2581%25E3%2583%25A3%25E3%2583%2583%25E3%2583%2588%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%25AEMarkdown%25E5%258C%2596%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:bluetang%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM3ZDRkMjc1MzAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>bluetang</dc:creator></item><item><title><![CDATA[Pythonで構造体みたいなデータを扱いたいときに標準で使える候補]]></title><description><![CDATA[
+ はじめに
+Pythonで型を意識しつつ，構造体のようなデータを扱いたいときに，標準で使える候補として以下の3つがあります．
+
+dataclasses
+NamedTuple
+TypedDict
+
+それぞれ使い方と簡単な特徴を紹介します．
+
+ dataclasses
+dataclassesは以下のように使います．
+from dataclasses import dataclass
+
+@dataclass
+class MyStruct:
+    id: int
+    name: str
+    active: bool
+
+# 使用例
+data = MyStruct(id=1, name=...]]></description><link>https://zenn.dev/enken/articles/enken-python-struct</link><guid isPermaLink="true">https://zenn.dev/enken/articles/enken-python-struct</guid><pubDate>Thu, 28 Nov 2024 12:07:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--McLF5AJd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A7%25E6%25A7%258B%25E9%2580%25A0%25E4%25BD%2593%25E3%2581%25BF%25E3%2581%259F%25E3%2581%2584%25E3%2581%25AA%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%2592%25E6%2589%25B1%25E3%2581%2584%25E3%2581%259F%25E3%2581%2584%25E3%2581%25A8%25E3%2581%258D%25E3%2581%25AB%25E6%25A8%2599%25E6%25BA%2596%25E3%2581%25A7%25E4%25BD%25BF%25E3%2581%2588%25E3%2582%258B%25E5%2580%2599%25E8%25A3%259C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:enken%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSUZUUk1GUjNZZS1Mb2lhQWg4TFo4SXVCV2laWGNxZmo2NEpzdjh5S3poR0k5VXMyaz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>enken</dc:creator></item><item><title><![CDATA[WSL+ローカルGPUによる深層学習の環境構築]]></title><description><![CDATA[
+ はじめに
+私の研究室は学生数が多く、全員が機械学習・深層学習を使った研究を行っているため、空前のGPU不足に悩まされています。
+応急的な対策としてGoogle ColabなどのGPUを使うことが挙げられますが、セキュリティ問題や利用時間の制限などが伴います。
+また、研究用途ではなく趣味の一環で、ネット上にデータを上げたくないけど機械学習・深層学習に挑戦してみたいという方もいると思います。
+そこで本記事では、WSL(Windows Subsystem for Linux)と、PCに備えられているGPU（ローカルGPU）を用いた機械学習・深層学習の環境構築について紹介します。
+特に大学生...]]></description><link>https://zenn.dev/seoi/articles/9bd902b73b718c</link><guid isPermaLink="true">https://zenn.dev/seoi/articles/9bd902b73b718c</guid><pubDate>Thu, 28 Nov 2024 10:42:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--mf8kCeof--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:WSL%252B%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25AB%25E3%2583%25ABGPU%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258B%25E6%25B7%25B1%25E5%25B1%25A4%25E5%25AD%25A6%25E7%25BF%2592%25E3%2581%25AE%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259B%25E3%2581%258A%25E3%2581%2584%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSmttYV9QbGZ2Uk1NRy13RzlWNzctN0xGeGJCWGhuZlZ2cVlXeEFZejhTc2JuZGZQQT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>せおい</dc:creator></item><item><title><![CDATA[現役エンジニアが CS50 をさらっと見た感想]]></title><description><![CDATA[
+ 経緯と背景
+
+大学で CS を学んでいない状態でエンジニアになった人です
+恥は全方向に晒していくスタイル
+now in android を読みながら、「やってることはわかる！なるほど！ただ、こういう書き方ってそもそもどうやったら思いつくんや？」と思った[1]
+
+日頃から新しい技術へのキャッチアップが遅い、効率が悪いと感じていて
+いつか外資やメガベンに挑戦するかもしれない！と思って始めた leetcode の進捗も芳しくない
+モヤモヤを晴らすため興味本位で入っていた Android の Discord コミュニティで「kotlin coroutine のリファレンス読めるけど、これ実装...]]></description><link>https://zenn.dev/rokki08/articles/5b63e02053afb9</link><guid isPermaLink="true">https://zenn.dev/rokki08/articles/5b63e02053afb9</guid><pubDate>Thu, 28 Nov 2024 07:43:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--IegULtBB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%258F%25BE%25E5%25BD%25B9%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%25E3%2581%258C%2520CS50%2520%25E3%2582%2592%25E3%2581%2595%25E3%2582%2589%25E3%2581%25A3%25E3%2581%25A8%25E8%25A6%258B%25E3%2581%259F%25E6%2584%259F%25E6%2583%25B3%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2590%25E3%2581%25A3%25E3%2581%25A1%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFUWEFKd09LX09RTnZMQm4zbk1HTGpXNlB4ZVlCYkYwMEdYLXhTZ1l4YjI9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ぐっち</dc:creator></item><item><title><![CDATA[VS Code+DevContainer+Dockerで最強Python開発環境(Remote編)]]></title><description><![CDATA[!
+本記事は、Aidemy Advent Calendar 2024の投稿です。
+
+
+ 概要
+
+ 本書の内容
+前回の続きで、VS CodeとDockerを利用したPython用開発環境(リモート接続編)の設定/利用方法を説明します。前回の利便性をそのままに、機械学習を目的としたGPUサーバーでの開発等が可能になります。
+本書で実現する開発環境の概略図は以下です。
+
+!
+接続先(RemoteMachine)は、オンプレのGPUサーバー、クラウド上のVM、RaspberryPi などが可能で、多くのケースで利用できます。
+
+
+ 前提
+
+下記のソフトウェアがインストール済みであること
+
+Loc...]]></description><link>https://zenn.dev/aidemy/articles/vscode-env-python-ssh</link><guid isPermaLink="true">https://zenn.dev/aidemy/articles/vscode-env-python-ssh</guid><pubDate>Thu, 28 Nov 2024 03:01:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BwunPFte--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:VS%2520Code%252BDevContainer%252BDocker%25E3%2581%25A7%25E6%259C%2580%25E5%25BC%25B7Python%25E9%2596%258B%25E7%2599%25BA%25E7%2592%25B0%25E5%25A2%2583%2528Remote%25E7%25B7%25A8%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:masa-suke%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNhNmVhZTQ3ZDkuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Aidemy%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhlZWRhMzE2NjYuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>masa-suke</dc:creator></item><item><title><![CDATA[Pythonでflatmapをする]]></title><description><![CDATA[
+ 始めに
+小ネタ。PythonでNestした配列に対して、flatなデータにしたいと思った時の処理を残します。
+
+ 環境
+
+Python 3.13
+
+
+ 実装
+構造が2階層だけならfrom itertools import chainのlist(chain.from_iterable(input_))を使用する。
+from itertools import chain
+
+async def test_01(self):
+    input_ = ["1", ["2", "3"]]
+
+    actual = list(chain.from_iterable(input_))
+
+    ...]]></description><link>https://zenn.dev/kirimaru/articles/5c2b764650aa38</link><guid isPermaLink="true">https://zenn.dev/kirimaru/articles/5c2b764650aa38</guid><pubDate>Thu, 28 Nov 2024 03:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--cl7oROHb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:Python%25E3%2581%25A7flatmap%25E3%2582%2592%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258D%25E3%2582%258A%25E4%25B8%25B8%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM1OTcxNmNjNDMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>きり丸</dc:creator></item><item><title><![CDATA[日本語に特化したOCRとレイアウト解析パッケージ「YomiToku」をM2 Pro Mac miniで動かしてみた]]></title><description><![CDATA[
+ はじめに
+YomiTokuは、日本語に特化したOCR およびレイアウト解析をしてくれるPythonのパッケージです。文書内の文字起こしを行うだけでなく、文書のレイアウト構造や図表の解析機能など、文書画像を解析するため機能があります。パッケージ開発者のKotaro.Kinoshita氏による紹介記事も参照してみてください。
+日本語に特化したOCR、文書画像解析Pythonパッケージ「YomiToku」を公開しました
+この記事では、YomiTokuをM2 ProのMac miniで一通り動かしてみた内容をまとめます。
+
+ パッケージのインストール
+GitHubにあるように、pipでインス...]]></description><link>https://zenn.dev/shakshi3104/articles/207350e1763e27</link><guid isPermaLink="true">https://zenn.dev/shakshi3104/articles/207350e1763e27</guid><pubDate>Thu, 28 Nov 2024 00:13:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--A3iC0SNs--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%2597%25A5%25E6%259C%25AC%25E8%25AA%259E%25E3%2581%25AB%25E7%2589%25B9%25E5%258C%2596%25E3%2581%2597%25E3%2581%259FOCR%25E3%2581%25A8%25E3%2583%25AC%25E3%2582%25A4%25E3%2582%25A2%25E3%2582%25A6%25E3%2583%2588%25E8%25A7%25A3%25E6%259E%2590%25E3%2583%2591%25E3%2583%2583%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B8%25E3%2580%258CYomiToku%25E3%2580%258D%25E3%2582%2592M2%2520Pro%2520Mac%2520mini%25E3%2581%25A7%25E5%258B%2595%25E3%2581%258B%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Shakshi3104%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzExNDMxNTBjODQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Shakshi3104</dc:creator></item><item><title><![CDATA[OpenTelemetry python auto_instrumentation]]></title><description><![CDATA[opentelemetry-instrument コマンドを使って auto-instrumentatin できるけれど、手動計装時に困ったので調べてみた。
+opentelemetry-instrument コマンドは PYTHONPATH に opentelemetry.instrumentation.auto_instrumentation のディレクトリを追加してから引数となるコマンドを起動する。こうするとopentelemetry/instrumentaton/auto_instrumentation/sitecustomize.py が自動的に読み込まれる。これはドキュメントに...]]></description><link>https://zenn.dev/kwi/articles/aeb36419ae328a</link><guid isPermaLink="true">https://zenn.dev/kwi/articles/aeb36419ae328a</guid><pubDate>Wed, 27 Nov 2024 23:44:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--y3uQ6AS4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:OpenTelemetry%2520python%2520auto_instrumentation%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kwi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2Rhcmsvay5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kwi</dc:creator></item><item><title><![CDATA[OpenCVで矢印画像から向いている方角を取得する]]></title><description><![CDATA[
+ はじめに
+OpenCVを使用して、画像内の矢印の向きを取得したので手法をメモ。
+
+ 素材
+前提として事前に2値化(前景:白、背景:黒)が完了していること。
+
+
+ 手順
+
+ 0. インポート
+import cv2
+import numpy as np
+import math
+
+ 1. 画像の読み込み
+# 画像を読み込む（グレースケール）
+image_path = "arrow.png"  # 入力画像のパス
+image = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
+
+ 2. 最大の輪郭を抽出
+# 輪郭を検出
+contours, _ = c...]]></description><link>https://zenn.dev/gigi_aaaaa/articles/bc921b4fa80fa2</link><guid isPermaLink="true">https://zenn.dev/gigi_aaaaa/articles/bc921b4fa80fa2</guid><pubDate>Wed, 27 Nov 2024 23:25:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bcsPtB-K--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:OpenCV%25E3%2581%25A7%25E7%259F%25A2%25E5%258D%25B0%25E7%2594%25BB%25E5%2583%258F%25E3%2581%258B%25E3%2582%2589%25E5%2590%2591%25E3%2581%2584%25E3%2581%25A6%25E3%2581%2584%25E3%2582%258B%25E6%2596%25B9%25E8%25A7%2592%25E3%2582%2592%25E5%258F%2596%25E5%25BE%2597%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:gigi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSTFGNFRDbDNVdEh4Z1pGQXU4Yzc4aEp4TGFkWEhQejJwR0tOM1U4RkJONGtFU1dBPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>gigi</dc:creator></item><item><title><![CDATA[M1/M2対応　Docker+Python開発環境構築手順]]></title><description><![CDATA[
+ あいさつ
+こんにちは。
+最近Python勉強しようかなと密かに企んでるのですが、M1MacBookProでpyenvで開発環境を構築しようとしたけど詰まってできなかったので、もういっそ仮想環境作るかってことでそのやり方をまとめました。
+正確じゃない内容もあったりすると思うから参考程度に使ってください。
+
+ M1/M2 MacBookでDockerを使ったPython環境構築手順
+
+ 1. Dockerのインストール
+手順
+1.Docker Desktopをダウンロード
+•公式サイトからDocker Desktopをダウンロードしインストール。
+　•M1/M2 Mac対応版を選択してく...]]></description><link>https://zenn.dev/sanpi34/articles/d7ee30ce659f2c</link><guid isPermaLink="true">https://zenn.dev/sanpi34/articles/d7ee30ce659f2c</guid><pubDate>Wed, 27 Nov 2024 16:30:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--IT3IlYBY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:M1%252FM2%25E5%25AF%25BE%25E5%25BF%259C%25E3%2580%2580Docker%252BPython%25E9%2596%258B%25E7%2599%25BA%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%25E6%2589%258B%25E9%25A0%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Sanpi34%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FiZTM1NzYwZTQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Sanpi34</dc:creator></item><item><title><![CDATA[PyAutoGUIでYouTubeのプレイリスト自動再生プログラム作ってみた]]></title><description><![CDATA[
+ TL;DR
+今回は，PyAutoGUI で YouTube のプレイリスト自動再生プログラムを作成する方法を紹介します。
+作成理由としては，勉強する際に自身で Youtube を検索すると，ホーム画面に表示されたおすすめの動画に気を取られてしまい，勉強に集中できないことがあったためです。
+⚠️：動画のサイズ上，圧縮してデモ動画を掲載しているので，動きが遅いですが，実際の動作はもっと速いです。
+
+こちらのリポジトリに，スムーズな動画を掲載しています。
+https://github.com/soso0024/pyautogui-practice
+
+ PyAutoGUI とは
+
+PyAut...]]></description><link>https://zenn.dev/os515/articles/pyautogui-practice-01</link><guid isPermaLink="true">https://zenn.dev/os515/articles/pyautogui-practice-01</guid><pubDate>Wed, 27 Nov 2024 14:11:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--d3T2Esxd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:PyAutoGUI%25E3%2581%25A7YouTube%25E3%2581%25AE%25E3%2583%2597%25E3%2583%25AC%25E3%2582%25A4%25E3%2583%25AA%25E3%2582%25B9%25E3%2583%2588%25E8%2587%25AA%25E5%258B%2595%25E5%2586%258D%25E7%2594%259F%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%25A0%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:soso%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4WXhTVFZ2dEMxc1c4N3NudWhKSVp0YTVMUWpsMUR5VW1YVTl5UFY2Zz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>soso</dc:creator></item><item><title><![CDATA[RAG機能付きチャットボットを作ろう-4_チャット履歴保存]]></title><description><![CDATA[
+ TL;DR
+前回の記事で、OpenAIのクライアントの作成、プロンプトの作成、そして回答の取得までを行いました。本稿では
+
+情報の保存：streamlitのsession_stateを使って、プロンプトや回答を保存します。
+
+
+ 実装イメージ
+
+ streamlitにおける情報の保存
+
+ 情報の保存
+streamlitでプロンプトの入力および回答の出力を行いました。しかしこのままでは、プロンプトを入力しても、回答を出力しても、次のプロンプトを入力すると、前のプロンプトや回答が消えてしまいます。
+そこで、streamlitのsession_stateを使って、プロンプトや回答を保存しま...]]></description><link>https://zenn.dev/bluetang/articles/chatbot_with_lc_st_chromadb_04</link><guid isPermaLink="true">https://zenn.dev/bluetang/articles/chatbot_with_lc_st_chromadb_04</guid><pubDate>Wed, 27 Nov 2024 12:58:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--oGBhAhQn--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:RAG%25E6%25A9%259F%25E8%2583%25BD%25E4%25BB%2598%25E3%2581%258D%25E3%2583%2581%25E3%2583%25A3%25E3%2583%2583%25E3%2583%2588%25E3%2583%259C%25E3%2583%2583%25E3%2583%2588%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258D%25E3%2581%2586-4_%25E3%2583%2581%25E3%2583%25A3%25E3%2583%2583%25E3%2583%2588%25E5%25B1%25A5%25E6%25AD%25B4%25E4%25BF%259D%25E5%25AD%2598%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:bluetang%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM3ZDRkMjc1MzAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>bluetang</dc:creator></item><item><title><![CDATA[PythonとGoogle Chart Toolsで作るシンプルな円グラフアプリ]]></title><description><![CDATA[こんにちは！今回は、PythonとGoogle Chart Toolsを使ってシンプルな円グラフアプリを作成する方法をご紹介します。Flaskを使用してウェブアプリケーションを構築し、Google Chart Toolsでデータを可視化します。
+
+ 目次
+
+Flaskのインストール
+Flaskアプリケーションの作成
+Google Chart Toolsを使った円グラフの表示
+
+HTMLコードの説明
+
+
+アプリケーションの実行
+
+
+ 1. Flaskのインストール
+まず、Flaskをインストールします。ターミナルで以下のコマンドを実行してください。
+pip install Flask
+
+ ...]]></description><link>https://zenn.dev/mstng/articles/eb7767218b51b2</link><guid isPermaLink="true">https://zenn.dev/mstng/articles/eb7767218b51b2</guid><pubDate>Wed, 27 Nov 2024 10:12:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--yBAqS6Ss--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A8Google%2520Chart%2520Tools%25E3%2581%25A7%25E4%25BD%259C%25E3%2582%258B%25E3%2582%25B7%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AB%25E3%2581%25AA%25E5%2586%2586%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%2595%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mstng%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSlVrUWI4S2o0cnl1WHhNZ1FBeXJleTFmOW5JTW1iRmN6UVRzaC1YYk1udWQtNEotYkF2Zz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mstng</dc:creator></item><item><title><![CDATA[Google ColabでLangChainを使ってGitHubリポジトリを学習させる]]></title><description><![CDATA[
+ 🌟 はじめに
+おぐまです。
+Google Colabを使ってLangChainでGitHubリポジトリの内容を学習し、質問に答えられるシステムを作る方法をご紹介します。
+環境構築の心配なく、ブラウザだけで試せるようにしました！😆
+!
+【重要】OpenAI APIの使用には料金が発生します。
+使用前に必ず料金体系を確認し、予期せぬ高額請求を避けるため使用量の上限設定を行ってください。
+本記事の内容を試す際は最小限の使用にとどめることをおすすめします。
+
+
+ 👷‍♂️ Google Colabでの準備
+特にありません！
+以下からLangchain_GithubLoader.ipynbを開...]]></description><link>https://zenn.dev/ap_com/articles/github_repository_langchain_chatgpt</link><guid isPermaLink="true">https://zenn.dev/ap_com/articles/github_repository_langchain_chatgpt</guid><pubDate>Wed, 27 Nov 2024 03:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--q5Tj7uLU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Google%2520Colab%25E3%2581%25A7LangChain%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6GitHub%25E3%2583%25AA%25E3%2583%259D%25E3%2582%25B8%25E3%2583%2588%25E3%2583%25AA%25E3%2582%2592%25E5%25AD%25A6%25E7%25BF%2592%25E3%2581%2595%25E3%2581%259B%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:9mak%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA5N2NlMjBhZWIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2582%25A8%25E3%2583%25BC%25E3%2583%2594%25E3%2583%25BC%25E3%2582%25B3%25E3%2583%259F%25E3%2583%25A5%25E3%2583%258B%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%25BA%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U5YTdiNjViNmIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>9mak</dc:creator></item></channel></rss>
