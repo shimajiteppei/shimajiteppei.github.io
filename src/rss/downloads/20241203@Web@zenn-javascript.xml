@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「JavaScript」のフィード]]></title><description><![CDATA[Zennのトピック「JavaScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/javascript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/64acd76870.png</url><title>Zennの「JavaScript」のフィード</title><link>https://zenn.dev/topics/javascript</link></image><generator>zenn.dev</generator><lastBuildDate>Tue, 03 Dec 2024 00:54:03 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/javascript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[JS と Elixir の比較: if...else 文と if マクロ (1)]]></title><description><![CDATA[本稿では、JavaScript の if...else 文と Elixir の if マクロを比較します。
+JavaScript の if...else 文は基本的な構文は次の通りです。
+if (条件式) {
+  A
+} else {
+  B
+}
+「条件式」が成立したら A が実行され、そうでなければ B が実行されます。何をもって条件式が成功したとされるのかは少しややこしいです。JavaScript では以下の値が「偽とみなされる値（falsy value）」です。
+
+false, 0, -0, 0n, "", null, undefined, NaN
+
+「条件式」がこれらの値を返さな...]]></description><link>https://zenn.dev/tkrd/articles/js-and-elixir-if-else-1</link><guid isPermaLink="true">https://zenn.dev/tkrd/articles/js-and-elixir-if-else-1</guid><pubDate>Mon, 02 Dec 2024 23:53:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ILOUEkBN--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JS%2520%25E3%2581%25A8%2520Elixir%2520%25E3%2581%25AE%25E6%25AF%2594%25E8%25BC%2583%253A%2520if...else%2520%25E6%2596%2587%25E3%2581%25A8%2520if%2520%25E3%2583%259E%25E3%2582%25AF%25E3%2583%25AD%2520%25281%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E9%25BB%2592%25E7%2594%25B0%25E5%258A%25AA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU3OWU2ZDRlZWMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>黒田努</dc:creator></item><item><title><![CDATA[X（旧Twitter）共有ボタンを作る際に気を利かせてはいけない？]]></title><description><![CDATA[
+ 結論
+以下のように書く。
+let title: string = encodeURIComponent("【何かタイトル】");
+let link: string = `https://twitter.com/intent/tweet?text=${title}&amp;url=${リンク}&amp;hashtags=${タグ}`;
+
+&lt;a href="[link]"&gt;Xで共有&lt;/a&gt;
+TwitterはXになったし「twitter.com」から「x.com」になったので「x.com」と「post」に変えてあげよう、と親切をした場合、PCからの共有は問題ないが、...]]></description><link>https://zenn.dev/tanukikyo/articles/f723ed654cfa07</link><guid isPermaLink="true">https://zenn.dev/tanukikyo/articles/f723ed654cfa07</guid><pubDate>Mon, 02 Dec 2024 22:43:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9AGUxDBc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:X%25EF%25BC%2588%25E6%2597%25A7Twitter%25EF%25BC%2589%25E5%2585%25B1%25E6%259C%2589%25E3%2583%259C%25E3%2582%25BF%25E3%2583%25B3%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%25E9%259A%259B%25E3%2581%25AB%25E6%25B0%2597%25E3%2582%2592%25E5%2588%25A9%25E3%2581%258B%25E3%2581%259B%25E3%2581%25A6%25E3%2581%25AF%25E3%2581%2584%25E3%2581%2591%25E3%2581%25AA%25E3%2581%2584%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259F%25E3%2581%25AC%25E3%2581%258D%25E3%2581%25AE%25E6%2595%2599%25E7%25A5%2596%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzkzNGJmZDI1ZjYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>たぬきの教祖</dc:creator></item><item><title><![CDATA[[JavaScript] 繰り返しを操る、Iterator]]></title><description><![CDATA[
+ はじめに
+実務でイテレータを触ることがあったので、調べてまとめてみたものです。
+間違いがありましたらコメントいただけると嬉しいです🫶
+さて、JavaScript を触っているとたまに見ます、Iterator とか Iterable の文字。
+for や while のことを「イテレータ」と呼ぶと昔学んだ記憶があるので、なんとなく反復するものだろうという程度の認識で使っていました。しかしよくよく調べるとけっこう便利そうな機能がでてきたので、年度の納めに学んでみようと思った次第です。
+
+ イテレータ（Iterator） とは？
+https://developer.mozilla.org/...]]></description><link>https://zenn.dev/progate_users/articles/b3ff93c03e21ad</link><guid isPermaLink="true">https://zenn.dev/progate_users/articles/b3ff93c03e21ad</guid><pubDate>Mon, 02 Dec 2024 22:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--deOmuqi2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BJavaScript%255D%2520%25E7%25B9%25B0%25E3%2582%258A%25E8%25BF%2594%25E3%2581%2597%25E3%2582%2592%25E6%2593%258D%25E3%2582%258B%25E3%2580%2581Iterator%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2582%2588%25E3%2581%25A4%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM2OGUyYmI4YzIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Progate%2520Path%2520%25E3%2582%25B3%25E3%2583%259F%25E3%2583%25A5%25E3%2583%258B%25E3%2583%2586%25E3%2582%25A3%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JiOGNiMGY2NjkuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>よつ</dc:creator></item><item><title><![CDATA[ENCA 3日目: プリミティブイテラブルを退ける規約制定]]></title><description><![CDATA[!
+この記事は 1人 ECMAScript Normative Changes Advent Calendar 2024 の 3 日目です。
+
+
+ イテラブル（反復可能）とは
+ES2015 から仕様の中にイテラブルインターフェースとイテレーターインターフェースが定義されています。イテラブルインターフェースを実装したオブジェクトやプリミティブのことを単にイテラブル（反復可能）と呼びます。
+ざっくり TypeScript の型で表現すると以下のようになります（実際の TypeScript での型はジェネリクスになっています）。
+interface Iterable {
+  [Symbol.i...]]></description><link>https://zenn.dev/pixiv/articles/2525ef2eddf6a0</link><guid isPermaLink="true">https://zenn.dev/pixiv/articles/2525ef2eddf6a0</guid><pubDate>Mon, 02 Dec 2024 15:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6GSv237g--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ENCA%25203%25E6%2597%25A5%25E7%259B%25AE%253A%2520%25E3%2583%2597%25E3%2583%25AA%25E3%2583%259F%25E3%2583%2586%25E3%2582%25A3%25E3%2583%2596%25E3%2582%25A4%25E3%2583%2586%25E3%2583%25A9%25E3%2583%2596%25E3%2583%25AB%25E3%2582%2592%25E9%2580%2580%25E3%2581%2591%25E3%2582%258B%25E8%25A6%258F%25E7%25B4%2584%25E5%2588%25B6%25E5%25AE%259A%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:petamoriken%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZhMDc3ZWRhZTMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:pixiv%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzMzODlhMzQ2ZjQuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>petamoriken</dc:creator></item><item><title><![CDATA[JS と Elixir の比較: 変数への再代入不可能性と値の不変性]]></title><description><![CDATA[JavaScript の const は、再代入のできない変数を宣言するためのキーワードです。例えば、次のプログラムを Node.js 上で実行するとエラー TypeError が発生します。
+const number = 1
+number = number + 1
+console.log(number)
+変数 number への再代入を許すには、const ではなく let で変数を宣言する必要があります。
+let number = 1
+number = number + 1
+console.log(number)
+では、次の JavaScript プログラムはエラーを発生させるでしょ...]]></description><link>https://zenn.dev/tkrd/articles/js-and-elixir-immutability</link><guid isPermaLink="true">https://zenn.dev/tkrd/articles/js-and-elixir-immutability</guid><pubDate>Mon, 02 Dec 2024 14:13:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--MwCTCi1C--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JS%2520%25E3%2581%25A8%2520Elixir%2520%25E3%2581%25AE%25E6%25AF%2594%25E8%25BC%2583%253A%2520%25E5%25A4%2589%25E6%2595%25B0%25E3%2581%25B8%25E3%2581%25AE%25E5%2586%258D%25E4%25BB%25A3%25E5%2585%25A5%25E4%25B8%258D%25E5%258F%25AF%25E8%2583%25BD%25E6%2580%25A7%25E3%2581%25A8%25E5%2580%25A4%25E3%2581%25AE%25E4%25B8%258D%25E5%25A4%2589%25E6%2580%25A7%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E9%25BB%2592%25E7%2594%25B0%25E5%258A%25AA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU3OWU2ZDRlZWMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>黒田努</dc:creator></item><item><title><![CDATA[VueConf Japan 2024 レポート：フロントエンド開発の最前線]]></title><description><![CDATA[2024年、VueConf Japanは最新のフロントエンド技術、ツール、開発プラクティスに関する非常に有益な情報が満載のカンファレンスでした。このブログでは、VueConf Japan 2024で発表された重要なトピックや新技術について詳しくご紹介します。
+
+ 目次
+
+Vite: 高速化と効率化の先駆け
+UIコンポーネント管理の新しいアプローチ
+Rustの登場：JavaScriptツールに革命を
+Nuxtとサーバーサイドレンダリングの進化
+Vueの新機能：パフォーマンス向上とリアクティビティの強化
+まとめ：フロントエンド開発の未来を見据えて
+
+
+ Vite: 高速化と効率化の先駆け
+
+...]]></description><link>https://zenn.dev/tinaba96/articles/999a2f05ef1c9d</link><guid isPermaLink="true">https://zenn.dev/tinaba96/articles/999a2f05ef1c9d</guid><pubDate>Mon, 02 Dec 2024 13:42:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--EOmdUp_S--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:VueConf%2520Japan%25202024%2520%25E3%2583%25AC%25E3%2583%259D%25E3%2583%25BC%25E3%2583%2588%25EF%25BC%259A%25E3%2583%2595%25E3%2583%25AD%25E3%2583%25B3%25E3%2583%2588%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2589%25E9%2596%258B%25E7%2599%25BA%25E3%2581%25AE%25E6%259C%2580%25E5%2589%258D%25E7%25B7%259A%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tinaba96%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSVg5aks4MDd1WG82ZW9EeUNUN0tEZ0QxNC05cWlicXEzYW9Bb3lfbk8yMVNjTmpRPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tinaba96</dc:creator></item><item><title><![CDATA[【Arc Browser】GitHubで、PRがdraftかつレビュワー指定時に警告を出す]]></title><description><![CDATA[
+ tl;dr
+ArcのBoost機能を使って、下のコードを実行するとこうなります。
+
+// 定数の定義
+const MESSAGE = 'Ready for Reviewを押してください！';
+const POPUP_STYLES = {
+  position: 'absolute',
+  backgroundColor: '#fff3b0',
+  color: '#333',
+  border: '1px solid #e0c027',
+  borderRadius: '8px',
+  padding: '12px 16px',
+  maxWidth: '400px',
+  zInd...]]></description><link>https://zenn.dev/eringi_shimeji/articles/c46743c22d2f74</link><guid isPermaLink="true">https://zenn.dev/eringi_shimeji/articles/c46743c22d2f74</guid><pubDate>Mon, 02 Dec 2024 12:40:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--L_8lTCTR--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Arc%2520Browser%25E3%2580%2591GitHub%25E3%2581%25A7%25E3%2580%2581PR%25E3%2581%258Cdraft%25E3%2581%258B%25E3%2581%25A4%25E3%2583%25AC%25E3%2583%2593%25E3%2583%25A5%25E3%2583%25AF%25E3%2583%25BC%25E6%258C%2587%25E5%25AE%259A%25E6%2599%2582%25E3%2581%25AB%25E8%25AD%25A6%25E5%2591%258A%25E3%2582%2592%25E5%2587%25BA%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:smatsuo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RkNmU2YzI4MjYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>smatsuo</dc:creator></item><item><title><![CDATA[WebUI をサッと作るツールとしての htmx]]></title><description><![CDATA[この記事は SecHack365 Advent Calendar 2024 2日目の記事です。先に断っておくと SecHack365 要素は1ミリもありません、ごめんなさい。
+
+ はじめに
+htmx というツール (ライブラリ？) をご存じでしょうか？ちょっと前に話題になったっきりで特に広く使われていることもなく、今や情報の海に溺れている悲しいやつです。
+実際に使ってみると確かにプロジェクトの規模にスケールしなさそうだなと思った一方で、簡単に WebUI とかを生やすのには結構向いているのでは？と感じました。なのでこの記事ではそれを布教していきます。
+
+ htmx とは
+最近のモダンなW...]]></description><link>https://zenn.dev/cp20/articles/htmx-as-a-tool-for-webui</link><guid isPermaLink="true">https://zenn.dev/cp20/articles/htmx-as-a-tool-for-webui</guid><pubDate>Mon, 02 Dec 2024 12:30:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--f-PqG-0x--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:WebUI%2520%25E3%2582%2592%25E3%2582%25B5%25E3%2583%2583%25E3%2581%25A8%25E4%25BD%259C%25E3%2582%258B%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%25A8%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25AE%2520htmx%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2597%25E3%2583%25BC%25E3%2581%25B4%25E3%2583%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lkMENtX3dVYnd6b0NyR1g2aEFVaWdkWnZ3dDJPb2g3cVpEWElEUlE9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>しーぴー</dc:creator></item><item><title><![CDATA[🏮「文章をお祭りっぽく翻訳するChrome拡張機能」をチームで開発しました🏮]]></title><description><![CDATA[
+ はじめに
+ウェブページの文章をお祭りっぽく翻訳するChrome拡張機能「textval」をチームで開発しました！
+
+
+ 開発の経緯
+
+2024年9月の技育CAMPハッカソンvol.14 テーマ「祭」に友人と3人チームで参加し、開発しました。3人ともばらばらの場所に住んでいて、以前の技育ハッカソンの即席チームで出会った!というエモすぎチームです。
+わいわいみんなでアイデア出しをして、10個以上の案の中から、kuroさんの「お祭りっぽく翻訳できる拡張機能を作りたい！」という案が、アイデア的にも難易度的にも良いのでは？ということになり、作ることになりました。
+
+ こだわり①形態素解析で、コ...]]></description><link>https://zenn.dev/esusaki/articles/eba916e0c71980</link><guid isPermaLink="true">https://zenn.dev/esusaki/articles/eba916e0c71980</guid><pubDate>Mon, 02 Dec 2024 08:18:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ezdSxCIa--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%2520%25E3%2580%258C%25E6%2596%2587%25E7%25AB%25A0%25E3%2582%2592%25E3%2581%258A%25E7%25A5%25AD%25E3%2582%258A%25E3%2581%25A3%25E3%2581%25BD%25E3%2581%258F%25E7%25BF%25BB%25E8%25A8%25B3%25E3%2581%2599%25E3%2582%258BChrome%25E6%258B%25A1%25E5%25BC%25B5%25E6%25A9%259F%25E8%2583%25BD%25E3%2580%258D%25E3%2582%2592%25E3%2583%2581%25E3%2583%25BC%25E3%2583%25A0%25E3%2581%25A7%25E9%2596%258B%25E7%2599%25BA%25E3%2581%2597%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%2520%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:susaki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc5MmVhMDA4MzEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>susaki</dc:creator></item><item><title><![CDATA[WixStudioでVeloを使う Step 34 「ライトボックスとセッションを組み合わせる」]]></title><description><![CDATA[
+ はじめに
+
+「サイトにお知らせを掲載する。でも、お知らせに掲載したところでどれだけ見て貰えるのか…」とちょっと疑問になった。なら、ライトボックスで表示する？でも、それはそれで毎回出られると邪魔なのが正直なところ。なら、1回なら…許容範囲？
+情報を半強制的に提示するならライトボックスが便利だと思う。これをVeloで制御して、更にセッションと組み合わせたら更に便利になるんではなかろうかと思って検証した記事。
+
+ 目的
+サイトにアクセスしたらライトボックスを提示する。ライトボックスは全てのページで表示するが、一度閉じたら同一のタブでは表示しないようにする。「情報は提示したいけど、閲覧の邪魔...]]></description><link>https://zenn.dev/niibori/articles/veloonwixstudio-beginner-0034</link><guid isPermaLink="true">https://zenn.dev/niibori/articles/veloonwixstudio-beginner-0034</guid><pubDate>Mon, 02 Dec 2024 07:49:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--zSQjzRox--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:WixStudio%25E3%2581%25A7Velo%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%2520Step%252034%2520%25E3%2580%258C%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2588%25E3%2583%259C%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25B9%25E3%2581%25A8%25E3%2582%25BB%25E3%2583%2583%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%2592%25E7%25B5%2584%25E3%2581%25BF%25E5%2590%2588%25E3%2582%258F%25E3%2581%259B%25E3%2582%258B%25E3%2580%258D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Niibori%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U4ZDA4Mjg3YTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Niibori</dc:creator></item><item><title><![CDATA[data属性で実現する表示・非表示アニメーションの作り方]]></title><description><![CDATA[
+ はじめに
+UI・UX向上のためにコンテンツを表示・非表示する際にアニメーションをつける。というのは良くある実装だと思います。しかし、実現する為の実装方法は一つではなく、どの方法が良いのか分からずに毎回モヤモヤが残る実装になっていました。
+data属性を使うことで、JavaScriptとCSSで責務を分けたシンプルな表示・非表示のCSSアニメーションが実装できたので紹介したいと思います。
+
+ 作成するもの
+ボタンをクリックすると、アニメーション付きで表示・非表示になる &lt;Card /&gt; コンポーネントを持つページを作成していきます。
+
+!
+今回の実装ではdialogといった...]]></description><link>https://zenn.dev/gemcook/articles/059a4c534a1368</link><guid isPermaLink="true">https://zenn.dev/gemcook/articles/059a4c534a1368</guid><pubDate>Mon, 02 Dec 2024 06:05:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--r5KNV3-N--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:data%25E5%25B1%259E%25E6%2580%25A7%25E3%2581%25A7%25E5%25AE%259F%25E7%258F%25BE%25E3%2581%2599%25E3%2582%258B%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2583%25BB%25E9%259D%259E%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2582%25A2%25E3%2583%258B%25E3%2583%25A1%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2581%25AE%25E4%25BD%259C%25E3%2582%258A%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Kantarou%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQyYzJiNzVlZTIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Gemcook%2520Tech%2520Blog%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzkzYTU2MDY5MDAuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kantarou</dc:creator></item><item><title><![CDATA[PWAマスター講座 第1部：はじめに]]></title><description><![CDATA[こんにちは、開発者の皆さん！
+PWA（Progressive Web App）の深い理解を目指した記事シリーズへようこそ！
+「PWA」という言葉が生まれたのは8年前ですが、実際にPWAに取り組んだWeb開発者はまだそれほど多くありません。このシリーズでは、PWA開発に関する情報を分かりやすく、網羅的に提供していきます。
+今回は、基礎編です。この入門記事では、PWAのキーコンセプト、可能性と限界、そして実践的な例を通して理解を深めます。PWA開発には独特の知識が必要なので、しっかりとした理論的な土台を築くことが重要です。スムーズな学習のためには、クライアントとサーバー間のやり取りを理解して...]]></description><link>https://zenn.dev/sun_asterisk/articles/72c00cf6d88e07</link><guid isPermaLink="true">https://zenn.dev/sun_asterisk/articles/72c00cf6d88e07</guid><pubDate>Mon, 02 Dec 2024 05:38:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ikLFqbtZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:PWA%25E3%2583%259E%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%25BC%25E8%25AC%259B%25E5%25BA%25A7%2520%25E7%25AC%25AC1%25E9%2583%25A8%25EF%25BC%259A%25E3%2581%25AF%25E3%2581%2598%25E3%2582%2581%25E3%2581%25AB%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2583%2587%25E3%2583%25AB%25E3%2583%2593%25E3%2583%25B3%2520%25E3%2582%25A2%25E3%2583%25AB%25E3%2583%2581%25E3%2583%25A7%25E3%2583%25A0%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M1YTU0ZjZiM2MuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Sun%252A%2520Developers%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRkNTVlY2IwMTMuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>デルビン アルチョム</dc:creator></item><item><title><![CDATA[Web Speech APIを利用した音声認識Webアプリの作成]]></title><description><![CDATA[
+ 前書き
+普段はPythonで開発しているAIエンジニアです。
+音声認識関連のタスクに取り組むにあたりちょっとしたWebアプリを作る機会があったので、簡単にまとめておこうと思います。
+取り組み時の私の状態ですが、
+
+
+
+項目
+状態
+
+
+
+
+HTML
+初めて利用。事前知識ゼロ。
+
+
+CSS
+初めて利用。事前知識ゼロ。
+
+
+JavaScript
+初めて利用。事前知識ゼロ。
+
+
+
+といった感じです。
+要するにただの素人がWebアプリを作ってみた！という感じの記事になります。
+
+ Web Speech API
+Web Speech APIというAPIを利用します。
+https://develo...]]></description><link>https://zenn.dev/goals_techblog/articles/176bcd810f49e7</link><guid isPermaLink="true">https://zenn.dev/goals_techblog/articles/176bcd810f49e7</guid><pubDate>Mon, 02 Dec 2024 04:32:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Kw78A6cu--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Web%2520Speech%2520API%25E3%2582%2592%25E5%2588%25A9%25E7%2594%25A8%25E3%2581%2597%25E3%2581%259F%25E9%259F%25B3%25E5%25A3%25B0%25E8%25AA%258D%25E8%25AD%2598Web%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2581%25AE%25E4%25BD%259C%25E6%2588%2590%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Kei%2520TAKAHATA%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY0ZmMzNjliMDYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Goals%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0Y1NLRWNucHdfaXpMRjdyRWhqZHJtelpjbnlCd1QycTBYVmZuSS1Gc1dtPXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kei TAKAHATA</dc:creator></item><item><title><![CDATA[【GSAP】GSAP Practice【#４ GSAP TO Special Properties】]]></title><description><![CDATA[
+ 【#４ GSAP TO Special Properties】
+YouTube: https://youtu.be/53LbNsB7bnE
+https://youtu.be/53LbNsB7bnE
+今回は「gsap.to」の第２引数のオブジェクトで
+よく使用する値について見ていきます。
+https://gsap.com/docs/v3/GSAP/gsap.to()
+https://gsap.com/docs/v3/Eases
+
+js/main.js
+// use a script tag or an external JS file
+document.addEventListener...]]></description><link>https://zenn.dev/web_life_ch/articles/9a48551d0981fd</link><guid isPermaLink="true">https://zenn.dev/web_life_ch/articles/9a48551d0981fd</guid><pubDate>Mon, 02 Dec 2024 04:26:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2XeC7Cu9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590GSAP%25E3%2580%2591GSAP%2520Practice%25E3%2580%2590%2523%25EF%25BC%2594%2520GSAP%2520TO%2520Special%2520Properties%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Web%2520Life%2520CH%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUl0YnZtbWNjTWFMM3dyd2x3VE5sVVZjTlhmZHEzZzF2QnJfMUJMSkJrN049czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Web Life CH</dc:creator></item><item><title><![CDATA[Hono のサンプルコードの内側を覗く]]></title><description><![CDATA[この記事は、「🎅GMOペパボ エンジニア Advent Calendar 2024」の2日目の記事です。
+昨日の記事は、@n01e0 さんの「proc_macroによる錆びつかない実装とGitHub Actionsにおけるsecret」でした。OpenAI のモデルアップデートを自動化する手法に留まらず、GitHub Actions の secret が漏洩する危険性を指摘した記事でした。怖い。
+
+ はじめに
+最近注目を集めている Web アプリケーションフレームワーク Hono。そのシンプルさと高速性、そして Web Standards に準拠した設計が多くの開発者から支持を得ています...]]></description><link>https://zenn.dev/yoshikouki/articles/inspect-hono-sample-code</link><guid isPermaLink="true">https://zenn.dev/yoshikouki/articles/inspect-hono-sample-code</guid><pubDate>Mon, 02 Dec 2024 00:30:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--kRWD6Ocp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Hono%2520%25E3%2581%25AE%25E3%2582%25B5%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AB%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2581%25AE%25E5%2586%2585%25E5%2581%25B4%25E3%2582%2592%25E8%25A6%2597%25E3%2581%258F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yoshikouki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I5YzZhMTdlMTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yoshikouki</dc:creator></item><item><title><![CDATA[オタマトーンをWebアプリで再現してみた]]></title><description><![CDATA[
+ 概要
+指をスライドし音色を奏でる電子楽器「オタマトーン」を
+Webアプリとして再現を試みたお話です。
+
+ つくったきっかけ
+僕には大好きな楽器があります。
+それは、「オタマトーン」。
+https://otamatone.jp/
+かわいい見た目からかわいい音色を奏でる、
+ちょっとくせがある楽器です。
+ひとによっては玩具とみなすかもしれませんが、
+僕はれっきとした電子楽器だと思っています。
+この子をいろんなところに連れて行き、どこでも音色を奏でたい。
+しかし、この子、意外と大きいんです。
+なかなか持ち運ぶのは難しい………
+そこで、この子のように演奏できるアプリが作れれば………と思い立ち、...]]></description><link>https://zenn.dev/neinc_tech/articles/40b318e7110424</link><guid isPermaLink="true">https://zenn.dev/neinc_tech/articles/40b318e7110424</guid><pubDate>Sun, 01 Dec 2024 15:05:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--gI-Z1UVg--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25AA%25E3%2582%25BF%25E3%2583%259E%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25B3%25E3%2582%2592Web%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2581%25A7%25E5%2586%258D%25E7%258F%25BE%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%2582%25E3%2581%2584%25E3%2581%25A6%25E3%2581%25AB%25E3%2581%2582%25E3%2582%2580%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JiMzg1NzFjZWMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:NE%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2581%25AE%25E9%2596%258B%25E7%2599%25BA%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FhMzJhZDQyMDMuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>あいてにあむ</dc:creator></item><item><title><![CDATA[ENCA 2日目: Array.prototype.sort 安定化]]></title><description><![CDATA[!
+この記事は 1人 ECMAScript Normative Changes Advent Calendar 2024 の 2 日目です。
+
+
+ 安定ソートとは
+ソート（並び替え）を実行した際に、順序が等しいものとして扱われる要素の順序が変化しないことが保証されているアルゴリズムを安定ソートと言います。
+例えば以下のようなオブジェクトの配列があり、age プロパティでソートする場合に Alice と Charlie の順序が入れ替わらないことが保証されます（昇順、降順問わず必ず Alice の次に Charlie が来る）。
+const users = [
+  { name: "Ali...]]></description><link>https://zenn.dev/pixiv/articles/adb6d7f0ebe3df</link><guid isPermaLink="true">https://zenn.dev/pixiv/articles/adb6d7f0ebe3df</guid><pubDate>Sun, 01 Dec 2024 15:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--u1KPnTJ8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ENCA%25202%25E6%2597%25A5%25E7%259B%25AE%253A%2520Array.prototype.sort%2520%25E5%25AE%2589%25E5%25AE%259A%25E5%258C%2596%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:petamoriken%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZhMDc3ZWRhZTMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:pixiv%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzMzODlhMzQ2ZjQuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>petamoriken</dc:creator></item><item><title><![CDATA[default exportとnamed exportって結局どう使い分ければ良いの？]]></title><description><![CDATA[こんにちは、atama plusというスタートアップでwebエンジニアをしているyubonです。
+atama plus Advent Calendar 2024の1日目の記事になります！
+
+ はじめに
+JavaScriptにおけるexport宣言には、default export（デフォルトエクスポート）とnamed export（名前付きエクスポート）の2種類があり、そのどちらを使うべきかについては今までもさまざまな記事で議論がなされています。
+それらの記事に書かれた内容も踏まえた上で、本記事では新たに
+
+default exportとnamed exportの思想の違い
+執筆時点（2...]]></description><link>https://zenn.dev/atamaplus/articles/compare-module-export</link><guid isPermaLink="true">https://zenn.dev/atamaplus/articles/compare-module-export</guid><pubDate>Sun, 01 Dec 2024 15:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--45vQRmVb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:default%2520export%25E3%2581%25A8named%2520export%25E3%2581%25A3%25E3%2581%25A6%25E7%25B5%2590%25E5%25B1%2580%25E3%2581%25A9%25E3%2581%2586%25E4%25BD%25BF%25E3%2581%2584%25E5%2588%2586%25E3%2581%2591%25E3%2582%258C%25E3%2581%25B0%25E8%2589%25AF%25E3%2581%2584%25E3%2581%25AE%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:yub0n%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RjOTM3M2I1YWUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:atama%2520plus%2520techblog%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg2YjM3MGZkMjkuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yub0n</dc:creator></item><item><title><![CDATA[TypeScriptの特別な型たちを徹底解説！`unknown`、`any`、`void`、`never`の使い方と選び方]]></title><description><![CDATA[
+ TypeScriptの特別な型たちを徹底解説！unknown、any、void、neverの使い方と選び方
+TypeScriptには、特別な役割を持つ型としてunknown、any、void、neverがあります。それぞれの型を理解することで、より安全で堅牢なコードを書くことが可能です。本記事では、これらの型の概要、具体的な使い方、実務での使用例について簡潔に説明します。
+
+ 型の概要（ざっくりと理解）
+
+ フローチャートでの比較
+下記のフローチャートは、どの型を選ぶべきかを視覚的に説明しています。コードの状況や用途に応じて適切な型を選ぶ際の参考にしてください。
+
+
+unknown:...]]></description><link>https://zenn.dev/crebo_tech/articles/article-0016-20241201</link><guid isPermaLink="true">https://zenn.dev/crebo_tech/articles/article-0016-20241201</guid><pubDate>Sun, 01 Dec 2024 13:11:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Kel_tsVh--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%25E3%2581%25AE%25E7%2589%25B9%25E5%2588%25A5%25E3%2581%25AA%25E5%259E%258B%25E3%2581%259F%25E3%2581%25A1%25E3%2582%2592%25E5%25BE%25B9%25E5%25BA%2595%25E8%25A7%25A3%25E8%25AA%25AC%25EF%25BC%2581%2560unknown%2560%25E3%2580%2581%2560any%2560%25E3%2580%2581%2560void%2560%25E3%2580%2581%2560never%2560%25E3%2581%25AE%25E4%25BD%25BF%25E3%2581%2584%25E6%2596%25B9...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2581%258F%25E3%2582%258A%25E3%2581%25BC%25E3%2583%25BC%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLmRldi9pbWFnZXMvZGVmYXVsdC1wdWJsaWNhdGlvbi1hdmF0YXIucG5n%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2581%258F%25E3%2582%258A%25E3%2581%25BC%25E3%2583%25BC%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2IxNzlhZTFjZGIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>株式会社くりぼー</dc:creator></item><item><title><![CDATA[ClusterScriptの読み方]]></title><description><![CDATA[この記事は Cluster Script Advent Calendar 2024 の1日目の記事です。
+
+ はじめに
+こんにちは Smith です、クラスター株式会社のプラットフォーム事業部でプロダクトマネージャーをやっています。
+クラスター株式会社では、バーチャル空間向けのコンテンツを作ったり誰かが作った様々なコンテンツを楽しめる cluster というサービスを提供しています。
+
+ cluster とスクリプト
+cluster ではコンテンツをつくるためのツールとして Cluster Creator Kit (CCK) を提供しています。
+CCK は Unity プロジェクトにイン...]]></description><link>https://zenn.dev/smith/articles/reading-clusterscript</link><guid isPermaLink="true">https://zenn.dev/smith/articles/reading-clusterscript</guid><pubDate>Sun, 01 Dec 2024 01:52:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--DxwaGROC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:ClusterScript%25E3%2581%25AE%25E8%25AA%25AD%25E3%2581%25BF%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Smith%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NiZTVkNTA3YjEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Smith</dc:creator></item></channel></rss>

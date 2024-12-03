@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Java」のフィード]]></title><description><![CDATA[Zennのトピック「Java」のRSSフィードです]]></description><link>https://zenn.dev/topics/java</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/5c47bb8423.png</url><title>Zennの「Java」のフィード</title><link>https://zenn.dev/topics/java</link></image><generator>zenn.dev</generator><lastBuildDate>Tue, 03 Dec 2024 12:04:25 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/java/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[【Unity】Androidのローカル通知実装と審査対応]]></title><description><![CDATA[この記事はambr, Inc. Advent Calendar 2024の3日目の記事です。
+こんにちは！ambr所属Unityエンジニアのtsyk5です。
+今回は、UnityのAndroidアプリにおけるローカル通知の実装方法と審査対応について解説していきます。
+
+ はじめに
+Unityでのローカル通知は、Unity Mobile Notificationsを使用することで実装可能です。
+しかし、OSのネイティブ機能を利用して多機能な通知を実現したい場合、JavaもしくはKotlinでの実装が必要になります。
+とは言え、OSの機能を全て挙げるとキリがないので、今回はサンプルプロジェクト...]]></description><link>https://zenn.dev/ambr_inc/articles/7c70b349a5eb27</link><guid isPermaLink="true">https://zenn.dev/ambr_inc/articles/7c70b349a5eb27</guid><pubDate>Tue, 03 Dec 2024 03:14:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--XZWA0DZJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Unity%25E3%2580%2591Android%25E3%2581%25AE%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25AB%25E3%2583%25AB%25E9%2580%259A%25E7%259F%25A5%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%25A8%25E5%25AF%25A9%25E6%259F%25BB%25E5%25AF%25BE%25E5%25BF%259C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:tsyk5%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y0ZThkOTNiZDMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:ambr%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzMyNmY5OTgzYzAuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tsyk5</dc:creator></item><item><title><![CDATA[JavaParserによるコード構文解析とシグネチャの言語化を考える]]></title><description><![CDATA[本記事は、GMOメディア株式会社 Advent Calendar 2024の2日目の記事です。
+
+ 初めに
+今回は、JavaParserを使用してメソッド単位でLLMの学習に必要な情報を抽出することを目的としています。
+大規模なJavaコードベースを扱う際、全体像を把握するのは容易ではありません。JavaParserを活用し、コード構造を視覚化することで、LLMによる解説を通じてより深い洞察を得る方法を模索してみました。また、コード理解はプロジェクト成功に不可欠な要素であるため、実用的な活用方法を探求することが今回の取り組みのきっかけとなりました。
+（LLMは今回触れません）
+https...]]></description><link>https://zenn.dev/gmomedia/articles/9e0786d65d1ead</link><guid isPermaLink="true">https://zenn.dev/gmomedia/articles/9e0786d65d1ead</guid><pubDate>Mon, 02 Dec 2024 23:10:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--TULu5HzU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaParser%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258B%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E6%25A7%258B%25E6%2596%2587%25E8%25A7%25A3%25E6%259E%2590%25E3%2581%25A8%25E3%2582%25B7%25E3%2582%25B0%25E3%2583%258D%25E3%2583%2581%25E3%2583%25A3%25E3%2581%25AE%25E8%25A8%2580%25E8%25AA%259E%25E5%258C%2596%25E3%2582%2592%25E8%2580%2583%25E3%2581%2588%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:tomoya-k31%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzMzOGEzNzc5MTMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:GMO%25E3%2583%25A1%25E3%2583%2587%25E3%2582%25A3%25E3%2582%25A2%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0ZGs0dThuZ1FHaWdjS1BvU0o5bVhrRi1RWEY0MjlMdUFyanhJbnZzQT1zOTYtYw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tomoya-k31</dc:creator></item><item><title><![CDATA[Java Puzzlers 小噺 No.11]]></title><description><![CDATA[!
+この記事は BABY JOB Advent Calendar 2024 の 3 日目の記事です。
+
+
+ 概要
+Java Puzzlers[1][2] という本で面白い問題を見つけて、Java の仕様を改めて調べてみたという感じの記事です。
+この記事では、「Puzzle 11: The Last Laugh」を取り上げます。
+!
+記事のタイトルに No.11 と書いていますが、上記の通り、問題番号のことですので、No.1 ~ 10 についてはまだ書いていないですし、No.11 以外の問題について取り上げるかはわかりません。[3]
+
+
+ きっかけ
+たまたま、図書館で見かけて、読んだら面白...]]></description><link>https://zenn.dev/babyjob/articles/mackey0225-java-puzzlers-11</link><guid isPermaLink="true">https://zenn.dev/babyjob/articles/mackey0225-java-puzzlers-11</guid><pubDate>Mon, 02 Dec 2024 15:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--63tWdzvQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:Java%2520Puzzlers%2520%25E5%25B0%258F%25E5%2599%25BA%2520No.11%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:mackey0225%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNhODk4NDRkMDEuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:BABY%2520JOB%2520%2520%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FkNTM5ZWRiYWEuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mackey0225</dc:creator></item><item><title><![CDATA[Javaの`-able`と`-tor`の違いを図解しながら考えた]]></title><description><![CDATA[JavaのインターフェースであるIterable-Iterator/Comparable-Compatorの存在を初めて知った時、私はかなり混乱してしまいました。その原因は-able/torというサフィックスに惑わされたからです。命名規則は似ているのに、設計思想は似ていなかった。
+私はIterable/Iteratorの関係から、XXX-ableに対応するメソッドを提供する目的でXXX-torがあると勘違いをしていました。ですが、Comparableの場合、実際のメソッドはcompareTo()が担っています。すると「Comparatorって何なの？」となってしまったのです。
+この混乱を...]]></description><link>https://zenn.dev/yo__shi/articles/e5904fd94c07e3</link><guid isPermaLink="true">https://zenn.dev/yo__shi/articles/e5904fd94c07e3</guid><pubDate>Mon, 02 Dec 2024 06:54:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--oclEnQGQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java%25E3%2581%25AE%2560-able%2560%25E3%2581%25A8%2560-tor%2560%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%25E3%2582%2592%25E5%259B%25B3%25E8%25A7%25A3%25E3%2581%2597%25E3%2581%25AA%25E3%2581%258C%25E3%2582%2589%25E8%2580%2583%25E3%2581%2588%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yoshi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I4NzJjMTM1NDUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yoshi</dc:creator></item><item><title><![CDATA[【Java】KMP法]]></title><description><![CDATA[この記事は、「新・明解Javaで学ぶアルゴリズムとデータ構造」を読んで学んだことを、個人的な備忘録目的でまとめています。
+ただし、本を参考にして自分なりに構成やコードを変更しているためご注意ください。
+アルゴリズムの詳細や解説は是非参考書をお手に取って読まれてください。
+
+【リンク紹介】
+・Javaで学ぶアルゴリズムとデータ構造
+・これまで書いたシリーズ記事一覧
+
+
+ KMP法
+package chap07;
+
+import java.util.Scanner;
+
+public class KnuthMorrisPatternMatch {
+	
+	//--- KMP法による文字列探索 -...]]></description><link>https://zenn.dev/youken/articles/740b361e958aca</link><guid isPermaLink="true">https://zenn.dev/youken/articles/740b361e958aca</guid><pubDate>Mon, 02 Dec 2024 00:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--mRhW9C-W--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:%25E3%2580%2590Java%25E3%2580%2591KMP%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:youken%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M1Mzc2MDk0YWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>youken</dc:creator></item><item><title><![CDATA[【Java】マージソート]]></title><description><![CDATA[この記事は、「新・明解Javaで学ぶアルゴリズムとデータ構造」を読んで学んだことを、個人的な備忘録目的でまとめています。
+ただし、本を参考にして自分なりに構成やコードを変更しているためご注意ください。
+アルゴリズムの詳細や解説は是非参考書をお手に取って読まれてください。
+
+【リンク紹介】
+・Javaで学ぶアルゴリズムとデータ構造
+・これまで書いたシリーズ記事一覧
+
+
+ マージソート
+package chap06;
+
+import java.util.Scanner;
+
+public class MergeSort {
+	
+	// 変数の宣言
+	static int[] buff;    ...]]></description><link>https://zenn.dev/youken/articles/a5ee5373999090</link><guid isPermaLink="true">https://zenn.dev/youken/articles/a5ee5373999090</guid><pubDate>Sun, 01 Dec 2024 03:22:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4TcZuvAH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Java%25E3%2580%2591%25E3%2583%259E%25E3%2583%25BC%25E3%2582%25B8%25E3%2582%25BD%25E3%2583%25BC%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:youken%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M1Mzc2MDk0YWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>youken</dc:creator></item><item><title><![CDATA[【Java】力任せ法]]></title><description><![CDATA[この記事は、「新・明解Javaで学ぶアルゴリズムとデータ構造」を読んで学んだことを、個人的な備忘録目的でまとめています。
+ただし、本を参考にして自分なりに構成やコードを変更しているためご注意ください。
+アルゴリズムの詳細や解説は是非参考書をお手に取って読まれてください。
+
+【リンク紹介】
+・Javaで学ぶアルゴリズムとデータ構造
+・これまで書いたシリーズ記事一覧
+
+
+ タイトル
+package chap07;
+
+import java.util.Scanner;
+
+//--- 力任せ法による文字列探索 ---//
+public class BruteForceMethodMatch {
+...]]></description><link>https://zenn.dev/youken/articles/c9cfee68ac3f58</link><guid isPermaLink="true">https://zenn.dev/youken/articles/c9cfee68ac3f58</guid><pubDate>Sat, 30 Nov 2024 00:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--v5XDOehX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Java%25E3%2580%2591%25E5%258A%259B%25E4%25BB%25BB%25E3%2581%259B%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:youken%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M1Mzc2MDk0YWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>youken</dc:creator></item><item><title><![CDATA[Goで高パフォーマンスなAPIを作成する]]></title><description><![CDATA[Go（Golang）は、Googleによって設計された静的型付けのコンパイル型プログラミング言語です。スケーラブルで高パフォーマンスなアプリケーションの要求に応えるために作られたため、API開発に最適な選択肢となります。この記事では、Goを紹介し、他の人気言語に対する利点を強調し、高品質なAPIを作成する実践的な例を示し、EchoAPIを使ったデバッグ方法を解説し、最後に重要なポイントをまとめます。
+
+ Goの紹介
+
+Goはそのシンプルさとパフォーマンスで知られています。Cに似た構文を持ちながら、PythonやRubyに匹敵する効率性とモダンな機能を備えたGoは、ソフトウェア開発者コミュ...]]></description><link>https://zenn.dev/kasuna/articles/d2b94ad069894b</link><guid isPermaLink="true">https://zenn.dev/kasuna/articles/d2b94ad069894b</guid><pubDate>Fri, 29 Nov 2024 15:10:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--C-goyXG2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Go%25E3%2581%25A7%25E9%25AB%2598%25E3%2583%2591%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25BC%25E3%2583%259E%25E3%2583%25B3%25E3%2582%25B9%25E3%2581%25AAAPI%25E3%2582%2592%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kasuna%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2Rhcmsvay5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kasuna</dc:creator></item><item><title><![CDATA[Chromebookで環境構築：Java]]></title><description><![CDATA[
+ はじめに
+本記事は、Chromebook で Java の開発環境を作る過程を説明していくものです。VSCode の拡張機能を使いつつ、なるべく手軽に導入できる方向を目指します。
+
+ 前提となる条件
+本記事は、Chromebook に Linux 開発環境が構築済みであることが前提となります。また Linux 側で VSCode がインストールされた状態で、日本語化や GitHub との連携といった諸々の設定が済んだ状態を想定し、話を進めていきます。
+!
+このあたりは調べると 丁寧にわかりやすく説明してくれる記事が たくさん見つかると思います。そのため本記事では省略させていただきます...]]></description><link>https://zenn.dev/nonaka101/articles/setup-java-on-chromebook</link><guid isPermaLink="true">https://zenn.dev/nonaka101/articles/setup-java-on-chromebook</guid><pubDate>Fri, 29 Nov 2024 08:08:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lk3hftVH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Chromebook%25E3%2581%25A7%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%25EF%25BC%259AJava%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Nonaka%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY4YWMyOGJiZWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Nonaka</dc:creator></item><item><title><![CDATA[テストデータの項目が多い時にはYAMLを使ってみよう]]></title><description><![CDATA[
+ はじめに
+テストデータの項目が多い場合、コードの保守性や可読性に課題を感じたことはありませんか。
+この記事では、YAMLを活用してテストデータを外部化し、これらの問題を解決する方法を紹介します。
+具体例を交えつつ、以下の課題に焦点を当てます。
+
+コードが肥大化し、テストの意図が伝わりにくい
+データ変更時の負担が大きい
+複雑なデータを管理するのが難しい
+
+サンプルコード全体はこちらのリポジトリから確認できます。
+
+ テストデータの項目が多いときの課題
+テストデータの項目が多いときの課題に詳しく触れるために、コードの例を用意しました。
+以下は、名前、年齢、メールアドレス、住所、電話番号、...]]></description><link>https://zenn.dev/choimake/articles/db02c9b9adc4e0</link><guid isPermaLink="true">https://zenn.dev/choimake/articles/db02c9b9adc4e0</guid><pubDate>Fri, 29 Nov 2024 06:59:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--yOYoTpMU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2581%25AE%25E9%25A0%2585%25E7%259B%25AE%25E3%2581%258C%25E5%25A4%259A%25E3%2581%2584%25E6%2599%2582%25E3%2581%25AB%25E3%2581%25AFYAML%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%2588%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:choimake%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MwYTQzYjhhZjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>choimake</dc:creator></item><item><title><![CDATA[【Java】単純挿入ソート]]></title><description><![CDATA[この記事は、「新・明解Javaで学ぶアルゴリズムとデータ構造」を読んで学んだことを、個人的な備忘録目的でまとめています。
+ただし、本を参考にして自分なりに構成やコードを変更しているためご注意ください。
+アルゴリズムの詳細や解説は是非参考書をお手に取って読まれてください。
+
+【リンク紹介】
+・Javaで学ぶアルゴリズムとデータ構造
+・これまで書いたシリーズ記事一覧
+
+
+ 単純挿入ソート
+package chap06;
+
+import java.util.Scanner;
+
+//--- 単純挿入ソート ---//
+public class InsertionSort {
+	
+	static ...]]></description><link>https://zenn.dev/youken/articles/d3daa301ea8e54</link><guid isPermaLink="true">https://zenn.dev/youken/articles/d3daa301ea8e54</guid><pubDate>Fri, 29 Nov 2024 00:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--juhSBH_R--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Java%25E3%2580%2591%25E5%258D%2598%25E7%25B4%2594%25E6%258C%25BF%25E5%2585%25A5%25E3%2582%25BD%25E3%2583%25BC%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:youken%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M1Mzc2MDk0YWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>youken</dc:creator></item><item><title><![CDATA[【Java】バブルソート]]></title><description><![CDATA[この記事は、「新・明解Javaで学ぶアルゴリズムとデータ構造」を読んで学んだことを、個人的な備忘録目的でまとめています。
+ただし、本を参考にして自分なりに構成やコードを変更しているためご注意ください。
+アルゴリズムの詳細や解説は是非参考書をお手に取って読まれてください。
+
+【リンク紹介】
+・Javaで学ぶアルゴリズムとデータ構造
+・これまで書いたシリーズ記事一覧
+
+
+ バブルソート１
+package chap06;
+
+import java.util.Scanner;
+
+//--- バブルソート（基本形） ---//
+public class BubbleSort {
+	
+	//--- ...]]></description><link>https://zenn.dev/youken/articles/698005299b2ac0</link><guid isPermaLink="true">https://zenn.dev/youken/articles/698005299b2ac0</guid><pubDate>Thu, 28 Nov 2024 00:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--tcauZiQ0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Java%25E3%2580%2591%25E3%2583%2590%25E3%2583%2596%25E3%2583%25AB%25E3%2582%25BD%25E3%2583%25BC%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:youken%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M1Mzc2MDk0YWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>youken</dc:creator></item><item><title><![CDATA[【Java】ハノイの塔]]></title><description><![CDATA[この記事は、「新・明解Javaで学ぶアルゴリズムとデータ構造」を読んで学んだことを、個人的な備忘録目的でまとめています。
+ただし、本を参考にして自分なりに構成やコードを変更しているためご注意ください。
+アルゴリズムの詳細や解説は是非参考書をお手に取って読まれてください。
+
+【リンク紹介】
+・Javaで学ぶアルゴリズムとデータ構造
+・これまで書いたシリーズ記事一覧
+
+
+ ハノイの塔
+package chap05;
+
+import java.util.Scanner;
+
+public class Hanoi {
+	
+	//--- no枚の円盤をx軸からy軸へ移動 ---//
+	static ...]]></description><link>https://zenn.dev/youken/articles/b06bf7431f8d1f</link><guid isPermaLink="true">https://zenn.dev/youken/articles/b06bf7431f8d1f</guid><pubDate>Wed, 27 Nov 2024 00:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--XvAYZA2l--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Java%25E3%2580%2591%25E3%2583%258F%25E3%2583%258E%25E3%2582%25A4%25E3%2581%25AE%25E5%25A1%2594%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:youken%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M1Mzc2MDk0YWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>youken</dc:creator></item><item><title><![CDATA[【Java】ユークリッドの互除法]]></title><description><![CDATA[この記事は、「新・明解Javaで学ぶアルゴリズムとデータ構造」を読んで学んだことを、個人的な備忘録目的でまとめています。
+ただし、本を参考にして自分なりに構成やコードを変更しているためご注意ください。
+アルゴリズムの詳細や解説は是非参考書をお手に取って読まれてください。
+
+【リンク紹介】
+・Javaで学ぶアルゴリズムとデータ構造
+・これまで書いたシリーズ記事一覧
+
+
+ ユークリッドの互除法
+package chap05;
+
+import java.util.Scanner;
+
+// ユークリッドの互除法によって最大公約数を求める
+public class EuclidGCD {
+	
+	/...]]></description><link>https://zenn.dev/youken/articles/6d778b5a3e0ff8</link><guid isPermaLink="true">https://zenn.dev/youken/articles/6d778b5a3e0ff8</guid><pubDate>Tue, 26 Nov 2024 00:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--UF3IUZyx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Java%25E3%2580%2591%25E3%2583%25A6%25E3%2583%25BC%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2583%25E3%2583%2589%25E3%2581%25AE%25E4%25BA%2592%25E9%2599%25A4%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:youken%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M1Mzc2MDk0YWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>youken</dc:creator></item><item><title><![CDATA[Java の DBUnit を使ったテストを Testcontainers で実行してみる]]></title><description><![CDATA[
+ はじめに
+最近チームで Javaエンジニアのための ソフトウェアテスト実践入門　～自動化と生成AIによるモダンなテスト技法～ を読んでいます。
+その中で取り扱われていた DBUnit を以前学習した Testcontainers で動かしてみたいなと思ったのでやってみました。
+https://gihyo.jp/book/2024/978-4-297-14435-7
+
+ 目次
+第1章　ソフトウェアテストの全体像
+1.1　ソフトウェアテストの概要
+1.1.1　ソフトウェアテストの基本的な考え方
+テストの定義と本書のスコープ
+「ソフトウェアテストの7原則」
+ソフトウェアテストの目的と意義
+...]]></description><link>https://zenn.dev/rescuenow/articles/466e9b197312ba</link><guid isPermaLink="true">https://zenn.dev/rescuenow/articles/466e9b197312ba</guid><pubDate>Mon, 25 Nov 2024 03:51:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dzyCo4uc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java%2520%25E3%2581%25AE%2520DBUnit%2520%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%259F%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E3%2582%2592%2520Testcontainers%2520%25E3%2581%25A7%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:takeuchi_kazuya%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E0NWI1N2NlZmMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%25AC%25E3%2582%25B9%25E3%2582%25AD%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%258A%25E3%2582%25A6%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNmZGM2NTEzMmUuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takeuchi_kazuya</dc:creator></item><item><title><![CDATA[【Java】階乗値]]></title><description><![CDATA[この記事は、「新・明解Javaで学ぶアルゴリズムとデータ構造」を読んで学んだことを、個人的な備忘録目的でまとめています。
+ただし、本を参考にして自分なりに構成やコードを変更しているためご注意ください。
+アルゴリズムの詳細や解説は是非参考書をお手に取って読まれてください。
+
+【リンク紹介】
+・Javaで学ぶアルゴリズムとデータ構造
+・これまで書いたシリーズ記事一覧
+
+
+ 階乗値
+package chap05;
+
+import java.util.Scanner;
+
+public class Factorial {
+	
+	//--- 非負の整数値nの階乗値を返却 ---//
+	static ...]]></description><link>https://zenn.dev/youken/articles/0153b0220c5550</link><guid isPermaLink="true">https://zenn.dev/youken/articles/0153b0220c5550</guid><pubDate>Mon, 25 Nov 2024 00:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4PtRao0n--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:%25E3%2580%2590Java%25E3%2580%2591%25E9%259A%258E%25E4%25B9%2597%25E5%2580%25A4%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:youken%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M1Mzc2MDk0YWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>youken</dc:creator></item><item><title><![CDATA[JavaでClass(クラス)を使いこなそう]]></title><description><![CDATA[
+ はじめに
+Javaを勉強しててすごく思うのは、Classの概念が難しすぎる。それは、アクセス修飾子とか、InstanceとClassの違いとか、本当にいろいろな要素が絡んでいることから来るのだと思う。しかしこの要素をまとめて、かつ簡単に解説しているサイトはなかった。だからその解説をやってみたいというのが趣旨。
+
+ Classとその周辺の用語ついて
+Class(クラス)は、キャラ設定で考えるとわかりやすい。
+スマブラを考えてみよう。それぞれのキャラクターには、名前とか、ダメージ率とか、攻撃力とか、そういった値が細かく設定されている。こういった設定されたステータスのことをField(フィ...]]></description><link>https://zenn.dev/taketooon/articles/388927e557d968</link><guid isPermaLink="true">https://zenn.dev/taketooon/articles/388927e557d968</guid><pubDate>Sun, 24 Nov 2024 15:48:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--PCwbgE16--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java%25E3%2581%25A7Class%2528%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25B9%2529%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2584%25E3%2581%2593%25E3%2581%25AA%25E3%2581%259D%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:taketooon%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUxtNXd1MXhCSlVRclJob19aUHVvYWhwQTdaNGFpZGtQNzRfY0NDZ0Ztd0w9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>taketooon</dc:creator></item><item><title><![CDATA[１度やってみて！Webアプリ開発でのプロンプトエンジニアリング]]></title><description><![CDATA[
+こんにちは、Naotoです。
+表題の件ですが、ざっと経緯だけ説明をさせてください。
+私が参画しているプロジェクトでChatGPTにプログラムコードやプロジェクト内の相談をしていたところ、
+
+同僚：「もしかしてプロンプトエンジニアリングをされてます？」
+私：「そんな大層なものじゃないけど、AIにマクロ組んでもらってますよ」
+同僚：「そのやり方を手順書におこしてほしい!!」
+私：「独学だから教本と合わせて確認してね(笑)」
+
+複数のプロジェクトや研修でご一緒した方に毎回聞かれるので、いっそオープンなところで記事を書こうと考えた次第です。
+
+
+ 読者の方々に質問です
+プロンプトエンジニアリン...]]></description><link>https://zenn.dev/naoto_z_matsuo/articles/fa52c3efa65593</link><guid isPermaLink="true">https://zenn.dev/naoto_z_matsuo/articles/fa52c3efa65593</guid><pubDate>Sun, 24 Nov 2024 15:46:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--57RojzCh--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25EF%25BC%2591%25E5%25BA%25A6%25E3%2582%2584%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%25A6%25EF%25BC%2581Web%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E9%2596%258B%25E7%2599%25BA%25E3%2581%25A7%25E3%2581%25AE%25E3%2583%2597%25E3%2583%25AD%25E3%2583%25B3%25E3%2583%2597%25E3%2583%2588%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%25E3%2583%25AA%25E3%2583%25B3%25E3%2582%25B0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Naoto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAyZTVjMTZmZDQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Naoto</dc:creator></item><item><title><![CDATA[TDD グリーンバーにするための 3 つの戦略]]></title><description><![CDATA[
+ はじめに
+ソフトウェア開発の設計手法として広く認知されている TDD ですが、きちんと勉強したことがなかったので、TDD の原典とも言えるテスト駆動開発を読みました。
+https://books.rakuten.co.jp/rb/14869144/
+「テストを先に書くもの」くらいの浅い認識しかなかったので、とても学びになりました。
+この記事では、先にテストを書いてレッドバーにしたあと、それをグリーンバーにするための戦略についてシンプルなコードを使って書いてみます。
+
+ お題
+今回のサンプルでは、正の整数を表現する PositiveInt クラスがすでに実装されており、それに偶数判定を...]]></description><link>https://zenn.dev/junjujun/articles/c37c788190e564</link><guid isPermaLink="true">https://zenn.dev/junjujun/articles/c37c788190e564</guid><pubDate>Sun, 24 Nov 2024 14:42:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--axQgMqSL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TDD%2520%25E3%2582%25B0%25E3%2583%25AA%25E3%2583%25BC%25E3%2583%25B3%25E3%2583%2590%25E3%2583%25BC%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%25203%2520%25E3%2581%25A4%25E3%2581%25AE%25E6%2588%25A6%25E7%2595%25A5%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Jun%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzEyMWU3MDRjYWUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Jun</dc:creator></item><item><title><![CDATA[Gradle を使った Java のビルド環境構築]]></title><description><![CDATA[
+ これを書く背景
+学習のためにシンプルな Java 開発環境が欲しくなったが、ビルドツールってどうやって使えるようにするんだっけ？と躓いてしまった。
+Java で何か作ろうとするとき、普段は Spring Initializer を使ってプロジェクトの初期化をしているので、ビルドツールを手動でインストールして～ということをしてこなかったからかもしれません。
+今さらこんなことで躓くなんて、正直恥ずかしい気持ちになったが、ログに残す良い機会とも思い、ここにその方法を残しておきます。
+
+ 環境
+WSL2
+仕事は Mac だが家の PC は Windows。妻も使うことがあるので（こういう人っ...]]></description><link>https://zenn.dev/junjujun/articles/1a8b7c6ad30b2f</link><guid isPermaLink="true">https://zenn.dev/junjujun/articles/1a8b7c6ad30b2f</guid><pubDate>Sun, 24 Nov 2024 10:07:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--CINWcsK3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Gradle%2520%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%259F%2520Java%2520%25E3%2581%25AE%25E3%2583%2593%25E3%2583%25AB%25E3%2583%2589%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Jun%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzEyMWU3MDRjYWUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Jun</dc:creator></item></channel></rss>

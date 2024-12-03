@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Tue, 03 Dec 2024 07:00:19 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[【AIエージェント入門】LangChain・LangGraphによるエージェント開発　その②LangChain基礎知識]]></title><description><![CDATA[どうも。@TM_AIbuchoことおっさんです。
+SES企業の社長が開発経験ゼロからAIを学習しています。
+是非とも暖かく、時には厳しく見守っていただけると嬉しいです。
+
+ はじめに
+AIエージェントの定義は明確ではないですが、一般的には特定の目的に応じて自律的に目標を設定し、タスクを実行していくシステムをAIエージェントといわれています。
+LangChainによるAIエージェントを開発してみよう。
+開発環境はGoogleColab、言語はPythonを使用しています。
+以下書籍を参考にしています。
+LangChainとLangGraphによるRAG・AIエージェント［実践］入門 (エン...]]></description><link>https://zenn.dev/tm_aibucho/articles/ddb9346b8c719a</link><guid isPermaLink="true">https://zenn.dev/tm_aibucho/articles/ddb9346b8c719a</guid><pubDate>Tue, 03 Dec 2024 04:34:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--iZB_HLaU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590AI%25E3%2582%25A8%25E3%2583%25BC%25E3%2582%25B8%25E3%2582%25A7%25E3%2583%25B3%25E3%2583%2588%25E5%2585%25A5%25E9%2596%2580%25E3%2580%2591LangChain%25E3%2583%25BBLangGraph%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258B%25E3%2582%25A8%25E3%2583%25BC%25E3%2582%25B8%25E3%2582%25A7%25E3%2583%25B3%25E3%2583%2588%25E9%2596%258B%25E7%2599%25BA%25E3%2580%2580%25E3%2581%259D%25E3%2581%25AE%25E2%2591%25A1LangChain%25E5%259F%25BA%25E7%25A4%258E%25E7%259F%25A5%25E8%25AD%2598%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:TM.AI%25E9%2583%25A8%25E9%2595%25B7%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzlmODM1OWU0MDAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>TM.AI部長</dc:creator></item><item><title><![CDATA[ジオコーディングのライブラリを試す]]></title><description><![CDATA[
+ 概要
+ジオコーディングのライブラリを試す機会がありましたので、備忘録です。
+
+ 対象
+今回は、以下のような文字列を対象にしてみます。
+
+岡山市旧御野郡金山寺村。現在の岡山市金山寺。市の中心部からは直線で北方約一〇キロを隔てた金山の中腹にある。
+
+
+ ツール1: Jageocoder - A Python Japanese geocoder
+まず以下の「Jageocoder」を試します。
+https://t-sagara.github.io/jageocoder/
+ソースコードの例は以下です。
+import json
+import jageocoder
+jageocoder.init(...]]></description><link>https://zenn.dev/nakamura196/articles/fdbeb0e6899296</link><guid isPermaLink="true">https://zenn.dev/nakamura196/articles/fdbeb0e6899296</guid><pubDate>Tue, 03 Dec 2024 03:38:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--HMlTQsqj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B8%25E3%2582%25AA%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2587%25E3%2582%25A3%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%25AE%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%25E3%2582%2592%25E8%25A9%25A6%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nakamura196%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pkd3BpX1gzTWIzV3VqTnVnV2tPTlJlU3VsNFNTN1BNMWlPQm9LRm5JPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nakamura196</dc:creator></item><item><title><![CDATA[Flaskで簡易的にAPIサーバーを立ち上げる]]></title><description><![CDATA[Flaskを使って簡単なAPIサーバーを構築します。FlaskはPythonで簡単にAPIサーバーを構築できる軽量なフレームワークです。以下のコードを保存し、実行すればAPIが動作し、ブラウザやAPIクライアントからレスポンスを確認できます。
+
+ シンプルな1エンドポイントのAPI
+
+single_endpoint.py
+from flask import Flask, jsonify
+
+app = Flask(__name__)
+
+@app.route('/api/endpoint', methods=['GET'])
+def single_endpoint():
+    return...]]></description><link>https://zenn.dev/fkaku/articles/34a05af0feaf07</link><guid isPermaLink="true">https://zenn.dev/fkaku/articles/34a05af0feaf07</guid><pubDate>Tue, 03 Dec 2024 02:15:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0Rn5fWt1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Flask%25E3%2581%25A7%25E7%25B0%25A1%25E6%2598%2593%25E7%259A%2584%25E3%2581%25ABAPI%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2582%2592%25E7%25AB%258B%25E3%2581%25A1%25E4%25B8%258A%25E3%2581%2592%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Taishi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2QyODg1ZDMzZGIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Taishi</dc:creator></item><item><title><![CDATA[写真から短歌を生成するAIを作ってみた]]></title><description><![CDATA[
+ はじめに
+SREホールディングス株式会社データサイエンティストの恒松です。Python、画像処理を用いた開発をしています。今回は、Image Captioning(画像キャプション生成)を用いて写真から短歌を生成するAIを作ってみました。
+
+ 生成結果
+
+西荻窪のピンクの象の写真から、「天井から　白き象たち　舞い降りて　軽やかに添う　店の夢模様」という短歌が生成されました。
+
+ 使用した技術
+
+Image Captioning
+
+LLavaを用いたキャプション生成
+
+
+翻訳
+
+Google 翻訳
+Python deep_translator
+
+
+
+大規模言語モデル
+
+Open AI ...]]></description><link>https://zenn.dev/sre_holdings/articles/47ca62f0aec61e</link><guid isPermaLink="true">https://zenn.dev/sre_holdings/articles/47ca62f0aec61e</guid><pubDate>Tue, 03 Dec 2024 01:41:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ewuXcc59--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2586%2599%25E7%259C%259F%25E3%2581%258B%25E3%2582%2589%25E7%259F%25AD%25E6%25AD%258C%25E3%2582%2592%25E7%2594%259F%25E6%2588%2590%25E3%2581%2599%25E3%2582%258BAI%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:ktsu%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZlYWJhYWQ3ZjEuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:SRE%2520Holdings%2520%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M4YWE3NjQ3Y2EuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ktsu</dc:creator></item><item><title><![CDATA[Geminiへの構造化データの入出力制御]]></title><description><![CDATA[
+ 概要
+Gemini を用いた少サイズデータを用いたコンテンツ生成に焦点を当て、構造化データ（CSV、JSON など）を効果的に活用する方法をPythonを用いて解説します。Gemini が持つ大規模トークン処理能力のメリットを活かした、より効率的なコンテンツ生成手法を提案します。
+
+ 序論
+AI が急速に進化する時代において、大量のデータを分析・活用する能力は極めて重要です。RAG 環境はこうしたタスクに理想的ですが、より少量のデータでコンテンツ生成を行う必要があるシナリオもあります。Gemini は、大量のトークンを処理できるため、有望な解決策を提供します。プロンプトとアップロード...]]></description><link>https://zenn.dev/google_cloud_jp/articles/d36d133828564a</link><guid isPermaLink="true">https://zenn.dev/google_cloud_jp/articles/d36d133828564a</guid><pubDate>Tue, 03 Dec 2024 00:54:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4J-1L4bJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Gemini%25E3%2581%25B8%25E3%2581%25AE%25E6%25A7%258B%25E9%2580%25A0%25E5%258C%2596%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2581%25AE%25E5%2585%25A5%25E5%2587%25BA%25E5%258A%259B%25E5%2588%25B6%25E5%25BE%25A1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Tanaike%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA1OTIyZmJmYTMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Google%2520Cloud%2520Japan%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0ZGVOZE5VYnN4RUtiUWIxcGp0Q216cE5SYlhTWVBnblhidk5nWndhX2VLRGc9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Tanaike</dc:creator></item><item><title><![CDATA[drf-spectacularでDRFのGenericForeignKeyをOpenAPIスキーマに反映する]]></title><description><![CDATA[
+ はじめに
+こんにちは！　atama plusでWebエンジニアをしているnaoshiです。
+この記事はatama plus Advent Calendar 2024の2日目の記事です。
+弊社では、Django REST Framework（DRF）をバックエンドに採用しており、drf-spectacular を用いてOpenAPIスキーマを生成しています。
+APIスキーマを生成する際に、GenericForeignKeyを持つフィールドがスキーマに反映されないという状況がありました。
+あまり遭遇することのない状況かもしれませんが、本記事では、その対処法を簡単にご紹介します。
+
+ 課題...]]></description><link>https://zenn.dev/tanimuranaomich/articles/generic-field-and-drf-spectacular</link><guid isPermaLink="true">https://zenn.dev/tanimuranaomich/articles/generic-field-and-drf-spectacular</guid><pubDate>Tue, 03 Dec 2024 00:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--l_Yu24LT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:drf-spectacular%25E3%2581%25A7DRF%25E3%2581%25AEGenericForeignKey%25E3%2582%2592OpenAPI%25E3%2582%25B9%25E3%2582%25AD%25E3%2583%25BC%25E3%2583%259E%25E3%2581%25AB%25E5%258F%258D%25E6%2598%25A0%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:naoshi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2QxNmU0ZDZjYWMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>naoshi</dc:creator></item><item><title><![CDATA[mypy pluginでオレオレルールを作ろう]]></title><description><![CDATA[こんにちは、こんばんは、おはようございます。LAPRASでエンジニアのような何かをしているdenzow です。この記事はLAPRAS Advent Calendar 2024 2日目の記事です。
+
+ mypyによる型チェック
+
+Pythonで開発している環境なら最近はたいていmypyで型チェックを入れているのではないでしょうか。これがあるだけで本番にデプロイしてから思っても見なかった型エラーで死ぬことを防いでくれますが、標準のチェックルールに加えて開発チーム独自のルールを組み込んでいく方法を簡単に紹介します。
+
+ mypy plugin
+mypyにはplugin機構があります。mypy....]]></description><link>https://zenn.dev/denzow/articles/a4f14e26fd498c</link><guid isPermaLink="true">https://zenn.dev/denzow/articles/a4f14e26fd498c</guid><pubDate>Mon, 02 Dec 2024 16:10:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--MP8oMad6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:mypy%2520plugin%25E3%2581%25A7%25E3%2582%25AA%25E3%2583%25AC%25E3%2582%25AA%25E3%2583%25AC%25E3%2583%25AB%25E3%2583%25BC%25E3%2583%25AB%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258D%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:denzow%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNmNjZkYzcyYzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>denzow</dc:creator></item><item><title><![CDATA[Turning Functionを用いたポリゴン形状マッチング]]></title><description><![CDATA[
+こんにちは、トグルホールディングスのAIエンジニアの中村です！
+トグルホールディングスエンジニアアドベントカレンダーの3日目の記事です！
+業務で地図ポリゴンデータの形状分析をする機会があったので、その際に用いた手法を紹介します！
+
+ はじめに
+形状の類似性を評価する際、多くの場合、データを画像に変換してから画像認識の手法（SIFT/SURFなどの特徴点検出や輪郭抽出など）を適用します。
+しかし、元々座標データとして存在するポリゴンの場合、画像変換を介さない直接的なアプローチの方が効率的です。
+本記事では、ポリゴンの座標データをそのまま分析できるTurning Functionを紹介しま...]]></description><link>https://zenn.dev/shosampo/articles/turning-function</link><guid isPermaLink="true">https://zenn.dev/shosampo/articles/turning-function</guid><pubDate>Mon, 02 Dec 2024 15:00:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2jDZ7jys--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Turning%2520Function%25E3%2582%2592%25E7%2594%25A8%25E3%2581%2584%25E3%2581%259F%25E3%2583%259D%25E3%2583%25AA%25E3%2582%25B4%25E3%2583%25B3%25E5%25BD%25A2%25E7%258A%25B6%25E3%2583%259E%25E3%2583%2583%25E3%2583%2581%25E3%2583%25B3%25E3%2582%25B0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ShoSampo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhlNWNjN2I5NjguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ShoSampo</dc:creator></item><item><title><![CDATA[TypeScriptでTensorflowモデルを手元で動かした]]></title><description><![CDATA[この投稿は、2024年JINSのアドベントカレンダー3日目の記事です。👓
+JOIN記事に憧れがあったので前半は自己紹介、後半は表題の件について紹介します。
+
+ 自己紹介
+10月にJINSにJOINしました、ITデジタル部のいしざき（@ishizak1111）です。
+前職では主にPythonで製品開発を含めたデータエンジニアリングをしていました。
+現在は主に購入/保証システムの刷新やデータ移行を担当しています。
+今後は海外店舗のシステム導入にも携わる予定なので、ドメイン知識や新旧システム仕様のインプットを頑張っています。
+
+ 動機
+自己紹介で述べてしまいましたが、現在JINSはシステム刷新...]]></description><link>https://zenn.dev/jins/articles/d2fd3806c10b89</link><guid isPermaLink="true">https://zenn.dev/jins/articles/d2fd3806c10b89</guid><pubDate>Mon, 02 Dec 2024 15:00:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dZKG9KTQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%25E3%2581%25A7Tensorflow%25E3%2583%25A2%25E3%2583%2587%25E3%2583%25AB%25E3%2582%2592%25E6%2589%258B%25E5%2585%2583%25E3%2581%25A7%25E5%258B%2595%25E3%2581%258B%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%2584%25E3%2581%2597%25E3%2581%2596%25E3%2581%258D%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdlMjlhN2FiYWQuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:JINS%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZmNmQ2ZGU4ZjUuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>いしざき</dc:creator></item><item><title><![CDATA[天鳳の牌譜から牌山を再現する(Python版)]]></title><description><![CDATA[
+ 概要
+http://integral001.blog.fc2.com/blog-entry-42.html
+integral001氏によるCのコードをPythonに移植した。
+ついでにざっくりと解説を加えた。
+
+ 牌山を再現するコード
+牌譜のシードから牌山を生成するコードが以下。
+ちなみに、シードとは牌譜の&lt;SHUFFLE seed="mt19937ar-sha512-n288-base64,XXXXXX&gt;というタグのXXXXXXの部分である。
+
+yama_generator.py
+import base64
+import hashlib
+import struct
+
+f...]]></description><link>https://zenn.dev/zurukumo/articles/c293c42dc5cefc</link><guid isPermaLink="true">https://zenn.dev/zurukumo/articles/c293c42dc5cefc</guid><pubDate>Mon, 02 Dec 2024 11:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6mj6WbBU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%25A4%25A9%25E9%25B3%25B3%25E3%2581%25AE%25E7%2589%258C%25E8%25AD%259C%25E3%2581%258B%25E3%2582%2589%25E7%2589%258C%25E5%25B1%25B1%25E3%2582%2592%25E5%2586%258D%25E7%258F%25BE%25E3%2581%2599%25E3%2582%258B%2528Python%25E7%2589%2588%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A4%25E3%2582%258B%25E3%2581%258F%25E3%2582%2582%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhkMjQyOWEzZjguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>つるくも</dc:creator></item><item><title><![CDATA[行動認識について調べてみた]]></title><description><![CDATA[
+ 1. はじめに
+STARAIインターンの橋詰です！
+行動認識について調べる機会があったので、モデルのアーキテクチャについて簡単にまとめてみました。
+
+ 1.1. 行動認識とは？
+行動認識（Human Action Recognition）とは、動画内の人物が取る行動（e.g. 静止、手を振る、走る）を分類するタスクです。
+
+行動認識タスクの例[1]
+
+ 1.2. 行動認識モデルの特徴
+あるフレームにおける行動を分類するとき、そのフレーム（静止画）だけでなく前後の情報も活用する方が性能が上がることが期待されます。そのため、動画の情報を余すところなく活用するためには、空間的な特徴だけでな...]]></description><link>https://zenn.dev/starai/articles/63d1e3a2516b70</link><guid isPermaLink="true">https://zenn.dev/starai/articles/63d1e3a2516b70</guid><pubDate>Mon, 02 Dec 2024 10:28:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--kypY-KP4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%25A1%258C%25E5%258B%2595%25E8%25AA%258D%25E8%25AD%2598%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E8%25AA%25BF%25E3%2581%25B9%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%2520STAR%2520AI%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI3YmI3MTFhYjIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>株式会社 STAR AI</dc:creator></item><item><title><![CDATA[PyTorch 3Dを使ってカメラ位置推定をしてみた]]></title><description><![CDATA[
+ Start position
+
+
+ Target Position
+
+
+ Result
+
+#https://github.com/facebookresearch/pytorch3d/blob/main/docs/tutorials/camera_position_optimization_with_differentiable_rendering.ipynb を参考にしてます。
+]]></description><link>https://zenn.dev/navigation_surg/articles/482bf785c39d3e</link><guid isPermaLink="true">https://zenn.dev/navigation_surg/articles/482bf785c39d3e</guid><pubDate>Mon, 02 Dec 2024 09:45:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vbNQTGM_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:PyTorch%25203D%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2582%25AB%25E3%2583%25A1%25E3%2583%25A9%25E4%25BD%258D%25E7%25BD%25AE%25E6%258E%25A8%25E5%25AE%259A%25E3%2582%2592%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%258B%25A1%25E5%25BC%25B5%25E7%258F%25BE%25E5%25AE%259F%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%259F%25E6%2589%258B%25E8%25A1%2593%25E3%2583%258A%25E3%2583%2593%25E3%2582%25B2%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%2592...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZlMWI0MGM1NDcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>拡張現実を使った手術ナビゲーションを研究する-路傍のいし‐</dc:creator></item><item><title><![CDATA[［AtCoder］ABC-381｜A - 11/22 String]]></title><description><![CDATA[
+ 設問ページ
+
+🔗ABC-381 A - 11/22 String
+
+
+
+ 提出結果
+def getInt():
+    return int(input())
+
+
+def getString():
+    return input()
+
+
+def main():
+    N = getInt()
+    S = getString()
+
+    r = False
+
+    t = S.split("/")
+    if len(t) == 2:
+        s1, s2 = t
+
+        if s1 == s2 == "":
+            r = True
+ ...]]></description><link>https://zenn.dev/hyperdb/articles/918557184de529</link><guid isPermaLink="true">https://zenn.dev/hyperdb/articles/918557184de529</guid><pubDate>Mon, 02 Dec 2024 09:34:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--kjP_nJk2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25EF%25BC%25BBAtCoder%25EF%25BC%25BDABC-381%25EF%25BD%259CA%2520-%252011%252F22%2520String%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AF%25E3%2581%2584%25E3%2581%25B1%25E3%2581%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhODJkODgwMzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>はいぱぁ</dc:creator></item><item><title><![CDATA[［AtCoder］ABC-381｜B - 1122 String]]></title><description><![CDATA[
+ 設問ページ
+
+🔗ABC-381 B - 1122 String
+
+
+
+ 提出結果
+def getString():
+    return input()
+
+
+def main():
+    S = list(getString())
+
+    r = False
+    if len(S) % 2 == 0 and len(set(S)) == len(S) // 2:
+        a = [S[i] for i in range(0, len(S), 2)]
+        b = [S[i] for i in range(1, len(S), 2)]
+
+        if ...]]></description><link>https://zenn.dev/hyperdb/articles/35a692d45f7b25</link><guid isPermaLink="true">https://zenn.dev/hyperdb/articles/35a692d45f7b25</guid><pubDate>Mon, 02 Dec 2024 09:34:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--NxJmAyYd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25EF%25BC%25BBAtCoder%25EF%25BC%25BDABC-381%25EF%25BD%259CB%2520-%25201122%2520String%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AF%25E3%2581%2584%25E3%2581%25B1%25E3%2581%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhODJkODgwMzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>はいぱぁ</dc:creator></item><item><title><![CDATA[［AtCoder］ABC-381｜C - 11/22 Substring]]></title><description><![CDATA[
+ 設問ページ
+
+🔗ABC-381 C - 11/22 Substring
+
+
+
+ 提出結果
+def getInt():
+    return int(input())
+
+
+def getString():
+    return input()
+
+
+def main():
+    N = getInt()
+    S = getString()
+
+    ch = S[0]
+    cnt = 1
+    d = []
+    for i in range(1, N):
+        if S[i] != ch:
+            d.append([ch, cnt])
+    ...]]></description><link>https://zenn.dev/hyperdb/articles/298c0a5d1c759c</link><guid isPermaLink="true">https://zenn.dev/hyperdb/articles/298c0a5d1c759c</guid><pubDate>Mon, 02 Dec 2024 09:34:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--geFr7F2f--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25EF%25BC%25BBAtCoder%25EF%25BC%25BDABC-381%25EF%25BD%259CC%2520-%252011%252F22%2520Substring%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AF%25E3%2581%2584%25E3%2581%25B1%25E3%2581%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhODJkODgwMzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>はいぱぁ</dc:creator></item><item><title><![CDATA[[Python] Pygameで迷路を作ってみた]]></title><description><![CDATA[
+ Pygameで迷路を作ってみた
+PygameはPythonのモジュールセットで、
+コードにimportするだけで、簡単にゲームを作ることができます。
+今回作った迷路の画面はこんなかんじです。
+右上のカウントごとにAIが進化して迷路を解くようにしたいと考えています
+（まだAIがポンコツで、迷路は解けていません）
+
+
+ コードはこちら
+READMEにgifもあるので動いている様子を見ることができます。
+https://github.com/ykmkn/python/tree/main/ga/maze
+
+ ざっくりとやっていること
+ゲームが動いている間、下記部分の無限ループが回っていて、
+...]]></description><link>https://zenn.dev/ykmkn/articles/0596a0aa72d2f3</link><guid isPermaLink="true">https://zenn.dev/ykmkn/articles/0596a0aa72d2f3</guid><pubDate>Mon, 02 Dec 2024 09:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--s2t9C0gW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BPython%255D%2520Pygame%25E3%2581%25A7%25E8%25BF%25B7%25E8%25B7%25AF%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yukimikan%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzliNzExMDJlOTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yukimikan</dc:creator></item><item><title><![CDATA[<pingscope>pingの実行結果の単純化と画像出力するPythonパッケージを開発]]></title><description><![CDATA[
+ pingとは
+
+ 目的
+
+通信相手との疎通確認と応答速度の計測
+
+
+ コマンド
+ping www.google.com -n 5
+
+ 実行結果
+www.google.com [142.250.207.4]に ping を送信しています 32 バイトのデータ:
+142.250.207.4 からの応答: バイト数 =32 時間 =10ms TTL=119
+142.250.207.4 からの応答: バイト数 =32 時間 =11ms TTL=119
+142.250.207.4 からの応答: バイト数 =32 時間 =11ms TTL=119
+142.250.207.4 からの応答: バイト...]]></description><link>https://zenn.dev/mskz_3110/articles/fa7c7e1d418feb</link><guid isPermaLink="true">https://zenn.dev/mskz_3110/articles/fa7c7e1d418feb</guid><pubDate>Mon, 02 Dec 2024 08:39:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bLFHA61S--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%253Cpingscope%253Eping%25E3%2581%25AE%25E5%25AE%259F%25E8%25A1%258C%25E7%25B5%2590%25E6%259E%259C%25E3%2581%25AE%25E5%258D%2598%25E7%25B4%2594%25E5%258C%2596%25E3%2581%25A8%25E7%2594%25BB%25E5%2583%258F%25E5%2587%25BA%25E5%258A%259B%25E3%2581%2599%25E3%2582%258BPython%25E3%2583%2591%25E3%2583%2583%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B8%25E3%2582%2592%25E9%2596%258B%25E7%2599%25BA%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mskz-3110%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSmNSTGg0SFl4emYxSkpobXBTX2pfa1Q2RGJZZ183aXZzTzFPMDhHR3c2bzBfQjJ3UT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mskz-3110</dc:creator></item><item><title><![CDATA[Neovim で Python ファイルを開いた時に、自動的に適切な仮想環境で LSP 起動、linter / formatter 適用する]]></title><description><![CDATA[本記事は SimpleForm Advent Calendar 2024 の 2 日目の記事です。
+1 日目の記事では、筆者が dotfiles を管理し始めたきっかけや使っているツールなどを紹介しました。
+本日の記事では、dotfiles で管理している Neovim の設定のこだわりの一つである Python での開発を便利にする設定を紹介します。
+具体的には、Python ファイルを開いた時に自動的に適切な仮想環境で LSP を起動し、linter と formatter も適切な仮想環境にインストールされているものを使うようにする設定について書きます。
+
+ 解決したかった課題
+業...]]></description><link>https://zenn.dev/simpleform_blog/articles/20241202-neovim_python_lsp</link><guid isPermaLink="true">https://zenn.dev/simpleform_blog/articles/20241202-neovim_python_lsp</guid><pubDate>Mon, 02 Dec 2024 08:30:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Gt-GI9KS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Neovim%2520%25E3%2581%25A7%2520Python%2520%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2592%25E9%2596%258B%25E3%2581%2584%25E3%2581%259F%25E6%2599%2582%25E3%2581%25AB%25E3%2580%2581%25E8%2587%25AA%25E5%258B%2595%25E7%259A%2584%25E3%2581%25AB%25E9%2581%25A9%25E5%2588%2587%25E3%2581%25AA%25E4%25BB%25AE%25E6%2583%25B3%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25A7%2520LSP%2520%25E8%25B5%25B7%25E5%258B%2595%25E3%2580%2581linter%2520%252F%2520f...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:inuatsu%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U2YTZmNDIxOGUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:SimpleForm%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2d1ZVpfSXpoN0lNalB3YXY5aXdNVUUtQkpKYjdlVWJDeHRtUU9ac2c9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>inuatsu</dc:creator></item><item><title><![CDATA[【AIエージェント入門】LangChain・LangGraphによるエージェント開発　その①複数のモデルを使ってみる]]></title><description><![CDATA[どうも。@TM_AIbuchoことおっさんです。
+SES企業の社長が開発経験ゼロからAIを学習しています。
+是非とも暖かく、時には厳しく見守っていただけると嬉しいです。
+
+ はじめに AIエージェントとは
+AIエージェントの定義は明確ではないですが、一般的には特定の目的に応じて自律的に目標を設定し、タスクを実行していくシステムをAIエージェントといわれています。
+LangChainによるAIエージェント開発を目指していきます。
+以下書籍を参考にしています。
+LangChainとLangGraphによるRAG・AIエージェント［実践］入門 (エンジニア選書) 単行本（ソフトカバー） – 2...]]></description><link>https://zenn.dev/tm_aibucho/articles/d595b414fe56fe</link><guid isPermaLink="true">https://zenn.dev/tm_aibucho/articles/d595b414fe56fe</guid><pubDate>Mon, 02 Dec 2024 04:44:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--73QIZHfB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590AI%25E3%2582%25A8%25E3%2583%25BC%25E3%2582%25B8%25E3%2582%25A7%25E3%2583%25B3%25E3%2583%2588%25E5%2585%25A5%25E9%2596%2580%25E3%2580%2591LangChain%25E3%2583%25BBLangGraph%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258B%25E3%2582%25A8%25E3%2583%25BC%25E3%2582%25B8%25E3%2582%25A7%25E3%2583%25B3%25E3%2583%2588%25E9%2596%258B%25E7%2599%25BA%25E3%2580%2580%25E3%2581%259D%25E3%2581%25AE%25E2%2591%25A0%25E8%25A4%2587%25E6%2595%25B0%25E3%2581%25AE%25E3%2583%25A2%25E3%2583%2587%25E3%2583%25AB%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:TM.AI%25E9%2583%25A8%25E9%2595%25B7%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzlmODM1OWU0MDAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>TM.AI部長</dc:creator></item><item><title><![CDATA[Python標準ライブラリを使いこなす 初級編 ~二重でfor文書いたりしてませんか?~]]></title><description><![CDATA[
+ 概要
+Pythonは標準ライブラリで便利な機能を多数用意しています。
+
+しかし、きちんと使いこなせている人は少ないのではないでしょうか。可読性の高いコードを書くことができるように標準ライブラリを使った方法に書き直す問題を作りました。
+
+ 問題
+
+ 二重ループ
+
+ 悪い例
+for i in range(100):
+    for j in range(1000):
+        # some process
+        pass
+二重ループを上の例のように書くと実際の処理の部分のネストが深くなってしまいます。Pythonはネストを4文字分のスペースで表現するので、ネストが深くなっ...]]></description><link>https://zenn.dev/mutex_inc/articles/b29779b3abff27</link><guid isPermaLink="true">https://zenn.dev/mutex_inc/articles/b29779b3abff27</guid><pubDate>Mon, 02 Dec 2024 02:50:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--JsddYnom--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E6%25A8%2599%25E6%25BA%2596%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2584%25E3%2581%2593%25E3%2581%25AA%25E3%2581%2599%2520%25E5%2588%259D%25E7%25B4%259A%25E7%25B7%25A8%2520%7E%25E4%25BA%258C%25E9%2587%258D%25E3%2581%25A7for%25E6%2596%2587%25E6%259B%25B8%25E3%2581%2584%25E3%2581%259F%25E3%2582%258A%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BE%25E3%2581%259B%25E3%2582%2593%25E3%2581%258B%253F%7E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:hodhodhod%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q0NTJhOTUzYmMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:mutex%2520Official%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2UxYWQxYjUwMTUuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hodhodhod</dc:creator></item></channel></rss>
