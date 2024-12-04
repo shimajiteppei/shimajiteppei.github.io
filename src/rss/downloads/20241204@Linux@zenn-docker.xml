@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Docker」のフィード]]></title><description><![CDATA[Zennのトピック「Docker」のRSSフィードです]]></description><link>https://zenn.dev/topics/docker</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/01c7f20365.png</url><title>Zennの「Docker」のフィード</title><link>https://zenn.dev/topics/docker</link></image><generator>zenn.dev</generator><lastBuildDate>Wed, 04 Dec 2024 03:13:01 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/docker/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[AWS Lambda Layer追加時の注意点とエラー対策]]></title><description><![CDATA[おぐまです。
+Lambda Layerを追加する際には、開発環境と実行環境の違いやランタイムの互換性など、様々な点に注意が必要です。これらを適切に管理しないとimportの段階でLambda関数が正常に動作しないなど、出鼻くじかれてきついです笑
+
+ 🤔 問題の原因
+Lambda Layer追加時に発生する主な問題の原因は以下の通りです。
+
+開発環境とLambda実行環境の違い
+ランタイムやバージョンの不一致
+アーキテクチャの不一致（x86_64 vs arm64）
+レイヤーのサイズ制限違反
+依存関係の競合
+ネイティブバイナリの互換性問題
+
+!
+今回は、1. 開発環境とLambda実行環境...]]></description><link>https://zenn.dev/ap_com/articles/aws-lambda-layer-fix</link><guid isPermaLink="true">https://zenn.dev/ap_com/articles/aws-lambda-layer-fix</guid><pubDate>Wed, 04 Dec 2024 03:00:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--uETUZ8Ed--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AWS%2520Lambda%2520Layer%25E8%25BF%25BD%25E5%258A%25A0%25E6%2599%2582%25E3%2581%25AE%25E6%25B3%25A8%25E6%2584%258F%25E7%2582%25B9%25E3%2581%25A8%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E5%25AF%25BE%25E7%25AD%2596%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:9mak%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA5N2NlMjBhZWIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2582%25A8%25E3%2583%25BC%25E3%2583%2594%25E3%2583%25BC%25E3%2582%25B3%25E3%2583%259F%25E3%2583%25A5%25E3%2583%258B%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%25BA%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U5YTdiNjViNmIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>9mak</dc:creator></item><item><title><![CDATA[Mbtilesファイルを生成してMapLibre（Web）で地図を表示する方法（M3環境）]]></title><description><![CDATA[
+ はじめに
+地理空間データをWebアプリケーションで活用するためには、ベクトルタイルの生成と配信が重要です。この記事では、Appleチップ環境（M1/M2/M3）を想定し、以下の流れを解説します。
+
+
+.mbtilesファイルの生成
+タイルサーバーの起動（Dockerを使用）
+MapLibreでの地図表示
+
+Appleチップに一部ツールがネイティブに対応していない場合がありそうなので、今回はDockerを使用することで環境をセットアップします。
+一部はこちらの記事と重複する内容があるため、併せて参考にしてください。
+
+ 使用するツール
+
+
+tippecanoe: GeoJSONデータを...]]></description><link>https://zenn.dev/sabakuma/articles/4ba065b7a0a52f</link><guid isPermaLink="true">https://zenn.dev/sabakuma/articles/4ba065b7a0a52f</guid><pubDate>Wed, 04 Dec 2024 01:13:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--gGrDkGXk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Mbtiles%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2592%25E7%2594%259F%25E6%2588%2590%25E3%2581%2597%25E3%2581%25A6MapLibre%25EF%25BC%2588Web%25EF%25BC%2589%25E3%2581%25A7%25E5%259C%25B0%25E5%259B%25B3%25E3%2582%2592%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%25EF%25BC%2588M3%25E7%2592%25B0%25E5%25A2%2583%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Ashmap%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJiZTdiZTdkOTUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Ashmap</dc:creator></item><item><title><![CDATA[XserverVPSでDifyとFirecrawlを連携させる方法]]></title><description><![CDATA[今回は、XserverVPSにインストールしたDifyにFirecrawlを連携させる方法を解説します。この設定により、ウェブサイトの情報を自動で収集し、AIチャットボットの知識ベースとして活用できるようになります。
+
+ 前提条件
+必要なスペック(Xserverプラン)
+
+vCPU：4コア以上
+メモリ：4GB以上
+NVMe SSD：100GB以上
+
+事前準備
+
+XserverVPSの契約が完了していること
+Difyがすでにインストールされていること
+SSHでの接続方法を理解していること
+
+XserverのVPSコンソールはコピー＆ペーストが制限されているため、SSHクライアント（Tera...]]></description><link>https://zenn.dev/toki_mwc/articles/ffa40c77b83180</link><guid isPermaLink="true">https://zenn.dev/toki_mwc/articles/ffa40c77b83180</guid><pubDate>Tue, 03 Dec 2024 13:43:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--HCb6krV0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:XserverVPS%25E3%2581%25A7Dify%25E3%2581%25A8Firecrawl%25E3%2582%2592%25E9%2580%25A3%25E6%2590%25BA%25E3%2581%2595%25E3%2581%259B%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:toki_mwc%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzViNzRiNzczNGIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>toki_mwc</dc:creator></item><item><title><![CDATA[AWS Lambda のローカル開発環境の整備]]></title><description><![CDATA[本記事は SimpleForm Advent Calendar 2024 の 3 日目の記事です。
+シンプルフォームで開発しているプロダクト SimpleCheck では、AWS Lambda を多数利用しています。
+Lambda はサーバの管理不要で処理を実行でき運用は便利ですが、ローカル環境での開発環境を整備するのがやや大変です。
+今回は、シンプルフォームで Lambda の開発環境をどのように整備しているかを共有します。
+
+ この記事で言及すること、言及しないこと
+
+ 言及すること
+
+
+Docker Compose を使ってローカル環境で Lambda を起動、実行できる環境を整備...]]></description><link>https://zenn.dev/simpleform_blog/articles/20241203-aws_lambda_local_dev</link><guid isPermaLink="true">https://zenn.dev/simpleform_blog/articles/20241203-aws_lambda_local_dev</guid><pubDate>Tue, 03 Dec 2024 11:27:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ReLUMK0L--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AWS%2520Lambda%2520%25E3%2581%25AE%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25AB%25E3%2583%25AB%25E9%2596%258B%25E7%2599%25BA%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25AE%25E6%2595%25B4%25E5%2582%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:inuatsu%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U2YTZmNDIxOGUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:SimpleForm%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2d1ZVpfSXpoN0lNalB3YXY5aXdNVUUtQkpKYjdlVWJDeHRtUU9ac2c9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>inuatsu</dc:creator></item><item><title><![CDATA[Dockerを使う上で知っていると捗るコマンドやテクニック - ストレージ圧迫対処編]]></title><description><![CDATA[Dockerを使っていると、「これどうやるんだろう？」と思ったり、調べても情報がなかなかまとまっていなかったりすることがあります。そこで、自分用のメモ書きとして、Dockerのよく使うコマンドや、困ったときの対処法、事前に設定しておくべきポイントなどをまとめてみました。この記事が、皆さんの Dockerライフ を少しでも便利にするお役に立てれば幸いです。
+この記事では、Dockerを使っていると良く遭遇するストレージ圧迫問題の対処方法をご紹介します。
+
+
+ 使用していない Docker オブジェクトの削除
+Dockerを使用していると、イメージやビルドキャッシュなどがどんどん蓄積され、ス...]]></description><link>https://zenn.dev/ryoma_dq/articles/20241203-docker-tips</link><guid isPermaLink="true">https://zenn.dev/ryoma_dq/articles/20241203-docker-tips</guid><pubDate>Tue, 03 Dec 2024 09:37:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--shkO-h3N--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%25E4%25B8%258A%25E3%2581%25A7%25E7%259F%25A5%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%2584%25E3%2582%258B%25E3%2581%25A8%25E6%258D%2597%25E3%2582%258B%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2582%2584%25E3%2583%2586%25E3%2582%25AF%25E3%2583%258B%25E3%2583%2583%25E3%2582%25AF%2520-%2520%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25AC%25E3%2583%25BC%25E3%2582%25B8%25E5%259C%25A7%25E8%25BF%25AB%25E5%25AF%25BE%25E5%2587%25A6%25E7%25B7%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E9%258F%2591%25E6%25B5%2581%25E9%25A6%25AC%2520%252F%2520Yabusame%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg1NmUxMjIxYjMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>鏑流馬 / Yabusame</dc:creator></item><item><title><![CDATA[TypedSQLはとても便利だが、ビルド時にDB接続が必要になって困った話]]></title><description><![CDATA[
+ はじめに
+Prismaを使い始めて久しいですが、集計画面などはどうしても複雑なクエリを投げる必要があり苦渋の思いで$queryRawを使いがちです。
+ですが、最近以下の記事を見かけました。
+https://zenn.dev/tockn/articles/0e6eac6220e072
+こんな便利なものがあるのかと使い始めたのですがビルド時にハマり、その後長いこと使用を諦めていたのですが、この度なんとか解決できたので記事にします。途中試行錯誤しながらのチャレンジでしたが、終わってみればあっさりとした解決方法でした。
+
+ 前提条件
+以下のような作りのプロジェクトがありました。
+
+モノレポ構...]]></description><link>https://zenn.dev/nekoniki/articles/7966d9852c29b0</link><guid isPermaLink="true">https://zenn.dev/nekoniki/articles/7966d9852c29b0</guid><pubDate>Tue, 03 Dec 2024 06:45:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--XsVSJzix--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypedSQL%25E3%2581%25AF%25E3%2581%25A8%25E3%2581%25A6%25E3%2582%2582%25E4%25BE%25BF%25E5%2588%25A9%25E3%2581%25A0%25E3%2581%258C%25E3%2580%2581%25E3%2583%2593%25E3%2583%25AB%25E3%2583%2589%25E6%2599%2582%25E3%2581%25ABDB%25E6%258E%25A5%25E7%25B6%259A%25E3%2581%258C%25E5%25BF%2585%25E8%25A6%2581%25E3%2581%25AB%25E3%2581%25AA%25E3%2581%25A3%25E3%2581%25A6%25E5%259B%25B0%25E3%2581%25A3%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nekoniki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y1OGNmMzMwMTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nekoniki</dc:creator></item><item><title><![CDATA[PhpStormを使用中にホストの9000番ポートのポートマッピング設定があるDockerコンテナを立ち上げるとエラーになる]]></title><description><![CDATA[
+ 問題
+PhpStormを使用中に、ホストの9000番ポートのポートマッピング設定があるDockerコンテナを立ち上げると、以下のようなエラーが発生します。
+Error response from daemon: Ports are not available: exposing port TCP 127.0.0.1:9000 -&gt; 0.0.0.0:0: listen tcp 127.0.0.1:9000: bind: An attempt was made to access a socket in a way forbidden by its access permissio...]]></description><link>https://zenn.dev/kihirakota/articles/port-9000-is-not-available-when-using-phpstorm</link><guid isPermaLink="true">https://zenn.dev/kihirakota/articles/port-9000-is-not-available-when-using-phpstorm</guid><pubDate>Mon, 02 Dec 2024 11:26:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--NkY3R5Px--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:PhpStorm%25E3%2582%2592%25E4%25BD%25BF%25E7%2594%25A8%25E4%25B8%25AD%25E3%2581%25AB%25E3%2583%259B%25E3%2582%25B9%25E3%2583%2588%25E3%2581%25AE9000%25E7%2595%25AA%25E3%2583%259D%25E3%2583%25BC%25E3%2583%2588%25E3%2581%25AE%25E3%2583%259D%25E3%2583%25BC%25E3%2583%2588%25E3%2583%259E%25E3%2583%2583%25E3%2583%2594%25E3%2583%25B3%25E3%2582%25B0%25E8%25A8%25AD%25E5%25AE%259A%25E3%2581%258C%25E3%2581%2582%25E3%2582%258BDocker%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2586%25E3%2583%258A%25E3%2582%2592%25E7%25AB%258B%25E3%2581%25A1%25E4%25B8%258A%25E3%2581%2592%25E3%2582%258B%25E3%2581%25A8%25E3%2582%25A8...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kihira%2520Kota%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSTRhRmVfNUp0NnVQRVd5Z0JZeVRzQWxtT3Y0MzMyNUNKbnY3MWZicG8tdmJKUz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kihira Kota</dc:creator></item><item><title><![CDATA[Envoy入門（その５）Auth0 で RBAC]]></title><description><![CDATA[
+ はじめに
+マイクロサービスやWeb API界隈では、サービス間のネットワークの制御をライブラリではなく、プロキシのコンテナをサイドカーとして使うのだとか。そのデファクトスタンダード的な立ち位置なのが Envoy さん。
+（その４）のおわりに で匂わせた
+
+今回、Lua を取り上げたのは、Auth0 で RBAC（Role-Based Access Control）を設定して、JWT に反映された内容に応じた認可を Envoy で実現したかったためです。
+
+をやります。
+
+ やってみた
+
+ 環境構築
+
+ Envoy
+（その３）の環境構築と同じリポジトリを git clone して頂いて...]]></description><link>https://zenn.dev/robon/articles/611cb5f284f611</link><guid isPermaLink="true">https://zenn.dev/robon/articles/611cb5f284f611</guid><pubDate>Mon, 02 Dec 2024 09:37:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--RotJEnDj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Envoy%25E5%2585%25A5%25E9%2596%2580%25EF%25BC%2588%25E3%2581%259D%25E3%2581%25AE%25EF%25BC%2595%25EF%25BC%2589Auth0%2520%25E3%2581%25A7%2520RBAC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E8%258D%2592%25E6%259C%25A8%2520%25E5%25B2%25B3%25E5%25A4%25AB%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q3NDIzMjE0NTUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BEROBON%25E3%2581%25AE%25E6%258A%2580%25E8%25A1%2593%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YUpBSVQ1V0NaaVBRUmF6TkswS1dFVkEybkRJMGdaN1lvMjdJdDIyQT1zOTYtYw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>荒木 岳夫</dc:creator></item><item><title><![CDATA[docker images none をまとめて消す]]></title><description><![CDATA[
+ 気が付いたらnoneだらけ
+開発が進んできたある日、
+何気にdocker imagesをたたいてみると、
+
+(;´･ω･) なんやこれ
+気が付いたら &lt;none&gt; まみれに
+・・・掃除しよ
+ヾ(・ω&lt;)ﾉ"　三三三●　ⅱⅲ コロコロ♪
+------------------- ↓ 本題はここから ↓-------------------
+
+ noneイメージ確認
+docker imagesで一覧をとってきてdocker rmiで撤去の流れ
+imagesのフィルターには -f "dangling=true"を使う
+ docker images -f "dangling=...]]></description><link>https://zenn.dev/dozo/articles/8e48e315f39ffc</link><guid isPermaLink="true">https://zenn.dev/dozo/articles/8e48e315f39ffc</guid><pubDate>Mon, 02 Dec 2024 00:13:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jcnRxRXd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:docker%2520images%2520none%2520%25E3%2582%2592%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2581%25A6%25E6%25B6%2588%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:dozo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvZC5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>dozo</dc:creator></item><item><title><![CDATA[Claude DesktopでMCPサーバーエラーへの対処（Windows環境）]]></title><description><![CDATA[
+ はじめに
+Keitoさんの動画を見ながら、Claude DesktopでMCPデビューを目指しましたが、私のWindows環境だと「Could not attach to MCP server」というエラーに遭遇。その解消方法を紹介します。
+https://youtu.be/eHrp9hKZed8?si=Ktp2G2C6sOebBVyU
+
+ 困った個所
+・Claude desktopのsettingsのDeveloperの個所にはbrave-searchが出てくる
+・でもチャットで使えないし、トンカチマークみたいな2 MCP tools availableが出てこない
+
+
+ 原因
+・...]]></description><link>https://zenn.dev/channnnsm/articles/6fc50a86a1e03e</link><guid isPermaLink="true">https://zenn.dev/channnnsm/articles/6fc50a86a1e03e</guid><pubDate>Sun, 01 Dec 2024 16:26:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hiSyurD0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Claude%2520Desktop%25E3%2581%25A7MCP%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E3%2581%25B8%25E3%2581%25AE%25E5%25AF%25BE%25E5%2587%25A6%25EF%25BC%2588Windows%25E7%2592%25B0%25E5%25A2%2583%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:channnnsm%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJkODNiNmZmODUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>channnnsm</dc:creator></item><item><title><![CDATA[git commit前にdockerコンテナ内でlintを強制する方法]]></title><description><![CDATA[
+ git commit前にdockerコンテナ内でlintを強制する方法
+構造上husky, lint-stagedが実行できないプロジェクトでgit commit前にdockerコンテナ内でlintを強制する方法についてのメモ。
+例えば以下のようなコンテナとdocker-compose.yml, Dockerfileが分離しているプロジェクト構造の場合。
+├ .git
+├ src // コンテナ
+├ Dockerfile
+├ docker-compose.yml
+git hooksという機能を使用してスクリプトを実行するとcommit前にlintを実行することができるようになる。
+
+...]]></description><link>https://zenn.dev/mitate_gengaku/articles/git-pre-commit</link><guid isPermaLink="true">https://zenn.dev/mitate_gengaku/articles/git-pre-commit</guid><pubDate>Sun, 01 Dec 2024 10:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Kt5bHI3G--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:git%2520commit%25E5%2589%258D%25E3%2581%25ABdocker%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2586%25E3%2583%258A%25E5%2586%2585%25E3%2581%25A7lint%25E3%2582%2592%25E5%25BC%25B7%25E5%2588%25B6%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25BE%25A1%25E6%25A5%25AF%25E7%258E%2584%25E5%25B6%25BD%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0tQOVRYWHQ5Qm1BLVplcURoLWdxUHl4RVFjMmNsRkhSNk95XzVVSVVhPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>御楯玄嶽</dc:creator></item><item><title><![CDATA[RustのDockerビルド時の依存関係のキャッシュで詰まった話]]></title><description><![CDATA[
+ 最初に結論
+Hello,World!プログラムが実行されてしまうのは、RUN cargo buildのまえにRUN touch src/main.rsを挟むことで解決できる
+
+ はじめに
+RustのプログラムをDockerで動かすときに、素朴にDockerfileを書くと、依存関係のビルドにとてつもなく時間がかかってしまうので、Cargo.lockとCargo.tomlだけをコピーしてからビルドして、その後にソースコードをコピーしてビルドすることによって依存関係が変わっていない場合にDockerのキャッシュを効かせるテクニックがあります。
+参考: https://zenn.dev/u...]]></description><link>https://zenn.dev/harui/articles/df03573597e3d9</link><guid isPermaLink="true">https://zenn.dev/harui/articles/df03573597e3d9</guid><pubDate>Sun, 01 Dec 2024 07:32:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--TJoe-j0S--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25AEDocker%25E3%2583%2593%25E3%2583%25AB%25E3%2583%2589%25E6%2599%2582%25E3%2581%25AE%25E4%25BE%259D%25E5%25AD%2598%25E9%2596%25A2%25E4%25BF%2582%25E3%2581%25AE%25E3%2582%25AD%25E3%2583%25A3%25E3%2583%2583%25E3%2582%25B7%25E3%2583%25A5%25E3%2581%25A7%25E8%25A9%25B0%25E3%2581%25BE%25E3%2581%25A3%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Harui%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSS1VaExIUDlyTFBxTWlsQU1EUnEwTUN1UDhwSnYwYk9hYkNpMDJ4eFdhYXpOLUdzYz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Harui</dc:creator></item><item><title><![CDATA[GitHub Actionsで特権コンテナを使う]]></title><description><![CDATA[
+ この記事は
+本記事はGitHub Dockyard Advent Calendar 2024の2日目の記事です。そして、SORACOM Advent Calendar 2024シーズン2の2日目の記事です。
+SORACOM Arcを題材に、GitHub Actionsで特権コンテナを使う方法を紹介します。
+
+ 特権コンテナとは
+特権コンテナとは、Dockerのドキュメントでは以下のように説明されています。
+
+デフォルトでは、Docker コンテナは「unprivileged」（権限がない）ため、Docker コンテナの中で Docker デーモンを動かす等ができません。これは、デフォ...]]></description><link>https://zenn.dev/showm001/articles/2024-12-02-01</link><guid isPermaLink="true">https://zenn.dev/showm001/articles/2024-12-02-01</guid><pubDate>Sun, 01 Dec 2024 07:18:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--MY2agfel--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:GitHub%2520Actions%25E3%2581%25A7%25E7%2589%25B9%25E6%25A8%25A9%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2586%25E3%2583%258A%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2597%25E3%2582%2587%25E3%2583%25BC%25E3%2581%25A1%25E3%2582%2583%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pxdDNnYVBBT2tDTTVSUWxmWGhzNXI3eGxaZl96Tm8ySU9oVUVJbm9RPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>しょーちゃん</dc:creator></item><item><title><![CDATA[Tilt, ctlptlを使ったKubernetesマイクロサービス用ローカル開発環境構築]]></title><description><![CDATA[
+ はじめに
+本記事では、Tilt、ctlptlを使用してDocker+Kubernetesのローカル開発環境を構築する方法について説明します。
+
+ 前提
+Dockerの実行環境はすでに構築されているものとしています。
+
+ ツールの概要
+
+
+Tilt: Tiltは、ローカル開発環境でのマイクロサービスのビルド、デプロイ、デバッグを簡素化するツールです。
+
+保存したファイルに関連するコンテナを自動でリビルド・デプロイしてくれるため、稼働確認の負荷が低減できます。
+
+
+
+ctlptl: ctlptlは、Kubernetesクラスターの管理を簡素化するツールで、ローカル開発環境でのクラスターの...]]></description><link>https://zenn.dev/zooth/articles/34b1ea470d4545</link><guid isPermaLink="true">https://zenn.dev/zooth/articles/34b1ea470d4545</guid><pubDate>Sun, 01 Dec 2024 06:46:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--B3kws7lR--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Tilt%252C%2520ctlptl%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%259FKubernetes%25E3%2583%259E%25E3%2582%25A4%25E3%2582%25AF%25E3%2583%25AD%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2593%25E3%2582%25B9%25E7%2594%25A8%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25AB%25E3%2583%25AB%25E9%2596%258B%25E7%2599%25BA%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ryamay%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2c3NG1TYWFmSmJQWkY5THVIWWd5b2ZNRXB2WXJZWXhkU3BYdkJyPXMyNTAtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ryamay</dc:creator></item><item><title><![CDATA[VSCode Dev Containerを使用する方法]]></title><description><![CDATA[ご覧いただきありがとうございます。Furuyaです。
+今回は、「VSCode Dev Containerを使用する方法」についてまとめます。
+
+ 環境
+PC：MacBook Pro 13-inch, 2020, Four Thunderbolt 3 ports
+macOS：Sonoma 14.6.1
+Shell: zsh
+
+ 前提条件
+すでにdocker環境が構築されていることが前提となります。
+Next.js開発環境をDockerに０から作成する方法は以下でまとめていますので、dokcer環境が未構築の方はこちらを参照してください。
+https://zenn.dev/k0y0k0y0/...]]></description><link>https://zenn.dev/k0y0k0y0/articles/article_20241129</link><guid isPermaLink="true">https://zenn.dev/k0y0k0y0/articles/article_20241129</guid><pubDate>Sun, 01 Dec 2024 06:01:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--V6sUfE2c--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:VSCode%2520Dev%2520Container%25E3%2582%2592%25E4%25BD%25BF%25E7%2594%25A8%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Takuma%2520Furuya%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg2YTg5YjIwNjQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Takuma Furuya</dc:creator></item><item><title><![CDATA[PostgreSQLのRLS (Row Level Security) キャッチアップ]]></title><description><![CDATA[
+ 概要
+今回は RLS (Row Level Security) に関してサポートしているPostgreSQLを使って
+色々動かしながら試していきたいと思います。
+
+ RLS (Row Level Security)
+https://www.postgresql.org/docs/current/ddl-rowsecurity.html
+
+Row Security Policies では、通常のクエリで返される行や、データ変更コマンドで挿入、更新、削除できる行をユーザーごとに制限します。この機能は Row-Level Security とも呼ばれます。
+
+
+ 特徴
+
+デフォルトではテー...]]></description><link>https://zenn.dev/slowhand/articles/a4f4ee6d627299</link><guid isPermaLink="true">https://zenn.dev/slowhand/articles/a4f4ee6d627299</guid><pubDate>Sat, 30 Nov 2024 13:38:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bINZEbtb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:PostgreSQL%25E3%2581%25AERLS%2520%2528Row%2520Level%2520Security%2529%2520%25E3%2582%25AD%25E3%2583%25A3%25E3%2583%2583%25E3%2583%2581%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:slowhand%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzEwY2YzMGUzMDAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>slowhand</dc:creator></item><item><title><![CDATA[Azure DevOps/Pipelinesでの自動ビルド環境構築]]></title><description><![CDATA[
+ 概要
+Azure DevOps/Pipelinesでの自動ビルド環境構築について具体例を示しながら紹介します。
+Azure DevOpsはGitHub、Azure PipelinesはGitHub Actionsのようなサービスです。
+Azure DevOps上のGitリポジトリに対してpushされたりPull Requestが発行されたりするのをトリガーに、ビルドやテスト、デプロイなどを自動で実行することができます。
+GitHubでなくMicrosoft社のAzure DevOpsなら職場環境上使いやすいという方もいると思います。
+
+ 自動化の内容
+この記事ではC++のアプリケーシ...]]></description><link>https://zenn.dev/teasy/articles/azure-devops-tutorial</link><guid isPermaLink="true">https://zenn.dev/teasy/articles/azure-devops-tutorial</guid><pubDate>Fri, 29 Nov 2024 13:43:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2UmhxJYK--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Azure%2520DevOps%252FPipelines%25E3%2581%25A7%25E3%2581%25AE%25E8%2587%25AA%25E5%258B%2595%25E3%2583%2593%25E3%2583%25AB%25E3%2583%2589%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:teasy%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdjMGVlZDQ5MGMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>teasy</dc:creator></item><item><title><![CDATA[docker環境でLaravel開発環境構築]]></title><description><![CDATA[
+ laravelアプリケーション作成手順
+
+ はじめに
+dockerのインストールは完了している前提で記述
+新たにプロジェクトを作成する
+今回はUbuntuを使用
+
+ アプリケーションの作成
+アプリケーションを作成したいディレクトリで以下のコマンドを実行
+curl -s https://laravel.build/practice | bash
+practiceの部分は好きな名前にしてOK
+
+ Laravel Sailの起動
+アプリケーションが作成されたらアプリケーションディレクトリに移動する
+cd ./practice
+以下のコマンドでsailを起動する
+./vendor/bin/s...]]></description><link>https://zenn.dev/nosho/articles/afaf4ea302a065</link><guid isPermaLink="true">https://zenn.dev/nosho/articles/afaf4ea302a065</guid><pubDate>Thu, 28 Nov 2024 15:16:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jQf3-J2O--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:docker%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25A7Laravel%25E9%2596%258B%25E7%2599%25BA%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:meltulto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzkxZWY2ZTNkNmMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>meltulto</dc:creator></item><item><title><![CDATA[error getting credentials - err: exit status 127, out:の対応]]></title><description><![CDATA[docker build したら死んだ。
+docker build -t cloudbuild-cicd-sample .
+...省略
+--------------------
+   1 |     # ビルドステージ
+   2 | &gt;&gt;&gt; FROM node:18-alpine AS builder
+   3 |     WORKDIR /app
+   4 |     
+--------------------
+ERROR: failed to solve: node:18-alpine: error getting credentials - err: exit s...]]></description><link>https://zenn.dev/okarin_9029/articles/28ad9f5be08309</link><guid isPermaLink="true">https://zenn.dev/okarin_9029/articles/28ad9f5be08309</guid><pubDate>Thu, 28 Nov 2024 14:45:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--pSZAvFtE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:error%2520getting%2520credentials%2520-%2520err%253A%2520exit%2520status%2520127%252C%2520out%253A%25E3%2581%25AE%25E5%25AF%25BE%25E5%25BF%259C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258A%25E3%2581%258B%25E3%2582%258A%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0ZmJ3LTdOdFB0TEJkSTZIa3cyU3BuSlRVNlFINXF2TkxYNUxDMXNnZWlGU0E9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>おかりん</dc:creator></item><item><title><![CDATA[docker コンテナを他の PC にコピーする]]></title><description><![CDATA[!
+docker ぜんぜん詳しくないので、間違ったことしていたら教えてください。
+
+先日、とある開発 PC で稼働中の docker コンテナを、別の開発 PC に移転 (コピー) したい需要が発生しました。プラットフォームは Windows で Docker for Desktop を使っています。docker 詳しくないので Bing Chat に聞いてみながらやってみた結果を、自分の備忘録的に、以下にメモします。
+
+ コピー元 PC での作業
+
+ コンテナをイメージにコミット
+まずは、docker commit コマンドを使用して、移転したいコピー元の docker コンテナのスト...]]></description><link>https://zenn.dev/j_sakamoto/articles/85fbeb26406c8c</link><guid isPermaLink="true">https://zenn.dev/j_sakamoto/articles/85fbeb26406c8c</guid><pubDate>Thu, 28 Nov 2024 14:13:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--NFsyb0rK--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:docker%2520%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2586%25E3%2583%258A%25E3%2582%2592%25E4%25BB%2596%25E3%2581%25AE%2520PC%2520%25E3%2581%25AB%25E3%2582%25B3%25E3%2583%2594%25E3%2583%25BC%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%2540jsakamoto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dVX243dnJ5ZFlLb2NxdUhSUkIxSGZ4NGpVekNsdGNmZ290R2hfNWc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>@jsakamoto</dc:creator></item></channel></rss>

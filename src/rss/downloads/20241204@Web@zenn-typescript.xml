@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「TypeScript」のフィード]]></title><description><![CDATA[Zennのトピック「TypeScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/typescript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/f13e758fdb.png</url><title>Zennの「TypeScript」のフィード</title><link>https://zenn.dev/topics/typescript</link></image><generator>zenn.dev</generator><lastBuildDate>Wed, 04 Dec 2024 09:14:27 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/typescript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Storybookでコンポーネントをフォルダ分けする]]></title><description><![CDATA[
+ はじめに
+ChakraUIを使っていたら、このようにフォルダ分けされおり、再現したいと思いました。
+しかし、Googleで「Storybook フォルダ分け」で調べても出てこなかったので手法を記します。
+
+
+ 手法を探す
+恐らくStorybookのドキュメントにもあるものだと思いますが、ChakraUIのコードから参照してみたところ、このような記述が見つかりました。
+実際のコード
+
+bar-chart.stories.tsx
+import { Box } from "../src"
+
+export default {
+  title: "WIP / Bar Chart",
+  dec...]]></description><link>https://zenn.dev/evesquare2/articles/25ae5f1ac55262</link><guid isPermaLink="true">https://zenn.dev/evesquare2/articles/25ae5f1ac55262</guid><pubDate>Wed, 04 Dec 2024 02:51:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--CTlO3nk0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Storybook%25E3%2581%25A7%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%259D%25E3%2583%25BC%25E3%2583%258D%25E3%2583%25B3%25E3%2583%2588%25E3%2582%2592%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25AB%25E3%2583%2580%25E5%2588%2586%25E3%2581%2591%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:EveSquare%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM3ODIyMjRmNTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>EveSquare</dc:creator></item><item><title><![CDATA[Claude Projectsを活用して、Deno / TypeScriptで言語処理系を書いてみた話]]></title><description><![CDATA[
+ 背景
+
+Claude Projectsをもっと活用できるようになりたい
+Deno / TypeScriptで何か作りたい
+
+という理由で、なんとなく「プログラミング言語的なものをClaudeと一緒に作ってみるか」と思いつきました。作業ログや学び的なものをせっかくなので残しておきます。
+作成したのは以下:
+https://github.com/danimal141/poor-go
+基本的に私は指示役の男としてClaudeにコードを書かせることに徹しています。また、また今回ChatGPT、Cursorなどその他の生成AI系サービスは一切使っておりません。
+
+ 開発方針
+今回、言語をリッチ...]]></description><link>https://zenn.dev/danimal141/articles/0b837232619038</link><guid isPermaLink="true">https://zenn.dev/danimal141/articles/0b837232619038</guid><pubDate>Wed, 04 Dec 2024 02:50:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wvpjdnbN--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Claude%2520Projects%25E3%2582%2592%25E6%25B4%25BB%25E7%2594%25A8%25E3%2581%2597%25E3%2581%25A6%25E3%2580%2581Deno%2520%252F%2520TypeScript%25E3%2581%25A7%25E8%25A8%2580%25E8%25AA%259E%25E5%2587%25A6%25E7%2590%2586%25E7%25B3%25BB%25E3%2582%2592%25E6%259B%25B8%25E3%2581%2584%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:danimal141%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVlMzc0YjE0N2UuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>danimal141</dc:creator></item><item><title><![CDATA[Chakra UI の as プロパティを利用するときに知っておくこと]]></title><description><![CDATA[
+ はじめに
+Chakra UI では as プロパティを使うことで、 styled-components と同様に、要素のレンダリングを変更できます。
+&lt;Box as="button" borderRadius="md" bg="tomato" color="white" px={4} h={8}&gt;
+  Button
+&lt;/Box&gt;
+引用: Box - Chakra UI
+Box は HTML だと div 要素のため、 onClick プロップスを持たせるとき、 Tab キーで要素にフォーカスができなかったり、スクリーンリーダーで認識されなかったりと、アクセシビ...]]></description><link>https://zenn.dev/route06/articles/478ac037471e0e</link><guid isPermaLink="true">https://zenn.dev/route06/articles/478ac037471e0e</guid><pubDate>Wed, 04 Dec 2024 01:15:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--W4hBqTFl--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Chakra%2520UI%2520%25E3%2581%25AE%2520as%2520%25E3%2583%2597%25E3%2583%25AD%25E3%2583%2591%25E3%2583%2586%25E3%2582%25A3%25E3%2582%2592%25E5%2588%25A9%25E7%2594%25A8%25E3%2581%2599%25E3%2582%258B%25E3%2581%25A8%25E3%2581%258D%25E3%2581%25AB%25E7%259F%25A5%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%258A%25E3%2581%258F%25E3%2581%2593%25E3%2581%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%258B%25E3%2581%258C%25E3%2581%25BF%25E3%2582%2582%25E3%2581%25A1%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzlkNTRlMGJjMjguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:ROUTE06%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzMwYTgwODM0MWUuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>かがみもち</dc:creator></item><item><title><![CDATA[Vueアプリケーションでオフラインで動画を再生できるようにする]]></title><description><![CDATA[こんにちは、RUN.EDGE株式会社の桑原です。
+今回は以下の２つ
+
+Cache API
+Service Worker
+
+を使って、オフラインで動画を再生する機能の実装方法の紹介をしたいと思います。
+また、今回はサンプルとしてVueアプリケーションを使っています。Reactなど、他のフレームワークを利用する場合は適宜読み替えてください。
+サンプルコードは以下においておきます。
+https://github.com/kuwabataK/video-cache-sample/tree/main/vue-sample
+
+ Cache APIについて
+Cache APIは、特定のURLのレスポン...]]></description><link>https://zenn.dev/run_edge/articles/2883090cec2e67</link><guid isPermaLink="true">https://zenn.dev/run_edge/articles/2883090cec2e67</guid><pubDate>Wed, 04 Dec 2024 01:02:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6R50q9NO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Vue%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2581%25A7%25E3%2582%25AA%25E3%2583%2595%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%25B3%25E3%2581%25A7%25E5%258B%2595%25E7%2594%25BB%25E3%2582%2592%25E5%2586%258D%25E7%2594%259F%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258B%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E6%25A1%2591%25E5%258E%259F%25E8%258D%2598%25E9%25A6%25AC%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBkNjVlOTZjYjguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:RUN.EDGE%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS01hV1NrNm5PMTVlanJlYnNoY2VBRDZCcV9ibzRlX1VnYXZ3TzNLMG9sbVctU0VBPXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>桑原荘馬</dc:creator></item><item><title><![CDATA[サクッと作る型安全なBFF開発環境 - マイクロサービス × OpenAPI自動生成]]></title><description><![CDATA[これは SMat Advent Calendar 2024 の12/4分の記事です。
+弊社技術イベントの宣伝です。
+IoTやデータ処理周りに少しでも興味がある方は是非ご参加ください。お一人様大歓迎です！まったり技術の話をしましょう！
+https://s-mat.connpass.com/event/336943/
+
+ はじめに
+こんにちは、株式会社エスマット エンジニアの hi6okuni です。
+今回は、OpenAPI Specification(以降、OpenAPIと呼ぶ)からTypeScriptの型自動生成の仕組みをサクッと作った時の振り返りです。
+型の自動生成自体はすでに多くの事...]]></description><link>https://zenn.dev/smartshopping/articles/a7cb9f0dd9d839</link><guid isPermaLink="true">https://zenn.dev/smartshopping/articles/a7cb9f0dd9d839</guid><pubDate>Tue, 03 Dec 2024 22:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0yaio4h9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B5%25E3%2582%25AF%25E3%2583%2583%25E3%2581%25A8%25E4%25BD%259C%25E3%2582%258B%25E5%259E%258B%25E5%25AE%2589%25E5%2585%25A8%25E3%2581%25AABFF%25E9%2596%258B%25E7%2599%25BA%25E7%2592%25B0%25E5%25A2%2583%2520-%2520%25E3%2583%259E%25E3%2582%25A4%25E3%2582%25AF%25E3%2583%25AD%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2593%25E3%2582%25B9%2520%25C3%2597%2520OpenAPI%25E8%2587%25AA%25E5%258B%2595%25E7%2594%259F%25E6%2588%2590%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:hi6okuni%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q4ODNjMWY0MDkuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2582%25A8%25E3%2582%25B9%25E3%2583%259E%25E3%2583%2583%25E3%2583%2588%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc2YjE3YjFhNjYuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hi6okuni</dc:creator></item><item><title><![CDATA[【TypeScript】ジェネレーターによる遅延評価でフィボナッチ数列を生成する]]></title><description><![CDATA[
+ はじめに
+!
+この記事は、遅延評価のことを初めて知った人が書いています。
+そのため特に遅延評価周りの理解が浅いですが、ご了承ください。
+
+
+ やりたいこと
+
+
+遅延評価でフィボナッチ数列を生成したい
+
+長さを指定して生成できること
+指定の数より小さい値のみの数列が生成できること
+
+
+JavaScriptのジェネレーターを使って遅延評価する
+フィボナッチ以外の数列を簡単に生成できるよう、設計を工夫する
+
+
+ 環境
+
+Bun v1.1.34
+
+TypeScript Playground（ファイル分けの修正が必要）
+
+また、この記事のコードはTypeScriptで書かれていますが、型部分を...]]></description><link>https://zenn.dev/nanasi_1/articles/22696e18f3a2f9</link><guid isPermaLink="true">https://zenn.dev/nanasi_1/articles/22696e18f3a2f9</guid><pubDate>Tue, 03 Dec 2024 15:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5G1EBGnv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590TypeScript%25E3%2580%2591%25E3%2582%25B8%25E3%2582%25A7%25E3%2583%258D%25E3%2583%25AC%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%25BC%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258B%25E9%2581%2585%25E5%25BB%25B6%25E8%25A9%2595%25E4%25BE%25A1%25E3%2581%25A7%25E3%2583%2595%25E3%2582%25A3%25E3%2583%259C%25E3%2583%258A%25E3%2583%2583%25E3%2583%2581%25E6%2595%25B0%25E5%2588%2597%25E3%2582%2592%25E7%2594%259F%25E6%2588%2590%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nanasi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc0MDFiNWU4NjMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nanasi</dc:creator></item><item><title><![CDATA[インターフェイス【個人学習まとめ】]]></title><description><![CDATA[
+ インターフェイスとは
+オブジェクトの構造を定義するのに特化した機能。
+インターフェイスの宣言
+interface Pet {
+    name: string;
+    age: number;
+}
+実際にインターフェイスを用いた型指定の例。
+変数pochiにPetインターフェイスを指定する。
+let pochi: Pet = {
+    name: "pochi",
+    age: 3
+}
+次の書き方はエラーになる。
+//型 'string' を型 'Pet' に割り当てることはできません。
+pochi = "tama";
+//型 'string' を型 'number' に割り...]]></description><link>https://zenn.dev/o0rororo0o/articles/074129387c31fe</link><guid isPermaLink="true">https://zenn.dev/o0rororo0o/articles/074129387c31fe</guid><pubDate>Tue, 03 Dec 2024 10:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--yoKKPL_f--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%2595%25E3%2582%25A7%25E3%2582%25A4%25E3%2582%25B9%25E3%2580%2590%25E5%2580%258B%25E4%25BA%25BA%25E5%25AD%25A6%25E7%25BF%2592%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%258D%25E3%2582%258D%25E3%2582%258D%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ2ZTZjOWM4YmMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ろろろ</dc:creator></item><item><title><![CDATA[【完全無料】VercelでOpenCVを動かそう～タートルグラフィックスを添えて～]]></title><description><![CDATA[これは2024team411アドベントカレンダー3日目の記事です。
+昨日はかなるさんの「【初心者向け】かわいい・かっこいい開発環境の作り方」でした。開発者にとって、普段使いする開発環境にこだわるのってとても良いですね。自分はVSCodeをダークテーマにしたっきりカスタマイズしてないです...
+
+ はじめに
+突然ですが、みなさんはタートルグラフィックスというものを知っていますか？
+タートルグラフィックスとは、GUIプログラミングの入門のようなもので、LOGOというプログラミング言語によって1967年に初めて実装されました。その後、さまざまな言語でも実装され、初心者向けとして受け継がれてきま...]]></description><link>https://zenn.dev/team411/articles/7700bb587d72c8</link><guid isPermaLink="true">https://zenn.dev/team411/articles/7700bb587d72c8</guid><pubDate>Tue, 03 Dec 2024 09:31:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Adm1A0-X--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%25AE%258C%25E5%2585%25A8%25E7%2584%25A1%25E6%2596%2599%25E3%2580%2591Vercel%25E3%2581%25A7OpenCV%25E3%2582%2592%25E5%258B%2595%25E3%2581%258B%25E3%2581%259D%25E3%2581%2586%25EF%25BD%259E%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%2588%25E3%2583%25AB%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%2595%25E3%2582%25A3%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25B9%25E3%2582%2592%25E6%25B7%25BB%25E3%2581%2588%25E3%2581%25A6%25EF%25BD%259E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Akaaku%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA4YzQxYWIxYjYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:team411%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTFkyUEJwUGJvR1k5SkJtUnpnTWc2NHdYd0VtYml2OXNzdjU3SFl4UDNHPXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Akaaku</dc:creator></item><item><title><![CDATA[ChakraUI V3 themeの色トークンを追加する]]></title><description><![CDATA[
+ はじめに
+ChakraUI V3が公開されましたね。
+ChakraUIを使うとき、オリジナルカラーのトークンを毎度設定するのですが、v2からv3で設定方法がガラリと変わっていたので、設定方法をまとめます。
+
+ 設定コード
+theme.tsを書き換えます。
+
+theme.ts
+ import {
+   ChakraProvider as Provider,
+   createSystem,
+   defaultConfig,
+   defineConfig,
+ } from "@chakra-ui/react";
+ 
+ const config = defineConfig({
+   ...]]></description><link>https://zenn.dev/evesquare2/articles/fb89be6862a940</link><guid isPermaLink="true">https://zenn.dev/evesquare2/articles/fb89be6862a940</guid><pubDate>Tue, 03 Dec 2024 07:23:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jsovbEb6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ChakraUI%2520V3%2520theme%25E3%2581%25AE%25E8%2589%25B2%25E3%2583%2588%25E3%2583%25BC%25E3%2582%25AF%25E3%2583%25B3%25E3%2582%2592%25E8%25BF%25BD%25E5%258A%25A0%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:EveSquare%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM3ODIyMjRmNTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>EveSquare</dc:creator></item><item><title><![CDATA[NestJSで環境設定ファイルを非同期に読み込み、JWT設定を行う方法]]></title><description><![CDATA[
+ はじめに
+NestJSは、モジュールベースで構築されている強力なバックエンドフレームワークで、簡単に拡張性のあるアプリケーションを作成できます。
+この記事では、NestJSのJwtModuleを使って、環境設定ファイル（.env）から非同期でJWTの設定を読み込み、JWTを発行するための簡単なコードを紹介します。
+
+ JWT認証の概要
+こちらは、興味のある方だけアコーディオンを開いて確認してください。
+JWTの簡単な概要
+JWTは、認証のために使われるトークン形式で、サーバーとクライアント間で情報を安全にやり取りするための標準的な手段です。通常、JWTには以下のような情報が含まれます...]]></description><link>https://zenn.dev/nifumafu/articles/9e8a4375e83a6b</link><guid isPermaLink="true">https://zenn.dev/nifumafu/articles/9e8a4375e83a6b</guid><pubDate>Tue, 03 Dec 2024 07:23:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0brKtcCr--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:NestJS%25E3%2581%25A7%25E7%2592%25B0%25E5%25A2%2583%25E8%25A8%25AD%25E5%25AE%259A%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2592%25E9%259D%259E%25E5%2590%258C%25E6%259C%259F%25E3%2581%25AB%25E8%25AA%25AD%25E3%2581%25BF%25E8%25BE%25BC%25E3%2581%25BF%25E3%2580%2581JWT%25E8%25A8%25AD%25E5%25AE%259A%25E3%2582%2592%25E8%25A1%258C%25E3%2581%2586%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Nifumafu%2520%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUVkRlRwNXZVb3ktcF9Nb3FTc3JnQnNIblU1ekN0MnItNWFkRDZoXzNSRGE9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Nifumafu🍊</dc:creator></item><item><title><![CDATA[TypedSQLはとても便利だが、ビルド時にDB接続が必要になって困った話]]></title><description><![CDATA[
+ はじめに
+Prismaを使い始めて久しいですが、集計画面などはどうしても複雑なクエリを投げる必要があり苦渋の思いで$queryRawを使いがちです。
+ですが、最近以下の記事を見かけました。
+https://zenn.dev/tockn/articles/0e6eac6220e072
+こんな便利なものがあるのかと使い始めたのですがビルド時にハマり、その後長いこと使用を諦めていたのですが、この度なんとか解決できたので記事にします。途中試行錯誤しながらのチャレンジでしたが、終わってみればあっさりとした解決方法でした。
+
+ 前提条件
+以下のような作りのプロジェクトがありました。
+
+モノレポ構...]]></description><link>https://zenn.dev/nekoniki/articles/7966d9852c29b0</link><guid isPermaLink="true">https://zenn.dev/nekoniki/articles/7966d9852c29b0</guid><pubDate>Tue, 03 Dec 2024 06:45:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--XsVSJzix--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypedSQL%25E3%2581%25AF%25E3%2581%25A8%25E3%2581%25A6%25E3%2582%2582%25E4%25BE%25BF%25E5%2588%25A9%25E3%2581%25A0%25E3%2581%258C%25E3%2580%2581%25E3%2583%2593%25E3%2583%25AB%25E3%2583%2589%25E6%2599%2582%25E3%2581%25ABDB%25E6%258E%25A5%25E7%25B6%259A%25E3%2581%258C%25E5%25BF%2585%25E8%25A6%2581%25E3%2581%25AB%25E3%2581%25AA%25E3%2581%25A3%25E3%2581%25A6%25E5%259B%25B0%25E3%2581%25A3%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nekoniki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y1OGNmMzMwMTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nekoniki</dc:creator></item><item><title><![CDATA[実践WEBビーコン：メール開封率計測テクニックの全て]]></title><description><![CDATA[この記事は「レバテック開発部 Advent Calendar 2024」の 3 日目の記事です！
+昨日の記事は、もりた さんの 年末に（私が）読みたい！　要件定義のおすすめ書籍ズ23冊 でした。
+
+ これはなに？
+皆さん、こんにちは！最近、インドネシア旅行に行ったら現地の方より顔が濃くて、道を歩いていると現地語で話しかけられた@tomo_nxnです。
+さて、そんな旅のエピソードはさておき、今回はメール配信システムの機能を使わずに、独自で Web ビーコンを使用してメール開封率を計測する仕組みを作ったので、その時の注意点や実際の実装方法などを紹介していきます！
+
+ 前提
+レバテック開発部で...]]></description><link>https://zenn.dev/levtech/articles/6e28631db41d76</link><guid isPermaLink="true">https://zenn.dev/levtech/articles/6e28631db41d76</guid><pubDate>Tue, 03 Dec 2024 03:30:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--sBLopdcW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%25AE%259F%25E8%25B7%25B5WEB%25E3%2583%2593%25E3%2583%25BC%25E3%2582%25B3%25E3%2583%25B3%25EF%25BC%259A%25E3%2583%25A1%25E3%2583%25BC%25E3%2583%25AB%25E9%2596%258B%25E5%25B0%2581%25E7%258E%2587%25E8%25A8%2588%25E6%25B8%25AC%25E3%2583%2586%25E3%2582%25AF%25E3%2583%258B%25E3%2583%2583%25E3%2582%25AF%25E3%2581%25AE%25E5%2585%25A8%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:tomo_nxn%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY1YzcxZDY5NDkuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%25AC%25E3%2583%2590%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E9%2596%258B%25E7%2599%25BA%25E9%2583%25A8%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg2MzM1MjA1YTguanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tomo_nxn</dc:creator></item><item><title><![CDATA[Laravel SailとReact+TypeScriptでフロントとバックを分離したSPAを作ろうとして挫折した😇]]></title><description><![CDATA[こんにちはmocchantaiです。
+少し前にチャレンジしたけど諦めちゃった時のメモを、成仏させようとブログ化してみました。
+もし成功した人がいれば知見を共有してくださると嬉しいです🙇‍♂️
+
+ 今回の目標
+
+バックエンドにLaravel Sail、フロントエンドにReact+TypeScriptを使ってSPAを作る
+フロントとバックのコードをfrontendとbackendディレクトリで分ける
+プロジェクトを1つのGitHubリポジトリで管理する
+
+
+ フロントバックを分離したいモチベーション
+webアプリ開発をLaravelから勉強し始めて、その後SPAをReactから勉強しました。...]]></description><link>https://zenn.dev/sdb_blog/articles/laravel-sail-react-typescript-spa-failed</link><guid isPermaLink="true">https://zenn.dev/sdb_blog/articles/laravel-sail-react-typescript-spa-failed</guid><pubDate>Mon, 02 Dec 2024 22:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--b2QfEI7Z--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Laravel%2520Sail%25E3%2581%25A8React%252BTypeScript%25E3%2581%25A7%25E3%2583%2595%25E3%2583%25AD%25E3%2583%25B3%25E3%2583%2588%25E3%2581%25A8%25E3%2583%2590%25E3%2583%2583%25E3%2582%25AF%25E3%2582%2592%25E5%2588%2586%25E9%259B%25A2%25E3%2581%2597%25E3%2581%259FSPA%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258D%25E3%2581%2586%25E3%2581%25A8%25E3%2581%2597%25E3%2581%25A6%25E6%258C%25AB%25E6%258A%2598%25E3%2581%2597%25E3%2581%259F%2520%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:mocchantai%2520%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzMyODFjNDczOTguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25BD%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A3%25E3%2583%25AB%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%2590%25E3%2583%25B3%25E3%2582%25AF%2520%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFlYzExYjk3ZDMuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mocchantai🍍</dc:creator></item><item><title><![CDATA[非エディタ環境でPlayCanvasを使う（Using the Engine Standalone）]]></title><description><![CDATA[!
+本記事はにー兄さんアドベントカレンダー2024の3日目の記事です。
+
+
+ はじめに
+
+ TL;DR
+PlayCanvas Engine を使うことで、エディタを使わずに Vite / TypeScript な環境で 3D シーンを実装できる。
+
+ 概要
+本記事は PlayCanvas Engine を用いて、エディタを使わずに 3D シーンを実装する方法をご紹介します。
+PlayCanvas といえば高機能なエディタが特徴的なフレームワークではありますが、コードベースのみでも実装できるという選択肢の幅も魅力なのかなと感じています。
+私は普段 Babylon.js を使っているのですが...]]></description><link>https://zenn.dev/drumath2237/articles/playcanvas-engine-standalone-vite</link><guid isPermaLink="true">https://zenn.dev/drumath2237/articles/playcanvas-engine-standalone-vite</guid><pubDate>Mon, 02 Dec 2024 19:03:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--aqyomXrO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E9%259D%259E%25E3%2582%25A8%25E3%2583%2587%25E3%2582%25A3%25E3%2582%25BF%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25A7PlayCanvas%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%25EF%25BC%2588Using%2520the%2520Engine%2520Standalone%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AB%25E3%2583%25BC%25E5%2585%2584%25E3%2581%2595%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dUQndtd2ZiTmM3Nzg0SmxRZWdlX3BSc09RdmdvX2hxNlg5MTJKT3VZPXMyNTAtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>にー兄さん</dc:creator></item><item><title><![CDATA[自前のJSX実装を作るために必要な全ての知識]]></title><description><![CDATA[JSX対応ライブラリをTypeScriptで作る方法を解説します。古い知識は省きつつも、必要な知識を全てお伝えします。]]></description><link>https://zenn.dev/uhyo/books/your-own-jsx-implementation</link><guid isPermaLink="true">https://zenn.dev/uhyo/books/your-own-jsx-implementation</guid><pubDate>Mon, 02 Dec 2024 15:00:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--kXrSoSc7--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci85YTljNGM0MGVlLmpwZw==%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>uhyo</dc:creator></item><item><title><![CDATA[TypeScriptでTensorflowモデルを手元で動かした]]></title><description><![CDATA[この投稿は、2024年JINSのアドベントカレンダー3日目の記事です。👓
+JOIN記事に憧れがあったので前半は自己紹介、後半は表題の件について紹介します。
+
+ 自己紹介
+10月にJINSにJOINしました、ITデジタル部のいしざき（@ishizak1111）です。
+前職では主にPythonで製品開発を含めたデータエンジニアリングをしていました。
+現在は主に購入/保証システムの刷新やデータ移行を担当しています。
+今後は海外店舗のシステム導入にも携わる予定なので、ドメイン知識や新旧システム仕様のインプットを頑張っています。
+
+ 動機
+自己紹介で述べてしまいましたが、現在JINSはシステム刷新...]]></description><link>https://zenn.dev/jins/articles/d2fd3806c10b89</link><guid isPermaLink="true">https://zenn.dev/jins/articles/d2fd3806c10b89</guid><pubDate>Mon, 02 Dec 2024 15:00:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dZKG9KTQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%25E3%2581%25A7Tensorflow%25E3%2583%25A2%25E3%2583%2587%25E3%2583%25AB%25E3%2582%2592%25E6%2589%258B%25E5%2585%2583%25E3%2581%25A7%25E5%258B%2595%25E3%2581%258B%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%2584%25E3%2581%2597%25E3%2581%2596%25E3%2581%258D%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdlMjlhN2FiYWQuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:JINS%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZmNmQ2ZGU4ZjUuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>いしざき</dc:creator></item><item><title><![CDATA[6万行規模の生成AI SaaSをNext.js 15にアップデートした話]]></title><description><![CDATA[
+ はじめに
+ストリーツ株式会社の@hanamaです。
+弊社では、生成AIを活用したメディア向けコンテンツ制作支援SaaSである「apnea」を開発・運営しています。
+今回は、先月に行ったapneaのNext.js 15へのアップデートについてご紹介します。本プロダクトは、Next.jsを用いたフルスタックアプリケーションであり、ts、tsxファイルのみで6万行(論理LOC)を超えるコードベースを有しています。
+執筆時点ではこの規模のNext.jsで構築されたアプリケーションのバージョン15へのアップデートに関する事例がネット上で見つけられなかったため、今回はその手順と課題について詳しく...]]></description><link>https://zenn.dev/streets_tech/articles/update-to-next-15</link><guid isPermaLink="true">https://zenn.dev/streets_tech/articles/update-to-next-15</guid><pubDate>Mon, 02 Dec 2024 15:00:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3VKebuJw--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:6%25E4%25B8%2587%25E8%25A1%258C%25E8%25A6%258F%25E6%25A8%25A1%25E3%2581%25AE%25E7%2594%259F%25E6%2588%2590AI%2520SaaS%25E3%2582%2592Next.js%252015%25E3%2581%25AB%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%25E3%2583%2587%25E3%2583%25BC%25E3%2583%2588%25E3%2581%2597%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:hanama%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I3ZjE4YjIwMzUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25AA%25E3%2583%25BC%25E3%2583%2584%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZkMTU4MDQ3OTIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hanama</dc:creator></item><item><title><![CDATA[【neverthrow】safeTryを理解する 〜Scalaのfor内包表記を添えて〜]]></title><description><![CDATA[この記事は弥生 Advent Calendar 2024シリーズ2の3日目の記事です。
+
+ はじめに
+私が所属しているチームでは、フロントエンド・バックエンドともにTypeScriptで開発を行っています。
+TypeScriptにおいて、型安全なエラーハンドリングを行いたい場合にneverthrowが便利です。
+neverthrowを使うと、関数が返す値は「成功」と「エラー」いずれかを返すResult型になります。
+https://github.com/supermacro/neverthrow
+Result型としてラップされるため、値を使いたい場所では明示的に取り出す、またはResul...]]></description><link>https://zenn.dev/seita1996/articles/neverthrow-safetry</link><guid isPermaLink="true">https://zenn.dev/seita1996/articles/neverthrow-safetry</guid><pubDate>Mon, 02 Dec 2024 15:00:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jOFDgHEI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590neverthrow%25E3%2580%2591safeTry%25E3%2582%2592%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2599%25E3%2582%258B%2520%25E3%2580%259CScala%25E3%2581%25AEfor%25E5%2586%2585%25E5%258C%2585%25E8%25A1%25A8%25E8%25A8%2598%25E3%2582%2592%25E6%25B7%25BB%25E3%2581%2588%25E3%2581%25A6%25E3%2580%259C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:seitaro%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhkMmE5NmZkNWYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>seitaro</dc:creator></item><item><title><![CDATA[date-fns をアップデートしたらテストが３倍遅くなったので調査した話]]></title><description><![CDATA[
+こんにちは、三菱UFJフィナンシャル・グループの戦略子会社である Japan Digital Design で Technology &amp; Development Div. に所属する西村です。
+Japan Digital Design Advent Calendar 2024 の3日目 の記事になります。よろしくお願いいたします。
+
+ はじめに
+ある Node.js バックエンドのプロジェクトにて、日付操作ライブラリである date-fns をアップデートしたところ、jest で実行しているテストの実行時間が3分ほどから9分ほどへと大幅に伸びてしまいました。
+これはまずい・・！...]]></description><link>https://zenn.dev/nshmura/articles/dff95c5a4eda1e</link><guid isPermaLink="true">https://zenn.dev/nshmura/articles/dff95c5a4eda1e</guid><pubDate>Mon, 02 Dec 2024 15:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--53ixVoOw--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:date-fns%2520%25E3%2582%2592%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%25E3%2583%2587%25E3%2583%25BC%25E3%2583%2588%25E3%2581%2597%25E3%2581%259F%25E3%2582%2589%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E3%2581%258C%25EF%25BC%2593%25E5%2580%258D%25E9%2581%2585%25E3%2581%258F%25E3%2581%25AA%25E3%2581%25A3%25E3%2581%259F%25E3%2581%25AE%25E3%2581%25A7%25E8%25AA%25BF%25E6%259F%25BB%25E3%2581%2597%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nshmura%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg1NWU0ZDc2MjcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nshmura</dc:creator></item><item><title><![CDATA[Node 17.5.0から入ったfetchとfsのStreamを組み合わせてファイルを保存]]></title><description><![CDATA[Node.js 17.5.0からfetchが入りましたが、fetchのresponseのbodyをローカルファイルに保存しようとしたら、Github CopilotやChatGPTなどなどが全く役に立たなかったので備忘録
+
+ 正解コード
+import fs from "node:fs";
+import { Writable } from "node:stream";
+
+async function downloadFromWeb() {
+  const response = await fetch("https://exampla.com/downlod_file");
+  const ...]]></description><link>https://zenn.dev/takezoux2/articles/f7d4e2676c637c</link><guid isPermaLink="true">https://zenn.dev/takezoux2/articles/f7d4e2676c637c</guid><pubDate>Mon, 02 Dec 2024 14:43:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--kwoYnmG3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Node%252017.5.0%25E3%2581%258B%25E3%2582%2589%25E5%2585%25A5%25E3%2581%25A3%25E3%2581%259Ffetch%25E3%2581%25A8fs%25E3%2581%25AEStream%25E3%2582%2592%25E7%25B5%2584%25E3%2581%25BF%25E5%2590%2588%25E3%2582%258F%25E3%2581%259B%25E3%2581%25A6%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2592%25E4%25BF%259D%25E5%25AD%2598%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:takezoux2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvdC5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takezoux2</dc:creator></item></channel></rss>

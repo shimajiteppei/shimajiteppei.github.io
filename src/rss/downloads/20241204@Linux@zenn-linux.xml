@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Linux」のフィード]]></title><description><![CDATA[Zennのトピック「Linux」のRSSフィードです]]></description><link>https://zenn.dev/topics/linux</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/860a9eb1e4.png</url><title>Zennの「Linux」のフィード</title><link>https://zenn.dev/topics/linux</link></image><generator>zenn.dev</generator><lastBuildDate>Wed, 04 Dec 2024 03:27:53 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/linux/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[ネットワークを知りたくて]]></title><description><![CDATA[OPENLOGI Advent Calendar 2024 4日目の記事です。
+https://qiita.com/advent-calendar/2024/openlogi
+3日目の記事は、riku929hr さんの「育休を取得するときのあれこれ」でした！
+
+ はじめに
+この記事では主に、ここ１年近くを通した、ネットワークについて自身が何をしてきたかを書こうと思います。
+みなさんは、ネットワークに関わる何らかツールを作りたい、と思ったことはありませんか？
+私が想像するネットワークなツールでパッと思いつくのは cURL コマンドです。Web系企業に勤められている方は、Postman も馴...]]></description><link>https://zenn.dev/openlogi/articles/195d07bd9bc5b4</link><guid isPermaLink="true">https://zenn.dev/openlogi/articles/195d07bd9bc5b4</guid><pubDate>Tue, 03 Dec 2024 15:01:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--kNYJ6pBV--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%258D%25E3%2583%2583%25E3%2583%2588%25E3%2583%25AF%25E3%2583%25BC%25E3%2582%25AF%25E3%2582%2592%25E7%259F%25A5%25E3%2582%258A%25E3%2581%259F%25E3%2581%258F%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:ddddddO%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RkYTczMGE3NTAuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:OPENLOGI%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzEyOTRhMmViNjcuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ddddddO</dc:creator></item><item><title><![CDATA[DBのパフォーマンスを最大限に出すシンプルな方法（コネクション数とレイテンシー）]]></title><description><![CDATA[この記事は個人の検証ベースとなりますので参考程度にしていただければと思います。
+環境: 16コア、Go 1.23,  PostgreSQL 16
+きっかけは以下のスライドです。面白いのでぜひ読んでみてください。
+都市伝説バスターズ「WebアプリのボトルネックはDBだから言語の性能は関係ない」 - Kaigi on Rails 2024
+その記事の性能測定の例
+
+
+ まずは自分が利用する環境のデータベースのレーテンシーを調べます。
+例えば以下のクエリです。元のスライドのページのスクショ
+
+
+ curl とかで叩いて何回かログに出して見ます。Go では time.Since などで測定可能で...]]></description><link>https://zenn.dev/qa/articles/15265c043676c0</link><guid isPermaLink="true">https://zenn.dev/qa/articles/15265c043676c0</guid><pubDate>Tue, 03 Dec 2024 13:46:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--CJknn4LH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:DB%25E3%2581%25AE%25E3%2583%2591%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25BC%25E3%2583%259E%25E3%2583%25B3%25E3%2582%25B9%25E3%2582%2592%25E6%259C%2580%25E5%25A4%25A7%25E9%2599%2590%25E3%2581%25AB%25E5%2587%25BA%25E3%2581%2599%25E3%2582%25B7%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AB%25E3%2581%25AA%25E6%2596%25B9%25E6%25B3%2595%25EF%25BC%2588%25E3%2582%25B3%25E3%2583%258D%25E3%2582%25AF%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E6%2595%25B0%25E3%2581%25A8%25E3%2583%25AC%25E3%2582%25A4%25E3%2583%2586%25E3%2583%25B3%25E3%2582%25B7%25E3%2583%25BC%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Q%252FA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JlNjkxOGM2NjMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Q/A</dc:creator></item><item><title><![CDATA[Gentoo Linux を Hyper-V 上にインストールする]]></title><description><![CDATA[
+ なにこれ
+この記事は 木更津高専 Advent Calendar 2024 参加記事です．
+
+
+今回は Gentoo Linux を Hyper-V 上にインストールしたので備忘録としてここに残しておきます．
+私個人の環境・思想による部分が大きいので，この記事を参考にする際は自己責任でお願いします．
+
+ 仮想スイッチの作成
+Hyper-V マネージャー を開く．
+
+右ペインの 操作 →  仮想スイッチ マネージャー... を選択．
+外部 を選択して 仮想スイッチの作成(S)．
+
+適当な名前をつけて OK(O) で閉じる．
+
+
+ 仮想マシンの作成
+右ペインの 操作 →  新規 → 仮想...]]></description><link>https://zenn.dev/nxvzbgbfben/articles/884944666cec97</link><guid isPermaLink="true">https://zenn.dev/nxvzbgbfben/articles/884944666cec97</guid><pubDate>Tue, 03 Dec 2024 12:29:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--yePk_v6v--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Gentoo%2520Linux%2520%25E3%2582%2592%2520Hyper-V%2520%25E4%25B8%258A%25E3%2581%25AB%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:NXVZBGBFBEN%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0ZVFGVHFTeHhDTGkwc3pCZ1RrWkxOaUFvN2s3R1R6WFExdnItZTRWWmY1MHpFPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>NXVZBGBFBEN</dc:creator></item><item><title><![CDATA[Arch LinuxでVSCodeをインストールするメモ]]></title><description><![CDATA[
+ Arch LinuxでVSCodeをインストールするメモ
+毎回ググってしまうのでシェルスクリプトにしてメモ。
+#!/bin/sh
+
+sudo pacman -Syyu --noconfirm &amp;&amp; \
+git clone https://AUR.archlinux.org/visual-studio-code-bin.git &amp;&amp; \
+cd visual-studio-code-bin &amp;&amp; \
+makepkg -s &amp;&amp; \
+sudo pacman -U visual-studio-code-bin-*.pkg.tar...]]></description><link>https://zenn.dev/mitate_gengaku/articles/archlinux-install-vscode</link><guid isPermaLink="true">https://zenn.dev/mitate_gengaku/articles/archlinux-install-vscode</guid><pubDate>Tue, 03 Dec 2024 10:00:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---g7zCzsE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Arch%2520Linux%25E3%2581%25A7VSCode%25E3%2582%2592%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%2599%25E3%2582%258B%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25BE%25A1%25E6%25A5%25AF%25E7%258E%2584%25E5%25B6%25BD%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0tQOVRYWHQ5Qm1BLVplcURoLWdxUHl4RVFjMmNsRkhSNk95XzVVSVVhPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>御楯玄嶽</dc:creator></item><item><title><![CDATA[Arch Linuxでパッケージをアップデートした際のPGP key errorの直し方のメモ]]></title><description><![CDATA[
+ Arch Linuxでパッケージをアップデートした際のPGP key errorの直し方のメモ
+pacmanでパッケージをアップデートした場合、このようなエラーが発生する場合がある。
+Import PGP key XXXXXX, "YYYYYYYYY &lt;alphabet@archlinux.org&gt;"? [Y/n] 
+error: key "ZZZZZZZZZZZ" could not be imported
+error: required key missing from keyring
+error: failed to commit transaction (unex...]]></description><link>https://zenn.dev/mitate_gengaku/articles/fix-archlinux-pgp-key-error</link><guid isPermaLink="true">https://zenn.dev/mitate_gengaku/articles/fix-archlinux-pgp-key-error</guid><pubDate>Tue, 03 Dec 2024 10:00:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Ue69oqSi--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Arch%2520Linux%25E3%2581%25A7%25E3%2583%2591%25E3%2583%2583%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B8%25E3%2582%2592%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%25E3%2583%2587%25E3%2583%25BC%25E3%2583%2588%25E3%2581%2597%25E3%2581%259F%25E9%259A%259B%25E3%2581%25AEPGP%2520key%2520error%25E3%2581%25AE%25E7%259B%25B4%25E3%2581%2597%25E6%2596%25B9%25E3%2581%25AE%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25BE%25A1%25E6%25A5%25AF%25E7%258E%2584%25E5%25B6%25BD%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0tQOVRYWHQ5Qm1BLVplcURoLWdxUHl4RVFjMmNsRkhSNk95XzVVSVVhPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>御楯玄嶽</dc:creator></item><item><title><![CDATA[Arch Linuxでfailed to synchronize all databasesが表示されたときの直し方のメモ]]></title><description><![CDATA[
+ Arch Linuxでfailed to synchronize all databasesが表示されたときの直し方のメモ
+sudo rm /var/lib/pacman/db.lck
+]]></description><link>https://zenn.dev/mitate_gengaku/articles/fix-archlinux-failed-to-synchronize-all-database</link><guid isPermaLink="true">https://zenn.dev/mitate_gengaku/articles/fix-archlinux-failed-to-synchronize-all-database</guid><pubDate>Tue, 03 Dec 2024 10:00:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xUl3OptZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Arch%2520Linux%25E3%2581%25A7failed%2520to%2520synchronize%2520all%2520databases%25E3%2581%258C%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2595%25E3%2582%258C%25E3%2581%259F%25E3%2581%25A8%25E3%2581%258D%25E3%2581%25AE%25E7%259B%25B4%25E3%2581%2597...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25BE%25A1%25E6%25A5%25AF%25E7%258E%2584%25E5%25B6%25BD%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0tQOVRYWHQ5Qm1BLVplcURoLWdxUHl4RVFjMmNsRkhSNk95XzVVSVVhPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>御楯玄嶽</dc:creator></item><item><title><![CDATA[Arch Linuxでパッケージをインストールした際、errors occurredと出た場合の直し方のメモ]]></title><description><![CDATA[
+ Arch Linuxでパッケージをインストールした際、errors occurredと出た場合の直し方のメモ
+
+エラーが発生パッケージを無視してアップデート
+
+sudo pacman -Syu —ignore 左側
+
+1が終了したらエラーのパッケージを再インストール
+
+sudo pacman -S 左側 —overwrite ‘*’
+]]></description><link>https://zenn.dev/mitate_gengaku/articles/fix-archlinux-errors-occurred</link><guid isPermaLink="true">https://zenn.dev/mitate_gengaku/articles/fix-archlinux-errors-occurred</guid><pubDate>Tue, 03 Dec 2024 10:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5JMVMie_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Arch%2520Linux%25E3%2581%25A7%25E3%2583%2591%25E3%2583%2583%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B8%25E3%2582%2592%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%2597%25E3%2581%259F%25E9%259A%259B%25E3%2580%2581errors%2520occurred%25E3%2581%25A8%25E5%2587%25BA%25E3%2581%259F%25E5%25A0%25B4%25E5%2590%2588%25E3%2581%25AE%25E7%259B%25B4%25E3%2581%2597%25E6%2596%25B9%25E3%2581%25AE%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25BE%25A1%25E6%25A5%25AF%25E7%258E%2584%25E5%25B6%25BD%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0tQOVRYWHQ5Qm1BLVplcURoLWdxUHl4RVFjMmNsRkhSNk95XzVVSVVhPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>御楯玄嶽</dc:creator></item><item><title><![CDATA[Git リポジトリとバックアップ]]></title><description><![CDATA[
+ はじめに
+これは「Linux 使いになりたい人のための Advent Calendar 2024」の記事です。
+筆者は、Web エンジニアを志望する人には、セルフホスト Git サービスを稼働させて利用することをオススメしています。もし Git を使ったことがないなら、Git を学ぶときに、セルフホスト Git サービスを稼働させることも視野に含めながら学習するのが効率的だと考えています。
+!
+この記事は、次の記事の続きです。
+
+
+
+ Git リポジトリとバックアップ
+セルフホスト Git サービスを稼働させることを考えると、Git リポジトリとバックアップの対応方法について考えてお...]]></description><link>https://zenn.dev/hiro345/articles/20241201_advent_calendar_2024_02</link><guid isPermaLink="true">https://zenn.dev/hiro345/articles/20241201_advent_calendar_2024_02</guid><pubDate>Tue, 03 Dec 2024 09:58:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7xCHOZwh--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Git%2520%25E3%2583%25AA%25E3%2583%259D%25E3%2582%25B8%25E3%2583%2588%25E3%2583%25AA%25E3%2581%25A8%25E3%2583%2590%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Hiroshi%2520Koyama%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2k5ZzdjLS0xTFk0S2k0LWw3dVFSSFZRdEdQcWZHYTlibVRJYUtFM0E9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Hiroshi Koyama</dc:creator></item><item><title><![CDATA[dnfコマンドの整理]]></title><description><![CDATA[
+ 調べた経緯
+リポジトリ周りの用語やdnfコマンドの理解があいまいだったので整理を兼ねてメモします。
+Wordpressのインストールする関係でPHP、MySQLのインストールするときに使用したコマンドを例に確認しています。
+
+ リポジトリ関係の基礎をおさらい
+おもにChatGPTで確認
+
+
+リポジトリとは？
+リポジトリ（Repository） は、ソフトウェアパッケージが保管されている場所（サーバー）のことです。
+AlmaLinuxやCentOSのようなLinuxディストリビューションでは、dnfやyumといったパッケージ管理システムを使ってリポジトリからソフトウェアをダウンロード・...]]></description><link>https://zenn.dev/mizuga/articles/e9de5ee3855405</link><guid isPermaLink="true">https://zenn.dev/mizuga/articles/e9de5ee3855405</guid><pubDate>Tue, 03 Dec 2024 07:42:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--XY46H1du--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:dnf%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2581%25AE%25E6%2595%25B4%25E7%2590%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mizuga%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg5NzU1NTA5ZmEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mizuga</dc:creator></item><item><title><![CDATA[NixOSでSecureBoot+LVM on LUKS]]></title><description><![CDATA[
+ 前がたり
+
+ 動機
+https://zenn.dev/keitti73/articles/d06c0a587695da
+これと同じことをNixOSでもしたいよねということです。
+
+ Q.グラフィカルインストール出でてくる暗号化じゃだめなの?
+A.駄目です。
+理由:
+グラフィカルインストールでできる暗号化はLUKS1使用されています(要出典
+また、LVM on LUKSになってないのでパーティション構成用意に変更できません(変更する必要があるかは議論しないものとする)
+
+ 課題
+
+筆者がflakeやhome-managerについて理解しておらず使用していない。
+
+どころかnixそのもの...]]></description><link>https://zenn.dev/keitti73/articles/7b98c03e0e18be</link><guid isPermaLink="true">https://zenn.dev/keitti73/articles/7b98c03e0e18be</guid><pubDate>Tue, 03 Dec 2024 06:54:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GkxA39wL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:NixOS%25E3%2581%25A7SecureBoot%252BLVM%2520on%2520LUKS%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:keitti73%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhiMjY4YmVhYmQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>keitti73</dc:creator></item><item><title><![CDATA[dnf(yum) updateをサボったせいでサーバに接続できなくなった]]></title><description><![CDATA[Microsoft Azure上のLinuxサーバをいじっていたところ、とつぜんSSH接続ができなくなってしまいました。
+色々と原因を調査したところ、サーバ構築時にdnf updateをサボったことが原因だと分かったので、調査内容や対処方法をまとめています。
+!
+Linuxサーバを立てたら横着せずにまずはパッケージマネージャ(dnf,apt等)のupdateコマンドを実行しよう
+
+
+ SSH接続ができなくなるまで
+サーバはAzure上で構築したVM、OSイメージはRockyLinux9を利用。
+コマンドとしては以下を実行するだけで、SSH接続ができなくなります。
+（環境によっては再現しな...]]></description><link>https://zenn.dev/pesi/articles/b3a39f0bce9c25</link><guid isPermaLink="true">https://zenn.dev/pesi/articles/b3a39f0bce9c25</guid><pubDate>Mon, 02 Dec 2024 17:11:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qRR8MfsC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:dnf%2528yum%2529%2520update%25E3%2582%2592%25E3%2582%25B5%25E3%2583%259C%25E3%2581%25A3%25E3%2581%259F%25E3%2581%259B%25E3%2581%2584%25E3%2581%25A7%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2581%25AB%25E6%258E%25A5%25E7%25B6%259A%25E3%2581%25A7%25E3%2581%258D%25E3%2581%25AA%25E3%2581%258F%25E3%2581%25AA%25E3%2581%25A3%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25BA%25E3%2581%2597%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI0NTA0ZTY4NTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ぺし</dc:creator></item><item><title><![CDATA[セルフホスト Git サービスをオススメする理由]]></title><description><![CDATA[
+ はじめに
+これは「Linux 使いになりたい人のための Advent Calendar 2024」の記事です。
+筆者は、Web エンジニアを志望する人には、セルフホスト Git サービスを稼働させて利用することをオススメしています。もし Git を使ったことがないなら、Git を学ぶときに、セルフホスト Git サービスを稼働させることも視野に含めながら学習するのが効率的だと考えています。
+
+ Web エンジニア志望者に必要な知識
+Web エンジニア志望者に必要な知識としては、次のようなものがあります。
+
+Web アプリ開発に使うプログラミング言語の知識
+Web アプリ実行環境につい...]]></description><link>https://zenn.dev/hiro345/articles/20241201_advent_calendar_2024_01</link><guid isPermaLink="true">https://zenn.dev/hiro345/articles/20241201_advent_calendar_2024_01</guid><pubDate>Mon, 02 Dec 2024 10:44:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--LJ63Cacz--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25BB%25E3%2583%25AB%25E3%2583%2595%25E3%2583%259B%25E3%2582%25B9%25E3%2583%2588%2520Git%2520%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2593%25E3%2582%25B9%25E3%2582%2592%25E3%2582%25AA%25E3%2582%25B9%25E3%2582%25B9%25E3%2583%25A1%25E3%2581%2599%25E3%2582%258B%25E7%2590%2586%25E7%2594%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Hiroshi%2520Koyama%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2k5ZzdjLS0xTFk0S2k0LWw3dVFSSFZRdEdQcWZHYTlibVRJYUtFM0E9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Hiroshi Koyama</dc:creator></item><item><title><![CDATA[Linux 使いになりたい人のための Advent Calendar 2024]]></title><description><![CDATA[
+ はじめに
+アドベントカレンダーの時期がきたので、「ぼっち・ざ・アドベントカレンダー」をやってみようと思い立ちました。プライベートでいろいろあるので、毎日の更新は難しいかもしれませんが、できる範囲でやってみようと考えています。
+
+ 内容について
+内容については、タイトルにあるとおり「Linux 使いになりたい人のための Advent Calendar」とします。Linux に関する技術をメインにしつつ、Windows からでも使えることを考慮した記事を書く予定です。
+なお、最近は、Web エンジニアを目指すなら、セルフホスト Git サービスを運用してみるのがスキルアップに良く、実用的...]]></description><link>https://zenn.dev/hiro345/articles/20241201_advent_calendar_2024_00</link><guid isPermaLink="true">https://zenn.dev/hiro345/articles/20241201_advent_calendar_2024_00</guid><pubDate>Sun, 01 Dec 2024 06:07:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3tirPDeo--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%2520%25E4%25BD%25BF%25E3%2581%2584%25E3%2581%25AB%25E3%2581%25AA%25E3%2582%258A%25E3%2581%259F%25E3%2581%2584%25E4%25BA%25BA%25E3%2581%25AE%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%2520Advent%2520Calendar%25202024%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Hiroshi%2520Koyama%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2k5ZzdjLS0xTFk0S2k0LWw3dVFSSFZRdEdQcWZHYTlibVRJYUtFM0E9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Hiroshi Koyama</dc:creator></item><item><title><![CDATA[Ubuntu・Linux Mint・DebianでGrub Customizerをインストールする方法]]></title><description><![CDATA[Grub Customizerは、GRUBブートローダーの設定を簡単に管理・カスタマイズできるツールです。デフォルトOSの設定やブート順の変更、外観のカスタマイズなど、初心者でも直感的に操作可能。本記事では、Ubuntu、Linux Mint、Debian向けに、簡単にインストールできる手順を解説します。また、Grub Customizerの利用に適したおすすめVPSサービスも紹介します。
+
+
+ Grub Customizerの特徴
+
+Grub Customizerを使用すると、以下のような操作が可能になります：
+
+
+ブート順の管理：ドラッグ&amp;ドロップでブート順を変更。
+
+外観カ...]]></description><link>https://zenn.dev/lulucky/articles/95ab49ee9cfc31</link><guid isPermaLink="true">https://zenn.dev/lulucky/articles/95ab49ee9cfc31</guid><pubDate>Fri, 29 Nov 2024 10:09:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3QlUb_Go--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ubuntu%25E3%2583%25BBLinux%2520Mint%25E3%2583%25BBDebian%25E3%2581%25A7Grub%2520Customizer%25E3%2582%2592%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:VPS%2520Pro%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzljMWE1ODU5ZTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>VPS Pro</dc:creator></item><item><title><![CDATA[LinuxでGitサーバーを構築する方法：簡単ガイド]]></title><description><![CDATA[Gitは現代のソフトウェア開発に欠かせない分散型バージョン管理システムです。本記事では、Linux上でGitサーバーを構築する方法をわかりやすく解説します。また、Gitサーバー運用に最適なおすすめVPSサービスも紹介します。
+
+
+ 1. Gitとは？
+
+Gitはソースコード管理を効率化するための分散型バージョン管理システムです。以下の特長があります：
+
+
+効率的なプロジェクト管理：コードの履歴を一元管理。
+
+非線形な開発のサポート：ブランチやマージ機能で柔軟な開発が可能。
+
+分散型アーキテクチャ：ローカル環境で作業を完結。
+
+
+ 2. Gitサーバーを構築するメリット
+
+
+ メリット
+
+...]]></description><link>https://zenn.dev/lulucky/articles/d924921669e7cc</link><guid isPermaLink="true">https://zenn.dev/lulucky/articles/d924921669e7cc</guid><pubDate>Fri, 29 Nov 2024 09:48:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hwSKD_z3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%25E3%2581%25A7Git%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2582%2592%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%25EF%25BC%259A%25E7%25B0%25A1%25E5%258D%2598%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:VPS%2520Pro%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzljMWE1ODU5ZTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>VPS Pro</dc:creator></item><item><title><![CDATA[Arch Linux 入門]]></title><description><![CDATA[Arch Linux の環境構築手順をご紹介します。2021年頃の個人メモを元にまとめたものですが、参考になれば幸いです。]]></description><link>https://zenn.dev/caunus/books/archlinux-introduction</link><guid isPermaLink="true">https://zenn.dev/caunus/books/archlinux-introduction</guid><pubDate>Fri, 29 Nov 2024 02:35:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--661Y0yxf--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci9iZTNjYmFlMmM4LnBuZw==%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>caunu-s</dc:creator></item><item><title><![CDATA[Arch Linux の NVIDIA Display Driver インストールで詰まった話]]></title><description><![CDATA[
+ 記事を書いたきっかけ
+Arch Linux の NVIDIA グラボ用 Display Driver のインストールがやや難易度高かったので、共有兼備忘録で記事に残します。
+※時間を使って多くを学んだので記録に残したかった。
+
+ 動作環境
+以下の本でまとめた Arch Linux 環境を使用しました。
+https://zenn.dev/caunus/books/archlinux-introduction/viewer/environments
+
+ 詰まるまでの設定手順
+詳しい GUI の設定手順は以下で説明しています。
+https://zenn.dev/caunus/books/a...]]></description><link>https://zenn.dev/caunus/articles/archlinux-displaydrivers</link><guid isPermaLink="true">https://zenn.dev/caunus/articles/archlinux-displaydrivers</guid><pubDate>Fri, 29 Nov 2024 02:35:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--W4YTSa-3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Arch%2520Linux%2520%25E3%2581%25AE%2520NVIDIA%2520Display%2520Driver%2520%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%25A7%25E8%25A9%25B0%25E3%2581%25BE%25E3%2581%25A3%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:caunu-s%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA4Zjg4YmUxNjQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>caunu-s</dc:creator></item><item><title><![CDATA[CoreDNS でローカルアプリケーションの名前解決をする。]]></title><description><![CDATA[
+ 記事を書いたきっかけ
+Arch Linux で Kubernetes 環境を構築していたある日のこと...
+「ちゃんとDNSサーバ勉強したいよなぁ」
+「/etc/hosts 管理脱却できないかなぁ」
+「別にお金払って何かやる気はないんだよなぁ」
+と漠然と考え、「じゃあまずローカルで OSS の DNS サーバ立ち上げて動作見てみようぜ」ということで CoreDNS の動作確認を兼ねて設定をしていたので、共有と備忘録がてら記事に残します。
+
+ やりたかったこと
+
+53 ポートを使う名前解決サーバをローカルに立てる。
+名前解決に関する設定を一か所に集約する。
+
+つまりはスタブリゾルバを触...]]></description><link>https://zenn.dev/caunus/articles/archlinux-coredns</link><guid isPermaLink="true">https://zenn.dev/caunus/articles/archlinux-coredns</guid><pubDate>Fri, 29 Nov 2024 02:35:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--cjYvjJfO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:CoreDNS%2520%25E3%2581%25A7%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25AB%25E3%2583%25AB%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2581%25AE%25E5%2590%258D%25E5%2589%258D%25E8%25A7%25A3%25E6%25B1%25BA%25E3%2582%2592%25E3%2581%2599%25E3%2582%258B%25E3%2580%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:caunu-s%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA4Zjg4YmUxNjQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>caunu-s</dc:creator></item><item><title><![CDATA[Amazon Fire HD 10 (7th generation) を Arch Linux サーバ化する。]]></title><description><![CDATA[
+ 記事を書いたきっかけ
+家に眠っていた Amazon Fire HD 10 (7th generation) を有効活用したい！の一心で設定をして動作検証しました。
+まぁまぁ使えそうだったので、共有&amp;備忘録します。
+
+ やりたかったこと
+
+タブレットを (Arch) Linux サーバ化して、いくつかのローカル管理アプリケーションを外部化したかった。
+どこでも触れる Linux 環境が欲しかった。
+
+
+ 動作環境
+Amazon Fire HD 10 (7th generation) を使います。
+以下の事前作業がしてある端末を使います。
+
+Reset to Factory De...]]></description><link>https://zenn.dev/caunus/articles/android-fire-arch</link><guid isPermaLink="true">https://zenn.dev/caunus/articles/android-fire-arch</guid><pubDate>Fri, 29 Nov 2024 02:35:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dI-GobEG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Amazon%2520Fire%2520HD%252010%2520%25287th%2520generation%2529%2520%25E3%2582%2592%2520Arch%2520Linux%2520%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E5%258C%2596%25E3%2581%2599%25E3%2582%258B%25E3%2580%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:caunu-s%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA4Zjg4YmUxNjQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>caunu-s</dc:creator></item><item><title><![CDATA[新MacでLinux：Kubuntu24.04 Theme ① Theme Basic]]></title><description><![CDATA[こんにちは、Armlinです。MacでLinuxシリーズを見て頂き有難うございます。
+https://zenn.dev/armcore/articles/maclinux_index
+
+ 1.デスクトップテーマ
+今回はデスクトップテーマの変更についてです。自分で色々試せば良いのですが、基本的な事だけ解説します。Plasmaはカスタマイズ性が高く、本当に・・・全てを把握するのは困難です。それだけで本が出せると思います。
+この連載の通りインストールした場合、デフォルトのテーマは下の様に成っています。
+
+
+ 2.一番簡単なテーマの変更
+まずは設定を開きましょう。次にAppearanceからGl...]]></description><link>https://zenn.dev/armcore/articles/kubuntu2404_cust_theme</link><guid isPermaLink="true">https://zenn.dev/armcore/articles/kubuntu2404_cust_theme</guid><pubDate>Thu, 28 Nov 2024 08:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xWlcS_Od--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%2596%25B0Mac%25E3%2581%25A7Linux%25EF%25BC%259AKubuntu24.04%2520Theme%2520%25E2%2591%25A0%2520Theme%2520Basic%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Armlin%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM3ODIxNWUwN2UuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Armlin</dc:creator></item></channel></rss>

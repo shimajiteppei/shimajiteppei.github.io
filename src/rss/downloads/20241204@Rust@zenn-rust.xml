@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Rust」のフィード]]></title><description><![CDATA[Zennのトピック「Rust」のRSSフィードです]]></description><link>https://zenn.dev/topics/rust</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ba09661577.png</url><title>Zennの「Rust」のフィード</title><link>https://zenn.dev/topics/rust</link></image><generator>zenn.dev</generator><lastBuildDate>Wed, 04 Dec 2024 05:09:05 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/rust/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Tauriでメニューバーにアプリを常駐しよう[Rust編]]]></title><description><![CDATA[!
+この記事は、Aidemy Advent Calendar 2024 4 日目の記事です。
+
+
+ はじめに
+以前[Rust]はじめてのデスクトップアプリ開発 with React × Tauriという記事を書いたのですが、
+今年はその Tauri が待望の v2.0 にアップデートされました。
+https://v2.tauri.app/blog/tauri-20/#enhancements
+目玉機能であるモバイル対応が Stable になり、個人的には激アツなアップデートとなりました。
+今回はそのうちの一つである、System Tray APIを使って、
+メニューバーに常駐するアプリケ...]]></description><link>https://zenn.dev/aidemy/articles/8d8e406967d386</link><guid isPermaLink="true">https://zenn.dev/aidemy/articles/8d8e406967d386</guid><pubDate>Wed, 04 Dec 2024 00:55:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--XpTIpqJT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Tauri%25E3%2581%25A7%25E3%2583%25A1%25E3%2583%258B%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2581%25AB%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E5%25B8%25B8%25E9%25A7%2590%25E3%2581%2597%25E3%2582%2588%25E3%2581%2586%255BRust%25E7%25B7%25A8%255D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2583%2584%25E3%2583%2581%25E3%2583%258E%25E3%2582%25B3%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNhNmVhZTQ3ZDkuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Aidemy%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAyNDk2MGJlYzIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ツチノコ</dc:creator></item><item><title><![CDATA[RustでAWSのAthenaで一覧を大量に楽して取得したい]]></title><description><![CDATA[
+ 目的
+ユニークビジョン株式会社 Advent Calendar 2024の12/2の記事です。
+RustでAWSのS3で一覧を大量に楽して取得したい
+RustでAWSのDynamoDBで一覧を大量に楽して取得したい
+Athena版です。他の記事と同じやり方です。
+
+ コード
+
+Cargo.toml
+[package]
+name = "athena_fold"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+anyhow = "1"
+aws-config = "1.5.10"
+aws-sdk-athena = "1.53.0"
+aw...]]></description><link>https://zenn.dev/aoyagikouhei/articles/8e2b722c8bf31d</link><guid isPermaLink="true">https://zenn.dev/aoyagikouhei/articles/8e2b722c8bf31d</guid><pubDate>Wed, 04 Dec 2024 00:33:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vKBw_TNA--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25A7AWS%25E3%2581%25AEAthena%25E3%2581%25A7%25E4%25B8%2580%25E8%25A6%25A7%25E3%2582%2592%25E5%25A4%25A7%25E9%2587%258F%25E3%2581%25AB%25E6%25A5%25BD%25E3%2581%2597%25E3%2581%25A6%25E5%258F%2596%25E5%25BE%2597%25E3%2581%2597%25E3%2581%259F%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E9%259D%2592%25E6%259F%25B3%25E5%25BA%25B7%25E5%25B9%25B3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFjZDA3ZGRhNzguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>青柳康平</dc:creator></item><item><title><![CDATA[Day 3:メモリオーダリング ~並行処理の基礎~]]></title><description><![CDATA[
+ 1. メモリオーダリングとは
+昨日はアトミック操作について説明した。今日は、メモリオーダリングについて学習する。
+「メモリオーダリング（Memory Ordering）」とは、コンピュータシステムやプログラミングにおいて、メモリ操作（読み込みや書き込み）がどのような順序で実行されるかを定義する概念である。
+プロセッサは性能向上のため、プログラムの命令順に処理を実行せずに、順序を入れ替えて実行することがある。性能が向上することに越したことがないのだが、マルチスレッド環境でメモリ操作の実行の順序が適切でないと、データの不整合が発生するなどの問題が生じる。なので、アトミック操作のメモリオー...]]></description><link>https://zenn.dev/labbase_sano/articles/971fdbc9d063e5</link><guid isPermaLink="true">https://zenn.dev/labbase_sano/articles/971fdbc9d063e5</guid><pubDate>Tue, 03 Dec 2024 18:31:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bb_qABsv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Day%25203%253A%25E3%2583%25A1%25E3%2583%25A2%25E3%2583%25AA%25E3%2582%25AA%25E3%2583%25BC%25E3%2583%2580%25E3%2583%25AA%25E3%2583%25B3%25E3%2582%25B0%2520%7E%25E4%25B8%25A6%25E8%25A1%258C%25E5%2587%25A6%25E7%2590%2586%25E3%2581%25AE%25E5%259F%25BA%25E7%25A4%258E%7E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Sano%2520%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ0Mjc3M2M5MjIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Sano🐡</dc:creator></item><item><title><![CDATA[Rustの`std::io::Write::write`が`Ok(0)`を返すことについて]]></title><description><![CDATA[
+ はじめに
+先日、hyperのストリーム[1]をtokio-rustlsでラップした際に、tokio::io::AsyncWrite::poll_writeが返すOk(0)の解釈の違いによって問題が出たので、そのときに調べたことをまとめます
+こちらは厳密にはtokioのAsyncWriteの話ですが、実質同じなのでstd::io::Writeの話として記事を続けます
+そのときのissue
+
+https://github.com/rustls/tokio-rustls/issues/92
+https://github.com/hyperium/hyper/issues/3801
+
+
+ 起...]]></description><link>https://zenn.dev/hatoo/articles/fc6dfaecbf1efa</link><guid isPermaLink="true">https://zenn.dev/hatoo/articles/fc6dfaecbf1efa</guid><pubDate>Tue, 03 Dec 2024 15:07:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8NNGsBVN--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25AE%2560std%253A%253Aio%253A%253AWrite%253A%253Awrite%2560%25E3%2581%258C%2560Ok%25280%2529%2560%25E3%2582%2592%25E8%25BF%2594%25E3%2581%2599%25E3%2581%2593%25E3%2581%25A8%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hatoo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2QyMzRhZWY1YjMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hatoo</dc:creator></item><item><title><![CDATA[ブラウザ上でヌルヌル動作する流体シミュレーションを Rust + wasm-bindgen-rayon で実装する]]></title><description><![CDATA[この記事は Rust Advent Calender 2024 の 4 日目の記事です。
+Rust と wasm-bindgen-rayon を使って，ブラウザ上で動作する流体シミュレーションを実装しました．マウスで流体をグリグリいじれるようになっているので，遊んでみてください．
+
+Demo（キャンバスの描画に数秒かかるかもしれません．動作には SharedArrayBuffer に対応しているブラウザが必要です）:
+https://fluid-simulation-test.netlify.app/
+Repository :
+https://github.com/matsuoka-60...]]></description><link>https://zenn.dev/sparkle/articles/8f9fb109c0d5aa</link><guid isPermaLink="true">https://zenn.dev/sparkle/articles/8f9fb109c0d5aa</guid><pubDate>Tue, 03 Dec 2024 15:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--sIcnC3JL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2596%25E3%2583%25A9%25E3%2582%25A6%25E3%2582%25B6%25E4%25B8%258A%25E3%2581%25A7%25E3%2583%258C%25E3%2583%25AB%25E3%2583%258C%25E3%2583%25AB%25E5%258B%2595%25E4%25BD%259C%25E3%2581%2599%25E3%2582%258B%25E6%25B5%2581%25E4%25BD%2593%25E3%2582%25B7%25E3%2583%259F%25E3%2583%25A5%25E3%2583%25AC%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%2592%2520Rust%2520%252B%2520wasm-bindgen-rayon%2520%25E3%2581%25A7%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:matsuoka-601%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTFdlWDU3WmVCejFrS2J3MEYtUFhnZUZrS1EzNXVtV3VUUFQyNm1NbmZyPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>matsuoka-601</dc:creator></item><item><title><![CDATA[Solana の開発環境の紹介]]></title><description><![CDATA[!
+これは Solana Advent Calendar 2024 4 日目の記事になります。
+
+こんにちは、ソフトゲートと申します。
+しばらくお休みしておりましたが、最近 Solana での開発に復帰しました。
+ご縁があり、Radar ハッカソンの Gaming Track で 3 位を受賞した Windfall で主にコントラクト開発を担当しております。
+さて、今回は「Solana の開発環境の紹介」というテーマで、
+
+Solana CLI および Anchor のインストール手順の説明
+最近 Solana で使われている（今後使われそうな）開発ツールの紹介
+
+をお届けしたいと思いま...]]></description><link>https://zenn.dev/softgate/articles/75b1a1fbf10ef4</link><guid isPermaLink="true">https://zenn.dev/softgate/articles/75b1a1fbf10ef4</guid><pubDate>Tue, 03 Dec 2024 14:59:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--h4NUDUmd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Solana%2520%25E3%2581%25AE%25E9%2596%258B%25E7%2599%25BA%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25AE%25E7%25B4%25B9%25E4%25BB%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Softgate%2520Limited%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I4NDJmOTdhZTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Softgate Limited</dc:creator></item><item><title><![CDATA[自作言語のツールチェーンインストーラを作る]]></title><description><![CDATA[!
+この記事は 言語実装 Advent Calendar 2024 の3日目の記事です。
+
+
+ はじめに
+この記事では自作言語向けにツールチェーンインストーラを作成する方法について説明します。ツールチェーンインストーラとはRustにおける rustup のようなツールのことで、最新のツールチェーンへのアップデートや、バージョン切り替えなどの機能を提供します。
+特にまだ安定していない自作言語の場合、簡単にアップデートやバージョン切り替えができることはユーザの利便性だけでなく（例えば特定のバージョンで入ったバグの調査など）自分自身の開発にも便利です。
+
+ verylup
+以下では自作のハード...]]></description><link>https://zenn.dev/dalance/articles/47b450232c2c0e</link><guid isPermaLink="true">https://zenn.dev/dalance/articles/47b450232c2c0e</guid><pubDate>Tue, 03 Dec 2024 03:37:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--tEM0fUKu--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%2587%25AA%25E4%25BD%259C%25E8%25A8%2580%25E8%25AA%259E%25E3%2581%25AE%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%25E3%2583%2581%25E3%2582%25A7%25E3%2583%25BC%25E3%2583%25B3%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25A9%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:dalance%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZlYzIzM2VmYTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>dalance</dc:creator></item><item><title><![CDATA[Rustの地域コミュニティを立ち上げた背景と将来]]></title><description><![CDATA[こんにちは、Findyの西村(@sontixyou)です。この記事はFindy Advent Calendar 2024 3日目の記事です。
+
+ これはなに？
+Rustの地域コミュニティ Osaki.rsを立ち上げた。
+第一回イベントが成功したことを記念して、Osaki.rsを立ち上げた背景と今後について書く。
+ちなみに、私は地域コミュニティを立ち上げた経験はない。
+
+ なんで地域コミュニティを立ち上げた？
+
+ 理由1 気軽に参加できるコミュニティが少ない
+私は2024/7から本格的にRustを仕事とプライベートで使い始めました。
+Rustの文法を一通り学習した後、CRUDできるAPIサ...]]></description><link>https://zenn.dev/kenkenlysh/articles/a6186aaf0396e3</link><guid isPermaLink="true">https://zenn.dev/kenkenlysh/articles/a6186aaf0396e3</guid><pubDate>Mon, 02 Dec 2024 23:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--VHZ9ApMb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25AE%25E5%259C%25B0%25E5%259F%259F%25E3%2582%25B3%25E3%2583%259F%25E3%2583%25A5%25E3%2583%258B%25E3%2583%2586%25E3%2582%25A3%25E3%2582%2592%25E7%25AB%258B%25E3%2581%25A1%25E4%25B8%258A%25E3%2581%2592%25E3%2581%259F%25E8%2583%258C%25E6%2599%25AF%25E3%2581%25A8%25E5%25B0%2586%25E6%259D%25A5%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:sontixyou%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU5ZmFlN2M0MWUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sontixyou</dc:creator></item><item><title><![CDATA[仮想通貨Botterに贈るRust×bot開発 あるある21連発]]></title><description><![CDATA[
+ はじめに
+仮想通貨botterのみなさん、こんにちは!
+この記事は仮想通貨botter Advent Calendar 2024 の二日目の記事です！
+前日の記事は5000e12さんによる、ゆるく始めるアトミックアービトラージ と、shun_m2eさんによる SUIチェーンでAtomic Arbを行うまで でした。
+どちらの記事もAtomic Arbを異なった側面から説明していてとても参考になりました✨
+この記事では、bitbankでの高頻度取引botをRustで開発中の私が、なんかカッコいいプログラミング言語であるRustの魅力とその使い勝手を象徴するあるあるなどを紹介します。
+R...]]></description><link>https://zenn.dev/harui/articles/246013c5de1f72</link><guid isPermaLink="true">https://zenn.dev/harui/articles/246013c5de1f72</guid><pubDate>Mon, 02 Dec 2024 22:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--O1pqvicb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E4%25BB%25AE%25E6%2583%25B3%25E9%2580%259A%25E8%25B2%25A8Botter%25E3%2581%25AB%25E8%25B4%2588%25E3%2582%258BRust%25C3%2597bot%25E9%2596%258B%25E7%2599%25BA%2520%25E3%2581%2582%25E3%2582%258B%25E3%2581%2582%25E3%2582%258B21%25E9%2580%25A3%25E7%2599%25BA%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Harui%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSS1VaExIUDlyTFBxTWlsQU1EUnEwTUN1UDhwSnYwYk9hYkNpMDJ4eFdhYXpOLUdzYz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Harui</dc:creator></item><item><title><![CDATA[ゲームエンジンBevyのセットアップ方法]]></title><description><![CDATA[この記事ではゲームエンジンBevyのセットアップ方法について書かれています。
+実装したコードは以下のURLから見ることもできます。
+https://github.com/ittokunvim/bevy-setup
+
+ バージョン
+Bevyのバージョンは0.14.2を使用しています。
+このバージョン以外で実装を行うと動作しない可能性があります。
+bevy = "0.14.2"
+
+ セットアップ
+リポジトリ
+をクローンしてから、cargo runを実行することで遊ぶことができます。
+
+
+ 実装内容
+このプロジェクトは主にゲームステートの遷移についての記述がされています。
+ゲームステートはMa...]]></description><link>https://zenn.dev/ittoku_ky73/articles/bevy-setup-code</link><guid isPermaLink="true">https://zenn.dev/ittoku_ky73/articles/bevy-setup-code</guid><pubDate>Mon, 02 Dec 2024 18:56:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--WFZdRE4H--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B2%25E3%2583%25BC%25E3%2583%25A0%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%25B3Bevy%25E3%2581%25AE%25E3%2582%25BB%25E3%2583%2583%25E3%2583%2588%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ittokunvim%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FGZFp1Y3BCQXEzTW1mRWhOc3RMcUk5ZjQySGhwWE8tcmhrVjFFYUY3azhCPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ittokunvim</dc:creator></item><item><title><![CDATA[Day 2: アトミック操作 ~並行処理の基礎~]]></title><description><![CDATA[
+ 1. アトミック操作とは
+昨日は、RCUとは何か簡単な説明をした。
+今日からは、RCUなどの並行プリミティブを作るのに必要な並行処理の基礎を学習していく。
+まずは、アトミック操作から。
+
+ 2. アトミック操作でできること
+「アトミック」とは哲学でこれ以上分解することができないものを表す言葉である。
+「アトミック操作」も同様に、これ以上小さい操作に分解することや、他のスレッドから途中の状態を観測することができない操作を意味する。仮に途中で失敗しても元の状態に戻る。他のスレッドから観測できるのは、操作前か操作に成功した後の状態のみである。
+
+ 2.1. unsafeな並行カウンタを実装...]]></description><link>https://zenn.dev/labbase_sano/articles/0cc689814a26a5</link><guid isPermaLink="true">https://zenn.dev/labbase_sano/articles/0cc689814a26a5</guid><pubDate>Mon, 02 Dec 2024 18:36:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--RXMp54tt--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Day%25202%253A%2520%25E3%2582%25A2%25E3%2583%2588%25E3%2583%259F%25E3%2583%2583%25E3%2582%25AF%25E6%2593%258D%25E4%25BD%259C%2520%7E%25E4%25B8%25A6%25E8%25A1%258C%25E5%2587%25A6%25E7%2590%2586%25E3%2581%25AE%25E5%259F%25BA%25E7%25A4%258E%7E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Sano%2520%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ0Mjc3M2M5MjIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Sano🐡</dc:creator></item><item><title><![CDATA[学校のタスク管理Discord Botを運用する]]></title><description><![CDATA[この記事は 朝活部 Advent Calendar 2024 3日目の記事です
+2J Advent Calendar 2024 3日目の記事でもあります(サボりですみません)
+クラスのDiscord鯖で動いているBotです。
+https://github.com/1STEP621/task-bot-rs
+
+ 機能
+
+ タスク一覧を見る
+
+
+
+ 毎日12時にタスク通知する
+
+
+ タスク追加/削除/編集
+
+
+
+ よく使う時間リスト/教科リストの編集
+
+
+ バックアップ
+
+
+ 大変だったことなど
+
+ Discordの制限との戦い
+Discordの仕様で、セレクトボックスは25種類の選択肢までし...]]></description><link>https://zenn.dev/1step621/articles/8ab48659757915</link><guid isPermaLink="true">https://zenn.dev/1step621/articles/8ab48659757915</guid><pubDate>Mon, 02 Dec 2024 15:27:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--gb2GhVwN--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%25AD%25A6%25E6%25A0%25A1%25E3%2581%25AE%25E3%2582%25BF%25E3%2582%25B9%25E3%2582%25AF%25E7%25AE%25A1%25E7%2590%2586Discord%2520Bot%25E3%2582%2592%25E9%2581%258B%25E7%2594%25A8%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:1Step621%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JjOGNhMmYxYTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>1Step621</dc:creator></item><item><title><![CDATA[VueConf Japan 2024 レポート：フロントエンド開発の最前線]]></title><description><![CDATA[2024年、VueConf Japanは最新のフロントエンド技術、ツール、開発プラクティスに関する非常に有益な情報が満載のカンファレンスでした。このブログでは、VueConf Japan 2024で発表された重要なトピックや新技術について詳しくご紹介します。
+
+ 目次
+
+Vite: 高速化と効率化の先駆け
+UIコンポーネント管理の新しいアプローチ
+Rustの登場：JavaScriptツールに革命を
+Nuxtとサーバーサイドレンダリングの進化
+Vueの新機能：パフォーマンス向上とリアクティビティの強化
+まとめ：フロントエンド開発の未来を見据えて
+
+
+ Vite: 高速化と効率化の先駆け
+
+...]]></description><link>https://zenn.dev/tinaba96/articles/999a2f05ef1c9d</link><guid isPermaLink="true">https://zenn.dev/tinaba96/articles/999a2f05ef1c9d</guid><pubDate>Mon, 02 Dec 2024 13:42:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--EOmdUp_S--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:VueConf%2520Japan%25202024%2520%25E3%2583%25AC%25E3%2583%259D%25E3%2583%25BC%25E3%2583%2588%25EF%25BC%259A%25E3%2583%2595%25E3%2583%25AD%25E3%2583%25B3%25E3%2583%2588%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2589%25E9%2596%258B%25E7%2599%25BA%25E3%2581%25AE%25E6%259C%2580%25E5%2589%258D%25E7%25B7%259A%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tinaba96%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSVg5aks4MDd1WG82ZW9EeUNUN0tEZ0QxNC05cWlicXEzYW9Bb3lfbk8yMVNjTmpRPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tinaba96</dc:creator></item><item><title><![CDATA[WASM Component Modelでゲームをスクリプティングしてみる]]></title><description><![CDATA[https://x.com/Pctg_x8/status/1810677149952864299
+これの話をします
+試作リポジトリ: https://github.com/Pctg-x8/peridot-wasm-scripting-test
+
+ WASM Component Model
+詳しい話は他の記事もあるのでここでは省略しますが、WASM(WebAssembly)に他システム/コンポーネント間とのデータのやり取りの方法などを定めた拡張仕様です。
+基本的なデータ型（文字列型などメモリの確保が必要なデータ型を含む）に加えて構造体などの複合データ型のやり取りを、相手側がどういう言語を使...]]></description><link>https://zenn.dev/pctg_x8/articles/61f7e3304293e6</link><guid isPermaLink="true">https://zenn.dev/pctg_x8/articles/61f7e3304293e6</guid><pubDate>Mon, 02 Dec 2024 03:15:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--yP6Qz3sI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:WASM%2520Component%2520Model%25E3%2581%25A7%25E3%2582%25B2%25E3%2583%25BC%25E3%2583%25A0%25E3%2582%2592%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2583%2586%25E3%2582%25A3%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:S.Percentage%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2cwdENVQm5BQ1JlWDVmbjhyVG9PVFlLSldJTjF0NnFVbUctSUw2akE9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>S.Percentage</dc:creator></item><item><title><![CDATA[Day 1: RCUとは何か]]></title><description><![CDATA[
+ 1. イントロダクション
+これはsanoが一人でRCU(Read Copy Update)に関する話をまとめてRustでRCUを実装をしていくアドベントカレンダーである。
+25日間の記事をRCUの話題だけで書き切れるか不安だが、一つ一つの記事を読者が「面白い」「勉強になる」「わかりやすい」と思えるようなものにしていこうと思う。
+以下のような流れでRCUについて深く掘り下げていく：
+まずRCUとは何かという基本的な説明から入り、次に実装の土台となる並行処理の知識を解説する。
+その後、これらの知識を組み合わせてRCUの動作原理を理解し、最後にRustによる実装に取り組んでいく。
+12月1...]]></description><link>https://zenn.dev/labbase_sano/articles/c690f9e9539bf4</link><guid isPermaLink="true">https://zenn.dev/labbase_sano/articles/c690f9e9539bf4</guid><pubDate>Sun, 01 Dec 2024 18:10:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--cR4oQvNB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Day%25201%253A%2520RCU%25E3%2581%25A8%25E3%2581%25AF%25E4%25BD%2595%25E3%2581%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Sano%2520%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ0Mjc3M2M5MjIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Sano🐡</dc:creator></item><item><title><![CDATA[AtCoder用Discord Botを作ってみた]]></title><description><![CDATA[この記事は 朝活部 Advent Calendar 2024 2日目の記事です
+https://github.com/1STEP621/atcoder-bot-rs
+ユーザーを登録しておくと毎日0時にACした問題を報告してくれるBotです。
+
+もともとPythonで書かれていたのですが、Rustで書き直してみました。
+
+ Rustにしてよかったところ
+Embedの生成周りをイテレータを使ってきれいにできたのがうれしかったです。
+仕様としては、
+
+Embedのタイトルは「(ユーザー名)さんが昨日ACした問題」にし、ユーザーへのリンクにする
+Embedのフィールドに解いた問題のタイトル、Di...]]></description><link>https://zenn.dev/1step621/articles/1f81859b0e03ed</link><guid isPermaLink="true">https://zenn.dev/1step621/articles/1f81859b0e03ed</guid><pubDate>Sun, 01 Dec 2024 15:09:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7nd-IhoX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AtCoder%25E7%2594%25A8Discord%2520Bot%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:1Step621%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JjOGNhMmYxYTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>1Step621</dc:creator></item><item><title><![CDATA[ABC382:Rustで解く！問題解説]]></title><description><![CDATA[AtCoder Beginner Contest 382のA~E問題をRustで解いた際の解法をまとめました。
+
+ A問題
+
+問題
+
+https://atcoder.jp/contests/abc382/tasks/abc382_a
+
+解説
+
+与えられた文字列Sに含まれる@を.にD個置き換えます。
+よって、もともとの.の数に、Dを加えた値が答えとなります。
+
+コード
+
+use proconio::{input, marker::Chars};
+
+fn main() {
+    input! {
+        _n: usize, // 使用しない変数_n
+        d: usiz...]]></description><link>https://zenn.dev/nakst_hide/articles/2fb7727cd584ce</link><guid isPermaLink="true">https://zenn.dev/nakst_hide/articles/2fb7727cd584ce</guid><pubDate>Sun, 01 Dec 2024 12:56:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ZJa48clR--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ABC382%253ARust%25E3%2581%25A7%25E8%25A7%25A3%25E3%2581%258F%25EF%25BC%2581%25E5%2595%258F%25E9%25A1%258C%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nakahide%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YkMxNEpSQnNET01hTGcxTVRQWGNTWS1qYlNQbFRMQTN3ZU9Sdz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nakahide</dc:creator></item><item><title><![CDATA[なぜ Rust が好きなのか]]></title><description><![CDATA[さすが Rust！ おれたちにできないメモリ管理を平然とやってのける そこにシビれる！ あこがれるゥ！
+この味は！ ………コンパイルが通らない「味」だぜ……
+
+ はじめに
+筆者は個人的興味から（実務ではないが）Rust を書いており，とても好きな言語である．
+Rust は難易度が高いと言われることが多く，他の言語と比較すると採用されている場面も少ないため情報も少ない．しかし，Rust を書いているときに感じる楽しさや面白さは他の言語にはないものがある．
+せっかくなので，Rust が好きな理由をまとめてみたい．
+
+ Rust の特徴
+Rust には他の言語にはない概念として，例えば以下のよ...]]></description><link>https://zenn.dev/taroosg/articles/20241201170810-c0a814b1720446</link><guid isPermaLink="true">https://zenn.dev/taroosg/articles/20241201170810-c0a814b1720446</guid><pubDate>Sun, 01 Dec 2024 10:11:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--29H6f036--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%25AA%25E3%2581%259C%2520Rust%2520%25E3%2581%258C%25E5%25A5%25BD%25E3%2581%258D%25E3%2581%25AA%25E3%2581%25AE%25E3%2581%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Taro%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MyOGZiYzgwODUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Taro</dc:creator></item><item><title><![CDATA[RustのDockerビルド時の依存関係のキャッシュで詰まった話]]></title><description><![CDATA[
+ 最初に結論
+Hello,World!プログラムが実行されてしまうのは、RUN cargo buildのまえにRUN touch src/main.rsを挟むことで解決できる
+
+ はじめに
+RustのプログラムをDockerで動かすときに、素朴にDockerfileを書くと、依存関係のビルドにとてつもなく時間がかかってしまうので、Cargo.lockとCargo.tomlだけをコピーしてからビルドして、その後にソースコードをコピーしてビルドすることによって依存関係が変わっていない場合にDockerのキャッシュを効かせるテクニックがあります。
+参考: https://zenn.dev/u...]]></description><link>https://zenn.dev/harui/articles/df03573597e3d9</link><guid isPermaLink="true">https://zenn.dev/harui/articles/df03573597e3d9</guid><pubDate>Sun, 01 Dec 2024 07:32:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--TJoe-j0S--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25AEDocker%25E3%2583%2593%25E3%2583%25AB%25E3%2583%2589%25E6%2599%2582%25E3%2581%25AE%25E4%25BE%259D%25E5%25AD%2598%25E9%2596%25A2%25E4%25BF%2582%25E3%2581%25AE%25E3%2582%25AD%25E3%2583%25A3%25E3%2583%2583%25E3%2582%25B7%25E3%2583%25A5%25E3%2581%25A7%25E8%25A9%25B0%25E3%2581%25BE%25E3%2581%25A3%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Harui%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSS1VaExIUDlyTFBxTWlsQU1EUnEwTUN1UDhwSnYwYk9hYkNpMDJ4eFdhYXpOLUdzYz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Harui</dc:creator></item><item><title><![CDATA[AIとプログラミング言語：Rustが示すエラー耐性とAIとの親和性]]></title><description><![CDATA[
+ AIとプログラミング言語：Rustが示すエラー耐性とAIとの親和性
+近年、AI技術の進歩により、プログラミングの手法や言語選択が再び注目されています。特に、AIがコード生成に関与する場面が増える中、エラー耐性やコンパイラのエラー検出・修正提案能力が重要な要素となっています。本記事では、Rustの優秀さを中心に、Python、VB、C#、Java、C言語などと比較しながら、AIとの協調でプログラムの完成度を高めるのに適した言語について考察します。
+
+ なぜAIと親和性のあるプログラミング言語が必要か
+AIがコードを生成する際、人間のように曖昧さや文脈を完全に理解することは難しく、誤りが...]]></description><link>https://zenn.dev/kokimu/articles/1efcf6ef51012b</link><guid isPermaLink="true">https://zenn.dev/kokimu/articles/1efcf6ef51012b</guid><pubDate>Sun, 01 Dec 2024 00:40:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--DKJGHVDQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AI%25E3%2581%25A8%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%259F%25E3%2583%25B3%25E3%2582%25B0%25E8%25A8%2580%25E8%25AA%259E%25EF%25BC%259ARust%25E3%2581%258C%25E7%25A4%25BA%25E3%2581%2599%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E8%2580%2590%25E6%2580%25A7%25E3%2581%25A8AI%25E3%2581%25A8%25E3%2581%25AE%25E8%25A6%25AA%25E5%2592%258C%25E6%2580%25A7%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2593%25E3%2583%25BC%25E3%2581%258D%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2UwZTkxNWRmMTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>こーき</dc:creator></item></channel></rss>
