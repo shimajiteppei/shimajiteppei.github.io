@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「JavaScript」のフィード]]></title><description><![CDATA[Zennのトピック「JavaScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/javascript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/64acd76870.png</url><title>Zennの「JavaScript」のフィード</title><link>https://zenn.dev/topics/javascript</link></image><generator>zenn.dev</generator><lastBuildDate>Thu, 05 Dec 2024 07:14:09 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/javascript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[【GSAP】GSAP Practice【#５ GSAP Staggers】]]></title><description><![CDATA[
+ 【#５ GSAP Staggers】
+YouTube: https://youtu.be/JXKeEaWoDEk
+https://youtu.be/JXKeEaWoDEk
+今回は「Stagger」について解説していきます。
+https://gsap.com/resources/getting-started/Staggers
+まずは、Staggerを設定する要素を作成していきます。
+
+index.html
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8" /...]]></description><link>https://zenn.dev/web_life_ch/articles/4826d5c72a1d92</link><guid isPermaLink="true">https://zenn.dev/web_life_ch/articles/4826d5c72a1d92</guid><pubDate>Thu, 05 Dec 2024 05:04:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--AiudJ4WN--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590GSAP%25E3%2580%2591GSAP%2520Practice%25E3%2580%2590%2523%25EF%25BC%2595%2520GSAP%2520Staggers%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Web%2520Life%2520CH%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUl0YnZtbWNjTWFMM3dyd2x3VE5sVVZjTlhmZHEzZzF2QnJfMUJMSkJrN049czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Web Life CH</dc:creator></item><item><title><![CDATA[【JavaScript】Popover APIを使ったオートコンプリート機能の作り方 (前編)]]></title><description><![CDATA[先日、業務でライブラリを使わずにオートコンプリート機能(自動補完)を実装する機会がありました。
+オートコンプリート機能を自作することは、カスタマイズ性の向上やライブラリ依存性を排除することができる等のメリットがあります。
+自作でのオートコンプリート機能の実装を考えている方に少しでも参考になれば幸いです。
+※設計自体は別の方が行い、実装を自分が担当したので、本記事は実装部分がメインの内容になります。
+
+ 完成形
+実装の前に、完成形を紹介します。
+データは次の4つを設定していて、3文字以上合致すると候補が表示されます。
+['text1', 'text2', 'text3', 'text4']...]]></description><link>https://zenn.dev/luxiar/articles/ffa60803c4b31f</link><guid isPermaLink="true">https://zenn.dev/luxiar/articles/ffa60803c4b31f</guid><pubDate>Thu, 05 Dec 2024 02:30:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xiEkFZdY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590JavaScript%25E3%2580%2591Popover%2520API%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%259F%25E3%2582%25AA%25E3%2583%25BC%25E3%2583%2588%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AA%25E3%2583%25BC%25E3%2583%2588%25E6%25A9%259F%25E8%2583%25BD%25E3%2581%25AE%25E4%25BD%259C%25E3%2582%258A%25E6%2596%25B9%2520%2528%25E5%2589%258D%25E7%25B7%25A8%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:ysh%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JiYmNkZDg1ZTIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%25A9%25E3%2582%25B0%25E3%2582%25B6%25E3%2582%25A4%25E3%2582%25A2%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTGVrdUVGT0xhLXgwRVVIazF5dE51cERKTC04VFlGelY3R3A0bnhfbEdQZERxRFEwZz1zOTYtYw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ysh</dc:creator></item><item><title><![CDATA[EmscriptenのHEAPを使ってC++/JavaScript間でバッファやvectorを参照する]]></title><description><![CDATA[!
+この記事はにー兄さんアドベントカレンダー2024の4日目の記事です。
+
+
+ はじめに
+
+ TL;DR
+
+JS からでバッファを参照する時は HEAP におけるポインタと Length を使って TypedArray で取り出す
+C++で受け取る時は int 型のアドレスをポインタ型にキャストする
+
+
+ 概要
+本記事では、Emscripten で C++を WebAssembly にコンパイルして使うプロジェクトにおいて、バッファのやり取りをする方法を解説します。
+JS 側では ArrayBuffer・TypedArray として、C++側では vector として取り扱う前提となって...]]></description><link>https://zenn.dev/drumath2237/articles/emscripten-heap-vector-ref</link><guid isPermaLink="true">https://zenn.dev/drumath2237/articles/emscripten-heap-vector-ref</guid><pubDate>Wed, 04 Dec 2024 19:08:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--YYzA7ZOn--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Emscripten%25E3%2581%25AEHEAP%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6C%252B%252B%252FJavaScript%25E9%2596%2593%25E3%2581%25A7%25E3%2583%2590%25E3%2583%2583%25E3%2583%2595%25E3%2582%25A1%25E3%2582%2584vector%25E3%2582%2592%25E5%258F%2582%25E7%2585%25A7%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AB%25E3%2583%25BC%25E5%2585%2584%25E3%2581%2595%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dUQndtd2ZiTmM3Nzg0SmxRZWdlX3BSc09RdmdvX2hxNlg5MTJKT3VZPXMyNTAtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>にー兄さん</dc:creator></item><item><title><![CDATA[import / exportの記法だけではない、CommonJS modulesとES modulesの違い]]></title><description><![CDATA[本記事はsyumai Advent Calendar 2024 4日目の記事です。
+内容としては、主にWeb Developer Conference 2024の休憩中に@NozomuIkutaさんと行った雑談を記事化したものです。
+内容に何か問題があれば、本記事のコメント欄や、Xなどでご連絡ください。
+
+ require(esm)の登場
+2024年、ついにNode.jsのCommonJS modulesから、ES modulesを利用できるようになりました。
+使い方は簡単で、これまでCommonJS modulesから別のCommonJS modulesを利用するために使っていた re...]]></description><link>https://zenn.dev/syumai/articles/ct7je2f24dtgb5uso610</link><guid isPermaLink="true">https://zenn.dev/syumai/articles/ct7je2f24dtgb5uso610</guid><pubDate>Wed, 04 Dec 2024 18:58:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2njagHz2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:import%2520%252F%2520export%25E3%2581%25AE%25E8%25A8%2598%25E6%25B3%2595%25E3%2581%25A0%25E3%2581%2591%25E3%2581%25A7%25E3%2581%25AF%25E3%2581%25AA%25E3%2581%2584%25E3%2580%2581CommonJS%2520modules%25E3%2581%25A8ES%2520modules%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:syumai%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2k5VTgtbGh1Q2NUU2lMLU9lbzRFMzJvbEhDeHhRN2kzbmZoVjQ0VHpJPXMyNTAtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>syumai</dc:creator></item><item><title><![CDATA[ENCA 5日目: AsyncFromSyncIterator で yield リジェクト時に元のイテレーターを閉じる（進行中）]]></title><description><![CDATA[!
+この記事は 1人 ECMAScript Normative Changes Advent Calendar 2024 の 5 日目です。
+
+
+ 非同期イテラブル（非同期反復可能）とは
+ES2018 から仕様の中に非同期イテラブルインターフェースと非同期イテレーターインターフェースが定義されています。非同期イテラブルインターフェースを実装したオブジェクト[1]のことを単に非同期イテラブル（非同期反復可能）と呼びます。
+ざっくり TypeScript の型で表現すると以下のようになります（実際の TypeScript での型はジェネリクスになっています）。
+interface Async...]]></description><link>https://zenn.dev/pixiv/articles/a0e82be63d25df</link><guid isPermaLink="true">https://zenn.dev/pixiv/articles/a0e82be63d25df</guid><pubDate>Wed, 04 Dec 2024 15:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--M-4GTAAi--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ENCA%25205%25E6%2597%25A5%25E7%259B%25AE%253A%2520AsyncFromSyncIterator%2520%25E3%2581%25A7%2520yield%2520%25E3%2583%25AA%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E6%2599%2582%25E3%2581%25AB%25E5%2585%2583%25E3%2581%25AE%25E3%2582%25A4%25E3%2583%2586%25E3%2583%25AC%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%25BC%25E3%2582%2592%25E9%2596%2589...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:petamoriken%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZhMDc3ZWRhZTMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:pixiv%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzMzODlhMzQ2ZjQuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>petamoriken</dc:creator></item><item><title><![CDATA[WixStudioでVeloを使う Step 35 「ライトボックスとセッションを組み合わせる」の拡張]]></title><description><![CDATA[
+ はじめに
+
+前回の記事 ではライトボックスとセクションを組み合わせて、サイトにアクセスした初回のみにライトボックスを表示する仕様を実装してみた。ただし、初回といってもブラウザのタブが異なればライトボックスは再度表示される。
+今回は前回の記事の続きで機能を拡張する。例えば「ライトボックスを閉じたら表示されなくなる」ではなくて「『再度表示しない』を選択したら表示されなくなる」を実現する。「再度表示しない」はチェックボックスで実装し、同チェックボックスはライトボックス内に配置する。
+
+ 目的
+ライトボックスに配置された「再度表示しない」のチェックボックスを選択されたときは、ライトボックスの...]]></description><link>https://zenn.dev/niibori/articles/veloonwixstudio-beginner-0035</link><guid isPermaLink="true">https://zenn.dev/niibori/articles/veloonwixstudio-beginner-0035</guid><pubDate>Wed, 04 Dec 2024 06:35:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--yiZD39QO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:WixStudio%25E3%2581%25A7Velo%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%2520Step%252035%2520%25E3%2580%258C%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2588%25E3%2583%259C%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25B9%25E3%2581%25A8%25E3%2582%25BB%25E3%2583%2583%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%2592%25E7%25B5%2584%25E3%2581%25BF%25E5%2590%2588%25E3%2582%258F%25E3%2581%259B%25E3%2582%258B%25E3%2580%258D%25E3%2581%25AE%25E6%258B%25A1%25E5%25BC%25B5%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Niibori%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U4ZDA4Mjg3YTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Niibori</dc:creator></item><item><title><![CDATA[JS と Elixir の比較: if...else 文と if マクロ (3)]]></title><description><![CDATA[前回の記事の続き（最終回）です。JavaScript の if...else 文と Elixir の if マクロを比較します。
+JavaScript の if...else 文は基本的な構文は次の通りです。
+if (条件式) {
+  A
+} else {
+  B
+}
+しかし、A と B に単一の文しか含まれない時、中括弧は省略可能です。
+if (条件式)
+  A
+else
+  B
+Elixir の  if マクロ にも類似の省略記法が存在します。
+if 条件式,
+  do: A,
+  else: B
+一行で書くこともできます。
+if 条件式, do: A, else: B
+これは、初回...]]></description><link>https://zenn.dev/tkrd/articles/js-and-elixir-if-else-3</link><guid isPermaLink="true">https://zenn.dev/tkrd/articles/js-and-elixir-if-else-3</guid><pubDate>Wed, 04 Dec 2024 05:17:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--o76AlYsq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JS%2520%25E3%2581%25A8%2520Elixir%2520%25E3%2581%25AE%25E6%25AF%2594%25E8%25BC%2583%253A%2520if...else%2520%25E6%2596%2587%25E3%2581%25A8%2520if%2520%25E3%2583%259E%25E3%2582%25AF%25E3%2583%25AD%2520%25283%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E9%25BB%2592%25E7%2594%25B0%25E5%258A%25AA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU3OWU2ZDRlZWMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>黒田努</dc:creator></item><item><title><![CDATA[Crypto API で JavaScript の配列をシャッフルする]]></title><description><![CDATA[
+
+ 気付き
+JavaScript の配列をシャッフル（ランダムに並び替える）しようと思います。
+調べてみると、Math.random を使って sort すると偏りが出るそうで、Fisher–Yates shuffle法を使うと良いとありました。その中で、乱数を発生させる API として Web Crypto API の名前が出てました。
+MDN の Web Crypto API の説明ページを見ると、getRandomValues という、乱数の配列を作るメソッドがありました。
+https://developer.mozilla.org/ja/docs/Web/API/Crypto/...]]></description><link>https://zenn.dev/tanoue/articles/77078bd5c70f62</link><guid isPermaLink="true">https://zenn.dev/tanoue/articles/77078bd5c70f62</guid><pubDate>Wed, 04 Dec 2024 02:04:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--96sN5QRa--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Crypto%2520API%2520%25E3%2581%25A7%2520JavaScript%2520%25E3%2581%25AE%25E9%2585%258D%25E5%2588%2597%25E3%2582%2592%25E3%2582%25B7%25E3%2583%25A3%25E3%2583%2583%25E3%2583%2595%25E3%2583%25AB%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Tanoue%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U0NzVkYTgyOTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Tanoue</dc:creator></item><item><title><![CDATA[JS と Elixir の比較: if...else 文と if マクロ (2)]]></title><description><![CDATA[前回の記事の続きです。JavaScript の if...else 文と Elixir の if マクロを比較します。
+JavaScript の if...else 文は次のように else 以下を省略できます。
+if (条件式) {
+  A
+}
+「条件式」が成立したら A が実行され、そうでなければ何も起きません。
+同様に、Elixir の if マクロでも else を省略できます。
+if 条件式 do
+  A
+end
+「条件式」が成立したら A が評価されて式 if ... end 全体の値となります。
+重要なのは、「条件式」が成立しない場合は nil が式全体の値となるということ...]]></description><link>https://zenn.dev/tkrd/articles/js-and-elixir-if-else-2</link><guid isPermaLink="true">https://zenn.dev/tkrd/articles/js-and-elixir-if-else-2</guid><pubDate>Wed, 04 Dec 2024 00:13:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--x3kFpu8N--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JS%2520%25E3%2581%25A8%2520Elixir%2520%25E3%2581%25AE%25E6%25AF%2594%25E8%25BC%2583%253A%2520if...else%2520%25E6%2596%2587%25E3%2581%25A8%2520if%2520%25E3%2583%259E%25E3%2582%25AF%25E3%2583%25AD%2520%25282%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E9%25BB%2592%25E7%2594%25B0%25E5%258A%25AA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU3OWU2ZDRlZWMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>黒田努</dc:creator></item><item><title><![CDATA[ENCA 4日目: Iterator Helpers で引数のバリデーションエラー時にイテレーターを閉じる（進行中）]]></title><description><![CDATA[変更情報
+【2024/12/05】
+
+承認されたことを追記
+ES2025 Iterator Helpers の return メソッドに関する誤りを修正
+
+
+!
+この記事は 1人 ECMAScript Normative Changes Advent Calendar 2024 の 4 日目です。
+
+
+ イテレーターの return メソッド
+昨日の記事でも少し触れていますが、イテレーターにはオプショナルな return メソッドが定義されています。これは仕様では IteratorClose 内で呼ばれ、イテレーターを閉じます。
+interface Iterator {
+  next(v...]]></description><link>https://zenn.dev/pixiv/articles/785c9fe23e894d</link><guid isPermaLink="true">https://zenn.dev/pixiv/articles/785c9fe23e894d</guid><pubDate>Tue, 03 Dec 2024 15:09:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--rqD5Ka3b--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ENCA%25204%25E6%2597%25A5%25E7%259B%25AE%253A%2520Iterator%2520Helpers%2520%25E3%2581%25A7%25E5%25BC%2595%25E6%2595%25B0%25E3%2581%25AE%25E3%2583%2590%25E3%2583%25AA%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E6%2599%2582%25E3%2581%25AB%25E3%2582%25A4%25E3%2583%2586%25E3%2583%25AC%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%25BC%25E3%2582%2592%25E9%2596%2589%25E3%2581%2598%25E3%2582%258B%25EF%25BC%2588%25E9%2580%25B2%25E8%25A1%258C%25E4%25B8%25AD%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:petamoriken%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZhMDc3ZWRhZTMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:pixiv%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzMzODlhMzQ2ZjQuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>petamoriken</dc:creator></item><item><title><![CDATA[【TypeScript】ジェネレーターによる遅延評価でフィボナッチ数列を生成する]]></title><description><![CDATA[
+ はじめに
+!
+この記事は、遅延評価のことを初めて知った人が書いています。
+そのため特に遅延評価周りの理解が浅いですが、ご了承ください。
+
+
+ やりたいこと
+
+
+遅延評価でフィボナッチ数列を生成したい
+
+長さを指定して生成できること
+指定の数より小さい値のみの数列が生成できること
+
+
+JavaScriptのジェネレーターを使って遅延評価する
+フィボナッチ以外の数列を簡単に生成できるよう、設計を工夫する
+
+
+ 環境
+
+Bun v1.1.34
+
+TypeScript Playground（ファイル分けの修正が必要）
+
+また、この記事のコードはTypeScriptで書かれていますが、型部分を...]]></description><link>https://zenn.dev/nanasi_1/articles/22696e18f3a2f9</link><guid isPermaLink="true">https://zenn.dev/nanasi_1/articles/22696e18f3a2f9</guid><pubDate>Tue, 03 Dec 2024 15:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5G1EBGnv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590TypeScript%25E3%2580%2591%25E3%2582%25B8%25E3%2582%25A7%25E3%2583%258D%25E3%2583%25AC%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%25BC%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258B%25E9%2581%2585%25E5%25BB%25B6%25E8%25A9%2595%25E4%25BE%25A1%25E3%2581%25A7%25E3%2583%2595%25E3%2582%25A3%25E3%2583%259C%25E3%2583%258A%25E3%2583%2583%25E3%2583%2581%25E6%2595%25B0%25E5%2588%2597%25E3%2582%2592%25E7%2594%259F%25E6%2588%2590%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nanasi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc0MDFiNWU4NjMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nanasi</dc:creator></item><item><title><![CDATA[Node.jsで構築するシンプルなREST API]]></title><description><![CDATA[
+ はじめに
+近年、ウェブ開発においてREST APIは欠かせない要素となっています。Node.jsは非同期I/Oを得意とするため、高性能なAPIサーバーを構築するのに適しています。本記事では、Node.jsとExpressを使用してシンプルなREST APIを構築する方法を解説します。
+
+ 環境設定
+
+
+Node.js：最新版（公式サイトからインストール）
+
+テキストエディタ：Visual Studio Codeなど
+
+APIテストツール：Postman、curl、またはブラウザの拡張機能
+
+
+ プロジェクトの初期化
+まず、新しいプロジェクト用のディレクトリを作成し、npm initで...]]></description><link>https://zenn.dev/mithra/articles/9d3f0f8a886ff4</link><guid isPermaLink="true">https://zenn.dev/mithra/articles/9d3f0f8a886ff4</guid><pubDate>Tue, 03 Dec 2024 13:48:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--oY2mx7gX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Node.js%25E3%2581%25A7%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2599%25E3%2582%258B%25E3%2582%25B7%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AB%25E3%2581%25AAREST%2520API%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BEMithra%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ExYTFiZmRkM2YuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>株式会社Mithra</dc:creator></item><item><title><![CDATA[Node.jsのconsole.logでネストが深くても[Object]を出さずに全てを表示する方法]]></title><description><![CDATA[バックエンドのAPIから取得したデータを確認したい場合などで、ネストが深いデータだと[Object]のように途中から表示されないことがあります。
+表示を省略させない方法がいくつかあると知ったのですが、それぞれにメリデメがあったので調べた結果をまとめています。
+
+ 結論
+console.dir(obj, { depth: null });を使いましょう。
+
+ 問題点を確認する
+次のようなデータがあるとします。
+const obj = {
+  key1: {
+    key2: {
+      key3: {
+        key4: {
+          key5: {
+       ...]]></description><link>https://zenn.dev/manabuyasuda/articles/d90758e4788bc1</link><guid isPermaLink="true">https://zenn.dev/manabuyasuda/articles/d90758e4788bc1</guid><pubDate>Tue, 03 Dec 2024 11:05:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--EPRKe6UJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Node.js%25E3%2581%25AEconsole.log%25E3%2581%25A7%25E3%2583%258D%25E3%2582%25B9%25E3%2583%2588%25E3%2581%258C%25E6%25B7%25B1%25E3%2581%258F%25E3%2581%25A6%25E3%2582%2582%255BObject%255D%25E3%2582%2592%25E5%2587%25BA%25E3%2581%2595%25E3%2581%259A%25E3%2581%25AB%25E5%2585%25A8%25E3%2581%25A6%25E3%2582%2592%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25AE%2589%25E7%2594%25B0%25E5%25AD%25A6%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAyMTk1Nzk4ODEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>安田学</dc:creator></item><item><title><![CDATA[いつも迷うJavaScriptの配列の操作に関するメソッドのメモ]]></title><description><![CDATA[
+ いつも迷うJavaScriptの配列の操作に関するメソッドのメモ
+いつもどれを使うべきか迷うことが多いので、メモ程度にまとめました。
+また後から追加してきます。
+間違っていたらコメントで訂正すべき箇所を教えていただけると幸いです。
+
+結合するconcat
+
+
+２つ以上の配列を結合するのに使用する。
+既存の配列を変更しない。
+結合された配列を含み新しい配列を返す。
+
+const arr1 = [1];
+const arr2 = [2];
+const results = arr1.concat(arr2);
+
+/*
+&gt; [1, 2]
+*/
+
+条件一致のfilter
+
+
+条件に一致す...]]></description><link>https://zenn.dev/mitate_gengaku/articles/javascript-wondring-array-method</link><guid isPermaLink="true">https://zenn.dev/mitate_gengaku/articles/javascript-wondring-array-method</guid><pubDate>Tue, 03 Dec 2024 10:00:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qc4B1qZb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%2584%25E3%2581%25A4%25E3%2582%2582%25E8%25BF%25B7%25E3%2581%2586JavaScript%25E3%2581%25AE%25E9%2585%258D%25E5%2588%2597%25E3%2581%25AE%25E6%2593%258D%25E4%25BD%259C%25E3%2581%25AB%25E9%2596%25A2%25E3%2581%2599%25E3%2582%258B%25E3%2583%25A1%25E3%2582%25BD%25E3%2583%2583%25E3%2583%2589%25E3%2581%25AE%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25BE%25A1%25E6%25A5%25AF%25E7%258E%2584%25E5%25B6%25BD%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0tQOVRYWHQ5Qm1BLVplcURoLWdxUHl4RVFjMmNsRkhSNk95XzVVSVVhPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>御楯玄嶽</dc:creator></item><item><title><![CDATA[GitHub Copilotは自動補完してくれるだけのAIだと思ってた]]></title><description><![CDATA[
+ 経緯
+aiderを利用して開発する事を覚えたが "Visual Studio Code" と　GitHub を利用しているともう一人のAIの存在が脳裏にチラつくと思われる、
+そう、GitHub Copilot だ。
+業務で "Visual Studio Code" と　GitHub を利用するので存在自体は知っていた。
+それにGitHub Copilotによるコード修正機能だったり予測変換にはお世話になっている。
+それだけだと思って使っていたが、どうやらそうでないので今回は調べて色々試せていけたらと思う
+
+ 利用条件
+
+
+Copilot へのサブスクリプション。 Visual Stu...]]></description><link>https://zenn.dev/shunsuke_stack/articles/499f6d4bcda795</link><guid isPermaLink="true">https://zenn.dev/shunsuke_stack/articles/499f6d4bcda795</guid><pubDate>Tue, 03 Dec 2024 09:18:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--tB2v4YN4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:GitHub%2520Copilot%25E3%2581%25AF%25E8%2587%25AA%25E5%258B%2595%25E8%25A3%259C%25E5%25AE%258C%25E3%2581%2597%25E3%2581%25A6%25E3%2581%258F%25E3%2582%258C%25E3%2582%258B%25E3%2581%25A0%25E3%2581%2591%25E3%2581%25AEAI%25E3%2581%25A0%25E3%2581%25A8%25E6%2580%259D%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Nakajima.js%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQzYmM0NjRiZjMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Nakajima.js</dc:creator></item><item><title><![CDATA[フロントエンドフレームワークから実装が望まれているmoveBeforeメソッドとはなにか]]></title><description><![CDATA[!
+この記事は NIJIBOX Advent Calendar 2024 3日目の記事として公開しています。
+
+皆さんは新しく実装が進む Node.prototype.moveBefore というメソッドをご存知でしょうか、この記事ではこの新しいメソッドについて簡単な解説を行おうと思います。
+
+ 新しく実装が進む Node.prototype.moveBefore メソッド
+Node.prototype.moveBefore() とは新しく Node インターフェースに追加されるメソッドで Node.prototype.insertBefore() と同様のシグネチャーで要素の状態を維持...]]></description><link>https://zenn.dev/ken7253/articles/node-move-before</link><guid isPermaLink="true">https://zenn.dev/ken7253/articles/node-move-before</guid><pubDate>Tue, 03 Dec 2024 04:05:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jwLJfV3h--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2595%25E3%2583%25AD%25E3%2583%25B3%25E3%2583%2588%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2589%25E3%2583%2595%25E3%2583%25AC%25E3%2583%25BC%25E3%2583%25A0%25E3%2583%25AF%25E3%2583%25BC%25E3%2582%25AF%25E3%2581%258B%25E3%2582%2589%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%258C%25E6%259C%259B%25E3%2581%25BE%25E3%2582%258C%25E3%2581%25A6%25E3%2581%2584%25E3%2582%258BmoveBefore%25E3%2583%25A1%25E3%2582%25BD%25E3%2583%2583%25E3%2583%2589%25E3%2581%25A8%25E3%2581%25AF%25E3%2581%25AA%25E3%2581%25AB%25E3%2581%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ken7253%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJmNDc1OTM1ZDUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ken7253</dc:creator></item><item><title><![CDATA[JS と Elixir の比較: if...else 文と if マクロ (1)]]></title><description><![CDATA[本稿では、JavaScript の if...else 文と Elixir の if マクロを比較します。
+JavaScript の if...else 文は基本的な構文は次の通りです。
+if (条件式) {
+  A
+} else {
+  B
+}
+「条件式」が成立したら A が実行され、そうでなければ B が実行されます。何をもって条件式が成功したとされるのかは少しややこしいです。JavaScript では以下の値が「偽とみなされる値（falsy value）」です。
+
+false, 0, -0, 0n, "", null, undefined, NaN
+
+「条件式」がこれらの値を返さな...]]></description><link>https://zenn.dev/tkrd/articles/js-and-elixir-if-else-1</link><guid isPermaLink="true">https://zenn.dev/tkrd/articles/js-and-elixir-if-else-1</guid><pubDate>Mon, 02 Dec 2024 23:53:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ILOUEkBN--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JS%2520%25E3%2581%25A8%2520Elixir%2520%25E3%2581%25AE%25E6%25AF%2594%25E8%25BC%2583%253A%2520if...else%2520%25E6%2596%2587%25E3%2581%25A8%2520if%2520%25E3%2583%259E%25E3%2582%25AF%25E3%2583%25AD%2520%25281%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E9%25BB%2592%25E7%2594%25B0%25E5%258A%25AA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU3OWU2ZDRlZWMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>黒田努</dc:creator></item><item><title><![CDATA[X（旧Twitter）共有ボタンを作る際に気を利かせてはいけない？]]></title><description><![CDATA[
+ 結論
+以下のように書く。
+let title: string = encodeURIComponent("【何かタイトル】");
+let link: string = `https://twitter.com/intent/tweet?text=${title}&amp;url=${リンク}&amp;hashtags=${タグ}`;
+
+&lt;a href="[link]"&gt;Xで共有&lt;/a&gt;
+TwitterはXになったし「twitter.com」から「x.com」になったので「x.com」と「post」に変えてあげよう、と親切をした場合、PCからの共有は問題ないが、...]]></description><link>https://zenn.dev/tanukikyo/articles/f723ed654cfa07</link><guid isPermaLink="true">https://zenn.dev/tanukikyo/articles/f723ed654cfa07</guid><pubDate>Mon, 02 Dec 2024 22:43:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9AGUxDBc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:X%25EF%25BC%2588%25E6%2597%25A7Twitter%25EF%25BC%2589%25E5%2585%25B1%25E6%259C%2589%25E3%2583%259C%25E3%2582%25BF%25E3%2583%25B3%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%25E9%259A%259B%25E3%2581%25AB%25E6%25B0%2597%25E3%2582%2592%25E5%2588%25A9%25E3%2581%258B%25E3%2581%259B%25E3%2581%25A6%25E3%2581%25AF%25E3%2581%2584%25E3%2581%2591%25E3%2581%25AA%25E3%2581%2584%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259F%25E3%2581%25AC%25E3%2581%258D%25E3%2581%25AE%25E6%2595%2599%25E7%25A5%2596%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzkzNGJmZDI1ZjYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>たぬきの教祖</dc:creator></item><item><title><![CDATA[[JavaScript] 繰り返しを操る、Iterator]]></title><description><![CDATA[
+ はじめに
+実務でイテレータを触ることがあったので、調べてまとめてみたものです。
+間違いがありましたらコメントいただけると嬉しいです🫶
+さて、JavaScript を触っているとたまに見ます、Iterator とか Iterable の文字。
+for や while のことを「イテレータ」と呼ぶと昔学んだ記憶があるので、なんとなく反復するものだろうという程度の認識で使っていました。しかしよくよく調べるとけっこう便利そうな機能がでてきたので、年度の納めに学んでみようと思った次第です。
+
+ イテレータ（Iterator） とは？
+https://developer.mozilla.org/...]]></description><link>https://zenn.dev/progate_users/articles/b3ff93c03e21ad</link><guid isPermaLink="true">https://zenn.dev/progate_users/articles/b3ff93c03e21ad</guid><pubDate>Mon, 02 Dec 2024 22:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--deOmuqi2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BJavaScript%255D%2520%25E7%25B9%25B0%25E3%2582%258A%25E8%25BF%2594%25E3%2581%2597%25E3%2582%2592%25E6%2593%258D%25E3%2582%258B%25E3%2580%2581Iterator%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2582%2588%25E3%2581%25A4%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM2OGUyYmI4YzIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Progate%2520Path%2520%25E3%2582%25B3%25E3%2583%259F%25E3%2583%25A5%25E3%2583%258B%25E3%2583%2586%25E3%2582%25A3%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JiOGNiMGY2NjkuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>よつ</dc:creator></item><item><title><![CDATA[ENCA 3日目: プリミティブイテラブルを退ける規約制定]]></title><description><![CDATA[!
+この記事は 1人 ECMAScript Normative Changes Advent Calendar 2024 の 3 日目です。
+
+
+ イテラブル（反復可能）とは
+ES2015 から仕様の中にイテラブルインターフェースとイテレーターインターフェースが定義されています。イテラブルインターフェースを実装したオブジェクトやプリミティブのことを単にイテラブル（反復可能）と呼びます。
+ざっくり TypeScript の型で表現すると以下のようになります（実際の TypeScript での型はジェネリクスになっています）。
+interface Iterable {
+  [Symbol.i...]]></description><link>https://zenn.dev/pixiv/articles/2525ef2eddf6a0</link><guid isPermaLink="true">https://zenn.dev/pixiv/articles/2525ef2eddf6a0</guid><pubDate>Mon, 02 Dec 2024 15:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6GSv237g--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ENCA%25203%25E6%2597%25A5%25E7%259B%25AE%253A%2520%25E3%2583%2597%25E3%2583%25AA%25E3%2583%259F%25E3%2583%2586%25E3%2582%25A3%25E3%2583%2596%25E3%2582%25A4%25E3%2583%2586%25E3%2583%25A9%25E3%2583%2596%25E3%2583%25AB%25E3%2582%2592%25E9%2580%2580%25E3%2581%2591%25E3%2582%258B%25E8%25A6%258F%25E7%25B4%2584%25E5%2588%25B6%25E5%25AE%259A%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:petamoriken%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZhMDc3ZWRhZTMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:pixiv%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzMzODlhMzQ2ZjQuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>petamoriken</dc:creator></item></channel></rss>
