@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Sat, 07 Dec 2024 09:34:08 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[【Python】 一番簡単！ログをテキストとして出力する方法！]]></title><description><![CDATA[
+PowerShell/cmd
+python main.py &gt; log_output.txt
+
+これでOK！超簡単！
+もちろん
+
+PowerShell/cmd
+python main.py &gt; log_output.log
+
+もOK！
+&gt;と&lt;を間違うことなく使いましょう！
+]]></description><link>https://zenn.dev/glisan/articles/c284451b6aaf86</link><guid isPermaLink="true">https://zenn.dev/glisan/articles/c284451b6aaf86</guid><pubDate>Sat, 07 Dec 2024 08:33:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--gBaFK-DQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591%2520%25E4%25B8%2580%25E7%2595%25AA%25E7%25B0%25A1%25E5%258D%2598%25EF%25BC%2581%25E3%2583%25AD%25E3%2582%25B0%25E3%2582%2592%25E3%2583%2586%25E3%2582%25AD%25E3%2582%25B9%25E3%2583%2588%25E3%2581%25A8%25E3%2581%2597%25E3%2581%25A6%25E5%2587%25BA%25E5%258A%259B%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25B0%25E3%2583%25AA%25E3%2583%2583%25E3%2582%25B5%25E3%2583%25B3%25E3%2583%2589%25E3%2580%2582%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M0MzU1YzBlZDcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>グリッサンド。</dc:creator></item><item><title><![CDATA[今のところの自分好みのPydantic v2のBaseModel]]></title><description><![CDATA[
+ 自分用のBaseModel
+pydanticはPythonで構造体のようなものを作るときにとても便利だ。
+しかし、デフォルトではいくつか自分好みでないところがある。
+そこで、pydanticを使うときは自分用のBaseModelを作成して使い回すことにした。
+from io import StringIO
+from typing import Any
+
+import pydantic
+import polars as pl
+from pydantic.alias_generators import to_camel
+from pydantic import model_validat...]]></description><link>https://zenn.dev/watanany/articles/a714550f2dd620</link><guid isPermaLink="true">https://zenn.dev/watanany/articles/a714550f2dd620</guid><pubDate>Sat, 07 Dec 2024 07:37:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BrB2SoED--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E4%25BB%258A%25E3%2581%25AE%25E3%2581%25A8%25E3%2581%2593%25E3%2582%258D%25E3%2581%25AE%25E8%2587%25AA%25E5%2588%2586%25E5%25A5%25BD%25E3%2581%25BF%25E3%2581%25AEPydantic%2520v2%25E3%2581%25AEBaseModel%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%25AF%25E3%2582%25BF%25E3%2583%258A%25E3%2583%2599%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzllOTFiZWRmYmMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ワタナベ</dc:creator></item><item><title><![CDATA[[Python, Windows] open したファイルを削除・移動する]]></title><description><![CDATA[
+ Windows では open 中のファイルを消せない
+次のコードで、 input で処理を止めている間に text.txt を削除してみましょう。
+with open("./test.txt", "w") as f:
+    # ここで test.txt を消す
+    input()
+Linux ではファイルを削除できますが、 Windows ではエラーになります。
+
+ファイルの移動も同様です。
+この問題をなんとかしましょう。
+
+ Windows は使用中ファイルの削除を禁止していない
+実は、 Windows でも使用中のファイルを消せる場合があります。
+Windows でファイ...]]></description><link>https://zenn.dev/sinotca/articles/af147bb3790897</link><guid isPermaLink="true">https://zenn.dev/sinotca/articles/af147bb3790897</guid><pubDate>Sat, 07 Dec 2024 05:34:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--c_o-yBek--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BPython%252C%2520Windows%255D%2520open%2520%25E3%2581%2597%25E3%2581%259F%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2592%25E5%2589%258A%25E9%2599%25A4%25E3%2583%25BB%25E7%25A7%25BB%25E5%258B%2595%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:sinotca%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg3YTgyMzQ1YmMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sinotca</dc:creator></item><item><title><![CDATA[【Python】Shift()を利用して日付の差分を取得する]]></title><description><![CDATA[
+ やりたいこと
+ビジネスの状況を分析するときの、基本的なセグメントの一つに、
+
+新規ユーザー
+継続ユーザー
+休眠ユーザー
+復帰ユーザー
+
+という具合に、アクティブ度合いやライフサイクルによる分類を設けて、それぞれのメカニズムの違いを分析して、それぞれに最適化した施策を検討するようなシーンがあると思います。
+新規、継続、休眠については定義がシンプルなことが多いですが、仮に復帰については定義を「最後のログインから30日以上ぶりのログインとする」とした場合、ログイン履歴から「そのログインは、最後のログインから何日ぶりのログインなのか？」をユーザー1人1人に対して演算する必要があります。
+今回...]]></description><link>https://zenn.dev/waddyyy/articles/01c169b4cab6be</link><guid isPermaLink="true">https://zenn.dev/waddyyy/articles/01c169b4cab6be</guid><pubDate>Sat, 07 Dec 2024 04:45:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--cCqhFvFv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591Shift%2528%2529%25E3%2582%2592%25E5%2588%25A9%25E7%2594%25A8%25E3%2581%2597%25E3%2581%25A6%25E6%2597%25A5%25E4%25BB%2598%25E3%2581%25AE%25E5%25B7%25AE%25E5%2588%2586%25E3%2582%2592%25E5%258F%2596%25E5%25BE%2597%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:waddy%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2EzOTg3NDQyM2EuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>waddy</dc:creator></item><item><title><![CDATA[AIスタジオのご紹介とストリーミング生成のポイント]]></title><description><![CDATA[
+本記事は株式会社ココナラ Advent Calendar 2024 7日目の記事です。
+
+
+ はじめに
+こんにちは。
+株式会社ココナラの データテクノロジー室に所属しているエンジニアの DO です。
+二児のパパをしています。かわいい笑顔に毎日癒されています（ただのノロケです 笑）
+ChatGPTの登場以降、ビジネスシーンでのAI活用が急速に広がっています。
+しかし、多くのビジネスパーソンが「AIをどのように業務に活用すればよいのかわからない」「適切な指示を出すのが難しい」といった課題を抱えているのが現状です。
+このような課題を解決するため、弊社は2024年11月18日に新サービス『ココ...]]></description><link>https://zenn.dev/coconala/articles/16ab32f068b5eb</link><guid isPermaLink="true">https://zenn.dev/coconala/articles/16ab32f068b5eb</guid><pubDate>Sat, 07 Dec 2024 04:01:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---CudGUbt--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AI%25E3%2582%25B9%25E3%2582%25BF%25E3%2582%25B8%25E3%2582%25AA%25E3%2581%25AE%25E3%2581%2594%25E7%25B4%25B9%25E4%25BB%258B%25E3%2581%25A8%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25AA%25E3%2583%25BC%25E3%2583%259F%25E3%2583%25B3%25E3%2582%25B0%25E7%2594%259F%25E6%2588%2590%25E3%2581%25AE%25E3%2583%259D%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2582%25B3%25E3%2582%25B3%25E3%2583%258A%25E3%2583%25A9%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRiNTMxNzlmY2QuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>株式会社ココナラ</dc:creator></item><item><title><![CDATA[バイト先のシフト作成業務を効率化したい話～技術選定編～]]></title><description><![CDATA[
+ はじめに
+皆さんこんにちは！ayaponzuです！
+本記事は大阪ハイテクノロジー専門学校のロボット学科が作るアドベントカレンダーの21日目の記事です。ほかの記事もよければご覧ください。
+https://qiita.com/advent-calendar/2024/osaka-hightech
+現在、私はスーパーでアルバイトをしています。（現在3年目）
+半月の自由シフト制なので半月ごとに店長がシフト作成しなければならないのですが、毎回、店長が「あ～またつくらないと」と言っているのをずっと見てきました。
+そこで私は IT の力を使って効率化できないかなと考えました。
+今回考慮するのは正社...]]></description><link>https://zenn.dev/ayaponzu2525/articles/shiftgenerator1</link><guid isPermaLink="true">https://zenn.dev/ayaponzu2525/articles/shiftgenerator1</guid><pubDate>Sat, 07 Dec 2024 03:49:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BnagC8Ye--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2590%25E3%2582%25A4%25E3%2583%2588%25E5%2585%2588%25E3%2581%25AE%25E3%2582%25B7%25E3%2583%2595%25E3%2583%2588%25E4%25BD%259C%25E6%2588%2590%25E6%25A5%25AD%25E5%258B%2599%25E3%2582%2592%25E5%258A%25B9%25E7%258E%2587%25E5%258C%2596%25E3%2581%2597%25E3%2581%259F%25E3%2581%2584%25E8%25A9%25B1%25EF%25BD%259E%25E6%258A%2580%25E8%25A1%2593%25E9%2581%25B8%25E5%25AE%259A%25E7%25B7%25A8%25EF%25BD%259E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ayaponzu2525%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSVNRZUFUSFctRjEwMzdTMGN1Y0pwa3dGUS11SXBweWtLcGhxRWtKdDVuT3BPVkNRelo9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ayaponzu2525</dc:creator></item><item><title><![CDATA[モジュール、パッケージ、ライブラリの違いについて解説]]></title><description><![CDATA[
+ 
+Python初心者にとって、「モジュール」「パッケージ」「ライブラリ」という用語は混乱しがちです。しかし、それぞれの意味と使い方を理解すれば、プログラム開発の幅が広がります。本記事では、これらの違いをわかりやすく解説し、実際に作成・使用する方法をステップバイステップで説明します。
+
+
+ モジュール、パッケージ、ライブラリの違い
+
+
+モジュール
+Pythonファイルそのものです。1つのPythonファイル（example.pyなど）に関数やクラスを定義できます。
+
+
+パッケージ
+モジュールをまとめたフォルダのことです。パッケージを作成するには、フォルダ内に__init__.pyという...]]></description><link>https://zenn.dev/halhal420/articles/9e28394c12e69a</link><guid isPermaLink="true">https://zenn.dev/halhal420/articles/9e28394c12e69a</guid><pubDate>Sat, 07 Dec 2024 03:09:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--pnkAmQbZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%25A2%25E3%2582%25B8%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%25AB%25E3%2580%2581%25E3%2583%2591%25E3%2583%2583%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B8%25E3%2580%2581%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hal%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSmdad292RDU4Vk10MlVuNVEtUlQ1bzBLNlFwYVRvRzBPaFRDcEl6Wjlsc2s2eXlvYz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hal</dc:creator></item><item><title><![CDATA[Duckdbを使用したSQL操作をするAWS Lambda関数作成(Python)]]></title><description><![CDATA[
+ 概要
+以前からDuckdb×AWS Lambdaを使用してS3上のSQL操作を行うという例は耳にしていた。
+(以下参考記事🙏)
+https://zenn.dev/penginpenguin/articles/b508f04a3431a8
+https://qiita.com/shinonome_taku/items/cb9bfd7419a77a80e235
+ただこの例ではpythonでLambda関数を作成していなかったので手軽に作成できる方法を探していた。
+結果的にはうまくいったが、かなり詰まったため記事として残しておこうと思います。
+
+ [前提]
+S3上のcsvデータにAWS La...]]></description><link>https://zenn.dev/amana/articles/7651ec03bb6c3e</link><guid isPermaLink="true">https://zenn.dev/amana/articles/7651ec03bb6c3e</guid><pubDate>Sat, 07 Dec 2024 02:11:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--O3nRd7Rn--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Duckdb%25E3%2582%2592%25E4%25BD%25BF%25E7%2594%25A8%25E3%2581%2597%25E3%2581%259FSQL%25E6%2593%258D%25E4%25BD%259C%25E3%2582%2592%25E3%2581%2599%25E3%2582%258BAWS%2520Lambda%25E9%2596%25A2%25E6%2595%25B0%25E4%25BD%259C%25E6%2588%2590%2528Python%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nk_work%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ1MjJkN2U5MzIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nk_work</dc:creator></item><item><title><![CDATA[CloudFront関数を使用してS3バケット内のファイルにインデックスドキュメントを追加する]]></title><description><![CDATA[
+ はじめに
+Amazon S3バケットで静的ウェブサイトをホストする時、ディレクトリにアクセスしたときに自動でindex.htmlが表示されるように設定するのが大事です。この記事では、CloudFrontディストリビューションとCloudFront関数を使って、S3バケットを公開せずにディレクトリへのアクセスをうまく処理する方法を説明します。
+
+ 課題
+静的ウェブサイトのファイルをS3バケットにアップロードして、CloudFrontディストリビューションで配信しているとします。この場合、ファイル名を指定せずにディレクトリにアクセスするとエラーが出てしまいます。例えば、/products...]]></description><link>https://zenn.dev/tn_a/articles/148246adbd48cb</link><guid isPermaLink="true">https://zenn.dev/tn_a/articles/148246adbd48cb</guid><pubDate>Fri, 06 Dec 2024 22:26:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dlYKimNK--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:CloudFront%25E9%2596%25A2%25E6%2595%25B0%25E3%2582%2592%25E4%25BD%25BF%25E7%2594%25A8%25E3%2581%2597%25E3%2581%25A6S3%25E3%2583%2590%25E3%2582%25B1%25E3%2583%2583%25E3%2583%2588%25E5%2586%2585%25E3%2581%25AE%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2581%25AB%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2587%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25B9%25E3%2583%2589%25E3%2582%25AD%25E3%2583%25A5%25E3%2583%25A1%25E3%2583%25B3%25E3%2583%2588%25E3%2582%2592%25E8%25BF%25BD%25E5%258A%25A0%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:sia%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I4MDcxYWUyMWQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sia</dc:creator></item><item><title><![CDATA[RAG機能付きチャットボットを作ろう-6_VectorDBの設定]]></title><description><![CDATA[
+ TL;DR
+前回の記事では、チャット履歴をMarkdown形式で表示しました。本稿では
+
+VectorDBの設定
+PDFのベクトル化
+
+を行います。
+
+ 準備
+
+ インストール
+VectorStoreとしてChromaDBを使います。以下でインストールします。
+pip install chromadb
+pip install langchain-chroma
+
+ PDFの格納フォルダ作成
+文書情報はPDFで格納している方が多いと思いますので、本稿ではPDFの内容をベクトル化して、検索できるようにします。
+まずは、PDFを格納するフォルダを作成します。
+フォルダ名は自由ですが、本稿では...]]></description><link>https://zenn.dev/bluetang/articles/chatbot_with_lc_st_chromadb_06</link><guid isPermaLink="true">https://zenn.dev/bluetang/articles/chatbot_with_lc_st_chromadb_06</guid><pubDate>Fri, 06 Dec 2024 15:02:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--XTXhgVfA--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:RAG%25E6%25A9%259F%25E8%2583%25BD%25E4%25BB%2598%25E3%2581%258D%25E3%2583%2581%25E3%2583%25A3%25E3%2583%2583%25E3%2583%2588%25E3%2583%259C%25E3%2583%2583%25E3%2583%2588%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258D%25E3%2581%2586-6_VectorDB%25E3%2581%25AE%25E8%25A8%25AD%25E5%25AE%259A%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:bluetang%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM3ZDRkMjc1MzAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>bluetang</dc:creator></item><item><title><![CDATA[エラーメッセージからBigQueryエディタURLを生成する]]></title><description><![CDATA[!
+
+ 学べること
+
+BigQueryをPythonで操作する基本的なコード例を理解する
+ちょっと便利なBigQueryエディタURLを生成する関数の活用方法を知る
+
+エラー出力を改善
+
+既存のエラー出力
+エラー
+Location: US
+Job ID: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+
+
+↓ 改善
+
+改善後のエラー出力
+[ERROR] BigQuery Job Link: https://console.cloud.google.com/bigquery?project=project_id&amp;j=bq:US:xxxxxxxx-xxxx-...]]></description><link>https://zenn.dev/yuichi_dev/articles/9e4bc0dd643655</link><guid isPermaLink="true">https://zenn.dev/yuichi_dev/articles/9e4bc0dd643655</guid><pubDate>Fri, 06 Dec 2024 15:01:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--NG1ijih---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E3%2583%25A1%25E3%2583%2583%25E3%2582%25BB%25E3%2583%25BC%25E3%2582%25B8%25E3%2581%258B%25E3%2582%2589BigQuery%25E3%2582%25A8%25E3%2583%2587%25E3%2582%25A3%25E3%2582%25BFURL%25E3%2582%2592%25E7%2594%259F%25E6%2588%2590%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yuichi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZiMmI0ZGExMjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yuichi</dc:creator></item><item><title><![CDATA[MK8DX Loungeの特定プレイヤーのMMRをBeautifulSoup+Webhookで追う]]></title><description><![CDATA[
+MMA Advent Calendar 2024 7日目の記事です
+
+
+ はじめに
+友人がMK8DX Loungeに参加しています．ランク帯が変わったらお祝いしたいです．
+しかし，毎日ホームページを見に行って確認は面倒です．
+そこで，PythonのBeautifulSoupでWebスクレイピングをして，MMRが変わったらDiscord WebHookで追うようにしてみましょう．
+
+ 環境構築
+Pythonのインストール方法は割愛します．
+requests, beautifulsoupはpipで導入します．
+以下の内容をrequirements.txtというファイル名で保存します．
+
+r...]]></description><link>https://zenn.dev/shiragi/articles/16635169d20373</link><guid isPermaLink="true">https://zenn.dev/shiragi/articles/16635169d20373</guid><pubDate>Fri, 06 Dec 2024 14:51:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--kqN94mIv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:MK8DX%2520Lounge%25E3%2581%25AE%25E7%2589%25B9%25E5%25AE%259A%25E3%2583%2597%25E3%2583%25AC%25E3%2582%25A4%25E3%2583%25A4%25E3%2583%25BC%25E3%2581%25AEMMR%25E3%2582%2592BeautifulSoup%252BWebhook%25E3%2581%25A7%25E8%25BF%25BD%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:shiargi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MzZDZjNWFjNmMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>shiargi</dc:creator></item><item><title><![CDATA[なぜJavaのコードをASTに変換するのか]]></title><description><![CDATA[
+ TL;DR
+C 言語と Java, Python の違いについて簡単にまとめました。
+下記の論文を読んでいる際に，Java のコードを AST に変換しており，なぜ Java のコードを AST に変換するのか（なぜ他の言語ではないのか）という疑問が湧いたため，調べてみました。
+https://arxiv.org/abs/1803.09473
+
+ C 言語、Java、Python の違い
+
+ 1. コンパイルと実行
+
+
+C 言語
+
+
+ソースコード(.c) → コンパイル(gcc) → 実行ファイル(.exe/.out)
+
+
+アセンブリ確認可能(-S オプションで.s ファイル生成)
+...]]></description><link>https://zenn.dev/os515/articles/2024-12-06-diff-c-java</link><guid isPermaLink="true">https://zenn.dev/os515/articles/2024-12-06-diff-c-java</guid><pubDate>Fri, 06 Dec 2024 14:33:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fFGAq-5w--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%25AA%25E3%2581%259CJava%25E3%2581%25AE%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2582%2592AST%25E3%2581%25AB%25E5%25A4%2589%25E6%258F%259B%25E3%2581%2599%25E3%2582%258B%25E3%2581%25AE%25E3%2581%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:soso%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4WXhTVFZ2dEMxc1c4N3NudWhKSVp0YTVMUWpsMUR5VW1YVTl5UFY2Zz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>soso</dc:creator></item><item><title><![CDATA[Bolt for Pythonの落とし穴]]></title><description><![CDATA[
+ 環境情報
+Docker Composeで作成しています。
+
+ Docker Composeで登録していた環境変数
+以下のように設定していました。
+
+ .env
+SLACK_CLIENT_ID=xxxxxxxxxxxxx.xxxxxxxxxxxxx
+SLACK_CLIENT_SECRET=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+SLACK_SIGNING_SECRET=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+SLACK_BOT_TOKEN=xoxb-xxxxxxxxxxxxx-xxxxxxxxxxxxx-xxxxxxxxxxxxxxx...]]></description><link>https://zenn.dev/pochimoritaro/articles/91e6d8f0b1be80</link><guid isPermaLink="true">https://zenn.dev/pochimoritaro/articles/91e6d8f0b1be80</guid><pubDate>Fri, 06 Dec 2024 10:33:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--QOX7Q6Bm--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Bolt%2520for%2520Python%25E3%2581%25AE%25E8%2590%25BD%25E3%2581%25A8%25E3%2581%2597%25E7%25A9%25B4%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25BD%25E3%2581%25A1%25E3%2581%259F%25E3%2582%258D%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBlYzNkMTAxNjYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ぽちたろ</dc:creator></item><item><title><![CDATA[【非公開×公開】新感覚の勉強記録アプリ「Study Vault」を作ってみた 144時間]]></title><description><![CDATA[
+
+
+
+ はじめに
+
+ アプリの概要
+本アプリは、ユーザーの勉強時間を管理・記録する非公開×公開を組み合わせた勉強アプリです。毎日ランダムな時間（12:00〜21:00）に勉強時間が公開されるまでは他のユーザーの勉強時間が分からない仕組みとなっています。ここから、「他の人はどのくらい勉強しているんだろう...」という不安感を利用して「勉強しよう」という気持ちを引き立てるアプリになっています。
+
+ 目的
+このアプリを開発しようと思ったきっかけは、大学受験時に使用していた勉強記録アプリの経験からです。以前のアプリでは勉強時間をリアルタイムで共有できましたが、他のユーザーがあまり勉強していない...]]></description><link>https://zenn.dev/kk3desu/articles/6e25b14d164494</link><guid isPermaLink="true">https://zenn.dev/kk3desu/articles/6e25b14d164494</guid><pubDate>Fri, 06 Dec 2024 07:13:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--a78-d8p---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E9%259D%259E%25E5%2585%25AC%25E9%2596%258B%25C3%2597%25E5%2585%25AC%25E9%2596%258B%25E3%2580%2591%25E6%2596%25B0%25E6%2584%259F%25E8%25A6%259A%25E3%2581%25AE%25E5%258B%2589%25E5%25BC%25B7%25E8%25A8%2598%25E9%258C%25B2%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2580%258CStudy%2520Vault%25E3%2580%258D%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2520144%25E6%2599%2582%25E9%2596%2593%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kk3desu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhlMDcxNTdjOGMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kk3desu</dc:creator></item><item><title><![CDATA[【AITuber】　プロンプトによるキャラクター設定から音声化まで]]></title><description><![CDATA[どうも。@TM_AIbuchoことおっさんです。
+SES企業の社長が開発経験ゼロからAIを学習しています。
+是非とも暖かく、時には厳しく見守っていただけると嬉しいです。
+
+ はじめに
+StudioCoさん主催のWeb勉強会にて、「AITuber本著者によるAIキャラクター入門―AITuberの基礎からソフトウェア設計、失敗談まで」に参加させていただきました。
+動画配信とまではいけませんでしたが、キャラクター設定と音声朗読まで実装してみましたので、ご紹介します！
+
+
+Compass
+compass AITuber本著者によるAIキャラクター入門―AITuberの基礎からソフトウェア設計、失...]]></description><link>https://zenn.dev/tm_aibucho/articles/655ab7c4085fa2</link><guid isPermaLink="true">https://zenn.dev/tm_aibucho/articles/655ab7c4085fa2</guid><pubDate>Fri, 06 Dec 2024 04:56:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--f0_ZQLu7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590AITuber%25E3%2580%2591%25E3%2580%2580%25E3%2583%2597%25E3%2583%25AD%25E3%2583%25B3%25E3%2583%2597%25E3%2583%2588%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258B%25E3%2582%25AD%25E3%2583%25A3%25E3%2583%25A9%25E3%2582%25AF%25E3%2582%25BF%25E3%2583%25BC%25E8%25A8%25AD%25E5%25AE%259A%25E3%2581%258B%25E3%2582%2589%25E9%259F%25B3%25E5%25A3%25B0%25E5%258C%2596%25E3%2581%25BE%25E3%2581%25A7%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:TM.AI%25E9%2583%25A8%25E9%2595%25B7%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzlmODM1OWU0MDAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>TM.AI部長</dc:creator></item><item><title><![CDATA[【vscodeを使った python 開発】2. 資材の説明]]></title><description><![CDATA[
+ この記事について
+
+ 概要
+"【システム開発】vscodeを使った python 開発〜1.まず動かそう〜"で使った資材の説明です。
+事前知識として docker についてざっくり知っておいてください。
+Qiita にめちゃくちゃわかりやすい記事があるのでとりあえず「前編」だけでも読んでおいてください。（この先ちょこちょこ引用します）
+【図解】Dockerの全体像を理解する -前編-
+
+ この記事の対象者
+
+python で本格的なアプリ開発を始めたい人
+エンジニア志望の人
+
+
+ この記事のゴール
+
+【システム開発】vscodeを使った python 開発〜1.まず動かそう〜 を動か...]]></description><link>https://zenn.dev/teachi/articles/5706ce86c86c94</link><guid isPermaLink="true">https://zenn.dev/teachi/articles/5706ce86c86c94</guid><pubDate>Fri, 06 Dec 2024 03:07:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bz1a41jO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590vscode%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%259F%2520python%2520%25E9%2596%258B%25E7%2599%25BA%25E3%2580%25912.%2520%25E8%25B3%2587%25E6%259D%2590%25E3%2581%25AE%25E8%25AA%25AC%25E6%2598%258E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A6%25E3%2581%2583%25E3%2583%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q3M2JkNDQ2ZmUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>てぃー</dc:creator></item><item><title><![CDATA[Geminiが意図せず失敗したときの対処法]]></title><description><![CDATA[
+ はじめに
+!
+Unipos Advent Calender 2024、1日目の記事です！（late sub です！）
+
+今回は Vertex AI の Gemini を使ったバッチ処理で実際に使ってる小ネタになります。Python SDK で Gemini などを触ってる人向けの記事になります。
+そもそも Google Cloud 使ってるならもっと他にやり方はあるのですが、今回は一例として手軽にできる方法として紹介していきます。
+
+ 背景
+生成AIをfor文などで繰り返し使っていると、リクエスト数の上限や予期せぬエラーによって意図せず落ちることが多々ありました。
+特に悩まされたエラ...]]></description><link>https://zenn.dev/trapi/articles/vertexai_gemini_retry</link><guid isPermaLink="true">https://zenn.dev/trapi/articles/vertexai_gemini_retry</guid><pubDate>Fri, 06 Dec 2024 02:11:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--WpoAuePS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Gemini%25E3%2581%258C%25E6%2584%258F%25E5%259B%25B3%25E3%2581%259B%25E3%2581%259A%25E5%25A4%25B1%25E6%2595%2597%25E3%2581%2597%25E3%2581%259F%25E3%2581%25A8%25E3%2581%258D%25E3%2581%25AE%25E5%25AF%25BE%25E5%2587%25A6%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:trapi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NhMGFkMjE0YzYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>trapi</dc:creator></item><item><title><![CDATA[「Out of Memory」が出て困ったので、大量データの扱い方をイチから学んでみた]]></title><description><![CDATA[最近、データ処理のプログラムを書いている中で「Out of Memory（メモリ不足）」というエラーに遭遇しました。このエラー、初めて見ると「一体何が原因？」「どこが問題だったの？」と困ってしまいますよね。私も同じ状況でした。
+この記事では、私がメモリ不足の問題を調べて理解した内容を共有します。どのくらいのデータが「大きすぎる」のか、どうすれば効率的に処理できるのか、初心者目線でまとめてみたので、同じような悩みを抱えている方に役立てば嬉しいです。
+
+
+ 1. Out of Memory（メモリ不足）とは？
+プログラムが実行中に必要なメモリ量が、システムの持つ物理メモリや仮想メモリの容量を...]]></description><link>https://zenn.dev/mifurohi/articles/58383a120f2742</link><guid isPermaLink="true">https://zenn.dev/mifurohi/articles/58383a120f2742</guid><pubDate>Fri, 06 Dec 2024 02:05:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--E05b6CXJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%258COut%2520of%2520Memory%25E3%2580%258D%25E3%2581%258C%25E5%2587%25BA%25E3%2581%25A6%25E5%259B%25B0%25E3%2581%25A3%25E3%2581%259F%25E3%2581%25AE%25E3%2581%25A7%25E3%2580%2581%25E5%25A4%25A7%25E9%2587%258F%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2581%25AE%25E6%2589%25B1%25E3%2581%2584%25E6%2596%25B9%25E3%2582%2592%25E3%2582%25A4%25E3%2583%2581%25E3%2581%258B%25E3%2582%2589%25E5%25AD%25A6%25E3%2582%2593%25E3%2581%25A7%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mifurohi%2540%25E5%2585%2583%25E7%25BE%258A%25E9%25A3%25BC%25E3%2581%2584%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q1MTA2ZWMzZmUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mifurohi@元羊飼い</dc:creator></item><item><title><![CDATA[LiteLLM を使って色々な LLM API サービスをいい感じに使いこなす]]></title><description><![CDATA[この記事は Magic Moment Advent Calendar 2024 5 日目の記事です。
+
+Magic Moment でプロダクトデータを活用した機能の開発・検討をしている @nagomiso です。
+気づけば前回の記事から 1 年が経過していました。時間の流れが早すぎて驚きを隠せません。 ここ 1 年での変化としては体重が大幅に増えました。原因は間違いなくラーメンの食べ過ぎです。節制せねば… 🍜
+
+ はじめに
+Google が Gemini 1.5 Pro / Flush を公開したり OpenAI が GPT-4o / 4o mini, OpenAI o1 / o1 mi...]]></description><link>https://zenn.dev/magicmoment/articles/litellm-is-useful-202412</link><guid isPermaLink="true">https://zenn.dev/magicmoment/articles/litellm-is-useful-202412</guid><pubDate>Thu, 05 Dec 2024 23:30:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dLXroYO7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:LiteLLM%2520%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E8%2589%25B2%25E3%2580%2585%25E3%2581%25AA%2520LLM%2520API%2520%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2593%25E3%2582%25B9%25E3%2582%2592%25E3%2581%2584%25E3%2581%2584%25E6%2584%259F%25E3%2581%2598%25E3%2581%25AB%25E4%25BD%25BF%25E3%2581%2584%25E3%2581%2593%25E3%2581%25AA%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Magic%2520Moment%2520Tech%2520...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA4YjkwNjQ0ZWUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Magic Moment Tech Blog</dc:creator></item></channel></rss>
