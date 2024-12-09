@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Kotlin」のフィード]]></title><description><![CDATA[Zennのトピック「Kotlin」のRSSフィードです]]></description><link>https://zenn.dev/topics/kotlin</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/0913f0325d.png</url><title>Zennの「Kotlin」のフィード</title><link>https://zenn.dev/topics/kotlin</link></image><generator>zenn.dev</generator><lastBuildDate>Mon, 09 Dec 2024 07:59:47 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/kotlin/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[ARのSNS ソースコード公開します]]></title><description><![CDATA[
+ 経緯
+何回かの記事に分けて発信していたARのSNSアプリなんですが、アプリをリリースしようとしたら、Google Play Storeのリリース基準に阻まれた為、リリースは諦めてソースコードを公開することに決めました。
+https://qiita.com/yuto-ktok/items/f13d56d6aaceba892ecb#:~:text=Googleは、2023年11,使ってもらうだと！！
+
+ 機能
+基本的にARCore + Geospatial APIを使い拡張世界にコンテンツを投稿でき、他者が投稿したコンテンツを閲覧できます。
+画面構成は以下のようになっており、左上の電波塔...]]></description><link>https://zenn.dev/taiseishimizu/articles/0e02953e2c4e6a</link><guid isPermaLink="true">https://zenn.dev/taiseishimizu/articles/0e02953e2c4e6a</guid><pubDate>Mon, 09 Dec 2024 00:56:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--tssqgAin--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AR%25E3%2581%25AESNS%2520%25E3%2582%25BD%25E3%2583%25BC%25E3%2582%25B9%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E5%2585%25AC%25E9%2596%258B%25E3%2581%2597%25E3%2581%25BE%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:shimizu%2520taisei%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSWNkbkpiUTBwWFVtRWpYczBRVmE4MzZsczIteTRQejh6NnQxeDlFWEhjYk90Q2pnPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>shimizu taisei</dc:creator></item><item><title><![CDATA[ExposedでStatementInterceptorを使ってSQL文実行前後に処理を差し挟む]]></title><description><![CDATA[この記事はKotlin Advent Calendar 2024 9日目の記事です
+
+ はじめに
+こんにちは、株式会社スマートラウンドの@tsukakei1012です！
+当社では、サーバーサイドKotlinで開発しており、ORマッパーとしてJetBrainsのExposedを利用しています
+本記事では、ExposedでSQL文実行前後に処理を差し挟むための機構であるStatementInterceptorの紹介とサンプルコードを共有します
+
+ StatementInterceptorとは
+ExposedからRDBに対して発行されるSQL文（厳密にはStatementクラス）実行時の各ライ...]]></description><link>https://zenn.dev/smartround_dev/articles/a934e2eab8b8d2</link><guid isPermaLink="true">https://zenn.dev/smartround_dev/articles/a934e2eab8b8d2</guid><pubDate>Sun, 08 Dec 2024 21:30:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--pWVQgoJL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Exposed%25E3%2581%25A7StatementInterceptor%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6SQL%25E6%2596%2587%25E5%25AE%259F%25E8%25A1%258C%25E5%2589%258D%25E5%25BE%258C%25E3%2581%25AB%25E5%2587%25A6%25E7%2590%2586%25E3%2582%2592%25E5%25B7%25AE%25E3%2581%2597%25E6%258C%259F%25E3%2582%2580%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:tsukakei%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2EyZGQyNWFiZDUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25B9%25E3%2583%259E%25E3%2583%25BC%25E3%2583%2588%25E3%2583%25A9%25E3%2582%25A6%25E3%2583%25B3%25E3%2583%2589%2520%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI5ZjUxNmM3MDMuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tsukakei</dc:creator></item><item><title><![CDATA[状態遷移の悩みを解決！DDDでシンプルかつ堅牢な状態遷移の設計を実現する方法]]></title><description><![CDATA[
+!
+この記事は 株式会社ログラス Productチーム Advent Calendar 2024 のシリーズ 2、9日目 の記事です。
+
+
+ はじめに
+ドメイン駆動設計（DDD）は、ビジネスドメインをソフトウェアに正確に反映させるための強力なアプローチです。その中でも、状態遷移の設計は、ドメインの振る舞いを表現するための核となる部分です。ドメインモデルで「状態」をどのように扱うかは、システム全体の品質に大きな影響を与えます。
+例えば、注文管理システムでは、注文が「未処理（注文時）」→「処理中」→「配送中」→「配送完了」と遷移する過程を管理する必要があります。この状態遷移を正しく設計しな...]]></description><link>https://zenn.dev/loglass/articles/426977debf9fb0</link><guid isPermaLink="true">https://zenn.dev/loglass/articles/426977debf9fb0</guid><pubDate>Sun, 08 Dec 2024 15:00:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--MC4fQuOK--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%258A%25B6%25E6%2585%258B%25E9%2581%25B7%25E7%25A7%25BB%25E3%2581%25AE%25E6%2582%25A9%25E3%2581%25BF%25E3%2582%2592%25E8%25A7%25A3%25E6%25B1%25BA%25EF%25BC%2581DDD%25E3%2581%25A7%25E3%2582%25B7%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AB%25E3%2581%258B%25E3%2581%25A4%25E5%25A0%2585%25E7%2589%25A2%25E3%2581%25AA%25E7%258A%25B6%25E6%2585%258B%25E9%2581%25B7%25E7%25A7%25BB%25E3%2581%25AE%25E8%25A8%25AD%25E8%25A8%2588%25E3%2582%2592%25E5%25AE%259F%25E7%258F%25BE%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2583%258A%25E3%2582%25AB%25E3%2583%25A0%25E3%2583%25A9%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRlNWQ4ZTRjZjguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2582%25B9%2520%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg4Zjk2YjhhYzIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ナカムラ</dc:creator></item><item><title><![CDATA[Jetpack Compose でメールアプリを最も簡単に開く記述]]></title><description><![CDATA[指定したURLでWEBブラウザを開くならこう書けます。
+@Composable
+fun OpenLinkButton(
+  urlHandler: UriHandler = LocalUriHandler.current
+) {
+  Button(
+    onClick = {
+      urlHandler.openUri("https://android.benigumo.com/")
+    }
+  ) {
+    Text("Open Web link")
+  }
+}
+
+もう想像はつくでしょう。メールアプリを開く場合は以下から。
+https://android.benigum...]]></description><link>https://zenn.dev/maochanz/articles/41061f9c5ae59d</link><guid isPermaLink="true">https://zenn.dev/maochanz/articles/41061f9c5ae59d</guid><pubDate>Sun, 08 Dec 2024 11:07:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--LEguZRdB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Jetpack%2520Compose%2520%25E3%2581%25A7%25E3%2583%25A1%25E3%2583%25BC%25E3%2583%25AB%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E6%259C%2580%25E3%2582%2582%25E7%25B0%25A1%25E5%258D%2598%25E3%2581%25AB%25E9%2596%258B%25E3%2581%258F%25E8%25A8%2598%25E8%25BF%25B0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:chanzmao%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzllNjNhNDE1ZDQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>chanzmao</dc:creator></item><item><title><![CDATA[障害を防ぐための関数型エラーハンドリング（前編）]]></title><description><![CDATA[
+!
+この記事は 株式会社ログラス Productチーム Advent Calendar 2024 のシリーズ 2、8日目 の記事です。
+
+いつの間にか始まっていたアドベントカレンダー、本日は8日目になります。
+気がつけばもう12月ですね。迫りくる年末年始、システム障害に振り回されずゆっくり過ごしたいものですよね。
+さて本日はそんな障害に立ち向かうための、エラーハンドリングについてお話したいと思います。
+ソフトウェア開発においてエラー処理は避けて通れない課題です。しかし、適切でないエラー処理はシステム全体の障害を引き起こしやすく、特に例外（Exception）の濫用は重大な問題を生みがち...]]></description><link>https://zenn.dev/loglass/articles/c19b79f17418f1</link><guid isPermaLink="true">https://zenn.dev/loglass/articles/c19b79f17418f1</guid><pubDate>Sun, 08 Dec 2024 08:36:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Im9Pg8hx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E9%259A%259C%25E5%25AE%25B3%25E3%2582%2592%25E9%2598%25B2%25E3%2581%2590%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%25E9%2596%25A2%25E6%2595%25B0%25E5%259E%258B%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E3%2583%258F%25E3%2583%25B3%25E3%2583%2589%25E3%2583%25AA%25E3%2583%25B3%25E3%2582%25B0%25EF%25BC%2588%25E5%2589%258D%25E7%25B7%25A8%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:knih%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRlNWQ4ZTRjZjguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2582%25B9%2520%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRkNTA1ZGU0NzguanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>knih</dc:creator></item><item><title><![CDATA[ECSのTaskProtectionを利用して安全なタスクの入れ替えを実現する]]></title><description><![CDATA[
+!
+この記事は 株式会社ログラス Productチーム Advent Calendar 2024 のシリーズ 1、8日目 の記事です。
+
+
+ はじめに
+こんにちは、ログラスでエンジニアをしています粟田（@wooootack）です。
+今日は久しぶりに純粋な技術記事を書こうと思います！ぜひ最後までお付き合いください。
+唐突ですが、皆さんのバックエンドアプリケーションには非同期処理が実装されているでしょうか？
+恐らく、ほとんどの方が 「はい」 と答えるのではないでしょうか。
+現代のアプリケーションにおいて、非同期処理は非常に重要な役割を担っています。特に、ユーザーリクエストに対する迅速な応答...]]></description><link>https://zenn.dev/loglass/articles/safe-container-replace-with-task-protection</link><guid isPermaLink="true">https://zenn.dev/loglass/articles/safe-container-replace-with-task-protection</guid><pubDate>Sun, 08 Dec 2024 03:41:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bIIsk7qq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ECS%25E3%2581%25AETaskProtection%25E3%2582%2592%25E5%2588%25A9%25E7%2594%25A8%25E3%2581%2597%25E3%2581%25A6%25E5%25AE%2589%25E5%2585%25A8%25E3%2581%25AA%25E3%2582%25BF%25E3%2582%25B9%25E3%2582%25AF%25E3%2581%25AE%25E5%2585%25A5%25E3%2582%258C%25E6%259B%25BF%25E3%2581%2588%25E3%2582%2592%25E5%25AE%259F%25E7%258F%25BE%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Kyosuke%2520Awata%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRlNWQ4ZTRjZjguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2582%25B9%2520%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdjYjE4NDM3MzYuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kyosuke Awata</dc:creator></item><item><title><![CDATA[フェイクコンストラクタを使った段階的な拡張]]></title><description><![CDATA[!
+本記事は Kotlin Advent Calendar 2024 の12月5日のものです。
+
+
+ はじめに
+KotlinにはJavaにはない便利な機能がたくさんありますが、そのうちの1つはFake constructors（フェイクコンストラクタ）でしょう。
+フェイクコンストラクタは、見た目はクラスのコンストラクタなのですが実体はただのトップレベル関数です。
+Kotlinの標準ライブラリにも存在し、例えば次のように定義されています。
+public inline fun &lt;T&gt; List(size: Int, init: (index: Int) -&gt; T): Lis...]]></description><link>https://zenn.dev/nakamura_to/articles/1b65b63a30e814</link><guid isPermaLink="true">https://zenn.dev/nakamura_to/articles/1b65b63a30e814</guid><pubDate>Sun, 08 Dec 2024 03:24:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--sIYDLGtR--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2595%25E3%2582%25A7%25E3%2582%25A4%25E3%2582%25AF%25E3%2582%25B3%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25A9%25E3%2582%25AF%25E3%2582%25BF%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%259F%25E6%25AE%25B5%25E9%259A%258E%25E7%259A%2584%25E3%2581%25AA%25E6%258B%25A1%25E5%25BC%25B5%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nakamura_to%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lSWkNjYVdwdlhnTTRldkc0QmM1QjhlZVFGbTUxYm1FZjhXbERLPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nakamura_to</dc:creator></item><item><title><![CDATA[moshiとは？]]></title><description><![CDATA[
+ Moshi ドキュメント
+
+ 概要
+Moshiは、KotlinとJavaのためのモダンなJSONライブラリです。GsonやJacksonの代替として使用でき、特にKotlinとの相性が優れています。
+
+ 主な特徴
+
+Kotlinのデータクラスとの優れた統合
+NullセーフティとJSONの型安全な変換
+カスタマイズ可能なアダプター機能
+軽量で高速な処理
+AndroidプロジェクトでのProguard対応
+
+
+ セットアップ
+
+ Gradle依存関係の追加
+dependencies {
+    implementation("com.squareup.moshi:moshi:1.15.0...]]></description><link>https://zenn.dev/joo_hashi/articles/76d7cab278b6d2</link><guid isPermaLink="true">https://zenn.dev/joo_hashi/articles/76d7cab278b6d2</guid><pubDate>Sun, 08 Dec 2024 02:57:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1rqktDND--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:moshi%25E3%2581%25A8%25E3%2581%25AF%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:JboyHashimoto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNjOTBiY2M0M2YuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>JboyHashimoto</dc:creator></item><item><title><![CDATA[Kotlinのbyとは?]]></title><description><![CDATA[
+ What by keyword?
+Kotlinのbyというキーワードはなんなのか？
+いつもおまじないでつけていた。
+https://kotlinlang.org/docs/delegated-properties.html
+
+ Delegated properties
+一般的なプロパティの種類によっては、必要なたびに手動で実装することもできるが、一度実装してライブラリに追加し、後で再利用した方が便利なものもある。例えば
+Lazyプロパティ：最初のアクセス時にのみ値が計算される。
+Observableプロパティ：このプロパティの変更についてリスナーに通知される。
+各プロパティに個別のフ...]]></description><link>https://zenn.dev/joo_hashi/articles/8385482f0057e3</link><guid isPermaLink="true">https://zenn.dev/joo_hashi/articles/8385482f0057e3</guid><pubDate>Sat, 07 Dec 2024 00:52:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--kMttlMXo--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:Kotlin%25E3%2581%25AEby%25E3%2581%25A8%25E3%2581%25AF%253F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:JboyHashimoto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNjOTBiY2M0M2YuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>JboyHashimoto</dc:creator></item><item><title><![CDATA[iOS/Android両方のアプリを作るならCompose Multiplatformがベストだと思う]]></title><description><![CDATA[こんにちは！sugitaniと申します。
+Black Cat CarnivalというSNSアプリを開発しています。現在ベータテスト中です。
+本稿はBlack Cat CarnivalでのCompose Multiplatformの採用事例の紹介と、それを例にとったCompose Multiplatformのオススメを行います。
+
+ "Compose Multiplatformがベストだと思う"なんてたいそうなこと言ってるけど、言うほど開発のことわかっているのかい？
+…と思われるかもしれないので経歴をご紹介させていただきます
+
+これまで主に開発してきたもの ⇒ ニコニコ生放送 / GANM...]]></description><link>https://zenn.dev/bcc/articles/b4191ae1de923e</link><guid isPermaLink="true">https://zenn.dev/bcc/articles/b4191ae1de923e</guid><pubDate>Fri, 06 Dec 2024 08:00:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--rAzTRx-J--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:iOS%252FAndroid%25E4%25B8%25A1%25E6%2596%25B9%25E3%2581%25AE%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%25E3%2581%25AA%25E3%2582%2589Compose%2520Multiplatform%25E3%2581%258C%25E3%2583%2599%25E3%2582%25B9%25E3%2583%2588%25E3%2581%25A0%25E3%2581%25A8%25E6%2580%259D%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:sugitani%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzkwYmM4NTk3YjAuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Black%2520Cat%2520Carnival%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2EzYzFhYWI0MGYuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sugitani</dc:creator></item><item><title><![CDATA[ASTでKotlinに入門する]]></title><description><![CDATA[この記事はKotlin Advent Calendar 2024 6日目の記事です。
+おはようございます。今年の10月にKotlinに入門したinouehiといいます、よろしくお願いします！
+Kotlinに慣れるためにとにかく手を動かしてみようということで、ASTを操作する簡単なツールを作ってみることにしました。ASTを観察することで言語仕様が垣間見えることも期待しています。
+
+ 想定読者
+
+KotlinでASTを操作したい方
+静的解析に興味がある方
+
+
+ 実装方法の調査・検討
+右も左もわからない、KotlinもGradleもあんまりわからない状態だったのでひとまずChatGPTに聞いて...]]></description><link>https://zenn.dev/inoco/articles/8c2f56c2009c80</link><guid isPermaLink="true">https://zenn.dev/inoco/articles/8c2f56c2009c80</guid><pubDate>Thu, 05 Dec 2024 15:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--uPr5oL8I--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AST%25E3%2581%25A7Kotlin%25E3%2581%25AB%25E5%2585%25A5%25E9%2596%2580%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:inouehi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk4NmRhNGQ0NWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>inouehi</dc:creator></item><item><title><![CDATA[AndroidのRealm周りでのクラッシュ調査(Realm access from incorrect thread)]]></title><description><![CDATA[原因究明までの記録
+間違っていたらご指摘いただけると嬉しいです！Coroutineにもkotlinにも知見があるわけではないので、とても助かります！
+
+ crashの内容
+crash
+Realm access from incorrect thread. Realm objects can only be accessed on the thread they were created.
+crashlyticsのログ
+io.realm.BaseRealm.checkIfValid (BaseRealm.java:530)
+io.realm.BaseRealm.refresh (BaseR...]]></description><link>https://zenn.dev/hikawa/articles/30a0c4683795a1</link><guid isPermaLink="true">https://zenn.dev/hikawa/articles/30a0c4683795a1</guid><pubDate>Thu, 05 Dec 2024 12:11:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--irKCiu7W--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Android%25E3%2581%25AERealm%25E5%2591%25A8%25E3%2582%258A%25E3%2581%25A7%25E3%2581%25AE%25E3%2582%25AF%25E3%2583%25A9%25E3%2583%2583%25E3%2582%25B7%25E3%2583%25A5%25E8%25AA%25BF%25E6%259F%25BB%2528Realm%2520access%2520from%2520incorrect%2520thread%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hikawa%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVjYWVjNTU1ODYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hikawa</dc:creator></item><item><title><![CDATA[Kolinの初期化ブロックはクラスボディの順番で呼び出される]]></title><description><![CDATA[
+ クイズ
+皆さん以下のandroidのコードの誤りを見つけられるでしょうか？
+Empty ActivityにInitTestClassを追加しただけです。
+当然ですがバグはInitTestClassに含まれています。
+package com.example.test_init_block
+
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToE...]]></description><link>https://zenn.dev/kiitosu/articles/7b0bf6e00ceaff</link><guid isPermaLink="true">https://zenn.dev/kiitosu/articles/7b0bf6e00ceaff</guid><pubDate>Thu, 05 Dec 2024 05:05:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9aC3YxOh--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Kolin%25E3%2581%25AE%25E5%2588%259D%25E6%259C%259F%25E5%258C%2596%25E3%2583%2596%25E3%2583%25AD%25E3%2583%2583%25E3%2582%25AF%25E3%2581%25AF%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25B9%25E3%2583%259C%25E3%2583%2587%25E3%2582%25A3%25E3%2581%25AE%25E9%25A0%2586%25E7%2595%25AA%25E3%2581%25A7%25E5%2591%25BC%25E3%2581%25B3%25E5%2587%25BA%25E3%2581%2595%25E3%2582%258C%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kiitosu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFUWEFKdzJBNDNaZzRhRzk5b0NEMm5aMFY1RDJISlVUVGtySVB4UWhtaXU9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kiitosu</dc:creator></item><item><title><![CDATA[Google ColaboratoryでANTLRを動かして、構文木の画像生成してみる]]></title><description><![CDATA[こんにちは！アルダグラムでレポートチームのエンジニアをしている志茂です。
+レポートチームでは、お客様が利用されているExcelファイルをKANNA上にアップロードし、webから編集できるような機能をKotlinとSpring Bootで開発しております。
+Excelファイルを読み込み編集できるようにするためには、色々な考慮事項があるのですが、
+今回はその中でもExcel関数の読み込みで利用している、ANTLRという構文解析を行うためのツールをGoogle Colaboratory上で動作させ、解析した結果を構文木の画像として生成する方法をご紹介します。
+
+ 構文解析ツールを使わないと大変...]]></description><link>https://zenn.dev/aldagram_tech/articles/8d712209c13973</link><guid isPermaLink="true">https://zenn.dev/aldagram_tech/articles/8d712209c13973</guid><pubDate>Thu, 05 Dec 2024 02:37:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dWoY8LYi--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Google%2520Colaboratory%25E3%2581%25A7ANTLR%25E3%2582%2592%25E5%258B%2595%25E3%2581%258B%25E3%2581%2597%25E3%2581%25A6%25E3%2580%2581%25E6%25A7%258B%25E6%2596%2587%25E6%259C%25A8%25E3%2581%25AE%25E7%2594%25BB%25E5%2583%258F%25E7%2594%259F%25E6%2588%2590%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:seamoooo%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JiM2FkMDk1NzUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25A2%25E3%2583%25AB%25E3%2583%2580%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%25A0%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI3YjU3ZWVlNzkuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>seamoooo</dc:creator></item><item><title><![CDATA[Gradle APIとMermaidを使ってmoduleの依存関係を図示する]]></title><description><![CDATA[!
+本記事は Kotlin Advent Calendar 2024 の12月4日のものです。
+
+
+ はじめに
+マルチモジュールのAndroidアプリにおいて、Gradle APIとMermaidを使って図1のようなモジュールの依存関係を図示する方法を紹介します。
+
+図1 公式doc「What is modularization?」より引用
+注意事項
+
+本記事で使用するGradle APIは非推奨となっており、Gradle 9で削除されることがアナウンスされています。（詳しくは後述）
+軽いお遊びのような記事なので正確性に欠けている可能性があります。
+
+
+ 実装
+基本的に Project....]]></description><link>https://zenn.dev/yuuuki/articles/662d2f7be1eb1a</link><guid isPermaLink="true">https://zenn.dev/yuuuki/articles/662d2f7be1eb1a</guid><pubDate>Wed, 04 Dec 2024 00:37:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--e3Q9Xkrv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Gradle%2520API%25E3%2581%25A8Mermaid%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6module%25E3%2581%25AE%25E4%25BE%259D%25E5%25AD%2598%25E9%2596%25A2%25E4%25BF%2582%25E3%2582%2592%25E5%259B%25B3%25E7%25A4%25BA%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:rikuyu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhjODBmYTcwMjkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>rikuyu</dc:creator></item><item><title><![CDATA[[Kotlin] 最近 value class を重宝してる]]></title><description><![CDATA[本記事は "mhidakaが建立した Advent Calendar 2024 (Vol.2)" の記事です。この記事では技術的なことを書きます。
+最近書く Kotlin コードで value class を重宝しているので、「 value class いいよ！」というのを雑にアピールしておきたい。日本語の記事だと value class を啓蒙する記事が少ないのでちょっとでも啓蒙しておくのが狙い。
+Kotlin における value class は Kotlin 1.5 で導入された仕組みで、単一の値を保持するがランタイムでは内部の型の値として表現されるクラス。
+https://kot...]]></description><link>https://zenn.dev/halu5071/articles/e30d00a39113d8</link><guid isPermaLink="true">https://zenn.dev/halu5071/articles/e30d00a39113d8</guid><pubDate>Tue, 03 Dec 2024 15:00:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--PSUjMuuU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BKotlin%255D%2520%25E6%259C%2580%25E8%25BF%2591%2520value%2520class%2520%25E3%2582%2592%25E9%2587%258D%25E5%25AE%259D%25E3%2581%2597%25E3%2581%25A6%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:halu5071%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAyOWM4YWJkYmUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>halu5071</dc:creator></item><item><title><![CDATA[マネーフォワード関西開発拠点 - チームの日々の開発を紹介]]></title><description><![CDATA[この記事はMoney Forward Kansai Advent Calendar 2024の４日目の記事です!
+こんにちは、株式会社マネーフォワードの大阪拠点でバックエンドエンジニアをしています。
+Kazuki Tanidaです。
+今回は私の所属するチームのエンジニアの日常についてざっくりと雰囲気を感じていただければと思います！
+
+ 私たちのチーム
+関西開発拠点は京都と大阪があり、多くのメンバーがビジネス向けプロダクトの開発に関わっています。
+エンジニア、QA、デザイナー、エンジニアリングマネージャー、プロダクトマネージャー等々日々関わりながら開発しています。日本側のチーム、ベトナム側...]]></description><link>https://zenn.dev/digitter/articles/a6d9c41cecf3b6</link><guid isPermaLink="true">https://zenn.dev/digitter/articles/a6d9c41cecf3b6</guid><pubDate>Tue, 03 Dec 2024 15:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dKRaMsoa--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%259E%25E3%2583%258D%25E3%2583%25BC%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25AF%25E3%2583%25BC%25E3%2583%2589%25E9%2596%25A2%25E8%25A5%25BF%25E9%2596%258B%25E7%2599%25BA%25E6%258B%25A0%25E7%2582%25B9%2520-%2520%25E3%2583%2581%25E3%2583%25BC%25E3%2583%25A0%25E3%2581%25AE%25E6%2597%25A5%25E3%2580%2585%25E3%2581%25AE%25E9%2596%258B%25E7%2599%25BA%25E3%2582%2592%25E7%25B4%25B9%25E4%25BB%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kazuki%2520tanida%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVkMjY4OTU0NDMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kazuki tanida</dc:creator></item><item><title><![CDATA[GPT4vを用いたandroidアプリin Kotlin]]></title><description><![CDATA[
+ 序説
+沖縄のビーチは、地元の人々にとって泳ぐ場所ではなく、むしろBBQを楽しむ場所である。
+これは、滋賀出身の私にとっても理解しやすい感覚だった。
+琵琶湖で泳がずにBBQをするのと同じようなものだ。
+ある日、私はビーチパーティの幹事を任され、参加者を集めるために「ビーチパーティ１番楽しみにしてきた人選手権」を企画することにした。
+参加者には、最もビーチパーティらしい服装で来るように呼びかけ、その中で一番の人には豪華な権利を贈呈することにしたのだ。
+しかし、問題が一つあった。
+どうやってその「一番」を判定するか？人間の目ではどうしても主観が入ってしまう。
+そこで、私は一計を案じた。AI...]]></description><link>https://zenn.dev/churadata/articles/c4fdba130dc83f</link><guid isPermaLink="true">https://zenn.dev/churadata/articles/c4fdba130dc83f</guid><pubDate>Tue, 03 Dec 2024 13:44:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Ji9MIJxr--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:GPT4v%25E3%2582%2592%25E7%2594%25A8%25E3%2581%2584%25E3%2581%259Fandroid%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AAin%2520Kotlin%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:kei%25E5%25BF%258D%25E8%2580%2585%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y2NTFmZDJlZWIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2581%25A1%25E3%2582%2585%25E3%2582%2589%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzIzYTk0NjI3YjYuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kei忍者</dc:creator></item><item><title><![CDATA[[Android] JetPack Compose Type SafeなNaigation]]></title><description><![CDATA[※Kotlin Serializationプラグインを入れている必要がある
+公式を見てまとめつつDeeplLinkの実装も含めてみた
+sealed class Route {
+    @Serializable
+    data object Home : Route()
+
+    @Serializable
+    data class ComicDetail(val id: String) : Route() {
+        companion object {
+            const val DEEP_LINK_URI_PATTERN = "myapp://comi...]]></description><link>https://zenn.dev/giglancer/articles/ae64622a250374</link><guid isPermaLink="true">https://zenn.dev/giglancer/articles/ae64622a250374</guid><pubDate>Tue, 03 Dec 2024 09:51:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--V5sfSp0p--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BAndroid%255D%2520JetPack%2520Compose%2520Type%2520Safe%25E3%2581%25AANaigation%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:apollo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBjZmZlZTVlZjQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>apollo</dc:creator></item><item><title><![CDATA[カプセル化2024]]></title><description><![CDATA[こんにちは！株式会社PREVENT開発部のこまたつです。
+この記事はPREVENTアドベントカレンダーの3日目の記事です。
+昨今では生成AIの登場によって検索結果の質が低下していると嘆かれているようですが、実は生成AIの登場以前からインターネットには誤解を元にした記事が溢れていました。
+というのも、プロジェクトやメンバーが変わればそこで通用するジャーゴンとして特定の語（たとえばカプセル化）が当てはめられることは多く、特定条件下でのみ正しい形で悪気なくそういった記事が作られていったからです。
+今回は、意外と誤解している人が多いカプセル化についてAndroidチームの定例で使った資料を元に改...]]></description><link>https://zenn.dev/prevent/articles/582289f9f3dc93</link><guid isPermaLink="true">https://zenn.dev/prevent/articles/582289f9f3dc93</guid><pubDate>Tue, 03 Dec 2024 01:29:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qQQrh1_L--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:%25E3%2582%25AB%25E3%2583%2597%25E3%2582%25BB%25E3%2583%25AB%25E5%258C%25962024%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:komatatsu%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2QzNzQ5ZTRhYWYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BEPREVENT%25E9%2596%258B%25E7%2599%25BA%25E9%2583%25A8%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2gxNDV6SlVyeG5lNi1HWXpha0s2a3ptUzBKaUxXUjVNamFFVUxyTHc9czI1MC1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>komatatsu</dc:creator></item></channel></rss>

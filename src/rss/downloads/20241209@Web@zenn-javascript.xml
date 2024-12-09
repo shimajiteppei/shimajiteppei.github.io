@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「JavaScript」のフィード]]></title><description><![CDATA[Zennのトピック「JavaScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/javascript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/64acd76870.png</url><title>Zennの「JavaScript」のフィード</title><link>https://zenn.dev/topics/javascript</link></image><generator>zenn.dev</generator><lastBuildDate>Mon, 09 Dec 2024 07:20:40 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/javascript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[JS と Elixir の比較: switch 文と case マクロ]]></title><description><![CDATA[本稿では、JavaScript の switch 文と Elixir の case マクロを比較します。
+JavaScript の switch 文の基本的な構文は次の通りです。
+switch (式0) {
+  case 式1:
+    文1
+    break
+  case 式2:
+    文2
+    break
+
+  (省略)
+
+  case 式n:
+    文n
+    break
+  default:
+    文z
+}
+「式0」を評価した値を X とします。「式1」の値が X に等しい場合、「文1」が実行されて switch 文全体が終了します。「式1」の値が X に等しくない...]]></description><link>https://zenn.dev/tkrd/articles/js-and-elixir-switch-case</link><guid isPermaLink="true">https://zenn.dev/tkrd/articles/js-and-elixir-switch-case</guid><pubDate>Mon, 09 Dec 2024 05:40:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--D5KaWhcc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JS%2520%25E3%2581%25A8%2520Elixir%2520%25E3%2581%25AE%25E6%25AF%2594%25E8%25BC%2583%253A%2520switch%2520%25E6%2596%2587%25E3%2581%25A8%2520case%2520%25E3%2583%259E%25E3%2582%25AF%25E3%2583%25AD%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E9%25BB%2592%25E7%2594%25B0%25E5%258A%25AA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU3OWU2ZDRlZWMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>黒田努</dc:creator></item><item><title><![CDATA[巨大SPAフロントエンド 垂直分割への第一歩]]></title><description><![CDATA[こんにちは、株式会社 AI Shift の @KK_sep_TT です。
+本記事は AI Shift Advent Calendar 2024 の 9 日目の記事となります。
+
+ 巨大SPAの現状
+AI Shift には複数のプロダクトがあり、それらのプロダクトの管理画面は1つのSPA上に構築されていました。
+
+これらのプロダクトが同じ SPA 上に構築されていたのには以下の背景がありました。
+
+それぞれのプロダクト同士にシナジーがあるので同じ管理画面で扱いたい
+共通のコンポーネントを使いたい
+
+このような背景のもと巨大な SPA が爆誕していました。しかし、これには以下の問題がありまし...]]></description><link>https://zenn.dev/aishift/articles/6d947242f0a69a</link><guid isPermaLink="true">https://zenn.dev/aishift/articles/6d947242f0a69a</guid><pubDate>Mon, 09 Dec 2024 04:34:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--aSgcmY_m--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%25B7%25A8%25E5%25A4%25A7SPA%25E3%2583%2595%25E3%2583%25AD%25E3%2583%25B3%25E3%2583%2588%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2589%2520%25E5%259E%2582%25E7%259B%25B4%25E5%2588%2586%25E5%2589%25B2%25E3%2581%25B8%25E3%2581%25AE%25E7%25AC%25AC%25E4%25B8%2580%25E6%25AD%25A9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:kult%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhhNDQwNmNlMGUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:AI%2520Shift%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhkZmY1MjcxNzUuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kult</dc:creator></item><item><title><![CDATA[【GSAP】GSAP Practice【#6 GSAP Change Code to Class】]]></title><description><![CDATA[
+ 【#6 GSAP Change Code to Class】
+YouTube: https://youtu.be/D_1uCpFZrlg
+https://youtu.be/D_1uCpFZrlg
+今回は、ここまでのコードをクラスにまとめて
+すっきりさせていきます。
+
+js/main.js
+// use a script tag or an external JS file
+document.addEventListener("DOMContentLoaded", (event) =&gt; {
+  gsap.registerPlugin(ScrollTrigger);
+  new A...]]></description><link>https://zenn.dev/web_life_ch/articles/51ae9773367dbf</link><guid isPermaLink="true">https://zenn.dev/web_life_ch/articles/51ae9773367dbf</guid><pubDate>Mon, 09 Dec 2024 04:06:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6P-oR1HP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590GSAP%25E3%2580%2591GSAP%2520Practice%25E3%2580%2590%25236%2520GSAP%2520Change%2520Code%2520to%2520Class%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Web%2520Life%2520CH%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUl0YnZtbWNjTWFMM3dyd2x3VE5sVVZjTlhmZHEzZzF2QnJfMUJMSkJrN049czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Web Life CH</dc:creator></item><item><title><![CDATA[@faker-js/faker の内部実装を探る：ダミーデータ生成の仕組み]]></title><description><![CDATA[この記事はファンタラクティブ 2024 年アドベントカレンダー 12 月 9 日の記事です
+
+ はじめに
+@faker-js/faker（以下 faker とします） は、ダミーデータを生成するためのライブラリです。
+テストで使用したり、モックデータを生成するのに便利なライブラリです。
+この記事では faker が内部でどのような処理が行われているのかを簡単に見ていき、faker の実装についての理解を深めることを目的とします。
+
+ TL;DR
+const firstName = faker.person.firstName();
+上記コードは、person モジュールの firstNa...]]></description><link>https://zenn.dev/funteractiveinc/articles/beb391224cac81</link><guid isPermaLink="true">https://zenn.dev/funteractiveinc/articles/beb391224cac81</guid><pubDate>Sun, 08 Dec 2024 21:00:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--l18ukbFS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%2540faker-js%252Ffaker%2520%25E3%2581%25AE%25E5%2586%2585%25E9%2583%25A8%25E5%25AE%259F%25E8%25A3%2585%25E3%2582%2592%25E6%258E%25A2%25E3%2582%258B%25EF%25BC%259A%25E3%2583%2580%25E3%2583%259F%25E3%2583%25BC%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E7%2594%259F%25E6%2588%2590%25E3%2581%25AE%25E4%25BB%2595%25E7%25B5%2584%25E3%2581%25BF%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:yoshino%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I4YmI2YjY4NDMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2595%25E3%2582%25A1%25E3%2583%25B3%25E3%2582%25BF%25E3%2583%25A9%25E3%2582%25AF%25E3%2583%2586%25E3%2582%25A3%25E3%2583%2596%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzczYTNmZDBlMGUuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yoshino</dc:creator></item><item><title><![CDATA[Node.js 非同期処理まとめ 2024年版]]></title><description><![CDATA[みなさまこんにちは、こんにちは！エアークローゼットCTOの辻です。
+この記事はエアークローゼットのアドベントカレンダー2024の9日目の記事となってますので、ぜひ他の記事も読んでいただけたらと思います！エアークローゼットは2015年からほぼ10年間ずっとNode.jsで開発してきたこともあり、Node.jsの成長をずっと間近で見てきました。
+そこで今回はNode.jsの大きな特徴の一つでもある非同期処理について、時系列順にそれぞれの特徴をまとめつつ、最後に最新の動向にも触れられたらと思います。
+
+ 見出し
+
+Callback
+Stream
+child_process
+cluster
+Pr...]]></description><link>https://zenn.dev/aircloset_dev/articles/66e0d2104e43dc</link><guid isPermaLink="true">https://zenn.dev/aircloset_dev/articles/66e0d2104e43dc</guid><pubDate>Sun, 08 Dec 2024 17:44:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--eJ-vQPmc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Node.js%2520%25E9%259D%259E%25E5%2590%258C%25E6%259C%259F%25E5%2587%25A6%25E7%2590%2586%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25202024%25E5%25B9%25B4%25E7%2589%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25A8%25E3%2582%25A2%25E3%2583%25BC%25E3%2582%25AF%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25BC%25E3%2583%2583%25E3%2583%2588%2520%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA2NGY0YzgzODcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>エアークローゼット テックブログ</dc:creator></item><item><title><![CDATA[La motivación de programar con JavaScript]]></title><description><![CDATA[En un mundo tan cambiante y en la era de la IA, la motivación para aprender a programar ha cambiado bastante. En este artículo quiero compartir mi experiencia y motivación para aprender a programar con JavaScript junto con las experiencias de mis estudiantes.
+
+ El inicio de todo programador
+Aún r...]]></description><link>https://zenn.dev/oroyajosue/articles/98936d528b061c</link><guid isPermaLink="true">https://zenn.dev/oroyajosue/articles/98936d528b061c</guid><pubDate>Sun, 08 Dec 2024 15:36:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--iZ6aM8iH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:La%2520motivaci%25C3%25B3n%2520de%2520programar%2520con%2520JavaScript%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25AA%25E3%2583%25AD%25E3%2583%25A4%25E3%2583%259B%25E3%2582%25B9%25E3%2582%25A8%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSlFwQzJtY0xvc3dqZzR0bVRpTDk5RU9wV3RNLUtOcTduRkdySzZaNjhPV2JpdndOTmM9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>オロヤホスエ</dc:creator></item><item><title><![CDATA[ENCA 9日目: プロパティ列挙順で始めに列挙する整数値の範囲修正]]></title><description><![CDATA[!
+この記事は 1人 ECMAScript Normative Changes Advent Calendar 2024 の 9 日目です。
+
+
+ 整数値インデックスの扱い
+ECMAScript の数値 number は倍精度浮動小数点数（binary64）です。仮数部が 52 ビットであることから、2^{53} - 1（Number.MAX_SAFE_INTEGER）までの整数値を正確に扱うことが出来ます。また配列 Array の長さの最大は 2^{32} - 1 と定義されており、インデックスとしては +0 から 2^{32} - 2 までの整数値を取ります。
+以上の理由から +0 ...]]></description><link>https://zenn.dev/pixiv/articles/b6393aad961221</link><guid isPermaLink="true">https://zenn.dev/pixiv/articles/b6393aad961221</guid><pubDate>Sun, 08 Dec 2024 15:00:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--zjjqY_8U--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ENCA%25209%25E6%2597%25A5%25E7%259B%25AE%253A%2520%25E3%2583%2597%25E3%2583%25AD%25E3%2583%2591%25E3%2583%2586%25E3%2582%25A3%25E5%2588%2597%25E6%258C%2599%25E9%25A0%2586%25E3%2581%25A7%25E5%25A7%258B%25E3%2582%2581%25E3%2581%25AB%25E5%2588%2597%25E6%258C%2599%25E3%2581%2599%25E3%2582%258B%25E6%2595%25B4%25E6%2595%25B0%25E5%2580%25A4%25E3%2581%25AE%25E7%25AF%2584%25E5%259B%25B2%25E4%25BF%25AE%25E6%25AD%25A3%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:petamoriken%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZhMDc3ZWRhZTMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:pixiv%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzMzODlhMzQ2ZjQuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>petamoriken</dc:creator></item><item><title><![CDATA[JavaScriptの「async/awaitは糖衣構文」の真意について]]></title><description><![CDATA[
+ async/awaitは糖衣構文
+async/awaitの話題になるとしたり顔の古参エンジニアが現れて「async/awaitはただの糖衣構文だからねｗPromiseをちゃんと理解したほうがいいよｗ」と捨て台詞を吐いて去ってゆくのはもはや風物詩であるが、この「async/awaitは糖衣構文」を誤解している人も多いのではないか。
+何が言いたいかというと
+function main() {
+  return promise1()
+    .then(() =&gt; promise2())
+    .then(() =&gt; promise3())
+}
+の糖衣構文が
+async fu...]]></description><link>https://zenn.dev/gon/articles/a27189dddb3c51</link><guid isPermaLink="true">https://zenn.dev/gon/articles/a27189dddb3c51</guid><pubDate>Sun, 08 Dec 2024 14:59:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--oV48bReq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25E3%2581%25AE%25E3%2580%258Casync%252Fawait%25E3%2581%25AF%25E7%25B3%2596%25E8%25A1%25A3%25E6%25A7%258B%25E6%2596%2587%25E3%2580%258D%25E3%2581%25AE%25E7%259C%259F%25E6%2584%258F%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:gon%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2gyTFE4dHZESk5KYlJpLUR6c25GbU5pV2RKQnZrT3VtLWY4a2cwPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>gon</dc:creator></item><item><title><![CDATA[デバウンスについて]]></title><description><![CDATA[
+ デバウンスとは
+デバウンスとは、特定のイベントや関数などが短期間に連続して実行された際に、タイマーによる入力遅延を利用して一度だけ処理が実行されるようにする手法です。
+この際に、実際に実行されるのは一番最後に実行されたイベントや関数だけとなります。
+
+ デバウンスが有効に使用できる場面とは？
+デバウンスが有効に使用できる場面としてすぐに思いつくのは、ユーザーの入力した値に対して、何らかの制約をチェックする場面です。
+郵便番号やEメールアドレスなどがそれに該当すると思います。
+デバウンスによく似た手法としてレートリミットという手法が存在します。こちらは、一定時間内に一定回数まで関数を実...]]></description><link>https://zenn.dev/heckt/articles/ed869b918df63f</link><guid isPermaLink="true">https://zenn.dev/heckt/articles/ed869b918df63f</guid><pubDate>Sun, 08 Dec 2024 14:46:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6V8sJsBG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2587%25E3%2583%2590%25E3%2582%25A6%25E3%2583%25B3%25E3%2582%25B9%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Heckt%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNhMzQ4ZjE5NTQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Heckt</dc:creator></item><item><title><![CDATA[Reactのチュートリアルを学ぶ（1）]]></title><description><![CDATA[みなさんお疲れ様です。
+heeheeと申します。
+唐突ですが、備忘録としてreactチュートリアルを残していこうと思いました。
+今回はReactの基礎中の基礎であるstateについて記していきます。
+間違っている部分がありましたら、コメント等でご教示いただけると幸いです。
+
+ useState()
+Reactを使う上で一番最初に学ぶのがuseStateです。
+useStateは各コンポーネントが保持する状態を表します。
+使い方
+const [value, setValue] = useState("");
+useState()の詳細は以下です。
+ー引数
+・（初回レンダリング時の）状態の初...]]></description><link>https://zenn.dev/heehee/articles/ceefd839d6dbd8</link><guid isPermaLink="true">https://zenn.dev/heehee/articles/ceefd839d6dbd8</guid><pubDate>Sun, 08 Dec 2024 12:29:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fYpNfvwg--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%25E3%2581%25AE%25E3%2583%2581%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%2588%25E3%2583%25AA%25E3%2582%25A2%25E3%2583%25AB%25E3%2582%2592%25E5%25AD%25A6%25E3%2581%25B6%25EF%25BC%25881%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:heehee%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS25qbHF3djVDeUFXaUU1NGRKQ0xtclNnQTd1aXhObEtWekhVMUNJYjhkRVVYMWQ3bz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>heehee</dc:creator></item><item><title><![CDATA[GUIでDB設計、APIは自動生成！PocketBaseで実現する高速社内アプリ開発]]></title><description><![CDATA[事業会社のIT部門で働くエンジニアの皆さん，社内向けの業務アプリ開発に携わった経験はありますか？ きっとほとんどの方は携わった経験があるのではないでしょうか．様々な部門から寄せられる開発依頼は，企業の業務効率化に直結する重要なミッションです．
+業務アプリをどのような技術で開発するかというのも重要な問題です．デスクトップアプリにするかWEBアプリにするか，オンプレサーバーで動かすのかクラウドで動かすのか，ノーコードツールやローコードツールを使うのか，など考えることがたくさん出てきます．
+そのような社内業務アプリの開発でおすすめしたいのが，オープンソースの BaaS である PocketBa...]]></description><link>https://zenn.dev/ikumasudo/articles/60791ecce05b16</link><guid isPermaLink="true">https://zenn.dev/ikumasudo/articles/60791ecce05b16</guid><pubDate>Sun, 08 Dec 2024 09:52:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--cF9dLYsm--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:GUI%25E3%2581%25A7DB%25E8%25A8%25AD%25E8%25A8%2588%25E3%2580%2581API%25E3%2581%25AF%25E8%2587%25AA%25E5%258B%2595%25E7%2594%259F%25E6%2588%2590%25EF%25BC%2581PocketBase%25E3%2581%25A7%25E5%25AE%259F%25E7%258F%25BE%25E3%2581%2599%25E3%2582%258B%25E9%25AB%2598%25E9%2580%259F%25E7%25A4%25BE%25E5%2586%2585%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E9%2596%258B%25E7%2599%25BA%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Ikuma%2520Sudo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSXMxRnpKeFc3NkI5TjdobGM2UHM1TllrNEpMUl8zTDVpd2JRRm9meTV2bHZRZjNqT2g9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Ikuma Sudo</dc:creator></item><item><title><![CDATA[NotebookLMで日本語入力中のEnter確定送信を防ぐTampermonkeyスクリプト]]></title><description><![CDATA[
+ はじめに
+NotebookLMを日本語で利用する際、変換確定のためにEnterキーを押すと、そのままテキストが送信されてしまう問題があります。これによって、まだ確定したくない入力途中の文字列が送信されてしまい、非常に煩わしい状況が発生します。
+この問題をTampermonkeyを利用して解消するスクリプトを貼ってます。
+
+ 背景
+NotebookLMは、Googleが提供するノートブック型のLLMツールですが、UIが英語圏向けに最適化されているため、日本語入力時の使い勝手がやや劣る場合があります。その一例が、変換中のEnterキー押下で入力欄のテキストがそのまま送信されてしまう現象で...]]></description><link>https://zenn.dev/knziiy/articles/notebooklm-japanese-enter-fix</link><guid isPermaLink="true">https://zenn.dev/knziiy/articles/notebooklm-japanese-enter-fix</guid><pubDate>Sun, 08 Dec 2024 09:10:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--B1CLdQvB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:NotebookLM%25E3%2581%25A7%25E6%2597%25A5%25E6%259C%25AC%25E8%25AA%259E%25E5%2585%25A5%25E5%258A%259B%25E4%25B8%25AD%25E3%2581%25AEEnter%25E7%25A2%25BA%25E5%25AE%259A%25E9%2580%2581%25E4%25BF%25A1%25E3%2582%2592%25E9%2598%25B2%25E3%2581%2590Tampermonkey%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:knziiy%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2QxMTFkYzlkZmEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>knziiy</dc:creator></item><item><title><![CDATA[async/awaitを使用してsetTimeoutで３秒待機してから次の処理をする。]]></title><description><![CDATA[非同期処理を学んでいる途中にsetTimeoutを非同期にするためにはどうしたらいいだろうということで覚えた書き方をアウトプットします。
+console.log('hi Mark'); // すぐに 'hi Mark' を出力
+
+// delay関数を定義。msミリ秒だけ待機し、Promiseを返す
+const delay = (ms) =&gt; {
+    return new Promise((resolve) =&gt; { // Promiseを作成
+        setTimeout(() =&gt; { // msミリ秒後にコールバック関数を実行
+            ...]]></description><link>https://zenn.dev/utan0907/articles/ac300457a6b567</link><guid isPermaLink="true">https://zenn.dev/utan0907/articles/ac300457a6b567</guid><pubDate>Sun, 08 Dec 2024 07:34:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8YMYQN7c--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:async%252Fawait%25E3%2582%2592%25E4%25BD%25BF%25E7%2594%25A8%25E3%2581%2597%25E3%2581%25A6setTimeout%25E3%2581%25A7%25EF%25BC%2593%25E7%25A7%2592%25E5%25BE%2585%25E6%25A9%259F%25E3%2581%2597%25E3%2581%25A6%25E3%2581%258B%25E3%2582%2589%25E6%25AC%25A1%25E3%2581%25AE%25E5%2587%25A6%25E7%2590%2586%25E3%2582%2592%25E3%2581%2599%25E3%2582%258B%25E3%2580%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yuta%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUl0YnZtbjlhQkptd2R1YS1LTGlUTkJRSlhyU0JDNThnUHJOS0xCRW0tTUk9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yuta</dc:creator></item><item><title><![CDATA[LINE Notifyがサ終になるので、5年前に作ったline-notify-nodejsを振り返る]]></title><description><![CDATA[
+ はじめに
+
+この記事は、LINEDC Advent Calendar 2024の10日目の記事です。
+9日目の記事： TBU
+11日目の記事： TBU
+
+こんにちは。
+DMM.comでDMMブックスを開発している@mitsuoka0423です。
+プライベートでは、LINE Develoer CommunityでLINE API Expertとしても活動しています。
+2025年3月末でLINE Notifyがサービス終了することがアナウンスされました。
+https://notify-bot.line.me/closing-announce
+この記事では、5年前に私が作ったline-no...]]></description><link>https://zenn.dev/tmitsuoka0423/articles/line-notify-nodejs-2024</link><guid isPermaLink="true">https://zenn.dev/tmitsuoka0423/articles/line-notify-nodejs-2024</guid><pubDate>Sun, 08 Dec 2024 07:15:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Q5LIqNx---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:LINE%2520Notify%25E3%2581%258C%25E3%2582%25B5%25E7%25B5%2582%25E3%2581%25AB%25E3%2581%25AA%25E3%2582%258B%25E3%2581%25AE%25E3%2581%25A7%25E3%2580%25815%25E5%25B9%25B4%25E5%2589%258D%25E3%2581%25AB%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259Fline-notify-nodejs%25E3%2582%2592%25E6%258C%25AF%25E3%2582%258A%25E8%25BF%2594%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%2585%2589%25E5%25B2%25A1%2520%25E9%25AB%2598%25E5%25AE%258F%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2UwMWIxMzQ5ODEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>光岡 高宏</dc:creator></item><item><title><![CDATA[[Next.js15][Mac]npmを使ってnext.js15をインストールする方法とローカルサーバーを立ち上げる方法[超初心者向け]]]></title><description><![CDATA[!
+この記事は過去にQiitaで投稿された内容と重複します。
+
+
+ 内容
+npmを使った、Next.js（最新版）のインストール方法とローカルサーバーを立ち上げる方法
+
+ 対象
+
+初めてNext.jsを触る人
+プログラミング初心者さん
+
+
+ 得られる知識
+
+Next.jsをインストールして、パッケージファイルを作成できるようになる。
+Next.jsのローカルサーバーを立ち上げることができる。
+
+
+ 筆者の環境仕様
+'24/12/7 現在
+
+
+
+カテゴリ
+技術
+
+
+
+
+PC
+Mac M1
+
+
+OS
+macOS Sequoia 15.1.1
+
+
+node.js
+version 10.8.2
+...]]></description><link>https://zenn.dev/kame_koki/articles/39d05c7b8a5a8b</link><guid isPermaLink="true">https://zenn.dev/kame_koki/articles/39d05c7b8a5a8b</guid><pubDate>Sun, 08 Dec 2024 03:20:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hYzEa0TD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BNext.js15%255D%255BMac%255Dnpm%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6next.js15%25E3%2582%2592%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%25E3%2581%25A8%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25AB%25E3%2583%25AB%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2582%2592%25E7%25AB%258B%25E3%2581%25A1%25E4%25B8%258A%25E3%2581%2592...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kame-koki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS3F6VktjZ3pndFFHZWhZS2RQMXFrd0Z2MjFUdmt3V0lhTHdkcnMyX0tIOVplRUJzcnY9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kame-koki</dc:creator></item><item><title><![CDATA[Auth0新機能のForms触ってみた]]></title><description><![CDATA[この投稿は、2024年JINSのアドベントカレンダー8日目の記事です。
+JINSのfutonkimochiiです。本格的に布団が気持ちいい時期がやってきました。
+今回は業務でAuth0に触れる機会があったので、Auth0の簡単な説明と、新機能であるFormsを触った感想を共有します。
+
+ Auth0の概要
+Auth0はIDaaS製品(*)の一つですが、実は正しい名前はOkta CIC (Okta Customer Identity Cloud)です。
+
+IDaaSはXaaSの一つ。ID管理をサーバーレスで行ってくれるサービスです。
+
+もともとはAuth0社のAuth0という製品でしたが、...]]></description><link>https://zenn.dev/jins/articles/ebbef6f841bcb9</link><guid isPermaLink="true">https://zenn.dev/jins/articles/ebbef6f841bcb9</guid><pubDate>Sun, 08 Dec 2024 01:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--aMTkNflG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Auth0%25E6%2596%25B0%25E6%25A9%259F%25E8%2583%25BD%25E3%2581%25AEForms%25E8%25A7%25A6%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:futonkimochii%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdlMjlhN2FiYWQuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:JINS%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTGN4UWlFUkRROWhsUGhoMUVDNHg1Y1h2Zi1USXlNblhlVkNyMmtyX09naWJIY21nPXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>futonkimochii</dc:creator></item><item><title><![CDATA[Nuxt 3 × Vue Router の主要な機能をまとめてみた]]></title><description><![CDATA[この記事は ANDPAD Advent Calendar 2024 8 日目の記事です。
+内容としては、今年10月に行われた「Vue Fes Japan 2024」にて登壇した際の発表内容を、記事向けにまとめ直したものとなります。
+元々、どちらかというと喋るより書く方が得意ですし、記事として残っていた方が良い内容でもあると思っていたのですが、
+登壇を終えてスライドを上げたあたりで燃え尽きていたところ、アドベントカレンダーが会社テックブログでなくてもOKということだったので、参加させて頂きました。
+登壇資料も上がっていますので、読みやすいスタイルで見て頂けたらありがたいです！
+
+ はじめに...]]></description><link>https://zenn.dev/ytr0903/articles/ecaf63f9ed7d36</link><guid isPermaLink="true">https://zenn.dev/ytr0903/articles/ecaf63f9ed7d36</guid><pubDate>Sat, 07 Dec 2024 22:13:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fGfGhCmD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Nuxt%25203%2520%25C3%2597%2520Vue%2520Router%2520%25E3%2581%25AE%25E4%25B8%25BB%25E8%25A6%2581%25E3%2581%25AA%25E6%25A9%259F%25E8%2583%25BD%25E3%2582%2592%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ykoizumi0903%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2UyMWIwMjZhZGEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ykoizumi0903</dc:creator></item><item><title><![CDATA[ENCA 8日目: プロパティ列挙順一律化]]></title><description><![CDATA[!
+この記事は 1人 ECMAScript Normative Changes Advent Calendar 2024 の 8 日目です。
+
+
+ Reflect.ownKeys のプロパティ列挙順
+ES2015 Reflect.ownKeys は対象オブジェクトが持つ [[OwnPropertyKeys]] 内部メソッドを呼び出します。Proxy や Module Namespace オブジェクトのような Exotic Object にはそれぞれ定義された [[OwnPropertyKeys]] 内部メソッドで順番が定義されますが、普通のオブジェクトは OrdinaryOwnPrope...]]></description><link>https://zenn.dev/pixiv/articles/b70c05e0cea8ae</link><guid isPermaLink="true">https://zenn.dev/pixiv/articles/b70c05e0cea8ae</guid><pubDate>Sat, 07 Dec 2024 15:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--NVvjDGWz--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ENCA%25208%25E6%2597%25A5%25E7%259B%25AE%253A%2520%25E3%2583%2597%25E3%2583%25AD%25E3%2583%2591%25E3%2583%2586%25E3%2582%25A3%25E5%2588%2597%25E6%258C%2599%25E9%25A0%2586%25E4%25B8%2580%25E5%25BE%258B%25E5%258C%2596%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:petamoriken%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZhMDc3ZWRhZTMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:pixiv%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzMzODlhMzQ2ZjQuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>petamoriken</dc:creator></item><item><title><![CDATA[JSで進捗表示する時はイベントループに制御を戻そう]]></title><description><![CDATA[
+ 概要
+JSで進捗表示する際、適宜表示させるにはイベントループに制御を戻す必要があります。
+実例を交えてご紹介します。
+
+ 突然ですがクイズです
+targets の全要素に対して重めの処理を施すスクリプトがあります。
+進捗率を出すために、L5 に記載のような処理で適時進捗率を表示したいです。
+L9 に記載の 処理① がある場合とない場合で、何が変わるでしょうか？
+/** @type {Array} targets 処理対象を詰めた配列 */
+const targets = Array(30); // これはダミー
+
+async function process(i) {
+    pro...]]></description><link>https://zenn.dev/neinc_tech/articles/184ddb00e1a6a6</link><guid isPermaLink="true">https://zenn.dev/neinc_tech/articles/184ddb00e1a6a6</guid><pubDate>Sat, 07 Dec 2024 15:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--p1udfkeL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JS%25E3%2581%25A7%25E9%2580%25B2%25E6%258D%2597%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2599%25E3%2582%258B%25E6%2599%2582%25E3%2581%25AF%25E3%2582%25A4%25E3%2583%2599%25E3%2583%25B3%25E3%2583%2588%25E3%2583%25AB%25E3%2583%25BC%25E3%2583%2597%25E3%2581%25AB%25E5%2588%25B6%25E5%25BE%25A1%25E3%2582%2592%25E6%2588%25BB%25E3%2581%259D%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%2582%25E3%2581%2584%25E3%2581%25A6%25E3%2581%25AB%25E3%2581%2582%25E3%2582%2580%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JiMzg1NzFjZWMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:NE%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2581%25AE%25E9%2596%258B%25E7%2599%25BA%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FhMzJhZDQyMDMuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>あいてにあむ</dc:creator></item><item><title><![CDATA[TSでたまに見る<T>とはなにか（ジェネリクス）]]></title><description><![CDATA[Typescriptを扱ったり、勉強するとたまに見かける&lt;T&gt;。
+いつも何使うのか不思議には思っていましたが、調べることがなく、月日が流れていました。
+ですので、謎の存在と思っている&lt;T&gt;の正体に迫ります。
+
+ &lt;T&gt;はジェネリクス
+結論から言うと、**&lt;T&gt;はジェネリクス(Generics)**です。
+そもそもジェネリクスと言われても、自分には最初ピンと来ていませんでした。
+ジェネリクスとは、型の安全性とコードの共通化の両立ができ、
+型も変数のように扱えるようにするものです。
+例としては下記です。
+const numbers: Array...]]></description><link>https://zenn.dev/643866/articles/059f2b40c9570b</link><guid isPermaLink="true">https://zenn.dev/643866/articles/059f2b40c9570b</guid><pubDate>Sat, 07 Dec 2024 12:30:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Ng0p44CV--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TS%25E3%2581%25A7%25E3%2581%259F%25E3%2581%25BE%25E3%2581%25AB%25E8%25A6%258B%25E3%2582%258B%253CT%253E%25E3%2581%25A8%25E3%2581%25AF%25E3%2581%25AA%25E3%2581%25AB%25E3%2581%258B%25EF%25BC%2588%25E3%2582%25B8%25E3%2582%25A7%25E3%2583%258D%25E3%2583%25AA%25E3%2582%25AF%25E3%2582%25B9%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259F%25E3%2581%2593%25E7%2584%25BC%25E3%2581%258D%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2UxZWY2MWJmNmIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>たこ焼き</dc:creator></item></channel></rss>
