@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Rust」のフィード]]></title><description><![CDATA[Zennのトピック「Rust」のRSSフィードです]]></description><link>https://zenn.dev/topics/rust</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ba09661577.png</url><title>Zennの「Rust」のフィード</title><link>https://zenn.dev/topics/rust</link></image><generator>zenn.dev</generator><lastBuildDate>Tue, 10 Dec 2024 11:55:48 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/rust/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Rustにおける関数とマクロの特性と効果的な使い分け]]></title><description><![CDATA[
+ 関数とマクロの特性と効果的な使い分け
+Rustのプログラミングでは、関数とマクロを適切に使い分けることが、効率的で保守性の高いコードを実現する鍵となります。関数は型安全性とデバッグ容易性に優れ、ロジックの再利用に最適です。一方、マクロはコンパイル時の柔軟なコード生成が可能で、関数では実現が難しい場面でその力を発揮します。
+本記事では、関数とマクロの基本的な特徴を整理し、プロジェクトでのモジュール化手法や名前衝突回避のポイントを具体的な例を交えて解説します。また、関数では実現が難しいマクロの活用例も紹介し、使い分けの判断基準を明確にします。これにより、柔軟性と保守性を両立したRustコ...]]></description><link>https://zenn.dev/kokimu/articles/4804a7403e2c40</link><guid isPermaLink="true">https://zenn.dev/kokimu/articles/4804a7403e2c40</guid><pubDate>Tue, 10 Dec 2024 11:35:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--sHcLqUGG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25AB%25E3%2581%258A%25E3%2581%2591%25E3%2582%258B%25E9%2596%25A2%25E6%2595%25B0%25E3%2581%25A8%25E3%2583%259E%25E3%2582%25AF%25E3%2583%25AD%25E3%2581%25AE%25E7%2589%25B9%25E6%2580%25A7%25E3%2581%25A8%25E5%258A%25B9%25E6%259E%259C%25E7%259A%2584%25E3%2581%25AA%25E4%25BD%25BF%25E3%2581%2584%25E5%2588%2586%25E3%2581%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2593%25E3%2583%25BC%25E3%2581%258D%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2UwZTkxNWRmMTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>こーき</dc:creator></item><item><title><![CDATA[#75　Polymorphism in Rust]]></title><description><![CDATA[
+ Introduction
+Polymorphism is a fundamental concept in object-oriented programming that allows a single interface to represent different underlying forms (data types). In Rust, polymorphism is typically achieved using trait, which are similar to interfaces in other languages. Trait enable us to ...]]></description><link>https://zenn.dev/nxted_sapporo/articles/71bb3a517f2cc5</link><guid isPermaLink="true">https://zenn.dev/nxted_sapporo/articles/71bb3a517f2cc5</guid><pubDate>Tue, 10 Dec 2024 11:11:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--h28325Xy--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:%252375%25E3%2580%2580Polymorphism%2520in%2520Rust%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:NXTEDCo.%252C%2520Ltd.%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBmZjQzOTVhYzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>NXTEDCo., Ltd.</dc:creator></item><item><title><![CDATA[ripgrepの結果をページャーでいい感じに表示する]]></title><description><![CDATA[
+ はじめに
+ripgrep（rg）で検索結果が大量にある場合、出力をページャーに渡すことがあると思いますが、そのまま渡しただけでは結果が分かりにくいと思います。
+rg "foo" | bat
+rg "foo" | less
+
+この記事は、ripgrepの結果をページャーでいい感じに表示できないか調べた結果をまとめたものです。
+以下の例では、https://github.com/rust-lang/rustで「foo」という文字列を検索します。
+$ git rev-parse HEAD
+ff7906bfe1ed264bf9c4d3abe1940e357b7e61dd
+
+ rg -p
+
+r...]]></description><link>https://zenn.dev/sorairolake/articles/display-ripgrep-result-with-pager</link><guid isPermaLink="true">https://zenn.dev/sorairolake/articles/display-ripgrep-result-with-pager</guid><pubDate>Tue, 10 Dec 2024 10:21:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--q1jyHiIW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ripgrep%25E3%2581%25AE%25E7%25B5%2590%25E6%259E%259C%25E3%2582%2592%25E3%2583%259A%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%25A3%25E3%2583%25BC%25E3%2581%25A7%25E3%2581%2584%25E3%2581%2584%25E6%2584%259F%25E3%2581%2598%25E3%2581%25AB%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:SorairoLake%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzEyZGZiOGQyM2QuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>SorairoLake</dc:creator></item><item><title><![CDATA[Rust pub(crate) の基本]]></title><description><![CDATA[
+ pub(crate) の基本
+Rust では、アイテム（関数、構造体、モジュール、マクロなど）の公開範囲を柔軟に指定できます。その中でも pub(crate) は クレート内限定の公開 を指定するためのアクセス修飾子で、モジュール設計やAPI管理において非常に便利です。本記事では、pub(crate) の基本から応用までを解説します。
+
+
+ 1. Rust におけるデフォルトの可視性と pub(crate)
+
+Rust では、アイテムの可視性はデフォルトでプライベート（非公開）です。つまり、修飾子を付けない場合、そのアイテムは定義されたモジュール内でのみアクセス可能になります。
+例え...]]></description><link>https://zenn.dev/kokimu/articles/95a7c6dc9f28d2</link><guid isPermaLink="true">https://zenn.dev/kokimu/articles/95a7c6dc9f28d2</guid><pubDate>Tue, 10 Dec 2024 09:49:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--kZwvhOjG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%2520pub%2528crate%2529%2520%25E3%2581%25AE%25E5%259F%25BA%25E6%259C%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2593%25E3%2583%25BC%25E3%2581%258D%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2UwZTkxNWRmMTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>こーき</dc:creator></item><item><title><![CDATA[インデックス可能なSortedListをRustで作った]]></title><description><![CDATA[前回の記事でスキップリストを用いて、挿入・削除・ランダムアクセスが高速なリストを実装しました。
+https://zenn.dev/komak/articles/c8d751d34711e8
+今回は、これを用いてPythonのSortedListのように、インデックス可能な順序付きリストを作ったため、紹介します。
+
+ 実装
+まずは構造体を定義します。
+pub struct SortedList&lt;T&gt; {
+    list: SkipList&lt;T&gt;,
+}
+あとは、lower_boundとupper_boundを実装すれば、ほとんど完成と言っていいでしょう。
+pub f...]]></description><link>https://zenn.dev/komak/articles/c39b14a542ef26</link><guid isPermaLink="true">https://zenn.dev/komak/articles/c39b14a542ef26</guid><pubDate>Tue, 10 Dec 2024 08:00:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--zf37d58C--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2587%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25B9%25E5%258F%25AF%25E8%2583%25BD%25E3%2581%25AASortedList%25E3%2582%2592Rust%25E3%2581%25A7%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2593%25E3%2581%25BE%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJmOTQ3ODhlMmUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>こま</dc:creator></item><item><title><![CDATA[RustとPostgreSQLのストアード・プロシージャーの雛形を作る]]></title><description><![CDATA[
+ 目的
+ユニークビジョン株式会社 Advent Calendar 2024のシリーズ2、12/3の記事です。
+RustとPostgreSQLでストアード・プロシージャーのTDDの記事では、最初にストアード・プロシージャーとそれをテストするためのRustの雛形のコードを紹介しています。
+毎回これをゼロから書くのは大変なので、自動生成することにします。
+
+ 説明
+
+ ERDツール
+ERDツールとはユニークビジョンが開発しているVSCode拡張です。
+jsonで書かれたERDからSQLやコードを自動生成するためのツールになります。
+ERDと似た構文でインターフェースも定義することが可能なので...]]></description><link>https://zenn.dev/aoyagikouhei/articles/4f660ca952072d</link><guid isPermaLink="true">https://zenn.dev/aoyagikouhei/articles/4f660ca952072d</guid><pubDate>Mon, 09 Dec 2024 23:25:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4FCoa-7_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25A8PostgreSQL%25E3%2581%25AE%25E3%2582%25B9%25E3%2583%2588%25E3%2582%25A2%25E3%2583%25BC%25E3%2583%2589%25E3%2583%25BB%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B7%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%25A3%25E3%2583%25BC%25E3%2581%25AE%25E9%259B%259B%25E5%25BD%25A2%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E9%259D%2592%25E6%259F%25B3%25E5%25BA%25B7%25E5%25B9%25B3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFjZDA3ZGRhNzguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>青柳康平</dc:creator></item><item><title><![CDATA[ウィンドウから画像が飛び出しているようにみえるアプリ]]></title><description><![CDATA[この記事はクソアプリ Advent Calendar 2024 - シリーズ2の10日目の記事です。
+
+ 概要
+指定したBB画像をウィンドウから飛び出すように表示するクソアプリです。
+GIFに対応しているため、アニメーションで動かすことも可能です。
+
+なお、ウィンドウを移動させるためにバーをクリックするとアニメーションが止まる上に、画像が重なる領域（透明化している部分も含む）がクリックできないため色々と終わってます。
+https://github.com/awrznc/bkrbk
+
+ 利用例
+インターネットでたまによくみかける「ウィンドウからキャラクターが乗り出している表現」が実現できる...]]></description><link>https://zenn.dev/awrznc/articles/5132877c6b6aa7</link><guid isPermaLink="true">https://zenn.dev/awrznc/articles/5132877c6b6aa7</guid><pubDate>Mon, 09 Dec 2024 15:15:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--CaxPol9U--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25A6%25E3%2582%25A3%25E3%2583%25B3%25E3%2583%2589%25E3%2582%25A6%25E3%2581%258B%25E3%2582%2589%25E7%2594%25BB%25E5%2583%258F%25E3%2581%258C%25E9%25A3%259B%25E3%2581%25B3%25E5%2587%25BA%25E3%2581%2597%25E3%2581%25A6%25E3%2581%2584%25E3%2582%258B%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E3%2581%25BF%25E3%2581%2588%25E3%2582%258B%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:awrznc%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM1ZTkwY2I4ZTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>awrznc</dc:creator></item><item><title><![CDATA[Rustのモジュール]]></title><description><![CDATA[
+ はじめに
+本記事では、Rustのモジュールを理解するために以下のポイントを整理したいと思います。
+
+
+use super::、crate::、self::とは何か
+
+pin_definitions::*のようなワイルドカードインポートの注意点
+
+mod.rs・lib.rsの役割とRust 2018以降の変化
+PythonやC#など他言語との比較
+
+
+
+ 1. crate, super, selfを使ったスコープ指定
+Rustでは相対的・絶対的なパス指定が可能であり、crate, super, selfはその基点を示します。
+
+ crate：ルートモジュール
+crate::はプロジェク...]]></description><link>https://zenn.dev/kokimu/articles/9e1410c5afe504</link><guid isPermaLink="true">https://zenn.dev/kokimu/articles/9e1410c5afe504</guid><pubDate>Mon, 09 Dec 2024 12:05:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vCuMaUIW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25AE%25E3%2583%25A2%25E3%2582%25B8%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%25AB%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2593%25E3%2583%25BC%25E3%2581%258D%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2UwZTkxNWRmMTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>こーき</dc:creator></item><item><title><![CDATA[シングルバイナリでsigv4署名ができるツールが欲しかったので作った]]></title><description><![CDATA[
+ 忙しい人用
+https://github.com/1hakusai1/awscurl-rs
+作ったのでよければ使ってください。日本語でのフィードバックも大歓迎です。
+
+ 何を作ったのか
+curlとほぼ同じ使い方で、sigv4署名付きのリクエストが送れるcliツールです。Homebrewで入ります。IAM認証がかかったAPI Gatewayを手元から叩きたい時などにお使いください。
+
+ 使い方
+&gt; awscurl --help
+Usage: awscurl [OPTIONS] &lt;URL&gt;
+
+Arguments:
+  &lt;URL&gt;  
+
+Options:
+  ...]]></description><link>https://zenn.dev/1hakusai1/articles/bbd8f03a607bab</link><guid isPermaLink="true">https://zenn.dev/1hakusai1/articles/bbd8f03a607bab</guid><pubDate>Mon, 09 Dec 2024 09:53:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--oNBBvKiC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B7%25E3%2583%25B3%25E3%2582%25B0%25E3%2583%25AB%25E3%2583%2590%25E3%2582%25A4%25E3%2583%258A%25E3%2583%25AA%25E3%2581%25A7sigv4%25E7%25BD%25B2%25E5%2590%258D%25E3%2581%258C%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258B%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%258C%25E6%25AC%25B2%25E3%2581%2597%25E3%2581%258B%25E3%2581%25A3%25E3%2581%259F%25E3%2581%25AE%25E3%2581%25A7%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hakusai%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U1Mjk0YmM1NWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hakusai</dc:creator></item><item><title><![CDATA[挿入、削除、ランダムアクセスがO(log n)のリストをRustで作ってみた]]></title><description><![CDATA[もともとTreapと呼ばれるデータ構造を実装しようと思い、こちらのスライドをみていたら、下の方にスキップリストというデータ構造が紹介されていました。一般的には順序付き集合として実装をするようなのですが、こちらのブログで紹介されていた実装に興味を持ったため、Rustで作ってみました。
+
+ 完成品
+コードuse rand::Rng;
+use std::{
+    fmt::Debug,
+    ops::Index,
+    alloc::{alloc, dealloc, Layout},
+    ptr::{null_mut, read, write},
+};
+
+const MAX_LEV...]]></description><link>https://zenn.dev/komak/articles/c8d751d34711e8</link><guid isPermaLink="true">https://zenn.dev/komak/articles/c8d751d34711e8</guid><pubDate>Mon, 09 Dec 2024 07:10:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--HzcD3zuK--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%258C%25BF%25E5%2585%25A5%25E3%2580%2581%25E5%2589%258A%25E9%2599%25A4%25E3%2580%2581%25E3%2583%25A9%25E3%2583%25B3%25E3%2583%2580%25E3%2583%25A0%25E3%2582%25A2%25E3%2582%25AF%25E3%2582%25BB%25E3%2582%25B9%25E3%2581%258CO%2528log%2520n%2529%25E3%2581%25AE%25E3%2583%25AA%25E3%2582%25B9%25E3%2583%2588%25E3%2582%2592Rust%25E3%2581%25A7%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2593%25E3%2581%25BE%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJmOTQ3ODhlMmUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>こま</dc:creator></item><item><title><![CDATA[Day 7: グレースピリオド ~RCUの動作原理~]]></title><description><![CDATA[
+ RCUの動作原理を知る
+今日に至るまで、並行処理の基礎を勉強してきた。これからはRCUのメカニズムを勉強していく。今日はグレースピリオド(Grace Period)という概念から勉強していく。
+
+ RCUの概要
+RCUの簡易的な説明をする。
+
+RCUは保護するデータのポインタを持っている
+RCUの読み込み時
+
+
+rcu_read_lock()という関数を呼ぶ(後述)
+
+rcu_dereference()でRCUで保護しているポインタを取得する
+
+rcu_read_unlock()という関数を呼ぶ(後述)
+
+
+RCUの書き込み時
+
+新しいデータを格納するためのメモリを確保する
+既存のデ...]]></description><link>https://zenn.dev/labbase_sano/articles/83d264d50a8ab8</link><guid isPermaLink="true">https://zenn.dev/labbase_sano/articles/83d264d50a8ab8</guid><pubDate>Sun, 08 Dec 2024 17:53:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--JKRNs0qv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Day%25207%253A%2520%25E3%2582%25B0%25E3%2583%25AC%25E3%2583%25BC%25E3%2582%25B9%25E3%2583%2594%25E3%2583%25AA%25E3%2582%25AA%25E3%2583%2589%2520%7ERCU%25E3%2581%25AE%25E5%258B%2595%25E4%25BD%259C%25E5%258E%259F%25E7%2590%2586%7E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Sano%2520%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ0Mjc3M2M5MjIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Sano🐡</dc:creator></item><item><title><![CDATA[Tauri 2.0で使えるRust UIテンプレートの比較]]></title><description><![CDATA[この記事はRust Advent Calendar 2024シリーズ2の9日目の記事です。
+Rustでデスクトップ/モバイルアプリを製作するソリューションの一つとしてTauriがあります。
+10月には、2.0がリリースされました🎉
+そんなTauriでUIを実装する際には、選択肢として、次の3つがあります。
+
+Rust
+TypeScript / JavaScript
+.NET
+
+せっかくなので、UIもRustを使いたいですよね。となると、現状では4つのテンプレートから選択することになります。
+
+Vanilla
+Yew
+Leptos
+Sycamore
+
+Vanillaは「自分でなんとかします...]]></description><link>https://zenn.dev/tkzwhr/articles/tauri-rust-frontend</link><guid isPermaLink="true">https://zenn.dev/tkzwhr/articles/tauri-rust-frontend</guid><pubDate>Sun, 08 Dec 2024 15:00:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--f7pligHe--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Tauri%25202.0%25E3%2581%25A7%25E4%25BD%25BF%25E3%2581%2588%25E3%2582%258BRust%2520UI%25E3%2583%2586%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AC%25E3%2583%25BC%25E3%2583%2588%25E3%2581%25AE%25E6%25AF%2594%25E8%25BC%2583%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tkzwhr%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I2ZmI0MDc3YTUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tkzwhr</dc:creator></item><item><title><![CDATA[RustでBrainfuckのJITコンパイルをする]]></title><description><![CDATA[
+ これは何？[1]
+
+これは理情 Advent Calendar 2024の８日目の記事です。他の人の記事も読んでいって下さい！
+https://adventar.org/calendars/10445
+
+ はじめに
+この記事では、RustでBrainfuckのインタプリタとJITコンパイラを作り、実行時間を比較します。その後、簡単な最適化を行います。Rustで簡単なJITコンパイラを作ってみたい人の参考になれば幸いです。
+
+ JITコンパイラとは？
+JITコンパイラとは、実行時に機械語へのコンパイルを行うコンパイラのことです。実行時にコンパイルをするため、実行するまで分からない動的な...]]></description><link>https://zenn.dev/taka2/articles/0fdd88d6b5ffbc</link><guid isPermaLink="true">https://zenn.dev/taka2/articles/0fdd88d6b5ffbc</guid><pubDate>Sun, 08 Dec 2024 13:58:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--VTvZzNe4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25A7Brainfuck%25E3%2581%25AEJIT%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2591%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2592%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:taka2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lRVzdSalFueHkyeF9QcHY4bktudDZiMmdqTzhLZ3lWOFFWbFlUPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>taka2</dc:creator></item><item><title><![CDATA[ABC383:Rustで解く！問題解説]]></title><description><![CDATA[AtCoder Beginner Contest 383のA~E問題をRustで解いた際の解法をまとめました。
+
+ A問題
+
+問題
+
+https://atcoder.jp/contests/abc383/tasks/abc383_a
+
+解説
+
+現在の時刻 now_timeから次の時刻tまでの時間差分のリットル数の水を減少し、その後、水をvリットル追加します。この操作をn回繰り返し、最終的に残る水の量を出力します。
+
+コード
+
+use proconio::input;
+use std::cmp::max;
+
+fn main() {
+    input!{
+        n: usize,...]]></description><link>https://zenn.dev/nakst_hide/articles/93a436696169a8</link><guid isPermaLink="true">https://zenn.dev/nakst_hide/articles/93a436696169a8</guid><pubDate>Sun, 08 Dec 2024 13:36:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ITCaxXNU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ABC383%253ARust%25E3%2581%25A7%25E8%25A7%25A3%25E3%2581%258F%25EF%25BC%2581%25E5%2595%258F%25E9%25A1%258C%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nakahide%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YkMxNEpSQnNET01hTGcxTVRQWGNTWS1qYlNQbFRMQTN3ZU9Sdz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nakahide</dc:creator></item><item><title><![CDATA[#1 Rustで数当てゲーム]]></title><description><![CDATA[
+ はじめに
+Rustで数当てゲームを作ってみたので記事にしてみました。
+
+ 対象読者
+Rustやプログラミングを始めたばかりの初心者に向けて書いた記事です。
+
+ 本記事のプログラム
+GitHubに載せてあります
+
+ プログラムの解説
+
+ 全体像
+プログラム全体の流れを解説します。
+
+1から100までのランダムな数字を生成
+無限ループを開始
+入力を受け取る
+入力を数字に変換
+入力した数字が大きいか小さいかを表示、もし正解の数字と同じなら、You guessed correctlyと表示して無限ループを終了
+
+
+ input関数
+fn input() -&gt; String {
+    ...]]></description><link>https://zenn.dev/daizyoo/articles/number-guessing</link><guid isPermaLink="true">https://zenn.dev/daizyoo/articles/number-guessing</guid><pubDate>Sun, 08 Dec 2024 07:32:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3N7oDC0o--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25231%2520Rust%25E3%2581%25A7%25E6%2595%25B0%25E5%25BD%2593%25E3%2581%25A6%25E3%2582%25B2%25E3%2583%25BC%25E3%2583%25A0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:daizyoo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q4ZGM0MzI4MTMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>daizyoo</dc:creator></item><item><title><![CDATA[Rust × Docker環境でGitフックによる任意コマンド実行を行う方法]]></title><description><![CDATA[
+ 背景
+JavaScript界隈ではhuskyを用いてpre-commitやpre-pushなどのGitフックを簡単に設定できます。
+これにより、コミットやプッシュ時に自動でテストやリント、
+フォーマットチェックを実行する運用が一般的です。
+一方、Rustプロジェクトでも同様のことを行いたい場合があります。
+ただし、npmやpythonといった他言語ツールに依存せず、
+Cargoエコシステム内で同様のフローを構築したいケースです。
+そのような場面で役立つのがcargo-huskyになります。
+本記事ではcargo-huskyを使用してRustプロジェクトでGitフックを管理する方法を紹...]]></description><link>https://zenn.dev/bull/articles/getting-started-cargo-husky</link><guid isPermaLink="true">https://zenn.dev/bull/articles/getting-started-cargo-husky</guid><pubDate>Sun, 08 Dec 2024 03:06:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bvTYm_Rn--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%2520%25C3%2597%2520Docker%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25A7Git%25E3%2583%2595%25E3%2583%2583%25E3%2582%25AF%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258B%25E4%25BB%25BB%25E6%2584%258F%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E5%25AE%259F%25E8%25A1%258C%25E3%2582%2592%25E8%25A1%258C%25E3%2581%2586%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:bull%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2g2MllRUHZOMXdGR25zMmFxNEpvOWI0VW96UTY4b3NfdlBOOFFqZUE9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>bull</dc:creator></item><item><title><![CDATA[WITとRust：リソース編]]></title><description><![CDATA[WebAssembly Interface Type（WIT）と呼ばれるインターフェース定義言語には「リソース」と呼ばれる要素があります。これを利用することで、状態を持つものを定義できます。この記事では、数を数えるもの（カウンター）を例に次の３つの事を解説します：
+
+WITでのリソースの定義方法
+Rustでのリソースの実装方法
+作成されたリソースのTypeScriptからの利用方法
+
+
+ 状態を持つものの例：カウンター
+状態を持つものを、Rustでは自身の値を変更するメソッドを持つ構造体として表現します。例えば次のHostCounter構造体はup()やdown()メソッドを呼ぶことで、...]]></description><link>https://zenn.dev/chikoski/articles/wit-and-rust-resource</link><guid isPermaLink="true">https://zenn.dev/chikoski/articles/wit-and-rust-resource</guid><pubDate>Sun, 08 Dec 2024 02:46:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--u8OUY9yt--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:WIT%25E3%2581%25A8Rust%25EF%25BC%259A%25E3%2583%25AA%25E3%2582%25BD%25E3%2583%25BC%25E3%2582%25B9%25E7%25B7%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:chikoski%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzgwYzk3YTk1NjEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>chikoski</dc:creator></item><item><title><![CDATA[Day 6: BlockingとNon-blocking ~並行処理の基礎~]]></title><description><![CDATA[
+ BlockingとNon-blocking
+昨日はキャッシュコヒーレンスプロトコルについて勉強した。CPUアーキテクチャの理解を深めた前回までの内容を踏まえ、今回は並行処理の実装手法について、特に「Blocking」と「Non-blocking」という重要な分類に焦点を当てて解説する。
+
+ BlockingとNon-blockingの特徴
+並行処理アルゴリズムは、排他ロックを使うかそうではないかを基準として「Blocking」と「Non-blocking」の2つに大きく分類される。
+
+Blocking
+
+1つのスレッドの遅延が他のスレッドを遅延させる可能性がある
+ロックを使っている
+...]]></description><link>https://zenn.dev/labbase_sano/articles/68b27c2262f560</link><guid isPermaLink="true">https://zenn.dev/labbase_sano/articles/68b27c2262f560</guid><pubDate>Sat, 07 Dec 2024 21:12:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lxWSRkv2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Day%25206%253A%2520Blocking%25E3%2581%25A8Non-blocking%2520%7E%25E4%25B8%25A6%25E8%25A1%258C%25E5%2587%25A6%25E7%2590%2586%25E3%2581%25AE%25E5%259F%25BA%25E7%25A4%258E%7E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Sano%2520%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ0Mjc3M2M5MjIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Sano🐡</dc:creator></item><item><title><![CDATA[typed-arenaで双方向リンクリストを作ってみた]]></title><description><![CDATA[この記事は Rust Advent Calender 2024シリーズ2 8日目の記事です。
+
+ はじめに
+Rustが流行ってますね。
+Rustを特徴づける機能の一つにshared xor mutableというものがあるのをご存知でしょうか？
+これは複数のリソースから参照されている値を可変にすることはできないというもので、このようにすることで"いつどこで値が変更されるかわからない"という状況を防ぐことができます。
+shared xor mutableのおかげでコードは見通しがよくなり、『どこで変数が書き換えられているかわからない』というありがちな困り事を防ぐことができます。とてもありがた...]]></description><link>https://zenn.dev/hanao/articles/b7f92106e3d85e</link><guid isPermaLink="true">https://zenn.dev/hanao/articles/b7f92106e3d85e</guid><pubDate>Sat, 07 Dec 2024 17:39:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--e3Q8dpKe--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:typed-arena%25E3%2581%25A7%25E5%258F%258C%25E6%2596%25B9%25E5%2590%2591%25E3%2583%25AA%25E3%2583%25B3%25E3%2582%25AF%25E3%2583%25AA%25E3%2582%25B9%25E3%2583%2588%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%2595%25E3%2583%25A9%25E3%2583%25AF%25E3%2583%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2IwMGJhMzVlYjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>フラワー</dc:creator></item><item><title><![CDATA[[Rust] 信じられるのは SQL だけ... そうだスナップショットしよう]]></title><description><![CDATA[
+ ざっくりいうと
+実行される SQL がわからないと（私は）不安なので、Insta という神クレートを使って SQL をスナップショットしましょう、という内容です。
+Rust の記事ですが、他の言語でも同じ様なことはできると思います 🦀
+
+ 例
+例えば、従業員管理システムにおいて、以下の様な検索機能を考えるとします。
+従業員（検索対象）
+
+ID
+名前
+契約形態（正社員/アルバイト）
+所属部署 ID（企画部/情報システム部など）
+
+アルバイトの場合はなし
+
+
+
+検索項目（各項目は検索に使用しない場合もある）
+
+名前
+契約形態（正社員の場合は所属部署での検索も可能）
+
+ざっくりコードにする...]]></description><link>https://zenn.dev/foolishell/articles/61f108703bd899</link><guid isPermaLink="true">https://zenn.dev/foolishell/articles/61f108703bd899</guid><pubDate>Sat, 07 Dec 2024 16:13:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BymDafmB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BRust%255D%2520%25E4%25BF%25A1%25E3%2581%2598%25E3%2582%2589%25E3%2582%258C%25E3%2582%258B%25E3%2581%25AE%25E3%2581%25AF%2520SQL%2520%25E3%2581%25A0%25E3%2581%2591...%2520%25E3%2581%259D%25E3%2581%2586%25E3%2581%25A0%25E3%2582%25B9%25E3%2583%258A%25E3%2583%2583%25E3%2583%2597%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%2583%25E3%2583%2588%25E3%2581%2597%25E3%2582%2588%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:FooliShell%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZhODRkMTBmYWMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>FooliShell</dc:creator></item></channel></rss>

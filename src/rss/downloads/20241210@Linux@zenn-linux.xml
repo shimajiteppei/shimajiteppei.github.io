@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Linux」のフィード]]></title><description><![CDATA[Zennのトピック「Linux」のRSSフィードです]]></description><link>https://zenn.dev/topics/linux</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/860a9eb1e4.png</url><title>Zennの「Linux」のフィード</title><link>https://zenn.dev/topics/linux</link></image><generator>zenn.dev</generator><lastBuildDate>Tue, 10 Dec 2024 12:04:18 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/linux/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[chmod,chownコマンドでの-Rオプション]]></title><description><![CDATA[
+ chmod,chownコマンドでの-Rオプション での反映される部分
+コマンド実行時に記載したパスのフォルダとその配下が再帰的に権限や所有の設定が変わる。
+※コマンド例
+[root@mizuga-education-web01 conf.d]# ll /var/www/vhosts/web1vhost1.pppwe.link/public_ht
+total 4
+-rwxrwxr-x 1 root root 18 Nov 28 10:52 index.html
+[root@mizuga-education-web01 conf.d]#
+[root@mizuga-education-we...]]></description><link>https://zenn.dev/mizuga/articles/179a31006334d9</link><guid isPermaLink="true">https://zenn.dev/mizuga/articles/179a31006334d9</guid><pubDate>Tue, 10 Dec 2024 06:32:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--l07cvKEA--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:chmod%252Cchown%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2581%25A7%25E3%2581%25AE-R%25E3%2582%25AA%25E3%2583%2597%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mizuga%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg5NzU1NTA5ZmEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mizuga</dc:creator></item><item><title><![CDATA[fileコマンドのmagicファイルの書き方]]></title><description><![CDATA[
+ はじめに
+この記事では、file(1)コマンドがファイルフォーマットを識別するために使うmagicファイル（/usr/share/file/misc/magicなどに置かれる）の書き方について説明します。
+これにより、独自のファイルフォーマットやhttps://github.com/file/fileに含まれていないファイルフォーマットをfileコマンドで識別できるようになります。
+
+ 仕様
+magicファイルの各行は以下のような形式になっています。
+&lt;オフセット&gt; &lt;データ型&gt; &lt;テスト&gt; &lt;メッセージ&gt;
+以下の例では、ファイルの先頭...]]></description><link>https://zenn.dev/sorairolake/articles/how-to-write-magic-file</link><guid isPermaLink="true">https://zenn.dev/sorairolake/articles/how-to-write-magic-file</guid><pubDate>Mon, 09 Dec 2024 22:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Np5LinfM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:file%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2581%25AEmagic%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2581%25AE%25E6%259B%25B8%25E3%2581%258D%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:SorairoLake%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzEyZGZiOGQyM2QuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>SorairoLake</dc:creator></item><item><title><![CDATA[TailscaleでLinux端末をVPN接続する]]></title><description><![CDATA[
+ Tailscaleとは
+https://tailscale.com/
+Tailscaleは、簡単に使えるVPN（仮想プライベートネットワーク）サービスです。デバイス間でファイル共有したり、外出先から自宅のコンピューターにアクセスしたりするのに便利です。
+
+ cURLのインストール
+curlコマンドが使用できない場合、以下の記事を参考にインストールします。
+https://zenn.dev/ats030/articles/719b462067397b
+
+ Tailscaleのインストール
+curlコマンドで以下のようにインストールします。
+curl -fsSL https://get....]]></description><link>https://zenn.dev/ats030/articles/870db2b999023c</link><guid isPermaLink="true">https://zenn.dev/ats030/articles/870db2b999023c</guid><pubDate>Mon, 09 Dec 2024 14:19:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--u0Xm1PnM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Tailscale%25E3%2581%25A7Linux%25E7%25AB%25AF%25E6%259C%25AB%25E3%2582%2592VPN%25E6%258E%25A5%25E7%25B6%259A%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2582%25E3%2582%258C%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSUN1SHBxV21INFNBbC1aRVRkejRoTEwzejNvRWpqVGtmNVY2LWNRNk5ZVEd3djVzZ0k9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>あれ</dc:creator></item><item><title><![CDATA[Linux環境でcurlコマンドを使えるようにする]]></title><description><![CDATA[
+ cURLとは
+https://curl.se/
+ｃURLはコマンドラインからHTTPリクエストを送信するためのツールです。URLを指定してデータを取得したり、データを送信したりすることができます。
+
+ cURLのインストール
+cURLがインストールされていない場合、curlコマンドが使用できません。その場合は以下のようにインストールします。
+Debian系
+sudo apt update
+sudo apt install curl
+Redhat系
+sudo yum install curl
+これで、curlコマンドが使用できるようになりました。
+]]></description><link>https://zenn.dev/ats030/articles/719b462067397b</link><guid isPermaLink="true">https://zenn.dev/ats030/articles/719b462067397b</guid><pubDate>Mon, 09 Dec 2024 13:56:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lg2vDdpO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25A7curl%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2588%25E3%2582%258B%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2582%25E3%2582%258C%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSUN1SHBxV21INFNBbC1aRVRkejRoTEwzejNvRWpqVGtmNVY2LWNRNk5ZVEd3djVzZ0k9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>あれ</dc:creator></item><item><title><![CDATA[Docker で OpenSSH を使う:Linux 使い（略）Advent Calendar 2024]]></title><description><![CDATA[
+ はじめに
+これは「Linux 使いになりたい人のための Advent Calendar 2024」の記事です。
+筆者は、Web エンジニアを志望する人には、セルフホスト Git サービスを稼働させて利用することをオススメしています。もし Git を使ったことがないなら、Git を学ぶときに、セルフホスト Git サービスを稼働させることも視野に含めながら学習するのが効率的だと考えています。
+!
+この記事は、次の記事の続きです。
+
+
+
+ Docker ssh コマンド
+前回はセルフホスト Git サービスを使うにあたり、OpenSSH を使うことが多いといった説明の流れから、Ubunt...]]></description><link>https://zenn.dev/hiro345/articles/20241201_advent_calendar_2024_07</link><guid isPermaLink="true">https://zenn.dev/hiro345/articles/20241201_advent_calendar_2024_07</guid><pubDate>Mon, 09 Dec 2024 11:35:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6HGlegzm--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%2520%25E3%2581%25A7%2520OpenSSH%2520%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%253ALinux%2520%25E4%25BD%25BF%25E3%2581%2584%25EF%25BC%2588%25E7%2595%25A5%25EF%25BC%2589Advent%2520Calendar%25202024%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Hiroshi%2520Koyama%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2k5ZzdjLS0xTFk0S2k0LWw3dVFSSFZRdEdQcWZHYTlibVRJYUtFM0E9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Hiroshi Koyama</dc:creator></item><item><title><![CDATA[Proxmox セットアップメモ]]></title><description><![CDATA[
+ 概要
+
+インストール
+セットアップ
+アップグレード
+
+!
+セットアップ後はブラウザから操作するので、セットアップ後はディスプレイ不要。
+
+
+ インストール
+
+こちらの記事をもとに進める。
+https://zenn.dev/atsushifx/articles/dev-proxmox-create-installusb
+
+
+
+ セットアップ
+基本画面に沿って進める。
+
+2つめのVE terminal UIを選択。（ブラウザを使うので）
+
+
+ホスト名
+
+FQDN必須。
+適当なホスト名.localとした。
+
+
+IPアドレス
+
+DCHPサーバと被らないように固定IPを割り当てた。
+
+
+設定完...]]></description><link>https://zenn.dev/apo_zenn/articles/aa0289ac5c4f1a</link><guid isPermaLink="true">https://zenn.dev/apo_zenn/articles/aa0289ac5c4f1a</guid><pubDate>Sun, 08 Dec 2024 14:46:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--05RMhzCG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Proxmox%2520%25E3%2582%25BB%25E3%2583%2583%25E3%2583%2588%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:apo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVhNmY0NWNjMjcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>apo</dc:creator></item><item><title><![CDATA[Linux環境でDockerをインストールする]]></title><description><![CDATA[
+ cURLのインストール
+curlコマンドが使用できない場合、以下の記事を参考にインストールします。
+https://zenn.dev/ats030/articles/719b462067397b
+
+ Dockerのインストール
+https://www.docker.com/
+curlコマンドで以下のように.shファイルをダウンロードします。
+curl -fsSL https://get.docker.com -o ~/get-docker.sh
+.shファイルを実行してDockerをインストールします。
+sudo sh ~/get-docker.sh
+.shファイルは不要になったので...]]></description><link>https://zenn.dev/ats030/articles/153d0738f50b48</link><guid isPermaLink="true">https://zenn.dev/ats030/articles/153d0738f50b48</guid><pubDate>Sun, 08 Dec 2024 05:54:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--O_XklFbA--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25A7Docker%25E3%2582%2592%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2582%25E3%2582%258C%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSUN1SHBxV21INFNBbC1aRVRkejRoTEwzejNvRWpqVGtmNVY2LWNRNk5ZVEd3djVzZ0k9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>あれ</dc:creator></item><item><title><![CDATA[MacBook Air (M1 Pro) をAsahi Linuxに全振りした話]]></title><description><![CDATA[
+ お前誰やねん
+普段の仕事は医師（耳鼻科医）をしております、Louiseと申します。
+趣味でプログラミングをしていたら何故かプログラマーになっていました（笑）
+勿論、普段の仕事も続けています・・・（儲かるとは言ってない）
+
+ 記事を書こうと思ったきっかけ
+MacOSでどうにかLinuxが導入できないかをずっと考えていましたが、DockerやK8sやUTMなどのVM(Virtual Machine)の記事ばかりがヒットしてOS自体を導入する記事が見当たらなかったため悶々としていたところ、Asahi Linuxを導入している記事を見つけ、MacOSに不満を持っていた私はLinuxに全振りし...]]></description><link>https://zenn.dev/miosky521/articles/0e43afb07d03ba</link><guid isPermaLink="true">https://zenn.dev/miosky521/articles/0e43afb07d03ba</guid><pubDate>Sat, 07 Dec 2024 10:56:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--087YhX7N--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:MacBook%2520Air%2520%2528M1%2520Pro%2529%2520%25E3%2582%2592Asahi%2520Linux%25E3%2581%25AB%25E5%2585%25A8%25E6%258C%25AF%25E3%2582%258A%25E3%2581%2597%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Louise%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2hSWXlWVzhjZHE5aTlpZlQ1QTJiNkxDNHdQZU1yVkRIYkw3cVZudUxBPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Louise</dc:creator></item><item><title><![CDATA[Ubuntu / WSL Ubuntu 版 ssh:Linux 使い（略）Advent Calendar 2024]]></title><description><![CDATA[
+ はじめに
+これは「Linux 使いになりたい人のための Advent Calendar 2024」の記事です。
+筆者は、Web エンジニアを志望する人には、セルフホスト Git サービスを稼働させて利用することをオススメしています。もし Git を使ったことがないなら、Git を学ぶときに、セルフホスト Git サービスを稼働させることも視野に含めながら学習するのが効率的だと考えています。
+!
+この記事は、次の記事の続きです。
+
+
+
+ Ubuntu / WSL Ubuntu 版 ssh
+前回はセルフホスト Git サービスを使うにあたり、OpenSSH を使うことが多いといった説明の...]]></description><link>https://zenn.dev/hiro345/articles/20241201_advent_calendar_2024_06</link><guid isPermaLink="true">https://zenn.dev/hiro345/articles/20241201_advent_calendar_2024_06</guid><pubDate>Sat, 07 Dec 2024 10:48:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--YTH_LwKF--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ubuntu%2520%252F%2520WSL%2520Ubuntu%2520%25E7%2589%2588%2520ssh%253ALinux%2520%25E4%25BD%25BF%25E3%2581%2584%25EF%25BC%2588%25E7%2595%25A5%25EF%25BC%2589Advent%2520Calendar%25202024%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Hiroshi%2520Koyama%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2k5ZzdjLS0xTFk0S2k0LWw3dVFSSFZRdEdQcWZHYTlibVRJYUtFM0E9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Hiroshi Koyama</dc:creator></item><item><title><![CDATA[sudo 実行時に設定される環境変数の仕組み]]></title><description><![CDATA[sudo 実行時の環境変数のセットのされ方について、知らなかったのでメモ。
+間違いがありましたら、ご指摘いただけると助かります🙇‍♀️
+※実行環境: Amazon Linux 2023(EC2)
+
+ 1. 前提
+環境変数は、ユーザーごとにそれぞれ保持しています。
+
+xxxユーザーなら、xxxユーザーの環境変数を保持
+rootユーザーなら、rootユーザーの環境変数を保持
+
+以下のコマンドで、ユーザーごとの環境変数を一覧で確認できます。
+$ env
+
+
+ 2. sudo 実行時に環境変数はどう変わるか？
+sudo は通常、コマンドを root 権限 で実行します。それなら、sudo を実行...]]></description><link>https://zenn.dev/fukuuuuuu/articles/ac37a87295cc4e</link><guid isPermaLink="true">https://zenn.dev/fukuuuuuu/articles/ac37a87295cc4e</guid><pubDate>Sat, 07 Dec 2024 09:26:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--KYuibGp3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:sudo%2520%25E5%25AE%259F%25E8%25A1%258C%25E6%2599%2582%25E3%2581%25AB%25E8%25A8%25AD%25E5%25AE%259A%25E3%2581%2595%25E3%2582%258C%25E3%2582%258B%25E7%2592%25B0%25E5%25A2%2583%25E5%25A4%2589%25E6%2595%25B0%25E3%2581%25AE%25E4%25BB%2595%25E7%25B5%2584%25E3%2581%25BF%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25B5%25E3%2581%258F%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RhYTE4MmRjYjYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ふく</dc:creator></item><item><title><![CDATA[ホームサーバー完全構築ガイド #5 情報収集システムの構築]]></title><description><![CDATA[
+ホームサーバー完全構築ガイド シリーズ記事：
+ホームサーバー完全構築ガイド #0 計画とハードウェア選定
+ホームサーバー完全構築ガイド #1 OS導入と基本設定
+ホームサーバー完全構築ガイド #2 インフラの構築
+ホームサーバー完全構築ガイド #3 サービス群の選定
+ホームサーバー完全構築ガイド #4 WordPressのデプロイ
+ホームサーバー完全構築ガイド #6 クラウドストレージの構築
+ホームサーバー完全構築ガイド #7 DevOpsプラットフォームの構築
+
+
+ はじめに
+ホームサーバー完全構築ガイドシリーズへようこそ。このシリーズでは、ホームサーバーを活用したさまざまなシステム...]]></description><link>https://zenn.dev/solitudera/articles/f066c34618ef9a6b76ffd6b48f47687c</link><guid isPermaLink="true">https://zenn.dev/solitudera/articles/f066c34618ef9a6b76ffd6b48f47687c</guid><pubDate>Fri, 06 Dec 2024 19:44:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--k871mGQT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%259B%25E3%2583%25BC%25E3%2583%25A0%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E5%25AE%258C%25E5%2585%25A8%25E6%25A7%258B%25E7%25AF%2589%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%2520%25235%2520%25E6%2583%2585%25E5%25A0%25B1%25E5%258F%258E%25E9%259B%2586%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%25E3%2581%25AE%25E6%25A7%258B%25E7%25AF%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:SolitudeRA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSmQtdWxfWFNVYlQtQ2wwUXNqdFd0N1NGSG5sZkUyUnd3Nk9LU2VCeHpKZVFLYUNiND1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>SolitudeRA</dc:creator></item><item><title><![CDATA[ホームサーバー完全構築ガイド #4 WordPressのデプロイ]]></title><description><![CDATA[
+ホームサーバー完全構築ガイド シリーズ記事：
+ホームサーバー完全構築ガイド #0 計画とハードウェア選定
+ホームサーバー完全構築ガイド #1 OS導入と基本設定
+ホームサーバー完全構築ガイド #2 インフラの構築
+ホームサーバー完全構築ガイド #3 サービス群の選定
+ホームサーバー完全構築ガイド #5 情報収集システムの構築
+ホームサーバー完全構築ガイド #6 クラウドストレージの構築
+ホームサーバー完全構築ガイド #7 DevOpsプラットフォームの構築
+
+
+ はじめに
+WordPressは世界で最も広く利用されているコンテンツ管理システム（CMS）であり、ブログから複雑な企業サイト...]]></description><link>https://zenn.dev/solitudera/articles/e908faa15ad46dc89cb87bf2d5b5908c</link><guid isPermaLink="true">https://zenn.dev/solitudera/articles/e908faa15ad46dc89cb87bf2d5b5908c</guid><pubDate>Fri, 06 Dec 2024 19:44:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--laCO-Zrc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%259B%25E3%2583%25BC%25E3%2583%25A0%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E5%25AE%258C%25E5%2585%25A8%25E6%25A7%258B%25E7%25AF%2589%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%2520%25234%2520WordPress%25E3%2581%25AE%25E3%2583%2587%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25A4%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:SolitudeRA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSmQtdWxfWFNVYlQtQ2wwUXNqdFd0N1NGSG5sZkUyUnd3Nk9LU2VCeHpKZVFLYUNiND1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>SolitudeRA</dc:creator></item><item><title><![CDATA[ホームサーバー完全構築ガイド #6 クラウドストレージの構築]]></title><description><![CDATA[
+ホームサーバー完全構築ガイド シリーズ記事：
+ホームサーバー完全構築ガイド #0 計画とハードウェア選定
+ホームサーバー完全構築ガイド #1 OS導入と基本設定
+ホームサーバー完全構築ガイド #2 インフラの構築
+ホームサーバー完全構築ガイド #3 サービス群の選定
+ホームサーバー完全構築ガイド #4 WordPressのデプロイ
+ホームサーバー完全構築ガイド #5 情報収集システムの構築
+ホームサーバー完全構築ガイド #7 DevOpsプラットフォームの構築
+
+
+ はじめに
+ホームサーバー完全構築ガイドシリーズへようこそ。このシリーズでは、ホームサーバーを活用したさまざまなシステム構...]]></description><link>https://zenn.dev/solitudera/articles/546e23531bd92a74006cab2ad7627c92</link><guid isPermaLink="true">https://zenn.dev/solitudera/articles/546e23531bd92a74006cab2ad7627c92</guid><pubDate>Fri, 06 Dec 2024 19:44:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GJZ6IrcT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%259B%25E3%2583%25BC%25E3%2583%25A0%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E5%25AE%258C%25E5%2585%25A8%25E6%25A7%258B%25E7%25AF%2589%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%2520%25236%2520%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25A6%25E3%2583%2589%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25AC%25E3%2583%25BC%25E3%2582%25B8%25E3%2581%25AE%25E6%25A7%258B%25E7%25AF%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:SolitudeRA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSmQtdWxfWFNVYlQtQ2wwUXNqdFd0N1NGSG5sZkUyUnd3Nk9LU2VCeHpKZVFLYUNiND1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>SolitudeRA</dc:creator></item><item><title><![CDATA[ホームサーバー完全構築ガイド #2 インフラの構築]]></title><description><![CDATA[
+ホームサーバー完全構築ガイド シリーズ記事：
+ホームサーバー完全構築ガイド #0 計画とハードウェア選定
+ホームサーバー完全構築ガイド #1 OS導入と基本設定
+ホームサーバー完全構築ガイド #3 サービス群の選定
+ホームサーバー完全構築ガイド #4 WordPressのデプロイ
+ホームサーバー完全構築ガイド #5 情報収集システムの構築
+ホームサーバー完全構築ガイド #6 クラウドストレージの構築
+ホームサーバー完全構築ガイド #7 DevOpsプラットフォームの構築
+
+
+ はじめに
+前回の記事では、ホームサーバーのOS導入や基本的な初期設定（ユーザー管理、SSH設定、ファイアウォー...]]></description><link>https://zenn.dev/solitudera/articles/339243802597e8c42bcddfb10b5e94e3</link><guid isPermaLink="true">https://zenn.dev/solitudera/articles/339243802597e8c42bcddfb10b5e94e3</guid><pubDate>Fri, 06 Dec 2024 19:44:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--SoquKzmF--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%259B%25E3%2583%25BC%25E3%2583%25A0%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E5%25AE%258C%25E5%2585%25A8%25E6%25A7%258B%25E7%25AF%2589%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%2520%25232%2520%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2595%25E3%2583%25A9%25E3%2581%25AE%25E6%25A7%258B%25E7%25AF%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:SolitudeRA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSmQtdWxfWFNVYlQtQ2wwUXNqdFd0N1NGSG5sZkUyUnd3Nk9LU2VCeHpKZVFLYUNiND1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>SolitudeRA</dc:creator></item><item><title><![CDATA[ホームサーバー完全構築ガイド #1 OS導入と基本設定]]></title><description><![CDATA[
+ホームサーバー完全構築ガイド シリーズ記事：
+ホームサーバー完全構築ガイド #0 計画とハードウェア選定
+ホームサーバー完全構築ガイド #2 インフラの構築
+ホームサーバー完全構築ガイド #3 サービス群の選定
+ホームサーバー完全構築ガイド #4 WordPressのデプロイ
+ホームサーバー完全構築ガイド #5 情報収集システムの構築
+ホームサーバー完全構築ガイド #6 クラウドストレージの構築
+ホームサーバー完全構築ガイド #7 DevOpsプラットフォームの構築
+
+前回の記事では、ハードウェア選定と全体的なサービスアーキテクチャについて解説しました。今回は、実際にサーバーのセットア...]]></description><link>https://zenn.dev/solitudera/articles/08828ec8b0719d4ae2ae640a6dd4867d</link><guid isPermaLink="true">https://zenn.dev/solitudera/articles/08828ec8b0719d4ae2ae640a6dd4867d</guid><pubDate>Fri, 06 Dec 2024 19:44:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--VGs33Vwo--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%259B%25E3%2583%25BC%25E3%2583%25A0%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E5%25AE%258C%25E5%2585%25A8%25E6%25A7%258B%25E7%25AF%2589%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%2520%25231%2520OS%25E5%25B0%258E%25E5%2585%25A5%25E3%2581%25A8%25E5%259F%25BA%25E6%259C%25AC%25E8%25A8%25AD%25E5%25AE%259A%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:SolitudeRA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSmQtdWxfWFNVYlQtQ2wwUXNqdFd0N1NGSG5sZkUyUnd3Nk9LU2VCeHpKZVFLYUNiND1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>SolitudeRA</dc:creator></item><item><title><![CDATA[ブートマネージャーでマウスを使う話(rEFInd)]]></title><description><![CDATA[この記事は 朝活部 Advent Calendar 2024 7日目の記事です。
+記事書くの初めてなのと言っていることに自信もないのでマサカリをお願いします。
+
+ はじめに
+この間bluetoothキーボード(HHKB)を買いました。
+ですがなんとbluetoothの機能はOSが提供しているのでBIOSやブートマネージャーの画面ではキーボードが動かないのです。
+つまりHHKBを使っているとWindowsとLinuxを切り替えることができないのです。
+
+ 解決策1(grub only)
+私は今までブートマネージャーにはgrub2を使用していました。
+構成はNixOSを使用しているので上から...]]></description><link>https://zenn.dev/yadokani389/articles/asakatsu2024-20241207</link><guid isPermaLink="true">https://zenn.dev/yadokani389/articles/asakatsu2024-20241207</guid><pubDate>Fri, 06 Dec 2024 15:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--u4ewrRwu--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2596%25E3%2583%25BC%25E3%2583%2588%25E3%2583%259E%25E3%2583%258D%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%25A3%25E3%2583%25BC%25E3%2581%25A7%25E3%2583%259E%25E3%2582%25A6%25E3%2582%25B9%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%25E8%25A9%25B1%2528rEFInd%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yadokani%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTEJMaDBkMjJOWkJSV3NVZnQxekxQcmlWUnduUXltYjREV0w4SnR4b0ZKNjEyQ19zND1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yadokani</dc:creator></item><item><title><![CDATA[devcontainer コマンドで devContainersSpecCLI が見つからないときの対処方法]]></title><description><![CDATA[
+ はじめに
+開発コンテナーを利用するための CLI ツールがあり、https://github.com/devcontainers/cli.git でオープンソースソフトウェアとして開発されています。この記事は、このツールを使おうとしたときに、エラーとなってしまったので、それを解決した方法について説明します。
+結論を先に書いておくと、「正しく @devcontainers/cli をインストールしましょう」になります。
+
+ devcontainer コマンドのエラー
+Ubuntu 22.04 で asdf の nodejs 環境で devcontainer/cli を使おうとしたところ...]]></description><link>https://zenn.dev/hiro345/articles/20241206_devcontainer_cli</link><guid isPermaLink="true">https://zenn.dev/hiro345/articles/20241206_devcontainer_cli</guid><pubDate>Fri, 06 Dec 2024 10:57:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6S8ddnCr--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:devcontainer%2520%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2581%25A7%2520devContainersSpecCLI%2520%25E3%2581%258C%25E8%25A6%258B%25E3%2581%25A4%25E3%2581%258B%25E3%2582%2589%25E3%2581%25AA%25E3%2581%2584%25E3%2581%25A8%25E3%2581%258D%25E3%2581%25AE%25E5%25AF%25BE%25E5%2587%25A6%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Hiroshi%2520Koyama%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2k5ZzdjLS0xTFk0S2k0LWw3dVFSSFZRdEdQcWZHYTlibVRJYUtFM0E9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Hiroshi Koyama</dc:creator></item><item><title><![CDATA[Ubuntuプログラムを完全削除！最適なアンインストール方法]]></title><description><![CDATA[
+ はじめに
+Ubuntuでは、ソフトウェアのアンインストールはシステム整理や最適化に欠かせないプロセスです。古くなったアプリケーションの削除、ディスクスペースの確保、未使用のプログラムの整理など、多くのメリットがあります。
+この記事では、APT、Snap、Flatpakを用いたプログラムの削除方法を中心に、グラフィカルユーザーインターフェース(GUI)を使った方法までわかりやすく解説します。Ubuntuシステムを効率的に管理するためのベストプラクティスも取り上げます。
+
+
+ Ubuntuのアンインストール方法
+
+ 1. APTを使用したアンインストール
+APTはUbuntuの標準的なパ...]]></description><link>https://zenn.dev/lulucky/articles/2c7cce87e33ef0</link><guid isPermaLink="true">https://zenn.dev/lulucky/articles/2c7cce87e33ef0</guid><pubDate>Fri, 06 Dec 2024 06:11:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--MmmVbL4J--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ubuntu%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%25A0%25E3%2582%2592%25E5%25AE%258C%25E5%2585%25A8%25E5%2589%258A%25E9%2599%25A4%25EF%25BC%2581%25E6%259C%2580%25E9%2581%25A9%25E3%2581%25AA%25E3%2582%25A2%25E3%2583%25B3%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:VPS%2520Pro%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzljMWE1ODU5ZTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>VPS Pro</dc:creator></item><item><title><![CDATA[CentOS 8.0 Stream によるインストール方法]]></title><description><![CDATA[
+ Stream版での注意
+他のISOファイルと違い、勝手にインストールを開始してくれないため
+きちんと、ネット上のURLを指定する必要があります。
+https://vault.centos.org/8-stream/BaseOS/x86_64/os/
+
+ 具体例
+
+ インストールソース指定前
+
+
+ 指定方法
+
+
+ インストールソース指定後
+
+]]></description><link>https://zenn.dev/muso_tensei/articles/0795fb17f178ec</link><guid isPermaLink="true">https://zenn.dev/muso_tensei/articles/0795fb17f178ec</guid><pubDate>Fri, 06 Dec 2024 03:32:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--LFlFYa4X--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:CentOS%25208.0%2520Stream%2520%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258B%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:muso-tensei%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk4ZjAzY2FlMjEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>muso-tensei</dc:creator></item><item><title><![CDATA[Linuxの 'cat' コマンドを使いこなそう！【2024年最新完全ガイド】]]></title><description><![CDATA[
+ なぜ今さら 'cat' コマンド？
+'cat' コマンドは、Linuxでのファイル操作に欠かせない定番コマンドです。しかし、その機能は「ファイル内容を表示するだけ」にとどまらず、多くの人が知らない便利な応用術が詰まっています。
+本記事では、'cat' の基本から、効率的な操作を可能にする応用例、さらにはLinux環境で最大限活用するためのヒントまで、幅広く解説します。さらに、Linuxサーバーを快適に使うためのおすすめVPSも紹介。これを読めば、あなたのLinuxライフが格段に変わるはずです！
+
+
+ 'cat' コマンドの基本から応用まで
+
+ 基本操作
+
+
+ファイルの内容を表示
+ファ...]]></description><link>https://zenn.dev/lulucky/articles/f91d0843c1d72a</link><guid isPermaLink="true">https://zenn.dev/lulucky/articles/f91d0843c1d72a</guid><pubDate>Fri, 06 Dec 2024 02:19:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--pGt6KS9m--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%25E3%2581%25AE%2520%2527cat%2527%2520%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2584%25E3%2581%2593%25E3%2581%25AA%25E3%2581%259D%25E3%2581%2586%25EF%25BC%2581%25E3%2580%25902024%25E5%25B9%25B4%25E6%259C%2580%25E6%2596%25B0%25E5%25AE%258C%25E5%2585%25A8%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:VPS%2520Pro%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzljMWE1ODU5ZTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>VPS Pro</dc:creator></item></channel></rss>
