@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「JavaScript」のフィード]]></title><description><![CDATA[Zennのトピック「JavaScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/javascript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/64acd76870.png</url><title>Zennの「JavaScript」のフィード</title><link>https://zenn.dev/topics/javascript</link></image><generator>zenn.dev</generator><lastBuildDate>Thu, 12 Dec 2024 05:08:29 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/javascript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[JavaScript で XML を扱う | NodeJS + fast-xml-parser]]></title><description><![CDATA[https://github.com/NaturalIntelligence/fast-xml-parser
+
+ fast-xml-parser でできること
+
+XML をオブジェクトに変換する（パース）
+オブジェクトを XML に変換する（ビルド）
+XML のフォーマットを検証する（バリデーション）
+
+
+ 前提
+
+Node: 20.12.2
+fast-xml-parser: ^4.5.0
+
+
+ セットアップ
+npm i fast-xml-parser
+
+ 使い方
+
+ XML をオブジェクトに変換する（パース）
+
+index.js
+const { XMLParser } = requir...]]></description><link>https://zenn.dev/bbsfish/articles/dde8794a0be4e6</link><guid isPermaLink="true">https://zenn.dev/bbsfish/articles/dde8794a0be4e6</guid><pubDate>Thu, 12 Dec 2024 04:32:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--VTODKewH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%2520%25E3%2581%25A7%2520XML%2520%25E3%2582%2592%25E6%2589%25B1%25E3%2581%2586%2520%257C%2520NodeJS%2520%252B%2520fast-xml-parser%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Y.%2520HSD%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSS1ZeDZXOGNtbm1hTFhWM25SNC1QYnFWbTdDVkJ3RXdrT2czUlNnWjlOPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Y. HSD</dc:creator></item><item><title><![CDATA[VSCodeでJavaScriptファイル内でHTMLタグをEmmetを使って補完する]]></title><description><![CDATA[
+ 概要
+Reactなどでjavascriptファイルを編集するときに、HTMLタグ補完機能が動かず毎回イライラする＆設定方法を忘れてしまうので、備忘録として投稿します
+
+ 設定方法
+今回はJavaScriptファイル編集時にHTMLタグを補完する設定をsetting.jsonに記述します
+
+setting.json
+{
+  "emmet.includeLanguages": {
+    "javascript": "html"
+  }
+}
+
+
+ 留意点と感想
+
+毎回設定方法を忘れることは自分のZennに投稿するとよいことが最近わかりました
+検索サイトで検索しても拡張機能ばかりで毎回探す...]]></description><link>https://zenn.dev/holypotter0304/articles/2818e002722a93</link><guid isPermaLink="true">https://zenn.dev/holypotter0304/articles/2818e002722a93</guid><pubDate>Thu, 12 Dec 2024 03:30:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--c5wc77Vw--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:VSCode%25E3%2581%25A7JavaScript%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E5%2586%2585%25E3%2581%25A7HTML%25E3%2582%25BF%25E3%2582%25B0%25E3%2582%2592Emmet%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E8%25A3%259C%25E5%25AE%258C%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25BB%25E3%2582%258A%25E3%2581%25BD%25E3%2581%259F%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdkZTZlMjBlZWYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ほりぽた</dc:creator></item><item><title><![CDATA[【JavaScript】Popover APIを使ったオートコンプリート機能の作り方 (後編)]]></title><description><![CDATA[
+ 後編
+この記事は、Popover APIを使ったオートコンプリート機能の作り方 (前編)の続きです。
+前編までで、単純なオートコンプリート機能が動くようになっています。
+データは['text1', 'text2', 'text3', 'text4']をセットしているので、3文字以上データにヒットすると表示されます。
+
+後編では、次の機能を追加します。
+
+選択中の候補のハイライト表示
+キーボード操作
+
+
+ 実装
+
+ ハイライト機能の追加
+現状では候補をマウスホバーしてもハイライトされません。
+選択状態を分かりやすくするために、選択中の候補をハイライトされるようにします。
+まず最初に、c...]]></description><link>https://zenn.dev/luxiar/articles/0016c6517b4c01</link><guid isPermaLink="true">https://zenn.dev/luxiar/articles/0016c6517b4c01</guid><pubDate>Thu, 12 Dec 2024 02:30:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--c5LKuEnR--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590JavaScript%25E3%2580%2591Popover%2520API%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%259F%25E3%2582%25AA%25E3%2583%25BC%25E3%2583%2588%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AA%25E3%2583%25BC%25E3%2583%2588%25E6%25A9%259F%25E8%2583%25BD%25E3%2581%25AE%25E4%25BD%259C%25E3%2582%258A%25E6%2596%25B9%2520%2528%25E5%25BE%258C%25E7%25B7%25A8%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:ysh%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JiYmNkZDg1ZTIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%25A9%25E3%2582%25B0%25E3%2582%25B6%25E3%2582%25A4%25E3%2582%25A2%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTGVrdUVGT0xhLXgwRVVIazF5dE51cERKTC04VFlGelY3R3A0bnhfbEdQZERxRFEwZz1zOTYtYw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ysh</dc:creator></item><item><title><![CDATA[ボタンローディング表示のサイズ制御に関するTips]]></title><description><![CDATA[ボタンでローディング表示するとき、元のボタンテキストより横幅が短かったり長い内容を表示するとサイズが変わってしまう恐れがあります。
+これの対処Tipsの紹介です。
+
+ 元ネタ
+https://x.com/chronark_/status/1866779278815162376
+
+ボタン幅に固定値を与えない
+ローディング表示で切り替わってもボタン内要素の最長幅を維持
+TailwindCSSで表現
+
+
+ Wes Bosの回答（本記事の内容の90%）
+https://x.com/wesbos/status/1866895899554926912
+（TailwindCSSではなくCSSでの解説動...]]></description><link>https://zenn.dev/tell_y/articles/033b42570abea1</link><guid isPermaLink="true">https://zenn.dev/tell_y/articles/033b42570abea1</guid><pubDate>Thu, 12 Dec 2024 02:25:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7hmw4U8Z--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%259C%25E3%2582%25BF%25E3%2583%25B3%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2587%25E3%2582%25A3%25E3%2583%25B3%25E3%2582%25B0%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%25AE%25E3%2582%25B5%25E3%2582%25A4%25E3%2582%25BA%25E5%2588%25B6%25E5%25BE%25A1%25E3%2581%25AB%25E9%2596%25A2%25E3%2581%2599%25E3%2582%258BTips%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Teruhisa%2520-%2520T6ADEV%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VhNDg5NTAyZTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Teruhisa - T6ADEV</dc:creator></item><item><title><![CDATA[Angularをv15→v18にアップデートしました]]></title><description><![CDATA[!
+本記事はVoicy Advent Calendar 2024の8日目の記事です。(8日目に出すとは言っていない)
+
+
+ はじめに
+この記事では、業務でAngularアプリケーションをv15→v18にアップデートする上でやったこと、考えたことなどを書いていきたいと思います。
+
+ アップデートの背景
+プロダクト開発においてアプリケーションのフレームワークやライブラリをアップデートすることは、セキュリティリスクの解消やバグの修正、新機能の活用、パフォーマンス向上などにおいて重要だと思います。
+voicyでは現在、基本的にAngularのLTSに追従する形でアップデートを行う方針となっていま...]]></description><link>https://zenn.dev/voicy/articles/df34173a782ee4</link><guid isPermaLink="true">https://zenn.dev/voicy/articles/df34173a782ee4</guid><pubDate>Wed, 11 Dec 2024 14:16:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jwqIGl-L--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Angular%25E3%2582%2592v15%25E2%2586%2592v18%25E3%2581%25AB%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%25E3%2583%2587%25E3%2583%25BC%25E3%2583%2588%25E3%2581%2597%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:komura-c%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhiODU5ZTAwNWYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Voicy%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRiOWY5NGVjNDguanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>komura-c</dc:creator></item><item><title><![CDATA[Next.js 15.1の主なアップグレード内容]]></title><description><![CDATA[
+ はじめに
+Next.js15.1が出たので、気になった内容をまとめてみました。
+間違いなどありましたら、コメントなどで教えてください。
+https://nextjs.org/blog/next-15-1
+
+ 各種コマンド
+Next.jsの最新バージョンにアップグレードする際に、必要なコードの修正や設定変更を自動的に行います。手動で変更する手間を省く。
+npx @next/codemod@canary upgrade latest
+Next.jsプロジェクトで使われているnext、react、react-domを手動で最新バージョンに更新します。この場合、コードの修正は自分で行う必要が...]]></description><link>https://zenn.dev/ryohei0509/articles/2a653323035301</link><guid isPermaLink="true">https://zenn.dev/ryohei0509/articles/2a653323035301</guid><pubDate>Wed, 11 Dec 2024 14:13:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--KdKVXGZr--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Next.js%252015.1%25E3%2581%25AE%25E4%25B8%25BB%25E3%2581%25AA%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%25E3%2582%25B0%25E3%2583%25AC%25E3%2583%25BC%25E3%2583%2589%25E5%2586%2585%25E5%25AE%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hukuryo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc0M2JhYWM4YjIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hukuryo</dc:creator></item><item><title><![CDATA[ブラウザから1クリックでSlackに投稿できるようにした]]></title><description><![CDATA[こんにちは、TRUSTDOCKのよもぎたです。
+
+ はじめに
+ニュースやZennの記事、ブログエントリなどをSlackで共有したいと思ったことはありませんか？私はよくあります。そこで、Webブラウザから1クリックで閲覧中のページをSlackに投稿できる仕組みを作りました。この記事ではその仕組みを紹介させていただきます。
+
+ 謝辞
+このアイディアは、技術書典で出会った増井技術士事務所さんの「ブックマークレット32本ノック」という本から着想を得ています。この場を借りて深く感謝申し上げます。
+
+ 概要
+この仕組みは、Webブラウザのブックマーク／お気に入りに登録したブックマークレットを利用して...]]></description><link>https://zenn.dev/trustdock/articles/e6fe9eaacd9049</link><guid isPermaLink="true">https://zenn.dev/trustdock/articles/e6fe9eaacd9049</guid><pubDate>Wed, 11 Dec 2024 12:49:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--RkNJvTlX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2596%25E3%2583%25A9%25E3%2582%25A6%25E3%2582%25B6%25E3%2581%258B%25E3%2582%25891%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2583%25E3%2582%25AF%25E3%2581%25A7Slack%25E3%2581%25AB%25E6%258A%2595%25E7%25A8%25BF%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258B%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:th0x0472%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzEzNzA5NTQzOWYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:TRUSTDOCK%2520%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUl0YnZtbVhNVW5aT1VNSTllNE1fNnpwUTBiTUh5VkhfakJ1Z3hDckh2aTI9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>th0x0472</dc:creator></item><item><title><![CDATA[PWAマスター講座 第2部：Workboxについて]]></title><description><![CDATA[ウェブ開発者の方々、こんにちは。PWA開発シリーズの第2部です。
+入門記事 では、Service Worker の基本的な仕組みについて解説しました。実際に試してみるとわかると思いますが、キャッシュの更新、クライアントとのやり取りなど、基本的な機能を実装するにはかなりのコード量が必要になります。
+今回は、Workbox というライブラリを活用することで、PWA開発を大幅に効率化します。
+コード例や細かい点もたくさんあるので、どうぞご辛抱ください（そして美味しい何かを片手に）。
+この記事では、今後のPWA開発で活用できる、Workbox の包括的なリファレンスを目指します。
+
+
+ Work...]]></description><link>https://zenn.dev/sun_asterisk/articles/409dc5b57e0fbd</link><guid isPermaLink="true">https://zenn.dev/sun_asterisk/articles/409dc5b57e0fbd</guid><pubDate>Wed, 11 Dec 2024 09:52:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9EwTrO9m--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:PWA%25E3%2583%259E%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%25BC%25E8%25AC%259B%25E5%25BA%25A7%2520%25E7%25AC%25AC2%25E9%2583%25A8%25EF%25BC%259AWorkbox%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2583%2587%25E3%2583%25AB%25E3%2583%2593%25E3%2583%25B3%2520%25E3%2582%25A2%25E3%2583%25AB%25E3%2583%2581%25E3%2583%25A7%25E3%2583%25A0%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M1YTU0ZjZiM2MuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Sun%252A%2520Developers%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRkNTVlY2IwMTMuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>デルビン アルチョム</dc:creator></item><item><title><![CDATA[pnpmコマンド第一引数はこのように探索される]]></title><description><![CDATA[最近、pnpmを使い始めた。pnpmを使っているリポジトリを訪問しては、こんなふうに使うんだなと眺めている。
+（pnpm build …ほうほう、package.jsonのscriptsセクションを見てくれるんだな）
+（ということは、第一引数はpnpmのコマンドとは限らないのだ。「そんなコマンドがあるのか」などと思ってはいけないのだな。これはどのように解釈されるのか分かってないと読みづらい）
+というわけで第一引数の解釈を整頓した。
+
+ 解釈の概要
+結論から言うとこうだ。
+第一引数 &lt;firstArg&gt; は
+
+まずはpnpmのコマンドを探す。あったら実行する
+次にpackage...]]></description><link>https://zenn.dev/aromarious/articles/pnpm-command-discovery</link><guid isPermaLink="true">https://zenn.dev/aromarious/articles/pnpm-command-discovery</guid><pubDate>Wed, 11 Dec 2024 09:28:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4Guxo56A--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:pnpm%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E7%25AC%25AC%25E4%25B8%2580%25E5%25BC%2595%25E6%2595%25B0%25E3%2581%25AF%25E3%2581%2593%25E3%2581%25AE%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E6%258E%25A2%25E7%25B4%25A2%25E3%2581%2595%25E3%2582%258C%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:aromarious%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RmMTIwZjRiODEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>aromarious</dc:creator></item><item><title><![CDATA[【GSAP】GSAP Practice【#7 GSAP Timeline】]]></title><description><![CDATA[
+ 【#7 GSAP Timeline】
+YouTube: https://youtu.be/zw5vOme3dZw
+https://youtu.be/zw5vOme3dZw
+今回は「Timeline」について解説していきます。
+https://gsap.com/docs/v3/GSAP/Timeline/
+
+js/main.js
+// use a script tag or an external JS file
+document.addEventListener("DOMContentLoaded", (event) =&gt; {
+  gsap.registerPlugin(Scr...]]></description><link>https://zenn.dev/web_life_ch/articles/d7b640c5195874</link><guid isPermaLink="true">https://zenn.dev/web_life_ch/articles/d7b640c5195874</guid><pubDate>Wed, 11 Dec 2024 04:52:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--DXZOZEpX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590GSAP%25E3%2580%2591GSAP%2520Practice%25E3%2580%2590%25237%2520GSAP%2520Timeline%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Web%2520Life%2520CH%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUl0YnZtbWNjTWFMM3dyd2x3VE5sVVZjTlhmZHEzZzF2QnJfMUJMSkJrN049czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Web Life CH</dc:creator></item><item><title><![CDATA[Memoizationとは？]]></title><description><![CDATA[参考サイト
+https://janhesters.com/blog/what-is-memoization-in-javascript-typescript
+
+ Memoizationとは？
+Memoization（メモ化）とは、関数の結果を**キャッシュ（保存）**しておき、同じ入力値で関数が呼び出されたときに保存された値を再利用する最適化手法です。これにより、不要な繰り返し計算を避け、パフォーマンスを大幅に向上させることができます。
+簡単に言えば、**「同じ質問を何度もせず、一度計算した答えを覚えておこう」**という概念です。
+
+ なぜ必要なのでしょうか？
+次のような状況でMemoi...]]></description><link>https://zenn.dev/sunnyheee/articles/5c58c0cc39c147</link><guid isPermaLink="true">https://zenn.dev/sunnyheee/articles/5c58c0cc39c147</guid><pubDate>Wed, 11 Dec 2024 01:50:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--yZLmQwCD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:Memoization%25E3%2581%25A8%25E3%2581%25AF%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25BD%25E3%2583%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0ZG1Ec0lUUDNzcXVpOVg0c0ZGUmFTRF9zYzVXUlJJbmVQRFdsVnM9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ソニ</dc:creator></item><item><title><![CDATA[ENCA 11日目: SharedArrayBuffer のオプショナル化]]></title><description><![CDATA[
+ SharedArrayBuffer のオプショナル化
+ES2017 に満を持して入った SharedArrayBuffer でしたが、その後 CPU の投機的実行を悪用した Spectre 脆弱性が発見されてしまい、攻撃を緩和するために高精度に時間が測定できる performance.now() の精度が落とされ、SharedArrayBuffer が無効化されてしまうこととなりました。
+詳しくは jxck さんのブログ記事を参考にしてください。
+https://blog.jxck.io/entries/2020-05-22/site-isolation.html
+さて言語仕様側でも...]]></description><link>https://zenn.dev/pixiv/articles/3868164a6a2d99</link><guid isPermaLink="true">https://zenn.dev/pixiv/articles/3868164a6a2d99</guid><pubDate>Tue, 10 Dec 2024 20:39:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--NY6AbYgM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ENCA%252011%25E6%2597%25A5%25E7%259B%25AE%253A%2520SharedArrayBuffer%2520%25E3%2581%25AE%25E3%2582%25AA%25E3%2583%2597%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%258A%25E3%2583%25AB%25E5%258C%2596%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:petamoriken%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZhMDc3ZWRhZTMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:pixiv%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzMzODlhMzQ2ZjQuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>petamoriken</dc:creator></item><item><title><![CDATA[`express-intlayer` を使って Express バックエンドに国際化 (i18n) を導入する方法]]></title><description><![CDATA[
+ なぜバックエンドを国際化するのか？
+バックエンドを国際化することで、アプリケーションがグローバルなユーザー層と効果的にコミュニケーションできるようになります。ユーザーの好みの言語でコンテンツを提供することで、ユーザー体験を向上させ、アプリのアクセシビリティを高めることができます。以下は、バックエンドを国際化する実用的な理由の一部です：
+
+
+ローカライズされたエラーメッセージ：ユーザーの母国語でエラーメッセージを表示し、混乱やストレスを軽減します。
+
+多言語対応のコンテンツ取得：データベースから多言語対応のコンテンツを提供することで、ECサイトやコンテンツ管理システムに最適です。
+
+ロ...]]></description><link>https://zenn.dev/aymericzip/articles/b8e0fc56943d29</link><guid isPermaLink="true">https://zenn.dev/aymericzip/articles/b8e0fc56943d29</guid><pubDate>Tue, 10 Dec 2024 15:24:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ttRs9Ni2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%2560express-intlayer%2560%2520%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%2520Express%2520%25E3%2583%2590%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2589%25E3%2581%25AB%25E5%259B%25BD%25E9%259A%259B%25E5%258C%2596%2520%2528i18n%2529%2520%25E3%2582%2592%25E5%25B0%258E%25E5%2585%25A5%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:aymericzip%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzViNDI4NDMxMTQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>aymericzip</dc:creator></item><item><title><![CDATA[TypeScriptのBigIntをJSONに変換できない、なぜ。]]></title><description><![CDATA[!
+この記事は BABY JOB Advent Calendar 2024 の 11 日目の記事です。
+
+
+ はじめに
+筆者はTypeScriptを最近学習中です。
+JavaScriptは業務でなんとなく使ったことがある程度で、モダンなフロントエンドの技術はほぼ触れたことがありません。
+本記事はTypeScriptのBigInt型とそのシリアライズについて、気になったことがあったので自身の調べた経緯と一旦の結論を書き出してます。
+BigInt型とはnumber型を超えてとても大きな数を表すことができる型です。
+
+ 背景
+最近サバイバルTypeScriptでTypeScriptを学習してい...]]></description><link>https://zenn.dev/babyjob/articles/8c920e23a93878</link><guid isPermaLink="true">https://zenn.dev/babyjob/articles/8c920e23a93878</guid><pubDate>Tue, 10 Dec 2024 15:00:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--XhSXmGss--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%25E3%2581%25AEBigInt%25E3%2582%2592JSON%25E3%2581%25AB%25E5%25A4%2589%25E6%258F%259B%25E3%2581%25A7%25E3%2581%258D%25E3%2581%25AA%25E3%2581%2584%25E3%2580%2581%25E3%2581%25AA%25E3%2581%259C%25E3%2580%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:tani33%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNhODk4NDRkMDEuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:BABY%2520JOB%2520%2520%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2YzMmM0YWE2NjIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tani33</dc:creator></item><item><title><![CDATA[Cosense(Scrapbox)に爆速でメモを取るためのおすすめ設定]]></title><description><![CDATA[この記事は、[ispec] 医療に向き合う技術者集団の戦録 Advent Calendar 2024 の10日目の記事です！
+https://adventar.org/calendars/10776
+
+ はじめに
+ispecでは最近、Cosense (旧 Scrapbox) を使用した社内での情報共有を積極的に行っています！
+アウトプットや、情報の紐づけが簡単にできるのが良いですよね 😊
+https://scrapbox.io/
+今回は、実装しながらでも爆速でメモを取っていくために行った3つの設定をご紹介します！
+
+ 1. 新規ページ作成ショートカット
+Cosenseには、新規ページを作...]]></description><link>https://zenn.dev/ispec_inc/articles/cosense-quick-memo-settings</link><guid isPermaLink="true">https://zenn.dev/ispec_inc/articles/cosense-quick-memo-settings</guid><pubDate>Tue, 10 Dec 2024 14:57:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5DA75iSd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Cosense%2528Scrapbox%2529%25E3%2581%25AB%25E7%2588%2586%25E9%2580%259F%25E3%2581%25A7%25E3%2583%25A1%25E3%2583%25A2%25E3%2582%2592%25E5%258F%2596%25E3%2582%258B%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%25E3%2581%258A%25E3%2581%2599%25E3%2581%2599%25E3%2582%2581%25E8%25A8%25AD%25E5%25AE%259A%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Masaharu%2520Hori%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRmN2Y5YzE4ZTUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:ispec%2520inc.%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dsMTBYY3R4TlFyTVZlODUyXzd4ZUtRNEJOR19PaVI2VU1nQlhlaGc9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Masaharu Hori</dc:creator></item><item><title><![CDATA[可変長Promiseチェーンで発生するメモリリークの防止策]]></title><description><![CDATA[
+ 背景
+業務上、Promiseチェーンを多く繋いで、大きなデータを処理する必要があった。
+これまでメモリリークについて意識することはなかったが、今回の業務における実装では、Promiseチェーンの長さや処理するデータの大きさから、メモリリークが発生する可能性があった。
+そのため、Promiseチェーンにおいてどのような書き方をするとメモリリークが発生するのか調査した。
+
+ 調査
+以下のコードは大きなデータを作成し、次の処理へそのデータを渡すような可変長のPromiseチェーンを生成し、処理するコードである。
+このコードをブラウザの開発者ツールのConsoleへ直接貼り付けて実行し、動作...]]></description><link>https://zenn.dev/yaona807/articles/b4604b6a63f960</link><guid isPermaLink="true">https://zenn.dev/yaona807/articles/b4604b6a63f960</guid><pubDate>Tue, 10 Dec 2024 14:07:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dWjQmdN8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%258F%25AF%25E5%25A4%2589%25E9%2595%25B7Promise%25E3%2583%2581%25E3%2582%25A7%25E3%2583%25BC%25E3%2583%25B3%25E3%2581%25A7%25E7%2599%25BA%25E7%2594%259F%25E3%2581%2599%25E3%2582%258B%25E3%2583%25A1%25E3%2583%25A2%25E3%2583%25AA%25E3%2583%25AA%25E3%2583%25BC%25E3%2582%25AF%25E3%2581%25AE%25E9%2598%25B2%25E6%25AD%25A2%25E7%25AD%2596%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yaona%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU0YWJmNGUzODYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yaona</dc:creator></item><item><title><![CDATA[大きなデータをアップロードする時、何を考えたらいい？学習しながら理解したことをまとめてみる]]></title><description><![CDATA[最近、仕事で数GBを超えるファイルをアップロードする必要が出てきました。通常のファイルアップロードなら簡単にできるけれど、「こんな大きなデータってどうやって送るの？」と疑問に思ったのがきっかけです。最初はHTTPでポンと送ればいいかな？なんて軽く考えていたのですが、調べていくと「大きなデータ」にはそれなりの考慮が必要だと理解しました。
+今回は、私が学んだ「大きなデータのアップロード方法」について、知識を整理しつつブログにまとめてみます。専門用語も出てきますが、できるだけ丁寧に解説するので、興味がある方は一緒に学んでいきましょう！
+
+
+ 1. HTTPで大きなデータを送るのは難しい？
+
+「...]]></description><link>https://zenn.dev/mifurohi/articles/dc612f55d2175d</link><guid isPermaLink="true">https://zenn.dev/mifurohi/articles/dc612f55d2175d</guid><pubDate>Tue, 10 Dec 2024 09:38:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ezSCCrWE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%25A4%25A7%25E3%2581%258D%25E3%2581%25AA%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%2592%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2589%25E3%2581%2599%25E3%2582%258B%25E6%2599%2582%25E3%2580%2581%25E4%25BD%2595%25E3%2582%2592%25E8%2580%2583%25E3%2581%2588%25E3%2581%259F%25E3%2582%2589%25E3%2581%2584%25E3%2581%2584%25EF%25BC%259F%25E5%25AD%25A6%25E7%25BF%2592%25E3%2581%2597%25E3%2581%25AA%25E3%2581%258C%25E3%2582%2589%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2597%25E3%2581%259F%25E3%2581%2593%25E3%2581%25A8%25E3%2582%2592%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mifurohi%2540%25E5%2585%2583%25E7%25BE%258A%25E9%25A3%25BC%25E3%2581%2584%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q1MTA2ZWMzZmUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mifurohi@元羊飼い</dc:creator></item><item><title><![CDATA[JavaScript]]></title><description><![CDATA[
+ JavaScript
+
+ createElement()
+
+Document: createElement() メソッド|MSDN
+createElementの使い方
+
+
+ Element.id
+
+Element.id - id属性を取得、変更する
+
+
+ appendChild()
+
+appendChild()の使い方
+
+
+ createTextNode vs innerHTML vs textContent
+
+createTextNode vs innerHTML vs textContent
+
+
+
+ for文を使った繰り返し処理
+
+for文を使った繰り返し処理
+
+
+
+
+ その他
+...]]></description><link>https://zenn.dev/v6qh2bxj/articles/3f71313baa0622</link><guid isPermaLink="true">https://zenn.dev/v6qh2bxj/articles/3f71313baa0622</guid><pubDate>Tue, 10 Dec 2024 09:37:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BMK3afVl--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_80:JavaScript%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:v6qh2bxj%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzgzYmY4Njc4OTUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>v6qh2bxj</dc:creator></item><item><title><![CDATA[DOM(HTML,CSS,JavaScript)]]></title><description><![CDATA[
+ DOM
+
+ 参考サイト
+
+7. DOMの基本
+HTMLのdivタグとは？使い道がわからない人向けに解説！
+
+]]></description><link>https://zenn.dev/v6qh2bxj/articles/4b342bc88b6304</link><guid isPermaLink="true">https://zenn.dev/v6qh2bxj/articles/4b342bc88b6304</guid><pubDate>Tue, 10 Dec 2024 09:27:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--zG8R7LPt--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:DOM%2528HTML%252CCSS%252CJavaScript%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:v6qh2bxj%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzgzYmY4Njc4OTUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>v6qh2bxj</dc:creator></item><item><title><![CDATA[ES5を手放せたのか]]></title><description><![CDATA[
+この記事は PLAID Design Advent Calendar 2024 の10日目の記事です。
+プレイドのデザインエンジニアのケンジです。
+!
+この記事は、ES5 についての私の考察を共有することが目的です。ES5 のサポートを続ける Web サイト、Web 開発者やライブラリ開発、ビルドツールなど、特定の属性や対象を批判したり優劣をつけたりする意図はありません。また、Web サイトは IE 11 をサポートすべきだと提案する意図もありません
+
+
+ はじめに
+Web 開発者やライブラリ開発者にとっては、レガシーなコードよりもモダンなコードを書きたいはずです。ですが、ライブラリや...]]></description><link>https://zenn.dev/ignorant_kenji/articles/211caf0adf3068</link><guid isPermaLink="true">https://zenn.dev/ignorant_kenji/articles/211caf0adf3068</guid><pubDate>Tue, 10 Dec 2024 07:35:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0aSLHTTv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ES5%25E3%2582%2592%25E6%2589%258B%25E6%2594%25BE%25E3%2581%259B%25E3%2581%259F%25E3%2581%25AE%25E3%2581%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kenji%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q5NDJhNGFhMjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kenji</dc:creator></item></channel></rss>

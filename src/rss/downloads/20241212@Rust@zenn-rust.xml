@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Rust」のフィード]]></title><description><![CDATA[Zennのトピック「Rust」のRSSフィードです]]></description><link>https://zenn.dev/topics/rust</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ba09661577.png</url><title>Zennの「Rust」のフィード</title><link>https://zenn.dev/topics/rust</link></image><generator>zenn.dev</generator><lastBuildDate>Thu, 12 Dec 2024 06:51:03 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/rust/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[TypeScriptのコードをRustで書き直した話]]></title><description><![CDATA[モニクル Advent Calendar 2024の12日目の記事です．
+https://adventar.org/calendars/10519
+
+ はじめに
+モニクルの開発組織では，TypeScriptをプロダクトを作るときの最初の選択肢として採用しており，Node.jsをランタイムとした一般的なJSの技術スタックでの開発を行っています．
+そんな中でNode.jsのパフォーマンスに課題を感じ始め，一部のコードをRustで書き直すという作業を行いました．
+
+ Node.jsに感じた課題
+あらゆるサービスが稼働しているだけでお金を生み出してくれると良いのですが，残念ながら全てのサービスが...]]></description><link>https://zenn.dev/monicle/articles/46c7093afd3d52</link><guid isPermaLink="true">https://zenn.dev/monicle/articles/46c7093afd3d52</guid><pubDate>Thu, 12 Dec 2024 03:47:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hDjaschC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%25E3%2581%25AE%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2582%2592Rust%25E3%2581%25A7%25E6%259B%25B8%25E3%2581%258D%25E7%259B%25B4%25E3%2581%2597%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:asuka%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NlMzk4MDdmM2QuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2583%25A2%25E3%2583%258B%25E3%2582%25AF%25E3%2583%25AB%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZhNDQzZmI1MzEuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>asuka</dc:creator></item><item><title><![CDATA[Rust × gRPC-webをECSにデプロイする]]></title><description><![CDATA[こんにちは、株式会社ナンバーナインの糟谷です。
+ナンバーナインでは今回マイクロサービス構成の一部にRustを使用することにしました。
+その際、gRPC-webの導入とデプロイ周りで苦労したので知見を記録しておきます。
+最低限再現したサンプルプロジェクトを作成したので詳細はそちらを参照してください。
+https://github.com/siro33950/rust-gprc-sample
+
+ TL;DR
+
+
+tonicに全部乗っかればいい
+
+gRPC-webでALBのヘルスチェックを通そうとすると色々ある
+
+
+コンパイルはcrossを使う
+
+
+crossはDockerを使っているのでpr...]]></description><link>https://zenn.dev/no9_dev/articles/rust_grpc_to_ecs</link><guid isPermaLink="true">https://zenn.dev/no9_dev/articles/rust_grpc_to_ecs</guid><pubDate>Thu, 12 Dec 2024 03:07:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--diSpKc6T--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%2520%25C3%2597%2520gRPC-web%25E3%2582%2592ECS%25E3%2581%25AB%25E3%2583%2587%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25A4%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:siro33950%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q1MWFmOTYyZDYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%258A%25E3%2583%25B3%25E3%2583%2590%25E3%2583%25BC%25E3%2583%258A%25E3%2582%25A4%25E3%2583%25B3%25E9%2596%258B%25E7%2599%25BA%25E5%25AE%25A4%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI5NDA0NDQzZjIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>siro33950</dc:creator></item><item><title><![CDATA[Rust公式ドキュメントの多言語対応について]]></title><description><![CDATA[!
+この記事は Rust Advent Calendar 2024  シリーズ2の12日目の記事です。
+
+
+ はじめに
+ここしばらくRustの公式ドキュメントの多言語対応についての活動をいろいろしていました。
+ここで言う公式ドキュメントとは https://doc.rust-lang.org でホストされているドキュメント群のことで、"The Rust Programming Language" や "Rust By Example" など多くのドキュメントが存在します。各ドキュメントの翻訳については各地域のRustコミュニティあるいは個人がそれぞれ個別に行っている状況が長く続いてきまし...]]></description><link>https://zenn.dev/dalance/articles/66e9498e82a72f</link><guid isPermaLink="true">https://zenn.dev/dalance/articles/66e9498e82a72f</guid><pubDate>Thu, 12 Dec 2024 00:55:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--tJtO5UDz--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E5%2585%25AC%25E5%25BC%258F%25E3%2583%2589%25E3%2582%25AD%25E3%2583%25A5%25E3%2583%25A1%25E3%2583%25B3%25E3%2583%2588%25E3%2581%25AE%25E5%25A4%259A%25E8%25A8%2580%25E8%25AA%259E%25E5%25AF%25BE%25E5%25BF%259C%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:dalance%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZlYzIzM2VmYTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>dalance</dc:creator></item><item><title><![CDATA[Rustで共有鍵で暗号化・復号化をする]]></title><description><![CDATA[
+ 目的
+ユニークビジョン株式会社 Advent Calendar 2024のシリーズ2、12/4の記事です。
+複数のプログラムで共有鍵を使った暗号化されたデータをやり取りすることがあります。
+以前はAESを使ってましたが、AESよりもシンプルで計算が早いChaCha20Poly1305を使ってみます。
+特にnonceが192bitのXChaCha20Poly1305を使います。ちなみに通常のnonceは96bitです。
+こちらのcrateを利用します。
+chacha20poly1305
+
+ 説明
+
+ nonce
+nonceは使い捨ての値で、被らなけれななんでも良いです。crateで紹介...]]></description><link>https://zenn.dev/aoyagikouhei/articles/43c2a7112711a3</link><guid isPermaLink="true">https://zenn.dev/aoyagikouhei/articles/43c2a7112711a3</guid><pubDate>Thu, 12 Dec 2024 00:01:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4pXmbggv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25A7%25E5%2585%25B1%25E6%259C%2589%25E9%258D%25B5%25E3%2581%25A7%25E6%259A%2597%25E5%258F%25B7%25E5%258C%2596%25E3%2583%25BB%25E5%25BE%25A9%25E5%258F%25B7%25E5%258C%2596%25E3%2582%2592%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E9%259D%2592%25E6%259F%25B3%25E5%25BA%25B7%25E5%25B9%25B3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFjZDA3ZGRhNzguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>青柳康平</dc:creator></item><item><title><![CDATA[[Baker link. Dev]Lチカを試そうとしたら開発環境構築で詰まった話]]></title><description><![CDATA[Rustでの組み込み開発してみたいなーとか考えていたら、
+丁度良い商品入荷したので買っちゃいました😘
+https://www.switch-science.com/products/10044
+
+ Baker link. Dev Rev. 1 とは
+
+Raspberry Pi財団が独自に開発したARM Cortex M0+デュアルコアのRP2040マイコンをベースに、デバッガを搭載したRust言語学習用開発ボードです。Rev.1版では、外部マイコンデバックをサポートしたファームウェアが標準搭載されています。
+
+Baker link. Dev Rev. 1 の前の型である「Baker li...]]></description><link>https://zenn.dev/collabostyle/articles/bf9fa0e604c33c</link><guid isPermaLink="true">https://zenn.dev/collabostyle/articles/bf9fa0e604c33c</guid><pubDate>Wed, 11 Dec 2024 11:51:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ZKjmoBTj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BBaker%2520link.%2520Dev%255DL%25E3%2583%2581%25E3%2582%25AB%25E3%2582%2592%25E8%25A9%25A6%25E3%2581%259D%25E3%2581%2586%25E3%2581%25A8%25E3%2581%2597%25E3%2581%259F%25E3%2582%2589%25E9%2596%258B%25E7%2599%25BA%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%25A7%25E8%25A9%25B0%25E3%2581%25BE%25E3%2581%25A3%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:miko%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzViM2I3NTQxYzUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25B3%25E3%2583%25A9%25E3%2583%259C%25E3%2582%25B9%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25AB%2520Developers%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk2NTU1YTc5NjcuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>miko</dc:creator></item><item><title><![CDATA[Rust初心者が適当に書いても動いてしまうコードの書き方とより良い書き方を考えてみる]]></title><description><![CDATA[この記事は Rust Advent Calender 2024 の 11 日目の記事です。
+こんにちは。NTT コミュニケーションズの @ucchy です。普段は SkyWay という WebRTC プラットフォームの開発や WebRTC リサーチャーをしています。
+
+ 記事の背景
+私は、2024 年に入ってから Media over QUIC Transport のプロトコル実装(moq-wasm)を Rust で書き始めました。Python や TypeScript の経験はあるものの、Rust は初めてだったため、多くの点で「良くない」コードを書いてしまいました。
+1 年間 Rus...]]></description><link>https://zenn.dev/yuki_uchida/articles/cc367211486e80</link><guid isPermaLink="true">https://zenn.dev/yuki_uchida/articles/cc367211486e80</guid><pubDate>Wed, 11 Dec 2024 11:50:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--VhqXlX8K--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E3%2581%258C%25E9%2581%25A9%25E5%25BD%2593%25E3%2581%25AB%25E6%259B%25B8%25E3%2581%2584%25E3%2581%25A6%25E3%2582%2582%25E5%258B%2595%25E3%2581%2584%25E3%2581%25A6%25E3%2581%2597%25E3%2581%25BE%25E3%2581%2586%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2581%25AE%25E6%259B%25B8%25E3%2581%258D%25E6%2596%25B9%25E3%2581%25A8%25E3%2582%2588%25E3%2582%258A%25E8%2589%25AF%25E3%2581%2584%25E6%259B%25B8%25E3%2581%258D%25E6%2596%25B9%25E3%2582%2592%25E8%2580%2583%25E3%2581%2588%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yuki_uchida%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU2MjcyZTFhZDIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yuki_uchida</dc:creator></item><item><title><![CDATA[wasi-threadsを使用したVRT用のgithub actionsをリリースしました]]></title><description><![CDATA[この記事は、WebAssembly Advent Calendar 2024 の 11 日目の記事です。
+wasi-threadsの実例として’紹介させていただければと思います。
+https://qiita.com/advent-calendar/2024/wasm
+以前Visual Regression Test をサポートする reg-actions をリリースしたという記事を書きました。
+https://zenn.dev/fraim/articles/e020e82985ac6d
+今回はreg-actionsの画像比較・レポート作成部分をRustで書き直しwebpのサポートとwas...]]></description><link>https://zenn.dev/fraim/articles/27a8cb71ad9d95</link><guid isPermaLink="true">https://zenn.dev/fraim/articles/27a8cb71ad9d95</guid><pubDate>Wed, 11 Dec 2024 05:13:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2CePJA7u--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:wasi-threads%25E3%2582%2592%25E4%25BD%25BF%25E7%2594%25A8%25E3%2581%2597%25E3%2581%259FVRT%25E7%2594%25A8%25E3%2581%25AEgithub%2520actions%25E3%2582%2592%25E3%2583%25AA%25E3%2583%25AA%25E3%2583%25BC%25E3%2582%25B9%25E3%2581%2597%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:bokuweb%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJlMDgxN2MyOTMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:FRAIM%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzczMTdlNTQzMjcuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>bokuweb</dc:creator></item><item><title><![CDATA[windows11へのRust開発環境構築 PROXY環境下にて]]></title><description><![CDATA[
+ プロキシ設定
+ユーザー権限のPowerShellにて
+&gt; setx http_proxy http://&lt;プロキシのアドレス&gt;:&lt;ポート&gt;
+確認
+&gt; echo $env:http_proxy
+
+ インストーラーをダウンロード
+https://www.rust-lang.org/tools/install
+Download rustup-init.exe (64-bit)をダウンロード
+
+今の時代32bitマシン使っている人は少ないはず...
+
+
+ インストール
+肝はダウンロードしたrustup-init.exeをフォルダからダブルクリックするのでは...]]></description><link>https://zenn.dev/96140/articles/50d91cecf7dfa8</link><guid isPermaLink="true">https://zenn.dev/96140/articles/50d91cecf7dfa8</guid><pubDate>Wed, 11 Dec 2024 03:27:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--yCS4w3Lk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:windows11%25E3%2581%25B8%25E3%2581%25AERust%25E9%2596%258B%25E7%2599%25BA%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%2520PROXY%25E7%2592%25B0%25E5%25A2%2583%25E4%25B8%258B%25E3%2581%25AB%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kuro-140%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y4OGI1NmMzYTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kuro-140</dc:creator></item><item><title><![CDATA[Rust.Tokyo 2024にゴールドスポンサーとして協賛し、計3件の発表を行いました！]]></title><description><![CDATA[
+ はじめに
+こんにちは、Fairy Devicesプロダクト開発部の片岡です。
+先日Fairy Devicesのプロダクト開発部のメンバーでRust.Tokyo 2024に参加してきましたので、その様子をレポートします。
+
+ Rust.Tokyoとは
+Rust.Tokyoはプログラミング言語Rustに関する技術カンファレンスです。
+2019年に第1回が開催されてから、今年で5回目の開催となります。
+年々規模を拡大し、今年は現地参加者100名くらい？オンライン参加は500名くらい(connpass 申し込み人数)、さらにこれまでのシングルセッションから2つのセッションが設けられ発表件数も...]]></description><link>https://zenn.dev/fairydevices/articles/b3060113e0d9bc</link><guid isPermaLink="true">https://zenn.dev/fairydevices/articles/b3060113e0d9bc</guid><pubDate>Wed, 11 Dec 2024 03:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jHMAdCtA--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust.Tokyo%25202024%25E3%2581%25AB%25E3%2582%25B4%25E3%2583%25BC%25E3%2583%25AB%25E3%2583%2589%25E3%2582%25B9%25E3%2583%259D%25E3%2583%25B3%25E3%2582%25B5%25E3%2583%25BC%25E3%2581%25A8%25E3%2581%2597%25E3%2581%25A6%25E5%258D%2594%25E8%25B3%259B%25E3%2581%2597%25E3%2580%2581%25E8%25A8%25883%25E4%25BB%25B6%25E3%2581%25AE%25E7%2599%25BA%25E8%25A1%25A8%25E3%2582%2592%25E8%25A1%258C%25E3%2581%2584%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:nope_noshishi%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E5MjE4ODkwNjAuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2595%25E3%2582%25A7%25E3%2582%25A2%25E3%2583%25AA%25E3%2583%25BC%25E3%2583%2587%25E3%2583%2590%25E3%2582%25A4%25E3%2582%25BB%25E3%2582%25BA%25E5%2585%25AC%25E5%25BC%258F%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2QxMjZkZDZkMmUuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nope_noshishi</dc:creator></item><item><title><![CDATA[URLが絵文字に！？史上最狂なURL短縮サービス誕生]]></title><description><![CDATA[先日開催されたクソアプリハッカソンで実装したアプリのお披露目。
+https://kuso-app.connpass.com/event/336557/
+
+ Musubu
+私はURL短縮サービスMusubu(読み方: むすぶ)を全世界へ公開します。
+https://musubu.sontixyou.com/
+このアプリはただの短縮サービスではありません。
+さっそくアプリの動きを見ていきましょう。
+
+生成された短縮URLは見た目は不穏だが、ちゃんと登録したURLへリダイレクトかかります。
+短縮さるたURLをブラウザのURLにコピペしてもリダイレクトされます。
+このように短縮サービスのパスが絵...]]></description><link>https://zenn.dev/kenkenlysh/articles/c4dacf2f4ec277</link><guid isPermaLink="true">https://zenn.dev/kenkenlysh/articles/c4dacf2f4ec277</guid><pubDate>Tue, 10 Dec 2024 23:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--G5i8pwrW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:URL%25E3%2581%258C%25E7%25B5%25B5%25E6%2596%2587%25E5%25AD%2597%25E3%2581%25AB%25EF%25BC%2581%25EF%25BC%259F%25E5%258F%25B2%25E4%25B8%258A%25E6%259C%2580%25E7%258B%2582%25E3%2581%25AAURL%25E7%259F%25AD%25E7%25B8%25AE%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2593%25E3%2582%25B9%25E8%25AA%2595%25E7%2594%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:sontixyou%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU5ZmFlN2M0MWUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sontixyou</dc:creator></item><item><title><![CDATA[Day 8: GCのデザイン ~RCUの動作原理~]]></title><description><![CDATA[
+ RCUのGC
+昨日はRCUの基礎を学び、古いデータの解放(GC)はグレースポイントが終了したときにされるということを学んだ。今日はその実装方法についての話をする。
+
+ 参照カウンタ(Arc)は遅い
+昨日の記事でGCの実装方法の一つとして、Atomic Reference Counter (Arc) を使用したGCがある。
+これは以下のような実装である:
+
+
+rcu_read_lock()時に参照カウンタを増加
+
+rcu_read_unlock()時にカウンタを減少
+カウンタが0になった時点でデータを解放
+
+一見シンプルに見えるこの方式だが、実はパフォーマンス上の大きな問題がある。その...]]></description><link>https://zenn.dev/labbase_sano/articles/1a40c5f0bf6974</link><guid isPermaLink="true">https://zenn.dev/labbase_sano/articles/1a40c5f0bf6974</guid><pubDate>Tue, 10 Dec 2024 16:37:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--NDOBsw01--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Day%25208%253A%2520GC%25E3%2581%25AE%25E3%2583%2587%25E3%2582%25B6%25E3%2582%25A4%25E3%2583%25B3%2520%7ERCU%25E3%2581%25AE%25E5%258B%2595%25E4%25BD%259C%25E5%258E%259F%25E7%2590%2586%7E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Sano%2520%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ0Mjc3M2M5MjIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Sano🐡</dc:creator></item><item><title><![CDATA[Rustにおける関数とマクロの特性と効果的な使い分け]]></title><description><![CDATA[
+ 関数とマクロの特性と効果的な使い分け
+Rustのプログラミングでは、関数とマクロを適切に使い分けることが、効率的で保守性の高いコードを実現する鍵となります。関数は型安全性とデバッグ容易性に優れ、ロジックの再利用に最適です。一方、マクロはコンパイル時の柔軟なコード生成が可能で、関数では実現が難しい場面でその力を発揮します。
+本記事では、関数とマクロの基本的な特徴を整理し、プロジェクトでのモジュール化手法や名前衝突回避のポイントを具体的な例を交えて解説します。また、関数では実現が難しいマクロの活用例も紹介し、使い分けの判断基準を明確にします。これにより、柔軟性と保守性を両立したRustコ...]]></description><link>https://zenn.dev/kokimu/articles/4804a7403e2c40</link><guid isPermaLink="true">https://zenn.dev/kokimu/articles/4804a7403e2c40</guid><pubDate>Tue, 10 Dec 2024 11:35:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--sHcLqUGG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25AB%25E3%2581%258A%25E3%2581%2591%25E3%2582%258B%25E9%2596%25A2%25E6%2595%25B0%25E3%2581%25A8%25E3%2583%259E%25E3%2582%25AF%25E3%2583%25AD%25E3%2581%25AE%25E7%2589%25B9%25E6%2580%25A7%25E3%2581%25A8%25E5%258A%25B9%25E6%259E%259C%25E7%259A%2584%25E3%2581%25AA%25E4%25BD%25BF%25E3%2581%2584%25E5%2588%2586%25E3%2581%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2593%25E3%2583%25BC%25E3%2581%258D%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2UwZTkxNWRmMTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>こーき</dc:creator></item><item><title><![CDATA[#75　Polymorphism in Rust]]></title><description><![CDATA[
+ Introduction
+Polymorphism is a fundamental concept in object-oriented programming that allows a single interface to represent different underlying forms (data types). In Rust, polymorphism is typically achieved using trait, which are similar to interfaces in other languages. Trait enable us to ...]]></description><link>https://zenn.dev/nxted_sapporo/articles/71bb3a517f2cc5</link><guid isPermaLink="true">https://zenn.dev/nxted_sapporo/articles/71bb3a517f2cc5</guid><pubDate>Tue, 10 Dec 2024 11:11:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--h28325Xy--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:%252375%25E3%2580%2580Polymorphism%2520in%2520Rust%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:NXTEDCo.%252C%2520Ltd.%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBmZjQzOTVhYzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>NXTEDCo., Ltd.</dc:creator></item><item><title><![CDATA[ripgrepの結果をページャーでいい感じに表示する]]></title><description><![CDATA[
+ はじめに
+ripgrep（rg）で検索結果が大量にある場合、出力をページャーに渡すことがあると思いますが、そのまま渡しただけでは結果が分かりにくいと思います。
+rg "foo" | bat
+rg "foo" | less
+
+この記事は、ripgrepの結果をページャーでいい感じに表示できないか調べた結果をまとめたものです。
+以下の例では、https://github.com/rust-lang/rustで「foo」という文字列を検索します。
+$ git rev-parse HEAD
+ff7906bfe1ed264bf9c4d3abe1940e357b7e61dd
+
+ rg -p
+
+r...]]></description><link>https://zenn.dev/sorairolake/articles/display-ripgrep-result-with-pager</link><guid isPermaLink="true">https://zenn.dev/sorairolake/articles/display-ripgrep-result-with-pager</guid><pubDate>Tue, 10 Dec 2024 10:21:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--q1jyHiIW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ripgrep%25E3%2581%25AE%25E7%25B5%2590%25E6%259E%259C%25E3%2582%2592%25E3%2583%259A%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%25A3%25E3%2583%25BC%25E3%2581%25A7%25E3%2581%2584%25E3%2581%2584%25E6%2584%259F%25E3%2581%2598%25E3%2581%25AB%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:SorairoLake%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzEyZGZiOGQyM2QuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>SorairoLake</dc:creator></item><item><title><![CDATA[Rust pub(crate) の基本]]></title><description><![CDATA[
+ pub(crate) の基本
+Rust では、アイテム（関数、構造体、モジュール、マクロなど）の公開範囲を柔軟に指定できます。その中でも pub(crate) は クレート内限定の公開 を指定するためのアクセス修飾子で、モジュール設計やAPI管理において非常に便利です。本記事では、pub(crate) の基本から応用までを解説します。
+
+
+ 1. Rust におけるデフォルトの可視性と pub(crate)
+
+Rust では、アイテムの可視性はデフォルトでプライベート（非公開）です。つまり、修飾子を付けない場合、そのアイテムは定義されたモジュール内でのみアクセス可能になります。
+例え...]]></description><link>https://zenn.dev/kokimu/articles/95a7c6dc9f28d2</link><guid isPermaLink="true">https://zenn.dev/kokimu/articles/95a7c6dc9f28d2</guid><pubDate>Tue, 10 Dec 2024 09:49:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--kZwvhOjG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%2520pub%2528crate%2529%2520%25E3%2581%25AE%25E5%259F%25BA%25E6%259C%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2593%25E3%2583%25BC%25E3%2581%258D%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2UwZTkxNWRmMTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>こーき</dc:creator></item><item><title><![CDATA[インデックス可能なSortedListをRustで作った]]></title><description><![CDATA[前回の記事でスキップリストを用いて、挿入・削除・ランダムアクセスが高速なリストを実装しました。
+https://zenn.dev/komak/articles/c8d751d34711e8
+今回は、これを用いてPythonのSortedListのように、インデックス可能な順序付きリストを作ったため、紹介します。
+
+ 実装
+まずは構造体を定義します。
+pub struct SortedList&lt;T&gt; {
+    list: SkipList&lt;T&gt;,
+}
+あとは、lower_boundとupper_boundを実装すれば、ほとんど完成と言っていいでしょう。
+pub f...]]></description><link>https://zenn.dev/komak/articles/c39b14a542ef26</link><guid isPermaLink="true">https://zenn.dev/komak/articles/c39b14a542ef26</guid><pubDate>Tue, 10 Dec 2024 08:00:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--zf37d58C--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2587%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25B9%25E5%258F%25AF%25E8%2583%25BD%25E3%2581%25AASortedList%25E3%2582%2592Rust%25E3%2581%25A7%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2593%25E3%2581%25BE%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJmOTQ3ODhlMmUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>こま</dc:creator></item><item><title><![CDATA[RustとPostgreSQLのストアード・プロシージャーの雛形を作る]]></title><description><![CDATA[
+ 目的
+ユニークビジョン株式会社 Advent Calendar 2024のシリーズ2、12/3の記事です。
+RustとPostgreSQLでストアード・プロシージャーのTDDの記事では、最初にストアード・プロシージャーとそれをテストするためのRustの雛形のコードを紹介しています。
+毎回これをゼロから書くのは大変なので、自動生成することにします。
+
+ 説明
+
+ ERDツール
+ERDツールとはユニークビジョンが開発しているVSCode拡張です。
+jsonで書かれたERDからSQLやコードを自動生成するためのツールになります。
+ERDと似た構文でインターフェースも定義することが可能なので...]]></description><link>https://zenn.dev/aoyagikouhei/articles/4f660ca952072d</link><guid isPermaLink="true">https://zenn.dev/aoyagikouhei/articles/4f660ca952072d</guid><pubDate>Mon, 09 Dec 2024 23:25:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4FCoa-7_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25A8PostgreSQL%25E3%2581%25AE%25E3%2582%25B9%25E3%2583%2588%25E3%2582%25A2%25E3%2583%25BC%25E3%2583%2589%25E3%2583%25BB%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B7%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%25A3%25E3%2583%25BC%25E3%2581%25AE%25E9%259B%259B%25E5%25BD%25A2%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E9%259D%2592%25E6%259F%25B3%25E5%25BA%25B7%25E5%25B9%25B3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFjZDA3ZGRhNzguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>青柳康平</dc:creator></item><item><title><![CDATA[ウィンドウから画像が飛び出しているようにみえるアプリ]]></title><description><![CDATA[この記事はクソアプリ Advent Calendar 2024 - シリーズ2の10日目の記事です。
+
+ 概要
+指定したBB画像をウィンドウから飛び出すように表示するクソアプリです。
+GIFに対応しているため、アニメーションで動かすことも可能です。
+
+なお、ウィンドウを移動させるためにバーをクリックするとアニメーションが止まる上に、画像が重なる領域（透明化している部分も含む）がクリックできないため色々と終わってます。
+https://github.com/awrznc/bkrbk
+
+ 利用例
+インターネットでたまによくみかける「ウィンドウからキャラクターが乗り出している表現」が実現できる...]]></description><link>https://zenn.dev/awrznc/articles/5132877c6b6aa7</link><guid isPermaLink="true">https://zenn.dev/awrznc/articles/5132877c6b6aa7</guid><pubDate>Mon, 09 Dec 2024 15:15:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--CaxPol9U--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25A6%25E3%2582%25A3%25E3%2583%25B3%25E3%2583%2589%25E3%2582%25A6%25E3%2581%258B%25E3%2582%2589%25E7%2594%25BB%25E5%2583%258F%25E3%2581%258C%25E9%25A3%259B%25E3%2581%25B3%25E5%2587%25BA%25E3%2581%2597%25E3%2581%25A6%25E3%2581%2584%25E3%2582%258B%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E3%2581%25BF%25E3%2581%2588%25E3%2582%258B%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:awrznc%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM1ZTkwY2I4ZTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>awrznc</dc:creator></item><item><title><![CDATA[Rustのモジュール]]></title><description><![CDATA[
+ はじめに
+本記事では、Rustのモジュールを理解するために以下のポイントを整理したいと思います。
+
+
+use super::、crate::、self::とは何か
+
+pin_definitions::*のようなワイルドカードインポートの注意点
+
+mod.rs・lib.rsの役割とRust 2018以降の変化
+PythonやC#など他言語との比較
+
+
+
+ 1. crate, super, selfを使ったスコープ指定
+Rustでは相対的・絶対的なパス指定が可能であり、crate, super, selfはその基点を示します。
+
+ crate：ルートモジュール
+crate::はプロジェク...]]></description><link>https://zenn.dev/kokimu/articles/9e1410c5afe504</link><guid isPermaLink="true">https://zenn.dev/kokimu/articles/9e1410c5afe504</guid><pubDate>Mon, 09 Dec 2024 12:05:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vCuMaUIW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25AE%25E3%2583%25A2%25E3%2582%25B8%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%25AB%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2593%25E3%2583%25BC%25E3%2581%258D%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2UwZTkxNWRmMTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>こーき</dc:creator></item><item><title><![CDATA[シングルバイナリでsigv4署名ができるツールが欲しかったので作った]]></title><description><![CDATA[
+ 忙しい人用
+https://github.com/1hakusai1/awscurl-rs
+作ったのでよければ使ってください。日本語でのフィードバックも大歓迎です。
+
+ 何を作ったのか
+curlとほぼ同じ使い方で、sigv4署名付きのリクエストが送れるcliツールです。Homebrewで入ります。IAM認証がかかったAPI Gatewayを手元から叩きたい時などにお使いください。
+
+ 使い方
+&gt; awscurl --help
+Usage: awscurl [OPTIONS] &lt;URL&gt;
+
+Arguments:
+  &lt;URL&gt;  
+
+Options:
+  ...]]></description><link>https://zenn.dev/1hakusai1/articles/bbd8f03a607bab</link><guid isPermaLink="true">https://zenn.dev/1hakusai1/articles/bbd8f03a607bab</guid><pubDate>Mon, 09 Dec 2024 09:53:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--oNBBvKiC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B7%25E3%2583%25B3%25E3%2582%25B0%25E3%2583%25AB%25E3%2583%2590%25E3%2582%25A4%25E3%2583%258A%25E3%2583%25AA%25E3%2581%25A7sigv4%25E7%25BD%25B2%25E5%2590%258D%25E3%2581%258C%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258B%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%258C%25E6%25AC%25B2%25E3%2581%2597%25E3%2581%258B%25E3%2581%25A3%25E3%2581%259F%25E3%2581%25AE%25E3%2581%25A7%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hakusai%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U1Mjk0YmM1NWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hakusai</dc:creator></item></channel></rss>
