@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「JavaScript」のフィード]]></title><description><![CDATA[Zennのトピック「JavaScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/javascript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/64acd76870.png</url><title>Zennの「JavaScript」のフィード</title><link>https://zenn.dev/topics/javascript</link></image><generator>zenn.dev</generator><lastBuildDate>Fri, 13 Dec 2024 07:32:42 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/javascript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[エディタからJestのテストを実行する際に複数の設定を自動で切り替える方法（VS CodeとJetBrains IDE）]]></title><description><![CDATA[この記事はCommune Advent Calendar 2024シリーズ1の13日目の記事です。
+
+ やりたいこと
+サーバーサイドの開発をしている現場ではユニットテストとは別にDBのセットアップ処理を伴う統合テストを実行できるようにしている場合があります。DBのセットアップ処理やリセット処理などは時間がかるため、ユニットテストには含めないようにして別の設定ファイルに含める方法を採る場合が多いと思います。
+コマンドラインから実行する場合にはテストフレームワークの実行用設定ファイルを引数に渡すことで変更できます。
+# ユニットテスト（デフォルトの設定ファイルが利用される）
+npm exec...]]></description><link>https://zenn.dev/dev_commune/articles/70f70336e73a2b</link><guid isPermaLink="true">https://zenn.dev/dev_commune/articles/70f70336e73a2b</guid><pubDate>Fri, 13 Dec 2024 01:01:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Kq0U1XyZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25A8%25E3%2583%2587%25E3%2582%25A3%25E3%2582%25BF%25E3%2581%258B%25E3%2582%2589Jest%25E3%2581%25AE%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E3%2582%2592%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%2599%25E3%2582%258B%25E9%259A%259B%25E3%2581%25AB%25E8%25A4%2587%25E6%2595%25B0%25E3%2581%25AE%25E8%25A8%25AD%25E5%25AE%259A%25E3%2582%2592%25E8%2587%25AA%25E5%258B%2595%25E3%2581%25A7%25E5%2588%2587%25E3%2582%258A%25E6%259B%25BF%25E3%2581%2588%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%25EF%25BC%2588VS%2520Code%25E3%2581%25A8JetBrains%2520IDE%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:isomura%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y1MTE3MTI5NDIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25B3%25E3%2583%259F%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%25B3%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZlNmQwZWQ5NGQuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>isomura</dc:creator></item><item><title><![CDATA[Gemini 1.5 Pro で音声ファイルの文字起こしをしてみた]]></title><description><![CDATA[
+ はじめに
+弊社ではフリーランスエンジニアと企業のマッチングサービスを運営しています。
+生成AIを活用し、営業担当とエンジニアのカウンセリングを文字起こし・要約し、カウンセリングの効率化を図りたいというニーズが社内から出てきました。
+その検証の第一段階として、Gemini 1.5 Proを活用し音声ファイルを文字起こししてみることにしました。
+
+ 技術スタック
+
+フレームワーク: Express
+言語: JavaScript
+音声ファイルの文字起こし: Google Gemini 1.5 Pro
+
+
+ ソースコード
+
+const fs = require('fs');
+const pa...]]></description><link>https://zenn.dev/bizlink/articles/7aabda4f4e1bdd</link><guid isPermaLink="true">https://zenn.dev/bizlink/articles/7aabda4f4e1bdd</guid><pubDate>Fri, 13 Dec 2024 00:08:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--PHKmMsdQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Gemini%25201.5%2520Pro%2520%25E3%2581%25A7%25E9%259F%25B3%25E5%25A3%25B0%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2581%25AE%25E6%2596%2587%25E5%25AD%2597%25E8%25B5%25B7%25E3%2581%2593%25E3%2581%2597%25E3%2582%2592%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Shun%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzllMzFlOGFkZGMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Bizlink%2520Developers%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0Zi1FQzFSY0JkbHk4Wm8xZ2Q0UWkzQ0ctRlRnZWc0UnpEc3VfUU1qUG9JPXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Shun</dc:creator></item><item><title><![CDATA[ENCA 12日目: Cyclic Module Records の策定]]></title><description><![CDATA[!
+この記事は 1人 ECMAScript Normative Changes Advent Calendar 2024 の 12 日目です。
+
+
+ ECMAScript のモジュール
+ECMAScript にはもともとモジュール1つをカプセル化して表現した Abstract Module Records という抽象クラスと、それを継承した Source Text Module Records 具象クラスのみが定義されていました。
+Source Text Module Records がいわゆる JavaScript モジュールを表しており、ざっくり以下のような特徴を持ちます。
+
+Jav...]]></description><link>https://zenn.dev/pixiv/articles/02b6e0c46f4edd</link><guid isPermaLink="true">https://zenn.dev/pixiv/articles/02b6e0c46f4edd</guid><pubDate>Thu, 12 Dec 2024 18:01:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--laEsBkLe--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ENCA%252012%25E6%2597%25A5%25E7%259B%25AE%253A%2520Cyclic%2520Module%2520Records%2520%25E3%2581%25AE%25E7%25AD%2596%25E5%25AE%259A%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:petamoriken%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZhMDc3ZWRhZTMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:pixiv%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzMzODlhMzQ2ZjQuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>petamoriken</dc:creator></item><item><title><![CDATA[ClusterScriptでも高階関数を使うのです]]></title><description><![CDATA[この記事は「Cluster Script Advent Calendar 2024」の10日目です
+昨日はa.satoさんの「第二回ゆるゲームジャムトライ」でした！
+send/receiveは本当こんがらがって大変ですよね…。
+
+こんばんは！かおもです！！！！！！
+まずはこちらのコードをご覧ください。
+インタラクトされたら実行する(
+    Playerのジャンプ力を指定倍にする(2)
+);
+
+毎Frame実行する(
+    Playerのジャンプ力を指定秒後に元に戻す(10)
+);
+そうです、これはClusterScriptのコードです。
+これ、なんと動きます！！！
+これを動くものにで...]]></description><link>https://zenn.dev/vkao/articles/5bbb858d99f2ff</link><guid isPermaLink="true">https://zenn.dev/vkao/articles/5bbb858d99f2ff</guid><pubDate>Thu, 12 Dec 2024 15:00:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--eyQQ32TU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ClusterScript%25E3%2581%25A7%25E3%2582%2582%25E9%25AB%2598%25E9%259A%258E%25E9%2596%25A2%25E6%2595%25B0%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%25E3%2581%25AE%25E3%2581%25A7%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258B%25E3%2581%258A%25E3%2582%2582%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FGZFp1Y290c3hmV19RVmFPemc4a0ZoeUNZQ0YtMGFiZlBldEpJLUdpdFM5OFE9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>かおも</dc:creator></item><item><title><![CDATA[【css】ふわっと！ページトップへ戻るボタン【javascript】]]></title><description><![CDATA[スクロールした時にふわっと表示され、トップに移動するときはスムーススクロールします。
+
+ 1.htmlを記述する
+&lt;a id="pagetop" aria-label="ページのトップへ"&gt;&lt;span&gt;&lt;/span&gt;&lt;/a&gt;
+aria-labelはwebアクセシビリティ対応を考慮
+
+ 2.cssを記述する
+html{
+  scroll-behavior: smooth;
+}
+#pagetop {
+  position: fixed;
+  right: 40px;
+  bottom: 20px;
+  z-index: 5500;
+  disp...]]></description><link>https://zenn.dev/saru_no_note/articles/10f24360b0c548</link><guid isPermaLink="true">https://zenn.dev/saru_no_note/articles/10f24360b0c548</guid><pubDate>Thu, 12 Dec 2024 12:58:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6ubqcfmb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590css%25E3%2580%2591%25E3%2581%25B5%25E3%2582%258F%25E3%2581%25A3%25E3%2581%25A8%25EF%25BC%2581%25E3%2583%259A%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%2588%25E3%2583%2583%25E3%2583%2597%25E3%2581%25B8%25E6%2588%25BB%25E3%2582%258B%25E3%2583%259C%25E3%2582%25BF%25E3%2583%25B3%25E3%2580%2590javascript%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:saru%2540%25E6%2596%2587%25E7%25B3%25BB%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2580%25E3%2583%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA4MWU3ZDhiYTcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>saru@文系コーダー</dc:creator></item><item><title><![CDATA[[Javascript]0/ null / undefined / NaNの区別]]></title><description><![CDATA[
+ JavaScriptのFalsy値：0、null、undefined、NaNの区別
+JavaScriptには0、null、undefined、NaNといったFalsy値があります。これらは条件文でFalsyとして評価されるという共通点がありますが、具体的な違いを知らない方も多いかもしれません。この機会にこれらの値を区別する方法を学んでみましょう。
+
+
+
+値
+Booleanコンテクスト
+Numberコンテクスト
+Stringコンテクスト
+
+
+
+
+null
+false
+0
+"null"
+
+
+undefined
+false
+NaN
+"undefined"
+
+
+NaN
+false
+NaN
+"...]]></description><link>https://zenn.dev/heatherjin/articles/6b3be184a5c7f4</link><guid isPermaLink="true">https://zenn.dev/heatherjin/articles/6b3be184a5c7f4</guid><pubDate>Thu, 12 Dec 2024 08:44:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--odi4OAZ4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BJavascript%255D0%252F%2520null%2520%252F%2520undefined%2520%252F%2520NaN%25E3%2581%25AE%25E5%258C%25BA%25E5%2588%25A5%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%258F%25E3%2583%25AA%25E3%2583%259C%25E3%2583%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSUQ0NnhSVTRQalhfb1c3RVMyRzQ5eS1kbXFibHp4azBWTDRGQjlCOHFuPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ハリボー</dc:creator></item><item><title><![CDATA[collaboflow.proxyではじめる外部API連携]]></title><description><![CDATA[
+ コラボフロー JavaScript API
+コラボフローには、申請書をJavaScriptによってカスタマイズするためのコラボフロー JavaScript APIが用意されています。
+本APIを利用することで、下記の例のようなさまざまなアクションを申請書上に実装する事が可能となります。
+
+通常のフォーム設計機能だけでは不可能な複雑な入力チェックを実現する
+特定の条件に一致する場合、入力パーツを表示/非表示にする
+特定の条件に一致する場合、必要な値を自動的にセットする
+
+
+ collaboflow.proxyではじめる外部API連携
+さらに、コラボフロー JavaScript APIに...]]></description><link>https://zenn.dev/uchimura/articles/2b7718be7f9df5</link><guid isPermaLink="true">https://zenn.dev/uchimura/articles/2b7718be7f9df5</guid><pubDate>Thu, 12 Dec 2024 07:37:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dlloW_r1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:collaboflow.proxy%25E3%2581%25A7%25E3%2581%25AF%25E3%2581%2598%25E3%2582%2581%25E3%2582%258B%25E5%25A4%2596%25E9%2583%25A8API%25E9%2580%25A3%25E6%2590%25BA%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%2586%2585%25E6%259D%2591%2520%25E5%259C%25AD%25E5%25AE%258F%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzlhNzY4MTQ3ZWUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>内村 圭宏</dc:creator></item><item><title><![CDATA[StripeのAPIキーからStripeアカウントを特定する方法]]></title><description><![CDATA[複数のStripeアカウントで開発や運用を行っていると、プロジェクトで利用しているAPIキーがどのStripeアカウントで利用しているものかがわからなくなることがあります。
+この記事では、APIキーから対象のStripeアカウントを特定する方法を紹介します。
+
+ Checkout Sessionを利用して確認する
+もっとも簡単な方法は、Checkout Sessionを利用することです。Checkout Sessionには、カード情報を保存するためのsetupモードが用意されています。setupモードでセッションを作成し、リダイレクトを行うAPIを実装しましょう。
+app.get('/c...]]></description><link>https://zenn.dev/stripe/articles/confirm-stripe-account-by-api-key</link><guid isPermaLink="true">https://zenn.dev/stripe/articles/confirm-stripe-account-by-api-key</guid><pubDate>Thu, 12 Dec 2024 06:10:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7KVDSdz4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Stripe%25E3%2581%25AEAPI%25E3%2582%25AD%25E3%2583%25BC%25E3%2581%258B%25E3%2582%2589Stripe%25E3%2582%25A2%25E3%2582%25AB%25E3%2582%25A6%25E3%2583%25B3%25E3%2583%2588%25E3%2582%2592%25E7%2589%25B9%25E5%25AE%259A%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Hidetaka%2520Okamoto%2528S...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2gtSGp6eWxINWdaWDBOVXNUN1JvQ1hzUEJSR3E1OHVDSlRZSFVKPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Hidetaka Okamoto(Stripe)</dc:creator></item><item><title><![CDATA[JavaScript で XML を扱う | NodeJS + fast-xml-parser]]></title><description><![CDATA[https://github.com/NaturalIntelligence/fast-xml-parser
+
+ fast-xml-parser でできること
+
+XML をオブジェクトに変換する（パース）
+オブジェクトを XML に変換する（ビルド）
+XML のフォーマットを検証する（バリデーション）
+
+
+ 前提
+
+Node: 20.12.2
+fast-xml-parser: ^4.5.0
+
+
+ セットアップ
+npm i fast-xml-parser
+
+ 使い方
+
+ XML をオブジェクトに変換する（パース）
+
+index.js
+const { XMLParser } = requir...]]></description><link>https://zenn.dev/bbsfish/articles/dde8794a0be4e6</link><guid isPermaLink="true">https://zenn.dev/bbsfish/articles/dde8794a0be4e6</guid><pubDate>Thu, 12 Dec 2024 04:32:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--VTODKewH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%2520%25E3%2581%25A7%2520XML%2520%25E3%2582%2592%25E6%2589%25B1%25E3%2581%2586%2520%257C%2520NodeJS%2520%252B%2520fast-xml-parser%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Y.%2520HSD%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSS1ZeDZXOGNtbm1hTFhWM25SNC1QYnFWbTdDVkJ3RXdrT2czUlNnWjlOPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Y. HSD</dc:creator></item><item><title><![CDATA[VSCodeでJavaScriptファイル内でHTMLタグをEmmetを使って補完する]]></title><description><![CDATA[
+ 概要
+Reactなどでjavascriptファイルを編集するときに、HTMLタグ補完機能が動かず毎回イライラする＆設定方法を忘れてしまうので、備忘録として投稿します
+
+ 設定方法
+今回はJavaScriptファイル編集時にHTMLタグを補完する設定をsetting.jsonに記述します
+
+setting.json
+{
+  "emmet.includeLanguages": {
+    "javascript": "html"
+  }
+}
+
+
+ 留意点と感想
+
+毎回設定方法を忘れることは自分のZennに投稿するとよいことが最近わかりました
+検索サイトで検索しても拡張機能ばかりで毎回探す...]]></description><link>https://zenn.dev/holypotter0304/articles/2818e002722a93</link><guid isPermaLink="true">https://zenn.dev/holypotter0304/articles/2818e002722a93</guid><pubDate>Thu, 12 Dec 2024 03:30:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--c5wc77Vw--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:VSCode%25E3%2581%25A7JavaScript%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E5%2586%2585%25E3%2581%25A7HTML%25E3%2582%25BF%25E3%2582%25B0%25E3%2582%2592Emmet%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E8%25A3%259C%25E5%25AE%258C%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25BB%25E3%2582%258A%25E3%2581%25BD%25E3%2581%259F%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdkZTZlMjBlZWYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ほりぽた</dc:creator></item><item><title><![CDATA[【JavaScript】Popover APIを使ったオートコンプリート機能の作り方 (後編)]]></title><description><![CDATA[
+ 後編
+この記事は、Popover APIを使ったオートコンプリート機能の作り方 (前編)の続きです。
+前編までで、単純なオートコンプリート機能が動くようになっています。
+データは['text1', 'text2', 'text3', 'text4']をセットしているので、3文字以上データにヒットすると表示されます。
+
+後編では、次の機能を追加します。
+
+選択中の候補のハイライト表示
+キーボード操作
+
+
+ 実装
+
+ ハイライト機能の追加
+現状では候補をマウスホバーしてもハイライトされません。
+選択状態を分かりやすくするために、選択中の候補をハイライトされるようにします。
+まず最初に、c...]]></description><link>https://zenn.dev/luxiar/articles/0016c6517b4c01</link><guid isPermaLink="true">https://zenn.dev/luxiar/articles/0016c6517b4c01</guid><pubDate>Thu, 12 Dec 2024 02:30:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--c5LKuEnR--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590JavaScript%25E3%2580%2591Popover%2520API%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%259F%25E3%2582%25AA%25E3%2583%25BC%25E3%2583%2588%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AA%25E3%2583%25BC%25E3%2583%2588%25E6%25A9%259F%25E8%2583%25BD%25E3%2581%25AE%25E4%25BD%259C%25E3%2582%258A%25E6%2596%25B9%2520%2528%25E5%25BE%258C%25E7%25B7%25A8%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:ysh%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JiYmNkZDg1ZTIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%25A9%25E3%2582%25B0%25E3%2582%25B6%25E3%2582%25A4%25E3%2582%25A2%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTGVrdUVGT0xhLXgwRVVIazF5dE51cERKTC04VFlGelY3R3A0bnhfbEdQZERxRFEwZz1zOTYtYw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ysh</dc:creator></item><item><title><![CDATA[ボタンローディング表示のサイズ制御に関するTips]]></title><description><![CDATA[ボタンでローディング表示するとき、元のボタンテキストより横幅が短かったり長い内容を表示するとサイズが変わってしまう恐れがあります。
+これの対処Tipsの紹介です。
+
+ 元ネタ
+https://x.com/chronark_/status/1866779278815162376
+
+ボタン幅に固定値を与えない
+ローディング表示で切り替わってもボタン内要素の最長幅を維持
+TailwindCSSで表現
+
+
+ Wes Bosの回答（本記事の内容の90%）
+https://x.com/wesbos/status/1866895899554926912
+（TailwindCSSではなくCSSでの解説動...]]></description><link>https://zenn.dev/tell_y/articles/033b42570abea1</link><guid isPermaLink="true">https://zenn.dev/tell_y/articles/033b42570abea1</guid><pubDate>Thu, 12 Dec 2024 02:25:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7hmw4U8Z--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%259C%25E3%2582%25BF%25E3%2583%25B3%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2587%25E3%2582%25A3%25E3%2583%25B3%25E3%2582%25B0%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%25AE%25E3%2582%25B5%25E3%2582%25A4%25E3%2582%25BA%25E5%2588%25B6%25E5%25BE%25A1%25E3%2581%25AB%25E9%2596%25A2%25E3%2581%2599%25E3%2582%258BTips%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Teruhisa%2520-%2520T6ADEV%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VhNDg5NTAyZTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Teruhisa - T6ADEV</dc:creator></item><item><title><![CDATA[Angularをv15→v18にアップデートしました]]></title><description><![CDATA[!
+本記事はVoicy Advent Calendar 2024の8日目の記事です。(8日目に出すとは言っていない)
+
+
+ はじめに
+この記事では、業務でAngularアプリケーションをv15→v18にアップデートする上でやったこと、考えたことなどを書いていきたいと思います。
+
+ アップデートの背景
+プロダクト開発においてアプリケーションのフレームワークやライブラリをアップデートすることは、セキュリティリスクの解消やバグの修正、新機能の活用、パフォーマンス向上などにおいて重要だと思います。
+voicyでは現在、基本的にAngularのLTSに追従する形でアップデートを行う方針となっていま...]]></description><link>https://zenn.dev/voicy/articles/df34173a782ee4</link><guid isPermaLink="true">https://zenn.dev/voicy/articles/df34173a782ee4</guid><pubDate>Wed, 11 Dec 2024 14:16:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jwqIGl-L--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Angular%25E3%2582%2592v15%25E2%2586%2592v18%25E3%2581%25AB%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%25E3%2583%2587%25E3%2583%25BC%25E3%2583%2588%25E3%2581%2597%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:komura-c%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhiODU5ZTAwNWYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Voicy%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRiOWY5NGVjNDguanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>komura-c</dc:creator></item><item><title><![CDATA[Next.js 15.1の主なアップグレード内容]]></title><description><![CDATA[
+ はじめに
+Next.js15.1が出たので、気になった内容をまとめてみました。
+間違いなどありましたら、コメントなどで教えてください。
+https://nextjs.org/blog/next-15-1
+
+ 各種コマンド
+Next.jsの最新バージョンにアップグレードする際に、必要なコードの修正や設定変更を自動的に行います。手動で変更する手間を省く。
+npx @next/codemod@canary upgrade latest
+Next.jsプロジェクトで使われているnext、react、react-domを手動で最新バージョンに更新します。この場合、コードの修正は自分で行う必要が...]]></description><link>https://zenn.dev/ryohei0509/articles/2a653323035301</link><guid isPermaLink="true">https://zenn.dev/ryohei0509/articles/2a653323035301</guid><pubDate>Wed, 11 Dec 2024 14:13:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--KdKVXGZr--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Next.js%252015.1%25E3%2581%25AE%25E4%25B8%25BB%25E3%2581%25AA%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%25E3%2582%25B0%25E3%2583%25AC%25E3%2583%25BC%25E3%2583%2589%25E5%2586%2585%25E5%25AE%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hukuryo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc0M2JhYWM4YjIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hukuryo</dc:creator></item><item><title><![CDATA[ブラウザから1クリックでSlackに投稿できるようにした]]></title><description><![CDATA[こんにちは、TRUSTDOCKのよもぎたです。
+
+ はじめに
+ニュースやZennの記事、ブログエントリなどをSlackで共有したいと思ったことはありませんか？私はよくあります。そこで、Webブラウザから1クリックで閲覧中のページをSlackに投稿できる仕組みを作りました。この記事ではその仕組みを紹介させていただきます。
+
+ 謝辞
+このアイディアは、技術書典で出会った増井技術士事務所さんの「ブックマークレット32本ノック」という本から着想を得ています。この場を借りて深く感謝申し上げます。
+
+ 概要
+この仕組みは、Webブラウザのブックマーク／お気に入りに登録したブックマークレットを利用して...]]></description><link>https://zenn.dev/trustdock/articles/e6fe9eaacd9049</link><guid isPermaLink="true">https://zenn.dev/trustdock/articles/e6fe9eaacd9049</guid><pubDate>Wed, 11 Dec 2024 12:49:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--RkNJvTlX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2596%25E3%2583%25A9%25E3%2582%25A6%25E3%2582%25B6%25E3%2581%258B%25E3%2582%25891%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2583%25E3%2582%25AF%25E3%2581%25A7Slack%25E3%2581%25AB%25E6%258A%2595%25E7%25A8%25BF%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258B%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:th0x0472%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzEzNzA5NTQzOWYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:TRUSTDOCK%2520%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUl0YnZtbVhNVW5aT1VNSTllNE1fNnpwUTBiTUh5VkhfakJ1Z3hDckh2aTI9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>th0x0472</dc:creator></item><item><title><![CDATA[PWAマスター講座 第2部：Workboxについて]]></title><description><![CDATA[ウェブ開発者の方々、こんにちは。PWA開発シリーズの第2部です。
+入門記事 では、Service Worker の基本的な仕組みについて解説しました。実際に試してみるとわかると思いますが、キャッシュの更新、クライアントとのやり取りなど、基本的な機能を実装するにはかなりのコード量が必要になります。
+今回は、Workbox というライブラリを活用することで、PWA開発を大幅に効率化します。
+コード例や細かい点もたくさんあるので、どうぞご辛抱ください（そして美味しい何かを片手に）。
+この記事では、今後のPWA開発で活用できる、Workbox の包括的なリファレンスを目指します。
+
+
+ Work...]]></description><link>https://zenn.dev/sun_asterisk/articles/409dc5b57e0fbd</link><guid isPermaLink="true">https://zenn.dev/sun_asterisk/articles/409dc5b57e0fbd</guid><pubDate>Wed, 11 Dec 2024 09:52:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9EwTrO9m--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:PWA%25E3%2583%259E%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%25BC%25E8%25AC%259B%25E5%25BA%25A7%2520%25E7%25AC%25AC2%25E9%2583%25A8%25EF%25BC%259AWorkbox%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2583%2587%25E3%2583%25AB%25E3%2583%2593%25E3%2583%25B3%2520%25E3%2582%25A2%25E3%2583%25AB%25E3%2583%2581%25E3%2583%25A7%25E3%2583%25A0%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M1YTU0ZjZiM2MuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Sun%252A%2520Developers%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRkNTVlY2IwMTMuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>デルビン アルチョム</dc:creator></item><item><title><![CDATA[pnpmコマンド第一引数はこのように探索される]]></title><description><![CDATA[最近、pnpmを使い始めた。pnpmを使っているリポジトリを訪問しては、こんなふうに使うんだなと眺めている。
+（pnpm build …ほうほう、package.jsonのscriptsセクションを見てくれるんだな）
+（ということは、第一引数はpnpmのコマンドとは限らないのだ。「そんなコマンドがあるのか」などと思ってはいけないのだな。これはどのように解釈されるのか分かってないと読みづらい）
+というわけで第一引数の解釈を整頓した。
+
+ 解釈の概要
+結論から言うとこうだ。
+第一引数 &lt;firstArg&gt; は
+
+まずはpnpmのコマンドを探す。あったら実行する
+次にpackage...]]></description><link>https://zenn.dev/aromarious/articles/pnpm-command-discovery</link><guid isPermaLink="true">https://zenn.dev/aromarious/articles/pnpm-command-discovery</guid><pubDate>Wed, 11 Dec 2024 09:28:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4Guxo56A--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:pnpm%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E7%25AC%25AC%25E4%25B8%2580%25E5%25BC%2595%25E6%2595%25B0%25E3%2581%25AF%25E3%2581%2593%25E3%2581%25AE%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E6%258E%25A2%25E7%25B4%25A2%25E3%2581%2595%25E3%2582%258C%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:aromarious%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RmMTIwZjRiODEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>aromarious</dc:creator></item><item><title><![CDATA[【GSAP】GSAP Practice【#7 GSAP Timeline】]]></title><description><![CDATA[
+ 【#7 GSAP Timeline】
+YouTube: https://youtu.be/zw5vOme3dZw
+https://youtu.be/zw5vOme3dZw
+今回は「Timeline」について解説していきます。
+https://gsap.com/docs/v3/GSAP/Timeline/
+
+js/main.js
+// use a script tag or an external JS file
+document.addEventListener("DOMContentLoaded", (event) =&gt; {
+  gsap.registerPlugin(Scr...]]></description><link>https://zenn.dev/web_life_ch/articles/d7b640c5195874</link><guid isPermaLink="true">https://zenn.dev/web_life_ch/articles/d7b640c5195874</guid><pubDate>Wed, 11 Dec 2024 04:52:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--DXZOZEpX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590GSAP%25E3%2580%2591GSAP%2520Practice%25E3%2580%2590%25237%2520GSAP%2520Timeline%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Web%2520Life%2520CH%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUl0YnZtbWNjTWFMM3dyd2x3VE5sVVZjTlhmZHEzZzF2QnJfMUJMSkJrN049czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Web Life CH</dc:creator></item><item><title><![CDATA[Memoizationとは？]]></title><description><![CDATA[参考サイト
+https://janhesters.com/blog/what-is-memoization-in-javascript-typescript
+
+ Memoizationとは？
+Memoization（メモ化）とは、関数の結果を**キャッシュ（保存）**しておき、同じ入力値で関数が呼び出されたときに保存された値を再利用する最適化手法です。これにより、不要な繰り返し計算を避け、パフォーマンスを大幅に向上させることができます。
+簡単に言えば、**「同じ質問を何度もせず、一度計算した答えを覚えておこう」**という概念です。
+
+ なぜ必要なのでしょうか？
+次のような状況でMemoi...]]></description><link>https://zenn.dev/sunnyheee/articles/5c58c0cc39c147</link><guid isPermaLink="true">https://zenn.dev/sunnyheee/articles/5c58c0cc39c147</guid><pubDate>Wed, 11 Dec 2024 01:50:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--yZLmQwCD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:Memoization%25E3%2581%25A8%25E3%2581%25AF%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25BD%25E3%2583%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0ZG1Ec0lUUDNzcXVpOVg0c0ZGUmFTRF9zYzVXUlJJbmVQRFdsVnM9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ソニ</dc:creator></item><item><title><![CDATA[ENCA 11日目: SharedArrayBuffer のオプショナル化]]></title><description><![CDATA[!
+この記事は 1人 ECMAScript Normative Changes Advent Calendar 2024 の 11 日目です。
+
+
+ SharedArrayBuffer のオプショナル化
+ES2017 に満を持して入った SharedArrayBuffer でしたが、その後 CPU の投機的実行を悪用した Spectre 脆弱性が発見されてしまい、攻撃を緩和するために高精度に時間が測定できる performance.now() の精度が落とされ、SharedArrayBuffer が無効化されてしまうこととなりました。
+詳しくは jxck さんのブログ記事を参考にしてくだ...]]></description><link>https://zenn.dev/pixiv/articles/3868164a6a2d99</link><guid isPermaLink="true">https://zenn.dev/pixiv/articles/3868164a6a2d99</guid><pubDate>Tue, 10 Dec 2024 20:39:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--NY6AbYgM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ENCA%252011%25E6%2597%25A5%25E7%259B%25AE%253A%2520SharedArrayBuffer%2520%25E3%2581%25AE%25E3%2582%25AA%25E3%2583%2597%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%258A%25E3%2583%25AB%25E5%258C%2596%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:petamoriken%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZhMDc3ZWRhZTMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:pixiv%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzMzODlhMzQ2ZjQuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>petamoriken</dc:creator></item></channel></rss>

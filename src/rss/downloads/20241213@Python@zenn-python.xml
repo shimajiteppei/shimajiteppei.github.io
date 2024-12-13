@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Fri, 13 Dec 2024 09:02:35 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Python loggingモジュールの内部構造]]></title><description><![CDATA[
+ はじめに
+Pythonの標準ライブラリである logging モジュールは強力かつ柔軟なロギングツールですが、複雑な内部構造ゆえに予期しない挙動や問題に直面することがあります。本記事では、loggingモジュールの内部構造を理解することを目指します。
+
+ コンポーネント
+loggingモジュールは複数のコンポーネントから構成されていて、それぞれが特定の役割を担っています。以下では Manager, Logger, Handler, Filter, Formatter および LogRecord について説明します。
+
+ Manager
+Manager は Logger の取得と管理を...]]></description><link>https://zenn.dev/taka256/articles/5d714229bc8d44</link><guid isPermaLink="true">https://zenn.dev/taka256/articles/5d714229bc8d44</guid><pubDate>Fri, 13 Dec 2024 08:33:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--FAAib54M--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%2520logging%25E3%2583%25A2%25E3%2582%25B8%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%25AE%25E5%2586%2585%25E9%2583%25A8%25E6%25A7%258B%25E9%2580%25A0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:taka256%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I4OGU3OGJkYWQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>taka256</dc:creator></item><item><title><![CDATA[Aurora Serverless v2の待機インスタンス0検証 〜本当にコスト最適化できるのか〜]]></title><description><![CDATA[
+ はじめに
+AWS Aurora Serverless v2において、待機インスタンスを0に設定できるようになりました。
+これにより、完全なサーバーレス運用が可能となり、コスト最適化の新たな選択肢となりました。
+本記事では、実際にどの程度の起動時間がかかるのか、実用に耐えうるのかを検証していきます。
+
+ 検証環境
+
+Aurora Serverless v2 (MySQL 8.0互換)
+最小ACU: 0
+最大ACU: 1
+リージョン: ap-northeast-1（東京）
+テストデータ: MySQL公式提供の「Worldデータベース」
+
+内容: 国、都市、言語に関するデータ
+ダウンロード...]]></description><link>https://zenn.dev/carenet/articles/5718ed00e74379</link><guid isPermaLink="true">https://zenn.dev/carenet/articles/5718ed00e74379</guid><pubDate>Fri, 13 Dec 2024 07:29:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jwzLlyuL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Aurora%2520Serverless%2520v2%25E3%2581%25AE%25E5%25BE%2585%25E6%25A9%259F%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%25B3%25E3%2582%25B90%25E6%25A4%259C%25E8%25A8%25BC%2520%25E3%2580%259C%25E6%259C%25AC%25E5%25BD%2593%25E3%2581%25AB%25E3%2582%25B3%25E3%2582%25B9%25E3%2583%2588%25E6%259C%2580%25E9%2581%25A9%25E5%258C%2596%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258B%25E3%2581%25AE%25E3%2581%258B%25E3%2580%259C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:toshihide%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE0MTRiZmIwZWQuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:CareNet%2520Engineers%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUVkRlRwNzNRMUp6WTk2Vlk1YmR4R2RyVVFETEhrSVpBN1h1c250Zkp5SFI9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>toshihide</dc:creator></item><item><title><![CDATA[【Python】コード品質を保ための環境構築@Vscode]]></title><description><![CDATA[
+ はじめに
+pythonでの開発時していると、「関数の入力の型が合っているかわからない」「いつの間にか不要なimportがある」などコードが煩雑になっていくことがあると思います。
+気をつけたいと思う一方で、そこまで考えていると開発が進まなかったりします。
+そこで、簡単な設定でvscodeが自動的に品質を保てる方法を紹介します！
+
+ 対象読者
+
+pythonで開発をしている人
+コード品質を考えていた人
+複数人で開発する必要がある人
+
+
+ 記事を読むメリット
+
+一定の品質を保ったコードを書ける
+
+
+ 結論
+
+簡単な設定でVscodeにコードチェックをしてもらえる！
+
+!
+uvを利用すること...]]></description><link>https://zenn.dev/tobiuo/articles/786767bd137444</link><guid isPermaLink="true">https://zenn.dev/tobiuo/articles/786767bd137444</guid><pubDate>Fri, 13 Dec 2024 04:41:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Wq0qxcwF--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E5%2593%2581%25E8%25B3%25AA%25E3%2582%2592%25E4%25BF%259D%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%2540Vscode%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tobiuo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAzYTkwNjkzOWYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tobiuo</dc:creator></item><item><title><![CDATA[ArduinoとRaspberry Piで心拍数と湿度に応じた照明制御を実現した]]></title><description><![CDATA[群馬イノベーションアワードのファイナル審査で使用するために、Arduino Uno R3とRaspberry Piを組み合わせ、心拍数と湿度のデータに基づいてPhilips Hue Goの照明色を制御するプロジェクト「KokoroColor」を開発しました。本記事では、その構成と設定方法について詳しく解説します。
+
+ プロジェクトの概要
+KokoroColorは、Arduino Uno R3で取得した心拍数と湿度のデータをRaspberry Piに送信し、Raspberry Piがそのデータを解析してBLE（Bluetooth Low Energy）を介してPhilips Hue Goの...]]></description><link>https://zenn.dev/take000709/articles/4c53cbef32feb6</link><guid isPermaLink="true">https://zenn.dev/take000709/articles/4c53cbef32feb6</guid><pubDate>Fri, 13 Dec 2024 04:24:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--p3nySisl--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Arduino%25E3%2581%25A8Raspberry%2520Pi%25E3%2581%25A7%25E5%25BF%2583%25E6%258B%258D%25E6%2595%25B0%25E3%2581%25A8%25E6%25B9%25BF%25E5%25BA%25A6%25E3%2581%25AB%25E5%25BF%259C%25E3%2581%2598%25E3%2581%259F%25E7%2585%25A7%25E6%2598%258E%25E5%2588%25B6%25E5%25BE%25A1%25E3%2582%2592%25E5%25AE%259F%25E7%258F%25BE%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259F%25E3%2581%2591%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS2FTNlFYeU93amE2aFQ5YVI5RWU2OURwby0tN3ZFMDJkUEZVOUZYVV95bHJLNzZHQ3I9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>たけ</dc:creator></item><item><title><![CDATA[pytestカバレッジをプルリクエストのコメントに表示する]]></title><description><![CDATA[
+ 導入経緯
+Specteeでエンジニアをしている和山です。
+プルリクエストのレビューにおいて、単体テストコードの妥当性を確認することは重要な観点の一つです。その際、カバレッジの確認が目安として活用されることがあります。
+しかし、現状ではカバレッジを確認するために、ローカル環境で実行して出力を確認するか、GitHub Actionsの履歴を参照する必要があり、レビューに必要な手順や時間が増加するという課題が発生していました。
+この問題を解決するために、 プルリクエストのコメントに pytest のカバレッジ結果を自動的に表示する仕組みを導入しました。 この仕組みにより、開発プロセスの透明...]]></description><link>https://zenn.dev/spectee/articles/spectee-pytest-pr-comment</link><guid isPermaLink="true">https://zenn.dev/spectee/articles/spectee-pytest-pr-comment</guid><pubDate>Fri, 13 Dec 2024 04:18:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--rVovJpzh--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:pytest%25E3%2582%25AB%25E3%2583%2590%25E3%2583%25AC%25E3%2583%2583%25E3%2582%25B8%25E3%2582%2592%25E3%2583%2597%25E3%2583%25AB%25E3%2583%25AA%25E3%2582%25AF%25E3%2582%25A8%25E3%2582%25B9%25E3%2583%2588%25E3%2581%25AE%25E3%2582%25B3%25E3%2583%25A1%25E3%2583%25B3%25E3%2583%2588%25E3%2581%25AB%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:N.Wayama%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzkwYzYyY2ZlNDQuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Spectee%2520Developers%2520Blog%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhkY2ZhN2VlNzguanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>N.Wayama</dc:creator></item><item><title><![CDATA[【後編】マリオカート自動集計Botを作成した話]]></title><description><![CDATA[
+ はじめに
+!
+この記事は「ハックツ &amp; YOSHINANI 合同アドベントカレンダー Advent Calendar 2024」の13日目です。
+
+株式会社ハックツ エンジニアのあいでんです。
+本記事は【前編】マリオカート自動集計Botを作成した話の続編となります。前回はOBS WebSocketとChatGPTを活用することで、ゲーム画面を取得して文字起こしを行う機能を作成しました。
+現状のままでは文字起こしを手動で発火させる必要があり、アプリとしてとても使いづらいです。
+完全自動化を実現するためには、OBS WebSocketから取得した画像がリザルト画面を含んでいるかを...]]></description><link>https://zenn.dev/hackz/articles/8044f0a41dd72e</link><guid isPermaLink="true">https://zenn.dev/hackz/articles/8044f0a41dd72e</guid><pubDate>Fri, 13 Dec 2024 03:16:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--s6cJCnL_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%25BE%258C%25E7%25B7%25A8%25E3%2580%2591%25E3%2583%259E%25E3%2583%25AA%25E3%2582%25AA%25E3%2582%25AB%25E3%2583%25BC%25E3%2583%2588%25E8%2587%25AA%25E5%258B%2595%25E9%259B%2586%25E8%25A8%2588Bot%25E3%2582%2592%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2597%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%2582%25E3%2581%2584%25E3%2581%25A7%25E3%2582%2593%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2YzNjQxNzY2YWMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Hackz%2520Inc.%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhlYjE4YWFmMTMuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>あいでん</dc:creator></item><item><title><![CDATA[RAGを使った自前Chatbot構築入門：社内ドキュメントを賢く活用する方法]]></title><description><![CDATA[
+ 導入
+昨今、大規模言語モデル（LLM）を用いたチャットボットが注目される中で、ChatGPTやBing、Bardなどの汎用モデルに加え、組織特有のナレッジを反映した「自前ChatBot」を構築したい場面が増えています。ここで最近話題の実装方法としてRAG（Retrieval-Augmented Generation）が注目されています。
+RAGは、LLMによる回答生成（Generation）の前に、外部データを検索・参照（Retrieval）するステップを組み込むことで、モデルが与えられた独自データを最新情報として活用し、根拠を明示した回答を可能にします。これにより、例えば社内ドキュ...]]></description><link>https://zenn.dev/jay_explolar/articles/b42cfc866d3ffd</link><guid isPermaLink="true">https://zenn.dev/jay_explolar/articles/b42cfc866d3ffd</guid><pubDate>Fri, 13 Dec 2024 00:44:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Sf6FexE3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:RAG%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%259F%25E8%2587%25AA%25E5%2589%258DChatbot%25E6%25A7%258B%25E7%25AF%2589%25E5%2585%25A5%25E9%2596%2580%25EF%25BC%259A%25E7%25A4%25BE%25E5%2586%2585%25E3%2583%2589%25E3%2582%25AD%25E3%2583%25A5%25E3%2583%25A1%25E3%2583%25B3%25E3%2583%2588%25E3%2582%2592%25E8%25B3%25A2%25E3%2581%258F%25E6%25B4%25BB%25E7%2594%25A8%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yuto%2520in%2520Sydney%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTGNzeERxbjdDbktmQ3VzcWR6OU9qeGRPWmIzNGYwWG5vVmhiUDB6Y2lROWNxYXY5VWU9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yuto in Sydney</dc:creator></item><item><title><![CDATA[Pythonを使った一元配置分散分析(ANOVA)で統計解析]]></title><description><![CDATA[
+ はじめに
+こんにちは、D2Cデータサイエンティストの郷原です。
+データ分析を行う際に、aとbとcの平均値を比較してaが一番大きかったけど、これは他の二つと比べて有意な差があると言えるのだろうか？
+こんな疑問を持ったことはないでしょうか？
+上記のような疑問を統計的に検証することができるのが分散分析(ANOVA)です。
+本記事では、１つの因子による平均値の差を分析する「一元配置分散分析」について、Pythonを使って試してみようと思います。
+
+ 一元配置分散分析とは
+一元配置分散分析（ANOVA, Analysis of Variance）は、複数のグループの平均値を比較し、それらの違い...]]></description><link>https://zenn.dev/d2c_mtech_blog/articles/91061a1406e9de</link><guid isPermaLink="true">https://zenn.dev/d2c_mtech_blog/articles/91061a1406e9de</guid><pubDate>Fri, 13 Dec 2024 00:36:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--sLB5SzTq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%259F%25E4%25B8%2580%25E5%2585%2583%25E9%2585%258D%25E7%25BD%25AE%25E5%2588%2586%25E6%2595%25A3%25E5%2588%2586%25E6%259E%2590%2528ANOVA%2529%25E3%2581%25A7%25E7%25B5%25B1%25E8%25A8%2588%25E8%25A7%25A3%25E6%259E%2590%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:D2C%2520%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%25B5%25E3%2582%25A4%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2586%25E3%2582%25A3%25E3%2582%25B9%25E3%2583%2588%2520%25E9%2583%25B7%25E5%258E%259F%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJmZTIyZmYyMWQuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:D2C%2520m-tech%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2IyZjdkMDVkNmIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>D2C データサイエンティスト 郷原</dc:creator></item><item><title><![CDATA[Houdini: 複数のジオメトリをロードするHDAのご紹介]]></title><description><![CDATA[もうアドベントカレンダーの季節とか嘘でしょう…？（2回目）
+気を取り直して皆さんいかがお過ごしでしょう。僕は今年もHoudini三昧の毎日でした。
+今回は複数のジオメトリをロードするHDAの作り方についてお話をしたいと思います。
+本記事はHoudiniアドベントカレンダー2024 13日目の記事です。
+
+ データ配布
+HDAダウンロード
+
+ ツール制作の背景とその特徴
+大量のジオメトリを読み込んで確認したいこと、頻繁にありますね。PDGなどを利用してバッチ処理でジオメトリを生成している場合などはなおさらです。
+本ツールは下記特徴をもったツールとなります。
+
+任意のディレクトリにあるジオメ...]]></description><link>https://zenn.dev/kickbase/articles/8cb3faabe53b7a</link><guid isPermaLink="true">https://zenn.dev/kickbase/articles/8cb3faabe53b7a</guid><pubDate>Fri, 13 Dec 2024 00:36:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ghPP5nLU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Houdini%253A%2520%25E8%25A4%2587%25E6%2595%25B0%25E3%2581%25AE%25E3%2582%25B8%25E3%2582%25AA%25E3%2583%25A1%25E3%2583%2588%25E3%2583%25AA%25E3%2582%2592%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2589%25E3%2581%2599%25E3%2582%258BHDA%25E3%2581%25AE%25E3%2581%2594%25E7%25B4%25B9%25E4%25BB%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2581%25E3%2582%2593%25E3%2581%259F%25E3%2581%2584%25E3%2581%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pvTlNrRXEtOVdEUlNaa2dKcFBxeFlFZGpZTm5TcGl3SzFUeXZOPXMyNTAtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>めんたいこ</dc:creator></item><item><title><![CDATA[ペルソナ対話文を文埋め込みモデルで可視化する 〜ペルソナは文埋め込み空間上で観察できるか？〜]]></title><description><![CDATA[!
+本記事はCyberAgent 26th Fresh Engineer's Advent Calendar 2024の13日目の記事です。
+あくまで内定者たち主催であり、有志で行っていることをご承知おきください。
+
+https://qiita.com/advent-calendar/2024/ca-26th
+
+ はじめに
+u-hyszkと申します！
+本記事では、文埋め込みモデルと自然言語処理において人や人格を表すペルソナの概念についてご紹介します。
+また、ペルソナ対話文を文埋め込みモデルで可視化するという簡単な定性分析を通して、実際の利用例もご紹介します。
+
+ 文埋め込みとは？
+自然言...]]></description><link>https://zenn.dev/u_hyszk/articles/0e167ffb2146c6</link><guid isPermaLink="true">https://zenn.dev/u_hyszk/articles/0e167ffb2146c6</guid><pubDate>Thu, 12 Dec 2024 22:21:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fVXBbkz5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%259A%25E3%2583%25AB%25E3%2582%25BD%25E3%2583%258A%25E5%25AF%25BE%25E8%25A9%25B1%25E6%2596%2587%25E3%2582%2592%25E6%2596%2587%25E5%259F%258B%25E3%2582%2581%25E8%25BE%25BC%25E3%2581%25BF%25E3%2583%25A2%25E3%2583%2587%25E3%2583%25AB%25E3%2581%25A7%25E5%258F%25AF%25E8%25A6%2596%25E5%258C%2596%25E3%2581%2599%25E3%2582%258B%2520%25E3%2580%259C%25E3%2583%259A%25E3%2583%25AB%25E3%2582%25BD%25E3%2583%258A%25E3%2581%25AF%25E6%2596%2587%25E5%259F%258B%25E3%2582%2581%25E8%25BE%25BC%25E3%2581%25BF%25E7%25A9%25BA%25E9%2596%2593%25E4%25B8%258A%25E3%2581%25A7%25E8%25A6%25B3%25E5%25AF%259F%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258B%25E3%2581%258B%25EF%25BC%259F%25E3%2580%259C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:u-hyszk%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzYyYjFjZTJjZGEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>u-hyszk</dc:creator></item><item><title><![CDATA[asyncioでなんちゃってリアルタイム音声対話システム]]></title><description><![CDATA[
+ 概要
+この記事ではasyncioの基本的な機能を使った処理例を紹介したのちに、なんちゃってリアルタイム音声対話システムの実装例を載せます。
+OpenAIのwhisper, TTS, および gpt-4oのREST APIのみを使用してどこまでいけるか挑戦しました（Real-Time APIは使ってません）。
+とても楽しかったです。
+実装方法も今回のものがベストではなくもっといい実装方法があるはず・・・！
+asyncioは同じものを色んな方法で実装できるから面白いヨネ。
+以下デモになります〜（音声収録が適当で大きかったり小さかったりしてます。）：
+デモ１
+https://youtu.b...]]></description><link>https://zenn.dev/4731/articles/f570e25b9279a5</link><guid isPermaLink="true">https://zenn.dev/4731/articles/f570e25b9279a5</guid><pubDate>Thu, 12 Dec 2024 22:00:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8-lMHhk_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:asyncio%25E3%2581%25A7%25E3%2581%25AA%25E3%2582%2593%25E3%2581%25A1%25E3%2582%2583%25E3%2581%25A3%25E3%2581%25A6%25E3%2583%25AA%25E3%2582%25A2%25E3%2583%25AB%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25A0%25E9%259F%25B3%25E5%25A3%25B0%25E5%25AF%25BE%25E8%25A9%25B1%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25A4%25AA%25E9%2583%258E%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSWdEcHlXY2NqQUphamJlVzdJQi1hWmxsVmJIUms4Q0tRNnFMN0NTUFNpMGlpanZRPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>太郎</dc:creator></item><item><title><![CDATA[技術ブログを読む習慣を身につけるための第一歩]]></title><description><![CDATA[
+ 背景
+こんにちは！株式会社ハウテレビジョンで外資就活ドットコムの開発をしているohiraです。
+突然ですが、皆さんは日々の生活の中で技術ブログを読んでいますか？
+私は正直、そこまで読めていません…。
+でも、業務中やプライベートで技術的な課題に直面したときに、早く解決するためには「知見の引き出しの多さ」がとても重要だと感じています。その引き出しを増やすには、やはり技術ブログを定期的に読むことが有効ですよね。
+とはいえ、業務時間外はどうしても趣味に時間を使ってしまいがちです。そこで、「通勤時間などのスキマ時間を活用して読もう！」と決意しても、気がつけば音楽や動画に夢中になってしまうことが...]]></description><link>https://zenn.dev/howtelevision/articles/4b717a23726a0b</link><guid isPermaLink="true">https://zenn.dev/howtelevision/articles/4b717a23726a0b</guid><pubDate>Thu, 12 Dec 2024 22:00:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--D8B5WysG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%258A%2580%25E8%25A1%2593%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%25E3%2582%2592%25E8%25AA%25AD%25E3%2582%2580%25E7%25BF%2592%25E6%2585%25A3%25E3%2582%2592%25E8%25BA%25AB%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2591%25E3%2582%258B%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%25E7%25AC%25AC%25E4%25B8%2580%25E6%25AD%25A9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:ohira%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQxOGZkMjNmZGQuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:HowTelevision%2520Enginee...%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg1ZjBlMmRkNWUuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ohira</dc:creator></item><item><title><![CDATA[先生に急にアプリ開発振られた話]]></title><description><![CDATA[
+ 自己紹介
+年齢：中１
+成績：悪
+夢：エンジニアになりたい。いまはエンジニアのまねっこ。
+得意言語：python
+
+ どうしてこうなった
+どうしてこうなったかというと、うちの学校には講義が定期的に行われる。そこで先生のPCを選ぶという企画で、ついでにPythonとかいろいろ紹介してたら講義の管理アプリ作ってとか言われた。
+
+ いろいろ決める
+
+ 言語決め
+
+ 無謀な挑戦
+使う言語は得意なPythonで挑もうと思い、（無謀）無理やり通そうと思ったけど、苦戦して、無理だったぁぁ
+
+ 無謀な挑戦その２
+言語はDart。なにもわからない。(無謀)他は同じ。
+なんでDartにしたかというと、学校...]]></description><link>https://zenn.dev/finou882/articles/9bb2a8896f5f86</link><guid isPermaLink="true">https://zenn.dev/finou882/articles/9bb2a8896f5f86</guid><pubDate>Thu, 12 Dec 2024 13:30:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--QQI0IUIn--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2585%2588%25E7%2594%259F%25E3%2581%25AB%25E6%2580%25A5%25E3%2581%25AB%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E9%2596%258B%25E7%2599%25BA%25E6%258C%25AF%25E3%2582%2589%25E3%2582%258C%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:finou882%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdhNWVlNTcwYjIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>finou882</dc:creator></item><item><title><![CDATA[microCMS Python SDK ユースケースアイデア]]></title><description><![CDATA[この記事は microCMSでこんなことができた！あなたのユースケースを大募集 by microCMS - Qiita Advent Calendar 2024 シリーズ 1の12月12日の記事です。
+前回の記事は、@14kwさんの microCMSのコンテンツをSpreadsheetから一括更新する でした。
+実際に活用している現場での一括編集、一覧性の課題について技術で解決されている記事でしたし、feedback について触れられていたので、せっかくだから microCMS のコミュニティ Discord で議論してみても良いのではないかと思いました。
+タイトルにあるとおり、今回はユ...]]></description><link>https://zenn.dev/tkm/articles/microcms-python-sdk-usecases</link><guid isPermaLink="true">https://zenn.dev/tkm/articles/microcms-python-sdk-usecases</guid><pubDate>Thu, 12 Dec 2024 12:26:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--YbDWWAi_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:microCMS%2520Python%2520SDK%2520%25E3%2583%25A6%25E3%2583%25BC%25E3%2582%25B9%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B9%25E3%2582%25A2%25E3%2582%25A4%25E3%2583%2587%25E3%2582%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:zztkm%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E4NjVjZmRlNDQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>zztkm</dc:creator></item><item><title><![CDATA[Raspberry Piに接続したマトリックスLEDにProcessingで作ったアニメーションを表示させる]]></title><description><![CDATA[
+ はじめに
+Processingはビジュアルアートやインタラクティブな作品を作ることができるプログラミング環境です。
+プログラミング初心者でも基本的な文法を学ぶだけでグラフィックの描画が簡単にできるので、幅広い層に使われています。
+オリジナルのProcessingはJavaで動作しますが、JavaScriptやPythonの実装などもあります。
+また、最近マトリックスLEDを使ったサイネージを多く見かけます。広告用の大型ディスプレイはもちろんアート作品にも多く用いられています。
+マトリックスLEDは発色が良く、応答性も高いため、非常に表現力があります。たとえばこのような作品があります。...]]></description><link>https://zenn.dev/nobkat/articles/005matrix-led</link><guid isPermaLink="true">https://zenn.dev/nobkat/articles/005matrix-led</guid><pubDate>Thu, 12 Dec 2024 11:55:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---tiIVMzS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Raspberry%2520Pi%25E3%2581%25AB%25E6%258E%25A5%25E7%25B6%259A%25E3%2581%2597%25E3%2581%259F%25E3%2583%259E%25E3%2583%2588%25E3%2583%25AA%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25B9LED%25E3%2581%25ABProcessing%25E3%2581%25A7%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%25E3%2582%25A2%25E3%2583%258B%25E3%2583%25A1%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%2592%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2595%25E3%2581%259B%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Nobkat%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUVkRlRwNU5OOW1ZNXkzNFpUNkhMdlNGS1RPR3kxWFh1WmdqNGJYcHpNVWt1aTA9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Nobkat</dc:creator></item><item><title><![CDATA[pythonでコマンドライン引数を使う方法（入門）]]></title><description><![CDATA[
+ はじめに
+Pythonでコマンドライン引数を指定してプログラムを実行したい場合があります．
+Pythonの標準ライブラリには，コマンドライン引数を処理するためのargparseモジュールが用意されています．
+今回は，argparseモジュールの簡単な使い方について説明します．
+
+ argparseモジュールの簡単な使い方
+以下がサンプルコードです．
+
+example.py
+import argparse
+
+# ArgumentParserの例を作成
+parser = argparse.ArgumentParser(description="Example script")
+
+# オプ...]]></description><link>https://zenn.dev/enken/articles/enken-python-argparse</link><guid isPermaLink="true">https://zenn.dev/enken/articles/enken-python-argparse</guid><pubDate>Thu, 12 Dec 2024 11:21:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8dRFUqNM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:python%25E3%2581%25A7%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%25B3%25E5%25BC%2595%25E6%2595%25B0%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%25E6%2596%25B9%25E6%25B3%2595%25EF%25BC%2588%25E5%2585%25A5%25E9%2596%2580%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:enken%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSUZUUk1GUjNZZS1Mb2lhQWg4TFo4SXVCV2laWGNxZmo2NEpzdjh5S3poR0k5VXMyaz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>enken</dc:creator></item><item><title><![CDATA[OpenAI APIを活用して元からある項目を元に新しい項目を追加してみた！]]></title><description><![CDATA[こんにちは！今回は、PythonとOpenAIのAPIを使って、元からある項目を読み込ませた上で、新しい情報を追加する方法について解説していきます！
+今回の記事の例として、CSVデータにある商品名カラムから、「季節フラグ」を追加する方法を紹介します。
+例えば、「浴衣」なら夏、「ニット」なら秋冬といった感じで商品に合った季節のフラグを付けたいこと、ありませんか？手作業だと面倒なので、OpenAI APIを活用して効率化してみました！
+
+
+ やりたいこと
+
+商品リスト（CSV形式）を用意
+OpenAI APIに「商品名から季節フラグを生成して！」とお願い
+最終的に、以下のような形のCSVを出...]]></description><link>https://zenn.dev/jay_explolar/articles/6eea38f5a6a3f9</link><guid isPermaLink="true">https://zenn.dev/jay_explolar/articles/6eea38f5a6a3f9</guid><pubDate>Thu, 12 Dec 2024 09:39:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--UPMPkX1i--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:OpenAI%2520API%25E3%2582%2592%25E6%25B4%25BB%25E7%2594%25A8%25E3%2581%2597%25E3%2581%25A6%25E5%2585%2583%25E3%2581%258B%25E3%2582%2589%25E3%2581%2582%25E3%2582%258B%25E9%25A0%2585%25E7%259B%25AE%25E3%2582%2592%25E5%2585%2583%25E3%2581%25AB%25E6%2596%25B0%25E3%2581%2597%25E3%2581%2584%25E9%25A0%2585%25E7%259B%25AE%25E3%2582%2592%25E8%25BF%25BD%25E5%258A%25A0%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yuto%2520in%2520Sydney%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTGNzeERxbjdDbktmQ3VzcWR6OU9qeGRPWmIzNGYwWG5vVmhiUDB6Y2lROWNxYXY5VWU9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yuto in Sydney</dc:creator></item><item><title><![CDATA[uvを用いてfairseqをeditableインストールする]]></title><description><![CDATA[
+ はじめに
+研究でfairseqを利用する際に、pipではなくuvでeditableインストールする方法がわからず詰まったので、動いた記録を共有します。
+uvはpythonのバージョン管理からパッケージ管理まで行える便利なツールです。
+利用を開始する際は以下の記事がわかりやすいです。
+https://zenn.dev/turing_motors/articles/594fbef42a36ee
+!
+この記事ではまっさらなディレクトから初めてfairseqで生成を行うところまでを扱います。
+
+
+ 作業手順
+
+ プロジェクトの準備
+# ディレクトリの準備
+mkdir fairseq_test...]]></description><link>https://zenn.dev/suzuhiki/articles/3fc7a34f42b0ee</link><guid isPermaLink="true">https://zenn.dev/suzuhiki/articles/3fc7a34f42b0ee</guid><pubDate>Thu, 12 Dec 2024 09:00:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2O_AiaiU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:uv%25E3%2582%2592%25E7%2594%25A8%25E3%2581%2584%25E3%2581%25A6fairseq%25E3%2582%2592editable%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2599%25E3%2581%259A%25E3%2581%25B2%25E3%2581%258D%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzMzM2RkMzVhZjIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>すずひき</dc:creator></item><item><title><![CDATA[Pythonで簡単に作れる！Pygameを使ったピンポンゲームの作り方]]></title><description><![CDATA[
+ はじめに
+こんにちは！今回はPythonで簡単にピンポンゲームを作成する方法を紹介します。pygameライブラリを使えば、初心者でも手軽にゲームを作ることができます。それでは、早速始めましょう！
+
+ Pygameのインストール
+まずは、pygameライブラリをインストールします。以下のコマンドをターミナルで実行してください。
+pip install pygame
+
+ ゲームプログラムを書く
+import pygame
+import sys
+
+# pygameを初期化
+pygame.init()
+
+# 画面の設定
+screen_width = 800
+screen_height = 6...]]></description><link>https://zenn.dev/mstng/articles/9d1c5c08ad734c</link><guid isPermaLink="true">https://zenn.dev/mstng/articles/9d1c5c08ad734c</guid><pubDate>Thu, 12 Dec 2024 06:09:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--myJaPUu6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A7%25E7%25B0%25A1%25E5%258D%2598%25E3%2581%25AB%25E4%25BD%259C%25E3%2582%258C%25E3%2582%258B%25EF%25BC%2581Pygame%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%259F%25E3%2583%2594%25E3%2583%25B3%25E3%2583%259D%25E3%2583%25B3%25E3%2582%25B2%25E3%2583%25BC%25E3%2583%25A0%25E3%2581%25AE%25E4%25BD%259C%25E3%2582%258A%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mstng%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSlVrUWI4S2o0cnl1WHhNZ1FBeXJleTFmOW5JTW1iRmN6UVRzaC1YYk1udWQtNEotYkF2Zz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mstng</dc:creator></item><item><title><![CDATA[小さな文字の集合体で、文字を表現する技法のはなし]]></title><description><![CDATA[
+ 掛け軸をみて、小さな文字を集合体のようにして、一つの一つの文字を書くような技法があることをしりました。pythonで、作ってみたのでコードを共有します。
+
+こんにちはでこんにちはを書く
+動作環境はwindowsですが、フォントパスなど変更すればなんでも動くかと思います。githubでは、小さな文字の集合体を、右からPrintする手法（縦書き用）の手法も紹介しています。よろしければご覧ください。
+https://github.com/kawaguchiatsushi/python_text_Aggregation.git
+import PIL.Image
+import PIL.Imag...]]></description><link>https://zenn.dev/kawaguchiatsuhi/articles/3ca5cecf08a9f2</link><guid isPermaLink="true">https://zenn.dev/kawaguchiatsuhi/articles/3ca5cecf08a9f2</guid><pubDate>Wed, 11 Dec 2024 16:36:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3Y313xcP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%25B0%258F%25E3%2581%2595%25E3%2581%25AA%25E6%2596%2587%25E5%25AD%2597%25E3%2581%25AE%25E9%259B%2586%25E5%2590%2588%25E4%25BD%2593%25E3%2581%25A7%25E3%2580%2581%25E6%2596%2587%25E5%25AD%2597%25E3%2582%2592%25E8%25A1%25A8%25E7%258F%25BE%25E3%2581%2599%25E3%2582%258B%25E6%258A%2580%25E6%25B3%2595%25E3%2581%25AE%25E3%2581%25AF%25E3%2581%25AA%25E3%2581%2597%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kawaguchiAtsushi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdjZDlkZGZhOWIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kawaguchiAtsushi</dc:creator></item></channel></rss>
