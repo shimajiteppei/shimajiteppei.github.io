@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Java」のフィード]]></title><description><![CDATA[Zennのトピック「Java」のRSSフィードです]]></description><link>https://zenn.dev/topics/java</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/5c47bb8423.png</url><title>Zennの「Java」のフィード</title><link>https://zenn.dev/topics/java</link></image><generator>zenn.dev</generator><lastBuildDate>Sat, 14 Dec 2024 01:34:17 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/java/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[java.utilのインターフェースのラッパークラスを作ろう(Decoratorパターン)]]></title><description><![CDATA[
+ 概要
+リストを引数に取りラップされたリストを返すメソッドの作り方と、その時に考えたことを話します。
+内容はDecoratorパターンを用いた実装です。
+
+ 対象
+既存のインターフェースの実装に対して、共通する特別な動作を追加したい人(例:リストに要素を追加する時に必ずソートするようにするなど)。
+
+ きっかけ
+最近Javaのコードを書いている時に、常にソートされているコードが欲しいなぁと思ったが、それらしいクラスはなかった[1]。
+
+ 要件
+
+リストに変更を加えた後にもリストがソートされていて欲しい。
+
+
+ 却下された案
+まずは、考えはしたけど却下された案について書いていきます。
+一...]]></description><link>https://zenn.dev/kinumiya/articles/d877a7d175ffd0</link><guid isPermaLink="true">https://zenn.dev/kinumiya/articles/d877a7d175ffd0</guid><pubDate>Fri, 13 Dec 2024 18:33:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--MtgLvXzQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:java.util%25E3%2581%25AE%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%2595%25E3%2582%25A7%25E3%2583%25BC%25E3%2582%25B9%25E3%2581%25AE%25E3%2583%25A9%25E3%2583%2583%25E3%2583%2591%25E3%2583%25BC%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25B9%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258D%25E3%2581%2586%2528Decorator%25E3%2583%2591%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%25B3%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E7%25B5%25B9%25E5%25AE%25AE%25E7%25B4%2580%25E4%25BB%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUl0YnZtbFJ6bEwyWTBTZGRLRF9MSzhQU0xvRzRaZk5IMGdGdGRMSVl1Q3U9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>絹宮紀仁</dc:creator></item><item><title><![CDATA[最速！Spring Bootで簡単Webアプリケーション開発〜入門編〜]]></title><description><![CDATA[本書は、Java初心者から中級者を対象に、Spring Bootを使用したWebアプリケーション開発の基礎をわかりやすく解説する入門書です。Spring Bootは、設定がシンプルで効率的な開発を可能にするJavaフレームワークとして、Webアプリケーションの開発で幅広く採用されています。環境構築から実際のアプリケーション開発までを解説しています。]]></description><link>https://zenn.dev/mojyamojya/books/java-spring-introduce</link><guid isPermaLink="true">https://zenn.dev/mojyamojya/books/java-spring-introduce</guid><pubDate>Fri, 13 Dec 2024 05:33:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--kwYR0le---/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci8zMDMzNWU2MzkxLmpwZWc=%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>AKIHIKO Sato</dc:creator></item><item><title><![CDATA[Processingの画像読み込みができなくなりハマったメモ【Windows】]]></title><description><![CDATA[
+ エラーの内容
+PImage gazou = loadImage("map-world.jpg");
+エラー文
+The file "mapworld.jpg" is missing or inaccessible, make sure the URL is valid or that the file has been added to your sketch and is readable.
+map-world.jpgが存在しないと言われてしまった
+
+ 試したこと① dataフォルダーの確認
+スケッチと同じ階層のdataフォルダーの中に、map-world.jpgが存在するかどうか確...]]></description><link>https://zenn.dev/esusaki/articles/5fce4ccb6953de</link><guid isPermaLink="true">https://zenn.dev/esusaki/articles/5fce4ccb6953de</guid><pubDate>Fri, 13 Dec 2024 04:51:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--pbyF1bwZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Processing%25E3%2581%25AE%25E7%2594%25BB%25E5%2583%258F%25E8%25AA%25AD%25E3%2581%25BF%25E8%25BE%25BC%25E3%2581%25BF%25E3%2581%258C%25E3%2581%25A7%25E3%2581%258D%25E3%2581%25AA%25E3%2581%258F%25E3%2581%25AA%25E3%2582%258A%25E3%2583%258F%25E3%2583%259E%25E3%2581%25A3%25E3%2581%259F%25E3%2583%25A1%25E3%2583%25A2%25E3%2580%2590Windows%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:susaki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc5MmVhMDA4MzEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>susaki</dc:creator></item><item><title><![CDATA[Spring Data JPAでIDとしてUUIDv7を利用する]]></title><description><![CDATA[この記事は jig.jp Advent Calender 2024 の13日目の記事です。
+
+初めまして、じんたんと申します。
+最近、家の電気毛布が2枚連続で壊れてしまいとても悲しい気持ちです。どうぞよろしくお願いします。
+Spring Data JPA のデフォルト実装である HibernateとMySQLを利用した記事となっております。
+
+ UUIDv7を使いたい
+
+連番IDと違いIDを推測されにくい
+時系列ソートが出来るのでUUIDv4よりもインデックス効率がいい
+時系列部分と乱数部分があるので衝突しにくい
+
+などの理由でUUIDv7を利用することになりました。
+
+ 既存のUUID...]]></description><link>https://zenn.dev/jigjp_engineer/articles/f0f3936eb8a8b4</link><guid isPermaLink="true">https://zenn.dev/jigjp_engineer/articles/f0f3936eb8a8b4</guid><pubDate>Fri, 13 Dec 2024 01:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--QDAbZt7h--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Spring%2520Data%2520JPA%25E3%2581%25A7ID%25E3%2581%25A8%25E3%2581%2597%25E3%2581%25A6UUIDv7%25E3%2582%2592%25E5%2588%25A9%25E7%2594%25A8%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%2598%25E3%2582%2593%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I5NGQxOTY3NzcuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:jig.jp%2520Engineers%2527%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSXhhOUZBUGhwdW04b21uMmFDTm1neTNEbFp0djV2alcteFQxX216WUlqTjBsOFJlX049czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>じん</dc:creator></item><item><title><![CDATA[[Mac] Javaのバージョンを簡単に切り替える]]></title><description><![CDATA[
+ やりたいこと
+プロジェクトによって、Javaのバージョンを切り替えたいということがあると思います。
+Node.jsのバージョンを切り替えるのは、nvmを使えば簡単にできますが、Javaのバージョンを切り替える方法がわからなかったので、調べてみました。
+
+ 前提
+前提として、MacOSで、Homebrewを使ってJavaをインストールしていることとします。
+現在使用しているJavaのバージョンは、java -versionで確認できます。
+$ java -version
+openjdk version "17.0.12" 2024-07-18
+OpenJDK Runtime Envir...]]></description><link>https://zenn.dev/notofu/articles/8579350ba042d8</link><guid isPermaLink="true">https://zenn.dev/notofu/articles/8579350ba042d8</guid><pubDate>Wed, 11 Dec 2024 13:38:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6WoVebkv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BMac%255D%2520Java%25E3%2581%25AE%25E3%2583%2590%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%2592%25E7%25B0%25A1%25E5%258D%2598%25E3%2581%25AB%25E5%2588%2587%25E3%2582%258A%25E6%259B%25BF%25E3%2581%2588%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kebab%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I4ZGUwMDRiYTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kebab</dc:creator></item><item><title><![CDATA[イレイジャってなんじゃ？]]></title><description><![CDATA[!
+この記事は Java Advent Calendar 2024 の 11 日目の記事です。
+
+他の方のレベルが高く、場違いじゃないかと本心はキョドっていますが、そんなことは気にせず、ハードルをくぐるスタイルで進めていきます。あしからず。
+
+ この記事はなんじゃ？（概要）
+みなさん、Java のイレイジャ（Type Erasure）はご存知ですか？
+少し前までの私はよく知りませんでした。
+この記事では、イレイジャとは何かを自分なりに学ぶための記事になります。
+実装ですぐに役に立つものではないですが、Java について興味を持ってもらえればと思います。
+
+ 前日譚（そもそものきっかけ）
+...]]></description><link>https://zenn.dev/mackey0225/articles/mackey0225-erasure-whats-that</link><guid isPermaLink="true">https://zenn.dev/mackey0225/articles/mackey0225-erasure-whats-that</guid><pubDate>Tue, 10 Dec 2024 15:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--CrFMgMFf--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25A4%25E3%2583%25AC%25E3%2582%25A4%25E3%2582%25B8%25E3%2583%25A3%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25AA%25E3%2582%2593%25E3%2581%2598%25E3%2582%2583%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mackey0225%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FkNTM5ZWRiYWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mackey0225</dc:creator></item><item><title><![CDATA[Java GPGPU (aparapi)]]></title><description><![CDATA[
+ Java
+
+ aparapi
+
+ [PukiWiki] 	
+Java aparapi で GPU を使う 
+
+
+ Jcuda
+
+Java で CUDA を導入する手順メモ
+
+]]></description><link>https://zenn.dev/v6qh2bxj/articles/deb56b478c013d</link><guid isPermaLink="true">https://zenn.dev/v6qh2bxj/articles/deb56b478c013d</guid><pubDate>Tue, 10 Dec 2024 14:24:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wji2Wj_I--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_76:Java%2520GPGPU%2520%2528aparapi%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:v6qh2bxj%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzgzYmY4Njc4OTUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>v6qh2bxj</dc:creator></item><item><title><![CDATA[Java　ラムダ式]]></title><description><![CDATA[
+ Java
+
+ ラムダ式
+
+ 参考サイト
+
+Java使いがC#を勉強する　その⑩　ラムダ式
+
+]]></description><link>https://zenn.dev/v6qh2bxj/articles/660a81e2da1a36</link><guid isPermaLink="true">https://zenn.dev/v6qh2bxj/articles/660a81e2da1a36</guid><pubDate>Tue, 10 Dec 2024 10:21:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vTXYYUCZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:Java%25E3%2580%2580%25E3%2583%25A9%25E3%2583%25A0%25E3%2583%2580%25E5%25BC%258F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:v6qh2bxj%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzgzYmY4Njc4OTUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>v6qh2bxj</dc:creator></item><item><title><![CDATA[Javaでデリゲートメモ]]></title><description><![CDATA[
+ Javaでデリゲートメモ
+
+ interfaceでデリゲート処理の例
+interface MyDelegate {
+    void doSomething();
+}
+
+class MyClass {
+    private MyDelegate delegate;
+
+    public void setDelegate(MyDelegate delegate) {
+        this.delegate = delegate;
+    }
+
+    public void    performAction() {
+        if (delegate != null) {...]]></description><link>https://zenn.dev/v6qh2bxj/articles/d6623ffad91c04</link><guid isPermaLink="true">https://zenn.dev/v6qh2bxj/articles/d6623ffad91c04</guid><pubDate>Tue, 10 Dec 2024 10:18:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--cWFLdNX---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java%25E3%2581%25A7%25E3%2583%2587%25E3%2583%25AA%25E3%2582%25B2%25E3%2583%25BC%25E3%2583%2588%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:v6qh2bxj%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzgzYmY4Njc4OTUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>v6qh2bxj</dc:creator></item><item><title><![CDATA[Java コレクション]]></title><description><![CDATA[
+ Java
+
+ コレクション
+
+ List
+
+配列のように要素順序があるコレクション
+
+ArrayList
+LinkedList
+Vector（ArrayListを優先的に使う）
+ArrayList
+
+
+
+
+後からでも要素追加削除可能
+cf:配列は不可
+インデックス値による値の読み書き(ランダムアクセス)は、位置によらず一定時間でアクセス可能
+値の頻繁な挿入削除は低速
+挿入時に確保していたメモリの領域を超えると自動でメモリ再割り当てが発生する
+→あらかじめ要素数が想定される場合サイズ宣言しよう
+
+var data = new ArrayList&lt;String&gt;(30);
+i...]]></description><link>https://zenn.dev/v6qh2bxj/articles/2c58dbae844065</link><guid isPermaLink="true">https://zenn.dev/v6qh2bxj/articles/2c58dbae844065</guid><pubDate>Tue, 10 Dec 2024 10:08:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--iM0RXS86--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java%2520%25E3%2582%25B3%25E3%2583%25AC%25E3%2582%25AF%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:v6qh2bxj%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzgzYmY4Njc4OTUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>v6qh2bxj</dc:creator></item><item><title><![CDATA[Render・メモ(PaaS)]]></title><description><![CDATA[
+ Render・メモ(PaaS)
+
+作ったWebサービスを無料、もしくは、低コストで公開する方法まとめ
+Heroku無料枠廃止で路頭に迷う開発者に捧ぐ、次世代PaaS「Render.com」の使い方
+https://github.com/projectormato/spring-render-deploy
+Spring Boot で作ったアプリをフリー枠で Web に公開（Render利用）
+https://github.com/sueasen/springboot-demo2
+[2024年8月]SpringBootで作ったWEBアプリをRenderで無料で公開する
+
+]]></description><link>https://zenn.dev/v6qh2bxj/articles/f2c6ad318bba35</link><guid isPermaLink="true">https://zenn.dev/v6qh2bxj/articles/f2c6ad318bba35</guid><pubDate>Tue, 10 Dec 2024 09:49:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--yBI_tbqD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:Render%25E3%2583%25BB%25E3%2583%25A1%25E3%2583%25A2%2528PaaS%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:v6qh2bxj%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzgzYmY4Njc4OTUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>v6qh2bxj</dc:creator></item><item><title><![CDATA[Java JDBC]]></title><description><![CDATA[
+ java
+
+ JDBC
+
+ 参考サイト
+
+PreparedStatement
+JDBCでPreparedStatementを利用する際、実際に発行するクエリ文字列を取得する方法
+SQLをまとめて実行するバッチ更新のススメ – SOFTEMCOM Developers Blog
+SQLのCOUNTで数を数える！基礎から応用まで詳しく解説
+
+
+]]></description><link>https://zenn.dev/v6qh2bxj/articles/5f067bd0345ac1</link><guid isPermaLink="true">https://zenn.dev/v6qh2bxj/articles/5f067bd0345ac1</guid><pubDate>Tue, 10 Dec 2024 09:18:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--JVsO_PYi--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_80:Java%2520JDBC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:v6qh2bxj%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzgzYmY4Njc4OTUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>v6qh2bxj</dc:creator></item><item><title><![CDATA[Java メモ]]></title><description><![CDATA[
+ Java メモ
+
+
+Java SE 日本語ドキュメント
+
+
+Javaでファイルを保存する際に、上書きの確認をする方法
+
+
+]]></description><link>https://zenn.dev/v6qh2bxj/articles/4783a927c23089</link><guid isPermaLink="true">https://zenn.dev/v6qh2bxj/articles/4783a927c23089</guid><pubDate>Tue, 10 Dec 2024 09:10:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BsaTeL5c--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_76:Java%2520%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:v6qh2bxj%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzgzYmY4Njc4OTUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>v6qh2bxj</dc:creator></item><item><title><![CDATA[Java "ディープコピー"と"シャロー（参照）コピー"]]></title><description><![CDATA[
+ Java
+
+ "ディープコピー"と"参照"
+
+ディープコピーとは、コピー元/先を変更してもコピー先/元に影響がないコピーのこと。
+Javaの参照型をディープコピーするには、コピー元と同じ値を持った新しいオブジェクトを生成する必要があり、少し工夫が必要。
+
+
+ 参考サイト
+
+Javaのディープコピーと「参照」
+【Java入門】配列のコピー(clone、arraycopy、ShallowとDeep)
+【Java】深いコピーと浅いコピー？『インスタンスのコピー』を詳しく解説！
+Javaの裏技（オブジェクトのディープコピーのやり方）
+Javaディープコピーの実装法10選！
+【Java】不変オ...]]></description><link>https://zenn.dev/v6qh2bxj/articles/885eee53060c3c</link><guid isPermaLink="true">https://zenn.dev/v6qh2bxj/articles/885eee53060c3c</guid><pubDate>Tue, 10 Dec 2024 09:07:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--oFAXvPiz--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java%2520%2522%25E3%2583%2587%25E3%2582%25A3%25E3%2583%25BC%25E3%2583%2597%25E3%2582%25B3%25E3%2583%2594%25E3%2583%25BC%2522%25E3%2581%25A8%2522%25E3%2582%25B7%25E3%2583%25A3%25E3%2583%25AD%25E3%2583%25BC%25EF%25BC%2588%25E5%258F%2582%25E7%2585%25A7%25EF%25BC%2589%25E3%2582%25B3%25E3%2583%2594%25E3%2583%25BC%2522%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:v6qh2bxj%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzgzYmY4Njc4OTUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>v6qh2bxj</dc:creator></item><item><title><![CDATA[Java メソッド参照とコンストラクタ参照]]></title><description><![CDATA[
+ Java
+
+ メソッド参照とコンストラクタ参照
+
+すでに定義済みのメソッドを、引数なしで呼び出せるのがメソッド参照。
+ラムダ式を書かずに直接メソッドを実行できる、などのメリットがある。
+メソッド参照で記述するとコード量が減り、かなりスッキリする。
+メソッド参照は次のように行う。
+
+（インスタンスを格納した）変数名::メソッド
+
+ 参考サイト
+
+Java】メソッド参照とコンストラクタ参照
+Javaメソッド参照・コンストラクター参照
+Javaのメソッド参照で注意べきすること
+
+]]></description><link>https://zenn.dev/v6qh2bxj/articles/a0cd6012e03247</link><guid isPermaLink="true">https://zenn.dev/v6qh2bxj/articles/a0cd6012e03247</guid><pubDate>Tue, 10 Dec 2024 09:01:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--UZFsFLct--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java%2520%25E3%2583%25A1%25E3%2582%25BD%25E3%2583%2583%25E3%2583%2589%25E5%258F%2582%25E7%2585%25A7%25E3%2581%25A8%25E3%2582%25B3%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25A9%25E3%2582%25AF%25E3%2582%25BF%25E5%258F%2582%25E7%2585%25A7%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:v6qh2bxj%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzgzYmY4Njc4OTUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>v6qh2bxj</dc:creator></item><item><title><![CDATA[Java Oracle Gold・メモ]]></title><description><![CDATA[
+ Java Oracle Gold・メモ
+
+ 参考書
+
+オラクル認定資格教科書 Javaプログラマ Gold SE11
+
+
+ 問題集
+
+徹底攻略Java SE 11 Gold問題集
+オラクル認定資格教科書 Javaプログラマ Gold SE11 スピードマスター問題集
+
+
+ 参考サイト
+
+入社１年目でJavaGold合格できたので勉強法について語っていく
+プログラミング実務経験ゼロでJava SE 8 Goldを2ヶ月半で取得してみた
+Java SE11 Gold試験に合格したので要点をまとめてみる
+「Hello world」を読み解く
+Java 8 練習問題 上級編 その1 |TEC...]]></description><link>https://zenn.dev/v6qh2bxj/articles/43f71681c22088</link><guid isPermaLink="true">https://zenn.dev/v6qh2bxj/articles/43f71681c22088</guid><pubDate>Tue, 10 Dec 2024 08:32:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ouJFclp8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:Java%2520Oracle%2520Gold%25E3%2583%25BB%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:v6qh2bxj%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzgzYmY4Njc4OTUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>v6qh2bxj</dc:creator></item><item><title><![CDATA[Java Oracle Silver・メモ]]></title><description><![CDATA[
+ Java Oracle Silver・メモ
+
+ 参考書
+
+オラクル認定資格教科書 Javaプログラマ Silver SE11
+
+
+ 問題集
+
+
+徹底攻略Java SE 11 Silver問題集
+
+
+オラクル認定資格教科書 Javaプログラマ Silver SE11 スピードマスター問題集
+
+
+
+ 参考サイト
+
+JavaSilver Strategy
+JAVA基礎|TECH PROjin
+Java Silver 練習問題|TECH PROjin
+【ここを抑えれば受かる！】Java Silver 頻出問題と要点の解説まとめ
+Java Silver SE 11 対策・ポイントメモ
+【Jav...]]></description><link>https://zenn.dev/v6qh2bxj/articles/8734cfef6b8253</link><guid isPermaLink="true">https://zenn.dev/v6qh2bxj/articles/8734cfef6b8253</guid><pubDate>Tue, 10 Dec 2024 08:19:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--DgGXucbE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:Java%2520Oracle%2520Silver%25E3%2583%25BB%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:v6qh2bxj%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzgzYmY4Njc4OTUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>v6qh2bxj</dc:creator></item><item><title><![CDATA[Java エスケープシーケンス・メモ]]></title><description><![CDATA[
+ Java
+
+ エスケープシーケンス・メモ
+
+
+replace()だと「"」だが、replaceAll()でダブルクォートは「"」ではなく「\"」としなければならない。
+https://note.com/tatehito/n/nf6fcb7060f1f
+
+
+Java正規表現の動作確認ができるサイト
+https://regex-testdrive.com/ja/
+
+
+]]></description><link>https://zenn.dev/v6qh2bxj/articles/d013d7c2cf7e03</link><guid isPermaLink="true">https://zenn.dev/v6qh2bxj/articles/d013d7c2cf7e03</guid><pubDate>Tue, 10 Dec 2024 08:05:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fQcWpQg9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java%2520%25E3%2582%25A8%25E3%2582%25B9%25E3%2582%25B1%25E3%2583%25BC%25E3%2583%2597%25E3%2582%25B7%25E3%2583%25BC%25E3%2582%25B1%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%25BB%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:v6qh2bxj%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzgzYmY4Njc4OTUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>v6qh2bxj</dc:creator></item><item><title><![CDATA[Java カプセル化]]></title><description><![CDATA[
+ Java
+
+ カプセル化
+
+カプセル化を理解していない状態でクラスを作ると、アクセス制限のないクラスが作られる可能性がある。
+アクセス制限のないクラスはオブジェクトとして適切な状態ではない。
+カプセル化は、外部からの自由なアクセスを制限しオブジェクトを守る。
+カプセル化は外部からのアクセスを完全にシャットアウトするわけではなく、必要な範囲については、外部からアクセスできる入り口を用意しておく。
+アクセス修飾子を利用して外部からのアクセスを制限する。アクセス修飾子とは、"フィールド"や"メソッド"の前に付けてアクセス範囲を決める修飾子。
+
+
+ カプセル化［プログラム例］
+カプセル化は外...]]></description><link>https://zenn.dev/v6qh2bxj/articles/8bc11d278df005</link><guid isPermaLink="true">https://zenn.dev/v6qh2bxj/articles/8bc11d278df005</guid><pubDate>Tue, 10 Dec 2024 07:15:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--gzwy6eF2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java%2520%25E3%2582%25AB%25E3%2583%2597%25E3%2582%25BB%25E3%2583%25AB%25E5%258C%2596%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:v6qh2bxj%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzgzYmY4Njc4OTUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>v6qh2bxj</dc:creator></item><item><title><![CDATA[Java オブジェクト指向について、他]]></title><description><![CDATA[
+ Java
+
+ オブジェクト指向
+
+"オブジェクト"はクラスで構成される。
+"インスタンス"＝"オブジェクト"
+"修飾子"について
+→ 別のファイルから使いたい場合は「public」、
+　→ あるクラス内だけで使う場合は「private」。
+クラス名は先頭を大文字にするのが慣例。
+クラス名は変数名などと同様に、"キャメルケース"（単語の頭文字だけ大文字にする記法）が推奨される。
+"クラスからオブジェクトを作る"＝"インスタンス化"。
+
+
+ フィールド
+
+"フィールド"とは、オブジェクトが持つ内部データ（変数）のこと。
+finalを付けると定数になる。
+
+
+ クラス
+
+そのクラス内であれ...]]></description><link>https://zenn.dev/v6qh2bxj/articles/427b031c33c113</link><guid isPermaLink="true">https://zenn.dev/v6qh2bxj/articles/427b031c33c113</guid><pubDate>Tue, 10 Dec 2024 07:05:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3iYlZLWW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java%2520%25E3%2582%25AA%25E3%2583%2596%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E6%258C%2587%25E5%2590%2591%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E3%2580%2581%25E4%25BB%2596%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:v6qh2bxj%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzgzYmY4Njc4OTUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>v6qh2bxj</dc:creator></item></channel></rss>
