@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「TypeScript」のフィード]]></title><description><![CDATA[Zennのトピック「TypeScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/typescript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/f13e758fdb.png</url><title>Zennの「TypeScript」のフィード</title><link>https://zenn.dev/topics/typescript</link></image><generator>zenn.dev</generator><lastBuildDate>Sun, 15 Dec 2024 09:56:46 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/typescript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[yarnでnode_modulesがあらわれず、typeの依存関係をvscodeが認識されなかった時の解決方法]]></title><description><![CDATA[
+ 問題
+
+Yarnを使用したプロジェクトで、以下のような問題に直面することがあります：
+
+
+VSCodeが型定義（Type Definitions）を認識しない
+
+例: import { useState } from 'react' の行でモジュール 'react' またはそれに対応する型宣言が見つかりません。
+と表示される。
+
+
+
+node_modulesがプロジェクト内に存在しない
+
+
+lsコマンドでnode_modulesを確認すると、フォルダ自体が見当たらない。
+
+
+
+一見すると依存関係がインストールされていないように見えますが、実際にはYarnの設定が原因でnode_mod...]]></description><link>https://zenn.dev/yohei7328/articles/321066ebd9dd57</link><guid isPermaLink="true">https://zenn.dev/yohei7328/articles/321066ebd9dd57</guid><pubDate>Sun, 15 Dec 2024 01:19:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lHACYHK0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:yarn%25E3%2581%25A7node_modules%25E3%2581%258C%25E3%2581%2582%25E3%2582%2589%25E3%2582%258F%25E3%2582%258C%25E3%2581%259A%25E3%2580%2581type%25E3%2581%25AE%25E4%25BE%259D%25E5%25AD%2598%25E9%2596%25A2%25E4%25BF%2582%25E3%2582%2592vscode%25E3%2581%258C%25E8%25AA%258D%25E8%25AD%2598%25E3%2581%2595%25E3%2582%258C%25E3%2581%25AA%25E3%2581%258B%25E3%2581%25A3%25E3%2581%259F%25E6%2599%2582%25E3%2581%25AE%25E8%25A7%25A3%25E6%25B1%25BA%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2588%25E3%2583%25BC%25E3%2581%25B8%25E3%2581%2584%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2h4bXpaRy1VMTdvWkx5Tkxvc0RBazA0UHNneUZkLTU2S2NtM0hSckE9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>よーへい</dc:creator></item><item><title><![CDATA[オンライン会議中のストレス駆動開発でボイスチャンネルにいるユーザーをランダム抽出する Discord bot を作った]]></title><description><![CDATA[!
+本記事は Qiita Advent Calendar 2024 の Discord Bot Advent Calendar 2024 15 日目の記事となります。なお、今のところ他に誰も書いていません。
+
+こんにちは、やぐちはるおです。Hono と Cloudflare 使って Discord bot 作った話をします。と思ったんですが、書き終わってみたら Hono と Cloudflare の話はほとんどしてませんでした。
+
+ はじめに
+会社で Discord 使ってるんですが、打ち合わせ中に誰でも良いから意見を欲しくなった時、誰を選ぶのかいつも困っています。ランダムに選ぼうと頑張...]]></description><link>https://zenn.dev/ashita_team/articles/2096d3330a6371</link><guid isPermaLink="true">https://zenn.dev/ashita_team/articles/2096d3330a6371</guid><pubDate>Sun, 15 Dec 2024 00:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--CsHE4suc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25AA%25E3%2583%25B3%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%25B3%25E4%25BC%259A%25E8%25AD%25B0%25E4%25B8%25AD%25E3%2581%25AE%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25AC%25E3%2582%25B9%25E9%25A7%2586%25E5%258B%2595%25E9%2596%258B%25E7%2599%25BA%25E3%2581%25A7%25E3%2583%259C%25E3%2582%25A4%25E3%2582%25B9%25E3%2583%2581%25E3%2583%25A3%25E3%2583%25B3%25E3%2583%258D%25E3%2583%25AB%25E3%2581%25AB%25E3%2581%2584%25E3%2582%258B%25E3%2583%25A6%25E3%2583%25BC%25E3%2582%25B6%25E3%2583%25BC%25E3%2582%2592%25E3%2583%25A9%25E3%2583%25B3%25E3%2583%2580%25E3%2583%25A0%25E6%258A%25BD%25E5%2587%25BA%25E3%2581%2599%25E3%2582%258B%2520Discord%2520bot%2520%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2582%2584%25E3%2581%2590%25E3%2581%25A1%25E3%2581%25AF%25E3%2582%258B%25E3%2581%258A%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA2ZjczNWNiYTguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2581%2582%25E3%2581%2597%25E3%2581%259F%25E3%2581%25AE%25E3%2583%2581%25E3%2583%25BC%25E3%2583%25A0%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRlZTY2YjY5NTIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>やぐちはるお</dc:creator></item><item><title><![CDATA[【React】input type="range" でチョットかっこいいボリュームフェーダーを作る]]></title><description><![CDATA[!
+この記事は Wano Group Advent Calendar 2024 の 15日目の記事となります。
+
+
+ 概要
+&lt;input type="range"&gt; というスライダーを表現できるタグがあります。
+今回はこの &lt;input type="range"&gt; でボリュームフェーダーを作成したので公開しようと思います。
+https://developer.mozilla.org/ja/docs/Web/HTML/Element/input/range
+
+ 出来上がったもの
+全て HTML(React)、CSS(tailwind含む)オンリーです。
+SVGなどは...]]></description><link>https://zenn.dev/fah_72946_engr/articles/26dbf1cc2093fa</link><guid isPermaLink="true">https://zenn.dev/fah_72946_engr/articles/26dbf1cc2093fa</guid><pubDate>Sat, 14 Dec 2024 23:00:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--kINBRE7L--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590React%25E3%2580%2591input%2520type%253D%2522range%2522%2520%25E3%2581%25A7%25E3%2583%2581%25E3%2583%25A7%25E3%2583%2583%25E3%2583%2588%25E3%2581%258B%25E3%2581%25A3%25E3%2581%2593%25E3%2581%2584%25E3%2581%2584%25E3%2583%259C%25E3%2583%25AA%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%25A0%25E3%2583%2595%25E3%2582%25A7%25E3%2583%25BC%25E3%2583%2580%25E3%2583%25BC%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:dsktchr%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvZi5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>dsktchr</dc:creator></item><item><title><![CDATA[Next.js + Web WorkerでSupabaseのDatabase Changesを受ける]]></title><description><![CDATA[
+ 概要
+今回はNext.js + Web Workerの構成で、SupabaseのDatabase ChangesをWorker側で受けてページ側に反映するという事を試してみました。
+
+ Web Worker
+https://developer.mozilla.org/ja/docs/Web/API/Web_Workers_API
+
+ウェブワーカー (Web Worker) とは、ウェブアプリケーションにおけるスクリプトの処理をメインとは別のスレッドに移し、バックグラウンドでの実行を可能にする仕組みのこと
+
+また、以下のような制限があります。
+
+ワーカー内から直接 DOM を操作するこ...]]></description><link>https://zenn.dev/slowhand/articles/40e25fcb91cf8c</link><guid isPermaLink="true">https://zenn.dev/slowhand/articles/40e25fcb91cf8c</guid><pubDate>Sat, 14 Dec 2024 22:13:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--aG8x1WT0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Next.js%2520%252B%2520Web%2520Worker%25E3%2581%25A7Supabase%25E3%2581%25AEDatabase%2520Changes%25E3%2582%2592%25E5%258F%2597%25E3%2581%2591%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:slowhand%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzEwY2YzMGUzMDAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>slowhand</dc:creator></item><item><title><![CDATA[Effect-TSでDIがしたい！]]></title><description><![CDATA[この記事は株式会社ビットキー Advent Calendar 2024 15日目の記事です。
+
+ はじめに
+本記事ではEffect（googlabilityが低いためEffect-TSとも表記される。以下Effect-TS）というTypeScriptライブラリを用いてDI（Dependency Injection、依存注入）を行う方法を紹介します。
+Effect-TSは2024年3月に安定版であるv3がリリースされました。2024年に開催されたTSKaigiでも話題として取り上げられており、注目を集めています。Githubのstar数も2024年に入り急上昇しています。
+
+私のチームでは...]]></description><link>https://zenn.dev/bitkey_dev/articles/f71789db6e40c6</link><guid isPermaLink="true">https://zenn.dev/bitkey_dev/articles/f71789db6e40c6</guid><pubDate>Sat, 14 Dec 2024 22:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fMsUO2xT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Effect-TS%25E3%2581%25A7DI%25E3%2581%258C%25E3%2581%2597%25E3%2581%259F%25E3%2581%2584%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:enpolio%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NjNWE2NmE4ZGMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Bitkey%2520Developers%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q5YjYwOWVmZWEuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>enpolio</dc:creator></item><item><title><![CDATA[シャリになるときが来た]]></title><description><![CDATA[
+ 祝辞
+クソアプリアドベントカレンダー10周年おめでとうございます🎉🎉🎉🎉🎉🎉🎉
+毎年、「見ててくださいよ。本物のクソアプリってものを見せてやりますよ。」と言ってたけど、（去年言ってたっけ？）つよつよが多すぎて、謙遜して作ったものを見せたくなるよね。
+分かる。
+
+ 概要
+寿司、それは日本人のソウルフード...
+寿司、それは手軽に海鮮を食する手段...
+寿司、それは、日本の宝...!
+しかし、人類は、寿司をネタにしすぎた...
+寿司で笑いを取りすぎたのだ。
+ウィーラブ　寿司。　ラブアンドピース...（ｽｩｰｼ、ｽｩｰｼ、ｽｩｰｼ）
+ネタにされ続けた寿司はお怒りである...
+この怒りを沈め...]]></description><link>https://zenn.dev/endo_hizumi/articles/76e7ce5285b76d</link><guid isPermaLink="true">https://zenn.dev/endo_hizumi/articles/76e7ce5285b76d</guid><pubDate>Sat, 14 Dec 2024 15:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0hBeY7Ri--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B7%25E3%2583%25A3%25E3%2583%25AA%25E3%2581%25AB%25E3%2581%25AA%25E3%2582%258B%25E3%2581%25A8%25E3%2581%258D%25E3%2581%258C%25E6%259D%25A5%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E9%2581%25A0%25E8%2597%25A4%25E3%2583%2592%25E3%2582%25BA%25E3%2583%259F%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FlZDJkNjgwZWUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>遠藤ヒズミ</dc:creator></item><item><title><![CDATA[【Remix】loaderとactionについて]]></title><description><![CDATA[
+ はじめに
+新しい案件ではremixを使っていました。
+その際に既存メンバーから「loader勉強しといて」と言われました。
+loaderとは何か、付随してactionとは何か学んでみました。
+mvにもloaderとactionが書かれています。
+
+
+remix LP
+サイトかっこいい、、、
+翻訳して読みました。
+https://remix.run/
+
+
+
+ loaderとは
+loaderは、ページのレンダリング前にサーバーサイドでデータを取得するための機能です。
+主に以下のような用途で使用されます。
+
+APIからのデータ取得
+データベースからの情報取得
+認証状態の確認
+
+
+ 基本的な...]]></description><link>https://zenn.dev/rlab/articles/da7a50d568b0ab</link><guid isPermaLink="true">https://zenn.dev/rlab/articles/da7a50d568b0ab</guid><pubDate>Sat, 14 Dec 2024 13:35:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GVK3oXnp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Remix%25E3%2580%2591loader%25E3%2581%25A8action%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%258A%25E3%2583%2584%25E3%2583%258E%25E3%2583%25AD%25E3%2583%2589%25E3%2583%25AA%25E3%2582%25B4%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNjNzdmZWEzNmQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ナツノロドリゴ</dc:creator></item><item><title><![CDATA[JavaとTypeScriptでジェネリクスについて比較する]]></title><description><![CDATA[
+ はじめに
+この記事では、プログラミングの中でも便利だけどちょっと難しそうな「ジェネリクス（Generics）」について、JavaとTypeScriptの違いを比較しながら解説してみます！
+!
+「いやいや、それは違うでしょ！」と思うところがあれば、ぜひツッコミを入れてください！私もまだまだ勉強中なので、みなさんのフィードバックがめちゃくちゃ助かります。
+
+
+ ジェネリクスって何？
+
+ジェネリクスは簡単に言うと、型を柔軟に扱える仕組みのことです。
+具体的には、「この処理はどんな型でも動くようにしたい！」とか「後から型を決めたい！」というときに使います。これによって、コードを再利用しやすく...]]></description><link>https://zenn.dev/5hige99/articles/1fc327c47fa6c0</link><guid isPermaLink="true">https://zenn.dev/5hige99/articles/1fc327c47fa6c0</guid><pubDate>Sat, 14 Dec 2024 12:54:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--K3Cjv4vq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java%25E3%2581%25A8TypeScript%25E3%2581%25A7%25E3%2582%25B8%25E3%2582%25A7%25E3%2583%258D%25E3%2583%25AA%25E3%2582%25AF%25E3%2582%25B9%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E6%25AF%2594%25E8%25BC%2583%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:shige%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2IyNzA1YWYzZjYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>shige</dc:creator></item><item><title><![CDATA[Next.jsのApp Router製アプリをAzure App Serviceにデプロイする方法]]></title><description><![CDATA[App Router（React Server Component）を使ってるとStatic Web Appsを使うことができません。
+...と言いたかったのですが、現在プレビュー状態ではあるものの実現できるようです。
+https://learn.microsoft.com/ja-jp/azure/static-web-apps/deploy-nextjs-hybrid
+とはいえApp Serviceを使うのが間違いないので、デプロイ方法を紹介。
+
+ デプロイするやつ
+5ヶ月前にGenerative UIを組み込んだチャットアプリを作ってて、React Server Componentを...]]></description><link>https://zenn.dev/headwaters/articles/04f58f411be804</link><guid isPermaLink="true">https://zenn.dev/headwaters/articles/04f58f411be804</guid><pubDate>Sat, 14 Dec 2024 10:09:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--eVH1tdwU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Next.js%25E3%2581%25AEApp%2520Router%25E8%25A3%25BD%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592Azure%2520App%2520Service%25E3%2581%25AB%25E3%2583%2587%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25A4%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:ikebowsan%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZjNGExY2UxMDYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2598%25E3%2583%2583%25E3%2583%2589%25E3%2582%25A6%25E3%2582%25A9%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%25BC%25E3%2582%25B9%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzUyNTM1ZTc4OGYuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ikebowsan</dc:creator></item><item><title><![CDATA[remixでフロントエンドを作ってみた]]></title><description><![CDATA[
+ Remixを選択した理由
+ここで少し「なぜRemixを使うのか？」について触れたいと思います。
+https://remix.run/
+
+ web標準に準拠
+Remixは独自の記法はありますが、基本的にWeb標準に準拠したWebフレームワークになっています。
+fetchやform、cookieなど、基本的にはこれまで使用されてきたweb技術をそのまま使うことができます。
+これにより、標準的な書き方を使用できるため、個別の記法を改めて覚える必要がなく、前提の知識を活用できたり、初学者が学習後に、別のプロジェクトなどで生かせる知識を得やすいなどのメリットがあります。
+
+ SSRが基本
+フレ...]]></description><link>https://zenn.dev/keita_f/articles/1d86a71c1c28e2</link><guid isPermaLink="true">https://zenn.dev/keita_f/articles/1d86a71c1c28e2</guid><pubDate>Sat, 14 Dec 2024 08:06:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qVUL4hx2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:remix%25E3%2581%25A7%25E3%2583%2595%25E3%2583%25AD%25E3%2583%25B3%25E3%2583%2588%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2589%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:KITFJN%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdjNDYxZWNjNTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>KITFJN</dc:creator></item><item><title><![CDATA[【Next.js】文化祭のチケット・レジシステムを作成・運用した話]]></title><description><![CDATA[2024年度に行った私 (筆者) が所属している学校での文化祭において、全校生徒(高校3年生を除く)および教職員、来場者、そして保護者に対しての文化祭システムを作成・運用させていただきました。今回はこのシステムの作成・運用にあたっての話を書いていきます。
+本記事の内容は、私が所属する学校に非公式で公開しているものです。本記事に関する問い合わせを学校へ行う行為は慎んでいただくようお願いいたします。
+また、本記事の画像には最新のものでない古い画像があることがあります。
+
+ 構想
+2023年度の文化祭サイトは私とは別の人が作成しており、TypeScript (Node.js) + Expres...]]></description><link>https://zenn.dev/hirooict/articles/2f53a8f55a5f97</link><guid isPermaLink="true">https://zenn.dev/hirooict/articles/2f53a8f55a5f97</guid><pubDate>Sat, 14 Dec 2024 07:43:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5mXYyBZI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Next.js%25E3%2580%2591%25E6%2596%2587%25E5%258C%2596%25E7%25A5%25AD%25E3%2581%25AE%25E3%2583%2581%25E3%2582%25B1%25E3%2583%2583%25E3%2583%2588%25E3%2583%25BB%25E3%2583%25AC%25E3%2582%25B8%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%25E3%2582%2592%25E4%25BD%259C%25E6%2588%2590%25E3%2583%25BB%25E9%2581%258B%25E7%2594%25A8%25E3%2581%2597%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:ikaw%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQwMjIwMjFiYTcuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Hiroo-Gakuen-ICT-Comm...%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M4NzA2NjBkYjUuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ikaw</dc:creator></item><item><title><![CDATA[LINE Botとkintoneを簡単連携！ハッカソンで使える実装テクニック]]></title><description><![CDATA[本の内容は、LINE Botとkintoneの連携に焦点を当てた実践的なガイドになっています。以下のポイントが主な内容です：
+
+ 読者対象: ハッカソン参加者や、LINE APIとkintoneを使って効率的なアプリケーションを構築したい人。
+ カバーするトピック:
+ ・課金体系の基本知識
+ ・LINE Messaging APIやkintoneの登録手順
+ ・具体的な連携方法（データ登録時の通知送信など）
+ ・デバッグの方法や、シナリオの永続化
+ 実用性: ハンズオン形式で、各ステップごとに実際の手順を示すため、初学者から中級者まで役立つ。]]></description><link>https://zenn.dev/4geru/books/kintone-line-bot</link><guid isPermaLink="true">https://zenn.dev/4geru/books/kintone-line-bot</guid><pubDate>Sat, 14 Dec 2024 06:33:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--X_wN5Tam--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci9lYjJmNTQ4NWVhLmpwZWc=%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>しげる</dc:creator></item><item><title><![CDATA[React Tokyoというコミュニティを作ろうと思ったワケ]]></title><description><![CDATA[https://x.com/ReactTokyo/status/1864325542746706283
+この度、新たにReact Tokyoというコミュニティを立ち上げました。
+少し過去を振り返ると、以前からコミュニティ活動に似た取り組みは続けてきました。当初は、2015年あたりからMeteorというフレームワークを使ったアプリ開発を推進してました。MeteorがReactを採用し始めたこともあり、徐々にUI部分はReact中心にシフトしていきました。2017年からは、Meteorに限らずJSフレームワーク全般を扱うようになり、特に後半はReactやTypeScriptを中心にしていきま...]]></description><link>https://zenn.dev/dai_shi/articles/9f2760086fb31a</link><guid isPermaLink="true">https://zenn.dev/dai_shi/articles/9f2760086fb31a</guid><pubDate>Sat, 14 Dec 2024 05:30:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--m1e0HcVL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%2520Tokyo%25E3%2581%25A8%25E3%2581%2584%25E3%2581%2586%25E3%2582%25B3%25E3%2583%259F%25E3%2583%25A5%25E3%2583%258B%25E3%2583%2586%25E3%2582%25A3%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258D%25E3%2581%2586%25E3%2581%25A8%25E6%2580%259D%25E3%2581%25A3%25E3%2581%259F%25E3%2583%25AF%25E3%2582%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:daishi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzcwZGNhM2E2Y2IuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>daishi</dc:creator></item><item><title><![CDATA[OpenAPI → Typescript Client ジェネレーター書き比べ 2024]]></title><description><![CDATA[
+ モチベーション
+React + Typescript でアプリケーションを開発します。この時、API 定義は OpenAPI 形式で提供されています。
+ジェネレーターで機械的にクライアント用のコードを生成することで、型安全でミスが入り込みにくいコードにしたいです。
+実現できそうなライブラリはいくつもあるので、実際に書き比べもしながら比較します。
+
+ 検討ポイント
+
+最近の流行りはどうか
+メンテナンス状況はどうか
+変換したい API 定義に対応できるか
+クライアントのコードは書きやすいか
+
+
+ 最近の流行りはどうか
+https://npmtrends.com/@openapitools...]]></description><link>https://zenn.dev/chocolat0w0/articles/ded07e81d2f7c1</link><guid isPermaLink="true">https://zenn.dev/chocolat0w0/articles/ded07e81d2f7c1</guid><pubDate>Sat, 14 Dec 2024 03:45:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dgnS-bkg--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:OpenAPI%2520%25E2%2586%2592%2520Typescript%2520Client%2520%25E3%2582%25B8%25E3%2582%25A7%25E3%2583%258D%25E3%2583%25AC%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%25BC%25E6%259B%25B8%25E3%2581%258D%25E6%25AF%2594%25E3%2581%25B9%25202024%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258D%25E3%2581%25AE%25E3%2581%2593%25E3%2581%25AE%25E3%2581%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y0OWE4ZmYzOTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>きのこのこ</dc:creator></item><item><title><![CDATA[fastify-cookieでreq.cookieがnullになる]]></title><description><![CDATA[!
+あまり深く調査せず書いております。違うところがあったらご教授いただければ幸いです。あと私の疑問に答えてくれる方がいればもっと幸いです。
+
+
+ 結論
+fastify-cookieの登録がonRequestの後だった場合、fastifyのonRequest Hook内だとreq.cookiesがnullになります。
+app.addHook('onRequest', async (req, reply) =&gt; {
+  console.log(req.cookies) // null
+}
+app.register(fastifyCookie) // fastify-cookieの登録
+...]]></description><link>https://zenn.dev/nayuta9999/articles/48ead76c06a37d</link><guid isPermaLink="true">https://zenn.dev/nayuta9999/articles/48ead76c06a37d</guid><pubDate>Sat, 14 Dec 2024 03:40:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--VmWUh_Y_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:fastify-cookie%25E3%2581%25A7req.cookie%25E3%2581%258Cnull%25E3%2581%25AB%25E3%2581%25AA%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E7%2594%25B0%25E4%25B8%25AD%25E5%258B%2587%25E5%25A4%25AA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAyNTk3ZTVkYzAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>田中勇太</dc:creator></item><item><title><![CDATA[未踏ジュニア終わったから超大規模リファクタリングしてみた]]></title><description><![CDATA[こんにちは。そうまめです。
+!
+この記事は、未踏ジュニアアドベントカレンダーの記事です。
+
+今日は私が現在開発しているアプリ、TutoriaLLMというアプリを大規模にリファクタリングした話をしようと思います。だいぶ慣れてきたとはいえ、まだまだ界隈の方から見ると素人なので一般的に良くないとされるコードの書き方をしているかもしれません。あったらそっと教えてください。連絡先はこちら
+https://tutoriallm.com
+https://github.com/TutoriaLLM/TutoriaLLM
+
+ TutoriaLLMとは？
+
+Scratchのようなブロックプログラミングのチュ...]]></description><link>https://zenn.dev/1090/articles/13ad7d38e8912f</link><guid isPermaLink="true">https://zenn.dev/1090/articles/13ad7d38e8912f</guid><pubDate>Sat, 14 Dec 2024 03:13:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lQqW4yuJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%259C%25AA%25E8%25B8%258F%25E3%2582%25B8%25E3%2583%25A5%25E3%2583%258B%25E3%2582%25A2%25E7%25B5%2582%25E3%2582%258F%25E3%2581%25A3%25E3%2581%259F%25E3%2581%258B%25E3%2582%2589%25E8%25B6%2585%25E5%25A4%25A7%25E8%25A6%258F%25E6%25A8%25A1%25E3%2583%25AA%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25AF%25E3%2582%25BF%25E3%2583%25AA%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:So%2520Tokumaru%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSVVuU2ZBb1ltdm5zdWJMZG90Y2xtekRDZTBHTzF2ZGNnSVFuMVZwbXFrZ3FfTD1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>So Tokumaru</dc:creator></item><item><title><![CDATA[10分で読めるReact Nativeの全公式コンポーネントまとめ]]></title><description><![CDATA[この記事はReact Native 全部俺 Advent Calendar 14日目の記事です。
+https://adventar.org/calendars/10741
+
+ このアドベントカレンダーについて
+このアドベントカレンダーは @itome が全て書いています。
+基本的にReact NativeおよびExpoの公式ドキュメントとソースコードを参照しながら書いていきます。誤植や編集依頼はXにお願いします。
+
+ 10分で読めるReact Nativeの全公式コンポーネントまとめ
+React Nativeには意外と少ない数の公式コンポーネントしかありません。その分1つ1つのコンポーネ...]]></description><link>https://zenn.dev/woodstock_tech/articles/082ccfd3e12f80</link><guid isPermaLink="true">https://zenn.dev/woodstock_tech/articles/082ccfd3e12f80</guid><pubDate>Sat, 14 Dec 2024 02:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--MIqksFum--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:10%25E5%2588%2586%25E3%2581%25A7%25E8%25AA%25AD%25E3%2582%2581%25E3%2582%258BReact%2520Native%25E3%2581%25AE%25E5%2585%25A8%25E5%2585%25AC%25E5%25BC%258F%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%259D%25E3%2583%25BC%25E3%2583%258D%25E3%2583%25B3%25E3%2583%2588%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Takeshi%2520Tsukamoto%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E5MTQzNDllZDIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:woodstock.club%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NmMDM0ODM0YzMuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Takeshi Tsukamoto</dc:creator></item><item><title><![CDATA[Firestoreのマイグレーションツールを自作した]]></title><description><![CDATA[
+ はじめに
+株式会社スーパーハムスターでエンジニアをしているお茶です。
+開発ではよくFirestoreを使うことがあります。
+Firestoreで開発を行っている際、DB設計の変更などでスキーマが変わった時に既存のドキュメントとDB設計変更後のドキュメントに差異が生まれてしまうケースがよくあります。
+RDBなどではマイグレーションを行えば解決しますが、Firestoreにはマイグレーションの仕組みがないので自作することにしました。
+
+ Firestore
+FirestoreはGoogleが提供するドキュメント指向のNoSQLデータベースです。コレクションとドキュメントという入れ子構造の...]]></description><link>https://zenn.dev/makura_nageru/articles/1621b7b09dd3a0</link><guid isPermaLink="true">https://zenn.dev/makura_nageru/articles/1621b7b09dd3a0</guid><pubDate>Sat, 14 Dec 2024 01:01:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--TLu0Pfc7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Firestore%25E3%2581%25AE%25E3%2583%259E%25E3%2582%25A4%25E3%2582%25B0%25E3%2583%25AC%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%25E3%2582%2592%25E8%2587%25AA%25E4%25BD%259C%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258A%25E8%258C%25B6%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFUWEFKd3YxRE9DeDNXSVRPQTdiZUxlb1hFVnU3b1FieC1YYU9aQXNXelA9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>お茶</dc:creator></item><item><title><![CDATA[Jestでデバッグ実行時に特定のテストケースの時だけ実行を止める方法]]></title><description><![CDATA[この記事はCommune Advent Calendar 2024シリーズ1の14日目の記事です。
+
+ 背景
+Jestで特定のテストケースだけデバッグ実行したい場合、VS CodeやJetBrainsのIDE（WebStormなど）では簡単に特定のテストケースだけデバッグ実行することができます。しかし、describe.eachやtest.eachを使ってテストを実行する場合JetBrainsのIDEではそれらの中の個別のケースだけを実行することはできませんこのためtest.eachの中の特定のテストケースの時だけデバッグ実行したい場合に他のケースをコメントアウトするか、ブレークポイント...]]></description><link>https://zenn.dev/dev_commune/articles/a7caa932745a11</link><guid isPermaLink="true">https://zenn.dev/dev_commune/articles/a7caa932745a11</guid><pubDate>Sat, 14 Dec 2024 00:52:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--gDZ4oYHR--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Jest%25E3%2581%25A7%25E3%2583%2587%25E3%2583%2590%25E3%2583%2583%25E3%2582%25B0%25E5%25AE%259F%25E8%25A1%258C%25E6%2599%2582%25E3%2581%25AB%25E7%2589%25B9%25E5%25AE%259A%25E3%2581%25AE%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B9%25E3%2581%25AE%25E6%2599%2582%25E3%2581%25A0%25E3%2581%2591%25E5%25AE%259F%25E8%25A1%258C%25E3%2582%2592%25E6%25AD%25A2%25E3%2582%2581%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:isomura%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y1MTE3MTI5NDIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25B3%25E3%2583%259F%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%25B3%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZlNmQwZWQ5NGQuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>isomura</dc:creator></item><item><title><![CDATA[GTFS-RTを触ってみよう]]></title><description><![CDATA[この記事は Social Databank Advent Calendar 2024 の 14 日目の記事です。
+
+ はじめに
+皆さんは GTFS と GTFS-RT というものをご存知でしょうか？
+
+ GTFS
+GTFS は General Transit Feed Specification の略で公共交通機関の時刻表と地理的情報に関するオープンフォーマットです。
+公共交通機関のルートや停車時刻等の情報をそれぞれ CSV ファイルに記述し、CSV ファイルを 1 つの ZIP ファイルにまとめたものになります。
+GTFS は GTFS-static と呼ばれることもあります。
+
+ G...]]></description><link>https://zenn.dev/sdb_blog/articles/14c61fcdb54e</link><guid isPermaLink="true">https://zenn.dev/sdb_blog/articles/14c61fcdb54e</guid><pubDate>Fri, 13 Dec 2024 22:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Q7_5JnPg--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:GTFS-RT%25E3%2582%2592%25E8%25A7%25A6%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%2588%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:hsrmy%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzMyODFjNDczOTguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25BD%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A3%25E3%2583%25AB%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%2590%25E3%2583%25B3%25E3%2582%25AF%2520%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSTB4bC14THRBV0ptYjJKWUVkY3hyeEtpSTgyODNZSHZTSWkzbGRXMDdXb2c9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hsrmy</dc:creator></item></channel></rss>

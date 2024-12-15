@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Java」のフィード]]></title><description><![CDATA[Zennのトピック「Java」のRSSフィードです]]></description><link>https://zenn.dev/topics/java</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/5c47bb8423.png</url><title>Zennの「Java」のフィード</title><link>https://zenn.dev/topics/java</link></image><generator>zenn.dev</generator><lastBuildDate>Sun, 15 Dec 2024 05:42:38 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/java/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[初めてSpring Batchアプリケーションを触ってつまずいたポイント]]></title><description><![CDATA[
+ はじめに
+はじめまして！ウェルスナビのやましたと申します！
+私は新卒でバックエンド開発エンジニアとして入社し、社内業務システムの開発を行っているチームに配属されました。
+当チームでは、社内業務システムの開発および定期的なリリース作業を行なっています。
+そこで扱っている社内業務システムは仮想サーバー（Amazon EC2）で構築されているため、私はコンテナ化されたシステム（Amazon ECS）のリリース作業を行った経験がありませんでした。
+そんな中、バッチ処理が実行されているコンテナ化されたシステムのリリース作業を担当することになりました。各Gitリポジトリ・クラスの責務の違いや処理...]]></description><link>https://zenn.dev/wn_engineering/articles/47199739df26bd</link><guid isPermaLink="true">https://zenn.dev/wn_engineering/articles/47199739df26bd</guid><pubDate>Sun, 15 Dec 2024 03:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--499CO_x4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2588%259D%25E3%2582%2581%25E3%2581%25A6Spring%2520Batch%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%2592%25E8%25A7%25A6%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25A4%25E3%2581%25BE%25E3%2581%259A%25E3%2581%2584%25E3%2581%259F%25E3%2583%259D%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2582%2584%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE3MzZjZWRmZjIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:WealthNavi%2520Engineeri...%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzMxNTQxNTc5ZWMuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>やました</dc:creator></item><item><title><![CDATA[Springbootで動的なimageをhtmlに表示したい。]]></title><description><![CDATA[
+ はじめに
+個人開発中にぶつかった問題についてまとめます。
+メモです。
+
+ 想定読者
+SpringBoot初学者。
+
+ 開発環境
+SpringBoot
+Java
+Thymeleaf
+
+ メインコンテンツ
+
+ 動的なimageが表示できない。
+&lt;img th:src="@{/img/${employee.image}}" /&gt;
+
+上記のコードで画像を表示することができませんでした。
+
+
+ コードの説明
+
+EmployeeServiceクラスのshowDetailメソッドで従業員詳細情報を呼び出しています。
+リクエストスコープに、従業員情報を与えています。
+
+# Employe...]]></description><link>https://zenn.dev/monaka0309/articles/b691db94a3828d</link><guid isPermaLink="true">https://zenn.dev/monaka0309/articles/b691db94a3828d</guid><pubDate>Sun, 15 Dec 2024 00:45:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--sollDmSf--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Springboot%25E3%2581%25A7%25E5%258B%2595%25E7%259A%2584%25E3%2581%25AAimage%25E3%2582%2592html%25E3%2581%25AB%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2597%25E3%2581%259F%25E3%2581%2584%25E3%2580%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2582%25E3%2581%25AA%25E3%2581%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU3OTBkYzczMmYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>もなか</dc:creator></item><item><title><![CDATA[DateTimeFormatter を使っていてエラーが出た時の対処について]]></title><description><![CDATA[
+ 想定読者
+Java初学者
+
+ 開発環境
+Mac OS
+
+ メインコンテンツ
+
+ 実装したい内容
+2018-01-28T23:45:32
+
+ 現れたエラー
+Exception in thread "main" java.time.format.DateTimeParseException: Text '2018/01/28 23:45:32' could not be parsed at index 14
+        at java.base/java.time.format.DateTimeFormatter.parseResolved0(DateTimeFormatter.ja...]]></description><link>https://zenn.dev/monaka0309/articles/2ecf068b8bb720</link><guid isPermaLink="true">https://zenn.dev/monaka0309/articles/2ecf068b8bb720</guid><pubDate>Sun, 15 Dec 2024 00:43:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--makVdIxN--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:DateTimeFormatter%2520%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%2584%25E3%2581%25A6%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E3%2581%258C%25E5%2587%25BA%25E3%2581%259F%25E6%2599%2582%25E3%2581%25AE%25E5%25AF%25BE%25E5%2587%25A6%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2582%25E3%2581%25AA%25E3%2581%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU3OTBkYzczMmYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>もなか</dc:creator></item><item><title><![CDATA[Interfaceとstaticメソッドと匿名クラスのみでインスタンスを作る(小話)]]></title><description><![CDATA[
+ 概要
+staticメソッドと匿名クラスの仕組みを悪用することで、個別に名前を持ったクラスを作ることなく、interfaceを実装したインスタンスを使うことができます。
+
+ 対象とする読者
+
+物好きな人
+
+
+ 実際のコード
+public interface GreetingInterface {
+    public String greeting();
+
+    public static GreetingInterface getInstance() {
+        return new GreetingInterface() {
+            @Override
+ ...]]></description><link>https://zenn.dev/kinumiya/articles/3bd47c7ea81155</link><guid isPermaLink="true">https://zenn.dev/kinumiya/articles/3bd47c7ea81155</guid><pubDate>Sat, 14 Dec 2024 18:04:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lfZwKj9Q--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Interface%25E3%2581%25A8static%25E3%2583%25A1%25E3%2582%25BD%25E3%2583%2583%25E3%2583%2589%25E3%2581%25A8%25E5%258C%25BF%25E5%2590%258D%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25B9%25E3%2581%25AE%25E3%2581%25BF%25E3%2581%25A7%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%25B3%25E3%2582%25B9%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%2528%25E5%25B0%258F%25E8%25A9%25B1%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E7%25B5%25B9%25E5%25AE%25AE%25E7%25B4%2580%25E4%25BB%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUl0YnZtbFJ6bEwyWTBTZGRLRF9MSzhQU0xvRzRaZk5IMGdGdGRMSVl1Q3U9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>絹宮紀仁</dc:creator></item><item><title><![CDATA[JavaでOptionalを活用したNull安全設計]]></title><description><![CDATA[!
+この記事は BABY JOB Advent Calendar 2024 の 15 日目の記事です。
+
+
+ はじめに
+プログラムにおけるnullの扱いは、長年にわたり多くのエラーの原因となってきました。これは10億ドルの誤り[1]とも言われるほど、多くのシステムに悪影響を与えてきました。
+この課題を解決するため、近年のプログラミング言語（例：Kotlin、TypeScriptなど）ではNull安全が言語仕様として取り入れられています。これらの言語では、型システムでnullを許容する場合と許容しない場合を明示的に区別することで、開発者が安全にコードを記述できる仕組みを提供しています。
+一...]]></description><link>https://zenn.dev/babyjob/articles/6c20ed68f6ad43</link><guid isPermaLink="true">https://zenn.dev/babyjob/articles/6c20ed68f6ad43</guid><pubDate>Sat, 14 Dec 2024 15:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--H155u_h2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java%25E3%2581%25A7Optional%25E3%2582%2592%25E6%25B4%25BB%25E7%2594%25A8%25E3%2581%2597%25E3%2581%259FNull%25E5%25AE%2589%25E5%2585%25A8%25E8%25A8%25AD%25E8%25A8%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:norita%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNhODk4NDRkMDEuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:BABY%2520JOB%2520%2520%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NiZmVhNDJiMDUuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>norita</dc:creator></item><item><title><![CDATA[Java | Eclipse | Spring Boot | ビューとコントローラ | アプリの起動（ブラウザでページ表示）]]></title><description><![CDATA[
+ Java
+
+ Eclipse | Spring Boot
+
+ "ビュー(View)"ファイルの作成
+
+トップページのビューを作成してみる。
+"Spring Boot"で"Thymeleaf"を利用する場合、"ビュー(View)"ファイルは"src/main/resources/templates"フォルダ以下に配置する。
+
+
+
+[index.htmlファイルの作成]　src/main/resourcesフォルダの左側に表示されている矢印ボタンをクリックして展開したら、その中にあるtemplatesフォルダを右クリックする。右クリックしたら、「新規 &gt; ファイル」を選択する。"新...]]></description><link>https://zenn.dev/v6qh2bxj/articles/536b34279b29dd</link><guid isPermaLink="true">https://zenn.dev/v6qh2bxj/articles/536b34279b29dd</guid><pubDate>Sat, 14 Dec 2024 14:16:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--J_BxmIvR--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java%2520%257C%2520Eclipse%2520%257C%2520Spring%2520Boot%2520%257C%2520%25E3%2583%2593%25E3%2583%25A5%25E3%2583%25BC%25E3%2581%25A8%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2588%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%25A9%2520%257C%2520%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2581%25AE%25E8%25B5%25B7%25E5%258B%2595%25EF%25BC%2588%25E3%2583%2596%25E3%2583%25A9%25E3%2582%25A6%25E3%2582%25B6%25E3%2581%25A7%25E3%2583%259A...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:v6qh2bxj%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzgzYmY4Njc4OTUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>v6qh2bxj</dc:creator></item><item><title><![CDATA[JavaとTypeScriptでジェネリクスについて比較する]]></title><description><![CDATA[
+ はじめに
+この記事では、プログラミングの中でも便利だけどちょっと難しそうな「ジェネリクス（Generics）」について、JavaとTypeScriptの違いを比較しながら解説してみます！
+!
+「いやいや、それは違うでしょ！」と思うところがあれば、ぜひツッコミを入れてください！私もまだまだ勉強中なので、みなさんのフィードバックがめちゃくちゃ助かります。
+
+
+ ジェネリクスって何？
+
+ジェネリクスは簡単に言うと、型を柔軟に扱える仕組みのことです。
+具体的には、「この処理はどんな型でも動くようにしたい！」とか「後から型を決めたい！」というときに使います。これによって、コードを再利用しやすく...]]></description><link>https://zenn.dev/5hige99/articles/1fc327c47fa6c0</link><guid isPermaLink="true">https://zenn.dev/5hige99/articles/1fc327c47fa6c0</guid><pubDate>Sat, 14 Dec 2024 12:54:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--K3Cjv4vq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java%25E3%2581%25A8TypeScript%25E3%2581%25A7%25E3%2582%25B8%25E3%2582%25A7%25E3%2583%258D%25E3%2583%25AA%25E3%2582%25AF%25E3%2582%25B9%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E6%25AF%2594%25E8%25BC%2583%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:shige%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2IyNzA1YWYzZjYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>shige</dc:creator></item><item><title><![CDATA[Java | Eclipse | Spring Bootプロジェクトのひな型作成方法]]></title><description><![CDATA[
+ Java
+
+ Eclipse
+
+"Spring Boot"における「プロジェクト」とは、"Spring Bootを利用して開発する「アプリそのもの」"のこと。
+"ビルドツール"は、"アプリケーションが動作するように組み立てるツール"のこと。具体的にはプログラムの変換作業（コンパイル）や、変換されたファイルの整理などを行ってくれる。
+
+
+ SpringBootプロジェクトのひな型作成方法
+
+"Spring Boot"における「プロジェクト」とは、"Spring Bootを利用して開発する「アプリそのもの」"のこと。
+Eclipse での SpringBootの開発ツールは、"Sprin...]]></description><link>https://zenn.dev/v6qh2bxj/articles/5e2d7256fc2b5a</link><guid isPermaLink="true">https://zenn.dev/v6qh2bxj/articles/5e2d7256fc2b5a</guid><pubDate>Sat, 14 Dec 2024 12:26:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--K-frvPDY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java%2520%257C%2520Eclipse%2520%257C%2520Spring%2520Boot%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E3%2581%25AE%25E3%2581%25B2%25E3%2581%25AA%25E5%259E%258B%25E4%25BD%259C%25E6%2588%2590%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:v6qh2bxj%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzgzYmY4Njc4OTUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>v6qh2bxj</dc:creator></item><item><title><![CDATA[Java | SpringBoot | 民宿サイトを例にした、要件の定義例]]></title><description><![CDATA[
+ Java
+
+ SpringBoot
+
+ 民宿サイトを例にした、作成例
+
+"大まかな要件（アプリに求められる条件）"をまとめる。
+"必要なページ"と"必要な機能"を確認する。
+データーベースに必要なテーブルとカラムを確認する。
+実装手順を確認する。
+
+
+ [1] "大まかな要件（アプリに求められる条件）"をまとめる。
+（例）民宿サイト
+
+
+
+要件
+
+
+
+
+会員登録できること
+
+
+メールアドレスとパスワードでログインできること
+
+
+ログアウトできること
+
+
+会員情報を編集できること
+
+
+民宿を名前や目的地、都道府県、予算で検索できること
+
+
+民宿を新着順、宿泊料金が安い順に並べ替えられる...]]></description><link>https://zenn.dev/v6qh2bxj/articles/cb91c3047f50e8</link><guid isPermaLink="true">https://zenn.dev/v6qh2bxj/articles/cb91c3047f50e8</guid><pubDate>Sat, 14 Dec 2024 11:53:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--j4tUPnKx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java%2520%257C%2520SpringBoot%2520%257C%2520%25E6%25B0%2591%25E5%25AE%25BF%25E3%2582%25B5%25E3%2582%25A4%25E3%2583%2588%25E3%2582%2592%25E4%25BE%258B%25E3%2581%25AB%25E3%2581%2597%25E3%2581%259F%25E3%2580%2581%25E8%25A6%2581%25E4%25BB%25B6%25E3%2581%25AE%25E5%25AE%259A%25E7%25BE%25A9%25E4%25BE%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:v6qh2bxj%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzgzYmY4Njc4OTUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>v6qh2bxj</dc:creator></item><item><title><![CDATA[Java | SpringBoot | CRUD（クラッド）とMVCモデル]]></title><description><![CDATA[
+ Java
+
+ SpringBoot
+
+ CRUD（クラッド）
+
+CRUD（クラッド）は、以下の頭文字をとった言葉。
+
+
+
+
+CRUD（クラッド）
+内容
+
+
+
+
+Create
+データの作成
+
+
+Read
+読み取り
+
+
+Update
+更新
+
+
+Delete
+削除
+
+
+
+
+基本的にCRUD機能は扱うデータの数だけ必要。
+
+
+民宿サイトのCRUD構築例
+
+
+
+
+以下のそれぞれにCRUD機能が必要
+内容
+
+
+
+
+ログインする「ユーザー」というデータ
+usersテーブル
+
+
+予約する「民宿」というデータ
+housesテーブル
+
+
+
+
+
+ MVCモデル
+MVCモデルはSpring Bootを含む多...]]></description><link>https://zenn.dev/v6qh2bxj/articles/f89ef871799bc8</link><guid isPermaLink="true">https://zenn.dev/v6qh2bxj/articles/f89ef871799bc8</guid><pubDate>Sat, 14 Dec 2024 10:58:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--59RruXsL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java%2520%257C%2520SpringBoot%2520%257C%2520CRUD%25EF%25BC%2588%25E3%2582%25AF%25E3%2583%25A9%25E3%2583%2583%25E3%2583%2589%25EF%25BC%2589%25E3%2581%25A8MVC%25E3%2583%25A2%25E3%2583%2587%25E3%2583%25AB%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:v6qh2bxj%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzgzYmY4Njc4OTUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>v6qh2bxj</dc:creator></item><item><title><![CDATA[JavaのCollections.unmodifiableListを勘違いしていた話]]></title><description><![CDATA[
+ 概要
+Collections.unmodifiableListはリストに対する変更不能なビューを返すのであって、変更が不能なリストを返すわけではありません。
+そのため、ビューの元の参照に変更を加えると、Collections.unmodifiableListで返ってきたリストも変更されます。
+
+ 対象読者
+JavaのCollections.unmodifiableListの理解を深めたい人。
+Collections.unmodifiableListを使ったはずなのに何故かリストが書き換わる怪奇現象に出会った人。
+
+ unmodifiableListで得られたリストを書き換える
+Col...]]></description><link>https://zenn.dev/kinumiya/articles/c5759e5e3b8c1b</link><guid isPermaLink="true">https://zenn.dev/kinumiya/articles/c5759e5e3b8c1b</guid><pubDate>Sat, 14 Dec 2024 04:59:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5ieLlhud--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java%25E3%2581%25AECollections.unmodifiableList%25E3%2582%2592%25E5%258B%2598%25E9%2581%2595%25E3%2581%2584%25E3%2581%2597%25E3%2581%25A6%25E3%2581%2584%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E7%25B5%25B9%25E5%25AE%25AE%25E7%25B4%2580%25E4%25BB%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUl0YnZtbFJ6bEwyWTBTZGRLRF9MSzhQU0xvRzRaZk5IMGdGdGRMSVl1Q3U9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>絹宮紀仁</dc:creator></item><item><title><![CDATA[MybatisのXMLファイルの書き方を整理してみた]]></title><description><![CDATA[
+ はじめに
+本業やプライベートでもMybatisを使っていますが、これまでXMLを適当に書いていたので改めて整理しました
+参考：https://mybatis.org/mybatis-3/ja/sqlmap-xml.html
+
+ 基本的な書き方
+以下は基本的なselect構文です。
+
+selectPersonというネームスペース内で固有な識別子をもつ
+int型のidという変数を受け取る
+列名をkey、値をvalueとして保持するHashMapを返却す
+
+&lt;select id="selectPerson" parameterType="int" resultType="hashma...]]></description><link>https://zenn.dev/kosei1107/articles/ca31ac502d5f84</link><guid isPermaLink="true">https://zenn.dev/kosei1107/articles/ca31ac502d5f84</guid><pubDate>Sat, 14 Dec 2024 03:46:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--U7baD97v--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Mybatis%25E3%2581%25AEXML%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2581%25AE%25E6%259B%25B8%25E3%2581%258D%25E6%2596%25B9%25E3%2582%2592%25E6%2595%25B4%25E7%2590%2586%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Koo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q3M2RhZmJjMjcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Koo</dc:creator></item><item><title><![CDATA[java.utilのインターフェースのラッパークラスを作ろう(Decoratorパターン)]]></title><description><![CDATA[
+ 概要
+リストを引数に取りラップされたリストを返すメソッドの作り方と、その時に考えたことを話します。
+内容はDecoratorパターンを用いた実装です。
+
+ 対象
+既存のインターフェースの実装に対して、共通する特別な動作を追加したい人(例:リストに要素を追加する時に必ずソートするようにするなど)。
+
+ きっかけ
+最近Javaのコードを書いている時に、常にソートされているコードが欲しいなぁと思ったが、それらしいクラスはなかった[1]。
+
+ 要件
+
+リストに変更を加えた後にもリストがソートされていて欲しい。
+
+
+ 却下された案
+まずは、考えはしたけど却下された案について書いていきます。
+一...]]></description><link>https://zenn.dev/kinumiya/articles/d877a7d175ffd0</link><guid isPermaLink="true">https://zenn.dev/kinumiya/articles/d877a7d175ffd0</guid><pubDate>Fri, 13 Dec 2024 18:33:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--MtgLvXzQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:java.util%25E3%2581%25AE%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%2595%25E3%2582%25A7%25E3%2583%25BC%25E3%2582%25B9%25E3%2581%25AE%25E3%2583%25A9%25E3%2583%2583%25E3%2583%2591%25E3%2583%25BC%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25B9%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258D%25E3%2581%2586%2528Decorator%25E3%2583%2591%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%25B3%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E7%25B5%25B9%25E5%25AE%25AE%25E7%25B4%2580%25E4%25BB%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUl0YnZtbFJ6bEwyWTBTZGRLRF9MSzhQU0xvRzRaZk5IMGdGdGRMSVl1Q3U9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>絹宮紀仁</dc:creator></item><item><title><![CDATA[最速！Spring Bootで簡単Webアプリケーション開発〜入門編〜]]></title><description><![CDATA[本書は、Java初心者から中級者を対象に、Spring Bootを使用したWebアプリケーション開発の基礎をわかりやすく解説する入門書です。Spring Bootは、設定がシンプルで効率的な開発を可能にするJavaフレームワークとして、Webアプリケーションの開発で幅広く採用されています。環境構築から実際のアプリケーション開発までを解説しています。]]></description><link>https://zenn.dev/mojyamojya/books/java-spring-introduce</link><guid isPermaLink="true">https://zenn.dev/mojyamojya/books/java-spring-introduce</guid><pubDate>Fri, 13 Dec 2024 05:33:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--kwYR0le---/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci8zMDMzNWU2MzkxLmpwZWc=%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>AKIHIKO Sato</dc:creator></item><item><title><![CDATA[Processingの画像読み込みができなくなりハマったメモ【Windows】]]></title><description><![CDATA[
+ エラーの内容
+PImage gazou = loadImage("map-world.jpg");
+エラー文
+The file "mapworld.jpg" is missing or inaccessible, make sure the URL is valid or that the file has been added to your sketch and is readable.
+map-world.jpgが存在しないと言われてしまった
+
+ 試したこと① dataフォルダーの確認
+スケッチと同じ階層のdataフォルダーの中に、map-world.jpgが存在するかどうか確...]]></description><link>https://zenn.dev/esusaki/articles/5fce4ccb6953de</link><guid isPermaLink="true">https://zenn.dev/esusaki/articles/5fce4ccb6953de</guid><pubDate>Fri, 13 Dec 2024 04:51:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--pbyF1bwZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Processing%25E3%2581%25AE%25E7%2594%25BB%25E5%2583%258F%25E8%25AA%25AD%25E3%2581%25BF%25E8%25BE%25BC%25E3%2581%25BF%25E3%2581%258C%25E3%2581%25A7%25E3%2581%258D%25E3%2581%25AA%25E3%2581%258F%25E3%2581%25AA%25E3%2582%258A%25E3%2583%258F%25E3%2583%259E%25E3%2581%25A3%25E3%2581%259F%25E3%2583%25A1%25E3%2583%25A2%25E3%2580%2590Windows%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:susaki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc5MmVhMDA4MzEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>susaki</dc:creator></item><item><title><![CDATA[Spring Data JPAでIDとしてUUIDv7を利用する]]></title><description><![CDATA[この記事は jig.jp Advent Calender 2024 の13日目の記事です。
+
+初めまして、じんたんと申します。
+最近、家の電気毛布が2枚連続で壊れてしまいとても悲しい気持ちです。どうぞよろしくお願いします。
+Spring Data JPA のデフォルト実装である HibernateとMySQLを利用した記事となっております。
+
+ UUIDv7を使いたい
+
+連番IDと違いIDを推測されにくい
+時系列ソートが出来るのでUUIDv4よりもインデックス効率がいい
+時系列部分と乱数部分があるので衝突しにくい
+
+などの理由でUUIDv7を利用することになりました。
+
+ 既存のUUID...]]></description><link>https://zenn.dev/jigjp_engineer/articles/f0f3936eb8a8b4</link><guid isPermaLink="true">https://zenn.dev/jigjp_engineer/articles/f0f3936eb8a8b4</guid><pubDate>Fri, 13 Dec 2024 01:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--QDAbZt7h--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Spring%2520Data%2520JPA%25E3%2581%25A7ID%25E3%2581%25A8%25E3%2581%2597%25E3%2581%25A6UUIDv7%25E3%2582%2592%25E5%2588%25A9%25E7%2594%25A8%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%2598%25E3%2582%2593%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I5NGQxOTY3NzcuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:jig.jp%2520Engineers%2527%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSXhhOUZBUGhwdW04b21uMmFDTm1neTNEbFp0djV2alcteFQxX216WUlqTjBsOFJlX049czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>じん</dc:creator></item><item><title><![CDATA[[Mac] Javaのバージョンを簡単に切り替える]]></title><description><![CDATA[
+ やりたいこと
+プロジェクトによって、Javaのバージョンを切り替えたいということがあると思います。
+Node.jsのバージョンを切り替えるのは、nvmを使えば簡単にできますが、Javaのバージョンを切り替える方法がわからなかったので、調べてみました。
+
+ 前提
+前提として、MacOSで、Homebrewを使ってJavaをインストールしていることとします。
+現在使用しているJavaのバージョンは、java -versionで確認できます。
+$ java -version
+openjdk version "17.0.12" 2024-07-18
+OpenJDK Runtime Envir...]]></description><link>https://zenn.dev/notofu/articles/8579350ba042d8</link><guid isPermaLink="true">https://zenn.dev/notofu/articles/8579350ba042d8</guid><pubDate>Wed, 11 Dec 2024 13:38:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6WoVebkv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BMac%255D%2520Java%25E3%2581%25AE%25E3%2583%2590%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%2592%25E7%25B0%25A1%25E5%258D%2598%25E3%2581%25AB%25E5%2588%2587%25E3%2582%258A%25E6%259B%25BF%25E3%2581%2588%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kebab%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I4ZGUwMDRiYTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kebab</dc:creator></item><item><title><![CDATA[イレイジャってなんじゃ？]]></title><description><![CDATA[!
+この記事は Java Advent Calendar 2024 の 11 日目の記事です。
+
+他の方のレベルが高く、場違いじゃないかと本心はキョドっていますが、そんなことは気にせず、ハードルをくぐるスタイルで進めていきます。あしからず。
+
+ この記事はなんじゃ？（概要）
+みなさん、Java のイレイジャ（Type Erasure）はご存知ですか？
+少し前までの私はよく知りませんでした。
+この記事では、イレイジャとは何かを自分なりに学ぶための記事になります。
+実装ですぐに役に立つものではないですが、Java について興味を持ってもらえればと思います。
+
+ 前日譚（そもそものきっかけ）
+...]]></description><link>https://zenn.dev/mackey0225/articles/mackey0225-erasure-whats-that</link><guid isPermaLink="true">https://zenn.dev/mackey0225/articles/mackey0225-erasure-whats-that</guid><pubDate>Tue, 10 Dec 2024 15:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--CrFMgMFf--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25A4%25E3%2583%25AC%25E3%2582%25A4%25E3%2582%25B8%25E3%2583%25A3%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25AA%25E3%2582%2593%25E3%2581%2598%25E3%2582%2583%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mackey0225%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FkNTM5ZWRiYWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mackey0225</dc:creator></item><item><title><![CDATA[Java GPGPU (aparapi)]]></title><description><![CDATA[
+ Java
+
+ aparapi
+
+ [PukiWiki] 	
+Java aparapi で GPU を使う 
+
+
+ Jcuda
+
+Java で CUDA を導入する手順メモ
+
+]]></description><link>https://zenn.dev/v6qh2bxj/articles/deb56b478c013d</link><guid isPermaLink="true">https://zenn.dev/v6qh2bxj/articles/deb56b478c013d</guid><pubDate>Tue, 10 Dec 2024 14:24:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wji2Wj_I--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_76:Java%2520GPGPU%2520%2528aparapi%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:v6qh2bxj%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzgzYmY4Njc4OTUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>v6qh2bxj</dc:creator></item><item><title><![CDATA[Java　ラムダ式]]></title><description><![CDATA[
+ Java
+
+ ラムダ式
+
+ 参考サイト
+
+Java使いがC#を勉強する　その⑩　ラムダ式
+
+]]></description><link>https://zenn.dev/v6qh2bxj/articles/660a81e2da1a36</link><guid isPermaLink="true">https://zenn.dev/v6qh2bxj/articles/660a81e2da1a36</guid><pubDate>Tue, 10 Dec 2024 10:21:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vTXYYUCZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:Java%25E3%2580%2580%25E3%2583%25A9%25E3%2583%25A0%25E3%2583%2580%25E5%25BC%258F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:v6qh2bxj%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzgzYmY4Njc4OTUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>v6qh2bxj</dc:creator></item></channel></rss>
