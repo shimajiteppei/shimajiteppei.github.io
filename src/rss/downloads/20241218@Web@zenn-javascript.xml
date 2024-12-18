@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「JavaScript」のフィード]]></title><description><![CDATA[Zennのトピック「JavaScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/javascript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/64acd76870.png</url><title>Zennの「JavaScript」のフィード</title><link>https://zenn.dev/topics/javascript</link></image><generator>zenn.dev</generator><lastBuildDate>Wed, 18 Dec 2024 07:52:49 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/javascript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[JavaScriptで作る！ミニ言語のインタプリタ（８）〜静的型検査を実装する（２）〜]]></title><description><![CDATA[
+ はじめに
+前回の記事では、リテラルや制御構文、変数の代入/参照を含む基本的な式に対する静的型検査の実装を紹介しました。今回はその続きとして、関数定義と関数呼び出しにおける型検査を追加し、型安全性をさらに向上させます。
+
+ 必要なクラスの定義
+前回の記事では関数定義・呼び出しを含まないプログラムを対象に型検査をしていたため、プログラム全体が一つの式でした。しかし、今回は任意個の関数定義が並んだあとに式の並びが出てくるような形式であるため、クラス定義の追加・修正が必要になります。
+
+ Programクラス
+前々回の記事のように、再び以下のクラスProgramを対象として型検査を行うものと...]]></description><link>https://zenn.dev/nextbeat/articles/9e60c4b4d3251d</link><guid isPermaLink="true">https://zenn.dev/nextbeat/articles/9e60c4b4d3251d</guid><pubDate>Wed, 18 Dec 2024 02:11:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--336-HGha--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25E3%2581%25A7%25E4%25BD%259C%25E3%2582%258B%25EF%25BC%2581%25E3%2583%259F%25E3%2583%258B%25E8%25A8%2580%25E8%25AA%259E%25E3%2581%25AE%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25BF%25E3%2583%2597%25E3%2583%25AA%25E3%2582%25BF%25EF%25BC%2588%25EF%25BC%2598%25EF%25BC%2589%25E3%2580%259C%25E9%259D%2599%25E7%259A%2584%25E5%259E%258B%25E6%25A4%259C%25E6%259F%25BB%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2599%25E3%2582%258B%25EF%25BC%2588%25EF%25BC%2592%25EF%25BC%2589%25E3%2580%259C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:kmizu%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q3MzM5NTFkZmMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:nextbeat%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YlNka1h3ZXdRZENWdDRvbHk0OUkyNkgyNi1IS2k0R2phNGdJdno9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kmizu</dc:creator></item><item><title><![CDATA[CloudFront Functionsのテストツール「cfft」を導入した]]></title><description><![CDATA[
+ はじめに
+!
+こちらは READYFOR Advent Calendar 2024 の18日目の記事です。
+
+こんにちは、READYFORでエンジニアをしているshmokmtです。
+READYFORでは歴史的な背景[1]からLPを様々な構成でホスティングしています。
+
+Netlify
+CloudFront + S3（Origin）
+CloudFront + ALB + Ruby on Rails
+STUDIO
+
+しかし、近年では非エンジニアが主体となってLPを制作する際のファーストチョイスとして、STUDIO[2]を利用する機会も増えてきました。その結果、REDYFORでは下記の構成...]]></description><link>https://zenn.dev/readyfor_blog/articles/04d519020933db</link><guid isPermaLink="true">https://zenn.dev/readyfor_blog/articles/04d519020933db</guid><pubDate>Wed, 18 Dec 2024 00:47:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--rLgG6V6d--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:CloudFront%2520Functions%25E3%2581%25AE%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%25E3%2580%258Ccfft%25E3%2580%258D%25E3%2582%2592%25E5%25B0%258E%25E5%2585%25A5%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:shmokmt%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E4NzU2YzZmODkuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:READYFOR%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzEzZTEwODljYzAuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>shmokmt</dc:creator></item><item><title><![CDATA[ポケベル変換表のコードゴルフ]]></title><description><![CDATA[
+ はじめに
+みなさんこんにちは。株式会社ハウテレビジョン CTO のめもりーです。
+最近，マネジメントの話やら経営と技術の接続のような記事や登壇が多く，たまには技術的な記事でも書こうかなと思った次第です。
+この記事は HowTelevision Advent Calendar 18 日目の記事です。
+https://qiita.com/advent-calendar/2024/howtv
+
+ ポケベルって知ってますか？
+ポケベルはポケットベルのことで 80 年代くらいから流行り始めた携帯電話の前進のようなものです。まぁ私は生まれてないんですが。
+以下の表をもとに数字で打っていって変換し...]]></description><link>https://zenn.dev/memory/articles/9fbfbc9e2a36c0</link><guid isPermaLink="true">https://zenn.dev/memory/articles/9fbfbc9e2a36c0</guid><pubDate>Wed, 18 Dec 2024 00:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Xd0S1bB1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%259D%25E3%2582%25B1%25E3%2583%2599%25E3%2583%25AB%25E5%25A4%2589%25E6%258F%259B%25E8%25A1%25A8%25E3%2581%25AE%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2582%25B4%25E3%2583%25AB%25E3%2583%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2581%25E3%2582%2582%25E3%2582%258A%25E3%2583%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ExODVkYzczNjMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>めもりー</dc:creator></item><item><title><![CDATA[ユーザースクリプトで遊んでみたい]]></title><description><![CDATA[
+ 対象読者
+
+ユーザースクリプト始めてみたいけどなんか怖そうだと思ってる人
+俺だけの最強カスタムマクロを作りたい人
+
+
+ 非対象読者
+
+JavaScript (TypeScript) の書き方がわからない人
+
+
+ 入れたもの
+
+
+Node.js: 10.8.2
+
+入れ方: winget add nodejs
+
+
+Node.jsのインストール参照
+
+
+
+
+ やったこと
+
+ Node.jsのインストール
+wingetでおk
+念の為winget show nodejsで確認したのち、問題なさそうであればwinget add nodejsでインストールする。
+怪しげな名前のインストールスクリプ...]]></description><link>https://zenn.dev/sgthr7/articles/2e20e82262aad9</link><guid isPermaLink="true">https://zenn.dev/sgthr7/articles/2e20e82262aad9</guid><pubDate>Tue, 17 Dec 2024 16:10:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GXqejrB9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%25A6%25E3%2583%25BC%25E3%2582%25B6%25E3%2583%25BC%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2583%2588%25E3%2581%25A7%25E9%2581%258A%25E3%2582%2593%25E3%2581%25A7%25E3%2581%25BF%25E3%2581%259F%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:SGThr7%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2hLN2xJcnZrMTdYVUh5bGl0cXBuNGhLR2Zqekt6OEttcXNXbUxrZkE9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>SGThr7</dc:creator></item><item><title><![CDATA[ENCA 17日目: catch 束縛変数とそのブロック内の for...of 内の var による変数名重複の許容]]></title><description><![CDATA[!
+この記事は 1人 ECMAScript Normative Changes Advent Calendar 2024 の 17 日目です。
+
+
+ try 文の Static Semantics: Early Errors
+try 文の Static Semantics: Early Errors に catch によって束縛された変数と、その後続のブロック内で変数名が重複したとき SyntaxError となる記述がなされています。
+// SyntaxError
+try {} catch (e) { const e; }
+しかし var によって変数宣言されているときにも Synta...]]></description><link>https://zenn.dev/pixiv/articles/83155f3965bec3</link><guid isPermaLink="true">https://zenn.dev/pixiv/articles/83155f3965bec3</guid><pubDate>Tue, 17 Dec 2024 15:36:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5a0ACsOK--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ENCA%252017%25E6%2597%25A5%25E7%259B%25AE%253A%2520catch%2520%25E6%259D%259F%25E7%25B8%259B%25E5%25A4%2589%25E6%2595%25B0%25E3%2581%25A8%25E3%2581%259D%25E3%2581%25AE%25E3%2583%2596%25E3%2583%25AD%25E3%2583%2583%25E3%2582%25AF%25E5%2586%2585%25E3%2581%25AE%2520for...of%2520%25E5%2586%2585%25E3%2581%25AE%2520var%2520%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258B%25E5%25A4%2589%25E6%2595%25B0%25E5%2590%258D%25E9%2587%258D%25E8%25A4%2587%25E3%2581%25AE%25E8%25A8%25B1%25E5%25AE%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:petamoriken%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZhMDc3ZWRhZTMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:pixiv%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzMzODlhMzQ2ZjQuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>petamoriken</dc:creator></item><item><title><![CDATA[[Jint]Unity上でClusterScriptを動かすための一歩目]]></title><description><![CDATA[こんばんは！！かおもです！！！！！！！
+弊ツール「CSEmulator」はUnity上でClusterScriptを動かせるようにしたツールです。
+Unity上でClusterScriptを動かすためには、まずJavaScriptを動かす必要があります。
+ということで、これはJavaScriptインタプリタのJintの簡単な紹介記事です。
+Jintの記事が少なくて大変苦労したので、記事に残しておこうと思った次第です。
+!
+Jint 4.1.0時点の情報です。APIまわりが割とダイナミックに変わる印象があるので注意です。
+Unity 2021.3.4f1を使用しています。
+
+
+ JavaS...]]></description><link>https://zenn.dev/vkao/articles/efdf780fa3cf3a</link><guid isPermaLink="true">https://zenn.dev/vkao/articles/efdf780fa3cf3a</guid><pubDate>Tue, 17 Dec 2024 15:00:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--gAMh5hsd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BJint%255DUnity%25E4%25B8%258A%25E3%2581%25A7ClusterScript%25E3%2582%2592%25E5%258B%2595%25E3%2581%258B%25E3%2581%2599%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%25E4%25B8%2580%25E6%25AD%25A9%25E7%259B%25AE%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258B%25E3%2581%258A%25E3%2582%2582%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FGZFp1Y290c3hmV19RVmFPemc4a0ZoeUNZQ0YtMGFiZlBldEpJLUdpdFM5OFE9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>かおも</dc:creator></item><item><title><![CDATA[残余プロパティの命名は 「...rest」 に統一しませんか？]]></title><description><![CDATA[
+ はじめに
+今回はタイトルにあるように、命名に関する話を簡単に書こうと思います。JavaScriptやTypeScriptには、分割代入という構文があります。これはとても便利で、多くの開発現場で利用されているでしょう。例えば、Reactコンポーネントでpropsを扱う際によく用いられるのがオブジェクトの分割代入です。特定のプロパティ（例えばhoge）だけを抜き出し、残りのプロパティをまとめて扱いたいときに、以下のようなコードを書くことができます。
+const MyComponent = (props) =&gt; {
+    const { hoge, ...rest } = prop...]]></description><link>https://zenn.dev/ackndev/articles/052fdaab6a8bfc</link><guid isPermaLink="true">https://zenn.dev/ackndev/articles/052fdaab6a8bfc</guid><pubDate>Tue, 17 Dec 2024 15:00:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--WCn5SxP2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%25AE%258B%25E4%25BD%2599%25E3%2583%2597%25E3%2583%25AD%25E3%2583%2591%25E3%2583%2586%25E3%2582%25A3%25E3%2581%25AE%25E5%2591%25BD%25E5%2590%258D%25E3%2581%25AF%2520%25E3%2580%258C...rest%25E3%2580%258D%2520%25E3%2581%25AB%25E7%25B5%25B1%25E4%25B8%2580%25E3%2581%2597%25E3%2581%25BE%25E3%2581%259B%25E3%2582%2593%25E3%2581%258B%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:a2c%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg4OGUzNjE0MzMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>a2c</dc:creator></item><item><title><![CDATA[Jotai のステートってどこに定義するべき？]]></title><description><![CDATA[普段 React でアプリ開発をしており、Jotai ライブラリを用いています。
+https://jotai.org/
+Jotai では atom を用いて、グローバルな状態管理を始めとした色々なことができます。
+（ Jotai そのものについての詳細は公式サイトや他記事を参考にしてください 🙏 ）
+const countAtom = atom(0);
+さて早速ですが本題です。☝️この定義、どのディレクトリにあるどのファイルに定義すればよいのでしょうか？
+私はなんとなく、 atom 定義専用のディレクトリを作りたいです……この気持ちは一体何なんでしょう。これを掘り下げて自分なりに納得した...]]></description><link>https://zenn.dev/noalone1111/articles/f922b2ce544706</link><guid isPermaLink="true">https://zenn.dev/noalone1111/articles/f922b2ce544706</guid><pubDate>Tue, 17 Dec 2024 13:46:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Kcl33kcX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Jotai%2520%25E3%2581%25AE%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25BC%25E3%2583%2588%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25A9%25E3%2581%2593%25E3%2581%25AB%25E5%25AE%259A%25E7%25BE%25A9%25E3%2581%2599%25E3%2582%258B%25E3%2581%25B9%25E3%2581%258D%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ktym%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM5MDIxYjdjMWUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ktym</dc:creator></item><item><title><![CDATA[showPickerを使ってフィールドのどこをクリックしても日付Pickerが開くようにする]]></title><description><![CDATA[!
+この記事はPORTアドベントカレンダー2024の17日目の記事です🎄
+
+
+ はじめに
+この記事ではHTML5の&lt;input type="date"&gt;を拡張して、本来はカレンダーアイコンをクリックすることでしか開けない日付Picker（date picker）を、フィールドのどこをクリックしても開くようにする方法を紹介します。
+
+https://developer.mozilla.org/ja/docs/Web/HTML/Element/input/date
+
+ showPicker()を使用する
+HTMLInputElement.showPicker()は、実行するとin...]]></description><link>https://zenn.dev/port_inc/articles/db1b071997cdc7</link><guid isPermaLink="true">https://zenn.dev/port_inc/articles/db1b071997cdc7</guid><pubDate>Tue, 17 Dec 2024 12:14:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--yIqcr-AY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:showPicker%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2583%2595%25E3%2582%25A3%25E3%2583%25BC%25E3%2583%25AB%25E3%2583%2589%25E3%2581%25AE%25E3%2581%25A9%25E3%2581%2593%25E3%2582%2592%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2583%25E3%2582%25AF%25E3%2581%2597%25E3%2581%25A6%25E3%2582%2582%25E6%2597%25A5%25E4%25BB%2598Picker%25E3%2581%258C%25E9%2596%258B%25E3%2581%258F%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2583%2595%25E3%2582%25B8%25E3%2582%25BF%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzcyNzc0NTRhOWIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%259D%25E3%2583%25BC%25E3%2583%2588%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%2520%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM3ZGY1YWM3ODMuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>フジタ</dc:creator></item><item><title><![CDATA[clusterで複数人プレイのゲームが格段に作りやすくなった！]]></title><description><![CDATA[この記事は「Cluster #1 Advent Calendar 2024」の17日目の記事です。
+2020年にclusterでゲームを作れるようになってから（特にその年の後半あたりから「ロジック」とかでフクザツなゲームもいけるようになってから）、ずーっと言われてきたのが「Ownerを取れるようにしてほしい！」ってことです。
+
+ Owner問題の基本
+Ownerってのは何か？　公式の説明ではこんな感じですが……（ムズかしめなんでリンク先読まなくてもいいです）
+clusterは複数人でプレイできるゲームなんで、
+
+敵とか弾とかボールの動きを
+ワールド内にいる誰か（Owner） のPCやスマ...]]></description><link>https://zenn.dev/vins/articles/91466df45445d1</link><guid isPermaLink="true">https://zenn.dev/vins/articles/91466df45445d1</guid><pubDate>Tue, 17 Dec 2024 08:20:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--X1OJaIoq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:cluster%25E3%2581%25A7%25E8%25A4%2587%25E6%2595%25B0%25E4%25BA%25BA%25E3%2583%2597%25E3%2583%25AC%25E3%2582%25A4%25E3%2581%25AE%25E3%2582%25B2%25E3%2583%25BC%25E3%2583%25A0%25E3%2581%258C%25E6%25A0%25BC%25E6%25AE%25B5%25E3%2581%25AB%25E4%25BD%259C%25E3%2582%258A%25E3%2582%2584%25E3%2581%2599%25E3%2581%258F%25E3%2581%25AA%25E3%2581%25A3%25E3%2581%259F%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:vins%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2c0ZERlaWVTamtQcDFmTDYwS1FhTlpYMkpMeTJOOGtfeWRha1F6PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>vins</dc:creator></item><item><title><![CDATA[API]]></title><description><![CDATA[
+ 1. APIとは何か？
+APIは「アプリケーションの窓口」のようなもの。
+例えば、レストランのウェイターが注文をキッチンに伝え、料理を運んできてくれるように、APIは「リクエスト（要求）」を送り「レスポンス（結果）」を受け取る役割をします。
+
+ 2. リクエストとレスポンス
+APIを使う時、次の2つが基本です。
+
+
+リクエスト：データや処理を要求すること
+
+レスポンス：その結果として返ってくるデータ
+
+例えば、天気情報APIに「今日の東京の天気は？」とリクエストすると、「晴れ、気温25度」とレスポンスが返ってきます。
+
+ 3. APIのルール（プロトコル）
+APIにはルールがあり、そ...]]></description><link>https://zenn.dev/kimascript/articles/ee488071766f53</link><guid isPermaLink="true">https://zenn.dev/kimascript/articles/ee488071766f53</guid><pubDate>Tue, 17 Dec 2024 03:02:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7IQ3cbIK--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_80:API%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ2N2UwMmQyNDEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>...</dc:creator></item><item><title><![CDATA[メールアドレスの優しいバリデーションとは]]></title><description><![CDATA[
+ はじめに
+アカウント登録のためのページを作成する際、ほぼ必須といってよい入力項目として、ユーザーID、パスワード、そしてメールアドレスがあります。
+ユーザーID、パスワードについては要件によって正しいバリデーションは変わるかと思いますが、メールアドレスについては、必ずアットマークがついているなどのルールが存在することは明らかですから、正しいバリデーションが存在していそうです。そのため、実装も既存のバリデーションのライブラリを利用すれば簡単に終わると私は思っていました。
+しかしながら、私は悩みました…なぜならメールアドレスの場合、正しいバリデーションがユーザーにとって優しいバリデーショ...]]></description><link>https://zenn.dev/namos_blog/articles/a96a5a33fe7cf2</link><guid isPermaLink="true">https://zenn.dev/namos_blog/articles/a96a5a33fe7cf2</guid><pubDate>Mon, 16 Dec 2024 22:38:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--aR0wXMtd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%25A1%25E3%2583%25BC%25E3%2583%25AB%25E3%2582%25A2%25E3%2583%2589%25E3%2583%25AC%25E3%2582%25B9%25E3%2581%25AE%25E5%2584%25AA%25E3%2581%2597%25E3%2581%2584%25E3%2583%2590%25E3%2583%25AA%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2581%25A8%25E3%2581%25AF%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:y-kashima%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhiMjQyZTM1NzguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:NAMOS%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzUwNTJkYjM4NDcuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>y-kashima</dc:creator></item><item><title><![CDATA[Laravel8の一部にReactを導入するには]]></title><description><![CDATA[
+ はじめに
+Reactの入門書を見るとcreate-react-appでSPAを作る方法しか載っていないことが多くて、Laravelの一部に注入して、動きの管理がややこしいところだけReactでやりたいって時の方法がありません。
+Laravelはvue.jsのサポートは手厚くて、vue.jsの場合は設定が少なく済んだりするのですが、Reactではどうするのでしょうか。
+導入できた方法を公開します。
+なお、今回はLaravel8のlaravel-mixを使っていますが新しいLaravelだとビルドツールが違うかもしれません。その場合は適宜読み替えてください。
+
+ Reactのインストール...]]></description><link>https://zenn.dev/k_tabuchi/articles/a7dca1d0fef514</link><guid isPermaLink="true">https://zenn.dev/k_tabuchi/articles/a7dca1d0fef514</guid><pubDate>Mon, 16 Dec 2024 15:50:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vIccaici--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Laravel8%25E3%2581%25AE%25E4%25B8%2580%25E9%2583%25A8%25E3%2581%25ABReact%25E3%2582%2592%25E5%25B0%258E%25E5%2585%25A5%25E3%2581%2599%25E3%2582%258B%25E3%2581%25AB%25E3%2581%25AF%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:k-tabuchi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhkMjhhY2RlZGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>k-tabuchi</dc:creator></item><item><title><![CDATA[Re: React Tokyoというコミュニティを作ろうと思ったワケ]]></title><description><![CDATA[https://zenn.dev/dai_shi/articles/9f2760086fb31a
+はじめまして、React Tokyoのもう一人の発起人のTeruhisaです。
+上記の@dai_shiさんが書かれた記事に添える形で、私の視点で何かしら書こうと思います。
+https://x.com/ReactTokyo/status/1864325542746706283
+
+ そもそも私は誰
+Daishi Katoさんは、世界的にも名の通ったReact界のレジェンドであることは疑いようもなく、そんな人が母国日本でReact Tokyoという大きな看板でコミュニティを立ち上げたことも、自然な...]]></description><link>https://zenn.dev/tell_y/articles/f013a03370ee27</link><guid isPermaLink="true">https://zenn.dev/tell_y/articles/f013a03370ee27</guid><pubDate>Mon, 16 Dec 2024 15:43:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--nN8lpuKi--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Re%253A%2520React%2520Tokyo%25E3%2581%25A8%25E3%2581%2584%25E3%2581%2586%25E3%2582%25B3%25E3%2583%259F%25E3%2583%25A5%25E3%2583%258B%25E3%2583%2586%25E3%2582%25A3%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258D%25E3%2581%2586%25E3%2581%25A8%25E6%2580%259D%25E3%2581%25A3%25E3%2581%259F%25E3%2583%25AF%25E3%2582%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Teruhisa%2520-%2520T6ADEV%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VhNDg5NTAyZTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Teruhisa - T6ADEV</dc:creator></item><item><title><![CDATA[インデックスアクセス時にundefinedを考慮する]]></title><description><![CDATA[JavaScriptの特徴的な挙動の一つとして、配列やオブジェクトに存在しないインデックスやプロパティにアクセスするとundefinedが返される点があります。
+この挙動は実行時エラーを引き起こす原因となるため注意が必要です。（自戒を込めて）
+その問題を防ぐため、TypeScriptでは明示的にundefinedを考慮した安全なコードを書くことが推奨されます。
+また、オブジェクトのプロパティアクセスでも同様の問題が発生する可能性があります。存在しないプロパティにアクセスした場合、その結果もundefinedとなります。
+
+
+ 存在しないインデックスやプロパティにアクセスすると
+以下の例で...]]></description><link>https://zenn.dev/tatsuki_dev06/articles/e8c55186d2655d</link><guid isPermaLink="true">https://zenn.dev/tatsuki_dev06/articles/e8c55186d2655d</guid><pubDate>Mon, 16 Dec 2024 15:02:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0SXT8hZm--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2587%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25B9%25E3%2582%25A2%25E3%2582%25AF%25E3%2582%25BB%25E3%2582%25B9%25E6%2599%2582%25E3%2581%25ABundefined%25E3%2582%2592%25E8%2580%2583%25E6%2585%25AE%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tatsuki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2YyMDMyNTZiNDQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tatsuki</dc:creator></item><item><title><![CDATA[React19 アップデートまとめ]]></title><description><![CDATA[
+ はじめに
+こんにちはたくみです．
+今朝，ふと X を見ていたら，React 公式から嬉しいポストがされていました．
+なんと！！React19 が安定リリースされました！！！
+この機会に React19 のアップデートの内容をまとめておこうと思います！
+
+ Action
+React には，「アクション」という概念があります．
+アクションとは一言でいうと，「非同期トランジションを使用する関数」と呼ばれています．
+昔の React では，ユーザーのアクションに対して何か行いたいとき，「送信状態」，「エラー」，「リクエストの順序」などを，すべて手動で行う必要がありました．アクションは，これら...]]></description><link>https://zenn.dev/uniformnext/articles/react19-update-summary</link><guid isPermaLink="true">https://zenn.dev/uniformnext/articles/react19-update-summary</guid><pubDate>Mon, 16 Dec 2024 14:49:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ACz30QQq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React19%2520%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%25E3%2583%2587%25E3%2583%25BC%25E3%2583%2588%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:takumi%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VjMTE2MTQ2NWYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%25A6%25E3%2583%258B%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25BC%25E3%2583%25A0%25E3%2583%258D%25E3%2582%25AF%25E3%2582%25B9%25E3%2583%2588%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQzYjM5OWJmOGMuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takumi</dc:creator></item><item><title><![CDATA[【JavaScript,TypeScript】オブジェクトのまとめ]]></title><description><![CDATA[
+ オブジェクト
+TypeScriptやJavaScriptでは、{}を使うとプロパティを備えたオブジェクトの定義と生成を簡単に行うことができます。
+https://typescriptbook.jp/reference/values-types-variables/object/object-literal
+// 空っぽのオブジェクトを生成
+const object = {};
+ 
+// プロパティを指定しながらオブジェクトを生成
+const person = { name: "Bob", age: 25 };
+
+console.log(object);//{}
+console.log...]]></description><link>https://zenn.dev/junyamachida/articles/7c2ad6743dfb7c</link><guid isPermaLink="true">https://zenn.dev/junyamachida/articles/7c2ad6743dfb7c</guid><pubDate>Mon, 16 Dec 2024 14:07:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fnhmndqS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590JavaScript%252CTypeScript%25E3%2580%2591%25E3%2582%25AA%25E3%2583%2596%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E3%2581%25AE%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Junya%2520Machida%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dxV083OUtMdS1yQU5ucDdEbFY5NU1IWmJJYU1vU0ZDcVFFN0t3a3c9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Junya Machida</dc:creator></item><item><title><![CDATA[【初級者脱却】JavaScriptの非同期通信について#1　async関数の戻り値]]></title><description><![CDATA[
+ はじめに
+JavaScriptにおける非同期通信で躓いた人は結構多いかと思います。
+若手エンジニアはこれをなんとなく使えるって人は多いけど、ちゃんと仕組みを理解して使えている人は決して多くない印象。
+そこで、小難しい解説を極力排除しつつ、JavaScriptの非同期通信を理解するサポートになる記事を複数回に分けて書いていきたいと思います。
+今回はその第1弾です。
+
+ async関数
+JavaScriptにおける非同期通信は、以前はPromise-thenを使ったメソッドチェーンが使われていましたが、今はES8で追加されたasync-awaitを使った記述が一般的かと思います。　
+as...]]></description><link>https://zenn.dev/tkfm84/articles/32cc418ed2b45b</link><guid isPermaLink="true">https://zenn.dev/tkfm84/articles/32cc418ed2b45b</guid><pubDate>Mon, 16 Dec 2024 12:12:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--n6vYpXZ---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%2588%259D%25E7%25B4%259A%25E8%2580%2585%25E8%2584%25B1%25E5%258D%25B4%25E3%2580%2591JavaScript%25E3%2581%25AE%25E9%259D%259E%25E5%2590%258C%25E6%259C%259F%25E9%2580%259A%25E4%25BF%25A1%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25231%25E3%2580%2580async%25E9%2596%25A2%25E6%2595%25B0%25E3%2581%25AE%25E6%2588%25BB%25E3%2582%258A%25E5%2580%25A4%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tkfm%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4WmkwZ3dBMExsVjlLbWFxdmRPZXlpSi1vclNjeHY5ampUNFJ4Wl9xZz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tkfm</dc:creator></item><item><title><![CDATA[ENCA 16日目: Intl API に渡す引数の挙動をコア API に合わせる（リジェクト）]]></title><description><![CDATA[!
+この記事は 1人 ECMAScript Normative Changes Advent Calendar 2024 の 16 日目です。
+
+
+ ECMA-402 Intl API について
+JavaScript コアの言語仕様は ECMA-262 に定義されています。そしてその拡張仕様である Intl API が ECMA-402 で定義されています。国や言語、文化によって異なる処理をサポートします。
+// 通貨のフォーマット
+const formatter = new Intl.NumberFormat("ja-JP", {
+  style: "currency",
+  curr...]]></description><link>https://zenn.dev/pixiv/articles/0faf1201e569a7</link><guid isPermaLink="true">https://zenn.dev/pixiv/articles/0faf1201e569a7</guid><pubDate>Mon, 16 Dec 2024 11:51:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8DL5xIRB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ENCA%252016%25E6%2597%25A5%25E7%259B%25AE%253A%2520Intl%2520API%2520%25E3%2581%25AB%25E6%25B8%25A1%25E3%2581%2599%25E5%25BC%2595%25E6%2595%25B0%25E3%2581%25AE%25E6%258C%2599%25E5%258B%2595%25E3%2582%2592%25E3%2582%25B3%25E3%2582%25A2%2520API%2520%25E3%2581%25AB%25E5%2590%2588%25E3%2582%258F%25E3%2581%259B%25E3%2582%258B%25EF%25BC%2588%25E3%2583%25AA%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:petamoriken%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZhMDc3ZWRhZTMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:pixiv%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzMzODlhMzQ2ZjQuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>petamoriken</dc:creator></item><item><title><![CDATA[【Xmasのプレゼント交換に】YouTube再生を指定した秒数で停止するブックマークレット]]></title><description><![CDATA[
+ はじめに
+みなさん、こんにちは。
+今回はYouTube動画の再生を停止するブックマークレットを作ったのでご紹介します。
+これからクリスマスのプレゼント交換をする方などの参考になれば幸いです。
+
+ ブックマークレットとは
+
+ 概要
+
+ブックマークに保存して実行する小さなJavaScriptコード
+
+ブックマークレットは、ブラウザのブックマーク機能を利用して保存・実行する小さな JavaScriptコード のことです。通常のウェブページとは異なり、現在開いているページの内容を操作したり変更したりするための簡易的なスクリプトとして動作します。
+
+ ブックマークレットの書き方
+
+ 概要
+
+コ...]]></description><link>https://zenn.dev/peter_norio/articles/d65f70ffbc31ea</link><guid isPermaLink="true">https://zenn.dev/peter_norio/articles/d65f70ffbc31ea</guid><pubDate>Mon, 16 Dec 2024 11:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--iiLLAocq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Xmas%25E3%2581%25AE%25E3%2583%2597%25E3%2583%25AC%25E3%2582%25BC%25E3%2583%25B3%25E3%2583%2588%25E4%25BA%25A4%25E6%258F%259B%25E3%2581%25AB%25E3%2580%2591YouTube%25E5%2586%258D%25E7%2594%259F%25E3%2582%2592%25E6%258C%2587%25E5%25AE%259A%25E3%2581%2597%25E3%2581%259F%25E7%25A7%2592%25E6%2595%25B0%25E3%2581%25A7%25E5%2581%259C%25E6%25AD%25A2%25E3%2581%2599%25E3%2582%258B%25E3%2583%2596%25E3%2583%2583%25E3%2582%25AF%25E3%2583%259E%25E3%2583%25BC%25E3%2582%25AF%25E3%2583%25AC%25E3%2583%2583%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%2594%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%25BC%25E3%2581%25AE%25E3%2582%258A%25E3%2581%258A%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSTcwSTlWTjhXNHl3eWRJY1JlYzFWaUJtc3B6S3lfX3JzeTUyYmJhRFh0c29FVzJDZz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ピーターのりお</dc:creator></item></channel></rss>
