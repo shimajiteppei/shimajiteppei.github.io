@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「shell」のフィード]]></title><description><![CDATA[Zennのトピック「shell」のRSSフィードです]]></description><link>https://zenn.dev/topics/shell</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/c8d33e6510.jpeg</url><title>Zennの「shell」のフィード</title><link>https://zenn.dev/topics/shell</link></image><generator>zenn.dev</generator><lastBuildDate>Thu, 19 Dec 2024 12:04:24 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/shell/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[curl で gRPC の疎通確認をしたい]]></title><description><![CDATA[
+ 実行コマンド
+printf '\x00\x00\x00\x00\x00' |
+  curl \
+    -v -s --http2 \
+    -H "Content-Type: application/grpc" \
+    -H "TE: trailers" \
+    --data-binary @- --output - \
+    "${GRPC_ENDPOINT:?}/grpc.health.v1.Health/Check" |
+  hexdump -C 
+空のメッセージを /grpc.health.v1.Health/Check 宛に送ってあげれば良い。
+
+ 実行例
+
+...]]></description><link>https://zenn.dev/ginokent/articles/2eb44c78718c2c</link><guid isPermaLink="true">https://zenn.dev/ginokent/articles/2eb44c78718c2c</guid><pubDate>Thu, 19 Dec 2024 07:24:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--kTtwTvo1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:curl%2520%25E3%2581%25A7%2520gRPC%2520%25E3%2581%25AE%25E7%2596%258E%25E9%2580%259A%25E7%25A2%25BA%25E8%25AA%258D%25E3%2582%2592%25E3%2581%2597%25E3%2581%259F%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ginokent%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FGZFp1Y3A4ams5ZGJhRkJRQjRZRjZuU0pBVTNhUlBsM2YtRkNRYi10VzRhPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ginokent</dc:creator></item><item><title><![CDATA[俺のガチってるdotfiles紹介]]></title><description><![CDATA[
+ はじめに
+どうもです。3-shake の melanmeg です
+今回は dotfiles 紹介です。
+エンジニアにとっては、dotfiles は作業効率を上げるための 自分用チートシート のように感じています。もしくは これまで コツコツと積み上げてきた財産 ...ですかね。
+普段から使い慣れた環境をどこでも再現できるようにしておくことで、複数の端末で素早く自分好みの環境を用意できます！
+シェルやVSCodeのカスタマイズ、Gitの便利設定、そして新しいVMでの簡単なセットアップ方法を紹介します。dotfiles管理の魅力を共有し、皆さんの環境構築がもっと楽しくなればと思います🙇
+...]]></description><link>https://zenn.dev/melanmeg/articles/dd0b9606352fb9</link><guid isPermaLink="true">https://zenn.dev/melanmeg/articles/dd0b9606352fb9</guid><pubDate>Tue, 17 Dec 2024 22:00:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ffrSn5Ux--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E4%25BF%25BA%25E3%2581%25AE%25E3%2582%25AC%25E3%2583%2581%25E3%2581%25A3%25E3%2581%25A6%25E3%2582%258Bdotfiles%25E7%25B4%25B9%25E4%25BB%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:melanmeg%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q1OGE1Y2Q4MGYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>melanmeg</dc:creator></item><item><title><![CDATA[Bashで定義されている変数の完全な一覧]]></title><description><![CDATA[
+ 組み込み変数とは
+Bashやシステムによってデフォルトで定義されている定数です。
+envコマンドでも一覧表示することはできないのですが、スクリプト内で呼び出すとちゃんと値を返してくれます。
+ここらへんの挙動は正直謎...
+
+ 情報元
+以下に完全な一覧が掲載されています。
+https://www.gnu.org/software/bash/manual/html_node/Bash-Variables.html
+]]></description><link>https://zenn.dev/hayao/articles/a40a4ce47c5ede</link><guid isPermaLink="true">https://zenn.dev/hayao/articles/a40a4ce47c5ede</guid><pubDate>Tue, 17 Dec 2024 04:25:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--SrixlmP6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Bash%25E3%2581%25A7%25E5%25AE%259A%25E7%25BE%25A9%25E3%2581%2595%25E3%2582%258C%25E3%2581%25A6%25E3%2581%2584%25E3%2582%258B%25E5%25A4%2589%25E6%2595%25B0%25E3%2581%25AE%25E5%25AE%258C%25E5%2585%25A8%25E3%2581%25AA%25E4%25B8%2580%25E8%25A6%25A7%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25B1%25B1%25E7%2594%25B0%25E3%2583%258F%25E3%2583%25A4%25E3%2582%25AA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lZMG9RMVBtQ2N2aXpaNHIzYnA4T1B1MU5jQV84UDR6czlSYzBYdXc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>山田ハヤオ</dc:creator></item><item><title><![CDATA[Salesforce API通信できるまで(2)]]></title><description><![CDATA[!
+この記事は株式会社カオナビ Advent Calendar 2024 シリーズ2の17日目の記事です。
+
+https://qiita.com/advent-calendar/2024/kaonavi
+
+ 概要
+
+カオナビではSalesforceとAPI連携してシステム開発をしてます
+この記事では【Salesforce のAPI疎通確認方法】を投稿します
+
+前の記事では「Developer環境作成」 から「データの登録」「APIを利用するためのフレームワーク設定」までをまとめております
+
+今回はデータを登録した内容をAPIを通じて取得する疎通確認までやってみます
+
+
+開発や仕組みは理解...]]></description><link>https://zenn.dev/harieshokunin/articles/3098292b20b04d</link><guid isPermaLink="true">https://zenn.dev/harieshokunin/articles/3098292b20b04d</guid><pubDate>Sat, 14 Dec 2024 07:46:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ZJxqZDp8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Salesforce%2520API%25E9%2580%259A%25E4%25BF%25A1%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258B%25E3%2581%25BE%25E3%2581%25A7%25282%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E8%25B2%25BC%25E3%2582%258A%25E7%25B5%25B5%25E8%2581%25B7%25E4%25BA%25BA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pmWmJmZWxybVEtLV84eDVjeFA4QklXc1dIdmhOZDFiWXNfd095b0E9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>貼り絵職人</dc:creator></item><item><title><![CDATA[Salesforce API通信できるまで(1)]]></title><description><![CDATA[!
+この記事は株式会社カオナビ Advent Calendar 2024 シリーズ2の16日目の記事です。
+
+https://qiita.com/advent-calendar/2024/kaonavi
+
+ 概要
+
+カオナビではSalesforceとAPI連携してシステム開発をしてます
+この記事では【Salesforce の無料で使える開発環境「Developer Edition」の取得方法】を投稿します
+今回は「Developer環境作成」 から「データの登録」「APIを利用するためのフレームワーク設定」までをまとめております
+
+
+次の記事では、データを登録した内容をAPIを通じて取得...]]></description><link>https://zenn.dev/harieshokunin/articles/7de11377b56bf4</link><guid isPermaLink="true">https://zenn.dev/harieshokunin/articles/7de11377b56bf4</guid><pubDate>Sat, 14 Dec 2024 07:42:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--h00mzNwX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Salesforce%2520API%25E9%2580%259A%25E4%25BF%25A1%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258B%25E3%2581%25BE%25E3%2581%25A7%25281%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E8%25B2%25BC%25E3%2582%258A%25E7%25B5%25B5%25E8%2581%25B7%25E4%25BA%25BA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pmWmJmZWxybVEtLV84eDVjeFA4QklXc1dIdmhOZDFiWXNfd095b0E9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>貼り絵職人</dc:creator></item><item><title><![CDATA[Batsを使ってシェルスクリプトをテストする]]></title><description><![CDATA[
+ はじめに
+この記事はシェルスクリプト＆PowerShell Advent Calendar 2024の12日目として書かれています。
+https://qiita.com/advent-calendar/2024/shell
+
+ 概要
+https://github.com/bats-core/bats-core
+BatsはBash用のテストフレームワークです。
+何らかのプログラミング言語で書くまででもない簡単なスクリプトを書こうと思った際に、とはいえテストが欲しいと思って見つけたのがBatsでした。
+今回は簡単なBatsのテストコードの紹介をします。
+書いたコードはここに置いています。...]]></description><link>https://zenn.dev/ara_ta3/articles/shell-script-test-with-bats</link><guid isPermaLink="true">https://zenn.dev/ara_ta3/articles/shell-script-test-with-bats</guid><pubDate>Thu, 12 Dec 2024 05:11:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--SuaS07pt--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Bats%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2582%25B7%25E3%2582%25A7%25E3%2583%25AB%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2583%2588%25E3%2582%2592%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ara_ta3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzIwMmNmMDMwYzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ara_ta3</dc:creator></item><item><title><![CDATA[記号だけでシェルピンスキーのギャスケットを描く]]></title><description><![CDATA[
+
+ はじめに
+シェルスクリプトで雪の結晶を描くという記事を書いた。
+https://eng-blog.iij.ad.jp/archives/28606
+この記事には頭がおかしいスクリプトしか出てこないのだが、その中でもとくにイカレてるのが、シェルピンスキーのギャスケットと呼ばれるフラクタル図形を描画する以下のシェルスクリプトである(元記事から1ヶ所修正した部分がある。詳しくは後述)。
+! _(){
+((____=__,${_______=_____[____]^=_____[____-__],++____&lt;___&amp;&amp;_______}))
+$______&lt;&l...]]></description><link>https://zenn.dev/yamaya/articles/f4ea47e5c70d64</link><guid isPermaLink="true">https://zenn.dev/yamaya/articles/f4ea47e5c70d64</guid><pubDate>Wed, 11 Dec 2024 03:55:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--DVTUaYXZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%25A8%2598%25E5%258F%25B7%25E3%2581%25A0%25E3%2581%2591%25E3%2581%25A7%25E3%2582%25B7%25E3%2582%25A7%25E3%2583%25AB%25E3%2583%2594%25E3%2583%25B3%25E3%2582%25B9%25E3%2582%25AD%25E3%2583%25BC%25E3%2581%25AE%25E3%2582%25AE%25E3%2583%25A3%25E3%2582%25B9%25E3%2582%25B1%25E3%2583%2583%25E3%2583%2588%25E3%2582%2592%25E6%258F%258F%25E3%2581%258F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yamaya%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFUWEFKeXpaNXEwZXI1dzkzQ012dk0wcEpfOG1md1d5VVY3a3pYWVZIT2k9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yamaya</dc:creator></item><item><title><![CDATA[Nushellと既存のシェルを併用する - なるべく移行しないで行こう！]]></title><description><![CDATA[この記事はNushell Advent Calendar 10日目の記事です。
+新しい職場で開発環境のセットアップをしていて気づいたんですが、既存のツール群は当然Bashや（macOSの場合）Zshを前提としていることが多いので「Nushell（あるいはその他非POSIX shell）に移行するには、そうしたスクリプトとか.zshrcとか.bashrcとかも全部移行しないといけないのでは？」と思っている方も多いかも知れません。
+しかし、実際のところLinuxでもmacOSでもWindowsでも仕様上、環境変数（.bashrcなどでexportした変数）は原則全て子プロセスに引き継がれるの...]]></description><link>https://zenn.dev/igrep/articles/2024-12-use-both-nu-and-others</link><guid isPermaLink="true">https://zenn.dev/igrep/articles/2024-12-use-both-nu-and-others</guid><pubDate>Tue, 10 Dec 2024 13:10:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--epHVbIEf--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Nushell%25E3%2581%25A8%25E6%2597%25A2%25E5%25AD%2598%25E3%2581%25AE%25E3%2582%25B7%25E3%2582%25A7%25E3%2583%25AB%25E3%2582%2592%25E4%25BD%25B5%25E7%2594%25A8%25E3%2581%2599%25E3%2582%258B%2520-%2520%25E3%2581%25AA%25E3%2582%258B%25E3%2581%25B9%25E3%2581%258F%25E7%25A7%25BB%25E8%25A1%258C%25E3%2581%2597%25E3%2581%25AA%25E3%2581%2584%25E3%2581%25A7%25E8%25A1%258C%25E3%2581%2593%25E3%2581%2586%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:YAMAMOTO%2520Yuji%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2QzNWJhYTQ2ZWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>YAMAMOTO Yuji</dc:creator></item><item><title><![CDATA[fileコマンドのmagicファイルの書き方]]></title><description><![CDATA[
+ はじめに
+この記事では、file(1)コマンドがファイルフォーマットを識別するために使うmagicファイル（/usr/share/file/misc/magicなどに置かれる）の書き方について説明します。
+これにより、独自のファイルフォーマットやhttps://github.com/file/fileに含まれていないファイルフォーマットをfileコマンドで識別できるようになります。
+
+ 仕様
+magicファイルの各行は以下のような形式になっています。
+&lt;オフセット&gt; &lt;データ型&gt; &lt;テスト&gt; &lt;メッセージ&gt;
+以下の例では、ファイルの先頭...]]></description><link>https://zenn.dev/sorairolake/articles/how-to-write-magic-file</link><guid isPermaLink="true">https://zenn.dev/sorairolake/articles/how-to-write-magic-file</guid><pubDate>Mon, 09 Dec 2024 22:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Np5LinfM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:file%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2581%25AEmagic%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2581%25AE%25E6%259B%25B8%25E3%2581%258D%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:SorairoLake%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzEyZGZiOGQyM2QuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>SorairoLake</dc:creator></item><item><title><![CDATA[Dockerコンテナで無限待機する]]></title><description><![CDATA[
+Dockerコンテナをデバッグしたり、特定のプロセスがない状態でもコンテナを起動したままにしておきたい場合、sleepコマンドを用いて無限に待機させることができる
+これにより、コンテナの中に入ってツールを実行したり、環境を整えたりといった調査・開発作業が容易になる
+以下のようなスクリプトをDockerfileでENTRYPOINTやCMDに指定することで、コンテナは終了せずにずっと起動状態を保つことができる
+
+#!/bin/bash
+
+exec sleep infinity
+]]></description><link>https://zenn.dev/wasabina67/articles/sleep-infinity-sh</link><guid isPermaLink="true">https://zenn.dev/wasabina67/articles/sleep-infinity-sh</guid><pubDate>Mon, 09 Dec 2024 15:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GRemOd9F--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2586%25E3%2583%258A%25E3%2581%25A7%25E7%2584%25A1%25E9%2599%2590%25E5%25BE%2585%25E6%25A9%259F%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:wasabina67%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0tBQmhwQURYZVpZNU9UQl81MjhsZDNXRXh4cXE5c3dWVFQxMGVwbXRlT1gwbTVtVT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>wasabina67</dc:creator></item><item><title><![CDATA[Makefileでシェルスクリプトを便利にする.ONESHELL]]></title><description><![CDATA[
+ はじめに
+Makefileは、主にビルドプロセスの管理に使用されるツールですが、シェルスクリプトを組み込むことで、タスクの自動化や簡単なスクリプト実行もできます。しかし、Makefile内で複数行のシェルコマンドを書く場合、シェルの挙動やMakefileの構文に関するいくつかの気をつけるポイントがあります。そんな中、.ONESHELLを使うことで、シェルスクリプトをよりシンプルで効率的に書くことができます。
+
+ .ONESHELLとは
+.ONESHELLは、Makefile内で複数行のシェルコマンドを1プロセスで実行するためのオプションです。通常、Makefileでは各コマンドは個別...]]></description><link>https://zenn.dev/mirablue/articles/20241208-make-oneshell</link><guid isPermaLink="true">https://zenn.dev/mirablue/articles/20241208-make-oneshell</guid><pubDate>Sun, 08 Dec 2024 10:37:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--uMtzcxK8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Makefile%25E3%2581%25A7%25E3%2582%25B7%25E3%2582%25A7%25E3%2583%25AB%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2583%2588%25E3%2582%2592%25E4%25BE%25BF%25E5%2588%25A9%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B.ONESHELL%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mirabule%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFiNjI4MTliNjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mirabule</dc:creator></item><item><title><![CDATA[長い処理には通知音コマンドを仕込んでおくと捗るぞ]]></title><description><![CDATA[こんにちは！
+Magic Moment フロントエンドエンジニアの @morishin です。
+この記事は、Magic Moment Advent Calendar 2024 4 日目の記事です。
+
+
+ はじめに
+
+ 開発あるある
+皆さん開発をしていて、コマンドの "待ち" が長いとき、こんな経験はありませんか。
+「ビルドに時間がかかるなぁ」
+(別の作業をする)
+「もう終わったかな (ﾀｰﾐﾅﾙﾁﾗｰ」
+「まだかー」
+(以降無限ループ)
+作業に集中できない！
+逆に
+「このインストール時間かかるなぁ」
+「終わるまでちょっと休憩しようかな (ｽﾔｧ」
+〜3 時間後〜
+「...あっ、いつの間に...]]></description><link>https://zenn.dev/magicmoment/articles/play-sound-command-20241205</link><guid isPermaLink="true">https://zenn.dev/magicmoment/articles/play-sound-command-20241205</guid><pubDate>Wed, 04 Dec 2024 23:30:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--YdAiJr6D--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E9%2595%25B7%25E3%2581%2584%25E5%2587%25A6%25E7%2590%2586%25E3%2581%25AB%25E3%2581%25AF%25E9%2580%259A%25E7%259F%25A5%25E9%259F%25B3%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2582%2592%25E4%25BB%2595%25E8%25BE%25BC%25E3%2582%2593%25E3%2581%25A7%25E3%2581%258A%25E3%2581%258F%25E3%2581%25A8%25E6%258D%2597%25E3%2582%258B%25E3%2581%259E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Magic%2520Moment%2520Tech%2520...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA4YjkwNjQ0ZWUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Magic Moment Tech Blog</dc:creator></item><item><title><![CDATA[Windowsユーザのためのpnpm Shell Emulator]]></title><description><![CDATA[!
+本記事はにー兄さんアドベントカレンダー2024の2日目の記事です。
+
+
+ はじめに
+
+ TL;DR
+Windows Powershell で pnpm のスクリプトを実行する時に Shell Emulator が有効だと
+POSIX 環境のコマンドの書き方でも実行可能になって嬉しい。
+
+ 概要
+本記事では pnpm の Shell Emulator をご紹介します。
+私は最近個人開発をしている時に知ったのですが、単体での日本語記事はあまりなかったのと、
+Windows ユーザだからこそ享受できたメリットがあったので筆を執った次第です。
+
+ 想定読者
+
+pnpm の機能に興味があるエン...]]></description><link>https://zenn.dev/drumath2237/articles/pnpm-shell-emulator-for-win-user</link><guid isPermaLink="true">https://zenn.dev/drumath2237/articles/pnpm-shell-emulator-for-win-user</guid><pubDate>Mon, 02 Dec 2024 15:33:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--HHe0AEPX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Windows%25E3%2583%25A6%25E3%2583%25BC%25E3%2582%25B6%25E3%2581%25AE%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AEpnpm%2520Shell%2520Emulator%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AB%25E3%2583%25BC%25E5%2585%2584%25E3%2581%2595%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dUQndtd2ZiTmM3Nzg0SmxRZWdlX3BSc09RdmdvX2hxNlg5MTJKT3VZPXMyNTAtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>にー兄さん</dc:creator></item><item><title><![CDATA[【初心者向け】かわいい・かっこいい開発環境の作り方]]></title><description><![CDATA[
+この記事は2024team411アドベントカレンダーの2日目です。
+team411のアドベントカレンダーはこちらをご覧ください。
+
+昨日はぬか喜びの庭さんの「VRCのワールドを作ってみよう」でした。VRCのワールドは作ろうとして挫折した記憶があるのでまた頑張ってみたいです。ただ、U#の情報が少ないのは不安ですね (笑)。
+
+ はじめに
+皆さんは開発環境の見た目にこだわりはありますでしょうか？　プログラミングを始めたばかりだったりすると、「とりあえずおすすめされた環境で開発する」というような状況で、なかなか見た目にこだわるというところまで行かない方も多いのではないでしょうか。
+この記事で...]]></description><link>https://zenn.dev/team411/articles/kanaru5757-vscode-theme</link><guid isPermaLink="true">https://zenn.dev/team411/articles/kanaru5757-vscode-theme</guid><pubDate>Sun, 01 Dec 2024 15:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Dmmmpk-D--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E5%2590%2591%25E3%2581%2591%25E3%2580%2591%25E3%2581%258B%25E3%2582%258F%25E3%2581%2584%25E3%2581%2584%25E3%2583%25BB%25E3%2581%258B%25E3%2581%25A3%25E3%2581%2593%25E3%2581%2584%25E3%2581%2584%25E9%2596%258B%25E7%2599%25BA%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25AE%25E4%25BD%259C%25E3%2582%258A%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Kanaru%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA4YzQxYWIxYjYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:team411%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI4MmVmNDY0ZGMuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kanaru</dc:creator></item><item><title><![CDATA[Docker on Mac の起動や終了をCLIでやりたい]]></title><description><![CDATA[
+ 結論
+.zshrc に以下を加える。
+alias docker-start="open -a docker"
+alias docker-stop="osascript -e 'quit app \"Docker\"'"
+bash は試していないけれども、おそらく動くと思われる。
+
+ Docker を起動する
+docker-start
+
+ Docker を終了する
+docker-stop
+
+ 詳細
+コマンドのエイリアス機能を使っている。
+
+ Docker を起動する
+open -a docker
+open コマンドを利用する。
+-a オプションは /Application の中にあるア...]]></description><link>https://zenn.dev/shimon_haga/articles/20241202-docker-start-stop-from-terminal</link><guid isPermaLink="true">https://zenn.dev/shimon_haga/articles/20241202-docker-start-stop-from-terminal</guid><pubDate>Sun, 01 Dec 2024 15:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--a_W9ZeHL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%2520on%2520Mac%2520%25E3%2581%25AE%25E8%25B5%25B7%25E5%258B%2595%25E3%2582%2584%25E7%25B5%2582%25E4%25BA%2586%25E3%2582%2592CLI%25E3%2581%25A7%25E3%2582%2584%25E3%2582%258A%25E3%2581%259F%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AF%25E3%2581%258C%25E3%2581%2597%25E3%2582%2582%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUxtNXd1MFFmLUdXSXI1RzhMelB5NjZMOG1NMGQ3RU5MRGpwRzczWG9NMk89czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>はがしもん</dc:creator></item><item><title><![CDATA[Typstのテンプレートファイルを作業ディレクトリに移すのを、fishのオートロード関数で簡単に]]></title><description><![CDATA[
+ はじめに
+前に書いた記事のとおり、現在TypstをTypst.vim+tinymistで編集しているが、Typst.vimがレポートのTypstファイルと同じディレクトリにあるtemplate.typしか認識してくれないのでちょっと面倒だった。なので今回、今いるディレクトリから親ディレクトリを再帰的に探索して、テンプレートファイルをcpしてくるようなコマンドをfishのオートロード関数を使って実装した。
+
+ やりたいこと
+
+現在のディレクトリから親ディレクトリを再帰的に探索してtemplate.typを見つける
+見つかったtemplate.typを現在のディレクトリにコピーする
+引数...]]></description><link>https://zenn.dev/htsulfuric/articles/makereportdirectory</link><guid isPermaLink="true">https://zenn.dev/htsulfuric/articles/makereportdirectory</guid><pubDate>Tue, 26 Nov 2024 10:00:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--q3o4fgrY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Typst%25E3%2581%25AE%25E3%2583%2586%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AC%25E3%2583%25BC%25E3%2583%2588%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2592%25E4%25BD%259C%25E6%25A5%25AD%25E3%2583%2587%25E3%2582%25A3%25E3%2583%25AC%25E3%2582%25AF%25E3%2583%2588%25E3%2583%25AA%25E3%2581%25AB%25E7%25A7%25BB%25E3%2581%2599%25E3%2581%25AE%25E3%2582%2592%25E3%2580%2581fish%25E3%2581%25AE%25E3%2582%25AA%25E3%2583%25BC%25E3%2583%2588%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2589%25E9%2596%25A2%25E6%2595%25B0%25E3%2581%25A7%25E7%25B0%25A1%25E5%258D%2598%25E3%2581%25AB%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:HTsulfuric%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzIwMTIxYjAyMmEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>HTsulfuric</dc:creator></item><item><title><![CDATA[npm binの代替]]></title><description><![CDATA[npm binセットアップなどでよく書いてありますよね。しかし、これは廃止されていて、今はもう使えなくなっています。ではどう読み替えれば良いのか？
+$(dirname $(which npm))
+こうすると良いです。
+npm binに行く（コピペ用）：
+cd "$(dirname $(which npm))"
+npm binにcdする。
+始めた時、ここで結構詰まってしまったので、「読み替える」とだけ思っておいてください。
+]]></description><link>https://zenn.dev/tocot/articles/1cba505441999c</link><guid isPermaLink="true">https://zenn.dev/tocot/articles/1cba505441999c</guid><pubDate>Tue, 26 Nov 2024 09:25:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--d3A8mccO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:npm%2520bin%25E3%2581%25AE%25E4%25BB%25A3%25E6%259B%25BF%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tOcOt%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg2MTIwNmIzNDUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tOcOt</dc:creator></item><item><title><![CDATA[独自のshellコマンドを~/mycmdに作る]]></title><description><![CDATA[一行でちょっとするときはaliasを使う
+echo "\nalias （名前）=（コマンド）\n" &gt;&gt; ~/.zshrc
+これで、$（名前）で使えるようになる。
+文を使ったり、何行にもなるようなものは.shファイルにまとめて、
+mkdir ~/mycmd
+vi ~/mycmd/（作りたいコマンド名）.sh
+chmod -R 700 ~/mycmd
+最初は、~/mycmdにPATH（名簿のようなもの）を通す必要がある。
+export PATH=$PATH:~/mycmd
+これで、（コマンド名）.shで実行できる。
+!
+シェルを再起動する必要があるので注意！よく再起動忘れて困る...]]></description><link>https://zenn.dev/tocot/articles/39121716f9cb76</link><guid isPermaLink="true">https://zenn.dev/tocot/articles/39121716f9cb76</guid><pubDate>Tue, 26 Nov 2024 08:01:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---HtcUCzr--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%258B%25AC%25E8%2587%25AA%25E3%2581%25AEshell%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2582%2592%7E%252Fmycmd%25E3%2581%25AB%25E4%25BD%259C%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tOcOt%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg2MTIwNmIzNDUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tOcOt</dc:creator></item><item><title><![CDATA[オレオレ証明書（自己署名証明書）bash/zsh作成]]></title><description><![CDATA[
+ key (秘密鍵) 作成
+
+ 平文でkey作成する場合（危険）
+openssl genrsa 4096 &gt; private.key
+後で暗号化できますopenssl rsa -in private.key -aes256 -out private_locked.key
+
+
+ private.keyの暗号化する場合
+openssl genrsa -aes256 4096 &gt; private.key
+後で解除できますopenssl rsa -in private.key -out private_unlock.key
+
+
+ crt (公開鍵) 作成
+
+ csr (Certif...]]></description><link>https://zenn.dev/tocot/articles/6df74451727344</link><guid isPermaLink="true">https://zenn.dev/tocot/articles/6df74451727344</guid><pubDate>Tue, 26 Nov 2024 07:12:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--mmcvZzqq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25AA%25E3%2583%25AC%25E3%2582%25AA%25E3%2583%25AC%25E8%25A8%25BC%25E6%2598%258E%25E6%259B%25B8%25EF%25BC%2588%25E8%2587%25AA%25E5%25B7%25B1%25E7%25BD%25B2%25E5%2590%258D%25E8%25A8%25BC%25E6%2598%258E%25E6%259B%25B8%25EF%25BC%2589bash%252Fzsh%25E4%25BD%259C%25E6%2588%2590%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tOcOt%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg2MTIwNmIzNDUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tOcOt</dc:creator></item><item><title><![CDATA[fishでmkdir+cdをひとつのコマンドに]]></title><description><![CDATA[
+ はじめに
+mkdirとcd、同時にやりたいよね……
+bashやzshなんかだと毎回
+sh hoge.sh
+みたいなことをする必要がありそうで結構大変そう。一方fishにはオートロード関数といって、~/.config/fish/functions/以下に.fishの拡張子でfish functionを登録しておけば、簡単に書けてかつどこからでも呼びだせるらしい。とはいえ、ここまでは色んな人から過去記事があがっているため、エラー処理回りを少し丁寧にして実装してみた。
+
+ 実装
+関数名は過去の人々に倣ってmkcdとしてみた
+
+ ~/.config/fish/funtions/mkcd.fi...]]></description><link>https://zenn.dev/htsulfuric/articles/my_mkdir_and_cd</link><guid isPermaLink="true">https://zenn.dev/htsulfuric/articles/my_mkdir_and_cd</guid><pubDate>Tue, 26 Nov 2024 06:20:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--rbuiV0Ah--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:fish%25E3%2581%25A7mkdir%252Bcd%25E3%2582%2592%25E3%2581%25B2%25E3%2581%25A8%25E3%2581%25A4%25E3%2581%25AE%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2581%25AB%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:HTsulfuric%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzIwMTIxYjAyMmEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>HTsulfuric</dc:creator></item></channel></rss>
