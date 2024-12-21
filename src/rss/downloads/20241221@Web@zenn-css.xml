@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「CSS」のフィード]]></title><description><![CDATA[Zennのトピック「CSS」のRSSフィードです]]></description><link>https://zenn.dev/topics/css</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/98e1680a6c.png</url><title>Zennの「CSS」のフィード</title><link>https://zenn.dev/topics/css</link></image><generator>zenn.dev</generator><lastBuildDate>Sat, 21 Dec 2024 01:11:51 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/css/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[fullPage.jsで画像や背景を遅延読み込みする方法]]></title><description><![CDATA[
+ はじめに
+遅延読み込みライブラリは、fullPage.js では機能しない場合があります。
+その理由は、fullPage.jsが従来の方法で「スクロール」イベントをトリガーしないためです。
+代わりに、fullPage.jsはCSSトランジションまたはJavaScriptを使用してスクロールをシミュレートします
+
+ fullPage.jsで遅延読み込みを行う方法
+
+ 方法1: 簡単な方法
+現在の遅延読み込み技術をfullPage.jsと組み合わせる最も簡単な方法は、fullPage.jsのオプションscrollBar:trueを使用することです。
+これにより、fullPage.jsは他...]]></description><link>https://zenn.dev/alvarotrigo/articles/8083e37bcfa6de</link><guid isPermaLink="true">https://zenn.dev/alvarotrigo/articles/8083e37bcfa6de</guid><pubDate>Fri, 20 Dec 2024 11:31:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ZCB1_713--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:fullPage.js%25E3%2581%25A7%25E7%2594%25BB%25E5%2583%258F%25E3%2582%2584%25E8%2583%258C%25E6%2599%25AF%25E3%2582%2592%25E9%2581%2585%25E5%25BB%25B6%25E8%25AA%25AD%25E3%2581%25BF%25E8%25BE%25BC%25E3%2581%25BF%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Alvaro%2520Trigo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAzZTc5MDBkNTQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Alvaro Trigo</dc:creator></item><item><title><![CDATA[[CSS組版]腑分けして理解したいCSS組版　余白のコラプシング・破棄]]></title><description><![CDATA[CSS組版アドベントカレンダー2024の19日目の記事です。
+https://adventar.org/calendars/10448
+組版環境揃った計算機を修理に出しているし図示は後日追記とします。
+
+ スペース・マージン・パディングの雑整理
+実運用では入り乱れてよく分からないことになっているし、仕様の話というよりは考え方の整理と捉えてください。
+余白には2種類あります。空いた空間の調整としての余白と、必要な空間の確保としての余白です。ざっくりとは、CSSに於けるパディングは前者、マージンは後者です。
+必要な空間にも色々ありますが、視認性のために損なわれてはいけないというのが指標として...]]></description><link>https://zenn.dev/docs_and_markup/articles/32930c61ee5f71</link><guid isPermaLink="true">https://zenn.dev/docs_and_markup/articles/32930c61ee5f71</guid><pubDate>Thu, 19 Dec 2024 14:59:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--q7lnawb9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BCSS%25E7%25B5%2584%25E7%2589%2588%255D%25E8%2585%2591%25E5%2588%2586%25E3%2581%2591%25E3%2581%2597%25E3%2581%25A6%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2597%25E3%2581%259F%25E3%2581%2584CSS%25E7%25B5%2584%25E7%2589%2588%25E3%2580%2580%25E4%25BD%2599%25E7%2599%25BD%25E3%2581%25AE%25E3%2582%25B3%25E3%2583%25A9%25E3%2583%2597%25E3%2582%25B7%25E3%2583%25B3%25E3%2582%25B0%25E3%2583%25BB%25E7%25A0%25B4%25E6%25A3%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:hidaruma%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLmRldi9pbWFnZXMvZGVmYXVsdC1wdWJsaWNhdGlvbi1hdmF0YXIucG5n%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E7%25B5%2584%25E7%2589%2588%25E3%2583%25BB%25E3%2583%2589%25E3%2582%25AD%25E3%2583%25A5%25E3%2583%25A1%25E3%2583%25B3%25E3%2583%2586%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E5%258B%2589%25E5%25BC%25B7%25E4%25BC%259A%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNiYjc2MzRmNTEuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hidaruma</dc:creator></item><item><title><![CDATA[【css】スクロールバーのデザインをcssで変更する]]></title><description><![CDATA[
+ 1.縦スクロールのデザイン
+
+ 1-1.htmlを記述する
+&lt;div id="scroll-layout-x"&gt;
+  &lt;ul&gt;
+    &lt;li&gt;北海道&lt;/li&gt;
+    &lt;li&gt;青森県&lt;/li&gt;
+    &lt;li&gt;岩手県&lt;/li&gt;
+    &lt;li&gt;宮城県&lt;/li&gt;
+    &lt;li&gt;秋田県&lt;/li&gt;
+    &lt;li&gt;山形県&lt;/li&gt;
+    &lt;li&gt;福島県&lt;/li&gt;
+    &lt;li&gt;茨城...]]></description><link>https://zenn.dev/saru_no_note/articles/7085ab29ed69ce</link><guid isPermaLink="true">https://zenn.dev/saru_no_note/articles/7085ab29ed69ce</guid><pubDate>Thu, 19 Dec 2024 13:03:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GoRY08jc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590css%25E3%2580%2591%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%25AB%25E3%2583%2590%25E3%2583%25BC%25E3%2581%25AE%25E3%2583%2587%25E3%2582%25B6%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%2592css%25E3%2581%25A7%25E5%25A4%2589%25E6%259B%25B4%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:saru%2540%25E6%2596%2587%25E7%25B3%25BB%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2580%25E3%2583%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA4MWU3ZDhiYTcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>saru@文系コーダー</dc:creator></item><item><title><![CDATA[【css】cssだけでくの字の矢印をつくる]]></title><description><![CDATA[ジェネレーターを使えば良いんだけど、自分で法則を見つけたかった、、、、けど無理だった。
+
+ 1.htmlを記述する
+&lt;span class="arrow-left"&gt;&lt;/span&gt;
+&lt;span class="arrow-right"&gt;&lt;/span&gt;
+&lt;span class="arrow-top"&gt;&lt;/span&gt;
+&lt;span class="arrow-bottom"&gt;&lt;/span&gt;
+
+ 2.cssを記述する
+[class^="arrow"]{
+  position: relative;
+  di...]]></description><link>https://zenn.dev/saru_no_note/articles/8d536e58d283cd</link><guid isPermaLink="true">https://zenn.dev/saru_no_note/articles/8d536e58d283cd</guid><pubDate>Thu, 19 Dec 2024 11:25:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7lEWkfK3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590css%25E3%2580%2591css%25E3%2581%25A0%25E3%2581%2591%25E3%2581%25A7%25E3%2581%258F%25E3%2581%25AE%25E5%25AD%2597%25E3%2581%25AE%25E7%259F%25A2%25E5%258D%25B0%25E3%2582%2592%25E3%2581%25A4%25E3%2581%258F%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:saru%2540%25E6%2596%2587%25E7%25B3%25BB%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2580%25E3%2583%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA4MWU3ZDhiYTcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>saru@文系コーダー</dc:creator></item><item><title><![CDATA[【初学者によるまとめ】この一冊で全部わかるWeb技術の基本　「Chapter4」＞「04 CSS」]]></title><description><![CDATA[目的：「イラスト図解式 この一冊で全部わかるWeb技術の基本」の要点を自分なりにまとめ、Qiitaへアウトプットして理解力の向上に努める。
+
+
+
+注意点
+
+
+
+
+🤔 ←この絵文字の文章は個人的な見解になります。的外れなこともあるかと思います。
+
+
+例）🤔&lt;(感想、考察、疑問点など)
+
+
+
+
+（参考書籍）
+
+イラスト図解式 この一冊で全部わかるWeb技術の基本
+
+（参考サイト）
+
+MDN
+
+
+
+ 概要
+!
+CSS（Cascading Style Sheets）
+
+主にHTMLの表示方法について設定するファイル
+
+具体的には装飾などデザイン面で使用される
+
+
+
+
+
+ HTMLの体裁を記...]]></description><link>https://zenn.dev/recaldenta/articles/be8b60bb1b5e90</link><guid isPermaLink="true">https://zenn.dev/recaldenta/articles/be8b60bb1b5e90</guid><pubDate>Thu, 19 Dec 2024 10:34:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--HMpVCNuH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%2588%259D%25E5%25AD%25A6%25E8%2580%2585%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258B%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2580%2591%25E3%2581%2593%25E3%2581%25AE%25E4%25B8%2580%25E5%2586%258A%25E3%2581%25A7%25E5%2585%25A8%25E9%2583%25A8%25E3%2582%258F%25E3%2581%258B%25E3%2582%258BWeb%25E6%258A%2580%25E8%25A1%2593%25E3%2581%25AE%25E5%259F%25BA%25E6%259C%25AC%25E3%2580%2580%25E3%2580%258CChapter4%25E3%2580%258D%25EF%25BC%259E%25E3%2580%258C04%2520CSS%25E3%2580%258D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nakad119%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSkJLSE95b1lrb3VsYzBIUm41T2ctWTBoOFpZMDlROWpYUUNpRFM2MUgyekFiMHEtaz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nakad119</dc:creator></item><item><title><![CDATA[CSSの三角関数を使ってJSなしできれいな斜線を引きたい！]]></title><description><![CDATA[この記事はCSS Advent Calendar 2024の18日目の記事です。
+
+LAWGUEでは、Wordのようにテーブルセル内で斜線を表示する機能があります。
+
+現在は transform: rotate でDOM要素を回転させて斜線を表示していますが、他にも新しい機能や方法があるのではないかと思い、斜線の描画方法についていくつか検証してみました。
+
+ 既存の斜線の例
+
+ グラデーションの斜線
+おそらく斜線を引きたい場合これが一番使われているのではないかと思います。
+background-image: linear-gradient(to top right, transparen...]]></description><link>https://zenn.dev/fraim/articles/6501d8f8842a7c</link><guid isPermaLink="true">https://zenn.dev/fraim/articles/6501d8f8842a7c</guid><pubDate>Thu, 19 Dec 2024 08:38:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--yrneT1y9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:CSS%25E3%2581%25AE%25E4%25B8%2589%25E8%25A7%2592%25E9%2596%25A2%25E6%2595%25B0%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6JS%25E3%2581%25AA%25E3%2581%2597%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258C%25E3%2581%2584%25E3%2581%25AA%25E6%2596%259C%25E7%25B7%259A%25E3%2582%2592%25E5%25BC%2595%25E3%2581%258D%25E3%2581%259F%25E3%2581%2584%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:tanshio%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJlMDgxN2MyOTMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:FRAIM%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZmYjI0MGJiMjYuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tanshio</dc:creator></item><item><title><![CDATA[〜Flexbox怖くない〜]]></title><description><![CDATA[Social Databank Advent Calendar 2024 の19日目です！
+突然ですが、みなさん、
+フロントを作る際に、このような悩みをもったことはないですか？
+「このフォームとボタンを綺麗に横に並べたいだけなのに、、
+なぜだか上手くいかない！もうわけがわからんっ！！」
+
+そんな時に便利なものがあります！
+✨Flexbox✨
+Flexboxとは、
+正式名称はFlexible Box Layout Moduleといい、
+複雑なレイアウトも、簡単に作ることができるCSSのレイアウト手法です！
+細かい所の自動調整もしてくれて、とっても便利！
+これが分かれば、フロント作りがかなり...]]></description><link>https://zenn.dev/sdb_blog/articles/yasus_article_003</link><guid isPermaLink="true">https://zenn.dev/sdb_blog/articles/yasus_article_003</guid><pubDate>Thu, 19 Dec 2024 01:42:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Q5kl5MVi--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%259CFlexbox%25E6%2580%2596%25E3%2581%258F%25E3%2581%25AA%25E3%2581%2584%25E3%2580%259C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:yasu%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzMyODFjNDczOTguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25BD%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A3%25E3%2583%25AB%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%2590%25E3%2583%25B3%25E3%2582%25AF%2520%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzUzOWExZmIyMjIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yasu</dc:creator></item><item><title><![CDATA[CSS widthやheightからはみ出した要素を見えないようにする]]></title><description><![CDATA[CSSが苦手なので再度取り組んでいます。備忘録として残しておきます
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;link rel="stylesheet" href="styles.css"&gt;
+    &lt;title&gt;CSS&lt;/title&gt;
+&lt;...]]></description><link>https://zenn.dev/imkei/articles/06445f654bfdd6</link><guid isPermaLink="true">https://zenn.dev/imkei/articles/06445f654bfdd6</guid><pubDate>Wed, 18 Dec 2024 16:07:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--OEWPLTpB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:CSS%2520width%25E3%2582%2584height%25E3%2581%258B%25E3%2582%2589%25E3%2581%25AF%25E3%2581%25BF%25E5%2587%25BA%25E3%2581%2597%25E3%2581%259F%25E8%25A6%2581%25E7%25B4%25A0%25E3%2582%2592%25E8%25A6%258B%25E3%2581%2588%25E3%2581%25AA%25E3%2581%2584%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:imkei%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M2Mzc4NTBjMzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>imkei</dc:creator></item><item><title><![CDATA[メディアクエリ全部捕捉す]]></title><description><![CDATA[というわけで 年末なので メディアクエリ全部捕捉します。
+!
+レギュレーション
+MDN の @media にあるメディア種別(Media types) 及び メディア特性(Media features)を全て補足して表示するページを作ります。
+※ただし、廃止されたものは除く
+
+
+ 対応範囲
+
+
+メディア種別
+
+all
+print
+screen
+speech
+
+
+メディア特性
+
+any-hover
+any-pointer
+color
+color-gamut
+color-index
+display-mode
+dynamic-range
+grid
+forced-colors
+height
+ho...]]></description><link>https://zenn.dev/juners/articles/565f5fad6bc80e</link><guid isPermaLink="true">https://zenn.dev/juners/articles/565f5fad6bc80e</guid><pubDate>Wed, 18 Dec 2024 09:51:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--g3RpjGCZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%25A1%25E3%2583%2587%25E3%2582%25A3%25E3%2582%25A2%25E3%2582%25AF%25E3%2582%25A8%25E3%2583%25AA%25E5%2585%25A8%25E9%2583%25A8%25E6%258D%2595%25E6%258D%2589%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:juner%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pJLTZTZnZQaDFwb0M5dmMxYUpVeTFoelB0R1g1RXRmUHRpQzF4QWR3PXMyNTAtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>juner</dc:creator></item><item><title><![CDATA[Javascriptで擬似要素のプロパティ値を変更する]]></title><description><![CDATA[
+ 動機
+
+上記画像のような吹き出しを以下のデザイン仕様に則り実装する必要がありました。
+
+？アイコンの左には様々な文章が入る（ただし1行で収まると仮定）
+吹き出しの三角形（ポインター）部分が必ず？アイコンの上に来るようにする
+
+？アイコンの左にどんな文章来ても吹き出しのポインターが？アイコンの真上に来るようにするため、吹き出しのポインターのX軸の位置は可変にする必要がありました。
+吹き出しのポインター部分は疑似要素(::before)で作っており、疑似要素のleftプロパティの値を動的に変更したいのですが、Javascriptで疑似要素のインラインスタイルを変更することはできません。
+...]]></description><link>https://zenn.dev/zozotech/articles/9b6dc476147941</link><guid isPermaLink="true">https://zenn.dev/zozotech/articles/9b6dc476147941</guid><pubDate>Wed, 18 Dec 2024 01:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1sN4PMNe--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Javascript%25E3%2581%25A7%25E6%2593%25AC%25E4%25BC%25BC%25E8%25A6%2581%25E7%25B4%25A0%25E3%2581%25AE%25E3%2583%2597%25E3%2583%25AD%25E3%2583%2591%25E3%2583%2586%25E3%2582%25A3%25E5%2580%25A4%25E3%2582%2592%25E5%25A4%2589%25E6%259B%25B4%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:tkTakeruKurokawa%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY0ZmQ2ZmJhZjQuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BEZOZO%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvdC5wbmc=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tkTakeruKurokawa</dc:creator></item><item><title><![CDATA[なぜCSS gridを覚えられないのか？]]></title><description><![CDATA[
+CSS gridは聞いたことがあるし、なんとなく触ったこともあるけど、いざ使うとなると 「覚えることが多すぎて面倒」とか「結局CSS flexの方が楽」 と感じる人も多いと思います。だからといってCSS flexばかりでレイアウトを組んでいると、当然ながらCSS gridの習得は進みません。
+記事タイトル「なぜCSS gridを覚えられないのか？」の答えは、単純に「CSS gridを使う機会が少なく、練習不足だから」…というのは一面の真実ではありますが、それではあまりに根性論的でアドバイスになりません。
+ある程度時間をかけてCSS gridを習得した私の経験から言うと、CSS grid...]]></description><link>https://zenn.dev/richardimaoka/articles/ed12be0b12cd94</link><guid isPermaLink="true">https://zenn.dev/richardimaoka/articles/ed12be0b12cd94</guid><pubDate>Mon, 16 Dec 2024 20:41:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4bRhCRs---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%25AA%25E3%2581%259CCSS%2520grid%25E3%2582%2592%25E8%25A6%259A%25E3%2581%2588%25E3%2582%2589%25E3%2582%258C%25E3%2581%25AA%25E3%2581%2584%25E3%2581%25AE%25E3%2581%258B%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Richard%2520Imaoka%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2o2MS11QmliS2tUdjRRUmJibFZfWDVLQWF5akhMZjJiMUtnVTZSTnc9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Richard Imaoka</dc:creator></item><item><title><![CDATA[[CSS組版]見出しに画像を使いつつヘッダ・フッタには画像のaltを使う例]]></title><description><![CDATA[CSS組版アドベントカレンダー2024の16日目の記事です。
+https://adventar.org/calendars/10448
+明日はメイユールさんです。
+
+ string()は画像を引っ張れない
+ごくベーシックなヘッダの置き方を見てみましょう。
+
+ヘッダに名前付き文字列headingを置く指定
+@page { size: JIS-B5;
+
+    @top-center {
+       ...      
+        content: string(heading);
+    }
+}
+
+main&gt; section&gt; h2 {
+    string-set: h...]]></description><link>https://zenn.dev/docs_and_markup/articles/9bdf8057d5c9cd</link><guid isPermaLink="true">https://zenn.dev/docs_and_markup/articles/9bdf8057d5c9cd</guid><pubDate>Mon, 16 Dec 2024 14:27:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--k0wSQbcs--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BCSS%25E7%25B5%2584%25E7%2589%2588%255D%25E8%25A6%258B%25E5%2587%25BA%25E3%2581%2597%25E3%2581%25AB%25E7%2594%25BB%25E5%2583%258F%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2584%25E3%2581%25A4%25E3%2581%25A4%25E3%2583%2598%25E3%2583%2583%25E3%2583%2580%25E3%2583%25BB%25E3%2583%2595%25E3%2583%2583%25E3%2582%25BF%25E3%2581%25AB%25E3%2581%25AF%25E7%2594%25BB%25E5%2583%258F%25E3%2581%25AEalt%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%25E4%25BE%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:hidaruma%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLmRldi9pbWFnZXMvZGVmYXVsdC1wdWJsaWNhdGlvbi1hdmF0YXIucG5n%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E7%25B5%2584%25E7%2589%2588%25E3%2583%25BB%25E3%2583%2589%25E3%2582%25AD%25E3%2583%25A5%25E3%2583%25A1%25E3%2583%25B3%25E3%2583%2586%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E5%258B%2589%25E5%25BC%25B7%25E4%25BC%259A%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNiYjc2MzRmNTEuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hidaruma</dc:creator></item><item><title><![CDATA[Tailwind CSS：レスポンシブ対応]]></title><description><![CDATA[この記事は、プログラミング初心者である筆者が、学習の過程でつまずいた経験をもとに備忘録としてまとめたものです。今回はレスポンシブ対応についてまとめました。
+
+ レスポンシブ対応とは
+レスポンシブ対応とは、同じコードを使ってPC、スマートフォン、タブレットなど、さまざまなデバイスで表示できるようにする仕組みです。ブラウザの幅に応じてレイアウトやデザインが自動的に調整されます。以前は、PC用とスマートフォン用で別々のコードを作成することが一般的でした。しかし、2018年にGoogleが「モバイルファーストインデックス」を導入したことで、スマートフォンなどモバイルデバイスに対応したデザインがよ...]]></description><link>https://zenn.dev/risagoto/articles/7657c38de20bb1</link><guid isPermaLink="true">https://zenn.dev/risagoto/articles/7657c38de20bb1</guid><pubDate>Mon, 16 Dec 2024 11:35:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--n_4tdEaw--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Tailwind%2520CSS%25EF%25BC%259A%25E3%2583%25AC%25E3%2582%25B9%25E3%2583%259D%25E3%2583%25B3%25E3%2582%25B7%25E3%2583%2596%25E5%25AF%25BE%25E5%25BF%259C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Risa%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVlOTRjNjlkNjMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Risa</dc:creator></item><item><title><![CDATA[CSSだけで簡単にできるコラボフローカスタマイズ！]]></title><description><![CDATA[この記事は「コラボスタイル Advent Calendar 2024 その２」の16日目の記事となります。
+※その１はこちら↓
+コラボスタイル Advent Calendar 2024 その１
+こんにちは。最近コストコで売っている湯田ヨーグルトにはまっているコニオこと小西です。
+クリスマスまであと少しですね🎅
+うちの4歳の子どもがクリスマスツリーにぶら下げているプレゼント用の袋を毎朝チェックして「サンタさん今日も来てないな～」と言っている姿を見てほっこりしています🥰
+（早くプレゼント何にするか決めてよ。。）
+さて今回は、CSSだけで簡単にできるコラボフローのカスタマイズをご紹介したいと思...]]></description><link>https://zenn.dev/collabostyle/articles/0e47277b2e7859</link><guid isPermaLink="true">https://zenn.dev/collabostyle/articles/0e47277b2e7859</guid><pubDate>Mon, 16 Dec 2024 00:15:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--a0mpgizc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:CSS%25E3%2581%25A0%25E3%2581%2591%25E3%2581%25A7%25E7%25B0%25A1%25E5%258D%2598%25E3%2581%25AB%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258B%25E3%2582%25B3%25E3%2583%25A9%25E3%2583%259C%25E3%2583%2595%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25AB%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%259E%25E3%2582%25A4%25E3%2582%25BA%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:kony%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzViM2I3NTQxYzUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25B3%25E3%2583%25A9%25E3%2583%259C%25E3%2582%25B9%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25AB%2520Developers%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU4NGQxMGUxMGYuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kony</dc:creator></item><item><title><![CDATA[フロントエンド開発者のためのCSS設計ガイド：メンテナンス性を高める10の実践]]></title><description><![CDATA[こんにちは、Webフロントエンド開発者のみなさま。silverbirderと申します。
+突然ですが、みなさんは普段どのようにCSSを設計していますか？愚直にプロパティを書いていますか？それとも、何かしらのルールがありますか？
+私自身、この1年間、スタイルに関わるさまざまな開発を経験してきました。その経験から、CSS設計に関するプラクティスが少しずつ固まってきました。そこで今回は、私が得た知見の中から10つの考えを共有したいと思います。これらの考えが、みなさんのCSS設計に少しでも役立つヒントになれば幸いです。
+
+ CSS設計
+HTMLとCSSのサンプルを使って具体例をご紹介します。コード...]]></description><link>https://zenn.dev/silverbirder/articles/63d42340a17a51</link><guid isPermaLink="true">https://zenn.dev/silverbirder/articles/63d42340a17a51</guid><pubDate>Sun, 15 Dec 2024 23:50:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--oDauXBBt--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2595%25E3%2583%25AD%25E3%2583%25B3%25E3%2583%2588%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2589%25E9%2596%258B%25E7%2599%25BA%25E8%2580%2585%25E3%2581%25AE%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AECSS%25E8%25A8%25AD%25E8%25A8%2588%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%25EF%25BC%259A%25E3%2583%25A1%25E3%2583%25B3%25E3%2583%2586%25E3%2583%258A%25E3%2583%25B3%25E3%2582%25B9%25E6%2580%25A7%25E3%2582%2592%25E9%25AB%2598%25E3%2582%2581%25E3%2582%258B10%25E3%2581%25AE%25E5%25AE%259F%25E8%25B7%25B5%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:silverbirder%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAyM2ViMWNiYjIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>silverbirder</dc:creator></item><item><title><![CDATA[[CSS組版]腑分けして理解したいCSS組版　フロート・脚註]]></title><description><![CDATA[CSS組版アドベントカレンダー2024の15日目の記事です。
+https://adventar.org/calendars/10448
+ナビゲーションの後半は真面目に書くのは結構重いのでまだ日を置きたい。
+
+ Web一般のフロートの使われ方のことは取り敢えず忘れる
+https://drafts.csswg.org/css2/#propdef-float
+leftかrightしか位置の選択肢が無い上に、扱いが難しくCSS FlexibleBoxやCSS Gridに役目の殆どを奪われたFloatさんの今までのことは忘れましょう。組版では、というより自動組版に於いて、フロートの役割は非常に重要...]]></description><link>https://zenn.dev/hidaruma/articles/6b3478be3395e9</link><guid isPermaLink="true">https://zenn.dev/hidaruma/articles/6b3478be3395e9</guid><pubDate>Sun, 15 Dec 2024 13:36:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wAyEbrQR--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BCSS%25E7%25B5%2584%25E7%2589%2588%255D%25E8%2585%2591%25E5%2588%2586%25E3%2581%2591%25E3%2581%2597%25E3%2581%25A6%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2597%25E3%2581%259F%25E3%2581%2584CSS%25E7%25B5%2584%25E7%2589%2588%25E3%2580%2580%25E3%2583%2595%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2588%25E3%2583%25BB%25E8%2584%259A%25E8%25A8%25BB%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hidaruma%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNiYjc2MzRmNTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hidaruma</dc:creator></item><item><title><![CDATA[Grid Layoutでバーチカルカレンダーを作る]]></title><description><![CDATA[これは 株式会社TimeTree Advent Calendar 2024 の15日目の記事です。
+
+ はじめに
+おはようございます。TimeTreeというカレンダーアプリのウェブ版を開発をしているSaul（ソール）です。
+今回はカレンダーでよくあるバーチカルカレンダーの作り方について解説していきます。
+https://timetreeapp.com/
+
+ バーチカルカレンダーの概要
+バーチカルカレンダーとは、カレンダーを縦方向にレイアウトした形式のことです。ウィークリーやデイリー、3日間など日数は可変です。
+↓Notion Calendarのウィークリーの例
+
+今回は以下の素朴なカレン...]]></description><link>https://zenn.dev/timetree/articles/5bc01beae5fd60</link><guid isPermaLink="true">https://zenn.dev/timetree/articles/5bc01beae5fd60</guid><pubDate>Sun, 15 Dec 2024 13:02:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--YcikbRuc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Grid%2520Layout%25E3%2581%25A7%25E3%2583%2590%25E3%2583%25BC%25E3%2583%2581%25E3%2582%25AB%25E3%2583%25AB%25E3%2582%25AB%25E3%2583%25AC%25E3%2583%25B3%25E3%2583%2580%25E3%2583%25BC%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Saul%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U1MDU4MGVlNDguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:TimeTree%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSURYM3R2Wnp2Ym12QmJ0ckZTdTNtVHBuMFZFNWVYOEVYaUFQQXZaX29QQkE9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Saul</dc:creator></item><item><title><![CDATA[[CSS組版]腑分けして理解したいCSS組版　ナビゲーション（柱稽古編）]]></title><description><![CDATA[CSS組版アドベントカレンダー2024の14日目の記事です。
+https://adventar.org/calendars/10448
+ナビゲーションについて書こうと思っていたんですが、2つに分けた方が書き易そうなのでそうします。
+
+ ナビゲーション（デカ主語）
+!
+本来的にはguidanceやsignっぽい話もごっちゃにして語りますのであしからず。
+
+ナビゲーションというのは日常語としては結構包含する範囲の広い言葉です。
+ここでは、次のように絞って考えることにします。
+
+現在地の情報を示すもの ex.「ここは地獄の一丁目です」
+目的地の情報 ex.「この先3kmで地獄の一丁目」
+（案内...]]></description><link>https://zenn.dev/docs_and_markup/articles/9113e94dbec3ce</link><guid isPermaLink="true">https://zenn.dev/docs_and_markup/articles/9113e94dbec3ce</guid><pubDate>Sat, 14 Dec 2024 14:08:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--j7hZ6043--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BCSS%25E7%25B5%2584%25E7%2589%2588%255D%25E8%2585%2591%25E5%2588%2586%25E3%2581%2591%25E3%2581%2597%25E3%2581%25A6%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2597%25E3%2581%259F%25E3%2581%2584CSS%25E7%25B5%2584%25E7%2589%2588%25E3%2580%2580%25E3%2583%258A%25E3%2583%2593%25E3%2582%25B2%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25EF%25BC%2588%25E6%259F%25B1%25E7%25A8%25BD%25E5%258F%25A4%25E7%25B7%25A8%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:hidaruma%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLmRldi9pbWFnZXMvZGVmYXVsdC1wdWJsaWNhdGlvbi1hdmF0YXIucG5n%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E7%25B5%2584%25E7%2589%2588%25E3%2583%25BB%25E3%2583%2589%25E3%2582%25AD%25E3%2583%25A5%25E3%2583%25A1%25E3%2583%25B3%25E3%2583%2586%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E5%258B%2589%25E5%25BC%25B7%25E4%25BC%259A%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNiYjc2MzRmNTEuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hidaruma</dc:creator></item><item><title><![CDATA[【備忘録】Django - 開発サーバの自動リロード]]></title><description><![CDATA[
+ 背景
+開発サーバの自動リロードにはvscodeの拡張機能のLive Serverが便利だが、django-htmlではbase.htmlにheadタグやbodyタグを分けてしまうためうまく作動しなかった。
+そこで、django-browser-reloadという便利な機能を見つけたので備忘録に残しておく。
+
+ 手順
+
+ 1. pythonの仮想環境内でdjango-browser-reloadをインストール
+
+termimal
+# ここでは仮想環境名をmyvenvとする。
+source myvenv/bin/activate  # windowsの場合は .\myvenv\Scrip...]]></description><link>https://zenn.dev/hiro8_hiro8/articles/a1132b68703e6b</link><guid isPermaLink="true">https://zenn.dev/hiro8_hiro8/articles/a1132b68703e6b</guid><pubDate>Sat, 14 Dec 2024 08:12:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--RaTqvMHB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%2582%2599%25E5%25BF%2598%25E9%258C%25B2%25E3%2580%2591Django%2520-%2520%25E9%2596%258B%25E7%2599%25BA%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2581%25AE%25E8%2587%25AA%25E5%258B%2595%25E3%2583%25AA%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Hiro%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSjVRSzFnQVpjV2cwTFJHUXlDcFMtU19uVm5HTlVzNlgwMEN2U2dYTUFmODVMMnFBPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Hiro</dc:creator></item><item><title><![CDATA[腑分けして理解したいCSS組版　ページレイアウト]]></title><description><![CDATA[CSS組版アドベントカレンダー2024、13日目の記事です。
+https://adventar.org/calendars/10448
+
+
+ 前回までの粗筋
+巻物（スクロール）メディアである通常のWebページに対し、冊子本（コデックス）に対応させる；ページネーションに対応させるCSSを適用するというのがCSS組版の基本です。
+
+ ページレイアウトとCSS組版
+ページネーションはページあってのもの。そのページ上にどんな情報を、どのように載せるのか、これがページレイアウトということになります。
+!
+『CSS Paged Media Module Level 3』はページマージンエリア（と脚註...]]></description><link>https://zenn.dev/hidaruma/articles/18ac75d034778a</link><guid isPermaLink="true">https://zenn.dev/hidaruma/articles/18ac75d034778a</guid><pubDate>Fri, 13 Dec 2024 14:58:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ges1FVRy--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%2585%2591%25E5%2588%2586%25E3%2581%2591%25E3%2581%2597%25E3%2581%25A6%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2597%25E3%2581%259F%25E3%2581%2584CSS%25E7%25B5%2584%25E7%2589%2588%25E3%2580%2580%25E3%2583%259A%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%25AC%25E3%2582%25A4%25E3%2582%25A2%25E3%2582%25A6%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hidaruma%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNiYjc2MzRmNTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hidaruma</dc:creator></item></channel></rss>
