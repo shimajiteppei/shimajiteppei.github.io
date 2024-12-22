@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Rust」のフィード]]></title><description><![CDATA[Zennのトピック「Rust」のRSSフィードです]]></description><link>https://zenn.dev/topics/rust</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ba09661577.png</url><title>Zennの「Rust」のフィード</title><link>https://zenn.dev/topics/rust</link></image><generator>zenn.dev</generator><lastBuildDate>Sun, 22 Dec 2024 09:12:50 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/rust/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[RustLadies第4回目を開催しました！【イベントレポ】]]></title><description><![CDATA[
+ RustLadiesとは
+Rustに興味がある女性で集まり、ゆるっとRustを楽しむコミュニティです。
+Rustにハマった筆者が、女性同士でRustを楽しみながら勉強したい！ついでに女性エンジニア同士の繋がりも増やしたい！というモチベーションから立ち上げました。
+多分日本初のRust女性コミュニティです！🦀
+https://rustladies.connpass.com/
+
+ 第4回目:3章の復習+α
+前回に引き続きThe Bookを参加者のみなさまと進めました！
+3章といえばデータ型、関数、変数の作り方、制御文、コメントなどなど。
+前回から1ヶ月経っていることもあり、前回の復習を兼...]]></description><link>https://zenn.dev/2323_code/articles/4381f6b0cfc262</link><guid isPermaLink="true">https://zenn.dev/2323_code/articles/4381f6b0cfc262</guid><pubDate>Sun, 22 Dec 2024 08:34:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Vsd2Fl13--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:RustLadies%25E7%25AC%25AC4%25E5%259B%259E%25E7%259B%25AE%25E3%2582%2592%25E9%2596%258B%25E5%2582%25AC%25E3%2581%2597%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%25EF%25BC%2581%25E3%2580%2590%25E3%2582%25A4%25E3%2583%2599%25E3%2583%25B3%25E3%2583%2588%25E3%2583%25AC%25E3%2583%259D%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25B5%25E3%2581%25BF%25E3%2581%25B5%25E3%2581%25BF%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAyZGQ3OTI1ODcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ふみふみ</dc:creator></item><item><title><![CDATA[RustでIteratorの拡張メソッドを自作してみる]]></title><description><![CDATA[
+ 対象読者層
+
+Rustの初学者
+
+Rustの文法をふんわり理解している
+mapやfilterのようなイテレータをふんわり使える
+
+
+
+
+ 環境
+
+Rust 1.83.0
+
+edtion 2021
+
+
+
+
+ 背景
+Rustの標準のscanの作りがあまり好みではないので、勉強も兼ねて自作してみた。
+
+ scanとは
+一言で言うと「 "処理ごとのスナップショット" 付きのfold」。
+HaskellやScalaには標準で用意されている。
+Scalaだとこんな感じ。
+@main
+def main(): Unit =
+  val v = ('b' to 'd').scanLeft("a")((...]]></description><link>https://zenn.dev/ka2kama/articles/dd227ff78a893f</link><guid isPermaLink="true">https://zenn.dev/ka2kama/articles/dd227ff78a893f</guid><pubDate>Sun, 22 Dec 2024 03:34:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xgDZ2C10--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25A7Iterator%25E3%2581%25AE%25E6%258B%25A1%25E5%25BC%25B5%25E3%2583%25A1%25E3%2582%25BD%25E3%2583%2583%25E3%2583%2589%25E3%2582%2592%25E8%2587%25AA%25E4%25BD%259C%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ka2kama%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2o3Zk9TdGE5bm5xTUZhbTNwSWVBd00waWozYlVkWWQ3U2R6VFVFPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ka2kama</dc:creator></item><item><title><![CDATA[うわ・・・私のdbt遅すぎ!?をRustで解決したい]]></title><description><![CDATA[
+ はじめに
+気軽にタイトルをつけてみて「Rustでdbtを書くのじゃ」という誤解を招かないかすごく不安になりました。
+残念ながらそんなに高尚なものではないポエムなので気軽な気持ちで読んでいただければ幸いです。
+これは datatech-jp Advent Calendar 2024 の22日目の記事です。
+
+ 解決したい課題
+普段、アナリティクスエンジニアとしてデータ分析基盤の運用を行っています。
+Data Vaultを活用したデータモデリングの検討や、社内外に提供するダッシュボードのリファクタリングや開発など、日々多岐にわたる業務を行っています。
+現在の会社のデータ分析基盤は、私が入...]]></description><link>https://zenn.dev/tenajima/articles/924a784f3f5b29</link><guid isPermaLink="true">https://zenn.dev/tenajima/articles/924a784f3f5b29</guid><pubDate>Sun, 22 Dec 2024 03:33:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4jc1cg4J--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%2586%25E3%2582%258F%25E3%2583%25BB%25E3%2583%25BB%25E3%2583%25BB%25E7%25A7%2581%25E3%2581%25AEdbt%25E9%2581%2585%25E3%2581%2599%25E3%2581%258E%2521%253F%25E3%2582%2592Rust%25E3%2581%25A7%25E8%25A7%25A3%25E6%25B1%25BA%25E3%2581%2597%25E3%2581%259F%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tenajima%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RiZWNjMGY4OTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tenajima</dc:creator></item><item><title><![CDATA[[Tauri v2.0]JSON データをRust BackendからFrontendに送信する方法]]></title><description><![CDATA[1.Tauriとは
+Tauriは、Rust製のクロスプラットフォーム対応デスクトップアプリケーションフレームワークです。
+Electronなどと同様にHTML/CSS/JavaScriptでフロントエンドを開発しつつ、バックエンドロジックをRustで記述できるのが特徴です。
+IPC (Inter-Process Communication) を利用して、Rust（バックエンド）とJavaScript（フロントエンド）間でデータのやり取りを行うため、高速かつセキュアなアプリケーションを構築できます。
+2.実行環境
+今回使用する環境は以下のとおりです。
+Rust バージョン: rustc 1...]]></description><link>https://zenn.dev/beginote/articles/0ec070f000696e</link><guid isPermaLink="true">https://zenn.dev/beginote/articles/0ec070f000696e</guid><pubDate>Sun, 22 Dec 2024 03:14:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--TtroBD5O--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BTauri%2520v2.0%255DJSON%2520%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%2592Rust%2520Backend%25E3%2581%258B%25E3%2582%2589Frontend%25E3%2581%25AB%25E9%2580%2581%25E4%25BF%25A1%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Zone%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTDRQazlDa2Fhdm9tRENjX0kzYVh3U1BHcFpDZDdvcnVJalNEYmtmV1NDPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Zone</dc:creator></item><item><title><![CDATA[Advent of Code 2024 4: Ceres Search]]></title><description><![CDATA[
+ このページは
+2024 年の Advent of Code の Day4 の記事です。 Day3 はこちら。
+https://zenn.dev/yasuharu519/articles/f6102eedfce78c
+!
+以下問題のネタバレが多数含まれています。問題を楽しみたい方は是非一度本家の問題を見てから読んでみてください。
+
+
+ Day 4: Ceres Search
+Day 4 は word search を行う問題で、入力としては "X", "M", "A", "S" の文字が二次元状に配置された文字列が与えられます。
+
+ Part1
+Part1 では、与えられた文字列の中か...]]></description><link>https://zenn.dev/yasuharu519/articles/5ef6154a07cc6d</link><guid isPermaLink="true">https://zenn.dev/yasuharu519/articles/5ef6154a07cc6d</guid><pubDate>Fri, 20 Dec 2024 15:13:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--v_QH6hNs--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:Advent%2520of%2520Code%25202024%25204%253A%2520Ceres%2520Search%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Sawady%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI4ODhkNmU3MTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Sawady</dc:creator></item><item><title><![CDATA[絵文字だけでコーディングしてHTMLにコンパイルするライブラリを作った]]></title><description><![CDATA[クソアプリアドベントカレンダー2024 21日目の記事です。
+まずは今年で10周年とのこと、本当におめでとうございます🎉🎉
+10年目にして初参加になります！お手柔らかにお願いします！
+
+ 概要
+絵文字を使ってコーディングを行い、その内容をHTMLとしてコンパイルする「emo-lan」というものをRustで作りました。
+!
+※エモい言語ではなく、emojiのemoとLanguageのlanをあわせた言葉です。
+
+ライブラリ自体は以下のRustのパッケージとして公開しています。
+https://crates.io/crates/emo-lan
+!
+Rustはド級の素人です！コードについてマサ...]]></description><link>https://zenn.dev/ryokatsu/articles/e66d4dd6cea075</link><guid isPermaLink="true">https://zenn.dev/ryokatsu/articles/e66d4dd6cea075</guid><pubDate>Fri, 20 Dec 2024 15:05:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--zEBFJFgO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%25B5%25B5%25E6%2596%2587%25E5%25AD%2597%25E3%2581%25A0%25E3%2581%2591%25E3%2581%25A7%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2587%25E3%2582%25A3%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%2597%25E3%2581%25A6HTML%25E3%2581%25AB%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2591%25E3%2582%25A4%25E3%2583%25AB%25E3%2581%2599%25E3%2582%258B%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:infixer%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2ljRElWMnNPWWU2VHJfdjhlMXQ0NzIxalZBWGg3MldmblJVV1c4PXMyNTAtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>infixer</dc:creator></item><item><title><![CDATA[もう全部あいつ(Polars)1人でいいんじゃないかな]]></title><description><![CDATA[本記事は、某企業アドベントカレンダー2024の21日目の記事です。
+KaggleのInstacart Market Basket Analysisデータセットを用いて、Polars (EagerおよびLazyモード) とPandasのパフォーマンスを比較検証します。
+何も考えずPandasを使い続ける私。
+本記事は、Polarsの魅力に触れることで、自分自身をPolarsへ移行する気にさせることを目的とした記事です。
+Pandas VS Polarsはよく取り上げられている話題です。
+しかし、私の戦争はまだ終わっていないのです。(？)
+
+ 実行環境
+本記事のコードは、誰でも簡単に実行でき...]]></description><link>https://zenn.dev/coffee_peng/articles/ddf65c010bbe09</link><guid isPermaLink="true">https://zenn.dev/coffee_peng/articles/ddf65c010bbe09</guid><pubDate>Fri, 20 Dec 2024 15:02:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--WG4dZoJ8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%2582%25E3%2581%2586%25E5%2585%25A8%25E9%2583%25A8%25E3%2581%2582%25E3%2581%2584%25E3%2581%25A4%2528Polars%25291%25E4%25BA%25BA%25E3%2581%25A7%25E3%2581%2584%25E3%2581%2584%25E3%2582%2593%25E3%2581%2598%25E3%2582%2583%25E3%2581%25AA%25E3%2581%2584%25E3%2581%258B%25E3%2581%25AA%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E7%258F%2588%25E7%2590%25B2%25E3%2583%259A%25E3%2583%25B3%25E3%2582%25AE%25E3%2583%25B3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJlN2JjM2EwYzkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>珈琲ペンギン</dc:creator></item><item><title><![CDATA[Advent of Code 2024 Day 3: Mull It Over]]></title><description><![CDATA[
+ このページは
+2024 年の Advent of Code の Day3 の記事です。 Day2 はこちら。
+https://zenn.dev/yasuharu519/articles/7466cf0680b540
+!
+以下問題のネタバレが多数含まれています。問題を楽しみたい方は是非一度本家の問題を見てから読んでみてください。
+
+
+ Day 3: Mull It Over
+今回はコンピュータのメモリが壊れてしまったが、文字列の中の mul(X,Y) という命令を読み取って、値を計算すると行ったもののようです。
+
+ Part1
+"文字列の中から決まったパターンを取り出す" といえば、正...]]></description><link>https://zenn.dev/yasuharu519/articles/f6102eedfce78c</link><guid isPermaLink="true">https://zenn.dev/yasuharu519/articles/f6102eedfce78c</guid><pubDate>Fri, 20 Dec 2024 14:09:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--pjSoqfMx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Advent%2520of%2520Code%25202024%2520Day%25203%253A%2520Mull%2520It%2520Over%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Sawady%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI4ODhkNmU3MTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Sawady</dc:creator></item><item><title><![CDATA[Homebrewでtapを作って自作ツールを配布するための必要十分条件]]></title><description><![CDATA[awscurl-rs を作った時に色々調べたのでメモ。Homebrewで入れられる自作ツールを作りたい方へ
+
+ なぜこれを書いたのか
+要は公式のガイドを読めば良いんですが、この手順には過剰な部分があります。実際のところどこまでが必要条件で、どこまで従う必要があるのかを明確にするために書きます。
+
+ 手順
+
+ バイナリをダウンロードできる状態にする
+公式のガイド通りGitHubのReleaseに保存しておくのが一番楽だと思いますが、インターネット経由でダウンロードできさえすれば他の方法でも良いはずです。（パブリックなS3に保存する等）
+
+ tap用のGitHubレポジトリを作る
+参考
+ht...]]></description><link>https://zenn.dev/1hakusai1/articles/7ff25cb682a08f</link><guid isPermaLink="true">https://zenn.dev/1hakusai1/articles/7ff25cb682a08f</guid><pubDate>Fri, 20 Dec 2024 11:50:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Od8Q0Lt8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Homebrew%25E3%2581%25A7tap%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E8%2587%25AA%25E4%25BD%259C%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%25E3%2582%2592%25E9%2585%258D%25E5%25B8%2583%25E3%2581%2599%25E3%2582%258B%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%25E5%25BF%2585%25E8%25A6%2581%25E5%258D%2581%25E5%2588%2586%25E6%259D%25A1%25E4%25BB%25B6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hakusai%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U1Mjk0YmM1NWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hakusai</dc:creator></item><item><title><![CDATA[Rustのclapでcliのコマンドやオプションをenumで取得する]]></title><description><![CDATA[
+ Rust Advent Calendar 2024 19 日目
+この記事は Rust Advent Calendar 2024 の 19 日目として書いています。
+今日見たら偶然 19 日が空いていたので 9 日目同様にせっかくなら入れるかと思って入れています。
+https://qiita.com/advent-calendar/2024/rust
+昨日は @sotanengel さんによる 「docs.rs 書くのめんどくさくない？」をできるだけ楽にした話 でした。
+https://qiita.com/sotanengel/items/81a25106d039aec919a3
+
+ ...]]></description><link>https://zenn.dev/ara_ta3/articles/rust-cli-with-clap-bind-enum</link><guid isPermaLink="true">https://zenn.dev/ara_ta3/articles/rust-cli-with-clap-bind-enum</guid><pubDate>Thu, 19 Dec 2024 07:00:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--RNbwa3eJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25AEclap%25E3%2581%25A7cli%25E3%2581%25AE%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2582%2584%25E3%2582%25AA%25E3%2583%2597%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%2592enum%25E3%2581%25A7%25E5%258F%2596%25E5%25BE%2597%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ara_ta3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzIwMmNmMDMwYzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ara_ta3</dc:creator></item><item><title><![CDATA[workers-rsでハローワールド + Github Actionで自動デプロイ]]></title><description><![CDATA[この記事は デジタルキューブ ＆ ヘプタゴン Advent Calendar 2024 の 12月23日分の記事です。
+Rust練習したいなーと常々思っていたので、入口としてCloudflare Workers用のRustクレートworkers-rsに入門してみます。
+そもそもCloudflare Workersって何？
+Cloudflareのエッジロケーションでサーバレスにコードを実行してくれるサービスです。
+CDNのエッジで処理するので通信による待ち時間が少なく、V8 isolateによってコールドスタートの影響も非常に少ないことが特徴です。厳密な説明ではありませんが、僕は制約がある...]]></description><link>https://zenn.dev/t4nih4ru/articles/403c6eec5ce72d</link><guid isPermaLink="true">https://zenn.dev/t4nih4ru/articles/403c6eec5ce72d</guid><pubDate>Thu, 19 Dec 2024 03:41:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Neq79BAc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:workers-rs%25E3%2581%25A7%25E3%2583%258F%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%25AF%25E3%2583%25BC%25E3%2583%25AB%25E3%2583%2589%2520%252B%2520Github%2520Action%25E3%2581%25A7%25E8%2587%25AA%25E5%258B%2595%25E3%2583%2587%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25A4%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:TH%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRmMWU1YTExNGEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>TH</dc:creator></item><item><title><![CDATA[RustでsqlxでPostgreSQLのLISTENとNOTIFYをしてみる]]></title><description><![CDATA[
+ 目的
+ユニークビジョン株式会社 Advent Calendar 2024のシリーズ2、12/12の記事です。
+PostgreSQLにはLISTENとNOTIFYという非同期で通信する仕組みが存在します。
+これをRustに組み込んでみます。
+
+ 説明
+
+ pg_notify
+PostgreSQLの関数であるpg_notifyは、チャンネル名とペイロードの2つの引数を取ります。
+SELECT pg_notify('channel_name', 'payload');
+チャンネル名をLISTENしている対象に通知が送られます。
+
+ コード
+コードは以下のようになります。
+channel_m...]]></description><link>https://zenn.dev/aoyagikouhei/articles/0cb7b4870f8010</link><guid isPermaLink="true">https://zenn.dev/aoyagikouhei/articles/0cb7b4870f8010</guid><pubDate>Wed, 18 Dec 2024 22:52:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0FI1tAZn--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25A7sqlx%25E3%2581%25A7PostgreSQL%25E3%2581%25AELISTEN%25E3%2581%25A8NOTIFY%25E3%2582%2592%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E9%259D%2592%25E6%259F%25B3%25E5%25BA%25B7%25E5%25B9%25B3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFjZDA3ZGRhNzguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>青柳康平</dc:creator></item><item><title><![CDATA[pg_bigmをRustで実装する（Part1）]]></title><description><![CDATA[この記事はPostgreSQL Advent Calendar 2024の19日目の記事です。
+昨日は澤田さんの「PostgreSQL 17で新しく実装されたradix treeを使ってインメモリのキーバリューストア作ってみた」でした。拡張機能を実装してさらにPostgreSQLのバグを見つけているのがさすがだなと思いました。
+
+ はじめに
+2024年10月にギリシャで開催されたPGConf.EU 2024に参加したのですが、そのときに「Fearless Extension Development With Rust and PGRX」という発表がありました。これは、PostgreSQL...]]></description><link>https://zenn.dev/shinyakato/articles/c9744a06cfa540</link><guid isPermaLink="true">https://zenn.dev/shinyakato/articles/c9744a06cfa540</guid><pubDate>Wed, 18 Dec 2024 22:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9WAuoNBz--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:pg_bigm%25E3%2582%2592Rust%25E3%2581%25A7%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2599%25E3%2582%258B%25EF%25BC%2588Part1%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Shinya%2520Kato%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZhNTI2MzU3OTMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Shinya Kato</dc:creator></item><item><title><![CDATA[Haskeller の異常な愛情：または、生粋の Haskeller は転職して Rust を一ヶ月半書いて何を思うようになったか]]></title><description><![CDATA[この記事は Jij Advent Calendar 2024、Haskell Advent Calendar 2024、およびRust Advent Calendar 2024シリーズ2 の18日目の記事です。
+各カレンダーの前後の記事は以下の通りです：
+
+Haskell Advent Calendar 2024
+
+前の記事：
+次の記事： gotoki_no_joe さんの「集めるDPについて」
+
+
+Rust Advent Calendar 2024 シリーズ2
+
+前の記事：yasuo-ozu さんの「本物のSpecializationをStable Rustで！」
+次の記事：hyuma...]]></description><link>https://zenn.dev/jij_inc/articles/2024-12-18-pure-haskeller-writing-rust</link><guid isPermaLink="true">https://zenn.dev/jij_inc/articles/2024-12-18-pure-haskeller-writing-rust</guid><pubDate>Wed, 18 Dec 2024 08:00:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--XCtgDzuq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Haskeller%2520%25E3%2581%25AE%25E7%2595%25B0%25E5%25B8%25B8%25E3%2581%25AA%25E6%2584%259B%25E6%2583%2585%25EF%25BC%259A%25E3%2581%25BE%25E3%2581%259F%25E3%2581%25AF%25E3%2580%2581%25E7%2594%259F%25E7%25B2%258B%25E3%2581%25AE%2520Haskeller%2520%25E3%2581%25AF%25E8%25BB%25A2%25E8%2581%25B7%25E3%2581%2597%25E3%2581%25A6%2520Rust%2520%25E3%2582%2592%25E4%25B8%2580%25E3%2583%25B6%25E6%259C%2588%25E5%258D%258A%25E6%259B%25B8%25E3%2581%2584%25E3%2581%25A6%25E4%25BD%2595%25E3%2582%2592%25E6%2580%259D...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:konn%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I0ZjhjYjkwMmYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Jij%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2gyb0FBaFdSS2VaMDl0LTg4dDQyemhvd1F4Y0tlMDJfbWN6b1ZoOEE9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>konn</dc:creator></item><item><title><![CDATA[RustでERDからモデルstructを作る]]></title><description><![CDATA[
+ 目的
+ユニークビジョン株式会社 Advent Calendar 2024のシリーズ2、12/10の記事です。
+Rustでテーブル変更に対して壊れにくいテストを書くで紹介しているようにbuilderパターンを使ってテーブルと同じ構造のstructを作ると単体テストで便利です。
+ここではRustとPostgreSQLのストアード・プロシージャーの雛形を作るでも紹介したERDツールを使って、作成します。
+
+ 説明
+
+ ディレクトリ構成
+- erd
+  - table
+    - templates
+      - table_rs.ejs
+    - table.erd.json
+- ap...]]></description><link>https://zenn.dev/aoyagikouhei/articles/ddb0a0285a6cec</link><guid isPermaLink="true">https://zenn.dev/aoyagikouhei/articles/ddb0a0285a6cec</guid><pubDate>Tue, 17 Dec 2024 22:52:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jd2iMTZu--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25A7ERD%25E3%2581%258B%25E3%2582%2589%25E3%2583%25A2%25E3%2583%2587%25E3%2583%25ABstruct%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E9%259D%2592%25E6%259F%25B3%25E5%25BA%25B7%25E5%25B9%25B3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFjZDA3ZGRhNzguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>青柳康平</dc:creator></item><item><title><![CDATA[俺のガチってるdotfiles紹介]]></title><description><![CDATA[
+ はじめに
+どうもです。3-shake の melanmeg です
+今回は dotfiles 紹介です。
+エンジニアにとっては、dotfiles は作業効率を上げるための 自分用チートシート のように感じています。もしくは これまで コツコツと積み上げてきた財産 ...ですかね。
+普段から使い慣れた環境をどこでも再現できるようにしておくことで、複数の端末で素早く自分好みの環境を用意できます！
+シェルやVSCodeのカスタマイズ、Gitの便利設定、そして新しいVMでの簡単なセットアップ方法を紹介します。dotfiles管理の魅力を共有し、皆さんの環境構築がもっと楽しくなればと思います🙇
+...]]></description><link>https://zenn.dev/melanmeg/articles/dd0b9606352fb9</link><guid isPermaLink="true">https://zenn.dev/melanmeg/articles/dd0b9606352fb9</guid><pubDate>Tue, 17 Dec 2024 22:00:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ffrSn5Ux--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E4%25BF%25BA%25E3%2581%25AE%25E3%2582%25AC%25E3%2583%2581%25E3%2581%25A3%25E3%2581%25A6%25E3%2582%258Bdotfiles%25E7%25B4%25B9%25E4%25BB%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:melanmeg%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q1OGE1Y2Q4MGYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>melanmeg</dc:creator></item><item><title><![CDATA[Tauri(Rust)、Qwik、Bunを使って爆速なクロスプラットフォームアプリ（デスクトップ、スマホ、Web）を作る（環境構築編）]]></title><description><![CDATA[
+ はじめに
+今回はTauri、Qwik、Bunを使って爆速なクロスプラットフォームアプリ（デスクトップ、スマホ、Web）を作るための環境構築方法を紹介する。
+
+ 今回の技術スタック
+
+ Rustとは
+ブラウザのFirefoxを開発しているMozillaが開発したプログラミング言語。
+所有権システムなど独特な方法でメモリ安全性を保証しつつ処理を高速化するための機能が備わっている。
+バックエンドとしてLLVMを使っているため、さまざまなプラットフォームに対応でき、ビルド時に高度な最適化が可能である。
+
+ TypeScriptとは
+JavaScriptの構文を拡張し、より高度な記述ができるよ...]]></description><link>https://zenn.dev/varubogu/articles/tauri-qwik-bun</link><guid isPermaLink="true">https://zenn.dev/varubogu/articles/tauri-qwik-bun</guid><pubDate>Tue, 17 Dec 2024 19:31:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--FyUjmQDp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Tauri%2528Rust%2529%25E3%2580%2581Qwik%25E3%2580%2581Bun%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E7%2588%2586%25E9%2580%259F%25E3%2581%25AA%25E3%2582%25AF%25E3%2583%25AD%25E3%2582%25B9%25E3%2583%2597%25E3%2583%25A9%25E3%2583%2583%25E3%2583%2588%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25BC%25E3%2583%25A0%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25EF%25BC%2588%25E3%2583%2587%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%2588%25E3%2583%2583%25E3%2583%2597%25E3%2580%2581%25E3%2582%25B9%25E3%2583%259E%25E3%2583%259B%25E3%2580%2581Web%25EF%25BC%2589...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%25B4%25E3%2582%25A1%25E3%2583%25AB%25E3%2583%259C%25E3%2583%25BC%25E3%2582%25B0%2540toyosuke%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dqUWptMkNsYkdRV21tdzk1UElEVkRpUmRzUU1Ec3lfcEEtX0ZOMGc9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ヴァルボーグ@toyosuke</dc:creator></item><item><title><![CDATA[組み込みRust入門]]></title><description><![CDATA[
+ はじめに
+こちらは広島大学の技術系サークルの18日目のアドカレです。
+https://adventar.org/calendars/10901
+そして、今回の記事はHiCoder内で組み込みRust講習会を行ったときに話した内容をまとめています。
+想定読者は、プログラミングをチョットデキて、Rustの所有権について他サイト等で学んできた人です。
+この記事ではコードを一切書かず、コマンドを叩くだけなので、是非やってみてください。
+私自身も勉強中なので、内容に誤りがあったらコメントで教えてくださいm(_ _)m8
+
+ この記事で必要なもの
+
+Raspberry Pi Pico
+ブレッドボ...]]></description><link>https://zenn.dev/hallucogenia/articles/embedded-rust</link><guid isPermaLink="true">https://zenn.dev/hallucogenia/articles/embedded-rust</guid><pubDate>Tue, 17 Dec 2024 18:46:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qP_vgN1C--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%25B5%2584%25E3%2581%25BF%25E8%25BE%25BC%25E3%2581%25BFRust%25E5%2585%25A5%25E9%2596%2580%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:jijinbei%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUVkRlRwNFJTZmdxUWM5U054bmFGN1lZQTl4emZ2eHdYQ1dhaGFZNUZ1RmQ9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>jijinbei</dc:creator></item><item><title><![CDATA[RustとBevyで雪の結晶のシミュレーションをする]]></title><description><![CDATA[
+静けさに抱かれながら　また今日も待っている
+ゆるやかに降る　水じゃなくてもっと寂しい粒 [1]
+
+!
+この記事は「株式会社ガラパゴス（有志）Advent Calendar 2024」18日目の記事です。
+
+
+ イントロダクション
+こんにちは。冬ですね。
+サービス開発パートナー事業部　バックエンドエンジニアの@necocenです。
+冬といえば雪、雪といえばきれいな結晶です。
+今回は、雪の結晶（雪片）の成長シミュレーションモデルをRustで実装して、Rayonで並列化を行い、さらにゲームエンジンBevyを使って可視化し、Webブラウザで表示できるようにした話をします。特に仕事とは関係があり...]]></description><link>https://zenn.dev/galapagos/articles/snowflake-simulator-in-rust</link><guid isPermaLink="true">https://zenn.dev/galapagos/articles/snowflake-simulator-in-rust</guid><pubDate>Tue, 17 Dec 2024 15:00:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9gPDbaLG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25A8Bevy%25E3%2581%25A7%25E9%259B%25AA%25E3%2581%25AE%25E7%25B5%2590%25E6%2599%25B6%25E3%2581%25AE%25E3%2582%25B7%25E3%2583%259F%25E3%2583%25A5%25E3%2583%25AC%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%2592%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:necocen%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBlMWFiMTkxYzQuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2582%25AC%25E3%2583%25A9%25E3%2583%2591%25E3%2582%25B4%25E3%2582%25B9%25EF%25BC%2588%25E6%259C%2589%25E5%25BF%2597%25EF%25BC%2589%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2hQekd1XzZweFgyVDZFNXBtWlZBWjl6ODhxSE9LdDlFdnRMU3lwPXMyNTAtYw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>necocen</dc:creator></item><item><title><![CDATA[RustでDBアクセスをsqlxにしてみた]]></title><description><![CDATA[
+ 目的
+ユニークビジョン株式会社 Advent Calendar 2024のシリーズ2、12/7の記事です。
+DBはPostgreSQLを使っていて、それにアクセスするためにcrate deadpool-postgresを使っていました。
+さらにこれだけではrawすぎたので、一覧や一件を返すためのwrapperを作って使ってました。
+sqlxはこれらをまとめてやってくれたので、こちらに乗り換えました。
+
+ 説明
+
+ sqlx
+READMEの機能を翻訳してみます。
+
+Native Rustなのでどこでもコンパイルできる
+行をストリームで読み込める。非同期でデコードしてくれる(struct...]]></description><link>https://zenn.dev/aoyagikouhei/articles/2ab5674172e764</link><guid isPermaLink="true">https://zenn.dev/aoyagikouhei/articles/2ab5674172e764</guid><pubDate>Mon, 16 Dec 2024 23:05:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--yUeMHOAW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25A7DB%25E3%2582%25A2%25E3%2582%25AF%25E3%2582%25BB%25E3%2582%25B9%25E3%2582%2592sqlx%25E3%2581%25AB%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E9%259D%2592%25E6%259F%25B3%25E5%25BA%25B7%25E5%25B9%25B3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFjZDA3ZGRhNzguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>青柳康平</dc:creator></item></channel></rss>

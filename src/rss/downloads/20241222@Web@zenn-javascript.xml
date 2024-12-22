@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「JavaScript」のフィード]]></title><description><![CDATA[Zennのトピック「JavaScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/javascript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/64acd76870.png</url><title>Zennの「JavaScript」のフィード</title><link>https://zenn.dev/topics/javascript</link></image><generator>zenn.dev</generator><lastBuildDate>Sun, 22 Dec 2024 07:29:56 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/javascript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Doshisha SSO emoji autocomplete hack]]></title><description><![CDATA[
+ 私たちの研究室
+https://nisk.doshisha.ac.jp/
+
+ アドベントカレンダー23日目〜
+https://nislab-advent-calendar-2024-12.vercel.app/
+
+ Doshisha SSO emoji autocomplete hack
+
+Article by エスカーニョ　マルケス、ユイス
+
+The Doshisha Single Sing On has multiple two factor mechanisms to login into its ecosystem. In this article I will show y...]]></description><link>https://zenn.dev/nislab/articles/c8b0f7a6c3b988</link><guid isPermaLink="true">https://zenn.dev/nislab/articles/c8b0f7a6c3b988</guid><pubDate>Sun, 22 Dec 2024 07:26:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--WhxWTd2O--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:Doshisha%2520SSO%2520emoji%2520autocomplete%2520hack%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:lluise%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzYzOTk4ZGRhN2IuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:NISLab%2520%25E5%25B0%258F%25E6%259D%25BF%25E7%25A0%2594%25E7%25A9%25B6%25E5%25AE%25A4%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSXcteno1SlRqbTJrREpQWEZpWlBLZW1NNmx5Uy1EbTlPV01TYkdKM05EOXlLNFV4QUw9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>lluise</dc:creator></item><item><title><![CDATA[ENCA 21日目: Function.prototype.bind でターゲットの length が Infinity な場合の挙動明示]]></title><description><![CDATA[!
+この記事は 1人 ECMAScript Normative Changes Advent Calendar 2024 の 21 日目です。
+
+
+ 函数の length プロパティ
+JavaScript の函数は length プロパティが設定されるようになっています。これは函数を作った際に受け取る引数（デフォルト引数や残余引数が現れる前の引数）の数が設定されます。
+function foo(a, b, c = "c") {}
+console.log(foo.length); // 2
+なおこのプロパティは configurable であるため、Object.definePropert...]]></description><link>https://zenn.dev/pixiv/articles/4db54367830251</link><guid isPermaLink="true">https://zenn.dev/pixiv/articles/4db54367830251</guid><pubDate>Sun, 22 Dec 2024 06:52:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--uble3QzN--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ENCA%252021%25E6%2597%25A5%25E7%259B%25AE%253A%2520Function.prototype.bind%2520%25E3%2581%25A7%25E3%2582%25BF%25E3%2583%25BC%25E3%2582%25B2%25E3%2583%2583%25E3%2583%2588%25E3%2581%25AE%2520length%2520%25E3%2581%258C%2520Infin...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:petamoriken%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZhMDc3ZWRhZTMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:pixiv%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzMzODlhMzQ2ZjQuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>petamoriken</dc:creator></item><item><title><![CDATA[[Tauri v2.0]JSON データをRust BackendからFrontendに送信する方法]]></title><description><![CDATA[1.Tauriとは
+Tauriは、Rust製のクロスプラットフォーム対応デスクトップアプリケーションフレームワークです。
+Electronなどと同様にHTML/CSS/JavaScriptでフロントエンドを開発しつつ、バックエンドロジックをRustで記述できるのが特徴です。
+IPC (Inter-Process Communication) を利用して、Rust（バックエンド）とJavaScript（フロントエンド）間でデータのやり取りを行うため、高速かつセキュアなアプリケーションを構築できます。
+2.実行環境
+今回使用する環境は以下のとおりです。
+Rust バージョン: rustc 1...]]></description><link>https://zenn.dev/beginote/articles/0ec070f000696e</link><guid isPermaLink="true">https://zenn.dev/beginote/articles/0ec070f000696e</guid><pubDate>Sun, 22 Dec 2024 03:14:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--TtroBD5O--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BTauri%2520v2.0%255DJSON%2520%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%2592Rust%2520Backend%25E3%2581%258B%25E3%2582%2589Frontend%25E3%2581%25AB%25E9%2580%2581%25E4%25BF%25A1%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Zone%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTDRQazlDa2Fhdm9tRENjX0kzYVh3U1BHcFpDZDdvcnVJalNEYmtmV1NDPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Zone</dc:creator></item><item><title><![CDATA[Three.jsで3Dの矢印を作りました！]]></title><description><![CDATA[
+ 今回はThree.jsで3Dの矢印を作ってみました。
+３Ｄの矢印を作成する、javascript、CSS、HTMLです。
+
+ HTML＆JavaScript
+これを矢印を描画したい箇所に記載します。
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Three.js矢印テスト&lt;/title&gt;
+&lt;style&gt;
+.animation-container {
+width: 360px;
+height: 200px;
+margin: 0 auto;
+padding: 0;
+position: relative;
+background-col...]]></description><link>https://zenn.dev/ausssxi/articles/dbd258345a18ab</link><guid isPermaLink="true">https://zenn.dev/ausssxi/articles/dbd258345a18ab</guid><pubDate>Sun, 22 Dec 2024 00:20:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--cIrdR1aX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Three.js%25E3%2581%25A73D%25E3%2581%25AE%25E7%259F%25A2%25E5%258D%25B0%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258A%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%2586%2585%25E7%2594%25B0%25E5%258E%259A%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VjNDgzNzUzOWMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>内田厚</dc:creator></item><item><title><![CDATA[Nuxt Securityの導入]]></title><description><![CDATA[
+ Nuxt Securitを導入してできることのまとめ
+
+ はじめに
+Nuxt3でのみ使用できるNuxt Securityを案件で使用することになったので何ができるか事前に調査しました。
+クレジットカード使用のセキュリティ対策をするにあたってNuxt3プロジェクトででできることをする対応の一環です。
+このモジュールを使用することで何ができるのか、セットアップの方法についてまとめていきます。
+私はセキュリティに関して明るくなく、今回調査するにあったって始めて目にする用語も多々ありました。
+なんとなく概念は理解してまとめたつもりですが、誤りがある場合もあるかと思います🙇‍♂️
+導入する際に...]]></description><link>https://zenn.dev/rlab/articles/40b6be1bf6de37</link><guid isPermaLink="true">https://zenn.dev/rlab/articles/40b6be1bf6de37</guid><pubDate>Sat, 21 Dec 2024 12:53:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ZjJMgQla--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:Nuxt%2520Security%25E3%2581%25AE%25E5%25B0%258E%25E5%2585%25A5%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%258A%25E3%2583%2584%25E3%2583%258E%25E3%2583%25AD%25E3%2583%2589%25E3%2583%25AA%25E3%2582%25B4%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNjNzdmZWEzNmQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ナツノロドリゴ</dc:creator></item><item><title><![CDATA[OSSコントリビュート、意外と簡単説]]></title><description><![CDATA[大学4年生のkawaiです！
+憧れだったOSSコントリビュートをすることができたので共有したいと思います。
+
+ 概要
+今回コントリビュートしたのは日本初のUIライブラリ「Yamada UI」です
+https://yamada-ui.com/ja
+https://x.com/hirotomoyamada/status/1738868143949508785
+
+ OSSコミット、チャレンジしてみるか、、
+一年ほど前にリリースされ、「なんだか凄そう、、」と思って、Hiroto YamadaさんのXをフォローしていました。
+フォローしていると時々以下のようなポストが流れてきます。恐らく新しくOS...]]></description><link>https://zenn.dev/yuyaba/articles/3b435ceae86003</link><guid isPermaLink="true">https://zenn.dev/yuyaba/articles/3b435ceae86003</guid><pubDate>Sat, 21 Dec 2024 07:32:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--tr0xK0b6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:OSS%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2588%25E3%2583%25AA%25E3%2583%2593%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%2588%25E3%2580%2581%25E6%2584%258F%25E5%25A4%2596%25E3%2581%25A8%25E7%25B0%25A1%25E5%258D%2598%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kawai%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzczMmQzNjAzZDEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kawai</dc:creator></item><item><title><![CDATA[ENCA 20日目: クラスの name プロパティ設定を早める]]></title><description><![CDATA[!
+この記事は 1人 ECMAScript Normative Changes Advent Calendar 2024 の 20 日目です。
+
+
+ クラスの name プロパティ
+JavaScript のクラスは name プロパティが設定されるようになっています。これは SetFunctionName が実行されることによるもので、通常の函数と同様に、クラス宣言、クラス式問わずに設定されます。
+// クラス宣言
+class Foo {}
+console.log(Foo.name); // "Foo"
+
+// 変数宣言でクラス式を使う
+const Bar = class {}
+cons...]]></description><link>https://zenn.dev/pixiv/articles/8282357622de0f</link><guid isPermaLink="true">https://zenn.dev/pixiv/articles/8282357622de0f</guid><pubDate>Fri, 20 Dec 2024 15:53:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--OA0VtZGH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ENCA%252020%25E6%2597%25A5%25E7%259B%25AE%253A%2520%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25B9%25E3%2581%25AE%2520name%2520%25E3%2583%2597%25E3%2583%25AD%25E3%2583%2591%25E3%2583%2586%25E3%2582%25A3%25E8%25A8%25AD%25E5%25AE%259A%25E3%2582%2592%25E6%2597%25A9%25E3%2582%2581%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:petamoriken%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZhMDc3ZWRhZTMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:pixiv%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzMzODlhMzQ2ZjQuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>petamoriken</dc:creator></item><item><title><![CDATA[fullPage.jsで画像や背景を遅延読み込みする方法]]></title><description><![CDATA[
+ はじめに
+遅延読み込みライブラリは、fullPage.js では機能しない場合があります。
+その理由は、fullPage.jsが従来の方法で「スクロール」イベントをトリガーしないためです。
+代わりに、fullPage.jsはCSSトランジションまたはJavaScriptを使用してスクロールをシミュレートします
+
+ fullPage.jsで遅延読み込みを行う方法
+
+ 方法1: 簡単な方法
+現在の遅延読み込み技術をfullPage.jsと組み合わせる最も簡単な方法は、fullPage.jsのオプションscrollBar:trueを使用することです。
+これにより、fullPage.jsは他...]]></description><link>https://zenn.dev/alvarotrigo/articles/8083e37bcfa6de</link><guid isPermaLink="true">https://zenn.dev/alvarotrigo/articles/8083e37bcfa6de</guid><pubDate>Fri, 20 Dec 2024 11:31:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ZCB1_713--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:fullPage.js%25E3%2581%25A7%25E7%2594%25BB%25E5%2583%258F%25E3%2582%2584%25E8%2583%258C%25E6%2599%25AF%25E3%2582%2592%25E9%2581%2585%25E5%25BB%25B6%25E8%25AA%25AD%25E3%2581%25BF%25E8%25BE%25BC%25E3%2581%25BF%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Alvaro%2520Trigo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAzZTc5MDBkNTQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Alvaro Trigo</dc:creator></item><item><title><![CDATA[ReadableStreamオブジェクトを理解する]]></title><description><![CDATA[こんにちは、株式会社イルシルでEMをしているmizukiです。
+今回はタスクでストリーミング配信を実装する必要があり「ReadableStream」というものに初めて触れたので、概要や使い方についてまとめていきたいと思います。
+
+ ReadableStreamとは
+まずはReadableStreamについてのMDNの説明を引用したいと思います。
+
+ReadableStream はストリーム API のインターフェイスで、バイトデータの読み取り可能なストリームを表します。 Fetch API は、 ReadableStream の具体的なインスタンスをResponse オブジェクトの bo...]]></description><link>https://zenn.dev/irusiru/articles/df80e75a1351c8</link><guid isPermaLink="true">https://zenn.dev/irusiru/articles/df80e75a1351c8</guid><pubDate>Fri, 20 Dec 2024 11:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--OagM4JuP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ReadableStream%25E3%2582%25AA%25E3%2583%2596%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E3%2582%2592%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:mizuki%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBkYjc5MDE3NjIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%25B7%25E3%2583%25AB%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzUxOGNiNzU1YTcuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mizuki</dc:creator></item><item><title><![CDATA[問題: JavaScript には参照渡しはありません]]></title><description><![CDATA[参照渡しでググると 参照渡しできない言語なのに 参照渡しができるような記事がごろごろみたいな例がまままままあるのがよくあります。
+勿論 JavaScript は 参照渡し の「無い」言語です。
+何故なら 変数の 参照を 引数に直接渡すことができないからです。
+勿論、後述の方法で 参照渡しが無くても参照を渡す方法は無いわけではない為、参照渡しができるようにする 野良プロポーザルとかもあります。
+https://github.com/rbuckton/proposal-refs
+で、参照渡しの話ですが、
+Wikipedia だと 参照渡しの説明としては次の様にあります。
+
+
+ 参照呼び
+参照...]]></description><link>https://zenn.dev/juners/articles/30472227e201e6</link><guid isPermaLink="true">https://zenn.dev/juners/articles/30472227e201e6</guid><pubDate>Fri, 20 Dec 2024 09:28:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--VcQW1Evf--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2595%258F%25E9%25A1%258C%253A%2520JavaScript%2520%25E3%2581%25AB%25E3%2581%25AF%25E5%258F%2582%25E7%2585%25A7%25E6%25B8%25A1%25E3%2581%2597%25E3%2581%25AF%25E3%2581%2582%25E3%2582%258A%25E3%2581%25BE%25E3%2581%259B%25E3%2582%2593%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:juner%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pJLTZTZnZQaDFwb0M5dmMxYUpVeTFoelB0R1g1RXRmUHRpQzF4QWR3PXMyNTAtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>juner</dc:creator></item><item><title><![CDATA[【GSAP】GSAP Practice【#９ GSAP Sample2 SVG Animation1】]]></title><description><![CDATA[
+ 【#９ GSAP Sample2 SVG Animation1】
+YouTube: https://youtu.be/yz2X0bSG2iE
+https://youtu.be/yz2X0bSG2iE
+今回からSVGにGsapのアニメーションを
+設定するサンプルの作成を行います。
+今回はSVGの描画と事前準備を行います。
+
+index.html
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8" /&gt;
+    &lt;meta name="viewport...]]></description><link>https://zenn.dev/web_life_ch/articles/9d5ccf27ea7b53</link><guid isPermaLink="true">https://zenn.dev/web_life_ch/articles/9d5ccf27ea7b53</guid><pubDate>Fri, 20 Dec 2024 09:08:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--nlnuXjb---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590GSAP%25E3%2580%2591GSAP%2520Practice%25E3%2580%2590%2523%25EF%25BC%2599%2520GSAP%2520Sample2%2520SVG%2520Animation1%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Web%2520Life%2520CH%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUl0YnZtbWNjTWFMM3dyd2x3VE5sVVZjTlhmZHEzZzF2QnJfMUJMSkJrN049czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Web Life CH</dc:creator></item><item><title><![CDATA[GSAPでクリスマスっぽいアニメーションを作る]]></title><description><![CDATA[おばんです！jig.jp Advent Calendar 2024 20日目の記事を担当します、サウスケイです！
+みなさん、クリスマス近いですね！僕は小学生の時にトンチンカンすぎてサンタさんから知恵の輪をプレゼントされたことがあります
+さて、今年ももう終わりが見えてきますが、
+今年僕がお世話になったライブラリは、SwiperとGSAPです
+どちらも手厚いドキュメントと豊富な情報でかなり開発で助かりました
+また、フレームワークではAstroもよく使いました。SSG最高
+今回は今年お世話になったGSAPを使ってクリスマスに訪れた人が少しでもハッピーになるようなLPを作ってみました！フレームワ...]]></description><link>https://zenn.dev/jigjp_engineer/articles/c816291460517f</link><guid isPermaLink="true">https://zenn.dev/jigjp_engineer/articles/c816291460517f</guid><pubDate>Fri, 20 Dec 2024 06:31:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--zPN87kKp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:GSAP%25E3%2581%25A7%25E3%2582%25AF%25E3%2583%25AA%25E3%2582%25B9%25E3%2583%259E%25E3%2582%25B9%25E3%2581%25A3%25E3%2581%25BD%25E3%2581%2584%25E3%2582%25A2%25E3%2583%258B%25E3%2583%25A1%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:jig.jp%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I5NGQxOTY3NzcuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:jig.jp%2520Engineers%2527%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJlOGE0ODg0OTkuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>jig.jp</dc:creator></item><item><title><![CDATA[駅すぱあと路線図JavaScriptライブラリrosen.jsを使って英語版路線図を描画する]]></title><description><![CDATA[本記事はヴァル研究所の支援として作成された記事です
+駅すぱあとは乗り換え案内サービスとして有名ですが、駅すぱあとの路線図をWebページに埋め込むことができるのを知っているでしょうか。駅すぱあとの路線図をWebページに埋め込むことで、Webサイトへの訪問者が目的地までの経路を探しやすくなります。日本の大都市圏では電車での移動が多いので、路線図を中心とした地図は便利です。
+そんな地図埋め込みを手軽に実現してくれるライブラリがrosen.jsです。これは駅すぱあと公式のライブラリであり、地図と駅・路線情報などを組み合わせてさまざまな可視化を行えます。
+本記事では、rosen.jsを使って地図を...]]></description><link>https://zenn.dev/ekispert_api/articles/afb01f6cf4b4ea</link><guid isPermaLink="true">https://zenn.dev/ekispert_api/articles/afb01f6cf4b4ea</guid><pubDate>Fri, 20 Dec 2024 04:16:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--zzAlImhH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E9%25A7%2585%25E3%2581%2599%25E3%2581%25B1%25E3%2581%2582%25E3%2581%25A8%25E8%25B7%25AF%25E7%25B7%259A%25E5%259B%25B3JavaScript%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AArosen.js%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E8%258B%25B1%25E8%25AA%259E%25E7%2589%2588%25E8%25B7%25AF%25E7%25B7%259A%25E5%259B%25B3%25E3%2582%2592%25E6%258F%258F%25E7%2594%25BB%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2582%25A2%25E3%2583%2584%25E3%2582%25B7%2540MOONGIFT%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzllZWU4MmU5MDMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E9%25A7%2585%25E3%2581%2599%25E3%2581%25B1%25E3%2581%2582%25E3%2581%25A8%2520API%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dqN3UwNEd0OEkzbTVsd2xaRUhBbjNlcko0QjZxNWlBd1V6N2tqT1E9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>アツシ@MOONGIFT</dc:creator></item><item><title><![CDATA[Hono の RPC Client の仕組み]]></title><description><![CDATA[
+ はじめに
+この記事は Hono Advent Calendar 2024 の 20 日目の記事です。
+今年は「Hono」のソースコードをすべて理解するというチャレンジを個人的にしてました。
+Hono をご存じない方もいるかも知れないので簡単にご紹介すると、Hono は超軽量で高速なウェブフレームワークで、Node.js 環境でも Deno 環境でも、そしてブラウザでも動作するモダンな設計が特徴です。リポジトリはこちらから。
+ちなみに、最近 Wikipedia も出来ました。
+https://ja.wikipedia.org/wiki/Hono
+遂に先日、全てを読み終えたので、その中で...]]></description><link>https://zenn.dev/ame_x/articles/b93bffa6c0499e</link><guid isPermaLink="true">https://zenn.dev/ame_x/articles/b93bffa6c0499e</guid><pubDate>Fri, 20 Dec 2024 03:06:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--V5xt12ft--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Hono%2520%25E3%2581%25AE%2520RPC%2520Client%2520%25E3%2581%25AE%25E4%25BB%2595%25E7%25B5%2584%25E3%2581%25BF%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:EdamAmex%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2EwZDE2YmYxODEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>EdamAmex</dc:creator></item><item><title><![CDATA[[TypeScript] NaN の判定方法]]></title><description><![CDATA[
+ 1. 目的
+JavaScriptおよびTypeScriptの数値型の特殊な値であるNaNについて特徴をまとめ、その変換の際に必要な注意点を挙げます。
+またNaNを0に変換する際の簡単な方法についても述べます。
+
+ 2. 使用言語
+
+JavaScript
+
+
+ 3. NaN の特徴
+NaN は JavaScript 上の値の一種で、JavaScript の数値型に属し、また TypeScript の型注釈では:numberに属します。
+しかし一方で、
+
+グローバルプロパティ NaN は非数 (Not-A-Number) を表す値です。
+
+NaN - JavaScript | MDN
+と...]]></description><link>https://zenn.dev/breakedge/articles/53b6c2d32d9d05</link><guid isPermaLink="true">https://zenn.dev/breakedge/articles/53b6c2d32d9d05</guid><pubDate>Fri, 20 Dec 2024 00:39:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--LP55deDb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BTypeScript%255D%2520NaN%2520%25E3%2581%25AE%25E5%2588%25A4%25E5%25AE%259A%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:hzmd%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLmRldi9pbWFnZXMvZGVmYXVsdC1wdWJsaWNhdGlvbi1hdmF0YXIucG5n%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2583%2596%25E3%2583%25AC%25E3%2582%25A4%25E3%2582%25AF%25E3%2582%25A8%25E3%2583%2583%25E3%2582%25B8%2520%25E6%258A%2580%25E8%25A1%2593%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRkZjUyYWExZWIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hzmd</dc:creator></item><item><title><![CDATA[JavaScriptのDateはなぜ扱いづらいのか]]></title><description><![CDATA[
+
+ はじめに
+READYFOR でプロダクトエンジニアをやっている pxfnc(ぴくすふぁんく) です。
+本記事は READYFOR Advent Calendar 2024 の 19 日目 の記事です。
+JavaScriptの言語仕様にも含まれているDateオブジェクトの扱いは、他の言語の日付時刻処理と比べてたいへん扱いづらいことで有名です(多分)。そのため、外部ライブラリとしてMoment.js date-fnsや、新しいものだとluxon、標準としてIntl.DateTimeFormat や、日付時刻を扱うためのTemporalのプロポーザルもある状態で、みんなかなり苦しんでいる...]]></description><link>https://zenn.dev/pxfnc/articles/99d162e62d3786</link><guid isPermaLink="true">https://zenn.dev/pxfnc/articles/99d162e62d3786</guid><pubDate>Thu, 19 Dec 2024 16:37:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--WY4aVt3S--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25E3%2581%25AEDate%25E3%2581%25AF%25E3%2581%25AA%25E3%2581%259C%25E6%2589%25B1%25E3%2581%2584%25E3%2581%25A5%25E3%2582%2589%25E3%2581%2584%25E3%2581%25AE%25E3%2581%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:pxfnc%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2IzZDJiZTNlYWQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>pxfnc</dc:creator></item><item><title><![CDATA[ENCA 19日目: `eval?.()` の direct eval 化（リジェクト）]]></title><description><![CDATA[!
+この記事は 1人 ECMAScript Normative Changes Advent Calendar 2024 の 19 日目です。
+
+
+ direct eval とは
+eval 函数を実行する際、参照される変数名が eval そのままで実行される場合を direct eval と呼び、そうでない indirect eval と区別しています。direct eval はそのスコープでの実行となりますが indirect eval は別のコンテキストで実行されます（新しく &lt;script&gt; タグが作られて実行されると考えるとわかりやすいかもしれません）。
+global...]]></description><link>https://zenn.dev/pixiv/articles/1b0a93eeb31d95</link><guid isPermaLink="true">https://zenn.dev/pixiv/articles/1b0a93eeb31d95</guid><pubDate>Thu, 19 Dec 2024 14:56:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1UsTBTGU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ENCA%252019%25E6%2597%25A5%25E7%259B%25AE%253A%2520%2560eval%253F.%2528%2529%2560%2520%25E3%2581%25AE%2520direct%2520eval%2520%25E5%258C%2596%25EF%25BC%2588%25E3%2583%25AA%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:petamoriken%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZhMDc3ZWRhZTMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:pixiv%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzMzODlhMzQ2ZjQuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>petamoriken</dc:creator></item><item><title><![CDATA[JavaScript｜flatMapの仕様]]></title><description><![CDATA[JavaScriptのメソッドの仕様を忘れてしまうことが多いので、ここに書いておく。
+
+ flatMap
+配列の各要素にマッピング関数を実行して、その結果の配列をに1次元の配列する。
+
+ サンプルコード
+const sample = [1, 2, 1];
+const result = sample.flatMap((num) =&gt; (num &gt; 1 ? [9, 9, 9] : 5));
+
+console.log(JSON.parse(JSON.stringify(result)));
+
+ 結果
+[ 5, 9, 9, 9, 5 ]
+
+ 参考文献
+https://develope...]]></description><link>https://zenn.dev/senaha/articles/ab4632337442e2</link><guid isPermaLink="true">https://zenn.dev/senaha/articles/ab4632337442e2</guid><pubDate>Thu, 19 Dec 2024 13:40:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--PPzZupUw--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25EF%25BD%259CflatMap%25E3%2581%25AE%25E4%25BB%2595%25E6%25A7%2598%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:senaha%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lUeUJ6QjU5OENKS2VIdVU3alZ5YmN3czkwT1FWMkJ1YmZoNmdIM3c9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>senaha</dc:creator></item><item><title><![CDATA[Chrome DevToolsのパフォーマンスタブ]]></title><description><![CDATA[ある日、一つのウェブページのパフォーマンス改善をしていたのですが、コードを見ているだけでは時間がかかっていて原因が全くわかりませんでした。そこで、以前から使っていたChromeのDevToolsのパフォーマンスタブを試してみることにしました。すると、すぐにボトルネックが特定でき、原因が明らかに。パフォーマンスタブの便利さを改めて実感した瞬間でした。
+
+ パフォーマンスタブとは？
+パフォーマンスタブは、ウェブアプリケーションのパフォーマンスを分析するために使用されるChrome DevToolsの機能です。このツールを使うと、
+ページの読み込み時間を測定：どの部分で時間がかかっているのかを...]]></description><link>https://zenn.dev/xbit/articles/174f454af5e31d</link><guid isPermaLink="true">https://zenn.dev/xbit/articles/174f454af5e31d</guid><pubDate>Thu, 19 Dec 2024 12:00:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--A7HnFh3b--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Chrome%2520DevTools%25E3%2581%25AE%25E3%2583%2591%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25BC%25E3%2583%259E%25E3%2583%25B3%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%2596%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:abhikesh%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc1Yjk4OTY5OWUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25AF%25E3%2583%25AD%25E3%2582%25B9%25E3%2583%2593%25E3%2583%2583%25E3%2583%2588%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JhZjRlYjllODEuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>abhikesh</dc:creator></item><item><title><![CDATA[【初学者によるまとめ】この一冊で全部わかるWeb技術の基本　「Chapter 4」＞「07 JSON」]]></title><description><![CDATA[目的：「イラスト図解式 この一冊で全部わかるWeb技術の基本」の要点を自分なりにまとめアウトプットして理解力の向上に努める。
+
+
+
+注意点
+
+
+
+
+🤔 ←この絵文字の文章は個人的な見解になります。的外れなこともあるかと思います。
+
+
+例）🤔&lt;(感想、考察、疑問点など)
+
+
+
+
+（参考書籍）
+
+イラスト図解式 この一冊で全部わかるWeb技術の基本
+
+（参考サイト）
+https://aws.amazon.com/jp/compare/the-difference-between-json-xml/
+
+
+ JavaScriptから生まれた汎用データ形式
+
+
+JSON (JavaScrip...]]></description><link>https://zenn.dev/recaldenta/articles/b40e9d66e18960</link><guid isPermaLink="true">https://zenn.dev/recaldenta/articles/b40e9d66e18960</guid><pubDate>Thu, 19 Dec 2024 11:48:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jLHN-Bbc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%2588%259D%25E5%25AD%25A6%25E8%2580%2585%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258B%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2580%2591%25E3%2581%2593%25E3%2581%25AE%25E4%25B8%2580%25E5%2586%258A%25E3%2581%25A7%25E5%2585%25A8%25E9%2583%25A8%25E3%2582%258F%25E3%2581%258B%25E3%2582%258BWeb%25E6%258A%2580%25E8%25A1%2593%25E3%2581%25AE%25E5%259F%25BA%25E6%259C%25AC%25E3%2580%2580%25E3%2580%258CChapter%25204%25E3%2580%258D%25EF%25BC%259E%25E3%2580%258C07%2520JSON%25E3%2580%258D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nakad119%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSkJLSE95b1lrb3VsYzBIUm41T2ctWTBoOFpZMDlROWpYUUNpRFM2MUgyekFiMHEtaz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nakad119</dc:creator></item></channel></rss>

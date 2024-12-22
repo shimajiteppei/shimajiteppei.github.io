@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Sun, 22 Dec 2024 09:32:18 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[H.264対応のopencv-pythonのwheelをマルチステージビルドする]]></title><description><![CDATA[
+ はじめに
+先日、「opencv-pythonのwheelを並列ビルドしてビルド時間を5分の1にした」という記事を書きました。
+https://zenn.dev/yuyakato/articles/0c6782411031b1
+H.264対応のopencv-pythonパッケージを素早く手に入れたかったがゆえに書いた記事ですが、並列ビルドでビルド時間を短縮した後も約5分とそれなりの時間が掛かってしまいます。
+Dockerイメージのビルドキャッシュが効かない状況（依存関係の変更など）が生じる度に5分待つのはしんどいので、マルチステージビルドを活用して、wheelのビルドを分離することにし...]]></description><link>https://zenn.dev/yuyakato/articles/00d53db5d5b93a</link><guid isPermaLink="true">https://zenn.dev/yuyakato/articles/00d53db5d5b93a</guid><pubDate>Sun, 22 Dec 2024 07:19:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qYIIio9B--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:H.264%25E5%25AF%25BE%25E5%25BF%259C%25E3%2581%25AEopencv-python%25E3%2581%25AEwheel%25E3%2582%2592%25E3%2583%259E%25E3%2583%25AB%25E3%2583%2581%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%2593%25E3%2583%25AB%25E3%2583%2589%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yuya%2520Kato%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dUSUhmX2JGaE1tcVp0aDNYQUI2NFY0aGRnNlJWbE5CbjVhZmQzdXc9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yuya Kato</dc:creator></item><item><title><![CDATA[EDINETのAPI仕様書を読んでみたPart1]]></title><description><![CDATA[
+ EDINETとは
+企業の財務情報をAPIなどで提供する（政府の？）システムのこと。利用にあたって、APIキーの取得などが必要だったので、方法やインターフェースなどを調べていたら、v2の仕様書を見つけたのでメモがわりにまとめます。
+
+ EDINET APIの機能
+二つのAPIを提供しています。
+
+書類一覧API
+
+「メタデータのみ」、「提出書類一覧及びメタデータ」の２パターンの呼び出し方がある
+日付などを指定
+
+
+書類取得API
+
+上で得られた書類情報から実際の書類データを取得するためのAPI
+
+
+
+
+ APIキーの発行
+
+ Chromeユーザー向け
+筆者はChromeを使用しているの...]]></description><link>https://zenn.dev/paradinight/articles/f4567f3728e4d2</link><guid isPermaLink="true">https://zenn.dev/paradinight/articles/f4567f3728e4d2</guid><pubDate>Sun, 22 Dec 2024 06:29:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--sXlS0hHT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:EDINET%25E3%2581%25AEAPI%25E4%25BB%2595%25E6%25A7%2598%25E6%259B%25B8%25E3%2582%2592%25E8%25AA%25AD%25E3%2582%2593%25E3%2581%25A7%25E3%2581%25BF%25E3%2581%259FPart1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%25AC%25E3%2582%25AA%25E3%2583%25AA%25E3%2582%25AA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzIxYmFlY2E1MmQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>レオリオ</dc:creator></item><item><title><![CDATA[[Python]ロギングの基本的な書き方]]></title><description><![CDATA[
+
+ loggingとは？
+
+ただ単純に表示させたいならprint文でも良いが、ログを残すのに特化した機能が豊富なライブラリ。
+ドキュメントでは以下のように定義されている。
+
+
+ 参考
+
+
+logging は、あるソフトウェアが実行されているときに起こったイベントを追跡するための手段です。ソフトウェアの開発者は、特定のイベントが発生したことを示す logging の呼び出しをコードに加えます。イベントは、メッセージで記述され、これに変数データ (すなわち、イベントが起こる度に異なるかもしれないデータ) を加えることもできます。イベントには、開発者がそのイベントに定めた重要性も含まれます。...]]></description><link>https://zenn.dev/takehiro1111/articles/python_logging</link><guid isPermaLink="true">https://zenn.dev/takehiro1111/articles/python_logging</guid><pubDate>Sun, 22 Dec 2024 04:15:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--JQgNf91K--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BPython%255D%25E3%2583%25AD%25E3%2582%25AE%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%25AE%25E5%259F%25BA%25E6%259C%25AC%25E7%259A%2584%25E3%2581%25AA%25E6%259B%25B8%25E3%2581%258D%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259F%25E3%2581%2591%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY2NDQ2ZjMwNzcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>たけ</dc:creator></item><item><title><![CDATA[Pythonでメールを受信する方法]]></title><description><![CDATA[
+ 仕様と動作環境
+
+
+仕様
+
+任意のサーバー名、ユーザー名、パスワードを指定
+受信しているメールの件数を取得
+受信しているメール情報を取得（件名・本文・送信者・受信日時）
+受信したメールは削除する
+pop3を使ってメール取得
+
+
+
+Pythonバージョン
+
+Python 3.12.4
+
+
+
+開発環境
+
+VSCode
+
+
+
+
+ ソースコード
+import poplib
+import email
+from email.header import decode_header
+
+
+# メール関連
+def fetchmail(cli, msg_no):
+    content = cli.ret...]]></description><link>https://zenn.dev/picaneru/articles/5d2c90669cb808</link><guid isPermaLink="true">https://zenn.dev/picaneru/articles/5d2c90669cb808</guid><pubDate>Sun, 22 Dec 2024 03:00:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--p7WgJAHi--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A7%25E3%2583%25A1%25E3%2583%25BC%25E3%2583%25AB%25E3%2582%2592%25E5%258F%2597%25E4%25BF%25A1%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E7%25B5%25B6%25E5%25AF%25BE%25E5%25AE%259A%25E6%2599%2582%25E9%2580%2580%25E5%258B%25A4%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NlYWVlYTI2MGYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>絶対定時退勤</dc:creator></item><item><title><![CDATA[管理者権限を保存するアプリ]]></title><description><![CDATA[Pythonにはまったtaisan11です。
+今回は管理者権限で困ってる学生向けに管理者権限を保存するアプリを作りました!!
+どんな仕組みで保存してるかと簡単な使い方を解説します。
+https://github.com/taisan11/admin-app-runner
+
+ 使い方
+
+GUIはシンプルで使いやすいので、正直説明する余地がありません。
+...ありました。
+まず、管理者権限を付与するときは、Upgrade Administratorボタンを押すとおなじみのポッポアップが出ます。
+これはこのアプリを起動するたび、やってください。終了したら、管理者権限も捨てられます...
+次に、...]]></description><link>https://zenn.dev/taisan11/articles/f5ff904405fbd7</link><guid isPermaLink="true">https://zenn.dev/taisan11/articles/f5ff904405fbd7</guid><pubDate>Sun, 22 Dec 2024 02:42:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Yaw86q1v--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%25AE%25A1%25E7%2590%2586%25E8%2580%2585%25E6%25A8%25A9%25E9%2599%2590%25E3%2582%2592%25E4%25BF%259D%25E5%25AD%2598%25E3%2581%2599%25E3%2582%258B%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259F%25E3%2581%2584%25E3%2581%2595%25E3%2582%2593%2521%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzcxZDE1NzViN2YuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>たいさん!</dc:creator></item><item><title><![CDATA[pythonで道路ネットワーク分析]]></title><description><![CDATA[この記事はRICORA Advent Calender 2024の19日目の記事になります。
+
+ はじめに
+学校のグループ開発で、pythonのOSMnxというパッケージを使用した道路ネットワークの経路探索を行ったため、基本的な使い方について紹介します。
+
+ OSMnxについて
+OSMnxについて、OSMnxのドキュメントの冒頭部分google翻訳したものを引用します。
+https://osmnx.readthedocs.io/en/stable/index.html
+
+OSMnx は、OpenStreetMap から街路網やその他の地理空間フィーチャを簡単にダウンロード、モデル化、分析...]]></description><link>https://zenn.dev/kuradai/articles/251bd1905d448d</link><guid isPermaLink="true">https://zenn.dev/kuradai/articles/251bd1905d448d</guid><pubDate>Sun, 22 Dec 2024 01:28:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--HWNID26d--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:python%25E3%2581%25A7%25E9%2581%2593%25E8%25B7%25AF%25E3%2583%258D%25E3%2583%2583%25E3%2583%2588%25E3%2583%25AF%25E3%2583%25BC%25E3%2582%25AF%25E5%2588%2586%25E6%259E%2590%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kurad%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdlOWI4ZGVjZGEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kurad</dc:creator></item><item><title><![CDATA[fasttext  を pip で入れるときのエラーと解決策]]></title><description><![CDATA[pip なり uv なりで RuntimeError: Unsupported compiler -- at least C++17 support is needed! というエラーが出たときの対処法です。
+今回は fasttext をインストールするときに生じました。
+環境は Linux で、linuxbrew からインストールした gcc を使っているつもりでいます。これが今回ややこしいところです。
+
+ 解決策
+CC=gcc-14 CXX=g++-14 uv add fasttext  のように、インストール時に gcc の名前を明示すれば解決します。
+
+ 少し詳しく
+which ...]]></description><link>https://zenn.dev/sjh4/articles/db4adff5282ae7</link><guid isPermaLink="true">https://zenn.dev/sjh4/articles/db4adff5282ae7</guid><pubDate>Sat, 21 Dec 2024 22:56:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--mn1laQ7L--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:fasttext%2520%2520%25E3%2582%2592%2520pip%2520%25E3%2581%25A7%25E5%2585%25A5%25E3%2582%258C%25E3%2582%258B%25E3%2581%25A8%25E3%2581%258D%25E3%2581%25AE%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E3%2581%25A8%25E8%25A7%25A3%25E6%25B1%25BA%25E7%25AD%2596%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:sj%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY5Y2RiMjRhNWIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sj</dc:creator></item><item><title><![CDATA[Typstと生成AIをつなぐ]]></title><description><![CDATA[
+ はじめのはじめに
+この記事はTypst Advent Calendar 2024の22日の記事です。
+https://qiita.com/advent-calendar/2024/typst
+
+ はじめに
+「Typstの中でJuliaのコードを実行する」をよんでいると、wasmで動いているのかなと思い、ソースコードに興味をもちました。
+そして、GitHubでソースコードを確認すると、想定外な使い方をしており、どのようにjuliaが動いているのかというと、Juliaをバックグラウンドで動かし、Typstファイルを監視し、typstの中のjuliaコードを実行し、jsonで保存していまし...]]></description><link>https://zenn.dev/hallucogenia/articles/typst-emoji-list</link><guid isPermaLink="true">https://zenn.dev/hallucogenia/articles/typst-emoji-list</guid><pubDate>Sat, 21 Dec 2024 20:46:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--yXRaGdLk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Typst%25E3%2581%25A8%25E7%2594%259F%25E6%2588%2590AI%25E3%2582%2592%25E3%2581%25A4%25E3%2581%25AA%25E3%2581%2590%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:jijinbei%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUVkRlRwNFJTZmdxUWM5U054bmFGN1lZQTl4emZ2eHdYQ1dhaGFZNUZ1RmQ9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>jijinbei</dc:creator></item><item><title><![CDATA[【Python】OpenCV + PyAutoGUIでドラクエ自動レベル上げ]]></title><description><![CDATA[
+ はじめに
+こんにちは、Yusei です。記念すべき Tech Blog 第１稿ということで、まずは簡単に自己紹介を。
+現在は修士２年で、分子シミュレーションの研究をしています。誇れる結果はありません😵‍💫
+最近、インターンをしているベンチャー企業で Tech Conference に登壇させていただき、to B 向けのWebアプリを紹介しました。
+
+簡単にですが、一応アプリの機能紹介ブログも書いています。
+
+学生は自分だけだったので、名刺交換のときにちいかわになっていました。来年からは某メガベンチャーでデータサイエンティストとして働きます。とにかく早く名刺をください。
+そして、「ギャ...]]></description><link>https://zenn.dev/ys110wstr/articles/944853e6059de4</link><guid isPermaLink="true">https://zenn.dev/ys110wstr/articles/944853e6059de4</guid><pubDate>Sat, 21 Dec 2024 15:59:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7E4RbtaM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591OpenCV%2520%252B%2520PyAutoGUI%25E3%2581%25A7%25E3%2583%2589%25E3%2583%25A9%25E3%2582%25AF%25E3%2582%25A8%25E8%2587%25AA%25E5%258B%2595%25E3%2583%25AC%25E3%2583%2599%25E3%2583%25AB%25E4%25B8%258A%25E3%2581%2592%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yusei%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdmNTU3ZGUwYTUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yusei</dc:creator></item><item><title><![CDATA[Snowflake で簡単に LLM のファインチューニングをしよう Part2 -AWS 東京リージョンで使ってみよう-]]></title><description><![CDATA[
+ はじめに
+本記事は Snowflake Advent Calendar の22日目です。是非 Snowflake の進化を楽しんでいってください！
+本記事は Part2 となります。Snowflake Cortex Fine-tuning の基本的な使い方や教師データ生成アプリの作成については以下 Part1 の記事を最初にご覧ください。(自力で教師データを準備できる方は本記事から開始いただいて問題ございません)
+https://zenn.dev/tsubasa_tech/articles/29316f1341391e
+本記事では準備した教師データで実際にファインチューニングを行い、...]]></description><link>https://zenn.dev/tsubasa_tech/articles/e5826d96d23dc4</link><guid isPermaLink="true">https://zenn.dev/tsubasa_tech/articles/e5826d96d23dc4</guid><pubDate>Sat, 21 Dec 2024 15:00:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1MPpeK-C--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Snowflake%2520%25E3%2581%25A7%25E7%25B0%25A1%25E5%258D%2598%25E3%2581%25AB%2520LLM%2520%25E3%2581%25AE%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2581%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%258B%25E3%2583%25B3%25E3%2582%25B0%25E3%2582%2592%25E3%2581%2597%25E3%2582%2588%25E3%2581%2586%2520Part2%2520-AWS%2520%25E6%259D%25B1%25E4%25BA%25AC%25E3%2583%25AA%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%25A7%25E3%2583%25B3%25E3%2581%25A7%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tsubasa%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzIzNTYwMzlkYjIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tsubasa</dc:creator></item><item><title><![CDATA[SQLとPythonでSnowflake LLM関数のできることに違いはあるのか？]]></title><description><![CDATA[
+ はじめに
+本記事は Snowflake アドベントカレンダー 22 日目の記事です。
+https://qiita.com/advent-calendar/2024/snowflake
+Snowflake の LLM 関数を使うには SQL と Python の 2 種類の実装方法があります。どちらもエンジニアにとってはお馴染みの言語であり自分の使いやすい方を選択することができますが、仕様の制約というか片方の言語でできることがもう片方ではサポートされていないというようなことがあると選択肢が自然と絞られてきます。
+というようなことを考えていたら SQL と Python それぞれの現時点...]]></description><link>https://zenn.dev/datatechblog/articles/9974e3820e5f33</link><guid isPermaLink="true">https://zenn.dev/datatechblog/articles/9974e3820e5f33</guid><pubDate>Sat, 21 Dec 2024 15:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--CWRd1ch7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:SQL%25E3%2581%25A8Python%25E3%2581%25A7Snowflake%2520LLM%25E9%2596%25A2%25E6%2595%25B0%25E3%2581%25AE%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258B%25E3%2581%2593%25E3%2581%25A8%25E3%2581%25AB%25E9%2581%2595%25E3%2581%2584%25E3%2581%25AF%25E3%2581%2582%25E3%2582%258B%25E3%2581%25AE%25E3%2581%258B%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Yoneyan%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzYwM2Y5ZWFhMjguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E9%259B%25BB%25E9%2580%259A%25E7%25B7%258F%25E7%25A0%2594%2520%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2UzMmM1MWM0NjkuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yoneyan</dc:creator></item><item><title><![CDATA[🔥高速デプロイを実現！『SwiftDeploy』をリリースしました！🔥]]></title><description><![CDATA[
+ 1.はじめに
+
+ プロジェクトの背景と目的🚀
+「もっと簡単にwebページを作成したい。」「webサイトの制作が終わった時の気持ちって最高。」そんな思いから生まれたのがこのSwiftDeployです。スプレッドシートを活用し、直感的にコンテンツを入力するだけで即座にデプロイされたwebサイトが生成されるこのアプリは、開発者だけでなく非技術者にも活用できる柔軟なツールを目指しています。
+
+
+ 使用した技術スタック⚒️
+
+バックエンド: FastAPI
+フロントエンド: React
+デプロイ管理: Vercel
+データ管理: Google Sheets API
+その他: Framer Mo...]]></description><link>https://zenn.dev/yusukekikuta/articles/64bdc85273eaf1</link><guid isPermaLink="true">https://zenn.dev/yusukekikuta/articles/64bdc85273eaf1</guid><pubDate>Sat, 21 Dec 2024 14:52:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--oe3YLFTC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%2520%25E9%25AB%2598%25E9%2580%259F%25E3%2583%2587%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25A4%25E3%2582%2592%25E5%25AE%259F%25E7%258F%25BE%25EF%25BC%2581%25E3%2580%258ESwiftDeploy%25E3%2580%258F%25E3%2582%2592%25E3%2583%25AA%25E3%2583%25AA%25E3%2583%25BC%25E3%2582%25B9%25E3%2581%2597%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%25EF%25BC%2581%2520%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E8%258F%258A%25E7%2594%25B0%25E4%25BD%2591%25E8%25BC%2594%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk4MDMyNzNmZGYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>菊田佑輔</dc:creator></item><item><title><![CDATA[[Python]datetimeモジュールの使い方]]></title><description><![CDATA[
+
+ 1.datetimeモジュールとは？
+
+ ドキュメントの記載
+
+
+datetime モジュールは、日付や時刻を操作するためのクラスを提供しています。
+日付や時刻に対する算術がサポートされている一方、実装では出力のフォーマットや操作のための効率的な属性の抽出に重点を置いています。
+
+
+ タイムゾーンの解決
+
+aware オブジェクトを必要とするアプリケーションのために、 datetime と time オブジェクトは追加のタイムゾーン情報の属性 tzinfo を持ちます。 tzinfo には抽象クラス tzinfo のサブクラスのインスタンスを設定できます。 これらの tzinfo ...]]></description><link>https://zenn.dev/takehiro1111/articles/python_datetime</link><guid isPermaLink="true">https://zenn.dev/takehiro1111/articles/python_datetime</guid><pubDate>Sat, 21 Dec 2024 06:37:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--T-6r0DD1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BPython%255Ddatetime%25E3%2583%25A2%25E3%2582%25B8%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%25AE%25E4%25BD%25BF%25E3%2581%2584%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259F%25E3%2581%2591%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY2NDQ2ZjMwNzcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>たけ</dc:creator></item><item><title><![CDATA[FastAPI採用 〜バックエンド構成の検討と決断〜]]></title><description><![CDATA[
+ はじめに
+こんにちは！株式会社ブロードエッジ・ウェアリンク CTOの高丸です。
+今回は、Qiita Advent Calendar 2024の6日目の記事です。
+今回は、バックエンドにFastAPIを導入したお話を共有します。
+
+ LaravelからFastAPIへ
+弊社はもともと、ECサイトをShopifyで運営し、独自の診断システム「wine@KARTE（カルテ）」をPHP/Laravelで動かしていました。Shopifyとは連携こそしますが、別システムということです。
+Laravelは、私が参画したときの業務委託のメンバーよりさらに前にご協力いただいていたフリーランスの方の技術...]]></description><link>https://zenn.dev/be_warelink/articles/6cb424f6380eda</link><guid isPermaLink="true">https://zenn.dev/be_warelink/articles/6cb424f6380eda</guid><pubDate>Sat, 21 Dec 2024 04:22:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--003fO1W3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:FastAPI%25E6%258E%25A1%25E7%2594%25A8%2520%25E3%2580%259C%25E3%2583%2590%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2589%25E6%25A7%258B%25E6%2588%2590%25E3%2581%25AE%25E6%25A4%259C%25E8%25A8%258E%25E3%2581%25A8%25E6%25B1%25BA%25E6%2596%25AD%25E3%2580%259C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:takamario%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM2NzAzOWIzMTUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2596%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2589%25E3%2582%25A8%25E3%2583%2583%25E3%2582%25B8%25E3%2583%25BB%25E3%2582%25A6%25E3%2582%25A7%25E3%2582%25A2%25E3%2583%25AA%25E3%2583%25B3%25E3%2582%25AF%2520%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FjMjM3OWQ5YWMuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takamario</dc:creator></item><item><title><![CDATA[遺伝的アルゴリズムで難しいインスタンスを生成してみた]]></title><description><![CDATA[この記事は数理最適化 Advent Calendar 2024の21日目の記事です。
+
+ 導入
+数理最適化の研究や実装において、作成したアルゴリズムの性能検証や異なる手法間のベンチマークを取得するのに使うためのテスト用のインスタンスが欲しい状況が往々にして生じる。
+しかしながら、乱数を用いてインスタンスを生成するとしばしば簡単すぎる問題が生成されがちであるため、「そこそこ難しい」 インスタンスを用意するのは意外と厄介なタスクである。
+ベンチマークを取得する対象に任意性があるのであればMIPLIB等のインスタンスを用いてベンチマークを取れば良いものの、自作した数理モデルでベンチマークを取る...]]></description><link>https://zenn.dev/jij_inc/articles/f375c280290da7</link><guid isPermaLink="true">https://zenn.dev/jij_inc/articles/f375c280290da7</guid><pubDate>Sat, 21 Dec 2024 02:43:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--KHY25Cbz--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E9%2581%25BA%25E4%25BC%259D%25E7%259A%2584%25E3%2582%25A2%25E3%2583%25AB%25E3%2582%25B4%25E3%2583%25AA%25E3%2582%25BA%25E3%2583%25A0%25E3%2581%25A7%25E9%259B%25A3%25E3%2581%2597%25E3%2581%2584%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%25B3%25E3%2582%25B9%25E3%2582%2592%25E7%2594%259F%25E6%2588%2590%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Kohji%2520Nishimura%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I0ZjhjYjkwMmYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Jij%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0Yy1ZeHl4LWZwbXRiTGJrT1ZocW5SNlBKVENJNVBQaVBWaWVLMV80MHkzLV93PXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kohji Nishimura</dc:creator></item><item><title><![CDATA[Automatic margin removal in images with Python]]></title><description><![CDATA[
+ 私たちの研究室
+https://nisk.doshisha.ac.jp/
+
+ アドベントカレンダー21日目〜
+https://nislab-advent-calendar-2024-12.vercel.app/
+
+ Automatic margin removal in images with Python
+
+Article by エスカーニョ　マルケス、ユイス
+
+In this article I will explain a little project of mine that consists on automating the removal of blank edges ...]]></description><link>https://zenn.dev/nislab/articles/9eff9bc1c1a946</link><guid isPermaLink="true">https://zenn.dev/nislab/articles/9eff9bc1c1a946</guid><pubDate>Fri, 20 Dec 2024 16:41:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--zX3wwbkB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Automatic%2520margin%2520removal%2520in%2520images%2520with%2520Python%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:lluise%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzYzOTk4ZGRhN2IuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:NISLab%2520%25E5%25B0%258F%25E6%259D%25BF%25E7%25A0%2594%25E7%25A9%25B6%25E5%25AE%25A4%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSXcteno1SlRqbTJrREpQWEZpWlBLZW1NNmx5Uy1EbTlPV01TYkdKM05EOXlLNFV4QUw9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>lluise</dc:creator></item><item><title><![CDATA[Advent of Code 2024 5: Print Queue]]></title><description><![CDATA[
+ このページは
+2024 年の Advent of Code の Day5 の記事です。 Day4 はこちら。
+https://zenn.dev/yasuharu519/articles/5ef6154a07cc6d
+!
+以下問題のネタバレが多数含まれています。問題を楽しみたい方は是非一度本家の問題を見てから読んでみてください。
+
+尚、これまでは Rust と Python の両方のコードを載せていましたが、間に合わないので Python のコードのみ載せています。気が向いたら Rust のコードも載せるかもしれません。
+
+ Day 5: Print Queue
+1|10
+11|20
+...]]></description><link>https://zenn.dev/yasuharu519/articles/0c32f0eb2ffc98</link><guid isPermaLink="true">https://zenn.dev/yasuharu519/articles/0c32f0eb2ffc98</guid><pubDate>Fri, 20 Dec 2024 16:34:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bCEt7Znr--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:Advent%2520of%2520Code%25202024%25205%253A%2520Print%2520Queue%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Sawady%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI4ODhkNmU3MTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Sawady</dc:creator></item><item><title><![CDATA[LinuxでPython 3.xをPythonコマンドで実行できるようにする方法]]></title><description><![CDATA[
+ 目的
+Linux環境でPython 3.12をインストール後にpythonコマンドでPython 3.12を実行させたかったため、シンボリックリンクの設定を行った。設定方法について簡単に備忘録として本記事に残す。
+
+ 環境
+
+WSL2で使用しているUbuntu 24.04
+Python 3.12
+
+
+ 設定方法
+
+ シンボリックリンク設定方法
+whichコマンドでPython 3.12がどこにインストールされているのかファイルパスを確認する。
+which python3.12
+/usr/bin/python3.12
+先ほどのファイルパスを使いシンボリックリンクを作成する。
+sudo ...]]></description><link>https://zenn.dev/ken2pg/articles/91f875eb434d62</link><guid isPermaLink="true">https://zenn.dev/ken2pg/articles/91f875eb434d62</guid><pubDate>Fri, 20 Dec 2024 15:37:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qvYAoKTs--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%25E3%2581%25A7Python%25203.x%25E3%2582%2592Python%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2581%25A7%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258B%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ken2pg%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RkNmYxNTIxNmIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ken2pg</dc:creator></item><item><title><![CDATA[Advent of Code 2024 4: Ceres Search]]></title><description><![CDATA[
+ このページは
+2024 年の Advent of Code の Day4 の記事です。 Day3 はこちら。
+https://zenn.dev/yasuharu519/articles/f6102eedfce78c
+!
+以下問題のネタバレが多数含まれています。問題を楽しみたい方は是非一度本家の問題を見てから読んでみてください。
+
+
+ Day 4: Ceres Search
+Day 4 は word search を行う問題で、入力としては "X", "M", "A", "S" の文字が二次元状に配置された文字列が与えられます。
+
+ Part1
+Part1 では、与えられた文字列の中か...]]></description><link>https://zenn.dev/yasuharu519/articles/5ef6154a07cc6d</link><guid isPermaLink="true">https://zenn.dev/yasuharu519/articles/5ef6154a07cc6d</guid><pubDate>Fri, 20 Dec 2024 15:13:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--v_QH6hNs--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:Advent%2520of%2520Code%25202024%25204%253A%2520Ceres%2520Search%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Sawady%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI4ODhkNmU3MTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Sawady</dc:creator></item><item><title><![CDATA[もう全部あいつ(Polars)1人でいいんじゃないかな]]></title><description><![CDATA[本記事は、某企業アドベントカレンダー2024の21日目の記事です。
+KaggleのInstacart Market Basket Analysisデータセットを用いて、Polars (EagerおよびLazyモード) とPandasのパフォーマンスを比較検証します。
+何も考えずPandasを使い続ける私。
+本記事は、Polarsの魅力に触れることで、自分自身をPolarsへ移行する気にさせることを目的とした記事です。
+Pandas VS Polarsはよく取り上げられている話題です。
+しかし、私の戦争はまだ終わっていないのです。(？)
+
+ 実行環境
+本記事のコードは、誰でも簡単に実行でき...]]></description><link>https://zenn.dev/coffee_peng/articles/ddf65c010bbe09</link><guid isPermaLink="true">https://zenn.dev/coffee_peng/articles/ddf65c010bbe09</guid><pubDate>Fri, 20 Dec 2024 15:02:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--WG4dZoJ8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%2582%25E3%2581%2586%25E5%2585%25A8%25E9%2583%25A8%25E3%2581%2582%25E3%2581%2584%25E3%2581%25A4%2528Polars%25291%25E4%25BA%25BA%25E3%2581%25A7%25E3%2581%2584%25E3%2581%2584%25E3%2582%2593%25E3%2581%2598%25E3%2582%2583%25E3%2581%25AA%25E3%2581%2584%25E3%2581%258B%25E3%2581%25AA%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E7%258F%2588%25E7%2590%25B2%25E3%2583%259A%25E3%2583%25B3%25E3%2582%25AE%25E3%2583%25B3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJlN2JjM2EwYzkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>珈琲ペンギン</dc:creator></item></channel></rss>
