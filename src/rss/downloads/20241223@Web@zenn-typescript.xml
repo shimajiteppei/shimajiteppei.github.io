@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「TypeScript」のフィード]]></title><description><![CDATA[Zennのトピック「TypeScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/typescript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/f13e758fdb.png</url><title>Zennの「TypeScript」のフィード</title><link>https://zenn.dev/topics/typescript</link></image><generator>zenn.dev</generator><lastBuildDate>Mon, 23 Dec 2024 10:21:00 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/typescript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Commanderを使ってCLIツールを作ってみるメモ]]></title><description><![CDATA[
+ Commanderを使ってCLIツールを作ってみるメモ
+Commanderというライブラリを使用すると、簡単にCLIツールが作れる。今回は引数に入力したライブラリをインストールするCLIツールを実装してcommanderに慣れることを目標とする。
+child_processモジュールを使用することでサブプロセスでコマンドを実行することができるので内部で使用する。
+
+ プロジェクトの準備
+
+ 前提条件
+TypeScriptプロジェクトがすでに作成済み
+
+ 実装
+
+
+command("コマンド名") - コマンド名を登録する
+
+description("説明") - コマンドの説明
+
+a...]]></description><link>https://zenn.dev/mitate_gengaku/articles/commander-tutorial</link><guid isPermaLink="true">https://zenn.dev/mitate_gengaku/articles/commander-tutorial</guid><pubDate>Mon, 23 Dec 2024 10:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Zemu5Wop--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Commander%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6CLI%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25BE%25A1%25E6%25A5%25AF%25E7%258E%2584%25E5%25B6%25BD%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0tQOVRYWHQ5Qm1BLVplcURoLWdxUHl4RVFjMmNsRkhSNk95XzVVSVVhPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>御楯玄嶽</dc:creator></item><item><title><![CDATA[[React] カスタムフックの独立性]]></title><description><![CDATA[
+ 概要
+React のカスタムフックを複数回呼び出した際、それらが互いに独立していることを検証します。
+検証内容としては、カスタムフック内部の state や useEffect 内の副作用などが干渉し合わないか、といった内容になります。
+カスタムフックの独立性については公式に以下の記載があります。
+
+カスタムフックは、state 自体ではなく、state を扱うロジックを共有できるようにするためのものです。フックの呼び出しは、同じフックの他の場所からの呼び出しとは完全に独立しています。
+
+カスタムフックでロジックを再利用する
+こちらについてさらに掘り下げ、カスタムフック呼び出し元が単...]]></description><link>https://zenn.dev/breakedge/articles/c6623477ecbd00</link><guid isPermaLink="true">https://zenn.dev/breakedge/articles/c6623477ecbd00</guid><pubDate>Mon, 23 Dec 2024 09:21:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vw6R7FPu--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BReact%255D%2520%25E3%2582%25AB%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%25A0%25E3%2583%2595%25E3%2583%2583%25E3%2582%25AF%25E3%2581%25AE%25E7%258B%25AC%25E7%25AB%258B%25E6%2580%25A7%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:hzmd%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLmRldi9pbWFnZXMvZGVmYXVsdC1wdWJsaWNhdGlvbi1hdmF0YXIucG5n%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2583%2596%25E3%2583%25AC%25E3%2582%25A4%25E3%2582%25AF%25E3%2582%25A8%25E3%2583%2583%25E3%2582%25B8%2520%25E6%258A%2580%25E8%25A1%2593%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRkZjUyYWExZWIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hzmd</dc:creator></item><item><title><![CDATA[TypeScriptでVRChatのロール振りを自動化してみる]]></title><description><![CDATA[この記事はUniMagic Advent Calendar 2024の12日目の記事です(11日遅れ)
+一応ゆにまじに関係ある話題です
+
+ 前提
+VRChatのブラウザページで使用されているAPIはユーザーが使用して良いと言われており、外部ツールや自動化などに用いることができます(例えばVRCXなど)
+前回自動化した認証を用いて、今回はロール振りを自動化します
+
+ 環境
+bun v1.0
+
+ ソースコード
+https://zenn.dev/articles/06579913c81331
+こちらの記事の認証が設定されている前提です
+https://gist.github.com/o-tr/...]]></description><link>https://zenn.dev/ootr/articles/f491d412162ae7</link><guid isPermaLink="true">https://zenn.dev/ootr/articles/f491d412162ae7</guid><pubDate>Mon, 23 Dec 2024 07:29:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--UmI-Ts7t--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%25E3%2581%25A7VRChat%25E3%2581%25AE%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%25AB%25E6%258C%25AF%25E3%2582%258A%25E3%2582%2592%25E8%2587%25AA%25E5%258B%2595%25E5%258C%2596%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ootr%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzExZDc3OTk2ZDAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ootr</dc:creator></item><item><title><![CDATA[TypeScriptの原因不明の型エラーの原因 コールバック編]]></title><description><![CDATA[TypeScriptでなんでこの型チェック通らないんだと思うことありますよね。
+この記事ではよく見るエラーの一つであるコールバックでの型エラーについて、なぜその型エラーを通すとまずいのかを解説します。[1]
+
+ エラー
+以下のように紙書籍と電子書籍のデータを題材に考えます。
+// 紙書籍はISBN (International Standard Book Number) をIDとして利用する
+type PaperBook = {
+  type: "paper";
+  isbn: string;
+  // ...その他いろんなフィールド
+};
+
+// 電子書籍はDOI (Digital O...]]></description><link>https://zenn.dev/aidemy/articles/typescript-mysterious-type-errors-callback</link><guid isPermaLink="true">https://zenn.dev/aidemy/articles/typescript-mysterious-type-errors-callback</guid><pubDate>Mon, 23 Dec 2024 06:34:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--k6fD3w3N--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%25E3%2581%25AE%25E5%258E%259F%25E5%259B%25A0%25E4%25B8%258D%25E6%2598%258E%25E3%2581%25AE%25E5%259E%258B%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E3%2581%25AE%25E5%258E%259F%25E5%259B%25A0%2520%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%25AB%25E3%2583%2590%25E3%2583%2583%25E3%2582%25AF%25E7%25B7%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:mosh%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNhNmVhZTQ3ZDkuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Aidemy%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAzNjI3YTFkMmMuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mosh</dc:creator></item><item><title><![CDATA[Atomic Design の課題と解決策：LX DESIGN の大規模リファクタリング事例]]></title><description><![CDATA[
+ はじめに
+はじめまして。
+LX DESIGNでフロントエンドエンジニアを担当している吉継と申します。
+今回が初めての技術記事執筆になりますので、お手柔らかによろしくお願いします🙌
+2024年初頭から半年間にわたり、LX DESIGNではフロントエンドの大規模リファクタリングを実施しました。私がちょうどジョインしたタイミングでもあり、その際にリファクタリングの方針や技術選定を担当させていただきました。
+リファクタリングの全体像については、以下の記事をご覧ください。
+(弊社のフロントエンドのエースですが、文章センスも圧倒的で羨ましい限りですw)
+https://zenn.dev/lxde...]]></description><link>https://zenn.dev/lxdesign_blog/articles/18022bf4fd45bb</link><guid isPermaLink="true">https://zenn.dev/lxdesign_blog/articles/18022bf4fd45bb</guid><pubDate>Mon, 23 Dec 2024 05:28:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--LL1A1YFw--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Atomic%2520Design%2520%25E3%2581%25AE%25E8%25AA%25B2%25E9%25A1%258C%25E3%2581%25A8%25E8%25A7%25A3%25E6%25B1%25BA%25E7%25AD%2596%25EF%25BC%259ALX%2520DESIGN%2520%25E3%2581%25AE%25E5%25A4%25A7%25E8%25A6%258F%25E6%25A8%25A1%25E3%2583%25AA%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25AF%25E3%2582%25BF%25E3%2583%25AA%25E3%2583%25B3%25E3%2582%25B0%25E4%25BA%258B%25E4%25BE%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Kei%2520Yoshitsugu%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2YxYzY4Y2UzMjAuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:LX%2520DESIGN%2520%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSVhBUGRGT2FCUkRZRkxVc3RQODNNakZScXF2TW1PNmNXVDEwVHdDU0lTcDFDLXdBPXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kei Yoshitsugu</dc:creator></item><item><title><![CDATA[tsupでバンドルする / TypeScript一人カレンダー]]></title><description><![CDATA[こんにちは、クレスウェア株式会社の奥野賢太郎 (@okunokentaro) です。本記事はTypeScript 一人 Advent Calendar 2024の23日目です。昨日は『tsx TypeScript Execute』を紹介しました。
+
+ JavaScriptのモジュール史とバンドル文化
+今回は少し昔話をします。
+JavaScriptプログラミングにおいて、CommonJS (CJS)が登場するまでは「モジュール」という概念がほとんどありませんでした。これは15年以上前の話で、巨大なJSファイルにすべてのプログラムを書いたり、もし複数ファイルに分割しても最終的にはモジュール機...]]></description><link>https://zenn.dev/okunokentaro/articles/01jf78zf9ebjsq8ywjm4jrtk30</link><guid isPermaLink="true">https://zenn.dev/okunokentaro/articles/01jf78zf9ebjsq8ywjm4jrtk30</guid><pubDate>Mon, 23 Dec 2024 05:07:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--f8Z5DCpv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:tsup%25E3%2581%25A7%25E3%2583%2590%25E3%2583%25B3%25E3%2583%2589%25E3%2583%25AB%25E3%2581%2599%25E3%2582%258B%2520%252F%2520TypeScript%25E4%25B8%2580%25E4%25BA%25BA%25E3%2582%25AB%25E3%2583%25AC%25E3%2583%25B3%25E3%2583%2580%25E3%2583%25BC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:okunokentaro%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAyY2RlNDNmOWUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>okunokentaro</dc:creator></item><item><title><![CDATA[tsx TypeScript Execute / TypeScript一人カレンダー]]></title><description><![CDATA[こんにちは、クレスウェア株式会社の奥野賢太郎 (@okunokentaro) です。本記事はTypeScript 一人 Advent Calendar 2024の22日目です。昨日は『using宣言』を紹介しました。
+
+ tsx とは
+皆さんはtsxをご存知でしょうか。
+そう聞くと、まず「.tsx」というファイル拡張子を想起することが多いと思います。これはReactにおけるJSXのTypeScript版であることを示す拡張子です。
+しかし今回はそうではなく、「tsx TypeScript Execute」という全く別のツールのご紹介です。紛らわしくも同じ名称なので注意が必要です。
+
+ N...]]></description><link>https://zenn.dev/okunokentaro/articles/01jf78zf9eam33wp5q00s5j839</link><guid isPermaLink="true">https://zenn.dev/okunokentaro/articles/01jf78zf9eam33wp5q00s5j839</guid><pubDate>Mon, 23 Dec 2024 05:07:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--iso86P6a--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:tsx%2520TypeScript%2520Execute%2520%252F%2520TypeScript%25E4%25B8%2580%25E4%25BA%25BA%25E3%2582%25AB%25E3%2583%25AC%25E3%2583%25B3%25E3%2583%2580%25E3%2583%25BC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:okunokentaro%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAyY2RlNDNmOWUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>okunokentaro</dc:creator></item><item><title><![CDATA[using宣言 / TypeScript一人カレンダー]]></title><description><![CDATA[こんにちは、クレスウェア株式会社の奥野賢太郎 (@okunokentaro) です。本記事はTypeScript 一人 Advent Calendar 2024の21日目です。昨日は『ECMAScript Private Fields』を紹介しました。
+
+ ECMAScriptの進化とusing宣言
+昨日の記事では、クラス実装時のモダンな記法としてECMAScript Private Fieldsを紹介しました。
+ここ数年、エラーハンドリングをめぐる事情や、バックエンド・フロントエンド境界がより曖昧になっていることによるprototype情報の取り扱いの事情など、クラス設計の観点に変化が...]]></description><link>https://zenn.dev/okunokentaro/articles/01jf78zf9e8y4j7vd351r4w10c</link><guid isPermaLink="true">https://zenn.dev/okunokentaro/articles/01jf78zf9e8y4j7vd351r4w10c</guid><pubDate>Mon, 23 Dec 2024 05:07:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--F3IMFLUK--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:using%25E5%25AE%25A3%25E8%25A8%2580%2520%252F%2520TypeScript%25E4%25B8%2580%25E4%25BA%25BA%25E3%2582%25AB%25E3%2583%25AC%25E3%2583%25B3%25E3%2583%2580%25E3%2583%25BC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:okunokentaro%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAyY2RlNDNmOWUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>okunokentaro</dc:creator></item><item><title><![CDATA[TypeScriptのCIで型チェックを速くしたい]]></title><description><![CDATA[この記事は TSKaigi アドベントカレンダー 23 日目の記事です。
+https://qiita.com/advent-calendar/2024/tskaigi
+
+ はじめに
+これまでは CI にかかる時間をあまり意識していませんでしたが、社内で Biome を導入したことで Lint にかかる時間が大幅に短縮され、その効果を強く実感しました。Lint が爆速で終わることに感動を覚え CI の効率化に対する意識が高まりました。特に、TypeScript の型チェックに時間がかかっていることに気付き、これを改善できないかと考えるようになったのがこの記事を書くきっかけです。今回は型チェ...]]></description><link>https://zenn.dev/gemcook/articles/ts-type-check-tools</link><guid isPermaLink="true">https://zenn.dev/gemcook/articles/ts-type-check-tools</guid><pubDate>Mon, 23 Dec 2024 04:57:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--e-9mG9lb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%25E3%2581%25AECI%25E3%2581%25A7%25E5%259E%258B%25E3%2583%2581%25E3%2582%25A7%25E3%2583%2583%25E3%2582%25AF%25E3%2582%2592%25E9%2580%259F%25E3%2581%258F%25E3%2581%2597%25E3%2581%259F%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%2582%25E3%2581%2595%25E3%2581%25B2%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQyYzJiNzVlZTIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Gemcook%2520Tech%2520Blog%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNhMDQyOWUwODUuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>あさひ</dc:creator></item><item><title><![CDATA[2024年のDenoのまとめと今後について]]></title><description><![CDATA[
+ はじめに
+Denoアドベントカレンダー 23日目の記事です🎅
+https://qiita.com/advent-calendar/2024/deno
+この記事では、2024年にDenoやその周辺に関する変更点などをまとめます。
+
+ Deno
+
+ Deno v2のリリース
+Deno v2が正式にリリースされました:
+https://www.youtube.com/watch?v=d35SlRgVxT8
+Deno v2の正式リリースに伴い、Deno v2.1からLTSリリースが開始されています。
+また、Deno for Enterpriseというサービスが正式に発表されました (主にエン...]]></description><link>https://zenn.dev/uki00a/articles/whats-new-for-deno-in-2024</link><guid isPermaLink="true">https://zenn.dev/uki00a/articles/whats-new-for-deno-in-2024</guid><pubDate>Sun, 22 Dec 2024 23:31:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--LwWyyAgk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:2024%25E5%25B9%25B4%25E3%2581%25AEDeno%25E3%2581%25AE%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2581%25A8%25E4%25BB%258A%25E5%25BE%258C%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:uki00a%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhlMzg5NzFkZjkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>uki00a</dc:creator></item><item><title><![CDATA[Figmaファイルのページ構造を一括生成するプラグインをつくる]]></title><description><![CDATA[この記事はFigma Advent Calendar 2024の23日目の記事です。
+今年はFigmaのプラグイン開発をやるぞ！と個人的に目標を立てており、無事にプラグインの制作実績を解除することができました。今回はその中でも、デザインシステムの一部としてFigmaファイルのページ構造を一括生成するプラグインをつくったので、その紹介をしたいと思います。
+
+ プラグインの紹介
+プラグインの名前は「Figma Page Generator」です。Figmaファイルのページ構造を一括生成するプラグインです。
+
+ページ名を入力すると、その名前のページを生成します。改行を入れることで複数のページを...]]></description><link>https://zenn.dev/shellme/articles/2014-12-figma-plugin</link><guid isPermaLink="true">https://zenn.dev/shellme/articles/2014-12-figma-plugin</guid><pubDate>Sun, 22 Dec 2024 23:30:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--FPjNzK8W--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Figma%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2581%25AE%25E3%2583%259A%25E3%2583%25BC%25E3%2582%25B8%25E6%25A7%258B%25E9%2580%25A0%25E3%2582%2592%25E4%25B8%2580%25E6%258B%25AC%25E7%2594%259F%25E6%2588%2590%25E3%2581%2599%25E3%2582%258B%25E3%2583%2597%25E3%2583%25A9%25E3%2582%25B0%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%2592%25E3%2581%25A4%25E3%2581%258F%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:shellme%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzYyZjg3ZmFmMGIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>shellme</dc:creator></item><item><title><![CDATA[Next.js API 内でファイルを取得する方法のメモ]]></title><description><![CDATA[Next.js app router でプロトタイプのアプリを作っています。
+DBからデータを取得して返す部分を Next.js の API でモック的に作っており、API 内でダミーのデータファイルを取得してフロントに返す実装をしたメモ。
+/root
+  |-/public
+  |  |-/data
+  |     |-dummyData.json #ダミーのデータファイル
+  |-/src
+     |-/api
+        |-/users
+           |-route.ts
+
+ 1. fs でファイルあを取得して返す
+
+/src/api/users/route.ts
+...]]></description><link>https://zenn.dev/kikiki_kiki/articles/f6bef96f84ed6c</link><guid isPermaLink="true">https://zenn.dev/kikiki_kiki/articles/f6bef96f84ed6c</guid><pubDate>Sun, 22 Dec 2024 16:46:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---T3oVod8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Next.js%2520API%2520%25E5%2586%2585%25E3%2581%25A7%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2592%25E5%258F%2596%25E5%25BE%2597%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%25E3%2581%25AE%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:KiKiKi%2520KiKi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RmMWU4OWU5ZWIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>KiKiKi KiKi</dc:creator></item><item><title><![CDATA[Discord掲示板Distopiaを徹底探求！]]></title><description><![CDATA[
+ Discord掲示板Distopiaを徹底探求！
+皆さん、Discord掲示板はどのくらい利用していますか？私はあまり使っていないのですが、最近公開サーバーを作ることになり、さまざまなDiscord掲示板の存在を知ることができました。その中でも特に気になったのが、最近リリースされたDistopiaという掲示板です。
+最近、Discordで通話やチャットを楽しんでいるのですが、自分に合ったコミュニティを見つけるのが本当に大変です。私は自由に発言したいタイプなので、言論の制限が緩いサーバーを探しているのですが、なかなか見つからないのが現状です。Discord公式やDisboard、ディス...]]></description><link>https://zenn.dev/5y4/articles/b0704d193a34bc</link><guid isPermaLink="true">https://zenn.dev/5y4/articles/b0704d193a34bc</guid><pubDate>Sun, 22 Dec 2024 15:19:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--x9-p20W4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Discord%25E6%258E%25B2%25E7%25A4%25BA%25E6%259D%25BFDistopia%25E3%2582%2592%25E5%25BE%25B9%25E5%25BA%2595%25E6%258E%25A2%25E6%25B1%2582%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:g31%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk1OTMxOGVjOTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>g31</dc:creator></item><item><title><![CDATA[SOLID原則とは：設計の基本を理解する]]></title><description><![CDATA[
+ SOLID原則
+
+SOLID原則は、Robert C. Martin（通称："Uncle Bob"）によって提唱されたオブジェクト指向プログラミングの設計原則です。この原則を守ることで、コードの可読性、保守性、拡張性が向上し、結果として高品質なソフトウェアの構築が可能となります。
+SOLIDは以下の5つの原則の頭文字を取ったものです：
+
+
+Single Responsibility Principle（単一責任の原則）
+
+Open/Closed Principle（開放/閉鎖の原則）
+
+Liskov Substitution Principle（リスコフの置換原則）
+
+Interfa...]]></description><link>https://zenn.dev/angen/articles/32d0b414260ab8</link><guid isPermaLink="true">https://zenn.dev/angen/articles/32d0b414260ab8</guid><pubDate>Sun, 22 Dec 2024 15:18:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6w2fmmVA--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:SOLID%25E5%258E%259F%25E5%2589%2587%25E3%2581%25A8%25E3%2581%25AF%25EF%25BC%259A%25E8%25A8%25AD%25E8%25A8%2588%25E3%2581%25AE%25E5%259F%25BA%25E6%259C%25AC%25E3%2582%2592%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Hikaru%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSmdEQi16dVN0ai1RRjFsZmRWUjktZXMwS1A5UEllT3FoaW0taUNUQVh4a1NGazhnPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Hikaru</dc:creator></item><item><title><![CDATA[Remix で画像トリミングモーダルを実装する🔍]]></title><description><![CDATA[この記事はファンタラクティブ2024年アドベントカレンダー 12月23日の記事です
+🎯 今回はRemixを使用し以下のようにアップロードした画像をトリミングするモーダルを作成します。
+
+
+ 使用するバージョン
+@remix-run/node@2.15.1
+@remix-run/react@2.15.1
+@remix-run/serve@2.15.1
+
+radix-ui/react-slider@1.2.2
+react-easy-crop@5.2.0
+
+ セットアップ
+※ 「実装を早く！」という方はこちらのセットアップはskipしてください。
+1.Remixのインストール
+npx crea...]]></description><link>https://zenn.dev/funteractiveinc/articles/daa2dd390dd17a</link><guid isPermaLink="true">https://zenn.dev/funteractiveinc/articles/daa2dd390dd17a</guid><pubDate>Sun, 22 Dec 2024 15:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_PRzqLl8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Remix%2520%25E3%2581%25A7%25E7%2594%25BB%25E5%2583%258F%25E3%2583%2588%25E3%2583%25AA%25E3%2583%259F%25E3%2583%25B3%25E3%2582%25B0%25E3%2583%25A2%25E3%2583%25BC%25E3%2583%2580%25E3%2583%25AB%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2599%25E3%2582%258B%2520%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:hoshico%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I4YmI2YjY4NDMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2595%25E3%2582%25A1%25E3%2583%25B3%25E3%2582%25BF%25E3%2583%25A9%25E3%2582%25AF%25E3%2583%2586%25E3%2582%25A3%25E3%2583%2596%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzIyNmRhYmM5YmYuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hoshico</dc:creator></item><item><title><![CDATA[NestJSでStrategyパターンを使ったCSVダウンロード機能を実装する]]></title><description><![CDATA[
+ はじめに
+前回の記事でNestJSについて触れましたが、今回はより実践的な記事を書いてみました。
+前回の記事はこちら。
+APIでCSV出力する実装は良くあるかと思いますが、
+出力形式をStrategyパターンで出し分ける実装をしてみました。
+ライブラリはfast-csvを使用しました。
+
+ Strategyパターンについて
+ChatGPTに聞いてみたら下記回答が返ってきました。
+
+Strategyパターン（ストラテジーパターン）は、アルゴリズムや処理手順の「族（ファミリー）」をカプセル化し、実行時にそれらを切り替えられるようにするデザインパターンです。これにより、利用側のコードは特定...]]></description><link>https://zenn.dev/shota_web305/articles/09f34d054339a9</link><guid isPermaLink="true">https://zenn.dev/shota_web305/articles/09f34d054339a9</guid><pubDate>Sun, 22 Dec 2024 15:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7-Uh4J-a--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:NestJS%25E3%2581%25A7Strategy%25E3%2583%2591%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%25B3%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%259FCSV%25E3%2583%2580%25E3%2582%25A6%25E3%2583%25B3%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2589%25E6%25A9%259F%25E8%2583%25BD%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kikiWeb305%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VmOWE5NzFkZjMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kikiWeb305</dc:creator></item><item><title><![CDATA[bunでreact-router-domを使う]]></title><description><![CDATA[
+ 💦公式の方法通りだとハマる
+業務で、React Router使ったことあるのですがルートの設定を別のモジュールに分けるのを自分でやったことなかったので試してみたくなり使ってみところ公式のインストールのやり方が違った。
+https://reactrouter.com/start/library/installation
+Viteで環境構築をした後に、以下のコマンドを実行するがモジュールをインポートしてもエラーが出る？
+npm i react-router
+どうやらreact-router-domが必要らしい。こちらをインストールすると解決した。私は、bunを使っているので、bun ad...]]></description><link>https://zenn.dev/joo_hashi/articles/c7725c4748839d</link><guid isPermaLink="true">https://zenn.dev/joo_hashi/articles/c7725c4748839d</guid><pubDate>Sun, 22 Dec 2024 13:04:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xWrula92--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:bun%25E3%2581%25A7react-router-dom%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:JboyHashimoto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNjOTBiY2M0M2YuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>JboyHashimoto</dc:creator></item><item><title><![CDATA[Hono DocsのGetting StartにApp Engineがないの なぁぜなぁぜ？]]></title><description><![CDATA[この記事はHono Advent Calendar 2024 22日目の記事です。
+表題の答えは記事の最後で。
+
+ なぜこのテーマなのか？
+突然ですが、僕はTypeScriptとGoogle Cloudがめっちゃ好きです。もちろんTypeScriptでめちゃくちゃいい感じに使えるHonoも好きです。
+なんですが公式ドキュメントのGetting Startを見ると…
+Cloudflare、もちろんある！
+AWS Lambda、ある！
+Azure Functions、ある！
+Google Cloudのサービス、、、、ない！！！！！！！！！！！！！！！！
+
+VercelやDenoまであるのにG...]]></description><link>https://zenn.dev/yskn_sid25/articles/1d6678105fa1ad</link><guid isPermaLink="true">https://zenn.dev/yskn_sid25/articles/1d6678105fa1ad</guid><pubDate>Sun, 22 Dec 2024 11:43:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--pGhdEp1N--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Hono%2520Docs%25E3%2581%25AEGetting%2520Start%25E3%2581%25ABApp%2520Engine%25E3%2581%258C%25E3%2581%25AA%25E3%2581%2584%25E3%2581%25AE%2520%25E3%2581%25AA%25E3%2581%2581%25E3%2581%259C%25E3%2581%25AA%25E3%2581%2581%25E3%2581%259C%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kanon%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM1OTY4ZjJmNWUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kanon</dc:creator></item><item><title><![CDATA[typescriptでtypeとintefaceの違いをふと忘れた君へ（箇条書きでお伝え）(更新していきます。)]]></title><description><![CDATA[
+ type
+
+拡張できる
+カスタムがあれこれutil typeででき、いじることが得意
+フィールド自体を定義できる
+
+
+ interfeace
+
+拡張がmergeやextendsによって自由にできる
+それゆえに、定義の管理が迷子になりやすい
+がパッケージやプラグインの機能をそのまま拡張して独自のフィールドなどを定義したい場合にはそのままmergeして型を支えるため、便利
+エラーにInterfeceの名前が表示されるためデバッグしやすい
+オブジェクトのみの定義が可能
+
+
+ 結局
+reactなどのPropsではいじったり頻繁に拡張しないからTypeがいいきがする
+パッケージみたいな実装を作...]]></description><link>https://zenn.dev/akidoki/articles/b6aeedaddaee70</link><guid isPermaLink="true">https://zenn.dev/akidoki/articles/b6aeedaddaee70</guid><pubDate>Sun, 22 Dec 2024 11:18:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--iH9Zqa4u--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:typescript%25E3%2581%25A7type%25E3%2581%25A8inteface%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%25E3%2582%2592%25E3%2581%25B5%25E3%2581%25A8%25E5%25BF%2598%25E3%2582%258C%25E3%2581%259F%25E5%2590%259B%25E3%2581%25B8%25EF%25BC%2588%25E7%25AE%2587%25E6%259D%25A1%25E6%259B%25B8%25E3%2581%258D%25E3%2581%25A7%25E3%2581%258A%25E4%25BC%259D%25E3%2581%2588%25EF%25BC%2589%2528%25E6%259B%25B4%25E6%2596%25B0%25E3%2581%2597%25E3%2581%25A6%25E3%2581%2584%25E3%2581%258D%25E3%2581%25BE%25E3%2581%2599%25E3%2580%2582%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Akido%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0JrVW9BRkRVNWJWeUlzd2pDMGtJeUNhRG05M2N4REtFeU9DdU5YYm9TTThNNUJ0QT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Akido</dc:creator></item><item><title><![CDATA[TypeScriptでVRChat APIの認証を自動化してみる]]></title><description><![CDATA[この記事はUniMagic Advent Calendar 2024の10日目の記事です(12日遅れ)
+一応ゆにまじに関係ある話題です
+
+ 前提
+VRChatのブラウザページで使用されているAPIはユーザーが使用して良いと言われており、外部ツールや自動化などに用いることができます(例えばVRCXなど)
+これにあたり、いい感じに認証を自動化したかったので作成しました
+
+ 環境
+bun v1.0
+valibot v0.27
+speakeasy v2.0
+
+ 免責事項
+この記事を参考にしたことによって発生した問題について筆者は一切の責任を負いません
+
+ ソースコード
+今回は複数ファイルなのでg...]]></description><link>https://zenn.dev/ootr/articles/06579913c81331</link><guid isPermaLink="true">https://zenn.dev/ootr/articles/06579913c81331</guid><pubDate>Sun, 22 Dec 2024 10:37:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--rcOrRl0_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%25E3%2581%25A7VRChat%2520API%25E3%2581%25AE%25E8%25AA%258D%25E8%25A8%25BC%25E3%2582%2592%25E8%2587%25AA%25E5%258B%2595%25E5%258C%2596%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ootr%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzExZDc3OTk2ZDAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ootr</dc:creator></item></channel></rss>

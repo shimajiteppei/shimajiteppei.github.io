@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Mon, 23 Dec 2024 06:22:53 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[PythonでI/Oバウンドな並行処理を一括でタイムアウトさせる]]></title><description><![CDATA[＼スニダンを開発しているSODA inc.の Advent Calendar 2024 23日目の記事です!!!／
+
+ 概要
+PythonでI/Oバウンドな処理を並行で実行し、一定時間経過後に一括でタイムアウトさせる方法を紹介します。
+PythonでI/Oバウンドな処理を並行で実行する際によく利用されるコンポーネントとして、スレッド(threading)とコルーチン(asyncio)があります。スレッドベースの並行処理は、スレッドを停止させる機能が提供されていないため、一括で処理をタイムアウトさせることが難しいです。一方、asyncioで用いられるコルーチンを使うと比較的楽に一括のタイム...]]></description><link>https://zenn.dev/team_soda/articles/timeout-concurrent-io-bound-tasks-in-python</link><guid isPermaLink="true">https://zenn.dev/team_soda/articles/timeout-concurrent-io-bound-tasks-in-python</guid><pubDate>Mon, 23 Dec 2024 01:30:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Ld-Bl2uz--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A7I%252FO%25E3%2583%2590%25E3%2582%25A6%25E3%2583%25B3%25E3%2583%2589%25E3%2581%25AA%25E4%25B8%25A6%25E8%25A1%258C%25E5%2587%25A6%25E7%2590%2586%25E3%2582%2592%25E4%25B8%2580%25E6%258B%25AC%25E3%2581%25A7%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25A0%25E3%2582%25A2%25E3%2582%25A6%25E3%2583%2588%25E3%2581%2595%25E3%2581%259B%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:nakasone%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NmYTM5ODQ3MWIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:SODA%2520Engineering%2520Blog%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAyYTEwNDc0MDQuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nakasone</dc:creator></item><item><title><![CDATA[【python】TIFFファイルをPDFに変換する方法]]></title><description><![CDATA[
+ 執筆日
+2024/12/20
+
+ やること
+TIFF形式のファイルを扱う機会がありましたが、TIFFを扱う環境が整っておらず、中身だけ確認したかったため、PythonでPDFに変換する方法をまとめます。TIFFには高品質な画像保存の利点があるため、本来はそのままの拡張子で使用することをお勧めします。
+
+ TIFFとは？
+TIFF（Tagged Image File Format）は、主に高品質な画像を保存するための柔軟なファイル形式です。Adobe Photoshopなどの画像編集ソフトウェアとも互換性があります。利用シーンとしては、印刷や出版業界、スキャナ、ファクシミリ、アーカイブ...]]></description><link>https://zenn.dev/headwaters/articles/df5c3ba31078ee</link><guid isPermaLink="true">https://zenn.dev/headwaters/articles/df5c3ba31078ee</guid><pubDate>Mon, 23 Dec 2024 01:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_bFfIjH5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590python%25E3%2580%2591TIFF%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2592PDF%25E3%2581%25AB%25E5%25A4%2589%25E6%258F%259B%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:takekawa%2520tomoki%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZjNGExY2UxMDYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2598%25E3%2583%2583%25E3%2583%2589%25E3%2582%25A6%25E3%2582%25A9%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%25BC%25E3%2582%25B9%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdmODg5YTRhYzguanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takekawa tomoki</dc:creator></item><item><title><![CDATA[Ubuntu環境でuvを使ってPythonのパッケージ管理をする]]></title><description><![CDATA[
+ uvとは
+https://docs.astral.sh/uv/
+uvは、Rustで開発された高速なPythonパッケージおよびプロジェクト管理ツールです。従来は複数のツールで行っていた作業を、uvひとつで統合的に管理できるようになりました。
+
+ 主な機能
+
+ パッケージ管理
+
+依存関係の追加、削除、更新が可能
+pipの代替として高速なパッケージインストールを実現
+
+
+ プロジェクト管理
+
+pyproject.tomlを使用してプロジェクト情報を一元管理
+仮想環境の作成と管理
+
+
+ Pythonバージョン管理
+
+pyenvのような機能でPythonのバージョンを管理
+
+
+ uvの利点
+...]]></description><link>https://zenn.dev/ats030/articles/how-to-use-uv-on-ubuntu</link><guid isPermaLink="true">https://zenn.dev/ats030/articles/how-to-use-uv-on-ubuntu</guid><pubDate>Sun, 22 Dec 2024 22:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jTwnZcQO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ubuntu%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25A7uv%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6Python%25E3%2581%25AE%25E3%2583%2591%25E3%2583%2583%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B8%25E7%25AE%25A1%25E7%2590%2586%25E3%2582%2592%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2582%25E3%2582%258C%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSUN1SHBxV21INFNBbC1aRVRkejRoTEwzejNvRWpqVGtmNVY2LWNRNk5ZVEd3djVzZ0k9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>あれ</dc:creator></item><item><title><![CDATA[出力品質が下がらないLLM推論高速化手法「投機的デコーディング」]]></title><description><![CDATA[!
+本記事はCyberAgent 26th Fresh Engineer's Advent Calendar 2024の23日目の記事です。
+あくまで内定者たち主催であり、有志で行っていることをご承知おきください。
+
+https://qiita.com/advent-calendar/2024/ca-26th
+
+ はじめに
+u-hyszkと申します！
+本記事では大規模言語モデル(LLM)の推論高速化手法である投機的デコーディング(Speculative Decoding)をご紹介します。
+また、投機的デコーディングの出力品質が低下しないというメリットを、アルゴリズムや証明に触れながら説明...]]></description><link>https://zenn.dev/u_hyszk/articles/7bf9c6fc4dd154</link><guid isPermaLink="true">https://zenn.dev/u_hyszk/articles/7bf9c6fc4dd154</guid><pubDate>Sun, 22 Dec 2024 22:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--XO8Rxp9J--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2587%25BA%25E5%258A%259B%25E5%2593%2581%25E8%25B3%25AA%25E3%2581%258C%25E4%25B8%258B%25E3%2581%258C%25E3%2582%2589%25E3%2581%25AA%25E3%2581%2584LLM%25E6%258E%25A8%25E8%25AB%2596%25E9%25AB%2598%25E9%2580%259F%25E5%258C%2596%25E6%2589%258B%25E6%25B3%2595%25E3%2580%258C%25E6%258A%2595%25E6%25A9%259F%25E7%259A%2584%25E3%2583%2587%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2587%25E3%2582%25A3%25E3%2583%25B3%25E3%2582%25B0%25E3%2580%258D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:u-hyszk%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzYyYjFjZTJjZGEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>u-hyszk</dc:creator></item><item><title><![CDATA[Pythonの『tenacity』を使ったお手軽リトライ処理実装]]></title><description><![CDATA[!
+この記事はAidemy Advent Calendar 2024の10日目（に遅刻した）の記事です。
+9日目はTauriでメニューバーにアプリを常駐しよう[JavaScript編]でした！
+
+
+ 1. 概要
+プログラムを実行していると、ネットワークエラーなどの要因で一時的に処理が失敗することがあります。
+こうしたエラーは多くの場合、一度失敗しても少し時間を置いて再試行（リトライ）すれば成功する可能性があります。
+Pythonではライブラリ『tenacity』を利用すれば、デコレートするだけでお手軽にリトライ処理を適用することができます。
+
+ 2. Tenacityの基本情報
+
+ 2....]]></description><link>https://zenn.dev/aidemy/articles/4b9803583b2e32</link><guid isPermaLink="true">https://zenn.dev/aidemy/articles/4b9803583b2e32</guid><pubDate>Sun, 22 Dec 2024 20:30:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--sGoI7bkx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25AE%25E3%2580%258Etenacity%25E3%2580%258F%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%259F%25E3%2581%258A%25E6%2589%258B%25E8%25BB%25BD%25E3%2583%25AA%25E3%2583%2588%25E3%2583%25A9%25E3%2582%25A4%25E5%2587%25A6%25E7%2590%2586%25E5%25AE%259F%25E8%25A3%2585%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:sakairi-y%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNhNmVhZTQ3ZDkuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Aidemy%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FmZTdmZTM3YjEuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sakairi-y</dc:creator></item><item><title><![CDATA[PyMOLで環状ペプチドの構造を出力する]]></title><description><![CDATA[PyMOLには標準でペプチドをbuildする機能が備わっています。　　
+Macだとoptキーを押しながらアミノ酸配列を入力するだけです。　　
+キーの割り当てがあればアミノ酸以外もbuild出来ます。　　
+例えばopt+jにはアセチレンが割り当てられていますが、これはatom pick(原子の選択)が外れてしまうので、以降はペプチドの出力を続けることが出来ません。　　
+下記はoptキーを押しながらHELPJPと入力することで出力したペプチドです。　　
+途中がアセチレンなので最後のプロリンは出力されていません。(あと何故かロイシンも...)　　
+
+モチーフとしてはhelix, paralle...]]></description><link>https://zenn.dev/keetane/articles/e19c06ead32af6</link><guid isPermaLink="true">https://zenn.dev/keetane/articles/e19c06ead32af6</guid><pubDate>Sun, 22 Dec 2024 19:24:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bmxsIhLE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:PyMOL%25E3%2581%25A7%25E7%2592%25B0%25E7%258A%25B6%25E3%2583%259A%25E3%2583%2597%25E3%2583%2581%25E3%2583%2589%25E3%2581%25AE%25E6%25A7%258B%25E9%2580%25A0%25E3%2582%2592%25E5%2587%25BA%25E5%258A%259B%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Keetane%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc1YzhkYjk2ODguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Keetane</dc:creator></item><item><title><![CDATA[LINE Messaging APIのサンプルコード]]></title><description><![CDATA[
+ サンプルコード
+https://github.com/wasabina67/wasabina67-bot/blob/main/src/run.py
+
+ 開発者ドキュメント
+https://developers.line.biz/ja/services/messaging-api/
+]]></description><link>https://zenn.dev/wasabina67/articles/line-bot-sdk-usage-example</link><guid isPermaLink="true">https://zenn.dev/wasabina67/articles/line-bot-sdk-usage-example</guid><pubDate>Sun, 22 Dec 2024 15:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--RVEyQHjp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:LINE%2520Messaging%2520API%25E3%2581%25AE%25E3%2582%25B5%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AB%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:wasabina67%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0tBQmhwQURYZVpZNU9UQl81MjhsZDNXRXh4cXE5c3dWVFQxMGVwbXRlT1gwbTVtVT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>wasabina67</dc:creator></item><item><title><![CDATA[割当問題で分布を均質化する]]></title><description><![CDATA[こんにちは，新卒 2 年目データサイエンティストのはだです．
+この記事はBrainPad Advent Calendar 2024の 10 日目の記事です．
+
+ はじめに
+ブレインパッドでは「新卒 1 年目は毎日業務時間 1h を使って課題図書を読んで勉強する（1 年間）」という勉強会制度があります．
+例年 2 年目になった先輩が自身の経験を元に図書の入れ替えを行い、次年度の課題図書を指定＆メンターに就任する仕組みです．
+書籍のトピックとしては統計，機械学習，効果検証，数理最適化などがあり，そのトピックから 6 冊が選ばれ，大体各書籍 2 ヶ月程で読んでいきながら適宜分からないところを ...]]></description><link>https://zenn.dev/h_atsu/articles/homogeneous_distribution</link><guid isPermaLink="true">https://zenn.dev/h_atsu/articles/homogeneous_distribution</guid><pubDate>Sun, 22 Dec 2024 13:44:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lXVUhENK--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2589%25B2%25E5%25BD%2593%25E5%2595%258F%25E9%25A1%258C%25E3%2581%25A7%25E5%2588%2586%25E5%25B8%2583%25E3%2582%2592%25E5%259D%2587%25E8%25B3%25AA%25E5%258C%2596%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:h_atsu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I1ZjZlYjlkOWMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>h_atsu</dc:creator></item><item><title><![CDATA[heapqを使うときの注意点]]></title><description><![CDATA[
+ この記事の経緯
+ゼロから作るDeep Learning 3のフレームワーク編での読者への宿題でheapqに関して詰まったので記載しておきます。書籍を持っている方向けに書くと、p.195です。
+
+ 問題概要
+ざっくりと問題を抽象化すると、
+class HogeHoge: 
+    def __init__(self, val):
+        self.value = value
+
+hogehoge_list: List[HogeHoge] = []  
+このhogehoge_listは、都度append()とpop()がされます。
+ただし、pop()するのは最もvalueが大きいも...]]></description><link>https://zenn.dev/tec_tanuki/articles/cf1497530c2f94</link><guid isPermaLink="true">https://zenn.dev/tec_tanuki/articles/cf1497530c2f94</guid><pubDate>Sun, 22 Dec 2024 13:31:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--tPQXgzxQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:heapq%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%25E3%2581%25A8%25E3%2581%258D%25E3%2581%25AE%25E6%25B3%25A8%25E6%2584%258F%25E7%2582%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25BF%25E3%2583%258C%25E3%2582%25AD%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I1ZTRkOWIwMTQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>テックタヌキ</dc:creator></item><item><title><![CDATA[OpenCVのカメラ補正のremapを部分的に適用したい]]></title><description><![CDATA[opencvでそこそこの解像度の魚眼カメラの映像補正をしていたところ、やたら時間がかかることが分かりました。映像の中で補正して使いたい部分は一部だったので、局所的に適用する方法はあるのか、考えました。
+
+ そもそも
+補正にはパラメータもといテンソルが必要です。これ自体は、チェス盤模様の被写体をつかって収集します。
+例えばこちらの記事が勉強になります。
+そのパラメータをつかって、元画像から補正後の画像への対応付けを示す行列（変換マップ）を計算し、opecvのremap関数で変換して補正後の画像を得ます。
+この変換マップはx,y軸用に2つ存在し、こちらの解説にあるように
+
+変換後の画像[i]...]]></description><link>https://zenn.dev/079aefdf/articles/9eab243dd11fb2</link><guid isPermaLink="true">https://zenn.dev/079aefdf/articles/9eab243dd11fb2</guid><pubDate>Sun, 22 Dec 2024 13:25:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dmQj5XME--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:OpenCV%25E3%2581%25AE%25E3%2582%25AB%25E3%2583%25A1%25E3%2583%25A9%25E8%25A3%259C%25E6%25AD%25A3%25E3%2581%25AEremap%25E3%2582%2592%25E9%2583%25A8%25E5%2588%2586%25E7%259A%2584%25E3%2581%25AB%25E9%2581%25A9%25E7%2594%25A8%25E3%2581%2597%25E3%2581%259F%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:daidai-orange%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhZmViMTkxMDEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>daidai-orange</dc:creator></item><item><title><![CDATA[PLINK2とPythonで集団遺伝学に入門する(1)データの前処理(HWE・アリル頻度分布)]]></title><description><![CDATA[
+ 記事に関する説明
+
+ 記事を書いた背景
+筆者が業務上の都合で集団遺伝のデータを扱うことになったが、集団遺伝学の知識が皆無なので一から勉強したメモ。および、PLINK2を試したところ
+
+PLINKの資料は1についてがほとんどでPLINK2についての資料が乏しい
+PLINK1とPLINK2とではオプションの名称が大きく変化
+PLINK2は精力的に開発されておりしばしば破壊的更新が行われる結果、バージョン変更やエラーによりチュートリアルの内容が一部再現できない
+PLINK後の解析や図示にRが使われるが、筆者は宗教上の理由でRを使わない
+
+のような問題に当たったので自分なりの解決方法を考えた...]]></description><link>https://zenn.dev/zczg/articles/46f175466c32fd</link><guid isPermaLink="true">https://zenn.dev/zczg/articles/46f175466c32fd</guid><pubDate>Sun, 22 Dec 2024 13:14:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4svAIAvU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:PLINK2%25E3%2581%25A8Python%25E3%2581%25A7%25E9%259B%2586%25E5%259B%25A3%25E9%2581%25BA%25E4%25BC%259D%25E5%25AD%25A6%25E3%2581%25AB%25E5%2585%25A5%25E9%2596%2580%25E3%2581%2599%25E3%2582%258B%25281%2529%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2581%25AE%25E5%2589%258D%25E5%2587%25A6%25E7%2590%2586%2528HWE%25E3%2583%25BB%25E3%2582%25A2%25E3%2583%25AA%25E3%2583%25AB%25E9%25A0%25BB%25E5%25BA%25A6%25E5%2588%2586%25E5%25B8%2583%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Zicong%2520Zhang%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzUwMDAyOTY0YjkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Zicong Zhang</dc:creator></item><item><title><![CDATA[【Python】欠損値Nullに対してフラグを付与する（セグメント分析の前処理）]]></title><description><![CDATA[
+ やりたいこと
+セグメント分析をするときに、ユーザーの特定のカラムが欠損している場合があります。
+例えば、後述のケースにおいて、ユーザーの年収がNUllの場合、fillna()メソッドを使って年収を0で代入してしまうと、それは年収が0万円であるということを意味してしまいます。
+やりたいこととしては、年収が0万円ユーザーとそうでないユーザーを分けて分析したいのではなく、年収の入力がある or 年収の入力がないというカテゴリを作って分析したいです。
+今回はそのカテゴリを作るための前処理を整理してみます。
+
+ 実際にやってみる
+まずは基本ライブラリをimportします。
+import num...]]></description><link>https://zenn.dev/waddyyy/articles/185ef5961a9c51</link><guid isPermaLink="true">https://zenn.dev/waddyyy/articles/185ef5961a9c51</guid><pubDate>Sun, 22 Dec 2024 10:16:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--geys1utt--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591%25E6%25AC%25A0%25E6%2590%258D%25E5%2580%25A4Null%25E3%2581%25AB%25E5%25AF%25BE%25E3%2581%2597%25E3%2581%25A6%25E3%2583%2595%25E3%2583%25A9%25E3%2582%25B0%25E3%2582%2592%25E4%25BB%2598%25E4%25B8%258E%25E3%2581%2599%25E3%2582%258B%25EF%25BC%2588%25E3%2582%25BB%25E3%2582%25B0%25E3%2583%25A1%25E3%2583%25B3%25E3%2583%2588%25E5%2588%2586%25E6%259E%2590%25E3%2581%25AE%25E5%2589%258D%25E5%2587%25A6%25E7%2590%2586%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%2592%258C%25E7%2594%25B0%2520%25E5%25B2%25B3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2EzOTg3NDQyM2EuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>和田 岳</dc:creator></item><item><title><![CDATA[【Python】複数条件を満たすフラグを付与する（セグメント分析の前処理）]]></title><description><![CDATA[
+ やりたいこと
+ビジネスの分析ではユーザー（or 顧客）が持つ複数の属性によって、それぞれが特定の行動にどれくらい影響を及しているのか確認したい場合があります。
+例えば、属性A、B、Cがあったときに、ユーザーがある行動に至る（=CVする）とき、属性Bよりも属性Aを持っている方がCVRが高いのか、もしくは属性A、B、C全て持っている方がCVRが高いのか、逆にどの属性も持っていない場合はCVRが低いのかなど、こういったセグメント別にCVRを集計したいユースケースがあると思います。
+今回はPythonを使って、その検証を進めるための簡単な前処理を整理してみました。
+
+ 実際にやってみる
+まず...]]></description><link>https://zenn.dev/waddyyy/articles/fe37502d3a622a</link><guid isPermaLink="true">https://zenn.dev/waddyyy/articles/fe37502d3a622a</guid><pubDate>Sun, 22 Dec 2024 09:37:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--g1II9bik--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591%25E8%25A4%2587%25E6%2595%25B0%25E6%259D%25A1%25E4%25BB%25B6%25E3%2582%2592%25E6%25BA%2580%25E3%2581%259F%25E3%2581%2599%25E3%2583%2595%25E3%2583%25A9%25E3%2582%25B0%25E3%2582%2592%25E4%25BB%2598%25E4%25B8%258E%25E3%2581%2599%25E3%2582%258B%25EF%25BC%2588%25E3%2582%25BB%25E3%2582%25B0%25E3%2583%25A1%25E3%2583%25B3%25E3%2583%2588%25E5%2588%2586%25E6%259E%2590%25E3%2581%25AE%25E5%2589%258D%25E5%2587%25A6%25E7%2590%2586%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%2592%258C%25E7%2594%25B0%2520%25E5%25B2%25B3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2EzOTg3NDQyM2EuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>和田 岳</dc:creator></item><item><title><![CDATA[H.264対応のopencv-pythonのwheelをマルチステージビルドする]]></title><description><![CDATA[
+ はじめに
+先日、「opencv-pythonのwheelを並列ビルドしてビルド時間を5分の1にした」という記事を書きました。
+https://zenn.dev/yuyakato/articles/0c6782411031b1
+H.264対応のopencv-pythonパッケージを素早く手に入れたかったがゆえに書いた記事ですが、並列ビルドでビルド時間を短縮した後も約5分とそれなりの時間が掛かってしまいます。
+Dockerイメージのビルドキャッシュが効かない状況（依存関係の変更など）が生じる度に5分待つのはしんどいので、マルチステージビルドを活用して、wheelのビルドを分離することにし...]]></description><link>https://zenn.dev/yuyakato/articles/00d53db5d5b93a</link><guid isPermaLink="true">https://zenn.dev/yuyakato/articles/00d53db5d5b93a</guid><pubDate>Sun, 22 Dec 2024 07:19:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qYIIio9B--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:H.264%25E5%25AF%25BE%25E5%25BF%259C%25E3%2581%25AEopencv-python%25E3%2581%25AEwheel%25E3%2582%2592%25E3%2583%259E%25E3%2583%25AB%25E3%2583%2581%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%2593%25E3%2583%25AB%25E3%2583%2589%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yuya%2520Kato%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dUSUhmX2JGaE1tcVp0aDNYQUI2NFY0aGRnNlJWbE5CbjVhZmQzdXc9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yuya Kato</dc:creator></item><item><title><![CDATA[EDINETのAPI仕様書を読んでみたPart1]]></title><description><![CDATA[
+ EDINETとは
+企業の財務情報をAPIなどで提供する（政府の？）システムのこと。利用にあたって、APIキーの取得などが必要だったので、方法やインターフェースなどを調べていたら、v2の仕様書を見つけたのでメモがわりにまとめます。
+
+ EDINET APIの機能
+二つのAPIを提供しています。
+
+書類一覧API
+
+「メタデータのみ」、「提出書類一覧及びメタデータ」の２パターンの呼び出し方がある
+日付などを指定
+
+
+書類取得API
+
+上で得られた書類情報から実際の書類データを取得するためのAPI
+
+
+
+
+ APIキーの発行
+
+ Chromeユーザー向け
+筆者はChromeを使用しているの...]]></description><link>https://zenn.dev/paradinight/articles/f4567f3728e4d2</link><guid isPermaLink="true">https://zenn.dev/paradinight/articles/f4567f3728e4d2</guid><pubDate>Sun, 22 Dec 2024 06:29:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--sXlS0hHT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:EDINET%25E3%2581%25AEAPI%25E4%25BB%2595%25E6%25A7%2598%25E6%259B%25B8%25E3%2582%2592%25E8%25AA%25AD%25E3%2582%2593%25E3%2581%25A7%25E3%2581%25BF%25E3%2581%259FPart1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%25AC%25E3%2582%25AA%25E3%2583%25AA%25E3%2582%25AA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzIxYmFlY2E1MmQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>レオリオ</dc:creator></item><item><title><![CDATA[[Python]ロギングの基本的な書き方]]></title><description><![CDATA[
+
+ loggingとは？
+
+ただ単純に表示させたいならprint文でも良いが、ログを残すのに特化した機能が豊富なライブラリ。
+ドキュメントでは以下のように定義されている。
+
+
+ 参考
+
+
+logging は、あるソフトウェアが実行されているときに起こったイベントを追跡するための手段です。ソフトウェアの開発者は、特定のイベントが発生したことを示す logging の呼び出しをコードに加えます。イベントは、メッセージで記述され、これに変数データ (すなわち、イベントが起こる度に異なるかもしれないデータ) を加えることもできます。イベントには、開発者がそのイベントに定めた重要性も含まれます。...]]></description><link>https://zenn.dev/takehiro1111/articles/python_logging</link><guid isPermaLink="true">https://zenn.dev/takehiro1111/articles/python_logging</guid><pubDate>Sun, 22 Dec 2024 04:15:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--JQgNf91K--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BPython%255D%25E3%2583%25AD%25E3%2582%25AE%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%25AE%25E5%259F%25BA%25E6%259C%25AC%25E7%259A%2584%25E3%2581%25AA%25E6%259B%25B8%25E3%2581%258D%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259F%25E3%2581%2591%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY2NDQ2ZjMwNzcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>たけ</dc:creator></item><item><title><![CDATA[Pythonでメールを受信する方法]]></title><description><![CDATA[
+ 仕様と動作環境
+
+
+仕様
+
+任意のサーバー名、ユーザー名、パスワードを指定
+受信しているメールの件数を取得
+受信しているメール情報を取得（件名・本文・送信者・受信日時）
+受信したメールは削除する
+pop3を使ってメール取得
+
+
+
+Pythonバージョン
+
+Python 3.12.4
+
+
+
+開発環境
+
+VSCode
+
+
+
+
+ ソースコード
+import poplib
+import email
+from email.header import decode_header
+
+
+# メール関連
+def fetchmail(cli, msg_no):
+    content = cli.ret...]]></description><link>https://zenn.dev/picaneru/articles/5d2c90669cb808</link><guid isPermaLink="true">https://zenn.dev/picaneru/articles/5d2c90669cb808</guid><pubDate>Sun, 22 Dec 2024 03:00:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--p7WgJAHi--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A7%25E3%2583%25A1%25E3%2583%25BC%25E3%2583%25AB%25E3%2582%2592%25E5%258F%2597%25E4%25BF%25A1%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E7%25B5%25B6%25E5%25AF%25BE%25E5%25AE%259A%25E6%2599%2582%25E9%2580%2580%25E5%258B%25A4%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NlYWVlYTI2MGYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>絶対定時退勤</dc:creator></item><item><title><![CDATA[管理者権限を保存するアプリ]]></title><description><![CDATA[Pythonにはまったtaisan11です。
+今回は管理者権限で困ってる学生向けに管理者権限を保存するアプリを作りました!!
+どんな仕組みで保存してるかと簡単な使い方を解説します。
+https://github.com/taisan11/admin-app-runner
+
+ 使い方
+
+GUIはシンプルで使いやすいので、正直説明する余地がありません。
+...ありました。
+まず、管理者権限を付与するときは、Upgrade Administratorボタンを押すとおなじみのポッポアップが出ます。
+これはこのアプリを起動するたび、やってください。終了したら、管理者権限も捨てられます...
+次に、...]]></description><link>https://zenn.dev/taisan11/articles/f5ff904405fbd7</link><guid isPermaLink="true">https://zenn.dev/taisan11/articles/f5ff904405fbd7</guid><pubDate>Sun, 22 Dec 2024 02:42:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Yaw86q1v--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%25AE%25A1%25E7%2590%2586%25E8%2580%2585%25E6%25A8%25A9%25E9%2599%2590%25E3%2582%2592%25E4%25BF%259D%25E5%25AD%2598%25E3%2581%2599%25E3%2582%258B%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259F%25E3%2581%2584%25E3%2581%2595%25E3%2582%2593%2521%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzcxZDE1NzViN2YuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>たいさん!</dc:creator></item><item><title><![CDATA[pythonで道路ネットワーク分析]]></title><description><![CDATA[この記事はRICORA Advent Calender 2024の19日目の記事になります。
+
+ はじめに
+学校のグループ開発で、pythonのOSMnxというパッケージを使用した道路ネットワークの経路探索を行ったため、基本的な使い方について紹介します。
+
+ OSMnxについて
+OSMnxについて、OSMnxのドキュメントの冒頭部分google翻訳したものを引用します。
+https://osmnx.readthedocs.io/en/stable/index.html
+
+OSMnx は、OpenStreetMap から街路網やその他の地理空間フィーチャを簡単にダウンロード、モデル化、分析...]]></description><link>https://zenn.dev/kuradai/articles/251bd1905d448d</link><guid isPermaLink="true">https://zenn.dev/kuradai/articles/251bd1905d448d</guid><pubDate>Sun, 22 Dec 2024 01:28:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--HWNID26d--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:python%25E3%2581%25A7%25E9%2581%2593%25E8%25B7%25AF%25E3%2583%258D%25E3%2583%2583%25E3%2583%2588%25E3%2583%25AF%25E3%2583%25BC%25E3%2582%25AF%25E5%2588%2586%25E6%259E%2590%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kurad%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdlOWI4ZGVjZGEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kurad</dc:creator></item><item><title><![CDATA[fasttext  を pip で入れるときのエラーと解決策]]></title><description><![CDATA[pip なり uv なりで RuntimeError: Unsupported compiler -- at least C++17 support is needed! というエラーが出たときの対処法です。
+今回は fasttext をインストールするときに生じました。
+環境は Linux で、linuxbrew からインストールした gcc を使っているつもりでいます。これが今回ややこしいところです。
+
+ 解決策
+CC=gcc-14 CXX=g++-14 uv add fasttext  のように、インストール時に gcc の名前を明示すれば解決します。
+
+ 少し詳しく
+which ...]]></description><link>https://zenn.dev/sjh4/articles/db4adff5282ae7</link><guid isPermaLink="true">https://zenn.dev/sjh4/articles/db4adff5282ae7</guid><pubDate>Sat, 21 Dec 2024 22:56:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--mn1laQ7L--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:fasttext%2520%2520%25E3%2582%2592%2520pip%2520%25E3%2581%25A7%25E5%2585%25A5%25E3%2582%258C%25E3%2582%258B%25E3%2581%25A8%25E3%2581%258D%25E3%2581%25AE%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E3%2581%25A8%25E8%25A7%25A3%25E6%25B1%25BA%25E7%25AD%2596%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:sj%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY5Y2RiMjRhNWIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sj</dc:creator></item></channel></rss>

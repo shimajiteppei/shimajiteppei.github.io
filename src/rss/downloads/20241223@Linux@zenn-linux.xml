@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Linux」のフィード]]></title><description><![CDATA[Zennのトピック「Linux」のRSSフィードです]]></description><link>https://zenn.dev/topics/linux</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/860a9eb1e4.png</url><title>Zennの「Linux」のフィード</title><link>https://zenn.dev/topics/linux</link></image><generator>zenn.dev</generator><lastBuildDate>Mon, 23 Dec 2024 10:32:45 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/linux/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Docker 版 GitLab Runner で CI/CD:Linux 使い（略）Advent Calendar 2024]]></title><description><![CDATA[
+ はじめに
+これは「Linux 使いになりたい人のための Advent Calendar 2024」の記事です。
+筆者は、Web エンジニアを志望する人には、セルフホスト Git サービスを稼働させて利用することをオススメしています。もし Git を使ったことがないなら、Git を学ぶときに、セルフホスト Git サービスを稼働させることも視野に含めながら学習するのが効率的だと考えています。
+!
+この記事は、次の3つの記事の続きです。
+
+
+
+
+
+ Docker 版 GitLab Runner で CI/CD
+前回まで、3回に渡ってcfssl で自己認証局、サーバー証明書を用意し、それら...]]></description><link>https://zenn.dev/hiro345/articles/20241201_advent_calendar_2024_17</link><guid isPermaLink="true">https://zenn.dev/hiro345/articles/20241201_advent_calendar_2024_17</guid><pubDate>Mon, 23 Dec 2024 10:05:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vcoeY3S_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%2520%25E7%2589%2588%2520GitLab%2520Runner%2520%25E3%2581%25A7%2520CI%252FCD%253ALinux%2520%25E4%25BD%25BF%25E3%2581%2584%25EF%25BC%2588%25E7%2595%25A5%25EF%25BC%2589Advent%2520Calendar...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Hiroshi%2520Koyama%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2k5ZzdjLS0xTFk0S2k0LWw3dVFSSFZRdEdQcWZHYTlibVRJYUtFM0E9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Hiroshi Koyama</dc:creator></item><item><title><![CDATA[Google Cloud で X 環境を構築する（今更ながらの Chrome Remote Desktop のススメ）]]></title><description><![CDATA[
+ Google Cloud で Chrome Remote Desktop を活用！セキュアな X デスクトップ環境を構築しよう
+
+
+ tl;dr
+
+Google Cloud の管理に便利な Linux GUI デスクトップ環境の構築方法をご案内
+Cloud Shell では対応できない、X 環境が必要なアプリケーションの実行や VPC 内のブラウザ アクセス環境として活用可能
+途中で接続を切っても、ログインセッションは残るので、長時間実行処理の実行環境としても活躍
+デスクトップへは Google アカウントによるログインが必要なので、VNC を利用するセキュリティリスクを回避。要塞ホ...]]></description><link>https://zenn.dev/google_cloud_jp/articles/chrome-remote-desktop</link><guid isPermaLink="true">https://zenn.dev/google_cloud_jp/articles/chrome-remote-desktop</guid><pubDate>Mon, 23 Dec 2024 08:52:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--m-55wL0I--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Google%2520Cloud%2520%25E3%2581%25A7%2520X%2520%25E7%2592%25B0%25E5%25A2%2583%25E3%2582%2592%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2599%25E3%2582%258B%25EF%25BC%2588%25E4%25BB%258A%25E6%259B%25B4%25E3%2581%25AA%25E3%2581%258C%25E3%2582%2589%25E3%2581%25AE%2520Chrome%2520Remote%2520Desktop%2520%25E3%2581%25AE%25E3%2582%25B9%25E3%2582%25B9%25E3%2583%25A1%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:ryutaza%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA1OTIyZmJmYTMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Google%2520Cloud%2520Japan%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUVkRlRwNDNoZ1ZkczhmX3ZpN3Mxb1A5aWstaWZreDVTZl8xYzFXbnVjRFk4dz1zOTYtYw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ryutaza</dc:creator></item><item><title><![CDATA[OpenSSH: 認証が完了したあとの各プロセスの状態についてのメモ]]></title><description><![CDATA[SSHログインしたあと、sshdやbashなどのプロセスがどういう状態になっているかに関する調査。対象はOpenSSHのV_8_7_P1。
+SSHでログインした直後の各プロセスの状態は以下のようになっている。
+
+plantuml@startuml
+!theme blueprint
+
+rectangle sshd1 as "sshd [listener]"
+rectangle client as "SSH CLient"
+
+scale 1024 width
+
+card "process \ngroup" as pg1 {
+  rectangle "sshd [priv]" as sshd2...]]></description><link>https://zenn.dev/h_izu/articles/8ea15ea5a5968e</link><guid isPermaLink="true">https://zenn.dev/h_izu/articles/8ea15ea5a5968e</guid><pubDate>Mon, 23 Dec 2024 08:26:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--uv1_PmZE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:OpenSSH%253A%2520%25E8%25AA%258D%25E8%25A8%25BC%25E3%2581%258C%25E5%25AE%258C%25E4%25BA%2586%25E3%2581%2597%25E3%2581%259F%25E3%2581%2582%25E3%2581%25A8%25E3%2581%25AE%25E5%2590%2584%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25BB%25E3%2582%25B9%25E3%2581%25AE%25E7%258A%25B6%25E6%2585%258B%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E3%2581%25AE%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:h-izu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU3Mzc0Zjg2ZDMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>h-izu</dc:creator></item><item><title><![CDATA[Guix SystemでのswayのHiDPIの設定]]></title><description><![CDATA[SwayのHiDPIの設定は、
+
+~/.config/sway/config
+# HiDPI
+output * scale 2
+
+を書くだけでだいたいうまくいったのですが、マウスカーソルが小さすぎたので以下で解決しました
+
+ マウスカーソルのテーマと大きさを設定
+
+ 必要なパッケージのインストール
+以下のパッケージをインストールする
+"glib:bin"
+"gsettings-desktop-schemas"
+"xrdb"
+その他、使いたいカーソルのテーマ(AdwaitaやBibata, Yaruなど)をインストールしてください
+
+ swayの設定
+テーマやサイズはお好きなもので大丈夫で...]]></description><link>https://zenn.dev/kurome/articles/f326b4f036f514</link><guid isPermaLink="true">https://zenn.dev/kurome/articles/f326b4f036f514</guid><pubDate>Mon, 23 Dec 2024 06:55:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--t2poaN2I--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Guix%2520System%25E3%2581%25A7%25E3%2581%25AEsway%25E3%2581%25AEHiDPI%25E3%2581%25AE%25E8%25A8%25AD%25E5%25AE%259A%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kurome%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2Rhcmsvay5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kurome</dc:creator></item><item><title><![CDATA[大規模言語モデルを自作しよう！2 (C++コーパスクリーニング+Patch-Level Training）]]></title><description><![CDATA[本記事は、LLM・LLM活用 Advent Calendar 2024 22日目の記事です。
+https://qiita.com/advent-calendar/2024/large-language-model
+
+ はじめに
+本記事は、「大規模言語モデルを自作しよう！」シリーズの第2段です。
+第1段では、300Mサイズのmistralモデルをベースに、wikipediaデータセットとcc100データセットを用いた事前学習と、databricks-dolly-15k-jaを用いたファインチューニングを実現しました。しかし、事前学習モデルの出力がそもそも文章になっていない場合や、引用符、記...]]></description><link>https://zenn.dev/selllous/articles/transformers_pretrain_and_ft2</link><guid isPermaLink="true">https://zenn.dev/selllous/articles/transformers_pretrain_and_ft2</guid><pubDate>Sun, 22 Dec 2024 13:55:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--opqbZySf--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%25A4%25A7%25E8%25A6%258F%25E6%25A8%25A1%25E8%25A8%2580%25E8%25AA%259E%25E3%2583%25A2%25E3%2583%2587%25E3%2583%25AB%25E3%2582%2592%25E8%2587%25AA%25E4%25BD%259C%25E3%2581%2597%25E3%2582%2588%25E3%2581%2586%25EF%25BC%25812%2520%2528C%252B%252B%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2591%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%25BC%25E3%2583%258B%25E3%2583%25B3%25E3%2582%25B0%252BPatch-Level%2520Training%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:celery%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZlYzAyMzM5ZDkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>celery</dc:creator></item><item><title><![CDATA[KVM構築]]></title><description><![CDATA[
+ 主要パッケージ
+
+
+
+パッケージ名
+説明
+
+
+
+
+libvirt
+仮想マシンを管理するための基盤となるツール
+
+
+qemu-kvm
+Linux 上で仮想化環境を提供するハイパーバイザ
+
+
+virt-install
+仮想マシンをコマンドラインから作成・管理するツール
+
+
+cockpit-machines
+Webブラウザから仮想マシンを簡単に作成・管理できるGUIツール
+
+
+
+
+ 環境
+
+# uname -a
+Linux pigukvm 4.18.0-553.32.1.el8_10.x86_64 #1 SMP Wed Dec 11 16:33:48 UTC 2024 x86_64 x86...]]></description><link>https://zenn.dev/piguolabo/articles/086b2c25193945</link><guid isPermaLink="true">https://zenn.dev/piguolabo/articles/086b2c25193945</guid><pubDate>Sun, 22 Dec 2024 11:53:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--R9tye-fE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_76:KVM%25E6%25A7%258B%25E7%25AF%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Piguo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRmM2RjYjNmOTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Piguo</dc:creator></item><item><title><![CDATA[NanoKVMと自宅サーバで遊ぶ]]></title><description><![CDATA[!
+本記事はAkatsuki Games Advent Calendar 2024における22日目の記事です。
+昨日の21日目はYuji Sugiyamaさんの記事『「桜井政博のゲームを作るには」を自身の仕事・所属チームに当てはめてみる』でした。桜井さんの有名な動画をもとに、チームで働くということを掘り下げる内容になっていて面白いので、ぜひ読んでみてください。
+
+
+ はじめに
+実家など遠隔地で自宅サーバを運用している際、通常であればSSH経由での操作で管理は事足りるのですが、稀にSSHでは困るケースがあります。例えば、以下のような場合です：
+
+何らかの理由により、SSHが疎通しなくなって...]]></description><link>https://zenn.dev/flfymoss/articles/2024-12-22-play-with-nanokvm</link><guid isPermaLink="true">https://zenn.dev/flfymoss/articles/2024-12-22-play-with-nanokvm</guid><pubDate>Sun, 22 Dec 2024 07:07:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--J4Ufwxhb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:NanoKVM%25E3%2581%25A8%25E8%2587%25AA%25E5%25AE%2585%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2581%25A7%25E9%2581%258A%25E3%2581%25B6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:flfymoss%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q1NWM4YTIwYWMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>flfymoss</dc:creator></item><item><title><![CDATA[Dockerを使って開発するときに必須な設定3つ]]></title><description><![CDATA[
+
+ 対象読者
+
+Docker初心者
+Dockerをつかってアプリケーションの構築を行おうとしている人
+
+
+ 事前準備
+
+Windowsの場合、Dockerの利用環境としてwslをインストールする
+
+WSL を使用して Windows に Linux をインストールする方法
+下記のコマンドを実行
+
+
+
+wsl --install
+
+ Dockerを使って開発するときに必須な設定
+
+ネットワーク
+マウント
+ホットリロード
+
+
+ 1. ネットワーク
+ホスト環境での動作確認や、アプリケーション同士の接続に必須の設定。
+
+ ホストとコンテナのポートをマッピングする
+アプリケーションをホスト環境か...]]></description><link>https://zenn.dev/eiyp_8r/articles/62a1813876b27b</link><guid isPermaLink="true">https://zenn.dev/eiyp_8r/articles/62a1813876b27b</guid><pubDate>Sun, 22 Dec 2024 05:29:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--MIdRm1ki--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E9%2596%258B%25E7%2599%25BA%25E3%2581%2599%25E3%2582%258B%25E3%2581%25A8%25E3%2581%258D%25E3%2581%25AB%25E5%25BF%2585%25E9%25A0%2588%25E3%2581%25AA%25E8%25A8%25AD%25E5%25AE%259A3%25E3%2581%25A4%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25B5%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2QwMmQ4OGE2M2IuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ふ</dc:creator></item><item><title><![CDATA[踏み台サーバーのアルゴリズムが古い場合の多段SSHの方法]]></title><description><![CDATA[踏み台サーバーが古いためにオプション無しではssh実行時にアルゴリズムが合致せず、sshできない場合があります。
+また、多段ssh(portfoward)を実行したい場合にはさらに厄介です。
+そうした場面で使えるsshの設定です。
+
+ !!!注意!!!
+本記事では回避策を掲示していますが、セキュリティ対応を遅らせることを推奨するものではありません。
+サーバー側のセキュリティ更新が絶対です。
+古いアルゴリズムは暗号化強度が弱く、解読されてしまう危険性が高まります。
+
+ .ssh/config ファイルの利用
+.ssh/config を利用するとsshコマンド実行時に接続先が補完され、use...]]></description><link>https://zenn.dev/takeaki_m/articles/af008273110c9b</link><guid isPermaLink="true">https://zenn.dev/takeaki_m/articles/af008273110c9b</guid><pubDate>Sun, 22 Dec 2024 04:24:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--NheT_-09--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%25B8%258F%25E3%2581%25BF%25E5%258F%25B0%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2581%25AE%25E3%2582%25A2%25E3%2583%25AB%25E3%2582%25B4%25E3%2583%25AA%25E3%2582%25BA%25E3%2583%25A0%25E3%2581%258C%25E5%258F%25A4%25E3%2581%2584%25E5%25A0%25B4%25E5%2590%2588%25E3%2581%25AE%25E5%25A4%259A%25E6%25AE%25B5SSH%25E3%2581%25AE%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:take%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ1NGUxN2RmODYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>take</dc:creator></item><item><title><![CDATA[manコマンドの見方(本当にメモ)]]></title><description><![CDATA[from GPT
+manコマンドの出力内容
+マニュアルページには、以下のような情報が含まれています。
+
+名前（NAME）
+コマンドやプログラムの名前と、その概要が表示されます。
+例:
+bash
+コードをコピーする
+NAME
+ls - list directory contents
+概要（SYNOPSIS）
+コマンドの使用方法（構文）が記載されています。
+引数やオプションの記述が含まれます。
+例:
+css
+コードをコピーする
+SYNOPSIS
+ls [OPTION]... [FILE]...
+説明（DESCRIPTION）
+コマンドや機能の詳細な説明です。
+各オプションの効果や用途が記載さ...]]></description><link>https://zenn.dev/bobby/articles/9da6e8b93e09f7</link><guid isPermaLink="true">https://zenn.dev/bobby/articles/9da6e8b93e09f7</guid><pubDate>Sun, 22 Dec 2024 02:50:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BReiZ3yi--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:man%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2581%25AE%25E8%25A6%258B%25E6%2596%25B9%2528%25E6%259C%25AC%25E5%25BD%2593%25E3%2581%25AB%25E3%2583%25A1%25E3%2583%25A2%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%2582%2599%25E5%25BF%2598%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTHAyRkVpcHVoYzZDOWoyMDJuTl9wckt6S3Nla1JUS3NGcEN2eTU2U0VlZFVrVjVBPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>備忘</dc:creator></item><item><title><![CDATA[Terminalのプロンプトをカスタマイズする( シェル・環境変数設定ファイルについて)]]></title><description><![CDATA[##記載内容
+シェル変数および環境変数
+プロンプトのカスタマイズの仕方
+##プロンプトのカスタマイズの仕方
+プロンプトの表示形式をlinuxおよびlinux likeのOSで決定するのはPS1。
+現在設定されている変数を確認する。
+~ % echo $PS1
+%n@%m %1~ %# 
+各文字の意味は以下のサイトを参照。
+bash
+[zsh]
+(https://it-syoya-engineer.com/zsh-prompt-setting/)
+そのため、以下でPS1を設定。
+PS1='%n@%m[%W %t] %d %#'
+そして再起動すると、プロンプトが以下の通り変化。
+userna...]]></description><link>https://zenn.dev/bobby/articles/3288ea1fd09719</link><guid isPermaLink="true">https://zenn.dev/bobby/articles/3288ea1fd09719</guid><pubDate>Sun, 22 Dec 2024 01:20:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--MYwhj9Au--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Terminal%25E3%2581%25AE%25E3%2583%2597%25E3%2583%25AD%25E3%2583%25B3%25E3%2583%2597%25E3%2583%2588%25E3%2582%2592%25E3%2582%25AB%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%259E%25E3%2582%25A4%25E3%2582%25BA%25E3%2581%2599%25E3%2582%258B%2528%2520%25E3%2582%25B7%25E3%2582%25A7%25E3%2583%25AB%25E3%2583%25BB%25E7%2592%25B0%25E5%25A2%2583%25E5%25A4%2589%25E6%2595%25B0%25E8%25A8%25AD%25E5%25AE%259A%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%2582%2599%25E5%25BF%2598%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTHAyRkVpcHVoYzZDOWoyMDJuTl9wckt6S3Nla1JUS3NGcEN2eTU2U0VlZFVrVjVBPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>備忘</dc:creator></item><item><title><![CDATA[fasttext  を pip で入れるときのエラーと解決策]]></title><description><![CDATA[pip なり uv なりで RuntimeError: Unsupported compiler -- at least C++17 support is needed! というエラーが出たときの対処法です。
+今回は fasttext をインストールするときに生じました。
+環境は Linux で、linuxbrew からインストールした gcc を使っているつもりでいます。これが今回ややこしいところです。
+
+ 解決策
+CC=gcc-14 CXX=g++-14 uv add fasttext  のように、インストール時に gcc の名前を明示すれば解決します。
+
+ 少し詳しく
+which ...]]></description><link>https://zenn.dev/sjh4/articles/db4adff5282ae7</link><guid isPermaLink="true">https://zenn.dev/sjh4/articles/db4adff5282ae7</guid><pubDate>Sat, 21 Dec 2024 22:56:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--mn1laQ7L--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:fasttext%2520%2520%25E3%2582%2592%2520pip%2520%25E3%2581%25A7%25E5%2585%25A5%25E3%2582%258C%25E3%2582%258B%25E3%2581%25A8%25E3%2581%258D%25E3%2581%25AE%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E3%2581%25A8%25E8%25A7%25A3%25E6%25B1%25BA%25E7%25AD%2596%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:sj%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY5Y2RiMjRhNWIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sj</dc:creator></item><item><title><![CDATA[KubuntuのVSCodeで日本語入力ができないことへの対応]]></title><description><![CDATA[日本語入力にはfcitx5を使用しています。
+しかし、VSCodeで日本語入力を行うことができませんでした。
+（半角/全角のようなIME切り替えキーを押してもローマ字しか入力できない）
+以下、解決方法記載します。
+
+ 原因調査
+fcitx5-diagnoseコマンドで環境を診断することができます。
+fcitx5-diagnoseは、Fcitx5（日本語入力システム）が正しく動作しているかを診断するためのツールです。このツールは、現在の環境変数や関連する設定をチェックしてくれます。
+主な診断項目として以下があります。
+
+環境変数: XMODIFIERS、GTK_IM_MODULE、QT_I...]]></description><link>https://zenn.dev/kitsunecat/articles/29c48b0f26ff84</link><guid isPermaLink="true">https://zenn.dev/kitsunecat/articles/29c48b0f26ff84</guid><pubDate>Sat, 21 Dec 2024 07:07:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--KyrpaFZH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Kubuntu%25E3%2581%25AEVSCode%25E3%2581%25A7%25E6%2597%25A5%25E6%259C%25AC%25E8%25AA%259E%25E5%2585%25A5%25E5%258A%259B%25E3%2581%258C%25E3%2581%25A7%25E3%2581%258D%25E3%2581%25AA%25E3%2581%2584%25E3%2581%2593%25E3%2581%25A8%25E3%2581%25B8%25E3%2581%25AE%25E5%25AF%25BE%25E5%25BF%259C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kitsunecat%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dnNE1lbmNackRFVjl6cUJuRWE4eV9WQVQzMkRZal93cGFOQ2I0M0JZPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kitsunecat</dc:creator></item><item><title><![CDATA[LinuxでPython 3.xをPythonコマンドで実行できるようにする方法]]></title><description><![CDATA[
+ 目的
+Linux環境でPython 3.12をインストール後にpythonコマンドでPython 3.12を実行させたかったため、シンボリックリンクの設定を行った。設定方法について簡単に備忘録として本記事に残す。
+
+ 環境
+
+WSL2で使用しているUbuntu 24.04
+Python 3.12
+
+
+ 設定方法
+
+ シンボリックリンク設定方法
+whichコマンドでPython 3.12がどこにインストールされているのかファイルパスを確認する。
+which python3.12
+/usr/bin/python3.12
+先ほどのファイルパスを使いシンボリックリンクを作成する。
+sudo ...]]></description><link>https://zenn.dev/ken2pg/articles/91f875eb434d62</link><guid isPermaLink="true">https://zenn.dev/ken2pg/articles/91f875eb434d62</guid><pubDate>Fri, 20 Dec 2024 15:37:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qvYAoKTs--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%25E3%2581%25A7Python%25203.x%25E3%2582%2592Python%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2581%25A7%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258B%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ken2pg%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RkNmYxNTIxNmIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ken2pg</dc:creator></item><item><title><![CDATA[Docker 版 GitLab と mailpit の HTTPS 対応:Linux 使い（略）Advent Calendar 2024]]></title><description><![CDATA[
+ はじめに
+これは「Linux 使いになりたい人のための Advent Calendar 2024」の記事です。
+筆者は、Web エンジニアを志望する人には、セルフホスト Git サービスを稼働させて利用することをオススメしています。もし Git を使ったことがないなら、Git を学ぶときに、セルフホスト Git サービスを稼働させることも視野に含めながら学習するのが効率的だと考えています。
+!
+この記事は、次の2つの記事の続きです。
+
+
+
+
+ Docker 版 GitLab と Mailpit の HTTPS 対応
+前回はセルフホスト Git サービスを稼働させるにあたり、HTTPS...]]></description><link>https://zenn.dev/hiro345/articles/20241201_advent_calendar_2024_16</link><guid isPermaLink="true">https://zenn.dev/hiro345/articles/20241201_advent_calendar_2024_16</guid><pubDate>Thu, 19 Dec 2024 12:24:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GpyFhJYK--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%2520%25E7%2589%2588%2520GitLab%2520%25E3%2581%25A8%2520mailpit%2520%25E3%2581%25AE%2520HTTPS%2520%25E5%25AF%25BE%25E5%25BF%259C%253ALinux%2520%25E4%25BD%25BF%25E3%2581%2584%25EF%25BC%2588%25E7%2595%25A5%25EF%25BC%2589Advent%2520Ca...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Hiroshi%2520Koyama%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2k5ZzdjLS0xTFk0S2k0LWw3dVFSSFZRdEdQcWZHYTlibVRJYUtFM0E9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Hiroshi Koyama</dc:creator></item><item><title><![CDATA[Linux環境でNode.jsをインストールする]]></title><description><![CDATA[
+ Node.jsとは
+https://nodejs.org/
+Node.jsは、JavaScriptをサーバーサイドで実行するための環境です。従来、JavaScriptはブラウザ上でのみ動作していましたが、Node.jsの登場により、サーバー上でもJavaScriptを使用できるようになりました。
+
+ nvmのインストール
+nvmコマンドが使用できない場合は、以下のページを参考にインストールしておきます。
+https://zenn.dev/ats030/articles/install-nvm-on-linux
+
+ Node.jsのインストール
+以下のコードでNode.jsをインストー...]]></description><link>https://zenn.dev/ats030/articles/install-nodejs-on-linux</link><guid isPermaLink="true">https://zenn.dev/ats030/articles/install-nodejs-on-linux</guid><pubDate>Thu, 19 Dec 2024 12:10:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--SulnJ6U1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25A7Node.js%25E3%2582%2592%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2582%25E3%2582%258C%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSUN1SHBxV21INFNBbC1aRVRkejRoTEwzejNvRWpqVGtmNVY2LWNRNk5ZVEd3djVzZ0k9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>あれ</dc:creator></item><item><title><![CDATA[Linux環境でnvmコマンドを使用できるようにする]]></title><description><![CDATA[
+ nvmとは
+https://github.com/nvm-sh/nvm
+nvmはNode Version Managerの略で、Node.jsの複数のバージョンを管理し、切り替えることができるツールです。
+
+ cURLのインストール
+curlコマンドが使用できない場合は、以下のページを参考にcURLをインストールしておきます。
+https://zenn.dev/ats030/articles/install-curl-on-linux
+
+ nvmのインストール
+nvmコマンドが使用できない場合、以下のページを参考に設定します。
+https://github.com/nvm-sh/nv...]]></description><link>https://zenn.dev/ats030/articles/install-nvm-on-linux</link><guid isPermaLink="true">https://zenn.dev/ats030/articles/install-nvm-on-linux</guid><pubDate>Thu, 19 Dec 2024 12:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--rOiJj4ZI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25A7nvm%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2582%2592%25E4%25BD%25BF%25E7%2594%25A8%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258B%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2582%25E3%2582%258C%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSUN1SHBxV21INFNBbC1aRVRkejRoTEwzejNvRWpqVGtmNVY2LWNRNk5ZVEd3djVzZ0k9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>あれ</dc:creator></item><item><title><![CDATA[Docker 版 GitLab と mailpit の HTTPS 準備編:Linux 使い（略）Advent Calendar 2024]]></title><description><![CDATA[
+ はじめに
+これは「Linux 使いになりたい人のための Advent Calendar 2024」の記事です。
+筆者は、Web エンジニアを志望する人には、セルフホスト Git サービスを稼働させて利用することをオススメしています。もし Git を使ったことがないなら、Git を学ぶときに、セルフホスト Git サービスを稼働させることも視野に含めながら学習するのが効率的だと考えています。
+!
+この記事は、次の記事の続きです。
+
+
+
+ Docker 版 GitLab と mailpit の HTTPS 対応（準備編）
+前回はセルフホスト Git サービスを稼働させるにあたり、HTTP...]]></description><link>https://zenn.dev/hiro345/articles/20241201_advent_calendar_2024_15</link><guid isPermaLink="true">https://zenn.dev/hiro345/articles/20241201_advent_calendar_2024_15</guid><pubDate>Wed, 18 Dec 2024 11:48:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--WlOxh0cs--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%2520%25E7%2589%2588%2520GitLab%2520%25E3%2581%25A8%2520mailpit%2520%25E3%2581%25AE%2520HTTPS%2520%25E6%25BA%2596%25E5%2582%2599%25E7%25B7%25A8%253ALinux%2520%25E4%25BD%25BF%25E3%2581%2584%25EF%25BC%2588%25E7%2595%25A5%25EF%25BC%2589Advent%2520C...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Hiroshi%2520Koyama%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2k5ZzdjLS0xTFk0S2k0LWw3dVFSSFZRdEdQcWZHYTlibVRJYUtFM0E9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Hiroshi Koyama</dc:creator></item><item><title><![CDATA[Guixのミラーサーバーを設定する]]></title><description><![CDATA[デフォルトのgitサーバーやSubstituteサーバーを使っていたところ、私の環境では通信速度が遅く不便だった。そこで上海交通大学が提供してくれているミラーサーバーを設定してみたら早くなったので、その方法を紹介する。
+
+ git
+guix pullするときに使うgitのミラーサーバーを設定する。~/.config/guix/channels.scmに以下のチャンネルを追加。
+
+~/.config/guix/channels.scm
+(list
+...
+      (channel
+       (inherit (car %default-channels))
+       (url ...]]></description><link>https://zenn.dev/kurome/articles/8bec5a8a18984e</link><guid isPermaLink="true">https://zenn.dev/kurome/articles/8bec5a8a18984e</guid><pubDate>Wed, 18 Dec 2024 02:07:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--P_6d9ySN--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Guix%25E3%2581%25AE%25E3%2583%259F%25E3%2583%25A9%25E3%2583%25BC%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2582%2592%25E8%25A8%25AD%25E5%25AE%259A%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kurome%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2Rhcmsvay5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kurome</dc:creator></item><item><title><![CDATA[Unix系システムの「sudo -su」を理解する：強力な権限管理と安全な活用法]]></title><description><![CDATA[
+ はじめに
+システム管理に携わると、一度は「sudo -su」コマンドに触れたことがあるはずです。このシンプルなコマンドが持つ「強力な力」と「伴う責任」を、きちんと理解していますか？
+sudoとsuの組み合わせによって、root権限を安全かつ効率的に使える一方、不用意な使い方はシステム全体に影響を及ぼす可能性もあります。
+この記事では、「sudo -su」の基本からその使い方、リスク、そしてより安全に運用するためのポイントを分かりやすく解説します。システム管理者の方も、初心者の方も、ぜひこの機会に理解を深めましょう！
+
+
+ 「sudo」と「su」：組み合わせの意味
+
+「sudo -su...]]></description><link>https://zenn.dev/lulucky/articles/11233fb6bd21e6</link><guid isPermaLink="true">https://zenn.dev/lulucky/articles/11233fb6bd21e6</guid><pubDate>Tue, 17 Dec 2024 15:44:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--VKlLKxRL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Unix%25E7%25B3%25BB%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%25E3%2581%25AE%25E3%2580%258Csudo%2520-su%25E3%2580%258D%25E3%2582%2592%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2599%25E3%2582%258B%25EF%25BC%259A%25E5%25BC%25B7%25E5%258A%259B%25E3%2581%25AA%25E6%25A8%25A9%25E9%2599%2590%25E7%25AE%25A1%25E7%2590%2586%25E3%2581%25A8%25E5%25AE%2589%25E5%2585%25A8%25E3%2581%25AA%25E6%25B4%25BB%25E7%2594%25A8%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:VPS%2520Pro%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzcxM2ZjMGZhYzEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>VPS Pro</dc:creator></item></channel></rss>
