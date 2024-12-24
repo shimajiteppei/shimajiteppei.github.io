@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「HTML」のフィード]]></title><description><![CDATA[Zennのトピック「HTML」のRSSフィードです]]></description><link>https://zenn.dev/topics/html</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/171432f5a6.png</url><title>Zennの「HTML」のフィード</title><link>https://zenn.dev/topics/html</link></image><generator>zenn.dev</generator><lastBuildDate>Tue, 24 Dec 2024 03:10:47 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/html/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[CSSで3Dのクリスマスツリーを作ろう]]></title><description><![CDATA[CSSのtransform-style: preserve-3dを利用すると要素を3D空間に配置することができます。
+これを使ってクリスマスにモミの樹を立てましょう。
+clip-pathを使って三角形の要素を作り、それを幹の周りに並べていきます。
+transform-origin: bottomを指定することによりtransformの基準点を木の中心にして各面の位置を計算しやすくしています。
+&lt;div class="tree"&gt;
+    &lt;div class="leaves top"&gt;
+        &lt;div class="leaf-1"&gt;&lt;/...]]></description><link>https://zenn.dev/koyo_k0/articles/874509e17a88e5</link><guid isPermaLink="true">https://zenn.dev/koyo_k0/articles/874509e17a88e5</guid><pubDate>Mon, 23 Dec 2024 15:13:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8oV7V6iV--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:CSS%25E3%2581%25A73D%25E3%2581%25AE%25E3%2582%25AF%25E3%2583%25AA%25E3%2582%25B9%25E3%2583%259E%25E3%2582%25B9%25E3%2583%2584%25E3%2583%25AA%25E3%2583%25BC%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258D%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:koyo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg4ZDM0MjIwMmQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>koyo</dc:creator></item><item><title><![CDATA[ChristmasだからCSSで雪を降らせよう]]></title><description><![CDATA[
+ はじめに
+こんにちは。GENDAエンジニアの西尾です。
+この記事は GENDA Advent Calendar 2024 24日目の記事です。
+https://qiita.com/advent-calendar/2024/genda
+今日はクリスマスイブなので、CSSで雪を降らせました。
+
+ TL;DR
+
+CSSでアニメーションを表現する方法は主に2つある。
+1つはtransitionを使った仕組みで、あるCSSプロパティの値が変化したとき、その変化をスムーズに行うような仕組みでアニメーションを表現できる。
+もう1つは@keyframesとanimationプロパティを利用した仕組み...]]></description><link>https://zenn.dev/genda_jp/articles/1af37706220df2</link><guid isPermaLink="true">https://zenn.dev/genda_jp/articles/1af37706220df2</guid><pubDate>Mon, 23 Dec 2024 14:07:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ZLFQzA7Y--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Christmas%25E3%2581%25A0%25E3%2581%258B%25E3%2582%2589CSS%25E3%2581%25A7%25E9%259B%25AA%25E3%2582%2592%25E9%2599%258D%25E3%2582%2589%25E3%2581%259B%25E3%2582%2588%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Kento%2520Nishio%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNiM2M1MjhkNjguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:GENDA%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M5ZTQxMzYwZWIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kento Nishio</dc:creator></item><item><title><![CDATA[input type="number"で電話番号を入力させないで！]]></title><description><![CDATA[電話番号入力欄って数字しか入れてほしくないから、input type="tel"じゃなくてinput type="number"にすれば入力制御のあれこれをしなくて済むのでは？と思いませんか？
+たとえば電話番号入力欄なら、以下のように制御したら使い勝手が良さそうです。
+
+入力できるのは数字のみ
+英数字やひらがな・カタカナ・漢字・記号は入力させない
+入力できる文字列の長さは20文字まで
+
+やっぱりinput type="number"にすれば全部解決できるじゃん！とますます思えてきますよね。でも電話番号はinput type="number"で入力させないでください！
+
+ NGな理由
+NG...]]></description><link>https://zenn.dev/928sekine/articles/45200ef214b033</link><guid isPermaLink="true">https://zenn.dev/928sekine/articles/45200ef214b033</guid><pubDate>Mon, 23 Dec 2024 12:12:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fNBvt70z--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:input%2520type%253D%2522number%2522%25E3%2581%25A7%25E9%259B%25BB%25E8%25A9%25B1%25E7%2595%25AA%25E5%258F%25B7%25E3%2582%2592%25E5%2585%25A5%25E5%258A%259B%25E3%2581%2595%25E3%2581%259B%25E3%2581%25AA%25E3%2581%2584%25E3%2581%25A7%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259B%25E3%2581%258D%25E3%2581%25AD%25E3%2582%258A%25E3%2581%25AA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAyNDQ3MGIzZjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>せきねりな</dc:creator></item><item><title><![CDATA[ローカルのHTMLをGradleタスクでstrings.xmlに変換してJetpack composeで表示する]]></title><description><![CDATA[
+ なぜそんなことするの？
+利用規約など、一部を装飾する場合が多いテキストを都度 Spannable で装飾するのは面倒だから。
+あとは、個人開発をしている場合は利用規約をホスティングするのも、やや手間だなっていう短絡的思考です。
+
+ メリット・デメリット
+
+ メリット
+
+都度 Spannable で装飾しなくていい。
+WebView で表示するよりライト/ダークのアプリテーマを適応させやすい。
+Android 特有の Xml エスケープをしなくていい。
+
+
+ デメリット
+
+そもそもそんなことしている案件ある？
+
+利用規約が更新されるたびに同意してもらうような殊勝な案件なら。。。(IoT...]]></description><link>https://zenn.dev/u_chan/articles/a10a2b0440ae30</link><guid isPermaLink="true">https://zenn.dev/u_chan/articles/a10a2b0440ae30</guid><pubDate>Mon, 23 Dec 2024 10:02:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1Se1Jb3c--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25AB%25E3%2583%25AB%25E3%2581%25AEHTML%25E3%2582%2592Gradle%25E3%2582%25BF%25E3%2582%25B9%25E3%2582%25AF%25E3%2581%25A7strings.xml%25E3%2581%25AB%25E5%25A4%2589%25E6%258F%259B%25E3%2581%2597%25E3%2581%25A6Jetpack%2520compose%25E3%2581%25A7%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2586%25E3%2583%25BC%25E3%2581%25A1%25E3%2582%2583%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzljYTk3ODY3ZDMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ゆーちゃん</dc:creator></item><item><title><![CDATA[Chromeローカルファイル保存時に自動表示更新]]></title><description><![CDATA[
+ はじめに
+CCSの勉強をするため、テキストエディタで入力・保存後ブラウザでリロードを押してたしかてめいたが、簡易サーバーなどを使わずに、ホットリロードみたいなことができないかと思い調べたところ、Google Chromeの標準機能に方法がありました。
+
+ 設定方法
+ChromeのF12でDevToolを表示し、ソース→ワークスペースを選択します。
+フォルダをドロップするか、フォルダを選択します。
+
+上部にアクセスを確認が表示されるので、「許可する」を選択します。
+
+ワークスペースにファイルが表示されます。ブラウザで表示すると、緑丸が表示されます。表示されない場合は一度リロードしてくだ...]]></description><link>https://zenn.dev/tryeverything/articles/a0007_chrome_autoreload</link><guid isPermaLink="true">https://zenn.dev/tryeverything/articles/a0007_chrome_autoreload</guid><pubDate>Mon, 23 Dec 2024 10:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--tivVMeHN--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Chrome%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25AB%25E3%2583%25AB%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E4%25BF%259D%25E5%25AD%2598%25E6%2599%2582%25E3%2581%25AB%25E8%2587%25AA%25E5%258B%2595%25E8%25A1%25A8%25E7%25A4%25BA%25E6%259B%25B4%25E6%2596%25B0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259F%25E3%2582%2593%25E3%2581%2595%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc2NDc5YTUwMzguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>たんさん</dc:creator></item><item><title><![CDATA[ConoHa VPSを使ってHTMLを表示するまで]]></title><description><![CDATA[!
+この記事は、「ハックツ&amp;YOSHINANI合同アドベントカレンダー Advent Calendar 2024」の22日目です。
+
+
+ はじめに
+こんにちは、今年もあとわずかとなりました、それだけです。
+今回はレンタルサーバー(ConoHa VPS)を用いて、実際にhtmlを表示するまでの流れなどを共有していこうと思ったり思わなかったり。
+
+ ConoHa VPSとは？
+GMOが提供する仮想プライベートサーバー（VPS）サービスで、
+物理サーバーを仮想化して、そのサーバー環境を利用できるサービスです
+（物理サーバーはこういうやつ）
+
+
+ SSH Keyの作成
+今回の使用するサー...]]></description><link>https://zenn.dev/hackz/articles/b3d2f0037f762f</link><guid isPermaLink="true">https://zenn.dev/hackz/articles/b3d2f0037f762f</guid><pubDate>Sun, 22 Dec 2024 15:56:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hDXoH4y5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ConoHa%2520VPS%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6HTML%25E3%2582%2592%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2599%25E3%2582%258B%25E3%2581%25BE%25E3%2581%25A7%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%2584%25E3%2581%25A3%25E3%2581%259B%25E3%2581%2584%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2YzNjQxNzY2YWMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Hackz%2520Inc.%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzEyMjNkMTY3Y2MuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>いっせい</dc:creator></item><item><title><![CDATA[Vueで<details>と<dialog>を扱う方法]]></title><description><![CDATA[これは LAPRAS Advent Calendar 2024の23日目の記事です。
+https://qiita.com/advent-calendar/2024/lapras
+
+ 概要
+2024年12月現在、&lt;details&gt;要素と&lt;dialog&gt;要素をv-modelで制御することはできません。
+（このPRがリリースされればできるようになります）
+現時点では、それらの要素をVueで扱うにはやや特殊な方法が必要です。
+本記事ではその方法を解説します。
+
+ &lt;details&gt;要素
+
+ 実装
+
+
+ コード
+&lt;details
+  :open="isDe...]]></description><link>https://zenn.dev/popopon/articles/how-to-integrate-details-element-with-vue</link><guid isPermaLink="true">https://zenn.dev/popopon/articles/how-to-integrate-details-element-with-vue</guid><pubDate>Sun, 22 Dec 2024 15:01:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--o3s0JDBa--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Vue%25E3%2581%25A7%253Cdetails%253E%25E3%2581%25A8%253Cdialog%253E%25E3%2582%2592%25E6%2589%25B1%25E3%2581%2586%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2597%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzgwYzhlNDRjMDMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>しん</dc:creator></item><item><title><![CDATA[Doshisha SSO emoji autocomplete hack]]></title><description><![CDATA[
+ 私たちの研究室
+https://nisk.doshisha.ac.jp/
+
+ アドベントカレンダー23日目〜
+https://nislab-advent-calendar-2024-12.vercel.app/
+
+ Doshisha SSO emoji autocomplete hack
+
+Article by エスカーニョ　マルケス、ユイス
+
+The Doshisha Single Sing On has multiple two factor mechanisms to login into its ecosystem. In this article I will show y...]]></description><link>https://zenn.dev/nislab/articles/c8b0f7a6c3b988</link><guid isPermaLink="true">https://zenn.dev/nislab/articles/c8b0f7a6c3b988</guid><pubDate>Sun, 22 Dec 2024 07:26:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--WhxWTd2O--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:Doshisha%2520SSO%2520emoji%2520autocomplete%2520hack%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:lluise%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzYzOTk4ZGRhN2IuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:NISLab%2520%25E5%25B0%258F%25E6%259D%25BF%25E7%25A0%2594%25E7%25A9%25B6%25E5%25AE%25A4%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSXcteno1SlRqbTJrREpQWEZpWlBLZW1NNmx5Uy1EbTlPV01TYkdKM05EOXlLNFV4QUw9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>lluise</dc:creator></item><item><title><![CDATA[Three.jsで3Dの矢印を作りました！]]></title><description><![CDATA[
+ 今回はThree.jsで3Dの矢印を作ってみました。
+３Ｄの矢印を作成する、javascript、CSS、HTMLです。
+
+ HTML＆JavaScript
+これを矢印を描画したい箇所に記載します。
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Three.js矢印テスト&lt;/title&gt;
+&lt;style&gt;
+.animation-container {
+width: 360px;
+height: 200px;
+margin: 0 auto;
+padding: 0;
+position: relative;
+background-col...]]></description><link>https://zenn.dev/ausssxi/articles/dbd258345a18ab</link><guid isPermaLink="true">https://zenn.dev/ausssxi/articles/dbd258345a18ab</guid><pubDate>Sun, 22 Dec 2024 00:20:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--cIrdR1aX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Three.js%25E3%2581%25A73D%25E3%2581%25AE%25E7%259F%25A2%25E5%258D%25B0%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258A%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%2586%2585%25E7%2594%25B0%25E5%258E%259A%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VjNDgzNzUzOWMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>内田厚</dc:creator></item><item><title><![CDATA[Cloudflare Pages Functionで型安全なHTMLテンプレートとしてTSXを使う]]></title><description><![CDATA[
+ デモ
+デモページを作成しました。以下のURLからアクセスできます。各ページはリクエストの都度サーバーサイドでTSXをレンダリングしています。
+https://contoso-japan.pages.dev
+GitHubリポジトリ
+https://github.com/moutend/rendering-tsx-files-on-cloudflare-pages-function
+
+ 目的
+Cloudflare Pagesの低いコストと運用の手軽さを生かしつつWebサイトを構築するのが目的です。さらに追加で以下の要件も満たす手段を検討しました。
+
+リクエストの都度サーバーサイドでHTM...]]></description><link>https://zenn.dev/moutend/articles/c1f5c63cbd83f3</link><guid isPermaLink="true">https://zenn.dev/moutend/articles/c1f5c63cbd83f3</guid><pubDate>Sat, 21 Dec 2024 09:41:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0eVbfMbE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Cloudflare%2520Pages%2520Function%25E3%2581%25A7%25E5%259E%258B%25E5%25AE%2589%25E5%2585%25A8%25E3%2581%25AAHTML%25E3%2583%2586%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AC%25E3%2583%25BC%25E3%2583%2588%25E3%2581%25A8%25E3%2581%2597%25E3%2581%25A6TSX%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yoshiyuki%2520Koyanagi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2luT1BUc1lmTWF3NkFTeUViN24wS2cza184NktOcDh0WUtIbGh0PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yoshiyuki Koyanagi</dc:creator></item><item><title><![CDATA[fullPage.jsで画像や背景を遅延読み込みする方法]]></title><description><![CDATA[
+ はじめに
+遅延読み込みライブラリは、fullPage.js では機能しない場合があります。
+その理由は、fullPage.jsが従来の方法で「スクロール」イベントをトリガーしないためです。
+代わりに、fullPage.jsはCSSトランジションまたはJavaScriptを使用してスクロールをシミュレートします
+
+ fullPage.jsで遅延読み込みを行う方法
+
+ 方法1: 簡単な方法
+現在の遅延読み込み技術をfullPage.jsと組み合わせる最も簡単な方法は、fullPage.jsのオプションscrollBar:trueを使用することです。
+これにより、fullPage.jsは他...]]></description><link>https://zenn.dev/alvarotrigo/articles/8083e37bcfa6de</link><guid isPermaLink="true">https://zenn.dev/alvarotrigo/articles/8083e37bcfa6de</guid><pubDate>Fri, 20 Dec 2024 11:31:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ZCB1_713--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:fullPage.js%25E3%2581%25A7%25E7%2594%25BB%25E5%2583%258F%25E3%2582%2584%25E8%2583%258C%25E6%2599%25AF%25E3%2582%2592%25E9%2581%2585%25E5%25BB%25B6%25E8%25AA%25AD%25E3%2581%25BF%25E8%25BE%25BC%25E3%2581%25BF%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Alvaro%2520Trigo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAzZTc5MDBkNTQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Alvaro Trigo</dc:creator></item><item><title><![CDATA[【css】スクロールバーのデザインをcssで変更する]]></title><description><![CDATA[
+ 1.縦スクロールのデザイン
+
+ 1-1.htmlを記述する
+&lt;div id="scroll-layout-x"&gt;
+  &lt;ul&gt;
+    &lt;li&gt;北海道&lt;/li&gt;
+    &lt;li&gt;青森県&lt;/li&gt;
+    &lt;li&gt;岩手県&lt;/li&gt;
+    &lt;li&gt;宮城県&lt;/li&gt;
+    &lt;li&gt;秋田県&lt;/li&gt;
+    &lt;li&gt;山形県&lt;/li&gt;
+    &lt;li&gt;福島県&lt;/li&gt;
+    &lt;li&gt;茨城...]]></description><link>https://zenn.dev/saru_no_note/articles/7085ab29ed69ce</link><guid isPermaLink="true">https://zenn.dev/saru_no_note/articles/7085ab29ed69ce</guid><pubDate>Thu, 19 Dec 2024 13:03:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GoRY08jc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590css%25E3%2580%2591%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%25AB%25E3%2583%2590%25E3%2583%25BC%25E3%2581%25AE%25E3%2583%2587%25E3%2582%25B6%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%2592css%25E3%2581%25A7%25E5%25A4%2589%25E6%259B%25B4%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:saru%2540%25E6%2596%2587%25E7%25B3%25BB%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2580%25E3%2583%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA4MWU3ZDhiYTcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>saru@文系コーダー</dc:creator></item><item><title><![CDATA[【css】cssだけでくの字の矢印をつくる]]></title><description><![CDATA[ジェネレーターを使えば良いんだけど、自分で法則を見つけたかった、、、、けど無理だった。
+
+ 1.htmlを記述する
+&lt;span class="arrow-left"&gt;&lt;/span&gt;
+&lt;span class="arrow-right"&gt;&lt;/span&gt;
+&lt;span class="arrow-top"&gt;&lt;/span&gt;
+&lt;span class="arrow-bottom"&gt;&lt;/span&gt;
+
+ 2.cssを記述する
+[class^="arrow"]{
+  position: relative;
+  di...]]></description><link>https://zenn.dev/saru_no_note/articles/8d536e58d283cd</link><guid isPermaLink="true">https://zenn.dev/saru_no_note/articles/8d536e58d283cd</guid><pubDate>Thu, 19 Dec 2024 11:25:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7lEWkfK3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590css%25E3%2580%2591css%25E3%2581%25A0%25E3%2581%2591%25E3%2581%25A7%25E3%2581%258F%25E3%2581%25AE%25E5%25AD%2597%25E3%2581%25AE%25E7%259F%25A2%25E5%258D%25B0%25E3%2582%2592%25E3%2581%25A4%25E3%2581%258F%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:saru%2540%25E6%2596%2587%25E7%25B3%25BB%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2580%25E3%2583%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA4MWU3ZDhiYTcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>saru@文系コーダー</dc:creator></item><item><title><![CDATA[【初学者によるまとめ】この一冊で全部わかるWeb技術の基本　「Chapter4」＞「04 CSS」]]></title><description><![CDATA[目的：「イラスト図解式 この一冊で全部わかるWeb技術の基本」の要点を自分なりにまとめ、Qiitaへアウトプットして理解力の向上に努める。
+
+
+
+注意点
+
+
+
+
+🤔 ←この絵文字の文章は個人的な見解になります。的外れなこともあるかと思います。
+
+
+例）🤔&lt;(感想、考察、疑問点など)
+
+
+
+
+（参考書籍）
+
+イラスト図解式 この一冊で全部わかるWeb技術の基本
+
+（参考サイト）
+
+MDN
+
+
+
+ 概要
+!
+CSS（Cascading Style Sheets）
+
+主にHTMLの表示方法について設定するファイル
+
+具体的には装飾などデザイン面で使用される
+
+
+
+
+
+ HTMLの体裁を記...]]></description><link>https://zenn.dev/recaldenta/articles/be8b60bb1b5e90</link><guid isPermaLink="true">https://zenn.dev/recaldenta/articles/be8b60bb1b5e90</guid><pubDate>Thu, 19 Dec 2024 10:34:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--HMpVCNuH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%2588%259D%25E5%25AD%25A6%25E8%2580%2585%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258B%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2580%2591%25E3%2581%2593%25E3%2581%25AE%25E4%25B8%2580%25E5%2586%258A%25E3%2581%25A7%25E5%2585%25A8%25E9%2583%25A8%25E3%2582%258F%25E3%2581%258B%25E3%2582%258BWeb%25E6%258A%2580%25E8%25A1%2593%25E3%2581%25AE%25E5%259F%25BA%25E6%259C%25AC%25E3%2580%2580%25E3%2580%258CChapter4%25E3%2580%258D%25EF%25BC%259E%25E3%2580%258C04%2520CSS%25E3%2580%258D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nakad119%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSkJLSE95b1lrb3VsYzBIUm41T2ctWTBoOFpZMDlROWpYUUNpRFM2MUgyekFiMHEtaz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nakad119</dc:creator></item><item><title><![CDATA[【初学者によるまとめ】この一冊で全部わかるWeb技術の基本　「Chapter4」＞「03 XML」]]></title><description><![CDATA[目的：「イラスト図解式 この一冊で全部わかるWeb技術の基本」の要点を自分なりにまとめ、Qiitaへアウトプットして理解力の向上に努める。
+
+
+
+注意点
+
+
+
+
+🤔 ←この絵文字の文章は個人的な見解になります。的外れなこともあるかと思います。
+
+
+例）🤔&lt;(感想、考察、疑問点など)
+
+
+
+
+（参考書籍）
+
+イラスト図解式 この一冊で全部わかるWeb技術の基本
+
+（参考サイト）
+
+BAsixs
+総務省
+SEOタイムズ
+microsoft.com
+XHTML 1.0 文書
+
+
+
+ XML
+:::note info
+
+
+XML（eXtensible Markup Language）…「拡...]]></description><link>https://zenn.dev/recaldenta/articles/2eb883bb743251</link><guid isPermaLink="true">https://zenn.dev/recaldenta/articles/2eb883bb743251</guid><pubDate>Thu, 19 Dec 2024 10:33:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--MfDmfXTJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%2588%259D%25E5%25AD%25A6%25E8%2580%2585%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258B%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2580%2591%25E3%2581%2593%25E3%2581%25AE%25E4%25B8%2580%25E5%2586%258A%25E3%2581%25A7%25E5%2585%25A8%25E9%2583%25A8%25E3%2582%258F%25E3%2581%258B%25E3%2582%258BWeb%25E6%258A%2580%25E8%25A1%2593%25E3%2581%25AE%25E5%259F%25BA%25E6%259C%25AC%25E3%2580%2580%25E3%2580%258CChapter4%25E3%2580%258D%25EF%25BC%259E%25E3%2580%258C03%2520XML%25E3%2580%258D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nakad119%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSkJLSE95b1lrb3VsYzBIUm41T2ctWTBoOFpZMDlROWpYUUNpRFM2MUgyekFiMHEtaz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nakad119</dc:creator></item><item><title><![CDATA[【初学者によるまとめ】この一冊で全部わかるWeb技術の基本　「Chapter4」＞「02 Webページで使用される画像形式」]]></title><description><![CDATA[目的：「イラスト図解式 この一冊で全部わかるWeb技術の基本」の要点を自分なりにまとめ、Qiitaへアウトプットして理解力の向上に努める。
+
+
+
+注意点
+
+
+
+
+🤔 ←この絵文字の文章は個人的な見解になります。的外れなこともあるかと思います。
+
+
+例）🤔&lt;(感想、考察、疑問点など)
+
+
+
+
+（参考書籍）
+
+イラスト図解式 この一冊で全部わかるWeb技術の基本
+HTML5 &amp; CSS3 デザインレシピ集
+
+（参考サイト）
+
+ラクスエンジニアブログ
+株式会社アーティス
+
+
+
+ 画像img要素で表示する
+
+画像はimg要素で表示する
+
+img要素には閉じタグは必要無い
+src属性...]]></description><link>https://zenn.dev/recaldenta/articles/cdb43344c588f7</link><guid isPermaLink="true">https://zenn.dev/recaldenta/articles/cdb43344c588f7</guid><pubDate>Thu, 19 Dec 2024 10:32:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vK6dn_dt--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%2588%259D%25E5%25AD%25A6%25E8%2580%2585%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258B%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2580%2591%25E3%2581%2593%25E3%2581%25AE%25E4%25B8%2580%25E5%2586%258A%25E3%2581%25A7%25E5%2585%25A8%25E9%2583%25A8%25E3%2582%258F%25E3%2581%258B%25E3%2582%258BWeb%25E6%258A%2580%25E8%25A1%2593%25E3%2581%25AE%25E5%259F%25BA%25E6%259C%25AC%25E3%2580%2580%25E3%2580%258CChapter4%25E3%2580%258D%25EF%25BC%259E%25E3%2580%258C02%2520Web%25E3%2583%259A%25E3%2583%25BC%25E3%2582%25B8%25E3%2581%25A7%25E4%25BD%25BF%25E7%2594%25A8%25E3%2581%2595%25E3%2582%258C%25E3%2582%258B...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nakad119%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSkJLSE95b1lrb3VsYzBIUm41T2ctWTBoOFpZMDlROWpYUUNpRFM2MUgyekFiMHEtaz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nakad119</dc:creator></item><item><title><![CDATA[【初学者によるまとめ】この一冊で全部わかるWeb技術の基本　「Chapter4」＞「01 HTML」]]></title><description><![CDATA[目的：「イラスト図解式 この一冊で全部わかるWeb技術の基本」の要点を自分なりにまとめ、Qiitaへアウトプットして理解力の向上に努める。
+
+
+
+注意点
+
+
+
+
+"HTMLの発展"と"HTML文書の構造"の順で記述しております
+
+
+🤔 ←この絵文字の文章は個人的な見解になります。的外れなこともあるかと思います。
+
+
+例）🤔&lt;(感想、考察、疑問点など)
+
+
+
+
+（参考書籍）
+
+イラスト図解式 この一冊で全部わかるWeb技術の基本
+
+（参考サイト）
+
+
+
+
+
+ HTMLの発展
+
+HTMLは当初は単に「文書（CSSなどの装飾、画像、埋め込み動画などは除く）」「別文書への参照リンク」を持つ...]]></description><link>https://zenn.dev/recaldenta/articles/8e20842e8ed50d</link><guid isPermaLink="true">https://zenn.dev/recaldenta/articles/8e20842e8ed50d</guid><pubDate>Thu, 19 Dec 2024 10:31:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--pFYKNA4j--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%2588%259D%25E5%25AD%25A6%25E8%2580%2585%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258B%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2580%2591%25E3%2581%2593%25E3%2581%25AE%25E4%25B8%2580%25E5%2586%258A%25E3%2581%25A7%25E5%2585%25A8%25E9%2583%25A8%25E3%2582%258F%25E3%2581%258B%25E3%2582%258BWeb%25E6%258A%2580%25E8%25A1%2593%25E3%2581%25AE%25E5%259F%25BA%25E6%259C%25AC%25E3%2580%2580%25E3%2580%258CChapter4%25E3%2580%258D%25EF%25BC%259E%25E3%2580%258C01%2520HTML%25E3%2580%258D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nakad119%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSkJLSE95b1lrb3VsYzBIUm41T2ctWTBoOFpZMDlROWpYUUNpRFM2MUgyekFiMHEtaz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nakad119</dc:creator></item><item><title><![CDATA[〜Flexbox怖くない〜]]></title><description><![CDATA[Social Databank Advent Calendar 2024 の19日目です！
+突然ですが、みなさん、
+フロントを作る際に、このような悩みをもったことはないですか？
+「このフォームとボタンを綺麗に横に並べたいだけなのに、、
+なぜだか上手くいかない！もうわけがわからんっ！！」
+
+そんな時に便利なものがあります！
+✨Flexbox✨
+Flexboxとは、
+正式名称はFlexible Box Layout Moduleといい、
+複雑なレイアウトも、簡単に作ることができるCSSのレイアウト手法です！
+細かい所の自動調整もしてくれて、とっても便利！
+これが分かれば、フロント作りがかなり...]]></description><link>https://zenn.dev/sdb_blog/articles/yasus_article_003</link><guid isPermaLink="true">https://zenn.dev/sdb_blog/articles/yasus_article_003</guid><pubDate>Thu, 19 Dec 2024 01:42:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Q5kl5MVi--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%259CFlexbox%25E6%2580%2596%25E3%2581%258F%25E3%2581%25AA%25E3%2581%2584%25E3%2580%259C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:yasu%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzMyODFjNDczOTguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25BD%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A3%25E3%2583%25AB%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%2590%25E3%2583%25B3%25E3%2582%25AF%2520%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzUzOWExZmIyMjIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yasu</dc:creator></item><item><title><![CDATA[<input>要素の日本語入力・カーソル挙動と Android での onKeyDown の制御]]></title><description><![CDATA[「Applibot Advent Calendar 2024」 19日目の記事になります。
+
+ はじめに
+&lt;input&gt; は一見シンプルですが、日本語入力 (IME) やモバイル環境、特にAndroid では独特の挙動があり、開発者を悩ませることがあります
+実際に私もかなり苦しみました😢
+この記事では、これらの課題と解決策を、実際のコード例とともに解説します
+
+ 対象読者:
+
+Web 開発経験者 (HTML, CSS, JavaScript, TypeScript などの基礎知識がある方)
+日本語入力周りの処理で困っている方
+&lt;input&gt; 要素のカーソル位置制御...]]></description><link>https://zenn.dev/dodoy/articles/a123b953549c4d</link><guid isPermaLink="true">https://zenn.dev/dodoy/articles/a123b953549c4d</guid><pubDate>Wed, 18 Dec 2024 16:59:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Zr3ISrZQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%253Cinput%253E%25E8%25A6%2581%25E7%25B4%25A0%25E3%2581%25AE%25E6%2597%25A5%25E6%259C%25AC%25E8%25AA%259E%25E5%2585%25A5%25E5%258A%259B%25E3%2583%25BB%25E3%2582%25AB%25E3%2583%25BC%25E3%2582%25BD%25E3%2583%25AB%25E6%258C%2599%25E5%258B%2595%25E3%2581%25A8%2520Android%2520%25E3%2581%25A7%25E3%2581%25AE%2520onKeyDown%2520%25E3%2581%25AE%25E5%2588%25B6%25E5%25BE%25A1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A9%25E3%2581%25A9%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2hxZDA0NXZOOXBYekhWbE5kNFlkMkp6eFVZYjJ2UjVPZ2tUYjdLPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>どど</dc:creator></item><item><title><![CDATA[メールアドレスの優しいバリデーションとは]]></title><description><![CDATA[
+ はじめに
+アカウント登録のためのページを作成する際、ほぼ必須といってよい入力項目として、ユーザーID、パスワード、そしてメールアドレスがあります。
+ユーザーID、パスワードについては要件によって正しいバリデーションは変わるかと思いますが、メールアドレスについては、必ずアットマークがついているなどのルールが存在することは明らかですから、正しいバリデーションが存在していそうです。
+そのため、実装も既存のバリデーションのライブラリを利用すれば簡単に終わる…と思っていました。
+しかしながら、私は悩みました…なぜならメールアドレスの場合、正しいバリデーションがユーザーにとって優しいバリデーショ...]]></description><link>https://zenn.dev/namos_blog/articles/a96a5a33fe7cf2</link><guid isPermaLink="true">https://zenn.dev/namos_blog/articles/a96a5a33fe7cf2</guid><pubDate>Mon, 16 Dec 2024 22:38:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--aR0wXMtd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%25A1%25E3%2583%25BC%25E3%2583%25AB%25E3%2582%25A2%25E3%2583%2589%25E3%2583%25AC%25E3%2582%25B9%25E3%2581%25AE%25E5%2584%25AA%25E3%2581%2597%25E3%2581%2584%25E3%2583%2590%25E3%2583%25AA%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2581%25A8%25E3%2581%25AF%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:y-kashima%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhiMjQyZTM1NzguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:NAMOS%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzUwNTJkYjM4NDcuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>y-kashima</dc:creator></item></channel></rss>
