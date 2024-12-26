@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Rust」のフィード]]></title><description><![CDATA[Zennのトピック「Rust」のRSSフィードです]]></description><link>https://zenn.dev/topics/rust</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ba09661577.png</url><title>Zennの「Rust」のフィード</title><link>https://zenn.dev/topics/rust</link></image><generator>zenn.dev</generator><lastBuildDate>Thu, 26 Dec 2024 06:30:55 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/rust/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Tauriアプリにウィンドウマネージャーを実装する]]></title><description><![CDATA[Tauriを使ってアプリのウィンドウのサイズや位置を管理できるようにしました。
+具体的には、ウィンドウのサイズを増減させたり、画面の特定の位置に移動させる機能を実装します。
+
+
+ 前提設定
+
+ tauri.conf.json
+参考にしてみてください。
+tauri.conf.json
+tauri.conf.json{
+  "build": {
+    "beforeDevCommand": "npm run dev",
+    "beforeBuildCommand": "npm run build",
+    "devPath": "http://localhost:1420",
+   ...]]></description><link>https://zenn.dev/ocat/articles/22b773c2282742</link><guid isPermaLink="true">https://zenn.dev/ocat/articles/22b773c2282742</guid><pubDate>Thu, 26 Dec 2024 01:48:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--P9oVjB6Z--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Tauri%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2581%25AB%25E3%2582%25A6%25E3%2582%25A3%25E3%2583%25B3%25E3%2583%2589%25E3%2582%25A6%25E3%2583%259E%25E3%2583%258D%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%25A3%25E3%2583%25BC%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Ocat%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VkZjUxNWYzOGUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Ocat</dc:creator></item><item><title><![CDATA[Linux上のtauriで画面に何も映らない問題への対応]]></title><description><![CDATA[
+ 環境
+OS    : Arch Linux x86_64
+Host  : ASUS MB
+Kernel: Linux 6.12.6-arch1-1
+Shell : fish 3.7.1
+DE    : Cinnamon 6.4.3
+WM    : Muffin (X11)
+CPU   : Intel(R) Core(TM) i7-4790K (8) @ 4.60 GHz
+GPU   : NVIDIA GeForce GTX 1070 [Discrete]
+
+ 問題の概要
+
+pnpm create tauri-appでtauriのプロジェクトを起動したあとpnpm tauri devを...]]></description><link>https://zenn.dev/aqyuki/articles/9a411bf51263c6</link><guid isPermaLink="true">https://zenn.dev/aqyuki/articles/9a411bf51263c6</guid><pubDate>Wed, 25 Dec 2024 23:49:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--RovU70zd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%25E4%25B8%258A%25E3%2581%25AEtauri%25E3%2581%25A7%25E7%2594%25BB%25E9%259D%25A2%25E3%2581%25AB%25E4%25BD%2595%25E3%2582%2582%25E6%2598%25A0%25E3%2582%2589%25E3%2581%25AA%25E3%2581%2584%25E5%2595%258F%25E9%25A1%258C%25E3%2581%25B8%25E3%2581%25AE%25E5%25AF%25BE%25E5%25BF%259C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2597%25E3%2582%258D%25E3%2581%25AD%2520%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRkMDJjNjQ5MjIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>しろね✨</dc:creator></item><item><title><![CDATA[Rust/Ruby向けのインラインREPLのVS Code拡張機能を公開しました]]></title><description><![CDATA[!
+この記事は Rust アドベントカレンダー 2024 および フィヨルドブートキャンプ Advent Calendar 2024 の 25 日目の記事です。
+
+
+ はじめに
+プログラミング言語の学習や開発において、REPL は非常に強力なツールです。特に Rust のような静的型付け言語では、コードの動作を素早く確認できる REPL の存在は、開発効率を大きく向上させます。
+私は開発において以下のような課題を感じており、これを解決するために VS Code 向けのインライン REPL 拡張機能の開発を始めました：
+
+
+エディタ機能との統合
+
+VS Code で Rust Analyz...]]></description><link>https://zenn.dev/mh/articles/73aab10616892d</link><guid isPermaLink="true">https://zenn.dev/mh/articles/73aab10616892d</guid><pubDate>Wed, 25 Dec 2024 11:11:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ele0xpMm--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%252FRuby%25E5%2590%2591%25E3%2581%2591%25E3%2581%25AE%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%25B3REPL%25E3%2581%25AEVS%2520Code%25E6%258B%25A1%25E5%25BC%25B5%25E6%25A9%259F%25E8%2583%25BD%25E3%2582%2592%25E5%2585%25AC%25E9%2596%258B%25E3%2581%2597%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mh-mobile%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE0OTRjZDRjNTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mh-mobile</dc:creator></item><item><title><![CDATA[Rustのマクロで正規表現のmatchを高速で行えるクレートを作ってみた...?]]></title><description><![CDATA[
+ はじめに
+こんにちは。aq2rです。
+最近Rustのマクロ、特に procedural macro が面白いなーと思いはまっています。
+そこで、何かマクロを書きたいけどいい感じのネタないかなーと思っていたところ、
+正規表現をもとにコンパイル時にif文に展開できれば高速で正規表現の判定ができるんじゃない？
+というのを思いついたので、このようなクレートを作って見ました。
+(crates.ioへの公開はしていません。)
+https://github.com/aq2r/reif
+!
+本気で高速化したいというよりただマクロを書くネタが欲しかっただけなので、Rust Regexクレートと完全に同...]]></description><link>https://zenn.dev/aq2r/articles/73b4e82d68adbe</link><guid isPermaLink="true">https://zenn.dev/aq2r/articles/73b4e82d68adbe</guid><pubDate>Wed, 25 Dec 2024 07:29:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--L671NlBk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25AE%25E3%2583%259E%25E3%2582%25AF%25E3%2583%25AD%25E3%2581%25A7%25E6%25AD%25A3%25E8%25A6%258F%25E8%25A1%25A8%25E7%258F%25BE%25E3%2581%25AEmatch%25E3%2582%2592%25E9%25AB%2598%25E9%2580%259F%25E3%2581%25A7%25E8%25A1%258C%25E3%2581%2588%25E3%2582%258B%25E3%2582%25AF%25E3%2583%25AC%25E3%2583%25BC%25E3%2583%2588%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F...%253F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:aq2r%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2IyYTQ3YTRiNjcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>aq2r</dc:creator></item><item><title><![CDATA[[小ネタ] GoとRustでLambdaを比較してみた]]></title><description><![CDATA[
+ はじめに
+こんにちは！株式会社ブロードエッジ・ウェアリンク CTOの高丸です。
+今回は、Qiita Advent Calendar 2024の21日目の記事です。
+今回も小ネタではありますが、技術を楽しく実験してみたというお話です。弊社のワインのマッチ度計算ロジックにおいて、その値を返すAPIをGoやRustを使って既存のAPIと比較してみたという話です。
+
+ 弊社のマッチ度計算
+wine@ONLINESTORE（ワインアットオンラインストア）では、ユーザーの好みの味わいタイプとワインの特徴を照らし合わせ、そのマッチ度を数値化して提供しています。ユーザーは味わいタイプだけでなく、マッ...]]></description><link>https://zenn.dev/be_warelink/articles/3cb5a8cb33e763</link><guid isPermaLink="true">https://zenn.dev/be_warelink/articles/3cb5a8cb33e763</guid><pubDate>Wed, 25 Dec 2024 05:01:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4gNXTzFx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255B%25E5%25B0%258F%25E3%2583%258D%25E3%2582%25BF%255D%2520Go%25E3%2581%25A8Rust%25E3%2581%25A7Lambda%25E3%2582%2592%25E6%25AF%2594%25E8%25BC%2583%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:takamario%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM2NzAzOWIzMTUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2596%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2589%25E3%2582%25A8%25E3%2583%2583%25E3%2582%25B8%25E3%2583%25BB%25E3%2582%25A6%25E3%2582%25A7%25E3%2582%25A2%25E3%2583%25AA%25E3%2583%25B3%25E3%2582%25AF%2520%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FjMjM3OWQ5YWMuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takamario</dc:creator></item><item><title><![CDATA[RustとPostgreSQLでUUIDv7]]></title><description><![CDATA[
+ 目的
+ユニークビジョン株式会社 Advent Calendar 2024のシリーズ2、12/23の記事です。
+UUIDv7は2024年5月にRFC9562で標準化されました。
+ここではRustとPostgreSQLで取り扱ってみます。
+UUIDv7は先頭はUnixTimestampのミリ秒から作成されるため、DBで主キーにするとソートすることができます。それ以外はランダムなので同時に作成しても衝突しにくいです。
+
+ コード
+
+ Rust
+crate uuidを利用します。featuresにv7があります。
+use chrono::prelude::*;
+use uuid::{NoCo...]]></description><link>https://zenn.dev/aoyagikouhei/articles/0397824311ed78</link><guid isPermaLink="true">https://zenn.dev/aoyagikouhei/articles/0397824311ed78</guid><pubDate>Wed, 25 Dec 2024 01:10:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--NvsBNNAF--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:Rust%25E3%2581%25A8PostgreSQL%25E3%2581%25A7UUIDv7%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E9%259D%2592%25E6%259F%25B3%25E5%25BA%25B7%25E5%25B9%25B3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFjZDA3ZGRhNzguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>青柳康平</dc:creator></item><item><title><![CDATA[pythonっぽい計算式を実行できるRustのパッケージをnomで作ってみた]]></title><description><![CDATA[この記事はRust Advent Calendar 2024の25日目の記事です。
+
+ はじめに
+Pythonっぽい文法で書かれた数式や簡易なラムダ式を、Rustで評価することができる軽量なパッケージを作りました。"Pythonっぽいeval"ということでpyishevalという名前で公開しています。
+https://github.com/neka-nat/pyisheval
+
+ なぜ作ったか？
+主に設定ファイルなどで、ユーザーに動的な数式や簡易スクリプトを記述させたい場面があります。たとえば、
+
+CI/CDツール内で簡易な条件式をユーザーに書かせたい
+DSL（ドメイン固有言語）のような...]]></description><link>https://zenn.dev/neka_nat/articles/124e3bbd0862ed</link><guid isPermaLink="true">https://zenn.dev/neka_nat/articles/124e3bbd0862ed</guid><pubDate>Tue, 24 Dec 2024 23:39:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--335NN4Xp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:python%25E3%2581%25A3%25E3%2581%25BD%25E3%2581%2584%25E8%25A8%2588%25E7%25AE%2597%25E5%25BC%258F%25E3%2582%2592%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258BRust%25E3%2581%25AE%25E3%2583%2591%25E3%2583%2583%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B8%25E3%2582%2592nom%25E3%2581%25A7%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2597%25E3%2582%258D%25E3%2581%258F%25E3%2581%25BE%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM0NjU3ODEwYjQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>しろくま</dc:creator></item><item><title><![CDATA[#2 Rustでしりとり]]></title><description><![CDATA[
+ はじめに
+前回に続き、初心者向けにプログラムを書いたので記事にしてみました。
+今回「しりとり」を作ってみました。
+プログラムの全体は最後に載せるのですがGitHubにもあります。
+
+ 本編
+
+ 変数宣言
+まず最初に入力した単語を記録する変数と、現在のプレイヤーを記録する変数を宣言します。
+// 入力した単語を保存する配列
+let mut content: Vec&lt;String&gt; = vec![];
+// プレイヤー
+let mut player = true;
+player1ならtrue、player2ならfalse表します
+println!("プレイヤー: {}", i...]]></description><link>https://zenn.dev/daizyoo/articles/siritori-game</link><guid isPermaLink="true">https://zenn.dev/daizyoo/articles/siritori-game</guid><pubDate>Tue, 24 Dec 2024 15:51:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--CbfFHmSX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25232%2520Rust%25E3%2581%25A7%25E3%2581%2597%25E3%2582%258A%25E3%2581%25A8%25E3%2582%258A%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:daizyoo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q4ZGM0MzI4MTMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>daizyoo</dc:creator></item><item><title><![CDATA[ABC385:Rustで解く！問題解説]]></title><description><![CDATA[AtCoder Beginner Contest 385のA~E問題をRustで解いた際の解法をまとめました。
+
+ A問題
+
+問題
+
+https://atcoder.jp/contests/abc385/tasks/abc385_a
+
+解説
+
+3つの整数をグループに分ける方法を順番に考えます。
+(1) 2つのグループに分けた場合
+昇順にソートした値の中で、最初の2つの値の和が、3番目の値と一致する場合に条件を満たします。
+(2) 3つのグループに分けた場合
+3つの値がすべて同じである場合に条件を満たします。
+
+コード
+
+use proconio::input;
+
+fn main() {
+...]]></description><link>https://zenn.dev/nakst_hide/articles/4449a2746402cb</link><guid isPermaLink="true">https://zenn.dev/nakst_hide/articles/4449a2746402cb</guid><pubDate>Tue, 24 Dec 2024 15:09:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--p_o5GTQx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ABC385%253ARust%25E3%2581%25A7%25E8%25A7%25A3%25E3%2581%258F%25EF%25BC%2581%25E5%2595%258F%25E9%25A1%258C%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nakahide%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YkMxNEpSQnNET01hTGcxTVRQWGNTWS1qYlNQbFRMQTN3ZU9Sdz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nakahide</dc:creator></item><item><title><![CDATA[TS ユーザーがRustを書いてみて型への認識をすこし改めた記録]]></title><description><![CDATA[この記事は「レバテック開発部 Advent Calendar 2024」の24日目の記事です！
+昨日の記事は、 RYO さんでした。
+
+ はじめに
+最近、趣味でRustを書いています。Rustのパラダイムに触れる中で、プログラミングに対する考え方に変化が生まれました。
+これまでは「型を満たすロジックを書く」ことを意識していましたが、Rustの型システムとトレイトの概念を学ぶ中ことで、「型やトレイトが要求する制約を考え、それを満たす実装を組み立てる」　という新しい視点を得ることができました。
+この記事では、私の型に対する考え方の変化と、Rustがそのきっかけとなった経緯を紹介します。
+
+ ...]]></description><link>https://zenn.dev/levtech/articles/c3c96bf1091ebe</link><guid isPermaLink="true">https://zenn.dev/levtech/articles/c3c96bf1091ebe</guid><pubDate>Tue, 24 Dec 2024 03:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fcH9q7Q5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TS%2520%25E3%2583%25A6%25E3%2583%25BC%25E3%2582%25B6%25E3%2583%25BC%25E3%2581%258CRust%25E3%2582%2592%25E6%259B%25B8%25E3%2581%2584%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%25A6%25E5%259E%258B%25E3%2581%25B8%25E3%2581%25AE%25E8%25AA%258D%25E8%25AD%2598%25E3%2582%2592%25E3%2581%2599%25E3%2581%2593%25E3%2581%2597%25E6%2594%25B9%25E3%2582%2581%25E3%2581%259F%25E8%25A8%2598%25E9%258C%25B2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:sotaro8181%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY1YzcxZDY5NDkuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%25AC%25E3%2583%2590%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E9%2596%258B%25E7%2599%25BA%25E9%2583%25A8%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE0NDhjNTIxMTAuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sotaro8181</dc:creator></item><item><title><![CDATA[RustでLINEログインAPIを使ってみよう]]></title><description><![CDATA[LINEログインAPIを使うためのライブラリの実装内容まとめ]]></description><link>https://zenn.dev/uiuifree/books/rust-line-login-api</link><guid isPermaLink="true">https://zenn.dev/uiuifree/books/rust-line-login-api</guid><pubDate>Mon, 23 Dec 2024 20:58:05 GMT</pubDate><dc:creator>uiuifree</dc:creator></item><item><title><![CDATA[実行しなくても危険なコピペ]]></title><description><![CDATA[この記事はとあるサークルのOB/OGが行っているN代アドベントカレンダー2024の24日目です。
+
+ はじめに
+インターネットで拾った野良コードをよく考えずに実行してはいけないという話は皆さん耳タコだと思います。今日びそんな野蛮なことをする人はいないでしょうが、世の中には実行しなくてもエディタに貼り付けただけで悪さをしだすコードもあります。
+
+ 本題
+以下のコードをVSCodeなりRustRoverなり、お好きなエディタに貼り付けてみてください。
+......いや、やっぱり貼り付けないでください。
+
+ src/main.rs
+#![allow(dead_code)]
+fn main() ...]]></description><link>https://zenn.dev/taro137/articles/6400b69b7d2b5b</link><guid isPermaLink="true">https://zenn.dev/taro137/articles/6400b69b7d2b5b</guid><pubDate>Mon, 23 Dec 2024 15:01:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--LZ54dw0C--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%2597%25E3%2581%25AA%25E3%2581%258F%25E3%2581%25A6%25E3%2582%2582%25E5%258D%25B1%25E9%2599%25BA%25E3%2581%25AA%25E3%2582%25B3%25E3%2583%2594%25E3%2583%259A%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Taro%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBlOGE5ZGM1NjEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Taro</dc:creator></item><item><title><![CDATA[Rustで深層学習フレームワークを開発しています]]></title><description><![CDATA[!
+この記事は Rustアドベントカレンダー2024 24日目の記事です。
+
+
+ リポジトリ
+⭐️がつくとやる気が出ます！
+https://github.com/bokutotu/zenu
+
+ サンプルコード(GAN など)
+https://github.com/bokutotu/zenu-examples
+ちなみに上記のサンプルを実行すると、以下のような画像が生成できました。
+
+
+
+
+
+
+
+
+
+
+
+ はじめに
+
+Rust で深層学習フレームワーク Zenu を開発しています。
+CPU / GPU 両方に対応し、型安全とメモリ安全を重視した設計です。
+MNIST や GAN などのサンプ...]]></description><link>https://zenn.dev/bokutotu/articles/zenu-a-deeplearning-framework</link><guid isPermaLink="true">https://zenn.dev/bokutotu/articles/zenu-a-deeplearning-framework</guid><pubDate>Mon, 23 Dec 2024 11:03:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hS5pJvYV--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25A7%25E6%25B7%25B1%25E5%25B1%25A4%25E5%25AD%25A6%25E7%25BF%2592%25E3%2583%2595%25E3%2583%25AC%25E3%2583%25BC%25E3%2583%25A0%25E3%2583%25AF%25E3%2583%25BC%25E3%2582%25AF%25E3%2582%2592%25E9%2596%258B%25E7%2599%25BA%25E3%2581%2597%25E3%2581%25A6%25E3%2581%2584%25E3%2581%25BE%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:bokutotu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvYi5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>bokutotu</dc:creator></item><item><title><![CDATA[超入門!Rustで作るアセット管理ツール～アセット命名規則チェッカー～]]></title><description><![CDATA[
+ はじめに
+!
+Rustの知識がゼロでもはじめるように補足しながら書いています
+
+ゲーム開発において、アセット管理は地味ながら重要な業務の一つです。プロジェクトが大きくなるにつれ、手作業での管理は困難になり、ミスのリスクも高まります。
+アセットとは、ゲームで使用される画像、音声、3Dモデルなどのデータファイルの総称です。例えば、キャラクターの画像、背景音楽、効果音、ステージの3Dモデルなどが該当します。
+本記事では、Rustを使用してアセット名の命名規則管理を自動化するツールの作成方法を解説します。
+
+ 想定読者
+
+ゲーム開発の効率化に興味がある開発者
+Rustに興味ある方
+自動化ツー...]]></description><link>https://zenn.dev/nezumizuki/articles/3fe59fbf7923b1</link><guid isPermaLink="true">https://zenn.dev/nezumizuki/articles/3fe59fbf7923b1</guid><pubDate>Mon, 23 Dec 2024 10:09:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--eTFrHbbA--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%25B6%2585%25E5%2585%25A5%25E9%2596%2580%2521Rust%25E3%2581%25A7%25E4%25BD%259C%25E3%2582%258B%25E3%2582%25A2%25E3%2582%25BB%25E3%2583%2583%25E3%2583%2588%25E7%25AE%25A1%25E7%2590%2586%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%25EF%25BD%259E%25E3%2582%25A2%25E3%2582%25BB%25E3%2583%2583%25E3%2583%2588%25E5%2591%25BD%25E5%2590%258D%25E8%25A6%258F%25E5%2589%2587%25E3%2583%2581%25E3%2582%25A7%25E3%2583%2583%25E3%2582%25AB%25E3%2583%25BC%25EF%25BD%259E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:MI%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSXRYZE91dm9hdlRUclRZSVY2eW5ibDdfVHprdXhtb1JUcUlQRGpTaTRfTmZxUnlLdz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>MI</dc:creator></item><item><title><![CDATA[Rust ✖️ Executorch ✖️ iOS  で YoloX を動かす]]></title><description><![CDATA[
+今回は、YoloX をモバイルアプリで動かすサンプルを作成しました。
+サンプルアプリの作成を通じて、二つのクレートを作成したのでサンプルアプリと合わせて紹介したいと思います。
+
+ TL;DR
+
+
+Executorch のラッパークレート berry-executorch を作成
+
+BYTETrack-cpp のRust移植版 jamtrack-rs を作成
+上記二つを使用してRustでバックエンドを書き、iPhoneで動作するサンプルアプリを作成
+
+!
+アドカレの公開日までに、jamtracker-rs を使ったアプリ側の実装が間に合いませんでした。
+後日、実装予定です。
+
+各リポジト...]]></description><link>https://zenn.dev/kadu_v/articles/c836edad1e4702</link><guid isPermaLink="true">https://zenn.dev/kadu_v/articles/c836edad1e4702</guid><pubDate>Sun, 22 Dec 2024 13:25:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--AoLM-Xee--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%2520%2520%2520Executorch%2520%2520%2520iOS%2520%2520%25E3%2581%25A7%2520YoloX%2520%25E3%2582%2592%25E5%258B%2595%25E3%2581%258B%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kadu-v%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzlmZTRhOGFlZjYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kadu-v</dc:creator></item><item><title><![CDATA[RustLadies第4回目を開催しました！【イベントレポ】]]></title><description><![CDATA[
+ RustLadiesとは
+Rustに興味がある女性で集まり、ゆるっとRustを楽しむコミュニティです。
+Rustにハマった筆者が、女性同士でRustを楽しみながら勉強したい！ついでに女性エンジニア同士の繋がりも増やしたい！というモチベーションから立ち上げました。
+多分日本初のRust女性コミュニティです！🦀
+https://rustladies.connpass.com/
+
+ 第4回目:3章の復習+α
+前回に引き続きThe Bookを参加者のみなさまと進めました！
+3章といえばデータ型、関数、変数の作り方、制御文、コメントなどなど。
+前回から1ヶ月経っていることもあり、前回の復習を兼...]]></description><link>https://zenn.dev/2323_code/articles/4381f6b0cfc262</link><guid isPermaLink="true">https://zenn.dev/2323_code/articles/4381f6b0cfc262</guid><pubDate>Sun, 22 Dec 2024 08:34:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Vsd2Fl13--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:RustLadies%25E7%25AC%25AC4%25E5%259B%259E%25E7%259B%25AE%25E3%2582%2592%25E9%2596%258B%25E5%2582%25AC%25E3%2581%2597%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%25EF%25BC%2581%25E3%2580%2590%25E3%2582%25A4%25E3%2583%2599%25E3%2583%25B3%25E3%2583%2588%25E3%2583%25AC%25E3%2583%259D%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25B5%25E3%2581%25BF%25E3%2581%25B5%25E3%2581%25BF%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAyZGQ3OTI1ODcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ふみふみ</dc:creator></item><item><title><![CDATA[RustでIteratorの拡張メソッドを自作してみる]]></title><description><![CDATA[
+ 対象読者層
+
+Rustの初学者
+
+Rustの文法をふんわり理解している
+mapやfilterのようなイテレータをふんわり使える
+
+
+
+
+ 環境
+
+Rust 1.83.0
+
+edtion 2021
+
+
+
+
+ 背景
+Rustの標準のscanの作りがあまり好みではないので、勉強も兼ねて自作してみた。
+
+ scanとは
+一言で言うと「 "処理ごとのスナップショット" 付きのfold」。
+HaskellやScalaには標準で用意されている。
+Scalaだとこんな感じ。
+@main
+def main(): Unit =
+  val v = ('b' to 'd').scanLeft("a")((...]]></description><link>https://zenn.dev/ka2kama/articles/dd227ff78a893f</link><guid isPermaLink="true">https://zenn.dev/ka2kama/articles/dd227ff78a893f</guid><pubDate>Sun, 22 Dec 2024 03:34:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xgDZ2C10--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25A7Iterator%25E3%2581%25AE%25E6%258B%25A1%25E5%25BC%25B5%25E3%2583%25A1%25E3%2582%25BD%25E3%2583%2583%25E3%2583%2589%25E3%2582%2592%25E8%2587%25AA%25E4%25BD%259C%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ka2kama%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2o3Zk9TdGE5bm5xTUZhbTNwSWVBd00waWozYlVkWWQ3U2R6VFVFPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ka2kama</dc:creator></item><item><title><![CDATA[うわ・・・私のdbt遅すぎ!?をRustで解決したい]]></title><description><![CDATA[
+ はじめに
+気軽にタイトルをつけてみて「Rustでdbtを書くのじゃ」という誤解を招かないかすごく不安になりました。
+残念ながらそんなに高尚なものではないポエムなので気軽な気持ちで読んでいただければ幸いです。
+これは datatech-jp Advent Calendar 2024 の22日目の記事です。
+
+ 解決したい課題
+普段、アナリティクスエンジニアとしてデータ分析基盤の運用を行っています。
+Data Vaultを活用したデータモデリングの検討や、社内外に提供するダッシュボードのリファクタリングや開発など、日々多岐にわたる業務を行っています。
+現在の会社のデータ分析基盤は、私が入...]]></description><link>https://zenn.dev/tenajima/articles/924a784f3f5b29</link><guid isPermaLink="true">https://zenn.dev/tenajima/articles/924a784f3f5b29</guid><pubDate>Sun, 22 Dec 2024 03:33:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4jc1cg4J--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%2586%25E3%2582%258F%25E3%2583%25BB%25E3%2583%25BB%25E3%2583%25BB%25E7%25A7%2581%25E3%2581%25AEdbt%25E9%2581%2585%25E3%2581%2599%25E3%2581%258E%2521%253F%25E3%2582%2592Rust%25E3%2581%25A7%25E8%25A7%25A3%25E6%25B1%25BA%25E3%2581%2597%25E3%2581%259F%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tenajima%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RiZWNjMGY4OTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tenajima</dc:creator></item><item><title><![CDATA[[Tauri v2.0]JSON データをRust BackendからFrontendに送信する方法]]></title><description><![CDATA[1.Tauriとは
+Tauriは、Rust製のクロスプラットフォーム対応デスクトップアプリケーションフレームワークです。
+Electronなどと同様にHTML/CSS/JavaScriptでフロントエンドを開発しつつ、バックエンドロジックをRustで記述できるのが特徴です。
+IPC (Inter-Process Communication) を利用して、Rust（バックエンド）とJavaScript（フロントエンド）間でデータのやり取りを行うため、高速かつセキュアなアプリケーションを構築できます。
+2.実行環境
+今回使用する環境は以下のとおりです。
+Rust バージョン: rustc 1...]]></description><link>https://zenn.dev/beginote/articles/0ec070f000696e</link><guid isPermaLink="true">https://zenn.dev/beginote/articles/0ec070f000696e</guid><pubDate>Sun, 22 Dec 2024 03:14:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--TtroBD5O--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BTauri%2520v2.0%255DJSON%2520%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%2592Rust%2520Backend%25E3%2581%258B%25E3%2582%2589Frontend%25E3%2581%25AB%25E9%2580%2581%25E4%25BF%25A1%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Zone%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTDRQazlDa2Fhdm9tRENjX0kzYVh3U1BHcFpDZDdvcnVJalNEYmtmV1NDPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Zone</dc:creator></item><item><title><![CDATA[Advent of Code 2024 4: Ceres Search]]></title><description><![CDATA[
+ このページは
+2024 年の Advent of Code の Day4 の記事です。 Day3 はこちら。
+https://zenn.dev/yasuharu519/articles/f6102eedfce78c
+!
+以下問題のネタバレが多数含まれています。問題を楽しみたい方は是非一度本家の問題を見てから読んでみてください。
+
+
+ Day 4: Ceres Search
+Day 4 は word search を行う問題で、入力としては "X", "M", "A", "S" の文字が二次元状に配置された文字列が与えられます。
+
+ Part1
+Part1 では、与えられた文字列の中か...]]></description><link>https://zenn.dev/yasuharu519/articles/5ef6154a07cc6d</link><guid isPermaLink="true">https://zenn.dev/yasuharu519/articles/5ef6154a07cc6d</guid><pubDate>Fri, 20 Dec 2024 15:13:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--v_QH6hNs--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:Advent%2520of%2520Code%25202024%25204%253A%2520Ceres%2520Search%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Sawady%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI4ODhkNmU3MTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Sawady</dc:creator></item></channel></rss>
