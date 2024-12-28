@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「TypeScript」のフィード]]></title><description><![CDATA[Zennのトピック「TypeScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/typescript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/f13e758fdb.png</url><title>Zennの「TypeScript」のフィード</title><link>https://zenn.dev/topics/typescript</link></image><generator>zenn.dev</generator><lastBuildDate>Sat, 28 Dec 2024 04:00:20 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/typescript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Next.jsのRoute Handlers + ElysiaJSの組み合わせでスタンドアロンビルドすると挙動がおかしくなる問題]]></title><description><![CDATA[
+ Problem
+
+Next.jsの Route Handlers を使ってElysiaJSのルーターをフックして呼び出している
+開発ビルドでは何の問題もなく動作するが、スタンドアロンビルドしたものを単体で動かすと「一部のエンドポイントにPOSTしてもbodyがundefinedになる」のような奇妙な問題が発生する
+
+
+ route.ts
+
+import { authRouter as server } from "@/controllers/AppController";
+
+export const GET = server.handle;
+export const POST = s...]]></description><link>https://zenn.dev/nexryai/articles/a4fa36c8349cab</link><guid isPermaLink="true">https://zenn.dev/nexryai/articles/a4fa36c8349cab</guid><pubDate>Sat, 28 Dec 2024 00:47:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--kz-Vp0zB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Next.js%25E3%2581%25AERoute%2520Handlers%2520%252B%2520ElysiaJS%25E3%2581%25AE%25E7%25B5%2584%25E3%2581%25BF%25E5%2590%2588%25E3%2582%258F%25E3%2581%259B%25E3%2581%25A7%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%25B3%25E3%2583%2589%25E3%2582%25A2%25E3%2583%25AD%25E3%2583%25B3%25E3%2583%2593%25E3%2583%25AB%25E3%2583%2589%25E3%2581%2599%25E3%2582%258B%25E3%2581%25A8%25E6%258C%2599%25E5%258B%2595%25E3%2581%258C%25E3%2581%258A...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nexryai%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzYxZDUzMzM2YjEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nexryai</dc:creator></item><item><title><![CDATA[next.jsのAppRouterでCookieをいい感じで扱う落とし所を考える]]></title><description><![CDATA[next.jsでCookieをサーバーでもクライアントでもいい感じに扱うにはどうするか考えた。
+今のところこのあたりが落とし所かな〜？ぐらいな温度感なので、特にベストプラクティスとかではない。
+全体感を俯瞰したい場合は下記でざっくり参照可能
+
+https://codesandbox.io/p/devbox/7d8ts6
+
+
+ Layout
+今回サーバーからの初回レンダリングも考慮したいケースを考えるので、サーバーからまずCookieを引っ張ってくる。これをContextに詰め込んでクライアント側で利用できるようにする方向で考えた
+まず全体で利用できるようにlayoutで取得する
+// l...]]></description><link>https://zenn.dev/terrierscript/articles/2024-12-27-next-js-app-router-cookie</link><guid isPermaLink="true">https://zenn.dev/terrierscript/articles/2024-12-27-next-js-app-router-cookie</guid><pubDate>Fri, 27 Dec 2024 15:32:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--rWphVpnj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:next.js%25E3%2581%25AEAppRouter%25E3%2581%25A7Cookie%25E3%2582%2592%25E3%2581%2584%25E3%2581%2584%25E6%2584%259F%25E3%2581%2598%25E3%2581%25A7%25E6%2589%25B1%25E3%2581%2586%25E8%2590%25BD%25E3%2581%25A8%25E3%2581%2597%25E6%2589%2580%25E3%2582%2592%25E8%2580%2583%25E3%2581%2588%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:terrierscript%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RhNzJjMjE0Y2QuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>terrierscript</dc:creator></item><item><title><![CDATA[ReactにStateパターンを取り入れて複雑な状態管理から脱却する]]></title><description><![CDATA[こんにちは、PortalKeyの植森です。
+今回は、最近たまに使っているReactにStateパターンを使う実装を、他メンバーへの説明も兼ねて紹介します。
+React18・19で非同期処理をシンプルに扱うためのAPIが増えたので使うシーンは減ってきていそうですが、実装パターンとして覚えておいて損はないと思います。
+
+ Stateパターン
+Stateパターンはあるオブジェクトに関する状態と状態の振る舞いを表現できるデザインパターンの1つです。
+
+ステートマシンの状態それぞれをオブジェクトとして扱うことで条件分岐を減らし、状態ごとの振る舞いをカプセル化することが出来ます。
+https://z...]]></description><link>https://zenn.dev/portalkeyinc/articles/59666c0c17eb36</link><guid isPermaLink="true">https://zenn.dev/portalkeyinc/articles/59666c0c17eb36</guid><pubDate>Fri, 27 Dec 2024 12:26:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--OJNEsGJT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%25E3%2581%25ABState%25E3%2583%2591%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%25B3%25E3%2582%2592%25E5%258F%2596%25E3%2582%258A%25E5%2585%25A5%25E3%2582%258C%25E3%2581%25A6%25E8%25A4%2587%25E9%259B%2591%25E3%2581%25AA%25E7%258A%25B6%25E6%2585%258B%25E7%25AE%25A1%25E7%2590%2586%25E3%2581%258B%25E3%2582%2589%25E8%2584%25B1%25E5%258D%25B4%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:wakaba260%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM2Y2JkM2UxMzEuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:PortalKey%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2hYOTVyU0tGaEZ1Xy00RWJGMXVDMldKcms2SEtYMFZ4MV91ZjhrRkE9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>wakaba260</dc:creator></item><item><title><![CDATA[100日アルゴリズム[16日目・バイナリサーチ]]]></title><description><![CDATA[
+ 解いた問題
+https://leetcode.com/problems/binary-search/
+
+ 解法
+通常のバイナリサーチの考え方に基づきtypescriptで実装した。
+function search(nums: number[], target: number): number {
+    let left = 0;
+    let right = nums.length -1;
+    while (left &lt;= right) {
+        const middle = Math.floor((left + right) / 2);
+        if...]]></description><link>https://zenn.dev/joeee/articles/d7ce94fc857e81</link><guid isPermaLink="true">https://zenn.dev/joeee/articles/d7ce94fc857e81</guid><pubDate>Fri, 27 Dec 2024 10:55:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--KlccTZjw--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:100%25E6%2597%25A5%25E3%2582%25A2%25E3%2583%25AB%25E3%2582%25B4%25E3%2583%25AA%25E3%2582%25BA%25E3%2583%25A0%255B16%25E6%2597%25A5%25E7%259B%25AE%25E3%2583%25BB%25E3%2583%2590%25E3%2582%25A4%25E3%2583%258A%25E3%2583%25AA%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2581%255D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:jo-shino%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM3NzI1NDY2NmEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>jo-shino</dc:creator></item><item><title><![CDATA[ExpressにてESLint、Prettierを設定してみた]]></title><description><![CDATA[
+ 設定
+
+ESLintの設定
+最初に必要なパッケージを追加する
+yarn add --dev prettier eslint-config-prettier eslint-plugin-prettier
+
+
+コマンド実行後にできたファイルを編集
+例
+import globals from "globals";
+import pluginJs from "@eslint/js";
+import tseslint from "@typescript-eslint/eslint-plugin";
+import tsparser from "@typescript-eslint/parser"...]]></description><link>https://zenn.dev/nineball/articles/351b56692ead42</link><guid isPermaLink="true">https://zenn.dev/nineball/articles/351b56692ead42</guid><pubDate>Fri, 27 Dec 2024 09:14:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ZL_e9xuO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Express%25E3%2581%25AB%25E3%2581%25A6ESLint%25E3%2580%2581Prettier%25E3%2582%2592%25E8%25A8%25AD%25E5%25AE%259A%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nineball%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA3YWM1ZTllYzAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nineball</dc:creator></item><item><title><![CDATA[Amplify Gen2のバックエンドを本番環境にセットアップしてみた]]></title><description><![CDATA[
+ はじめに
+AWS Amplify Gen2は、AWS Amplifyの次世代バージョンとしてリリースされ、TypeScriptを使ったインフラのコード管理ができるようになりました。フロントエンドからバックエンドまで一貫して構築できるのが特長ですが、ドキュメントにも記載がなく、本番環境でのバックエンドのセットアップに若干戸惑ったので記録に残しておきます。
+
+
+ 前提条件
+ここで紹介する手順を実行するには、以下の環境やツールが必要です。
+
+
+AWSアカウント
+各種AWSサービスを使うために必要です。
+
+
+Node.js 18.19.0以上
+Amplifyのビルド時に使用します。
+
+
+AW...]]></description><link>https://zenn.dev/yutabeee/articles/3f334f418006c2</link><guid isPermaLink="true">https://zenn.dev/yutabeee/articles/3f334f418006c2</guid><pubDate>Fri, 27 Dec 2024 06:10:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ROSxwwNF--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Amplify%2520Gen2%25E3%2581%25AE%25E3%2583%2590%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2589%25E3%2582%2592%25E6%259C%25AC%25E7%2595%25AA%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25AB%25E3%2582%25BB%25E3%2583%2583%25E3%2583%2588%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Darman%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE5YzFjYWRjOGUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Darman</dc:creator></item><item><title><![CDATA[5分でわかる！Supabase CLIを使いこなすための開発フロー]]></title><description><![CDATA[
+ 概要
+Supabase はとても便利ですが、コマンドを使いこなすにはちょっとコツが要ります。
+特に最初のセットアップがちょっと大変です。ローカル環境とリモート環境を用意していた場合、どのような開発フローで進めるべきか、ちょっと悩みます。
+https://supabase.com/docs/guides/local-development/cli/getting-started
+公式ドキュメントをよく読み解けば分かるようになっているのですが、自分にとって最適な手順を見つけるのに３日間くらい掛かりました。
+そのため、後続の方が役立つように「 5 分でわかる！」ようにまとめてみたいと思いま...]]></description><link>https://zenn.dev/lef237/articles/5a1a7ef372cdb8</link><guid isPermaLink="true">https://zenn.dev/lef237/articles/5a1a7ef372cdb8</guid><pubDate>Fri, 27 Dec 2024 04:35:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ihP2i1nb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:5%25E5%2588%2586%25E3%2581%25A7%25E3%2582%258F%25E3%2581%258B%25E3%2582%258B%25EF%25BC%2581Supabase%2520CLI%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2584%25E3%2581%2593%25E3%2581%25AA%25E3%2581%2599%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%25E9%2596%258B%25E7%2599%25BA%25E3%2583%2595%25E3%2583%25AD%25E3%2583%25BC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:LEF%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YVJQMTBoM19YeklJemlRSE0wY1pjWUpVemc5cUpFaVd4S2JXdWQ9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>LEF</dc:creator></item><item><title><![CDATA[アプリのパフォーマンス改善でライブラリの実装の理解が役立った話]]></title><description><![CDATA[
+ はじめに
+技術で開発上の問題を突破できると嬉しいですよね。
+しかもバックエンドで学んだことがフロントエンドで活用できると面白いですよね。
+そこでGraphQLサーバーの開発でDataLoaderの実装を勉強したことが、フロントエンドのパフォーマンス改善で役に立った話を紹介します。[1]
+（DataLoaderを知らなくても読めるようにこの記事は書いています！！！）
+
+ パフォーマンス問題
+ReactでExcelのようなテーブルを持ったアプリを開発していました。
+アプリには変更のあった行の色が変わる機能がありました。
+画面の雰囲気:
+
+ある日、データ件数が大きいときにペーストを行うと非...]]></description><link>https://zenn.dev/aidemy/articles/understanding-library-impl-helped-app-perf</link><guid isPermaLink="true">https://zenn.dev/aidemy/articles/understanding-library-impl-helped-app-perf</guid><pubDate>Fri, 27 Dec 2024 03:38:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--WsBdxvfV--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2581%25AE%25E3%2583%2591%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25BC%25E3%2583%259E%25E3%2583%25B3%25E3%2582%25B9%25E6%2594%25B9%25E5%2596%2584%25E3%2581%25A7%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%25E3%2581%25AE%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%25AE%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%258C%25E5%25BD%25B9%25E7%25AB%258B%25E3%2581%25A3%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:mosh%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNhNmVhZTQ3ZDkuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Aidemy%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAzNjI3YTFkMmMuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mosh</dc:creator></item><item><title><![CDATA[クラス②(アクセス修飾子)【個人学習まとめ】]]></title><description><![CDATA[
+ アクセス修飾子
+クラス内のプロパティやメソッドのメンバーがどの範囲からアクセス可能か制御することができる。
+
+ public
+public修飾子を持つメンバー(プロパティ、メソッド)はクラスの内側、外側問わずにアクセス可能。
+アクセス修飾子を指定していなければ、常にpublicになる。
+class PersonClass {
+  public name: string; //明示的に指定
+  age: number; //デフォルトでpublic
+
+  constructor(name: string, age: number) {
+    this.name = name;
+   ...]]></description><link>https://zenn.dev/o0rororo0o/articles/ef95d1aa9b00f2</link><guid isPermaLink="true">https://zenn.dev/o0rororo0o/articles/ef95d1aa9b00f2</guid><pubDate>Fri, 27 Dec 2024 01:14:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--cW2mTrQv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25B9%25E2%2591%25A1%2528%25E3%2582%25A2%25E3%2582%25AF%25E3%2582%25BB%25E3%2582%25B9%25E4%25BF%25AE%25E9%25A3%25BE%25E5%25AD%2590%2529%25E3%2580%2590%25E5%2580%258B%25E4%25BA%25BA%25E5%25AD%25A6%25E7%25BF%2592%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%258D%25E3%2582%258D%25E3%2582%258D%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ2ZTZjOWM4YmMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ろろろ</dc:creator></item><item><title><![CDATA[完全未経験からWebエンジニアになってみた。の「その後」]]></title><description><![CDATA[初めまして、PortalKey Webエンジニアのshariです。
+2024年5月に弊社に入社するまではいわゆる未経験者でした。
+8ヶ月の実務を通して感じたことや独学の時にこうすべきだったな、ということをお話したいと思います。
+
+ 誰に向けて書いたの？
+
+他業界からITエンジニア(特にwebエンジニア)になるべくアプリ開発をしている方
+未経験独学がWebエンジニアになったその後が気になる方
+
+
+ はじめに
+実は私、2年半前までこんな感じでした
+
+「javaとjavascriptは全然違うってネットでよく見る」「HTMLって何？」
+
+そこからプログラミングを始め、1000~1200時間くら...]]></description><link>https://zenn.dev/portalkeyinc/articles/51a9b8f339b4fb</link><guid isPermaLink="true">https://zenn.dev/portalkeyinc/articles/51a9b8f339b4fb</guid><pubDate>Thu, 26 Dec 2024 17:09:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--cg6v8Oj---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%25AE%258C%25E5%2585%25A8%25E6%259C%25AA%25E7%25B5%258C%25E9%25A8%2593%25E3%2581%258B%25E3%2582%2589Web%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%25E3%2581%25AB%25E3%2581%25AA%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25E3%2580%2582%25E3%2581%25AE%25E3%2580%258C%25E3%2581%259D%25E3%2581%25AE%25E5%25BE%258C%25E3%2580%258D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%2597%25E3%2582%2583%25E3%2582%258A%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM2Y2JkM2UxMzEuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:PortalKey%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y1MTJkYWZhMzIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>しゃり</dc:creator></item><item><title><![CDATA[any型を排除し、型安全なコードに変える【TypeScript】]]></title><description><![CDATA[こんにちは。今回は最近取り組んだTypeScriptのリファクタリングについてシェアしたいと思います。
+具体的には、プロジェクトで多用されていたany型をなくす作業を行いました。振り返りも兼ねて、なぜany型が問題なのか、どうやって対処したのかをまとめてみました。
+
+ リファクタリングの背景
+現在関わっているプロジェクトは約4年前に始まり、私はちょうど1年前に(ほとんどコーディングをする)システムエンジニアとして配属されました。しかし、このプロジェクトには少しクセがありました。仕様が頻繁に変わったり、メンバーが次々と入れ替わったりと、なかなか安定しない環境でした。その結果、急いで動くため...]]></description><link>https://zenn.dev/kazulife9127/articles/8652ba364c880b</link><guid isPermaLink="true">https://zenn.dev/kazulife9127/articles/8652ba364c880b</guid><pubDate>Thu, 26 Dec 2024 08:18:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Kpjz4tZO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:any%25E5%259E%258B%25E3%2582%2592%25E6%258E%2592%25E9%2599%25A4%25E3%2581%2597%25E3%2580%2581%25E5%259E%258B%25E5%25AE%2589%25E5%2585%25A8%25E3%2581%25AA%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2581%25AB%25E5%25A4%2589%25E3%2581%2588%25E3%2582%258B%25E3%2580%2590TypeScript%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kazulife9127%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y2MjUzZTIwNGIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kazulife9127</dc:creator></item><item><title><![CDATA[alchemyでAA(account abstraction)を実装する]]></title><description><![CDATA[
+ AAとは
+account abstractionとは、Ethereum上でEOAアドレスとスマートコントラクトを抽象化して新しいアカウントを目指した概念といえます。
+Ethereumのアプリでは、従来のweb2のアプリと比べてUXを下げる課題がありました。例えばユーザーがEVM上のゲームアプリを使う場合、現状であればまずメタマスクなどでアドレス(EOAアドレス)を作る必要があります。ただゲームアプリの新規ユーザーはまず最初に「面白そうだし、とりあえずプレイしてみよう」というようなユーザーが多く、最初の段階でEOAアドレスを用意する必要といった面倒なステップがあると初期の離脱率が高くな...]]></description><link>https://zenn.dev/joeee/articles/a955723caac6e0</link><guid isPermaLink="true">https://zenn.dev/joeee/articles/a955723caac6e0</guid><pubDate>Thu, 26 Dec 2024 08:01:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--19iU8zVO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:alchemy%25E3%2581%25A7AA%2528account%2520abstraction%2529%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:jo-shino%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM3NzI1NDY2NmEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>jo-shino</dc:creator></item><item><title><![CDATA[初心者でも安心！筋トレで学ぶTypeScript型設計の基本]]></title><description><![CDATA[
+ はじめに
+こんにちは。株式会社トリドリでバックエンドエンジニアをしている松田です！
+弊社はフロントエンドもバックエンドも、TypeScriptメインで開発をすることが多く、型を使いこなせることが必要になってきます。そして経験が浅いうちには使いこなすことはおろか、理解すること自体少し労力がかかるのがこのジェネリクスです。
+そこで今回はこのジェネリクスも含めた型設計の基本について、「筋トレ」を題材として理解を深めましょう！
+初めは右も左もわからずジムに入会したてのトレーニー状態から、徐々に筋トレの仕方がわかってくるまでのストーリー仕立てで進めていきます。
+
+ ジェネリクス、インターフェー...]]></description><link>https://zenn.dev/toridori/articles/6b4fade51a98c8</link><guid isPermaLink="true">https://zenn.dev/toridori/articles/6b4fade51a98c8</guid><pubDate>Thu, 26 Dec 2024 07:00:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3Tcl_G0W--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E3%2581%25A7%25E3%2582%2582%25E5%25AE%2589%25E5%25BF%2583%25EF%25BC%2581%25E7%25AD%258B%25E3%2583%2588%25E3%2583%25AC%25E3%2581%25A7%25E5%25AD%25A6%25E3%2581%25B6TypeScript%25E5%259E%258B%25E8%25A8%25AD%25E8%25A8%2588%25E3%2581%25AE%25E5%259F%25BA%25E6%259C%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:matsuda_t%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAxOWMzMTdiMzkuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:toridori%2520tech%2520blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA5MTFlMzBiMDQuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>matsuda_t</dc:creator></item><item><title><![CDATA[TypeScript一人カレンダー 2022/2024 目次と索引 O-Z・あーん]]></title><description><![CDATA[
+ 記号・A-N
+
+https://zenn.dev/okunokentaro/articles/01jg07mjacswxqfgp2m69qn7ew
+
+
+ O
+
+O/R マッパー / 2202
+
+
+Object.hasOwn() / 2417
+
+
+Object.prototype.toString() / 2218
+
+
+object() (Valibot) / 2405
+
+
+Object （コンストラクタ） / 2215
+
+
+object (型表記) / 2215
+
+
+Ok&lt;T&gt; / 2223, 2416
+
+
+Omit&lt;T, K&gt; / 2207, 2208, 2...]]></description><link>https://zenn.dev/okunokentaro/articles/01jg0ve6mk61rt8a6e7mbx66gc</link><guid isPermaLink="true">https://zenn.dev/okunokentaro/articles/01jg0ve6mk61rt8a6e7mbx66gc</guid><pubDate>Thu, 26 Dec 2024 06:48:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Cv2xtHvB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%25E4%25B8%2580%25E4%25BA%25BA%25E3%2582%25AB%25E3%2583%25AC%25E3%2583%25B3%25E3%2583%2580%25E3%2583%25BC%25202022%252F2024%2520%25E7%259B%25AE%25E6%25AC%25A1%25E3%2581%25A8%25E7%25B4%25A2%25E5%25BC%2595%2520O-Z%25E3%2583%25BB%25E3%2581%2582%25E3%2583%25BC%25E3%2582%2593%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:okunokentaro%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAyY2RlNDNmOWUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>okunokentaro</dc:creator></item><item><title><![CDATA[TypeScript一人カレンダー 2022/2024 目次と索引 記号・A-N]]></title><description><![CDATA[こんにちは、クレスウェア株式会社の奥野賢太郎 (@okunokentaro) です。本記事は『TypeScript 一人 Advent Calendar 2022』および『TypeScript 一人 Advent Calendar 2024』（TypeScript一人カレンダー） 全50記事の目次と索引ページです。
+
+https://qiita.com/advent-calendar/2022/okunokentaro-ts
+https://qiita.com/advent-calendar/2024/okunokentaro-ts
+
+本アドベントカレンダー内の各記事では、2024年12...]]></description><link>https://zenn.dev/okunokentaro/articles/01jg07mjacswxqfgp2m69qn7ew</link><guid isPermaLink="true">https://zenn.dev/okunokentaro/articles/01jg07mjacswxqfgp2m69qn7ew</guid><pubDate>Thu, 26 Dec 2024 06:48:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--VzdbGmF7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%25E4%25B8%2580%25E4%25BA%25BA%25E3%2582%25AB%25E3%2583%25AC%25E3%2583%25B3%25E3%2583%2580%25E3%2583%25BC%25202022%252F2024%2520%25E7%259B%25AE%25E6%25AC%25A1%25E3%2581%25A8%25E7%25B4%25A2%25E5%25BC%2595%2520%25E8%25A8%2598%25E5%258F%25B7%25E3%2583%25BBA-N%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:okunokentaro%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAyY2RlNDNmOWUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>okunokentaro</dc:creator></item><item><title><![CDATA[Kintoneの設定管理システムを作ってみた]]></title><description><![CDATA[こんにちは！Septeni Japan 株式会社のエンジニアの大志万といいます。
+今回は、TerraformなどのIaCのように、Kintoneの設定をファイルで管理し、必要に応じてデプロイできるようなシステムを作ったので、そのシステムについて紹介します。
+
+ 背景
+私の会社ではKintoneを契約しており、社内システムのいくつかにKintoneを利用しています。
+今までは、Kintoneを使ったシステム開発を行う際、毎回アプリをコピーして開発環境を作成していましたが、下記のような問題がありました。
+
+開発環境で行った変更を本番環境に反映する際、手動で設定を変更する必要がある。
+複数のア...]]></description><link>https://zenn.dev/septeni_japan/articles/2024-12_kintone_iac</link><guid isPermaLink="true">https://zenn.dev/septeni_japan/articles/2024-12_kintone_iac</guid><pubDate>Thu, 26 Dec 2024 04:29:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--F-a3DHbf--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Kintone%25E3%2581%25AE%25E8%25A8%25AD%25E5%25AE%259A%25E7%25AE%25A1%25E7%2590%2586%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:oshiman%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRlMzQ3Njk1ZjcuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Septeni%2520Japan%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZjMjBlMzNmNDcuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>oshiman</dc:creator></item><item><title><![CDATA[あのprisma previewFeaturesは今？]]></title><description><![CDATA[
+ はじめに
+はじめまして、株式会社トリドリでバックエンドを担当しているyrmzです。
+私が所属するチームではNestJSをメインに開発業務を行っています。
+
+ Prismaが発行するクエリ
+ORMはprismaを使っているのですが、複数テーブルを取得しようとした際に複数クエリが発行されてしまうという問題があります。
+例えば次のコードを実行したとしましょう。
+await this.prisma.company.findUnique({
+  where: { id },
+  include: {
+    shop: true,
+  },
+});
+これに対して大抵の人は以下のようなクエリが発...]]></description><link>https://zenn.dev/toridori/articles/3820e3b137a0fd</link><guid isPermaLink="true">https://zenn.dev/toridori/articles/3820e3b137a0fd</guid><pubDate>Thu, 26 Dec 2024 03:41:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Df7t3a7O--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%2582%25E3%2581%25AEprisma%2520previewFeatures%25E3%2581%25AF%25E4%25BB%258A%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:yrmz%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAxOWMzMTdiMzkuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:toridori%2520tech%2520blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2QxNzYyYjFmZjAuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yrmz</dc:creator></item><item><title><![CDATA[`node:test` のスナップショットテスト（--experimental-test-snapshots）を試す]]></title><description><![CDATA[https://www.mizdra.net/entry/2024/11/22/114114
+この記事の中でスナップショットテスト（--experimental-test-snapshots）については名前だけで具体例が無かったのですが、ちょうどJestのスナップショットテストを使っているOSSをメンテしていたのでJest -&gt; node:test に置き換えられるか試してみました。
+
+ node:test + TypeScriptのセットアップ
+実際のコードを置き換えてみる前に、最小限のコードで node:test とTypeScriptを使ったテストを実行する方法を試してみます...]]></description><link>https://zenn.dev/kesin11/articles/20241130_node_test_snapshot</link><guid isPermaLink="true">https://zenn.dev/kesin11/articles/20241130_node_test_snapshot</guid><pubDate>Thu, 26 Dec 2024 01:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2uVjEOSS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%2560node%253Atest%2560%2520%25E3%2581%25AE%25E3%2582%25B9%25E3%2583%258A%25E3%2583%2583%25E3%2583%2597%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%2583%25E3%2583%2588%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25EF%25BC%2588--experimental-test-snapshots%25EF%25BC%2589%25E3%2582%2592%25E8%25A9%25A6%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kesin11%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2l5YnpxY196Y2VPbEhIWlJGajNaSDdYWlM0OXVCNzdFZVZjV2xrbXc9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kesin11</dc:creator></item><item><title><![CDATA[最低限の flat config（まずは no-unused-imports を動かす）]]></title><description><![CDATA[
+ はじめに
+Next.js 最新版（15.1系）で始めると、eslint は9系になるので flat config で設定しなくてはなりません。
+確認した技術スタックは下記のとおりです。
+
+next: 15.1.2
+react: 19.0.0
+react-dom: 19.0.0
+
+
+ 設定していく
+今回は息子のためにトイプログラムを作りたいだけなので、
+とりあえず no-unused-imports を効かすためにパッケージのインストールと設定をしていきます。
+$ npm i -D typescript-eslint eslint-plugin-unused-imports
+
+.vsc...]]></description><link>https://zenn.dev/seventhseven07/articles/06a02c4048decf</link><guid isPermaLink="true">https://zenn.dev/seventhseven07/articles/06a02c4048decf</guid><pubDate>Thu, 26 Dec 2024 00:40:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--rOjkliVq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%259C%2580%25E4%25BD%258E%25E9%2599%2590%25E3%2581%25AE%2520flat%2520config%25EF%25BC%2588%25E3%2581%25BE%25E3%2581%259A%25E3%2581%25AF%2520no-unused-imports%2520%25E3%2582%2592%25E5%258B%2595%25E3%2581%258B%25E3%2581%2599%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Shumpei%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2YyY2ZhOWM5YTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Shumpei</dc:creator></item><item><title><![CDATA[ReactコンポーネントをAngularで使う]]></title><description><![CDATA[はじめまして、@onicode3です。
+AngularコンポーネントからReactコンポーネントを使う方法を紹介します。
+
+ Angular から React コンポーネントを使う実装方法
+
+ 1. React パッケージのインストール
+Reactをインストールします。
+今回はテストの為、angularからreact-selectを表示してみます。
+npm i react react-dom react-select
+npm i -D @types/react @types/react-dom
+
+ 2. tsconfig.json の設定
+tsconfig.json に jsx の設定を...]]></description><link>https://zenn.dev/onicode3/articles/react-in-angular</link><guid isPermaLink="true">https://zenn.dev/onicode3/articles/react-in-angular</guid><pubDate>Wed, 25 Dec 2024 22:51:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hKDnqpfD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%259D%25E3%2583%25BC%25E3%2583%258D%25E3%2583%25B3%25E3%2583%2588%25E3%2582%2592Angular%25E3%2581%25A7%25E4%25BD%25BF%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:onicode3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzcwMmNlZTVjN2YuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>onicode3</dc:creator></item></channel></rss>
