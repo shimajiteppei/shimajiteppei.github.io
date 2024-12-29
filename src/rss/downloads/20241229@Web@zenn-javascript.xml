@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「JavaScript」のフィード]]></title><description><![CDATA[Zennのトピック「JavaScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/javascript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/64acd76870.png</url><title>Zennの「JavaScript」のフィード</title><link>https://zenn.dev/topics/javascript</link></image><generator>zenn.dev</generator><lastBuildDate>Sun, 29 Dec 2024 10:00:25 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/javascript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[shadowDOM 以下の要素で発生したイベントの発生元要素を特定する]]></title><description><![CDATA[
+ document レベルでイベント捕捉、target で発生元を識別
+HTML/JavaScript でのプログラムの話です。
+最近の Web アプリケーションフレームワークを使っていると、あまり出番は薄いのですが、希に、「下位要素からバブリングしてくるイベントを、document レベルでリッスンする」みたいな実装を行なうことがあります。そしてこのようなパターンでは、「どの要素でそのイベントが発生したのか」を、イベント引数の target プロパティを見て判断することがままあります。
+// このページで発生したすべての click イベントを捕捉し...
+document.addE...]]></description><link>https://zenn.dev/j_sakamoto/articles/d72e2db20e9788</link><guid isPermaLink="true">https://zenn.dev/j_sakamoto/articles/d72e2db20e9788</guid><pubDate>Sun, 29 Dec 2024 09:35:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--HqbFoh0V--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:shadowDOM%2520%25E4%25BB%25A5%25E4%25B8%258B%25E3%2581%25AE%25E8%25A6%2581%25E7%25B4%25A0%25E3%2581%25A7%25E7%2599%25BA%25E7%2594%259F%25E3%2581%2597%25E3%2581%259F%25E3%2582%25A4%25E3%2583%2599%25E3%2583%25B3%25E3%2583%2588%25E3%2581%25AE%25E7%2599%25BA%25E7%2594%259F%25E5%2585%2583%25E8%25A6%2581%25E7%25B4%25A0%25E3%2582%2592%25E7%2589%25B9%25E5%25AE%259A%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%2540jsakamoto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dVX243dnJ5ZFlLb2NxdUhSUkIxSGZ4NGpVekNsdGNmZ290R2hfNWc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>@jsakamoto</dc:creator></item><item><title><![CDATA[NetworkInformation API を使ってレンダリング結果を制御してみる？]]></title><description><![CDATA[ちょっと株式会社フロントエンドエンジニアのn13uです.
+MDN Web Docsを見ていたら見つけた「NetworkInformation API」について記事を書いてみます.
+!
+今回紹介するAPIは仕様の更新が4年近く前に止まっているもので、かつ実装しているブラウザも少ないため実験的な要素の域を出ません.
+
+
+ NetworkInformation APIとは？
+Webブラウザからデバイスが接続しているインターネットの接続状況を取得するためのAPIです. 残念ながらGoogle Chromeのみで採用されており、他主要ブラウザでは未実装の状態です.
+仕様の詳細はWICG（Web I...]]></description><link>https://zenn.dev/wataru_nishi731/articles/dddc2f76b0c6e6</link><guid isPermaLink="true">https://zenn.dev/wataru_nishi731/articles/dddc2f76b0c6e6</guid><pubDate>Sun, 29 Dec 2024 08:46:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--SMZ2p_rj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:NetworkInformation%2520API%2520%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2583%25AC%25E3%2583%25B3%25E3%2583%2580%25E3%2583%25AA%25E3%2583%25B3%25E3%2582%25B0%25E7%25B5%2590%25E6%259E%259C%25E3%2582%2592%25E5%2588%25B6%25E5%25BE%25A1%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:n13u%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RhMDBhODZmYTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>n13u</dc:creator></item><item><title><![CDATA[【GSAP】GSAP Practice【#１１ GSAP Sample３ Drower Menu Animation】]]></title><description><![CDATA[
+ 【#１１ GSAP Sample３ Drower Menu Animation】
+YouTube: https://youtu.be/7VvIWGbSwiU
+https://youtu.be/7VvIWGbSwiU
+今回はGSAPを使用して、
+ドロワーメニューを作成していきます。
+まずは、HTMLとCSSの部分を実装します。
+https://remixicon.com/
+
+index.html
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8" /&gt;
+ ...]]></description><link>https://zenn.dev/web_life_ch/articles/ffd820ea8fb417</link><guid isPermaLink="true">https://zenn.dev/web_life_ch/articles/ffd820ea8fb417</guid><pubDate>Sun, 29 Dec 2024 05:07:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--UAsYraPY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590GSAP%25E3%2580%2591GSAP%2520Practice%25E3%2580%2590%2523%25EF%25BC%2591%25EF%25BC%2591%2520GSAP%2520Sample%25EF%25BC%2593%2520Drower%2520Menu%2520Animation%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Web%2520Life%2520CH%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUl0YnZtbWNjTWFMM3dyd2x3VE5sVVZjTlhmZHEzZzF2QnJfMUJMSkJrN049czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Web Life CH</dc:creator></item><item><title><![CDATA[未使用であることを示す変数 アンダーバー(_)【個人学習まとめ】]]></title><description><![CDATA[
+ 引数のアンダーバー(_)
+JavaScriptにおいて、引数にアンダーバー(_)が使われることがある。
+これは、未使用であることを示す。(自分は初めて見たが、一般的な使い方らしい)
+new Promise((_,reject) =&gt; {
+    setTimeout(() =&gt; {
+        reject("制限時間!");
+    },500);
+});
+Promiseは第一引数に成功状態を示すresolve、第二引数に失敗状態を示すrejectが必要。
+上記の例では、タイムアウト後にPromiseを拒否したいだけなので、成功状態を示すresolveは必要ないため...]]></description><link>https://zenn.dev/o0rororo0o/articles/ba7bb47d3a2251</link><guid isPermaLink="true">https://zenn.dev/o0rororo0o/articles/ba7bb47d3a2251</guid><pubDate>Sun, 29 Dec 2024 02:19:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--uW8ChXul--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%259C%25AA%25E4%25BD%25BF%25E7%2594%25A8%25E3%2581%25A7%25E3%2581%2582%25E3%2582%258B%25E3%2581%2593%25E3%2581%25A8%25E3%2582%2592%25E7%25A4%25BA%25E3%2581%2599%25E5%25A4%2589%25E6%2595%25B0%2520%25E3%2582%25A2%25E3%2583%25B3%25E3%2583%2580%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%2528_%2529%25E3%2580%2590%25E5%2580%258B%25E4%25BA%25BA%25E5%25AD%25A6%25E7%25BF%2592%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%258D%25E3%2582%258D%25E3%2582%258D%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ2ZTZjOWM4YmMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ろろろ</dc:creator></item><item><title><![CDATA[JavaScriptの二重否定の使い道!!]]></title><description><![CDATA[記事を見ているときに「!!」という表現を見てこれなんだっけなーとなったのでメモとして残しておきます。
+
+ 二重否定とは
+「!!」二重否定はその名の通り否定論理演算子を2回繰り返したものです。
+そのためtrueはtrueのままだし、falseはfalseのままです。
+const hoge = true
+const fuga = false
+
+console.log(!!hoge) // true
+console.log(!!fuga) // false
+
+ 使い道
+使い道としてはあらゆる値を真偽値へ変換することです。
+console.log(!!0)         // false
+co...]]></description><link>https://zenn.dev/straw_engine/articles/a655e3cac54004</link><guid isPermaLink="true">https://zenn.dev/straw_engine/articles/a655e3cac54004</guid><pubDate>Sat, 28 Dec 2024 14:54:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--tozByrQ_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25E3%2581%25AE%25E4%25BA%258C%25E9%2587%258D%25E5%2590%25A6%25E5%25AE%259A%25E3%2581%25AE%25E4%25BD%25BF%25E3%2581%2584%25E9%2581%2593%2521%2521%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hanatsuyo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFUWEFKellZZEM2T1pzUWxjdmVrSkMxZlhCOXhxcTd6bmZkMzZCdGtuT249czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hanatsuyo</dc:creator></item><item><title><![CDATA[OSSに関わるようになったきっかけ、Reactライブラリを開発するまでの道のり]]></title><description><![CDATA[歳をとっていることがバレてしまうかもしれませんが、私がOSS開発の世界に足を踏み入れた経緯について書いた記事を紹介します。
+https://blog.axlight.com/posts/how-i-got-involved-in-oss/
+以下、ChatGPTによる翻訳です。
+
+
+ はじめに
+この記事では、私がオープンソースソフトウェア（OSS）開発に関わるようになった道のりを振り返りたいと思います。
+
+ 初めてのOSS貢献
+2000年頃、初めてOSSに貢献しました。それはNetBSD/mac68k用のEthernetドライバでした。C言語で書かれており、今振り返ると、自分でもコードをほ...]]></description><link>https://zenn.dev/dai_shi/articles/0e22b8536e4563</link><guid isPermaLink="true">https://zenn.dev/dai_shi/articles/0e22b8536e4563</guid><pubDate>Sat, 28 Dec 2024 09:29:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--DCm6h5h3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:OSS%25E3%2581%25AB%25E9%2596%25A2%25E3%2582%258F%25E3%2582%258B%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E3%2581%25AA%25E3%2581%25A3%25E3%2581%259F%25E3%2581%258D%25E3%2581%25A3%25E3%2581%258B%25E3%2581%2591%25E3%2580%2581React%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%25E3%2582%2592%25E9%2596%258B%25E7%2599%25BA%25E3%2581%2599%25E3%2582%258B%25E3%2581%25BE%25E3%2581%25A7%25E3%2581%25AE%25E9%2581%2593%25E3%2581%25AE%25E3%2582%258A%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:daishi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzcwZGNhM2E2Y2IuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>daishi</dc:creator></item><item><title><![CDATA[文章を決まった文字数で折り返して表示する処理の作り方]]></title><description><![CDATA[
+ はじめに
+この記事では、文章を決まった文字数で折り返して表示するプログラムの作り方について説明しています。ある程度の経験があるプログラマーにとってはそれほど難しいものではないと思いますが、初心者・初学者の方に向けにまとめています。
+
+ 実現したいこと
+たとえば、「あけましておめでとうございます」という文章を1行5文字で折り返す場合、以下のように表示されます。
+あけまして  
+おめでとう  
+ございます  
+3文字で折り返すと以下のように表示されます。
+あけま
+してお
+めでと
+うござ
+います
+このような処理を各文字の座標を指定して表示しなければいけない場合に、それぞれの文字の位置を計算...]]></description><link>https://zenn.dev/kwaka1208/articles/wrapping-text-at-a-fixed-character-count</link><guid isPermaLink="true">https://zenn.dev/kwaka1208/articles/wrapping-text-at-a-fixed-character-count</guid><pubDate>Sat, 28 Dec 2024 08:31:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1dzCU3jr--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%2596%2587%25E7%25AB%25A0%25E3%2582%2592%25E6%25B1%25BA%25E3%2581%25BE%25E3%2581%25A3%25E3%2581%259F%25E6%2596%2587%25E5%25AD%2597%25E6%2595%25B0%25E3%2581%25A7%25E6%258A%2598%25E3%2582%258A%25E8%25BF%2594%25E3%2581%2597%25E3%2581%25A6%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2599%25E3%2582%258B%25E5%2587%25A6%25E7%2590%2586%25E3%2581%25AE%25E4%25BD%259C%25E3%2582%258A%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kenichi%2520Wakabayashi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJmMjI4MDllOTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kenichi Wakabayashi</dc:creator></item><item><title><![CDATA[自分がよく使っているブックマークレット公開所]]></title><description><![CDATA[
+ 使い方(ブックマークレットの概要)
+javascript:alert("ブックマークレットのソースコード");
+←範囲選択ここまで
+
+↑のコードブロックを範囲選択して、ブラウザのブックマークにドラックドロップ
+名前がソースコードになってるので、自分のわかりやすい名前に変更する
+
+
+ Xで、表示中のURLかXのポストIDの反応を検索
+javascript:(function(){let xSearch;if(location.hostname=="x.com"&amp;&amp;0&lt;location.href.indexOf("/status/")){xSearch=locati...]]></description><link>https://zenn.dev/ihok/articles/c3d02cb7bea8b9</link><guid isPermaLink="true">https://zenn.dev/ihok/articles/c3d02cb7bea8b9</guid><pubDate>Sat, 28 Dec 2024 02:51:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--FuWDy9qP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%2587%25AA%25E5%2588%2586%25E3%2581%258C%25E3%2582%2588%25E3%2581%258F%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%2584%25E3%2582%258B%25E3%2583%2596%25E3%2583%2583%25E3%2582%25AF%25E3%2583%259E%25E3%2583%25BC%25E3%2582%25AF%25E3%2583%25AC%25E3%2583%2583%25E3%2583%2588%25E5%2585%25AC%25E9%2596%258B%25E6%2589%2580%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ihok%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFUWEFKejhESUZGcEliSGtLNnV4SnBJQnl1eGtCQkwwWU5zamE5VGx6bzk9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ihok</dc:creator></item><item><title><![CDATA[JavaScriptで解く！『LeetCode Arai 60』#5 Zigzag Conversion]]></title><description><![CDATA[
+ JavaScriptで解く！『LeetCode Arai 60』#5 Zigzag Conversion
+「Zigzag Conversion」は、文字列をジグザグ（上下に行ったり来たり）に並べ替える問題です。
+この問題を解くポイントはどうやってジグザグに文字を配置するかというところ。
+ここでは、2次元配列を使った解法を取り上げます。
+
+
+ 1. 問題のイメージ
+例えば、文字列 "PAYPALISHIRING" を行数3でジグザグに並べると：
+P   A   H   N
+A P L S I I G
+Y   I   R
+これを1行で読み取ると、"PAHNAPLSIIGYIR" という文...]]></description><link>https://zenn.dev/tcool/articles/38cf6b0d451148</link><guid isPermaLink="true">https://zenn.dev/tcool/articles/38cf6b0d451148</guid><pubDate>Fri, 27 Dec 2024 11:41:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fY7h8Vtp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25E3%2581%25A7%25E8%25A7%25A3%25E3%2581%258F%25EF%25BC%2581%25E3%2580%258ELeetCode%2520Arai%252060%25E3%2580%258F%25235%2520Zigzag%2520Conversion%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:t-cool%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2liVmViMFdEdFlWcUtvVDRvYktNeDNTUGZvRTVFOW9rNUV0c21Dc2RvPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>t-cool</dc:creator></item><item><title><![CDATA[this を操るABC : apply, bind, call (JavaScript)]]></title><description><![CDATA[JavaScriptを使っていると、「this」の意味について迷うことは、初学者の大きな課題の一つです。
+JavaScriptでは、コンテキストによって「this」が指す対象は変わるため、独自にある関数を実行するときに「この関数を〈この = this〉オブジェクトに結びつけたい」というときがあります。
+これを実現する方法の一つが「call」「apply」「bind」です。これらのメソッドの違いと実用方法を詳しく解説します。
+
+
+ 「call」の解説
+要素:
+
+すぐに関数を実行したいときに使う
+第一対象に「this」に結びつけるオブジェクトを渡し、その後に実際の引数を渡す
+
+
+ 例:
+fu...]]></description><link>https://zenn.dev/tcool/articles/50040e1f657fea</link><guid isPermaLink="true">https://zenn.dev/tcool/articles/50040e1f657fea</guid><pubDate>Fri, 27 Dec 2024 10:43:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--TzlU4z8x--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:this%2520%25E3%2582%2592%25E6%2593%258D%25E3%2582%258BABC%2520%253A%2520apply%252C%2520bind%252C%2520call%2520%2528JavaScript%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:t-cool%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2liVmViMFdEdFlWcUtvVDRvYktNeDNTUGZvRTVFOW9rNUV0c21Dc2RvPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>t-cool</dc:creator></item><item><title><![CDATA[JavaScriptで解く！『LeetCode Arai 60』#4 First Unique Character in a String]]></title><description><![CDATA[この記事では、LeetCode Arai 60 シリーズ第4問、First Unique Character in a String を JavaScript を使って解く方法を解説します。
+
+
+ 問題の概要
+文字列 s が与えられます。この中から、
+
+一度しか登場しない文字
+その中で、一番最初に現れる文字の位置（インデックス）
+
+
+を見つける問題です。
+もしそのような文字が存在しなければ -1 を返します。
+
+
+ 例
+
+ 入力例1
+s = "loveleetcode"
+
+
+"l" → 1回だけ登場（インデックス 0）
+
+"o" → 2回登場
+
+"v" → 1回だけ登場（インデックス 2...]]></description><link>https://zenn.dev/tcool/articles/a23e83dd0da09f</link><guid isPermaLink="true">https://zenn.dev/tcool/articles/a23e83dd0da09f</guid><pubDate>Fri, 27 Dec 2024 10:29:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--og5oDRMQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25E3%2581%25A7%25E8%25A7%25A3%25E3%2581%258F%25EF%25BC%2581%25E3%2580%258ELeetCode%2520Arai%252060%25E3%2580%258F%25234%2520First%2520Unique%2520Character...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:t-cool%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2liVmViMFdEdFlWcUtvVDRvYktNeDNTUGZvRTVFOW9rNUV0c21Dc2RvPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>t-cool</dc:creator></item><item><title><![CDATA[ExpressにてESLint、Prettierを設定してみた]]></title><description><![CDATA[
+ 設定
+
+ESLintの設定
+最初に必要なパッケージを追加する
+yarn add --dev prettier eslint-config-prettier eslint-plugin-prettier
+
+
+コマンド実行後にできたファイルを編集
+例
+import globals from "globals";
+import pluginJs from "@eslint/js";
+import tseslint from "@typescript-eslint/eslint-plugin";
+import tsparser from "@typescript-eslint/parser"...]]></description><link>https://zenn.dev/nineball/articles/351b56692ead42</link><guid isPermaLink="true">https://zenn.dev/nineball/articles/351b56692ead42</guid><pubDate>Fri, 27 Dec 2024 09:14:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ZL_e9xuO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Express%25E3%2581%25AB%25E3%2581%25A6ESLint%25E3%2580%2581Prettier%25E3%2582%2592%25E8%25A8%25AD%25E5%25AE%259A%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nineball%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA3YWM1ZTllYzAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nineball</dc:creator></item><item><title><![CDATA[JavaScriptで解く！『LeetCode Arai 60』#3 繰り返し文字のない最長の部分文字列]]></title><description><![CDATA[この記事では、LeetCode Arai60 の第3問 「Longest Substring Without Repeating Characters」 を、スライドウィンドウ法 (Sliding Window) の手法を使って解きます。
+
+
+ 1. 問題について
+
+
+入力: 文字列 s
+
+
+出力:
+
+
+s の中で、同じ文字が重複しない 連続した部分（＝部分文字列）のうち、一番長いものの「長さ」を求める
+
+
+
+
+ 例
+s = "abcabcbb"
+
+
+abc → 長さ 3
+
+bca → 長さ 3
+
+cab → 長さ 3
+…
+最長 3 となる。
+
+
+部分文字列: 元の文字列から「連続する形...]]></description><link>https://zenn.dev/tcool/articles/9245a4891ec3c7</link><guid isPermaLink="true">https://zenn.dev/tcool/articles/9245a4891ec3c7</guid><pubDate>Fri, 27 Dec 2024 09:13:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Ma4Q-dhG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25E3%2581%25A7%25E8%25A7%25A3%25E3%2581%258F%25EF%25BC%2581%25E3%2580%258ELeetCode%2520Arai%252060%25E3%2580%258F%25233%2520%25E7%25B9%25B0%25E3%2582%258A%25E8%25BF%2594%25E3%2581%2597%25E6%2596%2587%25E5%25AD%2597%25E3%2581%25AE%25E3%2581%25AA%25E3%2581%2584%25E6%259C%2580%25E9%2595%25B7%25E3%2581%25AE%25E9%2583%25A8%25E5%2588%2586%25E6%2596%2587%25E5%25AD%2597%25E5%2588%2597%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:t-cool%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2liVmViMFdEdFlWcUtvVDRvYktNeDNTUGZvRTVFOW9rNUV0c21Dc2RvPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>t-cool</dc:creator></item><item><title><![CDATA[JavaScriptで解く！『LeetCode Arai 60』#2 Add Two Numbers]]></title><description><![CDATA[このシリーズでは、LeetCode で良問として知られている Arai 60 を、JavaScript を用いて順番に解説していきます。
+第2問となる「Add Two Numbers」は、単一連結リストというデータ構造を扱いながら、再帰処理の基本を学ぶことができる良問です。
+ぜひ、この記事を参考にしながら取り組んでみてください！
+
+
+ 第2問「Add Two Numbers」について
+
+ 問題へのアクセス
+Add Two Numbers 問題ページ（LeetCode）
+
+ 問題概要
+
+問題
+2つの非負整数を、「各桁の数字」を逆順に並べた形で 単一連結リスト（以下、リスト と表記）で受け取...]]></description><link>https://zenn.dev/tcool/articles/88dc4a02afbad7</link><guid isPermaLink="true">https://zenn.dev/tcool/articles/88dc4a02afbad7</guid><pubDate>Fri, 27 Dec 2024 08:17:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Xgjke762--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25E3%2581%25A7%25E8%25A7%25A3%25E3%2581%258F%25EF%25BC%2581%25E3%2580%258ELeetCode%2520Arai%252060%25E3%2580%258F%25232%2520Add%2520Two%2520Numbers%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:t-cool%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2liVmViMFdEdFlWcUtvVDRvYktNeDNTUGZvRTVFOW9rNUV0c21Dc2RvPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>t-cool</dc:creator></item><item><title><![CDATA[アプリのパフォーマンス改善でライブラリの実装の理解が役立った話]]></title><description><![CDATA[
+ はじめに
+技術で開発上の問題を突破できると嬉しいですよね。
+しかもバックエンドで学んだことがフロントエンドで活用できると面白いですよね。
+そこでGraphQLサーバーの開発でDataLoaderの実装を勉強したことが、フロントエンドのパフォーマンス改善で役に立った話を紹介します。[1]
+（DataLoaderを知らなくても読めるようにこの記事は書いています！！！）
+
+ パフォーマンス問題
+ReactでExcelのようなテーブルを持ったアプリを開発していました。
+アプリには変更のあった行の色が変わる機能がありました。
+画面の雰囲気:
+
+ある日、データ件数が大きいときにペーストを行うと非...]]></description><link>https://zenn.dev/aidemy/articles/understanding-library-impl-helped-app-perf</link><guid isPermaLink="true">https://zenn.dev/aidemy/articles/understanding-library-impl-helped-app-perf</guid><pubDate>Fri, 27 Dec 2024 03:38:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--WsBdxvfV--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2581%25AE%25E3%2583%2591%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25BC%25E3%2583%259E%25E3%2583%25B3%25E3%2582%25B9%25E6%2594%25B9%25E5%2596%2584%25E3%2581%25A7%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%25E3%2581%25AE%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%25AE%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%258C%25E5%25BD%25B9%25E7%25AB%258B%25E3%2581%25A3%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:mosh%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNhNmVhZTQ3ZDkuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Aidemy%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAzNjI3YTFkMmMuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mosh</dc:creator></item><item><title><![CDATA[[関数型プログラミング]評価とファーストクラスとは？]]></title><description><![CDATA[
+ 評価とファーストクラスとは？
+関数型プログラミングは、純粋関数、高階関数、不変性などを中心に構成されます。これらの特徴を学ぶ前に密接に関連している 評価와 ファーストクラスの概念を理解することが重要です。
+
+ なぜ評価とファーストクラスは関数型プログラミングで重要なのか？
+関数型プログラミングを学ぶ前にこの概念を学ぶ理由は以下の通りです：
+
+
+コード実行の原理理解
+評価とファーストクラスは、コードの実行方法や記述方法を理解する上で重要な役割を果たします。コードがどのように実行され、結果が導かれるのかを理解すると、問題解決能力が向上します。
+
+効率的で柔軟なコード作成
+評価プロセスを理...]]></description><link>https://zenn.dev/heatherjin/articles/c3983b3a22bba3</link><guid isPermaLink="true">https://zenn.dev/heatherjin/articles/c3983b3a22bba3</guid><pubDate>Fri, 27 Dec 2024 01:39:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--geCQt8L7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255B%25E9%2596%25A2%25E6%2595%25B0%25E5%259E%258B%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%259F%25E3%2583%25B3%25E3%2582%25B0%255D%25E8%25A9%2595%25E4%25BE%25A1%25E3%2581%25A8%25E3%2583%2595%25E3%2582%25A1%25E3%2583%25BC%25E3%2582%25B9%25E3%2583%2588%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25B9%25E3%2581%25A8%25E3%2581%25AF%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%258F%25E3%2583%25AA%25E3%2583%259C%25E3%2583%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSUQ0NnhSVTRQalhfb1c3RVMyRzQ5eS1kbXFibHp4azBWTDRGQjlCOHFuPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ハリボー</dc:creator></item><item><title><![CDATA[AirリザーブのURLパラメータから予約種別を判定し、予約種別ごとの計測をする]]></title><description><![CDATA[
+ 背景と目的
+Airリザーブでの予約フローでは、URLパラメータschdlIdで予約種別を区別しています。このパラメータを利用して、予約種別ごとの計測を実現します。
+
+ 実装の課題
+
+URLパラメータは入り口ページにのみ存在
+予約フロー全体で予約種別を維持する必要性
+複数の分析会社での同時計測への対応
+
+
+ 解決策：JavaScriptによる実装
+//airrsv_event_sender.js
+(function() {
+  function getReservationType() {
+    try {
+      //URLパラメータ取得
+      var urlParams...]]></description><link>https://zenn.dev/sarap422/articles/846966eb63e7a8</link><guid isPermaLink="true">https://zenn.dev/sarap422/articles/846966eb63e7a8</guid><pubDate>Thu, 26 Dec 2024 15:11:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--pEGCuSzO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Air%25E3%2583%25AA%25E3%2582%25B6%25E3%2583%25BC%25E3%2583%2596%25E3%2581%25AEURL%25E3%2583%2591%25E3%2583%25A9%25E3%2583%25A1%25E3%2583%25BC%25E3%2582%25BF%25E3%2581%258B%25E3%2582%2589%25E4%25BA%2588%25E7%25B4%2584%25E7%25A8%25AE%25E5%2588%25A5%25E3%2582%2592%25E5%2588%25A4%25E5%25AE%259A%25E3%2581%2597%25E3%2580%2581%25E4%25BA%2588%25E7%25B4%2584%25E7%25A8%25AE%25E5%2588%25A5%25E3%2581%2594%25E3%2581%25A8%25E3%2581%25AE%25E8%25A8%2588%25E6%25B8%25AC%25E3%2582%2592%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:sarap422%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2Rhcmsvcy5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sarap422</dc:creator></item><item><title><![CDATA[CCSのみでメニュー表示切替]]></title><description><![CDATA[
+ はじめに
+ちゃんと知っておきたい人のHTML/CSS完全入門でHTML／CSSの学習で最も良いとされている実践的な勉強方法は「模写」であると書いてあったので、Writeー書くためのテーマを模写し始めたが、メニューの表示でいきなり詰まってしまいました。HTMLとCSSの本だから、JavaScriptを使わずにできるのかと思い調べたらできました。
+
+
+ CCSのみで切り替える流れ
+① チェックボックスを非表示にして利用
+&lt;input type="checkbox" id="menu-toggle" class="menu-button" /&gt;
+② Labelのfor属性でクリ...]]></description><link>https://zenn.dev/tryeverything/articles/a0008_css_menubutton</link><guid isPermaLink="true">https://zenn.dev/tryeverything/articles/a0008_css_menubutton</guid><pubDate>Thu, 26 Dec 2024 10:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--UszWd-Tb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:CCS%25E3%2581%25AE%25E3%2581%25BF%25E3%2581%25A7%25E3%2583%25A1%25E3%2583%258B%25E3%2583%25A5%25E3%2583%25BC%25E8%25A1%25A8%25E7%25A4%25BA%25E5%2588%2587%25E6%259B%25BF%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259F%25E3%2582%2593%25E3%2581%2595%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc2NDc5YTUwMzguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>たんさん</dc:creator></item><item><title><![CDATA[【GSAP】GSAP Practice【#１０ GSAP Sample2 SVG Animation2】]]></title><description><![CDATA[
+ 【#１０ GSAP Sample2 SVG Animation2】
+YouTube: https://youtu.be/aoE-vWFvNLE
+https://youtu.be/aoE-vWFvNLE
+今回はマウスカーソルの動きに合わせたアニメーションの設定を行います。
+
+js/main.js
+// use a script tag or an external JS file
+document.addEventListener("DOMContentLoaded", (event) =&gt; {
+  gsap.registerPlugin(ScrollTrigger);
+  ne...]]></description><link>https://zenn.dev/web_life_ch/articles/985faf7c6e4de6</link><guid isPermaLink="true">https://zenn.dev/web_life_ch/articles/985faf7c6e4de6</guid><pubDate>Thu, 26 Dec 2024 04:20:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---T9yzDQJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590GSAP%25E3%2580%2591GSAP%2520Practice%25E3%2580%2590%2523%25EF%25BC%2591%25EF%25BC%2590%2520GSAP%2520Sample2%2520SVG%2520Animation2%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Web%2520Life%2520CH%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUl0YnZtbWNjTWFMM3dyd2x3VE5sVVZjTlhmZHEzZzF2QnJfMUJMSkJrN049czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Web Life CH</dc:creator></item><item><title><![CDATA[そのJSのAPIって何に準拠する？]]></title><description><![CDATA[おそらくXで、Node.jsを知るにはv8エンジンを知る必要がある。みたいなポストをみて、v8エンジンを少し学習しました。
+v8エンジンについては引き続き学習が必要ですが、その過程でjsのAPIが何に準拠するかを知り、「へー」となったので備忘録的に記事にします。
+
+ そもそもv8エンジンとは
+Googleが提供するjsエンジンのこと。ecmascriptを実装しています。
+つまり、このv8エンジンを使えば、ecmascriptの仕様に則りjsを実行することができます。
+
+ ecmascript
+JSの標準仕様のことです。jsの様々なAPIの仕様が https://402.ecma-int...]]></description><link>https://zenn.dev/aki_chan_desu/articles/8c52219c0e52d8</link><guid isPermaLink="true">https://zenn.dev/aki_chan_desu/articles/8c52219c0e52d8</guid><pubDate>Wed, 25 Dec 2024 15:11:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9dfa6RE2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%259D%25E3%2581%25AEJS%25E3%2581%25AEAPI%25E3%2581%25A3%25E3%2581%25A6%25E4%25BD%2595%25E3%2581%25AB%25E6%25BA%2596%25E6%258B%25A0%25E3%2581%2599%25E3%2582%258B%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25A2%25E3%2582%25AD%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA0NTNhNzU0NWUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>アキ</dc:creator></item></channel></rss>

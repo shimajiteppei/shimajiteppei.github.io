@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Sun, 29 Dec 2024 10:00:25 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[CIDR表記を計算するツールをPythonで作ってみた　]]></title><description><![CDATA[
+ 算数苦手な人のために
+IP CIDRを計算する方法がさっぱりわからない🤦
+計算してくれるサイトはあるようだ。
+https://www.softel.co.jp/labs/tools/network/
+でも知らなかったので、Pythonで作ってみた。ipaddress --- IPv4/IPv6 操作ライブラリを使用して作成してみました。標準のモジュールとして入っているみたい？
+pip installは不要!
+https://youtu.be/cEXXV0VGUKQ
+
+ example
+サンプルコードはこちら。実行するとGUIが表示される。ここに、イチ・クニなんとかって入力します。
+
+...]]></description><link>https://zenn.dev/joo_hashi/articles/b9225132d7d338</link><guid isPermaLink="true">https://zenn.dev/joo_hashi/articles/b9225132d7d338</guid><pubDate>Sun, 29 Dec 2024 09:58:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--A_crjGL2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:CIDR%25E8%25A1%25A8%25E8%25A8%2598%25E3%2582%2592%25E8%25A8%2588%25E7%25AE%2597%25E3%2581%2599%25E3%2582%258B%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%25E3%2582%2592Python%25E3%2581%25A7%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25E3%2580%2580%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:JboyHashimoto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNjOTBiY2M0M2YuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>JboyHashimoto</dc:creator></item><item><title><![CDATA[Pythonで無限井戸型ポテンシャルのシュレディンガー方程式を解く]]></title><description><![CDATA[
+ はじめに
+波動関数をベクトル、演算子を行列でそれぞれ表すと、シュレディンガー方程式は行列の固有値・固有ベクトル問題に帰着させることができます。この事実を活用することで、数値計算でシュレディンガー方程式を解けるようになります。本記事では、よく知られた一次元無限井戸型ポテンシャルを題材に、Pythonを用いた数値解法を紹介します。
+
+ シュレディンガー方程式を行列・ベクトルで表現する
+一次元無限井戸型ポテンシャルにおける(定常状態の)シュレディンガー方程式は下記の通りです。
+
+\left(-\frac{\hbar^2}{2m}\frac{\mathrm{d}^2}{\mathrm{d}x...]]></description><link>https://zenn.dev/moz_toki/articles/6fa7c05697b9a3</link><guid isPermaLink="true">https://zenn.dev/moz_toki/articles/6fa7c05697b9a3</guid><pubDate>Sun, 29 Dec 2024 09:55:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--pnwCooCd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A7%25E7%2584%25A1%25E9%2599%2590%25E4%25BA%2595%25E6%2588%25B8%25E5%259E%258B%25E3%2583%259D%25E3%2583%2586%25E3%2583%25B3%25E3%2582%25B7%25E3%2583%25A3%25E3%2583%25AB%25E3%2581%25AE%25E3%2582%25B7%25E3%2583%25A5%25E3%2583%25AC%25E3%2583%2587%25E3%2582%25A3%25E3%2583%25B3%25E3%2582%25AC%25E3%2583%25BC%25E6%2596%25B9%25E7%25A8%258B%25E5%25BC%258F%25E3%2582%2592%25E8%25A7%25A3%25E3%2581%258F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2582%25E3%2581%259A%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvbS5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>もず</dc:creator></item><item><title><![CDATA[ローカルLLMを用いたポートフォリオ生成アプリを作ってみた]]></title><description><![CDATA[
+ はじめに
+
+ どんな人向けの記事？
+
+生成 AI に興味がある方
+ローカル LLM に興味がある方
+資産運用に興味がある方
+
+
+開発環境
+Mac Studio（M2 Ultra 128GB） + Claude MCP (filesystem + git)
+
+
+ 概要
+現在、ちょっとした Web アプリを作っていて、その中間成果物としてローカル LLM を用いたポートフォリオ生成アプリを作りました。
+今回は、そのアプリの簡単な紹介と開発の中で得られた知見等を備忘録的にまとめます。
+「ちょっとしたアプリ」に関しては完成してからのお楽しみということで、今回はポートフォリオ生成アプリの開発ま...]]></description><link>https://zenn.dev/robustonian/articles/portfolio_generator</link><guid isPermaLink="true">https://zenn.dev/robustonian/articles/portfolio_generator</guid><pubDate>Sun, 29 Dec 2024 08:17:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--WodvtLd8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25AB%25E3%2583%25ABLLM%25E3%2582%2592%25E7%2594%25A8%25E3%2581%2584%25E3%2581%259F%25E3%2583%259D%25E3%2583%25BC%25E3%2583%2588%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25AA%25E3%2582%25AA%25E7%2594%259F%25E6%2588%2590%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E9%2587%2591%25E3%2581%25AE%25E3%2583%258B%25E3%2583%25AF%25E3%2583%2588%25E3%2583%25AA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ1NmVjZjczNWIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>金のニワトリ</dc:creator></item><item><title><![CDATA[Advent of Code 2024 Day 11: Plutonian Pebbles]]></title><description><![CDATA[
+ このページは
+2024 年の Advent of Code の Day11 の記事です。 Day10 はこちら。
+https://zenn.dev/yasuharu519/articles/a89527a2d3dd60
+!
+以下問題のネタバレが多数含まれています。問題を楽しみたい方は是非一度本家の問題を見てから読んでみてください。
+
+
+ Day 11: Plutonian Pebbles
+今回は物理法則を超越した石についての問題です。数字が掘られた石が直列に並んでいます。不思議なのは、瞬きする度に石が二つに分裂したり、掘られている数字が変化するというところです。
+どうやらそれぞれの石...]]></description><link>https://zenn.dev/yasuharu519/articles/6d3f5c09a55a8a</link><guid isPermaLink="true">https://zenn.dev/yasuharu519/articles/6d3f5c09a55a8a</guid><pubDate>Sun, 29 Dec 2024 06:55:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--D6r_wOWy--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Advent%2520of%2520Code%25202024%2520Day%252011%253A%2520Plutonian%2520Pebbles%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Sawady%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI4ODhkNmU3MTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Sawady</dc:creator></item><item><title><![CDATA[Advent of Code 2024 Day 10: Hoof It]]></title><description><![CDATA[
+ このページは
+2024 年の Advent of Code の Day10 の記事です。 Day9 はこちら。
+https://zenn.dev/yasuharu519/articles/f3bd94bbc6d16a
+!
+以下問題のネタバレが多数含まれています。問題を楽しみたい方は是非一度本家の問題を見てから読んでみてください。
+
+
+ Day 10: Hoof It
+今回のテーマはハイキングです。 以下のように、各セルの高さを与えられたマップが配られます。
+0123
+1234
+8765
+9876
+0 が一番低く、9 が一番高いことを表しています。
+
+ Part1
+Part1 では、あ...]]></description><link>https://zenn.dev/yasuharu519/articles/a89527a2d3dd60</link><guid isPermaLink="true">https://zenn.dev/yasuharu519/articles/a89527a2d3dd60</guid><pubDate>Sun, 29 Dec 2024 06:33:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5lOCa5Bb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Advent%2520of%2520Code%25202024%2520Day%252010%253A%2520Hoof%2520It%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Sawady%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI4ODhkNmU3MTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Sawady</dc:creator></item><item><title><![CDATA[【2024年版】何も考えずにAPIサーバーをpythonを建てたい話(Docker+FastAPI+mongo)]]></title><description><![CDATA[
+ 何をしたいのか？
+DockerとFastAPIを使ってpython製のAPIサーバーを簡単に建てる話です。
+今回の記事は、自分のためのメモ書きみたいな意味を含んでいるので注意です。
+コマンドの説明は、特に載せません。ググレカス。
+今回、何も考えずにネットで拾った情報(公式リファレンスetc)を使いまくって繋ぎ合わせています。余計なコマンドがあるかもしれませんが、そこはそっと替えておいてください。
+ちなみに、DBにmongoを使用していますが、これは他の方が使ってたElasticSearchを使ったシステムの引継ぎの影響を受けています。
+なので、お好きなDBをお使いください。
+
+ 前提...]]></description><link>https://zenn.dev/test_myname/articles/python-api-server-starter</link><guid isPermaLink="true">https://zenn.dev/test_myname/articles/python-api-server-starter</guid><pubDate>Sun, 29 Dec 2024 05:13:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2WIjftLU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%25902024%25E5%25B9%25B4%25E7%2589%2588%25E3%2580%2591%25E4%25BD%2595%25E3%2582%2582%25E8%2580%2583%25E3%2581%2588%25E3%2581%259A%25E3%2581%25ABAPI%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2582%2592python%25E3%2582%2592%25E5%25BB%25BA%25E3%2581%25A6%25E3%2581%259F%25E3%2581%2584%25E8%25A9%25B1%2528Docker%252BFastAPI%252Bmongo%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25B7%25E3%2582%2589%25E3%2582%2580%25E3%2582%2589%25E3%2581%2584%25E3%2581%2599%2528PlumRice%2529%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNiZTA0ODE1OTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ぷらむらいす(PlumRice)</dc:creator></item><item><title><![CDATA[AIに愚痴を聞いてもらってその時の感情を分析してくれる簡単なアプリを作成した]]></title><description><![CDATA[
+ はじめに
+日々の生活の中で、誰かに話を聞いてほしいと思う瞬間はありませんか？
+特に忙しい日々の中で、感情を整理する時間を持つことは難しいものです。そんなときに役立つのが、AIに愚痴を聞いてもらいながら自分の今の気持ちを分析できるアプリです。
+このアプリは、誰にも話せない思いをAIに打ち明けることで、感情を客観的に捉え、自己理解を深めるための手助けをします。特別な心理学的知識や複雑な操作は不要で、誰でも簡単に使える非常に簡易的なものになっています。
+
+ 解決したい社会課題
+現代社会では、仕事や人間関係、家庭環境など、多くの人がさまざまなストレスを抱えています。しかし、その感情を適切に表...]]></description><link>https://zenn.dev/coco_ns/articles/879a15a9ca62b9</link><guid isPermaLink="true">https://zenn.dev/coco_ns/articles/879a15a9ca62b9</guid><pubDate>Sun, 29 Dec 2024 03:04:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BAnqP1DO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AI%25E3%2581%25AB%25E6%2584%259A%25E7%2597%25B4%25E3%2582%2592%25E8%2581%259E%25E3%2581%2584%25E3%2581%25A6%25E3%2582%2582%25E3%2582%2589%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%259D%25E3%2581%25AE%25E6%2599%2582%25E3%2581%25AE%25E6%2584%259F%25E6%2583%2585%25E3%2582%2592%25E5%2588%2586%25E6%259E%2590%25E3%2581%2597%25E3%2581%25A6%25E3%2581%258F%25E3%2582%258C%25E3%2582%258B%25E7%25B0%25A1%25E5%258D%2598%25E3%2581%25AA%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:coco_ns%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSzFoWGg3V3ptWFgyYjVxUVlEamhZcUJIMmxHeDcwWi1USEQxNVJSbTdZWHFZYWJBPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>coco_ns</dc:creator></item><item><title><![CDATA[browser-useでインタラクティブなスクレイピング:最新情報にアクセス]]></title><description><![CDATA[あ
+
+ はじめに
+MBA取得に向けた小論文や面接の準備に追われていたため、ここしばらく記事を書く時間がありませんでした。しかし、会社が冬期休暇に入り、少し余裕ができたので、久しぶりに記事を書いてみることにしました。
+最近、browser-useというPythonライブラリが登場したことを、Google検索などで知りました。以前、seleniumを使ったWebブラウザ操作の自動化に関する記事を投稿しましたが、このbrowser-useはより自律的な処理操作が可能で、将来的な可能性を大いに感じています。
+https://qiita.com/ogi_kimura/items/db22e2697...]]></description><link>https://zenn.dev/ogiki/articles/6db6c13565528c</link><guid isPermaLink="true">https://zenn.dev/ogiki/articles/6db6c13565528c</guid><pubDate>Sun, 29 Dec 2024 03:00:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--a4Lx36lH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:browser-use%25E3%2581%25A7%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25BF%25E3%2583%25A9%25E3%2582%25AF%25E3%2583%2586%25E3%2582%25A3%25E3%2583%2596%25E3%2581%25AA%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AC%25E3%2582%25A4%25E3%2583%2594%25E3%2583%25B3%25E3%2582%25B0%253A%25E6%259C%2580%25E6%2596%25B0%25E6%2583%2585%25E5%25A0%25B1%25E3%2581%25AB%25E3%2582%25A2%25E3%2582%25AF%25E3%2582%25BB%25E3%2582%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%259C%25A8%25E6%259D%2591%25E3%2581%259F%25E3%2582%258D%25E3%2581%2586%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZkZjNiYWMwZmQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>木村たろう</dc:creator></item><item><title><![CDATA[ansible - FreeBSD 研究 2024/12/29]]></title><description><![CDATA[
+ FreeBSD で python を pkg でインストールすることが出来ない？
+
+ある時点で取り込んだ /var/db/pkg/repo に lang/python が存在していない。
+
+/var/db/pkg/repos/FreeBSD # ls -al
+total 48
+drwxr-xr-x  2 root wheel      7 Dec 29 01:31 .
+drwxr-xr-x  3 root wheel      3 Aug 13 08:32 ..
+-rw-r--r--  1 root wheel 184320 Dec 29 01:31 db
+-rw-r--r--  1...]]></description><link>https://zenn.dev/hikosakasohtaro/articles/3e5c892aefe7e9</link><guid isPermaLink="true">https://zenn.dev/hikosakasohtaro/articles/3e5c892aefe7e9</guid><pubDate>Sun, 29 Dec 2024 03:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2tskojTg--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ansible%2520-%2520FreeBSD%2520%25E7%25A0%2594%25E7%25A9%25B6%25202024%252F12%252F29%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:s-taro%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4WUhib25zV0tINlNHVGROZE11NVpjb0tnUDk2cEVHVUo3Ty00RXU9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>s-taro</dc:creator></item><item><title><![CDATA[YOLOv8を使って野球のバッティング動作の骨格推定]]></title><description><![CDATA[
+ はじめに
+先日開催されたソフトバンクホークスのデータサイエンス業務の体験会が福岡県の筑後で開催されていて、それに参加してきました。（交通費負担がかなりきつかった）
+https://www.softbankhawks.co.jp/news/detail/202400637726.html
+その中のセッションの一つに野球の動作の姿勢の推定してみるというものがあり、自分でも出来そうだなと思ったので、実装してみました。
+
+ 使用したモデルと環境
+
+Model : YOLOv8
+環境 : Google colab (CPUを使って推定できるのでGPUを使う必要はありません)
+
+
+ 参考にしたペ...]]></description><link>https://zenn.dev/maoya23/articles/47be090aec141a</link><guid isPermaLink="true">https://zenn.dev/maoya23/articles/47be090aec141a</guid><pubDate>Sun, 29 Dec 2024 02:40:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--v8psSEUC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:YOLOv8%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E9%2587%258E%25E7%2590%2583%25E3%2581%25AE%25E3%2583%2590%25E3%2583%2583%25E3%2583%2586%25E3%2582%25A3%25E3%2583%25B3%25E3%2582%25B0%25E5%258B%2595%25E4%25BD%259C%25E3%2581%25AE%25E9%25AA%25A8%25E6%25A0%25BC%25E6%258E%25A8%25E5%25AE%259A%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Naoya%2520Matsuo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E1ODIyOWM1YzYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Naoya Matsuo</dc:creator></item><item><title><![CDATA[【stable-diffusion-webui】 metadata-generation-failed]]></title><description><![CDATA[
+ 考えられる原因
+このエラーは、
+
+Pythonのバージョンが、非対応の3.11以上
+
+torchがvenv内にすでにインストールされている
+
+ときに起こると考えられます。
+
+ 解消法
+
+
+venvフォルダを削除
+
+
+以下のリンクからPython 3.10.6をインストールしてください
+https://www.python.org/ftp/python/3.10.6/python-3.10.6-amd64.exe
+
+
+!
+必ずAdd to pathにチェックを入れましょう！
+
+
+もう一度webui-user.batを実行
+
+この方法でエラーが解消されることを祈っています！
+]]></description><link>https://zenn.dev/glisan/articles/8bf720e74f5b7e</link><guid isPermaLink="true">https://zenn.dev/glisan/articles/8bf720e74f5b7e</guid><pubDate>Sun, 29 Dec 2024 01:28:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--rWqsPZmg--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590stable-diffusion-webui%25E3%2580%2591%2520metadata-generation-failed%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25B0%25E3%2583%25AA%25E3%2583%2583%25E3%2582%25B5%25E3%2583%25B3%25E3%2583%2589%25E3%2580%2582%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M0MzU1YzBlZDcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>グリッサンド。</dc:creator></item><item><title><![CDATA[精読「独習Python」(標準ライブラリ コレクション)]]></title><description><![CDATA[
+
+独習Python
+「独習Python」は、初心者から中級者までを対象に、Pythonの基礎から応用までを体系的に学べる入門書で、豊富な例題と練習問題を通じて実践的なスキルを身につけられる一冊です。
+関連記事
+https://zenn.dev/joaan/articles/bec9c096241f6b
+https://zenn.dev/joaan/articles/bde04761294b13
+https://zenn.dev/joaan/articles/37b84b3b500574
+https://zenn.dev/joaan/articles/9923635212d7ad
+
+複数...]]></description><link>https://zenn.dev/joaan/articles/5553aaf1ba39a2</link><guid isPermaLink="true">https://zenn.dev/joaan/articles/5553aaf1ba39a2</guid><pubDate>Sat, 28 Dec 2024 19:56:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6iwyCFiN--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%25B2%25BE%25E8%25AA%25AD%25E3%2580%258C%25E7%258B%25AC%25E7%25BF%2592Python%25E3%2580%258D%2528%25E6%25A8%2599%25E6%25BA%2596%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%2520%25E3%2582%25B3%25E3%2583%25AC%25E3%2582%25AF%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25B8%25E3%2583%25A7%25E3%2582%25A2%25E3%2583%25B3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRhMGZlZWIzNjguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ジョアン</dc:creator></item><item><title><![CDATA[話題のMarkItDownをCloud Run関数でAPI化してみた]]></title><description><![CDATA[
+ MarkItDownとは
+MarkItDownは、様々なファイルをMarkdownに変換するユーティリティです（インデックス作成、テキスト分析など）。
+以下のファイルをサポートしています。
+
+PDF
+パワーポイント
+ワード
+エクセル
+画像（EXIFメタデータおよびOCR）
+音声（EXIFメタデータおよび音声トランスクリプション）
+HTML
+テキストベースのフォーマット（CSV、JSON、XML）
+ZIPファイル（コンテンツを反復処理）
+
+https://github.com/microsoft/markitdown
+生成AIの活用が進むにつれて、既存のファイルを生成AIで扱えるように...]]></description><link>https://zenn.dev/delisit/articles/c31d10a7e9c7f3</link><guid isPermaLink="true">https://zenn.dev/delisit/articles/c31d10a7e9c7f3</guid><pubDate>Sat, 28 Dec 2024 14:41:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GM9L7cQK--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%25A9%25B1%25E9%25A1%258C%25E3%2581%25AEMarkItDown%25E3%2582%2592Cloud%2520Run%25E9%2596%25A2%25E6%2595%25B0%25E3%2581%25A7API%25E5%258C%2596%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:delisit%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTFN6TkFBVkZPQVJwbHJTZVBXVldTZXRHQy10YTdOd29aX1FJMUpIczZFMDNXZ3l6Wkk9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>delisit</dc:creator></item><item><title><![CDATA[Advent of Code 2024 Day 9: Disk Fragmenter]]></title><description><![CDATA[
+ このページは
+2024 年の Advent of Code の Day9 の記事です。 Day8 はこちら。
+https://zenn.dev/yasuharu519/articles/1739051153a249
+!
+以下問題のネタバレが多数含まれています。問題を楽しみたい方は是非一度本家の問題を見てから読んでみてください。
+
+
+ Day 9: Disk Fragmenter
+今回はディスク上のファイルと空き容量の配置が与えられます。指示に従って、ファイルを空き容量のスペースに移動させるといったような問題です。
+23325 といったような配置情報が与えられたとき、それぞれの数字はフ...]]></description><link>https://zenn.dev/yasuharu519/articles/f3bd94bbc6d16a</link><guid isPermaLink="true">https://zenn.dev/yasuharu519/articles/f3bd94bbc6d16a</guid><pubDate>Sat, 28 Dec 2024 14:19:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--A9k2MMT1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Advent%2520of%2520Code%25202024%2520Day%25209%253A%2520Disk%2520Fragmenter%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Sawady%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI4ODhkNmU3MTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Sawady</dc:creator></item><item><title><![CDATA[あなたのソフトウェア開発効率を改善するちょっとしたTips集]]></title><description><![CDATA[こんにちは、kaiwareです。
+この記事では、私が日々のプログラミングで気をつけているポイントや、効率を上げるためのテクニックをまとめてみました。C++（QtCreator）とPython（VSCode）を想定していますが、他の言語やツールでも応用可能な内容です。ぜひ参考にしてみてください！
+またオススメのTipsがあれば、ぜひコメントで教えてください！
+※ この記事はベースは人間が作成し、体裁を整えたり情報を追加したりなどはChatGPTで行いました。
+
+
+ 1. 見やすいコードを書く工夫
+
+ シンタックスハイライトのカスタマイズ
+例:
+
+デフォルトでは薄いグレーのコメントを、目立つ...]]></description><link>https://zenn.dev/kaiware0x/articles/software_dev_tips</link><guid isPermaLink="true">https://zenn.dev/kaiware0x/articles/software_dev_tips</guid><pubDate>Sat, 28 Dec 2024 13:04:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3JdYzDij--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%2582%25E3%2581%25AA%25E3%2581%259F%25E3%2581%25AE%25E3%2582%25BD%25E3%2583%2595%25E3%2583%2588%25E3%2582%25A6%25E3%2582%25A7%25E3%2582%25A2%25E9%2596%258B%25E7%2599%25BA%25E5%258A%25B9%25E7%258E%2587%25E3%2582%2592%25E6%2594%25B9%25E5%2596%2584%25E3%2581%2599%25E3%2582%258B%25E3%2581%25A1%25E3%2582%2587%25E3%2581%25A3%25E3%2581%25A8%25E3%2581%2597%25E3%2581%259FTips%25E9%259B%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kaiware%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2Rhcmsvay5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kaiware</dc:creator></item><item><title><![CDATA[インタラクティブなグラフ作成ライブラリ Plotly]]></title><description><![CDATA[
+ Plotlyとは
+Plotlyとは、インタラクティブ(グラフを作成した後にユーザが描画範囲等を変更できる)なグラフを簡単に作成できるライブラリです。グラフ作成では、matplotlibやseabornが有名ですが、これらは一度作ると描画範囲を変更するのにプログラムの再実行が必要であるため、情報共有の際に手戻りが発生することがありました。
+
+ Plotlyを使う嬉しさ
+
+描画範囲や表示する凡例を後から変更できる
+フォントを設定しなくても日本語が文字化けしない
+html形式で保存すれば、誰でも自由にインタラクティブなグラフを作成できる
+
+Plotlyを使う嬉しさはここら辺になるのですが、...]]></description><link>https://zenn.dev/aldente/articles/a3dca94fa29968</link><guid isPermaLink="true">https://zenn.dev/aldente/articles/a3dca94fa29968</guid><pubDate>Sat, 28 Dec 2024 12:58:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--YlxyFWyB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25BF%25E3%2583%25A9%25E3%2582%25AF%25E3%2583%2586%25E3%2582%25A3%25E3%2583%2596%25E3%2581%25AA%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%2595%25E4%25BD%259C%25E6%2588%2590%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%2520Plotly%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25A2%25E3%2583%25AB%25E3%2583%25BB%25E3%2583%2587%25E3%2583%25B3%25E3%2583%2586%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSkJuNkFQNGM1MEd2SjZjM3k1YTFEZHRkY2pVNTlGdjhFTnBzUGtqVkJPbGxBVU41NVY9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>アル・デンテ</dc:creator></item><item><title><![CDATA[NBA 24-25シーズンの2024年中におけるグリズリーズの各選手の得点力をベイズモデリングしてみる（河村くんフォーカスしたい）]]></title><description><![CDATA[
+ はじめに
+今シーズンのNBAはみなさん見ていますか。
+僕はというとバスケ歴はそこそこ長いにも関わらず今まであんまりリアルタイムで試合を見てこなかったのですが、河村勇輝くんがグリズリーズとの2wayを獲得しシーズン帯同しているのを見て隙あらばNBAを見ている次第です。
+Rakuten Mobile会員なのでNBA Rakutenで無料で見れることに大感謝です。
+ところで、普段からデータ分析をしている身として、そしてバスケ歴が20年弱というのもありバスケのプレイに対してそこそこ詳しい身として、昨今のスポーツは本当にデータ分析とともに進化して来ているなと感じますし、バスケも漏れなくその潮流...]]></description><link>https://zenn.dev/yakke/articles/9b3bc85e33758f</link><guid isPermaLink="true">https://zenn.dev/yakke/articles/9b3bc85e33758f</guid><pubDate>Sat, 28 Dec 2024 12:38:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BTxdP3Bo--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:NBA%252024-25%25E3%2582%25B7%25E3%2583%25BC%25E3%2582%25BA%25E3%2583%25B3%25E3%2581%25AE2024%25E5%25B9%25B4%25E4%25B8%25AD%25E3%2581%25AB%25E3%2581%258A%25E3%2581%2591%25E3%2582%258B%25E3%2582%25B0%25E3%2583%25AA%25E3%2582%25BA%25E3%2583%25AA%25E3%2583%25BC%25E3%2582%25BA%25E3%2581%25AE%25E5%2590%2584%25E9%2581%25B8%25E6%2589%258B%25E3%2581%25AE%25E5%25BE%2597%25E7%2582%25B9%25E5%258A%259B%25E3%2582%2592%25E3%2583%2599%25E3%2582%25A4%25E3%2582%25BA%25E3%2583%25A2%25E3%2583%2587%25E3%2583%25AA%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%25EF%25BC%2588%25E6%25B2%25B3%25E6%259D%2591%25E3%2581%258F%25E3%2582%2593%25E3%2583%2595...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yakke%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAwZTBiZWYyYWMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yakke</dc:creator></item><item><title><![CDATA[Pythonで学ぶRaspberry Pi入門]]></title><description><![CDATA[プログラミングや電子工作に興味はあるけど、何から始めればいいか分からない…。そんな初心者の方に向けたRaspberry Piの入門書です。
+
+Raspberry Piを使い、LED制御やセンサー（カメラ）活用から、AIを用いたオブジェクト検出まで初心者におすすめのプロジェクトをわかりやすく解説。小さなプロジェクトから一歩ずつ進めることで、楽しみながらスキルを習得できます。
+
+手を動かして学びたい方に最適な内容で、初心者から中級者まで楽しめる構成となっています。]]></description><link>https://zenn.dev/murasanlab/books/c93b5ccaf332a9</link><guid isPermaLink="true">https://zenn.dev/murasanlab/books/c93b5ccaf332a9</guid><pubDate>Sat, 28 Dec 2024 11:56:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--UR3JUSpW--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci9kZWUwYTY4NzNlLmpwZWc=%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>Murasan Lab</dc:creator></item><item><title><![CDATA[【MongoDB】日本語でソートするためにフィールドへCollationsを設定する（mongoengine使用）]]></title><description><![CDATA[
+ 概要
+MongoDBで日本語のデータが入るフィールドでソートをかけたい場合、Collations（照合順序）を設定する必要があります。今回はその設定をPythonのmongoengineでっ行ってみたので、そのメモ書きです。
+
+ 前提
+
+使用したMongoDBのバージョンは8.0.1です。
+使用したmongoengineのバージョンは0.29.1です。
+
+
+ Collations（照合順序）について
+概要についてはひとりMongoDB University / M201 MongoDB Performance(4)の記事のCollationsの項が参考になります。公式ドキュメントは照...]]></description><link>https://zenn.dev/someone7140/articles/44ff5f84afb8f0</link><guid isPermaLink="true">https://zenn.dev/someone7140/articles/44ff5f84afb8f0</guid><pubDate>Sat, 28 Dec 2024 11:34:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vRVrByL---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590MongoDB%25E3%2580%2591%25E6%2597%25A5%25E6%259C%25AC%25E8%25AA%259E%25E3%2581%25A7%25E3%2582%25BD%25E3%2583%25BC%25E3%2583%2588%25E3%2581%2599%25E3%2582%258B%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AB%25E3%2583%2595%25E3%2582%25A3%25E3%2583%25BC%25E3%2583%25AB%25E3%2583%2589%25E3%2581%25B8Collations%25E3%2582%2592%25E8%25A8%25AD%25E5%25AE%259A%25E3%2581%2599%25E3%2582%258B%25EF%25BC%2588mongoengine%25E4%25BD%25BF%25E7%2594%25A8%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AA%25E3%2581%258B%25E3%2581%25A4%25E3%2581%258C%25E3%2582%258F%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFhNWRlOTE4YjEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>なかつがわ</dc:creator></item><item><title><![CDATA[uv tool install でインストールしたツールは独立したvenvで実行される]]></title><description><![CDATA[便利さと実装方法に感動したので書く。
+
+ uvとは
+https://docs.astral.sh/uv/
+Pythonのバージョン+依存ライブラリ管理ツール。もはや説明不要かもしれない。Rustで書かれているので「Pythonの管理ツールをPythonで動かす場合、そのツールを動かすPythonのバージョンはいくつになるの？」みたいなニワトリ卵問題は発生しない。
+最強なので使ったことの無い人は本当に使ってみてほしい。pyenvやpipenvやpoetryに苦しめられた経験のある人は特に。
+
+ uv tool installとは
+https://docs.astral.sh/uv/conc...]]></description><link>https://zenn.dev/1hakusai1/articles/18ce679d072802</link><guid isPermaLink="true">https://zenn.dev/1hakusai1/articles/18ce679d072802</guid><pubDate>Sat, 28 Dec 2024 10:41:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--oUumElS3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:uv%2520tool%2520install%2520%25E3%2581%25A7%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%2597%25E3%2581%259F%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%25AF%25E7%258B%25AC%25E7%25AB%258B%25E3%2581%2597%25E3%2581%259Fvenv%25E3%2581%25A7%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%2595%25E3%2582%258C%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hakusai%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U1Mjk0YmM1NWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hakusai</dc:creator></item></channel></rss>
