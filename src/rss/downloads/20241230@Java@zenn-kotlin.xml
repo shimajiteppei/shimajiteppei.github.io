@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Kotlin」のフィード]]></title><description><![CDATA[Zennのトピック「Kotlin」のRSSフィードです]]></description><link>https://zenn.dev/topics/kotlin</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/0913f0325d.png</url><title>Zennの「Kotlin」のフィード</title><link>https://zenn.dev/topics/kotlin</link></image><generator>zenn.dev</generator><lastBuildDate>Mon, 30 Dec 2024 07:39:25 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/kotlin/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Googleが公開しているAndroid開発トレーニング（初心者向け）をやってみた - Unit2]]></title><description><![CDATA[
+ 前回
+https://zenn.dev/takoyaki31/articles/ee0a7cf7da7a66
+
+ 今回
+チュートリアル(Unit2)：
+https://developer.android.com/courses/android-basics-compose/unit-2?hl=ja
+
+ 学習メモ
+kotlinにはnull安全というコンセプトがあり、基本的に非NULL許容となっている。
+wrapContentSize：コンポーネントのサイズをその内容のサイズに合わせるように指定する
+余白がある場合は、子要素の位置を指定することができる
+
+wrapContentSize
+...]]></description><link>https://zenn.dev/takoyaki31/articles/90f6b6f230f1df</link><guid isPermaLink="true">https://zenn.dev/takoyaki31/articles/90f6b6f230f1df</guid><pubDate>Mon, 30 Dec 2024 02:17:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--v3ZqUE5J--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Google%25E3%2581%258C%25E5%2585%25AC%25E9%2596%258B%25E3%2581%2597%25E3%2581%25A6%25E3%2581%2584%25E3%2582%258BAndroid%25E9%2596%258B%25E7%2599%25BA%25E3%2583%2588%25E3%2583%25AC%25E3%2583%25BC%25E3%2583%258B%25E3%2583%25B3%25E3%2582%25B0%25EF%25BC%2588%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E5%2590%2591%25E3%2581%2591%25EF%25BC%2589%25E3%2582%2592%25E3%2582%2584%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2520-%2520Unit2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:takoyaki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U3ZDJmZGNlZWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takoyaki</dc:creator></item><item><title><![CDATA[文字列は実質Any問題に対するKotlinのアプローチ 〜TypeScriptのBranded Typesを添えて〜]]></title><description><![CDATA[
+ 文字列は実質Any
+例えば従業員IDを管理するemp_123456_idと部署IDを管理するdep_123456_idがあるとします。
+これを文字列として扱った場合、コードとしては以下のようになります。
+val employeeId = "emp_123456_id"
+val departmentId = "dep_123456_id"
+ですが、これらは文字列のためこのように従業員IDと部署IDを間違って代入できてしまいます。
+val employeeId = "dep_123456_id"
+val departmentId = "emp_123456_id"
+これは両方とも文字列の...]]></description><link>https://zenn.dev/yskn_sid25/articles/ff9514a99ea811</link><guid isPermaLink="true">https://zenn.dev/yskn_sid25/articles/ff9514a99ea811</guid><pubDate>Sun, 29 Dec 2024 23:04:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--nG07GiQ_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%2596%2587%25E5%25AD%2597%25E5%2588%2597%25E3%2581%25AF%25E5%25AE%259F%25E8%25B3%25AAAny%25E5%2595%258F%25E9%25A1%258C%25E3%2581%25AB%25E5%25AF%25BE%25E3%2581%2599%25E3%2582%258BKotlin%25E3%2581%25AE%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2581%2520%25E3%2580%259CTypeScript%25E3%2581%25AEBranded%2520Types%25E3%2582%2592%25E6%25B7%25BB%25E3%2581%2588%25E3%2581%25A6%25E3%2580%259C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kanon%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM1OTY4ZjJmNWUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kanon</dc:creator></item><item><title><![CDATA[SpringBoot3を使ったSpringBatchサンプルアプリ]]></title><description><![CDATA[Spring Boot3がリリースされて久しいですが、Spring BatchもSpring Boot3へ移行するにはSpring Batch5への対応が必要となります。
+Spring Boot3を利用してSpring Batchを作成した際に、参考情報が少なく試行錯誤したため、今後実装する方の参考になるようにサンプルアプリケーションを作成しました。
+最低限動くことを意図しているため、各種ロジックや設定は雑な部分が多いですが、ご了承ください。
+https://github.com/takeaki-m/spring-boot3-batch-sample
+今回の実装にあたり、以下の記事を参考...]]></description><link>https://zenn.dev/takeaki_m/articles/24c8d7291f3ab9</link><guid isPermaLink="true">https://zenn.dev/takeaki_m/articles/24c8d7291f3ab9</guid><pubDate>Sun, 29 Dec 2024 09:15:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7VmLjZLX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:SpringBoot3%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%259FSpringBatch%25E3%2582%25B5%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AB%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:take%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ1NGUxN2RmODYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>take</dc:creator></item><item><title><![CDATA[【1日1zenn - day14】Spring Bootで認証機能とか作ってみる part.2]]></title><description><![CDATA[以下の続きです
+https://zenn.dev/shunsuke108m/articles/6d94bfbbe96e77
+一旦公式チュートリアル通りに認証機能を実装したので、これの理解と応用をやっていきます。
+
+ 認証機能の理解
+
+ コードとか諸々。
+
+ MvcConfig.kt
+package com.example.securingweb
+
+import org.springframework.context.annotation.Configuration
+import org.springframework.web.servlet.config.annotation.ViewC...]]></description><link>https://zenn.dev/shunsuke108m/articles/d43c9187e031c3</link><guid isPermaLink="true">https://zenn.dev/shunsuke108m/articles/d43c9187e031c3</guid><pubDate>Sun, 29 Dec 2024 08:14:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--FEkrkzZq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%25901%25E6%2597%25A51zenn%2520-%2520day14%25E3%2580%2591Spring%2520Boot%25E3%2581%25A7%25E8%25AA%258D%25E8%25A8%25BC%25E6%25A9%259F%25E8%2583%25BD%25E3%2581%25A8%25E3%2581%258B%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2520part.2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25AE%25AE%25E7%2594%25B0%25E5%25B3%25BB%25E8%25BC%2594%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTG9Jdy1QSHNvSW1WVGpKTmxFbkhnZkRyZ0pBVlRSQzhIaWMweDVJUmZLS3hlUjZnPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>宮田峻輔</dc:creator></item><item><title><![CDATA[プロダクション向け Androidアプリ開発 2025]]></title><description><![CDATA[Now in Androidアプリを参考に、プロダクション向けのAndroidアプリ開発をプロジェクト作成から解説してみます。]]></description><link>https://zenn.dev/mokelab/books/1fc9efedfd8b9c</link><guid isPermaLink="true">https://zenn.dev/mokelab/books/1fc9efedfd8b9c</guid><pubDate>Sun, 29 Dec 2024 00:24:31 GMT</pubDate><dc:creator>mokelab</dc:creator></item><item><title><![CDATA[【1日1zenn - day13】Spring Bootで認証機能とか作ってみる]]></title><description><![CDATA[以下の続きです
+https://zenn.dev/shunsuke108m/articles/948fbad695ba51
+
+ 一旦GETとPOSTを作っていく
+まずこちらの記事を参考にGETを作ってみました。
+
+ GET
+
+ Controller
+
+DemoApplication.kt
+package com.example.demo
+
+import org.springframework.boot.autoconfigure.SpringBootApplication
+import org.springframework.boot.runApplication
+import org....]]></description><link>https://zenn.dev/shunsuke108m/articles/6d94bfbbe96e77</link><guid isPermaLink="true">https://zenn.dev/shunsuke108m/articles/6d94bfbbe96e77</guid><pubDate>Sat, 28 Dec 2024 17:53:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--HsR_CIKd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%25901%25E6%2597%25A51zenn%2520-%2520day13%25E3%2580%2591Spring%2520Boot%25E3%2581%25A7%25E8%25AA%258D%25E8%25A8%25BC%25E6%25A9%259F%25E8%2583%25BD%25E3%2581%25A8%25E3%2581%258B%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25AE%25AE%25E7%2594%25B0%25E5%25B3%25BB%25E8%25BC%2594%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTG9Jdy1QSHNvSW1WVGpKTmxFbkhnZkRyZ0pBVlRSQzhIaWMweDVJUmZLS3hlUjZnPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>宮田峻輔</dc:creator></item><item><title><![CDATA[【1日1zenn - day12】Spring BootでHTMLを表示]]></title><description><![CDATA[
+ やること
+https://spring.pleiades.io/spring-boot/tutorial/first-application/
+Springのチュートリアルをやろうと思います。kotlinは一旦後回し。このチュートリアルを書き換えたりしていくかも。
+
+ 環境構築
+必要なものは以下。
+
+InteliJ
+Java
+Maven
+Gradle
+全部私物PCでは入れていなかったです。
+
+InteliJはサクッとインストール。
+
+ Java
+java -version
+The operation couldn’t be completed. Unable to locate a ...]]></description><link>https://zenn.dev/shunsuke108m/articles/b05655557c7dde</link><guid isPermaLink="true">https://zenn.dev/shunsuke108m/articles/b05655557c7dde</guid><pubDate>Fri, 27 Dec 2024 12:58:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--q9QZ7Txm--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%25901%25E6%2597%25A51zenn%2520-%2520day12%25E3%2580%2591Spring%2520Boot%25E3%2581%25A7HTML%25E3%2582%2592%25E8%25A1%25A8%25E7%25A4%25BA%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25AE%25AE%25E7%2594%25B0%25E5%25B3%25BB%25E8%25BC%2594%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTG9Jdy1QSHNvSW1WVGpKTmxFbkhnZkRyZ0pBVlRSQzhIaWMweDVJUmZLS3hlUjZnPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>宮田峻輔</dc:creator></item><item><title><![CDATA[【1日1zenn - day11】Spring Bootをざっくりキャッチアップ]]></title><description><![CDATA[day10に続き、基礎知識の仕入れに使います。
+BEのコードを見ていると、Kotlin特有の書き方もあれば、Spring Boot特有の書き方もあり、なんとなく読むのはできたりしますがそのせいで処理を見落として沼ったりしてました。
+前回はkotlinのドキュメントをざっくりキャッチアップしたので、今回はSpring Bootをキャッチアップした上で、次回以降は実際に処理をどれくらい早く理解できるか、ボトルネックになっているところは何か特定していきます。
+そもそもSpiring Bootが何であって、何ではないのかがわかってないという感じ。
+
+ 一旦記事を読む
+ドキュメントを読もうとしたら...]]></description><link>https://zenn.dev/shunsuke108m/articles/948fbad695ba51</link><guid isPermaLink="true">https://zenn.dev/shunsuke108m/articles/948fbad695ba51</guid><pubDate>Wed, 25 Dec 2024 17:16:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xuIKPm0s--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%25901%25E6%2597%25A51zenn%2520-%2520day11%25E3%2580%2591Spring%2520Boot%25E3%2582%2592%25E3%2581%2596%25E3%2581%25A3%25E3%2581%258F%25E3%2582%258A%25E3%2582%25AD%25E3%2583%25A3%25E3%2583%2583%25E3%2583%2581%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25AE%25AE%25E7%2594%25B0%25E5%25B3%25BB%25E8%25BC%2594%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTG9Jdy1QSHNvSW1WVGpKTmxFbkhnZkRyZ0pBVlRSQzhIaWMweDVJUmZLS3hlUjZnPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>宮田峻輔</dc:creator></item><item><title><![CDATA[Kotlinでrequireを使って引数とかのAssertionをいい感じに表現する]]></title><description><![CDATA[
+ こういうコードを書いた覚えはないだろうか
+例えば商品の代金を計算したいとします。その時の計算処理は一般化し、以下のように記述することができます。
+fun calcPurchasePrice(price: Int, quantity: Int): Int {
+    if (price &lt; 0 || quantity &lt; 0) {
+        throw IllegalArgumentException("Price and quantity must be positive")
+    }
+    return price * quantity
+}
+ですが、このコード...]]></description><link>https://zenn.dev/yskn_sid25/articles/9bb03341d1ba4f</link><guid isPermaLink="true">https://zenn.dev/yskn_sid25/articles/9bb03341d1ba4f</guid><pubDate>Wed, 25 Dec 2024 12:06:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--cnBFkZGk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Kotlin%25E3%2581%25A7require%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E5%25BC%2595%25E6%2595%25B0%25E3%2581%25A8%25E3%2581%258B%25E3%2581%25AEAssertion%25E3%2582%2592%25E3%2581%2584%25E3%2581%2584%25E6%2584%259F%25E3%2581%2598%25E3%2581%25AB%25E8%25A1%25A8%25E7%258F%25BE%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kanon%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM1OTY4ZjJmNWUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kanon</dc:creator></item><item><title><![CDATA[Excelシート循環参照をトポロジカルソートで判定してみる(1/3)]]></title><description><![CDATA[こんにちは！アルダグラムでレポートチームのエンジニアをしている志茂です。
+レポートチームでは、お客様が利用されているExcelファイルをKANNA上にアップロードし、Webから編集できるような機能を開発しております。
+Excelファイルを読み込み編集できるようにするためには、色々な考慮事項があるのですが、今回はその中でもExcelアップロード時にバリデーションが必要な、Excelシートの循環参照をトポロジカルソートを用いて判定する方法について、以下のように3回に分けてお話ししたいと思います。
+
+Excelシートの循環参照をトポロジカルソートで判別するためには (1/3)
+DFS（深さ優先...]]></description><link>https://zenn.dev/aldagram_tech/articles/26771194887274</link><guid isPermaLink="true">https://zenn.dev/aldagram_tech/articles/26771194887274</guid><pubDate>Wed, 25 Dec 2024 01:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--eAT5Chzj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Excel%25E3%2582%25B7%25E3%2583%25BC%25E3%2583%2588%25E5%25BE%25AA%25E7%2592%25B0%25E5%258F%2582%25E7%2585%25A7%25E3%2582%2592%25E3%2583%2588%25E3%2583%259D%25E3%2583%25AD%25E3%2582%25B8%25E3%2582%25AB%25E3%2583%25AB%25E3%2582%25BD%25E3%2583%25BC%25E3%2583%2588%25E3%2581%25A7%25E5%2588%25A4%25E5%25AE%259A%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%25281%252F3%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:seamoooo%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JiM2FkMDk1NzUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25A2%25E3%2583%25AB%25E3%2583%2580%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%25A0%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI3YjU3ZWVlNzkuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>seamoooo</dc:creator></item><item><title><![CDATA[障害を防ぐための関数型エラーハンドリング（後編）]]></title><description><![CDATA[
+!
+この記事は 株式会社ログラス Productチーム Advent Calendar 2024 のシリーズ 1、24日目 の記事です。
+
+アドベントカレンダー24日目です。
+前回：障害を防ぐための関数型エラーハンドリング（前編）
+前回は、主に try-catch によるエラーハンドリングは、様々なデメリットがあることを示しました。
+今回の記事では、関数型がなぜ重要なのかを掘り下げてから、実際のKotlinでのDDDスタイルのコード例を見ていきたいと思います。
+
+ なぜ関数型が重要なのか
+関数型の特徴を用いると、エラーハンドリングがより安全になります。特に、純粋性と全域性によって、予測...]]></description><link>https://zenn.dev/loglass/articles/52953c9349fa05</link><guid isPermaLink="true">https://zenn.dev/loglass/articles/52953c9349fa05</guid><pubDate>Tue, 24 Dec 2024 08:48:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--apAyWXQz--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E9%259A%259C%25E5%25AE%25B3%25E3%2582%2592%25E9%2598%25B2%25E3%2581%2590%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%25E9%2596%25A2%25E6%2595%25B0%25E5%259E%258B%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E3%2583%258F%25E3%2583%25B3%25E3%2583%2589%25E3%2583%25AA%25E3%2583%25B3%25E3%2582%25B0%25EF%25BC%2588%25E5%25BE%258C%25E7%25B7%25A8%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:knih%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRlNWQ4ZTRjZjguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2582%25B9%2520%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRkNTA1ZGU0NzguanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>knih</dc:creator></item><item><title><![CDATA[Spring Boot 3.4.0で追加された MockMvcTester が便利]]></title><description><![CDATA[Spring Boot 3.4.0 から、AssertJがクラスパスに含まれている場合に MockMvcTester が利用可能になりました。これにより、リクエストとアサーションを流れるように記述でき、テストコードが読みやすくなります。
+
+ コントローラー例
+以下のコントローラーのテストを書きます。
+@RestController
+@RequestMapping("/api")
+class SampleController {
+
+    @GetMapping("/hello")
+    fun hello(): ResponseEntity&lt;String&gt; {
+      ...]]></description><link>https://zenn.dev/sukechannnn/articles/ec2eef03efa9d0</link><guid isPermaLink="true">https://zenn.dev/sukechannnn/articles/ec2eef03efa9d0</guid><pubDate>Tue, 24 Dec 2024 06:42:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--zY4WzIi---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Spring%2520Boot%25203.4.0%25E3%2581%25A7%25E8%25BF%25BD%25E5%258A%25A0%25E3%2581%2595%25E3%2582%258C%25E3%2581%259F%2520MockMvcTester%2520%25E3%2581%258C%25E4%25BE%25BF%25E5%2588%25A9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:sukechannnn%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2QzOTljNjM5YmQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sukechannnn</dc:creator></item><item><title><![CDATA[Googleが公開しているAndroid開発トレーニング（初心者向け）をやってみた - Unit1]]></title><description><![CDATA[
+ 背景
+次の案件がAndroidアプリの開発（Kotolin + Jetpack Compose）になるため事前にキャッチアップしておきたかった。
+チュートリアル(Unit1)：
+https://developer.android.com/courses/android-basics-compose/unit-1?hl=ja
+
+ 学習メモ
+
+ 概要
+onCreate()：エントリポイント、初期設定など
+setContent()：UIを設定、構築する関数
+@Composable：コンポーズ可能関数に付与するアノテーション、setContent()で使用するUIの部品
+@Preview：作...]]></description><link>https://zenn.dev/takoyaki31/articles/ee0a7cf7da7a66</link><guid isPermaLink="true">https://zenn.dev/takoyaki31/articles/ee0a7cf7da7a66</guid><pubDate>Mon, 23 Dec 2024 23:41:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--14fNoj4Y--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Google%25E3%2581%258C%25E5%2585%25AC%25E9%2596%258B%25E3%2581%2597%25E3%2581%25A6%25E3%2581%2584%25E3%2582%258BAndroid%25E9%2596%258B%25E7%2599%25BA%25E3%2583%2588%25E3%2583%25AC%25E3%2583%25BC%25E3%2583%258B%25E3%2583%25B3%25E3%2582%25B0%25EF%25BC%2588%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E5%2590%2591%25E3%2581%2591%25EF%25BC%2589%25E3%2582%2592%25E3%2582%2584%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2520-%2520Unit1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:takoyaki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U3ZDJmZGNlZWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takoyaki</dc:creator></item><item><title><![CDATA[Compose Multiplatform でも使える高機能画像表示の神ライブラリ ZoomImage]]></title><description><![CDATA[こんにちは！アルダグラムでエンジニアをしている渡邊です。
+弊社の KANNA のモバイルアプリでは、以前から画像に対して線やテキストを書き込み、書き込んだ内容を新しい画像として出力することができるという、画像編集機能があります。
+画像編集時には画像を回転することができなかったのですが、先日、画像も回転させられるようにする機能拡張を行いました。
+以下はそのサンプル動画です。
+
+以前までは画像編集時には TouchImageView というライブラリを使って画像を表示していたのですが、このライブラリには画像を回転させる機能がありませんでした。
+そのため回転機能がある画像表示ライブラリを探して...]]></description><link>https://zenn.dev/aldagram_tech/articles/6d7fac0ba18b6b</link><guid isPermaLink="true">https://zenn.dev/aldagram_tech/articles/6d7fac0ba18b6b</guid><pubDate>Mon, 23 Dec 2024 22:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--KxS_q5tp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Compose%2520Multiplatform%2520%25E3%2581%25A7%25E3%2582%2582%25E4%25BD%25BF%25E3%2581%2588%25E3%2582%258B%25E9%25AB%2598%25E6%25A9%259F%25E8%2583%25BD%25E7%2594%25BB%25E5%2583%258F%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%25AE%25E7%25A5%259E%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%2520ZoomImage%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:watabee%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JiM2FkMDk1NzUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25A2%25E3%2583%25AB%25E3%2583%2580%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%25A0%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lySjNaUlJPVUQ1R0ZrRi1Nc3ZmUFhWNUVrV1U2RHkwTnlLX0ZTPXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>watabee</dc:creator></item><item><title><![CDATA[【1日1zenn - day10】kotlinの超ざっくりキャッチアップ]]></title><description><![CDATA[BEのチケットをもらい、既存仕様等のキャッチアップを進めていたのですが、めちゃくちゃ時間がかかりました。
+かかった要因として、ざっくり大事そうなところを見ようとしていたので見落としていた処理があったことが大きく、
+それが発生したのは『多分ここが大事』の勘所を掴めていなかったのと、1行ずつ読むには自分の知識が甘く認知負荷が高すぎたことがあったように思えます。
+自分のチームはkotlinとSpring Bootでバックエンドを書いているのですが、研修で習ったJavaの机上知識でなんとなく直感的に理解できる部分もあるからザザッと読んじゃうみたいなことをしてしまっており、
+小さいAPI修正くらい...]]></description><link>https://zenn.dev/shunsuke108m/articles/53d7efb502b82b</link><guid isPermaLink="true">https://zenn.dev/shunsuke108m/articles/53d7efb502b82b</guid><pubDate>Mon, 23 Dec 2024 17:23:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--MVprLvu1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%25901%25E6%2597%25A51zenn%2520-%2520day10%25E3%2580%2591kotlin%25E3%2581%25AE%25E8%25B6%2585%25E3%2581%2596%25E3%2581%25A3%25E3%2581%258F%25E3%2582%258A%25E3%2582%25AD%25E3%2583%25A3%25E3%2583%2583%25E3%2583%2581%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25AE%25AE%25E7%2594%25B0%25E5%25B3%25BB%25E8%25BC%2594%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTG9Jdy1QSHNvSW1WVGpKTmxFbkhnZkRyZ0pBVlRSQzhIaWMweDVJUmZLS3hlUjZnPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>宮田峻輔</dc:creator></item><item><title><![CDATA[【Jetpack Compose】記事取得アプリを作ってみる]]></title><description><![CDATA[
+ 初めに
+今回は Jetpack Compose を用いて記事の一覧を取得するためのアプリケーションを作成してみたいと思います。記事の取得には Retrofit を用いるので、その使い方を中心に見ていきたいと思います。
+Jetpack Compose のドキュメントでインターネットからデータを取得するの章で Retrofit を用いてデータの取得を行う実装があったので、それを別の形で使ってみたいと思います。
+
+ 記事の対象者
+
+Jetpack Compose 初学者
+Retrofit に触れてみたい方
+
+
+ 目的
+今回の目的は、先述の通り Jetpack Compose で記事取得アプ...]]></description><link>https://zenn.dev/koichi_51/articles/6f86e0e94f9a8c</link><guid isPermaLink="true">https://zenn.dev/koichi_51/articles/6f86e0e94f9a8c</guid><pubDate>Mon, 23 Dec 2024 16:39:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lDSJXd9N--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Jetpack%2520Compose%25E3%2580%2591%25E8%25A8%2598%25E4%25BA%258B%25E5%258F%2596%25E5%25BE%2597%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Koichi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU1Y2NmNjkxYjMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Koichi</dc:creator></item><item><title><![CDATA[【Jetpack Compose】レイアウトについてまとめる]]></title><description><![CDATA[
+ 初めに
+今回は Jetpack Compose におけるレイアウトについてまとめてみたいと思います。
+Flutter のレイアウトと似ている部分も多くありますが、Flutter の書き方と比較しつつ、 Jetpack Compose ではどのように実装するかみていきたいと思います。
+
+ 記事の対象者
+
+Jetpack Compose 初学者
+
+
+ 目的
+今回の目的は、 Jetpack Compose のレイアウトの実装方法をまとめることです。
+Flutter だとどのようになるかを比較しつつ、基本的なレイアウトについては実現できるくらいまでまとめていきたいと思います。
+
+ 実装
+今回...]]></description><link>https://zenn.dev/koichi_51/articles/e686b3b6e52182</link><guid isPermaLink="true">https://zenn.dev/koichi_51/articles/e686b3b6e52182</guid><pubDate>Mon, 23 Dec 2024 16:37:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--gUSRkFgZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Jetpack%2520Compose%25E3%2580%2591%25E3%2583%25AC%25E3%2582%25A4%25E3%2582%25A2%25E3%2582%25A6%25E3%2583%2588%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Koichi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU1Y2NmNjkxYjMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Koichi</dc:creator></item><item><title><![CDATA[【Jetpack Compose】Textをカスタマイズする]]></title><description><![CDATA[
+ 初めに
+今回は Jetpack Compose で Text をカスタマイズする方法についてまとめてみたいと思います。
+筆者は普段 Flutter をメインで扱っているため、「Flutter ではこのように実装するが Jetpack Compose ではどのように実装すれば良いか？」という場面がよくあります。
+今回は特に Text について取り上げて、より詳しくみていきたいと思います。
+
+ 記事の対象者
+
+Jetpack Composer 初学者
+
+
+ 目的
+今回は上記の通り、 Jetpack Compose における Text の扱い方についてまとめていきたいと思います。実装にあた...]]></description><link>https://zenn.dev/koichi_51/articles/43a8f26bada069</link><guid isPermaLink="true">https://zenn.dev/koichi_51/articles/43a8f26bada069</guid><pubDate>Mon, 23 Dec 2024 16:36:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ICJmJBho--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Jetpack%2520Compose%25E3%2580%2591Text%25E3%2582%2592%25E3%2582%25AB%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%259E%25E3%2582%25A4%25E3%2582%25BA%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Koichi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU1Y2NmNjkxYjMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Koichi</dc:creator></item><item><title><![CDATA[Kotlin入門: バックエンド開発について理解する]]></title><description><![CDATA[
+ Kotlin入門: バックエンド開発について理解する
+
+ 1. はじめに
+前回はAndroid開発について学びました。
+
+Kotlin入門: Android開発について理解する
+
+今回はバックエンド開発について学びます。
+
+ 2. バックエンド開発とは
+バックエンド開発とは、Webアプリケーションのサーバーサイドの開発を指します。
+Kotlin は Android 向けの開発に注目されがちですが、JVM 言語であるためにサーバサイド（バックエンド）開発でも非常に活用されています。
+
+ 3. Kotlinでバックエンド開発をするメリット
+
+ 1. Java との高い互換性
+Kotlin...]]></description><link>https://zenn.dev/shintyakos1145/articles/github-zenn-linkage-20241223</link><guid isPermaLink="true">https://zenn.dev/shintyakos1145/articles/github-zenn-linkage-20241223</guid><pubDate>Mon, 23 Dec 2024 13:08:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7sq7wd0r--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Kotlin%25E5%2585%25A5%25E9%2596%2580%253A%2520%25E3%2583%2590%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2589%25E9%2596%258B%25E7%2599%25BA%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:stakeuchi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2Rhcmsvcy5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>stakeuchi</dc:creator></item><item><title><![CDATA[ローカルのHTMLをGradleタスクでstrings.xmlに変換してJetpack composeで表示する]]></title><description><![CDATA[
+ なぜそんなことするの？
+利用規約など、一部を装飾する場合が多いテキストを都度 Spannable で装飾するのは面倒だから。
+あとは、個人開発をしている場合は利用規約をホスティングするのも、やや手間だなっていう短絡的思考です。
+
+ メリット・デメリット
+
+ メリット
+
+都度 Spannable で装飾しなくていい。
+WebView で表示するよりライト/ダークのアプリテーマを適応させやすい。
+Android 特有の Xml エスケープをしなくていい。
+
+
+ デメリット
+
+そもそもそんなことしている案件ある？
+
+利用規約が更新されるたびに同意してもらうような殊勝な案件なら。。。(IoT...]]></description><link>https://zenn.dev/u_chan/articles/a10a2b0440ae30</link><guid isPermaLink="true">https://zenn.dev/u_chan/articles/a10a2b0440ae30</guid><pubDate>Mon, 23 Dec 2024 10:02:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1Se1Jb3c--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25AB%25E3%2583%25AB%25E3%2581%25AEHTML%25E3%2582%2592Gradle%25E3%2582%25BF%25E3%2582%25B9%25E3%2582%25AF%25E3%2581%25A7strings.xml%25E3%2581%25AB%25E5%25A4%2589%25E6%258F%259B%25E3%2581%2597%25E3%2581%25A6Jetpack%2520compose%25E3%2581%25A7%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2586%25E3%2583%25BC%25E3%2581%25A1%25E3%2582%2583%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzljYTk3ODY3ZDMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ゆーちゃん</dc:creator></item></channel></rss>

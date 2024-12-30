@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「TypeScript」のフィード]]></title><description><![CDATA[Zennのトピック「TypeScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/typescript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/f13e758fdb.png</url><title>Zennの「TypeScript」のフィード</title><link>https://zenn.dev/topics/typescript</link></image><generator>zenn.dev</generator><lastBuildDate>Mon, 30 Dec 2024 01:43:13 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/typescript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[CLI で TODO を管理する]]></title><description><![CDATA[
+ TODO を何で管理するか問題
+みなさんは TODO を管理するときにどんなものを使っていますか？
+筆者はジプシーで、古くは手書きでノートや付箋に書いたり、 Slack の自分の times/DM に書いたり、notion に書いたり、GitHub の issue はどうか、Chrome の拡張はどうか...と様々な手法を取ってきました。
+ただ、どれも長くは続きませんでした。
+todo 1つは大したことないサイズですが、
+役職上、細々としたものが非同期かつ同時並行で走っているのでチケット化しなくてもメモはしておきたいところです。
+手書きだとその場になかったり持ち歩く必要があったり、 ...]]></description><link>https://zenn.dev/seventhseven07/articles/ddac898532bacc</link><guid isPermaLink="true">https://zenn.dev/seventhseven07/articles/ddac898532bacc</guid><pubDate>Mon, 30 Dec 2024 00:30:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jBp-G4pX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:CLI%2520%25E3%2581%25A7%2520TODO%2520%25E3%2582%2592%25E7%25AE%25A1%25E7%2590%2586%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Shumpei%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2YyY2ZhOWM5YTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Shumpei</dc:creator></item><item><title><![CDATA[文字列は実質Any問題に対するKotlinのアプローチ 〜TypeScriptのBranded Typesを添えて〜]]></title><description><![CDATA[
+ 文字列は実質Any
+例えば従業員IDを管理するemp_123456_idと部署IDを管理するdep_123456_idがあるとします。
+これを文字列として扱った場合、コードとしては以下のようになります。
+val employeeId = "emp_123456_id"
+val departmentId = "dep_123456_id"
+ですが、これらは文字列のためこのように従業員IDと部署IDを間違って代入できてしまいます。
+val employeeId = "dep_123456_id"
+val departmentId = "emp_123456_id"
+これは両方とも文字列の...]]></description><link>https://zenn.dev/yskn_sid25/articles/ff9514a99ea811</link><guid isPermaLink="true">https://zenn.dev/yskn_sid25/articles/ff9514a99ea811</guid><pubDate>Sun, 29 Dec 2024 23:04:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--nG07GiQ_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%2596%2587%25E5%25AD%2597%25E5%2588%2597%25E3%2581%25AF%25E5%25AE%259F%25E8%25B3%25AAAny%25E5%2595%258F%25E9%25A1%258C%25E3%2581%25AB%25E5%25AF%25BE%25E3%2581%2599%25E3%2582%258BKotlin%25E3%2581%25AE%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2581%2520%25E3%2580%259CTypeScript%25E3%2581%25AEBranded%2520Types%25E3%2582%2592%25E6%25B7%25BB%25E3%2581%2588%25E3%2581%25A6%25E3%2580%259C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kanon%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM1OTY4ZjJmNWUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kanon</dc:creator></item><item><title><![CDATA[どこでも簡単にHTMLのサニタイズ with Svelte]]></title><description><![CDATA[
+ 導入
+カスタムHTMLのレンダリングはXSSの危険性があるので慎重になるのは言わずもがな。
+一般的にフロントエンドでは最強のサニタイズライブラリDOMPurifyを使うのが鉄板ですが、これだけでは色々と不足点が出てくるので色々ライブラリを作りました。
+https://github.com/cure53/DOMPurify
+
+ サーバーサイドでもサニタイズしたい
+モダンなフロントエンドというかBFFアーキテクチャではSSRが使われますが、先述のDOMPurifyはDOMを使用するのでサーバーでは使用できません。では、どうするかというとJSDOMを使って無理やりサーバー上にDOMを作成し...]]></description><link>https://zenn.dev/jill64/articles/20c4cfe535ba99</link><guid isPermaLink="true">https://zenn.dev/jill64/articles/20c4cfe535ba99</guid><pubDate>Sun, 29 Dec 2024 19:54:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ymtQ5EGM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%25A9%25E3%2581%2593%25E3%2581%25A7%25E3%2582%2582%25E7%25B0%25A1%25E5%258D%2598%25E3%2581%25ABHTML%25E3%2581%25AE%25E3%2582%25B5%25E3%2583%258B%25E3%2582%25BF%25E3%2582%25A4%25E3%2582%25BA%2520with%2520Svelte%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:jill64%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSkhvRWlDNlllZ2R6cGxwZ2xPQnVaN2V5akFPSUMtVExwQUpIMFg2NERIZWl3Z1dLTT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>jill64</dc:creator></item><item><title><![CDATA[Svelte5で`Complex binding patterns require an ...`エラーが発生した時の応急対処]]></title><description><![CDATA[
+ 一旦JSDocを使いましょう
+
+ 何が起きたか
+svelte-sanitizeをSvelte5にアップデートしていたところ以下のようなコードでエラーが発生。
+&lt;script lang="ts"&gt;
+  import { sanitize } from '@jill64/universal-sanitizer'
+
+  let {
+    html,
+    options = undefined
+  }: {
+    html: string
+    options?: Parameters&lt;typeof sanitize&gt;[1]
+  } = $props()
+
+...]]></description><link>https://zenn.dev/jill64/articles/8c4142794e053a</link><guid isPermaLink="true">https://zenn.dev/jill64/articles/8c4142794e053a</guid><pubDate>Sun, 29 Dec 2024 18:49:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--gik0fXll--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Svelte5%25E3%2581%25A7%2560Complex%2520binding%2520patterns%2520require%2520an%2520...%2560%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E3%2581%258C%25E7%2599%25BA%25E7%2594%259F%25E3%2581%2597%25E3%2581%259F...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:jill64%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSkhvRWlDNlllZ2R6cGxwZ2xPQnVaN2V5akFPSUMtVExwQUpIMFg2NERIZWl3Z1dLTT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>jill64</dc:creator></item><item><title><![CDATA[VOICEVOX エンジンを Docker で立ち上げて、音声をダウンロードする]]></title><description><![CDATA[
+ はじめに
+VOICEVOX は、商用・非商用問わず無料で利用できるテキスト読み上げソフトです。VOICEVOX エンジンを Docker で簡単に立ち上げ、TypeScript を使って音声ファイルをダウンロードする方法を紹介します。
+
+ Docker Compose で VOICEVOX を起動する
+まず、以下の docker-compose.yml ファイルを準備します。
+
+docker-compose.yml
+version: '3.8'
+services:
+  voicevox_engine:
+    image: voicevox/voicevox_engine:cpu-u...]]></description><link>https://zenn.dev/sorutonookage/articles/3fe6544347aa9e</link><guid isPermaLink="true">https://zenn.dev/sorutonookage/articles/3fe6544347aa9e</guid><pubDate>Sun, 29 Dec 2024 12:53:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---ne3gZL5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:VOICEVOX%2520%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%25B3%25E3%2582%2592%2520Docker%2520%25E3%2581%25A7%25E7%25AB%258B%25E3%2581%25A1%25E4%25B8%258A%25E3%2581%2592%25E3%2581%25A6%25E3%2580%2581%25E9%259F%25B3%25E5%25A3%25B0%25E3%2582%2592%25E3%2583%2580%25E3%2582%25A6%25E3%2583%25B3%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2589%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25BD%25E3%2583%25AB%25E3%2583%2588%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg4MWZjNDA5ZTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ソルト</dc:creator></item><item><title><![CDATA[WailsとAngularでのデスクトップアプリの作り方]]></title><description><![CDATA[
+ はじめに
+今回はWailsというGo製のWeb技術でデスクトップアプリを作れるフレームワークを使ってAngularアプリをデスクトップアプリ化する手順を示します。
+各フレームワークの公式サイトは以下の通りです。
+https://wails.io/ja/
+https://angular.jp/
+
+ Wailsとは
+Wailsは、Go言語で軽量かつ高速なデスクトップアプリケーションを開発できるフレームワークです。Web開発の知識を活かしつつ、高効率なアプリ開発が可能です。
+以下のような特徴があります。[1]
+
+ネイティブなメニュー、ダイアログ、テーマ、透過処理を使用可能です
+Window...]]></description><link>https://zenn.dev/neko3cs/articles/dev-desktopapp-with-wails-and-angular</link><guid isPermaLink="true">https://zenn.dev/neko3cs/articles/dev-desktopapp-with-wails-and-angular</guid><pubDate>Sun, 29 Dec 2024 08:08:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ymlLMZpp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Wails%25E3%2581%25A8Angular%25E3%2581%25A7%25E3%2581%25AE%25E3%2583%2587%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%2588%25E3%2583%2583%25E3%2583%2597%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2581%25AE%25E4%25BD%259C%25E3%2582%258A%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:neko3cs%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQzNzM0NmNjNmMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>neko3cs</dc:creator></item><item><title><![CDATA[Gemini APIで画像解析を試す（TypeScriptサンプル付き）]]></title><description><![CDATA[
+ はじめに
+この記事では、Geminiモデルに画像を投稿して解析する方法をTypeScriptで解説します。プロジェクトの構築には軽量で高速なJavaScriptランタイムであるBunを使用しています。また、ローカル画像ファイルの読み込み、Google Generative AIを利用した画像解析、そして料金体系についても説明します。
+
+ 必要な準備
+以下の手順を事前に行ってください。
+
+プロジェクトの作成:
+
+bun create ts
+cd ts
+
+依存関係のインストール:
+
+bun add @google/generative-ai
+bun add dotenv
+
+Google ...]]></description><link>https://zenn.dev/sorutonookage/articles/246099ae5da021</link><guid isPermaLink="true">https://zenn.dev/sorutonookage/articles/246099ae5da021</guid><pubDate>Sun, 29 Dec 2024 08:05:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ibMIyZZB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Gemini%2520API%25E3%2581%25A7%25E7%2594%25BB%25E5%2583%258F%25E8%25A7%25A3%25E6%259E%2590%25E3%2582%2592%25E8%25A9%25A6%25E3%2581%2599%25EF%25BC%2588TypeScript%25E3%2582%25B5%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AB%25E4%25BB%2598%25E3%2581%258D%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25BD%25E3%2583%25AB%25E3%2583%2588%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg4MWZjNDA5ZTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ソルト</dc:creator></item><item><title><![CDATA[React Native×Expoに入門する]]></title><description><![CDATA[
+ はじめに
+どうも！最近、手を動かしながら学ぶことで理解が深まることを実感しているshigeです。
+この記事では最近注目を集めているReact Nativeを学ぶために、ToDoアプリを作成する過程を解説します。
+私と同じように、これからReact Nativeを始める方にとって、少しでも役に立つ内容になれば幸いです。
+
+ 今回作成するToDoアプリ
+以下が今回作成したToDoアプリの動作イメージです。
+
+GitHubでソースコードも公開していますので、ぜひ参考にしてください。
+ソースコードを見る
+
+ 動作環境
+
+マシン : M1 MacBookAir
+Node.js：v20.14.0...]]></description><link>https://zenn.dev/5hige99/articles/bf1f81d15861ec</link><guid isPermaLink="true">https://zenn.dev/5hige99/articles/bf1f81d15861ec</guid><pubDate>Sun, 29 Dec 2024 02:20:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--nyHBbYFI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%2520Native%25C3%2597Expo%25E3%2581%25AB%25E5%2585%25A5%25E9%2596%2580%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:shige%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2IyNzA1YWYzZjYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>shige</dc:creator></item><item><title><![CDATA[未使用であることを示す変数 アンダーバー(_)【個人学習まとめ】]]></title><description><![CDATA[
+ 引数のアンダーバー(_)
+JavaScriptにおいて、引数にアンダーバー(_)が使われることがある。
+これは、未使用であることを示す。(自分は初めて見たが、一般的な使い方らしい)
+new Promise((_,reject) =&gt; {
+    setTimeout(() =&gt; {
+        reject("制限時間!");
+    },500);
+});
+Promiseは第一引数に成功状態を示すresolve、第二引数に失敗状態を示すrejectが必要。
+上記の例では、タイムアウト後にPromiseを拒否したいだけなので、成功状態を示すresolveは必要ないため...]]></description><link>https://zenn.dev/o0rororo0o/articles/ba7bb47d3a2251</link><guid isPermaLink="true">https://zenn.dev/o0rororo0o/articles/ba7bb47d3a2251</guid><pubDate>Sun, 29 Dec 2024 02:19:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--uW8ChXul--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%259C%25AA%25E4%25BD%25BF%25E7%2594%25A8%25E3%2581%25A7%25E3%2581%2582%25E3%2582%258B%25E3%2581%2593%25E3%2581%25A8%25E3%2582%2592%25E7%25A4%25BA%25E3%2581%2599%25E5%25A4%2589%25E6%2595%25B0%2520%25E3%2582%25A2%25E3%2583%25B3%25E3%2583%2580%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%2528_%2529%25E3%2580%2590%25E5%2580%258B%25E4%25BA%25BA%25E5%25AD%25A6%25E7%25BF%2592%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%258D%25E3%2582%258D%25E3%2582%258D%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ2ZTZjOWM4YmMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ろろろ</dc:creator></item><item><title><![CDATA[TypeScriptで実践するドメイン駆動設計（DDD）]]></title><description><![CDATA[
+ 初めに
+
+ モチベーション
+私はこれまでドメイン駆動設計で設計されたシステムの開発案件に参画した経験はありますが、1からドメイン駆動設計で設計での設計を行った経験がありませんでした。そのため個人でシステムを開発している際に設計に悩むことがあり、自身で1からドメイン駆動設計ベースの設計ができるようになることを目指して学習を進め、その過程で得た知見をまとめています。
+特に以下のような点に焦点を当てています。
+
+ドメイン駆動設計の理論をTypeScriptのコードベースで理解する
+既存のドメイン駆動設計システムを理解するだけでなく、新規設計ができるようになるための知識の整理
+
+
+ ドメイン...]]></description><link>https://zenn.dev/masakifukunishi/articles/0823a25f9a4713</link><guid isPermaLink="true">https://zenn.dev/masakifukunishi/articles/0823a25f9a4713</guid><pubDate>Sun, 29 Dec 2024 01:13:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hpgEvRWn--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%25E3%2581%25A7%25E5%25AE%259F%25E8%25B7%25B5%25E3%2581%2599%25E3%2582%258B%25E3%2583%2589%25E3%2583%25A1%25E3%2582%25A4%25E3%2583%25B3%25E9%25A7%2586%25E5%258B%2595%25E8%25A8%25AD%25E8%25A8%2588%25EF%25BC%2588DDD%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Masaki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VkNzRiZjhiN2YuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Masaki</dc:creator></item><item><title><![CDATA[React MapLibre で AWS の地形データを表示する！]]></title><description><![CDATA[
+ ⛳ Goal
+
+Next.js で作ったアプリ上に react-map-gl を使い MapLibre で地形データを3Dで表示させたい
+
+ 環境
+
+Next.js: 15.1.3
+
+React: 19.0.0
+
+TypeScrip: 5.7.2
+
+maplibre-gl: 4.7.1
+
+react-map-gl: 7.1.8
+
+
+
+ 🐕 Step
+
+react-map-gl を使って MapLibre の地図を表示させる
+AWS が公開している 地形データ (Terrain タイル) を表示させる
+地形タイル (Terrain Layer) を 3D 表示にする
+
+
+ 1. 🗺️ ...]]></description><link>https://zenn.dev/kikiki_kiki/articles/f60927e05e9c3f</link><guid isPermaLink="true">https://zenn.dev/kikiki_kiki/articles/f60927e05e9c3f</guid><pubDate>Sat, 28 Dec 2024 13:32:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--oHRSMiOI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%2520MapLibre%2520%25E3%2581%25A7%2520AWS%2520%25E3%2581%25AE%25E5%259C%25B0%25E5%25BD%25A2%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%2592%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2599%25E3%2582%258B%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:KiKiKi%2520KiKi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RmMWU4OWU5ZWIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>KiKiKi KiKi</dc:creator></item><item><title><![CDATA[ゆめみのコーディング試験に落ちました]]></title><description><![CDATA[先日、フロントエンドエンジニアとしての実力を測るために、ゆめみのコーディング試験を受けた。残念ながら落ちてしまったが、学びが多かったと感じている。
+
+コーディング試験の詳細
+ビルド先
+Github
+
+今回はNext.jsを使用した。開発を進める中で以下の点を学習できた。
+
+APIキーを秘匿にするロジックの実装
+StoryBookを初めて導入
+テストコードの記述
+
+試験後のフィードバックは以下のような内容だった。
+
+ 良かった点
+
+デザインがかわいい
+APIキーを秘匿にするなど、セキュリティ面を考慮している
+適切なコンポーネント分割やロジックの切り出し
+Unit Test、StoryBoo...]]></description><link>https://zenn.dev/yumekawa/articles/4dfb10a70cf739</link><guid isPermaLink="true">https://zenn.dev/yumekawa/articles/4dfb10a70cf739</guid><pubDate>Sat, 28 Dec 2024 12:04:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--snfYLgss--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%2586%25E3%2582%2581%25E3%2581%25BF%25E3%2581%25AE%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2587%25E3%2582%25A3%25E3%2583%25B3%25E3%2582%25B0%25E8%25A9%25A6%25E9%25A8%2593%25E3%2581%25AB%25E8%2590%25BD%25E3%2581%25A1%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yumekawa-chan%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSXY0dDJFZkVIMWMyY3ZKa3AwaWRwNEt3XzJIeUswRnEtNlcwM3VPbnBhZEUydjhkR1A9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yumekawa-chan</dc:creator></item><item><title><![CDATA[Gemini API を node で使うときには @google/generative-ai がよい。]]></title><description><![CDATA[
+ TL;DR;
+パッケージ名にGeminiがついていないが、@google/generative-ai を選んでおけばよいと思う。
+
+ Gemini
+LLMには色々出ていますが、Geminiにも良いところがたくさんあります。他LLMとの比較は他に譲りますが、GoogleのLLMであるGeminiを使うことも選択肢に入れてみてはいかがでしょう？
+
+ @google/generative-ai の利用方法
+ほぼ、リポジトリに説明が書いてありますが、日本語の情報も役に立つ事があると考えるため、記載していきます。
+
+ 鍵の取得
+Google　AI Studioの「Get　API Key」から鍵...]]></description><link>https://zenn.dev/ukiuni/articles/3598a9308ce8c8</link><guid isPermaLink="true">https://zenn.dev/ukiuni/articles/3598a9308ce8c8</guid><pubDate>Sat, 28 Dec 2024 11:47:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5Xrbwr7S--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Gemini%2520API%2520%25E3%2582%2592%2520node%2520%25E3%2581%25A7%25E4%25BD%25BF%25E3%2581%2586%25E3%2581%25A8%25E3%2581%258D%25E3%2581%25AB%25E3%2581%25AF%2520%2540google%252Fgenerative-ai%2520%25E3%2581%258C%25E3%2582%2588%25E3%2581%2584%25E3%2580%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E4%25BC%258A%25E8%2597%25A4%25E6%25AD%25A6%25E5%258F%25B8%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2kzMXNlQmg5LU1BSzZZemZtdzgtb1o1bVBRcVI1M1FlV0taOTZuSHc9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>伊藤武司</dc:creator></item><item><title><![CDATA[TypeScriptでGoogle Cloud Storageに音声ファイルをアップロードする方法]]></title><description><![CDATA[Google Cloud Storage (GCS) を利用して音声ファイルをアップロードする方法を紹介します。本記事では以下の2つの方法を解説します。
+
+GCS API を使用して直接アップロード
+Signed URL を使用してアップロード
+
+それぞれの方法のコード例や使用シナリオを解説します。
+
+
+ 1. GCS API を使用した直接アップロード
+
+ 必要な準備
+
+Google Cloud プロジェクトの作成
+
+バケットの作成
+
+GCS コンソール (https://console.cloud.google.com/storage) でバケットを作成します。
+
+
+
+サービスアカウ...]]></description><link>https://zenn.dev/sorutonookage/articles/7cd9cda678ef3c</link><guid isPermaLink="true">https://zenn.dev/sorutonookage/articles/7cd9cda678ef3c</guid><pubDate>Sat, 28 Dec 2024 07:01:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--j-bmTO8Z--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%25E3%2581%25A7Google%2520Cloud%2520Storage%25E3%2581%25AB%25E9%259F%25B3%25E5%25A3%25B0%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2592%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2589%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25BD%25E3%2583%25AB%25E3%2583%2588%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg4MWZjNDA5ZTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ソルト</dc:creator></item><item><title><![CDATA[Electronを使ってFFmpegのGUIを作った話]]></title><description><![CDATA[この記事はmast Advent Calender 2024の15日目の記事です。
+https://adventar.org/calendars/10425
+14日目の記事はUmi Onoderaさんの「???」（記事執筆時点[1]ではおそらく未公開）でした。
+はじめまして、mast23のhuntです。
+知人[2]からアドカレを勧められたので、FFmpegのGUIを開発したことについて書こうと思います。
+普段は映像制作をしている人間なので、自分が使いやすいかどうかにかなり主眼を置いて開発しました。
+今回初めて触れた[3]言語などを使用して開発したため、文中のコードが汚いことなどがあるかも...]]></description><link>https://zenn.dev/hunt_kingyo/articles/8cc9dcbe6f8f45</link><guid isPermaLink="true">https://zenn.dev/hunt_kingyo/articles/8cc9dcbe6f8f45</guid><pubDate>Sat, 28 Dec 2024 07:01:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--u7TQtXPt--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Electron%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6FFmpeg%25E3%2581%25AEGUI%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hunt%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI2YmZhZjY2NDkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hunt</dc:creator></item><item><title><![CDATA[続・一人アドベントカレンダーのススメ]]></title><description><![CDATA[こんにちは、クレスウェア株式会社の奥野賢太郎 (@okunokentaro) です。本記事は、2024年12月に掲載されたTypeScript 一人 Advent Calendar 2024の25記事を執筆した筆者によって、2度に渡り一人アドベントカレンダーをやる意義を、そしてなぜ今回この企画を実施したのかという裏話的な側面をお話します。
+
+ なぜ二度目の一人アドベントカレンダーを？
+筆者は2年前の2022年にもTypeScript 一人 Advent Calendar 2022として一人アドベントカレンダーを完走した経験があります。 2年前に25記事を書き切ったときのことを振り返ると、...]]></description><link>https://zenn.dev/okunokentaro/articles/01jg5rnx1vv7xk6tqg97v6qtv1</link><guid isPermaLink="true">https://zenn.dev/okunokentaro/articles/01jg5rnx1vv7xk6tqg97v6qtv1</guid><pubDate>Sat, 28 Dec 2024 07:01:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bzcrED02--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%25B6%259A%25E3%2583%25BB%25E4%25B8%2580%25E4%25BA%25BA%25E3%2582%25A2%25E3%2583%2589%25E3%2583%2599%25E3%2583%25B3%25E3%2583%2588%25E3%2582%25AB%25E3%2583%25AC%25E3%2583%25B3%25E3%2583%2580%25E3%2583%25BC%25E3%2581%25AE%25E3%2582%25B9%25E3%2582%25B9%25E3%2583%25A1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:okunokentaro%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAyY2RlNDNmOWUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>okunokentaro</dc:creator></item><item><title><![CDATA[Vikeを使ってVite+TypeScript+ReactのページをSSGする]]></title><description><![CDATA[
+ 概要
+GitHub Pages にホスティングしようと思って、せっかくなら SSG やってみるかと思って試した備忘録です。
+Vite + TypeScript + React で開発している状態で SSG を行おうと思ったら Vike というライブラリを知りました。
+元々は vite-plugin-ssr という Vite の plugin だったようですね。
+https://vite-plugin-ssr.com/
+
+The vite-plugin-ssr project has been renamed Vike.
+
+今回は TypeScript + React ベースのページを...]]></description><link>https://zenn.dev/ara_ta3/articles/typescript-vike-ssg-getting-started</link><guid isPermaLink="true">https://zenn.dev/ara_ta3/articles/typescript-vike-ssg-getting-started</guid><pubDate>Sat, 28 Dec 2024 06:02:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--UPSXACiA--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Vike%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6Vite%252BTypeScript%252BReact%25E3%2581%25AE%25E3%2583%259A%25E3%2583%25BC%25E3%2582%25B8%25E3%2582%2592SSG%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ara_ta3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzIwMmNmMDMwYzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ara_ta3</dc:creator></item><item><title><![CDATA[100日アルゴリズム[15日目・スタックとキュー]]]></title><description><![CDATA[
+ スタックとキューとは
+スタックとキューは特別なデータ構造ではなく、データの扱う順番をどうするかを決めたものです。
+スタックは「データの要素を順番に入れていき、データを取り出す順番は最後から取り出すもの」です。一方キューは、「データの要素を順番に入れていき、データを取り出す順番は最初から取り出すもの」です。
+コンビニを例で考えると分かりやすいです。コンビニにはタバコのケースがありますよね。あのケースはどんどん新しいタバコがケースの一番手前に来るようになっています。そういう意味では古いタバコは最初に納品されるが、取り出されるのは新しいタバコから取り出されるということでスタックのような扱わ...]]></description><link>https://zenn.dev/joeee/articles/6f55439ffe05ae</link><guid isPermaLink="true">https://zenn.dev/joeee/articles/6f55439ffe05ae</guid><pubDate>Sat, 28 Dec 2024 04:34:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Qn5YHuMB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:100%25E6%2597%25A5%25E3%2582%25A2%25E3%2583%25AB%25E3%2582%25B4%25E3%2583%25AA%25E3%2582%25BA%25E3%2583%25A0%255B15%25E6%2597%25A5%25E7%259B%25AE%25E3%2583%25BB%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%2583%25E3%2582%25AF%25E3%2581%25A8%25E3%2582%25AD%25E3%2583%25A5%25E3%2583%25BC%255D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:jo-shino%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM3NzI1NDY2NmEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>jo-shino</dc:creator></item><item><title><![CDATA[Next.jsのRoute Handlers + ElysiaJSの組み合わせでスタンドアロンビルドすると挙動がおかしくなる問題]]></title><description><![CDATA[
+ Problem
+
+Next.jsの Route Handlers を使ってElysiaJSのルーターをフックして呼び出している
+開発ビルドでは何の問題もなく動作するが、スタンドアロンビルドしたものを単体で動かすと「一部のエンドポイントにPOSTしてもbodyがundefinedになる」のような奇妙な問題が発生する
+
+
+ route.ts
+
+import { authRouter as server } from "@/controllers/AppController";
+
+export const GET = server.handle;
+export const POST = s...]]></description><link>https://zenn.dev/nexryai/articles/a4fa36c8349cab</link><guid isPermaLink="true">https://zenn.dev/nexryai/articles/a4fa36c8349cab</guid><pubDate>Sat, 28 Dec 2024 00:47:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--kz-Vp0zB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Next.js%25E3%2581%25AERoute%2520Handlers%2520%252B%2520ElysiaJS%25E3%2581%25AE%25E7%25B5%2584%25E3%2581%25BF%25E5%2590%2588%25E3%2582%258F%25E3%2581%259B%25E3%2581%25A7%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%25B3%25E3%2583%2589%25E3%2582%25A2%25E3%2583%25AD%25E3%2583%25B3%25E3%2583%2593%25E3%2583%25AB%25E3%2583%2589%25E3%2581%2599%25E3%2582%258B%25E3%2581%25A8%25E6%258C%2599%25E5%258B%2595%25E3%2581%258C%25E3%2581%258A...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nexryai%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzYxZDUzMzM2YjEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nexryai</dc:creator></item><item><title><![CDATA[next.jsのAppRouterでCookieをいい感じで扱う落とし所を考える]]></title><description><![CDATA[next.jsでCookieをサーバーでもクライアントでもいい感じに扱うにはどうするか考えた。
+今のところこのあたりが落とし所かな〜？ぐらいな温度感なので、特にベストプラクティスとかではない。
+全体感を俯瞰したい場合は下記でざっくり参照可能
+
+https://codesandbox.io/p/devbox/7d8ts6
+
+
+ Layout
+今回サーバーからの初回レンダリングも考慮したいケースを考えるので、サーバーからまずCookieを引っ張ってくる。これをContextに詰め込んでクライアント側で利用できるようにする方向で考えた
+まず全体で利用できるようにlayoutで取得する
+// l...]]></description><link>https://zenn.dev/terrierscript/articles/2024-12-27-next-js-app-router-cookie</link><guid isPermaLink="true">https://zenn.dev/terrierscript/articles/2024-12-27-next-js-app-router-cookie</guid><pubDate>Fri, 27 Dec 2024 15:32:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--rWphVpnj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:next.js%25E3%2581%25AEAppRouter%25E3%2581%25A7Cookie%25E3%2582%2592%25E3%2581%2584%25E3%2581%2584%25E6%2584%259F%25E3%2581%2598%25E3%2581%25A7%25E6%2589%25B1%25E3%2581%2586%25E8%2590%25BD%25E3%2581%25A8%25E3%2581%2597%25E6%2589%2580%25E3%2582%2592%25E8%2580%2583%25E3%2581%2588%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:terrierscript%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RhNzJjMjE0Y2QuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>terrierscript</dc:creator></item></channel></rss>
