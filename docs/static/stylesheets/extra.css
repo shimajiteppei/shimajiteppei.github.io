@@ -25,7 +25,7 @@
 
     body {
         --site-max-width: 1330px;
-        --article-max-width: 750px;
+        --article-max-width: 708px;
 
         header {
             box-shadow: unset !important;
@@ -75,27 +75,30 @@
 
                 .md-content {
                     background-color: var(--md-default-bg-color);
-                    max-width: var(--article-max-width);
-                    margin: 0 auto !important;
                     padding: 16px;
                     padding-bottom: 64px;
 
                     article {
-                        margin: 0 auto !important;
+                        max-width: var(--article-max-width);
+                        margin: auto !important;
                         line-height: 1.75em;
 
                         .md-typeset__scrollwrap {
                             scrollbar-color: unset;
                             scrollbar-width: thin;
                         }
+
+                        .highlight {
+                            margin: 0 !important;
+                        }
                     }
                 }
 
                 .md-sidebar {
-                    /* Hide navigation */
+                    /* Hide navigation title */
                     @media screen and (min-width: 76.25em) {
                         nav label[for="__drawer"] {
-                            background-color: transparent;
+                            display: none;
                         }
                     }
 
