@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Ubuntu」のフィード]]></title><description><![CDATA[Zennのトピック「Ubuntu」のRSSフィードです]]></description><link>https://zenn.dev/topics/ubuntu</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/8c2cdbc5b3.png</url><title>Zennの「Ubuntu」のフィード</title><link>https://zenn.dev/topics/ubuntu</link></image><generator>zenn.dev</generator><lastBuildDate>Tue, 31 Dec 2024 12:04:07 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/ubuntu/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[自宅の Ubuntu 24.04 マシンに Nextcloud を入れて、プライベートIPでのファイルストレージに使う]]></title><description><![CDATA[
+ きっかけ
+
+自宅で眠っていた古い MacBook Pro 2013 を何かに使おうと Ubuntu を入れてみたものの、結局あまり使っていなかった。
+最近趣味でゲームを作ろうとしているが、コードの保存は github があるからいいが、その他のファイルのバックアップどうしようかと悩んでいた。
+本格的に制作しているわけではないので、利用料を払ってDropbox等を使うまでも無いかなと二の足を踏んでいた。
+
+⇒ Nextcloud (ownCloudの派生)という OSS があることを知り、試しに入れてみるかという気持ちで入れてみた。
+
+ インストール
+参考
+
+公式: https://d...]]></description><link>https://zenn.dev/tkmfujise/articles/2e8cf9e692e39c</link><guid isPermaLink="true">https://zenn.dev/tkmfujise/articles/2e8cf9e692e39c</guid><pubDate>Mon, 30 Dec 2024 17:51:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--nGSEIRT0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%2587%25AA%25E5%25AE%2585%25E3%2581%25AE%2520Ubuntu%252024.04%2520%25E3%2583%259E%25E3%2582%25B7%25E3%2583%25B3%25E3%2581%25AB%2520Nextcloud%2520%25E3%2582%2592%25E5%2585%25A5%25E3%2582%258C%25E3%2581%25A6%25E3%2580%2581%25E3%2583%2597%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2599%25E3%2583%25BC%25E3%2583%2588IP%25E3%2581%25A7%25E3%2581%25AE%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25AC%25E3%2583%25BC%25E3%2582%25B8%25E3%2581%25AB%25E4%25BD%25BF%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tkmfujise%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4WkRseXBFekRMdUdCUEowOWI4XzQ1Z0xSVlNhekEwQm9jR2ZhRWM9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tkmfujise</dc:creator></item><item><title><![CDATA[「docker compose」での複数環境の構築の話]]></title><description><![CDATA[
+ はじめに
+当記事では、開発環境を「複数」個、作りそれを活用すれば、
+レビュー待ちの時に、先行で次タスクの開発をする
+レビューの指摘事項対応と、次タスクの開発を環境わけで、やれるから作業しやすいよ
+って話題が書かれてます。
+ざっくりは、この話題です。
+詳細は、メンドイ話なので、以降、ガッツリ書いてます。
+★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+すいません、私事のお知らせ  ( CM をここで入れさせていただきます )
+Docker環境ならば、Ubuntu(WSL2)がおススメ
+https://zenn.dev/tazzae999jp/artic...]]></description><link>https://zenn.dev/tazzae999jp/articles/1a044f201c735d</link><guid isPermaLink="true">https://zenn.dev/tazzae999jp/articles/1a044f201c735d</guid><pubDate>Sun, 29 Dec 2024 04:39:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--m3bJtVef--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%258Cdocker%2520compose%25E3%2580%258D%25E3%2581%25A7%25E3%2581%25AE%25E8%25A4%2587%25E6%2595%25B0%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25AE%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%25AE%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259F%25E3%2581%25A4%25E3%2581%258A%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzEwZmVjMjAxYTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>たつお</dc:creator></item><item><title><![CDATA[Ghostty on Ubuntu 22.04]]></title><description><![CDATA[一部界隈で話題になっていた Ghostty をUbuntu 22.04でインストールしてみたのでメモ。ソースからビルドする手順はいくつかありそうだけど、Nixを使った手順はあんまりなさそう。
+
+GTKで動いているので見た目がよい
+
+ちゃんとUbuntu 22.04で動く。画像も表示できる
+
+ Glossary
+
+
+Ghostty ... Hashicorpの共同創業者のMichell Hashimotoが主導して作ったターミナル。 Zig で作られているらしい
+
+Nix ... 関数型のパッケージマネージャー。これをベースにしたLinux Distroもある。宣言的にパッケージを管理でき...]]></description><link>https://zenn.dev/choge/articles/3fb8be3e2a1a56</link><guid isPermaLink="true">https://zenn.dev/choge/articles/3fb8be3e2a1a56</guid><pubDate>Sat, 28 Dec 2024 23:11:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3FYhTWul--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_76:Ghostty%2520on%2520Ubuntu%252022.04%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:choge%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2p4TUU3SWRsSUxKRWNTbk91VzIwOC1fT1pfbkVsNDJiNnl3YkNfbmc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>choge</dc:creator></item><item><title><![CDATA[Ubuntu環境でpCloudのマウントを自動化する]]></title><description><![CDATA[
+ pCloudクラウドストレージの設定
+
+ pCloudとは
+https://www.pcloud.com/
+pCloudは、スイス発のクラウドストレージサービスで、高いセキュリティとプライバシー保護を特徴としています。ユーザーは一度の支払いで生涯利用できる買い切りプランを選択でき、追加料金が発生しない点が魅力です。
+
+ pCloudのアカウントを作成する
+以下を参考にするなどして、pCloudのアカウントを作成しておいてください。
+https://www.pcloud.com/ja/help/general-help-center/how-do-i-create-a-pcloud-a...]]></description><link>https://zenn.dev/ats030/articles/setup-pcloud-on-ubuntu</link><guid isPermaLink="true">https://zenn.dev/ats030/articles/setup-pcloud-on-ubuntu</guid><pubDate>Sat, 28 Dec 2024 13:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--s-CVnl4e--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ubuntu%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25A7pCloud%25E3%2581%25AE%25E3%2583%259E%25E3%2582%25A6%25E3%2583%25B3%25E3%2583%2588%25E3%2582%2592%25E8%2587%25AA%25E5%258B%2595%25E5%258C%2596%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2582%25E3%2582%258C%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSUN1SHBxV21INFNBbC1aRVRkejRoTEwzejNvRWpqVGtmNVY2LWNRNk5ZVEd3djVzZ0k9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>あれ</dc:creator></item><item><title><![CDATA[Ubuntu環境でGear Leverを設定する]]></title><description><![CDATA[
+ Gear Leverとは
+https://mijorus.it/projects/gearlever/
+Gear Leverは、AppImageファイルをUbuntuのサイドバーに簡単に登録できるアプリです。AppImageアプリを素早く起動したり、ピン留めしたりすることができ、アプリの管理が非常に簡単になります。
+
+ Gear Leverの初期設定
+
+ FUSEの設定
+https://github.com/AppImage/AppImageKit/wiki/FUSE
+執筆時点での Ubuntuの最新LTS（24.04）では、AppImageファイルを実行するために、以下のコマンドで...]]></description><link>https://zenn.dev/ats030/articles/setup-gearlever-on-ubuntu</link><guid isPermaLink="true">https://zenn.dev/ats030/articles/setup-gearlever-on-ubuntu</guid><pubDate>Sat, 28 Dec 2024 12:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_Bgq0kO9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ubuntu%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25A7Gear%2520Lever%25E3%2582%2592%25E8%25A8%25AD%25E5%25AE%259A%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2582%25E3%2582%258C%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSUN1SHBxV21INFNBbC1aRVRkejRoTEwzejNvRWpqVGtmNVY2LWNRNk5ZVEd3djVzZ0k9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>あれ</dc:creator></item><item><title><![CDATA[ubuntu 24.04.01 の OS image ダウンロードリンク]]></title><description><![CDATA[ubuntu 24.04.01 の OS image ダウンロードリンク
+ICSCoE (産業サイバーセキュリティセンター)
+https://ftp.udx.icscoe.jp/Linux/ubuntu-releases/24.04.1/
+https://launchpad.net/ubuntu/+mirror/ftp.udx.icscoe.jp-release
+]]></description><link>https://zenn.dev/mtmatma/articles/87598cbabf5bdb</link><guid isPermaLink="true">https://zenn.dev/mtmatma/articles/87598cbabf5bdb</guid><pubDate>Sat, 28 Dec 2024 07:58:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Fr8hBA-D--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ubuntu%252024.04.01%2520%25E3%2581%25AE%2520OS%2520image%2520%25E3%2583%2580%25E3%2582%25A6%25E3%2583%25B3%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2589%25E3%2583%25AA%25E3%2583%25B3%25E3%2582%25AF%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:masaru%2520tsuchiyama%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvbS5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>masaru tsuchiyama</dc:creator></item><item><title><![CDATA[Ubuntu VPSにCyberPanelをインストールする方法]]></title><description><![CDATA[この記事では、UbuntuにCyberPanelをインストールする手順を紹介します。CyberPanelは、ウェブサイトのデプロイや管理を簡単に行える優れたウェブホスティングパネルです。以下は、Ubuntu VPSにCyberPanelをインストールする手順です。
+
+ インストール環境
+
+
+VPS構成: 1vCPU、2GB RAM、50GB NVMe SSD
+
+ロケーション: シリコンバレー
+
+OS: Ubuntu 22.04
+
+価格: 月額7.71ドル
+
+
+ Ubuntu 22.04 VPSにCyberPanelをインストールする方法
+
+ 1. VPSに接続
+まず、Ubuntu VPS...]]></description><link>https://zenn.dev/lulucky/articles/18c50eb18adf07</link><guid isPermaLink="true">https://zenn.dev/lulucky/articles/18c50eb18adf07</guid><pubDate>Thu, 26 Dec 2024 12:21:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--slKJFfGL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ubuntu%2520VPS%25E3%2581%25ABCyberPanel%25E3%2582%2592%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:VPS%2520Pro%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzcxM2ZjMGZhYzEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>VPS Pro</dc:creator></item><item><title><![CDATA[AWS Lightsail + Tailscaleで静的IPアドレスを持つVPNサーバーを構築する方法]]></title><description><![CDATA[この記事では、AWS LightsailインスタンスにTailscaleをインストールしてVPNサーバーを構築する方法と、必要なセキュリティ設定について説明します。
+
+ Tailscaleアカウントとクライアントの設定
+あらかじめtailscaleのアカウントを作成してクライアントPCへのTailscaleインストールを行なってください。
+https://tailscale.com/download
+
+ Lightsailインスタンスの作成
+
+
+https://lightsail.aws.amazon.com/ にアクセス
+
+
+インスタンスの作成
+
+
+
+「Create instance」...]]></description><link>https://zenn.dev/masakifukunishi/articles/8115946778736f</link><guid isPermaLink="true">https://zenn.dev/masakifukunishi/articles/8115946778736f</guid><pubDate>Thu, 26 Dec 2024 06:50:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--OmWlsdN4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AWS%2520Lightsail%2520%252B%2520Tailscale%25E3%2581%25A7%25E9%259D%2599%25E7%259A%2584IP%25E3%2582%25A2%25E3%2583%2589%25E3%2583%25AC%25E3%2582%25B9%25E3%2582%2592%25E6%258C%2581%25E3%2581%25A4VPN%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2582%2592%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Masaki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VkNzRiZjhiN2YuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Masaki</dc:creator></item><item><title><![CDATA[Intel MacBook Pro (Mid 2014) に Ubuntu 24.10 をインストールする]]></title><description><![CDATA[!
+強い理由がなければ 24.04 LTS を推奨。
+私の場合、継続して１年も使い続けることなく、気が向いたらOS入れ直すつもりでいるのとなるべくカーネルバージョンが新しいものを使いたいという欲求だけで手を動かした。
+
+
+ 要約
+
+昔地獄を見た時が嘘のように、超簡単にUbuntuが動作する（本当にいい時代だ）
+UIはMacほどではないにせよ、十分使える。Windows11よりきれい ブラウジングやSSH作業なら十分すぎる。
+サスペンド機能は相変わらず危ないのでDisabledにしたいところ。
+相変わらず mozc の変換精度が弱い。AI全盛期だからこそ、このあたりで一気に進化してほしいと...]]></description><link>https://zenn.dev/plesio/articles/54d8771dc69bfe</link><guid isPermaLink="true">https://zenn.dev/plesio/articles/54d8771dc69bfe</guid><pubDate>Wed, 25 Dec 2024 15:44:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--iFuc9Xhs--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Intel%2520MacBook%2520Pro%2520%2528Mid%25202014%2529%2520%25E3%2581%25AB%2520Ubuntu%252024.10%2520%25E3%2582%2592%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:plesio_%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ3NjgxN2M0NWYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>plesio_</dc:creator></item><item><title><![CDATA[最新Rのインストール@Ubuntu22.04]]></title><description><![CDATA[
+ これは何？
+現時点(2024/12/24)での最新(4.4.2)のRをUbuntu22.04へインストールした際のメモを残してみました！
+
+ 手順
+以下の順番にコマンドを実行すると最新バージョンのRをインストールできます！
+
+必要なパッケージをインストール
+
+sudo apt update &amp;&amp; sudo apt install wget software-properties-common
+
+公開鍵の取得&amp;ファイルへの書き込み
+
+sudo wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marut...]]></description><link>https://zenn.dev/mozuku55/articles/d1522f15d6226b</link><guid isPermaLink="true">https://zenn.dev/mozuku55/articles/d1522f15d6226b</guid><pubDate>Wed, 25 Dec 2024 13:27:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_OZlSEgb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%259C%2580%25E6%2596%25B0R%25E3%2581%25AE%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%2540Ubuntu22.04%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2582%25E3%2581%25A3%25E3%2581%25A1%25E3%2583%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSXpocTRfOTI5dHdBNFVIYWE1aV93N3pzZVY1b1UySmo3dXdzYmF6Vm5HSm8wPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>もっちー</dc:creator></item><item><title><![CDATA[ufwの使い方]]></title><description><![CDATA[
+ ufwの使い方
+UFWはUbuntuのデフォルトのファイアウォールの設定ツールです。iptablesによるファイアウォールの設定を簡単にするために開発されました。
+ufwはユーザーにフレンドリーな方法でIPv4あるいはIPv6ベースのホストのファイアウォールの作成することができます。デフォルトでUFWは無効になっています。
+
+ 基本的なコマンド
+
+ UFW有効化/無効化
+# 有効化
+sudo ufw enable
+
+# 無効化
+sudo ufw disable
+
+# 状態確認
+sudo ufw status verbose
+
+ ポートの許可/拒否
+# 特定のポートを許可
+sudo u...]]></description><link>https://zenn.dev/m10k1/articles/0a5a4436048718</link><guid isPermaLink="true">https://zenn.dev/m10k1/articles/0a5a4436048718</guid><pubDate>Tue, 24 Dec 2024 19:54:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--38iKj8v5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:ufw%25E3%2581%25AE%25E4%25BD%25BF%25E3%2581%2584%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:m10k1%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pseFQ2amhWc0JSTmlHZjktclduSldqbHVtTHlaWDhEZjBHQkdyemc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>m10k1</dc:creator></item><item><title><![CDATA[Macでlimaを使ってUbuntuの仮想環境を構築してみた]]></title><description><![CDATA[
+ はじめに
+今まではWindowsでWSLを使ってUbuntuを立ち上げた事はあったけど、Macではやったことがなかったのでやってみました。
+limaを採用したのはWSLと似たような操作感だったためです。
+
+ 実行環境
+
+
+
+
+バージョン
+
+
+
+
+Mac OS
+Sequoia 15.1
+
+
+lima
+1.0.2
+
+
+
+
+ limaをインストールする
+limaを入れるときはHomebrewを使いました。（Homebrewのインストールは割愛します）
+下記コマンドだけでインストールできます。
+brew install lima
+
+ Ubuntu起動用のyamlファイルを作成する
+yamlフ...]]></description><link>https://zenn.dev/mizodev/articles/0f4a51d33aff30</link><guid isPermaLink="true">https://zenn.dev/mizodev/articles/0f4a51d33aff30</guid><pubDate>Mon, 23 Dec 2024 01:47:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--CmMor0yB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Mac%25E3%2581%25A7lima%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6Ubuntu%25E3%2581%25AE%25E4%25BB%25AE%25E6%2583%25B3%25E7%2592%25B0%25E5%25A2%2583%25E3%2582%2592%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25BF%25E3%2581%259E%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTFEyV3dTYW9XRlp3dXFIcVNoUnVsS0szdmZSSGRQRTFkcDAyTjhFb1dIc0E9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>みぞ</dc:creator></item><item><title><![CDATA[Ubuntu環境でuvを使ってPythonのパッケージ管理をする]]></title><description><![CDATA[
+ uvとは
+https://docs.astral.sh/uv/
+uvは、Rustで開発された高速なPythonパッケージおよびプロジェクト管理ツールです。従来は複数のツールで行っていた作業を、uvひとつで統合的に管理できるようになりました。
+
+ 主な機能
+
+ パッケージ管理
+
+依存関係の追加、削除、更新が可能
+pipの代替として高速なパッケージインストールを実現
+
+
+ プロジェクト管理
+
+pyproject.tomlを使用してプロジェクト情報を一元管理
+仮想環境の作成と管理
+
+
+ Pythonバージョン管理
+
+pyenvのような機能でPythonのバージョンを管理
+
+
+ uvの利点
+...]]></description><link>https://zenn.dev/ats030/articles/how-to-use-uv-on-ubuntu</link><guid isPermaLink="true">https://zenn.dev/ats030/articles/how-to-use-uv-on-ubuntu</guid><pubDate>Sun, 22 Dec 2024 22:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jTwnZcQO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ubuntu%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25A7uv%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6Python%25E3%2581%25AE%25E3%2583%2591%25E3%2583%2583%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B8%25E7%25AE%25A1%25E7%2590%2586%25E3%2582%2592%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2582%25E3%2582%258C%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSUN1SHBxV21INFNBbC1aRVRkejRoTEwzejNvRWpqVGtmNVY2LWNRNk5ZVEd3djVzZ0k9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>あれ</dc:creator></item><item><title><![CDATA[nixでubuntu向けのdotfilesを書く]]></title><description><![CDATA[この記事は Nix Advent Calendar 2024 の22日目の記事です。
+
+ ごあいさつ
+はじめまして、Comaviusです。最近はC++で競プロをしつつNixやRustを書いています。本日はUbuntuにhome-managerを導入した際に詰まった点の解決策などについて見ていこうと思います。
+
+ 作ったもの
+今回主に導入したのはswaywmとzshです。
+https://github.com/comavius/dotfiles
+├── flake.lock
+├── flake.nix
+├── home.nix
+├── install-ubuntu.sh
+├── LICEN...]]></description><link>https://zenn.dev/comavius/articles/11a477c11942d8</link><guid isPermaLink="true">https://zenn.dev/comavius/articles/11a477c11942d8</guid><pubDate>Sun, 22 Dec 2024 14:52:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--HHIxc7cJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:nix%25E3%2581%25A7ubuntu%25E5%2590%2591%25E3%2581%2591%25E3%2581%25AEdotfiles%25E3%2582%2592%25E6%259B%25B8%25E3%2581%258F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2593%25E3%2581%25BE%2520%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JjZDQ1NjhjZGYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>こま🍁</dc:creator></item><item><title><![CDATA[Roo-ClineでAWS Session Managerのセットアップをしてみた！]]></title><description><![CDATA[
+ はじめに
+Roo-Clineは、AIによるコーディング支援を自動化するツールです。今回は、AWS CLIのSession Managerプラグインのインストールをプロンプト1つで自動化する方法を紹介します。
+
+ 実行環境
+
+OS: Ubuntu
+Roo-Cline: 最新版
+
+
+ プロンプトと実行結果
+
+ 入力したプロンプト
+aws の セッションマネージャーもインストールして
+
+ Roo-Clineの応答と実行プロセス
+
+
+まず、Roo-Clineはタスクを分析：
+
+AWSのSession Managerをインストールするタスクを実行します。
+Session Managerはシステ...]]></description><link>https://zenn.dev/sunwood_ai_labs/articles/aws-session-manager-setup-with-roo-cline</link><guid isPermaLink="true">https://zenn.dev/sunwood_ai_labs/articles/aws-session-manager-setup-with-roo-cline</guid><pubDate>Sun, 22 Dec 2024 12:36:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--RMgD7QkX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Roo-Cline%25E3%2581%25A7AWS%2520Session%2520Manager%25E3%2581%25AE%25E3%2582%25BB%25E3%2583%2583%25E3%2583%2588%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%25E3%2582%2592%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Maki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTDdpSmVyNldLVlpKLUd4N054QWVuSFVtYXQ3MUhhd1NXaU5hRG5FTnZiMXZZdHBIaGs9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Maki</dc:creator></item><item><title><![CDATA[LinuxでPython 3.xをPythonコマンドで実行できるようにする方法]]></title><description><![CDATA[
+ 目的
+Linux環境でPython 3.12をインストール後にpythonコマンドでPython 3.12を実行させたかったため、シンボリックリンクの設定を行った。設定方法について簡単に備忘録として本記事に残す。
+
+ 環境
+
+WSL2で使用しているUbuntu 24.04
+Python 3.12
+
+
+ 設定方法
+
+ シンボリックリンク設定方法
+whichコマンドでPython 3.12がどこにインストールされているのかファイルパスを確認する。
+which python3.12
+/usr/bin/python3.12
+先ほどのファイルパスを使いシンボリックリンクを作成する。
+sudo ...]]></description><link>https://zenn.dev/ken2pg/articles/91f875eb434d62</link><guid isPermaLink="true">https://zenn.dev/ken2pg/articles/91f875eb434d62</guid><pubDate>Fri, 20 Dec 2024 15:37:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qvYAoKTs--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%25E3%2581%25A7Python%25203.x%25E3%2582%2592Python%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2581%25A7%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258B%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ken2pg%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RkNmYxNTIxNmIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ken2pg</dc:creator></item><item><title><![CDATA[Ubuntu PCにFlatpakをインストールする]]></title><description><![CDATA[
+ Flatpakとは
+https://flatpak.org/
+Flatpakは、Linuxデスクトップ向けのソフトウェアデプロイメント・パッケージ管理・アプリケーション仮想化を行うユーティリティソフトウェアです。以下がFlatpakの主な特徴です。
+
+サンドボックス機能：ユーザーがアプリケーションとシステムを分離して実行できる環境を提供します。
+ディストリビューション非依存：36種類以上のLinuxディストリビューションに対応しており、異なるディストリビューション間でアプリケーションを利用できます。
+依存関係の解決：独自のランタイムを使用することで、システム全体のライブラリに依存しな...]]></description><link>https://zenn.dev/ats030/articles/install-flatpak-on-ubuntu</link><guid isPermaLink="true">https://zenn.dev/ats030/articles/install-flatpak-on-ubuntu</guid><pubDate>Thu, 19 Dec 2024 11:30:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--XoLyrpB1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ubuntu%2520PC%25E3%2581%25ABFlatpak%25E3%2582%2592%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2582%25E3%2582%258C%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSUN1SHBxV21INFNBbC1aRVRkejRoTEwzejNvRWpqVGtmNVY2LWNRNk5ZVEd3djVzZ0k9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>あれ</dc:creator></item><item><title><![CDATA[UbuntuでSSHポートを変更する方法]]></title><description><![CDATA[
+ はじめに
+SSH（Secure Shell）は、リモートサーバーへの安全なアクセスを提供する重要なプロトコルですが、デフォルトで使用されるポート22は攻撃のターゲットになりやすいです。セキュリティを強化するために、UbuntuシステムでSSHのポートを変更することが推奨されます。このガイドでは、簡単にポートを変更する手順を説明し、あなたのサーバーを守る方法を紹介します。
+
+ 事前準備
+SSHポートの変更を始める前に、以下の点を確認してください：
+
+
+Ubuntuシステム: 他のLinuxディストリビューションでも似た手順が適用されますが、ここではUbuntuを前提に説明します。
+
+R...]]></description><link>https://zenn.dev/lulucky/articles/ecc2ea014dcc36</link><guid isPermaLink="true">https://zenn.dev/lulucky/articles/ecc2ea014dcc36</guid><pubDate>Thu, 19 Dec 2024 10:31:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--H0pX687W--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ubuntu%25E3%2581%25A7SSH%25E3%2583%259D%25E3%2583%25BC%25E3%2583%2588%25E3%2582%2592%25E5%25A4%2589%25E6%259B%25B4%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:VPS%2520Pro%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzcxM2ZjMGZhYzEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>VPS Pro</dc:creator></item><item><title><![CDATA[Ubuntu Desktop に Alacritty + Starship を導入してターミナルをリッチにする]]></title><description><![CDATA[
+ はじめに
+こんにちは、D2Cエンジニアの穐澤です。
+本記事では、ターミナルエミュレータのAlacritty、及びプロンプトカスタマイズツールのStarshipをUbuntu環境に導入及びカスタマイズする手順についてご紹介します。
+D2Cでは開発環境の一部として、AWS上の仮想デスクトップ環境である Amazon Workspaces を利用しています。私もこれまで Amazon Linux 2 ベースの仮想デスクトップマシンを使っていたのですが、Amazon Linux 2 が来年EOLを迎える[1]ことから、新たに Ubuntu Desktop for Workspaces に移行...]]></description><link>https://zenn.dev/d2c_mtech_blog/articles/ff594d3ef9ab0b</link><guid isPermaLink="true">https://zenn.dev/d2c_mtech_blog/articles/ff594d3ef9ab0b</guid><pubDate>Thu, 19 Dec 2024 04:00:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lVDgUjnZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ubuntu%2520Desktop%2520%25E3%2581%25AB%2520Alacritty%2520%252B%2520Starship%2520%25E3%2582%2592%25E5%25B0%258E%25E5%2585%25A5%25E3%2581%2597%25E3%2581%25A6%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%259F%25E3%2583%258A%25E3%2583%25AB%25E3%2582%2592%25E3%2583%25AA%25E3%2583%2583%25E3%2583%2581%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:D2C%2520%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%25E7%25A9%2590%25E6%25BE%25A4%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJmZTIyZmYyMWQuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:D2C%2520m-tech%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NhYWIyOTQwYmMuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>D2C エンジニア穐澤</dc:creator></item><item><title><![CDATA[Ubuntuでプログラムをアンインストールする方法]]></title><description><![CDATA[Ubuntuを使っているとき、インストールしたプログラムが不要になったり、設定のリセットが必要になったりすることがあります。その際、適切にアンインストールする方法を知っておくことは非常に重要です。本記事では、GUIとコマンドラインの両方を使ったプログラムのアンインストール方法を、分かりやすく解説します。
+
+
+ 1. GUIを使ったアンインストール方法
+Ubuntuには、初心者にも使いやすいUbuntu SoftwareというGUIツールが用意されています。
+
+ 手順：
+
+
+Ubuntu Softwareを開く
+
+アプリケーション一覧から「Ubuntu Software」を選択。
+
+
+
+イ...]]></description><link>https://zenn.dev/lulucky/articles/1b9ad92a6cd8de</link><guid isPermaLink="true">https://zenn.dev/lulucky/articles/1b9ad92a6cd8de</guid><pubDate>Wed, 18 Dec 2024 13:24:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--P-cN4JRF--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ubuntu%25E3%2581%25A7%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%25A0%25E3%2582%2592%25E3%2582%25A2%25E3%2583%25B3%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:VPS%2520Pro%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzcxM2ZjMGZhYzEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>VPS Pro</dc:creator></item></channel></rss>

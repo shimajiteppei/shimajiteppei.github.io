@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「JavaScript」のフィード]]></title><description><![CDATA[Zennのトピック「JavaScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/javascript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/64acd76870.png</url><title>Zennの「JavaScript」のフィード</title><link>https://zenn.dev/topics/javascript</link></image><generator>zenn.dev</generator><lastBuildDate>Tue, 31 Dec 2024 07:20:43 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/javascript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[The Binding of Isaac（アイザックの伝説）のダンジョン生成の仕組み]]></title><description><![CDATA[
+ はじめに
+ダンジョン探索ゲームを作ろうと思い至り（そして絶賛停滞中である）、その考えてるゲームにあってそうなダンジョン形態についてThe Binding of Isaac（アイザックの伝説）のものが良さそうだったので調べてみたら英語の解説記事があったので、こちらを大いに参考にしつつ、独自で補完し生成の仕組みを書き残そうと思います。
+なお、このゲームのダンジョンは『ゼルダの伝説』を大変オマージュしているので同ゲームに近いダンジョン生成について知りたい人にも参考になると思われます。
+説明のため、サンプルのリポジトリの用意したので参考に読むと理解が進むと思います。（※一部コードは記事内容と...]]></description><link>https://zenn.dev/pentamania/articles/dungeon-generation-in-binding-of-isaac</link><guid isPermaLink="true">https://zenn.dev/pentamania/articles/dungeon-generation-in-binding-of-isaac</guid><pubDate>Tue, 31 Dec 2024 06:34:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--KG519uhH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:The%2520Binding%2520of%2520Isaac%25EF%25BC%2588%25E3%2582%25A2%25E3%2582%25A4%25E3%2582%25B6%25E3%2583%2583%25E3%2582%25AF%25E3%2581%25AE%25E4%25BC%259D%25E8%25AA%25AC%25EF%25BC%2589%25E3%2581%25AE%25E3%2583%2580%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%25A7%25E3%2583%25B3%25E7%2594%259F%25E6%2588%2590%25E3%2581%25AE%25E4%25BB%2595%25E7%25B5%2584%25E3%2581%25BF%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:pentamania%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dodjM0Mll3Mld0Q0RBN2F3MzA1ODBpR2xyZDVSZTVGemtiNFNDZHc9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>pentamania</dc:creator></item><item><title><![CDATA[仕事中にメモ帳とモダンブラウザだけでいろいろ作っている話]]></title><description><![CDATA[
+ TLDR;
+
+メールサポートみたいな部署で、メモ帳とブラウザでいろいろツールを作ってるよ
+エンジニアはいったん辞めたつもりで就職したのに、楽をしたくなってつい手が動いてしまったよ
+ブラウザがモダンでHTMLとJavaScriptさえ書ければ結構いろいろできるよ
+
+ちなみにこの取り組みは私個人の「内職」から始まりましたが、現在は上長より業務として認知していただいています。
+
+ ちょっと自己紹介
+ハンドルネーム「naary」です。発音は「カービィ」じゃなくて「AC」と同じです。
+コロナ禍にRailsやAWSを独学したあと、これまでに合計で3年ほど、PHP/Laravelをメインに使ってる...]]></description><link>https://zenn.dev/nawa/articles/c00be949042dec</link><guid isPermaLink="true">https://zenn.dev/nawa/articles/c00be949042dec</guid><pubDate>Tue, 31 Dec 2024 02:47:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hN6zsy-F--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E4%25BB%2595%25E4%25BA%258B%25E4%25B8%25AD%25E3%2581%25AB%25E3%2583%25A1%25E3%2583%25A2%25E5%25B8%25B3%25E3%2581%25A8%25E3%2583%25A2%25E3%2583%2580%25E3%2583%25B3%25E3%2583%2596%25E3%2583%25A9%25E3%2582%25A6%25E3%2582%25B6%25E3%2581%25A0%25E3%2581%2591%25E3%2581%25A7%25E3%2581%2584%25E3%2582%258D%25E3%2581%2584%25E3%2582%258D%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%2584%25E3%2582%258B%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:naary%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U1ZTc1ZmNkNjQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>naary</dc:creator></item><item><title><![CDATA[【なろう小説API】PHPでなろうAPIを叩いて「小説家になろう」独自検索フォームを作成する]]></title><description><![CDATA[
+ なろう小説APIとは
+「小説家になろう」が提供している公式APIです。
+
+なろう小説APIでは小説家になろうに掲載されている作品情報を取得できます。
+なろうAPIはHTTPでのリクエストに対してJSON形式、JSONP形式又はYAML形式、PHPのserializeで応答します。
+実際に作品のデータが修正されてからなろうAPIに反映されるまで平均5分程度(最大2時間)の誤差があります。
+なろうデベロッパーより
+
+公式の検索が提供しているものと同様の結果を返却してくれます。
+今回は備忘として残すため、本記事を作成しています。
+
+ 利用制限
+
+利用制限は現在、休止しています。
+負荷状況に...]]></description><link>https://zenn.dev/saikofall/articles/2c0c723bd3363f</link><guid isPermaLink="true">https://zenn.dev/saikofall/articles/2c0c723bd3363f</guid><pubDate>Mon, 30 Dec 2024 14:05:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3LPn1yTM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E3%2581%25AA%25E3%2582%258D%25E3%2581%2586%25E5%25B0%258F%25E8%25AA%25ACAPI%25E3%2580%2591PHP%25E3%2581%25A7%25E3%2581%25AA%25E3%2582%258D%25E3%2581%2586API%25E3%2582%2592%25E5%258F%25A9%25E3%2581%2584%25E3%2581%25A6%25E3%2580%258C%25E5%25B0%258F%25E8%25AA%25AC%25E5%25AE%25B6%25E3%2581%25AB%25E3%2581%25AA%25E3%2582%258D%25E3%2581%2586%25E3%2580%258D%25E7%258B%25AC%25E8%2587%25AA%25E6%25A4%259C%25E7%25B4%25A2%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25BC%25E3%2583%25A0%25E3%2582%2592%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:saikofall%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTEY5U0g1eEUzSG9UZ2dQbTVEYXRTa1lJLV9ualUwWTFoMDFwR3FEMWtmamV4VVZ3PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>saikofall</dc:creator></item><item><title><![CDATA[React FlowでControlsに独自のボタンを追加する方法]]></title><description><![CDATA[
+ React FlowでControlsに独自のボタンを追加する方法
+React Flowのデフォルトのコントロールパネルにはzoomin, zoomout, fitview, toggle interactiveの4つのボタンが表示されている。そこに独自のボタンを追加する方法を知ったのでメモ。
+
+ React Flowとは
+フローチャートや組織図などのチャートを簡単に描くことができるコンポーネント
+
+公式ページより
+A customizable React component for building node-based editors and interactive diagra...]]></description><link>https://zenn.dev/mitate_gengaku/articles/react-flow-add-control-button</link><guid isPermaLink="true">https://zenn.dev/mitate_gengaku/articles/react-flow-add-control-button</guid><pubDate>Mon, 30 Dec 2024 10:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--l6pFFZ4K--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%2520Flow%25E3%2581%25A7Controls%25E3%2581%25AB%25E7%258B%25AC%25E8%2587%25AA%25E3%2581%25AE%25E3%2583%259C%25E3%2582%25BF%25E3%2583%25B3%25E3%2582%2592%25E8%25BF%25BD%25E5%258A%25A0%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25BE%25A1%25E6%25A5%25AF%25E7%258E%2584%25E5%25B6%25BD%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0tQOVRYWHQ5Qm1BLVplcURoLWdxUHl4RVFjMmNsRkhSNk95XzVVSVVhPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>御楯玄嶽</dc:creator></item><item><title><![CDATA[React FlowでControlsの既存のボタンを置き換える方法]]></title><description><![CDATA[
+ React FlowでControlsの既存のボタンを置き換える方法
+React Flowのデフォルトのコントロールパネルにはzoomin, zoomout, fitview, toggle interactiveの4つのボタンが表示されている。その4つのボタンのスタイルやアイコンが気に入らない場合、置き換えることができることを知ったのでメモ。
+
+ React Flowとは
+フローチャートや組織図などのチャートを簡単に描くことができるコンポーネント
+
+公式ページより
+A customizable React component for building node-based edit...]]></description><link>https://zenn.dev/mitate_gengaku/articles/react-flow-replace-default-button</link><guid isPermaLink="true">https://zenn.dev/mitate_gengaku/articles/react-flow-replace-default-button</guid><pubDate>Mon, 30 Dec 2024 10:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7Mz7svw2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%2520Flow%25E3%2581%25A7Controls%25E3%2581%25AE%25E6%2597%25A2%25E5%25AD%2598%25E3%2581%25AE%25E3%2583%259C%25E3%2582%25BF%25E3%2583%25B3%25E3%2582%2592%25E7%25BD%25AE%25E3%2581%258D%25E6%258F%259B%25E3%2581%2588%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25BE%25A1%25E6%25A5%25AF%25E7%258E%2584%25E5%25B6%25BD%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0tQOVRYWHQ5Qm1BLVplcURoLWdxUHl4RVFjMmNsRkhSNk95XzVVSVVhPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>御楯玄嶽</dc:creator></item><item><title><![CDATA[宣言的プログラミングと配列メソッドの活用：JavaScriptのコードをより良くする]]></title><description><![CDATA[JavaScriptにおける配列操作は、フロントエンドからバックエンドまで幅広い開発現場で日常的に行われる重要なタスクです。
+従来の手続き型なループ処理に加え、map、sort、reduceといった宣言的な配列メソッドを活用することで、コードの可読性や保守性を向上させることが可能です。
+本記事では、宣言的プログラミングの概念と、mapやreduceといったメソッドがどのように抽象化を提供し、「何をするか」に集中できるのかについても深掘りします。
+
+ 宣言的プログラミングとは
+宣言的プログラミングは、「何を達成したいか」をコードで表現するプログラミングパラダイムです。
+具体的な手順や操作の...]]></description><link>https://zenn.dev/fitness_densuke/articles/declarative_programming_and_array_methods</link><guid isPermaLink="true">https://zenn.dev/fitness_densuke/articles/declarative_programming_and_array_methods</guid><pubDate>Mon, 30 Dec 2024 09:48:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--QqD2DoKa--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%25AE%25A3%25E8%25A8%2580%25E7%259A%2584%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%259F%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%25A8%25E9%2585%258D%25E5%2588%2597%25E3%2583%25A1%25E3%2582%25BD%25E3%2583%2583%25E3%2583%2589%25E3%2581%25AE%25E6%25B4%25BB%25E7%2594%25A8%25EF%25BC%259AJavaScript%25E3%2581%25AE%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2582%2592%25E3%2582%2588%25E3%2582%258A%25E8%2589%25AF%25E3%2581%258F%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Tamtam%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg4YzUxYzNmMDQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Tamtam</dc:creator></item><item><title><![CDATA[LeafletでOpenStreetMap表示してみました。]]></title><description><![CDATA[3年ぶりにMAPサービスを作るので、Leafletを使ってみました。
+LeafletはJavaScriptライブラリでGoogleMapような、地図を簡単に無料で利用することができます。
+
+ CDNでリンクするやり方
+HTMLファイルを作成し、CDNからcss/jsファイルを読み込みます。
+&lt;link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" cross...]]></description><link>https://zenn.dev/ausssxi/articles/4011315fd5e059</link><guid isPermaLink="true">https://zenn.dev/ausssxi/articles/4011315fd5e059</guid><pubDate>Mon, 30 Dec 2024 01:09:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--QX0rgnci--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Leaflet%25E3%2581%25A7OpenStreetMap%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%25E3%2580%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%2586%2585%25E7%2594%25B0%25E5%258E%259A%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VjNDgzNzUzOWMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>内田厚</dc:creator></item><item><title><![CDATA[どこでも簡単にHTMLのサニタイズ with Svelte]]></title><description><![CDATA[
+ 導入
+カスタムHTMLのレンダリングはXSSの危険性があるので慎重になるのは言わずもがな。
+一般的にフロントエンドでは最強のサニタイズライブラリDOMPurifyを使うのが鉄板ですが、これだけでは色々と不足点が出てくるので色々ライブラリを作りました。
+https://github.com/cure53/DOMPurify
+
+ サーバーサイドでもサニタイズしたい
+モダンなフロントエンドというかBFFアーキテクチャではSSRが使われますが、先述のDOMPurifyはDOMを使用するのでサーバーでは使用できません。では、どうするかというとJSDOMを使って無理やりサーバー上にDOMを作成し...]]></description><link>https://zenn.dev/jill64/articles/20c4cfe535ba99</link><guid isPermaLink="true">https://zenn.dev/jill64/articles/20c4cfe535ba99</guid><pubDate>Sun, 29 Dec 2024 19:54:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ymtQ5EGM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%25A9%25E3%2581%2593%25E3%2581%25A7%25E3%2582%2582%25E7%25B0%25A1%25E5%258D%2598%25E3%2581%25ABHTML%25E3%2581%25AE%25E3%2582%25B5%25E3%2583%258B%25E3%2582%25BF%25E3%2582%25A4%25E3%2582%25BA%2520with%2520Svelte%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:jill64%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSkhvRWlDNlllZ2R6cGxwZ2xPQnVaN2V5akFPSUMtVExwQUpIMFg2NERIZWl3Z1dLTT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>jill64</dc:creator></item><item><title><![CDATA[JavaScriptのclassでconstructorをawaitしたい時]]></title><description><![CDATA[JavaScriptのclassでconstructorをawaitしたい。
+割と使い勝手がよいのでたまにやりたくなるけどasync constructorって書けない。
+そういう時の書き方です。
+class User {
+  constructor() {
+    return new Promise(async (resolve, reject) =&gt; {
+      // TO-DO
+      resolve(this);
+    });
+  }
+}
+await (new User());
+]]></description><link>https://zenn.dev/xofeulb/articles/2158b2d52e1021</link><guid isPermaLink="true">https://zenn.dev/xofeulb/articles/2158b2d52e1021</guid><pubDate>Sun, 29 Dec 2024 16:10:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ffGj_PsY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25E3%2581%25AEclass%25E3%2581%25A7constructor%25E3%2582%2592await%25E3%2581%2597%25E3%2581%259F%25E3%2581%2584%25E6%2599%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%255E.%252C.%255E%2520BlueFox%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VjODY1MTRmYTUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>^.,.^ BlueFox</dc:creator></item><item><title><![CDATA[Web Componentsでmarqueeを作る]]></title><description><![CDATA[Web Componentsという仕様を知っていますか？
+独自のHTML要素に近いものをJavaScriptで作ってみます.
+ちなみにWeb Componentsの説明についてはMDN Web Docsにて「再利用可能なカスタム要素を作成し、その機能を他のコードから分離してウェブアプリケーションで利用できるようにします。」と書かれています.
+https://developer.mozilla.org/ja/docs/Web/API/Web_components
+これらの仕様と機能を使って、&lt;marquee&gt;要素を実装します.
+&lt;marquee&gt;要素については以下の...]]></description><link>https://zenn.dev/wataru_nishi731/articles/6fba2632246ee8</link><guid isPermaLink="true">https://zenn.dev/wataru_nishi731/articles/6fba2632246ee8</guid><pubDate>Sun, 29 Dec 2024 14:21:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--oy23hRXo--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Web%2520Components%25E3%2581%25A7marquee%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:n13u%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RhMDBhODZmYTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>n13u</dc:creator></item><item><title><![CDATA[CDN の Google Font を参照している CSS を改変せずに、ローカルのアセットを使うよう仕向ける]]></title><description><![CDATA[
+ 背景
+HTML/CSS の話です。
+とある既製の UI ライブラリが、その提供する CSS ファイル内で、Google Font の CDN エントリを import していました。
+@import"https://fonts.googleapis.com/icon?family=Material+Icons";
+さてその UI ライブラリを使用して構築されたとある Web アプリケーションが、インターネットに到達できない閉じたイントラネット内でのみ使用されることになりました。そうなると、前述の Google Font の CDN 参照はエラーとなって利用できません。代わりに、その ...]]></description><link>https://zenn.dev/j_sakamoto/articles/a222afa016d644</link><guid isPermaLink="true">https://zenn.dev/j_sakamoto/articles/a222afa016d644</guid><pubDate>Sun, 29 Dec 2024 12:35:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--JGHLS-xr--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:CDN%2520%25E3%2581%25AE%2520Google%2520Font%2520%25E3%2582%2592%25E5%258F%2582%25E7%2585%25A7%25E3%2581%2597%25E3%2581%25A6%25E3%2581%2584%25E3%2582%258B%2520CSS%2520%25E3%2582%2592%25E6%2594%25B9%25E5%25A4%2589%25E3%2581%259B%25E3%2581%259A%25E3%2581%25AB%25E3%2580%2581%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25AB%25E3%2583%25AB%25E3%2581%25AE%25E3%2582%25A2%25E3%2582%25BB%25E3%2583%2583%25E3%2583%2588%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%25E3%2582%2588%25E3%2581%2586%25E4%25BB%2595%25E5%2590%2591%25E3%2581%2591%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%2540jsakamoto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dVX243dnJ5ZFlLb2NxdUhSUkIxSGZ4NGpVekNsdGNmZ290R2hfNWc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>@jsakamoto</dc:creator></item><item><title><![CDATA[Promise の withResolvers() メソッドを知りませんでした]]></title><description><![CDATA[
+ Promise の reolver 関数を外で使いたい
+HTML/JavaSrcipt プログラミングの話です。
+とある案件で、外部から非同期にセットされるオブジェクトを待って、そのオブジェクトに対する処理を実装する必要が発生しました。
+そこで自分は以下のように実装しました。
+class Foo {
+
+  private resolve: (obj: Bar) =&gt; void;
+
+  private promise: Promise&lt;Bar&gt;;
+
+  constructor() {
+    // ここで Promise を用意しつつ、resolver 関数を外に取り...]]></description><link>https://zenn.dev/j_sakamoto/articles/f1540e5f3ac848</link><guid isPermaLink="true">https://zenn.dev/j_sakamoto/articles/f1540e5f3ac848</guid><pubDate>Sun, 29 Dec 2024 10:18:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Kcyy8oOA--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Promise%2520%25E3%2581%25AE%2520withResolvers%2528%2529%2520%25E3%2583%25A1%25E3%2582%25BD%25E3%2583%2583%25E3%2583%2589%25E3%2582%2592%25E7%259F%25A5%25E3%2582%258A%25E3%2581%25BE%25E3%2581%259B%25E3%2582%2593%25E3%2581%25A7%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%2540jsakamoto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dVX243dnJ5ZFlLb2NxdUhSUkIxSGZ4NGpVekNsdGNmZ290R2hfNWc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>@jsakamoto</dc:creator></item><item><title><![CDATA[shadowDOM 以下の要素で発生したイベントの発生元要素を特定する]]></title><description><![CDATA[
+ document レベルでイベント捕捉、target で発生元を識別
+HTML/JavaScript でのプログラムの話です。
+最近の Web アプリケーションフレームワークを使っていると、あまり出番は薄いのですが、希に、「下位要素からバブリングしてくるイベントを、document レベルでリッスンする」みたいな実装を行なうことがあります。そしてこのようなパターンでは、「どの要素でそのイベントが発生したのか」を、イベント引数の target プロパティを見て判断することがままあります。
+// このページで発生したすべての click イベントを捕捉し...
+document.addE...]]></description><link>https://zenn.dev/j_sakamoto/articles/d72e2db20e9788</link><guid isPermaLink="true">https://zenn.dev/j_sakamoto/articles/d72e2db20e9788</guid><pubDate>Sun, 29 Dec 2024 09:35:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--HqbFoh0V--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:shadowDOM%2520%25E4%25BB%25A5%25E4%25B8%258B%25E3%2581%25AE%25E8%25A6%2581%25E7%25B4%25A0%25E3%2581%25A7%25E7%2599%25BA%25E7%2594%259F%25E3%2581%2597%25E3%2581%259F%25E3%2582%25A4%25E3%2583%2599%25E3%2583%25B3%25E3%2583%2588%25E3%2581%25AE%25E7%2599%25BA%25E7%2594%259F%25E5%2585%2583%25E8%25A6%2581%25E7%25B4%25A0%25E3%2582%2592%25E7%2589%25B9%25E5%25AE%259A%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%2540jsakamoto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dVX243dnJ5ZFlLb2NxdUhSUkIxSGZ4NGpVekNsdGNmZ290R2hfNWc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>@jsakamoto</dc:creator></item><item><title><![CDATA[NetworkInformation API を使ってレンダリング結果を制御してみる？]]></title><description><![CDATA[ちょっと株式会社フロントエンドエンジニアのn13uです.
+MDN Web Docsを見ていたら見つけた「NetworkInformation API」について記事を書いてみます.
+!
+今回紹介するAPIは仕様の更新が4年近く前に止まっているもので、かつ実装しているブラウザも少ないため実験的な要素の域を出ません.
+
+
+ NetworkInformation APIとは？
+Webブラウザからデバイスが接続しているインターネットの接続状況を取得するためのAPIです. 残念ながらGoogle Chromeのみで採用されており、他主要ブラウザでは未実装の状態です.
+仕様の詳細はWICG（Web I...]]></description><link>https://zenn.dev/wataru_nishi731/articles/dddc2f76b0c6e6</link><guid isPermaLink="true">https://zenn.dev/wataru_nishi731/articles/dddc2f76b0c6e6</guid><pubDate>Sun, 29 Dec 2024 08:46:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--SMZ2p_rj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:NetworkInformation%2520API%2520%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2583%25AC%25E3%2583%25B3%25E3%2583%2580%25E3%2583%25AA%25E3%2583%25B3%25E3%2582%25B0%25E7%25B5%2590%25E6%259E%259C%25E3%2582%2592%25E5%2588%25B6%25E5%25BE%25A1%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:n13u%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RhMDBhODZmYTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>n13u</dc:creator></item><item><title><![CDATA[【GSAP】GSAP Practice【#１１ GSAP Sample３ Drower Menu Animation】]]></title><description><![CDATA[
+ 【#１１ GSAP Sample３ Drower Menu Animation】
+YouTube: https://youtu.be/7VvIWGbSwiU
+https://youtu.be/7VvIWGbSwiU
+今回はGSAPを使用して、
+ドロワーメニューを作成していきます。
+まずは、HTMLとCSSの部分を実装します。
+https://remixicon.com/
+
+index.html
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8" /&gt;
+ ...]]></description><link>https://zenn.dev/web_life_ch/articles/ffd820ea8fb417</link><guid isPermaLink="true">https://zenn.dev/web_life_ch/articles/ffd820ea8fb417</guid><pubDate>Sun, 29 Dec 2024 05:07:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--UAsYraPY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590GSAP%25E3%2580%2591GSAP%2520Practice%25E3%2580%2590%2523%25EF%25BC%2591%25EF%25BC%2591%2520GSAP%2520Sample%25EF%25BC%2593%2520Drower%2520Menu%2520Animation%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Web%2520Life%2520CH%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUl0YnZtbWNjTWFMM3dyd2x3VE5sVVZjTlhmZHEzZzF2QnJfMUJMSkJrN049czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Web Life CH</dc:creator></item><item><title><![CDATA[未使用であることを示す変数 アンダーバー(_)【個人学習まとめ】]]></title><description><![CDATA[
+ 引数のアンダーバー(_)
+JavaScriptにおいて、引数にアンダーバー(_)が使われることがある。
+これは、未使用であることを示す。(自分は初めて見たが、一般的な使い方らしい)
+new Promise((_,reject) =&gt; {
+    setTimeout(() =&gt; {
+        reject("制限時間!");
+    },500);
+});
+Promiseは第一引数に成功状態を示すresolve、第二引数に失敗状態を示すrejectが必要。
+上記の例では、タイムアウト後にPromiseを拒否したいだけなので、成功状態を示すresolveは必要ないため...]]></description><link>https://zenn.dev/o0rororo0o/articles/ba7bb47d3a2251</link><guid isPermaLink="true">https://zenn.dev/o0rororo0o/articles/ba7bb47d3a2251</guid><pubDate>Sun, 29 Dec 2024 02:19:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--uW8ChXul--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%259C%25AA%25E4%25BD%25BF%25E7%2594%25A8%25E3%2581%25A7%25E3%2581%2582%25E3%2582%258B%25E3%2581%2593%25E3%2581%25A8%25E3%2582%2592%25E7%25A4%25BA%25E3%2581%2599%25E5%25A4%2589%25E6%2595%25B0%2520%25E3%2582%25A2%25E3%2583%25B3%25E3%2583%2580%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%2528_%2529%25E3%2580%2590%25E5%2580%258B%25E4%25BA%25BA%25E5%25AD%25A6%25E7%25BF%2592%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%258D%25E3%2582%258D%25E3%2582%258D%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ2ZTZjOWM4YmMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ろろろ</dc:creator></item><item><title><![CDATA[JavaScriptの二重否定の使い道!!]]></title><description><![CDATA[記事を見ているときに「!!」という表現を見てこれなんだっけなーとなったのでメモとして残しておきます。
+
+ 二重否定とは
+「!!」二重否定はその名の通り否定論理演算子を2回繰り返したものです。
+そのためtrueはtrueのままだし、falseはfalseのままです。
+const hoge = true
+const fuga = false
+
+console.log(!!hoge) // true
+console.log(!!fuga) // false
+
+ 使い道
+使い道としてはあらゆる値を真偽値へ変換することです。
+console.log(!!0)         // false
+co...]]></description><link>https://zenn.dev/straw_engine/articles/a655e3cac54004</link><guid isPermaLink="true">https://zenn.dev/straw_engine/articles/a655e3cac54004</guid><pubDate>Sat, 28 Dec 2024 14:54:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--tozByrQ_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25E3%2581%25AE%25E4%25BA%258C%25E9%2587%258D%25E5%2590%25A6%25E5%25AE%259A%25E3%2581%25AE%25E4%25BD%25BF%25E3%2581%2584%25E9%2581%2593%2521%2521%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hanatsuyo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFUWEFKellZZEM2T1pzUWxjdmVrSkMxZlhCOXhxcTd6bmZkMzZCdGtuT249czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hanatsuyo</dc:creator></item><item><title><![CDATA[OSSに関わるようになったきっかけ、Reactライブラリを開発するまでの道のり]]></title><description><![CDATA[歳をとっていることがバレてしまうかもしれませんが、私がOSS開発の世界に足を踏み入れた経緯について書いた記事を紹介します。
+https://blog.axlight.com/posts/how-i-got-involved-in-oss/
+以下、ChatGPTによる翻訳です。
+
+
+ はじめに
+この記事では、私がオープンソースソフトウェア（OSS）開発に関わるようになった道のりを振り返りたいと思います。
+
+ 初めてのOSS貢献
+2000年頃、初めてOSSに貢献しました。それはNetBSD/mac68k用のEthernetドライバでした。C言語で書かれており、今振り返ると、自分でもコードをほ...]]></description><link>https://zenn.dev/dai_shi/articles/0e22b8536e4563</link><guid isPermaLink="true">https://zenn.dev/dai_shi/articles/0e22b8536e4563</guid><pubDate>Sat, 28 Dec 2024 09:29:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--DCm6h5h3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:OSS%25E3%2581%25AB%25E9%2596%25A2%25E3%2582%258F%25E3%2582%258B%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E3%2581%25AA%25E3%2581%25A3%25E3%2581%259F%25E3%2581%258D%25E3%2581%25A3%25E3%2581%258B%25E3%2581%2591%25E3%2580%2581React%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%25E3%2582%2592%25E9%2596%258B%25E7%2599%25BA%25E3%2581%2599%25E3%2582%258B%25E3%2581%25BE%25E3%2581%25A7%25E3%2581%25AE%25E9%2581%2593%25E3%2581%25AE%25E3%2582%258A%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:daishi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzcwZGNhM2E2Y2IuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>daishi</dc:creator></item><item><title><![CDATA[文章を決まった文字数で折り返して表示する処理の作り方]]></title><description><![CDATA[
+ はじめに
+この記事では、文章を決まった文字数で折り返して表示するプログラムの作り方について説明しています。ある程度の経験があるプログラマーにとってはそれほど難しいものではないと思いますが、初心者・初学者の方に向けにまとめています。
+
+ 実現したいこと
+たとえば、「あけましておめでとうございます」という文章を1行5文字で折り返す場合、以下のように表示されます。
+あけまして  
+おめでとう  
+ございます  
+3文字で折り返すと以下のように表示されます。
+あけま
+してお
+めでと
+うござ
+います
+このような処理を各文字の座標を指定して表示しなければいけない場合に、それぞれの文字の位置を計算...]]></description><link>https://zenn.dev/kwaka1208/articles/wrapping-text-at-a-fixed-character-count</link><guid isPermaLink="true">https://zenn.dev/kwaka1208/articles/wrapping-text-at-a-fixed-character-count</guid><pubDate>Sat, 28 Dec 2024 08:31:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1dzCU3jr--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%2596%2587%25E7%25AB%25A0%25E3%2582%2592%25E6%25B1%25BA%25E3%2581%25BE%25E3%2581%25A3%25E3%2581%259F%25E6%2596%2587%25E5%25AD%2597%25E6%2595%25B0%25E3%2581%25A7%25E6%258A%2598%25E3%2582%258A%25E8%25BF%2594%25E3%2581%2597%25E3%2581%25A6%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2599%25E3%2582%258B%25E5%2587%25A6%25E7%2590%2586%25E3%2581%25AE%25E4%25BD%259C%25E3%2582%258A%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kenichi%2520Wakabayashi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJmMjI4MDllOTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kenichi Wakabayashi</dc:creator></item><item><title><![CDATA[自分がよく使っているブックマークレット公開所]]></title><description><![CDATA[
+ 使い方(ブックマークレットの概要)
+javascript:alert("ブックマークレットのソースコード");
+←範囲選択ここまで
+
+↑のコードブロックを範囲選択して、ブラウザのブックマークにドラックドロップ
+名前がソースコードになってるので、自分のわかりやすい名前に変更する
+
+
+ Xで、表示中のURLかXのポストIDの反応を検索
+javascript:(function(){let xSearch;if(location.hostname=="x.com"&amp;&amp;0&lt;location.href.indexOf("/status/")){xSearch=locati...]]></description><link>https://zenn.dev/ihok/articles/c3d02cb7bea8b9</link><guid isPermaLink="true">https://zenn.dev/ihok/articles/c3d02cb7bea8b9</guid><pubDate>Sat, 28 Dec 2024 02:51:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--FuWDy9qP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%2587%25AA%25E5%2588%2586%25E3%2581%258C%25E3%2582%2588%25E3%2581%258F%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%2584%25E3%2582%258B%25E3%2583%2596%25E3%2583%2583%25E3%2582%25AF%25E3%2583%259E%25E3%2583%25BC%25E3%2582%25AF%25E3%2583%25AC%25E3%2583%2583%25E3%2583%2588%25E5%2585%25AC%25E9%2596%258B%25E6%2589%2580%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ihok%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFUWEFKejhESUZGcEliSGtLNnV4SnBJQnl1eGtCQkwwWU5zamE5VGx6bzk9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ihok</dc:creator></item></channel></rss>
