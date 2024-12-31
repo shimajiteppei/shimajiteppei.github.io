@@ -1,13 +1,4 @@
----
-categories:
-    - game
-    - math
-tags:
-    - Java
-date: 2023-10-01
----
-
-# ライフゲーム（高校時代版）
+# ライフゲーム
 
 <link rel="stylesheet" href="/static/stylesheets/xp.css">
 
