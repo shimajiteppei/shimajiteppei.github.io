@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「TypeScript」のフィード]]></title><description><![CDATA[Zennのトピック「TypeScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/typescript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/f13e758fdb.png</url><title>Zennの「TypeScript」のフィード</title><link>https://zenn.dev/topics/typescript</link></image><generator>zenn.dev</generator><lastBuildDate>Wed, 01 Jan 2025 01:58:31 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/typescript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[【Prisma】テストデータに影響を与えない単体テストを実装する]]></title><description><![CDATA[
+ 背景
+
+Typescript × Prisma × Jest でAPIを作成していたところ、テストデータに影響を与えない単体テストを実装したくなった。
+Spring BootではTestに @Transactional を付与するとテスト実行後にDBをロールバックさせることができる。
+
+参考
+
+
+Prisma, Jestでは @Transactional のようなものはなさそうだったが、上記の環境で @Transactional のような仕組みを実装したい。
+
+
+ 前提
+
+単体テスト = API単位のテスト とする。
+
+
+API単位のテストの具体例test('The case to ...]]></description><link>https://zenn.dev/kobata/articles/75623d30ed5b54</link><guid isPermaLink="true">https://zenn.dev/kobata/articles/75623d30ed5b54</guid><pubDate>Tue, 31 Dec 2024 14:00:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_NbqzDCG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Prisma%25E3%2580%2591%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2581%25AB%25E5%25BD%25B1%25E9%259F%25BF%25E3%2582%2592%25E4%25B8%258E%25E3%2581%2588%25E3%2581%25AA%25E3%2581%2584%25E5%258D%2598%25E4%25BD%2593%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kobata%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZmNGY5ZGJhMWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kobata</dc:creator></item><item><title><![CDATA[テストコード周りの悩みと対応例まとめ【2024】]]></title><description><![CDATA[!
+突貫備忘録です。
+Go, TypeScript ですが他言語でも参考にはなるかと
+
+
+ Go
+
+ 逐次的凝集 （特に interface-adapter (Clean Architecture) レイヤーで頻出）
+func (h *handler) SaveRecipe(input model.InputRecipeGroup) (*model.RecipeGroup, error) {
+	recipeGroups, err := h.Recipes.Find()
+	if err != nil {
+		return nil, err
+	}
+	recipeTypes, err := h...]]></description><link>https://zenn.dev/tingtt/articles/6e27aea1d60c5a</link><guid isPermaLink="true">https://zenn.dev/tingtt/articles/6e27aea1d60c5a</guid><pubDate>Tue, 31 Dec 2024 13:58:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--TnW_fdxj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E5%2591%25A8%25E3%2582%258A%25E3%2581%25AE%25E6%2582%25A9%25E3%2581%25BF%25E3%2581%25A8%25E5%25AF%25BE%25E5%25BF%259C%25E4%25BE%258B%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2580%25902024%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259F%25E3%2581%258F%25E3%2581%25A6%25E3%2581%2583%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZjZTlkMTI2YWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>たくてぃん</dc:creator></item><item><title><![CDATA[2年2ヶ月のエンジニア人生の振り返り]]></title><description><![CDATA[こんにちは、初めまして未経験でエンジニアに転職したとKuuuuuと申します。
+私の経歴は以下の通り。
+
+中学校教員 3年6ヶ月
+エンジニア 2年2ヶ月(2024年12月現在)
+
+私のことについては、弊社の入社エントリ記事を見ていただくか、なぜエンジニアになったのかは、今年記事を書いたので見ていただけたら幸いです。
+女性エンジニアとしてやりがいを感じた経験談をシェアしようというテーマでの記事なので、何を書くか本当に悩んだのですが、2年2ヶ月でどんなことをやってきたのかを振り返ってみようと思います。
+
+ 入社~2.5ヶ月: 研修時代
+弊社はありがたいことに研修がありました。内容は以下の2つで...]]></description><link>https://zenn.dev/kuuuuu/articles/135da590bad4a4</link><guid isPermaLink="true">https://zenn.dev/kuuuuu/articles/135da590bad4a4</guid><pubDate>Tue, 31 Dec 2024 13:12:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ftBi5Vud--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:2%25E5%25B9%25B42%25E3%2583%25B6%25E6%259C%2588%25E3%2581%25AE%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%25E4%25BA%25BA%25E7%2594%259F%25E3%2581%25AE%25E6%258C%25AF%25E3%2582%258A%25E8%25BF%2594%25E3%2582%258A%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kuuuuu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I4NjBiNTRkMzAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kuuuuu</dc:creator></item><item><title><![CDATA[鑑賞を鑑賞を鑑賞を鑑賞を鑑賞を鑑賞しないを鑑賞しないを鑑賞から学ぶ再帰処理]]></title><description><![CDATA[
+ 天竺鼠 川原 究極シリーズ
+お笑い芸人 天竺鼠 川原さんのYoutubeの動画を見て、なんとなく再帰処理の練習になるのでは？と思ったので実際にやってみました。
+Youtubeを見てもらうとわかるのですが、最初の動画を起点に色々な芸人さんが鑑賞してもらうのをみなさんに見ていただく動画です。（↓の画像のイメージです。）
+
+要件は以下になります。
+
+動画の最初は「オープニング、オープニング...」で始まる
+必ず鑑賞した順番を最初述べ、最後に「皆さんに見てもらいます」と言い、動画をスタートする
+動画を見る人と見ない人がいる
+一番最初の動画である、せいやさんと川原さんの動画が流れる
+必ず鑑賞し...]]></description><link>https://zenn.dev/shikazuki/articles/2efe44e48320e9c30607</link><guid isPermaLink="true">https://zenn.dev/shikazuki/articles/2efe44e48320e9c30607</guid><pubDate>Tue, 31 Dec 2024 13:07:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--mR2cO_aE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E9%2591%2591%25E8%25B3%259E%25E3%2582%2592%25E9%2591%2591%25E8%25B3%259E%25E3%2582%2592%25E9%2591%2591%25E8%25B3%259E%25E3%2582%2592%25E9%2591%2591%25E8%25B3%259E%25E3%2582%2592%25E9%2591%2591%25E8%25B3%259E%25E3%2582%2592%25E9%2591%2591%25E8%25B3%259E%25E3%2581%2597%25E3%2581%25AA%25E3%2581%2584%25E3%2582%2592%25E9%2591%2591%25E8%25B3%259E%25E3%2581%2597%25E3%2581%25AA%25E3%2581%2584%25E3%2582%2592%25E9%2591%2591%25E8%25B3%259E%25E3%2581%258B%25E3%2582%2589%25E5%25AD%25A6%25E3%2581%25B6%25E5%2586%258D%25E5%25B8%25B0%25E5%2587%25A6%25E7%2590%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:shikazuki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JlZDgyOGI0ZDUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>shikazuki</dc:creator></item><item><title><![CDATA[汎用的な型ガードメソッドを作る]]></title><description><![CDATA[TypeScriptを利用する際、APIから取得したデータの型が指定の型と異なるというエラーが出てしまうことはないでしょうか。その場合に役立つのが型ガードメソッドです。
+
+ 単純な型ガードの例
+https://typescriptbook.jp/reference/functions/type-guard-functions
+型ガードメソッドを通した後は、自動で「指定の型」と見なしてくれるようになります。
+const simpleTypeGuard = (x: unknown): x is number =&gt; {
+  return typeof x === "number";
+};...]]></description><link>https://zenn.dev/koda_momo/articles/869058f5ba6bf0</link><guid isPermaLink="true">https://zenn.dev/koda_momo/articles/869058f5ba6bf0</guid><pubDate>Tue, 31 Dec 2024 13:06:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--F49Uas7D--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%25B1%258E%25E7%2594%25A8%25E7%259A%2584%25E3%2581%25AA%25E5%259E%258B%25E3%2582%25AC%25E3%2583%25BC%25E3%2583%2589%25E3%2583%25A1%25E3%2582%25BD%25E3%2583%2583%25E3%2583%2589%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:koda_momo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE2NDQ3YWVkOGIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>koda_momo</dc:creator></item><item><title><![CDATA[React19を触る前にReactの進化をおさらい！Todoリストを作って変遷を体験してみた]]></title><description><![CDATA[
+ 最初に
+2024年12月5日にReact19の安定版がリリースされるなど、Reactはさまざまな進化をしてきています。
+今回はTodoリストアプリを作成していき、それをおさらいしていきます。
+
+ この記事でやること
+さまざまなversionのReactで同じアプリを作成していき、Reactの進化を体験していきます。
+
+ React15
+使いやすさ: ★★☆☆☆
+メリット: ★★★☆☆
+
+ アプリ作成
+
+ react15インストール
+npm install react@15 react-dom@15
+
+ コード
+クラスコンポーネントで書き、this.stateでの状態管理とthis.s...]]></description><link>https://zenn.dev/daiju81/articles/227934f5c16038</link><guid isPermaLink="true">https://zenn.dev/daiju81/articles/227934f5c16038</guid><pubDate>Tue, 31 Dec 2024 12:34:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0Da7GpRd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React19%25E3%2582%2592%25E8%25A7%25A6%25E3%2582%258B%25E5%2589%258D%25E3%2581%25ABReact%25E3%2581%25AE%25E9%2580%25B2%25E5%258C%2596%25E3%2582%2592%25E3%2581%258A%25E3%2581%2595%25E3%2582%2589%25E3%2581%2584%25EF%25BC%2581Todo%25E3%2583%25AA%25E3%2582%25B9%25E3%2583%2588%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E5%25A4%2589%25E9%2581%25B7%25E3%2582%2592%25E4%25BD%2593%25E9%25A8%2593%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:daiju%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzcyZjdiNGU0NjMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>daiju</dc:creator></item><item><title><![CDATA[honoを使ってBlueskyのサブドメイン ハンドル認証を実装しといた]]></title><description><![CDATA[自分のドメインはあるけど、Bluesky（bsky）で使いたいハンドルが異なる場合に使える hono サーバーを実装してみましたので、もし条件が合ったら使ってみてください。
+要するに、私がサイト bar.tld を運営していることでそこそこ有名な foo というハンドルの人だとすると、このコードがお役に立つかもしれません。
+
+
+@bar.tld として Bluesky を使いたいわけではない
+ハンドルは foo から始まってほしい
+ハンドルが @foo.bar.tld なら最高か
+foo.bar.tld というサブドメインは今まで使ったことがない
+
+上記を満たしている場合は、ぜひ使ってみ...]]></description><link>https://zenn.dev/karawapo/articles/001561d6eb36f1</link><guid isPermaLink="true">https://zenn.dev/karawapo/articles/001561d6eb36f1</guid><pubDate>Tue, 31 Dec 2024 11:49:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--enQvI5sI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:hono%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6Bluesky%25E3%2581%25AE%25E3%2582%25B5%25E3%2583%2596%25E3%2583%2589%25E3%2583%25A1%25E3%2582%25A4%25E3%2583%25B3%2520%25E3%2583%258F%25E3%2583%25B3%25E3%2583%2589%25E3%2583%25AB%25E8%25AA%258D%25E8%25A8%25BC%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2597%25E3%2581%25A8%25E3%2581%2584%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:karawapo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM0NThhZmI2NjQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>karawapo</dc:creator></item><item><title><![CDATA[o1jsを使って署名・検証が試せるZKアプリを動かしてみた！]]></title><description><![CDATA[
+
+ はじめに
+皆さん、こんにちは。
+今回は、MinaProtocol というブロックチェーンをテーマにした記事を執筆していこうと思います！
+現在ハッカソンプラットフォームAkindoとMinaProtocolのチームがタッグ組んで WaveHack というプログラムを実施中です！
+https://app.akindo.io/wave-hacks/ENw9p7R6nUz818lo1
+WaveHack ってなんだという方は以下の記事をご参照ください！
+ファウンダーである金城さんの想いがまとめられています！！！
+https://note.com/shinkinjo/n/n313d1e931e...]]></description><link>https://zenn.dev/mashharuki/articles/mina-protocol_2</link><guid isPermaLink="true">https://zenn.dev/mashharuki/articles/mina-protocol_2</guid><pubDate>Tue, 31 Dec 2024 11:38:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--J1nixwH5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:o1js%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E7%25BD%25B2%25E5%2590%258D%25E3%2583%25BB%25E6%25A4%259C%25E8%25A8%25BC%25E3%2581%258C%25E8%25A9%25A6%25E3%2581%259B%25E3%2582%258BZK%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E5%258B%2595%25E3%2581%258B%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Haruki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dIaXowNy12WWVodmV1RVRrNGZoU25LaldfYTVFdmJlYnprWG1XPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Haruki</dc:creator></item><item><title><![CDATA[MinaProtocolにトークンをデプロイしてみた！]]></title><description><![CDATA[
+
+ はじめに
+皆さん、こんにちは。
+今回は、MinaProtocol というブロックチェーンをテーマにした記事を執筆していこうと思います！
+現在ハッカソンプラットフォームAkindoとMinaProtocolのチームがタッグ組んで WaveHack というプログラムを実施中です！
+https://app.akindo.io/wave-hacks/ENw9p7R6nUz818lo1
+WaveHack ってなんだという方は以下の記事をご参照ください！
+ファウンダーである金城さんの想いがまとめられています！！！
+https://note.com/shinkinjo/n/n313d1e931e...]]></description><link>https://zenn.dev/mashharuki/articles/mina-protocol_1</link><guid isPermaLink="true">https://zenn.dev/mashharuki/articles/mina-protocol_1</guid><pubDate>Tue, 31 Dec 2024 10:34:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dC4r5bdr--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:MinaProtocol%25E3%2581%25AB%25E3%2583%2588%25E3%2583%25BC%25E3%2582%25AF%25E3%2583%25B3%25E3%2582%2592%25E3%2583%2587%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25A4%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Haruki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dIaXowNy12WWVodmV1RVRrNGZoU25LaldfYTVFdmJlYnprWG1XPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Haruki</dc:creator></item><item><title><![CDATA[React FlowでControlsに独自のノード・エッジを追加する方法]]></title><description><![CDATA[
+ React FlowでControlsに独自のノード・エッジを追加する方法
+React Flowでは独自のノードやエッジを追加することができる機能がある。これを使うと、クラス図みたいなカスタムノードも作って呼び出せたりする。その簡単な実装のメモ
+
+ React Flowとは
+フローチャートや組織図などのチャートを簡単に描くことができるコンポーネント
+
+公式ページより
+A customizable React component for building node-based editors and interactive diagrams
+
+
+ 実装
+以下のページの実装に独自のノード...]]></description><link>https://zenn.dev/mitate_gengaku/articles/react-flow-add-custom-node-and-edge</link><guid isPermaLink="true">https://zenn.dev/mitate_gengaku/articles/react-flow-add-custom-node-and-edge</guid><pubDate>Tue, 31 Dec 2024 10:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9sDjq_lW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%2520Flow%25E3%2581%25A7Controls%25E3%2581%25AB%25E7%258B%25AC%25E8%2587%25AA%25E3%2581%25AE%25E3%2583%258E%25E3%2583%25BC%25E3%2583%2589%25E3%2583%25BB%25E3%2582%25A8%25E3%2583%2583%25E3%2582%25B8%25E3%2582%2592%25E8%25BF%25BD%25E5%258A%25A0%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25BE%25A1%25E6%25A5%25AF%25E7%258E%2584%25E5%25B6%25BD%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0tQOVRYWHQ5Qm1BLVplcURoLWdxUHl4RVFjMmNsRkhSNk95XzVVSVVhPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>御楯玄嶽</dc:creator></item><item><title><![CDATA[手を動かして理解するBranded Type]]></title><description><![CDATA[
+ この記事の内容
+
+Branded Typeの概要を知ることができる。
+実際にBranded Typeを作成済みのソースコードに適用することで、手を動かして理解する。
+
+
+ はじめに
+Branded Typeとは、TypeScriptにおける型の安全性を高めるためのテクニックの一つです。基本的には、プリミティブ型にブランド（目印）を付与することで、同じプリミティブ型でも異なる型として扱うことを可能にします。
+この記事では私が文章読んでいるだけだと腹落ちできなかったので、実際に既存のリポジトリをBranded Typeに適用することでありがたみを理解しようとする試みです。
+
+ Brand...]]></description><link>https://zenn.dev/sui_water/articles/abdce537c48f9e</link><guid isPermaLink="true">https://zenn.dev/sui_water/articles/abdce537c48f9e</guid><pubDate>Tue, 31 Dec 2024 02:39:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3FRxS_xC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%2589%258B%25E3%2582%2592%25E5%258B%2595%25E3%2581%258B%25E3%2581%2597%25E3%2581%25A6%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2599%25E3%2582%258BBranded%2520Type%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25B9%25E3%2582%25A4%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M4MGQ1MWNkOTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>スイ</dc:creator></item><item><title><![CDATA[タイプセーフなStorage API管理 + Svelte]]></title><description><![CDATA[
+ 導入
+LocalStorageやSessionStorageといったStorage APIは非常に便利な存在ですが、数値やオブジェクトを格納しようとすると型定義が曖昧になりがちです。
+また、いちいちシリアライズ、デシリアライズを噛ませるのもネックになります。
+そこで今回は、Storage APIをより便利に扱うラッパーライブラリを作成したので紹介します。
+
+ @jill64/typed-storage
+https://github.com/jill64/typed-storage
+
+ string型
+まずは、型指定なし（string型）から説明します。
+typedStorageにキー...]]></description><link>https://zenn.dev/jill64/articles/0acfe33323156b</link><guid isPermaLink="true">https://zenn.dev/jill64/articles/0acfe33323156b</guid><pubDate>Tue, 31 Dec 2024 02:32:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--oIAFytqD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%2597%25E3%2582%25BB%25E3%2583%25BC%25E3%2583%2595%25E3%2581%25AAStorage%2520API%25E7%25AE%25A1%25E7%2590%2586%2520%252B%2520Svelte%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:jill64%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSkhvRWlDNlllZ2R6cGxwZ2xPQnVaN2V5akFPSUMtVExwQUpIMFg2NERIZWl3Z1dLTT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>jill64</dc:creator></item><item><title><![CDATA[TypeScript×クリーンアーキテクチャで簡単なタスク管理アプリを作成した]]></title><description><![CDATA[n 番煎じかもしれませんがクリーンアーキテクチャについての学習のアウトプットも兼ねて TypeScript で簡単なタスク管理アプリケーションを作成しました。
+https://github.com/guitarinchen/clean-architecture-todo-app
+
+ 使用技術
+
+
+TypeScript (言語)
+
+Hono (Web フレームワーク)
+
+Prisma (ORM)
+
+Biome (linter, formatter)
+
+
+ ディレクトリ構成
+上層レイヤから infrastructure, presentation, application, domain の...]]></description><link>https://zenn.dev/guitarinchen/articles/818922fec11cc5</link><guid isPermaLink="true">https://zenn.dev/guitarinchen/articles/818922fec11cc5</guid><pubDate>Tue, 31 Dec 2024 01:46:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---e-lrsb0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%25C3%2597%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%25BC%25E3%2583%25B3%25E3%2582%25A2%25E3%2583%25BC%25E3%2582%25AD%25E3%2583%2586%25E3%2582%25AF%25E3%2583%2581%25E3%2583%25A3%25E3%2581%25A7%25E7%25B0%25A1%25E5%258D%2598%25E3%2581%25AA%25E3%2582%25BF%25E3%2582%25B9%25E3%2582%25AF%25E7%25AE%25A1%25E7%2590%2586%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:guitarinchen%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MyMjdmMGEzNGUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>guitarinchen</dc:creator></item><item><title><![CDATA[JWT認証ってなんなん【Expressを用いた使用例】]]></title><description><![CDATA[
+ JWTとは
+JSON Web Tokenの略。
+ユーザの認証と認可に使用されるトークンベースの認証方法
+JWTによりユーザの識別情報や権限情報を含むトークンを生成し、
+それをクライアント-サーバー間でやり取りすることで、安全に認証情報を保持するしくみ
+
+ JWTを使うメリット
+ユーザ特有のIDと、共通の秘密鍵を組み合わせJWTを生成することで以下のようなメリットがある
+
+
+セキュリティの強化
+秘密鍵は、JWTトークンの署名と検証に使用されるため、トークンの改ざんを防止できる。
+正しい秘密鍵がなければ、トークンを生成したり安全性を保てない。
+
+
+ユーザーの識別
+JWTのペイロードにユー...]]></description><link>https://zenn.dev/nineball/articles/43b1ce18f5e75e</link><guid isPermaLink="true">https://zenn.dev/nineball/articles/43b1ce18f5e75e</guid><pubDate>Mon, 30 Dec 2024 23:22:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ZQ7pppWo--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JWT%25E8%25AA%258D%25E8%25A8%25BC%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25AA%25E3%2582%2593%25E3%2581%25AA%25E3%2582%2593%25E3%2580%2590Express%25E3%2582%2592%25E7%2594%25A8%25E3%2581%2584%25E3%2581%259F%25E4%25BD%25BF%25E7%2594%25A8%25E4%25BE%258B%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nineball%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA3YWM1ZTllYzAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nineball</dc:creator></item><item><title><![CDATA[第八話：画像認識する方法]]></title><description><![CDATA[
+AI活用を検討中で、既存のデータセットを活用し、風景・建物・食べ物を検出したい。モジュール開発で精度検証しながら研究に活用、PC（Windows）での利用を想定しております。ご対応可能でしょうか？
+
+今回もお問い合わせいただいた内容から厳選し、問題解決していきます。
+ここでは、Google Cloud Vision APIを使って、アップロードした画像から風景、建物、食べ物を検出するシンプルな例を示していきます。
+また、前回チャットボット用にメニューのOneとTwoを活用しましたので、今回はThreeのページに開発していきます。
+
+それでは、Let’s Go!!
+
+ 1. Google...]]></description><link>https://zenn.dev/takayamasashi/articles/61061b534f94a6</link><guid isPermaLink="true">https://zenn.dev/takayamasashi/articles/61061b534f94a6</guid><pubDate>Mon, 30 Dec 2024 18:35:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--romZfwlB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%25AC%25AC%25E5%2585%25AB%25E8%25A9%25B1%25EF%25BC%259A%25E7%2594%25BB%25E5%2583%258F%25E8%25AA%258D%25E8%25AD%2598%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E9%25AB%2598%25E8%25B0%25B7%25E6%2598%258C%25E5%25BF%2597-%25E3%2583%2596%25E3%2583%25AB%25E3%2583%2586%25E3%2583%258A%25E3%2582%25B5%25E3%2582%25B9Inc.%25E4%25BB%25A3%25E8%25A1%25A8%2Cx_90%2Cy_121/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>高谷昌志-ブルテナサスInc.代表</dc:creator></item><item><title><![CDATA[指定のディレクトリ下をブラウザ上で探索可能にする GitHubActions を作った]]></title><description><![CDATA[
+ 概要
+Generate Directory Listing Action という GitHubActions を作った。
+https://github.com/yKicchan/generate-directory-listing-action
+細かい使い方についてはREADMEへどうぞ(この記事では触れない)
+
+ なにができるの？
+文字にするとタイトルの通り「指定のディレクトリ下をブラウザ上で探索可能にする」となる。
+Repository にある Demo を見てもらえるとどういう意味かわかりやすいと思う。
+Demoの画像
+
+
+具体的には以下の通り
+
+指定のディレクトリ以下を探索
+...]]></description><link>https://zenn.dev/ykicchan/articles/f42b708fa332a4</link><guid isPermaLink="true">https://zenn.dev/ykicchan/articles/f42b708fa332a4</guid><pubDate>Mon, 30 Dec 2024 16:27:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--XCWpsL_J--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%258C%2587%25E5%25AE%259A%25E3%2581%25AE%25E3%2583%2587%25E3%2582%25A3%25E3%2583%25AC%25E3%2582%25AF%25E3%2583%2588%25E3%2583%25AA%25E4%25B8%258B%25E3%2582%2592%25E3%2583%2596%25E3%2583%25A9%25E3%2582%25A6%25E3%2582%25B6%25E4%25B8%258A%25E3%2581%25A7%25E6%258E%25A2%25E7%25B4%25A2%25E5%258F%25AF%25E8%2583%25BD%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%2520GitHubActions%2520%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258D%25E3%2581%25A3%25E3%2581%25A1%25E3%2582%2583%25E3%2581%259D%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFjZDgxZmEzY2QuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>きっちゃそ</dc:creator></item><item><title><![CDATA[React FlowでControlsに独自のボタンを追加する方法]]></title><description><![CDATA[
+ React FlowでControlsに独自のボタンを追加する方法
+React Flowのデフォルトのコントロールパネルにはzoomin, zoomout, fitview, toggle interactiveの4つのボタンが表示されている。そこに独自のボタンを追加する方法を知ったのでメモ。
+
+ React Flowとは
+フローチャートや組織図などのチャートを簡単に描くことができるコンポーネント
+
+公式ページより
+A customizable React component for building node-based editors and interactive diagra...]]></description><link>https://zenn.dev/mitate_gengaku/articles/react-flow-add-control-button</link><guid isPermaLink="true">https://zenn.dev/mitate_gengaku/articles/react-flow-add-control-button</guid><pubDate>Mon, 30 Dec 2024 10:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--l6pFFZ4K--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%2520Flow%25E3%2581%25A7Controls%25E3%2581%25AB%25E7%258B%25AC%25E8%2587%25AA%25E3%2581%25AE%25E3%2583%259C%25E3%2582%25BF%25E3%2583%25B3%25E3%2582%2592%25E8%25BF%25BD%25E5%258A%25A0%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25BE%25A1%25E6%25A5%25AF%25E7%258E%2584%25E5%25B6%25BD%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0tQOVRYWHQ5Qm1BLVplcURoLWdxUHl4RVFjMmNsRkhSNk95XzVVSVVhPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>御楯玄嶽</dc:creator></item><item><title><![CDATA[React FlowでControlsの既存のボタンを置き換える方法]]></title><description><![CDATA[
+ React FlowでControlsの既存のボタンを置き換える方法
+React Flowのデフォルトのコントロールパネルにはzoomin, zoomout, fitview, toggle interactiveの4つのボタンが表示されている。その4つのボタンのスタイルやアイコンが気に入らない場合、置き換えることができることを知ったのでメモ。
+
+ React Flowとは
+フローチャートや組織図などのチャートを簡単に描くことができるコンポーネント
+
+公式ページより
+A customizable React component for building node-based edit...]]></description><link>https://zenn.dev/mitate_gengaku/articles/react-flow-replace-default-button</link><guid isPermaLink="true">https://zenn.dev/mitate_gengaku/articles/react-flow-replace-default-button</guid><pubDate>Mon, 30 Dec 2024 10:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7Mz7svw2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%2520Flow%25E3%2581%25A7Controls%25E3%2581%25AE%25E6%2597%25A2%25E5%25AD%2598%25E3%2581%25AE%25E3%2583%259C%25E3%2582%25BF%25E3%2583%25B3%25E3%2582%2592%25E7%25BD%25AE%25E3%2581%258D%25E6%258F%259B%25E3%2581%2588%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25BE%25A1%25E6%25A5%25AF%25E7%258E%2584%25E5%25B6%25BD%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0tQOVRYWHQ5Qm1BLVplcURoLWdxUHl4RVFjMmNsRkhSNk95XzVVSVVhPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>御楯玄嶽</dc:creator></item><item><title><![CDATA[宣言的プログラミングと配列メソッドの活用：JavaScriptのコードをより良くする]]></title><description><![CDATA[JavaScriptにおける配列操作は、フロントエンドからバックエンドまで幅広い開発現場で日常的に行われる重要なタスクです。
+従来の手続き型なループ処理に加え、map、sort、reduceといった宣言的な配列メソッドを活用することで、コードの可読性や保守性を向上させることが可能です。
+本記事では、宣言的プログラミングの概念と、mapやreduceといったメソッドがどのように抽象化を提供し、「何をするか」に集中できるのかについても深掘りします。
+
+ 宣言的プログラミングとは
+宣言的プログラミングは、「何を達成したいか」をコードで表現するプログラミングパラダイムです。
+具体的な手順や操作の...]]></description><link>https://zenn.dev/fitness_densuke/articles/declarative_programming_and_array_methods</link><guid isPermaLink="true">https://zenn.dev/fitness_densuke/articles/declarative_programming_and_array_methods</guid><pubDate>Mon, 30 Dec 2024 09:48:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--QqD2DoKa--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%25AE%25A3%25E8%25A8%2580%25E7%259A%2584%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%259F%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%25A8%25E9%2585%258D%25E5%2588%2597%25E3%2583%25A1%25E3%2582%25BD%25E3%2583%2583%25E3%2583%2589%25E3%2581%25AE%25E6%25B4%25BB%25E7%2594%25A8%25EF%25BC%259AJavaScript%25E3%2581%25AE%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2582%2592%25E3%2582%2588%25E3%2582%258A%25E8%2589%25AF%25E3%2581%258F%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Tamtam%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg4YzUxYzNmMDQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Tamtam</dc:creator></item><item><title><![CDATA[CLI で TODO を管理する]]></title><description><![CDATA[
+ TODO を何で管理するか問題
+みなさんは TODO を管理するときにどんなものを使っていますか？
+筆者はジプシーで、古くは手書きでノートや付箋に書いたり、 Slack の自分の times/DM に書いたり、notion に書いたり、GitHub の issue はどうか、Chrome の拡張はどうか...と様々な手法を取ってきました。
+ただ、どれも長くは続きませんでした。
+todo 1つは大したことないサイズですが、
+役職上、細々としたものが非同期かつ同時並行で走っているのでチケット化しなくてもメモはしておきたいところです。
+手書きだとその場になかったり持ち歩く必要があったり、 ...]]></description><link>https://zenn.dev/seventhseven07/articles/ddac898532bacc</link><guid isPermaLink="true">https://zenn.dev/seventhseven07/articles/ddac898532bacc</guid><pubDate>Mon, 30 Dec 2024 00:30:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jBp-G4pX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:CLI%2520%25E3%2581%25A7%2520TODO%2520%25E3%2582%2592%25E7%25AE%25A1%25E7%2590%2586%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Shumpei%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2YyY2ZhOWM5YTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Shumpei</dc:creator></item></channel></rss>

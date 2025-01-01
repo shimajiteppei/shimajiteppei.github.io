@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Docker」のフィード]]></title><description><![CDATA[Zennのトピック「Docker」のRSSフィードです]]></description><link>https://zenn.dev/topics/docker</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/01c7f20365.png</url><title>Zennの「Docker」のフィード</title><link>https://zenn.dev/topics/docker</link></image><generator>zenn.dev</generator><lastBuildDate>Wed, 01 Jan 2025 02:30:12 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/docker/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Dockerのコンテナ内でFirebase Emulatorを動かしたい]]></title><description><![CDATA[
+ 背景
+自社サービス開発時に認証システムとしてFirebase Authenticationを使用することになりました。ただ、アカウントごとに権限を分けて自社サービスを運用する必要があるため、開発時にはFirebase Emulatorを使用することを決定しました。その際、Dockerコンテナ内でFirebase Emulatorを動かした際に学んだ内容をまとめました。
+
+ 実装
+
+ ディレクトリ構成
+記事用に作った構成のためDockerを使うような構成ではありませんが、ご了承ください
+.
+├── README.md
+├── docker
+│   ├── emulators
+│   └...]]></description><link>https://zenn.dev/roll1226/articles/d1ebcc58558380</link><guid isPermaLink="true">https://zenn.dev/roll1226/articles/d1ebcc58558380</guid><pubDate>Tue, 31 Dec 2024 15:03:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--OwvwumoH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%25E3%2581%25AE%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2586%25E3%2583%258A%25E5%2586%2585%25E3%2581%25A7Firebase%2520Emulator%25E3%2582%2592%25E5%258B%2595%25E3%2581%258B%25E3%2581%2597%25E3%2581%259F%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:roll1226%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzllMTFlOTYwNTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>roll1226</dc:creator></item><item><title><![CDATA[SpringBootにおけるホットデプロイとバインドマウントの関係と書き方について。]]></title><description><![CDATA[
+ はじめに
+
+SpringBoot初学者です。
+Dockerを使って環境構築をしていました。
+毎度、docker compose buildをしないと、変更点が変更されないことに気づき、
+ホットデプロイ機能を加えることで、その問題を解決できることを知りました。
+同時にバインドマウントについても知ったので、自分用のメモとしてまとめます。
+
+
+ 開発環境
+
+macOS
+Java17(maven)
+SpringBoot3.4.1
+postgresSQL
+Docker27.4.0
+
+
+ ホットデプロイとは
+
+アプリを再起動せずに、コードの変更を反映させる仕組みのこと。
+つまり、再起動する手間を...]]></description><link>https://zenn.dev/monaka0309/articles/a9d67c8eb6cf9f</link><guid isPermaLink="true">https://zenn.dev/monaka0309/articles/a9d67c8eb6cf9f</guid><pubDate>Tue, 31 Dec 2024 15:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ovipocnf--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:SpringBoot%25E3%2581%25AB%25E3%2581%258A%25E3%2581%2591%25E3%2582%258B%25E3%2583%259B%25E3%2583%2583%25E3%2583%2588%25E3%2583%2587%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25A4%25E3%2581%25A8%25E3%2583%2590%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2589%25E3%2583%259E%25E3%2582%25A6%25E3%2583%25B3%25E3%2583%2588%25E3%2581%25AE%25E9%2596%25A2%25E4%25BF%2582%25E3%2581%25A8%25E6%259B%25B8%25E3%2581%258D%25E6%2596%25B9%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E3%2580%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2582%25E3%2581%25AA%25E3%2581%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU3OTBkYzczMmYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>もなか</dc:creator></item><item><title><![CDATA[Docker Composeでサービス名を抽出して実行する]]></title><description><![CDATA[
+ 前提
+version: "3.3"
+services:
+  serviceA:
+  
+  taskA:
+
+  taskB:
+
+ 本題
+docker-compose psを使えばserviceの名称を取得できます。
+$ docker-compose ps --service
+serviceA
+taskA
+taskB
+taskだけ実行する
+$ docker-compose ps --service | grep task | xargs -I % docker-compose run %
+]]></description><link>https://zenn.dev/shikazuki/articles/73c310c437f30ffcbc9e</link><guid isPermaLink="true">https://zenn.dev/shikazuki/articles/73c310c437f30ffcbc9e</guid><pubDate>Tue, 31 Dec 2024 13:05:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vAde2JlB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%2520Compose%25E3%2581%25A7%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2593%25E3%2582%25B9%25E5%2590%258D%25E3%2582%2592%25E6%258A%25BD%25E5%2587%25BA%25E3%2581%2597%25E3%2581%25A6%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:shikazuki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JlZDgyOGI0ZDUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>shikazuki</dc:creator></item><item><title><![CDATA[Docker初心者がphp+apache+mysqlの開発・検証環境を構築する]]></title><description><![CDATA[
+ 経緯
+phpを全く知らない人間にphpのossについて検証・調査するようにというお達しが来ました。
+ossのシステム要件を見ると、linux系のosの指定、 apache、 mysql、 phpのversionにも色々指定があったので、dockerを使って検証することを決意したのでありました。（dockerの名前だけは知っていたので、やってみたいという気持ちがありました）
+
+ 問題点
+社内の人間でdockerを知っている人がほとんどいません。また、osもwindows8.1、 10、 macOSなどなど
+いざ開発となっても、問題が起こりそうなにおいがプンプンします
+
+ 目標
+
+doc...]]></description><link>https://zenn.dev/shikazuki/articles/5934f3c503c02deab766</link><guid isPermaLink="true">https://zenn.dev/shikazuki/articles/5934f3c503c02deab766</guid><pubDate>Tue, 31 Dec 2024 12:57:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--JI_HRRsY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E3%2581%258Cphp%252Bapache%252Bmysql%25E3%2581%25AE%25E9%2596%258B%25E7%2599%25BA%25E3%2583%25BB%25E6%25A4%259C%25E8%25A8%25BC%25E7%2592%25B0%25E5%25A2%2583%25E3%2582%2592%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:shikazuki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JlZDgyOGI0ZDUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>shikazuki</dc:creator></item><item><title><![CDATA[DockerのENTRYPOINTとCMD]]></title><description><![CDATA[
+ ENTRYPOINTとは？
+ENTRYPOINTは、コンテナが起動されたときに実行されるデフォルトのコマンドを指定します。ENTRYPOINTに指定されたコマンドは、コンテナが起動されるたびに必ず実行されます。
+
+ CMDとは？
+CMDは、デフォルトのコマンドおよび引数を指定します。CMDはENTRYPOINTと組み合わせて使われることが多く、ENTRYPOINTに指定されたコマンドのデフォルトの引数を提供します。
+ENTRYPOINTとCMDは、Dockerコンテナの起動時に実行されるコマンドを制御するための強力なツールです。ENTRYPOINTは必ず実行されるコマンドを指定し、C...]]></description><link>https://zenn.dev/headwaters/articles/b363ba0491ccde</link><guid isPermaLink="true">https://zenn.dev/headwaters/articles/b363ba0491ccde</guid><pubDate>Tue, 31 Dec 2024 11:24:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--INmPhhzk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:Docker%25E3%2581%25AEENTRYPOINT%25E3%2581%25A8CMD%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:onoda_shun%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZjNGExY2UxMDYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2598%25E3%2583%2583%25E3%2583%2589%25E3%2582%25A6%25E3%2582%25A9%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%25BC%25E3%2582%25B9%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JiYmVhZTM2NWUuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>onoda_shun</dc:creator></item><item><title><![CDATA[Laravel Docker イメージサイズ削減に挑戦！～実践と効果～]]></title><description><![CDATA[Dockerイメージサイズを削減することは、プロジェクトの効率化やコスト削減において非常に重要な取り組みです。特に、Laravelのようなフレームワークを使ったプロジェクトでは、サイズが膨らみがちで、ビルドやデプロイの速度が遅くなることがあります。
+今回、私は約400MBのイメージを約200MBまで削減することに成功しました。その過程で得た知見や具体的な手法を、実例を交えてご紹介します。
+
+
+ イメージサイズ削減のメリット
+Dockerイメージのサイズを小さくすることには、以下のようなメリットがあります。
+
+
+ビルド時間の短縮
+イメージのサイズが小さくなると、ビルドやプッシュ/プルの速度...]]></description><link>https://zenn.dev/ota_rg/articles/679a832483bc06</link><guid isPermaLink="true">https://zenn.dev/ota_rg/articles/679a832483bc06</guid><pubDate>Tue, 31 Dec 2024 10:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Si_-7m2D--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Laravel%2520Docker%2520%25E3%2582%25A4%25E3%2583%25A1%25E3%2583%25BC%25E3%2582%25B8%25E3%2582%25B5%25E3%2582%25A4%25E3%2582%25BA%25E5%2589%258A%25E6%25B8%259B%25E3%2581%25AB%25E6%258C%2591%25E6%2588%25A6%25EF%25BC%2581%25EF%25BD%259E%25E5%25AE%259F%25E8%25B7%25B5%25E3%2581%25A8%25E5%258A%25B9%25E6%259E%259C%25EF%25BD%259E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:takumi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FGZFp1Y3JoMmNKTGROM2VuNFFWSFFPR09IeW1EMnZuMy1lanJZMmNWUE9aPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takumi</dc:creator></item><item><title><![CDATA[2024年に調べたり構築した開発環境について]]></title><description><![CDATA[
+ はじめに
+2024年に調べたり構築した開発環境について、振り返っておこうと思います。基本的に Linux をメインに Web アプリの開発環境を構築することが多いです。
+今どきの Web アプリの開発環境というと、VS Code + Docker + Git が必須となっているので、これらをベースとして環境構築をしています。2024年は、これらを使った開発環境の構築をしていました。また、構築にあたって、いろいろと調べていました。
+!
+この記事は 2023年版をベースに2024年に調べたり構築した開発環境へアップデート、追加した内容となります。
+
+本記事内に出てくる環境について、一部の...]]></description><link>https://zenn.dev/hiro345/articles/20241231_development</link><guid isPermaLink="true">https://zenn.dev/hiro345/articles/20241231_development</guid><pubDate>Tue, 31 Dec 2024 08:38:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--VGMmIL59--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:2024%25E5%25B9%25B4%25E3%2581%25AB%25E8%25AA%25BF%25E3%2581%25B9%25E3%2581%259F%25E3%2582%258A%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2597%25E3%2581%259F%25E9%2596%258B%25E7%2599%25BA%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Hiroshi%2520Koyama%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2k5ZzdjLS0xTFk0S2k0LWw3dVFSSFZRdEdQcWZHYTlibVRJYUtFM0E9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Hiroshi Koyama</dc:creator></item><item><title><![CDATA[PyCharmでDocker Composeを使う]]></title><description><![CDATA[
+ コンテナを使ってみたい
+Docker Composeを使うときは、コマンドでやるからVS codeでもいいよなと思っていた。Runボタンを押さないので、PyCharmを使う必要がなかった。しかしDocker使う機能があるようだ？
+https://pleiades.io/help/pycharm/docker-compose.html
+まずは必要なファイルを作成しておく。Hello Worldするだけ。
+手動でプロジェクトを作成してPyCharmで開く。
+Githubに完成品あります
+mkdir fastapi-docker
+📁のツリー構造
+.
+├── Dockerfile
+├── R...]]></description><link>https://zenn.dev/joo_hashi/articles/2542825246bc67</link><guid isPermaLink="true">https://zenn.dev/joo_hashi/articles/2542825246bc67</guid><pubDate>Tue, 31 Dec 2024 06:36:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bnabsVTP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:PyCharm%25E3%2581%25A7Docker%2520Compose%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:JboyHashimoto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNjOTBiY2M0M2YuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>JboyHashimoto</dc:creator></item><item><title><![CDATA[久々にバックエンドを操作する時のメモ]]></title><description><![CDATA[DB接続環境の構築時に忘れがちなコマンドをメモ
+Docker/mysql 環境を想定
+
+ テーブルを確認
+
+コンテナ名を確認$ docker compose ps -a
+
+
+DBの環境に入る$ docker compose exec -it {コンテナ名} bash
+
+
+mysql実行$ mysql -u {ユーザー名} -p
+{パスワードを入力}
+
+
+DBを表示&gt; show databases;
+
+
+DBを選択&gt; use {DB名}
+
+
+テーブルを表示&gt; show tables;
+
+
+
+]]></description><link>https://zenn.dev/uttnaoki/articles/6419f3db362a43</link><guid isPermaLink="true">https://zenn.dev/uttnaoki/articles/6419f3db362a43</guid><pubDate>Tue, 31 Dec 2024 02:33:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--mgunxV5h--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E4%25B9%2585%25E3%2580%2585%25E3%2581%25AB%25E3%2583%2590%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2589%25E3%2582%2592%25E6%2593%258D%25E4%25BD%259C%25E3%2581%2599%25E3%2582%258B%25E6%2599%2582%25E3%2581%25AE%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:uttnaoki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2UzZWE0MTZhZTcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>uttnaoki</dc:creator></item><item><title><![CDATA[Dockerだって、管理しているコンテナを死活管理したい！]]></title><description><![CDATA[
+ やりたいこと
+コンテナの死活を監視して、discordなどのWebHookで通知を出したい。
+死活だけ知りたいのと、これに関することはできるだけメモリを使いたくないので、できるだけshだけで完結させたい。
+
+ やったこと
+
+ docker-compose.ymlの基礎設定
+services:
+  api-sever:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8000
+    volumes:
+      - ./api-src:/usr/src/app:ro
+  ...]]></description><link>https://zenn.dev/test_myname/articles/docker-death</link><guid isPermaLink="true">https://zenn.dev/test_myname/articles/docker-death</guid><pubDate>Mon, 30 Dec 2024 04:41:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--UiqBrqmi--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%25E3%2581%25A0%25E3%2581%25A3%25E3%2581%25A6%25E3%2580%2581%25E7%25AE%25A1%25E7%2590%2586%25E3%2581%2597%25E3%2581%25A6%25E3%2581%2584%25E3%2582%258B%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2586%25E3%2583%258A%25E3%2582%2592%25E6%25AD%25BB%25E6%25B4%25BB%25E7%25AE%25A1%25E7%2590%2586%25E3%2581%2597%25E3%2581%259F%25E3%2581%2584%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25B7%25E3%2582%2589%25E3%2582%2580%25E3%2582%2589%25E3%2581%2584%25E3%2581%2599%2528PlumRice%2529%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNiZTA0ODE1OTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ぷらむらいす(PlumRice)</dc:creator></item><item><title><![CDATA[Dockerコマンドについて]]></title><description><![CDATA[
+ Dockerイメージ
+
+ イメージを取得
+docker pull hello-world:latest
+docker pull python:3.10-slim
+
+ イメージ一覧を表示
+docker images
+
+ イメージを削除
+docker rmi hello-world:latest
+docker rmi python:3.10-slim
+
+ イメージをビルド
+
+Dockerfile
+
+FROM hello-world:latest
+
+ビルド
+
+docker build -t wasabina67/hello-world:0.1 .
+
+Dockerfile
+
+FROM hel...]]></description><link>https://zenn.dev/wasabina67/articles/9-f6tg6c4bx10jmzmt</link><guid isPermaLink="true">https://zenn.dev/wasabina67/articles/9-f6tg6c4bx10jmzmt</guid><pubDate>Sun, 29 Dec 2024 15:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--B_O6Iie0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:wasabina67%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0tBQmhwQURYZVpZNU9UQl81MjhsZDNXRXh4cXE5c3dWVFQxMGVwbXRlT1gwbTVtVT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>wasabina67</dc:creator></item><item><title><![CDATA[VOICEVOX エンジンを Docker で立ち上げて、音声をダウンロードする]]></title><description><![CDATA[
+ はじめに
+VOICEVOX は、商用・非商用問わず無料で利用できるテキスト読み上げソフトです。VOICEVOX エンジンを Docker で簡単に立ち上げ、TypeScript を使って音声ファイルをダウンロードする方法を紹介します。
+
+ Docker Compose で VOICEVOX を起動する
+まず、以下の docker-compose.yml ファイルを準備します。
+
+docker-compose.yml
+version: '3.8'
+services:
+  voicevox_engine:
+    image: voicevox/voicevox_engine:cpu-u...]]></description><link>https://zenn.dev/sorutonookage/articles/3fe6544347aa9e</link><guid isPermaLink="true">https://zenn.dev/sorutonookage/articles/3fe6544347aa9e</guid><pubDate>Sun, 29 Dec 2024 12:53:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---ne3gZL5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:VOICEVOX%2520%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%25B3%25E3%2582%2592%2520Docker%2520%25E3%2581%25A7%25E7%25AB%258B%25E3%2581%25A1%25E4%25B8%258A%25E3%2581%2592%25E3%2581%25A6%25E3%2580%2581%25E9%259F%25B3%25E5%25A3%25B0%25E3%2582%2592%25E3%2583%2580%25E3%2582%25A6%25E3%2583%25B3%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2589%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25BD%25E3%2583%25AB%25E3%2583%2588%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg4MWZjNDA5ZTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ソルト</dc:creator></item><item><title><![CDATA[Docker初心者がUbuntuイメージってOSなの？と悩んで調べてみたら理解が爆上がりした話]]></title><description><![CDATA[最近、コンテナ技術やKubernetes（クーバネティス）に触れる機会が増えました。DockerやKubernetesという言葉を耳にして、何となく「効率的にアプリケーションを動かせる仕組み」というイメージはありましたが、実際に中身を理解するのは一筋縄ではいきません。その中で特に気になったのが「イメージ」について。
+「Ubuntuイメージ」や「Alpineイメージ」といった名前はよく聞くけれど、具体的にこれはOSそのものなのか？それとも別のものなのか？
+今回はこの疑問について、自分で学びながら整理した内容を共有してみたいと思います。
+
+
+ コンテナイメージとは？そもそも「イメージ」って何...]]></description><link>https://zenn.dev/mifurohi/articles/c67815e7698654</link><guid isPermaLink="true">https://zenn.dev/mifurohi/articles/c67815e7698654</guid><pubDate>Sun, 29 Dec 2024 08:51:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qsFh4trO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E3%2581%258CUbuntu%25E3%2582%25A4%25E3%2583%25A1%25E3%2583%25BC%25E3%2582%25B8%25E3%2581%25A3%25E3%2581%25A6OS%25E3%2581%25AA%25E3%2581%25AE%25EF%25BC%259F%25E3%2581%25A8%25E6%2582%25A9%25E3%2582%2593%25E3%2581%25A7%25E8%25AA%25BF%25E3%2581%25B9%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25E3%2582%2589%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%258C%25E7%2588%2586%25E4%25B8%258A%25E3%2581%258C%25E3%2582%258A%25E3%2581%2597%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mifurohi%2540%25E5%2585%2583%25E7%25BE%258A%25E9%25A3%25BC%25E3%2581%2584%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q1MTA2ZWMzZmUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mifurohi@元羊飼い</dc:creator></item><item><title><![CDATA[Windows Dockerを駆使して静的リンクで仮想GPUとWHPXが使えるqemuをビルドするメモ]]></title><description><![CDATA[qemu 便利なんですが、諸般の事情(後述)で特殊な機能がいくつか必要で、自分が欲しい機能が全部揃ったものがその辺に落ちてなかったので自分でビルドすることにしました。
+
+Windows版で、
+静的リンクで、
+OpenGL(WebGL)のアクセラレートに対応していて、
+Hyper-V(WSL2とかWindows Container)と一緒にうごくもの
+
+
+ まとめ
+!
+バイナリは配付していません(ライセンスドキュメントを用意するのが面倒なので)。ビルドに使ったスクリプトは https://github.com/okuoku/qemubuild/
+
+
+WindowsネイティブのDockerで...]]></description><link>https://zenn.dev/okuoku/articles/227043abe241a8</link><guid isPermaLink="true">https://zenn.dev/okuoku/articles/227043abe241a8</guid><pubDate>Sun, 29 Dec 2024 08:21:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--sgC8ZqfU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Windows%2520Docker%25E3%2582%2592%25E9%25A7%2586%25E4%25BD%25BF%25E3%2581%2597%25E3%2581%25A6%25E9%259D%2599%25E7%259A%2584%25E3%2583%25AA%25E3%2583%25B3%25E3%2582%25AF%25E3%2581%25A7%25E4%25BB%25AE%25E6%2583%25B3GPU%25E3%2581%25A8WHPX%25E3%2581%258C%25E4%25BD%25BF%25E3%2581%2588%25E3%2582%258Bqemu%25E3%2582%2592%25E3%2583%2593%25E3%2583%25AB%25E3%2583%2589%25E3%2581%2599%25E3%2582%258B%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:okuoku%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFlN2ZiZWQ3OGIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>okuoku</dc:creator></item><item><title><![CDATA[Laravel Sail を使ったチーム開発の始め方]]></title><description><![CDATA[
+ 大まかな流れ
+Laravel Sail」を使用してチーム開発を行う場合，下記の手順となる．
+
+
+一人の開発者がプロジェクトを作成し，GitHub にソースコードを push する．
+
+
+他の開発者は ↑ で作成された GitHub リポジトリをクローンし，手元で開発をすすめる．
+
+
+クローンした後にいくつかの手順が必要となる．
+
+
+本記事は，既存のプロジェクトのリポジトリをクローンし，Docker 上で動作させるための手順を記載する．
+
+ 事前準備
+docker が動く状態にしておく．
+docker -v
+
+Docker version 20.10.12, build e91ed57...]]></description><link>https://zenn.dev/taroosg/articles/20241229150113-2a1124f85616f4</link><guid isPermaLink="true">https://zenn.dev/taroosg/articles/20241229150113-2a1124f85616f4</guid><pubDate>Sun, 29 Dec 2024 06:10:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Vrdm_mPr--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Laravel%2520Sail%2520%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%259F%25E3%2583%2581%25E3%2583%25BC%25E3%2583%25A0%25E9%2596%258B%25E7%2599%25BA%25E3%2581%25AE%25E5%25A7%258B%25E3%2582%2581%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Taro%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MyOGZiYzgwODUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Taro</dc:creator></item><item><title><![CDATA[GoのコードをLambdaで実行する]]></title><description><![CDATA[この記事では、Go言語で書かれたLambda関数を、AWSのECR（Elastic Container Registry）にプッシュし、そこからLambda関数としてデプロイ・実行する一連の流れを紹介します。AWS CLIのインストール方法からIAMロール作成、ECRリポジトリの用意、そしてLambda関数の作成までを順序立てて解説します。
+前提条件
+
+Goがローカル環境にインストール済みであること
+Dockerがインストール済みであること
+AWSアカウントを持っていること
+
+
+ Lambda用Goコード＆ベースイメージの用意
+GoでLambda関数をコンテナイメージとしてデプロイする場...]]></description><link>https://zenn.dev/efuzi/articles/e13f600aeeb021</link><guid isPermaLink="true">https://zenn.dev/efuzi/articles/e13f600aeeb021</guid><pubDate>Sun, 29 Dec 2024 05:26:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--nLBjRE6X--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Go%25E3%2581%25AE%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2582%2592Lambda%25E3%2581%25A7%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2588%25E3%2581%25B5%25E3%2581%2598%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JmY2FhZDc1NDMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>えふじ</dc:creator></item><item><title><![CDATA[【2024年版】何も考えずにAPIサーバーをpythonを建てたい話(Docker+FastAPI+mongo)]]></title><description><![CDATA[
+ 何をしたいのか？
+DockerとFastAPIを使ってpython製のAPIサーバーを簡単に建てる話です。
+今回の記事は、自分のためのメモ書きみたいな意味を含んでいるので注意です。
+コマンドの説明は、特に載せません。ググレカス。
+今回、何も考えずにネットで拾った情報(公式リファレンスetc)を使いまくって繋ぎ合わせています。余計なコマンドがあるかもしれませんが、そこはそっと替えておいてください。
+ちなみに、DBにmongoを使用していますが、これは他の方が使ってたElasticSearchを使ったシステムの引継ぎの影響を受けています。
+なので、お好きなDBをお使いください。
+
+ 前提...]]></description><link>https://zenn.dev/test_myname/articles/python-api-server-starter</link><guid isPermaLink="true">https://zenn.dev/test_myname/articles/python-api-server-starter</guid><pubDate>Sun, 29 Dec 2024 05:13:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2WIjftLU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%25902024%25E5%25B9%25B4%25E7%2589%2588%25E3%2580%2591%25E4%25BD%2595%25E3%2582%2582%25E8%2580%2583%25E3%2581%2588%25E3%2581%259A%25E3%2581%25ABAPI%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2582%2592python%25E3%2582%2592%25E5%25BB%25BA%25E3%2581%25A6%25E3%2581%259F%25E3%2581%2584%25E8%25A9%25B1%2528Docker%252BFastAPI%252Bmongo%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25B7%25E3%2582%2589%25E3%2582%2580%25E3%2582%2589%25E3%2581%2584%25E3%2581%2599%2528PlumRice%2529%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNiZTA0ODE1OTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ぷらむらいす(PlumRice)</dc:creator></item><item><title><![CDATA[「docker compose」での複数環境の構築の話]]></title><description><![CDATA[
+ はじめに
+当記事では、開発環境を「複数」個、作りそれを活用すれば、
+レビュー待ちの時に、先行で次タスクの開発をする
+レビューの指摘事項対応と、次タスクの開発を環境わけで、やれるから作業しやすいよ
+って話題が書かれてます。
+ざっくりは、この話題です。
+詳細は、メンドイ話なので、以降、ガッツリ書いてます。
+★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+すいません、私事のお知らせ  ( CM をここで入れさせていただきます )
+Docker環境ならば、Ubuntu(WSL2)がおススメ
+https://zenn.dev/tazzae999jp/artic...]]></description><link>https://zenn.dev/tazzae999jp/articles/1a044f201c735d</link><guid isPermaLink="true">https://zenn.dev/tazzae999jp/articles/1a044f201c735d</guid><pubDate>Sun, 29 Dec 2024 04:39:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--m3bJtVef--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%258Cdocker%2520compose%25E3%2580%258D%25E3%2581%25A7%25E3%2581%25AE%25E8%25A4%2587%25E6%2595%25B0%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25AE%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%25AE%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259F%25E3%2581%25A4%25E3%2581%258A%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzEwZmVjMjAxYTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>たつお</dc:creator></item><item><title><![CDATA[vm.max_map_count 65535 is too low というエラーが出た時にやったこと]]></title><description><![CDATA[Rancher for Desktop を使って Elasticsearch や OpenSearch のコンテナを立ち上げると、下記のようなエラーに遭遇することがあります。
+ max virtual memory areas vm.max_map_count [65530] is too low, increase to at least [262144]
+このエラーは、Elasticsearch や OpenSearch が利用するメモリーマップの上限が少ないことで怒られるものです。
+
+ 対処法
+rdctl を使って Rancher Desktop の管理シェル(Lima)を開き、下...]]></description><link>https://zenn.dev/killinsun/articles/d104f02e973cc5</link><guid isPermaLink="true">https://zenn.dev/killinsun/articles/d104f02e973cc5</guid><pubDate>Sun, 29 Dec 2024 04:23:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9fbcmwuR--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:vm.max_map_count%252065535%2520is%2520too%2520low%2520%25E3%2581%25A8%25E3%2581%2584%25E3%2581%2586%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E3%2581%258C%25E5%2587%25BA%25E3%2581%259F%25E6%2599%2582%25E3%2581%25AB%25E3%2582%2584%25E3%2581%25A3%25E3%2581%259F%25E3%2581%2593%25E3%2581%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E9%25A6%2596%25E7%2584%25A1%25E3%2581%2597%25E3%2582%25AD%25E3%2583%25AA%25E3%2583%25B3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RmYTM3MDU1NGEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>首無しキリン</dc:creator></item><item><title><![CDATA[Dockerで複数 GitHub アカウントを簡単に運用　設定不要すぐ運用可能]]></title><description><![CDATA[
+ 概要
+本記事では、Alpine Linux をベースにして最新バージョンの Git を含む軽量 Docker イメージを紹介します。
+複数の GitHub アカウントを簡単に運用する方法の一例として、フォルダごとの .git/config やカスタム .gitconfig ファイルの活用法もあわせて解説します。
+
+
+GitHub リポジトリ: https://github.com/softjapan/git
+
+
+Docker Hub リポジトリ: https://hub.docker.com/r/softjpn/git
+
+
+
+ 使い方
+
+ Docker Hub からプル
+docker...]]></description><link>https://zenn.dev/japan/articles/625c8cf818c899</link><guid isPermaLink="true">https://zenn.dev/japan/articles/625c8cf818c899</guid><pubDate>Sun, 29 Dec 2024 02:00:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--s7qsT06H--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%25E3%2581%25A7%25E8%25A4%2587%25E6%2595%25B0%2520GitHub%2520%25E3%2582%25A2%25E3%2582%25AB%25E3%2582%25A6%25E3%2583%25B3%25E3%2583%2588%25E3%2582%2592%25E7%25B0%25A1%25E5%258D%2598%25E3%2581%25AB%25E9%2581%258B%25E7%2594%25A8%25E3%2580%2580%25E8%25A8%25AD%25E5%25AE%259A%25E4%25B8%258D%25E8%25A6%2581%25E3%2581%2599%25E3%2581%2590%25E9%2581%258B%25E7%2594%25A8%25E5%258F%25AF%25E8%2583%25BD%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:SOFTBASE%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBmODJiNmYwZGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>SOFTBASE</dc:creator></item></channel></rss>
