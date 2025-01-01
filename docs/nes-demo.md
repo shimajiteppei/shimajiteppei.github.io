@@ -1,12 +1,3 @@
----
-categories:
-    - computer
-    - game
-tags:
-    - ゲーム
-date: 2023-09-11
----
-
 # ファミコンエミュレータ
 
 <link rel="stylesheet" href="/static/stylesheets/xp.css">
