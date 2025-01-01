@@ -2,7 +2,7 @@
     "private": true,
     "scripts": {
         "preinstall": "rm -rf ./node_modules",
-        "install": "npm install --ignore-scripts",
+        "install": "npm install --ignore-scripts && npx husky init",
         "postinstall": "run-s tool:build_docker",
         "start": "run-s tool:gen_xp-css docs:start_serve",
         "stop": "run-s docs:stop_serve",
@@ -19,10 +19,13 @@
         "tool:gen_webp": "sh src/webp/generate.sh",
         "tool:format": "prettier . --write",
         "tool:lint": "textlint docs",
-        "tool:check_dead_link": "find docs -type f -not -path '*/drafts/*' -name '*.md' ! -name 'rss.md' -print0 | xargs -0 -n1 npx markdown-link-check --quiet --config markdown-link-check.json"
+        "tool:check_dead_link": "find docs -type f -not -path '*/drafts/*' -name '*.md' ! -name 'rss.md' -print0 | xargs -0 -n1 npx markdown-link-check --quiet --config markdown-link-check.json",
+        "prepare": "husky"
     },
     "devDependencies": {
         "http-server": "latest",
+        "husky": "latest",
+        "lint-staged": "latest",
         "markdown-link-check": "latest",
         "npm-run-all": "latest",
         "prettier": "latest",
@@ -32,8 +35,11 @@
         "textlint-rule-preset-ja-engineering-paper": "latest",
         "textlint-rule-preset-ja-spacing": "latest",
         "textlint-rule-preset-ja-technical-writing": "latest",
-        "textlint-rule-spellcheck-tech-word": "latest",
-        "textlint-rule-preset-smarthr": "latest"
+        "textlint-rule-preset-smarthr": "latest",
+        "textlint-rule-spellcheck-tech-word": "latest"
+    },
+    "lint-staged": {
+        "*": "npm run tool:format"
     },
     "volta": {
         "node": "23.5.0",
