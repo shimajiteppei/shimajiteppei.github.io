@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「JavaScript」のフィード]]></title><description><![CDATA[Zennのトピック「JavaScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/javascript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/64acd76870.png</url><title>Zennの「JavaScript」のフィード</title><link>https://zenn.dev/topics/javascript</link></image><generator>zenn.dev</generator><lastBuildDate>Thu, 02 Jan 2025 05:58:56 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/javascript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[setInterval() の引数にアロー関数を使う【個人学習まとめ】]]></title><description><![CDATA[
+ setInterval()って？
+構文
+setInterval(関数,待ち時間);
+第一引数に待ち時間(ミリ秒)が経過するたびに実行する関数本体を指定する。
+第二引数に待ち時間を指定する(省略可。省略した場合は0になる)。
+!
+ここからはLeetCodeの「2725. Interval Cancellation」の回答中にやらかしたことをもとに書きます。
+fn: 問題から与えられた関数
+args: 問題から与えられた配列
+t: インターバル時間
+
+
+ 間違い例
+実際に自分がやらかしたコード。
+setInterval(fn(...args),t);
+このように書くと、fnが即座に実行さ...]]></description><link>https://zenn.dev/o0rororo0o/articles/b52b1042301f2b</link><guid isPermaLink="true">https://zenn.dev/o0rororo0o/articles/b52b1042301f2b</guid><pubDate>Thu, 02 Jan 2025 05:52:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Wc4hfx3S--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:setInterval%2528%2529%2520%25E3%2581%25AE%25E5%25BC%2595%25E6%2595%25B0%25E3%2581%25AB%25E3%2582%25A2%25E3%2583%25AD%25E3%2583%25BC%25E9%2596%25A2%25E6%2595%25B0%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%25E3%2580%2590%25E5%2580%258B%25E4%25BA%25BA%25E5%25AD%25A6%25E7%25BF%2592%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%258D%25E3%2582%258D%25E3%2582%258D%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ2ZTZjOWM4YmMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ろろろ</dc:creator></item><item><title><![CDATA[[神機能]React Compilerに触れてみた]]></title><description><![CDATA[
+ React Compilerとは
+React Compilerは、Metaが開発した新しいコンパイラで、ビルド時のみに実行されるツールであり、Reactアプリを自動的に最適化してくれます。
+https://ja.react.dev/learn/react-compiler
+
+ React Compilerの特徴
+React Compilerの一番大きな機能としては、useMemoやuseCallback、React.memoを使わずとも、パフォーマンスの最適化をしてくれる機能かと思います。
+メモ化は適用し忘れたり、誤って適用したりしてしまうことも多いので、その部分を意識しなくていいと...]]></description><link>https://zenn.dev/ryohei0509/articles/43aee8aa41f65f</link><guid isPermaLink="true">https://zenn.dev/ryohei0509/articles/43aee8aa41f65f</guid><pubDate>Wed, 01 Jan 2025 08:48:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--b_65rqAk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255B%25E7%25A5%259E%25E6%25A9%259F%25E8%2583%25BD%255DReact%2520Compiler%25E3%2581%25AB%25E8%25A7%25A6%25E3%2582%258C%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hukuryo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc0M2JhYWM4YjIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hukuryo</dc:creator></item><item><title><![CDATA[【GSAP】GSAP Practice【#１２ GSAP Sample３ Drower Menu Animation２】]]></title><description><![CDATA[
+ 【#１２ GSAP Sample３ Drower Menu Animation２】
+YouTube: https://youtu.be/KhjZQdOJpn8
+https://youtu.be/KhjZQdOJpn8
+今回も引き続きGSAPを使用して、
+ドロワーメニューを作成していきます。
+今回は、JSの部分を実装します。
+まずは、CSSを変更して、
+メニューを閉じた状態にします。
+
+css/main.css
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html,
+body {
+  width: 100%;
+ ...]]></description><link>https://zenn.dev/web_life_ch/articles/9c36d71969b832</link><guid isPermaLink="true">https://zenn.dev/web_life_ch/articles/9c36d71969b832</guid><pubDate>Wed, 01 Jan 2025 06:08:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8cAoGKUH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590GSAP%25E3%2580%2591GSAP%2520Practice%25E3%2580%2590%2523%25EF%25BC%2591%25EF%25BC%2592%2520GSAP%2520Sample%25EF%25BC%2593%2520Drower%2520Menu%2520Animation%25EF%25BC%2592%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Web%2520Life%2520CH%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUl0YnZtbWNjTWFMM3dyd2x3VE5sVVZjTlhmZHEzZzF2QnJfMUJMSkJrN049czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Web Life CH</dc:creator></item><item><title><![CDATA[Leafletで位置情報の現在地をマーカーで常時更新してみた]]></title><description><![CDATA[Leafletのプラグイン「UserMarker」使用と「navigator.geolocation.watchPosition」使って、位置情報の現在地をマーカーで常時更新してみました。
+実装すると以下のようになります。
+
+
+ まずは全体のコード
+&lt;!DOCTYPE html&gt;
+&lt;html lang="ja"&gt;
+&lt;head&gt;
+&lt;meta charset="UTF-8"&gt;
+&lt;meta http-equiv="X-UA-Compatible" content="IE=edge"&gt;
+&lt;meta name="viewport" ...]]></description><link>https://zenn.dev/ausssxi/articles/4fa3311a1a6f6a</link><guid isPermaLink="true">https://zenn.dev/ausssxi/articles/4fa3311a1a6f6a</guid><pubDate>Wed, 01 Jan 2025 00:43:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--z_RvVifx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Leaflet%25E3%2581%25A7%25E4%25BD%258D%25E7%25BD%25AE%25E6%2583%2585%25E5%25A0%25B1%25E3%2581%25AE%25E7%258F%25BE%25E5%259C%25A8%25E5%259C%25B0%25E3%2582%2592%25E3%2583%259E%25E3%2583%25BC%25E3%2582%25AB%25E3%2583%25BC%25E3%2581%25A7%25E5%25B8%25B8%25E6%2599%2582%25E6%259B%25B4%25E6%2596%25B0%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%2586%2585%25E7%2594%25B0%25E5%258E%259A%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VjNDgzNzUzOWMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>内田厚</dc:creator></item><item><title><![CDATA[初心者向け Service Worker 完全ガイド]]></title><description><![CDATA[
+ Service Workerとは？
+Service Workerは、Webブラウザのバックグラウンドで動作するJavaScriptファイルで、オフライン対応やプッシュ通知など、より優れたユーザー体験を実現するための機能を提供します。
+簡単に言うと：
+
+ブラウザとネットワークの間に立つ「仲介役」
+Webページとは別のスレッドで動作する「裏方さん」
+アプリのような機能を実現する「魔法使い」
+
+
+ なぜService Workerが必要？
+
+
+オフライン対応: インターネット接続がない時でもアプリを使用可能に
+
+高速な読み込み: キャッシュを活用して表示速度を改善
+
+プッシュ通知: ユーザ...]]></description><link>https://zenn.dev/susumomo/articles/3c122bda0781ab</link><guid isPermaLink="true">https://zenn.dev/susumomo/articles/3c122bda0781ab</guid><pubDate>Tue, 31 Dec 2024 14:57:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--36PxgUC_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E5%2590%2591%25E3%2581%2591%2520Service%2520Worker%2520%25E5%25AE%258C%25E5%2585%25A8%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:momo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhiOTdhN2MwZjQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>momo</dc:creator></item><item><title><![CDATA[toggle する カスタムコンポーネントを作成してみよう！]]></title><description><![CDATA[皆様、 &lt;input type=checkbox /&gt; を使っておられますでしょうか？
+
+ &lt;input type="checkbox" /&gt; とは
+HTMLInputElement の type=checkbox は name が設定されており、 checked の時だけ value が FormData に設定される コントロールです。
+よく css で :checked を使って toggle の再現をされているところを見ますが、 いっそのこと カスタムコンポーネントとして作り直して見ましょうというのが今回の 取り組みです。
+
+ カスタムコンポーネントと F...]]></description><link>https://zenn.dev/juners/articles/2159c3b0411bf6</link><guid isPermaLink="true">https://zenn.dev/juners/articles/2159c3b0411bf6</guid><pubDate>Tue, 31 Dec 2024 13:57:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---0tF0O5F--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:toggle%2520%25E3%2581%2599%25E3%2582%258B%2520%25E3%2582%25AB%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%25A0%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%259D%25E3%2583%25BC%25E3%2583%258D%25E3%2583%25B3%25E3%2583%2588%25E3%2582%2592%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%2588%25E3%2581%2586%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:juner%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pJLTZTZnZQaDFwb0M5dmMxYUpVeTFoelB0R1g1RXRmUHRpQzF4QWR3PXMyNTAtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>juner</dc:creator></item><item><title><![CDATA[Google Cloud Functions Emulator使ってみる]]></title><description><![CDATA[Google Cloud Functionsのemulatorがあるらしいので使ってみます
+https://github.com/GoogleCloudPlatform/cloud-functions-emulator
+ $ npm install -g @google-cloud/functions-emulator
+関数の作成・デプロイ
+
+index.js
+exports.helloWorld = function(req, res) {
+    console.log(req.body);
+    res.status(200).send("hello world");
+}
+
+エミ...]]></description><link>https://zenn.dev/shikazuki/articles/7f807a2b66046dc6a15c</link><guid isPermaLink="true">https://zenn.dev/shikazuki/articles/7f807a2b66046dc6a15c</guid><pubDate>Tue, 31 Dec 2024 13:05:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Z9Mcv2M3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Google%2520Cloud%2520Functions%2520Emulator%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:shikazuki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JlZDgyOGI0ZDUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>shikazuki</dc:creator></item><item><title><![CDATA[Vue.jsでお手製RangeSlider]]></title><description><![CDATA[
+ 完成形
+それっぽいものを作ってみました。
+
+
+ なぜ実装しようと思ったか
+私は普段はReactを使っています。ReactでもComponent外のマウス操作で画面を更新したいときがあります。そんなときはbodyなどに対してaddEventListenerによるイベントを設定し、refを用いてDOMからleftやwidthを取得してstateを更新することがあります。
+Vue.jsではどんな感じかなーということでやってみました。
+
+ 実装
+&lt;template&gt;
+  &lt;div class="range_slider" :style="{width: width + 'p...]]></description><link>https://zenn.dev/shikazuki/articles/f035167df64f74036856</link><guid isPermaLink="true">https://zenn.dev/shikazuki/articles/f035167df64f74036856</guid><pubDate>Tue, 31 Dec 2024 13:03:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8hkK4q86--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Vue.js%25E3%2581%25A7%25E3%2581%258A%25E6%2589%258B%25E8%25A3%25BDRangeSlider%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:shikazuki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JlZDgyOGI0ZDUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>shikazuki</dc:creator></item><item><title><![CDATA[色を透過させたときのカラーコードをJSで求める]]></title><description><![CDATA[
+ 経緯
+色を一定値で薄くしたくて単にrgbaの指定で薄くすると、当然の如く透過しており背景がうっすら見えてしまいます。
+薄い色を指定すれば済むかもしれませんが、javascriptで計算してみました。
+
+ アルファブレンド
+2つの画像を重ねたときの重なっている箇所の色を求めるものです。
+透過させている赤と青を重ねると紫になりますが、この紫のカラーコードを求めるようなものと思っております。(詳しくないです。)
+式的には以下になります。
+out_{rgb} = src_{rgb} * alpha_{src} + dest_{rgb} * (1 - alpha_{src})
+今回はこれをより...]]></description><link>https://zenn.dev/shikazuki/articles/6c5386791b34d6194da7</link><guid isPermaLink="true">https://zenn.dev/shikazuki/articles/6c5386791b34d6194da7</guid><pubDate>Tue, 31 Dec 2024 13:03:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--mBpPn3c4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%2589%25B2%25E3%2582%2592%25E9%2580%258F%25E9%2581%258E%25E3%2581%2595%25E3%2581%259B%25E3%2581%259F%25E3%2581%25A8%25E3%2581%258D%25E3%2581%25AE%25E3%2582%25AB%25E3%2583%25A9%25E3%2583%25BC%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2582%2592JS%25E3%2581%25A7%25E6%25B1%2582%25E3%2582%2581%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:shikazuki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JlZDgyOGI0ZDUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>shikazuki</dc:creator></item><item><title><![CDATA[Draft.jsのデータ保存について]]></title><description><![CDATA[
+ 概要
+Reactの復習ついでに、Draft.jsを使っていたら躓いたのでメモ。
+Draft.js自体はReactで作られたリッチエディタフレームワークです。(https://github.com/facebook/draft-js)
+
+ やりたいこと
+
+エディタで編集した内容をファイルに保存すること
+ファイルに保存したデータからエディタの状態を復元すること
+
+Editor自体の実装は以下のようにしておきます。
+Electronを使って実装をしていたので、fsでファイルの保存・読み込みを行います。
+
+Editor.js
+import React, {Component} from 'r...]]></description><link>https://zenn.dev/shikazuki/articles/1db87a945e2bbb99505b</link><guid isPermaLink="true">https://zenn.dev/shikazuki/articles/1db87a945e2bbb99505b</guid><pubDate>Tue, 31 Dec 2024 13:03:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--l-KDAfOH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Draft.js%25E3%2581%25AE%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E4%25BF%259D%25E5%25AD%2598%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:shikazuki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JlZDgyOGI0ZDUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>shikazuki</dc:creator></item><item><title><![CDATA[React Reduxには今後Redux Toolkitも使うのがいいと思う]]></title><description><![CDATA[ReactをTypeScriptで始めることが随分楽になったと感じています。Create React Appの以下のコマンドでOKです。
+$ npx create-react-app my-app --template typescript
+https://create-react-app.dev/docs/adding-typescript/#installation
+2020年2月の中頃からReduxのテンプレートが利用可能となり、以下のコマンドで始めることができます。
+$ npx create-react-app my-app --template redux
+# or 
+$ np...]]></description><link>https://zenn.dev/shikazuki/articles/02fb27dc741cbff18811</link><guid isPermaLink="true">https://zenn.dev/shikazuki/articles/02fb27dc741cbff18811</guid><pubDate>Tue, 31 Dec 2024 13:03:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--VtT1pBYY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%2520Redux%25E3%2581%25AB%25E3%2581%25AF%25E4%25BB%258A%25E5%25BE%258CRedux%2520Toolkit%25E3%2582%2582%25E4%25BD%25BF%25E3%2581%2586%25E3%2581%25AE%25E3%2581%258C%25E3%2581%2584%25E3%2581%2584%25E3%2581%25A8%25E6%2580%259D%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:shikazuki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JlZDgyOGI0ZDUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>shikazuki</dc:creator></item><item><title><![CDATA[prettierを使って過去のコミットをすべてフォーマットする]]></title><description><![CDATA[
+ 困ったことに
+古い古い自社ライブラリのお話です。はじめのコードはインデントが4で作成されていました。後から入ってきた私はJavaScriptのファイルのインデントは2と聞かされておりましたので、IDEの設定で2にしておいたのです。
+古いライブラリなので改修の頻度は少ないですが、新規の機能を作成しました。新しく作成されたファイルはインデントが2で書かれました。気づかないレビュー者。見かねてEslintを入れてくれました。EditorConfigも入れてくれました。EslintとEditorConfigでインデントが食い違っています。2なのか4なのか、混乱するIDE。私は悲しみました。
+...]]></description><link>https://zenn.dev/shikazuki/articles/388b8d9efccc4afef747</link><guid isPermaLink="true">https://zenn.dev/shikazuki/articles/388b8d9efccc4afef747</guid><pubDate>Tue, 31 Dec 2024 12:57:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--DHdRklGx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:prettier%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E9%2581%258E%25E5%258E%25BB%25E3%2581%25AE%25E3%2582%25B3%25E3%2583%259F%25E3%2583%2583%25E3%2583%2588%25E3%2582%2592%25E3%2581%2599%25E3%2581%25B9%25E3%2581%25A6%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25BC%25E3%2583%259E%25E3%2583%2583%25E3%2583%2588%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:shikazuki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JlZDgyOGI0ZDUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>shikazuki</dc:creator></item><item><title><![CDATA[BitbucketのJavaScriptプロジェクトをビルドしてS3にデプロイする]]></title><description><![CDATA[React.jsなどのSPAアプリケーションをBitbucket Pipelineを使ってS3にデプロイします。割とBitbucketが好きです。
+
+ 用意
+
+ S3へのデプロイIAMユーザーを作成
+IAM &gt; ユーザー &gt; 認証情報 &gt; アクセスキー からアクセスキーを作成し、アクセスキーIDとシークレットアクセスキーをメモしておきましょう。ここではs3-deploy-userとしておきます。
+
+ S3のバケットを作成
+なんでも良いです。ここではdeploy-bucketとしておきます。
+バケットポリシーを設定し、s3-deploy-userでbucketを更新できる...]]></description><link>https://zenn.dev/shikazuki/articles/109b78e8d14a2e4269d4</link><guid isPermaLink="true">https://zenn.dev/shikazuki/articles/109b78e8d14a2e4269d4</guid><pubDate>Tue, 31 Dec 2024 12:57:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--JM9GgZHk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Bitbucket%25E3%2581%25AEJavaScript%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E3%2582%2592%25E3%2583%2593%25E3%2583%25AB%25E3%2583%2589%25E3%2581%2597%25E3%2581%25A6S3%25E3%2581%25AB%25E3%2583%2587%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25A4%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:shikazuki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JlZDgyOGI0ZDUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>shikazuki</dc:creator></item><item><title><![CDATA[React19を触る前にReactの進化をおさらい！Todoリストを作って変遷を体験してみた]]></title><description><![CDATA[
+ 最初に
+2024年12月5日にReact19の安定版がリリースされるなど、Reactはさまざまな進化をしてきています。
+今回はTodoリストアプリを作成していき、それをおさらいしていきます。
+
+ この記事でやること
+さまざまなversionのReactで同じアプリを作成していき、Reactの進化を体験していきます。
+
+ React15
+使いやすさ: ★★☆☆☆
+メリット: ★★★☆☆
+
+ アプリ作成
+
+ react15インストール
+npm install react@15 react-dom@15
+
+ コード
+クラスコンポーネントで書き、this.stateでの状態管理とthis.s...]]></description><link>https://zenn.dev/daiju81/articles/227934f5c16038</link><guid isPermaLink="true">https://zenn.dev/daiju81/articles/227934f5c16038</guid><pubDate>Tue, 31 Dec 2024 12:34:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0Da7GpRd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React19%25E3%2582%2592%25E8%25A7%25A6%25E3%2582%258B%25E5%2589%258D%25E3%2581%25ABReact%25E3%2581%25AE%25E9%2580%25B2%25E5%258C%2596%25E3%2582%2592%25E3%2581%258A%25E3%2581%2595%25E3%2582%2589%25E3%2581%2584%25EF%25BC%2581Todo%25E3%2583%25AA%25E3%2582%25B9%25E3%2583%2588%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E5%25A4%2589%25E9%2581%25B7%25E3%2582%2592%25E4%25BD%2593%25E9%25A8%2593%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:daiju%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzcyZjdiNGU0NjMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>daiju</dc:creator></item><item><title><![CDATA[es6-promiseをコードリーディングしてPromiseの挙動を理解する]]></title><description><![CDATA[
+ 最初に
+es6-promiseはPromiseの基本的な仕組みを自前で実装して、以前のJavaScriptでも動くようになっています。
+es6-promiseのコードから主要な部分をコードリーディングしてPromiseの仕組みを理解していきます。
+https://github.com/stefanpenner/es6-promise
+
+ コードの理解
+
+ 状態管理
+Promiseは下記のように3つの状態を管理しています。
+早期returnをして、Promiseの状態がpendingの時だけ状態を変化するようにしています。
+
+PENDING: undefined(初期状態)
+FUFIL...]]></description><link>https://zenn.dev/daiju81/articles/f904c16384a02e</link><guid isPermaLink="true">https://zenn.dev/daiju81/articles/f904c16384a02e</guid><pubDate>Tue, 31 Dec 2024 12:29:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--RBfQHNsu--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:es6-promise%25E3%2582%2592%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2583%25AA%25E3%2583%25BC%25E3%2583%2587%25E3%2582%25A3%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%2597%25E3%2581%25A6Promise%25E3%2581%25AE%25E6%258C%2599%25E5%258B%2595%25E3%2582%2592%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:daiju%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzcyZjdiNGU0NjMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>daiju</dc:creator></item><item><title><![CDATA[JavaScriptで解くLeetCode：Is Subsequence]]></title><description><![CDATA[このシリーズでは、プログラミング学習サイト LeetCode に掲載されている問題の中から良問を厳選し、JavaScript を使って解説していきます。
+今回は、Arai60に収録されている「Is Subsequence」の問題を、JavaScriptでどのように実装するか解説します。
+
+ 問題の概要
+LeetCode の 392. Is Subsequence では、2つの文字列 s と t が与えられたときに、以下を判定します。
+「文字列 s は、文字列 t の subsequence（部分文字列）として存在するか？」
+ここで「subsequence（部分文字列）」とは、元の文字列か...]]></description><link>https://zenn.dev/tcool/articles/348a7e5c2b8316</link><guid isPermaLink="true">https://zenn.dev/tcool/articles/348a7e5c2b8316</guid><pubDate>Tue, 31 Dec 2024 12:19:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---aqIwW7D--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25E3%2581%25A7%25E8%25A7%25A3%25E3%2581%258FLeetCode%25EF%25BC%259AIs%2520Subsequence%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:t-cool%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2liVmViMFdEdFlWcUtvVDRvYktNeDNTUGZvRTVFOW9rNUV0c21Dc2RvPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>t-cool</dc:creator></item><item><title><![CDATA[JavaScriptで解くLeetCode：String to Integer (atoi)]]></title><description><![CDATA[このシリーズでは、プログラミング学習サイト LeetCode に掲載されている問題の中から良問を厳選し、JavaScript を使って解説していきます。
+今回は、Arai60に収録されている「String to Integer (atoi)」の問題を、JavaScriptでどのように実装するか解説します。
+C言語の標準関数「atoi」をモデルにした問題ですが、実装上のポイントが多数あり、よい練習問題となっています。
+以下のサイトから問題に挑戦できます。
+https://leetcode.com/problems/string-to-integer-atoi
+
+ 問題の概要
+与えられた文字...]]></description><link>https://zenn.dev/tcool/articles/690a69944a133e</link><guid isPermaLink="true">https://zenn.dev/tcool/articles/690a69944a133e</guid><pubDate>Tue, 31 Dec 2024 11:53:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--rthG24T0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25E3%2581%25A7%25E8%25A7%25A3%25E3%2581%258FLeetCode%25EF%25BC%259AString%2520to%2520Integer%2520%2528atoi%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:t-cool%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2liVmViMFdEdFlWcUtvVDRvYktNeDNTUGZvRTVFOW9rNUV0c21Dc2RvPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>t-cool</dc:creator></item><item><title><![CDATA[React FlowでControlsに独自のノード・エッジを追加する方法]]></title><description><![CDATA[
+ React FlowでControlsに独自のノード・エッジを追加する方法
+React Flowでは独自のノードやエッジを追加することができる機能がある。これを使うと、クラス図みたいなカスタムノードも作って呼び出せたりする。その簡単な実装のメモ
+
+ React Flowとは
+フローチャートや組織図などのチャートを簡単に描くことができるコンポーネント
+
+公式ページより
+A customizable React component for building node-based editors and interactive diagrams
+
+
+ 実装
+以下のページの実装に独自のノード...]]></description><link>https://zenn.dev/mitate_gengaku/articles/react-flow-add-custom-node-and-edge</link><guid isPermaLink="true">https://zenn.dev/mitate_gengaku/articles/react-flow-add-custom-node-and-edge</guid><pubDate>Tue, 31 Dec 2024 10:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9sDjq_lW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%2520Flow%25E3%2581%25A7Controls%25E3%2581%25AB%25E7%258B%25AC%25E8%2587%25AA%25E3%2581%25AE%25E3%2583%258E%25E3%2583%25BC%25E3%2583%2589%25E3%2583%25BB%25E3%2582%25A8%25E3%2583%2583%25E3%2582%25B8%25E3%2582%2592%25E8%25BF%25BD%25E5%258A%25A0%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25BE%25A1%25E6%25A5%25AF%25E7%258E%2584%25E5%25B6%25BD%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0tQOVRYWHQ5Qm1BLVplcURoLWdxUHl4RVFjMmNsRkhSNk95XzVVSVVhPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>御楯玄嶽</dc:creator></item><item><title><![CDATA[The Binding of Isaac（アイザックの伝説）のダンジョン生成の仕組み]]></title><description><![CDATA[
+ はじめに
+ダンジョン探索ゲームを作ろうと思い至り（そして絶賛停滞中である）、その考えてるゲームにあってそうなダンジョン形態についてThe Binding of Isaac（アイザックの伝説）のものが良さそうだったので調べてみたら英語の解説記事があったので、こちらを大いに参考にしつつ、独自で補完し生成の仕組みを書き残そうと思います。
+なお、このゲームのダンジョンは『ゼルダの伝説』を大変オマージュしているので同ゲームに近いダンジョン生成について知りたい人にも参考になると思われます。
+説明のため、サンプルのリポジトリの用意したので参考に読むと理解が進むと思います。（※一部コードは記事内容と...]]></description><link>https://zenn.dev/pentamania/articles/dungeon-generation-in-binding-of-isaac</link><guid isPermaLink="true">https://zenn.dev/pentamania/articles/dungeon-generation-in-binding-of-isaac</guid><pubDate>Tue, 31 Dec 2024 06:34:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--KG519uhH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:The%2520Binding%2520of%2520Isaac%25EF%25BC%2588%25E3%2582%25A2%25E3%2582%25A4%25E3%2582%25B6%25E3%2583%2583%25E3%2582%25AF%25E3%2581%25AE%25E4%25BC%259D%25E8%25AA%25AC%25EF%25BC%2589%25E3%2581%25AE%25E3%2583%2580%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%25A7%25E3%2583%25B3%25E7%2594%259F%25E6%2588%2590%25E3%2581%25AE%25E4%25BB%2595%25E7%25B5%2584%25E3%2581%25BF%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:pentamania%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dodjM0Mll3Mld0Q0RBN2F3MzA1ODBpR2xyZDVSZTVGemtiNFNDZHc9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>pentamania</dc:creator></item><item><title><![CDATA[仕事中にメモ帳とモダンブラウザだけでいろいろ作っている話]]></title><description><![CDATA[
+ TLDR;
+
+メールサポートみたいな部署で、メモ帳とブラウザでいろいろツールを作ってるよ
+エンジニアはいったん辞めたつもりで就職したのに、楽をしたくなってつい手が動いてしまったよ
+ブラウザがモダンでHTMLとJavaScriptさえ書ければ結構いろいろできるよ
+
+ちなみにこの取り組みは私個人の「内職」から始まりましたが、現在は上長より業務として認知していただいています。
+
+ ちょっと自己紹介
+ハンドルネーム「naary」です。発音は「カービィ」じゃなくて「AC」と同じです。
+コロナ禍にRailsやAWSを独学したあと、これまでに合計で3年ほど、PHP/Laravelをメインに使ってる...]]></description><link>https://zenn.dev/nawa/articles/c00be949042dec</link><guid isPermaLink="true">https://zenn.dev/nawa/articles/c00be949042dec</guid><pubDate>Tue, 31 Dec 2024 02:47:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hN6zsy-F--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E4%25BB%2595%25E4%25BA%258B%25E4%25B8%25AD%25E3%2581%25AB%25E3%2583%25A1%25E3%2583%25A2%25E5%25B8%25B3%25E3%2581%25A8%25E3%2583%25A2%25E3%2583%2580%25E3%2583%25B3%25E3%2583%2596%25E3%2583%25A9%25E3%2582%25A6%25E3%2582%25B6%25E3%2581%25A0%25E3%2581%2591%25E3%2581%25A7%25E3%2581%2584%25E3%2582%258D%25E3%2581%2584%25E3%2582%258D%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%2584%25E3%2582%258B%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:naary%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U1ZTc1ZmNkNjQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>naary</dc:creator></item></channel></rss>

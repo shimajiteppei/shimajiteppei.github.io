@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Rust」のフィード]]></title><description><![CDATA[Zennのトピック「Rust」のRSSフィードです]]></description><link>https://zenn.dev/topics/rust</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ba09661577.png</url><title>Zennの「Rust」のフィード</title><link>https://zenn.dev/topics/rust</link></image><generator>zenn.dev</generator><lastBuildDate>Thu, 02 Jan 2025 06:16:56 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/rust/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[高速に metrics を記録するための仕組み]]></title><description><![CDATA[
+ 概要
+アプリケーションを動かす際にその内部状態を外部から観測したいことが多く、その1つの方法にメトリクスを出力しそれを可視化するというやり方があります。こんな感じです。
+
+今回は Rust のアプリケーションでメトリクスを記録するのに用いられる metrics-rs/metrics の実装を追います。
+
+ 前提
+この記事はこちらの commit に関する情報を元にしてます。
+https://github.com/metrics-rs/metrics/commit/e6cf12457b4e9b81eb319f4aab70a573be7998b3
+
+ metrics-rs/metrics...]]></description><link>https://zenn.dev/uchiiii/articles/867029846da569</link><guid isPermaLink="true">https://zenn.dev/uchiiii/articles/867029846da569</guid><pubDate>Wed, 01 Jan 2025 16:25:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Z7J2Uwlz--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E9%25AB%2598%25E9%2580%259F%25E3%2581%25AB%2520metrics%2520%25E3%2582%2592%25E8%25A8%2598%25E9%258C%25B2%25E3%2581%2599%25E3%2582%258B%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%25E4%25BB%2595%25E7%25B5%2584%25E3%2581%25BF%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:uchiiii%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lfcXUtZUR3T1JQMExUbWxjOGxZeVZXSEVBVUJRMHdSM2NFZjgwekE9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>uchiiii</dc:creator></item><item><title><![CDATA[CodSpeedによる継続的ベンチーマーク]]></title><description><![CDATA[CodSpeedは継続的ベンチマークを行うためのサービスです。CodSpeedを使うことで、ベンチマークを自動で実施し可視化できます。CodSpeedは、ベンチマークの結果を比較できるため、コードの変更によるパフォーマンスの変化を追跡できます。
+対応言語はRustとPython及びNode.jsです。この記事ではRustを使う場合を説明します。
+https://docs.codspeed.io/
+PublicなOSSプロジェクトでは無料で使えます。Privateなリポジトリを使う場合は有料です。
+https://codspeed.io/pricing
+
+ CodSpeedの概略
+!
+以下...]]></description><link>https://zenn.dev/termoshtt/articles/codspeed-continuous-benchmarking</link><guid isPermaLink="true">https://zenn.dev/termoshtt/articles/codspeed-continuous-benchmarking</guid><pubDate>Wed, 01 Jan 2025 14:00:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xs3pAqlq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:CodSpeed%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258B%25E7%25B6%2599%25E7%25B6%259A%25E7%259A%2584%25E3%2583%2599%25E3%2583%25B3%25E3%2583%2581%25E3%2583%25BC%25E3%2583%259E%25E3%2583%25BC%25E3%2582%25AF%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:termoshtt%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lfdUM4LVBtaVF5cjN4UjBLdWMzN2t3ZDF2cGlsaUZWV25MbzhDS1E9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>termoshtt</dc:creator></item><item><title><![CDATA[Rust で未使用 crate を整理したいなら、cargo-machete]]></title><description><![CDATA[開発中って試行錯誤するんで、適当に crate 入れると思うんですけど。「結局、今どれを使ってるんだっけ？」ってなりません？　僕はなります。なりますんで、未使用 crate を削除する方法を必要としていました。いらんものを入れているとバイナリがデカくなるし、コンパイル速度も落ちますからね。
+で、「Rust 未使用 crate」で検索すると、日本語圏だとcargo-udepsが引っ掛かると思うんですね。英語圏知らんけど。cargo-udepsはよい crate だと思うし、私も昔は使っていたんですけど。ちょっと難点があるんですよね。
+まず、実行速度が遅い。実行してから数分かかるんですよね。...]]></description><link>https://zenn.dev/world_of_bear/articles/0fb0fd22abcbee</link><guid isPermaLink="true">https://zenn.dev/world_of_bear/articles/0fb0fd22abcbee</guid><pubDate>Wed, 01 Jan 2025 09:55:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--TtX8TXN9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%2520%25E3%2581%25A7%25E6%259C%25AA%25E4%25BD%25BF%25E7%2594%25A8%2520crate%2520%25E3%2582%2592%25E6%2595%25B4%25E7%2590%2586%25E3%2581%2597%25E3%2581%259F%25E3%2581%2584%25E3%2581%25AA%25E3%2582%2589%25E3%2580%2581cargo-machete%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:world_of_bear%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTHRwYmdpUEFDNnZCR0YtNG1rcktiNnA4dGhleU9qb0JNdHU3Q2Q2Ukc3RmN4ay1nPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>world_of_bear</dc:creator></item><item><title><![CDATA[[備忘録12]作って学ぶブラウザのしくみ / HTTPを実装する/ HTTPの構成/ステータスライン]]></title><description><![CDATA[HTTPレスポンスの一行目の部分がステータスライン。
+
+ ステータスラインが含んでいる情報
+HTTPのどのバージョンを使うか、アクセスの結果、そして結果の説明の３種類。各情報は空白文字で区切られている。
+リクエストライン同様RFC7230では以下のように定義されている。
+status-line = HTTP-version SP status-code SP reason-phrase CRLF
+再びhttp://example.com/index.htmlのwebサイトにアクセスし、成功した時は以下のようになる。
+HTTP/1.1 200 OK
+200はステータスコードと呼ばれる
+
+ ...]]></description><link>https://zenn.dev/tommy_aki/articles/7e0e12d5c7240d</link><guid isPermaLink="true">https://zenn.dev/tommy_aki/articles/7e0e12d5c7240d</guid><pubDate>Wed, 01 Jan 2025 07:36:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--rIt92L-i--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255B%25E5%2582%2599%25E5%25BF%2598%25E9%258C%25B212%255D%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E5%25AD%25A6%25E3%2581%25B6%25E3%2583%2596%25E3%2583%25A9%25E3%2582%25A6%25E3%2582%25B6%25E3%2581%25AE%25E3%2581%2597%25E3%2581%258F%25E3%2581%25BF%2520%252F%2520HTTP%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2599%25E3%2582%258B%252F%2520HTTP%25E3%2581%25AE%25E6%25A7%258B%25E6%2588%2590%252F%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%25B9%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%25B3%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Tommy%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lCc3lXZ2NzVmVqT2JNYWJDX0w5RjJTeTdhSjVoXzlsN0ZEWmp3TGc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Tommy</dc:creator></item><item><title><![CDATA[[備忘録10]作って学ぶブラウザのしくみ / HTTPを実装する/ HTTPとは]]></title><description><![CDATA[この章では、簡単なHTTPクライアントを実装する。URLを指定するとHTTPレスポンスが返ってくるプログラムと、その挙動を確かめるための簡単なアプリケーションをWasabiOSで動かすことが目標
+
+ HTTPとは
+TCP/IPにおけるアプリケーション層に位置する。ユーザに一番近いプロトコルであり、Webアプリケーションを書いたことがある人なら馴染みがあるものだと思う。
+ここでは、HTTPを送受信するプログラムを書くことによってインターネット上での情報のやり取りの理解を深めることが目的。
+[HTTPの基本的な仕事]
+
+クライアントとサーバー間でテキスト形式のリクエスト、レスポンスを交換する...]]></description><link>https://zenn.dev/tommy_aki/articles/7c13648e4504e3</link><guid isPermaLink="true">https://zenn.dev/tommy_aki/articles/7c13648e4504e3</guid><pubDate>Wed, 01 Jan 2025 06:40:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qXT4xsOq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255B%25E5%2582%2599%25E5%25BF%2598%25E9%258C%25B210%255D%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E5%25AD%25A6%25E3%2581%25B6%25E3%2583%2596%25E3%2583%25A9%25E3%2582%25A6%25E3%2582%25B6%25E3%2581%25AE%25E3%2581%2597%25E3%2581%258F%25E3%2581%25BF%2520%252F%2520HTTP%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2599%25E3%2582%258B%252F%2520HTTP%25E3%2581%25A8%25E3%2581%25AF%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Tommy%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lCc3lXZ2NzVmVqT2JNYWJDX0w5RjJTeTdhSjVoXzlsN0ZEWmp3TGc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Tommy</dc:creator></item><item><title><![CDATA[Rust で柔軟な do 式とモナドを使うために作った幾つかのもの]]></title><description><![CDATA[
+ TL;DR: QualifiedDo によるオーバーライド可能な do 式のマクロと、GATを使ってモナド階層を模倣するトリックを考えたよ
+https://github.com/konn/qualified_do
+
+ はじめに
+新年明けましておめでとうございます。前回の記事は思ったよりも反響を頂きましてちょっとかなりびっくりしています。
+https://zenn.dev/jij_inc/articles/2024-12-18-pure-haskeller-writing-rust
+この記事で、? の中途半端な非局所性や、Try の有無などによる関数の名前の組合せ爆発などを念頭に、認知...]]></description><link>https://zenn.dev/konn/articles/2024-12-31-monads-dos-with-gats-macros-in-rust</link><guid isPermaLink="true">https://zenn.dev/konn/articles/2024-12-31-monads-dos-with-gats-macros-in-rust</guid><pubDate>Tue, 31 Dec 2024 16:37:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--F8MoCPLi--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%2520%25E3%2581%25A7%25E6%259F%2594%25E8%25BB%259F%25E3%2581%25AA%2520do%2520%25E5%25BC%258F%25E3%2581%25A8%25E3%2583%25A2%25E3%2583%258A%25E3%2583%2589%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AB%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%25E5%25B9%25BE%25E3%2581%25A4%25E3%2581%258B%25E3%2581%25AE%25E3%2582%2582%25E3%2581%25AE%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:konn%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2gyb0FBaFdSS2VaMDl0LTg4dDQyemhvd1F4Y0tlMDJfbWN6b1ZoOEE9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>konn</dc:creator></item><item><title><![CDATA[PythonのSocket通信を利用したprobe-rsデバッグ]]></title><description><![CDATA[
+ 1. はじめに
+マイコン開発においては「開発環境の構築」「デバッグ機能の利用」「実機動作のリアルタイム確認」が重要です。一般的には、各メーカー製のIDEを使うことで、それらがすべてパッケージ化されているため、とても便利にデバッグが行えます。しかし一方で、そうした商用ツールのライセンス要件や各種ツールの連携のしやすさ、そしてOS・プラットフォームを跨いだ開発（Windows, macOS, Linuxなど）といった柔軟性の観点で課題も存在します。
+これらの課題解決案として、今回の記事のポイントとなるのが、「Socket通信を使って外部からプローブにアクセスしてRTT通信する」　というア...]]></description><link>https://zenn.dev/kokimu/articles/62ac3d5d7c24c1</link><guid isPermaLink="true">https://zenn.dev/kokimu/articles/62ac3d5d7c24c1</guid><pubDate>Tue, 31 Dec 2024 12:58:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--SdF1rbWk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25AESocket%25E9%2580%259A%25E4%25BF%25A1%25E3%2582%2592%25E5%2588%25A9%25E7%2594%25A8%25E3%2581%2597%25E3%2581%259Fprobe-rs%25E3%2583%2587%25E3%2583%2590%25E3%2583%2583%25E3%2582%25B0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2593%25E3%2583%25BC%25E3%2581%258D%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2UwZTkxNWRmMTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>こーき</dc:creator></item><item><title><![CDATA[[備忘録08]作って学ぶブラウザのしくみ / URLの構文解析の実装/ URLの分割の実装/クエリパラメータを取得]]></title><description><![CDATA[http://example.com:8080/path/to/resource?query=string
+上記のurlを例にクエリパラメータを取得する実装をする。
+rustのplaygroundに以下を貼り付けて実行してみた方が理解早いと思います。
+ pub fn type_of&lt;T&gt;(_: &amp;T) -&gt; &amp;'static str {
+     std::any::type_name::&lt;T&gt;()
+ }
+ 
+fn main() {
+
+    println!("Hello, world!");
+
+    let url_sample: St...]]></description><link>https://zenn.dev/tommy_aki/articles/de3918c90ff3bf</link><guid isPermaLink="true">https://zenn.dev/tommy_aki/articles/de3918c90ff3bf</guid><pubDate>Tue, 31 Dec 2024 08:52:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dmtOlIer--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255B%25E5%2582%2599%25E5%25BF%2598%25E9%258C%25B208%255D%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E5%25AD%25A6%25E3%2581%25B6%25E3%2583%2596%25E3%2583%25A9%25E3%2582%25A6%25E3%2582%25B6%25E3%2581%25AE%25E3%2581%2597%25E3%2581%258F%25E3%2581%25BF%2520%252F%2520URL%25E3%2581%25AE%25E6%25A7%258B%25E6%2596%2587%25E8%25A7%25A3%25E6%259E%2590%25E3%2581%25AE%25E5%25AE%259F%25E8%25A3%2585%252F%2520URL%25E3%2581%25AE%25E5%2588%2586%25E5%2589%25B2%25E3%2581%25AE%25E5%25AE%259F%25E8%25A3%2585%252F%25E3%2582%25AF%25E3%2582%25A8%25E3%2583%25AA%25E3%2583%2591%25E3%2583%25A9%25E3%2583%25A1%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%2592%25E5%258F%2596%25E5%25BE%2597%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Tommy%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lCc3lXZ2NzVmVqT2JNYWJDX0w5RjJTeTdhSjVoXzlsN0ZEWmp3TGc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Tommy</dc:creator></item><item><title><![CDATA[[備忘録07]作って学ぶブラウザのしくみ / URLの構文解析の実装/ URLの分割の実装]]></title><description><![CDATA[parseメソッドの中みを実装していく。
+rustにも正規表現を扱うregexというライブラリが存在するが、今回のプロジェクトでは外部ライブラリには頼らない。
+
+ [スキームの確認]
+ユーザが入力したURLからまずはスキームを分離する。今回対応するスキームはhttpのみ。
+本書で作成するブラウザの仕様としては以下となる
+!
+ユーザは常にスキームを含むURLを入力しないといけない。
+e.g. http://example.com
+
+    pub fn parse(&amp;mut self)-&gt; Result&lt;Self, String&gt; {
+        if !se...]]></description><link>https://zenn.dev/tommy_aki/articles/abd73aa08f63d0</link><guid isPermaLink="true">https://zenn.dev/tommy_aki/articles/abd73aa08f63d0</guid><pubDate>Tue, 31 Dec 2024 08:33:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Cyni7USG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255B%25E5%2582%2599%25E5%25BF%2598%25E9%258C%25B207%255D%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E5%25AD%25A6%25E3%2581%25B6%25E3%2583%2596%25E3%2583%25A9%25E3%2582%25A6%25E3%2582%25B6%25E3%2581%25AE%25E3%2581%2597%25E3%2581%258F%25E3%2581%25BF%2520%252F%2520URL%25E3%2581%25AE%25E6%25A7%258B%25E6%2596%2587%25E8%25A7%25A3%25E6%259E%2590%25E3%2581%25AE%25E5%25AE%259F%25E8%25A3%2585%252F%2520URL%25E3%2581%25AE%25E5%2588%2586%25E5%2589%25B2%25E3%2581%25AE%25E5%25AE%259F%25E8%25A3%2585%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Tommy%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lCc3lXZ2NzVmVqT2JNYWJDX0w5RjJTeTdhSjVoXzlsN0ZEWmp3TGc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Tommy</dc:creator></item><item><title><![CDATA[[rust] collect関数とは？]]></title><description><![CDATA[rustで以下のコードを実行します。
+ pub fn type_of&lt;T&gt;(_: &amp;T) -&gt; &amp;'static str {
+     std::any::type_name::&lt;T&gt;()
+ }
+ 
+fn main() {
+
+    println!("Hello, world!");
+    // let v = "abc1defXghiXabc".splitn(2, |c| c == '1' || c == 'X');
+    let v: Vec&lt;&amp;str&gt; = "abc1defXghi".splitn(2, |c|...]]></description><link>https://zenn.dev/tommy_aki/articles/8244ce828031c9</link><guid isPermaLink="true">https://zenn.dev/tommy_aki/articles/8244ce828031c9</guid><pubDate>Tue, 31 Dec 2024 08:32:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--s-YtHao---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255Brust%255D%2520collect%25E9%2596%25A2%25E6%2595%25B0%25E3%2581%25A8%25E3%2581%25AF%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Tommy%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lCc3lXZ2NzVmVqT2JNYWJDX0w5RjJTeTdhSjVoXzlsN0ZEWmp3TGc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Tommy</dc:creator></item><item><title><![CDATA[rustで変数の型情報を文字列として出力する方法]]></title><description><![CDATA[ pub fn type_of&lt;T&gt;(_: &amp;T) -&gt; &amp;'static str {
+     std::any::type_name::&lt;T&gt;()
+ }
+ 
+fn main() {
+    println!("Hello, world!");
+    let v: Vec&lt;&amp;str&gt; = "abc1defXghiXabc".splitn(2, |c| c == '1' || c == 'X').collect();
+    
+    print!("v={:?}\n", v);
+    print!("typeof(v...]]></description><link>https://zenn.dev/tommy_aki/articles/8f9cd8d15190b8</link><guid isPermaLink="true">https://zenn.dev/tommy_aki/articles/8f9cd8d15190b8</guid><pubDate>Tue, 31 Dec 2024 07:33:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--C3CXhis6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:rust%25E3%2581%25A7%25E5%25A4%2589%25E6%2595%25B0%25E3%2581%25AE%25E5%259E%258B%25E6%2583%2585%25E5%25A0%25B1%25E3%2582%2592%25E6%2596%2587%25E5%25AD%2597%25E5%2588%2597%25E3%2581%25A8%25E3%2581%2597%25E3%2581%25A6%25E5%2587%25BA%25E5%258A%259B%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Tommy%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lCc3lXZ2NzVmVqT2JNYWJDX0w5RjJTeTdhSjVoXzlsN0ZEWmp3TGc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Tommy</dc:creator></item><item><title><![CDATA[[備忘録06]作って学ぶブラウザのしくみ / URLの構文解析の実装/ URL構造体の作成]]></title><description><![CDATA[
+ [構造体の実装]
+saba_core/src/url.rsファイルで以下のようにurl構造体を定義する
+use alloc::string:String;
+
+#[derive(Debug, Clone, PartialEq)] 
+// derive属性はRustの構造体や列挙型に対して、自動的にトレイトを実装するための属性です。ここでは、Debugトレイト、CloneトレイトとPartialEqトレイトを実装しています。
+pub struct Url {
+    url: String,
+    host: String,
+    port: String,
+    path: St...]]></description><link>https://zenn.dev/tommy_aki/articles/f590a690c150fc</link><guid isPermaLink="true">https://zenn.dev/tommy_aki/articles/f590a690c150fc</guid><pubDate>Tue, 31 Dec 2024 06:49:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--HG_F-NDY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255B%25E5%2582%2599%25E5%25BF%2598%25E9%258C%25B206%255D%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E5%25AD%25A6%25E3%2581%25B6%25E3%2583%2596%25E3%2583%25A9%25E3%2582%25A6%25E3%2582%25B6%25E3%2581%25AE%25E3%2581%2597%25E3%2581%258F%25E3%2581%25BF%2520%252F%2520URL%25E3%2581%25AE%25E6%25A7%258B%25E6%2596%2587%25E8%25A7%25A3%25E6%259E%2590%25E3%2581%25AE%25E5%25AE%259F%25E8%25A3%2585%252F%2520URL%25E6%25A7%258B%25E9%2580%25A0%25E4%25BD%2593%25E3%2581%25AE%25E4%25BD%259C%25E6%2588%2590%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Tommy%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lCc3lXZ2NzVmVqT2JNYWJDX0w5RjJTeTdhSjVoXzlsN0ZEWmp3TGc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Tommy</dc:creator></item><item><title><![CDATA[[備忘録05]作って学ぶブラウザのしくみ / URLの構文解析の実装]]></title><description><![CDATA[URLの実装はurl.rsというファイルに実装することにする。
+
+ ライブラリクレートの作成
+０章で作成したプロジェクトのディレクトリ直下で以下を実行して、新しいライブラリクレートを作成する。
+クレートとは、rustでのコンパイル単位で以下の２種類が存在する
+
+バイナリクレート
+
+実行可能ファイル
+
+
+ライブラリクレート
+
+再利用可能なコードのコレクション。モジュール化したコードを他のプロクラムやクレートに提供できる。
+
+
+
+cargo  new saba_core --lib
+上記のコマンドにより、src/lib.rsファイルが自動的に作成さいれる。このファイルに他のプログラムやクレー...]]></description><link>https://zenn.dev/tommy_aki/articles/6174de660a5db4</link><guid isPermaLink="true">https://zenn.dev/tommy_aki/articles/6174de660a5db4</guid><pubDate>Tue, 31 Dec 2024 06:18:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--rycBHbvU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255B%25E5%2582%2599%25E5%25BF%2598%25E9%258C%25B205%255D%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E5%25AD%25A6%25E3%2581%25B6%25E3%2583%2596%25E3%2583%25A9%25E3%2582%25A6%25E3%2582%25B6%25E3%2581%25AE%25E3%2581%2597%25E3%2581%258F%25E3%2581%25BF%2520%252F%2520URL%25E3%2581%25AE%25E6%25A7%258B%25E6%2596%2587%25E8%25A7%25A3%25E6%259E%2590%25E3%2581%25AE%25E5%25AE%259F%25E8%25A3%2585%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Tommy%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lCc3lXZ2NzVmVqT2JNYWJDX0w5RjJTeTdhSjVoXzlsN0ZEWmp3TGc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Tommy</dc:creator></item><item><title><![CDATA[2024年の振り返りと2025年の抱負]]></title><description><![CDATA[今年の振り返りと来年に向けた目標の整理をしていく。
+
+ 2024年の振り返り
+2024年の目標として設定していたのは、以下の4つだった:
+
+大学院で良い成績をとりつづける
+仕事でより良い成果を出す
+外部発信をしていく
+人生をがんばる
+
+それぞれ達成度合いを振り返っていく。
+
+ 大学院で良い成績をとりつづける
+2022年9月からオンラインで通い始めたGeorgia Tech、早いもので2年とちょっとが経過した。2024年の秋学期終了時点での取得単位数は24（修了単位は30）。
+2024年にとったクラスは以下のとおり:
+
+CS6211: System Design for Cloud Com...]]></description><link>https://zenn.dev/magurotuna/articles/2024-to-2025</link><guid isPermaLink="true">https://zenn.dev/magurotuna/articles/2024-to-2025</guid><pubDate>Mon, 30 Dec 2024 10:24:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--NAhJ4rAn--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:2024%25E5%25B9%25B4%25E3%2581%25AE%25E6%258C%25AF%25E3%2582%258A%25E8%25BF%2594%25E3%2582%258A%25E3%2581%25A82025%25E5%25B9%25B4%25E3%2581%25AE%25E6%258A%25B1%25E8%25B2%25A0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:magurotuna%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dNUGF0cWN1MUh1d1dEcG5uVzRETFVxZlI5aDlOM1NFc3FmaWdYZkE9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>magurotuna</dc:creator></item><item><title><![CDATA[[備忘録04]作って学ぶブラウザのしくみ / URLを分解する]]></title><description><![CDATA[
+ URLとは
+インターネット上にある特定のリソースにアクセスするための識別子。
+本書ではhttpのみを実装する。（httpsは実装しない)
+
+ URLの分析
+
+** http://&lt;host&gt;:&lt;port&gt;/&lt;path&gt;?&lt;searchpart&gt;**
+
+
+ スキーム(scheme)
+URLのスキームとは、リソースにアクセスするために使用されるプロトコルの名前を示す。
+スキームの後は**://**が続く
+よく使われるスキームは HTTP, HTTPS, FTP, FILE, DATA
+
+ ホスト(host)
+ホストとは、FQDN(Fully...]]></description><link>https://zenn.dev/tommy_aki/articles/7c5e91a3fbf9c9</link><guid isPermaLink="true">https://zenn.dev/tommy_aki/articles/7c5e91a3fbf9c9</guid><pubDate>Mon, 30 Dec 2024 08:48:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--uN7AQRVh--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255B%25E5%2582%2599%25E5%25BF%2598%25E9%258C%25B204%255D%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E5%25AD%25A6%25E3%2581%25B6%25E3%2583%2596%25E3%2583%25A9%25E3%2582%25A6%25E3%2582%25B6%25E3%2581%25AE%25E3%2581%2597%25E3%2581%258F%25E3%2581%25BF%2520%252F%2520URL%25E3%2582%2592%25E5%2588%2586%25E8%25A7%25A3%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Tommy%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lCc3lXZ2NzVmVqT2JNYWJDX0w5RjJTeTdhSjVoXzlsN0ZEWmp3TGc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Tommy</dc:creator></item><item><title><![CDATA[ABC386:Rustで解く！問題解説]]></title><description><![CDATA[AtCoder Beginner Contest 386のA~E問題をRustで解いた際の解法をまとめました。
+
+ A問題
+
+問題
+
+https://atcoder.jp/contests/abc386/tasks/abc386_a
+
+解説
+1〜13までの各カードが何枚あったのかを数えます。任意のカードを1枚追加してフルハウスとなるのは、以下の条件(1)または(2)を満たす場合です。それぞれチェックします。
+(1) 3枚同じカードが1種類、かつ1枚だけのカードが1種類、残りは全て0枚
+(2) 2枚同じカードが2種類、残りは全て0枚
+
+カードの枚数が多い順に並び替えて枚数の多いもの2つを見...]]></description><link>https://zenn.dev/nakst_hide/articles/7cb37229c13abf</link><guid isPermaLink="true">https://zenn.dev/nakst_hide/articles/7cb37229c13abf</guid><pubDate>Sun, 29 Dec 2024 11:36:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--zmAezLnh--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ABC386%253ARust%25E3%2581%25A7%25E8%25A7%25A3%25E3%2581%258F%25EF%25BC%2581%25E5%2595%258F%25E9%25A1%258C%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nakahide%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YkMxNEpSQnNET01hTGcxTVRQWGNTWS1qYlNQbFRMQTN3ZU9Sdz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nakahide</dc:creator></item><item><title><![CDATA[[備忘録01]作って学ぶブラウザのしくみ]]></title><description><![CDATA[ざっくりと本書で学習するトピックをさらってみる
+!
+学習環境：macbook pro 13 macOS Ventura ver13.4.1
+
+まず、サンプルプログラムを動かしてみる
+本書にもサンプルプログラムの作成の仕方が書かれていますが、こちらのgit repositoryのsababookのch1を使っても同じことができます。
+しかし自分の環境では以下の変更が必要でした。
+Cargo.tomlで以下のように書かれていますが、
+[package]
+name = "saba"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+noli ...]]></description><link>https://zenn.dev/tommy_aki/articles/e51241ccdcc0bd</link><guid isPermaLink="true">https://zenn.dev/tommy_aki/articles/e51241ccdcc0bd</guid><pubDate>Sat, 28 Dec 2024 14:47:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--CF8w4nHp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255B%25E5%2582%2599%25E5%25BF%2598%25E9%258C%25B201%255D%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E5%25AD%25A6%25E3%2581%25B6%25E3%2583%2596%25E3%2583%25A9%25E3%2582%25A6%25E3%2582%25B6%25E3%2581%25AE%25E3%2581%2597%25E3%2581%258F%25E3%2581%25BF%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Tommy%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lCc3lXZ2NzVmVqT2JNYWJDX0w5RjJTeTdhSjVoXzlsN0ZEWmp3TGc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Tommy</dc:creator></item><item><title><![CDATA[Dockerコンテナ負荷をRustで取得&Next.jsで表示]]></title><description><![CDATA[
+ シンプルなプログラムで本番環境のサーバ負荷ログを取りたい
+と思って、最初は Linux 環境の /proc 以下にある疑似ファイルを読む Rust コードを書こうとしていました。
+
+本番環境では Docker で管理しているため、途中まで作ったところで 自分の本当に欲しいもののはちょっと違う気がする...... となり、Docker API を使ったコードに書き直しました。
+Dockerを使っている皆さんお馴染みの、/var/run/docker.sock は REST API エンドポイントとして使えます。
+
+Githubリポジトリはこちら。
+https://github.com/...]]></description><link>https://zenn.dev/daiius/articles/8f38ae1893c166</link><guid isPermaLink="true">https://zenn.dev/daiius/articles/8f38ae1893c166</guid><pubDate>Sat, 28 Dec 2024 12:19:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--E7p9g_Ib--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2586%25E3%2583%258A%25E8%25B2%25A0%25E8%258D%25B7%25E3%2582%2592Rust%25E3%2581%25A7%25E5%258F%2596%25E5%25BE%2597%2526Next.js%25E3%2581%25A7%25E8%25A1%25A8%25E7%25A4%25BA%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Daiius%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U2MzM1ZDg3MzAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Daiius</dc:creator></item><item><title><![CDATA[uv tool install でインストールしたツールは独立したvenvで実行される]]></title><description><![CDATA[便利さと実装方法に感動したので書く。
+
+ uvとは
+https://docs.astral.sh/uv/
+Pythonのバージョン+依存ライブラリ管理ツール。もはや説明不要かもしれない。Rustで書かれているので「Pythonの管理ツールをPythonで動かす場合、そのツールを動かすPythonのバージョンはいくつになるの？」みたいなニワトリ卵問題は発生しない。
+最強なので使ったことの無い人は本当に使ってみてほしい。pyenvやpipenvやpoetryに苦しめられた経験のある人は特に。
+
+ uv tool installとは
+https://docs.astral.sh/uv/conc...]]></description><link>https://zenn.dev/1hakusai1/articles/18ce679d072802</link><guid isPermaLink="true">https://zenn.dev/1hakusai1/articles/18ce679d072802</guid><pubDate>Sat, 28 Dec 2024 10:41:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--oUumElS3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:uv%2520tool%2520install%2520%25E3%2581%25A7%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%2597%25E3%2581%259F%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%25AF%25E7%258B%25AC%25E7%25AB%258B%25E3%2581%2597%25E3%2581%259Fvenv%25E3%2581%25A7%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%2595%25E3%2582%258C%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hakusai%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U1Mjk0YmM1NWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hakusai</dc:creator></item><item><title><![CDATA[LinkedList(PythonとRustで比較)]]></title><description><![CDATA[
+ LinkedListというデータ構造
+LinkedListというデータ構造が分子動力学計算の書籍で表れてたので、色々調べて見ました。
+本記事ではpythonとrustでlinkedListというデータ構造を実装してみたいと思います。
+pythonでは楽だったのですが、rustだと結構しんどかったでｺﾞﾜｽ
+
+ そもそもLinkedListとは？
+出てくる概念
+
+Node
+
+property
+
+value:ノードが保持する値
+next:次のノードへの参照
+
+
+method
+
+change_next:自身のノードが参照しているノードを別のノードへ切り替える
+
+
+
+
+List
+
+prope...]]></description><link>https://zenn.dev/kurutazoku/articles/f061d5cfa077af</link><guid isPermaLink="true">https://zenn.dev/kurutazoku/articles/f061d5cfa077af</guid><pubDate>Fri, 27 Dec 2024 15:50:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--PI7tdlrs--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:LinkedList%2528Python%25E3%2581%25A8Rust%25E3%2581%25A7%25E6%25AF%2594%25E8%25BC%2583%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E8%2596%2584%25E6%25B1%259A%25E3%2581%2584%25EF%25BD%25B8%25EF%25BE%2599%25EF%25BE%2580%25E6%2597%258F%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ3MjliOThhZjIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>薄汚いｸﾙﾀ族</dc:creator></item></channel></rss>
