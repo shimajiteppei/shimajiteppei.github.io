@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Linux」のフィード]]></title><description><![CDATA[Zennのトピック「Linux」のRSSフィードです]]></description><link>https://zenn.dev/topics/linux</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/860a9eb1e4.png</url><title>Zennの「Linux」のフィード</title><link>https://zenn.dev/topics/linux</link></image><generator>zenn.dev</generator><lastBuildDate>Sat, 04 Jan 2025 12:04:02 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/linux/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[ansibleを使ってraid1を構成した所感]]></title><description><![CDATA[
+ この記事の目的
+
+構成管理にansibleを使う場合の難しさを共有
+linuxでraid1を構成した際の例を基に、工夫点を共有
+
+
+ ansibleでハードウェアを扱うのは難しい
+サーバ構築にansibleを利用する際は、冪等性を意識してplaybookを書いている。
+&lt;&lt;基本方針&gt;&gt;
+初期構築時も、構築後も、何度ansibleを実行しても同じ状態になる。
+大体は基本方針に従って書けるが、raidを構成しようとしたときに難関にぶつかった。
+ディスクデバイス名はOS起動毎に変わる可能性がある。
+初期構築時に/dev/sdaと/dev/sdbでraidを構成したと...]]></description><link>https://zenn.dev/aa54/articles/raid1-ansible</link><guid isPermaLink="true">https://zenn.dev/aa54/articles/raid1-ansible</guid><pubDate>Sat, 04 Jan 2025 05:51:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--K7XUFo16--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ansible%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6raid1%25E3%2582%2592%25E6%25A7%258B%25E6%2588%2590%25E3%2581%2597%25E3%2581%259F%25E6%2589%2580%25E6%2584%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2582%25E3%2581%2594%25E3%2581%2597%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSUdGaVhmMzB2cGtiR05vT0tSR1UwZXBLckhSWDZFZWxpcTgxTXM0NGxkLU1OYlNBPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>あごし</dc:creator></item><item><title><![CDATA[【おまけ】【Django＋Nginx＋Gunicorn】アプリケーションをEC2へデプロイしよう]]></title><description><![CDATA[Django で作成したアプリを EC2 へデプロイしてみました。
+https://zenn.dev/kuuki/articles/django-nginx-gunicorn-ec2-deploy-first-part/
+https://zenn.dev/kuuki/articles/django-nginx-gunicorn-ec2-deploy-latter-part/
+↑ の記事では、サーバーで動作するための最短手順を踏んだつもりです
+なので、やり残したこともおおくあります。。。
+また、おまけ編ということで、ソースのアップデート方法をご紹介します
+
+ ソースの更新方法
+
+Djang...]]></description><link>https://zenn.dev/kuuki/articles/django-nginx-gunicorn-ec2-deploy-other-part</link><guid isPermaLink="true">https://zenn.dev/kuuki/articles/django-nginx-gunicorn-ec2-deploy-other-part</guid><pubDate>Fri, 03 Jan 2025 16:01:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--E4wsdSuu--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E3%2581%258A%25E3%2581%25BE%25E3%2581%2591%25E3%2580%2591%25E3%2580%2590Django%25EF%25BC%258BNginx%25EF%25BC%258BGunicorn%25E3%2580%2591%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%2592EC2%25E3%2581%25B8%25E3%2583%2587%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25A4%25E3%2581%2597%25E3%2582%2588%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hisui%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAxNzI1MTUwNTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hisui</dc:creator></item><item><title><![CDATA[【後編】【Django＋Nginx＋Gunicorn】アプリケーションをEC2へデプロイしよう]]></title><description><![CDATA[Django をサーバーへデプロイして、ブラウザからアクセスできるようにします。
+後編では、ソースをアップロードして、サーバーで動作するようになるまでをやってみます。
+システムの概要や Django・サーバーの下準備は前編でご紹介しています。
+https://zenn.dev/kuuki/articles/django-nginx-gunicorn-ec2-deploy-first-part/
+
+ Django のソースをアップロードする
+zip ファイルにした Django のソースを EC2 へアップロードします
+サーバーへファイルをアップロードするscp コマンド
+scp -i &...]]></description><link>https://zenn.dev/kuuki/articles/django-nginx-gunicorn-ec2-deploy-latter-part</link><guid isPermaLink="true">https://zenn.dev/kuuki/articles/django-nginx-gunicorn-ec2-deploy-latter-part</guid><pubDate>Fri, 03 Jan 2025 16:01:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--yyBFVctf--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%25BE%258C%25E7%25B7%25A8%25E3%2580%2591%25E3%2580%2590Django%25EF%25BC%258BNginx%25EF%25BC%258BGunicorn%25E3%2580%2591%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%2592EC2%25E3%2581%25B8%25E3%2583%2587%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25A4%25E3%2581%2597%25E3%2582%2588%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hisui%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAxNzI1MTUwNTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hisui</dc:creator></item><item><title><![CDATA[【前編】【Django＋Nginx＋Gunicorn】アプリケーションをEC2へデプロイしよう]]></title><description><![CDATA[Django でアプリケーションを作成したのでサーバーへデプロイします
+ただ、サーバーへのデプロイ方法は本に書いてないこともあり、Linux 等の知識も必要なため、なかなかハードルが高い
+そこで、Django をサーバーへデプロイする方法をご紹介します
+
+ システムのイメージ
+
+(各役割)
+Nginx：ユーザーからのアクセスに対して、静的ファイルを呼び出す or Gunicorn へ処理を振る
+Gunicorn：Django と Nginx をつなぐもの
+Django：Python のフレームワーク
+PostgreSQL：Django が使用するデータベース
+なので、
+
+ユーザーがブラウ...]]></description><link>https://zenn.dev/kuuki/articles/django-nginx-gunicorn-ec2-deploy-first-part</link><guid isPermaLink="true">https://zenn.dev/kuuki/articles/django-nginx-gunicorn-ec2-deploy-first-part</guid><pubDate>Fri, 03 Jan 2025 16:01:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0GpC44wX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%2589%258D%25E7%25B7%25A8%25E3%2580%2591%25E3%2580%2590Django%25EF%25BC%258BNginx%25EF%25BC%258BGunicorn%25E3%2580%2591%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%2592EC2%25E3%2581%25B8%25E3%2583%2587%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25A4%25E3%2581%2597%25E3%2582%2588%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hisui%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAxNzI1MTUwNTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hisui</dc:creator></item><item><title><![CDATA[【AWS】【EC2】タイムゾーンをJST（日本標準時）へ変更しよう]]></title><description><![CDATA[Amazon Linux2 は、デフォルトのタイムゾーンが UTC（協定世界時） です。
+JST（日本標準時） に変更していきます。
+AWS の公式 HP に手順が書いてあるので、それを参考に変更していきます。
+https://docs.aws.amazon.com/ja_jp/AWSEC2/latest/UserGuide/set-time.html#change_time_zone
+
+ 現在のタイムゾーンを確認
+※ec2-user で実行しています
+（実行コマンド）
+timedatectl
+（実行結果）
+[ec2-user@ip-×××-××-××-×× ~]$ timedatecc...]]></description><link>https://zenn.dev/kuuki/articles/aws-linux-ec2-modify-timezone-jst</link><guid isPermaLink="true">https://zenn.dev/kuuki/articles/aws-linux-ec2-modify-timezone-jst</guid><pubDate>Fri, 03 Jan 2025 15:29:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bCxbdSKU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590AWS%25E3%2580%2591%25E3%2580%2590EC2%25E3%2580%2591%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25A0%25E3%2582%25BE%25E3%2583%25BC%25E3%2583%25B3%25E3%2582%2592JST%25EF%25BC%2588%25E6%2597%25A5%25E6%259C%25AC%25E6%25A8%2599%25E6%25BA%2596%25E6%2599%2582%25EF%25BC%2589%25E3%2581%25B8%25E5%25A4%2589%25E6%259B%25B4%25E3%2581%2597%25E3%2582%2588%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hisui%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAxNzI1MTUwNTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hisui</dc:creator></item><item><title><![CDATA[2024年のコンピュータサイエンス関連読書振り返り]]></title><description><![CDATA[
+ はじめに
+あけましておめでとうございます。本年もよろしくお願いします。昨年の振り返りとして42Tokyoでの学習(+私の興味関心)のために読んだ書籍を振り返りたいと思います。
+なお、掲載順は私の購入順に過ぎません。
+
+ 想定読者
+下記のいずれかにあてはまる方
+1.42Tokyoの本科生
+2.コンピュータサイエンスに興味があって学習を開始して1年未満程度の方
+
+ ※『おすすめ度』節の星評価について
+想定読者にとってどの程度おすすめであるか、という単軸で独断と偏見に基づき評価させていただきます。
+★★★★★ : 必読
+★★★★☆ : おすすめ
+★★★☆☆ : 興味があれば
+★★☆☆☆ :...]]></description><link>https://zenn.dev/kfukuhar/articles/7c8c84ed14db40</link><guid isPermaLink="true">https://zenn.dev/kfukuhar/articles/7c8c84ed14db40</guid><pubDate>Fri, 03 Jan 2025 06:06:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--DDR9O3pF--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:2024%25E5%25B9%25B4%25E3%2581%25AE%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2594%25E3%2583%25A5%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%25B5%25E3%2582%25A4%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B9%25E9%2596%25A2%25E9%2580%25A3%25E8%25AA%25AD%25E6%259B%25B8%25E6%258C%25AF%25E3%2582%258A%25E8%25BF%2594%25E3%2582%258A%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kfukuhar%2Cx_90%2Cy_121/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kfukuhar</dc:creator></item><item><title><![CDATA[そうだ、ArchLinuxを使おう]]></title><description><![CDATA[
+ はじめに
+この記事は、UEC Advent Calendar 2024 の 21 日目の記事です。
+なお書いているのは、2025 年です。（なぜでしょうね...）
+昨日はアルカリオスさんの 神奈川男子校御三家と算数入試問題 でした。
+さて、この記事は
+
+Linux 布教大会
+ArchLinux 布教大会
+勢い余って zshrc 布教大会
+
+の 3 本仕立てでお送りします。Linux に手を出して見ようと思っている人のきっかけ・参考になれば嬉しいです。
+
+ Linux を使おう
+
+ そもそも Linux って？
+誤解と過激派を恐れずに言えば、この世界の OS は Windows 系と ...]]></description><link>https://zenn.dev/mimifuwa/articles/ce9d83a71cf125</link><guid isPermaLink="true">https://zenn.dev/mimifuwa/articles/ce9d83a71cf125</guid><pubDate>Wed, 01 Jan 2025 20:31:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--z92sV5z5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%259D%25E3%2581%2586%25E3%2581%25A0%25E3%2580%2581ArchLinux%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%258A%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25BF%25E3%2581%25BF%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSUY3a3VsUVlHdllmLW9HVXdGanBrbzRhcnVYQzJrYzktc1pFc0N2b2RPdDdyZmZUYz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>みみ</dc:creator></item><item><title><![CDATA[マイクラで始める自宅サーバー生活！マイクラサーバー(Java版)を建てる方法を解説する]]></title><description><![CDATA[どうもお疲れ様です。MESIです。
+このたび自宅サーバーを始めたくてマイクラサーバーを建てました。
+その内容を忘備録として残します。
+
+ 前提
+以下の前提で進めていきます！
+
+Linuxの知識がある程度あること(今回はUbuntuを使用します)
+すでにLinuxがサーバーマシンに入っていること
+ネットワークの知識がある程度あること(基本情報技術者レベル)
+サーバーにsshできること
+サーバーのローカルIPアドレスは固定済みであること
+
+
+ 使用するマシン
+
+https://amzn.to/4gzqHqw
+
+GMKtec ミニpc
+CPU: AMD Ryzen 9 PRO 6950H
+RA...]]></description><link>https://zenn.dev/mesi/articles/1ea3cdf9233e79</link><guid isPermaLink="true">https://zenn.dev/mesi/articles/1ea3cdf9233e79</guid><pubDate>Wed, 01 Jan 2025 02:53:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xaBVk1vD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%259E%25E3%2582%25A4%25E3%2582%25AF%25E3%2583%25A9%25E3%2581%25A7%25E5%25A7%258B%25E3%2582%2581%25E3%2582%258B%25E8%2587%25AA%25E5%25AE%2585%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E7%2594%259F%25E6%25B4%25BB%25EF%25BC%2581%25E3%2583%259E%25E3%2582%25A4%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%2528Java%25E7%2589%2588%2529%25E3%2582%2592%25E5%25BB%25BA%25E3%2581%25A6%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%25E3%2582%2592%25E8%25A7%25A3%25E8%25AA%25AC%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:MESI%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4WU9Qa2tIeEJCcWlvWjFvSzNwOG96LUZleXZvMGhfT2RpM0tsalNwMG89czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>MESI</dc:creator></item><item><title><![CDATA[2024年に調べたり構築した開発環境について]]></title><description><![CDATA[
+ はじめに
+2024年に調べたり構築した開発環境について、振り返っておこうと思います。基本的に Linux をメインに Web アプリの開発環境を構築することが多いです。
+今どきの Web アプリの開発環境というと、VS Code + Docker + Git が必須となっているので、これらをベースとして環境構築をしています。2024年は、これらを使った開発環境の構築をしていました。また、構築にあたって、いろいろと調べていました。
+!
+この記事は 2023年版をベースに2024年に調べたり構築した開発環境へアップデート、追加した内容となります。
+
+本記事内に出てくる環境について、一部の...]]></description><link>https://zenn.dev/hiro345/articles/20241231_development</link><guid isPermaLink="true">https://zenn.dev/hiro345/articles/20241231_development</guid><pubDate>Tue, 31 Dec 2024 08:38:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--VGMmIL59--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:2024%25E5%25B9%25B4%25E3%2581%25AB%25E8%25AA%25BF%25E3%2581%25B9%25E3%2581%259F%25E3%2582%258A%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2597%25E3%2581%259F%25E9%2596%258B%25E7%2599%25BA%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Hiroshi%2520Koyama%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2k5ZzdjLS0xTFk0S2k0LWw3dVFSSFZRdEdQcWZHYTlibVRJYUtFM0E9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Hiroshi Koyama</dc:creator></item><item><title><![CDATA[mkdirとcdを組み合わせて、作成ディレクトリに即移動する自作コードをターミナルから使用できるようにした。]]></title><description><![CDATA[
+ 経緯
+mkdir でディレクトリを作った後に再度cdして作成したディレクトリに移動するのが面倒なので、その操作を連結して一つのコードで行えるような自作コードをターミナルから使用できるようにした。
+
+ 手順
+
+ codeコマンドで.bashrcを開く。
+
+ .bashrcとは
+.bashrc は、ユーザがターミナルとかを開くたびに、内容が読み込まれるファイルのこと。ここに自作関数を置くことでターミナルから自作コードを起動させたりできる。
+
+ .bashrcをVscodeで編集する。
+.bashrcを編集する際にvimを用いても良かったが、コマンドからVscodeを開いて編集する方法を書...]]></description><link>https://zenn.dev/amana/articles/aeb5944ae5f34d</link><guid isPermaLink="true">https://zenn.dev/amana/articles/aeb5944ae5f34d</guid><pubDate>Tue, 31 Dec 2024 04:26:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--K0fNN1Im--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:mkdir%25E3%2581%25A8cd%25E3%2582%2592%25E7%25B5%2584%25E3%2581%25BF%25E5%2590%2588%25E3%2582%258F%25E3%2581%259B%25E3%2581%25A6%25E3%2580%2581%25E4%25BD%259C%25E6%2588%2590%25E3%2583%2587%25E3%2582%25A3%25E3%2583%25AC%25E3%2582%25AF%25E3%2583%2588%25E3%2583%25AA%25E3%2581%25AB%25E5%258D%25B3%25E7%25A7%25BB%25E5%258B%2595%25E3%2581%2599%25E3%2582%258B%25E8%2587%25AA%25E4%25BD%259C%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2582%2592%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%259F%25E3%2583%258A%25E3%2583%25AB%25E3%2581%258B%25E3%2582%2589%25E4%25BD%25BF%25E7%2594%25A8%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258B%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E3%2581%2597%25E3%2581%259F%25E3%2580%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nk_work%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ1MjJkN2U5MzIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nk_work</dc:creator></item><item><title><![CDATA[【備忘】ローカルPCからAWSのインスタンスにSSH鍵を配布する手順]]></title><description><![CDATA[
+ はじめに
+タイトルの通りです。AWSのインスタンスにローカルPCからSSH鍵を配布する手順を記載します。
+※本記事は以下の記事の一部を抜粋、改稿して個人的な備忘として残すために投稿しています。
+https://zenn.dev/yu_shi/articles/5a97909a011f35
+
+ 使用端末
+
+Macbook Air M1,2020
+チップ Apple M1
+メモリ 8GB
+OS macOS Sonoma バージョン14.6.1
+
+
+
+ 実施手順
+1.SSHターミナル上から踏み台インスタンスに.pemファイルを配布します。
+配布にはscpコマンドを使用します。
+ % scp...]]></description><link>https://zenn.dev/yu_shi/articles/318aa88cfcfb38</link><guid isPermaLink="true">https://zenn.dev/yu_shi/articles/318aa88cfcfb38</guid><pubDate>Tue, 31 Dec 2024 02:21:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--u5rFm6rX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%2582%2599%25E5%25BF%2598%25E3%2580%2591%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25AB%25E3%2583%25ABPC%25E3%2581%258B%25E3%2582%2589AWS%25E3%2581%25AE%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%25B3%25E3%2582%25B9%25E3%2581%25ABSSH%25E9%258D%25B5%25E3%2582%2592%25E9%2585%258D%25E5%25B8%2583%25E3%2581%2599%25E3%2582%258B%25E6%2589%258B%25E9%25A0%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2586%25E3%2581%2586%25E3%2581%2597%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NiYjE3YTcwYWYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ゆうし</dc:creator></item><item><title><![CDATA[[Linuxコマンド解説] awkコマンド]]></title><description><![CDATA[ 
+
+ awkコマンドとは？
+awkコマンドとは、テキストファイルの情報を抽出し、加工するためのコマンドです。
+ファイル全体を対象に処理するgrepやsortに対して、awkコマンドはファイルの一行一行に対して処理を実行します。
+また、ifやforなどの制御構造を用いることで、より柔軟にファイルを処理できます。
+
+ awkコマンドの構文
+awkコマンドの構文は以下です。
+$ awk '{アクション}' ファイル名
+
+条件分岐を用いる場合
+$ awk '条件 {条件が真の場合のアクション}{条件が偽の場合のアクション}' ファイル名
+
+
+ awkコマンドの例
+
+各行の1列目を抽出するコマン...]]></description><link>https://zenn.dev/comf_nakamura/articles/linux_command_awk</link><guid isPermaLink="true">https://zenn.dev/comf_nakamura/articles/linux_command_awk</guid><pubDate>Mon, 30 Dec 2024 14:27:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--mF0vJ3oz--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BLinux%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E8%25A7%25A3%25E8%25AA%25AC%255D%2520awk%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25BC%25E3%2583%2588%25E3%2582%25BE%25E3%2583%25BC%25E3%2583%25B3%25E4%25B8%25AD%25E6%259D%2591%25EF%25BD%259C%25E6%2596%25B0%25E4%25BA%25BA%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25A6%25E3%2583%2589...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU1OGFjNDI2M2QuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>コンフォートゾーン中村｜新人クラウドエンジニア</dc:creator></item><item><title><![CDATA[SadServers解説#12 "Saint Paul": Merge Many CSVs files]]></title><description><![CDATA[https://ja.wikipedia.org/wiki/セントポール_(ミネソタ州)
+
+ 問題概要
+
+ シナリオ
+多数の CSV ファイルを結合する
+
+ 問題詳細
+/home/admin/polldayregistrations_enregistjourduscrutin?????.csv ディレクトリにある338個すべてのファイルを、1つのファイル/home/admin/all.csvに結合 (マージ) してください。
+結合されたファイルは、すべてのCSVファイルの内容を任意の順序で含む必要があります。
+列の名前は、ヘッダーとして1行のみ存在する必要があります。
+
+ 解決判定
+解答...]]></description><link>https://zenn.dev/comf_nakamura/articles/sadservers_12-2</link><guid isPermaLink="true">https://zenn.dev/comf_nakamura/articles/sadservers_12-2</guid><pubDate>Mon, 30 Dec 2024 01:51:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fRG73G66--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:SadServers%25E8%25A7%25A3%25E8%25AA%25AC%252312%2520%2522Saint%2520Paul%2522%253A%2520Merge%2520Many%2520CSVs%2520files%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25BC%25E3%2583%2588%25E3%2582%25BE%25E3%2583%25BC%25E3%2583%25B3%25E4%25B8%25AD%25E6%259D%2591%25EF%25BD%259C%25E6%2596%25B0%25E4%25BA%25BA%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25A6%25E3%2583%2589...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU1OGFjNDI2M2QuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>コンフォートゾーン中村｜新人クラウドエンジニア</dc:creator></item><item><title><![CDATA[あなたの知らないSSHのIncludeディレクティブの落とし穴]]></title><description><![CDATA[
+ はじめに
+SSHの設定を分割管理できるInclude ディレクティブをご存じでしょうか。
+これは、~/.ssh/config を複数のファイルに分割して書ける機能です。
+SSHクライアントでは、OpenSSH 7.3 (2016年8月リリース)[1] 以降でサポートされています。
+このIncludeは便利な半面、ちょっとした落とし穴もあります。
+筆者は今回、SSHクライアントのターミナル『Tabby』をInclude機能に対応させる過程で、内部ロジックを調べて痛感しました。
+そこで、ハマらないために予め知っておきたい落とし穴をまとめました。
+
+ そもそもIncludeディレクティブと...]]></description><link>https://zenn.dev/hiroga/articles/ssh-include-directive-traps</link><guid isPermaLink="true">https://zenn.dev/hiroga/articles/ssh-include-directive-traps</guid><pubDate>Sun, 29 Dec 2024 11:04:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--rRmNj1WK--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%2582%25E3%2581%25AA%25E3%2581%259F%25E3%2581%25AE%25E7%259F%25A5%25E3%2582%2589%25E3%2581%25AA%25E3%2581%2584SSH%25E3%2581%25AEInclude%25E3%2583%2587%25E3%2582%25A3%25E3%2583%25AC%25E3%2582%25AF%25E3%2583%2586%25E3%2582%25A3%25E3%2583%2596%25E3%2581%25AE%25E8%2590%25BD%25E3%2581%25A8%25E3%2581%2597%25E7%25A9%25B4%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hiroga%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pfZHF2VHk5OFdpTG1EZ1Q1Ry1jLVNmWjRwaEdCcGdncGVKSjhqUzhzPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hiroga</dc:creator></item><item><title><![CDATA[【2024年版】何も考えずにAPIサーバーをpythonを建てたい話(Docker+FastAPI+mongo)]]></title><description><![CDATA[
+ 何をしたいのか？
+DockerとFastAPIを使ってpython製のAPIサーバーを簡単に建てる話です。
+今回の記事は、自分のためのメモ書きみたいな意味を含んでいるので注意です。
+コマンドの説明は、特に載せません。ググレカス。
+今回、何も考えずにネットで拾った情報(公式リファレンスetc)を使いまくって繋ぎ合わせています。余計なコマンドがあるかもしれませんが、そこはそっと替えておいてください。
+ちなみに、DBにmongoを使用していますが、これは他の方が使ってたElasticSearchを使ったシステムの引継ぎの影響を受けています。
+なので、お好きなDBをお使いください。
+
+ 前提...]]></description><link>https://zenn.dev/test_myname/articles/python-api-server-starter</link><guid isPermaLink="true">https://zenn.dev/test_myname/articles/python-api-server-starter</guid><pubDate>Sun, 29 Dec 2024 05:13:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2WIjftLU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%25902024%25E5%25B9%25B4%25E7%2589%2588%25E3%2580%2591%25E4%25BD%2595%25E3%2582%2582%25E8%2580%2583%25E3%2581%2588%25E3%2581%259A%25E3%2581%25ABAPI%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2582%2592python%25E3%2582%2592%25E5%25BB%25BA%25E3%2581%25A6%25E3%2581%259F%25E3%2581%2584%25E8%25A9%25B1%2528Docker%252BFastAPI%252Bmongo%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25B7%25E3%2582%2589%25E3%2582%2580%25E3%2582%2589%25E3%2581%2584%25E3%2581%2599%2528PlumRice%2529%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNiZTA0ODE1OTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ぷらむらいす(PlumRice)</dc:creator></item><item><title><![CDATA[AWS CodeBuildで手動インストールしたJDKを利用する]]></title><description><![CDATA[発生は稀だと思いますが、Javaアプリケーションのbuildで利用しているJDKをAWS Codebuildのimageに手動インストールする必要が生じました。
+英語文献も含めていくつか記事があったのですが、AWS公式の処理を真似た点において、本記事が一番確実な方法と思われます。(2024/12時点)
+過去の同様の内容にトライしている記事
+amazon web services - How to install different Java OpenJDK version on AWS CodeBuild standard image - Stack Overflow
+利用したimage...]]></description><link>https://zenn.dev/takeaki_m/articles/ed40ec038de69f</link><guid isPermaLink="true">https://zenn.dev/takeaki_m/articles/ed40ec038de69f</guid><pubDate>Sat, 28 Dec 2024 06:28:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--aVuz3Bdu--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AWS%2520CodeBuild%25E3%2581%25A7%25E6%2589%258B%25E5%258B%2595%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%2597%25E3%2581%259FJDK%25E3%2582%2592%25E5%2588%25A9%25E7%2594%25A8%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:take%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ1NGUxN2RmODYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>take</dc:creator></item><item><title><![CDATA[Dockerノート]]></title><description><![CDATA[
+ はじめに
+Dockerが苦手だったため学習した。Dockerでよく使うコマンドを備忘録のため記載。
+
+ 基礎事項や基本コマンド
+
+ シェルとカーネルの役割
+
+カーネル：PC上で唯一ハードウェアと会話できるソフトウェア
+シェル：ヒューマンの入力値を、シェル言語を通じてカーネルに翻訳して伝達するもの
+
+シェルのSTDINとSTDOUTをターミナルに繋げることを「TTYをアタッチする」という。
+→TTYをターミナルにアタッチすることで、ターミナルを使ってバックグラウンドプロセスと会話できる。
+ドッカーの中にシェルで入る時は次のコマンドを使う
+docker exec --interactiv...]]></description><link>https://zenn.dev/yadonn/articles/617d21e275a23a</link><guid isPermaLink="true">https://zenn.dev/yadonn/articles/617d21e275a23a</guid><pubDate>Fri, 27 Dec 2024 16:41:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fHQMs_LW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:Docker%25E3%2583%258E%25E3%2583%25BC%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:YADON%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVkOTAyMjM0YTMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>YADON</dc:creator></item><item><title><![CDATA[フォント比較/Noto,Kosugi,IPA,HackGen,Myrica,Nasu,等幅]]></title><description><![CDATA[
+ フォント比較/Noto,Kosugi,IPA,HackGen,Myrica,Nasu,等幅
+2024-12-27
+
+
+ (1).背景・經緯・一應の結論
+google スライドで Kosugi フォントを使用していた。
+.....何かおかしい.......。なにか判別しにくい時がある。
+google スライドでは "Kosugi"、"IBM Plex Mono" が指定可能なため、これらをよく使っている(いた)。
+"Arial", "Courier New" "Times New Roman" など他のフォントは、日本語文字列に、環境の代替フォントが使われているようにみえる。よって、ど...]]></description><link>https://zenn.dev/sorehaomosiroi/articles/sorehaomosiroi-20241227_font</link><guid isPermaLink="true">https://zenn.dev/sorehaomosiroi/articles/sorehaomosiroi-20241227_font</guid><pubDate>Fri, 27 Dec 2024 11:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--uPftcf35--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25B3%25E3%2583%2588%25E6%25AF%2594%25E8%25BC%2583%252FNoto%252CKosugi%252CIPA%252CHackGen%252CMyrica%252CNasu%252C%25E7%25AD%2589%25E5%25B9%2585%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2584%25E3%2581%2584%25E3%2581%25AD%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2YyMDNkNWJiZDcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>いいね</dc:creator></item><item><title><![CDATA[AWSで踏み台サーバーからプライベートサブネットのインスタンスにアクセスする手順]]></title><description><![CDATA[
+ はじめに
+本記事ではAWS環境でのネットワーク構成において、パブリックサブネットとプライベートサブネット間で安全にアクセスするために踏み台サーバーを使用する手法を解説します。
+踏み台サーバーを介してアクセスすることでよりセキュアにサーバーに接続することができます。
+
+ 本記事ではやらないこと
+パブリックサブネットにEC2インスタンスを構築しSSH接続する手順は以下の記事をご覧になって実施してみてください。本記事では以下手順は実施済みとします。また、プライベートサブネット上にもサブネット以外は同様の設定で構築を行います。
+https://zenn.dev/yu_shi/articles...]]></description><link>https://zenn.dev/yu_shi/articles/5a97909a011f35</link><guid isPermaLink="true">https://zenn.dev/yu_shi/articles/5a97909a011f35</guid><pubDate>Fri, 27 Dec 2024 09:26:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6zc6bT5i--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AWS%25E3%2581%25A7%25E8%25B8%258F%25E3%2581%25BF%25E5%258F%25B0%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2581%258B%25E3%2582%2589%25E3%2583%2597%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2599%25E3%2583%25BC%25E3%2583%2588%25E3%2582%25B5%25E3%2583%2596%25E3%2583%258D%25E3%2583%2583%25E3%2583%2588%25E3%2581%25AE%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%25B3%25E3%2582%25B9%25E3%2581%25AB%25E3%2582%25A2%25E3%2582%25AF%25E3%2582%25BB%25E3%2582%25B9%25E3%2581%2599%25E3%2582%258B%25E6%2589%258B%25E9%25A0%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2586%25E3%2581%2586%25E3%2581%2597%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NiYjE3YTcwYWYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ゆうし</dc:creator></item><item><title><![CDATA[Gentoo Linuxでピュアi3のデスクトップ環境を構築する]]></title><description><![CDATA[Gentoo Linuxは他の大多数のLinuxディストリビューションと異なり，ユーザがパッケージをビルドすることで環境を構築します．
+
+ Gentoo Linuxのセットアップ
+Gentoo Linuxをインストールする方法は，公式のハンドブックを参照するのが良いでしょう．ただし，基本的なLinuxの作法は心得ていることが前提となっていることが多いので，適宜Googleで調べましょう．
+
+ USEフラグ
+Gentooの魅力はユーザがUSEフラグを立てることで，アプリケーションが使用する機能を明示的に指定できるところにあります．
+例えばGNOMEデスクトップ環境を使用しないのに，アプリが...]]></description><link>https://zenn.dev/vmtch/articles/0847d9a27ddd75</link><guid isPermaLink="true">https://zenn.dev/vmtch/articles/0847d9a27ddd75</guid><pubDate>Thu, 26 Dec 2024 18:45:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--HVrwZQnC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Gentoo%2520Linux%25E3%2581%25A7%25E3%2583%2594%25E3%2583%25A5%25E3%2582%25A2i3%25E3%2581%25AE%25E3%2583%2587%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%2588%25E3%2583%2583%25E3%2583%2597%25E7%2592%25B0%25E5%25A2%2583%25E3%2582%2592%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:vmtch%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS2lySkRQU2EtMDh2VXNtTlRONEhiQi1acERIX1RkaTFpV3lXUVkxV0c5S3I4UG5WYz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>vmtch</dc:creator></item></channel></rss>
