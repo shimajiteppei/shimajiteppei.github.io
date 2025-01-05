@@ -86,7 +86,8 @@ def add_article_class(html_content):
 def on_page_content(html_content, page, config, files):
     modified_html = add_target_blank(html_content)
 
-    if page.url.startswith('article') and len(page.url.split('/')) >= 3:
+    print(page.url)
+    if page.url.startswith('article'):
         modified_html = add_article_class(modified_html)
 
     return modified_html
