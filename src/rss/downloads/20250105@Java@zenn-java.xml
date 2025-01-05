@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Java」のフィード]]></title><description><![CDATA[Zennのトピック「Java」のRSSフィードです]]></description><link>https://zenn.dev/topics/java</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/5c47bb8423.png</url><title>Zennの「Java」のフィード</title><link>https://zenn.dev/topics/java</link></image><generator>zenn.dev</generator><lastBuildDate>Sun, 05 Jan 2025 03:14:12 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/java/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[[Java] JUnit で書いたテストを GitHub Actions で実行する]]></title><description><![CDATA[
+ はじめに
+手間がかかるかな～と思っていたら案外さっくりできたので、覚え書きです。
+
+ 前提
+
+
+
+
+
+
+
+
+
+JDK
+Oracle OpenJDK 23.0.1
+
+
+ビルドツール
+Gradle
+
+
+
+
+ 方針
+以下の手順で実行します。
+
+最新バージョンの Ubuntu で実行環境を立ち上げる
+実行環境にリポジトリをコピーする
+プロジェクトに対応するバージョンの JDK をインストールする
+プロジェクトをビルドする
+プロジェクトのテストを実行する
+
+また、push されるごとにテストを実行するものとします。
+
+ workflows
+実際に書いたワークフローがこちら。
+リポジトリの ./...]]></description><link>https://zenn.dev/progate_users/articles/670c0f969bc7d6</link><guid isPermaLink="true">https://zenn.dev/progate_users/articles/670c0f969bc7d6</guid><pubDate>Sun, 05 Jan 2025 01:34:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--miwvy8Fy--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BJava%255D%2520JUnit%2520%25E3%2581%25A7%25E6%259B%25B8%25E3%2581%2584%25E3%2581%259F%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E3%2582%2592%2520GitHub%2520Actions%2520%25E3%2581%25A7%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2582%2588%25E3%2581%25A4%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM2OGUyYmI4YzIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Progate%2520Path%2520%25E3%2582%25B3%25E3%2583%259F%25E3%2583%25A5%25E3%2583%258B%25E3%2583%2586%25E3%2582%25A3%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JiOGNiMGY2NjkuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>よつ</dc:creator></item><item><title><![CDATA[[Java]エラー と 例外 について（備忘録）]]></title><description><![CDATA[
+ １．エラーとは
+・PDFファイルやCSVファイル等をダウンロードしようとした際、「ファイルを保存するための容量が不足している」「システムトラブル」といった理由で、ダウンロードが失敗することがあります。
+このようにプログラムは実行されたが期待結果が得られない問題を、エラーと呼びます。
+エラーは、プログラムの正常な実行を妨げる問題であり、プログラムの修正では対処できない場合が多いです。
+
+ ２．例外とは
+・例外は、プログラムを実行して初めて分かる問題のことです。
+例外の具体例として、「存在しないファイルを開こうとした」「整数を0で割ろうとした」があります。
+例外を適切に処理する為に、例外...]]></description><link>https://zenn.dev/yama_kawa/articles/03b94253e7d382</link><guid isPermaLink="true">https://zenn.dev/yama_kawa/articles/03b94253e7d382</guid><pubDate>Fri, 03 Jan 2025 14:55:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--f4b4nyVt--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BJava%255D%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%2520%25E3%2581%25A8%2520%25E4%25BE%258B%25E5%25A4%2596%2520%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25EF%25BC%2588%25E5%2582%2599%25E5%25BF%2598%25E9%258C%25B2%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%25A9%25E3%2582%25B6%25E3%2583%258B%25E3%2582%25A2%25E3%2583%2591%25E3%2583%25B3%25E3%2582%25B5%25E3%2583%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M1ZjYyZjIwYTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ラザニアパンサー</dc:creator></item><item><title><![CDATA[[Lombok] Class ~.JCTree$JCImport does not have member field]]></title><description><![CDATA[
+ 前提
+エラー対応ログです。
+Lombok を使用した環境の構築時、同様のエラーが発生する可能性があります。
+
+ 環境
+
+Windows 11
+IntelliJ IDEA Ultimate 2024.3.1.1
+build.gradle
+
+plugins {
+    id 'java'
+}
+
+group = 'com.example'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-...]]></description><link>https://zenn.dev/progate_users/articles/76dac2061d8ace</link><guid isPermaLink="true">https://zenn.dev/progate_users/articles/76dac2061d8ace</guid><pubDate>Fri, 03 Jan 2025 05:12:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jfAAf05u--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BLombok%255D%2520Class%2520%7E.JCTree%2524JCImport%2520does%2520not%2520have%2520member%2520field%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2582%2588%25E3%2581%25A4%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM2OGUyYmI4YzIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Progate%2520Path%2520%25E3%2582%25B3%25E3%2583%259F%25E3%2583%25A5%25E3%2583%258B%25E3%2583%2586%25E3%2582%25A3%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JiOGNiMGY2NjkuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>よつ</dc:creator></item><item><title><![CDATA[PythonのDI(Dependency Injection)ライブラリInjectorとSpringの比較]]></title><description><![CDATA[
+ 背景
+最近、Pythonを触る機会があり、オニオンアーキテクチャを意識してコードを書いているのですが、DI(Dependency Injection)を適用したくなってきました。普段仕事では、Java+Springで開発しているので、DIコンテナは意識せずとも利用しています。PythonでもDIコンテナのライブラリがあるのか調べてみたところ、Injectorというライブラリを紹介している人が多そうに思ったので、今回はこれを使ってみることにしました。使い方について、理解するまで少々戸惑ってしまったのですが、普段Springを触っている私にとってはSpringと対応させて考えると理解しや...]]></description><link>https://zenn.dev/snhr_1019/articles/20250102-python-injector</link><guid isPermaLink="true">https://zenn.dev/snhr_1019/articles/20250102-python-injector</guid><pubDate>Thu, 02 Jan 2025 08:33:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Sy6ccYJ2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25AEDI%2528Dependency%2520Injection%2529%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AAInjector%25E3%2581%25A8Spring%25E3%2581%25AE%25E6%25AF%2594%25E8%25BC%2583%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:snhr-1019%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUVkRlRwNVQ3S0lwLVlsT3pXZEktZVpDRFdvV0xST3g0UFlpalRwR3J2bUY9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>snhr-1019</dc:creator></item><item><title><![CDATA[Java Swingを使いこなしたい。　#1]]></title><description><![CDATA[
+ はじめに
+自分の学び 兼 業務のためのGUIツールを作りたい人に向けたメモです。
+今時Java Swingを使う人なんていないと思いますが、自社の環境だと、セキュリティの都合で今時はやりのPythonとか入れられず、使えるのがこれくらいだったので、何とか使おうと思い立ち、勉強し始めることにしました。
+意外とネットで検索しても詳しいものが出てこず、、、これは需要があるのでは？
+（本当か？）
+
+ Java Swingとは？
+JavaのSwingは、GUI（グラフィカルユーザーインターフェース）ツールキットです。
+Swingの良さとして、すべてのプラットフォーム上（Windows、macO...]]></description><link>https://zenn.dev/ne_maru/articles/75594f8a6a5aba</link><guid isPermaLink="true">https://zenn.dev/ne_maru/articles/75594f8a6a5aba</guid><pubDate>Wed, 01 Jan 2025 23:24:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--NakPA3K4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java%2520Swing%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2584%25E3%2581%2593%25E3%2581%25AA%25E3%2581%2597%25E3%2581%259F%25E3%2581%2584%25E3%2580%2582%25E3%2580%2580%25231%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AD%25E3%2583%25BC%25E3%2581%25BE%25E3%2582%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSmF1ZjViTlVYT29vNjZpLW9weTI2NFp6c0d0ZFNTSXIyTUw2X2ZCX1MtZ1ZJRTBMeVp5dz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ねーまる</dc:creator></item><item><title><![CDATA[はじめてのscheme制作]]></title><description><![CDATA[2024年の夏頃から、 r7rs-pico と call/ccが動くschemeを Javaで作成し始めた。
+この小さなLisp (r7rs-pico と call/cc仕様) は、それなりに動作した。
+調子に乗った私は、r7rs-smallを実装しようと試みたのだが、あまりに難しすぎた。
+この本は、『はじめてscheme制作に挑んだ私が』、苦労した点を文章に残して置こうと思い書いた本である。
+schemeの実装についての日本語の記事・情報があまりに少ないため書きたかったというのもある。
+
+今後scheme実装に挑む日本人のため、少しでも役に立つ本となれば幸いである。
+
+また、私は、scheme実装に詳しくない為、誤り等ありましたら、ご指摘いただけると助かります。]]></description><link>https://zenn.dev/clazz/books/a752b62f7b5e64</link><guid isPermaLink="true">https://zenn.dev/clazz/books/a752b62f7b5e64</guid><pubDate>Wed, 01 Jan 2025 04:12:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--LeDAIgAq--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci9iMGVhNTViYjVhLmpwZWc=%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>clazz</dc:creator></item><item><title><![CDATA[Spring Data JPAによるソート（複合キーのソート付き）]]></title><description><![CDATA[spring-bootを使った中での躓いたことや調べたことのメモです。
+
+ 環境
+
+java: 8
+spring-boot: 2.0.1
+spring-data-jpa: 2.0.7
+
+
+ 前提
+以下のEntityで考えます
+@Entity
+public class Entity {
+  @Id
+  private int Id;
+
+  private String name;
+
+  private int position;
+
+  // Getter, Setter省略
+}
+
+ List&lt;T&gt; findAll(Sort sort)
+
+JpaRepositoryを継承したin...]]></description><link>https://zenn.dev/shikazuki/articles/c864ac51dcbdf52554cf</link><guid isPermaLink="true">https://zenn.dev/shikazuki/articles/c864ac51dcbdf52554cf</guid><pubDate>Tue, 31 Dec 2024 13:07:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--h0kNoSsN--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Spring%2520Data%2520JPA%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258B%25E3%2582%25BD%25E3%2583%25BC%25E3%2583%2588%25EF%25BC%2588%25E8%25A4%2587%25E5%2590%2588%25E3%2582%25AD%25E3%2583%25BC%25E3%2581%25AE%25E3%2582%25BD%25E3%2583%25BC%25E3%2583%2588%25E4%25BB%2598%25E3%2581%258D%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:shikazuki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JlZDgyOGI0ZDUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>shikazuki</dc:creator></item><item><title><![CDATA[swagger-codegen-cliで生成したコードが好みでなかったときの対処法]]></title><description><![CDATA[
+ 困ったこと
+外部サービスが提供しているSwagger Specでjava-clientのコードをswagger-codegen-cliで生成して使っていました。
+swagger-codegen-cliのバージョンを上げて再作成したところ、BooleanのgetterがgetXXXではなくisXXXに変わってしまいました。
+
+ 状況
+
+swagger-codegen-cliのv2.2.3を以前使ったが、新しいSwagger Specでは正しく生成できない。(ビルドエラーになる)
+v2.2.3 -&gt; v2.3.1に変更（current stable）
+
+
+ テンプレートをカスタマイ...]]></description><link>https://zenn.dev/shikazuki/articles/bd2bf488194c295fec0b</link><guid isPermaLink="true">https://zenn.dev/shikazuki/articles/bd2bf488194c295fec0b</guid><pubDate>Tue, 31 Dec 2024 13:07:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--X5cXeTwA--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:swagger-codegen-cli%25E3%2581%25A7%25E7%2594%259F%25E6%2588%2590%25E3%2581%2597%25E3%2581%259F%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2581%258C%25E5%25A5%25BD%25E3%2581%25BF%25E3%2581%25A7%25E3%2581%25AA%25E3%2581%258B%25E3%2581%25A3%25E3%2581%259F%25E3%2581%25A8%25E3%2581%258D%25E3%2581%25AE%25E5%25AF%25BE%25E5%2587%25A6%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:shikazuki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JlZDgyOGI0ZDUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>shikazuki</dc:creator></item><item><title><![CDATA[Thymeleafでth:include, th:replace, th:insert, th:fragmentの組み合わせ別使用法]]></title><description><![CDATA[
+ 前置き
+
+ 追記(2019/6/29)
+th:includeはthymeleaf3.0から非推奨になっています。コメントにて指摘いただきました。ありがとうございます。
+現時点では廃止になるような記載はありませんが、th:includeは使用しないほうがよさそうです。
+
+ Thymeleafって何？
+javaのフレームワークであるSpringをやろう！とした場合、おそらくよく使われるであろうViewテンプレートがThymeleafです。
+このThymeleafではパーツごとにテンプレートファイルを作成することもでき、th:includeやth:replaceやth:insertを使って...]]></description><link>https://zenn.dev/shikazuki/articles/2c7dfd88e98827a800b5</link><guid isPermaLink="true">https://zenn.dev/shikazuki/articles/2c7dfd88e98827a800b5</guid><pubDate>Tue, 31 Dec 2024 13:07:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vfcchWI4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Thymeleaf%25E3%2581%25A7th%253Ainclude%252C%2520th%253Areplace%252C%2520th%253Ainsert%252C%2520th%253Afragment%25E3%2581%25AE...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:shikazuki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JlZDgyOGI0ZDUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>shikazuki</dc:creator></item><item><title><![CDATA[Java | Spring Boot | API Gateway]]></title><description><![CDATA[
+ Java Spring Boot
+
+ Routing
+Spring Bootアプリケーションでは、HTTPリクエストをルーティングするために、@RestControllerや@Controllerアノテーションを使用してコントローラを定義する。これにより、異なるエンドポイントへのルーティングが可能となる。
+@RestController
+public class MyRouter {
+
+    @GetMapping("/service1")
+    public String handleService1() {
+        return "Service 1 Response...]]></description><link>https://zenn.dev/v6qh2bxj/articles/6e884173bc0910</link><guid isPermaLink="true">https://zenn.dev/v6qh2bxj/articles/6e884173bc0910</guid><pubDate>Sun, 29 Dec 2024 21:38:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ho35T2VE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:Java%2520%257C%2520Spring%2520Boot%2520%257C%2520API%2520Gateway%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:v6qh2bxj%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzgzYmY4Njc4OTUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>v6qh2bxj</dc:creator></item><item><title><![CDATA[Java | Spring Boot | 統合開発環境（IDE）を使用せずに構築する手順]]></title><description><![CDATA[
+ Java
+
+ Spring Boot を統合開発環境（IDE）を使用せずに構築する手順
+
+ 1. JDKのインストール
+Spring Bootを実行するためには、Java Development Kit (JDK) が必要なため、
+以下の手順でJDKをインストールする。
+
+
+Oracle JDK または OpenJDK をダウンロードしてインストールする。Amazon CorrettoでもOK。
+インストール後、環境変数 JAVA_HOME を設定し、PATH に bin ディレクトリを追加する。
+
+# bashの場合（Linux/Mac）
+export JAVA_HOME=/pat...]]></description><link>https://zenn.dev/v6qh2bxj/articles/4040226cdba39f</link><guid isPermaLink="true">https://zenn.dev/v6qh2bxj/articles/4040226cdba39f</guid><pubDate>Sun, 29 Dec 2024 20:15:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--w2kZApai--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java%2520%257C%2520Spring%2520Boot%2520%257C%2520%25E7%25B5%25B1%25E5%2590%2588%25E9%2596%258B%25E7%2599%25BA%25E7%2592%25B0%25E5%25A2%2583%25EF%25BC%2588IDE%25EF%25BC%2589%25E3%2582%2592%25E4%25BD%25BF%25E7%2594%25A8%25E3%2581%259B%25E3%2581%259A%25E3%2581%25AB%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2599%25E3%2582%258B%25E6%2589%258B%25E9%25A0%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:v6qh2bxj%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzgzYmY4Njc4OTUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>v6qh2bxj</dc:creator></item><item><title><![CDATA[Java | Spring Boot | 依存性の注入 | DIコンテナ]]></title><description><![CDATA[
+ Java
+
+ Spring Bootの"DIコンテナ"
+
+"DIコンテナ"を理解するには、依存性の注入（DI：Dependency Injection）についての理解が必要。Spring Bootでの依存性の注入（DI：Dependency Injection）は、"DIコンテナ"が自動的に注入している。
+
+
+
+Spring Bootでは、クラスを「コンポーネント」として扱い、これらのコンポーネントが互いに依存する場合に、DIコンテナがその依存関係を自動的に注入している。これにより、手動でインスタンスを作成する必要がなくなり、コードがクリーンで保守しやすくなる。
+
+
+
+
+項目
+内容
+...]]></description><link>https://zenn.dev/v6qh2bxj/articles/7b08e13a73bfd2</link><guid isPermaLink="true">https://zenn.dev/v6qh2bxj/articles/7b08e13a73bfd2</guid><pubDate>Sun, 29 Dec 2024 16:02:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2LZcpE1Y--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java%2520%257C%2520Spring%2520Boot%2520%257C%2520%25E4%25BE%259D%25E5%25AD%2598%25E6%2580%25A7%25E3%2581%25AE%25E6%25B3%25A8%25E5%2585%25A5%2520%257C%2520DI%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2586%25E3%2583%258A%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:v6qh2bxj%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzgzYmY4Njc4OTUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>v6qh2bxj</dc:creator></item><item><title><![CDATA[Java | 依存性注入(DI) | 直行性（Loose Coupling）]]></title><description><![CDATA[
+ Java
+「依存性注入（DI）」と「直行性（Loose Coupling）」は異なる概念だが、密接に関連している。依存性注入（DI）は、コードの直行性を高めるための手段の1つであり、依存性注入（DI）を適用することで、クラス間の依存関係を緩やかにし、コードの可読性やテストの容易さを向上させることができる。
+
+ 直行性（Loose Coupling）
+直行性（Loose Coupling）とは、クラスやモジュール間の依存関係を示す。「直行性が高い」場合は、あるクラスが他のクラスに強く依存していないため、変更が容易で、テストや再利用がしやすくなる。
+
+ 依存性（Dependency）とは...]]></description><link>https://zenn.dev/v6qh2bxj/articles/29667f633c616b</link><guid isPermaLink="true">https://zenn.dev/v6qh2bxj/articles/29667f633c616b</guid><pubDate>Sun, 29 Dec 2024 15:06:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dOCRh589--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java%2520%257C%2520%25E4%25BE%259D%25E5%25AD%2598%25E6%2580%25A7%25E6%25B3%25A8%25E5%2585%25A5%2528DI%2529%2520%257C%2520%25E7%259B%25B4%25E8%25A1%258C%25E6%2580%25A7%25EF%25BC%2588Loose%2520Coupling%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:v6qh2bxj%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzgzYmY4Njc4OTUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>v6qh2bxj</dc:creator></item><item><title><![CDATA[SQLエラーにもう悩まない！参照カーソル利用で非効率なプログラム内での文字列組み立てから卒業しよう]]></title><description><![CDATA[
+ ごあいさつ
+こんにちは、「エイジ＠フジワーランド」です
+フリーでパッケージシステムのOEM供給やってます、最近暇なので時給でSESやってます
+年末年始でSESはお休みですが、フリーはいつでも休みでいつでも仕事です(深い意味は少しあり)
+さて今回はOracle参照カーソルの話です
+
+ プログラム内でSQL文字列を組み立てるのはもうやめよう
+プログラム内でSQL文を文字列結合して組み立てるのは柔軟性が高いように思えますが、以下のような問題点があります
+
+ 1. 実行時しかSQLエラーがわからない
+
+実行するまでエラーがわからないのは効率悪いです、WHERE条件を変更したりSELECT項目...]]></description><link>https://zenn.dev/fujiwaaaland/articles/c0bcc64e559518</link><guid isPermaLink="true">https://zenn.dev/fujiwaaaland/articles/c0bcc64e559518</guid><pubDate>Sun, 29 Dec 2024 14:10:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Qcnfq_Br--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:SQL%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E3%2581%25AB%25E3%2582%2582%25E3%2581%2586%25E6%2582%25A9%25E3%2581%25BE%25E3%2581%25AA%25E3%2581%2584%25EF%25BC%2581%25E5%258F%2582%25E7%2585%25A7%25E3%2582%25AB%25E3%2583%25BC%25E3%2582%25BD%25E3%2583%25AB%25E5%2588%25A9%25E7%2594%25A8%25E3%2581%25A7%25E9%259D%259E%25E5%258A%25B9%25E7%258E%2587%25E3%2581%25AA%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%25A0%25E5%2586%2585%25E3%2581%25A7%25E3%2581%25AE%25E6%2596%2587%25E5%25AD%2597%25E5%2588%2597%25E7%25B5%2584%25E3%2581%25BF%25E7%25AB%258B%25E3%2581%25A6%25E3%2581%258B%25E3%2582%2589%25E5%258D%2592%25E6%25A5%25AD%25E3%2581%2597%25E3%2582%2588%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25A8%25E3%2582%25A4%25E3%2582%25B8%2540%25E3%2583%2595%25E3%2582%25B8%25E3%2583%25AF%25E3%2583%25BC%25E3%2583%25A9%25E3%2583%25B3%25E3%2583%2589%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSUItQ3ZzWm5DMmlJX2RZVDVNMTdJcm9QZ2dqTGdTdl9mWkRiZXN2NjJvRWpDajAtU3I3UT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>エイジ@フジワーランド</dc:creator></item><item><title><![CDATA[java.time.format.DateTimeParseException の対処法]]></title><description><![CDATA[
+ 環境
+Open JDK 23.0.1
+
+ Unable to obtain {Temporal} from TemporalAccessor
+
+ エラーが発生するコード例
+DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy年M月d日[ H:mm]");
+
+LocalDateTime withTime = LocalDateTime.parse("2025年1月2日 03:45", formatter);
+// ↓ DateTimeParseExceptionが発生する
+LocalDateTime withou...]]></description><link>https://zenn.dev/nafuka11/articles/java-datetime-parse-exception</link><guid isPermaLink="true">https://zenn.dev/nafuka11/articles/java-datetime-parse-exception</guid><pubDate>Sun, 29 Dec 2024 06:26:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9ZrAd5qh--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:java.time.format.DateTimeParseException%2520%25E3%2581%25AE%25E5%25AF%25BE%25E5%2587%25A6%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nafuka11%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE4ZDQyMjFhNjAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nafuka11</dc:creator></item><item><title><![CDATA[Java | ORACLE以外のJDK | Amazon Corretto]]></title><description><![CDATA[
+ Java
+
+ ORACLE以外のJDK
+
+ Amazon Corretto
+
+
+
+
+
+Corretto は、Amazon の長期サポートを含む Open Java Development Kit (OpenJDK) のビルド。
+Corretto は、"Java Technology Compatibility Kit (TCK)" を使用して Java SE 規格に準拠するようにしていることが認証されており、Linux、Windows、および macOS で使用できる。
+
+
+
+
+]]></description><link>https://zenn.dev/v6qh2bxj/articles/59d24d83b126c3</link><guid isPermaLink="true">https://zenn.dev/v6qh2bxj/articles/59d24d83b126c3</guid><pubDate>Sat, 28 Dec 2024 19:24:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qMCVHu_s--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java%2520%257C%2520ORACLE%25E4%25BB%25A5%25E5%25A4%2596%25E3%2581%25AEJDK%2520%257C%2520Amazon%2520Corretto%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:v6qh2bxj%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzgzYmY4Njc4OTUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>v6qh2bxj</dc:creator></item><item><title><![CDATA[Java | Maven | Project Object Model (POM) | pom.xml]]></title><description><![CDATA[
+ Java
+
+ Maven
+
+ pom.xml
+
+
+]]></description><link>https://zenn.dev/v6qh2bxj/articles/fa707a61fabdb8</link><guid isPermaLink="true">https://zenn.dev/v6qh2bxj/articles/fa707a61fabdb8</guid><pubDate>Sat, 28 Dec 2024 19:18:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ZVtOhlmc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java%2520%257C%2520Maven%2520%257C%2520Project%2520Object%2520Model%2520%2528POM%2529%2520%257C%2520pom.xml%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:v6qh2bxj%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzgzYmY4Njc4OTUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>v6qh2bxj</dc:creator></item><item><title><![CDATA[Java | ダブルディスパッチ]]></title><description><![CDATA[
+ Java
+
+ ダブルディスパッチ
+
+]]></description><link>https://zenn.dev/v6qh2bxj/articles/7985f702b9ee3a</link><guid isPermaLink="true">https://zenn.dev/v6qh2bxj/articles/7985f702b9ee3a</guid><pubDate>Sat, 28 Dec 2024 18:50:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9_9Ln2r6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java%2520%257C%2520%25E3%2583%2580%25E3%2583%2596%25E3%2583%25AB%25E3%2583%2587%25E3%2582%25A3%25E3%2582%25B9%25E3%2583%2591%25E3%2583%2583%25E3%2583%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:v6qh2bxj%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzgzYmY4Njc4OTUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>v6qh2bxj</dc:creator></item><item><title><![CDATA[AWS CodeBuildで手動インストールしたJDKを利用する]]></title><description><![CDATA[発生は稀だと思いますが、Javaアプリケーションのbuildで利用しているJDKをAWS Codebuildのimageに手動インストールする必要が生じました。
+英語文献も含めていくつか記事があったのですが、AWS公式の処理を真似た点において、本記事が一番確実な方法と思われます。(2024/12時点)
+過去の同様の内容にトライしている記事
+amazon web services - How to install different Java OpenJDK version on AWS CodeBuild standard image - Stack Overflow
+利用したimage...]]></description><link>https://zenn.dev/takeaki_m/articles/ed40ec038de69f</link><guid isPermaLink="true">https://zenn.dev/takeaki_m/articles/ed40ec038de69f</guid><pubDate>Sat, 28 Dec 2024 06:28:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--aVuz3Bdu--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AWS%2520CodeBuild%25E3%2581%25A7%25E6%2589%258B%25E5%258B%2595%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%2597%25E3%2581%259FJDK%25E3%2582%2592%25E5%2588%25A9%25E7%2594%25A8%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:take%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ1NGUxN2RmODYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>take</dc:creator></item><item><title><![CDATA[Spring AIでAzure Cosmos DBのベクトル検索を試す]]></title><description><![CDATA[
+ 概要
+Azure Cosmos DBがベクトル検索できるようになり、Spring AIとも統合されました。
+https://devblogs.microsoft.com/cosmosdb/announcing-azure-cosmos-db-integration-with-spring-ai-and-langchain4j/
+簡単なRAGを通じてSpring AIとAzure Cosmos DB、Azure OpenAI Serviceを用いたベクトル検索を試してみます。
+
+ コード例
+今回のコード例は次のリポジトリのspring-ai-cosmos-vector-store-ex...]]></description><link>https://zenn.dev/backpaper0/articles/5f6edf59de42b9</link><guid isPermaLink="true">https://zenn.dev/backpaper0/articles/5f6edf59de42b9</guid><pubDate>Tue, 24 Dec 2024 15:00:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--EdSVX3n3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Spring%2520AI%25E3%2581%25A7Azure%2520Cosmos%2520DB%25E3%2581%25AE%25E3%2583%2599%25E3%2582%25AF%25E3%2583%2588%25E3%2583%25AB%25E6%25A4%259C%25E7%25B4%25A2%25E3%2582%2592%25E8%25A9%25A6%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2586%25E3%2582%2589%25E3%2581%258C%25E3%2581%25BF%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2h1Q0xBRjd4OC16dVN4NXl1MXU2OTJDWEVhR0s5MWxKZWhjQXU5cVE9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>うらがみ</dc:creator></item></channel></rss>
