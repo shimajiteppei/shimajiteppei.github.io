@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「TypeScript」のフィード]]></title><description><![CDATA[Zennのトピック「TypeScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/typescript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/f13e758fdb.png</url><title>Zennの「TypeScript」のフィード</title><link>https://zenn.dev/topics/typescript</link></image><generator>zenn.dev</generator><lastBuildDate>Mon, 06 Jan 2025 02:59:41 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/typescript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[モジュラモノリスの依存関係をESLintの設定で強制する]]></title><description><![CDATA[
+ 概要
+モジュラモノリスの依存関係をESLintの設定で強制する方法を示します。
+
+ 今回の構成
+.
+├── README.md
+├── bun.lockb
+├── eslint.config.js
+├── node_modules
+├── package-lock.json
+├── package.json
+├── src
+│   ├── index.ts
+│   ├── module1
+│   │   ├── dir
+│   │   │   └── var.ts
+│   │   ├── index.ts
+│   │   └── var.ts
+│   ├── module2
+│   ...]]></description><link>https://zenn.dev/hitotsu_blog/articles/ff10a561b02694</link><guid isPermaLink="true">https://zenn.dev/hitotsu_blog/articles/ff10a561b02694</guid><pubDate>Sun, 05 Jan 2025 16:24:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--m6pNFdFi--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%25A2%25E3%2582%25B8%25E3%2583%25A5%25E3%2583%25A9%25E3%2583%25A2%25E3%2583%258E%25E3%2583%25AA%25E3%2582%25B9%25E3%2581%25AE%25E4%25BE%259D%25E5%25AD%2598%25E9%2596%25A2%25E4%25BF%2582%25E3%2582%2592ESLint%25E3%2581%25AE%25E8%25A8%25AD%25E5%25AE%259A%25E3%2581%25A7%25E5%25BC%25B7%25E5%2588%25B6%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%2584%25E3%2581%2595%25E3%2581%258A%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY0NjczMDg4NjEuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:HITOTSU%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%2520%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZkYmFjYTIxMzguanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>いさお</dc:creator></item><item><title><![CDATA[【Remix】meta機能備忘録]]></title><description><![CDATA[
+ Remixのmeta機能とは
+Remixには、各ルートコンポーネントでmetaデータを定義できる機能が備わっています。
+この機能を使うことで、SEO対策に重要なmetaタグやtitleタグを動的に設定することができます。
+
+Docs
+https://remix.run/docs/en/main/route/meta
+
+
+
+ 基本的な使い方
+import type { MetaFunction } from "@remix-run/node";
+
+export const meta: MetaFunction = () =&gt; {
+  return [
+    { title: "...]]></description><link>https://zenn.dev/rlab/articles/586663f08931bc</link><guid isPermaLink="true">https://zenn.dev/rlab/articles/586663f08931bc</guid><pubDate>Sun, 05 Jan 2025 10:14:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vLM0FU8l--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Remix%25E3%2580%2591meta%25E6%25A9%259F%25E8%2583%25BD%25E5%2582%2599%25E5%25BF%2598%25E9%258C%25B2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%258A%25E3%2583%2584%25E3%2583%258E%25E3%2583%25AD%25E3%2583%2589%25E3%2583%25AA%25E3%2582%25B4%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNjNzdmZWEzNmQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ナツノロドリゴ</dc:creator></item><item><title><![CDATA[【v4からv5に切り替わる大変な時に勉強してるあなたへ】Svelteの基本的な書き方]]></title><description><![CDATA[
+ はじめに
+皆さん、こんにちは。
+今回はSvelteの基本的な使い方をご紹介します。最近Svelteはバージョンが上がり新しくルーンという表現が追加されました。この書き方の違いについても掲載していきます。
+https://svelte.dev/docs/svelte/v5-migration-guide
+
+ 雛形の作成とエディタの設定
+
+ 概要
+
+
+npm create vite@latestで雛形を作成
+VSCodeに「Svelte for VS Code」を追加
+
+npm run devでアプリの起動
+WebブラウザでSvelteを気軽に試す（Playground）
+
+Svelte...]]></description><link>https://zenn.dev/peter_norio/articles/65409d3a6469f0</link><guid isPermaLink="true">https://zenn.dev/peter_norio/articles/65409d3a6469f0</guid><pubDate>Sun, 05 Jan 2025 08:54:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--TRhiJSIY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590v4%25E3%2581%258B%25E3%2582%2589v5%25E3%2581%25AB%25E5%2588%2587%25E3%2582%258A%25E6%259B%25BF%25E3%2582%258F%25E3%2582%258B%25E5%25A4%25A7%25E5%25A4%2589%25E3%2581%25AA%25E6%2599%2582%25E3%2581%25AB%25E5%258B%2589%25E5%25BC%25B7%25E3%2581%2597%25E3%2581%25A6%25E3%2582%258B%25E3%2581%2582%25E3%2581%25AA%25E3%2581%259F%25E3%2581%25B8%25E3%2580%2591Svelte%25E3%2581%25AE%25E5%259F%25BA%25E6%259C%25AC%25E7%259A%2584%25E3%2581%25AA%25E6%259B%25B8%25E3%2581%258D%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%2594%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%25BC%25E3%2581%25AE%25E3%2582%258A%25E3%2581%258A%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSTcwSTlWTjhXNHl3eWRJY1JlYzFWaUJtc3B6S3lfX3JzeTUyYmJhRFh0c29FVzJDZz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ピーターのりお</dc:creator></item><item><title><![CDATA[【Prisma】schemaを複数ファイルで管理する]]></title><description><![CDATA[
+ 背景
+
+schema定義する際、schema.prisma単体で定義する方法もあるが、肥大化を避ける為にファイルを分けたい。
+
+
+schema.prismaの例
+schema.prisma
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model user {
+  id            Int      @id @default(autoincrement())
+...]]></description><link>https://zenn.dev/kobata/articles/341b9fb133a3d9</link><guid isPermaLink="true">https://zenn.dev/kobata/articles/341b9fb133a3d9</guid><pubDate>Sun, 05 Jan 2025 06:54:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--27-s3tTJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Prisma%25E3%2580%2591schema%25E3%2582%2592%25E8%25A4%2587%25E6%2595%25B0%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2581%25A7%25E7%25AE%25A1%25E7%2590%2586%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kobata%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZmNGY5ZGJhMWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kobata</dc:creator></item><item><title><![CDATA[画像処理100本ノックに挑戦｜大津の二値化（004/100）]]></title><description><![CDATA[
+ これはなに？
+画像処理100本ノックを、TypeScriptとlibvipsで挑戦してみる記事の4本目です。
+
+ 前回
+https://zenn.dev/nyagato_00/articles/f5c87321f68131
+
+ 実装
+
+ お題
+
+大津の二値化を実装せよ。 大津の二値化とは判別分析法と呼ばれ、二値化における分離の閾値を自動決定する手法である。 これはクラス内分散とクラス間分散の比から計算される。
+
+https://github.com/minido/Gasyori100knock-1/tree/master/Question_01_10#q4-大津の二値化
+
+ Codi...]]></description><link>https://zenn.dev/nyagato_00/articles/df65d68dd857c5</link><guid isPermaLink="true">https://zenn.dev/nyagato_00/articles/df65d68dd857c5</guid><pubDate>Sun, 05 Jan 2025 06:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--aNT8L-94--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%2594%25BB%25E5%2583%258F%25E5%2587%25A6%25E7%2590%2586100%25E6%259C%25AC%25E3%2583%258E%25E3%2583%2583%25E3%2582%25AF%25E3%2581%25AB%25E6%258C%2591%25E6%2588%25A6%25EF%25BD%259C%25E5%25A4%25A7%25E6%25B4%25A5%25E3%2581%25AE%25E4%25BA%258C%25E5%2580%25A4%25E5%258C%2596%25EF%25BC%2588004%252F100%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nyagato_00%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUxtNXd1MTVKUVk3SjNOUG1kcGlMeWdfWUt3blZzaTRpWDRoYjU1c21UTTk3c1E9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nyagato_00</dc:creator></item><item><title><![CDATA[Angularの File Extension Loader & Import attribute loader を全部試す]]></title><description><![CDATA[㊗️㊗️㊗️ 明けましておめでとうございます! ㊗️㊗️㊗️
+@onicode3です。
+Angularの File Extension Loader, Import attribute loaderについて記載します。
+
+ File Extension Loader とは
+Angular 17.1 から File Extension Loader が追加されました。
+これは、特定のファイル拡張子を持つファイルをどのように処理するかを制御する機能です。
+この設定により、ファイルをインポートしたときの挙動を制御できます。
+
+ 使い方
+File Extension Loader のローダータイ...]]></description><link>https://zenn.dev/onicode3/articles/angular-loader</link><guid isPermaLink="true">https://zenn.dev/onicode3/articles/angular-loader</guid><pubDate>Sun, 05 Jan 2025 04:30:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--OfZrFRtc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Angular%25E3%2581%25AE%2520File%2520Extension%2520Loader%2520%2526%2520Import%2520attribute%2520loader%2520...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:onicode3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzcwMmNlZTVjN2YuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>onicode3</dc:creator></item><item><title><![CDATA[Nuxt3 + PokeAPIでポケモン図鑑を作ろう！]]></title><description><![CDATA[この本は、Nuxt 3とPokeAPIを使ってハンズオン形式でポケモン図鑑を作成する本です。外部APIとの連携、型安全なデータ処理、Tailwind CSSによるスタイリング、ドメイン駆動設計（DDD）の基礎も解説します。]]></description><link>https://zenn.dev/tsukiyama3/books/pokedex-handson</link><guid isPermaLink="true">https://zenn.dev/tsukiyama3/books/pokedex-handson</guid><pubDate>Sun, 05 Jan 2025 00:49:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3Zh4aQZn--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci85ZDVmYTUwOTc1LnBuZw==%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>つきやま</dc:creator></item><item><title><![CDATA[Express.js徹底解説]]></title><description><![CDATA[
+ExpressはNode.jsで極めて一般的に使用されるウェブサーバーアプリケーションフレームワークです。基本的に、フレームワークとは特定のルールに則ったコード構造であり、2つの重要な特性を持っています：
+
+それはAPIをカプセル化し、開発者がよりビジネスコードの記述に集中できるようにします。
+それは既に定義されたプロセスと標準仕様を持っています。
+
+Expressフレームワークの主要機能は以下の通りです：
+
+様々なHTTPリクエストに応答するためのミドルウェアを設定できます。
+異なる種類のHTTPリクエストアクションを実行するためのルートテーブルを定義します。
+テンプレートにパラメー...]]></description><link>https://zenn.dev/leapcell/articles/3fdd20aa5aaae3</link><guid isPermaLink="true">https://zenn.dev/leapcell/articles/3fdd20aa5aaae3</guid><pubDate>Sat, 04 Jan 2025 12:57:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--b_xHT8bl--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:Express.js%25E5%25BE%25B9%25E5%25BA%2595%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Leapcell%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y0N2E0MGQ3NGEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Leapcell</dc:creator></item><item><title><![CDATA[Pulumi-aws-nativeを使ってECS Fargateのデプロイ環境を作ってみた]]></title><description><![CDATA[ふとしたことから業務でAWSの環境構築をIaCのpulumiを使ってやることになってハマりにハマったので記事化してみました。
+とりあえずPrivate subnet上にFargateのインスタンスを立てて、ALBのPublic IP経由でインターネットからアクセスしてみたかっただけなのでインフラ構成としては
+ECS Fargateのデプロイ環境をCFnでサクッと構築してみた（Rollingアップデート編）
+を基本にして以下を手抜き、改修しています。
+
+良く見る @pulumi/aws ではなく @pulumi/aws-native で記述
+ECR,CI/CD環境は無し
+auto scal...]]></description><link>https://zenn.dev/mryo0826/articles/ec1afa8362795b</link><guid isPermaLink="true">https://zenn.dev/mryo0826/articles/ec1afa8362795b</guid><pubDate>Sat, 04 Jan 2025 11:22:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--RqKfauHW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Pulumi-aws-native%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6ECS%2520Fargate%25E3%2581%25AE%25E3%2583%2587%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25A4%25E7%2592%25B0%25E5%25A2%2583%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mryo0826%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRiNjZlOTIwNDEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mryo0826</dc:creator></item><item><title><![CDATA[[Next.js]use cacheについて学んだ]]></title><description><![CDATA[
+ はじめに
+use cacheについて学んだので、学んだことを書いていきます。
+
+ use cacheとは
+use cache ディレクティブは、コンポーネント、関数、またはファイルをキャッシュ対象として指定します。
+ファイルや関数のトップレベルに宣言することで、ファイル内のすべての関数や、関数の戻り値をキャッシュ可能にしたりすることができます。
+ただ、まだ実験的なNext.jsの機能なので、use clientやuse serverのようなネイティブのReact機能ではありません。
+
+ サンプルコード
+今回は、以下のようにユーザーの一覧からランダムでユーザーを取得し、画面に表示する簡...]]></description><link>https://zenn.dev/ryohei0509/articles/339d05f4e7ffa8</link><guid isPermaLink="true">https://zenn.dev/ryohei0509/articles/339d05f4e7ffa8</guid><pubDate>Sat, 04 Jan 2025 08:41:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Tjaihkyj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BNext.js%255Duse%2520cache%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E5%25AD%25A6%25E3%2582%2593%25E3%2581%25A0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hukuryo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc0M2JhYWM4YjIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hukuryo</dc:creator></item><item><title><![CDATA[画像処理100本ノックに挑戦｜二値化（003/100）]]></title><description><![CDATA[
+ これはなに？
+画像処理100本ノックを、TypeScriptとlibvipsで挑戦してみる記事の3本目です。
+
+ 前回
+https://zenn.dev/nyagato_00/articles/c908be46e07ac0
+
+ 実装
+
+ お題
+
+画像を二値化せよ。 二値化とは、画像を黒と白の二値で表現する方法である。 ここでは、グレースケールにおいて閾値を128に設定し、下式で二値化する。
+
+y = { 0 (if y &lt; 128)
+     255 (else) 
+https://github.com/minido/Gasyori100knock-1/tree/master/...]]></description><link>https://zenn.dev/nyagato_00/articles/f5c87321f68131</link><guid isPermaLink="true">https://zenn.dev/nyagato_00/articles/f5c87321f68131</guid><pubDate>Sat, 04 Jan 2025 06:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6qY0GQAR--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%2594%25BB%25E5%2583%258F%25E5%2587%25A6%25E7%2590%2586100%25E6%259C%25AC%25E3%2583%258E%25E3%2583%2583%25E3%2582%25AF%25E3%2581%25AB%25E6%258C%2591%25E6%2588%25A6%25EF%25BD%259C%25E4%25BA%258C%25E5%2580%25A4%25E5%258C%2596%25EF%25BC%2588003%252F100%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nyagato_00%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUxtNXd1MTVKUVk3SjNOUG1kcGlMeWdfWUt3blZzaTRpWDRoYjU1c21UTTk3c1E9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nyagato_00</dc:creator></item><item><title><![CDATA[選手評価を偏差からパーセンタイルへ変更しました]]></title><description><![CDATA[ボールの代わりにペットボトルの蓋を投げて打つ野球盤型スポーツ、キャップ野球のデータ管理のお手伝いをしています。基本的には成績の計算方法は野球と同じです。
+https://zenn.dev/ckoshien/articles/707bc9fd97d57c
+
+ パーセンタイルの導入への経緯
+以前選手成績のUIを刷新した記事の中でも触れているのですが、従来の選手成績評価では、標準偏差を用いたS、A～F評価を採用していました。しかし、この方法では、特定の指標の分布が偏ると、特定のクラスに選手が集中してしまうという問題がありました。例えば、打率が全体的に高いシーズンでは、S評価の選手が極端に少なく...]]></description><link>https://zenn.dev/ckoshien/articles/f7255f83a48c4d</link><guid isPermaLink="true">https://zenn.dev/ckoshien/articles/f7255f83a48c4d</guid><pubDate>Fri, 03 Jan 2025 14:36:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--J32o-Hk_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E9%2581%25B8%25E6%2589%258B%25E8%25A9%2595%25E4%25BE%25A1%25E3%2582%2592%25E5%2581%258F%25E5%25B7%25AE%25E3%2581%258B%25E3%2582%2589%25E3%2583%2591%25E3%2583%25BC%25E3%2582%25BB%25E3%2583%25B3%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25AB%25E3%2581%25B8%25E5%25A4%2589%25E6%259B%25B4%25E3%2581%2597%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:koshien%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MyMTBiMDYzYWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>koshien</dc:creator></item><item><title><![CDATA[HTML Drag and Drop APIの紹介と導入【React】]]></title><description><![CDATA[
+ はじめに
+Web アプリケーション開発において、ユーザー体験を向上させる重要な機能の 1 つに、ドラッグ&amp;ドロップが挙げられます。
+シンプルなマウス操作で要素を移動したり、ファイルをアップロードしたり、
+直感的な操作性を実現することができます。
+今回は、HTML Drag and Drop API について調査したので、基礎的な内容をまとめました！
+時間の節約になれば、嬉しいです 🙌
+
+ HTML Drag and Drop API とは？
+https://developer.mozilla.org/ja/docs/Web/API/HTML_Drag_and_Drop_API...]]></description><link>https://zenn.dev/kazzyfrog/articles/tutorial-html-dnd</link><guid isPermaLink="true">https://zenn.dev/kazzyfrog/articles/tutorial-html-dnd</guid><pubDate>Fri, 03 Jan 2025 13:49:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--p6yyWIVL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:HTML%2520Drag%2520and%2520Drop%2520API%25E3%2581%25AE%25E7%25B4%25B9%25E4%25BB%258B%25E3%2581%25A8%25E5%25B0%258E%25E5%2585%25A5%25E3%2580%2590React%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kazzyfrog%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzgwMzRmZDk1NTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kazzyfrog</dc:creator></item><item><title><![CDATA[APIサーバーをCloudflare WorkersとCloud Functionsから Fastify (Cloud Run)に移行した話]]></title><description><![CDATA[こんにちは。かる(karuhi)です。
+今回は、以前の記事でも少し触れた「Cloudflare Workers と Cloud Functions の併用構成」をやめて、Fastify + Cloud Run に一本化した話をまとめます。
+以前の記事
+https://zenn.dev/karuhi/articles/a904048bb9812d
+
+ はじめに
+もともとは「少しでも安価かつシンプルにサービスを動かせないか？」という想いからユースケースに合わせて Cloudflare Workers と Cloud Functions などを活用していました。しかし、「ローカルで開発・デバッ...]]></description><link>https://zenn.dev/karuhi/articles/69ddba5d5ccaed</link><guid isPermaLink="true">https://zenn.dev/karuhi/articles/69ddba5d5ccaed</guid><pubDate>Fri, 03 Jan 2025 09:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--naXsaycR--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:API%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2582%2592Cloudflare%2520Workers%25E3%2581%25A8Cloud%2520Functions%25E3%2581%258B%25E3%2582%2589%2520Fastify%2520%2528Clo...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:karuhi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2YyN2M0NWM3ODQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>karuhi</dc:creator></item><item><title><![CDATA[【TypeScript】typeとinterfaceの機能比較表つくってみた]]></title><description><![CDATA[
+ typeとinterfaceの機能比較表
+
+
+
+機能
+type
+interface
+
+
+
+
+オブジェクト型の定義
+✅
+✅
+
+
+継承
+✅
+✅
+
+
+宣言のマージ
+❌
+✅
+
+
+ユニオン型
+✅
+❌
+
+
+インターセクション型
+✅
+❌
+
+
+プリミティブ型のエイリアス
+✅
+❌
+
+
+タプル型の定義
+✅
+❌
+
+
+関数型の定義
+✅
+✅
+
+
+計算プロパティ
+✅
+❌
+
+
+マップ型の定義
+✅
+❌
+
+
+
+
+ オブジェクト型の定義
+type・interfaceも可能
+
+type.ts
+// UserTypeを定義
+type UserType = {
+    id: number;
+    name: string...]]></description><link>https://zenn.dev/mof_moriko/articles/203104848e6618</link><guid isPermaLink="true">https://zenn.dev/mof_moriko/articles/203104848e6618</guid><pubDate>Fri, 03 Jan 2025 09:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--OAwXnUmv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590TypeScript%25E3%2580%2591type%25E3%2581%25A8interface%25E3%2581%25AE%25E6%25A9%259F%25E8%2583%25BD%25E6%25AF%2594%25E8%25BC%2583%25E8%25A1%25A8%25E3%2581%25A4%25E3%2581%258F%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:moriko%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNkMGY2YWE3OTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>moriko</dc:creator></item><item><title><![CDATA[画像処理100本ノックに挑戦｜グレースケール化（002/100）]]></title><description><![CDATA[
+ これはなに？
+画像処理100本ノックを、TypeScriptとlibvipsで挑戦してみる記事の2本目です。
+
+ 前回
+https://zenn.dev/nyagato_00/articles/96bd84836074f9
+
+ 実装
+
+ お題
+
+画像をグレースケールにせよ。 グレースケールとは、画像の輝度表現方法の一種であり下式で計算される。
+Y = 0.2126 R + 0.7152 G + 0.0722 B
+
+https://github.com/minido/Gasyori100knock-1/tree/master/Question_01_10#q2-グレースケール化
+
+ C...]]></description><link>https://zenn.dev/nyagato_00/articles/c908be46e07ac0</link><guid isPermaLink="true">https://zenn.dev/nyagato_00/articles/c908be46e07ac0</guid><pubDate>Fri, 03 Jan 2025 06:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BjwrmWFx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%2594%25BB%25E5%2583%258F%25E5%2587%25A6%25E7%2590%2586100%25E6%259C%25AC%25E3%2583%258E%25E3%2583%2583%25E3%2582%25AF%25E3%2581%25AB%25E6%258C%2591%25E6%2588%25A6%25EF%25BD%259C%25E3%2582%25B0%25E3%2583%25AC%25E3%2583%25BC%25E3%2582%25B9%25E3%2582%25B1%25E3%2583%25BC%25E3%2583%25AB%25E5%258C%2596%25EF%25BC%2588002%252F100%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nyagato_00%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUxtNXd1MTVKUVk3SjNOUG1kcGlMeWdfWUt3blZzaTRpWDRoYjU1c21UTTk3c1E9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nyagato_00</dc:creator></item><item><title><![CDATA[CloudFrontの署名付きURLでS3のデータを配信する by AWS CDK]]></title><description><![CDATA[CloudFront の署名付き URL + S3 によるファイルの配信は調べると、少し古いものもありますがいくつか記事を見つけることができます。この記事では AWS CDK での実装にフォーカスして、CloudFront の署名付き URL の生成と CloudFront の署名付き URL + S3 によるファイルの配信を作成します。
+
+ S3の署名付き URL との違い
+許可されたユーザーだけが指定したオブジェクト（ファイル）にアクセスできるようにするための一時的な URL を発行する、という点が共通していますがいくつか違いがあります。
+S3 の署名付き URL と比較して、Clo...]]></description><link>https://zenn.dev/hr20k_/articles/fe20bf0470d405</link><guid isPermaLink="true">https://zenn.dev/hr20k_/articles/fe20bf0470d405</guid><pubDate>Fri, 03 Jan 2025 04:59:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---krF4d-t--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:CloudFront%25E3%2581%25AE%25E7%25BD%25B2%25E5%2590%258D%25E4%25BB%2598%25E3%2581%258DURL%25E3%2581%25A7S3%25E3%2581%25AE%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%2592%25E9%2585%258D%25E4%25BF%25A1%25E3%2581%2599%25E3%2582%258B%2520by%2520AWS%2520CDK%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hr20k_%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdjNDIyY2IzNTMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hr20k_</dc:creator></item><item><title><![CDATA[TypeScript で Web 開発をする際の候補メモ]]></title><description><![CDATA[更新ログ
+
+2025/01/04 Git Hooks ツールの Lefthook を追記
+2025/01/05 フロントエンドの状態管理に XState を追記
+
+各リンクテキストを対象名がわかりやすい形式に変更
+
+
+
+
+
+ 概要
+以前のプロジェクトで使っていたり、進行中に差し替えまでは出来ないけど次使うならこれを使おうと思っていたライブラリやツールなどが、いざ新しくプロジェクトを作ろうと初期構築を始めたら色々と失念している事ってよくありませんか？
+最近実際それがあり、個別のページにわかれて技術メモはとってあったりするのですが探しながらは手間なのとブクマしただけのものもあるので、インデッ...]]></description><link>https://zenn.dev/akineko/articles/f611a806947c96</link><guid isPermaLink="true">https://zenn.dev/akineko/articles/f611a806947c96</guid><pubDate>Fri, 03 Jan 2025 02:29:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qMA5PFr4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%2520%25E3%2581%25A7%2520Web%2520%25E9%2596%258B%25E7%2599%25BA%25E3%2582%2592%25E3%2581%2599%25E3%2582%258B%25E9%259A%259B%25E3%2581%25AE%25E5%2580%2599%25E8%25A3%259C%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:akineko%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y3MWFkNDUwODMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>akineko</dc:creator></item><item><title><![CDATA[React19×typescriptの環境構築（メモ）]]></title><description><![CDATA[React19にアップデートされてから、いつものコマンドを打ってプロジェクトを立ち上げると以下のようなエラーが出るようになりました。
+いつものコマンド
+npx create-react-app my-react-app --template typescript
+エラーの内容
+npm error code ERESOLVE
+npm error ERESOLVE unable to resolve dependency tree
+npm error
+npm error While resolving: my-react-app@0.1.0
+npm error Found: react@19...]]></description><link>https://zenn.dev/suichandayoooo/articles/47894c3af884b3</link><guid isPermaLink="true">https://zenn.dev/suichandayoooo/articles/47894c3af884b3</guid><pubDate>Thu, 02 Jan 2025 14:31:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--PeNPfZTD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React19%25C3%2597typescript%25E3%2581%25AE%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%25EF%25BC%2588%25E3%2583%25A1%25E3%2583%25A2%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:syuwa%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NhMjNiYTQ5NTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>syuwa</dc:creator></item><item><title><![CDATA[CloudflareでWebアプリ開発[3/3] Cloudflare Workers AIを使用して、文章生成AIアプリを作成する]]></title><description><![CDATA[
+ はじめに
+今回は、Cloudflare Workers AIを使用して、文章生成AIのWebアプリを作成したいと思います。
+!
+Cloudflare Workers AIの文章生成は1万 トークン / 日の制限があります。
+詳しくはPricing · Cloudflare Workers AI docsを確認してください。
+
+
+ この記事はこんな人におすすめ！
+
+React（Vite）でWebサイトを作成したい人
+Cloudflare PagesでWebサイトを公開したい人
+Cloudflare Workers AIを使用して、文章生成AIのWebアプリを作成したい人
+
+
+ 前の記事...]]></description><link>https://zenn.dev/kinakokyoryu/articles/21176e575a6ad7</link><guid isPermaLink="true">https://zenn.dev/kinakokyoryu/articles/21176e575a6ad7</guid><pubDate>Thu, 02 Jan 2025 09:01:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--CIRbnK4T--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Cloudflare%25E3%2581%25A7Web%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E9%2596%258B%25E7%2599%25BA%255B3%252F3%255D%2520Cloudflare%2520Workers%2520AI%25E3%2582%2592%25E4%25BD%25BF%25E7%2594%25A8%25E3%2581%2597%25E3%2581%25A6%25E3%2580%2581%25E6%2596%2587%25E7%25AB%25A0%25E7%2594%259F%25E6%2588%2590A...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258D%25E3%2581%25AA%25E3%2581%2593%25E6%2581%2590%25E7%25AB%259C%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSXBVSDh2UWZMQ0hYNlFxcHdQRWxFQlNMZlZnNGU4UDlvUDFvZVJOWHZNTmhPV05RPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>きなこ恐竜</dc:creator></item></channel></rss>
