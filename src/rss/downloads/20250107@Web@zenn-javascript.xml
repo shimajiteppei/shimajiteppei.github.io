@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「JavaScript」のフィード]]></title><description><![CDATA[Zennのトピック「JavaScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/javascript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/64acd76870.png</url><title>Zennの「JavaScript」のフィード</title><link>https://zenn.dev/topics/javascript</link></image><generator>zenn.dev</generator><lastBuildDate>Tue, 07 Jan 2025 12:04:19 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/javascript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Chromium系ブラウザで使える拡張機能の作り方]]></title><description><![CDATA[
+ 執筆日
+2025/01/07
+
+ 概要
+年末年始に遊んでみて面白かったのでご紹介。(今更って言われるとつらい)
+今回はブラウザでテキストを選択してショートカットキーを押すとWeb版ChatGPTが開いて質問する、という拡張機能を作ってみます。
+
+ 環境
+自分が普段Microsoft Edgeを使っているため、紹介するコードはEdgeで動作テストしています。（Chrominum系では同じjavascriptが使えるはずなのでChrome等でも動作すると思います）
+
+ 前提
+
+edgeブラウザの拡張機能で開発者モードを有効化（後述）
+ブラウザでWeb版のChatGPTにログイン
+
+
+ ス...]]></description><link>https://zenn.dev/headwaters/articles/acd471d92157e9</link><guid isPermaLink="true">https://zenn.dev/headwaters/articles/acd471d92157e9</guid><pubDate>Tue, 07 Jan 2025 10:12:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6R5BAZr0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Chromium%25E7%25B3%25BB%25E3%2583%2596%25E3%2583%25A9%25E3%2582%25A6%25E3%2582%25B6%25E3%2581%25A7%25E4%25BD%25BF%25E3%2581%2588%25E3%2582%258B%25E6%258B%25A1%25E5%25BC%25B5%25E6%25A9%259F%25E8%2583%25BD%25E3%2581%25AE%25E4%25BD%259C%25E3%2582%258A%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:kodani%2520takushi%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZjNGExY2UxMDYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2598%25E3%2583%2583%25E3%2583%2589%25E3%2582%25A6%25E3%2582%25A9%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%25BC%25E3%2582%25B9%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZmNzIzMThiZjcuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kodani takushi</dc:creator></item><item><title><![CDATA[Swiperの基本知識]]></title><description><![CDATA[
+ 前書き
+Swiperを実装する際に知っておくべき基本知識を整理しました。
+これらを理解しておけば、Swiperの実装がスムーズになると思います。
+
+ 1️⃣ Swiperの基本構造
+Swiperを使うには、以下の基本的な構造を知る必要があります：
+
+ HTMLの基本構造
+&lt;div class="swiper"&gt;
+  &lt;div class="swiper-wrapper"&gt;
+    &lt;div class="swiper-slide"&gt;スライド1&lt;/div&gt;
+    &lt;div class="swiper-slide"&gt;スライド2...]]></description><link>https://zenn.dev/kimascript/articles/658d31f1cea0e0</link><guid isPermaLink="true">https://zenn.dev/kimascript/articles/658d31f1cea0e0</guid><pubDate>Tue, 07 Jan 2025 01:21:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--TJvmKzt8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Swiper%25E3%2581%25AE%25E5%259F%25BA%25E6%259C%25AC%25E7%259F%25A5%25E8%25AD%2598%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ2N2UwMmQyNDEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>...</dc:creator></item><item><title><![CDATA[「State of JavaScript 2024」で各分野ごとのトップに輝いた技術やツールをまとめてみた]]></title><description><![CDATA[
+ 「State of JavaScript 2024」で各分野ごとのトップに輝いた技術やツールをまとめてみた
+JavaScriptエコシステムの動向を毎年調査している「State of JavaScript」。2024年版では、各分野で開発者に最も支持された技術やツールが発表されました。本記事では、それらを具体例や使いどころを交えてご紹介します。
+
+
+ 構文機能: Null合体演算子 (??)
+
+
+ 特徴
+
+デフォルト値を簡潔に設定できる構文です。null または undefined の場合にのみ右辺の値を返すため、意図しない挙動を避けられます。
+例:
+const value = nu...]]></description><link>https://zenn.dev/japan/articles/af8c38d6709c6e</link><guid isPermaLink="true">https://zenn.dev/japan/articles/af8c38d6709c6e</guid><pubDate>Tue, 07 Jan 2025 00:18:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--s-sqbEEv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%258CState%2520of%2520JavaScript%25202024%25E3%2580%258D%25E3%2581%25A7%25E5%2590%2584%25E5%2588%2586%25E9%2587%258E%25E3%2581%2594%25E3%2581%25A8%25E3%2581%25AE%25E3%2583%2588%25E3%2583%2583%25E3%2583%2597%25E3%2581%25AB%25E8%25BC%259D%25E3%2581%2584%25E3%2581%259F%25E6%258A%2580%25E8%25A1%2593%25E3%2582%2584%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%25E3%2582%2592%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:SOFTBASE%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBmODJiNmYwZGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>SOFTBASE</dc:creator></item><item><title><![CDATA[なぜYouTubeでは動画を全画面表示しながらスクロールが可能なのか？]]></title><description><![CDATA[こちらは JavaScript Advent Calendar 2024の 25 日目の記事です。
+https://qiita.com/advent-calendar/2024/javascript
+
+ はじめに
+YouTubeは全画面表示中でもスクロールできて便利ですね[1]。
+
+動画を全画面表示中でもスクロールできる
+しかしFullscreen APIを用いて動画を全画面にした場合、通常はスクロール不可能なはずです。
+YouTube ではどのようにスクロール可能な全画面を実現しているのでしょうか？
+本記事では、その実装方法を解説します（そもそもFullscreen APIとは）。
+
+...]]></description><link>https://zenn.dev/popopon/articles/scrollable-fullscreen-video</link><guid isPermaLink="true">https://zenn.dev/popopon/articles/scrollable-fullscreen-video</guid><pubDate>Mon, 06 Jan 2025 23:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--e3_ucncs--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%25AA%25E3%2581%259CYouTube%25E3%2581%25A7%25E3%2581%25AF%25E5%258B%2595%25E7%2594%25BB%25E3%2582%2592%25E5%2585%25A8%25E7%2594%25BB%25E9%259D%25A2%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2597%25E3%2581%25AA%25E3%2581%258C%25E3%2582%2589%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%258C%25E5%258F%25AF%25E8%2583%25BD%25E3%2581%25AA%25E3%2581%25AE%25E3%2581%258B%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2597%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzgwYzhlNDRjMDMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>しん</dc:creator></item><item><title><![CDATA[Hono.js: 最速を目指すNode.jsフレームワーク]]></title><description><![CDATA[
+
+ Why Learn Hono
+
+既に市場にはNode.js用の多くのバックエンドライブラリやフレームワークが存在しています。以前、私はいくつかの小規模なプロジェクトでNest.jsを使ったことがあります。それは機能が充実しており、プロジェクトを迅速に実装できます。しかし、私の小規模プロジェクトにとって、その多くの機能は本当に必要以上であり、高度なカプセル化がされており、コードを書く際の自由度が少ないです。
+偶然にも、私はオンラインでHonoに出会いました。そのドキュメントを読んでみると：
+
+
+超高速 🚀 - ルータのRegExpRouterは本当に速いです。線形ループを使用していま...]]></description><link>https://zenn.dev/leapcell/articles/1ebf8086a1c51e</link><guid isPermaLink="true">https://zenn.dev/leapcell/articles/1ebf8086a1c51e</guid><pubDate>Mon, 06 Jan 2025 14:27:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--C_KqjTZ8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Hono.js%253A%2520%25E6%259C%2580%25E9%2580%259F%25E3%2582%2592%25E7%259B%25AE%25E6%258C%2587%25E3%2581%2599Node.js%25E3%2583%2595%25E3%2583%25AC%25E3%2583%25BC%25E3%2583%25A0%25E3%2583%25AF%25E3%2583%25BC%25E3%2582%25AF%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Leapcell%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y0N2E0MGQ3NGEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Leapcell</dc:creator></item><item><title><![CDATA[Recoilリポジトリアーカイブのニュースを受けて、Jotaiの過去記事をまとめてみた]]></title><description><![CDATA[昨日、たまたまRecoilのリポジトリが元日にアーカイブされていたのを知って、ツイートしたらすごい反響になってました。
+https://x.com/dai_shi/status/1875910305802514649
+せっかくなので、私が過去に書いたJotai関連のZenn記事をリストアップしてみようと思います。新しい順に載せますので、もし時系列を追いたい場合は下の方から見てください。あまり内容のある記事を書いていませんが、もしこれがきっかけで何か参考になれば幸いです。
+https://zenn.dev/dai_shi/articles/f770b771b75f73
+https://ze...]]></description><link>https://zenn.dev/dai_shi/articles/14e0451a0fc149</link><guid isPermaLink="true">https://zenn.dev/dai_shi/articles/14e0451a0fc149</guid><pubDate>Mon, 06 Jan 2025 14:12:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--SoZvHBm3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Recoil%25E3%2583%25AA%25E3%2583%259D%25E3%2582%25B8%25E3%2583%2588%25E3%2583%25AA%25E3%2582%25A2%25E3%2583%25BC%25E3%2582%25AB%25E3%2582%25A4%25E3%2583%2596%25E3%2581%25AE%25E3%2583%258B%25E3%2583%25A5%25E3%2583%25BC%25E3%2582%25B9%25E3%2582%2592%25E5%258F%2597%25E3%2581%2591%25E3%2581%25A6%25E3%2580%2581Jotai%25E3%2581%25AE%25E9%2581%258E%25E5%258E%25BB%25E8%25A8%2598%25E4%25BA%258B%25E3%2582%2592%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:daishi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzcwZGNhM2E2Y2IuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>daishi</dc:creator></item><item><title><![CDATA[<label>で<button>を囲んでいるときにclickイベントが2回発火する問題の原因と対策]]></title><description><![CDATA[皆さんこんにちは。今回は、最近筆者が遭遇した、&lt;label&gt;で&lt;button&gt;を囲んでいるときにclickイベントが2回発火することがある問題について解説します。
+さっそくですが、こちらのCodePenをご覧ください。
+
+ここでは、0と書かれたボタンが表示されています。このボタンは1回クリックすると数字が1増えるように実装されています。
+しかし、ボタンに表示されている数字をクリックすると、数字が2増えてしまいます。これは、clickイベントが2回発火しているためです。それ以外の部分（ボタンの端や、ラベル）をクリックした場合は数字が1増えます。
+実装のHTMLとJa...]]></description><link>https://zenn.dev/uhyo/articles/label-button-onclick-twice</link><guid isPermaLink="true">https://zenn.dev/uhyo/articles/label-button-onclick-twice</guid><pubDate>Mon, 06 Jan 2025 13:57:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--TImfEdWt--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%253Clabel%253E%25E3%2581%25A7%253Cbutton%253E%25E3%2582%2592%25E5%259B%25B2%25E3%2582%2593%25E3%2581%25A7%25E3%2581%2584%25E3%2582%258B%25E3%2581%25A8%25E3%2581%258D%25E3%2581%25ABclick%25E3%2582%25A4%25E3%2583%2599%25E3%2583%25B3%25E3%2583%2588%25E3%2581%258C2%25E5%259B%259E%25E7%2599%25BA%25E7%2581%25AB%25E3%2581%2599%25E3%2582%258B%25E5%2595%258F%25E9%25A1%258C%25E3%2581%25AE%25E5%258E%259F%25E5%259B%25A0%25E3%2581%25A8%25E5%25AF%25BE%25E7%25AD%2596%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:uhyo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVjYjFlMDJlNGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>uhyo</dc:creator></item><item><title><![CDATA[Rust を WebAssembly にコンパイルして JavaScript から呼び出す方法のまとめ]]></title><description><![CDATA[以前の記事にも書いたように、Rust コードを JavaScript でコンパイルするのは wasm-pack を使うと簡単にできます。しかし、wasm-pack が使えない場合はいくつか面倒な点があったり、wasm-pack を使う場合でも若干引っかかる点があったりします。
+この記事では、JavaScript 側のビルドツールとしては Vite を使う前提で説明します。
+また、ツールやライブラリのバージョンは以下を前提とします。
+
+rustc 1.83.0
+emcc 3.1.74
+vite 5.4.11
+vite-plugin-top-level-await 1.4.4
+
+
+ wasm...]]></description><link>https://zenn.dev/semiexp/articles/96e1b65d9a38aa</link><guid isPermaLink="true">https://zenn.dev/semiexp/articles/96e1b65d9a38aa</guid><pubDate>Mon, 06 Jan 2025 10:22:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--mIvlZi7b--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%2520%25E3%2582%2592%2520WebAssembly%2520%25E3%2581%25AB%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2591%25E3%2582%25A4%25E3%2583%25AB%25E3%2581%2597%25E3%2581%25A6%2520JavaScript%2520%25E3%2581%258B%25E3%2582%2589%25E5%2591%25BC%25E3%2581%25B3%25E5%2587%25BA%25E3%2581%2599%25E6%2596%25B9%25E6%25B3%2595%25E3%2581%25AE%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:semiexp%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk0M2JkNjUyOTUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>semiexp</dc:creator></item><item><title><![CDATA[フロントエンドからファイルをダウンロードさせるやり方について]]></title><description><![CDATA[いまどきのWebアプリにおいては、ファイルのダウンロード機能が必要な場面が多々あります。例えば、バックエンドが生成したCSVデータをファイルとしてダウンロードさせる「CSVダウンロード」機能などです。
+!
+この記事は筆者が趣味で書いたものです。筆者の業務とは一切関係ありません。関係ありませんよ。
+
+今回はAPI[1]から得られたデータをファイルとしてダウンロードさせたい場合のフロントエンドの実装方法について考察します。
+
+ 要件
+今回考える要件は、前述のとおり、APIから得られたデータをファイルとしてダウンロードさせることです。具体的には、以下のような要件を考えます。
+
+APIをGETリ...]]></description><link>https://zenn.dev/uhyo/articles/file-download-from-web-api</link><guid isPermaLink="true">https://zenn.dev/uhyo/articles/file-download-from-web-api</guid><pubDate>Mon, 06 Jan 2025 10:12:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--UmWCjb4B--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2595%25E3%2583%25AD%25E3%2583%25B3%25E3%2583%2588%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2589%25E3%2581%258B%25E3%2582%2589%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2592%25E3%2583%2580%25E3%2582%25A6%25E3%2583%25B3%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2589%25E3%2581%2595%25E3%2581%259B%25E3%2582%258B%25E3%2582%2584%25E3%2582%258A%25E6%2596%25B9%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:uhyo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVjYjFlMDJlNGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>uhyo</dc:creator></item><item><title><![CDATA[【Servicenow】スクリプトでなりすまし/代理操作を行う方法]]></title><description><![CDATA[
+ はじめに
+GlideRecordSecureやCanReadを手軽に確認できる方法を模索していた際に、スクリプトでできないかと模索していました。模索した結果や試行錯誤の結果を書いていきます。
+
+ スクリプト
+代理操作するだけであれば以下のスクリプトで実行できます。
+var userid = 'user_sys_id';
+var og = gs.getSession().impersonate(userid); //なりすまし開始
+gs.getSession().impersonate(og); //なりすまし終了
+
+ 注意点
+なりすましが終了する前にスクリプトエラーが発生した場合、セ...]]></description><link>https://zenn.dev/kymk_zenn/articles/b73efd0b05f036</link><guid isPermaLink="true">https://zenn.dev/kymk_zenn/articles/b73efd0b05f036</guid><pubDate>Mon, 06 Jan 2025 03:29:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GWjRWB_---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Servicenow%25E3%2580%2591%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2583%2588%25E3%2581%25A7%25E3%2581%25AA%25E3%2582%258A%25E3%2581%2599%25E3%2581%25BE%25E3%2581%2597%252F%25E4%25BB%25A3%25E7%2590%2586%25E6%2593%258D%25E4%25BD%259C%25E3%2582%2592%25E8%25A1%258C%25E3%2581%2586%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kymk%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJlNzg5Y2E1YjguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kymk</dc:creator></item><item><title><![CDATA[【実践ガイド】最新スタックで作るサーバーレスAPI環境構築 - 10分で完了！]]></title><description><![CDATA[
+ はじめに
+今日のWeb開発の世界では、堅牢でスケーラブルなバックエンドAPIサービスを素早くデプロイする能力が、これまで以上に重要になっています。このガイドでは、最新のテックスタック（Cloudflare Pages、D1データベース、Next.js、Drizzle ORM）を使用して、パワフルなバックエンドAPIサービスを構築するプロセスを紹介します。
+経験豊富な開発者でワークフローを効率化したい人も、モダンなWeb開発に挑戦したい初心者も、このチュートリアルを通じて、数分で実用的なバックエンドAPIサービスを作成する方法を学べます。
+この記事のソースコードは全て僕のGitHubで...]]></description><link>https://zenn.dev/nakamurakaito/articles/5e84a38eef16a7</link><guid isPermaLink="true">https://zenn.dev/nakamurakaito/articles/5e84a38eef16a7</guid><pubDate>Mon, 06 Jan 2025 01:50:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Ui_8qoZc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%25AE%259F%25E8%25B7%25B5%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%25E3%2580%2591%25E6%259C%2580%25E6%2596%25B0%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%2583%25E3%2582%25AF%25E3%2581%25A7%25E4%25BD%259C%25E3%2582%258B%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2583%25AC%25E3%2582%25B9API%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%2520-%252010%25E5%2588%2586%25E3%2581%25A7%25E5%25AE%258C%25E4%25BA%2586%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nakamura-kaito%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSktEajhnRFg4Rkdycl9odTJoMTRRVTJaZEpCUl93alFrX0ZwU3JKZnl5Vk43ZTBzTT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nakamura-kaito</dc:creator></item><item><title><![CDATA[東京テクニカルカレッジ IoT + AI 科 デバイス実習3 2024 年度教材]]></title><description><![CDATA[obniz スターターキットで学ぶ JavaScript]]></description><link>https://zenn.dev/tseigo/books/learning-javascript-with-obniz-2024</link><guid isPermaLink="true">https://zenn.dev/tseigo/books/learning-javascript-with-obniz-2024</guid><pubDate>Mon, 06 Jan 2025 01:33:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--sYB4-ytp--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci8yNWUxNmZkOTMyLnBuZw==%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>Seigo Tanaka</dc:creator></item><item><title><![CDATA[ドラッグでリサイズするUIを実装するときに設定したいCSS]]></title><description><![CDATA[例えばサイドバーの幅をドラッグで調整できるUIを実装した時、以下のような症状に遭遇したことはありませんか？
+
+ドラッグ中になんか引っかかる・スムースに反応しない
+マウスのボタンを離してもドラッグ中判定のままになってしまう
+ドラッグ中にテキストが選択されてしまう
+
+僕はあります。
+
+ 挙動が微妙な実装例
+以下は上記のような挙動を再現した実装例になっています。試しに、サイドバーの右端をドラッグして色々と操作をしてみてください。おそらく、リサイズがカクついたり、マウスのボタンを離した状態でもリサイズされてしまったり、テキストが選択されてしまう症状が出ると思います。
+（↓の埋込状態の操作だとうま...]]></description><link>https://zenn.dev/moozaru/articles/8df76e62e72c9e</link><guid isPermaLink="true">https://zenn.dev/moozaru/articles/8df76e62e72c9e</guid><pubDate>Sun, 05 Jan 2025 22:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8DLjqrvU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2589%25E3%2583%25A9%25E3%2583%2583%25E3%2582%25B0%25E3%2581%25A7%25E3%2583%25AA%25E3%2582%25B5%25E3%2582%25A4%25E3%2582%25BA%25E3%2581%2599%25E3%2582%258BUI%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2599%25E3%2582%258B%25E3%2581%25A8%25E3%2581%258D%25E3%2581%25AB%25E8%25A8%25AD%25E5%25AE%259A%25E3%2581%2597%25E3%2581%259F%25E3%2581%2584CSS%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:zaru%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FiNDkwNTdmZTMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%25A0%25E3%2583%25BC%25E3%2582%25B6%25E3%2583%25AB%25E3%2581%25A1%25E3%2582%2583%25E3%2582%2593%25E3%2581%25AD%25E3%2582%258B%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2hTeWVOcHN2TEdOdTdPeUFlU1JEbDhUNkNOX1p3NHBXSHpIRHN2NlBFPXMyNTAtYw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>zaru</dc:creator></item><item><title><![CDATA[モジュラモノリスの依存関係をESLintの設定で強制する]]></title><description><![CDATA[
+ 概要
+モジュラモノリスの依存関係をESLintの設定で強制する方法を示します。
+
+ 今回の構成
+.
+├── README.md
+├── bun.lockb
+├── eslint.config.js
+├── node_modules
+├── package-lock.json
+├── package.json
+├── src
+│   ├── index.ts
+│   ├── module1
+│   │   ├── dir
+│   │   │   └── var.ts
+│   │   ├── index.ts
+│   │   └── var.ts
+│   ├── module2
+│   ...]]></description><link>https://zenn.dev/hitotsu_blog/articles/ff10a561b02694</link><guid isPermaLink="true">https://zenn.dev/hitotsu_blog/articles/ff10a561b02694</guid><pubDate>Sun, 05 Jan 2025 16:24:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--m6pNFdFi--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%25A2%25E3%2582%25B8%25E3%2583%25A5%25E3%2583%25A9%25E3%2583%25A2%25E3%2583%258E%25E3%2583%25AA%25E3%2582%25B9%25E3%2581%25AE%25E4%25BE%259D%25E5%25AD%2598%25E9%2596%25A2%25E4%25BF%2582%25E3%2582%2592ESLint%25E3%2581%25AE%25E8%25A8%25AD%25E5%25AE%259A%25E3%2581%25A7%25E5%25BC%25B7%25E5%2588%25B6%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%2584%25E3%2581%2595%25E3%2581%258A%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY0NjczMDg4NjEuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:HITOTSU%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%2520%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZkYmFjYTIxMzguanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>いさお</dc:creator></item><item><title><![CDATA[【v4からv5に切り替わる大変な時に勉強してるあなたへ】Svelteの基本的な書き方]]></title><description><![CDATA[
+ はじめに
+皆さん、こんにちは。
+今回はSvelteの基本的な使い方をご紹介します。最近Svelteはバージョンが上がり新しくルーンという表現が追加されました。この書き方の違いについても掲載していきます。
+https://svelte.dev/docs/svelte/v5-migration-guide
+
+ 雛形の作成とエディタの設定
+
+ 概要
+
+
+npm create vite@latestで雛形を作成
+VSCodeに「Svelte for VS Code」を追加
+
+npm run devでアプリの起動
+WebブラウザでSvelteを気軽に試す（Playground）
+
+Svelte...]]></description><link>https://zenn.dev/peter_norio/articles/65409d3a6469f0</link><guid isPermaLink="true">https://zenn.dev/peter_norio/articles/65409d3a6469f0</guid><pubDate>Sun, 05 Jan 2025 08:54:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--TRhiJSIY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590v4%25E3%2581%258B%25E3%2582%2589v5%25E3%2581%25AB%25E5%2588%2587%25E3%2582%258A%25E6%259B%25BF%25E3%2582%258F%25E3%2582%258B%25E5%25A4%25A7%25E5%25A4%2589%25E3%2581%25AA%25E6%2599%2582%25E3%2581%25AB%25E5%258B%2589%25E5%25BC%25B7%25E3%2581%2597%25E3%2581%25A6%25E3%2582%258B%25E3%2581%2582%25E3%2581%25AA%25E3%2581%259F%25E3%2581%25B8%25E3%2580%2591Svelte%25E3%2581%25AE%25E5%259F%25BA%25E6%259C%25AC%25E7%259A%2584%25E3%2581%25AA%25E6%259B%25B8%25E3%2581%258D%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%2594%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%25BC%25E3%2581%25AE%25E3%2582%258A%25E3%2581%258A%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSTcwSTlWTjhXNHl3eWRJY1JlYzFWaUJtc3B6S3lfX3JzeTUyYmJhRFh0c29FVzJDZz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ピーターのりお</dc:creator></item><item><title><![CDATA[NestJSを使ったRBAC権限システムの設計：手順を追ったガイド]]></title><description><![CDATA[
+
+ 前書き
+バックエンド管理システムでは、アクセス制御や個別のユーザーインターフェイスが必須です。例えば、スーパ管理者はすべてのページを閲覧でき、通常ユーザーは A および B ページにアクセスでき、VIP ユーザーは A、B、C、D ページを閲覧できます。これらの機能の背後には、以下の 3 つの重要な概念が設計されています。
+
+
+ユーザー: 基本的な単位、例: Alice、Bob、Charlie。
+
+ロール: ユーザーは 1 つ以上のロールを持つことができます。例えば、Alice は通常ユーザーと VIP の両方のロールを持つ場合があります。
+
+権限: ロールには複数の権限が関連付け...]]></description><link>https://zenn.dev/leapcell/articles/367498a7f2d4e7</link><guid isPermaLink="true">https://zenn.dev/leapcell/articles/367498a7f2d4e7</guid><pubDate>Sun, 05 Jan 2025 06:57:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--aJtxRA8R--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:NestJS%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%259FRBAC%25E6%25A8%25A9%25E9%2599%2590%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%25E3%2581%25AE%25E8%25A8%25AD%25E8%25A8%2588%25EF%25BC%259A%25E6%2589%258B%25E9%25A0%2586%25E3%2582%2592%25E8%25BF%25BD%25E3%2581%25A3%25E3%2581%259F%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Leapcell%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y0N2E0MGQ3NGEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Leapcell</dc:creator></item><item><title><![CDATA[reduce の使用例を振り返る【JavaScript】]]></title><description><![CDATA[明けましておめでとうございます！
+JavaScriptの基礎力を上げようと、年末年始休暇を利用してプログラミングの問題を解いていました。
+その中で、reduceメソッドの使い方を覚えたのですが、それ以降の問題はreduceが使いたくなってしまい、できるだけreduceを使って問題を解いていました。新しい技を覚えたら使いたくなりますよね笑
+しかし落ち着いて考えてみると、そんなにあちこちでreduceを使うのが本当により良い選択だったのかは定かではありません。
+そこで、今回は実際に書いたコードを3つ振り返り、本当にreduceを使うべきだったのか、他の選択肢はどんなものだったのかといったこと...]]></description><link>https://zenn.dev/miki_do/articles/b98d31712b32f6</link><guid isPermaLink="true">https://zenn.dev/miki_do/articles/b98d31712b32f6</guid><pubDate>Sun, 05 Jan 2025 05:41:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--TyiQ2viF--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:reduce%2520%25E3%2581%25AE%25E4%25BD%25BF%25E7%2594%25A8%25E4%25BE%258B%25E3%2582%2592%25E6%258C%25AF%25E3%2582%258A%25E8%25BF%2594%25E3%2582%258B%25E3%2580%2590JavaScript%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%259F%25E3%2582%25AD%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VhOTllOTFjNzAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ミキ</dc:creator></item><item><title><![CDATA[【GSAP】GSAP Practice【#１３ GSAP ScrollTrigger１】]]></title><description><![CDATA[
+ 【#１３ GSAP ScrollTrigger１】
+YouTube: https://youtu.be/XkvGJGJDlCU
+https://youtu.be/XkvGJGJDlCU
+今回からScrollTriggerについて解説していきます。
+まずは、準備と初期設定から始めます。
+https://gsap.com/docs/v3/Plugins/ScrollTrigger/
+
+index.html
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8" /&g...]]></description><link>https://zenn.dev/web_life_ch/articles/09bb9ba3188aa9</link><guid isPermaLink="true">https://zenn.dev/web_life_ch/articles/09bb9ba3188aa9</guid><pubDate>Sun, 05 Jan 2025 04:52:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--TcTTv8hl--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590GSAP%25E3%2580%2591GSAP%2520Practice%25E3%2580%2590%2523%25EF%25BC%2591%25EF%25BC%2593%2520GSAP%2520ScrollTrigger%25EF%25BC%2591%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Web%2520Life%2520CH%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUl0YnZtbWNjTWFMM3dyd2x3VE5sVVZjTlhmZHEzZzF2QnJfMUJMSkJrN049czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Web Life CH</dc:creator></item><item><title><![CDATA[【テストフレームワーク】Jestとは【テスト自動化】]]></title><description><![CDATA[
+ Jestとは
+Facebookが開発したJavaScriptのテストフレームワーク
+特にReactアプリケーションのテストに適しており、簡単にセットアップできることから広く使用されている
+Jestは、ユニットテスト、統合テスト、エンドツーエンドテストなど、さまざまな種類のテストをサポートしている
+
+ メリット
+
+ 1. 簡単なセットアップ
+
+初期設定がシンプルで、新しいプロジェクトにも既存のプロジェクトにも簡単に導入可能
+
+
+ 2. 豊富な機能
+
+モック機能やスナップショットテストなど、テストを書くための豊富な機能が用意されている
+
+
+ 3. 高速な実行
+
+並列テストの実行やキャッシ...]]></description><link>https://zenn.dev/nineball/articles/fed3975c25e559</link><guid isPermaLink="true">https://zenn.dev/nineball/articles/fed3975c25e559</guid><pubDate>Sun, 05 Jan 2025 04:27:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--QuumYFaM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E3%2583%2595%25E3%2583%25AC%25E3%2583%25BC%25E3%2583%25A0%25E3%2583%25AF%25E3%2583%25BC%25E3%2582%25AF%25E3%2580%2591Jest%25E3%2581%25A8%25E3%2581%25AF%25E3%2580%2590%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E8%2587%25AA%25E5%258B%2595%25E5%258C%2596%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nineball%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA3YWM1ZTllYzAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nineball</dc:creator></item><item><title><![CDATA[[js] imgのonLoadをPromiseで検知する方法 (customElements)]]></title><description><![CDATA[例えばimgタグで404が返ってきた画像を差し替える時やなんかにとりあえず使える。
+customElementsを使ってPromiseをプロパティに設定しておくことで、ほぼ確実にonLoadを追加してPromiseを別スコープのJavaScriptから確認できる。
+window.customElements.define("async-img", class extends HTMLImageElement {
+  constructor() {
+    super();
+    this.whileLoad = new Promise((resolve, reject) =&gt; {...]]></description><link>https://zenn.dev/xofeulb/articles/0cb126ee8a6544</link><guid isPermaLink="true">https://zenn.dev/xofeulb/articles/0cb126ee8a6544</guid><pubDate>Sat, 04 Jan 2025 22:53:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Pb53QnM7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255Bjs%255D%2520img%25E3%2581%25AEonLoad%25E3%2582%2592Promise%25E3%2581%25A7%25E6%25A4%259C%25E7%259F%25A5%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2520%2528customElements%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%255E.%252C.%255E%2520BlueFox%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VjODY1MTRmYTUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>^.,.^ BlueFox</dc:creator></item></channel></rss>
