@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「TypeScript」のフィード]]></title><description><![CDATA[Zennのトピック「TypeScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/typescript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/f13e758fdb.png</url><title>Zennの「TypeScript」のフィード</title><link>https://zenn.dev/topics/typescript</link></image><generator>zenn.dev</generator><lastBuildDate>Wed, 08 Jan 2025 08:28:49 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/typescript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[あけおめ計算〜 (原始根をただ計算する)]]></title><description><![CDATA[
+ 導入
+&gt; 2 ** 4 % 5
+1
+&gt; 3 ** 16 % 17
+1
+&gt; 5 ** 96 % 97
+1
+&gt; r ** (p - 1) % p
+1
+なんか 1 になります！
+
+ あけおめなので、抱負
+ん〜、
+
+おすすめされた本を読む
+技術同人誌書く
+
+とかですかね
+
+ 原始根
+いきなりですが、これは原始根です！
+一般には、p を素数とすると、適当に r を取れば
+\begin{aligned} r^1 &amp;\not\equiv 1 \quad (\mathrm{mod} \ p) \\ r^2 &amp;\not\equiv 1 \quad (\mathr...]]></description><link>https://zenn.dev/medicalforce/articles/281f058fb2f170</link><guid isPermaLink="true">https://zenn.dev/medicalforce/articles/281f058fb2f170</guid><pubDate>Wed, 08 Jan 2025 07:32:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qZowkaeY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%2582%25E3%2581%2591%25E3%2581%258A%25E3%2582%2581%25E8%25A8%2588%25E7%25AE%2597%25E3%2580%259C%2520%2528%25E5%258E%259F%25E5%25A7%258B%25E6%25A0%25B9%25E3%2582%2592%25E3%2581%259F%25E3%2581%25A0%25E8%25A8%2588%25E7%25AE%2597%25E3%2581%2599%25E3%2582%258B%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:rryyoo%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzkyZjY0YWIzNTQuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%25A1%25E3%2583%2587%25E3%2582%25A3%25E3%2582%25AB%25E3%2583%25AB%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25BC%25E3%2582%25B9%2520%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0ZU9jTDk5dzA1bXBDUFNQWnd3NjZ3Q01IQUpGMFNBbC1RcHpQeEM9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>rryyoo</dc:creator></item><item><title><![CDATA[『初めてのTypeScript』で初めて型に触れる]]></title><description><![CDATA[
+ これはなに
+ども、レバテック開発部のもりたです。
+みなさん年末年始をいかがお過ごしでしたでしょうか。もりたはこの連休を利用して『初めてのTypeScript』を読みました。今回はその感想です。
+https://www.oreilly.co.jp/books/9784814400362/
+いろいろな前提
+
+もりたのレベル感
+
+元々はPythonとかPHPなどの言語をよく書いており、JavaScriptも時々は書いていた
+TypeScript Deep Diveの輪読会に参加したことがある
+TypeScriptは仕事で読むのがメイン
+
+
+動機
+
+なんとなく書ける気もするが、初心者むけのT...]]></description><link>https://zenn.dev/levtech/articles/9086cb7808c92c</link><guid isPermaLink="true">https://zenn.dev/levtech/articles/9086cb7808c92c</guid><pubDate>Wed, 08 Jan 2025 07:02:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--H7zzBqUl--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%258E%25E5%2588%259D%25E3%2582%2581%25E3%2581%25A6%25E3%2581%25AETypeScript%25E3%2580%258F%25E3%2581%25A7%25E5%2588%259D%25E3%2582%2581%25E3%2581%25A6%25E5%259E%258B%25E3%2581%25AB%25E8%25A7%25A6%25E3%2582%258C%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2582%2582%25E3%2582%258A%25E3%2581%259F%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY1YzcxZDY5NDkuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%25AC%25E3%2583%2590%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E9%2596%258B%25E7%2599%25BA%25E9%2583%25A8%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSmduNmRjWi1heEt6c1JkLXQ4UmxGcmRJMi1VV0tnTUpiamZISmQ5T0hqdmI4PXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>もりた</dc:creator></item><item><title><![CDATA[Sharp.js: 最強のNode.js画像処理フレームワーク]]></title><description><![CDATA[
+
+ Node.js環境におけるSharpモジュールを用いた画像の効率的な処理方法
+この記事では、Node.js環境においてSharpモジュールを用いて画像を効率的に処理する方法を紹介します。実際のコード例を通じて、大きな画像ファイルをネットワーク送信に適したJPEG、PNG、WebP、AVIF形式に変換する方法を示します。同時に、libvipsライブラリの強力な機能を利用して、画像処理の効率を高める方法も紹介します。
+
+ 1. Sharpモジュールのはじめに
+
+ 1.1 Sharpモジュールの紹介
+視覚情報爆発の今日の時代において、画像処理技術は極めて重要になっています。Node.js...]]></description><link>https://zenn.dev/leapcell/articles/7270d133a71634</link><guid isPermaLink="true">https://zenn.dev/leapcell/articles/7270d133a71634</guid><pubDate>Wed, 08 Jan 2025 04:32:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qnoiD5IJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Sharp.js%253A%2520%25E6%259C%2580%25E5%25BC%25B7%25E3%2581%25AENode.js%25E7%2594%25BB%25E5%2583%258F%25E5%2587%25A6%25E7%2590%2586%25E3%2583%2595%25E3%2583%25AC%25E3%2583%25BC%25E3%2583%25A0%25E3%2583%25AF%25E3%2583%25BC%25E3%2582%25AF%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Leapcell%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y0N2E0MGQ3NGEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Leapcell</dc:creator></item><item><title><![CDATA["Vitestで遭遇したエラー『TypeError: window.matchMedia is not a function』の解決方法"]]></title><description><![CDATA[
+ エラー内容
+テスト実行時に以下のエラーが発生しました。
+TypeError: window.matchMedia is not a function
+上記エラーの原因はwindow.matchMediaがテスト環境で提供されていないためです。window.matchMediaはブラウザ環境で動作しますが、@testing-library/reactやvitestのようなテスト環境ではデフォルトでは定義されていません。
+
+ 解決方法
+以下のようにvitestのセットアップファイルでwindow.matchMediaをモックすることで問題を解決できます。
+
+setup.ts
+import...]]></description><link>https://zenn.dev/rize/articles/222160837e18b0</link><guid isPermaLink="true">https://zenn.dev/rize/articles/222160837e18b0</guid><pubDate>Wed, 08 Jan 2025 02:25:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ebfyj_u3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%2522Vitest%25E3%2581%25A7%25E9%2581%25AD%25E9%2581%2587%25E3%2581%2597%25E3%2581%259F%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E3%2580%258ETypeError%253A%2520window.matchMedia%2520is%2520not%2520a%2520fun...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:rize%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJhMDQ5MzFkZDYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>rize</dc:creator></item><item><title><![CDATA[Reactで、Featuresにスタイルを持たないようにしてみた]]></title><description><![CDATA[
+ 前提
+
+bulletproof-react を基準にしていること
+tanstack-router を使用していること
+react-hook-form と zod を使用していること
+shadcn(UI ライブラリ)を使用していること
+筆者自身に技術力を期待しないこと
+
+
+ モチベーション
+いつも悩んでいたのが、pages と features 両方でレイアウト（以下スタイル）を適応していた。features は、form タグの中身のレイアウトも適応させる形にしていた。
+2024 年 9 月あたりで、SOLID 原則について改めて触れる機会があり、
+ふと、「単一責任を考えるのであれば...]]></description><link>https://zenn.dev/nekomals/articles/b18f07095d5b86</link><guid isPermaLink="true">https://zenn.dev/nekomals/articles/b18f07095d5b86</guid><pubDate>Wed, 08 Jan 2025 02:05:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--AUBgIeq4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%25E3%2581%25A7%25E3%2580%2581Features%25E3%2581%25AB%25E3%2582%25B9%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2592%25E6%258C%2581%25E3%2581%259F%25E3%2581%25AA%25E3%2581%2584%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2586%25E3%2582%2593%25E3%2582%2584%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS2tLcEsxSENsbUlvUWRaWkI3VXVmeGJkb0tTLWIyQ1VSWDVqYWxSbE9LeDJFQ3JVT3Yzdz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>うんや</dc:creator></item><item><title><![CDATA[Node.jsのfetchでプロキシを利用する]]></title><description><![CDATA[Node.jsのv18からfetchが使えますが、このfetchは環境変数のHTTPS_PROXYやHTTP_PROXY、NO_PROXYなどに応じてプロキシを使ってくれるといったようなことはありません。
+fetchを使っている箇所を適宜プロキシを使う形に書き換えるのは面倒なのと、利用しているライブラリ内でfetchを使っていると変更するのが困難な場合も発生しそうです。(実際発生してこれを書いています)
+
+ Node.jsのfetchで環境変数に応じてプロキシを利用する方法
+一律設定する方法が無いか調べたところ、Node.jsのfetchの実装として利用されているundiciのEnvHt...]]></description><link>https://zenn.dev/onozaty/articles/node-fetch-proxy</link><guid isPermaLink="true">https://zenn.dev/onozaty/articles/node-fetch-proxy</guid><pubDate>Tue, 07 Jan 2025 15:08:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9WxfBHl6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Node.js%25E3%2581%25AEfetch%25E3%2581%25A7%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25AD%25E3%2582%25B7%25E3%2582%2592%25E5%2588%25A9%25E7%2594%25A8%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:onozaty%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA0NjRiMDVlZmYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>onozaty</dc:creator></item><item><title><![CDATA[名前的型付けと構造的部分型について]]></title><description><![CDATA[
+ 構造的部分型について
+TypeScriptは、構造的部分型の言語と言われます。
+参考: https://typescriptbook.jp/reference/values-types-variables/structural-subtyping#構造的部分型
+構造的部分型（structural typing） と呼ばれる型システムのことで、 名前的型付け（nominal typing） という型システムと2つの種類があります。
+
+ 何者なのか
+プログラミング言語の型システムは、「2つの型がいつ互換性があると見なされるか」というルールを定めています。
+
+ 名前的型付け（Nominal...]]></description><link>https://zenn.dev/nana/articles/bd208335dbb8e9</link><guid isPermaLink="true">https://zenn.dev/nana/articles/bd208335dbb8e9</guid><pubDate>Tue, 07 Jan 2025 14:56:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dHeOkfh7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2590%258D%25E5%2589%258D%25E7%259A%2584%25E5%259E%258B%25E4%25BB%2598%25E3%2581%2591%25E3%2581%25A8%25E6%25A7%258B%25E9%2580%25A0%25E7%259A%2584%25E9%2583%25A8%25E5%2588%2586%25E5%259E%258B%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Ugo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E3OGQxMTFjYmUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Ugo</dc:creator></item><item><title><![CDATA[【TypeScript】定数にはas constをつけることにした]]></title><description><![CDATA[こんばんはmayaです！
+みなさん、as constって知ってますか？巷では「定数アサーション」と呼ばれていて、定義した変数の末尾につけるとその値をreadonlyにした上でリテラル型にしてくれる機能です。
+今日の業務でコードを眺めていたら、定数（const IS_VALID = ...的な）に非常に曖昧な型付けがされているのを見つけて、より良い型定義を探る中で一つの答えに辿り着いたので、ご紹介します！
+
+ どういう状況だったか
+今回の記事でいう定数ってのは、単にconstキーワードで定義された変数のことではなく、「プログラムの中で値が変わらないもの」という意味での「定数」です。
+そして...]]></description><link>https://zenn.dev/maya_honey/articles/662d9e197dfe63</link><guid isPermaLink="true">https://zenn.dev/maya_honey/articles/662d9e197dfe63</guid><pubDate>Tue, 07 Jan 2025 14:34:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--IadK_RKd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590TypeScript%25E3%2580%2591%25E5%25AE%259A%25E6%2595%25B0%25E3%2581%25AB%25E3%2581%25AFas%2520const%25E3%2582%2592%25E3%2581%25A4%25E3%2581%2591%25E3%2582%258B%25E3%2581%2593%25E3%2581%25A8%25E3%2581%25AB%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:maya%2520honey%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q1YzYwZWM4NzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>maya honey</dc:creator></item><item><title><![CDATA[Spring BootとReactの連携を学ぶためにToDoアプリを作る]]></title><description><![CDATA[
+ はじめに
+普段はサーバーサイドをJavaで実装しフレームワークはSpring Bootを使用しているが、個人開発のためにReactを学習したため、フロントエンドとサーバーサイドでどのように連携させるのか知りたいと思い調べながら実装してみることにした。
+以下の記事を見つけたので、先日学習したてのDockerを使ってSpring Boot × React(TypeScript)で連携できる状態を目指して実装してみる。
+https://qiita.com/studio_meowtoon/items/7d4d0bf73e04e01be558
+今回はJavaやTypeScriptのコードを細か...]]></description><link>https://zenn.dev/yadonn/articles/0e1185989b248b</link><guid isPermaLink="true">https://zenn.dev/yadonn/articles/0e1185989b248b</guid><pubDate>Tue, 07 Jan 2025 13:18:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fE1BOKS2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Spring%2520Boot%25E3%2581%25A8React%25E3%2581%25AE%25E9%2580%25A3%25E6%2590%25BA%25E3%2582%2592%25E5%25AD%25A6%25E3%2581%25B6%25E3%2581%259F%25E3%2582%2581%25E3%2581%25ABToDo%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:YADON%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVkOTAyMjM0YTMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>YADON</dc:creator></item><item><title><![CDATA[Embla Carousel で左右が少し見切れたスライドを作る]]></title><description><![CDATA[React と TypeScript の構成でカルーセルスライダーに Embla Carousel をよく利用しており、基本的な使い方を以前ご紹介いたしました。
+https://zenn.dev/yall/articles/4c7ab236d60553
+GitHub でのコントリビュートも行うなど個人的にはすごく応援しております。
+https://github.com/davidjerleke/embla-carousel/pull/1096#event-15826032457
+shadcn/uiでも採用され、今後普及しそうなのですが表題のUIを実現する方法について言及がネット上に見当た...]]></description><link>https://zenn.dev/yall/articles/aae45a28cd8d37</link><guid isPermaLink="true">https://zenn.dev/yall/articles/aae45a28cd8d37</guid><pubDate>Tue, 07 Jan 2025 12:13:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--nI4yxkJz--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Embla%2520Carousel%2520%25E3%2581%25A7%25E5%25B7%25A6%25E5%258F%25B3%25E3%2581%258C%25E5%25B0%2591%25E3%2581%2597%25E8%25A6%258B%25E5%2588%2587%25E3%2582%258C%25E3%2581%259F%25E3%2582%25B9%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2589%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yasuhiro%2520Yamamoto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE2ZTM4Njc5YmIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yasuhiro Yamamoto</dc:creator></item><item><title><![CDATA[画像処理100本ノックに挑戦｜減色処理（006/100）]]></title><description><![CDATA[
+ これはなに？
+画像処理100本ノックを、TypeScriptとlibvipsで挑戦してみる記事の6本目です。
+
+ 前回
+https://zenn.dev/nyagato_00/articles/c5406005c08b12
+
+ 実装
+
+ お題
+
+ここでは画像の値を256^3から4^3、すなわちR,G,B in {32, 96, 160, 224}の各4値に減色せよ。 これは量子化操作である。 各値に関して、以下の様に定義する。
+
+val = {  32  (  0 &lt;= val &lt;  64)
+         96  ( 64 &lt;= val &lt; 128)
+  ...]]></description><link>https://zenn.dev/nyagato_00/articles/de360085b46e19</link><guid isPermaLink="true">https://zenn.dev/nyagato_00/articles/de360085b46e19</guid><pubDate>Tue, 07 Jan 2025 11:02:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ZKD3oPpy--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%2594%25BB%25E5%2583%258F%25E5%2587%25A6%25E7%2590%2586100%25E6%259C%25AC%25E3%2583%258E%25E3%2583%2583%25E3%2582%25AF%25E3%2581%25AB%25E6%258C%2591%25E6%2588%25A6%25EF%25BD%259C%25E6%25B8%259B%25E8%2589%25B2%25E5%2587%25A6%25E7%2590%2586%25EF%25BC%2588006%252F100%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nyagato_00%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUxtNXd1MTVKUVk3SjNOUG1kcGlMeWdfWUt3blZzaTRpWDRoYjU1c21UTTk3c1E9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nyagato_00</dc:creator></item><item><title><![CDATA[【TypeScript】テスト駆動開発（TDD）入門 第1回：TDDって何？なぜ必要なの？]]></title><description><![CDATA[
+ はじめに
+プログラミングをしていると、こんな経験はありませんか？
+
+「動いているはずなのに、別の機能を追加したら急に動かなくなった…」
+「コードを変更する度に、他の機能が壊れていないか不安で仕方ない」
+「バグを直したと思ったら、別の場所で新しい問題が発生した」
+「チームメンバーのコードを変更するのが怖い」
+「コードの品質を保ちたいけど、どうすればいいかわからない」
+
+このような問題を解決する強力な手法の一つが、テスト駆動開発（Test-Driven Development: TDD）です。
+
+ TDDって何？
+テスト駆動開発とは、「先にテストを書いてから、実装を行う」という開発手法で...]]></description><link>https://zenn.dev/nezumizuki/articles/fa821accc95050</link><guid isPermaLink="true">https://zenn.dev/nezumizuki/articles/fa821accc95050</guid><pubDate>Tue, 07 Jan 2025 09:37:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--oC1_qj73--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590TypeScript%25E3%2580%2591%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E9%25A7%2586%25E5%258B%2595%25E9%2596%258B%25E7%2599%25BA%25EF%25BC%2588TDD%25EF%25BC%2589%25E5%2585%25A5%25E9%2596%2580%2520%25E7%25AC%25AC1%25E5%259B%259E%25EF%25BC%259ATDD%25E3%2581%25A3%25E3%2581%25A6%25E4%25BD%2595%25EF%25BC%259F%25E3%2581%25AA%25E3%2581%259C%25E5%25BF%2585%25E8%25A6%2581%25E3%2581%25AA%25E3%2581%25AE%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:MI%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSXRYZE91dm9hdlRUclRZSVY2eW5ibDdfVHprdXhtb1JUcUlQRGpTaTRfTmZxUnlLdz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>MI</dc:creator></item><item><title><![CDATA[初めてWebアプリを作ってみました]]></title><description><![CDATA[アプリと呼んで良いのかツールというべきかわかりませんが、個人的に欲しかったものを個人で作ってみました。
+これ
+ぼくは家で作業するときにTime Timer というものを使うことがあるのですが、机には極力なにも置きたくないのと、職場や外出先でも使えるようにWeb版で作ってみました。
+こんな感じです↓
+
+技術はTypeScript の練習がてら作った面もありますが、デプロイまでできて楽しかったのでここにのこします。
+]]></description><link>https://zenn.dev/daraenglish/articles/1dec4e1631eaa9</link><guid isPermaLink="true">https://zenn.dev/daraenglish/articles/1dec4e1631eaa9</guid><pubDate>Tue, 07 Jan 2025 06:31:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--uSqJaOn0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2588%259D%25E3%2582%2581%25E3%2581%25A6Web%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:daraEnglish%25E4%25B8%25AD%25E3%2581%25AE%25E4%25BA%25BA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSmp5dmY3NnBoTUdiazNoOWpwc2ppdVhiYTVsblgyMHpkZnAwVkxUc0hXdlkzT2VPY009czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>daraEnglish中の人</dc:creator></item><item><title><![CDATA[【読書感想文】TypeScript と React/Next.js でつくる実践 Web アプリケーション]]></title><description><![CDATA[最近、書籍を読む機会も多くなってきたので好みのものについては読書感想文を書いていこうと思います。今回は年末年始に注力したかったフロントエンド開発の書籍として 「TypeScript と React/Next.js でつくる実践 Wen アプリケーション」 を読んでみたので、その感想文を書いていきます。
+2022 年に発売されたものなのですが、後述する React/Next.js を学ぶ上での書籍として比較サイトに多く出てくるので人気の書籍となっているようです。
+
+執筆時点での自身のフロントエンド開発の経歴としては、本業で 1 年半・副業で半年ほど TypeScript, React/Ne...]]></description><link>https://zenn.dev/t_hayashi/articles/faa1ec1944731f</link><guid isPermaLink="true">https://zenn.dev/t_hayashi/articles/faa1ec1944731f</guid><pubDate>Tue, 07 Jan 2025 03:07:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--DANdRuDp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E8%25AA%25AD%25E6%259B%25B8%25E6%2584%259F%25E6%2583%25B3%25E6%2596%2587%25E3%2580%2591TypeScript%2520%25E3%2581%25A8%2520React%252FNext.js%2520%25E3%2581%25A7%25E3%2581%25A4%25E3%2581%258F%25E3%2582%258B%25E5%25AE%259F%25E8%25B7%25B5%2520Web%2520%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Tomonori%2520Hayashi%2520%252F...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4WlphS3JZOGdPbHVBSWpsbU02eUg0VXI4eW5OSnBYSnV0RzBPM255QT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Tomonori Hayashi / @pHaya72</dc:creator></item><item><title><![CDATA[【1日1zenn - day15】クエリパラメータの付与から取り出しまで]]></title><description><![CDATA[直近、1日1zennサイズに収まるような何かがあまりなかったので、
+一旦小ネタをまとめようかと思います。
+とか思ったけど書いてみたら一定のサイズになったからヨシ！
+
+ クエリパラメータの作成から取り出しまで
+自分はFEをReactとTypeScript、BEをKotlinとSpring Bootで開発してるので、それメインになります。
+
+ 前提メモ
+https://apidog.com/jp/blog/introduction-to-api-parameters/
+GETリクエストではクエリパラメータで検索することがメインで、POSTやPUTだとボディパラメータが利用されがち。DELET...]]></description><link>https://zenn.dev/shunsuke108m/articles/f2f97e98a90b2c</link><guid isPermaLink="true">https://zenn.dev/shunsuke108m/articles/f2f97e98a90b2c</guid><pubDate>Mon, 06 Jan 2025 14:50:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--emvtGRdx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%25901%25E6%2597%25A51zenn%2520-%2520day15%25E3%2580%2591%25E3%2582%25AF%25E3%2582%25A8%25E3%2583%25AA%25E3%2583%2591%25E3%2583%25A9%25E3%2583%25A1%25E3%2583%25BC%25E3%2582%25BF%25E3%2581%25AE%25E4%25BB%2598%25E4%25B8%258E%25E3%2581%258B%25E3%2582%2589%25E5%258F%2596%25E3%2582%258A%25E5%2587%25BA%25E3%2581%2597%25E3%2581%25BE%25E3%2581%25A7%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25AE%25AE%25E7%2594%25B0%25E5%25B3%25BB%25E8%25BC%2594%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTG9Jdy1QSHNvSW1WVGpKTmxFbkhnZkRyZ0pBVlRSQzhIaWMweDVJUmZLS3hlUjZnPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>宮田峻輔</dc:creator></item><item><title><![CDATA[Hono.js: 最速を目指すNode.jsフレームワーク]]></title><description><![CDATA[
+
+ Why Learn Hono
+
+既に市場にはNode.js用の多くのバックエンドライブラリやフレームワークが存在しています。以前、私はいくつかの小規模なプロジェクトでNest.jsを使ったことがあります。それは機能が充実しており、プロジェクトを迅速に実装できます。しかし、私の小規模プロジェクトにとって、その多くの機能は本当に必要以上であり、高度なカプセル化がされており、コードを書く際の自由度が少ないです。
+偶然にも、私はオンラインでHonoに出会いました。そのドキュメントを読んでみると：
+
+
+超高速 🚀 - ルータのRegExpRouterは本当に速いです。線形ループを使用していま...]]></description><link>https://zenn.dev/leapcell/articles/1ebf8086a1c51e</link><guid isPermaLink="true">https://zenn.dev/leapcell/articles/1ebf8086a1c51e</guid><pubDate>Mon, 06 Jan 2025 14:27:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--C_KqjTZ8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Hono.js%253A%2520%25E6%259C%2580%25E9%2580%259F%25E3%2582%2592%25E7%259B%25AE%25E6%258C%2587%25E3%2581%2599Node.js%25E3%2583%2595%25E3%2583%25AC%25E3%2583%25BC%25E3%2583%25A0%25E3%2583%25AF%25E3%2583%25BC%25E3%2582%25AF%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Leapcell%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y0N2E0MGQ3NGEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Leapcell</dc:creator></item><item><title><![CDATA[画像処理100本ノックに挑戦｜HSV変換（005/100）]]></title><description><![CDATA[
+ これはなに？
+画像処理100本ノックを、TypeScriptとlibvipsで挑戦してみる記事の5本目です。
+
+ 前回
+https://zenn.dev/nyagato_00/articles/df65d68dd857c5
+
+ 実装
+
+ お題
+
+HSV変換を実装して、色相Hを反転せよ。
+
+https://github.com/minido/Gasyori100knock-1/tree/master/Question_01_10#q5-hsv変換
+
+ Coding
+import sharp from 'sharp';
+
+interface HSV {
+  h: number;  // ...]]></description><link>https://zenn.dev/nyagato_00/articles/c5406005c08b12</link><guid isPermaLink="true">https://zenn.dev/nyagato_00/articles/c5406005c08b12</guid><pubDate>Mon, 06 Jan 2025 12:36:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--iu-Jejld--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%2594%25BB%25E5%2583%258F%25E5%2587%25A6%25E7%2590%2586100%25E6%259C%25AC%25E3%2583%258E%25E3%2583%2583%25E3%2582%25AF%25E3%2581%25AB%25E6%258C%2591%25E6%2588%25A6%25EF%25BD%259CHSV%25E5%25A4%2589%25E6%258F%259B%25EF%25BC%2588005%252F100%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nyagato_00%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUxtNXd1MTVKUVk3SjNOUG1kcGlMeWdfWUt3blZzaTRpWDRoYjU1c21UTTk3c1E9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nyagato_00</dc:creator></item><item><title><![CDATA[ドメイン駆動設計やシステム設計の勉強に TypeScript でサンプルプロジェクトを作ってみた]]></title><description><![CDATA[ドメイン駆動設計やアーキテクチャー、マイクロサービス、イベントソーシング、CQRS などのシステム設計を実践的に学習するために、TypeScript を用いたサンプルプロジェクトを作成しました。
+
+ サンプルプロジェクト
+
+
+ 題材
+書籍「ドメイン駆動設計入門 ボトムアップでわかる! ドメイン駆動設計の基本」のサンプルプロジェクトである、サークル管理システムを題材としています。
+
+ 要件
+題材としている書籍のサンプルプロジェクトとほぼ同等になります。
+
+プロフィール機能
+
+ユーザーを新規登録できること
+登録したユーザー情報を閲覧できること
+登録したユーザー情報を更新できること
+登録したユ...]]></description><link>https://zenn.dev/m10maeda/articles/study-domain-driven-design-and-system-design</link><guid isPermaLink="true">https://zenn.dev/m10maeda/articles/study-domain-driven-design-and-system-design</guid><pubDate>Mon, 06 Jan 2025 05:04:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4B62_R-W--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2589%25E3%2583%25A1%25E3%2582%25A4%25E3%2583%25B3%25E9%25A7%2586%25E5%258B%2595%25E8%25A8%25AD%25E8%25A8%2588%25E3%2582%2584%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%25E8%25A8%25AD%25E8%25A8%2588%25E3%2581%25AE%25E5%258B%2589%25E5%25BC%25B7%25E3%2581%25AB%2520TypeScript%2520%25E3%2581%25A7%25E3%2582%25B5%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AB%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%2589%258D%25E7%2594%25B0%25E3%2581%25BF%25E3%2581%258A%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZlMWY3YjBkZjIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>前田みお</dc:creator></item><item><title><![CDATA[【TypeScript】もう一歩先のExtendsとInferの使い方]]></title><description><![CDATA[どうもこんにちは、たくびーです。
+TypeScriptの型システムのextendsやinferといった構文を理解するために、ジェネリック型を含めてどのような概念があるのかこのブログで解説していこうと思います。
+
+ TypeScriptの型システムを使った少し凝ったテクニック
+早速ですが、いくつかのコード例を見ていきましょう。
+少し凝ったテクニックですが、最初はあまり構えずに『こんな書き方もあるんだな』と気軽に眺めてみてください。
+
+ ネストした配列を再帰的にフラットにする
+「T が配列なら、それを 1 段階フラットにする」「さらに要素が配列なら再帰的にフラットにする」という処理を、型レベ...]]></description><link>https://zenn.dev/socialplus/articles/38abaf9e40d271</link><guid isPermaLink="true">https://zenn.dev/socialplus/articles/38abaf9e40d271</guid><pubDate>Mon, 06 Jan 2025 05:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--s7JK0kvf--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590TypeScript%25E3%2580%2591%25E3%2582%2582%25E3%2581%2586%25E4%25B8%2580%25E6%25AD%25A9%25E5%2585%2588%25E3%2581%25AEExtends%25E3%2581%25A8Infer%25E3%2581%25AE%25E4%25BD%25BF%25E3%2581%2584%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:takubii%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I4Mjg2YmNjMDEuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:SocialPLUS%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZiNGYwMWMzNmEuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takubii</dc:creator></item><item><title><![CDATA[モジュラモノリスの依存関係をESLintの設定で強制する]]></title><description><![CDATA[
+ 概要
+モジュラモノリスの依存関係をESLintの設定で強制する方法を示します。
+
+ 今回の構成
+.
+├── README.md
+├── bun.lockb
+├── eslint.config.js
+├── node_modules
+├── package-lock.json
+├── package.json
+├── src
+│   ├── index.ts
+│   ├── module1
+│   │   ├── dir
+│   │   │   └── var.ts
+│   │   ├── index.ts
+│   │   └── var.ts
+│   ├── module2
+│   ...]]></description><link>https://zenn.dev/hitotsu_blog/articles/ff10a561b02694</link><guid isPermaLink="true">https://zenn.dev/hitotsu_blog/articles/ff10a561b02694</guid><pubDate>Sun, 05 Jan 2025 16:24:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--m6pNFdFi--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%25A2%25E3%2582%25B8%25E3%2583%25A5%25E3%2583%25A9%25E3%2583%25A2%25E3%2583%258E%25E3%2583%25AA%25E3%2582%25B9%25E3%2581%25AE%25E4%25BE%259D%25E5%25AD%2598%25E9%2596%25A2%25E4%25BF%2582%25E3%2582%2592ESLint%25E3%2581%25AE%25E8%25A8%25AD%25E5%25AE%259A%25E3%2581%25A7%25E5%25BC%25B7%25E5%2588%25B6%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%2584%25E3%2581%2595%25E3%2581%258A%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY0NjczMDg4NjEuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:HITOTSU%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%2520%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZkYmFjYTIxMzguanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>いさお</dc:creator></item></channel></rss>

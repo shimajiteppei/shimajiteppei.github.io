@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「HTML」のフィード]]></title><description><![CDATA[Zennのトピック「HTML」のRSSフィードです]]></description><link>https://zenn.dev/topics/html</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/171432f5a6.png</url><title>Zennの「HTML」のフィード</title><link>https://zenn.dev/topics/html</link></image><generator>zenn.dev</generator><lastBuildDate>Wed, 08 Jan 2025 03:11:52 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/html/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Webを支える技術としてのHTTP]]></title><description><![CDATA[
+ 1. はじめに
+今回は「Webを支える技術」という本を読んだので、その内容の中でもHTTPに関する内容をまとめます。またこの本の出版が2010年であり、現在でも初版のままで少し内容が古くなっていたのでその部分は更新された内容を付け加えています。また他にもこの本を要約していた記事やHTTPに関する記事も大変参考にさせていただきました。筆者の方にはこの場をお借りして感謝申し上げます。参考文献の欄にリンクを貼っているのでぜひご覧ください。
+https://amzn.asia/d/1jlwYYT
+
+ 2. そもそもWebとは？
+WebはWorld Wide Webの略で、直訳すると「世界規模...]]></description><link>https://zenn.dev/powersei45/articles/58c56e3b71b199</link><guid isPermaLink="true">https://zenn.dev/powersei45/articles/58c56e3b71b199</guid><pubDate>Tue, 07 Jan 2025 11:41:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--mmN76RUM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Web%25E3%2582%2592%25E6%2594%25AF%25E3%2581%2588%25E3%2582%258B%25E6%258A%2580%25E8%25A1%2593%25E3%2581%25A8%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25AEHTTP%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Morinosuke%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzIzOTY2MWY4NTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Morinosuke</dc:creator></item><item><title><![CDATA[なぜYouTubeでは動画を全画面表示しながらスクロールが可能なのか？]]></title><description><![CDATA[こちらは JavaScript Advent Calendar 2024の 25 日目の記事です。
+https://qiita.com/advent-calendar/2024/javascript
+
+ はじめに
+YouTubeは全画面表示中でもスクロールできて便利ですね[1]。
+
+動画を全画面表示中でもスクロールできる
+しかしFullscreen APIを用いて動画を全画面にした場合、通常はスクロール不可能なはずです。
+YouTube ではどのようにスクロール可能な全画面を実現しているのでしょうか？
+本記事では、その実装方法を解説します（Fullscreen APIとは）。
+
+ 調査
+...]]></description><link>https://zenn.dev/popopon/articles/scrollable-fullscreen-video</link><guid isPermaLink="true">https://zenn.dev/popopon/articles/scrollable-fullscreen-video</guid><pubDate>Mon, 06 Jan 2025 23:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--e3_ucncs--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%25AA%25E3%2581%259CYouTube%25E3%2581%25A7%25E3%2581%25AF%25E5%258B%2595%25E7%2594%25BB%25E3%2582%2592%25E5%2585%25A8%25E7%2594%25BB%25E9%259D%25A2%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2597%25E3%2581%25AA%25E3%2581%258C%25E3%2582%2589%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%258C%25E5%258F%25AF%25E8%2583%25BD%25E3%2581%25AA%25E3%2581%25AE%25E3%2581%258B%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2597%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzgwYzhlNDRjMDMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>しん</dc:creator></item><item><title><![CDATA[ドラッグでリサイズするUIを実装するときに設定したいCSS]]></title><description><![CDATA[例えばサイドバーの幅をドラッグで調整できるUIを実装した時、以下のような症状に遭遇したことはありませんか？
+
+ドラッグ中になんか引っかかる・スムースに反応しない
+マウスのボタンを離してもドラッグ中判定のままになってしまう
+ドラッグ中にテキストが選択されてしまう
+
+僕はあります。
+
+ 挙動が微妙な実装例
+以下は上記のような挙動を再現した実装例になっています。試しに、サイドバーの右端をドラッグして色々と操作をしてみてください。おそらく、リサイズがカクついたり、マウスのボタンを離した状態でもリサイズされてしまったり、テキストが選択されてしまう症状が出ると思います。
+（↓の埋込状態の操作だとうま...]]></description><link>https://zenn.dev/moozaru/articles/8df76e62e72c9e</link><guid isPermaLink="true">https://zenn.dev/moozaru/articles/8df76e62e72c9e</guid><pubDate>Sun, 05 Jan 2025 22:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8DLjqrvU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2589%25E3%2583%25A9%25E3%2583%2583%25E3%2582%25B0%25E3%2581%25A7%25E3%2583%25AA%25E3%2582%25B5%25E3%2582%25A4%25E3%2582%25BA%25E3%2581%2599%25E3%2582%258BUI%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2599%25E3%2582%258B%25E3%2581%25A8%25E3%2581%258D%25E3%2581%25AB%25E8%25A8%25AD%25E5%25AE%259A%25E3%2581%2597%25E3%2581%259F%25E3%2581%2584CSS%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:zaru%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FiNDkwNTdmZTMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%25A0%25E3%2583%25BC%25E3%2582%25B6%25E3%2583%25AB%25E3%2581%25A1%25E3%2582%2583%25E3%2582%2593%25E3%2581%25AD%25E3%2582%258B%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2hTeWVOcHN2TEdOdTdPeUFlU1JEbDhUNkNOX1p3NHBXSHpIRHN2NlBFPXMyNTAtYw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>zaru</dc:creator></item><item><title><![CDATA[WAI-ARIAについてまとめ]]></title><description><![CDATA[
+ WAI-ARIAとは
+WAI-ARIA（Web Accessibility Initiative – Accessible Rich Internet Applications）は、アクセシブルなWebアプリケーションを構築するための仕様です。特に、動的なコンテンツや高度なユーザーインターフェイスを支えるウェブアプリケーションにおいて、スクリーンリーダーや他の支援技術を使用するユーザーがコンテンツを理解し操作できるようにするために設計されています。
+
+ WAI-ARIAの目的
+
+閲覧支援（スクリーンリーダー等）が動的コンテンツや複雑なUIを理解・操作できるようにする
+通常のHTMLで...]]></description><link>https://zenn.dev/takaa/articles/74876755139106</link><guid isPermaLink="true">https://zenn.dev/takaa/articles/74876755139106</guid><pubDate>Sun, 05 Jan 2025 15:21:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5tXiJ9VO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:WAI-ARIA%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:takaa%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZkZTg4MTMwMTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takaa</dc:creator></item><item><title><![CDATA[FLOCSSについてまとめ]]></title><description><![CDATA[FLOCSSには3つのレイヤーの概念があり、役割によってそれぞれ区分されています。
+1.Foundation
+2.Layout
+3.Object
+
+ 1.Foundation
+webサイト全体で利用するベースとなるCSSがFoundationレイヤーで定義します。
+以下が具体的なものです。
+
+リセットCSSやノーマライズCSS
+全体の背景やタイポグラフィなどプロジェクト全体の基礎となるスタイル
+ざっくり要約すると全ページ、全要素に共通するようなcssはFoundationレイヤーに記述するといいと思います。
+
+
+ 2.Layout
+ヘッダーやフッター、メインとなるコンテンツエリア、サイド...]]></description><link>https://zenn.dev/takaa/articles/87f92eca7f2fa1</link><guid isPermaLink="true">https://zenn.dev/takaa/articles/87f92eca7f2fa1</guid><pubDate>Sun, 05 Jan 2025 15:12:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--cVAsfDXa--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:FLOCSS%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:takaa%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZkZTg4MTMwMTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takaa</dc:creator></item><item><title><![CDATA[フロントエンド開発者のためのalt属性入門]]></title><description><![CDATA[
+ はじめに
+alt属性は、画像の内容を説明するテキストを提供することで、視覚的なコンテンツを言語で表現する重要な属性です。
+Web アクセシビリティの文脈において、特に以下の場合に重要な役割を果たします。
+
+視覚障害のあるユーザーがスクリーンリーダーを使用する場合
+ネットワークの問題で画像が読み込めない場合
+ユーザーが画像表示を無効にしている場合
+
+WCAG 2.2では、alt属性の適切な使用が達成基準1.1.1「非テキストコンテンツ」（レベルA）として規定されています。
+この基準では、装飾を除くすべての非テキストコンテンツに対して、同等の目的を果たす代替テキストを提供することが求めら...]]></description><link>https://zenn.dev/harryduck/articles/alt-attribute-in-a11y</link><guid isPermaLink="true">https://zenn.dev/harryduck/articles/alt-attribute-in-a11y</guid><pubDate>Sun, 05 Jan 2025 08:02:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--h-Pxxm6t--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2595%25E3%2583%25AD%25E3%2583%25B3%25E3%2583%2588%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2589%25E9%2596%258B%25E7%2599%25BA%25E8%2580%2585%25E3%2581%25AE%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AEalt%25E5%25B1%259E%25E6%2580%25A7%25E5%2585%25A5%25E9%2596%2580%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:OKUDA%2520Haruki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc5M2YxYmYzYTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>OKUDA Haruki</dc:creator></item><item><title><![CDATA[aタグにaタグを入れ子にしたい！（がHTMLはそれを許さない）]]></title><description><![CDATA[
+ はじめに
+皆さんはaタグにaタグを入れ子にしたいと思ったことはありませんか？もしかしたら意外とないかもしれないですね笑🤓
+例えばQiitaの記事カードのUIなどは複数のリンク先を内包するカードになっていますが、カード全体もaタグとして機能しています。
+
+（出典: https://qiita.com/ ）
+こういった場合に単純に下記のようにマークアップすることはできません。
+&lt;a href="/article/1"&gt;
+  &lt;a href="/user/1"&gt;@UserName&lt;/a&gt;
+  &lt;a href="/article/1"&gt;記事のタ...]]></description><link>https://zenn.dev/zozotech/articles/9e7b9059f15509</link><guid isPermaLink="true">https://zenn.dev/zozotech/articles/9e7b9059f15509</guid><pubDate>Sun, 05 Jan 2025 05:02:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--rI1DEPEo--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:a%25E3%2582%25BF%25E3%2582%25B0%25E3%2581%25ABa%25E3%2582%25BF%25E3%2582%25B0%25E3%2582%2592%25E5%2585%25A5%25E3%2582%258C%25E5%25AD%2590%25E3%2581%25AB%25E3%2581%2597%25E3%2581%259F%25E3%2581%2584%25EF%25BC%2581%25EF%25BC%2588%25E3%2581%258CHTML%25E3%2581%25AF%25E3%2581%259D%25E3%2582%258C%25E3%2582%2592%25E8%25A8%25B1%25E3%2581%2595%25E3%2581%25AA%25E3%2581%2584%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2583%2584%25E3%2583%2581%25E3%2583%25A4%25E3%2582%25AB%25E3%2582%25A4%25E3%2582%25BF%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY0ZmQ2ZmJhZjQuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BEZOZO%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2UxZGFhMWVjYmUuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ツチヤカイタ</dc:creator></item><item><title><![CDATA[[js] imgのonLoadをPromiseで検知する方法 (customElements)]]></title><description><![CDATA[例えばimgタグで404が返ってきた画像を差し替える時やなんかにとりあえず使える。
+customElementsを使ってPromiseをプロパティに設定しておくことで、ほぼ確実にonLoadを追加してPromiseを別スコープのJavaScriptから確認できる。
+window.customElements.define("async-img", class extends HTMLImageElement {
+  constructor() {
+    super();
+    this.whileLoad = new Promise((resolve, reject) =&gt; {...]]></description><link>https://zenn.dev/xofeulb/articles/0cb126ee8a6544</link><guid isPermaLink="true">https://zenn.dev/xofeulb/articles/0cb126ee8a6544</guid><pubDate>Sat, 04 Jan 2025 22:53:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Pb53QnM7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255Bjs%255D%2520img%25E3%2581%25AEonLoad%25E3%2582%2592Promise%25E3%2581%25A7%25E6%25A4%259C%25E7%259F%25A5%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2520%2528customElements%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%255E.%252C.%255E%2520BlueFox%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VjODY1MTRmYTUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>^.,.^ BlueFox</dc:creator></item><item><title><![CDATA[Next.js fontの設定方法とstrongタグについて]]></title><description><![CDATA[
+ 初めに
+みなさん明けましておめでとうございます！
+私はインフルにかかっていたので、くたばっていました…
+みなさん健康には気を付けましょう。
+せっかくの連休が台無しになってしまいます…
+さて今回のコードはNext.jsのチュートリアルのコードを使用しています。
+Next.jsのチュートリアルは随時更新をしているので、もしかしたらこの記事以降にはコードが異なっている可能性があるので、ご了承ください。
+
+ Next.jsでfontを指定する方法
+subsetsとはこれだけ欲しいと宣言するもの
+Inter({ subsets: ['latin'] })ではInterの中からlatinだけ取り...]]></description><link>https://zenn.dev/omegamaster/articles/d53b7f7ee67d18</link><guid isPermaLink="true">https://zenn.dev/omegamaster/articles/d53b7f7ee67d18</guid><pubDate>Sat, 04 Jan 2025 10:40:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ocb2_qrH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Next.js%2520font%25E3%2581%25AE%25E8%25A8%25AD%25E5%25AE%259A%25E6%2596%25B9%25E6%25B3%2595%25E3%2581%25A8strong%25E3%2582%25BF%25E3%2582%25B0%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25AA%25E3%2583%25A1%25E3%2582%25AC%25E3%2583%259E%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0YzVXQURUYXFBRUlnaTg5WHM1a2JCQW1mRm05QzhDS09mNXVYODQ1QTBPYXc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>オメガマスター</dc:creator></item><item><title><![CDATA[Next.jsでGoogle Search Consoleの所有権の確認を行う]]></title><description><![CDATA[
+ はじめに
+Next.jsでGoogle Search Consoleの所有権の確認を行う方法を紹介します。所有権の確認方法にはいくつかの方法があります。この記事ではGoogle Search Consoleでおすすめの確認方法とされているウェブサイトにHTMLファイルアップロードする方法を紹介します。
+
+ 1. Google Search ConsoleからHTMLファイルをダウンロードする
+はじめに、Google Search Consoleの「1.ファイルをダウンロード」からgoogle****************.htmlをダウンロードします。
+
+HTMLファイルの中身は以...]]></description><link>https://zenn.dev/zozooizozzoizio/articles/3957063441365f</link><guid isPermaLink="true">https://zenn.dev/zozooizozzoizio/articles/3957063441365f</guid><pubDate>Fri, 03 Jan 2025 14:47:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---ljNXhhY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Next.js%25E3%2581%25A7Google%2520Search%2520Console%25E3%2581%25AE%25E6%2589%2580%25E6%259C%2589%25E6%25A8%25A9%25E3%2581%25AE%25E7%25A2%25BA%25E8%25AA%258D%25E3%2582%2592%25E8%25A1%258C%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259E%25E3%2581%259A%25E5%25AD%2590%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E0MzNhMmU2ZGMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ぞず子</dc:creator></item><item><title><![CDATA[fullPage.jsで水平スライドを自動再生する方法]]></title><description><![CDATA[
+ はじめに &amp; 初期デモ
+この記事では、ページ上の1つまたは複数の水平スライダーを自動でアニメーションさせる設定を、fullPage.jsでどのように行うかを解説します。
+説明を飛ばして例をすぐに見たい方はこちらのコードペンをご覧ください：
+こちらのコードペンでデモを確認できます。
+
+
+ チュートリアル
+デモの動作を理解したい方のために説明を始めます。
+
+ a) afterLoad コールバック
+ここでは、afterLoadコールバックを使用します。このコールバックに記述した内容は、垂直セクション間を移動するたびに実行されます。詳細はfullPage.jsドキュメントに記載され...]]></description><link>https://zenn.dev/alvarotrigo/articles/9f18b42fbb41e7</link><guid isPermaLink="true">https://zenn.dev/alvarotrigo/articles/9f18b42fbb41e7</guid><pubDate>Fri, 03 Jan 2025 09:37:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--RiML67Jm--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:fullPage.js%25E3%2581%25A7%25E6%25B0%25B4%25E5%25B9%25B3%25E3%2582%25B9%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2589%25E3%2582%2592%25E8%2587%25AA%25E5%258B%2595%25E5%2586%258D%25E7%2594%259F%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Alvaro%2520Trigo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAzZTc5MDBkNTQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Alvaro Trigo</dc:creator></item><item><title><![CDATA[ポップオーバーをシンプルに実現する、Popover API]]></title><description><![CDATA[
+ はじめに
+2024 年の Newly Available（最新バージョンのブラウザで利用できる機能）を流し見していた際、面白そうな機能があったので取り上げます。
+https://zenn.dev/anko/articles/mdn-baseline-2024-html-css
+!
+Newly Available を紹介する記事には掲載されていますが、記事内で参照されているソースを確認したところ、Limited Support となっていました。Safari などの一部ブラウザでは Partial Support（一部のサポート）のようです。
+https://webstatus.dev...]]></description><link>https://zenn.dev/progate_users/articles/02c9aa13105ee7</link><guid isPermaLink="true">https://zenn.dev/progate_users/articles/02c9aa13105ee7</guid><pubDate>Thu, 02 Jan 2025 11:34:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--eoRVZcOP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%259D%25E3%2583%2583%25E3%2583%2597%25E3%2582%25AA%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2582%2592%25E3%2582%25B7%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AB%25E3%2581%25AB%25E5%25AE%259F%25E7%258F%25BE%25E3%2581%2599%25E3%2582%258B%25E3%2580%2581Popover%2520API%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2582%2588%25E3%2581%25A4%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM2OGUyYmI4YzIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Progate%2520Path%2520%25E3%2582%25B3%25E3%2583%259F%25E3%2583%25A5%25E3%2583%258B%25E3%2583%2586%25E3%2582%25A3%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JiOGNiMGY2NjkuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>よつ</dc:creator></item><item><title><![CDATA[BEMとは？CSSの命名規則について詳しくまとめてみた]]></title><description><![CDATA[BEM（ベム）というクラスの命名規則があります。
+このBEMについて、詳しく解説していきます。
+
+
+ BEMって何？
+
+BEMは、ウェブサイトやアプリのCSS（デザイン）をわかりやすく管理するためのルールです。
+
+
+B: Block（ブロック）
+
+E: Element（エレメント）
+
+M: Modifier（モディファイア）
+
+つまり、「部品を分けて考えて名前を付けよう！」という考え方です。たとえば、家を作るときに「部屋（Block）」「家具（Element）」「家具の色（Modifier）」を決めるような感じです。
+
+
+ BEMの基本ルール
+
+
+
+Block（ブロック）
+
+ページの中で...]]></description><link>https://zenn.dev/nabesan/articles/b47aa380c118bb</link><guid isPermaLink="true">https://zenn.dev/nabesan/articles/b47aa380c118bb</guid><pubDate>Thu, 02 Jan 2025 07:24:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wrvwbvAk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:BEM%25E3%2581%25A8%25E3%2581%25AF%25EF%25BC%259FCSS%25E3%2581%25AE%25E5%2591%25BD%25E5%2590%258D%25E8%25A6%258F%25E5%2589%2587%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E8%25A9%25B3%25E3%2581%2597%25E3%2581%258F%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yuta%2520Watanabe%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2YzODU0MzkwNGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yuta Watanabe</dc:creator></item><item><title><![CDATA[Webページの文章をきれいにGoogleドキュメントに貼る方法]]></title><description><![CDATA[
+分野：Webライティング
+関連言語：HTML
+状況：納品した記事のリライトをする際に、Webページ上の記事をGoogleドキュメントにコピペして使用することがある
+
+
+ 課題
+Webページによっては、Googleドキュメントに貼ると体裁（書式）が悪くなることがある
+→ 書式なしコピペをすると全ての書式がなくなってしまう
+→ 見出しやリンクなどはそのまま引き継いでほしい
+
+ 解決策
+
+Webページ上でコピーした内容をマークダウンに変換する
+マークダウンをGoogleドキュメントに取り込む
+
+Webページのデータをマークダウンにするには、Chrome拡張機能「HTML to Markdow...]]></description><link>https://zenn.dev/expwakui/articles/70b645b89d3f3b</link><guid isPermaLink="true">https://zenn.dev/expwakui/articles/70b645b89d3f3b</guid><pubDate>Wed, 01 Jan 2025 06:38:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--gsElMxG5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Web%25E3%2583%259A%25E3%2583%25BC%25E3%2582%25B8%25E3%2581%25AE%25E6%2596%2587%25E7%25AB%25A0%25E3%2582%2592%25E3%2581%258D%25E3%2582%258C%25E3%2581%2584%25E3%2581%25ABGoogle%25E3%2583%2589%25E3%2582%25AD%25E3%2583%25A5%25E3%2583%25A1%25E3%2583%25B3%25E3%2583%2588%25E3%2581%25AB%25E8%25B2%25BC%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:expwakui%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VkNmY4ZDU4NzguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>expwakui</dc:creator></item><item><title><![CDATA[Leafletで位置情報の現在地をマーカーで常時更新してみた]]></title><description><![CDATA[Leafletのプラグイン「UserMarker」使用と「navigator.geolocation.watchPosition」使って、位置情報の現在地をマーカーで常時更新してみました。
+実装すると以下のようになります。
+
+
+ まずは全体のコード
+&lt;!DOCTYPE html&gt;
+&lt;html lang="ja"&gt;
+&lt;head&gt;
+&lt;meta charset="UTF-8"&gt;
+&lt;meta http-equiv="X-UA-Compatible" content="IE=edge"&gt;
+&lt;meta name="viewport" ...]]></description><link>https://zenn.dev/ausssxi/articles/4fa3311a1a6f6a</link><guid isPermaLink="true">https://zenn.dev/ausssxi/articles/4fa3311a1a6f6a</guid><pubDate>Wed, 01 Jan 2025 00:43:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--z_RvVifx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Leaflet%25E3%2581%25A7%25E4%25BD%258D%25E7%25BD%25AE%25E6%2583%2585%25E5%25A0%25B1%25E3%2581%25AE%25E7%258F%25BE%25E5%259C%25A8%25E5%259C%25B0%25E3%2582%2592%25E3%2583%259E%25E3%2583%25BC%25E3%2582%25AB%25E3%2583%25BC%25E3%2581%25A7%25E5%25B8%25B8%25E6%2599%2582%25E6%259B%25B4%25E6%2596%25B0%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%2586%2585%25E7%2594%25B0%25E5%258E%259A%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VjNDgzNzUzOWMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>内田厚</dc:creator></item><item><title><![CDATA[仕事中にメモ帳とモダンブラウザだけでいろいろ作っている話]]></title><description><![CDATA[
+ TL;DR;
+
+メールサポートみたいな部署で、メモ帳とブラウザでいろいろツールを作ってるよ
+エンジニアはいったん辞めたつもりで就職したのに、楽をしたくなってつい手が動いてしまったよ
+ブラウザがモダンでHTMLとJavaScriptさえ書ければ結構いろいろできるよ
+
+ちなみにこの取り組みは私個人の「内職」から始まりましたが、現在は上長より業務として認知していただいています。
+
+ ちょっと自己紹介
+ハンドルネーム「naary」です。発音は「カービィ」じゃなくて「AC」と同じです。
+コロナ禍にRailsやAWSを独学したあと、これまでに合計で3年ほど、PHP/Laravelをメインに使って...]]></description><link>https://zenn.dev/nawa/articles/c00be949042dec</link><guid isPermaLink="true">https://zenn.dev/nawa/articles/c00be949042dec</guid><pubDate>Tue, 31 Dec 2024 02:47:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hN6zsy-F--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E4%25BB%2595%25E4%25BA%258B%25E4%25B8%25AD%25E3%2581%25AB%25E3%2583%25A1%25E3%2583%25A2%25E5%25B8%25B3%25E3%2581%25A8%25E3%2583%25A2%25E3%2583%2580%25E3%2583%25B3%25E3%2583%2596%25E3%2583%25A9%25E3%2582%25A6%25E3%2582%25B6%25E3%2581%25A0%25E3%2581%2591%25E3%2581%25A7%25E3%2581%2584%25E3%2582%258D%25E3%2581%2584%25E3%2582%258D%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%2584%25E3%2582%258B%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:naary%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U1ZTc1ZmNkNjQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>naary</dc:creator></item><item><title><![CDATA[プロキシサーバー経由でOGPを取得してブログサイトで表示する]]></title><description><![CDATA[
+ やりたいこと
+Next.jsでMarkdown to HTMLブログを作っていると、Markdownでリンクを貼る時にaタグとして表示されます。これを、下の画像のようにOGPを取得して表示したいと思いました。(画像は私が所属するサークルのブログサイトから)
+
+
+ OGPを取得する
+まず考えたのは、MarkdownからHTMLに変換する際に、自動でOGPを取得してLinkCardとして表示してくれるようなプラグインがあればいいなと思いました。
+https://github.com/gladevise/remark-link-card
+今回これは使わずに、自作したカードコンポーネントを使...]]></description><link>https://zenn.dev/batora/articles/43cb7b6cef8e15</link><guid isPermaLink="true">https://zenn.dev/batora/articles/43cb7b6cef8e15</guid><pubDate>Mon, 30 Dec 2024 16:36:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4HEf5QEv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25AD%25E3%2582%25B7%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E7%25B5%258C%25E7%2594%25B1%25E3%2581%25A7OGP%25E3%2582%2592%25E5%258F%2596%25E5%25BE%2597%25E3%2581%2597%25E3%2581%25A6%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%25E3%2582%25B5%25E3%2582%25A4%25E3%2583%2588%25E3%2581%25A7%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25B0%25E3%2581%25A8%25E3%2582%2589%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0ZmNVU21QY04tN1g1MW9nX2dLNFcyYi03VmtNLXBoVFMwS3Zjdm15X2RqbkE9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ばとら</dc:creator></item><item><title><![CDATA[【なろう小説API】PHPでなろうAPIを叩いて「小説家になろう」独自検索フォームを作成する]]></title><description><![CDATA[
+ なろう小説APIとは
+「小説家になろう」が提供している公式APIです。
+
+なろう小説APIでは小説家になろうに掲載されている作品情報を取得できます。
+なろうAPIはHTTPでのリクエストに対してJSON形式、JSONP形式又はYAML形式、PHPのserializeで応答します。
+実際に作品のデータが修正されてからなろうAPIに反映されるまで平均5分程度(最大2時間)の誤差があります。
+なろうデベロッパーより
+
+公式の検索が提供しているものと同様の結果を返却してくれます。
+今回は備忘として残すため、本記事を作成しています。
+
+ 利用制限
+
+利用制限は現在、休止しています。
+負荷状況に...]]></description><link>https://zenn.dev/saikofall/articles/2c0c723bd3363f</link><guid isPermaLink="true">https://zenn.dev/saikofall/articles/2c0c723bd3363f</guid><pubDate>Mon, 30 Dec 2024 14:05:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3LPn1yTM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E3%2581%25AA%25E3%2582%258D%25E3%2581%2586%25E5%25B0%258F%25E8%25AA%25ACAPI%25E3%2580%2591PHP%25E3%2581%25A7%25E3%2581%25AA%25E3%2582%258D%25E3%2581%2586API%25E3%2582%2592%25E5%258F%25A9%25E3%2581%2584%25E3%2581%25A6%25E3%2580%258C%25E5%25B0%258F%25E8%25AA%25AC%25E5%25AE%25B6%25E3%2581%25AB%25E3%2581%25AA%25E3%2582%258D%25E3%2581%2586%25E3%2580%258D%25E7%258B%25AC%25E8%2587%25AA%25E6%25A4%259C%25E7%25B4%25A2%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25BC%25E3%2583%25A0%25E3%2582%2592%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:saikofall%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTEY5U0g1eEUzSG9UZ2dQbTVEYXRTa1lJLV9ualUwWTFoMDFwR3FEMWtmamV4VVZ3PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>saikofall</dc:creator></item><item><title><![CDATA[LeafletでOpenStreetMap表示してみました。]]></title><description><![CDATA[3年ぶりにMAPサービスを作るので、Leafletを使ってみました。
+LeafletはJavaScriptライブラリでGoogleMapような、地図を簡単に無料で利用することができます。
+
+ CDNでリンクするやり方
+HTMLファイルを作成し、CDNからcss/jsファイルを読み込みます。
+&lt;link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" cross...]]></description><link>https://zenn.dev/ausssxi/articles/4011315fd5e059</link><guid isPermaLink="true">https://zenn.dev/ausssxi/articles/4011315fd5e059</guid><pubDate>Mon, 30 Dec 2024 01:09:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--QX0rgnci--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Leaflet%25E3%2581%25A7OpenStreetMap%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%25E3%2580%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%2586%2585%25E7%2594%25B0%25E5%258E%259A%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VjNDgzNzUzOWMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>内田厚</dc:creator></item><item><title><![CDATA[CSSのmaskでsvgを読み込めなかった件（CORSエラー）]]></title><description><![CDATA[コーディングの練習中でCSSのmaskプロパティでsvgファイルを読み込もうとした時、それができないことがありました。
+maskプロパティとbackground-colorプロパティを使うことで、ボタンのマウスホバー時に画像の色を容易に変えることができます。しかし、、、、
+
+html
+&lt;a href="" class="button"&gt;contact&lt;/a&gt;
+
+
+css
+.button {
+  // 省略
+}
+.button::before {
+  content: "";
+  width: 18px;
+  height: 14px;
+  mask: url(.....]]></description><link>https://zenn.dev/ryo_hajime/articles/23e2f8aab2066e</link><guid isPermaLink="true">https://zenn.dev/ryo_hajime/articles/23e2f8aab2066e</guid><pubDate>Sun, 29 Dec 2024 23:19:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vArmhBfD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:CSS%25E3%2581%25AEmask%25E3%2581%25A7svg%25E3%2582%2592%25E8%25AA%25AD%25E3%2581%25BF%25E8%25BE%25BC%25E3%2582%2581%25E3%2581%25AA%25E3%2581%258B%25E3%2581%25A3%25E3%2581%259F%25E4%25BB%25B6%25EF%25BC%2588CORS%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Ryoichi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzgxYTIyODY2YzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Ryoichi</dc:creator></item></channel></rss>
