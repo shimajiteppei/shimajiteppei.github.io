@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Docker」のフィード]]></title><description><![CDATA[Zennのトピック「Docker」のRSSフィードです]]></description><link>https://zenn.dev/topics/docker</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/75b80a5922.png</url><title>Zennの「Docker」のフィード</title><link>https://zenn.dev/topics/docker</link></image><generator>zenn.dev</generator><lastBuildDate>Thu, 09 Jan 2025 07:00:22 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/docker/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Misskeyインスタンスを自宅サーバーでホストする(Docker環境)]]></title><description><![CDATA[新年2日目からMastodonインスタンス爆破→Misskeyに乗り換える、ということをしたので
+自宅サーバーに誤興味のある逸般人向けに初心者目線でメモ程度に書いてみようと思います。
+所々chatGPTに設定聞いたりしてるのでそれもまとめたいメモ記事です。
+みなさんもこの記事を参考に余ってるパソコンとか誤活躍させてみてはいかがでしょうか！
+では本題へ。
+
+ 用意するもの(必須)
+・自宅サーバー機(元々iMacでMastodonをホスト、今は投げ売りされてたWyse3040)
+・インストールメディア(今回はUbuntu Serverを入れたUSBメモリを用意)
+・ドメイン
+・Cloudfl...]]></description><link>https://zenn.dev/harumaki2000/articles/5d3ec7d0761b6d</link><guid isPermaLink="true">https://zenn.dev/harumaki2000/articles/5d3ec7d0761b6d</guid><pubDate>Thu, 09 Jan 2025 01:25:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--e2VdPxwq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Misskey%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%25B3%25E3%2582%25B9%25E3%2582%2592%25E8%2587%25AA%25E5%25AE%2585%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2581%25A7%25E3%2583%259B%25E3%2582%25B9%25E3%2583%2588%25E3%2581%2599%25E3%2582%258B%2528Docker%25E7%2592%25B0%25E5%25A2%2583%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:harumaki2000%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSW5iWFNoMlRaUXQ1d29DN19KZzV1U0xKT0xTS1lDYXo1aVA0Z0l1MU1pREVKakNnPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>harumaki2000</dc:creator></item><item><title><![CDATA[VSCode＋DockerでDjangoの開発環境を構築する]]></title><description><![CDATA[一度は催眠術にかかってみたいです。
+こんにちは、
+ワニかず@40歳 出戻りエンジニアです。
+ジャンゴというと、
+「1.2.ジャンゴ！」
+しか知らなかったのですが、
+
+転職先ではDjangoで開発を行うということで、
+今回は、VS Code＆Dockerで
+Djangoの開発環境の構築までの手順をまとめました。
+
+ 事前準備
+
+ VSCodeをインストール
+まずは、VS Codeをインストールします。
+VS Codeダウンロードサイトにアクセスして、
+ご自身の環境のファイルをダウンロード、
+インストールします。私はWindowsの環境で行っています。
+
+ WSL2をインストール
+以下に手順...]]></description><link>https://zenn.dev/40_comeback_eng/articles/29c306f656babe</link><guid isPermaLink="true">https://zenn.dev/40_comeback_eng/articles/29c306f656babe</guid><pubDate>Thu, 09 Jan 2025 00:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4GBpYCeq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:VSCode%25EF%25BC%258BDocker%25E3%2581%25A7Django%25E3%2581%25AE%25E9%2596%258B%25E7%2599%25BA%25E7%2592%25B0%25E5%25A2%2583%25E3%2582%2592%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%25AF%25E3%2583%258B%25E3%2581%258B%25E3%2581%259A%254040%25E6%25AD%25B3%2520%25E5%2587%25BA%25E6%2588%25BB%25E3%2582%258A%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg3ZGNhZmRmOGUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ワニかず@40歳 出戻りエンジニア</dc:creator></item><item><title><![CDATA[Docker Desktop for Mac がマルウェア扱いされて起動できない]]></title><description><![CDATA[PC起動したら突然 Docker Desktop がゴミ箱に入れられて、しかもマルウェアだなんて言われてびっくりしました。
+本記事執筆時点では https://www.dockerstatus.com/ に Incident として本件が報告されていて、Workaround が公開されていました。現在原因調査中とのことではありますが、 Workaround を試したところ、無事に Docker Desktop がまた利用できるようになりました！
+※ 私の場合は Docker Desktop 自体のバージョンが古かったようなので、手順にある Bash シェルスクリプトを実行しただけではダメ...]]></description><link>https://zenn.dev/masakiee/articles/4c6f7e68a5a31c</link><guid isPermaLink="true">https://zenn.dev/masakiee/articles/4c6f7e68a5a31c</guid><pubDate>Wed, 08 Jan 2025 21:23:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8fFZF7BA--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%2520Desktop%2520for%2520Mac%2520%25E3%2581%258C%25E3%2583%259E%25E3%2583%25AB%25E3%2582%25A6%25E3%2582%25A7%25E3%2582%25A2%25E6%2589%25B1%25E3%2581%2584%25E3%2581%2595%25E3%2582%258C%25E3%2581%25A6%25E8%25B5%25B7%25E5%258B%2595%25E3%2581%25A7%25E3%2581%258D%25E3%2581%25AA%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:masakiee%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzIwN2ZjMDFlMmMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>masakiee</dc:creator></item><item><title><![CDATA[DifyをDockerで立ち上げたら relation dify_setups does not exist]]></title><description><![CDATA[お疲れ様です、波浪です
+掲題の通りなんですが、
+https://docs.dify.ai/ja-jp/getting-started/install-self-hosted/docker-compose#:~:text=docker-compose up -d
+この手順に従って
+docker compose up したら dify_setups がないとか言われ立ち往生したんで
+同じ現象の人に向けて解決方法の共有です。
+
+ 解決方法
+~/app/dify/docker❯ brew install dos2unix
+
+&lt;中略&gt;
+
+~/app/dify/docker❯ unix2...]]></description><link>https://zenn.dev/hellohazime/articles/dify_setups_does_not_exist</link><guid isPermaLink="true">https://zenn.dev/hellohazime/articles/dify_setups_does_not_exist</guid><pubDate>Wed, 08 Jan 2025 11:02:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2cR4JuNs--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Dify%25E3%2582%2592Docker%25E3%2581%25A7%25E7%25AB%258B%25E3%2581%25A1%25E4%25B8%258A%25E3%2581%2592%25E3%2581%259F%25E3%2582%2589%2520relation%2520dify_setups%2520does%2520not%2520exist%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hellohazime%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc1NzM0MDdiMjMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hellohazime</dc:creator></item><item><title><![CDATA[Docker Compose の links は非推奨なのかわかりにくい]]></title><description><![CDATA[
+ はじめに
+Docker で Minio を使っていたのですが、 Virtual Hosted Style の指定が必要でした。
+https://zenn.dev/mh4gf/articles/873e34b95bbbdf
+https://zenn.dev/lincwell_inc/articles/minio_virtual_hosted_style
+これらを参考にしながら、改めて Docker のマニュアルを読んでいました。
+が、注意書きが散らばっており、かなりわかりにくかったです。 少し整理してみました。
+!
+なんとなく動作確認に postgres を利用してしまいました。
+pi...]]></description><link>https://zenn.dev/shikazuki/articles/e01beec5566070</link><guid isPermaLink="true">https://zenn.dev/shikazuki/articles/e01beec5566070</guid><pubDate>Wed, 08 Jan 2025 02:53:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--KGzvKFoN--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%2520Compose%2520%25E3%2581%25AE%2520links%2520%25E3%2581%25AF%25E9%259D%259E%25E6%258E%25A8%25E5%25A5%25A8%25E3%2581%25AA%25E3%2581%25AE%25E3%2581%258B%25E3%2582%258F%25E3%2581%258B%25E3%2582%258A%25E3%2581%25AB%25E3%2581%258F%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:shikazuki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JlZDgyOGI0ZDUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>shikazuki</dc:creator></item><item><title><![CDATA[簡単に rails API を実装してみた]]></title><description><![CDATA[
+ Docker
+参考
+https://zenn.dev/trysmr/articles/b9c99302ebc205
+本記事では、web コンテナのポートを 80:3000 で実装している
+
+ rails API 実装
+
+ cors 設定
+Gemfile
++ gem 'rack-cors'
+config/initializers/cors.rb
+Rails.application.config.middleware.insert_before 0, Rack::Cors do
+  allow do
+    origins 'http://localhost:3000'
+
+    res...]]></description><link>https://zenn.dev/nekomals/articles/6ea5f40927ca53</link><guid isPermaLink="true">https://zenn.dev/nekomals/articles/6ea5f40927ca53</guid><pubDate>Wed, 08 Jan 2025 02:08:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5dkGhDkv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%25B0%25A1%25E5%258D%2598%25E3%2581%25AB%2520rails%2520API%2520%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2586%25E3%2582%2593%25E3%2582%2584%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS2tLcEsxSENsbUlvUWRaWkI3VXVmeGJkb0tTLWIyQ1VSWDVqYWxSbE9LeDJFQ3JVT3Yzdz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>うんや</dc:creator></item><item><title><![CDATA[KubernetesとDockerの違いは？]]></title><description><![CDATA[KubernetesとDockerは、コンテナ技術に関連する重要なツールですが、その目的と機能に明確な違いがあります：
+
+
+目的:
+
+Docker: コンテナの作成、実行、管理を行うプラットフォームです。アプリケーションを各コンテナに分離することが主な目的です。
+Kubernetes: 複数のコンテナを管理し、オーケストレーションするためのプラットフォームです。コンテナの監視、スケーリング、負荷分散などを行います。
+
+オーケストレーション（orchestration）は、複数のコンピュータシステムやアプリケーション、サービスなどの構築や運用管理を自動化すること
+
+
+
+
+
+実行環境:
+
+D...]]></description><link>https://zenn.dev/btc/articles/250108_kubernetes_docker</link><guid isPermaLink="true">https://zenn.dev/btc/articles/250108_kubernetes_docker</guid><pubDate>Wed, 08 Jan 2025 01:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--CIgFknu0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Kubernetes%25E3%2581%25A8Docker%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%25E3%2581%25AF%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:my%2520log%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzEwODIzM2M5OGYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>my log</dc:creator></item><item><title><![CDATA[Spring BootとReactの連携を学ぶためにToDoアプリを作る]]></title><description><![CDATA[
+ はじめに
+普段はサーバーサイドをJavaで実装しフレームワークはSpring Bootを使用しているが、個人開発のためにReactを学習したため、フロントエンドとサーバーサイドでどのように連携させるのか知りたいと思い調べながら実装してみることにした。
+以下の記事を見つけたので、先日学習したてのDockerを使ってSpring Boot × React(TypeScript)で連携できる状態を目指して実装してみる。
+https://qiita.com/studio_meowtoon/items/7d4d0bf73e04e01be558
+今回はJavaやTypeScriptのコードを細か...]]></description><link>https://zenn.dev/yadonn/articles/0e1185989b248b</link><guid isPermaLink="true">https://zenn.dev/yadonn/articles/0e1185989b248b</guid><pubDate>Tue, 07 Jan 2025 13:18:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fE1BOKS2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Spring%2520Boot%25E3%2581%25A8React%25E3%2581%25AE%25E9%2580%25A3%25E6%2590%25BA%25E3%2582%2592%25E5%25AD%25A6%25E3%2581%25B6%25E3%2581%259F%25E3%2582%2581%25E3%2581%25ABToDo%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:YADON%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVkOTAyMjM0YTMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>YADON</dc:creator></item><item><title><![CDATA[コンテナ時代のAnsibleを初心者が調べてみた！役割とオーケストレーションツールとの違いを解説]]></title><description><![CDATA[最近、プロジェクトでコンテナ環境の管理を任される機会がありました。DockerやKubernetesの話題をよく耳にしますが、Ansibleの役割はどうなるのだろう？そんな疑問が浮かびました。
+正直に言うと、私はまだAnsibleを使ったことがありません。でも最近、サーバ管理や構成管理の自動化を考える中で、何度もAnsibleという名前を耳にするようになりました。私にとって、コンテナ環境でのAnsibleの立ち位置を理解することがまず優先すべきと考えました。
+今回は、Ansibleがコンテナ環境でどのように役立つのか、そしてどのような場面では最適解でないのか、調べて学んだ内容を整理しまし...]]></description><link>https://zenn.dev/mifurohi/articles/8d0e22572ee1bc</link><guid isPermaLink="true">https://zenn.dev/mifurohi/articles/8d0e22572ee1bc</guid><pubDate>Tue, 07 Jan 2025 09:27:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--U0yQ2Y18--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2586%25E3%2583%258A%25E6%2599%2582%25E4%25BB%25A3%25E3%2581%25AEAnsible%25E3%2582%2592%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E3%2581%258C%25E8%25AA%25BF%25E3%2581%25B9%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25EF%25BC%2581%25E5%25BD%25B9%25E5%2589%25B2%25E3%2581%25A8%25E3%2582%25AA%25E3%2583%25BC%25E3%2582%25B1%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25AC%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%25A8%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%25E3%2582%2592%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mifurohi%2540%25E5%2585%2583%25E7%25BE%258A%25E9%25A3%25BC%25E3%2581%2584%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q1MTA2ZWMzZmUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mifurohi@元羊飼い</dc:creator></item><item><title><![CDATA[Dockerに触れてみた[初心者向け]]]></title><description><![CDATA[
+ はじめに
+こんにちは。クラウドエンジニアのRJです。
+このブログでは、開発環境の構築や運用で注目を集めているDockerについて、初心者の方でも理解できるように解説していきます。前半ではDockerの基本的な概念について、後半では実際のDocker Desktopのインストール手順を説明していきます。
+AWSをメインとして仕事をしているのでDockerなどの勉強がてらブログを投稿してみました。
+
+ 想定読者
+
+プログラミングを勉強し始めた方
+開発環境の構築に興味がある方
+Dockerについて聞いたことはあるが、使ったことがない方
+
+
+ 1. Dockerとは？
+Dockerは、アプリ...]]></description><link>https://zenn.dev/rjkankanrjblog/articles/ee53524ac01138</link><guid isPermaLink="true">https://zenn.dev/rjkankanrjblog/articles/ee53524ac01138</guid><pubDate>Tue, 07 Jan 2025 08:38:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--eLgpA0UM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%25E3%2581%25AB%25E8%25A7%25A6%25E3%2582%258C%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%255B%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E5%2590%2591%25E3%2581%2591%255D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:RJ%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTHE5RHlsTEdULVNGVXI4d2c3SVV5M1RyMHBjTU5wbXAxcE9KSzZDeDRKN2tSYzV3PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>RJ</dc:creator></item><item><title><![CDATA[Drupalでモジュールインストール時にfgets周りでエラーが出たとき]]></title><description><![CDATA[DrupalでWebのUIからpersistent_loginモジュールをインストールしたとき、Dockerのログに以下のようなエラーが出ました。
+&gt;  [error]  TypeError: fgets(): Argument #1 ($stream) must be of type resource, false given in fgets() (line 248 of /var/www/web/core/lib/Drupal/Component/Gettext/PoStreamReader.php) #0 /var/www/web/core/lib/Drupal/Compo...]]></description><link>https://zenn.dev/the2ndloop/articles/9060229cd8878f</link><guid isPermaLink="true">https://zenn.dev/the2ndloop/articles/9060229cd8878f</guid><pubDate>Tue, 07 Jan 2025 01:27:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vbRyXGoW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Drupal%25E3%2581%25A7%25E3%2583%25A2%25E3%2582%25B8%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%25AB%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E6%2599%2582%25E3%2581%25ABfgets%25E5%2591%25A8%25E3%2582%258A%25E3%2581%25A7%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E3%2581%258C%25E5%2587%25BA%25E3%2581%259F%25E3%2581%25A8%25E3%2581%258D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25B2%25E3%2581%259A%25E3%2581%25BF%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NiMzVlYmVjNWIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ひずみ</dc:creator></item><item><title><![CDATA[Poetry v2.0 リリース後の Docker 環境を救う簡単な暫定対処法]]></title><description><![CDATA[
+ はじめに
+2025 年 1 月 5 日に Poetry version 2.0 の安定版がリリースされました。
+https://python-poetry.org/history/#200---2025-01-05
+pyproject.toml の記述方法が PEP 621 に準拠したものに変更されるなど、v1 系と v2 系では大きな変更が幾つかあります。それに伴い、Poetry v1 系で開発していたアプリケーションを docker コンテナとして利用する場合、これまで通りの Dockerfile ではビルドができないことがあります。
+この記事では v1 系で利用していた Doc...]]></description><link>https://zenn.dev/atsukish/articles/bdb235c7466e42</link><guid isPermaLink="true">https://zenn.dev/atsukish/articles/bdb235c7466e42</guid><pubDate>Tue, 07 Jan 2025 01:18:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--HoT36Nqj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Poetry%2520v2.0%2520%25E3%2583%25AA%25E3%2583%25AA%25E3%2583%25BC%25E3%2582%25B9%25E5%25BE%258C%25E3%2581%25AE%2520Docker%2520%25E7%2592%25B0%25E5%25A2%2583%25E3%2582%2592%25E6%2595%2591%25E3%2581%2586%25E7%25B0%25A1%25E5%258D%2598%25E3%2581%25AA%25E6%259A%25AB%25E5%25AE%259A%25E5%25AF%25BE%25E5%2587%25A6%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:atsukish%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUVkRlRwNFlsUl9JNU96MGtrLURPTHhQdlUydkthSkFBcnhIbWlpZEpfc3FWbUE9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>atsukish</dc:creator></item><item><title><![CDATA[Docker環境Misskeyバックアップ(ディレクトリごと)メモ]]></title><description><![CDATA[Misskeyディレクトリごとバックアップ→GoogleDriveにアップロード(手動)
+GoogleDriveマウント方法は上記のリンクから
+Misskeyディレクトリごとのバックアップ
+#Misskey作業ユーザーに入る
+sudo su - misskey
+
+#Misskey作業ディレクトリに移動
+cd misskey
+
+#Misskey止める
+sudo docker compose down
+
+#ディレクトリをtar.gzで固めてホームディレクトリに.tgzファイル作成
+sudo tar -zvcf ../mi_backup.tgz .
+
+#Misskey起動
+sudo docke...]]></description><link>https://zenn.dev/harumaki2000/articles/0dc0a470eeb1c6</link><guid isPermaLink="true">https://zenn.dev/harumaki2000/articles/0dc0a470eeb1c6</guid><pubDate>Tue, 07 Jan 2025 00:41:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Ifs_c1Ic--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%25E7%2592%25B0%25E5%25A2%2583Misskey%25E3%2583%2590%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%2528%25E3%2583%2587%25E3%2582%25A3%25E3%2583%25AC%25E3%2582%25AF%25E3%2583%2588%25E3%2583%25AA%25E3%2581%2594%25E3%2581%25A8%2529%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:harumaki2000%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSW5iWFNoMlRaUXQ1d29DN19KZzV1U0xKT0xTS1lDYXo1aVA0Z0l1MU1pREVKakNnPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>harumaki2000</dc:creator></item><item><title><![CDATA[Next.js StandaloneビルドでPrismaマイグレーションとSeed実行]]></title><description><![CDATA[
+ Next.jsのビルドについて
+npm run build (next build) で実行する Next.jsのビルドには3種類あります。
+
+デフォルト : 特別なことはしない
+export : 静的ファイルとして出力、主にSPAとして利用
+standalone : 必要なファイル（ライブラリ含む）を抽出する
+
+これらのオプションは next.config.ts(js) で指定できます。
+import type { NextConfig } from "next";
+
+const nextConfig: NextConfig = {
+  output: "standalone"
+}...]]></description><link>https://zenn.dev/moozaru/articles/1a024346a0e497</link><guid isPermaLink="true">https://zenn.dev/moozaru/articles/1a024346a0e497</guid><pubDate>Mon, 06 Jan 2025 22:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Ykh1GEk9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Next.js%2520Standalone%25E3%2583%2593%25E3%2583%25AB%25E3%2583%2589%25E3%2581%25A7Prisma%25E3%2583%259E%25E3%2582%25A4%25E3%2582%25B0%25E3%2583%25AC%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2581%25A8Seed%25E5%25AE%259F%25E8%25A1%258C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:zaru%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FiNDkwNTdmZTMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%25A0%25E3%2583%25BC%25E3%2582%25B6%25E3%2583%25AB%25E3%2581%25A1%25E3%2582%2583%25E3%2582%2593%25E3%2581%25AD%25E3%2582%258B%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2hTeWVOcHN2TEdOdTdPeUFlU1JEbDhUNkNOX1p3NHBXSHpIRHN2NlBFPXMyNTAtYw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>zaru</dc:creator></item><item><title><![CDATA[Docker環境で構築したMisskeyデータベースのバックアップ自動化]]></title><description><![CDATA[Misskeyバックアップ自動化記事三部作最後の記事
+・Ubuntu/LinuxにGoogleDriveをマウント
+・Linux再起動時にGoogleDriveを自動マウントする
+この2つの設定をDockerを動かしているユーザーで行っている
+・Discordウェブフックの作成
+以上が済んでいる前提で進めていきます。
+# Dockerを動かしているユーザーに入る(例：misskey)
+# バックアップ用ディレクトリ作成
+mkdir mi_backup
+
+# バックアップスクリプトファイル作成・編集
+touch backup.sh
+sudo vim backup.sh
+backup.sh
+...]]></description><link>https://zenn.dev/harumaki2000/articles/cf637ea663ce58</link><guid isPermaLink="true">https://zenn.dev/harumaki2000/articles/cf637ea663ce58</guid><pubDate>Mon, 06 Jan 2025 21:55:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--zq8gdQj6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25A7%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2597%25E3%2581%259FMisskey%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%2599%25E3%2583%25BC%25E3%2582%25B9%25E3%2581%25AE%25E3%2583%2590%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%25E8%2587%25AA%25E5%258B%2595%25E5%258C%2596%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:harumaki2000%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSW5iWFNoMlRaUXQ1d29DN19KZzV1U0xKT0xTS1lDYXo1aVA0Z0l1MU1pREVKakNnPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>harumaki2000</dc:creator></item><item><title><![CDATA[【WSL】UbuntuからWindows版Docker Desktopを使いたい]]></title><description><![CDATA[WSL の Ubuntu から Windows 版 Docker Desktop を使いたいーーー！
+ということで設定していきます。
+手順が公式ドキュメントにあるので、その通りにやってみます
+https://docs.docker.com/desktop/wsl/
+
+ Docker Engine 等をアンインストール
+Ubuntu に Docker をインストールしている場合は、
+Docker Desktop と競合するため、アンインストールします。
+// インストールされているか確認
+$ apt list --installed | grep "docker\|containerd.i...]]></description><link>https://zenn.dev/kuuki/articles/wsl-ubuntu-use-docker-desktop-for-windows</link><guid isPermaLink="true">https://zenn.dev/kuuki/articles/wsl-ubuntu-use-docker-desktop-for-windows</guid><pubDate>Mon, 06 Jan 2025 12:06:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1mshlWsi--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590WSL%25E3%2580%2591Ubuntu%25E3%2581%258B%25E3%2582%2589Windows%25E7%2589%2588Docker%2520Desktop%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2584%25E3%2581%259F%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hisui%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAxNzI1MTUwNTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hisui</dc:creator></item><item><title><![CDATA[Windows上の仮想環境について(自分用メモ)]]></title><description><![CDATA[おじさんパイソン勉強しちゃうぞーと思ったらC:\Users\私の 名前\AppData\Roaming\Python\Python313\Scriptsみたいになって草。だからWinは
+やっぱリナックスよと思ってWSLからDocker上げたらKubernetesがサポートしてない？Dockerオワタて書いた人が燃えてたり何があったんや(15年くらい技術から離れてた人)
+調べたことの自分用メモ。
+
+ WSL
+WindowsのWSL(Windows Subsystem for Linux)は2020年Ver2になり、Hyper-V仮想環境で(本物の)Linuxカーネルが動くようになった(それ...]]></description><link>https://zenn.dev/tabirider/articles/tr-windows-dev-env</link><guid isPermaLink="true">https://zenn.dev/tabirider/articles/tr-windows-dev-env</guid><pubDate>Mon, 06 Jan 2025 09:58:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--x8sOhYMQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Windows%25E4%25B8%258A%25E3%2581%25AE%25E4%25BB%25AE%25E6%2583%25B3%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2528%25E8%2587%25AA%25E5%2588%2586%25E7%2594%25A8%25E3%2583%25A1%25E3%2583%25A2%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tabirider%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSkdXX1MwVUNvSHVmUk12UDlTLWpUX1pVbXJzQmg1Q3lFMkh4TGhpMFY2ZDRIRHBHRHg9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tabirider</dc:creator></item><item><title><![CDATA[デジタル庁のABRジオコーダーとCloud Runで、ジオコーディングAPIを作ってみた]]></title><description><![CDATA[
+ はじめに
+こんにちは！CareNetのYTです。
+入力形式やソースの異なる住所データの紐付けを行いたいとき、住所文字列の正規化を行うことが不可欠です。本記事では、Google CloudのCloud Run Serviceとデジタル庁が提供するアドレス・ベース・レジストリ ジオコーダーを活用して、住所文字列の正規化が可能なジオコーディングAPIを構築する方法をご紹介します。
+
+ デジタル庁のアドレス・ベース・レジストリ ジオコーダーについて
+リクエストされた住所文字列を、デジタル庁のアドレス・ベース・レジストリ（ABR: Address Base Registry）と照合することで、...]]></description><link>https://zenn.dev/carenet/articles/ac15dbe0d2e7be</link><guid isPermaLink="true">https://zenn.dev/carenet/articles/ac15dbe0d2e7be</guid><pubDate>Mon, 06 Jan 2025 07:08:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--rVuUaluM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2587%25E3%2582%25B8%25E3%2582%25BF%25E3%2583%25AB%25E5%25BA%2581%25E3%2581%25AEABR%25E3%2582%25B8%25E3%2582%25AA%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2580%25E3%2583%25BC%25E3%2581%25A8Cloud%2520Run%25E3%2581%25A7%25E3%2580%2581%25E3%2582%25B8%25E3%2582%25AA%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2587%25E3%2582%25A3%25E3%2583%25B3%25E3%2582%25B0API%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:YT%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE0MTRiZmIwZWQuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:CareNet%2520Engineers%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSkpqSGk2b3lTUUxvWFA5N1JYZVJPMXZOMnZYTHphWDdFR05QcEh3ZDJfR0FBRERBPXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>YT</dc:creator></item><item><title><![CDATA[【Dockerを使用】Unitree 4D Lidar L1/ROS2HumbleをUbuntu24.04上で動作させる]]></title><description><![CDATA[
+ はじめに
+機械･制御系研究室での研究で、LiDARをRaspberryPi5上で動作させるにあたって試行錯誤した結果を共有します。
+
+
+ 概要
+Ubuntu24.04にROS2Humbleをaptによってインストールできないため、Dockerを用いてUnitree 4D Lidar L1 のデータをRviz2で可視化する手順をご紹介します。
+!
+RaspberryPi5にインストールされたUbuntu24.04LTS上でのみ動作確認済みです。
+
+
+ 手順
+以下のディレクトリ構成に従ってファイルを配置し、後述のコマンド群を上から順番に実行してください。
+
+ ディレクトリ構成
+/
+├─ ...]]></description><link>https://zenn.dev/nitic_students/articles/dce62d8389a052</link><guid isPermaLink="true">https://zenn.dev/nitic_students/articles/dce62d8389a052</guid><pubDate>Mon, 06 Jan 2025 02:53:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--oJrdZl-Q--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Docker%25E3%2582%2592%25E4%25BD%25BF%25E7%2594%25A8%25E3%2580%2591Unitree%25204D%2520Lidar%2520L1%252FROS2Humble%25E3%2582%2592Ubuntu24.04%25E4%25B8%258A%25E3%2581%25A7%25E5%258B%2595%25E4%25BD%259C%25E3%2581%2595%25E3%2581%259B%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:amuratakamitamu%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBiYzc3NDIyM2YuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E8%258C%25A8%25E5%259F%258E%25E9%25AB%2598%25E5%25B0%2582%2520%25E5%25AD%25A6%25E7%2594%259F%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YVZlY251U3dCa3pGblZFRnRmRlVLT21Cam1hZ21UZXpQNkNrZWg1QVE9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>amuratakamitamu</dc:creator></item><item><title><![CDATA[WindowsにWSL2をインストールする【Docker Desktopをインストールために必須】]]></title><description><![CDATA[Windows上でのLinux環境構築が
+恐ろしいほど簡単になっていて驚きました。
+こんにちは、
+ワニかず@40歳 出戻りエンジニアです。
+私がエンジニアとして働き始めた2007年ごろ、
+WindowsでUNIX環境を構築するものといえば
+Cygwinぐらいしか知らず、
+設定もそこそこ面倒だった記憶があるのですが、
+今は仮想環境の構築が簡単になりましたね。
+この記事をご覧になることで、
+WindowsでLinux動作をさせる環境
+「WSL2」のインストールがわかるとともに、
+DockerとWSL2の関係について理解することができます。
+
+ WSL2をインストール
+
+ PowerShell...]]></description><link>https://zenn.dev/40_comeback_eng/articles/820952bc22e151</link><guid isPermaLink="true">https://zenn.dev/40_comeback_eng/articles/820952bc22e151</guid><pubDate>Mon, 06 Jan 2025 00:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--WCYa0cir--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Windows%25E3%2581%25ABWSL2%25E3%2582%2592%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%2599%25E3%2582%258B%25E3%2580%2590Docker%2520Desktop%25E3%2582%2592%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AB%25E5%25BF%2585%25E9%25A0%2588%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%25AF%25E3%2583%258B%25E3%2581%258B%25E3%2581%259A%254040%25E6%25AD%25B3%2520%25E5%2587%25BA%25E6%2588%25BB%25E3%2582%258A%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg3ZGNhZmRmOGUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ワニかず@40歳 出戻りエンジニア</dc:creator></item></channel></rss>
