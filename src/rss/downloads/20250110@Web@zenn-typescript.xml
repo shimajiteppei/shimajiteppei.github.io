@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「TypeScript」のフィード]]></title><description><![CDATA[Zennのトピック「TypeScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/typescript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/f13e758fdb.png</url><title>Zennの「TypeScript」のフィード</title><link>https://zenn.dev/topics/typescript</link></image><generator>zenn.dev</generator><lastBuildDate>Fri, 10 Jan 2025 12:04:25 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/typescript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[画像処理100本ノックに挑戦｜Maxプーリング（009/100）]]></title><description><![CDATA[
+ これはなに？
+画像処理100本ノックを、TypeScriptとlibvipsで挑戦してみる記事の9本目です。
+
+ 前回
+https://zenn.dev/nyagato_00/articles/0a008e6bd4439b
+
+ 実装
+
+ お題
+
+ガウシアンフィルタ(3x3、標準偏差1.3)を実装し、imori_noise.jpgのノイズを除去せよ。
+ガウシアンフィルタとは画像の平滑化（滑らかにする）を行うフィルタの一種であり、ノイズ除去にも使われる。
+ノイズ除去には他にも、メディアンフィルタ(Q.10)、平滑化フィルタ(Q.11)、LoGフィルタ(Q.19)などがある。
+ガウシアンフ...]]></description><link>https://zenn.dev/nyagato_00/articles/0a309932643e53</link><guid isPermaLink="true">https://zenn.dev/nyagato_00/articles/0a309932643e53</guid><pubDate>Fri, 10 Jan 2025 10:51:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lUnq-fu0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%2594%25BB%25E5%2583%258F%25E5%2587%25A6%25E7%2590%2586100%25E6%259C%25AC%25E3%2583%258E%25E3%2583%2583%25E3%2582%25AF%25E3%2581%25AB%25E6%258C%2591%25E6%2588%25A6%25EF%25BD%259CMax%25E3%2583%2597%25E3%2583%25BC%25E3%2583%25AA%25E3%2583%25B3%25E3%2582%25B0%25EF%25BC%2588009%252F100%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nyagato_00%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUxtNXd1MTVKUVk3SjNOUG1kcGlMeWdfWUt3blZzaTRpWDRoYjU1c21UTTk3c1E9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nyagato_00</dc:creator></item><item><title><![CDATA[画面上の好きな位置にメッセージを配置できるSNSをReactで作ってみた]]></title><description><![CDATA[
+ はじめに
+皆さんはサマーウォーズという映画をご存知でしょうか？こちらの映画に登場するSNSでは以下の画像のようにメッセージが表示されます。画面を覆い尽くすように表示される感じが魅力的ですね。今回はこちらのSNSをモチーフにしたWebアプリを作成してみました。
+
+サマーウォーズに登場するSNS [1]
+!
+以降の記事には著者の趣味でちいかわ要素が盛り込まれていますのでご注意ください
+
+
+ アプリについて
+
+ 概要
+今回作成したアプリです。
+・ログイン
+・投稿
+・編集
+・返信
+・削除
+などの基本的な機能を実装しています。
+各機能について順にご紹介します。
+
+
+ 主な機能
+
+ メッセージの...]]></description><link>https://zenn.dev/hrtr/articles/318b1e0a41836e</link><guid isPermaLink="true">https://zenn.dev/hrtr/articles/318b1e0a41836e</guid><pubDate>Fri, 10 Jan 2025 07:30:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bz6TFtgd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%2594%25BB%25E9%259D%25A2%25E4%25B8%258A%25E3%2581%25AE%25E5%25A5%25BD%25E3%2581%258D%25E3%2581%25AA%25E4%25BD%258D%25E7%25BD%25AE%25E3%2581%25AB%25E3%2583%25A1%25E3%2583%2583%25E3%2582%25BB%25E3%2583%25BC%25E3%2582%25B8%25E3%2582%2592%25E9%2585%258D%25E7%25BD%25AE%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258BSNS%25E3%2582%2592React%25E3%2581%25A7%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:HRTR-86%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M3MzMxZGQyNmEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>HRTR-86</dc:creator></item><item><title><![CDATA[VSC上で「モジュール '...' またはそれに対応する型宣言が見つかりません。ts(2307)」のエラーが出る]]></title><description><![CDATA[
+ 事象
+TypeScript に対応しているはずのパッケージを import したのに、以下のようなエラーがでる。
+
+モジュール '...' またはそれに対応する型宣言が見つかりません。ts(2307)
+補足
+VSC上にエラーは出るものの、コンパイルはとおる
+
+ 環境
+
+VSCode
+TypeScript
+ESLint
+Vite
+
+
+ 対応
+VSCの「TypeScript と JavaScript の言語機能」を無効にする。
+やり方は以下の「ビルトイン拡張機能の切り方」を参考
+https://zenn.dev/minamo/articles/6c935d0dccd5e6
+]]></description><link>https://zenn.dev/ynghal/articles/ebfaa0c3d5919c</link><guid isPermaLink="true">https://zenn.dev/ynghal/articles/ebfaa0c3d5919c</guid><pubDate>Fri, 10 Jan 2025 06:58:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2KsLaWJy--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:VSC%25E4%25B8%258A%25E3%2581%25A7%25E3%2580%258C%25E3%2583%25A2%25E3%2582%25B8%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%25AB%2520%2527...%2527%2520%25E3%2581%25BE%25E3%2581%259F%25E3%2581%25AF%25E3%2581%259D%25E3%2582%258C%25E3%2581%25AB%25E5%25AF%25BE%25E5%25BF%259C%25E3%2581%2599%25E3%2582%258B%25E5%259E%258B%25E5%25AE%25A3%25E8%25A8%2580%25E3%2581%258C%25E8%25A6%258B%25E3%2581%25A4%25E3%2581%258B%25E3%2582%258A%25E3%2581%25BE%25E3%2581%259B%25E3%2582%2593%25E3%2580%2582ts%25282307%2529%25E3%2580%258D%25E3%2581%25AE%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E3%2581%258C%25E5%2587%25BA%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yng%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZjMjE0YTg4ZmMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yng</dc:creator></item><item><title><![CDATA[AI駆動開発を調べていたらCursorと出会った話]]></title><description><![CDATA[
+ はじめに
+FizzBuzz問題を解くコードをCursorで生成してみました。
+ただ、CursorはAIでコードを生成させるだけではなく、テスト駆動開発を行ってみたいと思います。
+参考資料の本を読めばCursorについては理解できるが、活用方法をハンズオン形式で記事にした方が馴染みやすいと思ったので今回の記事を作成しました。
+
+ Cursorとは
+The AI Code Editor
+CursorはAIによるコード生成をサポートするコードエディタです。
+CursorはVSCodeの拡張機能としてインストールできます。
+
+ FizzBuzzとは
+元は単純なパーティゲームでFizzBuzz...]]></description><link>https://zenn.dev/shunsuke_stack/articles/277e75e9b3df27</link><guid isPermaLink="true">https://zenn.dev/shunsuke_stack/articles/277e75e9b3df27</guid><pubDate>Fri, 10 Jan 2025 04:37:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--43BVnIiX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AI%25E9%25A7%2586%25E5%258B%2595%25E9%2596%258B%25E7%2599%25BA%25E3%2582%2592%25E8%25AA%25BF%25E3%2581%25B9%25E3%2581%25A6%25E3%2581%2584%25E3%2581%259F%25E3%2582%2589Cursor%25E3%2581%25A8%25E5%2587%25BA%25E4%25BC%259A%25E3%2581%25A3%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Nakajima.js%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FiNjljNTJjOTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Nakajima.js</dc:creator></item><item><title><![CDATA[Node.js 23.6.0でTSの型がフラグ無しで除去されるようになった]]></title><description><![CDATA[Unflag --experimental-strip-types · Issue #17 · nodejs/typescript
+が取り込まれた Node.js 23.6.0 がリリースされたので早速試してみる。
+// greeting.mts
+export function greet(message: string): string {
+  return `Hello, ${message}!`
+}
+console.log(greet('world'))
+$ node ./greeting.mts
+Hello, world!
+フラグなしでmtsファイルが実行された。
+// gree...]]></description><link>https://zenn.dev/malformedx/articles/10238fdcba1b2d</link><guid isPermaLink="true">https://zenn.dev/malformedx/articles/10238fdcba1b2d</guid><pubDate>Fri, 10 Jan 2025 03:46:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--d86uvgc3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Node.js%252023.6.0%25E3%2581%25A7TS%25E3%2581%25AE%25E5%259E%258B%25E3%2581%258C%25E3%2583%2595%25E3%2583%25A9%25E3%2582%25B0%25E7%2584%25A1%25E3%2581%2597%25E3%2581%25A7%25E9%2599%25A4%25E5%258E%25BB%25E3%2581%2595%25E3%2582%258C%25E3%2582%258B%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E3%2581%25AA%25E3%2581%25A3%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:beer-bearz%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RhMTJhNzYyMDIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>beer-bearz</dc:creator></item><item><title><![CDATA[TypeScriptを用いたnpxコマンドの開発とnpm公開手順]]></title><description><![CDATA[
+ はじめに
+npx コマンドを知っていますでしょうか？npxコマンドは、ローカルにインストールしなくても  npm パッケージを実行できるコマンドです。
+例えば、コード生成ツールやコードチェックの自動実行を、依存関係に影響を与えることなく実行できます。
+本記事では、自作の npx コマンドを TypeScript で作成し、それを自身のスコープ（npmユーザー名）で、npm に公開する方法を解説します。npm公開することにより、他のユーザーも含めてオリジナルのコマンドを簡単に実行できるようになります。
+!
+本記事で紹介しているサンプル通りに実行すれば、自作のnpxコマンドを作成できます...]]></description><link>https://zenn.dev/thinkingsinc/articles/627ccdebff3b6f</link><guid isPermaLink="true">https://zenn.dev/thinkingsinc/articles/627ccdebff3b6f</guid><pubDate>Fri, 10 Jan 2025 02:26:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1Sw3ygto--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%25E3%2582%2592%25E7%2594%25A8%25E3%2581%2584%25E3%2581%259Fnpx%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2581%25AE%25E9%2596%258B%25E7%2599%25BA%25E3%2581%25A8npm%25E5%2585%25AC%25E9%2596%258B%25E6%2589%258B%25E9%25A0%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:atman%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ExNDk2MTc4MWYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Thinkings%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSjl3SUJHQTRDUWZZOW54b1owcjI3WkN6N1I1Y0NsMnBzM2EwWkRnbGc0dXZHVlFnPXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>atman</dc:creator></item><item><title><![CDATA[StripeのInvoice支払いの導入の流れ]]></title><description><![CDATA[
+ StripeのInvoice支払いの導入
+
+ 流れ
+
+
+開発環境
+
+Stripe dashboard: Test modeに設定する
+
+Publishable_keyとSecret_keyを設定、取得する
+
+
+
+Stripe CLI
+
+ローカルテスト用のWebhookを設定する
+　　- Stripe CLIのインストール、設定
+
+
+https://docs.stripe.com/stripe-cli
+
+brew install stripe/stripe-cli/stripe
+stripe login --api-key Secret_key
+
+
+テスト環境のWebhook APIを...]]></description><link>https://zenn.dev/bizlink/articles/b77c0c0ebaa45b</link><guid isPermaLink="true">https://zenn.dev/bizlink/articles/b77c0c0ebaa45b</guid><pubDate>Fri, 10 Jan 2025 02:02:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--kAfprKBg--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Stripe%25E3%2581%25AEInvoice%25E6%2594%25AF%25E6%2589%2595%25E3%2581%2584%25E3%2581%25AE%25E5%25B0%258E%25E5%2585%25A5%25E3%2581%25AE%25E6%25B5%2581%25E3%2582%258C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Zihan%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzllMzFlOGFkZGMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Bizlink%2520Developers%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M0NmM0OTllZDguanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Zihan</dc:creator></item><item><title><![CDATA[Node.js v23.6.0：TypeScriptサポートが登場]]></title><description><![CDATA[
+Node.js v23.6.0 が最近リリースされ、大きなアップデートとして --experimental-strip-types フラグが解除されました。これにより、Node.js は追加の設定なしで TypeScript ファイルをネイティブに実行できるようになりました。
+
+ TypeScript の重要性
+TypeScript は、JavaScript にオプションの静的型付けやインターフェース、ジェネリクス、型推論などの高度な機能を追加することで、JavaScript を拡張します。これにより、大規模な JavaScript アプリケーションのデファクトスタンダードとなっていま...]]></description><link>https://zenn.dev/leapcell/articles/67ee774d4a22d1</link><guid isPermaLink="true">https://zenn.dev/leapcell/articles/67ee774d4a22d1</guid><pubDate>Thu, 09 Jan 2025 19:30:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--cWOe73ni--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Node.js%2520v23.6.0%25EF%25BC%259ATypeScript%25E3%2582%25B5%25E3%2583%259D%25E3%2583%25BC%25E3%2583%2588%25E3%2581%258C%25E7%2599%25BB%25E5%25A0%25B4%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Leapcell%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y0N2E0MGQ3NGEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Leapcell</dc:creator></item><item><title><![CDATA[自作のAIにソースコード投げるやつをnpmに公開した]]></title><description><![CDATA[https://zenn.dev/yamadashy/articles/ai-tool-repomix-5000-star#cli実装
+たまたまTwitterで流れてきたこの投稿を見て、自分も似たようなもの作ってんだよな、やっぱり同じ考えの人って多いんだな～と思いつつ、「えっファイルの指定できないん！？！？」という驚きが。
+そして上記リンクの方がまとめてくださっている類似のプロジェクトと比較しても、自作したものはカスタム性こそショボいもののClaudeから利用した際の利便性は負けてないなと感じたので、いろいろ調べつつnpmに公開してみました。
+githubもほとんどprivate、ろくに...]]></description><link>https://zenn.dev/chiepu3/articles/12e5970af5e93e</link><guid isPermaLink="true">https://zenn.dev/chiepu3/articles/12e5970af5e93e</guid><pubDate>Thu, 09 Jan 2025 19:05:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--JthRE3p---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%2587%25AA%25E4%25BD%259C%25E3%2581%25AEAI%25E3%2581%25AB%25E3%2582%25BD%25E3%2583%25BC%25E3%2582%25B9%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E6%258A%2595%25E3%2581%2592%25E3%2582%258B%25E3%2582%2584%25E3%2581%25A4%25E3%2582%2592npm%25E3%2581%25AB%25E5%2585%25AC%25E9%2596%258B%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:chiepu3%2Cx_90%2Cy_121/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>chiepu3</dc:creator></item><item><title><![CDATA[画像処理100本ノックに挑戦｜Maxプーリング（008/100）]]></title><description><![CDATA[
+ これはなに？
+画像処理100本ノックを、TypeScriptとlibvipsで挑戦してみる記事の8本目です。
+
+ 前回
+https://zenn.dev/nyagato_00/articles/91ff5e44b4c6dd
+
+ 実装
+
+ お題
+
+ここでは平均値でなく最大値でプーリングせよ。
+
+https://github.com/minido/Gasyori100knock-1/tree/master/Question_01_10#q8-maxプーリング
+
+ Coding
+import sharp from 'sharp';
+
+export async function maxPoo...]]></description><link>https://zenn.dev/nyagato_00/articles/0a008e6bd4439b</link><guid isPermaLink="true">https://zenn.dev/nyagato_00/articles/0a008e6bd4439b</guid><pubDate>Thu, 09 Jan 2025 14:09:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---STHQpAk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%2594%25BB%25E5%2583%258F%25E5%2587%25A6%25E7%2590%2586100%25E6%259C%25AC%25E3%2583%258E%25E3%2583%2583%25E3%2582%25AF%25E3%2581%25AB%25E6%258C%2591%25E6%2588%25A6%25EF%25BD%259CMax%25E3%2583%2597%25E3%2583%25BC%25E3%2583%25AA%25E3%2583%25B3%25E3%2582%25B0%25EF%25BC%2588008%252F100%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nyagato_00%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUxtNXd1MTVKUVk3SjNOUG1kcGlMeWdfWUt3blZzaTRpWDRoYjU1c21UTTk3c1E9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nyagato_00</dc:creator></item><item><title><![CDATA[【TypeScript/ハンズオン】テスト駆動開発(TDD)入門 第3回：FizzBuzzで学ぶTDDの実践]]></title><description><![CDATA[
+ はじめに
+前回は、Jestを使ってテストを書いていく方法を実践しました。
+https://zenn.dev/nezumizuki/articles/b9dd543d601218
+今回は、実際のプログラムをTDDで開発する具体的な流れを、FizzBuzzを例に整理していきます。
+
+ 1. 開発環境のセットアップ
+
+ 1.1 必要なツールの確認
+
+Node.js（v16以上）がインストールされていること
+npmが利用可能であること
+
+# バージョンの確認方法
+node -v
+npm -v
+もし未インストールの場合は、Node.jsの公式サイトからダウンロードしてインストールしてください。...]]></description><link>https://zenn.dev/nezumizuki/articles/c24df235f7333d</link><guid isPermaLink="true">https://zenn.dev/nezumizuki/articles/c24df235f7333d</guid><pubDate>Thu, 09 Jan 2025 09:34:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8m2Sej8m--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590TypeScript%252F%25E3%2583%258F%25E3%2583%25B3%25E3%2582%25BA%25E3%2582%25AA%25E3%2583%25B3%25E3%2580%2591%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E9%25A7%2586%25E5%258B%2595%25E9%2596%258B%25E7%2599%25BA%2528TDD%2529%25E5%2585%25A5%25E9%2596%2580%2520%25E7%25AC%25AC3%25E5%259B%259E%25EF%25BC%259AFizzBuzz%25E3%2581%25A7%25E5%25AD%25A6%25E3%2581%25B6TDD%25E3%2581%25AE%25E5%25AE%259F%25E8%25B7%25B5%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:MI%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSXRYZE91dm9hdlRUclRZSVY2eW5ibDdfVHprdXhtb1JUcUlQRGpTaTRfTmZxUnlLdz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>MI</dc:creator></item><item><title><![CDATA[test]]></title><description><![CDATA[test
+]]></description><link>https://zenn.dev/kkagomme/articles/df88de516c048e</link><guid isPermaLink="true">https://zenn.dev/kkagomme/articles/df88de516c048e</guid><pubDate>Thu, 09 Jan 2025 07:47:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--N7JDp_o7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_80:test%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kagome%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc4MmQxNDIwNDUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kagome</dc:creator></item><item><title><![CDATA[ショッピングアプリに必要となる基本的な機能を持つサーバーを開発しています。]]></title><description><![CDATA[
+ はじめに
+こんにちは。絶賛ほぼニートというスローライフを送る、Kokomiです。
+私は主にフロントエンドに興味を持っていますが、TypeScriptでできることはなんでもやりたいと思うので、APIサーバーも作ってみようかということで、将来開発するかもしれない、Kokomi shoppingというショッピングアプリのサーバーを作ることにしました。
+最近といいますか、トレンドとして、NuxtやらNextやらSvelteKitなどの、フロントエンドフレームワークとサーバーサイドが合体したようなWebフレームワークが流行っていますが、私はあのやり方がどうにも好きになれず、フロントエンドとAP...]]></description><link>https://zenn.dev/kokomi/articles/2d309bc6ef1d06</link><guid isPermaLink="true">https://zenn.dev/kokomi/articles/2d309bc6ef1d06</guid><pubDate>Thu, 09 Jan 2025 07:27:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Biun7Ybw--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%2583%25E3%2583%2594%25E3%2583%25B3%25E3%2582%25B0%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2581%25AB%25E5%25BF%2585%25E8%25A6%2581%25E3%2581%25A8%25E3%2581%25AA%25E3%2582%258B%25E5%259F%25BA%25E6%259C%25AC%25E7%259A%2584%25E3%2581%25AA%25E6%25A9%259F%25E8%2583%25BD%25E3%2582%2592%25E6%258C%2581%25E3%2581%25A4%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2582%2592%25E9%2596%258B%25E7%2599%25BA%25E3%2581%2597%25E3%2581%25A6%25E3%2581%2584%25E3%2581%25BE%25E3%2581%2599%25E3%2580%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:KOKOMI%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M1YmIyY2Y4MzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>KOKOMI</dc:creator></item><item><title><![CDATA[Capacitor用のネイティブZIP操作プラグインを作った]]></title><description><![CDATA[こんにちは。音楽ディレクター／プロデューサーの村上といいます。
+今、WebAudio APIをがっつり使った音楽系のCapacitorアプリを作っているのですが、
+そこでZIPを扱うことになって、ZIP操作はフロントエンドでfflateなりjszipなり使っても
+できるんですが、スマホだとメモリ不足ですぐ落ちてしまうんですよね。
+そこでネイティブのプラグインを探してみたわけですが、更新が止まっていたり、Androidしか対応してなかったり、有料プラグインだったりして、いい感じのネイティブプラグインが無かったので自作しました。
+既存のCordovaプラグインを参考にはしていますが、フルスク...]]></description><link>https://zenn.dev/jun_murakami/articles/3d64ea7bb06003</link><guid isPermaLink="true">https://zenn.dev/jun_murakami/articles/3d64ea7bb06003</guid><pubDate>Thu, 09 Jan 2025 07:23:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ef3BlD0P--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Capacitor%25E7%2594%25A8%25E3%2581%25AE%25E3%2583%258D%25E3%2582%25A4%25E3%2583%2586%25E3%2582%25A3%25E3%2583%2596ZIP%25E6%2593%258D%25E4%25BD%259C%25E3%2583%2597%25E3%2583%25A9%25E3%2582%25B0%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Jun%2520Murakami%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4WUpGeVFIblVsUDZucHhNYXZtX25qUEx3M1JfanJxRldjdEhDSjlodz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Jun Murakami</dc:creator></item><item><title><![CDATA[Figmaデザインを即座にReactへ！初心者でも簡単に作れるWebページ公開ガイド！！！！]]></title><description><![CDATA[
+ はじめに
+
+ 記事の目的
+デザイナーがせっかくfigmaを丁寧に作っても、開発者がデザインを無視して開発しちゃうことよくあるよね😭まじ悲しい！
+もう少し簡単に協力する仕組みがあれば、もう少しマシになるはずです！
+なので、FigmaとReactの連携方法を紹介して初心者でも簡単に相互にやり取りする方法をまとめます！
+
+ 対象読者
+フロントエンド開発者、UI/UXデザイナー、プロダクトマネージャー
+
+ 必要な前提知識
+基本的なFigmaの操作やReactの基礎知識
+
+ 必要なツールと環境の準備
+Figmaアカウントの作成と基本設定
+Anima(figma plugin)
+React開発環...]]></description><link>https://zenn.dev/medicalforce/articles/753b9dabf4f43e</link><guid isPermaLink="true">https://zenn.dev/medicalforce/articles/753b9dabf4f43e</guid><pubDate>Thu, 09 Jan 2025 05:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Fayrntmi--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Figma%25E3%2583%2587%25E3%2582%25B6%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%2592%25E5%258D%25B3%25E5%25BA%25A7%25E3%2581%25ABReact%25E3%2581%25B8%25EF%25BC%2581%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E3%2581%25A7%25E3%2582%2582%25E7%25B0%25A1%25E5%258D%2598%25E3%2581%25AB%25E4%25BD%259C%25E3%2582%258C%25E3%2582%258BWeb%25E3%2583%259A%25E3%2583%25BC%25E3%2582%25B8%25E5%2585%25AC%25E9%2596%258B%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%25EF%25BC%2581%25EF%25BC%2581%25EF%25BC%2581%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%2582%25E3%2582%2593%25E3%2581%25A9%25E3%2581%2586%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzkyZjY0YWIzNTQuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%25A1%25E3%2583%2587%25E3%2582%25A3%25E3%2582%25AB%25E3%2583%25AB%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25BC%25E3%2582%25B9%2520%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VlMmIxZjU3YjguanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>あんどう</dc:creator></item><item><title><![CDATA[思いつきで作ったAIツールが5000スターを獲得した話]]></title><description><![CDATA[とにかくケチりたい、そんな気持ちで作ったツールの話です。
+元々開発にCline(Claude Dev)やAiderなどの開発ツールを駆使していました。
+ただ、APIの料金が常に心配で、できる限り安く済ませたい気持ちもあり、Claude Proを契約してWeb版にファイルを1つ1つアップロードする日々を過ごしていました。
+ある日それが面倒になってきて「全部1ファイルにしたらいい感じに読み込んでくれるのでは？」と思い、作ってみたら思いのほかうまくいったので公開しました。
+https://github.com/yamadashy/repomix
+百聞は一見にしかずということで、
+こちらのデモに...]]></description><link>https://zenn.dev/yamadashy/articles/ai-tool-repomix-5000-star</link><guid isPermaLink="true">https://zenn.dev/yamadashy/articles/ai-tool-repomix-5000-star</guid><pubDate>Thu, 09 Jan 2025 00:36:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--aN6-tgbG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%2580%259D%25E3%2581%2584%25E3%2581%25A4%25E3%2581%258D%25E3%2581%25A7%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259FAI%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%258C5000%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%25BC%25E3%2582%2592%25E7%258D%25B2%25E5%25BE%2597%25E3%2581%2597%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yamadashy%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2p1ZVdzVUYtM0ZqUFZlT3BjY1pxZ2lXWlNmbUF1aEctQkNBenBUc0E9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yamadashy</dc:creator></item><item><title><![CDATA[djangorestframework-camel-caseの導入方法]]></title><description><![CDATA[
+ 概要
+djangorestframework-camel-caseはDRFでJSONレスポンスを返すとき、自動的にキーをキャメルケースに変換してくれるライブラリです。
+https://github.com/vbabiy/djangorestframework-camel-case
+
+ 例
+たとえば、ユーザ情報を返却するAPIを叩いたとき
+
+response.json
+ {
+ 	username: "Yuji",
+ 	created_at: "2025-01-01",
+ }
+
+これが、こうなります。
+
+response.json
+ {
+  	username: "Yuji",
+  	c...]]></description><link>https://zenn.dev/evesquare2/articles/a61976455dc0d5</link><guid isPermaLink="true">https://zenn.dev/evesquare2/articles/a61976455dc0d5</guid><pubDate>Thu, 09 Jan 2025 00:21:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--W2EoLJdH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:djangorestframework-camel-case%25E3%2581%25AE%25E5%25B0%258E%25E5%2585%25A5%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:evesquare%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM3ODIyMjRmNTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>evesquare</dc:creator></item><item><title><![CDATA[状態管理ライブラリのJotaiに入門する]]></title><description><![CDATA[
+ はじめに
+先日、Reactの状態管理ライブラリとして知られていたRecoilのリポジトリがアーカイブされたことが話題になりました。
+https://github.com/facebookexperimental/Recoil
+
+This repository has been archived by the owner on Jan 2, 2025. It is now read-only.
+
+これまでRecoilを利用していた開発者も多く、戸惑った方もいるかもしれません。その中で、RecoilからJotaiへ移行したという事例も見かけるようになりました。
+私自身も今回、Jotaiを...]]></description><link>https://zenn.dev/blueish/articles/8e992d1019c983</link><guid isPermaLink="true">https://zenn.dev/blueish/articles/8e992d1019c983</guid><pubDate>Wed, 08 Jan 2025 23:18:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3EJ7WzpT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%258A%25B6%25E6%2585%258B%25E7%25AE%25A1%25E7%2590%2586%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%25E3%2581%25AEJotai%25E3%2581%25AB%25E5%2585%25A5%25E9%2596%2580%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:kiwichan%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg5YWRmNjMzNzkuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:BLUEISH%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZlYTA3YzU3YzUuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kiwichan</dc:creator></item><item><title><![CDATA[GraphQLが流行りづらい点]]></title><description><![CDATA[!
+！！個人の見解になります！！
+私のような表面的に触った人ではなく、しっかりと学習した人であれば違った見解になると思います。
+
+
+ そもそもGraphQLとは
+
+ 概要
+クライアントが必要なデータを正確に指定して取得できる柔軟性を提供してくれるもの。
+RESTAPIの代替として登場し、クライアントとサーバー間のデータ通信を効率化することを目的としています。
+以下のような特徴を持っています。
+
+スキーマ駆動型: APIはスキーマによって型安全かつ構造化されています。
+単一エンドポイント: すべてのリクエストは単一のエンドポイント（例: /graphql）で処理されます。
+クライアント主導...]]></description><link>https://zenn.dev/ninja_stack/articles/907b35f147eef9</link><guid isPermaLink="true">https://zenn.dev/ninja_stack/articles/907b35f147eef9</guid><pubDate>Wed, 08 Jan 2025 14:39:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--tfnWg-Pn--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:GraphQL%25E3%2581%258C%25E6%25B5%2581%25E8%25A1%258C%25E3%2582%258A%25E3%2581%25A5%25E3%2582%2589%25E3%2581%2584%25E7%2582%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:shikyo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U4NTZmMjU4MzkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>shikyo</dc:creator></item><item><title><![CDATA[画像処理100本ノックに挑戦｜平均プーリング（007/100）]]></title><description><![CDATA[
+ これはなに？
+画像処理100本ノックを、TypeScriptとlibvipsで挑戦してみる記事の7本目です。
+
+ 前回
+https://zenn.dev/nyagato_00/articles/de360085b46e19
+
+ 実装
+
+ お題
+
+ここでは画像をグリッド分割(ある固定長の領域に分ける)し、かく領域内(セル)の平均値でその領域内の値を埋める。 このようにグリッド分割し、その領域内の代表値を求める操作はPooling(プーリング) と呼ばれる。 これらプーリング操作はCNN(Convolutional Neural Network) において重要な役割を持つ。
+これは次式で...]]></description><link>https://zenn.dev/nyagato_00/articles/91ff5e44b4c6dd</link><guid isPermaLink="true">https://zenn.dev/nyagato_00/articles/91ff5e44b4c6dd</guid><pubDate>Wed, 08 Jan 2025 13:59:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BopMXH3o--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%2594%25BB%25E5%2583%258F%25E5%2587%25A6%25E7%2590%2586100%25E6%259C%25AC%25E3%2583%258E%25E3%2583%2583%25E3%2582%25AF%25E3%2581%25AB%25E6%258C%2591%25E6%2588%25A6%25EF%25BD%259C%25E5%25B9%25B3%25E5%259D%2587%25E3%2583%2597%25E3%2583%25BC%25E3%2583%25AA%25E3%2583%25B3%25E3%2582%25B0%25EF%25BC%2588007%252F100%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nyagato_00%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUxtNXd1MTVKUVk3SjNOUG1kcGlMeWdfWUt3blZzaTRpWDRoYjU1c21UTTk3c1E9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nyagato_00</dc:creator></item></channel></rss>
