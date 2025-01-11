@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Sat, 11 Jan 2025 05:00:41 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[【Python】「pip install mysqlclient」がエラーになたよ]]></title><description><![CDATA[Django はデフォルトの DB が sqlite3 となっています
+MySQL に変更しようとして、必要なライブラリであるmysqlclientを インストールしようとしたらエラーになりました
+とりあえず、エラー内容を見ていきます
+
+ エラー
+（実行コマンド）
+pip install mysqlclient
+（エラー内容一部抜粋）
+MySQLdb/_mysql.c(29): fatal error C1083: include ファイルを開けません。'mysql.h':No such file or directory
+「mysql.h」がないっていってますね
+
+ 何はなくとも検索し...]]></description><link>https://zenn.dev/kuuki/articles/python-pip-install-mysqlclient-error</link><guid isPermaLink="true">https://zenn.dev/kuuki/articles/python-pip-install-mysqlclient-error</guid><pubDate>Sat, 11 Jan 2025 04:05:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--FWJxg2vY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591%25E3%2580%258Cpip%2520install%2520mysqlclient%25E3%2580%258D%25E3%2581%258C%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E3%2581%25AB%25E3%2581%25AA%25E3%2581%259F%25E3%2582%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hisui%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAxNzI1MTUwNTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hisui</dc:creator></item><item><title><![CDATA[【Python】【Anaconda】pip install を使用したら、エラーがでた]]></title><description><![CDATA[Anaconda で仮想環境を作成し、django をインストールしようとしたら、エラーが出ました
+エラー内容や対処法をまとめ、自分への備忘録として残しておきます
+
+ エラー内容
+djnago をインストールするために、「pip install django」を実行すると、 下記のようなエラーが出ました。（Windows PowerShell）
+(virtual_env) PS C:\Users\****&gt; pip install django
+pip : 用語 'pip' は、コマンドレット、関数、スクリプト ファイル、または操作可能なプログラムの名前として認識されません。
+名前...]]></description><link>https://zenn.dev/kuuki/articles/python-pip-install-error</link><guid isPermaLink="true">https://zenn.dev/kuuki/articles/python-pip-install-error</guid><pubDate>Sat, 11 Jan 2025 04:05:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Jai6UiG4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591%25E3%2580%2590Anaconda%25E3%2580%2591pip%2520install%2520%25E3%2582%2592%25E4%25BD%25BF%25E7%2594%25A8%25E3%2581%2597%25E3%2581%259F%25E3%2582%2589%25E3%2580%2581%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E3%2581%258C%25E3%2581%25A7%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hisui%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAxNzI1MTUwNTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hisui</dc:creator></item><item><title><![CDATA[【Python】pip freezeを使って、同じ環境を作成しよう]]></title><description><![CDATA[別の PC やサーバーで Python を使用する際に、パッケージをそろえるのが大変ですよね
+pip freeze を使用すると、パッケージ情報を出力でき、 それをもとに pip install するとパッケージをそろえられるので、便利です！
+今回はその方法をご紹介します
+
+ pip freeze とは？
+Python のパッケージを pip で管理している場合、 pip freeze コマンドでインストールされているパッケージ一覧を出力できます
+(実行結果)
+$ pip freeze
+appdirs==1.4.4
+asgiref==3.5.2
+astroid==2.11.7
+astto...]]></description><link>https://zenn.dev/kuuki/articles/python-pip-freeze</link><guid isPermaLink="true">https://zenn.dev/kuuki/articles/python-pip-freeze</guid><pubDate>Sat, 11 Jan 2025 04:05:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Y3OfD8Tp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591pip%2520freeze%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2580%2581%25E5%2590%258C%25E3%2581%2598%25E7%2592%25B0%25E5%25A2%2583%25E3%2582%2592%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2597%25E3%2582%2588%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hisui%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAxNzI1MTUwNTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hisui</dc:creator></item><item><title><![CDATA[【Python】PowerShellでAnacondaを使えるようにする]]></title><description><![CDATA[いちいち Anaconda prompt を開きたくないですよね
+Windows ならできれば、PowerShell で Anaconda を使えるようにしたいと思ったので、
+やってみました
+Anaconda Prompt と PowerShell で 1 つずつコマンドを実行するだけの簡単作業です
+
+ Anaconda での設定
+Anaconda Promptを起動します
+
+起動したら、以下のコマンドを実行します
+conda init powershell
+エラーが出なければ以下の画像のように表示されます
+
+これで Anaconda 側の設定は終わりです
+
+ PowerShell での...]]></description><link>https://zenn.dev/kuuki/articles/python-anaconda-powershell</link><guid isPermaLink="true">https://zenn.dev/kuuki/articles/python-anaconda-powershell</guid><pubDate>Sat, 11 Jan 2025 04:05:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1ULcrC5---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591PowerShell%25E3%2581%25A7Anaconda%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2588%25E3%2582%258B%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hisui%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAxNzI1MTUwNTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hisui</dc:creator></item><item><title><![CDATA[【Python】WindowsにAnacondaをインストールしてみる]]></title><description><![CDATA[Python の勉強をするため、Windows PCにPython 3をインストールしようと思いました。
+Python 公式 HPから、インストールしても良いのですが、
+Python3 だけでなく、ライブラリも同時にインストールするAnacondaをダウンロードしました。
+https://www.anaconda.com/
+
+ インストール方法
+
+
+ 公式 HP から Anaconda をダウンロード
+Anaconda の公式 HPへ行き、真ん中の「Download」ボタンを押すと、ダウンロードできます
+
+
+ Anaconda のインストール
+先ほどダウンロードした Anaconda3-...]]></description><link>https://zenn.dev/kuuki/articles/python-anaconda-install</link><guid isPermaLink="true">https://zenn.dev/kuuki/articles/python-anaconda-install</guid><pubDate>Sat, 11 Jan 2025 04:04:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--b3bBgqRV--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591Windows%25E3%2581%25ABAnaconda%25E3%2582%2592%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hisui%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAxNzI1MTUwNTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hisui</dc:creator></item><item><title><![CDATA[PythonではじめるRaspberry Pi入門  [応用編]実践的組み込みテクニック]]></title><description><![CDATA[ロボットやIoTアプリケーションを開発してみたいけど実現方法がわからない…
+Raspberry Piでのプログラムの実行方法やLチカはできたけど、そこから一歩進んだ実践テクニックを習得したい。
+そんな方に役立つ次のステップとして本書を執筆しました。
+
+本書は、Raspberry Piを活用し、ソフトウェアタイマーを用いた定周期処理やプロセス間通信、ソケット通信、Watchdogタイマによる自動復旧など、多岐にわたる組み込みシステム開発の技術を初心者にもわかりやすく解説します。
+
+マイコンの組み込みソフトウェアをC言語で実装する際に活用されるテクニックに近いものをPythonで再現きるよう工夫しています。
+
+初心者から中級者まで幅広く活用できる一冊として、あなたの次の挑戦をサポートします。]]></description><link>https://zenn.dev/murasanlab/books/122bbb7f031935</link><guid isPermaLink="true">https://zenn.dev/murasanlab/books/122bbb7f031935</guid><pubDate>Fri, 10 Jan 2025 12:43:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--SFWNMKzU--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci84YWYzYjg3NzYwLmpwZWc=%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>Murasan Lab</dc:creator></item><item><title><![CDATA[Multi-AgentをMVPで動かして勉強する会]]></title><description><![CDATA[
+
+ はじめに
+今回は Microsoft が公開している「Multi-Agent-Custom-Automation-Engine-Solution-Accelerator」というリポジトリを動かして Multi-Agent について理解を深めていく会となります。
+上記リポジトリを Deploy すると、以下のようなアプリケーションが Deploy されます。
+https://youtu.be/ZKMgTrxuHdU
+このリポジトリでは、Multi-Agent を MVP という最小単位で動かせるサンプルが提供されています。
+Multi-Agent という言葉を初めて聞いたり、なんとな...]]></description><link>https://zenn.dev/microsoft/articles/azure_multiagent_study</link><guid isPermaLink="true">https://zenn.dev/microsoft/articles/azure_multiagent_study</guid><pubDate>Fri, 10 Jan 2025 11:16:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--zdNmW0yx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Multi-Agent%25E3%2582%2592MVP%25E3%2581%25A7%25E5%258B%2595%25E3%2581%258B%25E3%2581%2597%25E3%2581%25A6%25E5%258B%2589%25E5%25BC%25B7%25E3%2581%2599%25E3%2582%258B%25E4%25BC%259A%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Yusuke%2520Satake%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MzZDNiN2I3OGYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Microsoft%2520%2528%25E6%259C%2589%25E5%25BF%2597%2529%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzczMjQwNDhhMDkuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yusuke Satake</dc:creator></item><item><title><![CDATA[【boto3】Scheduler のステータス（有効/無効）を切り替える方法]]></title><description><![CDATA[
+ 概要
+boto3 を利用して EventBrdige Scheduler のステータス（有効/無効）を切り替える方法
+
+ 前提
+
+Python version 3.12.4 で動作確認済み
+独学なので変なことしてたら教えてください。
+
+
+ スクリプト
+!
+
+boto3.client をクラス定義しているのはマイブームなので気にしないでください。
+エラーハンドリングは適宜変えてください。あと、printではなくloggingを使ったほうが良いと思います。
+簡易な型アノテーションをつけているのでドキュメンテーションに型の記載はしてません。
+
+
+
+ switch_state_schedul...]]></description><link>https://zenn.dev/suraud/articles/boto3-change-state-scheduler</link><guid isPermaLink="true">https://zenn.dev/suraud/articles/boto3-change-state-scheduler</guid><pubDate>Fri, 10 Jan 2025 10:01:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--HKdA9hk0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590boto3%25E3%2580%2591Scheduler%2520%25E3%2581%25AE%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%25B9%25EF%25BC%2588%25E6%259C%2589%25E5%258A%25B9%252F%25E7%2584%25A1%25E5%258A%25B9%25EF%25BC%2589%25E3%2582%2592%25E5%2588%2587%25E3%2582%258A%25E6%259B%25BF%25E3%2581%2588%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%252FUD%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg0NzY3NjU1ODMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>/UD</dc:creator></item><item><title><![CDATA[Github ActionsでPyTest+LocalStackを動かしてテストを自動化する]]></title><description><![CDATA[
+ 概要
+「機能追加とテストはセットである。テストのないコードはありえない」というお話を何回もしていたのですが「忘れたので別Issueで」とか、そもそもテストを書くという概念がない人が多くてめちゃくちゃ疲弊したので、自動でテストを回してPassしないとマージできないようにしました。
+「テストを書きましょう」と個々の意識に任せるのではなく、仕組みとして導入してしまう方が確実です。
+今回はPyTestとLocalStackをGithub Actions上で動かす必要があったのですがそのナレッジを今回ご紹介します。
+
+ リポジトリ
+今回Github Actionsを検証するにあたり作成したリポ...]]></description><link>https://zenn.dev/dogfortune/articles/f2edc5b660158d</link><guid isPermaLink="true">https://zenn.dev/dogfortune/articles/f2edc5b660158d</guid><pubDate>Fri, 10 Jan 2025 09:19:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bXtzGtKq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Github%2520Actions%25E3%2581%25A7PyTest%252BLocalStack%25E3%2582%2592%25E5%258B%2595%25E3%2581%258B%25E3%2581%2597%25E3%2581%25A6%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E3%2582%2592%25E8%2587%25AA%25E5%258B%2595%25E5%258C%2596%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:DogFortune%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk5ODRjMTgzYjMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>DogFortune</dc:creator></item><item><title><![CDATA[【Python】Numbaで処理を劇的に高速化させる]]></title><description><![CDATA[こんにちは。初投稿です
+
+ 1. Numbaとは
+Numbaは、Pythonコードをリアルタイムでコンパイルして、高速な実行速度を実現するJIT(Just-In-Time)コンパイラです。特に、数値計算を含むPythonコードを効率的に最適化し、CやFortranに匹敵する性能を引き出すことができます。科学技術計算やデータ解析の分野で、NumPyとの高い互換性から広く利用されています。
+https://numba.pydata.org/
+
+ 主な特徴
+
+JITコンパイルによる高速化: 実行時にコードを機械語に変換し、パフォーマンスを向上させます。
+NumPyとの互換性: NumPyの配列...]]></description><link>https://zenn.dev/maiwb/articles/10f0b96202bba8</link><guid isPermaLink="true">https://zenn.dev/maiwb/articles/10f0b96202bba8</guid><pubDate>Fri, 10 Jan 2025 07:45:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1eg_8QR0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591Numba%25E3%2581%25A7%25E5%2587%25A6%25E7%2590%2586%25E3%2582%2592%25E5%258A%2587%25E7%259A%2584%25E3%2581%25AB%25E9%25AB%2598%25E9%2580%259F%25E5%258C%2596%25E3%2581%2595%25E3%2581%259B%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E7%25A5%259E%25E6%259D%25A5%25E7%25A4%25BE%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZkNWFmZTljNDguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>神来社</dc:creator></item><item><title><![CDATA[FastAPI × Uvicorn：最強のAPI高速化コンビ誕生！]]></title><description><![CDATA[
+
+ Uvicornとは何か？
+
+答え：Uvicornは、uvloopとhttptoolsを基盤とした、非常に高速なASGI（Asynchronous Server Gateway Interface）サーバーです。これは、asyncioに基づいて開発された軽量で効率的なWebサーバーフレームワークです。
+Uvicornは当初、2つの目標を掲げて設計されました。
+
+uvloopとhttptoolsを使って、極めて高速なasyncioサーバーを実装すること。
+ASGIに基づく最小限のアプリケーションインターフェースを実装すること。
+現在、これはHTTP、WebSocket、Pub/Subブ...]]></description><link>https://zenn.dev/leapcell/articles/6171d5bc507a99</link><guid isPermaLink="true">https://zenn.dev/leapcell/articles/6171d5bc507a99</guid><pubDate>Fri, 10 Jan 2025 06:56:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--G1YSEobZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:FastAPI%2520%25C3%2597%2520Uvicorn%25EF%25BC%259A%25E6%259C%2580%25E5%25BC%25B7%25E3%2581%25AEAPI%25E9%25AB%2598%25E9%2580%259F%25E5%258C%2596%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2593%25E8%25AA%2595%25E7%2594%259F%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Leapcell%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y0N2E0MGQ3NGEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Leapcell</dc:creator></item><item><title><![CDATA[【Python】VSCodeに拡張機能を入れて快適にPythonをコーディングする]]></title><description><![CDATA[VSCode で Python を快適にコーディングするために 筆者がインストールしている拡張機能をご紹介します
+Python（Anaconda）を VSCode で使用するには以下の記事をご参考ください
+https://hisuiblog.com/python-vscode-anaconda/
+
+ Python
+
+まずは、この拡張機能を入れて、VSCode で Python を使えるようにしておきましょう
+
+ Pylance
+
+Pyrightという別の拡張機能を使って型チェックをしてくれます ※Pyright をインストールする必要はありません
+また、import 文のチェックも行いま...]]></description><link>https://zenn.dev/kuuki/articles/python-vscode-extensions</link><guid isPermaLink="true">https://zenn.dev/kuuki/articles/python-vscode-extensions</guid><pubDate>Fri, 10 Jan 2025 05:35:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--aoLcC8um--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591VSCode%25E3%2581%25AB%25E6%258B%25A1%25E5%25BC%25B5%25E6%25A9%259F%25E8%2583%25BD%25E3%2582%2592%25E5%2585%25A5%25E3%2582%258C%25E3%2581%25A6%25E5%25BF%25AB%25E9%2581%25A9%25E3%2581%25ABPython%25E3%2582%2592%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2587%25E3%2582%25A3%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hisui%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAxNzI1MTUwNTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hisui</dc:creator></item><item><title><![CDATA[【Python】VSCodeでAnacondaを使用できるようにする]]></title><description><![CDATA[Anaconda を使用してインストールした Python を VSCode で使えるようにしていきます
+以下のステップを行います
+
+VSCode で拡張機能をインストールする
+VSCode に Anaconda の PATH を教えてあげる
+Python が実行できるか確認する
+
+
+ 前提
+以下の 2 つのインストールが完了していることを前提として進めていきます
+
+Anaconda
+VSCode
+
+Anaconda のインストールがまだの方は以下の記事を参考にしてみてください
+https://hisuiblog.com/python-anaconda-install/
+VSCode が...]]></description><link>https://zenn.dev/kuuki/articles/python-vscode-anaconda</link><guid isPermaLink="true">https://zenn.dev/kuuki/articles/python-vscode-anaconda</guid><pubDate>Fri, 10 Jan 2025 05:35:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vtDAs737--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591VSCode%25E3%2581%25A7Anaconda%25E3%2582%2592%25E4%25BD%25BF%25E7%2594%25A8%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258B%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hisui%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAxNzI1MTUwNTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hisui</dc:creator></item><item><title><![CDATA[Gitの仕組みを完全理解！自作ミニGitで学ぶバージョン管理の仕組み【ゼロからGitを実装】]]></title><description><![CDATA[Gitのコマンド操作はある程度慣れてきたものの、「Gitってどうやってバージョン管理しているのだろう」と感じていませんか？
+
+本書はそんな方に向けて、「作って覚えるGitの内部構造」をテーマに書きました。
+
+最低限の機能しか持たないmini_git(ミニGit)を作成することで、blobオブジェクトやコミットオブジェクト、HEADやrefsなどGitの仕組みを自然に学ぶことができます。
+
+Gitを使いこなす上で必ず役立つ知識が満載なので、一歩先行くエンジニアを目指すあなたにピッタリの入門書です。
+
+※プログラミングはPython 3を使用します。
+※Pythonを使ったことがない方でも、安心して学べるように、コードの解説やコメントを丁寧に行っています。]]></description><link>https://zenn.dev/ryu_9845343/books/fc32a59e1a3807</link><guid isPermaLink="true">https://zenn.dev/ryu_9845343/books/fc32a59e1a3807</guid><pubDate>Fri, 10 Jan 2025 05:30:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--DhH0obXs--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci8xNjhkNjBiMzhiLmpwZWc=%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>ryu_InfraAcademy</dc:creator></item><item><title><![CDATA[Chatworkの通知を受け取るSlackアプリを作った話]]></title><description><![CDATA[こんにちは、株式会社シグマアイのリサーチャーの@mory22kです。
+今回は、業務円滑化のために社内で導入したChatworkの通知をSlackで受け取るインテグレーションについて紹介します。
+
+ はじめに
+弊社はたくさんのクライアント様と頻繁にやりとりしており、クライアント様の要望や制約に応じて様々なコミュニケーションツールを併用しています。
+こうした複数のツールの併用を続けると、情報の見逃しや重複などのインシデントに繋がりかねません。幸い弊社はまだそれほどまで多くのアプリを併用するには至っていませんが、今後も様々な相手とやりとりを進める中で、情報の一元化がますます重要になると考えてい...]]></description><link>https://zenn.dev/sigmai_tech/articles/202501-chatwork-to-slack</link><guid isPermaLink="true">https://zenn.dev/sigmai_tech/articles/202501-chatwork-to-slack</guid><pubDate>Fri, 10 Jan 2025 04:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Me2R1djU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Chatwork%25E3%2581%25AE%25E9%2580%259A%25E7%259F%25A5%25E3%2582%2592%25E5%258F%2597%25E3%2581%2591%25E5%258F%2596%25E3%2582%258BSlack%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:mory22k%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y1MWQyNmIxZWIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25B7%25E3%2582%25B0%25E3%2583%259E%25E3%2582%25A2%25E3%2582%25A4%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FGZFp1Y3AxakYxZWZ3THdBRmRSeUliY3JTSHVOZy0zOUp0NF9CMkZQYWFkWFdVPXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mory22k</dc:creator></item><item><title><![CDATA[MySQL環境構築とPythonからの接続方法]]></title><description><![CDATA[Pythonを使ってMySQLを操作する方法を解説します。仮想環境の作成方法やMySQLの認証方式の変更などを含めて詳しく手順を説明します。
+
+
+ 手順概要
+
+
+WSLでPython仮想環境を作成
+必要なパッケージのインストール
+MySQLサーバーのインストールと認証方式の変更
+PythonスクリプトでMySQLに接続し、データベース一覧を取得
+
+
+
+ ステップ1：WSL環境でPython仮想環境を作成
+
+
+ 1.1 必要なパッケージのインストール
+
+sudo apt update &amp;&amp; sudo apt upgrade -y
+sudo apt install pytho...]]></description><link>https://zenn.dev/murasanlab/articles/fd25fb50d1e408</link><guid isPermaLink="true">https://zenn.dev/murasanlab/articles/fd25fb50d1e408</guid><pubDate>Fri, 10 Jan 2025 01:26:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--MHztn8oq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:MySQL%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%25A8Python%25E3%2581%258B%25E3%2582%2589%25E3%2581%25AE%25E6%258E%25A5%25E7%25B6%259A%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Murasan%2520Lab%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc0OTBiNmM4MDEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Murasan Lab</dc:creator></item><item><title><![CDATA[Advent of Code 2024 Day 16: Reindeer Maze]]></title><description><![CDATA[
+ このページは
+2024 年の Advent of Code の Day16 の記事です。
+https://adventofcode.com/2024/day/16
+Day15 の内容はこちら。
+https://zenn.dev/yasuharu519/articles/930eef6cd3d253
+!
+以下問題のネタバレが多数含まれています。問題を楽しみたい方は是非一度本家の問題を見てから読んでみてください。
+
+
+ Day 16: Reindeer Maze
+さて今回はトナカイオリンピックの時間です! トナカイたちが一番少ないポイントで迷路を抜けるという競技を行っているようです。
+#...]]></description><link>https://zenn.dev/yasuharu519/articles/9d1b6e56b115c5</link><guid isPermaLink="true">https://zenn.dev/yasuharu519/articles/9d1b6e56b115c5</guid><pubDate>Thu, 09 Jan 2025 14:06:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BJoItvB6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Advent%2520of%2520Code%25202024%2520Day%252016%253A%2520Reindeer%2520Maze%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Sawady%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI4ODhkNmU3MTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Sawady</dc:creator></item><item><title><![CDATA[パワーポイントで画像が勝手にぼやける現象を防ぐ]]></title><description><![CDATA[
+ 補間による画像のぼやけ
+パワーポイントに画像を貼ると、勝手に補間が働いて意図通りに画像が表示されないことがあります。例えば、以下の画像は縦横が100ピクセルの画像をパワーポイントに貼り付けた様子を示しています。パワポでは、画像が補間によってぼやけており、見た目がオリジナル画像とかけ離れています。
+
+
+ 対策法
+対策方法を探してみましたが、パワーポイント内で完結できる方法は見つかりませんでした。力技として、画像を無理やり引き伸ばしてサイズを大きくすることで解決できました。
+以下はPythonコードの例です。
+from PIL import Image
+
+image = Image.op...]]></description><link>https://zenn.dev/moz_toki/articles/fabf9f9eba7a86</link><guid isPermaLink="true">https://zenn.dev/moz_toki/articles/fabf9f9eba7a86</guid><pubDate>Thu, 09 Jan 2025 13:24:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--opZvQUSc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2591%25E3%2583%25AF%25E3%2583%25BC%25E3%2583%259D%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2588%25E3%2581%25A7%25E7%2594%25BB%25E5%2583%258F%25E3%2581%258C%25E5%258B%259D%25E6%2589%258B%25E3%2581%25AB%25E3%2581%25BC%25E3%2582%2584%25E3%2581%2591%25E3%2582%258B%25E7%258F%25BE%25E8%25B1%25A1%25E3%2582%2592%25E9%2598%25B2%25E3%2581%2590%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2582%25E3%2581%259A%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvbS5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>もず</dc:creator></item><item><title><![CDATA[コードの品質の重要性について]]></title><description><![CDATA[
+ 経緯
+2025年で社会人7年目になるエンジニアです。
+数年前に転職をし、今勤めさせていただいている会社で人生初のコードレビュー受けました。
+いくつもの指摘をいただき、自身のコード品質が悪いことを認識しました。
+基礎中の基礎となりますが、その際の知見を共有しようと思います。
+使用している言語はPythonになります。
+
+ そもそもコード品質上げるとメリットあるの？
+品質と聞くだけで、作業が多くなりそうですよね。
+ただコードの品質を上げることで、エンジニアのメリットは大きいです。
+実際に体験するのは
+
+コードを読む際の負担が減る
+バグが減る
+コード変更があった際、変更箇所が限定されている...]]></description><link>https://zenn.dev/fushirou/articles/68ef46dc8982ae</link><guid isPermaLink="true">https://zenn.dev/fushirou/articles/68ef46dc8982ae</guid><pubDate>Thu, 09 Jan 2025 12:05:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fNrZ7318--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2581%25AE%25E5%2593%2581%25E8%25B3%25AA%25E3%2581%25AE%25E9%2587%258D%25E8%25A6%2581%25E6%2580%25A7%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:fushirou%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS09STTNndjNPQ3hleVQ0RUJBY0U2V0RfYklNZkozVlpTZzdxZFpMV2k0QTRkWkF0LWU9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>fushirou</dc:creator></item><item><title><![CDATA[『browser-use-webui』で始めるブラウザ操作の自動化入門]]></title><description><![CDATA[
+ はじめに
+本記事では、AIエージェントを活用してブラウザ操作を自動化するツール 「browser-use-webui」 の概要と基本的な使い方を説明します。
+繰り返しのブラウザ操作を減らす一手段として、セットアップ方法から簡単な使用例まで順を追って解説します。
+
+ browser-use-webuiの概要
+
+ レポジトリ
+https://github.com/browser-use/web-ui
+
+ 概要
+browser-use-webui は、以下のような特徴を持つブラウザ操作自動化ツールです。
+
+
+シンプルな指示で動作: 「特定ページにアクセスして入力 → ボタンクリック → 結...]]></description><link>https://zenn.dev/yosh1/articles/browser-use-webui-automation</link><guid isPermaLink="true">https://zenn.dev/yosh1/articles/browser-use-webui-automation</guid><pubDate>Thu, 09 Jan 2025 02:02:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--gDORAUvx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%258Ebrowser-use-webui%25E3%2580%258F%25E3%2581%25A7%25E5%25A7%258B%25E3%2582%2581%25E3%2582%258B%25E3%2583%2596%25E3%2583%25A9%25E3%2582%25A6%25E3%2582%25B6%25E6%2593%258D%25E4%25BD%259C%25E3%2581%25AE%25E8%2587%25AA%25E5%258B%2595%25E5%258C%2596%25E5%2585%25A5%25E9%2596%2580%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yosh1%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhiNGVjNjdhZTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yosh1</dc:creator></item></channel></rss>
