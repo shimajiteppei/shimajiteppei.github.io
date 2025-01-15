@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「JavaScript」のフィード]]></title><description><![CDATA[Zennのトピック「JavaScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/javascript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/64acd76870.png</url><title>Zennの「JavaScript」のフィード</title><link>https://zenn.dev/topics/javascript</link></image><generator>zenn.dev</generator><lastBuildDate>Wed, 15 Jan 2025 00:15:18 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/javascript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Node.js クラスターの核心を解き明かす]]></title><description><![CDATA[
+
+ 前書き
+PM2 を使って Node.js プロセスを管理していると、クラスターモードをサポートしていることに気づくでしょう。このモードを有効にすると、Node.js で複数のプロセスを作成できます。クラスターモードでインスタンス数を max に設定すると、サーバーの CPU コア数に基づいて同数の Node プロセスが作成されます。
+PM2 は、Node.js の Cluster モジュールを利用してこれを実現しています。このモジュールは、Node.js のシングルスレッド特性による制約を解決し、複数の CPU コアを活用できるようにするために導入されました。しかし、Cluster...]]></description><link>https://zenn.dev/leapcell/articles/d29c2578226f65</link><guid isPermaLink="true">https://zenn.dev/leapcell/articles/d29c2578226f65</guid><pubDate>Tue, 14 Jan 2025 19:47:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hz-bBwtB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Node.js%2520%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%25BC%25E3%2581%25AE%25E6%25A0%25B8%25E5%25BF%2583%25E3%2582%2592%25E8%25A7%25A3%25E3%2581%258D%25E6%2598%258E%25E3%2581%258B%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Leapcell%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y0N2E0MGQ3NGEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Leapcell</dc:creator></item><item><title><![CDATA[磯野家で学ぶ！配列のミュータブルとイミュータブル]]></title><description><![CDATA[
+ 概要
+この記事は、表題の通り磯野家でjsのArray.propertyのミュータブル、イミュータブルを学ぶことを目的としています。
+
+ 今回使うデータ
+// 磯野家
+const isonoFamily = [
+  { name: "カツオ", age: 11 },
+  { name: "ワカメ", age: 9 },
+  { name: "波平", age: 54 },
+  { name: "フネ", age: 50 }
+];
+
+// フグ田家
+const fugutaFamily = [
+  { name: "サザエ", age: 27 },
+  { name: "マスオ", ag...]]></description><link>https://zenn.dev/hirockysan/articles/ac4024dae765a6</link><guid isPermaLink="true">https://zenn.dev/hirockysan/articles/ac4024dae765a6</guid><pubDate>Tue, 14 Jan 2025 15:06:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5kRo1CmL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%25A3%25AF%25E9%2587%258E%25E5%25AE%25B6%25E3%2581%25A7%25E5%25AD%25A6%25E3%2581%25B6%25EF%25BC%2581%25E9%2585%258D%25E5%2588%2597%25E3%2581%25AE%25E3%2583%259F%25E3%2583%25A5%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%2596%25E3%2583%25AB%25E3%2581%25A8%25E3%2582%25A4%25E3%2583%259F%25E3%2583%25A5%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%2596%25E3%2583%25AB%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25B2%25E3%2582%258D%25E3%2581%25A3%25E3%2581%258D%25E3%2583%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2liZVZOYWZFUW1TcFIzZWhsWDdUVzZCV0ZsekJnTFpsRExFQ0NhUmc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ひろっきー</dc:creator></item><item><title><![CDATA[Chrome の音声合成APIは voiceschanged イベントと組み合わせて使う]]></title><description><![CDATA[
+ TL;DR
+Google Chrome で speechSynthesis.getVoices() するときは voiceschanged イベントを監視しつつ使うと良いです。
+speechSynthesis.addEventListener("voiceschanged", () =&gt; {
+  const voices = speechSynthesis.getVoices();
+});
+
+ やりたいこと
+ブラウザで音声合成をして Text-to-Speech をやりたい場合、例えば次のように書くだけで最低限OKです。このコードを実行すると、#play ボタンをクリックした際...]]></description><link>https://zenn.dev/sudame/articles/b2183c2f1bf59b</link><guid isPermaLink="true">https://zenn.dev/sudame/articles/b2183c2f1bf59b</guid><pubDate>Tue, 14 Jan 2025 14:11:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ORnkIE4u--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Chrome%2520%25E3%2581%25AE%25E9%259F%25B3%25E5%25A3%25B0%25E5%2590%2588%25E6%2588%2590API%25E3%2581%25AF%2520voiceschanged%2520%25E3%2582%25A4%25E3%2583%2599%25E3%2583%25B3%25E3%2583%2588%25E3%2581%25A8%25E7%25B5%2584%25E3%2581%25BF%25E5%2590%2588%25E3%2582%258F%25E3%2581%259B%25E3%2581%25A6%25E4%25BD%25BF%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:sudame%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFUWEFKeUk1Q1NzamI5M2hKa05JVDM5ZGZwSVU3NHZ5UXFTUVl0OFcxNUU9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sudame</dc:creator></item><item><title><![CDATA[JavaScript / クロージャを少し噛み砕いてみる]]></title><description><![CDATA[
+ クロージャとは
+
+ 関数が宣言されたときのスコープを記憶し、そのスコープへのアクセスを保持する機能を指す。
+通常、関数の実行後は内部で定義されている変数の値はデータ領域から削除されてしまう。しかし以下のコードを見てみよう。
+function outerFunction() {
+    let outerVariable = "こんにちは！";
+
+    function innerFunction() {
+        console.log(outerVariable); // outerVariableにアクセス
+    }
+
+    return innerFunction;...]]></description><link>https://zenn.dev/tsumugu2024/articles/172dbcd46281b2</link><guid isPermaLink="true">https://zenn.dev/tsumugu2024/articles/172dbcd46281b2</guid><pubDate>Tue, 14 Jan 2025 13:56:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--OxKJTBL9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%2520%252F%2520%25E3%2582%25AF%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%25A3%25E3%2582%2592%25E5%25B0%2591%25E3%2581%2597%25E5%2599%259B%25E3%2581%25BF%25E7%25A0%2595%25E3%2581%2584%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A4%25E3%2582%2580%25E3%2581%2590%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdhYjgyY2M0ZjYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>つむぐ</dc:creator></item><item><title><![CDATA[ECharts Scatter3DをFlutterWebに実装する（地球儀編）]]></title><description><![CDATA[
+ iOSアプリで偶然できたなんちゃって実装とはぜんぜん違っていた
+基本は地図と一緒でしょ?
+map_pageから「ちょっと」書き換えてglobe_pageをつくればいいわけでしょ？
+index.htmlやそれを読むecharts_js.dartは変更なし。
+ということで、ともかく書いてみたコードがこちら。
+
+ globe_page
+import 'dart:convert';
+import 'dart:html' as html;
+import 'dart:ui_web' as ui_web;
+
+import 'package:flutter/material.dart';
+impor...]]></description><link>https://zenn.dev/flutteruniv_dev/articles/05790a04db69a6</link><guid isPermaLink="true">https://zenn.dev/flutteruniv_dev/articles/05790a04db69a6</guid><pubDate>Tue, 14 Jan 2025 13:43:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qp7nx38q--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ECharts%2520Scatter3D%25E3%2582%2592FlutterWeb%25E3%2581%25AB%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2599%25E3%2582%258B%25EF%25BC%2588%25E5%259C%25B0%25E7%2590%2583%25E5%2584%2580%25E7%25B7%25A8%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%25A9%25E3%2582%2593%25E3%2581%2590%25E3%2582%258A%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y0ODUxNDkwOTcuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Flutter%25E5%25A4%25A7%25E5%25AD%25A6%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dqQ2RNdHFjMF9fWVFUdkJndHR1R3plSnVVNW41ZXMyTzM0RDUzPXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>どんぐり</dc:creator></item><item><title><![CDATA[【CORS】API叩いたらCORSエラーになった]]></title><description><![CDATA[
+ CORSとは
+
+
+Cross-Origin Resource Sharing の略
+オリジン間リソース共有
+
+あるオリジンで動いている Web アプリケーションに対して、別のオリジンのサーバーへのアクセスをオリジン間 HTTP リクエストによって許可できる仕組みのこと
+
+
+インターネットブラウザに実装されているセキュリティのためのメカニズム
+
+オリジンとは
+
+
+オリジン = プロトコル＋ホスト＋ドメイン＋ポート番号
+
+下記のURLを例に説明する
+
+
+http:://www.hogehoge.com:80/
+
+http = プロトコル
+www = ホスト名
+hogehoge.com =...]]></description><link>https://zenn.dev/mof_moriko/articles/91cacad32ce0c1</link><guid isPermaLink="true">https://zenn.dev/mof_moriko/articles/91cacad32ce0c1</guid><pubDate>Tue, 14 Jan 2025 10:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Uvo-P71i--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590CORS%25E3%2580%2591API%25E5%258F%25A9%25E3%2581%2584%25E3%2581%259F%25E3%2582%2589CORS%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E3%2581%25AB%25E3%2581%25AA%25E3%2581%25A3%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:moriko%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNkMGY2YWE3OTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>moriko</dc:creator></item><item><title><![CDATA[【JS】CSVインポートでBOMエラー]]></title><description><![CDATA[こんにちは！
+CSVのインポート機能を開発していた時に、ExcelからCSVを作成して
+そのCSVをインポートしたときにエラーが起こることがあり、
+ちょっと悩みました。
+そのインポートのエラー原因がBOM付きCSVというものだったので、
+原因と解決策を書いていきます！
+
+ 原因
+先ほども書きましたが、原因はBOM付きのCSVでした。
+BOMとは？
+
+ファイルにおける BOM (Byte Order Mark) は、文字エンコーディングを示すためにテキストファイルの先頭に付加される特別なバイト列です。特にUTFエンコーディング（例：UTF-8、UTF-16、UTF-32）で使用されることが...]]></description><link>https://zenn.dev/ki1998/articles/cc49c0263007d4</link><guid isPermaLink="true">https://zenn.dev/ki1998/articles/cc49c0263007d4</guid><pubDate>Tue, 14 Jan 2025 08:38:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xzWeMQ80--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590JS%25E3%2580%2591CSV%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%259D%25E3%2583%25BC%25E3%2583%2588%25E3%2581%25A7BOM%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E1NDkwMDdkZWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ki</dc:creator></item><item><title><![CDATA[ECharts Scatter3DをFlutterWebに実装する（地図編）]]></title><description><![CDATA[
+ テストプロジェクトから運用中のサイトへ
+前回作ったシンプルなプロジェクトで学んだことを、本番環境に実装する。
+Previous Episode....
+https://zenn.dev/flutteruniv_dev/articles/f60816ae507215
+まずは「なんもかんもmain.dart」から脱却する。
+
+ main.dartのものはmain.dartに
+運用中のmain.dartに特に追加するものはない。
+main.dartの仕事はmain.dartに任せて、切り離す。
+
+ index.htmlに追加してある情報はこれ
+index.html
+index.html
+ ...]]></description><link>https://zenn.dev/flutteruniv_dev/articles/1fcdac1c92a8ae</link><guid isPermaLink="true">https://zenn.dev/flutteruniv_dev/articles/1fcdac1c92a8ae</guid><pubDate>Tue, 14 Jan 2025 04:01:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--l7Z3_yhU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ECharts%2520Scatter3D%25E3%2582%2592FlutterWeb%25E3%2581%25AB%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2599%25E3%2582%258B%25EF%25BC%2588%25E5%259C%25B0%25E5%259B%25B3%25E7%25B7%25A8%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%25A9%25E3%2582%2593%25E3%2581%2590%25E3%2582%258A%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y0ODUxNDkwOTcuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Flutter%25E5%25A4%25A7%25E5%25AD%25A6%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dqQ2RNdHFjMF9fWVFUdkJndHR1R3plSnVVNW41ZXMyTzM0RDUzPXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>どんぐり</dc:creator></item><item><title><![CDATA[mjsとcjsの違いって何？　普通のjsとどう違うの？　ChatGPTに聞いてみた]]></title><description><![CDATA[
+ mjs と cjs の違い
+JavaScriptのモジュールシステムには、主にmjs（ECMAScript Modules）とcjs（CommonJS）の2種類があります。この記事では、これらの違いについて詳しく説明します。
+
+ 背景
+JavaScriptはもともとブラウザ上で動作するスクリプト言語として開発されました。初期の頃は、モジュールという概念が存在せず、全てのコードはグローバルスコープで実行されていました。しかし、プロジェクトが大規模化するにつれて、コードの再利用や分割が求められるようになり、モジュールシステムが導入されました。
+
+ CommonJS (cjs)
+Commo...]]></description><link>https://zenn.dev/itsukinuko/articles/d4f1be24ffc3a93af83b</link><guid isPermaLink="true">https://zenn.dev/itsukinuko/articles/d4f1be24ffc3a93af83b</guid><pubDate>Tue, 14 Jan 2025 02:12:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--N5hU5Z0q--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:mjs%25E3%2581%25A8cjs%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%25E3%2581%25A3%25E3%2581%25A6%25E4%25BD%2595%25EF%25BC%259F%25E3%2580%2580%25E6%2599%25AE%25E9%2580%259A%25E3%2581%25AEjs%25E3%2581%25A8%25E3%2581%25A9%25E3%2581%2586%25E9%2581%2595%25E3%2581%2586%25E3%2581%25AE%25EF%25BC%259F%25E3%2580%2580ChatGPT%25E3%2581%25AB%25E8%2581%259E%25E3%2581%2584%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:itsuki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzlhODMyNzI4NTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>itsuki</dc:creator></item><item><title><![CDATA[バックエンドって何してるの？関数と何が違うのか]]></title><description><![CDATA[
+ バックエンドの仕組みとは？
+バックエンドは、ウェブアプリケーションの裏側で動作し、ユーザーインターフェースとデータベース間の通信や処理を担当する部分です。ここでは、JavaScriptを使ってバックエンドの基本的な仕組みについて解説します。
+
+ 1. 関数呼び出しとバックエンドの問い合わせの違い
+
+
+関数呼び出し:
+function calculateSum(a, b) {
+    return a + b;
+}
+
+// 関数の呼び出し
+let result = calculateSum(3, 5);
+console.log(result); // 出力: 8
+
+上記の例では、cal...]]></description><link>https://zenn.dev/itsukinuko/articles/0e03ced853cbbca47dff</link><guid isPermaLink="true">https://zenn.dev/itsukinuko/articles/0e03ced853cbbca47dff</guid><pubDate>Tue, 14 Jan 2025 02:12:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--IiFerwuj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2590%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2589%25E3%2581%25A3%25E3%2581%25A6%25E4%25BD%2595%25E3%2581%2597%25E3%2581%25A6%25E3%2582%258B%25E3%2581%25AE%25EF%25BC%259F%25E9%2596%25A2%25E6%2595%25B0%25E3%2581%25A8%25E4%25BD%2595%25E3%2581%258C%25E9%2581%2595%25E3%2581%2586%25E3%2581%25AE%25E3%2581%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:itsuki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzlhODMyNzI4NTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>itsuki</dc:creator></item><item><title><![CDATA[【TypeScript×関数型】まとめてエラーを捕まえる！neverthrowで実現するスマートなCSV検証]]></title><description><![CDATA[
+ はじめに
+CSVデータの検証においては、数多くのエラーが同時発生する可能性があります。たとえば「ある行のIDが数値ではない」「日付が無効」「必須項目が空欄」など、複数セルで同時に問題が起こりえるのがCSVの難しいところです。
+JavaScriptの例外処理では、標準的な例外処理手法であるtry-catchをネストしてエラーを拾う方法がよく使われてきましたが、このアプローチには多くの問題が潜んでいます。
+そこで、今回は TypeScript の関数型スタイルでのエラーハンドリングを可能にするライブラリ neverthrow を活用し、複数のバリデーション結果をまとめて扱う方法を紹介しま...]]></description><link>https://zenn.dev/hacobell_dev/articles/typescript-neverthrow-csv-error-handling</link><guid isPermaLink="true">https://zenn.dev/hacobell_dev/articles/typescript-neverthrow-csv-error-handling</guid><pubDate>Tue, 14 Jan 2025 00:30:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1u2xWOhd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590TypeScript%25C3%2597%25E9%2596%25A2%25E6%2595%25B0%25E5%259E%258B%25E3%2580%2591%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2581%25A6%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E3%2582%2592%25E6%258D%2595%25E3%2581%25BE%25E3%2581%2588%25E3%2582%258B%25EF%25BC%2581neverthrow%25E3%2581%25A7%25E5%25AE%259F%25E7%258F%25BE%25E3%2581%2599%25E3%2582%258B%25E3%2582%25B9%25E3%2583%259E%25E3%2583%25BC%25E3%2583%2588%25E3%2581%25AACSV%25E6%25A4%259C%25E8%25A8%25BC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%25BB%25E3%2582%258A%25E3%2581%2597%25E3%2582%2587%25E3%2583%25BC%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzEzYjhhODE4MTUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Hacobell%2520Developers%2520...%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZiZTM4NTI2YzMuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ほりしょー</dc:creator></item><item><title><![CDATA[SvelteKitでタイプセーフなCookie管理]]></title><description><![CDATA[
+ 導入
+CookieはWebアプリに必須の存在ですが、オブジェクトを格納したりしようとするとシリアライズ・デシリアライズの手間が発生します。また、変換の際やサーバー・クライアント間で型定義を間違えてつけてエラーを発生させてしまう可能性があります。
+今回は、SvelteKitでフルスタックにタープセーフなCookie管理ができるライブラリを紹介します。
+
+ svelte-baked-cookie
+https://github.com/jill64/svelte-baked-cookie
+名前の由来は硬く型付けされたCookieにしたかったのでbaked(焼いた)-cookieにしました。...]]></description><link>https://zenn.dev/jill64/articles/1d2625a58aae99</link><guid isPermaLink="true">https://zenn.dev/jill64/articles/1d2625a58aae99</guid><pubDate>Mon, 13 Jan 2025 22:16:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0kBbl00E--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:SvelteKit%25E3%2581%25A7%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%2597%25E3%2582%25BB%25E3%2583%25BC%25E3%2583%2595%25E3%2581%25AACookie%25E7%25AE%25A1%25E7%2590%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:jill64%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSkhvRWlDNlllZ2R6cGxwZ2xPQnVaN2V5akFPSUMtVExwQUpIMFg2NERIZWl3Z1dLTT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>jill64</dc:creator></item><item><title><![CDATA[Stripe導入手順]]></title><description><![CDATA[
+ はじめに
+Stripe Checkoutを利用することで、オンライン決済を簡単かつ安全に実装できます。
+本手順書では、基本的な実装フローを順序立てて説明します。画像はこちら
+
+ 導入効果
+Stripeを導入することで、以下の効果が得られます：
+簡単な操作で支払い画面に遷移
+ユーザーが注文画面で「支払い」ボタンを押すと、Stripeが提供する支払い画面に移動します。
+多様な支払い方法に対応
+支払い画面には、クレジットカード、デビットカード、銀行振込、ApplePay、GooglePay、コンビニ決済などのオプションが表示されます。
+支払い後のスムーズなリダイレクト
+支払い完了後、自動的...]]></description><link>https://zenn.dev/umesoft_jp/articles/82ed9b29169bf3</link><guid isPermaLink="true">https://zenn.dev/umesoft_jp/articles/82ed9b29169bf3</guid><pubDate>Mon, 13 Jan 2025 12:54:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--TQkDASHs--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:Stripe%25E5%25B0%258E%25E5%2585%25A5%25E6%2589%258B%25E9%25A0%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:UmeSoft%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSVFiMVltbDd4WWU3dG1ROXNVTlk4Q0VnOHVkd0NOcVI1UEc0TFpEOTRobWhJaVNnPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>UmeSoft</dc:creator></item><item><title><![CDATA[倉庫管理システム]]></title><description><![CDATA[
+ はじめに
+SpringBootやMybatisなどを使用して倉庫管理システムを開発しました。画像はこちら
+
+ 機能紹介
+
+ 基本管理
+
+ a.顧客管理
+・顧客追加：顧客名、住所、担当者名、電話番号などを入力して顧客を登録。
+・顧客変更：登録済みの顧客情報を編集。
+・顧客検索：顧客名、担当者名、電話番号で検索。部分一致検索が可能。結果を顧客IDや顧客名でソート可能。
+・顧客削除：指定した顧客の情報を削除。
+
+ b.仕入先管理
+・仕入先追加：仕入先名、住所、担当者名、電話番号を入力して登録。
+・仕入先変更：登録済みの仕入先情報を編集。
+・仕入先検索：仕入先名、担当者名、電話番号で検索。部...]]></description><link>https://zenn.dev/umesoft_jp/articles/eaf24a3e25f9cf</link><guid isPermaLink="true">https://zenn.dev/umesoft_jp/articles/eaf24a3e25f9cf</guid><pubDate>Mon, 13 Jan 2025 12:52:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---1SMfdh_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2580%2589%25E5%25BA%25AB%25E7%25AE%25A1%25E7%2590%2586%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:UmeSoft%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSVFiMVltbDd4WWU3dG1ROXNVTlk4Q0VnOHVkd0NOcVI1UEc0TFpEOTRobWhJaVNnPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>UmeSoft</dc:creator></item><item><title><![CDATA[JavaScript / HTMLCollectionとNodeList]]></title><description><![CDATA[
+ 毎回調べてる気がする
+React書くようになると直接的なDOM操作しなくなるので忘れてしまう。
+というわけで、VanillaJSで徹底的におさらいしていこう。
+
+ HTMLCollectionとは
+
+DOM操作を行う際に使用する配列風オブジェクト
+主に特定の要素を取得するメソッド（例: getElementsByTagName, getElementsByClassName）や、childrenプロパティを使用してアクセス可能。
+配列のようにインデックスが付与されているが、本物の配列ではないため、forEach()やfilter()などの配列メソッドは使用できない
+
+  &lt;di...]]></description><link>https://zenn.dev/tsumugu2024/articles/87bbd40454df44</link><guid isPermaLink="true">https://zenn.dev/tsumugu2024/articles/87bbd40454df44</guid><pubDate>Mon, 13 Jan 2025 09:23:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qnhFhkbx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:JavaScript%2520%252F%2520HTMLCollection%25E3%2581%25A8NodeList%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A4%25E3%2582%2580%25E3%2581%2590%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdhYjgyY2M0ZjYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>つむぐ</dc:creator></item><item><title><![CDATA[ReactでイベントハンドラにDefault Argsを設定する場合の注意点]]></title><description><![CDATA[
+ 背景
+React.jsのイベントハンドラでは、第一引数にイベントオブジェクト（MouseEventなど）が渡されます。
+人間は愚かな生き物なため、この初歩的な事実を忘れて 誤ったデフォルトの引数を設定しコードをバグらせる ことがあります。
+私も実際過去に「イベントハンドラの返り値がNaNになる」という不具合を起こしてしまいました。
+しかもエラーを明示的に吐かない不具合だったため原因の特定に時間がかかり、とてもストレスフルでした。
+そこで、今回の件を自分への教訓として書き残しておこうと思います。
+
+ 問題のコードスニペット
+export default function App() {...]]></description><link>https://zenn.dev/h_p_yancy/articles/doc11-event-handler-for-react-button-in-ts</link><guid isPermaLink="true">https://zenn.dev/h_p_yancy/articles/doc11-event-handler-for-react-button-in-ts</guid><pubDate>Mon, 13 Jan 2025 07:32:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--YbiB49UW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%25E3%2581%25A7%25E3%2582%25A4%25E3%2583%2599%25E3%2583%25B3%25E3%2583%2588%25E3%2583%258F%25E3%2583%25B3%25E3%2583%2589%25E3%2583%25A9%25E3%2581%25ABDefault%2520Args%25E3%2582%2592%25E8%25A8%25AD%25E5%25AE%259A%25E3%2581%2599%25E3%2582%258B%25E5%25A0%25B4%25E5%2590%2588%25E3%2581%25AE%25E6%25B3%25A8%25E6%2584%258F%25E7%2582%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:H.P.Yancy%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg4ZjU4OTA5MDguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>H.P.Yancy</dc:creator></item><item><title><![CDATA[【GSAP】GSAP Practice【#１５ GSAP ScrollTrigger３】]]></title><description><![CDATA[
+ 【#１５ GSAP ScrollTrigger３】
+YouTube: https://youtu.be/Rb4bhnOTx38
+https://youtu.be/Rb4bhnOTx38
+今回は複数の子要素をラップしている親要素にScrollTriggerを設定して、
+複数の子要素に対してアニメーションを設定する方法について解説します。
+https://gsap.com/docs/v3/Plugins/ScrollTrigger/
+具体的にはtimelineを使用して、
+tinelineの引数のオブジェクトにScrollTriggerを設定します。
+
+js/main.js
+// use...]]></description><link>https://zenn.dev/web_life_ch/articles/780cbdea3271d1</link><guid isPermaLink="true">https://zenn.dev/web_life_ch/articles/780cbdea3271d1</guid><pubDate>Mon, 13 Jan 2025 04:26:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--gvTJ884z--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590GSAP%25E3%2580%2591GSAP%2520Practice%25E3%2580%2590%2523%25EF%25BC%2591%25EF%25BC%2595%2520GSAP%2520ScrollTrigger%25EF%25BC%2593%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Web%2520Life%2520CH%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUl0YnZtbWNjTWFMM3dyd2x3VE5sVVZjTlhmZHEzZzF2QnJfMUJMSkJrN049czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Web Life CH</dc:creator></item><item><title><![CDATA[RSCがSPAに与える意味についての考察、Wakuを試してみませんか？]]></title><description><![CDATA[こんにちは、Wakuの作者です。RSCのためのReactフレームワークであるWakuですが、SPAもサポートしたいと思っています。RSCとSPAに関して思ったことを雑多ですが記事にしたので、よろしければご覧ください。
+https://blog.axlight.com/posts/thoughts-on-what-rsc-means-for-spas/
+以下、ChatGPTによる翻訳です。
+
+
+ はじめに
+RSCはReact Server Componentの略ですが、この投稿では以下の2つの主要な要素を含む広義のアーキテクチャとしてRSCを使用します。
+
+コア機能：Reactコンポーネン...]]></description><link>https://zenn.dev/dai_shi/articles/847db04a8fd35c</link><guid isPermaLink="true">https://zenn.dev/dai_shi/articles/847db04a8fd35c</guid><pubDate>Mon, 13 Jan 2025 00:43:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--VuWQBoP4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:RSC%25E3%2581%258CSPA%25E3%2581%25AB%25E4%25B8%258E%25E3%2581%2588%25E3%2582%258B%25E6%2584%258F%25E5%2591%25B3%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E3%2581%25AE%25E8%2580%2583%25E5%25AF%259F%25E3%2580%2581Waku%25E3%2582%2592%25E8%25A9%25A6%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%25BE%25E3%2581%259B%25E3%2582%2593%25E3%2581%258B%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:daishi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzcwZGNhM2E2Y2IuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>daishi</dc:creator></item><item><title><![CDATA[selectタグで選択をするたびに新しいselectタグが出現する]]></title><description><![CDATA[いま、オリプロを作っているんですが。その中に投稿フォームがあります。
+投稿フォームの中にはselectタグがあり、選択するたびに新しいselectタグが出現するようにしています。
+備忘録として残します。
+動作の流れ
+動作としてはselectタグで値を選択するとselectタグが作成されるという流れになります。
+まず、htmlです。
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="w...]]></description><link>https://zenn.dev/imkei/articles/a7e69327df3b18</link><guid isPermaLink="true">https://zenn.dev/imkei/articles/a7e69327df3b18</guid><pubDate>Sun, 12 Jan 2025 14:05:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--cGypd-88--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:select%25E3%2582%25BF%25E3%2582%25B0%25E3%2581%25A7%25E9%2581%25B8%25E6%258A%259E%25E3%2582%2592%25E3%2581%2599%25E3%2582%258B%25E3%2581%259F%25E3%2581%25B3%25E3%2581%25AB%25E6%2596%25B0%25E3%2581%2597%25E3%2581%2584select%25E3%2582%25BF%25E3%2582%25B0%25E3%2581%258C%25E5%2587%25BA%25E7%258F%25BE%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:imkei%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M2Mzc4NTBjMzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>imkei</dc:creator></item><item><title><![CDATA[JavaScriptデバッグの新常識：error.cause]]></title><description><![CDATA[
+
+ デバッグの課題
+デバッグにおける最大の課題とは何でしょうか？その中の一つは、エラーの発生源を特定することです。
+次のようなシナリオを想像してみてください：
+const func = () =&gt; {
+  doSth('A');
+  doSth('B');
+};
+func がエラーをスローしたとき、そのエラーがどのステップで発生したのかをどのように特定しますか？doSth('A') に起因するのか、doSth('B') なのか、それとも func 自体が原因なのか？明らかに、このエラーは文脈が不足しています。
+
+ 一般的な解決策
+このような問題を解決するための一般的な方法は次のよ...]]></description><link>https://zenn.dev/leapcell/articles/9d554d5a54c4db</link><guid isPermaLink="true">https://zenn.dev/leapcell/articles/9d554d5a54c4db</guid><pubDate>Sun, 12 Jan 2025 08:33:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---3Wfnd3_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25E3%2583%2587%25E3%2583%2590%25E3%2583%2583%25E3%2582%25B0%25E3%2581%25AE%25E6%2596%25B0%25E5%25B8%25B8%25E8%25AD%2598%25EF%25BC%259Aerror.cause%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Leapcell%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y0N2E0MGQ3NGEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Leapcell</dc:creator></item></channel></rss>
