@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「JavaScript」のフィード]]></title><description><![CDATA[Zennのトピック「JavaScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/javascript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/64acd76870.png</url><title>Zennの「JavaScript」のフィード</title><link>https://zenn.dev/topics/javascript</link></image><generator>zenn.dev</generator><lastBuildDate>Thu, 16 Jan 2025 03:10:42 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/javascript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[JavaScript で非破壊的な配列操作する際に、シャローコピーを使うのと非破壊的な配列操作メソッドを使うのとでは何か違いってあるの？]]></title><description><![CDATA[
+ はじめに
+タイトルにある通りのことが気になって軽く調査＆検証してみました。
+具体的な例としては以下のようなことで処理結果に違いはありません。
+const ary = [1, 2, 3, 4, 5];
+
+// ソース元配列（ary）をシャローコピーして反転
+const copiedAry = [...ary].reverse();
+
+// ES2023で追加された非破壊的メソッド（toReversed）で反転
+const nonBreak_ary = ary.toReversed();
+
+console.log(ary, copiedAry, nonBreak_ary);
+/*
+[1,...]]></description><link>https://zenn.dev/benjuwan/articles/a80df2e0fecdb6</link><guid isPermaLink="true">https://zenn.dev/benjuwan/articles/a80df2e0fecdb6</guid><pubDate>Thu, 16 Jan 2025 02:24:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vunIM_tv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%2520%25E3%2581%25A7%25E9%259D%259E%25E7%25A0%25B4%25E5%25A3%258A%25E7%259A%2584%25E3%2581%25AA%25E9%2585%258D%25E5%2588%2597%25E6%2593%258D%25E4%25BD%259C%25E3%2581%2599%25E3%2582%258B%25E9%259A%259B%25E3%2581%25AB%25E3%2580%2581%25E3%2582%25B7%25E3%2583%25A3%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25B3%25E3%2583%2594%25E3%2583%25BC%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%25E3%2581%25AE%25E3%2581%25A8%25E9%259D%259E%25E7%25A0%25B4%25E5%25A3%258A%25E7%259A%2584%25E3%2581%25AA%25E9%2585%258D%25E5%2588%2597%25E6%2593%258D%25E4%25BD%259C%25E3%2583%25A1%25E3%2582%25BD%25E3%2583%2583%25E3%2583%2589%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%25E3%2581%25AE%25E3%2581%25A8%25E3%2581%25A7...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:benjuwan%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSnd2XzJhLTN4SnJmSkN0Ql9wMkkwWUlVaVlTY1ozLTFQZFZoNkxsaUIyRmc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>benjuwan</dc:creator></item><item><title><![CDATA[2025-1 JavaScript Tech Talk by KEPPLE CREATORS LAB]]></title><description><![CDATA[こんにちは！KEPPLE CREATORS LAB エンジニアの吉田です。
+ケップルでは月に一度、関心のあるフロントエンドの技術やトピックを共有する JavaScript Tech Talk を開催しています。
+今回は2024年9月から12月の 4 回にわたり、盛り上がった話題をお届けします！
+今回の内容
+
+
+Convex とは？魅力と課題に迫る！
+
+TypeScript 5.5, 5.6 の新機能について
+
+
+ Convex とは？魅力と課題に迫る！
+Convexは、バックエンド (BaaS) プラットフォームとして注目を集めています。
+
+
+ 1. Convexの魅力
+Convexとは...]]></description><link>https://zenn.dev/kepple/articles/e2b9f0c76214d2</link><guid isPermaLink="true">https://zenn.dev/kepple/articles/e2b9f0c76214d2</guid><pubDate>Thu, 16 Jan 2025 01:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1-f5wpKD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:2025-1%2520JavaScript%2520Tech%2520Talk%2520by%2520KEPPLE%2520CREATORS%2520LAB%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:riooo%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg3NzkwMTQ0ZDMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Kepple%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTExqWVVNdHktdHR0TkZ2ZnZJd1lsOUpBM2tjdUVDRWt3XzlGc3Nmc1FOM3VIU253PXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>riooo</dc:creator></item><item><title><![CDATA[[JavaScript] アイテムを選り分ける、groupBy]]></title><description><![CDATA[
+ はじめに
+Baseline 2024 より、Newly Available（主要なブラウザで使用可）となった機能の一つ、Object.groupBy() についての記事です。
+2024 年に Baseline に組み込まれた機能の一覧は、以下の記事を参照しています。
+https://web.dev/series/baseline-newly-available?hl=ja
+
+ 概要
+反復可能な要素 items と、任意のコールバック関数 callbackFn を引数に取ります。
+Object.groupBy(items, callbackFn)
+この関数が実行されると items の...]]></description><link>https://zenn.dev/ulxsth/articles/javascript-object-groupby</link><guid isPermaLink="true">https://zenn.dev/ulxsth/articles/javascript-object-groupby</guid><pubDate>Wed, 15 Jan 2025 23:35:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--LOaM6xjg--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BJavaScript%255D%2520%25E3%2582%25A2%25E3%2582%25A4%25E3%2583%2586%25E3%2583%25A0%25E3%2582%2592%25E9%2581%25B8%25E3%2582%258A%25E5%2588%2586%25E3%2581%2591%25E3%2582%258B%25E3%2580%2581groupBy%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2588%25E3%2581%25A4%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JiOGNiMGY2NjkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>よつ</dc:creator></item><item><title><![CDATA[JavaScript / イテレーター]]></title><description><![CDATA[
+ イテレーターとは
+反復処理が可能な（イテラブルな）オブジェクトがもつ、実際の反復処理を行う機能のこと。以下がイテラブルオブジェクトに挙げられる
+
+ イテラブルオブジェクト一覧
+
+配列
+Map
+Set
+NodeList
+arguments オブジェクト
+文字列（プリミティブ型だけど）
+
+
+ イテラブルオブジェクトの特徴の内、重要な2つ
+
+ 1. for...of文で反復処理が可能
+// for...of文の使用例
+//**********************
+// 配列の場合
+const array = [1, 2, 3]
+for (let item of array) {
+  c...]]></description><link>https://zenn.dev/tsumugu2024/articles/05f633fffec456</link><guid isPermaLink="true">https://zenn.dev/tsumugu2024/articles/05f633fffec456</guid><pubDate>Wed, 15 Jan 2025 14:18:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--IiJ-MOF1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%2520%252F%2520%25E3%2582%25A4%25E3%2583%2586%25E3%2583%25AC%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%25BC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A4%25E3%2582%2580%25E3%2581%2590%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdhYjgyY2M0ZjYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>つむぐ</dc:creator></item><item><title><![CDATA[JS,TSの実行環境について]]></title><description><![CDATA[
+ はじめに
+普段何気なく使用した Node についてあまり理解していないことに気づいた。
+比較的簡単に環境が作れるため、意識することは少なかったが最近 Deno V2 がでたらしいので
+これを機に JS,TS の実行環境について深く知ろうと思う。
+
+ 実行環境
+元々は、javascript を実行する環境はブラウザのみであった。
+ブラウザ、例えば Chrome はv8という JS 実行エンジンが搭載されているため動く。
+そこから、Node.js と言われるサーバーサイドでも実行ができる環境が開発された。
+サーバーサイドの特徴として、ネットワークリクエストを処理できる、ファイルの読み書き...]]></description><link>https://zenn.dev/takumi_machino/articles/node-deno-bun</link><guid isPermaLink="true">https://zenn.dev/takumi_machino/articles/node-deno-bun</guid><pubDate>Wed, 15 Jan 2025 10:07:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--oHe-vw4D--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JS%252CTS%25E3%2581%25AE%25E5%25AE%259F%25E8%25A1%258C%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:takumi%2520machino%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0lmY1dUTmhkc0NrQWNackJhQUZLci1kTkVKclItc1BtMHBIdEM1RDRYVnV1bjFBPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takumi machino</dc:creator></item><item><title><![CDATA[【ゼロから始める Web 開発】自分だけの美しいポートフォリオサイトを作ろう（HTML & CSS & JavaScript）]]></title><description><![CDATA[本書では、HTML・CSS・JavaScript の基礎を学びながら、魅力的なポートフォリオサイトを作成します。
+ 作ったサイトは GitHub Pages で無料で公開でき、就職・転職活動にも活用できます。
+
+身につくスキルは下記の通りです。
+ 🎨 HTML/CSS を使ったデザイン実装
+ 📱 スマートフォンやタブレットにも対応するレスポンシブデザイン
+ ⚡ JavaScript でのインタラクティブな機能実装
+ 🔧 Chrome DevTools を使ったデバッグ手法
+ 🚀 GitHub Pages でのサイト公開
+
+本書の特徴はこちらです。
+ ・コードの書き方を一から丁寧に解説
+ ・環境構築からデプロイまでをサポート
+ ・デザインの知識がなくても見栄えの良いサイトが作れる
+ ・実践的なスキルが段階的に身につく
+
+プログラミング初心者でも安心して始められる内容となっています。一緒に、あなただけのポートフォリオサイトを作っていきましょう。]]></description><link>https://zenn.dev/farstep/books/create-portfolio-site-with-html-css-javascript</link><guid isPermaLink="true">https://zenn.dev/farstep/books/create-portfolio-site-with-html-css-javascript</guid><pubDate>Wed, 15 Jan 2025 08:24:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--E7uKpa9w--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci84MmI3ODFlZTUyLnBuZw==%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>FarStep</dc:creator></item><item><title><![CDATA[関数の出口を１つにする　品質担保の観点で最も重要なコーディングスタンダードと単体テストの関連性に関してのメモ]]></title><description><![CDATA[
+ はじめに
+ソフトウェア品質を高める開発者テスト アジャイル時代の実践的・効率的なテストのやり方を読んでいて、「関数の出口を１つにする」という事と単体テストの関連性を少し深堀して理解しておきたいと思った。本記事はその深堀の備忘録です。
+
+ 背景（前提）
+
+アーリーリターン (early return) を多用すると、関数内に return が散乱しやすい
+
+処理フローが分散し、保守や拡張の際に「どこで終了するか」を追いかけづらい
+エラー処理やクリーンアップのコードを書き忘れてしまうリスクが高まる
+
+
+
+
+ 関数の出口を１つにする」とは？
+
+
+「出口を１つにする」 とは、基本的に関数の終...]]></description><link>https://zenn.dev/yutak23/articles/4c3fc622d448ec</link><guid isPermaLink="true">https://zenn.dev/yutak23/articles/4c3fc622d448ec</guid><pubDate>Wed, 15 Jan 2025 02:03:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4v914gtP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E9%2596%25A2%25E6%2595%25B0%25E3%2581%25AE%25E5%2587%25BA%25E5%258F%25A3%25E3%2582%2592%25EF%25BC%2591%25E3%2581%25A4%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%25E3%2580%2580%25E5%2593%2581%25E8%25B3%25AA%25E6%258B%2585%25E4%25BF%259D%25E3%2581%25AE%25E8%25A6%25B3%25E7%2582%25B9%25E3%2581%25A7%25E6%259C%2580%25E3%2582%2582%25E9%2587%258D%25E8%25A6%2581%25E3%2581%25AA%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2587%25E3%2582%25A3%25E3%2583%25B3%25E3%2582%25B0%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%25B3%25E3%2583%2580%25E3%2583%25BC%25E3%2583%2589%25E3%2581%25A8%25E5%258D%2598%25E4%25BD%2593%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E3%2581%25AE%25E9%2596%25A2%25E9%2580%25A3%25E6%2580%25A7%25E3%2581%25AB%25E9%2596%25A2%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25AE%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yutak23%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NiNzU0NWNiYzkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yutak23</dc:creator></item><item><title><![CDATA[『RPGツクールMZ』タイルセットのデータ構造]]></title><description><![CDATA[『RPGツクールMZ』関連記事 目次
+
+ はじめに
+別の記事『『RPGツクールMZ』マップの構成と更新』では、マップで使われるクラス、その包含関係および呼び出し関係を調べました。
+今回は[タイルセット]のファイル読み込みとデータ構造について調べます。
+とくにオートタイルなどは複雑な作りをしていて、コードをサラッと読んで理解できる物ではないので、丁寧にやります。
+本記事では JavaScript での扱いを調べるので、ツール(『RPGツクールMZ』のエディタ)上での扱いは次の記事を参考にしてください。この辺りは理解している前提で書きます。
+
+『RPGツクールMZ』[モード]-[マップ]のヘ...]]></description><link>https://zenn.dev/tonbi/articles/b7a193ba71580f</link><guid isPermaLink="true">https://zenn.dev/tonbi/articles/b7a193ba71580f</guid><pubDate>Wed, 15 Jan 2025 01:47:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---s-36Cvb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%258ERPG%25E3%2583%2584%25E3%2582%25AF%25E3%2583%25BC%25E3%2583%25ABMZ%25E3%2580%258F%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%25BB%25E3%2583%2583%25E3%2583%2588%25E3%2581%25AE%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E6%25A7%258B%25E9%2580%25A0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A8%25E3%2582%2593%25E3%2581%25B3%2540%25E9%25B3%25B6%25E5%25B6%258B%25E5%25B7%25A5%25E6%2588%25BF%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pBYl9FRlAtZm9RQU1pN1VoM3hzYkNyQXZUSTZjUDFkZGJJMWJrPXMyNTAtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>とんび@鳶嶋工房</dc:creator></item><item><title><![CDATA[Node.js クラスターの核心を解き明かす]]></title><description><![CDATA[
+
+ 前書き
+PM2 を使って Node.js プロセスを管理していると、クラスターモードをサポートしていることに気づくでしょう。このモードを有効にすると、Node.js で複数のプロセスを作成できます。クラスターモードでインスタンス数を max に設定すると、サーバーの CPU コア数に基づいて同数の Node プロセスが作成されます。
+PM2 は、Node.js の Cluster モジュールを利用してこれを実現しています。このモジュールは、Node.js のシングルスレッド特性による制約を解決し、複数の CPU コアを活用できるようにするために導入されました。しかし、Cluster...]]></description><link>https://zenn.dev/leapcell/articles/d29c2578226f65</link><guid isPermaLink="true">https://zenn.dev/leapcell/articles/d29c2578226f65</guid><pubDate>Tue, 14 Jan 2025 19:47:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hz-bBwtB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Node.js%2520%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%25BC%25E3%2581%25AE%25E6%25A0%25B8%25E5%25BF%2583%25E3%2582%2592%25E8%25A7%25A3%25E3%2581%258D%25E6%2598%258E%25E3%2581%258B%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Leapcell%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y0N2E0MGQ3NGEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Leapcell</dc:creator></item><item><title><![CDATA[磯野家で学ぶ！配列のミュータブルとイミュータブル]]></title><description><![CDATA[
+ 概要
+この記事は、表題の通り磯野家でjsのArray.propertyのミュータブル、イミュータブルを学ぶことを目的としています。
+
+ 今回使うデータ
+// 磯野家
+const isonoFamily = [
+  { name: "カツオ", age: 11 },
+  { name: "ワカメ", age: 9 },
+  { name: "波平", age: 54 },
+  { name: "フネ", age: 50 }
+];
+
+// フグ田家
+const fugutaFamily = [
+  { name: "サザエ", age: 27 },
+  { name: "マスオ", ag...]]></description><link>https://zenn.dev/hirockysan/articles/ac4024dae765a6</link><guid isPermaLink="true">https://zenn.dev/hirockysan/articles/ac4024dae765a6</guid><pubDate>Tue, 14 Jan 2025 15:06:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5kRo1CmL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%25A3%25AF%25E9%2587%258E%25E5%25AE%25B6%25E3%2581%25A7%25E5%25AD%25A6%25E3%2581%25B6%25EF%25BC%2581%25E9%2585%258D%25E5%2588%2597%25E3%2581%25AE%25E3%2583%259F%25E3%2583%25A5%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%2596%25E3%2583%25AB%25E3%2581%25A8%25E3%2582%25A4%25E3%2583%259F%25E3%2583%25A5%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%2596%25E3%2583%25AB%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25B2%25E3%2582%258D%25E3%2581%25A3%25E3%2581%258D%25E3%2583%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2liZVZOYWZFUW1TcFIzZWhsWDdUVzZCV0ZsekJnTFpsRExFQ0NhUmc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ひろっきー</dc:creator></item><item><title><![CDATA[Chrome の音声合成APIは voiceschanged イベントと組み合わせて使う]]></title><description><![CDATA[
+ TL;DR
+Google Chrome で speechSynthesis.getVoices() するときは voiceschanged イベントを監視しつつ使うと良いです。
+speechSynthesis.addEventListener("voiceschanged", () =&gt; {
+  const voices = speechSynthesis.getVoices();
+});
+
+ やりたいこと
+ブラウザで音声合成をして Text-to-Speech をやりたい場合、例えば次のように書くだけで最低限OKです。このコードを実行すると、#play ボタンをクリックした際...]]></description><link>https://zenn.dev/sudame/articles/b2183c2f1bf59b</link><guid isPermaLink="true">https://zenn.dev/sudame/articles/b2183c2f1bf59b</guid><pubDate>Tue, 14 Jan 2025 14:11:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ORnkIE4u--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Chrome%2520%25E3%2581%25AE%25E9%259F%25B3%25E5%25A3%25B0%25E5%2590%2588%25E6%2588%2590API%25E3%2581%25AF%2520voiceschanged%2520%25E3%2582%25A4%25E3%2583%2599%25E3%2583%25B3%25E3%2583%2588%25E3%2581%25A8%25E7%25B5%2584%25E3%2581%25BF%25E5%2590%2588%25E3%2582%258F%25E3%2581%259B%25E3%2581%25A6%25E4%25BD%25BF%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:sudame%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFUWEFKeUk1Q1NzamI5M2hKa05JVDM5ZGZwSVU3NHZ5UXFTUVl0OFcxNUU9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sudame</dc:creator></item><item><title><![CDATA[JavaScript / クロージャを少し噛み砕いてみる]]></title><description><![CDATA[
+ クロージャとは
+
+ 関数が宣言されたときのスコープを記憶し、そのスコープへのアクセスを保持する機能を指す。
+通常、関数の実行後は内部で定義されている変数の値はメモリ領域から削除されてしまう。しかし以下のコードを見てみよう。
+function outerFunction() {
+    let outerVariable = "こんにちは！";
+
+    function innerFunction() {
+        console.log(outerVariable); // outerVariableにアクセス
+    }
+
+    return innerFunction;...]]></description><link>https://zenn.dev/tsumugu2024/articles/172dbcd46281b2</link><guid isPermaLink="true">https://zenn.dev/tsumugu2024/articles/172dbcd46281b2</guid><pubDate>Tue, 14 Jan 2025 13:56:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--OxKJTBL9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%2520%252F%2520%25E3%2582%25AF%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%25A3%25E3%2582%2592%25E5%25B0%2591%25E3%2581%2597%25E5%2599%259B%25E3%2581%25BF%25E7%25A0%2595%25E3%2581%2584%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A4%25E3%2582%2580%25E3%2581%2590%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdhYjgyY2M0ZjYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>つむぐ</dc:creator></item><item><title><![CDATA[ECharts Scatter3DをFlutterWebに実装する（地球儀編）]]></title><description><![CDATA[
+ iOSアプリで偶然できたなんちゃって実装とはぜんぜん違っていた
+基本は地図と一緒でしょ?
+map_pageから「ちょっと」書き換えてglobe_pageをつくればいいわけでしょ？
+index.htmlやそれを読むecharts_js.dartは変更なし。
+ということで、ともかく書いてみたコードがこちら。
+
+ globe_page
+import 'dart:convert';
+import 'dart:html' as html;
+import 'dart:ui_web' as ui_web;
+
+import 'package:flutter/material.dart';
+impor...]]></description><link>https://zenn.dev/flutteruniv_dev/articles/05790a04db69a6</link><guid isPermaLink="true">https://zenn.dev/flutteruniv_dev/articles/05790a04db69a6</guid><pubDate>Tue, 14 Jan 2025 13:43:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qp7nx38q--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ECharts%2520Scatter3D%25E3%2582%2592FlutterWeb%25E3%2581%25AB%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2599%25E3%2582%258B%25EF%25BC%2588%25E5%259C%25B0%25E7%2590%2583%25E5%2584%2580%25E7%25B7%25A8%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%25A9%25E3%2582%2593%25E3%2581%2590%25E3%2582%258A%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y0ODUxNDkwOTcuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Flutter%25E5%25A4%25A7%25E5%25AD%25A6%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dqQ2RNdHFjMF9fWVFUdkJndHR1R3plSnVVNW41ZXMyTzM0RDUzPXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>どんぐり</dc:creator></item><item><title><![CDATA[【CORS】API叩いたらCORSエラーになったときの対処法]]></title><description><![CDATA[
+ CORSとは
+
+
+Cross-Origin Resource Sharing の略
+オリジン間リソース共有
+
+あるオリジンで動いている Web アプリケーションに対して、別のオリジンのサーバーへのアクセスをオリジン間 HTTP リクエストによって許可できる仕組みのこと
+
+
+インターネットブラウザに実装されているセキュリティのためのメカニズム
+
+オリジンとは
+
+
+オリジン = プロトコル＋ホスト＋ドメイン＋ポート番号
+
+下記のURLを例に説明する
+
+
+http:://www.hogehoge.com:80/
+
+http = プロトコル
+www = ホスト名
+hogehoge.com =...]]></description><link>https://zenn.dev/mof_moriko/articles/91cacad32ce0c1</link><guid isPermaLink="true">https://zenn.dev/mof_moriko/articles/91cacad32ce0c1</guid><pubDate>Tue, 14 Jan 2025 10:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--WNqumis5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590CORS%25E3%2580%2591API%25E5%258F%25A9%25E3%2581%2584%25E3%2581%259F%25E3%2582%2589CORS%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E3%2581%25AB%25E3%2581%25AA%25E3%2581%25A3%25E3%2581%259F%25E3%2581%25A8%25E3%2581%258D%25E3%2581%25AE%25E5%25AF%25BE%25E5%2587%25A6%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:moriko%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNkMGY2YWE3OTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>moriko</dc:creator></item><item><title><![CDATA[【JS】CSVインポートでBOMエラー]]></title><description><![CDATA[こんにちは！
+CSVのインポート機能を開発していた時に、ExcelからCSVを作成して
+そのCSVをインポートしたときにエラーが起こることがあり、
+ちょっと悩みました。
+そのインポートのエラー原因がBOM付きCSVというものだったので、
+原因と解決策を書いていきます！
+
+ 原因
+先ほども書きましたが、原因はBOM付きのCSVでした。
+BOMとは？
+
+ファイルにおける BOM (Byte Order Mark) は、文字エンコーディングを示すためにテキストファイルの先頭に付加される特別なバイト列です。特にUTFエンコーディング（例：UTF-8、UTF-16、UTF-32）で使用されることが...]]></description><link>https://zenn.dev/ki1998/articles/cc49c0263007d4</link><guid isPermaLink="true">https://zenn.dev/ki1998/articles/cc49c0263007d4</guid><pubDate>Tue, 14 Jan 2025 08:38:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xzWeMQ80--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590JS%25E3%2580%2591CSV%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%259D%25E3%2583%25BC%25E3%2583%2588%25E3%2581%25A7BOM%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E1NDkwMDdkZWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ki</dc:creator></item><item><title><![CDATA[ECharts Scatter3DをFlutterWebに実装する（地図編）]]></title><description><![CDATA[
+ テストプロジェクトから運用中のサイトへ
+前回作ったシンプルなプロジェクトで学んだことを、本番環境に実装する。
+Previous Episode....
+https://zenn.dev/flutteruniv_dev/articles/f60816ae507215
+まずは「なんもかんもmain.dart」から脱却する。
+
+ main.dartのものはmain.dartに
+運用中のmain.dartに特に追加するものはない。
+main.dartの仕事はmain.dartに任せて、切り離す。
+
+ index.htmlに追加してある情報はこれ
+index.html
+index.html
+ ...]]></description><link>https://zenn.dev/flutteruniv_dev/articles/1fcdac1c92a8ae</link><guid isPermaLink="true">https://zenn.dev/flutteruniv_dev/articles/1fcdac1c92a8ae</guid><pubDate>Tue, 14 Jan 2025 04:01:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--l7Z3_yhU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ECharts%2520Scatter3D%25E3%2582%2592FlutterWeb%25E3%2581%25AB%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2599%25E3%2582%258B%25EF%25BC%2588%25E5%259C%25B0%25E5%259B%25B3%25E7%25B7%25A8%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%25A9%25E3%2582%2593%25E3%2581%2590%25E3%2582%258A%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y0ODUxNDkwOTcuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Flutter%25E5%25A4%25A7%25E5%25AD%25A6%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dqQ2RNdHFjMF9fWVFUdkJndHR1R3plSnVVNW41ZXMyTzM0RDUzPXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>どんぐり</dc:creator></item><item><title><![CDATA[mjsとcjsの違いって何？　普通のjsとどう違うの？　ChatGPTに聞いてみた]]></title><description><![CDATA[
+ mjs と cjs の違い
+JavaScriptのモジュールシステムには、主にmjs（ECMAScript Modules）とcjs（CommonJS）の2種類があります。この記事では、これらの違いについて詳しく説明します。
+
+ 背景
+JavaScriptはもともとブラウザ上で動作するスクリプト言語として開発されました。初期の頃は、モジュールという概念が存在せず、全てのコードはグローバルスコープで実行されていました。しかし、プロジェクトが大規模化するにつれて、コードの再利用や分割が求められるようになり、モジュールシステムが導入されました。
+
+ CommonJS (cjs)
+Commo...]]></description><link>https://zenn.dev/itsukinuko/articles/d4f1be24ffc3a93af83b</link><guid isPermaLink="true">https://zenn.dev/itsukinuko/articles/d4f1be24ffc3a93af83b</guid><pubDate>Tue, 14 Jan 2025 02:12:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--N5hU5Z0q--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:mjs%25E3%2581%25A8cjs%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%25E3%2581%25A3%25E3%2581%25A6%25E4%25BD%2595%25EF%25BC%259F%25E3%2580%2580%25E6%2599%25AE%25E9%2580%259A%25E3%2581%25AEjs%25E3%2581%25A8%25E3%2581%25A9%25E3%2581%2586%25E9%2581%2595%25E3%2581%2586%25E3%2581%25AE%25EF%25BC%259F%25E3%2580%2580ChatGPT%25E3%2581%25AB%25E8%2581%259E%25E3%2581%2584%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:itsuki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzlhODMyNzI4NTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>itsuki</dc:creator></item><item><title><![CDATA[バックエンドって何してるの？関数と何が違うのか]]></title><description><![CDATA[
+ バックエンドの仕組みとは？
+バックエンドは、ウェブアプリケーションの裏側で動作し、ユーザーインターフェースとデータベース間の通信や処理を担当する部分です。ここでは、JavaScriptを使ってバックエンドの基本的な仕組みについて解説します。
+
+ 1. 関数呼び出しとバックエンドの問い合わせの違い
+
+
+関数呼び出し:
+function calculateSum(a, b) {
+    return a + b;
+}
+
+// 関数の呼び出し
+let result = calculateSum(3, 5);
+console.log(result); // 出力: 8
+
+上記の例では、cal...]]></description><link>https://zenn.dev/itsukinuko/articles/0e03ced853cbbca47dff</link><guid isPermaLink="true">https://zenn.dev/itsukinuko/articles/0e03ced853cbbca47dff</guid><pubDate>Tue, 14 Jan 2025 02:12:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--IiFerwuj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2590%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2589%25E3%2581%25A3%25E3%2581%25A6%25E4%25BD%2595%25E3%2581%2597%25E3%2581%25A6%25E3%2582%258B%25E3%2581%25AE%25EF%25BC%259F%25E9%2596%25A2%25E6%2595%25B0%25E3%2581%25A8%25E4%25BD%2595%25E3%2581%258C%25E9%2581%2595%25E3%2581%2586%25E3%2581%25AE%25E3%2581%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:itsuki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzlhODMyNzI4NTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>itsuki</dc:creator></item><item><title><![CDATA[【TypeScript×関数型】まとめてエラーを捕まえる！neverthrowで実現するスマートなCSV検証]]></title><description><![CDATA[
+ はじめに
+CSVデータの検証においては、数多くのエラーが同時発生する可能性があります。たとえば「ある行のIDが数値ではない」「日付が無効」「必須項目が空欄」など、複数セルで同時に問題が起こりえるのがCSVの難しいところです。
+JavaScriptの例外処理では、標準的な例外処理手法であるtry-catchをネストしてエラーを拾う方法がよく使われてきましたが、このアプローチには多くの問題が潜んでいます。
+そこで、今回は TypeScript の関数型スタイルでのエラーハンドリングを可能にするライブラリ neverthrow を活用し、複数のバリデーション結果をまとめて扱う方法を紹介しま...]]></description><link>https://zenn.dev/hacobell_dev/articles/typescript-neverthrow-csv-error-handling</link><guid isPermaLink="true">https://zenn.dev/hacobell_dev/articles/typescript-neverthrow-csv-error-handling</guid><pubDate>Tue, 14 Jan 2025 00:30:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1u2xWOhd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590TypeScript%25C3%2597%25E9%2596%25A2%25E6%2595%25B0%25E5%259E%258B%25E3%2580%2591%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2581%25A6%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E3%2582%2592%25E6%258D%2595%25E3%2581%25BE%25E3%2581%2588%25E3%2582%258B%25EF%25BC%2581neverthrow%25E3%2581%25A7%25E5%25AE%259F%25E7%258F%25BE%25E3%2581%2599%25E3%2582%258B%25E3%2582%25B9%25E3%2583%259E%25E3%2583%25BC%25E3%2583%2588%25E3%2581%25AACSV%25E6%25A4%259C%25E8%25A8%25BC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%25BB%25E3%2582%258A%25E3%2581%2597%25E3%2582%2587%25E3%2583%25BC%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzEzYjhhODE4MTUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Hacobell%2520Developers%2520...%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZiZTM4NTI2YzMuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ほりしょー</dc:creator></item><item><title><![CDATA[SvelteKitでタイプセーフなCookie管理]]></title><description><![CDATA[
+ 導入
+CookieはWebアプリに必須の存在ですが、オブジェクトを格納したりしようとするとシリアライズ・デシリアライズの手間が発生します。また、変換の際やサーバー・クライアント間で型定義を間違えてつけてエラーを発生させてしまう可能性があります。
+今回は、SvelteKitでフルスタックにタープセーフなCookie管理ができるライブラリを紹介します。
+
+ svelte-baked-cookie
+https://github.com/jill64/svelte-baked-cookie
+名前の由来は硬く型付けされたCookieにしたかったのでbaked(焼いた)-cookieにしました。...]]></description><link>https://zenn.dev/jill64/articles/1d2625a58aae99</link><guid isPermaLink="true">https://zenn.dev/jill64/articles/1d2625a58aae99</guid><pubDate>Mon, 13 Jan 2025 22:16:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0kBbl00E--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:SvelteKit%25E3%2581%25A7%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%2597%25E3%2582%25BB%25E3%2583%25BC%25E3%2583%2595%25E3%2581%25AACookie%25E7%25AE%25A1%25E7%2590%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:jill64%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSkhvRWlDNlllZ2R6cGxwZ2xPQnVaN2V5akFPSUMtVExwQUpIMFg2NERIZWl3Z1dLTT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>jill64</dc:creator></item></channel></rss>
