@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「CSS」のフィード]]></title><description><![CDATA[Zennのトピック「CSS」のRSSフィードです]]></description><link>https://zenn.dev/topics/css</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/98e1680a6c.png</url><title>Zennの「CSS」のフィード</title><link>https://zenn.dev/topics/css</link></image><generator>zenn.dev</generator><lastBuildDate>Fri, 17 Jan 2025 03:53:58 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/css/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Rechartsを使用したグラフ実装例と小技]]></title><description><![CDATA[株式会社 Rehab for JAPAN エンジニアのもじゃ(@moja_moja)です。
+私がこのブログを書いている段階では、新規プロダクトでフロントエンドエンジニアをしており、その中で Recharts を使用したグラフをいくつか実装しました。
+Rehab for JAPAN は複数のプロダクトが存在しますが、私が関わるプロダクト以外では Recharts を導入していません。
+今回は他プロダクトのメンバーや社外でグラフの実装を検討している人に向けて、少しでも参考になるような、グラフの実装例やちょっとした小技・実装時に困った点・解決策の一部を紹介していきたいと思います。
+なお、紹介す...]]></description><link>https://zenn.dev/rehabforjapan/articles/8cb72628868492</link><guid isPermaLink="true">https://zenn.dev/rehabforjapan/articles/8cb72628868492</guid><pubDate>Fri, 17 Jan 2025 02:36:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lSFZLz-T--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Recharts%25E3%2582%2592%25E4%25BD%25BF%25E7%2594%25A8%25E3%2581%2597%25E3%2581%259F%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%2595%25E5%25AE%259F%25E8%25A3%2585%25E4%25BE%258B%25E3%2581%25A8%25E5%25B0%258F%25E6%258A%2580%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2582%2582%25E3%2581%2598%25E3%2582%2583%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNkYzExOTgzNjguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Rehab%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzlmZGEwZmUzZDYuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>もじゃ</dc:creator></item><item><title><![CDATA[[React.js/TypeScript] 管理画面系のサイドバー実装例]]></title><description><![CDATA[
+ 概要
+今までたくさんの企業で管理画面やSaaSのUIを作ってきました。そのたびにサイドバーを実装してきましたが、さすがにそろそろテンプレート化しておこうと思った…というのがこの記事の執筆動機です。
+この記事では、サイドバー実装のサンプルコードと、軽微な解説を掲載します。使用技術は React.js / TypeScript / CSS in JS になります。
+Vue.js でも TailwindCSS でも、この記事で紹介した考え方自体は流用できると思います。
+UI ライブラリは使用していません。管理画面やSaaS開発では、自前で作った方が拡張性があり、複雑なニーズに対応できるため...]]></description><link>https://zenn.dev/tenkei/articles/9c69093e4354ae</link><guid isPermaLink="true">https://zenn.dev/tenkei/articles/9c69093e4354ae</guid><pubDate>Thu, 16 Jan 2025 09:20:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--CCKDf-9C--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BReact.js%252FTypeScript%255D%2520%25E7%25AE%25A1%25E7%2590%2586%25E7%2594%25BB%25E9%259D%25A2%25E7%25B3%25BB%25E3%2581%25AE%25E3%2582%25B5%25E3%2582%25A4%25E3%2583%2589%25E3%2583%2590%25E3%2583%25BC%25E5%25AE%259F%25E8%25A3%2585%25E4%25BE%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tenkei%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTC1MbnhJQkE4eS1Yd2xoS3hwQllvMzlxODB3ZVItMDB2NlVWTkdRdnoyTnc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tenkei</dc:creator></item><item><title><![CDATA[【CSS】任意の子要素幅に基づいて親要素のwidthを制御するTips]]></title><description><![CDATA[
+ TL;DR
+👇のように指定する
+.parent {
+  width: fit-content;
+}
+
+.targetChild {
+  width: 0;
+  min-width: 100%;
+}
+
+ before
+
+
+ after
+
+
+ 使えるケース
+かなり限定的で👇のようなタイトルの下にサブタイトルがあり、タイトルの幅に合わせてサブタイトルの幅を決めたい時などに使えると思います。
+&lt;body&gt;
+  &lt;div class="parent"&gt;
+    &lt;div class="title"&gt;優先する要素&lt;/div&gt;
+    &lt;div...]]></description><link>https://zenn.dev/smartcamp/articles/b8710e0964e760</link><guid isPermaLink="true">https://zenn.dev/smartcamp/articles/b8710e0964e760</guid><pubDate>Thu, 16 Jan 2025 07:30:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--CbUdOp3F--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590CSS%25E3%2580%2591%25E4%25BB%25BB%25E6%2584%258F%25E3%2581%25AE%25E5%25AD%2590%25E8%25A6%2581%25E7%25B4%25A0%25E5%25B9%2585%25E3%2581%25AB%25E5%259F%25BA%25E3%2581%25A5%25E3%2581%2584%25E3%2581%25A6%25E8%25A6%25AA%25E8%25A6%2581%25E7%25B4%25A0%25E3%2581%25AEwidth%25E3%2582%2592%25E5%2588%25B6%25E5%25BE%25A1%25E3%2581%2599%25E3%2582%258BTips%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Ayuu%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzUyNGYwMGIzM2MuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:SMARTCAMP%2520Engineer%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2hCRXRzOTYwTHZiRnpjamotQ2ZjLUZlQjRKNy1QaTZPc0FhZVZsPXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Ayuu</dc:creator></item><item><title><![CDATA[【CSS】var() は代替値を設定できる]]></title><description><![CDATA[Web サイトを制作しています。
+使用していたライブラリのスタイルを少し変えたくて適用されているスタイルを確認したところ
+.component-style {
+  width: var(--component-width, var(--component-size, 16px);
+  height: var(--component-height, var(--component-size, 16px);
+}
+上記のように、var() 関数が入れ子構造になっていました。
+今まで var(--variant) のように、何気なく使っていましたが、公式ドキュメントをあらためて確認すると、var...]]></description><link>https://zenn.dev/ndjndj/articles/8713727fda8357</link><guid isPermaLink="true">https://zenn.dev/ndjndj/articles/8713727fda8357</guid><pubDate>Thu, 16 Jan 2025 03:54:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6Up-oMZq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590CSS%25E3%2580%2591var%2528%2529%2520%25E3%2581%25AF%25E4%25BB%25A3%25E6%259B%25BF%25E5%2580%25A4%25E3%2582%2592%25E8%25A8%25AD%25E5%25AE%259A%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ndj%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FmOGFkYjRiMGEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ndj</dc:creator></item><item><title><![CDATA[【ゼロから始める Web 開発】自分だけの美しいポートフォリオサイトを作ろう（HTML & CSS & JavaScript）]]></title><description><![CDATA[本書では、HTML・CSS・JavaScript の基礎を学びながら、魅力的なポートフォリオサイトを作成します。
+ 作ったサイトは GitHub Pages で無料で公開でき、就職・転職活動にも活用できます。
+
+身につくスキルは下記の通りです。
+ 🎨 HTML/CSS を使ったデザイン実装
+ 📱 スマートフォンやタブレットにも対応するレスポンシブデザイン
+ ⚡ JavaScript でのインタラクティブな機能実装
+ 🔧 Chrome DevTools を使ったデバッグ手法
+ 🚀 GitHub Pages でのサイト公開
+
+本書の特徴はこちらです。
+ ・コードの書き方を一から丁寧に解説
+ ・環境構築からデプロイまでをサポート
+ ・デザインの知識がなくても見栄えの良いサイトが作れる
+ ・実践的なスキルが段階的に身につく
+
+プログラミング初心者でも安心して始められる内容となっています。一緒に、あなただけのポートフォリオサイトを作っていきましょう。]]></description><link>https://zenn.dev/farstep/books/create-portfolio-site-with-html-css-javascript</link><guid isPermaLink="true">https://zenn.dev/farstep/books/create-portfolio-site-with-html-css-javascript</guid><pubDate>Wed, 15 Jan 2025 08:24:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--E7uKpa9w--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci84MmI3ODFlZTUyLnBuZw==%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>FarStep</dc:creator></item><item><title><![CDATA[MUIでAspectRatioするだけ]]></title><description><![CDATA[
+ 概要
+Chakra UIには、iframeの縦横比をいい感じにしてくれるコンポーネント AspectRatio がある。
+https://www.chakra-ui.com/docs/components/aspect-ratio
+ではMUIではどうかというと、MUI本体にはなくJoy UIの方に存在する。
+https://mui.com/joy-ui/react-aspect-ratio/?srsltid=AfmBOoqlsSOkN0-DACXO7gvXaGl4QB4jKufchlaLrYjS8QePc6wWSNLM
+とはいえMUIをシンプルに使っていたところわざわざこれだけのため...]]></description><link>https://zenn.dev/music_shio/articles/b5da0ab99fc3b1</link><guid isPermaLink="true">https://zenn.dev/music_shio/articles/b5da0ab99fc3b1</guid><pubDate>Tue, 14 Jan 2025 01:16:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--yfK7ACJV--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:MUI%25E3%2581%25A7AspectRatio%25E3%2581%2599%25E3%2582%258B%25E3%2581%25A0%25E3%2581%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Hiromichi%2520Shiozuka%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzkwZjc3NDNlYTcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Hiromichi Shiozuka</dc:creator></item><item><title><![CDATA[画像を dark mode 対応するメモ]]></title><description><![CDATA[画像をダークモード対応する方法のメモ
+
+ 結論
+
+SVG は SVG 内に style でダークモードのスタイルを作成する
+backdroung-image は media query で切り替える
+img タグは &lt;picture&gt; を使って切り替える
+
+
+ web サイトでの画像をパターン分けする
+
+ 画像の種類は2通りに分ける
+
+SVG 画像
+SVG 以外の画像
+
+
+ webサイトで使う画像はだいたい次のパターンに分けられる
+
+img タグで配置する画像
+1-a. SVG 画像
+1-b. SVG 以外の画像
+CSS の background-image で配置する画像
+...]]></description><link>https://zenn.dev/kikiki_kiki/articles/a2a2dbc487fb8c</link><guid isPermaLink="true">https://zenn.dev/kikiki_kiki/articles/a2a2dbc487fb8c</guid><pubDate>Mon, 13 Jan 2025 23:30:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--WkjNhRmZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%2594%25BB%25E5%2583%258F%25E3%2582%2592%2520dark%2520mode%2520%25E5%25AF%25BE%25E5%25BF%259C%25E3%2581%2599%25E3%2582%258B%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:KiKiKi%2520KiKi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RmMWU4OWU5ZWIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>KiKiKi KiKi</dc:creator></item><item><title><![CDATA[flexアイテムのmax-heightとmax-widthがうまく機能しない問題の原因と解決策]]></title><description><![CDATA[
+ 背景
+Flexboxレイアウトを使っていると、要素のmax-heightやmax-widthが期待通りに動作しない場面に遭遇することがあります。この記事では、その原因と解決策をわかりやすく解説します。
+
+ 状況設定
+今回の設定は以下の通りです。
+
+登場人物は parent, fixed, text-container の３人
+parentはfixedとtext-containerの親要素で縦幅固定のフレックスコンテナ( height: 500px, direction: column )
+fixedは縦幅固定の要素( height: 100px )
+text-containerは残り...]]></description><link>https://zenn.dev/kg_filled/articles/fda2b61a518e92</link><guid isPermaLink="true">https://zenn.dev/kg_filled/articles/fda2b61a518e92</guid><pubDate>Mon, 13 Jan 2025 01:59:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_Q4IZBk3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:flex%25E3%2582%25A2%25E3%2582%25A4%25E3%2583%2586%25E3%2583%25A0%25E3%2581%25AEmax-height%25E3%2581%25A8max-width%25E3%2581%258C%25E3%2581%2586%25E3%2581%25BE%25E3%2581%258F%25E6%25A9%259F%25E8%2583%25BD%25E3%2581%2597%25E3%2581%25AA%25E3%2581%2584%25E5%2595%258F%25E9%25A1%258C%25E3%2581%25AE%25E5%258E%259F%25E5%259B%25A0%25E3%2581%25A8%25E8%25A7%25A3%25E6%25B1%25BA%25E7%25AD%2596%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:KGFilled%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS29PNi1XamQ4ZW54NXdWdHRDUmQ3TTE3cmx0QVJibjZBTVVtdFhhdko0SGZnSXM2cz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>KGFilled</dc:creator></item><item><title><![CDATA[TailwindCSSのブレークポイントまとめ]]></title><description><![CDATA[
+ TailwindCSSのブレークポイントとは
+TailwindCSSでは、レスポンシブデザインを実装するためにブレークポイントが用意されています。
+デフォルトで以下の5つのブレークポイントが提供されています。
+
+
+
+ブレークポイント
+最小幅
+
+
+
+
+sm
+640px
+
+
+md
+768px
+
+
+lg
+1024px
+
+
+xl
+1280px
+
+
+2xl
+1536px
+
+
+
+
+ 基本的な使い方
+&lt;div class="w-full md:w-1/2 lg:w-1/3"&gt;
+&lt;!-- コンテンツ --&gt;
+&lt;/div&gt;
+
+ header例
+&lt;!-- ナビゲ...]]></description><link>https://zenn.dev/rlab/articles/99826a6af9bf87</link><guid isPermaLink="true">https://zenn.dev/rlab/articles/99826a6af9bf87</guid><pubDate>Sun, 12 Jan 2025 14:18:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--iEjQ93Rb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TailwindCSS%25E3%2581%25AE%25E3%2583%2596%25E3%2583%25AC%25E3%2583%25BC%25E3%2582%25AF%25E3%2583%259D%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2588%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%258A%25E3%2583%2584%25E3%2583%258E%25E3%2583%25AD%25E3%2583%2589%25E3%2583%25AA%25E3%2582%25B4%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNjNzdmZWEzNmQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ナツノロドリゴ</dc:creator></item><item><title><![CDATA[【CSS】特定クラスの最後の要素を指定する]]></title><description><![CDATA[
+ はじめに
+CSSを使って最後の要素をスタイリングしたい場合、疑似クラスの:last-of-typeや:last-childがまず思い浮かびます。しかし、これらを特定のクラスに絞る場合には、別の方法が必要でした。:hasを活用して実現する方法を備忘録として残します。
+
+ コード例
+以下は、Sassでborder-bottomを条件付きで設定する例です。
+.item {
+  border-bottom: 1px solid black;
+
+  &amp;:not(:has(~ .item)) {
+    border-bottom: none;
+  }
+}
+
+ 解説
+
+ :not(:ha...]]></description><link>https://zenn.dev/kibe/articles/771571e0eb75c2</link><guid isPermaLink="true">https://zenn.dev/kibe/articles/771571e0eb75c2</guid><pubDate>Thu, 09 Jan 2025 00:53:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--LeBN2A2T--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590CSS%25E3%2580%2591%25E7%2589%25B9%25E5%25AE%259A%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25B9%25E3%2581%25AE%25E6%259C%2580%25E5%25BE%258C%25E3%2581%25AE%25E8%25A6%2581%25E7%25B4%25A0%25E3%2582%2592%25E6%258C%2587%25E5%25AE%259A%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:k1b3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAwOTYwY2IzNTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>k1b3</dc:creator></item><item><title><![CDATA[タブレットのレスポンシブ対応：PC画面サイズの縮小版を表示する]]></title><description><![CDATA[
+ 概要
+画面幅に基づいて適切なレイアウトを提供する実装方法を解説します。特に以下の2つのケースで、縮小表示を実現します：
+
+小型スマートフォン（412px未満）：412px幅のレイアウトを縮小表示
+タブレット（744px～1200px未満）：1200px幅のPCレイアウトを縮小表示
+
+
+ コードによる実装
+
+ 1. viewport設定
+(function () {
+  var screenWidth = window.screen.width;
+  var metaTag = document.createElement('meta');
+  metaTag.name = "view...]]></description><link>https://zenn.dev/sarap422/articles/b61ea87791a81e</link><guid isPermaLink="true">https://zenn.dev/sarap422/articles/b61ea87791a81e</guid><pubDate>Wed, 08 Jan 2025 18:37:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--I5OGe2wv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25BF%25E3%2583%2596%25E3%2583%25AC%25E3%2583%2583%25E3%2583%2588%25E3%2581%25AE%25E3%2583%25AC%25E3%2582%25B9%25E3%2583%259D%25E3%2583%25B3%25E3%2582%25B7%25E3%2583%2596%25E5%25AF%25BE%25E5%25BF%259C%25EF%25BC%259APC%25E7%2594%25BB%25E9%259D%25A2%25E3%2582%25B5%25E3%2582%25A4%25E3%2582%25BA%25E3%2581%25AE%25E7%25B8%25AE%25E5%25B0%258F%25E7%2589%2588%25E3%2582%2592%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:sarap422%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2Rhcmsvcy5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sarap422</dc:creator></item><item><title><![CDATA[visually-hidden]]></title><description><![CDATA[.visually-hidden {
+position: absolute!important;
+width:4px!important;
+height: 4px!important;
+padding: 0!important;
+margin: -1px!important;
+overflow: hidden!important;
+clip: rect(0,0,0,0)!important;
+white-space: nowrap!important;
+border: 0!important;
+}
+https://qiita.com/randy39/items/fca820d500dfe...]]></description><link>https://zenn.dev/1000_x_t30/articles/82373c5bbddbca</link><guid isPermaLink="true">https://zenn.dev/1000_x_t30/articles/82373c5bbddbca</guid><pubDate>Wed, 08 Jan 2025 04:37:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7tSrG2DA--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_80:visually-hidden%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:taka%2540ngtmtkyk%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFkNjk2NzYzNzguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>taka@ngtmtkyk</dc:creator></item><item><title><![CDATA[input が含まれないcustom element にすれば大体解決した話]]></title><description><![CDATA[ということで 前回の話 の &lt;toggle-checkbox&gt;&lt;/toggle-checkbox&gt; の内部で使っていた input を排除した toggle-checkbox が完成しました。
+ポイントとしては以下の通り
+
+内部 checked は this.#checked に一元化
+validation が必要かは ElementInternals.willValidate でチェック
+validate で focus したい場合は 子として 何らかの要素が必要（自身ではダメ？
+disabled の対応は別途実装必要
+
+例: tabindex とか
+
+
+spa...]]></description><link>https://zenn.dev/juners/articles/dc1d4b881879c3</link><guid isPermaLink="true">https://zenn.dev/juners/articles/dc1d4b881879c3</guid><pubDate>Wed, 08 Jan 2025 03:32:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--CHWwhLK4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:input%2520%25E3%2581%258C%25E5%2590%25AB%25E3%2581%25BE%25E3%2582%258C%25E3%2581%25AA%25E3%2581%2584custom%2520element%2520%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258C%25E3%2581%25B0%25E5%25A4%25A7%25E4%25BD%2593%25E8%25A7%25A3%25E6%25B1%25BA%25E3%2581%2597%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:juner%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pJLTZTZnZQaDFwb0M5dmMxYUpVeTFoelB0R1g1RXRmUHRpQzF4QWR3PXMyNTAtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>juner</dc:creator></item><item><title><![CDATA[CSSで扇形を作る方法]]></title><description><![CDATA[HTMLとかCSSで扇形を作るのは::beforeとか::afterとかborder-radiusとか使わなきゃ行けなさそうで大変に思えるけど、ちょっとしたせこワザを思いついたので共有します。
+border-radius: 50%;
+background: conic-gradient(white 60deg, blue 60deg):
+この例なら角度60度の扇形ができます。
+
+ 仕組み
+円を作ってその内部の色にグラデーションを当ててるだけです。
+上の例では白と青のグラデーションをしていしていますが、用途によって white → transparent のようにすると扇形だけ可視化するこ...]]></description><link>https://zenn.dev/daraenglish/articles/8b800203439a75</link><guid isPermaLink="true">https://zenn.dev/daraenglish/articles/8b800203439a75</guid><pubDate>Wed, 08 Jan 2025 03:22:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lI_12AAd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:CSS%25E3%2581%25A7%25E6%2589%2587%25E5%25BD%25A2%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:daraEnglish%25E4%25B8%25AD%25E3%2581%25AE%25E4%25BA%25BA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSmp5dmY3NnBoTUdiazNoOWpwc2ppdVhiYTVsblgyMHpkZnAwVkxUc0hXdlkzT2VPY009czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>daraEnglish中の人</dc:creator></item><item><title><![CDATA[TailWind CSS v4は便利だぞ]]></title><description><![CDATA[
+ はじめに
+tailwindCSS の v4.0 ベータ版が出ました！
+それに伴って今まで以上に便利な機能が追加されたので
+細かい変更やよく使う機能を絞って紹介させていただきます！
+
+ 初期設定
+初期設定の部分から変更されています。
+まず CSS ファイルに必要な記述が少なくなりました！
+
+app.css
+- @tailwind base;
+- @tailwind components;
+- @tailwind utilities;
+
++ @import "tailwindcss";
+
+見ての通り今までは TailWindCSS を使うのに
+必要なコードが 3 行ありましたが
+1 行に...]]></description><link>https://zenn.dev/jun0723/articles/f27b0046072704</link><guid isPermaLink="true">https://zenn.dev/jun0723/articles/f27b0046072704</guid><pubDate>Wed, 08 Jan 2025 03:10:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qTBDeI0---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TailWind%2520CSS%2520v4%25E3%2581%25AF%25E4%25BE%25BF%25E5%2588%25A9%25E3%2581%25A0%25E3%2581%259E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2598%25E3%2582%2585%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU3ZmE0NzMzZGMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>じゅん</dc:creator></item><item><title><![CDATA[CSS Modulesとは？]]></title><description><![CDATA[CSS Modulesは、コンポーネント指向のWeb開発におけるスタイリング手法の一つです。主な特徴は以下の通りです：
+
+
+スコープ化: 各コンポーネントのスタイルをローカルスコープ化し、クラス名の衝突を防ぎます。
+
+
+自動的なユニーク化: コンパイル時にクラス名に一意の識別子を付与し、グローバルな名前空間の汚染を回避します。
+
+
+JavaScriptとの統合: CSSファイルをJavaScriptモジュールとしてインポートし、オブジェクトのようにクラス名を扱えます。
+
+
+再利用性: スタイルを再利用可能なモジュールとして定義でき、コードの重複を減らせます。
+
+
+柔軟性: 通常のCSSと...]]></description><link>https://zenn.dev/btc/articles/250108_css_modules</link><guid isPermaLink="true">https://zenn.dev/btc/articles/250108_css_modules</guid><pubDate>Wed, 08 Jan 2025 01:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--32ptv37R--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:CSS%2520Modules%25E3%2581%25A8%25E3%2581%25AF%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:my%2520log%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzEwODIzM2M5OGYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>my log</dc:creator></item><item><title><![CDATA[Marpのcustom css適用]]></title><description><![CDATA[カスタムCSSが適用できないときに確認すること
+
+相対パスがあっているか（今開いているところの相対パス、絶対パスはNG）
+
+
+"OUTPUT"から右側の"WINDOW"からエラーの原因をみる
+
+
+わたしは最初に /* @theme test1 */とファイル名が入っていないことが原因だった
+
+https://qiita.com/atw0_0w/items/ca0699010600db169b55
+https://marpit.marp.app/theme-css
+]]></description><link>https://zenn.dev/codememo/articles/7a7812b8c85089</link><guid isPermaLink="true">https://zenn.dev/codememo/articles/7a7812b8c85089</guid><pubDate>Tue, 07 Jan 2025 04:28:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--mrPJPKyi--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:Marp%25E3%2581%25AEcustom%2520css%25E9%2581%25A9%25E7%2594%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:M%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS3J5eXVmTENHdzJwemFHYnM0WjMzeEg0UXl3YjNDUGdKdHpUN2I4VF8zZ1BjVjZWVT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>M</dc:creator></item><item><title><![CDATA[なぜYouTubeでは動画を全画面表示しながらスクロールが可能なのか？]]></title><description><![CDATA[こちらは JavaScript Advent Calendar 2024の 25 日目の記事です。
+https://qiita.com/advent-calendar/2024/javascript
+
+ はじめに
+YouTubeは全画面表示中でもスクロールできて便利ですね[1]。
+
+動画を全画面表示中でもスクロールできる
+しかし Fullscreen API を用いて動画を全画面にした場合、通常はスクロール不可能なはずです。
+YouTube ではどのようにスクロール可能な全画面を実現しているのでしょうか？
+本記事では、その実装方法を解説します（Fullscreen APIとは）。
+
+ 調...]]></description><link>https://zenn.dev/popopon/articles/scrollable-fullscreen-video</link><guid isPermaLink="true">https://zenn.dev/popopon/articles/scrollable-fullscreen-video</guid><pubDate>Mon, 06 Jan 2025 23:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--e3_ucncs--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%25AA%25E3%2581%259CYouTube%25E3%2581%25A7%25E3%2581%25AF%25E5%258B%2595%25E7%2594%25BB%25E3%2582%2592%25E5%2585%25A8%25E7%2594%25BB%25E9%259D%25A2%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2597%25E3%2581%25AA%25E3%2581%258C%25E3%2582%2589%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%258C%25E5%258F%25AF%25E8%2583%25BD%25E3%2581%25AA%25E3%2581%25AE%25E3%2581%258B%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2597%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzgwYzhlNDRjMDMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>しん</dc:creator></item><item><title><![CDATA[同じデザインを複数のHTMLタグに適用する]]></title><description><![CDATA[Webアプリなどを業務で開発する際に、UIのデザインをFigmaなどで作成し（Design System）、
+それを元に実装することはよくあるかと思います。
+本記事は、上記の場合に見た目は同じだけどHTMLタグは別にしたいユースケースに遭遇した場合に、
+対応した内容を時系列で解説します。
+実装全体は以下のPRです。
+https://github.com/ki504178/nextjs_ts_codebase/pull/21
+
+ 前提
+Design Systemで定義されていたものとして、以下のようなパターンにより表示を切り替えられるボタンの共通コンポーネントでした。
+
+!
+実際の業務では...]]></description><link>https://zenn.dev/ki504178/articles/html_tag_design</link><guid isPermaLink="true">https://zenn.dev/ki504178/articles/html_tag_design</guid><pubDate>Mon, 06 Jan 2025 00:25:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--x67N-PBr--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2590%258C%25E3%2581%2598%25E3%2583%2587%25E3%2582%25B6%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%2592%25E8%25A4%2587%25E6%2595%25B0%25E3%2581%25AEHTML%25E3%2582%25BF%25E3%2582%25B0%25E3%2581%25AB%25E9%2581%25A9%25E7%2594%25A8%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ki504178%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U3YWU5YTIzNzcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ki504178</dc:creator></item><item><title><![CDATA[ドラッグでリサイズするUIを実装するときに設定したいCSS]]></title><description><![CDATA[例えばサイドバーの幅をドラッグで調整できるUIを実装した時、以下のような症状に遭遇したことはありませんか？
+
+ドラッグ中になんか引っかかる・スムースに反応しない
+マウスのボタンを離してもドラッグ中判定のままになってしまう
+ドラッグ中にテキストが選択されてしまう
+
+僕はあります。
+
+ 挙動が微妙な実装例
+以下は上記のような挙動を再現した実装例になっています。試しに、サイドバーの右端をドラッグして色々と操作をしてみてください。おそらく、リサイズがカクついたり、マウスのボタンを離した状態でもリサイズされてしまったり、テキストが選択されてしまう症状が出ると思います。
+（↓の埋込状態の操作だとうま...]]></description><link>https://zenn.dev/moozaru/articles/8df76e62e72c9e</link><guid isPermaLink="true">https://zenn.dev/moozaru/articles/8df76e62e72c9e</guid><pubDate>Sun, 05 Jan 2025 22:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8DLjqrvU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2589%25E3%2583%25A9%25E3%2583%2583%25E3%2582%25B0%25E3%2581%25A7%25E3%2583%25AA%25E3%2582%25B5%25E3%2582%25A4%25E3%2582%25BA%25E3%2581%2599%25E3%2582%258BUI%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2599%25E3%2582%258B%25E3%2581%25A8%25E3%2581%258D%25E3%2581%25AB%25E8%25A8%25AD%25E5%25AE%259A%25E3%2581%2597%25E3%2581%259F%25E3%2581%2584CSS%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:zaru%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FiNDkwNTdmZTMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%25A0%25E3%2583%25BC%25E3%2582%25B6%25E3%2583%25AB%25E3%2581%25A1%25E3%2582%2583%25E3%2582%2593%25E3%2581%25AD%25E3%2582%258B%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2hTeWVOcHN2TEdOdTdPeUFlU1JEbDhUNkNOX1p3NHBXSHpIRHN2NlBFPXMyNTAtYw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>zaru</dc:creator></item></channel></rss>
