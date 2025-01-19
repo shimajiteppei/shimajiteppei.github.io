@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「shell」のフィード]]></title><description><![CDATA[Zennのトピック「shell」のRSSフィードです]]></description><link>https://zenn.dev/topics/shell</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/c8d33e6510.jpeg</url><title>Zennの「shell」のフィード</title><link>https://zenn.dev/topics/shell</link></image><generator>zenn.dev</generator><lastBuildDate>Sun, 19 Jan 2025 00:42:44 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/shell/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[プロセス置換 (Process Substitution)について]]></title><description><![CDATA[bash や zsh にはプロセス置換 (Process Substitution)という機能があるのだが、あまり使うことがなく、毎回忘れるのでメモ。
+
+ プロセス置換 (Process Substitution)とは
+コマンドの結果をファイルのように扱うことができる機能。以下のように書く。
+
+
+&lt;(list)
+
+リストの結果を入力ファイルに置き換える
+
+
+
+&gt;(list)
+
+リストの結果を出力ファイルに置き換える
+
+
+
+これはリストの結果をもう一方のプロセスに送るために/dev/fd/&lt;n&gt;のファイルディスクリプタを使っているっぽい。
+
+ 使用例
+例えば com...]]></description><link>https://zenn.dev/danimal141/articles/97688b48eafa27</link><guid isPermaLink="true">https://zenn.dev/danimal141/articles/97688b48eafa27</guid><pubDate>Sun, 19 Jan 2025 00:34:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--uf-nrvU4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25BB%25E3%2582%25B9%25E7%25BD%25AE%25E6%258F%259B%2520%2528Process%2520Substitution%2529%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:danimal141%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVlMzc0YjE0N2UuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>danimal141</dc:creator></item><item><title><![CDATA[シェル設定ファイル　~/.bash_profile　~/.bashrc]]></title><description><![CDATA[!
+移行してきた記事なので投稿日よりも前に書いたものになります。
+
+
+ 概要
+以下のシェル設定ファイルの用途、違い、読み込まれるタイミングについて説明する。
+
+~/.bash_profile
+~/.bashrc
+
+
+ 用途
+
+ 用途A：設定の永続化
+https://zenn.dev/417yr/articles/de38ecfdecf7f5
+
+上記の記事でせっかくシェル変数を環境変数に変換し、外部コマンドからも値を参照できるようにしても、ログインシェルを終了させると全て消えてしまいます。
+設定として永続化したいですよね?
+なのでログインシェル起動後、自動で実行されるシェルの設定ファイルに...]]></description><link>https://zenn.dev/417yr/articles/aa3ab155c6718e</link><guid isPermaLink="true">https://zenn.dev/417yr/articles/aa3ab155c6718e</guid><pubDate>Fri, 17 Jan 2025 16:39:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1clnuod6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B7%25E3%2582%25A7%25E3%2583%25AB%25E8%25A8%25AD%25E5%25AE%259A%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2580%2580%7E%252F.bash_profile%25E3%2580%2580%7E%252F.bashrc%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:417yr%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY5NDJhY2ViOTMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>417yr</dc:creator></item><item><title><![CDATA[.zshrcと.zprofile って何が違うの？]]></title><description><![CDATA[anaconda や pyenv などの環境設定を行う際に .zshrc と .zprofile の違いについて忘れてしまっていたので，自分の備忘録として残しておきます。
+
+ TD;LR
+
+
+.zshrc：シェルが起動するたびに実行したい設定を書く
+
+.zprofile：ログイン時に 1 回だけ実行したい設定を書く
+
+
+ もう少し詳しく
+一応，bash_profile についても簡単に記述しておきます。
+macOS Catalina 以降では，デフォルトのシェルが zsh に変更されたみたいです。
+https://mykii.blog/what-is-shell-bash-and-zsh...]]></description><link>https://zenn.dev/os515/articles/2025-01-17-shell_file</link><guid isPermaLink="true">https://zenn.dev/os515/articles/2025-01-17-shell_file</guid><pubDate>Fri, 17 Jan 2025 15:17:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6QsCAkm3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:.zshrc%25E3%2581%25A8.zprofile%2520%25E3%2581%25A3%25E3%2581%25A6%25E4%25BD%2595%25E3%2581%258C%25E9%2581%2595%25E3%2581%2586%25E3%2581%25AE%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:soso%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2EzYmUxOGY4MzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>soso</dc:creator></item><item><title><![CDATA[複数のCSVを結合して集計するワンライナー]]></title><description><![CDATA[カレントディレクトリに下記のファイルがあるとします。
+
+a.csv
+ID,名前,都道府県
+1,佐藤,北海道
+2,鈴木,東京
+
+
+b.csv
+ID,名前,都道府県
+3,高橋,北海道
+4,田中,東京
+
+
+c.csv
+ID,名前,都道府県,メールアドレス
+5,伊藤,沖縄,ito@example.com
+
+下記のコマンドを実行（Mac）することで都道府県ごとの件数の出力が得られます。
+(echo "都道府県,件数" &amp;&amp; find . -name "*.csv" -exec tail -n +2 {} + | awk -F',' '{count[$3]++} END {for (...]]></description><link>https://zenn.dev/purratto/articles/f7b8445c734f31</link><guid isPermaLink="true">https://zenn.dev/purratto/articles/f7b8445c734f31</guid><pubDate>Wed, 15 Jan 2025 03:05:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--KGdf_7Ac--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%25A4%2587%25E6%2595%25B0%25E3%2581%25AECSV%25E3%2582%2592%25E7%25B5%2590%25E5%2590%2588%25E3%2581%2597%25E3%2581%25A6%25E9%259B%2586%25E8%25A8%2588%25E3%2581%2599%25E3%2582%258B%25E3%2583%25AF%25E3%2583%25B3%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%258A%25E3%2583%25BC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:purratto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNhODdjNTc4MzguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>purratto</dc:creator></item><item><title><![CDATA[Mac で利用するシェルを zsh から fish に変更した記録]]></title><description><![CDATA[
+ はじめに
+Mac のシェルは長いこと zsh を利用していました。2024 年から 2025 年の年末年始にかけて、少し新しいことにチャレンジしてみようと思い、zsh から fish にシェルを変更して利用してみることにしました。一通り利用できる環境が整備できたので、その記録です。
+また合わせてターミナルアプリも iTerm2 から  Ghostty に変更しました。
+前提として私の環境は M2 Pro MacBookPro です。
+
+ fish のインストール
+前提に記載した通り私は Mac を利用していますので、Homebrew を利用してインストールしました。
+brew ins...]]></description><link>https://zenn.dev/cactatsu/articles/a73ffa7476348b</link><guid isPermaLink="true">https://zenn.dev/cactatsu/articles/a73ffa7476348b</guid><pubDate>Sat, 11 Jan 2025 08:19:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ZDF6wSMi--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Mac%2520%25E3%2581%25A7%25E5%2588%25A9%25E7%2594%25A8%25E3%2581%2599%25E3%2582%258B%25E3%2582%25B7%25E3%2582%25A7%25E3%2583%25AB%25E3%2582%2592%2520zsh%2520%25E3%2581%258B%25E3%2582%2589%2520fish%2520%25E3%2581%25AB%25E5%25A4%2589%25E6%259B%25B4%25E3%2581%2597%25E3%2581%259F%25E8%25A8%2598%25E9%258C%25B2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tatsu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdlYWJkNjZhZDUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tatsu</dc:creator></item><item><title><![CDATA[【Bash】ツール作りでよく使う機能]]></title><description><![CDATA[
+ はじめに
+
+ミニツール作成で何度も書く機能があるため、自分用のメモとして作成しました。
+
+
+ ルート権限で実行しているか確認する
+if [ "$(id -u)" -ne 0 ]; then
+  echo "This script must be run as root. Please use sudo or switch to the root user."
+  exit 1
+fi
+
+
+lshwや/var/log以下のファイルを確認したいときなど、ルート権限がないと正常に動作しないときに使用
+
+
+ 日時情報を入れた文字列を生成する
+timestamp=$(date +"%Y%m%d_...]]></description><link>https://zenn.dev/tesseract/articles/d1f83ac60e10b8</link><guid isPermaLink="true">https://zenn.dev/tesseract/articles/d1f83ac60e10b8</guid><pubDate>Thu, 09 Jan 2025 15:17:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--eEu6m_45--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Bash%25E3%2580%2591%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%25E4%25BD%259C%25E3%2582%258A%25E3%2581%25A7%25E3%2582%2588%25E3%2581%258F%25E4%25BD%25BF%25E3%2581%2586%25E6%25A9%259F%25E8%2583%25BD%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:HANAE%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2hPS0Z0VGxtQlJEcGdZXzgzel9BdXZ5ajFhZ0ZuczdZajRWck8yUmE4PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>HANAE</dc:creator></item><item><title><![CDATA[torneのファイルサーバーにmacから接続するシェル]]></title><description><![CDATA[#!/bin/sh
+if [ $# != 1 ]; then
+    echo 引数エラー: $*
+    exit 1
+else
+    echo OK
+fi
+
+if [ $1 = 'up' ]; then
+    mkdir -p ~/nasne
+    mount_smbfs //guest@nasne-xxxxxx/Share1 ~/nasne
+elif [ $1 = 'down' ]; then
+    diskutil umount ~/nasne
+fi
+]]></description><link>https://zenn.dev/ohnishi/articles/f89464aef76711</link><guid isPermaLink="true">https://zenn.dev/ohnishi/articles/f89464aef76711</guid><pubDate>Thu, 09 Jan 2025 13:34:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BCkNm6Cv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:torne%25E3%2581%25AE%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2581%25ABmac%25E3%2581%258B%25E3%2582%2589%25E6%258E%25A5%25E7%25B6%259A%25E3%2581%2599%25E3%2582%258B%25E3%2582%25B7%25E3%2582%25A7%25E3%2583%25AB%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ohnishi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJhMGZiNzE1ZTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ohnishi</dc:creator></item><item><title><![CDATA[Git Commit時のメッセージをさらに踏み込んで]]></title><description><![CDATA[
+ 概要
+前の記事 https://zenn.dev/masaki_mori72/articles/8ccc180632ba50 で git commit コマンドには想像以上に多くのオプションや使い方が存在していることに触れました。
+さらにコミットメッセージに絞って git commitコマンドを調べていきます。
+
+ コミットメッセージをVisutal Studio Codeで入力する
+
+vscodeを使ってコミットメッセージを記載する
+git config --global core.editor 'code --wait'
+
+# commitを実施する
+git commit
+
+普段...]]></description><link>https://zenn.dev/masaki_mori72/articles/395c6248fe31ee</link><guid isPermaLink="true">https://zenn.dev/masaki_mori72/articles/395c6248fe31ee</guid><pubDate>Wed, 08 Jan 2025 17:09:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--FcfCGjO1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Git%2520Commit%25E6%2599%2582%25E3%2581%25AE%25E3%2583%25A1%25E3%2583%2583%25E3%2582%25BB%25E3%2583%25BC%25E3%2582%25B8%25E3%2582%2592%25E3%2581%2595%25E3%2582%2589%25E3%2581%25AB%25E8%25B8%258F%25E3%2581%25BF%25E8%25BE%25BC%25E3%2582%2593%25E3%2581%25A7%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:masaki%2520mori%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2h0Zy0zeERLZF9VY19OaFA0TVB2S1BqRkNFc2JrV1loSk5aTV9LPXMyNTAtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>masaki mori</dc:creator></item><item><title><![CDATA[私のshell（途中）]]></title><description><![CDATA[
+ 構成
+
+zsh(macのデフォルトなので、買い替えの時にfishとお別れした)
+Nerd-font
+starship
+zshsuggestions
+fzf
+
+
+ NerdFontインストール
+# font-hack-nerd-fontをインストール
+brew install --cask font-hack-nerd-font
+
+ Starship設定
+
+ インストール
+brew install starship
+
+ zshrc設定
+.zshrcに以下を貼る
+
+.zshrc
+eval "$(starship init zsh)"
+
+
+ 諸々設定
+~/.config/starship....]]></description><link>https://zenn.dev/toipptakosan11/articles/97df26d5d7111b</link><guid isPermaLink="true">https://zenn.dev/toipptakosan11/articles/97df26d5d7111b</guid><pubDate>Wed, 08 Jan 2025 06:23:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--RwHP-oX1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%25A7%2581%25E3%2581%25AEshell%25EF%25BC%2588%25E9%2580%2594%25E4%25B8%25AD%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%258A%25E3%2582%25A4%25E3%2583%25B3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg0ZGJiNWMxYzYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ナイン</dc:creator></item><item><title><![CDATA[Git Commitの各種オプションとその使い道]]></title><description><![CDATA[
+ 概要
+
+git commitする際にmオプションくらいしか使ってなくない？
+公式ドキュメントを読んでもっと効率の良い使い方がないかを調べて紹介します
+https://git-scm.com/docs/git-commit
+
+
+
+ 各種オプション 利用ケースを添えて
+
+ git commit -a でまとめてaddしてコミット
+変更差分があるファイルを個別でaddせずともコミットしてくれます。自動フォーマットをコミットしたい場面で修正が担保されている場合にはこのコマンドを使うのがおすすめ。
+
+ git commit -p のパッチオプションつきで部分的にコミットする
+git add -...]]></description><link>https://zenn.dev/masaki_mori72/articles/8ccc180632ba50</link><guid isPermaLink="true">https://zenn.dev/masaki_mori72/articles/8ccc180632ba50</guid><pubDate>Tue, 07 Jan 2025 10:11:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wBaH_Fov--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Git%2520Commit%25E3%2581%25AE%25E5%2590%2584%25E7%25A8%25AE%25E3%2582%25AA%25E3%2583%2597%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2581%25A8%25E3%2581%259D%25E3%2581%25AE%25E4%25BD%25BF%25E3%2581%2584%25E9%2581%2593%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:masaki%2520mori%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2h0Zy0zeERLZF9VY19OaFA0TVB2S1BqRkNFc2JrV1loSk5aTV9LPXMyNTAtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>masaki mori</dc:creator></item><item><title><![CDATA[MacのFinderで常に隠しファイルを表示する]]></title><description><![CDATA[
+ 常に隠しファイルを表示するコマンド
+
+設定を更新してAppleShowAllFilesを有効化
+defaults write com.apple.finder AppleShowAllFiles -bool true
+
+
+Finderを再起動
+killall Finder
+
+
+ 一時的に表示・非表示を切り替える
+別の方法としてはFinderがアクティブな状態でCommand + Shift + . を押す。
+ただしこの方法では一時的に切り替わるだけ。
+
+ 設定を元に戻すには
+設定をtrueからfalseにすれば良い。以下のようにコマンドを設定する
+
+AppleShowAllFiles...]]></description><link>https://zenn.dev/masaki_mori72/articles/eb0acac96fc8fe</link><guid isPermaLink="true">https://zenn.dev/masaki_mori72/articles/eb0acac96fc8fe</guid><pubDate>Mon, 06 Jan 2025 06:42:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ePKC5_FE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Mac%25E3%2581%25AEFinder%25E3%2581%25A7%25E5%25B8%25B8%25E3%2581%25AB%25E9%259A%25A0%25E3%2581%2597%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2592%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:masaki%2520mori%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2h0Zy0zeERLZF9VY19OaFA0TVB2S1BqRkNFc2JrV1loSk5aTV9LPXMyNTAtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>masaki mori</dc:creator></item><item><title><![CDATA[コマンドを後からnohup的な感じにする]]></title><description><![CDATA[
+ これは何？
+時間がかかるコマンドを実行する際にフォアグラウンドで実行してしまった時に、nohup的なことをやるための方法をまとめる
+
+ 答え
+$ ./hoge
+^Z
+$ jobs
+$ bg 1
+$ disown %1
+※jobのIDは適宜変更
+
+コマンド中断：Control + Z
+
+ジョブIDを取得：jobs
+
+バックグラウンドへ移動：bg {job_id}
+
+ジョブテーブルから外す（ログアウトしてもkillされない）：disown %{job_id}
+
+
+
+ 参考
+https://blog.glidenote.com/blog/2013/09/26/bg-and-disown/
+...]]></description><link>https://zenn.dev/awonosuke/articles/2128b5e9626ebd</link><guid isPermaLink="true">https://zenn.dev/awonosuke/articles/2128b5e9626ebd</guid><pubDate>Mon, 06 Jan 2025 01:54:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bz_zQHcE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2582%2592%25E5%25BE%258C%25E3%2581%258B%25E3%2582%2589nohup%25E7%259A%2584%25E3%2581%25AA%25E6%2584%259F%25E3%2581%2598%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:awonosuke%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJhMjljMWI3NWYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>awonosuke</dc:creator></item><item><title><![CDATA[zsh で alias の代わりに abbr を使ってみた感想]]></title><description><![CDATA[
+ はじめに
+既にご存じの方も多数だと思いますが、alias とはコマンドのエイリアス (別名) を登録・表示するコマンドで、alias &lt;word&gt;="&lt;command&gt;" のように設定します。
+例えば、以下のように設定しておくと ll で ls -l を実行できます。
+alias ll="ls -l"
+
+ abbr とは
+abbr とは略語を自動展開してくれる zsh マネージャです。
+
+
+ abbr の良いところ
+
+ コマンドが展開してから実行される
+これが一番の魅力といっても過言ではないと思います。
+abbr ではコマンドが展開してから実行されます。これの...]]></description><link>https://zenn.dev/guitarinchen/articles/e9999d54cc5295</link><guid isPermaLink="true">https://zenn.dev/guitarinchen/articles/e9999d54cc5295</guid><pubDate>Thu, 02 Jan 2025 00:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qoVEa_p4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:zsh%2520%25E3%2581%25A7%2520alias%2520%25E3%2581%25AE%25E4%25BB%25A3%25E3%2582%258F%25E3%2582%258A%25E3%2581%25AB%2520abbr%2520%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25E6%2584%259F%25E6%2583%25B3%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:guitarinchen%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MyMjdmMGEzNGUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>guitarinchen</dc:creator></item><item><title><![CDATA[設定したalias名を忘れるのでpecoで探して実行する]]></title><description><![CDATA[タイトルどおりです。
+aliasを設定したはいいんですが、たまにしか使わないものってよく忘れませんか？
+gitのブランチ削除、sshのknow_hostsファイルからec2インスタンスを削除、とか作ったはいいんですがほぼ毎回aliasの設定を確認している気がします。
+なので、pecoで簡単に実行してみました。
+$ eval $(alias | sort | peco | sed -e 's/=.*$//')
+自分の環境はzshです。
+今回は単純にaliasで読み込ませていますが、pecoの一覧に出てきてほしいものに予め分けておいたほうが良さそうです。
+]]></description><link>https://zenn.dev/shikazuki/articles/f181432d397b9d6a8eec</link><guid isPermaLink="true">https://zenn.dev/shikazuki/articles/f181432d397b9d6a8eec</guid><pubDate>Tue, 31 Dec 2024 13:06:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7DuwrlRM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%25A8%25AD%25E5%25AE%259A%25E3%2581%2597%25E3%2581%259Falias%25E5%2590%258D%25E3%2582%2592%25E5%25BF%2598%25E3%2582%258C%25E3%2582%258B%25E3%2581%25AE%25E3%2581%25A7peco%25E3%2581%25A7%25E6%258E%25A2%25E3%2581%2597%25E3%2581%25A6%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:shikazuki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JlZDgyOGI0ZDUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>shikazuki</dc:creator></item><item><title><![CDATA[shellコマンド個人的備忘集]]></title><description><![CDATA[未経験から3年で使用したshellコマンドの中で個人的に使うコマンドをまとめておきます。
+OJT中によく聞かれたコマンドも記載しておきます。
+
+ ssh-keygen
+rsaのssh-key生成
+ssh-keygen -t rsa
+known_hostsから特定のhostを削除
+# 特定のホストをremove
+ssh-keygen -R github.com
+
+ ssh
+github, bitbucketなどでsshで接続できることを確認する
+# ssh-keygenでssh-keyを作成済. githubに公開鍵の設定済
+ssh -T github.com
+awsのec2インスタンスに...]]></description><link>https://zenn.dev/shikazuki/articles/928da96d97ae5a7e1fca</link><guid isPermaLink="true">https://zenn.dev/shikazuki/articles/928da96d97ae5a7e1fca</guid><pubDate>Tue, 31 Dec 2024 13:05:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--TnQlHMAw--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:shell%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E5%2580%258B%25E4%25BA%25BA%25E7%259A%2584%25E5%2582%2599%25E5%25BF%2598%25E9%259B%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:shikazuki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JlZDgyOGI0ZDUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>shikazuki</dc:creator></item><item><title><![CDATA[Makefileの基礎的な活用方法]]></title><description><![CDATA[
+ 導入
+Makefileって聞くとどんなイメージをもちますか？
+c,c++のビルドツールというイメージを持ってる人も多いですよね。
+そのようなイメージを持たれがちなMakefileですが、実はシェルスクリプトを束ねた便利ツールとして使うこともできます。
+特に何が便利かというと、所定コマンド実行の前提で必要なコマンド群を定義して、シーケンス制御がさくっとできる点です。
+今回は、Makefileの基本的な使い方や、シーケンス制御のやり方を紹介しようと思います。
+
+ 基本的な使い方
+
+ 基本構造
+Makefileを使うときは、
+ターゲット名と依存ターゲットを書いて、その中で実行したいシェルス...]]></description><link>https://zenn.dev/collabostyle/articles/e0ec4f27f56d6c</link><guid isPermaLink="true">https://zenn.dev/collabostyle/articles/e0ec4f27f56d6c</guid><pubDate>Fri, 27 Dec 2024 03:10:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--geyPALRP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Makefile%25E3%2581%25AE%25E5%259F%25BA%25E7%25A4%258E%25E7%259A%2584%25E3%2581%25AA%25E6%25B4%25BB%25E7%2594%25A8%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:yushi-s%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzViM2I3NTQxYzUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25B3%25E3%2583%25A9%25E3%2583%259C%25E3%2582%25B9%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25AB%2520Developers%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSk1DWlFPZDBzMmF6VWgtQ0lVZjRvTnVxeW5ZUUswU0g2N3M3M1hVbjFvQldPRDJBPXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yushi-s</dc:creator></item><item><title><![CDATA[git cleanコマンドのオプションと具体的な利用ケース]]></title><description><![CDATA[
+ 概要
+
+git cleanコマンドをちゃんと使えてない、特にオプションなど気にせず使っている
+具体的な利用ケースと合わせてメモ書き
+
+
+ git cleanの具体的な利用ケースとオプションについて
+詳しく知りたいならとにかくgit-bookを読んでみるのをおすすめする。オプションから主要な利用ケースまで解説してあるので。今回はこれに加えて個人的な利用オプションをいくつかピックアップしてメモ書きしておく
+https://git-scm.com/book/ja/v2/Git-のさまざまなツール-作業の隠しかたと消しかた
+
+ -fd の組み合わせでとにかくリセットしたい
+# とにかく作業デ...]]></description><link>https://zenn.dev/masaki_mori72/articles/99f77af83df154</link><guid isPermaLink="true">https://zenn.dev/masaki_mori72/articles/99f77af83df154</guid><pubDate>Wed, 25 Dec 2024 03:17:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vFXtgpE5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:git%2520clean%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2581%25AE%25E3%2582%25AA%25E3%2583%2597%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2581%25A8%25E5%2585%25B7%25E4%25BD%2593%25E7%259A%2584%25E3%2581%25AA%25E5%2588%25A9%25E7%2594%25A8%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:masaki%2520mori%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2h0Zy0zeERLZF9VY19OaFA0TVB2S1BqRkNFc2JrV1loSk5aTV9LPXMyNTAtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>masaki mori</dc:creator></item><item><title><![CDATA[xargs の -I オプションとコマンドライン長の制約]]></title><description><![CDATA[
+ 概要
+この記事では xargs コマンドの基本的な使いかたと、便利な -I オプションの紹介をします。
+最後に、xargs コマンドの -I オプションを用いたときの置換文字列長の制約についてまとめます。
+最後の内容はシェル芸人しか得しない結構ニッチな部分になってしまったと思いますが、-I オプション自体はかなり便利なので、このオプションだけでも覚えていってもらえれば幸いです。
+
+ なんでこんな記事書いたの?
+昨日こんな記事を書きました。
+https://zenn.dev/sankantsu/articles/ef2d277789fa8a
+しかし、翌日になっていろいろ試していたら M...]]></description><link>https://zenn.dev/sankantsu/articles/ca15e7b0e18387</link><guid isPermaLink="true">https://zenn.dev/sankantsu/articles/ca15e7b0e18387</guid><pubDate>Sun, 22 Dec 2024 07:12:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2Upet-4o--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:xargs%2520%25E3%2581%25AE%2520-I%2520%25E3%2582%25AA%25E3%2583%2597%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2581%25A8%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%25B3%25E9%2595%25B7%25E3%2581%25AE%25E5%2588%25B6%25E7%25B4%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:sankantsu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRmOTc0Nzk2ODEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sankantsu</dc:creator></item><item><title><![CDATA[踏み台サーバーのアルゴリズムが古い場合の多段SSHの方法]]></title><description><![CDATA[踏み台サーバーが古いためにオプション無しではssh実行時にアルゴリズムが合致せず、sshできない場合があります。
+また、多段ssh(portfoward)を実行したい場合にはさらに厄介です。
+そうした場面で使えるsshの設定です。
+
+ !!!注意!!!
+本記事では回避策を掲示していますが、セキュリティ対応を遅らせることを推奨するものではありません。
+サーバー側のセキュリティ更新が絶対です。
+古いアルゴリズムは暗号化強度が弱く、解読されてしまう危険性が高まります。
+
+ .ssh/config ファイルの利用
+.ssh/config を利用するとsshコマンド実行時に接続先が補完され、use...]]></description><link>https://zenn.dev/takeaki_m/articles/af008273110c9b</link><guid isPermaLink="true">https://zenn.dev/takeaki_m/articles/af008273110c9b</guid><pubDate>Sun, 22 Dec 2024 04:24:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--NheT_-09--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%25B8%258F%25E3%2581%25BF%25E5%258F%25B0%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2581%25AE%25E3%2582%25A2%25E3%2583%25AB%25E3%2582%25B4%25E3%2583%25AA%25E3%2582%25BA%25E3%2583%25A0%25E3%2581%258C%25E5%258F%25A4%25E3%2581%2584%25E5%25A0%25B4%25E5%2590%2588%25E3%2581%25AE%25E5%25A4%259A%25E6%25AE%25B5SSH%25E3%2581%25AE%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:take%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ1NGUxN2RmODYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>take</dc:creator></item><item><title><![CDATA[OSC 52 で出力をクリップボードにコピーするためのワンライナー]]></title><description><![CDATA[
+ ワンライナーまとめ
+./cmd の出力をクリップボードにコピーできるワンライナー
+# サブシェル (`(...)`) or グループコマンド (`{...}`)
+$ ./cmd | (echo -e "\e]52;;"; base64 | tr -d "\n"; echo -e "\e\\")
+$ ./cmd | {echo -e "\e]52;;"; base64 | tr -d "\n"; echo -e "\e\\"}
+
+# $(...) で直接埋めこむ
+$ echo -ne "\e]52;;$(./cmd | base64 | tr -d '\n')\e\\"
+# 端末によっ...]]></description><link>https://zenn.dev/sankantsu/articles/ef2d277789fa8a</link><guid isPermaLink="true">https://zenn.dev/sankantsu/articles/ef2d277789fa8a</guid><pubDate>Sat, 21 Dec 2024 13:55:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lHhd9VCe--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:OSC%252052%2520%25E3%2581%25A7%25E5%2587%25BA%25E5%258A%259B%25E3%2582%2592%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2583%25E3%2583%2597%25E3%2583%259C%25E3%2583%25BC%25E3%2583%2589%25E3%2581%25AB%25E3%2582%25B3%25E3%2583%2594%25E3%2583%25BC%25E3%2581%2599%25E3%2582%258B%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%25E3%2583%25AF%25E3%2583%25B3%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%258A%25E3%2583%25BC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:sankantsu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRmOTc0Nzk2ODEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sankantsu</dc:creator></item></channel></rss>

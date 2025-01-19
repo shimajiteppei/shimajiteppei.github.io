@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Sun, 19 Jan 2025 02:40:52 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Cortex Analyst ~Text to SQLへの誘い~]]></title><description><![CDATA[
+ 1. はじめに
+
+ 1.1 記事の目的と想定読者
+Cortex Analystは、自然言語で入力された質問を自動的にSQLに変換して、データを抽出するText to SQLのサービスです。
+本記事では、Cortex Analystを初見でもこの記事を見れば、実装まで持っていけるように解説していきます。
+想定読者は、以下のような課題をお持ちの方です。
+
+Snowflake を導入済み、あるいは導入を検討していて、Text to SQL を用いたサービスを取り入れたい企業担当者
+レポート作成やデータ抽出依頼に追われていて、依頼対応のためのSQLを書く時間を減らしたいデータ担当者
+「Cor...]]></description><link>https://zenn.dev/jay_explolar/articles/df9bf248ab40a9</link><guid isPermaLink="true">https://zenn.dev/jay_explolar/articles/df9bf248ab40a9</guid><pubDate>Sun, 19 Jan 2025 02:17:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vQ0ptNhE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Cortex%2520Analyst%2520%7EText%2520to%2520SQL%25E3%2581%25B8%25E3%2581%25AE%25E8%25AA%2598%25E3%2581%2584%7E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yuto%2520in%2520%25E3%2582%25B7%25E3%2583%2589%25E3%2583%258B%25E3%2583%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTGNzeERxbjdDbktmQ3VzcWR6OU9qeGRPWmIzNGYwWG5vVmhiUDB6Y2lROWNxYXY5VWU9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yuto in シドニー</dc:creator></item><item><title><![CDATA[【ハイリキ】Hyperliquid Python SDK×GitHub Codespaces環境にてExchange API取引するまで]]></title><description><![CDATA[前回記事ではGoogle ColaboとHyperliquid Python SDKを使ってinfo APIから情報を引っ張ってくるまでをやってみました。
+今回は実際のbotを動作させるのに近い環境の構築とその中でExchange APIを使って実際に取引させてみるまでやってみました。
+https://zenn.dev/kayato/articles/8691c03c66c259
+
+ 公式ドキュメント
+
+ Hyperliquid Docs API
+https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api
+
+ hy...]]></description><link>https://zenn.dev/kayato/articles/0f9a5e7eb3c1df</link><guid isPermaLink="true">https://zenn.dev/kayato/articles/0f9a5e7eb3c1df</guid><pubDate>Sun, 19 Jan 2025 01:47:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1ITLnwdX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E3%2583%258F%25E3%2582%25A4%25E3%2583%25AA%25E3%2582%25AD%25E3%2580%2591Hyperliquid%2520Python%2520SDK%25C3%2597GitHub%2520Codespaces%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25AB%25E3%2581%25A6Exchang...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kayato%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y0YjAyMzY4OTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kayato</dc:creator></item><item><title><![CDATA[pytestを今更ながらまとめてみる]]></title><description><![CDATA[
+ はじめに
+今年こそはダイエットを心に決めた、ノベルワークスのりょうちん（ryotech34）です。
+cursorを使用してpytestでテストを書かせた際に、知らないデコレータなど知識不足が目についたので改めてpytestについてまとめてみました。
+https://docs.pytest.org/en/latest/contents.html#
+
+ 対象読者
+
+pytestにあまり触れたことがない方
+cursorで初めてpytestを使うよっていう方
+
+
+ 今回話さないこと
+
+セットアップと基本的な実行方法
+unittestなどの別ライブラリとの比較
+
+
+ pytestとは
+pyth...]]></description><link>https://zenn.dev/ryoryo34/articles/4f67b534402db2</link><guid isPermaLink="true">https://zenn.dev/ryoryo34/articles/4f67b534402db2</guid><pubDate>Sun, 19 Jan 2025 00:17:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--06T-Nicw--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:pytest%25E3%2582%2592%25E4%25BB%258A%25E6%259B%25B4%25E3%2581%25AA%25E3%2581%258C%25E3%2582%2589%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ryoryo34%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY2ZDI5MjRhMzkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ryoryo34</dc:creator></item><item><title><![CDATA[【Python】【pandas入門】引数がfunc系のアイツラ ～オモテのDataFrame/Series編～]]></title><description><![CDATA[
+ 0. はじめに
+map()、apply()、agg()など、引数に関数（func）を取るメソッドについて調査し、その内容をまとめた。これらのメソッドは、データを変換したり計算したりする際に非常に便利だが、その使い方や違いについては、少し混乱しがちな部分もあるため、整理することにした。
+本記事では、pandas.DataFrameおよびpandas.Seriesにて定義されているメソッドを中心に扱うが、pandas.core.groupby.generic.DataFrameGroupByやpandas.core.groupby.generic.SeriesGroupByについては、次...]]></description><link>https://zenn.dev/xenon135yen/articles/0dc41b3cc17bf2</link><guid isPermaLink="true">https://zenn.dev/xenon135yen/articles/0dc41b3cc17bf2</guid><pubDate>Sat, 18 Jan 2025 16:00:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Jk4XJ-FU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591%25E3%2580%2590pandas%25E5%2585%25A5%25E9%2596%2580%25E3%2580%2591%25E5%25BC%2595%25E6%2595%25B0%25E3%2581%258Cfunc%25E7%25B3%25BB%25E3%2581%25AE%25E3%2582%25A2%25E3%2582%25A4%25E3%2583%2584%25E3%2583%25A9%2520%25EF%25BD%259E%25E3%2582%25AA%25E3%2583%25A2%25E3%2583%2586%25E3%2581%25AEDataFrame%252FSeries%25E7%25B7%25A8%25EF%25BD%259E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Xenon135yen%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzllNGY4ZTljZjQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Xenon135yen</dc:creator></item><item><title><![CDATA[正方形の二次配列を渦状に取得する]]></title><description><![CDATA[24新卒のDaikiです。
+昔の記事をzennにまとめたいので昔書いた記事をこちらに移動します。
+
+ 問題
+正方形の二次配列が存在するとします。
+例.)
+array = [
+    [1, 2, 3, 4]
+    [12, 13, 14, 5]
+    [11, 16, 15, 6]
+    [10, 9, 8, 7]
+]
+この 縦x横の二次配列を渦状に一つ一つの要素を渡り、一次配列を取得してください。(Time ComplexityはO(n))
+出力例
+[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
+
+ 考え方
+
+ 1....]]></description><link>https://zenn.dev/daikieng/articles/642471aab81d29</link><guid isPermaLink="true">https://zenn.dev/daikieng/articles/642471aab81d29</guid><pubDate>Sat, 18 Jan 2025 15:48:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--EoZg-Q-0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%25AD%25A3%25E6%2596%25B9%25E5%25BD%25A2%25E3%2581%25AE%25E4%25BA%258C%25E6%25AC%25A1%25E9%2585%258D%25E5%2588%2597%25E3%2582%2592%25E6%25B8%25A6%25E7%258A%25B6%25E3%2581%25AB%25E5%258F%2596%25E5%25BE%2597%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Daiki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NiZDI0MDRhN2QuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Daiki</dc:creator></item><item><title><![CDATA[PydanticAIが有能すぎて今までが何だったんだ感]]></title><description><![CDATA[
+ TL;DR
+ちまたで噂のPydantic AI[1] を触ってみました。
+Langchainとpydanticで無理無理やってたのが何だったんだ感がパない・・・
+
+出力型がほぼ完璧に定義できる --&gt; 型ミスがないしデバッグも楽。
+Agentの下にtoolをくっつけるだけでツール実装可能。
+Agent &lt;-&gt; tool 間でのデータのやりとりをミスしない。
+
+というわけで、追々RAGやSQLとのtool連携もやっていく予定ですが、今回の記事では、Agentと構造化出力に絞って実装します。
+
+ コード
+import nest_asyncio
+import pandas...]]></description><link>https://zenn.dev/bluetang/articles/pdai_agent_01</link><guid isPermaLink="true">https://zenn.dev/bluetang/articles/pdai_agent_01</guid><pubDate>Sat, 18 Jan 2025 14:27:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hJEL6X9S--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:PydanticAI%25E3%2581%258C%25E6%259C%2589%25E8%2583%25BD%25E3%2581%2599%25E3%2581%258E%25E3%2581%25A6%25E4%25BB%258A%25E3%2581%25BE%25E3%2581%25A7%25E3%2581%258C%25E4%25BD%2595%25E3%2581%25A0%25E3%2581%25A3%25E3%2581%259F%25E3%2582%2593%25E3%2581%25A0%25E6%2584%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:bluetang%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM3ZDRkMjc1MzAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>bluetang</dc:creator></item><item><title><![CDATA[お寿司屋さんに学ぶ！ドメイン駆動設計（DDD）のエッセンス]]></title><description><![CDATA[
+ はじめに
+ソフトウェア開発の世界で近年注目を集めているドメイン駆動設計(DDD)。名前は聞いたことがあるけれど、なんだか難しそう…と感じている方も多いのではないでしょうか？
+今回は、皆さんもよくご存知の「お寿司屋さん」を題材に、DDDの基本的な考え方とその魅力を、わかりやすく解説していきます。
+
+ DDDって何？従来の開発が抱えていた課題
+DDDとは、一言で言えば、ビジネスの核心（ドメイン）を中心に据えてソフトウェアを設計する開発手法です。
+しかし、なぜそのような手法が必要なのでしょうか？ それは、ソフトウェア開発では、以下のような課題にしばしば直面しており、これらの課題を解決するア...]]></description><link>https://zenn.dev/sonicmoov/articles/5e256a5bceb9c1</link><guid isPermaLink="true">https://zenn.dev/sonicmoov/articles/5e256a5bceb9c1</guid><pubDate>Sat, 18 Jan 2025 14:21:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--QwOBi_gl--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%258A%25E5%25AF%25BF%25E5%258F%25B8%25E5%25B1%258B%25E3%2581%2595%25E3%2582%2593%25E3%2581%25AB%25E5%25AD%25A6%25E3%2581%25B6%25EF%25BC%2581%25E3%2583%2589%25E3%2583%25A1%25E3%2582%25A4%25E3%2583%25B3%25E9%25A7%2586%25E5%258B%2595%25E8%25A8%25AD%25E8%25A8%2588%25EF%25BC%2588DDD%25EF%25BC%2589%25E3%2581%25AE%25E3%2582%25A8%25E3%2583%2583%25E3%2582%25BB%25E3%2583%25B3%25E3%2582%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:takemo101%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY0YjYwNGE3MzguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2582%25BD%25E3%2583%258B%25E3%2583%2583%25E3%2582%25AF%25E3%2583%25A0%25E3%2583%25BC%25E3%2583%2596%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q3NDBmZGFmNmIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takemo101</dc:creator></item><item><title><![CDATA[Renderを使用してFast APIで作成したバックエンドをデプロイしてみた🤩]]></title><description><![CDATA[
+ はじめに
+
+今回は、FastAPI をバックエンドとして Render を使用してデプロイした経験についてまとめます。この記事では、FastAPI アプリケーションを Render にデプロイするための具体的な手順を詳しく解説します。これから Render を使って簡単にバックエンドを公開したい方に役立つ内容です！
+
+
+ 概要
+
+FastAPI は Python 製の軽量かつ高速な Web フレームワークで、多くの開発者に愛用されています。一方、Render は無料枠もあるクラウドホスティングサービスで、デプロイが簡単なのが特徴です。
+今回の記事では、以下の構成のアプリケーションをデ...]]></description><link>https://zenn.dev/yusukekikuta/articles/be414501dfdc2f</link><guid isPermaLink="true">https://zenn.dev/yusukekikuta/articles/be414501dfdc2f</guid><pubDate>Sat, 18 Jan 2025 12:56:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--T5-Fa6IK--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Render%25E3%2582%2592%25E4%25BD%25BF%25E7%2594%25A8%25E3%2581%2597%25E3%2581%25A6Fast%2520API%25E3%2581%25A7%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2597%25E3%2581%259F%25E3%2583%2590%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2589%25E3%2582%2592%25E3%2583%2587%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25A4%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2520%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E8%258F%258A%25E7%2594%25B0%25E4%25BD%2591%25E8%25BC%2594%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RkY2M4NmQ2YmQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>菊田佑輔</dc:creator></item><item><title><![CDATA[Pythonデコレーターの魔法を解き放て！ 🐍🐍]]></title><description><![CDATA[
+
+ Pythonのデコレーター：強力なプログラミングツール
+Pythonのデコレーターは非常に強力なツールであり、プログラマーが元の関数定義を変更せずに関数に追加の機能を追加できるようにするものです。この機能により、コードの保守と拡張が容易になり、コードの可読性と再利用性も向上します。デコレーターは幅広い応用シナリオを持ち、ログ記録、パフォーマンステスト、トランザクション処理、キャッシュ、権限確認などの領域をカバーしています。この記事では、いくつかの具体的な例を通じて、Pythonでデコレーターを巧みに使用して実際の問題を解決する方法を詳しく紹介します。
+
+ ログ記録
+ソフトウェア開発...]]></description><link>https://zenn.dev/leapcell/articles/9eb6d6c46cd5e7</link><guid isPermaLink="true">https://zenn.dev/leapcell/articles/9eb6d6c46cd5e7</guid><pubDate>Sat, 18 Jan 2025 12:29:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--u9Ljol4s--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2583%2587%25E3%2582%25B3%25E3%2583%25AC%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%25BC%25E3%2581%25AE%25E9%25AD%2594%25E6%25B3%2595%25E3%2582%2592%25E8%25A7%25A3%25E3%2581%258D%25E6%2594%25BE%25E3%2581%25A6%25EF%25BC%2581%2520%2520%2520%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Leapcell%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y0N2E0MGQ3NGEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Leapcell</dc:creator></item><item><title><![CDATA[Raspberry PiでWayPonDEV RPLIDAR A1M8 を設定する手順]]></title><description><![CDATA[WayPonDEV RPLIDAR A1M8 を Raspberry Pi 4 上の Ubuntu Server 22.04 および ROS2 Humble で使用するための手順を以下に記載します。
+!
+Raspberry Piの入門書を執筆しています📕
+Pythonで学ぶRaspberry Pi入門
+
+
+
+ 必要なハードウェアとソフトウェア
+
+ ハードウェア
+
+Raspberry Pi 4
+WayPonDEV RPLIDAR A1M8
+USB ケーブル（RPLIDAR 接続用）
+
+
+ ソフトウェア
+
+Ubuntu Server 22.04（Raspberry Pi 向けにインストール済...]]></description><link>https://zenn.dev/murasanlab/articles/d0b71130f7d1b2</link><guid isPermaLink="true">https://zenn.dev/murasanlab/articles/d0b71130f7d1b2</guid><pubDate>Sat, 18 Jan 2025 11:58:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--peY7Rm0T--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Raspberry%2520Pi%25E3%2581%25A7WayPonDEV%2520RPLIDAR%2520A1M8%2520%25E3%2582%2592%25E8%25A8%25AD%25E5%25AE%259A%25E3%2581%2599%25E3%2582%258B%25E6%2589%258B%25E9%25A0%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Murasan%2520Lab%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc0OTBiNmM4MDEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Murasan Lab</dc:creator></item><item><title><![CDATA[数学のできない文系非エンジニアが3か月でE資格に合格した勉強法]]></title><description><![CDATA[
+ はじめに
+「文系で難しい数学はわからないけどE資格に合格できるかな。。。」
+「ビジネス職だけどE資格に合格して知識を証明したい！」
+このような悩みを抱えたことはありませんか？
+私も文系大学卒ですし、そもそもエンジニアですらないのですが、E資格2024#2に合格したので、勉強法をご紹介したいと思います。
+同じような悩みをお持ちの方の参考になればうれしいです。
+
+
+ プロフィール
+まずは私がどの程度プログラミングの能力があったのかを示しておきたいと思います。
+私は現在都内の金融機関で経営企画をしており、業務でプログラミングや統計・データ分析の知識を使うことはほとんどありません。
+ただ、前...]]></description><link>https://zenn.dev/lytton/articles/f9992780d515d6</link><guid isPermaLink="true">https://zenn.dev/lytton/articles/f9992780d515d6</guid><pubDate>Sat, 18 Jan 2025 11:21:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GWYLbhb---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%2595%25B0%25E5%25AD%25A6%25E3%2581%25AE%25E3%2581%25A7%25E3%2581%258D%25E3%2581%25AA%25E3%2581%2584%25E6%2596%2587%25E7%25B3%25BB%25E9%259D%259E%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%25E3%2581%258C3%25E3%2581%258B%25E6%259C%2588%25E3%2581%25A7E%25E8%25B3%2587%25E6%25A0%25BC%25E3%2581%25AB%25E5%2590%2588%25E6%25A0%25BC%25E3%2581%2597%25E3%2581%259F%25E5%258B%2589%25E5%25BC%25B7%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%25AA%25E3%2583%2583%25E3%2583%2588%25E3%2583%25B3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzkxZTJjMTI1MzkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>リットン</dc:creator></item><item><title><![CDATA[【Python・Pysparkで学ぶ！】データ分析の基礎【データの読み込み③エクセルファイル】]]></title><description><![CDATA[
+ 【データの読み込み③エクセルファイル】
+↓トランザクションエクセルファイル(transaction_table.xlsx)のサンプル
+
+上記のようなデータがエクセルファイル形式で存在すると仮定します。
+
+ ◾️要望
+とある日の朝会MTGにて、クライアントから次のような要望を頂きました。
+
+ 『エクセルファイルをPysparkデータフレームにしてほしい』
+本稿では、クライアントからの要望に答えながら、 エクセルファイルのPysparkデータフレーム化 について学びます。
+よろしくお願いいたします。
+
+ ◾️AsIs(現状把握)
+エンジニアとクライアント間の認識に相違があるとアウトプット...]]></description><link>https://zenn.dev/taiking/articles/8167eb641e88df</link><guid isPermaLink="true">https://zenn.dev/taiking/articles/8167eb641e88df</guid><pubDate>Sat, 18 Jan 2025 10:38:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--IwpS95SM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2583%25BBPyspark%25E3%2581%25A7%25E5%25AD%25A6%25E3%2581%25B6%25EF%25BC%2581%25E3%2580%2591%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E5%2588%2586%25E6%259E%2590%25E3%2581%25AE%25E5%259F%25BA%25E7%25A4%258E%25E3%2580%2590%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2581%25AE%25E8%25AA%25AD%25E3%2581%25BF%25E8%25BE%25BC%25E3%2581%25BF%25E2%2591%25A2%25E3%2582%25A8%25E3%2582%25AF%25E3%2582%25BB%25E3%2583%25AB%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259F%25E3%2581%2584%25E3%2581%258D%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2IzNTFhOTQ1NDIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>たいき</dc:creator></item><item><title><![CDATA[【Python・Pysparkで学ぶ！】データ分析の基礎【データ分析の最適化①スキーマ定義】]]></title><description><![CDATA[
+ 【データ分析の最適化①スキーマ定義】
+↓トランザクションエクセルファイル(transaction.csv)のサンプル
+
+
+
+tran_id
+pay_method
+tran_dt
+user_id
+shop_id
+pay_amount_raw
+pay_amount_without_tax
+y
+m
+d
+
+
+
+
+101
+code
+2025/01/03 06:48
+user000007
+shop0004
+1540
+1400
+2025
+01
+03
+
+
+102
+cache
+2025/01/04 22:27
+user000001
+shop0006
+6050
+5500
+2025
+01
+04
+
+
+103...]]></description><link>https://zenn.dev/taiking/articles/04ff8d42f9fa45</link><guid isPermaLink="true">https://zenn.dev/taiking/articles/04ff8d42f9fa45</guid><pubDate>Sat, 18 Jan 2025 10:07:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--SxGEwdNm--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2583%25BBPyspark%25E3%2581%25A7%25E5%25AD%25A6%25E3%2581%25B6%25EF%25BC%2581%25E3%2580%2591%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E5%2588%2586%25E6%259E%2590%25E3%2581%25AE%25E5%259F%25BA%25E7%25A4%258E%25E3%2580%2590%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E5%2588%2586%25E6%259E%2590%25E3%2581%25AE%25E6%259C%2580%25E9%2581%25A9%25E5%258C%2596%25E2%2591%25A0%25E3%2582%25B9%25E3%2582%25AD%25E3%2583%25BC%25E3%2583%259E%25E5%25AE%259A%25E7%25BE%25A9%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259F%25E3%2581%2584%25E3%2581%258D%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2IzNTFhOTQ1NDIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>たいき</dc:creator></item><item><title><![CDATA[【Python】『独学プログラマー』再読メモ]]></title><description><![CDATA[LLM経由で久しぶりにPythonコード触りはじめたけど基礎がすっかり抜け落ちてしまいエラー解決とかで時間かかってしまってたので再読。（初読18年5月なので5年半ぶり)
+『独学プログラマー Python言語の基本から仕事のやり方まで』/ 2018/2/24
+https://www.amazon.co.jp/dp/4822292274
+
+ 仕様
+
+ インデント
+
+インデントはPythonにコードブロック（コードの塊）の開始と終了を伝えるために使います。これから出てくるコード例にインデントがあったら、1段のインデントにスペースを4つ使っている
+
+
+ データ型
+
+Pythonにおいてオブジェク...]]></description><link>https://zenn.dev/kayato/articles/88db83b368c844</link><guid isPermaLink="true">https://zenn.dev/kayato/articles/88db83b368c844</guid><pubDate>Sat, 18 Jan 2025 05:59:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wRaDyUy7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591%25E3%2580%258E%25E7%258B%25AC%25E5%25AD%25A6%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%259E%25E3%2583%25BC%25E3%2580%258F%25E5%2586%258D%25E8%25AA%25AD%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kayato%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y0YjAyMzY4OTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kayato</dc:creator></item><item><title><![CDATA[Pyhton基礎 100本ノック]]></title><description><![CDATA[本書はただ読むだけではなく、実際に手を動かして学びたい人のための一冊です。解説には図解を多用しており、これからPythonを学ぶ方や初学者の方でも無理なく勉強を進められます。
+
+また、内容はPythonチュートリアル（公式のドキュメント）に準拠しているため、理解必須の部分をこの1冊ですべて網羅することができます。
+
+・プログラミングを1から学びたい
+・エンジニアとして活躍したい
+・リスキリングして年収をあげたい
+
+そんな方は是非ご活用ください。]]></description><link>https://zenn.dev/python_academia/books/eabcc6b22afff5</link><guid isPermaLink="true">https://zenn.dev/python_academia/books/eabcc6b22afff5</guid><pubDate>Sat, 18 Jan 2025 05:57:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--VQRCQfqO--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci84NDlhYTliYjIyLmpwZWc=%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>Pythonアカデミア</dc:creator></item><item><title><![CDATA[Heroku+PostgresにLangChainで構築したRAGをデプロイする]]></title><description><![CDATA[PaaSとして有名なHerokuに、Python＋LangChainで構築した簡易なRAGをデプロイしてみました。HerokuのPosgreSQLにPGVector拡張をインストールして、ベクトルDBとして利用できるようにした構成です。とても簡単にデプロイできたので、RAGアプリケーションやAIチャットボットのバックエンドとして使い勝手がよいと思います。
+
+ HerokuにRAGをデプロイする
+Herokuは、アプリの構築、提供、監視、スケールを支援するクラウド型のプラットフォームです。いわゆるPaaSと呼ばれるサービスで、さまざまな言語に対応しています。
+かつては無料プランがあり、個人...]]></description><link>https://zenn.dev/khisa/articles/be0a2aabe77ca3</link><guid isPermaLink="true">https://zenn.dev/khisa/articles/be0a2aabe77ca3</guid><pubDate>Sat, 18 Jan 2025 03:56:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--mon42-gi--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Heroku%252BPostgres%25E3%2581%25ABLangChain%25E3%2581%25A7%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2597%25E3%2581%259FRAG%25E3%2582%2592%25E3%2583%2587%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25A4%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25B2%25E3%2581%2595%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTHFKaUVHa1VQMkc5WGpIeHlTa3p4bld3Z3JNcHFhT19hUFVKcWEyQ2YxWUZFPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ひさ</dc:creator></item><item><title><![CDATA[【Python】Google ColabでCSVファイルをBigQueryに簡単ロード！]]></title><description><![CDATA[こんにちは、エンジニアのうさぎです🐰
+今回は、Google Colabを使ってCSVファイルをBigQueryにロードする方法をご紹介します。データ分析やBI（ビジネスインテリジェンス）で便利なBigQueryですが、初めて使う方にとってはデータのロード方法が分かりにくいかもしれません。
+この記事では、Pythonを使って簡単にCSVファイルをBigQueryにロードする方法を解説します！
+
+ 📋 目次
+
+事前準備
+実装手順
+エラー対処法
+まとめ
+
+
+ 1. 事前準備
+BigQueryを使用するために、以下の準備が必要です：
+
+Google Cloudプロジェクトの作成
+必要な権限の設定...]]></description><link>https://zenn.dev/usagininja/articles/1e7608fa254f1e</link><guid isPermaLink="true">https://zenn.dev/usagininja/articles/1e7608fa254f1e</guid><pubDate>Sat, 18 Jan 2025 03:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4PR2TNXz--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591Google%2520Colab%25E3%2581%25A7CSV%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2592BigQuery%25E3%2581%25AB%25E7%25B0%25A1%25E5%258D%2598%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2589%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2586%25E3%2581%2595%25E3%2581%258E%25E3%2581%25AE%25E3%2582%2581%25E3%2582%2582%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFjZjlmOGY0MGYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>うさぎのめも</dc:creator></item><item><title><![CDATA[【Python・Pysparkで学ぶ！】データ分析の基礎【深掘分析①決済ステータス】]]></title><description><![CDATA[
+ 【深掘分析①決済ステータス】
+↓決済ステータステーブル(pay_status_table)のサンプル
+
+
+
+shop_id
+shop_name
+industry
+pay_method
+pay_status
+max_cont_months
+user_cnt
+pay_mean_raw
+pay_mean_without_tax
+
+
+
+
+shop0001
+佐藤レストラン
+food
+cache
+新規
+1
+1
+2310
+2100
+
+
+shop0001
+佐藤レストラン
+food
+card
+復帰
+1
+1
+3630
+3300
+
+
+shop0001
+佐藤レストラン
+food
+card
+新規
+1
+2
+30...]]></description><link>https://zenn.dev/taiking/articles/a8034a54608cda</link><guid isPermaLink="true">https://zenn.dev/taiking/articles/a8034a54608cda</guid><pubDate>Fri, 17 Jan 2025 16:18:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--HaJkz6ok--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2583%25BBPyspark%25E3%2581%25A7%25E5%25AD%25A6%25E3%2581%25B6%25EF%25BC%2581%25E3%2580%2591%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E5%2588%2586%25E6%259E%2590%25E3%2581%25AE%25E5%259F%25BA%25E7%25A4%258E%25E3%2580%2590%25E6%25B7%25B1%25E6%258E%2598%25E5%2588%2586%25E6%259E%2590%25E2%2591%25A0%25E6%25B1%25BA%25E6%25B8%2588%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%25B9%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259F%25E3%2581%2584%25E3%2581%258D%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2IzNTFhOTQ1NDIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>たいき</dc:creator></item><item><title><![CDATA[Pythonのガベージコレクション(GC)完全解説]]></title><description><![CDATA[
+
+ I. ガベージコレクションの概要
+
+コンピュータサイエンスにおいて、ガベージコレクション（略称GC）は自動メモリ管理メカニズムです。プログラムが占有している特定のメモリ空間がもはやアクセスされなくなったとき、プログラムはガベージコレクションアルゴリズムを通じてそれをオペレーティングシステムに返します。
+ガベージコレクタは、プログラマの負担を軽減し、プログラムエラーを最小限に抑えることができます。それはLISP言語に由来します。
+現在、Smalltalk、Java、C#、Go、Dなどの多くの言語がガベージコレクタをサポートしています。
+現代のプログラミング言語の自動メモリ管理メカニズ...]]></description><link>https://zenn.dev/leapcell/articles/723583d7d4db92</link><guid isPermaLink="true">https://zenn.dev/leapcell/articles/723583d7d4db92</guid><pubDate>Fri, 17 Jan 2025 15:35:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_yrdKFtf--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25AE%25E3%2582%25AC%25E3%2583%2599%25E3%2583%25BC%25E3%2582%25B8%25E3%2582%25B3%25E3%2583%25AC%25E3%2582%25AF%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%2528GC%2529%25E5%25AE%258C%25E5%2585%25A8%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Leapcell%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y0N2E0MGQ3NGEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Leapcell</dc:creator></item><item><title><![CDATA[AbuseIPDBを使った一括ブラックリスト検索]]></title><description><![CDATA[
+ はじめに
+インターネットに公開しているWebアプリケーションを管理していると、不特定多数のIPアドレスからアクセスがありますが、その中には攻撃を目的としたアクセスもあります。
+特にDDoS攻撃を受けたりすると、大量のアクセスログの解析が必要になりますが、その際どこからのアクセスなのかを分析することも多いです。
+仕事上、IPアドレスの分析（ブラックリストに登録されているかなど）を確認する際に「AbuseIPDB」を使うことが多くなってきたので、調査手法を記事に残しておこうと思います。
+
+ 本記事の目的
+
+AbuseIPDBについて知ってもらう
+効率よく検索できるプログラムを作成したので...]]></description><link>https://zenn.dev/motisan/articles/20250117_abuseid</link><guid isPermaLink="true">https://zenn.dev/motisan/articles/20250117_abuseid</guid><pubDate>Fri, 17 Jan 2025 13:55:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--zsrqkl-R--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AbuseIPDB%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%259F%25E4%25B8%2580%25E6%258B%25AC%25E3%2583%2596%25E3%2583%25A9%25E3%2583%2583%25E3%2582%25AF%25E3%2583%25AA%25E3%2582%25B9%25E3%2583%2588%25E6%25A4%259C%25E7%25B4%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25AA%25E3%2583%25A2%25E3%2583%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUxtNXd1MTNPQU9jUEJibVhhWHk5NDYyanRvSE42QjViMUd3WFZFVmViang9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>オモチ</dc:creator></item></channel></rss>
