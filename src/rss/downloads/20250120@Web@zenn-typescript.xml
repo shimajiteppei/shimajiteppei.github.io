@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「TypeScript」のフィード]]></title><description><![CDATA[Zennのトピック「TypeScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/typescript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/f13e758fdb.png</url><title>Zennの「TypeScript」のフィード</title><link>https://zenn.dev/topics/typescript</link></image><generator>zenn.dev</generator><lastBuildDate>Mon, 20 Jan 2025 07:36:41 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/typescript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Uppy でファイルアップロードする]]></title><description><![CDATA[
+ Uppy とは
+https://uppy.io/
+Uppy はブラウザー向けファイルアップロードライブラリーで、シンプルかつ高機能な UI を簡単に統合できます。
+
+高機能なダッシュボード
+
+ドラッグ &amp; ドロップ
+リモート URL、Web カメラ、マイク音声、など豊富な入力ソース
+
+
+プラグインシステムによる拡張が可能
+React, Vue, Svelte などの UI フレームワークに統合可能
+
+https://stackblitz.com/edit/vitejs-vite-zaqyaf?file=main.js
+
+ Uploader の種類
+
+Transloadit[1...]]></description><link>https://zenn.dev/manabo_tech/articles/2025-01-07-uppy-demo</link><guid isPermaLink="true">https://zenn.dev/manabo_tech/articles/2025-01-07-uppy-demo</guid><pubDate>Mon, 20 Jan 2025 05:39:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--SRfvcTY2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Uppy%2520%25E3%2581%25A7%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2589%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:submax%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U5MzVlZTI4YWEuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:manabo%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I4ZDIxZmEyYzUuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>submax</dc:creator></item><item><title><![CDATA[Template Literal Typesを知らんかったし、zodで表現する方法もあったらしい]]></title><description><![CDATA[文字列の型定義に部分的な制約を定義したかったけどやり方知らなんだが、あった
+Template Literal Typesで
+type Food = "Egg" | "Apple" | "Meat";
+type Category = `group_${Food}`;
+// "group_Egg" | "group_Apple" | "group_Meat"
+とか
+type Category = `group_${string}`;
+// "group_Music" | "group_Book" | "group_foo"
+みたいに書ける
+https://zenn.dev/ak/articl...]]></description><link>https://zenn.dev/ksyunnnn/articles/5e1fb25ab03ac5</link><guid isPermaLink="true">https://zenn.dev/ksyunnnn/articles/5e1fb25ab03ac5</guid><pubDate>Mon, 20 Jan 2025 04:48:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--73_SGgOy--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Template%2520Literal%2520Types%25E3%2582%2592%25E7%259F%25A5%25E3%2582%2589%25E3%2582%2593%25E3%2581%258B%25E3%2581%25A3%25E3%2581%259F%25E3%2581%2597%25E3%2580%2581zod%25E3%2581%25A7%25E8%25A1%25A8%25E7%258F%25BE%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%25E3%2582%2582%25E3%2581%2582%25E3%2581%25A3%25E3%2581%259F%25E3%2582%2589%25E3%2581%2597%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2593%25E3%2581%25B0%25E3%2581%2597%25E3%2582%2585%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBlZDgzMjFiNTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>こばしゅん</dc:creator></item><item><title><![CDATA[NodeJSのマスター・ワーカー・パターン解説]]></title><description><![CDATA[
+NodeJS は、JavaScript を基盤とした開発プラットフォームで、開発者が JavaScript を使用してサーバーサイドアプリケーションを作成できるようにします。NodeJS の重要な特徴の一つは、シングルスレッドかつイベント駆動モデルで、多数の同時リクエストを効率的に処理できる点です。このモデルにより、複数のスレッドやプロセスを必要とせずに高いパフォーマンスを実現できます。
+
+ マスターワーカーパターンを使用する理由
+しかし、NodeJS のシングルスレッドモデルには以下のような制限があります。
+
+
+CPU 集約型タスク：画像処理や暗号化/復号化などのタスクでは、シングル...]]></description><link>https://zenn.dev/leapcell/articles/782c9427bb5658</link><guid isPermaLink="true">https://zenn.dev/leapcell/articles/782c9427bb5658</guid><pubDate>Mon, 20 Jan 2025 02:04:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--mD5nQUW_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:NodeJS%25E3%2581%25AE%25E3%2583%259E%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%25BB%25E3%2583%25AF%25E3%2583%25BC%25E3%2582%25AB%25E3%2583%25BC%25E3%2583%25BB%25E3%2583%2591%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%25B3%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Leapcell%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y0N2E0MGQ3NGEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Leapcell</dc:creator></item><item><title><![CDATA[React Router v6使用時の警告とv7での変更点]]></title><description><![CDATA[React Router v6を使用している際にワーニングが出たので、v7での変更点を調べてまとめてみました。
+
+ React Router v7では「スプラットルート（*）」の相対パス解決方法が変更
+Warningの内容:
+hook.js:608 ⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the v7_relativeSplatPath future flag to opt-in early.
+解決:
+...]]></description><link>https://zenn.dev/kkoisland/articles/f2d855e16cac44</link><guid isPermaLink="true">https://zenn.dev/kkoisland/articles/f2d855e16cac44</guid><pubDate>Sun, 19 Jan 2025 23:41:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--94iwLLMM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%2520Router%2520v6%25E4%25BD%25BF%25E7%2594%25A8%25E6%2599%2582%25E3%2581%25AE%25E8%25AD%25A6%25E5%2591%258A%25E3%2581%25A8v7%25E3%2581%25A7%25E3%2581%25AE%25E5%25A4%2589%25E6%259B%25B4%25E7%2582%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kkoisland%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E2MzIwYmQ0NDQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kkoisland</dc:creator></item><item><title><![CDATA[Playwrightで複数ユーザーを使ったテストが素敵に書ける]]></title><description><![CDATA[
+ 【複数ユーザーのE2Eテストを楽に！】Playwrightで同時ログインを扱う方法
+https://www.youtube.com/watch?v=AP2YD6rllyM
+「管理者でログインしたあとに、一般ユーザーに切り替えて同じテストを続行したい！」
+そんなときに便利なのがPlaywrightで 複数BrowserContext を使ったテストです。この記事では、上の動画でシェアしている内容をかいつまんで紹介します。
+
+ 結論から
+
+
+複数のBrowserContext を使うことで、同じテスト内で複数のユーザーをシミュレート可能
+Playwrightのセッション保持の仕組みのおか...]]></description><link>https://zenn.dev/kenfdev/articles/a5ed4e89830a33</link><guid isPermaLink="true">https://zenn.dev/kenfdev/articles/a5ed4e89830a33</guid><pubDate>Sun, 19 Jan 2025 22:30:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3OCXllNg--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Playwright%25E3%2581%25A7%25E8%25A4%2587%25E6%2595%25B0%25E3%2583%25A6%25E3%2583%25BC%25E3%2582%25B6%25E3%2583%25BC%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%259F%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E3%2581%258C%25E7%25B4%25A0%25E6%2595%25B5%25E3%2581%25AB%25E6%259B%25B8%25E3%2581%2591%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kenfdev%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lnVUZOakM0OHNyRHBrdW03SXRrSi11UUg2ZFpvVUNkVUVfeHZsLVE9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kenfdev</dc:creator></item><item><title><![CDATA[HTTPキャッシュ入門：基本から応用まで]]></title><description><![CDATA[
+
+ HTTPキャッシュとは
+HTTPキャッシュは、サーバーの負荷を軽減し、クライアントの応答時間を短縮し、ネットワーク帯域幅を節約することで、Webパフォーマンスを向上させる技術です。HTTPキャッシュには、強制キャッシュと協調キャッシュの2種類があります。
+
+ 強制キャッシュ
+強制キャッシュでは、クライアントが指定された期間内にローカルにキャッシュされたリソースを直接使用できるようにします。この場合、サーバーへのリクエストを送信する必要はありません。強制キャッシュは、サーバーによって指定されるレスポンスヘッダー、主にCache-ControlとExpiresフィールドによって制御され...]]></description><link>https://zenn.dev/leapcell/articles/36a9f55f893d20</link><guid isPermaLink="true">https://zenn.dev/leapcell/articles/36a9f55f893d20</guid><pubDate>Sun, 19 Jan 2025 18:06:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jMueYLOs--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:HTTP%25E3%2582%25AD%25E3%2583%25A3%25E3%2583%2583%25E3%2582%25B7%25E3%2583%25A5%25E5%2585%25A5%25E9%2596%2580%25EF%25BC%259A%25E5%259F%25BA%25E6%259C%25AC%25E3%2581%258B%25E3%2582%2589%25E5%25BF%259C%25E7%2594%25A8%25E3%2581%25BE%25E3%2581%25A7%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Leapcell%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y0N2E0MGQ3NGEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Leapcell</dc:creator></item><item><title><![CDATA[joshi.ts もくもく会　開催2回目の参加レポ]]></title><description><![CDATA[
+ はじめに
+これはイベント参加レポです。
+1回目も参加していたのですが、参加レポを書いておらず、レポ系今回初めて書きます...
+
+ 概要
+女性エンジニア限定のTypescriptのもくもく会2回目に参加してきました！
+読んで学ぶTypeScript読んだり、作って学ぶTypeScriptで作ったりなどを各々作業していました。
+場所
+オンライン参加(Discord)
+参加日
+2024/01/16
+時間
+20:00〜21:00
+イベントの流れ
+イントロダクション(5分くらい？)
+　　　↓
+各々作業(30~40分くらい)
+　　　↓
+何をやったか(5~10分くらい。チャットで話してました。)
+...]]></description><link>https://zenn.dev/koi_matcha/articles/7cd0f805edbc1f</link><guid isPermaLink="true">https://zenn.dev/koi_matcha/articles/7cd0f805edbc1f</guid><pubDate>Sun, 19 Jan 2025 15:21:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qM5R9dOJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:joshi.ts%2520%25E3%2582%2582%25E3%2581%258F%25E3%2582%2582%25E3%2581%258F%25E4%25BC%259A%25E3%2580%2580%25E9%2596%258B%25E5%2582%25AC2%25E5%259B%259E%25E7%259B%25AE%25E3%2581%25AE%25E5%258F%2582%25E5%258A%25A0%25E3%2583%25AC%25E3%2583%259D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%25BF%2583%25E3%2581%2584%25E6%258A%25B9%25E8%258C%25B6%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNkZTNmMDA2N2YuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>濃い抹茶</dc:creator></item><item><title><![CDATA[Serverless Framework v4 のserverless.tsでStepFunctionsを書く時に型で保護する方法]]></title><description><![CDATA[
+ 概要
+Serverless Framework v4 では serverless.ts というファイル名で TypeScript で設定ファイルを記述することができます。
+この型定義は @types/serverless というパッケージで管理されていますが、StepFunctions の設定に関する型定義が含まれていません。
+Step Functions に関する型定義は @types/serverless-step-functions として別に切り出されていますが、以下を見ての通り
+これをインストールするだけでは Serverless 型の型定義は拡張されません。
+
+types...]]></description><link>https://zenn.dev/tristar/articles/how-to-enable-serverless-ts-v4-step-functions</link><guid isPermaLink="true">https://zenn.dev/tristar/articles/how-to-enable-serverless-ts-v4-step-functions</guid><pubDate>Sun, 19 Jan 2025 15:10:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_Yi3N3NI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Serverless%2520Framework%2520v4%2520%25E3%2581%25AEserverless.ts%25E3%2581%25A7StepFunctions%25E3%2582%2592%25E6%259B%25B8%25E3%2581%258F%25E6%2599%2582%25E3%2581%25AB...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tristar%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2g4NGF5cUZVU1haNkluYXBZdGNLenRkSEpWQjVyclViWFN3cThiRmc9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tristar</dc:creator></item><item><title><![CDATA[0からはじめるTypeScript型定義マスターへの道]]></title><description><![CDATA[
+ はじめに
+新人教育で質問が多かったので整理しました。
+より型安全なコードを書きたい中級者の方も有用な内容かもしれません。よかったら目を通してください。
+実践的な例を通じて整理しています。
+
+ 私的きっちりかっちり理解する利点
+開発効率の向上
+
+エディタの入力補完が賢くなり、プロパティやメソッドの候補が表示される
+リファクタリングが安全に行える
+
+チーム開発力向上
+
+型定義がドキュメントとしても機能
+意図伝達が容易になる
+
+
+ この記事で整理したこと
+
+TypeScriptの基本的な型の使い方
+配列とオブジェクトを活用した高度な型定義
+実務でよく使用する型定義パターン
+Webアプリケー...]]></description><link>https://zenn.dev/nezumizuki/articles/4af454c402f4fa</link><guid isPermaLink="true">https://zenn.dev/nezumizuki/articles/4af454c402f4fa</guid><pubDate>Sun, 19 Jan 2025 14:49:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--sYHyXhdA--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:0%25E3%2581%258B%25E3%2582%2589%25E3%2581%25AF%25E3%2581%2598%25E3%2582%2581%25E3%2582%258BTypeScript%25E5%259E%258B%25E5%25AE%259A%25E7%25BE%25A9%25E3%2583%259E%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%25BC%25E3%2581%25B8%25E3%2581%25AE%25E9%2581%2593%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:MI%2528%25E7%2594%2598%25E8%25BE%259B%25E3%2583%2581%25E3%2582%25AD%25E3%2583%25B3%2529%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzYzMmZiODJlMzMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>MI(甘辛チキン)</dc:creator></item><item><title><![CDATA[SPA？ルーティング？開発しながら学んでいく]]></title><description><![CDATA[
+
+ はじめに
+こんにちは、生成AIを活用しながら留学中の空いた時間を使って開発の勉強をしているニートです。
+細かい自己紹介は初回の記事に書いてあります。
+2025年始まってもう半月以上過ぎてしまいました。
+日々英語と開発を過ごしていますが、時間が過ぎるのが速いです。
+今回は React,Viteで作っている個人の自己紹介サイト（もともとは1画面だけで完結）にポートフォリオページ（サブページ）を追加する過程で、以下の部分が全然理解できていなかったことに気づけたので、学びをアウトプットしようと思います。
+
+SPA（Single Page Application）って何？
+ルーティングとは？...]]></description><link>https://zenn.dev/rts0401/articles/090c511d1e2e5f</link><guid isPermaLink="true">https://zenn.dev/rts0401/articles/090c511d1e2e5f</guid><pubDate>Sun, 19 Jan 2025 14:39:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--UkanLfvw--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:SPA%25EF%25BC%259F%25E3%2583%25AB%25E3%2583%25BC%25E3%2583%2586%25E3%2582%25A3%25E3%2583%25B3%25E3%2582%25B0%25EF%25BC%259F%25E9%2596%258B%25E7%2599%25BA%25E3%2581%2597%25E3%2581%25AA%25E3%2581%258C%25E3%2582%2589%25E5%25AD%25A6%25E3%2582%2593%25E3%2581%25A7%25E3%2581%2584%25E3%2581%258F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:skgw%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTHpQckVTeUNEZ0ZodW1YY3ZtLWR1TEJhMThuSkt5MGJFNXZZcWtjeHhtdnBOc2ZLOFA9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>skgw</dc:creator></item><item><title><![CDATA[react router v7に入門してみた]]></title><description><![CDATA[
+ react router v7に入門してみた
+私は、remixを使って色々遊んでいましたが、今回のremixとreact router v7の統合を機に、reacct router v7に乗り換えてみました。
+試しに、todoアプリケーションを作ってみたので、共有したいと思います。
+!
+
+以降は、react router v7　→ RR7とします
+todoアプリを作っていたら、色々やりたくなって余計なものまで入っています
+バックエンドはFastAPIで組んだのですが、それはまた別の機会に記事を書きます
+
+
+バックエンドの参考記事はこちら
+https://zenn.dev/keita_...]]></description><link>https://zenn.dev/keita_f/articles/f791869b941244</link><guid isPermaLink="true">https://zenn.dev/keita_f/articles/f791869b941244</guid><pubDate>Sun, 19 Jan 2025 12:01:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Oy8bLZyS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:react%2520router%2520v7%25E3%2581%25AB%25E5%2585%25A5%25E9%2596%2580%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:KITFJN%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdjNDYxZWNjNTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>KITFJN</dc:creator></item><item><title><![CDATA[画像処理100本ノックに挑戦｜Embossフィルタ（018/100）]]></title><description><![CDATA[
+ これはなに？
+画像処理100本ノックを、TypeScriptとlibvipsで挑戦してみる記事の18本目です。
+
+ 前回
+https://zenn.dev/nyagato_00/articles/bf0ba1f0cac474
+
+ 実装
+
+ お題
+
+Embossフィルタを実装せよ。
+Embossフィルタとは輪郭部分を浮き出しにするフィルタで、次式で定義される。
+
+      -2 -1  0
+K = [ -1  1  1 ]
+       0  1  2
+https://github.com/minido/Gasyori100knock-1/tree/master/Question_1...]]></description><link>https://zenn.dev/nyagato_00/articles/266a552899dcbc</link><guid isPermaLink="true">https://zenn.dev/nyagato_00/articles/266a552899dcbc</guid><pubDate>Sun, 19 Jan 2025 07:20:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---0edqZZO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%2594%25BB%25E5%2583%258F%25E5%2587%25A6%25E7%2590%2586100%25E6%259C%25AC%25E3%2583%258E%25E3%2583%2583%25E3%2582%25AF%25E3%2581%25AB%25E6%258C%2591%25E6%2588%25A6%25EF%25BD%259CEmboss%25E3%2583%2595%25E3%2582%25A3%25E3%2583%25AB%25E3%2582%25BF%25EF%25BC%2588018%252F100%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nyagato_00%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUxtNXd1MTVKUVk3SjNOUG1kcGlMeWdfWUt3blZzaTRpWDRoYjU1c21UTTk3c1E9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nyagato_00</dc:creator></item><item><title><![CDATA[TypeScriptで作る：型推論を強化するCommandパターンの設計]]></title><description><![CDATA[ソフトウェア開発において、型安全性と柔軟性を両立させるための設計は重要です。特に、コマンドパターンのような構造では、コマンドの入力と出力の型を正確に推論する仕組みが必要です。本記事では、コマンドのインターフェースにメソッドを追加することで、型推論を強化した方法を紹介します。
+
+
+ 背景と課題
+前回の記事でCommandパターンの実装方法について紹介しました。しかし、コマンドの実行結果に対してキャストが必要でした。それを解消するため、入力型Iと出力型Oをコマンドごとに明確に定義したところ、型推論が不十分で、コマンドハンドラーで出力型を推論する際に、unknown型にフォールバックするケース...]]></description><link>https://zenn.dev/trskd/articles/59cf56eb09c03a</link><guid isPermaLink="true">https://zenn.dev/trskd/articles/59cf56eb09c03a</guid><pubDate>Sun, 19 Jan 2025 06:07:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3o8Vh1p7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%25E3%2581%25A7%25E4%25BD%259C%25E3%2582%258B%25EF%25BC%259A%25E5%259E%258B%25E6%258E%25A8%25E8%25AB%2596%25E3%2582%2592%25E5%25BC%25B7%25E5%258C%2596%25E3%2581%2599%25E3%2582%258BCommand%25E3%2583%2591%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%25B3%25E3%2581%25AE%25E8%25A8%25AD%25E8%25A8%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:trskd%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M4ODMyNDZjOTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>trskd</dc:creator></item><item><title><![CDATA[【開発環境】TypeScript, Express, Docker, VScodeでリモートデバッグ]]></title><description><![CDATA[
+ TL;DR
+
+ExpressをVScodeでリモートデバッグしたい
+サーバーサイドのDockerコンテナに、リモートデバッグ用のポート9229を開放する
+
+
+ ディレクトリ構成
+
+Reactプロジェクトのapiパッケージ内にExpressがプロジェクトのある変な感じの構成？
+
+frontend/, backens/のような一般的なパッケージ構成の場合、launch.json, tsconfig.jsonのディレクトリ指定部分とかをええ感じにしとって下さい
+
+.vscode/
+├── launch.json
+docker/
+├── backend.Dockerfile
+├── fron...]]></description><link>https://zenn.dev/kazumadev/articles/7f8d954ee78bfc</link><guid isPermaLink="true">https://zenn.dev/kazumadev/articles/7f8d954ee78bfc</guid><pubDate>Sun, 19 Jan 2025 06:00:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--S02eZ-gS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E9%2596%258B%25E7%2599%25BA%25E7%2592%25B0%25E5%25A2%2583%25E3%2580%2591TypeScript%252C%2520Express%252C%2520Docker%252C%2520VScode%25E3%2581%25A7%25E3%2583%25AA%25E3%2583%25A2%25E3%2583%25BC%25E3%2583%2588%25E3%2583%2587%25E3%2583%2590%25E3%2583%2583%25E3%2582%25B0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kazumakishimoto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lRWGJ1cy1vSkozOE5FYjVvdDBlSGdLQzFZOWFEQVZ3UFR6VDdNUVE9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kazumakishimoto</dc:creator></item><item><title><![CDATA[Date や 日時文字列の変換 Intl.DateTimeFormatを使った存在しないフォーマットの作り方]]></title><description><![CDATA[最近は Intl.DateTimeFormat がとても便利なので 紹介します。
+
+ Intl.DateTimeFormat とは
+Intl.DateTimeFormat は Date を任意の文字列フォーマットに変換する為のクラスです。
+https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat
+通常は format(date) で フォーマットします。
+https://developer.mozilla.org/ja/docs/Web/JavaScr...]]></description><link>https://zenn.dev/juners/articles/a9c710aacb12ec</link><guid isPermaLink="true">https://zenn.dev/juners/articles/a9c710aacb12ec</guid><pubDate>Sun, 19 Jan 2025 05:10:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Ql31xFcw--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Date%2520%25E3%2582%2584%2520%25E6%2597%25A5%25E6%2599%2582%25E6%2596%2587%25E5%25AD%2597%25E5%2588%2597%25E3%2581%25AE%25E5%25A4%2589%25E6%258F%259B%2520Intl.DateTimeFormat%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%259F%25E5%25AD%2598%25E5%259C%25A8%25E3%2581%2597%25E3%2581%25AA%25E3%2581%2584%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25BC%25E3%2583%259E%25E3%2583%2583%25E3%2583%2588%25E3%2581%25AE%25E4%25BD%259C%25E3%2582%258A%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:juner%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pJLTZTZnZQaDFwb0M5dmMxYUpVeTFoelB0R1g1RXRmUHRpQzF4QWR3PXMyNTAtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>juner</dc:creator></item><item><title><![CDATA[大容量ファイルのアップロードを効率的に管理する方法]]></title><description><![CDATA[
+
+ なぜ大容量ファイルのアップロードを最適化すべきか
+フロントエンド開発において、画像、動画、音声ファイルなどのアップロードが必要な場面に頻繁に遭遇します。しかし、大容量ファイルのアップロード時には以下のような問題が発生する可能性があります。
+
+アップロード時間が長くなり、ユーザー体験が悪化する。
+サーバー負荷が増加し、リソース消費が増える。
+不安定なネットワーク環境ではアップロード失敗が起こり、再アップロードが必要になり、時間と帯域幅が浪費される。
+ブラウザのメモリ使用量が高くなり、パフォーマンスや安定性に影響を与える。
+
+これらの問題を解決するために、大容量ファイルのアップロードを...]]></description><link>https://zenn.dev/leapcell/articles/63aa6827653a4d</link><guid isPermaLink="true">https://zenn.dev/leapcell/articles/63aa6827653a4d</guid><pubDate>Sun, 19 Jan 2025 05:08:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5CmXtWHm--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%25A4%25A7%25E5%25AE%25B9%25E9%2587%258F%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2581%25AE%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2589%25E3%2582%2592%25E5%258A%25B9%25E7%258E%2587%25E7%259A%2584%25E3%2581%25AB%25E7%25AE%25A1%25E7%2590%2586%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Leapcell%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y0N2E0MGQ3NGEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Leapcell</dc:creator></item><item><title><![CDATA[NestJSではじめるSymbol-SDK]]></title><description><![CDATA[
+ Node.js まわりのバージョン
+
+Yarn v4.6.0
+Node.js v22.13.0
+NestJS v10.0.0
+
+
+ CLI のインストール
+
+bash
+npm install -g @nestjs/cli
+
+※Yarn はグローバルインストール出来なくなった
+
+ NestJS プロジェクト作成
+例として test-nestjs というプロジェクトを作成します。
+
+bash
+nest new test-nestjs
+
+yarn を使用するので yarn を選択。
+⚡  We will scaffold your app in a few seconds..
+
+? Whi...]]></description><link>https://zenn.dev/ccharvestasya/articles/nestjs-symbolsdk</link><guid isPermaLink="true">https://zenn.dev/ccharvestasya/articles/nestjs-symbolsdk</guid><pubDate>Sun, 19 Jan 2025 03:47:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9v7TaSzW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:NestJS%25E3%2581%25A7%25E3%2581%25AF%25E3%2581%2598%25E3%2582%2581%25E3%2582%258BSymbol-SDK%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ccHarvestasya%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JiNGZhYzk3NDIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ccHarvestasya</dc:creator></item><item><title><![CDATA[Node.js+TypeScriptではじめるSymbol-SDK]]></title><description><![CDATA[
+ Node.js まわりのバージョン
+
+Yarn v4.6.0
+Node.js v22.13.0
+
+
+ プロジェクトフォルダの作成と初期化
+適当な場所に作成します。
+
+bash
+mkdir test-project
+cd test-project
+
+yarn が node_modules フォルダを作成するようファイルを作成します。
+
+bash
+echo "nodeLinker: node-modules" &gt; .yarnrc.yml
+
+プロジェクトフォルダを初期化します。
+
+bash
+yarn init
+
+念のため Node.js などのバージョンのピン留めもしておきます。
+
+...]]></description><link>https://zenn.dev/ccharvestasya/articles/nodejs-symbolsdk</link><guid isPermaLink="true">https://zenn.dev/ccharvestasya/articles/nodejs-symbolsdk</guid><pubDate>Sat, 18 Jan 2025 22:26:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--h0ErHmhz--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Node.js%252BTypeScript%25E3%2581%25A7%25E3%2581%25AF%25E3%2581%2598%25E3%2582%2581%25E3%2582%258BSymbol-SDK%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ccHarvestasya%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JiNGZhYzk3NDIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ccHarvestasya</dc:creator></item><item><title><![CDATA[GAS開発者のための日付操作ガイド - GAS + TypeScriptによる日付操作ユーティリティの実装と応用]]></title><description><![CDATA[
+ 1. はじめに
+
+GAS(Google Apps Script)のプロジェクトにおいて、日付の操作は頻繁に必要となる処理です。
+本記事では、GASとTypeScriptを使用した日付操作ユーティリティの実装について解説します。
+
+
+ 2.日付操作ユーティリティ - DateUtilクラスの実装
+/**
+ * 日付計算のユーティリティクラス
+ */
+export class DateUtil {
+  /**
+   * 基準日から指定日数を加算または減算した日付を取得します
+   * @param date 基準日
+   * @param days 加算する日数（負数の場合は減算）
+  ...]]></description><link>https://zenn.dev/yuki_fujisawa/articles/e19e4e74a302f5</link><guid isPermaLink="true">https://zenn.dev/yuki_fujisawa/articles/e19e4e74a302f5</guid><pubDate>Sat, 18 Jan 2025 10:47:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--IZN4ePQu--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:GAS%25E9%2596%258B%25E7%2599%25BA%25E8%2580%2585%25E3%2581%25AE%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%25E6%2597%25A5%25E4%25BB%2598%25E6%2593%258D%25E4%25BD%259C%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%2520-%2520GAS%2520%252B%2520TypeScript%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258B%25E6%2597%25A5%25E4%25BB%2598%25E6%2593%258D%25E4%25BD%259C%25E3%2583%25A6%25E3%2583%25BC%25E3%2583%2586%25E3%2582%25A3%25E3%2583%25AA%25E3%2583%2586%25E3%2582%25A3%25E3%2581%25AE%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%25A8%25E5%25BF%259C%25E7%2594%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E8%2597%25A4%25E6%25BE%25A4%25E5%258B%2587%25E6%25A8%25B9%2528Yuki%2520Fujisawa%2529%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2YyOWNiMTQyZjcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>藤澤勇樹(Yuki Fujisawa)</dc:creator></item><item><title><![CDATA[ReProm：リポジトリをまとめてプロンプト化する CLI]]></title><description><![CDATA[こんにちは、keisukenagakawa です。
+この記事では、私が開発した CLI ツール ReProm を紹介します。
+ReProm は、指定したディレクトリの構造とファイルの内容をまとめて 1 つの Markdown に出力するためのツールです。ChatGPT などの AI とやりとりをするとき、複数のファイルをいちいちコピペする手間を省き、コードレビューやデバッグを効率化できます。
+
+
+ なぜ作ったのか
+AI（特に ChatGPT など）のコードレビュー機能を活用するとき、以下の点に不便さを感じていました。
+
+
+複数ファイルの貼り付けが面倒
+コードが複数ファイルに分割されている...]]></description><link>https://zenn.dev/keisukenagakawa/articles/83afa361556b1e</link><guid isPermaLink="true">https://zenn.dev/keisukenagakawa/articles/83afa361556b1e</guid><pubDate>Sat, 18 Jan 2025 07:03:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1zAnAaFm--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ReProm%25EF%25BC%259A%25E3%2583%25AA%25E3%2583%259D%25E3%2582%25B8%25E3%2583%2588%25E3%2583%25AA%25E3%2582%2592%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2581%25A6%25E3%2583%2597%25E3%2583%25AD%25E3%2583%25B3%25E3%2583%2597%25E3%2583%2588%25E5%258C%2596%25E3%2581%2599%25E3%2582%258B%2520CLI%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:KeisukeNagakawa%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI2NzMwYTY5OTUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>KeisukeNagakawa</dc:creator></item></channel></rss>
