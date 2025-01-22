@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Wed, 22 Jan 2025 00:47:27 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[自動化をもっと手軽に！Pythonスクリプトをexe化するステップ解説]]></title><description><![CDATA[
+
+ はじめに
+以前、娘のためにWebサイトへの予約作業を自動化する仕組みを作成し、その内容を記事にまとめました。
+https://qiita.com/ogi_kimura/items/4ec8c7c29b0669426276
+この自動化スクリプトを使うことで、私のPCでは予約処理が問題なく実行できています。しかし、この仕組みをそのまま娘のPCで動かそうとすると、動作しません。その理由は、娘のPCにはPythonやGoogle Chromeのドライバなど必要な環境が一切整っていないからです。
+この予約処理は毎月1回、月初の深夜0:00に実行する必要があります。現在の状態では、私のPCでし...]]></description><link>https://zenn.dev/ogiki/articles/c29dca4fc9b0f8</link><guid isPermaLink="true">https://zenn.dev/ogiki/articles/c29dca4fc9b0f8</guid><pubDate>Wed, 22 Jan 2025 00:38:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6uaCb0-m--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%2587%25AA%25E5%258B%2595%25E5%258C%2596%25E3%2582%2592%25E3%2582%2582%25E3%2581%25A3%25E3%2581%25A8%25E6%2589%258B%25E8%25BB%25BD%25E3%2581%25AB%25EF%25BC%2581Python%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2583%2588%25E3%2582%2592exe%25E5%258C%2596%25E3%2581%2599%25E3%2582%258B%25E3%2582%25B9%25E3%2583%2586%25E3%2583%2583%25E3%2583%2597%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%259C%25A8%25E6%259D%2591%25E3%2581%259F%25E3%2582%258D%25E3%2581%2586%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZkZjNiYWMwZmQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>木村たろう</dc:creator></item><item><title><![CDATA[Advent of Code 2024 Day 18: RAM Run]]></title><description><![CDATA[
+ このページは
+2024 年の Advent of Code の Day18 の記事です。
+https://adventofcode.com/2024/day/18
+Day17 の内容はこちら。
+https://zenn.dev/yasuharu519/articles/6bc95f52efc503
+!
+以下問題のネタバレが多数含まれています。問題を楽しみたい方は是非一度本家の問題を見てから読んでみてください。
+
+
+ Day 18: RAM Run
+今度の舞台はコンピュータ内部のメモリ空間です。このメモリ空間は二次元座標で表されており、座標は縦横共に 0 から 70 までの値をとるよう...]]></description><link>https://zenn.dev/yasuharu519/articles/a1569d4b96c9a1</link><guid isPermaLink="true">https://zenn.dev/yasuharu519/articles/a1569d4b96c9a1</guid><pubDate>Tue, 21 Jan 2025 17:29:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--57CZoc6w--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Advent%2520of%2520Code%25202024%2520Day%252018%253A%2520RAM%2520Run%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Sawady%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI4ODhkNmU3MTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Sawady</dc:creator></item><item><title><![CDATA[【Python・Pysparkで学ぶ！】データ分析の基礎【データ結合①"エントリーユーザー"(left join)】]]></title><description><![CDATA[
+ 【データ結合①"エントリーユーザー"(left join)】
+↓トランザクションテーブル(transaction_table)のサンプル
+
+
+
+tran_id
+pay_method
+tran_dt
+user_id
+shop_id
+pay_amount_raw
+pay_amount_without_tax
+y
+m
+d
+
+
+
+
+101
+code
+2025/01/03 06:48
+user000007
+shop0004
+1540
+1400
+2025
+01
+03
+
+
+102
+cache
+2025/01/04 22:27
+user000001
+shop0006
+6050
+5500
+2025
+0...]]></description><link>https://zenn.dev/taiking/articles/f557d94d13cb10</link><guid isPermaLink="true">https://zenn.dev/taiking/articles/f557d94d13cb10</guid><pubDate>Tue, 21 Jan 2025 15:54:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--aPcy3OKq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2583%25BBPyspark%25E3%2581%25A7%25E5%25AD%25A6%25E3%2581%25B6%25EF%25BC%2581%25E3%2580%2591%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E5%2588%2586%25E6%259E%2590%25E3%2581%25AE%25E5%259F%25BA%25E7%25A4%258E%25E3%2580%2590%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E7%25B5%2590%25E5%2590%2588%25E2%2591%25A0%2522%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2588%25E3%2583%25AA%25E3%2583%25BC%25E3%2583%25A6%25E3%2583%25BC%25E3%2582%25B6%25E3%2583%25BC%2522%2528left%2520join%2529%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259F%25E3%2581%2584%25E3%2581%258D%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2IzNTFhOTQ1NDIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>たいき</dc:creator></item><item><title><![CDATA[PythonでERA5のデータをダウンロードする]]></title><description><![CDATA[
+ 事前設定
+
+ ERA5のデータを取得するための設定
+https://zenn.dev/ats030/articles/get-era5-data-in-python
+
+ Ubuntu環境でのPythonスクリプトの例
+
+ 作業ディレクトリの構成
+任意の&lt;作業ディレクトリ&gt;直下に、下記のように.pyファイルを3つ配置します。
+&lt;作業ディレクトリ&gt;
+  ├─ configure.py
+  ├─ get_era5_data.py
+  └─ get_era5.py
+  
+
+ ダウンロード条件の設定
+気象データのダウンロード条件を設定します。
+例えば、configure...]]></description><link>https://zenn.dev/ats030/articles/download-era5-data-in-python</link><guid isPermaLink="true">https://zenn.dev/ats030/articles/download-era5-data-in-python</guid><pubDate>Tue, 21 Jan 2025 14:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--auY0nRpO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A7ERA5%25E3%2581%25AE%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%2592%25E3%2583%2580%25E3%2582%25A6%25E3%2583%25B3%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2589%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2582%25E3%2582%258C%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSUN1SHBxV21INFNBbC1aRVRkejRoTEwzejNvRWpqVGtmNVY2LWNRNk5ZVEd3djVzZ0k9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>あれ</dc:creator></item><item><title><![CDATA[はじめまして]]></title><description><![CDATA[はじめまして。
+こうして文章をインターネット上で公開するのは初めてになります。
+製造業で働きながら主に下記の言語で（AIに頼りつつ）遊んでいます。
+
+ Python
+以前会社に大学の先生に来ていただいて機械学習について教えていただきました。
+ただ機械学習より簡単なアプリを作って遊んでばっかりだったり...
+近いうちに会社から「画像検査装置をPythonで内製しなさい」と言われそうな今日この頃
+
+ C#
+Pythonで作成したアプリを配布しようとexeにしたところ重たすぎて使い物にならず
+同じような機能で軽い配布用のアプリを作るために手を出しました。
+
+ VBA
+生成AI台頭前に唯一手を出...]]></description><link>https://zenn.dev/nakashun_mf/articles/2cb25b5f406c4f</link><guid isPermaLink="true">https://zenn.dev/nakashun_mf/articles/2cb25b5f406c4f</guid><pubDate>Tue, 21 Jan 2025 12:45:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--JqRRNoYP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%25AF%25E3%2581%2598%25E3%2582%2581%25E3%2581%25BE%25E3%2581%2597%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Nakao%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSWNLbWFfcE1HVDBlYTA0Zl93VjVzZkRvZ2Q1WHZNUTE0Qm1xbzdoVmhNdDRTQnpwT0c9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Nakao</dc:creator></item><item><title><![CDATA[言語練習：生年月日から年齢と経過日数を算出]]></title><description><![CDATA[
+ はじめに
+本記事は、下記記事で行った内容を他の言語等で実装することを目的にしております。
+https://zenn.dev/nonaka101/articles/calculate-age-and-days
+本記事では JavaScript に加え、下記の言語等で実装を行っています。
+
+Excel 関数
+VBA
+PHP
+Python
+Java
+C 言語
+
+タイトル「言語練習」について
+タイトルの「言語練習」は、フランスの小説家 レーモン・クノーの著書『文体練習』に倣ったものです。
+この本は、端的に言ってしまえば「バスで口論している男を見かけ、後で駅前に行った際に その男が助言を受けて...]]></description><link>https://zenn.dev/nonaka101/articles/exercise_in_language__calculate_age</link><guid isPermaLink="true">https://zenn.dev/nonaka101/articles/exercise_in_language__calculate_age</guid><pubDate>Tue, 21 Jan 2025 12:22:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--CQY2BVAV--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%25A8%2580%25E8%25AA%259E%25E7%25B7%25B4%25E7%25BF%2592%25EF%25BC%259A%25E7%2594%259F%25E5%25B9%25B4%25E6%259C%2588%25E6%2597%25A5%25E3%2581%258B%25E3%2582%2589%25E5%25B9%25B4%25E9%25BD%25A2%25E3%2581%25A8%25E7%25B5%258C%25E9%2581%258E%25E6%2597%25A5%25E6%2595%25B0%25E3%2582%2592%25E7%25AE%2597%25E5%2587%25BA%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Nonaka%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY4YWMyOGJiZWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Nonaka</dc:creator></item><item><title><![CDATA[Poetry v2 への移行でやったこと]]></title><description><![CDATA[今年の年始早々、1月5日に Python のパッケージ管理ツールの一つである Poetry の v2.0.0 がリリースされました。破壊的な変更も含まれており、特に Poetry のバージョンを指定せずにチームで利用していた場合など、対応が必要かと思います。
+私の参画するプロジェクトでも v2 への移行を行いましたので、具体的な作業内容を記録しておきます。
+
+ 参考
+公式のアナウンスはこちらです。
+https://python-poetry.org/blog/announcing-poetry-2.0.0/
+日本語ではこちらの記事が非常に分かりやすいです。本記事ではこちらの記事に記載され...]]></description><link>https://zenn.dev/hayatoy/articles/4bdede2bb0cd1e</link><guid isPermaLink="true">https://zenn.dev/hayatoy/articles/4bdede2bb0cd1e</guid><pubDate>Tue, 21 Jan 2025 10:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--f3tqBRUr--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Poetry%2520v2%2520%25E3%2581%25B8%25E3%2581%25AE%25E7%25A7%25BB%25E8%25A1%258C%25E3%2581%25A7%25E3%2582%2584%25E3%2581%25A3%25E3%2581%259F%25E3%2581%2593%25E3%2581%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:HayatoY%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI4OWUwMzI2ZWUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>HayatoY</dc:creator></item><item><title><![CDATA[バロック音楽の作曲手法の対位法とアルゴリズムの関係性]]></title><description><![CDATA[
+ はじめに
+初めまして音大中退高卒エンジニアの菊田です。
+今回は音楽を専門的に学んできた僕から、音楽理論とアルゴリズムの意外な親和性について対位法という作曲法にフォーカスしてエンジニアの皆さんに音楽理論に興味を持ってもらえるように記事の執筆をいたしました。
+普段アルゴリズムに触れている皆様にとって一つの新しい価値を提供できるように努めます。
+ぜひ一読くださいませ。
+
+
+ 導入
+音楽とプログラミングは、一見すると全く異なる分野に見えますが、実は音楽理論、とりわけバロック音楽の対位法はアルゴリズムの設計と深く共通する部分があります。本記事では、音楽理論の基礎から始め、特に音程やリズムなどの...]]></description><link>https://zenn.dev/yusukekikuta/articles/8b26d7d6e03274</link><guid isPermaLink="true">https://zenn.dev/yusukekikuta/articles/8b26d7d6e03274</guid><pubDate>Tue, 21 Jan 2025 09:09:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ZpDqLbaH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2590%25E3%2583%25AD%25E3%2583%2583%25E3%2582%25AF%25E9%259F%25B3%25E6%25A5%25BD%25E3%2581%25AE%25E4%25BD%259C%25E6%259B%25B2%25E6%2589%258B%25E6%25B3%2595%25E3%2581%25AE%25E5%25AF%25BE%25E4%25BD%258D%25E6%25B3%2595%25E3%2581%25A8%25E3%2582%25A2%25E3%2583%25AB%25E3%2582%25B4%25E3%2583%25AA%25E3%2582%25BA%25E3%2583%25A0%25E3%2581%25AE%25E9%2596%25A2%25E4%25BF%2582%25E6%2580%25A7%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E8%258F%258A%25E7%2594%25B0%25E4%25BD%2591%25E8%25BC%2594%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RkY2M4NmQ2YmQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>菊田佑輔</dc:creator></item><item><title><![CDATA[requestsの独自証明書エラーの解決法をCopilotに教えてもらった]]></title><description><![CDATA[
+ ！注意
+こちらはCopilotの回答を基に情報をまとめたものであり、内容のすべてについて検証できているものではありません。誤った情報が含まれている可能性もゼロではないため、リンク先の参考情報も合わせて確認することをお勧めします。
+
+ エラー内容
+ssl.SSLCertVerificationError: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)
+
+ エラーの原因と解決方法
+
+ エラーの原因
+このエラーは...]]></description><link>https://zenn.dev/shytaani/articles/e7d6d23658a082</link><guid isPermaLink="true">https://zenn.dev/shytaani/articles/e7d6d23658a082</guid><pubDate>Tue, 21 Jan 2025 08:47:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--p9By8OO6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:requests%25E3%2581%25AE%25E7%258B%25AC%25E8%2587%25AA%25E8%25A8%25BC%25E6%2598%258E%25E6%259B%25B8%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E3%2581%25AE%25E8%25A7%25A3%25E6%25B1%25BA%25E6%25B3%2595%25E3%2582%2592Copilot%25E3%2581%25AB%25E6%2595%2599%25E3%2581%2588%25E3%2581%25A6%25E3%2582%2582%25E3%2582%2589%25E3%2581%25A3%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Toru.T%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0Y1FiejZORHAwb08wbTdxWS05dUFJZGlfYVIyVlJUbHdGb1A3ODRieGJJPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Toru.T</dc:creator></item><item><title><![CDATA[structlogのJSONRendererでマルチバイト文字を表示させる]]></title><description><![CDATA[
+ 忙しい人用
+ensure_ascii=Falseを指定すれば良い
+https://github.com/1hakusai1/structlog-multibyte-characters/blob/84259d608b449b70362178b590cd1775d25b7ce9/main.py
+
+ structlogってなに？
+Pythonの構造化logger。ログをJSONで吐かせることもできる。
+https://www.structlog.org/en/stable/
+
+ 困ったこと
+公式のexample通りにJSONでログを出力させると、マルチバイト文字はエスケープして表示される...]]></description><link>https://zenn.dev/1hakusai1/articles/89e7906fa0749d</link><guid isPermaLink="true">https://zenn.dev/1hakusai1/articles/89e7906fa0749d</guid><pubDate>Tue, 21 Jan 2025 08:26:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--d5hEHgzs--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:structlog%25E3%2581%25AEJSONRenderer%25E3%2581%25A7%25E3%2583%259E%25E3%2583%25AB%25E3%2583%2581%25E3%2583%2590%25E3%2582%25A4%25E3%2583%2588%25E6%2596%2587%25E5%25AD%2597%25E3%2582%2592%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2595%25E3%2581%259B%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hakusai%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U1Mjk0YmM1NWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hakusai</dc:creator></item><item><title><![CDATA[pythonで設定ファイル読み込み処理をconfigparserからtomlibに変えてみた]]></title><description><![CDATA[
+ 概要
+Pythonアプリケーションでのconfigparserで生じた不具合に対処するため、代わりにtomlを利用する実装に変更しました。
+この記事では、tomlibを使用してファイルから設定値を取得する実装例を記載します。
+
+ 読者層
+Pythonでアプリケーション開発を行っており、設定ファイルの読み込みを実装する方が対象。ログレベルをハードコーディングせず、tomlファイルから値を取得する実装を検討している方が対象です。
+
+ 発生した現象
+ログ出力処理の実装と同時に、ログレベルも手軽に切り替えられるよう、設定ファイルを読み取る処理を実装した時に、こんな問題が発生しました。
+
+py...]]></description><link>https://zenn.dev/hukutsuu/articles/e29a8258b09a06</link><guid isPermaLink="true">https://zenn.dev/hukutsuu/articles/e29a8258b09a06</guid><pubDate>Tue, 21 Jan 2025 07:20:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--T4mMCley--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:python%25E3%2581%25A7%25E8%25A8%25AD%25E5%25AE%259A%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E8%25AA%25AD%25E3%2581%25BF%25E8%25BE%25BC%25E3%2581%25BF%25E5%2587%25A6%25E7%2590%2586%25E3%2582%2592configparser%25E3%2581%258B%25E3%2582%2589tomlib%25E3%2581%25AB%25E5%25A4%2589%25E3%2581%2588%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25BF%2598%25E3%2582%258C%25E3%2581%25A3%25E3%2581%25BD%25E3%2581%2584%25E3%2581%258B%25E3%2582%2589%25E5%25BF%2598%25E5%2582%2599%25E9%258C%25B2%25E6%259B%25B8%25E3%2581%2584%25E3%2581%25A6%25E3%2581%25BE%25E3%2581%2599%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2IyNmY0OGYyNjAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>忘れっぽいから忘備録書いてます</dc:creator></item><item><title><![CDATA[Djangoの管理画面が開けない]]></title><description><![CDATA[
+ 結論
+プロジェクトフォルダー内のurl.pyで指定しているパスと一致していませんでした。
+
+ 不具合の概要
+下記のURLでローカルホストの管理画面を開こうとしましたが、404エラーになってしまっていました。
+http://localhost:8000/admin
+
+ 原因
+adminの後ろに「/」が足りなかったのが原因でした。
+プロジェクトフォルダー内のurl.pyが下記のような設定になっていたため、urlで指定する際にadminの後ろに「/」をつける必要がありました。
+from django.contrib import admin
+from django.urls import ...]]></description><link>https://zenn.dev/chibakawamura/articles/3e3a53628b25ea</link><guid isPermaLink="true">https://zenn.dev/chibakawamura/articles/3e3a53628b25ea</guid><pubDate>Tue, 21 Jan 2025 06:43:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--phpgjAq5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Django%25E3%2581%25AE%25E7%25AE%25A1%25E7%2590%2586%25E7%2594%25BB%25E9%259D%25A2%25E3%2581%258C%25E9%2596%258B%25E3%2581%2591%25E3%2581%25AA%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kawamura%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RhNTA2ZDU0OTcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kawamura</dc:creator></item><item><title><![CDATA[poetry バージョン2.0.0 のDocker環境でbuildできなくなった]]></title><description><![CDATA[過去作成済みのプロジェクトをdocker compose up -dで起動しようとたら以下のようなエラーが出て起動しなくなってしまった。
+Installing the current project: hoge-pj (0.1.0)
+Error: The current project could not be installed: No file/folder found for package hoge-pj
+If you do not want to install the current project use --no-root.
+If you want to use Poet...]]></description><link>https://zenn.dev/gon9a/articles/97d59105e1aed1</link><guid isPermaLink="true">https://zenn.dev/gon9a/articles/97d59105e1aed1</guid><pubDate>Tue, 21 Jan 2025 04:52:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--zLLkAd7s--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:poetry%2520%25E3%2583%2590%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%25A7%25E3%2583%25B32.0.0%2520%25E3%2581%25AEDocker%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25A7build%25E3%2581%25A7%25E3%2581%258D%25E3%2581%25AA%25E3%2581%258F%25E3%2581%25AA%25E3%2581%25A3%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:gon9a%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U3M2RmMWJiMDcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>gon9a</dc:creator></item><item><title><![CDATA[【Python・Pysparkで学ぶ！】データ分析の基礎【データの読み込み③DDL・SQLテーブル】]]></title><description><![CDATA[
+ 【データフレームの確認】
+↓トランザクションテーブル(transaction_table)のサンプル
+
+
+
+tran_id
+pay_method
+tran_dt
+user_id
+shop_id
+pay_amount_raw
+pay_amount_without_tax
+y
+m
+d
+
+
+
+
+101
+code
+2025/01/03 06:48
+user000007
+shop0004
+1540
+1400
+2025
+01
+03
+
+
+102
+cache
+2025/01/04 22:27
+user000001
+shop0006
+6050
+5500
+2025
+01
+04
+
+
+103
+code
+20...]]></description><link>https://zenn.dev/taiking/articles/c8d5a69cf8f55c</link><guid isPermaLink="true">https://zenn.dev/taiking/articles/c8d5a69cf8f55c</guid><pubDate>Mon, 20 Jan 2025 17:01:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qYUlKJcb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2583%25BBPyspark%25E3%2581%25A7%25E5%25AD%25A6%25E3%2581%25B6%25EF%25BC%2581%25E3%2580%2591%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E5%2588%2586%25E6%259E%2590%25E3%2581%25AE%25E5%259F%25BA%25E7%25A4%258E%25E3%2580%2590%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2581%25AE%25E8%25AA%25AD%25E3%2581%25BF%25E8%25BE%25BC%25E3%2581%25BF%25E2%2591%25A2DDL%25E3%2583%25BBSQL%25E3%2583%2586%25E3%2583%25BC%25E3%2583%2596%25E3%2583%25AB%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259F%25E3%2581%2584%25E3%2581%258D%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2IzNTFhOTQ1NDIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>たいき</dc:creator></item><item><title><![CDATA[Python：tkinterdnd2がTcl/Tk 9系で動かせた]]></title><description><![CDATA[
+ はじめに
+こちらの続きになります。
+https://zenn.dev/takudooon/articles/7793b624d104c7
+前回は、pythonとpython-tkのバージョンを下げることで、Tcl/Tk8系でtkinterdnd2を動かせるようになりました。
+その後、さらに調べたところ、tkinterdnd2がTcl/Tk9系で動かせました。
+
+ 解決方法
+python-tk@3.13でtkinterdnd2を動かしたところ、下記のようなエラーが出ていました。
+raceback (most recent call last):
+  File "/Users/user/...]]></description><link>https://zenn.dev/takudooon/articles/fee688312b7b88</link><guid isPermaLink="true">https://zenn.dev/takudooon/articles/fee688312b7b88</guid><pubDate>Mon, 20 Jan 2025 14:31:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--WMah1EoF--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25EF%25BC%259Atkinterdnd2%25E3%2581%258CTcl%252FTk%25209%25E7%25B3%25BB%25E3%2581%25A7%25E5%258B%2595%25E3%2581%258B%25E3%2581%259B%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259F%25E3%2581%258F%25E3%2582%258D%25E3%2583%25BC%25E3%2581%25A9%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzViZTI2M2IwYzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>たくろーどん</dc:creator></item><item><title><![CDATA[『ハイパーモダンPython』で紹介されていたpytestのプラグインを試してみる]]></title><description><![CDATA[2024年9月に出版された技術書『ハイパーモダンPython―信頼性の高いワークフローを構築するモダンテクニック』では、Pythonのテストツールであるpytestの利用方法に加えて、pytestのプラグインも多数紹介されています。
+https://amzn.to/4j5BGcH
+この記事では、これらのプラグインの機能概要と実際に導入してみた例を紹介します。
+なおpytestとプラグインに関する基本的な説明は割愛します。これらの詳細は書籍内の「6章：pytestによるテスト」内で紹介されていますので、そちらも合わせてご参照ください。
+
+ 紹介するプラグインの一覧
+以下に、今回紹介するプラ...]]></description><link>https://zenn.dev/tanny/articles/c2815f45e98d68</link><guid isPermaLink="true">https://zenn.dev/tanny/articles/c2815f45e98d68</guid><pubDate>Mon, 20 Jan 2025 13:18:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--q2utZTPD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%258E%25E3%2583%258F%25E3%2582%25A4%25E3%2583%2591%25E3%2583%25BC%25E3%2583%25A2%25E3%2583%2580%25E3%2583%25B3Python%25E3%2580%258F%25E3%2581%25A7%25E7%25B4%25B9%25E4%25BB%258B%25E3%2581%2595%25E3%2582%258C%25E3%2581%25A6%25E3%2581%2584%25E3%2581%259Fpytest%25E3%2581%25AE%25E3%2583%2597%25E3%2583%25A9%25E3%2582%25B0%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%2592%25E8%25A9%25A6%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Tanny%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ1OGU0Njc0YzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Tanny</dc:creator></item><item><title><![CDATA[Python：tkinterdnd2がTcl/Tk 9系で動かないので8系にもどして一時解決]]></title><description><![CDATA[!
+こちらの現象は、このあと解決できました
+
+https://zenn.dev/takudooon/articles/fee688312b7b88
+
+ 直面した現象
+ひさしぶりにPythonでtkinterとtkinterdnd2を動かしてみたところ、
+!
+tkinter： Tcl/Tk GUI ツールキットに対する標準のPythonインターフェース
+tkinterdnd2：tkinterでドラッグ&amp;ドロップを実現するパッケージ
+
+下記のようなエラーがでて、tkinterdnd2が使用できませんでした。
+本記事は、その原因の調査と対処療法について書きます。
+raceback (m...]]></description><link>https://zenn.dev/takudooon/articles/7793b624d104c7</link><guid isPermaLink="true">https://zenn.dev/takudooon/articles/7793b624d104c7</guid><pubDate>Mon, 20 Jan 2025 11:56:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--c-B0vpfP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25EF%25BC%259Atkinterdnd2%25E3%2581%258CTcl%252FTk%25209%25E7%25B3%25BB%25E3%2581%25A7%25E5%258B%2595%25E3%2581%258B%25E3%2581%25AA%25E3%2581%2584%25E3%2581%25AE%25E3%2581%25A78%25E7%25B3%25BB%25E3%2581%25AB%25E3%2582%2582%25E3%2581%25A9%25E3%2581%2597%25E3%2581%25A6%25E4%25B8%2580%25E6%2599%2582%25E8%25A7%25A3%25E6%25B1%25BA%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259F%25E3%2581%258F%25E3%2582%258D%25E3%2583%25BC%25E3%2581%25A9%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzViZTI2M2IwYzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>たくろーどん</dc:creator></item><item><title><![CDATA[Deutsch-Jozsaのアルゴリズムを実装してみた]]></title><description><![CDATA[Zenn初投稿です。
+よろしくお願いします。
+
+ Deutsch-Jozsaのアルゴリズムについて
+量子コンピュータのアルゴリズムの1つです。このアルゴリズムは、実用性は低いものの、ある種の問題においては量子コンピュータが古典コンピュータよりも有利であることを示したという点で重要です。[1]
+
+ 問題設定
+
+図1. 入力が(n+1)量子ビットのDeutschのゲート
+図1のような量子ゲートを考えます。入力は、x（n量子ビット）、y（1量子ビット）の2つです。この量子ゲートの入出力は、次のようになっています。
+
+\ket{xy} \stackrel{U}{\to} \ket{x \;y\o...]]></description><link>https://zenn.dev/meet4580/articles/adb84ea228d3cc</link><guid isPermaLink="true">https://zenn.dev/meet4580/articles/adb84ea228d3cc</guid><pubDate>Mon, 20 Jan 2025 09:13:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--tQ8PhzeE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Deutsch-Jozsa%25E3%2581%25AE%25E3%2582%25A2%25E3%2583%25AB%25E3%2582%25B4%25E3%2583%25AA%25E3%2582%25BA%25E3%2583%25A0%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:meet4580%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU1ZjkyZjhjMTcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>meet4580</dc:creator></item><item><title><![CDATA[【爆速】uvでpython環境を作る]]></title><description><![CDATA[
+ uvとは
+爆速のpython用パッケージおよびプロジェクトマネージャーです
+pythonのバージョン管理、環境構築から実行までuvひとつでできます
+https://docs.astral.sh/uv/
+
+ こんな人にオススメ
+
+python仮想環境どれ使っていいか分からない初心者
+数ステップのシンプルなコマンドで環境が作れます
+コードの実行もuvでOK
+pythonに慣れている上級者
+pipの100倍という圧倒的速度で開発効率UP
+ベンチマーク
+
+
+
+ 執筆環境
+本記事は次の環境で実施しました
+
+windows11
+VScodeのターミナル
+
+
+ uvインストール
+uv本体をインスト...]]></description><link>https://zenn.dev/giana12th/articles/4f44b04250ce4a</link><guid isPermaLink="true">https://zenn.dev/giana12th/articles/4f44b04250ce4a</guid><pubDate>Mon, 20 Jan 2025 06:30:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--IP83SNqZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E7%2588%2586%25E9%2580%259F%25E3%2580%2591uv%25E3%2581%25A7python%25E7%2592%25B0%25E5%25A2%2583%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Giana12th%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzkxMDlhMjg5NWMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Giana12th</dc:creator></item><item><title><![CDATA[Optimizerの変遷 ~最急降下法からAdamWまで~]]></title><description><![CDATA[
+ はじめに
+機械学習のコードを書いているエンジニアの方はoptimizerに何を選べばいいか迷ったことがあると思います。
+とりあえず有名なモデルでよく使われているAdamやAdamWをよく考えずに選んでいませんか。
+本記事ではそれぞれのoptimizerのパラメータ更新式の定性的な意味について、最急降下法からAdamWまでの変遷とともに説明したいと思います。
+
+ optimizerの発展の流れ
+
+ 最急降下法
+まずは、最も基本的なパラメータ更新手法である、最急降下法について軽くおさらいする。
+
+ パラメータ更新式
+ \bm{G}_t = \nabla f(\bm{\theta}_{t-...]]></description><link>https://zenn.dev/mutex_inc/articles/2948e2c5934171</link><guid isPermaLink="true">https://zenn.dev/mutex_inc/articles/2948e2c5934171</guid><pubDate>Mon, 20 Jan 2025 02:50:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--10Y8Go4g--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Optimizer%25E3%2581%25AE%25E5%25A4%2589%25E9%2581%25B7%2520%7E%25E6%259C%2580%25E6%2580%25A5%25E9%2599%258D%25E4%25B8%258B%25E6%25B3%2595%25E3%2581%258B%25E3%2582%2589AdamW%25E3%2581%25BE%25E3%2581%25A7%7E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:hodhodhod%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZmOTE5ZmY2NmEuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:mutex%2520Official%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2UxYWQxYjUwMTUuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hodhodhod</dc:creator></item></channel></rss>
