@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Thu, 23 Jan 2025 05:00:40 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Pythonのitertools. groupby()で困った話]]></title><description><![CDATA[
+ はじめに
+こんにちは！美味しいものに目がないPOCO🐶です。
+アプリを自作する中で、SQLでの処理が複雑になり、どうにか効率化できないかと模索していました。
+その際に出会ったのがPythonのitertools.groupby()です。「これは便利そう！」と感じ、さっそく使ってみたのですが、実際に活用してみると意外な落とし穴があり、試行錯誤の連続でした。
+今回の記事では、私がgroupby()に挑戦した経験を通じて感じた学びについて共有します。
+同じように迷う初心者エンジニアの方々にとって、少しでも参考になれば幸いです！
+
+ 対象読者
+Python初心者
+
+ 結論
+groupby()...]]></description><link>https://zenn.dev/richancona/articles/2eae7717b10cd1</link><guid isPermaLink="true">https://zenn.dev/richancona/articles/2eae7717b10cd1</guid><pubDate>Thu, 23 Jan 2025 02:10:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--IFiAalKn--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25AEitertools.%2520groupby%2528%2529%25E3%2581%25A7%25E5%259B%25B0%25E3%2581%25A3%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:POCO%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdiYjg3YWNjZWUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>POCO</dc:creator></item><item><title><![CDATA[ちょっとだけ触ってみるDjango]]></title><description><![CDATA[PythonでWebアプリ作るには何を使うの？
+てかそもそも作れるの？
+Python勉強したけど次何しよう・・・ 
+という人におススメ！ Djangoで簡単なwebアプリケーションを作ってみませんか？
+（初めて作ったので適宜改版しますw）
+]]></description><link>https://zenn.dev/picaneru/books/10a1798e73adef</link><guid isPermaLink="true">https://zenn.dev/picaneru/books/10a1798e73adef</guid><pubDate>Thu, 23 Jan 2025 00:45:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--FliNjTSg--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci9lMTFmODkwNGQzLmpwZWc=%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>絶対定時退勤</dc:creator></item><item><title><![CDATA[PydanticAI の新機能：pydantic-graph で AI エージェントのワークフローを作る]]></title><description><![CDATA[
+ はじめに
+先月の Advent Calendar の記事で、PydanticAI という Pydantic の開発チームから公開された AI エージェントライブラリの紹介をしました。
+https://qiita.com/atsukish/items/a1613c77cecd41980467
+そして先日の v0.0.19 のリリースで、pydantic-graphというグラフ API が追加され、いわゆる Agentic Workflow が実装できるようになりました。
+https://x.com/samuel_colvin/status/1879627376990224417
+htt...]]></description><link>https://zenn.dev/atsukish/articles/8169318b02e39c</link><guid isPermaLink="true">https://zenn.dev/atsukish/articles/8169318b02e39c</guid><pubDate>Wed, 22 Jan 2025 23:31:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--FUFTjZMM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:PydanticAI%2520%25E3%2581%25AE%25E6%2596%25B0%25E6%25A9%259F%25E8%2583%25BD%25EF%25BC%259Apydantic-graph%2520%25E3%2581%25A7%2520AI%2520%25E3%2582%25A8%25E3%2583%25BC%25E3%2582%25B8%25E3%2582%25A7%25E3%2583%25B3%25E3%2583%2588%25E3%2581%25AE%25E3%2583%25AF%25E3%2583%25BC%25E3%2582%25AF%25E3%2583%2595%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:atsukish%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I1ZWMzOTBhY2YuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>atsukish</dc:creator></item><item><title><![CDATA[Discord-Slack連携Botで業務効率化にチャレンジしてみた]]></title><description><![CDATA[
+ 🌟 はじめに
+みなさん、こんにちは！仕事や研究でDiscordとSlackの両方を使っている方、必見です！
+今回は、情報共有を効率化するために作った連携Botの開発記録を共有したいと思います。
+
+ こんな悩みありませんか？
+
+「あれ？その連絡Slackだっけ？Discordだっけ？」
+「重要な連絡、見逃してた...やばい」
+「同じファイル、両方にアップロードするの面倒だな...」
+
+私も同じ悩みを抱えていました。そこで、「両方のツールを連携させれば解決するのでは？」と思い立ち、Botを開発することにしました！
+
+ 導入効果がスゴイ！
+実際に使ってみたところ...
+📈 数字で見る改善効...]]></description><link>https://zenn.dev/miguel/articles/f0a584b423d19e</link><guid isPermaLink="true">https://zenn.dev/miguel/articles/f0a584b423d19e</guid><pubDate>Wed, 22 Jan 2025 11:24:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--McgLnyPD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Discord-Slack%25E9%2580%25A3%25E6%2590%25BABot%25E3%2581%25A7%25E6%25A5%25AD%25E5%258B%2599%25E5%258A%25B9%25E7%258E%2587%25E5%258C%2596%25E3%2581%25AB%25E3%2583%2581%25E3%2583%25A3%25E3%2583%25AC%25E3%2583%25B3%25E3%2582%25B8%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%2591%25E3%2583%25A9%25E3%2583%2583%25E3%2582%25B3%25E3%2583%25AA%25E3%2583%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU0YWNhNjJjMDQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>パラッコリー</dc:creator></item><item><title><![CDATA[［AtCoder］ABC-387｜A - Happy New Year 2025]]></title><description><![CDATA[
+ 設問ページ
+
+🔗ABC-387 A - Happy New Year 2025
+
+
+
+ 提出結果
+def getIntMap():
+    return map(int, input().split())
+
+
+def main():
+    A, B = getIntMap()
+
+    print((A + B) ** 2)
+
+
+if __name__ == "__main__":
+    main()
+]]></description><link>https://zenn.dev/hyperdb/articles/dd8c0530ed10e3</link><guid isPermaLink="true">https://zenn.dev/hyperdb/articles/dd8c0530ed10e3</guid><pubDate>Wed, 22 Jan 2025 10:48:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--LZGBrMNl--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25EF%25BC%25BBAtCoder%25EF%25BC%25BDABC-387%25EF%25BD%259CA%2520-%2520Happy%2520New%2520Year%25202025%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AF%25E3%2581%2584%25E3%2581%25B1%25E3%2581%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhODJkODgwMzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>はいぱぁ</dc:creator></item><item><title><![CDATA[［AtCoder］ABC-388｜A - ?UPC]]></title><description><![CDATA[
+ 設問ページ
+
+🔗ABC-388 A - ?UPC
+
+
+
+ 提出結果
+def getString():
+    return input()
+
+
+def main():
+    S = getString()
+
+    print(S[0] + "UPC")
+
+
+if __name__ == "__main__":
+    main()
+]]></description><link>https://zenn.dev/hyperdb/articles/6c41b6a47f5c7d</link><guid isPermaLink="true">https://zenn.dev/hyperdb/articles/6c41b6a47f5c7d</guid><pubDate>Wed, 22 Jan 2025 10:48:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--O406Z-y8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25EF%25BC%25BBAtCoder%25EF%25BC%25BDABC-388%25EF%25BD%259CA%2520-%2520%253FUPC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AF%25E3%2581%2584%25E3%2581%25B1%25E3%2581%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhODJkODgwMzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>はいぱぁ</dc:creator></item><item><title><![CDATA[［AtCoder］ABC-388｜B - Heavy Snake]]></title><description><![CDATA[
+ 設問ページ
+
+🔗ABC-388 B - Heavy Snake
+
+
+
+ 提出結果
+def getIntMap():
+    return map(int, input().split())
+
+
+def getIntListRow(N):
+    return [list(map(int, input().split())) for _ in range(N)]
+
+
+def main():
+    N, D = getIntMap()
+    TL = getIntListRow(N)
+
+    for i in range(1, D + 1):
+        w = 0
+     ...]]></description><link>https://zenn.dev/hyperdb/articles/4dab64551d45fd</link><guid isPermaLink="true">https://zenn.dev/hyperdb/articles/4dab64551d45fd</guid><pubDate>Wed, 22 Jan 2025 10:48:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--r-tXnDo9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25EF%25BC%25BBAtCoder%25EF%25BC%25BDABC-388%25EF%25BD%259CB%2520-%2520Heavy%2520Snake%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AF%25E3%2581%2584%25E3%2581%25B1%25E3%2581%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhODJkODgwMzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>はいぱぁ</dc:creator></item><item><title><![CDATA[［AtCoder］ABC-387｜B - 9x9 Sum]]></title><description><![CDATA[
+ 設問ページ
+
+🔗ABC-387 B - 9x9 Sum
+
+
+
+ 提出結果
+def getInt():
+    return int(input())
+
+
+def main():
+    X = getInt()
+
+    a = []
+    for i in range(1, 10):
+        a += [x * i for x in range(1, 10)]
+
+    c = a.count(X)
+
+    print(sum(a) - c * X)
+
+
+if __name__ == "__main__":
+    main()
+]]></description><link>https://zenn.dev/hyperdb/articles/2b4d62d77e99f5</link><guid isPermaLink="true">https://zenn.dev/hyperdb/articles/2b4d62d77e99f5</guid><pubDate>Wed, 22 Jan 2025 10:48:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_nWHtcMp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25EF%25BC%25BBAtCoder%25EF%25BC%25BDABC-387%25EF%25BD%259CB%2520-%25209x9%2520Sum%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AF%25E3%2581%2584%25E3%2581%25B1%25E3%2581%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhODJkODgwMzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>はいぱぁ</dc:creator></item><item><title><![CDATA[`uv run`でファイルパスを補完する方法]]></title><description><![CDATA[Pythonの世界は進化が激しく、ちょっと前までvenvでプロジェクトを作るのが主流だったのが今はuvだという。
+https://docs.astral.sh/uv/
+このuvはRustベースで動作も機敏だし、venvの環境やpyproject.tomlも自動で作ってくれるので完成度が高い。今後デファクトになっていくのではないかと思う。
+しかし、uvを使ってみると1つだけ痒いところに手が届かない問題がある。表題の、uv runでファイルパス補完が効かない問題だ。
+uv run [ファイルパス]
+!
+zshで、と報告されているので、macOSなどでzshを使っているときのみ起こる問題かもし...]]></description><link>https://zenn.dev/tadayosi/articles/522efbda48fbf4</link><guid isPermaLink="true">https://zenn.dev/tadayosi/articles/522efbda48fbf4</guid><pubDate>Wed, 22 Jan 2025 05:33:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--KLjENxC6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%2560uv%2520run%2560%25E3%2581%25A7%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2583%2591%25E3%2582%25B9%25E3%2582%2592%25E8%25A3%259C%25E5%25AE%258C%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E4%25BD%2590%25E8%2597%25A4%2520%25E5%258C%25A1%25E5%2589%259B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk3MWZkMDJmY2YuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>佐藤 匡剛</dc:creator></item><item><title><![CDATA[Google Colab T4でKokoro TTSの音声合成を試してみた]]></title><description><![CDATA[
+ Kokoro-82M とは？
+Kokoro-82M とは高性能な音声を生成することが出来る TTS モデルです。
+テキストから音声を簡単に生成することが出来、また音声ファイルに重みを設定することで、簡単に音声の合成が可能です。
+https://huggingface.co/hexgrad/Kokoro-82M
+v0.23 からは日本語もサポートされています。
+下記で簡単に試すことが出来ます。
+ただし、日本語に関してはイントネーションがやや不自然な印象です。
+https://huggingface.co/spaces/hexgrad/Kokoro-TTS
+本記事では、kokoro と ...]]></description><link>https://zenn.dev/00/articles/kokoro_tts_on_google_colab</link><guid isPermaLink="true">https://zenn.dev/00/articles/kokoro_tts_on_google_colab</guid><pubDate>Wed, 22 Jan 2025 03:48:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--W9pJoWWB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Google%2520Colab%2520T4%25E3%2581%25A7Kokoro%2520TTS%25E3%2581%25AE%25E9%259F%25B3%25E5%25A3%25B0%25E5%2590%2588%25E6%2588%2590%25E3%2582%2592%25E8%25A9%25A6%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:koji%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q1MTIwOWU2Y2UuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>koji</dc:creator></item><item><title><![CDATA[AutoGenでAIエージェントのデザインパターンを学ぶ(1)：Passive Goal Creator]]></title><description><![CDATA[
+ やること
+Passive Goal Creatorと呼ばれるデザインパターンで具体的な目標を引き出す
+
+ 背景
+今年流行すると言われているAIエージェントのデザインパターンをキャッチアップしていきます。元ネタは以下の書籍です。
+https://gihyo.jp/book/2024/978-4-297-14530-9
+この書籍で説明されているさらに元ネタは以下の論文です。
+https://arxiv.org/abs/2405.10467
+
+ 全体像
+上の論文ではデザインパターンが18種類紹介されており、全体像は以下の図で示されています。
+
+また、AIエージェントの役割が6つ挙げられてい...]]></description><link>https://zenn.dev/headwaters/articles/271221d198f48c</link><guid isPermaLink="true">https://zenn.dev/headwaters/articles/271221d198f48c</guid><pubDate>Wed, 22 Jan 2025 01:47:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0kxX5T0i--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AutoGen%25E3%2581%25A7AI%25E3%2582%25A8%25E3%2583%25BC%25E3%2582%25B8%25E3%2582%25A7%25E3%2583%25B3%25E3%2583%2588%25E3%2581%25AE%25E3%2583%2587%25E3%2582%25B6%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2591%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%25B3%25E3%2582%2592%25E5%25AD%25A6%25E3%2581%25B6%25281%2529%25EF%25BC%259APassive%2520Goal%2520Creator%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:akihiro%2520nakamura%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZjNGExY2UxMDYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2598%25E3%2583%2583%25E3%2583%2589%25E3%2582%25A6%25E3%2582%25A9%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%25BC%25E3%2582%25B9%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA5MjU4ZWEwY2QuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>akihiro nakamura</dc:creator></item><item><title><![CDATA[PythonのAWSLambdaをCDKでArm版にする：GitHubActionsでバンドル時のイメージがx86になる問題を解決]]></title><description><![CDATA[Specteeでエンジニアをしている和山と申します！
+PythonでAWS LambdaをCDKを使ってArm版にしたいと思ったことはありませんか？
+Arm版はx86版より料金が安く設定されているのと、x86版より若干性能が良いため経済的にLambdaを利用することができます。
+少し古めの記事ですが、料金と性能比較をしてくださっている記事があったので紹介します。
+https://dev.classmethod.jp/articles/aws-lambda-graviton2/
+このように経済的なArm版のLambdaですが、CDKで実装する際にArm版として実装したのにx86版としてバン...]]></description><link>https://zenn.dev/spectee/articles/spectee-aws-lambda-python-architecture</link><guid isPermaLink="true">https://zenn.dev/spectee/articles/spectee-aws-lambda-python-architecture</guid><pubDate>Wed, 22 Jan 2025 01:07:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--64pzc0Tu--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25AEAWSLambda%25E3%2582%2592CDK%25E3%2581%25A7Arm%25E7%2589%2588%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%25EF%25BC%259AGitHubActions%25E3%2581%25A7%25E3%2583%2590%25E3%2583%25B3%25E3%2583%2589%25E3%2583%25AB%25E6%2599%2582%25E3%2581%25AE%25E3%2582%25A4%25E3%2583%25A1%25E3%2583%25BC%25E3%2582%25B8%25E3%2581%258Cx86...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:N.Wayama%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzkwYzYyY2ZlNDQuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Spectee%2520Developers%2520Blog%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhkY2ZhN2VlNzguanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>N.Wayama</dc:creator></item><item><title><![CDATA[自動化をもっと手軽に！Pythonスクリプトをexe化するステップ解説]]></title><description><![CDATA[
+
+ はじめに
+以前、娘のためにWebサイトへの予約作業を自動化する仕組みを作成し、その内容を記事にまとめました。
+https://qiita.com/ogi_kimura/items/4ec8c7c29b0669426276
+この自動化スクリプトを使うことで、私のPCでは予約処理が問題なく実行できています。しかし、この仕組みをそのまま娘のPCで動かそうとすると、動作しません。その理由は、娘のPCにはPythonやGoogle Chromeのドライバなど必要な環境が一切整っていないからです。
+この予約処理は毎月1回、月初の深夜0:00に実行する必要があります。現在の状態では、私のPCでし...]]></description><link>https://zenn.dev/ogiki/articles/c29dca4fc9b0f8</link><guid isPermaLink="true">https://zenn.dev/ogiki/articles/c29dca4fc9b0f8</guid><pubDate>Wed, 22 Jan 2025 00:38:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6uaCb0-m--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%2587%25AA%25E5%258B%2595%25E5%258C%2596%25E3%2582%2592%25E3%2582%2582%25E3%2581%25A3%25E3%2581%25A8%25E6%2589%258B%25E8%25BB%25BD%25E3%2581%25AB%25EF%25BC%2581Python%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2583%2588%25E3%2582%2592exe%25E5%258C%2596%25E3%2581%2599%25E3%2582%258B%25E3%2582%25B9%25E3%2583%2586%25E3%2583%2583%25E3%2583%2597%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%259C%25A8%25E6%259D%2591%25E3%2581%259F%25E3%2582%258D%25E3%2581%2586%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZkZjNiYWMwZmQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>木村たろう</dc:creator></item><item><title><![CDATA[Advent of Code 2024 Day 18: RAM Run]]></title><description><![CDATA[
+ このページは
+2024 年の Advent of Code の Day18 の記事です。
+https://adventofcode.com/2024/day/18
+Day17 の内容はこちら。
+https://zenn.dev/yasuharu519/articles/6bc95f52efc503
+!
+以下問題のネタバレが多数含まれています。問題を楽しみたい方は是非一度本家の問題を見てから読んでみてください。
+
+
+ Day 18: RAM Run
+今度の舞台はコンピュータ内部のメモリ空間です。このメモリ空間は二次元座標で表されており、座標は縦横共に 0 から 70 までの値をとるよう...]]></description><link>https://zenn.dev/yasuharu519/articles/a1569d4b96c9a1</link><guid isPermaLink="true">https://zenn.dev/yasuharu519/articles/a1569d4b96c9a1</guid><pubDate>Tue, 21 Jan 2025 17:29:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--57CZoc6w--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Advent%2520of%2520Code%25202024%2520Day%252018%253A%2520RAM%2520Run%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Sawady%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI4ODhkNmU3MTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Sawady</dc:creator></item><item><title><![CDATA[アドベンチャーゲームを作りながら学ぶPython基礎]]></title><description><![CDATA[プログラミングを基礎から順番に学ぶのはなんだか退屈……
+最終的にどんなモノを作れるのか早く知りたい！
+
+そんなあなたのために、ゴール（完成形）から逆算して学ぶスタイルのPython学習資料（講座）を制作しました。
+
+
+この講座では、「テキストベースのアドベンチャーゲーム」をテーマとして設定しています。
+画面に表示される物語や選択肢に沿って、プレイヤーが数字を入力して冒険を進めるRPG風のゲームです。
+
+チャプターごとに「ゲームでこのような事(機能)を実装したい」というイメージを先に示し、その実現に必要なPythonの文法やプログラミング的思考を逆引きして学ぶため、目的と知識が結びついて理解しやすく構成されているのが特徴です。
+
+たとえば「HP(体力)を管理したいから変数を使う」「選択肢を増やしたいからif文で分岐する」など、何のためにそれを学ぶのかがはっきりします。
+
+最終的には簡易的なセーブ・ロード機能も実装し、途中でやめても次回再開できるワクワク感あふれる本格ゲーム制作に挑戦できます。
+
+誰もが一度は憧れるRPGづくりを通して、Pythonの基本文法からちょっとした応用まで自然と身につけられるカリキュラムです。
+
+未経験者でも安心の懇切丁寧な解説なので、ステップを踏みながら自分のペースで進められます。
+
+
+本講座のポイント
+・逆引き式だからこそ、やりたいこと（HP管理、選択肢分岐など）が明確になり、モチベーションが上がりやすい。
+
+・テキストベースのゲームを開発するので、グラフィックの知識ゼロでもゲームを完成できる。
+
+・エラーが出ても大丈夫。失敗は次のステップへのヒント。挫折しにくい工夫がたくさん。
+
+・各チャプターの終わりにプログラミングに対する知識や興味を広げる為のTips(豆知識)を配置。
+
+
+さあ、「つくりたい物のイメージ」を軸に、Pythonの世界をのぞいてみましょう。
+この講座を終えるころには、きっと自分だけの物語を走らせられる自信がついていますよ。]]></description><link>https://zenn.dev/rei2718/books/4217e626401e78</link><guid isPermaLink="true">https://zenn.dev/rei2718/books/4217e626401e78</guid><pubDate>Tue, 21 Jan 2025 17:14:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fKOyqKyf--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci84MjY2ZGQ2MTA2LmpwZWc=%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>Rei</dc:creator></item><item><title><![CDATA[【Python・Pysparkで学ぶ！】データ分析の基礎【データ結合①"エントリーユーザー"(left join)】]]></title><description><![CDATA[
+ 【データ結合①"エントリーユーザー"(left join)】
+↓トランザクションテーブル(transaction_table)のサンプル
+
+
+
+tran_id
+pay_method
+tran_dt
+user_id
+shop_id
+pay_amount_raw
+pay_amount_without_tax
+y
+m
+d
+
+
+
+
+101
+code
+2025/01/03 06:48
+user000007
+shop0004
+1540
+1400
+2025
+01
+03
+
+
+102
+cache
+2025/01/04 22:27
+user000001
+shop0006
+6050
+5500
+2025
+0...]]></description><link>https://zenn.dev/taiking/articles/f557d94d13cb10</link><guid isPermaLink="true">https://zenn.dev/taiking/articles/f557d94d13cb10</guid><pubDate>Tue, 21 Jan 2025 15:54:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--aPcy3OKq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2583%25BBPyspark%25E3%2581%25A7%25E5%25AD%25A6%25E3%2581%25B6%25EF%25BC%2581%25E3%2580%2591%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E5%2588%2586%25E6%259E%2590%25E3%2581%25AE%25E5%259F%25BA%25E7%25A4%258E%25E3%2580%2590%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E7%25B5%2590%25E5%2590%2588%25E2%2591%25A0%2522%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2588%25E3%2583%25AA%25E3%2583%25BC%25E3%2583%25A6%25E3%2583%25BC%25E3%2582%25B6%25E3%2583%25BC%2522%2528left%2520join%2529%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259F%25E3%2581%2584%25E3%2581%258D%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2IzNTFhOTQ1NDIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>たいき</dc:creator></item><item><title><![CDATA[PythonでERA5のデータをダウンロードする]]></title><description><![CDATA[
+ 事前設定
+
+ ERA5のデータを取得するための設定
+https://zenn.dev/ats030/articles/get-era5-data-in-python
+
+ Ubuntu環境でのPythonスクリプトの例
+
+ 作業ディレクトリの構成
+任意の&lt;作業ディレクトリ&gt;直下に、下記のように.pyファイルを3つ配置します。
+&lt;作業ディレクトリ&gt;
+  ├─ configure.py
+  ├─ get_era5_data.py
+  └─ get_era5.py
+  
+
+ ダウンロード条件の設定
+気象データのダウンロード条件を設定します。
+例えば、configure...]]></description><link>https://zenn.dev/ats030/articles/download-era5-data-in-python</link><guid isPermaLink="true">https://zenn.dev/ats030/articles/download-era5-data-in-python</guid><pubDate>Tue, 21 Jan 2025 14:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--auY0nRpO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A7ERA5%25E3%2581%25AE%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%2592%25E3%2583%2580%25E3%2582%25A6%25E3%2583%25B3%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2589%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2582%25E3%2582%258C%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSUN1SHBxV21INFNBbC1aRVRkejRoTEwzejNvRWpqVGtmNVY2LWNRNk5ZVEd3djVzZ0k9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>あれ</dc:creator></item><item><title><![CDATA[はじめまして]]></title><description><![CDATA[はじめまして。
+こうして文章をインターネット上で公開するのは初めてになります。
+製造業で働きながら主に下記の言語で（AIに頼りつつ）遊んでいます。
+
+ Python
+以前会社に大学の先生に来ていただいて機械学習について教えていただきました。
+ただ機械学習より簡単なアプリを作って遊んでばっかりだったり...
+近いうちに会社から「画像検査装置をPythonで内製しなさい」と言われそうな今日この頃
+
+ C#
+Pythonで作成したアプリを配布しようとexeにしたところ重たすぎて使い物にならず
+同じような機能で軽い配布用のアプリを作るために手を出しました。
+
+ VBA
+生成AI台頭前に唯一手を出...]]></description><link>https://zenn.dev/nakashun_mf/articles/2cb25b5f406c4f</link><guid isPermaLink="true">https://zenn.dev/nakashun_mf/articles/2cb25b5f406c4f</guid><pubDate>Tue, 21 Jan 2025 12:45:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--JqRRNoYP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%25AF%25E3%2581%2598%25E3%2582%2581%25E3%2581%25BE%25E3%2581%2597%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Nakao%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSWNLbWFfcE1HVDBlYTA0Zl93VjVzZkRvZ2Q1WHZNUTE0Qm1xbzdoVmhNdDRTQnpwT0c9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Nakao</dc:creator></item><item><title><![CDATA[言語練習：生年月日から年齢と経過日数を算出]]></title><description><![CDATA[
+ はじめに
+本記事は、下記記事で行った内容を他の言語等で実装することを目的にしております。
+https://zenn.dev/nonaka101/articles/calculate-age-and-days
+本記事では JavaScript に加え、下記の言語等で実装を行っています。
+
+Excel 関数
+VBA
+PHP
+Python
+Java
+C 言語
+
+タイトル「言語練習」について
+タイトルの「言語練習」は、フランスの小説家 レーモン・クノーの著書『文体練習』に倣ったものです。
+この本は、端的に言ってしまえば「バスで口論している男を見かけ、後で駅前に行った際に その男が助言を受けて...]]></description><link>https://zenn.dev/nonaka101/articles/exercise_in_language__calculate_age</link><guid isPermaLink="true">https://zenn.dev/nonaka101/articles/exercise_in_language__calculate_age</guid><pubDate>Tue, 21 Jan 2025 12:22:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--CQY2BVAV--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%25A8%2580%25E8%25AA%259E%25E7%25B7%25B4%25E7%25BF%2592%25EF%25BC%259A%25E7%2594%259F%25E5%25B9%25B4%25E6%259C%2588%25E6%2597%25A5%25E3%2581%258B%25E3%2582%2589%25E5%25B9%25B4%25E9%25BD%25A2%25E3%2581%25A8%25E7%25B5%258C%25E9%2581%258E%25E6%2597%25A5%25E6%2595%25B0%25E3%2582%2592%25E7%25AE%2597%25E5%2587%25BA%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Nonaka%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY4YWMyOGJiZWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Nonaka</dc:creator></item><item><title><![CDATA[Poetry v2 への移行でやったこと]]></title><description><![CDATA[今年の年始早々、1月5日に Python のパッケージ管理ツールの一つである Poetry の v2.0.0 がリリースされました。破壊的な変更も含まれており、特に Poetry のバージョンを指定せずにチームで利用していた場合など、対応が必要かと思います。
+私の参画するプロジェクトでも v2 への移行を行いましたので、具体的な作業内容を記録しておきます。
+
+ 参考
+公式のアナウンスはこちらです。
+https://python-poetry.org/blog/announcing-poetry-2.0.0/
+日本語ではこちらの記事が非常に分かりやすいです。本記事ではこちらの記事に記載され...]]></description><link>https://zenn.dev/hayatoy/articles/4bdede2bb0cd1e</link><guid isPermaLink="true">https://zenn.dev/hayatoy/articles/4bdede2bb0cd1e</guid><pubDate>Tue, 21 Jan 2025 10:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--f3tqBRUr--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Poetry%2520v2%2520%25E3%2581%25B8%25E3%2581%25AE%25E7%25A7%25BB%25E8%25A1%258C%25E3%2581%25A7%25E3%2582%2584%25E3%2581%25A3%25E3%2581%259F%25E3%2581%2593%25E3%2581%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:HayatoY%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI4OWUwMzI2ZWUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>HayatoY</dc:creator></item></channel></rss>

@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「JavaScript」のフィード]]></title><description><![CDATA[Zennのトピック「JavaScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/javascript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/64acd76870.png</url><title>Zennの「JavaScript」のフィード</title><link>https://zenn.dev/topics/javascript</link></image><generator>zenn.dev</generator><lastBuildDate>Thu, 23 Jan 2025 01:36:47 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/javascript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[[JavaScript]IF 文で False と判定される条件値について（備忘録）]]></title><description><![CDATA[
+ １．はじめに
+・IF文は設定した条件を判定します。
+　判定結果が、Trueであればプログラムが実行されます。
+
+IFの基本構文
+if (設定条件) {
+    // 設定条件がTrueの場合、実行されるプログラム
+}
+
+
+ ２．False として判定される条件値
+
+Sample.js
+if (false) {
+    console.log('結果表示');
+}
+
+if (0) {
+    console.log('結果表示');
+}
+
+// 判定条件が空文字列
+if ('') {
+    console.log('結果表示');
+}
+
+if (null) {
+    console...]]></description><link>https://zenn.dev/yama_kawa/articles/99275196a2efef</link><guid isPermaLink="true">https://zenn.dev/yama_kawa/articles/99275196a2efef</guid><pubDate>Wed, 22 Jan 2025 14:30:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--J-_BwimX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BJavaScript%255DIF%2520%25E6%2596%2587%25E3%2581%25A7%2520False%2520%25E3%2581%25A8%25E5%2588%25A4%25E5%25AE%259A%25E3%2581%2595%25E3%2582%258C%25E3%2582%258B%25E6%259D%25A1%25E4%25BB%25B6%25E5%2580%25A4%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25EF%25BC%2588%25E5%2582%2599%25E5%25BF%2598%25E9%258C%25B2%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%25A9%25E3%2582%25B6%25E3%2583%258B%25E3%2582%25A2%25E3%2583%2591%25E3%2583%25B3%25E3%2582%25B5%25E3%2583%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M1ZjYyZjIwYTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ラザニアパンサー</dc:creator></item><item><title><![CDATA[【GAS】スプレッドシートの情報をオブジェクト型で取得するテンプレート]]></title><description><![CDATA[
+ はじめに：スプレッドシートの情報取得で便利なテンプレート
+Google apps script（GAS）で業務効率を改善するとき、スプレッドシートを起点に操作することがほとんどです。
+私が社内でよく依頼をうけるパターンは以下の2つです。
+
+メール送信を自動送信する
+まとめてカレンダー登録を行う
+
+どちらの場合も、スプレッドシートに情報をまとめるところから始めます。
+シート情報をGASで処理していく場合、シート内にまとめた情報を取得し、その後の処理を行っていきます。
+シート情報を操作しやすいオブジェクト型で取得するGASコードのテンプレートの紹介です。
+
+ この記事の対象者
+
+GAS初...]]></description><link>https://zenn.dev/kojimaru/articles/0d0359368a2366</link><guid isPermaLink="true">https://zenn.dev/kojimaru/articles/0d0359368a2366</guid><pubDate>Wed, 22 Jan 2025 14:09:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ytt1LQ0W--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590GAS%25E3%2580%2591%25E3%2582%25B9%25E3%2583%2597%25E3%2583%25AC%25E3%2583%2583%25E3%2583%2589%25E3%2582%25B7%25E3%2583%25BC%25E3%2583%2588%25E3%2581%25AE%25E6%2583%2585%25E5%25A0%25B1%25E3%2582%2592%25E3%2582%25AA%25E3%2583%2596%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E5%259E%258B%25E3%2581%25A7%25E5%258F%2596%25E5%25BE%2597%25E3%2581%2599%25E3%2582%258B%25E3%2583%2586%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AC%25E3%2583%25BC%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2593%25E3%2581%2598%25E3%2581%25BE%25E3%2582%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSzR6Y3lfaVFlMGstVHN6b0prWFpXMFlNOG9wdEYwMkVnaXRibTRTd2otOFo5UE95dz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>こじまる</dc:creator></item><item><title><![CDATA[【学習メモ】配列やオブジェクトの便利な構文まとめ]]></title><description><![CDATA[
+ 【学習メモ】配列やオブジェクトの便利な構文まとめ
+最近のモダンな JavaScript 開発で頻出する配列とオブジェクトの構文について学習したので、自分の備忘録としてまとめました。特に React の開発で頻繁に使用する構文なので、しっかり理解しておきたいポイントです。
+
+ 1. 分割代入（Destructuring Assignment）
+配列やオブジェクトから特定の値を取り出して、変数に代入する構文です。最初は少し見慣れない書き方でしたが、使っているうちに便利さを実感しました。
+
+ 配列の分割代入
+const [a, b] = ['foo', 'bar'];
+console.lo...]]></description><link>https://zenn.dev/c_kiro/articles/6e2d520d0ac1e5</link><guid isPermaLink="true">https://zenn.dev/c_kiro/articles/6e2d520d0ac1e5</guid><pubDate>Wed, 22 Jan 2025 11:55:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--PF3hYm59--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%25AD%25A6%25E7%25BF%2592%25E3%2583%25A1%25E3%2583%25A2%25E3%2580%2591%25E9%2585%258D%25E5%2588%2597%25E3%2582%2584%25E3%2582%25AA%25E3%2583%2596%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E3%2581%25AE%25E4%25BE%25BF%25E5%2588%25A9%25E3%2581%25AA%25E6%25A7%258B%25E6%2596%2587%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:C.Kiro%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSXBPb0VMakJjcU9hZmxFVkJTckRlWFRpeDd4Sy1QeTRxclcxaHVuWEtFaTZJSVdWcHo9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>C.Kiro</dc:creator></item><item><title><![CDATA[Date.toISOString は常にUTCの時刻を返す]]></title><description><![CDATA[
+ まとめ
+実行環境が JST（日本標準時、UTC+9）の場合でも、toISOString の出力は 常に UTC の時刻として表示されます。これは、toISOString が実行環境のタイムゾーンに影響を受けず、UTC の形式で日時を表すからです。なの、実行環境は出力結果に影響しません。
+
+ サンプルコード
+const date = new Date("2025-01-01T00:00:00+09:00");
+console.log(date.toISOString()); // UTC 時刻で表示
+// 出力結果: 2024-12-31T15:00:00.000Z
+
+ 解説
+
+入力さ...]]></description><link>https://zenn.dev/k_kazukiiiiii/articles/1bc422a8176b8e</link><guid isPermaLink="true">https://zenn.dev/k_kazukiiiiii/articles/1bc422a8176b8e</guid><pubDate>Wed, 22 Jan 2025 10:24:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--42GFhnie--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Date.toISOString%2520%25E3%2581%25AF%25E5%25B8%25B8%25E3%2581%25ABUTC%25E3%2581%25AE%25E6%2599%2582%25E5%2588%25BB%25E3%2582%2592%25E8%25BF%2594%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kimura%2520Kazuki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc2MDJhZGIxMWUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kimura Kazuki</dc:creator></item><item><title><![CDATA[React Tokyo トレンドレポート : <ViewTransition> Component]]></title><description><![CDATA[こんにちは！cordeliaです。
+React TokyoのDiscordには情報・質問部屋というフォーラム形式のチャンネルがあります。これは各々が気になったトピックを立て、関連コンテンツ（記事・issue・Pull Request・動画・SNS投稿、なんでも）を共有するナレッジ蓄積型のチャンネルです。旬なものからマニアックなものまで、様々な情報が日々蓄積されております。コミュニティの皆様いつもありがとうございます。
+そこで！特に盛り上がったチャンネルに共有されたコンテンツをピックアップして皆様にお届けしようじゃないか、という試みがこのReact Tokyo トレンドレポートです🎉
+そし...]]></description><link>https://zenn.dev/react_tokyo/articles/db90a5397364aa</link><guid isPermaLink="true">https://zenn.dev/react_tokyo/articles/db90a5397364aa</guid><pubDate>Wed, 22 Jan 2025 06:24:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--FFjcRWI0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%2520Tokyo%2520%25E3%2583%2588%25E3%2583%25AC%25E3%2583%25B3%25E3%2583%2589%25E3%2583%25AC%25E3%2583%259D%25E3%2583%25BC%25E3%2583%2588%2520%253A%2520%253CViewTransition%253E%2520Component%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:cordelia%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzczM2MxYTQzYzYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:React%2520Tokyo%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM0YmFmZWVjNTguanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>cordelia</dc:creator></item><item><title><![CDATA[kintoneアプリの一覧画面をVue3＋Vuetify3を使って表示]]></title><description><![CDATA[前回に引き続き、今度はVue3＋Vuetify3を使ってkintoneの一覧画面を表示したいと思います。
+Vuetify3のロードマップをみるとまだまだ開発中という感じですが、Vue2＋Vuetify2もサポート終了なので、ああでもないこうでもないと試行錯誤しながらようやく出来上がりました。
+こちらもぜひご利用ください！
+!
+VuetifyのリセットCSSが非常に強力で、若干kintoneの表示が崩れます、ご注意ください！
+
+
+ 1. 利用環境
+以下の環境で動作しています。
+
+kintone … クラウド最新版（2025年1月時点）
+Vue2 … バージョン3.5.13
+Vuetify2...]]></description><link>https://zenn.dev/nori_suke/articles/2a7434b00b99cd</link><guid isPermaLink="true">https://zenn.dev/nori_suke/articles/2a7434b00b99cd</guid><pubDate>Wed, 22 Jan 2025 02:43:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ADrSBJ96--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:kintone%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2581%25AE%25E4%25B8%2580%25E8%25A6%25A7%25E7%2594%25BB%25E9%259D%25A2%25E3%2582%2592Vue3%25EF%25BC%258BVuetify3%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E8%25A1%25A8%25E7%25A4%25BA%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%25B5%25B7%25E8%258B%2594%25E5%258A%25A9%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhlZDRmZjExNzcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>海苔助</dc:creator></item><item><title><![CDATA[fetchでAPIからデータを取得する]]></title><description><![CDATA[
+// fetchでAPIからデータを取得する
+fetch(" URLを記述する ").then(res =&gt; res.json()).then(data =&gt; {
+    console.log(data)　// 取得したデータを確認できる
+})
+
+このコードを、例えばscriptタグの中に記述したら、そのhtmlファイルで利用できる
+（参考：https://jonchon-u.github.io/mypage/　）
+（このページにあるAPIはgithubだと機能しない泣）
+
+もし、APIから取得できるデータがjson形式なら…
+URLにアクセスするとそのデータがブラウザに...]]></description><link>https://zenn.dev/jonchon_u/articles/feab4797bb2682</link><guid isPermaLink="true">https://zenn.dev/jonchon_u/articles/feab4797bb2682</guid><pubDate>Wed, 22 Jan 2025 00:23:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1jdASzzr--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:fetch%25E3%2581%25A7API%25E3%2581%258B%25E3%2582%2589%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%2592%25E5%258F%2596%25E5%25BE%2597%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:jonchon%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRlYzc0MjBlNmEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>jonchon</dc:creator></item><item><title><![CDATA[クリーンなコードを追い求めて: 私のプログラムコードを作る際の今のイメージ]]></title><description><![CDATA[※ この記事は TechCommit AdventCalendar2024 の24日目の記事です。
+https://adventar.org/calendars/10584
+https://www.tech-commit.jp/
+!
+...ん？アドベントカレンダーの時期はとっくのとうに過ぎた？
+するどいですね ꉂꉂ( ᐛ ) 間に合わせようと書いていたのですが、変数名・関数名について言及しているところ以外のコード例の変数名と関数名がやばすぎて、公開を遅くさせていただきました٩( ᐛ )و そのうちコード例がいけてなさすぎるのが見つかり...て感じです ꉂꉂ( ᐛ )
+ダメですねぇ。なかな...]]></description><link>https://zenn.dev/mae616/articles/cc9e3db259e484</link><guid isPermaLink="true">https://zenn.dev/mae616/articles/cc9e3db259e484</guid><pubDate>Tue, 21 Jan 2025 08:23:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0Fe3lnzb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%25BC%25E3%2583%25B3%25E3%2581%25AA%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2582%2592%25E8%25BF%25BD%25E3%2581%2584%25E6%25B1%2582%25E3%2582%2581%25E3%2581%25A6%253A%2520%25E7%25A7%2581%25E3%2581%25AE%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%25A0%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%25E9%259A%259B%25E3%2581%25AE%25E4%25BB%258A%25E3%2581%25AE%25E3%2582%25A4%25E3%2583%25A1%25E3%2583%25BC%25E3%2582%25B8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mae616%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2kwTnJ0MEpDNXNNd1NXRmxtVU80RlhRa09KaVdtM0ZrNkduMG9NPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mae616</dc:creator></item><item><title><![CDATA[【GSAP】GSAP Practice【#１7 GSAP ScrollTrigger Sample1 Text Animation】]]></title><description><![CDATA[
+ 【#１7 GSAP ScrollTrigger Sample1 Text Animation】
+YouTube: https://youtu.be/syw7lbreh9g
+https://youtu.be/syw7lbreh9g
+今回はScrollTriggerとpinを使用して、
+スクロールに応じてテキストが横から表示されるアニメーションを
+実装していきます。
+
+index.html
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8" /&gt;
+    &...]]></description><link>https://zenn.dev/web_life_ch/articles/5b6b9bd49376c0</link><guid isPermaLink="true">https://zenn.dev/web_life_ch/articles/5b6b9bd49376c0</guid><pubDate>Tue, 21 Jan 2025 04:52:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--kUhsfg6e--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590GSAP%25E3%2580%2591GSAP%2520Practice%25E3%2580%2590%2523%25EF%25BC%25917%2520GSAP%2520ScrollTrigger%2520Sample1%2520Text%2520A...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Web%2520Life%2520CH%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUl0YnZtbWNjTWFMM3dyd2x3VE5sVVZjTlhmZHEzZzF2QnJfMUJMSkJrN049czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Web Life CH</dc:creator></item><item><title><![CDATA[google app script から kintone のレコードを削除（複数）]]></title><description><![CDATA[kintoneのデータを、クエリを使って複数件削除するスクリプトです。
+!
+APIトークンを使った認証方式では、Administratorユーザーで実行されます！
+どんなレコードでも削除できてしまいますのでご注意ください！
+
+
+ はじめに
+以下の環境で動作しています。
+
+google app script … Chrome V8ランタイム利用
+kintone … クラウド最新版（2025年1月時点）
+
+
+ 用意するもの
+例によって、google app script　→　プロジェクトの設定　→　スクリプトプロパティ　に、以下３つのプロパティを作成します。
+それぞれ取得元のアプリにあわせて...]]></description><link>https://zenn.dev/nori_suke/articles/288de1c71db491</link><guid isPermaLink="true">https://zenn.dev/nori_suke/articles/288de1c71db491</guid><pubDate>Tue, 21 Jan 2025 01:51:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--UWeTL5-e--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:google%2520app%2520script%2520%25E3%2581%258B%25E3%2582%2589%2520kintone%2520%25E3%2581%25AE%25E3%2583%25AC%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2582%2592%25E5%2589%258A%25E9%2599%25A4%25EF%25BC%2588%25E8%25A4%2587%25E6%2595%25B0%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%25B5%25B7%25E8%258B%2594%25E5%258A%25A9%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhlZDRmZjExNzcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>海苔助</dc:creator></item><item><title><![CDATA[npm パッケージのセキュリティアップデートをする備忘録]]></title><description><![CDATA[npmパッケージの依存関係にセキュリティ警告があった際のアップデートについて、自分が進めた備忘録をさくっとまとめてみました。
+
+ npm audit
+npm auditはnpmパッケージ内で依存しているライブラリにおいて、セキュリティ上の既知の脆弱性を持つものを洗い出して警告してくれます。
+https://docs.npmjs.com/auditing-package-dependencies-for-security-vulnerabilities
+ということでまずはpackage.json直下でnpm auditを実行。
+$ npm audit
+# npm audit report
+...]]></description><link>https://zenn.dev/moepyxxx/articles/317bf40e47470c</link><guid isPermaLink="true">https://zenn.dev/moepyxxx/articles/317bf40e47470c</guid><pubDate>Mon, 20 Jan 2025 16:29:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--LTZfIA1b--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:npm%2520%25E3%2583%2591%25E3%2583%2583%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B8%25E3%2581%25AE%25E3%2582%25BB%25E3%2582%25AD%25E3%2583%25A5%25E3%2583%25AA%25E3%2583%2586%25E3%2582%25A3%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%25E3%2583%2587%25E3%2583%25BC%25E3%2583%2588%25E3%2582%2592%25E3%2581%2599%25E3%2582%258B%25E5%2582%2599%25E5%25BF%2598%25E9%258C%25B2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:moepyxxx%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E0MzA5NDk2MTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>moepyxxx</dc:creator></item><item><title><![CDATA[React TokyoコミュニティでのDiscordチャンネルの利用方法]]></title><description><![CDATA[
+ React Tokyoとは
+React Tokyoは、東京を中心に、オンラインとオフラインの両方で活動するReactコミュニティです。2024年12月に発足し、2025年1月には初のオフラインイベントを開催します。公式ページもできましたので、ぜひご覧ください。
+https://react-tokyo.vercel.app/
+React Tokyoのオンライン活動は主にDiscordサーバー上で行います。本記事では、Discordサーバにおけるチャンネルの使い方について紹介します。執筆時点の情報であり、将来的に変わる可能性は高いです。
+
+ Discordサーバーのチャンネル設計
+筆者は...]]></description><link>https://zenn.dev/react_tokyo/articles/6aaea6220a2c3e</link><guid isPermaLink="true">https://zenn.dev/react_tokyo/articles/6aaea6220a2c3e</guid><pubDate>Mon, 20 Jan 2025 13:53:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--UE15YsQk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%2520Tokyo%25E3%2582%25B3%25E3%2583%259F%25E3%2583%25A5%25E3%2583%258B%25E3%2583%2586%25E3%2582%25A3%25E3%2581%25A7%25E3%2581%25AEDiscord%25E3%2583%2581%25E3%2583%25A3%25E3%2583%25B3%25E3%2583%258D%25E3%2583%25AB%25E3%2581%25AE%25E5%2588%25A9%25E7%2594%25A8%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:daishi%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzczM2MxYTQzYzYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:React%2520Tokyo%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzcwZGNhM2E2Y2IuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>daishi</dc:creator></item><item><title><![CDATA[【Honoミドルウェア】多分この書き方を知ってたら救われる編]]></title><description><![CDATA[
+ 記事を書いた経緯
+Honoのmiddlewareの公式ドキュメントの情報って全然豊富じゃないですよね？
+Honoのコンセプトは大好きなのにミドルウェアの痒いところに手が届かずにLaravel(かRails)に帰って行った個人開発プログラマーも多いはず。。。
+そこで、ミドルウェアの「多分この書き方を覚えておけばいいですよ」というよう使い方を紹介します。
+
+ コンテンツ
+
+createMiddlewareを使ったオリジナルミドルウェアの定義方法
+exceptを使った特定ルートのミドルウェアの除外
+everyを使ったミドルウェアの連続適用（チェーン）
+
+
+ createMiddleware...]]></description><link>https://zenn.dev/noworker/articles/16f0e8d190a67c</link><guid isPermaLink="true">https://zenn.dev/noworker/articles/16f0e8d190a67c</guid><pubDate>Mon, 20 Jan 2025 12:26:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ThM4ZiWo--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Hono%25E3%2583%259F%25E3%2583%2589%25E3%2583%25AB%25E3%2582%25A6%25E3%2582%25A7%25E3%2582%25A2%25E3%2580%2591%25E5%25A4%259A%25E5%2588%2586%25E3%2581%2593%25E3%2581%25AE%25E6%259B%25B8%25E3%2581%258D%25E6%2596%25B9%25E3%2582%2592%25E7%259F%25A5%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%259F%25E3%2582%2589%25E6%2595%2591%25E3%2582%258F%25E3%2582%258C%25E3%2582%258B%25E7%25B7%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AE%25E3%2582%258F%25E3%2581%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2UwYTY1Y2I2MDUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>のわか</dc:creator></item><item><title><![CDATA[Dependency InjectionをJSで理解する]]></title><description><![CDATA[
+ Dependency Injectionとは
+Dependency Injection（DI: 依存性注入）とは、オブジェクト（クラス）同士の依存を外部から設定する設計方針のことです。
+この記事では、JSで書かれたFizzBuzzの例を使い、DIの基本概念を学びます。
+
+ DIがない場合
+まずは、依存性注入を行わない例を見てみましょう。以下は、1から100までのFizzBuzzをコンソールに出力するクラスです:
+
+fizzbuzz-converter.js
+export class FizzBuzzConverter {
+  convert(number) {
+    if (num...]]></description><link>https://zenn.dev/zhenyou620/articles/dependency-injection</link><guid isPermaLink="true">https://zenn.dev/zhenyou620/articles/dependency-injection</guid><pubDate>Mon, 20 Jan 2025 10:45:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--sla40d7R--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Dependency%2520Injection%25E3%2582%2592JS%25E3%2581%25A7%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:skgut%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I5ODA4ZjExZWMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>skgut</dc:creator></item><item><title><![CDATA[kintoneアプリの一覧画面をVue2＋Vuetify2を使って表示]]></title><description><![CDATA[kintoneを触り始めて２年ほど、他業務に追われながら片手間に開発していましたが、ようやくカスタマイズも板についてきました。
+頻繁に開発しているわけではないので備忘録も兼ねて本記事に落とし込んでいきたいと思います。
+ところでVueに関する記事は多数あれどバージョンがない記事も少なくなく、自分の環境で使えるかどうか分からずかなりの時間を試行錯誤していましたので、利用環境にバージョンを記載しました。
+ご自身の環境にあっているかを充分に確認のうえ、参考にしていただければと思います。
+!
+VuetifyのリセットCSSが非常に強力で、若干kintoneの表示が崩れます、ご注意ください！
+
+
+ ...]]></description><link>https://zenn.dev/nori_suke/articles/f27ebb3924bc83</link><guid isPermaLink="true">https://zenn.dev/nori_suke/articles/f27ebb3924bc83</guid><pubDate>Mon, 20 Jan 2025 08:54:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--MbVa1Zgl--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:kintone%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2581%25AE%25E4%25B8%2580%25E8%25A6%25A7%25E7%2594%25BB%25E9%259D%25A2%25E3%2582%2592Vue2%25EF%25BC%258BVuetify2%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E8%25A1%25A8%25E7%25A4%25BA%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%25B5%25B7%25E8%258B%2594%25E5%258A%25A9%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhlZDRmZjExNzcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>海苔助</dc:creator></item><item><title><![CDATA[AIのおかげで「ゼロから」ウェブアプリを作れるようになった話]]></title><description><![CDATA[HTMLもCSSもJavaScriptも暗記しておらず、未だに一行すら書けない自分でも、AIのおかげでゼロからウェブアプリケーションを作れるようになりました！
+AIに頼りながら作った、私の初めてのウェブアプリはこちら 👉 NPCシェア
+
+ アプリを作れるようになったけど…
+しかし、エンジニアでもない自分がアプリを作れるようになったとはいえ、それで対価を得るのは簡単じゃないというのが正直なところです。
+作った後もやるべきことが山積みで、思っていたよりもずっと大変でした💦
+たとえば、今回作ったアプリはPCやAndroidでは問題なく動いていたのですが、
+古いiPhoneでは動かないことが発覚...]]></description><link>https://zenn.dev/namboo/articles/f70428ea800164</link><guid isPermaLink="true">https://zenn.dev/namboo/articles/f70428ea800164</guid><pubDate>Mon, 20 Jan 2025 07:56:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2JN46uMp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AI%25E3%2581%25AE%25E3%2581%258A%25E3%2581%258B%25E3%2581%2592%25E3%2581%25A7%25E3%2580%258C%25E3%2582%25BC%25E3%2583%25AD%25E3%2581%258B%25E3%2582%2589%25E3%2580%258D%25E3%2582%25A6%25E3%2582%25A7%25E3%2583%2596%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258C%25E3%2582%258B%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E3%2581%25AA%25E3%2581%25A3%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:namboo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSkpRcWZWVXFzY0loaWJBUDlxYUc3V3pqeVUxdjZoZUJ3NEE2QThYMlY1bld0bmFQQXk9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>namboo</dc:creator></item><item><title><![CDATA[useStateの更新用関数は、なぜ最新の状態を参照できるのか。]]></title><description><![CDATA[
+ はじめに
+Reactにおいて最も使われているフックと言っても過言ではないuseStateですが、その中に更新用関数というものがあります。
+今回はこの更新用関数を、useStateが内部でどのように動いているのかという観点で深掘ってみました。
+
+ 前提
+下記のようなnumber型のstateがあると仮定し、現在の数値に1を足すという関数を作ってみます。
+const [inputNumber, setInputNumber] = useState&lt;number&gt;(0)
+下記の場合、2つとも同じ結果になると思います。
+// パターン１
+const handleChange = ...]]></description><link>https://zenn.dev/medicalforce/articles/d7fc654a4dbd3b</link><guid isPermaLink="true">https://zenn.dev/medicalforce/articles/d7fc654a4dbd3b</guid><pubDate>Mon, 20 Jan 2025 07:45:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vJi6wyUM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:useState%25E3%2581%25AE%25E6%259B%25B4%25E6%2596%25B0%25E7%2594%25A8%25E9%2596%25A2%25E6%2595%25B0%25E3%2581%25AF%25E3%2580%2581%25E3%2581%25AA%25E3%2581%259C%25E6%259C%2580%25E6%2596%25B0%25E3%2581%25AE%25E7%258A%25B6%25E6%2585%258B%25E3%2582%2592%25E5%258F%2582%25E7%2585%25A7%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258B%25E3%2581%25AE%25E3%2581%258B%25E3%2580%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2582%2586%25E3%2581%259A%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzkyZjY0YWIzNTQuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%25A1%25E3%2583%2587%25E3%2582%25A3%25E3%2582%25AB%25E3%2583%25AB%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25BC%25E3%2582%25B9%2520%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzEyZDE3ZjA5MjcuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ゆず</dc:creator></item><item><title><![CDATA[google app script から kintone のレコードを更新（フィールドの値を指定）]]></title><description><![CDATA[kintoneのデータを、クエリを使って１件更新するスクリプトです。
+
+ はじめに
+以下の環境で動作しています。
+
+google app script … Chrome V8ランタイム利用
+kintone … クラウド最新版（2025年1月時点）
+
+
+ 用意するもの
+他のスクリプトと同じく、google app script　→　プロジェクトの設定　→　スクリプトプロパティ　に、以下３つのプロパティを作成します。
+それぞれ取得元のアプリにあわせてください。
+なお更新先のフィールドコードに「ルックアップ」フィールドがあるか否かでappTokenの記載方法が異なります。
+
+
+
+プロパティ名
+...]]></description><link>https://zenn.dev/nori_suke/articles/b6f82a193343f2</link><guid isPermaLink="true">https://zenn.dev/nori_suke/articles/b6f82a193343f2</guid><pubDate>Mon, 20 Jan 2025 06:30:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vWxmcEHU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:google%2520app%2520script%2520%25E3%2581%258B%25E3%2582%2589%2520kintone%2520%25E3%2581%25AE%25E3%2583%25AC%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2582%2592%25E6%259B%25B4%25E6%2596%25B0%25EF%25BC%2588%25E3%2583%2595%25E3%2582%25A3%25E3%2583%25BC%25E3%2583%25AB%25E3%2583%2589%25E3%2581%25AE%25E5%2580%25A4%25E3%2582%2592%25E6%258C%2587%25E5%25AE%259A%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%25B5%25B7%25E8%258B%2594%25E5%258A%25A9%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhlZDRmZjExNzcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>海苔助</dc:creator></item><item><title><![CDATA[Uppy でファイルアップロードする]]></title><description><![CDATA[
+ Uppy とは
+https://uppy.io/
+Uppy はブラウザー向けファイルアップロードライブラリーで、シンプルかつ高機能な UI を簡単に統合できます。
+
+高機能なダッシュボード
+
+ドラッグ &amp; ドロップ
+リモート URL、Web カメラ、マイク音声、など豊富な入力ソース
+
+
+プラグインシステムによる拡張が可能
+React, Vue, Svelte などの UI フレームワークに統合可能
+
+https://stackblitz.com/edit/vitejs-vite-zaqyaf?file=main.js
+
+ Uploader の種類
+
+Transloadit[1...]]></description><link>https://zenn.dev/manabo_tech/articles/2025-01-07-uppy-demo</link><guid isPermaLink="true">https://zenn.dev/manabo_tech/articles/2025-01-07-uppy-demo</guid><pubDate>Mon, 20 Jan 2025 05:39:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--SRfvcTY2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Uppy%2520%25E3%2581%25A7%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2589%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:submax%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U5MzVlZTI4YWEuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:manabo%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I4ZDIxZmEyYzUuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>submax</dc:creator></item><item><title><![CDATA[google app script から kintone のレコードを更新（レコード番号を指定）]]></title><description><![CDATA[kintoneのデータを、クエリを使って１件更新するスクリプトです。
+
+ はじめに
+以下の環境で動作しています。
+
+google app script … Chrome V8ランタイム利用
+kintone … クラウド最新版（2025年1月時点）
+
+
+ 用意するもの
+他のスクリプトと同じく、google app script　→　プロジェクトの設定　→　スクリプトプロパティ　に、以下３つのプロパティを作成します。
+それぞれ取得元のアプリにあわせてください。
+なお追加先のフィールドコードに「ルックアップ」フィールドがあるか否かでappTokenの記載方法が異なります。
+
+
+
+プロパティ名
+...]]></description><link>https://zenn.dev/nori_suke/articles/7e0ca7157f783e</link><guid isPermaLink="true">https://zenn.dev/nori_suke/articles/7e0ca7157f783e</guid><pubDate>Mon, 20 Jan 2025 05:16:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--rsgHOOJW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:google%2520app%2520script%2520%25E3%2581%258B%25E3%2582%2589%2520kintone%2520%25E3%2581%25AE%25E3%2583%25AC%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2582%2592%25E6%259B%25B4%25E6%2596%25B0%25EF%25BC%2588%25E3%2583%25AC%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E7%2595%25AA%25E5%258F%25B7%25E3%2582%2592%25E6%258C%2587%25E5%25AE%259A%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%25B5%25B7%25E8%258B%2594%25E5%258A%25A9%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhlZDRmZjExNzcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>海苔助</dc:creator></item></channel></rss>
