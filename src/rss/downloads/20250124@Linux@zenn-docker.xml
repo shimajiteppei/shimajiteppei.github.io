@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Docker」のフィード]]></title><description><![CDATA[Zennのトピック「Docker」のRSSフィードです]]></description><link>https://zenn.dev/topics/docker</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/75b80a5922.png</url><title>Zennの「Docker」のフィード</title><link>https://zenn.dev/topics/docker</link></image><generator>zenn.dev</generator><lastBuildDate>Fri, 24 Jan 2025 07:14:54 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/docker/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Mountpoint for Amazon S3をDockerで起動する]]></title><description><![CDATA[
+ 概要
+Mountpoint for Amazon S3はS3バケット内のオブジェクトをローカルファイルと同じように扱えるようにマウントするツールです。
+特徴は高スループットな点で、読み取り負荷の大きい大規模アプリケーションの本番利用にも耐えられると謳っています。
+
+参考: Mountpoint for Amazon S3 – 一般公開されており、本番環境のワークロードにも対応可能 | Amazon Web Services ブログ
+
+
+Mountpoint for Amazon S3はLinux系OSをサポートしていますが、macOSはサポート外です。
+そこで、多くの環境で実行できる...]]></description><link>https://zenn.dev/arapower/articles/8518b1acb9c7e2</link><guid isPermaLink="true">https://zenn.dev/arapower/articles/8518b1acb9c7e2</guid><pubDate>Thu, 23 Jan 2025 23:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--w9Eyuz18--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Mountpoint%2520for%2520Amazon%2520S3%25E3%2582%2592Docker%25E3%2581%25A7%25E8%25B5%25B7%25E5%258B%2595%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:arapower%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY4YzdiODNkOTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>arapower</dc:creator></item><item><title><![CDATA[Docker for Mac のマルウェア騒動後に Docker を再インストールしても起動しない場合のヒント]]></title><description><![CDATA[これで完全に解決するとは言い切れないのでヒントと書いています。
+
+ 対処法だけ知りたい方
+以下のどれかで解決する可能性があります。
+
+Docker.app にフルディスクアクセスの権限を付与
+
+
+システム設定 -&gt; プライバシーとセキュリティ の中にあります。
+
+
+関連ファイルを削除してから再インストール
+
+以下
+
+~/Library/Containers/com.docker.docker
+~/Library/Group\ Containers/group.com.docker
+~/.docker
+
+
+削除できない場合はターミナルにフルディスクアクセスの権限を付与してください。
+...]]></description><link>https://zenn.dev/euxn23/articles/b2eeef22589b8c</link><guid isPermaLink="true">https://zenn.dev/euxn23/articles/b2eeef22589b8c</guid><pubDate>Thu, 23 Jan 2025 19:12:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ycJU-ENg--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%2520for%2520Mac%2520%25E3%2581%25AE%25E3%2583%259E%25E3%2583%25AB%25E3%2582%25A6%25E3%2582%25A7%25E3%2582%25A2%25E9%25A8%2592%25E5%258B%2595%25E5%25BE%258C%25E3%2581%25AB%2520Docker%2520%25E3%2582%2592%25E5%2586%258D%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%2597%25E3%2581%25A6%25E3%2582%2582%25E8%25B5%25B7%25E5%258B%2595%25E3%2581%2597%25E3%2581%25AA%25E3%2581%2584%25E5%25A0%25B4%25E5%2590%2588%25E3%2581%25AE%25E3%2583%2592%25E3%2583%25B3%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%25A6%25E3%2583%25BC%25E3%2583%25B3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2o0cUtwdExNU0hJbGJoaFVxd2FsSmloNWp4Q1RqSFdZM1M4OHNrPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ユーン</dc:creator></item><item><title><![CDATA[Docker×Nuxt3 EBUSY: resource busy or locked, rmdir '/app/.output']]></title><description><![CDATA[あまりみないエラーに出会ったので記録しておきます。
+
+ 環境
+
+Docker Desktop for Mac
+Nuxt3.13.0
+
+
+ 状況
+エラー監視ツールとしてSentryを導入しました。(https://docs.sentry.io/platforms/javascript/guides/nuxt/)
+導入後、以下コマンドで、nuxt generateを実行時に、エラーが起こるようになりました。
+(npm run devでのローカル開発環境での起動は問題なし)
+
+terminal
+# コマンド
+docker run -v "$(pwd)/app/.output:/app/.out...]]></description><link>https://zenn.dev/michan74/articles/9772f64cd59fdf</link><guid isPermaLink="true">https://zenn.dev/michan74/articles/9772f64cd59fdf</guid><pubDate>Thu, 23 Jan 2025 13:13:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--yjZQT1a_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%25C3%2597Nuxt3%2520EBUSY%253A%2520resource%2520busy%2520or%2520locked%252C%2520rmdir%2520%2527%252Fapp%252F...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A9%25E3%2582%2589%25E3%2582%2584%25E3%2581%258D%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJhOGZiMDg3OTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>どらやき</dc:creator></item><item><title><![CDATA[Alfresco Governance Services Community Editionを起動する]]></title><description><![CDATA[
+ 概要
+以下のマニュアルを参考に、Alfresco Governance Services Community Editionのインストールを試みましたので、備忘録です。
+https://support.hyland.com/r/Alfresco/Alfresco-Governance-Services-Community-Edition/23.4/Alfresco-Governance-Services-Community-Edition
+
+ 参考
+同様の取り組みとして、以下があります。こちらも参考にしてください。
+https://irisawadojo.blogspot.com/2...]]></description><link>https://zenn.dev/nakamura196/articles/8da7161ff3df30</link><guid isPermaLink="true">https://zenn.dev/nakamura196/articles/8da7161ff3df30</guid><pubDate>Thu, 23 Jan 2025 12:47:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--o9WvcYzB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Alfresco%2520Governance%2520Services%2520Community%2520Edition%25E3%2582%2592%25E8%25B5%25B7%25E5%258B%2595%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nakamura196%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pkd3BpX1gzTWIzV3VqTnVnV2tPTlJlU3VsNFNTN1BNMWlPQm9LRm5JPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nakamura196</dc:creator></item><item><title><![CDATA[【Gitea】Docker Composeで建てたGitea Runnerのエラー「Could not resolve host」の解決策]]></title><description><![CDATA[僕はセルフホストが好きなので基本的にGiteaを使っているんだけど、その流れでGitea Runnerを使ってみたくなった。
+それでDocker Composeで建てたGitea Runnerがうまく作動しなかった。
+その問題を解決できたので、メモとして残そうと思う。
+
+ 今回の環境
+
+Docker 27.4.1
+Docker Compose 2.32.1
+Gitea 1.23.1
+Gitea Runner 0.2.11
+
+
+ Giteaに関する前提知識
+GiteaってのはGitHubに似たサービスで、自分のサーバーでホストできるのが特徴。
+セルフホストできるGit管理サービスは多いけど...]]></description><link>https://zenn.dev/spa_9999/articles/e560d772e3ef4c</link><guid isPermaLink="true">https://zenn.dev/spa_9999/articles/e560d772e3ef4c</guid><pubDate>Thu, 23 Jan 2025 09:00:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vSDEi66N--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Gitea%25E3%2580%2591Docker%2520Compose%25E3%2581%25A7%25E5%25BB%25BA%25E3%2581%25A6%25E3%2581%259FGitea%2520Runner%25E3%2581%25AE%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E3%2580%258CCould%2520not%2520resol...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:spa%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBmYjhhZjJhN2MuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>spa</dc:creator></item><item><title><![CDATA[taskfile.yaml で特定の Docker イメージを docker compose 対象外にする]]></title><description><![CDATA[
+ やりたいこと
+
+
+taskfile.yaml で特定の Docker イメージを docker compose コマンドの対象外にしたい
+
+
+ 解決方法
+
+ docker-compose.yml でサービスを制御
+
+
+docker compose コマンドは、docker-compose.yml 内で定義されたサービスを基に動作する
+そのため、対象外にしたいサービスを profiles 機能や条件で制御する
+
+
+taskfile.yml
+version: '3.9'
+services:
+  app:
+    image: your-app-image
+    profiles:
+  ...]]></description><link>https://zenn.dev/murtmo/articles/9b94ae56d4e7f0</link><guid isPermaLink="true">https://zenn.dev/murtmo/articles/9b94ae56d4e7f0</guid><pubDate>Thu, 23 Jan 2025 08:42:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Uk41kpIg--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:taskfile.yaml%2520%25E3%2581%25A7%25E7%2589%25B9%25E5%25AE%259A%25E3%2581%25AE%2520Docker%2520%25E3%2582%25A4%25E3%2583%25A1%25E3%2583%25BC%25E3%2582%25B8%25E3%2582%2592%2520docker%2520compose%2520%25E5%25AF%25BE%25E8%25B1%25A1%25E5%25A4%2596%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:murtmo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM0ZjFhNzFhNWQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>murtmo</dc:creator></item><item><title><![CDATA[Docker の容量が不足して no space left on device と出た際のメモ]]></title><description><![CDATA[
+ 問題
+
+docker compose でビルドした際、Error response from daemon: failed to update store for object type *libnetwork.Endpoint: write /var/lib/docker/network/files/local-kv.db: no space left on deviceというエラー
+不要なデータを削除してストレージを空ける必要があるとのこと。
+
+
+ 解決フロー
+
+ 1. docker system df でストレージ容量を確認
+$ docker system df
+TYPE   ...]]></description><link>https://zenn.dev/murtmo/articles/ca3ada75f632d7</link><guid isPermaLink="true">https://zenn.dev/murtmo/articles/ca3ada75f632d7</guid><pubDate>Thu, 23 Jan 2025 08:35:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--m2ONp9NR--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%2520%25E3%2581%25AE%25E5%25AE%25B9%25E9%2587%258F%25E3%2581%258C%25E4%25B8%258D%25E8%25B6%25B3%25E3%2581%2597%25E3%2581%25A6%2520no%2520space%2520left%2520on%2520device%2520%25E3%2581%25A8%25E5%2587%25BA%25E3%2581%259F%25E9%259A%259B%25E3%2581%25AE%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:murtmo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM0ZjFhNzFhNWQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>murtmo</dc:creator></item><item><title><![CDATA[docker-composeを使用したDBの作成について]]></title><description><![CDATA[DBサーバーを並列で起動して遊んで見たので、その覚書
+
+ docker-composeとは
+複数のコンテナを同時に起動させるときに役立つツールのこと。
+
+ メリット
+
+WebサーバーとDBサーバーの両方同時に使いたいケースの場合、一度に立ち上げることができる。
+ネットワーク設定が簡単
+
+
+ 使い方
+
+compose.ymlを作成
+
+compose.ymlファイル内で今回使いたいDBのimageやコンテナ名、環境変数、解放するポート等を書き込む必要がある。
+今回はDockerの公式からmysqlの別バージョンを参照
+
+compose.yml
+version: '3'
+
+services:
+...]]></description><link>https://zenn.dev/shari/articles/bd29f15fc5131e</link><guid isPermaLink="true">https://zenn.dev/shari/articles/bd29f15fc5131e</guid><pubDate>Wed, 22 Jan 2025 10:13:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Pz14vq5S--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:docker-compose%25E3%2582%2592%25E4%25BD%25BF%25E7%2594%25A8%25E3%2581%2597%25E3%2581%259FDB%25E3%2581%25AE%25E4%25BD%259C%25E6%2588%2590%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Ryo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U4M2Y3ZWZjZTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Ryo</dc:creator></item><item><title><![CDATA[poetry バージョン2.0.0 のDocker環境でbuildできなくなった]]></title><description><![CDATA[過去作成済みのプロジェクトをdocker compose up -dで起動しようとたら以下のようなエラーが出て起動しなくなってしまった。
+Installing the current project: hoge-pj (0.1.0)
+Error: The current project could not be installed: No file/folder found for package hoge-pj
+If you do not want to install the current project use --no-root.
+If you want to use Poet...]]></description><link>https://zenn.dev/gon9a/articles/97d59105e1aed1</link><guid isPermaLink="true">https://zenn.dev/gon9a/articles/97d59105e1aed1</guid><pubDate>Tue, 21 Jan 2025 04:52:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--zLLkAd7s--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:poetry%2520%25E3%2583%2590%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%25A7%25E3%2583%25B32.0.0%2520%25E3%2581%25AEDocker%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25A7build%25E3%2581%25A7%25E3%2581%258D%25E3%2581%25AA%25E3%2581%258F%25E3%2581%25AA%25E3%2581%25A3%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:gon9a%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U3M2RmMWJiMDcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>gon9a</dc:creator></item><item><title><![CDATA[GitHub Actionsでarm64 runnerが利用できるようになったので、QEMUを使わずにDockerイメージをビルドする]]></title><description><![CDATA[
+ フリープランでもARM64 Runnerが使えるようになった
+GitHub Team と Enterprise Cloud plansに限られていたARM64 Runnerが、2025/01/16からパブリックレポジトリならフリープランでも利用できるようになりました。
+https://github.blog/news-insights/product-news/arm64-on-github-actions-powering-faster-more-efficient-build-systems/
+これにより、ワークフロー内のruns-onでubuntu-24.04-armとubun...]]></description><link>https://zenn.dev/till0196/articles/8efa063c953350</link><guid isPermaLink="true">https://zenn.dev/till0196/articles/8efa063c953350</guid><pubDate>Tue, 21 Jan 2025 04:45:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--mla7d4qv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:GitHub%2520Actions%25E3%2581%25A7arm64%2520runner%25E3%2581%258C%25E5%2588%25A9%25E7%2594%25A8%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258B%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E3%2581%25AA%25E3%2581%25A3%25E3%2581%259F%25E3%2581%25AE%25E3%2581%25A7%25E3%2580%2581QEMU%25E3%2582%2592%25E4%25BD%25BF%25E3%2582%258F%25E3%2581%259A%25E3%2581%25ABDocker...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Till0196%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSUNOdnRfVEQ3cGJrTllXSFhiV2Q5a3dYVi03Z1VGQUxwdzhxeDJSOHloRHVlRnAxd0E9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Till0196</dc:creator></item><item><title><![CDATA[DockerにおけるENTRYPOINTとCMDの関係と上書き方法]]></title><description><![CDATA[Dockerにおけるエンドポイント（ENTRYPOINT）とコマンド（CMD）は、コンテナの実行方法を定義するための指示ですが、それぞれ異なる役割を持っています。
+
+ ENTRYPOINT
+
+
+ENTRYPOINT はコンテナが実行する主なプロセスを定義します。
+常に実行されるプロセスを指定するために使用されることが多く、指定されたコマンドはコンテナが起動するときに必ず実行されます。
+
+ENTRYPOINT は配列形式または文字列形式の2つの形式で指定できます。
+
+配列形式: ENTRYPOINT ["executable", "param1", "param2"]
+
+文字列形式: EN...]]></description><link>https://zenn.dev/wakit/articles/3390361797a126</link><guid isPermaLink="true">https://zenn.dev/wakit/articles/3390361797a126</guid><pubDate>Tue, 21 Jan 2025 02:19:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dkIEbXVN--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%25E3%2581%25AB%25E3%2581%258A%25E3%2581%2591%25E3%2582%258BENTRYPOINT%25E3%2581%25A8CMD%25E3%2581%25AE%25E9%2596%25A2%25E4%25BF%2582%25E3%2581%25A8%25E4%25B8%258A%25E6%259B%25B8%25E3%2581%258D%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:wakit%2528y.ueno%2529%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAzMTZiNTZiN2QuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>wakit(y.ueno)</dc:creator></item><item><title><![CDATA[「A server error occurred.  Please contact the administrator.」の対処の流れ]]></title><description><![CDATA[ django-admin startproject ｘｘｘｘ .
+を使わずにDjangoプロジェクトを初めて構築しようとしたところ、
+「A server error occurred.  Please contact the administrator.」
+というエラーが起きたので、その対処の流れをまとめました。
+
+ 条件
+
+ 前提
+WindowsでVS Codeで『Dev Containers』機能を使用し、
+Dockerコンテナ内にDjangoプロジェクトを構築した状態
+
+ 開発コンテナーのフォルダー構成
+
+ コンテナー側
+
+
+ ローカル
+
+上記のプロジェクトは
+「C:\Users...]]></description><link>https://zenn.dev/40_comeback_eng/articles/ebca894af6c7ca</link><guid isPermaLink="true">https://zenn.dev/40_comeback_eng/articles/ebca894af6c7ca</guid><pubDate>Tue, 21 Jan 2025 00:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_2hbUG3V--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%258CA%2520server%2520error%2520occurred.%2520%2520Please%2520contact%2520the%2520administrat...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%25AF%25E3%2583%258B%25E3%2581%258B%25E3%2581%259A%254040%25E6%25AD%25B3%2520%25E5%2587%25BA%25E6%2588%25BB%25E3%2582%258A%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg3ZGNhZmRmOGUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ワニかず@40歳 出戻りエンジニア</dc:creator></item><item><title><![CDATA[Laravelの開発環境をDockerで構築する]]></title><description><![CDATA[
+ 開発環境
+
+macOS
+VSCode
+Laravel
+PHP
+MySQL
+NGINX
+
+
+ 行いたいこと
+
+Laravelの開発環境をDockerで構築したのでその流れを記載します
+
+
+
+
+ Laravelの開発環境をDockerで構築する手順
+・Laravel開発環境を構築していくディレクトリの作成をしファイルに移動する
+
+ ターミナル
+$ mkdir Laravel_app　　# ディレクトリの作成
+
+$ cd Laravel_app　 # ディレクトリへ移動
+
+
+※ 作成したLaravel_appディレクトリの配下に以下のようなディレクトリとファイルを作成する
+
+
+・Larav...]]></description><link>https://zenn.dev/tteaoocl/articles/15e4ec3173c682</link><guid isPermaLink="true">https://zenn.dev/tteaoocl/articles/15e4ec3173c682</guid><pubDate>Mon, 20 Jan 2025 17:04:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5MQ-0Eiw--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Laravel%25E3%2581%25AE%25E9%2596%258B%25E7%2599%25BA%25E7%2592%25B0%25E5%25A2%2583%25E3%2582%2592Docker%25E3%2581%25A7%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hasegawa%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSkYxQWtRaGVBVlJ2Tldac0dZQUVSbFAyX2dQUktEZlZiQUhTMUlIOEM2T3c9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hasegawa</dc:creator></item><item><title><![CDATA[VSCodeのdevcontainerでAtCoder環境を構築]]></title><description><![CDATA[せっかくだからいろいろな言語でAtCoderをやってみたい、と思っている皆さんには、ちょっと参考になることもあるかと。
+
+ 環境の前提
+
+Windows
+WSL2
+VSCode
+
+
+ ディレクトリ構造
+冒頭から、ディレクトリ構造を。
+Workspaces
+        ├─ C++
+        │   ├─ .devcontainer
+        │   │   ├─ Dockerfile
+        │   │
+        │   ├─ .vscode
+        │   │   ├─ tasks.json
+        │   │   ├─ cpp.code-...]]></description><link>https://zenn.dev/sukenori/articles/405f24e8ef4b5d</link><guid isPermaLink="true">https://zenn.dev/sukenori/articles/405f24e8ef4b5d</guid><pubDate>Mon, 20 Jan 2025 13:22:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--aytqtl6L--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:VSCode%25E3%2581%25AEdevcontainer%25E3%2581%25A7AtCoder%25E7%2592%25B0%25E5%25A2%2583%25E3%2582%2592%25E6%25A7%258B%25E7%25AF%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:sukenori%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSTlhTEp0Wm9BdW9kdWluRUhDNUx6VUhYRjRJc0FsX1g4SW9xNlVYRlJhSUk2S3E4Y2dTUT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sukenori</dc:creator></item><item><title><![CDATA[AtCoder環境のDockerfile: PyPy(+CPython)編]]></title><description><![CDATA[さんざん擦られたお題ではありますが、ご参考まで。
+
+ 前提の環境
+
+Windows
+WSL2
+VSCode
+Docker Desktop
+
+
+ dockerfile
+ubuntuのイメージを下書きに、2023年の言語アップデート時の提案シート通りにinstall commandを置いていくだけ、のはずが、いざやってみると、2025年の現在ではライブラリ達のくだりでエラーを吐き続け、まともに焼き上がりませんでした。
+結論としては、PyPyのイメージに、バージョン名を抜いたライブラリのpipインストールを並べて、その後、CPythonのインストールをしたらうまくいきましたよ、というだけの話で...]]></description><link>https://zenn.dev/sukenori/articles/fc4428059386b2</link><guid isPermaLink="true">https://zenn.dev/sukenori/articles/fc4428059386b2</guid><pubDate>Mon, 20 Jan 2025 10:54:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--EjkDkKIR--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AtCoder%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25AEDockerfile%253A%2520PyPy%2528%252BCPython%2529%25E7%25B7%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:sukenori%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSTlhTEp0Wm9BdW9kdWluRUhDNUx6VUhYRjRJc0FsX1g4SW9xNlVYRlJhSUk2S3E4Y2dTUT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sukenori</dc:creator></item><item><title><![CDATA[Docker × Kubernetes をはじめる]]></title><description><![CDATA[
+ はじめに
+DockerやKubernetesについて知らないことが多かったので、これを機にハンズオンの題材として勉強し直してみました。この記事では、
+
+DockerやKubernetesとは何かを学びたい方
+Dockerを使った仮想環境の構築をしたい方
+Kubernetesのマニフェストを使ってみたい方
+
+を対象として、DockerとKubernetesの基本概念を交えたハンズオンを行います。
+※ 1時間半程度を想定しています。
+
+ 本ハンズオンの流れ
+
+Dockerを使った仮想環境の構築をして、Webサーバを立てる。
+Kubernetes上でWordpressを動かす。
+
+
+ Do...]]></description><link>https://zenn.dev/areaeffectcloud/articles/1dad29586fd3f6</link><guid isPermaLink="true">https://zenn.dev/areaeffectcloud/articles/1dad29586fd3f6</guid><pubDate>Mon, 20 Jan 2025 06:06:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---ShM102y--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%2520%25C3%2597%2520Kubernetes%2520%25E3%2582%2592%25E3%2581%25AF%25E3%2581%2598%25E3%2582%2581%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:AreaEffectCloud%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTDJnYi1rWE1fRGJVRzJMemRnMFZxUFE1TWMySTg3V3o1YWt5TnhmckRsd1c1MTdHUT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>AreaEffectCloud</dc:creator></item><item><title><![CDATA[LeftHook で PHPStan と PHP-CS-Fixer と PHPUnit を使う]]></title><description><![CDATA[
+ はじめに
+PHP の開発でよく使う以下のツールを Lefthook で動かしてみたので備忘録。
+
+PHPStan
+PHP-CS-Fixer
+PHPUnit
+
+環境に依存したくなかったので Docker を使って実行してみる。
+
+ 前提
+
+以下がインストールされていること。
+
+Lefthook
+Docker
+
+
+lefthook.yml は設定済み。
+
+
+ セットアップ
+あらかじめ lefthook.yml があるディレクトリ内で以下を実行しておく必要がある。
+% lefthook install
+動作確認をしたディレクトリ構成は以下。
+├── .git
+├── .php-cs-fix...]]></description><link>https://zenn.dev/oppara/articles/lefthook-phpstan-phpcsfixer</link><guid isPermaLink="true">https://zenn.dev/oppara/articles/lefthook-phpstan-phpcsfixer</guid><pubDate>Sun, 19 Jan 2025 14:49:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Z9yHG6fv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:LeftHook%2520%25E3%2581%25A7%2520PHPStan%2520%25E3%2581%25A8%2520PHP-CS-Fixer%2520%25E3%2581%25A8%2520PHPUnit%2520%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:oppara%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dyYTRKSGo5UzNEckZ0dTlwcUd5d0V4ZEZZTjZmS0JUQjBkTkthdFE9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>oppara</dc:creator></item><item><title><![CDATA[VSCodeの開発コンテナ、いつどうやって開いたやつだっけ]]></title><description><![CDATA[
+ やりたいこと
+VSCode Dev Containers、便利でよく使っています。
+しかしある時、「このコンテナはどのコマンドから起動したんだっけ」「どのDockerfileから作ったんだっけ」といったことを確認したい場面に遭遇しました。
+そこで、VSCodeで現在実行中のコンテナの情報を確認するコマンドをメモしておきます。
+
+ 結論
+
+
+[開発コンテナ内で実行] 調べたいコンテナのIDを取得（正確には先頭10文字）
+hostname
+
+
+
+[ホストマシンで実行] コンテナIDでinspectし、詳細情報を確認
+docker inspect &lt;コンテナID&gt; | less...]]></description><link>https://zenn.dev/cherr/articles/4e8ee2aa2c923b</link><guid isPermaLink="true">https://zenn.dev/cherr/articles/4e8ee2aa2c923b</guid><pubDate>Sun, 19 Jan 2025 13:07:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2fJ5-kzR--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:VSCode%25E3%2581%25AE%25E9%2596%258B%25E7%2599%25BA%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2586%25E3%2583%258A%25E3%2580%2581%25E3%2581%2584%25E3%2581%25A4%25E3%2581%25A9%25E3%2581%2586%25E3%2582%2584%25E3%2581%25A3%25E3%2581%25A6%25E9%2596%258B%25E3%2581%2584%25E3%2581%259F%25E3%2582%2584%25E3%2581%25A4%25E3%2581%25A0%25E3%2581%25A3%25E3%2581%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Cherr%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2IyOWI4OGMyMmQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Cherr</dc:creator></item><item><title><![CDATA[Docker：基本操作]]></title><description><![CDATA[
+ Docker基本操作
+
+ コマンド
+
+ dockerイメージ関連
+
+公式のdockerイメージを検索する
+
+
+キーワード：nginx
+docker search {キーワード} --filter is-official=true
+
+
+イメージを取得する
+
+
+キーワード：nginx
+docker image pull {キーワード}
+
+
+イメージの確認
+
+// （docker imagsに省略可能）
+docker image ls
+
+イメージの起動
+
+
+キーワード：ubuntu
+docker run {イメージ名} cat /etc/issue
+
+
+イメージの起動（bash）
+
+
+キー...]]></description><link>https://zenn.dev/tomotiro/articles/893209bd5931b2</link><guid isPermaLink="true">https://zenn.dev/tomotiro/articles/893209bd5931b2</guid><pubDate>Sun, 19 Jan 2025 11:56:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--WrsrJqjj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%25EF%25BC%259A%25E5%259F%25BA%25E6%259C%25AC%25E6%2593%258D%25E4%25BD%259C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%2588%25E3%2583%25A2%25E3%2583%2581%25E3%2583%25AD%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc1OGYxMmE5OTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>トモチロ</dc:creator></item><item><title><![CDATA[【開発環境】TypeScript, Express, Docker, VScodeでリモートデバッグ]]></title><description><![CDATA[
+ TL;DR
+
+ExpressをVScodeでリモートデバッグしたい
+サーバーサイドのDockerコンテナに、リモートデバッグ用のポート9229を開放する
+
+
+ ディレクトリ構成
+
+Reactプロジェクトのapiパッケージ内にExpressがプロジェクトのある変な感じの構成？
+
+frontend/, backens/のような一般的なパッケージ構成の場合、launch.json, tsconfig.jsonのディレクトリ指定部分とかをええ感じにしとって下さい
+
+.vscode/
+├── launch.json
+docker/
+├── backend.Dockerfile
+├── fron...]]></description><link>https://zenn.dev/kazumadev/articles/7f8d954ee78bfc</link><guid isPermaLink="true">https://zenn.dev/kazumadev/articles/7f8d954ee78bfc</guid><pubDate>Sun, 19 Jan 2025 06:00:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--S02eZ-gS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E9%2596%258B%25E7%2599%25BA%25E7%2592%25B0%25E5%25A2%2583%25E3%2580%2591TypeScript%252C%2520Express%252C%2520Docker%252C%2520VScode%25E3%2581%25A7%25E3%2583%25AA%25E3%2583%25A2%25E3%2583%25BC%25E3%2583%2588%25E3%2583%2587%25E3%2583%2590%25E3%2583%2583%25E3%2582%25B0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kazumakishimoto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lRWGJ1cy1vSkozOE5FYjVvdDBlSGdLQzFZOWFEQVZ3UFR6VDdNUVE9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kazumakishimoto</dc:creator></item></channel></rss>
