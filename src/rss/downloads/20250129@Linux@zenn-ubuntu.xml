@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Ubuntu」のフィード]]></title><description><![CDATA[Zennのトピック「Ubuntu」のRSSフィードです]]></description><link>https://zenn.dev/topics/ubuntu</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/8c2cdbc5b3.png</url><title>Zennの「Ubuntu」のフィード</title><link>https://zenn.dev/topics/ubuntu</link></image><generator>zenn.dev</generator><lastBuildDate>Wed, 29 Jan 2025 02:01:44 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/ubuntu/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Linuxの暗号化解除をコンソール以外で行うためにClevis-TangとDropbaerを使う]]></title><description><![CDATA[自宅内に勉強用のLinuxサーバーを建てるにあたって、ルートドライブの暗号化解除方法を検討しました。その結果Clevis-Tangによる解除とDropbearによるSSH接続を採用することで、サーバーの物理コンソールと並行した暗号化解除を採用しました。以下、選定理由と設定方法を書いておきます。
+LinuxはUbuntu 24.04 Serverを使用し、VMWare Workstation上で実験しました。その後、ここに記した方法をDebian 12にも利用できることを実機で確認しています。
+
+ Debian/Ubuntuの全ディスク暗号化とinitramfs
+まず大事なことから。Deb...]]></description><link>https://zenn.dev/seiichihorie/articles/20250125-clevis-dropbear</link><guid isPermaLink="true">https://zenn.dev/seiichihorie/articles/20250125-clevis-dropbear</guid><pubDate>Wed, 29 Jan 2025 01:14:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--KeWRssc_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%25E3%2581%25AE%25E6%259A%2597%25E5%258F%25B7%25E5%258C%2596%25E8%25A7%25A3%25E9%2599%25A4%25E3%2582%2592%25E3%2582%25B3%25E3%2583%25B3%25E3%2582%25BD%25E3%2583%25BC%25E3%2583%25AB%25E4%25BB%25A5%25E5%25A4%2596%25E3%2581%25A7%25E8%25A1%258C%25E3%2581%2586%25E3%2581%259F%25E3%2582%2581%25E3%2581%25ABClevis-Tang%25E3%2581%25A8Dropbaer%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25A0%2580%25E6%25B1%259F%25E8%25AA%25A0%25E4%25B8%2580%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS3hveFBEMG4wNVZyT182d0hPbUpld1BTOTdVOE1Hdzg0R09IY1A5Tm1ETmk0N1V0QWZTQT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>堀江誠一</dc:creator></item><item><title><![CDATA[カーネル引数を使ってinitramfsのIPアドレスを固定にする]]></title><description><![CDATA[initramfsのアドレスを固定にする方法を以下に記します。暗号化されたUbuntuのルートファイルシステムをリモートから復号する方法を参考にしています。
+
+ 考え方
+initramfsはLinuxが動作を始める前にその下準備をする小さなLinuxです。initramfsはLinuxシステム本体と同じカーネルを使いますが、デーモン等は共用しません。
+動作中のinitramfsに介入するためにdorpbear SSHを使うのですが、その際IPアドレスがDHCPで割り振られていると何かと不都合です。そこで、IPアドレスを固定にする必要があります。
+initramfsでIPアドレスを指定する...]]></description><link>https://zenn.dev/seiichihorie/articles/20250129-fixed-initramfs-ipaddress</link><guid isPermaLink="true">https://zenn.dev/seiichihorie/articles/20250129-fixed-initramfs-ipaddress</guid><pubDate>Tue, 28 Jan 2025 23:38:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--XWS7Jlcx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25AB%25E3%2583%25BC%25E3%2583%258D%25E3%2583%25AB%25E5%25BC%2595%25E6%2595%25B0%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6initramfs%25E3%2581%25AEIP%25E3%2582%25A2%25E3%2583%2589%25E3%2583%25AC%25E3%2582%25B9%25E3%2582%2592%25E5%259B%25BA%25E5%25AE%259A%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25A0%2580%25E6%25B1%259F%25E8%25AA%25A0%25E4%25B8%2580%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS3hveFBEMG4wNVZyT182d0hPbUpld1BTOTdVOE1Hdzg0R09IY1A5Tm1ETmk0N1V0QWZTQT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>堀江誠一</dc:creator></item><item><title><![CDATA[WSL Ubuntuでcolimaが起動できない Could not access KVM kernel moduleの対処法]]></title><description><![CDATA[以下のようにcolimaのログを確認したところ、
+cat ~/.config/colima/_lima/colima/ha.stderr.log
+qemu-system-x86_64: Could not access KVM kernel module: Permission denied
+qemu-system-x86_64: failed to initialize kvm: Permission denied
+こんな感じで起動できない場合がある。
+これはWSLでKVMが有効になっていないことが要因。以下コマンドでkvmがインストールされているかを確認する。
+lsmod | gre...]]></description><link>https://zenn.dev/yokophys_h/articles/10a09a4db92923</link><guid isPermaLink="true">https://zenn.dev/yokophys_h/articles/10a09a4db92923</guid><pubDate>Tue, 28 Jan 2025 13:46:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8Ndb_BAY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:WSL%2520Ubuntu%25E3%2581%25A7colima%25E3%2581%258C%25E8%25B5%25B7%25E5%258B%2595%25E3%2581%25A7%25E3%2581%258D%25E3%2581%25AA%25E3%2581%2584%2520Could%2520not%2520access%2520KVM%2520kernel%2520modu...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:haruotsu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsveS5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>haruotsu</dc:creator></item><item><title><![CDATA[Netplanを使ってDebian/UbuntuのIPアドレスを固定にする]]></title><description><![CDATA[Debian/UbuntuでIPアドレスを固定にする必要がありましたので、その方法を記しておきます。
+
+Debian 12
+Ubuntu 24.04 Server
+
+Debian12に関しては以下の2か所を参考にしました。
+
+Debian 12 Netplan.io
+debian 12でnetplanを使って固定IPを設定する
+
+
+ （Debianのみ）Netplanをインストールする
+sudo apt update &amp;&amp; sudo apt install netplan.io openvswitch-switch
+コンフィギュレーションファイルのディレクトリを作っておき...]]></description><link>https://zenn.dev/seiichihorie/articles/20250127-fixed-ipaddress</link><guid isPermaLink="true">https://zenn.dev/seiichihorie/articles/20250127-fixed-ipaddress</guid><pubDate>Tue, 28 Jan 2025 12:53:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--pDxWcLC7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Netplan%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6Debian%252FUbuntu%25E3%2581%25AEIP%25E3%2582%25A2%25E3%2583%2589%25E3%2583%25AC%25E3%2582%25B9%25E3%2582%2592%25E5%259B%25BA%25E5%25AE%259A%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25A0%2580%25E6%25B1%259F%25E8%25AA%25A0%25E4%25B8%2580%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS3hveFBEMG4wNVZyT182d0hPbUpld1BTOTdVOE1Hdzg0R09IY1A5Tm1ETmk0N1V0QWZTQT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>堀江誠一</dc:creator></item><item><title><![CDATA[Let's Encrypt 証明書発行でつまずいたこと③]]></title><description><![CDATA[
+ 事象
+今回もLet's Encryptの証明書更新エラーが起きた事象があったのでその事象を共有します。
+
+ 使用環境
+
+AWS
+VPC
+AWS EC2 (OSはUbuntu)
+セキュリティグループでのIP制限
+
+
+ 状況
+
+Let's Encrypt証明書が更新できるかを確認するために更新前に"--dry run"オプションを付随させて、コマンド実行をしてみる。
+
+certbot renew --dry-run
+
+エラーが発生する。
+
+Failed to renew certificate amex.stg.i-sma.com with error: Some challenges ...]]></description><link>https://zenn.dev/headwaters/articles/0cd81ee4bbcac3</link><guid isPermaLink="true">https://zenn.dev/headwaters/articles/0cd81ee4bbcac3</guid><pubDate>Tue, 28 Jan 2025 08:25:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--FSKBouiw--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Let%2527s%2520Encrypt%2520%25E8%25A8%25BC%25E6%2598%258E%25E6%259B%25B8%25E7%2599%25BA%25E8%25A1%258C%25E3%2581%25A7%25E3%2581%25A4%25E3%2581%25BE%25E3%2581%259A%25E3%2581%2584%25E3%2581%259F%25E3%2581%2593%25E3%2581%25A8%25E2%2591%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:jemiya%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZjNGExY2UxMDYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2598%25E3%2583%2583%25E3%2583%2589%25E3%2582%25A6%25E3%2582%25A9%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%25BC%25E3%2582%25B9%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FlNjlhNTFjMDIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>jemiya</dc:creator></item><item><title><![CDATA[Ubuntu上でBrowser UseのWeb UIを動作させる手順]]></title><description><![CDATA[
+ Ubuntu上でBrowser UseのWeb UIを動作させる手順
+この記事では、Ubuntu上でBrowser UseのWeb UIを動作させる手順を説明します。必要なソフトウェアのインストールから、Web UIの起動までを段階的に解説します。
+
+ 1. リポジトリのクローン
+まず、GitHubからリポジトリをクローンします。
+git clone https://github.com/browser-use/web-ui.git
+cd web-ui
+
+ 2. Python環境のセットアップ
+
+ 2.1. pyenvのインストールと設定
+Python 3.11以上が必要です。pye...]]></description><link>https://zenn.dev/flyingv/articles/20250126_broser_use_runs_on_utuntu</link><guid isPermaLink="true">https://zenn.dev/flyingv/articles/20250126_broser_use_runs_on_utuntu</guid><pubDate>Sun, 26 Jan 2025 14:18:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7h5JHsK2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ubuntu%25E4%25B8%258A%25E3%2581%25A7Browser%2520Use%25E3%2581%25AEWeb%2520UI%25E3%2582%2592%25E5%258B%2595%25E4%25BD%259C%25E3%2581%2595%25E3%2581%259B%25E3%2582%258B%25E6%2589%258B%25E9%25A0%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:flyingv%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JkMTM0NmUzNjMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>flyingv</dc:creator></item><item><title><![CDATA[Ubuntuデスクトップに Mac からリモート接続する手順]]></title><description><![CDATA[
+ Ubuntuデスクトップに Mac からリモート接続する手順
+この記事では、Ubuntuデスクトップ環境に Mac からリモート接続する手順を解説します。リモート接続には xrdp を使用し、軽量なデスクトップ環境 XFCE を導入します。
+
+ 前提条件
+
+Ubuntu 24 がインストールされていること
+Mac からリモート接続するためのネットワーク環境が整っていること
+
+
+ 1. Ubuntu のバージョンを確認
+まず、Ubuntu のバージョンを確認します。以下のコマンドを実行してください。
+lsb_release -a
+出力例:
+No LSB modules are avai...]]></description><link>https://zenn.dev/flyingv/articles/20250126_remote_desktop_mac_to_utuntu</link><guid isPermaLink="true">https://zenn.dev/flyingv/articles/20250126_remote_desktop_mac_to_utuntu</guid><pubDate>Sun, 26 Jan 2025 12:39:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vTpk-hY8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ubuntu%25E3%2583%2587%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%2588%25E3%2583%2583%25E3%2583%2597%25E3%2581%25AB%2520Mac%2520%25E3%2581%258B%25E3%2582%2589%25E3%2583%25AA%25E3%2583%25A2%25E3%2583%25BC%25E3%2583%2588%25E6%258E%25A5%25E7%25B6%259A%25E3%2581%2599%25E3%2582%258B%25E6%2589%258B%25E9%25A0%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:flyingv%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JkMTM0NmUzNjMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>flyingv</dc:creator></item><item><title><![CDATA[Ubuntu Desktopで採用されてるフォントをDocker環境のPuppeteerでも使う]]></title><description><![CDATA[
+ Docker環境で日本語の字形が異なる
+Puppeteer公式ドキュメントに載ってるフォントをDocker環境に入れると、日本語の字形が本来とは異なってしまう
+
+詳しい原因
+https://ibemu.dev/post/2024/09/08/playwright-noto-font/
+
+ 代わりにUbuntu Desktopのフォントを入れる
+デスクトップPC向けのフォントリストなら、見栄えよくメンテされているはず
+絵文字フォントも入る
+https://old-releases.ubuntu.com/releases/24.04/ubuntu-24.04-desktop-amd64....]]></description><link>https://zenn.dev/hata6502/articles/8438ffd647d835</link><guid isPermaLink="true">https://zenn.dev/hata6502/articles/8438ffd647d835</guid><pubDate>Sat, 25 Jan 2025 07:49:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--afxvZreQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ubuntu%2520Desktop%25E3%2581%25A7%25E6%258E%25A1%25E7%2594%25A8%25E3%2581%2595%25E3%2582%258C%25E3%2581%25A6%25E3%2582%258B%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25B3%25E3%2583%2588%25E3%2582%2592Docker%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25AEPuppeteer%25E3%2581%25A7%25E3%2582%2582%25E4%25BD%25BF%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%25A0%25E3%2582%25AE%25E3%2583%25A5%25E3%2582%25A6%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2oxNDU3TUJDMGxGd0lUREV2aVpUSktzTmwyb3ExSDlQaWsyaG9rRGc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ムギュウ</dc:creator></item><item><title><![CDATA[USBシリアル変換のデバイス名を固定したい (Ubuntu)]]></title><description><![CDATA[
+ はじめに
+USBシリアル変換デバイスを複数つなぐと/dev/ttyUSBnが作成され、接続の順番ごとに番号が変わるので、udevルールファイル使ってデバイスの種類やシリアル番号ごとに固定したデバイス名を割り振りたい。今回はU2D2を使ってデバイス名を固定する。
+https://e-shop.robotis.co.jp/product.php?id=190
+
+ 手順
+
+ 0. U2D2とパソコンをUSBで接続する
+
+
+ 1. lsusbコマンドで表示してデバイスのベンダーIDとプロダクトIDを取得する
+lsusb
+以下のような表示が出ます。U2D2はFT232Hデバイスなのでその記述に...]]></description><link>https://zenn.dev/robohase01/articles/a24ba7327a4176</link><guid isPermaLink="true">https://zenn.dev/robohase01/articles/a24ba7327a4176</guid><pubDate>Wed, 22 Jan 2025 04:46:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--tmwKvbMP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:USB%25E3%2582%25B7%25E3%2583%25AA%25E3%2582%25A2%25E3%2583%25AB%25E5%25A4%2589%25E6%258F%259B%25E3%2581%25AE%25E3%2583%2587%25E3%2583%2590%25E3%2582%25A4%25E3%2582%25B9%25E5%2590%258D%25E3%2582%2592%25E5%259B%25BA%25E5%25AE%259A%25E3%2581%2597%25E3%2581%259F%25E3%2581%2584%2520%2528Ubuntu%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hasegawa%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVmMjc2MmI1MmQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hasegawa</dc:creator></item><item><title><![CDATA[[Ubuntu 22.04] systemctl(systemd)でシェルスクリプトを自動実行]]></title><description><![CDATA[Ubuntu起動時にシェルスクリプトを自動実行する手順の備忘録です。bashシェルを想定しているためzshなどを使用している方は適宜読み替えてください。
+
+ 手順
+
+ 1. シェルスクリプトを作成
+任意の場所でシェルスクリプトを作成します。
+
+sample.sh
+#!/bin/bash
+
+# 例) pythonスクリプトを実行
+/home/ubuntu/.pyenv/versions/3.12.7/bin/python3.12 /home/ubuntu/example/main.py
+
+
+ファイルは絶対パスで表記
+カレントディレクトリを移動する必要がある場合はcd /home/ubunt...]]></description><link>https://zenn.dev/amano_spica/articles/ubuntu-systemctl-service</link><guid isPermaLink="true">https://zenn.dev/amano_spica/articles/ubuntu-systemctl-service</guid><pubDate>Sun, 19 Jan 2025 12:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fo7vimeJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BUbuntu%252022.04%255D%2520systemctl%2528systemd%2529%25E3%2581%25A7%25E3%2582%25B7%25E3%2582%25A7%25E3%2583%25AB%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2583%2588%25E3%2582%2592%25E8%2587%25AA%25E5%258B%2595%25E5%25AE%259F%25E8%25A1%258C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:SP1CA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNmMzI3MDZlMjEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>SP1CA</dc:creator></item><item><title><![CDATA[WindowsでWSL2を使い、Ubuntuを日本語化＆zsh＋oh-my-zsh導入、Bunまでセットアップする手順]]></title><description><![CDATA[Windowsで快適にLinux環境を使う方法として、WSL2（Windows Subsystem for Linux 2）を利用する方法があります。本記事では、Ubuntu 24.04.01 LTSをWSL2上にセットアップし、日本語化やzshへの切り替え、oh-my-zshの導入、そして高速なJavaScriptランタイムであるBunのインストールまでの流れをまとめています。
+
+
+ 1. WSL2のインストール
+
+ 手順1: PowerShellを管理者権限で起動
+
+
+スタートメニューを開き、「PowerShell」と入力して検索します。
+PowerShellを右クリックし、「管理者...]]></description><link>https://zenn.dev/taida/articles/wsl2-ubuntu-ja-zsh-bun</link><guid isPermaLink="true">https://zenn.dev/taida/articles/wsl2-ubuntu-ja-zsh-bun</guid><pubDate>Sat, 18 Jan 2025 21:50:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Yzwbr-DY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Windows%25E3%2581%25A7WSL2%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2584%25E3%2580%2581Ubuntu%25E3%2582%2592%25E6%2597%25A5%25E6%259C%25AC%25E8%25AA%259E%25E5%258C%2596%25EF%25BC%2586zsh%25EF%25BC%258Boh-my-zsh%25E5%25B0%258E%25E5%2585%25A5%25E3%2580%2581Bun%25E3%2581%25BE%25E3%2581%25A7%25E3%2582%25BB%25E3%2583%2583%25E3%2583%2588%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%25E3%2581%2599%25E3%2582%258B%25E6%2589%258B%25E9%25A0%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25B2%25B1%25E7%2594%25B0%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA3ZTUyZWY3YmEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>岱田</dc:creator></item><item><title><![CDATA[【解決済】メモリ不足によるエラーが発生。FATAL ERROR: Ineffective mark-compacts near heap..]]></title><description><![CDATA[
+ 状況
+VPSにてUbuntuを導入しており、メモリサイズ1Gでストレージサイズは25Gの最小限の環境を準備していました。
+Next.jsのアプリをデプロイしようと、npm run buildを実行した結果、メモリ不足により下記エラーが発生..
+FATAL ERROR: Ineffective mark-compacts near heap limit Allocation failed - JavaScript heap out of memory...
+
+ エラーの概要
+このエラーは、V8エンジンのJavaScriptヒープメモリが不足したために発生します。
+npu run bui...]]></description><link>https://zenn.dev/shelpro/articles/9756c59b5bcdd6</link><guid isPermaLink="true">https://zenn.dev/shelpro/articles/9756c59b5bcdd6</guid><pubDate>Fri, 17 Jan 2025 13:45:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--upFYF4Is--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E8%25A7%25A3%25E6%25B1%25BA%25E6%25B8%2588%25E3%2580%2591%25E3%2583%25A1%25E3%2583%25A2%25E3%2583%25AA%25E4%25B8%258D%25E8%25B6%25B3%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258B%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E3%2581%258C%25E7%2599%25BA%25E7%2594%259F%25E3%2580%2582FATAL%2520ERROR%253A%2520Ineffective%2520mark-compact...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25B7%25E3%2582%25A7%25E3%2583%25AB%25E3%2583%258A%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%259F%25E3%2583%25B3%25E3%2582%25B0%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTHAxZTQzc3N1YWdkLTJzSVE0bl9ZaWdQTlFrQmN4XzNFWGRfMHZBWDFnY3F2QlhyYz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>シェルナプログラミング</dc:creator></item><item><title><![CDATA[ZorinOSにnvidiaのドライバを入れる]]></title><description><![CDATA[
+ 実はデフォで入ってる
+ZorinOSはデフォルトでNVIDIAのドライバが入っています。
+しかしながら、私はプリインストールを信用していない!!のと最新ではないので手動でインスコしていこう。
+
+ 諸々の確認
+
+cat os-release
+PRETTY_NAME="Zorin OS 17.2"
+NAME="Zorin OS"
+VERSION_ID="17"
+VERSION="17.2"
+VERSION_CODENAME=jammy
+ID=zorin
+ID_LIKE="ubuntu debian"
+HOME_URL="https://zorin.com/os/"
+SUPPORT_URL...]]></description><link>https://zenn.dev/ziaensochan/articles/dc1138d96f6472</link><guid isPermaLink="true">https://zenn.dev/ziaensochan/articles/dc1138d96f6472</guid><pubDate>Thu, 16 Jan 2025 17:26:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5OD8Q5oY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ZorinOS%25E3%2581%25ABnvidia%25E3%2581%25AE%25E3%2583%2589%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2590%25E3%2582%2592%25E5%2585%25A5%25E3%2582%258C%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:samenoko%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAwMTk3ZDBkN2EuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>samenoko</dc:creator></item><item><title><![CDATA[ローカルから GitLab に SSH 接続する方法]]></title><description><![CDATA[ローカル環境から GitLab に SSH 接続する方法を解説します。想定環境は Linux です。
+
+ まずは公式ドキュメントを確認
+
+GitLab の公式ドキュメントには、SSH 接続の手順が詳細に記載されています。困ったときは、以下のリンクを参考にしてください。
+Use SSH keys to communicate with GitLab | GitLab
+ただし、公式ドキュメントは非常に詳細で、すべての情報が必要とは限りません。本記事では、「ローカルから GitLab に SSH 接続する」という目標に必要な手順だけを簡潔に説明します。
+
+ 手順
+
+
+ 1. git confi...]]></description><link>https://zenn.dev/hagifly/articles/ed17a7f71c5970</link><guid isPermaLink="true">https://zenn.dev/hagifly/articles/ed17a7f71c5970</guid><pubDate>Wed, 15 Jan 2025 03:34:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--yxDn-H0q--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25AB%25E3%2583%25AB%25E3%2581%258B%25E3%2582%2589%2520GitLab%2520%25E3%2581%25AB%2520SSH%2520%25E6%258E%25A5%25E7%25B6%259A%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Asher%2520Ishikawa%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI1YjFlNzZlZDYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Asher Ishikawa</dc:creator></item><item><title><![CDATA[自作鯖のNextプロジェクトを独自ドメインで公開する方法]]></title><description><![CDATA[STEP 1: DockerとDocker Composeのインストール
+sudo apt-get update
+sudo apt-get install -y docker-ce docker-ce-cli containerd.io
+sudo mkdir -p /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+sudo apt-get update
+sudo apt-get inst...]]></description><link>https://zenn.dev/itsukinuko/articles/0870a6982b0b56ad1c51</link><guid isPermaLink="true">https://zenn.dev/itsukinuko/articles/0870a6982b0b56ad1c51</guid><pubDate>Tue, 14 Jan 2025 02:11:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--aBnV-Sp1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%2587%25AA%25E4%25BD%259C%25E9%25AF%2596%25E3%2581%25AENext%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E3%2582%2592%25E7%258B%25AC%25E8%2587%25AA%25E3%2583%2589%25E3%2583%25A1%25E3%2582%25A4%25E3%2583%25B3%25E3%2581%25A7%25E5%2585%25AC%25E9%2596%258B%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:itsuki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzlhODMyNzI4NTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>itsuki</dc:creator></item><item><title><![CDATA[OpenMediaVaultで構築したNASをUbuntu PCにマウントする]]></title><description><![CDATA[
+ サーバーの設定
+
+ Raspberry Piでの設定
+https://zenn.dev/ats030/articles/install-openmediavault-on-raspberrypi-os
+
+ Rcloneによるマウント設定
+OpenMediaVaultのマウントをCLIで実行するにはRcloneを使用するのが良さそうです。
+
+ Rcloneのインストール
+https://zenn.dev/ats030/articles/install-rclone-on-ubuntu
+
+ RcloneにOpenMediaVaultを登録する
+以下のコマンドでRcloneにOpenMed...]]></description><link>https://zenn.dev/ats030/articles/mount-openmediavault-on-ubuntu</link><guid isPermaLink="true">https://zenn.dev/ats030/articles/mount-openmediavault-on-ubuntu</guid><pubDate>Mon, 13 Jan 2025 22:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Mj1Qr9z3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:OpenMediaVault%25E3%2581%25A7%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2597%25E3%2581%259FNAS%25E3%2582%2592Ubuntu%2520PC%25E3%2581%25AB%25E3%2583%259E%25E3%2582%25A6%25E3%2583%25B3%25E3%2583%2588%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2582%25E3%2582%258C%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSUN1SHBxV21INFNBbC1aRVRkejRoTEwzejNvRWpqVGtmNVY2LWNRNk5ZVEd3djVzZ0k9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>あれ</dc:creator></item><item><title><![CDATA[外部ディスクをUbuntu用にフォーマットする]]></title><description><![CDATA[
+ 「ディスク」アプリ
+https://wiki.gnome.org/Apps/Disks
+Ubuntuにプリインストールされている、「ディスク」アプリを使用して外付けディスクをフォーマットします。
+!
+Ubuntuのデフォルト設定では「Show Apps」→「ユーティリティ」→「ディスク」で開けます。
+
+
+ ディスクのフォーマット
+
+「ディスク」アプリの画面左側から、フォーマットしたいディスクを選択。
+「ディスク」アプリの画面右上の「ドライブのオプション」→「ディスクを初期化」。
+
+「消去」→既存のデータをゼロで上書きする（スロー）
+
+「パーティション」→新しいシステムと2TBを超える...]]></description><link>https://zenn.dev/ats030/articles/format-external-disk-for-ubuntu</link><guid isPermaLink="true">https://zenn.dev/ats030/articles/format-external-disk-for-ubuntu</guid><pubDate>Mon, 13 Jan 2025 21:50:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--OixFkFsK--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%25A4%2596%25E9%2583%25A8%25E3%2583%2587%25E3%2582%25A3%25E3%2582%25B9%25E3%2582%25AF%25E3%2582%2592Ubuntu%25E7%2594%25A8%25E3%2581%25AB%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25BC%25E3%2583%259E%25E3%2583%2583%25E3%2583%2588%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2582%25E3%2582%258C%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSUN1SHBxV21INFNBbC1aRVRkejRoTEwzejNvRWpqVGtmNVY2LWNRNk5ZVEd3djVzZ0k9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>あれ</dc:creator></item><item><title><![CDATA[Ubuntu PCにRCloneをインストールする]]></title><description><![CDATA[
+ Rcloneとは
+https://rclone.org/
+Rcloneは、多様なクラウドストレージサービス間でファイルを管理・同期するためのオープンソースのコマンドラインツールです。pCloud以外にも、Google DriveやDropboxなど40以上のクラウドストレージに対応し、ファイルのアップロード、ダウンロード、同期が簡単に行えます。高速で効率的なファイル転送が可能で、大容量データの移行にも適しています。
+
+ Rcloneのインストール
+以下のコマンドでRcloneをインストールします。
+sudo apt install rclone
+]]></description><link>https://zenn.dev/ats030/articles/install-rclone-on-ubuntu</link><guid isPermaLink="true">https://zenn.dev/ats030/articles/install-rclone-on-ubuntu</guid><pubDate>Mon, 13 Jan 2025 21:45:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--eNDe22xm--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ubuntu%2520PC%25E3%2581%25ABRClone%25E3%2582%2592%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2582%25E3%2582%258C%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSUN1SHBxV21INFNBbC1aRVRkejRoTEwzejNvRWpqVGtmNVY2LWNRNk5ZVEd3djVzZ0k9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>あれ</dc:creator></item><item><title><![CDATA[AIエディター Cursor を Ubuntu 24.04にインストール]]></title><description><![CDATA[参考サイトです
+https://dev.to/mhbaando/how-to-install-cursor-the-ai-editor-on-linux-41dm
+
+ 1. Cursorをダウンロード
+https://www.cursor.com/
+
+ 2. libfuse2をインストール
+sudo apt-get install libfuse2
+他のディストリビューションだとこの行程は必要ないとか(確認していません)。
+Ubuntuでは「Fuse」が非推奨なため「libfuse2」をインストールします。
+
+ 3. 権限を変更
+バージョンは自分がダウンロードしたものに替えてください。
+...]]></description><link>https://zenn.dev/mizki/articles/36535a1b75ab81</link><guid isPermaLink="true">https://zenn.dev/mizki/articles/36535a1b75ab81</guid><pubDate>Mon, 13 Jan 2025 14:35:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wZxQskPi--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AI%25E3%2582%25A8%25E3%2583%2587%25E3%2582%25A3%25E3%2582%25BF%25E3%2583%25BC%2520Cursor%2520%25E3%2582%2592%2520Ubuntu%252024.04%25E3%2581%25AB%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:WaterWood%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUxtNXd1MF90R0d6NnBqR3I2bEdrMS1pZTUtOGRnTmZLU2Zra0dOXzcxYWxzZz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>WaterWood</dc:creator></item><item><title><![CDATA[Building OpenMetadata on Local Kubernetres]]></title><description><![CDATA[自宅のKubernetes環境にOpenMetadataを構築し、Cloudflare Tunnelで外部公開して遊んでみたので備忘録です。
+
+ ローカルKubernetesにOpenMetadataをデプロイする
+手順については、次の2つの公式ドキュメントを参照し、一部修正を行い構築しました。
+https://docs.open-metadata.org/latest/quick-start/local-kubernetes-deployment
+https://docs.open-metadata.org/latest/deployment/kubernetes/on-prem
+
+ ...]]></description><link>https://zenn.dev/kyami/articles/5fd8a6b3f6a091</link><guid isPermaLink="true">https://zenn.dev/kyami/articles/5fd8a6b3f6a091</guid><pubDate>Mon, 13 Jan 2025 03:30:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--yzF8PxD1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:Building%2520OpenMetadata%2520on%2520Local%2520Kubernetres%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kyami%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzllODdlNWY4MTcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kyami</dc:creator></item></channel></rss>

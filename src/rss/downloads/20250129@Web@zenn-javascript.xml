@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「JavaScript」のフィード]]></title><description><![CDATA[Zennのトピック「JavaScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/javascript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/64acd76870.png</url><title>Zennの「JavaScript」のフィード</title><link>https://zenn.dev/topics/javascript</link></image><generator>zenn.dev</generator><lastBuildDate>Wed, 29 Jan 2025 04:00:22 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/javascript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[llama.cppの入力欄の高さを可変にし、日本語入力に対応させるTampermonkeyスクリプト]]></title><description><![CDATA[llama.cppは便利ですが、入力欄が不便です。具体的には以下の問題があります。
+
+入力欄で、日本語変換を確定しようとしてEnterキーを押すとPostされてしまう
+入力欄の高さが2行固定で、それ以上の場合見切れてしまう
+
+この問題を解決するため、Chromeの拡張機能Tampermonkeyスクリプトを使います。
+
+llama.cppの入力欄
+@match の部分は適宜、ご自分の環境のllama.cppのurlに変更してください。前方一致したurlで、このscriptが適用されます。
+// ==UserScript==
+// @name         llama.cpp UI改善
+...]]></description><link>https://zenn.dev/d3com/articles/2e1be84eeb5d50</link><guid isPermaLink="true">https://zenn.dev/d3com/articles/2e1be84eeb5d50</guid><pubDate>Wed, 29 Jan 2025 01:47:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--I930bgmQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:llama.cpp%25E3%2581%25AE%25E5%2585%25A5%25E5%258A%259B%25E6%25AC%2584%25E3%2581%25AE%25E9%25AB%2598%25E3%2581%2595%25E3%2582%2592%25E5%258F%25AF%25E5%25A4%2589%25E3%2581%25AB%25E3%2581%2597%25E3%2580%2581%25E6%2597%25A5%25E6%259C%25AC%25E8%25AA%259E%25E5%2585%25A5%25E5%258A%259B%25E3%2581%25AB%25E5%25AF%25BE%25E5%25BF%259C%25E3%2581%2595%25E3%2581%259B%25E3%2582%258BTampermonkey%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:D3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSzJUbXR2enJvRFFwU2Mwbkd5d0JwdW5CalFDUGFEQkNMaWlkUDJWa19hPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>D3</dc:creator></item><item><title><![CDATA[今さら聞けないhtml＋JavaScript入門～divタグの基礎中の基礎～]]></title><description><![CDATA[4月からWeb開発をする予定ですが、
+htmlについて知識がぼんやりとしています。
+こんにちは、
+ワニかず@40歳 出戻りエンジニアです。
+ということで、今回は、
+こんな感じのカレンダーを
+
+
+HTMLのdivタグに
+
+JavaScriptを使って
+
+表示する例を見ながら、
+
+divタグとclass/idの仕組み
+JavaScriptの動き
+HTML読み込み～カレンダー表示までの流れ
+
+を説明していこうと思います。
+
+ 具体例
+
+html(説明に必要な部分だけ抜粋)
+&lt;div class="calendar-container"&gt;
+    &lt;div id="calend...]]></description><link>https://zenn.dev/40_comeback_eng/articles/098663bc6bfe2a</link><guid isPermaLink="true">https://zenn.dev/40_comeback_eng/articles/098663bc6bfe2a</guid><pubDate>Wed, 29 Jan 2025 00:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--NOmlkhxB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E4%25BB%258A%25E3%2581%2595%25E3%2582%2589%25E8%2581%259E%25E3%2581%2591%25E3%2581%25AA%25E3%2581%2584html%25EF%25BC%258BJavaScript%25E5%2585%25A5%25E9%2596%2580%25EF%25BD%259Ediv%25E3%2582%25BF%25E3%2582%25B0%25E3%2581%25AE%25E5%259F%25BA%25E7%25A4%258E%25E4%25B8%25AD%25E3%2581%25AE%25E5%259F%25BA%25E7%25A4%258E%25EF%25BD%259E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%25AF%25E3%2583%258B%25E3%2581%258B%25E3%2581%259A%254040%25E6%25AD%25B3%2520%25E5%2587%25BA%25E6%2588%25BB%25E3%2582%258A%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg3ZGNhZmRmOGUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ワニかず@40歳 出戻りエンジニア</dc:creator></item><item><title><![CDATA[JavaScript / デバウンスをガチで分解する]]></title><description><![CDATA[
+ デバウンスとは
+
+ 概要
+高頻度で発火するイベント内の処理を一定時間が経過してから1回だけ実行するテクニック。
+例えば
+
+ユーザーが&lt;input&gt;へ1文字入力するごとに処理が発火したり
+window幅を変化させる度に処理が発火したり
+
+等すればブラウザに非常に大きな負担がかかる。
+このような事態を防ぐためのテクニックをデバウンスと呼ぶ。
+
+ こいつが案外難しい
+コピペする分には良いが、デバウンスを実現するために利用されているJSのメカニズムやメソッドをすべて理解するのが難しい。つまり前提知識が非常に多くなってくる。
+
+ 前提知識
+
+スレッドの占有(何故ブラウザに負担がかか...]]></description><link>https://zenn.dev/tsumugu2024/articles/321d7eb0a68458</link><guid isPermaLink="true">https://zenn.dev/tsumugu2024/articles/321d7eb0a68458</guid><pubDate>Tue, 28 Jan 2025 14:27:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--CKlA6K3J--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%2520%252F%2520%25E3%2583%2587%25E3%2583%2590%25E3%2582%25A6%25E3%2583%25B3%25E3%2582%25B9%25E3%2582%2592%25E3%2582%25AC%25E3%2583%2581%25E3%2581%25A7%25E5%2588%2586%25E8%25A7%25A3%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A4%25E3%2582%2580%25E3%2581%2590%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdhYjgyY2M0ZjYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>つむぐ</dc:creator></item><item><title><![CDATA[個人ブログの記事を Zenn, Qiita へエクスポートするコマンドを作る]]></title><description><![CDATA[
+ Git Subtree
+Git には複数のリポジトリを統合する手段の1つとして Subtree というものがあるようです。文字通り、リポジトリをサブディレクトリとして取り込み、別でバージョン管理できるようにする仕組みです。
+
+やり方はこの記事などに書いてあります。
+
+ Zenn のリポジトリを取り込む
+例として、Zenn の記事を管理しているリポジトリを取り込んでみます。リポジトリが GitHub にあるとすると、
+git remote add my-zenn-repo https://github.com/username/zenn-repo.git
+のようにすることで、my-ze...]]></description><link>https://zenn.dev/s_inoue0108/articles/article-export-cmd</link><guid isPermaLink="true">https://zenn.dev/s_inoue0108/articles/article-export-cmd</guid><pubDate>Tue, 28 Jan 2025 14:18:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--QqC0THpU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2580%258B%25E4%25BA%25BA%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%25E3%2581%25AE%25E8%25A8%2598%25E4%25BA%258B%25E3%2582%2592%2520Zenn%252C%2520Qiita%2520%25E3%2581%25B8%25E3%2582%25A8%25E3%2582%25AF%25E3%2582%25B9%25E3%2583%259D%25E3%2583%25BC%25E3%2583%2588%25E3%2581%2599%25E3%2582%258B%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:S.Inoue%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBlZTc2ZmE4NzYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>S.Inoue</dc:creator></item><item><title><![CDATA[【GAS】Googleカレンダーの勤務地を取得する方法]]></title><description><![CDATA[
+ はじめに：Googleカレンダーの勤務地は取得しづらい
+私の会社では、リモートワーク解禁に伴い、Googleカレンダーに勤務地を入れることがルール化されました。
+メンバーの勤務地をまとめるべく、GASで取得しようとしたら、全然うまくできませんでした。
+工夫しながら、勤務地を取得できるコードが書けたので紹介です。
+
+ この記事の対象者
+
+GAS初心者の方
+GASでの勤務地取得に苦労している方
+Googleカレンダーの勤務地を使っている方
+
+
+ コードを使うための準備
+勤務地を取得するためにはGoogle Calendar APIの導入が必要です。
+サービスを追加からGoogle Cal...]]></description><link>https://zenn.dev/kojimaru/articles/63f69ee92c9894</link><guid isPermaLink="true">https://zenn.dev/kojimaru/articles/63f69ee92c9894</guid><pubDate>Tue, 28 Jan 2025 13:21:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--T9yiszzs--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590GAS%25E3%2580%2591Google%25E3%2582%25AB%25E3%2583%25AC%25E3%2583%25B3%25E3%2583%2580%25E3%2583%25BC%25E3%2581%25AE%25E5%258B%25A4%25E5%258B%2599%25E5%259C%25B0%25E3%2582%2592%25E5%258F%2596%25E5%25BE%2597%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2593%25E3%2581%2598%25E3%2581%25BE%25E3%2582%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSzR6Y3lfaVFlMGstVHN6b0prWFpXMFlNOG9wdEYwMkVnaXRibTRTd2otOFo5UE95dz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>こじまる</dc:creator></item><item><title><![CDATA[try, catch 処理が必要なコードの見極め方]]></title><description><![CDATA[!
+そもそもtry, catchがわからない方は、こちらをお読みください
+
+https://zenn.dev/sanpi34/articles/294717a744970a
+
+ try...catch 処理が必要なコードの見極め方
+try...catch 処理を使うべき場面を見極めるには、エラーが発生しやすい箇所やその影響を正しく判断することが重要です。この記事では、どのような場合に try...catch を使うべきかを解説します。
+
+
+ 1. エラーが発生する可能性がある操作を含むか
+以下のような操作では、エラーが発生する可能性があるため、try...catch を検討する必要があり...]]></description><link>https://zenn.dev/sanpi34/articles/ed98ee5a563e4d</link><guid isPermaLink="true">https://zenn.dev/sanpi34/articles/ed98ee5a563e4d</guid><pubDate>Tue, 28 Jan 2025 13:03:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--yhx0utIM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:try%252C%2520catch%2520%25E5%2587%25A6%25E7%2590%2586%25E3%2581%258C%25E5%25BF%2585%25E8%25A6%2581%25E3%2581%25AA%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2581%25AE%25E8%25A6%258B%25E6%25A5%25B5%25E3%2582%2581%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Sanpi34%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FiZTM1NzYwZTQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Sanpi34</dc:creator></item><item><title><![CDATA[try...catch とは何か？]]></title><description><![CDATA[try...catch は、JavaScript をはじめとする多くのプログラミング言語で使用されるエラーハンドリングの構文です。プログラム実行中に発生するエラーを捕捉し、適切に処理するための仕組みを提供します。
+
+
+ try...catch の基本構文
+以下は、JavaScript の try...catch 構文の基本形です。
+try {
+  // エラーが発生する可能性のあるコード
+} catch (error) {
+  // エラーが発生した場合の処理
+}
+
+ 構成要素
+
+
+try ブロック
+
+エラーが発生する可能性のあるコードを記述します。
+このブロック内でエラーが発生した場合...]]></description><link>https://zenn.dev/sanpi34/articles/294717a744970a</link><guid isPermaLink="true">https://zenn.dev/sanpi34/articles/294717a744970a</guid><pubDate>Tue, 28 Jan 2025 13:00:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--A6ssPak5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:try...catch%2520%25E3%2581%25A8%25E3%2581%25AF%25E4%25BD%2595%25E3%2581%258B%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Sanpi34%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FiZTM1NzYwZTQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Sanpi34</dc:creator></item><item><title><![CDATA[『RPGツクールMZ』コモンイベントの構成と更新]]></title><description><![CDATA[『RPGツクールMZ』関連記事 目次
+
+ はじめに
+『RPGツクールMZ』の[コモンイベント]が JavaScript 上でどのように実装されているか調べていきます。
+ツール上のコモンイベントについては、次の記事にまとめています。
+
+『RPGツクールMZ』[データベース]-[コモンイベント]のヘルプ
+
+この辺についてはすでに理解しているものとして書いていきます。
+『RPGツクールMZ』非公式JavaScriptリファレンス
+適宜このリファレンスのページにクラスなどリンクします。
+
+ 用語
+JavaScript… Webブラウザを中心に使われるプログラミング言語です。Java は別の言語の...]]></description><link>https://zenn.dev/tonbi/articles/8b09e34a7b58da</link><guid isPermaLink="true">https://zenn.dev/tonbi/articles/8b09e34a7b58da</guid><pubDate>Tue, 28 Jan 2025 09:03:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--yobeY8HA--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%258ERPG%25E3%2583%2584%25E3%2582%25AF%25E3%2583%25BC%25E3%2583%25ABMZ%25E3%2580%258F%25E3%2582%25B3%25E3%2583%25A2%25E3%2583%25B3%25E3%2582%25A4%25E3%2583%2599%25E3%2583%25B3%25E3%2583%2588%25E3%2581%25AE%25E6%25A7%258B%25E6%2588%2590%25E3%2581%25A8%25E6%259B%25B4%25E6%2596%25B0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A8%25E3%2582%2593%25E3%2581%25B3%2540%25E9%25B3%25B6%25E5%25B6%258B%25E5%25B7%25A5%25E6%2588%25BF%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pBYl9FRlAtZm9RQU1pN1VoM3hzYkNyQXZUSTZjUDFkZGJJMWJrPXMyNTAtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>とんび@鳶嶋工房</dc:creator></item><item><title><![CDATA[駅すぱあと路線図JavaScriptライブラリrosen.jsを使って駅名検索・地図にマーカーを表示する]]></title><description><![CDATA[本記事はヴァル研究所の支援として作成された記事です
+駅すぱあとは乗り換え案内サービスとして有名ですが、駅すぱあとの路線図をWebページに埋め込むことができるのを知っているでしょうか。駅すぱあとの路線図をWebページに埋め込むことで、Webサイトへの訪問者が目的地までの経路を探しやすくなります。日本の大都市圏では電車での移動が多いので、路線図を中心とした地図は便利です。
+そんな地図埋め込みを手軽に実現してくれるライブラリがrosen.jsです。これは駅すぱあと公式のライブラリであり、地図と駅・路線情報などを組み合わせてさまざまな可視化を行えます。
+本記事では、rosen.jsを使って駅名を...]]></description><link>https://zenn.dev/ekispert_api/articles/d5b3c73e3e2b3e</link><guid isPermaLink="true">https://zenn.dev/ekispert_api/articles/d5b3c73e3e2b3e</guid><pubDate>Tue, 28 Jan 2025 07:54:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--iEUihRE9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E9%25A7%2585%25E3%2581%2599%25E3%2581%25B1%25E3%2581%2582%25E3%2581%25A8%25E8%25B7%25AF%25E7%25B7%259A%25E5%259B%25B3JavaScript%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AArosen.js%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E9%25A7%2585%25E5%2590%258D%25E6%25A4%259C%25E7%25B4%25A2%25E3%2583%25BB%25E5%259C%25B0%25E5%259B%25B3%25E3%2581%25AB%25E3%2583%259E%25E3%2583%25BC%25E3%2582%25AB%25E3%2583%25BC%25E3%2582%2592%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2582%25A2%25E3%2583%2584%25E3%2582%25B7%2540MOONGIFT%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzllZWU4MmU5MDMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E9%25A7%2585%25E3%2581%2599%25E3%2581%25B1%25E3%2581%2582%25E3%2581%25A8%2520API%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dqN3UwNEd0OEkzbTVsd2xaRUhBbjNlcko0QjZxNWlBd1V6N2tqT1E9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>アツシ@MOONGIFT</dc:creator></item><item><title><![CDATA[TypeScript 5.8のerasableSyntaxOnlyフラグ。enumやnamespaceが消える日が来た]]></title><description><![CDATA[TypeScript 5.8で導入されるerasableSyntaxOnlyフラグを使うと、enumやnamespace、クラスのパラメータプロパティ、moduleキーワードなどの構文をエラーとして検出できます。これらの構文はNode.jsでTypeScriptを実行する際に非互換な構文であり、本フラグの導入によりNode.jsとTypeScriptの互換性が高まります。
+本記事では、erasableSyntaxOnlyフラグの挙動と、なぜこのフラグが導入されたのかを解説します。
+
+ erasableSyntaxOnlyフラグの挙動
+erasableSyntaxOnly とは、「削除可能...]]></description><link>https://zenn.dev/ubie_dev/articles/ts-58-erasable-syntax-only</link><guid isPermaLink="true">https://zenn.dev/ubie_dev/articles/ts-58-erasable-syntax-only</guid><pubDate>Tue, 28 Jan 2025 04:14:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1bnbxgNw--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%25205.8%25E3%2581%25AEerasableSyntaxOnly%25E3%2583%2595%25E3%2583%25A9%25E3%2582%25B0%25E3%2580%2582enum%25E3%2582%2584namespace%25E3%2581%258C%25E6%25B6%2588%25E3%2581%2588%25E3%2582%258B%25E6%2597%25A5%25E3%2581%258C%25E6%259D%25A5%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E9%25B9%25BF%25E9%2587%258E%2520%25E5%25A3%25AE%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VlOWMzMWRhODMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Ubie%2520%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2hwRUMxbUtjVjZsX01lT2R6N1Nsejk1SXR4WUZoYjB2LTNOdzNjV3c9czI1MC1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>鹿野 壮</dc:creator></item><item><title><![CDATA[ブラウザでキーボードショートカットを実装する]]></title><description><![CDATA[
+ はじめに
+ショートカットとは、アプリケーションの操作を特定のキーボード入力で素早く実行するための効率的なインターフェースのことで、皆さんもブラウザやWebアプリで実装されているショートカットを使う機会も多いのではないでしょうか？
+今回は、Reactを使ったブラウザでのショートカットの実装方法についてみていきたいと思います。
+
+ ブラウザでの入力と挙動について
+実装にあたり、事前に知っておいた方が良い前提知識について少し見ていきたいと思います。
+
+ 装飾キーと通常キー
+ショートカットキーは通常、Command（修飾キー） + C（通常キー） のように、修飾キーと通常キーの組み合わせで動...]]></description><link>https://zenn.dev/gemcook/articles/f9ebd5f2d4f24a</link><guid isPermaLink="true">https://zenn.dev/gemcook/articles/f9ebd5f2d4f24a</guid><pubDate>Tue, 28 Jan 2025 03:47:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_YReMYPg--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2596%25E3%2583%25A9%25E3%2582%25A6%25E3%2582%25B6%25E3%2581%25A7%25E3%2582%25AD%25E3%2583%25BC%25E3%2583%259C%25E3%2583%25BC%25E3%2583%2589%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25BC%25E3%2583%2588%25E3%2582%25AB%25E3%2583%2583%25E3%2583%2588%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Kantarou%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQyYzJiNzVlZTIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Gemcook%2520Tech%2520Blog%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzkzYTU2MDY5MDAuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kantarou</dc:creator></item><item><title><![CDATA[OPFS（Origin Private File System）についてまとめる]]></title><description><![CDATA[
+ はじめに
+SQLite Wasmの内部でOPFS（Origin Private File System）を使用していることを知りました。
+OPFSについて詳しく理解するために本記事を執筆しています。
+
+ OPFS（Origin Private File System）とは
+OPFS（Origin Private File System）とは、ブラウザ内でOriginごとの隔離されたプライベートな領域を提供するファイルシステムのことです。
+これはFile System Access APIの一部として提供されており、従来のAPIで抱えていたセキュリティやパフォーマンスの課題を解決するた...]]></description><link>https://zenn.dev/wasuwa/articles/77406ac862a867</link><guid isPermaLink="true">https://zenn.dev/wasuwa/articles/77406ac862a867</guid><pubDate>Mon, 27 Jan 2025 16:49:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--pauCmmZQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:OPFS%25EF%25BC%2588Origin%2520Private%2520File%2520System%25EF%25BC%2589%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:wasu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q3MjQ0NDMxMDQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>wasu</dc:creator></item><item><title><![CDATA[React Hooksはステートの管理と副作用のある処理を関心事ごとに整理する]]></title><description><![CDATA[React Hooksは関数コンポーネントでステートの管理と副作用のある処理を扱えるようにするものです。この記事では、クラスコンポーネントと比較してフックがどのように関心の分離や高凝集・疎結合に寄与するかを考えてみます。
+!
+この記事は2020/08/13のブログ記事を移行したものです。記述やリンク先は古いですが、テーマの本質は変わらないと思います。
+
+
+ 関数コンポーネントでステートの管理と副作用のある処理を扱う
+
+Reactではコンポーネントを組み合わせてページを実装します。各コンポーネントはレンダーのサイクルをまたがるステートを持てます。コンポーネントを関数で実装することもできます...]]></description><link>https://zenn.dev/fukuchiharuki/articles/3407fa2a079e90</link><guid isPermaLink="true">https://zenn.dev/fukuchiharuki/articles/3407fa2a079e90</guid><pubDate>Mon, 27 Jan 2025 14:58:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--w89dPGMF--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%2520Hooks%25E3%2581%25AF%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25BC%25E3%2583%2588%25E3%2581%25AE%25E7%25AE%25A1%25E7%2590%2586%25E3%2581%25A8%25E5%2589%25AF%25E4%25BD%259C%25E7%2594%25A8%25E3%2581%25AE%25E3%2581%2582%25E3%2582%258B%25E5%2587%25A6%25E7%2590%2586%25E3%2582%2592%25E9%2596%25A2%25E5%25BF%2583%25E4%25BA%258B%25E3%2581%2594%25E3%2581%25A8%25E3%2581%25AB%25E6%2595%25B4%25E7%2590%2586%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Fukuchi%252C%2520Haruki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSzdUcVVuSkVabVMzdi1XOWwwNVA3b0tfYWV4VzZkNnRsV3hNZFkyRUF3M1VBN0g5UWM4UT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Fukuchi, Haruki</dc:creator></item><item><title><![CDATA[JavaScript / IntersectionObserverとResizeObserver]]></title><description><![CDATA[
+ 概要
+それぞれブラウザが提供しているWeb APIであり、IntersectionObserverは対象要素が描画領域との交差状態を、ResizeObserverは対象要素の幅の大きさをそれぞれ監視（observe）する。
+
+ 従来の手法の例
+
+ 要素が描画領域に入った時に処理を発火させる場合（IntersectionObserver以前）
+const targetEl = document.getElementById('target');
+
+function handleScroll(el, callback) {
+
+  window.addEventListener('scro...]]></description><link>https://zenn.dev/tsumugu2024/articles/3aed18012f1b25</link><guid isPermaLink="true">https://zenn.dev/tsumugu2024/articles/3aed18012f1b25</guid><pubDate>Mon, 27 Jan 2025 14:13:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2FLavnFP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%2520%252F%2520IntersectionObserver%25E3%2581%25A8ResizeObserver%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A4%25E3%2582%2580%25E3%2581%2590%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdhYjgyY2M0ZjYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>つむぐ</dc:creator></item><item><title><![CDATA[高校生が初めてシステムの個人開発に挑戦した話]]></title><description><![CDATA[
+ はじめに
+このような記事を書くのは初めてなので、温かい目で読んでいただけると幸いです。
+この記事では、私が通う学校で運行しているスクールバスの現在位置を確認できるシステム（サービス？）の開発記録を残しておこうと思います。
+
+ システムを開発するまでに至った経緯
+
+ 多くの児童・生徒がスクールバスを利用している
+私が通う学校は、幼稚園・小学校・中学校・高等学校をもつ学園であり、多くの児童・生徒が在籍していて、さまざまな地域から通っています。
+そのため、どの地域からも安全に通えるように、各方面へ送迎するスクールバスを運行しています。
+
+ スクールバスが抱える問題
+私は小学校から高校の12...]]></description><link>https://zenn.dev/ei_ch48_26/articles/ce8a2b67ac041c</link><guid isPermaLink="true">https://zenn.dev/ei_ch48_26/articles/ce8a2b67ac041c</guid><pubDate>Mon, 27 Jan 2025 12:56:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lpsdJWjC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E9%25AB%2598%25E6%25A0%25A1%25E7%2594%259F%25E3%2581%258C%25E5%2588%259D%25E3%2582%2581%25E3%2581%25A6%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%25E3%2581%25AE%25E5%2580%258B%25E4%25BA%25BA%25E9%2596%258B%25E7%2599%25BA%25E3%2581%25AB%25E6%258C%2591%25E6%2588%25A6%25E3%2581%2597%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Eiichiro%2520Ito%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSlR0SktwSE9kcTBoZGlSRmxZZDdLRk1oa0U5Wld0VVFlM3FHWU1ldERfLWZmOWpVMD1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Eiichiro Ito</dc:creator></item><item><title><![CDATA[Tailwind CSS V4まとめ！]]></title><description><![CDATA[
+ はじめに
+Tailwind CSS v4.0がリリースされたので、まとめてみました！
+
+ TL;DR
+■主な変更点
+
+パフォーマンスの大幅な向上
+コンテンツの自動検出
+CSSファースト設定
+arbitrary valuesが簡素化された
+
+JavaScriptではなくCSSでプロジェクトを設定するようになったのが、一番大きい。（これは革命）
+あとは個人的にはarbitrary valuesが簡素化されたのは書きやすくはなるけど、秩序としては崩れやすいのでこの変更点はあまり好きではない...😢
+
+ Tailwind CSS v4.0とは
+Tailwind CSS v4.0は、パフォーマ...]]></description><link>https://zenn.dev/miz_dev/articles/tailwind-css-v4</link><guid isPermaLink="true">https://zenn.dev/miz_dev/articles/tailwind-css-v4</guid><pubDate>Mon, 27 Jan 2025 10:53:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6riAaNqK--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Tailwind%2520CSS%2520V4%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Miz_dev%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNkMjViZGYyMGYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Miz_dev</dc:creator></item><item><title><![CDATA[【JavaScript】三項演算子についてまとめてみた]]></title><description><![CDATA[
+ JavaScript の三項演算子について
+私は普段の仕事では条件分岐の際に if 文の方が使用頻度が高いですが、プライベートでは三項演算子を使って条件分岐させるのも少なくないです。
+今回は JavaScript の三項演算子について、その基本的な使い方をおさらいします。この記事では、三項演算子の概念や実際のコード例、React の JSX での使い方に加えて、if 文との比較についても解説します。
+
+ 三項演算子とは
+三項演算子は、JavaScript の条件分岐で便利に使えるシンプルな演算子です。たった 1 行のコードで条件分岐を書くことができます。
+
+ 構文
+条件 ? 条件がt...]]></description><link>https://zenn.dev/hayatech/articles/js-what-is-ternary-operator</link><guid isPermaLink="true">https://zenn.dev/hayatech/articles/js-what-is-ternary-operator</guid><pubDate>Mon, 27 Jan 2025 10:38:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--zJVYOcLZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590JavaScript%25E3%2580%2591%25E4%25B8%2589%25E9%25A0%2585%25E6%25BC%2594%25E7%25AE%2597%25E5%25AD%2590%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:HayaTech%2528%25E3%2581%25AF%25E3%2582%2584%25E3%2581%25A6%25E3%2581%258F%2529%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM0YzBmNjVhMjcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>HayaTech(はやてく)</dc:creator></item><item><title><![CDATA[ぷよぷよプログラミングをGodotで実装 02 コード理解（stage.js）]]></title><description><![CDATA[
+ はじめに
+前回に引き続きぷよぷよプログラミングを利用して、Godotでパズルゲームの作り方の基礎を一緒に学んでいこうと思います。YouTubeでもこの記事の内容に沿ってゲームを作っているので、動画を見ながら取り組んでみてください。
+https://youtu.be/xWCfGvPEpp4
+前回の記事はこちら
+https://zenn.dev/yurinchi/articles/77241679201f44
+
+ 利用教材
+
+ぷよぷよプログラミング
+
+!
+当該記事の内容は、ぷよぷよプログラミングの利用条件を理解したうえで学習にご利用ください。
+
+
+ この記事で学ぶこと
+godotを触る前...]]></description><link>https://zenn.dev/yurinchi/articles/d94e36dbe479cd</link><guid isPermaLink="true">https://zenn.dev/yurinchi/articles/d94e36dbe479cd</guid><pubDate>Mon, 27 Jan 2025 10:00:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_wjY-ypP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%25B7%25E3%2582%2588%25E3%2581%25B7%25E3%2582%2588%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%259F%25E3%2583%25B3%25E3%2582%25B0%25E3%2582%2592Godot%25E3%2581%25A7%25E5%25AE%259F%25E8%25A3%2585%252002%2520%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E7%2590%2586%25E8%25A7%25A3%25EF%25BC%2588stage.js%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2586%25E3%2583%25BC%25E3%2582%258A%25E3%2582%2593%25E3%2581%25A1%25E3%2581%2583%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTG5mTmtnd0NObm1POTVBUlRkMWRMcU9vM2JiMWotcEViRVdHMlBxLS04UktHWnVTOD1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ゆーりんちぃ</dc:creator></item><item><title><![CDATA[【GSAP】GSAP Practice【#１９ GSAP ScrollTrigger Sample2 Horizontal Scroll】]]></title><description><![CDATA[
+ 【#１９ GSAP ScrollTrigger Sample2 Horizontal Scroll 2】
+YouTube: https://youtu.be/cl8OJl555-E
+https://youtu.be/cl8OJl555-E
+今回はJSの部分を実装していきます。
+HTMLの部分に誤りがありましたので、
+まずはこちらの修正から行います。
+
+index.html
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8" /&gt;
+    &lt;meta...]]></description><link>https://zenn.dev/web_life_ch/articles/dc573070490e3c</link><guid isPermaLink="true">https://zenn.dev/web_life_ch/articles/dc573070490e3c</guid><pubDate>Mon, 27 Jan 2025 05:36:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--KhAPrC87--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590GSAP%25E3%2580%2591GSAP%2520Practice%25E3%2580%2590%2523%25EF%25BC%2591%25EF%25BC%2599%2520GSAP%2520ScrollTrigger%2520Sample2%2520Horizo...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Web%2520Life%2520CH%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUl0YnZtbWNjTWFMM3dyd2x3VE5sVVZjTlhmZHEzZzF2QnJfMUJMSkJrN049czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Web Life CH</dc:creator></item><item><title><![CDATA[『RPGツクールMZ』マップイベントの構成と更新]]></title><description><![CDATA[『RPGツクールMZ』関連記事 目次
+
+ はじめに
+『RPGツクールMZ』の[イベント]が JavaScript 上でどのように実装されているか調べていきます。
+[イベント]はマップ上の[イベント]と全体で使える[コモンイベント]および戦闘時の[バトルイベント]があります。
+さすがに全部は大変なので、本記事ではマップ上の[イベント](以下マップイベント)のみ調べます。
+ツール上のマップイベントについては、次の記事にまとめています。
+
+『RPGツクールMZ』[モード]-[イベント]のヘルプ
+『RPGツクールMZ』イベントエディターのヘルプ
+
+この辺についてはすでに理解しているものとして書い...]]></description><link>https://zenn.dev/tonbi/articles/872724960ca767</link><guid isPermaLink="true">https://zenn.dev/tonbi/articles/872724960ca767</guid><pubDate>Mon, 27 Jan 2025 05:04:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--O6ob8b7x--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%258ERPG%25E3%2583%2584%25E3%2582%25AF%25E3%2583%25BC%25E3%2583%25ABMZ%25E3%2580%258F%25E3%2583%259E%25E3%2583%2583%25E3%2583%2597%25E3%2582%25A4%25E3%2583%2599%25E3%2583%25B3%25E3%2583%2588%25E3%2581%25AE%25E6%25A7%258B%25E6%2588%2590%25E3%2581%25A8%25E6%259B%25B4%25E6%2596%25B0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A8%25E3%2582%2593%25E3%2581%25B3%2540%25E9%25B3%25B6%25E5%25B6%258B%25E5%25B7%25A5%25E6%2588%25BF%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pBYl9FRlAtZm9RQU1pN1VoM3hzYkNyQXZUSTZjUDFkZGJJMWJrPXMyNTAtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>とんび@鳶嶋工房</dc:creator></item></channel></rss>
