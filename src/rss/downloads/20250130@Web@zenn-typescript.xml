@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「TypeScript」のフィード]]></title><description><![CDATA[Zennのトピック「TypeScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/typescript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/f13e758fdb.png</url><title>Zennの「TypeScript」のフィード</title><link>https://zenn.dev/topics/typescript</link></image><generator>zenn.dev</generator><lastBuildDate>Thu, 30 Jan 2025 12:04:04 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/typescript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[zodを用いた条件分岐バリデーションを実装してみる]]></title><description><![CDATA[
+ はじめに
+1ヶ月後にモンスターハンターになる、ノベルワークスのりょうちん（ryotech34）です。
+今回は、TypeScript向けに設計されたスキーマ宣言やバリデーションを助けてくれるライブラリである、zodを使用して条件分岐バリデーションを実装した際の備忘録です。
+https://zod.dev/
+ドメインモデルとzodを組み合わせた実装方法として、下記の記事を参考にさせていただきました。ぜひ確認してみてください。
+https://zenn.dev/kimutyam/articles/zod-domain-model
+
+ 対象読者
+
+zodに触れているもしくはこれから触ろうと思...]]></description><link>https://zenn.dev/ryoryo34/articles/7e60c176b1ab0a</link><guid isPermaLink="true">https://zenn.dev/ryoryo34/articles/7e60c176b1ab0a</guid><pubDate>Thu, 30 Jan 2025 10:04:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--af0r3FA5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:zod%25E3%2582%2592%25E7%2594%25A8%25E3%2581%2584%25E3%2581%259F%25E6%259D%25A1%25E4%25BB%25B6%25E5%2588%2586%25E5%25B2%2590%25E3%2583%2590%25E3%2583%25AA%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ryoryo34%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY2ZDI5MjRhMzkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ryoryo34</dc:creator></item><item><title><![CDATA[Expo Audioで音を鳴らす]]></title><description><![CDATA[
+ はじめに
+
+アプリの中で、「音を鳴らしたい」って思うことありますよね？
+実際に、Expoアプリの中で音を鳴らせるようにするまでやってみました🍵
+今回は「Expo Audio」と呼ばれる、expo-avをベースにした音声再生・録音ライブラリを使います。
+
+
+ まとめ
+
+Expo Audio（expo-av）を使えば、簡単に音声の再生・録音を実装できる
+近い将来、expo-audioとして改良版がリリース予定。
+
+
+ Expo AVとは？
+
+https://docs.expo.dev/versions/latest/sdk/audio-av/
+
+概要
+
+Expo Audioは、expo-...]]></description><link>https://zenn.dev/deepbluemasao/articles/825087a1b1a9b9</link><guid isPermaLink="true">https://zenn.dev/deepbluemasao/articles/825087a1b1a9b9</guid><pubDate>Thu, 30 Jan 2025 09:55:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--F_NXUydz--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Expo%2520Audio%25E3%2581%25A7%25E9%259F%25B3%25E3%2582%2592%25E9%25B3%25B4%25E3%2582%2589%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:masa%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y3MjNkYjVhMWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>masa</dc:creator></item><item><title><![CDATA[【Web3 / Blockchain/React/TypeScript】Solanaでのトランザクション処理をコードから学ぶ]]></title><description><![CDATA[
+ はじめに
+仮想通貨やブロックチェーン上での取引は、実際にどのようにプログラムコードで行われているのでしょうか？
+この記事では Solana を例に、Web3 ならではのネットワーク構造・RPC ノード・トランザクションの仕組みを、シンプルな入金(Deposit)コードをとおして解説します。
+
+
+ 1. Web3 / Blockchain とは？
+
+ 1-1. 従来のWeb2との違い
+
+
+Web2: 中央サーバー or クラウド (例: AWS, GCP) がメイン。
+
+Web3: 分散型ネットワークを使い、誰でもトランザクション(取引)を検証できる。
+
+Solanaのようなブロックチ...]]></description><link>https://zenn.dev/yusukekikuta/articles/b8711d3b2d16c4</link><guid isPermaLink="true">https://zenn.dev/yusukekikuta/articles/b8711d3b2d16c4</guid><pubDate>Thu, 30 Jan 2025 09:30:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--P1FDnDGp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Web3%2520%252F%2520Blockchain%252FReact%252FTypeScript%25E3%2580%2591Solana%25E3%2581%25A7%25E3%2581%25AE%25E3%2583%2588%25E3%2583%25A9%25E3%2583%25B3%25E3%2582%25B6%25E3%2582%25AF%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E5%2587%25A6%25E7%2590%2586%25E3%2582%2592%25E3%2582%25B3%25E3%2583%25BC...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yusuke%2520Kikuta%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2UzOGI2NmM0ZDQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yusuke Kikuta</dc:creator></item><item><title><![CDATA[画像処理100本ノックに挑戦｜アフィン変換(平行移動)（028/100）]]></title><description><![CDATA[
+ これはなに？
+画像処理100本ノックを、TypeScriptとlibvipsで挑戦してみる記事の28本目です。
+
+ 前回
+https://zenn.dev/nyagato_00/articles/5d252ed19206f8
+
+ 実装
+
+ お題
+
+アフィン変換を利用して画像をx方向に+30、y方向に-30だけ平行移動させよ。
+アフィン変換とは3x3の行列を用いて画像の変換を行う操作である。
+
+https://github.com/minido/Gasyori100knock-1/tree/master/Question_21_30#q28-アフィン変換平行移動
+
+ Coding
+im...]]></description><link>https://zenn.dev/nyagato_00/articles/bd83bc3148f4ce</link><guid isPermaLink="true">https://zenn.dev/nyagato_00/articles/bd83bc3148f4ce</guid><pubDate>Thu, 30 Jan 2025 07:45:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vWZ9VQfA--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%2594%25BB%25E5%2583%258F%25E5%2587%25A6%25E7%2590%2586100%25E6%259C%25AC%25E3%2583%258E%25E3%2583%2583%25E3%2582%25AF%25E3%2581%25AB%25E6%258C%2591%25E6%2588%25A6%25EF%25BD%259C%25E3%2582%25A2%25E3%2583%2595%25E3%2582%25A3%25E3%2583%25B3%25E5%25A4%2589%25E6%258F%259B%2528%25E5%25B9%25B3%25E8%25A1%258C%25E7%25A7%25BB%25E5%258B%2595%2529%25EF%25BC%2588028%252F100%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nyagato_00%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUxtNXd1MTVKUVk3SjNOUG1kcGlMeWdfWUt3blZzaTRpWDRoYjU1c21UTTk3c1E9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nyagato_00</dc:creator></item><item><title><![CDATA[【拡張機能】Google Chromeで使える自動クリック(左右の矢印キーのみ)【習作】]]></title><description><![CDATA[
+ はじめに
+拡張機能の習作として、左右の矢印キーを自動でクリックできる拡張機能を作りました。
+漫画サイトでフリーハンドでスライドショーのようにページめくりできたらいいなと思ったのがきっかけです。ジャンプ＋などで試したところ上手く行きました。
+PlasmoというReactベースで拡張機能を作れるフレームワークを使いました。まだまだ練習中ですが、Reactに慣れていると比較的楽に開発がすすめられました。
+もし良ければ使ってみてください。
+
+ 拡張機能に追加する
+
+
+zipファイルをダウンロードして解凍する
+
+
+chrome://extensions/にアクセス
+
+
+パッケージ化されていない...]]></description><link>https://zenn.dev/syab_syab/articles/57fe26bac5f0e7</link><guid isPermaLink="true">https://zenn.dev/syab_syab/articles/57fe26bac5f0e7</guid><pubDate>Wed, 29 Jan 2025 20:37:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--VgtWSkhE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E6%258B%25A1%25E5%25BC%25B5%25E6%25A9%259F%25E8%2583%25BD%25E3%2580%2591Google%2520Chrome%25E3%2581%25A7%25E4%25BD%25BF%25E3%2581%2588%25E3%2582%258B%25E8%2587%25AA%25E5%258B%2595%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2583%25E3%2582%25AF%2528%25E5%25B7%25A6%25E5%258F%25B3%25E3%2581%25AE%25E7%259F%25A2%25E5%258D%25B0%25E3%2582%25AD%25E3%2583%25BC%25E3%2581%25AE%25E3%2581%25BF%2529%25E3%2580%2590%25E7%25BF%2592%25E4%25BD%259C%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25B9%25E3%2582%25A4%25E3%2582%25B9%25E3%2582%25A2%25E3%2583%25BC%25E3%2583%259F%25E3%2583%25BC%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4WlVLdDBZeHh0TzVNRVdqV3lrQlQtM0l0UWZPZ1JlaE1EbERNR0w9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>スイスアーミーアプリ</dc:creator></item><item><title><![CDATA[GASをTypescriptで。(動作確認済み)]]></title><description><![CDATA[Google Apps Script (GAS) を TypeScript で開発し、VSCode を使ってスプレッドシートを操作する方法を以下に説明します。TypeScript を使うことで、型安全で保守性の高いコードを書けます。
+
+
+ 手順
+
+
+必要なツールのインストール
+まず、以下のツールをインストールします。
+
+
+Node.js（npmが使える環境）
+
+clasp（Google Apps Script の CLI ツール）
+
+clasp のインストールコマンド:
+npm install -g @google/clasp
+
+
+
+Google アカウントで clasp を認証
+cla...]]></description><link>https://zenn.dev/endeavor_robot/articles/24edc7b2400b4d</link><guid isPermaLink="true">https://zenn.dev/endeavor_robot/articles/24edc7b2400b4d</guid><pubDate>Wed, 29 Jan 2025 18:37:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--RO8x9q4A--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:GAS%25E3%2582%2592Typescript%25E3%2581%25A7%25E3%2580%2582%2528%25E5%258B%2595%25E4%25BD%259C%25E7%25A2%25BA%25E8%25AA%258D%25E6%25B8%2588%25E3%2581%25BF%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:inumina%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI2NzZiMTdmZjIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>inumina</dc:creator></item><item><title><![CDATA[「npx create-xxx」で始めるnpmパッケージを自作したい]]></title><description><![CDATA[
+ はじめに
+create-next-app や npm init playwright のような便利なセットアップコマンドを利用した経験はありませんか？
+これらのコマンドは、たった数秒でプロジェクトをセットアップし、開発の第一歩を大きく加速させてくれます。
+ただ、その裏側を「どうやって作られているのだろう？」と考えたことがある方もいるのではないでしょうか。
+本記事では、そんな「npx create-xxx で始める npm パッケージの自作方法」について、シンプルなパッケージの自作をしながら解説します。
+
+
+npx create-xxx によるセットアップコマンドを作成する方法
+モジュ...]]></description><link>https://zenn.dev/yuu104/articles/how-to-create-npx-create-package</link><guid isPermaLink="true">https://zenn.dev/yuu104/articles/how-to-create-npx-create-package</guid><pubDate>Wed, 29 Jan 2025 13:39:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--A3I82_Zt--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%258Cnpx%2520create-xxx%25E3%2580%258D%25E3%2581%25A7%25E5%25A7%258B%25E3%2582%2581%25E3%2582%258Bnpm%25E3%2583%2591%25E3%2583%2583%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B8%25E3%2582%2592%25E8%2587%25AA%25E4%25BD%259C%25E3%2581%2597%25E3%2581%259F%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yuu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RjMGVjMzFlNzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yuu</dc:creator></item><item><title><![CDATA[Hi👋.length は３なのか]]></title><description><![CDATA[以下のコードを実行すると何が出力されるでしょうか？
+console.log("Hi👋".length);
+実はこれを実行すると、4 になります。この記事では、なぜこのような結果になるのか、そして「正しく」文字数をカウントする方法をざっくりと解説します。
+!
+記事中「文字」に関する情報がでてきますが、詳細な説明等はありません。そのため誤りが含まれる場合があるかもしれませんが、その場合はご指摘いただけると幸いです。
+
+
+ JavaScript の.length メソッド
+私は JavaScript において.lengthは、その文字列の長さを返すメソッドだと認識していました。例えば以下のよう...]]></description><link>https://zenn.dev/dev_commune/articles/js-str-length</link><guid isPermaLink="true">https://zenn.dev/dev_commune/articles/js-str-length</guid><pubDate>Wed, 29 Jan 2025 12:44:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Yim7geWE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Hi%2520.length%2520%25E3%2581%25AF%25EF%25BC%2593%25E3%2581%25AA%25E3%2581%25AE%25E3%2581%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:kenchandayo%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y1MTE3MTI5NDIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25B3%25E3%2583%259F%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%25B3%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU5Y2Q5ZDdkNDYuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kenchandayo</dc:creator></item><item><title><![CDATA[【TypeScript基礎②】型推論と型注釈の使い分け]]></title><description><![CDATA[
+ 結論
+複雑な型(オブジェクトなど)や曖昧な型（ユニオン型やジェネリクス型など）は型注釈で明示的に型を指定し、型の安全性を保つ方が良いが、明確な型は型推論に任せるのがベストプラクティス
+
+ 型推論
+
+TypeScriptが自動的に変数や関数の方を推測して決定するしくみ
+型推論の例は下記
+
+// 文字列型と推論
+const name = "John"
+
+ 型推論を使うとき
+
+シンプルな型を扱うときに使う
+
+プリミティブ型など
+
+
+
+
+ 型注釈
+
+TypeScriptで変数や関数に明示的に型を指定するしくみ
+型注釈の例は下記
+
+// 文字列型を明示
+const name: string =...]]></description><link>https://zenn.dev/mof_moriko/articles/292b6ad4635ecc</link><guid isPermaLink="true">https://zenn.dev/mof_moriko/articles/292b6ad4635ecc</guid><pubDate>Wed, 29 Jan 2025 10:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--sxm_7vVs--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590TypeScript%25E5%259F%25BA%25E7%25A4%258E%25E2%2591%25A1%25E3%2580%2591%25E5%259E%258B%25E6%258E%25A8%25E8%25AB%2596%25E3%2581%25A8%25E5%259E%258B%25E6%25B3%25A8%25E9%2587%2588%25E3%2581%25AE%25E4%25BD%25BF%25E3%2581%2584%25E5%2588%2586%25E3%2581%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:moriko%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNkMGY2YWE3OTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>moriko</dc:creator></item><item><title><![CDATA[画像処理100本ノックに挑戦｜Bi-cubic補間（027/100）]]></title><description><![CDATA[
+ これはなに？
+画像処理100本ノックを、TypeScriptとlibvipsで挑戦してみる記事の27本目です。
+
+ 前回
+https://zenn.dev/nyagato_00/articles/b3355f806fb6ad
+
+ 実装
+
+ お題
+
+Bi-cubic補間により画像を1.5倍に拡大せよ。
+Bi-cubic補間とはBi-linear補間の拡張であり、周辺の16画素から補間を行う。
+
+https://github.com/minido/Gasyori100knock-1/tree/master/Question_21_30#q27-bi-cubic補間
+
+ Coding
+im...]]></description><link>https://zenn.dev/nyagato_00/articles/5d252ed19206f8</link><guid isPermaLink="true">https://zenn.dev/nyagato_00/articles/5d252ed19206f8</guid><pubDate>Wed, 29 Jan 2025 06:22:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lETDwIO6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%2594%25BB%25E5%2583%258F%25E5%2587%25A6%25E7%2590%2586100%25E6%259C%25AC%25E3%2583%258E%25E3%2583%2583%25E3%2582%25AF%25E3%2581%25AB%25E6%258C%2591%25E6%2588%25A6%25EF%25BD%259CBi-cubic%25E8%25A3%259C%25E9%2596%2593%25EF%25BC%2588027%252F100%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nyagato_00%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUxtNXd1MTVKUVk3SjNOUG1kcGlMeWdfWUt3blZzaTRpWDRoYjU1c21UTTk3c1E9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nyagato_00</dc:creator></item><item><title><![CDATA[TypeScriptで始めるTDDハンズオン：レイヤードアーキテクチャでのAPI開発]]></title><description><![CDATA[TypeScriptとjestを使用したアプリケーションのAPI開発を通じて、テスト駆動開発（TDD）の実践的な手法を学ぶハンズオン形式の解説書です。
+
+ソースコードの一部だけでなく完結と動作確認まで載せているので、
+（未経験の方は少々難しいかもしれませんが）ポートフォリオの参考にもなると思います。すぐに取り組むことができ、実務で必要となる要素を着実に学べます。
+
+【概要】
+1. TypeScriptとExpress.jsを使用したRESTful APIの開発
+2. Jestを使用したテスト駆動開発(TDD)の手法
+3. レイヤードアーキテクチャの実践
+4. 実務で使える設計・実装テクニック
+5. 延長線上のおすすめ書籍
+
+【特徴】
+1. 段階的に整理しました
+   - 各レイヤーを順に実装
+   - TDDのサイクルを実践しながら進める
+   - 実務で必要な機能を網羅
+
+2. 実践的な内容を意識しました
+   - XSS対策などのセキュリティ考慮
+   - バリデーションの実装
+   - エラーハンドリング
+   - TypeScriptの型安全な開発
+
+3. テスト駆動開発の実践
+   - Red-Green-Refactorサイクルの具体例
+   - 適切な粒度でのテスト実装
+   - テストファーストの考え方
+]]></description><link>https://zenn.dev/nezumizuki/books/3a7f70aab092f1</link><guid isPermaLink="true">https://zenn.dev/nezumizuki/books/3a7f70aab092f1</guid><pubDate>Wed, 29 Jan 2025 04:38:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--sZ7qvQGh--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci9jOTVmYmFlNDU2LmpwZWc=%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>MI(甘辛チキン)</dc:creator></item><item><title><![CDATA[[TypeScript]オブジェクト定数から型定義するのが便利だよって話]]></title><description><![CDATA[こんにちわ、かねこです。
+自分は普段Reactを使って開発をしているのですが、Reactにはconstantsと呼ばれる変数や値を定義する方法があり、プロジェクト内で使う値を一元管理でき変更が必要になった場合にも、一箇所で変更するだけで済むため、コードの保守性を高めることができたり、JSX内に生のテキストを書かなくて良くなるため、ソースコードの可読性が上がるので、かなり気に入っています。
+その中でも最近、定義した定数からTypeScriptの型を生成する記述方法がかなりいいなと思ったので、共有していこうと思います〜
+今回はTODOリストの新規作成画面と編集画面で同じコンポーネントを使って...]]></description><link>https://zenn.dev/toraco/articles/ef4a98f272a5f5</link><guid isPermaLink="true">https://zenn.dev/toraco/articles/ef4a98f272a5f5</guid><pubDate>Wed, 29 Jan 2025 03:16:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Cw3hFaA4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BTypeScript%255D%25E3%2582%25AA%25E3%2583%2596%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E5%25AE%259A%25E6%2595%25B0%25E3%2581%258B%25E3%2582%2589%25E5%259E%258B%25E5%25AE%259A%25E7%25BE%25A9%25E3%2581%2599%25E3%2582%258B%25E3%2581%25AE%25E3%2581%258C%25E4%25BE%25BF%25E5%2588%25A9%25E3%2581%25A0%25E3%2582%2588%25E3%2581%25A3%25E3%2581%25A6%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%258B%25E3%2581%25AD%25E3%2581%2593%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y5ZTBhNDI3ZjguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:toraco%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2581%25AE%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2d3T1pRbUc0ZDBMRjA3LUdScVBsWm1ZeWpIYzNlM0NZSjFOSnhHeEE9czI1MC1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>かねこ</dc:creator></item><item><title><![CDATA[GAS で多言語対応やってみた]]></title><description><![CDATA[
+ はじめに
+クラウドエース第三開発部の角谷（かどたに）です。
+Google Apps Script（以下、GAS）を使用した開発において、多言語対応をやってみたのでその方法を紹介します。
+
+ 対象読者
+
+GAS 開発を行っている方（特に ASIDE を使用する方）
+GAS で多言語対応を行いたい方
+ASIDE 環境で外部の npm パッケージを使用したい方
+
+
+ 手順
+
+ 前提条件
+
+Node.js がインストールされている
+
+
+ 手順 1. ASIDE で GAS の開発環境を構築
+今回は ASIDE というフレームワークを用いて、GAS の開発環境を構築します。
+
+
+ASIDE: ...]]></description><link>https://zenn.dev/cloud_ace/articles/773666f01034cb</link><guid isPermaLink="true">https://zenn.dev/cloud_ace/articles/773666f01034cb</guid><pubDate>Wed, 29 Jan 2025 01:23:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Aca_sizN--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:GAS%2520%25E3%2581%25A7%25E5%25A4%259A%25E8%25A8%2580%25E8%25AA%259E%25E5%25AF%25BE%25E5%25BF%259C%25E3%2582%2584%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25A6%25E3%2583%2589%25E3%2582%25A8%25E3%2583%25BC%25E3%2582%25B9%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE2OGMwYmM4MTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>クラウドエース株式会社</dc:creator></item><item><title><![CDATA[真のエラーを救い出せ！バックエンドのエラーを99.9%削減した話]]></title><description><![CDATA[
+ はじめに
+!
+修正や追加はコメントやGitHubの編集リクエストにてお願いします。
+本記事は、提供いただいた資料および追加情報のみを元に執筆しています。
+
+
+ 事の発端
+私のチームでは日々多くのアラートがSlackに流れてきます。ほんとに対応しないといけないクリティカルなエラーもあれば、そうでないものもあります。
+もはやオオカミ少年と化したエラーに、私たちはどう対応すべきか、それが問題でした。
+今回取り掛かったのはNest.jsで稼働しているAPIサーバーとCloud Functions(TypeScript)のエラーを削減するプロジェクトです。
+このプロジェクトが始まったころ、1日...]]></description><link>https://zenn.dev/gmomedia/articles/5d57255ae74b84</link><guid isPermaLink="true">https://zenn.dev/gmomedia/articles/5d57255ae74b84</guid><pubDate>Wed, 29 Jan 2025 01:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Z-ZjMgBQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%259C%259F%25E3%2581%25AE%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E3%2582%2592%25E6%2595%2591%25E3%2581%2584%25E5%2587%25BA%25E3%2581%259B%25EF%25BC%2581%25E3%2583%2590%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2589%25E3%2581%25AE%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E3%2582%259299.9%2525%25E5%2589%258A%25E6%25B8%259B%25E3%2581%2597%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Riya%2520Amemiya%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzMzOGEzNzc5MTMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:GMO%25E3%2583%25A1%25E3%2583%2587%25E3%2582%25A3%25E3%2582%25A2%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzIyOTk0YWYxZDYuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Riya Amemiya</dc:creator></item><item><title><![CDATA[個人ブログの記事を Zenn, Qiita へエクスポートするコマンドを作る]]></title><description><![CDATA[
+ Git Subtree
+Git には複数のリポジトリを統合する手段の1つとして Subtree というものがあるようです。文字通り、リポジトリをサブディレクトリとして取り込み、別でバージョン管理できるようにする仕組みです。
+
+やり方はこの記事などに書いてあります。
+
+ Zenn のリポジトリを取り込む
+例として、Zenn の記事を管理しているリポジトリを取り込んでみます。リポジトリが GitHub にあるとすると、
+git remote add my-zenn-repo https://github.com/username/zenn-repo.git
+のようにすることで、my-ze...]]></description><link>https://zenn.dev/s_inoue0108/articles/article-export-cmd</link><guid isPermaLink="true">https://zenn.dev/s_inoue0108/articles/article-export-cmd</guid><pubDate>Tue, 28 Jan 2025 14:18:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--QqC0THpU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2580%258B%25E4%25BA%25BA%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%25E3%2581%25AE%25E8%25A8%2598%25E4%25BA%258B%25E3%2582%2592%2520Zenn%252C%2520Qiita%2520%25E3%2581%25B8%25E3%2582%25A8%25E3%2582%25AF%25E3%2582%25B9%25E3%2583%259D%25E3%2583%25BC%25E3%2583%2588%25E3%2581%2599%25E3%2582%258B%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:S.Inoue%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBlZTc2ZmE4NzYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>S.Inoue</dc:creator></item><item><title><![CDATA[try, catch 処理が必要なコードの見極め方]]></title><description><![CDATA[!
+そもそもtry, catchがわからない方は、こちらをお読みください
+
+https://zenn.dev/sanpi34/articles/294717a744970a
+
+ try...catch 処理が必要なコードの見極め方
+try...catch 処理を使うべき場面を見極めるには、エラーが発生しやすい箇所やその影響を正しく判断することが重要です。この記事では、どのような場合に try...catch を使うべきかを解説します。
+
+
+ 1. エラーが発生する可能性がある操作を含むか
+以下のような操作では、エラーが発生する可能性があるため、try...catch を検討する必要があり...]]></description><link>https://zenn.dev/sanpi34/articles/ed98ee5a563e4d</link><guid isPermaLink="true">https://zenn.dev/sanpi34/articles/ed98ee5a563e4d</guid><pubDate>Tue, 28 Jan 2025 13:03:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--yhx0utIM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:try%252C%2520catch%2520%25E5%2587%25A6%25E7%2590%2586%25E3%2581%258C%25E5%25BF%2585%25E8%25A6%2581%25E3%2581%25AA%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2581%25AE%25E8%25A6%258B%25E6%25A5%25B5%25E3%2582%2581%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Sanpi34%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FiZTM1NzYwZTQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Sanpi34</dc:creator></item><item><title><![CDATA[try...catch とは何か？]]></title><description><![CDATA[try...catch は、JavaScript をはじめとする多くのプログラミング言語で使用されるエラーハンドリングの構文です。プログラム実行中に発生するエラーを捕捉し、適切に処理するための仕組みを提供します。
+
+
+ try...catch の基本構文
+以下は、JavaScript の try...catch 構文の基本形です。
+try {
+  // エラーが発生する可能性のあるコード
+} catch (error) {
+  // エラーが発生した場合の処理
+}
+
+ 構成要素
+
+
+try ブロック
+
+エラーが発生する可能性のあるコードを記述します。
+このブロック内でエラーが発生した場合...]]></description><link>https://zenn.dev/sanpi34/articles/294717a744970a</link><guid isPermaLink="true">https://zenn.dev/sanpi34/articles/294717a744970a</guid><pubDate>Tue, 28 Jan 2025 13:00:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--A6ssPak5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:try...catch%2520%25E3%2581%25A8%25E3%2581%25AF%25E4%25BD%2595%25E3%2581%258B%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Sanpi34%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FiZTM1NzYwZTQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Sanpi34</dc:creator></item><item><title><![CDATA[Next.js × GAイベントトラッキング実装で学んだこと]]></title><description><![CDATA[
+ はじめに
+最近、Next.jsプロジェクトでGoogle Analytics（GA4）のイベントトラッキングを実装する機会がありました。その過程で学んだことを共有したいと思います。
+
+ 注意事項
+本記事では Next.js アプリケーションでのイベントトラッキングの実装に焦点を当てているため、GA4/GTMのコンソールでの設定（トリガーの作成やタグの設定など）については割愛しています。設定については、以下の公式ドキュメントを参照してください：
+
+Google Analytics 4 設定ガイド
+Google タグマネージャーの基本
+GA4 イベントの設定方法
+GTM トリガーの設定
+...]]></description><link>https://zenn.dev/shunjuio/articles/9e0feaabce6a3b</link><guid isPermaLink="true">https://zenn.dev/shunjuio/articles/9e0feaabce6a3b</guid><pubDate>Tue, 28 Jan 2025 11:21:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GKs4LoPK--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Next.js%2520%25C3%2597%2520GA%25E3%2582%25A4%25E3%2583%2599%25E3%2583%25B3%25E3%2583%2588%25E3%2583%2588%25E3%2583%25A9%25E3%2583%2583%25E3%2582%25AD%25E3%2583%25B3%25E3%2582%25B0%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%25A7%25E5%25AD%25A6%25E3%2582%2593%25E3%2581%25A0%25E3%2581%2593%25E3%2581%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:aratai%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU3MGZmNGMxMGQuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E5%2590%2588%25E5%2590%258C%25E4%25BC%259A%25E7%25A4%25BE%25E6%2598%25A5%25E7%25A7%258B%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YV9BNjFzbGNZZ1pDYWpGMC1zb0Y4SDExU1R3OUdsQk5XRE5pWUg5UT1zOTYtYw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>aratai</dc:creator></item><item><title><![CDATA[画像処理100本ノックに挑戦｜Bi-linear補間（026/100）]]></title><description><![CDATA[
+ これはなに？
+画像処理100本ノックを、TypeScriptとlibvipsで挑戦してみる記事の26本目です。
+
+ 前回
+https://zenn.dev/nyagato_00/articles/8bb967fe63fd6e
+
+ 実装
+
+ お題
+
+Bi-linear補間により画像を1.5倍に拡大せよ。
+Bi-linear補間とは周辺の４画素に距離に応じた重みをつけることで補完する手法である。 計算量が多いだけ処理時間がかかるが、画質の劣化を抑えることができる。
+
+https://github.com/minido/Gasyori100knock-1/tree/master/Quest...]]></description><link>https://zenn.dev/nyagato_00/articles/b3355f806fb6ad</link><guid isPermaLink="true">https://zenn.dev/nyagato_00/articles/b3355f806fb6ad</guid><pubDate>Tue, 28 Jan 2025 07:44:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--RkbQTKF2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%2594%25BB%25E5%2583%258F%25E5%2587%25A6%25E7%2590%2586100%25E6%259C%25AC%25E3%2583%258E%25E3%2583%2583%25E3%2582%25AF%25E3%2581%25AB%25E6%258C%2591%25E6%2588%25A6%25EF%25BD%259CBi-linear%25E8%25A3%259C%25E9%2596%2593%25EF%25BC%2588026%252F100%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nyagato_00%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUxtNXd1MTVKUVk3SjNOUG1kcGlMeWdfWUt3blZzaTRpWDRoYjU1c21UTTk3c1E9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nyagato_00</dc:creator></item><item><title><![CDATA[TypeScript 5.8のerasableSyntaxOnlyフラグ。enumやnamespaceが消える日が来た]]></title><description><![CDATA[TypeScript 5.8で導入されるerasableSyntaxOnlyフラグを使うと、enumやnamespace、クラスのパラメータプロパティ、moduleキーワードなどの構文をエラーとして検出できます。これらの構文はNode.jsでTypeScriptを実行する際に非互換な構文であり、本フラグの導入によりNode.jsとTypeScriptの互換性が高まります。
+本記事では、erasableSyntaxOnlyフラグの挙動と、なぜこのフラグが導入されたのかを解説します。
+
+ erasableSyntaxOnlyフラグの挙動
+erasableSyntaxOnly とは、「削除可能...]]></description><link>https://zenn.dev/ubie_dev/articles/ts-58-erasable-syntax-only</link><guid isPermaLink="true">https://zenn.dev/ubie_dev/articles/ts-58-erasable-syntax-only</guid><pubDate>Tue, 28 Jan 2025 04:14:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1bnbxgNw--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%25205.8%25E3%2581%25AEerasableSyntaxOnly%25E3%2583%2595%25E3%2583%25A9%25E3%2582%25B0%25E3%2580%2582enum%25E3%2582%2584namespace%25E3%2581%258C%25E6%25B6%2588%25E3%2581%2588%25E3%2582%258B%25E6%2597%25A5%25E3%2581%258C%25E6%259D%25A5%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E9%25B9%25BF%25E9%2587%258E%2520%25E5%25A3%25AE%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VlOWMzMWRhODMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Ubie%2520%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2hwRUMxbUtjVjZsX01lT2R6N1Nsejk1SXR4WUZoYjB2LTNOdzNjV3c9czI1MC1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>鹿野 壮</dc:creator></item></channel></rss>
