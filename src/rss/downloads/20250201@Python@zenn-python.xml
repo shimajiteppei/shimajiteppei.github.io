@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Sat, 01 Feb 2025 01:00:21 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Baby-step Giant-step メモ]]></title><description><![CDATA[
+ 一般に
+
+ 問題設定
+
+有限巡回群 (G = \langle g \rangle) （位数 (n)）
+要素 (h \in G)
+
+典型的には 離散対数問題： g^x = h を満たす整数 x （0 \le x &lt; n）を求める[1]
+
+
+
+ アルゴリズムの流れ
+
+
+ステップ数の設定
+
+m = \lceil \sqrt{n} \rceil
+
+
+
+Baby-step
+
+
+j = 0, 1, \dots, m-1 について b_j = g^j を計算し、b_j（群要素）をキーに「対応する j」をハッシュテーブルに保存する
+
+
+
+Giant-step
+
+（大ステップ量）g^m の逆元を...]]></description><link>https://zenn.dev/t_shunsuke/articles/note-baby-step-giant-step</link><guid isPermaLink="true">https://zenn.dev/t_shunsuke/articles/note-baby-step-giant-step</guid><pubDate>Fri, 31 Jan 2025 10:33:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GySZjvXd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:Baby-step%2520Giant-step%2520%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:t_shunsuke%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzYxM2YzZjlhMjcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>t_shunsuke</dc:creator></item><item><title><![CDATA[PythonとJavaScriptで転置をするときの違い]]></title><description><![CDATA[例
+# before
+| 1 2 3 |
+| 4 5 6 |
+→
+# before
+| 1 4 |
+| 2 5 |
+| 3 6 |
+import numpy as np
+def transpose(matrix):
+    arr = np.array(matrix)
+    r,c = arr.shape
+    return arr.T.reshape((c,r)).tolist()
+Python の場合 numpy を使えば比較的楽に実装可能。
+reshape で値を取得し、転置を行なってからreshapeすることで値を取得することが可能となる。
+pythonの場合、
+const ...]]></description><link>https://zenn.dev/pypypymi/articles/7101b46e3f49ac</link><guid isPermaLink="true">https://zenn.dev/pypypymi/articles/7101b46e3f49ac</guid><pubDate>Fri, 31 Jan 2025 09:24:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--uhqkftiH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A8JavaScript%25E3%2581%25A7%25E8%25BB%25A2%25E7%25BD%25AE%25E3%2582%2592%25E3%2581%2599%25E3%2582%258B%25E3%2581%25A8%25E3%2581%258D%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tac-tac-go%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4WTctaEpSdWxmSTVwMGhQX3dSXzk0dzhab1pQbGtXaHd4ejB5UG1HLWM9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tac-tac-go</dc:creator></item><item><title><![CDATA[論理演算を用いた奇数と偶数の判定(Python)]]></title><description><![CDATA[実装
+def is_even_or_odd(num):
+    return "Even" if num &amp; 1 == 0 else "Odd"
+
+number = 5
+result = is_even_or_odd(number)
+print(f"{number} is {result}")
+説明:
+
+
+任意の整数をnとする。このnを二進数に変換し、1を二進数に変換する。
+
+1は二進数で表すと0b00..1。最下位ビットが1であり、それ以外のビットはすべて0である。
+任意の奇数nを二進数で表すと、最下位ビットが1であり、それ以外のビットは数値によって変わる。
+
+
+
+次に、これら...]]></description><link>https://zenn.dev/pypypymi/articles/178994695ec7d3</link><guid isPermaLink="true">https://zenn.dev/pypypymi/articles/178994695ec7d3</guid><pubDate>Fri, 31 Jan 2025 09:22:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--NRgZp3wE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%25AB%2596%25E7%2590%2586%25E6%25BC%2594%25E7%25AE%2597%25E3%2582%2592%25E7%2594%25A8%25E3%2581%2584%25E3%2581%259F%25E5%25A5%2587%25E6%2595%25B0%25E3%2581%25A8%25E5%2581%25B6%25E6%2595%25B0%25E3%2581%25AE%25E5%2588%25A4%25E5%25AE%259A%2528Python%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tac-tac-go%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4WTctaEpSdWxmSTVwMGhQX3dSXzk0dzhab1pQbGtXaHd4ejB5UG1HLWM9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tac-tac-go</dc:creator></item><item><title><![CDATA[文字列の中で重複しない初めての文字を探す]]></title><description><![CDATA[例
+"aabbccdde" → "e"
+"wxyz" → "w"
+function noRepeat(str) {  
+  const arr = str.split("")
+  return arr.find((ele) =&gt; arr.indexOf(ele)===arr.lastIndexOf(ele))
+}
+JavaScript であれば indexOf と lastIndexOf を用いてその結果が一致するインデックスであればすなわち唯一登場する文字列となり判定できる。
+Python であれば 文字列に対して特定の文字が登場するインデックスを検索する find と 右側の文...]]></description><link>https://zenn.dev/pypypymi/articles/6693a774274e49</link><guid isPermaLink="true">https://zenn.dev/pypypymi/articles/6693a774274e49</guid><pubDate>Fri, 31 Jan 2025 09:17:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--h4hEr2U2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%2596%2587%25E5%25AD%2597%25E5%2588%2597%25E3%2581%25AE%25E4%25B8%25AD%25E3%2581%25A7%25E9%2587%258D%25E8%25A4%2587%25E3%2581%2597%25E3%2581%25AA%25E3%2581%2584%25E5%2588%259D%25E3%2582%2581%25E3%2581%25A6%25E3%2581%25AE%25E6%2596%2587%25E5%25AD%2597%25E3%2582%2592%25E6%258E%25A2%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tac-tac-go%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4WTctaEpSdWxmSTVwMGhQX3dSXzk0dzhab1pQbGtXaHd4ejB5UG1HLWM9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tac-tac-go</dc:creator></item><item><title><![CDATA[PythonとJavaScriptの yield の違い]]></title><description><![CDATA[
+ Pythonのyield
+
+Pythonでは、yieldは主にジェネレーター関数で使用される。ジェネレーター関数はイテレータを返す特殊な関数であり、yieldを使って一度に一つずつ値を生成する。
+def generator_example():
+    yield 1
+    yield 2
+    yield 3
+
+gen = generator_example()
+print(next(gen))  # 出力: 1
+print(next(gen))  # 出力: 2
+print(next(gen))  # 出力: 3
+
+ JavaScriptのyield
+
+JavaScriptで...]]></description><link>https://zenn.dev/pypypymi/articles/34ce1006aae005</link><guid isPermaLink="true">https://zenn.dev/pypypymi/articles/34ce1006aae005</guid><pubDate>Fri, 31 Jan 2025 09:11:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--CDoNYoc2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A8JavaScript%25E3%2581%25AE%2520yield%2520%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tac-tac-go%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4WTctaEpSdWxmSTVwMGhQX3dSXzk0dzhab1pQbGtXaHd4ejB5UG1HLWM9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tac-tac-go</dc:creator></item><item><title><![CDATA[値の条件比較を三項演算子と if を使わずに実装する方法]]></title><description><![CDATA[Python と JavaScript で三項演算子とifを使わずに a と b の代償比較をする実装
+いくつか方法は考えられるが、Python は match 、Javascript であれば switch を利用する。この際、条件分岐として sign 関数を用いて正負によって値を分岐させると便利である。
+Python
+import numpy as np
+def no_ifs_no_buts(a, b):
+    sign = np.sign(a-b)
+    match sign:
+        case -1:
+            return f'{a} is small...]]></description><link>https://zenn.dev/pypypymi/articles/2aa090157fd938</link><guid isPermaLink="true">https://zenn.dev/pypypymi/articles/2aa090157fd938</guid><pubDate>Fri, 31 Jan 2025 09:10:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--TOjV3FQU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2580%25A4%25E3%2581%25AE%25E6%259D%25A1%25E4%25BB%25B6%25E6%25AF%2594%25E8%25BC%2583%25E3%2582%2592%25E4%25B8%2589%25E9%25A0%2585%25E6%25BC%2594%25E7%25AE%2597%25E5%25AD%2590%25E3%2581%25A8%2520if%2520%25E3%2582%2592%25E4%25BD%25BF%25E3%2582%258F%25E3%2581%259A%25E3%2581%25AB%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tac-tac-go%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4WTctaEpSdWxmSTVwMGhQX3dSXzk0dzhab1pQbGtXaHd4ejB5UG1HLWM9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tac-tac-go</dc:creator></item><item><title><![CDATA[PythonとJavaScriptで母音を抜き出す実装の違い]]></title><description><![CDATA[
+ Python
+Python では、reモジュール を使って母音を抽出します。
+import re
+
+def extract_vowels(text):
+    vowels = re.findall(r'[aeiou]', text,re.IGNORECASE)
+    return vowels
+
+text = "Hello, World!"
+vowels = extract_vowels(text)
+print(vowels)
+説明:
+
+
+re.findall は、正規表現に一致するすべての部分文字列をリストとして返します。
+
+re.IGNORECASE は、小文字と大文字の母音...]]></description><link>https://zenn.dev/pypypymi/articles/e0e0168cd2aacd</link><guid isPermaLink="true">https://zenn.dev/pypypymi/articles/e0e0168cd2aacd</guid><pubDate>Fri, 31 Jan 2025 09:08:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--E3JvJVht--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A8JavaScript%25E3%2581%25A7%25E6%25AF%258D%25E9%259F%25B3%25E3%2582%2592%25E6%258A%259C%25E3%2581%258D%25E5%2587%25BA%25E3%2581%2599%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tac-tac-go%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4WTctaEpSdWxmSTVwMGhQX3dSXzk0dzhab1pQbGtXaHd4ejB5UG1HLWM9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tac-tac-go</dc:creator></item><item><title><![CDATA[JavaScriptの連想配列をPythonの辞書のように特定のキーを指定しながら、順序を保ちながらソートする方法]]></title><description><![CDATA[例えば 商品という key 、値段という value が あり、値段 ごとに降順で並べ上位3つのみを取得するというタスクがあったとする。
+[ 'Computer', 'Cell Phones', 'Vacuum Cleaner','Autos' ] #商品名
+[ 597, 7176, 3192,597 ] #値段のリスト
+Pythonでこのような問題を考える
+{'Computer': 597, 'Cell Phones': 7176, 'Vacuum Cleaner': 3192, 'Autos': 597}
+上記のような辞書が用意されたときにforなどで 辞書型を作成し、sorted関...]]></description><link>https://zenn.dev/pypypymi/articles/4053472609688f</link><guid isPermaLink="true">https://zenn.dev/pypypymi/articles/4053472609688f</guid><pubDate>Fri, 31 Jan 2025 09:07:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fiSpK7Ak--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25E3%2581%25AE%25E9%2580%25A3%25E6%2583%25B3%25E9%2585%258D%25E5%2588%2597%25E3%2582%2592Python%25E3%2581%25AE%25E8%25BE%259E%25E6%259B%25B8%25E3%2581%25AE%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E7%2589%25B9%25E5%25AE%259A%25E3%2581%25AE%25E3%2582%25AD%25E3%2583%25BC%25E3%2582%2592%25E6%258C%2587%25E5%25AE%259A%25E3%2581%2597%25E3%2581%25AA%25E3%2581%258C%25E3%2582%2589%25E3%2580%2581%25E9%25A0%2586%25E5%25BA%258F%25E3%2582%2592%25E4%25BF%259D%25E3%2581%25A1%25E3%2581%25AA%25E3%2581%258C%25E3%2582%2589%25E3%2582%25BD%25E3%2583%25BC%25E3%2583%2588%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tac-tac-go%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4WTctaEpSdWxmSTVwMGhQX3dSXzk0dzhab1pQbGtXaHd4ejB5UG1HLWM9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tac-tac-go</dc:creator></item><item><title><![CDATA[文字列比較のPythonとJavaScriptの違い]]></title><description><![CDATA[Python とJavaScript で末尾の文字を基準に並び替える時、Python では sorted の key に文字列を渡せばいいが、JavaScript の sort では そのままだと文字列比較ではなく数値比較にしか使えないので少し工夫が必要である。
+
+ Python
+def sort_by_last_char(arr):
+    return sorted(arr, key=lambda x: x[-1])
+
+arr = ['apple', 'banana', 'cherry', 'date']
+sorted_arr = sort_by_last_char(arr)
+pri...]]></description><link>https://zenn.dev/pypypymi/articles/03d462d6ab2259</link><guid isPermaLink="true">https://zenn.dev/pypypymi/articles/03d462d6ab2259</guid><pubDate>Fri, 31 Jan 2025 09:06:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--C3gL85-7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%2596%2587%25E5%25AD%2597%25E5%2588%2597%25E6%25AF%2594%25E8%25BC%2583%25E3%2581%25AEPython%25E3%2581%25A8JavaScript%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tac-tac-go%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4WTctaEpSdWxmSTVwMGhQX3dSXzk0dzhab1pQbGtXaHd4ejB5UG1HLWM9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tac-tac-go</dc:creator></item><item><title><![CDATA[JavaScriptとPythonを用いて文字列を置換処理をさせるときの第2引数について]]></title><description><![CDATA[今まで両言語ともに文字列を置換させるときには第二引数に置換後の文字列を記述するのが
+ほとんどで、Python で re.sub を用いて文字を置換処理させるときには、
+re.sub の第二引数の値は置換後の文字列だと思っていたが、それは間違いで 公式(https://docs.python.org/ja/3/library/re.html) を読んでみると
+もし repl が関数であれば、重複しない pattern が発生するたびにその関数が呼ばれます。
+この関数は一つの Match 引数を取り、置換文字列を返します
+という記述があり、第二引数には関数を渡すことができる。
+例えばある文字...]]></description><link>https://zenn.dev/pypypymi/articles/5ff2b58dfc2f01</link><guid isPermaLink="true">https://zenn.dev/pypypymi/articles/5ff2b58dfc2f01</guid><pubDate>Fri, 31 Jan 2025 09:04:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--eKx3FxFS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25E3%2581%25A8Python%25E3%2582%2592%25E7%2594%25A8%25E3%2581%2584%25E3%2581%25A6%25E6%2596%2587%25E5%25AD%2597%25E5%2588%2597%25E3%2582%2592%25E7%25BD%25AE%25E6%258F%259B%25E5%2587%25A6%25E7%2590%2586%25E3%2582%2592%25E3%2581%2595%25E3%2581%259B%25E3%2582%258B%25E3%2581%25A8%25E3%2581%258D%25E3%2581%25AE%25E7%25AC%25AC2%25E5%25BC%2595%25E6%2595%25B0%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tac-tac-go%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4WTctaEpSdWxmSTVwMGhQX3dSXzk0dzhab1pQbGtXaHd4ejB5UG1HLWM9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tac-tac-go</dc:creator></item><item><title><![CDATA[PythonとJavaScriptでsortする際に複数の項目で並び替える時の違い]]></title><description><![CDATA[例えば
+['Hiroshi','Kenji','Masahiro','Yutaka','Shigeru','Kazuo','Noboru','Satoshi','Yoshio']
+のような配列があった場合に、文字の長さで並び替えることを最優先し、
+その後アルファベットの並び替えは降順で文字を並び替えたい場合に、Python と JavaScript の記述の違いを記述する。
+Python の場合、
+lst = ['Hiroshi','Kenji','Masahiro','Yutaka','Shigeru','Kazuo','Noboru','Satoshi','Yoshio']
+prin...]]></description><link>https://zenn.dev/pypypymi/articles/bba6e17725fbe5</link><guid isPermaLink="true">https://zenn.dev/pypypymi/articles/bba6e17725fbe5</guid><pubDate>Fri, 31 Jan 2025 09:00:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hUM8Crl2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A8JavaScript%25E3%2581%25A7sort%25E3%2581%2599%25E3%2582%258B%25E9%259A%259B%25E3%2581%25AB%25E8%25A4%2587%25E6%2595%25B0%25E3%2581%25AE%25E9%25A0%2585%25E7%259B%25AE%25E3%2581%25A7%25E4%25B8%25A6%25E3%2581%25B3%25E6%259B%25BF%25E3%2581%2588%25E3%2582%258B%25E6%2599%2582%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tac-tac-go%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4WTctaEpSdWxmSTVwMGhQX3dSXzk0dzhab1pQbGtXaHd4ejB5UG1HLWM9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tac-tac-go</dc:creator></item><item><title><![CDATA[PythonとJavaScriptのsort関数における複数の項目を並び替える記述の違いについて]]></title><description><![CDATA[
+ PythonとJavaScriptのsort関数の違いについて
+PythonとJavaScriptには、それぞれ独自の方法でリストや辞書をソートする機能があります。この記事では、特に多次元リストや辞書をソートする方法について、PythonとJavaScriptの実装を比較してみましょう。
+
+ Pythonのソート
+Pythonでは、sorted関数を使用してリストや辞書をソートすることができます。sorted関数は新しいリストを返し、元のリストは変更されません。
+多次元リストのソート
+例えば、以下のような多次元リストをソートする場合を考えます。
+data = [['きゅうり', 2,...]]></description><link>https://zenn.dev/pypypymi/articles/f9e60dc4e7dc90</link><guid isPermaLink="true">https://zenn.dev/pypypymi/articles/f9e60dc4e7dc90</guid><pubDate>Fri, 31 Jan 2025 08:54:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--mcz2XsaC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A8JavaScript%25E3%2581%25AEsort%25E9%2596%25A2%25E6%2595%25B0%25E3%2581%25AB%25E3%2581%258A%25E3%2581%2591%25E3%2582%258B%25E8%25A4%2587%25E6%2595%25B0%25E3%2581%25AE%25E9%25A0%2585%25E7%259B%25AE%25E3%2582%2592%25E4%25B8%25A6%25E3%2581%25B3%25E6%259B%25BF%25E3%2581%2588%25E3%2582%258B%25E8%25A8%2598%25E8%25BF%25B0%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tac-tac-go%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4WTctaEpSdWxmSTVwMGhQX3dSXzk0dzhab1pQbGtXaHd4ejB5UG1HLWM9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tac-tac-go</dc:creator></item><item><title><![CDATA[DBSCAN実践とアルゴリズム]]></title><description><![CDATA[DBSCANは"密度ベース"のクラスタリング手法である。
+
+DBSCANが提案された論文は
+
+Martin Ester，Hans-Peter Kriegel，Jorg Sander，Xiaowei Xu. A Density-Based Algorithm for Discovering Clusters in Large Spatial Databases with Noise. Proccrdings of 2ndInternational Conference on Knowledge Discovery and Data Mining (KDD-96),1996.
+
+で、scik...]]></description><link>https://zenn.dev/pypypymi/articles/e98b8140184d1c</link><guid isPermaLink="true">https://zenn.dev/pypypymi/articles/e98b8140184d1c</guid><pubDate>Fri, 31 Jan 2025 08:44:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7mrY9MAn--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:DBSCAN%25E5%25AE%259F%25E8%25B7%25B5%25E3%2581%25A8%25E3%2582%25A2%25E3%2583%25AB%25E3%2582%25B4%25E3%2583%25AA%25E3%2582%25BA%25E3%2583%25A0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tac-tac-go%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4WTctaEpSdWxmSTVwMGhQX3dSXzk0dzhab1pQbGtXaHd4ejB5UG1HLWM9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tac-tac-go</dc:creator></item><item><title><![CDATA[PythonとJavaScriptでリスト(List)を転置させるときの違い]]></title><description><![CDATA[
+ Pythonでリストを転置
+def transpose(matrix):
+    return [list(row) for row in zip(*matrix)]
+
+matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+
+transposed_matrix = transpose(matrix)
+print(transposed_matrix)
+説明:
+
+
+zip(*matrix) は、各行の対応する要素をまとめてタプルにする。
+リスト内包表記 [list(row) for row in zip(*matrix)] によ...]]></description><link>https://zenn.dev/pypypymi/articles/842a9564b776c2</link><guid isPermaLink="true">https://zenn.dev/pypypymi/articles/842a9564b776c2</guid><pubDate>Fri, 31 Jan 2025 08:27:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--QY-vIctS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A8JavaScript%25E3%2581%25A7%25E3%2583%25AA%25E3%2582%25B9%25E3%2583%2588%2528List%2529%25E3%2582%2592%25E8%25BB%25A2%25E7%25BD%25AE%25E3%2581%2595%25E3%2581%259B%25E3%2582%258B%25E3%2581%25A8%25E3%2581%258D%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tac-tac-go%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4WTctaEpSdWxmSTVwMGhQX3dSXzk0dzhab1pQbGtXaHd4ejB5UG1HLWM9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tac-tac-go</dc:creator></item><item><title><![CDATA[Semantic Kernel入門 - (1)Hello World]]></title><description><![CDATA[
+ 概要
+Semantic Kernel（セマンティック カーネル） は、AIを活用したアプリケーションを効率よく開発できる軽量なフレームワークです。
+LangChainなどと同じAIオーケストレーターのカテゴリに分類され、複数のAIモデルやツールを連携させることで、より高度なタスクを実行できます。
+Semantic Kernelは、Microsoft社がオープンソースとして提供・管理しており、Java・C#・Pythonで利用可能です。
+このシリーズでは、PythonをベースにSemantic Kernelの基本的な使い方から応用的な活用方法までを、デモを交えながら紹介していきます。
+...]]></description><link>https://zenn.dev/motojinc25/articles/sk_20250131_helloworld</link><guid isPermaLink="true">https://zenn.dev/motojinc25/articles/sk_20250131_helloworld</guid><pubDate>Fri, 31 Jan 2025 08:01:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8F6WsOkj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Semantic%2520Kernel%25E5%2585%25A5%25E9%2596%2580%2520-%2520%25281%2529Hello%2520World%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Jingun%2520Jung%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lxODg1eUJVX3VkdXJxZTRJb1pJZWRMeld2Z3RYbks0LWZjaXpRPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Jingun Jung</dc:creator></item><item><title><![CDATA[[YouTube API] ライブ/配信中のチャットを取得する]]></title><description><![CDATA[
+ はじめに
+この記事では、YouTube APIを活用して配信中のチャットを取得する方法をまとめております。
+
+ 取得イメージ
+$ python src/main.py
+[2025-01-31 10:14:43] 小倉あん: テスト
+[2025-01-31 10:14:46] 小倉あん: テスト
+[2025-01-31 10:14:48] 小倉あん: テスト
+
+参考資料
+
+
+
+ 結論
+!
+
+
+Google Cloudで「YouTube Data API」のAPI Keyを作成する
+
+google-api-python-clientを使ってデータを取得する
+
+
+
+ 注意事項
+!
+
+
+配信...]]></description><link>https://zenn.dev/aew2sbee/articles/youtube-data-api-live-streaming-chat</link><guid isPermaLink="true">https://zenn.dev/aew2sbee/articles/youtube-data-api-live-streaming-chat</guid><pubDate>Fri, 31 Jan 2025 07:25:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2zTm-mZL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BYouTube%2520API%255D%2520%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%252F%25E9%2585%258D%25E4%25BF%25A1%25E4%25B8%25AD%25E3%2581%25AE%25E3%2583%2581%25E3%2583%25A3%25E3%2583%2583%25E3%2583%2588%25E3%2582%2592%25E5%258F%2596%25E5%25BE%2597%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25B0%258F%25E5%2580%2589%25E3%2581%2582%25E3%2582%2593%2520%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FhZTc3ZDA0MzcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>小倉あん🥝</dc:creator></item><item><title><![CDATA[[がんばれ] 作業効率を高めてくれるAIチューターを作って、使ってみた [がんばろう]]]></title><description><![CDATA[
+ はじめに
+はじめまして！ふっきーと申します。
+突然ですが、みなさんは個人開発してますか？
+自分はしていません(しています)
+だらける、情報収集のつもりで開いたSNSに夢中になるなどして、
+個人開発ができていない時間がたびたび発生していました。
+こりゃいかんと思い、さぼり対策を考えた結果、
+
+配信型：不特定多数に作業を見せる
+監視型：誰かに作業を見てもらう
+
+が有効だと思いました。
+自分のメインの作業場所がパブリックスペースなので、監視型しか選択肢がなかったのですが、
+自分の作業を見守ってくれる人はこの世に存在しませんでした。
+※そもそも交友関係が滅びている。
+なので、自分で作るしかな...]]></description><link>https://zenn.dev/fkky/articles/e1e553e5a81688</link><guid isPermaLink="true">https://zenn.dev/fkky/articles/e1e553e5a81688</guid><pubDate>Thu, 30 Jan 2025 12:53:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vQ7CRx29--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255B%25E3%2581%258C%25E3%2582%2593%25E3%2581%25B0%25E3%2582%258C%255D%2520%25E4%25BD%259C%25E6%25A5%25AD%25E5%258A%25B9%25E7%258E%2587%25E3%2582%2592%25E9%25AB%2598%25E3%2582%2581%25E3%2581%25A6%25E3%2581%258F%25E3%2582%258C%25E3%2582%258BAI%25E3%2583%2581%25E3%2583%25A5%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%25BC%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2580%2581%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2520%255B%25E3%2581%258C%25E3%2582%2593%25E3%2581%25B0%25E3%2582%258D%25E3%2581%2586%255D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25B5%25E3%2581%25A3%25E3%2581%258D%25E3%2583%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY0ZDk5NTljYzAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ふっきー</dc:creator></item><item><title><![CDATA[［AtCoder］ABC-388｜C - Various Kagamimochi]]></title><description><![CDATA[
+ 設問ページ
+
+🔗ABC-388 C - Various Kagamimochi
+
+
+
+ 提出結果
+def getInt():
+    return int(input())
+
+
+def getIntList():
+    return list(map(int, input().split()))
+
+
+def main():
+    N = getInt()
+    A = getIntList()
+
+    mx = max(A)
+    c = 1
+    r = 0
+    for i in range(N - 1):
+        a = A[i]
+        b = ...]]></description><link>https://zenn.dev/hyperdb/articles/67bd8a53e33218</link><guid isPermaLink="true">https://zenn.dev/hyperdb/articles/67bd8a53e33218</guid><pubDate>Thu, 30 Jan 2025 10:34:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--AeNoWjo1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25EF%25BC%25BBAtCoder%25EF%25BC%25BDABC-388%25EF%25BD%259CC%2520-%2520Various%2520Kagamimochi%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AF%25E3%2581%2584%25E3%2581%25B1%25E3%2581%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhODJkODgwMzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>はいぱぁ</dc:creator></item><item><title><![CDATA[［AtCoder］ABC-389｜B - tcaF]]></title><description><![CDATA[
+ 設問ページ
+
+🔗ABC-389 B - tcaF
+
+
+
+ 提出結果
+def getInt():
+    return int(input())
+
+
+def main():
+    X = getInt()
+
+    f = 1
+    for i in range(2, X):
+        f *= i
+        if f == X:
+            print(i)
+            break
+
+
+if __name__ == "__main__":
+    main()
+]]></description><link>https://zenn.dev/hyperdb/articles/3abba1f2b7db1c</link><guid isPermaLink="true">https://zenn.dev/hyperdb/articles/3abba1f2b7db1c</guid><pubDate>Thu, 30 Jan 2025 10:34:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--U8ZKre-R--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25EF%25BC%25BBAtCoder%25EF%25BC%25BDABC-389%25EF%25BD%259CB%2520-%2520tcaF%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AF%25E3%2581%2584%25E3%2581%25B1%25E3%2581%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhODJkODgwMzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>はいぱぁ</dc:creator></item><item><title><![CDATA[［AtCoder］ABC-389｜A - 9x9]]></title><description><![CDATA[
+ 設問ページ
+
+🔗ABC-389 A - 9x9
+
+
+
+ 提出結果
+def getString():
+    return input()
+
+
+def main():
+    S = getString()
+    n = list(map(int, S.split("x")))
+
+    print(n[0] * n[1])
+
+
+if __name__ == "__main__":
+    main()
+]]></description><link>https://zenn.dev/hyperdb/articles/0c7475cf673eed</link><guid isPermaLink="true">https://zenn.dev/hyperdb/articles/0c7475cf673eed</guid><pubDate>Thu, 30 Jan 2025 10:34:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8l4UQbHr--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25EF%25BC%25BBAtCoder%25EF%25BC%25BDABC-389%25EF%25BD%259CA%2520-%25209x9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AF%25E3%2581%2584%25E3%2581%25B1%25E3%2581%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhODJkODgwMzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>はいぱぁ</dc:creator></item></channel></rss>

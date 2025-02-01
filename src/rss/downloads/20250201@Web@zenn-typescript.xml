@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「TypeScript」のフィード]]></title><description><![CDATA[Zennのトピック「TypeScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/typescript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/f13e758fdb.png</url><title>Zennの「TypeScript」のフィード</title><link>https://zenn.dev/topics/typescript</link></image><generator>zenn.dev</generator><lastBuildDate>Sat, 01 Feb 2025 07:00:21 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/typescript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[【フロントエンド】ポケモン図鑑のテストをVitestで書いてみた]]></title><description><![CDATA[
+ 概要
+以下の本で作成したポケモン図鑑のテストコード(フロントエンド)をVitestで書いてみたという報告記事になります。
+※テストコードの解説などは記載しておりませんが、時間があれば後日追記するかもしれません。
+
+
+ 前提
+フロントエンドのテストが全く分からないという方が本記事を読む際は、以下の前提を踏まえて参考程度に読んでいただければと思います
+!
+筆者はあまりフロントエンドのテストに詳しくなく、手探りで書いたコードになります
+
+!
+必要なテストが網羅されていない、過分なテストがあるといった可能性があります
+
+
+ 本記事の対象者
+
+フロントエンドのテストコードをはじめて書く方（サン...]]></description><link>https://zenn.dev/souemon/articles/aad9a886ec207d</link><guid isPermaLink="true">https://zenn.dev/souemon/articles/aad9a886ec207d</guid><pubDate>Sat, 01 Feb 2025 06:30:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--41qzSM8d--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E3%2583%2595%25E3%2583%25AD%25E3%2583%25B3%25E3%2583%2588%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2589%25E3%2580%2591%25E3%2583%259D%25E3%2582%25B1%25E3%2583%25A2%25E3%2583%25B3%25E5%259B%25B3%25E9%2591%2591%25E3%2581%25AE%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E3%2582%2592Vitest%25E3%2581%25A7%25E6%259B%25B8%25E3%2581%2584%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259D%25E3%2581%2586%25E3%2581%2588%25E3%2582%2582%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBmZWE1MTdmMDIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>そうえもん</dc:creator></item><item><title><![CDATA[TypeScriptのinferを使ってみる]]></title><description><![CDATA[TypeScriptの型システムはとても強力で、コードの安全性や明瞭性を向上させるための様々な機能が備わっています。その中でも infer キーワードは、条件型の中で型の一部を動的に抽出するのに役立ちます。この記事では、infer の基本的な使い方から実践的な例まで、幅広く解説していきます。
+
+
+ 1. inferって何？
+infer は、TypeScriptの条件型の中で使われるキーワードです。
+具体的には、ある型から内部にある型情報を抜き出したい場合に使用します。
+たとえば、配列やPromise、関数の戻り値など、ある型の「中身」を取り出すのに最適です。
+基本の構文:
+type Ex...]]></description><link>https://zenn.dev/ktrszk/articles/87377cf4471e3f</link><guid isPermaLink="true">https://zenn.dev/ktrszk/articles/87377cf4471e3f</guid><pubDate>Sat, 01 Feb 2025 02:51:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--MLu8qxPd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%25E3%2581%25AEinfer%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kotaro%2520Suzuki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lXc3F4bl9xenpWS2duS0l0TjctNFNLOEh4dzhmaDY5bnNBQ3I0NGc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kotaro Suzuki</dc:creator></item><item><title><![CDATA[reformatter.elを使って色々な言語のフォーマッターを一元管理する]]></title><description><![CDATA[
+ はじめに
+プログラムを書いてセーブ時にフォーマットを実行する。当たり前にやってることと思いますが複数のプログラミング言語を使う環境で言語ごとにフォーマッターを設定していくのは大変です。そこで最近 Emacs の reformatter.el というパッケージを使って複数のフォーマッターを一元管理する方法を見つけたので紹介します。
+
+ emacs-reformatter
+今回利用するパッケージはこちらです。
+https://github.com/purcell/emacs-reformatter
+reformatterという名前ですがパスの通ったCLIコマンドであればフォーマッターに限...]]></description><link>https://zenn.dev/glassonion1/articles/9dcc961824314c</link><guid isPermaLink="true">https://zenn.dev/glassonion1/articles/9dcc961824314c</guid><pubDate>Sat, 01 Feb 2025 01:30:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fLg_IUHp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:reformatter.el%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E8%2589%25B2%25E3%2580%2585%25E3%2581%25AA%25E8%25A8%2580%25E8%25AA%259E%25E3%2581%25AE%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25BC%25E3%2583%259E%25E3%2583%2583%25E3%2582%25BF%25E3%2583%25BC%25E3%2582%2592%25E4%25B8%2580%25E5%2585%2583%25E7%25AE%25A1%25E7%2590%2586%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:glassonion1%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ExMzcxN2Y0ZGUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>glassonion1</dc:creator></item><item><title><![CDATA[EmacsでTree-Sitterによる新しいモードを利用する方法]]></title><description><![CDATA[
+ はじめに
+最近 Tree-Sitter という構文解析を利用したシンタックスハイライトが流行っています。Emacs でもバージョン29.1から Tree-Sitter に対応したモードを利用できるようになったので導入してみました[1]。
+
+ Tree-Sitterとは
+Tree-Sitter については色々なサイトで説明されているので割愛します。詳細を知りたい場合はこちらの記事がおすすめです。
+https://apribase.net/2024/06/12/emacs-treesit-ts-mode/
+ちなみに Emacs で Tree-Sitter を利用する場合は Treesit...]]></description><link>https://zenn.dev/glassonion1/articles/20752bb8d2cf98</link><guid isPermaLink="true">https://zenn.dev/glassonion1/articles/20752bb8d2cf98</guid><pubDate>Sat, 01 Feb 2025 01:22:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1uNEYuue--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Emacs%25E3%2581%25A7Tree-Sitter%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258B%25E6%2596%25B0%25E3%2581%2597%25E3%2581%2584%25E3%2583%25A2%25E3%2583%25BC%25E3%2583%2589%25E3%2582%2592%25E5%2588%25A9%25E7%2594%25A8%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:glassonion1%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ExMzcxN2Y0ZGUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>glassonion1</dc:creator></item><item><title><![CDATA[[TensorFlow.js+MediaPipe Hands]気軽にロマンを探せるアプリを作った]]></title><description><![CDATA[
+ はじめに
+人はロマン（おっぱい）を求めてしまう生き物です。特にストレスが溜まったらおっぱいに癒されたい、そう思うことは少なくないかと思います。
+けど手軽な場所におっぱいがない、そんな人のためにどこでもおっぱいを探すことができるアプリを作りました。
+https://x.com/toffy_dev/status/1884010569826721952
+※音が鳴るので注意してください
+中身はMediaPipe Handsを使って結構真面目に手の位置を取っているので、今回はMediaPipe Handsモデルを使った手の検出方法などに視点を当てて書いていきたいと思います。
+アプリ: http...]]></description><link>https://zenn.dev/yui/articles/1e5df7fd0ea872</link><guid isPermaLink="true">https://zenn.dev/yui/articles/1e5df7fd0ea872</guid><pubDate>Fri, 31 Jan 2025 17:11:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6uS5otD3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BTensorFlow.js%252BMediaPipe%2520Hands%255D%25E6%25B0%2597%25E8%25BB%25BD%25E3%2581%25AB%25E3%2583%25AD%25E3%2583%259E%25E3%2583%25B3%25E3%2582%2592%25E6%258E%25A2%25E3%2581%259B%25E3%2582%258B%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yui%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVjMGIyNzFhZWUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yui</dc:creator></item><item><title><![CDATA[画像処理100本ノックに挑戦｜アフィン変換(拡大縮小)（029/100）]]></title><description><![CDATA[
+ これはなに？
+画像処理100本ノックを、TypeScriptとlibvipsで挑戦してみる記事の29本目です。
+
+ 前回
+https://zenn.dev/nyagato_00/articles/bd83bc3148f4ce
+
+ 実装
+
+ お題
+
+アフィン変換を用いて、(1)x方向に1.3倍、y方向に0.8倍にリサイズせよ。
+また、(2) (1)の条件に加えて、x方向に+30、y方向に-30だけ平行移動を同時に実現せよ。
+
+https://github.com/minido/Gasyori100knock-1/tree/master/Question_21_30#q29-アフィン変換...]]></description><link>https://zenn.dev/nyagato_00/articles/9b7aa704309aaa</link><guid isPermaLink="true">https://zenn.dev/nyagato_00/articles/9b7aa704309aaa</guid><pubDate>Fri, 31 Jan 2025 13:03:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--44rXFBi4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%2594%25BB%25E5%2583%258F%25E5%2587%25A6%25E7%2590%2586100%25E6%259C%25AC%25E3%2583%258E%25E3%2583%2583%25E3%2582%25AF%25E3%2581%25AB%25E6%258C%2591%25E6%2588%25A6%25EF%25BD%259C%25E3%2582%25A2%25E3%2583%2595%25E3%2582%25A3%25E3%2583%25B3%25E5%25A4%2589%25E6%258F%259B%2528%25E6%258B%25A1%25E5%25A4%25A7%25E7%25B8%25AE%25E5%25B0%258F%2529%25EF%25BC%2588029%252F100%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nyagato_00%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUxtNXd1MTVKUVk3SjNOUG1kcGlMeWdfWUt3blZzaTRpWDRoYjU1c21UTTk3c1E9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nyagato_00</dc:creator></item><item><title><![CDATA[【OpenAI API × TypeScript】インタラクティブなチャットボットの開発]]></title><description><![CDATA[
+ OpenAI API × TypeScriptでインタラクティブなチャットボットを開発
+https://github.com/sorein-mio/chatbot
+
+ はじめに
+OpenAI APIを活用したインタラクティブなチャットボットアプリケーションを開発したので、ここに記録として残します。
+TypeScriptとReactを使用して構築され、マークダウン形式での応答をサポートしています。
+
+ デモ画面
+
+ チャットインターフェース
+
+シンプルで使いやすいインターフェースを心がけました。マークダウン形式での表示やコードブロックにも対応し、プログラミング関連の会話も快適に行えます...]]></description><link>https://zenn.dev/sorein/articles/chatbot_start</link><guid isPermaLink="true">https://zenn.dev/sorein/articles/chatbot_start</guid><pubDate>Fri, 31 Jan 2025 08:32:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lWIN8mH1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590OpenAI%2520API%2520%25C3%2597%2520TypeScript%25E3%2580%2591%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25BF%25E3%2583%25A9%25E3%2582%25AF%25E3%2583%2586%25E3%2582%25A3%25E3%2583%2596%25E3%2581%25AA%25E3%2583%2581%25E3%2583%25A3%25E3%2583%2583%25E3%2583%2588%25E3%2583%259C%25E3%2583%2583%25E3%2583%2588%25E3%2581%25AE%25E9%2596%258B%25E7%2599%25BA%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:sorein%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q2NmRlODQ3Y2EuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sorein</dc:creator></item><item><title><![CDATA[Branded Typeを活用したドメイン知識の表現]]></title><description><![CDATA[メディカルフォースでCTOをしている畠中です。
+メディカルフォースでは新規事業として警備業界向けのSaaS「警備フォース」を開発しています。
+「警備フォース」ではDDDおよびオニオンアーキテクチャを積極的に取り入れており、そちらで用いられているtipsについて共有できればと思っております。
+
+ 要旨
+かなりの長期間システムを運用する場合、DDDは強力な武器になると考えています。
+コードを高凝集・低結合を保つことができ、変更がある際の変更箇所が明確になるという点と変更を行なった際の影響範囲が明確になるという点で特に価値を発揮します。
+DDDにおいてドメイン層の中で不正なentityが発生し...]]></description><link>https://zenn.dev/medicalforce/articles/8b88e7e89740f8</link><guid isPermaLink="true">https://zenn.dev/medicalforce/articles/8b88e7e89740f8</guid><pubDate>Fri, 31 Jan 2025 08:00:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8c0mmEHi--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Branded%2520Type%25E3%2582%2592%25E6%25B4%25BB%25E7%2594%25A8%25E3%2581%2597%25E3%2581%259F%25E3%2583%2589%25E3%2583%25A1%25E3%2582%25A4%25E3%2583%25B3%25E7%259F%25A5%25E8%25AD%2598%25E3%2581%25AE%25E8%25A1%25A8%25E7%258F%25BE%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E7%2595%25A0%25E4%25B8%25AD%25E7%25BF%2594%25E4%25B8%2580%252F%25E3%2583%25A1%25E3%2583%2587%25E3%2582%25A3%25E3%2582%25AB%25E3%2583%25AB%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25BC%25E3%2582%25B9CTO%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzkyZjY0YWIzNTQuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%25A1%25E3%2583%2587%25E3%2582%25A3%25E3%2582%25AB%25E3%2583%25AB%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25BC%25E3%2582%25B9%2520%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0ZFlQbjY1TWJkaW1Za25uZGRPbFFmaHdBemJwbzc0TXQ5VlowMlo9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>畠中翔一/メディカルフォースCTO</dc:creator></item><item><title><![CDATA[既存の型に対してzodのスキーマを実装する]]></title><description><![CDATA[
+ 背景
+TypeScriptとzodを組み合わせる場合、一般的にzodのスキーマから型を生成する方法が使われます。
+const shapeSchema = z.object({
+  name: z.string(),
+})
+
+type Shape = z.infer&lt;typeof shapeSchema&gt;
+このアプローチは型の作成とスキーマの定義を矛盾なく実装できるため便利ですが、次のような場合に課題が生じます。
+
+外部の型定義ファイルを参照する必要がある場合
+型定義が既に存在している場合
+
+!
+外部の型定義を参照する場合、ACL（腐敗防止層）を利用して解決する場合がありま...]]></description><link>https://zenn.dev/aprender/articles/0cc87245977602</link><guid isPermaLink="true">https://zenn.dev/aprender/articles/0cc87245977602</guid><pubDate>Fri, 31 Jan 2025 05:24:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--XFsZTajQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%2597%25A2%25E5%25AD%2598%25E3%2581%25AE%25E5%259E%258B%25E3%2581%25AB%25E5%25AF%25BE%25E3%2581%2597%25E3%2581%25A6zod%25E3%2581%25AE%25E3%2582%25B9%25E3%2582%25AD%25E3%2583%25BC%25E3%2583%259E%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%25BF%25E3%2581%25BF%25E3%2581%25A4%25E3%2581%258D%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzIxNWYyNmY1YjUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Aprender%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E1NWUwYWQyMGEuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>みみつき</dc:creator></item><item><title><![CDATA[クラスとインターフェイスの実装【個人学習まとめ】]]></title><description><![CDATA[
+ インターフェイスの実装
+クラスがインターフェイスの規約に沿うように設計されることをクラスがインターフェイスを実装(implement)すると表現する。
+キーワードは、implement。構文は次の通り。
+interface SampleInterface {
+    ダミー
+}
+class SampleClassName implements SampleInterface {
+    実装内容
+}
+実際に動くコードで確認してみる。
+interface Rate {
+    getTaxRate(): number;
+}
+
+Shohizei クラスは Rate インターフェイスを実装...]]></description><link>https://zenn.dev/o0rororo0o/articles/1dc085063e3343</link><guid isPermaLink="true">https://zenn.dev/o0rororo0o/articles/1dc085063e3343</guid><pubDate>Fri, 31 Jan 2025 04:20:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--zLO3oHn3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25B9%25E3%2581%25A8%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%2595%25E3%2582%25A7%25E3%2582%25A4%25E3%2582%25B9%25E3%2581%25AE%25E5%25AE%259F%25E8%25A3%2585%25E3%2580%2590%25E5%2580%258B%25E4%25BA%25BA%25E5%25AD%25A6%25E7%25BF%2592%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%258D%25E3%2582%258D%25E3%2582%258D%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ2ZTZjOWM4YmMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ろろろ</dc:creator></item><item><title><![CDATA[【Blockchain/web3】Solanaトランザクションにおける二重トランザクションエラーの解決方法]]></title><description><![CDATA[
+ はじめに
+Solanaを用いたアプリケーション開発において、トランザクションの管理は非常に重要です。特に、ユーザーが意図せず同じトランザクションを複数回送信してしまう「二重トランザクションエラー」は、ユーザー体験を損なう重大な問題となります。今回の開発ではlogとしてそれぞれユニークなhashを出力してましたが、この二重トランザクションエラーが度重なって起こってしまいました。今回んの解決方法としてあまり推奨されませんがskipPreflightをオフにして解決しました。blockchain領域はどうしても海外のDocumentが多く困惑すると思いますので日本のengineerの皆様に...]]></description><link>https://zenn.dev/yusukekikuta/articles/6667515562d411</link><guid isPermaLink="true">https://zenn.dev/yusukekikuta/articles/6667515562d411</guid><pubDate>Fri, 31 Jan 2025 01:57:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--mWwwV34O--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Blockchain%252Fweb3%25E3%2580%2591Solana%25E3%2583%2588%25E3%2583%25A9%25E3%2583%25B3%25E3%2582%25B6%25E3%2582%25AF%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2581%25AB%25E3%2581%258A%25E3%2581%2591%25E3%2582%258B%25E4%25BA%258C%25E9%2587%258D%25E3%2583%2588%25E3%2583%25A9%25E3%2583%25B3%25E3%2582%25B6%25E3%2582%25AF%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E3%2581%25AE%25E8%25A7%25A3%25E6%25B1%25BA%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yusuke%2520Kikuta%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2UzOGI2NmM0ZDQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yusuke Kikuta</dc:creator></item><item><title><![CDATA[Standard Schemaで何が実現できる？]]></title><description><![CDATA[
+ 初めに
+本記事では先日v1.0.0が公開されたStandard Schameについて紹介します。
+
+ 本記事で紹介すること
+
+
+Standard Schemaとは何か
+
+Standard Schemaで実現できること
+
+Standard Schemaに準拠済みのツール・フレームワーク
+
+
+ 本記事で紹介しないこと
+
+スキーマライブラリでの準拠方法
+
+!
+本記事はReadmeの雑目なまとめ記事です。
+より詳細を知りたい方はこちらをご確認ください。
+
+
+ Standard Schemaとは
+Standard Schemaはzodやvalibotといったスキーマバリデーションライブラリの共...]]></description><link>https://zenn.dev/caffe_latte_623/articles/standard-schema</link><guid isPermaLink="true">https://zenn.dev/caffe_latte_623/articles/standard-schema</guid><pubDate>Fri, 31 Jan 2025 01:07:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6i2nwe_A--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Standard%2520Schema%25E3%2581%25A7%25E4%25BD%2595%25E3%2581%258C%25E5%25AE%259F%25E7%258F%25BE%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258B%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2597%25E3%2583%25BC%25E3%2581%2595%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E4ZjhhZGMzMTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>しーさん</dc:creator></item><item><title><![CDATA[Vitest Browser Mode が凄い]]></title><description><![CDATA[
+ Vitest Browser Mode とは
+https://vitest.dev/guide/browser/
+Vitest Browser Mode（ブラウザモード）とは、2025/1/31 現在 Experimental として公開されている Vitest の API で、ブラウザ上でテストを実行できる機能のことです。
+ブラウザ上で実行可能になったことで必要なモックを最小限に、実際に操作される環境と同じ環境でテストをすることができます。
+実際に試してみた内容をこの記事では紹介します。
+
+ 試してみた
+通常のテストと Browser Mode のテストをそれぞれ作成し、比較してみ...]]></description><link>https://zenn.dev/t0daaay/articles/db0985a1e54b1c</link><guid isPermaLink="true">https://zenn.dev/t0daaay/articles/db0985a1e54b1c</guid><pubDate>Fri, 31 Jan 2025 01:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--oUMgzlUq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Vitest%2520Browser%2520Mode%2520%25E3%2581%258C%25E5%2587%2584%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A4%25E3%2581%2598%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q3ZWJmY2U1MDIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>つじ</dc:creator></item><item><title><![CDATA[playwrightのsnapshotでmask以外の方法で要素を隠す]]></title><description><![CDATA[Playwrightのスクリーンショットのテストをする際、差分として考慮したくない部分に関してmaskを指定できる。
+test('snapshot', async ({ page }) =&gt; {
+  await page.goto('https://playwright.dev/')
+  await expect(page).toHaveScreenshot({
+    mask: [
+      page.locator(".navbar__title.text--truncate"),
+      page.locator(".getStarted_Sjon"),
+    ]
+...]]></description><link>https://zenn.dev/terrierscript/articles/2025-01-31-playwright-snapshot-mask</link><guid isPermaLink="true">https://zenn.dev/terrierscript/articles/2025-01-31-playwright-snapshot-mask</guid><pubDate>Thu, 30 Jan 2025 16:02:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--21hssDiL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:playwright%25E3%2581%25AEsnapshot%25E3%2581%25A7mask%25E4%25BB%25A5%25E5%25A4%2596%25E3%2581%25AE%25E6%2596%25B9%25E6%25B3%2595%25E3%2581%25A7%25E8%25A6%2581%25E7%25B4%25A0%25E3%2582%2592%25E9%259A%25A0%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:terrierscript%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RhNzJjMjE0Y2QuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>terrierscript</dc:creator></item><item><title><![CDATA[Biome で特定のディレクトリ内のモジュールの import を制限する]]></title><description><![CDATA[
+ 特定のディレクトリからモジュールの import を制限したい
+TypeScriptのプロジェクトで、アーキテクチャや依存関係の整合性を保つために、あるディレクトリから別のディレクトリへの import を制限したいことがあります。
+具体的には下記のようなケース
+
+foo ディレクトリ配下のコードでは、bar ディレクトリ配下のモジュールを使ってはいけない
+ただし、bar ディレクトリ配下から、foo ディレクトリ配下のモジュールは使ってもよい
+
+
+ ESLint での制限
+ESLint であれば no-restricted-imports という便利なルールがあり、下記のようにpa...]]></description><link>https://zenn.dev/tetzng/articles/32ddacdc43790a</link><guid isPermaLink="true">https://zenn.dev/tetzng/articles/32ddacdc43790a</guid><pubDate>Thu, 30 Jan 2025 13:34:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7Rk5ud-N--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Biome%2520%25E3%2581%25A7%25E7%2589%25B9%25E5%25AE%259A%25E3%2581%25AE%25E3%2583%2587%25E3%2582%25A3%25E3%2583%25AC%25E3%2582%25AF%25E3%2583%2588%25E3%2583%25AA%25E5%2586%2585%25E3%2581%25AE%25E3%2583%25A2%25E3%2582%25B8%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%25AE%2520import%2520%25E3%2582%2592%25E5%2588%25B6%25E9%2599%2590%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tetzng%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY1MGY0ZjJkNTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tetzng</dc:creator></item><item><title><![CDATA[【最低限抑えたい】SvelteKitの書き方（ルーン対応済み）]]></title><description><![CDATA[
+ はじめに
+皆さん、こんにちは。
+今回はSvelteKitの基本的な使い方をご紹介します。最近Svelteはバージョンが上がり新しくルーンという表現が追加されました。今回の内容はSvelteのルーンに対応しております。
+https://svelte.jp/tutorial/kit/introducing-sveltekit
+https://svelte.jp/docs/kit/introduction
+
+ サンプルコードのリポジトリ
+https://github.com/peter-norio/svelte/tree/main/my-sveltekit
+
+ 雛形とファイル構成
+
+ 概要...]]></description><link>https://zenn.dev/peter_norio/articles/e396fea99aa6ec</link><guid isPermaLink="true">https://zenn.dev/peter_norio/articles/e396fea99aa6ec</guid><pubDate>Thu, 30 Jan 2025 12:39:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--MEQZC7gI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E6%259C%2580%25E4%25BD%258E%25E9%2599%2590%25E6%258A%2591%25E3%2581%2588%25E3%2581%259F%25E3%2581%2584%25E3%2580%2591SvelteKit%25E3%2581%25AE%25E6%259B%25B8%25E3%2581%258D%25E6%2596%25B9%25EF%25BC%2588%25E3%2583%25AB%25E3%2583%25BC%25E3%2583%25B3%25E5%25AF%25BE%25E5%25BF%259C%25E6%25B8%2588%25E3%2581%25BF%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%2594%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%25BC%25E3%2581%25AE%25E3%2582%258A%25E3%2581%258A%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSTcwSTlWTjhXNHl3eWRJY1JlYzFWaUJtc3B6S3lfX3JzeTUyYmJhRFh0c29FVzJDZz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ピーターのりお</dc:creator></item><item><title><![CDATA[zodを用いた条件分岐バリデーションを実装してみる]]></title><description><![CDATA[
+ はじめに
+1ヶ月後にモンスターハンターになる、ノベルワークスのりょうちん（ryotech34）です。
+今回は、TypeScript向けに設計されたスキーマ宣言やバリデーションを助けてくれるライブラリである、zodを使用して条件分岐バリデーションを実装した際の備忘録です。
+https://zod.dev/
+ドメインモデルとzodを組み合わせた実装方法として、下記の記事を参考にさせていただきました。ぜひ確認してみてください。
+https://zenn.dev/kimutyam/articles/zod-domain-model
+
+ 対象読者
+
+zodに触れているもしくはこれから触ろうと思...]]></description><link>https://zenn.dev/ryoryo34/articles/7e60c176b1ab0a</link><guid isPermaLink="true">https://zenn.dev/ryoryo34/articles/7e60c176b1ab0a</guid><pubDate>Thu, 30 Jan 2025 10:04:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--af0r3FA5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:zod%25E3%2582%2592%25E7%2594%25A8%25E3%2581%2584%25E3%2581%259F%25E6%259D%25A1%25E4%25BB%25B6%25E5%2588%2586%25E5%25B2%2590%25E3%2583%2590%25E3%2583%25AA%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ryoryo34%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY2ZDI5MjRhMzkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ryoryo34</dc:creator></item><item><title><![CDATA[Expo Audioで音を鳴らす]]></title><description><![CDATA[
+ はじめに
+
+アプリの中で、「音を鳴らしたい」って思うことありますよね？
+実際に、Expoアプリの中で音を鳴らせるようにするまでやってみました🍵
+今回は「Expo Audio」と呼ばれる、expo-avをベースにした音声再生・録音ライブラリを使います。
+
+
+ まとめ
+
+Expo Audio（expo-av）を使えば、簡単に音声の再生・録音を実装できる
+近い将来、expo-audioとして改良版がリリース予定。
+
+
+ Expo AVとは？
+
+https://docs.expo.dev/versions/latest/sdk/audio-av/
+
+概要
+
+Expo Audioは、expo-...]]></description><link>https://zenn.dev/deepbluemasao/articles/825087a1b1a9b9</link><guid isPermaLink="true">https://zenn.dev/deepbluemasao/articles/825087a1b1a9b9</guid><pubDate>Thu, 30 Jan 2025 09:55:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--F_NXUydz--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Expo%2520Audio%25E3%2581%25A7%25E9%259F%25B3%25E3%2582%2592%25E9%25B3%25B4%25E3%2582%2589%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:masa%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y3MjNkYjVhMWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>masa</dc:creator></item><item><title><![CDATA[【Web3 / Blockchain/React/TypeScript】Solanaでのトランザクション処理をコードから学ぶ]]></title><description><![CDATA[
+ はじめに
+仮想通貨やブロックチェーン上での取引は、実際にどのようにプログラムコードで行われているのでしょうか？
+この記事では Solana を例に、Web3 ならではのネットワーク構造・RPC ノード・トランザクションの仕組みを、シンプルな入金(Deposit)コードをとおして解説します。
+
+
+ 1. Web3 / Blockchain とは？
+
+ 1-1. 従来のWeb2との違い
+
+
+Web2: 中央サーバー or クラウド (例: AWS, GCP) がメイン。
+
+Web3: 分散型ネットワークを使い、誰でもトランザクション(取引)を検証できる。
+
+Solanaのようなブロックチ...]]></description><link>https://zenn.dev/yusukekikuta/articles/b8711d3b2d16c4</link><guid isPermaLink="true">https://zenn.dev/yusukekikuta/articles/b8711d3b2d16c4</guid><pubDate>Thu, 30 Jan 2025 09:30:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--P1FDnDGp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Web3%2520%252F%2520Blockchain%252FReact%252FTypeScript%25E3%2580%2591Solana%25E3%2581%25A7%25E3%2581%25AE%25E3%2583%2588%25E3%2583%25A9%25E3%2583%25B3%25E3%2582%25B6%25E3%2582%25AF%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E5%2587%25A6%25E7%2590%2586%25E3%2582%2592%25E3%2582%25B3%25E3%2583%25BC...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yusuke%2520Kikuta%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2UzOGI2NmM0ZDQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yusuke Kikuta</dc:creator></item><item><title><![CDATA[画像処理100本ノックに挑戦｜アフィン変換(平行移動)（028/100）]]></title><description><![CDATA[
+ これはなに？
+画像処理100本ノックを、TypeScriptとlibvipsで挑戦してみる記事の28本目です。
+
+ 前回
+https://zenn.dev/nyagato_00/articles/5d252ed19206f8
+
+ 実装
+
+ お題
+
+アフィン変換を利用して画像をx方向に+30、y方向に-30だけ平行移動させよ。
+アフィン変換とは3x3の行列を用いて画像の変換を行う操作である。
+
+https://github.com/minido/Gasyori100knock-1/tree/master/Question_21_30#q28-アフィン変換平行移動
+
+ Coding
+im...]]></description><link>https://zenn.dev/nyagato_00/articles/bd83bc3148f4ce</link><guid isPermaLink="true">https://zenn.dev/nyagato_00/articles/bd83bc3148f4ce</guid><pubDate>Thu, 30 Jan 2025 07:45:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vWZ9VQfA--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%2594%25BB%25E5%2583%258F%25E5%2587%25A6%25E7%2590%2586100%25E6%259C%25AC%25E3%2583%258E%25E3%2583%2583%25E3%2582%25AF%25E3%2581%25AB%25E6%258C%2591%25E6%2588%25A6%25EF%25BD%259C%25E3%2582%25A2%25E3%2583%2595%25E3%2582%25A3%25E3%2583%25B3%25E5%25A4%2589%25E6%258F%259B%2528%25E5%25B9%25B3%25E8%25A1%258C%25E7%25A7%25BB%25E5%258B%2595%2529%25EF%25BC%2588028%252F100%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nyagato_00%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUxtNXd1MTVKUVk3SjNOUG1kcGlMeWdfWUt3blZzaTRpWDRoYjU1c21UTTk3c1E9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nyagato_00</dc:creator></item></channel></rss>

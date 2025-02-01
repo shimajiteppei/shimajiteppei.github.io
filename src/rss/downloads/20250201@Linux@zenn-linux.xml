@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Linux」のフィード]]></title><description><![CDATA[Zennのトピック「Linux」のRSSフィードです]]></description><link>https://zenn.dev/topics/linux</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/860a9eb1e4.png</url><title>Zennの「Linux」のフィード</title><link>https://zenn.dev/topics/linux</link></image><generator>zenn.dev</generator><lastBuildDate>Sat, 01 Feb 2025 01:00:21 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/linux/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[wsl2（Linux）でGitLabを動かしてみた]]></title><description><![CDATA[
+
+ はじめに
+前回、こちらの記事でWindows上でLinuxを利用できるようにしたので、ここにGitLabを使えるようにします。
+※今回はローカルマシン上で起動させます。
+
+ 事前準備
+
+IPアドレスの確認
+inet xxx.xxx.xxx.xxx/20 の部分が割り当てられてるIPアドレス$ ip a show dev eth0 | grep eth0
+2: eth0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc mq state UP group default qlen 1000
+inet xxx.xxx.xxx...]]></description><link>https://zenn.dev/pisuboy/articles/9d972548cd13a6</link><guid isPermaLink="true">https://zenn.dev/pisuboy/articles/9d972548cd13a6</guid><pubDate>Fri, 31 Jan 2025 14:20:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4sE8MwZm--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:wsl2%25EF%25BC%2588Linux%25EF%25BC%2589%25E3%2581%25A7GitLab%25E3%2582%2592%25E5%258B%2595%25E3%2581%258B%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:pisuboy%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q2MjVmYTU5MzguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>pisuboy</dc:creator></item><item><title><![CDATA[Windows11でLinux（wsl2）を使えるようにしてみた]]></title><description><![CDATA[
+ 対象読者
+
+WindowsユーザでLinuxを利用したい人
+Linux上でしか動作しないソフトウェアを動作させたい人
+ローカルで無償でコンテナを動かしたい人（Linux上でdocker engineを起動）
+
+
+ 環境構築
+
+ 実行環境
+
+OS : Microsoft Windows 11 Pro
+wsl&gt; wsl --version
+WSL バージョン: 2.3.26.0
+カーネル バージョン: 5.15.167.4-1
+WSLg バージョン: 1.0.65
+MSRDC バージョン: 1.2.5620
+Direct3D バージョン: 1.611.1-81528511
+DXCo...]]></description><link>https://zenn.dev/pisuboy/articles/59b6d0730d3e8d</link><guid isPermaLink="true">https://zenn.dev/pisuboy/articles/59b6d0730d3e8d</guid><pubDate>Fri, 31 Jan 2025 08:00:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---ani29VL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Windows11%25E3%2581%25A7Linux%25EF%25BC%2588wsl2%25EF%25BC%2589%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2588%25E3%2582%258B%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:pisuboy%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q2MjVmYTU5MzguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>pisuboy</dc:creator></item><item><title><![CDATA[【Linux 入門】ゼロから始める Linux（初心者のための Linux 入門）]]></title><description><![CDATA[本書では、Linux の基礎から実践的なシステム管理まで、初心者でも理解しやすいように段階的に解説していきます。
+
+身につくスキルは下記の通りです。
+ 💻 Linux の基本概念と仕組みの理解
+ 📁 ファイルシステムの操作とディレクトリ構造の把握
+ ⚡️ コマンドラインの基本操作と効率的な使用方法
+ 🔧 システム管理の基礎（ユーザー管理、プロセス管理など）
+ 🔄 定期的なタスクの自動化とスクリプティング
+ 🌐 基本的なネットワーク管理
+
+本書の特徴はこちらです。
+ ・Linux を初めて学ぶ方でも理解できる丁寧な解説
+ ・仮想環境を使用した安全な学習環境の構築
+ ・実践的な例による確実なスキル習得
+ ・システム管理者として必要な基礎知識の網羅
+ ・豊富な図解による視覚的な理解のサポート
+
+本書では Apple シリコン搭載の Mac を使用して、UTM と Ubuntu Server による実践的な環境で学習を進めていきます。Linux の基礎を一から学びたい方、システム管理者を目指す方に最適な内容となっています。一緒に、Linux の世界を探検していきましょう。]]></description><link>https://zenn.dev/farstep/books/linux-beginners-guide</link><guid isPermaLink="true">https://zenn.dev/farstep/books/linux-beginners-guide</guid><pubDate>Wed, 29 Jan 2025 22:55:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--srP_ivIs--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci80NTAwZmQ2MTAzLnBuZw==%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>FarStep</dc:creator></item><item><title><![CDATA[Windows環境下でDockerを使う場合]]></title><description><![CDATA[
+ はじめに
+Dockerと言ったら基本はLinux系のOSで動かすことがほとんどだったのだが、日本企業ではWindowsサーバーを入れているところがそれなりに多いため、Windows環境でも問題なく動かせるものなのか実験してみた。（外国の企業でWindowサーバーが多く導入されているのかは知りませんが・・・）
+
+ 前提環境
+Windows 10 pro
+WSL2（Ubuntu-20.04）
+
+ Dockerを使うための方法
+Windows環境下でDockerを使おうとしたら、大きくは以下2案が主流と認識している。
+
+WSL上に Docker をインストール（Podman使ってdocke...]]></description><link>https://zenn.dev/relims7165/articles/e81f389c0497b9</link><guid isPermaLink="true">https://zenn.dev/relims7165/articles/e81f389c0497b9</guid><pubDate>Wed, 29 Jan 2025 17:14:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--npBzDJRF--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Windows%25E7%2592%25B0%25E5%25A2%2583%25E4%25B8%258B%25E3%2581%25A7Docker%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%25E5%25A0%25B4%25E5%2590%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:relims%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U0ZjdjYzk5MjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>relims</dc:creator></item><item><title><![CDATA[Python仮想環境(.venv)でのcronジョブ設定方法]]></title><description><![CDATA[
+ Python仮想環境(.venv)でのcronジョブ設定方法
+
+ パスの確認方法
+
+プロジェクトの絶対パスを確認
+
+# プロジェクトディレクトリに移動して
+cd プロジェクトディレクトリ
+# 絶対パスを表示
+pwd
+/home/user/myproject  # ← これをメモ
+
+仮想環境のPythonパスを確認
+
+# プロジェクトディレクトリで
+which python
+/path/to/your/project/.venv/bin/python # ← これをメモ
+
+# または
+echo $(pwd)/.venv/bin/python
+/home/user/myproject/....]]></description><link>https://zenn.dev/yamato_snow/articles/0d94d8a496e483</link><guid isPermaLink="true">https://zenn.dev/yamato_snow/articles/0d94d8a496e483</guid><pubDate>Wed, 29 Jan 2025 03:45:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--IgFEeUgm--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E4%25BB%25AE%25E6%2583%25B3%25E7%2592%25B0%25E5%25A2%2583%2528.venv%2529%25E3%2581%25A7%25E3%2581%25AEcron%25E3%2582%25B8%25E3%2583%25A7%25E3%2583%2596%25E8%25A8%25AD%25E5%25AE%259A%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2584%25E3%2581%25BE%25E3%2581%25A8%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2IwM2U0NTU2MzYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>やまと</dc:creator></item><item><title><![CDATA[Linux - /dev/null とは]]></title><description><![CDATA[
+ Summary
+/dev/null はUNIXシステムにおける特殊なデバイスファイルの一つであり、その特徴は
+
+入力されたデータをすべて破棄する
+読み取り時は常にEOF（End of File）を返す
+
+/dev ディレクトリ配下に配置される疑似デバイスの一種
+
+
+ 本記事のモチベーション
+
+Ubuntuサーバーの構築
+UbuntuなどのUNIX系OSをベースイメージとしたDocker解析環境の構築
+
+これらを業務で行うとき、CUDAドライバー・CUDA・Docker Engineなど、様々なツールをパッケージマネージャを用いてインストールします。その際に &gt; /dev/nul...]]></description><link>https://zenn.dev/boh_mouse/articles/93c2ceb6f165a7</link><guid isPermaLink="true">https://zenn.dev/boh_mouse/articles/93c2ceb6f165a7</guid><pubDate>Tue, 28 Jan 2025 12:33:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Ka580jmB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:Linux%2520-%2520%252Fdev%252Fnull%2520%25E3%2581%25A8%25E3%2581%25AF%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Odoriko%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUxtNXd1MnRYbm1lMkFpSjZ3MERsVDBfeTZ2WnF1cHZxTXRDV2tkdzNxdnU9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Odoriko</dc:creator></item><item><title><![CDATA[【初心者向け】M5Stack ModuleLLMを使う上で最低限知っておくべきLinux情報]]></title><description><![CDATA[コマンドの詳細は下記の検索条件で大体ヒットするので調べてください（爆）
+Linux &lt;コマンド名&gt; オプション
+
+ 事前の疑問がでそうなところ
+
+
+ユーザーは作らなくてもいい？
+→ まだ安定したファームウェアは出ていないのでrootのままで実験した方がいいと思います。きっと何回も作成することになるでしょう。。。リカバリー用のシェル準備できる人は別ですが。
+
+
+エラーが出たんだけど or 上手く動かない
+→ Linuxは大体困った問題は全部ログに出力されます。さかのぼって原因を探りましょう。（根気が必要です。）どうしても分からない時は、、、ログを全部githubやgistに貼っ...]]></description><link>https://zenn.dev/mongonta/articles/0798197b9b7e2f</link><guid isPermaLink="true">https://zenn.dev/mongonta/articles/0798197b9b7e2f</guid><pubDate>Tue, 28 Jan 2025 08:28:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qf47pLja--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E5%2590%2591%25E3%2581%2591%25E3%2580%2591M5Stack%2520ModuleLLM%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%25E4%25B8%258A%25E3%2581%25A7%25E6%259C%2580%25E4%25BD%258E%25E9%2599%2590%25E7%259F%25A5%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%258A%25E3%2581%258F%25E3%2581%25B9%25E3%2581%258DLinux%25E6%2583%2585%25E5%25A0%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E7%25B4%2585%25E6%25A8%25B9%25E3%2582%25BF%25E3%2582%25AB%25E3%2582%25AA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pjbkdpaU9JbG9fWlBhM0lTS0cyWjZydVVmLXNucFZFYlUwcG9NSEE9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>紅樹タカオ</dc:creator></item><item><title><![CDATA[【Linux】コンテナで使用されるLinuxカーネル技術~uts namespace/pid namspace偏~]]></title><description><![CDATA[
+ はじめに
+こんにちは。championです。
+普段は、Google CloudやAWSを中心としたクラウドインフラの設計～保守運用を行なっています。
+Google CloudのCloud Runや、AWSのECSでも利用されるコンテナですが、コンテナを構成する技術について深入りしてみたく、コンテナで使用されるLinuxカーネル技術のnamespaceのuts namespaceとpid namespaceに焦点を当てて調べてみました。
+前回は、network namespaceについて調べた内容について記事を書いています。
+https://zenn.dev/hi_ka_ru/arti...]]></description><link>https://zenn.dev/hi_ka_ru/articles/linux-uts-namespace-20250123</link><guid isPermaLink="true">https://zenn.dev/hi_ka_ru/articles/linux-uts-namespace-20250123</guid><pubDate>Wed, 22 Jan 2025 22:18:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--CnUvabbw--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Linux%25E3%2580%2591%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2586%25E3%2583%258A%25E3%2581%25A7%25E4%25BD%25BF%25E7%2594%25A8%25E3%2581%2595%25E3%2582%258C%25E3%2582%258BLinux%25E3%2582%25AB%25E3%2583%25BC%25E3%2583%258D%25E3%2583%25AB%25E6%258A%2580%25E8%25A1%2593%7Euts%2520namespace%252Fpid%2520namspace%25E5%2581%258F%7E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Hikaru%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvaC5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Hikaru</dc:creator></item><item><title><![CDATA[Q21.[Reversing]reversing easy! 実際にバイナリファイルを書き換えたい]]></title><description><![CDATA[
+ 概要
+CpawCTFの第21問の問題
+
+フラグを出す実行ファイルがあるのだが、プログラム(elfファイル)作成者が出力する関数を書き忘れてしまったらしい…
+
+当初の回答はlinuxのstringコマンドで出力された中身を提出したが、「出力する関数を書き忘れてしまったらしい…」とあるので出力する方法があるっぽく見える書き方なので、もう少し掘り下げてみた。
+
+ 使用したツール(コマンド)
+
+Ghidra
+hexedit
+xxd
+
+
+ 手順
+
+実行ファイルをGhidraに読み込ませる
+怪しいソースコードを見つける
+実行ファイルを編集するツール(ここではhexeditとxxd)で編集
+
+
+ ...]]></description><link>https://zenn.dev/tttttttttt/articles/0577a2de5c31dd</link><guid isPermaLink="true">https://zenn.dev/tttttttttt/articles/0577a2de5c31dd</guid><pubDate>Wed, 22 Jan 2025 14:26:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--tub7oC6H--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Q21.%255BReversing%255Dreversing%2520easy%2521%2520%25E5%25AE%259F%25E9%259A%259B%25E3%2581%25AB%25E3%2583%2590%25E3%2582%25A4%25E3%2583%258A%25E3%2583%25AA%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2592%25E6%259B%25B8%25E3%2581%258D%25E6%258F%259B%25E3%2581%2588%25E3%2581%259F%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tttttttttt%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2IxZTcyNjQ1MWMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tttttttttt</dc:creator></item><item><title><![CDATA[【Linux】コンテナで使用されるLinuxカーネル技術~network namespace偏~]]></title><description><![CDATA[
+ はじめに
+こんにちは。championです。
+普段は、Google CloudやAWSを中心としたクラウドインフラの設計～保守運用を行なっています。
+Google CloudのCloud Runや、AWSのECSでも利用されるコンテナですが、コンテナを構成する技術について深入りしてみたく、
+コンテナで使用されるLinuxカーネル技術のnamespaceの一つであるnetwork namespaceに焦点を当てて調べてみました。
+
+ 対象OS
+今回はGoogle Cloud上のCompute EngineのUbuntu 20.04上で動作確認しています。
+$ cat /etc/os-r...]]></description><link>https://zenn.dev/hi_ka_ru/articles/linux-network-namespace-20250121</link><guid isPermaLink="true">https://zenn.dev/hi_ka_ru/articles/linux-network-namespace-20250121</guid><pubDate>Wed, 22 Jan 2025 07:45:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--O57TubXR--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Linux%25E3%2580%2591%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2586%25E3%2583%258A%25E3%2581%25A7%25E4%25BD%25BF%25E7%2594%25A8%25E3%2581%2595%25E3%2582%258C%25E3%2582%258BLinux%25E3%2582%25AB%25E3%2583%25BC%25E3%2583%258D%25E3%2583%25AB%25E6%258A%2580%25E8%25A1%2593%7Enetwork%2520namespace%25E5%2581%258F%7E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Hikaru%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvaC5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Hikaru</dc:creator></item><item><title><![CDATA[[SadServers] #2: 最もアクセスの多いIPを割り出す]]></title><description><![CDATA[
+ はじめに
+この記事は SadServers の「"Saskatoon": counting IPs.」の解説になります。
+https://sadservers.com/newserver/saint-john
+
+ 状況
+Web サーバーがあり、そこに対するアクセスを記録したログファイル: /home/admin/access.log があるようです。試しに cat コマンドで中身を見てみます。
+$ cat /home/admin/access.log
+66.249.73.135 - - [20/May/2015:21:05:00 +0000] "GET /?flav=atom HTT...]]></description><link>https://zenn.dev/ulxsth/articles/sadservers-counting-ips</link><guid isPermaLink="true">https://zenn.dev/ulxsth/articles/sadservers-counting-ips</guid><pubDate>Wed, 22 Jan 2025 00:19:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xemMKgBa--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BSadServers%255D%2520%25232%253A%2520%25E6%259C%2580%25E3%2582%2582%25E3%2582%25A2%25E3%2582%25AF%25E3%2582%25BB%25E3%2582%25B9%25E3%2581%25AE%25E5%25A4%259A%25E3%2581%2584IP%25E3%2582%2592%25E5%2589%25B2%25E3%2582%258A%25E5%2587%25BA%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2588%25E3%2581%25A4%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JiOGNiMGY2NjkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>よつ</dc:creator></item><item><title><![CDATA[[C言語] メモリリークは悪なのか]]></title><description><![CDATA[
+ はじめに
+今回はメモリリークは悪なのか調べていきたいと思います。
+前提として
+・仮想マシン(Linux)を使用しています。
+・C言語中心に話していきます。
+
+ なぜ調べようと思ったのか
+筆者が42Tokyoというエンジニア養成機関でC言語を学ぶ中で、メモリリークについてはとても厳しく評価されました。周りが厳しいので勝手に自分もメモリリークは悪だと根拠なしに考えていましたが、根拠を知らずにそれが正解だとするのはあまりにもエンジニアらしくないと思ったからです。
+
+ メモリリークとは
+メモリリークとは動的に確保したメモリを開放せずに残すことです。
+
+ システムのメモリ量
+システムのメモリ量...]]></description><link>https://zenn.dev/kodyi/articles/2a4b7f58058838</link><guid isPermaLink="true">https://zenn.dev/kodyi/articles/2a4b7f58058838</guid><pubDate>Tue, 21 Jan 2025 15:59:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--FE07wQkV--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BC%25E8%25A8%2580%25E8%25AA%259E%255D%2520%25E3%2583%25A1%25E3%2583%25A2%25E3%2583%25AA%25E3%2583%25AA%25E3%2583%25BC%25E3%2582%25AF%25E3%2581%25AF%25E6%2582%25AA%25E3%2581%25AA%25E3%2581%25AE%25E3%2581%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25AB%25E3%2582%25A4%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzViMWY1YjBmMjAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>カイ</dc:creator></item><item><title><![CDATA[Linux EC2インスタンスのポート番号変更でセキュリティを強化する方法]]></title><description><![CDATA[こんにちは！
+SSH接続のポート番号といえば「22」ですよね。
+と言えば全員がそうだよねと頷くぐらいにはSSHの接続ポートは22番ポートというのは浸透している話だと思います。
+これが何を指しているかと言うと、「悪い人たち」もそのことを知っているわけです。
+と言うことで、本記事ではAWSのLinuxインスタンスにSSH接続に使用するポート番号を変更する手順を紹介します。
+簡潔に記載すると、①AWSのセキュリティグループの設定を変更。②インスタンスのsshd_configを編集して③sshdサービスを再起動後④実際にそのポート番号を使って接続できるかをテストする
+と言うだけの簡単な手順になり...]]></description><link>https://zenn.dev/yu_shi/articles/c7b22b00cbfd11</link><guid isPermaLink="true">https://zenn.dev/yu_shi/articles/c7b22b00cbfd11</guid><pubDate>Mon, 20 Jan 2025 09:10:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--gpg-BVqF--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%2520EC2%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%25B3%25E3%2582%25B9%25E3%2581%25AE%25E3%2583%259D%25E3%2583%25BC%25E3%2583%2588%25E7%2595%25AA%25E5%258F%25B7%25E5%25A4%2589%25E6%259B%25B4%25E3%2581%25A7%25E3%2582%25BB%25E3%2582%25AD%25E3%2583%25A5%25E3%2583%25AA%25E3%2583%2586%25E3%2582%25A3%25E3%2582%2592%25E5%25BC%25B7%25E5%258C%2596%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2586%25E3%2581%2586%25E3%2581%2597%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NiYjE3YTcwYWYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ゆうし</dc:creator></item><item><title><![CDATA[[Linux] ファイルを使用しているプロセスを見つけ、止める]]></title><description><![CDATA[
+ はじめに
+この記事は SadServers の 1問目を解いた際のノートです。
+SadServers は Web 上で Linux の操作を実践的に学べるサービスです。
+https://sadservers.com/newserver/saint-john
+
+ 状況
+特定のファイルを専有し、書き込みを続けるシステムがあったとします。
+例として、SadServers では「/var/log/bad.log にログを吐き続ける悪いプログラム」があります。
+試しに、/var/log/bad.log が更新されているかを見てみます。tail -f コマンドは、ファイルに更新があった場合即座に...]]></description><link>https://zenn.dev/ulxsth/articles/sadservers-terminate-bad-log</link><guid isPermaLink="true">https://zenn.dev/ulxsth/articles/sadservers-terminate-bad-log</guid><pubDate>Mon, 20 Jan 2025 01:10:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--E4lzUhs4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BLinux%255D%2520%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2592%25E4%25BD%25BF%25E7%2594%25A8%25E3%2581%2597%25E3%2581%25A6%25E3%2581%2584%25E3%2582%258B%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25BB%25E3%2582%25B9%25E3%2582%2592%25E8%25A6%258B%25E3%2581%25A4%25E3%2581%2591%25E3%2580%2581%25E6%25AD%25A2%25E3%2582%2581%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2588%25E3%2581%25A4%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JiOGNiMGY2NjkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>よつ</dc:creator></item><item><title><![CDATA[Linux 特定の文字列に一致するファイルを一括置換]]></title><description><![CDATA[_path_配下の_serch_に一致するファイル内の_serch_を_replace_に一括置換してバックアップ（xxx.bak）を作成。
+-- 実行前に確認
+grep -e "_serch_" -rl /_path_ | xargs sed -n 's/_serch_/_replace_/p'
+
+-- 実行
+grep -e "_serch_" -rl /_path_ | xargs sed -i.bak -e 's/_serch_/_replace_/g'
+]]></description><link>https://zenn.dev/stnr_kai/articles/c393de98ff44e1</link><guid isPermaLink="true">https://zenn.dev/stnr_kai/articles/c393de98ff44e1</guid><pubDate>Sun, 19 Jan 2025 03:04:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--eUhLDNH7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%2520%25E7%2589%25B9%25E5%25AE%259A%25E3%2581%25AE%25E6%2596%2587%25E5%25AD%2597%25E5%2588%2597%25E3%2581%25AB%25E4%25B8%2580%25E8%2587%25B4%25E3%2581%2599%25E3%2582%258B%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2592%25E4%25B8%2580%25E6%258B%25AC%25E7%25BD%25AE%25E6%258F%259B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kai%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ4ZDRkZjAyYzIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kai</dc:creator></item><item><title><![CDATA[straceprof——とにかく簡単にビルドのプロファイルを取るためのソフトウェア]]></title><description><![CDATA[
+ 三行まとめ
+
+
+straceprof は strace コマンドを利用して Linux 上のマルチプロセスで動くプログラムをプロファイルするためのソフトウェアです。
+
+straceprof は strace コマンドが使えるところならどこでも使うことができます。
+
+straceprof はソフトウェアのビルドのプロファイルを特に念頭に置いて書かれています。
+
+
+ とりあえず使ってみたい人向けのコマンド
+$ sudo apt-get install strace
+$ pip install straceprof
+$ strace \
+    --trace=execve,execvea...]]></description><link>https://zenn.dev/a_kawashiro/articles/cfa7456ca49cab</link><guid isPermaLink="true">https://zenn.dev/a_kawashiro/articles/cfa7456ca49cab</guid><pubDate>Sun, 19 Jan 2025 03:01:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--JY_AG9T---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:straceprof%25E2%2580%2594%25E2%2580%2594%25E3%2581%25A8%25E3%2581%25AB%25E3%2581%258B%25E3%2581%258F%25E7%25B0%25A1%25E5%258D%2598%25E3%2581%25AB%25E3%2583%2593%25E3%2583%25AB%25E3%2583%2589%25E3%2581%25AE%25E3%2583%2597%25E3%2583%25AD%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2592%25E5%258F%2596%25E3%2582%258B%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%25E3%2582%25BD%25E3%2583%2595%25E3%2583%2588%25E3%2582%25A6%25E3%2582%25A7%25E3%2582%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:a_kawashiro%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQwMzIxYWY2YTcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>a_kawashiro</dc:creator></item><item><title><![CDATA[ログインしている/ログインしたユーザを確認するコマンド]]></title><description><![CDATA[
+ 初めに
+
+本記事では、Linuxで現在ログインしているユーザ、ログインしていたユーザを確認するためのコマンドについて紹介します。
+また、これらのコマンドの覚え方についてまとめています。(独断と偏見になります。)
+
+
+ ログインしているユーザを確認するコマンド
+
+ w/whoコマンド
+
+現在、Linuxにログインしているユーザを確認するにはwもしくはwhoコマンドを使用します。
+
+$ who
+User pts/1        2025-01-18 06:44
+$ w
+ 06:53:39 up 9 min,  1 user,  load average: 1.34, 1.33, 1.0...]]></description><link>https://zenn.dev/matsuo_1938/articles/ca2d7a5efe1098</link><guid isPermaLink="true">https://zenn.dev/matsuo_1938/articles/ca2d7a5efe1098</guid><pubDate>Fri, 17 Jan 2025 22:26:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--WBIy2DpX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%25AD%25E3%2582%25B0%25E3%2582%25A4%25E3%2583%25B3%25E3%2581%2597%25E3%2581%25A6%25E3%2581%2584%25E3%2582%258B%252F%25E3%2583%25AD%25E3%2582%25B0%25E3%2582%25A4%25E3%2583%25B3%25E3%2581%2597%25E3%2581%259F%25E3%2583%25A6%25E3%2583%25BC%25E3%2582%25B6%25E3%2582%2592%25E7%25A2%25BA%25E8%25AA%258D%25E3%2581%2599%25E3%2582%258B%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Matsuo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI4YWZlN2NhNzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Matsuo</dc:creator></item><item><title><![CDATA[各種システム及びコマンドのプロキシ設定ガイド]]></title><description><![CDATA[
+ はじめに
+既に3週間は何かの病気に掛かり続けている @___nix___  です。
+
+ 背景
+制約のある環境では経路も限定されていることがあります。
+或いは特定のIPからの接続のみ許可されているケースもあります。
+そんな時はプロキシを経由して外部にアクセスします。
+
+ 概要
+プロキシ経由のアクセスですが、OSの設定をしたとしてもシステムやコマンドが独自に経路を決めてしまうので、「あれ？設定したのにプロキシ経由にならないな」ということが発生します。
+今回、OSやシステム、或いはコマンドによるプロキシ設定をまとめてみました。
+
+ 設定方法
+
+ 1. Linux システム全般
+
+ 環境変数...]]></description><link>https://zenn.dev/nix/articles/04810a519df02e</link><guid isPermaLink="true">https://zenn.dev/nix/articles/04810a519df02e</guid><pubDate>Fri, 17 Jan 2025 08:33:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--do_B0Lna--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2590%2584%25E7%25A8%25AE%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%25E5%258F%258A%25E3%2581%25B3%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2581%25AE%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25AD%25E3%2582%25B7%25E8%25A8%25AD%25E5%25AE%259A%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:___nix___%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzllYWYxODlkNGEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>___nix___</dc:creator></item><item><title><![CDATA[ZorinOSにnvidiaのドライバを入れる]]></title><description><![CDATA[
+ 実はデフォで入ってる
+ZorinOSはデフォルトでNVIDIAのドライバが入っています。
+しかしながら、私はプリインストールを信用していない!!のと最新ではないので手動でインスコしていこう。
+
+ 諸々の確認
+
+cat os-release
+PRETTY_NAME="Zorin OS 17.2"
+NAME="Zorin OS"
+VERSION_ID="17"
+VERSION="17.2"
+VERSION_CODENAME=jammy
+ID=zorin
+ID_LIKE="ubuntu debian"
+HOME_URL="https://zorin.com/os/"
+SUPPORT_URL...]]></description><link>https://zenn.dev/ziaensochan/articles/dc1138d96f6472</link><guid isPermaLink="true">https://zenn.dev/ziaensochan/articles/dc1138d96f6472</guid><pubDate>Thu, 16 Jan 2025 17:26:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5OD8Q5oY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ZorinOS%25E3%2581%25ABnvidia%25E3%2581%25AE%25E3%2583%2589%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2590%25E3%2582%2592%25E5%2585%25A5%25E3%2582%258C%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:samenoko%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAwMTk3ZDBkN2EuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>samenoko</dc:creator></item><item><title><![CDATA[WindowsからLinuxサーバーをコマンドで操作！]]></title><description><![CDATA[今回は、WindowsのPowerShellからLinuxサーバーのコマンドを実行し、
+サーバーを再起動する方法を解説します。
+この記事では、特に自動化にフォーカスし、
+再起動時のパスワード入力を不要にする設定や
+公開鍵認証の設定方法をわかりやすく説明します。
+
+ 手順の概要
+
+sudoコマンド実行時のパスワード入力を不要にする
+SSH接続を公開鍵認証にする
+PowerShellスクリプトを作成する
+
+
+ ①sudoコマンド実行時のパスワード入力を不要にする
+Linuxサーバーで sudo を使用する場合、
+通常はパスワードが求められます。
+しかし、自動化ではこれを避ける必要があります。...]]></description><link>https://zenn.dev/subqru/articles/4e48c8532a1289</link><guid isPermaLink="true">https://zenn.dev/subqru/articles/4e48c8532a1289</guid><pubDate>Thu, 16 Jan 2025 13:23:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Jq6apzkx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Windows%25E3%2581%258B%25E3%2582%2589Linux%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2582%2592%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2581%25A7%25E6%2593%258D%25E4%25BD%259C%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:subqru%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2IxMWZiZGJiODQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>subqru</dc:creator></item></channel></rss>

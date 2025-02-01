@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「JavaScript」のフィード]]></title><description><![CDATA[Zennのトピック「JavaScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/javascript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/64acd76870.png</url><title>Zennの「JavaScript」のフィード</title><link>https://zenn.dev/topics/javascript</link></image><generator>zenn.dev</generator><lastBuildDate>Sat, 01 Feb 2025 10:00:22 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/javascript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[【JavaScript】三項演算子についてまとめてみた]]></title><description><![CDATA[
+ JavaScript の三項演算子について
+私は普段の仕事では条件分岐の際に if 文の方が使用頻度が高いですが、プライベートでは三項演算子を使って条件分岐させるのも少なくないです。
+今回は JavaScript の三項演算子について、その基本的な使い方をおさらいします。この記事では、三項演算子の概念や実際のコード例、React の JSX での使い方に加えて、if 文との比較についても解説します。
+
+ 三項演算子とは
+三項演算子は、JavaScript の条件分岐で便利に使えるシンプルな演算子です。たった 1 行のコードで条件分岐を書くことができます。
+
+ 構文
+条件 ? 条件がt...]]></description><link>https://zenn.dev/hayatech/articles/js-ternary-operator</link><guid isPermaLink="true">https://zenn.dev/hayatech/articles/js-ternary-operator</guid><pubDate>Sat, 01 Feb 2025 06:29:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--zJVYOcLZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590JavaScript%25E3%2580%2591%25E4%25B8%2589%25E9%25A0%2585%25E6%25BC%2594%25E7%25AE%2597%25E5%25AD%2590%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:HayaTech%2528%25E3%2581%25AF%25E3%2582%2584%25E3%2581%25A6%25E3%2581%258F%2529%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM0YzBmNjVhMjcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>HayaTech(はやてく)</dc:creator></item><item><title><![CDATA[JSの中でPHPを使ったときに戸惑った論理判定]]></title><description><![CDATA[拡張子phpのファイル内で、html、js、phpを使用していて、論理式が思っているものと違ったのでそのときのメモ✏️
+
+phpファイルで以下を実行すると、consoleに何が表示されるかで戸惑った
+
+
+phpファイル
+&lt;script&gt;
+  let test  = &lt;?= (strpos('bbbb', 'nnn') !== false ? 'true' : 'false') ?&gt;;
+  if (test) {
+    console.log("test1"); 
+  } else {
+    console.log("test2");
+  }
+&lt;/scri...]]></description><link>https://zenn.dev/tamae/articles/cce5b82227d941</link><guid isPermaLink="true">https://zenn.dev/tamae/articles/cce5b82227d941</guid><pubDate>Sat, 01 Feb 2025 05:57:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--OXGQcnPs--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JS%25E3%2581%25AE%25E4%25B8%25AD%25E3%2581%25A7PHP%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%259F%25E3%2581%25A8%25E3%2581%258D%25E3%2581%25AB%25E6%2588%25B8%25E6%2583%2591%25E3%2581%25A3%25E3%2581%259F%25E8%25AB%2596%25E7%2590%2586%25E5%2588%25A4%25E5%25AE%259A%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:madoka%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRmNGUxNDkyYTMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>madoka</dc:creator></item><item><title><![CDATA[mapとforEachの違いについて]]></title><description><![CDATA[ReactやNext.jsを使って個人開発をしてる際、配列メソッドのmapを何となく使ってたのですが、今回mapとforEachの違いって何だっけ？となり、使い分けについて学ぶ機会があったので備忘録として書くなどする🐹
+
+ Array.prototype.map()とArray.prototype.forEach()の違い
+この2つのメソッドは配列のそれぞれの要素に対して処理するArrayインスタンスメソッドです。
+💡Arrayインスタンスメソッドとは？
+JavaScriptの配列(Array)に対して利用できる関数のことをメソッドのこと。
+これらのメソッドを使うことで配列の要素を操作し...]]></description><link>https://zenn.dev/yukinko/articles/4cbefe18734a7f</link><guid isPermaLink="true">https://zenn.dev/yukinko/articles/4cbefe18734a7f</guid><pubDate>Fri, 31 Jan 2025 10:29:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--VTSDXOmn--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:map%25E3%2581%25A8forEach%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2586%25E3%2581%258D%25E3%2582%2593%25E3%2581%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E2M2FlZWMyNjAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ゆきんこ</dc:creator></item><item><title><![CDATA[PythonとJavaScriptで転置をするときの違い]]></title><description><![CDATA[例
+# before
+| 1 2 3 |
+| 4 5 6 |
+→
+# before
+| 1 4 |
+| 2 5 |
+| 3 6 |
+import numpy as np
+def transpose(matrix):
+    arr = np.array(matrix)
+    r,c = arr.shape
+    return arr.T.reshape((c,r)).tolist()
+Python の場合 numpy を使えば比較的楽に実装可能。
+reshape で値を取得し、転置を行なってからreshapeすることで値を取得することが可能となる。
+pythonの場合、
+const ...]]></description><link>https://zenn.dev/pypypymi/articles/7101b46e3f49ac</link><guid isPermaLink="true">https://zenn.dev/pypypymi/articles/7101b46e3f49ac</guid><pubDate>Fri, 31 Jan 2025 09:24:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--uhqkftiH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A8JavaScript%25E3%2581%25A7%25E8%25BB%25A2%25E7%25BD%25AE%25E3%2582%2592%25E3%2581%2599%25E3%2582%258B%25E3%2581%25A8%25E3%2581%258D%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tac-tac-go%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4WTctaEpSdWxmSTVwMGhQX3dSXzk0dzhab1pQbGtXaHd4ejB5UG1HLWM9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tac-tac-go</dc:creator></item><item><title><![CDATA[文字列の中で重複しない初めての文字を探す]]></title><description><![CDATA[例
+"aabbccdde" → "e"
+"wxyz" → "w"
+function noRepeat(str) {  
+  const arr = str.split("")
+  return arr.find((ele) =&gt; arr.indexOf(ele)===arr.lastIndexOf(ele))
+}
+JavaScript であれば indexOf と lastIndexOf を用いてその結果が一致するインデックスであればすなわち唯一登場する文字列となり判定できる。
+Python であれば 文字列に対して特定の文字が登場するインデックスを検索する find と 右側の文...]]></description><link>https://zenn.dev/pypypymi/articles/6693a774274e49</link><guid isPermaLink="true">https://zenn.dev/pypypymi/articles/6693a774274e49</guid><pubDate>Fri, 31 Jan 2025 09:17:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--h4hEr2U2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%2596%2587%25E5%25AD%2597%25E5%2588%2597%25E3%2581%25AE%25E4%25B8%25AD%25E3%2581%25A7%25E9%2587%258D%25E8%25A4%2587%25E3%2581%2597%25E3%2581%25AA%25E3%2581%2584%25E5%2588%259D%25E3%2582%2581%25E3%2581%25A6%25E3%2581%25AE%25E6%2596%2587%25E5%25AD%2597%25E3%2582%2592%25E6%258E%25A2%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tac-tac-go%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4WTctaEpSdWxmSTVwMGhQX3dSXzk0dzhab1pQbGtXaHd4ejB5UG1HLWM9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tac-tac-go</dc:creator></item><item><title><![CDATA[PythonとJavaScriptの yield の違い]]></title><description><![CDATA[
+ Pythonのyield
+
+Pythonでは、yieldは主にジェネレーター関数で使用される。ジェネレーター関数はイテレータを返す特殊な関数であり、yieldを使って一度に一つずつ値を生成する。
+def generator_example():
+    yield 1
+    yield 2
+    yield 3
+
+gen = generator_example()
+print(next(gen))  # 出力: 1
+print(next(gen))  # 出力: 2
+print(next(gen))  # 出力: 3
+
+ JavaScriptのyield
+
+JavaScriptで...]]></description><link>https://zenn.dev/pypypymi/articles/34ce1006aae005</link><guid isPermaLink="true">https://zenn.dev/pypypymi/articles/34ce1006aae005</guid><pubDate>Fri, 31 Jan 2025 09:11:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--CDoNYoc2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A8JavaScript%25E3%2581%25AE%2520yield%2520%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tac-tac-go%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4WTctaEpSdWxmSTVwMGhQX3dSXzk0dzhab1pQbGtXaHd4ejB5UG1HLWM9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tac-tac-go</dc:creator></item><item><title><![CDATA[値の条件比較を三項演算子と if を使わずに実装する方法]]></title><description><![CDATA[Python と JavaScript で三項演算子とifを使わずに a と b の代償比較をする実装
+いくつか方法は考えられるが、Python は match 、Javascript であれば switch を利用する。この際、条件分岐として sign 関数を用いて正負によって値を分岐させると便利である。
+Python
+import numpy as np
+def no_ifs_no_buts(a, b):
+    sign = np.sign(a-b)
+    match sign:
+        case -1:
+            return f'{a} is small...]]></description><link>https://zenn.dev/pypypymi/articles/2aa090157fd938</link><guid isPermaLink="true">https://zenn.dev/pypypymi/articles/2aa090157fd938</guid><pubDate>Fri, 31 Jan 2025 09:10:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--TOjV3FQU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2580%25A4%25E3%2581%25AE%25E6%259D%25A1%25E4%25BB%25B6%25E6%25AF%2594%25E8%25BC%2583%25E3%2582%2592%25E4%25B8%2589%25E9%25A0%2585%25E6%25BC%2594%25E7%25AE%2597%25E5%25AD%2590%25E3%2581%25A8%2520if%2520%25E3%2582%2592%25E4%25BD%25BF%25E3%2582%258F%25E3%2581%259A%25E3%2581%25AB%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tac-tac-go%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4WTctaEpSdWxmSTVwMGhQX3dSXzk0dzhab1pQbGtXaHd4ejB5UG1HLWM9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tac-tac-go</dc:creator></item><item><title><![CDATA[PythonとJavaScriptで母音を抜き出す実装の違い]]></title><description><![CDATA[
+ Python
+Python では、reモジュール を使って母音を抽出します。
+import re
+
+def extract_vowels(text):
+    vowels = re.findall(r'[aeiou]', text,re.IGNORECASE)
+    return vowels
+
+text = "Hello, World!"
+vowels = extract_vowels(text)
+print(vowels)
+説明:
+
+
+re.findall は、正規表現に一致するすべての部分文字列をリストとして返します。
+
+re.IGNORECASE は、小文字と大文字の母音...]]></description><link>https://zenn.dev/pypypymi/articles/e0e0168cd2aacd</link><guid isPermaLink="true">https://zenn.dev/pypypymi/articles/e0e0168cd2aacd</guid><pubDate>Fri, 31 Jan 2025 09:08:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--E3JvJVht--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A8JavaScript%25E3%2581%25A7%25E6%25AF%258D%25E9%259F%25B3%25E3%2582%2592%25E6%258A%259C%25E3%2581%258D%25E5%2587%25BA%25E3%2581%2599%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tac-tac-go%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4WTctaEpSdWxmSTVwMGhQX3dSXzk0dzhab1pQbGtXaHd4ejB5UG1HLWM9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tac-tac-go</dc:creator></item><item><title><![CDATA[JavaScriptの連想配列をPythonの辞書のように特定のキーを指定しながら、順序を保ちながらソートする方法]]></title><description><![CDATA[例えば 商品という key 、値段という value が あり、値段 ごとに降順で並べ上位3つのみを取得するというタスクがあったとする。
+[ 'Computer', 'Cell Phones', 'Vacuum Cleaner','Autos' ] #商品名
+[ 597, 7176, 3192,597 ] #値段のリスト
+Pythonでこのような問題を考える
+{'Computer': 597, 'Cell Phones': 7176, 'Vacuum Cleaner': 3192, 'Autos': 597}
+上記のような辞書が用意されたときにforなどで 辞書型を作成し、sorted関...]]></description><link>https://zenn.dev/pypypymi/articles/4053472609688f</link><guid isPermaLink="true">https://zenn.dev/pypypymi/articles/4053472609688f</guid><pubDate>Fri, 31 Jan 2025 09:07:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fiSpK7Ak--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25E3%2581%25AE%25E9%2580%25A3%25E6%2583%25B3%25E9%2585%258D%25E5%2588%2597%25E3%2582%2592Python%25E3%2581%25AE%25E8%25BE%259E%25E6%259B%25B8%25E3%2581%25AE%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E7%2589%25B9%25E5%25AE%259A%25E3%2581%25AE%25E3%2582%25AD%25E3%2583%25BC%25E3%2582%2592%25E6%258C%2587%25E5%25AE%259A%25E3%2581%2597%25E3%2581%25AA%25E3%2581%258C%25E3%2582%2589%25E3%2580%2581%25E9%25A0%2586%25E5%25BA%258F%25E3%2582%2592%25E4%25BF%259D%25E3%2581%25A1%25E3%2581%25AA%25E3%2581%258C%25E3%2582%2589%25E3%2582%25BD%25E3%2583%25BC%25E3%2583%2588%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tac-tac-go%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4WTctaEpSdWxmSTVwMGhQX3dSXzk0dzhab1pQbGtXaHd4ejB5UG1HLWM9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tac-tac-go</dc:creator></item><item><title><![CDATA[文字列比較のPythonとJavaScriptの違い]]></title><description><![CDATA[Python とJavaScript で末尾の文字を基準に並び替える時、Python では sorted の key に文字列を渡せばいいが、JavaScript の sort では そのままだと文字列比較ではなく数値比較にしか使えないので少し工夫が必要である。
+
+ Python
+def sort_by_last_char(arr):
+    return sorted(arr, key=lambda x: x[-1])
+
+arr = ['apple', 'banana', 'cherry', 'date']
+sorted_arr = sort_by_last_char(arr)
+pri...]]></description><link>https://zenn.dev/pypypymi/articles/03d462d6ab2259</link><guid isPermaLink="true">https://zenn.dev/pypypymi/articles/03d462d6ab2259</guid><pubDate>Fri, 31 Jan 2025 09:06:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--C3gL85-7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%2596%2587%25E5%25AD%2597%25E5%2588%2597%25E6%25AF%2594%25E8%25BC%2583%25E3%2581%25AEPython%25E3%2581%25A8JavaScript%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tac-tac-go%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4WTctaEpSdWxmSTVwMGhQX3dSXzk0dzhab1pQbGtXaHd4ejB5UG1HLWM9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tac-tac-go</dc:creator></item><item><title><![CDATA[JavaScriptとPythonを用いて文字列を置換処理をさせるときの第2引数について]]></title><description><![CDATA[今まで両言語ともに文字列を置換させるときには第二引数に置換後の文字列を記述するのが
+ほとんどで、Python で re.sub を用いて文字を置換処理させるときには、
+re.sub の第二引数の値は置換後の文字列だと思っていたが、それは間違いで 公式(https://docs.python.org/ja/3/library/re.html) を読んでみると
+もし repl が関数であれば、重複しない pattern が発生するたびにその関数が呼ばれます。
+この関数は一つの Match 引数を取り、置換文字列を返します
+という記述があり、第二引数には関数を渡すことができる。
+例えばある文字...]]></description><link>https://zenn.dev/pypypymi/articles/5ff2b58dfc2f01</link><guid isPermaLink="true">https://zenn.dev/pypypymi/articles/5ff2b58dfc2f01</guid><pubDate>Fri, 31 Jan 2025 09:04:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--eKx3FxFS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25E3%2581%25A8Python%25E3%2582%2592%25E7%2594%25A8%25E3%2581%2584%25E3%2581%25A6%25E6%2596%2587%25E5%25AD%2597%25E5%2588%2597%25E3%2582%2592%25E7%25BD%25AE%25E6%258F%259B%25E5%2587%25A6%25E7%2590%2586%25E3%2582%2592%25E3%2581%2595%25E3%2581%259B%25E3%2582%258B%25E3%2581%25A8%25E3%2581%258D%25E3%2581%25AE%25E7%25AC%25AC2%25E5%25BC%2595%25E6%2595%25B0%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tac-tac-go%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4WTctaEpSdWxmSTVwMGhQX3dSXzk0dzhab1pQbGtXaHd4ejB5UG1HLWM9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tac-tac-go</dc:creator></item><item><title><![CDATA[PythonとJavaScriptでsortする際に複数の項目で並び替える時の違い]]></title><description><![CDATA[例えば
+['Hiroshi','Kenji','Masahiro','Yutaka','Shigeru','Kazuo','Noboru','Satoshi','Yoshio']
+のような配列があった場合に、文字の長さで並び替えることを最優先し、
+その後アルファベットの並び替えは降順で文字を並び替えたい場合に、Python と JavaScript の記述の違いを記述する。
+Python の場合、
+lst = ['Hiroshi','Kenji','Masahiro','Yutaka','Shigeru','Kazuo','Noboru','Satoshi','Yoshio']
+prin...]]></description><link>https://zenn.dev/pypypymi/articles/bba6e17725fbe5</link><guid isPermaLink="true">https://zenn.dev/pypypymi/articles/bba6e17725fbe5</guid><pubDate>Fri, 31 Jan 2025 09:00:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hUM8Crl2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A8JavaScript%25E3%2581%25A7sort%25E3%2581%2599%25E3%2582%258B%25E9%259A%259B%25E3%2581%25AB%25E8%25A4%2587%25E6%2595%25B0%25E3%2581%25AE%25E9%25A0%2585%25E7%259B%25AE%25E3%2581%25A7%25E4%25B8%25A6%25E3%2581%25B3%25E6%259B%25BF%25E3%2581%2588%25E3%2582%258B%25E6%2599%2582%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tac-tac-go%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4WTctaEpSdWxmSTVwMGhQX3dSXzk0dzhab1pQbGtXaHd4ejB5UG1HLWM9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tac-tac-go</dc:creator></item><item><title><![CDATA[PythonとJavaScriptのsort関数における複数の項目を並び替える記述の違いについて]]></title><description><![CDATA[
+ PythonとJavaScriptのsort関数の違いについて
+PythonとJavaScriptには、それぞれ独自の方法でリストや辞書をソートする機能があります。この記事では、特に多次元リストや辞書をソートする方法について、PythonとJavaScriptの実装を比較してみましょう。
+
+ Pythonのソート
+Pythonでは、sorted関数を使用してリストや辞書をソートすることができます。sorted関数は新しいリストを返し、元のリストは変更されません。
+多次元リストのソート
+例えば、以下のような多次元リストをソートする場合を考えます。
+data = [['きゅうり', 2,...]]></description><link>https://zenn.dev/pypypymi/articles/f9e60dc4e7dc90</link><guid isPermaLink="true">https://zenn.dev/pypypymi/articles/f9e60dc4e7dc90</guid><pubDate>Fri, 31 Jan 2025 08:54:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--mcz2XsaC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A8JavaScript%25E3%2581%25AEsort%25E9%2596%25A2%25E6%2595%25B0%25E3%2581%25AB%25E3%2581%258A%25E3%2581%2591%25E3%2582%258B%25E8%25A4%2587%25E6%2595%25B0%25E3%2581%25AE%25E9%25A0%2585%25E7%259B%25AE%25E3%2582%2592%25E4%25B8%25A6%25E3%2581%25B3%25E6%259B%25BF%25E3%2581%2588%25E3%2582%258B%25E8%25A8%2598%25E8%25BF%25B0%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tac-tac-go%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4WTctaEpSdWxmSTVwMGhQX3dSXzk0dzhab1pQbGtXaHd4ejB5UG1HLWM9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tac-tac-go</dc:creator></item><item><title><![CDATA[JavaScript の sort関数 の内部動作を改めて理解してみる]]></title><description><![CDATA[JavaScriptの 配列をソートする実装はある程度覚えているのですが、おまじないのように書くことが多いので改めて整理してみました。
+MDNの方にもしっかりと記載のある sort関数 ですが、
+文面を見ても内部動作があまり理解できなかったので今回は動作を確認しました。
+JavaScript Tutor で今回の実装の動きは 確認 できます
+URLを開いたら、
+Visualize Execution を実行してください。
+
+では、詳細に入っていきます。
+以下のような実装があったとします。
+これは配列を昇順に並べる実装です。
+var array = [1,10,3,100,7]
+array...]]></description><link>https://zenn.dev/pypypymi/articles/05b7b0f2c69664</link><guid isPermaLink="true">https://zenn.dev/pypypymi/articles/05b7b0f2c69664</guid><pubDate>Fri, 31 Jan 2025 08:41:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--B3wViL1T--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%2520%25E3%2581%25AE%2520sort%25E9%2596%25A2%25E6%2595%25B0%2520%25E3%2581%25AE%25E5%2586%2585%25E9%2583%25A8%25E5%258B%2595%25E4%25BD%259C%25E3%2582%2592%25E6%2594%25B9%25E3%2582%2581%25E3%2581%25A6%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tac-tac-go%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4WTctaEpSdWxmSTVwMGhQX3dSXzk0dzhab1pQbGtXaHd4ejB5UG1HLWM9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tac-tac-go</dc:creator></item><item><title><![CDATA[JavaScript reduce関数の第二引数 initialValueに配列を指定することで実現する集計配列の実装]]></title><description><![CDATA[
+
+ reduceを使う方法
+ワンライナーで if-elseの条件分けを JavaScript でできないかといつも思っていました。
+普通に考えたらそこまで難しくないが、あまりこのような書き方を見なかったのでメモ。
+たとえば、配列の値を条件分けしてそれぞれの値を集計したいタスクを考える。
+一番シンプルに考えるのであれば、事前に変数を宣言しておき for文を回して
+その中で変数にインクリメントするか、配列にpushするという選択肢が考えられる。
+
+ただ、少しスマートではないと思ったので、reduce関数 の第二引数 initialValue に
+配列を指定することでそのような要件を達成した...]]></description><link>https://zenn.dev/pypypymi/articles/60408f88437bd7</link><guid isPermaLink="true">https://zenn.dev/pypypymi/articles/60408f88437bd7</guid><pubDate>Fri, 31 Jan 2025 08:31:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wwl2KYAP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%2520reduce%25E9%2596%25A2%25E6%2595%25B0%25E3%2581%25AE%25E7%25AC%25AC%25E4%25BA%258C%25E5%25BC%2595%25E6%2595%25B0%2520initialValue%25E3%2581%25AB%25E9%2585%258D%25E5%2588%2597%25E3%2582%2592%25E6%258C%2587%25E5%25AE%259A%25E3%2581%2599%25E3%2582%258B%25E3%2581%2593%25E3%2581%25A8%25E3%2581%25A7%25E5%25AE%259F%25E7%258F%25BE%25E3%2581%2599%25E3%2582%258B%25E9%259B%2586%25E8%25A8%2588%25E9%2585%258D%25E5%2588%2597%25E3%2581%25AE%25E5%25AE%259F%25E8%25A3%2585%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tac-tac-go%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4WTctaEpSdWxmSTVwMGhQX3dSXzk0dzhab1pQbGtXaHd4ejB5UG1HLWM9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tac-tac-go</dc:creator></item><item><title><![CDATA[PythonとJavaScriptでリスト(List)を転置させるときの違い]]></title><description><![CDATA[
+ Pythonでリストを転置
+def transpose(matrix):
+    return [list(row) for row in zip(*matrix)]
+
+matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+
+transposed_matrix = transpose(matrix)
+print(transposed_matrix)
+説明:
+
+
+zip(*matrix) は、各行の対応する要素をまとめてタプルにする。
+リスト内包表記 [list(row) for row in zip(*matrix)] によ...]]></description><link>https://zenn.dev/pypypymi/articles/842a9564b776c2</link><guid isPermaLink="true">https://zenn.dev/pypypymi/articles/842a9564b776c2</guid><pubDate>Fri, 31 Jan 2025 08:27:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--QY-vIctS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A8JavaScript%25E3%2581%25A7%25E3%2583%25AA%25E3%2582%25B9%25E3%2583%2588%2528List%2529%25E3%2582%2592%25E8%25BB%25A2%25E7%25BD%25AE%25E3%2581%2595%25E3%2581%259B%25E3%2582%258B%25E3%2581%25A8%25E3%2581%258D%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tac-tac-go%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4WTctaEpSdWxmSTVwMGhQX3dSXzk0dzhab1pQbGtXaHd4ejB5UG1HLWM9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tac-tac-go</dc:creator></item><item><title><![CDATA[Standard Schemaで何が実現できる？]]></title><description><![CDATA[
+ 初めに
+本記事では先日v1.0.0が公開されたStandard Schameについて紹介します。
+
+ 本記事で紹介すること
+
+
+Standard Schemaとは何か
+
+Standard Schemaで実現できること
+
+Standard Schemaに準拠済みのツール・フレームワーク
+
+
+ 本記事で紹介しないこと
+
+スキーマライブラリでの準拠方法
+
+!
+本記事はReadmeの雑目なまとめ記事です。
+より詳細を知りたい方はこちらをご確認ください。
+
+
+ Standard Schemaとは
+Standard Schemaはzodやvalibotといったスキーマバリデーションライブラリの共...]]></description><link>https://zenn.dev/caffe_latte_623/articles/standard-schema</link><guid isPermaLink="true">https://zenn.dev/caffe_latte_623/articles/standard-schema</guid><pubDate>Fri, 31 Jan 2025 01:07:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6i2nwe_A--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Standard%2520Schema%25E3%2581%25A7%25E4%25BD%2595%25E3%2581%258C%25E5%25AE%259F%25E7%258F%25BE%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258B%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2597%25E3%2583%25BC%25E3%2581%2595%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E4ZjhhZGMzMTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>しーさん</dc:creator></item><item><title><![CDATA[Vitest Browser Mode が凄い]]></title><description><![CDATA[
+ Vitest Browser Mode とは
+https://vitest.dev/guide/browser/
+Vitest Browser Mode（ブラウザモード）とは、2025/1/31 現在 Experimental として公開されている Vitest の API で、ブラウザ上でテストを実行できる機能のことです。
+ブラウザ上で実行可能になったことで必要なモックを最小限に、実際に操作される環境と同じ環境でテストをすることができます。
+実際に試してみた内容をこの記事では紹介します。
+
+ 試してみた
+通常のテストと Browser Mode のテストをそれぞれ作成し、比較してみ...]]></description><link>https://zenn.dev/t0daaay/articles/db0985a1e54b1c</link><guid isPermaLink="true">https://zenn.dev/t0daaay/articles/db0985a1e54b1c</guid><pubDate>Fri, 31 Jan 2025 01:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--oUMgzlUq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Vitest%2520Browser%2520Mode%2520%25E3%2581%258C%25E5%2587%2584%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A4%25E3%2581%2598%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q3ZWJmY2U1MDIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>つじ</dc:creator></item><item><title><![CDATA[JavaScript のオブジェクトが引き起こす思わぬ罠と対策]]></title><description><![CDATA[JavaScript のデータは、大きく プリミティブ（例: Number, String など）と オブジェクト（例: 配列 [], オブジェクト {} など）に分けられます。
+しかし、配列やオブジェクトを扱うときには、「変数を使い回していたら別のところまで値が変わってしまった…」などの思わぬトラブルが起こりがちです。
+この記事では、プリミティブとオブジェクトの違い、そして 「変数の再代入」と「オブジェクトのミューテーション（内容の変更）」を区別する ことの重要性について、具体例を交えて解説します。
+
+
+ 1. プリミティブオブジェクト：何が違うの？
+
+ プリミティブ
+
+代表例: Nu...]]></description><link>https://zenn.dev/tcool/articles/ad82580916da6a</link><guid isPermaLink="true">https://zenn.dev/tcool/articles/ad82580916da6a</guid><pubDate>Fri, 31 Jan 2025 00:25:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lChkhKcU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%2520%25E3%2581%25AE%25E3%2582%25AA%25E3%2583%2596%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E3%2581%258C%25E5%25BC%2595%25E3%2581%258D%25E8%25B5%25B7%25E3%2581%2593%25E3%2581%2599%25E6%2580%259D%25E3%2582%258F%25E3%2581%25AC%25E7%25BD%25A0%25E3%2581%25A8%25E5%25AF%25BE%25E7%25AD%2596%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:t-cool%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2liVmViMFdEdFlWcUtvVDRvYktNeDNTUGZvRTVFOW9rNUV0c21Dc2RvPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>t-cool</dc:creator></item><item><title><![CDATA[noscript タグでエスケープされる innerHtml]]></title><description><![CDATA[&lt;noscript&gt; タグ内の innerHTML は、ブラウザによってエスケープされてしまいます。
+ただし、そもそも &lt;noscript&gt; タグは JavaScript が無効な環境での &lt;script&gt; タグのフォールバックとして機能するため、JavaScript が有効な環境ではエスケープされるのが通常の動作です。
+試しに、ブラウザの設定で JavaScript を無効化してみるとエスケープは解除されるので、安心してほしい。
+https://upa-pc.blogspot.com/2014/04/noscriptinnerhtmlinnerhtm...]]></description><link>https://zenn.dev/aoito/articles/2d949838bcbfdf</link><guid isPermaLink="true">https://zenn.dev/aoito/articles/2d949838bcbfdf</guid><pubDate>Thu, 30 Jan 2025 18:58:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--NbNGHWVu--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:noscript%2520%25E3%2582%25BF%25E3%2582%25B0%25E3%2581%25A7%25E3%2582%25A8%25E3%2582%25B9%25E3%2582%25B1%25E3%2583%25BC%25E3%2583%2597%25E3%2581%2595%25E3%2582%258C%25E3%2582%258B%2520innerHtml%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:uchay%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVlMWE1MmJjNjkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>uchay</dc:creator></item></channel></rss>
