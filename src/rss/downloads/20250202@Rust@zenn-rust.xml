@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Rust」のフィード]]></title><description><![CDATA[Zennのトピック「Rust」のRSSフィードです]]></description><link>https://zenn.dev/topics/rust</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ba09661577.png</url><title>Zennの「Rust」のフィード</title><link>https://zenn.dev/topics/rust</link></image><generator>zenn.dev</generator><lastBuildDate>Sun, 02 Feb 2025 05:12:08 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/rust/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[QRコード誤り訂正の内側を理解しよう]]></title><description><![CDATA[
+ 誤り訂正の仕組みを探ろう！
+みなさん、QRコードを使ったことがありますよね？
+スマホでピッとスキャンするあの四角いマーク。でも、QRコードが少し汚れていたり、一部が隠れていても読み取れるのはなぜでしょうか？その秘密は「誤り訂正」という魔法のような技術にあります！
+
+ 誤り訂正って何？
+誤り訂正は、QRコードの中に隠された特別な情報です。
+この情報があれば、QRコードの一部が読めなくても、元のメッセージを復元できるんです。
+まるで、友達が言った言葉の一部が聞こえなくても、前後の文脈から推測できるようなものです。
+
+ どうやって働くの？
+QRコードを作るとき、元のデータに加えて「冗長デー...]]></description><link>https://zenn.dev/rem/articles/f82f8689bdcdaa</link><guid isPermaLink="true">https://zenn.dev/rem/articles/f82f8689bdcdaa</guid><pubDate>Thu, 30 Jan 2025 22:54:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--KHSSnJwj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:QR%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E8%25AA%25A4%25E3%2582%258A%25E8%25A8%2582%25E6%25AD%25A3%25E3%2581%25AE%25E5%2586%2585%25E5%2581%25B4%25E3%2582%2592%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2597%25E3%2582%2588%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:rem%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2c3ZkdxZXZ1SjhKODktVElvZnNWOXoyT2hJLVlFR0dnTnhfS1hKQWc9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>rem</dc:creator></item><item><title><![CDATA[Rust AnalyzerがTauriのプロジェクトで動かない時の対処法]]></title><description><![CDATA[
+VSCode上でTauriのプロジェクトを開いていると、Rust Analyzerがcargo.tomlを見つけられずエラーが出ることがある
+その時はVSCodeの設定に以下を追加する
+
+{
+    "rust-analyzer.linkedProjects": [
+        "src-tauri/Cargo.toml",
+    ],
+}
+
+
+cargo.tomlのパスはVSCodeでプロジェクトを開いた時の相対パスで指定する
+
+]]></description><link>https://zenn.dev/local/articles/ec17b7b98e4be6</link><guid isPermaLink="true">https://zenn.dev/local/articles/ec17b7b98e4be6</guid><pubDate>Thu, 30 Jan 2025 02:14:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--F7Gk-etO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%2520Analyzer%25E3%2581%258CTauri%25E3%2581%25AE%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E3%2581%25A7%25E5%258B%2595%25E3%2581%258B%25E3%2581%25AA%25E3%2581%2584%25E6%2599%2582%25E3%2581%25AE%25E5%25AF%25BE%25E5%2587%25A6%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Catfish%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2QzOGQ5MDdiN2EuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Catfish</dc:creator></item><item><title><![CDATA[aws-sdk-rustを高速化する at Mac]]></title><description><![CDATA[
+ ことのはじまり
+GoとRustでaws sdkを使ってS3にアクセスしてみたところ、
+
+main.go
+package main
+
+import (
+	"context"
+	"errors"
+	"fmt"
+	"time"
+
+	"github.com/aws/aws-sdk-go-v2/config"
+	"github.com/aws/aws-sdk-go-v2/service/s3"
+	"github.com/aws/smithy-go"
+)
+
+func main() {
+	start := time.Now()
+
+	profile := "hakusai"
+	bucket := "...]]></description><link>https://zenn.dev/1hakusai1/articles/e2fbcb61fc4004</link><guid isPermaLink="true">https://zenn.dev/1hakusai1/articles/e2fbcb61fc4004</guid><pubDate>Wed, 29 Jan 2025 15:27:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--RUmeaksh--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:aws-sdk-rust%25E3%2582%2592%25E9%25AB%2598%25E9%2580%259F%25E5%258C%2596%25E3%2581%2599%25E3%2582%258B%2520at%2520Mac%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hakusai%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U1Mjk0YmM1NWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hakusai</dc:creator></item><item><title><![CDATA[_sqlx_migrations のレコードに入る checksum を自前で計算するスクリプト]]></title><description><![CDATA[
+こいつを突破したい
+
+ はじめに
+sqlx-cli でのマイグレーションを管理している _sqlx_migrations テーブルを確認すると、こんなテーブル構造をしています。
+
+_sqlx_migrations のテーブル構造
+5 番目のカラムに checksum がありますね。
+ここには 6ACD14A420A076E4F59F8D11061CF2ABE392DDE34B32A62E83E10B6C0160C9CC3B98D2381E7465C9EB37E1CC72D8EB69 といった値が入っています。
+このチェックサムの値がどのように計算されているかを調査したので、メモがてら残...]]></description><link>https://zenn.dev/levtech/articles/c98f2c5a298b2a</link><guid isPermaLink="true">https://zenn.dev/levtech/articles/c98f2c5a298b2a</guid><pubDate>Wed, 29 Jan 2025 02:50:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vOtaWAyc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:_sqlx_migrations%2520%25E3%2581%25AE%25E3%2583%25AC%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2581%25AB%25E5%2585%25A5%25E3%2582%258B%2520checksum%2520%25E3%2582%2592%25E8%2587%25AA%25E5%2589%258D%25E3%2581%25A7%25E8%25A8%2588%25E7%25AE%2597%25E3%2581%2599%25E3%2582%258B%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:seoink%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY1YzcxZDY5NDkuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%25AC%25E3%2583%2590%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E9%2596%258B%25E7%2599%25BA%25E9%2583%25A8%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhiODRiZWE5YzYuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>seoink</dc:creator></item><item><title><![CDATA[[WGPU] 学習リソース]]></title><description><![CDATA[
+ WGPUは情報が少ない
+WGPUはrust製のクロスプラットフォームなグラフィックスAPIです。rustでゲーム開発を行う場合必要になります。WebGPUをベースにしているため、学習リソースが少ないことが難点です。
+
+ 初心者向けの教材リンク
+いくつか初心者向けの学習リソースを見つけたので共有します。
+
+
+WebGPU fundamentals
+WebGPUの解説です。親切な説明がわかりやすいです。
+
+WGPU examples
+WGPUのリポジトリにあるサンプルです。実際にどのように使うのか学習できます。
+
+Learn WGPU(ja)
+日本語でWGPUを実際に扱う方法を解説してい...]]></description><link>https://zenn.dev/omini/articles/8c866e2d2060aa</link><guid isPermaLink="true">https://zenn.dev/omini/articles/8c866e2d2060aa</guid><pubDate>Sun, 26 Jan 2025 20:28:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Mav1q22s--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BWGPU%255D%2520%25E5%25AD%25A6%25E7%25BF%2592%25E3%2583%25AA%25E3%2582%25BD%25E3%2583%25BC%25E3%2582%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:omini%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2Rhcmsvby5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>omini</dc:creator></item><item><title><![CDATA[【Rust】アプリケーションのDBトランザクション管理の方法を考える]]></title><description><![CDATA[こんにちは。
+今回はRustで構築したWebアプリケーションにおいて、DBのトランザクション管理の手法を検討、実装しました。結論としては、完全に満足できる形では実装できていませんが、試行錯誤した結果をまとめます。改善可能な点があればぜひコメントにてご指摘ください。
+
+ 前提
+
+Rust 1.81
+Actix Web 4.9.0
+SeaORM 1.1.3
+PostgreSQL 17.0
+
+ORMの選択肢としてはDieselもありますが、アプリケーション全体をActix Webによって非同期ベースで構築していたため、同じように非同期で実装可能なSeaORMを選択しました。
+https://w...]]></description><link>https://zenn.dev/penysho/articles/a48ca73b757656</link><guid isPermaLink="true">https://zenn.dev/penysho/articles/a48ca73b757656</guid><pubDate>Sun, 26 Jan 2025 16:30:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---esUnB5v--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Rust%25E3%2580%2591%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2581%25AEDB%25E3%2583%2588%25E3%2583%25A9%25E3%2583%25B3%25E3%2582%25B6%25E3%2582%25AF%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E7%25AE%25A1%25E7%2590%2586%25E3%2581%25AE%25E6%2596%25B9%25E6%25B3%2595%25E3%2582%2592%25E8%2580%2583%25E3%2581%2588%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2593%25E3%2581%2598%25E3%2582%258D%25E3%2581%2586%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI2ZWRiMmQ4NDcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>こじろう</dc:creator></item><item><title><![CDATA[失われたメトリクスのケース: Rustクロージャーの謎]]></title><description><![CDATA[
+ 問題 - 不正確なメトリクス
+RisingWaveのようなストリーミングデータベースでは、正確なメトリクスは単なる便利なものではなく、パフォーマンスの監視、ボトルネックの特定、システムがリアルタイムでスムーズに動作することを確保するために不可欠です。これは、車のダッシュボードの計器のようなもので、エンジンの下で何が起こっているのかをリアルタイムでフィードバックしてくれます。私たちが監視している重要な項目の1つは、ストレージ層からのデータ取得速度で、これはリアルタイムシステムにとって非常に重要です。
+最近、奇妙な状況に遭遇しました：ストレージメトリクスの1つがゼロを報告しており、データ...]]></description><link>https://zenn.dev/rwcolinpeng/articles/c83805562b4060</link><guid isPermaLink="true">https://zenn.dev/rwcolinpeng/articles/c83805562b4060</guid><pubDate>Sun, 26 Jan 2025 11:35:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4WBDy9Ys--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%25A4%25B1%25E3%2582%258F%25E3%2582%258C%25E3%2581%259F%25E3%2583%25A1%25E3%2583%2588%25E3%2583%25AA%25E3%2582%25AF%25E3%2582%25B9%25E3%2581%25AE%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B9%253A%2520Rust%25E3%2582%25AF%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%25A3%25E3%2583%25BC%25E3%2581%25AE%25E8%25AC%258E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:RisingWave%2520Labs%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdmZmFjMDNiZWUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>RisingWave Labs</dc:creator></item><item><title><![CDATA[ABC390:Rustで解く！問題解説]]></title><description><![CDATA[AtCoder Beginner Contest 390のA~E問題をRustで解いた際の解法をまとめました。
+
+ A問題
+
+問題
+
+https://atcoder.jp/contests/abc390/tasks/abc390_a
+
+解説
+
+整数列 A について、隣接する2つの要素を実際に交換して、昇順に並び替えたものと一致するかどうかをチェックします。
+一致した場合はその時点で Yes と出力し、違った場合は元の状態に戻します。この操作を全ての隣接する要素のペアに対して試みます。
+
+コード
+
+use proconio::input;
+
+fn main() {
+    input!{
+...]]></description><link>https://zenn.dev/nakst_hide/articles/03a7154d33838c</link><guid isPermaLink="true">https://zenn.dev/nakst_hide/articles/03a7154d33838c</guid><pubDate>Sun, 26 Jan 2025 11:15:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--TotHPvV_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ABC390%253ARust%25E3%2581%25A7%25E8%25A7%25A3%25E3%2581%258F%25EF%25BC%2581%25E5%2595%258F%25E9%25A1%258C%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nakahide%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YkMxNEpSQnNET01hTGcxTVRQWGNTWS1qYlNQbFRMQTN3ZU9Sdz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nakahide</dc:creator></item><item><title><![CDATA[Internet Computer Canister開発 Rust編]]></title><description><![CDATA[Cloud 3.0（分散型クラウド）を謳うInternet Computer上で動作するアプリケーションをRustで開発する方法を解説します]]></description><link>https://zenn.dev/halifax/books/icpbook-rust</link><guid isPermaLink="true">https://zenn.dev/halifax/books/icpbook-rust</guid><pubDate>Sun, 26 Jan 2025 11:12:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--rGD43jB2--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci9lZTI4OTI4MDBlLnBuZw==%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>halifax</dc:creator></item><item><title><![CDATA[Rustで最小二乗法を実装]]></title><description><![CDATA[備忘録です。
+use nalgebra::{DMatrix, DVector, LU};
+
+/// NumPyの `polyfit` を再現する関数
+///
+/// # 引数
+///
+/// * `x`: x座標のデータ点のスライス
+/// * `y`: y座標のデータ点のスライス
+/// * `degree`: 近似する多項式の次数
+///
+/// # 戻り値
+///
+/// * `Result&lt;Vec&lt;f64&gt;, &amp;'static str&gt;`:
+///     - `Ok(Vec&lt;f64&gt;)`: 多項式係数（次数の高い順）を格納したベクタ
+...]]></description><link>https://zenn.dev/miseuser/articles/a7984d1c87d254</link><guid isPermaLink="true">https://zenn.dev/miseuser/articles/a7984d1c87d254</guid><pubDate>Sun, 26 Jan 2025 11:09:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--QEp7Znzv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25A7%25E6%259C%2580%25E5%25B0%258F%25E4%25BA%258C%25E4%25B9%2597%25E6%25B3%2595%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:user%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTDZXb1czOEUtNHpaS18yM1kwR2tGTnJBR3BNTEUzNjJPMGlPR0UyY19keG81WDhBPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>user</dc:creator></item><item><title><![CDATA[Effective Rustを読んだ]]></title><description><![CDATA[
+ はじめに
+Effective Rustを読んで、個人的に良かったところを備忘録として残す。
+https://www.oreilly.co.jp/books/9784814400942/
+
+ トレイト制約の捉え方
+
+オブジェクト指向言語から来たプログラマは、トレイト制約とインターフェイスを混同しがちだ。
+このようなトレイト制約を「Shape is-a Draw」（ShapeはDrawの一種）だと間違って捉えてしまう。
+この場合の2つの型の関係は、「Shape also-implements Draw」（ShapeはDrawも実装している）という意味だと思ったほうがいい。
+
+trait ...]]></description><link>https://zenn.dev/techlead/articles/2025-01-26-rust-book-effective-rust</link><guid isPermaLink="true">https://zenn.dev/techlead/articles/2025-01-26-rust-book-effective-rust</guid><pubDate>Sat, 25 Jan 2025 16:28:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--LTwLxkK_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Effective%2520Rust%25E3%2582%2592%25E8%25AA%25AD%25E3%2582%2593%25E3%2581%25A0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2582%25B4%25E3%2583%25AA%25E3%2583%25A9%2540%25E3%2583%259F%25E3%2582%25B9%25E3%2583%2589%2520%2520%25E3%2583%259F%25E3%2582%25B9%25E3%2583%2589%2520%2520%25E3%2583%259F%25E3%2582%25B9%25E3%2583%2589%2520...%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJmODRjMjM5ZTAuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%25BC%25E3%2583%2589%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdlNGE3Zjg2ODIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ゴリラ@ミスド🍩 ミスド🍩 ミスド🍩 ミスド🍩 ミスド🍩</dc:creator></item><item><title><![CDATA[FlexiSpotの昇降デスクE8をiPhoneから操作する]]></title><description><![CDATA[
+ 概要
+iPhoneやMacなどのssh接続可能なデバイスからFlexSpotの電動昇降デスク(E8)を制御します。
+下の画像の通り、iPhoneのホーム画面にショートカットを設置することで、リモコンに触ることなくプリセットを選択できます。
+
+
+!
+現時点(2025/1)ではプリセット 1,2,座り,立ちまでしか作成できていません
+UP,DOWNを押して高さ調査するのは別途調査中です
+
+
+ 必要なもの
+
+Raspberry Pi model 3
+
+Rust環境
+
+
+FlexiSpot
+LANケーブル(RJ45型プラグ)
+GPIOピンとLANケーブルを接続する何か
+
+
+ 手順
+
+ Fle...]]></description><link>https://zenn.dev/junnakarai/articles/f19c6c669bab63</link><guid isPermaLink="true">https://zenn.dev/junnakarai/articles/f19c6c669bab63</guid><pubDate>Sat, 25 Jan 2025 13:48:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--R9_9IPFR--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:FlexiSpot%25E3%2581%25AE%25E6%2598%2587%25E9%2599%258D%25E3%2583%2587%25E3%2582%25B9%25E3%2582%25AFE8%25E3%2582%2592iPhone%25E3%2581%258B%25E3%2582%2589%25E6%2593%258D%25E4%25BD%259C%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Jun%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2Rhcmsvai5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Jun</dc:creator></item><item><title><![CDATA[Rust版polarsでデータフレームからユニークなカテゴリ列（vec型データ）を取得する方法]]></title><description><![CDATA[
+ 1.はじめに
+Rust版Polarsでデータフレームの数値型や文字列型の列から、ユニークなカテゴリ列を Vec 型で取得したい場合があります。
+しかし、Polarsが扱うデータ型から直接 Vec 型に変換するメソッドが見当たらなかったため、Vec 型で取得するコードを作成しました。（もし、直接変換するメソッドがあればご教授いただけますと幸いです。）
+
+ 2. cargo.toml
+今回は LazyFrame を使用するため、features に lazy を指定します。
+[dependencies]
+polars = { version = "0.45.1", features = ...]]></description><link>https://zenn.dev/beginote/articles/12dc8627cdefe3</link><guid isPermaLink="true">https://zenn.dev/beginote/articles/12dc8627cdefe3</guid><pubDate>Sat, 25 Jan 2025 01:48:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--uXT-pWx2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E7%2589%2588polars%25E3%2581%25A7%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%2595%25E3%2583%25AC%25E3%2583%25BC%25E3%2583%25A0%25E3%2581%258B%25E3%2582%2589%25E3%2583%25A6%25E3%2583%258B%25E3%2583%25BC%25E3%2582%25AF%25E3%2581%25AA%25E3%2582%25AB%25E3%2583%2586%25E3%2582%25B4%25E3%2583%25AA%25E5%2588%2597%25EF%25BC%2588vec%25E5%259E%258B%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25EF%25BC%2589%25E3%2582%2592%25E5%258F%2596%25E5%25BE%2597%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Zone%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTDRQazlDa2Fhdm9tRENjX0kzYVh3U1BHcFpDZDdvcnVJalNEYmtmV1NDPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Zone</dc:creator></item><item><title><![CDATA[さまざまな配列用にazikを簡単に実装するアプリを作りました]]></title><description><![CDATA[
+ azik_generatorが完成したぞ！！
+やったーーーーーーーーーーーーー
+おめでとーーーーーーーーーーーーー
+ありがとーーーーーーーーーーーーーー
+
+ とりあえずリポジトリ
+azik_generator
+これです
+
+ 使い方
+
+ まずインストール
+まずCargoは入れといてください。
+みなRustを信仰しろ。
+CargoのインストールはRustの公式サイト
+こっからそれっぽくやったら出来るよ
+Cargo入れたらこれ
+cargo install azik_generator
+
+ したら
+Azikの割り当てを設定するためのJsonを書きます
+まきゆきAZIK4大西を設定するためのJ...]]></description><link>https://zenn.dev/maki10645/articles/a46204884be162</link><guid isPermaLink="true">https://zenn.dev/maki10645/articles/a46204884be162</guid><pubDate>Fri, 24 Jan 2025 10:09:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--IXX-jJkZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%2595%25E3%2581%25BE%25E3%2581%2596%25E3%2581%25BE%25E3%2581%25AA%25E9%2585%258D%25E5%2588%2597%25E7%2594%25A8%25E3%2581%25ABazik%25E3%2582%2592%25E7%25B0%25A1%25E5%258D%2598%25E3%2581%25AB%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2599%25E3%2582%258B%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258A%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25BE%25E3%2581%258D%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSVdVSlFjSU9wbWhyR2N5T0VPeXVXZnBsbDZscGdWTVpwcHRXTFdYRmxhZzNzbTNVZz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>まき</dc:creator></item><item><title><![CDATA[ISUCON14 をベンチマーカーの限界を超えて最適化した話]]></title><description><![CDATA[
+ はじめに
+2024-12-08 に開催された ISUCON 14 にチーム最上川(@kawaemon, @shun-shobon, @re-taro)で参加しました。今回が ISUCON 初参加でした。本番では悔しくもデータ保持違反[1]で失格でしたが、スコア順位としては 37,127 点で全体 8 / 834 位、学生 2 / 99 位 でした。
+また、その後 1 ヶ月程度に渡って開催された感想戦[2]においては、850,573 点で全体 2 位、学生 1 位でした。
+この点数は、感想戦ベンチマーカー（インスタンス）のほぼ測定限界となっています。
+筆者ローカルでは約 180 万点ま...]]></description><link>https://zenn.dev/kawaemon/articles/529fd6a12ac43b</link><guid isPermaLink="true">https://zenn.dev/kawaemon/articles/529fd6a12ac43b</guid><pubDate>Fri, 24 Jan 2025 03:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--rIDQCMpg--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ISUCON14%2520%25E3%2582%2592%25E3%2583%2599%25E3%2583%25B3%25E3%2583%2581%25E3%2583%259E%25E3%2583%25BC%25E3%2582%25AB%25E3%2583%25BC%25E3%2581%25AE%25E9%2599%2590%25E7%2595%258C%25E3%2582%2592%25E8%25B6%2585%25E3%2581%2588%25E3%2581%25A6%25E6%259C%2580%25E9%2581%25A9%25E5%258C%2596%25E3%2581%2597%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258B%25E3%2582%258F%25E3%2581%2588%25E3%2582%2582%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzljYjg1M2UwNTMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>かわえもん</dc:creator></item><item><title><![CDATA[RustでWebスクレイピング]]></title><description><![CDATA[
+ 概要
+Rust(1.84.0)を用いてWebスクレイピングを行うためのライブラリを紹介します。
+
+Rust Headless Chrome
+scraper
+
+
+ Webスクレイピングの流れ
+Webスクレイピングとは、Webサイトから情報を抽出する技術のことを言います。
+ここでは全体の手順を「クロール」、「パース」の2つに分けて考えることにします。
+
+クロール \cdots Webサイトを巡回してHTMLなどを取得する
+パース \cdots 取得したデータを加工し、欲しい情報を抽出する [1]
+
+
+それぞれ順に説明します。
+
+ クロール
+巡回したいWebサイトが決まっていて、また、何ら...]]></description><link>https://zenn.dev/northward/articles/847f999f1dc860</link><guid isPermaLink="true">https://zenn.dev/northward/articles/847f999f1dc860</guid><pubDate>Thu, 23 Jan 2025 18:00:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bisokB2g--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25A7Web%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AC%25E3%2582%25A4%25E3%2583%2594%25E3%2583%25B3%25E3%2582%25B0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Northward%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc0Y2FlYjY3OTQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Northward</dc:creator></item><item><title><![CDATA[Rust/Tauriに入門したので画像変換デスクトップアプリを開発してみた]]></title><description><![CDATA[こんにちは！某製造業で新米DXエンジニアをしているものです。
+先月から Rust の学習を始めました。
+学習している理由としては
+
+今までインタプリタ言語を使ってきたので、コンパイル言語に挑戦したい
+爆速で動くコードを書きたい
+ネイティブアプリの開発をしてみたい
+WebAssembly を使えるようになって、Web アプリ開発の幅を広げたい
+
+といったところです。
+そんな中、Rust でデスクトップアプリを開発するために Tauri を使ってみました。
+正月の暇をつぶすために軽い気持ちで始めましたが、色々苦しんだので備忘録を残しておきます。
+今回は長くなりそうなので、目次をご活用ください...]]></description><link>https://zenn.dev/harumikun/articles/67f992728099ed</link><guid isPermaLink="true">https://zenn.dev/harumikun/articles/67f992728099ed</guid><pubDate>Thu, 23 Jan 2025 12:16:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--K8ydukor--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%252FTauri%25E3%2581%25AB%25E5%2585%25A5%25E9%2596%2580%25E3%2581%2597%25E3%2581%259F%25E3%2581%25AE%25E3%2581%25A7%25E7%2594%25BB%25E5%2583%258F%25E5%25A4%2589%25E6%258F%259B%25E3%2583%2587%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%2588%25E3%2583%2583%25E3%2583%2597%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E9%2596%258B%25E7%2599%25BA%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%258F%25E3%2583%25AB%25E3%2583%259F%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk3MjJkZGRjYjMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ハルミ</dc:creator></item><item><title><![CDATA[Rust 1.84からRustの最小バージョンを考慮した依存関係の解決ができるようになった]]></title><description><![CDATA[Rust 1.84でRustの最小バージョン（MSRV）を考慮するリゾルバが安定化されました。
+これによって、cargo addで間接的に追加されるクレートのMSRVが考慮されるようになったり、cargo updateでrust-versionフィールドで指定されているRustのバージョンと互換性のあるバージョンのクレートが自動的に選択されるようになります。
+cargo add clap
+
+MSRVを考慮した依存関係の解決
+
+MSRVを考慮しない依存関係の解決
+cargo update
+
+MSRVを考慮した依存関係の解決
+
+MSRVを考慮しない依存関係の解決
+MSRVは（間接的に）依存す...]]></description><link>https://zenn.dev/sorairolake/articles/introduce-msrv-aware-resolver</link><guid isPermaLink="true">https://zenn.dev/sorairolake/articles/introduce-msrv-aware-resolver</guid><pubDate>Thu, 23 Jan 2025 03:22:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3by_RfZY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25201.84%25E3%2581%258B%25E3%2582%2589Rust%25E3%2581%25AE%25E6%259C%2580%25E5%25B0%258F%25E3%2583%2590%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%2592%25E8%2580%2583%25E6%2585%25AE%25E3%2581%2597%25E3%2581%259F%25E4%25BE%259D%25E5%25AD%2598%25E9%2596%25A2%25E4%25BF%2582%25E3%2581%25AE%25E8%25A7%25A3%25E6%25B1%25BA%25E3%2581%258C%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258B%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E3%2581%25AA%25E3%2581%25A3%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:SorairoLake%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzEyZGZiOGQyM2QuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>SorairoLake</dc:creator></item><item><title><![CDATA[ABC389:Rustで解く！問題解説]]></title><description><![CDATA[AtCoder Beginner Contest 389のA~E問題をRustで解いた際の解法をまとめました。
+
+ A問題
+
+問題
+
+https://atcoder.jp/contests/abc389/tasks/abc389_a
+
+解説
+
+1文字目と3文字目を数値に変換して掛け算します。
+
+コード
+
+use proconio::{input, marker::Chars};
+fn main() {
+    input!{
+        s: Chars,
+    }
+    let s1 = s[0] as usize - 0x30;
+    let s2 = s[2] as us...]]></description><link>https://zenn.dev/nakst_hide/articles/38cfab4b2c7fda</link><guid isPermaLink="true">https://zenn.dev/nakst_hide/articles/38cfab4b2c7fda</guid><pubDate>Tue, 21 Jan 2025 12:43:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--JgordIxV--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ABC389%253ARust%25E3%2581%25A7%25E8%25A7%25A3%25E3%2581%258F%25EF%25BC%2581%25E5%2595%258F%25E9%25A1%258C%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nakahide%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YkMxNEpSQnNET01hTGcxTVRQWGNTWS1qYlNQbFRMQTN3ZU9Sdz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nakahide</dc:creator></item><item><title><![CDATA[Rustでデータ構造書いてみた（B木編）]]></title><description><![CDATA[
+ はじめに
+この記事は jack Advent Calendar 2024 の記事の再掲です．
+
+Rust でデータ構造書いてみた（B 木編）：前編
+Rust でデータ構造書いてみた（B 木編）：後編
+
+
+ 概要
+
+B 木の操作について説明したよ
+
+検索
+挿入
+削除
+
+
+Rust で B 木の実装をしたよ
+
+ソースコード：kentakom1213/rust-btree
+
+ここから動かせるよ：B 木 - Rust-Playground
+
+
+
+
+
+ B 木とは
+B 木は，データを常にソートされた状態で管理することができるデータ構造の 1 種です．
+また，赤黒木のように，データの挿入や削除で...]]></description><link>https://zenn.dev/powell/articles/02eb1ad5185f76</link><guid isPermaLink="true">https://zenn.dev/powell/articles/02eb1ad5185f76</guid><pubDate>Tue, 21 Jan 2025 08:30:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--f31jzGtk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25A7%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E6%25A7%258B%25E9%2580%25A0%25E6%259B%25B8%25E3%2581%2584%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25EF%25BC%2588B%25E6%259C%25A8%25E7%25B7%25A8%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:powell%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E1ZGVhZGQ0OTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>powell</dc:creator></item></channel></rss>
