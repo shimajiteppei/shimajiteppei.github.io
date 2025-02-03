@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「TypeScript」のフィード]]></title><description><![CDATA[Zennのトピック「TypeScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/typescript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/f13e758fdb.png</url><title>Zennの「TypeScript」のフィード</title><link>https://zenn.dev/topics/typescript</link></image><generator>zenn.dev</generator><lastBuildDate>Mon, 03 Feb 2025 12:04:19 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/typescript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Next.jsで個人サイトを立ち上げた]]></title><description><![CDATA[
+ 個人サイトのURL
+まだ雛形状態です。
+https://y-blo.vercel.app/
+
+ 経緯
+今回自分の個人サイトを立ち上げるに至ったのは、普段学習していることの成果として目にみえる開発物が欲しいこと、このサイトを改良したり新機能をつけたりする中で必ず学習しながら進めるため自身の勉強になること、せっかくなら学んだことを記事として発信していけること、これらをちょうどよく全て実現できるので開発を始めました。
+
+ やったこと
+Next.jsのExampleにあるテンプレートを使用してまずは個人サイトの雛形をvercelにデプロイしました。
+ESLint、Prettier、husky...]]></description><link>https://zenn.dev/yadonn/articles/4851861074fef7</link><guid isPermaLink="true">https://zenn.dev/yadonn/articles/4851861074fef7</guid><pubDate>Mon, 03 Feb 2025 03:26:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--JQ-1UvlL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Next.js%25E3%2581%25A7%25E5%2580%258B%25E4%25BA%25BA%25E3%2582%25B5%25E3%2582%25A4%25E3%2583%2588%25E3%2582%2592%25E7%25AB%258B%25E3%2581%25A1%25E4%25B8%258A%25E3%2581%2592%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:YADON%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVkOTAyMjM0YTMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>YADON</dc:creator></item><item><title><![CDATA[AngularのfileReplacementsでTAURIとコードを共有したり置換したりする話]]></title><description><![CDATA[
+ はじめに
+最近、Tauriへの期待を込めて利用感を調査しています。
+TauriはFrontend Frameworkに依存せずMobile/DesktopのNativeアプリ開発が可能です。
+せっかく好きなFrameworkが使えるので、極力コードを共通化し、1つのレポジトリでWebもネイティブも開発したくなる訳ですが、以下のような困難があります。
+
+WebとNativeでは利用するAPIが異なる（HTTP ClientやGeolocationなど）
+現状、TauriはServer Side Rendering（SSR）に非対応
+
+https://v2.tauri.app/start...]]></description><link>https://zenn.dev/nao50/articles/angular19-filereplacements-tauri</link><guid isPermaLink="true">https://zenn.dev/nao50/articles/angular19-filereplacements-tauri</guid><pubDate>Mon, 03 Feb 2025 02:04:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--LCwyi-UL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Angular%25E3%2581%25AEfileReplacements%25E3%2581%25A7TAURI%25E3%2581%25A8%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2582%2592%25E5%2585%25B1%25E6%259C%2589%25E3%2581%2597%25E3%2581%259F%25E3%2582%258A%25E7%25BD%25AE%25E6%258F%259B%25E3%2581%2597%25E3%2581%259F%25E3%2582%258A%25E3%2581%2599%25E3%2582%258B%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nao%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRiY2YzZDIyYTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nao</dc:creator></item><item><title><![CDATA[Next.js MiddlewareはNode.js runtimeでも使える！【誤解を解消＆今後の展望】]]></title><description><![CDATA[
+ 結論から
+たまにEdge runtimeでしか使えないと誤解されている方がいるので...
+Next.jsのMiddlewareはNode.js runtimeでも使えます!
+!
+ただし、Node.js runtimeのフルサポートではなく、fs, net, child_process, cryptoなどの特定のNode APIは使えません。
+
+
+ はじめに
+Next.jsのMiddlewareは、「Edge runtime専用」と誤解してしまうケースも散見されます。実は、Node.js runtime上でも動作するため、この点について解説します!
+
+ Next.js Middlewa...]]></description><link>https://zenn.dev/jonghyo/articles/nextjs-middleware</link><guid isPermaLink="true">https://zenn.dev/jonghyo/articles/nextjs-middleware</guid><pubDate>Sun, 02 Feb 2025 22:00:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--LGrQfjPe--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Next.js%2520Middleware%25E3%2581%25AFNode.js%2520runtime%25E3%2581%25A7%25E3%2582%2582%25E4%25BD%25BF%25E3%2581%2588%25E3%2582%258B%25EF%25BC%2581%25E3%2580%2590%25E8%25AA%25A4%25E8%25A7%25A3%25E3%2582%2592%25E8%25A7%25A3%25E6%25B6%2588%25EF%25BC%2586%25E4%25BB%258A%25E5%25BE%258C%25E3%2581%25AE%25E5%25B1%2595%25E6%259C%259B%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:jonghyo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRhZGQ4YWVlMjcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>jonghyo</dc:creator></item><item><title><![CDATA[tRPCでPrismaのDate型がstringで帰ってくる問題とsuperjsonによる解決策]]></title><description><![CDATA[
+ 背景
+再現に必要な各種packageのバージョンは以下の通りです。
+
+Next.js 15.0系
+Prisma 5.系統
+trpc 10.系統
+
+trpcで取得したdataをfrontendで受け取ってuseStateのstateとして取り込もうとした際に下記のエラーが生じました。
+import { useState, useEffect } from 'react';
+import { User } from '@prisma/client';
+import { trpc } from '@/server/trpc/trpcClient';
+// (中略)
+
+const Page ...]]></description><link>https://zenn.dev/h_p_yancy/articles/doc12-trpc-date-string-error</link><guid isPermaLink="true">https://zenn.dev/h_p_yancy/articles/doc12-trpc-date-string-error</guid><pubDate>Sun, 02 Feb 2025 16:52:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--LNLXLZmb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:tRPC%25E3%2581%25A7Prisma%25E3%2581%25AEDate%25E5%259E%258B%25E3%2581%258Cstring%25E3%2581%25A7%25E5%25B8%25B0%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%258F%25E3%2582%258B%25E5%2595%258F%25E9%25A1%258C%25E3%2581%25A8superjson%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258B%25E8%25A7%25A3%25E6%25B1%25BA%25E7%25AD%2596%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:H.P.Yancy%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg4ZjU4OTA5MDguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>H.P.Yancy</dc:creator></item><item><title><![CDATA[Three.js + TypeScriptで断面表示（ローカルクリッピング）]]></title><description><![CDATA[
+ 内容
+
+これはTypeScriptからThree.jsを使うサンプルである。
+3Dオブジェクトの一部を非表示にするクリッピングを試す。
+断面を描画する場合と、しない場合。
+
+プロジェクトの作り方は、以下の記事と同様
+https://zenn.dev/ythk/articles/ythk-arphys-three1
+
+ 断面を描画しない場合
+オブジェクトの「ある平面より上の部分を非表示」のような表示は、とても簡単にできる。本質的な部分を取り出すと以下のようになる。
+renderer.localClippingEnabled = true; //重要
+
+const plane = new...]]></description><link>https://zenn.dev/ythk/articles/ythk-arphys-three2</link><guid isPermaLink="true">https://zenn.dev/ythk/articles/ythk-arphys-three2</guid><pubDate>Sun, 02 Feb 2025 14:17:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--LHzlgd1a--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Three.js%2520%252B%2520TypeScript%25E3%2581%25A7%25E6%2596%25AD%25E9%259D%25A2%25E8%25A1%25A8%25E7%25A4%25BA%25EF%25BC%2588%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25AB%25E3%2583%25AB%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2583%25E3%2583%2594%25E3%2583%25B3%25E3%2582%25B0%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ythk%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSVZOZ09NOWpjZEg1TFlRQlh6dnIzWW5ZRmZ6T3F3NUt4VWtNMVdjV3VRPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ythk</dc:creator></item><item><title><![CDATA[画像処理100本ノックに挑戦｜アフィン変換(スキュー)（031/100）]]></title><description><![CDATA[
+ これはなに？
+画像処理100本ノックを、TypeScriptとlibvipsで挑戦してみる記事の31本目です。
+
+ 前回
+https://zenn.dev/nyagato_00/articles/eba0b8c62c36c5
+
+ 実装
+
+ お題
+
+(1)アフィン変換を用いて、出力(1)のようなX-sharing(dx = 30)画像を作成せよ。
+(2)アフィン変換を用いて、出力2のようなY-sharing(dy = 30)画像を作成せよ。
+(3)アフィン変換を用いて、出力3のような幾何変換した(dx = 30, dy = 30)画像を作成せよ。
+このような画像はスキュー画像と呼ばれ、...]]></description><link>https://zenn.dev/nyagato_00/articles/85a7f0fb1d4840</link><guid isPermaLink="true">https://zenn.dev/nyagato_00/articles/85a7f0fb1d4840</guid><pubDate>Sun, 02 Feb 2025 11:58:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GqX2XlRn--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%2594%25BB%25E5%2583%258F%25E5%2587%25A6%25E7%2590%2586100%25E6%259C%25AC%25E3%2583%258E%25E3%2583%2583%25E3%2582%25AF%25E3%2581%25AB%25E6%258C%2591%25E6%2588%25A6%25EF%25BD%259C%25E3%2582%25A2%25E3%2583%2595%25E3%2582%25A3%25E3%2583%25B3%25E5%25A4%2589%25E6%258F%259B%2528%25E3%2582%25B9%25E3%2582%25AD%25E3%2583%25A5%25E3%2583%25BC%2529%25EF%25BC%2588031%252F100%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nyagato_00%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUxtNXd1MTVKUVk3SjNOUG1kcGlMeWdfWUt3blZzaTRpWDRoYjU1c21UTTk3c1E9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nyagato_00</dc:creator></item><item><title><![CDATA[interfaceのoptionalとnullableの違い]]></title><description><![CDATA[インターフェースにおいてプロパティがオプショナルの時、
+・プロパティごと渡さない
+or
+・undefinedを明示的に渡す
+interface Person {
+    name: string;
+    age?: number; // オプショナルなプロパティ
+}
+
+const person1: Person = {
+    name: "Alice"
+};
+
+const person2: Person = {
+    name: "Bob",
+    age: undefined // undefinedは設定できるがnullはNG
+};
+
+プロパティの値がnullableなときは...]]></description><link>https://zenn.dev/nanacb/articles/12b9f6f0d2b0f7</link><guid isPermaLink="true">https://zenn.dev/nanacb/articles/12b9f6f0d2b0f7</guid><pubDate>Sun, 02 Feb 2025 10:41:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--J6nfjn9b--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:interface%25E3%2581%25AEoptional%25E3%2581%25A8nullable%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2586%25E3%2581%25A0%25E3%2581%25AA%25E3%2581%25AA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU2Nzk5NWZkMmIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>うだなな</dc:creator></item><item><title><![CDATA[【TypeScript】unknown と anyを比較してみる]]></title><description><![CDATA[TypeScript を使っていて、catch (error: any) に ESLint エラーが出たことはありませんか？
+「any ならなんでも受け取れるし、問題ないのでは？」 と思うかもしれませんが、それが落とし穴！
+本記事では、unknown と any の違いや、エラーハンドリングでの instanceof Error の重要性について解説します。
+
+
+ ✅ any を使うと危険？
+try {
+  throw new Error("Something went wrong!");
+} catch (error: any) { // ❌ 型チェックなし
+  console.log...]]></description><link>https://zenn.dev/sanpi34/articles/fc700e04db4bc3</link><guid isPermaLink="true">https://zenn.dev/sanpi34/articles/fc700e04db4bc3</guid><pubDate>Sun, 02 Feb 2025 09:23:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8y1uDG0N--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590TypeScript%25E3%2580%2591unknown%2520%25E3%2581%25A8%2520any%25E3%2582%2592%25E6%25AF%2594%25E8%25BC%2583%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Sanpi34%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FiZTM1NzYwZTQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Sanpi34</dc:creator></item><item><title><![CDATA[TypeScript + Vitest スパイ＆モックのテスト例]]></title><description><![CDATA[
+ はじめに
+こんにちは。
+最近 Vitest でテストを書くことが多くなったので、モックについて解説していこうと思います。
+本記事では、Vitest のスパイ・モック機能を利用して、関数やオブジェクト、グローバルオブジェクトのテスト方法を具体例とともに説明します。
+今後もフロントエンドのテストに関する記事を書いていこうと思いますので、よろしくお願いします。
+
+ vi.spyOn
+vi.spyOn は、関数やオブジェクトのメソッドに対して、元の実装をそのまま利用しながら呼び出し状況（回数、引数、戻り値など）の記録を行います。
+※必要に応じて、.mockImplementation() や...]]></description><link>https://zenn.dev/rh820/articles/25d26253d99bd9</link><guid isPermaLink="true">https://zenn.dev/rh820/articles/25d26253d99bd9</guid><pubDate>Sun, 02 Feb 2025 08:37:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Q7BJCspS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%2520%252B%2520Vitest%2520%25E3%2582%25B9%25E3%2583%2591%25E3%2582%25A4%25EF%25BC%2586%25E3%2583%25A2%25E3%2583%2583%25E3%2582%25AF%25E3%2581%25AE%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E4%25BE%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hodii%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk5ODQ5YTZhMzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hodii</dc:creator></item><item><title><![CDATA[TypeScriptで学ぶポリモーフィズム~オブジェクト指向サブタイプポリモーフィズム編~]]></title><description><![CDATA[
+ はじめに
+ポリモーフィズムにはおおきく３種類あります。
+
+
+アドホック多相: 同じ関数・メソッドで異なる引数・振る舞いを許容したい(オーバーライドなど)
+
+パラメトリック多相: 同じ関数・メソッドで異なる入力値型を許容したい(ジェネリクスなど)
+
+サブタイピング: 共通の関数・メソッドをもつ様々な種類のオブジェクト・インスタンスを渡して振る舞いを変えたい
+
+参照: Wikipediaポリモーフィズム
+今回は、特にオブジェクト指向において便利なサブタイピングを紹介したいと思います。このサブタイピングはほかのポリモーフィズムが実現できない強力な仕組みを提供してくれます。
+なお毎回、関数名...]]></description><link>https://zenn.dev/dove/articles/c05ce17fd68133</link><guid isPermaLink="true">https://zenn.dev/dove/articles/c05ce17fd68133</guid><pubDate>Sun, 02 Feb 2025 06:48:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--N0tVmpVQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%25E3%2581%25A7%25E5%25AD%25A6%25E3%2581%25B6%25E3%2583%259D%25E3%2583%25AA%25E3%2583%25A2%25E3%2583%25BC%25E3%2583%2595%25E3%2582%25A3%25E3%2582%25BA%25E3%2583%25A0%7E%25E3%2582%25AA%25E3%2583%2596%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E6%258C%2587%25E5%2590%2591%25E3%2582%25B5%25E3%2583%2596%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%2597%25E3%2583%259D%25E3%2583%25AA%25E3%2583%25A2%25E3%2583%25BC%25E3%2583%2595%25E3%2582%25A3%25E3%2582%25BA%25E3%2583%25A0%25E7%25B7%25A8%7E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%258F%25E3%2583%2588%25E3%2581%2599%25E3%2581%2591%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVkMjNlN2Q4MzMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ハトすけ</dc:creator></item><item><title><![CDATA[openapi-typescriptとZodで任意フィールドの型エラーの対処]]></title><description><![CDATA[OpenAPI、Swaggerから名前が変わってだいぶ良い印象になったなと謎の感想を持っている@zaruです、こんにちは。TypeScriptでOpenAPIを扱うなら openapi-typescript / openapi-fetchライブラリが圧倒的に良いと思いずっと使っています。また、バリデーションはいくつかありますがZodを使い続けています。
+今回は「OpenAPIの任意フィールドが、openapi-typescriptで生成したOpenAPIの型情報と、Zodスキーマの型情報が不一致で型エラーになる」症状の対処法を紹介します。前提として tsconfig.json で exa...]]></description><link>https://zenn.dev/moozaru/articles/8a7cacefd6d91a</link><guid isPermaLink="true">https://zenn.dev/moozaru/articles/8a7cacefd6d91a</guid><pubDate>Sun, 02 Feb 2025 04:59:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bWHQN_NX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:openapi-typescript%25E3%2581%25A8Zod%25E3%2581%25A7%25E4%25BB%25BB%25E6%2584%258F%25E3%2583%2595%25E3%2582%25A3%25E3%2583%25BC%25E3%2583%25AB%25E3%2583%2589%25E3%2581%25AE%25E5%259E%258B%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E3%2581%25AE%25E5%25AF%25BE%25E5%2587%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:zaru%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FiNDkwNTdmZTMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%25A0%25E3%2583%25BC%25E3%2582%25B6%25E3%2583%25AB%25E3%2581%25A1%25E3%2582%2583%25E3%2582%2593%25E3%2581%25AD%25E3%2582%258B%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2hTeWVOcHN2TEdOdTdPeUFlU1JEbDhUNkNOX1p3NHBXSHpIRHN2NlBFPXMyNTAtYw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>zaru</dc:creator></item><item><title><![CDATA[Three.js + TypeScriptで3Dアニメーション表示]]></title><description><![CDATA[
+ 内容
+
+これはTypeScriptからThree.jsを使うサンプルである。
+
+z=f(x,y,t)という関数の描画を目指す。
+単に3次元グラフを表示したいのなら、plotly.jsなどのグラフ用のライブラリを使った方が簡単である。つまり実用的なプログラムの紹介ではなく、Three.jsの使い方のための記事である。
+
+
+ プロジェクトの用意
+
+ プロジェクト作成
+pnpm create vite@latest
+cd プロジェクト名
+pnpm add -D three @types/three
+"Select a framework"には Vanilla、"Select a varia...]]></description><link>https://zenn.dev/ythk/articles/ythk-arphys-three1</link><guid isPermaLink="true">https://zenn.dev/ythk/articles/ythk-arphys-three1</guid><pubDate>Sun, 02 Feb 2025 02:59:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--H48pZPAk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Three.js%2520%252B%2520TypeScript%25E3%2581%25A73D%25E3%2582%25A2%25E3%2583%258B%25E3%2583%25A1%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E8%25A1%25A8%25E7%25A4%25BA%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ythk%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSVZOZ09NOWpjZEg1TFlRQlh6dnIzWW5ZRmZ6T3F3NUt4VWtNMVdjV3VRPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ythk</dc:creator></item><item><title><![CDATA[サーバーに'入る'だけでプロフィールページを生成したい!]]></title><description><![CDATA[
+ なにを作ったの?
+とあるDiscordサーバーに"入る"だけで自分のプロフィールが表示されるようなWebアプリを作りました!
+https://github.com/L4Ph/Anchor
+
+ どう使うの?
+
+ 1. LanyardのDiscordサーバーに参加します。
+!
+注意!
+このサーバーが原因で
+
+乗っ取りなどが発生するのが怖い
+不要に情報を渡したくない。
+
+という方は、参加しないでください。
+基本的には問題ないはずですが、万が一なにか発生しても私は責任を負うことができません。
+
+
+ 2. DiscordのユーザーIDを取得する。
+Discordの開発者モードを有効化し、ユーザ...]]></description><link>https://zenn.dev/katsuyuki/articles/2a6a3369aee9e8</link><guid isPermaLink="true">https://zenn.dev/katsuyuki/articles/2a6a3369aee9e8</guid><pubDate>Sun, 02 Feb 2025 02:02:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---HHcl5Sj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2581%25AB%2527%25E5%2585%25A5%25E3%2582%258B%2527%25E3%2581%25A0%25E3%2581%2591%25E3%2581%25A7%25E3%2583%2597%25E3%2583%25AD%25E3%2583%2595%25E3%2582%25A3%25E3%2583%25BC%25E3%2583%25AB%25E3%2583%259A%25E3%2583%25BC%25E3%2582%25B8%25E3%2582%2592%25E7%2594%259F%25E6%2588%2590%25E3%2581%2597%25E3%2581%259F%25E3%2581%2584%2521%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:LaPh%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFiYzcxMjA0NGYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>LaPh</dc:creator></item><item><title><![CDATA[【JavaScript】null 合体演算子についてまとめてみた]]></title><description><![CDATA[
+ JavaScript の null 合体演算子について
+前回は様々な演算子の中で三項演算子を取り上げましたが、今回は null 合体演算子 についてまとめてみたいと思います。
+
+ null 合体演算子とは
+?? の 左側の値が null または undefined のときに、右側の値を返す 演算子です。
+(もし null と undefined が分からない場合は参考記事をご覧ください。参考記事：JavaScript での undefined と null の違い）
+
+ 構文
+値1 ?? 値2;
+値1 が null または undefined の場合に 値2 を返します。
+
+ シンプ...]]></description><link>https://zenn.dev/hayatech/articles/js-nullish-operator</link><guid isPermaLink="true">https://zenn.dev/hayatech/articles/js-nullish-operator</guid><pubDate>Sun, 02 Feb 2025 00:46:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--f5OO2MUu--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590JavaScript%25E3%2580%2591null%2520%25E5%2590%2588%25E4%25BD%2593%25E6%25BC%2594%25E7%25AE%2597%25E5%25AD%2590%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:HayaTech%2528%25E3%2581%25AF%25E3%2582%2584%25E3%2581%25A6%25E3%2581%258F%2529%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM0YzBmNjVhMjcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>HayaTech(はやてく)</dc:creator></item><item><title><![CDATA[BiomeのPluginについて]]></title><description><![CDATA[こんにちは、mehm8128 です。
+最近、Roadmap 2025 and Biome 2.0 | Biomeが公開されました。
+その中でも一番気になっているのはやはりプラグイン機能です。そこで、RFC を簡単にまとめて寄り道などしながら、Biome のプラグインについて理解している範囲で紹介します。
+間違いなどありましたらコメント欄にて教えていただけると助かります。
+
+ Biome のプラグイン
+そもそも Biome のプラグインとは、ESLint のプラグイン機能のように、Biome 自体が提供している lint ルール以外にもユーザーが独自のルールを作成できるようにするものです（...]]></description><link>https://zenn.dev/mehm8128/articles/biome-plugin</link><guid isPermaLink="true">https://zenn.dev/mehm8128/articles/biome-plugin</guid><pubDate>Sat, 01 Feb 2025 15:32:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--yczbejQu--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Biome%25E3%2581%25AEPlugin%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mehm8128%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNjNzNlNGI0Y2EuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mehm8128</dc:creator></item><item><title><![CDATA[tRPCとgRPCの違いは？]]></title><description><![CDATA[tRPC と gRPC はどちらも RPC（Remote Procedure Call） のフレームワークですが、目的や実装方式が大きく異なります。
+
+
+
+比較項目
+tRPC
+gRPC
+
+
+
+
+主な用途
+TypeScript / JavaScript 向けの RPC フレームワーク（Node.js のフルスタック開発向け）
+マイクロサービス、言語間通信、分散システム向け
+
+
+通信プロトコル
+HTTP + JSON
+HTTP/2 + Protocol Buffers（バイナリ通信）
+
+
+データフォーマット
+JSON（デフォルト）
+Protocol Buffers（protobuf）
+
+
+型...]]></description><link>https://zenn.dev/tommy_aki/articles/7840be2e1e9c4e</link><guid isPermaLink="true">https://zenn.dev/tommy_aki/articles/7840be2e1e9c4e</guid><pubDate>Sat, 01 Feb 2025 15:24:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--RCW1occY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:tRPC%25E3%2581%25A8gRPC%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%25E3%2581%25AF%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Tommy%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lCc3lXZ2NzVmVqT2JNYWJDX0w5RjJTeTdhSjVoXzlsN0ZEWmp3TGc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Tommy</dc:creator></item><item><title><![CDATA[Next.jsのIntercepting RoutesとParallel Routesを使ってモダンなUXを実現する]]></title><description><![CDATA[今回はNext.js 13.3のApp Routerから導入されたIntercepting RoutesとParallel Routesを使用して、モダンなUXを実現する方法を解説します。
+
+
+ 実際に動作するデモ
+https://nextjs-intercepting-routes-example-igz0.vercel.app/articles
+※ モバイルでは通常の記事一覧表示になりますが、PCではサイドバーを使ったプレビュー表示になります。
+
+ ソースコード
+https://github.com/igz0/nextjs-intercepting-routes-example
+
+ ...]]></description><link>https://zenn.dev/igz0/articles/nextjs-intercepting-parallel-routes-modal</link><guid isPermaLink="true">https://zenn.dev/igz0/articles/nextjs-intercepting-parallel-routes-modal</guid><pubDate>Sat, 01 Feb 2025 13:06:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--G0evygli--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Next.js%25E3%2581%25AEIntercepting%2520Routes%25E3%2581%25A8Parallel%2520Routes%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2583%25A2%25E3%2583%2580%25E3%2583%25B3%25E3%2581%25AAUX%25E3%2582%2592%25E5%25AE%259F%25E7%258F%25BE%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2584%25E3%2581%2590%25E3%2581%259E%25E3%2583%25BC%2520%2520%2520%25E6%2597%2585%25E3%2581%2599%25E3%2582%258B%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%259E%25E3%2583%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2YxYWU4MTNkNWMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>いぐぞー ✈️ 旅するプログラマー</dc:creator></item><item><title><![CDATA[画像処理100本ノックに挑戦｜アフィン変換(回転)（030/100）]]></title><description><![CDATA[
+ これはなに？
+画像処理100本ノックを、TypeScriptとlibvipsで挑戦してみる記事の30本目です。
+https://zenn.dev/nyagato_00/articles/9b7aa704309aaa
+
+ 実装
+
+ お題
+
+(1)アフィン変換を用いて、反時計方向に30度回転させよ。
+(2) アフィン変換を用いて、反時計方向に30度回転した画像で中心座標を固定することで、なるべく黒い領域がなくなるように画像を作成せよ。 （ただし、単純なアフィン変換を行うと画像が切れてしまうので、工夫を要する。）
+
+https://github.com/minido/Gasyori100k...]]></description><link>https://zenn.dev/nyagato_00/articles/eba0b8c62c36c5</link><guid isPermaLink="true">https://zenn.dev/nyagato_00/articles/eba0b8c62c36c5</guid><pubDate>Sat, 01 Feb 2025 10:38:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8O39hpUw--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%2594%25BB%25E5%2583%258F%25E5%2587%25A6%25E7%2590%2586100%25E6%259C%25AC%25E3%2583%258E%25E3%2583%2583%25E3%2582%25AF%25E3%2581%25AB%25E6%258C%2591%25E6%2588%25A6%25EF%25BD%259C%25E3%2582%25A2%25E3%2583%2595%25E3%2582%25A3%25E3%2583%25B3%25E5%25A4%2589%25E6%258F%259B%2528%25E5%259B%259E%25E8%25BB%25A2%2529%25EF%25BC%2588030%252F100%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nyagato_00%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUxtNXd1MTVKUVk3SjNOUG1kcGlMeWdfWUt3blZzaTRpWDRoYjU1c21UTTk3c1E9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nyagato_00</dc:creator></item><item><title><![CDATA[ZKPのAppの開発の流れがわかる：Minaでスクラッチ実装]]></title><description><![CDATA[
+ はじめに
+Minaプロトコルは、ゼロ知識証明(Zero Knowledge Proofs)を活用したブロックチェーンプロトコルです。このプロトコル上でzkApps(ゼロ知識アプリケーション)を開発することで、プライバシーを保護しながら計算の正当性を証明することができます。
+Minaではスマートコントラクトとしてコードがネットワークにはありません。あるのは検証鍵とStateのみ。そしてトランザクションの実行自体はローカルでして、その実行の証明までローカルで生成して... という新しい感覚でMinaプロトコルの挙動などが学べるのでぜひ読み進めていってください。
+
+ 動画で学びたい方はこち...]]></description><link>https://zenn.dev/mameta29/articles/dd51634a6fe0ee</link><guid isPermaLink="true">https://zenn.dev/mameta29/articles/dd51634a6fe0ee</guid><pubDate>Sat, 01 Feb 2025 09:45:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--G0HvOvto--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ZKP%25E3%2581%25AEApp%25E3%2581%25AE%25E9%2596%258B%25E7%2599%25BA%25E3%2581%25AE%25E6%25B5%2581%25E3%2582%258C%25E3%2581%258C%25E3%2582%258F%25E3%2581%258B%25E3%2582%258B%25EF%25BC%259AMina%25E3%2581%25A7%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25A9%25E3%2583%2583%25E3%2583%2581%25E5%25AE%259F%25E8%25A3%2585%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mameta29%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FGZFp1Y3FzbE45OV9GR0RoRWJpbGxfZHl0dGNTcUhmQTd4VUh2bFo0TDZNPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mameta29</dc:creator></item><item><title><![CDATA[【フロントエンド】ポケモン図鑑のテストをVitestで書いてみた]]></title><description><![CDATA[
+ 概要
+以下の本で作成したポケモン図鑑のテストコード(フロントエンド)をVitestで書いてみたという報告記事になります。
+※テストコードの解説などは記載しておりませんが、時間があれば後日追記するかもしれません。
+
+
+ 前提
+フロントエンドのテストが全く分からないという方が本記事を読む際は、以下の前提を踏まえて参考程度に読んでいただければと思います
+!
+筆者はあまりフロントエンドのテストに詳しくなく、手探りで書いたコードになります
+
+!
+必要なテストが網羅されていない、過分なテストがあるといった可能性があります
+
+
+ 本記事の対象者
+
+フロントエンドのテストコードをはじめて書く方（サン...]]></description><link>https://zenn.dev/souemon/articles/aad9a886ec207d</link><guid isPermaLink="true">https://zenn.dev/souemon/articles/aad9a886ec207d</guid><pubDate>Sat, 01 Feb 2025 06:30:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--41qzSM8d--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E3%2583%2595%25E3%2583%25AD%25E3%2583%25B3%25E3%2583%2588%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2589%25E3%2580%2591%25E3%2583%259D%25E3%2582%25B1%25E3%2583%25A2%25E3%2583%25B3%25E5%259B%25B3%25E9%2591%2591%25E3%2581%25AE%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E3%2582%2592Vitest%25E3%2581%25A7%25E6%259B%25B8%25E3%2581%2584%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259D%25E3%2581%2586%25E3%2581%2588%25E3%2582%2582%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBmZWE1MTdmMDIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>そうえもん</dc:creator></item></channel></rss>

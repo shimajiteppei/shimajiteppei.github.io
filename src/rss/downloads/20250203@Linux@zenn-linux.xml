@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Linux」のフィード]]></title><description><![CDATA[Zennのトピック「Linux」のRSSフィードです]]></description><link>https://zenn.dev/topics/linux</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/860a9eb1e4.png</url><title>Zennの「Linux」のフィード</title><link>https://zenn.dev/topics/linux</link></image><generator>zenn.dev</generator><lastBuildDate>Mon, 03 Feb 2025 12:04:15 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/linux/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Linuxで確実にDiskをマウントする方法]]></title><description><![CDATA[
+ 要約
+Linuxでデバイス名が変わったとしても、確実に特定のDiskをマウントしてアクセスさせる方法
+
+ はじめに
+Desktop Linuxなどの環境において、接続するUSB経由などで接続するストレージが変化することがあり、起動時に振られる/dev/sd?が一定しないことがある。
+そんな時に、確実にストレージを特定して必要な場所にmountしたいときに、UUIDでMountする方法がある。
+以下は、Debian GNU/Linux Bookworm(Debian 12)を用いて、実際に行っているが、このあたりはLinux一般の話なので、ほかのDistroをお使いの人でも
+参考になる...]]></description><link>https://zenn.dev/yabuki/articles/2025-02-03-btrfs-mount-by-uuid</link><guid isPermaLink="true">https://zenn.dev/yabuki/articles/2025-02-03-btrfs-mount-by-uuid</guid><pubDate>Mon, 03 Feb 2025 11:01:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--pXOgqjdx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%25E3%2581%25A7%25E7%25A2%25BA%25E5%25AE%259F%25E3%2581%25ABDisk%25E3%2582%2592%25E3%2583%259E%25E3%2582%25A6%25E3%2583%25B3%25E3%2583%2588%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:YABUKI%2520Yukiharu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2huRmQ1MnFmTEF6bUNNYVREYVhrTEZsZ0l0d1FrNVlrczJvcjBEPXMyNTAtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>YABUKI Yukiharu</dc:creator></item><item><title><![CDATA[コマンドラインからPDFのページを差し替える - PDFtk]]></title><description><![CDATA[学位論文などで本文は英語だけれども、表紙などでフォーマットが決まっていて日本語が必要になることがあると思います。
+LaTeXで執筆を行っていると、たった数ページのためにクラスファイルを編集して体裁を整えるのは非常に面倒です。
+この記事ではPDFtkを用いてコマンドラインからPDFのページを差し替える方法を解説します。
+
+ PDFtkのインストール
+Ubuntu 24.04では、以下のコマンドでインストールができます。
+$ sudo apt install pdftk-java
+PDFtkのソースコードはこちら
+https://gitlab.com/pdftk-java/pdftk
+
+ ペ...]]></description><link>https://zenn.dev/pon_pokapoka/articles/pdftk_metadata</link><guid isPermaLink="true">https://zenn.dev/pon_pokapoka/articles/pdftk_metadata</guid><pubDate>Sun, 02 Feb 2025 17:48:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--IAfTIotp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%25B3%25E3%2581%258B%25E3%2582%2589PDF%25E3%2581%25AE%25E3%2583%259A%25E3%2583%25BC%25E3%2582%25B8%25E3%2582%2592%25E5%25B7%25AE%25E3%2581%2597%25E6%259B%25BF%25E3%2581%2588%25E3%2582%258B%2520-%2520PDFtk%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Takehiro%2520Yoshioka%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSnRFVUJTaFVzRXRDTzdsNlZSeElpWW9UcnVJbVhKZFhzRm9UNHJGdjA1TXRFPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Takehiro Yoshioka</dc:creator></item><item><title><![CDATA[Flutter環境構築時の「error: linkageerror occurred while loading...」の解決法]]></title><description><![CDATA[
+ 問題
+Flutter環境構築時に，
+$ sdkmanager --version
+Error: LinkageError occurred while loading main class com.android.sdklib.tool.sdkmanager.SdkManagerCli
+        java.lang.UnsupportedClassVersionError: com/android/sdklib/tool/sdkmanager/SdkManagerCli has been compiled by a more recent version of the Java...]]></description><link>https://zenn.dev/tatesoto/articles/236b1c9f3e68a6</link><guid isPermaLink="true">https://zenn.dev/tatesoto/articles/236b1c9f3e68a6</guid><pubDate>Sun, 02 Feb 2025 14:31:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vKYChG5c--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Flutter%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%25E6%2599%2582%25E3%2581%25AE%25E3%2580%258Cerror%253A%2520linkageerror%2520occurred%2520while%2520loading....%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259F%25E3%2581%25A6%25E3%2581%259D%25E3%2581%25A8%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2YzMzZiYjM2ZjkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>たてそと</dc:creator></item><item><title><![CDATA[SrfacePro4にDebian12を入れたときにやったこと]]></title><description><![CDATA[
+ Debianをインストールする
+
+音量アップボタンと電源を長押しして起動
+セキュアブートを無効化する
+Boot順を変えUSB Storageをトップに持ってくる
+Debianを適当にインストールする
+
+https://learn.microsoft.com/ja-jp/surface/manage-surface-uefi-settings
+
+ タッチパネルを有効化するために
+カーネルを置き換えてタッチパネルを有効化する
+
+ LinuxSurface
+https://github.com/linux-surface/linux-surface/wiki/Installation-an...]]></description><link>https://zenn.dev/crackworks/articles/5200611d329fd0</link><guid isPermaLink="true">https://zenn.dev/crackworks/articles/5200611d329fd0</guid><pubDate>Sun, 02 Feb 2025 01:56:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--tBtHKpe3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:SrfacePro4%25E3%2581%25ABDebian12%25E3%2582%2592%25E5%2585%25A5%25E3%2582%258C%25E3%2581%259F%25E3%2581%25A8%25E3%2581%258D%25E3%2581%25AB%25E3%2582%2584%25E3%2581%25A3%25E3%2581%259F%25E3%2581%2593%25E3%2581%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:CRACKWORKS%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JmZTA5NThhYmQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>CRACKWORKS</dc:creator></item><item><title><![CDATA[Snapの接続]]></title><description><![CDATA[
+ 初めに
+
+本記事では、2つのSnapを接続する方法を紹介します。
+
+
+ Snapの接続
+
+Snapを接続して使用する際、下記のようなprovidesとconsumesのそれぞれ2つの役割があります。
+
+・provides:接続したSnapにファイル等を共有する側
+・consumes:接続したSnapのファイル等を使用する側
+
+provides側ではslot、consumes側ではplugという機能を使用して2つのSnapを接続します。
+
+
+ Snapの作成
+
+ provides側
+
+provides側のSnapにはconsumes側に提供するシェルスクリプトを用意します。
+
+$ tr...]]></description><link>https://zenn.dev/matsuo_1938/articles/f386d6c7ac48de</link><guid isPermaLink="true">https://zenn.dev/matsuo_1938/articles/f386d6c7ac48de</guid><pubDate>Sat, 01 Feb 2025 05:25:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--sIcbLXue--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:Snap%25E3%2581%25AE%25E6%258E%25A5%25E7%25B6%259A%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Matsuo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI4YWZlN2NhNzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Matsuo</dc:creator></item><item><title><![CDATA[wsl2（Linux）でGitLabを動かしてみた]]></title><description><![CDATA[
+
+ はじめに
+前回、こちらの記事でWindows上でLinuxを利用できるようにしたので、ここにGitLabを使えるようにします。
+※今回はローカルマシン上で起動させます。
+
+ 事前準備
+
+IPアドレスの確認
+inet xxx.xxx.xxx.xxx/20 の部分が割り当てられてるIPアドレス$ ip a show dev eth0 | grep eth0
+2: eth0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc mq state UP group default qlen 1000
+inet xxx.xxx.xxx...]]></description><link>https://zenn.dev/pisuboy/articles/9d972548cd13a6</link><guid isPermaLink="true">https://zenn.dev/pisuboy/articles/9d972548cd13a6</guid><pubDate>Fri, 31 Jan 2025 14:20:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4sE8MwZm--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:wsl2%25EF%25BC%2588Linux%25EF%25BC%2589%25E3%2581%25A7GitLab%25E3%2582%2592%25E5%258B%2595%25E3%2581%258B%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:pisuboy%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q2MjVmYTU5MzguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>pisuboy</dc:creator></item><item><title><![CDATA[Windows11でLinux（wsl2）を使えるようにしてみた]]></title><description><![CDATA[
+ 対象読者
+
+WindowsユーザでLinuxを利用したい人
+Linux上でしか動作しないソフトウェアを動作させたい人
+ローカルで無償でコンテナを動かしたい人（Linux上でdocker engineを起動）
+
+
+ 環境構築
+
+ 実行環境
+
+OS : Microsoft Windows 11 Pro
+wsl&gt; wsl --version
+WSL バージョン: 2.3.26.0
+カーネル バージョン: 5.15.167.4-1
+WSLg バージョン: 1.0.65
+MSRDC バージョン: 1.2.5620
+Direct3D バージョン: 1.611.1-81528511
+DXCo...]]></description><link>https://zenn.dev/pisuboy/articles/59b6d0730d3e8d</link><guid isPermaLink="true">https://zenn.dev/pisuboy/articles/59b6d0730d3e8d</guid><pubDate>Fri, 31 Jan 2025 08:00:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---ani29VL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Windows11%25E3%2581%25A7Linux%25EF%25BC%2588wsl2%25EF%25BC%2589%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2588%25E3%2582%258B%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:pisuboy%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q2MjVmYTU5MzguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>pisuboy</dc:creator></item><item><title><![CDATA[【Linux 入門】ゼロから始める Linux（初心者のための Linux 入門）]]></title><description><![CDATA[本書では、Linux の基礎から実践的なシステム管理まで、初心者でも理解しやすいように段階的に解説していきます。
+
+身につくスキルは下記の通りです。
+ 💻 Linux の基本概念と仕組みの理解
+ 📁 ファイルシステムの操作とディレクトリ構造の把握
+ ⚡️ コマンドラインの基本操作と効率的な使用方法
+ 🔧 システム管理の基礎（ユーザー管理、プロセス管理など）
+ 🔄 定期的なタスクの自動化とスクリプティング
+ 🌐 基本的なネットワーク管理
+
+本書の特徴はこちらです。
+ ・Linux を初めて学ぶ方でも理解できる丁寧な解説
+ ・仮想環境を使用した安全な学習環境の構築
+ ・実践的な例による確実なスキル習得
+ ・システム管理者として必要な基礎知識の網羅
+ ・豊富な図解による視覚的な理解のサポート
+
+本書では Apple シリコン搭載の Mac を使用して、UTM と Ubuntu Server による実践的な環境で学習を進めていきます。Linux の基礎を一から学びたい方、システム管理者を目指す方に最適な内容となっています。一緒に、Linux の世界を探検していきましょう。]]></description><link>https://zenn.dev/farstep/books/linux-beginners-guide</link><guid isPermaLink="true">https://zenn.dev/farstep/books/linux-beginners-guide</guid><pubDate>Wed, 29 Jan 2025 22:55:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--srP_ivIs--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci80NTAwZmQ2MTAzLnBuZw==%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>FarStep</dc:creator></item><item><title><![CDATA[Windows環境下でDockerを使う場合]]></title><description><![CDATA[
+ はじめに
+Dockerと言ったら基本はLinux系のOSで動かすことがほとんどだったのだが、日本企業ではWindowsサーバーを入れているところがそれなりに多いため、Windows環境でも問題なく動かせるものなのか実験してみた。（外国の企業でWindowサーバーが多く導入されているのかは知りませんが・・・）
+
+ 前提環境
+Windows 10 pro
+WSL2（Ubuntu-20.04）
+
+ Dockerを使うための方法
+Windows環境下でDockerを使おうとしたら、大きくは以下2案が主流と認識している。
+
+WSL上に Docker をインストール（Podman使ってdocke...]]></description><link>https://zenn.dev/relims7165/articles/e81f389c0497b9</link><guid isPermaLink="true">https://zenn.dev/relims7165/articles/e81f389c0497b9</guid><pubDate>Wed, 29 Jan 2025 17:14:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--npBzDJRF--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Windows%25E7%2592%25B0%25E5%25A2%2583%25E4%25B8%258B%25E3%2581%25A7Docker%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%25E5%25A0%25B4%25E5%2590%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:relims%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U0ZjdjYzk5MjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>relims</dc:creator></item><item><title><![CDATA[Python仮想環境(.venv)でのcronジョブ設定方法]]></title><description><![CDATA[
+ Python仮想環境(.venv)でのcronジョブ設定方法
+
+ パスの確認方法
+
+プロジェクトの絶対パスを確認
+
+# プロジェクトディレクトリに移動して
+cd プロジェクトディレクトリ
+# 絶対パスを表示
+pwd
+/home/user/myproject  # ← これをメモ
+
+仮想環境のPythonパスを確認
+
+# プロジェクトディレクトリで
+which python
+/path/to/your/project/.venv/bin/python # ← これをメモ
+
+# または
+echo $(pwd)/.venv/bin/python
+/home/user/myproject/....]]></description><link>https://zenn.dev/yamato_snow/articles/0d94d8a496e483</link><guid isPermaLink="true">https://zenn.dev/yamato_snow/articles/0d94d8a496e483</guid><pubDate>Wed, 29 Jan 2025 03:45:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--IgFEeUgm--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E4%25BB%25AE%25E6%2583%25B3%25E7%2592%25B0%25E5%25A2%2583%2528.venv%2529%25E3%2581%25A7%25E3%2581%25AEcron%25E3%2582%25B8%25E3%2583%25A7%25E3%2583%2596%25E8%25A8%25AD%25E5%25AE%259A%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2584%25E3%2581%25BE%25E3%2581%25A8%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2IwM2U0NTU2MzYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>やまと</dc:creator></item><item><title><![CDATA[Linux - /dev/null とは]]></title><description><![CDATA[
+ Summary
+/dev/null はUNIXシステムにおける特殊なデバイスファイルの一つであり、その特徴は
+
+入力されたデータをすべて破棄する
+読み取り時は常にEOF（End of File）を返す
+
+/dev ディレクトリ配下に配置される疑似デバイスの一種
+
+
+ 本記事のモチベーション
+
+Ubuntuサーバーの構築
+UbuntuなどのUNIX系OSをベースイメージとしたDocker解析環境の構築
+
+これらを業務で行うとき、CUDAドライバー・CUDA・Docker Engineなど、様々なツールをパッケージマネージャを用いてインストールします。その際に &gt; /dev/nul...]]></description><link>https://zenn.dev/boh_mouse/articles/93c2ceb6f165a7</link><guid isPermaLink="true">https://zenn.dev/boh_mouse/articles/93c2ceb6f165a7</guid><pubDate>Tue, 28 Jan 2025 12:33:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Ka580jmB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:Linux%2520-%2520%252Fdev%252Fnull%2520%25E3%2581%25A8%25E3%2581%25AF%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Odoriko%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUxtNXd1MnRYbm1lMkFpSjZ3MERsVDBfeTZ2WnF1cHZxTXRDV2tkdzNxdnU9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Odoriko</dc:creator></item><item><title><![CDATA[【初心者向け】M5Stack ModuleLLMを使う上で最低限知っておくべきLinux情報]]></title><description><![CDATA[コマンドの詳細は下記の検索条件で大体ヒットするので調べてください（爆）
+Linux &lt;コマンド名&gt; オプション
+
+ 事前の疑問がでそうなところ
+
+
+ユーザーは作らなくてもいい？
+→ まだ安定したファームウェアは出ていないのでrootのままで実験した方がいいと思います。きっと何回も作成することになるでしょう。。。リカバリー用のシェル準備できる人は別ですが。
+
+
+エラーが出たんだけど or 上手く動かない
+→ Linuxは大体困った問題は全部ログに出力されます。さかのぼって原因を探りましょう。（根気が必要です。）どうしても分からない時は、、、ログを全部githubやgistに貼っ...]]></description><link>https://zenn.dev/mongonta/articles/0798197b9b7e2f</link><guid isPermaLink="true">https://zenn.dev/mongonta/articles/0798197b9b7e2f</guid><pubDate>Tue, 28 Jan 2025 08:28:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qf47pLja--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E5%2590%2591%25E3%2581%2591%25E3%2580%2591M5Stack%2520ModuleLLM%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%25E4%25B8%258A%25E3%2581%25A7%25E6%259C%2580%25E4%25BD%258E%25E9%2599%2590%25E7%259F%25A5%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%258A%25E3%2581%258F%25E3%2581%25B9%25E3%2581%258DLinux%25E6%2583%2585%25E5%25A0%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E7%25B4%2585%25E6%25A8%25B9%25E3%2582%25BF%25E3%2582%25AB%25E3%2582%25AA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pjbkdpaU9JbG9fWlBhM0lTS0cyWjZydVVmLXNucFZFYlUwcG9NSEE9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>紅樹タカオ</dc:creator></item><item><title><![CDATA[【Linux】コンテナで使用されるLinuxカーネル技術~uts namespace/pid namspace偏~]]></title><description><![CDATA[
+ はじめに
+こんにちは。championです。
+普段は、Google CloudやAWSを中心としたクラウドインフラの設計～保守運用を行なっています。
+Google CloudのCloud Runや、AWSのECSでも利用されるコンテナですが、コンテナを構成する技術について深入りしてみたく、コンテナで使用されるLinuxカーネル技術のnamespaceのuts namespaceとpid namespaceに焦点を当てて調べてみました。
+前回は、network namespaceについて調べた内容について記事を書いています。
+https://zenn.dev/hi_ka_ru/arti...]]></description><link>https://zenn.dev/hi_ka_ru/articles/linux-uts-namespace-20250123</link><guid isPermaLink="true">https://zenn.dev/hi_ka_ru/articles/linux-uts-namespace-20250123</guid><pubDate>Wed, 22 Jan 2025 22:18:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--CnUvabbw--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Linux%25E3%2580%2591%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2586%25E3%2583%258A%25E3%2581%25A7%25E4%25BD%25BF%25E7%2594%25A8%25E3%2581%2595%25E3%2582%258C%25E3%2582%258BLinux%25E3%2582%25AB%25E3%2583%25BC%25E3%2583%258D%25E3%2583%25AB%25E6%258A%2580%25E8%25A1%2593%7Euts%2520namespace%252Fpid%2520namspace%25E5%2581%258F%7E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Hikaru%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvaC5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Hikaru</dc:creator></item><item><title><![CDATA[Q21.[Reversing]reversing easy! 実際にバイナリファイルを書き換えたい]]></title><description><![CDATA[
+ 概要
+CpawCTFの第21問の問題
+
+フラグを出す実行ファイルがあるのだが、プログラム(elfファイル)作成者が出力する関数を書き忘れてしまったらしい…
+
+当初の回答はlinuxのstringコマンドで出力された中身を提出したが、「出力する関数を書き忘れてしまったらしい…」とあるので出力する方法があるっぽく見える書き方なので、もう少し掘り下げてみた。
+
+ 使用したツール(コマンド)
+
+Ghidra
+hexedit
+xxd
+
+
+ 手順
+
+実行ファイルをGhidraに読み込ませる
+怪しいソースコードを見つける
+実行ファイルを編集するツール(ここではhexeditとxxd)で編集
+
+
+ ...]]></description><link>https://zenn.dev/tttttttttt/articles/0577a2de5c31dd</link><guid isPermaLink="true">https://zenn.dev/tttttttttt/articles/0577a2de5c31dd</guid><pubDate>Wed, 22 Jan 2025 14:26:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--tub7oC6H--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Q21.%255BReversing%255Dreversing%2520easy%2521%2520%25E5%25AE%259F%25E9%259A%259B%25E3%2581%25AB%25E3%2583%2590%25E3%2582%25A4%25E3%2583%258A%25E3%2583%25AA%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2592%25E6%259B%25B8%25E3%2581%258D%25E6%258F%259B%25E3%2581%2588%25E3%2581%259F%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tttttttttt%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2IxZTcyNjQ1MWMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tttttttttt</dc:creator></item><item><title><![CDATA[【Linux】コンテナで使用されるLinuxカーネル技術~network namespace偏~]]></title><description><![CDATA[
+ はじめに
+こんにちは。championです。
+普段は、Google CloudやAWSを中心としたクラウドインフラの設計～保守運用を行なっています。
+Google CloudのCloud Runや、AWSのECSでも利用されるコンテナですが、コンテナを構成する技術について深入りしてみたく、
+コンテナで使用されるLinuxカーネル技術のnamespaceの一つであるnetwork namespaceに焦点を当てて調べてみました。
+
+ 対象OS
+今回はGoogle Cloud上のCompute EngineのUbuntu 20.04上で動作確認しています。
+$ cat /etc/os-r...]]></description><link>https://zenn.dev/hi_ka_ru/articles/linux-network-namespace-20250121</link><guid isPermaLink="true">https://zenn.dev/hi_ka_ru/articles/linux-network-namespace-20250121</guid><pubDate>Wed, 22 Jan 2025 07:45:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--O57TubXR--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Linux%25E3%2580%2591%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2586%25E3%2583%258A%25E3%2581%25A7%25E4%25BD%25BF%25E7%2594%25A8%25E3%2581%2595%25E3%2582%258C%25E3%2582%258BLinux%25E3%2582%25AB%25E3%2583%25BC%25E3%2583%258D%25E3%2583%25AB%25E6%258A%2580%25E8%25A1%2593%7Enetwork%2520namespace%25E5%2581%258F%7E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Hikaru%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvaC5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Hikaru</dc:creator></item><item><title><![CDATA[[SadServers] #2: 最もアクセスの多いIPを割り出す]]></title><description><![CDATA[
+ はじめに
+この記事は SadServers の「"Saskatoon": counting IPs.」の解説になります。
+https://sadservers.com/newserver/saint-john
+
+ 状況
+Web サーバーがあり、そこに対するアクセスを記録したログファイル: /home/admin/access.log があるようです。試しに cat コマンドで中身を見てみます。
+$ cat /home/admin/access.log
+66.249.73.135 - - [20/May/2015:21:05:00 +0000] "GET /?flav=atom HTT...]]></description><link>https://zenn.dev/ulxsth/articles/sadservers-counting-ips</link><guid isPermaLink="true">https://zenn.dev/ulxsth/articles/sadservers-counting-ips</guid><pubDate>Wed, 22 Jan 2025 00:19:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xemMKgBa--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BSadServers%255D%2520%25232%253A%2520%25E6%259C%2580%25E3%2582%2582%25E3%2582%25A2%25E3%2582%25AF%25E3%2582%25BB%25E3%2582%25B9%25E3%2581%25AE%25E5%25A4%259A%25E3%2581%2584IP%25E3%2582%2592%25E5%2589%25B2%25E3%2582%258A%25E5%2587%25BA%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2588%25E3%2581%25A4%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JiOGNiMGY2NjkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>よつ</dc:creator></item><item><title><![CDATA[[C言語] メモリリークは悪なのか]]></title><description><![CDATA[
+ はじめに
+今回はメモリリークは悪なのか調べていきたいと思います。
+前提として
+・仮想マシン(Linux)を使用しています。
+・C言語中心に話していきます。
+
+ なぜ調べようと思ったのか
+筆者が42Tokyoというエンジニア養成機関でC言語を学ぶ中で、メモリリークについてはとても厳しく評価されました。周りが厳しいので勝手に自分もメモリリークは悪だと根拠なしに考えていましたが、根拠を知らずにそれが正解だとするのはあまりにもエンジニアらしくないと思ったからです。
+
+ メモリリークとは
+メモリリークとは動的に確保したメモリを開放せずに残すことです。
+
+ システムのメモリ量
+システムのメモリ量...]]></description><link>https://zenn.dev/kodyi/articles/2a4b7f58058838</link><guid isPermaLink="true">https://zenn.dev/kodyi/articles/2a4b7f58058838</guid><pubDate>Tue, 21 Jan 2025 15:59:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--FE07wQkV--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BC%25E8%25A8%2580%25E8%25AA%259E%255D%2520%25E3%2583%25A1%25E3%2583%25A2%25E3%2583%25AA%25E3%2583%25AA%25E3%2583%25BC%25E3%2582%25AF%25E3%2581%25AF%25E6%2582%25AA%25E3%2581%25AA%25E3%2581%25AE%25E3%2581%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25AB%25E3%2582%25A4%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzViMWY1YjBmMjAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>カイ</dc:creator></item><item><title><![CDATA[Linux EC2インスタンスのポート番号変更でセキュリティを強化する方法]]></title><description><![CDATA[こんにちは！
+SSH接続のポート番号といえば「22」ですよね。
+と言えば全員がそうだよねと頷くぐらいにはSSHの接続ポートは22番ポートというのは浸透している話だと思います。
+これが何を指しているかと言うと、「悪い人たち」もそのことを知っているわけです。
+と言うことで、本記事ではAWSのLinuxインスタンスにSSH接続に使用するポート番号を変更する手順を紹介します。
+簡潔に記載すると、①AWSのセキュリティグループの設定を変更。②インスタンスのsshd_configを編集して③sshdサービスを再起動後④実際にそのポート番号を使って接続できるかをテストする
+と言うだけの簡単な手順になり...]]></description><link>https://zenn.dev/yu_shi/articles/c7b22b00cbfd11</link><guid isPermaLink="true">https://zenn.dev/yu_shi/articles/c7b22b00cbfd11</guid><pubDate>Mon, 20 Jan 2025 09:10:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--gpg-BVqF--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%2520EC2%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%25B3%25E3%2582%25B9%25E3%2581%25AE%25E3%2583%259D%25E3%2583%25BC%25E3%2583%2588%25E7%2595%25AA%25E5%258F%25B7%25E5%25A4%2589%25E6%259B%25B4%25E3%2581%25A7%25E3%2582%25BB%25E3%2582%25AD%25E3%2583%25A5%25E3%2583%25AA%25E3%2583%2586%25E3%2582%25A3%25E3%2582%2592%25E5%25BC%25B7%25E5%258C%2596%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2586%25E3%2581%2586%25E3%2581%2597%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NiYjE3YTcwYWYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ゆうし</dc:creator></item><item><title><![CDATA[[Linux] ファイルを使用しているプロセスを見つけ、止める]]></title><description><![CDATA[
+ はじめに
+この記事は SadServers の 1問目を解いた際のノートです。
+SadServers は Web 上で Linux の操作を実践的に学べるサービスです。
+https://sadservers.com/newserver/saint-john
+
+ 状況
+特定のファイルを専有し、書き込みを続けるシステムがあったとします。
+例として、SadServers では「/var/log/bad.log にログを吐き続ける悪いプログラム」があります。
+試しに、/var/log/bad.log が更新されているかを見てみます。tail -f コマンドは、ファイルに更新があった場合即座に...]]></description><link>https://zenn.dev/ulxsth/articles/sadservers-terminate-bad-log</link><guid isPermaLink="true">https://zenn.dev/ulxsth/articles/sadservers-terminate-bad-log</guid><pubDate>Mon, 20 Jan 2025 01:10:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--E4lzUhs4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BLinux%255D%2520%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2592%25E4%25BD%25BF%25E7%2594%25A8%25E3%2581%2597%25E3%2581%25A6%25E3%2581%2584%25E3%2582%258B%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25BB%25E3%2582%25B9%25E3%2582%2592%25E8%25A6%258B%25E3%2581%25A4%25E3%2581%2591%25E3%2580%2581%25E6%25AD%25A2%25E3%2582%2581%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2588%25E3%2581%25A4%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JiOGNiMGY2NjkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>よつ</dc:creator></item><item><title><![CDATA[Linux 特定の文字列に一致するファイルを一括置換]]></title><description><![CDATA[_path_配下の_serch_に一致するファイル内の_serch_を_replace_に一括置換してバックアップ（xxx.bak）を作成。
+-- 実行前に確認
+grep -e "_serch_" -rl /_path_ | xargs sed -n 's/_serch_/_replace_/p'
+
+-- 実行
+grep -e "_serch_" -rl /_path_ | xargs sed -i.bak -e 's/_serch_/_replace_/g'
+]]></description><link>https://zenn.dev/stnr_kai/articles/c393de98ff44e1</link><guid isPermaLink="true">https://zenn.dev/stnr_kai/articles/c393de98ff44e1</guid><pubDate>Sun, 19 Jan 2025 03:04:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--eUhLDNH7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%2520%25E7%2589%25B9%25E5%25AE%259A%25E3%2581%25AE%25E6%2596%2587%25E5%25AD%2597%25E5%2588%2597%25E3%2581%25AB%25E4%25B8%2580%25E8%2587%25B4%25E3%2581%2599%25E3%2582%258B%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2592%25E4%25B8%2580%25E6%258B%25AC%25E7%25BD%25AE%25E6%258F%259B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kai%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ4ZDRkZjAyYzIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kai</dc:creator></item></channel></rss>
