@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Java」のフィード]]></title><description><![CDATA[Zennのトピック「Java」のRSSフィードです]]></description><link>https://zenn.dev/topics/java</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/5c47bb8423.png</url><title>Zennの「Java」のフィード</title><link>https://zenn.dev/topics/java</link></image><generator>zenn.dev</generator><lastBuildDate>Tue, 04 Feb 2025 08:30:01 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/java/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[WebClientでXML＋APIエラー時の特定条件でのRetryを定義する]]></title><description><![CDATA[
+ はじめに
+例えば、特定のエンドポイントにPostするとこのエラーコードのときだけリトライしてくれという仕様があったときにどう実装するかを解説していきます。
+皆さんはWebClientを使用していますか？WebClientはSpring WebFluxから追加された新しいClientツールで、効率的にFunctionalに使用できますが、書き方が難しいと感じるかもしれません。今回は、特定の条件下でのRetryの設定方法について解説していきます。
+WebClientの基礎からXMLでのParseの仕方。エラー時の挙動設定、Retry処理の設定を解説していきます。
+
+ WebClient基...]]></description><link>https://zenn.dev/yoshiki__0428/articles/webclient-xml-parse-and-api-error</link><guid isPermaLink="true">https://zenn.dev/yoshiki__0428/articles/webclient-xml-parse-and-api-error</guid><pubDate>Mon, 03 Feb 2025 15:03:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2s3kTPQ1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:WebClient%25E3%2581%25A7XML%25EF%25BC%258BAPI%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E6%2599%2582%25E3%2581%25AE%25E7%2589%25B9%25E5%25AE%259A%25E6%259D%25A1%25E4%25BB%25B6%25E3%2581%25A7%25E3%2581%25AERetry%25E3%2582%2592%25E5%25AE%259A%25E7%25BE%25A9%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yoshiki-0428%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2UwYTNkODg1NTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yoshiki-0428</dc:creator></item><item><title><![CDATA[SpringBoot3対応したので大体の対応を書いてみる]]></title><description><![CDATA[
+ 💡この記事でわかること・解決すること
+SpringBoot2.7 から 3.0.x へVersionUpする際にぶつかった壁と解決策を載せています。困っている人がいれば参考にしてください。構成は gradle, groovy, spockな構成です。
+
+ そもそもSpringBoot3対応とは？
+Spring Bootは、Javaでエンタープライズグレードのアプリケーションを簡単に作成できる人気のあるフレームワークです。幅広い「スターター」テンプレートを提供することで、開発者が無駄な設定や手間を避け、ビジネスロジックに注力できるため、迅速なアプリケーション開発を支援しています。
+Sp...]]></description><link>https://zenn.dev/yoshiki__0428/articles/version-up-spingboot3</link><guid isPermaLink="true">https://zenn.dev/yoshiki__0428/articles/version-up-spingboot3</guid><pubDate>Mon, 03 Feb 2025 15:03:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6bqD3rt_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:SpringBoot3%25E5%25AF%25BE%25E5%25BF%259C%25E3%2581%2597%25E3%2581%259F%25E3%2581%25AE%25E3%2581%25A7%25E5%25A4%25A7%25E4%25BD%2593%25E3%2581%25AE%25E5%25AF%25BE%25E5%25BF%259C%25E3%2582%2592%25E6%259B%25B8%25E3%2581%2584%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yoshiki-0428%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2UwYTNkODg1NTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yoshiki-0428</dc:creator></item><item><title><![CDATA[Java Stream APIで2つの差分のLocalDateな日付Listを作るTips]]></title><description><![CDATA[
+ 💡結論として
+結論これです。
+
+ Stream APIで2つの日数の差分の日付リストを取得できるコード
+LocalDate startDate = LocalDate.of(2023, 02, 14);
+
+long numOfDays = ChronoUnit.DAYS.between(LocalDate.of(2023, 02, 14), LocalDate.of(2023, 02, 18));
+
+List&lt;LocalDate&gt; daysRange = Stream
+   .iterate(startDate, date -&gt; date.plusDays(1))
+...]]></description><link>https://zenn.dev/yoshiki__0428/articles/tips-creating-localdate-date</link><guid isPermaLink="true">https://zenn.dev/yoshiki__0428/articles/tips-creating-localdate-date</guid><pubDate>Mon, 03 Feb 2025 15:03:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---W18qlju--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java%2520Stream%2520API%25E3%2581%25A72%25E3%2581%25A4%25E3%2581%25AE%25E5%25B7%25AE%25E5%2588%2586%25E3%2581%25AELocalDate%25E3%2581%25AA%25E6%2597%25A5%25E4%25BB%2598List%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258BTips%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yoshiki-0428%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2UwYTNkODg1NTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yoshiki-0428</dc:creator></item><item><title><![CDATA[Spring Integration Test Cassandraでハマったこと]]></title><description><![CDATA[
+ 💡この記事でわかること・解決すること
+Spring Integration Test でCassandraへの接続をモックしたいときにハマったのでその解決方法を書いておく。
+
+ そもそもAPIの結合テストとは
+バックエンドでのマイクロサービス間の開発では、例えばBFF APIから荷物API → 配送方法APIなど API同士の通信が往々として増えてきます。そんなときに1APIとしてはJSONファイルを保存しておいて、JSONファイルの中身の一部を比較するテストを書いておけば、大規模リファクタしたときや新機能追加したときの開発でデグレードが起きづらくなります。
+しかし、マイクロサービス...]]></description><link>https://zenn.dev/yoshiki__0428/articles/cassandra-spring-auto-configuration</link><guid isPermaLink="true">https://zenn.dev/yoshiki__0428/articles/cassandra-spring-auto-configuration</guid><pubDate>Mon, 03 Feb 2025 14:58:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--yphOtfgK--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Spring%2520Integration%2520Test%2520Cassandra%25E3%2581%25A7%25E3%2583%258F%25E3%2583%259E%25E3%2581%25A3%25E3%2581%259F%25E3%2581%2593%25E3%2581%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yoshiki-0428%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2UwYTNkODg1NTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yoshiki-0428</dc:creator></item><item><title><![CDATA[3コインで学ぶ！ソフトウェアテスト＆UML]]></title><description><![CDATA[現場で開発未経験のあなたに必要な最低限の知識を学ぶ講座です。
+
+実際に新入社員研修で使われている内容になっていますので、現場に必要な最低限の確実な知識を近道で学んで頂けます！
+
+以下の知識と環境が必要です。
+あなたに内容を分かりやすくお伝えするため、講座の中では説明しておりませんのでご注意下さい。
+
+★講座で使用しているバージョンは、Windows11になります 。
+　Macの場合は操作方法が異なる事がありますのでご了承頂けますと幸いです
+
+★Javaの知識(出来ればオブジェクト指向まで)
+https://zenn.dev/codek2/books/63c880c460c21e
+https://zenn.dev/codek2/articles/22dce36b4ad458
+
+講座ではEclipseを使用します
+Eclipseを使用しますのでお持ちでない方はインストールをお願いします
+インストールの方法は↓
+https://zenn.dev/codek2/articles/8e9295c77866d4
+
+★PostgreSQLの知識
+https://zenn.dev/codek2/articles/e8e52c0d5817be
+
+インストールの方法は↓
+https://zenn.dev/codek2/articles/7acb27a52cb2d1
+
+★JDBCの知識
+https://zenn.dev/codek2/books/cc252354d94052
+
+
+ソフトウェアテストで使われる用語や内容、書き方などは企業や団体などによりさまざまなので、唯一の正解というのはありません。
+現場により読み替えて頂ければ幸いです。
+
+また、エンジニアを目指している方向けに、とりあえず最初に知っておいて欲しい知識について説明しておりますので、全ての内容は取り扱っておりません。
+
+この本では一般的にという観点で説明していますのでご了承頂けますと幸いです。
+
+しっかり学びたいあなたは↓がおすすめです！
+新入社員研修向け！JDBC・Servlet/JSP・ソフトウェアテスト・UML・Webアプリケーション開発実習講座！
+https://www.udemy.com/course/jdbcservletjsp/?referralCode=88203EF7B00BDA28198C]]></description><link>https://zenn.dev/codek2/books/a377e4d627e8e5</link><guid isPermaLink="true">https://zenn.dev/codek2/books/a377e4d627e8e5</guid><pubDate>Mon, 03 Feb 2025 08:38:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_6RFOlWT--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci81ZmU1OWI5YzA4LmpwZWc=%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>Udemy・企業・オンラインプログラミングスクール講師♪codek2</dc:creator></item><item><title><![CDATA[CaffeineをKotlin Coroutinesでも使えるようにする方法 - caffeine-coroutinesの紹介]]></title><description><![CDATA[
+ Motivation
+JVMには、キャッシュを実装するときに広く使われているCaffeineというライブラリがあります。
+https://github.com/ben-manes/caffeine
+このライブラリはJavaで書かれているため、Coroutines上ではそのままだと使用することができません。
+CaffeineにはAsyncサポート(ComletableFutureに対応したインタフェース)があるため、これを駆使することで一応Coroutines上でも動作させることが可能になります。ただし、CaffeineとCoroutinesへの理解が深くないとなかなか敷居が高いのかな...]]></description><link>https://zenn.dev/be_hase/articles/504f9261582486</link><guid isPermaLink="true">https://zenn.dev/be_hase/articles/504f9261582486</guid><pubDate>Sun, 02 Feb 2025 10:53:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3jMxQjqP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Caffeine%25E3%2582%2592Kotlin%2520Coroutines%25E3%2581%25A7%25E3%2582%2582%25E4%25BD%25BF%25E3%2581%2588%25E3%2582%258B%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2520-%2520caffeine-corouti...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:be-hase%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dNaVhNZnFBWE9yTXdHZVdBMEpmaE5OX3FJRVExUWQzRUw2MVJtM0E9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>be-hase</dc:creator></item><item><title><![CDATA[【Java】Listとオートボクシング・アンボクシングの関係]]></title><description><![CDATA[
+ オートボクシングとは？
+プリミティブ型（int, double など）を対応するラッパークラス（Integer, Double など）に自動変換するしくみ
+int num = 10;
+Integer boxedNum = num; // オートボクシング
+
+ アンボクシングとは？
+ラッパークラス（Integer, Double など）を対応するプリミティブ型に自動変換するしくみ
+Integer boxedNum = 20;
+int num = boxedNum; // アンボクシング
+
+ Listとオートボクシング・アンボクシングの関係
+List&lt;int&gt; のようにプリミ...]]></description><link>https://zenn.dev/codek2/articles/3359c729beeeef</link><guid isPermaLink="true">https://zenn.dev/codek2/articles/3359c729beeeef</guid><pubDate>Sun, 02 Feb 2025 06:10:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--t0Kh0iEC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Java%25E3%2580%2591List%25E3%2581%25A8%25E3%2582%25AA%25E3%2583%25BC%25E3%2583%2588%25E3%2583%259C%25E3%2582%25AF%25E3%2582%25B7%25E3%2583%25B3%25E3%2582%25B0%25E3%2583%25BB%25E3%2582%25A2%25E3%2583%25B3%25E3%2583%259C%25E3%2582%25AF%25E3%2582%25B7%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%25AE%25E9%2596%25A2%25E4%25BF%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Udemy%25E3%2583%25BB%25E4%25BC%2581%25E6%25A5%25AD%25E3%2583%25BB%25E3%2582%25AA%25E3%2583%25B3%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSWJNcXYyNnJHY2xGVDEtOURITHVZTjhrWUpWOVN1aTJWYmxkNU9aejljTmtNPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Udemy・企業・オンラインプログラミングスクール講師♪codek2</dc:creator></item><item><title><![CDATA[【Java】ジェネリクス（Generics）とは？]]></title><description><![CDATA[ジェネリクス（Generics）とは、データの型を柔軟に扱えるしくみのことです。
+
+ もしジェネリクスがなかったら…？
+たとえば、Box という「データを保存するクラス」を作るとします。
+以下のようにデータの型ごとにクラスを作るのは面倒ですね・・・
+
+ 文字列（String）を保存する Box
+class StringBox {
+    private String value;
+
+    public void set(String value) {
+        this.value = value;
+    }
+
+    public String get() {
+       ...]]></description><link>https://zenn.dev/codek2/articles/c597aa77808e1c</link><guid isPermaLink="true">https://zenn.dev/codek2/articles/c597aa77808e1c</guid><pubDate>Sat, 01 Feb 2025 08:38:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4UkmVKfW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Java%25E3%2580%2591%25E3%2582%25B8%25E3%2582%25A7%25E3%2583%258D%25E3%2583%25AA%25E3%2582%25AF%25E3%2582%25B9%25EF%25BC%2588Generics%25EF%25BC%2589%25E3%2581%25A8%25E3%2581%25AF%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Udemy%25E3%2583%25BB%25E4%25BC%2581%25E6%25A5%25AD%25E3%2583%25BB%25E3%2582%25AA%25E3%2583%25B3%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSWJNcXYyNnJHY2xGVDEtOURITHVZTjhrWUpWOVN1aTJWYmxkNU9aejljTmtNPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Udemy・企業・オンラインプログラミングスクール講師♪codek2</dc:creator></item><item><title><![CDATA[静的型付けと動的型付けの基本的な違い]]></title><description><![CDATA[
+ 静的型付けと動的型付けの基本的な違い
+
+ 静的型付け（Go、Java、C++など）
+変数の型が コンパイル時に決まる。
+一度決めた型は、プログラムが動作する間、基本的に変わらない。
+型に関する間違い（例：型の不一致など）は、コンパイル時にエラーとして発見される。
+動的型付け（Python、JavaScriptなど）
+変数の型は 実行時に決まる。
+同じ変数に異なる型の値を入れることが可能。
+型の間違いによるエラーは、実行時までわからないことが多い。
+Goの静的型付けの例
+Goでは、変数を宣言する際に型を指定します。例えば：
+package main
+
+import "fmt"
+
+fun...]]></description><link>https://zenn.dev/koounosuke/articles/e26f873a6b2a5d</link><guid isPermaLink="true">https://zenn.dev/koounosuke/articles/e26f873a6b2a5d</guid><pubDate>Sat, 01 Feb 2025 02:57:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--MpjrdAnP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E9%259D%2599%25E7%259A%2584%25E5%259E%258B%25E4%25BB%2598%25E3%2581%2591%25E3%2581%25A8%25E5%258B%2595%25E7%259A%2584%25E5%259E%258B%25E4%25BB%2598%25E3%2581%2591%25E3%2581%25AE%25E5%259F%25BA%25E6%259C%25AC%25E7%259A%2584%25E3%2581%25AA%25E9%2581%2595%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:JavaJava%25E7%2594%25B7%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTHBqUDlLS2pjOGRlQ050RUQyVmYyOEZZVUU0TWFkQVZoRS1GNXpDLXd3YmJnYXZnPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>JavaJava男</dc:creator></item><item><title><![CDATA[Gradle 依存関係の差分を可視化！「gradle-dependency-diff-action」のご紹介]]></title><description><![CDATA[自分が作成したGitHub Actions「gradle-dependency-diff-action」についてご紹介します。このActionsを使うことで、Pull RequestによってGradle依存関係にどのような差分が生じるかを簡単に確認できるようになります。
+
+ Motivation
+Gradleは推移的(?)にライブラリの依存を解決していくため、しばしば意図せぬ依存の変更が発生することがあります。
+例えば、以下のようにtinkというライブラリをアップデートしたとします。一見すると、ただのマイナーアップデートですよね。
+こういった変更のPull Requestのレビュー依頼が...]]></description><link>https://zenn.dev/be_hase/articles/e01864e80c5e97</link><guid isPermaLink="true">https://zenn.dev/be_hase/articles/e01864e80c5e97</guid><pubDate>Wed, 29 Jan 2025 13:49:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Ee9RitMg--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Gradle%2520%25E4%25BE%259D%25E5%25AD%2598%25E9%2596%25A2%25E4%25BF%2582%25E3%2581%25AE%25E5%25B7%25AE%25E5%2588%2586%25E3%2582%2592%25E5%258F%25AF%25E8%25A6%2596%25E5%258C%2596%25EF%25BC%2581%25E3%2580%258Cgradle-dependency-diff-action%25E3%2580%258D%25E3%2581%25AE%25E3%2581%2594%25E7%25B4%25B9%25E4%25BB%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:be-hase%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dNaVhNZnFBWE9yTXdHZVdBMEpmaE5OX3FJRVExUWQzRUw2MVJtM0E9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>be-hase</dc:creator></item><item><title><![CDATA[【Java】nextLine()の注意事項]]></title><description><![CDATA[※「next()」や「nextInt()」のあとに「nextLine()」を使用すると空の文字列(“”)が取得されてしまうことがあります。
+これを避けるには以下のような記述が必要になる場合があります。
+Scanner scanner = new Scanner(System.in);
+
+System.out.println("番号を入力してください:");
+int id = scanner.nextInt();
+
+System.out.println("コメントを入力してください:");
+scanner.nextLine(); // ダミーの nextLine() を使ってバッファをクリ...]]></description><link>https://zenn.dev/codek2/articles/85cfd14807f55f</link><guid isPermaLink="true">https://zenn.dev/codek2/articles/85cfd14807f55f</guid><pubDate>Tue, 28 Jan 2025 08:19:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--IBu4XoEp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Java%25E3%2580%2591nextLine%2528%2529%25E3%2581%25AE%25E6%25B3%25A8%25E6%2584%258F%25E4%25BA%258B%25E9%25A0%2585%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Udemy%25E3%2583%25BB%25E4%25BC%2581%25E6%25A5%25AD%25E3%2583%25BB%25E3%2582%25AA%25E3%2583%25B3%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSWJNcXYyNnJHY2xGVDEtOURITHVZTjhrWUpWOVN1aTJWYmxkNU9aejljTmtNPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Udemy・企業・オンラインプログラミングスクール講師♪codek2</dc:creator></item><item><title><![CDATA[スレッドセーフを考えたことがないあなたへ]]></title><description><![CDATA[
+ はじめに
+スレッドセーフ？いつ使うのそれ？という方に向けて書きました！
+不明点や誤りがあれば、ぜひぜひご指摘頂けると助かります。
+ちなみに、本記事は、Java Concurrency in Practice を主なソースとして執筆しました。
+（この後に登場する例のうちいくつかは本書から引用しています）
+
+ スレッドセーフとは
+まず、どのような場面でスレッドセーフを意識する必要が生じるのか、見ていきましょう。
+分かり切ったことですが、シングルスレッドであれば、スレッドセーフを意識する必要はありません。
+マルチスレッドで処理が行われる場合のみ、スレッドセーフを意識する必要があります。
+そ...]]></description><link>https://zenn.dev/my4_dev/articles/fbbed3e106d049</link><guid isPermaLink="true">https://zenn.dev/my4_dev/articles/fbbed3e106d049</guid><pubDate>Mon, 27 Jan 2025 13:37:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fF3QlJ02--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B9%25E3%2583%25AC%25E3%2583%2583%25E3%2583%2589%25E3%2582%25BB%25E3%2583%25BC%25E3%2583%2595%25E3%2582%2592%25E8%2580%2583%25E3%2581%2588%25E3%2581%259F%25E3%2581%2593%25E3%2581%25A8%25E3%2581%258C%25E3%2581%25AA%25E3%2581%2584%25E3%2581%2582%25E3%2581%25AA%25E3%2581%259F%25E3%2581%25B8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2584%25E3%2581%25A1%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU5ZDdjZTNhMjEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>いち</dc:creator></item><item><title><![CDATA[【Java】java.time.Periodクラスの例]]></title><description><![CDATA[サマータイムやうるう年なども考慮しながら日数ベースで期間を管理する必要がある場合に使用
+
+ between
+
+ 2つの LocalDate の間の期間を求める例
+public class BetweenTest {
+	public static void main(String[] args) {
+		LocalDate startDate = LocalDate.of(2023, 1, 1); // 開始日
+		LocalDate endDate = LocalDate.of(2024, 1, 1); // 終了日
+
+		Period period = Period.between(s...]]></description><link>https://zenn.dev/codek2/articles/7fa809ff86549b</link><guid isPermaLink="true">https://zenn.dev/codek2/articles/7fa809ff86549b</guid><pubDate>Mon, 27 Jan 2025 07:51:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qInTLeu2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Java%25E3%2580%2591java.time.Period%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25B9%25E3%2581%25AE%25E4%25BE%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Udemy%25E3%2583%25BB%25E4%25BC%2581%25E6%25A5%25AD%25E3%2583%25BB%25E3%2582%25AA%25E3%2583%25B3%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSWJNcXYyNnJHY2xGVDEtOURITHVZTjhrWUpWOVN1aTJWYmxkNU9aejljTmtNPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Udemy・企業・オンラインプログラミングスクール講師♪codek2</dc:creator></item><item><title><![CDATA[【Java】java.time.Durationクラスの例]]></title><description><![CDATA[時・分・秒などで収まるデータのときに使用
+
+ between
+
+ 2つのInstantなどの間の時間差を表すDurationを取得
+public class DurationTest {
+ public static void main(String[] args) {
+  Instant start = Instant.parse("2025-01-27T10:00:00Z");
+  Instant end = Instant.parse("2025-01-27T12:30:00Z");
+
+  // 開始と終了の間のDurationを計算
+  Duration duration = D...]]></description><link>https://zenn.dev/codek2/articles/500f7eeba326e6</link><guid isPermaLink="true">https://zenn.dev/codek2/articles/500f7eeba326e6</guid><pubDate>Mon, 27 Jan 2025 07:26:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--oC58Opvg--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Java%25E3%2580%2591java.time.Duration%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25B9%25E3%2581%25AE%25E4%25BE%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Udemy%25E3%2583%25BB%25E4%25BC%2581%25E6%25A5%25AD%25E3%2583%25BB%25E3%2582%25AA%25E3%2583%25B3%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSWJNcXYyNnJHY2xGVDEtOURITHVZTjhrWUpWOVN1aTJWYmxkNU9aejljTmtNPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Udemy・企業・オンラインプログラミングスクール講師♪codek2</dc:creator></item><item><title><![CDATA[@Priorityアノテーションを読んでみた]]></title><description><![CDATA[javax.annotation.Priorityアノテーションを読んでみました。
+ドキュメントはこちら
+Priorityアノテーションは、実行順序を指定するためのアノテーションです。
+優先順位を指定するために数値をもたせます。
+数値が大きければ大きいほど優先度が高く、先に処理されます。
+使い方はこんな感じです。
+@Priority(100)
+では早速読んでいきます。
+
+ コピーライトについて
+ * Copyright (c) 2005, 2018 Oracle and/or its affiliates. All rights reserved.
+
+【ぐぐるさん訳】
+Copyright...]]></description><link>https://zenn.dev/iizukasan/articles/read_priority_annotation</link><guid isPermaLink="true">https://zenn.dev/iizukasan/articles/read_priority_annotation</guid><pubDate>Sun, 26 Jan 2025 15:19:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xlcfWjTW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%2540Priority%25E3%2582%25A2%25E3%2583%258E%25E3%2583%2586%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%2592%25E8%25AA%25AD%25E3%2582%2593%25E3%2581%25A7%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:iizk%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzMwMGM0NzA2ZTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>iizk</dc:creator></item><item><title><![CDATA[はじめてのscheme製作  Ⅱ]]></title><description><![CDATA[はじめてのscheme製作の続きです。
+define-syntaxとsyntax-rulesについて、深掘りしていきます。
+
+なお本schemeインタープリタはJavaで実装しています。]]></description><link>https://zenn.dev/clazz/books/220ee37670b7ec</link><guid isPermaLink="true">https://zenn.dev/clazz/books/220ee37670b7ec</guid><pubDate>Sun, 26 Jan 2025 06:02:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qcAdXmkn--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci8yZDg5Mzc0NDFiLmpwZWc=%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>clazz</dc:creator></item><item><title><![CDATA[Javaで最強の非HTMLテンプレートエンジンを考えてみる]]></title><description><![CDATA[
+ モチベーション
+プレーンテキスト用のテンプレートエンジンがほしい！！というのがきっかけです。
+（JSライブラリのejsのようなもの。）
+具体的には以下のような機能を兼ね備えたプレーンテキスト用のテンプレートエンジンが必要でした。
+
+コンテキストで設定したオブジェクトを、テンプレートエンジンで参照可能
+コンテキストで設定した引数あり関数を、テンプレート内で実行可能。
+テンプレート内で四則演算可能
+テンプレート内で三項演算子が実行可能
+
+JavaにはThymeleafやJSPなど、HTML用のテンプレートエンジンは優秀なものが多いのですが、プレーンテキスト用となると、今回の条件に合致する...]]></description><link>https://zenn.dev/namiken/articles/fa380e96300384</link><guid isPermaLink="true">https://zenn.dev/namiken/articles/fa380e96300384</guid><pubDate>Sat, 25 Jan 2025 11:30:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--A5vUF3AD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java%25E3%2581%25A7%25E6%259C%2580%25E5%25BC%25B7%25E3%2581%25AE%25E9%259D%259EHTML%25E3%2583%2586%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AC%25E3%2583%25BC%25E3%2583%2588%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%25B3%25E3%2582%2592%25E8%2580%2583%25E3%2581%2588%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Namiken%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSk0zc2gwNHBHMGJ2TmlUeW1LSUl1RHUwVnE0cEt2M1Z3Q2xzZXpjSWRfSzJTNVpBPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Namiken</dc:creator></item><item><title><![CDATA[Mavenプロジェクトの命名規則]]></title><description><![CDATA[最初に、プロジェクト名をつけるときに混乱したので
+メモしておこうと思います。
+
+Apache Maven公式の命名規則
+Guide to naming conventions on groupId, artifactId, and version
+
+Mavenプロジェクトは通常、"com.company.sample_application"
+みたいな名前の付け方がされます。
+これはGroupIdとArtifactIdという2つの要素から成り立ってます。
+GroupIdというのは、プロジェクトを判別するためのものらしいです。
+同じプロジェクト名が存在したら、どのプロジェクトを指しているか...]]></description><link>https://zenn.dev/iizukasan/articles/maven_naming_convention</link><guid isPermaLink="true">https://zenn.dev/iizukasan/articles/maven_naming_convention</guid><pubDate>Sat, 25 Jan 2025 08:39:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--YozXUT3S--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Maven%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E3%2581%25AE%25E5%2591%25BD%25E5%2590%258D%25E8%25A6%258F%25E5%2589%2587%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:iizk%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzMwMGM0NzA2ZTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>iizk</dc:creator></item><item><title><![CDATA[【JAVA】シリアライズとは？ SerialVersionUIDの作り方]]></title><description><![CDATA[private static final long serialVersionUID = -2170800526658571029L;
+こんなやつです。
+Serializableインターフェースを実装している場合に、
+このIDが付与されてます。
+
+ 作り方だけ知りたい
+手動で作成したりはしません。
+IDEで自動生成します。
+
+ Eclipseでの設定方法
+https://itsakura.com/eclipse-java-serializable
+上記記事が参考になります。
+
+ VSCodeでの設定方法
+ちょっと面倒くさいです。
+以下が手順になります。
+
+①.settingsフォルダを表...]]></description><link>https://zenn.dev/iizukasan/articles/what_is_serialization</link><guid isPermaLink="true">https://zenn.dev/iizukasan/articles/what_is_serialization</guid><pubDate>Sat, 25 Jan 2025 07:24:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jkXYrFpn--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590JAVA%25E3%2580%2591%25E3%2582%25B7%25E3%2583%25AA%25E3%2582%25A2%25E3%2583%25A9%25E3%2582%25A4%25E3%2582%25BA%25E3%2581%25A8%25E3%2581%25AF%25EF%25BC%259F%2520SerialVersionUID%25E3%2581%25AE%25E4%25BD%259C%25E3%2582%258A%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:iizk%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzMwMGM0NzA2ZTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>iizk</dc:creator></item><item><title><![CDATA[volatile修飾子とは（修飾子とは）]]></title><description><![CDATA[メタモデルクラスでvoratile修飾子に出会いました。
+
+ そもそも修飾子とは
+修飾子とは、クラスやメソッドやフィールドで最初にくっついている
+public, static, private, finalとかのことです。
+修飾子をくっつけることで、クラスやメソッドやフィールドの
+使い方を指定したり制限したりできます。
+
+ アクセス修飾子と非アクセス修飾子の2つがある
+使い方を指定したり制限したりする修飾子には、
+アクセス修飾子・非アクセス修飾子の2種類があります。
+
+アクセス修飾子
+クラス・メソッド・フィールドなどのアクセス可能範囲を示します
+非アクセス修飾子
+クラス・メソッド・フィー...]]></description><link>https://zenn.dev/iizukasan/articles/what_is_volatile_modifier</link><guid isPermaLink="true">https://zenn.dev/iizukasan/articles/what_is_volatile_modifier</guid><pubDate>Sat, 25 Jan 2025 06:21:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--blAd2Ukn--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:volatile%25E4%25BF%25AE%25E9%25A3%25BE%25E5%25AD%2590%25E3%2581%25A8%25E3%2581%25AF%25EF%25BC%2588%25E4%25BF%25AE%25E9%25A3%25BE%25E5%25AD%2590%25E3%2581%25A8%25E3%2581%25AF%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:iizk%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzMwMGM0NzA2ZTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>iizk</dc:creator></item></channel></rss>

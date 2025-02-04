@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「CSS」のフィード]]></title><description><![CDATA[Zennのトピック「CSS」のRSSフィードです]]></description><link>https://zenn.dev/topics/css</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/98e1680a6c.png</url><title>Zennの「CSS」のフィード</title><link>https://zenn.dev/topics/css</link></image><generator>zenn.dev</generator><lastBuildDate>Tue, 04 Feb 2025 08:33:58 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/css/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[属人的なデザイントークン管理からの脱却]]></title><description><![CDATA[※こちら自身の記事のテックブログからの転載になります
+https://tech.forstartups.com/entry/2025/01/24/175935
+
+ はじめに
+こんにちは、STARTUP DB(SDB)の開発をしている杉谷です。
+私含めSDBチームでは、デザイナーとエンジニアが密に連携しながらプロダクト開発を進めています。
+その中で、「デザイントークンの管理」という課題に直面し、改善に取り組んできました。
+フロントエンド開発において「デザインの意図を正確にコードに反映する」ことの重要性を日々の開発で実感しています。特に、デザイントークンの管理は、品質の維持と開発効率の両面で...]]></description><link>https://zenn.dev/wrench/articles/94fc6454a866bf</link><guid isPermaLink="true">https://zenn.dev/wrench/articles/94fc6454a866bf</guid><pubDate>Tue, 04 Feb 2025 05:35:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4qfFHMfK--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%25B1%259E%25E4%25BA%25BA%25E7%259A%2584%25E3%2581%25AA%25E3%2583%2587%25E3%2582%25B6%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2588%25E3%2583%25BC%25E3%2582%25AF%25E3%2583%25B3%25E7%25AE%25A1%25E7%2590%2586%25E3%2581%258B%25E3%2582%2589%25E3%2581%25AE%25E8%2584%25B1%25E5%258D%25B4%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:wrench%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JhZjZkYmMxZTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>wrench</dc:creator></item><item><title><![CDATA[CSS の セレクタの区切り文字として始まった 結合子 が 結合子と呼ばれるまで]]></title><description><![CDATA[CSSの解説記事を読んでいると 子孫セレクタ と呼んだり、子孫結合子と呼んだりしているのを見ます。
+ただ、MDN では 子孫結合子です。
+https://developer.mozilla.org/ja/docs/Web/CSS/Child_combinator
+https://developer.mozilla.org/ja/docs/Learn_web_development/Core/Styling_basics/Combinators
+何故そういう呼び名に差が出ているのかを確認していくために原典を調査しました。
+
+ Cascading Style Sheets, level 1
+...]]></description><link>https://zenn.dev/juners/articles/a253cff587caba</link><guid isPermaLink="true">https://zenn.dev/juners/articles/a253cff587caba</guid><pubDate>Tue, 04 Feb 2025 03:30:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6Y71xyew--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:CSS%2520%25E3%2581%25AE%2520%25E3%2582%25BB%25E3%2583%25AC%25E3%2582%25AF%25E3%2582%25BF%25E3%2581%25AE%25E5%258C%25BA%25E5%2588%2587%25E3%2582%258A%25E6%2596%2587%25E5%25AD%2597%25E3%2581%25A8%25E3%2581%2597%25E3%2581%25A6%25E5%25A7%258B%25E3%2581%25BE%25E3%2581%25A3%25E3%2581%259F%2520%25E7%25B5%2590%25E5%2590%2588%25E5%25AD%2590%2520%25E3%2581%258C%2520%25E7%25B5%2590%25E5%2590%2588%25E5%25AD%2590%25E3%2581%25A8%25E5%2591%25BC%25E3%2581%25B0%25E3%2582%258C%25E3%2582%258B%25E3%2581%25BE%25E3%2581%25A7%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:juner%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pJLTZTZnZQaDFwb0M5dmMxYUpVeTFoelB0R1g1RXRmUHRpQzF4QWR3PXMyNTAtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>juner</dc:creator></item><item><title><![CDATA[【Rails】超簡単！コピーボタンを実装する方法]]></title><description><![CDATA[
+ はじめに
+お疲れ様です。
+おおくまです。
+今回は、「【Rails】超簡単！コピーボタンを実装する方法」ということで、Ruby on Railsで、コピーボタンを実装する方法について、まとめてみました。
+とても簡単に実装できるので、ぜひ実装してみてください。
+少しでも皆様の参考になりますと幸いです。
+
+ 対象読者
+!
+
+
+Ruby on Railsについて興味のある方
+コピーボタンの実装について興味のある方
+
+
+
+ 注意点
+!
+
+内容に誤りがある場合があります。
+コメント等で教えていただけると幸甚です。
+
+
+
+ 環境
+!
+
+Docker Desktop：4.38.0
+Docker En...]]></description><link>https://zenn.dev/linkedge/articles/325037b7053aee</link><guid isPermaLink="true">https://zenn.dev/linkedge/articles/325037b7053aee</guid><pubDate>Sun, 02 Feb 2025 23:17:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--c53sNVsR--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Rails%25E3%2580%2591%25E8%25B6%2585%25E7%25B0%25A1%25E5%258D%2598%25EF%25BC%2581%25E3%2582%25B3%25E3%2583%2594%25E3%2583%25BC%25E3%2583%259C%25E3%2582%25BF%25E3%2583%25B3%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:RyoyaOkuma%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNmZmE4YTI1NWMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BEL%2526E%2520Group%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSzhIN0k1TWtwTzN0SFJZOWQzRzVSdTVyVlpRVmI1MG5IWG1HWTdwdk5ublk4PXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>RyoyaOkuma</dc:creator></item><item><title><![CDATA[CSSの新しい国際化機能、対応ブラウザ状況は？]]></title><description><![CDATA[2023年12月、CSS に 4 つの新しい国際化機能を導入  |  Blog  |  Chrome for Developersで、CSSの3つの新しいプロパティが話題になりました。あれから1年あまり……。主要ブラウザのサポート状況はどうなっているのか、調査しました。
+
+ word-break:auto-phrase
+
+
+
+概要：CSSの word-break: auto-phrase で、文節ごとの折り返しが可能になりました。
+
+詳細：https://developer.mozilla.org/ja/docs/Web/CSS/word-break
+
+
+堅牢性：このプロパティ値は実験段...]]></description><link>https://zenn.dev/masahiko888/articles/0e6301de9f4a08</link><guid isPermaLink="true">https://zenn.dev/masahiko888/articles/0e6301de9f4a08</guid><pubDate>Sun, 02 Feb 2025 15:54:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7ApVKnDN--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:CSS%25E3%2581%25AE%25E6%2596%25B0%25E3%2581%2597%25E3%2581%2584%25E5%259B%25BD%25E9%259A%259B%25E5%258C%2596%25E6%25A9%259F%25E8%2583%25BD%25E3%2580%2581%25E5%25AF%25BE%25E5%25BF%259C%25E3%2583%2596%25E3%2583%25A9%25E3%2582%25A6%25E3%2582%25B6%25E7%258A%25B6%25E6%25B3%2581%25E3%2581%25AF%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%2590%2589%25E5%25B7%259D%25E9%259B%2585%25E5%25BD%25A6%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I4MDg0YWZkYzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>吉川雅彦</dc:creator></item><item><title><![CDATA[Reset.cssの影響を受けずに素のHTMLを確認する]]></title><description><![CDATA[
+ 結論: all: revert; を適用する
+&lt;style&gt;
+  #debug * {
+    all: revert;
+  }
+&lt;/style&gt;
+
+&lt;div id="debug"&gt;
+  &lt;h1&gt;Heading 1!&lt;/h1&gt;
+  &lt;button&gt;Click me&lt;/button&gt;
+&lt;/div&gt;
+これで、Reset.cssによってリセットされたデフォルトスタイルを復元できます
+参考: https://developer.mozilla.org/ja/docs/Web/CSS/all
+
+ そ...]]></description><link>https://zenn.dev/aokiken/articles/bbff98432aa315</link><guid isPermaLink="true">https://zenn.dev/aokiken/articles/bbff98432aa315</guid><pubDate>Sun, 02 Feb 2025 15:54:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--VETZD8d8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Reset.css%25E3%2581%25AE%25E5%25BD%25B1%25E9%259F%25BF%25E3%2582%2592%25E5%258F%2597%25E3%2581%2591%25E3%2581%259A%25E3%2581%25AB%25E7%25B4%25A0%25E3%2581%25AEHTML%25E3%2582%2592%25E7%25A2%25BA%25E8%25AA%258D%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:aokiken%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzczNmNjYmUyMGIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>aokiken</dc:creator></item><item><title><![CDATA[VueのTransitionを駆使してカードめくりアニメーションを作る]]></title><description><![CDATA[
+ デモ 兼 結論
+
+
+(StackBlitzのサードパーティCookieを許可しないと動かないです)
+
+ 前置き
+
+ この記事を読むとわかること
+
+Vue.jsでTransitionを使ったカードめくりアニメーションの作り方
+Transition、特に以下の機能について
+
+
+v-if および v-else / v-else-if によって排他になる場合に限り、複数要素を配置することができる
+
+
+Transition mode を指定することにより、アニメーションのタイミングを「消失・出現の同時発生」から「消失→出現」の順や「表示→出現」の順に変更できる
+
+
+
+
+
+ わからないこと
+
+S...]]></description><link>https://zenn.dev/p_craft/articles/22493301dbb5d7</link><guid isPermaLink="true">https://zenn.dev/p_craft/articles/22493301dbb5d7</guid><pubDate>Sat, 01 Feb 2025 04:17:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Vf98OZBi--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Vue%25E3%2581%25AETransition%25E3%2582%2592%25E9%25A7%2586%25E4%25BD%25BF%25E3%2581%2597%25E3%2581%25A6%25E3%2582%25AB%25E3%2583%25BC%25E3%2583%2589%25E3%2582%2581%25E3%2581%258F%25E3%2582%258A%25E3%2582%25A2%25E3%2583%258B%25E3%2583%25A1%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258B%25E3%2581%25BF%25E3%2581%258F%25E3%2581%259A%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTE56SnlvbmVSRzNKZ2QxdVhKLV9oOHJtSmNZVFdSUWg4dV9zM3RUNE9mUkVNUTZQLVFPZz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>かみくず</dc:creator></item><item><title><![CDATA[cssの頭に付いている「.」や「#」の処理方法について調べてみた。]]></title><description><![CDATA[色々調べた結果、「.」や「#」があることで
+処理高速化の工夫がなされている
+というのがよくわかりました。
+
+ そもそもcssの頭に付いている「.」は何？
+HTMLの要素に付与されたclass属性を指定するため記号で、
+クラスセレクタと呼ばれるものです。
+
+ 使用方法
+.クラス名 {
+  プロパティ: 値;
+}
+
+ 例
+/* 青色のテキスト */
+.blue-text {
+  color: blue;
+}
+
+/* 複数のクラスを組み合わせる */
+.large.bold {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+ HTML側での使用
+&lt;...]]></description><link>https://zenn.dev/40_comeback_eng/articles/a7a1a6605c4b02</link><guid isPermaLink="true">https://zenn.dev/40_comeback_eng/articles/a7a1a6605c4b02</guid><pubDate>Sat, 01 Feb 2025 00:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Pvg79kCX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:css%25E3%2581%25AE%25E9%25A0%25AD%25E3%2581%25AB%25E4%25BB%2598%25E3%2581%2584%25E3%2581%25A6%25E3%2581%2584%25E3%2582%258B%25E3%2580%258C.%25E3%2580%258D%25E3%2582%2584%25E3%2580%258C%2523%25E3%2580%258D%25E3%2581%25AE%25E5%2587%25A6%25E7%2590%2586%25E6%2596%25B9%25E6%25B3%2595%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E8%25AA%25BF%25E3%2581%25B9%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25E3%2580%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%25AF%25E3%2583%258B%25E3%2581%258B%25E3%2581%259A%254040%25E6%25AD%25B3%2520%25E5%2587%25BA%25E6%2588%25BB%25E3%2582%258A%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg3ZGNhZmRmOGUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ワニかず@40歳 出戻りエンジニア</dc:creator></item><item><title><![CDATA[MS IME のちょっとだけ変なムーブに立ち向かわない]]></title><description><![CDATA[
+ 報告された不具合
+
+input[type=number] にフォーカスすると直接入力モードになるが、その後 input[type=text] のフィールドにフォーカスを移しても、元の入力モードに戻らない
+
+例えば日本語入力モードで input[type=text] で入力したあとで、 input[type=number] にフォーカスを移すと数値が入力されるように直接入力に切り替わります。これは正常な動きであり、どの環境でもそうなります。しかしそのあとで input[type=text] にフォーカスを移動した場合に、他の環境では日本語入力モードに戻るのですが、MS IMEではそうな...]]></description><link>https://zenn.dev/mach3/articles/a0fd9d5a3dd091</link><guid isPermaLink="true">https://zenn.dev/mach3/articles/a0fd9d5a3dd091</guid><pubDate>Fri, 31 Jan 2025 13:18:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--PzjqE3OK--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:MS%2520IME%2520%25E3%2581%25AE%25E3%2581%25A1%25E3%2582%2587%25E3%2581%25A3%25E3%2581%25A8%25E3%2581%25A0%25E3%2581%2591%25E5%25A4%2589%25E3%2581%25AA%25E3%2583%25A0%25E3%2583%25BC%25E3%2583%2596%25E3%2581%25AB%25E7%25AB%258B%25E3%2581%25A1%25E5%2590%2591%25E3%2581%258B%25E3%2582%258F%25E3%2581%25AA%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25BE%25E3%2581%25A3%25E3%2581%25AF%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pkMmVRVUpxZzFMdnR0dElfWU4zRFIzZm1DQ3FyWVlEekFyeHpRVFE9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>まっは</dc:creator></item><item><title><![CDATA[ヘッダー固定でのアンカーリンクがずれる問題がCSS1行で完了する時代だった。scroll-padding-top恐るべし・・・]]></title><description><![CDATA[
+ はじめに
+ソニックムーブの安立です。
+最近は細かい実装からだいぶ遠ざかっていて、久しぶりにやってみると色々な発見があります。
+ヘッダーをfixedやstickyで固定した時に、ページ内リンクがずれるという問題は以前からありました。
+Javasriptでスクロール量の調整したり、CSSでmarginやpaddingを駆使してどうにかするという形だったと記憶しています。
+いずれにせよ、バッドノウハウ的な形でなかなかに面倒だったな〜・・・・と。
+時代は変わり各種ブラウザのアップデートにより、この問題がjavascriptなしの、たった1行のCSSで解決できるようになっていたのでそれを紹介し...]]></description><link>https://zenn.dev/sonicmoov/articles/ead60241f21696</link><guid isPermaLink="true">https://zenn.dev/sonicmoov/articles/ead60241f21696</guid><pubDate>Thu, 30 Jan 2025 00:39:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8TR6DC7s--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2598%25E3%2583%2583%25E3%2583%2580%25E3%2583%25BC%25E5%259B%25BA%25E5%25AE%259A%25E3%2581%25A7%25E3%2581%25AE%25E3%2582%25A2%25E3%2583%25B3%25E3%2582%25AB%25E3%2583%25BC%25E3%2583%25AA%25E3%2583%25B3%25E3%2582%25AF%25E3%2581%258C%25E3%2581%259A%25E3%2582%258C%25E3%2582%258B%25E5%2595%258F%25E9%25A1%258C%25E3%2581%258CCSS1%25E8%25A1%258C%25E3%2581%25A7%25E5%25AE%258C%25E4%25BA%2586%25E3%2581%2599%25E3%2582%258B%25E6%2599%2582%25E4%25BB%25A3%25E3%2581%25A0%25E3%2581%25A3%25E3%2581%259F%25E3%2580%2582scroll-padding-top%25E6%2581%2590...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E5%25AE%2589%25E7%25AB%258B%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY0YjYwNGE3MzguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2582%25BD%25E3%2583%258B%25E3%2583%2583%25E3%2582%25AF%25E3%2583%25A0%25E3%2583%25BC%25E3%2583%2596%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ5OTlmM2U4MGIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>安立</dc:creator></item><item><title><![CDATA[XPath1.0でクラスセレクター相当の選択をする]]></title><description><![CDATA[皆さんXPathは書いていますか？
+私は、主にGoogleスプレッドシートのIMPORTXML関数でHTMLからデータを抽出するときに書いています。
+と言っても、年に2回くらいしかXPathはいじらないのでなかなか文法が覚えられず、毎回「xpath 書き方」で検索しているのですが…
+XPathでHTMLと格闘していると頻繁に浮かぶのが、 「クラスセレクター使いたい」 という願望です。
+CSSのクラスセレクターやDOM APIのgetElementsByClassName()メソッドを使うと、class属性のリストに特定の値を含む要素を抜き出すことができます。
+XPathはCSSセレクター...]]></description><link>https://zenn.dev/omu_tryangle/articles/7c6adcb5811fb8</link><guid isPermaLink="true">https://zenn.dev/omu_tryangle/articles/7c6adcb5811fb8</guid><pubDate>Wed, 29 Jan 2025 04:02:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--SR-MFbj1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:XPath1.0%25E3%2581%25A7%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25B9%25E3%2582%25BB%25E3%2583%25AC%25E3%2582%25AF%25E3%2582%25BF%25E3%2583%25BC%25E7%259B%25B8%25E5%25BD%2593%25E3%2581%25AE%25E9%2581%25B8%25E6%258A%259E%25E3%2582%2592%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:takagakik23%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAwMmVhYjg4YTkuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:TryAngle%2540%25E5%25A4%25A7%25E9%2598%25AA%25E5%2585%25AC%25E7%25AB%258B%25E5%25A4%25A7%25E5%25AD%25A6%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS2JWVlhxRWY0S0lfeEVONVE5N256TDhDVVQ3NDJDWGlGOGMzSTBXWjdmaWY5RDlnPXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takagakik23</dc:creator></item><item><title><![CDATA[font awsomeを発見]]></title><description><![CDATA[
+ 状況
+
+CSS勉強してたらこんなサイトを見つけた
+
+https://fontawesome.com/
+
+ 使い方
+
+無料登録してアカウント作成、使いたいアイコンを探す
+
+https://www.youtube.com/watch?v=vgAE5gMzEe8&amp;t=317s
+
+Font AwesomeのCSSファイルを読み込む
+
+
+
+&lt;span&gt;タグにfaクラスとfa-アイコン名クラスを指定する
+（Font Awesomeのサイトにアイコンごとのクラス名が記載）
+
+
+
+ 所見
+これだけで簡単にアイコンを表示させることができる
+有料だともっとアイコンが使えるようになるの...]]></description><link>https://zenn.dev/tatsuki_otake/articles/002e32cf57e730</link><guid isPermaLink="true">https://zenn.dev/tatsuki_otake/articles/002e32cf57e730</guid><pubDate>Mon, 27 Jan 2025 23:49:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6wB-S_Bp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:font%2520awsome%25E3%2582%2592%25E7%2599%25BA%25E8%25A6%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%2540torcheees.otake%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E4YWEzNGJkZWUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>@torcheees.otake</dc:creator></item><item><title><![CDATA[高校生が初めてシステムの個人開発に挑戦した話]]></title><description><![CDATA[
+ はじめに
+このような記事を書くのは初めてなので、温かい目で読んでいただけると幸いです。
+この記事では、私が通う学校で運行しているスクールバスの現在位置を確認できるシステム（サービス？）の開発記録を残しておこうと思います。
+
+ システムを開発するまでに至った経緯
+
+ 多くの児童・生徒がスクールバスを利用している
+私が通う学校は、幼稚園・小学校・中学校・高等学校をもつ学園であり、多くの児童・生徒が在籍していて、さまざまな地域から通っています。
+そのため、どの地域からも安全に通えるように、各方面へ送迎するスクールバスを運行しています。
+
+ スクールバスが抱える問題
+私は小学校から高校の12...]]></description><link>https://zenn.dev/ei_ch48_26/articles/ce8a2b67ac041c</link><guid isPermaLink="true">https://zenn.dev/ei_ch48_26/articles/ce8a2b67ac041c</guid><pubDate>Mon, 27 Jan 2025 12:56:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lpsdJWjC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E9%25AB%2598%25E6%25A0%25A1%25E7%2594%259F%25E3%2581%258C%25E5%2588%259D%25E3%2582%2581%25E3%2581%25A6%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%25E3%2581%25AE%25E5%2580%258B%25E4%25BA%25BA%25E9%2596%258B%25E7%2599%25BA%25E3%2581%25AB%25E6%258C%2591%25E6%2588%25A6%25E3%2581%2597%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Eiichiro%2520Ito%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSlR0SktwSE9kcTBoZGlSRmxZZDdLRk1oa0U5Wld0VVFlM3FHWU1ldERfLWZmOWpVMD1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Eiichiro Ito</dc:creator></item><item><title><![CDATA[Tailwind CSS V4まとめ！]]></title><description><![CDATA[
+ はじめに
+Tailwind CSS v4.0がリリースされたので、まとめてみました！
+
+ TL;DR
+■主な変更点
+
+パフォーマンスの大幅な向上
+コンテンツの自動検出
+CSSファースト設定
+arbitrary valuesが簡素化された
+
+JavaScriptではなくCSSでプロジェクトを設定するようになったのが、一番大きい。（これは革命）
+あとは個人的にはarbitrary valuesが簡素化されたのは書きやすくはなるけど、秩序としては崩れやすいのでこの変更点はあまり好きではない...😢
+
+ Tailwind CSS v4.0とは
+Tailwind CSS v4.0は、パフォーマ...]]></description><link>https://zenn.dev/miz_dev/articles/tailwind-css-v4</link><guid isPermaLink="true">https://zenn.dev/miz_dev/articles/tailwind-css-v4</guid><pubDate>Mon, 27 Jan 2025 10:53:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6riAaNqK--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Tailwind%2520CSS%2520V4%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Miz_dev%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNkMjViZGYyMGYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Miz_dev</dc:creator></item><item><title><![CDATA[[Tailwind CSS]表示と編集の便利方法]]></title><description><![CDATA[
+中国人です、日本語の文法が下手で申し訳ございません。コメント欄で私の間違いを指摘していただければ幸いです。
+
+Tailwind は、最も人気がある CSS フレームワークの一つです。
+しかし、Tailwind を使用すると、このような状況に遭遇することがよくあります：
+&lt;div
+  className={
+    "relative rounded mr-2 lg:my-2 overflow-hidden text-primary w-[180px] h-[100px] text-2xl font-semibold text-center leading-[100px] bg-w...]]></description><link>https://zenn.dev/cygra/articles/9eeec2ca813797</link><guid isPermaLink="true">https://zenn.dev/cygra/articles/9eeec2ca813797</guid><pubDate>Mon, 27 Jan 2025 08:29:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--J-qiqlTv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BTailwind%2520CSS%255D%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%25A8%25E7%25B7%25A8%25E9%259B%2586%25E3%2581%25AE%25E4%25BE%25BF%25E5%2588%25A9%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Cygra%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzEwOWE3MmQ0OGUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Cygra</dc:creator></item><item><title><![CDATA[Chakra UIでマークアップを作る手法]]></title><description><![CDATA[こんにちは、SpacemarketのWebエンジニアのShotaです。
+最近フロントエンドの実装をする機会が増え、今まであまり経験がなかったマークアップの手法を学んだのでユースケースごとにまとめました。
+
+ 文字の大きさをレスポンシブに設定する
+&lt;chakra.h3
+  fontSize={{ base: '14px', md: '16px' }}
+  fontWeight="bold"
+&gt;
+  見出し要素
+&lt;/chakra.h3&gt;
+h3要素で見出しを作っています。
+今回は base: '14px', md: '16px' としているため、画面幅が768px以上の...]]></description><link>https://zenn.dev/spacemarket/articles/466bb9bbc61369</link><guid isPermaLink="true">https://zenn.dev/spacemarket/articles/466bb9bbc61369</guid><pubDate>Sun, 26 Jan 2025 15:21:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--52LE1Aan--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Chakra%2520UI%25E3%2581%25A7%25E3%2583%259E%25E3%2583%25BC%25E3%2582%25AF%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%25E6%2589%258B%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:ShotaA%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc1NTA1NzM5OGYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25B9%25E3%2583%259A%25E3%2583%25BC%25E3%2582%25B9%25E3%2583%259E%25E3%2583%25BC%25E3%2582%25B1%25E3%2583%2583%25E3%2583%2588%2520Engineer%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzkzOWRjNjljYzIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ShotaA</dc:creator></item><item><title><![CDATA[【CSS】画像のアスペクト比を維持する方法あれこれ]]></title><description><![CDATA[ウェブサイトに画像を配置するとき、縦横比が崩れて不自然に見えてしまった経験はありませんか？
+PC、スマホ、タブレットなど、さまざまな端末の画面サイズに応じて画像を拡大・縮小するのはよくある課題です。本記事では、その解決方法をメモがてら整理してみたいと思います。
+
+ 画像のサイズがわからない場合
+ユーザーがアップロードしたサイズがランダムな画像を表示する場合などを想定しています。
+この場合は、以下のようなコードで対応できます。
+やっていることを簡単に説明すると、画像の幅を親要素の幅に合わせ、高さは自動で調節するということです。
+幅が指定されることにより、はみ出しを防ぐことができます。
+&l...]]></description><link>https://zenn.dev/ohimusdev46301/articles/56b6388a318628</link><guid isPermaLink="true">https://zenn.dev/ohimusdev46301/articles/56b6388a318628</guid><pubDate>Sun, 26 Jan 2025 07:42:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5Yu26yD7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590CSS%25E3%2580%2591%25E7%2594%25BB%25E5%2583%258F%25E3%2581%25AE%25E3%2582%25A2%25E3%2582%25B9%25E3%2583%259A%25E3%2582%25AF%25E3%2583%2588%25E6%25AF%2594%25E3%2582%2592%25E7%25B6%25AD%25E6%258C%2581%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%25E3%2581%2582%25E3%2582%258C%25E3%2581%2593%25E3%2582%258C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Wataru%2520Takiguchi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdkOTBhM2EyYTcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Wataru Takiguchi</dc:creator></item><item><title><![CDATA[lumeでPanda CSSを使うメモ]]></title><description><![CDATA[勉強会でstatic site generatorであるlumeを教わったので、Panda CSSを組み合わせるところまで試してみたのでメモです。
+概ね同内容のリポジトリはここにあります: https://github.com/sunnyone/luma-pandacss-demo
+
+ 前提
+lumeのsrcは./srcとしている。
+const site = lume({
+    src: "./src"
+});
+
+site.use(jsx());
+site.use(mdx());
+
+ postcss pluginのインストール
+@importを使うようにするために、https://lu...]]></description><link>https://zenn.dev/sunnyone/articles/1e972b580d75ae</link><guid isPermaLink="true">https://zenn.dev/sunnyone/articles/1e972b580d75ae</guid><pubDate>Sat, 25 Jan 2025 08:12:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--cF3Kls_o--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:lume%25E3%2581%25A7Panda%2520CSS%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:sunnyone%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFUWEFKek9vWHNpcElZcTJGYmVnTXRTSnl0REIwNmMyalhqU1N4Z1g3OUY9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sunnyone</dc:creator></item><item><title><![CDATA[Rechartsの折れ線グラフカスタマイズ方法]]></title><description><![CDATA[株式会社 Rehab for JAPAN エンジニアのもじゃ(@moja_moja)です。
+前回は折れ線・棒・円・折れ線 + 棒グラフの実装例を紹介しました。
+今回は紹介しきれなかった折れ線グラフのカスタマイズ方法をサンプルコード付きで紹介していきたいと思います。
+なお、基本の折れ線グラフ実装例や一部の説明については、前回紹介しているので省きます。
+サンプルコードの実行方法についてはこちらに記載しています。
+
+ 線の形状を変更する方法
+&lt;Line/&gt;コンポーネントの線の形状を変更するには”type”のプロパティを使用します。
+type は"linear"・"monotone"...]]></description><link>https://zenn.dev/rehabforjapan/articles/9c0acc2abb4d9b</link><guid isPermaLink="true">https://zenn.dev/rehabforjapan/articles/9c0acc2abb4d9b</guid><pubDate>Fri, 24 Jan 2025 03:00:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--yAwFNv4I--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Recharts%25E3%2581%25AE%25E6%258A%2598%25E3%2582%258C%25E7%25B7%259A%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%2595%25E3%2582%25AB%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%259E%25E3%2582%25A4%25E3%2582%25BA%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2582%2582%25E3%2581%2598%25E3%2582%2583%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNkYzExOTgzNjguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Rehab%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzlmZGEwZmUzZDYuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>もじゃ</dc:creator></item><item><title><![CDATA[インラインスタイルのパフォーマンスは悪いのか]]></title><description><![CDATA[
+ TL;DR
+
+inline styleのパフォーマンスは悪くなくむしろ高い
+パフォーマンス比較にあたってはMUIのベンチマークが便利だった
+
+
+
+
+Style Type
+Time (ms)
+
+
+
+
+Inline Style
+23.71 ± 0.22
+
+
+Styled Emotion
+28.39 ± 0.66
+
+
+Styled SC
+25.94 ± 1.34
+
+
+sx props
+39.28 ± 0.84
+
+
+
+
+ きっかけ
+Reactではinline styleを用いて簡単にスタイリングができる。しかし、旧公式Reactドキュメントにはinline styleを使ったスタイリングは推...]]></description><link>https://zenn.dev/cryptobox/articles/6861603afe1f93</link><guid isPermaLink="true">https://zenn.dev/cryptobox/articles/6861603afe1f93</guid><pubDate>Thu, 23 Jan 2025 08:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--87fVZTAD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25AB%25E3%2581%25AE%25E3%2583%2591%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25BC%25E3%2583%259E%25E3%2583%25B3%25E3%2582%25B9%25E3%2581%25AF%25E6%2582%25AA%25E3%2581%2584%25E3%2581%25AE%25E3%2581%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:cryptobox%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZjZWRlY2I5NTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>cryptobox</dc:creator></item><item><title><![CDATA[[Tailwind CSS]テキストフェードイン効果を実現]]></title><description><![CDATA[
+中国人です、日本語の文法が下手で申し訳ございません。コメント欄で私の間違いを指摘していただければ幸いです。
+
+
+ [Tailwind CSS + IntersectionObserver] フェードイン 効果
+
+Apple の公式 Web サイトにあるようなテキストのフェードイン効果を実現するには、IntersectionObserver を使用して、テキストがウィンドウに入ったかどうかを判断します。
+テキストがウィンドウに入ったら、opacity 　と　 translate-y 　を変化する。
+export const Comp = () =&gt; {
+  const ref = ...]]></description><link>https://zenn.dev/cygra/articles/3bd10bf5d2b150</link><guid isPermaLink="true">https://zenn.dev/cygra/articles/3bd10bf5d2b150</guid><pubDate>Thu, 23 Jan 2025 05:41:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--kVVll_t2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BTailwind%2520CSS%255D%25E3%2583%2586%25E3%2582%25AD%25E3%2582%25B9%25E3%2583%2588%25E3%2583%2595%25E3%2582%25A7%25E3%2583%25BC%25E3%2583%2589%25E3%2582%25A4%25E3%2583%25B3%25E5%258A%25B9%25E6%259E%259C%25E3%2582%2592%25E5%25AE%259F%25E7%258F%25BE%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Cygra%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzEwOWE3MmQ0OGUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Cygra</dc:creator></item></channel></rss>
