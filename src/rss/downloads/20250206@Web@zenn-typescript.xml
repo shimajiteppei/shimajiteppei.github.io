@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「TypeScript」のフィード]]></title><description><![CDATA[Zennのトピック「TypeScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/typescript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/f13e758fdb.png</url><title>Zennの「TypeScript」のフィード</title><link>https://zenn.dev/topics/typescript</link></image><generator>zenn.dev</generator><lastBuildDate>Thu, 06 Feb 2025 08:34:10 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/typescript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[vue-i18nのi18n.t('key')で、'key'が見つからなかったときに例外をthrowする]]></title><description><![CDATA[vue-i18nはi18n.t('key')をしたときに、I18nOptionsのmessages[locale]に'key'が見つからなければconsole.warn()されますが、例外はthrowされません。
+console.warn()で大抵の場合は問題ないですが、今回特定の条件下でのみ'key'が見つからないことがあったので、デバッグのためにthrowするようにしました。
+その手順です。
+結論ですが、I18nOptionsにmissingプロパティを指定すればいけます。
+
+ nuxt/i18nでの例
+動く環境↓
+https://stackblitz.com/edit/nuxt-s...]]></description><link>https://zenn.dev/aiya000/articles/15d1f76e968ea0</link><guid isPermaLink="true">https://zenn.dev/aiya000/articles/15d1f76e968ea0</guid><pubDate>Thu, 06 Feb 2025 08:27:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--G64ccytb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:vue-i18n%25E3%2581%25AEi18n.t%2528%2527key%2527%2529%25E3%2581%25A7%25E3%2580%2581%2527key%2527%25E3%2581%258C%25E8%25A6%258B%25E3%2581%25A4%25E3%2581%258B%25E3%2582%2589%25E3%2581%25AA%25E3%2581%258B%25E3%2581%25A3%25E3%2581%259F%25E3%2581%25A8%25E3%2581%258D%25E3%2581%25AB%25E4%25BE%258B%25E5%25A4%2596%25E3%2582%2592throw%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2582%25E3%2581%2584%25E3%2582%2584%2520-%2520aiya000%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pZVUM0QXdxcVdtMVZmVWtiQXFzdE5ra1BFZU1FOUN0NFY1UzdiPXMyNTAtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>あいや - aiya000</dc:creator></item><item><title><![CDATA[Lingui で実現するモダンな多言語対応]]></title><description><![CDATA[
+ はじめに 🚩
+よくある i18n ライブラリでは翻訳辞書を用意し、翻訳キーを元に翻訳対応を行いますが、Lingui では、コードベース内で実際の文言を直接記述し、それを翻訳対象として抽出できます。
+つまり、先に翻訳辞書を用意するか、先にコードベース内で文言を記述するかといった違いがあります。
+後者のこの特徴により、翻訳キーの管理が不要になるといったメリットがあります。
+さらに翻訳作業を効率化、自動化できる機能も提供されており、翻訳作業のコストを削減できると感じます。
+この記事では、このような特徴を持つ JavaScript 向けの国際化（i18n）ライブラリ Lingui を使用して...]]></description><link>https://zenn.dev/chot/articles/d325df526aa656</link><guid isPermaLink="true">https://zenn.dev/chot/articles/d325df526aa656</guid><pubDate>Thu, 06 Feb 2025 05:52:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--XdXfMwtP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Lingui%2520%25E3%2581%25A7%25E5%25AE%259F%25E7%258F%25BE%25E3%2581%2599%25E3%2582%258B%25E3%2583%25A2%25E3%2583%2580%25E3%2583%25B3%25E3%2581%25AA%25E5%25A4%259A%25E8%25A8%2580%25E8%25AA%259E%25E5%25AF%25BE%25E5%25BF%259C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Tsuboi%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAzODVjOWFlYzkuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:chot%2520Inc.%2520tech%2520blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzUzMmU3Zjg2MTIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Tsuboi</dc:creator></item><item><title><![CDATA[Laravelでクエリパラメータを持たせたURLのQRコードを発行する]]></title><description><![CDATA[LaravelでのQRコード発行が思ったよコード発行が思ったより簡単だったので、忘備録に残します。
+
+ 環境
+
+PHP 8.3.12 (cli) (built: Sep 24 2024 18:08:04) (NTS)
+Laravel Framework 11.41.3
+react 18.2.0
+typescript 5.0.2
+Breeze
+
+
+ 何をやるのか
+
+tokenIdを紐付けたURLを発行する。
+tokenIdはクエリパラメータに掲載。
+
+
+ パラメータとは
+知ってる方は飛ばしてOK。パラメータは大まかにいうと2種類ある。
+
+ルートパラメータ
+クエリパラメータ
+
+
+ ルートパラ...]]></description><link>https://zenn.dev/aya_sato/articles/7d6d50fed25143</link><guid isPermaLink="true">https://zenn.dev/aya_sato/articles/7d6d50fed25143</guid><pubDate>Thu, 06 Feb 2025 02:32:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--WaIe69wX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Laravel%25E3%2581%25A7%25E3%2582%25AF%25E3%2582%25A8%25E3%2583%25AA%25E3%2583%2591%25E3%2583%25A9%25E3%2583%25A1%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%2592%25E6%258C%2581%25E3%2581%259F%25E3%2581%259B%25E3%2581%259FURL%25E3%2581%25AEQR%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2582%2592%25E7%2599%25BA%25E8%25A1%258C%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:aya%2520satoh%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dLa3dRbnNlMlVSdUs0ellWZ3FOZHJ3bnBBTzdyNmRYd3lTMU1JPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>aya satoh</dc:creator></item><item><title><![CDATA[TypeScriptの型定義と実務でありがちな問題コードの対策]]></title><description><![CDATA[
+ はじめに
+設計思想によって多少変わりはしますが、TypeScriptを用いた開発では型安全なコードを書くのが理想と考えられます。しかし、実際業務をしていると工数に制限があったり、大人数でそれぞれが作業する兼ね合いで理想のコードではない状態のコードにぶつかる場面がとても多いです。
+例えば、既存のJavaScriptを流用するためにany型を使用したが、本来はきちんと型を定義して呼び出し時に安全に使用したい。既存実装が複雑でわからず影響範囲も考えとりあえずnullableにしたが、本当は全部調査して安全に使用したい。といったことはよくありますよね。
+本記事ではそんなTypeScript開...]]></description><link>https://zenn.dev/thinkingsinc/articles/ed21bad6092614</link><guid isPermaLink="true">https://zenn.dev/thinkingsinc/articles/ed21bad6092614</guid><pubDate>Thu, 06 Feb 2025 00:27:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--sByqrPfe--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%25E3%2581%25AE%25E5%259E%258B%25E5%25AE%259A%25E7%25BE%25A9%25E3%2581%25A8%25E5%25AE%259F%25E5%258B%2599%25E3%2581%25A7%25E3%2581%2582%25E3%2582%258A%25E3%2581%258C%25E3%2581%25A1%25E3%2581%25AA%25E5%2595%258F%25E9%25A1%258C%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2581%25AE%25E5%25AF%25BE%25E7%25AD%2596%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:omochi%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ExNDk2MTc4MWYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Thinkings%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFjYmYzZjdhMzQuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>omochi</dc:creator></item><item><title><![CDATA[【JavaScript / TypeScript】Mapについてまとめてみる]]></title><description><![CDATA[
+ はじめに
+
+MapはJavaScriptの組み込みAPIのひとつで、キーと値のペアを取り扱うためのオブジェクトです。Mapにはひとつのキーについてはひとつの値のみを格納できます。
+
+https://typescriptbook.jp/reference/builtin-api/map
+上記Mapについて、筆者はインプットしただけで全然使ったことがありませんでした。
+つい最近はまっていた処理をMapによってスマートに解決できたので、自身の戒め備忘録としてまとめていきたいと思います。
+!
+先ほどのMap&lt;K, V&gt; | サバイバルTypeScriptの内容と重複している部分が...]]></description><link>https://zenn.dev/benjuwan/articles/99b0e963f6ec11</link><guid isPermaLink="true">https://zenn.dev/benjuwan/articles/99b0e963f6ec11</guid><pubDate>Wed, 05 Feb 2025 13:57:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--RWpyxrEz--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590JavaScript%2520%252F%2520TypeScript%25E3%2580%2591Map%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:benjuwan%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSnd2XzJhLTN4SnJmSkN0Ql9wMkkwWUlVaVlTY1ozLTFQZFZoNkxsaUIyRmc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>benjuwan</dc:creator></item><item><title><![CDATA[Pixi.js v8 CustomFilter のサンプルコード]]></title><description><![CDATA[pixi.jsのバージョン8でカスタムフィルターのuniforms指定周りが変わっていたので
+備忘録としてサンプルコードを書きました。
+どなたかの役に立つと嬉しいです。
+
+ V8でのCustomFilter
+
+ SampleFilter.ts
+(旧 v7)
+export class SampleFilter extends Filter {
+	constructor(texture: Texture) {
+		super(
+			SampleVert,
+			SampleFrag,
+			{ // uniforms
+				texture: texture,
+				time: 0,
+	...]]></description><link>https://zenn.dev/a_saya_108/articles/0740da9261ada3</link><guid isPermaLink="true">https://zenn.dev/a_saya_108/articles/0740da9261ada3</guid><pubDate>Wed, 05 Feb 2025 12:55:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qNYBp5Ep--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Pixi.js%2520v8%2520CustomFilter%2520%25E3%2581%25AE%25E3%2582%25B5%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AB%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:adachi%2520saya%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU2ZGYyZTcxZGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>adachi saya</dc:creator></item><item><title><![CDATA[BroadcastChannel APIでタブ間通信を行う]]></title><description><![CDATA[
+ はじめに
+私は普段SaaSアプリケーションのフロントエンドを開発しているのですが、その中で外部アプリと連携する機能を作ることになりました。その機能を作る中で、以下の要件を満たさなければなりませんでした。
+
+自社アプリの画面から外部アプリの認証画面を別タブで開く
+認証が完了すると自社アプリと同じオリジンの認証完了画面にリダイレクトする
+その画面を閉じると自社アプリの画面が自動で更新されており、外部アプリから受け取った情報が一覧表示されている
+
+文字だとわかりにくいので図にすると以下のようになります。
+
+これを実現するために BroadcastChannel API が便利だったので紹介...]]></description><link>https://zenn.dev/cryptobox/articles/52142bb5e0ee8c</link><guid isPermaLink="true">https://zenn.dev/cryptobox/articles/52142bb5e0ee8c</guid><pubDate>Wed, 05 Feb 2025 12:16:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5SgleFEa--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:BroadcastChannel%2520API%25E3%2581%25A7%25E3%2582%25BF%25E3%2583%2596%25E9%2596%2593%25E9%2580%259A%25E4%25BF%25A1%25E3%2582%2592%25E8%25A1%258C%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:cryptobox%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZjZWRlY2I5NTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>cryptobox</dc:creator></item><item><title><![CDATA[Zod + HonoでTypeScript スキーマ定義 & OpenAPI ドキュメント作成]]></title><description><![CDATA[
+ 1. 本スキーマ定義で使うツール・ライブラリ
+
+
+Zod
+TypeScript 向けのバリデーションライブラリ
+スキーマ定義を通して入力データの検証や型の推論が可能
+例: z.object({...}) でオブジェクトのスキーマを定義し、z.string(), z.date() などのメソッドで各プロパティの型を指定する
+
+
+@hono/zod-openapi
+Zod に OpenAPI 用のメタデータ（例: example、パラメータの位置情報など）を付与する機能を追加するライブラリ
+定義したスキーマから自動で OpenAPI の仕様書を生成できるようにする
+例: .openapi...]]></description><link>https://zenn.dev/ka_projects/articles/8bb6a74cb32b4e</link><guid isPermaLink="true">https://zenn.dev/ka_projects/articles/8bb6a74cb32b4e</guid><pubDate>Wed, 05 Feb 2025 00:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--d1BqotLQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Zod%2520%252B%2520Hono%25E3%2581%25A7TypeScript%2520%25E3%2582%25B9%25E3%2582%25AD%25E3%2583%25BC%25E3%2583%259E%25E5%25AE%259A%25E7%25BE%25A9%2520%2526%2520OpenAPI%2520%25E3%2583%2589%25E3%2582%25AD%25E3%2583%25A5%25E3%2583%25A1%25E3%2583%25B3%25E3%2583%2588%25E4%25BD%259C%25E6%2588%2590%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:luck%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY3MzNhNDk3OTguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:KA%2520projects%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSWZWX29pQVNoRWZKTVpVV1NuOVh2c1MyOU11b1pEU3dodEVfQkFNR0FWbjBPUkwxYjc9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>luck</dc:creator></item><item><title><![CDATA[「半年間の長期インターンを始めたので、1ヶ月ごとに学んだこととかを吐き出してみるの会」シリーズまとめ]]></title><description><![CDATA[
+ 本編
+https://zenn.dev/lnest_knowledge/articles/9e27e740f7fd54
+https://zenn.dev/lnest_knowledge/articles/ed5f9306d774c0
+https://zenn.dev/lnest_knowledge/articles/8b62bdd442bc73
+https://zenn.dev/lnest_knowledge/articles/a39511525f27de
+https://zenn.dev/lnest_knowledge/articles/f5e8ebec7f2c38
+https:/...]]></description><link>https://zenn.dev/seiwell/articles/ee64863ad2ab88</link><guid isPermaLink="true">https://zenn.dev/seiwell/articles/ee64863ad2ab88</guid><pubDate>Tue, 04 Feb 2025 23:00:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GDFTf8Vz--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%258C%25E5%258D%258A%25E5%25B9%25B4%25E9%2596%2593%25E3%2581%25AE%25E9%2595%25B7%25E6%259C%259F%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%25B3%25E3%2582%2592%25E5%25A7%258B%25E3%2582%2581%25E3%2581%259F%25E3%2581%25AE%25E3%2581%25A7%25E3%2580%25811%25E3%2583%25B6%25E6%259C%2588%25E3%2581%2594%25E3%2581%25A8%25E3%2581%25AB%25E5%25AD%25A6%25E3%2582%2593%25E3%2581%25A0%25E3%2581%2593%25E3%2581%25A8%25E3%2581%25A8%25E3%2581%258B%25E3%2582%2592%25E5%2590%2590%25E3%2581%258D%25E5%2587%25BA%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%25E3%2581%25AE%25E4%25BC%259A%25E3%2580%258D%25E3%2582%25B7%25E3%2583%25AA%25E3%2583%25BC%25E3%2582%25BA%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ruis%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M5MGVkYzQxMDcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ruis</dc:creator></item><item><title><![CDATA[NestJSと戦術的DDDのいいとこどりをしてバックエンドTypescriptの設計をした話]]></title><description><![CDATA[
+ はじめに
+バックエンド開発にもTypeScriptを利用する事例、増えてますね。NestJSはTypescriptバックエンドの中でも、唯一のopinionatedなフレームワークとして採用しました（特に大規模な開発を目指している弊社では相性がいい）。しかし、実際にNestJSを使って開発を進めると「too much」と言われる前評判とは異なり、「not enough」という印象を受けました。特に、DDDの観点からすると、DTO（Data Transfer Object）やControllerなどプレゼンテーション層は整備されているものの、Service層にユースケース層、ドメイン層...]]></description><link>https://zenn.dev/ficilcom/articles/typescript-ddd-nest-backend</link><guid isPermaLink="true">https://zenn.dev/ficilcom/articles/typescript-ddd-nest-backend</guid><pubDate>Tue, 04 Feb 2025 15:05:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jjyEbFKg--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:NestJS%25E3%2581%25A8%25E6%2588%25A6%25E8%25A1%2593%25E7%259A%2584DDD%25E3%2581%25AE%25E3%2581%2584%25E3%2581%2584%25E3%2581%25A8%25E3%2581%2593%25E3%2581%25A9%25E3%2582%258A%25E3%2582%2592%25E3%2581%2597%25E3%2581%25A6%25E3%2583%2590%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2589Typescript%25E3%2581%25AE%25E8%25A8%25AD%25E8%25A8%2588%25E3%2582%2592%25E3%2581%2597%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2582%2588%25E3%2581%2595%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE3MmFmNGJkODAuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2595%25E3%2582%25A3%25E3%2582%25B7%25E3%2583%25AB%25E3%2582%25B3%25E3%2583%25A0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM5MGI3NGZiN2EuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>よさ</dc:creator></item><item><title><![CDATA[画像最適化で爆速サイトを実現する方法 with Cloudinary]]></title><description><![CDATA[
+ はじめに
+皆さんはWebアプリケーションを作成する際に画像の最適化はしていますか？
+現代のWebサイトにおいて、画像は不可欠な要素となっています。しかし、高画質な画像の大量使用は表示速度を低下させ、ユーザーエクスペリエンスを著しく損なう可能性があります。本記事では、無料で実装できる画像最適化手法を紹介し、サイトパフォーマンスを劇的に改善する方法をご紹介します。
+
+ モチベーション
+私は現在、「AI辞書」というプロジェクトを趣味で開発しています。Google翻訳やDeepLなどでは文脈理解が不完全で、従来の辞書サイトは広告が多く使いづらいという問題から自分用に作成しようと思いました。ま...]]></description><link>https://zenn.dev/ydai20/articles/8e3042ad97952b</link><guid isPermaLink="true">https://zenn.dev/ydai20/articles/8e3042ad97952b</guid><pubDate>Tue, 04 Feb 2025 12:18:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5BQqXTCH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%2594%25BB%25E5%2583%258F%25E6%259C%2580%25E9%2581%25A9%25E5%258C%2596%25E3%2581%25A7%25E7%2588%2586%25E9%2580%259F%25E3%2582%25B5%25E3%2582%25A4%25E3%2583%2588%25E3%2582%2592%25E5%25AE%259F%25E7%258F%25BE%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2520with%2520Cloudinary%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:y-dai20%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTFVIVkpBcEh0ZnVZS3d6SUtYZ2ZpaVB0WlRnM0JIMVBTZkpxRmRxeVA1PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>y-dai20</dc:creator></item><item><title><![CDATA[clasp で GAS を書く]]></title><description><![CDATA[
+ 動機
+自分の好きなエディターを使っていると、GAS を web 上で書くのはとてもストレスが溜まる。GAS は javascript ベースなので、ローカルなエディターで補完等を使って書きたい。さらに言えば typescript で書きたい
+というわけで備忘録も兼ねて、手順書を作成する
+https://github.com/gen740/TypescriptGASTemplate
+
+ clasp のセットアップ
+
+ clasp とは
+clasp とはローカルで GAS を書きそれをデプロイするものである。簡単に始めるには、aside というものがあり（中では clasp を使用してい...]]></description><link>https://zenn.dev/genf740/articles/18f5fe33-ee3d-8055-b0fc-f2d3808413b7</link><guid isPermaLink="true">https://zenn.dev/genf740/articles/18f5fe33-ee3d-8055-b0fc-f2d3808413b7</guid><pubDate>Tue, 04 Feb 2025 07:21:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GwFBACp3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:clasp%2520%25E3%2581%25A7%2520GAS%2520%25E3%2582%2592%25E6%259B%25B8%25E3%2581%258F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:gen740%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pNOGJfSGVlRHJhclh6YllqWnBrQjBWUVZtcExib3ZzRE42WEFoYjdVPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>gen740</dc:creator></item><item><title><![CDATA[（JSのBuffer, Fileを理解した上で）Slack Upload APIで画像投稿を行う]]></title><description><![CDATA[
+ 💡この記事でわかること・解決すること
+Slack bolt 2.0系で画像のアップロードする際に slack.files.upload で画像投稿すると古いバージョンすぎてできないので、HttpClientのfetchを使用して、画像アップロードできるようにする
+
+ 前提など
+
+Slackのbot tokenの取得ができている
+Slack API scopeのfiles:write がbot側で許可されている
+Slack bot側から使用されること
+
+
+ TL;DR
+
+👉 とりあえずコード見る
+
+公式Doc
+import FormData from 'form-data'
+impor...]]></description><link>https://zenn.dev/yoshiki__0428/articles/slack-upload-api-articles</link><guid isPermaLink="true">https://zenn.dev/yoshiki__0428/articles/slack-upload-api-articles</guid><pubDate>Mon, 03 Feb 2025 15:03:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--c6FwwTc0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25EF%25BC%2588JS%25E3%2581%25AEBuffer%252C%2520File%25E3%2582%2592%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2597%25E3%2581%259F%25E4%25B8%258A%25E3%2581%25A7%25EF%25BC%2589Slack%2520Upload%2520API%25E3%2581%25A7%25E7%2594%25BB%25E5%2583%258F%25E6%258A%2595%25E7%25A8%25BF%25E3%2582%2592%25E8%25A1%258C%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yoshiki-0428%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2UwYTNkODg1NTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yoshiki-0428</dc:creator></item><item><title><![CDATA[TypeChatとCloud Vision APIを使用したレシート解析]]></title><description><![CDATA[
+ はじめに
+過去に家計簿系のアプリの個人開発をしている中で、レシートの読み取り機能を実装した際に試したことがあったので、簡単にまとめてみたいと思います。
+
+ 処理の流れ
+
+処理の流れは画像のままですが、以下のようになります。
+
+ユーザーがレシートの画像をアップロード
+1の画像をCloud Vision APIで画像解析
+2で取得したデータをTypeChatに渡す
+JSONとして出力
+
+OCR系のOSSなどのライブラリは何個かありましたが、今回はCloud Vision APIを選択しました。そこまで深い理由はないです。なるべく早く検証してみたかったという気持ちが強かったです。
+
+ Ty...]]></description><link>https://zenn.dev/watahaya/articles/3b24ed602d3227</link><guid isPermaLink="true">https://zenn.dev/watahaya/articles/3b24ed602d3227</guid><pubDate>Mon, 03 Feb 2025 13:20:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--o1zCZpk7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeChat%25E3%2581%25A8Cloud%2520Vision%2520API%25E3%2582%2592%25E4%25BD%25BF%25E7%2594%25A8%25E3%2581%2597%25E3%2581%259F%25E3%2583%25AC%25E3%2582%25B7%25E3%2583%25BC%25E3%2583%2588%25E8%25A7%25A3%25E6%259E%2590%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:chai%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk5MGFhYTkzZDYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>chai</dc:creator></item><item><title><![CDATA[Next.jsで個人サイトを立ち上げた]]></title><description><![CDATA[
+ 個人サイトの URL
+まだ雛形状態です。
+https://y-blo.vercel.app/
+
+ 経緯
+今回自分の個人サイトを立ち上げるに至ったのは、普段学習していることの成果として目にみえる開発物が欲しいこと、このサイトを改良したり新機能をつけたりする中で必ず学習しながら進めるため自身の勉強になること、せっかくなら学んだことを記事として発信していけること、これらをちょうどよく全て実現できるので開発を始めました。
+
+ やったこと
+Next.js の Example にあるテンプレートを使用してまずは個人サイトの雛形を vercel にデプロイしました。
+ESLint、Prettier...]]></description><link>https://zenn.dev/yadonn/articles/4851861074fef7</link><guid isPermaLink="true">https://zenn.dev/yadonn/articles/4851861074fef7</guid><pubDate>Mon, 03 Feb 2025 03:26:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--JQ-1UvlL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Next.js%25E3%2581%25A7%25E5%2580%258B%25E4%25BA%25BA%25E3%2582%25B5%25E3%2582%25A4%25E3%2583%2588%25E3%2582%2592%25E7%25AB%258B%25E3%2581%25A1%25E4%25B8%258A%25E3%2581%2592%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:YADON%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVkOTAyMjM0YTMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>YADON</dc:creator></item><item><title><![CDATA[AngularのfileReplacementsでTAURIとコードを共有したり置換したりする話]]></title><description><![CDATA[
+ はじめに
+最近、Tauriへの期待を込めて利用感を調査しています。
+TauriはFrontend Frameworkに依存せずMobile/DesktopのNativeアプリ開発が可能です。
+せっかく好きなFrameworkが使えるので、極力コードを共通化し、1つのレポジトリでWebもネイティブも開発したくなる訳ですが、以下のような困難があります。
+
+WebとNativeでは利用するAPIが異なる（HTTP ClientやGeolocationなど）
+現状、TauriはServer Side Rendering（SSR）に非対応
+
+https://v2.tauri.app/start...]]></description><link>https://zenn.dev/nao50/articles/angular19-filereplacements-tauri</link><guid isPermaLink="true">https://zenn.dev/nao50/articles/angular19-filereplacements-tauri</guid><pubDate>Mon, 03 Feb 2025 02:04:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--LCwyi-UL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Angular%25E3%2581%25AEfileReplacements%25E3%2581%25A7TAURI%25E3%2581%25A8%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2582%2592%25E5%2585%25B1%25E6%259C%2589%25E3%2581%2597%25E3%2581%259F%25E3%2582%258A%25E7%25BD%25AE%25E6%258F%259B%25E3%2581%2597%25E3%2581%259F%25E3%2582%258A%25E3%2581%2599%25E3%2582%258B%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nao%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRiY2YzZDIyYTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nao</dc:creator></item><item><title><![CDATA[Next.js MiddlewareはNode.js runtimeでも使える！【誤解を解消＆今後の展望】]]></title><description><![CDATA[
+ 結論から
+たまにEdge runtimeでしか使えないと誤解されている方がいるので...
+Next.jsのMiddlewareはNode.js runtimeでも使えます!
+!
+ただし、Node.js runtimeのフルサポートではなく、fs, net, child_process, cryptoなどの特定のNode APIは使えません。
+
+
+ はじめに
+Next.jsのMiddlewareは、「Edge runtime専用」と誤解してしまうケースも散見されます。実は、Node.js runtime上でも動作するため、この点について解説します!
+
+ Next.js Middlewa...]]></description><link>https://zenn.dev/jonghyo/articles/nextjs-middleware</link><guid isPermaLink="true">https://zenn.dev/jonghyo/articles/nextjs-middleware</guid><pubDate>Sun, 02 Feb 2025 22:00:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--LGrQfjPe--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Next.js%2520Middleware%25E3%2581%25AFNode.js%2520runtime%25E3%2581%25A7%25E3%2582%2582%25E4%25BD%25BF%25E3%2581%2588%25E3%2582%258B%25EF%25BC%2581%25E3%2580%2590%25E8%25AA%25A4%25E8%25A7%25A3%25E3%2582%2592%25E8%25A7%25A3%25E6%25B6%2588%25EF%25BC%2586%25E4%25BB%258A%25E5%25BE%258C%25E3%2581%25AE%25E5%25B1%2595%25E6%259C%259B%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:jonghyo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRhZGQ4YWVlMjcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>jonghyo</dc:creator></item><item><title><![CDATA[tRPCでPrismaのDate型がstringで帰ってくる問題とsuperjsonによる解決策]]></title><description><![CDATA[
+ 背景
+再現に必要な各種packageのバージョンは以下の通りです。
+
+Next.js 15.0系
+Prisma 5.系統
+trpc 10.系統
+
+trpcで取得したdataをfrontendで受け取ってuseStateのstateとして取り込もうとした際に下記のエラーが生じました。
+import { useState, useEffect } from 'react';
+import { User } from '@prisma/client';
+import { trpc } from '@/server/trpc/trpcClient';
+// (中略)
+
+const Page ...]]></description><link>https://zenn.dev/h_p_yancy/articles/doc12-trpc-date-string-error</link><guid isPermaLink="true">https://zenn.dev/h_p_yancy/articles/doc12-trpc-date-string-error</guid><pubDate>Sun, 02 Feb 2025 16:52:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--LNLXLZmb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:tRPC%25E3%2581%25A7Prisma%25E3%2581%25AEDate%25E5%259E%258B%25E3%2581%258Cstring%25E3%2581%25A7%25E5%25B8%25B0%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%258F%25E3%2582%258B%25E5%2595%258F%25E9%25A1%258C%25E3%2581%25A8superjson%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258B%25E8%25A7%25A3%25E6%25B1%25BA%25E7%25AD%2596%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:H.P.Yancy%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg4ZjU4OTA5MDguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>H.P.Yancy</dc:creator></item><item><title><![CDATA[Three.js + TypeScriptで断面表示（ローカルクリッピング）]]></title><description><![CDATA[
+ 内容
+
+これはTypeScriptからThree.jsを使うサンプルである。
+3Dオブジェクトの一部を非表示にするクリッピングを試す。
+断面を描画する場合と、しない場合。
+
+プロジェクトの作り方は、以下の記事と同様
+https://zenn.dev/ythk/articles/ythk-arphys-three1
+
+ 断面を描画しない場合
+オブジェクトの「ある平面より上の部分を非表示」のような表示は、とても簡単にできる。本質的な部分を取り出すと以下のようになる。
+renderer.localClippingEnabled = true; //重要
+
+const plane = new...]]></description><link>https://zenn.dev/ythk/articles/ythk-arphys-three2</link><guid isPermaLink="true">https://zenn.dev/ythk/articles/ythk-arphys-three2</guid><pubDate>Sun, 02 Feb 2025 14:17:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--LHzlgd1a--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Three.js%2520%252B%2520TypeScript%25E3%2581%25A7%25E6%2596%25AD%25E9%259D%25A2%25E8%25A1%25A8%25E7%25A4%25BA%25EF%25BC%2588%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25AB%25E3%2583%25AB%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2583%25E3%2583%2594%25E3%2583%25B3%25E3%2582%25B0%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ythk%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSVZOZ09NOWpjZEg1TFlRQlh6dnIzWW5ZRmZ6T3F3NUt4VWtNMVdjV3VRPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ythk</dc:creator></item><item><title><![CDATA[画像処理100本ノックに挑戦｜アフィン変換(スキュー)（031/100）]]></title><description><![CDATA[
+ これはなに？
+画像処理100本ノックを、TypeScriptとlibvipsで挑戦してみる記事の31本目です。
+
+ 前回
+https://zenn.dev/nyagato_00/articles/eba0b8c62c36c5
+
+ 実装
+
+ お題
+
+(1)アフィン変換を用いて、出力(1)のようなX-sharing(dx = 30)画像を作成せよ。
+(2)アフィン変換を用いて、出力2のようなY-sharing(dy = 30)画像を作成せよ。
+(3)アフィン変換を用いて、出力3のような幾何変換した(dx = 30, dy = 30)画像を作成せよ。
+このような画像はスキュー画像と呼ばれ、...]]></description><link>https://zenn.dev/nyagato_00/articles/85a7f0fb1d4840</link><guid isPermaLink="true">https://zenn.dev/nyagato_00/articles/85a7f0fb1d4840</guid><pubDate>Sun, 02 Feb 2025 11:58:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GqX2XlRn--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%2594%25BB%25E5%2583%258F%25E5%2587%25A6%25E7%2590%2586100%25E6%259C%25AC%25E3%2583%258E%25E3%2583%2583%25E3%2582%25AF%25E3%2581%25AB%25E6%258C%2591%25E6%2588%25A6%25EF%25BD%259C%25E3%2582%25A2%25E3%2583%2595%25E3%2582%25A3%25E3%2583%25B3%25E5%25A4%2589%25E6%258F%259B%2528%25E3%2582%25B9%25E3%2582%25AD%25E3%2583%25A5%25E3%2583%25BC%2529%25EF%25BC%2588031%252F100%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nyagato_00%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUxtNXd1MTVKUVk3SjNOUG1kcGlMeWdfWUt3blZzaTRpWDRoYjU1c21UTTk3c1E9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nyagato_00</dc:creator></item></channel></rss>
