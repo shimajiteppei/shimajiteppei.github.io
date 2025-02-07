@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Linux」のフィード]]></title><description><![CDATA[Zennのトピック「Linux」のRSSフィードです]]></description><link>https://zenn.dev/topics/linux</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/860a9eb1e4.png</url><title>Zennの「Linux」のフィード</title><link>https://zenn.dev/topics/linux</link></image><generator>zenn.dev</generator><lastBuildDate>Fri, 07 Feb 2025 08:50:50 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/linux/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[証明書更新作業時に確認すべき項目]]></title><description><![CDATA[SSL/TLS証明書更新作業時に確認すべき項目のメモ。
+事前作業での確認や当日の作業ミスを軽減させる。
+
+ 有効期限確認（ローカルファイル）
+
+bash
+openssl x509 -noout -subject -dates -in &lt;署名証明書&gt;
+
+
+ 秘密鍵ファイルのパスフレーズ設定確認
+
+bash
+ssh-keygen -yf &lt;秘密鍵&gt; 
+
+!
+パスフレーズの入力を求められられなければ、設定されていない。
+
+
+ 証明書と秘密鍵の整合性確認
+
+bash
+openssl x509 -noout -modulus -in &lt;署名証明書&gt; | md5s...]]></description><link>https://zenn.dev/tano2/articles/2e8404a3ebdf7a</link><guid isPermaLink="true">https://zenn.dev/tano2/articles/2e8404a3ebdf7a</guid><pubDate>Fri, 07 Feb 2025 04:43:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--gaRGCatu--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%25A8%25BC%25E6%2598%258E%25E6%259B%25B8%25E6%259B%25B4%25E6%2596%25B0%25E4%25BD%259C%25E6%25A5%25AD%25E6%2599%2582%25E3%2581%25AB%25E7%25A2%25BA%25E8%25AA%258D%25E3%2581%2599%25E3%2581%25B9%25E3%2581%258D%25E9%25A0%2585%25E7%259B%25AE%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259F%25E3%2581%25AE%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS181TF90OGdORl92b1NBa0k0MmI2cThUYnVBaWRibU5LNDJmVFNydkZrU3c9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>たの</dc:creator></item><item><title><![CDATA[<リダイレクト演算子ガイド>]]></title><description><![CDATA[コマンドラインを使用する際、リダイレクト演算子を理解することは、標準出力やエラーの管理に不可欠です。本記事では、以下のようなコマンドを例に取り、リダイレクト演算子の使い方とその効果について解説します。
+nohup mysql -u root -pYourPassword your_database &lt; /path/to/backup.sql &gt; restore.log 2&gt;&amp;1 &amp;
+このコマンドは、MySQLデータベースのリストア作業を行いながら、出力とエラーを適切にログファイルに記録し、プロセスをバックグラウンドで実行しています。それでは、このコマンド...]]></description><link>https://zenn.dev/kompeito/articles/b192fab85d75d8</link><guid isPermaLink="true">https://zenn.dev/kompeito/articles/b192fab85d75d8</guid><pubDate>Fri, 07 Feb 2025 02:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xJN4P9HE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%253C%25E3%2583%25AA%25E3%2583%2580%25E3%2582%25A4%25E3%2583%25AC%25E3%2582%25AF%25E3%2583%2588%25E6%25BC%2594%25E7%25AE%2597%25E5%25AD%2590%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%253E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:takNaga%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2IxNjM2Njc5ZmYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BEKOMPEITO%2520%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E5NmFmNjYwNGIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takNaga</dc:creator></item><item><title><![CDATA[killコマンドと主要なシグナル一覧]]></title><description><![CDATA[
+ killコマンド
+
+
+
+書式
+説明
+例
+
+
+
+
+kill [PID]
+デフォルトの SIGTERM（15）シグナル を送信してプロセスを正常終了させる。
+kill 1234
+
+
+kill -s [シグナル名] [PID]
+指定した シグナル名 を送信。
+kill -s SIGKILL 1234
+
+
+kill -[シグナル名] [PID]
+-s を省略して シグナル名 を直接指定。
+kill -SIGKILL 1234
+
+
+kill -[シグナル番号] [PID]
+シグナル番号 を指定して送信。
+kill -9 1234
+
+
+kill -l
+使用可能なシグナル一覧 を表示。
+kill ...]]></description><link>https://zenn.dev/kompeito/articles/1ad712d6afc9ec</link><guid isPermaLink="true">https://zenn.dev/kompeito/articles/1ad712d6afc9ec</guid><pubDate>Fri, 07 Feb 2025 02:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--f1GIywjh--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:kill%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2581%25A8%25E4%25B8%25BB%25E8%25A6%2581%25E3%2581%25AA%25E3%2582%25B7%25E3%2582%25B0%25E3%2583%258A%25E3%2583%25AB%25E4%25B8%2580%25E8%25A6%25A7%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:takNaga%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2IxNjM2Njc5ZmYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BEKOMPEITO%2520%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E5NmFmNjYwNGIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takNaga</dc:creator></item><item><title><![CDATA[リモート接続の切断でプロセスが終了する理由とその対策]]></title><description><![CDATA[
+ リモート接続が切れるとプロセスが終了する理由
+リモートサーバーにSSH接続して作業中、接続が切れた途端に実行中のプロセスが終了してしまう経験ありますよね。
+これは、接続の切断時にプロセスへ送信される特定のシグナルが原因です。
+killコマンドと主要なシグナル一覧
+
+
+ 1. SIGHUP（ハングアップシグナル）の概要
+
+SIGHUP（Signal Hang UP）は、元々は物理的な端末の切断を検知するために設計されたシグナルです。
+リモート接続（SSH）の切断時にも、この SIGHUPシグナルが実行中のシェルやプロセスに送信されます。
+
+SIGHUPが送信される流れ
+
+SSH接続の切...]]></description><link>https://zenn.dev/kompeito/articles/73031e0507272f</link><guid isPermaLink="true">https://zenn.dev/kompeito/articles/73031e0507272f</guid><pubDate>Fri, 07 Feb 2025 02:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4ibXqrSH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%25AA%25E3%2583%25A2%25E3%2583%25BC%25E3%2583%2588%25E6%258E%25A5%25E7%25B6%259A%25E3%2581%25AE%25E5%2588%2587%25E6%2596%25AD%25E3%2581%25A7%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25BB%25E3%2582%25B9%25E3%2581%258C%25E7%25B5%2582%25E4%25BA%2586%25E3%2581%2599%25E3%2582%258B%25E7%2590%2586%25E7%2594%25B1%25E3%2581%25A8%25E3%2581%259D%25E3%2581%25AE%25E5%25AF%25BE%25E7%25AD%2596%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:takNaga%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2IxNjM2Njc5ZmYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BEKOMPEITO%2520%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E5NmFmNjYwNGIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takNaga</dc:creator></item><item><title><![CDATA[nohup と & の組み合わせによる長時間コマンド実行の安定運用]]></title><description><![CDATA[
+ 1. なぜ nohup と &amp; が必要なのか？
+長時間かかるコマンドを実行している最中に、ターミナル接続が切れてしまう、あるいはリモートセッションがタイムアウトしてしまった経験はありませんか？
+特に、大規模なデータベースのリストア作業やシステムバックアップのような処理は、途中で中断されると作業全体が失敗してしまいます。
+リモート接続の切断でプロセスが終了する理由とその対策
+そこで登場するのが nohup と &amp; の組み合わせです。
+これらを活用することで、ログアウト後もプロセスを安定して継続させることができます。
+
+ 2. nohup と &amp; の基本的な使い方...]]></description><link>https://zenn.dev/kompeito/articles/516dfd85cb5e9a</link><guid isPermaLink="true">https://zenn.dev/kompeito/articles/516dfd85cb5e9a</guid><pubDate>Fri, 07 Feb 2025 02:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--VmnVWUtT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:nohup%2520%25E3%2581%25A8%2520%2526%2520%25E3%2581%25AE%25E7%25B5%2584%25E3%2581%25BF%25E5%2590%2588%25E3%2582%258F%25E3%2581%259B%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258B%25E9%2595%25B7%25E6%2599%2582%25E9%2596%2593%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%25AE%25E5%25AE%2589%25E5%25AE%259A%25E9%2581%258B%25E7%2594%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:takNaga%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2IxNjM2Njc5ZmYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BEKOMPEITO%2520%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E5NmFmNjYwNGIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takNaga</dc:creator></item><item><title><![CDATA[MX Linuxにnvidiaのドライバを入れる]]></title><description><![CDATA[
+ MX Linux
+聞いたことはあるけど何故か使ったことがなかったディストリビューション。
+中量級とWikipediaに書いているけど、新しいパソコンだとぶっちゃけ軽量。
+今回の環境は以下の通り。
+$ cat /etc/os-release
+PRETTY_NAME="Debian GNU/Linux 12 (bookworm)"
+NAME="Debian GNU/Linux"
+VERSION_ID="12"
+VERSION="12 (bookworm)"
+VERSION_CODENAME=bookworm
+ID=debian
+HOME_URL="https://www.debian.o...]]></description><link>https://zenn.dev/ziaensochan/articles/0dc0c33516a75e</link><guid isPermaLink="true">https://zenn.dev/ziaensochan/articles/0dc0c33516a75e</guid><pubDate>Thu, 06 Feb 2025 17:58:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--tg54CvhE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:MX%2520Linux%25E3%2581%25ABnvidia%25E3%2581%25AE%25E3%2583%2589%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2590%25E3%2582%2592%25E5%2585%25A5%25E3%2582%258C%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:samenoko%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAwMTk3ZDBkN2EuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>samenoko</dc:creator></item><item><title><![CDATA[IMEのON/OFFには変換/無変換キーを使おう]]></title><description><![CDATA[JIS配列キーボードをお使いの皆さん、日本語/英語入力の切り替え（IMEのON/OFF）にはどのキーを使っていますか？[全角/半角]キーをお使いの方、手の移動量が多いと思いませんか？
+IMEのON/OFFには[変換][無変換]キーを活用しましょう。英語交じりの日本語入力がぐっと楽になります。
+
+
+ [変換][無変換]でIMEをON/OFFするメリット
+最大のメリットは左手首の移動量の削減です。
+日本語と英語の入力を煩雑に行う場合、デフォルトでは左手小指で[全角/半角]キーを頻繁に打つことになります。当然、左手首の移動量は多くなります。大量の文章を打ち込む際、これは結構な負担になります。
+...]]></description><link>https://zenn.dev/seiichihorie/articles/20250206-ime</link><guid isPermaLink="true">https://zenn.dev/seiichihorie/articles/20250206-ime</guid><pubDate>Thu, 06 Feb 2025 12:58:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Ubh3CBhL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:IME%25E3%2581%25AEON%252FOFF%25E3%2581%25AB%25E3%2581%25AF%25E5%25A4%2589%25E6%258F%259B%252F%25E7%2584%25A1%25E5%25A4%2589%25E6%258F%259B%25E3%2582%25AD%25E3%2583%25BC%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%258A%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25A0%2580%25E6%25B1%259F%25E8%25AA%25A0%25E4%25B8%2580%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS3hveFBEMG4wNVZyT182d0hPbUpld1BTOTdVOE1Hdzg0R09IY1A5Tm1ETmk0N1V0QWZTQT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>堀江誠一</dc:creator></item><item><title><![CDATA[Linuxとは？]]></title><description><![CDATA[
+ Linuxとは
+世界中で使われているオープンソースのオペレーティングシステムで無料で誰でも使用することができる。
+オープンソースがすべて公開されている。
+
+ Linuxはあらゆる機器を支えている
+スマートフォン（Android）やスーパーコンピューター、組み込み系（テレビなど）などもLinuxOSをベースにしている。
+
+ なぜLinuxを学ぶべきか？
+
+カスタマイズ可能で幅広い分野で役立つ
+無料で利用可能
+インフラ分野でデファクトスタンダードである
+開発コミュニティが活発である
+
+
+ Linuxの歴史
+1991年　リーナス・トーバルズによって開発。
+当時はUNIXが有名だったが、非常...]]></description><link>https://zenn.dev/kw_develop/articles/99ebe2b73c11bb</link><guid isPermaLink="true">https://zenn.dev/kw_develop/articles/99ebe2b73c11bb</guid><pubDate>Thu, 06 Feb 2025 11:52:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--btKTNoPh--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:Linux%25E3%2581%25A8%25E3%2581%25AF%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258B%25E3%2582%258F%25E3%2581%2590%25E3%2581%25A1%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSlk1OTgyLTBHX3ZKcUxVVHQxVU4yS3JQWEpFQWJnakJIYjdFcUhaRVZGVXJSOE9Pcz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>かわぐち</dc:creator></item><item><title><![CDATA[【Apache/Tomcat】初めてのWeb/APサーバ構築]]></title><description><![CDATA[
+ はじめに
+今からWebサーバ/APサーバを勉強したいと思われている方向けに、比較的簡単な方法でAWS上に環境構築を行う方法をご紹介します。
+無料利用枠内での利用となっていますので、とりあえず試してみたいという方におすすめです。
+この記事で紹介する方法が全てではありませんが、少なくともWeb/APサーバがどのようなものかイメージを持っていただけるかと思います。
+どなたかのお役に立てれば幸いです。
+
+ 前提
+AWSアカウントを所持している
+本記事ではAWSアカウントを作成済みであることを前提に解説を進めます。未作成の方は以下リンクを参照しアカウントを作成された後、次章に進んでください。
+...]]></description><link>https://zenn.dev/gj77a/articles/3f3b1be845289b</link><guid isPermaLink="true">https://zenn.dev/gj77a/articles/3f3b1be845289b</guid><pubDate>Tue, 04 Feb 2025 15:08:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jpiFrwS6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Apache%252FTomcat%25E3%2580%2591%25E5%2588%259D%25E3%2582%2581%25E3%2581%25A6%25E3%2581%25AEWeb%252FAP%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E6%25A7%258B%25E7%25AF%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:GK7AA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY3OWM5ZmRiZGUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>GK7AA</dc:creator></item><item><title><![CDATA[さくらインターネットのVPSにArch Linuxをインストールする]]></title><description><![CDATA[さくらインターネット の VPS に Arch Linux をインストールする方法。
+
+ さくらインターネットの公式マニュアル
+さくらインターネットが公式でマニュアルを用意してくれているので、この手順通りに進める。
+インストール・メディアのisoファイルは自分で用意しなくても良い。さくらインターネットが公式でisoを用意してくれている。
+https://manual.sakura.ad.jp/vps/os-reinstall/iso-install/arch.html
+
+ 仮想スイッチ
+
+ コントロールパネルからeth1を仮想スイッチに接続する。
+
+ 現在のネットワークの状況を確認する。...]]></description><link>https://zenn.dev/tomoakinagahara/articles/arch-sakura-vps</link><guid isPermaLink="true">https://zenn.dev/tomoakinagahara/articles/arch-sakura-vps</guid><pubDate>Tue, 04 Feb 2025 05:37:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--FbJqsred--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%2595%25E3%2581%258F%25E3%2582%2589%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%258D%25E3%2583%2583%25E3%2583%2588%25E3%2581%25AEVPS%25E3%2581%25ABArch%2520Linux%25E3%2582%2592%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Tomoaki%2520Nagahara%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2czREt6Z1p1U3hEcGVZaFY1ajhJSjNmTzFZODlMLXg3bVJxcFU1Q0E9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Tomoaki Nagahara</dc:creator></item><item><title><![CDATA[M5StackLLMでLinux-(01)時間の設定]]></title><description><![CDATA[こんにちは、NoRiと申します。はじめてのZennの記事です。
+自分の作業の記録、および情報の共有ができればいいと思い記事を書いてみました。
+もし、ご質問・間違い・気が付いたこと等がありましたらコメント欄や「X」にてご連絡いただければ幸いです。どうかよろしくお願いいたします。
+　　by　 NoRi@NoRi230401
+
+ 時間の設定
+M5Stack LLM-Moduleのlinuxの時間は、おかしくないですか？
+RTC(Real Time Clock)ないのか？ たぶん。
+ネットワークに繋がっているときにNTPサーバーで時間を設定できればよいのでは。
+以下で、時間に関する設定を記しまし...]]></description><link>https://zenn.dev/nori230401/articles/b51f594f0d6e59</link><guid isPermaLink="true">https://zenn.dev/nori230401/articles/b51f594f0d6e59</guid><pubDate>Tue, 04 Feb 2025 05:25:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jtZ9lW4X--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:M5StackLLM%25E3%2581%25A7Linux-%252801%2529%25E6%2599%2582%25E9%2596%2593%25E3%2581%25AE%25E8%25A8%25AD%25E5%25AE%259A%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nori230401%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSWJEb2tnbThNdW96NWxFNFZFdWpuWEZYZGJTREFUaFdvSTZ1MzB5SlQyX1NjS0lwcz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nori230401</dc:creator></item><item><title><![CDATA[自分用Arch Linux インストールメモ (インストール〜SSHまで)]]></title><description><![CDATA[Amazonスマイルセールとか言う謎のセールで前々から気になっていたN100のミニPCを購入した。こいつにLinuxを入れてTailscale・AdGuardとか用のサーバーとして運用したいのだが、せっかくなのでLinuxの勉強がてらArch Linuxを入れてみる。do-it-yourself、良いと思います。
+!
+ミニPCだが、CPUがN100, RAMが16GB, SSDが512GB で15000円だった。安すぎやしないか。CPUに関して言えば後発のN97とかのほうが性能がいいらしいが、値段が5000円ぐらい上がる。もしくは同価格帯でRAM8GBとか。安さ重視かつCPUの性能差より...]]></description><link>https://zenn.dev/ama_nenee/articles/6d7d145044b035</link><guid isPermaLink="true">https://zenn.dev/ama_nenee/articles/6d7d145044b035</guid><pubDate>Tue, 04 Feb 2025 03:22:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--VnUdVgzl--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%2587%25AA%25E5%2588%2586%25E7%2594%25A8Arch%2520Linux%2520%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2583%25A1%25E3%2583%25A2%2520%2528%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2580%259CSSH%25E3%2581%25BE%25E3%2581%25A7%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Amane%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZlMWI2N2FiM2EuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Amane</dc:creator></item><item><title><![CDATA[Amazon Linux 2023 に Supervisor をインストールして起動する]]></title><description><![CDATA[
+ はじめに
+巷では着々と Amazon Linux 2023 への移行が進んでいるかと思います。
+しかし Supervisor のインストールについて、 Amazon Linux 2 での方法をまとめたものはよくあるものの、Amazon Linux 2023 についてまとめたものはまだ多くありません。
+というわけで Amazon Linux 2023 に Supervisor をインストールして起動するまでをまとめます。
+※本記事で扱うのはインストール手順までで、詳細な設定ファイルのカスタマイズ方法までは触れません
+
+ 環境
+Amazon Linux 2023
+Version 2023...]]></description><link>https://zenn.dev/shuh/articles/al2023-v6-supervisor</link><guid isPermaLink="true">https://zenn.dev/shuh/articles/al2023-v6-supervisor</guid><pubDate>Mon, 03 Feb 2025 14:06:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6-0vOlsW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Amazon%2520Linux%25202023%2520%25E3%2581%25AB%2520Supervisor%2520%25E3%2582%2592%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%2597%25E3%2581%25A6%25E8%25B5%25B7%25E5%258B%2595%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:shusch%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk0ODg1Y2EwN2QuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>shusch</dc:creator></item><item><title><![CDATA[nixos入門: wslで使うnixos (Linux初心者のための究極なOS)]]></title><description><![CDATA[初心者のためのOSに必要なことそれはOS自体が初心者ということ→つまり何も入っていないまっさらな状態のOSが初心者向け→NixOSは初心者向け
+ものが多いOSはあんまり好きじゃない。
+... 
+
+最近linuxユーザーのコミュニティではNixOSというOSが人気です。
+
+garuda linux のinfraがnixだったり…
+
+いきなり新しくNixOSを導入することは難しいのでまずはWindows 環境にLinux環境をお手軽に構築するWSLという機能を用いて、NixOSを初めて行きましょう
+
+NixOSはnixというパッケージマネージャーを使用した。OSですべての設定をコードとして残せることが特徴です。
+
+クラウド界隈ではインフラを効率的に運用するためにInfra as a Codeが流行っています。
+OSについてもOS as a Codeを広めていきましょう。
+nixOSの人を増やしたいので無料公開です。
+]]></description><link>https://zenn.dev/tositada/books/1c1564531ec8fc</link><guid isPermaLink="true">https://zenn.dev/tositada/books/1c1564531ec8fc</guid><pubDate>Mon, 03 Feb 2025 13:23:17 GMT</pubDate><dc:creator>tositada</dc:creator></item><item><title><![CDATA[Linuxで確実にDiskをマウントする方法]]></title><description><![CDATA[
+ 要約
+Linuxでデバイス名が変わったとしても、確実に特定のDiskをマウントしてアクセスさせる方法
+
+ はじめに
+Desktop Linuxなどの環境において、接続するUSB経由などで接続するストレージが変化することがあり、起動時に振られる/dev/sd?が一定しないことがある。
+そんな時に、確実にストレージを特定して必要な場所にmountしたいときに、UUIDでMountする方法がある。
+以下は、Debian GNU/Linux Bookworm(Debian 12)を用いて、実際に行っているが、このあたりはLinux一般の話なので、ほかのDistroをお使いの人でも
+参考になる...]]></description><link>https://zenn.dev/yabuki/articles/2025-02-03-btrfs-mount-by-uuid</link><guid isPermaLink="true">https://zenn.dev/yabuki/articles/2025-02-03-btrfs-mount-by-uuid</guid><pubDate>Mon, 03 Feb 2025 11:01:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--pXOgqjdx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%25E3%2581%25A7%25E7%25A2%25BA%25E5%25AE%259F%25E3%2581%25ABDisk%25E3%2582%2592%25E3%2583%259E%25E3%2582%25A6%25E3%2583%25B3%25E3%2583%2588%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:YABUKI%2520Yukiharu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2huRmQ1MnFmTEF6bUNNYVREYVhrTEZsZ0l0d1FrNVlrczJvcjBEPXMyNTAtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>YABUKI Yukiharu</dc:creator></item><item><title><![CDATA[コマンドラインからPDFのページを差し替える - PDFtk]]></title><description><![CDATA[学位論文などで本文は英語だけれども、表紙などでフォーマットが決まっていて日本語が必要になることがあると思います。
+LaTeXで執筆を行っていると、たった数ページのためにクラスファイルを編集して体裁を整えるのは非常に面倒です。
+この記事ではPDFtkを用いてコマンドラインからPDFのページを差し替える方法を解説します。
+
+ PDFtkのインストール
+Ubuntu 24.04では、以下のコマンドでインストールができます。
+$ sudo apt install pdftk-java
+PDFtkのソースコードはこちら
+https://gitlab.com/pdftk-java/pdftk
+
+ ペ...]]></description><link>https://zenn.dev/pon_pokapoka/articles/pdftk_metadata</link><guid isPermaLink="true">https://zenn.dev/pon_pokapoka/articles/pdftk_metadata</guid><pubDate>Sun, 02 Feb 2025 17:48:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--IAfTIotp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%25B3%25E3%2581%258B%25E3%2582%2589PDF%25E3%2581%25AE%25E3%2583%259A%25E3%2583%25BC%25E3%2582%25B8%25E3%2582%2592%25E5%25B7%25AE%25E3%2581%2597%25E6%259B%25BF%25E3%2581%2588%25E3%2582%258B%2520-%2520PDFtk%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Takehiro%2520Yoshioka%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSnRFVUJTaFVzRXRDTzdsNlZSeElpWW9UcnVJbVhKZFhzRm9UNHJGdjA1TXRFPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Takehiro Yoshioka</dc:creator></item><item><title><![CDATA[Flutter環境構築時の「error: linkageerror occurred while loading...」の解決法]]></title><description><![CDATA[
+ 問題
+Flutter環境構築時に，
+$ sdkmanager --version
+Error: LinkageError occurred while loading main class com.android.sdklib.tool.sdkmanager.SdkManagerCli
+        java.lang.UnsupportedClassVersionError: com/android/sdklib/tool/sdkmanager/SdkManagerCli has been compiled by a more recent version of the Java...]]></description><link>https://zenn.dev/tatesoto/articles/236b1c9f3e68a6</link><guid isPermaLink="true">https://zenn.dev/tatesoto/articles/236b1c9f3e68a6</guid><pubDate>Sun, 02 Feb 2025 14:31:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vKYChG5c--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Flutter%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%25E6%2599%2582%25E3%2581%25AE%25E3%2580%258Cerror%253A%2520linkageerror%2520occurred%2520while%2520loading....%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259F%25E3%2581%25A6%25E3%2581%259D%25E3%2581%25A8%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2YzMzZiYjM2ZjkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>たてそと</dc:creator></item><item><title><![CDATA[SrfacePro4にDebian12を入れたときにやったこと]]></title><description><![CDATA[
+ Debianをインストールする
+
+音量アップボタンと電源を長押しして起動
+セキュアブートを無効化する
+Boot順を変えUSB Storageをトップに持ってくる
+Debianを適当にインストールする
+
+https://learn.microsoft.com/ja-jp/surface/manage-surface-uefi-settings
+
+ タッチパネルを有効化するために
+カーネルを置き換えてタッチパネルを有効化する
+
+ LinuxSurface
+https://github.com/linux-surface/linux-surface/wiki/Installation-an...]]></description><link>https://zenn.dev/crackworks/articles/5200611d329fd0</link><guid isPermaLink="true">https://zenn.dev/crackworks/articles/5200611d329fd0</guid><pubDate>Sun, 02 Feb 2025 01:56:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--tBtHKpe3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:SrfacePro4%25E3%2581%25ABDebian12%25E3%2582%2592%25E5%2585%25A5%25E3%2582%258C%25E3%2581%259F%25E3%2581%25A8%25E3%2581%258D%25E3%2581%25AB%25E3%2582%2584%25E3%2581%25A3%25E3%2581%259F%25E3%2581%2593%25E3%2581%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:CRACKWORKS%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JmZTA5NThhYmQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>CRACKWORKS</dc:creator></item><item><title><![CDATA[Snapの接続]]></title><description><![CDATA[
+ 初めに
+
+本記事では、2つのSnapを接続する方法を紹介します。
+
+
+ Snapの接続
+
+Snapを接続して使用する際、下記のようなprovidesとconsumesのそれぞれ2つの役割があります。
+
+・provides:接続したSnapにファイル等を共有する側
+・consumes:接続したSnapのファイル等を使用する側
+
+provides側ではslot、consumes側ではplugという機能を使用して2つのSnapを接続します。
+
+
+ Snapの作成
+
+ provides側
+
+provides側のSnapにはconsumes側に提供するシェルスクリプトを用意します。
+
+$ tr...]]></description><link>https://zenn.dev/matsuo_1938/articles/f386d6c7ac48de</link><guid isPermaLink="true">https://zenn.dev/matsuo_1938/articles/f386d6c7ac48de</guid><pubDate>Sat, 01 Feb 2025 05:25:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--sIcbLXue--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:Snap%25E3%2581%25AE%25E6%258E%25A5%25E7%25B6%259A%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Matsuo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI4YWZlN2NhNzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Matsuo</dc:creator></item><item><title><![CDATA[wsl2（Linux）でGitLabを動かしてみた]]></title><description><![CDATA[
+
+ はじめに
+前回、こちらの記事でWindows上でLinuxを利用できるようにしたので、ここにGitLabを使えるようにします。
+※今回はローカルマシン上で起動させます。
+
+ 事前準備
+
+IPアドレスの確認
+inet xxx.xxx.xxx.xxx/20 の部分が割り当てられてるIPアドレス$ ip a show dev eth0 | grep eth0
+2: eth0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc mq state UP group default qlen 1000
+inet xxx.xxx.xxx...]]></description><link>https://zenn.dev/pisuboy/articles/9d972548cd13a6</link><guid isPermaLink="true">https://zenn.dev/pisuboy/articles/9d972548cd13a6</guid><pubDate>Fri, 31 Jan 2025 14:20:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4sE8MwZm--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:wsl2%25EF%25BC%2588Linux%25EF%25BC%2589%25E3%2581%25A7GitLab%25E3%2582%2592%25E5%258B%2595%25E3%2581%258B%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:pisuboy%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q2MjVmYTU5MzguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>pisuboy</dc:creator></item></channel></rss>

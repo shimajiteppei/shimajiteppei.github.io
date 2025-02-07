@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「JavaScript」のフィード]]></title><description><![CDATA[Zennのトピック「JavaScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/javascript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/64acd76870.png</url><title>Zennの「JavaScript」のフィード</title><link>https://zenn.dev/topics/javascript</link></image><generator>zenn.dev</generator><lastBuildDate>Fri, 07 Feb 2025 08:36:32 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/javascript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Bun で HTML をライブリロードする]]></title><description><![CDATA[
+ tl;dr
+bun-html-live-reload というBunでライブリロードできるライブラリを作ったので、コードが動く仕組みを簡略化してこの記事に書いてます。
+一言で説明すると、Bunサーバーがホットリロードされるたびに、Server Sent Events (SSE) を送信してブラウザを更新してます。
+
+ 何が不満なのか
+Bunの組み込みHTTPサーバーを使うと簡単にウェブサイトが作れちゃいます。
+// server.ts
+Bun.serve({
+  fetch: () =&gt; {
+    return new Response("&lt;h1&gt;Hello, Wo...]]></description><link>https://zenn.dev/aabccd021/articles/b951f09228df8f</link><guid isPermaLink="true">https://zenn.dev/aabccd021/articles/b951f09228df8f</guid><pubDate>Fri, 07 Feb 2025 07:13:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---cocvYhO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Bun%2520%25E3%2581%25A7%2520HTML%2520%25E3%2582%2592%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25AA%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2589%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:aabccd021%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dzZElPeU1kX1NNc01zYXlJTFJWMW8xc3dxWVFKaHZQOXJETktUSlE9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>aabccd021</dc:creator></item><item><title><![CDATA[PythonのクロージャとJavaScriptのクロージャ、実装の違い]]></title><description><![CDATA[
+ Pythonのクロージャ
+
+
+定義方法: 関数の中で別の関数を定義し、内側の関数が外側の関数の変数を参照する。
+
+def outer_function(text):
+    def inner_function():
+        print(text)
+    return inner_function
+
+closure = outer_function('Hello, Python!')
+closure()  # Output: Hello, Python!
+
+
+再代入の制限: nonlocalキーワードが必要。
+
+def outer_function(count):
+    ...]]></description><link>https://zenn.dev/pypypymi/articles/b683b56f2c726b</link><guid isPermaLink="true">https://zenn.dev/pypypymi/articles/b683b56f2c726b</guid><pubDate>Fri, 07 Feb 2025 03:35:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hw1eo3UH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25AE%25E3%2582%25AF%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%25A3%25E3%2581%25A8JavaScript%25E3%2581%25AE%25E3%2582%25AF%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%25A3%25E3%2580%2581%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tac-tac-go%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4WTctaEpSdWxmSTVwMGhQX3dSXzk0dzhab1pQbGtXaHd4ejB5UG1HLWM9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tac-tac-go</dc:creator></item><item><title><![CDATA[JavaScriptのスコープ]]></title><description><![CDATA[
+ スコープとは
+変数や関数が参照・使用できる範囲のこと。
+
+ スコープの種類
+
+ グローバルスコープ
+どの関数やブロックにも属さないトップレベルのスコープ。
+関数やブロック外で宣言するとグローバルスコープとなる。
+スクリプト内のどこからでもアクセス可能。
+// グローバルスコープの変数
+const a = 10;
+
+// グローバルスコープの関数
+function example() {
+    console.log(a); // 10
+}
+example();
+
+ ローカルスコープ（関数スコープ）
+宣言された関数内のみでアクセス可能なスコープ。
+関数（function）内で宣言する...]]></description><link>https://zenn.dev/uniii/articles/95612bab1c4894</link><guid isPermaLink="true">https://zenn.dev/uniii/articles/95612bab1c4894</guid><pubDate>Fri, 07 Feb 2025 03:27:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--io87Q-97--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25E3%2581%25AE%25E3%2582%25B9%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2597%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:uuuunnnnii%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2g1X1FuclVoSlBOTVU5em0wTV9YTEdFN0dwQmF0b0VyRGNlUUpaPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>uuuunnnnii</dc:creator></item><item><title><![CDATA[[CodePen解説] Blur Card with Parallax]]></title><description><![CDATA[CodePen では毎年、多くのクリエイターが公開するHTML/CSS/JSの作品が注目を集めます。
+そのうち、2024年に特に人気の高かったHTMLスニペットをランキング形式でまとめた The Most Hearted of 2024 の作品を順番に解説していきます。
+どの作品も個性的なアイデアや美しい表現が詰まっており、コードのポイントを押さえるだけでなく、実際に自分のプロジェクトへ活用するヒントにもつながるはずです。
+最初のスニペットはこちら：HomeBlur Card with Parallax
+
+ 概要
+
+作りたいものは、「大阪の美しい景色を背景に、大きく"OSAKA"と文字が...]]></description><link>https://zenn.dev/tkybpp/articles/bf352a29ca0ddb</link><guid isPermaLink="true">https://zenn.dev/tkybpp/articles/bf352a29ca0ddb</guid><pubDate>Thu, 06 Feb 2025 23:30:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ms7kjQz5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BCodePen%25E8%25A7%25A3%25E8%25AA%25AC%255D%2520Blur%2520Card%2520with%2520Parallax%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tkybpp%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzMxOTYyY2Y1OTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tkybpp</dc:creator></item><item><title><![CDATA[JSでの主な基準のサイズ・要素のサイズと座標・ポインターの座標取得まとめメモ]]></title><description><![CDATA[
+要素のサイズやポインターの座標など色々プロパティがありますが、その時々に調べて使用していました。しかしその作業が非常に煩わしいので、いい加減全体的にどうなのか理解するため&amp;見返し用に纏めたメモです。
+
+ 前提
+Google Chromeで値確認。この記事で使用する単語の定義は以下。
+
+ドキュメント
+
+
+margin,border,paddingの設定がないHTMLHtmlElement
+
+
+document.documentElementの内容が上記であると見なす
+
+
+コンテンツ全体
+
+HTMLBodyElement
+
+document.bodyの内容が上記であると見なす
+
+
+...]]></description><link>https://zenn.dev/scirexs/articles/d6316a11c73ea0</link><guid isPermaLink="true">https://zenn.dev/scirexs/articles/d6316a11c73ea0</guid><pubDate>Thu, 06 Feb 2025 21:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1J7hjuIP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JS%25E3%2581%25A7%25E3%2581%25AE%25E4%25B8%25BB%25E3%2581%25AA%25E5%259F%25BA%25E6%25BA%2596%25E3%2581%25AE%25E3%2582%25B5%25E3%2582%25A4%25E3%2582%25BA%25E3%2583%25BB%25E8%25A6%2581%25E7%25B4%25A0%25E3%2581%25AE%25E3%2582%25B5%25E3%2582%25A4%25E3%2582%25BA%25E3%2581%25A8%25E5%25BA%25A7%25E6%25A8%2599%25E3%2583%25BB%25E3%2583%259D%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25BF%25E3%2583%25BC%25E3%2581%25AE%25E5%25BA%25A7%25E6%25A8%2599%25E5%258F%2596%25E5%25BE%2597%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:scirexs%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FGZFp1Y3BiazJHVGtaaklCQV9TTzVGSW55bVU0TFNuaGtlanZ3aW15OUhBPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>scirexs</dc:creator></item><item><title><![CDATA[エンジニアが知っておきたい「npm run build」の全て！]]></title><description><![CDATA[
+ エンジニアが知っておきたい「npm run build」の全て！
+
+ はじめに
+今回は、普段何気なく実行しているnpm run buildについて、Next.js 14での実際のビルド結果を見ながら解説します。
+特に、Vercelへのデプロイ前に確認すべきポイントを重点的に説明します。
+
+ npm run buildとは？
+開発環境（localhost:3000）で作成したコードを本番環境で動作させるために必要な変換処理です。
+Next.js 14のプロジェクトでは、主に以下の処理を行います。
+
+TypeScript（v5.0以上）のコードをJavaScriptへコンパイル
+Reac...]]></description><link>https://zenn.dev/yamato_snow/articles/8bf04ca843abce</link><guid isPermaLink="true">https://zenn.dev/yamato_snow/articles/8bf04ca843abce</guid><pubDate>Thu, 06 Feb 2025 14:04:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--DNchQmNm--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%25E3%2581%258C%25E7%259F%25A5%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%258A%25E3%2581%258D%25E3%2581%259F%25E3%2581%2584%25E3%2580%258Cnpm%2520run%2520build%25E3%2580%258D%25E3%2581%25AE%25E5%2585%25A8%25E3%2581%25A6%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2584%25E3%2581%25BE%25E3%2581%25A8%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2IwM2U0NTU2MzYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>やまと</dc:creator></item><item><title><![CDATA[ヒープ領域とメモリリーク]]></title><description><![CDATA[Daily Blogging47日目
+今までメモリのことなんて気にせずに生きてきたけど、ついに気にしなければならない時が来た
+
+ ヒープ領域とは
+そもそもメモリとは、コンピュータ全体の記憶領域（RAM）を指す。
+そのメモリには2つの種類が存在する。
+
+スタック領域
+ヒープ領域
+
+両者の違いは、何を格納するのかというところと動的であるかというところ
+
+ スタック領域
+関数の戻り値やローカル変数が一時的に格納される記憶領域。
+関数が終了したタイミングや、ローカル変数のスコープを抜けたタイミングで自動で解放される。
+サイズは固定
+
+ ヒープ領域
+オブジェクトや配列のデータが格納される記憶領域。...]]></description><link>https://zenn.dev/shoan/articles/d1ab48e3432598</link><guid isPermaLink="true">https://zenn.dev/shoan/articles/d1ab48e3432598</guid><pubDate>Thu, 06 Feb 2025 11:55:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8cvycOM5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2592%25E3%2583%25BC%25E3%2583%2597%25E9%25A0%2598%25E5%259F%259F%25E3%2581%25A8%25E3%2583%25A1%25E3%2583%25A2%25E3%2583%25AA%25E3%2583%25AA%25E3%2583%25BC%25E3%2582%25AF%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Sho%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSlpJckNTX1JkYlRYSXpVU204TmRlRGx3UG9xMWtteVhtcUV6WVdkQUxlPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Sho</dc:creator></item><item><title><![CDATA[今週の学習記録（2025/1/26～2025/02/01）]]></title><description><![CDATA[
+ 🔍 学習内容
+
+
+学習テーマ: JavaScript, TypeScript
+
+使用した教材: CodeLesson, Qiita, YouTubeなど
+
+
+ ✏️ 学んだこと
+
+ 主なポイント
+
+DOM操作
+型の概念（TypeScript）
+
+
+ 💡 学び・反省点
+
+ 学び
+
+「e.preventDefault()」でデフォルトの処理を阻止する。
+any型：どんな方でもいれることができる。やむを得ない場合に使用する。
+タプル型：関数から複数の値を返したいときに配列に入れてまとめて返す配列。特定の型である必要はない。
+variadic Tuple Types：配列のスプレッド構文のよ...]]></description><link>https://zenn.dev/kw_develop/articles/4ccfbfce28229f</link><guid isPermaLink="true">https://zenn.dev/kw_develop/articles/4ccfbfce28229f</guid><pubDate>Thu, 06 Feb 2025 11:49:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--p2SIUfQw--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E4%25BB%258A%25E9%2580%25B1%25E3%2581%25AE%25E5%25AD%25A6%25E7%25BF%2592%25E8%25A8%2598%25E9%258C%25B2%25EF%25BC%25882025%252F1%252F26%25EF%25BD%259E2025%252F02%252F01%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258B%25E3%2582%258F%25E3%2581%2590%25E3%2581%25A1%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSlk1OTgyLTBHX3ZKcUxVVHQxVU4yS3JQWEpFQWJnakJIYjdFcUhaRVZGVXJSOE9Pcz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>かわぐち</dc:creator></item><item><title><![CDATA[JavaScriptの配列 (2)]]></title><description><![CDATA[JavaScriptの配列について、あまり深く考えず使ってきましたが、改めて学びなおしをします！
+(作成: やたてつ氏のスピード違反助長となる動画を追及する会(Yatatsukai) )
+
+ 末尾の要素を削除
+pop メソッドを使うと、配列の末尾の要素を削除できます。
+fruits.pop();
+console.log(fruits); // ['apple', 'banana', 'orange']
+
+ 先頭に要素を追加
+unshift メソッドを使うと、配列の先頭に要素を追加できます。
+fruits.unshift('kiwi');
+console.log(fruits); // [...]]></description><link>https://zenn.dev/yata/articles/a238a76b8c8346</link><guid isPermaLink="true">https://zenn.dev/yata/articles/a238a76b8c8346</guid><pubDate>Thu, 06 Feb 2025 06:28:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--h5pMkA9k--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:JavaScript%25E3%2581%25AE%25E9%2585%258D%25E5%2588%2597%2520%25282%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yatatsukai%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U5NWFhZTUzNDYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yatatsukai</dc:creator></item><item><title><![CDATA[JavaScriptの配列 (1)]]></title><description><![CDATA[JavaScriptの配列について、あまり深く考えず使ってきましたが、改めて学びなおしをします！
+(作成: やたてつ氏のスピード違反助長となる動画を追及する会(Yatatsukai) )
+
+ 配列の作成
+配列は角括弧 [] を使って作成します。
+let fruits = ['apple', 'banana', 'orange'];
+
+ 配列の要素へのアクセス
+配列の要素にはインデックスを使ってアクセスします。インデックスは0から始まります。
+console.log(fruits[0]); // 'apple'
+console.log(fruits[1]); // 'banana'
+
+ 末...]]></description><link>https://zenn.dev/yata/articles/96ffe8122e7df7</link><guid isPermaLink="true">https://zenn.dev/yata/articles/96ffe8122e7df7</guid><pubDate>Thu, 06 Feb 2025 06:18:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--x3NiI5Y---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:JavaScript%25E3%2581%25AE%25E9%2585%258D%25E5%2588%2597%2520%25281%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yatatsukai%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U5NWFhZTUzNDYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yatatsukai</dc:creator></item><item><title><![CDATA[Voltaで超楽にNode.jsバージョン管理したい]]></title><description><![CDATA[
+
+ Quick Usage
+特定のバージョンのインストールコマンド
+volta install pnpm@9.4
+インストールしたバージョンの確認
+volta list all
+Node.jsのバージョンをプロジェクトに固定 | volta pin
+volta pin pnpm@10.2
+!
+例えば、既にpnpm v9.4を使用していた場合、volta install pnpm@10.2を実行するだけでそのバージョンを使用してくれます。
+
+
+ Volta===JavaScript開発者のための手軽なツール管理
+JavaScriptのコマンドラインツールの管理に悩んでいませんか？Volt...]]></description><link>https://zenn.dev/json_hardcoder/articles/1c102f2d5511e3</link><guid isPermaLink="true">https://zenn.dev/json_hardcoder/articles/1c102f2d5511e3</guid><pubDate>Thu, 06 Feb 2025 04:34:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--gmhI5bvE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Volta%25E3%2581%25A7%25E8%25B6%2585%25E6%25A5%25BD%25E3%2581%25ABNode.js%25E3%2583%2590%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%25A7%25E3%2583%25B3%25E7%25AE%25A1%25E7%2590%2586%25E3%2581%2597%25E3%2581%259F%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:jhcoder%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVlODYyMzUyMzEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>jhcoder</dc:creator></item><item><title><![CDATA[【JavaScript / TypeScript】Mapについてまとめてみる]]></title><description><![CDATA[
+ はじめに
+
+MapはJavaScriptの組み込みAPIのひとつで、キーと値のペアを取り扱うためのオブジェクトです。Mapにはひとつのキーについてはひとつの値のみを格納できます。
+
+https://typescriptbook.jp/reference/builtin-api/map
+上記Mapについて、筆者はインプットしただけで全然使ったことがありませんでした。
+つい最近はまっていた処理をMapによってスマートに解決できたので、自身の戒め備忘録としてまとめていきたいと思います。
+!
+先ほどのMap&lt;K, V&gt; | サバイバルTypeScriptの内容と重複している部分が...]]></description><link>https://zenn.dev/benjuwan/articles/99b0e963f6ec11</link><guid isPermaLink="true">https://zenn.dev/benjuwan/articles/99b0e963f6ec11</guid><pubDate>Wed, 05 Feb 2025 13:57:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--RWpyxrEz--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590JavaScript%2520%252F%2520TypeScript%25E3%2580%2591Map%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:benjuwan%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSnd2XzJhLTN4SnJmSkN0Ql9wMkkwWUlVaVlTY1ozLTFQZFZoNkxsaUIyRmc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>benjuwan</dc:creator></item><item><title><![CDATA[Pixi.js v8 CustomFilter のサンプルコード]]></title><description><![CDATA[pixi.jsのバージョン8でカスタムフィルターのuniforms指定周りが変わっていたので
+備忘録としてサンプルコードを書きました。
+どなたかの役に立つと嬉しいです。
+
+ V8でのCustomFilter
+
+ SampleFilter.ts
+(旧 v7)
+export class SampleFilter extends Filter {
+	constructor(texture: Texture) {
+		super(
+			SampleVert,
+			SampleFrag,
+			{ // uniforms
+				texture: texture,
+				time: 0,
+	...]]></description><link>https://zenn.dev/a_saya_108/articles/0740da9261ada3</link><guid isPermaLink="true">https://zenn.dev/a_saya_108/articles/0740da9261ada3</guid><pubDate>Wed, 05 Feb 2025 12:55:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qNYBp5Ep--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Pixi.js%2520v8%2520CustomFilter%2520%25E3%2581%25AE%25E3%2582%25B5%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AB%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:adachi%2520saya%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU2ZGYyZTcxZGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>adachi saya</dc:creator></item><item><title><![CDATA[初代 iPad 用の Web アプリを作った(スコアボードアプリ)]]></title><description><![CDATA[はい。今どきなかなか珍しい体験をした(？)と思うので、記録を残しておきます。
+URL: https://score-board.pages.dev/
+スクリーンショット:
+
+
+ Why?
+ある日、うちの父が1つ頼みたいことがあると言ってきました。
+パッパ「趣味(ビリヤード)でスコアボードアプリ入れて使おうと思って古い iPad を買ったんだ、ただ古すぎてアプリストアから入れることができなかった😥PC からなんとか入れられないか？」
+ワイ「古いっていつの？」
+パッパ「最初のやつ」
+ワイ「(流石に初代 mini のことやろな)まあシンプルなものでいいならワンチャンワイが Web で作れるよ」...]]></description><link>https://zenn.dev/kei874/articles/23ca6e9f1e4dce</link><guid isPermaLink="true">https://zenn.dev/kei874/articles/23ca6e9f1e4dce</guid><pubDate>Wed, 05 Feb 2025 10:37:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4sW1J843--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2588%259D%25E4%25BB%25A3%2520iPad%2520%25E7%2594%25A8%25E3%2581%25AE%2520Web%2520%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%2528%25E3%2582%25B9%25E3%2582%25B3%25E3%2582%25A2%25E3%2583%259C%25E3%2583%25BC%25E3%2583%2589%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kei%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk1YWRhNzY4ZGEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kei</dc:creator></item><item><title><![CDATA[よく使うJavaScriptのモダンな記法]]></title><description><![CDATA[
+ テンプレートリテラル（`${}`）
+文字列に変数や式を埋め込む
+const name = "Alice";
+console.log(`Hello, ${name}!`); // "Hello, Alice!"
+
+ デフォルト引数
+関数の引数が未指定の場合、デフォルト値を設定する
+function greet(name = "Guest") {
+  console.log(`Hello, ${name}!`); // "Hello, Guest!"
+}
+
+ 分割代入
+オブジェクトや配列から特定の値を簡単に取り出す
+
+ オブジェクト
+const { name, age } = { nam...]]></description><link>https://zenn.dev/uniii/articles/77c13301d989f4</link><guid isPermaLink="true">https://zenn.dev/uniii/articles/77c13301d989f4</guid><pubDate>Wed, 05 Feb 2025 05:49:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--NfUdx9g9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%2588%25E3%2581%258F%25E4%25BD%25BF%25E3%2581%2586JavaScript%25E3%2581%25AE%25E3%2583%25A2%25E3%2583%2580%25E3%2583%25B3%25E3%2581%25AA%25E8%25A8%2598%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:uuuunnnnii%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2g1X1FuclVoSlBOTVU5em0wTV9YTEdFN0dwQmF0b0VyRGNlUUpaPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>uuuunnnnii</dc:creator></item><item><title><![CDATA[ECharts Scatter3DをFlutterWebに実装する（Div element not found）]]></title><description><![CDATA[
+ 検索結果を共有する
+ここまでの実装は、地図と地球儀と、個別に設定していたので、
+それぞれの表示を選択するたびにデータベースに接続してデータを取ってくるという、
+とっても不経済なことになっていた。
+https://zenn.dev/flutteruniv_dev/articles/1fcdac1c92a8ae
+https://zenn.dev/flutteruniv_dev/articles/05790a04db69a6
+AWSの無料お試し期間も終わってしまったことだし、コスパも考えないと。
+それにこの方法だと、表示間の行き来もスムーズじゃない。
+なので
+
+検索ページで一括してデータ処...]]></description><link>https://zenn.dev/flutteruniv_dev/articles/18217632f5393d</link><guid isPermaLink="true">https://zenn.dev/flutteruniv_dev/articles/18217632f5393d</guid><pubDate>Wed, 05 Feb 2025 00:12:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--EljNX5sn--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ECharts%2520Scatter3D%25E3%2582%2592FlutterWeb%25E3%2581%25AB%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2599%25E3%2582%258B%25EF%25BC%2588Div%2520element%2520not%2520found%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%25A9%25E3%2582%2593%25E3%2581%2590%25E3%2582%258A%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y0ODUxNDkwOTcuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Flutter%25E5%25A4%25A7%25E5%25AD%25A6%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dqQ2RNdHFjMF9fWVFUdkJndHR1R3plSnVVNW41ZXMyTzM0RDUzPXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>どんぐり</dc:creator></item><item><title><![CDATA[AWSマネジメントコンソールのマルチセッション用のURLを共有用にコピーする時に使うChrome拡張作った]]></title><description><![CDATA[AWSマネジメントコンソールでマルチセッションがサポートされました。自分も同時に複数アカウントを操作することはよくあるので、とてもありがたいアップデートです。
+https://docs.aws.amazon.com/ja_jp/awsconsolehelpdocs/latest/gsg/multisession.html
+この機能を有効にするとマネジメントコンソールのURLが https://000000000000-aaaaaaaa.us-east-1.console.aws.amazon.com/console/home?region=us-east-1 のような形式になり、先頭にセ...]]></description><link>https://zenn.dev/kuredev/articles/432f1441b90466</link><guid isPermaLink="true">https://zenn.dev/kuredev/articles/432f1441b90466</guid><pubDate>Tue, 04 Feb 2025 13:48:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--G5d2cL9R--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AWS%25E3%2583%259E%25E3%2583%258D%25E3%2582%25B8%25E3%2583%25A1%25E3%2583%25B3%25E3%2583%2588%25E3%2582%25B3%25E3%2583%25B3%25E3%2582%25BD%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%25AE%25E3%2583%259E%25E3%2583%25AB%25E3%2583%2581%25E3%2582%25BB%25E3%2583%2583%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E7%2594%25A8%25E3%2581%25AEURL%25E3%2582%2592%25E5%2585%25B1%25E6%259C%2589%25E7%2594%25A8%25E3%2581%25AB%25E3%2582%25B3%25E3%2583%2594%25E3%2583%25BC%25E3%2581%2599%25E3%2582%258B%25E6%2599%2582%25E3%2581%25AB%25E4%25BD%25BF%25E3%2581%2586Chrome%25E6%258B%25A1%25E5%25BC%25B5%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:aki%2520kure%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzEyZWIyMjU5MzguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>aki kure</dc:creator></item><item><title><![CDATA[clasp で GAS を書く]]></title><description><![CDATA[
+ 動機
+自分の好きなエディターを使っていると、GAS を web 上で書くのはとてもストレスが溜まる。GAS は javascript ベースなので、ローカルなエディターで補完等を使って書きたい。さらに言えば typescript で書きたい
+というわけで備忘録も兼ねて、手順書を作成する
+https://github.com/gen740/TypescriptGASTemplate
+
+ clasp のセットアップ
+
+ clasp とは
+clasp とはローカルで GAS を書きそれをデプロイするものである。簡単に始めるには、aside というものがあり（中では clasp を使用してい...]]></description><link>https://zenn.dev/genf740/articles/18f5fe33-ee3d-8055-b0fc-f2d3808413b7</link><guid isPermaLink="true">https://zenn.dev/genf740/articles/18f5fe33-ee3d-8055-b0fc-f2d3808413b7</guid><pubDate>Tue, 04 Feb 2025 07:21:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GwFBACp3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:clasp%2520%25E3%2581%25A7%2520GAS%2520%25E3%2582%2592%25E6%259B%25B8%25E3%2581%258F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:gen740%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pNOGJfSGVlRHJhclh6YllqWnBrQjBWUVZtcExib3ZzRE42WEFoYjdVPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>gen740</dc:creator></item><item><title><![CDATA[関数宣言、関数式、アロー関数]]></title><description><![CDATA[
+ 関数宣言
+functionキーワードを先頭に記述する書き方
+
+ 記述例
+function greet(name) {
+  return `Hello, ${name}!`;
+}
+
+ 特徴
+ホイスティング（巻き上げ）時の動作として、関数宣言はプログラムの最初に読み込まれるため
+コード内で関数を定義する前に関数を呼び出してもエラーにならない
+※ただしスクリプトをモジュールとして読み込んだり、strict modeを使用していると挙動が変わる
+
+ 関数式
+関数を変数に代入して定義する書き方
+
+ 記述例
+const greet = function(name) {
+  return `Hel...]]></description><link>https://zenn.dev/uniii/articles/908d46d737ae37</link><guid isPermaLink="true">https://zenn.dev/uniii/articles/908d46d737ae37</guid><pubDate>Tue, 04 Feb 2025 03:23:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2WlNhFwE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E9%2596%25A2%25E6%2595%25B0%25E5%25AE%25A3%25E8%25A8%2580%25E3%2580%2581%25E9%2596%25A2%25E6%2595%25B0%25E5%25BC%258F%25E3%2580%2581%25E3%2582%25A2%25E3%2583%25AD%25E3%2583%25BC%25E9%2596%25A2%25E6%2595%25B0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:uuuunnnnii%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2g1X1FuclVoSlBOTVU5em0wTV9YTEdFN0dwQmF0b0VyRGNlUUpaPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>uuuunnnnii</dc:creator></item><item><title><![CDATA[関数の中の関数について【超初心者向けの記事】「ネストされた関数」「入れ子の関数」「ローカル関数」とも言う]]></title><description><![CDATA[さて今回は、JavaScriptやPythonで一般的に用いられる
+「ネストされた関数」（「入れ子の関数」、「ローカル関数」）についてです。
+C言語を中心にやっていた元組み込み系エンジニアは
+この記述がはじめサッパリわからなかったのでまとめてみました。
+（C言語ではネストされた関数の記述は不可能のようです）
+
+ 「ネストされた関数」のメリット
+JavaScriptやPythonで「ネストされた関数」を使う主なメリットは
+
+スコープを制限できる
+クロージャの活用（外側の変数を使える）
+というのがあります。
+
+
+ JavaScriptの例
+
+ スコープの制限
+document.addEven...]]></description><link>https://zenn.dev/40_comeback_eng/articles/c08c1907181b9b</link><guid isPermaLink="true">https://zenn.dev/40_comeback_eng/articles/c08c1907181b9b</guid><pubDate>Mon, 03 Feb 2025 00:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--KxOBJLLh--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E9%2596%25A2%25E6%2595%25B0%25E3%2581%25AE%25E4%25B8%25AD%25E3%2581%25AE%25E9%2596%25A2%25E6%2595%25B0%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E3%2580%2590%25E8%25B6%2585%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E5%2590%2591%25E3%2581%2591%25E3%2581%25AE%25E8%25A8%2598%25E4%25BA%258B%25E3%2580%2591%25E3%2580%258C%25E3%2583%258D%25E3%2582%25B9%25E3%2583%2588%25E3%2581%2595%25E3%2582%258C%25E3%2581%259F%25E9%2596%25A2%25E6%2595%25B0%25E3%2580%258D%25E3%2580%258C%25E5%2585%25A5%25E3%2582%258C%25E5%25AD%2590%25E3%2581%25AE%25E9%2596%25A2%25E6%2595%25B0%25E3%2580%258D%25E3%2580%258C%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25AB%25E3%2583%25AB%25E9%2596%25A2%25E6%2595%25B0%25E3%2580%258D%25E3%2581%25A8%25E3%2582%2582%25E8%25A8%2580%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%25AF%25E3%2583%258B%25E3%2581%258B%25E3%2581%259A%254040%25E6%25AD%25B3%2520%25E5%2587%25BA%25E6%2588%25BB%25E3%2582%258A%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg3ZGNhZmRmOGUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ワニかず@40歳 出戻りエンジニア</dc:creator></item></channel></rss>
