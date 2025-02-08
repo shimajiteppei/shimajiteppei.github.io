@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Sat, 08 Feb 2025 08:38:43 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Vertex AI Agent Builderで開発した生成AIアプリをFlask(Python)から呼びCloud Runにデプロイ①]]></title><description><![CDATA[アクセンチュア株式会社テクノロジーコンサルティング本部金融サービスグループ アソシエイト・ディレクターの青柳雅之です。私は金融サービスグループのクラウドに関するプラクティスのリードをしています。
+Vertex AI Agent Builderでは、簡単に生成AIアプリケーションを開発することができます。生成したアプリケーションはコンソールからその動作を確認することができます。しかし、このような簡単に開発したアプリをユーザーにコンソールから使わせることはありません。 そこで、Webアプリからのアクセスを念頭に、このアプリケーションにPythonからアクセスする手順をまとめてみました。
+最終...]]></description><link>https://zenn.dev/acntechjp/articles/a0b70db6cda54e</link><guid isPermaLink="true">https://zenn.dev/acntechjp/articles/a0b70db6cda54e</guid><pubDate>Sat, 08 Feb 2025 08:06:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--SdaBW5nv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Vertex%2520AI%2520Agent%2520Builder%25E3%2581%25A7%25E9%2596%258B%25E7%2599%25BA%25E3%2581%2597%25E3%2581%259F%25E7%2594%259F%25E6%2588%2590AI%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592Flask%2528Python%2529%25E3%2581%258B%25E3%2582%2589%25E5%2591%25BC%25E3%2581%25B3Clou...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E9%259D%2592%25E6%259F%25B3%25E9%259B%2585%25E4%25B9%258B%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U2ZDA4MDY5ODcuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Accenture%2520Japan%2520%2528%25E6%259C%2589%25E5%25BF%2597%2529%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSTRXMUpvSTBoSXoxTTBOWkxfdWFtRnJiRjZIRFZUUWdDOWh5SEVnV0JvPXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>青柳雅之</dc:creator></item><item><title><![CDATA[Pythonのコンパイラを作りたい #3 - 数値演算と型システム]]></title><description><![CDATA[こんにちは。前回の記事（「#2 - Python AST から LLVM IR を生成するまでの概略」）では、Python の抽象構文木 (AST) をどのように LLVM IR へ変換して .ll ファイルを生成しているかを紹介しました。
+今回のテーマは、数値演算と型システム です。
+Python では int が自動的に大きな数に拡張されたり、float や Decimal など多彩な数値型が存在します。しかし、本プロジェクト pyc ではまず i32 を中心に扱う設計を採用しています。「Python はオブジェクト指向で何でもオブジェクト扱いなのに、なぜ i32？」と思われるかもし...]]></description><link>https://zenn.dev/t3tra/articles/6be1531fdf9fe6</link><guid isPermaLink="true">https://zenn.dev/t3tra/articles/6be1531fdf9fe6</guid><pubDate>Sat, 08 Feb 2025 07:49:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5cnnHGmx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25AE%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2591%25E3%2582%25A4%25E3%2583%25A9%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258A%25E3%2581%259F%25E3%2581%2584%2520%25233%2520-%2520%25E6%2595%25B0%25E5%2580%25A4%25E6%25BC%2594%25E7%25AE%2597%25E3%2581%25A8%25E5%259E%258B%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:t3tra%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ2MDdkNzY3ZTMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>t3tra</dc:creator></item><item><title><![CDATA[Effective Python 読書メモ]]></title><description><![CDATA[
+ 概要
+Effective Pythonを読んだ上での要点や、使えそうな知識をメモとして記す
+
+ 対象本
+
+効率的で堅牢であるだけでなく、読みやすく、保守しやすく、改善しやすいPythonicなコードを書く秘訣を教えます。
+
+https://www.oreilly.co.jp/books/9784873119175/
+
+ １章 Pythonic思考
+
+ 項目2 PEP8スタイルガイドに従う
+PEP8 : https://peps.python.org/pep-0008/
+正しい構文である限り、コードは自由に記述して良いが、一貫したスタイルに従い記述することでより扱いやすく可読性を向上さ...]]></description><link>https://zenn.dev/zennkey/articles/c992b37cec9016</link><guid isPermaLink="true">https://zenn.dev/zennkey/articles/c992b37cec9016</guid><pubDate>Sat, 08 Feb 2025 07:40:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_MhIvBZ9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Effective%2520Python%2520%25E8%25AA%25AD%25E6%259B%25B8%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:KK%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZiMzNiNWNlMWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>KK</dc:creator></item><item><title><![CDATA[結局どっち？Pythonの「継承」と「委譲」の違いを5分で理解する]]></title><description><![CDATA[
+ はじめに
+
+Python でクラス設計をする際、「継承を使うべきか？それとも委譲を使うべきか？」と悩むことはありませんか？
+
+継承の方が簡単だから、とりあえず継承を使う
+でも、継承を使いすぎるとコードの修正が面倒になる…
+どんなときに委譲を使えばよいのか、よくわからない
+
+こうした疑問を5分でスッキリと解決できるように、クラス継承と委譲の違い、メリット・デメリット、適切な使い分け方 をわかりやすく解説します！
+
+ 🏁 TL;DR（要約）
+
+
+継承（Inheritance）：「○○は△△である（is-a）」の関係
+
+例: Dog は Animal である
+
+親クラスの機能をそのまま使え...]]></description><link>https://zenn.dev/sousquared/articles/95bf8dbddf3756</link><guid isPermaLink="true">https://zenn.dev/sousquared/articles/95bf8dbddf3756</guid><pubDate>Sat, 08 Feb 2025 04:05:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--zeIqZ8vY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%25B5%2590%25E5%25B1%2580%25E3%2581%25A9%25E3%2581%25A3%25E3%2581%25A1%25EF%25BC%259FPython%25E3%2581%25AE%25E3%2580%258C%25E7%25B6%2599%25E6%2589%25BF%25E3%2580%258D%25E3%2581%25A8%25E3%2580%258C%25E5%25A7%2594%25E8%25AD%25B2%25E3%2580%258D%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%25E3%2582%25925%25E5%2588%2586%25E3%2581%25A7%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:sousquared%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lXYTF2cDBWNTdEM3hXUExZZ0puLTIyaHZ4U0pEQWxPbzFpX1h2PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sousquared</dc:creator></item><item><title><![CDATA[親子パソコン教室：Pythonで学ぶ！ じゃんけんゲームと 確率(かくりつ)・ 期待値(きたいち)]]></title><description><![CDATA[以下に、小学3年生向けのやさしい言葉づかいでまとめた**「親子パソコン教室：Pythonで学ぶ！ じゃんけんゲームと 確率**(かくりつ)・ 期待値(きたいち)**」**の教材を、ふりがな入りで再掲します。
+時間はおよそ30分程度を想定しています。
+
+
+ 親子パソコン教室：Pythonで学ぶ！ じゃんけんゲームと 確率(かくりつ)・ 期待値(きたいち)
+
+ 1. はじめに
+今日のめあては、Pythonというプログラミングを使って、
+
+
+じゃんけんゲームを動かす。
+
+勝った回数や勝率を調べて、確率(かくりつ)を学ぶ。
+
+グリコじゃんけんを動かして、勝ったときにもらえるポイントと期待値(きた...]]></description><link>https://zenn.dev/sakumura/articles/d33a5fbf69c831</link><guid isPermaLink="true">https://zenn.dev/sakumura/articles/d33a5fbf69c831</guid><pubDate>Sat, 08 Feb 2025 03:06:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--NeiRl8cU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%25A6%25AA%25E5%25AD%2590%25E3%2583%2591%25E3%2582%25BD%25E3%2582%25B3%25E3%2583%25B3%25E6%2595%2599%25E5%25AE%25A4%25EF%25BC%259APython%25E3%2581%25A7%25E5%25AD%25A6%25E3%2581%25B6%25EF%25BC%2581%2520%25E3%2581%2598%25E3%2582%2583%25E3%2582%2593%25E3%2581%2591%25E3%2582%2593%25E3%2582%25B2%25E3%2583%25BC%25E3%2583%25A0%25E3%2581%25A8%2520%25E7%25A2%25BA%25E7%258E%2587%2528%25E3%2581%258B%25E3%2581%258F%25E3%2582%258A%25E3%2581%25A4%2529%25E3%2583%25BB%2520%25E6%259C%259F%25E5%25BE%2585%25E5%2580%25A4%2528%25E3%2581%258D%25E3%2581%259F%25E3%2581%2584%25E3%2581%25A1%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:sakumura%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VmOThiMGU0NGYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sakumura</dc:creator></item><item><title><![CDATA[PythonとJavaScriptで複数文字を一気に置換したいとき]]></title><description><![CDATA[
+ PythonとJavaScriptでの文字置換の便利な方法
+例えば、aを3に、eを2に、iを1に書き換えたい場合、PythonとJavaScriptでそれぞれ方法を記述。一番簡単な方法でいえば replace を何回も使えば実装可能ではあるが、それだとコード量が多くなってしまうので違う方法を考えた。
+
+ Python
+Pythonでは、translate()メソッドとstr.maketrans()を使って、一度に複数の文字を置換することができる。
+text = "apple pie"
+
+# 置換パターンを辞書で定義
+replacements = str.maketrans({
+   ...]]></description><link>https://zenn.dev/pypypymi/articles/725dfd9e1a5a3f</link><guid isPermaLink="true">https://zenn.dev/pypypymi/articles/725dfd9e1a5a3f</guid><pubDate>Sat, 08 Feb 2025 02:51:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dIysRGIf--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A8JavaScript%25E3%2581%25A7%25E8%25A4%2587%25E6%2595%25B0%25E6%2596%2587%25E5%25AD%2597%25E3%2582%2592%25E4%25B8%2580%25E6%25B0%2597%25E3%2581%25AB%25E7%25BD%25AE%25E6%258F%259B%25E3%2581%2597%25E3%2581%259F%25E3%2581%2584%25E3%2581%25A8%25E3%2581%258D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tac-tac-go%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4WTctaEpSdWxmSTVwMGhQX3dSXzk0dzhab1pQbGtXaHd4ejB5UG1HLWM9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tac-tac-go</dc:creator></item><item><title><![CDATA[【Python】無精プログラマー入門]]></title><description><![CDATA[最小労力で最大効果を得る方法をご提案します
+
+ 即時スタート方法：
+
+Google Colab 活用
+ブラウザを開く
+"Python Google Colab" で検索
+新規ノートブックを開く
+→ これだけで Python 環境の完成
+
+
+ 最小限の Docker 環境
+
+Docker Desktop をダウンロード
+インストーラーを実行
+再起動
+→ これだけでコンテナ環境の完成
+
+
+ 実践的な学習
+
+ コピペ駆動開発
+
+Stack Overflow から解決策をコピー
+動作確認
+必要に応じてカスタマイズ
+→ 理解は後からついてくる
+
+
+ 最小コマンドセット
+bashCopy# Pyth...]]></description><link>https://zenn.dev/cai3/articles/81d16f58dfc931</link><guid isPermaLink="true">https://zenn.dev/cai3/articles/81d16f58dfc931</guid><pubDate>Sat, 08 Feb 2025 00:17:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--KtjtVjya--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591%25E7%2584%25A1%25E7%25B2%25BE%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%259E%25E3%2583%25BC%25E5%2585%25A5%25E9%2596%2580%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:cai3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRkYzYyYjNmODMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>cai3</dc:creator></item><item><title><![CDATA[Nand2Tetrisのアセンブラ(6章)をPythonで実装する]]></title><description><![CDATA[
+ Nand2TetrisのアセンブラをPythonで実装する
+
+ この記事の概要
+本記事では、Nand2Tetrisにおいて、アセンブラをPythonで実装する方法を解説します。
+なお、1~5章のハードウェアはこちらを参考にしてください。
+https://zenn.dev/ryotaro45123/articles/4-nand2tetris_hardware
+
+
+対象読者
+
+普段python使っている人
+Nand2Tetris進めている方
+手を動かしながら学ぶのが好きな方
+
+
+
+本書を通じて作成したプログラムは、GitHub に公開しています。
+https://github.com/...]]></description><link>https://zenn.dev/ryotaro45123/articles/5-nand2tetris-assembler-by-python</link><guid isPermaLink="true">https://zenn.dev/ryotaro45123/articles/5-nand2tetris-assembler-by-python</guid><pubDate>Fri, 07 Feb 2025 23:27:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7YATKH1V--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Nand2Tetris%25E3%2581%25AE%25E3%2582%25A2%25E3%2582%25BB%25E3%2583%25B3%25E3%2583%2596%25E3%2583%25A9%25286%25E7%25AB%25A0%2529%25E3%2582%2592Python%25E3%2581%25A7%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:RyotaroAbe%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVkYzQ0OGY0OWMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>RyotaroAbe</dc:creator></item><item><title><![CDATA[Neo4jとPythonで始めるグラフデータベース入門]]></title><description><![CDATA[
+ Neo4jとPythonで始めるグラフデータベース入門
+今回は、Neo4jグラフデータベースをPythonから操作する方法について、実践的なチュートリアルを通じて解説していきます。
+
+ はじめに
+
+ グラフデータベースって何？
+従来のリレーショナルデータベース（RDB）では、データを表（テーブル）で管理していましたが、グラフデータベースでは、データを「ノード」と「関係」として管理します。これにより、複雑な関係性を持つデータを直感的に表現できます。
+
+ Neo4jの特徴
+Neo4jは人気のあるグラフデータベースの1つで、以下のような特徴があります：
+
+直感的なクエリ言語（Cypher）...]]></description><link>https://zenn.dev/jockrock95/articles/668bf026318814</link><guid isPermaLink="true">https://zenn.dev/jockrock95/articles/668bf026318814</guid><pubDate>Fri, 07 Feb 2025 13:25:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--RbsK_kQY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Neo4j%25E3%2581%25A8Python%25E3%2581%25A7%25E5%25A7%258B%25E3%2582%2581%25E3%2582%258B%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%2595%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%2599%25E3%2583%25BC%25E3%2582%25B9%25E5%2585%25A5%25E9%2596%2580%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ooo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVjYjViY2Q1YmIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ooo</dc:creator></item><item><title><![CDATA[PythonでGoogle風の検索クエリをSQLにトランスパイル]]></title><description><![CDATA[streamlitなどでWEBアプリを作る際に検索フォームを導入したい。
+検索フォームでは慣れ親しんだGoogle風の検索演算子が使えると便利だと思った。
+例えば、以下のように検索できると良い。
+hoge
+hoge OR foo bar
+hoge OR (foo bar)
+abc -def
+abc -(def OR GHI)
+検索クエリからSQLで使用する条件式を生成するには、まず検索クエリをAST(ツリー)に変換して加工しやすくして、そのツリーをSQL条件式にトランスパイルするのが良さそうだった。
+変換のイメージとしては、「検索クエリ(文字列) → AST → SQL条件式(文字列)」...]]></description><link>https://zenn.dev/watanany/articles/google_query_pyparsing</link><guid isPermaLink="true">https://zenn.dev/watanany/articles/google_query_pyparsing</guid><pubDate>Fri, 07 Feb 2025 09:38:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_wbdrgjx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A7Google%25E9%25A2%25A8%25E3%2581%25AE%25E6%25A4%259C%25E7%25B4%25A2%25E3%2582%25AF%25E3%2582%25A8%25E3%2583%25AA%25E3%2582%2592SQL%25E3%2581%25AB%25E3%2583%2588%25E3%2583%25A9%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2591%25E3%2582%25A4%25E3%2583%25AB%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%25AF%25E3%2582%25BF%25E3%2583%258A%25E3%2583%2599%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzllOTFiZWRmYmMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ワタナベ</dc:creator></item><item><title><![CDATA[decoder onlyのデータセットに関して]]></title><description><![CDATA[
+ 学習方法
+
+pretrain(事前学習)
+インストラクションチューニング
+
+
+ CausalLMの前提
+
+CausalLM modelsの場合、labels を 質問応答モデルのように考えてはいけない。
+
+
+代わりに、labels と input_ids は形状が同じになるように作成 する必要があります。
+数学的に表すと、インデックス k の labels トークンを予測するために、input_ids のインデックス 0 から k-1 までのトークンを使用
+
+pred_token_k = model(input_ids[:k])
+
+ ポイント1
+
+損失 (loss)の算出はlabel...]]></description><link>https://zenn.dev/timoneko/articles/70fde2fa81bb5d</link><guid isPermaLink="true">https://zenn.dev/timoneko/articles/70fde2fa81bb5d</guid><pubDate>Fri, 07 Feb 2025 07:06:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hFOPjCI7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:decoder%2520only%25E3%2581%25AE%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%25BB%25E3%2583%2583%25E3%2583%2588%25E3%2581%25AB%25E9%2596%25A2%25E3%2581%2597%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:timoneko%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM4NjZlZGEzNjEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>timoneko</dc:creator></item><item><title><![CDATA[旋律の歌唱可能性の定量化に向けた歌唱の正確さの一分析]]></title><description><![CDATA[
+ はじめに
+この記事では、卒業研究の『旋律の歌唱可能性の定量化に向けた歌唱の正確さの一分析』における分析手法について簡単に述べます。
+
+ 分析手法
+
+ 時間同期
+録音データと正解データ(実験で使用した音源)において、開始地点を揃えるようにするためにnumpyのcorrelate関数を用いました。
+
+ ノイズ調整
+参加者の独自の環境で録音しているため、ノイズが入らないように振幅値を1.0で正規化し、0.01以下の音声はフィルタリングするようにしました。
+
+ 単位変換
+今回の周波数推定は単位がHzになっています。しかし、この単位では半音上がった際にHzでは約1.06倍上がるため、数値として...]]></description><link>https://zenn.dev/kahamimi/articles/3506f44dffe6ca</link><guid isPermaLink="true">https://zenn.dev/kahamimi/articles/3506f44dffe6ca</guid><pubDate>Fri, 07 Feb 2025 07:04:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8PFgM3M7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%2597%258B%25E5%25BE%258B%25E3%2581%25AE%25E6%25AD%258C%25E5%2594%25B1%25E5%258F%25AF%25E8%2583%25BD%25E6%2580%25A7%25E3%2581%25AE%25E5%25AE%259A%25E9%2587%258F%25E5%258C%2596%25E3%2581%25AB%25E5%2590%2591%25E3%2581%2591%25E3%2581%259F%25E6%25AD%258C%25E5%2594%25B1%25E3%2581%25AE%25E6%25AD%25A3%25E7%25A2%25BA%25E3%2581%2595%25E3%2581%25AE%25E4%25B8%2580%25E5%2588%2586%25E6%259E%2590%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25B7%259D%25E5%258E%259F%25E6%259C%25AA%25E6%25B3%25A2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YVV6Z1ZleUNNOVU1NExBVWNxMV9oYmFIYXVCMlU1QmtuZHV3UWo9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>川原未波</dc:creator></item><item><title><![CDATA[Pythonのコンパイラを作りたい #2 - Python AST から LLVM IR を生成するまでの概略]]></title><description><![CDATA[こんにちは。前回の記事（「#1 - 開発の背景と概要」) では、Python コードを LLVM IR にコンパイルするプロジェクトの全体像や開発のモチベーションなどを紹介しました。
+今回は、「Python AST から LLVM IR を生成するまでの概略」 についてご説明します。
+具体的には、次のようなステップを追います。
+
+Python のソースコードを ast モジュールでパースして抽象構文木 (AST) を得る
+AST の各ノードを巡回 (Visitor パターン) して「どのように LLVM IR に変換するか」を決める
+LLVM IR をテキストとして組み立て、.ll ファ...]]></description><link>https://zenn.dev/t3tra/articles/d03c8047287296</link><guid isPermaLink="true">https://zenn.dev/t3tra/articles/d03c8047287296</guid><pubDate>Fri, 07 Feb 2025 06:56:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---DWvbz_G--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25AE%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2591%25E3%2582%25A4%25E3%2583%25A9%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258A%25E3%2581%259F%25E3%2581%2584%2520%25232%2520-%2520Python%2520AST%2520%25E3%2581%258B%25E3%2582%2589%2520LLVM%2520IR%2520%25E3%2582%2592%25E7%2594%259F%25E6%2588%2590%25E3%2581%2599%25E3%2582%258B%25E3%2581%25BE%25E3%2581%25A7%25E3%2581%25AE%25E6%25A6%2582%25E7%2595%25A5%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:t3tra%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ2MDdkNzY3ZTMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>t3tra</dc:creator></item><item><title><![CDATA[スポーツデータサイト一覧(サッカー編)]]></title><description><![CDATA[スポーツデータの分析に興味があるけれど、「どのサイトを見ればいいのかわからない」「どんなデータが手に入るのか知りたい」と思ったことはありませんか？
+この記事では、サッカーデータを取得できる主要なサイトを 「リーグ公式サイト」 と 「スタッツまとめサイト」 に分類し、紹介します。試合ごとの基本スタッツを確認したい場合から、選手やチームの詳細なパフォーマンスデータを分析したい場合まで、用途に応じて活用してください！
+
+ リーグ公式サイト
+
+Jリーグ
+
+https://www.jleague.jp/stats/
+
+プレミアリーグ
+
+https://www.premierleague.com/s...]]></description><link>https://zenn.dev/genki_morph/articles/2d8133a902234e</link><guid isPermaLink="true">https://zenn.dev/genki_morph/articles/2d8133a902234e</guid><pubDate>Fri, 07 Feb 2025 06:44:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BplbX3Xr--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B9%25E3%2583%259D%25E3%2583%25BC%25E3%2583%2584%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%25B5%25E3%2582%25A4%25E3%2583%2588%25E4%25B8%2580%25E8%25A6%25A7%2528%25E3%2582%25B5%25E3%2583%2583%25E3%2582%25AB%25E3%2583%25BC%25E7%25B7%25A8%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:genki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk5ZDE2MzM0ZjkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>genki</dc:creator></item><item><title><![CDATA[Pythonのコンパイラを作りたい #1 - 開発の背景と概要]]></title><description><![CDATA[こんにちは。これから続ける(かもしれない)「Pythonのコンパイラを作りたい」では私が取り組んでいる「PythonコードをLLVM IRへ変換し、ネイティブバイナリを生成する」プロジェクト pyc のあれこれをご紹介します。
+https://github.com/t3tra-dev/pyc
+初回のこの記事では、開発の背景・モチベーションや全体像など、「なぜわざわざPythonのコンパイラを作るのか？」という部分をざっくりとお話ししようと思います。
+
+ 1. Pythonコンパイラを作る理由
+
+ 1-1. なぜPythonをコンパイルする必要があるのか？
+Pythonはとても書きやすく、...]]></description><link>https://zenn.dev/t3tra/articles/056b406cb688da</link><guid isPermaLink="true">https://zenn.dev/t3tra/articles/056b406cb688da</guid><pubDate>Fri, 07 Feb 2025 06:34:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Ad2lXYQj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25AE%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2591%25E3%2582%25A4%25E3%2583%25A9%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258A%25E3%2581%259F%25E3%2581%2584%2520%25231%2520-%2520%25E9%2596%258B%25E7%2599%25BA%25E3%2581%25AE%25E8%2583%258C%25E6%2599%25AF%25E3%2581%25A8%25E6%25A6%2582%25E8%25A6%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:t3tra%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ2MDdkNzY3ZTMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>t3tra</dc:creator></item><item><title><![CDATA[【初心者向け】Python Numpy 二次元配列の指定（スライシング）]]></title><description><![CDATA[Pythonの数値計算ライブラリNumpyは、多次元配列を効率的に扱うための強力なツールです。特に、二次元配列（行列）の操作は、データ分析や機械学習において頻繁に行われます。
+本記事では、Numpyの二次元配列における要素の指定（スライシング）に焦点を当て、様々なテクニックを具体的なコード例を交えながら解説します。
+
+ 基本的なスライシング
+まずは、基本的なスライシングの方法から見ていきましょう。
+# 2次元配列の指定
+import numpy as np
+a_list = np.arange(0, 12).reshape(3,4)
+a_list
+array([[ 0,  1,  2, ...]]></description><link>https://zenn.dev/yogurt/articles/ada71fa5638321</link><guid isPermaLink="true">https://zenn.dev/yogurt/articles/ada71fa5638321</guid><pubDate>Fri, 07 Feb 2025 06:28:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_EQYXeSy--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E5%2590%2591%25E3%2581%2591%25E3%2580%2591Python%2520Numpy%2520%25E4%25BA%258C%25E6%25AC%25A1%25E5%2585%2583%25E9%2585%258D%25E5%2588%2597%25E3%2581%25AE%25E6%258C%2587%25E5%25AE%259A%25EF%25BC%2588%25E3%2582%25B9%25E3%2583%25A9%25E3%2582%25A4%25E3%2582%25B7%25E3%2583%25B3%25E3%2582%25B0%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%25A8%25E3%2583%25BC%25E3%2582%25B0%25E3%2583%25AB%25E3%2583%2588%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzViZmFiYWU4NDUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ヨーグルト</dc:creator></item><item><title><![CDATA[【学習ログ】Pythonを使ってJSONデータをExcelへ自動変換]]></title><description><![CDATA[今回は、Pythonスクリプトを通じて、JSONからExcelへの変換処理について学習したので、アウトプットとして記事を共有します。
+
+ ディレクトリ構成図
+─ json_to_excel
+    ├ input
+    |   ├ sample1.json
+    |   ├ sample2.json
+    |   └ template.xlsx
+    ├ output
+    |   └output.xlsx(ない場合は自動的に作成される)
+    └ src
+        └main.py
+    ・・・
+
+ スクリプトの概要
+このスクリプトは以下の機能を提供します。
+
+指定...]]></description><link>https://zenn.dev/headwaters/articles/22efecffa7bf15</link><guid isPermaLink="true">https://zenn.dev/headwaters/articles/22efecffa7bf15</guid><pubDate>Fri, 07 Feb 2025 05:51:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--LtnYORZ8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%25AD%25A6%25E7%25BF%2592%25E3%2583%25AD%25E3%2582%25B0%25E3%2580%2591Python%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6JSON%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%2592Excel%25E3%2581%25B8%25E8%2587%25AA%25E5%258B%2595%25E5%25A4%2589%25E6%258F%259B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Yamao%2520Kodai%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZjNGExY2UxMDYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2598%25E3%2583%2583%25E3%2583%2589%25E3%2582%25A6%25E3%2582%25A9%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%25BC%25E3%2582%25B9%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS3dLeXFnYjlkS1pTb2p6Q2UweWN3Z0NLUzJ4QXBfaUlmMElSa1ZmX19xRVlLVFpRPXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yamao Kodai</dc:creator></item><item><title><![CDATA[PythonのクロージャとJavaScriptのクロージャ、実装の違い]]></title><description><![CDATA[
+ Pythonのクロージャ
+
+
+定義方法: 関数の中で別の関数を定義し、内側の関数が外側の関数の変数を参照する。
+
+def outer_function(text):
+    def inner_function():
+        print(text)
+    return inner_function
+
+closure = outer_function('Hello, Python!')
+closure()  # Output: Hello, Python!
+
+
+再代入の制限: nonlocalキーワードが必要。
+
+def outer_function(count):
+    ...]]></description><link>https://zenn.dev/pypypymi/articles/b683b56f2c726b</link><guid isPermaLink="true">https://zenn.dev/pypypymi/articles/b683b56f2c726b</guid><pubDate>Fri, 07 Feb 2025 03:35:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hw1eo3UH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25AE%25E3%2582%25AF%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%25A3%25E3%2581%25A8JavaScript%25E3%2581%25AE%25E3%2582%25AF%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%25A3%25E3%2580%2581%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tac-tac-go%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4WTctaEpSdWxmSTVwMGhQX3dSXzk0dzhab1pQbGtXaHd4ejB5UG1HLWM9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tac-tac-go</dc:creator></item><item><title><![CDATA[検索結果の評価プロンプト]]></title><description><![CDATA[import openai
+from openai.resources.chat.completions import ChatCompletion
+import os, json
+
+def evaluate_relevance(question: str, search_results: list) -&gt; str:
+    """
+    質問文と検索結果のリストに基づいて、各検索結果（"text" フィールド）の関連性評価を実行する関数
+
+    :param question: 質問文
+    :param search_results: [{ "idx": int, "sc...]]></description><link>https://zenn.dev/yunosuke068/articles/a051bd99bfcf6a</link><guid isPermaLink="true">https://zenn.dev/yunosuke068/articles/a051bd99bfcf6a</guid><pubDate>Thu, 06 Feb 2025 23:52:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--nfHX3YxV--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%25A4%259C%25E7%25B4%25A2%25E7%25B5%2590%25E6%259E%259C%25E3%2581%25AE%25E8%25A9%2595%25E4%25BE%25A1%25E3%2583%2597%25E3%2583%25AD%25E3%2583%25B3%25E3%2583%2597%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yunosuke%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0ZUxYNl83dzZHbUdMY2pqcTF6OFNxa2ZTQmJVWWJmcXdlcGdSczV5eEZucXc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yunosuke</dc:creator></item><item><title><![CDATA[RAGシステム導入前に、全文検索 / セマンティック検索 / ハイブリット検索を整理してみた]]></title><description><![CDATA[
+ はじめに
+ChatGPTを活用したRAGシステムの開発案件に参画することになったので、キャッチアップしたことを記載していきます。RAG（Retrieval Augmented Generation）とは検索拡張生成のことで、社内専用GPTと言えばイメージしやすいでしょう。AIに企業独自のデータ（大量の社内ナレッジや文書、就業規則など）を学習させ、そのデータを元にAIが適宜回答します。また、外部のAIモデルがその企業独自データを学習することはないため、データ流出の心配はなく、セキュリティ面でも安心です。
+
+ 主なユースケース
+こちらが参考になります。
+https://www.softb...]]></description><link>https://zenn.dev/shuto2828/articles/5090433d38e42c</link><guid isPermaLink="true">https://zenn.dev/shuto2828/articles/5090433d38e42c</guid><pubDate>Thu, 06 Feb 2025 23:34:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--eD6J1IN4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:RAG%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%25E5%25B0%258E%25E5%2585%25A5%25E5%2589%258D%25E3%2581%25AB%25E3%2580%2581%25E5%2585%25A8%25E6%2596%2587%25E6%25A4%259C%25E7%25B4%25A2%2520%252F%2520%25E3%2582%25BB%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2586%25E3%2582%25A3%25E3%2583%2583%25E3%2582%25AF%25E6%25A4%259C%25E7%25B4%25A2%2520%252F%2520%25E3%2583%258F%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25AA%25E3%2583%2583%25E3%2583%2588%25E6%25A4%259C%25E7%25B4%25A2%25E3%2582%2592%25E6%2595%25B4%25E7%2590%2586%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2597%25E3%2582%2585%25E3%2583%25BC%25E3%2581%25A8%25EF%25BD%259C%25E3%2583%2595%25E3%2583%25AA%25E3%2583%25BC%25E3%2583%25A9%25E3%2583%25B3%25E3%2582%25B9%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNlMWJmNjg1NTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>しゅーと｜フリーランスエンジニア</dc:creator></item></channel></rss>
