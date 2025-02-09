@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「JavaScript」のフィード]]></title><description><![CDATA[Zennのトピック「JavaScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/javascript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/64acd76870.png</url><title>Zennの「JavaScript」のフィード</title><link>https://zenn.dev/topics/javascript</link></image><generator>zenn.dev</generator><lastBuildDate>Sun, 09 Feb 2025 10:36:24 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/javascript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Tidy First? 第I部をJavaScriptでまとめる]]></title><description><![CDATA[今回は Tidy First? の例をJavaScriptに置き換えつつ、簡潔に整理したいと思います。
+!
+自身の備忘録としてかなり省略 &amp; 独自解釈しているので、本を読むことをお勧めします。
+
+https://www.oreilly.co.jp/books/9784814400911/
+
+ 関連記事
+https://zenn.dev/koda_momo/articles/4c5ea920ebeb29
+
+ 全体
+リファクタリング(整頓)をいつすべきか？どうすべきか？という内容。
+
+ 第I部 整頓
+コードを具体的にどう書くべきか？について
+
+ 1章 ガード節
+ifはネストしないでr...]]></description><link>https://zenn.dev/koda_momo/articles/c2fde8ea7260e3</link><guid isPermaLink="true">https://zenn.dev/koda_momo/articles/c2fde8ea7260e3</guid><pubDate>Sun, 09 Feb 2025 10:01:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--X88oT3TR--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Tidy%2520First%253F%2520%25E7%25AC%25ACI%25E9%2583%25A8%25E3%2582%2592JavaScript%25E3%2581%25A7%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:koda_momo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE2NDQ3YWVkOGIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>koda_momo</dc:creator></item><item><title><![CDATA[kintoneアプリの一覧画面をVue3＋Quasarを使って表示]]></title><description><![CDATA[今度はVue3＋Quasarを使ってkintoneの一覧画面を表示したいと思います。
+Vuetify3のロードマップをみると開発が遅れているという感じなのと、Vuetify3だと表示の崩れが大きいのでこちらも作成してみました。
+!
+QuasarのリセットCSSもそれなりに強力で、若干kintoneの表示が崩れます、ご注意ください！
+
+
+ 1. 利用環境
+以下の環境で動作しています。
+
+kintone … クラウド最新版（2025年2月時点）
+Vue3 … バージョン3.5.13
+Quasar … バージョン2.17.7
+
+
+ 2. 用意するもの
+
+ 2-1. 一覧画面を作成
+アプリ管理　...]]></description><link>https://zenn.dev/nori_suke/articles/6b51d4da14b7e9</link><guid isPermaLink="true">https://zenn.dev/nori_suke/articles/6b51d4da14b7e9</guid><pubDate>Sun, 09 Feb 2025 09:22:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--gySuyV7r--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:kintone%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2581%25AE%25E4%25B8%2580%25E8%25A6%25A7%25E7%2594%25BB%25E9%259D%25A2%25E3%2582%2592Vue3%25EF%25BC%258BQuasar%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E8%25A1%25A8%25E7%25A4%25BA%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%25B5%25B7%25E8%258B%2594%25E5%258A%25A9%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhlZDRmZjExNzcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>海苔助</dc:creator></item><item><title><![CDATA[JSのズッコケポイントPromiseを作ってみて理解してみる]]></title><description><![CDATA[
+ 概要
+JavaScriptにおけるPromiseって全然何やってるかわからなくないですか？（私だけです・・・？）
+こうやって動くもんだからこうやって書くんだよ！と学びたての頃教えられてほーんそうかといった具合で今の今まで来てしまったのですが、やはりちゃんと理解していないと複雑なことをやろうとすると詰まるわけで・・・ということなので簡易的にPromiseを作ってみて大体こんなことやってんだ、
+だからそういう動きになるんだを見ていこうかなと思います！（Promiseに困っている同士を助けられたらなと・・・！）
+
+ 学べること
+今回の自作Promiseで学べることとしては
+
+意外と処理自体...]]></description><link>https://zenn.dev/koakichi/articles/af15ad6e6fbdaf</link><guid isPermaLink="true">https://zenn.dev/koakichi/articles/af15ad6e6fbdaf</guid><pubDate>Sun, 09 Feb 2025 07:45:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9ONlbX_a--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JS%25E3%2581%25AE%25E3%2582%25BA%25E3%2583%2583%25E3%2582%25B3%25E3%2582%25B1%25E3%2583%259D%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2588Promise%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%25A6%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:koakichi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2YzZGIyYzA0MmQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>koakichi</dc:creator></item><item><title><![CDATA[ExpressのPOSTメソッド内で非同期処理の必要な外部APIを呼び出す方法]]></title><description><![CDATA[
+ はじめに
+私は現在Node.jsの勉強の一環として、Notionページの内容をWebページ表示できるようなものを作成しています。その中でつまづいたExpressのPOSTメソッドの中で非同期処理の必要な外部APIが呼べない点を回避する方法についてまとめたいと思います。NotionAPIを使用していて同じく非同期処理で詰まった人の参考にしていただけたら幸いです。
+
+ 【やりたいこと】
+reqで受け取ったIDをもとにNotionのAPIを操作し、データの取得をしたい。
+app.post("/test",(req,res) =&gt; {
+    var database_id = req...]]></description><link>https://zenn.dev/chibakawamura/articles/c9930e3ad3dabc</link><guid isPermaLink="true">https://zenn.dev/chibakawamura/articles/c9930e3ad3dabc</guid><pubDate>Sun, 09 Feb 2025 03:18:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wmjjYjQo--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Express%25E3%2581%25AEPOST%25E3%2583%25A1%25E3%2582%25BD%25E3%2583%2583%25E3%2583%2589%25E5%2586%2585%25E3%2581%25A7%25E9%259D%259E%25E5%2590%258C%25E6%259C%259F%25E5%2587%25A6%25E7%2590%2586%25E3%2581%25AE%25E5%25BF%2585%25E8%25A6%2581%25E3%2581%25AA%25E5%25A4%2596%25E9%2583%25A8API%25E3%2582%2592%25E5%2591%25BC%25E3%2581%25B3%25E5%2587%25BA%25E3%2581%2599%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kawamura%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RhNTA2ZDU0OTcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kawamura</dc:creator></item><item><title><![CDATA[【JS】クイズで再確認するimport/exportの挙動 ～ インポートされたファイルは全体が実行されるよ]]></title><description><![CDATA[JavaScript (ECMAScript) のモジュールシステムにおける import / export の挙動について、意外と理解していないかもしれないポイントをクイズ形式で確認してみましょう！
+わかっている人にとっては当たり前の話ですが、自分もふとどうだったっけ？となることがあるので、再確認しておきます。
+（記事を書き始めたときは第 1 問に関してだけ書くつもりだったので、他の 2 つはおまけみたいな感じです）
+記事タイトルや見出しにめちゃめちゃヒントを書いていますが、あえてです。クイズを解くことよりも挙動を把握してもらうことが目的なので。
+動作確認環境： Node.js v20...]]></description><link>https://zenn.dev/kagan/articles/js-module-import-export</link><guid isPermaLink="true">https://zenn.dev/kagan/articles/js-module-import-export</guid><pubDate>Sat, 08 Feb 2025 14:33:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5Tx3hWfT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590JS%25E3%2580%2591%25E3%2582%25AF%25E3%2582%25A4%25E3%2582%25BA%25E3%2581%25A7%25E5%2586%258D%25E7%25A2%25BA%25E8%25AA%258D%25E3%2581%2599%25E3%2582%258Bimport%252Fexport%25E3%2581%25AE%25E6%258C%2599%25E5%258B%2595%2520%25EF%25BD%259E%2520%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%259D%25E3%2583%25BC%25E3%2583%2588%25E3%2581%2595%25E3%2582%258C%25E3%2581%259F%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2581%25AF%25E5%2585%25A8%25E4%25BD%2593%25E3%2581%258C%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%2595%25E3%2582%258C%25E3%2582%258B%25E3%2582%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258B%25E3%2581%258C%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pxRzhkLXVXenp5SlJteDF3NU9tcE9KZjdkNHFHUXo5ZFowNy0wNmc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>かがん</dc:creator></item><item><title><![CDATA[JS演習　配列のメソッドとプロトタイプ　★1～4]]></title><description><![CDATA[初めまして。今回は配列を上手く使えるようになるための問題です。じゃあ頑張ってね。
+
+ for文で足し算　★☆☆☆☆
+sumという、配列の合計を出すメソッドを作ってください！
+for文で合計を出した後はしっかり値を返してくださいね。
+let arr = [4, 7, 6, 9];
+arr.sum = () =&gt; {
+    // arrの合計を返す。
+};
+console.log(arr.sum());// &gt; 26
+ヒント　for文の使い方
+n回処理を繰り返す文はこう書きます。
+for (let cnt = 0; cnt &lt; 回数; cnt++) {
+    // 繰り...]]></description><link>https://zenn.dev/javascript/articles/cf7ca0de0fe013</link><guid isPermaLink="true">https://zenn.dev/javascript/articles/cf7ca0de0fe013</guid><pubDate>Sat, 08 Feb 2025 11:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--v_yM6s1i--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JS%25E6%25BC%2594%25E7%25BF%2592%25E3%2580%2580%25E9%2585%258D%25E5%2588%2597%25E3%2581%25AE%25E3%2583%25A1%25E3%2582%25BD%25E3%2583%2583%25E3%2583%2589%25E3%2581%25A8%25E3%2583%2597%25E3%2583%25AD%25E3%2583%2588%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%2597%25E3%2580%2580%25E2%2598%25851%25EF%25BD%259E4%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AD%25E3%2581%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RmMjIwOGM5NWIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ねこ</dc:creator></item><item><title><![CDATA[【JS/TS】Javascript/Typescriptで`null`や`undefined`撲滅！？]]></title><description><![CDATA[
+ はじめに
+どもどもてるし〜です。
+最近Rustを勉強し始めました。
+今までや意識してなかったことや新しい知識を取得できとても有意義な時間を過ごしています。
+Rustのドキュメントを日本語訳したものを現在読んでいます。
+https://doc.rust-jp.rs/book-ja/
+enumの単元を読んでいるときに以下の言葉が出てきました。
+"Null References: The Billion Dollar Mistake"
+私はこの言葉にすごく興味を持ちました。
+今回はこの言葉はいったいどういう意味をなのか？
+そして、JSやTSにどう活かしていく？
+といった記事になります。
+
+...]]></description><link>https://zenn.dev/terusi/articles/abd692e1c2df69</link><guid isPermaLink="true">https://zenn.dev/terusi/articles/abd692e1c2df69</guid><pubDate>Sat, 08 Feb 2025 09:22:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--M2fm36rE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590JS%252FTS%25E3%2580%2591Javascript%252FTypescript%25E3%2581%25A7%2560null%2560%25E3%2582%2584%2560undefined%2560%25E6%2592%25B2%25E6%25BB%2585%25EF%25BC%2581%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A6%25E3%2582%258B%25E3%2581%2597%25E3%2580%259C%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRlM2M5MzkyNjguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>てるし〜</dc:creator></item><item><title><![CDATA[よくわからない「use～」編]]></title><description><![CDATA[
+ 想定読者
+Reactを勉強中で、use～ってつくものをたくさんimport文で書くけどこれってなんなんだ？の人向けです。
+HTML＆CSSを学んだ後、静的ではなく動的なWebサイトを作りたくなりJavaScriptやTypeScriptを学び始めた人にとってReactへの挑戦心が生まれるようなより良い記事になりますように。
+
+ use～のご紹介
+ReactのWebサイトのフックの欄を見たところ、useから始まるものが複数あることが確認できます。（こんなにあると思わなくて、useStateとuseEffectだけ解説するつもりでした...)しかしここはめげずに全部の特徴を調べてコード付...]]></description><link>https://zenn.dev/ysouth/articles/aafe912229a71d</link><guid isPermaLink="true">https://zenn.dev/ysouth/articles/aafe912229a71d</guid><pubDate>Sat, 08 Feb 2025 08:34:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--XOJBhTnr--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%2588%25E3%2581%258F%25E3%2582%258F%25E3%2581%258B%25E3%2582%2589%25E3%2581%25AA%25E3%2581%2584%25E3%2580%258Cuse%25EF%25BD%259E%25E3%2580%258D%25E7%25B7%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:1m4nim%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FlODQ3ZjkzMzYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>1m4nim</dc:creator></item><item><title><![CDATA[PythonとJavaScriptで複数文字を一気に置換したいとき]]></title><description><![CDATA[
+ PythonとJavaScriptでの文字置換の便利な方法
+例えば、aを3に、eを2に、iを1に書き換えたい場合、PythonとJavaScriptでそれぞれ方法を記述。一番簡単な方法でいえば replace を何回も使えば実装可能ではあるが、それだとコード量が多くなってしまうので違う方法を考えた。
+
+ Python
+Pythonでは、translate()メソッドとstr.maketrans()を使って、一度に複数の文字を置換することができる。
+text = "apple pie"
+
+# 置換パターンを辞書で定義
+replacements = str.maketrans({
+   ...]]></description><link>https://zenn.dev/pypypymi/articles/725dfd9e1a5a3f</link><guid isPermaLink="true">https://zenn.dev/pypypymi/articles/725dfd9e1a5a3f</guid><pubDate>Sat, 08 Feb 2025 02:51:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dIysRGIf--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A8JavaScript%25E3%2581%25A7%25E8%25A4%2587%25E6%2595%25B0%25E6%2596%2587%25E5%25AD%2597%25E3%2582%2592%25E4%25B8%2580%25E6%25B0%2597%25E3%2581%25AB%25E7%25BD%25AE%25E6%258F%259B%25E3%2581%2597%25E3%2581%259F%25E3%2581%2584%25E3%2581%25A8%25E3%2581%258D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tac-tac-go%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4WTctaEpSdWxmSTVwMGhQX3dSXzk0dzhab1pQbGtXaHd4ejB5UG1HLWM9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tac-tac-go</dc:creator></item><item><title><![CDATA[若干わかった気になるJavaScriptのクロージャ]]></title><description><![CDATA[
+ 概要
+クロージャってわかりづらいですよね
+仕事中とかに出てきて？しか思い浮かばなかったかつ、よく、クロージャの説明に
+「実行環境と関数を合体したものを1つに閉じ込めたものをクロージャと呼ぶ、関数自体のことをエンクロージャと呼ぶ」のような定義が書かれていますが、基本頭が回っていない私からするとこの説明では何もピンときませんでした・・・
+なので、一旦簡潔な例でクロージャとは何なのかを何となく理解していこうというのが今回の目的です！
+
+ じゃあ結局何なんなのよクロージャって
+一言で言うと、「関数と一緒に使いたい変数をまとめて管理しようねー」といった感じかなと思います！
+説明する上で、数値を...]]></description><link>https://zenn.dev/koakichi/articles/2ec831cde2d180</link><guid isPermaLink="true">https://zenn.dev/koakichi/articles/2ec831cde2d180</guid><pubDate>Sat, 08 Feb 2025 01:45:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Ew9mLtnA--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%258B%25A5%25E5%25B9%25B2%25E3%2582%258F%25E3%2581%258B%25E3%2581%25A3%25E3%2581%259F%25E6%25B0%2597%25E3%2581%25AB%25E3%2581%25AA%25E3%2582%258BJavaScript%25E3%2581%25AE%25E3%2582%25AF%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%25A3%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:koakichi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2YzZGIyYzA0MmQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>koakichi</dc:creator></item><item><title><![CDATA[GASをモダンな環境で開発したい！！]]></title><description><![CDATA[
+ 何がやりたいの？
+GASを普通に開発すると、GASが用意したブラウザ上の専用のエディタを使う必要がある。簡単な作業をするにはさほど問題は発生しないが、ある程度規模があるものを作ろうとすると結構辛い。なので、中規模程度の開発を想定したGAS開発環境を作成してみた。
+
+ 説明しない事
+
+GASにおけるコードの書き方
+JavascriptやTypescriptの解説
+各種ツールの使い方
+
+
+ どんな事をしたの？
+
+専用エディタじゃなくてVSCodeで開発できるようにした
+JavaScriptだと辛いのでTypeScriptを使用できるようにした
+モジュール化できるようにした。
+
+
+ 御託は...]]></description><link>https://zenn.dev/manntera/articles/5dd2590ce65937</link><guid isPermaLink="true">https://zenn.dev/manntera/articles/5dd2590ce65937</guid><pubDate>Fri, 07 Feb 2025 20:57:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dKD-X9xB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:GAS%25E3%2582%2592%25E3%2583%25A2%25E3%2583%2580%25E3%2583%25B3%25E3%2581%25AA%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25A7%25E9%2596%258B%25E7%2599%25BA%25E3%2581%2597%25E3%2581%259F%25E3%2581%2584%25EF%25BC%2581%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25BE%25E3%2582%2593%25E3%2581%25A6%25E3%2582%2589%25E3%2582%25B9%25E3%2582%25BF%25E3%2582%25B8%25E3%2582%25AA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc1NWJmOTI0MDcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>まんてらスタジオ</dc:creator></item><item><title><![CDATA[Web Componentsで作る、Radix UIライクなAccordionコンポーネント]]></title><description><![CDATA[
+ はじめに
+最近のWebフロントエンド開発はshadcn/ui（中身の大部分はRadix UI）やreact-ariaなどのHeadlessUIコンポーネントを利用し、より宣言的で再利用性の高いUI構築が主流になってきました。
+今回は、HeadlessUIの代表格であるRadix UIのAccordionコンポーネントにインスパイアされたコンポーネントを、Web Componentsを使って自作してみようと思います。
+Web Componentsの基本的な概念から解説しつつ、段階的にAccordionを構築していく過程を説明します。
+
+ Web Componentsとは？
+Web Co...]]></description><link>https://zenn.dev/kshr/articles/ae186cddf0c7a9</link><guid isPermaLink="true">https://zenn.dev/kshr/articles/ae186cddf0c7a9</guid><pubDate>Fri, 07 Feb 2025 17:05:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vZ4E42CD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Web%2520Components%25E3%2581%25A7%25E4%25BD%259C%25E3%2582%258B%25E3%2580%2581Radix%2520UI%25E3%2583%25A9%25E3%2582%25A4%25E3%2582%25AF%25E3%2581%25AAAccordion%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%259D%25E3%2583%25BC%25E3%2583%258D%25E3%2583%25B3%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:_H_R_%25E2%2593%25BF%25E1%25B4%25A5%25E2%2593%25BF%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFUWEFKeGdZMGlDYkVyeUp3cml1OVROb3VYUktXM2NxWk5COFM2QjZnVVQ9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>_H_R_⓿ᴥ⓿</dc:creator></item><item><title><![CDATA[漢は黙ってhtml contenteditable]]></title><description><![CDATA[
+ はじめに
+ブラウザで動くHTML1ライナーテキストエディタ作ったのでコピペ＆ブクマして使ってみてください
+
+ コード
+data:text/html,&lt;html contenteditable&gt;&lt;script&gt;window.addEventListener("beforeunload",(e)=&gt;{document.body.innerText.length&gt;0&amp;&amp;(e.preventDefault(),e.returnValue="")})&lt;/script&gt;&lt;/html&gt;
+]]></description><link>https://zenn.dev/koudaiishigame/articles/ae83ff26919c99</link><guid isPermaLink="true">https://zenn.dev/koudaiishigame/articles/ae83ff26919c99</guid><pubDate>Fri, 07 Feb 2025 13:38:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5qX_6bSh--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%25BC%25A2%25E3%2581%25AF%25E9%25BB%2599%25E3%2581%25A3%25E3%2581%25A6html%2520contenteditable%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258B%25E3%2582%2581%25E3%2581%25BD%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JjY2FhMGUwODcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>かめぽん</dc:creator></item><item><title><![CDATA[Bun で HTML をライブリロードする]]></title><description><![CDATA[
+ tl;dr
+bun-html-live-reload というBunでライブリロードできるライブラリを作ったので、コードが動く仕組みを簡略化してこの記事に書いてます。
+一言で説明すると、Bunサーバーがホットリロードされるたびに、Server Sent Events (SSE) を送信してブラウザを更新してます。
+
+ 何が不満なのか
+Bunの組み込みHTTPサーバーを使うと簡単にウェブサイトが作れちゃいます。
+// server.ts
+Bun.serve({
+  fetch: () =&gt; {
+    return new Response("&lt;h1&gt;Hello, Wo...]]></description><link>https://zenn.dev/aabccd021/articles/b951f09228df8f</link><guid isPermaLink="true">https://zenn.dev/aabccd021/articles/b951f09228df8f</guid><pubDate>Fri, 07 Feb 2025 07:13:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---cocvYhO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Bun%2520%25E3%2581%25A7%2520HTML%2520%25E3%2582%2592%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25AA%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2589%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:aabccd021%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dzZElPeU1kX1NNc01zYXlJTFJWMW8xc3dxWVFKaHZQOXJETktUSlE9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>aabccd021</dc:creator></item><item><title><![CDATA[PythonのクロージャとJavaScriptのクロージャ、実装の違い]]></title><description><![CDATA[
+ Pythonのクロージャ
+
+
+定義方法: 関数の中で別の関数を定義し、内側の関数が外側の関数の変数を参照する。
+
+def outer_function(text):
+    def inner_function():
+        print(text)
+    return inner_function
+
+closure = outer_function('Hello, Python!')
+closure()  # Output: Hello, Python!
+
+
+再代入の制限: nonlocalキーワードが必要。
+
+def outer_function(count):
+    ...]]></description><link>https://zenn.dev/pypypymi/articles/b683b56f2c726b</link><guid isPermaLink="true">https://zenn.dev/pypypymi/articles/b683b56f2c726b</guid><pubDate>Fri, 07 Feb 2025 03:35:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hw1eo3UH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25AE%25E3%2582%25AF%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%25A3%25E3%2581%25A8JavaScript%25E3%2581%25AE%25E3%2582%25AF%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%25A3%25E3%2580%2581%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tac-tac-go%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4WTctaEpSdWxmSTVwMGhQX3dSXzk0dzhab1pQbGtXaHd4ejB5UG1HLWM9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tac-tac-go</dc:creator></item><item><title><![CDATA[JavaScriptのスコープ]]></title><description><![CDATA[
+ スコープとは
+変数や関数が参照・使用できる範囲のこと。
+
+ スコープの種類
+
+ グローバルスコープ
+どの関数やブロックにも属さないトップレベルのスコープ。
+関数やブロック外で宣言するとグローバルスコープとなる。
+スクリプト内のどこからでもアクセス可能。
+// グローバルスコープの変数
+const a = 10;
+
+// グローバルスコープの関数
+function example() {
+    console.log(a); // 10
+}
+example();
+
+ ローカルスコープ（関数スコープ）
+宣言された関数内のみでアクセス可能なスコープ。
+関数（function）内で宣言する...]]></description><link>https://zenn.dev/uniii/articles/95612bab1c4894</link><guid isPermaLink="true">https://zenn.dev/uniii/articles/95612bab1c4894</guid><pubDate>Fri, 07 Feb 2025 03:27:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--io87Q-97--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25E3%2581%25AE%25E3%2582%25B9%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2597%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:uuuunnnnii%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2g1X1FuclVoSlBOTVU5em0wTV9YTEdFN0dwQmF0b0VyRGNlUUpaPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>uuuunnnnii</dc:creator></item><item><title><![CDATA[[CodePen解説] Blur Card with Parallax]]></title><description><![CDATA[CodePen では毎年、多くのクリエイターが公開するHTML/CSS/JSの作品が注目を集めます。
+そのうち、2024年に特に人気の高かったHTMLスニペットをランキング形式でまとめた The Most Hearted of 2024 の作品を順番に解説していきます。
+どの作品も個性的なアイデアや美しい表現が詰まっており、コードのポイントを押さえるだけでなく、実際に自分のプロジェクトへ活用するヒントにもつながるはずです。
+最初のスニペットはこちら：HomeBlur Card with Parallax
+
+ 概要
+
+作りたいものは、「大阪の美しい景色を背景に、大きく"OSAKA"と文字が...]]></description><link>https://zenn.dev/tkybpp/articles/bf352a29ca0ddb</link><guid isPermaLink="true">https://zenn.dev/tkybpp/articles/bf352a29ca0ddb</guid><pubDate>Thu, 06 Feb 2025 23:30:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ms7kjQz5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BCodePen%25E8%25A7%25A3%25E8%25AA%25AC%255D%2520Blur%2520Card%2520with%2520Parallax%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tkybpp%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzMxOTYyY2Y1OTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tkybpp</dc:creator></item><item><title><![CDATA[JSでの主な基準のサイズ・要素のサイズと座標・ポインターの座標取得まとめメモ]]></title><description><![CDATA[
+要素のサイズやポインターの座標など色々プロパティがありますが、その時々に調べて使用していました。しかしその作業が非常に煩わしいので、いい加減全体的にどうなのか理解するため&amp;見返し用に纏めたメモです。
+
+ 前提
+Google Chromeで値確認。この記事で使用する単語の定義は以下。
+
+ドキュメント
+
+
+margin,border,paddingの設定がないHTMLHtmlElement
+
+
+document.documentElementの内容が上記であると見なす
+
+
+コンテンツ全体
+
+HTMLBodyElement
+
+document.bodyの内容が上記であると見なす
+
+
+...]]></description><link>https://zenn.dev/scirexs/articles/d6316a11c73ea0</link><guid isPermaLink="true">https://zenn.dev/scirexs/articles/d6316a11c73ea0</guid><pubDate>Thu, 06 Feb 2025 21:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1J7hjuIP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JS%25E3%2581%25A7%25E3%2581%25AE%25E4%25B8%25BB%25E3%2581%25AA%25E5%259F%25BA%25E6%25BA%2596%25E3%2581%25AE%25E3%2582%25B5%25E3%2582%25A4%25E3%2582%25BA%25E3%2583%25BB%25E8%25A6%2581%25E7%25B4%25A0%25E3%2581%25AE%25E3%2582%25B5%25E3%2582%25A4%25E3%2582%25BA%25E3%2581%25A8%25E5%25BA%25A7%25E6%25A8%2599%25E3%2583%25BB%25E3%2583%259D%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25BF%25E3%2583%25BC%25E3%2581%25AE%25E5%25BA%25A7%25E6%25A8%2599%25E5%258F%2596%25E5%25BE%2597%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:scirexs%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FGZFp1Y3BiazJHVGtaaklCQV9TTzVGSW55bVU0TFNuaGtlanZ3aW15OUhBPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>scirexs</dc:creator></item><item><title><![CDATA[エンジニアが知っておきたい「npm run build」の全て！]]></title><description><![CDATA[
+ エンジニアが知っておきたい「npm run build」の全て！
+
+ はじめに
+今回は、普段何気なく実行しているnpm run buildについて、Next.js 14での実際のビルド結果を見ながら解説します。
+特に、Vercelへのデプロイ前に確認すべきポイントを重点的に説明します。
+
+ npm run buildとは？
+開発環境（localhost:3000）で作成したコードを本番環境で動作させるために必要な変換処理です。
+Next.js 14のプロジェクトでは、主に以下の処理を行います。
+
+TypeScript（v5.0以上）のコードをJavaScriptへコンパイル
+Reac...]]></description><link>https://zenn.dev/yamato_snow/articles/8bf04ca843abce</link><guid isPermaLink="true">https://zenn.dev/yamato_snow/articles/8bf04ca843abce</guid><pubDate>Thu, 06 Feb 2025 14:04:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--DNchQmNm--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%25E3%2581%258C%25E7%259F%25A5%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%258A%25E3%2581%258D%25E3%2581%259F%25E3%2581%2584%25E3%2580%258Cnpm%2520run%2520build%25E3%2580%258D%25E3%2581%25AE%25E5%2585%25A8%25E3%2581%25A6%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2584%25E3%2581%25BE%25E3%2581%25A8%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2IwM2U0NTU2MzYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>やまと</dc:creator></item><item><title><![CDATA[ヒープ領域とメモリリーク]]></title><description><![CDATA[Daily Blogging47日目
+今までメモリのことなんて気にせずに生きてきたけど、ついに気にしなければならない時が来た
+
+ ヒープ領域とは
+そもそもメモリとは、コンピュータ全体の記憶領域（RAM）を指す。
+そのメモリには2つの種類が存在する。
+
+スタック領域
+ヒープ領域
+
+両者の違いは、何を格納するのかというところと動的であるかというところ
+
+ スタック領域
+関数の戻り値やローカル変数が一時的に格納される記憶領域。
+関数が終了したタイミングや、ローカル変数のスコープを抜けたタイミングで自動で解放される。
+特徴
+
+
+サイズは固定（コンパイル時に決まる）
+基本的にプリミティブな値（数値...]]></description><link>https://zenn.dev/shoan/articles/d1ab48e3432598</link><guid isPermaLink="true">https://zenn.dev/shoan/articles/d1ab48e3432598</guid><pubDate>Thu, 06 Feb 2025 11:55:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8cvycOM5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2592%25E3%2583%25BC%25E3%2583%2597%25E9%25A0%2598%25E5%259F%259F%25E3%2581%25A8%25E3%2583%25A1%25E3%2583%25A2%25E3%2583%25AA%25E3%2583%25AA%25E3%2583%25BC%25E3%2582%25AF%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Sho%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSlpJckNTX1JkYlRYSXpVU204TmRlRGx3UG9xMWtteVhtcUV6WVdkQUxlPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Sho</dc:creator></item></channel></rss>
