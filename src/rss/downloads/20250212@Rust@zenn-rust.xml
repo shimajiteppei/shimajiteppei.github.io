@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Rust」のフィード]]></title><description><![CDATA[Zennのトピック「Rust」のRSSフィードです]]></description><link>https://zenn.dev/topics/rust</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ba09661577.png</url><title>Zennの「Rust」のフィード</title><link>https://zenn.dev/topics/rust</link></image><generator>zenn.dev</generator><lastBuildDate>Wed, 12 Feb 2025 08:48:02 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/rust/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[RustのAtomicUsize]]></title><description><![CDATA[
+ AtomicUsizeとは
+https://doc.rust-lang.org/std/sync/atomic/struct.AtomicUsize.html
+AtomicUsizeは、複数のスレッド間で安全に共有できる整数型（usize）をラップした構造体です。
+通常の変数はスレッド間で同時に読み書きするとデータ競合が起こる可能性がありますが、AtomicUsizeはアトミック操作を用いることで、こうした競合を防ぎます。
+
+ 使い方
+
+ 値の書き込み(store)
+use std::sync::atomic::{AtomicUsize, Ordering};
+
+let atomic...]]></description><link>https://zenn.dev/hakoten/articles/f8c6cbcf20e74c</link><guid isPermaLink="true">https://zenn.dev/hakoten/articles/f8c6cbcf20e74c</guid><pubDate>Tue, 11 Feb 2025 05:10:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2JIG2Cj6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_76:Rust%25E3%2581%25AEAtomicUsize%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hakotensan%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2YzNGM1MmE4MWMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hakotensan</dc:creator></item><item><title><![CDATA[【Rust】配列の繰り返し処理の借用]]></title><description><![CDATA[
+ はじめに
+Rustで、以下のようなループ処理をするとどのような結果となるでしょうか？
+結果は、println!("{:?}", numbers)で、エラーが発生します。
+理由は、numbersのループ処理で所有権がnumberに移動するからです。
+ fn main() {
+  let mut numbers = Vec::new();
+     numbers.push(1);
+     numbers.push(2);
+     numbers.push(3);
+     
+     for number in numbers {
+         println!("{}", n...]]></description><link>https://zenn.dev/devtatsu/articles/04ea745f03ac3b</link><guid isPermaLink="true">https://zenn.dev/devtatsu/articles/04ea745f03ac3b</guid><pubDate>Sun, 09 Feb 2025 10:46:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---A0GEXhk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Rust%25E3%2580%2591%25E9%2585%258D%25E5%2588%2597%25E3%2581%25AE%25E7%25B9%25B0%25E3%2582%258A%25E8%25BF%2594%25E3%2581%2597%25E5%2587%25A6%25E7%2590%2586%25E3%2581%25AE%25E5%2580%259F%25E7%2594%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25BF%25E3%2583%2584%25E3%2583%25A4%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBiYTg1MmMzNWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>タツヤ</dc:creator></item><item><title><![CDATA[ABC392:Rustで解く！問題解説]]></title><description><![CDATA[AtCoder Beginner Contest 392のA~F問題をRustで解いた際の解法をまとめました。
+
+ A問題
+問題
+https://atcoder.jp/contests/ABC392/tasks/ABC392_a
+解説
+整数列 A を昇順に並び替えたとき、条件 A_1 \times A_2 = A_3 が成り立つかを判定します。
+コード
+
+abc392a.rs
+use proconio::input;
+
+fn main() {
+    input!{
+        mut a: [usize; 3],
+    }   
+    a.sort();
+    
+    pr...]]></description><link>https://zenn.dev/nakst_hide/articles/3d0b5e238487d5</link><guid isPermaLink="true">https://zenn.dev/nakst_hide/articles/3d0b5e238487d5</guid><pubDate>Sun, 09 Feb 2025 10:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wRHQyNgM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ABC392%253ARust%25E3%2581%25A7%25E8%25A7%25A3%25E3%2581%258F%25EF%25BC%2581%25E5%2595%258F%25E9%25A1%258C%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nakahide%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YkMxNEpSQnNET01hTGcxTVRQWGNTWS1qYlNQbFRMQTN3ZU9Sdz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nakahide</dc:creator></item><item><title><![CDATA[Wikiリンクによるドキュメント記述静的サイトジェネレーター「Scraps」を作っている話]]></title><description><![CDATA[こんにちは。タイトルの通りOSSとして開発しているWikiリンクによるドキュメント記述静的サイトジェネレーター（以下、SSG）の紹介です。
+!
+Zennのスクラップ機能とは関連はありません
+
+!
+2024/02/10 追記
+コメントでの議論を受け、「Wiki向け静的サイトジェネレーター」から「Wikiリンクによるドキュメント記述静的サイトジェネレーター」へ記載を変更しております
+
+
+ Scrapsの概要
+ScrapsはMarkdownファイル上で内部リンク（Wikiリンク）を容易にドキュメント記述できるSSGです。CLIによってMarkdownファイルを元に以下のような静的サイトのファイ...]]></description><link>https://zenn.dev/boykush/articles/0b13f54335dbb7</link><guid isPermaLink="true">https://zenn.dev/boykush/articles/0b13f54335dbb7</guid><pubDate>Sun, 09 Feb 2025 06:47:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--b11ydqtY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Wiki%25E3%2583%25AA%25E3%2583%25B3%25E3%2582%25AF%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258B%25E3%2583%2589%25E3%2582%25AD%25E3%2583%25A5%25E3%2583%25A1%25E3%2583%25B3%25E3%2583%2588%25E8%25A8%2598%25E8%25BF%25B0%25E9%259D%2599%25E7%259A%2584%25E3%2582%25B5%25E3%2582%25A4%25E3%2583%2588%25E3%2582%25B8%25E3%2582%25A7%25E3%2583%258D%25E3%2583%25AC%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%25BC%25E3%2580%258CScraps%25E3%2580%258D%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%2584%25E3%2582%258B%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kush%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk2ZTI1NWVlZjQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kush</dc:creator></item><item><title><![CDATA[Rustのブロックの返り値の式で借用するとエラーになることがある(2024Editionで解決予定)]]></title><description><![CDATA[
+ これは何の記事？
+先日week in rustを読んでいたところ、The Rust 2024 Edition takes shapeに気になる記述がありました。
+
+The project is also fixing the order in which temporary expressions at the end of a block get cleaned up. Rust blocks have return values, which lets if statements be used as expressions, among other cases. But whe...]]></description><link>https://zenn.dev/hanao/articles/4c4f9d4adbc29d</link><guid isPermaLink="true">https://zenn.dev/hanao/articles/4c4f9d4adbc29d</guid><pubDate>Sun, 09 Feb 2025 06:14:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--TiYTtijm--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25AE%25E3%2583%2596%25E3%2583%25AD%25E3%2583%2583%25E3%2582%25AF%25E3%2581%25AE%25E8%25BF%2594%25E3%2582%258A%25E5%2580%25A4%25E3%2581%25AE%25E5%25BC%258F%25E3%2581%25A7%25E5%2580%259F%25E7%2594%25A8%25E3%2581%2599%25E3%2582%258B%25E3%2581%25A8%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E3%2581%25AB%25E3%2581%25AA%25E3%2582%258B%25E3%2581%2593%25E3%2581%25A8%25E3%2581%258C%25E3%2581%2582%25E3%2582%258B%25282024Edition%25E3%2581%25A7%25E8%25A7%25A3%25E6%25B1%25BA%25E4%25BA%2588%25E5%25AE%259A%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%2595%25E3%2583%25A9%25E3%2583%25AF%25E3%2583%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2IwMGJhMzVlYjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>フラワー</dc:creator></item><item><title><![CDATA[【Rust】「Ownership？所有権？何それ・・・」を解決する]]></title><description><![CDATA[
+ 所有権(Ownership)とは？
+Rustには「所有権（Ownership）」という仕組みがあります。これは、メモリ安全を保証しながらGCなしでリソース管理するためのものです。CやC++のように手動でメモリを解放するのではなく、所有権のルールに従うことで、安全なメモリ管理を実現できます。
+この概念により、Rustではコンパイル時にメモリ管理の問題を防ぐことができます。
+Rustでは、変数や関数の引数・戻り値がデータの所有者となるのが特徴です。
+一方、多くの言語（例えばRuby）では、値は特定の変数に所有されず、自由にコピーできます。
+
+ Rubyの例
+Rubyでは、同じデータを複数...]]></description><link>https://zenn.dev/tsubasa_ryuto/articles/5ffa0e63f7e8f8</link><guid isPermaLink="true">https://zenn.dev/tsubasa_ryuto/articles/5ffa0e63f7e8f8</guid><pubDate>Sat, 08 Feb 2025 16:25:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--oW75PpLM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Rust%25E3%2580%2591%25E3%2580%258COwnership%25EF%25BC%259F%25E6%2589%2580%25E6%259C%2589%25E6%25A8%25A9%25EF%25BC%259F%25E4%25BD%2595%25E3%2581%259D%25E3%2582%258C%25E3%2583%25BB%25E3%2583%25BB%25E3%2583%25BB%25E3%2580%258D%25E3%2582%2592%25E8%25A7%25A3%25E6%25B1%25BA%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:TsubasaRyuto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ3MzgwZDBlYWQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>TsubasaRyuto</dc:creator></item><item><title><![CDATA[[Rust] Ohkami の OpenAPI ドキュメント生成アプローチ]]></title><description><![CDATA[https://github.com/ohkami-rs/ohkami
+Ohkami が v0.21 から提供している OpenAPI ドキュメント生成機能がマクロに頼らない独自のアプローチをとっているので紹介します。
+
+ 具体例
+例として以下のコードを考えます。 README の openapi の例から OpenAPI 要素を抜いたもので、適当ユーザー API サーバーです。
+
+main.rs
+use ohkami::prelude::*;
+use ohkami::typed::status;
+
+#[derive(Deserialize)]
+struct CreateUser&lt;...]]></description><link>https://zenn.dev/kanal/articles/ohkami-openapi-document-generation</link><guid isPermaLink="true">https://zenn.dev/kanal/articles/ohkami-openapi-document-generation</guid><pubDate>Sat, 08 Feb 2025 13:27:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qW6pqba8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BRust%255D%2520Ohkami%2520%25E3%2581%25AE%2520OpenAPI%2520%25E3%2583%2589%25E3%2582%25AD%25E3%2583%25A5%25E3%2583%25A1%25E3%2583%25B3%25E3%2583%2588%25E7%2594%259F%25E6%2588%2590%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kanarus%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc0ZTQ5YjRjOWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kanarus</dc:creator></item><item><title><![CDATA[自作 Web Framework が AWS Lambda で動くようになった (Experimental Support)]]></title><description><![CDATA[Ohkami v0.22 を出しました。
+https://github.com/ohkami-rs/ohkami
+native な async runtime ( tokio, async-std, smol, glommio, nio ) と Cloudflare Workers ( worker ) に加えて、今回 AWS Lambda を試験的にサポートしたので紹介します。
+
+ できること
+
+Function URLs での動作
+API Gateway での動作
+呼び出しモード BUFFERED でのレスポンス
+呼び出しモード RESPONSE_STREAM でのストリーミング
+
+...]]></description><link>https://zenn.dev/kanal/articles/ohkami-on-lambda</link><guid isPermaLink="true">https://zenn.dev/kanal/articles/ohkami-on-lambda</guid><pubDate>Sat, 08 Feb 2025 08:07:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--KKJmsVDB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%2587%25AA%25E4%25BD%259C%2520Web%2520Framework%2520%25E3%2581%258C%2520AWS%2520Lambda%2520%25E3%2581%25A7%25E5%258B%2595%25E3%2581%258F%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E3%2581%25AA%25E3%2581%25A3%25E3%2581%259F%2520%2528Experimental%2520Sup...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kanarus%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc0ZTQ5YjRjOWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kanarus</dc:creator></item><item><title><![CDATA[wit-bindgen / cargo-component が生成するstructにderiveを追加する(小ネタ)]]></title><description><![CDATA[例えば以下のようなWITがあったときに
+package component:testing;
+
+world run {
+  export wasi:cli/run@0.2.0;
+  import tests;
+}
+
+interface tests {
+  record point { x: s32, y: s32 }
+  roundtrip-point: func(a: point) -&gt; point;
+}
+wit-bindgen (0.17.0) はデフォルトではこういうコードを書いてくれる。
+pub mod component {
+  pub mod testing {
+   ...]]></description><link>https://zenn.dev/tanishiking/articles/2025-02-wit-bindgen-rust</link><guid isPermaLink="true">https://zenn.dev/tanishiking/articles/2025-02-wit-bindgen-rust</guid><pubDate>Fri, 07 Feb 2025 08:18:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Y5uxrIMt--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:wit-bindgen%2520%252F%2520cargo-component%2520%25E3%2581%258C%25E7%2594%259F%25E6%2588%2590%25E3%2581%2599%25E3%2582%258Bstruct%25E3%2581%25ABderive%25E3%2582%2592%25E8%25BF%25BD%25E5%258A%25A0%25E3%2581%2599%25E3%2582%258B%2528%25E5%25B0%258F%25E3%2583%258D%25E3%2582%25BF%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tanishiking%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY2ZjcwZDg5NDguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tanishiking</dc:creator></item><item><title><![CDATA[Rustの標準ライブラリで乱数生成ができるようになるかもしれない]]></title><description><![CDATA[現在のRustの標準ライブラリには実験的なモジュールとしてstd::randomがあります。
+このモジュールには以下のアイテムが含まれています。
+
+
+DefaultRandomSource構造体
+
+Randomトレイト
+
+RandomSourceトレイト
+
+random関数
+
+RandomトレイトとRandomSourceトレイトはno_std環境でも利用できます。
+DefaultRandomSource構造体はgetrandomやProcessPrngなどのシステムの乱数生成器を表します。
+Randomトレイトは指定したデータ型の乱数を取得するためのトレイトです。
+現在はi32やu8な...]]></description><link>https://zenn.dev/sorairolake/articles/random-value-generation-in-rust-standard-library</link><guid isPermaLink="true">https://zenn.dev/sorairolake/articles/random-value-generation-in-rust-standard-library</guid><pubDate>Thu, 06 Feb 2025 02:59:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9CiB-k_v--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25AE%25E6%25A8%2599%25E6%25BA%2596%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%25E3%2581%25A7%25E4%25B9%25B1%25E6%2595%25B0%25E7%2594%259F%25E6%2588%2590%25E3%2581%258C%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258B%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E3%2581%25AA%25E3%2582%258B%25E3%2581%258B%25E3%2582%2582%25E3%2581%2597%25E3%2582%258C%25E3%2581%25AA%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:SorairoLake%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzEyZGZiOGQyM2QuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>SorairoLake</dc:creator></item><item><title><![CDATA[[Bevy] Android向けにビルドする]]></title><description><![CDATA[BevyでAndroidアプリを作成する方法がこちらです。
+適当なディレクトリで
+git clone https://github.com/NiklasEi/bevy_game_template.git
+を実行して
+cd bevy_game_template
+cargo apk run -p mobile
+を実行すると接続されているデバイスでアプリが立ち上がります。Android SDK, Android NDKのパスを設定するのを忘れないでください。
+私はAndroidしか試していませんが他にもWindows, macos, Iphone, Webを対象にビルドできるようです。
+コント...]]></description><link>https://zenn.dev/omini/articles/4fab71904a3090</link><guid isPermaLink="true">https://zenn.dev/omini/articles/4fab71904a3090</guid><pubDate>Tue, 04 Feb 2025 23:23:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--uTOp-62I--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BBevy%255D%2520Android%25E5%2590%2591%25E3%2581%2591%25E3%2581%25AB%25E3%2583%2593%25E3%2583%25AB%25E3%2583%2589%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:omini%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2Rhcmsvby5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>omini</dc:creator></item><item><title><![CDATA[Rustのドキュメント翻訳プロジェクト rust-lang-translations.org]]></title><description><![CDATA[
+ はじめに
+Rust の翻訳ドキュメントを公式にマージする取り組みをしばらくやっていますが、「やりたいんだけど現状は人手不足で無理」という形で断られることが多くなってきました。
+RustのGitHubに集まる人というのは基本的には言語開発に興味のある人たちなので、時間がたっても翻訳に割り当てられるリソースが増えることはあまり期待できません。
+そこで、公式へのマージはいったんあきらめて、それとは別に全言語の翻訳ドキュメントを集めるサイトを作ってみることにしました。
+もしこのプロジェクトに多くの人が集まって、専属のメンテナーなども確保できるようになれば、それをもって再度公式へのマージも試み...]]></description><link>https://zenn.dev/dalance/articles/288c5acc772639</link><guid isPermaLink="true">https://zenn.dev/dalance/articles/288c5acc772639</guid><pubDate>Tue, 04 Feb 2025 09:30:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Ckb0vjUo--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25AE%25E3%2583%2589%25E3%2582%25AD%25E3%2583%25A5%25E3%2583%25A1%25E3%2583%25B3%25E3%2583%2588%25E7%25BF%25BB%25E8%25A8%25B3%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%2520rust-lang-translations.org%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:dalance%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZlYzIzM2VmYTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>dalance</dc:creator></item><item><title><![CDATA[[Rust] 自作CLIツールをGitHubとcrate.ioで配布するまでの記録]]></title><description><![CDATA[
+ はじめに
+opという自作の個人的なCLIツール（元々はGo製でした）をRustで配布する為に行った記録を書きます。
+RustでCLIツールを作った時、GitHubのリリースページとcrate.ioで公開すれば、色々な人が手軽にインストールしてみることができるようになるので良いと思います。（このツールは本当に個人的なので、ちょっと私以外に使う方がおられるのか謎ですが…笑）
+このツール自体は、中々にザツなノリの開発でやってますので、記事に書いている手法はそこそこアナログです。以下のような方法でGitHubとcrate.ioでリリース配布してますので、1つの方法として参考にしてみてください...]]></description><link>https://zenn.dev/shimarisu_121/articles/1fa0c4c54ff6e5</link><guid isPermaLink="true">https://zenn.dev/shimarisu_121/articles/1fa0c4c54ff6e5</guid><pubDate>Mon, 03 Feb 2025 15:09:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--onOiszde--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BRust%255D%2520%25E8%2587%25AA%25E4%25BD%259CCLI%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%25E3%2582%2592GitHub%25E3%2581%25A8crate.io%25E3%2581%25A7%25E9%2585%258D%25E5%25B8%2583%25E3%2581%2599%25E3%2582%258B%25E3%2581%25BE%25E3%2581%25A7%25E3%2581%25AE%25E8%25A8%2598%25E9%258C%25B2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:shimarisu_121%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzUyYTA5YjFmMWQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>shimarisu_121</dc:creator></item><item><title><![CDATA[Android環境でRust製ライブラリをC/C++経由で使用する]]></title><description><![CDATA[
+ 簡単に言うと…
+Rust言語で作成したライブラリをAndroidから簡単に呼び出したい。
+
+C言語からRust製ライブラリの関数を簡単に呼び出せる
+AndroidのJava/KotlinはJNIでC/C++言語の関数を呼び出せる
+
+よって、
+この様に簡単な方法で呼び出せるのでは？と思い、実行してみた結果、呼び出せることを確認しました。
+
+ Rust言語とは
+Rust言語は、メモリの安全性を確保しやすい言語機能を持っていることからC/C++の代用として昨今Windows、Linux、Android自身を含むさまざまな場面[1] [2] [3] [4] で採用されている言語です。
+
+ な...]]></description><link>https://zenn.dev/ubiblog2/articles/36517cc91e4875</link><guid isPermaLink="true">https://zenn.dev/ubiblog2/articles/36517cc91e4875</guid><pubDate>Mon, 03 Feb 2025 05:26:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hBKKshZy--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Android%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25A7Rust%25E8%25A3%25BD%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%25E3%2582%2592C%252FC%252B%252B%25E7%25B5%258C%25E7%2594%25B1%25E3%2581%25A7%25E4%25BD%25BF%25E7%2594%25A8%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:TechSavvy_24%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ3YTVmZDAwZWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>TechSavvy_24</dc:creator></item><item><title><![CDATA[ABC391:Rustで解く！問題解説]]></title><description><![CDATA[AtCoder Beginner Contest 391のA~E問題をRustで解いた際の解法をまとめました。
+
+ A問題
+
+問題
+
+https://atcoder.jp/contests/abc391/tasks/abc391_a
+
+解説
+
+N は S に、 S は N に、 E は W に、 W は E に変換します。
+
+コード
+
+use proconio::{input, marker::Chars};
+
+fn main() {
+    input! {
+        d: Chars
+    }
+    let from_list = ['N', 'S', 'E', 'W'];...]]></description><link>https://zenn.dev/nakst_hide/articles/ee0f530867f8ba</link><guid isPermaLink="true">https://zenn.dev/nakst_hide/articles/ee0f530867f8ba</guid><pubDate>Sun, 02 Feb 2025 12:00:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--yxWwha8n--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ABC391%253ARust%25E3%2581%25A7%25E8%25A7%25A3%25E3%2581%258F%25EF%25BC%2581%25E5%2595%258F%25E9%25A1%258C%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nakahide%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YkMxNEpSQnNET01hTGcxTVRQWGNTWS1qYlNQbFRMQTN3ZU9Sdz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nakahide</dc:creator></item><item><title><![CDATA[serde::Deserializeを自分で書けるようになろう]]></title><description><![CDATA[
+ 目的
+この記事の目的は、Rust userの大半が使ったことがあるcrate, serdeのDeserializetraitを自分で実装できるようにすることです。
+Rustを使っていて、serdeもよく使っているけどあまり仕組みはわかってない人も多いのではないでしょうか。そういう方をターゲットとしてserdeの仕組みからわかりやすくDeserializeを実装する方法を解説しようと思います。
+
+ 背景
+最近、仕事で外部APIからResponseとして送られてくるJSONを構造体にデシリアライズする必要がありました。通常このような場合はserdeが提供してくれるderive macro...]]></description><link>https://zenn.dev/yosuku/articles/ffd169840b70fc</link><guid isPermaLink="true">https://zenn.dev/yosuku/articles/ffd169840b70fc</guid><pubDate>Sun, 02 Feb 2025 11:47:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--MiP8jPOq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:serde%253A%253ADeserialize%25E3%2582%2592%25E8%2587%25AA%25E5%2588%2586%25E3%2581%25A7%25E6%259B%25B8%25E3%2581%2591%25E3%2582%258B%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E3%2581%25AA%25E3%2582%258D%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yoshiki%2520Iwasa%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFUWEFKeDlrWlo1Y196UXkwaHlnMlJGdlZfTGpTeEFtaWo1VUdEZ1o3TE09czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yoshiki Iwasa</dc:creator></item><item><title><![CDATA[QRコード誤り訂正の内側を理解しよう]]></title><description><![CDATA[
+ 誤り訂正の仕組みを探ろう！
+みなさん、QRコードを使ったことがありますよね？
+スマホでピッとスキャンするあの四角いマーク。でも、QRコードが少し汚れていたり、一部が隠れていても読み取れるのはなぜでしょうか？その秘密は「誤り訂正」という魔法のような技術にあります！
+
+ 誤り訂正って何？
+誤り訂正は、QRコードの中に隠された特別な情報です。
+この情報があれば、QRコードの一部が読めなくても、元のメッセージを復元できるんです。
+まるで、友達が言った言葉の一部が聞こえなくても、前後の文脈から推測できるようなものです。
+
+ どうやって働くの？
+QRコードを作るとき、元のデータに加えて「冗長デー...]]></description><link>https://zenn.dev/rem/articles/f82f8689bdcdaa</link><guid isPermaLink="true">https://zenn.dev/rem/articles/f82f8689bdcdaa</guid><pubDate>Thu, 30 Jan 2025 22:54:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--KHSSnJwj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:QR%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E8%25AA%25A4%25E3%2582%258A%25E8%25A8%2582%25E6%25AD%25A3%25E3%2581%25AE%25E5%2586%2585%25E5%2581%25B4%25E3%2582%2592%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2597%25E3%2582%2588%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:rem%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2c3ZkdxZXZ1SjhKODktVElvZnNWOXoyT2hJLVlFR0dnTnhfS1hKQWc9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>rem</dc:creator></item><item><title><![CDATA[Rust AnalyzerがTauriのプロジェクトで動かない時の対処法]]></title><description><![CDATA[
+VSCode上でTauriのプロジェクトを開いていると、Rust Analyzerがcargo.tomlを見つけられずエラーが出ることがある
+その時はVSCodeの設定に以下を追加する
+
+{
+    "rust-analyzer.linkedProjects": [
+        "src-tauri/Cargo.toml",
+    ],
+}
+
+
+cargo.tomlのパスはVSCodeでプロジェクトを開いた時の相対パスで指定する
+
+]]></description><link>https://zenn.dev/local/articles/ec17b7b98e4be6</link><guid isPermaLink="true">https://zenn.dev/local/articles/ec17b7b98e4be6</guid><pubDate>Thu, 30 Jan 2025 02:14:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--F7Gk-etO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%2520Analyzer%25E3%2581%258CTauri%25E3%2581%25AE%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E3%2581%25A7%25E5%258B%2595%25E3%2581%258B%25E3%2581%25AA%25E3%2581%2584%25E6%2599%2582%25E3%2581%25AE%25E5%25AF%25BE%25E5%2587%25A6%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Catfish%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2QzOGQ5MDdiN2EuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Catfish</dc:creator></item><item><title><![CDATA[aws-sdk-rustを高速化する at Mac]]></title><description><![CDATA[
+ ことのはじまり
+GoとRustでaws sdkを使ってS3にアクセスしてみたところ、
+
+main.go
+package main
+
+import (
+	"context"
+	"errors"
+	"fmt"
+	"time"
+
+	"github.com/aws/aws-sdk-go-v2/config"
+	"github.com/aws/aws-sdk-go-v2/service/s3"
+	"github.com/aws/smithy-go"
+)
+
+func main() {
+	start := time.Now()
+
+	profile := "hakusai"
+	bucket := "...]]></description><link>https://zenn.dev/1hakusai1/articles/e2fbcb61fc4004</link><guid isPermaLink="true">https://zenn.dev/1hakusai1/articles/e2fbcb61fc4004</guid><pubDate>Wed, 29 Jan 2025 15:27:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--RUmeaksh--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:aws-sdk-rust%25E3%2582%2592%25E9%25AB%2598%25E9%2580%259F%25E5%258C%2596%25E3%2581%2599%25E3%2582%258B%2520at%2520Mac%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hakusai%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U1Mjk0YmM1NWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hakusai</dc:creator></item><item><title><![CDATA[_sqlx_migrations のレコードに入る checksum を自前で計算するスクリプト]]></title><description><![CDATA[
+こいつを突破したい
+
+ はじめに
+sqlx-cli でのマイグレーションを管理している _sqlx_migrations テーブルを確認すると、こんなテーブル構造をしています。
+
+_sqlx_migrations のテーブル構造
+5 番目のカラムに checksum がありますね。
+ここには 6ACD14A420A076E4F59F8D11061CF2ABE392DDE34B32A62E83E10B6C0160C9CC3B98D2381E7465C9EB37E1CC72D8EB69 といった値が入っています。
+このチェックサムの値がどのように計算されているかを調査したので、メモがてら残...]]></description><link>https://zenn.dev/levtech/articles/c98f2c5a298b2a</link><guid isPermaLink="true">https://zenn.dev/levtech/articles/c98f2c5a298b2a</guid><pubDate>Wed, 29 Jan 2025 02:50:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vOtaWAyc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:_sqlx_migrations%2520%25E3%2581%25AE%25E3%2583%25AC%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2581%25AB%25E5%2585%25A5%25E3%2582%258B%2520checksum%2520%25E3%2582%2592%25E8%2587%25AA%25E5%2589%258D%25E3%2581%25A7%25E8%25A8%2588%25E7%25AE%2597%25E3%2581%2599%25E3%2582%258B%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:seoink%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY1YzcxZDY5NDkuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%25AC%25E3%2583%2590%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E9%2596%258B%25E7%2599%25BA%25E9%2583%25A8%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhiODRiZWE5YzYuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>seoink</dc:creator></item></channel></rss>

@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Kotlin」のフィード]]></title><description><![CDATA[Zennのトピック「Kotlin」のRSSフィードです]]></description><link>https://zenn.dev/topics/kotlin</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/0913f0325d.png</url><title>Zennの「Kotlin」のフィード</title><link>https://zenn.dev/topics/kotlin</link></image><generator>zenn.dev</generator><lastBuildDate>Wed, 12 Feb 2025 09:43:56 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/kotlin/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Kotlin のオブジェクト初期化]]></title><description><![CDATA[コンストラクタとか init ブロックとかオブジェクト初期化に関するメモ。
+
+ シンプルなクラスの場合
+class Employee {}
+上記を省略しないで書くとこうなる。
+class Employee() {}
+もしくはこう。
+class Employee constructor() {}
+クラス名の右横のはプライマリコンストラクタという。
+ちなみに IntelliJ など IDE からは冗長だよ、と注意されるし省略形で実装するのがフツー。
+インスタンス化するときに new は不要。
+val employee = Employee()
+
+ 引数ありコンストラクタを持つクラスの場合
+基...]]></description><link>https://zenn.dev/junjujun/articles/a313c3bbecb733</link><guid isPermaLink="true">https://zenn.dev/junjujun/articles/a313c3bbecb733</guid><pubDate>Tue, 11 Feb 2025 05:55:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--HUhoppBX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Kotlin%2520%25E3%2581%25AE%25E3%2582%25AA%25E3%2583%2596%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E5%2588%259D%25E6%259C%259F%25E5%258C%2596%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Jun%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzEyMWU3MDRjYWUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Jun</dc:creator></item><item><title><![CDATA[Kotlin におけるワンショットと Flow の違い]]></title><description><![CDATA[この記事では、Kotlin の非同期処理手法である ワンショット（One-Shot）と Flow の違いについて解説します。  両者の特徴や利用シーン、実装例を通じて、どのようなケースでどちらを選択すべきかを理解しましょう。
+
+ ワンショット（One-Shot）とは
+ワンショットは、単一の値を返す非同期処理に適しています。
+例えば、ネットワークから 1 件のデータを取得する処理など、一度の呼び出しで結果が得られるケースに向いています。
+Kotlin では suspend 関数を用いて実装します。
+
+ ワンショットのコード例
+suspend fun fetchUserData(userId...]]></description><link>https://zenn.dev/sekies/articles/55fa1a986950a5</link><guid isPermaLink="true">https://zenn.dev/sekies/articles/55fa1a986950a5</guid><pubDate>Tue, 11 Feb 2025 04:29:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4nFXMz7A--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Kotlin%2520%25E3%2581%25AB%25E3%2581%258A%25E3%2581%2591%25E3%2582%258B%25E3%2583%25AF%25E3%2583%25B3%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%2583%25E3%2583%2588%25E3%2581%25A8%2520Flow%2520%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yosuke%2520Seki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ExN2NhMTMxNjQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yosuke Seki</dc:creator></item><item><title><![CDATA[Jetpack Compose Navigationでのルート画面判定: previousBackStackEntryの活用法]]></title><description><![CDATA[
+ Jetpack Compose Navigationにおけるルート画面の判定方法
+Jetpack Composeを使用したAndroidアプリ開発において、画面遷移の管理は非常に重要です。今回は、NavControllerのプロパティであるpreviousBackStackEntryを利用し、現在の画面がナビゲーションのルート（最初の画面）にいるかどうかを判定する方法をご紹介します。
+
+ なぜルート画面の判定が必要か？
+アプリケーションでは、画面遷移や戻るボタンの動作を適切に制御することが求められます。例えば、ルート画面では戻るボタンを非表示にするなど、状況に応じたUIの変更が必要で...]]></description><link>https://zenn.dev/sekies/articles/88dbffa1d9c076</link><guid isPermaLink="true">https://zenn.dev/sekies/articles/88dbffa1d9c076</guid><pubDate>Tue, 11 Feb 2025 02:54:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4DZhPoeZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Jetpack%2520Compose%2520Navigation%25E3%2581%25A7%25E3%2581%25AE%25E3%2583%25AB%25E3%2583%25BC%25E3%2583%2588%25E7%2594%25BB%25E9%259D%25A2%25E5%2588%25A4%25E5%25AE%259A%253A%2520previousBackStackEnt...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yosuke%2520Seki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ExN2NhMTMxNjQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yosuke Seki</dc:creator></item><item><title><![CDATA[Kotlin の ViewModel で実装する 30 秒タイマー ～途中停止にも対応～]]></title><description><![CDATA[この記事では、Kotlin の ViewModel 内で 30 秒間のカウントダウンタイマーを実装する方法について解説します。コルーチンを利用した非同期処理や、タイマーの途中停止に対応する実装例を紹介します。
+
+ 実装のポイント
+
+
+LiveData による状態管理
+タイマーの残り時間を MutableLiveData 経由で管理し、UI に通知します。
+
+
+コルーチンによる非同期処理
+viewModelScope.launch を使用して、ViewModel のライフサイクルに合わせた非同期処理を実行します。
+
+
+タイマーの途中停止
+実行中のタイマー処理を Job として保持し、必要に...]]></description><link>https://zenn.dev/sekies/articles/5a627c870585cd</link><guid isPermaLink="true">https://zenn.dev/sekies/articles/5a627c870585cd</guid><pubDate>Mon, 10 Feb 2025 05:37:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--QuyQVI6u--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Kotlin%2520%25E3%2581%25AE%2520ViewModel%2520%25E3%2581%25A7%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2599%25E3%2582%258B%252030%2520%25E7%25A7%2592%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%259E%25E3%2583%25BC%2520%25EF%25BD%259E%25E9%2580%2594%25E4%25B8%25AD%25E5%2581%259C%25E6%25AD%25A2%25E3%2581%25AB%25E3%2582%2582%25E5%25AF%25BE%25E5%25BF%259C%25EF%25BD%259E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yosuke%2520Seki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ExN2NhMTMxNjQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yosuke Seki</dc:creator></item><item><title><![CDATA[型間違いでシステムクラッシュ？Inline Value ClassとSealed Classを使いこなそう【Kotlin・実例付き】]]></title><description><![CDATA[「ある日のデプロイで、サービス全体がクラッシュした――。」
+新たなロジックをデプロイした瞬間、エラーが次々と発生。原因は、メートル (m) とフィート (ft) を取り違えたせいで、位置データが異常な数値を出し続けたことだった。
+・・・というのは架空の話ですが、実際にNASAのミッションでも同様のミスが発生したそうです。1999年、NASAの火星探査機が単位変換ミスによって予定コースを逸脱し、火星の大気圏で消滅。数百万ドルもの損害が出たそうです[1]。
+
+このように、 単位を厳密に区別しないことは、エンジニアにとって「ロケット級の危険」 なのです🚀　私たちの日常的な開発でも、異なるデータ...]]></description><link>https://zenn.dev/mtkrm/articles/8ab4baf3ddacb3</link><guid isPermaLink="true">https://zenn.dev/mtkrm/articles/8ab4baf3ddacb3</guid><pubDate>Sun, 09 Feb 2025 21:47:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3Ipn4TgH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%259E%258B%25E9%2596%2593%25E9%2581%2595%25E3%2581%2584%25E3%2581%25A7%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%25E3%2582%25AF%25E3%2583%25A9%25E3%2583%2583%25E3%2582%25B7%25E3%2583%25A5%25EF%25BC%259FInline%2520Value%2520Class%25E3%2581%25A8Sealed%2520Class%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2584%25E3%2581%2593%25E3%2581%25AA%25E3%2581%259D%25E3%2581%2586%25E3%2580%2590Kot...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kurumi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA4MTQ2NmRiMWIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kurumi</dc:creator></item><item><title><![CDATA[ktlint, detekt を利用している環境で定数のネーミングを PascalCase にするまでにやること]]></title><description><![CDATA[
+ Kotlin の定数のネーミング
+Kotlin のコーディング規約 では定数は SCREAMING_SNAKE_CASE で命名すると書いてあります。
+
+Property names﻿
+Names of constants (properties marked with const, or top-level or object val properties with no custom get function that hold deeply immutable data) should use all uppercase, underscore-separated names ...]]></description><link>https://zenn.dev/tbsten/articles/6f78a875aea0cc</link><guid isPermaLink="true">https://zenn.dev/tbsten/articles/6f78a875aea0cc</guid><pubDate>Thu, 06 Feb 2025 02:40:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--z4V8tsXh--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ktlint%252C%2520detekt%2520%25E3%2582%2592%25E5%2588%25A9%25E7%2594%25A8%25E3%2581%2597%25E3%2581%25A6%25E3%2581%2584%25E3%2582%258B%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25A7%25E5%25AE%259A%25E6%2595%25B0%25E3%2581%25AE%25E3%2583%258D%25E3%2583%25BC%25E3%2583%259F%25E3%2583%25B3%25E3%2582%25B0%25E3%2582%2592%2520PascalCase%2520%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%25E3%2581%25BE%25E3%2581%25A7%25E3%2581%25AB%25E3%2582%2584%25E3%2582%258B%25E3%2581%2593%25E3%2581%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A6%25E3%2581%25B9%25E3%2581%2599%25E3%2581%25A6%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FjMGFhMjliZTUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>てべすてん</dc:creator></item><item><title><![CDATA[別のPCで生成されたKMPのxcframeworkをXcodeでデバッグする]]></title><description><![CDATA[Kotlin Multiplatform(以下KMP)を利用している際に、XcodeからKotlinのファイルに対してBreakpointを貼ってデバッグをしたいケースがあるかと思います。
+xcode-kotlinを利用することで、一般的なKMPのプロジェクトにおいては容易にXcodeからデバッグができるようになります。
+しかし、担当しているプロジェクトではXcode上でBreakpointを貼ってアプリを起動すると、起動したタイミングでBreakpointが無効になってしまってデバッグができない現象が発生していました。
+本記事では、その課題の原因の説明と解決方法について記載しています。...]]></description><link>https://zenn.dev/marty_suzuki/articles/0aab89e30f47c2</link><guid isPermaLink="true">https://zenn.dev/marty_suzuki/articles/0aab89e30f47c2</guid><pubDate>Tue, 04 Feb 2025 18:16:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--rotV8Gg6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2588%25A5%25E3%2581%25AEPC%25E3%2581%25A7%25E7%2594%259F%25E6%2588%2590%25E3%2581%2595%25E3%2582%258C%25E3%2581%259FKMP%25E3%2581%25AExcframework%25E3%2582%2592Xcode%25E3%2581%25A7%25E3%2583%2587%25E3%2583%2590%25E3%2583%2583%25E3%2582%25B0%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:marty-suzuki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2UwNzU4Y2UzYjAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>marty-suzuki</dc:creator></item><item><title><![CDATA[CaffeineをKotlin Coroutinesでも使えるようにする方法 - caffeine-coroutinesの紹介]]></title><description><![CDATA[
+ Motivation
+JVMには、キャッシュを実装するときに広く使われているCaffeineというライブラリがあります。
+https://github.com/ben-manes/caffeine
+このライブラリはJavaで書かれているため、Coroutines上ではそのままだと使用することができません。
+CaffeineにはAsyncサポート(ComletableFutureに対応したインタフェース)があるため、これを駆使することで一応Coroutines上でも動作させることが可能になります。ただし、CaffeineとCoroutinesへの理解が深くないとなかなか敷居が高いのかな...]]></description><link>https://zenn.dev/be_hase/articles/504f9261582486</link><guid isPermaLink="true">https://zenn.dev/be_hase/articles/504f9261582486</guid><pubDate>Sun, 02 Feb 2025 10:53:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3jMxQjqP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Caffeine%25E3%2582%2592Kotlin%2520Coroutines%25E3%2581%25A7%25E3%2582%2582%25E4%25BD%25BF%25E3%2581%2588%25E3%2582%258B%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2520-%2520caffeine-corouti...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:be-hase%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dNaVhNZnFBWE9yTXdHZVdBMEpmaE5OX3FJRVExUWQzRUw2MVJtM0E9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>be-hase</dc:creator></item><item><title><![CDATA[MockitoをAgentとして起動できるようにする]]></title><description><![CDATA[以前、参画するプロジェクトの下準備として、Sprint Boot アプリケーションをJavaで記述したサンプルコードをKotlinで書き直していたことがある。そのアプリケーションをJDK 22で実行しようとすると、Java 21以降では、MockitoはAgentとして起動することになったため、警告が出るようになった。そこで、Kotlinでの指定方法を確認するべく調査。
+たどり着いたサイトは、Support configuring Mockito java agent in java 21+。
+Javaでの指定方法が紹介されていたのを参考にして、Kotlin DSLに書き起こした。
+va...]]></description><link>https://zenn.dev/tatsukiyoshi/articles/97dd0e35e6750b</link><guid isPermaLink="true">https://zenn.dev/tatsukiyoshi/articles/97dd0e35e6750b</guid><pubDate>Sat, 01 Feb 2025 16:31:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jzWdsp0M--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Mockito%25E3%2582%2592Agent%25E3%2581%25A8%25E3%2581%2597%25E3%2581%25A6%25E8%25B5%25B7%25E5%258B%2595%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258B%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E8%25BE%25B0%25E8%2581%2596%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSlRwMzFwR2w4eEFqS3YtSlVsQVgyRnUyZDBCSU9OaEJFNG9TTGJSQWtVXzE0UktwVnM0QT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>辰聖</dc:creator></item><item><title><![CDATA[リスキリングとしての取り組み（2025/1：第4週）]]></title><description><![CDATA[2025年1月第4週（2025/1/26～2025/2/1）に
+リスキリング（プログラミング）として取り組んだことをまとめました。
+
+ ＜Topic＞
+Apple Intelligenceを強化した iOS 18.3 / Mac OS Sequoia 15.3 にアップデート
+
+ 詳細は、GitHubを参照ください
+
+ 【1/29】
+
+
+＜OS＞ Mac OS Sequoia 15.3にアップデート
+
+
+
+ 【1/31】
+
+
+＜Kotlin＞ Android Studio Meerkat を 2024.3.2 Canary 2に更新
+
+Kotlin を 2.1.10 に更新
+Androi...]]></description><link>https://zenn.dev/tatsukiyoshi/articles/2101d480413ee2</link><guid isPermaLink="true">https://zenn.dev/tatsukiyoshi/articles/2101d480413ee2</guid><pubDate>Sat, 01 Feb 2025 16:31:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qDiOV8qB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%25AA%25E3%2582%25B9%25E3%2582%25AD%25E3%2583%25AA%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%25A8%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25AE%25E5%258F%2596%25E3%2582%258A%25E7%25B5%2584%25E3%2581%25BF%25EF%25BC%25882025%252F1%25EF%25BC%259A%25E7%25AC%25AC4%25E9%2580%25B1%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E8%25BE%25B0%25E8%2581%2596%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSlRwMzFwR2w4eEFqS3YtSlVsQVgyRnUyZDBCSU9OaEJFNG9TTGJSQWtVXzE0UktwVnM0QT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>辰聖</dc:creator></item><item><title><![CDATA[Gradle 依存関係の差分を可視化！「gradle-dependency-diff-action」のご紹介]]></title><description><![CDATA[自分が作成したGitHub Actions「gradle-dependency-diff-action」についてご紹介します。このActionsを使うことで、Pull RequestによってGradle依存関係にどのような差分が生じるかを簡単に確認できるようになります。
+
+ Motivation
+Gradleは推移的(?)にライブラリの依存を解決していくため、しばしば意図せぬ依存の変更が発生することがあります。
+例えば、以下のようにtinkというライブラリをアップデートしたとします。一見すると、ただのマイナーアップデートですよね。
+こういった変更のPull Requestのレビュー依頼が...]]></description><link>https://zenn.dev/be_hase/articles/e01864e80c5e97</link><guid isPermaLink="true">https://zenn.dev/be_hase/articles/e01864e80c5e97</guid><pubDate>Wed, 29 Jan 2025 13:49:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Ee9RitMg--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Gradle%2520%25E4%25BE%259D%25E5%25AD%2598%25E9%2596%25A2%25E4%25BF%2582%25E3%2581%25AE%25E5%25B7%25AE%25E5%2588%2586%25E3%2582%2592%25E5%258F%25AF%25E8%25A6%2596%25E5%258C%2596%25EF%25BC%2581%25E3%2580%258Cgradle-dependency-diff-action%25E3%2580%258D%25E3%2581%25AE%25E3%2581%2594%25E7%25B4%25B9%25E4%25BB%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:be-hase%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dNaVhNZnFBWE9yTXdHZVdBMEpmaE5OX3FJRVExUWQzRUw2MVJtM0E9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>be-hase</dc:creator></item><item><title><![CDATA[[ASO]App Store Optimization   インストール数を上げる方法]]></title><description><![CDATA[ストアにアプリをリリースしたのはいいものの
+なかなかインストール数が増えないってことは、
+よくありますよね。
+実は、アプリのダウンロードの65%は「検索」から発生しています。
+つまり、アプリストアでの検索結果で上位に表示されるかどうかが
+アプリの成功を大きく左右するのです。
+最近、ASOを学習して1日の平均インストールが
+先月の約1.5~2倍に増えたためその知見を共有したいと思います。
+本記事は、AppTweakという会社の情報を
+かなり参考にしております。
+メルマガで最新の情報をゲットできたり
+講義も受けれたりするのでASOを学習される方には
+かなりおすすめです⭐️
+おすすめの記事、参...]]></description><link>https://zenn.dev/renren0112/articles/0a7fc67b065ed5</link><guid isPermaLink="true">https://zenn.dev/renren0112/articles/0a7fc67b065ed5</guid><pubDate>Tue, 28 Jan 2025 23:58:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--D-rXhwkl--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BASO%255DApp%2520Store%2520Optimization%2520%2520%2520%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E6%2595%25B0%25E3%2582%2592%25E4%25B8%258A%25E3%2581%2592%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ren%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzIzNjE0ZGZiZTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ren</dc:creator></item><item><title><![CDATA[Spring IntegrationでTCP通信(Server)]]></title><description><![CDATA[
+ はじめに
+TCP通信の実装をしたことがなかったので、今回はSpring Integrationを使ってTCP Serverを実装してみました。
+!
+言語はkotlinで書いてます
+
+
+ 要件
+
+
+クライアント側から3バイト送られてくるので、演算結果をレスポンスとして返す
+
+1バイト目は加算・減算を表す"+" or "-"
+2バイト目と3バイト目は1-9の数値
+
+
+
+レスポンス
+
+1バイト目には正常終了・異常終了を表す"A" or "N"
+2バイト目に演算結果を格納
+
+異常終了時には0を入れる
+
+
+
+
+
+
+ 処理フロー
+
+
+ 実装
+結構雑に実装してしまっているかもしれませんが、大体のイ...]]></description><link>https://zenn.dev/ooooomu/articles/d77230e9e14dfc</link><guid isPermaLink="true">https://zenn.dev/ooooomu/articles/d77230e9e14dfc</guid><pubDate>Tue, 28 Jan 2025 00:21:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--R4inqSYh--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Spring%2520Integration%25E3%2581%25A7TCP%25E9%2580%259A%25E4%25BF%25A1%2528Server%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Omu%2520%252F%2520%25E3%2581%258A%25E3%2582%2580%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzgwMGNjMzFlYjcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Omu / おむ</dc:creator></item><item><title><![CDATA[JWT認証によるSalesforce API連携手順について]]></title><description><![CDATA[!
+この記事は毎週必ず記事がでるテックブログ Loglass Tech Blog Sprint の75週目の記事です！
+2年間連続達成まで残り31週となりました！
+
+
+ 本記事について
+本記事は、Salesforce API連携を初めて試す方や、JWT認証を用いた接続方法を学びたい方向けに、JWT認証を用いたSalesforce API連携手順について解説します。
+
+ この記事で学べること
+
+JWT認証を使用したSalesforce API連携の基本
+KotlinスクリプトによるAPI接続の実装
+Salesforceからデータを取得する具体的な手順
+
+
+ 想定するユースケース
+Sales...]]></description><link>https://zenn.dev/loglass/articles/028bf1ee96c026</link><guid isPermaLink="true">https://zenn.dev/loglass/articles/028bf1ee96c026</guid><pubDate>Thu, 23 Jan 2025 09:15:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--eeBD_Q7t--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JWT%25E8%25AA%258D%25E8%25A8%25BC%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258BSalesforce%2520API%25E9%2580%25A3%25E6%2590%25BA%25E6%2589%258B%25E9%25A0%2586%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:woody_kawagoe%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRlNWQ4ZTRjZjguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2582%25B9%2520%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FkYTY5OGQwYmQuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>woody_kawagoe</dc:creator></item><item><title><![CDATA[JUnit 5 でも RSpec みたいに失敗したテストのサマリーをログの最後に表示したい]]></title><description><![CDATA[こんにちは！アルダグラムの @sukechannnn です。
+JUnit 5 でテストを実行するとテストの実行ログは出るのですが、最終的な実行結果のサマリーは 5 tests completed, 1 failed しか表示されません。
+IDE上ではあまり困らないのですが、CI で全てのテストを実行して一部が失敗した時に「どこでテストが失敗してるんだ？」と FAILED で検索するのが地味に面倒で、RSpec のように失敗したテストが最後にまとめて表示されたら嬉しいなと思いました。
+JUnit Platform の TestExecutionListener を利用することで、失敗したテ...]]></description><link>https://zenn.dev/aldagram_tech/articles/e084fda3aedbb4</link><guid isPermaLink="true">https://zenn.dev/aldagram_tech/articles/e084fda3aedbb4</guid><pubDate>Thu, 23 Jan 2025 00:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0E_4rysp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JUnit%25205%2520%25E3%2581%25A7%25E3%2582%2582%2520RSpec%2520%25E3%2581%25BF%25E3%2581%259F%25E3%2581%2584%25E3%2581%25AB%25E5%25A4%25B1%25E6%2595%2597%25E3%2581%2597%25E3%2581%259F%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E3%2581%25AE%25E3%2582%25B5%25E3%2583%259E%25E3%2583%25AA%25E3%2583%25BC%25E3%2582%2592%25E3%2583%25AD%25E3%2582%25B0%25E3%2581%25AE%25E6%259C%2580%25E5%25BE%258C%25E3%2581%25AB%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2597%25E3%2581%259F%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:sukechannnn%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JiM2FkMDk1NzUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25A2%25E3%2583%25AB%25E3%2583%2580%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%25A0%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2QzOTljNjM5YmQuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sukechannnn</dc:creator></item><item><title><![CDATA[AIにペットの餌やりを任せてみた！]]></title><description><![CDATA[
+ AIにペットの餌やりを任せてみた！
+皆さん、こんにちは！
+今回は、我が家の愛猫の食事をもっと快適にするために、ある実験的な試みを行ってみました。その結果をレポートとしてお届けしたいと思います！
+
+ 愛猫の食事事情
+我が家の猫ちゃんは、いつも自動給餌器でご飯を食べています。自動給餌器は、スケジュールを設定できるので、決まった時間に餌をあげることができて便利です。
+
+でも、猫ちゃんの食欲って毎日同じじゃないです。ある日はたくさん食べてくれるけど、次の日はちょっと少なめだったり… なので、自動給餌器を使っているとはいえ、餌の残量を気にしながら、手動で調整する必要がありました。
+そこで、「猫...]]></description><link>https://zenn.dev/progate/articles/29a32338e4fa11</link><guid isPermaLink="true">https://zenn.dev/progate/articles/29a32338e4fa11</guid><pubDate>Wed, 22 Jan 2025 07:06:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hvvqqXY---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AI%25E3%2581%25AB%25E3%2583%259A%25E3%2583%2583%25E3%2583%2588%25E3%2581%25AE%25E9%25A4%258C%25E3%2582%2584%25E3%2582%258A%25E3%2582%2592%25E4%25BB%25BB%25E3%2581%259B%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:dacer%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2UzOTZjNjhlM2MuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Progate%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSk5NLUg0VVkyMmNKcDFPWEJSc2VWN29zRGF5aW5IRXlUaXlLdjNOWXV2YnBwMVhPWEo9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>dacer</dc:creator></item><item><title><![CDATA[【Android】Composeで横スクロールできる登録画像リストを作成する]]></title><description><![CDATA[
+ 概要
+どの様なものかは👇こちらの動画を見て頂ければイメージしやすいと思います。これをAndroid向けにComposeを使って実装していきたいと思います。
+
+機能としては
+
+リストを横スクロールできる
+リストに画像を追加できる
+リストの画像を削除できる
+
+上記の機能を持つ前提で実装していきます。
+
+ 動作環境
+
+Android Studio Ladybug | 2024.2.1 Patch 2
+MBA M3 Sonoma 14.6.1
+kotlin 2.1.0
+compose-bom 2024.12.01
+
+
+ 必要なライブラリ追加
+今回は画像表示する部分に Coil の Async...]]></description><link>https://zenn.dev/slowhand/articles/767d486c988270</link><guid isPermaLink="true">https://zenn.dev/slowhand/articles/767d486c988270</guid><pubDate>Sat, 18 Jan 2025 21:30:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_rvOSJto--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Android%25E3%2580%2591Compose%25E3%2581%25A7%25E6%25A8%25AA%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258B%25E7%2599%25BB%25E9%258C%25B2%25E7%2594%25BB%25E5%2583%258F%25E3%2583%25AA%25E3%2582%25B9%25E3%2583%2588%25E3%2582%2592%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:slowhand%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzEwY2YzMGUzMDAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>slowhand</dc:creator></item><item><title><![CDATA[AxonFramework コマンドの冪等性]]></title><description><![CDATA[
+ 冪等性
+AxonFrameworkはCQRS/ESをベースに作られたフレームワークで、当然マイクロサービスにも対応できるように作られています。
+マイクロサービス間はトランザクションなどを利用した強い整合性をかけられないため、ネットワーク断が発生した場合はリトライ処理などをする必要があります。
+残念ながら冪等性がいるかいらないかユースケースによって異なるので、Axonはデフォルトで冪等性を実現する機能を提供していません。自分で作りましょう。
+いろいろやり方はあるんですが今回は一番簡単なAggreggateの中で冪等性を検証する方法です。
+
+ やり方
+
+ 下ごしらえ
+まずは冪等性をチェッ...]]></description><link>https://zenn.dev/azarasi_kozou/articles/26d3d28014282a</link><guid isPermaLink="true">https://zenn.dev/azarasi_kozou/articles/26d3d28014282a</guid><pubDate>Sat, 18 Jan 2025 03:13:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--kZnl--uJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AxonFramework%2520%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2581%25AE%25E5%2586%25AA%25E7%25AD%2589%25E6%2580%25A7%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25A2%25E3%2582%25B6%25E3%2583%25A9%25E3%2582%25B7%25E5%25B0%258F%25E5%2583%25A7%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSVZnMlI2VlJTcC1veW45LU14QzYteGxYTnFnQmxNRDl6a2trbE11WVFMczJReVhBPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>アザラシ小僧</dc:creator></item><item><title><![CDATA[GaalVM + Kotlin + Spring Boot + jOOQ(Postgres)で現実的にバッチアプリケーション作るためのPoC]]></title><description><![CDATA[!
+この記事は毎週必ず記事がでるテックブログ Loglass Tech Blog Sprint の74週目の記事です！
+2年間連続達成まで残り32週となりました！
+
+
+ はじめに
+アドベントカレンダーから次のBlogまでの間隔が短く、ひいひい言っているゲインです。
+今回は冬休みの自由研究でGraalVMで遊んでみました。
+
+ モチベーション
+ログラスではKotlin + Spring Bootを利用しています。
+いわゆるJVM言語ではJavaバイトコードと呼ばれる中間コードに変換したうえで、実行時に各CPU各環境に最適なコンパイルを行います。(JITコンパイル)
+このJITの最適化にはあ...]]></description><link>https://zenn.dev/loglass/articles/0f975ec4557cba</link><guid isPermaLink="true">https://zenn.dev/loglass/articles/0f975ec4557cba</guid><pubDate>Thu, 16 Jan 2025 08:56:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--g4FoR4vU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:GaalVM%2520%252B%2520Kotlin%2520%252B%2520Spring%2520Boot%2520%252B%2520jOOQ%2528Postgres%2529%25E3%2581%25A7%25E7%258F%25BE%25E5%25AE%259F%25E7%259A%2584%25E3%2581%25AB%25E3%2583%2590%25E3%2583%2583%25E3%2583%2581%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2582%25B2%25E3%2582%25A4%25E3%2583%25B3%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRlNWQ4ZTRjZjguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2582%25B9%2520%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2EwN2IyNjA2YmMuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ゲイン</dc:creator></item><item><title><![CDATA[Flutterのandroidビルドをするときに「Unknown Kotlin JVM target: 21」]]></title><description><![CDATA[
+ 書いてること
+Macbookの再インストールを行なって、新たにFlutterの開発環境を再構築してるときに、表題のエラーが発生。
+androidのビルドをするときに「Unknown Kotlin JVM target: 21」のエラーが発生。
+
+ 概要
+Flutterのandroidをビルドするときに以下のエラーが発生
+You are applying Flutter's app_plugin_loader Gradle plugin imperatively using the apply script method, which is deprecated and will be...]]></description><link>https://zenn.dev/yuki_2021/articles/8e78b7dd89c374</link><guid isPermaLink="true">https://zenn.dev/yuki_2021/articles/8e78b7dd89c374</guid><pubDate>Thu, 09 Jan 2025 11:49:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wgRvCcgX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Flutter%25E3%2581%25AEandroid%25E3%2583%2593%25E3%2583%25AB%25E3%2583%2589%25E3%2582%2592%25E3%2581%2599%25E3%2582%258B%25E3%2581%25A8%25E3%2581%258D%25E3%2581%25AB%25E3%2580%258CUnknown%2520Kotlin%2520JVM%2520target%253A%252021%25E3%2580%258D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2586%25E3%2581%258D%25E3%2581%25AB%25E3%2583%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBjMjM1Zjc1OWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ゆきにー</dc:creator></item></channel></rss>
