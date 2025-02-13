@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Thu, 13 Feb 2025 10:37:30 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[メタヒューリスティクス開発者向けのツールopytimizerを使ってみる]]></title><description><![CDATA[
+ 本記事について
+メタヒューリスティクスを開発する際に、開発コストを下げるツールがないかと探していたら、pythonパッケージであるopytimizerを見つけました。簡単に触ってみて面白いなと思ったので紹介します。０から全て開発するよりもopytimizerを使った方が少し便利かなという印象です。
+本記事は、pythonに慣れていて、メタヒューリスティクス等の数理最適化アルゴリズムの開発者やアルゴリズム実装に関心がある方向けに書いています。
+
+ はじめに
+メタヒューリスティクスとは、数理最適化用語集によると以下のように定義されています。具体的にはシミュレーテッドアニーリングやタブーサ...]]></description><link>https://zenn.dev/jij_inc/articles/e13cdfe2c934bd</link><guid isPermaLink="true">https://zenn.dev/jij_inc/articles/e13cdfe2c934bd</guid><pubDate>Thu, 13 Feb 2025 09:00:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5i5EjTPS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%25A1%25E3%2582%25BF%25E3%2583%2592%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%25AA%25E3%2582%25B9%25E3%2583%2586%25E3%2582%25A3%25E3%2582%25AF%25E3%2582%25B9%25E9%2596%258B%25E7%2599%25BA%25E8%2580%2585%25E5%2590%2591%25E3%2581%2591%25E3%2581%25AE%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25ABopytimizer%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:sulazo8%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I0ZjhjYjkwMmYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Jij%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRjNTA1NjU5NzUuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sulazo8</dc:creator></item><item><title><![CDATA[tfrecord形式のデータを使ってみる]]></title><description><![CDATA[
+
+ はじめに
+
+データは命
+AI 開発を行う上では、データは非常に重要です。
+どれくらい賢い AI を作れるかは、どのようなデータを使うか次第、と言っても過言ではありません。
+そんな重要なデータの形式についての話です。
+
+ tfrecord 形式って？
+tfrecord 形式（テンソルフローレコードけいしき）とは、TensorFlow が推奨する特別なデータ保存形式です。
+
+tfrecord 形式
+たとえば、たくさんの画像をいくつかのラベルに分類するモデルを作成する場合を考えましょう。その際、学習データや評価データは、画像の形式で保存されていると思います。
+この時、実際に学習する際は、...]]></description><link>https://zenn.dev/nekoallergy/articles/tf-basic-tfrecord</link><guid isPermaLink="true">https://zenn.dev/nekoallergy/articles/tf-basic-tfrecord</guid><pubDate>Thu, 13 Feb 2025 08:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8USsLG4E--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:tfrecord%25E5%25BD%25A2%25E5%25BC%258F%25E3%2581%25AE%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:NekoAllergy%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRkMzhmNmU1YjguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>NekoAllergy</dc:creator></item><item><title><![CDATA[Slackbot に Google News 検索を追加してみた]]></title><description><![CDATA[
+ 機能サンプルイメージ
+
+
+
+ 何をしているのか
+Google ニュース で検索した内容を Slack に展開する感じになります
+もちろん Google ニュースのページ構成が変われば動かなくなります
+
+ 展望
+各記事の内容を LLM に投げて統合して要約してもらいたいなあ
+]]></description><link>https://zenn.dev/sharl/articles/4afadfb379d0db</link><guid isPermaLink="true">https://zenn.dev/sharl/articles/4afadfb379d0db</guid><pubDate>Thu, 13 Feb 2025 05:13:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--YwbqVlwj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Slackbot%2520%25E3%2581%25AB%2520Google%2520News%2520%25E6%25A4%259C%25E7%25B4%25A2%25E3%2582%2592%25E8%25BF%25BD%25E5%258A%25A0%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2597%25E3%2582%2583%25E3%2581%2582%25E3%2582%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0xuZEM2dlZRUHNRVzBHa1dpdS1DY2trTlVETnVhemF1YjlUVVRkQ3B5dHBqbTBLUXA9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>しゃある</dc:creator></item><item><title><![CDATA[Pythonのパッケージ管理ツール「uv」の使い方]]></title><description><![CDATA[
+ 1. プロジェクトの初期化
+
+
+プロジェクトの初期化
+新しいプロジェクトを作成するには、以下のコマンドを使用する。
+uv init プロジェクト名
+
+このコマンドにより、pyproject.toml ファイルが生成され、プロジェクトの基本構成が整う。
+さらに、--app オプションでアプリケーションプロジェクト、--lib オプションでライブラリプロジェクトを作成できる。
+例えば
+uv init --app my-app
+uv init --lib my-lib
+
+
+
+
+ 2. 仮想環境の作成、入り方、出方
+uvはプロジェクトごとに仮想環境を自動的に作成・管理する。手動で仮想環境を作...]]></description><link>https://zenn.dev/okamyuji/articles/7974950dbb2479</link><guid isPermaLink="true">https://zenn.dev/okamyuji/articles/7974950dbb2479</guid><pubDate>Thu, 13 Feb 2025 01:53:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--kauCQFXG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25AE%25E3%2583%2591%25E3%2583%2583%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B8%25E7%25AE%25A1%25E7%2590%2586%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%25E3%2580%258Cuv%25E3%2580%258D%25E3%2581%25AE%25E4%25BD%25BF%25E3%2581%2584%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:okamyuji%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY5YjFmNDYyYjkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>okamyuji</dc:creator></item><item><title><![CDATA[DuckdbのBlog「Catching up with Windowing」について簡単な検証をしてみた]]></title><description><![CDATA[
+ Blogリンク
+https://duckdb.org/2025/02/10/window-catchup.html
+
+ 概要
+2025-02-10に上のブログが書かれた。内容は英語だったがWindow関数についての歴史やパフォーマンスについて書かれており面白い内容だったので簡単な要約と検証も兼ねてpythonでコードを書いてみました。
+
+ ウィンドウ関数に関するキャッチアップ
+著者: リチャード・ウェズリー
+公開日: 2025年2月10日
+
+ Window関数が導入された背景
+
+時系列データなどの処理は従来のSQLクエリでは非常に難しかった
+→不等号条件でのself-joinを含むか...]]></description><link>https://zenn.dev/amana/articles/ba6b6e144e9475</link><guid isPermaLink="true">https://zenn.dev/amana/articles/ba6b6e144e9475</guid><pubDate>Wed, 12 Feb 2025 14:31:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BG7uGlSt--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Duckdb%25E3%2581%25AEBlog%25E3%2580%258CCatching%2520up%2520with%2520Windowing%25E3%2580%258D%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E7%25B0%25A1%25E5%258D%2598%25E3%2581%25AA%25E6%25A4%259C%25E8%25A8%25BC%25E3%2582%2592%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nk_work%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ1MjJkN2U5MzIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nk_work</dc:creator></item><item><title><![CDATA[Playwrightを使ったら自動化が捗った話]]></title><description><![CDATA[みなさんは業務のちょっとしたブラウザ操作を自動化したいと思ったことはありませんか？
+私の場合、デプロイ時にブラウザを操作してあれこれしなければならない手順があり、それを何とかしたいなあと思って自動化に着手し始めました。
+ブラウザ操作の自動化といえば、Seleniumが有名ですよね。
+私も最初はSeleniumを使って自動化に取り組んでいました。
+しかし実際にSeleniumで自動化に取り組んでみると
+
+意図した通りに操作させるコードを書くのが難しい
+動作がなかなか安定しない（しばしばエラー落ちする）
+公式のドキュメントが読みづらく、欲しい情報を集めづらい
+
+などの問題に突き当たってしまい...]]></description><link>https://zenn.dev/nanae/articles/76caf0ec31a445</link><guid isPermaLink="true">https://zenn.dev/nanae/articles/76caf0ec31a445</guid><pubDate>Wed, 12 Feb 2025 12:00:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--mRzIFt9e--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Playwright%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%259F%25E3%2582%2589%25E8%2587%25AA%25E5%258B%2595%25E5%258C%2596%25E3%2581%258C%25E6%258D%2597%25E3%2581%25A3%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nanae%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzEyOWRhNGI5NzcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nanae</dc:creator></item><item><title><![CDATA[【macOS】uvでインストールしたPythonからtkinterを使うとDEPRECATION WARNINGが出る]]></title><description><![CDATA[uv run python -m tkinter をした際に、動作はするものの下記のエラーが出た。
+どうやら、macOSにデフォルトで入っているTkは非推奨になっているらしい。
+DEPRECATION WARNING: The system version of Tk is deprecated and may be removed in a future release. Please don't rely on it. Set TK_SILENCE_DEPRECATION=1 to suppress this warning.
+下記手順で、HomebrewでインストールしたTkを使う...]]></description><link>https://zenn.dev/k_hashiura/articles/a7a9fd5d928c38</link><guid isPermaLink="true">https://zenn.dev/k_hashiura/articles/a7a9fd5d928c38</guid><pubDate>Wed, 12 Feb 2025 11:35:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--XDxyUy6b--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590macOS%25E3%2580%2591uv%25E3%2581%25A7%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%2597%25E3%2581%259FPython%25E3%2581%258B%25E3%2582%2589tkinter%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%25E3%2581%25A8DEPRECATION%2520WARNING%25E3%2581%258C%25E5%2587%25BA%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:k-hashiura%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSWRUc1pqWWVzRlpoZFpPMWFraDBIeFFjT181OHdyYmZYQkdOX2JRcWFCX0JZRngycUs9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>k-hashiura</dc:creator></item><item><title><![CDATA[Tensorflow の モデル形式 3 つ]]></title><description><![CDATA[
+
+ はじめに
+AI 開発の最終ゴールは、賢いモデルを作ることです。
+モデルは学習したデータや設定値によって性能が大きく変わるため、設定やモデルは正しく保存しておくことが重要です。
+そんなモデルに関するお話です。
+
+ 3 つのモデル形式
+
+Tensorflow を使って AI を開発する際、3 つの主要な保存形式があります。
+「なんで 3 種類もあるんだよ」と最初は思うかもしれませんが、それぞれに長所と短所があり、用途に応じて使い分ける必要があります。
+ここでは、それぞれの形式の特徴を比較し、使い分け方を紹介します。
+
+CKPT 形式
+HDF5 形式
+SavedModel 形式
+
+それぞ...]]></description><link>https://zenn.dev/nekoallergy/articles/tf-basic-model</link><guid isPermaLink="true">https://zenn.dev/nekoallergy/articles/tf-basic-model</guid><pubDate>Wed, 12 Feb 2025 08:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--htGFkLbB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Tensorflow%2520%25E3%2581%25AE%2520%25E3%2583%25A2%25E3%2583%2587%25E3%2583%25AB%25E5%25BD%25A2%25E5%25BC%258F%25203%2520%25E3%2581%25A4%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:NekoAllergy%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRkMzhmNmU1YjguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>NekoAllergy</dc:creator></item><item><title><![CDATA[Tensorflow と Keras の関係]]></title><description><![CDATA[
+
+ はじめに
+Keras を使うことで、深層学習やモデル構築をよりシンプルに記述することができます。
+一方で、実際の AI 開発の現場では Keras よりも Tensorflow や Pytorch といったフレームワークが広く使われています。
+今回は、Tensorflow と Keras の関係について、主要なポイントを説明します。
+
+ 役割の違い
+
+Tensorflow と Keras は次のような補完関係にあります。
+
+
+Keras は、より簡潔で使いやすいインターフェースを提供する高レベル API です。
+要するに、簡単にお試ししたり、小規模なモデル開発なら Keras で充...]]></description><link>https://zenn.dev/nekoallergy/articles/tf-basic-tf-and-keras</link><guid isPermaLink="true">https://zenn.dev/nekoallergy/articles/tf-basic-tf-and-keras</guid><pubDate>Wed, 12 Feb 2025 08:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--914rw206--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Tensorflow%2520%25E3%2581%25A8%2520Keras%2520%25E3%2581%25AE%25E9%2596%25A2%25E4%25BF%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:NekoAllergy%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRkMzhmNmU1YjguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>NekoAllergy</dc:creator></item><item><title><![CDATA[PDFの注釈情報を抽出してMarkdown等で出力するPythonライブラリpdfannots]]></title><description><![CDATA[学術論文のレビューや組織内のドキュメント作成など，PDF文書に注釈を付けて複数人とやりとりする場面がある。
+注釈はAcrobat Readerなどで閲覧・編集できるが，これをテキストデータで抽出できると嬉しいことも多いと思われる。
+例えば，理工系文書のPDFで数式の一部をこう修正したいという指示を修正箇所をハイライトしてLaTeXの数式記法でコメントを書いたとすると，Acrobat Readerなどでは可読性が非常に低いだろう。
+つまり，\int_a ^b f(x) dxが$\int_a ^b f(x) dx$となるわけで，より複雑な数式であればさらにわかりにくくなる。
+そこでpdfan...]]></description><link>https://zenn.dev/misgnros/articles/7ff53756280c06</link><guid isPermaLink="true">https://zenn.dev/misgnros/articles/7ff53756280c06</guid><pubDate>Wed, 12 Feb 2025 07:12:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--b8mCg9uE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:PDF%25E3%2581%25AE%25E6%25B3%25A8%25E9%2587%2588%25E6%2583%2585%25E5%25A0%25B1%25E3%2582%2592%25E6%258A%25BD%25E5%2587%25BA%25E3%2581%2597%25E3%2581%25A6Markdown%25E7%25AD%2589%25E3%2581%25A7%25E5%2587%25BA%25E5%258A%259B%25E3%2581%2599%25E3%2582%258BPython%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AApdfannots%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:misgnros%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdmMDBkYjc1NGEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>misgnros</dc:creator></item><item><title><![CDATA[Pythonのコンパイラを作りたい #5 - リストと辞書の実装]]></title><description><![CDATA[こんにちは。前回（「#4 - 関数定義とスコープ（簡易的な static typing での解釈）」）は、Python の def 文を LLVM IR の関数定義に落とし込む方法をご紹介しました。AST 上の FunctionDef を解析してシンプルな静的型付き関数として扱うことで、高速なコード生成が可能になっていました。
+今回は、リスト (list) と辞書 (dict) にスポットを当てます。
+Python のリストと辞書は、異なる型の要素を混在できたり、要素数を柔軟に増やしたり、ハッシュマップ的なアクセスを行ったりするなど、非常に動的なデータ構造です。こうした振る舞いを C言語...]]></description><link>https://zenn.dev/t3tra/articles/10c356a2560e5a</link><guid isPermaLink="true">https://zenn.dev/t3tra/articles/10c356a2560e5a</guid><pubDate>Wed, 12 Feb 2025 06:39:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qeqzZhei--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25AE%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2591%25E3%2582%25A4%25E3%2583%25A9%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258A%25E3%2581%259F%25E3%2581%2584%2520%25235%2520-%2520%25E3%2583%25AA%25E3%2582%25B9%25E3%2583%2588%25E3%2581%25A8%25E8%25BE%259E%25E6%259B%25B8%25E3%2581%25AE%25E5%25AE%259F%25E8%25A3%2585%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:t3tra%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ2MDdkNzY3ZTMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>t3tra</dc:creator></item><item><title><![CDATA[Pythonを使った勤怠表自動転記ツールの作り方]]></title><description><![CDATA[
+ ① Pythonのインストール
+
+
+
+公式サイト から最新のPythonをダウンロード
+インストーラーを実行し、「Add Python to PATH」にチェックを入れる
+
+インストール完了後、ターミナル（またはコマンドプロンプト）で以下を実行して確認python --version
+正しくバージョンが表示されればOK
+
+
+ ② VS Codeのインストール（まだの場合）
+
+
+
+公式サイト からVS Codeをダウンロード＆インストール
+
+
+ ③ Python拡張機能のインストール
+
+
+VS Codeを開く
+
+拡張機能（Ctrl + Shift + X） を開く
+「Python」を検...]]></description><link>https://zenn.dev/tomo0108/articles/9362394d5c76c6</link><guid isPermaLink="true">https://zenn.dev/tomo0108/articles/9362394d5c76c6</guid><pubDate>Tue, 11 Feb 2025 14:42:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--nWkQi4PZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%259F%25E5%258B%25A4%25E6%2580%25A0%25E8%25A1%25A8%25E8%2587%25AA%25E5%258B%2595%25E8%25BB%25A2%25E8%25A8%2598%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%25AE%25E4%25BD%259C%25E3%2582%258A%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ToMo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTElVaUtHaTlGYTZrbjM1eVFjX1Vvd3FTQVRaRWUwWUx5SzVmeHhhRWhCdWJBPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ToMo</dc:creator></item><item><title><![CDATA[CDK TypeScriptでSecrets ManagerのSecretを読み出せない]]></title><description><![CDATA[
+ はじめに
+私は普段、CDK TypeScriptを使ってAWS各種リソースの構築を行っています。
+LambdaにPythonのソースコードをデプロイし、Secretから読み出した内容をLambdaの環境変数に設定しようとしたところSecretを読み出せない不具合が発生しました。
+備忘録を兼ねて残します。
+
+ 何が起きたか
+コンソール画面でSecretを作成後、下記内容にてcdk deployを実行しLambdaを構築しようとしたところ、Secrets Manager cant't find the specified secret. (Service: AWSSecretsManag...]]></description><link>https://zenn.dev/wata_tsugarian/articles/a515f8e6778abb</link><guid isPermaLink="true">https://zenn.dev/wata_tsugarian/articles/a515f8e6778abb</guid><pubDate>Tue, 11 Feb 2025 12:32:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--idpF5Yh0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:CDK%2520TypeScript%25E3%2581%25A7Secrets%2520Manager%25E3%2581%25AESecret%25E3%2582%2592%25E8%25AA%25AD%25E3%2581%25BF%25E5%2587%25BA%25E3%2581%259B%25E3%2581%25AA%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%258F%25E3%2581%259F%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSVJOY3NpYVRUMlpLNGJDbUJpQk1PZENoUzU4RzI5S18tTEdtNXZ6cDFYTUhmSTdGND1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>わた</dc:creator></item><item><title><![CDATA[ふりかえりに関するアプリを個人開発でやってみて、その失敗と成長のふりかえり]]></title><description><![CDATA[
+ はじめに
+こんにちは！突然ですが、みなさん「ふりかえり」は好きですか？僕は大好きです！
+今回、ふりかえりに関する自作アプリを作ってみました。
+この記事では自作アプリを作る過程での工夫や失敗、そこから得た学びをふりかえっていきます！
+リンクはこちらなので、良かったらアクセスしてみてください〜！
+👉 アプリはこちら
+👉 GitHubリポジトリはこちら
+
+ なぜ作ったのか？
+私がこのアプリを作った理由には、以下のようなモチベーションがありました。
+
+技術力向上の１つの手段として、何かを作ってみたかった
+フロント、バックエンド、インフラを通したアプリケーションを作って、一通り理解したかった
+...]]></description><link>https://zenn.dev/go_furu93/articles/retrospect_individual_development</link><guid isPermaLink="true">https://zenn.dev/go_furu93/articles/retrospect_individual_development</guid><pubDate>Tue, 11 Feb 2025 10:30:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---8ihAeUU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%25B5%25E3%2582%258A%25E3%2581%258B%25E3%2581%2588%25E3%2582%258A%25E3%2581%25AB%25E9%2596%25A2%25E3%2581%2599%25E3%2582%258B%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E5%2580%258B%25E4%25BA%25BA%25E9%2596%258B%25E7%2599%25BA%25E3%2581%25A7%25E3%2582%2584%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%25A6%25E3%2580%2581%25E3%2581%259D%25E3%2581%25AE%25E5%25A4%25B1%25E6%2595%2597%25E3%2581%25A8%25E6%2588%2590%25E9%2595%25B7%25E3%2581%25AE%25E3%2581%25B5%25E3%2582%258A%25E3%2581%258B%25E3%2581%2588%25E3%2582%258A%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:sakopon%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2IwMTYzOTI0Y2QuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sakopon</dc:creator></item><item><title><![CDATA[ollama-deep-researcherを試す]]></title><description><![CDATA[
+ はじめに
+この記事では、ollama-deep-researcherを試します。
+ollama-deep-researcherは、ollamaがホストするローカルLLMを使用する、リサーチアシスタントです。
+https://github.com/langchain-ai/ollama-deep-researcher
+LangChainのチームが開発をしているOSSのDeep Researchです。
+ollamaを使っているため、ローカルでLLMを使用でき、API料金が発生せず、ローカルで色々と試せます。（Web検索を利用するためのAPI料金は発生します）
+
+ ollama-deep-...]]></description><link>https://zenn.dev/tossy21/articles/1cf011b42a4efd</link><guid isPermaLink="true">https://zenn.dev/tossy21/articles/1cf011b42a4efd</guid><pubDate>Tue, 11 Feb 2025 08:23:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1h6wTXUp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:ollama-deep-researcher%25E3%2582%2592%25E8%25A9%25A6%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tossy%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdkYTdiNWJkY2IuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tossy</dc:creator></item><item><title><![CDATA[pypiのAPIキーをゲットする方法]]></title><description><![CDATA[
+ はじめに
+pypi でライブラリを公開するためには、pypi の API を取得する必要があります。
+今回は API の取得方法について紹介します。
+!
+pypi にはテスト環境があり、ライブラリをお試し公開することができます。
+
+PyPI : 本番環境 (pypi.org)
+TestPyPI : テスト環境 (test.pypi.org)
+
+どちらも手順は同じですので、まずは test 環境で試してみるのがいいでしょう。
+
+
+Created by NekoAllergy
+
+ 手順
+
+ step 1: アカウント登録
+まずは、test.pypi もしくは pypiへアクセス。
+
+こん...]]></description><link>https://zenn.dev/nekoallergy/articles/py-advance-pypi-setup</link><guid isPermaLink="true">https://zenn.dev/nekoallergy/articles/py-advance-pypi-setup</guid><pubDate>Tue, 11 Feb 2025 08:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--nEXeoNd2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:pypi%25E3%2581%25AEAPI%25E3%2582%25AD%25E3%2583%25BC%25E3%2582%2592%25E3%2582%25B2%25E3%2583%2583%25E3%2583%2588%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:NekoAllergy%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRkMzhmNmU1YjguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>NekoAllergy</dc:creator></item><item><title><![CDATA[D-Waveの量子アニーリング 無料トライアルのAPI Tokenが消えた？？]]></title><description><![CDATA[
+ D-Waveの無料トライアルのAPI Tokenが使えない？
+2025年1月末にD-Wave Systems社の量子アニーリングを使おうと思ったら、
+「あれ、、API Tokenがなくなってる」
+いつもあったところにAPI Tokenの欄すら残っていないので、使おうと思ったのにかなりびっくり。。
+D-Wave Systems社のホームページから調べてみたところ、
+2025年1月22日から新しいLeap Quantum LaunchPadプログラムに変更されました。
+https://www.dwavesys.com/company/newsroom/press-release/d-wa...]]></description><link>https://zenn.dev/qa_messenger/articles/5456e5890f53fd</link><guid isPermaLink="true">https://zenn.dev/qa_messenger/articles/5456e5890f53fd</guid><pubDate>Tue, 11 Feb 2025 06:54:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--E9HHntwQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:D-Wave%25E3%2581%25AE%25E9%2587%258F%25E5%25AD%2590%25E3%2582%25A2%25E3%2583%258B%25E3%2583%25BC%25E3%2583%25AA%25E3%2583%25B3%25E3%2582%25B0%2520%25E7%2584%25A1%25E6%2596%2599%25E3%2583%2588%25E3%2583%25A9%25E3%2582%25A4%25E3%2582%25A2%25E3%2583%25AB%25E3%2581%25AEAPI%2520Token%25E3%2581%258C%25E6%25B6%2588%25E3%2581%2588%25E3%2581%259F%25EF%25BC%259F%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:BloodOra%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU5ODdmZWI4NWIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>BloodOra</dc:creator></item><item><title><![CDATA[セーラームーンと明治チョコのコラボ My Map を ChatGPT とコラボして作った]]></title><description><![CDATA[
+ 作ったもの
+https://www.google.com/maps/d/u/0/viewer?mid=1UhFGfXLyfNj1qUAWQIBnzslrHqgCZsA&amp;ll=36.37357930376461%2C136.31889075&amp;z=5
+セーラームーンと明治チョコのコラボチョコレートが販売されるローソンの店舗一覧から住所を取ってきて、 Google Map のカスタム My Map を作った。
+コラボ概要は下記。
+株式会社 明治×『美少女戦士セーラームーン』タイアップ第2弾 ワタシを輝かせるプリズムなひと粒
+https://sailormoon-offici...]]></description><link>https://zenn.dev/birdmangai/articles/7e691bd9e59580</link><guid isPermaLink="true">https://zenn.dev/birdmangai/articles/7e691bd9e59580</guid><pubDate>Tue, 11 Feb 2025 05:09:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2OeCdtmp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25BB%25E3%2583%25BC%25E3%2583%25A9%25E3%2583%25BC%25E3%2583%25A0%25E3%2583%25BC%25E3%2583%25B3%25E3%2581%25A8%25E6%2598%258E%25E6%25B2%25BB%25E3%2583%2581%25E3%2583%25A7%25E3%2582%25B3%25E3%2581%25AE%25E3%2582%25B3%25E3%2583%25A9%25E3%2583%259C%2520My%2520Map%2520%25E3%2582%2592%2520ChatGPT%2520%25E3%2581%25A8%25E3%2582%25B3%25E3%2583%25A9%25E3%2583%259C%25E3%2581%2597%25E3%2581%25A6%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:gai%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU0NDhiYzA0ODUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>gai</dc:creator></item><item><title><![CDATA[【LiteLLM】PythonでLLMのAPIを簡単に切り替える方法]]></title><description><![CDATA[https://www.litellm.ai/
+
+ 1. はじめに
+アクセンチュア株式会社の桐山です。
+近年、大規模言語モデル（LLM）の進化が加速し、ChatGPT、Claude、Gemini … などなど、多様なモデルが登場しています。
+しかし、この急速な発展に伴い、LLMごとに APIのインターフェースが異なる という課題が生じています。
+たとえば、ChatGPTとClaudeでは、以下のように実装方法が異なり、統一性がありません。
+
+ ChatGPTの場合（OpenAI公式より）
+from openai import OpenAI
+client = OpenAI()
+
+compl...]]></description><link>https://zenn.dev/acntechjp/articles/e2e4ded87c9298</link><guid isPermaLink="true">https://zenn.dev/acntechjp/articles/e2e4ded87c9298</guid><pubDate>Tue, 11 Feb 2025 05:05:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7QXfX90g--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590LiteLLM%25E3%2580%2591Python%25E3%2581%25A7LLM%25E3%2581%25AEAPI%25E3%2582%2592%25E7%25B0%25A1%25E5%258D%2598%25E3%2581%25AB%25E5%2588%2587%25E3%2582%258A%25E6%259B%25BF%25E3%2581%2588%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Koichi%2520Kiriyama%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U2ZDA4MDY5ODcuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Accenture%2520Japan%2520%2528%25E6%259C%2589%25E5%25BF%2597%2529%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U5NmMzZGEzY2QuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Koichi Kiriyama</dc:creator></item><item><title><![CDATA[ALOS/PALSAR L1.0データの読み込み (CEOSフォーマット)]]></title><description><![CDATA[https://github.com/hiydee/sar_raw_process/tree/main/src/utils
+
+ 概要
+以前の記事 SAR衛星画像のRAWデータ再生処理を実装してみる (ALOS1) でALOS1のRAWデータの画像の再生処理の実装を紹介しました。今回の記事では、そこで詳しく触れられなかった再生処理に必要なデータや各パラメータを取得する処理を実装したので、その紹介をします。
+取得の際、必要な値がどのファイルのどのバイトアドレスに格納されているかが分かっていれば、値ごとにピンポイントで取得できます。しかし今回は、より汎用的な方法として、必要なデータ全体をまとめ...]]></description><link>https://zenn.dev/hiydee/articles/241ebc347a4f68</link><guid isPermaLink="true">https://zenn.dev/hiydee/articles/241ebc347a4f68</guid><pubDate>Tue, 11 Feb 2025 03:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ZrEF_j3O--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ALOS%252FPALSAR%2520L1.0%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2581%25AE%25E8%25AA%25AD%25E3%2581%25BF%25E8%25BE%25BC%25E3%2581%25BF%2520%2528CEOS%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25BC%25E3%2583%259E%25E3%2583%2583%25E3%2583%2588%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hiydee%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQwOTllOWEyOGIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hiydee</dc:creator></item></channel></rss>
