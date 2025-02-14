@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Java」のフィード]]></title><description><![CDATA[Zennのトピック「Java」のRSSフィードです]]></description><link>https://zenn.dev/topics/java</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/5c47bb8423.png</url><title>Zennの「Java」のフィード</title><link>https://zenn.dev/topics/java</link></image><generator>zenn.dev</generator><lastBuildDate>Fri, 14 Feb 2025 11:04:31 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/java/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[SpringSecurity(セッション数管理)]]></title><description><![CDATA[
+ はじめに
+こんにちは！
+オアシステクノロジーズの山本です。
+SpringBoot + SpringSecurity でセッション数管理ではまったので、その内容を共有します。
+
+ 目次
+
+前提
+セッション数管理
+問題点
+解決策
+まとめ
+
+
+ 1.前提
+SpringBoot + SpringSecurity でセッション数(Redis※ElasticCashe）管理を行う前提で記載しています。
+SpringBoot 3.2.3
+SpringSecurity 6.2.2
+SpringDataRedis 3.2.3
+
+ 2.セッション数管理
+SpringSecurity でセッション数管理を...]]></description><link>https://zenn.dev/oasys/articles/f67bcd38304a93</link><guid isPermaLink="true">https://zenn.dev/oasys/articles/f67bcd38304a93</guid><pubDate>Fri, 14 Feb 2025 05:37:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--roK9nhmD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:SpringSecurity%2528%25E3%2582%25BB%25E3%2583%2583%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E6%2595%25B0%25E7%25AE%25A1%25E7%2590%2586%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25AA%25E3%2582%25A2%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2582%25AF%25E3%2583%258E%25E3%2583%25AD%25E3%2582%25B8%25E3%2583%25BC%25E3%2582%25BA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQyMGUxYmY0YzcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>オアシステクノロジーズ</dc:creator></item><item><title><![CDATA[疑問解消編④]]></title><description><![CDATA[久しぶりです！
+オアシステクノロジーズの中村です。
+疑問点や知らない単語をChatGPTに聞いてみた！編Part3です。
+
+ 今回のトピック
+
+サイトコア
+セッション
+PRD
+
+
+ サイトコア
+「サイトコアってなんですか？」
+ChatGPT君
+
+「サイトコア」は、Webサイトやデジタルコンテンツを管理するためのプラットフォームです。具体的には、企業が自社のウェブサイトやアプリケーション、オンラインコンテンツを効果的に運営し、パーソナライズされたデジタルエクスペリエンスを提供するために使用されます。
+
+主な機能としては、以下のようなものがあります：
+
+
+コンテンツ管理: ウェブサイトやアプ...]]></description><link>https://zenn.dev/oasys/articles/979c82ca09ddea</link><guid isPermaLink="true">https://zenn.dev/oasys/articles/979c82ca09ddea</guid><pubDate>Fri, 14 Feb 2025 05:37:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Hn6mMroP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%2596%2591%25E5%2595%258F%25E8%25A7%25A3%25E6%25B6%2588%25E7%25B7%25A8%25E2%2591%25A3%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25AA%25E3%2582%25A2%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2582%25AF%25E3%2583%258E%25E3%2583%25AD%25E3%2582%25B8%25E3%2583%25BC%25E3%2582%25BA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQyMGUxYmY0YzcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>オアシステクノロジーズ</dc:creator></item><item><title><![CDATA[Cloud Storage にアップロードしたCSVファイルを BigQuery に自動インポートする]]></title><description><![CDATA[こんにちは、クラウドエース株式会社の許です。
+この記事では、Cloud Storage にアップロードした CSV ファイルを BigQuery に自動インポートする方法について紹介します。
+
+ 大まかな構成
+以下のような構成で実装していきます。
+
+Cloud Storage に CSV ファイルをアップロードすると、Cloud Run Functions がトリガーされ、BigQuery に自動インポートされます。
+Cloud Run Functions は、いくつかトリガーが存在していますが、今回は Cloud Storage のファイルアップロード時にトリガーされる Cloud S...]]></description><link>https://zenn.dev/cloud_ace/articles/e96feef15b1947</link><guid isPermaLink="true">https://zenn.dev/cloud_ace/articles/e96feef15b1947</guid><pubDate>Fri, 14 Feb 2025 00:48:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--940S8Vm2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Cloud%2520Storage%2520%25E3%2581%25AB%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2589%25E3%2581%2597%25E3%2581%259FCSV%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2592%2520BigQuery%2520%25E3%2581%25AB%25E8%2587%25AA%25E5%258B%2595%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%259D%25E3%2583%25BC%25E3%2583%2588%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25A6%25E3%2583%2589%25E3%2582%25A8%25E3%2583%25BC%25E3%2582%25B9%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE2OGMwYmM4MTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>クラウドエース株式会社</dc:creator></item><item><title><![CDATA[【Java】Stream API]]></title><description><![CDATA[
+ Stream APIとは？
+
+リストや配列などのデータを「流れるデータの流れ（ストリーム）」として処理するしくみ。
+「繰り返し処理」や「フィルタリング」「変換」「集計」などを、シンプルに記述出来るようになる。
+
+
+ 基本的な流れ
+データ.stream()      // 1．Stream作成
+     .中間操作()     // 2．中間操作
+     .終端操作();   // 3．終端操作
+1．Stream作成：配列やリストなどのデータからStreamを作成
+2．中間操作：フィルタリング・変換などを行う（複数可）
+3．終端操作：結果を出力・集計・リスト化
+
+ 使用例
+packa...]]></description><link>https://zenn.dev/codek2/articles/c7b07b59564078</link><guid isPermaLink="true">https://zenn.dev/codek2/articles/c7b07b59564078</guid><pubDate>Thu, 13 Feb 2025 07:32:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--AkbsEegZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:%25E3%2580%2590Java%25E3%2580%2591Stream%2520API%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Udemy%25E3%2583%25BB%25E4%25BC%2581%25E6%25A5%25AD%25E3%2583%25BB%25E3%2582%25AA%25E3%2583%25B3%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSWJNcXYyNnJHY2xGVDEtOURITHVZTjhrWUpWOVN1aTJWYmxkNU9aejljTmtNPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Udemy・企業・オンラインプログラミングスクール講師♪codek2</dc:creator></item><item><title><![CDATA[【Java】ラムダ式]]></title><description><![CDATA[
+ ラムダ式とは？
+
+ラムダ式は、1回だけ使用する処理を短く書くための手段
+匿名クラスの代わりとして使える
+Stream APIなどでも利用される
+
+
+ まずは普通のメソッドを復習
+たとえば、数を2倍にするメソッドを作る場合、従来の方法では以下のように記述すると思います。
+しかし、この twice メソッドをたった1度しか使わないなら、毎回メソッドを書くのは面倒ですよね。
+package lambdaTest;
+
+public class Main {
+	public static int twice(int x) {
+		return x * 2;
+	}
+
+	public static...]]></description><link>https://zenn.dev/codek2/articles/069afe4a5bf986</link><guid isPermaLink="true">https://zenn.dev/codek2/articles/069afe4a5bf986</guid><pubDate>Thu, 13 Feb 2025 05:59:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--cu9Gyoyk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Java%25E3%2580%2591%25E3%2583%25A9%25E3%2583%25A0%25E3%2583%2580%25E5%25BC%258F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Udemy%25E3%2583%25BB%25E4%25BC%2581%25E6%25A5%25AD%25E3%2583%25BB%25E3%2582%25AA%25E3%2583%25B3%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSWJNcXYyNnJHY2xGVDEtOURITHVZTjhrWUpWOVN1aTJWYmxkNU9aejljTmtNPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Udemy・企業・オンラインプログラミングスクール講師♪codek2</dc:creator></item><item><title><![CDATA[配列・Enum値をDTOで管理するSQL検索機能の実装方法]]></title><description><![CDATA[https://zenn.dev/takeda_kaho/articles/67466ef5e4ba75#in
+この記事のINを参考に
+
+今回やりたかったこと
+
+検索機能[男・女]
+
+前提
+
+SQL[PostgreSQL]ではgenderというカラム名でINTEGER型
+namedvalueでenumで定義され男・MANなど加工されている
+検索フォームではlist Gender.values()で格納
+actionでgenders定義・デバックで確認して値は正しく取れてると判明
+検索条件に該当する人はDTOファイルから取ってきている
+[DTOとは]：エンティティに「追加情報」を持たせたい...]]></description><link>https://zenn.dev/takeda_kaho/articles/a8698f6198e142</link><guid isPermaLink="true">https://zenn.dev/takeda_kaho/articles/a8698f6198e142</guid><pubDate>Thu, 13 Feb 2025 03:16:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hBFu5K3z--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E9%2585%258D%25E5%2588%2597%25E3%2583%25BBEnum%25E5%2580%25A4%25E3%2582%2592DTO%25E3%2581%25A7%25E7%25AE%25A1%25E7%2590%2586%25E3%2581%2599%25E3%2582%258BSQL%25E6%25A4%259C%25E7%25B4%25A2%25E6%25A9%259F%25E8%2583%25BD%25E3%2581%25AE%25E5%25AE%259F%25E8%25A3%2585%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:takepanda%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAxZWRlZDIyZDYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takepanda</dc:creator></item><item><title><![CDATA[【Java】メソッド参照]]></title><description><![CDATA[
+ メソッド参照とは
+
+すでに定義済みのメソッドを呼び出して実行出来る書き方
+引数が省略出来るので、ラムダ式より記述量が減らすことが可能
+Java8より導入された
+
+
+ 構文
+
+
+
+対象
+書き方
+
+
+
+
+クラスメソッド
+クラス名::メソッド名
+
+
+インスタンスメソッド
+インスタンス名::メソッド名
+
+
+コンストラクタ
+クラス名::new コンストラクタ
+
+
+
+
+ 使用例
+
+ クラスメソッド
+package methodReferenceTest;
+
+import java.util.function.Function;
+
+public class Main {
+	public stati...]]></description><link>https://zenn.dev/codek2/articles/b18de5665c9bd6</link><guid isPermaLink="true">https://zenn.dev/codek2/articles/b18de5665c9bd6</guid><pubDate>Wed, 12 Feb 2025 08:55:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ygNZ6wQq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Java%25E3%2580%2591%25E3%2583%25A1%25E3%2582%25BD%25E3%2583%2583%25E3%2583%2589%25E5%258F%2582%25E7%2585%25A7%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Udemy%25E3%2583%25BB%25E4%25BC%2581%25E6%25A5%25AD%25E3%2583%25BB%25E3%2582%25AA%25E3%2583%25B3%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSWJNcXYyNnJHY2xGVDEtOURITHVZTjhrWUpWOVN1aTJWYmxkNU9aejljTmtNPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Udemy・企業・オンラインプログラミングスクール講師♪codek2</dc:creator></item><item><title><![CDATA[【Java】関数型インターフェース]]></title><description><![CDATA[https://zenn.dev/codek2/articles/069afe4a5bf986
+
+ 関数型インターフェースとは
+1つの抽象メソッドを持つインターフェース
+例）Consumer&lt;T&gt; ※一部省略しています
+@FunctionalInterface
+public interface Consumer&lt;T&gt; {
+    void accept(T t);
+}
+
+ メリット
+
+コードが簡潔になる
+わざわざクラスを作成する必要がない
+
+
+ 従来のインターフェースを使用した例
+package functionInterfaceTest;
+
+public int...]]></description><link>https://zenn.dev/codek2/articles/dbbe5e9ceddc49</link><guid isPermaLink="true">https://zenn.dev/codek2/articles/dbbe5e9ceddc49</guid><pubDate>Wed, 12 Feb 2025 08:25:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--H8RzbZ20--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Java%25E3%2580%2591%25E9%2596%25A2%25E6%2595%25B0%25E5%259E%258B%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%2595%25E3%2582%25A7%25E3%2583%25BC%25E3%2582%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Udemy%25E3%2583%25BB%25E4%25BC%2581%25E6%25A5%25AD%25E3%2583%25BB%25E3%2582%25AA%25E3%2583%25B3%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSWJNcXYyNnJHY2xGVDEtOURITHVZTjhrWUpWOVN1aTJWYmxkNU9aejljTmtNPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Udemy・企業・オンラインプログラミングスクール講師♪codek2</dc:creator></item><item><title><![CDATA[【Java】匿名(無名)クラス]]></title><description><![CDATA[
+ 匿名(無名)クラスとは
+
+名前をつけずにその場で定義して使うクラス
+1度しか使わないクラスに適している
+主に「クラスの継承」や「インターフェースの実装」をするために使われる
+
+
+ なぜ匿名クラスを使うの？
+
+1度しか使わないクラスのために、わざわざファイルを作らなくてもよい
+インスタンスを作ると同時に、その場でクラスの中身を定義することが出来る
+
+
+ 実際のコード例
+
+ クラスやインターフェースなどファイルを分けて作成する場合
+
+ファイルを分けて作成する場合、3つのファイルが必要
+記述する文字数も多い
+
+package nonameTest;
+
+public interface Gr...]]></description><link>https://zenn.dev/codek2/articles/57a7b02dc5f9eb</link><guid isPermaLink="true">https://zenn.dev/codek2/articles/57a7b02dc5f9eb</guid><pubDate>Wed, 12 Feb 2025 06:43:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9TBnbIRv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Java%25E3%2580%2591%25E5%258C%25BF%25E5%2590%258D%2528%25E7%2584%25A1%25E5%2590%258D%2529%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Udemy%25E3%2583%25BB%25E4%25BC%2581%25E6%25A5%25AD%25E3%2583%25BB%25E3%2582%25AA%25E3%2583%25B3%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSWJNcXYyNnJHY2xGVDEtOURITHVZTjhrWUpWOVN1aTJWYmxkNU9aejljTmtNPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Udemy・企業・オンラインプログラミングスクール講師♪codek2</dc:creator></item><item><title><![CDATA[【DBを自作する会 #1-2.5】ファイルシステムを理解しよう！─番外編（JavaにおけるRandomAccessFileの使い方）]]></title><description><![CDATA[
+ 概要
+ファイルレベルインタフェースの典型例である「RandomAccessFile」の紹介です。下の画像に示す機能を実現してくれます。
+
+
+ 使い方
+サンプルコードは以下の通りです。
+public class FileMgr {
+  public static void fileRandomAccess() {
+    try {
+      // f は、今「ファイルの先頭」を指している
+      RandomAccessFile f = new RandomAccessFile("./text.txt", "rws");
+
+      // ファイルの先頭から、2バイト文字を書...]]></description><link>https://zenn.dev/yosshi_zen/articles/a06113fa9b2a66</link><guid isPermaLink="true">https://zenn.dev/yosshi_zen/articles/a06113fa9b2a66</guid><pubDate>Wed, 12 Feb 2025 05:36:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1XRSLfvx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590DB%25E3%2582%2592%25E8%2587%25AA%25E4%25BD%259C%25E3%2581%2599%25E3%2582%258B%25E4%25BC%259A%2520%25231-2.5%25E3%2580%2591%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%25E3%2582%2592%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2597%25E3%2582%2588%25E3%2581%2586%25EF%25BC%2581%25E2%2594%2580%25E7%2595%25AA%25E5%25A4%2596%25E7%25B7%25A8%25EF%25BC%2588Java%25E3%2581%25AB%25E3%2581%258A%25E3%2581%2591%25E3%2582%258BRandomAccess...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2588%25E3%2581%25A3%25E3%2581%2597%25E3%2583%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzkxNzIyZGY4ZjIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>よっしー</dc:creator></item><item><title><![CDATA[Doma のアグリゲート戦略（複数の関連エンティティを一度に取得）]]></title><description><![CDATA[この記事では Doma 3.4.0 で導入された アグリゲート戦略 の少し複雑な例を紹介します。
+例題は TERASOLUNA Server Framework for Java (5.x) Development Guideline の
+「データベースアクセス（MyBatis3編）」に記載されている「関連Entityを1回のSQLで取得する方法について」を参考にさせていただきます（ありがとうございます）。
+上述の TERASOLUNA のガイドラインでは、MyBatis 3 を使って1度の SQL の実行で8つのテーブルを結合し、対応する7つのエンティティクラスへデータをマッピングして...]]></description><link>https://zenn.dev/nakamura_to/articles/64be524291ae33</link><guid isPermaLink="true">https://zenn.dev/nakamura_to/articles/64be524291ae33</guid><pubDate>Tue, 11 Feb 2025 10:06:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--nHqCAQxh--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Doma%2520%25E3%2581%25AE%25E3%2582%25A2%25E3%2582%25B0%25E3%2583%25AA%25E3%2582%25B2%25E3%2583%25BC%25E3%2583%2588%25E6%2588%25A6%25E7%2595%25A5%25EF%25BC%2588%25E8%25A4%2587%25E6%2595%25B0%25E3%2581%25AE%25E9%2596%25A2%25E9%2580%25A3%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2586%25E3%2582%25A3%25E3%2583%2586%25E3%2582%25A3%25E3%2582%2592%25E4%25B8%2580%25E5%25BA%25A6%25E3%2581%25AB%25E5%258F%2596%25E5%25BE%2597%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nakamura_to%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lSWkNjYVdwdlhnTTRldkc0QmM1QjhlZVFGbTUxYm1FZjhXbERLPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nakamura_to</dc:creator></item><item><title><![CDATA[Java | Spring Boot | Thymeleaf | in line Script]]></title><description><![CDATA[
+ JavaのSpring Bootフレームワークで、Thymeleafテンプレート のin-Line-ScriptのJavaScript変数へJSONオブジェクトを埋め込む。
+
+ ObjectMapper：ListをJSONにエンコードしてクライアントへ渡す
+
+
+ObjectMapperでListをJSONにエンコードしてクライアントへ渡す。
+
+//Controller
+List&lt;ReviewHouseUserDTO&gt; reviewList = reviewPage.getContent();
+model.addAttribute("reviewList", reviewL...]]></description><link>https://zenn.dev/v6qh2bxj/articles/a322cade0b9755</link><guid isPermaLink="true">https://zenn.dev/v6qh2bxj/articles/a322cade0b9755</guid><pubDate>Tue, 11 Feb 2025 09:25:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--titHhnhq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java%2520%257C%2520Spring%2520Boot%2520%257C%2520Thymeleaf%2520%257C%2520in%2520line%2520Script%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:v6qh2bxj%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzgzYmY4Njc4OTUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>v6qh2bxj</dc:creator></item><item><title><![CDATA[【Java】instanceof パターン・マッチングについて]]></title><description><![CDATA[
+ instanceofとは？
+オブジェクトが特定のクラスやインターフェースのインスタンスかどうかを調べるためのキーワード
+
+ 基本構文
+オブジェクトが指定したクラス（またはそのサブクラス）のインスタンスであればtrueを返し、それ以外なら false を返す
+オブジェクト instanceof クラス名
+
+ 使用例
+
+ インスタンスがどのクラスなのかチェック
+スーパークラス：Animal
+package instanceofTest;
+
+public class Dog extends Animal {
+
+}
+サブクラス：Dog
+package instanceofTest;
+
+pub...]]></description><link>https://zenn.dev/codek2/articles/87fe71892f7e0b</link><guid isPermaLink="true">https://zenn.dev/codek2/articles/87fe71892f7e0b</guid><pubDate>Tue, 11 Feb 2025 09:10:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--e6DPSVY9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Java%25E3%2580%2591instanceof%2520%25E3%2583%2591%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%25B3%25E3%2583%25BB%25E3%2583%259E%25E3%2583%2583%25E3%2583%2581%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Udemy%25E3%2583%25BB%25E4%25BC%2581%25E6%25A5%25AD%25E3%2583%25BB%25E3%2582%25AA%25E3%2583%25B3%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSWJNcXYyNnJHY2xGVDEtOURITHVZTjhrWUpWOVN1aTJWYmxkNU9aejljTmtNPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Udemy・企業・オンラインプログラミングスクール講師♪codek2</dc:creator></item><item><title><![CDATA[【Java】switch式について]]></title><description><![CDATA[
+ 従来のswitch文とは？
+switch文は、ある値（例えば整数や文字）を比較し、それに応じた処理を行う制御構造
+if文と似ていますが、分岐が多い場合にスッキリ書けるのが特徴
+
+switch (変数) で判定する変数を指定。
+caseに続けて比較する値を書く。
+breakを入れないと、次のcaseまで実行されてしまう。
+どのcase にも当てはまらない場合、defaultが実行される。
+
+例）数値に応じたメッセージを表示する
+package switchest;
+
+public class SwitchExample {
+    public static void main(Str...]]></description><link>https://zenn.dev/codek2/articles/962e23dcd88e19</link><guid isPermaLink="true">https://zenn.dev/codek2/articles/962e23dcd88e19</guid><pubDate>Tue, 11 Feb 2025 08:32:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--q6q6u9A_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Java%25E3%2580%2591switch%25E5%25BC%258F%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Udemy%25E3%2583%25BB%25E4%25BC%2581%25E6%25A5%25AD%25E3%2583%25BB%25E3%2582%25AA%25E3%2583%25B3%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSWJNcXYyNnJHY2xGVDEtOURITHVZTjhrWUpWOVN1aTJWYmxkNU9aejljTmtNPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Udemy・企業・オンラインプログラミングスクール講師♪codek2</dc:creator></item><item><title><![CDATA[Doma で many-to-many 型のリレーションシップを扱う（Criteria API版）]]></title><description><![CDATA[この記事では、Doma の Criteria API を使って many-to-many 型のリレーションシップを扱う方法を紹介します。
+SQLを使ってmany-to-many 型のリレーションシップを扱う方法は以下の記事を参照ください。
+https://zenn.dev/nakamura_to/articles/3bd731d3c50fa5
+
+ DDL と初期データ
+例えば、users、roles、users_roles の 3 つのテーブルがあるとしましょう。1 人のユーザーが複数のロールを持つことができ、1 つのロールが複数のユーザーに割り当てられることがある、というケースです（冒...]]></description><link>https://zenn.dev/nakamura_to/articles/64b35bfcbc3474</link><guid isPermaLink="true">https://zenn.dev/nakamura_to/articles/64b35bfcbc3474</guid><pubDate>Tue, 11 Feb 2025 01:16:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--j3kcJfAB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Doma%2520%25E3%2581%25A7%2520many-to-many%2520%25E5%259E%258B%25E3%2581%25AE%25E3%2583%25AA%25E3%2583%25AC%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%25B7%25E3%2583%2583%25E3%2583%2597%25E3%2582%2592%25E6%2589%25B1%25E3%2581%2586%25EF%25BC%2588Criteria%2520API%25E7%2589%2588%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nakamura_to%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lSWkNjYVdwdlhnTTRldkc0QmM1QjhlZVFGbTUxYm1FZjhXbERLPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nakamura_to</dc:creator></item><item><title><![CDATA[Doma で many-to-many 型のリレーションシップを扱う]]></title><description><![CDATA[Doma 3.4.0 で導入された アグリゲート戦略 を利用することで、many-to-many 型のリレーションシップが簡単に扱えるようになりました。
+
+ アグリゲートとは
+「アグリゲート」という言葉は、DDD（ドメイン駆動設計）の用語として使われることもありますが、ここでは「関連先のエンティティの参照を持つエンティティ」といった意味で捉えてもらえればと思います。
+（私の記憶では、DDD のアグリゲートという概念が登場する前から、一般的な用語として使われていたように思いますが、どうでしたっけ？）
+Doma はアグリゲートの構築を簡単にする機能を持ちます。
+
+ DDL と初期データ
+例え...]]></description><link>https://zenn.dev/nakamura_to/articles/3bd731d3c50fa5</link><guid isPermaLink="true">https://zenn.dev/nakamura_to/articles/3bd731d3c50fa5</guid><pubDate>Mon, 10 Feb 2025 23:49:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--RwCAsMCN--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Doma%2520%25E3%2581%25A7%2520many-to-many%2520%25E5%259E%258B%25E3%2581%25AE%25E3%2583%25AA%25E3%2583%25AC%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%25B7%25E3%2583%2583%25E3%2583%2597%25E3%2582%2592%25E6%2589%25B1%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nakamura_to%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lSWkNjYVdwdlhnTTRldkc0QmM1QjhlZVFGbTUxYm1FZjhXbERLPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nakamura_to</dc:creator></item><item><title><![CDATA[【Java】レコードクラスについて]]></title><description><![CDATA[
+ レコードクラスとは？
+
+Java16で正式に追加された機能。
+「データを保持するためのクラス」を簡潔に記述できます。
+
+今までは例えば以下のようにすべて手動で記述していたものを
+※lombokを使わなかった場合
+package recordTest;
+
+import java.util.Objects;
+
+public class Item {
+	private final int id;
+	private final String name;
+
+	public Item(int id, String name) {
+		this.id = id;
+		this.name = nam...]]></description><link>https://zenn.dev/codek2/articles/cac9d0a5a2e237</link><guid isPermaLink="true">https://zenn.dev/codek2/articles/cac9d0a5a2e237</guid><pubDate>Mon, 10 Feb 2025 08:55:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1S1bnFa3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Java%25E3%2580%2591%25E3%2583%25AC%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25B9%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Udemy%25E3%2583%25BB%25E4%25BC%2581%25E6%25A5%25AD%25E3%2583%25BB%25E3%2582%25AA%25E3%2583%25B3%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSWJNcXYyNnJHY2xGVDEtOURITHVZTjhrWUpWOVN1aTJWYmxkNU9aejljTmtNPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Udemy・企業・オンラインプログラミングスクール講師♪codek2</dc:creator></item><item><title><![CDATA[Java Springbootプロジェクト・Mavenを選択時のディレクトリ構成]]></title><description><![CDATA[
+・src/main/java・・・javaソースを格納
+・static・・・CSS・javascriptのファイルを入れる　staticフォルダ配下はサーバーにデプロイされるときにコンテキストルートにコピーされる。（コンテキストルート＝アプリケーションの最上位の）
+・src/main/resources/templatesフォルダ・・テンプレートエンジンで使用されるファイルを格納する
+・Maven依存関係・・Mavenが管理しているローカルリポジトリであり、.jarファイルの一覧を参照できる
+Springbootプロジェクトの特別なファイル
+・SpringStartApplicatio...]]></description><link>https://zenn.dev/masa_blog_tech/articles/ed9ec95da1c837</link><guid isPermaLink="true">https://zenn.dev/masa_blog_tech/articles/ed9ec95da1c837</guid><pubDate>Sun, 09 Feb 2025 11:18:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ZDZFUmIo--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java%2520Springboot%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E3%2583%25BBMaven%25E3%2582%2592%25E9%2581%25B8%25E6%258A%259E%25E6%2599%2582%25E3%2581%25AE%25E3%2583%2587%25E3%2582%25A3%25E3%2583%25AC%25E3%2582%25AF%25E3%2583%2588%25E3%2583%25AA%25E6%25A7%258B%25E6%2588%2590%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25BB%25E3%2581%25BC%25E6%259C%25AA%25E7%25B5%258C%25E9%25A8%2593PG%25E3%2583%259E%25E3%2582%25B5%25E3%2581%25AE%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%259F%25E3%2583%25B3%25E3%2582%25B0%25E5%25AD%25A6...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSzRpT3FfeUNFNnJqeEJQSGsxX3Y3TUlLV2kxcDNnN0UyVnNla3BSaU5OMW5WUzRrd0k9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ほぼ未経験PGマサのプログラミング学習ブログ</dc:creator></item><item><title><![CDATA[macOS Sequoia で Subclipse + JavaHL による SVN操作を有効化する方法]]></title><description><![CDATA[Mac + Eclipse + Subclipse + JavaHL という組みあわせについて調べると、ヒットするネット知見がどうにも古い。
+ただ古いだけなら良いが、手順に再現性がなくなっているため、試行錯誤して正解を探してみることにした。
+
+ 発端は？
+Homebrew でインストールした svn に JavaHL のライブラリが付属されない。
+（昔はbrew install subversionを叩けば勝手に付属されていたであろう記述が散見される）
+JavaHLは、Subclipse を利用する際に通すIFとして、デフォルトのSVNKitの代替としての選択肢なのだが、現状は（おそらく...]]></description><link>https://zenn.dev/plesio/articles/5ecb338b1a361c</link><guid isPermaLink="true">https://zenn.dev/plesio/articles/5ecb338b1a361c</guid><pubDate>Sat, 08 Feb 2025 14:38:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--pTragIKF--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:macOS%2520Sequoia%2520%25E3%2581%25A7%2520Subclipse%2520%252B%2520JavaHL%2520%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258B%2520SVN%25E6%2593%258D%25E4%25BD%259C%25E3%2582%2592%25E6%259C%2589%25E5%258A%25B9%25E5%258C%2596%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:plesio_%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ3NjgxN2M0NWYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>plesio_</dc:creator></item><item><title><![CDATA[【備忘録】Java SpringBoot 取っ掛かり]]></title><description><![CDATA[
+ 導入
+JavaのSpringBootを利用することはそこそこ多いが、新規で作成する際、毎回同じことを検索していることが多いので、ほぼ自分用に備忘録を作成することにしました。
+今回は、とりあえずプロジェクトを作成して「プレゼンテーション層」と「ビジネスロジック層」の2つについて記載します。
+※データアクセス層は後日作成予定
+
+ 実装
+
+ やりたいこと
+「プレゼンテーション層」と「ビジネスロジック層」の2つをメインで行うので以下が処理できるような超簡単なものを目標にしておきます。
+
+新しくプロジェクトを作成してからRest APIとしてリクエストを受け取る
+エラーが起きたときに共通の処理...]]></description><link>https://zenn.dev/taro_memo/articles/a57d7069976712</link><guid isPermaLink="true">https://zenn.dev/taro_memo/articles/a57d7069976712</guid><pubDate>Sat, 08 Feb 2025 08:01:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--PA0rdYDy--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%2582%2599%25E5%25BF%2598%25E9%258C%25B2%25E3%2580%2591Java%2520SpringBoot%2520%25E5%258F%2596%25E3%2581%25A3%25E6%258E%259B%25E3%2581%258B%25E3%2582%258A%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:taro%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSS1MMGNtLTdqejBtYXBkUFhRWDB4TFFjRHVmaWh6cHNRa3ZrYXlpVjNicEMwPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>taro</dc:creator></item></channel></rss>

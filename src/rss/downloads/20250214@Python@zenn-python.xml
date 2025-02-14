@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Fri, 14 Feb 2025 10:50:52 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[【Python】日々の「freee人事労務」の勤怠登録を自動入力する]]></title><description><![CDATA[
+ はじめに
+「freee人事労務」を日常的に使用している方の中には、毎日の勤怠入力を自動化したいと考えている人もいるでしょう。本記事では、Pythonを用いて「freee人事労務」に自動ログインし、勤怠入力を自動化する方法について解説します。
+!
+一般的にWebサービスをスクレイピングする場合、利用規約にスクレイピングの可否が記載されています。事前に規約を確認し、適切な方法で自動化を行いましょう。
+
+
+ 使用する技術
+
+
+Python: 自動化スクリプトを作成
+
+Selenium: Webブラウザの操作を自動化
+
+Chromedriver: Chromeブラウザを制御するためのドライバ...]]></description><link>https://zenn.dev/ykbone/articles/0ff40c3b3afc6b</link><guid isPermaLink="true">https://zenn.dev/ykbone/articles/0ff40c3b3afc6b</guid><pubDate>Fri, 14 Feb 2025 10:45:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--rXzPm3OU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591%25E6%2597%25A5%25E3%2580%2585%25E3%2581%25AE%25E3%2580%258Cfreee%25E4%25BA%25BA%25E4%25BA%258B%25E5%258A%25B4%25E5%258B%2599%25E3%2580%258D%25E3%2581%25AE%25E5%258B%25A4%25E6%2580%25A0%25E7%2599%25BB%25E9%258C%25B2%25E3%2582%2592%25E8%2587%25AA%25E5%258B%2595%25E5%2585%25A5%25E5%258A%259B%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ykbone%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAyYmU2ODQzYjEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ykbone</dc:creator></item><item><title><![CDATA[Pythonでシンプルなパスワードジェネレータを作成する]]></title><description><![CDATA[
+ はじめに
+こんにちは！今回はPythonを使って、簡単にパスワードを生成するプログラムを作成してみましょう。
+
+ 目的
+セキュリティを強化するためには、強力なパスワードを使用することが重要です。このプログラムでは、ランダムな文字、数字、特殊文字を組み合わせたパスワードを簡単に生成できます。
+
+ 必要なライブラリ
+Pythonの標準ライブラリであるrandomとstringを使用しますので、特別なインストールは必要ありません。
+
+ コードの説明
+以下がパスワードジェネレータのコードです。
+import random
+import string
+
+def generate_passwor...]]></description><link>https://zenn.dev/mstng/articles/e273a2120272a2</link><guid isPermaLink="true">https://zenn.dev/mstng/articles/e273a2120272a2</guid><pubDate>Fri, 14 Feb 2025 09:21:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--WdbAC7CS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A7%25E3%2582%25B7%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AB%25E3%2581%25AA%25E3%2583%2591%25E3%2582%25B9%25E3%2583%25AF%25E3%2583%25BC%25E3%2583%2589%25E3%2582%25B8%25E3%2582%25A7%25E3%2583%258D%25E3%2583%25AC%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%2592%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mstng%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSlVrUWI4S2o0cnl1WHhNZ1FBeXJleTFmOW5JTW1iRmN6UVRzaC1YYk1udWQtNEotYkF2Zz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mstng</dc:creator></item><item><title><![CDATA[Herokuのログを取得し、整形する]]></title><description><![CDATA[
+ はじめに
+現在監視している Heroku 環境にて、最近はリクエスト数が増えたので、監視用のバッチのためのログ取得処理を実装したので、以下に記します。
+
+ ログ取得
+Heroku のログは、Heroku API を使用して取得することができます。
+本プログラムでは、error_code と dyno に関心があったので、それらを取得するようにしました。
+取得したログは、扱いやすいように pydantic モデルに変換しています。
+
+log_get.py
+from typing import Dict, Optional, List
+import requests
+from datet...]]></description><link>https://zenn.dev/straydog/articles/20fa20448202f3</link><guid isPermaLink="true">https://zenn.dev/straydog/articles/20fa20448202f3</guid><pubDate>Fri, 14 Feb 2025 09:15:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ohxcFTs1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Heroku%25E3%2581%25AE%25E3%2583%25AD%25E3%2582%25B0%25E3%2582%2592%25E5%258F%2596%25E5%25BE%2597%25E3%2581%2597%25E3%2580%2581%25E6%2595%25B4%25E5%25BD%25A2%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:stray%2520dog%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBjYzhmZDAzMGYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>stray dog</dc:creator></item><item><title><![CDATA[オーディオ型の振動子を用いた触覚デバイスの実装方法]]></title><description><![CDATA[
+ この記事に書いてあること
+本記事では、オーディオ型の振動子を用いた触覚デバイスの実装方法について解説します。
+
+ 触覚の話
+触覚とは、身体を通して外界から加わる圧力や振動などの力学的な刺激を受け取り、それを脳が処理して知覚として成立させる感覚です。人間は一般的に1Hz程度の低周波から数百Hz、さらには数千Hzの高周波帯まで感じ取ることができるとされており、スマートフォンの通知で感じる振動（およそ100～200Hz）は、その代表的な例にあたります。スマートフォンのバイブレーションは、皮膚に直接小刻みな振動や圧力を与えることで認識されますが、こうした周波数帯を変調することで、ざらざらした...]]></description><link>https://zenn.dev/yamarico/articles/8ead36c905e60d</link><guid isPermaLink="true">https://zenn.dev/yamarico/articles/8ead36c905e60d</guid><pubDate>Fri, 14 Feb 2025 09:09:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--N0Dfxvac--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25AA%25E3%2583%25BC%25E3%2583%2587%25E3%2582%25A3%25E3%2582%25AA%25E5%259E%258B%25E3%2581%25AE%25E6%258C%25AF%25E5%258B%2595%25E5%25AD%2590%25E3%2582%2592%25E7%2594%25A8%25E3%2581%2584%25E3%2581%259F%25E8%25A7%25A6%25E8%25A6%259A%25E3%2583%2587%25E3%2583%2590%25E3%2582%25A4%25E3%2582%25B9%25E3%2581%25AE%25E5%25AE%259F%25E8%25A3%2585%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yamarico%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJjNjJhMDkzODcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yamarico</dc:creator></item><item><title><![CDATA[回答を分岐させる簡易RAGスクリプトを組んでみた]]></title><description><![CDATA[
+ はじめに
+以前保険の窓口に行った際、細かい要望をたくさん出してしまったため、自分に合う保険を探すのに担当の人がすごく時間を使っていて、少し申し訳なく思ったことがありました。
+そこで膨大な量の保険商品の中から最適な保険商品を選ぶAIを作ってみようと考えました。
+具体的には商品pdfをアップロードしておく事で、通常の生成AIではできない専門的な応答ができるシステムを考えました。
+また、保険の質問中に保険以外のことも気になるかもしれないので通常のgeminiとしても動作するようにしてみました。
+
+ 仕組み
+
+
+質問判定　　　: 保険の質問かを判定します。保険に関する質問でないなら手順4に進...]]></description><link>https://zenn.dev/rounda_blog/articles/c0f19cb96ea86c</link><guid isPermaLink="true">https://zenn.dev/rounda_blog/articles/c0f19cb96ea86c</guid><pubDate>Fri, 14 Feb 2025 07:41:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wHO2SvF0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%259B%259E%25E7%25AD%2594%25E3%2582%2592%25E5%2588%2586%25E5%25B2%2590%25E3%2581%2595%25E3%2581%259B%25E3%2582%258B%25E7%25B0%25A1%25E6%2598%2593RAG%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2583%2588%25E3%2582%2592%25E7%25B5%2584%25E3%2582%2593%25E3%2581%25A7%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:abe%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y4NWFjNjE2ZTAuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Rounda%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSVVUVTRRNnJpQWo0ei1YeTk3X2VSRVNpaUExTXIyTkZDSUUwUVdiczdkb2JaOU53PXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>abe</dc:creator></item><item><title><![CDATA[FAISS]]></title><description><![CDATA[
+src/FAISS/faiss.py
+import faiss
+import openai
+import numpy as np
+import os
+
+class FAISSWrapper:
+
+    def __init__(self, embedding_model: str = "text-embedding-3-small"):
+        """
+        コンストラクタ。OpenAI APIキーと埋め込みモデルを初期化します。
+        """
+        self.embedding_model = embedding_model
+        se...]]></description><link>https://zenn.dev/yunosuke068/articles/53121d7c0a264f</link><guid isPermaLink="true">https://zenn.dev/yunosuke068/articles/53121d7c0a264f</guid><pubDate>Fri, 14 Feb 2025 04:53:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--eB6ku7Oz--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_80:FAISS%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yunosuke%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0ZUxYNl83dzZHbUdMY2pqcTF6OFNxa2ZTQmJVWWJmcXdlcGdSczV5eEZucXc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yunosuke</dc:creator></item><item><title><![CDATA[MixPR]]></title><description><![CDATA[
+src/MixPR/mixpr.py
+import numpy as np
+
+class MixPR:
+    """
+    Personalized PageRankを用いて文書をランキングするクラス。
+    ベクトライズのロジック（TF-IDF or BERT など）はコンストラクタ引数の `vectorizer` で差し替える。
+    """
+    def __init__(self, vectorizer, alpha=0.85, max_iter=100, tol=1e-6):
+        """
+        Parameters:
+        - vec...]]></description><link>https://zenn.dev/yunosuke068/articles/c7fe5ed8588e78</link><guid isPermaLink="true">https://zenn.dev/yunosuke068/articles/c7fe5ed8588e78</guid><pubDate>Fri, 14 Feb 2025 03:26:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--A5qvSC8o--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_80:MixPR%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yunosuke%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0ZUxYNl83dzZHbUdMY2pqcTF6OFNxa2ZTQmJVWWJmcXdlcGdSczV5eEZucXc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yunosuke</dc:creator></item><item><title><![CDATA[Docker Desktopを利用してPytorch環境の構築するメモ]]></title><description><![CDATA[環境を構築するための簡単なメモです。Dockerの仕組みなどの解説は省略します。
+
+ STEP1:GPUドライバをインストール
+https://www.nvidia.com/ja-jp/drivers/
+「ドライバーの手動検索」より使用するGPUを検索し手順にしたがいドライバーのインストーラーをダウンロードする。基本的には、最新版をダウンロードで問題ない。
+インストーラーを実行しドライバーをインストールする。完了後、コマンドプロンプトを起動し以下のコマンドを実行し情報が表示されているとドライバーが問題なくインストールされている。右上の「CUDA Version」が「このCUDAのバージョ...]]></description><link>https://zenn.dev/faceshiba/articles/a82d309aa4f1d9</link><guid isPermaLink="true">https://zenn.dev/faceshiba/articles/a82d309aa4f1d9</guid><pubDate>Fri, 14 Feb 2025 03:08:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--F-GrnIo9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%2520Desktop%25E3%2582%2592%25E5%2588%25A9%25E7%2594%25A8%25E3%2581%2597%25E3%2581%25A6Pytorch%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25AE%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2599%25E3%2582%258B%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E4%25BA%25BA%25E9%259D%25A2%25E6%259F%25B4%25E7%258A%25AC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FhNmQxMTQwYWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>人面柴犬</dc:creator></item><item><title><![CDATA[スポーツデータサイト一覧(野球編)]]></title><description><![CDATA[スポーツデータの分析に興味があるけれど、「どのサイトを見ればいいのかわからない」「どんなデータが手に入るのか知りたい」と思ったことはありませんか？
+野球は、打率や防御率といった基本的なスタッツから、打球速度・回転数・WARなどの高度なセイバーメトリクスまで、多岐にわたるデータが活用されています。しかし、リーグや球団によって公開されているデータの種類は異なり、どのサイトを活用すればよいのか迷うこともあると思います。
+この記事では、MLBとNPBのデータが取得できる主要なサイトを紹介します。試合ごとの成績をチェックしたい場合から、詳細なパフォーマンス分析を行いたい場合まで、目的に応じて活用し...]]></description><link>https://zenn.dev/genki_morph/articles/485bc82ffe975b</link><guid isPermaLink="true">https://zenn.dev/genki_morph/articles/485bc82ffe975b</guid><pubDate>Fri, 14 Feb 2025 03:01:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--AgmRzY2m--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B9%25E3%2583%259D%25E3%2583%25BC%25E3%2583%2584%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%25B5%25E3%2582%25A4%25E3%2583%2588%25E4%25B8%2580%25E8%25A6%25A7%2528%25E9%2587%258E%25E7%2590%2583%25E7%25B7%25A8%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:genki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk5ZDE2MzM0ZjkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>genki</dc:creator></item><item><title><![CDATA[コンテナ内でuvicorn経由でfastAPIを動かす場合のメモ]]></title><description><![CDATA[
+ 概要
+docker内でuvicorn経由でfastAPIを動かす場合のメモです。
+loggingの設定や、環境に応じた切り替えなどを考慮して、uvicornの起動をmain.pyから行うようにしました。
+
+ 構成
+構成は以下の通りです。
+app
+ ┣ src
+ ┃ ┣ main.py
+ ┣ Dockerfile
+ ┣ docker-compose.yaml
+ ┣ log_config.yaml
+ ┗ requirements.txt
+Dockefileは以下の通りです。
+main.pyからuvicornを起動するようにしているので、単純なコマンドになっています。
+# ベースイメージと...]]></description><link>https://zenn.dev/kicchan/articles/0006_llyssm_docker_and_uvicorn</link><guid isPermaLink="true">https://zenn.dev/kicchan/articles/0006_llyssm_docker_and_uvicorn</guid><pubDate>Fri, 14 Feb 2025 03:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vO0iXSAK--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2586%25E3%2583%258A%25E5%2586%2585%25E3%2581%25A7uvicorn%25E7%25B5%258C%25E7%2594%25B1%25E3%2581%25A7fastAPI%25E3%2582%2592%25E5%258B%2595%25E3%2581%258B%25E3%2581%2599%25E5%25A0%25B4%25E5%2590%2588%25E3%2581%25AE%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kicchan%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U0NmExYWE4YWIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kicchan</dc:creator></item><item><title><![CDATA[Djangoでテストデータを用意する]]></title><description><![CDATA[
+ 概要
+半年前に転職して、現職でがっつり Python x Django を使用した開発を行っている。
+これまで趣味で使うことや仕事で隙を見て使用することがあったが、これを期にしっかり学んでいきたい。
+本記事では、Djangoをでユニットテストを行う上で、テストデータを用意する複数の方法についてそれぞれの特徴を簡単にではあるが整理していきたい。
+テストデータを用意する3つの方法として以下を取り上げる。
+
+モデル.objects.create を使用する
+フィクスチャ を使用する
+FactoryBoy を使用する
+
+
+ 環境
+
+Python : 3.13.0
+Django : 5.1.6...]]></description><link>https://zenn.dev/enechange_blog/articles/c562f8ebdff66c</link><guid isPermaLink="true">https://zenn.dev/enechange_blog/articles/c562f8ebdff66c</guid><pubDate>Fri, 14 Feb 2025 01:55:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2AwWm7cb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Django%25E3%2581%25A7%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%2592%25E7%2594%25A8%25E6%2584%258F%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E6%25B7%25B1%25E6%25BE%25A4%25E3%2582%25BD%25E3%2583%2595%25E3%2583%2588%25E3%2582%25A6%25E3%2582%25A7%25E3%2582%25A2%25E9%2596%258B%25E7%2599%25BA%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk5YThmZmY3MzEuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:ENECHANGE%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0ZHQyY0NZb0txM29xUzY4RDcyOThGeFhGYjFWSGIyTkNXWVdETT1zOTYtYw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>深澤ソフトウェア開発ブログ</dc:creator></item><item><title><![CDATA[Pythonのクラス変数とインスタンス変数]]></title><description><![CDATA[
+ はじめに
+Pythonのクラス変数とインスタンス変数の値の持ち方がよくわからなかったので整理する。
+登場する用語達
+
+Human ➡ Humanクラス
+human_name ➡ 変数
+change_name ➡ 名前を書き換えるメソッド
+first_human ➡ インスタンス
+second_human ➡ インスタンス
+
+init() ➡ 特殊メソッド
+
+
+
+ Pythonのクラス変数
+Pythonのクラス変数は、クラスで保持する変数のため、すべてのインスタンスで共有される。
+例えば、下記のコードを例に詳しく見てみる。
+class Human:
+    human_name:str...]]></description><link>https://zenn.dev/aputech/articles/bc1ca815bde582</link><guid isPermaLink="true">https://zenn.dev/aputech/articles/bc1ca815bde582</guid><pubDate>Thu, 13 Feb 2025 22:15:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--38YNsvGu--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25AE%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25B9%25E5%25A4%2589%25E6%2595%25B0%25E3%2581%25A8%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%25B3%25E3%2582%25B9%25E5%25A4%2589%25E6%2595%25B0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25B2%25E3%2583%25BC%2540%25E6%2583%2585%25E5%25A0%25B1%25E7%25B3%25BB%25E5%25AD%25A6%25E7%2594%259F%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA4NGM3YTBlZTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ひー@情報系学生</dc:creator></item><item><title><![CDATA[DuckdbでSQLのCAST(型変換)がうまくいかない時どうするか]]></title><description><![CDATA[
+ どう言った時にうまくいかないか
+基本的にSQLでは列ごとの型と言うものは決まっている。
+なので例えば文字と数字の混ざった列を扱いたい時にはVARCHAR(文字列)などを使用する。
+この時にこの列をINTなどにCASTすると当然エラーが出る。
+ただこう言った文字と数字の混ざった列から数字のみINTへCASTしたいという需要はあると思う。
+
+ 解決法
+Duckdbに限らず、SQLにはTRY_CASTというものがあるらしい。
+型変換を試みて変換が可能なら型変換して、不可能ならNULL を返すというもの。
+
+ テーブル作成
+文字列と数字の混ざった列を作成する。
+import duckdb
+
+...]]></description><link>https://zenn.dev/amana/articles/ef55b29a9eb40b</link><guid isPermaLink="true">https://zenn.dev/amana/articles/ef55b29a9eb40b</guid><pubDate>Thu, 13 Feb 2025 21:18:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7i18u9yP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Duckdb%25E3%2581%25A7SQL%25E3%2581%25AECAST%2528%25E5%259E%258B%25E5%25A4%2589%25E6%258F%259B%2529%25E3%2581%258C%25E3%2581%2586%25E3%2581%25BE%25E3%2581%258F%25E3%2581%2584%25E3%2581%258B%25E3%2581%25AA%25E3%2581%2584%25E6%2599%2582%25E3%2581%25A9%25E3%2581%2586%25E3%2581%2599%25E3%2582%258B%25E3%2581%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nk_work%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ1MjJkN2U5MzIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nk_work</dc:creator></item><item><title><![CDATA[Python 2 を AArch64 の macOS (Apple silicon) で動かす]]></title><description><![CDATA[Python 2 を AArch64 (Apple silicon) の macOS で動かしたときのメモ。
+
+CPython の Git プロジェクトをレポジトリ (https://github.com/python/cpython) からクローンしてくる。
+Python 2 の一番新しいやつからブランチを作る。git checkout -b build-2.7.18 v2.7.18.
+以下のように configure を書き換える。
+
+$ git diff
+diff --git a/configure b/configure
+index 63d675312da..4d7aab7de8...]]></description><link>https://zenn.dev/paalon/articles/78c92ed5d2ba24</link><guid isPermaLink="true">https://zenn.dev/paalon/articles/78c92ed5d2ba24</guid><pubDate>Thu, 13 Feb 2025 18:22:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--VtGjcyMq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25202%2520%25E3%2582%2592%2520AArch64%2520%25E3%2581%25AE%2520macOS%2520%2528Apple%2520silicon%2529%2520%25E3%2581%25A7%25E5%258B%2595%25E3%2581%258B%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Paalon%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE4ZWViZDI3YTcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Paalon</dc:creator></item><item><title><![CDATA[Jupyter NotebookをGitで管理する方法]]></title><description><![CDATA[
+ はじめに
+Gitを練習していた際に、「Jupyter NotebookとGitって相性が悪いのでは？」と疑問に思い、調べてみました。
+本記事では、Jupyter NotebookをGitで管理する際の問題点と、それを解決する方法について紹介します。
+
+ 結論
+Jupyter Notebook (.ipynb) はGitとの相性が悪いですが、解決策として以下の方法が挙げられます。
+
+
+.ipynb をGitで管理するなら nbstripout を使用する
+
+.py ファイルで管理するなら # %% を使う
+
+特に .py ファイルで # %% を使えば、.ipynb と同じように実行で...]]></description><link>https://zenn.dev/fushirou/articles/b12bf45055081b</link><guid isPermaLink="true">https://zenn.dev/fushirou/articles/b12bf45055081b</guid><pubDate>Thu, 13 Feb 2025 16:21:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--V_yuA1j2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Jupyter%2520Notebook%25E3%2582%2592Git%25E3%2581%25A7%25E7%25AE%25A1%25E7%2590%2586%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:fushirou%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS09STTNndjNPQ3hleVQ0RUJBY0U2V0RfYklNZkozVlpTZzdxZFpMV2k0QTRkWkF0LWU9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>fushirou</dc:creator></item><item><title><![CDATA[Playwrightとlxmlを利用したスクレイピング]]></title><description><![CDATA[
+ はじめに
+少し前からJ-REITの情報を地図上に表示するJ-REIT Mapsというアプリを開発しています。
+https://jreitmaps.defrag.works/
+REITを運営している会社のWebサイトをスクレイピングして、情報を地図に表示するWebアプリです。REITの建物や施設は意外と身近なところにあるので、それを地図に表示するとおもしろいかなと思ってつくっています。
+
+ REITのWebサイトをスクレイピング
+Webサイトから情報を取得するため、lxmlを利用してスクレイピングしています。ただ、昨今はJavaScriptを利用しているケースも多くて、その場合はJav...]]></description><link>https://zenn.dev/kaorumori/articles/aa36eb5dbcf776</link><guid isPermaLink="true">https://zenn.dev/kaorumori/articles/aa36eb5dbcf776</guid><pubDate>Thu, 13 Feb 2025 15:10:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--VhrSyMZG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Playwright%25E3%2581%25A8lxml%25E3%2582%2592%25E5%2588%25A9%25E7%2594%25A8%25E3%2581%2597%25E3%2581%259F%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AC%25E3%2582%25A4%25E3%2583%2594%25E3%2583%25B3%25E3%2582%25B0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kaorumori%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRjZjA1YmY3MzAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kaorumori</dc:creator></item><item><title><![CDATA[Pythonのコンパイラを作りたい #6 - ランタイムとメモリ管理]]></title><description><![CDATA[こんにちは。前回 (「#5 - リストと辞書の実装」) では、Python 的なリストや辞書を C 言語でどのように再現しているか、その実装の概要をご紹介しました。
+今回のテーマは、ランタイムとメモリ管理です。
+リストや辞書などのオブジェクトを動的に生成していく過程で、どのようにメモリを確保・解放しているのか、そして なぜ Boehm GC (ガーベジコレクタ) を導入したのか について具体的にお話しします。
+
+ 1. 当初は自前でメモリ管理していた
+
+ 1-1. ポインタの連鎖が増えて混乱した
+開発初期には「C 言語で書くんだから、malloc と free をうまく使えば十分だろう」...]]></description><link>https://zenn.dev/t3tra/articles/f1d407419da53d</link><guid isPermaLink="true">https://zenn.dev/t3tra/articles/f1d407419da53d</guid><pubDate>Thu, 13 Feb 2025 11:47:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--h6hc3hSx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25AE%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2591%25E3%2582%25A4%25E3%2583%25A9%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258A%25E3%2581%259F%25E3%2581%2584%2520%25236%2520-%2520%25E3%2583%25A9%25E3%2583%25B3%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25A0%25E3%2581%25A8%25E3%2583%25A1%25E3%2583%25A2%25E3%2583%25AA%25E7%25AE%25A1%25E7%2590%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:t3tra%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ2MDdkNzY3ZTMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>t3tra</dc:creator></item><item><title><![CDATA[【Python】ABC392Fを解く]]></title><description><![CDATA[解説ACですが、Pythonで意外と簡単に解けたので共有です！
+
+ 問題
+https://atcoder.jp/contests/abc392/tasks/abc392_f
+Diff: 1395
+
+ 解説を読む
+
+A′ = [1, 2, …, N] に対し、逆順に削除していく
+
+A′は「最終的な位置」を表しています。
+この操作をしていくことで、それぞれの数字が最終的に何番目かを調べることができるので、
+その後は数字を当てはめていくことで答えを求めることができます。
+
+ 便利なライブラリ
+https://qiita.com/Shirotsume/items/706742162db68c48...]]></description><link>https://zenn.dev/takechi_s/articles/atcoder-abc392f</link><guid isPermaLink="true">https://zenn.dev/takechi_s/articles/atcoder-abc392f</guid><pubDate>Thu, 13 Feb 2025 11:21:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--WjcwFTBT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591ABC392F%25E3%2582%2592%25E8%25A7%25A3%25E3%2581%258F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259F%25E3%2583%25BC%25E3%2581%2591%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS282Vk5hSnU0WU5WQ3ZHb0lQME5NV3oxODY5MXFheGRJZHROZXdSZ1lwQ1g5eHpKYz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>たーけ</dc:creator></item><item><title><![CDATA[メタヒューリスティクス開発者向けのツールopytimizerを使ってみる]]></title><description><![CDATA[
+ 本記事について
+メタヒューリスティクスを開発する際に、開発コストを下げるツールがないかと探していたら、pythonパッケージであるopytimizerを見つけました。簡単に触ってみて面白いなと思ったので紹介します。０から全て開発するよりもopytimizerを使った方が少し便利かなという印象です。
+本記事は、pythonに慣れていて、メタヒューリスティクス等の数理最適化アルゴリズムの開発者やアルゴリズム実装に関心がある方向けに書いています。
+
+ はじめに
+メタヒューリスティクスとは、数理最適化用語集によると以下のように定義されています。具体的にはシミュレーテッドアニーリングやタブーサ...]]></description><link>https://zenn.dev/jij_inc/articles/e13cdfe2c934bd</link><guid isPermaLink="true">https://zenn.dev/jij_inc/articles/e13cdfe2c934bd</guid><pubDate>Thu, 13 Feb 2025 09:00:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5i5EjTPS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%25A1%25E3%2582%25BF%25E3%2583%2592%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%25AA%25E3%2582%25B9%25E3%2583%2586%25E3%2582%25A3%25E3%2582%25AF%25E3%2582%25B9%25E9%2596%258B%25E7%2599%25BA%25E8%2580%2585%25E5%2590%2591%25E3%2581%2591%25E3%2581%25AE%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25ABopytimizer%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:sulazo8%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I0ZjhjYjkwMmYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Jij%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRjNTA1NjU5NzUuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sulazo8</dc:creator></item><item><title><![CDATA[tfrecord形式のデータを使ってみる]]></title><description><![CDATA[
+
+ はじめに
+
+データは命
+AI 開発を行う上では、データは非常に重要です。
+どれくらい賢い AI を作れるかは、どのようなデータを使うか次第、と言っても過言ではありません。
+そんな重要なデータの形式についての話です。
+
+ tfrecord 形式って？
+tfrecord 形式（テンソルフローレコードけいしき）とは、TensorFlow が推奨する特別なデータ保存形式です。
+
+tfrecord 形式
+たとえば、たくさんの画像をいくつかのラベルに分類するモデルを作成する場合を考えましょう。その際、学習データや評価データは、画像の形式で保存されていると思います。
+この時、実際に学習する際は、...]]></description><link>https://zenn.dev/nekoallergy/articles/tf-basic-tfrecord</link><guid isPermaLink="true">https://zenn.dev/nekoallergy/articles/tf-basic-tfrecord</guid><pubDate>Thu, 13 Feb 2025 08:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8USsLG4E--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:tfrecord%25E5%25BD%25A2%25E5%25BC%258F%25E3%2581%25AE%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:NekoAllergy%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRkMzhmNmU1YjguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>NekoAllergy</dc:creator></item></channel></rss>
