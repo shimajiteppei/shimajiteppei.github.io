@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「TypeScript」のフィード]]></title><description><![CDATA[Zennのトピック「TypeScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/typescript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/f13e758fdb.png</url><title>Zennの「TypeScript」のフィード</title><link>https://zenn.dev/topics/typescript</link></image><generator>zenn.dev</generator><lastBuildDate>Sat, 15 Feb 2025 08:49:06 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/typescript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[【Zod】string型の"true", "false"をboolean型のtrue, falseに変換する]]></title><description><![CDATA[
+ はじめに
+
+ 何がしたかったか
+文字列として存在する"true"と"false"をzodでbooleanにしてtrueとfalseに直そうとしました。
+
+ 全部trueになってしまう！
+とりあえず定義
+const a = z.coerce.boolean();
+"true"はもちろんtrueになります。
+a.parse("true") // true
+しかし、"false"もtrueになってしまいます...
+a.parse("false") // true
+この挙動はJavaScriptのBoolean()と似ています。
+&gt; Boolean("false")
+true
+
+ 解決...]]></description><link>https://zenn.dev/r64/articles/3c6cfc8a39f3b6</link><guid isPermaLink="true">https://zenn.dev/r64/articles/3c6cfc8a39f3b6</guid><pubDate>Sat, 15 Feb 2025 06:36:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ieuzPnO6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Zod%25E3%2580%2591string%25E5%259E%258B%25E3%2581%25AE%2522true%2522%252C%2520%2522false%2522%25E3%2582%2592boolean%25E5%259E%258B%25E3%2581%25AEtrue%252C%2520false%25E3%2581%25AB%25E5%25A4%2589%25E6%258F%259B%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ruka64%2528%25E3%2582%258B%25E3%2581%258B%2529%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBiZDlmOWU5NzEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ruka64(るか)</dc:creator></item><item><title><![CDATA[TypeScript + Next.js + Prisma/Drizzle を用いたSaaSサンプルレポジトリ【ボイラーテンプレート】]]></title><description><![CDATA[!
+この記事は、OpenAIのDeep Research機能を使って調査したものになります
+
+
+ はじめに
+ここでは TypeScript と Next.js、および ORM（Prisma や Drizzle）を使用したオープンソースのSaaS向けサンプル／ボイラープレートリポジトリを紹介します。以下の要件を満たしているものを中心にピックアップしています。
+
+認証・認可機能
+Role-based access control (RBAC)
+ユーザー／組織（ワークスペース）のエンティティを持つ
+1ユーザーが複数の組織に所属可能
+
+
+ 各プロジェクトの機能比較
+
+
+
+リポジトリ
+技術スタック...]]></description><link>https://zenn.dev/1mono2/articles/843f850cdb9a5a</link><guid isPermaLink="true">https://zenn.dev/1mono2/articles/843f850cdb9a5a</guid><pubDate>Sat, 15 Feb 2025 04:06:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--mA0m9Vh9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%2520%252B%2520Next.js%2520%252B%2520Prisma%252FDrizzle%2520%25E3%2582%2592%25E7%2594%25A8%25E3%2581%2584%25E3%2581%259FSaaS%25E3%2582%25B5%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AB%25E3%2583%25AC%25E3%2583%259D%25E3%2582%25B8%25E3%2583%2588%25E3%2583%25AA%25E3%2580%2590%25E3%2583%259C...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%25A3%25AE%25E6%259C%25AC%25E3%2582%25BF%25E3%2582%25AB%25E3%2583%2592%25E3%2583%25AD%2520%257C%2520nocall%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dTeENxcFE2VXBZX2dJa1E4cTBmVzBEbFpMTnpIc0FoZWl1czJNaUE9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>森本タカヒロ | nocall株式会社 CTO</dc:creator></item><item><title><![CDATA[TypeScript 入門]]></title><description><![CDATA[
+ 1. はじめに
+現代のWeb開発では、コードの信頼性や保守性が求められます。JavaScriptはその柔軟性から非常に人気のある言語ですが、大規模なプロジェクトになると、型がないために予期せぬエラーが発生しやすいという課題もあります。そこで登場するのが TypeScript です。
+TypeScriptは、JavaScriptのスーパーセットとして設計されており、静的型付けを導入することで、開発中に多くのエラーを事前に防ぐことができます。この記事では、TypeScriptの基本を丁寧に解説し、次のReact入門記事へと繋がる知識を身につけていきます。
+
+ 2. TypeScriptと...]]></description><link>https://zenn.dev/utokyo_aido/articles/b499e16d9189cb</link><guid isPermaLink="true">https://zenn.dev/utokyo_aido/articles/b499e16d9189cb</guid><pubDate>Sat, 15 Feb 2025 04:03:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BQdSkWaL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:TypeScript%2520%25E5%2585%25A5%25E9%2596%2580%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:AIDO%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS3A3SUtCeDVyd2FRcWFFY3dLZ3p2cDVSNmdVSk40UDd0bTU3T21IQVJsVFlXSVFhdz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>AIDO</dc:creator></item><item><title><![CDATA[AutonomeでAgent Kitを使う]]></title><description><![CDATA[
+ AutonomeでAgent Kitを使う
+この記事は2025年2月時点の情報です。
+最近話題の「AIエージェント」を手軽にデプロイできる
+プラットフォームとして注目されるのが**Autonome（オートノーム）**です。
+本記事では、Autonome上でAgent Kitを利用して
+AIエージェントを作成し、デプロイする方法を解説します。
+
+ Autonomeとは
+AutonomeはAltLayer社が提供する
+自律型AIエージェントの作成とデプロイのための
+プラットフォームです。
+Web上のダッシュボードから簡単にエージェントを起動でき、
+インフラ構築の手間が不要です。
+Auto...]]></description><link>https://zenn.dev/bull/articles/how-to-integrate-agentkit-to-autonome</link><guid isPermaLink="true">https://zenn.dev/bull/articles/how-to-integrate-agentkit-to-autonome</guid><pubDate>Sat, 15 Feb 2025 01:39:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8ympY_Fz--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Autonome%25E3%2581%25A7Agent%2520Kit%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:bull%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2g2MllRUHZOMXdGR25zMmFxNEpvOWI0VW96UTY4b3NfdlBOOFFqZUE9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>bull</dc:creator></item><item><title><![CDATA[TinyBaseのTypeScript型システム]]></title><description><![CDATA[TinyBaseはシンプルながら強力な型サポートを提供しており、TypeScriptを活用することでより安全で開発効率の高いデータ管理が可能になります。それでは、順番に見ていきましょう！
+
+ 基本的な型サポート
+TinyBaseはデフォルトで型サポートを備えており、データの格納や取得時に型チェックが適用されます。特に、Cell や Value の型は number、string、boolean のいずれかに制限されているため、意図しないデータの混入を防げます。
+import { createStore } from 'tinybase';
+
+const store = createSto...]]></description><link>https://zenn.dev/53able/articles/59f9ea61729cc9</link><guid isPermaLink="true">https://zenn.dev/53able/articles/59f9ea61729cc9</guid><pubDate>Fri, 14 Feb 2025 23:46:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--t2FIXeyf--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TinyBase%25E3%2581%25AETypeScript%25E5%259E%258B%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:53able%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFiZWE2OGI5M2YuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>53able</dc:creator></item><item><title><![CDATA[Hono & Stream Deck: 実践的モダン開発ワークフロー構築術]]></title><description><![CDATA[本書は、高速WebフレームワークHonoとElgato Stream Deckを連携させ、モダンな開発ワークフローを構築する方法を解説します。CLI操作や環境構築の自動化、API開発、デプロイメント、プラグイン開発まで、実践的な内容を網羅。読者は、HonoとStream Deckを活用し、開発効率を大幅に向上させ、より創造的な開発に集中できるようになります。]]></description><link>https://zenn.dev/idev/books/book-20250215-041516</link><guid isPermaLink="true">https://zenn.dev/idev/books/book-20250215-041516</guid><pubDate>Fri, 14 Feb 2025 20:20:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--t0jSW3ss--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci8wNTc2MWEyMjAxLnBuZw==%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>timeless-residents</dc:creator></item><item><title><![CDATA[Astro + Spline + React + TypeScript で構築する3Dデザインが表示できるポートフォリオサイト]]></title><description><![CDATA[
+ Astro + Spline + React + TypeScript で構築する3Dデザインが表示できるポートフォリオサイト
+Astro + Spline + React + TypeScript で構築する3Dデザインが表示できるポートフォリオサイトを技術的な観点で解説させて頂きます。
+
+ 目次
+1.はじめに
+2.Astro+Spline+React+TypeScriptの組み合わせのメリット
+3.Splineの基本的な使い方
+4.3Dが表示できるWebサイトの構築方法
+5.まとめ
+6.参考文献とリンク
+
+ はじめに
+私自身フリーランスとして活動するエンジニアにとって、Webサイ...]]></description><link>https://zenn.dev/amatec/articles/86687f8f47a3cd</link><guid isPermaLink="true">https://zenn.dev/amatec/articles/86687f8f47a3cd</guid><pubDate>Fri, 14 Feb 2025 17:34:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3F8t6ILx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Astro%2520%252B%2520Spline%2520%252B%2520React%2520%252B%2520TypeScript%2520%25E3%2581%25A7%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2599%25E3%2582%258B3D%25E3%2583%2587%25E3%2582%25B6%25E3%2582%25A4%25E3%2583%25B3%25E3%2581%258C%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258B%25E3%2583%259D%25E3%2583%25BC%25E3%2583%2588%25E3%2583%2595...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25A4%25A9%25E9%2587%258E%25E8%2589%25AF%25E7%25A5%2590%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA4OTBkMzhkYWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>天野良祐</dc:creator></item><item><title><![CDATA[既存プロダクトにPiniaとComposition APIを部分導入してみた]]></title><description><![CDATA[
+ はじめに
+社内用の既存プロダクト（Vue × Laravel）に対して実験的に Pinia と Composition API を部分導入しリファクタリングしてみたので、その体験を簡単にまとめようと思いました 🍍
+!
+前提として、このプロダクトは社内用に完結しており、今後横展開の可能性がないため変更による影響範囲が少ないことから、特にフロントエンドのテストは作成しませんでした 🙏
+
+
+ 目的
+なぜ既存コードのリファクタリングを行おうと思ったのかというと、このプロダクトを今後入社するインターン生の教育として活用するためです。
+インターン生が担っているプロジェクトは 10 個ぐらいありま...]]></description><link>https://zenn.dev/sdb_blog/articles/introduced_pinia_and_composition_api</link><guid isPermaLink="true">https://zenn.dev/sdb_blog/articles/introduced_pinia_and_composition_api</guid><pubDate>Fri, 14 Feb 2025 09:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--eaoYdowI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%2597%25A2%25E5%25AD%2598%25E3%2583%2597%25E3%2583%25AD%25E3%2583%2580%25E3%2582%25AF%25E3%2583%2588%25E3%2581%25ABPinia%25E3%2581%25A8Composition%2520API%25E3%2582%2592%25E9%2583%25A8%25E5%2588%2586%25E5%25B0%258E%25E5%2585%25A5%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:kenshin%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzMyODFjNDczOTguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25BD%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A3%25E3%2583%25AB%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%2590%25E3%2583%25B3%25E3%2582%25AF%2520%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0N5QzJxaUNNdXNHUmlpSEliaWhrRXE5MmZDNVNIYXdDRmN1Z2I1R3JMbkE9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kenshin</dc:creator></item><item><title><![CDATA[FlatConfig移行時に知っておくとよいかもしれないこと]]></title><description><![CDATA[
+
+ はじめに
+こんにちは。
+2024年はESLint v8がEOLになったり、Next.jsがESLint v9をサポートしたりで設定ファイルをFlat Config形式に移行した方が多いかもしれません。
+私自身、業務でそれなりに大きいプロジェクト2つで移行を経験しました。
+今回はそこで得た知見をまだ移行していない方向けに書き連ねてみようと思います。
+!
+本記事ではFlatConfigとLegacy Configの違いに関して詳しく言及はいたしません。
+違いについては公式ドキュメントや以下の記事をご確認ください。
+https://zenn.dev/yumemi_inc/articles...]]></description><link>https://zenn.dev/caffe_latte_623/articles/migrate-flat-config-tips</link><guid isPermaLink="true">https://zenn.dev/caffe_latte_623/articles/migrate-flat-config-tips</guid><pubDate>Fri, 14 Feb 2025 02:00:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--AAPzkH7R--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:FlatConfig%25E7%25A7%25BB%25E8%25A1%258C%25E6%2599%2582%25E3%2581%25AB%25E7%259F%25A5%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%258A%25E3%2581%258F%25E3%2581%25A8%25E3%2582%2588%25E3%2581%2584%25E3%2581%258B%25E3%2582%2582%25E3%2581%2597%25E3%2582%258C%25E3%2581%25AA%25E3%2581%2584%25E3%2581%2593%25E3%2581%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2597%25E3%2583%25BC%25E3%2581%2595%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E4ZjhhZGMzMTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>しーさん</dc:creator></item><item><title><![CDATA[YouTube の動画 URL から切り抜きやショート動画など関連動画を見つけるサービスを作ってみた]]></title><description><![CDATA[
+
+ 作ったもの
+YouTube の動画 URL から切り抜きやショート動画など関連動画を簡単に見つけるサービス ClipSearch をリリースしました。🎉
+https://www.clipsearch.jp/
+
+
+ なぜ作ろうと思ったのか
+私は Vtuber の配信を見るのが好きですが、追う対象が多すぎて正直全部見切れてないです。切り抜きチャンネルはフォローしていますが、その中でこの動画の切り抜きどれだ？？と探すのが結構手間だったりします。（特にゲーム実況...）
+そこで、動画 URL を貼ったら関連動画が出てくるものがあると嬉しいなと思い、そのまま Web サービスとして開発しまし...]]></description><link>https://zenn.dev/yossyxp/articles/16e1a70c10ad84</link><guid isPermaLink="true">https://zenn.dev/yossyxp/articles/16e1a70c10ad84</guid><pubDate>Thu, 13 Feb 2025 21:56:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hjDhhmAE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:YouTube%2520%25E3%2581%25AE%25E5%258B%2595%25E7%2594%25BB%2520URL%2520%25E3%2581%258B%25E3%2582%2589%25E5%2588%2587%25E3%2582%258A%25E6%258A%259C%25E3%2581%258D%25E3%2582%2584%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25BC%25E3%2583%2588%25E5%258B%2595%25E7%2594%25BB%25E3%2581%25AA%25E3%2581%25A9%25E9%2596%25A2%25E9%2580%25A3%25E5%258B%2595%25E7%2594%25BB%25E3%2582%2592%25E8%25A6%258B%25E3%2581%25A4%25E3%2581%2591%25E3%2582%258B%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2593%25E3%2582%25B9%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25BB%25E3%2583%25AC%25E3%2583%258A%25E3%2583%25BC%25E3%2583%2587%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFlNWY2MjI0MTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>セレナーデ</dc:creator></item><item><title><![CDATA[Visual Studio CodeでTypeScriptのデバッグを行う方法]]></title><description><![CDATA[
+ はじめに
+本記事では、Visual Studio Code（VS Code）を使用してTypeScriptのデバッグを行う方法を紹介します。特に、docker-composeを使用してnginxコンテナ上で動作する環境で、VS CodeからChromeを起動し、TypeScriptファイルにブレークポイントを設定してデバッグする手順を詳しく説明します。
+
+ フォルダ構成
+以下のようなフォルダ構成でプロジェクトを構築しました。
+.
+├── docker-compose.yaml
+├── nginx
+│   ├── Makefile
+│   ├── conf.d
+│   │   └── ...]]></description><link>https://zenn.dev/tryeverything/articles/a0020_vscode_docker_typescript</link><guid isPermaLink="true">https://zenn.dev/tryeverything/articles/a0020_vscode_docker_typescript</guid><pubDate>Thu, 13 Feb 2025 10:00:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--XXJuNdNy--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Visual%2520Studio%2520Code%25E3%2581%25A7TypeScript%25E3%2581%25AE%25E3%2583%2587%25E3%2583%2590%25E3%2583%2583%25E3%2582%25B0%25E3%2582%2592%25E8%25A1%258C%25E3%2581%2586%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259F%25E3%2582%2593%25E3%2581%2595%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc2NDc5YTUwMzguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>たんさん</dc:creator></item><item><title><![CDATA[TypeScriptでAtCoder始めたいからツール作った]]></title><description><![CDATA[こんにちは！！
+久々にAtCoderで競技プログラミングをしたいなとなったのですが、個人的にTypeScriptで参加しづらく感じたので、コードエディタ上(自分はVSCode)で動かすことを想定したサポートツール作りました。
+TypeScriptでAtCoderしているorしようと思っている方、良ければ参考にしていただけると幸いです。（ツールも使ってくれるとなおうれしいです。）
+
+ AtCoderにTypeScriptで参加する上で感じた"やりづらさ"について
+これは自分が、C言語で競技プログラミングを始めたことにも起因するのですが、CLI上で実行～入力してテストまでできるのが当たり前だ...]]></description><link>https://zenn.dev/soray677/articles/43edde52534b8e</link><guid isPermaLink="true">https://zenn.dev/soray677/articles/43edde52534b8e</guid><pubDate>Wed, 12 Feb 2025 13:30:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3SpI0-Yq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%25E3%2581%25A7AtCoder%25E5%25A7%258B%25E3%2582%2581%25E3%2581%259F%25E3%2581%2584%25E3%2581%258B%25E3%2582%2589%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:SoraY677%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg3ZGJhNTliMTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>SoraY677</dc:creator></item><item><title><![CDATA[React Tokyo トレンドレポート #2 : 初めてReactを学ぶ教材]]></title><description><![CDATA[こんにちは！
+トレンドレポート#2はtamuが担当させていただきます！
+React TokyoのDiscordチャンネルで盛り上がったトピックをピックアップしてお届けさせていただきます！
+
+ 初めてReactを学ぶ教材
+Reactの学習を始める際、どんな教材を選ぶべきか？公式ドキュメントを読むべき？動画のほうが分かりやすい？ハンズオン形式がいい？……そんな悩みを持つ人も多いのではないでしょうか。
+今回、React TokyoのDiscordで特に話題になった「React初心者向けの学習教材」をご紹介します！
+
+ 1. React公式ドキュメント（日本語版）
+公式ドキュメントは王道の学習手...]]></description><link>https://zenn.dev/react_tokyo/articles/77375d84125b76</link><guid isPermaLink="true">https://zenn.dev/react_tokyo/articles/77375d84125b76</guid><pubDate>Wed, 12 Feb 2025 11:12:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--FgzgO846--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%2520Tokyo%2520%25E3%2583%2588%25E3%2583%25AC%25E3%2583%25B3%25E3%2583%2589%25E3%2583%25AC%25E3%2583%259D%25E3%2583%25BC%25E3%2583%2588%2520%25232%2520%253A%2520%25E5%2588%259D%25E3%2582%2581%25E3%2581%25A6React%25E3%2582%2592%25E5%25AD%25A6%25E3%2581%25B6%25E6%2595%2599%25E6%259D%2590%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2582%25BF%25E3%2583%25A0%2540%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzczM2MxYTQzYzYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:React%2520Tokyo%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JmNzdjNGQ0YTAuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>タム@エンジニア</dc:creator></item><item><title><![CDATA[React 環境構築]]></title><description><![CDATA[
+ React環境構築
+ 最近Reactに触れる機会が増えたので、環境構築から入門してみたいと思います。
+
+ 参考
+
+React
+
+
+ 環境構築する
+mkdir react
+cd react
+
+ ディレクトリ構成
+ 以下のような構成で、作成します。
+.
+├── index.html
+├── package.json
+├── src
+│   ├── app.tsx
+│   └── main.tsx
+├── tsconfig.json
+└── vite.config.ts
+
+ インストール
+pnpm add react react-dom
+pnpm add -D @types/react @...]]></description><link>https://zenn.dev/mini_bg_pro_n/articles/97755e0d50ae3e</link><guid isPermaLink="true">https://zenn.dev/mini_bg_pro_n/articles/97755e0d50ae3e</guid><pubDate>Wed, 12 Feb 2025 10:57:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lgYbdGUO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:React%2520%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:N%2520Akita%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzgwZGQ4MzFmNzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>N Akita</dc:creator></item><item><title><![CDATA[Laravel x React (SPA) で419エラーを解決した方法]]></title><description><![CDATA[
+ Laravel x React (SPA) で419エラーを解決した方法
+備忘録として残します。
+
+ 使用している技術
+FE: React/Typescript
+BE: Laravel Sail
+Breeze apiを使用しています
+
+ 直面した問題
+419 unknown status
+"message": "CSRF token mismatch."
+
+ やったこと
+
+Laravelプロジェクトの.envファイルに下記を追記 (自分の環境に合った設定にしてください)
+.env
+
+
+APP_URL=http://localhost
+FRONTEND_URL=http://local...]]></description><link>https://zenn.dev/funayamateppei/articles/e7be11120185aa</link><guid isPermaLink="true">https://zenn.dev/funayamateppei/articles/e7be11120185aa</guid><pubDate>Wed, 12 Feb 2025 09:07:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--tlZX2xjF--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Laravel%2520x%2520React%2520%2528SPA%2529%2520%25E3%2581%25A7419%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E3%2582%2592%25E8%25A7%25A3%25E6%25B1%25BA%25E3%2581%2597%25E3%2581%259F%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25B5%25E3%2581%25AA%25E3%2582%2580%25E3%2581%2597%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ExNTA3MWNkNjkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ふなむし</dc:creator></item><item><title><![CDATA[ClaudeでAppleのメモ機能を自動操作するMCPサーバーを作ってみた]]></title><description><![CDATA[
+ はじめに
+どうもClaude使用歴2ヶ月目のwrenchです。
+今回は、Claude Desktop Appを活用したMCPサーバーの構築について、その開発過程と得られた知見を共有させていただきます。
+
+ きっかけ
+日々の開発業務において、Claude Desktop Appを積極的に活用していました。その中で、「後で参照したい」と感じる有用なスクリプトや会話内容に頻繁に遭遇し、それらを都度メモに残す機会が増えていきました。
+また、Claude Desktop Appでは会話が一定の長さを超えると、以下のように新規チャットでの会話の継続を促されます。
+
+このような状況では、それまでの...]]></description><link>https://zenn.dev/wrench/articles/42c43a7be626fd</link><guid isPermaLink="true">https://zenn.dev/wrench/articles/42c43a7be626fd</guid><pubDate>Wed, 12 Feb 2025 07:22:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--iSl7Ftlx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Claude%25E3%2581%25A7Apple%25E3%2581%25AE%25E3%2583%25A1%25E3%2583%25A2%25E6%25A9%259F%25E8%2583%25BD%25E3%2582%2592%25E8%2587%25AA%25E5%258B%2595%25E6%2593%258D%25E4%25BD%259C%25E3%2581%2599%25E3%2582%258BMCP%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:wrench%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JhZjZkYmMxZTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>wrench</dc:creator></item><item><title><![CDATA[Next.js App Router で実装！フリマっぽいサンプルアプリ]]></title><description><![CDATA[年末年始に読んだ 「TypeScript と React/Next.js でつくる実践 Web アプリケーション」 の読書感想文を先月記事にしました。（多くの方に読んでいただき、非常にありがたい経験ができました。）
+https://zenn.dev/t_hayashi/articles/faa1ec1944731f
+この中で惜しかったところとして、書籍内のサンプルアプリケーションが Page Router で実装されていた点をあげました。これは自身のモチベーションに App Router を学びことがあったためです。（書籍では丁寧にサンプルアプリケーションの実装手順が記載されていました。...]]></description><link>https://zenn.dev/t_hayashi/articles/e7917167b68a6b</link><guid isPermaLink="true">https://zenn.dev/t_hayashi/articles/e7917167b68a6b</guid><pubDate>Wed, 12 Feb 2025 03:30:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xgNmYou7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Next.js%2520App%2520Router%2520%25E3%2581%25A7%25E5%25AE%259F%25E8%25A3%2585%25EF%25BC%2581%25E3%2583%2595%25E3%2583%25AA%25E3%2583%259E%25E3%2581%25A3%25E3%2581%25BD%25E3%2581%2584%25E3%2582%25B5%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AB%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Tomonori%2520Hayashi%2520%252F...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4WlphS3JZOGdPbHVBSWpsbU02eUg0VXI4eW5OSnBYSnV0RzBPM255QT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Tomonori Hayashi / @pHaya72</dc:creator></item><item><title><![CDATA[8thwallエディタプロジェクトでReactテンプレートを使って感じたメリットと制限]]></title><description><![CDATA[
+ はじめに
+
+ TL;DR
+
+React テンプレートを使うことで、8thwall と組み合わせた環境をすぐ構築できる
+React 導入によって、便利な React のエコシステムを使えるようになる
+DOM 操作が楽になり、インタラクションが必要なランディングページなどが作れる
+クラウドエディタでは TypeScript サポートが乏しいのでコーディングはしにくい
+
+
+ 概要
+本記事では 8thwall が公開している React を使ったテンプレートプロジェクトを使ってみて、
+React を導入することで得られる恩恵と制約についてご紹介します。
+ここでいう React テンプレートと...]]></description><link>https://zenn.dev/hololab/articles/about-react-in-8thwall-editor</link><guid isPermaLink="true">https://zenn.dev/hololab/articles/about-react-in-8thwall-editor</guid><pubDate>Wed, 12 Feb 2025 00:11:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--n6uMG4CC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:8thwall%25E3%2582%25A8%25E3%2583%2587%25E3%2582%25A3%25E3%2582%25BF%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E3%2581%25A7React%25E3%2583%2586%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AC%25E3%2583%25BC%25E3%2583%2588%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E6%2584%259F%25E3%2581%2598%25E3%2581%259F%25E3%2583%25A1%25E3%2583%25AA%25E3%2583%2583%25E3%2583%2588%25E3%2581%25A8%25E5%2588%25B6%25E9%2599%2590%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%25AB%25E3%2583%25BC%25E5%2585%2584%25E3%2581%2595%25E3%2582%2593%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RkMzA4MzIwZTkuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%259B%25E3%2583%25AD%25E3%2583%25A9%25E3%2583%259C%25E3%2581%25AE%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dUQndtd2ZiTmM3Nzg0SmxRZWdlX3BSc09RdmdvX2hxNlg5MTJKT3VZPXMyNTAtYw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>にー兄さん</dc:creator></item><item><title><![CDATA[【プロンプトも公開】Zoom 会議が自動で議事録に！文字起こし × 生成 AI で業務大幅削減]]></title><description><![CDATA[こんにちは、株式会社キカガク CTO 室の高橋です。
+AI 活用推進をはじめとした、技術による課題解決や業務効率化に取り組んでいます。
+Zoom には、録画を行うと文字起こしテキストを出力する機能があります。
+その存在は知ってはいたのですが、ぱっと見た感じ「あぁー」とか「うん」といったフィラーが多く入っており、そのまま読むには難しいものでした。
+一方で、会議内容を他者に共有するために議事録を記録するのが大変だったり、録画を共有しても視聴するのが大変であるという課題がありました。
+そういった課題を解決するべく、Zoom の文字起こし作成をフックに、生成 AI を活用して要約を作成するワーク...]]></description><link>https://zenn.dev/kikagaku/articles/1f788f62cf59b6</link><guid isPermaLink="true">https://zenn.dev/kikagaku/articles/1f788f62cf59b6</guid><pubDate>Wed, 12 Feb 2025 00:00:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--yATlfglg--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E3%2583%2597%25E3%2583%25AD%25E3%2583%25B3%25E3%2583%2597%25E3%2583%2588%25E3%2582%2582%25E5%2585%25AC%25E9%2596%258B%25E3%2580%2591Zoom%2520%25E4%25BC%259A%25E8%25AD%25B0%25E3%2581%258C%25E8%2587%25AA%25E5%258B%2595%25E3%2581%25A7%25E8%25AD%25B0%25E4%25BA%258B%25E9%258C%25B2%25E3%2581%25AB%25EF%25BC%2581%25E6%2596%2587%25E5%25AD%2597%25E8%25B5%25B7%25E3%2581%2593%25E3%2581%2597%2520%25C3%2597%2520%25E7%2594%259F%25E6%2588%2590%2520AI%2520%25E3%2581%25A7%25E6%25A5%25AD%25E5%258B%2599%25E5%25A4%25A7%25E5%25B9%2585%25E5%2589%258A%25E6%25B8%259B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%259F%25E3%2581%258B%25E3%2581%25AF%25E3%2581%2597%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JiY2ZkM2FkNDQuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2582%25AD%25E3%2582%25AB%25E3%2582%25AC%25E3%2582%25AF%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2UzYzM3MDEyN2IuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>たかはし</dc:creator></item><item><title><![CDATA[TinyBase × React UI: 状態管理をシンプルに統合する方法]]></title><description><![CDATA[
+ TinyBase × React UI: 状態管理をシンプルに統合する方法
+TinyBase は、軽量かつ柔軟なデータストアを提供するライブラリです。特に React との統合に優れており、複雑な状態管理をシンプルかつパフォーマンス良く実現できます。
+本記事では、TinyBase を React UI に統合する方法を、具体的なコード例 を交えながら解説します。
+
+
+ TinyBase + React UI の準備
+まずは、TinyBase の React 用モジュール ui-react をインストールしましょう。
+npm install tinybase ui-react reac...]]></description><link>https://zenn.dev/53able/articles/bfa668a435f065</link><guid isPermaLink="true">https://zenn.dev/53able/articles/bfa668a435f065</guid><pubDate>Tue, 11 Feb 2025 16:15:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_hbkmGdB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TinyBase%2520%25C3%2597%2520React%2520UI%253A%2520%25E7%258A%25B6%25E6%2585%258B%25E7%25AE%25A1%25E7%2590%2586%25E3%2582%2592%25E3%2582%25B7%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AB%25E3%2581%25AB%25E7%25B5%25B1%25E5%2590%2588%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:53able%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFiZWE2OGI5M2YuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>53able</dc:creator></item></channel></rss>
