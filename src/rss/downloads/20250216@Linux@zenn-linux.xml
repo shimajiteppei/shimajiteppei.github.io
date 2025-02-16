@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Linux」のフィード]]></title><description><![CDATA[Zennのトピック「Linux」のRSSフィードです]]></description><link>https://zenn.dev/topics/linux</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/860a9eb1e4.png</url><title>Zennの「Linux」のフィード</title><link>https://zenn.dev/topics/linux</link></image><generator>zenn.dev</generator><lastBuildDate>Sun, 16 Feb 2025 12:03:56 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/linux/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Rails で文書管理アプリのようなもの(2)]]></title><description><![CDATA[お家の検証サーバ用の備忘録です。
+
+ 前提
+最低限のモデルの作成が終わっている状態です。
+https://zenn.dev/asterisk9101/articles/ruby_on_rails8-1
+
+ Active Storage のインストール
+bundle exec rails active_storage:install
+bundle exec rails db:migrate
+保存先は config/storage.yml などで設定しますが、そのままでもサーバのローカルディスクに保存されるので、そのまま進みます。
+
+ 機密性の確保
+各所で説明されている通り、Active S...]]></description><link>https://zenn.dev/asterisk9101/articles/ruby_on_rails8-2</link><guid isPermaLink="true">https://zenn.dev/asterisk9101/articles/ruby_on_rails8-2</guid><pubDate>Sun, 16 Feb 2025 10:38:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xerTbOWB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rails%2520%25E3%2581%25A7%25E6%2596%2587%25E6%259B%25B8%25E7%25AE%25A1%25E7%2590%2586%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2581%25AE%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AA%25E3%2582%2582%25E3%2581%25AE%25282%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25A4%259A%25E7%2594%25B0%25E6%25B0%258F%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFUWEFKd3hvZ1pLNDVtSmdsUDlROUZPUTcyRXg4eV9MeFdmejdma0V1aTA9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>多田氏</dc:creator></item><item><title><![CDATA[Rails で文書管理アプリのようなもの(1)]]></title><description><![CDATA[お家の検証サーバ用の備忘録です。
+
+ 前提
+適当なページが表示できるようになった状態です。
+https://zenn.dev/asterisk9101/articles/fedora41server-5
+
+ 目標
+どこかで見たことがある文書管理アプリを作ってみます。
+網羅性のないざっくり要件は以下。
+
+部署(Section)
+
+各リソースを管理する入れ物です
+公開されていて一覧表示可能な場合もあり、非公開で招待のみ表示可能な場合もあります
+セキュリティの境界です（Punditの練習）
+
+
+文書(Document)
+
+部署に所属します（referencesの練習）
+リッチテキストのコンテン...]]></description><link>https://zenn.dev/asterisk9101/articles/ruby_on_rails8-1</link><guid isPermaLink="true">https://zenn.dev/asterisk9101/articles/ruby_on_rails8-1</guid><pubDate>Sun, 16 Feb 2025 10:38:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--OvqDjB0M--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rails%2520%25E3%2581%25A7%25E6%2596%2587%25E6%259B%25B8%25E7%25AE%25A1%25E7%2590%2586%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2581%25AE%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AA%25E3%2582%2582%25E3%2581%25AE%25281%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25A4%259A%25E7%2594%25B0%25E6%25B0%258F%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFUWEFKd3hvZ1pLNDVtSmdsUDlROUZPUTcyRXg4eV9MeFdmejdma0V1aTA9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>多田氏</dc:creator></item><item><title><![CDATA[コマンドラインでGitログをおしゃれに表示！]]></title><description><![CDATA[
+ Gitログに変更行数も表示！
+
+ コミットの内訳をひも解くカラフルな冒険
+Gitのコミット履歴を眺めると、まるで無機質なタイムカプセルのよう。
+でも、あなたの変更がどのくらいの情熱（行数）を伴っていたのか、もっと詳しく見てみたくありませんか？
+今回は、ターミナル上でコミットの概要に加え、各ファイルごとに追加・削除された行数までも表示する、洗練されたGitログの設定方法をご紹介します！
+
+
+ 魔法のエイリアスをセットアップ
+まずは、以下のコマンドを実行してください。
+これで、.bashrc にエイリアスが追加され、以降は gitlog と打つだけで、色鮮やかなGitログと共に、各ファイ...]]></description><link>https://zenn.dev/ryoushin/articles/e62c5e0c0a3d8f</link><guid isPermaLink="true">https://zenn.dev/ryoushin/articles/e62c5e0c0a3d8f</guid><pubDate>Sun, 16 Feb 2025 02:59:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--MgkQ3wF4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%25B3%25E3%2581%25A7Git%25E3%2583%25AD%25E3%2582%25B0%25E3%2582%2592%25E3%2581%258A%25E3%2581%2597%25E3%2582%2583%25E3%2582%258C%25E3%2581%25AB%25E8%25A1%25A8%25E7%25A4%25BA%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Shin%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q0MjU2NjlkZmUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Shin</dc:creator></item><item><title><![CDATA[Linuxとは]]></title><description><![CDATA[Linux は、1991年にLinus Torvalds氏によって開発されたOSです。
+もともとはサーバー向けに作られましたが、現在ではデスクトップPC、スマートフォン、組み込み機器（家電やIoTデバイス）など、さまざまな分野で活用されています。
+Linuxの最大の特徴は、フリーかつオープンソースであることです。
+誰でも自由に改変・再配布ができるため、多くの開発者や企業がカスタマイズし、用途に応じた最適なOS環境を作ることができます。
+
+ Linuxの特徴
+Linuxには、次のようなメリットがあります。
+
+軽量で動作が速い
+高いスペックのPCを必要とせず、古いPCでも動作可能。
+余計な機...]]></description><link>https://zenn.dev/kannn/articles/be08c85ed8bfa0</link><guid isPermaLink="true">https://zenn.dev/kannn/articles/be08c85ed8bfa0</guid><pubDate>Sun, 16 Feb 2025 02:44:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--LObZ12TT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_76:Linux%25E3%2581%25A8%25E3%2581%25AF%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kan%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2Rhcmsvay5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kan</dc:creator></item><item><title><![CDATA[nkf コマンドで、UTF-8からWindows-31Jに変換]]></title><description><![CDATA[nkf 便利!
+cat some-text.txt | nkf --ic=UTF-8N --oc=Windows-31J
+]]></description><link>https://zenn.dev/yata/articles/3749cda59833e9</link><guid isPermaLink="true">https://zenn.dev/yata/articles/3749cda59833e9</guid><pubDate>Sun, 16 Feb 2025 01:10:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--cYSM_Lqn--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:nkf%2520%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2581%25A7%25E3%2580%2581UTF-8%25E3%2581%258B%25E3%2582%2589Windows-31J%25E3%2581%25AB%25E5%25A4%2589%25E6%258F%259B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yatatsukai%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U5NWFhZTUzNDYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yatatsukai</dc:creator></item><item><title><![CDATA[初心者が最初に学んだ Unix/Linuxのディレクトリ構成とコマンドの由来]]></title><description><![CDATA[エンジニアの世界では当たり前に使われているUnixやLinuxのコマンドですが、初心者だった私が最初に学んだディレクトリ構成や、よく使ったコマンドをメモとして残します。言葉が省略されていることが多く感じたので、どんな由来か、どの単語を省略してその呼び名になっているのかを重点的に残しています。
+
+ そもそも
+
+ コマンドとは？
+コマンドは、コンピュータに対する指示です。
+マウスを使ってファイルを操作するように、キーボードから文字を入力してコンピュータに命令を送ることができます。UnixやLinuxでは、このコマンドを使って様々な操作を行います。
+
+ シェルとは？
+シェルは、コマンドを受け付...]]></description><link>https://zenn.dev/channnnsm/articles/67ab28bd184c51</link><guid isPermaLink="true">https://zenn.dev/channnnsm/articles/67ab28bd184c51</guid><pubDate>Sat, 15 Feb 2025 10:34:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--01b2KFIi--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E3%2581%258C%25E6%259C%2580%25E5%2588%259D%25E3%2581%25AB%25E5%25AD%25A6%25E3%2582%2593%25E3%2581%25A0%2520Unix%252FLinux%25E3%2581%25AE%25E3%2583%2587%25E3%2582%25A3%25E3%2583%25AC%25E3%2582%25AF%25E3%2583%2588%25E3%2583%25AA%25E6%25A7%258B%25E6%2588%2590%25E3%2581%25A8%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2581%25AE%25E7%2594%25B1%25E6%259D%25A5%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:channnnsm%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJkODNiNmZmODUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>channnnsm</dc:creator></item><item><title><![CDATA[catatsuy's Picks Vol.3]]></title><description><![CDATA[
+ Go
+https://x.com/mattn_jp/status/1889465123988971722
+Go 1.24リリースされたので、ざっくりまとめ。
+
+ Security
+https://sfujiwara.hatenablog.com/entry/2025/02/11/094755
+恐すぎる。自分も人ごとではない。自分のコードとOSSを使われて攻撃を仕掛けてくると考えると非常に腹が立つ。
+https://zhero-web-sec.github.io/research-and-things/nextjs-cache-and-chains-the-stale-elixir
+特...]]></description><link>https://zenn.dev/catatsuy/articles/08229ac97f6618</link><guid isPermaLink="true">https://zenn.dev/catatsuy/articles/08229ac97f6618</guid><pubDate>Sat, 15 Feb 2025 09:45:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bK6nkJIM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_76:catatsuy%2527s%2520Picks%2520Vol.3%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:catatsuy%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NiYTVlYjRjMTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>catatsuy</dc:creator></item><item><title><![CDATA[ゆっくり霊夢とゆっくり魔理沙でWebプログラミング]]></title><description><![CDATA[ChatGPTに生成させたチュートリアルのメモ。中で使うものが少し古く感じる部分はあります。]]></description><link>https://zenn.dev/hiromichinomata/books/604d65f06f6e1d</link><guid isPermaLink="true">https://zenn.dev/hiromichinomata/books/604d65f06f6e1d</guid><pubDate>Fri, 14 Feb 2025 15:11:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--QuvvuQrR--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci9mYzA5NjliMDliLmpwZWc=%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>Hiromichi NOMATA</dc:creator></item><item><title><![CDATA[ArchLinuxとミニPCで構築する最強の地震監視システム]]></title><description><![CDATA[
+ JQuakeとは
+皆さんはJQuakeを使用していますでしょうか？
+JQuakeは日本各地の揺れをリアルタイムに監視するためのフリーソフトです。
+防災科学技術研究所(NIED)の利用条件の更新に伴って、緊急地震速報はProject DM-D.S.Sに加入していない状態では利用できなくなってしまいましたが、月額550円とそこまでお高くはないので加入しても損はないと思います。
+https://jquake.net/
+しかしWindowsで動かすとWindowsアップデート等で勝手に再起動されてしまったり、Windows自体を長時間起動させっぱなしだと不安定になりがちです。地震監視システム...]]></description><link>https://zenn.dev/njm2360/articles/9c755c5b0fc490</link><guid isPermaLink="true">https://zenn.dev/njm2360/articles/9c755c5b0fc490</guid><pubDate>Fri, 14 Feb 2025 09:30:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Pbgqi7PI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ArchLinux%25E3%2581%25A8%25E3%2583%259F%25E3%2583%258BPC%25E3%2581%25A7%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2599%25E3%2582%258B%25E6%259C%2580%25E5%25BC%25B7%25E3%2581%25AE%25E5%259C%25B0%25E9%259C%2587%25E7%259B%25A3%25E8%25A6%2596%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:njm2360%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzlkNTczYjdlMDguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>njm2360</dc:creator></item><item><title><![CDATA[Linuxのディレクトリ構成]]></title><description><![CDATA[
+/：ルートディレクトリ。絶対パスで表記する際のスタート地点。
+/bin：すべてのユーザーが実行するファイルの格納されたディレクトリ。
+/sbin：ルートユーザーのみ実行できるファイルが格納されたディレクトリ。
+/boot：システム起動に必要なファイルが格納されたディレクトリ。
+/dev：デバイスファイルが格納されるディレクトリ。
+/etc：設定ファイルの格納されたディレクトリ。
+/home：ユーザーのホームディレクトリ。
+/lib：共有ライブラリの格納されたディレクトリ。
+/media：OSが自動的にマウントを実行するポイント
+/mnt：一時的なマウントポイント
+/tmp：全てのユーザ...]]></description><link>https://zenn.dev/iestudy/articles/50ef9e1f106b26</link><guid isPermaLink="true">https://zenn.dev/iestudy/articles/50ef9e1f106b26</guid><pubDate>Fri, 14 Feb 2025 00:45:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--72z-F3Wu--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%25E3%2581%25AE%25E3%2583%2587%25E3%2582%25A3%25E3%2583%25AC%25E3%2582%25AF%25E3%2583%2588%25E3%2583%25AA%25E6%25A7%258B%25E6%2588%2590%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:iestudy%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS05QOThyUk1xVm4za0lCaXlpZlh5WDZTU191Y0hxeVBSejZvNTBjYTVDTC1ORDBOVC09czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>iestudy</dc:creator></item><item><title><![CDATA[カスタマイズ可能なDebian環境: WSL 2 に Debian をインストールする方法]]></title><description><![CDATA[
+ tl;dr
+Windows Terminalで以下のコマンドを実行すると、WSLにDebianをインストールします。
+!
+WSL 2を利用する場合は、Windows 11の使用を推奨します。
+
+
+
+wsl --set-default-version 2を実行
+
+wsl --install -d Debianを実行
+
+Windows Terminalを再起動すると、新しいDebianプロファイルが自動的に追加される
+
+以上で、Debianのセットアップが完了します。
+
+ はじめに
+この記事では、WSLを使用してDebianをインストールする手順を紹介します。
+WSL 2 では、実際の ...]]></description><link>https://zenn.dev/atsushifx/articles/dev-wsl2-customdebian-install</link><guid isPermaLink="true">https://zenn.dev/atsushifx/articles/dev-wsl2-customdebian-install</guid><pubDate>Thu, 13 Feb 2025 14:34:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0V4U3oJo--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25AB%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%259E%25E3%2582%25A4%25E3%2582%25BA%25E5%258F%25AF%25E8%2583%25BD%25E3%2581%25AADebian%25E7%2592%25B0%25E5%25A2%2583%253A%2520WSL%25202%2520%25E3%2581%25AB%2520Debian%2520%25E3%2582%2592%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:atsushifx%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ1ZDYxMWM1ZTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>atsushifx</dc:creator></item><item><title><![CDATA[Jetson AGX Orin に JetPack をインストールして初期設定をする]]></title><description><![CDATA[この記事は Jetson AGX Orin の使い方を書いていく の一部です。
+基本的には公式ドキュメントを見れば初期設定方法はわかるので、本記事はあくまでも「私の場合はこうしている」という参考程度に公開します。
+https://developer.nvidia.com/embedded/learn/get-started-jetson-agx-orin-devkit
+
+ sudo をパスワード不要にする
+セキュリティ上の懸念が無い利用環境では sudo のパスワードを不要にする。
+$ sudo visudo
+- %sudo   ALL=(ALL:ALL) ALL
++ %sudo   A...]]></description><link>https://zenn.dev/19931/articles/05e457498e2864</link><guid isPermaLink="true">https://zenn.dev/19931/articles/05e457498e2864</guid><pubDate>Thu, 13 Feb 2025 11:09:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--DhsRYFsT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Jetson%2520AGX%2520Orin%2520%25E3%2581%25AB%2520JetPack%2520%25E3%2582%2592%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%2597%25E3%2581%25A6%25E5%2588%259D%25E6%259C%259F%25E8%25A8%25AD%25E5%25AE%259A%25E3%2582%2592%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Ippei%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JhYTViMjM2ZWYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Ippei</dc:creator></item><item><title><![CDATA[[PowerShell]PSでLinuxの「history」コマンド]]></title><description><![CDATA[
+ おさらい
+
+
+
+機能
+PowerShell
+Linux
+
+
+
+
+過去実施したコマンド一覧
+Get-Content (Get-PSReadlineOption).HistorySavePath
+history
+
+
+ファイルを開く
+notepad
+(あるいみ) vi
+
+
+
+毎回、「Get-Content (Get-PSReadlineOption).HistorySavePath」を打つのは面倒
+→コマンド化する
+→定義ファイル(*.ps1)に関数を定義する
+
+
+ （１）PowerShellの定義ファイル在処を確認する
+PowerShellの定義ファイルは「$PROFILE」に格納されて...]]></description><link>https://zenn.dev/muso_tensei/articles/6144e77c382939</link><guid isPermaLink="true">https://zenn.dev/muso_tensei/articles/6144e77c382939</guid><pubDate>Thu, 13 Feb 2025 09:35:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--LeRKnRd2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BPowerShell%255DPS%25E3%2581%25A7Linux%25E3%2581%25AE%25E3%2580%258Chistory%25E3%2580%258D%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:muso-tensei%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk4ZjAzY2FlMjEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>muso-tensei</dc:creator></item><item><title><![CDATA[Jetson で WireGuard を使う（要カーネルビルド）]]></title><description><![CDATA[この記事は Jetson AGX Orin の使い方を書いていく の一部です。
+
+ はじめに
+Jetson を外出先からいじりたい場合は、VPN が欲しい時があると思います。Jetson Linux はデフォルトで WireGuard モジュールが無効になっているので、カーネルビルドをしてインストールします。本記事ではホストコンピュータを使わずに全工程を Jetson 上で行います。
+基本的には下記の公式ドキュメントに従えばよいのですが、若干情報が足りていないので補足を含めて書いていきます。なお、Jetson Linux のバージョンによって手順が異なるので、ドキュメントの参照先には気を...]]></description><link>https://zenn.dev/19931/articles/1373f5410fa6d3</link><guid isPermaLink="true">https://zenn.dev/19931/articles/1373f5410fa6d3</guid><pubDate>Thu, 13 Feb 2025 03:53:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wjlMSmlo--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Jetson%2520%25E3%2581%25A7%2520WireGuard%2520%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%25EF%25BC%2588%25E8%25A6%2581%25E3%2582%25AB%25E3%2583%25BC%25E3%2583%258D%25E3%2583%25AB%25E3%2583%2593%25E3%2583%25AB%25E3%2583%2589%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Ippei%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JhYTViMjM2ZWYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Ippei</dc:creator></item><item><title><![CDATA[コマンドラインからモノスペースのメールを送る]]></title><description><![CDATA[Linuxのshellからモノスペースのメールを送る方法を調べましたので記しておきます。
+
+Debian 12
+
+Content-Typeをtext/htmlにし、コンテンツを&lt;html&gt;&lt;pre&gt;&lt;/pre&gt;&lt;/html&gt;で囲むとモノスペースになります。
+
+ なぜモノスペースにしたいか
+Linuxのmailコマンドは標準入力をメール本文として送ることができる手軽なコマンドです。例えば、以下のようにして本文Helloをrootに送ることができます。
+echo Hello | mail -s 'Greeting' root
+しかしながら、この...]]></description><link>https://zenn.dev/seiichihorie/articles/20250213-monospace-mail</link><guid isPermaLink="true">https://zenn.dev/seiichihorie/articles/20250213-monospace-mail</guid><pubDate>Thu, 13 Feb 2025 00:46:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--b7iAeTgt--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%25B3%25E3%2581%258B%25E3%2582%2589%25E3%2583%25A2%25E3%2583%258E%25E3%2582%25B9%25E3%2583%259A%25E3%2583%25BC%25E3%2582%25B9%25E3%2581%25AE%25E3%2583%25A1%25E3%2583%25BC%25E3%2583%25AB%25E3%2582%2592%25E9%2580%2581%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25A0%2580%25E6%25B1%259F%25E8%25AA%25A0%25E4%25B8%2580%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS3hveFBEMG4wNVZyT182d0hPbUpld1BTOTdVOE1Hdzg0R09IY1A5Tm1ETmk0N1V0QWZTQT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>堀江誠一</dc:creator></item><item><title><![CDATA[Ruby on Rails の最初のページを作成するときのメモ]]></title><description><![CDATA[お家の検証サーバ用の備忘録です。今回は wheel グループのユーザーです。
+
+ Rails の用意
+Rails をインストールした状態にします。
+https://zenn.dev/asterisk9101/articles/fedora41server-4
+
+ Homeページの作成
+最初に簡単なホームページを作成します。
+bundle exec rails generate controller home index
+ルートに設定します。
+sed -i 's/get "home\/index"/root "home#index"/' config/routes.rb
+bin/dev で...]]></description><link>https://zenn.dev/asterisk9101/articles/fedora41server-5</link><guid isPermaLink="true">https://zenn.dev/asterisk9101/articles/fedora41server-5</guid><pubDate>Wed, 12 Feb 2025 16:36:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5_nUhXr1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ruby%2520on%2520Rails%2520%25E3%2581%25AE%25E6%259C%2580%25E5%2588%259D%25E3%2581%25AE%25E3%2583%259A%25E3%2583%25BC%25E3%2582%25B8%25E3%2582%2592%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2599%25E3%2582%258B%25E3%2581%25A8%25E3%2581%258D%25E3%2581%25AE%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25A4%259A%25E7%2594%25B0%25E6%25B0%258F%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFUWEFKd3hvZ1pLNDVtSmdsUDlROUZPUTcyRXg4eV9MeFdmejdma0V1aTA9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>多田氏</dc:creator></item><item><title><![CDATA[AlmaLinuxでスリープを阻止！ノートPCを閉じても動作を維持する設定]]></title><description><![CDATA[
+ 1. はじめに
+先月半ばにDELLのノートPCを購入したので、古いノートPCを活用して自宅にWebサーバーを構築することにしました。
+今回は、その準備としてノートPCのフタを閉じてもサスペンドしないように設定します。
+なお、今回の作業は別のPCからTeraTermなどのSSHクライアントを使って接続し、作業を行ってください。
+
+ 2. 環境
+
+ OS
+
+ /etc/os-release
+
+[root@localhost ~]# cat /etc/os-release
+NAME="AlmaLinux"
+VERSION="9.5 (Teal Serval)"
+ID="almalinux"...]]></description><link>https://zenn.dev/unanatsu/articles/51932eaea4cd13</link><guid isPermaLink="true">https://zenn.dev/unanatsu/articles/51932eaea4cd13</guid><pubDate>Wed, 12 Feb 2025 13:30:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_8xvpzFI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AlmaLinux%25E3%2581%25A7%25E3%2582%25B9%25E3%2583%25AA%25E3%2583%25BC%25E3%2583%2597%25E3%2582%2592%25E9%2598%25BB%25E6%25AD%25A2%25EF%25BC%2581%25E3%2583%258E%25E3%2583%25BC%25E3%2583%2588PC%25E3%2582%2592%25E9%2596%2589%25E3%2581%2598%25E3%2581%25A6%25E3%2582%2582%25E5%258B%2595%25E4%25BD%259C%25E3%2582%2592%25E7%25B6%25AD%25E6%258C%2581%25E3%2581%2599%25E3%2582%258B%25E8%25A8%25AD%25E5%25AE%259A%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:UnaNatsu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSUdqOHRtTDhmUGVJaXRMWF9iVm5rLWRXSFN0ZnA3TTJ0N2ZNdF9XNElXcXE2RDZ3PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>UnaNatsu</dc:creator></item><item><title><![CDATA[zipファイルの解凍が遅い場合の高速化Tips（コマンド付き）]]></title><description><![CDATA[
+ 🗂️はじめに：Linux環境での大量ファイル解凍の課題
+皆さん、日々の運用作業お疲れ様です。skmochaです。
+環境マイグレーションやバックアップ復元など、業務で大容量のzipファイルを扱うシーンは多々ありますよね。
+ただ、環境やサービスによってはそのzipファイルが大きすぎて、解凍するのにも一苦労...なんて場面はありませんか？さらに、I/O待ちやCPU負荷がボトルネックになって作業が遅れ、上からは「早く終わらせてくれ」なんて言われることもあるかもしれません。
+この記事では、そんな皆さんの困りごとを解決するため、並列処理を用いた高速化テクニックに加え、解凍前のチェックリスト、基本...]]></description><link>https://zenn.dev/skmocha/articles/7a3aaef54faee4</link><guid isPermaLink="true">https://zenn.dev/skmocha/articles/7a3aaef54faee4</guid><pubDate>Wed, 12 Feb 2025 11:34:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Up5G5icN--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:zip%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2581%25AE%25E8%25A7%25A3%25E5%2587%258D%25E3%2581%258C%25E9%2581%2585%25E3%2581%2584%25E5%25A0%25B4%25E5%2590%2588%25E3%2581%25AE%25E9%25AB%2598%25E9%2580%259F%25E5%258C%2596Tips%25EF%25BC%2588%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E4%25BB%2598%25E3%2581%258D%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:skmocha%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS1lWeHdIWXNuQjIzT3JRalduUEo5N0ZsVG1tM2FIenlacXNCOWluZkxEZFgxbVhwUT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>skmocha</dc:creator></item><item><title><![CDATA[Jetson AGX Orin に L4T (Jetson Linux) をインストールする]]></title><description><![CDATA[この記事は Jetson AGX Orin の使い方を書いていく の一部です。
+
+ はじめに
+Jetson に L4T をインストールするにはホストコンピュータ（開発用パソコン）上で動作させるアプリ NVIDIA SDK Manager が必要になる（必須というわけではないが、わざわざ手間を掛けて別の手段をとる理由はあまりない）。
+そして、SDK Manager で Jetson に L4T をインストールするには Ubuntu が必須となる。
+
+ ホストコンピュータの Ubuntu 動作環境の比較
+
+ネイティブインストールならば間違いない
+仮想マシンでも特に問題ない
+WSL だと機能が...]]></description><link>https://zenn.dev/19931/articles/022d53e0dff55d</link><guid isPermaLink="true">https://zenn.dev/19931/articles/022d53e0dff55d</guid><pubDate>Wed, 12 Feb 2025 11:27:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--37ECXGEG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Jetson%2520AGX%2520Orin%2520%25E3%2581%25AB%2520L4T%2520%2528Jetson%2520Linux%2529%2520%25E3%2582%2592%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Ippei%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JhYTViMjM2ZWYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Ippei</dc:creator></item><item><title><![CDATA[Jetson AGX Orin の使い方を書いていく]]></title><description><![CDATA[Jetson Nano に関する日本語記事はそれなりにあるが、Jetson AGX Orin Developer Kit に関する日本語記事が少ないので書いていく。
+Jetson シリーズ Developer Kit は NVIDIA の公式ドキュメントが充実しているため、とりあえず試しに使ってみる分には困ることは無いと思う。とは言え、現時点で最新の JetPack 6.2 (L4T 36.4.3) に対応した内容や、公式ドキュメントには見当たらずハマった内容をメインに記録しているため、順次それらを公開していきたい。
+
+ 目次 ＆ 予定している内容
+
+
+L4T (Jetson Linux...]]></description><link>https://zenn.dev/19931/articles/380fc2d8cb67a3</link><guid isPermaLink="true">https://zenn.dev/19931/articles/380fc2d8cb67a3</guid><pubDate>Wed, 12 Feb 2025 10:11:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--g0-vCQKr--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Jetson%2520AGX%2520Orin%2520%25E3%2581%25AE%25E4%25BD%25BF%25E3%2581%2584%25E6%2596%25B9%25E3%2582%2592%25E6%259B%25B8%25E3%2581%2584%25E3%2581%25A6%25E3%2581%2584%25E3%2581%258F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Ippei%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JhYTViMjM2ZWYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Ippei</dc:creator></item></channel></rss>
