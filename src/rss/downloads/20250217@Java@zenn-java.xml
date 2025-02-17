@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Java」のフィード]]></title><description><![CDATA[Zennのトピック「Java」のRSSフィードです]]></description><link>https://zenn.dev/topics/java</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/5c47bb8423.png</url><title>Zennの「Java」のフィード</title><link>https://zenn.dev/topics/java</link></image><generator>zenn.dev</generator><lastBuildDate>Mon, 17 Feb 2025 07:29:28 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/java/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[《あなたが知らないJAVA》ユニットテストの命名哲学]]></title><description><![CDATA[
+
+ ユニットテストの設計哲学
+プログラムはまず人間が読むために書かれ、その後に機械が実行できるようにする。
+
+Programs must be written for people to read, and only incidentally for machines to execute.
+
+そして、プログラミングの第一歩は命名であり、ユニットテストも同様です。
+
+ WWW
+ユニットテストの命名をどのように人間が理解できるようにするか？命名において3つの要素を反映する必要があります。略してWWW原則と呼びます。
+
+何をテストするか？(what)
+どのような条件下でテストするか？(wh...]]></description><link>https://zenn.dev/mjga/articles/86a3b8f1f1cdbd</link><guid isPermaLink="true">https://zenn.dev/mjga/articles/86a3b8f1f1cdbd</guid><pubDate>Mon, 17 Feb 2025 04:20:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--cCys5jrb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%258A%25E3%2581%2582%25E3%2581%25AA%25E3%2581%259F%25E3%2581%258C%25E7%259F%25A5%25E3%2582%2589%25E3%2581%25AA%25E3%2581%2584JAVA%25E3%2580%258B%25E3%2583%25A6%25E3%2583%258B%25E3%2583%2583%25E3%2583%2588%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E3%2581%25AE%25E5%2591%25BD%25E5%2590%258D%25E5%2593%25B2%25E5%25AD%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ccmjga%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzMxYzY0YzBlM2QuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ccmjga</dc:creator></item><item><title><![CDATA[【備忘録】 AP exam Computer Science A 勉強記①]]></title><description><![CDATA[
+ Javaの基本まとめ（初心者向け）
+!
+この記事は、Next.jsなどを勉強している筆者が、AP ExamのComputer Science Aを受験するためにJavaを学び始めた備忘録です。Javaは完全初心者なので頑張ります！
+
+
+
+ 1. 出力 (print)
+
+System.out.println を使うと、画面に文字や計算結果を表示できます。
+System.out.println("Hello world!"); // 出力: Hello world!
+System.out.println(8 + 10); // 出力: 18
+System.out.println(8 % ...]]></description><link>https://zenn.dev/kamehonu/articles/fcc9a1b39a1be5</link><guid isPermaLink="true">https://zenn.dev/kamehonu/articles/fcc9a1b39a1be5</guid><pubDate>Mon, 17 Feb 2025 02:29:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--K2co9aHu--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%2582%2599%25E5%25BF%2598%25E9%258C%25B2%25E3%2580%2591%2520AP%2520exam%2520Computer%2520Science%2520A%2520%25E5%258B%2589%25E5%25BC%25B7%25E8%25A8%2598%25E2%2591%25A0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:honu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0ZkhMcUd6a0hRUGpDWWF3cWh0bV85NnVUOWMxN0wyQkJkbkpRU1pScW1wcVE4PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>honu</dc:creator></item><item><title><![CDATA[【Java】メソッド]]></title><description><![CDATA[
+ Javaのメソッド（Method）
+
+メソッドは特定の処理をまとめたブロックです。
+繰り返し使えるように名前をつけて再利用できます。
+
+
+ 1. メソッドの基本構文
+
+返り値の型 メソッド名(引数) {
+    // 処理内容
+    return 値;  // 返り値がある場合
+}
+
+ 例: 足し算メソッド
+
+int add(int a, int b) {
+    return a + b;
+}
+実際に呼び出している例
+class Main {
+  public static void main(String[] args) {
+    hello();
+  }
+  
+  publ...]]></description><link>https://zenn.dev/kaishigaki/articles/2f28457f807519</link><guid isPermaLink="true">https://zenn.dev/kaishigaki/articles/2f28457f807519</guid><pubDate>Sun, 16 Feb 2025 02:45:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Cdjubkv8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Java%25E3%2580%2591%25E3%2583%25A1%25E3%2582%25BD%25E3%2583%2583%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258B%25E3%2581%2584%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M0MjQ2ZmVjOWIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>かい</dc:creator></item><item><title><![CDATA[【Java】クラス]]></title><description><![CDATA[
+ Javaのクラス（Class）
+
+クラスはオブジェクトを作るための設計図です。
+変数（フィールド） と メソッド（関数） を持ち、データをまとめて管理できます。
+
+
+ 1. クラスの基本
+
+
+ クラスの作成
+
+class クラス名 {
+    // フィールド（変数）
+    // メソッド（処理）
+}
+
+ 例: Car クラスの作成
+
+class Car {
+    String brand;  // フィールド（車のブランド）
+    int speed;     // フィールド（速度）
+
+    void drive() { // メソッド（走る動作）
+        Sys...]]></description><link>https://zenn.dev/kaishigaki/articles/caa67dd350d93b</link><guid isPermaLink="true">https://zenn.dev/kaishigaki/articles/caa67dd350d93b</guid><pubDate>Sun, 16 Feb 2025 02:44:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--I1HbHyiz--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:%25E3%2580%2590Java%25E3%2580%2591%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258B%25E3%2581%2584%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M0MjQ2ZmVjOWIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>かい</dc:creator></item><item><title><![CDATA[【Java】配列]]></title><description><![CDATA[
+ Javaの配列（Array）
+
+配列は同じ型のデータをまとめて管理するための仕組みです。
+複数の値を1つの変数で扱えるので便利です。
+
+
+ 1. 配列の基本
+
+
+ 配列の宣言と初期化
+
+データ型[] 配列名 = new データ型[サイズ];
+
+ 例: 5つの整数を格納する配列
+
+int[] numbers = new int[5]; // 5つの要素を持つ配列を作成
+📌 ポイント
+
+配列の要素は 0から始まる（numbers[0] が最初）
+
+new を使ってメモリに確保する
+
+
+
+ 2. 配列の初期化
+
+
+ 方法1: 1つずつ代入
+
+int[] numbers = new int[...]]></description><link>https://zenn.dev/kaishigaki/articles/7c542c3ae12e05</link><guid isPermaLink="true">https://zenn.dev/kaishigaki/articles/7c542c3ae12e05</guid><pubDate>Sun, 16 Feb 2025 02:41:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ADECRuhM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:%25E3%2580%2590Java%25E3%2580%2591%25E9%2585%258D%25E5%2588%2597%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258B%25E3%2581%2584%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M0MjQ2ZmVjOWIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>かい</dc:creator></item><item><title><![CDATA[【Java】繰り返し文]]></title><description><![CDATA[
+ Javaの繰り返し文（基本3種類）
+
+Javaのループ処理の中で、特によく使う for / while / for-each の3つを解説します。
+
+
+ 1. for 文（回数が決まっている繰り返し）
+
+「○回繰り返す」場合に適したループ
+
+ 基本構文
+
+for (初期化; 条件; 更新) {
+    // 繰り返し処理
+}
+
+
+初期化 : ループ開始時の変数（例: int i = 0;）
+
+条件 : ループを続ける条件（例: i &lt; 5;）
+
+更新 : ループごとに変数を更新（例: i++）
+
+
+ 例: 0〜4 を表示
+
+for (int i = 0; i &lt; 5; i...]]></description><link>https://zenn.dev/kaishigaki/articles/585f655076310d</link><guid isPermaLink="true">https://zenn.dev/kaishigaki/articles/585f655076310d</guid><pubDate>Sun, 16 Feb 2025 02:39:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0n2khqO1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Java%25E3%2580%2591%25E7%25B9%25B0%25E3%2582%258A%25E8%25BF%2594%25E3%2581%2597%25E6%2596%2587%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258B%25E3%2581%2584%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M0MjQ2ZmVjOWIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>かい</dc:creator></item><item><title><![CDATA[【Java】条件分岐について（復習）]]></title><description><![CDATA[
+ Javaの if 文の基本
+
+if 文は、条件によって処理を分岐するために使います。
+「もし ○○ ならば、△△ をする」というような処理を実装できます。
+
+
+ 1. 基本の書き方
+
+if (条件式) {
+    // 条件が true（真）なら実行
+}
+
+ 例
+
+int num = 10;
+if (num &gt; 5) {
+    System.out.println("num は 5 より大きい");
+}
+✅ num が 5 より大きいため、"num は 5 より大きい" が表示される。
+
+
+ 2. if-else（条件が false の場合の処理）
+
+if (条件式) {
+ ...]]></description><link>https://zenn.dev/kaishigaki/articles/88d73e6b58b6c6</link><guid isPermaLink="true">https://zenn.dev/kaishigaki/articles/88d73e6b58b6c6</guid><pubDate>Sun, 16 Feb 2025 02:36:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GnbQxlew--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Java%25E3%2580%2591%25E6%259D%25A1%25E4%25BB%25B6%25E5%2588%2586%25E5%25B2%2590%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25EF%25BC%2588%25E5%25BE%25A9%25E7%25BF%2592%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258B%25E3%2581%2584%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M0MjQ2ZmVjOWIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>かい</dc:creator></item><item><title><![CDATA[【Java】変数について（復習）]]></title><description><![CDATA[
+ 変数とは？
+データを入れる箱（入れ物）という認識。
+複数の箱があると、区別が必要なので、その変数に名前を付ける必要がある。
+
+ データ型とは
+データを入れる箱をジャンルごとで分けるイメージ
+データの中身は「あああ」のような文字列や、「123」のような整数、「0.314」のような少数
+があるので、それらに合わせた分類のようなものがデータ型。
+
+String（文字列型）
+　　文字列を扱うためのクラス で、""（ダブルクォート）で囲んで表現します。
+（データの値そのものではなく、オブジェクトのアドレス（参照）を格納する型に分類される）
+int（整数型）
+　一般的に使用される整数型（範囲：-...]]></description><link>https://zenn.dev/kaishigaki/articles/9d62e333f50672</link><guid isPermaLink="true">https://zenn.dev/kaishigaki/articles/9d62e333f50672</guid><pubDate>Sun, 16 Feb 2025 02:29:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lofcl4iq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Java%25E3%2580%2591%25E5%25A4%2589%25E6%2595%25B0%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25EF%25BC%2588%25E5%25BE%25A9%25E7%25BF%2592%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258B%25E3%2581%2584%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M0MjQ2ZmVjOWIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>かい</dc:creator></item><item><title><![CDATA[[Java]キャスト とは（備忘録）]]></title><description><![CDATA[
+ １．はじめに
+・データ型を変換することを、キャストといいます。
+・小さなデータ型から大きなデータへの変換（例：short 型をlong 型に変換）は、自動で行われます。（暗黙的キャスト）
+・大きなデータ型から小さなデータ型への変換（例：long 型をshort 型に変換）は、キャストを使って明示的に行います。（明示的キャスト）
+!
+重要：
+真偽値である boolean 型は型変換できません。
+
+
+ ２．アップキャスト とは
+・アップキャストとは、継承関係のあるクラスにおいて、サブクラス（継承先）のオブジェクトをスーパークラス（継承元）のオブジェクトと同じように扱うことができます。
+ア...]]></description><link>https://zenn.dev/yama_kawa/articles/347668f4e91b85</link><guid isPermaLink="true">https://zenn.dev/yama_kawa/articles/347668f4e91b85</guid><pubDate>Sun, 16 Feb 2025 02:07:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--MpBWI_3Q--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BJava%255D%25E3%2582%25AD%25E3%2583%25A3%25E3%2582%25B9%25E3%2583%2588%2520%25E3%2581%25A8%25E3%2581%25AF%25EF%25BC%2588%25E5%2582%2599%25E5%25BF%2598%25E9%258C%25B2%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%25A9%25E3%2582%25B6%25E3%2583%258B%25E3%2582%25A2%25E3%2583%2591%25E3%2583%25B3%25E3%2582%25B5%25E3%2583%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M1ZjYyZjIwYTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ラザニアパンサー</dc:creator></item><item><title><![CDATA[jarファイルのライブラリに苦しめられた話]]></title><description><![CDATA[
+ はじめに
+ispecでは、サーバーサイドにKotlinを採用して開発を行っています。
+(Kodee可愛いですよね 😊)
+
+今回は、jarファイルで追加したライブラリが原因で、他のライブラリが動作しなくなった際の話をしようと思います。
+かなりレアケースではあると思うのですが、誰かの助けになれば幸いです。
+最後にまとめがあるので、お急ぎの方はどうぞ！
+
+ 問題発生：ロガーが動作しなくなる
+自分が担当していたプロジェクトでは、SLF4J + Logbackというよくある構成でログ出力を行っていました。
+しかしある日、このログが出力されていないことに気が付きました。
+アプリケーション自体は問...]]></description><link>https://zenn.dev/ispec_inc/articles/jar-library-trouble</link><guid isPermaLink="true">https://zenn.dev/ispec_inc/articles/jar-library-trouble</guid><pubDate>Sat, 15 Feb 2025 08:07:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qohVK4vo--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:jar%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2581%25AE%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%25E3%2581%25AB%25E8%258B%25A6%25E3%2581%2597%25E3%2582%2581%25E3%2582%2589%25E3%2582%258C%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Masaharu%2520Hori%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRmN2Y5YzE4ZTUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:ispec%2520inc.%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dsMTBYY3R4TlFyTVZlODUyXzd4ZUtRNEJOR19PaVI2VU1nQlhlaGc9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Masaharu Hori</dc:creator></item><item><title><![CDATA[Javaで自作クラスのリストを2変数以上でソートする方法]]></title><description><![CDATA[
+ はじめに
+この記事では、Javaを用いて、自作クラスのリストをソートする方法について書きます。
+方法はいくつかありますが、一番簡単な方法を1つ紹介します。
+
+ 1変数の場合
+例えば3つの変数を持つレコードのリストを1変数でソートする場合は、java.util.Comparatorのcomparing関数を使用してcomparatorというものを作り出し、それを元にソートします。
+詳細はJavaのリファレンスを参考にしてください。
+以下の例では、Personというレコードのageという変数に着目して、リストをソートしています。
+import java.util.*;
+
+public c...]]></description><link>https://zenn.dev/g_dev/articles/39debfdb8981c0</link><guid isPermaLink="true">https://zenn.dev/g_dev/articles/39debfdb8981c0</guid><pubDate>Fri, 14 Feb 2025 14:11:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--PAH3dW7T--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java%25E3%2581%25A7%25E8%2587%25AA%25E4%25BD%259C%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25B9%25E3%2581%25AE%25E3%2583%25AA%25E3%2582%25B9%25E3%2583%2588%25E3%2582%25922%25E5%25A4%2589%25E6%2595%25B0%25E4%25BB%25A5%25E4%25B8%258A%25E3%2581%25A7%25E3%2582%25BD%25E3%2583%25BC%25E3%2583%2588%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Atomic%2520G%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q3NDA4NDg2ZTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Atomic G</dc:creator></item><item><title><![CDATA[SpringSecurity(セッション数管理)]]></title><description><![CDATA[
+ はじめに
+こんにちは！
+オアシステクノロジーズの山本です。
+SpringBoot + SpringSecurity でセッション数管理ではまったので、その内容を共有します。
+
+ 目次
+
+前提
+セッション数管理
+問題点
+解決策
+まとめ
+
+
+ 1.前提
+SpringBoot + SpringSecurity でセッション数(Redis※ElasticCashe）管理を行う前提で記載しています。
+SpringBoot 3.2.3
+SpringSecurity 6.2.2
+SpringDataRedis 3.2.3
+
+ 2.セッション数管理
+SpringSecurity でセッション数管理を...]]></description><link>https://zenn.dev/oasys/articles/f67bcd38304a93</link><guid isPermaLink="true">https://zenn.dev/oasys/articles/f67bcd38304a93</guid><pubDate>Fri, 14 Feb 2025 05:37:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--roK9nhmD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:SpringSecurity%2528%25E3%2582%25BB%25E3%2583%2583%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E6%2595%25B0%25E7%25AE%25A1%25E7%2590%2586%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25AA%25E3%2582%25A2%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2582%25AF%25E3%2583%258E%25E3%2583%25AD%25E3%2582%25B8%25E3%2583%25BC%25E3%2582%25BA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQyMGUxYmY0YzcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>オアシステクノロジーズ</dc:creator></item><item><title><![CDATA[疑問解消編④]]></title><description><![CDATA[久しぶりです！
+オアシステクノロジーズの中村です。
+疑問点や知らない単語をChatGPTに聞いてみた！編Part3です。
+
+ 今回のトピック
+
+サイトコア
+セッション
+PRD
+
+
+ サイトコア
+「サイトコアってなんですか？」
+ChatGPT君
+
+「サイトコア」は、Webサイトやデジタルコンテンツを管理するためのプラットフォームです。具体的には、企業が自社のウェブサイトやアプリケーション、オンラインコンテンツを効果的に運営し、パーソナライズされたデジタルエクスペリエンスを提供するために使用されます。
+
+主な機能としては、以下のようなものがあります：
+
+
+コンテンツ管理: ウェブサイトやアプ...]]></description><link>https://zenn.dev/oasys/articles/979c82ca09ddea</link><guid isPermaLink="true">https://zenn.dev/oasys/articles/979c82ca09ddea</guid><pubDate>Fri, 14 Feb 2025 05:37:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Hn6mMroP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%2596%2591%25E5%2595%258F%25E8%25A7%25A3%25E6%25B6%2588%25E7%25B7%25A8%25E2%2591%25A3%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25AA%25E3%2582%25A2%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2582%25AF%25E3%2583%258E%25E3%2583%25AD%25E3%2582%25B8%25E3%2583%25BC%25E3%2582%25BA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQyMGUxYmY0YzcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>オアシステクノロジーズ</dc:creator></item><item><title><![CDATA[Cloud Storage にアップロードしたCSVファイルを BigQuery に自動インポートする]]></title><description><![CDATA[こんにちは、クラウドエース株式会社の許です。
+この記事では、Cloud Storage にアップロードした CSV ファイルを BigQuery に自動インポートする方法について紹介します。
+
+ 大まかな構成
+以下のような構成で実装していきます。
+
+Cloud Storage に CSV ファイルをアップロードすると、Cloud Run Functions がトリガーされ、BigQuery に自動インポートされます。
+Cloud Run Functions は、いくつかトリガーが存在していますが、今回は Cloud Storage のファイルアップロード時にトリガーされる Cloud S...]]></description><link>https://zenn.dev/cloud_ace/articles/e96feef15b1947</link><guid isPermaLink="true">https://zenn.dev/cloud_ace/articles/e96feef15b1947</guid><pubDate>Fri, 14 Feb 2025 00:48:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--940S8Vm2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Cloud%2520Storage%2520%25E3%2581%25AB%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2589%25E3%2581%2597%25E3%2581%259FCSV%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2592%2520BigQuery%2520%25E3%2581%25AB%25E8%2587%25AA%25E5%258B%2595%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%259D%25E3%2583%25BC%25E3%2583%2588%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25A6%25E3%2583%2589%25E3%2582%25A8%25E3%2583%25BC%25E3%2582%25B9%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE2OGMwYmM4MTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>クラウドエース株式会社</dc:creator></item><item><title><![CDATA[【Java】Stream API]]></title><description><![CDATA[
+ Stream APIとは？
+
+リストや配列などのデータを「流れるデータの流れ（ストリーム）」として処理するしくみ。
+「繰り返し処理」や「フィルタリング」「変換」「集計」などを、シンプルに記述出来るようになる。
+
+
+ 基本的な流れ
+データ.stream()      // 1．Stream作成
+     .中間操作()     // 2．中間操作
+     .終端操作();   // 3．終端操作
+1．Stream作成：配列やリストなどのデータからStreamを作成
+2．中間操作：フィルタリング・変換などを行う（複数可）
+3．終端操作：結果を出力・集計・リスト化
+
+ 使用例
+packa...]]></description><link>https://zenn.dev/codek2/articles/c7b07b59564078</link><guid isPermaLink="true">https://zenn.dev/codek2/articles/c7b07b59564078</guid><pubDate>Thu, 13 Feb 2025 07:32:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--AkbsEegZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:%25E3%2580%2590Java%25E3%2580%2591Stream%2520API%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Udemy%25E3%2583%25BB%25E4%25BC%2581%25E6%25A5%25AD%25E3%2583%25BB%25E3%2582%25AA%25E3%2583%25B3%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSWJNcXYyNnJHY2xGVDEtOURITHVZTjhrWUpWOVN1aTJWYmxkNU9aejljTmtNPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Udemy・企業・オンラインプログラミングスクール講師♪codek2</dc:creator></item><item><title><![CDATA[【Java】ラムダ式]]></title><description><![CDATA[
+ ラムダ式とは？
+
+ラムダ式は、1回だけ使用する処理を短く書くための手段
+匿名クラスの代わりとして使える
+Stream APIなどでも利用される
+
+
+ まずは普通のメソッドを復習
+たとえば、数を2倍にするメソッドを作る場合、従来の方法では以下のように記述すると思います。
+しかし、この twice メソッドをたった1度しか使わないなら、毎回メソッドを書くのは面倒ですよね。
+package lambdaTest;
+
+public class Main {
+	public static int twice(int x) {
+		return x * 2;
+	}
+
+	public static...]]></description><link>https://zenn.dev/codek2/articles/069afe4a5bf986</link><guid isPermaLink="true">https://zenn.dev/codek2/articles/069afe4a5bf986</guid><pubDate>Thu, 13 Feb 2025 05:59:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--cu9Gyoyk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Java%25E3%2580%2591%25E3%2583%25A9%25E3%2583%25A0%25E3%2583%2580%25E5%25BC%258F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Udemy%25E3%2583%25BB%25E4%25BC%2581%25E6%25A5%25AD%25E3%2583%25BB%25E3%2582%25AA%25E3%2583%25B3%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSWJNcXYyNnJHY2xGVDEtOURITHVZTjhrWUpWOVN1aTJWYmxkNU9aejljTmtNPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Udemy・企業・オンラインプログラミングスクール講師♪codek2</dc:creator></item><item><title><![CDATA[配列・Enum値をDTOで管理するSQL検索機能の実装方法]]></title><description><![CDATA[https://zenn.dev/takeda_kaho/articles/67466ef5e4ba75#in
+この記事のINを参考に
+
+今回やりたかったこと
+
+検索機能[男・女]
+
+前提
+
+SQL[PostgreSQL]ではgenderというカラム名でINTEGER型
+namedvalueでenumで定義され男・MANなど加工されている
+検索フォームではlist Gender.values()で格納
+actionでgenders定義・デバックで確認して値は正しく取れてると判明
+検索条件に該当する人はDTOファイルから取ってきている
+[DTOとは]：エンティティに「追加情報」を持たせたい...]]></description><link>https://zenn.dev/takeda_kaho/articles/a8698f6198e142</link><guid isPermaLink="true">https://zenn.dev/takeda_kaho/articles/a8698f6198e142</guid><pubDate>Thu, 13 Feb 2025 03:16:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hBFu5K3z--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E9%2585%258D%25E5%2588%2597%25E3%2583%25BBEnum%25E5%2580%25A4%25E3%2582%2592DTO%25E3%2581%25A7%25E7%25AE%25A1%25E7%2590%2586%25E3%2581%2599%25E3%2582%258BSQL%25E6%25A4%259C%25E7%25B4%25A2%25E6%25A9%259F%25E8%2583%25BD%25E3%2581%25AE%25E5%25AE%259F%25E8%25A3%2585%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:takepanda%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAxZWRlZDIyZDYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takepanda</dc:creator></item><item><title><![CDATA[【Java】メソッド参照]]></title><description><![CDATA[
+ メソッド参照とは
+
+すでに定義済みのメソッドを呼び出して実行出来る書き方
+引数が省略出来るので、ラムダ式より記述量が減らすことが可能
+Java8より導入された
+
+
+ 構文
+
+
+
+対象
+書き方
+
+
+
+
+クラスメソッド
+クラス名::メソッド名
+
+
+インスタンスメソッド
+インスタンス名::メソッド名
+
+
+コンストラクタ
+クラス名::new コンストラクタ
+
+
+
+
+ 使用例
+
+ クラスメソッド
+package methodReferenceTest;
+
+import java.util.function.Function;
+
+public class Main {
+	public stati...]]></description><link>https://zenn.dev/codek2/articles/b18de5665c9bd6</link><guid isPermaLink="true">https://zenn.dev/codek2/articles/b18de5665c9bd6</guid><pubDate>Wed, 12 Feb 2025 08:55:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ygNZ6wQq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Java%25E3%2580%2591%25E3%2583%25A1%25E3%2582%25BD%25E3%2583%2583%25E3%2583%2589%25E5%258F%2582%25E7%2585%25A7%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Udemy%25E3%2583%25BB%25E4%25BC%2581%25E6%25A5%25AD%25E3%2583%25BB%25E3%2582%25AA%25E3%2583%25B3%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSWJNcXYyNnJHY2xGVDEtOURITHVZTjhrWUpWOVN1aTJWYmxkNU9aejljTmtNPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Udemy・企業・オンラインプログラミングスクール講師♪codek2</dc:creator></item><item><title><![CDATA[【Java】関数型インターフェース]]></title><description><![CDATA[https://zenn.dev/codek2/articles/069afe4a5bf986
+
+ 関数型インターフェースとは
+1つの抽象メソッドを持つインターフェース
+例）Consumer&lt;T&gt; ※一部省略しています
+@FunctionalInterface
+public interface Consumer&lt;T&gt; {
+    void accept(T t);
+}
+
+ メリット
+
+コードが簡潔になる
+わざわざクラスを作成する必要がない
+
+
+ 従来のインターフェースを使用した例
+package functionInterfaceTest;
+
+public int...]]></description><link>https://zenn.dev/codek2/articles/dbbe5e9ceddc49</link><guid isPermaLink="true">https://zenn.dev/codek2/articles/dbbe5e9ceddc49</guid><pubDate>Wed, 12 Feb 2025 08:25:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--H8RzbZ20--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Java%25E3%2580%2591%25E9%2596%25A2%25E6%2595%25B0%25E5%259E%258B%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%2595%25E3%2582%25A7%25E3%2583%25BC%25E3%2582%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Udemy%25E3%2583%25BB%25E4%25BC%2581%25E6%25A5%25AD%25E3%2583%25BB%25E3%2582%25AA%25E3%2583%25B3%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSWJNcXYyNnJHY2xGVDEtOURITHVZTjhrWUpWOVN1aTJWYmxkNU9aejljTmtNPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Udemy・企業・オンラインプログラミングスクール講師♪codek2</dc:creator></item><item><title><![CDATA[【Java】匿名(無名)クラス]]></title><description><![CDATA[
+ 匿名(無名)クラスとは
+
+名前をつけずにその場で定義して使うクラス
+1度しか使わないクラスに適している
+主に「クラスの継承」や「インターフェースの実装」をするために使われる
+
+
+ なぜ匿名クラスを使うの？
+
+1度しか使わないクラスのために、わざわざファイルを作らなくてもよい
+インスタンスを作ると同時に、その場でクラスの中身を定義することが出来る
+
+
+ 実際のコード例
+
+ クラスやインターフェースなどファイルを分けて作成する場合
+
+ファイルを分けて作成する場合、3つのファイルが必要
+記述する文字数も多い
+
+package nonameTest;
+
+public interface Gr...]]></description><link>https://zenn.dev/codek2/articles/57a7b02dc5f9eb</link><guid isPermaLink="true">https://zenn.dev/codek2/articles/57a7b02dc5f9eb</guid><pubDate>Wed, 12 Feb 2025 06:43:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9TBnbIRv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Java%25E3%2580%2591%25E5%258C%25BF%25E5%2590%258D%2528%25E7%2584%25A1%25E5%2590%258D%2529%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Udemy%25E3%2583%25BB%25E4%25BC%2581%25E6%25A5%25AD%25E3%2583%25BB%25E3%2582%25AA%25E3%2583%25B3%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSWJNcXYyNnJHY2xGVDEtOURITHVZTjhrWUpWOVN1aTJWYmxkNU9aejljTmtNPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Udemy・企業・オンラインプログラミングスクール講師♪codek2</dc:creator></item></channel></rss>

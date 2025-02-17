@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「TypeScript」のフィード]]></title><description><![CDATA[Zennのトピック「TypeScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/typescript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/f13e758fdb.png</url><title>Zennの「TypeScript」のフィード</title><link>https://zenn.dev/topics/typescript</link></image><generator>zenn.dev</generator><lastBuildDate>Mon, 17 Feb 2025 00:36:35 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/typescript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[AIを使った名刺解析・登録Slackアプリのコードレシピ（Cloudflare / Azure OpenAI / FileMaker）]]></title><description><![CDATA[
+ はじめに
+筆者は技術検証を兼ねて、LLMを使った社内ツールを数多く作ってきました。使われたものもあれば、使われないものもあります。忘れられるものの方が多いです。
+そのなかで好評だったのが、Slackを使った名刺登録アプリでした。
+LLMのOCR機能を使ったもので、作例が多く、屋上屋を架すは否めませんが、この記事ではコンテキストを絞って、実際に運用しているCloudflare Workers、Azure OpenAI Service 、FileMakerを用いた例を、具体的なコード実装に焦点を当てて紹介します。
+
+ 本記事のスコープ
+
+TypeScriptによるコード実装上のポイントを...]]></description><link>https://zenn.dev/ptna/articles/2bd69c532f1bb7</link><guid isPermaLink="true">https://zenn.dev/ptna/articles/2bd69c532f1bb7</guid><pubDate>Sun, 16 Feb 2025 23:15:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Rvqe9Q8C--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AI%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%259F%25E5%2590%258D%25E5%2588%25BA%25E8%25A7%25A3%25E6%259E%2590%25E3%2583%25BB%25E7%2599%25BB%25E9%258C%25B2Slack%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2581%25AE%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2583%25AC%25E3%2582%25B7%25E3%2583%2594%25EF%25BC%2588Cloudflare%2520%252F%2520Azure%2520OpenAI%2520%252F%2520...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:hosaka313%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZjNDZkNWFmNTAuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E5%2585%25A8%25E6%2597%25A5%25E6%259C%25AC%25E3%2583%2594%25E3%2582%25A2%25E3%2583%258E%25E6%258C%2587%25E5%25B0%258E%25E8%2580%2585%25E5%258D%2594%25E4%25BC%259A%25EF%25BC%2588%25E3%2583%2594%25E3%2583%2586%25E3%2582%25A3%25E3%2583%258A%25EF%25BC%2589%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lvTjJRYzJRN1V1ZnM1X29EblNkWkt4OFNPSWUzOTBaQTRSTDVOPXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hosaka313</dc:creator></item><item><title><![CDATA[初めてのAWS CDK｜開発環境構築〜初デプロイまでやってみた]]></title><description><![CDATA[こんにちは、mayaです。
+今日は初めてのIaCチャレンジということで、AWS CDKを使ってローカル環境の構築から実装・デプロイまでやってみようと思います。
+今回、参考にした記事はこちらです↓
+https://aws.amazon.com/jp/builders-flash/202411/create-cdk-local-dev-environment/
+
+ この記事でわかること
+
+AWS CDKの初歩的なローカル開発環境構築方法
+AWS CDKを使ったLamda関数の作成方法
+作成したコードのデプロイ方法
+
+
+ 筆者のステータス
+
+Webアプリケーションエンジニア（フロント/バック）...]]></description><link>https://zenn.dev/maya_honey/articles/a2cfd073337ee1</link><guid isPermaLink="true">https://zenn.dev/maya_honey/articles/a2cfd073337ee1</guid><pubDate>Sun, 16 Feb 2025 14:54:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xG3sk2uJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2588%259D%25E3%2582%2581%25E3%2581%25A6%25E3%2581%25AEAWS%2520CDK%25EF%25BD%259C%25E9%2596%258B%25E7%2599%25BA%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%25E3%2580%259C%25E5%2588%259D%25E3%2583%2587%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25A4%25E3%2581%25BE%25E3%2581%25A7%25E3%2582%2584%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:maya%2520honey%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q1YzYwZWM4NzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>maya honey</dc:creator></item><item><title><![CDATA[AI Podcast:HackerVoiceのリリース, その裏側]]></title><description><![CDATA[
+ AI Podcast: HackerVoiceをリリースしました!
+
+https://hackervoice.vercel.app/ja
+デモ動画
+https://www.youtube.com/watch?v=1lsP7VpOWi8
+Y Combinatorが管理する海外の掲示板HackerNewsのトレンドをピックアップし、AIによってPodcastを自動生成しています。機能の概要としては以下のようになります。
+
+HackerNewsの最新情報5選をコメント付きでお伝え
+日本語版、英語版どちらでも聴ける
+Gemini+TTSで毎日自動更新
+Spotify, Apple Podca...]]></description><link>https://zenn.dev/goriratatsu/articles/ec8f29de075349</link><guid isPermaLink="true">https://zenn.dev/goriratatsu/articles/ec8f29de075349</guid><pubDate>Sun, 16 Feb 2025 14:44:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--88MdOvfr--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AI%2520Podcast%253AHackerVoice%25E3%2581%25AE%25E3%2583%25AA%25E3%2583%25AA%25E3%2583%25BC%25E3%2582%25B9%252C%2520%25E3%2581%259D%25E3%2581%25AE%25E8%25A3%258F%25E5%2581%25B4%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Gorira-Tatsu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzgwZTE0ZTYxNDUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Gorira-Tatsu</dc:creator></item><item><title><![CDATA[【技術検証】ExpoとViroで始めるAR開発]]></title><description><![CDATA[
+ はじめに
+今回、Expoを使ったAR開発の技術検証を行いました。
+Expo環境でARを実装する方法のひとつとして、Viro というライブラリを使用したので紹介します。
+例えば、以下のようなAR機能を実装できます。
+
+
+
+本記事ではライブラリの紹介と、技術検証の結果について触れています。
+
+ 背景
+現在、プロジェクトでは「ARを使った動画を投稿するSNS」のような「AR×SNS」を融合したアプリケーションを開発中です。
+この開発にあたり、AR機能とSNS機能の両方をスムーズに実装できる技術スタックを選定する必要がありました。候補として挙がったのは、以下のアプローチです。
+
+ネイティブ開...]]></description><link>https://zenn.dev/kiwichan101kg/articles/9566c13042bb1e</link><guid isPermaLink="true">https://zenn.dev/kiwichan101kg/articles/9566c13042bb1e</guid><pubDate>Sun, 16 Feb 2025 10:59:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3x9q6qG6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E6%258A%2580%25E8%25A1%2593%25E6%25A4%259C%25E8%25A8%25BC%25E3%2580%2591Expo%25E3%2581%25A8Viro%25E3%2581%25A7%25E5%25A7%258B%25E3%2582%2581%25E3%2582%258BAR%25E9%2596%258B%25E7%2599%25BA%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kiwichan%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZlYTA3YzU3YzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kiwichan</dc:creator></item><item><title><![CDATA[Web Componentsで作る、Radix UIライクなTabsコンポーネント]]></title><description><![CDATA[
+ はじめに
+Web Componentsで作る、Radix UIライクなAccordionコンポーネントとWeb Componentsで作る、Radix UIライクなDialogコンポーネントに続き、今回はRadix UIライクなTabsを作成していきます。
+AccordionとDialogコンポーネントに比べると、Tabsコンポーネントは&lt;details&gt;や&lt;dialog&gt;の様な標準のHTML要素がないため、Web Componentsで作成するメリットが多いコンポーネントです。
+
+ 作成するTabsコンポーネントの仕様
+今回作成するTabsコンポーネントは、...]]></description><link>https://zenn.dev/kshr/articles/89b90be2657f1c</link><guid isPermaLink="true">https://zenn.dev/kshr/articles/89b90be2657f1c</guid><pubDate>Sun, 16 Feb 2025 09:52:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--y0raWrMT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Web%2520Components%25E3%2581%25A7%25E4%25BD%259C%25E3%2582%258B%25E3%2580%2581Radix%2520UI%25E3%2583%25A9%25E3%2582%25A4%25E3%2582%25AF%25E3%2581%25AATabs%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%259D%25E3%2583%25BC%25E3%2583%258D%25E3%2583%25B3%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:_H_R_%25E2%2593%25BF%25E1%25B4%25A5%25E2%2593%25BF%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFUWEFKeGdZMGlDYkVyeUp3cml1OVROb3VYUktXM2NxWk5COFM2QjZnVVQ9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>_H_R_⓿ᴥ⓿</dc:creator></item><item><title><![CDATA[テスト環境でのSyntaxError: Unexpected token '<'を実行環境と統一して解消する]]></title><description><![CDATA[
+ この記事の内容
+Next.js 12以降でSWCを利用している場合は、JestでもSWCを利用するようにしましょう。
+Next.jsのデフォルトのコンパイラはSWCだが、Jestはbabel-jestを利用するので気をつけましょう。
+
+ SyntaxError: Unexpected token '&lt;'
+開発中のNext.jsのプロジェクトに、テストを追加したいなと思い、Jestを導入しました。
+node_modules以下のデザインを読み込んだコンポーネントだけ、ブラウザ上ではデザインが反映されているが、テストではコンポーネントの描写に失敗する事象に遭遇しました。
+原因は既に...]]></description><link>https://zenn.dev/shotarokuramata/articles/e2cc107176cfbc</link><guid isPermaLink="true">https://zenn.dev/shotarokuramata/articles/e2cc107176cfbc</guid><pubDate>Sun, 16 Feb 2025 06:21:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ZM1svFVt--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25A7%25E3%2581%25AESyntaxError%253A%2520Unexpected%2520token%2520%2527%253C%2527%25E3%2582%2592%25E5%25AE%259F%25E8%25A1%258C%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25A8%25E7%25B5%25B1%25E4%25B8%2580%25E3%2581%2597%25E3%2581%25A6%25E8%25A7%25A3%25E6%25B6%2588%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:shotarokuramata%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSWRMdUhTVzFvRWdZb1Rfa1FCRlBHWEZ0WTdfWXVpWnpZUmtrV2ZtNjladXBsSm5BPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>shotarokuramata</dc:creator></item><item><title><![CDATA[Mixinとインターフェースの違い]]></title><description><![CDATA[備忘録として
+
+ Mixinとインターフェースの書き方
+JavaScriptにはPrototypeに動的にメソッドを追加できる。これはほかの言語では一般的にMixinと呼ばれる。
+// Mixin用のオブジェクト
+const Flyable = {
+  fly() {
+    console.log(`${this.name} is flying!`);
+  }
+};
+
+// コンストラクタ関数
+function Bird(name) {
+  this.name = name;
+}
+
+// Mixin を prototype に適用
+Object.assign(Bird.prototyp...]]></description><link>https://zenn.dev/dove/articles/3f01369e718479</link><guid isPermaLink="true">https://zenn.dev/dove/articles/3f01369e718479</guid><pubDate>Sun, 16 Feb 2025 05:52:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--HCoYzI_y--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Mixin%25E3%2581%25A8%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%2595%25E3%2582%25A7%25E3%2583%25BC%25E3%2582%25B9%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%258F%25E3%2583%2588%25E3%2581%2599%25E3%2581%2591%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVkMjNlN2Q4MzMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ハトすけ</dc:creator></item><item><title><![CDATA[React `useEffect`発火タイミング備忘録]]></title><description><![CDATA[
+ 🟡 背景
+useEffectのクリーンアップ関数が思った通りに発火しなかったので、原因を整理するために自分なりにまとめました。
+特に、Parent.tsxでChild.tsxを表示・非表示（toggle）する際のuseEffect発火タイミングに混乱しました。
+
+ 💡 問題のきっかけ:
+
+
+
+startせずにtoggle → クリーンアップだけ発火し、本体は発火しない。
+
+start後にtoggle → 本体とクリーンアップの両方が発火する。
+
+これにより、「toggleでアンマウントするならuseEffect本体も発火するはずでは？」という疑問がありました。
+そこで、3パターンの想...]]></description><link>https://zenn.dev/tamon_kondo/articles/2b61e8dddf3a70</link><guid isPermaLink="true">https://zenn.dev/tamon_kondo/articles/2b61e8dddf3a70</guid><pubDate>Sun, 16 Feb 2025 05:04:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8kMSFVt0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%2520%2560useEffect%2560%25E7%2599%25BA%25E7%2581%25AB%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%259F%25E3%2583%25B3%25E3%2582%25B0%25E5%2582%2599%25E5%25BF%2598%25E9%258C%25B2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:t.k%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2k1WWoxNXZlTDl0VE9pd0p0VHVZSXUyNENJMkJuOG1MYkhNcjFvN2c9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>t.k</dc:creator></item><item><title><![CDATA[React + Hono + Azure Functions で作る Azure Static Web Apps入門]]></title><description><![CDATA[
+ 概要
+みなさんは Azure サービスを使って開発したことがありますか？自分は AWS のサービスを使った経験はあったのですが、Azure サービスは使ったことがありませんでした。
+仕事では Azure サービスも使っているため、個人でも勉強しようと思い簡単なアプリを Azure サービスを使ってデプロイしたので、こちらを紹介します。
+デプロイする Azure サービスは Azure Static Web Apps を使います。Azure Static Web Apps は、フロントエンドからバックエンドまでをシームレスにデプロイできるサービスです。
+そして Azure Static...]]></description><link>https://zenn.dev/reki/articles/841b80aa45c66f</link><guid isPermaLink="true">https://zenn.dev/reki/articles/841b80aa45c66f</guid><pubDate>Sun, 16 Feb 2025 04:17:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--l8d45HGD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%2520%252B%2520Hono%2520%252B%2520Azure%2520Functions%2520%25E3%2581%25A7%25E4%25BD%259C%25E3%2582%258B%2520Azure%2520Static%2520Web%2520Apps%25E5%2585%25A5%25E9%2596%2580%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:rekitaro%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzIzZDI1MGQ5ZWYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>rekitaro</dc:creator></item><item><title><![CDATA[[NestJS] DDDアプローチによる認証機能の実装改善]]></title><description><![CDATA[本記事では、NestJSアプリケーションにおける認証機能のリファクタリング過程を解説します。ドメイン駆動設計（DDD）の原則に基づいて、認証ロジックをApplication層に適切に配置し、Value Objectsを活用した実装への改善を行います。このアプローチにより、保守性が高く、テストが容易なコードベースを実現します。
+
+ アーキテクチャの変更
+リファクタリング前後のアーキテクチャの変更を図で表現すると：
+【リファクタリング前】
+
+Infrastructure層
+└── AuthRepository
+    └── validateCredentials()  // 認証ロジックが...]]></description><link>https://zenn.dev/codeciao/articles/5fdf99d28f49b8</link><guid isPermaLink="true">https://zenn.dev/codeciao/articles/5fdf99d28f49b8</guid><pubDate>Sun, 16 Feb 2025 03:44:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--PLKGGrOP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BNestJS%255D%2520DDD%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2581%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258B%25E8%25AA%258D%25E8%25A8%25BC%25E6%25A9%259F%25E8%2583%25BD%25E3%2581%25AE%25E5%25AE%259F%25E8%25A3%2585%25E6%2594%25B9%25E5%2596%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:d_abe%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLmRldi9pbWFnZXMvZGVmYXVsdC1wdWJsaWNhdGlvbi1hdmF0YXIucG5n%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:codeciao%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJjMjYxODRmNzEuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>d_abe</dc:creator></item><item><title><![CDATA[hyperLiquidでおさわりを自動化]]></title><description><![CDATA[
+ ** hyperLiquidでおさわりを自動化**
+以下では、HyperliquidのPerpetual取引に参加する際の戦略と、自動化を念頭に置いたチュートリアルを、「コードレベルで」のイメージを踏まえつつ解説していきます。
+
+
+ 前提
+
+
+Hyperliquidはスマートコントラクトを介して取引を実行する形の取引所であり、公式が提供するAPIもしくはスマートコントラクトを直接呼び出す方法で自動化が可能であると想定。
+ここでは、Hyperliquidの提供するAPI、あるいはsmart contractを想定した擬似コードの例として解説します。
+各ステップで実際に動作させるには、公...]]></description><link>https://zenn.dev/s0g0m1hara/articles/99bd7d5d755f3c</link><guid isPermaLink="true">https://zenn.dev/s0g0m1hara/articles/99bd7d5d755f3c</guid><pubDate>Sun, 16 Feb 2025 03:33:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ygRYDQ8d--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:hyperLiquid%25E3%2581%25A7%25E3%2581%258A%25E3%2581%2595%25E3%2582%258F%25E3%2582%258A%25E3%2582%2592%25E8%2587%25AA%25E5%258B%2595%25E5%258C%2596%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E4%25B8%2589%25E5%258E%259F%25E8%25B5%25B0%25E5%25B7%25B1%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FiNDQwYTEzNDMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>三原走己</dc:creator></item><item><title><![CDATA[私の学習方法・時間の作り方]]></title><description><![CDATA[
+ 普段やってる勉強方法について
+こんにちわJboyです😄
+エンジニアやってもう２年以上になります。年数は増えたけどうーんまだ足りないものが多い。
+今回は技術的なことより勉強方法についてご紹介しようと思います。言語別にやった方がいいかな。。。
+
+ ⌚学習時間の確保
+ここは難しい方法ですね。私がやっている方法だと。
+
+フルリモートの仕事を選ぶ.
+定時退社の仕事を選ぶ.
+残業がほぼない仕事を選ぶ.
+勤務時間が１０時の仕事とか選ぶ.
+外出を減らす。食品・日用品は買い溜めしておきましょう.
+イベントはメリットがなければ参加しない。滞在時間と移動時間が無駄.
+
+
+ 集中する環境を作る
+その日の気分...]]></description><link>https://zenn.dev/joo_hashi/articles/c2d5b1e17be8b9</link><guid isPermaLink="true">https://zenn.dev/joo_hashi/articles/c2d5b1e17be8b9</guid><pubDate>Sun, 16 Feb 2025 01:13:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--QEB3AzNI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%25A7%2581%25E3%2581%25AE%25E5%25AD%25A6%25E7%25BF%2592%25E6%2596%25B9%25E6%25B3%2595%25E3%2583%25BB%25E6%2599%2582%25E9%2596%2593%25E3%2581%25AE%25E4%25BD%259C%25E3%2582%258A%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:JboyHashimoto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNjOTBiY2M0M2YuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>JboyHashimoto</dc:creator></item><item><title><![CDATA[ComfyUI Custom Nodes用のTypeScriptテンプレートを公開しました]]></title><description><![CDATA[
+ TL;DR
+ComfyUIのCustom NodesをTypeScriptで開発するためのテンプレートを公開しました。
+https://github.com/xhiroga/ComfyUI-TypeScript-CustomNode
+Star⭐️お待ちしております！
+
+ ComfyUI Custom Nodeとは？
+ComfyUI は、拡散モデルや LLM などを実行するためのワークフローを GUI 上で実装・管理できるアプリケーションです。ノードベースのインターフェースを採用しており、各ノードが特定の処理を実行し、それらを繋ぎ合わせることで複雑なワークフローを構築できます。
+Cus...]]></description><link>https://zenn.dev/hiroga/articles/comfyui-typescript-custom-node</link><guid isPermaLink="true">https://zenn.dev/hiroga/articles/comfyui-typescript-custom-node</guid><pubDate>Sat, 15 Feb 2025 22:15:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--C27RtIl---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ComfyUI%2520Custom%2520Nodes%25E7%2594%25A8%25E3%2581%25AETypeScript%25E3%2583%2586%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AC%25E3%2583%25BC%25E3%2583%2588%25E3%2582%2592%25E5%2585%25AC%25E9%2596%258B%25E3%2581%2597%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hiroga%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pfZHF2VHk5OFdpTG1EZ1Q1Ry1jLVNmWjRwaEdCcGdncGVKSjhqUzhzPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hiroga</dc:creator></item><item><title><![CDATA[Notionからmarkdownに変換するOSSを公開しました（Zennも対応）]]></title><description><![CDATA[
+ はじめに
+こんにちは。はじめまして。まるべいじ（malvageee）と申します！
+まだ完成系じゃないですが、Notionからmarkdownに変換するライブラリをOSSとして公開したので、経緯など含めて紹介しようと思います。
+https://github.com/salvage0707/notion-md-converter
+
+変換されたMarkdownはこちらから確認できます。https://zenn.dev/salvage0707/articles/4105ccdf1690c8
+この記事もこのライブラリを使って変換処理されたMarkdownを使ってます。
+Notion記事：htt...]]></description><link>https://zenn.dev/smartcamp/articles/4b3e05623bf11e</link><guid isPermaLink="true">https://zenn.dev/smartcamp/articles/4b3e05623bf11e</guid><pubDate>Sat, 15 Feb 2025 12:37:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ksDWmSyG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Notion%25E3%2581%258B%25E3%2582%2589markdown%25E3%2581%25AB%25E5%25A4%2589%25E6%258F%259B%25E3%2581%2599%25E3%2582%258BOSS%25E3%2582%2592%25E5%2585%25AC%25E9%2596%258B%25E3%2581%2597%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%25EF%25BC%2588Zenn%25E3%2582%2582%25E5%25AF%25BE%25E5%25BF%259C%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%25BE%25E3%2582%258B%25E3%2581%25B9%25E3%2581%2584%25E3%2581%2598%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzUyNGYwMGIzM2MuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:SMARTCAMP%2520Engineer%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQxOGVmZTY1YzEuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>まるべいじ</dc:creator></item><item><title><![CDATA[便利なReactカスタムフックが用意しているusehooks-tsとは]]></title><description><![CDATA[Reactカスタムフックライブラリのusehooks-tsの使い方について紹介します。
+
+ usehooks-tsとは
+便利なhookがたくさん入っているReactフックライブラリです。
+フックはDRY (Don't Repeat Yourself) の原則に基づいて構築されており、導入手順もわかりやすいです。
+npm install usehooks-ts
+で導入可能です。
+引用：　https://usehooks-ts.com/
+
+ usehooks-ts使い方
+便利そうなReactフックを何個か紹介します。
+
+ 1. useCopyToClipboard
+テキストをクリップボードに...]]></description><link>https://zenn.dev/643866/articles/bcd725c6f318f3</link><guid isPermaLink="true">https://zenn.dev/643866/articles/bcd725c6f318f3</guid><pubDate>Sat, 15 Feb 2025 11:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--nGMvgSFy--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E4%25BE%25BF%25E5%2588%25A9%25E3%2581%25AAReact%25E3%2582%25AB%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%25A0%25E3%2583%2595%25E3%2583%2583%25E3%2582%25AF%25E3%2581%258C%25E7%2594%25A8%25E6%2584%258F%25E3%2581%2597%25E3%2581%25A6%25E3%2581%2584%25E3%2582%258Busehooks-ts%25E3%2581%25A8%25E3%2581%25AF%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259F%25E3%2581%2593%25E7%2584%25BC%25E3%2581%258D%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2UxZWY2MWJmNmIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>たこ焼き</dc:creator></item><item><title><![CDATA[notion-md-converterで実行した時のmarkdown]]></title><description><![CDATA[
+ このライブラリを使ってNotionのブロックを変換した時の一覧
+
+ 使用したライブラリ
+https://github.com/salvage0707/notion-md-converter
+https://zenn.dev/articles/4b3e05623bf11e/edit
+
+ 変換対象のブロック
+https://malvageee.notion.site/1982ad69d3ce80a9b37fd990af6292e2?v=1992ad69d3ce80bb9950000cf51c9ea6&amp;pvs=74
+
+
+ 以下が変換されたMarkdown
+videoとか未完成な部分...]]></description><link>https://zenn.dev/salvage0707/articles/4105ccdf1690c8</link><guid isPermaLink="true">https://zenn.dev/salvage0707/articles/4105ccdf1690c8</guid><pubDate>Sat, 15 Feb 2025 09:57:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--yQsS3DF0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:notion-md-converter%25E3%2581%25A7%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%2597%25E3%2581%259F%25E6%2599%2582%25E3%2581%25AEmarkdown%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25BE%25E3%2582%258B%25E3%2581%25B9%25E3%2581%2584%25E3%2581%2598%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQxOGVmZTY1YzEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>まるべいじ</dc:creator></item><item><title><![CDATA[【Zod】string型の"true", "false"をboolean型のtrue, falseに変換する]]></title><description><![CDATA[
+ はじめに
+
+ 何がしたかったか
+文字列として存在する"true"と"false"をzodでbooleanにしてtrueとfalseに直そうとしました。
+
+ 全部trueになってしまう！
+とりあえず定義
+const a = z.coerce.boolean();
+"true"はもちろんtrueになります。
+a.parse("true") // true
+しかし、"false"もtrueになってしまいます...
+a.parse("false") // true
+この挙動はJavaScriptのBoolean()と似ています。
+&gt; Boolean("false")
+true
+
+ 解決...]]></description><link>https://zenn.dev/r64/articles/3c6cfc8a39f3b6</link><guid isPermaLink="true">https://zenn.dev/r64/articles/3c6cfc8a39f3b6</guid><pubDate>Sat, 15 Feb 2025 06:36:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ieuzPnO6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Zod%25E3%2580%2591string%25E5%259E%258B%25E3%2581%25AE%2522true%2522%252C%2520%2522false%2522%25E3%2582%2592boolean%25E5%259E%258B%25E3%2581%25AEtrue%252C%2520false%25E3%2581%25AB%25E5%25A4%2589%25E6%258F%259B%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ruka64%2528%25E3%2582%258B%25E3%2581%258B%2529%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBiZDlmOWU5NzEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ruka64(るか)</dc:creator></item><item><title><![CDATA[TypeScript + Next.js + Prisma/Drizzle を用いたSaaSサンプルレポジトリ【ボイラーテンプレート】]]></title><description><![CDATA[!
+この記事は、OpenAIのDeep Research機能を使って調査したものになります
+
+
+ はじめに
+ここでは TypeScript と Next.js、および ORM（Prisma や Drizzle）を使用したオープンソースのSaaS向けサンプル／ボイラープレートリポジトリを紹介します。以下の要件を満たしているものを中心にピックアップしています。
+
+認証・認可機能
+Role-based access control (RBAC)
+ユーザー／組織（ワークスペース）のエンティティを持つ
+1ユーザーが複数の組織に所属可能
+
+
+ 各プロジェクトの機能比較
+
+
+
+リポジトリ
+技術スタック...]]></description><link>https://zenn.dev/1mono2/articles/843f850cdb9a5a</link><guid isPermaLink="true">https://zenn.dev/1mono2/articles/843f850cdb9a5a</guid><pubDate>Sat, 15 Feb 2025 04:06:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--mA0m9Vh9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%2520%252B%2520Next.js%2520%252B%2520Prisma%252FDrizzle%2520%25E3%2582%2592%25E7%2594%25A8%25E3%2581%2584%25E3%2581%259FSaaS%25E3%2582%25B5%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AB%25E3%2583%25AC%25E3%2583%259D%25E3%2582%25B8%25E3%2583%2588%25E3%2583%25AA%25E3%2580%2590%25E3%2583%259C...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%25A3%25AE%25E6%259C%25AC%25E3%2582%25BF%25E3%2582%25AB%25E3%2583%2592%25E3%2583%25AD%2520%257C%2520nocall%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dTeENxcFE2VXBZX2dJa1E4cTBmVzBEbFpMTnpIc0FoZWl1czJNaUE9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>森本タカヒロ | nocall株式会社 CTO</dc:creator></item><item><title><![CDATA[TypeScript 入門]]></title><description><![CDATA[
+ 1. はじめに
+現代のWeb開発では、コードの信頼性や保守性が求められます。JavaScriptはその柔軟性から非常に人気のある言語ですが、大規模なプロジェクトになると、型がないために予期せぬエラーが発生しやすいという課題もあります。そこで登場するのが TypeScript です。
+TypeScriptは、JavaScriptのスーパーセットとして設計されており、静的型付けを導入することで、開発中に多くのエラーを事前に防ぐことができます。この記事では、TypeScriptの基本を丁寧に解説し、次のReact入門記事へと繋がる知識を身につけていきます。
+
+ 2. TypeScriptと...]]></description><link>https://zenn.dev/utokyo_aido/articles/b499e16d9189cb</link><guid isPermaLink="true">https://zenn.dev/utokyo_aido/articles/b499e16d9189cb</guid><pubDate>Sat, 15 Feb 2025 04:03:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BQdSkWaL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:TypeScript%2520%25E5%2585%25A5%25E9%2596%2580%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:AIDO%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS3A3SUtCeDVyd2FRcWFFY3dLZ3p2cDVSNmdVSk40UDd0bTU3T21IQVJsVFlXSVFhdz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>AIDO</dc:creator></item><item><title><![CDATA[Autonome+Agent Kitを使ってCrypto AI Agentを作成する]]></title><description><![CDATA[
+ AutonomeでAgent Kitを使う
+この記事は2025年2月時点の情報です。
+最近話題の「AIエージェント」を手軽にデプロイできる
+プラットフォームとして注目されるのが**Autonome（オートノーム）**です。
+本記事では、Autonome上でAgent Kitを利用して
+AIエージェントを作成し、デプロイする方法を解説します。
+
+ Autonomeとは
+AutonomeはAltLayer社が提供する
+自律型AIエージェントの作成とデプロイのための
+プラットフォームです。
+Web上のダッシュボードから簡単にエージェントを起動でき、
+インフラ構築の手間が不要です。
+Auto...]]></description><link>https://zenn.dev/bull/articles/how-to-integrate-agentkit-to-autonome</link><guid isPermaLink="true">https://zenn.dev/bull/articles/how-to-integrate-agentkit-to-autonome</guid><pubDate>Sat, 15 Feb 2025 01:39:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--CSUy8h-i--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Autonome%252BAgent%2520Kit%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6Crypto%2520AI%2520Agent%25E3%2582%2592%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:bull%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2g2MllRUHZOMXdGR25zMmFxNEpvOWI0VW96UTY4b3NfdlBOOFFqZUE9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>bull</dc:creator></item></channel></rss>
