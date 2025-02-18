@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「HTML」のフィード]]></title><description><![CDATA[Zennのトピック「HTML」のRSSフィードです]]></description><link>https://zenn.dev/topics/html</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/171432f5a6.png</url><title>Zennの「HTML」のフィード</title><link>https://zenn.dev/topics/html</link></image><generator>zenn.dev</generator><lastBuildDate>Tue, 18 Feb 2025 08:34:03 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/html/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Popover API × anchor-position × @starting-style で作るTooltip]]></title><description><![CDATA[
+ はじめに
+こんにちは！😄
+みなさん、少し前ですがCSS Wrapped 2024はチェックされましたか？私はCSS Wrapped 2024を見て、「おぉ…この辺の技術で何か作って試してみたい！」となりまして、何かちょうどさくっと作れるいい題材がないかな…と考えた結果、「Popover API」「anchor-position」「@starting-style」を使ってTooltipを作ることにしました！
+というわけで、色々な技術を試したいエンジニアの好奇心のままに、CSS Wrapped 2024で紹介された技術を駆使したTooltipのご紹介をします🚀
+https://chrom...]]></description><link>https://zenn.dev/gemcook/articles/github-zenn-linkage-popover</link><guid isPermaLink="true">https://zenn.dev/gemcook/articles/github-zenn-linkage-popover</guid><pubDate>Tue, 18 Feb 2025 04:04:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--KAWDpsnU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Popover%2520API%2520%25C3%2597%2520anchor-position%2520%25C3%2597%2520%2540starting-style%2520%25E3%2581%25A7%25E4%25BD%259C%25E3%2582%258BTooltip%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:KM%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQyYzJiNzVlZTIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Gemcook%2520Tech%2520Blog%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2EzYjk0ZGQyMWEuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>KM</dc:creator></item><item><title><![CDATA[HTMLとWAI-ARIAについてのまとめと気を付けるポイントメモ]]></title><description><![CDATA[
+WAI-ARIAについては何となく存在を知っていましたが、その程度の知識しかありませんでした。もう少しきちんと知識を整理して対応していこうと思い、個人的な対応方針を決定するまでの情報整理や思考した軌跡と結論を備忘メモとして残しておきます。
+この記事に書かれている内容は個人の解釈・主観が多分に含まれていることに加えて情報の行間等も全てを記せていません。情報を整理している中で、私が認識したためその時に気を付ければいいか、と思い記載していない内容等もあります。解釈が誤っている可能性もあるため、全体像をある程度把握するための参考程度にすることをおすすめします。
+
+ WAI-ARIAについて
+
+...]]></description><link>https://zenn.dev/scirexs/articles/7b71e03c7fbe76</link><guid isPermaLink="true">https://zenn.dev/scirexs/articles/7b71e03c7fbe76</guid><pubDate>Mon, 17 Feb 2025 21:00:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Zmc7PStY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:HTML%25E3%2581%25A8WAI-ARIA%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E3%2581%25AE%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2581%25A8%25E6%25B0%2597%25E3%2582%2592%25E4%25BB%2598%25E3%2581%2591%25E3%2582%258B%25E3%2583%259D%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2588%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:scirexs%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FGZFp1Y3BiazJHVGtaaklCQV9TTzVGSW55bVU0TFNuaGtlanZ3aW15OUhBPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>scirexs</dc:creator></item><item><title><![CDATA[HTMLで使うidとclassの違い]]></title><description><![CDATA[
+ HTMLのidとclass
+HTMLで要素にスタイルを適用したり、JavaScriptで操作したりするときに使う id と class。
+この2つにはそれぞれ異なるルールや使い方があります。本記事では、id と class の違いについて解説します。
+
+
+ それぞれの特徴
+
+ id の特徴
+
+同じ名前の id は一つのHTMLファイル内で1回しか使えない
+1つのタグに複数の id を指定することはできない
+CSSで id を指定するときは #id名 の形式で書く
+
+
+ classの特徴
+
+同じ名前のclassを一つのファイルにいくつも指定できる
+一つのタグの中で半角スペースで区切れば...]]></description><link>https://zenn.dev/ryu0830/articles/c80ac62d62a146</link><guid isPermaLink="true">https://zenn.dev/ryu0830/articles/c80ac62d62a146</guid><pubDate>Mon, 17 Feb 2025 12:50:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Pe7cz9YE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:HTML%25E3%2581%25A7%25E4%25BD%25BF%25E3%2581%2586id%25E3%2581%25A8class%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Ryu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS2prNWdKNC0zcDhxTFFjRGJPMHJDdDlXemtUdlBlbjNiSjREcDNTVXdXU1gxek9IcEY9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Ryu</dc:creator></item><item><title><![CDATA[Canvasでズーム＆描画！インタラクティブなホワイトボードを構築 (2)]]></title><description><![CDATA[
+ はじめに
+こんにちは！PortalKeyの渋谷です。
+今回は前回作成したホワイトボードに付箋の実装をしていきます。
+完成イメージはこちらです！
+
+
+ 付箋実装を行う前に…
+前回実装した物をそのまま拡張すると１ファイルのコード量がとんでもないことになるので一旦各機能毎にクラス分けしようと思います。
+whiteboard.tsimport { useCallback, useEffect, useRef } from "react"
+import { ViewManager } from "./viewManager"
+import { MarkerManager } from "./m...]]></description><link>https://zenn.dev/portalkeyinc/articles/9dd07b9b57b23c</link><guid isPermaLink="true">https://zenn.dev/portalkeyinc/articles/9dd07b9b57b23c</guid><pubDate>Mon, 17 Feb 2025 05:19:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7T_hwe9U--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Canvas%25E3%2581%25A7%25E3%2582%25BA%25E3%2583%25BC%25E3%2583%25A0%25EF%25BC%2586%25E6%258F%258F%25E7%2594%25BB%25EF%25BC%2581%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25BF%25E3%2583%25A9%25E3%2582%25AF%25E3%2583%2586%25E3%2582%25A3%25E3%2583%2596%25E3%2581%25AA%25E3%2583%259B%25E3%2583%25AF%25E3%2582%25A4%25E3%2583%2588%25E3%2583%259C%25E3%2583%25BC%25E3%2583%2589%25E3%2582%2592%25E6%25A7%258B%25E7%25AF%2589%2520%25282%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:da-shibuya%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM2Y2JkM2UxMzEuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:PortalKey%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSzR2Y0dCWGJ5bmIwc3k4TnQyZll4aU8xQ2xBN1ZwNzAtR2RJeTR4WW1uc2JEMEhRPXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>da-shibuya</dc:creator></item><item><title><![CDATA[【実務導入】素のReactでXみたいな無限ローディング実装例]]></title><description><![CDATA[
+ 最初に
+
+昔業務で大きめな新機能追加で、新規画面実装を行いました。
+そこで table 要素を使って組んだレイアウトに無限ローディング機能 + ユーザが選択した要素を別テーブルで保持する機能実装を行いました。
+文字にするとややこしいですが、テーブルレイアウトが2つ横並びになっている少し変わったUIです。
+こちらを外部UIライブラリを使わず、Reactのみでどのように実装したか紹介しようと思います。
+非機能要件もあり、パフォーマンスにもこだわりました。
+
+ 仕様
+まず実装前にデザイナーさんから Figma で作成された UI と共にこんな感じの要望がありました。
+テーブルのレイアウトが...]]></description><link>https://zenn.dev/unemployed/articles/react-infinite-scroll</link><guid isPermaLink="true">https://zenn.dev/unemployed/articles/react-infinite-scroll</guid><pubDate>Sun, 16 Feb 2025 23:11:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--MvEswYSl--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%25AE%259F%25E5%258B%2599%25E5%25B0%258E%25E5%2585%25A5%25E3%2580%2591%25E7%25B4%25A0%25E3%2581%25AEReact%25E3%2581%25A7X%25E3%2581%25BF%25E3%2581%259F%25E3%2581%2584%25E3%2581%25AA%25E7%2584%25A1%25E9%2599%2590%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2587%25E3%2582%25A3%25E3%2583%25B3%25E3%2582%25B0%25E5%25AE%259F%25E8%25A3%2585%25E4%25BE%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25A4%25A7%25E5%25AD%25A6%25E7%2594%259F%25E3%2581%25A0%25E3%2581%25A3%25E3%2581%259F.%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZhMzZiMmE0MTMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>大学生だった.</dc:creator></item><item><title><![CDATA[GASでHTMLファイルを分割して利用する方法]]></title><description><![CDATA[
+ Google Apps Script (GAS) でのHTMLファイル分割ガイド
+
+ 概要
+Google Apps Script（GAS）でウェブアプリケーションを開発する際、HTMLファイルを複数のファイルに分割して管理することで、コードの保守性と再利用性を向上させることができます。
+この文書では、GASでのHTMLファイル分割の基本的な実装方法について説明します。
+
+ 基本的なファイル構成
+
+ ファイル構成の説明
+
+
+エントリーポイント
+
+
+Code.js: アプリケーションのエントリーポイント
+
+index.html: メインのHTMLテンプレート
+
+
+
+基本モジュール
+
+
+s...]]></description><link>https://zenn.dev/hstats/articles/53b1cabc1dc0b5</link><guid isPermaLink="true">https://zenn.dev/hstats/articles/53b1cabc1dc0b5</guid><pubDate>Sun, 16 Feb 2025 06:23:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--HtQjjpA7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:GAS%25E3%2581%25A7HTML%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2592%25E5%2588%2586%25E5%2589%25B2%25E3%2581%2597%25E3%2581%25A6%25E5%2588%25A9%25E7%2594%25A8%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:AI%25E3%2583%258F%25E3%2583%25B3%25E3%2583%2589%25E3%2583%259C%25E3%2583%25BC%25E3%2583%25AB%25E4%25BA%25BA%2520%252F%2520HSTATS...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzljMDU4N2I2YzkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>AIハンドボール人 / HSTATS (ホースタッツ)</dc:creator></item><item><title><![CDATA[HTML & CSS入門]]></title><description><![CDATA[
+ 1. はじめに
+Web開発の世界に足を踏み入れると、まずはHTMLとCSSという2つの基本技術に出会います。
+• HTML (HyperText Markup Language): Webページの「構造」を定義するためのマークアップ言語です。
+• CSS (Cascading Style Sheets): HTMLで作られたコンテンツに「見た目」を与えるためのスタイルシート言語です。
+この入門記事では、今後学ぶJavaScript、TypeScript、Reactなどの技術に備えるため、最低限の理論と実践的な知識を解説していきます。特に、HTMLとCSSの役割や基本構造、セマンティッ...]]></description><link>https://zenn.dev/utokyo_aido/articles/149d29e12c5312</link><guid isPermaLink="true">https://zenn.dev/utokyo_aido/articles/149d29e12c5312</guid><pubDate>Sat, 15 Feb 2025 04:05:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--72A3MlHh--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:HTML%2520%2526%2520CSS%25E5%2585%25A5%25E9%2596%2580%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:AIDO%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS3A3SUtCeDVyd2FRcWFFY3dLZ3p2cDVSNmdVSk40UDd0bTU3T21IQVJsVFlXSVFhdz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>AIDO</dc:creator></item><item><title><![CDATA[Web技術の互換性を把握するためのBaselineとWeb Platform Status Dashboard]]></title><description><![CDATA[Webブラウザの進化に伴い、新しい機能や技術が次々と登場しています。しかし、各ブラウザの実装状況や互換性を把握することは、開発者にとって大きな課題でした。この課題を解決するため、2024年に整備が進み、2025年から本格的に活用できる指標が「Baseline」です。本記事では、2024年に大きく進展したBaselineとWeb Platform Status Dashboardについて紹介します。
+
+ Baselineのおさらい
+Safari、Chrome、Edge、Firefoxといった主要なWebブラウザ間での機能の互換性レベルを体系的に定義し、開発者に明確な指標を提供するものです。...]]></description><link>https://zenn.dev/sakito/articles/26cba8397c4dbe</link><guid isPermaLink="true">https://zenn.dev/sakito/articles/26cba8397c4dbe</guid><pubDate>Fri, 14 Feb 2025 00:39:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--PHozToVM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Web%25E6%258A%2580%25E8%25A1%2593%25E3%2581%25AE%25E4%25BA%2592%25E6%258F%259B%25E6%2580%25A7%25E3%2582%2592%25E6%258A%258A%25E6%258F%25A1%25E3%2581%2599%25E3%2582%258B%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AEBaseline%25E3%2581%25A8Web%2520Platform%2520Status%2520Dashboard%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:sakito%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lzR1A2UzZiZ09GRGVtOVhKcjFiOF82eUQ5djBzYV9waDhkcGM3Mmc9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sakito</dc:creator></item><item><title><![CDATA[本当にあった入力フォームの怖い話 〜Enterキーを押しただけなのに〜]]></title><description><![CDATA[
+ はじめに
+こんにちは。レバテック開発部でオウンドメディアの開発を担当しています、金井です。
+HTMLのinputタグを使って入力フォームを作成することがあるかと思いますが、今回はその入力フォームについて、1つ怖いお話をしようと思います。
+
+ 何が起こったか
+
+ 気づくまでの経緯
+エントリーフォーム上でのユーザーの行動を分析していたところ、不可解な遷移をしているユーザーがいることがログからわかりました。
+通常だと、画像のような遷移をして登録完了画面に遷移するはずなのですが
+
+メールアドレス入力画面の後に、入力したであろうメールアドレスがクエリパラメータとして付与されて、最初の「希望契約...]]></description><link>https://zenn.dev/levtech/articles/ea998f86f231e4</link><guid isPermaLink="true">https://zenn.dev/levtech/articles/ea998f86f231e4</guid><pubDate>Thu, 13 Feb 2025 03:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--M-0uCXtZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%259C%25AC%25E5%25BD%2593%25E3%2581%25AB%25E3%2581%2582%25E3%2581%25A3%25E3%2581%259F%25E5%2585%25A5%25E5%258A%259B%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25BC%25E3%2583%25A0%25E3%2581%25AE%25E6%2580%2596%25E3%2581%2584%25E8%25A9%25B1%2520%25E3%2580%259CEnter%25E3%2582%25AD%25E3%2583%25BC%25E3%2582%2592%25E6%258A%25BC%25E3%2581%2597%25E3%2581%259F%25E3%2581%25A0%25E3%2581%2591%25E3%2581%25AA%25E3%2581%25AE%25E3%2581%25AB%25E3%2580%259C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%2584%25E3%2581%25AA%25E3%2581%258B%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY1YzcxZDY5NDkuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%25AC%25E3%2583%2590%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E9%2596%258B%25E7%2599%25BA%25E9%2583%25A8%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzcxNjQ2N2RjZDMuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>いなか</dc:creator></item><item><title><![CDATA[スムーススクロールもCSSのみで簡単に実装できてしまう時代だったのである。おぉ・・・scroll-behavior・・・]]></title><description><![CDATA[
+ はじめに
+ソニックムーブの安立です。
+先日以下のような記事を書きました。
+https://zenn.dev/sonicmoov/articles/ead60241f21696
+さらにページ内リンクのスムーススクロールもJavascriptを使用せずにCSSのみで行けるようになっていました。
+
+ 結論
+まずは結論ということで、htmlに対して以下のコードを指定しましょう。
+・・・簡単！！！！
+html {
+    scroll-behavior: smooth;
+}
+今回はscroll-behaviorというプロパティですね。
+
+ デモ
+前回のデモを流用する形で見てみましょう。
+スムー...]]></description><link>https://zenn.dev/sonicmoov/articles/d114b499f0d2f9</link><guid isPermaLink="true">https://zenn.dev/sonicmoov/articles/d114b499f0d2f9</guid><pubDate>Tue, 11 Feb 2025 22:50:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--VrvkoRj3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B9%25E3%2583%25A0%25E3%2583%25BC%25E3%2582%25B9%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%25AB%25E3%2582%2582CSS%25E3%2581%25AE%25E3%2581%25BF%25E3%2581%25A7%25E7%25B0%25A1%25E5%258D%2598%25E3%2581%25AB%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%25A7%25E3%2581%258D%25E3%2581%25A6%25E3%2581%2597%25E3%2581%25BE%25E3%2581%2586%25E6%2599%2582%25E4%25BB%25A3%25E3%2581%25A0%25E3%2581%25A3%25E3%2581%259F%25E3%2581%25AE%25E3%2581%25A7%25E3%2581%2582%25E3%2582%258B%25E3%2580%2582%25E3%2581%258A%25E3%2581%2589%25E3%2583%25BB%25E3%2583%25BB%25E3%2583%25BBscroll-behavior%25E3%2583%25BB%25E3%2583%25BB%25E3%2583%25BB%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E5%25AE%2589%25E7%25AB%258B%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY0YjYwNGE3MzguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2582%25BD%25E3%2583%258B%25E3%2583%2583%25E3%2582%25AF%25E3%2583%25A0%25E3%2583%25BC%25E3%2583%2596%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ5OTlmM2U4MGIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>安立</dc:creator></item><item><title><![CDATA[PLCでラダーをHTML出力]]></title><description><![CDATA[
+ はじめに
+最近のPLCエディターでは、ラダー図をHTML形式で出力できる機能が備わっています。本記事では、三菱電機 GX Works3やキーエンス KV-StudioのHTMLエクスポート機能について解説します。
+
+ PLCとFA業界についての補足
+PLC（プログラマブル・ロジック・コントローラ）は、工場の自動化（FA: ファクトリー・オートメーション）を支える制御装置です。主に機械のシーケンス制御を担い、センサーやアクチュエーターと連携して装置の動作を管理します。FA業界では、PLCを活用した生産ラインの最適化や、IoTと組み合わせたスマートファクトリー化が進んでいます。
+特に三菱...]]></description><link>https://zenn.dev/tryeverything/articles/a0019_plc_html_output</link><guid isPermaLink="true">https://zenn.dev/tryeverything/articles/a0019_plc_html_output</guid><pubDate>Mon, 10 Feb 2025 10:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BDcirjBa--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:PLC%25E3%2581%25A7%25E3%2583%25A9%25E3%2583%2580%25E3%2583%25BC%25E3%2582%2592HTML%25E5%2587%25BA%25E5%258A%259B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259F%25E3%2582%2593%25E3%2581%2595%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc2NDc5YTUwMzguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>たんさん</dc:creator></item><item><title><![CDATA[Wixで埋め込みHTMLに動的にURLを渡す方法]]></title><description><![CDATA[
+ はじめに
+WixでWebサイトを作成する際、HTMLコンポーネントに動的にURLを渡したいケースがあります。例えば：
+
+外部サービスの埋め込みiframeのURLを動的に変更したい
+ユーザーの入力に基づいてリンク先を変更したい
+データベースの値に応じてコンテンツを切り替えたい
+
+この記事では、WixのhtmlComponentを使用して動的にURLを渡す方法を解説します。
+
+ 前提知識
+
+Wixのコードパネルの基本的な使い方
+JavaScriptの基礎知識
+HTMLコンポーネントの使用方法
+
+
+ 実装手順
+
+ 1. HTMLコンポーネントの配置
+まず、Wixエディタで以下の手順を実行...]]></description><link>https://zenn.dev/ryujo/articles/7f067db00a2a4d</link><guid isPermaLink="true">https://zenn.dev/ryujo/articles/7f067db00a2a4d</guid><pubDate>Mon, 10 Feb 2025 02:39:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--CWQW0IZF--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Wix%25E3%2581%25A7%25E5%259F%258B%25E3%2582%2581%25E8%25BE%25BC%25E3%2581%25BFHTML%25E3%2581%25AB%25E5%258B%2595%25E7%259A%2584%25E3%2581%25ABURL%25E3%2582%2592%25E6%25B8%25A1%25E3%2581%2599%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:zaki3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSS1Kd2d6N0J3YUtybF90SWFVUWNJLU1MQkxvOV9WU0hRaGR5dURrSjhhZjhNUXJRPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>zaki3</dc:creator></item><item><title><![CDATA[Googleサイトにコピーボタンを実装する方法(API不要)]]></title><description><![CDATA[
+ 初めに
+社内ドキュメントの作成にGoogleサイトを使用しているのですが、コードの埋め込みでコピーボタンを実装しようとしたところ、一般的なAPIを使う方法では実装できませんでした。なのでAPIなしでコピーボタンを実装しました。
+
+ 公開サイト
+動作テスト用のページを公開しています。以下のリンクから確認できます。
+https://sites.google.com/view/tuyuzaki-test/ホーム
+
+ 動作のスクショ
+以下のように、ボタンをクリックすると指定したテキストがコピーされます。
+
+ コピー前
+
+
+ コピー後
+
+
+ 実装したコード
+Googleサイトの埋め込む機能を使...]]></description><link>https://zenn.dev/mentsuyu/articles/b5e498d1481433</link><guid isPermaLink="true">https://zenn.dev/mentsuyu/articles/b5e498d1481433</guid><pubDate>Sun, 09 Feb 2025 10:42:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--05E7m9Hy--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Google%25E3%2582%25B5%25E3%2582%25A4%25E3%2583%2588%25E3%2581%25AB%25E3%2582%25B3%25E3%2583%2594%25E3%2583%25BC%25E3%2583%259C%25E3%2582%25BF%25E3%2583%25B3%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2528API%25E4%25B8%258D%25E8%25A6%2581%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mentsuyu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS3RFR0ZoS2NmVmFxQlE5SEhUM2lUVm15dm54V1F6N0FVNUM5VEVxN0tkUUJDdj1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mentsuyu</dc:creator></item><item><title><![CDATA[漢は黙ってhtml contenteditable]]></title><description><![CDATA[
+ はじめに
+ブラウザで動くHTML1ライナーテキストエディタ作ったのでコピペ＆ブクマして使ってみてください。URLに直接打ち込んで使えます。
+
+ コード
+data:text/html,&lt;html contenteditable&gt;&lt;script&gt;window.addEventListener("beforeunload",(e)=&gt;{document.body.innerText.length&gt;0&amp;&amp;(e.preventDefault(),e.returnValue="")})&lt;/script&gt;&lt;/html&gt;
+]]></description><link>https://zenn.dev/koudaiishigame/articles/ae83ff26919c99</link><guid isPermaLink="true">https://zenn.dev/koudaiishigame/articles/ae83ff26919c99</guid><pubDate>Fri, 07 Feb 2025 13:38:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5qX_6bSh--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%25BC%25A2%25E3%2581%25AF%25E9%25BB%2599%25E3%2581%25A3%25E3%2581%25A6html%2520contenteditable%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258B%25E3%2582%2581%25E3%2581%25BD%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JjY2FhMGUwODcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>かめぽん</dc:creator></item><item><title><![CDATA[初代 iPad 用の Web アプリを作った(スコアボードアプリ)]]></title><description><![CDATA[はい。今どきなかなか珍しい体験をした(？)と思うので、記録を残しておきます。
+URL: https://score-board.pages.dev/
+スクリーンショット:
+
+
+ Why?
+ある日、うちの父が1つ頼みたいことがあると言ってきました。
+パッパ「趣味(ビリヤード)でスコアボードアプリ入れて使おうと思って古い iPad を買ったんだ、ただ古すぎてアプリストアから入れることができなかった😥PC からなんとか入れられないか？」
+ワイ「古いっていつの？」
+パッパ「最初のやつ」
+ワイ「(流石に初代 mini のことやろな)まあシンプルなものでいいならワンチャンワイが Web で作れるよ」...]]></description><link>https://zenn.dev/kei874/articles/23ca6e9f1e4dce</link><guid isPermaLink="true">https://zenn.dev/kei874/articles/23ca6e9f1e4dce</guid><pubDate>Wed, 05 Feb 2025 10:37:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4sW1J843--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2588%259D%25E4%25BB%25A3%2520iPad%2520%25E7%2594%25A8%25E3%2581%25AE%2520Web%2520%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%2528%25E3%2582%25B9%25E3%2582%25B3%25E3%2582%25A2%25E3%2583%259C%25E3%2583%25BC%25E3%2583%2589%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kei%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk1YWRhNzY4ZGEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kei</dc:creator></item><item><title><![CDATA[Flaskの小技：HTMLのPOSTメソッドについて、静的な文字を上手くバックエンド側にSubmitする]]></title><description><![CDATA[
+ 本記事の背景
+HTMLでPOSTを実装する場合、&lt;input&gt;タグを使うのだが、静的な文字をPOST実行する場合、わざわざ入力させるのも、面倒なので、単に文字列をバックエンドに引き渡したいが、調べても事例がないので、本記事は、ちょっとした工夫をすることでうまくできたので、紹介する。
+
+ 問題点
+以下のようなHTMLがあり、{{ hogehoge }}をバックエンド側に引き渡したい。
+ &lt;form action="/confirm" method="post"&gt;
+　　&lt;h3&gt;{{ hogehoe }} &lt;/h3&gt;
+　　&lt;button...]]></description><link>https://zenn.dev/akeyi2025/articles/c0f15f62ae0b3f</link><guid isPermaLink="true">https://zenn.dev/akeyi2025/articles/c0f15f62ae0b3f</guid><pubDate>Mon, 03 Feb 2025 13:51:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--If_D6Usu--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Flask%25E3%2581%25AE%25E5%25B0%258F%25E6%258A%2580%25EF%25BC%259AHTML%25E3%2581%25AEPOST%25E3%2583%25A1%25E3%2582%25BD%25E3%2583%2583%25E3%2583%2589%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E3%2580%2581%25E9%259D%2599%25E7%259A%2584%25E3%2581%25AA%25E6%2596%2587%25E5%25AD%2597%25E3%2582%2592%25E4%25B8%258A%25E6%2589%258B%25E3%2581%258F%25E3%2583%2590%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2589%25E5%2581%25B4%25E3%2581%25ABSubmit%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2Y%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSUxRWU9iOGsxd1M4UHg3QU1IYXliNTdyUmpOZVViU1JoejFwTVRuQVNMdkpSYkQ3Nk9FZz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>エンジニアY</dc:creator></item><item><title><![CDATA[cyberagent-deepseek-r1-distill-qwen-14b-japaneseをVSCODEで使いました]]></title><description><![CDATA[Deepseekが登場してVSCODEでDeepseekを使うという投稿が、Xで散見されるようになりました。
+私も、LMStudioを使っていますので、試したいと思いました。
+今回は、(株)サイバーエージェントがDeepseekをベースに開発したモデルを蒸留して作られたcyberagent-deepseek-r1-distill-qwen-14b-japaneseを使いました。
+https://huggingface.co/mmnga/cyberagent-DeepSeek-R1-Distill-Qwen-14B-Japanese-gguf
+このモデルのお陰で、私のノートパソコンでもDe...]]></description><link>https://zenn.dev/masaru21/articles/6953f2c792fee5</link><guid isPermaLink="true">https://zenn.dev/masaru21/articles/6953f2c792fee5</guid><pubDate>Mon, 03 Feb 2025 03:42:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--F5lpu_DL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:cyberagent-deepseek-r1-distill-qwen-14b-japanese%25E3%2582%2592VSCODE%25E3%2581%25A7%25E4%25BD%25BF...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:lonely_creator_m%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2hzOWNVVzBjY3NDOXZPcXFwd0QtZktPblJpbmM4YnFYWG9LVDhVQmxvPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>lonely_creator_m</dc:creator></item><item><title><![CDATA[Next.jsのmeta-dataを設定方法]]></title><description><![CDATA[
+ 初めに
+SEO対策と聞いて何を思い浮かべますか？
+HTMLタグの適切な利用を意識するあまり、メタデータに意識を疎かにしていました。
+そこで今回はメタデータを中心に話したいと思います。
+
+ そもそもメタデータとは？
+Next.jsでは、Layout.tsxにあるこんな記載です。
+
+layout.tsx
+export const metadata: Metadata = {
+  title: "Create Next App",
+  description: "Generated by create next app",
+};
+
+Web開発では、メタデータは Web ページに関する追加の...]]></description><link>https://zenn.dev/omegamaster/articles/nextjs-meta-data</link><guid isPermaLink="true">https://zenn.dev/omegamaster/articles/nextjs-meta-data</guid><pubDate>Mon, 03 Feb 2025 02:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--esZlkp4A--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Next.js%25E3%2581%25AEmeta-data%25E3%2582%2592%25E8%25A8%25AD%25E5%25AE%259A%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25AA%25E3%2583%25A1%25E3%2582%25AC%25E3%2583%259E%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0YzVXQURUYXFBRUlnaTg5WHM1a2JCQW1mRm05QzhDS09mNXVYODQ1QTBPYXc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>オメガマスター</dc:creator></item><item><title><![CDATA[【Rails】超簡単！コピーボタンを実装する方法]]></title><description><![CDATA[
+ はじめに
+お疲れ様です。
+おおくまです。
+今回は、「【Rails】超簡単！コピーボタンを実装する方法」ということで、Ruby on Railsで、コピーボタンを実装する方法について、まとめてみました。
+とても簡単に実装できるので、ぜひ実装してみてください。
+少しでも皆様の参考になりますと幸いです。
+
+ 対象読者
+!
+
+
+Ruby on Railsについて興味のある方
+コピーボタンの実装について興味のある方
+
+
+
+ 注意点
+!
+
+内容に誤りがある場合があります。
+コメント等で教えていただけると幸甚です。
+
+
+
+ 環境
+!
+
+Docker Desktop：4.38.0
+Docker En...]]></description><link>https://zenn.dev/linkedge/articles/325037b7053aee</link><guid isPermaLink="true">https://zenn.dev/linkedge/articles/325037b7053aee</guid><pubDate>Sun, 02 Feb 2025 23:17:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--c53sNVsR--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Rails%25E3%2580%2591%25E8%25B6%2585%25E7%25B0%25A1%25E5%258D%2598%25EF%25BC%2581%25E3%2582%25B3%25E3%2583%2594%25E3%2583%25BC%25E3%2583%259C%25E3%2582%25BF%25E3%2583%25B3%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:RyoyaOkuma%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNmZmE4YTI1NWMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BEL%2526E%2520Group%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSzhIN0k1TWtwTzN0SFJZOWQzRzVSdTVyVlpRVmI1MG5IWG1HWTdwdk5ublk4PXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>RyoyaOkuma</dc:creator></item><item><title><![CDATA[個人的に今まで使っていなかったHTMLタグまとめ]]></title><description><![CDATA[
+ &lt;article&gt;
+以下MDN
+
+&lt;article&gt; は HTML の要素で、文書、ページ、アプリケーション、サイトなどの中で自己完結しており、（集合したものの中で）個別に配信や再利用を行うことを意図した構成物を表します。例えば、フォーラムの投稿、雑誌や新聞の記事、ブログの記事、商品カード、ユーザーが投稿したコメント、対話型のウィジェットやガジェット、その他の独立したコンテンツの項目が含まれます。
+
+つまり、記事、ブログ投稿、コメント、など、それ自体で完結する独立したコンテンツを表す際に使用すれば良いということですね。
+以下のように
+&lt;article&g...]]></description><link>https://zenn.dev/straw_engine/articles/bf9b56c0a8a942</link><guid isPermaLink="true">https://zenn.dev/straw_engine/articles/bf9b56c0a8a942</guid><pubDate>Sun, 02 Feb 2025 14:29:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--iPQI_j-I--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2580%258B%25E4%25BA%25BA%25E7%259A%2584%25E3%2581%25AB%25E4%25BB%258A%25E3%2581%25BE%25E3%2581%25A7%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%2584%25E3%2581%25AA%25E3%2581%258B%25E3%2581%25A3%25E3%2581%259FHTML%25E3%2582%25BF%25E3%2582%25B0%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hanatsuyo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFUWEFKellZZEM2T1pzUWxjdmVrSkMxZlhCOXhxcTd6bmZkMzZCdGtuT249czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hanatsuyo</dc:creator></item></channel></rss>
