@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Wed, 19 Feb 2025 03:15:39 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Grok APIを使ってみよう！ - $150分の無料クレジットで遊んでみる]]></title><description><![CDATA[Grok APIでは、データ共有にオプトインすることで毎月$150分の無料APIクレジットを獲得できます。このチュートリアルでは、その無料クレジットを使ってGrok APIの基本的な使い方を説明します。
+
+ 無料クレジットの取得方法
+
+まず$5の課金が必要です
+課金後、「Share Data」ボタンが表示されます
+データ共有にオプトインすると$150分のクレジットが付与されます
+
+注意：一度データ共有を有効にすると、無効にすることはできません。商用利用の場合は別チームを作成することをお勧めします。
+それでは、獲得したクレジットを使って実際にAPIを試してみましょう！
+
+ セットアップ
+ま...]]></description><link>https://zenn.dev/sunwood_ai_labs/articles/trying-grok-api-free-credit</link><guid isPermaLink="true">https://zenn.dev/sunwood_ai_labs/articles/trying-grok-api-free-credit</guid><pubDate>Wed, 19 Feb 2025 01:22:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lu4ob7Zq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Grok%2520API%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%2588%25E3%2581%2586%25EF%25BC%2581%2520-%2520%2524150%25E5%2588%2586%25E3%2581%25AE%25E7%2584%25A1%25E6%2596%2599%25E3%2582%25AF%25E3%2583%25AC%25E3%2582%25B8%25E3%2583%2583%25E3%2583%2588%25E3%2581%25A7%25E9%2581%258A%25E3%2582%2593%25E3%2581%25A7%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Maki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTDdpSmVyNldLVlpKLUd4N054QWVuSFVtYXQ3MUhhd1NXaU5hRG5FTnZiMXZZdHBIaGs9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Maki</dc:creator></item><item><title><![CDATA[【学習ログ】Pythonで拡張子別にファイルを自動分類]]></title><description><![CDATA[
+ 作成しようと思った経緯
+今まで、ダウンロードファイルを定期的にフォルダ分けしたり、削除したりしていたのですが、この作業が意外と時間のかかるもので、どうにか自動化できないかと悩んでいました。
+そこで、今回はその面倒なファイル整理を自動で行ってくれるPythonスクリプトを作成しました。
+少しでも同じような悩みを抱えている方の手助けになれば嬉しいです。
+
+ 使用するライブラリ
+今回使用するライブラリは、Pythonの標準ライブラリに含まれているため、別途インストールする必要はありません。
+以下がライブラリの用途です。
+import os #ファイル・フォルダの操作
+import shut...]]></description><link>https://zenn.dev/headwaters/articles/3b556a892e9335</link><guid isPermaLink="true">https://zenn.dev/headwaters/articles/3b556a892e9335</guid><pubDate>Wed, 19 Feb 2025 00:59:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dY69TR-x--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%25AD%25A6%25E7%25BF%2592%25E3%2583%25AD%25E3%2582%25B0%25E3%2580%2591Python%25E3%2581%25A7%25E6%258B%25A1%25E5%25BC%25B5%25E5%25AD%2590%25E5%2588%25A5%25E3%2581%25AB%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2592%25E8%2587%25AA%25E5%258B%2595%25E5%2588%2586%25E9%25A1%259E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Yamao%2520Kodai%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZjNGExY2UxMDYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2598%25E3%2583%2583%25E3%2583%2589%25E3%2582%25A6%25E3%2582%25A9%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%25BC%25E3%2582%25B9%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS3dLeXFnYjlkS1pTb2p6Q2UweWN3Z0NLUzJ4QXBfaUlmMElSa1ZmX19xRVlLVFpRPXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yamao Kodai</dc:creator></item><item><title><![CDATA[Google Sheetとマークダウンで、ダッシュボード Webアプリを構築する]]></title><description><![CDATA[スプレッドシートは、直感的な操作性と柔軟な入力が特徴で、多くのチームでデータ管理に用いられていると思います。その中でもGooglesスプレッドシートはクラウドでの共同編集が魅力ですが、Google Sheet APIを用いることで外部システムとの連携が可能になります。
+本記事では、Googleスプレッドシートをデータソースに、ダッシュボードをWebアプリを構築します。
+
+ 作るもの
+本チュートリアルでは、Googleシートで営業データをマニュアル管理している状況を想定し、Google Sheet APIを用いてデータを取得、Morphフレームワークを用いてデータ可視化を備えたダッシュボー...]]></description><link>https://zenn.dev/morph_tech_blog/articles/4ac7c7ace75b30</link><guid isPermaLink="true">https://zenn.dev/morph_tech_blog/articles/4ac7c7ace75b30</guid><pubDate>Tue, 18 Feb 2025 08:00:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9xnnUP7o--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Google%2520Sheet%25E3%2581%25A8%25E3%2583%259E%25E3%2583%25BC%25E3%2582%25AF%25E3%2583%2580%25E3%2582%25A6%25E3%2583%25B3%25E3%2581%25A7%25E3%2580%2581%25E3%2583%2580%25E3%2583%2583%25E3%2582%25B7%25E3%2583%25A5%25E3%2583%259C%25E3%2583%25BC%25E3%2583%2589%2520Web%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E5%25B0%258F%25E9%2587%258E%25E5%25AF%25BA%2520%25E9%259A%25BC%25E4%25BA%25BA%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc5YmQ0Y2Q4MGUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Morph%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJiYTU4NzJjNWIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>小野寺 隼人</dc:creator></item><item><title><![CDATA[Houdini Pythonでパラメータ名の確認など（備忘録3）]]></title><description><![CDATA[
+ 自動化で使いそうな小さなスクリプト
+今回もNetwork Editor上での操作を自動化するときに使えそうな、Houdini Pythonについて調べてみました。
+
+選択ノードのパラメータを確認
+選択ノードのSuffixを取得
+
+
+ 環境
+Windows10 Pro
+Houdini Indie 20.5.332 py3.11
+
+ 選択ノードのパラメータを確認
+import hou
+
+selected_nodes = hou.selectedNodes()
+
+if selected_nodes:
+    for node in selected_nodes:
+        param...]]></description><link>https://zenn.dev/mj31000/articles/b7624ac28651eb</link><guid isPermaLink="true">https://zenn.dev/mj31000/articles/b7624ac28651eb</guid><pubDate>Tue, 18 Feb 2025 07:56:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--AbprzvXX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Houdini%2520Python%25E3%2581%25A7%25E3%2583%2591%25E3%2583%25A9%25E3%2583%25A1%25E3%2583%25BC%25E3%2582%25BF%25E5%2590%258D%25E3%2581%25AE%25E7%25A2%25BA%25E8%25AA%258D%25E3%2581%25AA%25E3%2581%25A9%25EF%25BC%2588%25E5%2582%2599%25E5%25BF%2598%25E9%258C%25B23%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Hidetake%2520Miyajima%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzExNjJkNGI2MjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Hidetake Miyajima</dc:creator></item><item><title><![CDATA[Djangoで快適にAPIを開発する!Django Ninja]]></title><description><![CDATA[こんにちは、Globe-ingのCTOを務める上田です
+私たちGlobe-ingでは、バックエンドの開発言語として主にPythonを使っています。
+本記事では、私たちが一般的によく使われるDjango REST frameworkやFastAPIではなく、あえて「Django Ninja」を選んだ理由と、その魅力についてご紹介します。
+
+
+ Django Ninjaとは
+Django Ninjaは、作者自身がFastAPIに強くインスパイアを受けた[^https://django-ninja.dev/motivation/]と語っているように、DjangoベースでFastAPIライクな開...]]></description><link>https://zenn.dev/globeing/articles/django-ninja</link><guid isPermaLink="true">https://zenn.dev/globeing/articles/django-ninja</guid><pubDate>Tue, 18 Feb 2025 07:40:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--rJuIUfTl--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Django%25E3%2581%25A7%25E5%25BF%25AB%25E9%2581%25A9%25E3%2581%25ABAPI%25E3%2582%2592%25E9%2596%258B%25E7%2599%25BA%25E3%2581%2599%25E3%2582%258B%2521Django%2520Ninja%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:kueda%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2QxZWQ3MTE4MTkuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Globe-ing%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzMyOWJhYzk3ZGMuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kueda</dc:creator></item><item><title><![CDATA[OpenAI APIで複数の人格と対話してみた]]></title><description><![CDATA[
+ はじめに
+こんにちは、ambr, Inc.でクライアントエンジニアをしているサックーです。
+今回はOpenAIのドキュメントを見ていて気づいた、messagesフィールドの中で使えるnameフィールドの活用について紹介します。
+
+簡単にできることをまとめると
+
+
+AI側に複数の人格を設定
+複数の人間が１つの会話に参加するときの識別
+
+が挙げられます。
+かなりニッチな需要だと思いますが参考になれば幸いです。
+
+ nameフィールドとは
+https://platform.openai.com/docs/api-reference/chat/create#chat-create-messa...]]></description><link>https://zenn.dev/ambr_inc/articles/e8d13eafe2e74b</link><guid isPermaLink="true">https://zenn.dev/ambr_inc/articles/e8d13eafe2e74b</guid><pubDate>Tue, 18 Feb 2025 05:58:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--JSWKFrIp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:OpenAI%2520API%25E3%2581%25A7%25E8%25A4%2587%25E6%2595%25B0%25E3%2581%25AE%25E4%25BA%25BA%25E6%25A0%25BC%25E3%2581%25A8%25E5%25AF%25BE%25E8%25A9%25B1%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2582%25B5%25E3%2583%2583%25E3%2582%25AF%25E3%2583%25BC%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y0ZThkOTNiZDMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:ambr%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NkNmJiNTliOWIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>サックー</dc:creator></item><item><title><![CDATA[【AWS】DynamoDBでTTLに達したデータをS3 Glacierへアーカイブする構成]]></title><description><![CDATA[
+ 概要
+この構成は、IoTデバイスから送信されたデータをDynamoDBに格納し、設定したTTL（Time To Live）に基づいて自動的に削除されたデータを、低コストなS3 Glacierストレージにアーカイブするものです。
+
+ 目的
+
+
+データ保持要件の遵守: 一定期間経過したデータを削除する必要があるものの、監査や分析のために長期的な保管が必要な場合に、コスト効率よくデータを保持します。
+
+コスト最適化: アクティブに使用するデータは高速なDynamoDBに、アクセス頻度の低い過去データは低コストなS3 Glacierに保管することで、全体的なストレージコストを削減します。
+
+...]]></description><link>https://zenn.dev/zuzuzu/articles/aws_dynamodb_ttl</link><guid isPermaLink="true">https://zenn.dev/zuzuzu/articles/aws_dynamodb_ttl</guid><pubDate>Tue, 18 Feb 2025 01:21:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--WKc0upCf--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590AWS%25E3%2580%2591DynamoDB%25E3%2581%25A7TTL%25E3%2581%25AB%25E9%2581%2594%25E3%2581%2597%25E3%2581%259F%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%2592S3%2520Glacier%25E3%2581%25B8%25E3%2582%25A2%25E3%2583%25BC%25E3%2582%25AB%25E3%2582%25A4%25E3%2583%2596%25E3%2581%2599%25E3%2582%258B%25E6%25A7%258B%25E6%2588%2590%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:zu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2EwYzkyNjY5ZjcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>zu</dc:creator></item><item><title><![CDATA[ChatGPT-4oとGemini-2.0 Flashによる領収書のOCR性能評価]]></title><description><![CDATA[
+ はじめに
+こんにちは、アスエネの加藤です。友人の結婚式に参列するべく、久しぶりに靴を買いました。
+今回は2月5日に公開されたGemini 2.0 FlashシリーズやChatGPT 4oの性能を調査してみました。
+
+ Geminiとは？
+Gemini本人に自己紹介してもらいました。
+Gemini は、Google によって開発された、大規模言語モデル（LLM）です。まだ開発中ではありますが、以下のようなことができます。
+
+テキストの生成: ストーリー、詩、コード、スクリプト、音楽作品、メール、手紙など、さまざまなクリエイティブなテキスト形式を作成できます。
+質問への回答: 質問に対し...]]></description><link>https://zenn.dev/asuene/articles/fe99a8ff07998e</link><guid isPermaLink="true">https://zenn.dev/asuene/articles/fe99a8ff07998e</guid><pubDate>Tue, 18 Feb 2025 00:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--iPIIEW6e--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ChatGPT-4o%25E3%2581%25A8Gemini-2.0%2520Flash%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258B%25E9%25A0%2598%25E5%258F%258E%25E6%259B%25B8%25E3%2581%25AEOCR%25E6%2580%25A7%25E8%2583%25BD%25E8%25A9%2595%25E4%25BE%25A1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Kato%2520Ryuichi%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU0MmE4ZTRhM2UuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25A2%25E3%2582%25B9%25E3%2582%25A8%25E3%2583%258D%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSmlkTjlrQ05TeEthV2IwekR3RkZiT0lrdFRWdzVvU3E2Sml2WDhPdHBJbjNQNV9WMD1zOTYtYw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kato Ryuichi</dc:creator></item><item><title><![CDATA[BLASTエラーの原因となる制御文字の処理：FASTAファイル修正プログラムの実装・解説！]]></title><description><![CDATA[
+ 制御文字とキャレット表記について
+
+ キャレット表記の基本
+キャレット表記は、ASCIIコードにおける制御文字を視覚的に表現するための記法です。
+
+
+表記方法
+
+
+^ (キャレット) + アルファベット大文字
+例：^A = 制御コード1（Start of Heading：ヘッダ開始）
+ASCIIコード0-31の範囲の制御文字を表現
+ASCIIコード一覧表
+
+
+
+主な使用場面
+
+プログラミング環境でのデバッグ（テキストエディタやプログラミング環境では、特定の制御文字を簡単に参照するためにこの表記が使われます。）
+テキスト処理における制御文字の表現
+文書校正や特殊文字の確認
+
+
+
+
+ 今...]]></description><link>https://zenn.dev/d_treasure0712/articles/f72712017487d8</link><guid isPermaLink="true">https://zenn.dev/d_treasure0712/articles/f72712017487d8</guid><pubDate>Mon, 17 Feb 2025 15:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--WFAnWAqO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:BLAST%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E3%2581%25AE%25E5%258E%259F%25E5%259B%25A0%25E3%2581%25A8%25E3%2581%25AA%25E3%2582%258B%25E5%2588%25B6%25E5%25BE%25A1%25E6%2596%2587%25E5%25AD%2597%25E3%2581%25AE%25E5%2587%25A6%25E7%2590%2586%25EF%25BC%259AFASTA%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E4%25BF%25AE%25E6%25AD%25A3%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%25A0%25E3%2581%25AE%25E5%25AE%259F%25E8%25A3%2585%25E3%2583%25BB%25E8%25A7%25A3%25E8%25AA%25AC%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259F%25E3%2581%258B%25E3%2582%2589%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSnR4b0JVYlhZeklpamlxN181cGc1bXhtSC00dl9HTmFPVGpId1NtQTlqU3I2eW0xZUQ9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>たから</dc:creator></item><item><title><![CDATA[【Python】 k-hop Clusteringの詳説：ネットワークグラフにおけるクラスタリング手法の実装と解説！]]></title><description><![CDATA[
+ ネットワーク分析手法：k-hop Clusteringの実装・解説
+
+ k-hop Clusteringとは
+k-hop Clusteringは、ネットワークグラフにおけるクラスタリング手法の一つです。この手法の特徴は、ネットワーク上の任意のノードから指定した数（k）のエッジを辿って到達できるノードを1つのクラスタとして抽出できる点にあります！
+
+ 具体的な例で見るk-hop Clustering
+
+ 1-hopクラスタリングの場合
+あるノードから1エッジで到達できるノードのみをクラスタとして抽出します。例えば：
+
+中心ノード「A」から
+直接つながっているノード「B」「C」「D」が
+...]]></description><link>https://zenn.dev/d_treasure0712/articles/26465eccfe429c</link><guid isPermaLink="true">https://zenn.dev/d_treasure0712/articles/26465eccfe429c</guid><pubDate>Mon, 17 Feb 2025 15:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--PWOBppYS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591%2520k-hop%2520Clustering%25E3%2581%25AE%25E8%25A9%25B3%25E8%25AA%25AC%25EF%25BC%259A%25E3%2583%258D%25E3%2583%2583%25E3%2583%2588%25E3%2583%25AF%25E3%2583%25BC%25E3%2582%25AF%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%2595%25E3%2581%25AB%25E3%2581%258A%25E3%2581%2591%25E3%2582%258B%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%25AA%25E3%2583%25B3%25E3%2582%25B0%25E6%2589%258B%25E6%25B3%2595%25E3%2581%25AE%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%25A8%25E8%25A7%25A3%25E8%25AA%25AC%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259F%25E3%2581%258B%25E3%2582%2589%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSnR4b0JVYlhZeklpamlxN181cGc1bXhtSC00dl9HTmFPVGpId1NtQTlqU3I2eW0xZUQ9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>たから</dc:creator></item><item><title><![CDATA[Pythonのコンパイラを作りたい #7.5 - プロジェクト名の変更とレイアウト再構成(番外編)]]></title><description><![CDATA[こんにちは。前回（「#7 - ベンチマークと最適化」）では、フィボナッチ数列でのパフォーマンス比較を取り上げました。
+今回は番外編として、プロジェクト名とディレクトリ構造を大幅に変更したので、その概要をまとめておきます。
+
+ 1. プロジェクト名を pyc から lython に変更
+
+ 1-1. なぜ pyc から変えたのか
+これまでは「pyc」と呼んでいましたが、Python のバイトコードキャッシュ (.pyc) と紛らわしい上に短すぎて覚えづらく、独自処理系であることが伝わりにくい問題がありました。
+
+ 1-2. Lython
+
+
+名前の由来: LLVM + Python -&g...]]></description><link>https://zenn.dev/t3tra/articles/b5e10394e6212a</link><guid isPermaLink="true">https://zenn.dev/t3tra/articles/b5e10394e6212a</guid><pubDate>Mon, 17 Feb 2025 12:00:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--s76cqXBq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25AE%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2591%25E3%2582%25A4%25E3%2583%25A9%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258A%25E3%2581%259F%25E3%2581%2584%2520%25237.5%2520-%2520%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E5%2590%258D%25E3%2581%25AE%25E5%25A4%2589%25E6%259B%25B4%25E3%2581%25A8%25E3%2583%25AC%25E3%2582%25A4%25E3%2582%25A2%25E3%2582%25A6%25E3%2583%2588%25E5%2586%258D%25E6%25A7%258B%25E6%2588%2590%2528%25E7%2595%25AA%25E5%25A4%2596%25E7%25B7%25A8%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:t3tra%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ2MDdkNzY3ZTMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>t3tra</dc:creator></item><item><title><![CDATA[ベイズでLOOCV (Leave-One-Out Cross-Validation)]]></title><description><![CDATA[PyMCの使い方を調べていたらArviZにlooというAPIがあるのを見つけました。どうやらleave-one-out cross-validation (LOOCV) を使ってELPDを推定してくれるみたいです。LOOCVといえばデータセットの分割数をデータ数と同じまで細分化した究極のクロスバリデーションで、計算量の多さから机上の空論だとずっと思っていました。本当に動くのでしょうか……？
+そこでドキュメントで引用されている論文をたどりlooがどのようにLOOCVを計算するのか調べてみたところ、そもそもベイズモデルは1回学習させるだけでクロスバリデーションを行えることがわかりました。言わ...]]></description><link>https://zenn.dev/mtmaru/articles/4af857aff42278</link><guid isPermaLink="true">https://zenn.dev/mtmaru/articles/4af857aff42278</guid><pubDate>Mon, 17 Feb 2025 11:26:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--AV6ko7C9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2599%25E3%2582%25A4%25E3%2582%25BA%25E3%2581%25A7LOOCV%2520%2528Leave-One-Out%2520Cross-Validation%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mtmaru%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzgzMzI4NmUyYmMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mtmaru</dc:creator></item><item><title><![CDATA[Flow Q-Learning]]></title><description><![CDATA[本記事では、Flow Q-Learning の概要とその技術的特徴、そして実験結果について解説します。
+元論文
+Flow Q-Learning
+公式のサイト
+https://seohong.me/projects/fql/
+公式のgithub
+https://github.com/seohongpark/fql
+
+ 概要
+Flow Q-Learning (FQL) は、Flow Policy を蒸留して One step Policy を作ることで、複数ステップのノイズ除去を回避し高速な推論を実現しています。また、蒸留モデルを用いた Q 学習で安定性を向上させ、D4RL や OGBenc...]]></description><link>https://zenn.dev/akiyamas/articles/be40db3664b4a3</link><guid isPermaLink="true">https://zenn.dev/akiyamas/articles/be40db3664b4a3</guid><pubDate>Mon, 17 Feb 2025 09:32:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--AWLrNukJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_80:Flow%2520Q-Learning%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:AkiyamaS%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSzRPMmlIVWxha1lnUHJNazVWVE1ZRWExLUhQZnpZYm1fdHljMnZTZUcyLUZUQ0xTUT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>AkiyamaS</dc:creator></item><item><title><![CDATA[［AtCoder］ABC-392｜B - Who is Missing?]]></title><description><![CDATA[
+ 設問ページ
+
+🔗ABC-392 B - Who is Missing?
+
+
+
+ 提出結果
+def getIntMap():
+    return map(int, input().split())
+
+
+def getIntList():
+    return list(map(int, input().split()))
+
+
+def main():
+    N, M = getIntMap()
+    A = [0] + getIntList()
+    A.sort()
+
+    B = []
+    for i in range(1, M + 1):
+        d = A[...]]></description><link>https://zenn.dev/hyperdb/articles/c00ad6628ac812</link><guid isPermaLink="true">https://zenn.dev/hyperdb/articles/c00ad6628ac812</guid><pubDate>Mon, 17 Feb 2025 08:27:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7LWhYhWW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25EF%25BC%25BBAtCoder%25EF%25BC%25BDABC-392%25EF%25BD%259CB%2520-%2520Who%2520is%2520Missing%253F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AF%25E3%2581%2584%25E3%2581%25B1%25E3%2581%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhODJkODgwMzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>はいぱぁ</dc:creator></item><item><title><![CDATA[［AtCoder］ABC-392｜A - Shuffled Equation]]></title><description><![CDATA[
+ 設問ページ
+
+🔗ABC-392 A - Shuffled Equation
+
+
+
+ 提出結果
+def getIntList():
+    return list(map(int, input().split()))
+
+
+def main():
+    A = getIntList()
+    A.sort()
+
+    print("Yes" if A[0] * A[1] == A[2] else "No")
+
+
+if __name__ == "__main__":
+    main()
+]]></description><link>https://zenn.dev/hyperdb/articles/275680a6266f8d</link><guid isPermaLink="true">https://zenn.dev/hyperdb/articles/275680a6266f8d</guid><pubDate>Mon, 17 Feb 2025 08:27:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--LGpqu4Iw--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25EF%25BC%25BBAtCoder%25EF%25BC%25BDABC-392%25EF%25BD%259CA%2520-%2520Shuffled%2520Equation%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AF%25E3%2581%2584%25E3%2581%25B1%25E3%2581%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhODJkODgwMzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>はいぱぁ</dc:creator></item><item><title><![CDATA[Azure  AI 翻訳サービスの使い方]]></title><description><![CDATA[https://azure.microsoft.com/ja-jp/products/ai-services/ai-translator
+システムに翻訳機能を入れたくて、当初はGPT-4oに生成してもらおうかと思ってたのですが、Azureに翻訳サービスがあったので使ってみました。
+
+ リソース作成
+「Azure AI Translator Service」のリソースを作成するのもいいですが、「AI Services」リソースを作るのがおすすめです。
+Translator以外にもDocument IntelligenceやComputer Visionを同じエンドポイントから呼び出すことが...]]></description><link>https://zenn.dev/headwaters/articles/c3edad674f31d3</link><guid isPermaLink="true">https://zenn.dev/headwaters/articles/c3edad674f31d3</guid><pubDate>Mon, 17 Feb 2025 00:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_CRNsy_E--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Azure%2520%2520AI%2520%25E7%25BF%25BB%25E8%25A8%25B3%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2593%25E3%2582%25B9%25E3%2581%25AE%25E4%25BD%25BF%25E3%2581%2584%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:ikebowsan%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZjNGExY2UxMDYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2598%25E3%2583%2583%25E3%2583%2589%25E3%2582%25A6%25E3%2582%25A9%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%25BC%25E3%2582%25B9%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzUyNTM1ZTc4OGYuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ikebowsan</dc:creator></item><item><title><![CDATA[実践トレード戦略: TradingView, データ分析, 自動売買システム構築]]></title><description><![CDATA[本書は、TradingViewを活用したトレード戦略の構築から、データ分析、自動売買システムの実装までを網羅的に解説します。Pine Scriptによるカスタムインジケーター開発、Pythonによるデータ分析、API連携による自動売買まで、幅広い技術を習得できます。読者は、実践的なスキルを身につけ、自らのトレード戦略を自動化し、効率的な運用を目指すことができます。]]></description><link>https://zenn.dev/idev/books/book-20250217-083917</link><guid isPermaLink="true">https://zenn.dev/idev/books/book-20250217-083917</guid><pubDate>Sun, 16 Feb 2025 23:57:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--A9y5vm5n--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci9lOTY5ODM1YzA1LnBuZw==%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>timeless-residents</dc:creator></item><item><title><![CDATA[第３回金融データ活用チャレンジ奮闘記 〜PDFの読み取りが得意なLLM探しとローカルOpenSearchによるハイブリッド検索〜]]></title><description><![CDATA[こんにちは、フリーランスの機械学習エンジニア/データサイエンティストとして働いているashenOneと申します。zennでのブログ投稿はこれが初めてですが、今後は機械学習をはじめとするデータ系の技術記事を執筆していければと思っています。
+さて今回は、先日までSIGNATEで開催されていた第３回金融データ活用チャレンジへの取り組みについて書いていきます。
+なお、全体のソースコードはこちらのリポジトリに公開しているので、そちらも併せて御覧ください。
+はじめに、私自身の結果は、最終順位49位 (参加者1544名、投稿チーム数635チーム) です。
+スコアとしては残念ながら上位のみなさまには遠く...]]></description><link>https://zenn.dev/ashen_one/articles/ac5609e1773d87</link><guid isPermaLink="true">https://zenn.dev/ashen_one/articles/ac5609e1773d87</guid><pubDate>Sun, 16 Feb 2025 22:23:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--o6Q6m2df--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%25AC%25AC%25EF%25BC%2593%25E5%259B%259E%25E9%2587%2591%25E8%259E%258D%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E6%25B4%25BB%25E7%2594%25A8%25E3%2583%2581%25E3%2583%25A3%25E3%2583%25AC%25E3%2583%25B3%25E3%2582%25B8%25E5%25A5%25AE%25E9%2597%2598%25E8%25A8%2598%2520%25E3%2580%259CPDF%25E3%2581%25AE%25E8%25AA%25AD%25E3%2581%25BF%25E5%258F%2596%25E3%2582%258A%25E3%2581%258C%25E5%25BE%2597%25E6%2584%258F%25E3%2581%25AALLM%25E6%258E%25A2%25E3%2581%2597%25E3%2581%25A8%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25AB%25E3%2583%25ABOpenSearch%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258B%25E3%2583%258F%25E3%2582%25A4...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ashenOne%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4WmhqZm5kQjFtcnZTZy05YVZvLUhSaFRtdjg3VWNPWjc0dl9jWFU9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ashenOne</dc:creator></item><item><title><![CDATA[AI Podcast:HackerVoiceのリリース, その裏側]]></title><description><![CDATA[
+ AI Podcast: HackerVoiceをリリースしました!
+
+https://hackervoice.vercel.app/ja
+デモ動画
+https://www.youtube.com/watch?v=1lsP7VpOWi8
+Y Combinatorが管理する海外の掲示板HackerNewsのトレンドをピックアップし、AIによってPodcastを自動生成しています。機能の概要としては以下のようになります。
+
+HackerNewsの最新情報5選をコメント付きでお伝え
+日本語版、英語版どちらでも聴ける
+Gemini+TTSで毎日自動更新
+Spotify, Apple Podca...]]></description><link>https://zenn.dev/goriratatsu/articles/ec8f29de075349</link><guid isPermaLink="true">https://zenn.dev/goriratatsu/articles/ec8f29de075349</guid><pubDate>Sun, 16 Feb 2025 14:44:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--88MdOvfr--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AI%2520Podcast%253AHackerVoice%25E3%2581%25AE%25E3%2583%25AA%25E3%2583%25AA%25E3%2583%25BC%25E3%2582%25B9%252C%2520%25E3%2581%259D%25E3%2581%25AE%25E8%25A3%258F%25E5%2581%25B4%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Gorira-Tatsu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzgwZTE0ZTYxNDUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Gorira-Tatsu</dc:creator></item><item><title><![CDATA[LLM から出力した JSON が Pydantic のバリデーションに引っかかるときに上手いことフォールバックする方法]]></title><description><![CDATA[
+ 背景
+システムに LLM を組み込む際に、所望の JSON の書式に従わせるために Pydantic を使って JSON Schema を作成して、それを記載したプロンプトを LLM へ与えることがあるかと思います。例えば以下のような Pydantic モデルを考えます。
+class Table(BaseModel):
+    foo: int
+このときに LLM が以下のような JSON を出力してきて、型が異なるためバリデーションエラーが起こってしまうとき、あると思います。本記事ではその対処法を GitHub Gist に書き留めました。
+{
+    "foo": "123"
+}...]]></description><link>https://zenn.dev/wattai/articles/817febbe554681</link><guid isPermaLink="true">https://zenn.dev/wattai/articles/817febbe554681</guid><pubDate>Sun, 16 Feb 2025 10:13:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wPq73hvw--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:LLM%2520%25E3%2581%258B%25E3%2582%2589%25E5%2587%25BA%25E5%258A%259B%25E3%2581%2597%25E3%2581%259F%2520JSON%2520%25E3%2581%258C%2520Pydantic%2520%25E3%2581%25AE%25E3%2583%2590%25E3%2583%25AA%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2581%25AB%25E5%25BC%2595%25E3%2581%25A3%25E3%2581%258B%25E3%2581%258B%25E3%2582%258B%25E3%2581%25A8%25E3%2581%258D%25E3%2581%25AB%25E4%25B8%258A%25E6%2589%258B%25E3%2581%2584%25E3%2581%2593%25E3%2581%25A8%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25BC%25E3%2583%25AB%25E3%2583%2590%25E3%2583%2583%25E3%2582%25AF%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:wattai%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q1ZjEwN2NjMzMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>wattai</dc:creator></item></channel></rss>

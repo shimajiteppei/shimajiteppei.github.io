@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「TypeScript」のフィード]]></title><description><![CDATA[Zennのトピック「TypeScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/typescript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/f13e758fdb.png</url><title>Zennの「TypeScript」のフィード</title><link>https://zenn.dev/topics/typescript</link></image><generator>zenn.dev</generator><lastBuildDate>Wed, 19 Feb 2025 12:04:02 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/typescript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[初心者に優しい Next.js app router マイベストフォルダ設計]]></title><description><![CDATA[
+ 概要
+Next.js app routerでは、様々な記事でフォルダ設計が紹介されているものの、まだまだ課題があると感じております。
+私が試してみて、これがベストなんじゃないかと思うフォルダ設計(2025年2月時点)がありますので、それを紹介したいと思います。
+現状、全フロントエンドエンジニアがapp routerをキャッチアップしているわけではないと思う(少なくとも私の会社はそう)ので、「初心者に優しい」「難しすぎない」というのを意識してます。
+フロントエンドとしてVueやReactは書いているが、app routerを実務であまり使ったことのない方も入りやすいようにと思って考えま...]]></description><link>https://zenn.dev/sonicmoov/articles/e5ce7fb6d42267</link><guid isPermaLink="true">https://zenn.dev/sonicmoov/articles/e5ce7fb6d42267</guid><pubDate>Wed, 19 Feb 2025 12:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--aT_G7jDt--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E3%2581%25AB%25E5%2584%25AA%25E3%2581%2597%25E3%2581%2584%2520Next.js%2520app%2520router%2520%25E3%2583%259E%25E3%2582%25A4%25E3%2583%2599%25E3%2582%25B9%25E3%2583%2588%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25AB%25E3%2583%2580%25E8%25A8%25AD%25E8%25A8%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:yuu_aoringo%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY0YjYwNGE3MzguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2582%25BD%25E3%2583%258B%25E3%2583%2583%25E3%2582%25AF%25E3%2583%25A0%25E3%2583%25BC%25E3%2583%2596%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U2MWQzYjIxZDIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yuu_aoringo</dc:creator></item><item><title><![CDATA[【JavaScript】AND 演算子と OR 演算子についてまとめてみた]]></title><description><![CDATA[
+ JavaScript の AND 演算子と OR 演算子について
+JavaScript には論理演算を行うための演算子として、AND 演算子（&amp;&amp;）と OR 演算子（||）があります。これらは条件分岐や値の短絡評価などで頻繁に使われます。
+!
+備忘録として様々な演算子の中から昨今の開発で使う頻度が多くなった演算子について連続で記事を書いてきましたが、今回 AND 演算子と OR 演算子をまとめ、これを一旦最終回としたいと思います。
+過去の記事はこちら：
+【JavaScript】三項演算子についてまとめてみた
+【JavaScript】null 合体演算子についてまとめて...]]></description><link>https://zenn.dev/hayatech/articles/js-and-or-operator</link><guid isPermaLink="true">https://zenn.dev/hayatech/articles/js-and-or-operator</guid><pubDate>Wed, 19 Feb 2025 11:11:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Tz0tHRxS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590JavaScript%25E3%2580%2591AND%2520%25E6%25BC%2594%25E7%25AE%2597%25E5%25AD%2590%25E3%2581%25A8%2520OR%2520%25E6%25BC%2594%25E7%25AE%2597%25E5%25AD%2590%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:HayaTech%2528%25E3%2581%25AF%25E3%2582%2584%25E3%2581%25A6%25E3%2581%258F%2529%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM0YzBmNjVhMjcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>HayaTech(はやてく)</dc:creator></item><item><title><![CDATA[脆弱性報告で GitHub から $4,000 貰った話]]></title><description><![CDATA[
+ はじめに
+こんにちは、ダイニーの ogino です。
+この記事では GitHub の bug bounty で脆弱性を報告し、実際に報奨金を受け取った時の体験を共有します。
+私は特にセキュリティの専門家ではなく、偶然に問題を見つけて初めて報告をしました。読者の方が同じようなチャンスに遭遇した時スムーズに行くように、海外からお金を受け取る上での意外なつまずきポイントや、実際に貰える金額などについて紹介します。
+
+ どんな問題を見つけたのか
+!
+GitHub の脆弱性報告プログラムのルールで、脆弱性について自由に write-up を書いてよいことになっています。
+
+You are fr...]]></description><link>https://zenn.dev/dinii/articles/0bf9e893c7879c</link><guid isPermaLink="true">https://zenn.dev/dinii/articles/0bf9e893c7879c</guid><pubDate>Wed, 19 Feb 2025 03:00:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xZByLZXp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%2584%2586%25E5%25BC%25B1%25E6%2580%25A7%25E5%25A0%25B1%25E5%2591%258A%25E3%2581%25A7%2520GitHub%2520%25E3%2581%258B%25E3%2582%2589%2520%25244%252C000%2520%25E8%25B2%25B0%25E3%2581%25A3%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:ogino%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZhNTVhMGJiNDIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Dinii%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRkNWJkMjFjOWEuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ogino</dc:creator></item><item><title><![CDATA[Reactのレビューポイント]]></title><description><![CDATA[
+ コンポーネント設計と責任の分離
+
+単一責任の原則
+
+各コンポーネントが一つの明確な目的を持ち、過度に肥大化していないか。プレゼンテーションとロジックの分離が適切に行われているか。
+
+
+再利用性とコンポーネントの分割
+
+複雑なUIは小さなコンポーネントに分解され、必要に応じて再利用可能な形で実装されているか。
+
+
+
+
+ Hooks の適切な利用
+
+基本的なHooksの正しい使用
+
+useState, useEffect, useContext などが正しく使われ、副作用の管理や状態管理が適切に行われているか。
+
+
+依存配列の適正管理
+
+useEffect や useCallback, ...]]></description><link>https://zenn.dev/okamyuji/articles/5922a782148893</link><guid isPermaLink="true">https://zenn.dev/okamyuji/articles/5922a782148893</guid><pubDate>Tue, 18 Feb 2025 18:37:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--df6_nuT6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%25E3%2581%25AE%25E3%2583%25AC%25E3%2583%2593%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%259D%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:okamyuji%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY5YjFmNDYyYjkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>okamyuji</dc:creator></item><item><title><![CDATA[TypeORMのレビューポイント]]></title><description><![CDATA[
+ エンティティ定義とリレーションの正確な設定
+
+エンティティの設計
+
+@Entity, @Column, @PrimaryColumn/@PrimaryGeneratedColumn などのデコレーターが正しく使われ、各エンティティの責務が明確か。
+
+
+リレーションの定義
+
+@OneToMany, @ManyToOne, @ManyToMany, @OneToOne の関係が適切に定義され、必要に応じて lazy/eager ローディングが使い分けられているか。
+
+
+
+
+ パフォーマンスとクエリの最適化
+
+N+1問題の回避
+
+リレーションの取得方法やJOINの使用方法を見直し、不要なク...]]></description><link>https://zenn.dev/okamyuji/articles/22834e0a97f5e5</link><guid isPermaLink="true">https://zenn.dev/okamyuji/articles/22834e0a97f5e5</guid><pubDate>Tue, 18 Feb 2025 18:34:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--XGelz8Uu--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeORM%25E3%2581%25AE%25E3%2583%25AC%25E3%2583%2593%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%259D%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:okamyuji%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY5YjFmNDYyYjkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>okamyuji</dc:creator></item><item><title><![CDATA[TypeScriptのレビューポイント]]></title><description><![CDATA[
+ 厳格な型安全性の確保
+
+strict オプションの有効化
+
+tsconfig.json で strict, noImplicitAny, strictNullChecks などを有効にしているかを確認。
+
+
+型アノテーションの徹底
+
+可能な限り明示的な型指定を行い、anyや曖昧な型を避ける。
+
+
+型ガード・ユーティリティの利用
+
+不確実な値に対しては、型ガードやユーティリティ関数を使って安全に扱っているか。
+
+
+
+
+ コードの可読性・保守性の向上
+
+一貫性のあるコーディングスタイル
+
+ESLint や Prettier を利用し、チームで合意したスタイルガイドに沿っているか。
+
+
+イ...]]></description><link>https://zenn.dev/okamyuji/articles/a9eb81d7727c9d</link><guid isPermaLink="true">https://zenn.dev/okamyuji/articles/a9eb81d7727c9d</guid><pubDate>Tue, 18 Feb 2025 18:32:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Gbn_TyWF--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%25E3%2581%25AE%25E3%2583%25AC%25E3%2583%2593%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%259D%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:okamyuji%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY5YjFmNDYyYjkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>okamyuji</dc:creator></item><item><title><![CDATA[WEBAPIを作成する(Nextjs+TypeScript)]]></title><description><![CDATA[作成します。まずは静的にリストをJSONで返すWEBAPIを作成する。
+提供するFQDNとパスは http://localhost:3000/api/users
+
+/app/api/users/route.ts
+import { NextResponse } from "next/server";
+
+export async function GET() {
+  return NextResponse.json([
+    {message: "データを取得1"},
+    {message: "データを取得2"},
+    {message: "データを取得3"},
+  ]);
+}
+
+...]]></description><link>https://zenn.dev/kaikusakari/articles/d48a022832dd87</link><guid isPermaLink="true">https://zenn.dev/kaikusakari/articles/d48a022832dd87</guid><pubDate>Tue, 18 Feb 2025 15:44:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--XE620uwl--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:WEBAPI%25E3%2582%2592%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2599%25E3%2582%258B%2528Nextjs%252BTypeScript%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E8%258D%2589%25E8%258B%2585%2520%25E5%25BF%25AB%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U3MzBlOTgxYmIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>草苅 快</dc:creator></item><item><title><![CDATA[Next.js 15へのアップグレード備忘録]]></title><description><![CDATA[
+ はじめに
+2024年10月、Next.js 15がリリースされました。
+https://nextjs.org/blog/next-15
+私が所属するプロジェクトでNext.js 15へのアップグレード作業を行いましたが、今後も別プロジェクトにおいて同様の作業が発生するため、備忘録的に作業内容を書き記します。
+なお、本記事の内容はアップグレードに関わる手順全てを網羅しておらず、あくまで今回行った手順をまとめたものになります。作業の際は、必ず公式のアップグレードのガイドもご参照ください。
+https://nextjs.org/docs/app/building-your-applicat...]]></description><link>https://zenn.dev/muramatu/articles/d1c3b7647eec4f</link><guid isPermaLink="true">https://zenn.dev/muramatu/articles/d1c3b7647eec4f</guid><pubDate>Tue, 18 Feb 2025 08:25:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lXmzFeH2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Next.js%252015%25E3%2581%25B8%25E3%2581%25AE%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%25E3%2582%25B0%25E3%2583%25AC%25E3%2583%25BC%25E3%2583%2589%25E5%2582%2599%25E5%25BF%2598%25E9%258C%25B2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:muramatu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA4MzI5MWI4NzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>muramatu</dc:creator></item><item><title><![CDATA[SSH上でDrizzle Studioが起動しない]]></title><description><![CDATA[
+ 状況
+SSH接続をしている状態で、Drizzle Studioを起動するとlocal.drizzle.studioにはアクセスできるが、localhost:4983の接続がタイムアウトしてしまう
+
+ 原因
+VSCodeでポートフォワーディングがされてなかった。
+多分ターミナルにlocalhostが出力された場合に自動的にポートが追加されるんだけど、Drizzleの場合はlocal.drizzle.studioだから自動でポートが追加されないみたい。
+
+ 解決方法
+VSCodeの場合はターミナルの横にあるポートから追加できます。
+]]></description><link>https://zenn.dev/akazdayo/articles/4353918b5550f1</link><guid isPermaLink="true">https://zenn.dev/akazdayo/articles/4353918b5550f1</guid><pubDate>Tue, 18 Feb 2025 06:12:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--OSmj5xCP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:SSH%25E4%25B8%258A%25E3%2581%25A7Drizzle%2520Studio%25E3%2581%258C%25E8%25B5%25B7%25E5%258B%2595%25E3%2581%2597%25E3%2581%25AA%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:akazdayo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y3Mjc0NTY2NjEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>akazdayo</dc:creator></item><item><title><![CDATA[Socket.IOでバッチ処理の完了をユーザーに即時通知してみる]]></title><description><![CDATA[こんにちは 👋
+株式会社 Rehab for JAPAN フロントエンドエンジニアの okazawa です！
+突然ですが Web アプリ開発で、
+
+API リクエストをする
+API リクエストをきっかけにバッチ処理等の時間のかかる処理を開始する
+
+という場合、バッチ処理の完了をユーザーに知らせるにはどんな方法があるでしょうか？
+
+バッチ処理が完了するまで API レスポンスを返さない
+一定時間後に処理が完了しているかユーザーに画面更新等で確認してもらう
+ポーリングする
+WebSocket 等リアルタイムにクライアントとサーバー間で双方向通信できるような技術を使って即時通知をする
+メールで...]]></description><link>https://zenn.dev/rehabforjapan/articles/e1d9bdf6a95e5a</link><guid isPermaLink="true">https://zenn.dev/rehabforjapan/articles/e1d9bdf6a95e5a</guid><pubDate>Tue, 18 Feb 2025 01:39:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--AGBxHJZe--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Socket.IO%25E3%2581%25A7%25E3%2583%2590%25E3%2583%2583%25E3%2583%2581%25E5%2587%25A6%25E7%2590%2586%25E3%2581%25AE%25E5%25AE%258C%25E4%25BA%2586%25E3%2582%2592%25E3%2583%25A6%25E3%2583%25BC%25E3%2582%25B6%25E3%2583%25BC%25E3%2581%25AB%25E5%258D%25B3%25E6%2599%2582%25E9%2580%259A%25E7%259F%25A5%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:okazawa%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNkYzExOTgzNjguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Rehab%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc5YTJkM2MyMDMuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>okazawa</dc:creator></item><item><title><![CDATA[Zodと設定0行でNext.jsのRoute Handlersに完全な型を付与する最強ライブラリ「FrourioNext」]]></title><description><![CDATA[
+ Next.js + REST APIを必要とする人のためのライブラリ
+世間がRSCで盛り上がっている今でも私はREST APIを好んで使っています。OpenAPIをSwaggerUIで展開してAPI仕様書として納品できるし、保守引継ぎのためのエンジニア教育も比較的簡単です。
+SwiftやKotlinでネイティブアプリ対応する場合もOpenAPIからHTTPクライアントを自動生成して使うことが多いのではないでしょうか？
+ゆえにNext.jsのRoute HandlersでAPIを開発したい場面がそれなりにあるのですが、公式の方法だけだと型が緩くて辛いです。回避策として全てのリクエストを...]]></description><link>https://zenn.dev/solufa/articles/frourio-next</link><guid isPermaLink="true">https://zenn.dev/solufa/articles/frourio-next</guid><pubDate>Tue, 18 Feb 2025 00:15:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--iDYHK32d--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Zod%25E3%2581%25A8%25E8%25A8%25AD%25E5%25AE%259A0%25E8%25A1%258C%25E3%2581%25A7Next.js%25E3%2581%25AERoute%2520Handlers%25E3%2581%25AB%25E5%25AE%258C%25E5%2585%25A8%25E3%2581%25AA%25E5%259E%258B%25E3%2582%2592%25E4%25BB%2598%25E4%25B8%258E%25E3%2581%2599%25E3%2582%258B%25E6%259C%2580%25E5%25BC%25B7%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%25E3%2580%258CFrourioN...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Solufa%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2hSSkFIRjk0YjU5N0ZnQmFCbWxYUFBDWmkxYVlYcWdhVE1RanZHPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Solufa</dc:creator></item><item><title><![CDATA[Zenn記事の執筆を効率化！NotionのMarkdown変換ライブラリをnpm公開]]></title><description><![CDATA[
+ はじめに
+こんにちは。はじめまして！まるべいじ（malvageee）です。
+先日、NotionのページをMarkdownに変換するライブラリをOSSとして公開しました。
+Zennにも対応しているので、技術記事を書いている方にも便利です。
+📢 公開記事:
+https://zenn.dev/smartcamp/articles/4b3e05623bf11e
+初回リリース時はgit cloneが必要で、導入のハードルが少し高かったのですが、今回はnpmに公開しました！
+これにより、より簡単に導入・利用できるようになりました。
+この記事では、ライブラリの使い方を詳しく解説します。
+すぐにサン...]]></description><link>https://zenn.dev/smartcamp/articles/568610b015fc20</link><guid isPermaLink="true">https://zenn.dev/smartcamp/articles/568610b015fc20</guid><pubDate>Mon, 17 Feb 2025 22:30:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--cGA4z7hu--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Zenn%25E8%25A8%2598%25E4%25BA%258B%25E3%2581%25AE%25E5%259F%25B7%25E7%25AD%2586%25E3%2582%2592%25E5%258A%25B9%25E7%258E%2587%25E5%258C%2596%25EF%25BC%2581Notion%25E3%2581%25AEMarkdown%25E5%25A4%2589%25E6%258F%259B%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%25E3%2582%2592npm%25E5%2585%25AC%25E9%2596%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%25BE%25E3%2582%258B%25E3%2581%25B9%25E3%2581%2584%25E3%2581%2598%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzUyNGYwMGIzM2MuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:SMARTCAMP%2520Engineer%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQxOGVmZTY1YzEuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>まるべいじ</dc:creator></item><item><title><![CDATA[VitePressにGoogle Analytics(GA4)を導入する]]></title><description><![CDATA[
+ はじめに
+
+VitePressで作った自ブログに、Google Analytics(GA4)を導入し、アクセス解析をしたい。
+
+
+ TL;DR
+
+Google Analytics(GA4)でプロパティを作成し、Googleタグを取得する(G-XXXXXXXXXX 形式)
+VitePressの設定ファイル( .vitepress/config.mts )を開き、以下を記載する
+
+Googleタグ G-XXXXXXXXXX は取得したものに置き換える
+
+
+
+
+.vitepress/config.mts
+export default defineConfig({
+  // (中略)
+  h...]]></description><link>https://zenn.dev/920oj/articles/b767be18bdfa50</link><guid isPermaLink="true">https://zenn.dev/920oj/articles/b767be18bdfa50</guid><pubDate>Mon, 17 Feb 2025 14:16:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--VDXRmHjx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:VitePress%25E3%2581%25ABGoogle%2520Analytics%2528GA4%2529%25E3%2582%2592%25E5%25B0%258E%25E5%2585%25A5%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258A%25E3%2583%25BC%25E3%2581%2598%25E3%2581%2587%25E3%2581%2584%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSndIMDJIZHllNUdlM24xa1QwbzRsUTloRkcyLWx3UkxSQ01tZmJONmhHOEgwPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>おーじぇい</dc:creator></item><item><title><![CDATA[Slackからのリクエストの署名検証をする方法]]></title><description><![CDATA[Slack から送られるリクエスト（例えば、Slash Commands や Interactive Components など）を安全に取り扱うためには、Slack 側が本当に送ったリクエストであることを検証する仕組みが必要です。そのために 「署名検証 (signature verification)」 を実装します。
+この記事では、以下のポイントを中心に解説します。
+
+なぜ署名検証が必要なのか？
+署名検証の具体的な手順
+リプレイ攻撃を防ぐためのタイムスタンプ検証
+実際の実装例
+
+もし Slack アプリを作成して外部向けにエンドポイントを公開している方は、ぜひ参考にしてみてください。...]]></description><link>https://zenn.dev/kossy0701/articles/3830bc1fe3f772</link><guid isPermaLink="true">https://zenn.dev/kossy0701/articles/3830bc1fe3f772</guid><pubDate>Mon, 17 Feb 2025 09:40:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--c2floaMN--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Slack%25E3%2581%258B%25E3%2582%2589%25E3%2581%25AE%25E3%2583%25AA%25E3%2582%25AF%25E3%2582%25A8%25E3%2582%25B9%25E3%2583%2588%25E3%2581%25AE%25E7%25BD%25B2%25E5%2590%258D%25E6%25A4%259C%25E8%25A8%25BC%25E3%2582%2592%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kossy0701%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2Rhcmsvay5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kossy0701</dc:creator></item><item><title><![CDATA[Docker で Vite + React + TypeScript の環境構築！Tailwind CSS も導入]]></title><description><![CDATA[
+ はじめに
+本記事では、Dockerを使ってViteベースのReact+TypeScript環境を構築する手順を紹介します。
+また、スタイルの管理を簡単にするためにTailwind CSSも導入します。
+ローカル環境にNode.jsをインストールせずに、コンテナを活用して開発を進められるメリットがあります。
+「環境構築を効率化したい」「React × TypeScriptの開発をスムーズに始めたい」という方にオススメです！
+
+ この記事でできること
+
+
+Dockerを使用し、React + TypeScriptの環境をセットアップ
+
+Viteを利用して高速開発
+
+Tailwind CS...]]></description><link>https://zenn.dev/toshi052312/articles/ffd026e96a8d97</link><guid isPermaLink="true">https://zenn.dev/toshi052312/articles/ffd026e96a8d97</guid><pubDate>Mon, 17 Feb 2025 08:49:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--sKDwJWBX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%2520%25E3%2581%25A7%2520Vite%2520%252B%2520React%2520%252B%2520TypeScript%2520%25E3%2581%25AE%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%25EF%25BC%2581Tailwind%2520CSS%2520%25E3%2582%2582%25E5%25B0%258E%25E5%2585%25A5%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:toshi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2YyN2FlNzg3NGMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>toshi</dc:creator></item><item><title><![CDATA[Canvasでズーム＆描画！インタラクティブなホワイトボードを構築 (2)]]></title><description><![CDATA[
+ はじめに
+こんにちは！PortalKeyの渋谷です。
+今回は前回作成したホワイトボードに付箋の実装をしていきます。
+完成イメージはこちらです！
+
+
+ 付箋実装を行う前に…
+前回実装した物をそのまま拡張すると１ファイルのコード量がとんでもないことになるので一旦各機能毎にクラス分けしようと思います。
+whiteboard.tsimport { useCallback, useEffect, useRef } from "react"
+import { ViewManager } from "./viewManager"
+import { MarkerManager } from "./m...]]></description><link>https://zenn.dev/portalkeyinc/articles/9dd07b9b57b23c</link><guid isPermaLink="true">https://zenn.dev/portalkeyinc/articles/9dd07b9b57b23c</guid><pubDate>Mon, 17 Feb 2025 05:19:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7T_hwe9U--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Canvas%25E3%2581%25A7%25E3%2582%25BA%25E3%2583%25BC%25E3%2583%25A0%25EF%25BC%2586%25E6%258F%258F%25E7%2594%25BB%25EF%25BC%2581%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25BF%25E3%2583%25A9%25E3%2582%25AF%25E3%2583%2586%25E3%2582%25A3%25E3%2583%2596%25E3%2581%25AA%25E3%2583%259B%25E3%2583%25AF%25E3%2582%25A4%25E3%2583%2588%25E3%2583%259C%25E3%2583%25BC%25E3%2583%2589%25E3%2582%2592%25E6%25A7%258B%25E7%25AF%2589%2520%25282%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:da-shibuya%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM2Y2JkM2UxMzEuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:PortalKey%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSzR2Y0dCWGJ5bmIwc3k4TnQyZll4aU8xQ2xBN1ZwNzAtR2RJeTR4WW1uc2JEMEhRPXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>da-shibuya</dc:creator></item><item><title><![CDATA[Tailwind CSS×カスタムカラーパレット：ハードコードしないテクニック！]]></title><description><![CDATA[
+ 1. はじめに：Tailwindでのカラーパレット管理
+Tailwind CSSは、効率的にUIを構築するための強力なツールです。
+多くのプロジェクトでは、tailwind.config.ts で独自のカラーパレットを定義し、デザインの一貫性を保っています。
+例えば、以下のように定義すれば、プロジェクト全体で使えるカラーパレットが実現できます。
+// tailwind.config.ts の一例
+import type { Config } from 'tailwindcss'
+import scrollbarHide from 'tailwind-scrollbar-hide'
+
+...]]></description><link>https://zenn.dev/nanimiru/articles/a9ac5171d2ed75</link><guid isPermaLink="true">https://zenn.dev/nanimiru/articles/a9ac5171d2ed75</guid><pubDate>Mon, 17 Feb 2025 04:34:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--eaZVtqdf--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Tailwind%2520CSS%25C3%2597%25E3%2582%25AB%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%25A0%25E3%2582%25AB%25E3%2583%25A9%25E3%2583%25BC%25E3%2583%2591%25E3%2583%25AC%25E3%2583%2583%25E3%2583%2588%25EF%25BC%259A%25E3%2583%258F%25E3%2583%25BC%25E3%2583%2589%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2581%2597%25E3%2581%25AA%25E3%2581%2584%25E3%2583%2586%25E3%2582%25AF%25E3%2583%258B%25E3%2583%2583%25E3%2582%25AF%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AA%25E3%2581%25AB%25E3%2581%25BF%25E3%2582%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS1ByT2k0SkVYQnVpT1draENyT3dOLWtjbHRlUmlFeHVRZ2hsLWFycVQzeGg1Zkh3PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>なにみる</dc:creator></item><item><title><![CDATA[Next.js + react-timer-hookでポモドーロタイマーを作る]]></title><description><![CDATA[最近、『ポモドーロテクニック』という時間管理手法を使っています。
+ご存知ない方のために、Wikipediaを引用します。
+
+このテクニックは2009年に出版されたシリロの著書『The Pomodoro Technique』（どんな仕事も「25分+5分」で結果が出る ポモドーロ・テクニック入門）や、自身の公式サイト内で紹介されている。具体的な手順は以下の通りである。
+1.達成しようとするタスクを選ぶ
+2.キッチンタイマーで25分を設定する
+3.タイマーが鳴るまでタスクに集中する
+4.少し休憩する（5分程度）
+5.ステップ2 - 4を4回繰り返したら、少し長めに休憩する（15分 - 30分）...]]></description><link>https://zenn.dev/k_zumi_dev/articles/2ea670ac3cdfb2</link><guid isPermaLink="true">https://zenn.dev/k_zumi_dev/articles/2ea670ac3cdfb2</guid><pubDate>Mon, 17 Feb 2025 03:55:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--MiUsJ7rO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Next.js%2520%252B%2520react-timer-hook%25E3%2581%25A7%25E3%2583%259D%25E3%2583%25A2%25E3%2583%2589%25E3%2583%25BC%25E3%2583%25AD%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%259E%25E3%2583%25BC%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:k_zumi_dev%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NiMTRjZTg1MTcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>k_zumi_dev</dc:creator></item><item><title><![CDATA[Next.jsとHonoでデータ表示をしてみた]]></title><description><![CDATA[
+ 初めに
+何故か会社で鼻水が止まらないオメガマスターです…
+そろそろ花粉症の季節なので、リモート希望です（叶わぬ夢）
+さて今回は巷で話題のHonoを使ってみました。
+使ってみたと言っても、Honoのデータを表示させるだけなので、初学者向けにはなりますが、
+とっかかりとして見ていって頂けたら幸いです。
+
+ フォルダ構成
+今回のフォルダ構成は下記の感じです。
+珍しいことはなく、apps配下にbackendとfrontendを分けています。
+backendにはHonoをインストール、
+frontendにはNext.jsをインストールしています。
+インストールした時から新しく追加したファイルは...]]></description><link>https://zenn.dev/omegamaster/articles/next-hono-display-plactice</link><guid isPermaLink="true">https://zenn.dev/omegamaster/articles/next-hono-display-plactice</guid><pubDate>Mon, 17 Feb 2025 01:00:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ycWAJOE0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Next.js%25E3%2581%25A8Hono%25E3%2581%25A7%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2582%2592%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25AA%25E3%2583%25A1%25E3%2582%25AC%25E3%2583%259E%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0YzVXQURUYXFBRUlnaTg5WHM1a2JCQW1mRm05QzhDS09mNXVYODQ1QTBPYXc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>オメガマスター</dc:creator></item><item><title><![CDATA[AIを使った名刺解析・登録Slackアプリのコードレシピ（Cloudflare / Azure OpenAI / FileMaker）]]></title><description><![CDATA[
+ はじめに
+筆者は技術検証を兼ねて、LLMを使った社内ツールを数多く作ってきました。使われたものもあれば、使われないものもあります。忘れられるものの方が多いです。
+そのなかで好評だったのが、Slackを使った名刺登録アプリでした。
+LLMのOCR機能を使ったもので、作例が多く、屋上屋を架すは否めませんが、この記事ではコンテキストを絞って、実際に運用しているCloudflare Workers、Azure OpenAI Service 、FileMakerを用いた例を、具体的なコード実装に焦点を当てて紹介します。
+
+ 本記事のスコープ
+
+TypeScriptによるコード実装上のポイントを...]]></description><link>https://zenn.dev/ptna/articles/2bd69c532f1bb7</link><guid isPermaLink="true">https://zenn.dev/ptna/articles/2bd69c532f1bb7</guid><pubDate>Sun, 16 Feb 2025 23:15:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Rvqe9Q8C--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AI%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%259F%25E5%2590%258D%25E5%2588%25BA%25E8%25A7%25A3%25E6%259E%2590%25E3%2583%25BB%25E7%2599%25BB%25E9%258C%25B2Slack%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2581%25AE%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2583%25AC%25E3%2582%25B7%25E3%2583%2594%25EF%25BC%2588Cloudflare%2520%252F%2520Azure%2520OpenAI%2520%252F%2520...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:hosaka313%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZjNDZkNWFmNTAuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E5%2585%25A8%25E6%2597%25A5%25E6%259C%25AC%25E3%2583%2594%25E3%2582%25A2%25E3%2583%258E%25E6%258C%2587%25E5%25B0%258E%25E8%2580%2585%25E5%258D%2594%25E4%25BC%259A%25EF%25BC%2588%25E3%2583%2594%25E3%2583%2586%25E3%2582%25A3%25E3%2583%258A%25EF%25BC%2589%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lvTjJRYzJRN1V1ZnM1X29EblNkWkt4OFNPSWUzOTBaQTRSTDVOPXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hosaka313</dc:creator></item></channel></rss>
