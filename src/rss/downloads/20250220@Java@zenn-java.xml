@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Java」のフィード]]></title><description><![CDATA[Zennのトピック「Java」のRSSフィードです]]></description><link>https://zenn.dev/topics/java</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/5c47bb8423.png</url><title>Zennの「Java」のフィード</title><link>https://zenn.dev/topics/java</link></image><generator>zenn.dev</generator><lastBuildDate>Thu, 20 Feb 2025 12:04:08 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/java/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[《あなたが知らないJAVA》💘 ページネーションクエリのダ・ヴィンチ・コード。]]></title><description><![CDATA[
+ブログ対応のプロジェクトテンプレート
+
+https://www.mjga.cc
+https://github.com/ccmjga/mjga-scaffold/blob/main/README_EN.md
+
+
+ はじめに
+Mybatis には馴染みがあるかもしれませんが、今日はその文字列連結ベースの古いライブラリについては触れません。今日は QueryDSL をベースに実装されたライブラリについて話します。（このライブラリの最初のバージョンは 2009 年に誕生しました）その名は JOOQ です。
+JOOQ は一言でまとめると：JOOQ を使っているとき、あなたは SQL を使っている...]]></description><link>https://zenn.dev/mjga/articles/6612788591c6ed</link><guid isPermaLink="true">https://zenn.dev/mjga/articles/6612788591c6ed</guid><pubDate>Thu, 20 Feb 2025 04:21:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--YQ16Hq5T--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%258A%25E3%2581%2582%25E3%2581%25AA%25E3%2581%259F%25E3%2581%258C%25E7%259F%25A5%25E3%2582%2589%25E3%2581%25AA%25E3%2581%2584JAVA%25E3%2580%258B%2520%2520%25E3%2583%259A%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%258D%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%25AF%25E3%2582%25A8%25E3%2583%25AA%25E3%2581%25AE%25E3%2583%2580%25E3%2583%25BB%25E3%2583%25B4%25E3%2582%25A3%25E3%2583%25B3%25E3%2583%2581%25E3%2583%25BB%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2580%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ccmjga%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzMxYzY0YzBlM2QuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ccmjga</dc:creator></item><item><title><![CDATA[JavaでSMTPサーバー経由でメールを送信する]]></title><description><![CDATA[
+ はじめに
+前回、SMTPについて理解を深めてみました。
+https://zenn.dev/takudooon/articles/4ce5e2070b2064
+そもそも元々の動機を説明します。
+AndroidアプリをからSMTPサーバー経由でメール送る時、ライブラリ「Jakarta Mail API
+」を使用していました。
+https://jakartaee.github.io/mail-api/
+https://mvnrepository.com/artifact/com.sun.mail/jakarta.mail
+気になったのは、このライブラリがGPLライセンスであることです。
+こ...]]></description><link>https://zenn.dev/takudooon/articles/4d303484155829</link><guid isPermaLink="true">https://zenn.dev/takudooon/articles/4d303484155829</guid><pubDate>Wed, 19 Feb 2025 23:12:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_xxWB3M2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java%25E3%2581%25A7SMTP%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E7%25B5%258C%25E7%2594%25B1%25E3%2581%25A7%25E3%2583%25A1%25E3%2583%25BC%25E3%2583%25AB%25E3%2582%2592%25E9%2580%2581%25E4%25BF%25A1%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259F%25E3%2581%258F%25E3%2582%258D%25E3%2583%25BC%25E3%2581%25A9%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzViZTI2M2IwYzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>たくろーどん</dc:creator></item><item><title><![CDATA[Quarkusとは？Spring Bootとの違いを徹底比較]]></title><description><![CDATA[
+ 1. Quarkusとは？Spring Bootとの違いを徹底比較 🚀🐘
+
+ はじめに
+JavaのWebアプリケーションフレームワークといえば、Spring Boot が長年の標準でした。
+しかし、クラウドネイティブな環境で高速・軽量なアプリを実現するQuarkusが登場し、注目を集めています。
+「結局、どっちを選べばいいの？」
+そんな疑問に答えるため、本記事では QuarkusとSpring Bootの違いを徹底比較 します。
+
+
+ 1.1 Quarkusとは？
+
+ 🌟 Quarkusの特徴
+
+Quarkusは、クラウドネイティブなJavaアプリケーション開発に最適化された軽量・高...]]></description><link>https://zenn.dev/homatsu_tech/articles/ff683ce77692d4</link><guid isPermaLink="true">https://zenn.dev/homatsu_tech/articles/ff683ce77692d4</guid><pubDate>Wed, 19 Feb 2025 22:16:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1EfgUfda--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Quarkus%25E3%2581%25A8%25E3%2581%25AF%25EF%25BC%259FSpring%2520Boot%25E3%2581%25A8%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%25E3%2582%2592%25E5%25BE%25B9%25E5%25BA%2595%25E6%25AF%2594%25E8%25BC%2583%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25AE%259D%25E6%259D%25BE%2540%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2YzZWQ1ZGYyMjYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>宝松@システムエンジニア</dc:creator></item><item><title><![CDATA[[Java]パッケージ とは（備忘録）]]></title><description><![CDATA[
+ １．はじめに
+・パッケージとは、複数のクラスやインターフェースをグループ化して整理するための仕組みです。
+・Javaファイルの先頭行でpackage 文を使用し、パッケージ宣言を行います。
+・パッケージ名の命名規則は、インターネットのドメインを反対にした方式が一般的です。
+
+パッケージ宣言の方法
+package パッケージ名;
+
+・パッケージ化されたクラスを他のクラスで使用する場合、import 文を使用します。
+
+import文の書き方
+// パッケージ化したクラスをインポートする場合
+import パッケージ名.クラス名;
+
+// パッケージに含まれる全クラスをインポートする場合...]]></description><link>https://zenn.dev/yama_kawa/articles/2ccf517b28a0b2</link><guid isPermaLink="true">https://zenn.dev/yama_kawa/articles/2ccf517b28a0b2</guid><pubDate>Wed, 19 Feb 2025 16:00:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fDewlY7o--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BJava%255D%25E3%2583%2591%25E3%2583%2583%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B8%2520%25E3%2581%25A8%25E3%2581%25AF%25EF%25BC%2588%25E5%2582%2599%25E5%25BF%2598%25E9%258C%25B2%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%25A9%25E3%2582%25B6%25E3%2583%258B%25E3%2582%25A2%25E3%2583%2591%25E3%2583%25B3%25E3%2582%25B5%25E3%2583%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M1ZjYyZjIwYTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ラザニアパンサー</dc:creator></item><item><title><![CDATA[eclipse4.14.0でtomcat8.0を起動した際にログが取得できない問題]]></title><description><![CDATA[
+ eclipse4.14.0でtomcat8.0を起動した際にログが取得できない問題
+エラーの解決のためにログを確認したかったが取得できなかったので色々試しました。
+結果、起動オプションに以下を入れると解決しました。
+-Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager -Djava.util.logging.config.file="%CATALINA_BASE%/conf/logging.properties"
+解決したいエラーは解決していないので、引き続き調査を進めます。
+]]></description><link>https://zenn.dev/hirokis920/articles/5ab894c29a805d</link><guid isPermaLink="true">https://zenn.dev/hirokis920/articles/5ab894c29a805d</guid><pubDate>Wed, 19 Feb 2025 10:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--QykDTcwv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:eclipse4.14.0%25E3%2581%25A7tomcat8.0%25E3%2582%2592%25E8%25B5%25B7%25E5%258B%2595%25E3%2581%2597%25E3%2581%259F%25E9%259A%259B%25E3%2581%25AB%25E3%2583%25AD%25E3%2582%25B0%25E3%2581%258C%25E5%258F%2596%25E5%25BE%2597%25E3%2581%25A7%25E3%2581%258D%25E3%2581%25AA%25E3%2581%2584%25E5%2595%258F%25E9%25A1%258C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258A%25E3%2582%2582%25E3%2581%25A1%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSWJlaUptelV3aXBpbzN0anpuU3FlTldMWkNLaE5NT25CRlRqSGZ2SEo4UTB1VUtRPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>おもち</dc:creator></item><item><title><![CDATA[JavaSilverの勉強過程で新たに知ったことや覚えておくべきこと、気付いたことや疑問点をまとめる場所]]></title><description><![CDATA[
+ この記事の概要
+
+
+この記事は私のJavaSilver学習進捗に従いどんどん追記、改訂されます。
+
+
+JavaSilverの資格取得のために以下のことをアウトプットし、復習用に整理します。
+　- 新たに知ったこと
+　- 覚えておくべきこと
+　- 気付いたこと
+　- 疑問点
+
+
+学習開始日：2025年2月14日
+
+
+
+ 1章 簡単なJavaプログラムの作成
+
+パッケージ宣言はソースコードの先頭行に記載すること。
+ただし、コメントのみはパッケージ宣言よりも前に記述できる。
+インポート宣言時にアスタリスク「*」を使用することで、そのパッケージに属するクラスをすべてインポートできる。
+
+!
+...]]></description><link>https://zenn.dev/kinako_yo4kado/articles/d7469c411147b0</link><guid isPermaLink="true">https://zenn.dev/kinako_yo4kado/articles/d7469c411147b0</guid><pubDate>Wed, 19 Feb 2025 04:47:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qGgiG9cz--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaSilver%25E3%2581%25AE%25E5%258B%2589%25E5%25BC%25B7%25E9%2581%258E%25E7%25A8%258B%25E3%2581%25A7%25E6%2596%25B0%25E3%2581%259F%25E3%2581%25AB%25E7%259F%25A5%25E3%2581%25A3%25E3%2581%259F%25E3%2581%2593%25E3%2581%25A8%25E3%2582%2584%25E8%25A6%259A%25E3%2581%2588%25E3%2581%25A6%25E3%2581%258A%25E3%2581%258F%25E3%2581%25B9%25E3%2581%258D%25E3%2581%2593%25E3%2581%25A8%25E3%2580%2581%25E6%25B0%2597%25E4%25BB%2598%25E3%2581%2584%25E3%2581%259F%25E3%2581%2593%25E3%2581%25A8%25E3%2582%2584%25E7%2596%2591%25E5%2595%258F%25E7%2582%25B9%25E3%2582%2592%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2582%258B%25E5%25A0%25B4%25E6%2589%2580%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%2590%2589%25E9%2596%2580%25E3%2581%258D%25E3%2581%25AA%25E3%2581%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS1NOR29BWm1VLVc5VkhGaWd6TjNJWk5wZU0tZkZ6MTgtNUZXQmhObG84NGVlWnZ3PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>吉門きなこ</dc:creator></item><item><title><![CDATA[Minecraftのホワイトリストをサーバ間で共有するシステムを作ってみた]]></title><description><![CDATA[
+ 概要
+今回、初めてWebサービス(?)を開発しデプロイしたので、総括の意味も込めて記事にまとめることにしました。ただし、本当に内輪向けに開発したものなので大っぴらに公開する予定はありません。
+システムの概要としては、タイトル通りホワイトリストを複数のMinecraftサーバ間で共有するもので、
+比較的大規模かつ同一の組織に所属する人が、組織内の人間向けにMinecraftのサーバを公開したい場合などを想定しています。
+Github: https://github.com/McOrgAuth
+
+ 仕組み
+ユーザの目線から本システムの仕組みを解説します。
+
+ 登録
+ユーザは、登録ページに...]]></description><link>https://zenn.dev/mam1zu/articles/e9877491c39e00</link><guid isPermaLink="true">https://zenn.dev/mam1zu/articles/e9877491c39e00</guid><pubDate>Tue, 18 Feb 2025 17:59:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--XrLR1szX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Minecraft%25E3%2581%25AE%25E3%2583%259B%25E3%2583%25AF%25E3%2582%25A4%25E3%2583%2588%25E3%2583%25AA%25E3%2582%25B9%25E3%2583%2588%25E3%2582%2592%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E9%2596%2593%25E3%2581%25A7%25E5%2585%25B1%25E6%259C%2589%25E3%2581%2599%25E3%2582%258B%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mam1zu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSmRiTU9ERk9IaHNnVkpzc0U3OUIyTzRacmdHMms3VkI2WTBvS29VYm1abjMtVC1RPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mam1zu</dc:creator></item><item><title><![CDATA[《あなたが知らないJAVA》ユニットテストの命名哲学]]></title><description><![CDATA[
+
+ ユニットテストの設計哲学
+プログラムはまず人間が読むために書かれ、その後に機械が実行できるようにする。
+
+Programs must be written for people to read, and only incidentally for machines to execute.
+
+そして、プログラミングの第一歩は命名であり、ユニットテストも同様です。
+
+ WWW
+ユニットテストの命名をどのように人間が理解できるようにするか？命名において3つの要素を反映する必要があります。略してWWW原則と呼びます。
+
+何をテストするか？(what)
+どのような条件下でテストするか？(wh...]]></description><link>https://zenn.dev/mjga/articles/86a3b8f1f1cdbd</link><guid isPermaLink="true">https://zenn.dev/mjga/articles/86a3b8f1f1cdbd</guid><pubDate>Mon, 17 Feb 2025 04:20:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--cCys5jrb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%258A%25E3%2581%2582%25E3%2581%25AA%25E3%2581%259F%25E3%2581%258C%25E7%259F%25A5%25E3%2582%2589%25E3%2581%25AA%25E3%2581%2584JAVA%25E3%2580%258B%25E3%2583%25A6%25E3%2583%258B%25E3%2583%2583%25E3%2583%2588%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E3%2581%25AE%25E5%2591%25BD%25E5%2590%258D%25E5%2593%25B2%25E5%25AD%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ccmjga%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzMxYzY0YzBlM2QuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ccmjga</dc:creator></item><item><title><![CDATA[【備忘録】 AP exam Computer Science A 勉強記①]]></title><description><![CDATA[
+ Javaの基本まとめ（初心者向け）
+!
+この記事は、Next.jsなどを勉強している筆者が、AP ExamのComputer Science Aを受験するためにJavaを学び始めた備忘録です。Javaは完全初心者なので頑張ります！
+
+
+
+ 1. 出力 (print)
+
+System.out.println を使うと、画面に文字や計算結果を表示できます。
+System.out.println("Hello world!"); // 出力: Hello world!
+System.out.println(8 + 10); // 出力: 18
+System.out.println(8 % ...]]></description><link>https://zenn.dev/kamehonu/articles/fcc9a1b39a1be5</link><guid isPermaLink="true">https://zenn.dev/kamehonu/articles/fcc9a1b39a1be5</guid><pubDate>Mon, 17 Feb 2025 02:29:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--K2co9aHu--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%2582%2599%25E5%25BF%2598%25E9%258C%25B2%25E3%2580%2591%2520AP%2520exam%2520Computer%2520Science%2520A%2520%25E5%258B%2589%25E5%25BC%25B7%25E8%25A8%2598%25E2%2591%25A0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:honu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0ZkhMcUd6a0hRUGpDWWF3cWh0bV85NnVUOWMxN0wyQkJkbkpRU1pScW1wcVE4PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>honu</dc:creator></item><item><title><![CDATA[【Java】メソッド]]></title><description><![CDATA[
+ Javaのメソッド（Method）
+
+メソッドは特定の処理をまとめたブロックです。
+繰り返し使えるように名前をつけて再利用できます。
+
+
+ 1. メソッドの基本構文
+
+返り値の型 メソッド名(引数) {
+    // 処理内容
+    return 値;  // 返り値がある場合
+}
+
+ 例: 足し算メソッド
+
+int add(int a, int b) {
+    return a + b;
+}
+実際に呼び出している例
+class Main {
+  public static void main(String[] args) {
+    hello();
+  }
+  
+  publ...]]></description><link>https://zenn.dev/kaishigaki/articles/2f28457f807519</link><guid isPermaLink="true">https://zenn.dev/kaishigaki/articles/2f28457f807519</guid><pubDate>Sun, 16 Feb 2025 02:45:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Cdjubkv8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Java%25E3%2580%2591%25E3%2583%25A1%25E3%2582%25BD%25E3%2583%2583%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258B%25E3%2581%2584%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M0MjQ2ZmVjOWIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>かい</dc:creator></item><item><title><![CDATA[【Java】クラス]]></title><description><![CDATA[
+ Javaのクラス（Class）
+
+クラスはオブジェクトを作るための設計図です。
+変数（フィールド） と メソッド（関数） を持ち、データをまとめて管理できます。
+
+
+ 1. クラスの基本
+
+
+ クラスの作成
+
+class クラス名 {
+    // フィールド（変数）
+    // メソッド（処理）
+}
+
+ 例: Car クラスの作成
+
+class Car {
+    String brand;  // フィールド（車のブランド）
+    int speed;     // フィールド（速度）
+
+    void drive() { // メソッド（走る動作）
+        Sys...]]></description><link>https://zenn.dev/kaishigaki/articles/caa67dd350d93b</link><guid isPermaLink="true">https://zenn.dev/kaishigaki/articles/caa67dd350d93b</guid><pubDate>Sun, 16 Feb 2025 02:44:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--I1HbHyiz--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:%25E3%2580%2590Java%25E3%2580%2591%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258B%25E3%2581%2584%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M0MjQ2ZmVjOWIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>かい</dc:creator></item><item><title><![CDATA[【Java】配列]]></title><description><![CDATA[
+ Javaの配列（Array）
+
+配列は同じ型のデータをまとめて管理するための仕組みです。
+複数の値を1つの変数で扱えるので便利です。
+
+
+ 1. 配列の基本
+
+
+ 配列の宣言と初期化
+
+データ型[] 配列名 = new データ型[サイズ];
+
+ 例: 5つの整数を格納する配列
+
+int[] numbers = new int[5]; // 5つの要素を持つ配列を作成
+📌 ポイント
+
+配列の要素は 0から始まる（numbers[0] が最初）
+
+new を使ってメモリに確保する
+
+
+
+ 2. 配列の初期化
+
+
+ 方法1: 1つずつ代入
+
+int[] numbers = new int[...]]></description><link>https://zenn.dev/kaishigaki/articles/7c542c3ae12e05</link><guid isPermaLink="true">https://zenn.dev/kaishigaki/articles/7c542c3ae12e05</guid><pubDate>Sun, 16 Feb 2025 02:41:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ADECRuhM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:%25E3%2580%2590Java%25E3%2580%2591%25E9%2585%258D%25E5%2588%2597%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258B%25E3%2581%2584%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M0MjQ2ZmVjOWIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>かい</dc:creator></item><item><title><![CDATA[【Java】繰り返し文]]></title><description><![CDATA[
+ Javaの繰り返し文（基本3種類）
+
+Javaのループ処理の中で、特によく使う for / while / for-each の3つを解説します。
+
+
+ 1. for 文（回数が決まっている繰り返し）
+
+「○回繰り返す」場合に適したループ
+
+ 基本構文
+
+for (初期化; 条件; 更新) {
+    // 繰り返し処理
+}
+
+
+初期化 : ループ開始時の変数（例: int i = 0;）
+
+条件 : ループを続ける条件（例: i &lt; 5;）
+
+更新 : ループごとに変数を更新（例: i++）
+
+
+ 例: 0〜4 を表示
+
+for (int i = 0; i &lt; 5; i...]]></description><link>https://zenn.dev/kaishigaki/articles/585f655076310d</link><guid isPermaLink="true">https://zenn.dev/kaishigaki/articles/585f655076310d</guid><pubDate>Sun, 16 Feb 2025 02:39:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0n2khqO1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Java%25E3%2580%2591%25E7%25B9%25B0%25E3%2582%258A%25E8%25BF%2594%25E3%2581%2597%25E6%2596%2587%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258B%25E3%2581%2584%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M0MjQ2ZmVjOWIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>かい</dc:creator></item><item><title><![CDATA[【Java】条件分岐について（復習）]]></title><description><![CDATA[
+ Javaの if 文の基本
+
+if 文は、条件によって処理を分岐するために使います。
+「もし ○○ ならば、△△ をする」というような処理を実装できます。
+
+
+ 1. 基本の書き方
+
+if (条件式) {
+    // 条件が true（真）なら実行
+}
+
+ 例
+
+int num = 10;
+if (num &gt; 5) {
+    System.out.println("num は 5 より大きい");
+}
+✅ num が 5 より大きいため、"num は 5 より大きい" が表示される。
+
+
+ 2. if-else（条件が false の場合の処理）
+
+if (条件式) {
+ ...]]></description><link>https://zenn.dev/kaishigaki/articles/88d73e6b58b6c6</link><guid isPermaLink="true">https://zenn.dev/kaishigaki/articles/88d73e6b58b6c6</guid><pubDate>Sun, 16 Feb 2025 02:36:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GnbQxlew--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Java%25E3%2580%2591%25E6%259D%25A1%25E4%25BB%25B6%25E5%2588%2586%25E5%25B2%2590%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25EF%25BC%2588%25E5%25BE%25A9%25E7%25BF%2592%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258B%25E3%2581%2584%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M0MjQ2ZmVjOWIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>かい</dc:creator></item><item><title><![CDATA[【Java】変数について（復習）]]></title><description><![CDATA[
+ 変数とは？
+データを入れる箱（入れ物）という認識。
+複数の箱があると、区別が必要なので、その変数に名前を付ける必要がある。
+
+ データ型とは
+データを入れる箱をジャンルごとで分けるイメージ
+データの中身は「あああ」のような文字列や、「123」のような整数、「0.314」のような少数
+があるので、それらに合わせた分類のようなものがデータ型。
+
+String（文字列型）
+　　文字列を扱うためのクラス で、""（ダブルクォート）で囲んで表現します。
+（データの値そのものではなく、オブジェクトのアドレス（参照）を格納する型に分類される）
+int（整数型）
+　一般的に使用される整数型（範囲：-...]]></description><link>https://zenn.dev/kaishigaki/articles/9d62e333f50672</link><guid isPermaLink="true">https://zenn.dev/kaishigaki/articles/9d62e333f50672</guid><pubDate>Sun, 16 Feb 2025 02:29:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lofcl4iq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Java%25E3%2580%2591%25E5%25A4%2589%25E6%2595%25B0%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25EF%25BC%2588%25E5%25BE%25A9%25E7%25BF%2592%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258B%25E3%2581%2584%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M0MjQ2ZmVjOWIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>かい</dc:creator></item><item><title><![CDATA[[Java]キャスト とは（備忘録）]]></title><description><![CDATA[
+ １．はじめに
+・データ型を変換することを、キャストといいます。
+・小さなデータ型から大きなデータへの変換（例：short 型をlong 型に変換）は、自動で行われます。（暗黙的キャスト）
+・大きなデータ型から小さなデータ型への変換（例：long 型をshort 型に変換）は、キャストを使って明示的に行います。（明示的キャスト）
+!
+重要：
+真偽値である boolean 型は型変換できません。
+
+
+ ２．アップキャスト とは
+・アップキャストとは、継承関係のあるクラスにおいて、サブクラス（継承先）のオブジェクトをスーパークラス（継承元）のオブジェクトと同じように扱うことができます。
+ア...]]></description><link>https://zenn.dev/yama_kawa/articles/347668f4e91b85</link><guid isPermaLink="true">https://zenn.dev/yama_kawa/articles/347668f4e91b85</guid><pubDate>Sun, 16 Feb 2025 02:07:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--MpBWI_3Q--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BJava%255D%25E3%2582%25AD%25E3%2583%25A3%25E3%2582%25B9%25E3%2583%2588%2520%25E3%2581%25A8%25E3%2581%25AF%25EF%25BC%2588%25E5%2582%2599%25E5%25BF%2598%25E9%258C%25B2%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%25A9%25E3%2582%25B6%25E3%2583%258B%25E3%2582%25A2%25E3%2583%2591%25E3%2583%25B3%25E3%2582%25B5%25E3%2583%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M1ZjYyZjIwYTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ラザニアパンサー</dc:creator></item><item><title><![CDATA[jarファイルのライブラリに苦しめられた話]]></title><description><![CDATA[
+ はじめに
+ispecでは、サーバーサイドにKotlinを採用して開発を行っています。
+(Kodee可愛いですよね 😊)
+
+今回は、jarファイルで追加したライブラリが原因で、他のライブラリが動作しなくなった際の話をしようと思います。
+かなりレアケースではあると思うのですが、誰かの助けになれば幸いです。
+最後にまとめがあるので、お急ぎの方はどうぞ！
+
+ 問題発生：ロガーが動作しなくなる
+自分が担当していたプロジェクトでは、SLF4J + Logbackというよくある構成でログ出力を行っていました。
+しかしある日、このログが出力されていないことに気が付きました。
+アプリケーション自体は問...]]></description><link>https://zenn.dev/ispec_inc/articles/jar-library-trouble</link><guid isPermaLink="true">https://zenn.dev/ispec_inc/articles/jar-library-trouble</guid><pubDate>Sat, 15 Feb 2025 08:07:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qohVK4vo--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:jar%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2581%25AE%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%25E3%2581%25AB%25E8%258B%25A6%25E3%2581%2597%25E3%2582%2581%25E3%2582%2589%25E3%2582%258C%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Masaharu%2520Hori%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRmN2Y5YzE4ZTUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:ispec%2520inc.%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dsMTBYY3R4TlFyTVZlODUyXzd4ZUtRNEJOR19PaVI2VU1nQlhlaGc9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Masaharu Hori</dc:creator></item><item><title><![CDATA[Javaで自作クラスのリストを2変数以上でソートする方法]]></title><description><![CDATA[
+ はじめに
+この記事では、Javaを用いて、自作クラスのリストをソートする方法について書きます。
+方法はいくつかありますが、一番簡単な方法を1つ紹介します。
+
+ 1変数の場合
+例えば3つの変数を持つレコードのリストを1変数でソートする場合は、java.util.Comparatorのcomparing関数を使用してcomparatorというものを作り出し、それを元にソートします。
+詳細はJavaのリファレンスを参考にしてください。
+以下の例では、Personというレコードのageという変数に着目して、リストをソートしています。
+import java.util.*;
+
+public c...]]></description><link>https://zenn.dev/g_dev/articles/39debfdb8981c0</link><guid isPermaLink="true">https://zenn.dev/g_dev/articles/39debfdb8981c0</guid><pubDate>Fri, 14 Feb 2025 14:11:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--PAH3dW7T--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java%25E3%2581%25A7%25E8%2587%25AA%25E4%25BD%259C%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25B9%25E3%2581%25AE%25E3%2583%25AA%25E3%2582%25B9%25E3%2583%2588%25E3%2582%25922%25E5%25A4%2589%25E6%2595%25B0%25E4%25BB%25A5%25E4%25B8%258A%25E3%2581%25A7%25E3%2582%25BD%25E3%2583%25BC%25E3%2583%2588%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Atomic%2520G%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q3NDA4NDg2ZTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Atomic G</dc:creator></item><item><title><![CDATA[SpringSecurity(セッション数管理)]]></title><description><![CDATA[
+ はじめに
+こんにちは！
+オアシステクノロジーズの山本です。
+SpringBoot + SpringSecurity でセッション数管理ではまったので、その内容を共有します。
+
+ 目次
+
+前提
+セッション数管理
+問題点
+解決策
+まとめ
+
+
+ 1.前提
+SpringBoot + SpringSecurity でセッション数(Redis※ElasticCashe）管理を行う前提で記載しています。
+SpringBoot 3.2.3
+SpringSecurity 6.2.2
+SpringDataRedis 3.2.3
+
+ 2.セッション数管理
+SpringSecurity でセッション数管理を...]]></description><link>https://zenn.dev/oasys/articles/f67bcd38304a93</link><guid isPermaLink="true">https://zenn.dev/oasys/articles/f67bcd38304a93</guid><pubDate>Fri, 14 Feb 2025 05:37:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--roK9nhmD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:SpringSecurity%2528%25E3%2582%25BB%25E3%2583%2583%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E6%2595%25B0%25E7%25AE%25A1%25E7%2590%2586%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25AA%25E3%2582%25A2%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2582%25AF%25E3%2583%258E%25E3%2583%25AD%25E3%2582%25B8%25E3%2583%25BC%25E3%2582%25BA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQyMGUxYmY0YzcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>オアシステクノロジーズ</dc:creator></item><item><title><![CDATA[疑問解消編④]]></title><description><![CDATA[久しぶりです！
+オアシステクノロジーズの中村です。
+疑問点や知らない単語をChatGPTに聞いてみた！編Part3です。
+
+ 今回のトピック
+
+サイトコア
+セッション
+PRD
+
+
+ サイトコア
+「サイトコアってなんですか？」
+ChatGPT君
+
+「サイトコア」は、Webサイトやデジタルコンテンツを管理するためのプラットフォームです。具体的には、企業が自社のウェブサイトやアプリケーション、オンラインコンテンツを効果的に運営し、パーソナライズされたデジタルエクスペリエンスを提供するために使用されます。
+
+主な機能としては、以下のようなものがあります：
+
+
+コンテンツ管理: ウェブサイトやアプ...]]></description><link>https://zenn.dev/oasys/articles/979c82ca09ddea</link><guid isPermaLink="true">https://zenn.dev/oasys/articles/979c82ca09ddea</guid><pubDate>Fri, 14 Feb 2025 05:37:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Hn6mMroP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%2596%2591%25E5%2595%258F%25E8%25A7%25A3%25E6%25B6%2588%25E7%25B7%25A8%25E2%2591%25A3%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25AA%25E3%2582%25A2%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2582%25AF%25E3%2583%258E%25E3%2583%25AD%25E3%2582%25B8%25E3%2583%25BC%25E3%2582%25BA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQyMGUxYmY0YzcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>オアシステクノロジーズ</dc:creator></item></channel></rss>
