@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「TypeScript」のフィード]]></title><description><![CDATA[Zennのトピック「TypeScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/typescript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/f13e758fdb.png</url><title>Zennの「TypeScript」のフィード</title><link>https://zenn.dev/topics/typescript</link></image><generator>zenn.dev</generator><lastBuildDate>Fri, 21 Feb 2025 10:37:11 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/typescript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[海外メンバー向けに英語で勉強会を開催した際の知見]]></title><description><![CDATA[
+ はじめに
+はじめまして。GAOGAO の null です。
+https://zenn.dev/nu_______ll/articles/9c1f7bed1c5e1b
+本記事では GAOGAO 社内にて主に海外メンバー向けに英語で勉強会を実施した際の知見を共有します。
+英語に自信がない方でも参考にできるかと思いますので、英語での勉強会やミーティングに興味のある方は、是非ご一読いただけますと幸いです！
+
+ 背景 &amp; 動機
+弊社 GAOGAO では東南アジアを中心に、海外メンバーが多数在籍しています。
+そこで、各国のメンバー間の交流の促進し、また共にスキルアップするべく、英語にて社...]]></description><link>https://zenn.dev/nu_______ll/articles/1f52fe388660de</link><guid isPermaLink="true">https://zenn.dev/nu_______ll/articles/1f52fe388660de</guid><pubDate>Fri, 21 Feb 2025 09:25:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dM1JXNgp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%25B5%25B7%25E5%25A4%2596%25E3%2583%25A1%25E3%2583%25B3%25E3%2583%2590%25E3%2583%25BC%25E5%2590%2591%25E3%2581%2591%25E3%2581%25AB%25E8%258B%25B1%25E8%25AA%259E%25E3%2581%25A7%25E5%258B%2589%25E5%25BC%25B7%25E4%25BC%259A%25E3%2582%2592%25E9%2596%258B%25E5%2582%25AC%25E3%2581%2597%25E3%2581%259F%25E9%259A%259B%25E3%2581%25AE%25E7%259F%25A5%25E8%25A6%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:null%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VkZmI5MDY3OWIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>null</dc:creator></item><item><title><![CDATA[【Next.js】Zodを使用した環境変数のバリデーション]]></title><description><![CDATA[
+ はじめに
+環境変数を扱うときにZodを使用したバリデーションをすると便利だなと思ったので記事にしました。
+
+ process.envを使用すると面倒なこと
+
+型がstring|undefindになってしまい、毎回undefindチェックする必要がある。
+期待するフォーマットでない値でもそのまま使用できてしまいランタイムエラー等が発生する可能性がある。
+
+大袈裟ですがこんなイメージ
+// process.envから直接取得
+const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+
+// 毎回undefinedチェックを行う必要がある
+if (!a...]]></description><link>https://zenn.dev/kiwichan101kg/articles/7ba33ab64414b2</link><guid isPermaLink="true">https://zenn.dev/kiwichan101kg/articles/7ba33ab64414b2</guid><pubDate>Fri, 21 Feb 2025 09:20:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--JMFKFwdP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Next.js%25E3%2580%2591Zod%25E3%2582%2592%25E4%25BD%25BF%25E7%2594%25A8%25E3%2581%2597%25E3%2581%259F%25E7%2592%25B0%25E5%25A2%2583%25E5%25A4%2589%25E6%2595%25B0%25E3%2581%25AE%25E3%2583%2590%25E3%2583%25AA%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kiwichan%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZlYTA3YzU3YzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kiwichan</dc:creator></item><item><title><![CDATA[「chakoshi」を試して遊んでみる]]></title><description><![CDATA[
+ chakoshiとはなんぞ
+NTTコミュニケーションズが発表した、テキストの安全性を判定するサービスです。
+https://www.ntt.com/about-us/press-releases/news/article/2025/0219.html
+https://chakoshi.ntt.com
+つい先日発表されたばかりのようです。
+簡単に試せるプレイグラウンドだけでなく、APIも無償提供されてるみたいです⭐️
+↓こういうネチネチした日本的な暴言などに反応して、テキストが安全かどうかを返してくれます。
+
+今回はこのAPIを使ってみたいと思います。
+
+ 公式ドキュメントを読んでAP...]]></description><link>https://zenn.dev/macori/articles/16836b45c32983</link><guid isPermaLink="true">https://zenn.dev/macori/articles/16836b45c32983</guid><pubDate>Fri, 21 Feb 2025 08:57:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jzwgls7_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%258Cchakoshi%25E3%2580%258D%25E3%2582%2592%25E8%25A9%25A6%25E3%2581%2597%25E3%2581%25A6%25E9%2581%258A%25E3%2582%2593%25E3%2581%25A7%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:macori%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY1NGRmMzE4ZjMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>macori</dc:creator></item><item><title><![CDATA[忙しい人のためのESLint Flat Configの設定例（主要なプラグイン込み）]]></title><description><![CDATA[
+ 前書き
+v9からFlat Configという新しい記法がデフォルトとなったeslintですが、
+v10からeslintrcの機構が無くなるようです。
+https://eslint.org/blog/2023/10/flat-config-rollout-plans/#eslintrc-removed-in-eslint-v10.0.0
+先んじてFlat Config化に取り組みまして、その際の設定の最終系を記します。
+
+ 前提
+
+ここでの記載は以下の技術スタック向けに書かれています。
+
+TypeScript
+React
+Next.js
+※他のプラグインでも応用可能かと思います。
+
+
+...]]></description><link>https://zenn.dev/yu_ta_9/articles/7001d66779ff3a</link><guid isPermaLink="true">https://zenn.dev/yu_ta_9/articles/7001d66779ff3a</guid><pubDate>Thu, 20 Feb 2025 12:03:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7laPudyH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%25BF%2599%25E3%2581%2597%25E3%2581%2584%25E4%25BA%25BA%25E3%2581%25AE%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AEESLint%2520Flat%2520Config%25E3%2581%25AE%25E8%25A8%25AD%25E5%25AE%259A%25E4%25BE%258B%25EF%25BC%2588%25E4%25B8%25BB%25E8%25A6%2581%25E3%2581%25AA%25E3%2583%2597%25E3%2583%25A9%25E3%2582%25B0%25E3%2582%25A4%25E3%2583%25B3%25E8%25BE%25BC%25E3%2581%25BF%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:YU-TA-9%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2QwNzU2NmM5MzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>YU-TA-9</dc:creator></item><item><title><![CDATA[【typoとおさらば】AppRouterで画面URL定義の自動生成をしてくれるpathpida]]></title><description><![CDATA[pathpidaを利用して画面のURL定義を自動生成するのは、めちゃくちゃ便利です！
+自動生成を一度経験してしまったら、もう手作業で画面URLの定義を用意していた頃には戻れませんよ…
+
+ 利用者想定
+Next.jsのAppRouterを利用して開発を行っている方
+
+ [前提]AppRouterとは
+pathpidaを説明する上でAppRouterの前提知識が必要になるので、AppRouterのルーティングについて触れますが、有識者の方は読み飛ばして頂いて構いません。
+
+ルーティングの特徴
+
+app配下でpage.tsxファイルが配置されているディレクトリのパスが、そのまま画面のパス(UR...]]></description><link>https://zenn.dev/suzukishouten/articles/c28e6a3db12892</link><guid isPermaLink="true">https://zenn.dev/suzukishouten/articles/c28e6a3db12892</guid><pubDate>Thu, 20 Feb 2025 08:57:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--zpEj9wBK--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590typo%25E3%2581%25A8%25E3%2581%258A%25E3%2581%2595%25E3%2582%2589%25E3%2581%25B0%25E3%2580%2591AppRouter%25E3%2581%25A7%25E7%2594%25BB%25E9%259D%25A2URL%25E5%25AE%259A%25E7%25BE%25A9%25E3%2581%25AE%25E8%2587%25AA%25E5%258B%2595%25E7%2594%259F%25E6%2588%2590%25E3%2582%2592%25E3%2581%2597%25E3%2581%25A6%25E3%2581%258F%25E3%2582%258C%25E3%2582%258Bpathpida%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2582%258F%25E3%2581%25A1%25E3%2581%25A1%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q2ODgxNGNkY2QuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E9%2588%25B4%25E6%259C%25A8%25E5%2595%2586%25E5%25BA%2597%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y5ZGI1NDRjZDYuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>わちち</dc:creator></item><item><title><![CDATA[VScodeとTypeScriptを用いたGAS開発の効率化]]></title><description><![CDATA[
+ 概要
+Google App Script(GAS)のコーディングにclaspとVScodeを用いている。エディタは使い慣れたVScodeで作業したいかつ、TypeScriptを用いた開発を行いたいためである。が、このセットアップ作業が毎回とてもとてもめんどくさい。npmパッケージをダウンロードしたのち自分好みのディレクトリ構成にするというのは決まった動作なので、作りたいファイル名を指定すればあとは自動でセットアップしてくれるようにした。
+
+ 実行環境
+MacBook Pro (M3, 2023)（Apple Silicon）
+OS: macOS Sonoma 14.4
+
+ 作りたいデ...]]></description><link>https://zenn.dev/rosalina60zzz/articles/d5f10274ffa8c4</link><guid isPermaLink="true">https://zenn.dev/rosalina60zzz/articles/d5f10274ffa8c4</guid><pubDate>Thu, 20 Feb 2025 08:47:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--oTT6p7In--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:VScode%25E3%2581%25A8TypeScript%25E3%2582%2592%25E7%2594%25A8%25E3%2581%2584%25E3%2581%259FGAS%25E9%2596%258B%25E7%2599%25BA%25E3%2581%25AE%25E5%258A%25B9%25E7%258E%2587%25E5%258C%2596%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:rosalina%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZlMzk2ZTg1Y2EuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>rosalina</dc:creator></item><item><title><![CDATA[🦊🐈️❤|Firefoxベースのブラウザー、模様替えしてみた]]></title><description><![CDATA[こんにちは。Firefoxベースのブラウザーである『noraneko』の開発をしているNyanRusです。
+私が作っているブラウザーについて、「開発のきっかけ」や「開発で知ったこと」、「経験したこと」を書きます。
+
+ Firefoxってなに？
+『Firefox』はMozillaという会社、及びコミュニティが開発しているブラウザーです。
+メジャーなブラウザーである『Chrome』はGoogleが開発しています。
+世の中には、『Microsoft Edge』『Opera』などChromeの亜種がたくさんありますが、Firefoxはそうではなく、Chromeと同じ先祖を持っている違うブラウザー...]]></description><link>https://zenn.dev/nyanrus/articles/2a88304f57faeb</link><guid isPermaLink="true">https://zenn.dev/nyanrus/articles/2a88304f57faeb</guid><pubDate>Thu, 20 Feb 2025 03:11:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--SG13-CQZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%2520%2520%2520%257CFirefox%25E3%2583%2599%25E3%2583%25BC%25E3%2582%25B9%25E3%2581%25AE%25E3%2583%2596%25E3%2583%25A9%25E3%2582%25A6%25E3%2582%25B6%25E3%2583%25BC%25E3%2580%2581%25E6%25A8%25A1%25E6%25A7%2598%25E6%259B%25BF%25E3%2581%2588%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:NyanRus%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE3YmFiMTMwYTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>NyanRus</dc:creator></item><item><title><![CDATA[社内 NPM パッケージの作り方 with Bun + Google Cloud]]></title><description><![CDATA[
+ はじめに
+こんにちは。 whatasoda です。
+プログラミング言語を TypeScript に統一しつつマルチプロダクトなサービスを開発しているダイニーでは、毎度利用する便利関数など、プロダクト横断で利用できる共通の実装の共有方法を色々と模索してきました。例えば、今回紹介する方法に移行する前は、モノレポで開発していることを生かして Symbolic Link を使った方法をツール化して採用していました。その方法ではソースコードそのものを直接共有しつつ利用側で適宜ビルドしていましたが、以下のような課題がありました。
+
+常に最新のファイルが参照されるため、共通部分の変化に気が付きにく...]]></description><link>https://zenn.dev/dinii/articles/59f77b05434305</link><guid isPermaLink="true">https://zenn.dev/dinii/articles/59f77b05434305</guid><pubDate>Thu, 20 Feb 2025 02:55:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vKSOrwWI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%25A4%25BE%25E5%2586%2585%2520NPM%2520%25E3%2583%2591%25E3%2583%2583%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B8%25E3%2581%25AE%25E4%25BD%259C%25E3%2582%258A%25E6%2596%25B9%2520with%2520Bun%2520%252B%2520Google%2520Cloud%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:whatasoda%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZhNTVhMGJiNDIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Dinii%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdlZWE3MDkzNTkuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>whatasoda</dc:creator></item><item><title><![CDATA[２０２５年最近の新規開発で使われる技術たち？]]></title><description><![CDATA[
+ 個人的な感想なので参考までに
+こんにちわJboyです。３月〜４月はフリーランスの案件が増える季節です。お仕事を変える方が多かったりするようです。あるいは前の案件が終わってしまい案件数が多い時期に探す😅
+ここ最近だとどんな技術が採用されているのか？
+
+私はフリーランスなので検索したら出てくるものや実際に面談で聞いた話を元にしています。意外と新しい技術は国内で普及してきているイメージがありました。
+
+
+ モバイル
+これは去年からあったのですが新規開発なのか？
+ネイティブアプリ（スマートフォンのアプリ）開発は、Flutterの案件が多いと聞きました。昔から運用されているものだと、Objec...]]></description><link>https://zenn.dev/joo_hashi/articles/7d0fb8f618f40e</link><guid isPermaLink="true">https://zenn.dev/joo_hashi/articles/7d0fb8f618f40e</guid><pubDate>Wed, 19 Feb 2025 23:35:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3PkATCLO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25EF%25BC%2592%25EF%25BC%2590%25EF%25BC%2592%25EF%25BC%2595%25E5%25B9%25B4%25E6%259C%2580%25E8%25BF%2591%25E3%2581%25AE%25E6%2596%25B0%25E8%25A6%258F%25E9%2596%258B%25E7%2599%25BA%25E3%2581%25A7%25E4%25BD%25BF%25E3%2582%258F%25E3%2582%258C%25E3%2582%258B%25E6%258A%2580%25E8%25A1%2593%25E3%2581%259F%25E3%2581%25A1%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:JboyHashimoto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNjOTBiY2M0M2YuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>JboyHashimoto</dc:creator></item><item><title><![CDATA[［型パズル］TypeScript で連番の配列に詳しい型を付ける]]></title><description><![CDATA[
+ 目標
+以下の返り値型の rangeArray 関数を実装すること。
+function rangeArray&lt;S extends number, E extends number&gt;(
+  start: S,
+  end: E,
+  step: number = 1
+): /* TODO */;
+
+const result: readonly [1, 2, 3, 4] = rangeArray(1, 5); // ok
+
+console.log(result); // [1, 2, 3, 4]
+start と end が（型計算が重くならない）十分小さな非負整数で start...]]></description><link>https://zenn.dev/noshiro_piko/articles/typescript-range-type</link><guid isPermaLink="true">https://zenn.dev/noshiro_piko/articles/typescript-range-type</guid><pubDate>Wed, 19 Feb 2025 16:19:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bYT-trjw--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25EF%25BC%25BB%25E5%259E%258B%25E3%2583%2591%25E3%2582%25BA%25E3%2583%25AB%25EF%25BC%25BDTypeScript%2520%25E3%2581%25A7%25E9%2580%25A3%25E7%2595%25AA%25E3%2581%25AE%25E9%2585%258D%25E5%2588%2597%25E3%2581%25AB%25E8%25A9%25B3%25E3%2581%2597%25E3%2581%2584%25E5%259E%258B%25E3%2582%2592%25E4%25BB%2598%25E3%2581%2591%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Hideaki%2520Noshiro%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2hIODg5WTZNWGM4YUZJb1M0dDl0Nm4tTWloS3pocGMyNXNtQ3BTSWc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Hideaki Noshiro</dc:creator></item><item><title><![CDATA[【React Native】Tailwind Variants みたいなユーティリティを実装してみる]]></title><description><![CDATA[普段はウェブの開発をするのですが、ネイティブアプリを作りたくなったのでReact Nativeを触り始めました。ウェブの開発では、コンポーネントのバリアントの定義にtailwind variantsをよく使うのですが、React Native でも同じ感じの実装がしたいなと思ったので実装してみます。（実装雑です。。）
+
+ 実装
+import { StyleProp, ViewStyle } from 'react-native'
+
+type StyleVariant&lt;T&gt; = {
+  [key: string]: {
+    [Key: string]: StyleProp&...]]></description><link>https://zenn.dev/vanellope/articles/cf3a0ff3792330</link><guid isPermaLink="true">https://zenn.dev/vanellope/articles/cf3a0ff3792330</guid><pubDate>Wed, 19 Feb 2025 16:10:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--m-T4gmqJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590React%2520Native%25E3%2580%2591Tailwind%2520Variants%2520%25E3%2581%25BF%25E3%2581%259F%25E3%2581%2584%25E3%2581%25AA%25E3%2583%25A6%25E3%2583%25BC%25E3%2583%2586%25E3%2582%25A3%25E3%2583%25AA%25E3%2583%2586%25E3%2582%25A3%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:marromugi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQyOWZmOTQwZmIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>marromugi</dc:creator></item><item><title><![CDATA[Cloudflare Workers AI 使ってみた「画像インペインティング編」]]></title><description><![CDATA[
+ はじめに
+こんにちは、いけがわです。
+今回は画像の一部を変更できる Stable Diffusion Inpainting モデル（stable-diffusion-v1-5-inpainting）を使用してみました。
+インペインティングは、画像内の特定部分に対して指示した変換（たとえば「犬をライオンに変える」など）を行う技術で、マスク画像を使って変換対象を指定する点が特徴です。
+
+ 前提条件
+この記事を進めるにあたり、以下の準備が必要です。
+
+
+Cloudflare アカウント
+Workers AI の利用に必須。対象のモデルが有効になっているか確認してください。
+
+Node.js...]]></description><link>https://zenn.dev/toraco/articles/77ca00c54c1b56</link><guid isPermaLink="true">https://zenn.dev/toraco/articles/77ca00c54c1b56</guid><pubDate>Wed, 19 Feb 2025 16:09:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7srMlY8N--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Cloudflare%2520Workers%2520AI%2520%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25E3%2580%258C%25E7%2594%25BB%25E5%2583%258F%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%259A%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2586%25E3%2582%25A3%25E3%2583%25B3%25E3%2582%25B0%25E7%25B7%25A8%25E3%2580%258D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:ikechan%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y5ZTBhNDI3ZjguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:toraco%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2581%25AE%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RlZTIxYjg3YWYuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ikechan</dc:creator></item><item><title><![CDATA[NextjsからPrisma経由でPostgreSQLに接続する]]></title><description><![CDATA[https://www.prisma.io/docs/getting-started/quickstart-sqlite
+上記を参考に進めていきます。サンプルはsqliteなので適宜読み替えていきます。
+まずはセットアップ
+npm install prisma --save-dev
+npx prisma init --datasource-provider postgresql
+PJの中に schema.prisma というファイルができるのでチュートリアルのORM設定を転記する。Azureで動かしてるPostgreSQLがあるのでそちらを使う。
+
+schema.prisma
+gener...]]></description><link>https://zenn.dev/kaikusakari/articles/53d65c3f155ce6</link><guid isPermaLink="true">https://zenn.dev/kaikusakari/articles/53d65c3f155ce6</guid><pubDate>Wed, 19 Feb 2025 16:04:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hn0OkrcE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Nextjs%25E3%2581%258B%25E3%2582%2589Prisma%25E7%25B5%258C%25E7%2594%25B1%25E3%2581%25A7PostgreSQL%25E3%2581%25AB%25E6%258E%25A5%25E7%25B6%259A%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E8%258D%2589%25E8%258B%2585%2520%25E5%25BF%25AB%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U3MzBlOTgxYmIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>草苅 快</dc:creator></item><item><title><![CDATA[WEBAPIのパスパラメータを取得する(Nextjs+TypeScript)]]></title><description><![CDATA[https://zenn.dev/kawaxumax/articles/9c4cea2d731dae
+上記を参考にさせていただきました。URLの途中に入っている数字をNextjsの機能で取得します。
+チュートリアルの以下も参考にします。
+https://nextjs.org/docs/app/building-your-application/routing/dynamic-routes
+今回は htt://localhost:3000/api/users/[path] のpath部分を取得します。
+GETリクエストを受け取るfuncとパスパラメータを取得します。
+
+/app/api/u...]]></description><link>https://zenn.dev/kaikusakari/articles/efa9f6dbab8aef</link><guid isPermaLink="true">https://zenn.dev/kaikusakari/articles/efa9f6dbab8aef</guid><pubDate>Wed, 19 Feb 2025 14:38:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--FKEGHTAb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:WEBAPI%25E3%2581%25AE%25E3%2583%2591%25E3%2582%25B9%25E3%2583%2591%25E3%2583%25A9%25E3%2583%25A1%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%2592%25E5%258F%2596%25E5%25BE%2597%25E3%2581%2599%25E3%2582%258B%2528Nextjs%252BTypeScript%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E8%258D%2589%25E8%258B%2585%2520%25E5%25BF%25AB%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U3MzBlOTgxYmIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>草苅 快</dc:creator></item><item><title><![CDATA[💡JavaScript, TypeScript, React, Next.js の違いをざっくり理解する💡]]></title><description><![CDATA[
+ はじめに
+Web開発をしていると、JavaScript, TypeScript, React, Next.js といった技術をよく耳にしますよね。この記事では、それぞれの役割や特徴を簡単に整理してみます。
+
+ 1. JavaScript とは？
+JavaScriptは、HTMLやCSSと組み合わせて使用される、クライアントサイド（ブラウザ）で実行されるプログラミング言語です。
+画面表示の動的な変更、ユーザーが入力した値に応じた計算などに幅広く使われます。
+Webページにアニメーションやインタラクションを加えることで、ユーザーにとって動きのある体験を提供できます。
+近年では Node....]]></description><link>https://zenn.dev/genly/articles/72273ec3b4ec85</link><guid isPermaLink="true">https://zenn.dev/genly/articles/72273ec3b4ec85</guid><pubDate>Wed, 19 Feb 2025 12:46:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--oCv2YHHG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%2520JavaScript%252C%2520TypeScript%252C%2520React%252C%2520Next.js%2520%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%25E3%2582%2592%25E3%2581%2596%25E3%2581%25A3%25E3%2581%258F%25E3%2582%258A%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2599%25E3%2582%258B%2520%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:GENLY_n%25E3%2581%2595%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAxZjVkNTAxMGEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>GENLY_nさん</dc:creator></item><item><title><![CDATA[初心者に優しい Next.js app router マイベストフォルダ設計]]></title><description><![CDATA[
+ 概要
+Next.js app routerでは、様々な記事でフォルダ設計が紹介されているものの、まだまだ課題があると感じております。
+私が試してみて、これがベストなんじゃないかと思うフォルダ設計(2025年2月時点)がありますので、それを紹介したいと思います。
+現状、全フロントエンドエンジニアがapp routerをキャッチアップしているわけではないと思う(少なくとも私の会社はそう)ので、「初心者に優しい」「難しすぎない」というのを意識してます。
+フロントエンドとしてVueやReactは書いているが、app routerを実務であまり使ったことのない方も入りやすいようにと思って考えま...]]></description><link>https://zenn.dev/sonicmoov/articles/e5ce7fb6d42267</link><guid isPermaLink="true">https://zenn.dev/sonicmoov/articles/e5ce7fb6d42267</guid><pubDate>Wed, 19 Feb 2025 12:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--aT_G7jDt--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E3%2581%25AB%25E5%2584%25AA%25E3%2581%2597%25E3%2581%2584%2520Next.js%2520app%2520router%2520%25E3%2583%259E%25E3%2582%25A4%25E3%2583%2599%25E3%2582%25B9%25E3%2583%2588%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25AB%25E3%2583%2580%25E8%25A8%25AD%25E8%25A8%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:yuu_aoringo%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY0YjYwNGE3MzguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2582%25BD%25E3%2583%258B%25E3%2583%2583%25E3%2582%25AF%25E3%2583%25A0%25E3%2583%25BC%25E3%2583%2596%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U2MWQzYjIxZDIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yuu_aoringo</dc:creator></item><item><title><![CDATA[【JavaScript】AND 演算子と OR 演算子についてまとめてみた]]></title><description><![CDATA[
+ JavaScript の AND 演算子と OR 演算子について
+JavaScript には論理演算を行うための演算子として、AND 演算子（&amp;&amp;）と OR 演算子（||）があります。これらは条件分岐や値の短絡評価などで頻繁に使われます。
+!
+備忘録として様々な演算子の中から昨今の開発で使う頻度が多くなった演算子について連続で記事を書いてきましたが、今回 AND 演算子と OR 演算子をまとめ、これを一旦最終回としたいと思います。
+過去の記事はこちら：
+【JavaScript】三項演算子についてまとめてみた
+【JavaScript】null 合体演算子についてまとめて...]]></description><link>https://zenn.dev/hayatech/articles/js-and-or-operator</link><guid isPermaLink="true">https://zenn.dev/hayatech/articles/js-and-or-operator</guid><pubDate>Wed, 19 Feb 2025 11:11:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--tjP1JCgp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590JavaScript%25E3%2580%2591AND%2520%25E6%25BC%2594%25E7%25AE%2597%25E5%25AD%2590%25E3%2581%25A8%2520OR%2520%25E6%25BC%2594%25E7%25AE%2597%25E5%25AD%2590%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:HayaTech%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAyNWM3ODUyMDMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>HayaTech</dc:creator></item><item><title><![CDATA[脆弱性報告で GitHub から $4,000 貰った話]]></title><description><![CDATA[
+ はじめに
+こんにちは、ダイニーの ogino です。
+この記事では GitHub の bug bounty で脆弱性を報告し、実際に報奨金を受け取った時の体験を共有します。
+私は特にセキュリティの専門家ではなく、偶然に問題を見つけて初めて報告をしました。読者の方が同じようなチャンスに遭遇した時スムーズに行くように、海外からお金を受け取る上での意外なつまずきポイントや、実際に貰える金額などについて紹介します。
+
+ どんな問題を見つけたのか
+!
+GitHub の脆弱性報告プログラムのルールで、脆弱性について自由に write-up を書いてよいことになっています。
+
+You are fr...]]></description><link>https://zenn.dev/dinii/articles/0bf9e893c7879c</link><guid isPermaLink="true">https://zenn.dev/dinii/articles/0bf9e893c7879c</guid><pubDate>Wed, 19 Feb 2025 03:00:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xZByLZXp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%2584%2586%25E5%25BC%25B1%25E6%2580%25A7%25E5%25A0%25B1%25E5%2591%258A%25E3%2581%25A7%2520GitHub%2520%25E3%2581%258B%25E3%2582%2589%2520%25244%252C000%2520%25E8%25B2%25B0%25E3%2581%25A3%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:ogino%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZhNTVhMGJiNDIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Dinii%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRkNWJkMjFjOWEuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ogino</dc:creator></item><item><title><![CDATA[Reactのレビューポイント]]></title><description><![CDATA[
+ コンポーネント設計と責任の分離
+
+単一責任の原則
+
+各コンポーネントが一つの明確な目的を持ち、過度に肥大化していないか。プレゼンテーションとロジックの分離が適切に行われているか。
+
+
+再利用性とコンポーネントの分割
+
+複雑なUIは小さなコンポーネントに分解され、必要に応じて再利用可能な形で実装されているか。
+
+
+
+
+ Hooks の適切な利用
+
+基本的なHooksの正しい使用
+
+useState, useEffect, useContext などが正しく使われ、副作用の管理や状態管理が適切に行われているか。
+
+
+依存配列の適正管理
+
+useEffect や useCallback, ...]]></description><link>https://zenn.dev/okamyuji/articles/5922a782148893</link><guid isPermaLink="true">https://zenn.dev/okamyuji/articles/5922a782148893</guid><pubDate>Tue, 18 Feb 2025 18:37:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--df6_nuT6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%25E3%2581%25AE%25E3%2583%25AC%25E3%2583%2593%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%259D%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:okamyuji%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY5YjFmNDYyYjkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>okamyuji</dc:creator></item><item><title><![CDATA[TypeORMのレビューポイント]]></title><description><![CDATA[
+ エンティティ定義とリレーションの正確な設定
+
+エンティティの設計
+
+@Entity, @Column, @PrimaryColumn/@PrimaryGeneratedColumn などのデコレーターが正しく使われ、各エンティティの責務が明確か。
+
+
+リレーションの定義
+
+@OneToMany, @ManyToOne, @ManyToMany, @OneToOne の関係が適切に定義され、必要に応じて lazy/eager ローディングが使い分けられているか。
+
+
+
+
+ パフォーマンスとクエリの最適化
+
+N+1問題の回避
+
+リレーションの取得方法やJOINの使用方法を見直し、不要なク...]]></description><link>https://zenn.dev/okamyuji/articles/22834e0a97f5e5</link><guid isPermaLink="true">https://zenn.dev/okamyuji/articles/22834e0a97f5e5</guid><pubDate>Tue, 18 Feb 2025 18:34:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--XGelz8Uu--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeORM%25E3%2581%25AE%25E3%2583%25AC%25E3%2583%2593%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%259D%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:okamyuji%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY5YjFmNDYyYjkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>okamyuji</dc:creator></item></channel></rss>
