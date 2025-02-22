@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Rust」のフィード]]></title><description><![CDATA[Zennのトピック「Rust」のRSSフィードです]]></description><link>https://zenn.dev/topics/rust</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ba09661577.png</url><title>Zennの「Rust」のフィード</title><link>https://zenn.dev/topics/rust</link></image><generator>zenn.dev</generator><lastBuildDate>Sat, 22 Feb 2025 09:43:20 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/rust/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[C++とRustで純粋再帰]]></title><description><![CDATA[こんな関数を書きたいと思ったことはありませんか？
+
+Scheme
+(define (counter count)
+  (lambda () 
+    (display count)
+    (counter (+ count 1))))
+
+戻り値にクロージャーを置いて、関数を呼び出す度に引数の値を更新していく擬似的な再帰です
+お手軽に反復カウンターが実装できる便利な関数ですが、戻り値の型は
+counter:int-&gt;(int-&gt;(int-&gt;...)-&gt;...)
+と無限ループしてしまい、静的型付けでは容易に実装できません
+型がループするような戻り値の実装には、クロー...]]></description><link>https://zenn.dev/usagi123/articles/2616adf237e791</link><guid isPermaLink="true">https://zenn.dev/usagi123/articles/2616adf237e791</guid><pubDate>Sat, 22 Feb 2025 08:47:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Y2p4Ptid--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:C%252B%252B%25E3%2581%25A8Rust%25E3%2581%25A7%25E7%25B4%2594%25E7%25B2%258B%25E5%2586%258D%25E5%25B8%25B0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25B7%25E3%2583%25AD%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RjMmVhM2JhOGIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>シロ</dc:creator></item><item><title><![CDATA[Rustで書くN体シミュレーション]]></title><description><![CDATA[
+
+ N体シミュレーション
+N体シミュレーションは、複数の粒子が相互に引力や斥力を及ぼし合う動きを数値的に解く手法です。天体の軌道計算や粒子の相互作用をモデル化する際に使用され、物理学や天文学などで広く利用されます。
+この記事では、重力相互作用を考慮し、各ステップで粒子の加速度・速度・位置を更新しながら粒子に見立てたパーティクルの運動をシミュレートするシンプルなN体シミュレーションをRustで実装します。
+実装原理は下記記事の直接計算法を参考にします。直接計算法では、計算量はO(N^2)の計算量となります。
+https://medium.com/swlh/create-your-own-...]]></description><link>https://zenn.dev/kkent030315/articles/5837f59206d912</link><guid isPermaLink="true">https://zenn.dev/kkent030315/articles/5837f59206d912</guid><pubDate>Fri, 21 Feb 2025 20:40:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9jqOWXX---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25A7%25E6%259B%25B8%25E3%2581%258FN%25E4%25BD%2593%25E3%2582%25B7%25E3%2583%259F%25E3%2583%25A5%25E3%2583%25AC%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kkent030315%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI0NTk2NTRjZGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kkent030315</dc:creator></item><item><title><![CDATA[Rust on ESP32 の環境構築で2日溶けた話]]></title><description><![CDATA[
+ Conclusion
+
+ esp channel にターゲティングするには cargo +esp ~~
+
+ Target
+https://github.com/esp-rs
+https://lilygo.cc/products/t-watch-2020-v3?srsltid=AfmBOoqtYouWdlm4nJQCDLiRNCfX_PLbNGNgD0Xcf6qEHZh2-30VyoOC
+※技適の実験届出が必要
+
+ Reference
+https://lang-ship.com/blog/work/esp32-std-rust-1/
+https://note.com/shirokuma...]]></description><link>https://zenn.dev/placeless/articles/zenn_article-18</link><guid isPermaLink="true">https://zenn.dev/placeless/articles/zenn_article-18</guid><pubDate>Thu, 20 Feb 2025 20:35:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2dMASxXA--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%2520on%2520ESP32%2520%25E3%2581%25AE%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%25A72%25E6%2597%25A5%25E6%25BA%25B6%25E3%2581%2591%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yoshitaka%2520Naraoka%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0VmQkZHLW5HaTlYX192SU4xUGNHUVFiTFFMOV9wYmZ5VWVVdlhlNUpfY291ZD1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yoshitaka Naraoka</dc:creator></item><item><title><![CDATA[WebAssemblyで遊びたい！準備編]]></title><description><![CDATA[こんにちは！kirigayaです。
+WebAssemblyで遊んでいこうと思います。
+この記事は環境構築だけです。
+遊ぶ理由としては面白そうだったから...これしかありません。
+参考にした本はこちら
+https://learning.oreilly.com/library/view/rusttowebassemblyniyorugemukai-fa-an-quan-gao-su-puratutohuomufei-yi-cun-nowebapurikai-fa-ru-men/9784814400393/
+さっそく遊び場(環境)の構築からやっていきます。
+OSはmacです。
+最初はRust以...]]></description><link>https://zenn.dev/iwatagumi/articles/a364b197b4ff46</link><guid isPermaLink="true">https://zenn.dev/iwatagumi/articles/a364b197b4ff46</guid><pubDate>Wed, 19 Feb 2025 17:21:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--n5duT7R7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:WebAssembly%25E3%2581%25A7%25E9%2581%258A%25E3%2581%25B3%25E3%2581%259F%25E3%2581%2584%25EF%25BC%2581%25E6%25BA%2596%25E5%2582%2599%25E7%25B7%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:kirigaya%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U1MjI0YmNkMDYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E5%25B2%25A9%25E7%2594%25B0%25E7%25B5%2584%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JmNGYxNzkwNDMuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kirigaya</dc:creator></item><item><title><![CDATA[【Rust】Hello egui: eguiを動かす]]></title><description><![CDATA[
+ Prerequisites: 前提条件
+この記事を読むには Rust の以下の知識が少なくとも必要です．
+
+Rust の関数，クロージャ，所有権を知っていること．
+Cargo.toml で外部クレートが呼び出せる．
+
+
+ この記事は？
+Rust で egui を動かすだけの記事です．
+egui クレートについて：
+https://docs.rs/egui/latest/egui/
+
+ egui とは？
+egui クレートについては以下のドキュメントや，検索すればかなり情報が出ていると思います．
+https://docs.rs/egui/latest/egui/
+一言で言えば，egui...]]></description><link>https://zenn.dev/imashroom/articles/hello-egui-rust</link><guid isPermaLink="true">https://zenn.dev/imashroom/articles/hello-egui-rust</guid><pubDate>Wed, 19 Feb 2025 13:19:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--FFWmXiFH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Rust%25E3%2580%2591Hello%2520egui%253A%2520egui%25E3%2582%2592%25E5%258B%2595%25E3%2581%258B%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:imash%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTFJld0wwT1J4akhqVTMxN1BJdWo1eEEza2ZYejUxbUZZWm90ZXFvWGdXaXNBYzNZST1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>imash</dc:creator></item><item><title><![CDATA[Rustの誤解と改善]]></title><description><![CDATA[ChatGPT にこんな要求をしました。
+
+Rust自体は難しい言語ではなく、むしろ単純な機能の組み合わせで豊かな表現力を提供しています。なのに、他言語の複雑な機能をRustで再現しようとして混乱する人が跡を絶たず、いつの間にかRustは難しいという誤解が定着してしまいました。そこで、他言語の考え方をRustに持ち込んで失敗した例をいくつか挙げ、改善案を教えて下さい。
+
+本記事は ChatGPT の出力をまとめたものです。
+
+ GPT-4o
+色々試したのですが、まず2025年2月18日時点のGPT-4oから。
+
+確かに、Rustの設計はシンプルな概念の組み合わせですが、他言語の習慣を持ち...]]></description><link>https://zenn.dev/toga/articles/rust-pitfalls</link><guid isPermaLink="true">https://zenn.dev/toga/articles/rust-pitfalls</guid><pubDate>Tue, 18 Feb 2025 00:34:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--FMzgAlID--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25AE%25E8%25AA%25A4%25E8%25A7%25A3%25E3%2581%25A8%25E6%2594%25B9%25E5%2596%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A8%25E3%2581%258C%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q1NTBlNjIzOTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>とが</dc:creator></item><item><title><![CDATA[Rust + Clean Architecture で実装する REST API サーバーの安全な認可の仕組みを考える]]></title><description><![CDATA[
+ はじめに
+Web アプリケーションサーバーを実装するうえで、認可処理については頻繁に議論されているかつ実装の難しさを指摘されることが多い分野です。認可制御を適切に行わないと、権限のないユーザーがリソースにアクセスできる脆弱性が生じる可能性があり、ソフトウェア開発をする上で重要な実装です。
+本稿では、Rust と Clean Architecture(DDD) を用いた Web アプリケーションサーバーにおいて、安全な認可の仕組みをどのように実装できるかを考察します。これは、実際に Rust と Clean Architecture を用いて REST API サーバーを実装するうえで...]]></description><link>https://zenn.dev/rito528/articles/63fcc830ef59eb</link><guid isPermaLink="true">https://zenn.dev/rito528/articles/63fcc830ef59eb</guid><pubDate>Mon, 17 Feb 2025 14:55:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8CbiWTka--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%2520%252B%2520Clean%2520Architecture%2520%25E3%2581%25A7%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2599%25E3%2582%258B%2520REST%2520API%2520%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2581%25AE%25E5%25AE%2589%25E5%2585%25A8%25E3%2581%25AA%25E8%25AA%258D%25E5%258F%25AF%25E3%2581%25AE%25E4%25BB%2595%25E7%25B5%2584%25E3%2581%25BF%25E3%2582%2592%25E8%2580%2583%25E3%2581%2588%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:rito528%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2cweFlST1ZFRVE2bG5hbFlsMWk1bTFKUDVOeThsV0R6dzV1TjI0YXc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>rito528</dc:creator></item><item><title><![CDATA[ABC393:Rustで解く！問題解説]]></title><description><![CDATA[AtCoder Beginner Contest 393のA~F問題をRustで解いた際の解法をまとめました。
+
+ A問題
+問題
+https://atcoder.jp/contests/abc393/tasks/abc393_a
+解説
+入力で与えられるS_1とS_2は、以下の4通りに場合分けして処理することができます。
+
+
+S_1とS_2が sick の場合
+
+S_1が sick、S_2が fine の場合
+
+S_1が fine、S_2が sick の場合
+
+S_1とS_2が fine の場合
+
+各場合に応じた出力を行います。
+コード
+use proconio::input;
+
+fn m...]]></description><link>https://zenn.dev/nakst_hide/articles/d5026180dcde78</link><guid isPermaLink="true">https://zenn.dev/nakst_hide/articles/d5026180dcde78</guid><pubDate>Sun, 16 Feb 2025 12:16:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BA-3eOPY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ABC393%253ARust%25E3%2581%25A7%25E8%25A7%25A3%25E3%2581%258F%25EF%25BC%2581%25E5%2595%258F%25E9%25A1%258C%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nakahide%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YkMxNEpSQnNET01hTGcxTVRQWGNTWS1qYlNQbFRMQTN3ZU9Sdz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nakahide</dc:creator></item><item><title><![CDATA[arm64 Cargo Lambda で reqwest]]></title><description><![CDATA[
+ 内容
+タイトルの通り arm64 の cargo lambda から reqwest で http リクエストをする。
+Rust の Lambda を arm64 で作ろうとしたら reqwest が上手く動かない、そもそもビルドが通らないなどに出くわす。その解決手段とサンプルを記す。
+https://github.com/Creanciel/ZennCargoLambda
+
+ 本記事で述べること
+
+ CDK を使って Cargo Lambda の zip デプロイ
+Cargo Lambda のデプロイ方法は ECR からコンテナイメージをデプロイする方法と bootstrap.zi...]]></description><link>https://zenn.dev/creanciel/articles/cargo-lambda</link><guid isPermaLink="true">https://zenn.dev/creanciel/articles/cargo-lambda</guid><pubDate>Sun, 16 Feb 2025 09:48:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Gmimgpsh--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:arm64%2520Cargo%2520Lambda%2520%25E3%2581%25A7%2520reqwest%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Creanciel%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzIwOWFkYmIxNjAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Creanciel</dc:creator></item><item><title><![CDATA[[Rust] 型推論実装してみた]]></title><description><![CDATA[しばらく間が空きましたが、 Rust で作るプログラミング言語シリーズです。
+https://www.amazon.co.jp/dp/4297141922
+モダンな言語の多くは型推論の機能を備えています。型推論はコード量を抑えるだけではなく、リファクタリング時に必要な変更を減らしてくれる有用な機能です。静的型付け言語では特に効果が高いといえます。
+実装は Mascal 言語に対して行っています。
+https://github.com/msakuta/mascal?tab=readme-ov-file
+
+ 型推論とは
+型推論とは省略した型宣言を自動的に補完する機能です。 Rust プログラ...]]></description><link>https://zenn.dev/msakuta/articles/10c571093538d7</link><guid isPermaLink="true">https://zenn.dev/msakuta/articles/10c571093538d7</guid><pubDate>Sun, 16 Feb 2025 08:30:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dLUCcHx5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BRust%255D%2520%25E5%259E%258B%25E6%258E%25A8%25E8%25AB%2596%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:msakuta%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFUWEFKeG5tZ0ZYQlJsZjJpZVh1QWlwOG9LaFdpT2FSczg2dXRzWlcwN3o9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>msakuta</dc:creator></item><item><title><![CDATA[Rust Lambda を AWS CDK で簡単管理！Cargo Lambda CDK を試してみた]]></title><description><![CDATA[
+
+ 1. はじめに
+
+ この記事は何 ?
+Cargo Lambda CDK というライブラリの紹介です.
+
+ 対象読者
+
+Rust を書きたい人
+AWS Lambda 関数を使って開発したい人
+
+
+ この記事で解説しないこと
+
+Rust について
+AWS CDK について
+
+
+ 成果物
+Cargo Lambda CDK を使ったコードは以下に置いています．
+https://github.com/virtual-hippo/hello-cargo-lambda-cdk?tab=readme-ov-file#hello-cargo-lambda-cdk
+
+ 2. 前置き
+コードの解説だけ読...]]></description><link>https://zenn.dev/virtual_hippo/articles/5d10cae228722c</link><guid isPermaLink="true">https://zenn.dev/virtual_hippo/articles/5d10cae228722c</guid><pubDate>Sun, 16 Feb 2025 06:47:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--boy_PSUp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%2520Lambda%2520%25E3%2582%2592%2520AWS%2520CDK%2520%25E3%2581%25A7%25E7%25B0%25A1%25E5%258D%2598%25E7%25AE%25A1%25E7%2590%2586%25EF%25BC%2581Cargo%2520Lambda%2520CDK%2520%25E3%2582%2592%25E8%25A9%25A6%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25AB%25E3%2583%2590%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZmNGMwNDg2ZWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>カバ</dc:creator></item><item><title><![CDATA[Rust & Wasm でミニゲームを作る時のサンプル]]></title><description><![CDATA[
+ はじめに
+WebAssemblyを使いミニゲームを作成する際、WASMの作法に、Rustの借用や所有権、クロージャ、ジェネリクスなどのモダン仕様が重なると、自作アプリのビルドを通すのに苦労します。そこで、'web_bindgen'や、'web-sys'処理をPoC(試行錯誤※)するための、シンプル(1ファイルでなるべくコーディング量が少ない)なミニゲーム用の"Rust &amp; Waws"サンプルを作成しました。また、ブラウザーからのコールバックを受け取る方法は、たくさんの情報が公開されていますが、それでも、自由に使えるようになるまで理解するには、時間がかかりました。今回のサンプル...]]></description><link>https://zenn.dev/yurioka/articles/8ea8c31d8a7d98</link><guid isPermaLink="true">https://zenn.dev/yurioka/articles/8ea8c31d8a7d98</guid><pubDate>Sun, 16 Feb 2025 05:57:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jCAdNHSq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%2520%2526%2520Wasm%2520%25E3%2581%25A7%25E3%2583%259F%25E3%2583%258B%25E3%2582%25B2%25E3%2583%25BC%25E3%2583%25A0%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%25E6%2599%2582%25E3%2581%25AE%25E3%2582%25B5%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AB%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:myurioka%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY3YTE2NGMzMzkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>myurioka</dc:creator></item><item><title><![CDATA[【Rust】Azure OpenAI Apiに接続する方法]]></title><description><![CDATA[
+ 【Rust】Azure OpenAI APIと通信する方法
+この記事では、Rustのをasync-openaiクレートを用いてAzure OpenAI APIに接続し、チャット形式のリクエストを送信する方法を解説します。async-openaiクレートはopenAIのApiだけでなく、Azure OpenAI API対応しています。
+
+
+ 1. 処理の全体の流れ
+今回のコード例では、以下の手順でAzure OpenAI APIと通信を行っています。
+
+
+環境変数の設定: APIキーやエンドポイント、APIバージョンなどの設定値を.envファイルを読み込み。
+
+Azure API接続の...]]></description><link>https://zenn.dev/beginote/articles/f03b0d8c3c4db9</link><guid isPermaLink="true">https://zenn.dev/beginote/articles/f03b0d8c3c4db9</guid><pubDate>Sun, 16 Feb 2025 03:31:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vbCoZgJR--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Rust%25E3%2580%2591Azure%2520OpenAI%2520Api%25E3%2581%25AB%25E6%258E%25A5%25E7%25B6%259A%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Zone%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTDRQazlDa2Fhdm9tRENjX0kzYVh3U1BHcFpDZDdvcnVJalNEYmtmV1NDPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Zone</dc:creator></item><item><title><![CDATA[Rustのndarrayにtensordotが無いので自分で作った]]></title><description><![CDATA[
+ はじめに
+ndarrayクレートはNumpyのRust版のようなものです。Numpyに存在する多くの機能が実装されていますが、記事執筆時点（バージョン0.16.1）ではmoveaxisやtensordotに相当する機能がありません。
+そこでこれらに相当する関数を自作しました。
+この記事では具体的な実装方法を紹介します。
+
+ 成果物
+https://github.com/inomata137/ndarray_tensor_utils
+
+ 本編
+
+ moveaxis
+moveaxisそれ自体はndarrayに無いのですが、近い機能を提供するpermuted_axes関数があります。
+両者...]]></description><link>https://zenn.dev/taro137/articles/075d7c57f1b7d0</link><guid isPermaLink="true">https://zenn.dev/taro137/articles/075d7c57f1b7d0</guid><pubDate>Sun, 16 Feb 2025 02:18:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--IMZwoJIK--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25AEndarray%25E3%2581%25ABtensordot%25E3%2581%258C%25E7%2584%25A1%25E3%2581%2584%25E3%2581%25AE%25E3%2581%25A7%25E8%2587%25AA%25E5%2588%2586%25E3%2581%25A7%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Taro%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBlOGE5ZGM1NjEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Taro</dc:creator></item><item><title><![CDATA[Rust における抽象化の多層性とゼロコストの両立]]></title><description><![CDATA[
+ Rust における抽象化の多層性とゼロコストの両立
+― 宣言的、命令的、関数型、オブジェクト指向、メタプログラミングの観点からの総まとめ ―
+
+ はじめに
+プログラミング言語には、さまざまなパラダイムが存在します。大きく分けると、命令的（Imperative）、宣言的（Declarative）、関数型（Functional） といった考え方があります。これらのパラダイムは、コードの書き方やプログラムの構造に対する考え方を示しており、各言語はそれぞれ独自の抽象化の手法を提供しています。
+この記事では、まず「命令的プログラミングとは何か？」という基本概念から始め、宣言的、関数型、オブジェ...]]></description><link>https://zenn.dev/kokimu/articles/62c9f01c9c0b7f</link><guid isPermaLink="true">https://zenn.dev/kokimu/articles/62c9f01c9c0b7f</guid><pubDate>Sun, 16 Feb 2025 01:08:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--FR2yMb3h--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%2520%25E3%2581%25AB%25E3%2581%258A%25E3%2581%2591%25E3%2582%258B%25E6%258A%25BD%25E8%25B1%25A1%25E5%258C%2596%25E3%2581%25AE%25E5%25A4%259A%25E5%25B1%25A4%25E6%2580%25A7%25E3%2581%25A8%25E3%2582%25BC%25E3%2583%25AD%25E3%2582%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2581%25AE%25E4%25B8%25A1%25E7%25AB%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2593%25E3%2583%25BC%25E3%2581%258D%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2UwZTkxNWRmMTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>こーき</dc:creator></item><item><title><![CDATA[WebAssemblyに入門してみた]]></title><description><![CDATA[WebAssembly
+ブラウザでPostgreSQLが動く、ターミナルも動く
+なんて、素晴らしい
+ということで、入門
+ついでに、興味のあったRustも使ってみる
+Fedoraで検証してます。
+動かしてみるが優先なので構成とか解説などはないです。。
+
+ 環境準備
+
+ Rustのインストール
+ここは手抜きでasdfを使う
+asdfのインストールはGetting Startedの通りなので、省略。。。
+Rustをインストールするためには、asdfにpluginをインストール
+asdf plugin-list-all | grep -i rust
+→ plugin-list-allで全plug...]]></description><link>https://zenn.dev/summer_fb/articles/f91230a493f5d2</link><guid isPermaLink="true">https://zenn.dev/summer_fb/articles/f91230a493f5d2</guid><pubDate>Sat, 15 Feb 2025 23:10:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--VT9s-_nw--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:WebAssembly%25E3%2581%25AB%25E5%2585%25A5%25E9%2596%2580%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:summer%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUxtNXd1MC00QWxicjV1OXRYWFZ4V2dpNkIwOWE4Yl9FX0xjOTB5cmRXMEVRYjA9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>summer</dc:creator></item><item><title><![CDATA[Webサーバーがどのようにリクエストを並行に処理しているのか、説明できなかったのでRustでコードを書いてみる]]></title><description><![CDATA[
+ はじめに
+Webサーバーがどのように大量のリクエストを並行に処理しているのか、説明できますか？
+私は今まで、実際のところどのようにこれらが実装されているのかをよくわかっておらず、ブロッキングなコードを書いてしまったりしていました🤫
+結論から述べると、Webアプリケーションでは、リクエストが大量に来た場合にいかに効率よく処理するために「並行（Concurrency）」や「並列（Parallelism）」を利用しています。
+今回の記事では、この並行処理が実際のところどのように動作するのか、Rustのサンプルコードを示しつつ、解説していきます。
+
+ 単一スレッドによるシンプルなサーバー
+最...]]></description><link>https://zenn.dev/sobacha/articles/4744d2206802cb</link><guid isPermaLink="true">https://zenn.dev/sobacha/articles/4744d2206802cb</guid><pubDate>Sat, 15 Feb 2025 11:55:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--LLFDofod--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Web%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2581%258C%25E3%2581%25A9%25E3%2581%25AE%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E3%2583%25AA%25E3%2582%25AF%25E3%2582%25A8%25E3%2582%25B9%25E3%2583%2588%25E3%2582%2592%25E4%25B8%25A6%25E8%25A1%258C%25E3%2581%25AB%25E5%2587%25A6%25E7%2590%2586%25E3%2581%2597%25E3%2581%25A6%25E3%2581%2584%25E3%2582%258B%25E3%2581%25AE%25E3%2581%258B%25E3%2580%2581%25E8%25AA%25AC%25E6%2598%258E%25E3%2581%25A7%25E3%2581%258D%25E3%2581%25AA%25E3%2581%258B%25E3%2581%25A3%25E3%2581%259F%25E3%2581%25AE%25E3%2581%25A7Rust%25E3%2581%25A7%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2582%2592%25E6%259B%25B8%25E3%2581%2584%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:sobacha%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRiY2U2YWU2MDMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sobacha</dc:creator></item><item><title><![CDATA[tokio::net::TcpListenerは正しく設定しないとブロッキング動作する場合がある]]></title><description><![CDATA[
+ 環境
+tokio のバージョンは 1.43.0。
+説明のためコードは簡略化している。
+
+ 発生した問題
+tokio::net::TcpListener の accept で一定時間接続が無かった場合にキャンセル操作を行いたい。
+そこで、tokio::time::sleep と select! を使って、タイムアウト処理を実装してみる。（tokio::time::timeout を使うのが一番良いが、ログ挿入の都合上この方式を取っている）。
+fn print_with_time(msg: &amp;str) {
+    let now = std::time::SystemTime::...]]></description><link>https://zenn.dev/mai/articles/778850153b27eb</link><guid isPermaLink="true">https://zenn.dev/mai/articles/778850153b27eb</guid><pubDate>Sat, 15 Feb 2025 10:06:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--XvxEFBrv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:tokio%253A%253Anet%253A%253ATcpListener%25E3%2581%25AF%25E6%25AD%25A3%25E3%2581%2597%25E3%2581%258F%25E8%25A8%25AD%25E5%25AE%259A%25E3%2581%2597%25E3%2581%25AA%25E3%2581%2584%25E3%2581%25A8%25E3%2583%2596%25E3%2583%25AD%25E3%2583%2583%25E3%2582%25AD%25E3%2583%25B3%25E3%2582%25B0%25E5%258B%2595%25E4%25BD%259C%25E3%2581%2599%25E3%2582%258B%25E5%25A0%25B4%25E5%2590%2588%25E3%2581%258C%25E3%2581%2582%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mai%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhMmVkNzNmNjIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mai</dc:creator></item><item><title><![CDATA[Rustのpostgres用sqlcプラグインを作った]]></title><description><![CDATA[この記事は自身のブログにも掲載しています
+
+ はじめに
+Rustのpostgres用のsqlcプラグインを作ったので、その紹介です
+https://github.com/tunamaguro/sqlc-rust-postgres
+
+ 作った経緯
+今回作成した主な理由は、Rust向けのsqlcプラグインを私が見つけられなかったためです。個人的にSQLを直接記述するスタイルが好みで、このスタイルを実現するためのツールとしてCornucopiaがありました。ですが、2025年現在すでにメンテナンスが終了していたため終了していたため、今回自身でプラグインを書くことにしました
+
+ 実際の使用例
+セ...]]></description><link>https://zenn.dev/tunamaguro/articles/41f8c07f4c55b4</link><guid isPermaLink="true">https://zenn.dev/tunamaguro/articles/41f8c07f4c55b4</guid><pubDate>Fri, 14 Feb 2025 10:17:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GxGtAhGK--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25AEpostgres%25E7%2594%25A8sqlc%25E3%2583%2597%25E3%2583%25A9%25E3%2582%25B0%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tunamaguro%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvdC5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tunamaguro</dc:creator></item><item><title><![CDATA[快適なRust開発体験を求めて - マシンパワー盛り盛り編]]></title><description><![CDATA[Rustの開発を快適にするためにRyzen 9 9950Xを導入し、1週間ほど経過した。
+乗り換え前に使っていたM3 Max MacBook Proと比較しての現時点での感想をまとめておく。
+
+ 動機
+乗り換えの最大の動機はモンスターハンターワイルズをプレイするためにWindowsマシンが必要だったから仕事で書いているRustプロジェクトの開発体験が悪く、集中力を持続させながら開発を行うことが難しいと感じていたため。
+具体的には、ある場所で型エラーが出ているとき、「.into()差し込めば直るかな～」といったお祈り修正をすることがある（もちろん完全に当てずっぽうというわけではなく、あわせ...]]></description><link>https://zenn.dev/magurotuna/articles/ryzen9-9950x</link><guid isPermaLink="true">https://zenn.dev/magurotuna/articles/ryzen9-9950x</guid><pubDate>Fri, 14 Feb 2025 10:03:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--sfqt1wm---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%25BF%25AB%25E9%2581%25A9%25E3%2581%25AARust%25E9%2596%258B%25E7%2599%25BA%25E4%25BD%2593%25E9%25A8%2593%25E3%2582%2592%25E6%25B1%2582%25E3%2582%2581%25E3%2581%25A6%2520-%2520%25E3%2583%259E%25E3%2582%25B7%25E3%2583%25B3%25E3%2583%2591%25E3%2583%25AF%25E3%2583%25BC%25E7%259B%259B%25E3%2582%258A%25E7%259B%259B%25E3%2582%258A%25E7%25B7%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:magurotuna%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dNUGF0cWN1MUh1d1dEcG5uVzRETFVxZlI5aDlOM1NFc3FmaWdYZkE9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>magurotuna</dc:creator></item></channel></rss>

@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Docker」のフィード]]></title><description><![CDATA[Zennのトピック「Docker」のRSSフィードです]]></description><link>https://zenn.dev/topics/docker</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/75b80a5922.png</url><title>Zennの「Docker」のフィード</title><link>https://zenn.dev/topics/docker</link></image><generator>zenn.dev</generator><lastBuildDate>Sat, 22 Feb 2025 09:03:41 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/docker/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Next.js × Docker 最速環境構築]]></title><description><![CDATA[
+ 詳しくDockerを知りたい方向け
+https://zenn.dev/kate0418/articles/4910b4c94acbba
+
+
+
+ 【 事前準備 】
+.
+├── docker-compose.yml
+└── Dockerfile
+
+
+
+ 【 ディレクトリ作成 】
+
+ 1. ファイルを編集
+
+ Dockerfile
+FROM node
+WORKDIR /workdir
+
+ docker-compose.yml
+services:
+  app:
+    build: ./
+    volumes:
+      - .:/workdir
+
+ 2. コンテナに入る
+
+ ターミナル...]]></description><link>https://zenn.dev/kate0418/articles/db4eecb906ba58</link><guid isPermaLink="true">https://zenn.dev/kate0418/articles/db4eecb906ba58</guid><pubDate>Sat, 22 Feb 2025 09:01:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fuM2LdNn--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Next.js%2520%25C3%2597%2520Docker%2520%25E6%259C%2580%25E9%2580%259F%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2591%25E3%2581%2583%25E3%2581%25A8%25C2%25B0%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU3OWNhMjkxZTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>けぃと°</dc:creator></item><item><title><![CDATA[Laravel × Docker 最速環境構築]]></title><description><![CDATA[
+ 詳しくDockerを知りたい方向け
+https://zenn.dev/kate0418/articles/4910b4c94acbba
+
+
+
+ 【 事前準備 】
+.
+├── docker-compose.yml
+└── Dockerfile
+
+
+
+ 【 ディレクトリ作成 】
+
+ 1. ファイルを編集
+
+ Dockerfile
+FROM php:8.4
+WORKDIR /workdir
+COPY --from=composer:2.7 /usr/bin/composer /usr/bin/composer
+ENV COMPOSER_ALLOW_SUPERUSER=1
+ENV COMPO...]]></description><link>https://zenn.dev/kate0418/articles/d6a0a71bd7ece9</link><guid isPermaLink="true">https://zenn.dev/kate0418/articles/d6a0a71bd7ece9</guid><pubDate>Sat, 22 Feb 2025 08:41:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--55sxrCTV--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Laravel%2520%25C3%2597%2520Docker%2520%25E6%259C%2580%25E9%2580%259F%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2591%25E3%2581%2583%25E3%2581%25A8%25C2%25B0%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU3OWNhMjkxZTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>けぃと°</dc:creator></item><item><title><![CDATA[EC2内でdocker composeコマンドを使えるようにする]]></title><description><![CDATA[
+ サーバー内で以下を実行
+sudo dnf update &amp;&amp;
+sudo dnf install -y docker &amp;&amp;
+sudo systemctl start docker &amp;&amp;
+sudo systemctl enable docker &amp;&amp;
+sudo usermod -aG docker $USER &amp;&amp;
+mkdir -p ~/.docker/cli-plugins/ &amp;&amp;
+curl -SL "https://github.com/docker/compose/releases/do...]]></description><link>https://zenn.dev/kate0418/articles/0c13fc5cc61f98</link><guid isPermaLink="true">https://zenn.dev/kate0418/articles/0c13fc5cc61f98</guid><pubDate>Sat, 22 Feb 2025 08:19:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--pKvHrYs1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:EC2%25E5%2586%2585%25E3%2581%25A7docker%2520compose%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2588%25E3%2582%258B%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2591%25E3%2581%2583%25E3%2581%25A8%25C2%25B0%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU3OWNhMjkxZTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>けぃと°</dc:creator></item><item><title><![CDATA[10分で動かすローカルLLM（Mac×Docker×Ollama×DeepSeek編）]]></title><description><![CDATA[
+ はじめに
+ただのフロントエンドエンジニアがDeepSeekをMacで動かした備忘録です。
+なお、各手順は公式READMEを参考にしております。
+!
+※ Mac×Dockerの環境だとGPUを利用できていないため、推論は遅いです。
+運用は別の方法をおすすめします。
+
+
+ 実行環境
+
+Mac mini M4チップ 32GBメモリ
+macOS Sequoia 15.3.1
+
+
+ 環境構築
+
+
+事前準備
+
+
+Docker Desktopのインストールと起動
+設定で、Resource AllocationのMemory Limitを大きめの値に変更（本検証では24GBにしました）
+
+
+
+Oll...]]></description><link>https://zenn.dev/s_hirano_ist/articles/7dcfeac4086b51</link><guid isPermaLink="true">https://zenn.dev/s_hirano_ist/articles/7dcfeac4086b51</guid><pubDate>Sat, 22 Feb 2025 03:05:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--URwoz7FM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:10%25E5%2588%2586%25E3%2581%25A7%25E5%258B%2595%25E3%2581%258B%25E3%2581%2599%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25AB%25E3%2583%25ABLLM%25EF%25BC%2588Mac%25C3%2597Docker%25C3%2597Ollama%25C3%2597DeepSeek%25E7%25B7%25A8%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Sola%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBmMjBjNjNlYjkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Sola</dc:creator></item><item><title><![CDATA[Podがなにか分からないから弁当ケースで表現してもらう]]></title><description><![CDATA[
+ 現職でお客様報告時の一幕
+リーダー「Pod数を増やせば解決します！」
+私「...(Podってなにか分かんねぇ...)」
+となったので、そもそもPodって何かをざっくりでいいから理解することにしました。
+
+ ざっくり理解
+
+Pod = 1つ以上のコンテナをまとめたもの(コンテナたちをまとめて管理するランチボックス)
+コンテナ = Webサーバー(Nginx)やDB(MySQL)を動かすための単位
+Kubernetes = Podを大量に管理する仕組み(工場の管理システムのようなもの)
+
+
+ 📦 コンテナ = お弁当
+お弁当(コンテナ)の中には「ご飯」や「おかず(アプリ)」が入っており、...]]></description><link>https://zenn.dev/sui_water/articles/f6d1a733dd312e</link><guid isPermaLink="true">https://zenn.dev/sui_water/articles/f6d1a733dd312e</guid><pubDate>Sat, 22 Feb 2025 00:23:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--H1SdkT_T--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Pod%25E3%2581%258C%25E3%2581%25AA%25E3%2581%25AB%25E3%2581%258B%25E5%2588%2586%25E3%2581%258B%25E3%2582%2589%25E3%2581%25AA%25E3%2581%2584%25E3%2581%258B%25E3%2582%2589%25E5%25BC%2581%25E5%25BD%2593%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B9%25E3%2581%25A7%25E8%25A1%25A8%25E7%258F%25BE%25E3%2581%2597%25E3%2581%25A6%25E3%2582%2582%25E3%2582%2589%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25B9%25E3%2582%25A4%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M4MGQ1MWNkOTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>スイ</dc:creator></item><item><title><![CDATA[Next.js + Rails （APIモード）アプリケーションの環境構築]]></title><description><![CDATA[
+ はじめに
+フロントエンドがNext.js、バックエンドがRuby on RailsのAPIモードで構成するアプリケーションの開発環境をまとめました。
+バックエンドはDockerを使用して環境を統一し、依存関係の管理やデプロイを容易にしています。
+モノレポでの管理やCI/CDでフロントエンド・バックエンドで個別のワークフローを実行できるようにもしています。
+https://github.com/wakiy1031/template_Next.js-15_Rails-8
+
+ 技術スタック
+
+ バックエンド
+
+Ruby: 3.2.2
+Ruby on Rails: 8.0.1（API モード...]]></description><link>https://zenn.dev/wakiy/articles/835e8e4f3e0070</link><guid isPermaLink="true">https://zenn.dev/wakiy/articles/835e8e4f3e0070</guid><pubDate>Fri, 21 Feb 2025 22:15:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lDpklu5f--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Next.js%2520%252B%2520Rails%2520%25EF%25BC%2588API%25E3%2583%25A2%25E3%2583%25BC%25E3%2583%2589%25EF%25BC%2589%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2581%25AE%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:wakiy%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE2ZWM2YTQxMGMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>wakiy</dc:creator></item><item><title><![CDATA[Docker Docs の Allowlist にドメインが追加されたことで Docker Pull ができなくなっている事象について]]></title><description><![CDATA[
+ 結論
+以下のドメインへのアクセスを許可しましょう。
+
+https://docker-images-prod.6aa30f8b08e16409b46e0173d6de2f56.r2.cloudflarestorage.com/
+
+Allowlist | Docker Docs
+
+ 事象の報告について
+2025 年 2 月 4 日頃から、docker pull で以下のようなエラーが発生するようになったとの報告が増えているようです。
+failed to copy: httpReadSeeker: failed open: failed to do request: Get "https:...]]></description><link>https://zenn.dev/mn87/articles/7e4fe59233bf9e</link><guid isPermaLink="true">https://zenn.dev/mn87/articles/7e4fe59233bf9e</guid><pubDate>Fri, 21 Feb 2025 10:26:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--h5BTDqAE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%2520Docs%2520%25E3%2581%25AE%2520Allowlist%2520%25E3%2581%25AB%25E3%2583%2589%25E3%2583%25A1%25E3%2582%25A4%25E3%2583%25B3%25E3%2581%258C%25E8%25BF%25BD%25E5%258A%25A0%25E3%2581%2595%25E3%2582%258C%25E3%2581%259F%25E3%2581%2593%25E3%2581%25A8%25E3%2581%25A7%2520Docker%2520Pull%2520%25E3%2581%258C%25E3%2581%25A7%25E3%2581%258D%25E3%2581%25AA%25E3%2581%258F%25E3%2581%25AA...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mn87%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAyNmUxNzcyOGIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mn87</dc:creator></item><item><title><![CDATA[GitHub Codespaces をプロジェクトに導入・運用してみた 其の弐]]></title><description><![CDATA[前回は Rails プロジェクト向けでしたが、今回は Rails + フロントエンド + etc. を含むプロジェクトに導入・運用してみたので得た知見などを共有します
+前回の記事は↓です
+https://zenn.dev/lincwell_inc/articles/61bff901f293e9
+
+ プロジェクト概要
+リポジトリは下記のように分割されています
+
+バックエンド ( Rails )
+フロントエンド ( React )
+etc. ( 認証関連 )
+
+バックエンドのリポジトリには Rails 以外にもいくつかのコンテナが含まれています
+
+含まれるコンテナ
+
+Rails
+DB
+Red...]]></description><link>https://zenn.dev/lincwell_inc/articles/f4671ffcda2c0f</link><guid isPermaLink="true">https://zenn.dev/lincwell_inc/articles/f4671ffcda2c0f</guid><pubDate>Thu, 20 Feb 2025 23:46:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--baofQyxq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:GitHub%2520Codespaces%2520%25E3%2582%2592%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E3%2581%25AB%25E5%25B0%258E%25E5%2585%25A5%25E3%2583%25BB%25E9%2581%258B%25E7%2594%25A8%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2520%25E5%2585%25B6%25E3%2581%25AE%25E5%25BC%2590%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:kaz-e4b880%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdkNzA3MDZjNTUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Linc%2527well%252C%2520inc.%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTFFycFNmV1A1ODhZcVZiZXdwa1hsV3pmLWl4bm83VEcwNG4tQllOMDdRPXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kaz-e4b880</dc:creator></item><item><title><![CDATA[Docker Compose で MongoDB のレプリカセットを構築してみた]]></title><description><![CDATA[
+ MongoDB のレプリカセットとは？
+
+Gemini に聞いてみた
+
+MongoDB のレプリカセットとは、データの冗長性と高可用性を提供する機能です。複数の MongoDB サーバー（ノード）で構築され、同一のデータセットを保持します。これにより、ハードウェア障害やネットワーク障害が発生した場合でも、データへのアクセスを継続できます。
+レプリカセットの主な特徴
+
+データの冗長性
+複数のノードが同一のデータを保持するため、1つまたは複数のノードが故障してもデータは失われない。
+高可用性
+Primary ノードがダウンした場合、自動的に Secondary ノードが Primary ...]]></description><link>https://zenn.dev/puchimilk/articles/54b00b8bfc8477</link><guid isPermaLink="true">https://zenn.dev/puchimilk/articles/54b00b8bfc8477</guid><pubDate>Thu, 20 Feb 2025 17:03:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--In4IwPlr--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%2520Compose%2520%25E3%2581%25A7%2520MongoDB%2520%25E3%2581%25AE%25E3%2583%25AC%25E3%2583%2597%25E3%2583%25AA%25E3%2582%25AB%25E3%2582%25BB%25E3%2583%2583%25E3%2583%2588%25E3%2582%2592%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:puchimilk%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FDTlBFdV9jRVlXWlFhR1BZc09YeXBkbmZrVUNsSXdaT3E3VHNmbkFERHcwN0E9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>puchimilk</dc:creator></item><item><title><![CDATA[KubernetesクラスタのシステムコンポーネントPodがCrashLoopBackOffになったのでトラブルシュートした]]></title><description><![CDATA[
+ 1. 背景
+Kubernetesの学習のため公式ドキュメントを参考に、Raspberry Pi4にKubernetesをインストールしてクラスタを構成しました。しかし、構成した直後にシステムコンポーネントのetcdやkube-apiserverなどがCrashLoopBackOffし続けて、うまく起動しない事象が発生しました。。。
+解決にかなり時間がかかってしまったので、同じ轍を踏む人が増えないように投稿したいと思います。
+
+悲しみの状態
+NAMESPACE     NAME                                READY   STATUS         ...]]></description><link>https://zenn.dev/name0euph/articles/ed208c661e7853</link><guid isPermaLink="true">https://zenn.dev/name0euph/articles/ed208c661e7853</guid><pubDate>Thu, 20 Feb 2025 14:23:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--yzOSfA2f--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Kubernetes%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25B9%25E3%2582%25BF%25E3%2581%25AE%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%259D%25E3%2583%25BC%25E3%2583%258D%25E3%2583%25B3%25E3%2583%2588Pod%25E3%2581%258CCrashLoopBackOff%25E3%2581%25AB%25E3%2581%25AA%25E3%2581%25A3%25E3%2581%259F%25E3%2581%25AE%25E3%2581%25A7%25E3%2583%2588%25E3%2583%25A9%25E3%2583%2596%25E3%2583%25AB%25E3%2582%25B7...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2588%25E3%2581%25B3%25E3%2581%25AE%25E3%2581%2597%25E3%2581%25A3%25E3%2581%25BD%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSnFIRlh6bkd2Q292c2xvT3FRaGx1VWU3RHNWbDcwaVBiaG1USFY3a2tPbW5TdmdwVlk9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>えびのしっぽ</dc:creator></item><item><title><![CDATA[Raspberry Pi に Docker をインストールする方法]]></title><description><![CDATA[
+ はじめに
+Raspberry Pi Imager で作成した純正 OS 64 ビットを使用しています。
+Raspberry Pi で Docker を利用する方法として、公式の apt install ではなく、直接ダウンロードしてインストールする方法がよく解説されています。実際に apt を試してみましたが、提供されているバージョンが古く、期待通りに動作しませんでした。
+本記事では、apt を使用した場合の問題点を説明し、最新の Docker と docker-compose をインストールする方法について詳しく解説します。
+
+ apt で試した結果
+まず、apt search を...]]></description><link>https://zenn.dev/tryeverything/articles/a0022_raspberry-pi-docker-install</link><guid isPermaLink="true">https://zenn.dev/tryeverything/articles/a0022_raspberry-pi-docker-install</guid><pubDate>Thu, 20 Feb 2025 10:00:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--y_KCw3UJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Raspberry%2520Pi%2520%25E3%2581%25AB%2520Docker%2520%25E3%2582%2592%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259F%25E3%2582%2593%25E3%2581%2595%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc2NDc5YTUwMzguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>たんさん</dc:creator></item><item><title><![CDATA[JavaScript ActionからDocker Container Actionへの移行]]></title><description><![CDATA[
+ はじめに
+もともとTypeScriptで書かれていたJavaScript Actionをメンテしていたのですが、モチベがなくなっていき、1年ほど放置していました。
+ただ、最近読み終わったGitHub CI/CD実践ガイドという本でDocker Container Actionを知ったので、Rustで実装しなおしてみました。
+この記事では、どのようにDocker Container Actionを実装するかについてや、ビルドしたDockerイメージの保存先であるGitHub Container Registryを使う方法などを解説していきます。
+今回移行したリポジトリは以下となります。...]]></description><link>https://zenn.dev/ambr_inc/articles/1bc1e2fc4784a8</link><guid isPermaLink="true">https://zenn.dev/ambr_inc/articles/1bc1e2fc4784a8</guid><pubDate>Thu, 20 Feb 2025 07:54:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--QLlB7L3o--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%2520Action%25E3%2581%258B%25E3%2582%2589Docker%2520Container%2520Action%25E3%2581%25B8%25E3%2581%25AE%25E7%25A7%25BB%25E8%25A1%258C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Takashicc%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y0ZThkOTNiZDMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:ambr%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU3YTMxZjA0NTUuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Takashicc</dc:creator></item><item><title><![CDATA[どうしてもDockerコンテナ間をlocalhost:xxxxで通信したい]]></title><description><![CDATA[
+ 結論
+リバースプロキシを通しました
+
+ 経緯
+docker composeでwebアプリケーションが２つ起動する環境を構築しました
+それぞれApp1, App2とします
+App1はlocalhost:8080, App2はlocalhost:8081でアクセスできます
+App1からApp2が提供するAPIをリクエストします
+また、App1を開いている時にApp2へのリダイレクトが発生します
+
+compose.ymlのイメージ
+services:
+  app1:
+    ports:
+      - 8080:80
+  app2:
+    ports:
+      - 8081:80
+...]]></description><link>https://zenn.dev/fukurozuno/articles/6445b8c16014b2</link><guid isPermaLink="true">https://zenn.dev/fukurozuno/articles/6445b8c16014b2</guid><pubDate>Thu, 20 Feb 2025 02:45:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--w68tOlsT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%25A9%25E3%2581%2586%25E3%2581%2597%25E3%2581%25A6%25E3%2582%2582Docker%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2586%25E3%2583%258A%25E9%2596%2593%25E3%2582%2592localhost%253Axxxx%25E3%2581%25A7%25E9%2580%259A%25E4%25BF%25A1%25E3%2581%2597%25E3%2581%259F%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:rokuen%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JjYmQ4YTBkNTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>rokuen</dc:creator></item><item><title><![CDATA[lambda memo]]></title><description><![CDATA[
+ lambda memo
+
+ src.lambda.ts
+
+npm install @vendia/serverless-express aws-lambda
+
+import { NestFactory } from '@nestjs/core';
+import { AppModule } from './app.module';
+import serverlessExpress from '@vendia/serverless-express';
+import { Context, APIGatewayEvent } from 'aws-lambda';
+import { INest...]]></description><link>https://zenn.dev/yusa_yamamo/articles/memo-lambda-swagger</link><guid isPermaLink="true">https://zenn.dev/yusa_yamamo/articles/memo-lambda-swagger</guid><pubDate>Wed, 19 Feb 2025 16:22:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--aVBzYYJl--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_80:lambda%2520memo%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yuya%25EF%25BD%258Da%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I4YjA4YjI0YjIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yuyaｍa</dc:creator></item><item><title><![CDATA[docker accident memo]]></title><description><![CDATA[
+ docker memo
+
+ .bashrc から該当部分を一度コメントアウトし、手動で sudo service docker start が動くかどうか確認
+
+WSL がフリーズ状態にある場合や、現在のセッションをクリアしておきたい場合は、一度以下のコマンドで WSL を完全に停止させます。
+
+wsl --shutdow
+
+
+WSL(Ubuntu) に入る
+
+もし .bashrc の内容でフリーズしてしまう場合、以下のようにして最小限のシェルで入る手段
+
+# フリーズする場合はこちら:
+wsl -d Ubuntu -- bash --noprofile --norc
+
+# root...]]></description><link>https://zenn.dev/yusa_yamamo/articles/memo-dockero-problem</link><guid isPermaLink="true">https://zenn.dev/yusa_yamamo/articles/memo-dockero-problem</guid><pubDate>Wed, 19 Feb 2025 15:52:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--x5O0iKyI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_76:docker%2520accident%2520memo%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yuya%25EF%25BD%258Da%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I4YjA4YjI0YjIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yuyaｍa</dc:creator></item><item><title><![CDATA[Real World Kamal]]></title><description><![CDATA[
+ 対象読者
+
+Kamal の仕組みを知りたい
+Kamal のメリットを知りたい
+Kamal の実際の運用方法を知りたい
+
+※デプロイツールって何？Dockerって？という初学者は対象としていません。
+※Kamalの基本的なインストール方法、導入方法については詳しく説明していません。
+
+ はじめに
+この記事では、Kamal v2を実際に案件で使ってみてわかったことをもとに、実践的なKamalの使い方を紹介します。
+Kamalは、RenderやECS+Fargateなどの商用サービスと違い特定のプラットフォームに依存せず、昔ながらのCapistranoなどと比べてデプロイ先の環境構築が容易...]]></description><link>https://zenn.dev/takeyuwebinc/articles/bc12b1275950e3</link><guid isPermaLink="true">https://zenn.dev/takeyuwebinc/articles/bc12b1275950e3</guid><pubDate>Wed, 19 Feb 2025 12:03:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--D_fdJ4zb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_80:Real%2520World%2520Kamal%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:takeyuweb%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2UwMjNiOGM3N2MuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25BF%25E3%2582%25B1%25E3%2583%25A6%25E3%2583%25BC%25E3%2583%25BB%25E3%2582%25A6%25E3%2582%25A7%25E3%2583%2596%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2ljeVN4dTIydDRHcy1rVlRMVFh3MHZLX2w1TWxpNngxQTB1TUR3VXc9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takeyuweb</dc:creator></item><item><title><![CDATA[poetry × Docker(マルチステージ)におけるPOETRY_HOMEの固定設定とパス引き継ぎ問題について]]></title><description><![CDATA[Dockerを用いたマルチステージビルドでは、各ステージが独立した環境となるため、インストール済みのpoetryや依存パッケージのパスが正しく引き継がれない場合があります。特に、curlでpoetryをインストールする際、環境変数で固定のインストール先を設定していないと、実行時に「poetry not found」エラーや依存パッケージの認識エラーが発生する可能性があります。
+そこで、環境変数POETRY_HOMEを明示的に固定し、各ステージで同一のパス設定を利用することが重要になります。
+!
+※ 注意
+グローバルインストール（poetry config virtualenvs.crea...]]></description><link>https://zenn.dev/gon9a/articles/8447167bae17fa</link><guid isPermaLink="true">https://zenn.dev/gon9a/articles/8447167bae17fa</guid><pubDate>Wed, 19 Feb 2025 09:02:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--43MaOKiY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:poetry%2520%25C3%2597%2520Docker%2528%25E3%2583%259E%25E3%2583%25AB%25E3%2583%2581%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25BC%25E3%2582%25B8%2529%25E3%2581%25AB%25E3%2581%258A%25E3%2581%2591%25E3%2582%258BPOETRY_HOME%25E3%2581%25AE%25E5%259B%25BA%25E5%25AE%259A%25E8%25A8%25AD%25E5%25AE%259A%25E3%2581%25A8%25E3%2583%2591%25E3%2582%25B9%25E5%25BC%2595%25E3%2581%258D%25E7%25B6%2599%25E3%2581%258E%25E5%2595%258F%25E9%25A1%258C%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:gon9a%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U3M2RmMWJiMDcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>gon9a</dc:creator></item><item><title><![CDATA[OrbStackはいいぞ]]></title><description><![CDATA[
+ はじめに
+株式会社イノベーションでITトレンドEXPOの開発を担当しているTACです。
+最近OrbStackを使い始めたので、その概要やDockerDesktopとの比較をした内容をアウトプットします。
+
+ OrbStackとは
+一言で言うと、MacOS上で動作する軽量かつ高速なDocker Desktopの代替ツールです。
+
+ OrbStackの概要
+
+
+特徴１：Docker Desktop よりも高速で軽量
+
+CPUやメモリの使用量が少なく、バッテリー消費も抑えられる。
+
+
+
+特徴2 : 既存のDockerコマンドやdocker-composeファイルがそのまま使用可能
+
+今まで...]]></description><link>https://zenn.dev/innovation/articles/cc098996a12639</link><guid isPermaLink="true">https://zenn.dev/innovation/articles/cc098996a12639</guid><pubDate>Wed, 19 Feb 2025 07:43:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--gRg3HelW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:OrbStack%25E3%2581%25AF%25E3%2581%2584%25E3%2581%2584%25E3%2581%259E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:TAC%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQyOTAzNWRlMDguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2582%25A4%25E3%2583%258E%25E3%2583%2599%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzlmYzI3MWI3OWEuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>TAC</dc:creator></item><item><title><![CDATA[Databricksの環境構築を劇的に改善！Databricks Container Service × Poetry 活用法]]></title><description><![CDATA[
+ はじめに
+Databricksは、Apache Sparkを活用したデータエンジニアリングや機械学習のワークフローを効率的に構築できるクラウドベースのプラットフォームです。DatabricksのContainer Serviceを利用すると、カスタムコンテナイメージをクラスターにデプロイし、特定の環境やライブラリのセットアップを統一できます。
+本記事では、Docker HubにホストしたカスタムDockerイメージをDatabricksのContainer Serviceを使用してクラスターにデプロイする方法を詳しく解説します。また、Poetryを活用してPythonの依存関係を管理...]]></description><link>https://zenn.dev/enjapan/articles/ed9f938be933df</link><guid isPermaLink="true">https://zenn.dev/enjapan/articles/ed9f938be933df</guid><pubDate>Wed, 19 Feb 2025 00:28:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--IXIxPCgl--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Databricks%25E3%2581%25AE%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%25E3%2582%2592%25E5%258A%2587%25E7%259A%2584%25E3%2581%25AB%25E6%2594%25B9%25E5%2596%2584%25EF%25BC%2581Databricks%2520Container%2520Service%2520%25C3%2597%2520Poet...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:KN%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MzNmZjMTAzYzIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%25BB%25E3%2582%25B8%25E3%2583%25A3%25E3%2583%2591%25E3%2583%25B3%2520%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q0YTU0NGQyZTcuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>KN</dc:creator></item><item><title><![CDATA[Morphのチュートリアルを横目に簡単なデータ可視化を試してみる]]></title><description><![CDATA[
+ Morph
+Build AI Apps in a Scalable Python Framework and Deploy Securely
+
+Morphについてはこちらを参照
+まずは環境のセットアップと、簡単なデータの可視化のみをやって見ようと思います。
+
+
+ 環境構築
+Dockerを使って環境構築していきます。
+
+ ディレクトリ構成
+mkdir morph
+cd $_
+
+tree
+.
+├── Dockerfile
+├── compose.yaml
+└── apps
+
+
+ 各ファイルの内容
+
+ Dockerfile
+FROM python:3.11-slim
+
+RUN apt-ge...]]></description><link>https://zenn.dev/lowse01/articles/07291af9d0eacb</link><guid isPermaLink="true">https://zenn.dev/lowse01/articles/07291af9d0eacb</guid><pubDate>Tue, 18 Feb 2025 23:46:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lvPZIsZt--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Morph%25E3%2581%25AE%25E3%2583%2581%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%2588%25E3%2583%25AA%25E3%2582%25A2%25E3%2583%25AB%25E3%2582%2592%25E6%25A8%25AA%25E7%259B%25AE%25E3%2581%25AB%25E7%25B0%25A1%25E5%258D%2598%25E3%2581%25AA%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E5%258F%25AF%25E8%25A6%2596%25E5%258C%2596%25E3%2582%2592%25E8%25A9%25A6%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%25AD%25E3%2583%25BC%2520%252F%2520LowSE01%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRhY2VkMmU0NzYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ロー / LowSE01</dc:creator></item></channel></rss>

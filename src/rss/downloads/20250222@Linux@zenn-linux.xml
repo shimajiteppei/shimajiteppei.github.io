@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Linux」のフィード]]></title><description><![CDATA[Zennのトピック「Linux」のRSSフィードです]]></description><link>https://zenn.dev/topics/linux</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/860a9eb1e4.png</url><title>Zennの「Linux」のフィード</title><link>https://zenn.dev/topics/linux</link></image><generator>zenn.dev</generator><lastBuildDate>Sat, 22 Feb 2025 12:03:52 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/linux/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Ubuntu 24.10のインストーラーがディスクを100%使ってくれない際の対応方法]]></title><description><![CDATA[Ubuntu 24.10のインストーラーがディスクを100%使ってくれないので、対応した。
+やることは下記通り
+
+残りディスクを/dev/mapper/ubuntu--vg-ubuntu--lvに割り当てる
+割り当てただけだとファイルシステムが認識しないので、ファイルシステムのリサイズをする
+
+コマンドは下記通り。めんどくさいの説明はナシ。
+sudo lvextend -l +100%FREE /dev/mapper/ubuntu--vg-ubuntu--lv
+sudo resize2fs /dev/mapper/ubuntu--vg-ubuntu--lv
+Ubuntu 24.10のイン...]]></description><link>https://zenn.dev/yamaz/articles/65c8cb2d1f6cc5</link><guid isPermaLink="true">https://zenn.dev/yamaz/articles/65c8cb2d1f6cc5</guid><pubDate>Sat, 22 Feb 2025 11:23:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--V5icVcUN--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ubuntu%252024.10%25E3%2581%25AE%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25A9%25E3%2583%25BC%25E3%2581%258C%25E3%2583%2587%25E3%2582%25A3%25E3%2582%25B9%25E3%2582%25AF%25E3%2582%2592100%2525%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%258F%25E3%2582%258C%25E3%2581%25AA%25E3%2581%2584%25E9%259A%259B%25E3%2581%25AE%25E5%25AF%25BE%25E5%25BF%259C%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yamaz%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2hyS2E1YzBOZFNoSHlsUGZhY3d2anJtdGFyQU9HRWZCQWpacFB4TGc9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yamaz</dc:creator></item><item><title><![CDATA[Podmanコンテナ + Zed Editor で快適開発！]]></title><description><![CDATA[Zed Editorでコンテナ環境の開発できないか？と思い、調べていたところ、devPodで構築する方法に辿り着きました。今回はdockerよりも軽量のpodmanを使用しています。
+今回のゴール
+Dockerfile, docker-compose.yml, devcontainer.json の3つのファイルを使って、Podman コンテナ上に Zed Editor の開発環境を構築し、実際に Zed Editor からコンテナに接続して開発できるようにします。
+devpod-container/
+└── .devcontainer/
+└── Dockerfile
+└──docker...]]></description><link>https://zenn.dev/beginote/articles/c30e91bc394a81</link><guid isPermaLink="true">https://zenn.dev/beginote/articles/c30e91bc394a81</guid><pubDate>Sat, 22 Feb 2025 11:13:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--w-QuLZI---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Podman%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2586%25E3%2583%258A%2520%252B%2520Zed%2520Editor%2520%25E3%2581%25A7%25E5%25BF%25AB%25E9%2581%25A9%25E9%2596%258B%25E7%2599%25BA%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Zone%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTDRQazlDa2Fhdm9tRENjX0kzYVh3U1BHcFpDZDdvcnVJalNEYmtmV1NDPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Zone</dc:creator></item><item><title><![CDATA[【合格体験記】LPIC-1]]></title><description><![CDATA[LPIC-1 を受験し、無事合格したのでその体験記です。
+
+以下に101と102の試験結果を示します。
+画像が大きいため折りたたんでいます。
+試験結果詳細
+
+
+
+
+ 私のプロフィール
+
+高等専門学校 情報工学科 卒業
+ソフトウェア開発職4年目
+インフラエンジニアではない
+2023年にLinux Essentialsに合格
+
+
+ 受験の理由
+以下の3つの理由から受験しました。
+
+業務でLinuxを触る機会が多く、Linuxの知識を体系的に学びたい
+昨年度はLinux Linux Essentialsに合格したので、その次のステップとしてLPIC-1を受験
+毎年資格試験を受けているので、今年...]]></description><link>https://zenn.dev/yutotnh/articles/lpic1-passing-experience</link><guid isPermaLink="true">https://zenn.dev/yutotnh/articles/lpic1-passing-experience</guid><pubDate>Sat, 22 Feb 2025 06:59:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--CNhJZVeL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%2590%2588%25E6%25A0%25BC%25E4%25BD%2593%25E9%25A8%2593%25E8%25A8%2598%25E3%2580%2591LPIC-1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yutotnh%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lCMGg4Y3Vrb29zUnFuekVBZ0l2cFFxb0p0X3lIa1Z3QVBUYU5TPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yutotnh</dc:creator></item><item><title><![CDATA[Linux CUI でてっとり早くストレージの読み書き速度を確認する]]></title><description><![CDATA[
+ 書き込み
+測定したいストレージに 1GB 程度書き込みます。
+/path/to/ssd 部分は置き換えてください。
+dd if=/dev/zero of=/path/to/ssd/tempfile bs=1M count=1024 conv=fdatasync,notrunc status=progress	
+
+ 読み出し
+キャッシュをクリアしてから、上記で書き込んだファイルを読み出します。
+echo 3 &gt; /proc/sys/vm/drop_caches
+dd if=/path/to/ssd/tempfile of=/dev/null bs=1M count=1024 st...]]></description><link>https://zenn.dev/19931/articles/c6fd769d7bf72d</link><guid isPermaLink="true">https://zenn.dev/19931/articles/c6fd769d7bf72d</guid><pubDate>Fri, 21 Feb 2025 15:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--iNUuNeF8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%2520CUI%2520%25E3%2581%25A7%25E3%2581%25A6%25E3%2581%25A3%25E3%2581%25A8%25E3%2582%258A%25E6%2597%25A9%25E3%2581%258F%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25AC%25E3%2583%25BC%25E3%2582%25B8%25E3%2581%25AE%25E8%25AA%25AD%25E3%2581%25BF%25E6%259B%25B8%25E3%2581%258D%25E9%2580%259F%25E5%25BA%25A6%25E3%2582%2592%25E7%25A2%25BA%25E8%25AA%258D%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Ippei%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JhYTViMjM2ZWYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Ippei</dc:creator></item><item><title><![CDATA[Lightsail を DDNS サーバにする]]></title><description><![CDATA[
+ はじめに
+Lightsail で使用しているドメインを自宅などのダイナミック IP アドレスに割り当てる方法を記載します。
+DNS を Route 53 ではなく Lightsail で管理している前提になります。
+クライアント側は Raspberry Pi でも動作確認済みです。
+
+ サーバ側スクリプト
+クライアントの IP アドレスを返せば何でもよいです。
+
+myip.php
+&lt;?php print($_SERVER['REMOTE_ADDR']);?&gt;
+
+サーバの DNS レコードを以下のように設定しておくと、ウェブブラウザからでも IPv4 or IPv6 を選択...]]></description><link>https://zenn.dev/19931/articles/81114399bb0701</link><guid isPermaLink="true">https://zenn.dev/19931/articles/81114399bb0701</guid><pubDate>Fri, 21 Feb 2025 13:25:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--kKGCXCd6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Lightsail%2520%25E3%2582%2592%2520DDNS%2520%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Ippei%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JhYTViMjM2ZWYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Ippei</dc:creator></item><item><title><![CDATA[Linuxのパーミッション(アクセス権限)について]]></title><description><![CDATA[Linuxでは、ファイルやディレクトリに パーミッション（アクセス権限） が設定されており、
+どのユーザーがどの操作をできるかを制御できます。
+
+ パーミッションとは？
+
+パーミッション（Permission） とは、ファイルやディレクトリのアクセス権限のことです。
+Linuxでは、ファイルごとに 「誰が」「どの操作をできるか」 を決めることができます。
+パーミッションには以下の3つの権限があります。
+
+
+
+説明
+記号
+2進数
+8進数
+
+
+
+
+読み取り（read）
+r
+100
+4
+
+
+書き込み（write）
+w
+10
+2
+
+
+実行（execute）
+x
+1
+1
+
+
+アクセス不可
+-
+0
+...]]></description><link>https://zenn.dev/kannn/articles/195f5baa91ad9e</link><guid isPermaLink="true">https://zenn.dev/kannn/articles/195f5baa91ad9e</guid><pubDate>Fri, 21 Feb 2025 11:11:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--MfWU7jD0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%25E3%2581%25AE%25E3%2583%2591%25E3%2583%25BC%25E3%2583%259F%25E3%2583%2583%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%2528%25E3%2582%25A2%25E3%2582%25AF%25E3%2582%25BB%25E3%2582%25B9%25E6%25A8%25A9%25E9%2599%2590%2529%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kan%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2Rhcmsvay5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kan</dc:creator></item><item><title><![CDATA[【Linux】【log】Linuxサーバ大活躍コマンド・ログ（運用保守編）]]></title><description><![CDATA[
+ はじめに
+業務でLinuxサーバを用いて保守運用や監視、設定の導入をすることが多かったため内容整理などを含めコマンドなどをまとめてみます。今回は、特に知識として持っておきたい運用・保守面で書いていきます。何かインシデントが起こった際に、「どこのログを見ればいいかわからない方」や、「どんなコマンド打てばいいかわからない」（僕。。。）みたいにならないように、していきましょう！
+今回は、基本的なLinuxサーバを想定しています。
+
+ 1. システム全体の基本ログ
+インシデンとが起こった場合は、内容にもよりますが、基本的にシステム全体のログを見てみましょう。
+まずはシステム全体の状態を確認す...]]></description><link>https://zenn.dev/kira_n/articles/72a177a41dc2e1</link><guid isPermaLink="true">https://zenn.dev/kira_n/articles/72a177a41dc2e1</guid><pubDate>Fri, 21 Feb 2025 09:29:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Sv8wRDof--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Linux%25E3%2580%2591%25E3%2580%2590log%25E3%2580%2591Linux%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E5%25A4%25A7%25E6%25B4%25BB%25E8%25BA%258D%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2583%25BB%25E3%2583%25AD%25E3%2582%25B0%25EF%25BC%2588%25E9%2581%258B%25E7%2594%25A8%25E4%25BF%259D%25E5%25AE%2588%25E7%25B7%25A8%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kira_n%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzkyMWU4MWZiYzMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kira_n</dc:creator></item><item><title><![CDATA[Jetson AGX Orin でシステムモニタリングする]]></title><description><![CDATA[https://zenn.dev/19931/articles/380fc2d8cb67a3
+
+ はじめに
+説明は全て公式ドキュメントに記載されていますので、この記事は備忘録レベルです。
+
+ 手順
+NVIDIA SDK Manager を使って Jetson Platform Services をインストールします。（別記事に記載）
+Grafana の設定を変更します。
+
+/opt/nvidia/jetson/services/monitoring/config/grafana.ini
+- root_url = %(protocol)s://%(domain)s:%(http_port)...]]></description><link>https://zenn.dev/19931/articles/5e148e5671dfea</link><guid isPermaLink="true">https://zenn.dev/19931/articles/5e148e5671dfea</guid><pubDate>Thu, 20 Feb 2025 11:46:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--gwTNhbYh--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Jetson%2520AGX%2520Orin%2520%25E3%2581%25A7%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%25E3%2583%25A2%25E3%2583%258B%25E3%2582%25BF%25E3%2583%25AA%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Ippei%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JhYTViMjM2ZWYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Ippei</dc:creator></item><item><title><![CDATA[WindowsサーバーをLinuxに移行するための調査ガイド]]></title><description><![CDATA[
+ ✨はじめに
+Windowsサーバーを移行するためには、まず現状を調査することが重要です。この記事では、「このWindowsサーバーは何…⁉️」状態から、Linuxに移行するために調査した内容と方法をまとめました🔍
+
+ ▶️ やったこと
+
+
+
+IIS：ドメイン設定を確認
+
+サービス：起動しているサービス一覧を取得
+
+ストレージ：各ドライブの利用状況を確認
+
+アプリ：アプリケーション環境の確認
+
+ジョブ：タスクスケジューラのジョブを洗い出し
+
+ログ：IISやアプリケーションのログを確認
+
+Windows特有機能：COMオブジェクトなどの利用状況を調査
+
+パーミッション：ファイル・フォルダ...]]></description><link>https://zenn.dev/azunyan/articles/bb10d6c531af06</link><guid isPermaLink="true">https://zenn.dev/azunyan/articles/bb10d6c531af06</guid><pubDate>Thu, 20 Feb 2025 11:24:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7dIlkgcX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Windows%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2582%2592Linux%25E3%2581%25AB%25E7%25A7%25BB%25E8%25A1%258C%25E3%2581%2599%25E3%2582%258B%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%25E8%25AA%25BF%25E6%259F%25BB%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2588%25E3%2581%25BF%25E3%2582%258A%25E3%2580%259C%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNlODc0NGRhYmUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>えみり〜</dc:creator></item><item><title><![CDATA[Linux における標準入力（stdin）の仕組みと Python の input()]]></title><description><![CDATA[
+ はじめに
+Linux の標準入力（stdin）はどこに存在し、どのように動作しているのでしょうか？
+本記事では、Linux における標準入力の実体、stdin の動作、そして Python の input() がどのように標準入力を扱うのかについて詳しく解説します。
+
+ 1. 標準入力（stdin）はどこにあるのか？
+
+ /dev/stdin
+stdin へのシンボリックリンク
+ls -l /dev/stdin で確認可能
+
+ /proc/self/fd/0
+stdin を指すファイルディスクリプタ
+ls -l /proc/self/fd/0 で確認可能
+
+ 2. /proc/sel...]]></description><link>https://zenn.dev/osachi/articles/569474796b5ff4</link><guid isPermaLink="true">https://zenn.dev/osachi/articles/569474796b5ff4</guid><pubDate>Wed, 19 Feb 2025 13:43:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--sKGIeZft--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%2520%25E3%2581%25AB%25E3%2581%258A%25E3%2581%2591%25E3%2582%258B%25E6%25A8%2599%25E6%25BA%2596%25E5%2585%25A5%25E5%258A%259B%25EF%25BC%2588stdin%25EF%25BC%2589%25E3%2581%25AE%25E4%25BB%2595%25E7%25B5%2584%25E3%2581%25BF%25E3%2581%25A8%2520Python%2520%25E3%2581%25AE%2520input%2528%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:osachi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS1dQbG9ta3VENjRseUgxcHZnX3BHMjA5cEZQTjM2UGZtN3lzLTNIUVJGPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>osachi</dc:creator></item><item><title><![CDATA[Linuxの基本コマンド一覧]]></title><description><![CDATA[Linuxを使う上で欠かせない基本的なコマンドを一覧にまとめました
+
+
+ ファイル・ディレクトリ操作
+
+
+
+コマンド
+説明
+使用例
+
+
+
+
+ls
+ディレクトリ内のファイルを表示
+
+ls -l（詳細表示）
+
+
+cd
+ディレクトリを移動
+cd /home/user
+
+
+pwd
+現在のディレクトリを表示
+pwd
+
+
+mkdir
+新しいディレクトリを作成
+mkdir mydir
+
+
+rm
+ファイルやディレクトリを削除
+rm file.txt
+
+
+cp
+ファイルをコピー
+cp file1.txt file2.txt
+
+
+mv
+ファイルを移動/リネーム
+mv oldname.txt newname....]]></description><link>https://zenn.dev/kannn/articles/15f8ed01445e2b</link><guid isPermaLink="true">https://zenn.dev/kannn/articles/15f8ed01445e2b</guid><pubDate>Wed, 19 Feb 2025 12:56:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--mCgLCulX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%25E3%2581%25AE%25E5%259F%25BA%25E6%259C%25AC%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E4%25B8%2580%25E8%25A6%25A7%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kan%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2Rhcmsvay5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kan</dc:creator></item><item><title><![CDATA[ラズパイで自宅サーバを立ててみる本]]></title><description><![CDATA[一家に一台自宅サーバ！　あなたのお宅にも一台どうです？]]></description><link>https://zenn.dev/gunseikpaseri/books/homebuilt-raspi-server</link><guid isPermaLink="true">https://zenn.dev/gunseikpaseri/books/homebuilt-raspi-server</guid><pubDate>Wed, 19 Feb 2025 09:51:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--UBuSE4mY--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci82M2U2OTlhNzdhLnBuZw==%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>GunseiKPaseri</dc:creator></item><item><title><![CDATA[OrbStackはいいぞ]]></title><description><![CDATA[
+ はじめに
+株式会社イノベーションでITトレンドEXPOの開発を担当しているTACです。
+最近OrbStackを使い始めたので、その概要やDockerDesktopとの比較をした内容をアウトプットします。
+
+ OrbStackとは
+一言で言うと、MacOS上で動作する軽量かつ高速なDocker Desktopの代替ツールです。
+
+ OrbStackの概要
+
+
+特徴１：Docker Desktop よりも高速で軽量
+
+CPUやメモリの使用量が少なく、バッテリー消費も抑えられる。
+
+
+
+特徴2 : 既存のDockerコマンドやdocker-composeファイルがそのまま使用可能
+
+今まで...]]></description><link>https://zenn.dev/innovation/articles/cc098996a12639</link><guid isPermaLink="true">https://zenn.dev/innovation/articles/cc098996a12639</guid><pubDate>Wed, 19 Feb 2025 07:43:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--gRg3HelW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:OrbStack%25E3%2581%25AF%25E3%2581%2584%25E3%2581%2584%25E3%2581%259E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:TAC%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQyOTAzNWRlMDguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2582%25A4%25E3%2583%258E%25E3%2583%2599%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzlmYzI3MWI3OWEuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>TAC</dc:creator></item><item><title><![CDATA[Fedora41 サーバで Minio Server を使うときのメモ]]></title><description><![CDATA[お家の検証サーバ用の備忘録です。基本 root です。
+基本は公式の通りです。
+https://min.io/docs/minio/linux/index.html
+
+ インストール
+ダウンロードしてインストールします。
+wget https://dl.min.io/server/minio/release/linux-amd64/archive/minio-20250207232109.0.0-1.x86_64.rpm -O minio.rpm
+dnf -y install minio.rpm
+
+ サービス登録
+systemd のユニットファイルを作ります。
+cat &lt;&lt; ...]]></description><link>https://zenn.dev/asterisk9101/articles/fedora41server-6</link><guid isPermaLink="true">https://zenn.dev/asterisk9101/articles/fedora41server-6</guid><pubDate>Tue, 18 Feb 2025 14:58:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--k3qesxl8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Fedora41%2520%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2581%25A7%2520Minio%2520Server%2520%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%25E3%2581%25A8%25E3%2581%258D%25E3%2581%25AE%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25A4%259A%25E7%2594%25B0%25E6%25B0%258F%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFUWEFKd3hvZ1pLNDVtSmdsUDlROUZPUTcyRXg4eV9MeFdmejdma0V1aTA9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>多田氏</dc:creator></item><item><title><![CDATA[ChromebookでLinux環境を構築した際の初期状態]]></title><description><![CDATA[
+ はじめに
+本記事は、Chromebook で Linux 環境を構築した際の初期状態について見ていくものです。調べた時点は 2025 年 2 月で、Chromebook のバージョンは、「132.0.6834.206（Official Build）（64 ビット）」となります。
+
+ 構築時のディレクトリ構造
+構築後のファイルやディレクトリの構造は、下記のようになっています。「ファイル」アプリで確認する場合、その他のオプション項目にある「非表示のファイルを表示」を有効にする必要があります。
+
+ホームディレクトリ
+.
+├── .config
+│   ├── cros-garcon.con...]]></description><link>https://zenn.dev/nonaka101/articles/memo-on-crostini-initialized</link><guid isPermaLink="true">https://zenn.dev/nonaka101/articles/memo-on-crostini-initialized</guid><pubDate>Tue, 18 Feb 2025 10:35:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lIC3BUVY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Chromebook%25E3%2581%25A7Linux%25E7%2592%25B0%25E5%25A2%2583%25E3%2582%2592%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2597%25E3%2581%259F%25E9%259A%259B%25E3%2581%25AE%25E5%2588%259D%25E6%259C%259F%25E7%258A%25B6%25E6%2585%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Nonaka%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY4YWMyOGJiZWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Nonaka</dc:creator></item><item><title><![CDATA[コマンド2発でWSL2にOracle Linuxをインストールできたので手順を共有]]></title><description><![CDATA[WSL2にOracle Linuxをインストールする方法をGoogle検索などで調べると、まずはUbuntuを導入してからMicrosoft StoreでOracle Linuxをダウンロードする等、手間のかかる方法が数多くヒットします。
+今回、コマンドを2回叩いてインストールできたので共有したいと思います。
+※使用環境：Surface Laptop Go3
+PowerShellを管理者モードで起動。
+まずは以下のコマンドでインストール可能バージョンを確認する。
+wsl --list --online
+上記コマンドを実行すると以下のような一覧が表示されます。
+
+一覧にOracle Lin...]]></description><link>https://zenn.dev/hrt999/articles/a7c94c447eea0c</link><guid isPermaLink="true">https://zenn.dev/hrt999/articles/a7c94c447eea0c</guid><pubDate>Tue, 18 Feb 2025 09:35:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ymQoz7zF--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%25892%25E7%2599%25BA%25E3%2581%25A7WSL2%25E3%2581%25ABOracle%2520Linux%25E3%2582%2592%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%25A7%25E3%2581%258D%25E3%2581%259F%25E3%2581%25AE%25E3%2581%25A7%25E6%2589%258B%25E9%25A0%2586%25E3%2582%2592%25E5%2585%25B1%25E6%259C%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:K.K%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSUVOblRUMHpZLUNaSjlUQUc1ZUY1THhVcWVwczY2VzJRY3FRaVhpaTMzYm4xM3ZaRT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>K.K</dc:creator></item><item><title><![CDATA[IaCの基礎【AWS CloudFormation】について基本を実践]]></title><description><![CDATA[
+ はじめに
+IaCについて学習中の身ではございますが、基礎的な範囲で実践してみた結果をアウトプットします。
+また私と同じような初学者の方にとって、この記事が少しでもお力になれれば幸いです。
+
+ 前提
+今回CloudFormationのテンプレート内で記述する構成は、私の他記事で作成したWebAPサーバの構成をそのまま転用します。
+内容についてご興味、ご不明点ありましたら、ぜひそちらの記事もご参照ください。↓
+https://zenn.dev/gj77a/articles/3f3b1be845289b#discuss
+以下、構成の概要です。
+
+
+
+項目名
+設定値
+
+
+
+
+VPC
+作成済み...]]></description><link>https://zenn.dev/gj77a/articles/920440ae3f7ec6</link><guid isPermaLink="true">https://zenn.dev/gj77a/articles/920440ae3f7ec6</guid><pubDate>Mon, 17 Feb 2025 13:32:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--FLPF9x2---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:IaC%25E3%2581%25AE%25E5%259F%25BA%25E7%25A4%258E%25E3%2580%2590AWS%2520CloudFormation%25E3%2580%2591%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E5%259F%25BA%25E6%259C%25AC%25E3%2582%2592%25E5%25AE%259F%25E8%25B7%25B5%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:GK7AA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY3OWM5ZmRiZGUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>GK7AA</dc:creator></item><item><title><![CDATA[Linuxを学習するための環境について考えてみる]]></title><description><![CDATA[ここ最近、業務でLinuxに触れる機会が増えたため、過去に私が行った勉強法を思い出しつつ、どのような学習環境があるかを共有したいと思います。
+本記事を書いていて、「学びたい内容」によって用意すべき環境が異なることを感じました。
+具体的には、以下のような選択肢があります。
+
+VirtualBoxや物理的なPCを準備
+インフラエンジニアとしてOSインストールや各種設定を学びたい場合
+WSL2環境
+コマンド操作などを学びたい場合
+AWSなどのクラウドサービスを利用
+クラウドを活用した環境に触れたい場合
+
+
+ 1. VirtualBoxを利用 / 物理的なPCを準備
+学習用の講座やブログでよく見...]]></description><link>https://zenn.dev/hrt999/articles/19145032c7b8ca</link><guid isPermaLink="true">https://zenn.dev/hrt999/articles/19145032c7b8ca</guid><pubDate>Mon, 17 Feb 2025 13:06:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--yKCbWtMw--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%25E3%2582%2592%25E5%25AD%25A6%25E7%25BF%2592%25E3%2581%2599%25E3%2582%258B%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E8%2580%2583%25E3%2581%2588%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:K.K%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSUVOblRUMHpZLUNaSjlUQUc1ZUY1THhVcWVwczY2VzJRY3FRaVhpaTMzYm4xM3ZaRT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>K.K</dc:creator></item><item><title><![CDATA[コンテナ時代にLinux知識はレガシー化するの？~トレンドに「Linux」が入った日に思ったこと~]]></title><description><![CDATA[今日（2025年2月16日）、
+XでLinuxがトレンドに入っていた。コンテナが普及してきた中で、Linux自体の学習をどうするか、という話とかが中心の模様。議論の中で出てきたアイデアを自分なりに解釈して書いてみた。
+
+ 結論
+
+Linuxを学習する重要度・優先度は 一部の役割の人達にとって下がっている
+
+背景：コンテナなどの発達によりサーバー構築作業が必要な場面が 減った から
+
+
+
+また、これはLinuxに限らず、あらゆる場面で、
+技術の優先度や位置づけの変化が、（もともとあったが加速しているという意味で）起きている
+
+ コンテナの普及
+VMがあったのになぜ、さらにコンテナが普及した...]]></description><link>https://zenn.dev/akazah/articles/20d4c0b21e4a05</link><guid isPermaLink="true">https://zenn.dev/akazah/articles/20d4c0b21e4a05</guid><pubDate>Mon, 17 Feb 2025 05:00:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--24qQSO9p--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2586%25E3%2583%258A%25E6%2599%2582%25E4%25BB%25A3%25E3%2581%25ABLinux%25E7%259F%25A5%25E8%25AD%2598%25E3%2581%25AF%25E3%2583%25AC%25E3%2582%25AC%25E3%2582%25B7%25E3%2583%25BC%25E5%258C%2596%25E3%2581%2599%25E3%2582%258B%25E3%2581%25AE%25EF%25BC%259F%7E%25E3%2583%2588%25E3%2583%25AC%25E3%2583%25B3%25E3%2583%2589%25E3%2581%25AB%25E3%2580%258CLinux%25E3%2580%258D%25E3%2581%258C%25E5%2585%25A5%25E3%2581%25A3%25E3%2581%259F%25E6%2597%25A5%25E3%2581%25AB%25E6%2580%259D%25E3%2581%25A3%25E3%2581%259F%25E3%2581%2593%25E3%2581%25A8%7E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:akazah%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM1NmExNDAxNDcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>akazah</dc:creator></item><item><title><![CDATA[シェルスクリプトの curl にとりあえず付けておくべきオプション（＋たまに使うオプションのまとめ）]]></title><description><![CDATA[
+ はじめに
+シェルスクリプト中で API からデータを取得する際など、 curl でどんなオプションを指定しておくか毎回悩んでしまうのでまとめておきます。
+ついでに必要に応じて使うオプションもまとめておきます。
+※シェルスクリプトに限らず CLI でも有用です
+
+ とりあえず指定しておくオプション
+curl -fsSL &lt;URL&gt;
+
+ 各オプションの説明
+
+ -f, --fail
+http ステータスコードがエラーの場合にスクリプトを異常終了します。
+curl はデフォルトだとサーバーがエラーのステータスコードを返した場合、サーバーが返したエラーのHTMLを表示し、スクリプ...]]></description><link>https://zenn.dev/shuh/articles/shellscript-curl</link><guid isPermaLink="true">https://zenn.dev/shuh/articles/shellscript-curl</guid><pubDate>Sun, 16 Feb 2025 16:53:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dZXL1-iP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B7%25E3%2582%25A7%25E3%2583%25AB%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2583%2588%25E3%2581%25AE%2520curl%2520%25E3%2581%25AB%25E3%2581%25A8%25E3%2582%258A%25E3%2581%2582%25E3%2581%2588%25E3%2581%259A%25E4%25BB%2598%25E3%2581%2591%25E3%2581%25A6%25E3%2581%258A%25E3%2581%258F%25E3%2581%25B9%25E3%2581%258D%25E3%2582%25AA%25E3%2583%2597%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25EF%25BC%2588%25EF%25BC%258B%25E3%2581%259F%25E3%2581%25BE%25E3%2581%25AB%25E4%25BD%25BF%25E3%2581%2586%25E3%2582%25AA%25E3%2583%2597%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2581%25AE%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:shusch%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk0ODg1Y2EwN2QuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>shusch</dc:creator></item></channel></rss>
