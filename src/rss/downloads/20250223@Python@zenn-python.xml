@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Sun, 23 Feb 2025 12:03:52 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[大きな画像から部分画像の座標を取得する方法]]></title><description><![CDATA[
+ 概要
+大きな画像の一部が切り出された複数の画像から、元の画像内での座標を取得する機会がありました。本記事では、そのための方法についての備忘録をまとめます。
+OpenCV の SIFT (Scale-Invariant Feature Transform) を用いて、テンプレート画像と元の画像を特徴点マッチングし、アフィン変換を推定して座標を取得する方法を紹介します。
+
+ 実装
+
+ 必要なライブラリ
+pip install opencv-python numpy tqdm
+
+ Pythonコード
+以下のコードでは、指定した大きな画像 (image_path) に対して、テンプレート画像...]]></description><link>https://zenn.dev/nakamura196/articles/16864d23a238c4</link><guid isPermaLink="true">https://zenn.dev/nakamura196/articles/16864d23a238c4</guid><pubDate>Sun, 23 Feb 2025 11:32:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Lc58xjC7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%25A4%25A7%25E3%2581%258D%25E3%2581%25AA%25E7%2594%25BB%25E5%2583%258F%25E3%2581%258B%25E3%2582%2589%25E9%2583%25A8%25E5%2588%2586%25E7%2594%25BB%25E5%2583%258F%25E3%2581%25AE%25E5%25BA%25A7%25E6%25A8%2599%25E3%2582%2592%25E5%258F%2596%25E5%25BE%2597%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nakamura196%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pkd3BpX1gzTWIzV3VqTnVnV2tPTlJlU3VsNFNTN1BNMWlPQm9LRm5JPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nakamura196</dc:creator></item><item><title><![CDATA[Yahoo!リアルタイム検索を使ってX（旧Twitter）をスクレイピングする方法！🚀]]></title><description><![CDATA[
+ Yahoo!リアルタイム検索を使ってX（旧Twitter）をスクレイピングする方法！🚀
+こんにちは！
+現在、Xではユーザーの最新の投稿を見るにはログインが必要な状態となっています。
+ですが、Yahoo!リアルタイム検索を使用するとログインなしで最新の投稿を確認することができます！✨
+今回は、Yahoo!リアルタイム検索 を活用して、X（旧Twitter）の投稿を取得するPythonスクリプトを紹介します！🐍✨
+
+ 🔹 Yahoo!リアルタイム検索とは？
+Yahoo!リアルタイム検索とは、LINEヤフー株式会社が提供するX(旧Twitter)のポストをリアルタイムでまとめて検索できるサ...]]></description><link>https://zenn.dev/pipipipipi/articles/0345b95543e66e</link><guid isPermaLink="true">https://zenn.dev/pipipipipi/articles/0345b95543e66e</guid><pubDate>Sun, 23 Feb 2025 09:57:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--kPjiTNDc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Yahoo%2521%25E3%2583%25AA%25E3%2582%25A2%25E3%2583%25AB%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25A0%25E6%25A4%259C%25E7%25B4%25A2%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6X%25EF%25BC%2588%25E6%2597%25A7Twitter%25EF%25BC%2589%25E3%2582%2592%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AC%25E3%2582%25A4%25E3%2583%2594%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%25EF%25BC%2581%2520%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:popp%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSjFBVFVfNExibktPbVJpWks1MlJMWERjZ25McDRMNHNfNUJNTHdRLWQxUVE9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>popp</dc:creator></item><item><title><![CDATA[Python で学ぶ！UDP ソケット通信の基本]]></title><description><![CDATA[
+ タイトル：Python で学ぶ！UDP ソケット通信の基本：クライアント・サーバー実装でネットワークの仕組みを理解しよう
+
+ 導入：ネットワークの基礎を Python で体験！
+「ネットワーク」と聞くと、なんだか難しそう…と感じる方もいるかもしれません。でも、実は Python を使えば、ネットワークの基本を簡単に体験できるんです！この記事では、UDP（User Datagram Protocol）という通信プロトコルを使って、クライアントとサーバーがメッセージをやり取りする簡単なプログラムを作ります。
+この記事を読めば、ネットワーク通信の基本的な流れや、クライアントとサーバーの役割...]]></description><link>https://zenn.dev/jinchangz/articles/e173d59c0f4dd0</link><guid isPermaLink="true">https://zenn.dev/jinchangz/articles/e173d59c0f4dd0</guid><pubDate>Sun, 23 Feb 2025 08:32:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--KfI9xEVh--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%2520%25E3%2581%25A7%25E5%25AD%25A6%25E3%2581%25B6%25EF%25BC%2581UDP%2520%25E3%2582%25BD%25E3%2582%25B1%25E3%2583%2583%25E3%2583%2588%25E9%2580%259A%25E4%25BF%25A1%25E3%2581%25AE%25E5%259F%25BA%25E6%259C%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hoso8722%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFUWEFKd2dWZ2I1Yk1hcW82dS1BY1FyZnBRb0hCNUxlX2ZLeHhLRWVHOD1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hoso8722</dc:creator></item><item><title><![CDATA[PyTorchのテンソルをシリアライズする3つの方法とベンチマーク分析]]></title><description><![CDATA[PyTorchで開発をしていると、テンソルデータをバイト列に変換（シリアライズ）して保存や転送を行う必要に迫られることがあります。本記事では、一般的な3つのシリアライズ方法について、その特徴とパフォーマンスを解説します。
+
+ シリアライズの3つの方法
+
+ 1. numpy().tobytes()
+
+def tensor_to_buffer_numpy(tensor: torch.Tensor) -&gt; bytes:
+    if tensor.device.type != "cpu":
+        tensor = tensor.cpu()
+    return tensor.n...]]></description><link>https://zenn.dev/gesonanko/articles/b3be878fe09605</link><guid isPermaLink="true">https://zenn.dev/gesonanko/articles/b3be878fe09605</guid><pubDate>Sun, 23 Feb 2025 04:35:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--N5V2frGi--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:PyTorch%25E3%2581%25AE%25E3%2583%2586%25E3%2583%25B3%25E3%2582%25BD%25E3%2583%25AB%25E3%2582%2592%25E3%2582%25B7%25E3%2583%25AA%25E3%2582%25A2%25E3%2583%25A9%25E3%2582%25A4%25E3%2582%25BA%25E3%2581%2599%25E3%2582%258B3%25E3%2581%25A4%25E3%2581%25AE%25E6%2596%25B9%25E6%25B3%2595%25E3%2581%25A8%25E3%2583%2599%25E3%2583%25B3%25E3%2583%2581%25E3%2583%259E%25E3%2583%25BC%25E3%2582%25AF%25E5%2588%2586%25E6%259E%2590%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:GesonAnko%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0Y0hwQmdOV1BQUlluS3djcUZuQU16VmVsVko2WU85Tkp1OURCV1A1Q3FfQW5RPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>GesonAnko</dc:creator></item><item><title><![CDATA[AI開発バックエンド基礎]]></title><description><![CDATA[
+ はじめに
+AI開発に必要なバックエンドの基礎知識をまとめました！
+以下の記事を読むことで、バックエンド開発の基本的な技術を理解し、簡単なアプリケーションを構築する第一歩を踏み出せます!
+
+ 目次
+
+Python: バックエンドの基盤となるプログラムの考え方
+機械学習・深層学習・LLMとは？
+LangChain: AIアプリケーション開発のためのフレームワーク
+FastAPI: シンプルで高速なAPI構築フレームワーク
+Docker: 環境構築とデプロイの標準ツール
+データベース関連: MongoDBとPinecone
+
+
+ Python:バックエンドの基盤となるプログラミング言語
+P...]]></description><link>https://zenn.dev/utokyo_aido/articles/a22174b90ceba5</link><guid isPermaLink="true">https://zenn.dev/utokyo_aido/articles/a22174b90ceba5</guid><pubDate>Sun, 23 Feb 2025 02:53:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--PP6sFkKZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AI%25E9%2596%258B%25E7%2599%25BA%25E3%2583%2590%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2589%25E5%259F%25BA%25E7%25A4%258E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:AIDO%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS3A3SUtCeDVyd2FRcWFFY3dLZ3p2cDVSNmdVSk40UDd0bTU3T21IQVJsVFlXSVFhdz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>AIDO</dc:creator></item><item><title><![CDATA[時間情報の物体検出精度への影響度 (LiDAR Sweep)]]></title><description><![CDATA[
+ 概要
+本記事では3D物体検出モデルで学習/推論する際に入力する時間情報が与える出力への影響度を調査したものである. ここで扱う時間情報とは LiDAR Sweep に付与される timestamp である. 自動運転領域では連続的に収集される複数の点群データをマージして1つの密な入力データとして取り扱うことがある. このとき基準となる点群データの timestamp と マージされる他の点群データの timestamp の差を特徴量としてモデルに入力する. この値を0に置換した場合とそのまま利用した場合にモデルの出力にどのような変化が起きるか調査した内容をここに記す.
+
+ LiDAR...]]></description><link>https://zenn.dev/kosukeumino/articles/a8ea996cb58450</link><guid isPermaLink="true">https://zenn.dev/kosukeumino/articles/a8ea996cb58450</guid><pubDate>Sun, 23 Feb 2025 01:24:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--tMf8AFKc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%2599%2582%25E9%2596%2593%25E6%2583%2585%25E5%25A0%25B1%25E3%2581%25AE%25E7%2589%25A9%25E4%25BD%2593%25E6%25A4%259C%25E5%2587%25BA%25E7%25B2%25BE%25E5%25BA%25A6%25E3%2581%25B8%25E3%2581%25AE%25E5%25BD%25B1%25E9%259F%25BF%25E5%25BA%25A6%2520%2528LiDAR%2520Sweep%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kosuke%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZlMmE4MGIwZWMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kosuke</dc:creator></item><item><title><![CDATA[uvで自作CLIツールをインストールできるか検証メモ]]></title><description><![CDATA[!
+検証メモなので間違っている可能性があります
+
+pythonでCLIツールを作ることができるが、それをpypiにアップロードすること無しにuvでインストールできるか検証してみた
+現在uvはグローバルなpythonをインストールできないので以下の方法を取る必要がありそう？
+方法例
+
+別の方法でpythonをインストールして pip install .
+
+PyPIに上げて uv tool install でインストール
+
+
+ uvの効くディレクトリでインストールして使う例
+uv initしてから
+hello.py
+def main():
+    print("Hello from hell...]]></description><link>https://zenn.dev/eastxe/articles/9862eda00243ff</link><guid isPermaLink="true">https://zenn.dev/eastxe/articles/9862eda00243ff</guid><pubDate>Sat, 22 Feb 2025 17:15:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GXzv93yL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:uv%25E3%2581%25A7%25E8%2587%25AA%25E4%25BD%259CCLI%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%25E3%2582%2592%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258B%25E3%2581%258B%25E6%25A4%259C%25E8%25A8%25BC%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:EAST%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY5NmMwNGM4YmEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>EAST</dc:creator></item><item><title><![CDATA[PyO3をつかってみる＜PythonとRustの連携＞]]></title><description><![CDATA[
+ 概要
+こんにちは！
+今回は PyO3 についてお話しします。このライブラリは、Rust と Python をバインディングするための Rust ライブラリ です。
+つまり、Rust で Python ライブラリを作成できる のです！！
+私の意見としては、Rust を使いたい理由はその速さです。
+しかし、Python も使いたいという気持ちがあり、その問題を PyO3 が解決してくれます。
+一緒に PyO3 をチェックしてみましょう！
+
+
+ 誰に向けた記事か？
+
+Python ユーザー
+Rust ユーザー
+
+Python の処理速度を上げたいと考えている人
+
+
+
+ PyO3 とは？
+こ...]]></description><link>https://zenn.dev/yujikawa/articles/introduction_to_pyo3</link><guid isPermaLink="true">https://zenn.dev/yujikawa/articles/introduction_to_pyo3</guid><pubDate>Sat, 22 Feb 2025 12:42:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--msDnOF7u--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:PyO3%25E3%2582%2592%25E3%2581%25A4%25E3%2581%258B%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%25EF%25BC%259CPython%25E3%2581%25A8Rust%25E3%2581%25AE%25E9%2580%25A3%25E6%2590%25BA%25EF%25BC%259E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2586%25E3%2581%2598%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzlhYzVhYjdlYmQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ゆじ</dc:creator></item><item><title><![CDATA[Next.js x OpenSearch x Lambda(Python) で簡単な検索・蔵書アプリケーションを作ってみた]]></title><description><![CDATA[
+ 背景
+今まで業務の中で検索機能の実装を担当した際、バックエンド側から取得したデータをフロントエンド側でフィルタリングして表示するようにしていました。
+しかし、この実装だとデータ量が増加するにつれてパフォーマンスの低下が懸念されるのと、複雑な検索要件への対応が難しいかなと思ったので、何かいい方法はないかなーと探していたところ、AWSのマネージドサービスであるOpenSearchを見つけました。
+ちょうどサーバーレスアーキテクチャについても勉強しようと思っていたので、いろいろ調べた結果、YoutubeでAWSのサーバレスアーキテクチャで実装した紹介例があったので、自分でもやってみようと思...]]></description><link>https://zenn.dev/toshipy/articles/cc6960d175a347</link><guid isPermaLink="true">https://zenn.dev/toshipy/articles/cc6960d175a347</guid><pubDate>Sat, 22 Feb 2025 10:50:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--g0ICeEMq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Next.js%2520x%2520OpenSearch%2520x%2520Lambda%2528Python%2529%2520%25E3%2581%25A7%25E7%25B0%25A1%25E5%258D%2598%25E3%2581%25AA%25E6%25A4%259C%25E7%25B4%25A2%25E3%2583%25BB%25E8%2594%25B5%25E6%259B%25B8%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%2592%25E4%25BD%259C...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Toshipy%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2QzMTk5NTE0NTcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Toshipy</dc:creator></item><item><title><![CDATA[PyCharmで使われなくなったインタープリターを削除する方法]]></title><description><![CDATA[
+ 課題
+PyCharmを使っていると、古いプロジェクトを削除しても、インタープリターが [Invalid: 無効] と表示されたまま残ることがあります。
+
+PyCharm は時々「無効な Python インタープリターが選択されました」と表示します。これは、削除したはずの Python インタープリターが大量に残ってしまうためですが、PyCharm はこれを自動的に削除してくれません。
+
+ 解決策
+PyCharm には無効なインタープリターを自動削除する機能がないため、手動で削除する必要があります。
+
+[Settings] &gt; [Project: プロジェクト名] &gt; [P...]]></description><link>https://zenn.dev/kotai/articles/09bd8dce5bc770</link><guid isPermaLink="true">https://zenn.dev/kotai/articles/09bd8dce5bc770</guid><pubDate>Sat, 22 Feb 2025 02:39:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--p_PnaIX5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:PyCharm%25E3%2581%25A7%25E4%25BD%25BF%25E3%2582%258F%25E3%2582%258C%25E3%2581%25AA%25E3%2581%258F%25E3%2581%25AA%25E3%2581%25A3%25E3%2581%259F%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%2597%25E3%2583%25AA%25E3%2582%25BF%25E3%2583%25BC%25E3%2582%2592%25E5%2589%258A%25E9%2599%25A4%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kotai2003%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2gzSEtteFhtSDhmSkd3aDV3cVYtY2tvbVB1NE1rbTN4bWhQRmE2eGc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kotai2003</dc:creator></item><item><title><![CDATA[Pythonで壁紙を変更するGUIをtkinterで作ってみた]]></title><description><![CDATA[
+ 作りたいもの
+tkinterで設定した壁紙一覧から好きな壁紙を選んで簡単に壁紙を変更するguiを作る
+
+ 背景
+pcの壁紙をかっこいい壁紙や可愛い壁紙あとちょっとえっちな壁紙とかを設定したいけど他の人には見られたくない...
+でも、いちいち変更するのってめんどいよなって思ったので調べてみたらできそうだったので作ってみることにしました！
+
+ 環境
+
+windows10
+python 3.7.9
+
+
+ できたもの
+
+アプリ使用例
+壁紙には例としてswitchに保存されてた画像を使いました
+
+ 使用したライブラリ
+
+ctypes
+json
+os
+tkinter
+
+filedialog
+me...]]></description><link>https://zenn.dev/rimikoro/articles/9f3e75ca5fcc14</link><guid isPermaLink="true">https://zenn.dev/rimikoro/articles/9f3e75ca5fcc14</guid><pubDate>Fri, 21 Feb 2025 15:24:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Jqs4zmpx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A7%25E5%25A3%2581%25E7%25B4%2599%25E3%2582%2592%25E5%25A4%2589%25E6%259B%25B4%25E3%2581%2599%25E3%2582%258BGUI%25E3%2582%2592tkinter%25E3%2581%25A7%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%258A%25E3%2581%25BF%25E3%2581%2593%25E3%2582%258D%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg0ODJhNTAxZDQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>りみころ</dc:creator></item><item><title><![CDATA[hogefugaせずにダミーデータを作る「Faker」]]></title><description><![CDATA[
+ 1. はじめに
+ダミーデータは、アプリケーション開発、テストケース、シミュレーションなど、さまざまな場面で、実データの使用が困難な場合や、プライバシー保護が必要な状況での代替手段として使われています。一般的に、ダミーデータの作成は、手動入力や何かしらの関数や擬似乱数生成器からの出力などがあり、hoge,fuga,piyoなどはよく見かけますね。
+ChatGPTなりの生成AIツールを使うと効率的かつ柔軟に生成できますが、ダミーを作りたいだけなのにやり直し含む生成の待ち時間やAPI叩く料金が発生しているのがアレだなと思ったので、pythonの「Faker」を使ってみました。
+
+ 2. F...]]></description><link>https://zenn.dev/nakakiiro/articles/faker_makes_dummy_data</link><guid isPermaLink="true">https://zenn.dev/nakakiiro/articles/faker_makes_dummy_data</guid><pubDate>Fri, 21 Feb 2025 12:30:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qECkdEYP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:hogefuga%25E3%2581%259B%25E3%2581%259A%25E3%2581%25AB%25E3%2583%2580%25E3%2583%259F%25E3%2583%25BC%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%25E3%2580%258CFaker%25E3%2580%258D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nakakiiro%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUxtNXd1M1hKcDNodXJyRzV5cDNzR19jZXJtREh6YXZMeGVqN3FUSDcxTTZuQT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nakakiiro</dc:creator></item><item><title><![CDATA[VectorWorksのスクリプトのダイアログでドロップダウンの表示及び、要素を追加する方法]]></title><description><![CDATA[VectorWorksのPythonスクリプトにおいて、ダイアログ内にドロップダウンメニューを表示し、選択肢を追加する方法を解説します。特に、vs.RunLayoutDialogNのコールバック関数内で選択肢を追加する際のポイントを説明します。
+
+ 1. ドロップダウンの作成
+まず、ダイアログ内にドロップダウンメニューを作成します。以下のコードでは、vs.CreatePullDownMenuを使用してドロップダウンを作成しています。
+vs.CreatePullDownMenu(dialogID, 8, 10)
+ここで、dialogIDはダイアログのID、8はドロップダウンのアイテムID、...]]></description><link>https://zenn.dev/ryujo/articles/799778a432e886</link><guid isPermaLink="true">https://zenn.dev/ryujo/articles/799778a432e886</guid><pubDate>Fri, 21 Feb 2025 09:00:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0EuBABJh--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:VectorWorks%25E3%2581%25AE%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2583%2588%25E3%2581%25AE%25E3%2583%2580%25E3%2582%25A4%25E3%2582%25A2%25E3%2583%25AD%25E3%2582%25B0%25E3%2581%25A7%25E3%2583%2589%25E3%2583%25AD%25E3%2583%2583%25E3%2583%2597%25E3%2583%2580%25E3%2582%25A6%25E3%2583%25B3%25E3%2581%25AE%25E8%25A1%25A8%25E7%25A4%25BA%25E5%258F%258A%25E3%2581%25B3%25E3%2580%2581%25E8%25A6%2581%25E7%25B4%25A0%25E3%2582%2592%25E8%25BF%25BD%25E5%258A%25A0%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:zaki3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSS1Kd2d6N0J3YUtybF90SWFVUWNJLU1MQkxvOV9WU0hRaGR5dURrSjhhZjhNUXJRPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>zaki3</dc:creator></item><item><title><![CDATA[Python研修]]></title><description><![CDATA[社内のPython研修用]]></description><link>https://zenn.dev/owayo/books/5f0320d252e7cf</link><guid isPermaLink="true">https://zenn.dev/owayo/books/5f0320d252e7cf</guid><pubDate>Fri, 21 Feb 2025 06:08:57 GMT</pubDate><dc:creator>owayo</dc:creator></item><item><title><![CDATA[スポーツデータサイト一覧(バスケットボール編)]]></title><description><![CDATA[スポーツデータの分析に興味があるけれど、「どのサイトを見ればいいのかわからない」「どんなデータが手に入るのか知りたい」と思ったことはありませんか？
+バスケットボールでは、得点、アシスト、リバウンドなどの基本的なスタッツから、選手の効率性を測るPER（プレイヤーエフィシエンシーレーティング）や、シュートの期待値を算出するEfg%（有効シュート率）など、さまざまな高度なデータが活用されています。しかし、リーグやチームごとに公開されるデータの種類は異なり、どのサイトを活用すればよいのか迷うことも多いかもしれません。
+この記事では、バスケットボールのデータが取得できる主要なサイトを紹介します。試...]]></description><link>https://zenn.dev/genki_morph/articles/7a8930b39f1ca2</link><guid isPermaLink="true">https://zenn.dev/genki_morph/articles/7a8930b39f1ca2</guid><pubDate>Fri, 21 Feb 2025 06:07:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Ava8nvzM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B9%25E3%2583%259D%25E3%2583%25BC%25E3%2583%2584%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%25B5%25E3%2582%25A4%25E3%2583%2588%25E4%25B8%2580%25E8%25A6%25A7%2528%25E3%2583%2590%25E3%2582%25B9%25E3%2582%25B1%25E3%2583%2583%25E3%2583%2588%25E3%2583%259C%25E3%2583%25BC%25E3%2583%25AB%25E7%25B7%25A8%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:genki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk5ZDE2MzM0ZjkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>genki</dc:creator></item><item><title><![CDATA[fastAPIでの例外ハンドラを理解する]]></title><description><![CDATA[
+ 概要
+この記事はFastAPI初心者が例外ハンドラを理解するために調べた内容のメモです。
+FastAPIでは、エンドポイント内で発生した例外に対して適切なレスポンスを返すため、例外ハンドラとミドルウェアがそれぞれ異なる役割を担っています。
+この記事では、その違いと役割について整理します。
+
+ FastAPIの例外処理
+FastAPIでは、エンドポイント内で発生した例外は、通常は例外ハンドラ（add_exception_handlerで登録）で処理されます。
+一方、予期しない例外はミドルウェア（add_middlewareで登録）で捕捉され、500エラーなどとして処理されます。
+以下は...]]></description><link>https://zenn.dev/kicchan/articles/0008_llyssm_fastapi_exception_handling</link><guid isPermaLink="true">https://zenn.dev/kicchan/articles/0008_llyssm_fastapi_exception_handling</guid><pubDate>Fri, 21 Feb 2025 03:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--PhGp4PtM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:fastAPI%25E3%2581%25A7%25E3%2581%25AE%25E4%25BE%258B%25E5%25A4%2596%25E3%2583%258F%25E3%2583%25B3%25E3%2583%2589%25E3%2583%25A9%25E3%2582%2592%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kicchan%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U0NmExYWE4YWIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kicchan</dc:creator></item><item><title><![CDATA[vttファイルからTEI/XMLを作成する]]></title><description><![CDATA[
+ 概要
+vttファイルからTEI/XMLファイルを作成する方法の備忘録です。
+さらに、IIIFマニフェストから、vttファイルおよびTEI/XMLファイルにアクセスできるようにしてみます。結果、以下のように、TEI/XMLファイルがSeeAlsoに関連づけられ、また「Annotations」タブから、vttファイルの内容にアクセスできます。
+https://clover-iiif-demo.vercel.app/?manifest=https://movie-tei-demo.vercel.app/data/sdcommons_npl-02FT0102974177/sdcommons_...]]></description><link>https://zenn.dev/nakamura196/articles/04e9ec79cfac90</link><guid isPermaLink="true">https://zenn.dev/nakamura196/articles/04e9ec79cfac90</guid><pubDate>Fri, 21 Feb 2025 00:29:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--btWffb8_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:vtt%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2581%258B%25E3%2582%2589TEI%252FXML%25E3%2582%2592%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nakamura196%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pkd3BpX1gzTWIzV3VqTnVnV2tPTlJlU3VsNFNTN1BNMWlPQm9LRm5JPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nakamura196</dc:creator></item><item><title><![CDATA[RabbitMQのTopic Exchangeの使い方を学ぶ]]></title><description><![CDATA[
+ 概要
+RabbitMQのTOPICエクスチェンジを使ったメッセージングの設計できるようにするために使い方を纏める。以下経緯。
+
+DDDの適用方法について学習
+CQRS+ESという設計手法が色々なところでちらつくのでやってみることに
+Event Sourcingに利用するメッセージブローカーとしてBing CopilotからRabbitMQを紹介される
+組み込む過程で手を加えようとしたときに理解が足りていないことがわかる
+チュートリアルを実施して理解を深めることに
+TOPIC Exchangeをアプリケーションに組み込んでみると手の止まる部分があり、まだ理解が足りていないと感じる
+整理...]]></description><link>https://zenn.dev/slowman/articles/74849aedfd9924</link><guid isPermaLink="true">https://zenn.dev/slowman/articles/74849aedfd9924</guid><pubDate>Thu, 20 Feb 2025 17:23:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bojr8VUt--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:RabbitMQ%25E3%2581%25AETopic%2520Exchange%25E3%2581%25AE%25E4%25BD%25BF%25E3%2581%2584%25E6%2596%25B9%25E3%2582%2592%25E5%25AD%25A6%25E3%2581%25B6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:slowman%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NhOGUzMDdkM2UuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>slowman</dc:creator></item><item><title><![CDATA[【Python】BLASTエラーの原因となる制御文字の処理：FASTAファイル修正プログラムの実装・解説！]]></title><description><![CDATA[
+ 制御文字とキャレット表記について
+
+ キャレット表記の基本
+キャレット表記は、ASCIIコードにおける制御文字を視覚的に表現するための記法です。
+
+
+表記方法
+
+
+^ (キャレット) + アルファベット大文字
+例：^A = 制御コード1（Start of Heading：ヘッダ開始）
+ASCIIコード0-31の範囲の制御文字を表現
+ASCIIコード一覧表
+
+
+
+主な使用場面
+
+プログラミング環境でのデバッグ（テキストエディタやプログラミング環境では、特定の制御文字を簡単に参照するためにこの表記が使われます。）
+テキスト処理における制御文字の表現
+文書校正や特殊文字の確認
+
+
+
+
+ 今...]]></description><link>https://zenn.dev/d_treasure0712/articles/aeb731425b2eaa</link><guid isPermaLink="true">https://zenn.dev/d_treasure0712/articles/aeb731425b2eaa</guid><pubDate>Thu, 20 Feb 2025 16:06:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--u8Xc5cdj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591BLAST%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E3%2581%25AE%25E5%258E%259F%25E5%259B%25A0%25E3%2581%25A8%25E3%2581%25AA%25E3%2582%258B%25E5%2588%25B6%25E5%25BE%25A1%25E6%2596%2587%25E5%25AD%2597%25E3%2581%25AE%25E5%2587%25A6%25E7%2590%2586%25EF%25BC%259AFASTA%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E4%25BF%25AE%25E6%25AD%25A3%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%25A0%25E3%2581%25AE%25E5%25AE%259F%25E8%25A3%2585%25E3%2583%25BB%25E8%25A7%25A3%25E8%25AA%25AC%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259F%25E3%2581%258B%25E3%2582%2589%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSnR4b0JVYlhZeklpamlxN181cGc1bXhtSC00dl9HTmFPVGpId1NtQTlqU3I2eW0xZUQ9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>たから</dc:creator></item><item><title><![CDATA[【Python】ネットワーク分析手法：k-hop Clusteringの実装・解説]]></title><description><![CDATA[
+ k-hop Clusteringとは
+k-hop Clusteringは、ネットワークグラフにおけるクラスタリング手法の一つです。この手法の特徴は、ネットワーク上の任意のノードから指定した数（k）のエッジを辿って到達できるノードを1つのクラスタとして抽出できる点にあります！
+
+ 具体的な例で見るk-hop Clustering
+
+ 1-hopクラスタリングの場合
+あるノードから1エッジで到達できるノードのみをクラスタとして抽出します。例えば：
+
+中心ノード「A」から
+直接つながっているノード「B」「C」「D」が
+1つのクラスタとして抽出されます
+
+
+ 2-hopクラスタリングの場合
+...]]></description><link>https://zenn.dev/d_treasure0712/articles/8cb521c919b4dd</link><guid isPermaLink="true">https://zenn.dev/d_treasure0712/articles/8cb521c919b4dd</guid><pubDate>Thu, 20 Feb 2025 15:47:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--CCs1lFcT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591%25E3%2583%258D%25E3%2583%2583%25E3%2583%2588%25E3%2583%25AF%25E3%2583%25BC%25E3%2582%25AF%25E5%2588%2586%25E6%259E%2590%25E6%2589%258B%25E6%25B3%2595%25EF%25BC%259Ak-hop%2520Clustering%25E3%2581%25AE%25E5%25AE%259F%25E8%25A3%2585%25E3%2583%25BB%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259F%25E3%2581%258B%25E3%2582%2589%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSnR4b0JVYlhZeklpamlxN181cGc1bXhtSC00dl9HTmFPVGpId1NtQTlqU3I2eW0xZUQ9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>たから</dc:creator></item></channel></rss>
