@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「JavaScript」のフィード]]></title><description><![CDATA[Zennのトピック「JavaScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/javascript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/64acd76870.png</url><title>Zennの「JavaScript」のフィード</title><link>https://zenn.dev/topics/javascript</link></image><generator>zenn.dev</generator><lastBuildDate>Mon, 24 Feb 2025 00:30:26 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/javascript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[エビングハウスの忘却曲線に沿った学習予定を自動でカレンダーに入れる#1]]></title><description><![CDATA[
+ はじめに
+効率的な学習を行うにあたって、エビングハウスの忘却曲線（10分後、1時間後、1週間後、1ヶ月後）に学んだ内容を復習すると良いのは有名である。
+ここ10年くらいで何回か挑戦するも、３日坊主ですぐにやめてしまった。
+やめた理由の１つに手動管理だとかなりの手間になる。
+さらに１ヶ月目を過ぎる頃には１日に４つの復讐をすることになり、時間的余裕はない（学ぶことより復習に追われる）
+最近notionを使って、１日に１ページくらいは学んだ内容をまとめるということが出来ているので、この習慣を利用する。
+予定を組むのを自動化するために、Google App Script（GAS）、Googl...]]></description><link>https://zenn.dev/kasgo/articles/58de5e5b7e5d7c</link><guid isPermaLink="true">https://zenn.dev/kasgo/articles/58de5e5b7e5d7c</guid><pubDate>Sun, 23 Feb 2025 16:27:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--UXkDFOgT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25A8%25E3%2583%2593%25E3%2583%25B3%25E3%2582%25B0%25E3%2583%258F%25E3%2582%25A6%25E3%2582%25B9%25E3%2581%25AE%25E5%25BF%2598%25E5%258D%25B4%25E6%259B%25B2%25E7%25B7%259A%25E3%2581%25AB%25E6%25B2%25BF%25E3%2581%25A3%25E3%2581%259F%25E5%25AD%25A6%25E7%25BF%2592%25E4%25BA%2588%25E5%25AE%259A%25E3%2582%2592%25E8%2587%25AA%25E5%258B%2595%25E3%2581%25A7%25E3%2582%25AB%25E3%2583%25AC%25E3%2583%25B3%25E3%2583%2580%25E3%2583%25BC%25E3%2581%25AB%25E5%2585%25A5%25E3%2582%258C%25E3%2582%258B%25231%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ivx3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dlbkxOZDlUZEZiY2pCbDlfZFFReS1sMjI1ejFZcUlqdHQ1NFB1Unc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ivx3</dc:creator></item><item><title><![CDATA[【GAS】私がよく使うコードまとめ]]></title><description><![CDATA[私が業務中によく使うコードをまとめています。
+今までは無題のApps scriptにまとめていたのですが
+
+転職したら見られなくなる
+プライベートのPCから見られない
+増えてきて整理したい
+
+といった理由から、改めて整理しています。
+
+ スプレッドシート取得
+const ss = SpreadsheetApp.getActiveSpreadsheet();//アクティブなスプレッドシートを取得
+const ss = SpreadsheetApp.openById('スプレッドシートID');//idで取得
+const sheet = ss.getSheetByName('シート1');/...]]></description><link>https://zenn.dev/kojimaru/articles/0cb5685660b65b</link><guid isPermaLink="true">https://zenn.dev/kojimaru/articles/0cb5685660b65b</guid><pubDate>Sun, 23 Feb 2025 15:02:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--R_RW-eEi--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590GAS%25E3%2580%2591%25E7%25A7%2581%25E3%2581%258C%25E3%2582%2588%25E3%2581%258F%25E4%25BD%25BF%25E3%2581%2586%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2593%25E3%2581%2598%25E3%2581%25BE%25E3%2582%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSzR6Y3lfaVFlMGstVHN6b0prWFpXMFlNOG9wdEYwMkVnaXRibTRTd2otOFo5UE95dz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>こじまる</dc:creator></item><item><title><![CDATA[JavaScriptのDOM要素取得メソッド完全解説]]></title><description><![CDATA[
+📘 入門編として、基本的な使い方については以下の記事をご参照ください：
+要素を取得する3つのJSメソッド 〜挙動の違いをまとめてみた〜
+
+JavaScriptでDOM要素を取得する際、目的に応じて適切なメソッドを選択することが重要です。
+本記事では、各メソッドの特徴と使い分けについて、実装例を交えながら詳しく解説します。
+
+ DOM要素取得メソッドの分類
+JavaScriptのDOM要素取得メソッドは、以下の3つに大別できます。
+
+
+単一要素取得メソッド
+
+
+getElementById：ID指定による取得
+
+querySelector：CSS セレクタによる最初の要素取得
+
+
+
+複数...]]></description><link>https://zenn.dev/harryduck/articles/javascript-dom-selector-methods-advanced</link><guid isPermaLink="true">https://zenn.dev/harryduck/articles/javascript-dom-selector-methods-advanced</guid><pubDate>Sun, 23 Feb 2025 06:44:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--46TWbfKr--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25E3%2581%25AEDOM%25E8%25A6%2581%25E7%25B4%25A0%25E5%258F%2596%25E5%25BE%2597%25E3%2583%25A1%25E3%2582%25BD%25E3%2583%2583%25E3%2583%2589%25E5%25AE%258C%25E5%2585%25A8%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:OE%2520Haruki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc5M2YxYmYzYTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>OE Haruki</dc:creator></item><item><title><![CDATA[フロントエンド基礎]]></title><description><![CDATA[
+ はじめに
+AI開発に必要なフロントエンドの基礎知識をまとめました！
+以下の記事を読むことで、Web技術の基本からモダンなフロントエンド開発までを一通り理解し、シンプルなアプリケーションの構築に役立てることができます。
+
+ 目次
+
+Web技術入門
+HTML &amp; CSS 入門
+JavaScript 入門
+TypeScript 入門
+React 入門：現代のWeb開発を支えるuiライブラリ
+
+
+ Web技術入門
+Webページが表示される仕組み（HTTP通信やブラウザ・サーバー間のやり取り）を理解し、Web開発全体の流れを把握しましょう。基礎を押さえることで、フロントエンドとバックエ...]]></description><link>https://zenn.dev/utokyo_aido/articles/fd4f27dc703929</link><guid isPermaLink="true">https://zenn.dev/utokyo_aido/articles/fd4f27dc703929</guid><pubDate>Sun, 23 Feb 2025 02:52:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BVJuwKXw--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2595%25E3%2583%25AD%25E3%2583%25B3%25E3%2583%2588%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2589%25E5%259F%25BA%25E7%25A4%258E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:AIDO%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS3A3SUtCeDVyd2FRcWFFY3dLZ3p2cDVSNmdVSk40UDd0bTU3T21IQVJsVFlXSVFhdz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>AIDO</dc:creator></item><item><title><![CDATA[lodash/fp と Clojure に学ぶ「データラストの設計 」]]></title><description><![CDATA[関数型プログラミング (FP) では、コードの可読性や再利用性を向上させるために 関数の引数順を工夫することが重要です。特に「データラスト (data-last)」の設計は、複数の関数をパイプライン的に合成するときに便利です。
+本記事では、JavaScript の lodash/fp と Clojure の スレッドラストマクロ (-&gt;&gt;) を使って、データラストの考え方をどのように適用できるかを紹介します。
+
+ 1. lodash/fp のデータラストアプローチ
+通常の lodash は、第一引数にデータを取る API 設計がされていますが、lodash/fp では「データ...]]></description><link>https://zenn.dev/tcool/articles/63d6b4d9440511</link><guid isPermaLink="true">https://zenn.dev/tcool/articles/63d6b4d9440511</guid><pubDate>Sun, 23 Feb 2025 02:43:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6KukMdqL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:lodash%252Ffp%2520%25E3%2581%25A8%2520Clojure%2520%25E3%2581%25AB%25E5%25AD%25A6%25E3%2581%25B6%25E3%2580%258C%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%25A9%25E3%2582%25B9%25E3%2583%2588%25E3%2581%25AE%25E8%25A8%25AD%25E8%25A8%2588%2520%25E3%2580%258D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:t-cool%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2liVmViMFdEdFlWcUtvVDRvYktNeDNTUGZvRTVFOW9rNUV0c21Dc2RvPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>t-cool</dc:creator></item><item><title><![CDATA[React 入門：現代のWeb開発を支えるUIライブラリ]]></title><description><![CDATA[
+ はじめに
+Web開発の現場では、ユーザーインターフェース（UI）の作成が非常に重要です。ここでは、Reactというライブラリに焦点を当て、その役割や目的、使い方を解説します。HTML、CSS、JavaScript の基本は既にご理解いただいている前提で、これらとReactの関係にも触れていきます。React を使うことで、複雑なUIを効率的かつ再利用可能なコンポーネントとして実装できるようになります。
+
+ 1. Reactとは？
+Reactは、Facebook（現 Meta）が開発したオープンソースの JavaScript ライブラリです。主に以下のような特徴があります。
+
+コンポー...]]></description><link>https://zenn.dev/utokyo_aido/articles/b5f09fd9d93d5f</link><guid isPermaLink="true">https://zenn.dev/utokyo_aido/articles/b5f09fd9d93d5f</guid><pubDate>Sun, 23 Feb 2025 02:40:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--DY-n-DX2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%2520%25E5%2585%25A5%25E9%2596%2580%25EF%25BC%259A%25E7%258F%25BE%25E4%25BB%25A3%25E3%2581%25AEWeb%25E9%2596%258B%25E7%2599%25BA%25E3%2582%2592%25E6%2594%25AF%25E3%2581%2588%25E3%2582%258BUI%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:AIDO%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS3A3SUtCeDVyd2FRcWFFY3dLZ3p2cDVSNmdVSk40UDd0bTU3T21IQVJsVFlXSVFhdz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>AIDO</dc:creator></item><item><title><![CDATA[lodash/fp で始める関数型プログラミング]]></title><description><![CDATA[JavaScript で関数型プログラミング (Functional Programming: FP) を取り入れると、データの不変性 (immutability) や副作用の削減 を通じて、コードの保守性や安全性を高めることができます。そこでおすすめしたいのが、「lodash/fp」 を使ったアプローチです。lodash/fp は「関数型プログラミング向け」に最適化されており、FP を実践するうえで役立つ仕組みが組み込まれています。
+本記事では、この lodash/fp を活用し、関数型プログラミングの世界を紹介します。
+「lodash/fp なんか使わなくても、最新のESで実現可能だ...]]></description><link>https://zenn.dev/tcool/articles/759b8ce6fa7f6a</link><guid isPermaLink="true">https://zenn.dev/tcool/articles/759b8ce6fa7f6a</guid><pubDate>Sun, 23 Feb 2025 01:33:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dnkSW4Nh--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:lodash%252Ffp%2520%25E3%2581%25A7%25E5%25A7%258B%25E3%2582%2581%25E3%2582%258B%25E9%2596%25A2%25E6%2595%25B0%25E5%259E%258B%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%259F%25E3%2583%25B3%25E3%2582%25B0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:t-cool%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2liVmViMFdEdFlWcUtvVDRvYktNeDNTUGZvRTVFOW9rNUV0c21Dc2RvPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>t-cool</dc:creator></item><item><title><![CDATA[JavaScript で関数はオブジェクト? なにそれ?]]></title><description><![CDATA[
+ はじめに
+JavaScript をある程度書いていると、「関数はオブジェクトでもある」という話を耳にしますよね。そして、「そんなの知らないよ。はいはい。」と右から左に聞き流しているあなたのためにこの記事を書きました。
+Function オブジェクトのプロトタイプチェーンや内部スロット、コンストラクタとしての使い方、bind/call/apply の仕組み、Arrow Function や Generator Function、Async Function など、JavaScript の関数が持つさまざまな特徴を解説します。
+
+ 関数がオブジェクト??
+まず最初に、JavaScript...]]></description><link>https://zenn.dev/tcool/articles/77418f395f89b3</link><guid isPermaLink="true">https://zenn.dev/tcool/articles/77418f395f89b3</guid><pubDate>Sun, 23 Feb 2025 01:20:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--29CW5KGJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%2520%25E3%2581%25A7%25E9%2596%25A2%25E6%2595%25B0%25E3%2581%25AF%25E3%2582%25AA%25E3%2583%2596%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%253F%2520%25E3%2581%25AA%25E3%2581%25AB%25E3%2581%259D%25E3%2582%258C%253F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:t-cool%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2liVmViMFdEdFlWcUtvVDRvYktNeDNTUGZvRTVFOW9rNUV0c21Dc2RvPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>t-cool</dc:creator></item><item><title><![CDATA[JavaScriptのImport AttributesでJSONとCSSをimportする]]></title><description><![CDATA[
+ はじめに
+こんにちは、ハチミツです。
+私はAstroとPages CMSを組み合わせて自身のブログを構築しています。Pages CMSではMarkdownやJSON、YAMLを扱えますが、ブログの設定をTypeScriptで書いている関係で設定をPages CMSで扱えませんでした。その解決策としてJSONを活用する中で発見したJavaScriptの新機能を共有します。
+
+ 対象読者
+
+JavaScriptでJSONやCSSを扱う開発者
+モダンなJavaScript機能に興味がある方
+
+
+ Import Attributesの基本的な使い方
+
+ JSONの場合
+従来のコード:
+con...]]></description><link>https://zenn.dev/hatimitu76/articles/js-inport-attributes</link><guid isPermaLink="true">https://zenn.dev/hatimitu76/articles/js-inport-attributes</guid><pubDate>Sat, 22 Feb 2025 11:25:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Tp98CvmJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25E3%2581%25AEImport%2520Attributes%25E3%2581%25A7JSON%25E3%2581%25A8CSS%25E3%2582%2592import%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%258F%25E3%2583%2581%25E3%2583%259F%25E3%2583%2584%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA4NmVhMzcwZDQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ハチミツ</dc:creator></item><item><title><![CDATA[【Web 3.0 / BlockChain】DeFi入門：新たな金融エコシステム]]></title><description><![CDATA[
+ はじめに
+ブロックチェーン技術の革新は、従来の金融システムに根本的な変革をもたらす可能性を秘めています。近年、特に注目を浴びているのが「DeFi（Decentralized Finance：分散型金融）」です。DeFiは、中央集権的な金融機関に依存しない、オープンで透明性の高い金融サービスを提供する仕組みです。本記事では、DeFiとは何者か、DeFiがもたらす利点、中央集権型金融との違い、具体的な分散型取引所（DEX）の構築例とその実装コード、さらには私自身が考えるトークン発行モデルについて、詳しく解説します。
+
+
+ 第1章：DeFiとは何者か
+
+ 1-1．DeFiの定義
+DeFiは...]]></description><link>https://zenn.dev/yusukekikuta/articles/93977ef27a56ee</link><guid isPermaLink="true">https://zenn.dev/yusukekikuta/articles/93977ef27a56ee</guid><pubDate>Sat, 22 Feb 2025 09:44:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wbeor2bC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Web%25203.0%2520%252F%2520BlockChain%25E3%2580%2591DeFi%25E5%2585%25A5%25E9%2596%2580%25EF%25BC%259A%25E6%2596%25B0%25E3%2581%259F%25E3%2581%25AA%25E9%2587%2591%25E8%259E%258D%25E3%2582%25A8%25E3%2582%25B3%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yusuke%2520Kikuta%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2UzOGI2NmM0ZDQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yusuke Kikuta</dc:creator></item><item><title><![CDATA[HTML・CSS・Web関連リンク集]]></title><description><![CDATA[私が新入社員研修などで受講生に説明する際に参考にしていたサイトのURLをご紹介します！
+これをひととおり読むだけでもITスキルがアップすると思います！
+インライン要素・ブロックレベル要素とCSS「display」の使い方
+レンダリングとは
+レンダリングの様子
+レンダリングエンジン一覧
+W3Cバリデーションチェック
+コンテンツモデルを図にしたもの
+セレクトボックスを作る
+すぐわかる！HTMLでスペースや空白を入れる正しい方法
+フォントサイズをremで指定する。（emとの比較）
+【模写コーディング】作って学ぶ コーディング学習サイト
+【模写コーディング】おすすめの練習サイト【入門編～上級編】...]]></description><link>https://zenn.dev/codek2/articles/fbaece6f41de5f</link><guid isPermaLink="true">https://zenn.dev/codek2/articles/fbaece6f41de5f</guid><pubDate>Sat, 22 Feb 2025 08:07:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lLW2jmJ4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:HTML%25E3%2583%25BBCSS%25E3%2583%25BBWeb%25E9%2596%25A2%25E9%2580%25A3%25E3%2583%25AA%25E3%2583%25B3%25E3%2582%25AF%25E9%259B%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Udemy%25E3%2583%25BB%25E4%25BC%2581%25E6%25A5%25AD%25E3%2583%25BB%25E3%2582%25AA%25E3%2583%25B3%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSWJNcXYyNnJHY2xGVDEtOURITHVZTjhrWUpWOVN1aTJWYmxkNU9aejljTmtNPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Udemy・企業・オンラインプログラミングスクール講師♪codek2</dc:creator></item><item><title><![CDATA[ViteアプリのPWA化]]></title><description><![CDATA[
+ これは何
+先日思い立って個人開発してるWebアプリをPWA化したので、その時に調べたことを諸々まとめてみました！
+
+ そもそもPWAって
+ご存知の方も多いかもしれませんが、そもそも PWAって何なのという部分にさらっと触れておきます！
+
+PWAはProgressive Web Applicationの略称
+Webサイト・アプリケーションをネイティブアプリのように使えるようにする仕組み
+Service Worker、Web App Manifest といった技術を利用して、次のような機能がWebサイト・アプリケーションでも使えるようになります
+
+✅ アプリのインストール（アプリのように...]]></description><link>https://zenn.dev/shota_karato/articles/cb25b625ced6fb</link><guid isPermaLink="true">https://zenn.dev/shota_karato/articles/cb25b625ced6fb</guid><pubDate>Sat, 22 Feb 2025 04:10:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Jd7An9CB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Vite%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2581%25AEPWA%25E5%258C%2596%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:skitzville%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ2YjgzZjJkNjMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>skitzville</dc:creator></item><item><title><![CDATA[webのモーダルダイアログshowModalDialogの代替手段]]></title><description><![CDATA[IE時代にASP.NETでモーダルダイアログを表示する便利な手段として使われていたWindow.showModalDialog()。
+主要なブラウザで使用できなくなって久しいのですが、未だに残っていたコードの移行を手がける機会があったので代替手段の一例について記載します。
+
+ dialogタグを使用したモーダルダイアログの実現
+dialogタグを利用した、単体で動作するhtml実装例は以下の通りです。
+&lt;!DOCTYPE html&gt;
+&lt;html lang="ja"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+   ...]]></description><link>https://zenn.dev/mitakaosamu/articles/42df115ceb989a</link><guid isPermaLink="true">https://zenn.dev/mitakaosamu/articles/42df115ceb989a</guid><pubDate>Fri, 21 Feb 2025 09:48:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--erp3FvrH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:web%25E3%2581%25AE%25E3%2583%25A2%25E3%2583%25BC%25E3%2583%2580%25E3%2583%25AB%25E3%2583%2580%25E3%2582%25A4%25E3%2582%25A2%25E3%2583%25AD%25E3%2582%25B0showModalDialog%25E3%2581%25AE%25E4%25BB%25A3%25E6%259B%25BF%25E6%2589%258B%25E6%25AE%25B5%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mitakaosamu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFUWEFKeHExQ2VHSm9qRjY1VzljVTB1MGJrQTNaY0d5cDlXcTJGRl9YOD1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mitakaosamu</dc:creator></item><item><title><![CDATA[【Next.js】Zodを使用した環境変数のバリデーション]]></title><description><![CDATA[
+ はじめに
+環境変数を扱うときにZodを使用したバリデーションをすると便利だなと思ったので記事にしました。
+
+ process.envを使用すると面倒なこと
+
+型がstring|undefindになってしまい、毎回undefindチェックする必要がある。
+期待するフォーマットでない値でもそのまま使用できてしまいランタイムエラー等が発生する可能性がある。
+
+大袈裟ですがこんなイメージ
+// process.envから直接取得
+const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+
+// 毎回undefinedチェックを行う必要がある
+if (!a...]]></description><link>https://zenn.dev/kiwichan101kg/articles/7ba33ab64414b2</link><guid isPermaLink="true">https://zenn.dev/kiwichan101kg/articles/7ba33ab64414b2</guid><pubDate>Fri, 21 Feb 2025 09:20:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--JMFKFwdP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Next.js%25E3%2580%2591Zod%25E3%2582%2592%25E4%25BD%25BF%25E7%2594%25A8%25E3%2581%2597%25E3%2581%259F%25E7%2592%25B0%25E5%25A2%2583%25E5%25A4%2589%25E6%2595%25B0%25E3%2581%25AE%25E3%2583%2590%25E3%2583%25AA%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kiwichan%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZlYTA3YzU3YzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kiwichan</dc:creator></item><item><title><![CDATA[JavaScriptの非同期処理]]></title><description><![CDATA[
+ 1. はじめに：同期処理と非同期処理
+JavaScript はシングルスレッドで動作しますが、非同期処理を行うことで、時間のかかる処理（例：ネットワークリクエスト、ファイルの読み込み）の完了を待たずに、次の処理を進めることができます。
+
+
+同期処理： 処理が順番に実行され、前の処理が終わるまで次の処理は開始されません。
+
+非同期処理： 時間のかかる処理をバックグラウンドで実行し、その間にも他の処理を進めることができます。処理が完了したら、コールバック関数や Promise を使って結果を受け取ります。
+
+
+ 2. async/await：非同期処理をシンプルに書くための構文
+asyn...]]></description><link>https://zenn.dev/coke_126/articles/dea8146e9ea0dc</link><guid isPermaLink="true">https://zenn.dev/coke_126/articles/dea8146e9ea0dc</guid><pubDate>Fri, 21 Feb 2025 07:32:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--WNDyQMrx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25E3%2581%25AE%25E9%259D%259E%25E5%2590%258C%25E6%259C%259F%25E5%2587%25A6%25E7%2590%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:coke%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q3MmM2MGNiMGMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>coke</dc:creator></item><item><title><![CDATA[テキストハイライト機能を実装する]]></title><description><![CDATA[
+ はじめに
+読書アプリや学習アプリには、テキストの一部を選択してハイライトをつける機能がよくあります。参考書にマーカーペンで印をつけるようなイメージです。
+本記事では、JavaScript を用いたハイライト機能の実装例を紹介します。
+
+ 結果
+動作するサンプルプログラムを CodePen で公開しています。
+
+
+ 本記事で解説する機能
+
+HTML 文書で、マウスドラッグで選択したテキストにハイライトを適用する
+ハイライト位置を保存し、ページを再読み込みしても同じ位置にハイライトを表示する
+
+
+ 使用する Web API
+
+ Selection API
+テキスト選択範囲の取得には Se...]]></description><link>https://zenn.dev/micin/articles/7dab8bcbd30ae6</link><guid isPermaLink="true">https://zenn.dev/micin/articles/7dab8bcbd30ae6</guid><pubDate>Fri, 21 Feb 2025 04:38:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8vwmeUOB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2586%25E3%2582%25AD%25E3%2582%25B9%25E3%2583%2588%25E3%2583%258F%25E3%2582%25A4%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2588%25E6%25A9%259F%25E8%2583%25BD%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Yoshinari%2520Somaki%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRmZDEzMmY4YTMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BEMICIN%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2p4WnFhVGY1QmhKQU13akV3cTU0b1V3NGtQN0VwTkhid3B0TWtfPXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yoshinari Somaki</dc:creator></item><item><title><![CDATA[『RPGツクールMZ』の入力機器周り]]></title><description><![CDATA[『RPGツクールMZ』関連記事 目次
+『RPGツクールMZ』はキーボード、ゲームパッド、マウス、タッチスクリーンの入力に対応していて、それ自体は非常に良いことですが、デメリットとしてプログラムがややこしいことになっています。
+今回そのややこしい入力周りのコードを読み解く場合の一助となる記事を書ければな…というか自分の理解のための記事です！(いつもそうだという話もある)
+『RPGツクールMZ』で自作のインタフェースを実装したいという場合には、意外と役に立たない知識であることを事前にご了承ください(笑)
+自作インタフェースの作成に関しては次の記事を参照してください。
+『RPGツクールMZ』シ...]]></description><link>https://zenn.dev/tonbi/articles/0dbfc5bfa649e1</link><guid isPermaLink="true">https://zenn.dev/tonbi/articles/0dbfc5bfa649e1</guid><pubDate>Thu, 20 Feb 2025 15:45:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8dbP4qUB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%258ERPG%25E3%2583%2584%25E3%2582%25AF%25E3%2583%25BC%25E3%2583%25ABMZ%25E3%2580%258F%25E3%2581%25AE%25E5%2585%25A5%25E5%258A%259B%25E6%25A9%259F%25E5%2599%25A8%25E5%2591%25A8%25E3%2582%258A%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A8%25E3%2582%2593%25E3%2581%25B3%2540%25E9%25B3%25B6%25E5%25B6%258B%25E5%25B7%25A5%25E6%2588%25BF%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pBYl9FRlAtZm9RQU1pN1VoM3hzYkNyQXZUSTZjUDFkZGJJMWJrPXMyNTAtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>とんび@鳶嶋工房</dc:creator></item><item><title><![CDATA[忙しい人のためのESLint Flat Configの設定例（主要なプラグイン込み）]]></title><description><![CDATA[
+ 前書き
+v9からFlat Configという新しい記法がデフォルトとなったeslintですが、
+v10からeslintrcの機構が無くなるようです。
+https://eslint.org/blog/2023/10/flat-config-rollout-plans/#eslintrc-removed-in-eslint-v10.0.0
+先んじてFlat Config化に取り組みまして、その際の設定の最終系を記します。
+
+ 前提
+
+ここでの記載は以下の技術スタック向けに書かれています。
+
+TypeScript
+React
+Next.js
+※他のプラグインでも応用可能かと思います。
+
+
+...]]></description><link>https://zenn.dev/yu_ta_9/articles/7001d66779ff3a</link><guid isPermaLink="true">https://zenn.dev/yu_ta_9/articles/7001d66779ff3a</guid><pubDate>Thu, 20 Feb 2025 12:03:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--i3QN4Xz6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%25BF%2599%25E3%2581%2597%25E3%2581%2584%25E4%25BA%25BA%25E3%2581%25AE%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AEESLint%2520Flat%2520Config%25E3%2581%25AE%25E8%25A8%25AD%25E5%25AE%259A%25E4%25BE%258B%25EF%25BC%2588%25E4%25B8%25BB%25E8%25A6%2581%25E3%2581%25AA%25E3%2583%2597%25E3%2583%25A9%25E3%2582%25B0%25E3%2582%25A4%25E3%2583%25B3%25E8%25BE%25BC%25E3%2581%25BF%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yu-ta-9%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2QwNzU2NmM5MzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yu-ta-9</dc:creator></item><item><title><![CDATA[和暦と西暦を変換するための NPM パッケージを作成しました]]></title><description><![CDATA[https://www.npmjs.com/package/date-format-wareki
+https://github.com/Cygra/date-format-wareki
+
+ インストール
+npm install date-format-wareki
+
+ 使い方
+import { toWareki, toDate } from "date-format-wareki";
+
+const date = new Date(1996, 10, 27);
+toWareki(date); // =&gt; "平成8/11/27"
+toWareki(date, { era: "narro...]]></description><link>https://zenn.dev/cygra/articles/d829914ebd60eb</link><guid isPermaLink="true">https://zenn.dev/cygra/articles/d829914ebd60eb</guid><pubDate>Thu, 20 Feb 2025 03:28:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--kbdCHqnv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2592%258C%25E6%259A%25A6%25E3%2581%25A8%25E8%25A5%25BF%25E6%259A%25A6%25E3%2582%2592%25E5%25A4%2589%25E6%258F%259B%25E3%2581%2599%25E3%2582%258B%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%2520NPM%2520%25E3%2583%2591%25E3%2583%2583%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B8%25E3%2582%2592%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2597%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Cygra%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzEwOWE3MmQ0OGUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Cygra</dc:creator></item><item><title><![CDATA[🦊🐈️❤|Firefoxベースのブラウザー、模様替えしてみた]]></title><description><![CDATA[こんにちは。Firefoxベースのブラウザーである『noraneko』の開発をしているNyanRusです。
+私が作っているブラウザーについて、「開発のきっかけ」や「開発で知ったこと」、「経験したこと」を書きます。
+
+ Firefoxってなに？
+『Firefox』はMozillaという会社、及びコミュニティが開発しているブラウザーです。
+メジャーなブラウザーである『Chrome』はGoogleが開発しています。
+世の中には、『Microsoft Edge』『Opera』などChromeの亜種がたくさんありますが、Firefoxはそうではなく、Chromeと同じ先祖を持っている違うブラウザー...]]></description><link>https://zenn.dev/nyanrus/articles/2a88304f57faeb</link><guid isPermaLink="true">https://zenn.dev/nyanrus/articles/2a88304f57faeb</guid><pubDate>Thu, 20 Feb 2025 03:11:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--SG13-CQZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%2520%2520%2520%257CFirefox%25E3%2583%2599%25E3%2583%25BC%25E3%2582%25B9%25E3%2581%25AE%25E3%2583%2596%25E3%2583%25A9%25E3%2582%25A6%25E3%2582%25B6%25E3%2583%25BC%25E3%2580%2581%25E6%25A8%25A1%25E6%25A7%2598%25E6%259B%25BF%25E3%2581%2588%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:NyanRus%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE3YmFiMTMwYTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>NyanRus</dc:creator></item></channel></rss>
