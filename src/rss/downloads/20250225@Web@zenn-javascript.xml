@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「JavaScript」のフィード]]></title><description><![CDATA[Zennのトピック「JavaScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/javascript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/64acd76870.png</url><title>Zennの「JavaScript」のフィード</title><link>https://zenn.dev/topics/javascript</link></image><generator>zenn.dev</generator><lastBuildDate>Tue, 25 Feb 2025 11:30:43 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/javascript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[JS演習　コールバック関数　★2～3]]></title><description><![CDATA[こんばんは。今日はコールバック関数の演習です。作り方が分かれば使い方もより一層わかると思います。
+
+ 処理の反復　★★☆☆☆
+シンプルなコールバック関数です。関数を繰り返してください。
+
+function
+repeat(関数, 回数);// 回数分だけ関数を実行
+
+// ここにコードを書いてね。
+
+repeat(() =&gt; {
+    console.log('JS');
+}, 3);// &gt; 'JS' 'JS' 'JS'
+
+repeat(function() {
+    console.log('うさぎ');
+}, 0);// なし
+ヒント　コールバック関数とは
+引数に関数...]]></description><link>https://zenn.dev/javascript/articles/c5b9584dfa5575</link><guid isPermaLink="true">https://zenn.dev/javascript/articles/c5b9584dfa5575</guid><pubDate>Tue, 25 Feb 2025 11:00:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--P-q49xE2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JS%25E6%25BC%2594%25E7%25BF%2592%25E3%2580%2580%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%25AB%25E3%2583%2590%25E3%2583%2583%25E3%2582%25AF%25E9%2596%25A2%25E6%2595%25B0%25E3%2580%2580%25E2%2598%25852%25EF%25BD%259E3%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E9%25AB%2598%25E7%25B4%259A%25E3%2581%25AA%25E9%2583%25BD%25E4%25BC%259A%25E3%2583%2590%25E3%2583%2588%25E5%25A5%25BD%25E3%2581%258D%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RmMjIwOGM5NWIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>高級な都会バト好き</dc:creator></item><item><title><![CDATA[【複数ディレクトリ対応】HtmlWebpackPlugin を自動で追加させる]]></title><description><![CDATA[
+ 先ずは結論
+とりあえず試してやろうじゃねーか！て人は以下の手順を参考に
+
+ 前提
+
+ejsを使用
+
+src/html 配下のディレクトリ構成をそのまま　public に出力させる
+
+
+フォルダ構成(一部省略)
+.
+└── webpackSample
+    ├── public // ファイルの出力先
+    ├── src // リソースファイル
+    │   └── html
+    │       ├── article
+    │       │   └── index.ejs
+    │       └── index.ejs
+    └── webpack.js
+
+
+ ...]]></description><link>https://zenn.dev/noteman/articles/987617770d7f1c</link><guid isPermaLink="true">https://zenn.dev/noteman/articles/987617770d7f1c</guid><pubDate>Tue, 25 Feb 2025 07:26:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--488YRYbb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E8%25A4%2587%25E6%2595%25B0%25E3%2583%2587%25E3%2582%25A3%25E3%2583%25AC%25E3%2582%25AF%25E3%2583%2588%25E3%2583%25AA%25E5%25AF%25BE%25E5%25BF%259C%25E3%2580%2591HtmlWebpackPlugin%2520%25E3%2582%2592%25E8%2587%25AA%25E5%258B%2595%25E3%2581%25A7%25E8%25BF%25BD%25E5%258A%25A0%25E3%2581%2595%25E3%2581%259B%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:NoteMan%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJjOTQ2OWI2YjguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>NoteMan</dc:creator></item><item><title><![CDATA[【超初心者向け】Firebase・Express・Node.jsの関係を理解したい！]]></title><description><![CDATA[必要に迫られてFirebase Cloud Functionsを勉強し始めたところ、
+初っ端のJavaScriptの記述である、
+const express = require('express');
+という
+「Expressフレームワークをインポートするための記述」
+の意味が全くわからないことってありますよね（私のこと）
+ということで、今回は、
+
+Firebase Cloud Functions
+Expressフレームワーク
+Node.js
+
+などの関係について、概念図やその意味などをまとめてみました（自分のため）
+
+ const express = require('express'...]]></description><link>https://zenn.dev/40_comeback_eng/articles/c8b75f0ae6242a</link><guid isPermaLink="true">https://zenn.dev/40_comeback_eng/articles/c8b75f0ae6242a</guid><pubDate>Tue, 25 Feb 2025 00:00:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Gg_zgvGM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E8%25B6%2585%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E5%2590%2591%25E3%2581%2591%25E3%2580%2591Firebase%25E3%2583%25BBExpress%25E3%2583%25BBNode.js%25E3%2581%25AE%25E9%2596%25A2%25E4%25BF%2582%25E3%2582%2592%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2597%25E3%2581%259F%25E3%2581%2584%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%25AF%25E3%2583%258B%25E3%2581%258B%25E3%2581%259A%254040%25E6%25AD%25B3%2520%25E5%2587%25BA%25E6%2588%25BB%25E3%2582%258A%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg3ZGNhZmRmOGUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ワニかず@40歳 出戻りエンジニア</dc:creator></item><item><title><![CDATA[【初級者脱却】【一問一答】javaScriptのオブジェクト・配列について]]></title><description><![CDATA[
+ 前書
+若手エンジニアがつまづきやすいであろう、javaScriptのオブジェクトや配列の挙動について、読むだけよりも実際に自分で考えて答えを出す方が理解が進むかと思うので、一問一答形式で書いていきます。
+console.log()で何が出力されるかを考えてみてください。
+
+ 問題集
+
+Question
+
+const obj1 = {
+  key1: "val1",
+  key2: "val2"
+};
+const obj2 = {
+  key1: "val1",
+  key2: "val2"
+};
+console.log(obj1 === obj2);
+Answerfalse
+// o...]]></description><link>https://zenn.dev/tkfm84/articles/4d0b4d6ca0ea36</link><guid isPermaLink="true">https://zenn.dev/tkfm84/articles/4d0b4d6ca0ea36</guid><pubDate>Mon, 24 Feb 2025 16:37:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--VODxyep1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%2588%259D%25E7%25B4%259A%25E8%2580%2585%25E8%2584%25B1%25E5%258D%25B4%25E3%2580%2591%25E3%2580%2590%25E4%25B8%2580%25E5%2595%258F%25E4%25B8%2580%25E7%25AD%2594%25E3%2580%2591javaScript%25E3%2581%25AE%25E3%2582%25AA%25E3%2583%2596%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E3%2583%25BB%25E9%2585%258D%25E5%2588%2597%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tkfm%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4WmkwZ3dBMExsVjlLbWFxdmRPZXlpSi1vclNjeHY5ampUNFJ4Wl9xZz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tkfm</dc:creator></item><item><title><![CDATA[AIボドゲソムリエ🎲Gemini2.0×Dify×Flaskで作る推薦エージェント]]></title><description><![CDATA[
+ 概要
+ボードゲームを始めたいけど、何を選べばいいか分からない...。
+そんな経験はありませんか？？
+ボードゲームには、プレイ人数やプレイ時間、ゲームの難易度など、考慮すべき要素が多くあります。
+初心者にとって、これらの条件を満たす最適なゲームを見つけるのは結構大変だったりしますよね！
+そこで今回作った「ボードゲームソムリエのサイハラさん」は、プレイ人数やプレイ時間などの簡単な質問に答えるだけで、AIが最適なボードゲームを提案してくれるチャットエージェントです！
+サイハラさん開発にあたり、フロントエンドではPythonのWeb開発フレームワークのFlaskとJavaScript、バック...]]></description><link>https://zenn.dev/ghillie/articles/fcb896886d25f1</link><guid isPermaLink="true">https://zenn.dev/ghillie/articles/fcb896886d25f1</guid><pubDate>Mon, 24 Feb 2025 12:57:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--b0aXE4U2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AI%25E3%2583%259C%25E3%2583%2589%25E3%2582%25B2%25E3%2582%25BD%25E3%2583%25A0%25E3%2583%25AA%25E3%2582%25A8%2520Gemini2.0%25C3%2597Dify%25C3%2597Flask%25E3%2581%25A7%25E4%25BD%259C%25E3%2582%258B%25E6%258E%25A8%25E8%2596%25A6%25E3%2582%25A8%25E3%2583%25BC%25E3%2582%25B8%25E3%2582%25A7%25E3%2583%25B3%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25A2%25E3%2582%25AE%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc2NDA5NzlhNzAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>アギ</dc:creator></item><item><title><![CDATA[Clineに自分をエミュレートさせて技術記事を代筆させてみたらビビった]]></title><description><![CDATA[なんか驚き屋っぽくてアレなんだけど、今回はさすがに驚く権利があると思うので、至急記事を書く。
+
+ やろうとしたこと
+
+毎回手元の検証結果から技術記事を構成するのがだるい
+自分のブログを適当に読ませておいて、その構成と文体を真似させればいいのでは
+
+手元に mizchi/zenn というリポジトリがあり、ここに zennにポストする原稿を管理している。
+$ tree ./articles   
+./articles
+├── 1c35fdcc77065c02f631.md
+├── 3e4742e24f2ca0118f70.md
+├── 8a017097d3994ddc0a85.md
+├── ...]]></description><link>https://zenn.dev/mizchi/articles/auto-mizchi-writer</link><guid isPermaLink="true">https://zenn.dev/mizchi/articles/auto-mizchi-writer</guid><pubDate>Mon, 24 Feb 2025 12:07:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--y4_HHEk7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Cline%25E3%2581%25AB%25E8%2587%25AA%25E5%2588%2586%25E3%2582%2592%25E3%2582%25A8%25E3%2583%259F%25E3%2583%25A5%25E3%2583%25AC%25E3%2583%25BC%25E3%2583%2588%25E3%2581%2595%25E3%2581%259B%25E3%2581%25A6%25E6%258A%2580%25E8%25A1%2593%25E8%25A8%2598%25E4%25BA%258B%25E3%2582%2592%25E4%25BB%25A3%25E7%25AD%2586%25E3%2581%2595%25E3%2581%259B%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25E3%2582%2589%25E3%2583%2593%25E3%2583%2593%25E3%2581%25A3%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mizchi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2liclRHT052Z3d3ay1fNGxlcVk4TGNGSlNuX0FoWnpEWVlKaXJNcWc9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mizchi</dc:creator></item><item><title><![CDATA[JavaScriptのよく使う配列処理備忘録]]></title><description><![CDATA[lodashとかunderscoreのライブラリ、便利ですよね。
+でもそれ、ほんとにライブラリに頼らないと実装できませんか？
+Vanilla Jsで書けるものは書きましょう、ということでチートシート的にまとめていきます。
+
+ every()
+
+処理内容
+
+配列内の全ての要素が、引数の関数の処理に合致するかどうかを判定。
+
+戻り値
+
+Boolean
+const arr = [10, 14, 22, 40, 90];
+const result1 = arr.every((elm) =&gt; {
+  return elm % 2 === 0
+})
+console.log(result1); ...]]></description><link>https://zenn.dev/tkfm84/articles/e7b1b062752bae</link><guid isPermaLink="true">https://zenn.dev/tkfm84/articles/e7b1b062752bae</guid><pubDate>Mon, 24 Feb 2025 08:56:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--CMAo_2tV--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25E3%2581%25AE%25E3%2582%2588%25E3%2581%258F%25E4%25BD%25BF%25E3%2581%2586%25E9%2585%258D%25E5%2588%2597%25E5%2587%25A6%25E7%2590%2586%25E5%2582%2599%25E5%25BF%2598%25E9%258C%25B2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tkfm%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4WmkwZ3dBMExsVjlLbWFxdmRPZXlpSi1vclNjeHY5ampUNFJ4Wl9xZz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tkfm</dc:creator></item><item><title><![CDATA[RTK Queryを始めてみてナニコレイミワカラナイから便利やなーぐらいになった人の]]></title><description><![CDATA[
+ 概要
+仕事で開発をしている時、RTK Queryなるものに出会いました
+そもそもReduxが得意ではない点 + fetchで頑張るおじさんだった私が始めて出会った時
+ナニコレイミワカラナイ・・・と一回PCを閉じたのですが、ちょっと基礎を触ってみて
+便利やなーとなる過程をただつらつら書いただけの記事です🙌
+
+ RTK Qeuryってそもそも何よ
+RTK Queryと言うのはRedux Toolkitに含まれているデータフェッチ・キャッシュ管理を良しなーにやってくれる便利ツールです。
+fetchやaxiosを使って手動で状態管理する代わりに、RTK Queryを使えば非同期処理をRedu...]]></description><link>https://zenn.dev/koakichi/articles/ea625114bdcbb8</link><guid isPermaLink="true">https://zenn.dev/koakichi/articles/ea625114bdcbb8</guid><pubDate>Mon, 24 Feb 2025 07:31:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--26iC-NTG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:RTK%2520Query%25E3%2582%2592%25E5%25A7%258B%25E3%2582%2581%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%25A6%25E3%2583%258A%25E3%2583%258B%25E3%2582%25B3%25E3%2583%25AC%25E3%2582%25A4%25E3%2583%259F%25E3%2583%25AF%25E3%2582%25AB%25E3%2583%25A9%25E3%2583%258A%25E3%2582%25A4%25E3%2581%258B%25E3%2582%2589%25E4%25BE%25BF%25E5%2588%25A9%25E3%2582%2584%25E3%2581%25AA%25E3%2583%25BC%25E3%2581%2590%25E3%2582%2589%25E3%2581%2584%25E3%2581%25AB%25E3%2581%25AA%25E3%2581%25A3%25E3%2581%259F%25E4%25BA%25BA%25E3%2581%25AE%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:koakichi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2YzZGIyYzA0MmQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>koakichi</dc:creator></item><item><title><![CDATA[[GIS]MapLibre GL JSを使用したWebマップ上での距離測定について（備忘録）]]></title><description><![CDATA[
+ はじめに
+・GISとは地理情報システム（Geographic Information System）の略称です。
+・地球上に存在する地形物や事象をコンピュータ上の地図に可視化し、空間データの管理・検索・分析等を可能にします。
+
+ ２．サンプルプログラム
+
+index.html
+&lt;!DOCTYPE html&gt;
+&lt;html lang="ja"&gt;
+&lt;head&gt;
+    &lt;meta charset='utf-8'&gt;
+    &lt;meta name="viewport" content="width=device-width, initial...]]></description><link>https://zenn.dev/yama_kawa/articles/131b2b2d7a6b3b</link><guid isPermaLink="true">https://zenn.dev/yama_kawa/articles/131b2b2d7a6b3b</guid><pubDate>Mon, 24 Feb 2025 06:57:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--gs7tE_4---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BGIS%255DMapLibre%2520GL%2520JS%25E3%2582%2592%25E4%25BD%25BF%25E7%2594%25A8%25E3%2581%2597%25E3%2581%259FWeb%25E3%2583%259E%25E3%2583%2583%25E3%2583%2597%25E4%25B8%258A%25E3%2581%25A7%25E3%2581%25AE%25E8%25B7%259D%25E9%259B%25A2%25E6%25B8%25AC%25E5%25AE%259A%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25EF%25BC%2588%25E5%2582%2599%25E5%25BF%2598%25E9%258C%25B2%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%25A9%25E3%2582%25B6%25E3%2583%258B%25E3%2582%25A2%25E3%2583%2591%25E3%2583%25B3%25E3%2582%25B5%25E3%2583%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M1ZjYyZjIwYTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ラザニアパンサー</dc:creator></item><item><title><![CDATA[TS/JSでセミコロンをつけないスタイル（No-Semi）について]]></title><description><![CDATA[TypeScriptやJavaScriptにおいて、文末にセミコロンをつけないスタイル（以下「No-Semiスタイル」）の現在の普及状況について、最近の調査資料が見つからなかったため、独自に調べてみました。コーディングスタイルを検討する際の参考になれば幸いです。
+
+ 背景
+Cursor ComposerやClineなどのコーディングAIを使ってTypeScriptの開発をしていると、Lint設定でNo-Semiスタイルを指定しているにもかかわらず、Composerがセミコロンありのコードを生成してしまうため、毎回Lintエラーが発生することがあります。
+この問題は「TypeScriptで...]]></description><link>https://zenn.dev/sparkleai_blog/articles/346593f3b32405</link><guid isPermaLink="true">https://zenn.dev/sparkleai_blog/articles/346593f3b32405</guid><pubDate>Mon, 24 Feb 2025 06:48:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--rAbpZ1sX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TS%252FJS%25E3%2581%25A7%25E3%2582%25BB%25E3%2583%259F%25E3%2582%25B3%25E3%2583%25AD%25E3%2583%25B3%25E3%2582%2592%25E3%2581%25A4%25E3%2581%2591%25E3%2581%25AA%25E3%2581%2584%25E3%2582%25B9%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25AB%25EF%25BC%2588No-Semi%25EF%25BC%2589%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:delhi%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZmMDAxYWM3ZjEuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Sparkle%2520AI%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzMzODc0Y2EyNmYuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>delhi</dc:creator></item><item><title><![CDATA[エビングハウスの忘却曲線に沿った学習予定を自動でカレンダーに入れる#1]]></title><description><![CDATA[
+ はじめに
+効率的な学習を行うにあたって、エビングハウスの忘却曲線（10分後、1時間後、1週間後、1ヶ月後）に学んだ内容を復習すると良いのは有名である。
+ここ10年くらいで何回か挑戦するも、３日坊主ですぐにやめてしまった。
+やめた理由の１つに手動管理だとかなりの手間になる。
+さらに１ヶ月目を過ぎる頃には１日に４つの復讐をすることになり、時間的余裕はない（学ぶことより復習に追われる）
+最近notionを使って、１日に１ページくらいは学んだ内容をまとめるということが出来ているので、この習慣を利用する。
+予定を組むのを自動化するために、Google App Script（GAS）、Googl...]]></description><link>https://zenn.dev/kasgo/articles/58de5e5b7e5d7c</link><guid isPermaLink="true">https://zenn.dev/kasgo/articles/58de5e5b7e5d7c</guid><pubDate>Sun, 23 Feb 2025 16:27:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--UXkDFOgT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25A8%25E3%2583%2593%25E3%2583%25B3%25E3%2582%25B0%25E3%2583%258F%25E3%2582%25A6%25E3%2582%25B9%25E3%2581%25AE%25E5%25BF%2598%25E5%258D%25B4%25E6%259B%25B2%25E7%25B7%259A%25E3%2581%25AB%25E6%25B2%25BF%25E3%2581%25A3%25E3%2581%259F%25E5%25AD%25A6%25E7%25BF%2592%25E4%25BA%2588%25E5%25AE%259A%25E3%2582%2592%25E8%2587%25AA%25E5%258B%2595%25E3%2581%25A7%25E3%2582%25AB%25E3%2583%25AC%25E3%2583%25B3%25E3%2583%2580%25E3%2583%25BC%25E3%2581%25AB%25E5%2585%25A5%25E3%2582%258C%25E3%2582%258B%25231%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ivx3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dlbkxOZDlUZEZiY2pCbDlfZFFReS1sMjI1ejFZcUlqdHQ1NFB1Unc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ivx3</dc:creator></item><item><title><![CDATA[【GAS】私がよく使うコードまとめ]]></title><description><![CDATA[私が業務中によく使うコードをまとめています。
+今までは無題のApps scriptにまとめていたのですが
+
+転職したら見られなくなる
+プライベートのPCから見られない
+増えてきて整理したい
+
+といった理由から、改めて記事にしました（随時更新予定）。
+
+ スプレッドシート取得
+const ss = SpreadsheetApp.getActiveSpreadsheet();//アクティブなスプレッドシートを取得
+const ss = SpreadsheetApp.openById('スプレッドシートID');//idで取得
+const sheet = ss.getSheetByName('...]]></description><link>https://zenn.dev/kojimaru/articles/0cb5685660b65b</link><guid isPermaLink="true">https://zenn.dev/kojimaru/articles/0cb5685660b65b</guid><pubDate>Sun, 23 Feb 2025 15:02:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--R_RW-eEi--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590GAS%25E3%2580%2591%25E7%25A7%2581%25E3%2581%258C%25E3%2582%2588%25E3%2581%258F%25E4%25BD%25BF%25E3%2581%2586%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2593%25E3%2581%2598%25E3%2581%25BE%25E3%2582%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSzR6Y3lfaVFlMGstVHN6b0prWFpXMFlNOG9wdEYwMkVnaXRibTRTd2otOFo5UE95dz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>こじまる</dc:creator></item><item><title><![CDATA[JavaScriptのDOM要素取得メソッド完全解説]]></title><description><![CDATA[
+📘 入門編として、基本的な使い方については以下の記事をご参照ください：
+要素を取得する3つのJSメソッド 〜挙動の違いをまとめてみた〜
+
+JavaScriptでDOM要素を取得する際、目的に応じて適切なメソッドを選択することが重要です。
+本記事では、各メソッドの特徴と使い分けについて、実装例を交えながら詳しく解説します。
+
+ DOM要素取得メソッドの分類
+JavaScriptのDOM要素取得メソッドは、以下の3つに大別できます。
+
+
+単一要素取得メソッド
+
+
+getElementById：ID指定による取得
+
+querySelector：CSS セレクタによる最初の要素取得
+
+
+
+複数...]]></description><link>https://zenn.dev/harryduck/articles/javascript-dom-selector-methods-advanced</link><guid isPermaLink="true">https://zenn.dev/harryduck/articles/javascript-dom-selector-methods-advanced</guid><pubDate>Sun, 23 Feb 2025 06:44:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--46TWbfKr--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25E3%2581%25AEDOM%25E8%25A6%2581%25E7%25B4%25A0%25E5%258F%2596%25E5%25BE%2597%25E3%2583%25A1%25E3%2582%25BD%25E3%2583%2583%25E3%2583%2589%25E5%25AE%258C%25E5%2585%25A8%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:OE%2520Haruki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc5M2YxYmYzYTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>OE Haruki</dc:creator></item><item><title><![CDATA[フロントエンド基礎]]></title><description><![CDATA[
+ はじめに
+AI開発に必要なフロントエンドの基礎知識をまとめました！
+以下の記事を読むことで、Web技術の基本からモダンなフロントエンド開発までを一通り理解し、シンプルなアプリケーションの構築に役立てることができます。
+
+ 目次
+
+Web技術入門
+HTML &amp; CSS 入門
+JavaScript 入門
+TypeScript 入門
+React 入門：現代のWeb開発を支えるuiライブラリ
+
+
+ Web技術入門
+Webページが表示される仕組み（HTTP通信やブラウザ・サーバー間のやり取り）を理解し、Web開発全体の流れを把握しましょう。基礎を押さえることで、フロントエンドとバックエ...]]></description><link>https://zenn.dev/utokyo_aido/articles/fd4f27dc703929</link><guid isPermaLink="true">https://zenn.dev/utokyo_aido/articles/fd4f27dc703929</guid><pubDate>Sun, 23 Feb 2025 02:52:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BVJuwKXw--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2595%25E3%2583%25AD%25E3%2583%25B3%25E3%2583%2588%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2589%25E5%259F%25BA%25E7%25A4%258E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:AIDO%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS3A3SUtCeDVyd2FRcWFFY3dLZ3p2cDVSNmdVSk40UDd0bTU3T21IQVJsVFlXSVFhdz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>AIDO</dc:creator></item><item><title><![CDATA[lodash/fp と Clojure に学ぶ「データラスト」の考え方]]></title><description><![CDATA[関数型プログラミング (FP) では、コードの可読性や再利用性を向上させるために、関数の引数順を工夫します。例えば「データラスト (data-last)」の考え方は、複数の関数をパイプライン的に合成するときに便利です。
+本記事では、JavaScript の lodash/fp と Clojure の スレッドラストマクロ (-&gt;&gt;) を通して、データラストの考え方を学びます。
+
+ 1. lodash/fp のデータラストアプローチ
+通常の lodash は、第一引数にデータを取る API 設計がされていますが、lodash/fp では「データラスト」を採用しています。これは関...]]></description><link>https://zenn.dev/tcool/articles/63d6b4d9440511</link><guid isPermaLink="true">https://zenn.dev/tcool/articles/63d6b4d9440511</guid><pubDate>Sun, 23 Feb 2025 02:43:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2Xug2SF1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:lodash%252Ffp%2520%25E3%2581%25A8%2520Clojure%2520%25E3%2581%25AB%25E5%25AD%25A6%25E3%2581%25B6%25E3%2580%258C%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%25A9%25E3%2582%25B9%25E3%2583%2588%25E3%2580%258D%25E3%2581%25AE%25E8%2580%2583%25E3%2581%2588%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:t-cool%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2liVmViMFdEdFlWcUtvVDRvYktNeDNTUGZvRTVFOW9rNUV0c21Dc2RvPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>t-cool</dc:creator></item><item><title><![CDATA[React 入門：現代のWeb開発を支えるUIライブラリ]]></title><description><![CDATA[
+ はじめに
+Web開発の現場では、ユーザーインターフェース（UI）の作成が非常に重要です。ここでは、Reactというライブラリに焦点を当て、その役割や目的、使い方を解説します。HTML、CSS、JavaScript の基本は既にご理解いただいている前提で、これらとReactの関係にも触れていきます。React を使うことで、複雑なUIを効率的かつ再利用可能なコンポーネントとして実装できるようになります。
+
+ 1. Reactとは？
+Reactは、Facebook（現 Meta）が開発したオープンソースの JavaScript ライブラリです。主に以下のような特徴があります。
+
+コンポー...]]></description><link>https://zenn.dev/utokyo_aido/articles/b5f09fd9d93d5f</link><guid isPermaLink="true">https://zenn.dev/utokyo_aido/articles/b5f09fd9d93d5f</guid><pubDate>Sun, 23 Feb 2025 02:40:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--DY-n-DX2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%2520%25E5%2585%25A5%25E9%2596%2580%25EF%25BC%259A%25E7%258F%25BE%25E4%25BB%25A3%25E3%2581%25AEWeb%25E9%2596%258B%25E7%2599%25BA%25E3%2582%2592%25E6%2594%25AF%25E3%2581%2588%25E3%2582%258BUI%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:AIDO%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS3A3SUtCeDVyd2FRcWFFY3dLZ3p2cDVSNmdVSk40UDd0bTU3T21IQVJsVFlXSVFhdz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>AIDO</dc:creator></item><item><title><![CDATA[JavaScript で関数はオブジェクト? なにそれ?]]></title><description><![CDATA[
+ はじめに
+JavaScript をある程度書いていると、「関数はオブジェクトでもある」という話を耳にしますよね。そして、「そんなの知らないよ。はいはい。」と右から左に聞き流しているあなたのためにこの記事を書きました。
+Function オブジェクトのプロトタイプチェーンや内部スロット、コンストラクタとしての使い方、bind/call/apply の仕組み、Arrow Function や Generator Function、Async Function など、JavaScript の関数が持つさまざまな特徴を解説します。
+
+ 関数がオブジェクト??
+まず最初に、JavaScript...]]></description><link>https://zenn.dev/tcool/articles/77418f395f89b3</link><guid isPermaLink="true">https://zenn.dev/tcool/articles/77418f395f89b3</guid><pubDate>Sun, 23 Feb 2025 01:20:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--29CW5KGJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%2520%25E3%2581%25A7%25E9%2596%25A2%25E6%2595%25B0%25E3%2581%25AF%25E3%2582%25AA%25E3%2583%2596%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%253F%2520%25E3%2581%25AA%25E3%2581%25AB%25E3%2581%259D%25E3%2582%258C%253F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:t-cool%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2liVmViMFdEdFlWcUtvVDRvYktNeDNTUGZvRTVFOW9rNUV0c21Dc2RvPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>t-cool</dc:creator></item><item><title><![CDATA[JavaScriptのImport AttributesでJSONとCSSをimportする]]></title><description><![CDATA[
+ はじめに
+こんにちは、ハチミツです。
+私はAstroとPages CMSを組み合わせて自身のブログを構築しています。Pages CMSではMarkdownやJSON、YAMLを扱えますが、ブログの設定をTypeScriptで書いている関係で設定をPages CMSで扱えませんでした。その解決策としてJSONを活用する中で発見したJavaScriptの新機能を共有します。
+
+ 対象読者
+
+JavaScriptでJSONやCSSを扱う開発者
+モダンなJavaScript機能に興味がある方
+
+
+ Import Attributesの基本的な使い方
+
+ JSONの場合
+従来のコード:
+con...]]></description><link>https://zenn.dev/hatimitu76/articles/js-inport-attributes</link><guid isPermaLink="true">https://zenn.dev/hatimitu76/articles/js-inport-attributes</guid><pubDate>Sat, 22 Feb 2025 11:25:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Tp98CvmJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25E3%2581%25AEImport%2520Attributes%25E3%2581%25A7JSON%25E3%2581%25A8CSS%25E3%2582%2592import%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%258F%25E3%2583%2581%25E3%2583%259F%25E3%2583%2584%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA4NmVhMzcwZDQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ハチミツ</dc:creator></item><item><title><![CDATA[【Web 3.0 / BlockChain】DeFi入門：新たな金融エコシステム]]></title><description><![CDATA[
+ はじめに
+ブロックチェーン技術の革新は、従来の金融システムに根本的な変革をもたらす可能性を秘めています。近年、特に注目を浴びているのが「DeFi（Decentralized Finance：分散型金融）」です。DeFiは、中央集権的な金融機関に依存しない、オープンで透明性の高い金融サービスを提供する仕組みです。本記事では、DeFiとは何者か、DeFiがもたらす利点、中央集権型金融との違い、具体的な分散型取引所（DEX）の構築例とその実装コード、さらには私自身が考えるトークン発行モデルについて、詳しく解説します。
+
+
+ 第1章：DeFiとは何者か
+
+ 1-1．DeFiの定義
+DeFiは...]]></description><link>https://zenn.dev/yusukekikuta/articles/93977ef27a56ee</link><guid isPermaLink="true">https://zenn.dev/yusukekikuta/articles/93977ef27a56ee</guid><pubDate>Sat, 22 Feb 2025 09:44:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wbeor2bC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Web%25203.0%2520%252F%2520BlockChain%25E3%2580%2591DeFi%25E5%2585%25A5%25E9%2596%2580%25EF%25BC%259A%25E6%2596%25B0%25E3%2581%259F%25E3%2581%25AA%25E9%2587%2591%25E8%259E%258D%25E3%2582%25A8%25E3%2582%25B3%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yusuke%2520Kikuta%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2UzOGI2NmM0ZDQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yusuke Kikuta</dc:creator></item><item><title><![CDATA[HTML・CSS・Web関連リンク集]]></title><description><![CDATA[私が参考にしているWebサイトの一覧です。
+ご興味ありましたらどうぞ！
+これをひととおり読むだけでもITスキルがアップすると思います！
+インライン要素・ブロックレベル要素とCSS「display」の使い方
+レンダリングとは
+レンダリングの様子
+レンダリングエンジン一覧
+W3Cバリデーションチェック
+コンテンツモデルを図にしたもの
+セレクトボックスを作る
+すぐわかる！HTMLでスペースや空白を入れる正しい方法
+フォントサイズをremで指定する。（emとの比較）
+【模写コーディング】作って学ぶ コーディング学習サイト
+【模写コーディング】おすすめの練習サイト【入門編～上級編】 - Codes...]]></description><link>https://zenn.dev/codek2/articles/fbaece6f41de5f</link><guid isPermaLink="true">https://zenn.dev/codek2/articles/fbaece6f41de5f</guid><pubDate>Sat, 22 Feb 2025 08:07:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lLW2jmJ4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:HTML%25E3%2583%25BBCSS%25E3%2583%25BBWeb%25E9%2596%25A2%25E9%2580%25A3%25E3%2583%25AA%25E3%2583%25B3%25E3%2582%25AF%25E9%259B%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Udemy%25E3%2583%25BB%25E4%25BC%2581%25E6%25A5%25AD%25E3%2583%25BB%25E3%2582%25AA%25E3%2583%25B3%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSWJNcXYyNnJHY2xGVDEtOURITHVZTjhrWUpWOVN1aTJWYmxkNU9aejljTmtNPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Udemy・企業・オンラインプログラミングスクール講師♪codek2</dc:creator></item></channel></rss>
