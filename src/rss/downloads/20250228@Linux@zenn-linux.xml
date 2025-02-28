@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Linux」のフィード]]></title><description><![CDATA[Zennのトピック「Linux」のRSSフィードです]]></description><link>https://zenn.dev/topics/linux</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/860a9eb1e4.png</url><title>Zennの「Linux」のフィード</title><link>https://zenn.dev/topics/linux</link></image><generator>zenn.dev</generator><lastBuildDate>Fri, 28 Feb 2025 02:58:26 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/linux/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Arch Linux Install w/Btrfs & Snapper]]></title><description><![CDATA[
+ まえがき
+本記事は初心者向けに作ってあります。経験深い方々には既知の情報かと思われますが、もし読んでいただけるのならば、ご自身のLinuxインストール関連の体験談などコメントに書いていただければありがたいです。
+
+ 概要
+本記事は筆者がArch Linux をインストールし、環境構築する際に躓いたりし、複数のサイトを参考にインストールした経験に基づいて作られた簡単なガイドです。
+
+ Arch Linux を使おうと思った話
+Linuxには様々なDistributionがあり、それぞれ特徴があります。代表的なものを上げるとUbuntuやLinux Mint, Fedora, openS...]]></description><link>https://zenn.dev/archer/articles/2379e1ab40a117</link><guid isPermaLink="true">https://zenn.dev/archer/articles/2379e1ab40a117</guid><pubDate>Thu, 27 Feb 2025 16:57:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--V8t3UqgP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:Arch%2520Linux%2520Install%2520w%252FBtrfs%2520%2526%2520Snapper%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Archer%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTHlEeDZ6ZzRRbERGX3I0WUJFR2ZPaUNKMVdhSG5FemptNGNPLTVCWFFiN2xHY0xwQT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Archer</dc:creator></item><item><title><![CDATA[Raspberry Pi Pico 2をUSBでWSL2にマウントしてみる]]></title><description><![CDATA[
+ 概要
+WindowsでSBCを使う場合、開発環境をWSL2に置きたい事が多々ある。
+以下はusbipdでマウントして、実際に疎通出来ているかどうか公式リポジトリのHello Worldプログラムを実行して疎通できているか確認するまでの記事である。
+
+ 環境
+
+ ソフトウェア
+
+Windows 10 22H2(OSビルド 19045.5247)
+WSL2(Ubuntu) Ubuntu 11.4.0-1ubuntu1~22.04
+gcc gcc version 11.4.0
+VS Code　バージョン: 1.96.0 (user setup)
+
+
+ ハードウェア
+
+Raspberry P...]]></description><link>https://zenn.dev/ita2024/articles/17e8a49a12cede</link><guid isPermaLink="true">https://zenn.dev/ita2024/articles/17e8a49a12cede</guid><pubDate>Thu, 27 Feb 2025 10:50:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GHFFfcD_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Raspberry%2520Pi%2520Pico%25202%25E3%2582%2592USB%25E3%2581%25A7WSL2%25E3%2581%25AB%25E3%2583%259E%25E3%2582%25A6%25E3%2583%25B3%25E3%2583%2588%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ita2024%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTERKNHJfS3daNE9aSl9TQ3hpSWFwenMyRmZwUE1IWDRadnQ5bjFNb0xCZkFINW5RPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ita2024</dc:creator></item><item><title><![CDATA[【シェルスクリプト】`$ echo '-eq'`みたいにオプションっぽい文字列を表示しようとすると、無が表示される]]></title><description><![CDATA[単純だけど、そういうことです。
+$ echo '-eq'
+（無）
+おそらくechoコマンドの-eqオプションを実行しようとしているんだと思う。
+おまえ-eqオプションなんてないだろうが！！！
+解決策はprintfです。
+printfしか勝たん。
+$ printf '%s\n' '-eq'
+-eq
+ちなみに以下でもムダムダムダァです。
+全部吸収するじゃん…そりゃそうなんだけど。
+$ x=$(printf '%s\n' '-eq')
+$ echo "$x"
+（無）
+こいつなんでも食いやがる…。
+なんも信じられん。
+ちなみになんでこんな異常行動をしようと思ったかというと、Bash/Zsh向けの...]]></description><link>https://zenn.dev/aiya000/articles/7a3dab870d5b30</link><guid isPermaLink="true">https://zenn.dev/aiya000/articles/7a3dab870d5b30</guid><pubDate>Wed, 26 Feb 2025 17:32:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BCVBHOlp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E3%2582%25B7%25E3%2582%25A7%25E3%2583%25AB%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2583%2588%25E3%2580%2591%2560%2524%2520echo%2520%2527-eq%2527%2560%25E3%2581%25BF%25E3%2581%259F%25E3%2581%2584%25E3%2581%25AB%25E3%2582%25AA%25E3%2583%2597%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2581%25A3%25E3%2581%25BD%25E3%2581%2584%25E6%2596%2587%25E5%25AD%2597%25E5%2588%2597%25E3%2582%2592%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2597%25E3%2582%2588%25E3%2581%2586%25E3%2581%25A8%25E3%2581%2599%25E3%2582%258B%25E3%2581%25A8%25E3%2580%2581%25E7%2584%25A1%25E3%2581%258C%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2595%25E3%2582%258C%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2582%25E3%2581%2584%25E3%2582%2584%2520-%2520aiya000%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pZVUM0QXdxcVdtMVZmVWtiQXFzdE5ra1BFZU1FOUN0NFY1UzdiPXMyNTAtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>あいや - aiya000</dc:creator></item><item><title><![CDATA[仮想関数と最適化について]]></title><description><![CDATA[
+ 序
+仮想関数って実際どうなるの？
+っていう話と、
+最適化(インライン展開)はどこまで有効なの？
+という話をgccで簡単に検証してみました。
+※元は4日ほど前にQiitaに載せた記事ですが、編集不可能になってしまったので(将来的には削除予定)、こちらに引っ越しています。
+
+ 1. 前提
+
+ 1-1. 対象読者
+
+
+仮想関数テーブルという言葉を何となく知っている人
+x86_amd64アセンブラを読める人(今回はintelにしてみた。普段はAT&amp;T)
+インライン展開を知っている人
+LinuxとGNUのツールを使ってる人
+
+※なので細かい説明は省略しています
+
+ 1-2. 検証環境
+...]]></description><link>https://zenn.dev/dameyodamedame/articles/5b5af2851ff30c</link><guid isPermaLink="true">https://zenn.dev/dameyodamedame/articles/5b5af2851ff30c</guid><pubDate>Tue, 25 Feb 2025 19:16:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--OMSjSzrN--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E4%25BB%25AE%25E6%2583%25B3%25E9%2596%25A2%25E6%2595%25B0%25E3%2581%25A8%25E6%259C%2580%25E9%2581%25A9%25E5%258C%2596%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:dameyodamedame%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvZC5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>dameyodamedame</dc:creator></item><item><title><![CDATA[C++のベンチマークライブラリ(ヘッダのみ)を使ってみる]]></title><description><![CDATA[
+ 序
+今回試してみたのは
+
+nanobench
+mitata
+
+というヘッダのみの軽量級のものです。mitataはjsでは知ってる人もいるかもしれないけど、C++ではまるで聞かないライブラリなので、その辺を調べてみました。
+C++で他に有名なのはGoogle Bnechmarkですが、これはヘッダのみで済まないので除外しています。
+https://github.com/martinus/nanobench
+https://github.com/evanwashere/mitata
+※元は20日ほど前にQiitaに載せた記事ですが、編集不可能になってしまったので(将来的には削除予定)、こ...]]></description><link>https://zenn.dev/dameyodamedame/articles/927daa2eca3de2</link><guid isPermaLink="true">https://zenn.dev/dameyodamedame/articles/927daa2eca3de2</guid><pubDate>Tue, 25 Feb 2025 18:57:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--KbAuELss--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:C%252B%252B%25E3%2581%25AE%25E3%2583%2599%25E3%2583%25B3%25E3%2583%2581%25E3%2583%259E%25E3%2583%25BC%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%2528%25E3%2583%2598%25E3%2583%2583%25E3%2583%2580%25E3%2581%25AE%25E3%2581%25BF%2529%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:dameyodamedame%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvZC5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>dameyodamedame</dc:creator></item><item><title><![CDATA[picom でアプリケーションを透過させる]]></title><description><![CDATA[まず、透過させたいウィンドウの WM_CLASS を調べる。
+WM_CLASS を調べるには xprop コマンドを使う。
+使い方:
+$ xprop | grep WM_CLASS
+コマンドを入力すると待機状態になり、ウィンドウをクリックすると、そのウィンドウのプロパティが出力される。
+出力の例(Firefox):
+WM_CLASS(STRING) = "Navigator", "firefox"
+2つ出力されて、上記の例だと "firefox" の部分が今回知りたい WM_CLASS。"Navigator" はインスタンス名。
+あとは config に書くだけ(例):
+opacity-...]]></description><link>https://zenn.dev/sqzume/articles/0556bb9844705a</link><guid isPermaLink="true">https://zenn.dev/sqzume/articles/0556bb9844705a</guid><pubDate>Tue, 25 Feb 2025 00:00:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--OOTmoaaB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:picom%2520%25E3%2581%25A7%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%2592%25E9%2580%258F%25E9%2581%258E%25E3%2581%2595%25E3%2581%259B%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2595%25E3%2581%259A%25E3%2582%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBlNzExYjEwOWYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>さずめ</dc:creator></item><item><title><![CDATA[steam の日本語が中華フォントで表示される]]></title><description><![CDATA[
+ 状態
+Steam - Arch Wiki に沿って steam のインストールを進めると、言語を日本語に切り替えたときに中華フォントで表示される。
+
+ 原因
+wqy-zenhei をインストールしたのが原因。
+https://fukudagyuuen.vivaldi.net/2024/01/17/archlinux006/
+wqy-zenhei は中国語のサポートに必要で、日本語環境下では必要ないらしい。Wiki には"アジア言語のサポート~..."って書いてあったのに...
+
+ 対応
+wqy-zenhei をアンインストールするだけ:
+$ sudo pacman -R wqy-ze...]]></description><link>https://zenn.dev/sqzume/articles/bdcd97b7ff5e24</link><guid isPermaLink="true">https://zenn.dev/sqzume/articles/bdcd97b7ff5e24</guid><pubDate>Tue, 25 Feb 2025 00:00:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ojyib1Er--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:steam%2520%25E3%2581%25AE%25E6%2597%25A5%25E6%259C%25AC%25E8%25AA%259E%25E3%2581%258C%25E4%25B8%25AD%25E8%258F%25AF%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25B3%25E3%2583%2588%25E3%2581%25A7%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2595%25E3%2582%258C%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2595%25E3%2581%259A%25E3%2582%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBlNzExYjEwOWYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>さずめ</dc:creator></item><item><title><![CDATA[steam で-105エラー画面が表示される]]></title><description><![CDATA[
+ 状態
+steam をインストールして立ち上げるとライブラリタブ以外は105エラー画面になっていた。
+
+ 原因
+systemd-resolved が原因だったぽい。
+https://github.com/ValveSoftware/steam-for-linux/issues/10550
+
+ 対応
+issue に書いてあるとおりに systemd-resolved を他のもので置き換えるか、設定をすることで解決するらしい。今回は設定をすることで解決した。
+したことは次のコマンドを実行するだけ:
+# ln -sf /run/systemd/resolve/stub-resolv.conf...]]></description><link>https://zenn.dev/sqzume/articles/9a667c660aa189</link><guid isPermaLink="true">https://zenn.dev/sqzume/articles/9a667c660aa189</guid><pubDate>Tue, 25 Feb 2025 00:00:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--DogSHX16--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:steam%2520%25E3%2581%25A7-105%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E7%2594%25BB%25E9%259D%25A2%25E3%2581%258C%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2595%25E3%2582%258C%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2595%25E3%2581%259A%25E3%2582%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBlNzExYjEwOWYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>さずめ</dc:creator></item><item><title><![CDATA[Rails でコメントを追加する機能を追加する]]></title><description><![CDATA[お家の検証サーバ用の備忘録です。
+
+ 前提
+前提です。
+https://zenn.dev/asterisk9101/articles/ruby_on_rails8-3
+
+ scaffold
+モデルと一緒に諸々を作ります。
+bundle exec rails g scaffold Activity \
+    document:references \
+    user_department:string \
+    user_title:string \
+    user_name:string \
+    type:string
+
+bundle exec rails db:migrat...]]></description><link>https://zenn.dev/asterisk9101/articles/ruby_on_rails8-4</link><guid isPermaLink="true">https://zenn.dev/asterisk9101/articles/ruby_on_rails8-4</guid><pubDate>Mon, 24 Feb 2025 11:41:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--USJUI9Gr--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rails%2520%25E3%2581%25A7%25E3%2582%25B3%25E3%2583%25A1%25E3%2583%25B3%25E3%2583%2588%25E3%2582%2592%25E8%25BF%25BD%25E5%258A%25A0%25E3%2581%2599%25E3%2582%258B%25E6%25A9%259F%25E8%2583%25BD%25E3%2582%2592%25E8%25BF%25BD%25E5%258A%25A0%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25A4%259A%25E7%2594%25B0%25E6%25B0%258F%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFUWEFKd3hvZ1pLNDVtSmdsUDlROUZPUTcyRXg4eV9MeFdmejdma0V1aTA9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>多田氏</dc:creator></item><item><title><![CDATA[LiteX を Ubuntu 24.04 on WSL2 で使用し、 Demo Applicationを動作させる]]></title><description><![CDATA[LiteX を Windows 環境で使用したく、試していたときの備忘録。以下の通り無事 demo app の動作確認までたどり着けたので書き残す。
+
+
+
+ 手順まとめ
+時系列順に実行した内容のまとめを先に記載する。細かいトラブルシューティングは後半に記載。
+
+ 環境構築
+基本手順は公式ドキュメントの Quick Start Guideに従い、WSL2 上にインストールした Ubuntu 24.04 で行う。
+要点は以下。
+
+virtualenv を作成し、Python 仮想環境中で実行する
+virtualenv 中で user install を実行するとエラーになるため、 --use...]]></description><link>https://zenn.dev/wipeseals/articles/6aaae326ba7731</link><guid isPermaLink="true">https://zenn.dev/wipeseals/articles/6aaae326ba7731</guid><pubDate>Mon, 24 Feb 2025 10:14:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--94nxFCKd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:LiteX%2520%25E3%2582%2592%2520Ubuntu%252024.04%2520on%2520WSL2%2520%25E3%2581%25A7%25E4%25BD%25BF%25E7%2594%25A8%25E3%2581%2597%25E3%2580%2581%2520Demo%2520Application%25E3%2582%2592%25E5%258B%2595%25E4%25BD%259C%25E3%2581%2595%25E3%2581%259B%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:wipeseals%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSm5QbXhfekNrMmgwRUFDUkp4NXhGREZwQ25ZOWxpN2hxZ1hpYTZZSmNZNWIyUzFhND1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>wipeseals</dc:creator></item><item><title><![CDATA[Rails に Action Text を追加する]]></title><description><![CDATA[お家の検証サーバ用の備忘録です。
+
+ 前提
+Active Storage のインストールは終わっている状態です。
+https://zenn.dev/asterisk9101/articles/ruby_on_rails8-2
+
+ 文書にリッチテキストコンテンツを追加する
+ActionText を追加します。
+bundle exec rails action_text:install
+bundle exec rails db:migrate
+モデルに関連を追記します。
+vi app/models/document.rb
+has_rich_text :content
+ビューにリッチテキストを...]]></description><link>https://zenn.dev/asterisk9101/articles/ruby_on_rails8-3</link><guid isPermaLink="true">https://zenn.dev/asterisk9101/articles/ruby_on_rails8-3</guid><pubDate>Mon, 24 Feb 2025 09:16:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fmDoQ4Pp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rails%2520%25E3%2581%25AB%2520Action%2520Text%2520%25E3%2582%2592%25E8%25BF%25BD%25E5%258A%25A0%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25A4%259A%25E7%2594%25B0%25E6%25B0%258F%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFUWEFKd3hvZ1pLNDVtSmdsUDlROUZPUTcyRXg4eV9MeFdmejdma0V1aTA9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>多田氏</dc:creator></item><item><title><![CDATA[【WSL2 × ClamAV】なぜか動かない？その原因と解決策を完全解説！]]></title><description><![CDATA[
+ はじめに
+WSL2にClamAVを導入しようとして、「情報が見つからない」「Ubuntuの手順通りにやったのに動かない」という壁にぶつかりませんでしたか？
+私もまさにその沼にハマりました。そして、試行錯誤の末に動作させることができたのです！
+この記事では、その過程を余すことなく共有します。
+「ClamAVを入れたのに動かない！」と悩んでいる方、このままでは時間をムダにするだけです。
+ここでしっかり解決策を押さえましょう！
+
+ ClamAVのインストール
+まずは通常の手順でClamAVをインストールします。
+$ sudo apt install clamav clamav-daemon...]]></description><link>https://zenn.dev/aiya000/articles/install-clamav-into-wsl2</link><guid isPermaLink="true">https://zenn.dev/aiya000/articles/install-clamav-into-wsl2</guid><pubDate>Sun, 23 Feb 2025 17:57:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8WFEfF3W--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590WSL2%2520%25C3%2597%2520ClamAV%25E3%2580%2591%25E3%2581%25AA%25E3%2581%259C%25E3%2581%258B%25E5%258B%2595%25E3%2581%258B%25E3%2581%25AA%25E3%2581%2584%25EF%25BC%259F%25E3%2581%259D%25E3%2581%25AE%25E5%258E%259F%25E5%259B%25A0%25E3%2581%25A8%25E8%25A7%25A3%25E6%25B1%25BA%25E7%25AD%2596%25E3%2582%2592%25E5%25AE%258C%25E5%2585%25A8%25E8%25A7%25A3%25E8%25AA%25AC%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2582%25E3%2581%2584%25E3%2582%2584%2520-%2520aiya000%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pZVUM0QXdxcVdtMVZmVWtiQXFzdE5ra1BFZU1FOUN0NFY1UzdiPXMyNTAtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>あいや - aiya000</dc:creator></item><item><title><![CDATA[WSL2 でカスタム Linux kernel を使いたい]]></title><description><![CDATA[RCLab です。今回はソースからビルドした Linux kernel を WSL 環境で使えるようになるまでをまとめました。
+
+ きっかけ
+職場では VirtualBox + Vagrant の環境で開発を進めている筆者ですが、わけあって windows で開発をすることになった後輩ができました。結果、WSL 上で VirtualBox がうまく動作せず、環境構築が進まなくなってしまいました。VirtualBox をインストールし、その動作を確認するも
+ ~ $ VBoxManage --version
+WARNING: The vboxdrv kernel module is not...]]></description><link>https://zenn.dev/rclab/articles/build_linux_kernel_inside_wsl</link><guid isPermaLink="true">https://zenn.dev/rclab/articles/build_linux_kernel_inside_wsl</guid><pubDate>Sun, 23 Feb 2025 16:08:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ZR_wHyUN--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:WSL2%2520%25E3%2581%25A7%25E3%2582%25AB%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%25A0%2520Linux%2520kernel%2520%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2584%25E3%2581%259F%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:R.C.Lab%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSU5VUTJwVDk0eDJCUkJNbXUyUjFSSFl5Y195QlRuRzlJT1NHWXUyYVJfPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>R.C.Lab</dc:creator></item><item><title><![CDATA[Linuxのプロセス管理]]></title><description><![CDATA[Linux では、実行中のプログラム（プロセス）を管理することが重要です。
+特に、ps コマンドを使えば、システム内のプロセスを簡単に確認できます。
+本記事では、Linux のプロセスとは何か、ps コマンドを中心に、プロセスの管理方法を解説します
+
+ プロセスとは？
+
+プロセス（Process） とは、実行中のプログラムのこと です。
+Linux では、プロセスごとに PID（プロセスID） が割り振られ、システムが管理します。
+
+ プロセスの種類
+
+
+
+
+種類
+説明
+
+
+
+
+フォアグラウンドプロセス
+ユーザーが直接操作できるプロセス（例：vim、nano など）
+
+
+バックグラウンド...]]></description><link>https://zenn.dev/kannn/articles/d289423f29aede</link><guid isPermaLink="true">https://zenn.dev/kannn/articles/d289423f29aede</guid><pubDate>Sun, 23 Feb 2025 01:44:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--pwvtTjVP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%25E3%2581%25AE%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25BB%25E3%2582%25B9%25E7%25AE%25A1%25E7%2590%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kan%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2Rhcmsvay5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kan</dc:creator></item><item><title><![CDATA[Raspberry Pi のディスクイメージを小さくする]]></title><description><![CDATA[
+ はじめに
+Raspberry Pi に限らず、SBC などのストレージをクローンするときに、ディスクイメージのサイズを小さくしたい場面があります。
+
+バックアップの容量を節約したい
+より小容量のストレージに移植したい
+
+そんなときに使えるディスクイメージの作成手順をまとめておきます。
+
+ パーティションサイズの変更
+以降、空き容量が大きいパーティションを /dev/mmcblk0p2 として例示します。
+
+ ファイルシステムのサイズを一旦最小にする
+まず、ファイルシステムをチェックします。
+$ sudo e2fsck -f /dev/mmcblk0p2
+ファイルシステムをシュリンクす...]]></description><link>https://zenn.dev/19931/articles/90a8d88ba510d7</link><guid isPermaLink="true">https://zenn.dev/19931/articles/90a8d88ba510d7</guid><pubDate>Sun, 23 Feb 2025 01:26:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--s3VSCOpL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Raspberry%2520Pi%2520%25E3%2581%25AE%25E3%2583%2587%25E3%2582%25A3%25E3%2582%25B9%25E3%2582%25AF%25E3%2582%25A4%25E3%2583%25A1%25E3%2583%25BC%25E3%2582%25B8%25E3%2582%2592%25E5%25B0%258F%25E3%2581%2595%25E3%2581%258F%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Ippei%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JhYTViMjM2ZWYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Ippei</dc:creator></item><item><title><![CDATA[IaCサービス【AWS CDK】について基本を実践]]></title><description><![CDATA[
+ はじめに
+前回の「AWS CloudFormation」に引き続き、今回もAWSのIaCサービスである「AWS CDK」について概要と実践方法をご紹介します。
+お時間あれば前回記事をご参照の後に、本記事をご覧いただければと思います。
+https://zenn.dev/gj77a/articles/920440ae3f7ec6
+また今回ご紹介する操作は、基本的に以下リンクの公式チュートリアルに沿った内容としていますので、不明点がありましたらそちらも併せてご確認ください。
+https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/hello_world...]]></description><link>https://zenn.dev/gj77a/articles/6cf8ee2e5856da</link><guid isPermaLink="true">https://zenn.dev/gj77a/articles/6cf8ee2e5856da</guid><pubDate>Sat, 22 Feb 2025 18:35:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5dXuk2xm--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:IaC%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2593%25E3%2582%25B9%25E3%2580%2590AWS%2520CDK%25E3%2580%2591%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E5%259F%25BA%25E6%259C%25AC%25E3%2582%2592%25E5%25AE%259F%25E8%25B7%25B5%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:GK7AA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY3OWM5ZmRiZGUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>GK7AA</dc:creator></item><item><title><![CDATA[SSH接続を楽にするSSH ConfigとSSH Agent 使ってますか？]]></title><description><![CDATA[SSHするときに毎回IPアドレスや秘密鍵を確認して、それをSSHコマンドで入力していませんか？
+それとても面倒ですよね...
+実は事前に設定しておけば省略できるんです。
+
+ SSHとは
+SSH（Secure Shell）は、ネットワーク経由で安全にリモートコンピュータに接続するためのプロトコルです。主に以下の用途で利用されます。
+リモートサーバーへのログイン
+ファイル転送（SCP、SFTP）
+コマンド実行
+ポートフォワーディング（トンネリング）
+
+ SSH Configとは
+SSH Configファイルは、SSHクライアントの設定ファイルであり、接続先のホストごとに様々な設定を記述できま...]]></description><link>https://zenn.dev/ryo0122mrr/articles/d4c86c2dccf67c</link><guid isPermaLink="true">https://zenn.dev/ryo0122mrr/articles/d4c86c2dccf67c</guid><pubDate>Sat, 22 Feb 2025 15:17:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5QPX3zGU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:SSH%25E6%258E%25A5%25E7%25B6%259A%25E3%2582%2592%25E6%25A5%25BD%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258BSSH%2520Config%25E3%2581%25A8SSH%2520Agent%2520%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BE%25E3%2581%2599%25E3%2581%258B%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:rk%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M2NjUxMDE4YzIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>rk</dc:creator></item><item><title><![CDATA[cibuildwheelでLinux向けのwheelビルド時につまずいた点と解決策]]></title><description><![CDATA[
+ cibuildwheelでLinux向けのwheelビルド時につまずいた点と解決策
+問題点: 依存関係のエラー
+cibuildwheelを使用してLinux向けのwheelをビルドする際、依存関係のエラーに悩まされました。
+最初、CIホスト上で必要なパッケージをインストールしていましたが、ビルド時に依存関係のエラーが解消されず、試行錯誤を繰り返しました。
+
+ 重要なポイント: コンテナ内での処理
+cibuildwheelはビルドのために独自のコンテナを作成して処理を行います。そのため、CIホスト上でいくら依存パッケージをインストールしても、ビルドには反映されません。
+この事実を認識す...]]></description><link>https://zenn.dev/veloxml/articles/24fdde72c07ba0</link><guid isPermaLink="true">https://zenn.dev/veloxml/articles/24fdde72c07ba0</guid><pubDate>Sat, 22 Feb 2025 13:02:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--FuLozb-R--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:cibuildwheel%25E3%2581%25A7Linux%25E5%2590%2591%25E3%2581%2591%25E3%2581%25AEwheel%25E3%2583%2593%25E3%2583%25AB%25E3%2583%2589%25E6%2599%2582%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%25BE%25E3%2581%259A%25E3%2581%2584%25E3%2581%259F%25E7%2582%25B9%25E3%2581%25A8%25E8%25A7%25A3%25E6%25B1%25BA%25E7%25AD%2596%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:VeloxML%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSTM4ZDBGWUxjRUhfd0FPb180Yi1majV3d0U2d3Yza0VtNlBUbnE3UzdvbzJmZj1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>VeloxML</dc:creator></item><item><title><![CDATA[Ubuntu 24.10のインストーラーがディスクを100%使ってくれない際の対応方法]]></title><description><![CDATA[Ubuntu 24.10のインストーラーがディスクを100%使ってくれないので、対応した。
+やることは下記通り
+
+残りディスクを/dev/mapper/ubuntu--vg-ubuntu--lvに割り当てる
+割り当てただけだとファイルシステムが認識しないので、ファイルシステムのリサイズをする
+
+コマンドは下記通り。めんどくさいの説明はナシ。
+sudo lvextend -l +100%FREE /dev/mapper/ubuntu--vg-ubuntu--lv
+sudo resize2fs /dev/mapper/ubuntu--vg-ubuntu--lv
+Ubuntu 24.10のイン...]]></description><link>https://zenn.dev/yamaz/articles/65c8cb2d1f6cc5</link><guid isPermaLink="true">https://zenn.dev/yamaz/articles/65c8cb2d1f6cc5</guid><pubDate>Sat, 22 Feb 2025 11:23:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--V5icVcUN--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ubuntu%252024.10%25E3%2581%25AE%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25A9%25E3%2583%25BC%25E3%2581%258C%25E3%2583%2587%25E3%2582%25A3%25E3%2582%25B9%25E3%2582%25AF%25E3%2582%2592100%2525%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%258F%25E3%2582%258C%25E3%2581%25AA%25E3%2581%2584%25E9%259A%259B%25E3%2581%25AE%25E5%25AF%25BE%25E5%25BF%259C%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yamaz%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2hyS2E1YzBOZFNoSHlsUGZhY3d2anJtdGFyQU9HRWZCQWpacFB4TGc9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yamaz</dc:creator></item><item><title><![CDATA[Podmanコンテナ + Zed Editor で快適開発！]]></title><description><![CDATA[Zed Editorでコンテナ環境の開発できないか？と思い、調べていたところ、devPodで構築する方法に辿り着きました。今回はdockerよりも軽量のpodmanを使用しています。
+今回のゴール
+Dockerfile, docker-compose.yml, devcontainer.json の3つのファイルを使って、Podman コンテナ上に Zed Editor の開発環境を構築し、実際に Zed Editor からコンテナに接続して開発できるようにします。
+devpod-container/
+└── .devcontainer/
+└── Dockerfile
+└──docker...]]></description><link>https://zenn.dev/beginote/articles/c30e91bc394a81</link><guid isPermaLink="true">https://zenn.dev/beginote/articles/c30e91bc394a81</guid><pubDate>Sat, 22 Feb 2025 11:13:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--w-QuLZI---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Podman%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2586%25E3%2583%258A%2520%252B%2520Zed%2520Editor%2520%25E3%2581%25A7%25E5%25BF%25AB%25E9%2581%25A9%25E9%2596%258B%25E7%2599%25BA%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Zone%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTDRQazlDa2Fhdm9tRENjX0kzYVh3U1BHcFpDZDdvcnVJalNEYmtmV1NDPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Zone</dc:creator></item></channel></rss>
