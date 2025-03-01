@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「JavaScript」のフィード]]></title><description><![CDATA[Zennのトピック「JavaScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/javascript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/64acd76870.png</url><title>Zennの「JavaScript」のフィード</title><link>https://zenn.dev/topics/javascript</link></image><generator>zenn.dev</generator><lastBuildDate>Sat, 01 Mar 2025 05:37:14 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/javascript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[@solana/spl-tokenを使わずに phantom wallet からSPLトークンを送信する]]></title><description><![CDATA[JavaScriptを使ったSPLトークンの送信プログラムについて解説します。
+Phantomを始めとした wallet api に関するドキュメントでは、@solana/web3.jsを使った例はみられますが、そのほとんどはSOLを送信するための実装になっています。
+SOLはSolanaチェーン上でのネイティブトークンなので確かに使い勝手はいいです。
+しかし同様に、SPLトークン(Solana Program Library)を扱うニーズも高いです。
+そこでSPLトークンをweb3.jsのみで扱う例として、本記事を執筆します。
+同じようなツールを開発する際の一助となれば幸いです。
+前提...]]></description><link>https://zenn.dev/kawason/articles/3010d03c71b2b3</link><guid isPermaLink="true">https://zenn.dev/kawason/articles/3010d03c71b2b3</guid><pubDate>Fri, 28 Feb 2025 08:49:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xcKpeHUT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%2540solana%252Fspl-token%25E3%2582%2592%25E4%25BD%25BF%25E3%2582%258F%25E3%2581%259A%25E3%2581%25AB%2520phantom%2520wallet%2520%25E3%2581%258B%25E3%2582%2589SPL%25E3%2583%2588%25E3%2583%25BC%25E3%2582%25AF%25E3%2583%25B3%25E3%2582%2592%25E9%2580%2581%25E4%25BF%25A1%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258B%25E3%2582%258F%25E3%2581%259D%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2hBUC1KbHJHMnNrV2pVMm93T0hXbUNwdVNzdk9YUGNLWlpESThNWXc9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>かわそん</dc:creator></item><item><title><![CDATA[個人開発勉強①のコード内容理解]]></title><description><![CDATA[今回は前回の記事でClaudeに出力してもらったコードを理解することに努めようと思う。
+https://zenn.dev/bousoumelon/articles/95762672907362
+
+ index.htmlの理解
+
+index.html
+&lt;!DOCTYPE html&gt;
+&lt;html lang="ja"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+  &l...]]></description><link>https://zenn.dev/bousoumelon/articles/a08f030cfbbf60</link><guid isPermaLink="true">https://zenn.dev/bousoumelon/articles/a08f030cfbbf60</guid><pubDate>Fri, 28 Feb 2025 06:20:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--IZUSk8kA--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2580%258B%25E4%25BA%25BA%25E9%2596%258B%25E7%2599%25BA%25E5%258B%2589%25E5%25BC%25B7%25E2%2591%25A0%25E3%2581%25AE%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E5%2586%2585%25E5%25AE%25B9%25E7%2590%2586%25E8%25A7%25A3%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%259A%25B4%25E8%25B5%25B0%25E3%2583%25A1%25E3%2583%25AD%25E3%2583%25B3%25E3%2583%2591%25E3%2583%25B3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0ZjE4NVl1LXZ2aHVlOW9GVXFkbXBlR3FOcWFWVU5UWDRrYVM0dUd5cWc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>暴走メロンパン</dc:creator></item><item><title><![CDATA[追伸:  AsyncIterator.withResolvers は ReadableStream 内のメソッドを外部化した方が作りやすい？]]></title><description><![CDATA[前回 あんなに長いコードを書いていたのに、よくよく考えると ReadableStream も asyncIterator が実装されていることを思い出したのでもっと簡単に書けることに気が付きました。
+https://streams.spec.whatwg.org/#rs-asynciterator
+具体的には ReadableStream の内部で使われている ReadableStreamDefaultController を使うとですね。
+https://developer.mozilla.org/ja/docs/Web/API/ReadableStreamDefaultControl...]]></description><link>https://zenn.dev/juners/articles/cc71f5bcaea28d</link><guid isPermaLink="true">https://zenn.dev/juners/articles/cc71f5bcaea28d</guid><pubDate>Fri, 28 Feb 2025 03:04:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--PT5-7CDv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%25BF%25BD%25E4%25BC%25B8%253A%2520%2520AsyncIterator.withResolvers%2520%25E3%2581%25AF%2520ReadableStream%2520%25E5%2586%2585%25E3%2581%25AE%25E3%2583%25A1%25E3%2582%25BD%25E3%2583%2583%25E3%2583%2589%25E3%2582%2592...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:juner%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pJLTZTZnZQaDFwb0M5dmMxYUpVeTFoelB0R1g1RXRmUHRpQzF4QWR3PXMyNTAtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>juner</dc:creator></item><item><title><![CDATA[ES Modules (ESM) と CommonJS (CJS)ってなに？JavaScriptのモジュールシステムの歴史]]></title><description><![CDATA[
+ 🌐 モジュールシステムってなに？
+
+
+
+モジュールシステム は、プログラムを小さな部品（モジュール）に分割して、必要な時だけ使える仕組みだよ。
+例えば、Reactのコンポーネントや、ユーティリティ関数を別ファイルにして import / require するあの仕組み！
+
+
+
+ 🕰️ なぜモジュールシステムが必要？
+
+昔のJavaScript（例えば jQuery を使ってた時代）は、すべてのコードが一つの巨大なファイルにまとまっていたんだ。
+
+ 🚫 問題点
+
+
+コードが増えると 管理が大変。
+変数名がかぶると バグが起きやすい。
+再利用可能なコード（例えば 関数やクラス）を、他のプ...]]></description><link>https://zenn.dev/soze/articles/6ac793b1974682</link><guid isPermaLink="true">https://zenn.dev/soze/articles/6ac793b1974682</guid><pubDate>Fri, 28 Feb 2025 02:29:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--mSz93yok--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ES%2520Modules%2520%2528ESM%2529%2520%25E3%2581%25A8%2520CommonJS%2520%2528CJS%2529%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25AA%25E3%2581%25AB%25EF%25BC%259FJavaScript%25E3%2581%25AE%25E3%2583%25A2%25E3%2582%25B8%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%25AB%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25AB%25E3%2582%25A4%25E3%2582%25B6%25E3%2583%25BC%25E3%2583%25BB%25E3%2582%25BD%25E3%2582%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FjNGQ1NDMzNWIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>カイザー・ソゼ</dc:creator></item><item><title><![CDATA[js タグ機能スクリプト　紹介]]></title><description><![CDATA[function search(str){
+  let parent = document.getElementById('link_section');
+  let cNodes = parent.children; // 要素ノードのみを取得
+  
+  for (let i = 0; i &lt; cNodes.length; i++) {
+    let element = cNodes[i];
+    if (element.classList.contains(str)) {
+        element.style.display = "block";
+    } else...]]></description><link>https://zenn.dev/kemii/articles/924d22d432289d</link><guid isPermaLink="true">https://zenn.dev/kemii/articles/924d22d432289d</guid><pubDate>Fri, 28 Feb 2025 00:24:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--UQpkJaBS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:js%2520%25E3%2582%25BF%25E3%2582%25B0%25E6%25A9%259F%25E8%2583%25BD%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2583%2588%25E3%2580%2580%25E7%25B4%25B9%25E4%25BB%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kemii%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E5ZGYyMjM5ZmIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kemii</dc:creator></item><item><title><![CDATA[Temporal APIの現在地（2025年2月時点）]]></title><description><![CDATA[
+ はじめに
+Temporal APIは、一言で要約すると「JavaScriptの日付・時間の処理をまともにする」ためのプロポーザル(仕様提案)です。
+この記事では、Temporalについて「今どういう状態なのか」「今すぐ使うにはどうすればいいのか」「今すぐ使う場合に注意すべきことは何か」といった情報を提供します。
+
+ 仕様
+Temporalは現在stage 3です。
+https://github.com/tc39/proposal-temporal
+2024年6〜9月にかけて巨大な仕様変更(normative change)があったものの、2025年現在Temporalは仕様として「ほ...]]></description><link>https://zenn.dev/fabon/articles/e9d4610722b660</link><guid isPermaLink="true">https://zenn.dev/fabon/articles/e9d4610722b660</guid><pubDate>Thu, 27 Feb 2025 10:29:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--kSlYHlkx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Temporal%2520API%25E3%2581%25AE%25E7%258F%25BE%25E5%259C%25A8%25E5%259C%25B0%25EF%25BC%25882025%25E5%25B9%25B42%25E6%259C%2588%25E6%2599%2582%25E7%2582%25B9%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25B5%25E3%2581%2581%25E3%2581%25BC%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVlMThiZjIwMDEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ふぁぼん</dc:creator></item><item><title><![CDATA[JavaScriptの計算力、最大1075桁?]]></title><description><![CDATA[この物語は多倍長整数とは無縁である(多分)。我が流派の結論は最後に述べる。
+
+ Number.MAX_VALUE
+その値は1.7976931348623157e+308となり、上記と等価になる最大の整数は309桁に及ぶ。
+
+整数
+17976931348623158079372897140530341507993413271003782693617377
+89804449682927647509466490179775872070963302864166928879109465
+55547851940402630657488671505820681908902000708383676273...]]></description><link>https://zenn.dev/mashuel/articles/79f8fa10cb25b1</link><guid isPermaLink="true">https://zenn.dev/mashuel/articles/79f8fa10cb25b1</guid><pubDate>Thu, 27 Feb 2025 10:16:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7EcPr-is--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25E3%2581%25AE%25E8%25A8%2588%25E7%25AE%2597%25E5%258A%259B%25E3%2580%2581%25E6%259C%2580%25E5%25A4%25A71075%25E6%25A1%2581%253F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mashuel%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSUtJd2pfZ2VwbXM1a1dHcWdITlB5NUFHMVBEd2hpR1Rydi1tZmhhS09uSU50T3VBPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mashuel</dc:creator></item><item><title><![CDATA[WixStudioでVeloを使う Step 37 「コレクションの色フィールドの活用 その2」]]></title><description><![CDATA[
+ はじめに
+
+コレクションのフィールドとして新しく追加された色フィールド。前回の記事で簡単な使い方とVeloでの拡張を紹介した。しかし、個人的にはもう一歩便利に使った方が良いと思う。余計なお世話かもしれないけれど色フィールドを使ったThemeコレクションの活用を提案。
+今回の記事はVeloの説明があまりないかも…。
+
+ 準備
+新しくサイトを作成しCMSやVeloを有効にしておく。
+
+ Productsコレクションの作成
+まずはコレクションを作成する。コレクションはAIで作成する。今回はProductsコレクションとして商品情報を管理するようなコレクションを作成する。
+
+AIでコレクショ...]]></description><link>https://zenn.dev/niibori/articles/veloonwixstudio-beginner-0037</link><guid isPermaLink="true">https://zenn.dev/niibori/articles/veloonwixstudio-beginner-0037</guid><pubDate>Thu, 27 Feb 2025 08:03:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--q_E7ncE4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:WixStudio%25E3%2581%25A7Velo%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%2520Step%252037%2520%25E3%2580%258C%25E3%2582%25B3%25E3%2583%25AC%25E3%2582%25AF%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2581%25AE%25E8%2589%25B2%25E3%2583%2595%25E3%2582%25A3%25E3%2583%25BC%25E3%2583%25AB%25E3%2583%2589%25E3%2581%25AE%25E6%25B4%25BB%25E7%2594%25A8%2520%25E3%2581%259D%25E3%2581%25AE2%25E3%2580%258D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Niibori%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U4ZDA4Mjg3YTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Niibori</dc:creator></item><item><title><![CDATA[[GIS]MapLibre GL JS を使用し、Webマップ上でユーザーの現在地を特定する（備忘録）]]></title><description><![CDATA[
+ １．はじめに
+・GISとは地理情報システム（Geographic Information System）の略称です。
+・地球上に存在する地形物や事象をコンピュータ上の地図に可視化し、空間データの管理・検索・分析等を可能にします。
+
+ ２．サンプルプログラム
+
+index.html
+&lt;!DOCTYPE html&gt;
+&lt;html lang="ja"&gt;
+&lt;head&gt;
+    &lt;meta charset='utf-8'&gt;
+    &lt;meta name="viewport" content="width=device-width, initi...]]></description><link>https://zenn.dev/yama_kawa/articles/245eca6cc20879</link><guid isPermaLink="true">https://zenn.dev/yama_kawa/articles/245eca6cc20879</guid><pubDate>Thu, 27 Feb 2025 05:46:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--eAv9KOar--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BGIS%255DMapLibre%2520GL%2520JS%2520%25E3%2582%2592%25E4%25BD%25BF%25E7%2594%25A8%25E3%2581%2597%25E3%2580%2581Web%25E3%2583%259E%25E3%2583%2583%25E3%2583%2597%25E4%25B8%258A%25E3%2581%25A7%25E3%2583%25A6%25E3%2583%25BC%25E3%2582%25B6%25E3%2583%25BC%25E3%2581%25AE%25E7%258F%25BE%25E5%259C%25A8%25E5%259C%25B0%25E3%2582%2592%25E7%2589%25B9%25E5%25AE%259A%25E3%2581%2599%25E3%2582%258B%25EF%25BC%2588%25E5%2582%2599%25E5%25BF%2598%25E9%258C%25B2%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%25A9%25E3%2582%25B6%25E3%2583%258B%25E3%2582%25A2%25E3%2583%2591%25E3%2583%25B3%25E3%2582%25B5%25E3%2583%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M1ZjYyZjIwYTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ラザニアパンサー</dc:creator></item><item><title><![CDATA[Promise.withResolvers みたいな AsyncIterator.withResolvers がほしい]]></title><description><![CDATA[皆さまは Promise.withResolvers() は使っておられますでしょうか？
+https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Promise/withResolvers
+new Promise() と違ってネストを浅くでき、また、 wrap しなくていいので こじんまりと使えるのが利点です。
+で、で、でです。
+
+ Promise.withResolvers みたいな AsyncIterator.withResolvers がほしい
+本題 です。
+Promise.with...]]></description><link>https://zenn.dev/juners/articles/0c575b02f4c5e8</link><guid isPermaLink="true">https://zenn.dev/juners/articles/0c575b02f4c5e8</guid><pubDate>Thu, 27 Feb 2025 03:04:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--MCUdH34h--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Promise.withResolvers%2520%25E3%2581%25BF%25E3%2581%259F%25E3%2581%2584%25E3%2581%25AA%2520AsyncIterator.withResolvers%2520%25E3%2581%258C%25E3%2581%25BB%25E3%2581%2597%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:juner%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pJLTZTZnZQaDFwb0M5dmMxYUpVeTFoelB0R1g1RXRmUHRpQzF4QWR3PXMyNTAtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>juner</dc:creator></item><item><title><![CDATA[js学習メモ｜イベントオブジェクトに対する疑問]]></title><description><![CDATA[
+※注意※
+このメモは私がJavaScript学習中に生じた疑問について書いています。
+そのため、かなり初歩的なものや「何を言っているんだ」というのもあると思います。
+自分の思考整理、理解するために執筆しているので、温かい目で見ていただけますと幸いです。
+また、記述に誤りがありましたら、コメントにてご教示お願いいたします。
+
+
+ 事の始まり
+今回、Udemyのある講座でTODOリストの作成を行いました。
+受講が終わり、復習として1から自分で書いてみようとやっていたところ
+フォームのデフォルトの動作（ページのリロード）を防ぐために記述した「preventDefault」のところで疑問が発生...]]></description><link>https://zenn.dev/taka_nami/articles/4805a2acb9fd3c</link><guid isPermaLink="true">https://zenn.dev/taka_nami/articles/4805a2acb9fd3c</guid><pubDate>Thu, 27 Feb 2025 02:51:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4h_ZcQGa--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:js%25E5%25AD%25A6%25E7%25BF%2592%25E3%2583%25A1%25E3%2583%25A2%25EF%25BD%259C%25E3%2582%25A4%25E3%2583%2599%25E3%2583%25B3%25E3%2583%2588%25E3%2582%25AA%25E3%2583%2596%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E3%2581%25AB%25E5%25AF%25BE%25E3%2581%2599%25E3%2582%258B%25E7%2596%2591%25E5%2595%258F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:eringi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZmNmQ2NWIzMjYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>eringi</dc:creator></item><item><title><![CDATA[application/x-www-form-urlencodedって何？]]></title><description><![CDATA[ローカルサーバーを使ってLINEログインの基礎を理解するの記事を書いた時にapplication/x-www-form-urlencodedがわからず、気になったので、忘備録にChatGPTとのやりとりを残す。（※内容の精査はしてないので、あくまで参考程度に）
+Aさん:
+application/x-www-form-urlencodedって何？
+Bさん:
+いい質問だね！簡単に言うと、application/x-www-form-urlencoded は、フォームのデータを送るときのフォーマットの一つなんだ。Webフォームでよく使われる方式だね。
+Aさん:
+フォームのデータって、例えばログ...]]></description><link>https://zenn.dev/rivertech71/articles/f5301f6e0c7cf3</link><guid isPermaLink="true">https://zenn.dev/rivertech71/articles/f5301f6e0c7cf3</guid><pubDate>Thu, 27 Feb 2025 01:57:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--PPDDHHkp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:application%252Fx-www-form-urlencoded%25E3%2581%25A3%25E3%2581%25A6%25E4%25BD%2595%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:riverTech71%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSkR1WGhIZlNGai1WNHMwUnk4VGs5ZlpuSGpQUFZGOERjdFBVdjF1R3V2VFQyUjJsaXJzdz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>riverTech71</dc:creator></item><item><title><![CDATA[GitHub ActionsでCI/CDパイプラインを構築する方法]]></title><description><![CDATA[こんにちは！この記事では、GitHub Actionsを使ってCI/CD（継続的インテグレーション/継続的デリバリー）パイプラインを構築する方法について、初心者向けに詳しく説明します。CI/CDは、ソフトウェア開発のプロセスを自動化し、コードの品質を向上させるための重要な手法です。
+
+ 目次
+
+CI/CDとは？
+GitHub Actionsとは？
+GitHubリポジトリの準備
+GitHub Actionsの基本的な使い方
+CI/CDパイプラインの構築
+実践的な例：Node.jsアプリのCI/CDパイプライン
+まとめ
+
+
+ CI/CDとは？
+CI/CDは、ソフトウェア開発のプロセスを効率化...]]></description><link>https://zenn.dev/utokyo_aido/articles/20250226-080332</link><guid isPermaLink="true">https://zenn.dev/utokyo_aido/articles/20250226-080332</guid><pubDate>Wed, 26 Feb 2025 22:17:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--OblfMeRd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:GitHub%2520Actions%25E3%2581%25A7CI%252FCD%25E3%2583%2591%25E3%2582%25A4%25E3%2583%2597%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%2592%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:AIDO%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVhYWFkMWNkMzMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>AIDO</dc:creator></item><item><title><![CDATA[Pythonを使った自動化スクリプトの作り方]]></title><description><![CDATA[こんにちは！この記事では、Pythonを使って自動化スクリプトを作成する方法について詳しく解説します。自動化スクリプトは、日常的な作業を効率化するための強力なツールです。特に、繰り返し行う作業や手動で行うと時間がかかる作業を自動化することで、時間を節約し、ミスを減らすことができます。
+
+ 目次
+
+Pythonとは？
+自動化スクリプトの基本
+Pythonのインストール
+基本的な自動化スクリプトの作成
+ファイル操作の自動化
+ウェブスクレイピングを使った自動化
+スケジューリングによる自動化
+まとめ
+
+
+ Pythonとは？
+Pythonは、シンプルで読みやすい文法が特徴のプログラミング言語です...]]></description><link>https://zenn.dev/utokyo_aido/articles/20250226-121956</link><guid isPermaLink="true">https://zenn.dev/utokyo_aido/articles/20250226-121956</guid><pubDate>Wed, 26 Feb 2025 22:17:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--aLUj6Crc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%259F%25E8%2587%25AA%25E5%258B%2595%25E5%258C%2596%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2583%2588%25E3%2581%25AE%25E4%25BD%259C%25E3%2582%258A%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:AIDO%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVhYWFkMWNkMzMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>AIDO</dc:creator></item><item><title><![CDATA[Web技術入門]]></title><description><![CDATA[
+ はじめに
+現代のインターネット社会で利用されるWebは、単なる画面表示だけでなく、複雑なネットワーク技術やセキュリティ対策に支えられています。この入門記事では、Webの基本概念からネットワーク技術、通信プロトコル、データ形式、アプリケーションの開発・運用、セキュリティまで、具体例や日常のアナロジーを交えて解説します。初めて学ぶ方でも、実際のコードや例え話を通じて全体像がイメージしやすくなるよう構成しています。
+
+ 1.Webの基本概念と仕組み
+Webとは、インターネット上で情報を閲覧・共有するための仕組みです。
+例:
+大きな図書館の中で、利用者（ブラウザ）が本（Webページ）を探して...]]></description><link>https://zenn.dev/utokyo_aido/articles/a5f63ed80b7ad2</link><guid isPermaLink="true">https://zenn.dev/utokyo_aido/articles/a5f63ed80b7ad2</guid><pubDate>Wed, 26 Feb 2025 08:20:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ZzPRAvGZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:Web%25E6%258A%2580%25E8%25A1%2593%25E5%2585%25A5%25E9%2596%2580%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:AIDO%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVhYWFkMWNkMzMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>AIDO</dc:creator></item><item><title><![CDATA[クラウドサービスを使ったスケーラブルなアプリケーション開発]]></title><description><![CDATA[近年、アプリケーション開発において「スケーラビリティ（スケーラブル）」という言葉をよく耳にします。スケーラブルなアプリケーションは、ユーザー数やデータ量の増加に柔軟に対応できるため、ビジネスの成長を支える重要な要素です。本記事では、クラウドサービスを利用してスケーラブルなアプリケーションを開発する方法について、初心者向けに分かりやすく解説していきます。
+
+ 1. スケーラビリティとは？
+スケーラビリティとは、システムの性能を維持しながら、リソースを増加させることができる能力のことを指します。これには以下の2つのタイプがあります。
+
+
+垂直スケーリング（スケールアップ）：既存のサーバーにC...]]></description><link>https://zenn.dev/utokyo_aido/articles/20250226-061045</link><guid isPermaLink="true">https://zenn.dev/utokyo_aido/articles/20250226-061045</guid><pubDate>Wed, 26 Feb 2025 06:52:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ef7eiJnW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25A6%25E3%2583%2589%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2593%25E3%2582%25B9%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%259F%25E3%2582%25B9%25E3%2582%25B1%25E3%2583%25BC%25E3%2583%25A9%25E3%2583%2596%25E3%2583%25AB%25E3%2581%25AA%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E9%2596%258B%25E7%2599%25BA%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:AIDO%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVhYWFkMWNkMzMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>AIDO</dc:creator></item><item><title><![CDATA[AWS CloudFormationによるインフラのコード化入門]]></title><description><![CDATA[現代のソフトウェア開発において、インフラストラクチャの管理はますます重要になっています。特にクラウド環境では、インフラをコード化することで、効率的かつ再現性のある管理が可能になります。この記事では、AWS CloudFormationを使用してインフラをコード化する方法について、初心者向けに詳しく説明します。
+
+ AWS CloudFormationとは？
+AWS CloudFormationは、AWS（Amazon Web Services）が提供するサービスで、インフラストラクチャをコードとして定義し、管理するためのツールです。これにより、インフラのプロビジョニングや管理が自動化され...]]></description><link>https://zenn.dev/utokyo_aido/articles/20250226-064442</link><guid isPermaLink="true">https://zenn.dev/utokyo_aido/articles/20250226-064442</guid><pubDate>Wed, 26 Feb 2025 06:51:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--SkDLuVrC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AWS%2520CloudFormation%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258B%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2595%25E3%2583%25A9%25E3%2581%25AE%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E5%258C%2596%25E5%2585%25A5%25E9%2596%2580%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:AIDO%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVhYWFkMWNkMzMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>AIDO</dc:creator></item><item><title><![CDATA[WixStudioでVeloを使う Step 36 「コレクションの色フィールドの活用」]]></title><description><![CDATA[
+ はじめに
+
+今回はWixStudioのCMSに注目する。CMSはいわゆるデータベースの仕組み。サイトで扱う記事や商品、会員の情報などのデータをテーマ毎に一定のルールに従って管理することができる。CMSはテーマ毎にデータをまとめて管理することになるが、テーマ毎にまとめられたデータ群をコレクションと呼んでいるぽい。
+そんなCMSのコレクションには、新しいフィールドとして色が登場した。
+
+新しいフィールド「色」
+この色フィールドについて考えていきたい。
+
+ 目的
+CMSのコレクションで使える新しいフィールドタイプ「色｣の活用について検討する。
+
+ 準備
+新しくサイトを作成しCMSやVelo...]]></description><link>https://zenn.dev/niibori/articles/veloonwixstudio-beginner-0036</link><guid isPermaLink="true">https://zenn.dev/niibori/articles/veloonwixstudio-beginner-0036</guid><pubDate>Wed, 26 Feb 2025 05:39:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_XebkAL_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:WixStudio%25E3%2581%25A7Velo%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%2520Step%252036%2520%25E3%2580%258C%25E3%2582%25B3%25E3%2583%25AC%25E3%2582%25AF%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2581%25AE%25E8%2589%25B2%25E3%2583%2595%25E3%2582%25A3%25E3%2583%25BC%25E3%2583%25AB%25E3%2583%2589%25E3%2581%25AE%25E6%25B4%25BB%25E7%2594%25A8%25E3%2580%258D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Niibori%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U4ZDA4Mjg3YTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Niibori</dc:creator></item><item><title><![CDATA[【解説】大個人開発時代を生き抜くためのJavaScript・Reactの基本的な開発フローをまとめてみた]]></title><description><![CDATA[
+ JavaScriptとReactでプロジェクトを作成するための基本的な手順（初心者向け）
+
+ はじめに
+大個人開発時代に乗り遅れないために、JavaScriptとReactで開発するための基礎基本をまとめました。
+生成AIは人間の探究心を具現化させるための最高のパートナーだと思っています。形ないもの（思想・思考）を形あるものにしていくために基礎基本を抑えておくと良いなと思い、Claude 3.7 Sonnet、OpenAI o3-mini-high と一緒に書きました。
+参考：
+
+React 日本語ドキュメント
+MDN Web Docs - JavaScript
+
+!
+加筆修正必要な...]]></description><link>https://zenn.dev/yellowbanana/articles/a4a3565190182b</link><guid isPermaLink="true">https://zenn.dev/yellowbanana/articles/a4a3565190182b</guid><pubDate>Wed, 26 Feb 2025 02:58:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--PZdvaCqS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E8%25A7%25A3%25E8%25AA%25AC%25E3%2580%2591%25E5%25A4%25A7%25E5%2580%258B%25E4%25BA%25BA%25E9%2596%258B%25E7%2599%25BA%25E6%2599%2582%25E4%25BB%25A3%25E3%2582%2592%25E7%2594%259F%25E3%2581%258D%25E6%258A%259C%25E3%2581%258F%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AEJavaScript%25E3%2583%25BBReact%25E3%2581%25AE%25E5%259F%25BA%25E6%259C%25AC%25E7%259A%2584%25E3%2581%25AA%25E9%2596%258B%25E7%2599%25BA%25E3%2583%2595%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%2592%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%25A4%25E3%2583%259E%25E3%2583%2580%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVkZWMyODcyMDIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ヤマダ</dc:creator></item><item><title><![CDATA[クレカの利用明細メールをスプレッドシートに自動で書き起こしする]]></title><description><![CDATA[こんにちは、TRUSTDOCKのよもぎたです。
+突然ですが、時代はキャッシュレス！です。
+クレカや〇〇ペイなどで支払いをすると、その旨のメールが飛んでくるものが多いかと思います。そのメールをパースして、スプレッドシートに書き起こしするGoogle Apps Scriptを作成してみました。
+別の言い方をすると、こちらの記事でGmailを扱うリファレンスを見たので、それをもとにした派生ネタです。
+
+ アプローチ
+先程引用した記事と同じで、search()メソッドでメールを検索します。そこから今回はメール本文をパースして、スプレッドシートに書き起こししたい単位に抽出・分割して配列に格納してス...]]></description><link>https://zenn.dev/trustdock/articles/631e0e2bdf821a</link><guid isPermaLink="true">https://zenn.dev/trustdock/articles/631e0e2bdf821a</guid><pubDate>Tue, 25 Feb 2025 13:16:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1SIj6v0q--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25AF%25E3%2583%25AC%25E3%2582%25AB%25E3%2581%25AE%25E5%2588%25A9%25E7%2594%25A8%25E6%2598%258E%25E7%25B4%25B0%25E3%2583%25A1%25E3%2583%25BC%25E3%2583%25AB%25E3%2582%2592%25E3%2582%25B9%25E3%2583%2597%25E3%2583%25AC%25E3%2583%2583%25E3%2583%2589%25E3%2582%25B7%25E3%2583%25BC%25E3%2583%2588%25E3%2581%25AB%25E8%2587%25AA%25E5%258B%2595%25E3%2581%25A7%25E6%259B%25B8%25E3%2581%258D%25E8%25B5%25B7%25E3%2581%2593%25E3%2581%2597%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:th0x0472%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzEzNzA5NTQzOWYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:TRUSTDOCK%2520%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2UzYzI4Njg4YjQuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>th0x0472</dc:creator></item></channel></rss>
