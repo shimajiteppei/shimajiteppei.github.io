@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Tue, 04 Mar 2025 03:09:39 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[alembicをfastAPIで用いる場合にloggingを実装する場合の注意点]]></title><description><![CDATA[
+ 概要
+FastAPIとuvicornを用いてAPIサーバーを立ち上げる場合、uvicorn上で設定を適切に行うことで、意図したログ出力を行うことができます。
+しかし、マイグレーションツールであるalembicとの組み合わせた場合にハマってしまったのでそのメモです。
+結論から言うと、alembicが自動生成するenv.pyに含まれるログ設定が、uvicornのログ設定と競合してしまうので、何かしらの対策が必要です。
+
+ alembicとは？
+alembicは、PythonのORMライブラリSQLAlchemyと連携して利用されるデータベースマイグレーションツールです。
+データベースのス...]]></description><link>https://zenn.dev/kicchan/articles/0009_llyssm_logging_on_fastapi_and_alembic</link><guid isPermaLink="true">https://zenn.dev/kicchan/articles/0009_llyssm_logging_on_fastapi_and_alembic</guid><pubDate>Mon, 03 Mar 2025 23:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Mmf7Fgue--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:alembic%25E3%2582%2592fastAPI%25E3%2581%25A7%25E7%2594%25A8%25E3%2581%2584%25E3%2582%258B%25E5%25A0%25B4%25E5%2590%2588%25E3%2581%25ABlogging%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2599%25E3%2582%258B%25E5%25A0%25B4%25E5%2590%2588%25E3%2581%25AE%25E6%25B3%25A8%25E6%2584%258F%25E7%2582%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kicchan%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U0NmExYWE4YWIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kicchan</dc:creator></item><item><title><![CDATA[AnkiConnect × Python: フラッシュカード学習を極める - 自動化レシピと高度なカスタマイズ]]></title><description><![CDATA[本書は、AnkiConnectとPythonを用いてフラッシュカード学習を自動化・高度化するための実践的なガイドです。AnkiConnect APIの基礎から、データソース連携、Webスクレイピング、画像生成AIとの連携まで、幅広い技術を網羅します。読者は、本書を通してAnki学習を自分好みにカスタマイズし、学習効率を飛躍的に向上させるための知識とスキルを習得できます。]]></description><link>https://zenn.dev/idev/books/book-20250304-045421</link><guid isPermaLink="true">https://zenn.dev/idev/books/book-20250304-045421</guid><pubDate>Mon, 03 Mar 2025 22:06:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--DaaMaMnS--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci83MmJlYzAzODNmLnBuZw==%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>timeless-residents</dc:creator></item><item><title><![CDATA[AnkiConnect×Python: フラッシュカード学習を自動化する実践ガイド]]></title><description><![CDATA[
+ AnkiConnect×Python: フラッシュカード学習を自動化する実践ガイド
+この記事では、AnkiConnectとPythonを使ってフラッシュカード学習を自動化する方法を解説します。Ankiは強力なフラッシュカード学習ソフトウェアですが、AnkiConnectとPythonを組み合わせることで、その機能をさらに拡張し、学習効率を劇的に向上させることができます。この記事は『AnkiConnect × Python: フラッシュカード学習を極める - 自動化レシピと高度なカスタマイズ』の内容に基づいており、実践的なコード例と段階的な説明を通して、読者がすぐに自動化を始められるよ...]]></description><link>https://zenn.dev/idev/articles/article-20250304-050655</link><guid isPermaLink="true">https://zenn.dev/idev/articles/article-20250304-050655</guid><pubDate>Mon, 03 Mar 2025 22:06:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ygo8m209--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AnkiConnect%25C3%2597Python%253A%2520%25E3%2583%2595%25E3%2583%25A9%25E3%2583%2583%25E3%2582%25B7%25E3%2583%25A5%25E3%2582%25AB%25E3%2583%25BC%25E3%2583%2589%25E5%25AD%25A6%25E7%25BF%2592%25E3%2582%2592%25E8%2587%25AA%25E5%258B%2595%25E5%258C%2596%25E3%2581%2599%25E3%2582%258B%25E5%25AE%259F%25E8%25B7%25B5%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:timeless-residents%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I3NTdiM2NmN2QuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>timeless-residents</dc:creator></item><item><title><![CDATA[「chakoshi」とLINE botを連携してみる]]></title><description><![CDATA[
+ これまでのおさらい
+前回の記事では、NTTコミュニケーションズ株式会社が開発した「chakoshi」を音声認識アプリと絡めて遊んでみました。
+たくさんの方に読んでいただいて、大変嬉しい限りです🙏
+https://zenn.dev/macori/articles/16836b45c32983
+chakoshi自体はLLMガードレールとよばれる製品の一つで、入出力に有害な文章が含まれるかどうかを判定してくれるようです。
+https://chakoshi.ntt.com/
+
+ 今回の目標
+chakoshiは本来テキストの安全性や有害性を判定するのが主目的のようです。
+なので、今回は一番あり...]]></description><link>https://zenn.dev/macori/articles/7976b859e4a947</link><guid isPermaLink="true">https://zenn.dev/macori/articles/7976b859e4a947</guid><pubDate>Mon, 03 Mar 2025 09:21:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--o6BeXPZG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%258Cchakoshi%25E3%2580%258D%25E3%2581%25A8LINE%2520bot%25E3%2582%2592%25E9%2580%25A3%25E6%2590%25BA%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:macori%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY1NGRmMzE4ZjMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>macori</dc:creator></item><item><title><![CDATA[駅すぱあと Python SDKを使って駅情報を取得する]]></title><description><![CDATA[本記事はヴァル研究所の支援として作成された記事です
+駅すぱあとはAPIを公開しており、駅情報や経路探索などをAPI経由で行えます。メソッドはすべてGETメソッドで、情報取得系のみです。レスポンスはJSONまたはXMLで返ってきます。
+この駅すぱあと APIを利用しやすくするSDKを開発しはじめました。SDKはPythonで作っており、ローカルやサーバーサイドで実行できます。
+今回は、駅情報取得APIの使い方を解説します。
+なお、駅すぱあと APIを使ってExcel VBAでもSDKを作っています。
+「駅すぱあと API」をExcel VBAから利用して、経費精算用に経路探索を行う
+駅すぱ...]]></description><link>https://zenn.dev/ekispert_api/articles/093b6e85aa9cb9</link><guid isPermaLink="true">https://zenn.dev/ekispert_api/articles/093b6e85aa9cb9</guid><pubDate>Mon, 03 Mar 2025 08:40:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vsrfUaCF--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E9%25A7%2585%25E3%2581%2599%25E3%2581%25B1%25E3%2581%2582%25E3%2581%25A8%2520Python%2520SDK%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E9%25A7%2585%25E6%2583%2585%25E5%25A0%25B1%25E3%2582%2592%25E5%258F%2596%25E5%25BE%2597%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2582%25A2%25E3%2583%2584%25E3%2582%25B7%2540MOONGIFT%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzllZWU4MmU5MDMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E9%25A7%2585%25E3%2581%2599%25E3%2581%25B1%25E3%2581%2582%25E3%2581%25A8%2520API%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dqN3UwNEd0OEkzbTVsd2xaRUhBbjNlcko0QjZxNWlBd1V6N2tqT1E9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>アツシ@MOONGIFT</dc:creator></item><item><title><![CDATA[python3エンジニア認定実践試験対策②]]></title><description><![CDATA[
+ はじめに
+
+
+Python実践レシピに沿って学習します。
+
+
+ 以前の記事
+
+
+Python3エンジニア認定実践試験対策①
+第4章pythonのクラス、第6章テキストの処理
+
+
+ 今回の範囲
+
+
+
+章
+タイトル
+問題数
+問題割合
+備考
+
+
+
+
+10
+汎用OS・ランタイムサービス
+2
+5.0%
+
+
+
+11
+ファイルとディレクトリへのアクセス
+2
+5.0%
+
+
+
+
+
+ 10：汎用OS・ランタイムサービス
+
+ モジュール一覧
+
+osモジュール
+ioモジュール
+sysモジュール
+argparseモジュール
+主観と練習問題を見た感覚だとos、sysの方が出現割合が高そうなので、os/sys -...]]></description><link>https://zenn.dev/tuki24/articles/4bdf30b873c951</link><guid isPermaLink="true">https://zenn.dev/tuki24/articles/4bdf30b873c951</guid><pubDate>Mon, 03 Mar 2025 08:25:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--sy7yh9t---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:python3%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%25E8%25AA%258D%25E5%25AE%259A%25E5%25AE%259F%25E8%25B7%25B5%25E8%25A9%25A6%25E9%25A8%2593%25E5%25AF%25BE%25E7%25AD%2596%25E2%2591%25A1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A4%25E3%2581%258D%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSXdmOFA0QUY2NEIwNGdDVzVpVkpfakMweTFtOGVMeGxQQlhiV2tmSWdvRFhmOF9nPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>つき</dc:creator></item><item><title><![CDATA[Pythonの関数とwhileループについて]]></title><description><![CDATA[
+ Pythonの関数とwhileループについて
+
+ 関数とは？
+Pythonにおける関数は、一連の処理をまとめて定義し、必要なときに呼び出せる便利な仕組みです。関数を使うことで、コードの再利用性が向上し、可読性も良くなります。
+
+ 基本的な関数の定義方法
+関数は def キーワードを使って定義します。
+def 関数名(仮引数1, 仮引数2, ...):
+    処理
+    return 返り値
+
+
+def の後に関数名を書き、() 内に必要な引数を指定します。
+
+return を使うと、計算結果などの値を返すことができます。
+
+return を省略した場合、関数は None を返しま...]]></description><link>https://zenn.dev/halhal420/articles/4f641989565074</link><guid isPermaLink="true">https://zenn.dev/halhal420/articles/4f641989565074</guid><pubDate>Mon, 03 Mar 2025 04:29:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--STrD2uMR--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25AE%25E9%2596%25A2%25E6%2595%25B0%25E3%2581%25A8while%25E3%2583%25AB%25E3%2583%25BC%25E3%2583%2597%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hal%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSmdad292RDU4Vk10MlVuNVEtUlQ1bzBLNlFwYVRvRzBPaFRDcEl6Wjlsc2s2eXlvYz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hal</dc:creator></item><item><title><![CDATA[ゼロからのプログラミング学習ロードマップ]]></title><description><![CDATA[# ゼロからのプログラミング学習ロードマップ
+
+# 前文
+これはLLMの実験として全文をClaude 3.7 SonnetおよびClaude 3.5 Sonnetに書いてもらったものです（バージョンが違うのは3.7で長文を出力しようとすると私の環境ではAPI実行に失敗していたため）。
+一応妥当性は確認していますが人間が書いたものではないので気になる方は読まないようにしてください。
+ちなみに出力に金額として600円、時間としてたぶん6時間くらいかかりました。
+
+## 概要
+このドキュメントは、プログラミング未経験者が基礎から実践的なツール開発までを学ぶための包括的なガイドです。Windows環境でPythonを使用し、最新のツールとベストプラクティスを学びながら、段階的にプログラミングスキルを向上させることを目的としています。
+
+## 対象読者
+- プログラミングが初めての方
+- 基本的なPC操作はできるが、開発経験のない方
+- 実践的なプログラミングスキルを身につけたい方
+
+## 前提環境
+- OS: Windows
+- エディタ: Windsurf
+- 言語: Python
+- バージョン管理: Git & GitHub]]></description><link>https://zenn.dev/kuwashima/books/92073d7c1c25fc</link><guid isPermaLink="true">https://zenn.dev/kuwashima/books/92073d7c1c25fc</guid><pubDate>Mon, 03 Mar 2025 04:22:40 GMT</pubDate><dc:creator>kuwashima</dc:creator></item><item><title><![CDATA[機械学習で情報を分類する簡単ステップ]]></title><description><![CDATA[問題設定: どのコーヒーが仕事の集中力を上げるのか？
+例えば、あなたがコーヒー好きで、どの種類のコーヒーを飲むと仕事の集中力が高まるかを分析したいとします。
+そこで、機械学習を使って、コーヒーを「集中力が高まる☕」と「集中力が下がる😪」の 2つのカテゴリに分類するモデル を作成してみましょう！
+ステップ 1: データ収集
+まずは、1週間にわたって以下のデータを記録します。
+✔️ コーヒーの種類（エスプレッソ、カプチーノ、ドリップコーヒーなど）
+✔️ 砂糖の量（なし、少なめ、多め）
+✔️ 飲んだ時間
+✔️ 1時間後の集中度（高い or 低い）
+データの例:
+
+ステップ 2: データの前処理...]]></description><link>https://zenn.dev/dedairiki/articles/b8fc84a640bb63</link><guid isPermaLink="true">https://zenn.dev/dedairiki/articles/b8fc84a640bb63</guid><pubDate>Mon, 03 Mar 2025 03:25:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--OtRiVESr--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%25A9%259F%25E6%25A2%25B0%25E5%25AD%25A6%25E7%25BF%2592%25E3%2581%25A7%25E6%2583%2585%25E5%25A0%25B1%25E3%2582%2592%25E5%2588%2586%25E9%25A1%259E%25E3%2581%2599%25E3%2582%258B%25E7%25B0%25A1%25E5%258D%2598%25E3%2582%25B9%25E3%2583%2586%25E3%2583%2583%25E3%2583%2597%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:DeDairiki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSXpVM2RCVEdkTGJER1g2dExNQUFiTzROakNyZ2pvcFZQMV9qeHg1cWxUPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>DeDairiki</dc:creator></item><item><title><![CDATA[Pythonのf-stringsとエンコーディングについて]]></title><description><![CDATA[
+ Pythonのf-stringsとエンコーディングについて
+
+ f-stringsとは？
+f-strings（フォーマット済み文字列リテラル）は、Python 3.6から導入された便利な文字列フォーマット方法です。
+
+ 基本的な使い方
+f'...' のように、文字列の前に f を付けることで f-strings を使用できます。文字列の中に {} を使うと、その中の式が評価され、その結果に置き換えられます。
+
+ 例:
+name = "Alice"
+age = 25
+message = f"{name} is {age} years old."
+print(message)
+出力:
+A...]]></description><link>https://zenn.dev/halhal420/articles/3635c5264bb39d</link><guid isPermaLink="true">https://zenn.dev/halhal420/articles/3635c5264bb39d</guid><pubDate>Mon, 03 Mar 2025 02:50:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--tP6_c3dY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25AEf-strings%25E3%2581%25A8%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2587%25E3%2582%25A3%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hal%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSmdad292RDU4Vk10MlVuNVEtUlQ1bzBLNlFwYVRvRzBPaFRDcEl6Wjlsc2s2eXlvYz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hal</dc:creator></item><item><title><![CDATA[動的なサイトもスクレピングできる【Scrapy-Playwright】]]></title><description><![CDATA[
+ はじめに
+こんにちは。スペースマーケットでWebエンジニアしてるmotimoti63です。
+2025年1月に入社してから二ヶ月経ちました。こういった技術的なブログ投稿は初めてですが少しでも役に立つ情報を発信できればと思います。
+大学時代にスクレイピングをしててその時に動的なサイトでもスクレピング可能な方法があったので紹介します。
+
+ Scrapyとは？
+Python製の強力なスクレイピングフレームワークです。通常の静的サイトであれば、HTMLを解析してデータを取得することができますが、Scrapyはそれに加え、非同期処理による高速なクロールやリトライ・キャッシュ機能、データパイプライ...]]></description><link>https://zenn.dev/spacemarket/articles/3c3b06a55f3550</link><guid isPermaLink="true">https://zenn.dev/spacemarket/articles/3c3b06a55f3550</guid><pubDate>Mon, 03 Mar 2025 02:47:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9K248SbD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%258B%2595%25E7%259A%2584%25E3%2581%25AA%25E3%2582%25B5%25E3%2582%25A4%25E3%2583%2588%25E3%2582%2582%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AC%25E3%2583%2594%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258B%25E3%2580%2590Scrapy-Playwright%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:motimoti63%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc1NTA1NzM5OGYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25B9%25E3%2583%259A%25E3%2583%25BC%25E3%2582%25B9%25E3%2583%259E%25E3%2583%25BC%25E3%2582%25B1%25E3%2583%2583%25E3%2583%2588%2520Engineer%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc3OTUxZjA0NzMuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>motimoti63</dc:creator></item><item><title><![CDATA[WindowsでのPython環境準備メモ]]></title><description><![CDATA[一応、数種のLLMと相談した結果、以下の環境(miniconda)を選ぶことにした。
+pythonを使った、DeepLearning、機械学習、webサービス、excel操作、LLMとRAGの構築などをTGTとして、これを1台のPCでまとめる為に環境変数や環境設定をして使い分ける前提でどの環境を選ぶか?venv、docker、Miniconda、Virtualenv、Pyenvを比較させました。ポイントは、ライセンス形態（無料の条件を優先）、導入の容易さ、処理負荷、拡張性、メモリ消費にしています。
+結果として中規模企業で有料だったり、リソースの消費が大きかったりするのを良しと出来るならD...]]></description><link>https://zenn.dev/rieki/articles/ae46109906eee8</link><guid isPermaLink="true">https://zenn.dev/rieki/articles/ae46109906eee8</guid><pubDate>Mon, 03 Mar 2025 01:59:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--YLuebsfT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Windows%25E3%2581%25A7%25E3%2581%25AEPython%25E7%2592%25B0%25E5%25A2%2583%25E6%25BA%2596%25E5%2582%2599%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258B%25E3%2581%25A4.%25E3%2582%258A%25E3%2581%2588%25E3%2581%258D%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2IzMzY4ZTYwZDMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>かつ.りえき</dc:creator></item><item><title><![CDATA[WordファイルをTEI XMLに変換する方法：TEIgarage APIの活用ガイ]]></title><description><![CDATA[この記事は、AIが作成し、一部を人が修正したものです。
+
+ はじめに
+デジタル人文学の世界では、文書をTEI（Text Encoding Initiative）形式で保存することが一般的になっています。TEIは学術的なテキストを構造化するための標準規格です。今回は、Microsoft Wordで作成した文書をTEI XML形式に変換する方法を、Pythonを使って解説します。
+
+ TEIgarageとは？
+TEIgarageは、さまざまな形式の文書をTEI XMLに変換するためのオンラインサービスです。このサービスはAPIを提供しており、プログラムから直接利用することができます。今回はこ...]]></description><link>https://zenn.dev/nakamura196/articles/21e2b4484fdf24</link><guid isPermaLink="true">https://zenn.dev/nakamura196/articles/21e2b4484fdf24</guid><pubDate>Mon, 03 Mar 2025 01:06:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--aybe-mbI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Word%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2592TEI%2520XML%25E3%2581%25AB%25E5%25A4%2589%25E6%258F%259B%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%25EF%25BC%259ATEIgarage%2520API%25E3%2581%25AE%25E6%25B4%25BB%25E7%2594%25A8%25E3%2582%25AC%25E3%2582%25A4%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nakamura196%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pkd3BpX1gzTWIzV3VqTnVnV2tPTlJlU3VsNFNTN1BNMWlPQm9LRm5JPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nakamura196</dc:creator></item><item><title><![CDATA[【初心者必見】Python入門ガイド｜環境構築から基本文法・実践プログラミング例まで徹底解説]]></title><description><![CDATA[
+ Python入門記事（初心者向け）
+本記事では、プログラミング未経験の方でも理解できるように、Pythonの基本から実践的なプログラミング例まで、丁寧かつ詳しく解説していきます。実際に手を動かしながら学べる内容となっており、コピー＆ペーストでそのままコードを試すことができるため、初心者の方でも安心して取り組めます。
+
+
+ 1. はじめに
+
+ 1.1 記事の目的と背景
+Pythonは、シンプルで読みやすい文法と、豊富なライブラリが魅力のプログラミング言語です。
+
+
+人気の理由：
+
+
+シンプルな文法： 他のプログラミング言語に比べ、コードが直感的で理解しやすいため、初めてプログラミングに...]]></description><link>https://zenn.dev/huteneko2024/articles/aa0e7fc08aa105</link><guid isPermaLink="true">https://zenn.dev/huteneko2024/articles/aa0e7fc08aa105</guid><pubDate>Sun, 02 Mar 2025 23:12:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--EIQdTyXW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E5%25BF%2585%25E8%25A6%258B%25E3%2580%2591Python%25E5%2585%25A5%25E9%2596%2580%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%25EF%25BD%259C%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%258B%25E3%2582%2589%25E5%259F%25BA%25E6%259C%25AC%25E6%2596%2587%25E6%25B3%2595%25E3%2583%25BB%25E5%25AE%259F%25E8%25B7%25B5%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%259F%25E3%2583%25B3%25E3%2582%25B0%25E4%25BE%258B%25E3%2581%25BE%25E3%2581%25A7%25E5%25BE%25B9%25E5%25BA%2595%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25B5%25E3%2581%25A6%25E3%2581%25B6%25E3%2581%25A6%25E3%2581%2597%25E3%2581%2584%25E7%258C%25AB%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTHk4WG5VR3NKTE8xMXE5SUFGZEtyT1hqdmR1MFBkbDRJb1hkaVRadmVEZjNpb2hFdz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ふてぶてしい猫</dc:creator></item><item><title><![CDATA[個人的なFastAPI バックエンド構成 決定版]]></title><description><![CDATA[
+ はじめに
+FastAPIを使ったバックエンド開発でよく使っているお気に入りの構成があるので紹介したいと思います。
+
+ 特徴
+
+中規模開発向け構成
+FactoryMethodパターン
+Poetryで依存関係管理
+PydanticでDTO実装
+
+
+ ディレクトリ構成
+.
+├── core/
+│   ├── base/
+│   │   ├── abstractions/
+│   │   │   └── __init__.py ... sharedの抽象クラスをここでまとめる
+│   │   ├── providers/ ... プロバイダー抽象クラス
+│   │   └── utils/
+...]]></description><link>https://zenn.dev/morimoto/articles/f4be63cdf0a09d</link><guid isPermaLink="true">https://zenn.dev/morimoto/articles/f4be63cdf0a09d</guid><pubDate>Sun, 02 Mar 2025 21:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--KyQGlyM2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2580%258B%25E4%25BA%25BA%25E7%259A%2584%25E3%2581%25AAFastAPI%2520%25E3%2583%2590%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2589%25E6%25A7%258B%25E6%2588%2590%2520%25E6%25B1%25BA%25E5%25AE%259A%25E7%2589%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yuma%2520morimoto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY1ZWUwMmUwYzkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yuma morimoto</dc:creator></item><item><title><![CDATA[Cloud Functionsで使用中のライブラリバージョンを特定する方法]]></title><description><![CDATA[
+ TL;DR
+
+Cloud Functionsにデプロイされたライブラリの正確なバージョンは、コンテナイメージを取得して内部を調査することで確認できる
+Artifact Registryから取得したコンテナイメージのファイルシステムを抽出し、.dist-infoディレクトリを調べることでバージョン情報がわかる
+
+
+ はじめに
+Cloud Functionsをデプロイする際、requirements.txtでライブラリのバージョンを指定することがあります。
+しかし、ワイルドカード（*）を使用してバージョンを指定している場合、実際にどのバージョンがデプロイされているか把握しづらくなります。...]]></description><link>https://zenn.dev/o2wsu9/articles/7688bd2320f164</link><guid isPermaLink="true">https://zenn.dev/o2wsu9/articles/7688bd2320f164</guid><pubDate>Sun, 02 Mar 2025 11:34:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--mLSPlJiC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Cloud%2520Functions%25E3%2581%25A7%25E4%25BD%25BF%25E7%2594%25A8%25E4%25B8%25AD%25E3%2581%25AE%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%25E3%2583%2590%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%2592%25E7%2589%25B9%25E5%25AE%259A%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:o2wsu9%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdjMTFhNDRkZTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>o2wsu9</dc:creator></item><item><title><![CDATA[uvのリポジトリでRenovateやDependabotを導入する]]></title><description><![CDATA[
+ dependency-bot
+RenovateやDependabotといった、依存関係の更新を通知するシステムはメンテナンスをする上で欠かせません。Pythonの開発ツールであるuvを使ったリポジトリにおける通知の導入手順を紹介します。
+
+ Renovateを使う
+Renovateは、uvをサポートしています。
+
+uv is supported by Renovate.
+
+https://docs.astral.sh/uv/guides/integration/dependency-bots/
+リポジトリをRenovateと連携しrenovate.json を作成すると、Renova...]]></description><link>https://zenn.dev/shundeveloper/articles/38844d24e470d1</link><guid isPermaLink="true">https://zenn.dev/shundeveloper/articles/38844d24e470d1</guid><pubDate>Sun, 02 Mar 2025 11:34:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--JbEaGgu_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:uv%25E3%2581%25AE%25E3%2583%25AA%25E3%2583%259D%25E3%2582%25B8%25E3%2583%2588%25E3%2583%25AA%25E3%2581%25A7Renovate%25E3%2582%2584Dependabot%25E3%2582%2592%25E5%25B0%258E%25E5%2585%25A5%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:shunsock%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY3Y2U4NzUxNzkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>shunsock</dc:creator></item><item><title><![CDATA[Pythonでプログレスバーを表示する]]></title><description><![CDATA[PythonとTkinterを使用してプログレスバーを表示し処理の進捗状況を表示するコードをまとめていきます
+こちらのコードはChatGPTを使用して作成しています
+
+
+ プログレスバーを表示するコード
+from tkinter import Tk, Toplevel, ttk
+
+class ProgressBarApp:
+    def __init__(self, maximum):
+        self.root = Tk()
+        self.root.withdraw()
+
+        # プログレスバーのウィンドウを作成
+        self.progre...]]></description><link>https://zenn.dev/sayasurvey/articles/dbfbd56ab0ddc2</link><guid isPermaLink="true">https://zenn.dev/sayasurvey/articles/dbfbd56ab0ddc2</guid><pubDate>Sun, 02 Mar 2025 08:57:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--moE7qqhS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A7%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25AC%25E3%2582%25B9%25E3%2583%2590%25E3%2583%25BC%25E3%2582%2592%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:sayasurvey%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSXlZWjNSbWJhQXZFaU91cXJGMld3OTRGdlMzX2hJWGhPTFFwcHlHV1RTNGc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sayasurvey</dc:creator></item><item><title><![CDATA[Streamitの使い方]]></title><description><![CDATA[
+ 実行
+streamlit run app.py --server.port 8501
+
+ streamlitのテンプレート
+import streamlit as st
+# マルチページを使うには、pagesフォルダを作ってページを追加するだけでいい。
+
+# タイトル
+st.title('streamlit Tutorial')
+# ヘッダ
+st.header('This is a header')
+# サブヘッダ
+st.subheader('This is a subheader')
+# テキスト
+st.text('Hello World!')
+# st.write()はMarkd...]]></description><link>https://zenn.dev/ebikazuki/articles/44decc4a223831</link><guid isPermaLink="true">https://zenn.dev/ebikazuki/articles/44decc4a223831</guid><pubDate>Sun, 02 Mar 2025 07:23:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dDX5bE-k--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:Streamit%25E3%2581%25AE%25E4%25BD%25BF%25E3%2581%2584%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2588%25E3%2581%25B3%25E3%2581%258B%25E3%2581%259A%25E3%2581%258D%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTHhBckpUeFNEVHhZLXMwTE9wZ2hxQXRFa0JrcW9MNnFvTXl2azZlMk9qVl9rPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>えびかずき</dc:creator></item><item><title><![CDATA[受託会社でのエンジニアインターン(2023/1~2023/11)を振り返って]]></title><description><![CDATA[
+ 概要
+今回は受託会社でバックエンドエンジニアのインターン生として大学2年の1月から大学3年の11月までの11ヶ月ほど働いていたときのことについて書いていこうと思います。
+なぜ長期インターンを始めようと思ったかというと、自分で簡単なアプリを作るだけでなく、実務としてのプロダクト開発に関わることで実践的なスキルを身に着けいたいと考えたからです。
+その中でも私がつばさ株式会社を選んだ理由は2つあります。1つ目が業務内容と使用技術がとても良いと思ったことです。2つ目が自社開発のプロジェクトも近々始めるつもりだということを面接の際に聞いたたことです。メインのプログラミング言語として、Pytho...]]></description><link>https://zenn.dev/kanji_y/articles/6b633956fbfc89</link><guid isPermaLink="true">https://zenn.dev/kanji_y/articles/6b633956fbfc89</guid><pubDate>Sun, 02 Mar 2025 06:30:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jZPnipje--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%258F%2597%25E8%25A8%2597%25E4%25BC%259A%25E7%25A4%25BE%25E3%2581%25A7%25E3%2581%25AE%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%25B3%25282023%252F1%7E2023%252F11%2529%25E3%2582%2592%25E6%258C%25AF%25E3%2582%258A%25E8%25BF%2594%25E3%2581%25A3%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kanji%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2IyOWVlZjdhZDIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kanji</dc:creator></item></channel></rss>
