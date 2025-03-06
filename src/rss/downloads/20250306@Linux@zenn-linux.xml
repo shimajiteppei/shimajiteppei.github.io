@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Linux」のフィード]]></title><description><![CDATA[Zennのトピック「Linux」のRSSフィードです]]></description><link>https://zenn.dev/topics/linux</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/860a9eb1e4.png</url><title>Zennの「Linux」のフィード</title><link>https://zenn.dev/topics/linux</link></image><generator>zenn.dev</generator><lastBuildDate>Thu, 06 Mar 2025 05:12:38 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/linux/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Rails でユーザーが複数の部署に所属することを表すメンバーシップモデルを作る]]></title><description><![CDATA[お家の検証サーバ用の備忘録です。
+
+ 前提
+前提です。
+https://zenn.dev/asterisk9101/articles/ruby_on_rails8-4
+
+ 権限の境界としての部署
+ユーザーを部署（Section）に所属させます。
+ユーザーは複数の部署に所属することがあるので、中間テーブルとなる Membership モデルを作成します。
+また、ユーザーは部署毎に役割を持つので、role 属性を持たせます。
+bundle exec rails g scaffold Membership \
+  section:references \
+  user:references \...]]></description><link>https://zenn.dev/asterisk9101/articles/ruby_on_rails8-5</link><guid isPermaLink="true">https://zenn.dev/asterisk9101/articles/ruby_on_rails8-5</guid><pubDate>Wed, 05 Mar 2025 15:17:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--rX9jjOBF--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rails%2520%25E3%2581%25A7%25E3%2583%25A6%25E3%2583%25BC%25E3%2582%25B6%25E3%2583%25BC%25E3%2581%258C%25E8%25A4%2587%25E6%2595%25B0%25E3%2581%25AE%25E9%2583%25A8%25E7%25BD%25B2%25E3%2581%25AB%25E6%2589%2580%25E5%25B1%259E%25E3%2581%2599%25E3%2582%258B%25E3%2581%2593%25E3%2581%25A8%25E3%2582%2592%25E8%25A1%25A8%25E3%2581%2599%25E3%2583%25A1%25E3%2583%25B3%25E3%2583%2590%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%2583%25E3%2583%2597%25E3%2583%25A2%25E3%2583%2587%25E3%2583%25AB%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25A4%259A%25E7%2594%25B0%25E6%25B0%258F%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFUWEFKd3hvZ1pLNDVtSmdsUDlROUZPUTcyRXg4eV9MeFdmejdma0V1aTA9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>多田氏</dc:creator></item><item><title><![CDATA[Linuxでディスクをマウントする基本操作]]></title><description><![CDATA[普段はクラウドにおんぶにだっこな私ですが、たまたま物理マシン（Ubuntu Server）に外付けSSDを挿して操作する用事があったので、「あれってどうやるんだっけ…」と調べながら基本操作をまとめてみました。
+今回繋いだ「外付けSSD」は元々別のUbuntuマシンのストレージとして利用していたものであるため、一般的なUSBメモリなどとは異なりLVMで管理されているものでした。そのため、後半ではLVMのマウントにも触れています。
+
+ 基本
+
+ デバイスのリスト
+接続されたブロックデバイス（例：/dev/sdb1）を探す。
+
+
+lsblk
+
+List Block Devices
+シンプルなツ...]]></description><link>https://zenn.dev/kitar/articles/4443dfabd51e36</link><guid isPermaLink="true">https://zenn.dev/kitar/articles/4443dfabd51e36</guid><pubDate>Wed, 05 Mar 2025 11:28:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qTwKjYZf--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%25E3%2581%25A7%25E3%2583%2587%25E3%2582%25A3%25E3%2582%25B9%25E3%2582%25AF%25E3%2582%2592%25E3%2583%259E%25E3%2582%25A6%25E3%2583%25B3%25E3%2583%2588%25E3%2581%2599%25E3%2582%258B%25E5%259F%25BA%25E6%259C%25AC%25E6%2593%258D%25E4%25BD%259C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Satoshi%2520Kita%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2hxTGhOUzBuNWlEZ094ZmpUT1NaT01RM0JCZFZmczNScGJZTTg1aUtjPXMyNTAtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Satoshi Kita</dc:creator></item><item><title><![CDATA[Swayでサクっと日本語入力の環境を整える w/ fcitx5]]></title><description><![CDATA[備忘録です。
+
+ 環境
+Arch Linux（カーネル：6.13.5.arch1-1）
+Sway 1:1.10.1-2
+xorg-xwayland 24.1.6-1
+fcitx5 5.1.12-1
+fcitx5-mozc 2.32.5712.102.g9dc8247-3
+fcitx5-configtool 5.1.8-1
+kwindowsystem 6.11.0-1
+ここでは例として、GTK3.0で開発されたソフト（例えば、firefox、WezTermなど）に対して、日本語入力が使えるようにします。
+
+ Sway側の設定
+まずは、デフォルトの設定をコピーしましょう。
+$ cp -r /...]]></description><link>https://zenn.dev/meet4580/articles/336c6362e2c0a2</link><guid isPermaLink="true">https://zenn.dev/meet4580/articles/336c6362e2c0a2</guid><pubDate>Wed, 05 Mar 2025 07:29:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0DjSLjxr--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Sway%25E3%2581%25A7%25E3%2582%25B5%25E3%2582%25AF%25E3%2581%25A3%25E3%2581%25A8%25E6%2597%25A5%25E6%259C%25AC%25E8%25AA%259E%25E5%2585%25A5%25E5%258A%259B%25E3%2581%25AE%25E7%2592%25B0%25E5%25A2%2583%25E3%2582%2592%25E6%2595%25B4%25E3%2581%2588%25E3%2582%258B%2520w%252F%2520fcitx5%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:meet4580%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU1ZjkyZjhjMTcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>meet4580</dc:creator></item><item><title><![CDATA[ping 0 のナゾ]]></title><description><![CDATA[
+ はじめに
+ある日、トチ狂ったみかんちゃんは次のようなコマンドを実行しました。
+$ ping 0
+すると、このコマンドは不思議なことに、自分自身に向けて ICMP パケットを投げ始めました。
+$ ping 0
+PING 0 (127.0.0.1) 56(84) bytes of data.
+64 bytes from 127.0.0.1: icmp_seq=1 ttl=64 time=0.076 ms
+64 bytes from 127.0.0.1: icmp_seq=2 ttl=64 time=0.090 ms
+64 bytes from 127.0.0.1: icmp_seq=3 ...]]></description><link>https://zenn.dev/kusaremkn/articles/720e4931fc2e46</link><guid isPermaLink="true">https://zenn.dev/kusaremkn/articles/720e4931fc2e46</guid><pubDate>Wed, 05 Mar 2025 07:23:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--kD2gJYcB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:ping%25200%2520%25E3%2581%25AE%25E3%2583%258A%25E3%2582%25BE%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:KusaReMKN%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA4ZDY2NzVkZjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>KusaReMKN</dc:creator></item><item><title><![CDATA[yocto cheat sheet]]></title><description><![CDATA[
+ はじめの一歩
+# リリース一覧: https://wiki.yoctoproject.org/wiki/Releases
+git clone git://git.yoctoproject.org/poky.git -b scarthgap
+source poky/oe-init-build-env &lt;working directory name&gt;
+
+bitbake core-image-minimal  # ビルドする
+
+ ビルド
+
+ raspi 用のイメージを作る
+TODO
+
+ 成果物を SD カードに焼く
+cd tmp/deploy/images/$MACHINE/
+...]]></description><link>https://zenn.dev/zakkie/articles/5a7e37e97e8843</link><guid isPermaLink="true">https://zenn.dev/zakkie/articles/5a7e37e97e8843</guid><pubDate>Wed, 05 Mar 2025 00:31:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qMwQvkzJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_76:yocto%2520cheat%2520sheet%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:zakkie%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2Rhcmsvei5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>zakkie</dc:creator></item><item><title><![CDATA[LPIC101 合格体験記]]></title><description><![CDATA[LPIC101の試験に合格したので、合格までの流れや、オススメの勉強方法について書きます。
+
+ 受験までの流れ
+まず、受験までのおおまかな流れについて。
+
+
+Linux Professional Institute にてアカウント登録し、LPI ID を取得
+
+ピアソン VUE のアカウント登録
+白本での学習
+touch-q での学習
+ピアソン VUE から試験日の予約
+CBTテストセンターにて受験 &amp; 結果発表
+
+LPI ID は絶対に必要なので、最初にササッと登録&amp;取得してしまうのが良いです。
+
+ 試験予約
+試験の予約はピアソン VUE というサイトから行います。
+会...]]></description><link>https://zenn.dev/tenkei/articles/72ee0e117c50a6</link><guid isPermaLink="true">https://zenn.dev/tenkei/articles/72ee0e117c50a6</guid><pubDate>Mon, 03 Mar 2025 07:16:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Surwobww--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:LPIC101%2520%25E5%2590%2588%25E6%25A0%25BC%25E4%25BD%2593%25E9%25A8%2593%25E8%25A8%2598%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tenkei%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTC1MbnhJQkE4eS1Yd2xoS3hwQllvMzlxODB3ZVItMDB2NlVWTkdRdnoyTnc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tenkei</dc:creator></item><item><title><![CDATA[Linuxのディレクトリとファイルのパーミッションについて]]></title><description><![CDATA[なにができてできないのか混乱したので、備忘録としてまとめました。
+
+ ファイル
+
+
+
+記号
+権限
+内容
+
+
+
+
+r
+読み取り権
+ファイルの内容を読み出せる
+
+
+w
+書き込み権
+ファイルの内容を変更できる
+
+
+x
+実行権
+ファイルのプログラムを実行できる
+
+
+
+
+ ディレクトリ
+
+
+
+記号
+権限
+内容
+
+
+
+
+r
+読み取り権
+ファイル名一覧を読み出せる
+
+
+w
+書き込み権
+ファイルの作成や削除ができる
+
+
+x
+実行権
+ディレクトリ内に移動できる、ファイルにアクセスできる
+
+
+
+]]></description><link>https://zenn.dev/jin1125/articles/0ca04a0b1a04bc</link><guid isPermaLink="true">https://zenn.dev/jin1125/articles/0ca04a0b1a04bc</guid><pubDate>Mon, 03 Mar 2025 01:59:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--68TBgqps--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%25E3%2581%25AE%25E3%2583%2587%25E3%2582%25A3%25E3%2583%25AC%25E3%2582%25AF%25E3%2583%2588%25E3%2583%25AA%25E3%2581%25A8%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2581%25AE%25E3%2583%2591%25E3%2583%25BC%25E3%2583%259F%25E3%2583%2583%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:jin%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2EyMWU0YTc2YjIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>jin</dc:creator></item><item><title><![CDATA[Arch Linux でハイバネートからの復帰が失敗していたので調査・修正した]]></title><description><![CDATA[
+ 概要
+Arch Linux で休止状態（ハイバネーション）からの復帰が失敗し、通常の起動が行われる問題が発生しました。ブートログに以下のようなエラーメッセージが表示されていました。
+Mar 02 16:25:09 archlinux kernel: Hibernate inconsistent memory map detected!
+Mar 02 16:25:09 archlinux kernel: PM: hibernation: Image mismatch: architecture specific data
+Mar 02 16:25:09 archlinux kernel...]]></description><link>https://zenn.dev/acro5piano/articles/d12694a52f5a32</link><guid isPermaLink="true">https://zenn.dev/acro5piano/articles/d12694a52f5a32</guid><pubDate>Sun, 02 Mar 2025 09:08:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--uUA_RM0L--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Arch%2520Linux%2520%25E3%2581%25A7%25E3%2583%258F%25E3%2582%25A4%25E3%2583%2590%25E3%2583%258D%25E3%2583%25BC%25E3%2583%2588%25E3%2581%258B%25E3%2582%2589%25E3%2581%25AE%25E5%25BE%25A9%25E5%25B8%25B0%25E3%2581%258C%25E5%25A4%25B1%25E6%2595%2597%25E3%2581%2597%25E3%2581%25A6%25E3%2581%2584%25E3%2581%259F%25E3%2581%25AE%25E3%2581%25A7%25E8%25AA%25BF%25E6%259F%25BB%25E3%2583%25BB%25E4%25BF%25AE%25E6%25AD%25A3%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E4%25BA%2594%25E6%2589%2580%2520%25E5%2592%258C%25E5%2593%2589%2520%25EF%25BC%2588MonCargo%2520CTO%25EF%25BC%2589%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dPdDhnaDhYVEJ3VjFmU0FGTG5kMU9WTExTaGc4dUpiaml3Y2FILWFZPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>五所 和哉 （MonCargo CTO）</dc:creator></item><item><title><![CDATA[Windows用マウスカーソル(.ani)をXCursorに変換するメモ]]></title><description><![CDATA[
+ TL;DR
+https://github.com/quantum5/win2xcur
+で変換して正しくリネーム + index.themeを作成して~/.local/share/iconsあたりに置いておけばOK
+
+ win2xcurのインストール
+pip install win2xcurでもインストールできるようです。
+いま現在どうかは確認していませんが、参考にした記事には--scale追加前で更新が止まっているとの記載があったので私はソースからインストールしました（最終的に--scaleは使いませんでしたが...)
+この場合はpip install git+https://git...]]></description><link>https://zenn.dev/r_ca/articles/c79e46b7248b90</link><guid isPermaLink="true">https://zenn.dev/r_ca/articles/c79e46b7248b90</guid><pubDate>Sun, 02 Mar 2025 08:19:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--SvMQCDjh--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Windows%25E7%2594%25A8%25E3%2583%259E%25E3%2582%25A6%25E3%2582%25B9%25E3%2582%25AB%25E3%2583%25BC%25E3%2582%25BD%25E3%2583%25AB%2528.ani%2529%25E3%2582%2592XCursor%25E3%2581%25AB%25E5%25A4%2589%25E6%258F%259B%25E3%2581%2599%25E3%2582%258B%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:r_ca%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJmYTkyYzczNmMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>r_ca</dc:creator></item><item><title><![CDATA[なかなか覚えられない用語まとめ]]></title><description><![CDATA[よく聞くけど毎回意味を忘れちゃう用語を、辞書のように使うためにまとめます！こちらも随時追加できたらいいな…。
+ひとまずジャンル問わずどんどん追加していって、分類分けできそうになったら、記事を分けていこうと考えています。
+
+ エンジニアリング系
+
+
+
+
+用語
+簡単な説明
+
+
+
+
+DDD（ドメイン駆動設計）
+ビジネスのルール（ドメイン）を中心に設計する手法。複雑なシステムを整理しやすくする。
+
+
+クリーンアーキテクチャ
+ソフトウェアの構造を整理し、依存関係を最適化する設計手法。コードを長期間メンテしやすくする。
+
+
+パフォーマンスチューニング
+システムの動作速度や効率を改善する作業。DB最適...]]></description><link>https://zenn.dev/eliri/articles/04e3af92c3af8c</link><guid isPermaLink="true">https://zenn.dev/eliri/articles/04e3af92c3af8c</guid><pubDate>Sun, 02 Mar 2025 06:53:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Vgv_EnxH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%25AA%25E3%2581%258B%25E3%2581%25AA%25E3%2581%258B%25E8%25A6%259A%25E3%2581%2588%25E3%2582%2589%25E3%2582%258C%25E3%2581%25AA%25E3%2581%2584%25E7%2594%25A8%25E8%25AA%259E%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Eli%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JiYWJlMzMzYzMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Eli</dc:creator></item><item><title><![CDATA[Amazon Linux 2023 に PHP モジュール をインストール]]></title><description><![CDATA[Amazon Linux 2023 で PHP の拡張機能（モジュール）を追加し、設定情報を確認する方法を解説します。本記事では、以下の 2 つの方法を比較しながら、実際の手順を説明します。
+✅ dnf を使った公式モジュールのインストール
+✅ pecl を使った拡張モジュールのインストール
+
+ 📦 レポジトリ（Repository）とは？
+レポジトリとは、ソフトウェアパッケージを管理・提供する場所のことです。Linux のパッケージ管理システム（yum や dnf）では、レポジトリを参照して必要なパッケージをダウンロード・インストールします。
+Amazon Linux 2023 の公式...]]></description><link>https://zenn.dev/azunyan/articles/46725870a13d07</link><guid isPermaLink="true">https://zenn.dev/azunyan/articles/46725870a13d07</guid><pubDate>Sun, 02 Mar 2025 05:30:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qv47WHmm--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Amazon%2520Linux%25202023%2520%25E3%2581%25AB%2520PHP%2520%25E3%2583%25A2%25E3%2582%25B8%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%25AB%2520%25E3%2582%2592%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2588%25E3%2581%25BF%25E3%2582%258A%25E3%2580%259C%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNlODc0NGRhYmUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>えみり〜</dc:creator></item><item><title><![CDATA[Ghostty - Terminal emulator - My configuration]]></title><description><![CDATA[
+ 概要
+2024 年 12 月 26 日にターミナルエミュレータの Ghostty が公開されました。このターミナルは、HashiCorp の創設者である Mitchell Hashimoto 氏が開発した OSS のターミナルとして注目が集まっています。
+彼の経緯や開発経緯などは、ThePrimeagen と TJ DeVries との対談動画で詳しく語られていますので、興味がある方は、視聴をお勧めします。
+!
+2025 年 2 月現在、Windows には対応していませんが、今後のアップデートで対応予定です。
+
+!
+以降の説明は、macOS の操作方法がメインになります。Linux...]]></description><link>https://zenn.dev/massa/articles/ghostty-usage</link><guid isPermaLink="true">https://zenn.dev/massa/articles/ghostty-usage</guid><pubDate>Sat, 01 Mar 2025 23:42:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--N2di2nVW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ghostty%2520-%2520Terminal%2520emulator%2520-%2520My%2520configuration%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Masato%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJhYTViYzBlZjcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Masato</dc:creator></item><item><title><![CDATA[curlの-sオプションについて]]></title><description><![CDATA[
+ 先に結論から
+curlに-sオプションをつけると以下が実現できる
+1. 進捗メーターの非表示
+通常、curl はデータ取得中に進捗状況を表示するが、-s を使うとこの表示が無効になる。
+2. エラーメッセージの非表示
+エラー発生時のメッセージも表示されなくなる。ただし、エラーの内容が必要な場合は、-s と併せて -S（大文字のS）オプションを使うことで、エラーは表示しつつ進捗表示だけを抑制することができる。
+
+
+ 進捗メーターの非表示
+
+通常、curl はデータ取得中に進捗状況を表示する
+
+$ curl -O https://speed.hetzner.de/100MB.bin
+  ...]]></description><link>https://zenn.dev/malliavin/articles/a74cc1c69f2bd6</link><guid isPermaLink="true">https://zenn.dev/malliavin/articles/a74cc1c69f2bd6</guid><pubDate>Sat, 01 Mar 2025 13:01:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2xq3djjD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:curl%25E3%2581%25AE-s%25E3%2582%25AA%25E3%2583%2597%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%2581%25E3%2582%25A7%25E3%2583%25BC%25E3%2582%25AA%25E3%2583%25BC%25E3%2582%2592%25E3%2581%2593%25E3%2582%2588%25E3%2581%25AA%25E3%2581%258F%25E6%2584%259B%25E3%2581%2599%25E8%2580%2585%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA3NzY3MzFlNDQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>チェーオーをこよなく愛す者</dc:creator></item><item><title><![CDATA[WindowsからLinuxにテキストファイルを転送する前の準備]]></title><description><![CDATA[
+ はじめに
+WindowsからLinuxに設定ファイル等のテキストファイルをTeraTermやWinSCP等で転送する前の準備について書く。
+個人的に地味に重要な部分であると思っている。
+
+ 今回やりたいこと
+何も準備をせずにファイル転送すると、下記のようになってしまうことがある。
+$ cat test.txt
+aaa
+aa
+
+aaa $
+上記のようではなく、下記のようにする場合の対応を今回は記載する。
+$ cat test.txt
+aaa
+aa
+
+aaa
+$
+
+ 必要なソフト
+
+サクラエディタ
+TeraTerm (もしくは、WinSCPなど)
+
+※本記事では、ファイル転送方法について...]]></description><link>https://zenn.dev/supersatton/articles/ef1be1e47e54de</link><guid isPermaLink="true">https://zenn.dev/supersatton/articles/ef1be1e47e54de</guid><pubDate>Sat, 01 Mar 2025 04:12:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xlJxjOWg--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Windows%25E3%2581%258B%25E3%2582%2589Linux%25E3%2581%25AB%25E3%2583%2586%25E3%2582%25AD%25E3%2582%25B9%25E3%2583%2588%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2592%25E8%25BB%25A2%25E9%2580%2581%25E3%2581%2599%25E3%2582%258B%25E5%2589%258D%25E3%2581%25AE%25E6%25BA%2596%25E5%2582%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:No%2520Name%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdmMzBiMTIwZDEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>No Name</dc:creator></item><item><title><![CDATA[KUINS-Air（京都大学の学内ネットワーク）にiwdで接続する（PEAP）]]></title><description><![CDATA[
+ はじめに
+私は、ArchLinuxを使っており、ネットワーク認証の設定、DHCPクライアントデーモンには、扱いが単純明快なiwdを愛用しています。（NetworkManagerは、色々煩雑で、自分には使い方がよくわからないので・・・）
+しかし、iwdでIEEE802.1x認証するには、少々面倒な設定が必要です。
+2年ほど前は、iwdを使ったPEAPでの認証がうまくいかず、別のPCをPEAPで接続し、そのPCでEAP-TLSに使うクライアント証明書を取得し、それを使ってEAP-TLS認証をする、という少々本末転倒なことをしていました。NetworkManagerを使ってどうにかPEAP...]]></description><link>https://zenn.dev/meet4580/articles/8144c090d7904c</link><guid isPermaLink="true">https://zenn.dev/meet4580/articles/8144c090d7904c</guid><pubDate>Fri, 28 Feb 2025 09:01:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_NFqGw3d--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:KUINS-Air%25EF%25BC%2588%25E4%25BA%25AC%25E9%2583%25BD%25E5%25A4%25A7%25E5%25AD%25A6%25E3%2581%25AE%25E5%25AD%25A6%25E5%2586%2585%25E3%2583%258D%25E3%2583%2583%25E3%2583%2588%25E3%2583%25AF%25E3%2583%25BC%25E3%2582%25AF%25EF%25BC%2589%25E3%2581%25ABiwd%25E3%2581%25A7%25E6%258E%25A5%25E7%25B6%259A%25E3%2581%2599%25E3%2582%258B%25EF%25BC%2588PEAP%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:meet4580%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU1ZjkyZjhjMTcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>meet4580</dc:creator></item><item><title><![CDATA[Arch Linux Install w/Btrfs & Snapper]]></title><description><![CDATA[
+ まえがき
+本記事は初心者向けに作ってあります。経験深い方々には既知の情報かと思われますが、もし読んでいただけるのならば、ご自身のLinuxインストール関連の体験談などコメントに書いていただければありがたいです。
+
+ 概要
+本記事は筆者がArch Linux をインストールし、環境構築する際に躓いたりし、複数のサイトを参考にインストールした経験に基づいて作られた簡単なガイドです。
+
+ Arch Linux を使おうと思った話
+Linuxには様々なDistributionがあり、それぞれ特徴があります。代表的なものを上げるとUbuntuやLinux Mint, Fedora, openS...]]></description><link>https://zenn.dev/archer/articles/2379e1ab40a117</link><guid isPermaLink="true">https://zenn.dev/archer/articles/2379e1ab40a117</guid><pubDate>Thu, 27 Feb 2025 16:57:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--V8t3UqgP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:Arch%2520Linux%2520Install%2520w%252FBtrfs%2520%2526%2520Snapper%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Archer%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTHlEeDZ6ZzRRbERGX3I0WUJFR2ZPaUNKMVdhSG5FemptNGNPLTVCWFFiN2xHY0xwQT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Archer</dc:creator></item><item><title><![CDATA[Raspberry Pi Pico 2をUSBでWSL2にマウントしてみる]]></title><description><![CDATA[
+ 概要
+WindowsでSBCを使う場合、開発環境をWSL2に置きたい事が多々ある。
+以下はusbipdでマウントして、実際に疎通出来ているかどうか公式リポジトリのHello Worldプログラムを実行して疎通できているか確認するまでの記事である。
+
+ 環境
+
+ ソフトウェア
+
+Windows 10 22H2(OSビルド 19045.5247)
+WSL2(Ubuntu) Ubuntu 11.4.0-1ubuntu1~22.04
+gcc gcc version 11.4.0
+VS Code　バージョン: 1.96.0 (user setup)
+
+
+ ハードウェア
+
+Raspberry P...]]></description><link>https://zenn.dev/ita2024/articles/17e8a49a12cede</link><guid isPermaLink="true">https://zenn.dev/ita2024/articles/17e8a49a12cede</guid><pubDate>Thu, 27 Feb 2025 10:50:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GHFFfcD_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Raspberry%2520Pi%2520Pico%25202%25E3%2582%2592USB%25E3%2581%25A7WSL2%25E3%2581%25AB%25E3%2583%259E%25E3%2582%25A6%25E3%2583%25B3%25E3%2583%2588%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ita2024%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTERKNHJfS3daNE9aSl9TQ3hpSWFwenMyRmZwUE1IWDRadnQ5bjFNb0xCZkFINW5RPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ita2024</dc:creator></item><item><title><![CDATA[【シェルスクリプト】`$ echo '-eq'`みたいにオプションっぽい文字列を表示しようとすると、無が表示される]]></title><description><![CDATA[単純だけど、そういうことです。
+$ echo '-eq'
+（無）
+おそらくechoコマンドの-eqオプションを実行しようとしているんだと思う。
+おまえ-eqオプションなんてないだろうが！！！
+解決策はprintfです。
+printfしか勝たん。
+$ printf '%s\n' '-eq'
+-eq
+ちなみに以下でもムダムダムダァです。
+全部吸収するじゃん…そりゃそうなんだけど。
+$ x=$(printf '%s\n' '-eq')
+$ echo "$x"
+（無）
+こいつなんでも食いやがる…。
+なんも信じられん。
+ちなみになんでこんな異常行動をしようと思ったかというと、Bash/Zsh向けの...]]></description><link>https://zenn.dev/aiya000/articles/7a3dab870d5b30</link><guid isPermaLink="true">https://zenn.dev/aiya000/articles/7a3dab870d5b30</guid><pubDate>Wed, 26 Feb 2025 17:32:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BCVBHOlp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E3%2582%25B7%25E3%2582%25A7%25E3%2583%25AB%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2583%2588%25E3%2580%2591%2560%2524%2520echo%2520%2527-eq%2527%2560%25E3%2581%25BF%25E3%2581%259F%25E3%2581%2584%25E3%2581%25AB%25E3%2582%25AA%25E3%2583%2597%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2581%25A3%25E3%2581%25BD%25E3%2581%2584%25E6%2596%2587%25E5%25AD%2597%25E5%2588%2597%25E3%2582%2592%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2597%25E3%2582%2588%25E3%2581%2586%25E3%2581%25A8%25E3%2581%2599%25E3%2582%258B%25E3%2581%25A8%25E3%2580%2581%25E7%2584%25A1%25E3%2581%258C%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2595%25E3%2582%258C%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2582%25E3%2581%2584%25E3%2582%2584%2520-%2520aiya000%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pZVUM0QXdxcVdtMVZmVWtiQXFzdE5ra1BFZU1FOUN0NFY1UzdiPXMyNTAtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>あいや - aiya000</dc:creator></item><item><title><![CDATA[仮想関数と最適化について]]></title><description><![CDATA[
+ 序
+仮想関数って実際どうなるの？
+っていう話と、
+最適化(インライン展開)はどこまで有効なの？
+という話をgccで簡単に検証してみました。
+※元は4日ほど前にQiitaに載せた記事ですが、編集不可能になってしまったので(将来的には削除予定)、こちらに引っ越しています。
+
+ 1. 前提
+
+ 1-1. 対象読者
+
+
+仮想関数テーブルという言葉を何となく知っている人
+x86_amd64アセンブラを読める人(今回はintelにしてみた。普段はAT&amp;T)
+インライン展開を知っている人
+LinuxとGNUのツールを使ってる人
+
+※なので細かい説明は省略しています
+
+ 1-2. 検証環境
+...]]></description><link>https://zenn.dev/dameyodamedame/articles/5b5af2851ff30c</link><guid isPermaLink="true">https://zenn.dev/dameyodamedame/articles/5b5af2851ff30c</guid><pubDate>Tue, 25 Feb 2025 19:16:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--OMSjSzrN--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E4%25BB%25AE%25E6%2583%25B3%25E9%2596%25A2%25E6%2595%25B0%25E3%2581%25A8%25E6%259C%2580%25E9%2581%25A9%25E5%258C%2596%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:dameyodamedame%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvZC5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>dameyodamedame</dc:creator></item><item><title><![CDATA[C++のベンチマークライブラリ(ヘッダのみ)を使ってみる]]></title><description><![CDATA[
+ 序
+今回試してみたのは
+
+nanobench
+mitata
+
+というヘッダのみの軽量級のものです。mitataはjsでは知ってる人もいるかもしれないけど、C++ではまるで聞かないライブラリなので、その辺を調べてみました。
+C++で他に有名なのはGoogle Bnechmarkですが、これはヘッダのみで済まないので除外しています。
+https://github.com/martinus/nanobench
+https://github.com/evanwashere/mitata
+※元は20日ほど前にQiitaに載せた記事ですが、編集不可能になってしまったので(将来的には削除予定)、こ...]]></description><link>https://zenn.dev/dameyodamedame/articles/927daa2eca3de2</link><guid isPermaLink="true">https://zenn.dev/dameyodamedame/articles/927daa2eca3de2</guid><pubDate>Tue, 25 Feb 2025 18:57:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--KbAuELss--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:C%252B%252B%25E3%2581%25AE%25E3%2583%2599%25E3%2583%25B3%25E3%2583%2581%25E3%2583%259E%25E3%2583%25BC%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%2528%25E3%2583%2598%25E3%2583%2583%25E3%2583%2580%25E3%2581%25AE%25E3%2581%25BF%2529%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:dameyodamedame%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvZC5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>dameyodamedame</dc:creator></item></channel></rss>
