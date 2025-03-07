@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「JavaScript」のフィード]]></title><description><![CDATA[Zennのトピック「JavaScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/javascript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/64acd76870.png</url><title>Zennの「JavaScript」のフィード</title><link>https://zenn.dev/topics/javascript</link></image><generator>zenn.dev</generator><lastBuildDate>Fri, 07 Mar 2025 02:50:44 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/javascript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Build a React project with react-router]]></title><description><![CDATA[
+ My Environment
+
+OS: Windows11
+node -v: 22
+npm -v: 10
+IDE: VSCode
+Framework: React
+
+
+ How to build a React Project
+
+Open a VSCode Terminal (your terminal)
+Open a your empty Project folder
+Run: npx create-react-router@latest
+
+Run: npm i
+
+Run: npm run dev
+
+
+
+ References
+
+https://reactrouter.com/st...]]></description><link>https://zenn.dev/shelpro/articles/246454455d089b</link><guid isPermaLink="true">https://zenn.dev/shelpro/articles/246454455d089b</guid><pubDate>Fri, 07 Mar 2025 02:34:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--h0eMXvTz--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:Build%2520a%2520React%2520project%2520with%2520react-router%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Shelner%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTHAxZTQzc3N1YWdkLTJzSVE0bl9ZaWdQTlFrQmN4XzNFWGRfMHZBWDFnY3F2QlhyYz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Shelner</dc:creator></item><item><title><![CDATA[[小ネタ] ALB の固定レスポンスで JavaScript を実行してみた]]></title><description><![CDATA[Application Load Balancer のリスナー - エラスティックロードバランシング
+
+クライアントリクエストを破棄し、カスタムの HTTP レスポンスを返すには、fixed-response アクションを使用します。
+
+今回はコンテンツタイプ text/html で JavaScript を実行してみました。
+
+ やってみた
+デフォルト設定で ALB を作成済みです。
+
+デフォルトの HTTP:80 のリスナーを編集します。
+
+以下の設定に変更して保存します。
+
+デフォルトアクション: 固定レスポンスを返す
+レスポンスコード: 200
+コンテンツタイプ: text/ht...]]></description><link>https://zenn.dev/mn87/articles/20da74b95ee87e</link><guid isPermaLink="true">https://zenn.dev/mn87/articles/20da74b95ee87e</guid><pubDate>Thu, 06 Mar 2025 22:32:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5LCroBG1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255B%25E5%25B0%258F%25E3%2583%258D%25E3%2582%25BF%255D%2520ALB%2520%25E3%2581%25AE%25E5%259B%25BA%25E5%25AE%259A%25E3%2583%25AC%25E3%2582%25B9%25E3%2583%259D%25E3%2583%25B3%25E3%2582%25B9%25E3%2581%25A7%2520JavaScript%2520%25E3%2582%2592%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mn87%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAyNmUxNzcyOGIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mn87</dc:creator></item><item><title><![CDATA[「フロントエンドのエラー発生箇所を楽に特定」SentryでSource Mapを活用する]]></title><description><![CDATA[
+ はじめに
+「Sentryでエラー通知を受け取ったが、バンドルされたコードでエラー箇所が書いてある。
+ソースコードのどこなのかパッとわからない、、」
+と感じたことのある方は多いのではないでしょうか？
+このような問題を解決する技術・ツールとして「Source Map」というものがあります。
+SentryでSrouce Mapを活用すると、Issueを確認するとき
+バンドル後のエラーの発生箇所とソースコードの対応が非常に確認しやすくなります。
+
+導入前(ビルド後のファイル名のみ表示）
+
+導入後(ビルド前・ソースコードのファイル名・内容）
+ただ、「すぐできるかな」と思っていた導入で案外ハマっ...]]></description><link>https://zenn.dev/kataokatsuki/articles/d38d9e8c4234e4</link><guid isPermaLink="true">https://zenn.dev/kataokatsuki/articles/d38d9e8c4234e4</guid><pubDate>Thu, 06 Mar 2025 13:32:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Sjc6CW17--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%258C%25E3%2583%2595%25E3%2583%25AD%25E3%2583%25B3%25E3%2583%2588%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2589%25E3%2581%25AE%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E7%2599%25BA%25E7%2594%259F%25E7%25AE%2587%25E6%2589%2580%25E3%2582%2592%25E6%25A5%25BD%25E3%2581%25AB%25E7%2589%25B9%25E5%25AE%259A%25E3%2580%258DSentry%25E3%2581%25A7Source%2520Map%25E3%2582%2592%25E6%25B4%25BB%25E7%2594%25A8%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kataoka%2520Katsuki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2plaEl4V2xYM3ctckJQMDNMUDVna0s2NDN3MVJBZTl6TW1LcWxnPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kataoka Katsuki</dc:creator></item><item><title><![CDATA[ZodではなくValibotを使う(フロントエンドでは)]]></title><description><![CDATA[知ってる人も多いとは思いますが、フロントエンドでは Zod ではなく Valibot を使ったほうがバンドルサイズが減るよという話です。
+ZodもValibotも、検証したデータに対してTypeScriptの型をつけてくれる便利なライブラリですが、大きな違いの一つとして、Valibotはtree-shaking可能ですが、Zodはtree-shaking可能な設計になっていないということです。tree-shakingとは、ライブラリ内にある利用していないコードをバンドルから除外して、アプリケーションのバンドルサイズを減らすことを指します。
+フロントエンド開発で利用するバンドラは基本的に ...]]></description><link>https://zenn.dev/anatoo/articles/bc7f4a9fe25f0b</link><guid isPermaLink="true">https://zenn.dev/anatoo/articles/bc7f4a9fe25f0b</guid><pubDate>Thu, 06 Mar 2025 12:42:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---84MFkah--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Zod%25E3%2581%25A7%25E3%2581%25AF%25E3%2581%25AA%25E3%2581%258FValibot%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%2528%25E3%2583%2595%25E3%2583%25AD%25E3%2583%25B3%25E3%2583%2588%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2589%25E3%2581%25A7%25E3%2581%25AF%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:anatoo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2o2SlMxT0IydDYtVXJEdi0wM1VCUkhZbWdDUFM2UGxpQ1JQVVI1PXMyNTAtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>anatoo</dc:creator></item><item><title><![CDATA[RLS(Row-Level Security)を簡単解説]]></title><description><![CDATA[
+ はじめに
+Webアプリのデータ保存場所+認証関係で Supabase を使用しているのですが，各TableにはRLS(Row-Level Security) をつけられるということで，勉強したので共有します．
+自分は，セキュリティに関して完全な初心者なので，初心者でもわかるように解説していきます．
+
+ 対象読者
+
+RLS について知りいたい人
+セキュリティに関して完全な初心者の人
+
+
+ RLS(Row-Level Security)とは？
+Row-Level Security(行レベルセキュリティ) は，データベースのテーブルに格納されている“各行(レコード)”ごとに，誰が閲覧・更新...]]></description><link>https://zenn.dev/keishi85/articles/58c6e1c88ffd88</link><guid isPermaLink="true">https://zenn.dev/keishi85/articles/58c6e1c88ffd88</guid><pubDate>Thu, 06 Mar 2025 11:00:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GqcFAC1a--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:RLS%2528Row-Level%2520Security%2529%25E3%2582%2592%25E7%25B0%25A1%25E5%258D%2598%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2591%25E3%2583%25BC%25E3%2581%2597%2540%25E5%25AD%25A6%25E7%2594%259F%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzliYjA0MTBhMDQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>けーし@学生エンジニア</dc:creator></item><item><title><![CDATA[jsで要素のtemplate化に成功　全文]]></title><description><![CDATA[html内でhtml要素のテンプレを記述し、引数込みでreplaceするようなものを作成しました
+やりたいこととしては、
+
+    &lt;div class="product-template"&gt;
+        &lt;div class = "contents_wrap_test"&gt;
+            &lt;div class = "contents_wrap_test_2"&gt;
+                &lt;div class="test_wrap"&gt;
+                    &lt;div class="price"&gt...]]></description><link>https://zenn.dev/kemii/articles/5c4b8ae37547b7</link><guid isPermaLink="true">https://zenn.dev/kemii/articles/5c4b8ae37547b7</guid><pubDate>Thu, 06 Mar 2025 09:27:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--SOZrB29p--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:js%25E3%2581%25A7%25E8%25A6%2581%25E7%25B4%25A0%25E3%2581%25AEtemplate%25E5%258C%2596%25E3%2581%25AB%25E6%2588%2590%25E5%258A%259F%25E3%2580%2580%25E5%2585%25A8%25E6%2596%2587%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kemii%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E5ZGYyMjM5ZmIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kemii</dc:creator></item><item><title><![CDATA[HTMLとCSSとJavaScriptで作ったサイトにMicroCMSを使った投稿システムを実装する方法]]></title><description><![CDATA[
+ はじめに：後からお知らせ機能を追加する課題
+「すでに運用しているHTML/CSS/JavaScriptで作られたサイトに、後からお知らせ機能やニュース投稿システムを追加したい」というケースの際にはどうしてますか？
+解決策としては「WordPressに完全移行する」というアプローチが一般的かと思います。
+しかし、これには以下のような課題があります：
+
+WordPress用のテーマ開発に時間とコストがかかる
+既存の機能をWordpress用として再実装する必要がある
+
+特に後出しでこういう投稿機能をつけたいと言われた際には
+もう一度構成を考えなくてはいけないのかと一度頭を抱えると思います...]]></description><link>https://zenn.dev/junk/articles/8eec2409bceb02</link><guid isPermaLink="true">https://zenn.dev/junk/articles/8eec2409bceb02</guid><pubDate>Thu, 06 Mar 2025 05:30:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---wV7Kd47--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:HTML%25E3%2581%25A8CSS%25E3%2581%25A8JavaScript%25E3%2581%25A7%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%25E3%2582%25B5%25E3%2582%25A4%25E3%2583%2588%25E3%2581%25ABMicroCMS%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%259F%25E6%258A%2595%25E7%25A8%25BF%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:junichi%2520kako%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NmOGRlYWE1YTQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>junichi kako</dc:creator></item><item><title><![CDATA[Nuxt3のRollupのプラットフォーム依存問題]]></title><description><![CDATA[
+ Nuxt3 の Rollup のプラットフォーム依存問題
+
+ 直面した課題
+フロントエンド開発において、ビルドツールの安定性は開発効率に直結する重要な要素だ。特に複数の開発環境や CI での一貫したビルド環境の維持は、チーム開発では非常に重要な課題となる。
+最近、私たちのプロジェクト（pnpm workspace でモノレポ管理している Nuxt 3 アプリケーション）では Rollup をベースとしたビルドパイプラインで、異なる OS 間で一貫性のないビルド結果という問題に直面していた。具体的には、以下のようなエラーが発生していた：
+Cannot find module '@rol...]]></description><link>https://zenn.dev/apollo880/articles/solving-rollup-platform-dependency-with-wasm</link><guid isPermaLink="true">https://zenn.dev/apollo880/articles/solving-rollup-platform-dependency-with-wasm</guid><pubDate>Thu, 06 Mar 2025 03:48:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--zO9XWXi7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Nuxt3%25E3%2581%25AERollup%25E3%2581%25AE%25E3%2583%2597%25E3%2583%25A9%25E3%2583%2583%25E3%2583%2588%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25BC%25E3%2583%25A0%25E4%25BE%259D%25E5%25AD%2598%25E5%2595%258F%25E9%25A1%258C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:apollo880%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dINHpRNC1vODhBZ0NTSDRnTUduZkFjTjFtTDR4Zk1BNFNrSUQtaEE9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>apollo880</dc:creator></item><item><title><![CDATA[DocusaurusでPlantUMLを表示するテーマを作りました]]></title><description><![CDATA[
+ はじめに
+待てど暮せどDocusaurusにPlantUMLを表示するテーマやプラグインが出てこないので自分で作りました
+
+npm: docusaurus-theme-plantuml
+
+
+
+ 表示イメージ
+ライトモード
+
+ダークモード
+
+
+ docusaurus-theme-plantuml とは？
+DocusaurusでPlantUMLを表示できるようにするnpmです。
+
+ 🌟 特徴
+
+
+ライトモード・ダークモード対応
+PlantUMLのレンダリング先を変更可能（デフォルトはPlantUML公式サーバー）
+コードブロック (```でくくる) の書き方でPlantUMLを埋め込み可...]]></description><link>https://zenn.dev/flatring/articles/97e94054fe9f9b</link><guid isPermaLink="true">https://zenn.dev/flatring/articles/97e94054fe9f9b</guid><pubDate>Thu, 06 Mar 2025 01:42:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--LgyhFZEb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docusaurus%25E3%2581%25A7PlantUML%25E3%2582%2592%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2599%25E3%2582%258B%25E3%2583%2586%25E3%2583%25BC%25E3%2583%259E%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258A%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hoh%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E1ZGYwOTE4ZjIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hoh</dc:creator></item><item><title><![CDATA[CompressionStreamを使ってライブラリを導入せずにVercelのRoute Handlersのリミットを一時的に回避する]]></title><description><![CDATA[こんにちは。株式会社 Sally エンジニアの @piesukeです。
+私たちは、マーダーミステリーを遊べることが出来るアプリ「ウズ」と、マーダーミステリーを制作してウズ上で遊べることが出来るアプリ「ウズスタジオ」を開発しています。
+最近良かったマーダーミステリーは「ABENDLAND -誰そ彼の地-」です。
+
+ はじめに
+私たちは運営する Web サイトにおいて Next.js を採用しており、データのやり取りの一部に Vercel の Route Handlers を利用しています。
+簡単な API であれば問題ないのですが、リクエストボディ が 4.5MB を超えた場合は Verc...]]></description><link>https://zenn.dev/uzu_tech/articles/compression-stream</link><guid isPermaLink="true">https://zenn.dev/uzu_tech/articles/compression-stream</guid><pubDate>Thu, 06 Mar 2025 00:32:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--f3zyYQWq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:CompressionStream%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%25E3%2582%2592%25E5%25B0%258E%25E5%2585%25A5%25E3%2581%259B%25E3%2581%259A%25E3%2581%25ABVercel%25E3%2581%25AERoute%2520Handlers%25E3%2581%25AE%25E3%2583%25AA%25E3%2583%259F%25E3%2583%2583...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:piesuke%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI5NjI5NGIwZmUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:UZU%2520%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhjNDgyMGY2MzAuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>piesuke</dc:creator></item><item><title><![CDATA[localStorageについてのメモ]]></title><description><![CDATA[localStorageについてのメモです。
+誤りがありましたら、ご教示いただけますと幸いです！
+
+ localStorageについて
+
+ブラウザにデータを保存できるオブジェクト（Web Storage APIの一部）。
+キーと値のペア（key-value）の形式でデータを保存する。
+保存されたデータはページを閉じても残る（セッションが切れても消えない）。
+文字列（string）としてデータを保存するため、オブジェクトなどは JSON.stringify() を使う必要がある。
+
+
+ localStorageのメソッド
+
+ setItem(key, value)
+ローカルストレージにデー...]]></description><link>https://zenn.dev/taka_nami/articles/047160730c962a</link><guid isPermaLink="true">https://zenn.dev/taka_nami/articles/047160730c962a</guid><pubDate>Wed, 05 Mar 2025 23:57:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jP7fKDI4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:localStorage%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E3%2581%25AE%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:eringi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZmNmQ2NWIzMjYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>eringi</dc:creator></item><item><title><![CDATA[Chrome 134 がリリースされたのに誰も using /await using の話をしないので]]></title><description><![CDATA[Chrome 134 がリリースされましたね。
+https://developer.chrome.com/blog/new-in-chrome-134?hl=ja
+https://developer.chrome.com/release-notes/134?hl=ja
+ちなみに今回の 134 には 現在策定中の proposal の ECMAScript Explicit Resource Management（日本語訳だと 明示的なリソースの管理） の実装が含まれています。 現在(2025/03/06) stage 3 のプロポーザルで実装待ちの段階です（実装が2つ完了すると stag...]]></description><link>https://zenn.dev/juners/articles/39424cde685b06</link><guid isPermaLink="true">https://zenn.dev/juners/articles/39424cde685b06</guid><pubDate>Wed, 05 Mar 2025 23:43:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--zOwkgGoj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Chrome%2520134%2520%25E3%2581%258C%25E3%2583%25AA%25E3%2583%25AA%25E3%2583%25BC%25E3%2582%25B9%25E3%2581%2595%25E3%2582%258C%25E3%2581%259F%25E3%2581%25AE%25E3%2581%25AB%25E8%25AA%25B0%25E3%2582%2582%2520using%2520%252Fawait%2520using%2520%25E3%2581%25AE%25E8%25A9%25B1%25E3%2582%2592%25E3%2581%2597%25E3%2581%25AA%25E3%2581%2584%25E3%2581%25AE%25E3%2581%25A7%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:juner%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pJLTZTZnZQaDFwb0M5dmMxYUpVeTFoelB0R1g1RXRmUHRpQzF4QWR3PXMyNTAtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>juner</dc:creator></item><item><title><![CDATA[Amazon Connect で留守番電話を作る (2025-01)]]></title><description><![CDATA[Amazon Connectで留守番電話を作りました。
+基本的には 参考記事 の手法を踏襲していますが、一部異なる部分もあるのでメモを残します。
+
+通話に関する情報を取得し S3 に保存する
+Amazon Connect から Kinesis Video Streams に通話音声を流す
+通話終了後に Kinesis の当該通話のストリームから音声ファイルに変換し S3 に保存する
+
+
+ 留守番電話のフロー
+Amazon Connect のフローエディタで作成する留守番電話フローは概ね次のようになります。
+
+着信
+AWS Lambda 関数を呼び出す: 通話に関する情報を取得し S3 に...]]></description><link>https://zenn.dev/ftl/articles/877a5e9eeb81b2</link><guid isPermaLink="true">https://zenn.dev/ftl/articles/877a5e9eeb81b2</guid><pubDate>Wed, 05 Mar 2025 17:30:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Y6IB6yqo--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Amazon%2520Connect%2520%25E3%2581%25A7%25E7%2595%2599%25E5%25AE%2588%25E7%2595%25AA%25E9%259B%25BB%25E8%25A9%25B1%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%2520%25282025-01%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Shigeru%2520Fujiwara%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSjNjMTlHUWxQZmRuaVB1YTRyeFdjM1hnNG1nV0tvVGJPcHhWUmpjOS1xdWtzZ3o2eHk9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Shigeru Fujiwara</dc:creator></item><item><title><![CDATA[オブジェクト指向って何？初心者向けに超ざっくり解説]]></title><description><![CDATA[プログラミングを学んでいると必ず出てくる「オブジェクト指向」という言葉。なんとなく難しそうで、初心者の方は尻込みしてしまうかもしれません。この記事では、オブジェクト指向プログラミングの基本的な考え方を、できるだけわかりやすく、「超ざっくり」と解説していきます。
+
+ オブジェクト指向とは？
+
+ 簡単に言うと…
+オブジェクト指向プログラミング（Object-Oriented Programming、略してOOP）とは、プログラムを「モノ（オブジェクト）」の集まりとして考えるプログラミングの方法です。
+例えば、車を管理するプログラムを作るとしましょう。オブジェクト指向では、「車」というモノ（オ...]]></description><link>https://zenn.dev/homatsu_tech/articles/d712e0881c0cb2</link><guid isPermaLink="true">https://zenn.dev/homatsu_tech/articles/d712e0881c0cb2</guid><pubDate>Wed, 05 Mar 2025 14:13:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--e4J73nf_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25AA%25E3%2583%2596%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E6%258C%2587%25E5%2590%2591%25E3%2581%25A3%25E3%2581%25A6%25E4%25BD%2595%25EF%25BC%259F%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E5%2590%2591%25E3%2581%2591%25E3%2581%25AB%25E8%25B6%2585%25E3%2581%2596%25E3%2581%25A3%25E3%2581%258F%25E3%2582%258A%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25AE%259D%25E6%259D%25BE%2540%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2YzZWQ1ZGYyMjYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>宝松@システムエンジニア</dc:creator></item><item><title><![CDATA[Laravel等で部分的にReactを利用する際の設計]]></title><description><![CDATA[
+ はじめに
+LaravelやRailsなどのフルスタックサーバーサイドフレームワークを利用しており、フロントエンドは未だjQueryやプレーンなJSを利用しているといった現場も多く存在すると思います。
+そんな中でReactを導入したいと考えた時、一気に全体を置き換えるのはかなり大変で難しいでしょう。
+そこで部分的にReactを導入し、組織として慣れていくための方法を提案します。
+
+ 前提
+テンプレートエンジン上で実装することを想定しているため、ページ全体（丸ごと）でReactを利用できないものとします。これからの話はクライアントサイドのレンダリングのみにフォーカスしたものと考えてくださ...]]></description><link>https://zenn.dev/tsuchiyakaita/articles/6f0e22d3726364</link><guid isPermaLink="true">https://zenn.dev/tsuchiyakaita/articles/6f0e22d3726364</guid><pubDate>Wed, 05 Mar 2025 11:10:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ZjIib2qD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Laravel%25E7%25AD%2589%25E3%2581%25A7%25E9%2583%25A8%25E5%2588%2586%25E7%259A%2584%25E3%2581%25ABReact%25E3%2582%2592%25E5%2588%25A9%25E7%2594%25A8%25E3%2581%2599%25E3%2582%258B%25E9%259A%259B%25E3%2581%25AE%25E8%25A8%25AD%25E8%25A8%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%2584%25E3%2583%2581%25E3%2583%25A4%25E3%2582%25AB%25E3%2582%25A4%25E3%2582%25BF%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2UxZGFhMWVjYmUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ツチヤカイタ</dc:creator></item><item><title><![CDATA[JavaScriptの非同期処理]]></title><description><![CDATA[
+ 非同期処理とは
+時間のかかる処理（例：APIリクエストやファイル操作）の完了を待たずに、他の処理を進めることができる仕組み。
+
+ なぜ必要なのか
+JavaScriptは基本的にシングルスレッドで動作する。
+そのため、一つの処理が完了するまで次の処理を実行できず、同期的に処理をすると（非同期処理を使わないと）ブロッキングが発生する。
+例えば、ブラウザの場合は次のような挙動が起こり、ユーザー体験の悪化につながる。
+
+大量のデータを読み込んで表示する際に、画面が真っ白なまま長時間待たされる。
+重い計算処理の際に、計算が終わるまでボタンのクリックや画面のスクロールができない。
+
+同期的な処理...]]></description><link>https://zenn.dev/uniii/articles/ca985972afdd38</link><guid isPermaLink="true">https://zenn.dev/uniii/articles/ca985972afdd38</guid><pubDate>Wed, 05 Mar 2025 06:54:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--cTGXcoNE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25E3%2581%25AE%25E9%259D%259E%25E5%2590%258C%25E6%259C%259F%25E5%2587%25A6%25E7%2590%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:uuuunnnnii%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2g1X1FuclVoSlBOTVU5em0wTV9YTEdFN0dwQmF0b0VyRGNlUUpaPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>uuuunnnnii</dc:creator></item><item><title><![CDATA[iOS自動化の最終兵器：Scriptable 実践レシピ集]]></title><description><![CDATA[OSの自動化アプリScriptableの実践的な活用方法を解説するレシピ集です。ウィジェット作成からAPI連携、Siriショートカット連携まで、幅広い自動化テクニックを具体的なコード例と共に紹介します。初心者でもScriptableを使いこなし、日々のタスクを効率化できるようになることを目指します。]]></description><link>https://zenn.dev/idev/books/book-20250305-121502</link><guid isPermaLink="true">https://zenn.dev/idev/books/book-20250305-121502</guid><pubDate>Wed, 05 Mar 2025 03:40:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--45Hge6WA--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci9hZTIxNTRiYzc1LnBuZw==%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>timeless-residents</dc:creator></item><item><title><![CDATA[Scriptableユーザーガイド：iOSを自動化する完全解説]]></title><description><![CDATA[
+ Scriptableユーザーガイド：iOSを自動化する完全解説
+Scriptableは、iOS上でJavaScriptを使って様々な自動化を実現できる強力なアプリです。このガイドでは、Scriptableの基本から応用までを網羅し、あなた自身のiOS自動化を実現するための完全な解説を提供します。この記事は、『iOS自動化の最終兵器：Scriptable 実践レシピ集』の内容に基づいて構成されています。
+
+ Scriptableとは？
+Scriptableは、iOS/iPadOS上でJavaScriptを実行できるアプリです。iOSの様々な機能にアクセスできるAPIが提供されており、こ...]]></description><link>https://zenn.dev/idev/articles/article-20250305-122846</link><guid isPermaLink="true">https://zenn.dev/idev/articles/article-20250305-122846</guid><pubDate>Wed, 05 Mar 2025 03:39:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ccU-uisB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Scriptable%25E3%2583%25A6%25E3%2583%25BC%25E3%2582%25B6%25E3%2583%25BC%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%25EF%25BC%259AiOS%25E3%2582%2592%25E8%2587%25AA%25E5%258B%2595%25E5%258C%2596%25E3%2581%2599%25E3%2582%258B%25E5%25AE%258C%25E5%2585%25A8%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:timeless-residents%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I3NTdiM2NmN2QuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>timeless-residents</dc:creator></item><item><title><![CDATA[React Tokyoコミュニティで地方開催を目指すワケ]]></title><description><![CDATA[以前書いた記事
+https://zenn.dev/dai_shi/articles/9f2760086fb31a
+の中で、次のように述べました。
+
+実は東京以外にも広げていこうと思っているので、命名は少し悩みました。いずれにしても東京を中心にということでReact Tokyoでいきます。
+
+React Tokyoは、もちろん東京を中心としたコミュニティです。ただ、立ち上げ当初から「東京に閉じこもるつもりはない」という気持ちを持っていました。当初から、React TokyoのDiscordサーバには、東京圏以外にお住まいの方にも参加いただけるよう案内しています。実際に全国各地からご参加いた...]]></description><link>https://zenn.dev/react_tokyo/articles/04d1af4b4a3abc</link><guid isPermaLink="true">https://zenn.dev/react_tokyo/articles/04d1af4b4a3abc</guid><pubDate>Tue, 04 Mar 2025 23:13:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Bi7EzB2u--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%2520Tokyo%25E3%2582%25B3%25E3%2583%259F%25E3%2583%25A5%25E3%2583%258B%25E3%2583%2586%25E3%2582%25A3%25E3%2581%25A7%25E5%259C%25B0%25E6%2596%25B9%25E9%2596%258B%25E5%2582%25AC%25E3%2582%2592%25E7%259B%25AE%25E6%258C%2587%25E3%2581%2599%25E3%2583%25AF%25E3%2582%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:daishi%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzczM2MxYTQzYzYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:React%2520Tokyo%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzcwZGNhM2E2Y2IuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>daishi</dc:creator></item><item><title><![CDATA[【Node.js】(node:12345) Warning: ...の警告を消す方法]]></title><description><![CDATA[
+ 忙しい人へ
+process.emitWarning = () =&gt; {};
+とりあえずこれを書けばいいです。特定の警告だけ消したい人は続きを読んでください。
+
+ 本編
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+のような設定をした際に出てくる警告を抹消したいとき、あると思います。
+そんな人に向けた対処法です。
+
+ 1. (超簡単)全部消す
+process.emitWarning = () =&gt; {};
+警告メッセージを出力する関数を空にして強引に無効化します。
+かなりシンプルな方法ですが、全ての警告が消えてしまいます。
+...]]></description><link>https://zenn.dev/r64/articles/654df34167714a</link><guid isPermaLink="true">https://zenn.dev/r64/articles/654df34167714a</guid><pubDate>Tue, 04 Mar 2025 08:12:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0ojbxz2J--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Node.js%25E3%2580%2591%2528node%253A12345%2529%2520Warning%253A%2520...%25E3%2581%25AE%25E8%25AD%25A6%25E5%2591%258A%25E3%2582%2592%25E6%25B6%2588%25E3%2581%2599%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ruka64%2528%25E3%2582%258B%25E3%2581%258B%2529%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBiZDlmOWU5NzEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ruka64(るか)</dc:creator></item></channel></rss>

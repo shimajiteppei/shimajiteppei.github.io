@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Rust」のフィード]]></title><description><![CDATA[Zennのトピック「Rust」のRSSフィードです]]></description><link>https://zenn.dev/topics/rust</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ba09661577.png</url><title>Zennの「Rust」のフィード</title><link>https://zenn.dev/topics/rust</link></image><generator>zenn.dev</generator><lastBuildDate>Fri, 07 Mar 2025 04:40:31 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/rust/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[gRPCスキーマを活用したDTO変換パターン：型安全性と保守性の向上]]></title><description><![CDATA[
+ gRPCスキーマを活用したDTO変換パターン：型安全性と保守性の向上
+
+ はじめに
+gRPCは効率的な通信プロトコルとして広く採用されていますが、Protocol Buffersで定義されたメッセージ型と実際のアプリケーションドメインモデルの実装、もしくは変換を適切に行うことが重要です。
+この記事では、Rustにおいて.protoファイルから生成されたgRPCスキーマを利用してDTO（Data Transfer Object）変換を実装する方法と、そのメリットについて解説します。
+※クリーンアーキテクチャに関する知識があると理解しやすいと思います。
+
+ コードの概要
+サンプルコードで...]]></description><link>https://zenn.dev/kazuma0606/articles/ca13dc98ce8ad5</link><guid isPermaLink="true">https://zenn.dev/kazuma0606/articles/ca13dc98ce8ad5</guid><pubDate>Thu, 06 Mar 2025 13:10:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Nq3vF8of--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:gRPC%25E3%2582%25B9%25E3%2582%25AD%25E3%2583%25BC%25E3%2583%259E%25E3%2582%2592%25E6%25B4%25BB%25E7%2594%25A8%25E3%2581%2597%25E3%2581%259FDTO%25E5%25A4%2589%25E6%258F%259B%25E3%2583%2591%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%25B3%25EF%25BC%259A%25E5%259E%258B%25E5%25AE%2589%25E5%2585%25A8%25E6%2580%25A7%25E3%2581%25A8%25E4%25BF%259D%25E5%25AE%2588%25E6%2580%25A7%25E3%2581%25AE%25E5%2590%2591%25E4%25B8%258A%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25AB%25E3%2582%25BA%25E3%2583%259E%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI1ZjkwNWYyMmEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>カズマ</dc:creator></item><item><title><![CDATA[メモリと仲良しになろう！[アロケータ実装編]]]></title><description><![CDATA[!
+この記事は「メモリと仲良しになろう！[超入門編]」の続編です。
+メモリの基礎理解から始めたい方は前回の記事を参照してください。
+
+
+ はじめに
+本記事は「Writing an OS in Rust」のアロケータ実装編を個人的に咀嚼するために作成しました。
+不明瞭な部分がありましたら原文をご参照いただけると幸いです。
+
+ 誰のための記事か？(for whom)
+
+メモリ上でどのようにデータが載るのかが分からない人
+どのようにアロケーションが行われるか分からない人
+アロケータの実装に興味がある人
+
+
+ なぜ学ぶのか？ (why)
+
+自作 OS 開発をする上での基礎的な知識として必要である...]]></description><link>https://zenn.dev/tomoikey/articles/becdcef97aa62c</link><guid isPermaLink="true">https://zenn.dev/tomoikey/articles/becdcef97aa62c</guid><pubDate>Wed, 05 Mar 2025 22:55:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--st4_d6hj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%25A1%25E3%2583%25A2%25E3%2583%25AA%25E3%2581%25A8%25E4%25BB%25B2%25E8%2589%25AF%25E3%2581%2597%25E3%2581%25AB%25E3%2581%25AA%25E3%2582%258D%25E3%2581%2586%25EF%25BC%2581%255B%25E3%2582%25A2%25E3%2583%25AD%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25BF%25E5%25AE%259F%25E8%25A3%2585%25E7%25B7%25A8%255D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tomoikey%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJlZTJjNDgxYzIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tomoikey</dc:creator></item><item><title><![CDATA[フルスタックでRust製ブログアプリを書いてみよう]]></title><description><![CDATA[
+ Rust製ブログアプリの技術スタック: 軽量 &amp; 高速 &amp; 拡張性を兼ね備えた構成
+
+ はじめに
+現在、個人開発として Rust 製のブログアプリ を開発しています。本記事では、その技術スタックと設計方針について紹介します。
+目的:
+
+
+高速 &amp; 軽量 で、依存関係を最小限に抑えた構成
+
+
+開発効率を向上 させ、デプロイの手間を最小限に
+
+
+スケーラブルな設計 で、アクセス増加時にも対応可能
+
+この構成は、MVP開発 → 本番運用へのスムーズな移行 を意識したものになっています。
+
+
+ 技術スタック
+
+
+
+カテゴリ
+選定技術
+理由
+
+
+
+
+フロントエンド
+Le...]]></description><link>https://zenn.dev/kazuma0606/articles/795e8f146a9859</link><guid isPermaLink="true">https://zenn.dev/kazuma0606/articles/795e8f146a9859</guid><pubDate>Wed, 05 Mar 2025 13:55:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Ii1apDxk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2595%25E3%2583%25AB%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%2583%25E3%2582%25AF%25E3%2581%25A7Rust%25E8%25A3%25BD%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E6%259B%25B8%25E3%2581%2584%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%2588%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25AB%25E3%2582%25BA%25E3%2583%259E%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI1ZjkwNWYyMmEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>カズマ</dc:creator></item><item><title><![CDATA[RustとWebAssemblyでQRコードジェネレーターを作る]]></title><description><![CDATA[
+ はじめに
+
+ モチベーション
+なぜこのプロジェクトを作ろうと思ったかというと、現状のQRコードを出すライブラリがどれも帯に短しタスキに長しと思ったからです。
+どれも基本的な機能は揃えていますが、ビルドパフォーマンスや画像の埋め込みなどに課題があると感じています。
+OSSにコミットをして、改善を図ることも考えましたが、コツコツ自分で1から作ることでRustやwasmについて詳しくなりたいと思ったので、自分のプロジェクトとしてスタートすることにしました。
+今回の記事ではやったことをざざっと振り返りながら書いているので、不明な点などはコメントをいただけると嬉しいです。
+
+ WebAssem...]]></description><link>https://zenn.dev/rem/articles/d777930df82208</link><guid isPermaLink="true">https://zenn.dev/rem/articles/d777930df82208</guid><pubDate>Wed, 05 Mar 2025 11:45:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--kiqJ8Bfl--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25A8WebAssembly%25E3%2581%25A7QR%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2582%25B8%25E3%2582%25A7%25E3%2583%258D%25E3%2583%25AC%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%25BC%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:rem%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2c3ZkdxZXZ1SjhKODktVElvZnNWOXoyT2hJLVlFR0dnTnhfS1hKQWc9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>rem</dc:creator></item><item><title><![CDATA[[深層強化学習] RustでDQN (Deep Q Network) をフルスクラッチで実装してみた]]></title><description><![CDATA[※ 2025/03/01にqiitaに投稿した記事を同じ内容でzennに投稿してます。
+
+ はじめに
+個人開発しているRust製の強化学習フレームワーク（ReinforceX）にDQNを実装したので、それについて解説する記事です。
+gitレポジトリはこちらになります（もしこの記事が良かったらStarを付けてもらえると、やる気がでます！）。
+また、crates.ioにもreinforcexという名のクレートとして公開しています。
+
+ やること
+
+実装したDQNでCartPoleを学習してみる
+APIについての解説
+DQNの実装についての解説（下記の実装も含む）
+
+ε-greedy法
+Rep...]]></description><link>https://zenn.dev/kakky_hacker/articles/652bd7f9a1e6c1</link><guid isPermaLink="true">https://zenn.dev/kakky_hacker/articles/652bd7f9a1e6c1</guid><pubDate>Wed, 05 Mar 2025 09:41:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--TY9z32XN--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255B%25E6%25B7%25B1%25E5%25B1%25A4%25E5%25BC%25B7%25E5%258C%2596%25E5%25AD%25A6%25E7%25BF%2592%255D%2520Rust%25E3%2581%25A7DQN%2520%2528Deep%2520Q%2520Network%2529%2520%25E3%2582%2592%25E3%2583%2595%25E3%2583%25AB%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25A9%25E3%2583%2583%25E3%2583%2581%25E3%2581%25A7%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kakky_hacker%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUl0YnZtbmFhSmE3WHdXV2ZCS0lXcTdoQ3lmYmdzdG0ydzVuY0dVMWh0eFk9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kakky_hacker</dc:creator></item><item><title><![CDATA[TauriでもRustで爆速描画したい]]></title><description><![CDATA[
+ はじめに
+皆さんこの記事は読みましたでしょうか？
+https://zenn.dev/1step621/articles/8daee458b5140b
+この記事を書いたのは僕の友達で、レンダリングについて色々調べていたら知見が溜まってきたので記事にしました。
+
+ 課題点
+一応ここでも挙げておくと
+
+Rustで画像を処理したとしてもフロントに送るのが遅い
+wasmはnative Rustよりは遅い (ロマンが足りない)
++Linuxだとwasmは現状並列化ができない (SharedArrayBufferが有効にできないため)
+
+↓
+じゃあRustで直接描画するしかない！！
+となるわけです...]]></description><link>https://zenn.dev/yadokani389/articles/rendering-with-rust-in-tauri-20250305</link><guid isPermaLink="true">https://zenn.dev/yadokani389/articles/rendering-with-rust-in-tauri-20250305</guid><pubDate>Wed, 05 Mar 2025 04:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--RXqD_Nth--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Tauri%25E3%2581%25A7%25E3%2582%2582Rust%25E3%2581%25A7%25E7%2588%2586%25E9%2580%259F%25E6%258F%258F%25E7%2594%25BB%25E3%2581%2597%25E3%2581%259F%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yadokani%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTEJMaDBkMjJOWkJSV3NVZnQxekxQcmlWUnduUXltYjREV0w4SnR4b0ZKNjEyQ19zND1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yadokani</dc:creator></item><item><title><![CDATA[Rustのライフタイム徹底解説：メモリ管理を理解する]]></title><description><![CDATA[
+
+ ライフタイムとは
+
+ ライフタイムの定義
+Rust において、すべての参照（リファレンス）にはライフタイムが存在します。つまり、その参照が指している値がメモリ上に存在する期間（または、参照がコード内で有効な行数）を指します。ライフタイムは、参照がそのライフタイム全体にわたって有効であることを保証するために使用されます。これは、参照の安全性を確保するために不可欠です。
+fn longest&lt;'a&gt;(x: &amp;'a str, y: &amp;'a str) -&gt; &amp;'a str {
+    if x.len() &gt; y.len() {
+      ...]]></description><link>https://zenn.dev/leap_adam/articles/7380d78930083a</link><guid isPermaLink="true">https://zenn.dev/leap_adam/articles/7380d78930083a</guid><pubDate>Tue, 04 Mar 2025 17:57:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--UrcWK4-2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25AE%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2595%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25A0%25E5%25BE%25B9%25E5%25BA%2595%25E8%25A7%25A3%25E8%25AA%25AC%25EF%25BC%259A%25E3%2583%25A1%25E3%2583%25A2%25E3%2583%25AA%25E7%25AE%25A1%25E7%2590%2586%25E3%2582%2592%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Adam%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZhZDIzOTdlZTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Adam</dc:creator></item><item><title><![CDATA[【bevy_baby】Bevyを使ってデスクトップマスコットを開発中です【OSS】]]></title><description><![CDATA[
+ リンク
+バイナリはitch.ioで公開しています！
+まだα版ですがよかったらお試しください。
+https://notelm.itch.io/bevy-baby
+オープンソースで公開しています。
+不具合などありましたらIssue頂けると助かります。
+PRも歓迎しております。
+https://github.com/not-elm/bevy_baby
+
+ はじめに
+
+ウィンドウの上に座らせることができます
+
+複数のマスコットを配置できます
+Bevy、Blender、VRMの学習を兼ねてBevyというRust製のゲームエンジンを使ってデスクトップマスコットの制作を始めました。
+マスコットの表...]]></description><link>https://zenn.dev/elm/articles/260d0e8caa5957</link><guid isPermaLink="true">https://zenn.dev/elm/articles/260d0e8caa5957</guid><pubDate>Tue, 04 Mar 2025 15:50:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Iqrbnl7e--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590bevy_baby%25E3%2580%2591Bevy%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2583%2587%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%2588%25E3%2583%2583%25E3%2583%2597%25E3%2583%259E%25E3%2582%25B9%25E3%2582%25B3%25E3%2583%2583%25E3%2583%2588%25E3%2582%2592%25E9%2596%258B%25E7%2599%25BA%25E4%25B8%25AD%25E3%2581%25A7%25E3%2581%2599%25E3%2580%2590OSS%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:notelm%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE4NWNhMmQ2OTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>notelm</dc:creator></item><item><title><![CDATA[メモリと仲良しになろう！[Private Field アクセス編]]]></title><description><![CDATA[
+ 誰のための記事か？(for whom)
+
+メモリ上でどのようにデータが載るのかが分からない人
+
+
+ なぜ学ぶのか？ (why)
+
+メモリ上にデータがどのように展開されるかを知り、メモリへの知見を深めるため
+
+
+ はじめに
+実はプライベートフィールドにアクセスするという話は各所で擦られまくっている話です。
+であるにも関わらず、なぜこの話題を再び掘り起こしたのか。
+それは「メモリの基礎を理解するために最も適した遊びだから」です。
+この記事を通して、さらなるメモリへの理解へと繋げていただけると幸いです。
+
+ 1. 前回の記事を軽く振り返る
+https://zenn.dev/tomoikey...]]></description><link>https://zenn.dev/tomoikey/articles/20f99256507362</link><guid isPermaLink="true">https://zenn.dev/tomoikey/articles/20f99256507362</guid><pubDate>Tue, 04 Mar 2025 14:05:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--E-I-v14j--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%25A1%25E3%2583%25A2%25E3%2583%25AA%25E3%2581%25A8%25E4%25BB%25B2%25E8%2589%25AF%25E3%2581%2597%25E3%2581%25AB%25E3%2581%25AA%25E3%2582%258D%25E3%2581%2586%25EF%25BC%2581%255BPrivate%2520Field%2520%25E3%2582%25A2%25E3%2582%25AF%25E3%2582%25BB%25E3%2582%25B9%25E7%25B7%25A8%255D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tomoikey%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJlZTJjNDgxYzIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tomoikey</dc:creator></item><item><title><![CDATA[Rust で ICMP パケットをキャプチャする]]></title><description><![CDATA[
+ 概要
+ネットワークの勉強のために ICMP パケットをキャプチャするプログラムを作成しました。
+作成したプログラムについて、説明を記載します。
+作成したプログラムは以下のリポジトリにあります。
+https://github.com/shu-kitamura/icmp-packet-capture
+
+ 依存関係
+今回作成したプログラムでは、以下の4つのクレートを利用しています。
+
+clap
+pnet
+pnet_datalink
+thiserror
+
+Cargo.toml の dependencies に以下の内容を記載します。
+[dependencies]
+clap = { versi...]]></description><link>https://zenn.dev/shu_kitamura/articles/1efec3f4b9b90f</link><guid isPermaLink="true">https://zenn.dev/shu_kitamura/articles/1efec3f4b9b90f</guid><pubDate>Tue, 04 Mar 2025 12:17:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qn8cGZ6l--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%2520%25E3%2581%25A7%2520ICMP%2520%25E3%2583%2591%25E3%2582%25B1%25E3%2583%2583%25E3%2583%2588%25E3%2582%2592%25E3%2582%25AD%25E3%2583%25A3%25E3%2583%2597%25E3%2583%2581%25E3%2583%25A3%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Skit%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FjZjhiN2M4YmEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Skit</dc:creator></item><item><title><![CDATA[『ダウンロードしたファイルを現在のフォルダーに移動させるbatファイル』をRustで書き直す]]></title><description><![CDATA[以前このような記事を出しました。
+https://zenn.dev/yuhi_ili/articles/62c87d5558b0bc
+これをRustに書き換えます。
+ただ、batをRustに書き直すのは面倒くさいので、batファイルをCahtGPTに投げて出力してもらいました。
+難読コードみたいな感じでしたがしっかりと解読してくれました。人工知能ってすごい。
+
+ 人工知能が出力したコード
+use std::env;
+use std::fs;
+use std::path::PathBuf;
+use std::process;
+
+fn main() {
+    let args: Vec&l...]]></description><link>https://zenn.dev/yuhi_ili/articles/479b997e23e6eb</link><guid isPermaLink="true">https://zenn.dev/yuhi_ili/articles/479b997e23e6eb</guid><pubDate>Tue, 04 Mar 2025 11:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--kYE7bxjw--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%258E%25E3%2583%2580%25E3%2582%25A6%25E3%2583%25B3%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2589%25E3%2581%2597%25E3%2581%259F%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2592%25E7%258F%25BE%25E5%259C%25A8%25E3%2581%25AE%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25AB%25E3%2583%2580%25E3%2583%25BC%25E3%2581%25AB%25E7%25A7%25BB%25E5%258B%2595%25E3%2581%2595%25E3%2581%259B%25E3%2582%258Bbat%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2580%258F%25E3%2582%2592Rust%25E3%2581%25A7%25E6%259B%25B8%25E3%2581%258D%25E7%259B%25B4%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25A4%2595%25E6%2597%25A5%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2QzOTk2NzgwZTUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>夕日</dc:creator></item><item><title><![CDATA[[Rust] 型推論結果を LSP でエディターにライブ表示してみた]]></title><description><![CDATA[Rust で作るプログラミング言語シリーズです。
+https://www.amazon.co.jp/dp/4297141922
+
+ 概要
+前回 は Mascal 言語に型推論を実装してみましたが、これはコマンドラインで -at オプションをつけて出力を見るか、コンパイルエラーのメッセージでフィードバックされるのみで、あまり「生きている」感じがしませんでした。そこで、今回は VSCode の拡張機能として LSP (Language Server Protocol) を実装することによってエディタ上で型推論結果をライブプレビューしてみたいと思います。
+この結果、次の GIF アニメのように...]]></description><link>https://zenn.dev/msakuta/articles/type-infer-lsp</link><guid isPermaLink="true">https://zenn.dev/msakuta/articles/type-infer-lsp</guid><pubDate>Mon, 03 Mar 2025 22:32:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--HjG09CSJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BRust%255D%2520%25E5%259E%258B%25E6%258E%25A8%25E8%25AB%2596%25E7%25B5%2590%25E6%259E%259C%25E3%2582%2592%2520LSP%2520%25E3%2581%25A7%25E3%2582%25A8%25E3%2583%2587%25E3%2582%25A3%25E3%2582%25BF%25E3%2583%25BC%25E3%2581%25AB%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:msakuta%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFUWEFKeG5tZ0ZYQlJsZjJpZVh1QWlwOG9LaFdpT2FSczg2dXRzWlcwN3o9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>msakuta</dc:creator></item><item><title><![CDATA[Rustのメソッドチェーンを使った関数型プログラミング]]></title><description><![CDATA[他のプログラミング言語を使っている人がRustを始めると、いくつか発想の転換が必要になります。
+そのうちの一つ、Rustのメソッドチェーンについて私が気づいたことを記事にします。
+
+ Rustはメソッドチェーンが重要な要素
+Rustはメソッドチェーンが頻繁に利用される言語です。むしろメソッドチェーンを基準として言語設計されているように見えます。
+例えばイテレータを使うときはこんな感じになります。
+exes.into_iter()
+    .filter_map((|x| ...)
+    .collect()
+他にもawaitは後置記法になっており、メソッドを繋げやすくなっています。
+l...]]></description><link>https://zenn.dev/itte/articles/77a0a56877ba0c</link><guid isPermaLink="true">https://zenn.dev/itte/articles/77a0a56877ba0c</guid><pubDate>Mon, 03 Mar 2025 21:35:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ihTPfNnp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25AE%25E3%2583%25A1%25E3%2582%25BD%25E3%2583%2583%25E3%2583%2589%25E3%2583%2581%25E3%2582%25A7%25E3%2583%25BC%25E3%2583%25B3%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%259F%25E9%2596%25A2%25E6%2595%25B0%25E5%259E%258B%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%259F%25E3%2583%25B3%25E3%2582%25B0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Nakamura%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzlhZmFmY2VlMTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Nakamura</dc:creator></item><item><title><![CDATA[Rust の derive を深掘り]]></title><description><![CDATA[
+
+ Rust における derive とは何か？
+Rust 言語において、derive はコンパイラが特定のトレイトの基本的な実装を提供できるようにする属性です。これらのトレイトは手動で実装することもでき、より複雑な動作を実現できます。
+
+ derive の登場によって解決された問題とは？
+derive 属性の登場によって、一部のトレイトを手動で実装する際に発生する大量の重複コードの問題が解決されました。コンパイラがこれらのトレイトの基本実装を自動生成できるため、プログラマが記述するコードの量を減らすことができます。
+
+ derive の使い方
+derive 属性を使用するには、型定義...]]></description><link>https://zenn.dev/leap_adam/articles/9238f1e394e4fe</link><guid isPermaLink="true">https://zenn.dev/leap_adam/articles/9238f1e394e4fe</guid><pubDate>Mon, 03 Mar 2025 19:33:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--e6KdQ1r7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%2520%25E3%2581%25AE%2520derive%2520%25E3%2582%2592%25E6%25B7%25B1%25E6%258E%2598%25E3%2582%258A%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Adam%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZhZDIzOTdlZTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Adam</dc:creator></item><item><title><![CDATA[ABC395:Rustで解く！問題解説]]></title><description><![CDATA[AtCoder Beginner Contest 395のA~E問題をRustで解いた際の解法をまとめました。
+
+ A問題
+問題
+https://atcoder.jp/contests/abc395/tasks/abc395_a
+解説
+数列 A について、各隣接する2項について以下の条件を満たしているかどうかを順番に判定します。
+A_{i} &lt; A_{i+1}
+どの2項でも条件を満たす場合は Yes、1箇所でも条件を満たさない箇所があれば、No となります。
+コード
+
+abc395a.rs
+use proconio::input;
+fn main() {
+    // 入力
+   ...]]></description><link>https://zenn.dev/nakst_hide/articles/ac44562e2bf72e</link><guid isPermaLink="true">https://zenn.dev/nakst_hide/articles/ac44562e2bf72e</guid><pubDate>Mon, 03 Mar 2025 14:28:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--z-E6kXZd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ABC395%253ARust%25E3%2581%25A7%25E8%25A7%25A3%25E3%2581%258F%25EF%25BC%2581%25E5%2595%258F%25E9%25A1%258C%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nakahide%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YkMxNEpSQnNET01hTGcxTVRQWGNTWS1qYlNQbFRMQTN3ZU9Sdz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nakahide</dc:creator></item><item><title><![CDATA[Wake on Lan のマジックパケットを送信するプログラムを Rust で実装した]]></title><description><![CDATA[
+ Wake on Lan とは
+Wake on Lan は、コンピュータネットワークに特定のパケットを送信させることにより、そのパケットの内容に該当するコンピュータが自ら電源を投入させる仕組みです(参考 : Wikipedia)
+Wake on Lan を使用することで、遠隔でコンピュータの電源を入れることができるようになります。
+送信する「特定のパケット」を マジックパケット といいます。
+マジックパケットは FF:FF:FF:FF:FF:FF に続けて起動したい装置の MAC アドレスを16回繰り返したデータパターンのパケットです。
+例えば、起動したい装置の MAC アドレスが E...]]></description><link>https://zenn.dev/shu_kitamura/articles/0b5151e1294fa1</link><guid isPermaLink="true">https://zenn.dev/shu_kitamura/articles/0b5151e1294fa1</guid><pubDate>Mon, 03 Mar 2025 13:44:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vhkvBal6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Wake%2520on%2520Lan%2520%25E3%2581%25AE%25E3%2583%259E%25E3%2582%25B8%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2591%25E3%2582%25B1%25E3%2583%2583%25E3%2583%2588%25E3%2582%2592%25E9%2580%2581%25E4%25BF%25A1%25E3%2581%2599%25E3%2582%258B%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%25A0%25E3%2582%2592%2520Rust%2520%25E3%2581%25A7%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Skit%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FjZjhiN2M4YmEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Skit</dc:creator></item><item><title><![CDATA[RustからSupabase上のDBにアクセスする方法]]></title><description><![CDATA[
+ RustからSupabase上のDBにアクセスする方法
+こんにちは。カズマです。
+ほぼ自分用のメモですが、共有させて頂きます。
+SupabaseのデータベースをRustから利用するための手順を説明します。
+最初にSupabaseでテーブルを作成し、次にRustからそのテーブルにアクセスする方法を見ていきましょう。
+
+ 1. Supabaseの設定
+
+ Supabaseプロジェクトの作成
+
+
+Supabaseにアクセスし、アカウント作成・ログイン
+「New Project」をクリックして新しいプロジェクトを作成
+プロジェクト名、パスワード、リージョンを設定して「Create new p...]]></description><link>https://zenn.dev/kazuma0606/articles/4855ca93a2d529</link><guid isPermaLink="true">https://zenn.dev/kazuma0606/articles/4855ca93a2d529</guid><pubDate>Mon, 03 Mar 2025 11:23:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--WxlaBHVt--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%258B%25E3%2582%2589Supabase%25E4%25B8%258A%25E3%2581%25AEDB%25E3%2581%25AB%25E3%2582%25A2%25E3%2582%25AF%25E3%2582%25BB%25E3%2582%25B9%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25AB%25E3%2582%25BA%25E3%2583%259E%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI1ZjkwNWYyMmEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>カズマ</dc:creator></item><item><title><![CDATA[TauriでMac用のデスクトップアプリを開発してみる]]></title><description><![CDATA[Webアプリ開発者がデスクトップアプリに入門してみます。
+RustベースのTauriフレームワークを使えば、慣れ親しんだWeb技術でクロスプラットフォームなデスクトップアプリが作れるとのこと。AIもいるしきっと学習コストは低いはずです！
+前提：
+
+macOS使用
+Reactを使った開発経験あり
+
+
+ 準備
+
+ 1. Rustインストール
+Tauriの核となるRust言語をインストールします。Rustは高速で安全なシステムプログラミング言語で、パッケージマネージャの「Cargo」も一緒に導入されます。インストールは公式のrustupツールを使うのが最も簡単です。
+# rustupをインスト...]]></description><link>https://zenn.dev/yoneya/articles/f0dc01bf826528</link><guid isPermaLink="true">https://zenn.dev/yoneya/articles/f0dc01bf826528</guid><pubDate>Mon, 03 Mar 2025 00:01:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--UoCRi-p---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Tauri%25E3%2581%25A7Mac%25E7%2594%25A8%25E3%2581%25AE%25E3%2583%2587%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%2588%25E3%2583%2583%25E3%2583%2597%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E9%2596%258B%25E7%2599%25BA%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2593%25E3%2583%25BC%25E3%2582%2589%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFlMjAyODRiNzcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>こーら</dc:creator></item><item><title><![CDATA[RustのResult型：エラー処理を簡単に]]></title><description><![CDATA[
+
+ Rust における Result 型
+Rust はシステムプログラミング言語であり、独自のエラー処理メカニズムを提供しています。Rust では、エラーは 2 つのカテゴリに分けられます：回復可能なエラーと回復不可能なエラーです。回復可能なエラーに対して、Rust は Result 型を提供しています。
+
+ Result 型の定義
+Result 型は列挙型であり、Ok と Err の 2 つのバリアントを持ちます。Ok バリアントは操作の成功を示し、成功した値を含みます。一方、Err バリアントは操作の失敗を示し、エラーの値を含みます。
+以下は Result 型の定義です：
+enum...]]></description><link>https://zenn.dev/leap_adam/articles/f092afa5726161</link><guid isPermaLink="true">https://zenn.dev/leap_adam/articles/f092afa5726161</guid><pubDate>Sun, 02 Mar 2025 17:10:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Imy-p7gf--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25AEResult%25E5%259E%258B%25EF%25BC%259A%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E5%2587%25A6%25E7%2590%2586%25E3%2582%2592%25E7%25B0%25A1%25E5%258D%2598%25E3%2581%25AB%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Adam%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZhZDIzOTdlZTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Adam</dc:creator></item><item><title><![CDATA[[Bevy] Resourceを作る]]></title><description><![CDATA[BevyのResourceは独立したグローバルなデータです。ユニークでなければいけないので、例えばゲームの音量とかボタンの設定などに使えます。
+Bevyのバージョンは0.15.3です。
+// まずリソースの構造体を定義します
+#[derive(Resource)]
+struct MyResource{
+    hoge: u16,
+    // Other attributes
+}
+// リソースのデフォルトの値を定義します
+impl Default for MyResource{
+    fn default() -&gt; MyResource{
+        MyResource...]]></description><link>https://zenn.dev/omini/articles/29534073ddaee2</link><guid isPermaLink="true">https://zenn.dev/omini/articles/29534073ddaee2</guid><pubDate>Sun, 02 Mar 2025 14:16:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hfvTw0yR--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:%255BBevy%255D%2520Resource%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:omini%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2Rhcmsvby5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>omini</dc:creator></item></channel></rss>

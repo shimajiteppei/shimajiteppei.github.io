@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Java」のフィード]]></title><description><![CDATA[Zennのトピック「Java」のRSSフィードです]]></description><link>https://zenn.dev/topics/java</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/5c47bb8423.png</url><title>Zennの「Java」のフィード</title><link>https://zenn.dev/topics/java</link></image><generator>zenn.dev</generator><lastBuildDate>Fri, 07 Mar 2025 12:04:02 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/java/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[JavaのHikariCPでConnectionの状態を確認する方法]]></title><description><![CDATA[
+ はじめに
+HikariCP の Connection Pool を使用してDBアクセスをする際に、取得した Connection が有効かどうかを確認する方法について調査しました。
+
+ HikariCPのデフォルト動作
+HikariCP は特別な設定をしなくても、コネクションの有効性を自動でチェックする仕組みがあります。
+HikariCP では、以下のタイミングで Connection の有効性チェックが行われます。
+
+Connection をプールから取得するとき
+dataSource.getConnection() を呼び出す際、HikariCP は無効な Connection ...]]></description><link>https://zenn.dev/rescuenow/articles/4dac64ab021528</link><guid isPermaLink="true">https://zenn.dev/rescuenow/articles/4dac64ab021528</guid><pubDate>Fri, 07 Mar 2025 08:16:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--usg21dpT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java%25E3%2581%25AEHikariCP%25E3%2581%25A7Connection%25E3%2581%25AE%25E7%258A%25B6%25E6%2585%258B%25E3%2582%2592%25E7%25A2%25BA%25E8%25AA%258D%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:nmatsu%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E0NWI1N2NlZmMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%25AC%25E3%2582%25B9%25E3%2582%25AD%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%258A%25E3%2582%25A6%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzEzOThkNmZjMGEuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nmatsu</dc:creator></item><item><title><![CDATA[Java | 2次元リスト]]></title><description><![CDATA[
+]]></description><link>https://zenn.dev/v6qh2bxj/articles/385f214e54f671</link><guid isPermaLink="true">https://zenn.dev/v6qh2bxj/articles/385f214e54f671</guid><pubDate>Thu, 06 Mar 2025 16:10:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--yKKvl852--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java%2520%257C%25202%25E6%25AC%25A1%25E5%2585%2583%25E3%2583%25AA%25E3%2582%25B9%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:v6qh2bxj%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzgzYmY4Njc4OTUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>v6qh2bxj</dc:creator></item><item><title><![CDATA[Java開発者が勉強したJava vs Kotlin① 基礎文法（変数とNull処理）]]></title><description><![CDATA[
+ はじめに
+ひさしぶりの投稿です！
+去年から、JavaとSpringを用いたプロジェクトに参加し、3月末にプロジェクト終わりますが、
+Kotlinに興味を覚え始めました。まだ、Javaの中でもマルチスレッド関連の知識は足りてないため、KotlinのCoroutineのような非同期処理までまとめることは難しいですが、自分なりにオンライン講座から勉強した内容をまとめ、シェアしたいと考えました。
+
+ 変数
+
+ var &amp; val
+
+variable.java
+int number = 1;
+final int number2 = 2;
+int onlyDeclare;
+
+
+varia...]]></description><link>https://zenn.dev/eldorado215/articles/67b534dd6444b2</link><guid isPermaLink="true">https://zenn.dev/eldorado215/articles/67b534dd6444b2</guid><pubDate>Thu, 06 Mar 2025 13:39:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Mhum-zNb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java%25E9%2596%258B%25E7%2599%25BA%25E8%2580%2585%25E3%2581%258C%25E5%258B%2589%25E5%25BC%25B7%25E3%2581%2597%25E3%2581%259FJava%2520vs%2520Kotlin%25E2%2591%25A0%2520%25E5%259F%25BA%25E7%25A4%258E%25E6%2596%2587%25E6%25B3%2595%25EF%25BC%2588%25E5%25A4%2589%25E6%2595%25B0%25E3%2581%25A8Null%25E5%2587%25A6%25E7%2590%2586%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Hyon%2520%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzczOTFmMzVlZjEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Hyon🇰🇷</dc:creator></item><item><title><![CDATA[Java SE 11 Silver]]></title><description><![CDATA[Java SE 11 Silver勉強用。]]></description><link>https://zenn.dev/v6qh2bxj/books/5652a0929f2e36</link><guid isPermaLink="true">https://zenn.dev/v6qh2bxj/books/5652a0929f2e36</guid><pubDate>Thu, 06 Mar 2025 13:05:35 GMT</pubDate><dc:creator>v6qh2bxj</dc:creator></item><item><title><![CDATA[How to create a simple API in Spring boot]]></title><description><![CDATA[
+ Environment
+
+Windows11
+maven: 3.9.9
+Java 21
+
+
+ Create a Spring Boot Project
+
+Access: Spring Initializr
+
+Select each item
+
+Choose Spring Web
+
+
+Push GENERATE button
+
+
+
+
+ Open the Project
+
+Open the project your IDE
+
+
+ Create a simple REST Controller
+
+src/main/java/myblog/myapi/controller/HelloCont...]]></description><link>https://zenn.dev/shelpro/articles/a35bdf4d20b24b</link><guid isPermaLink="true">https://zenn.dev/shelpro/articles/a35bdf4d20b24b</guid><pubDate>Thu, 06 Mar 2025 02:20:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6K6FGxo8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:How%2520to%2520create%2520a%2520simple%2520API%2520in%2520Spring%2520boot%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Shelner%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTHAxZTQzc3N1YWdkLTJzSVE0bl9ZaWdQTlFrQmN4XzNFWGRfMHZBWDFnY3F2QlhyYz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Shelner</dc:creator></item><item><title><![CDATA[Java Silver 勉強③]]></title><description><![CDATA[【出題項目の例】
+
+Javaの基本データ型と文字列の操作
+演算子と制御構造
+⭐️配列の操作
+
+クラスの宣言とインスタンスの使用
+メソッドの作成と使用
+カプセル化の適用
+継承による実装の再利用
+インタフェースによる抽象化
+例外処理
+モジュール・システム
+
+
+ 演算子と制御構造
+
+ 1. 演算子 (Operators)
+Javaにはさまざまな演算子があります。以下に代表的なものを紹介します。
+
+ (1) 算術演算子
+
+
++ : 加算
+
+- : 減算
+
+* : 乗算
+
+/ : 除算
+
+% : 剰余（余り）
+
+例:
+int a = 10, b = 3;
+System.out.println(a ...]]></description><link>https://zenn.dev/hyoni/articles/6c5819a1f32e13</link><guid isPermaLink="true">https://zenn.dev/hyoni/articles/6c5819a1f32e13</guid><pubDate>Wed, 05 Mar 2025 04:45:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bHq-LEMw--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:Java%2520Silver%2520%25E5%258B%2589%25E5%25BC%25B7%25E2%2591%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%2592%25E3%2583%25A7%25E3%2583%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0sxdWxlU2pkSzlwbDVxZnp3QVlUcFhCNk9xUEhkZGpKWjRUVlRPTl9lMHdYODhLdkg9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ヒョニ</dc:creator></item><item><title><![CDATA[IT技術解説①：Javaとは何か？]]></title><description><![CDATA[
+ はじめに
+Javaは1990年代初頭、サン・マイクロシステムズによる「Oak」というプロジェクトが源流となって開発されました。当時は家庭用機器や組み込み機器へのソフトウェア導入が増えつつあり、CやC++のようなネイティブ言語ではハードウェアに応じた移植作業やバッファオーバーフローといったメモリ管理のリスクが目立っていました。そこで、プラットフォームに依存せず動作し、安全かつ効率的に開発できる言語が求められたのです。Javaは「Write Once, Run Anywhere」という標語を掲げ、こうした課題の解決を目的として登場しました。しかし、その後の市場の変化によって、Javaが想...]]></description><link>https://zenn.dev/pdfractal/articles/7cb009e7724620</link><guid isPermaLink="true">https://zenn.dev/pdfractal/articles/7cb009e7724620</guid><pubDate>Tue, 04 Mar 2025 16:02:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Ty0SWFVf--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:IT%25E6%258A%2580%25E8%25A1%2593%25E8%25A7%25A3%25E8%25AA%25AC%25E2%2591%25A0%25EF%25BC%259AJava%25E3%2581%25A8%25E3%2581%25AF%25E4%25BD%2595%25E3%2581%258B%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:pdfractal%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ExMjhiODE1ZjkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>pdfractal</dc:creator></item><item><title><![CDATA[JAVAのRecordクラスについて]]></title><description><![CDATA[
+ はじめに
+Java 14でプレビュー機能として導入され、Java 16から正式にサポートされたRecordクラスは、データキャリアとしてのシンプルなクラスを簡潔に定義するための新しい構文を提供します。従来のPOJO（Plain Old Java Object）やDTO（Data Transfer Object）に代わるものとして、より簡潔かつ安全にデータを表現できます。
+本記事では、Recordクラスの基本文法から、コードサンプル、応用的な使い方、利用ケース、実装時の注意点について最新の情報を交えながら解説します。
+
+
+ Recordクラスの基本文法
+
+ Recordクラスとは？
+R...]]></description><link>https://zenn.dev/heiho/articles/567c466ef57253</link><guid isPermaLink="true">https://zenn.dev/heiho/articles/567c466ef57253</guid><pubDate>Tue, 04 Mar 2025 10:42:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--rByK8O6h--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JAVA%25E3%2581%25AERecord%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25B9%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E9%2585%2592%25E3%2581%258F%25E3%2581%259A%25E3%2581%258A%25E3%2581%2598%25E3%2581%2595%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdjM2VmOTM3YzEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>酒くずおじさん</dc:creator></item><item><title><![CDATA[GradleにおけるJUnit 5.12.0からの注意点]]></title><description><![CDATA[
+ TL;DR
+junit 5.12.0以上にあげるときは、testRuntimeOnly("org.junit.platform:junit-platform-launcher") を追加するようにしてください。(BOMを使っているであろうという前提でversionは省略してます)
+追加しないとtest taskが実行できないのですぐに気付けると思います。
+
+ Why
+明示的に junit-platform-launcherへの依存関係を指定しない場合、Gradleはバンドルされたバージョンを暗黙的に使用します。Gradle 8.13の時点では、junit-platform-launc...]]></description><link>https://zenn.dev/be_hase/articles/e760f23cc8050f</link><guid isPermaLink="true">https://zenn.dev/be_hase/articles/e760f23cc8050f</guid><pubDate>Tue, 04 Mar 2025 09:08:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GXnQOUju--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Gradle%25E3%2581%25AB%25E3%2581%258A%25E3%2581%2591%25E3%2582%258BJUnit%25205.12.0%25E3%2581%258B%25E3%2582%2589%25E3%2581%25AE%25E6%25B3%25A8%25E6%2584%258F%25E7%2582%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:be-hase%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dNaVhNZnFBWE9yTXdHZVdBMEpmaE5OX3FJRVExUWQzRUw2MVJtM0E9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>be-hase</dc:creator></item><item><title><![CDATA[Java Silver 勉強①]]></title><description><![CDATA[就活をしつつ、勉強も必要なのでモチベーションを上げるために
+Java Silverの勉強を始めてみようかと思います。
+
+
+ JavaSilver項目
+
+ 【出題項目】
+
+Javaの基本データ型と文字列の操作
+演算子と制御構造
+配列の操作
+クラスの宣言とインスタンスの使用
+メソッドの作成と使用
+カプセル化の適用
+継承による実装の再利用
+インタフェースによる抽象化
+例外処理
+モジュール・システム
+
+
+ JAVA基礎
+
+ 【Javaの特徴】
+①フォームに依存しない
+JVM（Java仮想マシン）
+②OSの種類を気にせずにさまざまな環境で実行可能
+WORA(Write Once Run AnyWh...]]></description><link>https://zenn.dev/hyoni/articles/d6445323e1d70a</link><guid isPermaLink="true">https://zenn.dev/hyoni/articles/d6445323e1d70a</guid><pubDate>Tue, 04 Mar 2025 02:55:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--PJb9-Kpq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:Java%2520Silver%2520%25E5%258B%2589%25E5%25BC%25B7%25E2%2591%25A0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%2592%25E3%2583%25A7%25E3%2583%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0sxdWxlU2pkSzlwbDVxZnp3QVlUcFhCNk9xUEhkZGpKWjRUVlRPTl9lMHdYODhLdkg9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ヒョニ</dc:creator></item><item><title><![CDATA[Java Silver 勉強②]]></title><description><![CDATA[【出題項目の例】﻿
+Javaの基本データ型と文字列の操作
+演算子と制御構造
+配列の操作
+クラスの宣言とインスタンスの使用
+メソッドの作成と使用
+カプセル化の適用
+継承による実装の再利用
+インタフェースによる抽象化
+例外処理
+モジュール・システム
+
+ Javaの基本データ型と文字列の操作
+Javaの基本データ型と文字列の操作について、以下のポイントに分けて説明します。
+
+ 1. 基本データ型 (Primitive Data Types)
+
+Javaには8つの基本データ型があります。それぞれの型には固有のサイズ、範囲、およびデフォルト値があります。
+
+ 1.1 整数型
+
+
+
+byte: 8ビ...]]></description><link>https://zenn.dev/hyoni/articles/73271a2c8ab2ae</link><guid isPermaLink="true">https://zenn.dev/hyoni/articles/73271a2c8ab2ae</guid><pubDate>Tue, 04 Mar 2025 02:55:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--nKsI1IKw--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:Java%2520Silver%2520%25E5%258B%2589%25E5%25BC%25B7%25E2%2591%25A1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%2592%25E3%2583%25A7%25E3%2583%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0sxdWxlU2pkSzlwbDVxZnp3QVlUcFhCNk9xUEhkZGpKWjRUVlRPTl9lMHdYODhLdkg9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ヒョニ</dc:creator></item><item><title><![CDATA[Gradle の設定ファイルとライブラリ管理とビルドバージョン設定]]></title><description><![CDATA[
+ はじめに
+この記事は、次の記事に入れようとしたら長くなりすぎた部分を切り出した記事です。
+https://zenn.dev/suzuki_hoge/articles/2025-02-introduction-to-java-c9d1047a3f233f
+Gradle の機能のうち、ライブラリ管理とビルドバージョンについてまとめました。
+「普段の開発でメンテするのは主にこの辺りだろう」という経験と、「どうも似た設定が多くてよくわからないな」という経験をもとに整理対象を決めました。
+
+なかなか複雑ですが、これくらい知って ( not 覚えて ) いればあまり困ることはなくなると思います。...]]></description><link>https://zenn.dev/suzuki_hoge/articles/2025-03-gradle-libs-and-versions-456e16d3197d75</link><guid isPermaLink="true">https://zenn.dev/suzuki_hoge/articles/2025-03-gradle-libs-and-versions-456e16d3197d75</guid><pubDate>Sun, 02 Mar 2025 06:39:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--NP0WCJs6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Gradle%2520%25E3%2581%25AE%25E8%25A8%25AD%25E5%25AE%259A%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2581%25A8%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%25E7%25AE%25A1%25E7%2590%2586%25E3%2581%25A8%25E3%2583%2593%25E3%2583%25AB%25E3%2583%2589%25E3%2583%2590%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%25A7%25E3%2583%25B3%25E8%25A8%25AD%25E5%25AE%259A%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25BB%25E3%2581%2592%25E3%2581%2595%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNlMDU2Mzg4YjAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ほげさん</dc:creator></item><item><title><![CDATA[Java とか Kotlin をやることになったら知っておきたい単語や仕組み]]></title><description><![CDATA[
+ はじめに
+「明日からきみは Java ね」って言われたとき、これくらい知っていれば大丈夫だろう内容をまとめました。
+この記事は初心者エンジニアで Java 系に触れているひとのフォローアップや、Java 系以外の実務経験ならあるというひとへの読み物的なまとめです。
+文法解説や設計論、ツール紹介などはありません。
+項目は多いですが、ひとつひとつは軽くまとめてあります。
+「必要に応じて詳細を調べられる」という入り口のところまでさくさくと紹介します。
+この記事の内容を覚える必要はありませんし、最初の最初はあまり理解できなくても大丈夫です。
+必要になったとき「そういえばそんなこと聞いたような...]]></description><link>https://zenn.dev/suzuki_hoge/articles/2025-02-introduction-to-java-c9d1047a3f233f</link><guid isPermaLink="true">https://zenn.dev/suzuki_hoge/articles/2025-02-introduction-to-java-c9d1047a3f233f</guid><pubDate>Sun, 02 Mar 2025 06:39:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vly98ufT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java%2520%25E3%2581%25A8%25E3%2581%258B%2520Kotlin%2520%25E3%2582%2592%25E3%2582%2584%25E3%2582%258B%25E3%2581%2593%25E3%2581%25A8%25E3%2581%25AB%25E3%2581%25AA%25E3%2581%25A3%25E3%2581%259F%25E3%2582%2589%25E7%259F%25A5%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%258A%25E3%2581%258D%25E3%2581%259F%25E3%2581%2584%25E5%258D%2598%25E8%25AA%259E%25E3%2582%2584%25E4%25BB%2595%25E7%25B5%2584%25E3%2581%25BF%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25BB%25E3%2581%2592%25E3%2581%2595%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNlMDU2Mzg4YjAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ほげさん</dc:creator></item><item><title><![CDATA[Java | Visitor Pattern]]></title><description><![CDATA[
+ Java
+
+ Visitor Pattern概要
+
+アルゴリズムをオブジェクトの構造から分離して、新しい操作を柔軟に追加できるデザインパターン
+分離による実用的な結果として、既存のオブジェクトに対する新たな操作を構造を変更せずに追加することができる。
+
+
+ Visitor Pattern特徴
+
+
+
+Visitor Pattern特徴
+内容
+
+
+
+
+データ構造と処理の分離
+データ構造を変更せずに新しい操作を追加できる。
+
+
+拡張性
+新しいVisitorを追加することで、既存の要素に新しい操作を適用できる。
+
+
+要素の知識不要
+要素はVisitorの存在を認識する必要がない。
+
+
+
+
+ ...]]></description><link>https://zenn.dev/v6qh2bxj/articles/7e33c3d01a746f</link><guid isPermaLink="true">https://zenn.dev/v6qh2bxj/articles/7e33c3d01a746f</guid><pubDate>Sun, 02 Mar 2025 05:34:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Whtme4V5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_76:Java%2520%257C%2520Visitor%2520Pattern%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:v6qh2bxj%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzgzYmY4Njc4OTUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>v6qh2bxj</dc:creator></item><item><title><![CDATA[Java 21/Spring Boot 3で実装する最新JWT認証ガイド]]></title><description><![CDATA[こんにちは！今回はJava 21とSpring Boot 3を使った最新のJWT認証実装について詳しく解説します。セキュアな認証システムの構築に役立つベストプラクティスも紹介しますので、ぜひ最後までご覧ください。
+サンプルで示したソースコードは「高度な機能拡張」以外、jwt-sampleに動作するSprinBoot3アプリケーションとしてプロジェクト一式を上げてあるので是非ご参照ください。
+
+ 目次
+
+JWTとは何か
+従来の認証との違い
+JWTの構造
+Spring Boot 3でのJWT実装
+Java 21の新機能を活用したコード改善
+セキュリティベストプラクティス
+実装チェックリスト
+...]]></description><link>https://zenn.dev/okamyuji/articles/0bfcc5a9b17cb5</link><guid isPermaLink="true">https://zenn.dev/okamyuji/articles/0bfcc5a9b17cb5</guid><pubDate>Sat, 01 Mar 2025 21:14:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--CRR3Em92--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java%252021%252FSpring%2520Boot%25203%25E3%2581%25A7%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2599%25E3%2582%258B%25E6%259C%2580%25E6%2596%25B0JWT%25E8%25AA%258D%25E8%25A8%25BC%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:okamyuji%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY5YjFmNDYyYjkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>okamyuji</dc:creator></item><item><title><![CDATA[《あなたが知らないJAVA》💘 失われた SQL JOIN クエリの秘伝]]></title><description><![CDATA[
+ブログ対応のプロジェクトテンプレート
+
+https://www.mjga.cc
+https://github.com/ccmjga/mjga-scaffold/blob/main/README_EN.md
+
+
+ Left Joinから始める
+ユーザーとロールの関係を表すn2nのリレーションテーブルがあるとします。
+
+通常、left joinを使用してこれら3つのテーブルを結合し、ユーザーとそのロールの情報をクエリします。
+SELECT 
+    u.id AS user_id,
+    u.name AS user_name,
+    r.name AS role_name
+FROM ...]]></description><link>https://zenn.dev/mjga/articles/b6b97bcca0bc04</link><guid isPermaLink="true">https://zenn.dev/mjga/articles/b6b97bcca0bc04</guid><pubDate>Fri, 28 Feb 2025 03:20:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--11FpRLn9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%258A%25E3%2581%2582%25E3%2581%25AA%25E3%2581%259F%25E3%2581%258C%25E7%259F%25A5%25E3%2582%2589%25E3%2581%25AA%25E3%2581%2584JAVA%25E3%2580%258B%2520%2520%25E5%25A4%25B1%25E3%2582%258F%25E3%2582%258C%25E3%2581%259F%2520SQL%2520JOIN%2520%25E3%2582%25AF%25E3%2582%25A8%25E3%2583%25AA%25E3%2581%25AE%25E7%25A7%2598%25E4%25BC%259D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ccmjga%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzMxYzY0YzBlM2QuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ccmjga</dc:creator></item><item><title><![CDATA[Java Goldに合格したのでいろいろ振り返ってみる]]></title><description><![CDATA[すでに先人の方々によって発信されているので真新しい情報があるかというと恐らくそうではないが、
+せっかく合格したので、Java Gold合格体験記的なのを書こうと思う。
+これからJava Goldを受験しようと意気込んでいる方、Silverを受験しようか検討している方
+など、少しでも参考になれば幸いだ。
+
+ 筆者
+
+エンジニア2年目
+文系卒
+Goldの勉強を本格的に始めるまでJava自体は業務で1年ほど使っていた
+
+
+ Java Goldを受験した経緯
+プログラミング未経験者の私には、会社の短い研修の期間だけでプログラミング手法やオブジェクト指向を理解しきるのは無理だった。現場に入っても、...]]></description><link>https://zenn.dev/dochigo82/articles/29219372d522bc</link><guid isPermaLink="true">https://zenn.dev/dochigo82/articles/29219372d522bc</guid><pubDate>Thu, 27 Feb 2025 15:17:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ottlYCAJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java%2520Gold%25E3%2581%25AB%25E5%2590%2588%25E6%25A0%25BC%25E3%2581%2597%25E3%2581%259F%25E3%2581%25AE%25E3%2581%25A7%25E3%2581%2584%25E3%2582%258D%25E3%2581%2584%25E3%2582%258D%25E6%258C%25AF%25E3%2582%258A%25E8%25BF%2594%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ShoheiShimokawa%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQzNmQyNTE5YmUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ShoheiShimokawa</dc:creator></item><item><title><![CDATA[Androidアプリ開発入門(Kotlinお勉強編)]]></title><description><![CDATA[
+ はじめに
+勉強がてら、まとめてみました。
+こちらはお勉強編として
+
+
+Kotlinの文法
+Jetpackについて
+アーキテクチャー
+Unit Test
+
+などについて書いていきます。このあと実装編を書くつもりで、そこで簡単なアプリ開発のメモを書いていく予定です。
+
+ 言語はなにか？
+Kotlinを使います。理由は以下です。
+
+これまではJavaだったが、今ではAndroidアプリの推奨言語になっている
+Kotlinでしか使えない独自APIがある
+簡潔に記述できる
+nullを代入できる/できない変数を宣言できる(null安全)
+Javaと互換性あり
+
+
+ 超基礎
+
+ そもそも実行に関し...]]></description><link>https://zenn.dev/sc_tech/articles/82b817b98aba7e</link><guid isPermaLink="true">https://zenn.dev/sc_tech/articles/82b817b98aba7e</guid><pubDate>Wed, 26 Feb 2025 02:31:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Wl4C1V12--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Android%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E9%2596%258B%25E7%2599%25BA%25E5%2585%25A5%25E9%2596%2580%2528Kotlin%25E3%2581%258A%25E5%258B%2589%25E5%25BC%25B7%25E7%25B7%25A8%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%25AF%25E3%2582%25AA%25E3%2582%25AD%25E3%2583%2584%25E3%2583%258D%25E3%2582%25B6%25E3%2583%25AB%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ExNmRmMzZmYzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ワオキツネザル</dc:creator></item><item><title><![CDATA[M4 Mac miniでDockerコンテナ内でのnative-imageビルド時にSIGILLでクラッシュする場合の対処]]></title><description><![CDATA[
+ 事象
+Micronautプロジェクトの環境構築時に遭遇。
+./gradlew dockerBuildNative(Dockerコンテナでのネイティブイメージビルド)の実行時に下記のようなエラーが発生してビルドが異常終了する。
+Step 20/29 : RUN native-image -cp /home/app/libs/*.jar:/home/app/resources:/home/app/application.jar --no-fallback -o application -H:ConfigurationFileDirectories=/home/app/config-dir...]]></description><link>https://zenn.dev/yo_yamada/articles/ce54142fbe5658</link><guid isPermaLink="true">https://zenn.dev/yo_yamada/articles/ce54142fbe5658</guid><pubDate>Mon, 24 Feb 2025 15:02:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--tKvFLvtU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:M4%2520Mac%2520mini%25E3%2581%25A7Docker%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2586%25E3%2583%258A%25E5%2586%2585%25E3%2581%25A7%25E3%2581%25AEnative-image%25E3%2583%2593%25E3%2583%25AB%25E3%2583%2589%25E6%2599%2582%25E3%2581%25ABSIGILL%25E3%2581%25A7%25E3%2582%25AF%25E3%2583%25A9%25E3%2583%2583%25E3%2582%25B7%25E3%2583%25A5%25E3%2581%2599%25E3%2582%258B%25E5%25A0%25B4...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yohei_yamada%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzlmYmRlYzliYTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yohei_yamada</dc:creator></item><item><title><![CDATA[Mavenとは]]></title><description><![CDATA[Javaを使ったアプリケーションを作るときには、
+mavenとかgradleとかいうビルドツールを使って作るんだよ〜って、サイトで読んで、mavenプロジェクト作成してmvn installを実行してたんですが、
+実際に何やってるのかよくわからなくて調べてみました。
+
+ そもそもビルドツールとは
+ビルドツールについてよくわからないな、と思った根本原因は
+「ビルドが理解できていない」ことだったと気づきました。
+ビルドツールとは、ビルドに必要な作業を
+すべてよしなに実行してくれるツールです。
+でも、「ビルド」自体の内容をある程度理解していないと
+結局ビルドツールも理解できないなと痛感したので...]]></description><link>https://zenn.dev/iizukasan/articles/what_is_maven</link><guid isPermaLink="true">https://zenn.dev/iizukasan/articles/what_is_maven</guid><pubDate>Mon, 24 Feb 2025 09:49:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--JLDPZbHK--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_76:Maven%25E3%2581%25A8%25E3%2581%25AF%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:iizk%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzMwMGM0NzA2ZTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>iizk</dc:creator></item></channel></rss>
