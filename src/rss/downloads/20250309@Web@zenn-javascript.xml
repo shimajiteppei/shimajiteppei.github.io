@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「JavaScript」のフィード]]></title><description><![CDATA[Zennのトピック「JavaScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/javascript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/64acd76870.png</url><title>Zennの「JavaScript」のフィード</title><link>https://zenn.dev/topics/javascript</link></image><generator>zenn.dev</generator><lastBuildDate>Sun, 09 Mar 2025 01:02:44 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/javascript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[anime.jsでシークバーに連動する数値アニメーションを実装した]]></title><description><![CDATA[
+ 前書き
+
+ 作りたいものの説明
+私は今、生産シミュレーションアプリを作成している。生産設備を配置しそれぞれを線で結ぶことで、生産ラインを形成する。ラインの中を人が行き来して、製品をひとつずつ作り上げる様をシミュレーションする。
+
+ 解決したかったこと
+シミュレーションの機能として再生や停止機能を設けた。シークバーを設けて任意の位置から再生できるようにした。このほかにも現在の生産数を表示させるようにしたい。シークバーに連動して、その値が動くようにする。
+そのやり方がわかったので、ここで説明する。
+
+ anime.jsとは何か
+軽量なJSアニメーションライブラリ。CSSやDOM、JSオブ...]]></description><link>https://zenn.dev/kyokucho1989/articles/46b16dc1cf02c4</link><guid isPermaLink="true">https://zenn.dev/kyokucho1989/articles/46b16dc1cf02c4</guid><pubDate>Sat, 08 Mar 2025 22:59:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vCZLZq68--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:anime.js%25E3%2581%25A7%25E3%2582%25B7%25E3%2583%25BC%25E3%2582%25AF%25E3%2583%2590%25E3%2583%25BC%25E3%2581%25AB%25E9%2580%25A3%25E5%258B%2595%25E3%2581%2599%25E3%2582%258B%25E6%2595%25B0%25E5%2580%25A4%25E3%2582%25A2%25E3%2583%258B%25E3%2583%25A1%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kyokucho1989%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lqbUw1MUdrQm9ESFJENkJvTE0zQm0zUGFQYThOb193ZmE1MnNqPXMyNTAtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kyokucho1989</dc:creator></item><item><title><![CDATA[Laravelでフォロー機能を実装する方法]]></title><description><![CDATA[Laravel でフォロー機能を API 経由で実装し、JavaScript でフォローボタンを制御する方法を解説します。
+
+ 実行環境
+PHP 8.3
+Laravel 11
+MySQL 8.0
+JavaScript (fetch API使用)
+上記を使用してフォロー機能を実装していきます。
+また、サイトはログインしなければ使用できない仕様になっています。
+
+ フォロー処理の流れ
+
+ページにアクセス時にフォロー状況をチェック
+
+フォローしていなければ「フォローボタン」を表示。
+フォローしていれば「フォロー解除ボタン」を表示。
+
+
+フォローボタンを押すと API を呼び出してフォロー
+フォ...]]></description><link>https://zenn.dev/imkei/articles/3287911aaf707d</link><guid isPermaLink="true">https://zenn.dev/imkei/articles/3287911aaf707d</guid><pubDate>Sat, 08 Mar 2025 18:01:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--I4vYvtFL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Laravel%25E3%2581%25A7%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25AD%25E3%2583%25BC%25E6%25A9%259F%25E8%2583%25BD%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:imkei%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M2Mzc4NTBjMzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>imkei</dc:creator></item><item><title><![CDATA[Reactでfalsyな値を表示制御する方法(0とNaNがカギ)]]></title><description><![CDATA[以下のようなコンポーネントで、「値をNaNにする」というボタンを押した場合に、
+どのような表示になるでしょうか？
+import { useState } from "react";
+
+export default function App() {
+  const [count, setCount] = useState&lt;number&gt;(0);
+
+  const handleClick = () =&gt; {
+    // 負の数の平方根なので、必ずNaNになる。
+    setCount(Math.sqrt(-1));
+  };
+
+  return (
+    &lt;di...]]></description><link>https://zenn.dev/ohimusdev46301/articles/26aadd90010ac1</link><guid isPermaLink="true">https://zenn.dev/ohimusdev46301/articles/26aadd90010ac1</guid><pubDate>Sat, 08 Mar 2025 09:31:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--33K5PF5V--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%25E3%2581%25A7falsy%25E3%2581%25AA%25E5%2580%25A4%25E3%2582%2592%25E8%25A1%25A8%25E7%25A4%25BA%25E5%2588%25B6%25E5%25BE%25A1%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%25280%25E3%2581%25A8NaN%25E3%2581%258C%25E3%2582%25AB%25E3%2582%25AE%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Wataru%2520Takiguchi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdkOTBhM2EyYTcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Wataru Takiguchi</dc:creator></item><item><title><![CDATA[jsのみchatbot 数字による分岐が可能に！！]]></title><description><![CDATA[http://kemii.sakura.ne.jp/chat_bot_test1/index.html
+↑お試し用
+downloadも可能。
+https://zenn.dev/kemii/articles/c8664ed58a37bd
+詳細はver1参照
+変更点。
+複数選択肢に対応。
+/n
+を使って改行可能に
+]]></description><link>https://zenn.dev/kemii/articles/24ee9f046b879a</link><guid isPermaLink="true">https://zenn.dev/kemii/articles/24ee9f046b879a</guid><pubDate>Sat, 08 Mar 2025 05:28:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--RfSQ6cjA--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:js%25E3%2581%25AE%25E3%2581%25BFchatbot%2520%25E6%2595%25B0%25E5%25AD%2597%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258B%25E5%2588%2586%25E5%25B2%2590%25E3%2581%258C%25E5%258F%25AF%25E8%2583%25BD%25E3%2581%25AB%25EF%25BC%2581%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kemii%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E5ZGYyMjM5ZmIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kemii</dc:creator></item><item><title><![CDATA[jsのみのchatbotを作りました。　全文　]]></title><description><![CDATA[質問内容に応じたbooleanが存在し、回答に応じて、booleanをtrue,flaseする。
+yes,noに応じて、質問内容を変化させられる。しなくてもいい。
+const questions = [
+    {
+        id: 'q0',
+        text: '新しいチャットを始めますか (yes/no)',
+        next: (answer) =&gt; answer ? 'q1' : evaluateAnswers()
+    },
+    {
+        id: 'q1',
+        text: 'それは鉄道ですか (yes/no)',
+  ...]]></description><link>https://zenn.dev/kemii/articles/c8664ed58a37bd</link><guid isPermaLink="true">https://zenn.dev/kemii/articles/c8664ed58a37bd</guid><pubDate>Sat, 08 Mar 2025 02:21:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--NHEJW5W8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:js%25E3%2581%25AE%25E3%2581%25BF%25E3%2581%25AEchatbot%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258A%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%25E3%2580%2582%25E3%2580%2580%25E5%2585%25A8%25E6%2596%2587%25E3%2580%2580%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kemii%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E5ZGYyMjM5ZmIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kemii</dc:creator></item><item><title><![CDATA[【初心者向け】プログラミングのエラーの種類と対処法]]></title><description><![CDATA[プログラミングを学び始めると必ず遭遇するのが「エラー」です。最初は英語のエラーメッセージを見ただけで心が折れそうになるかもしれませんが、実はエラーは私たちの良き先生です。この記事では、プログラミングでよく遭遇するエラーの種類と、その対処法について具体例を交えて解説します。
+
+ エラーとは何か？
+エラーとは、プログラムが正常に動作しない状態を指します。大きく分けて以下の3つのカテゴリーがあります：
+
+
+構文エラー（Syntax Error）：文法の間違い
+
+実行時エラー（Runtime Error）：実行中に発生するエラー
+
+論理エラー（Logical Error）：プログラムは動くが、期...]]></description><link>https://zenn.dev/homatsu_tech/articles/8a5ca9a69cc856</link><guid isPermaLink="true">https://zenn.dev/homatsu_tech/articles/8a5ca9a69cc856</guid><pubDate>Sat, 08 Mar 2025 00:17:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vftQ3uvD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E5%2590%2591%25E3%2581%2591%25E3%2580%2591%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%259F%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%25AE%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E3%2581%25AE%25E7%25A8%25AE%25E9%25A1%259E%25E3%2581%25A8%25E5%25AF%25BE%25E5%2587%25A6%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25AE%259D%25E6%259D%25BE%2540%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2YzZWQ1ZGYyMjYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>宝松@システムエンジニア</dc:creator></item><item><title><![CDATA[映画とドラマ紹介のWebサイトを作ってみた]]></title><description><![CDATA[
+ HTML
+
+ 映画ページ
+
+
+ ソースコード
+&lt;!DOCTYPE html&gt;
+&lt;html lang="ja"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;おすすめ映画&lt;/title&gt;
+    &lt;link rel="stylesheet" href="../css/style.css"&gt;
+&lt;...]]></description><link>https://zenn.dev/louloutech/articles/b4b336d6d064ec</link><guid isPermaLink="true">https://zenn.dev/louloutech/articles/b4b336d6d064ec</guid><pubDate>Fri, 07 Mar 2025 11:50:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lyb4rh17--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%2598%25A0%25E7%2594%25BB%25E3%2581%25A8%25E3%2583%2589%25E3%2583%25A9%25E3%2583%259E%25E7%25B4%25B9%25E4%25BB%258B%25E3%2581%25AEWeb%25E3%2582%25B5%25E3%2582%25A4%25E3%2583%2588%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:louloutech%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YktVMDI3VzFrR2p0ZzVZcFoxVzRtUHVRcHlrM0hSWkwwS3NWSWo9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>louloutech</dc:creator></item><item><title><![CDATA[ぷよぷよプログラミングをGodotで実装 03 コード理解（player.js）]]></title><description><![CDATA[
+ はじめに
+前回に引き続きぷよぷよプログラミングを利用して、Godotでパズルゲームの作り方の基礎を一緒に学んでいこうと思います。YouTubeでもこの記事の内容に沿ってゲームを作っているので、動画を見ながら取り組んでみてください。
+https://youtu.be/ZpPS9VSz09A
+前回の記事はこちら
+https://zenn.dev/yurinchi/articles/d94e36dbe479cd
+
+ 利用教材
+
+ぷよぷよプログラミング
+
+!
+当該記事の内容は、ぷよぷよプログラミングの利用条件を理解したうえで学習にご利用ください。
+
+
+ この記事で学ぶこと
+godotを触る前...]]></description><link>https://zenn.dev/yurinchi/articles/6b2ba320e47849</link><guid isPermaLink="true">https://zenn.dev/yurinchi/articles/6b2ba320e47849</guid><pubDate>Fri, 07 Mar 2025 10:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--iqzDqrOS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%25B7%25E3%2582%2588%25E3%2581%25B7%25E3%2582%2588%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%259F%25E3%2583%25B3%25E3%2582%25B0%25E3%2582%2592Godot%25E3%2581%25A7%25E5%25AE%259F%25E8%25A3%2585%252003%2520%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E7%2590%2586%25E8%25A7%25A3%25EF%25BC%2588player.js%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2586%25E3%2583%25BC%25E3%2582%258A%25E3%2582%2593%25E3%2581%25A1%25E3%2581%2583%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTG5mTmtnd0NObm1POTVBUlRkMWRMcU9vM2JiMWotcEViRVdHMlBxLS04UktHWnVTOD1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ゆーりんちぃ</dc:creator></item><item><title><![CDATA[[Javascript] Lodashによる空判定の返り値まとめ]]></title><description><![CDATA[
+ 背景
+Lodashが使われている案件の開発中に以下のような場面で本記事に記載する内容を調べる機会がありました。
+
+使用されているLodashの関数の返り値がどうなるのか分からない
+空判定を行いたいがどの関数を使用することが適切なのか分からない
+
+空判定と言ってもnull, undefined, ""(空文字), 0など、状況によって何を「空」として扱いたいか変わるかと思います。
+今回はLodashで用意されている空判定に使われるいくつかの関数の返り値が引数によってどうなるのかを表にまとめておきます。
+
+ Lodashとは？
+Javascriptで扱える便利な関数をまとめて提供している...]]></description><link>https://zenn.dev/1stscratch/articles/b1b2024359e57b</link><guid isPermaLink="true">https://zenn.dev/1stscratch/articles/b1b2024359e57b</guid><pubDate>Fri, 07 Mar 2025 08:11:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2IPkCdD5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BJavascript%255D%2520Lodash%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258B%25E7%25A9%25BA%25E5%2588%25A4%25E5%25AE%259A%25E3%2581%25AE%25E8%25BF%2594%25E3%2582%258A%25E5%2580%25A4%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:g.sato%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y4MDQ1NTg2ODcuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2595%25E3%2582%25A1%25E3%2583%25BC%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BB%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25A9%25E3%2583%2583%25E3%2583%2581Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTEFlNGNBZWdLN0lUeEJ5d3ZidG5PN3ZwSUlPOFhCM21aeElSZHQxNWt1dFZlUTVnPXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>g.sato</dc:creator></item><item><title><![CDATA[ky（軽量 fetch API ラッパー）における、ネットワークエラーとタイムアウトの扱い]]></title><description><![CDATA[ky とは：薄い fetch API ラッパーである。
+
+公式ページ
+
+axiosやfetchに替わるKyのススメ #JavaScript - Qiita
+
+使うメリットを日本語でざっくり知りたい人はこちら
+
+
+
+
+ 投げられるエラーの型、メッセージ
+
+
+
+_
+ネットワークエラー
+タイムアウト
+
+
+
+
+エラーの型
+TypeError
+TimeoutError [1]
+
+
+
+エラーメッセージ
+Failed to fetch
+Request timed out: GET {url}
+
+
+
+
+ネットワークエラーのメッセージが曖昧で分かりづらいことに注意。
+ネットワークエラーを区別したい場合は ...]]></description><link>https://zenn.dev/cside/articles/f40abc37616176</link><guid isPermaLink="true">https://zenn.dev/cside/articles/f40abc37616176</guid><pubDate>Fri, 07 Mar 2025 04:20:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_ihKYAZT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ky%25EF%25BC%2588%25E8%25BB%25BD%25E9%2587%258F%2520fetch%2520API%2520%25E3%2583%25A9%25E3%2583%2583%25E3%2583%2591%25E3%2583%25BC%25EF%25BC%2589%25E3%2581%25AB%25E3%2581%258A%25E3%2581%2591%25E3%2582%258B%25E3%2580%2581%25E3%2583%258D%25E3%2583%2583%25E3%2583%2588%25E3%2583%25AF%25E3%2583%25BC%25E3%2582%25AF%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E3%2581%25A8%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25A0%25E3%2582%25A2%25E3%2582%25A6%25E3%2583%2588%25E3%2581%25AE%25E6%2589%25B1%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Cside%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZhZDFhOGJkMTcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Cside</dc:creator></item><item><title><![CDATA[HTML+JSで作る1kb以下の変態program]]></title><description><![CDATA[実用的なものから便利な役立たたず、不便利で役立つもの等紹介。制御文字含んでいるもの多数あり、という訳で正常に表示されない場合はbase64の文字列を復号してお使い下さい。
+
+ gzipとか
+
+367 bytes
+&lt;svg onload='for(a=`reonfileecchktaminput id=	new opti&lt;&gt;deflateselt&lt; type=(Blob([a])ompssiS.arrayBuffer().then(a=&gt;&lt;	s&gt;-raw&lt;&gt;gzip&lt;/&gt;box	d&gt;dode ="s[0]Respse....]]></description><link>https://zenn.dev/mashuel/articles/b6e769c811ab10</link><guid isPermaLink="true">https://zenn.dev/mashuel/articles/b6e769c811ab10</guid><pubDate>Fri, 07 Mar 2025 04:20:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ntWJKGfk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:HTML%252BJS%25E3%2581%25A7%25E4%25BD%259C%25E3%2582%258B1kb%25E4%25BB%25A5%25E4%25B8%258B%25E3%2581%25AE%25E5%25A4%2589%25E6%2585%258Bprogram%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mashuel%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSUtJd2pfZ2VwbXM1a1dHcWdITlB5NUFHMVBEd2hpR1Rydi1tZmhhS09uSU50T3VBPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mashuel</dc:creator></item><item><title><![CDATA[本当に必要なのは仮想DOMではなくkeyだけだった - remakejs/remakeの紹介]]></title><description><![CDATA[拙作SPAフレームワーク remakejs を作るだけ作って解説するのが面倒だったのでAIに書かせたシリーズ第二弾です。例によって指示出しはしたけど直接は書いていません。
+
+ 本当に必要なのは仮想DOMではなくkeyだった
+
+ はじめに
+現代のWebフロントエンド開発において、ReactやVueなどの仮想DOM（Virtual DOM）を採用したフレームワークが主流となっています。仮想DOMは、実際のDOMを直接操作するコストを削減し、効率的なUI更新を実現するための手法として広く受け入れられてきました。
+しかし、私たちは立ち止まって考える必要があります。仮想DOMは本当に必要なのでしょ...]]></description><link>https://zenn.dev/eihigh/articles/what-is-remakejs</link><guid isPermaLink="true">https://zenn.dev/eihigh/articles/what-is-remakejs</guid><pubDate>Fri, 07 Mar 2025 03:48:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qvo0dEw8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%259C%25AC%25E5%25BD%2593%25E3%2581%25AB%25E5%25BF%2585%25E8%25A6%2581%25E3%2581%25AA%25E3%2581%25AE%25E3%2581%25AF%25E4%25BB%25AE%25E6%2583%25B3DOM%25E3%2581%25A7%25E3%2581%25AF%25E3%2581%25AA%25E3%2581%258Fkey%25E3%2581%25A0%25E3%2581%2591%25E3%2581%25A0%25E3%2581%25A3%25E3%2581%259F%2520-%2520remakejs%252Fremake%25E3%2581%25AE%25E7%25B4%25B9%25E4%25BB%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:eihigh%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM4N2QwMWUwYWQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>eihigh</dc:creator></item><item><title><![CDATA[AsyncIterator.withResolvers() を for await ..of の break 対応]]></title><description><![CDATA[前の記事の改稿となります。
+https://zenn.dev/juners/articles/0c575b02f4c5e8
+前のだと break すると break 後の complete の呼び出しに問題が発生していたので、その対応です。
+AsyncIterator.withResolvers ??= () =&gt; {
+  let controller;
+  let closed = false;
+  const abortController = new AbortController();
+  const signal = abortController.signal;
+
+  ...]]></description><link>https://zenn.dev/juners/articles/d51cb1790f7cc6</link><guid isPermaLink="true">https://zenn.dev/juners/articles/d51cb1790f7cc6</guid><pubDate>Fri, 07 Mar 2025 03:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--NvQUh7td--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AsyncIterator.withResolvers%2528%2529%2520%25E3%2582%2592%2520for%2520await%2520..of%2520%25E3%2581%25AE%2520break%2520%25E5%25AF%25BE%25E5%25BF%259C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:juner%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pJLTZTZnZQaDFwb0M5dmMxYUpVeTFoelB0R1g1RXRmUHRpQzF4QWR3PXMyNTAtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>juner</dc:creator></item><item><title><![CDATA[Build a React project with react-router]]></title><description><![CDATA[
+ My Environment
+
+OS: Windows11
+node -v: 22
+npm -v: 10
+IDE: VSCode
+Framework: React
+
+
+ How to build a React Project
+
+Open a VSCode Terminal (your terminal)
+Open a your empty Project folder
+Run: npx create-react-router@latest
+
+Run: npm i
+
+Run: npm run dev
+
+
+
+ References
+
+https://reactrouter.com/st...]]></description><link>https://zenn.dev/shelpro/articles/246454455d089b</link><guid isPermaLink="true">https://zenn.dev/shelpro/articles/246454455d089b</guid><pubDate>Fri, 07 Mar 2025 02:34:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--h0eMXvTz--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:Build%2520a%2520React%2520project%2520with%2520react-router%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Shelner%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTHAxZTQzc3N1YWdkLTJzSVE0bl9ZaWdQTlFrQmN4XzNFWGRfMHZBWDFnY3F2QlhyYz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Shelner</dc:creator></item><item><title><![CDATA[[小ネタ] ALB の固定レスポンスで JavaScript を実行してみた]]></title><description><![CDATA[Application Load Balancer のリスナー - エラスティックロードバランシング
+
+クライアントリクエストを破棄し、カスタムの HTTP レスポンスを返すには、fixed-response アクションを使用します。
+
+今回はコンテンツタイプ text/html で JavaScript を実行してみました。
+
+ やってみた
+デフォルト設定で ALB を作成済みです。
+
+デフォルトの HTTP:80 のリスナーを編集します。
+
+以下の設定に変更して保存します。
+
+デフォルトアクション: 固定レスポンスを返す
+レスポンスコード: 200
+コンテンツタイプ: text/ht...]]></description><link>https://zenn.dev/mn87/articles/20da74b95ee87e</link><guid isPermaLink="true">https://zenn.dev/mn87/articles/20da74b95ee87e</guid><pubDate>Thu, 06 Mar 2025 22:32:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5LCroBG1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255B%25E5%25B0%258F%25E3%2583%258D%25E3%2582%25BF%255D%2520ALB%2520%25E3%2581%25AE%25E5%259B%25BA%25E5%25AE%259A%25E3%2583%25AC%25E3%2582%25B9%25E3%2583%259D%25E3%2583%25B3%25E3%2582%25B9%25E3%2581%25A7%2520JavaScript%2520%25E3%2582%2592%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mn87%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAyNmUxNzcyOGIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mn87</dc:creator></item><item><title><![CDATA[「フロントエンドのエラー発生箇所を楽に特定」SentryでSource Mapを活用する]]></title><description><![CDATA[
+ はじめに
+「Sentryでエラー通知を受け取ったが、バンドルされたコードでエラー箇所が書いてある。
+ソースコードのどこなのかパッとわからない、、」
+と感じたことのある方は多いのではないでしょうか？
+このような問題を解決する技術・ツールとして「Source Map」というものがあります。
+SentryでSrouce Mapを活用すると、Issueを確認するとき
+バンドル後のエラーの発生箇所とソースコードの対応が非常に確認しやすくなります。
+
+導入前(ビルド後のファイル名のみ表示）
+
+導入後(ビルド前・ソースコードのファイル名・内容）
+ただ、「すぐできるかな」と思っていた導入で案外ハマっ...]]></description><link>https://zenn.dev/kataokatsuki/articles/d38d9e8c4234e4</link><guid isPermaLink="true">https://zenn.dev/kataokatsuki/articles/d38d9e8c4234e4</guid><pubDate>Thu, 06 Mar 2025 13:32:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Sjc6CW17--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%258C%25E3%2583%2595%25E3%2583%25AD%25E3%2583%25B3%25E3%2583%2588%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2589%25E3%2581%25AE%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E7%2599%25BA%25E7%2594%259F%25E7%25AE%2587%25E6%2589%2580%25E3%2582%2592%25E6%25A5%25BD%25E3%2581%25AB%25E7%2589%25B9%25E5%25AE%259A%25E3%2580%258DSentry%25E3%2581%25A7Source%2520Map%25E3%2582%2592%25E6%25B4%25BB%25E7%2594%25A8%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kataoka%2520Katsuki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2plaEl4V2xYM3ctckJQMDNMUDVna0s2NDN3MVJBZTl6TW1LcWxnPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kataoka Katsuki</dc:creator></item><item><title><![CDATA[ZodではなくValibotを使う(フロントエンドでは)]]></title><description><![CDATA[知ってる人も多いとは思いますが、フロントエンドでは Zod ではなく Valibot を使ったほうがバンドルサイズが減るよという話です。
+ZodもValibotも、検証したデータに対してTypeScriptの型をつけてくれる便利なライブラリですが、大きな違いの一つとして、Valibotはtree-shaking可能ですが、Zodはtree-shaking可能な設計になっていないということです。tree-shakingとは、ライブラリ内にある利用していないコードをバンドルから除外して、アプリケーションのバンドルサイズを減らすことを指します。
+フロントエンド開発で利用するバンドラは基本的に ...]]></description><link>https://zenn.dev/anatoo/articles/bc7f4a9fe25f0b</link><guid isPermaLink="true">https://zenn.dev/anatoo/articles/bc7f4a9fe25f0b</guid><pubDate>Thu, 06 Mar 2025 12:42:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---84MFkah--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Zod%25E3%2581%25A7%25E3%2581%25AF%25E3%2581%25AA%25E3%2581%258FValibot%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%2528%25E3%2583%2595%25E3%2583%25AD%25E3%2583%25B3%25E3%2583%2588%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2589%25E3%2581%25A7%25E3%2581%25AF%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:anatoo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2o2SlMxT0IydDYtVXJEdi0wM1VCUkhZbWdDUFM2UGxpQ1JQVVI1PXMyNTAtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>anatoo</dc:creator></item><item><title><![CDATA[RLS(Row-Level Security)を簡単解説]]></title><description><![CDATA[
+ はじめに
+Webアプリのデータ保存場所+認証関係で Supabase を使用しているのですが，各TableにはRLS(Row-Level Security) をつけられるということで，勉強したので共有します．
+自分は，セキュリティに関して完全な初心者なので，初心者でもわかるように解説していきます．
+
+ 対象読者
+
+RLS について知りいたい人
+セキュリティに関して完全な初心者の人
+
+
+ RLS(Row-Level Security)とは？
+Row-Level Security(行レベルセキュリティ) は，データベースのテーブルに格納されている“各行(レコード)”ごとに，誰が閲覧・更新...]]></description><link>https://zenn.dev/keishi85/articles/58c6e1c88ffd88</link><guid isPermaLink="true">https://zenn.dev/keishi85/articles/58c6e1c88ffd88</guid><pubDate>Thu, 06 Mar 2025 11:00:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GqcFAC1a--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:RLS%2528Row-Level%2520Security%2529%25E3%2582%2592%25E7%25B0%25A1%25E5%258D%2598%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2591%25E3%2583%25BC%25E3%2581%2597%2540%25E5%25AD%25A6%25E7%2594%259F%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzliYjA0MTBhMDQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>けーし@学生エンジニア</dc:creator></item><item><title><![CDATA[jsで要素のtemplate化に成功　全文]]></title><description><![CDATA[html内でhtml要素のテンプレを記述し、引数込みでreplaceするようなものを作成しました
+やりたいこととしては、
+
+    &lt;div class="product-template"&gt;
+        &lt;div class = "contents_wrap_test"&gt;
+            &lt;div class = "contents_wrap_test_2"&gt;
+                &lt;div class="test_wrap"&gt;
+                    &lt;div class="price"&gt...]]></description><link>https://zenn.dev/kemii/articles/5c4b8ae37547b7</link><guid isPermaLink="true">https://zenn.dev/kemii/articles/5c4b8ae37547b7</guid><pubDate>Thu, 06 Mar 2025 09:27:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--SOZrB29p--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:js%25E3%2581%25A7%25E8%25A6%2581%25E7%25B4%25A0%25E3%2581%25AEtemplate%25E5%258C%2596%25E3%2581%25AB%25E6%2588%2590%25E5%258A%259F%25E3%2580%2580%25E5%2585%25A8%25E6%2596%2587%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kemii%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E5ZGYyMjM5ZmIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kemii</dc:creator></item><item><title><![CDATA[HTMLとCSSとJavaScriptで作ったサイトにMicroCMSを使った投稿システムを実装する方法]]></title><description><![CDATA[
+ はじめに：後からお知らせ機能を追加する課題
+「すでに運用しているHTML/CSS/JavaScriptで作られたサイトに、後からお知らせ機能やニュース投稿システムを追加したい」というケースの際にはどうしてますか？
+解決策としては「WordPressに完全移行する」というアプローチが一般的かと思います。
+しかし、これには以下のような課題があります：
+
+WordPress用のテーマ開発に時間とコストがかかる
+既存の機能をWordpress用として再実装する必要がある
+
+特に後出しでこういう投稿機能をつけたいと言われた際には
+もう一度構成を考えなくてはいけないのかと一度頭を抱えると思います...]]></description><link>https://zenn.dev/junk/articles/8eec2409bceb02</link><guid isPermaLink="true">https://zenn.dev/junk/articles/8eec2409bceb02</guid><pubDate>Thu, 06 Mar 2025 05:30:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---wV7Kd47--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:HTML%25E3%2581%25A8CSS%25E3%2581%25A8JavaScript%25E3%2581%25A7%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%25E3%2582%25B5%25E3%2582%25A4%25E3%2583%2588%25E3%2581%25ABMicroCMS%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%259F%25E6%258A%2595%25E7%25A8%25BF%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:junichi%2520kako%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NmOGRlYWE1YTQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>junichi kako</dc:creator></item></channel></rss>
