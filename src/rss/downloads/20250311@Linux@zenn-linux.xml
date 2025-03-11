@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Linux」のフィード]]></title><description><![CDATA[Zennのトピック「Linux」のRSSフィードです]]></description><link>https://zenn.dev/topics/linux</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/860a9eb1e4.png</url><title>Zennの「Linux」のフィード</title><link>https://zenn.dev/topics/linux</link></image><generator>zenn.dev</generator><lastBuildDate>Tue, 11 Mar 2025 06:34:51 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/linux/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[【Linux】ユーザ設定]]></title><description><![CDATA[
+ ユーザ設定
+usermod testuser
+
+ サブグループへ追加する
+testuserを事前に作成したグループtestgroupに追加する。
+[root@localhost ~]# tail -n 2 /etc/passwd
+testuser:x:3000:3000::/home/testuser:/bin/bash    //これを
+testuser2:x:3001:3001::/home/testuser2:/sbin/nologin
+[root@localhost ~]#
+[root@localhost ~]# tail -n 3 /etc/group
+testuser:x...]]></description><link>https://zenn.dev/pamesan/articles/c7632206ac995b</link><guid isPermaLink="true">https://zenn.dev/pamesan/articles/c7632206ac995b</guid><pubDate>Mon, 10 Mar 2025 14:42:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--aRkhn0rm--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Linux%25E3%2580%2591%25E3%2583%25A6%25E3%2583%25BC%25E3%2582%25B6%25E8%25A8%25AD%25E5%25AE%259A%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25B1%25E3%2582%2581%25E3%2581%2595%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M5NGQ3ZjMwMjcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ぱめさん</dc:creator></item><item><title><![CDATA[【Linux】ユーザ作成]]></title><description><![CDATA[
+ ユーザ作成
+useradd testuser
+
+ useraddのデフォルト値
+オプションを明示的に指定しない場合、以下のデフォルト値が設定される。
+[root@localhost ~]# useradd -D
+GROUP=100
+HOME=/home
+INACTIVE=-1
+EXPIRE=
+SHELL=/bin/bash
+SKEL=/etc/skel
+CREATE_MAIL_SPOOL=yes
+[root@localhost ~]#
+
+ UID、GIDを同じ値で作成
+useradd testuser -u 3000 -U
+!
+-gオプションでグループの指定が可能だが事前に作成してい...]]></description><link>https://zenn.dev/pamesan/articles/32e3728b462a1a</link><guid isPermaLink="true">https://zenn.dev/pamesan/articles/32e3728b462a1a</guid><pubDate>Mon, 10 Mar 2025 14:05:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--SaPommML--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Linux%25E3%2580%2591%25E3%2583%25A6%25E3%2583%25BC%25E3%2582%25B6%25E4%25BD%259C%25E6%2588%2590%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25B1%25E3%2582%2581%25E3%2581%2595%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M5NGQ3ZjMwMjcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ぱめさん</dc:creator></item><item><title><![CDATA[catatsuy's Picks Vol.6]]></title><description><![CDATA[
+ Go
+
+https://www.cncf.io/blog/2025/03/03/announcing-the-beta-release-of-opentelemetry-go-auto-instrumentation-using-ebpf/
+以前から注目しているeBPFを活用し、GoでOpenTelemetryを実装できることが発表された。
+
+ Security
+
+https://zenn.dev/catatsuy/scraps/e423c2c37f3eb6
+AppleはイギリスでADPを提供できない。プライバシーを巡る法律と技術の戦いは、これからも続きそう。
+https://zen...]]></description><link>https://zenn.dev/catatsuy/articles/54b29ef51f0132</link><guid isPermaLink="true">https://zenn.dev/catatsuy/articles/54b29ef51f0132</guid><pubDate>Sun, 09 Mar 2025 07:20:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--71vG3y0o--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_76:catatsuy%2527s%2520Picks%2520Vol.6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:catatsuy%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NiYTVlYjRjMTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>catatsuy</dc:creator></item><item><title><![CDATA[AndroidのLinux開発環境(試験運用版)でRustを実行してみる]]></title><description><![CDATA[
+ 0.なんかAndroidにLinux開発環境が降ってきたらしい
+へ〜！
+https://x.com/kuro_m88/status/1898197222493503679
+リリースを確認。ほんとだ。おもしろそー
+https://developer.android.com/about/versions/15/release-notes?hl=ja#linux-development-environment
+じゃあやってみよ！ということで、以下、ただそれだけのメモです。仕様機材はpixel8a。
+!
+試験運用版ということですし、僕もよくわからないまま触っているため、
+試す場合は自己責任で...]]></description><link>https://zenn.dev/sh1r4s4g1/articles/524cc3eab835c4</link><guid isPermaLink="true">https://zenn.dev/sh1r4s4g1/articles/524cc3eab835c4</guid><pubDate>Sun, 09 Mar 2025 06:20:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3OSF5LZH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Android%25E3%2581%25AELinux%25E9%2596%258B%25E7%2599%25BA%25E7%2592%25B0%25E5%25A2%2583%2528%25E8%25A9%25A6%25E9%25A8%2593%25E9%2581%258B%25E7%2594%25A8%25E7%2589%2588%2529%25E3%2581%25A7Rust%25E3%2582%2592%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:SH1R4S4G1%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSk1YQmtDLVREWUhYTFY1NVFOQkM4NmNPZXdiM09vN1l4ZUNQSmNTckRXN2c9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>SH1R4S4G1</dc:creator></item><item><title><![CDATA[WSL 2: GitHub からパッケージをダウンロードして WSL をセットアップする方法]]></title><description><![CDATA[
+ はじめに
+atsushifx です。
+WSL 2環境のセットアップ中に、ENOENTエラーが発生しました。
+このエラーは、「ファイルまたはディレクトリが見つからない」ことを示し、その結果、wslコマンドが実行できませんでした。
+機能を無効化してから再度有効化しましたが、改善しませんでした。
+最終的に、Microsoft のGitHubリポジトリからWSLをダウンロードして手動でセットアップしました。
+この記事では、WSLのセットアップ中に発生したENOENTエラーを手動で解決する方法を解説します。
+
+ 用語集
+
+
+WSL (Windows Subsystem for Linux):
+...]]></description><link>https://zenn.dev/atsushifx/articles/wsl2-setup-from-github</link><guid isPermaLink="true">https://zenn.dev/atsushifx/articles/wsl2-setup-from-github</guid><pubDate>Sat, 08 Mar 2025 03:03:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bY8TmoGx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:WSL%25202%253A%2520GitHub%2520%25E3%2581%258B%25E3%2582%2589%25E3%2583%2591%25E3%2583%2583%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B8%25E3%2582%2592%25E3%2583%2580%25E3%2582%25A6%25E3%2583%25B3%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2589%25E3%2581%2597%25E3%2581%25A6%2520WSL%2520%25E3%2582%2592%25E3%2582%25BB%25E3%2583%2583%25E3%2583%2588%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:atsushifx%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ1ZDYxMWM1ZTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>atsushifx</dc:creator></item><item><title><![CDATA[Raspberry Pi OSの/tmpをtmpfsにする]]></title><description><![CDATA[多くの Linux ディストリビューションでは、/tmp は tmpfs としてマウントされていることも多いですが、Raspberry Pi OS ではデフォルトで /tmp が SD カード上に作成されます。SDカードの寿命を考えると、頻繁に読み書きするファイルはtmpfsに置きたいですよね。
+
+ 手順
+
+現在の /tmp の状態を確認
+
+$ df -h /tmp
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/root        29G  9.8G   18G  36% /
+/tmpはSDカード上にあることが確認できまし...]]></description><link>https://zenn.dev/hnw/articles/48e3d30879cbc1</link><guid isPermaLink="true">https://zenn.dev/hnw/articles/48e3d30879cbc1</guid><pubDate>Sat, 08 Mar 2025 00:43:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jTfsEoZo--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Raspberry%2520Pi%2520OS%25E3%2581%25AE%252Ftmp%25E3%2582%2592tmpfs%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hnw%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvaC5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hnw</dc:creator></item><item><title><![CDATA[【Linux】よく使うコマンドTOP5]]></title><description><![CDATA[最近Linuxを操作するシーンが多いので、よく使うコマンドTOP5をまとめました。
+英数字から操作を想像するのが私は難しく感じたので、語呂合わせ・イメージで覚えておりその内容も書いています。コマンド操作怖い！って方にも覚えてもらいやすい説明になってたら嬉しいです。
+今回はデスクトップに置いたtestフォルダをコマンド操作で使っていきます。
+
+
+ 1位：ディレクトリ（フォルダ）移動
+cd /フォルダ名/フォルダ名/
+使用例：　cd /Users/user_name/Desktop/test
+マウスの操作でダブルクリックして目的のフォルダに移動する、あの行動をコマンドにするとこんなに短く！
+...]]></description><link>https://zenn.dev/928sekine/articles/0ee56f2fc87571</link><guid isPermaLink="true">https://zenn.dev/928sekine/articles/0ee56f2fc87571</guid><pubDate>Fri, 07 Mar 2025 03:35:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hq37Vl13--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Linux%25E3%2580%2591%25E3%2582%2588%25E3%2581%258F%25E4%25BD%25BF%25E3%2581%2586%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589TOP5%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259B%25E3%2581%258D%25E3%2581%25AD%25E3%2582%258A%25E3%2581%25AA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAyNDQ3MGIzZjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>せきねりな</dc:creator></item><item><title><![CDATA[Obsidianを使い始めた話 – vimでも快適に編集できるメモ環境]]></title><description><![CDATA[
+ Obsidianを始めてみる
+最近、メモ環境を見直すことにして、Obsidianを試してみた。
+マルチプラットフォーム(Windows、Linux、Android)で動作し、ローカルで完結するメモ管理ができるのが魅力的だ。
+ローカルで管理できるということは、vimが使えるということでもある。Obsidianには標準でvim-modeプラグインがあり、公式アプリ内でもvimライクな操作が可能。普段からvimで編集する身としては、これは大きなポイントだった。
+同期にはGitHubを使うことにし、Obsidian Gitプラグインを活用することで、快適に管理できる環境を整えた。
+さらに、Z...]]></description><link>https://zenn.dev/omohikane/articles/started-using-obsidian</link><guid isPermaLink="true">https://zenn.dev/omohikane/articles/started-using-obsidian</guid><pubDate>Thu, 06 Mar 2025 11:44:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--aJtJEizl--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Obsidian%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2584%25E5%25A7%258B%25E3%2582%2581%25E3%2581%259F%25E8%25A9%25B1%2520%25E2%2580%2593%2520vim%25E3%2581%25A7%25E3%2582%2582%25E5%25BF%25AB%25E9%2581%25A9%25E3%2581%25AB%25E7%25B7%25A8%25E9%259B%2586%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258B%25E3%2583%25A1%25E3%2583%25A2%25E7%2592%25B0%25E5%25A2%2583%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ripple%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pFY00zcjltMkUwbTRsWXc5eXhYczFuYVlyWUFOVERxZHFVWlAyPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ripple</dc:creator></item><item><title><![CDATA[Rails でユーザーが複数の部署に所属することを表すメンバーシップモデルを作る]]></title><description><![CDATA[お家の検証サーバ用の備忘録です。
+
+ 前提
+前提です。
+https://zenn.dev/asterisk9101/articles/ruby_on_rails8-4
+
+ 権限の境界としての部署
+ユーザーを部署（Section）に所属させます。
+ユーザーは複数の部署に所属することがあるので、中間テーブルとなる Membership モデルを作成します。
+また、ユーザーは部署毎に役割を持つので、role 属性を持たせます。
+bundle exec rails g scaffold Membership \
+  section:references \
+  user:references \...]]></description><link>https://zenn.dev/asterisk9101/articles/ruby_on_rails8-5</link><guid isPermaLink="true">https://zenn.dev/asterisk9101/articles/ruby_on_rails8-5</guid><pubDate>Wed, 05 Mar 2025 15:17:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--rX9jjOBF--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rails%2520%25E3%2581%25A7%25E3%2583%25A6%25E3%2583%25BC%25E3%2582%25B6%25E3%2583%25BC%25E3%2581%258C%25E8%25A4%2587%25E6%2595%25B0%25E3%2581%25AE%25E9%2583%25A8%25E7%25BD%25B2%25E3%2581%25AB%25E6%2589%2580%25E5%25B1%259E%25E3%2581%2599%25E3%2582%258B%25E3%2581%2593%25E3%2581%25A8%25E3%2582%2592%25E8%25A1%25A8%25E3%2581%2599%25E3%2583%25A1%25E3%2583%25B3%25E3%2583%2590%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%2583%25E3%2583%2597%25E3%2583%25A2%25E3%2583%2587%25E3%2583%25AB%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25A4%259A%25E7%2594%25B0%25E6%25B0%258F%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFUWEFKd3hvZ1pLNDVtSmdsUDlROUZPUTcyRXg4eV9MeFdmejdma0V1aTA9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>多田氏</dc:creator></item><item><title><![CDATA[Linuxでディスクをマウントする基本操作]]></title><description><![CDATA[普段はクラウドにおんぶにだっこな私ですが、たまたま物理マシン（Ubuntu Server）に外付けSSDを挿して操作する用事があったので、「あれってどうやるんだっけ…」と調べながら基本操作をまとめてみました。
+今回繋いだ「外付けSSD」は元々別のUbuntuマシンのストレージとして利用していたものであるため、一般的なUSBメモリなどとは異なりLVMで管理されているものでした。そのため、後半ではLVMのマウントにも触れています。
+
+ 基本
+
+ デバイスのリスト
+接続されたブロックデバイス（例：/dev/sdb1）を探す。
+
+
+lsblk
+
+List Block Devices
+シンプルなツ...]]></description><link>https://zenn.dev/kitar/articles/4443dfabd51e36</link><guid isPermaLink="true">https://zenn.dev/kitar/articles/4443dfabd51e36</guid><pubDate>Wed, 05 Mar 2025 11:28:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qTwKjYZf--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%25E3%2581%25A7%25E3%2583%2587%25E3%2582%25A3%25E3%2582%25B9%25E3%2582%25AF%25E3%2582%2592%25E3%2583%259E%25E3%2582%25A6%25E3%2583%25B3%25E3%2583%2588%25E3%2581%2599%25E3%2582%258B%25E5%259F%25BA%25E6%259C%25AC%25E6%2593%258D%25E4%25BD%259C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Satoshi%2520Kita%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2hxTGhOUzBuNWlEZ094ZmpUT1NaT01RM0JCZFZmczNScGJZTTg1aUtjPXMyNTAtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Satoshi Kita</dc:creator></item><item><title><![CDATA[Swayでサクっと日本語入力の環境を整える w/ fcitx5]]></title><description><![CDATA[備忘録です。
+
+ 環境
+Arch Linux（カーネル：6.13.5.arch1-1）
+Sway 1:1.10.1-2
+xorg-xwayland 24.1.6-1
+fcitx5 5.1.12-1
+fcitx5-mozc 2.32.5712.102.g9dc8247-3
+fcitx5-configtool 5.1.8-1
+kwindowsystem 6.11.0-1
+ここでは例として、GTK3.0で開発されたソフト（例えば、firefox、WezTermなど）に対して、日本語入力が使えるようにします。
+
+ Sway側の設定
+まずは、デフォルトの設定をコピーしましょう。
+$ cp -r /...]]></description><link>https://zenn.dev/meet4580/articles/336c6362e2c0a2</link><guid isPermaLink="true">https://zenn.dev/meet4580/articles/336c6362e2c0a2</guid><pubDate>Wed, 05 Mar 2025 07:29:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0DjSLjxr--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Sway%25E3%2581%25A7%25E3%2582%25B5%25E3%2582%25AF%25E3%2581%25A3%25E3%2581%25A8%25E6%2597%25A5%25E6%259C%25AC%25E8%25AA%259E%25E5%2585%25A5%25E5%258A%259B%25E3%2581%25AE%25E7%2592%25B0%25E5%25A2%2583%25E3%2582%2592%25E6%2595%25B4%25E3%2581%2588%25E3%2582%258B%2520w%252F%2520fcitx5%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:meet4580%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU1ZjkyZjhjMTcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>meet4580</dc:creator></item><item><title><![CDATA[ping 0 のナゾ]]></title><description><![CDATA[
+ はじめに
+ある日、トチ狂ったみかんちゃんは次のようなコマンドを実行しました。
+$ ping 0
+すると、このコマンドは不思議なことに、自分自身に向けて ICMP パケットを投げ始めました。
+$ ping 0
+PING 0 (127.0.0.1) 56(84) bytes of data.
+64 bytes from 127.0.0.1: icmp_seq=1 ttl=64 time=0.076 ms
+64 bytes from 127.0.0.1: icmp_seq=2 ttl=64 time=0.090 ms
+64 bytes from 127.0.0.1: icmp_seq=3 ...]]></description><link>https://zenn.dev/kusaremkn/articles/720e4931fc2e46</link><guid isPermaLink="true">https://zenn.dev/kusaremkn/articles/720e4931fc2e46</guid><pubDate>Wed, 05 Mar 2025 07:23:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--kD2gJYcB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:ping%25200%2520%25E3%2581%25AE%25E3%2583%258A%25E3%2582%25BE%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:KusaReMKN%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA4ZDY2NzVkZjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>KusaReMKN</dc:creator></item><item><title><![CDATA[yocto cheat sheet]]></title><description><![CDATA[
+ はじめの一歩
+# リリース一覧: https://wiki.yoctoproject.org/wiki/Releases
+git clone git://git.yoctoproject.org/poky.git -b scarthgap
+source poky/oe-init-build-env &lt;working directory name&gt;
+
+bitbake core-image-minimal  # ビルドする
+
+ ビルド
+
+ raspi 用のイメージを作る
+TODO
+
+ 成果物を SD カードに焼く
+cd tmp/deploy/images/$MACHINE/
+...]]></description><link>https://zenn.dev/zakkie/articles/5a7e37e97e8843</link><guid isPermaLink="true">https://zenn.dev/zakkie/articles/5a7e37e97e8843</guid><pubDate>Wed, 05 Mar 2025 00:31:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qMwQvkzJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_76:yocto%2520cheat%2520sheet%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:zakkie%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2Rhcmsvei5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>zakkie</dc:creator></item><item><title><![CDATA[LPIC101 合格体験記]]></title><description><![CDATA[LPIC101の試験に合格したので、合格までの流れや、オススメの勉強方法について書きます。
+
+ 受験までの流れ
+まず、受験までのおおまかな流れについて。
+
+
+Linux Professional Institute にてアカウント登録し、LPI ID を取得
+
+ピアソン VUE のアカウント登録
+白本での学習
+touch-q での学習
+ピアソン VUE から試験日の予約
+CBTテストセンターにて受験 &amp; 結果発表
+
+LPI ID は絶対に必要なので、最初にササッと登録&amp;取得してしまうのが良いです。
+
+ 試験予約
+試験の予約はピアソン VUE というサイトから行います。
+会...]]></description><link>https://zenn.dev/tenkei/articles/72ee0e117c50a6</link><guid isPermaLink="true">https://zenn.dev/tenkei/articles/72ee0e117c50a6</guid><pubDate>Mon, 03 Mar 2025 07:16:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Surwobww--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:LPIC101%2520%25E5%2590%2588%25E6%25A0%25BC%25E4%25BD%2593%25E9%25A8%2593%25E8%25A8%2598%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tenkei%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTC1MbnhJQkE4eS1Yd2xoS3hwQllvMzlxODB3ZVItMDB2NlVWTkdRdnoyTnc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tenkei</dc:creator></item><item><title><![CDATA[Linuxのディレクトリとファイルのパーミッションについて]]></title><description><![CDATA[なにができてできないのか混乱したので、備忘録としてまとめました。
+
+ ファイル
+
+
+
+記号
+権限
+内容
+
+
+
+
+r
+読み取り権
+ファイルの内容を読み出せる
+
+
+w
+書き込み権
+ファイルの内容を変更できる
+
+
+x
+実行権
+ファイルのプログラムを実行できる
+
+
+
+
+ ディレクトリ
+
+
+
+記号
+権限
+内容
+
+
+
+
+r
+読み取り権
+ファイル名一覧を読み出せる
+
+
+w
+書き込み権
+ファイルの作成や削除ができる
+
+
+x
+実行権
+ディレクトリ内に移動できる、ファイルにアクセスできる
+
+
+
+]]></description><link>https://zenn.dev/jin1125/articles/0ca04a0b1a04bc</link><guid isPermaLink="true">https://zenn.dev/jin1125/articles/0ca04a0b1a04bc</guid><pubDate>Mon, 03 Mar 2025 01:59:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--68TBgqps--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%25E3%2581%25AE%25E3%2583%2587%25E3%2582%25A3%25E3%2583%25AC%25E3%2582%25AF%25E3%2583%2588%25E3%2583%25AA%25E3%2581%25A8%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2581%25AE%25E3%2583%2591%25E3%2583%25BC%25E3%2583%259F%25E3%2583%2583%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:jin%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2EyMWU0YTc2YjIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>jin</dc:creator></item><item><title><![CDATA[Arch Linux でハイバネートからの復帰が失敗していたので調査・修正した]]></title><description><![CDATA[
+ 概要
+Arch Linux で休止状態（ハイバネーション）からの復帰が失敗し、通常の起動が行われる問題が発生しました。ブートログに以下のようなエラーメッセージが表示されていました。
+Mar 02 16:25:09 archlinux kernel: Hibernate inconsistent memory map detected!
+Mar 02 16:25:09 archlinux kernel: PM: hibernation: Image mismatch: architecture specific data
+Mar 02 16:25:09 archlinux kernel...]]></description><link>https://zenn.dev/acro5piano/articles/d12694a52f5a32</link><guid isPermaLink="true">https://zenn.dev/acro5piano/articles/d12694a52f5a32</guid><pubDate>Sun, 02 Mar 2025 09:08:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--uUA_RM0L--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Arch%2520Linux%2520%25E3%2581%25A7%25E3%2583%258F%25E3%2582%25A4%25E3%2583%2590%25E3%2583%258D%25E3%2583%25BC%25E3%2583%2588%25E3%2581%258B%25E3%2582%2589%25E3%2581%25AE%25E5%25BE%25A9%25E5%25B8%25B0%25E3%2581%258C%25E5%25A4%25B1%25E6%2595%2597%25E3%2581%2597%25E3%2581%25A6%25E3%2581%2584%25E3%2581%259F%25E3%2581%25AE%25E3%2581%25A7%25E8%25AA%25BF%25E6%259F%25BB%25E3%2583%25BB%25E4%25BF%25AE%25E6%25AD%25A3%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E4%25BA%2594%25E6%2589%2580%2520%25E5%2592%258C%25E5%2593%2589%2520%25EF%25BC%2588MonCargo%2520CTO%25EF%25BC%2589%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dPdDhnaDhYVEJ3VjFmU0FGTG5kMU9WTExTaGc4dUpiaml3Y2FILWFZPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>五所 和哉 （MonCargo CTO）</dc:creator></item><item><title><![CDATA[Windows用マウスカーソル(.ani)をXCursorに変換するメモ]]></title><description><![CDATA[
+ TL;DR
+https://github.com/quantum5/win2xcur
+で変換して正しくリネーム + index.themeを作成して~/.local/share/iconsあたりに置いておけばOK
+
+ win2xcurのインストール
+pip install win2xcurでもインストールできるようです。
+いま現在どうかは確認していませんが、参考にした記事には--scale追加前で更新が止まっているとの記載があったので私はソースからインストールしました（最終的に--scaleは使いませんでしたが...)
+この場合はpip install git+https://git...]]></description><link>https://zenn.dev/r_ca/articles/c79e46b7248b90</link><guid isPermaLink="true">https://zenn.dev/r_ca/articles/c79e46b7248b90</guid><pubDate>Sun, 02 Mar 2025 08:19:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--SvMQCDjh--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Windows%25E7%2594%25A8%25E3%2583%259E%25E3%2582%25A6%25E3%2582%25B9%25E3%2582%25AB%25E3%2583%25BC%25E3%2582%25BD%25E3%2583%25AB%2528.ani%2529%25E3%2582%2592XCursor%25E3%2581%25AB%25E5%25A4%2589%25E6%258F%259B%25E3%2581%2599%25E3%2582%258B%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:r_ca%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJmYTkyYzczNmMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>r_ca</dc:creator></item><item><title><![CDATA[なかなか覚えられない用語まとめ]]></title><description><![CDATA[よく聞くけど毎回意味を忘れちゃう用語を、辞書のように使うためにまとめます！こちらも随時追加できたらいいな…。
+ひとまずジャンル問わずどんどん追加していって、分類分けできそうになったら、記事を分けていこうと考えています。
+
+ エンジニアリング系
+
+
+
+
+用語
+簡単な説明
+
+
+
+
+DDD（ドメイン駆動設計）
+ビジネスのルール（ドメイン）を中心に設計する手法。複雑なシステムを整理しやすくする。
+
+
+クリーンアーキテクチャ
+ソフトウェアの構造を整理し、依存関係を最適化する設計手法。コードを長期間メンテしやすくする。
+
+
+パフォーマンスチューニング
+システムの動作速度や効率を改善する作業。DB最適...]]></description><link>https://zenn.dev/eliri/articles/04e3af92c3af8c</link><guid isPermaLink="true">https://zenn.dev/eliri/articles/04e3af92c3af8c</guid><pubDate>Sun, 02 Mar 2025 06:53:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Vgv_EnxH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%25AA%25E3%2581%258B%25E3%2581%25AA%25E3%2581%258B%25E8%25A6%259A%25E3%2581%2588%25E3%2582%2589%25E3%2582%258C%25E3%2581%25AA%25E3%2581%2584%25E7%2594%25A8%25E8%25AA%259E%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Eli%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JiYWJlMzMzYzMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Eli</dc:creator></item><item><title><![CDATA[Amazon Linux 2023 に PHP モジュール をインストール]]></title><description><![CDATA[Amazon Linux 2023 で PHP の拡張機能（モジュール）を追加し、設定情報を確認する方法を解説します。本記事では、以下の 2 つの方法を比較しながら、実際の手順を説明します。
+✅ dnf を使った公式モジュールのインストール
+✅ pecl を使った拡張モジュールのインストール
+
+ 📦 レポジトリ（Repository）とは？
+レポジトリとは、ソフトウェアパッケージを管理・提供する場所のことです。Linux のパッケージ管理システム（yum や dnf）では、レポジトリを参照して必要なパッケージをダウンロード・インストールします。
+Amazon Linux 2023 の公式...]]></description><link>https://zenn.dev/azunyan/articles/46725870a13d07</link><guid isPermaLink="true">https://zenn.dev/azunyan/articles/46725870a13d07</guid><pubDate>Sun, 02 Mar 2025 05:30:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qv47WHmm--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Amazon%2520Linux%25202023%2520%25E3%2581%25AB%2520PHP%2520%25E3%2583%25A2%25E3%2582%25B8%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%25AB%2520%25E3%2582%2592%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2588%25E3%2581%25BF%25E3%2582%258A%25E3%2580%259C%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNlODc0NGRhYmUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>えみり〜</dc:creator></item><item><title><![CDATA[Ghostty - Terminal emulator - My configuration]]></title><description><![CDATA[
+ 概要
+2024 年 12 月 26 日にターミナルエミュレータの Ghostty が公開されました。このターミナルは、HashiCorp の創設者である Mitchell Hashimoto 氏が開発した OSS のターミナルとして注目が集まっています。
+彼の経緯や開発経緯などは、ThePrimeagen と TJ DeVries との対談動画で詳しく語られていますので、興味がある方は、視聴をお勧めします。
+!
+2025 年 2 月現在、Windows には対応していませんが、今後のアップデートで対応予定です。
+
+!
+以降の説明は、macOS の操作方法がメインになります。Linux...]]></description><link>https://zenn.dev/massa/articles/ghostty-usage</link><guid isPermaLink="true">https://zenn.dev/massa/articles/ghostty-usage</guid><pubDate>Sat, 01 Mar 2025 23:42:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--N2di2nVW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ghostty%2520-%2520Terminal%2520emulator%2520-%2520My%2520configuration%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Masato%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJhYTViYzBlZjcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Masato</dc:creator></item></channel></rss>

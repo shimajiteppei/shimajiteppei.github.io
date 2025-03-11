@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「JavaScript」のフィード]]></title><description><![CDATA[Zennのトピック「JavaScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/javascript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/64acd76870.png</url><title>Zennの「JavaScript」のフィード</title><link>https://zenn.dev/topics/javascript</link></image><generator>zenn.dev</generator><lastBuildDate>Tue, 11 Mar 2025 07:34:33 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/javascript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Goで学ぶWebSocket：[JWT認証 & 負荷分散設計]]]></title><description><![CDATA[
+ はじめに
+前回の記事では、WebSocketを活用した通知システム、Redisを使ったWebSocketサーバーの構築方法を解説しました。
+今回はさらに発展させて、JWT認証を組み込んだWebSocket実装と 負荷分散を考慮した設計について解説します。
+対象読者
+
+WebSocketに認証を組み込みたい方
+負荷の高いWebSocketアプリを効率的にスケールアウトしたい方
+セキュアなリアルタイム通信を実現したい方
+
+目次
+
+JWT認証を組み込んだセキュアなWebSocketの実装
+
+JWT認証とは？
+GoでのJWT認証の実装
+WebSocketへのJWT認証の適用
+
+
+負荷分散を考...]]></description><link>https://zenn.dev/urabexon/articles/13f981020eefc5</link><guid isPermaLink="true">https://zenn.dev/urabexon/articles/13f981020eefc5</guid><pubDate>Tue, 11 Mar 2025 05:06:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--YTly41Nx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Go%25E3%2581%25A7%25E5%25AD%25A6%25E3%2581%25B6WebSocket%25EF%25BC%259A%255BJWT%25E8%25AA%258D%25E8%25A8%25BC%2520%2526%2520%25E8%25B2%25A0%25E8%258D%25B7%25E5%2588%2586%25E6%2595%25A3%25E8%25A8%25AD%25E8%25A8%2588%255D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Hiroki%2520Urabe%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI4NmEwZTdkZjMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Hiroki Urabe</dc:creator></item><item><title><![CDATA[React19にアップグレードに挑戦してみた話]]></title><description><![CDATA[こんにちは、WED 株式会社でエンジニアをしている篠崎（@sinora_）です。
+WED が開発・運営している、レシート買取アプリ「ONE」はアプリのみで展開していますが、
+その「ONE」の運用で使用する管理画面は Next.js を採用しております。
+最近管理画面の開発にアサインされることになり、フロントエンド側を書く機会がとても増えまして、自分の学習がてら 2024 年 12 月にリリースされた React19 のアップグレードにチャレンジしてみようと思い、
+その軌跡を備忘録としてここに記述していこうと思います。
+
+ なぜアップグレードしようと思ったのか？
+forwardRef を使...]]></description><link>https://zenn.dev/wed_engineering/articles/20250303-react19-upgrade</link><guid isPermaLink="true">https://zenn.dev/wed_engineering/articles/20250303-react19-upgrade</guid><pubDate>Tue, 11 Mar 2025 01:14:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--CCi4hs-A--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React19%25E3%2581%25AB%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%25E3%2582%25B0%25E3%2583%25AC%25E3%2583%25BC%25E3%2583%2589%25E3%2581%25AB%25E6%258C%2591%25E6%2588%25A6%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:sinora%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzIxYjlmMzI3YWMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:WED%2520Engineering%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc3MWM1NjVkM2MuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sinora</dc:creator></item><item><title><![CDATA[「エラー発生時の状況を楽に正確に再現」Sentry Session Replayを活用する]]></title><description><![CDATA[
+ 導入の背景
+突然ですがフロントエンドのエラー発生時、「状況再現」によく困りませんか？
+以前までは
+「Sentryにエラーが来た。エラーの内容はわかるが、これどういう経緯で発生したんだ、、？？」
+という調査に時間がかかることが多く、なんとかしたいなと考えていました。
+このような「エラー発生時の状況再現」に非常に便利なのがSentry Session Replay（以後Session Replay）です。
+Session Replay導入の結果「状況再現」が精度良く、かつ迅速に行えるようになり、エラーの修正が非常に楽になりました。
+ただ導入前は「具体的にどういうことができるんだ？」という...]]></description><link>https://zenn.dev/kataokatsuki/articles/6274a55a2beda2</link><guid isPermaLink="true">https://zenn.dev/kataokatsuki/articles/6274a55a2beda2</guid><pubDate>Tue, 11 Mar 2025 01:10:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xdcoBQzq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%258C%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E7%2599%25BA%25E7%2594%259F%25E6%2599%2582%25E3%2581%25AE%25E7%258A%25B6%25E6%25B3%2581%25E3%2582%2592%25E6%25A5%25BD%25E3%2581%25AB%25E6%25AD%25A3%25E7%25A2%25BA%25E3%2581%25AB%25E5%2586%258D%25E7%258F%25BE%25E3%2580%258DSentry%2520Session%2520Replay%25E3%2582%2592%25E6%25B4%25BB%25E7%2594%25A8%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kataoka%2520Katsuki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2plaEl4V2xYM3ctckJQMDNMUDVna0s2NDN3MVJBZTl6TW1LcWxnPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kataoka Katsuki</dc:creator></item><item><title><![CDATA[Promiseについて調べてみた]]></title><description><![CDATA[前回、chatGPTを使ってコールバック関数について調べてみました。
+https://zenn.dev/masato24524/articles/1e7fe29f12aa33
+今回はasync/awaitについて調べてみます、、、と思ったのですが
+その前にPromiseのきちんとした理解が必要そうです。
+Promiseは非同期処理の際の結果に応じて処理を指定できるというものでした。
+
+
+（質問）そもそもJavaScriptのPromiseってなに？
+
+
+ Promiseとは？
+Promise は、非同期処理の結果を表すオブジェクト です。
+非同期処理が 成功するか失敗するか を表し、それ...]]></description><link>https://zenn.dev/masato24524/articles/4d248db052a364</link><guid isPermaLink="true">https://zenn.dev/masato24524/articles/4d248db052a364</guid><pubDate>Tue, 11 Mar 2025 00:34:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0DoMHskE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Promise%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E8%25AA%25BF%25E3%2581%25B9%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Masato%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NhYzUxMTE3YTMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Masato</dc:creator></item><item><title><![CDATA[denoland/denoをvscodeで動かすための設定]]></title><description><![CDATA[cargoとかそこら辺が入っているのは前提として。
+denoには https://docs.deno.com/runtime/contributing/#deno という親切なガイドがあるんですが、なんかこれ通りだとちょいちょいエラー出たりするので自分の手元でゴニョゴニョしてた話を書く。
+とりあえず、以下のように.vscode/settings.jsonをか書けば良さそう。
+{
+    "deno.enable": true,
+    "deno.path": "your-pc-path/target/debug/deno",
+    "deno.importMap": "./tools...]]></description><link>https://zenn.dev/yuto76/articles/cfd0b28be422da</link><guid isPermaLink="true">https://zenn.dev/yuto76/articles/cfd0b28be422da</guid><pubDate>Mon, 10 Mar 2025 23:52:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--UrIzXDH4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:denoland%252Fdeno%25E3%2582%2592vscode%25E3%2581%25A7%25E5%258B%2595%25E3%2581%258B%25E3%2581%2599%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%25E8%25A8%25AD%25E5%25AE%259A%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%25A6%25E3%2582%25A6%25E3%2583%2588%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q4NzFiYTNmNzguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ユウト</dc:creator></item><item><title><![CDATA[GoでWebSocketを使用した通知システムを作成する：[Redis連携]]]></title><description><![CDATA[
+ はじめに
+前回の記事では、GoでWebSocketを使った基本的なリアルタイム通信を実装しました。
+今回は、さらに応用的なWebSocketの活用方法として、通知システムの作成およびRedisを使ったスケーラブルなWebSocketサーバーの構築を解説します。
+対象読者
+
+WebSocketを活用して通知システムを実装したい方
+Redisを使ってWebSocketサーバーをスケールアウトしたい方
+複数のWebSocketクライアントを効率的に管理したい方
+
+目次
+
+WebSocketを活用した通知システムの作り方
+
+通知システムの仕組み
+WebSocketサーバーの実装
+クライアント...]]></description><link>https://zenn.dev/urabexon/articles/0e822d7c6cb571</link><guid isPermaLink="true">https://zenn.dev/urabexon/articles/0e822d7c6cb571</guid><pubDate>Mon, 10 Mar 2025 11:22:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--UZtZrFs4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Go%25E3%2581%25A7WebSocket%25E3%2582%2592%25E4%25BD%25BF%25E7%2594%25A8%25E3%2581%2597%25E3%2581%259F%25E9%2580%259A%25E7%259F%25A5%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%25E3%2582%2592%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2599%25E3%2582%258B%25EF%25BC%259A%255BRedis%25E9%2580%25A3%25E6%2590%25BA%255D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Hiroki%2520Urabe%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI4NmEwZTdkZjMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Hiroki Urabe</dc:creator></item><item><title><![CDATA[【超初心者向け】Hello Worldを書いてみよう！（Python, JavaScript, Java）]]></title><description><![CDATA[プログラミングを始める時、最初に書くのが「Hello World」プログラムです。これは画面に「Hello World」という文字を表示する、最もシンプルなプログラムです。この記事では、3つの主要なプログラミング言語でHello Worldを書く方法を解説します。
+
+ なぜHello Worldから始めるの？
+Hello Worldプログラムには、以下のような意義があります：
+
+
+最小限のコードで動作確認ができる
+
+開発環境が正しく設定されているか確認できる
+プログラムの基本的な構造を理解できる
+
+
+
+プログラミングの第一歩として最適
+
+成功体験を得やすい
+言語の基本的な文法に触れられる...]]></description><link>https://zenn.dev/homatsu_tech/articles/40e7bfdfa62eae</link><guid isPermaLink="true">https://zenn.dev/homatsu_tech/articles/40e7bfdfa62eae</guid><pubDate>Mon, 10 Mar 2025 11:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--l9vQ6VSI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E8%25B6%2585%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E5%2590%2591%25E3%2581%2591%25E3%2580%2591Hello%2520World%25E3%2582%2592%25E6%259B%25B8%25E3%2581%2584%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%2588%25E3%2581%2586%25EF%25BC%2581%25EF%25BC%2588Python%252C%2520JavaScript%252C%2520Java%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25AE%259D%25E6%259D%25BE%2540%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2YzZWQ1ZGYyMjYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>宝松@システムエンジニア</dc:creator></item><item><title><![CDATA[JavaScript レキシカルスコープとは？]]></title><description><![CDATA[
+ クロージャの一種
+https://developer.mozilla.org/ja/docs/Web/JavaScript/Guide/Closures
+
+ 公式の解説によると
+クロージャ
+クロージャは、組み合わされた（囲まれた）関数と、その周囲の状態（レキシカル環境）への参照の組み合わせです。言い換えれば、クロージャは関数にその外側のスコープにアクセスする機能を提供します。JavaScript では、クロージャは関数が作成されるたびに、関数作成時点で作成されます。
+レキシカルスコープ
+次のような関数を考えてみてください。
+function init() {
+  var name =...]]></description><link>https://zenn.dev/forge422/articles/f0ff40c2de7660</link><guid isPermaLink="true">https://zenn.dev/forge422/articles/f0ff40c2de7660</guid><pubDate>Mon, 10 Mar 2025 02:28:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8462MJ6x--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%2520%25E3%2583%25AC%25E3%2582%25AD%25E3%2582%25B7%25E3%2582%25AB%25E3%2583%25AB%25E3%2582%25B9%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2597%25E3%2581%25A8%25E3%2581%25AF%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Forge%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRhZmFlYjIyYzEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Forge</dc:creator></item><item><title><![CDATA[なぜReactを使うかを理解してみる(#1 JavaScript編)]]></title><description><![CDATA[
+ はじめに
+はじめまして、私は今年の1月からReactを触り始めた初学者です。
+日々キャッチアップに苦闘する中で、
+
+Reactを習得する上で、学ぶべきことが多すぎる…
+なんとなく便利なことはわかったが、それぞれの技術がなぜ使われているのか、全然わかっていない…
+
+といった想いがふつふつと湧いてきてしまいました。
+そんな私のような「悩めるReactぴよぴよエンジニア」に向け、一緒に頑張っていきましょうといった想いから、本記事を書きました。
+本記事では、初学者を対象としているため、なるべく専門用語は使わず、認知負荷がかからないように心がけております。
+!
+この記事の対象者
+
+React入...]]></description><link>https://zenn.dev/baleenstudio/articles/9c946a2116898a</link><guid isPermaLink="true">https://zenn.dev/baleenstudio/articles/9c946a2116898a</guid><pubDate>Sun, 09 Mar 2025 22:35:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--p4CjjAPq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%25AA%25E3%2581%259CReact%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%25E3%2581%258B%25E3%2582%2592%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2528%25231%2520JavaScript%25E7%25B7%25A8%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2583%258F%25E3%2583%2588%25E3%2581%25AF%25E9%25A3%259B%25E3%2581%25B0%25E3%2581%25AA%25E3%2581%2584%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc2OWZhMGRkNDAuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BEBALEEN%2520STUDIO%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FiODkxOGZkYzIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ハトは飛ばない</dc:creator></item><item><title><![CDATA[GoでWebSocketを実装する[リアルタイム通信の実装方法について]]]></title><description><![CDATA[
+ はじめに
+WebSocketは、リアルタイム通信を実現するための技術です。
+通常のHTTP通信では、クライアントがリクエストを送るたびにサーバーが応答する方式ですが、WebSocketはサーバーとクライアントの間で常に接続を維持し、双方向通信が可能です。
+Goには、標準のnet/httpパッケージではWebSocketをサポートしていませんが、サードパーティのライブラリ「github.com/gorilla/websocket」を使うことで、簡単にWebSocketを実装できます。
+今回は、GoでWebSocketサーバーを実装する方法を、基本から実践まで初心者向けにわかりやすく解説...]]></description><link>https://zenn.dev/urabexon/articles/c29e8caa73fe3d</link><guid isPermaLink="true">https://zenn.dev/urabexon/articles/c29e8caa73fe3d</guid><pubDate>Sun, 09 Mar 2025 09:39:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1LKe26-f--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Go%25E3%2581%25A7WebSocket%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2599%25E3%2582%258B%255B%25E3%2583%25AA%25E3%2582%25A2%25E3%2583%25AB%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25A0%25E9%2580%259A%25E4%25BF%25A1%25E3%2581%25AE%25E5%25AE%259F%25E8%25A3%2585%25E6%2596%25B9%25E6%25B3%2595%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%255D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Hiroki%2520Urabe%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI4NmEwZTdkZjMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Hiroki Urabe</dc:creator></item><item><title><![CDATA[JavaScriptで学ぶ条件分岐と繰り返し処理：アコーディオンとタブパネルの実装を通じて]]></title><description><![CDATA[Webサイトを作っていると、「クリックしたら開閉する」「タブを切り替える」といった動きをつけたくなることがありますよね。このような動きを実現するためには、JavaScriptの条件分岐と繰り返し処理の理解が欠かせません。
+この記事では、実際によく使われるUIコンポーネントの実装を通じて、JavaScriptの基本的な制御構文を学んでいきましょう。
+
+ 目次
+
+条件分岐とは
+繰り返し処理とは
+実装例1：アコーディオン
+実装例2：タブパネル
+まとめ
+
+
+ 1. 条件分岐とは
+条件分岐は、「もし〜なら、こうする」というプログラムの流れを作るための制御構文です。例えば、「もし年齢が20歳以上なら...]]></description><link>https://zenn.dev/ori1026/articles/2b8559dd00a3fd</link><guid isPermaLink="true">https://zenn.dev/ori1026/articles/2b8559dd00a3fd</guid><pubDate>Sun, 09 Mar 2025 04:55:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wkU2N9N6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25E3%2581%25A7%25E5%25AD%25A6%25E3%2581%25B6%25E6%259D%25A1%25E4%25BB%25B6%25E5%2588%2586%25E5%25B2%2590%25E3%2581%25A8%25E7%25B9%25B0%25E3%2582%258A%25E8%25BF%2594%25E3%2581%2597%25E5%2587%25A6%25E7%2590%2586%25EF%25BC%259A%25E3%2582%25A2%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2587%25E3%2582%25A3%25E3%2582%25AA%25E3%2583%25B3%25E3%2581%25A8%25E3%2582%25BF%25E3%2583%2596%25E3%2583%2591%25E3%2583%258D%25E3%2583%25AB%25E3%2581%25AE%25E5%25AE%259F%25E8%25A3%2585%25E3%2582%2592%25E9%2580%259A%25E3%2581%2598%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Maple%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFhNDM4OTljNDcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Maple</dc:creator></item><item><title><![CDATA[anime.jsでシークバーに連動する数値アニメーションを実装した]]></title><description><![CDATA[
+ 前書き
+
+ 作りたいものの説明
+私は今、生産シミュレーションアプリを作成している。生産設備を配置しそれぞれを線で結ぶことで、生産ラインを形成する。ラインの中を人が行き来して、製品をひとつずつ作り上げる様をシミュレーションする。
+
+ 解決したかったこと
+シミュレーションの機能として再生や停止機能を設けた。シークバーを設けて任意の位置から再生できるようにした。このほかにも現在の生産数を表示させるようにしたい。シークバーに連動して、その値が動くようにする。
+そのやり方がわかったので、ここで説明する。
+
+ anime.jsとは何か
+軽量なJSアニメーションライブラリ。CSSやDOM、JSオブ...]]></description><link>https://zenn.dev/kyokucho1989/articles/46b16dc1cf02c4</link><guid isPermaLink="true">https://zenn.dev/kyokucho1989/articles/46b16dc1cf02c4</guid><pubDate>Sat, 08 Mar 2025 22:59:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vCZLZq68--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:anime.js%25E3%2581%25A7%25E3%2582%25B7%25E3%2583%25BC%25E3%2582%25AF%25E3%2583%2590%25E3%2583%25BC%25E3%2581%25AB%25E9%2580%25A3%25E5%258B%2595%25E3%2581%2599%25E3%2582%258B%25E6%2595%25B0%25E5%2580%25A4%25E3%2582%25A2%25E3%2583%258B%25E3%2583%25A1%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kyokucho1989%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lqbUw1MUdrQm9ESFJENkJvTE0zQm0zUGFQYThOb193ZmE1MnNqPXMyNTAtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kyokucho1989</dc:creator></item><item><title><![CDATA[Laravelでフォロー機能を実装する方法]]></title><description><![CDATA[Laravel でフォロー機能を API 経由で実装し、JavaScript でフォローボタンを制御する方法を解説します。
+
+ 実行環境
+PHP 8.3
+Laravel 11
+MySQL 8.0
+JavaScript (fetch API使用)
+上記を使用してフォロー機能を実装していきます。
+また、サイトはログインしなければ使用できない仕様になっています。
+
+ フォロー処理の流れ
+
+ページにアクセス時にフォロー状況をチェック
+
+フォローしていなければ「フォローボタン」を表示。
+フォローしていれば「フォロー解除ボタン」を表示。
+
+
+フォローボタンを押すと API を呼び出してフォロー
+フォ...]]></description><link>https://zenn.dev/imkei/articles/3287911aaf707d</link><guid isPermaLink="true">https://zenn.dev/imkei/articles/3287911aaf707d</guid><pubDate>Sat, 08 Mar 2025 18:01:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--I4vYvtFL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Laravel%25E3%2581%25A7%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25AD%25E3%2583%25BC%25E6%25A9%259F%25E8%2583%25BD%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:imkei%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M2Mzc4NTBjMzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>imkei</dc:creator></item><item><title><![CDATA[Reactでfalsyな値を表示制御する方法(0とNaNがカギ)]]></title><description><![CDATA[以下のようなコンポーネントで、「値をNaNにする」というボタンを押した場合に、
+どのような表示になるでしょうか？
+import { useState } from "react";
+
+export default function App() {
+  const [count, setCount] = useState&lt;number&gt;(0);
+
+  const handleClick = () =&gt; {
+    // 負の数の平方根なので、必ずNaNになる。
+    setCount(Math.sqrt(-1));
+  };
+
+  return (
+    &lt;di...]]></description><link>https://zenn.dev/ohimusdev46301/articles/26aadd90010ac1</link><guid isPermaLink="true">https://zenn.dev/ohimusdev46301/articles/26aadd90010ac1</guid><pubDate>Sat, 08 Mar 2025 09:31:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--33K5PF5V--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%25E3%2581%25A7falsy%25E3%2581%25AA%25E5%2580%25A4%25E3%2582%2592%25E8%25A1%25A8%25E7%25A4%25BA%25E5%2588%25B6%25E5%25BE%25A1%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%25280%25E3%2581%25A8NaN%25E3%2581%258C%25E3%2582%25AB%25E3%2582%25AE%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Wataru%2520Takiguchi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdkOTBhM2EyYTcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Wataru Takiguchi</dc:creator></item><item><title><![CDATA[jsのみchatbot 数字による分岐が可能に！！]]></title><description><![CDATA[http://kemii.sakura.ne.jp/chat_bot_test1/index.html
+↑お試し用
+downloadも可能。
+https://zenn.dev/kemii/articles/c8664ed58a37bd
+詳細はver1参照
+変更点。
+複数選択肢に対応。
+/n
+を使って改行可能に
+]]></description><link>https://zenn.dev/kemii/articles/24ee9f046b879a</link><guid isPermaLink="true">https://zenn.dev/kemii/articles/24ee9f046b879a</guid><pubDate>Sat, 08 Mar 2025 05:28:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--RfSQ6cjA--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:js%25E3%2581%25AE%25E3%2581%25BFchatbot%2520%25E6%2595%25B0%25E5%25AD%2597%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258B%25E5%2588%2586%25E5%25B2%2590%25E3%2581%258C%25E5%258F%25AF%25E8%2583%25BD%25E3%2581%25AB%25EF%25BC%2581%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kemii%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E5ZGYyMjM5ZmIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kemii</dc:creator></item><item><title><![CDATA[jsのみのchatbotを作りました。　全文　]]></title><description><![CDATA[質問内容に応じたbooleanが存在し、回答に応じて、booleanをtrue,flaseする。
+yes,noに応じて、質問内容を変化させられる。しなくてもいい。
+const questions = [
+    {
+        id: 'q0',
+        text: '新しいチャットを始めますか (yes/no)',
+        next: (answer) =&gt; answer ? 'q1' : evaluateAnswers()
+    },
+    {
+        id: 'q1',
+        text: 'それは鉄道ですか (yes/no)',
+  ...]]></description><link>https://zenn.dev/kemii/articles/c8664ed58a37bd</link><guid isPermaLink="true">https://zenn.dev/kemii/articles/c8664ed58a37bd</guid><pubDate>Sat, 08 Mar 2025 02:21:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--NHEJW5W8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:js%25E3%2581%25AE%25E3%2581%25BF%25E3%2581%25AEchatbot%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258A%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%25E3%2580%2582%25E3%2580%2580%25E5%2585%25A8%25E6%2596%2587%25E3%2580%2580%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kemii%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E5ZGYyMjM5ZmIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kemii</dc:creator></item><item><title><![CDATA[【初心者向け】プログラミングのエラーの種類と対処法]]></title><description><![CDATA[プログラミングを学び始めると必ず遭遇するのが「エラー」です。最初は英語のエラーメッセージを見ただけで心が折れそうになるかもしれませんが、実はエラーは私たちの良き先生です。この記事では、プログラミングでよく遭遇するエラーの種類と、その対処法について具体例を交えて解説します。
+
+ エラーとは何か？
+エラーとは、プログラムが正常に動作しない状態を指します。大きく分けて以下の3つのカテゴリーがあります：
+
+
+構文エラー（Syntax Error）：文法の間違い
+
+実行時エラー（Runtime Error）：実行中に発生するエラー
+
+論理エラー（Logical Error）：プログラムは動くが、期...]]></description><link>https://zenn.dev/homatsu_tech/articles/8a5ca9a69cc856</link><guid isPermaLink="true">https://zenn.dev/homatsu_tech/articles/8a5ca9a69cc856</guid><pubDate>Sat, 08 Mar 2025 00:17:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vftQ3uvD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E5%2590%2591%25E3%2581%2591%25E3%2580%2591%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%259F%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%25AE%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E3%2581%25AE%25E7%25A8%25AE%25E9%25A1%259E%25E3%2581%25A8%25E5%25AF%25BE%25E5%2587%25A6%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25AE%259D%25E6%259D%25BE%2540%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2YzZWQ1ZGYyMjYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>宝松@システムエンジニア</dc:creator></item><item><title><![CDATA[映画とドラマ紹介のWebサイトを作ってみた]]></title><description><![CDATA[
+ HTML
+
+ 映画ページ
+
+
+ ソースコード
+&lt;!DOCTYPE html&gt;
+&lt;html lang="ja"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;おすすめ映画&lt;/title&gt;
+    &lt;link rel="stylesheet" href="../css/style.css"&gt;
+&lt;...]]></description><link>https://zenn.dev/louloutech/articles/b4b336d6d064ec</link><guid isPermaLink="true">https://zenn.dev/louloutech/articles/b4b336d6d064ec</guid><pubDate>Fri, 07 Mar 2025 11:50:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lyb4rh17--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%2598%25A0%25E7%2594%25BB%25E3%2581%25A8%25E3%2583%2589%25E3%2583%25A9%25E3%2583%259E%25E7%25B4%25B9%25E4%25BB%258B%25E3%2581%25AEWeb%25E3%2582%25B5%25E3%2582%25A4%25E3%2583%2588%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:louloutech%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YktVMDI3VzFrR2p0ZzVZcFoxVzRtUHVRcHlrM0hSWkwwS3NWSWo9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>louloutech</dc:creator></item><item><title><![CDATA[ぷよぷよプログラミングをGodotで実装 03 コード理解（player.js）]]></title><description><![CDATA[
+ はじめに
+前回に引き続きぷよぷよプログラミングを利用して、Godotでパズルゲームの作り方の基礎を一緒に学んでいこうと思います。YouTubeでもこの記事の内容に沿ってゲームを作っているので、動画を見ながら取り組んでみてください。
+https://youtu.be/ZpPS9VSz09A
+前回の記事はこちら
+https://zenn.dev/yurinchi/articles/d94e36dbe479cd
+
+ 利用教材
+
+ぷよぷよプログラミング
+
+!
+当該記事の内容は、ぷよぷよプログラミングの利用条件を理解したうえで学習にご利用ください。
+
+
+ この記事で学ぶこと
+godotを触る前...]]></description><link>https://zenn.dev/yurinchi/articles/6b2ba320e47849</link><guid isPermaLink="true">https://zenn.dev/yurinchi/articles/6b2ba320e47849</guid><pubDate>Fri, 07 Mar 2025 10:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--iqzDqrOS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%25B7%25E3%2582%2588%25E3%2581%25B7%25E3%2582%2588%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%259F%25E3%2583%25B3%25E3%2582%25B0%25E3%2582%2592Godot%25E3%2581%25A7%25E5%25AE%259F%25E8%25A3%2585%252003%2520%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E7%2590%2586%25E8%25A7%25A3%25EF%25BC%2588player.js%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2586%25E3%2583%25BC%25E3%2582%258A%25E3%2582%2593%25E3%2581%25A1%25E3%2581%2583%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTG5mTmtnd0NObm1POTVBUlRkMWRMcU9vM2JiMWotcEViRVdHMlBxLS04UktHWnVTOD1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ゆーりんちぃ</dc:creator></item><item><title><![CDATA[[Javascript] Lodashによる空判定の返り値まとめ]]></title><description><![CDATA[
+ 背景
+Lodashが使われている案件の開発中に以下のような場面で本記事に記載する内容を調べる機会がありました。
+
+使用されているLodashの関数の返り値がどうなるのか分からない
+空判定を行いたいがどの関数を使用することが適切なのか分からない
+
+空判定と言ってもnull, undefined, ""(空文字), 0など、状況によって何を「空」として扱いたいか変わるかと思います。
+今回はLodashで用意されている空判定に使われるいくつかの関数の返り値が引数によってどうなるのかを表にまとめておきます。
+
+ Lodashとは？
+Javascriptで扱える便利な関数をまとめて提供している...]]></description><link>https://zenn.dev/1stscratch/articles/b1b2024359e57b</link><guid isPermaLink="true">https://zenn.dev/1stscratch/articles/b1b2024359e57b</guid><pubDate>Fri, 07 Mar 2025 08:11:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2IPkCdD5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BJavascript%255D%2520Lodash%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258B%25E7%25A9%25BA%25E5%2588%25A4%25E5%25AE%259A%25E3%2581%25AE%25E8%25BF%2594%25E3%2582%258A%25E5%2580%25A4%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:g.sato%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y4MDQ1NTg2ODcuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2595%25E3%2582%25A1%25E3%2583%25BC%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BB%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25A9%25E3%2583%2583%25E3%2583%2581Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTEFlNGNBZWdLN0lUeEJ5d3ZidG5PN3ZwSUlPOFhCM21aeElSZHQxNWt1dFZlUTVnPXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>g.sato</dc:creator></item></channel></rss>
