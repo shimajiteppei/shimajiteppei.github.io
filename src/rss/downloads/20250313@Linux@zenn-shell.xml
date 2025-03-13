@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「shell」のフィード]]></title><description><![CDATA[Zennのトピック「shell」のRSSフィードです]]></description><link>https://zenn.dev/topics/shell</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/c8d33e6510.jpeg</url><title>Zennの「shell」のフィード</title><link>https://zenn.dev/topics/shell</link></image><generator>zenn.dev</generator><lastBuildDate>Thu, 13 Mar 2025 12:04:18 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/shell/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[ADS-Bレシーバー用のシェルスクリプトをつくってみた]]></title><description><![CDATA[
+ 学生団体Keiseiで使用しているADS-Bレシーバー設定用のシェルスクリプトを公開しました！
+
+ プロジェクトの紹介
+このプロジェクトは、Raspberry Piを活用して、航空機の位置情報を受信し、地図上に表示するシステムです。無線を受信し、それを解析することで、リアルタイムで航空機の位置や高度、速度などの情報を追跡できます。
+Flightradar24などのサービスは個人のレシーバーで得たデータを送信することで実現しています！
+筆者が所属する学生団体Keiseiではレシーバーを全国に設置し、自分たちのADS-Bネットワークを作る取り組みを行っています。その過程で設定用スクリプト...]]></description><link>https://zenn.dev/ngstk/articles/f01ef07ef97e47</link><guid isPermaLink="true">https://zenn.dev/ngstk/articles/f01ef07ef97e47</guid><pubDate>Thu, 06 Mar 2025 23:57:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ntnYdqAy--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ADS-B%25E3%2583%25AC%25E3%2582%25B7%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E7%2594%25A8%25E3%2581%25AE%25E3%2582%25B7%25E3%2582%25A7%25E3%2583%25AB%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2583%2588%25E3%2582%2592%25E3%2581%25A4%25E3%2581%258F%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:negishi_tako%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSTMtVk0wSnRuZkN4aWlFQlZRam05ZVRjdGt1S0doODYtX0RxYkFwbGg2d0ozMG5NWTI9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>negishi_tako</dc:creator></item><item><title><![CDATA[リモート接続の要：SSHの仕組みと重要性を完全解説]]></title><description><![CDATA[リモートサーバーへの接続手段として広く使われているSSH。この技術は現代のITインフラ管理やクラウドコンピューティングにおいて欠かせない存在です。この記事では、SSHの基本概念から内部の暗号化の仕組み、実用的な活用法まで詳しく解説します。
+
+ SSHとは？安全なリモート操作を実現するプロトコル
+SSH（Secure Shell）は、その名前が示す通り「安全な（Secure）シェル（Shell）」です。シェルとは、コンピュータにコマンドを入力して操作するための環境のこと。SSHは遠隔地にあるサーバーに安全に接続し、まるでその場にいるかのようにコマンドを実行できる通信プロトコルです。
+ssh...]]></description><link>https://zenn.dev/soze/articles/b4df318885d400</link><guid isPermaLink="true">https://zenn.dev/soze/articles/b4df318885d400</guid><pubDate>Sat, 01 Mar 2025 06:47:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Zf_ShrBT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%25AA%25E3%2583%25A2%25E3%2583%25BC%25E3%2583%2588%25E6%258E%25A5%25E7%25B6%259A%25E3%2581%25AE%25E8%25A6%2581%25EF%25BC%259ASSH%25E3%2581%25AE%25E4%25BB%2595%25E7%25B5%2584%25E3%2581%25BF%25E3%2581%25A8%25E9%2587%258D%25E8%25A6%2581%25E6%2580%25A7%25E3%2582%2592%25E5%25AE%258C%25E5%2585%25A8%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:keyser%2520soze%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FjNGQ1NDMzNWIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>keyser soze</dc:creator></item><item><title><![CDATA[【シェルスクリプト】`$ echo '-eq'`みたいにオプションっぽい文字列を表示しようとすると、無が表示される]]></title><description><![CDATA[単純だけど、そういうことです。
+$ echo '-eq'
+（無）
+おそらくechoコマンドの-eqオプションを実行しようとしているんだと思う。
+おまえ-eqオプションなんてないだろうが！！！
+解決策はprintfです。
+printfしか勝たん。
+$ printf '%s\n' '-eq'
+-eq
+ちなみに以下でもムダムダムダァです。
+全部吸収するじゃん…そりゃそうなんだけど。
+$ x=$(printf '%s\n' '-eq')
+$ echo "$x"
+（無）
+こいつなんでも食いやがる…。
+なんも信じられん。
+ちなみになんでこんな異常行動をしようと思ったかというと、Bash/Zsh向けの...]]></description><link>https://zenn.dev/aiya000/articles/7a3dab870d5b30</link><guid isPermaLink="true">https://zenn.dev/aiya000/articles/7a3dab870d5b30</guid><pubDate>Wed, 26 Feb 2025 17:32:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BCVBHOlp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E3%2582%25B7%25E3%2582%25A7%25E3%2583%25AB%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2583%2588%25E3%2580%2591%2560%2524%2520echo%2520%2527-eq%2527%2560%25E3%2581%25BF%25E3%2581%259F%25E3%2581%2584%25E3%2581%25AB%25E3%2582%25AA%25E3%2583%2597%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2581%25A3%25E3%2581%25BD%25E3%2581%2584%25E6%2596%2587%25E5%25AD%2597%25E5%2588%2597%25E3%2582%2592%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2597%25E3%2582%2588%25E3%2581%2586%25E3%2581%25A8%25E3%2581%2599%25E3%2582%258B%25E3%2581%25A8%25E3%2580%2581%25E7%2584%25A1%25E3%2581%258C%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2595%25E3%2582%258C%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2582%25E3%2581%2584%25E3%2582%2584%2520-%2520aiya000%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pZVUM0QXdxcVdtMVZmVWtiQXFzdE5ra1BFZU1FOUN0NFY1UzdiPXMyNTAtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>あいや - aiya000</dc:creator></item><item><title><![CDATA[【初学者向け】予算アラートを自動設定するシェルスクリプトを作ってみた]]></title><description><![CDATA[
+ はじめに
+クラウドエース第三開発部に所属している柴田です。この記事では「 Google Cloud の予算アラートを自動設定するシェルスクリプト」の作成手順について紹介します。ほぼ IT 未経験で新卒入社した私でも Google Cloud 公式ドキュメントを活用することで簡単に作成できたので、初学者の方にも分かりやすいように解説していけたらと思います。
+
+ 対象読者とゴール
+
+ 対象読者
+
+Google Cloud 初学者（Google Cloud でプロジェクトを作成できるレベルを想定）
+シェルスクリプト初学者
+Google Cloud 予算アラートを自動設定したい方
+
+
+ ゴー...]]></description><link>https://zenn.dev/cloud_ace/articles/budget-alert</link><guid isPermaLink="true">https://zenn.dev/cloud_ace/articles/budget-alert</guid><pubDate>Wed, 26 Feb 2025 02:37:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--TEHH7aNw--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%2588%259D%25E5%25AD%25A6%25E8%2580%2585%25E5%2590%2591%25E3%2581%2591%25E3%2580%2591%25E4%25BA%2588%25E7%25AE%2597%25E3%2582%25A2%25E3%2583%25A9%25E3%2583%25BC%25E3%2583%2588%25E3%2582%2592%25E8%2587%25AA%25E5%258B%2595%25E8%25A8%25AD%25E5%25AE%259A%25E3%2581%2599%25E3%2582%258B%25E3%2582%25B7%25E3%2582%25A7%25E3%2583%25AB%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2583%2588%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25A6%25E3%2583%2589%25E3%2582%25A8%25E3%2583%25BC%25E3%2582%25B9%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE2OGMwYmM4MTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>クラウドエース株式会社</dc:creator></item><item><title><![CDATA[TIL: UNIXプログラミング環境 第2章 (2)]]></title><description><![CDATA[
+ UNIXプログラミング環境 第2章 2.4 ~ 2.7
+内容はToday I Learnedということで、学びを記す記事です。
+　詳しいわけではないので悪しからず。
+書籍はこちら
+UNIXプログラミング環境
+
+ 2.4 ファイルの使用許可
+全てのファイルは一群の使用許可を持っており、誰が何をして良いか決めている。
+ただし、全てのUNIXシステムには、スーパーユーザと呼ばれる特別なユーザがいて、システム上の任意のファイルを読んだり、修正したりできる。rootと呼ばれることが多い。
+rootのパスワードを知っていれば、suコマンド(スーパーユーザコマンド)で誰でもスーパーユーザになれ、ど...]]></description><link>https://zenn.dev/rgrey/articles/f0f8c4487a340f</link><guid isPermaLink="true">https://zenn.dev/rgrey/articles/f0f8c4487a340f</guid><pubDate>Mon, 24 Feb 2025 15:31:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1eeZCtXG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TIL%253A%2520UNIX%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%259F%25E3%2583%25B3%25E3%2582%25B0%25E7%2592%25B0%25E5%25A2%2583%2520%25E7%25AC%25AC2%25E7%25AB%25A0%2520%25282%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E7%25AB%25AF%25E3%2581%258F%25E3%2582%258C%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2UxYTQxODM3ODAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>端くれエンジニア</dc:creator></item><item><title><![CDATA[TIL: UNIXプログラミング環境 第2章]]></title><description><![CDATA[
+ UNIXプログラミング環境 第2章
+今回から3節ごとを目処に記事にします。
+内容はToday I Learnedということで、学びを記す記事です。
+　詳しいわけではないので悪しからず。
+書籍はこちら
+UNIXプログラミング環境
+
+ ファイルシステム
+
+ 2.1 ファイルの基礎
+
+ファイルとはバイトの集合。
+ファイルはなんの制約も受けず、その内容に意味を持たされることはない
+プログラムが解釈して初めて意味を持つ
+
+これは周辺機器にも当てはまり、磁気テープからメール、パイプのような流れるデータもバイトの集合でしかない。
+ファイルをいじるのが最も勉強になるのことで、プロンプトの操作に入る。...]]></description><link>https://zenn.dev/rgrey/articles/1537c0c4b1d637</link><guid isPermaLink="true">https://zenn.dev/rgrey/articles/1537c0c4b1d637</guid><pubDate>Sat, 22 Feb 2025 10:12:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xCdDUt_5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TIL%253A%2520UNIX%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%259F%25E3%2583%25B3%25E3%2582%25B0%25E7%2592%25B0%25E5%25A2%2583%2520%25E7%25AC%25AC2%25E7%25AB%25A0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E7%25AB%25AF%25E3%2581%258F%25E3%2582%258C%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2UxYTQxODM3ODAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>端くれエンジニア</dc:creator></item><item><title><![CDATA[VSCodeのタスクでコマンドを簡単に実行する。]]></title><description><![CDATA[
+ はじめに
+今回はVSCodeでコマンド入力を楽に行う技を紹介します。
+コマンドでスクリプトを動かすのは便利ですが、複数のコマンドを実行しないといけないとコマンドメモを別途控えておかないといけなかったりしますよね。
+また、どのコマンドが何をするものかのコメントも必要になります。
+さらに実行順序も大切です。
+このタスク機能を活用すればそのような悩みが軽減します。
+
+ さっそくやってみる。
+今回はPowerShellスクリプトを実行させます。
+PowerShellがどんなものかについては以下の記事で紹介しています。
+https://zenn.dev/articles/8e18e647c58...]]></description><link>https://zenn.dev/k_tabuchi/articles/13993a7653486d</link><guid isPermaLink="true">https://zenn.dev/k_tabuchi/articles/13993a7653486d</guid><pubDate>Wed, 19 Feb 2025 10:20:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dHvuS4lO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:VSCode%25E3%2581%25AE%25E3%2582%25BF%25E3%2582%25B9%25E3%2582%25AF%25E3%2581%25A7%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2582%2592%25E7%25B0%25A1%25E5%258D%2598%25E3%2581%25AB%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%2599%25E3%2582%258B%25E3%2580%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:k-tabuchi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhkMjhhY2RlZGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>k-tabuchi</dc:creator></item><item><title><![CDATA[AWS CDKの環境構築しすぎて自動化したくなったので自動化してみた]]></title><description><![CDATA[株式会社Specteeセキュリティチームの都築です。
+
+ 導入と背景
+AWS CDKは、インフラをコードで管理できる便利なツールですが、プロジェクトごとの環境構築や初期設定に手間がかかることがあります。
+毎回同じようなコマンドを打ち、構成ファイルを用意するのが面倒に感じたため、環境構築を自動化して効率化を図ることにしました。
+本記事では、AWS CDKの環境構築作業を自動化する方法を紹介し、セットアップの手間を大幅に減らす手法を解説します。特に、複数プロジェクトを管理する人にとって役立つ内容です。
+
+ 方法
+今回のディレクトリ構造
+
+ディレクトリツリー
+-+- Dockerfile
+ +...]]></description><link>https://zenn.dev/spectee/articles/c8cbac2533bd20</link><guid isPermaLink="true">https://zenn.dev/spectee/articles/c8cbac2533bd20</guid><pubDate>Mon, 17 Feb 2025 03:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--rbzxSNmO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AWS%2520CDK%25E3%2581%25AE%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2597%25E3%2581%2599%25E3%2581%258E%25E3%2581%25A6%25E8%2587%25AA%25E5%258B%2595%25E5%258C%2596%25E3%2581%2597%25E3%2581%259F%25E3%2581%258F%25E3%2581%25AA%25E3%2581%25A3%25E3%2581%259F%25E3%2581%25AE%25E3%2581%25A7%25E8%2587%25AA%25E5%258B%2595%25E5%258C%2596%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:LACO46%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzkwYzYyY2ZlNDQuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Spectee%2520Developers%2520Blog%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FjMTVmNDM3MDUuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>LACO46</dc:creator></item><item><title><![CDATA[その手間ムダじゃない？3分で時短できるエイリアス（ alias ）設定法！]]></title><description><![CDATA[
+ 0. Docker と Git のエイリアス設定で開発効率を向上させる
+開発中に何度も打つ長いコマンド、毎回入力するのが面倒だと感じたことはありませんか？そんな手間をなくし、たった3分で作業を効率化するエイリアス設定法を紹介します。
+シェルのエイリアスと Git のエイリアスを活用すれば、よく使うコマンドを短縮して日々の開発をより快適に進めることができます。
+本記事では、Docker や Git のエイリアスを設定し、無駄なタイピングを削減する方法を詳しく解説します。
+
+ 1. Zsh のエイリアス設定
+まず、Zsh の設定ファイル ~/.zshrc を開きます。
+nano ~/.z...]]></description><link>https://zenn.dev/take_tech/articles/c1573931f955c3</link><guid isPermaLink="true">https://zenn.dev/take_tech/articles/c1573931f955c3</guid><pubDate>Sun, 16 Feb 2025 20:27:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ok3tFma9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%259D%25E3%2581%25AE%25E6%2589%258B%25E9%2596%2593%25E3%2583%25A0%25E3%2583%2580%25E3%2581%2598%25E3%2582%2583%25E3%2581%25AA%25E3%2581%2584%25EF%25BC%259F3%25E5%2588%2586%25E3%2581%25A7%25E6%2599%2582%25E7%259F%25AD%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258B%25E3%2582%25A8%25E3%2582%25A4%25E3%2583%25AA%25E3%2582%25A2%25E3%2582%25B9%25EF%25BC%2588%2520alias%2520%25EF%25BC%2589%25E8%25A8%25AD%25E5%25AE%259A%25E6%25B3%2595%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Take%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzYyNThiNDQ2YTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Take</dc:creator></item><item><title><![CDATA[シェルスクリプトの curl にとりあえず付けておくべきオプション（＋たまに使うオプションのまとめ）]]></title><description><![CDATA[
+ はじめに
+シェルスクリプト中で API からデータを取得する際など、 curl でどんなオプションを指定しておくか毎回悩んでしまうのでまとめておきます。
+ついでに必要に応じて使うオプションもまとめておきます。
+※シェルスクリプトに限らず CLI でも有用です
+
+ とりあえず指定しておくオプション
+基本的に以下のオプションはつけるように覚えておいて問題ないでしょう。
+curl -fsSL &lt;URL&gt;
+このオプション指定はとりあえず覚えておいて、必要に応じて他のオプションも付けるようにしておけば良いと思います。
+
+ 各オプションの説明
+
+ -f, --fail
+http ステ...]]></description><link>https://zenn.dev/shuh/articles/shellscript-curl</link><guid isPermaLink="true">https://zenn.dev/shuh/articles/shellscript-curl</guid><pubDate>Sun, 16 Feb 2025 16:53:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dZXL1-iP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B7%25E3%2582%25A7%25E3%2583%25AB%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2583%2588%25E3%2581%25AE%2520curl%2520%25E3%2581%25AB%25E3%2581%25A8%25E3%2582%258A%25E3%2581%2582%25E3%2581%2588%25E3%2581%259A%25E4%25BB%2598%25E3%2581%2591%25E3%2581%25A6%25E3%2581%258A%25E3%2581%258F%25E3%2581%25B9%25E3%2581%258D%25E3%2582%25AA%25E3%2583%2597%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25EF%25BC%2588%25EF%25BC%258B%25E3%2581%259F%25E3%2581%25BE%25E3%2581%25AB%25E4%25BD%25BF%25E3%2581%2586%25E3%2582%25AA%25E3%2583%2597%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2581%25AE%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:shusch%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk0ODg1Y2EwN2QuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>shusch</dc:creator></item><item><title><![CDATA[TIL : UNIXプログラミング環境　第１章]]></title><description><![CDATA[
+ UNIXプログラミング環境 (1章)
+TIL: Today I Learned　の1タイトル目にはUNIXプログラミング環境という本を選択しました。
+毎日学んだことを1章ずつ記事にしていきます。まぁ備忘録です。
+プロフィールにある通り端くれのエンジニアで普段はpython等々を使用して分析など行なっているのですが、サービス開発してみたいという思いから、基礎の基礎から学び直そうとしている所存です。
+といってもLinuxコマンドを触ったことがあるので、新たな学びを中心に記載します。網羅的に学びたい方はぜひ↓の書籍を！
+UNIXプログラミング環境
+
+ 1章 初心者のためのUNIX
+
+ wh...]]></description><link>https://zenn.dev/rgrey/articles/854706f0153999</link><guid isPermaLink="true">https://zenn.dev/rgrey/articles/854706f0153999</guid><pubDate>Sun, 16 Feb 2025 16:00:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Ej8EsXP0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TIL%2520%253A%2520UNIX%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%259F%25E3%2583%25B3%25E3%2582%25B0%25E7%2592%25B0%25E5%25A2%2583%25E3%2580%2580%25E7%25AC%25AC%25EF%25BC%2591%25E7%25AB%25A0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E7%25AB%25AF%25E3%2581%258F%25E3%2582%258C%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2UxYTQxODM3ODAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>端くれエンジニア</dc:creator></item><item><title><![CDATA[OAuthをcurlとphpでやってみる]]></title><description><![CDATA[去年10月から ソーシャルPLUS にフロントエンドエンジニアとして業務委託で参画しているほっしゃん(https://github.com/hotsum92)です!!!
+あまりログイン関連の技術については、触ったことがなかったのですが、ソーシャルPLUSに参画してから、OIDCを勉強させていただきました。今回は、その基本となるOAuth演舞を舞ってやろうとおもいます。
+勉強はしてみたけど、よくわからないみたいな状況をぬけだすために、とりあえず動くものを作ってみることにします。なるべくシンプルな環境で動作確認をしていきたいので、curlとphpで、OAuthの動きを真似してみようとおもいま...]]></description><link>https://zenn.dev/socialplus/articles/35f27f5b1814ee</link><guid isPermaLink="true">https://zenn.dev/socialplus/articles/35f27f5b1814ee</guid><pubDate>Fri, 14 Feb 2025 09:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--rEfKjapi--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:OAuth%25E3%2582%2592curl%25E3%2581%25A8php%25E3%2581%25A7%25E3%2582%2584%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:hotsum%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I4Mjg2YmNjMDEuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:SocialPLUS%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk5MjFmMmZlYmEuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hotsum</dc:creator></item><item><title><![CDATA[Macのデフォルトのシェルをzshからfishに切り替える方法]]></title><description><![CDATA[
+ なぜシェルを切り替えるか
+飽くなきシェルへのこだわり…などは全然なくて、VS CodeエディタのAIコーディングのためのCline（Roo Code）という拡張機能のためです。
+本来は、ClineがVS Codeエディタのターミナルでコマンドを実行したり、その出力を読んでくれるはずなのですが、どうしてもターミナル出力を読んでくれなくて、同じように困っている人のClineのissueに「シェルをzshからfishに切り替えた」という力技があったので、試したらうまくいったし、fishも結構いい感じなので切り替えちゃおうかなという感じです。
+https://x.com/karaage070...]]></description><link>https://zenn.dev/karaage0703/articles/275bf8f906cc66</link><guid isPermaLink="true">https://zenn.dev/karaage0703/articles/275bf8f906cc66</guid><pubDate>Wed, 12 Feb 2025 15:40:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ci_exqPC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Mac%25E3%2581%25AE%25E3%2583%2587%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25AB%25E3%2583%2588%25E3%2581%25AE%25E3%2582%25B7%25E3%2582%25A7%25E3%2583%25AB%25E3%2582%2592zsh%25E3%2581%258B%25E3%2582%2589fish%25E3%2581%25AB%25E5%2588%2587%25E3%2582%258A%25E6%259B%25BF%25E3%2581%2588%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258B%25E3%2582%2589%25E3%2581%2582%25E3%2581%2592%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2hDZEtvakJfZXdDTjNCV1Z0WXIteFNIZ0hmRjlXZmt3QzI5c0Y0aXYwPXMyNTAtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>からあげ</dc:creator></item><item><title><![CDATA[Amazon linux 2023で SL🚂 コマンドを使えるようにする！]]></title><description><![CDATA[
+ Amazon linux 2023
+
+参考：https://blog.serverworks.co.jp/create-package-for-al2023-01
+
+ 概要：
+コツは、Amazon linux 2023ではRHELリポジトリが利用できないため、ソースコードからビルドしてインストールを行うことです。
+
+ 手順：
+
+ビルドツールをインストール
+ソースコードをダウンロード
+ソースコードをビルド
+ビルドされたコマンドをインストール
+
+ビルドツールをインストール
+$ sudo dnf install rpm-build
+
+ソースコードをダウンロード
+$ sudo wget ht...]]></description><link>https://zenn.dev/apo_zenn/articles/c1eacb2a50e5cf</link><guid isPermaLink="true">https://zenn.dev/apo_zenn/articles/c1eacb2a50e5cf</guid><pubDate>Sat, 08 Feb 2025 00:12:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hKl3Tdvy--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Amazon%2520linux%25202023%25E3%2581%25A7%2520SL%2520%2520%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2588%25E3%2582%258B%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:apo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVhNmY0NWNjMjcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>apo</dc:creator></item><item><title><![CDATA[TeXの出力を文字列として得る術（テコテフ⹀TecoTeX）]]></title><description><![CDATA[
+ TeXの出力を文字列として得る術（テコテフ⹀TecoTeX）
+今日は立春の前日、節分ですね。
+聞くところによると節分は、TeXへの理解を整理し節目とする日だそうです。
+そんなわけで、この記事を仕上げることにしました。
+
+ TeX言語を組版以外にも利用したい
+TeXの出力は、PDFへの変換元となるDVIという形式です。
+通常の方法では、TeXが処理した完成形の文章を文字列として取り出して別の用途で使うことはできません。
+しかし、TeXで整形した完成形の文章を文字列で得たいというのは、誰しもが思うところでしょう。
+文字列として得られれば、HTMLやマークダウンなどの他の形にしたり、校正や...]]></description><link>https://zenn.dev/tyty/articles/e4b62474657e79</link><guid isPermaLink="true">https://zenn.dev/tyty/articles/e4b62474657e79</guid><pubDate>Sun, 02 Feb 2025 10:09:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--JQ3tyYys--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TeX%25E3%2581%25AE%25E5%2587%25BA%25E5%258A%259B%25E3%2582%2592%25E6%2596%2587%25E5%25AD%2597%25E5%2588%2597%25E3%2581%25A8%25E3%2581%2597%25E3%2581%25A6%25E5%25BE%2597%25E3%2582%258B%25E8%25A1%2593%25EF%25BC%2588%25E3%2583%2586%25E3%2582%25B3%25E3%2583%2586%25E3%2583%2595%25E2%25B9%2580TecoTeX%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%25B4%25A5%25E8%258C%25B6%25E5%2588%25A9%25E4%25BC%2591%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc2YjY0ZmU2NWIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>津茶利休</dc:creator></item><item><title><![CDATA[イシューのコピーをスクリプトでやってみてた]]></title><description><![CDATA[
+ はじめに
+手動でイシューを何度も複製するのが面倒だったので試しにスクリプトを作ってみました。
+以下のツールを使用しているので任意の方法でインストールして使えるようにしておきます。
+
+jq
+GitHub CLI
+
+
+ ローカルリポジトリに移動
+$ cd /リポジトリのパス
+
+ スクリプト用のファイルを設置
+任意の場所にスクリプト用のファイルを設置します。
+$ mkdir sh
+$ cd sh
+$ touch cp-issue
+リポジトリ内に以下のように作成されます。
+sh
+ ┗ cp-issue
+
+ スクリプトを書く
+作成したcp-issueファイルに以下の内容を記述します。
+
+cp-...]]></description><link>https://zenn.dev/s_takashi/articles/f1ec1e14731764</link><guid isPermaLink="true">https://zenn.dev/s_takashi/articles/f1ec1e14731764</guid><pubDate>Fri, 31 Jan 2025 00:57:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--RaBnSO4k--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25A4%25E3%2582%25B7%25E3%2583%25A5%25E3%2583%25BC%25E3%2581%25AE%25E3%2582%25B3%25E3%2583%2594%25E3%2583%25BC%25E3%2582%2592%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2583%2588%25E3%2581%25A7%25E3%2582%2584%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%25A6%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:shiratori%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhiOTZmNDhhMGYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>shiratori</dc:creator></item><item><title><![CDATA[[課題振り返り] minishell 前編]]></title><description><![CDATA[
+ はじめに
+今回は42の一番の山場ともいわれるminishellについて振り返っていきます。
+
+ 課題概要
+C言語で基本的な機能を持ったshell(bash)を実装します。
+
+ 実装方法
+一番参考にするのはBash Reference Manualだと思います。(terminalでman bashでも見れます)
+https://www.gnu.org/software/bash/manual/bash.html#What-is-Bash_003f
+bashの実際のソースコードじゃないの？と思った方もいると思います。が、正直bashのソースコードを全て読もうと思うと果てしなく時間がかかる...]]></description><link>https://zenn.dev/kodyi/articles/0bea756f0ce23c</link><guid isPermaLink="true">https://zenn.dev/kodyi/articles/0bea756f0ce23c</guid><pubDate>Mon, 27 Jan 2025 10:15:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--g_dwjEWo--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255B%25E8%25AA%25B2%25E9%25A1%258C%25E6%258C%25AF%25E3%2582%258A%25E8%25BF%2594%25E3%2582%258A%255D%2520minishell%2520%25E5%2589%258D%25E7%25B7%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25AB%25E3%2582%25A4%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzViMWY1YjBmMjAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>カイ</dc:creator></item><item><title><![CDATA[シェルスクリプトとは]]></title><description><![CDATA[
+シェルスクリプトとはシェルで実行するコマンドなどがまとまったドキュメントのようなものだ。
+このドキュメントを用意しておくと、上から順番にコマンドが実行されていくので、いちいちコマンドを打たなくて済む。例えば、定期的な保守作業など、シェルスクリプトを用意しておけば、コマンドを打たずにすぐに実行できる。
+
+(参照元：【1分でわかる】シェルスクリプトとは？)
+らしいです。
+コマンドラインとかで実行するような、
+ディレクトリ移動のためのcd ...とか、ファイル編集のためのvim ...とかが
+コマンドって呼ばれてますが、
+こういうコマンドを自作して、まとめて書いておけるのが
+シェルスクリプト...]]></description><link>https://zenn.dev/iizukasan/articles/what_is_shell-script</link><guid isPermaLink="true">https://zenn.dev/iizukasan/articles/what_is_shell-script</guid><pubDate>Sat, 25 Jan 2025 08:31:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--24UEx5ba--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B7%25E3%2582%25A7%25E3%2583%25AB%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2583%2588%25E3%2581%25A8%25E3%2581%25AF%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:iizk%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzMwMGM0NzA2ZTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>iizk</dc:creator></item><item><title><![CDATA[m2 mac環境構築備忘録]]></title><description><![CDATA[
+ 背景
+m1 mac -&gt; intel mac -&gt; ubuntu -&gt; windows11(wsl) -&gt; m2 mac と、ここ一年で環境が変わりすぎて疲れた。
+そろそろセットアップシェルスクリプト書いとくか...と思ったので、何をしたのか整理する。
+
+ ssh-keyの作成
+githubでdotfilesを管理してるからまずssh-keyを作るよ。
+ssh-keygen -t ed25519 -C "your_email@example.com"
+出力の意味がわからなかったら Enter 4~5回叩くといいよ。
+
+ dotfilesのclone、シンボリッ...]]></description><link>https://zenn.dev/mum26/articles/a46c61bb09e34a</link><guid isPermaLink="true">https://zenn.dev/mum26/articles/a46c61bb09e34a</guid><pubDate>Fri, 24 Jan 2025 21:51:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--YEKTFQfk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:m2%2520mac%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%25E5%2582%2599%25E5%25BF%2598%25E9%258C%25B2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%258D%25E3%2581%25B6%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSkhqVGx0SGJLUVpadllrTWpWNFplbnd4X3l6Nzl5aDBmektjYkhPZDY3bWxfbUxnPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ろぶ</dc:creator></item><item><title><![CDATA[[macOS] 'ls'コマンドの出力をオシャレにする]]></title><description><![CDATA[
+ やったこと
+
+Warpのインストール
+
+ezaコマンドのインストール
+
+lsのエイリアス設定
+アイコンフォントのインストール
+Warpのフォント設定
+
+
+ Warpのインストール
+WarpはRustで書かれた高機能なターミナルエミュレータ。Homebrewでインストールできる。
+brew install --cask warp
+
+ ezaコマンドのインストール
+ezaはlsの現代的な代替コマンド。Homebrewでインストールできる。
+brew install eza
+
+ lsのエイリアス設定
+~/.zshrcに以下を追記する。source ~/.zshrcを忘れずに。
+
+~/.zs...]]></description><link>https://zenn.dev/niikei/articles/2a4df1093ebc45</link><guid isPermaLink="true">https://zenn.dev/niikei/articles/2a4df1093ebc45</guid><pubDate>Thu, 23 Jan 2025 10:24:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--D8z7O9wL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BmacOS%255D%2520%2527ls%2527%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2581%25AE%25E5%2587%25BA%25E5%258A%259B%25E3%2582%2592%25E3%2582%25AA%25E3%2582%25B7%25E3%2583%25A3%25E3%2583%25AC%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:niikei%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSmFabjhjTGZRRmdkX3hfUkR2S1VOOUJ3WjFoc1NkQlhBaWg2QzZGUktlb3BEYnZxbng9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>niikei</dc:creator></item></channel></rss>

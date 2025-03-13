@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Rust」のフィード]]></title><description><![CDATA[Zennのトピック「Rust」のRSSフィードです]]></description><link>https://zenn.dev/topics/rust</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ba09661577.png</url><title>Zennの「Rust」のフィード</title><link>https://zenn.dev/topics/rust</link></image><generator>zenn.dev</generator><lastBuildDate>Thu, 13 Mar 2025 07:32:20 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/rust/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[RustとRP2040マイコンでPWMを出力してみた（組み込み開発、PWM入門）]]></title><description><![CDATA[
+ はじめに
+多くのマイコンには、PWM（pulse width modulation：パルス幅変調）という波形を出力する機能があります。
+
+https://ja.wikipedia.org/wiki/パルス幅変調
+このPWMは、デューティー比とと言われるON/OFFの比率を変化させることで平均的な電圧値を下げることができ、デジタル出力をアナログ出力の様に扱うことができます。これを利用すれば擬似的な正弦波を出力することもできます。以下、ディーティ比の数式です。
+ {\displaystyle D={\frac {\tau }{T}}\ } 
+{\displaystyle \tau }は信...]]></description><link>https://zenn.dev/baker_link_lab/articles/51e2fca8571ca3</link><guid isPermaLink="true">https://zenn.dev/baker_link_lab/articles/51e2fca8571ca3</guid><pubDate>Thu, 13 Mar 2025 03:57:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--gOjSlq25--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25A8RP2040%25E3%2583%259E%25E3%2582%25A4%25E3%2582%25B3%25E3%2583%25B3%25E3%2581%25A7PWM%25E3%2582%2592%25E5%2587%25BA%25E5%258A%259B%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25EF%25BC%2588%25E7%25B5%2584%25E3%2581%25BF%25E8%25BE%25BC%25E3%2581%25BF%25E9%2596%258B%25E7%2599%25BA%25E3%2580%2581PWM%25E5%2585%25A5%25E9%2596%2580%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Baker%2520link.%2520Lab%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FkNzkyZGRhODEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Baker link. Lab</dc:creator></item><item><title><![CDATA[Rust で書かれた高速な Python 型チェッカー 3 選]]></title><description><![CDATA[
+ 導入
+昨今の Python 開発では、Ruff や uv といった Rust 製ツールの利用が広がっています。Python 製のこれまでのツールと Rust 製のツールを比較すると、Rust 製のツールはパフォーマンスが高く、短い時間でタスクを完了できます。
+本稿では、Rust で書かれた高速な Python 型チェッカーを紹介します。型チェッカーは、Python コードの型を検査し、型エラーを検出するツールです。静的解析ツールとして利用でき、コードの品質を向上させるのに役立ちます。Meta が公開している記事では、2024 年に Python コミュニティに調査を行い、回答者の 8...]]></description><link>https://zenn.dev/nishikoh/articles/31441fa8fe1f73</link><guid isPermaLink="true">https://zenn.dev/nishikoh/articles/31441fa8fe1f73</guid><pubDate>Wed, 12 Mar 2025 03:00:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GZxqUI50--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%2520%25E3%2581%25A7%25E6%259B%25B8%25E3%2581%258B%25E3%2582%258C%25E3%2581%259F%25E9%25AB%2598%25E9%2580%259F%25E3%2581%25AA%2520Python%2520%25E5%259E%258B%25E3%2583%2581%25E3%2582%25A7%25E3%2583%2583%25E3%2582%25AB%25E3%2583%25BC%25203%2520%25E9%2581%25B8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nishikoh%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q2MzI0MTlkMTQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nishikoh</dc:creator></item><item><title><![CDATA[Rustで作る自作データベース：第零回 なぜRustでデータベースを実装するのか]]></title><description><![CDATA[
+ Rustで作る自作データベース：第零回 なぜRustでデータベースを実装するのか
+
+ はじめに
+エンジニアとして成長するには、使用しているツールの内部構造を理解することが重要です。多くの開発者は日々データベースを使用していますが、その内部がどのように動作しているかを深く理解している人は意外と少ないのではないでしょうか。
+
+この連載では、Rustを使ってゼロからデータベースを実装していきます。単なる玩具ではなく、最終的には実用レベルの機能を備えたデータベースを目指します。
+🔸なぜRustなのか？
+🔸なぜデータベースなのか？
+そしてどのような実装アプローチを取るのか。この記事では、これか...]]></description><link>https://zenn.dev/kazuma0606/articles/9a086386fe8af2</link><guid isPermaLink="true">https://zenn.dev/kazuma0606/articles/9a086386fe8af2</guid><pubDate>Wed, 12 Mar 2025 01:47:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--AmsLxwRc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25A7%25E4%25BD%259C%25E3%2582%258B%25E8%2587%25AA%25E4%25BD%259C%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%2599%25E3%2583%25BC%25E3%2582%25B9%25EF%25BC%259A%25E7%25AC%25AC%25E9%259B%25B6%25E5%259B%259E%2520%25E3%2581%25AA%25E3%2581%259CRust%25E3%2581%25A7%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%2599%25E3%2583%25BC%25E3%2582%25B9%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2599%25E3%2582%258B%25E3%2581%25AE%25E3%2581%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25AB%25E3%2582%25BA%25E3%2583%259E%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI1ZjkwNWYyMmEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>カズマ</dc:creator></item><item><title><![CDATA[ターミナルで使えるコマンドを作ろうとしたら苦労した話。]]></title><description><![CDATA[初めまして。趣味のRustで変なの書いてる者です。
+久々にプログラミングがやりたくなったので、適当にアプデなんか済ませて書いてたら。。
+
+ ディレクトリ分けるとき、mod.rs書くのだるくね？
+昔からそうは思っていたのですが、不満を垂らすだけで解消する動きはなかったので、これを機にディレクトリ生成とそれに付随してmod.rsを行うシェルを組もうと思いました。
+以下シェルになります。
+
+rsdir.sh 
+#!/bin/bash
+
+# 引数チェック
+if [ -z "$1" ]; then
+    echo "Usage: rsdir &lt;module_name&gt;"
+    ex...]]></description><link>https://zenn.dev/ennui/articles/d86d942dbfa12a</link><guid isPermaLink="true">https://zenn.dev/ennui/articles/d86d942dbfa12a</guid><pubDate>Tue, 11 Mar 2025 23:29:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--JJ5uqc3d--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%259F%25E3%2583%258A%25E3%2583%25AB%25E3%2581%25A7%25E4%25BD%25BF%25E3%2581%2588%25E3%2582%258B%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258D%25E3%2581%2586%25E3%2581%25A8%25E3%2581%2597%25E3%2581%259F%25E3%2582%2589%25E8%258B%25A6%25E5%258A%25B4%25E3%2581%2597%25E3%2581%259F%25E8%25A9%25B1%25E3%2580%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Ennui%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzMzYjUwMDBlMzkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Ennui</dc:creator></item><item><title><![CDATA[【Rust】「クレート？パッケージ？モジュール？」をそろそろ理解しませんか？]]></title><description><![CDATA[どのプログラミング言語でも、最初は１つのファイルに適当に処理を書いて実行してみることを繰り返すと思います。しかし、プログラムが少し大きくなると、ファイルやディレクトリを分割したくなります。
+Rustでは、コードを整理するために、「クレート」「パッケージ」「モジュール」 という概念が登場します。
+この記事では、「クレート」「パッケージ」「モジュール」の違いをシンプルに解説し、適切にプログラムを管理できるようにすることを目的としています。
+
+ 「クレート」「パッケージ」「モジュール」の整理
+
+ クレート
+Rustのコンパイル単位。
+クレートは２種類あり、バイナリクレートとライブラリクレートに...]]></description><link>https://zenn.dev/tsubasa_ryuto/articles/6fae346409df81</link><guid isPermaLink="true">https://zenn.dev/tsubasa_ryuto/articles/6fae346409df81</guid><pubDate>Tue, 11 Mar 2025 19:06:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--sTQoO50N--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Rust%25E3%2580%2591%25E3%2580%258C%25E3%2582%25AF%25E3%2583%25AC%25E3%2583%25BC%25E3%2583%2588%25EF%25BC%259F%25E3%2583%2591%25E3%2583%2583%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B8%25EF%25BC%259F%25E3%2583%25A2%25E3%2582%25B8%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%25AB%25EF%25BC%259F%25E3%2580%258D%25E3%2582%2592%25E3%2581%259D%25E3%2582%258D%25E3%2581%259D%25E3%2582%258D%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2597%25E3%2581%25BE%25E3%2581%259B%25E3%2582%2593%25E3%2581%258B%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:TsubasaRyuto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ3MzgwZDBlYWQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>TsubasaRyuto</dc:creator></item><item><title><![CDATA[ライブラリクレートでは`doc_cfg`や`doc_auto_cfg`を有効にするのがおすすめ]]></title><description><![CDATA[rustdocでdoc_cfg機能やdoc_auto_cfg機能を有効にすると、条件付きコンパイルに関する情報をrustdocに伝えることができます。
+これらの機能を有効にすると、以下のようにそのアイテムが特定のfeatureフラグが有効な場合や特定のプラットフォームでのみ利用可能なことを説明するバナーを表示できます。
+
+unixモジュールはUnix環境でのみ利用可能
+
+nowメソッドはstdフラグが有効な場合のみ利用可能
+
+ 設定方法
+これらの機能はまだ不安定なのでcfg_attrを使ってdocsrsが定義されている場合にのみ機能を有効にします。
+
+src/lib.rs
+#![cfg_...]]></description><link>https://zenn.dev/sorairolake/articles/display-features-in-rustdoc</link><guid isPermaLink="true">https://zenn.dev/sorairolake/articles/display-features-in-rustdoc</guid><pubDate>Tue, 11 Mar 2025 03:34:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--LKb8uAGP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%25E3%2582%25AF%25E3%2583%25AC%25E3%2583%25BC%25E3%2583%2588%25E3%2581%25A7%25E3%2581%25AF%2560doc_cfg%2560%25E3%2582%2584%2560doc_auto_cfg%2560%25E3%2582%2592%25E6%259C%2589%25E5%258A%25B9%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%25E3%2581%25AE%25E3%2581%258C%25E3%2581%258A%25E3%2581%2599%25E3%2581%2599%25E3%2582%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:SorairoLake%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzEyZGZiOGQyM2QuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>SorairoLake</dc:creator></item><item><title><![CDATA[Rustのデータ構造をナビゲート：ベクターからハッシュセットへ]]></title><description><![CDATA[
+Rust の標準ライブラリには、基本的なデータ構造として、ベクター（Vec&lt;T&gt;）、ハッシュマップ（HashMap&lt;K, V&gt;）、および集合（HashSet&lt;T&gt;）が提供されています。これらの 3 つのデータ構造は、ほとんどのプログラミングシナリオで最も一般的で有用なものです。Rust の目標である「安全性」「並行性」「実用性」に適合する形で設計・提供されており、データの格納とアクセスのニーズを満たしながら、標準ライブラリの軽量性と効率性を維持しています。
+
+ ベクター（Vec&lt;T&gt;）
+ベクターは、Rust で最も一般的に使用される動的配...]]></description><link>https://zenn.dev/leap_adam/articles/fb3d83d3fc0b3e</link><guid isPermaLink="true">https://zenn.dev/leap_adam/articles/fb3d83d3fc0b3e</guid><pubDate>Sun, 09 Mar 2025 19:00:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--nM9WK2Em--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25AE%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E6%25A7%258B%25E9%2580%25A0%25E3%2582%2592%25E3%2583%258A%25E3%2583%2593%25E3%2582%25B2%25E3%2583%25BC%25E3%2583%2588%25EF%25BC%259A%25E3%2583%2599%25E3%2582%25AF%25E3%2582%25BF%25E3%2583%25BC%25E3%2581%258B%25E3%2582%2589%25E3%2583%258F%25E3%2583%2583%25E3%2582%25B7%25E3%2583%25A5%25E3%2582%25BB%25E3%2583%2583%25E3%2583%2588%25E3%2581%25B8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Adam%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZhZDIzOTdlZTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Adam</dc:creator></item><item><title><![CDATA[ABC396:Rustで解く！問題解説]]></title><description><![CDATA[AtCoder Beginner Contest 396のA~E問題をRustで解いた際の解法をまとめました。
+
+ A問題
+問題
+https://atcoder.jp/contests/abc396/tasks/abc396_a
+解説
+隣接する3つの値が同じかどうかをチェックします。全て試して1箇所でも見つかればYes 、見つからなければ No を出力します。
+コード
+
+abc396a.rs
+use proconio::input;
+fn main() {
+    // 入力
+    input!{
+        n: usize,
+        a: [usize; n],
+   ...]]></description><link>https://zenn.dev/nakst_hide/articles/f841b31744ee0d</link><guid isPermaLink="true">https://zenn.dev/nakst_hide/articles/f841b31744ee0d</guid><pubDate>Sun, 09 Mar 2025 14:02:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--WhVeVOb7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ABC396%253ARust%25E3%2581%25A7%25E8%25A7%25A3%25E3%2581%258F%25EF%25BC%2581%25E5%2595%258F%25E9%25A1%258C%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nakahide%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YkMxNEpSQnNET01hTGcxTVRQWGNTWS1qYlNQbFRMQTN3ZU9Sdz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nakahide</dc:creator></item><item><title><![CDATA[DuckDB の拡張を Rust で書けるらしいので調べてみた（2025年3月時点）]]></title><description><![CDATA[DuckDB は v1.2.0 で C extension API というものが追加されました。これによって、C で拡張を書けるのみならず、Rust や Go などの C FFI を使えるプログラミング言語でも（その C extension API へのバインディングがあれば）書けるようになりました。
+https://duckdb.org/2025/02/05/announcing-duckdb-120.html
+実際、Rust 実装の拡張を書くテンプレートが公式に用意されています。
+https://github.com/duckdb/extension-template-rs
+とはいえ...]]></description><link>https://zenn.dev/yutannihilation/articles/663c879b74343c</link><guid isPermaLink="true">https://zenn.dev/yutannihilation/articles/663c879b74343c</guid><pubDate>Sun, 09 Mar 2025 03:40:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--e4XaMGjs--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:DuckDB%2520%25E3%2581%25AE%25E6%258B%25A1%25E5%25BC%25B5%25E3%2582%2592%2520Rust%2520%25E3%2581%25A7%25E6%259B%25B8%25E3%2581%2591%25E3%2582%258B%25E3%2582%2589%25E3%2581%2597%25E3%2581%2584%25E3%2581%25AE%25E3%2581%25A7%25E8%25AA%25BF%25E3%2581%25B9%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25EF%25BC%25882025%25E5%25B9%25B43%25E6%259C%2588%25E6%2599%2582%25E7%2582%25B9%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yutannihilation%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2cxWXFZLWt6LTVmNFhSNVdXbjFNOVBpaWxaMkdYNHkwNjdtZy1VOEE9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yutannihilation</dc:creator></item><item><title><![CDATA[Rustのクロージャの仕組み：Fn、FnMut、FnOnce]]></title><description><![CDATA[
+Rust プログラミング言語において、クロージャ（closures）は非常に強力で柔軟な機能であり、無名関数を定義し、その環境内の変数をキャプチャすることができます。Rust のクロージャシステムは、Fn、FnMut、FnOnce という 3 つのコアトレイトによって定義されます。これらのトレイトは、クロージャがキャプチャした変数とどのように相互作用するか、何回呼び出せるか、環境を変更できるかを決定します。これらの理解は、Rust のクロージャメカニズムを習得し、効率的で安全なコードを書くために不可欠です。
+本記事では、Fn、FnMut、FnOnce の 3 つのトレイトについて詳しく...]]></description><link>https://zenn.dev/leap_adam/articles/a29c3ce6f5fd59</link><guid isPermaLink="true">https://zenn.dev/leap_adam/articles/a29c3ce6f5fd59</guid><pubDate>Sat, 08 Mar 2025 21:34:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4JAa-ZJA--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25AE%25E3%2582%25AF%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%25A3%25E3%2581%25AE%25E4%25BB%2595%25E7%25B5%2584%25E3%2581%25BF%25EF%25BC%259AFn%25E3%2580%2581FnMut%25E3%2580%2581FnOnce%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Adam%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZhZDIzOTdlZTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Adam</dc:creator></item><item><title><![CDATA[Rustの所有権に入門した]]></title><description><![CDATA[
+ はじめに
+最近Rustに入門し、「The Rust Programming Language」でRustの基礎を学んでいます。今回は復習として重要な概念である「所有権」について、私自身がつまずきやすかった点や、重要だと感じた点を簡潔にまとめています。
+所有権は、Rustがメモリ安全性を保証するための強力な仕組みであり、これを理解することで、メモリリークやダングリングポインタといったバグをコンパイル時に防ぐことができます。これは、Rustが高速でありながら安全なシステムプログラミング言語として注目される大きな理由の一つです。
+この記事では、所有権の基本から、ムーブ、クローン、コピー、借...]]></description><link>https://zenn.dev/youcangg/articles/87ba6dd6099523</link><guid isPermaLink="true">https://zenn.dev/youcangg/articles/87ba6dd6099523</guid><pubDate>Sat, 08 Mar 2025 13:56:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--oSRNTqSr--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25AE%25E6%2589%2580%25E6%259C%2589%25E6%25A8%25A9%25E3%2581%25AB%25E5%2585%25A5%25E9%2596%2580%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:youcangg%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsveS5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>youcangg</dc:creator></item><item><title><![CDATA[【Rust】所有権を完全に理解する]]></title><description><![CDATA[Rustに入門する上で最初の壁となる概念は「所有権」でしょう。Rustの所有権を中心にしたメモリ管理は非常に強力な機能ですが、プログラマに厳密な所有権の管理を要求するため、初心者がつまづきやすい点でもあります。
+この記事では他言語との比較を交えつつ、Rustの所有権の基本的な考え方についてを学んでいきます。
+
+ メモリ管理
+所有権の細かい話を始める前に、まずはメモリ管理の概要を掴むところから始めましょう。
+Rustに限らず、あらゆる言語ではプログラム上で確保された値はメモリのどこかに保持されます。また、メモリ領域には主にスタックとヒープの2種類があり、Rustの場合はデフォルトでは全ての...]]></description><link>https://zenn.dev/nuskey/articles/6c2831abd68d7d</link><guid isPermaLink="true">https://zenn.dev/nuskey/articles/6c2831abd68d7d</guid><pubDate>Sat, 08 Mar 2025 10:47:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--i14bHeD_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Rust%25E3%2580%2591%25E6%2589%2580%25E6%259C%2589%25E6%25A8%25A9%25E3%2582%2592%25E5%25AE%258C%25E5%2585%25A8%25E3%2581%25AB%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nuskey%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZkZTM4NWZlYWQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nuskey</dc:creator></item><item><title><![CDATA[Rust × Rocket で作る！TODOアプリ完全ガイド【完成コード付き】]]></title><description><![CDATA[Rust初心者でWeb開発経験がある方へ向けた実践書。Rust製Webフレームワーク Rocket を使い、ログイン機能付きのTODOアプリを開発します。SQLiteを用いたデータ管理やCookie認証を実装し、実際に動作するアプリを作りながら学べます。RustでのWeb開発を始めたい方に最適！]]></description><link>https://zenn.dev/tcool/books/9b65225abf2ad1</link><guid isPermaLink="true">https://zenn.dev/tcool/books/9b65225abf2ad1</guid><pubDate>Sat, 08 Mar 2025 08:31:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1Dh2eEyj--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci81NDRhMDdjMTE1LmpwZWc=%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>t-cool</dc:creator></item><item><title><![CDATA[Rustでダイクストラ法 (優先度つきキューと一緒)]]></title><description><![CDATA[
+ TL;DR
+
+重みのある無向辺グラフの任意の点の最短経路を求める方法の一つがダイクストラ法
+
+訪問したノードに始点からの最短距離を記録
+候補を待ち行列に入れて､各点の最短距離を更新する
+
+
+優先度付きキューを扱う場合､std::collections::BinaryHeapを使う
+
+Min-Heapにしたい場合は`BinaryHeap&lt;Reverse&lt;T&gt;&gt;
+
+(または目標値を構造体でラップしてOrdトレイトを実装する(後述))
+
+
+挿入コストはO(\log_2 N) (Nは要素数)
+最大(最小)要素を取り出すのはO(1)
+
+
+
+
+
+ はじめに
+std::co...]]></description><link>https://zenn.dev/ahoxa1rx/articles/02203406be0003</link><guid isPermaLink="true">https://zenn.dev/ahoxa1rx/articles/02203406be0003</guid><pubDate>Sat, 08 Mar 2025 01:49:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ZgsEbpui--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25A7%25E3%2583%2580%25E3%2582%25A4%25E3%2582%25AF%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25A9%25E6%25B3%2595%2520%2528%25E5%2584%25AA%25E5%2585%2588%25E5%25BA%25A6%25E3%2581%25A4%25E3%2581%258D%25E3%2582%25AD%25E3%2583%25A5%25E3%2583%25BC%25E3%2581%25A8%25E4%25B8%2580%25E7%25B7%2592%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ahoxa1rx%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2p0cVFMMThkdU9JWXh5NVRhM1JfYWZyUGtWd0U3M2o1aldsSWdhPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ahoxa1rx</dc:creator></item><item><title><![CDATA[Rust で GoogleDrive を操作する]]></title><description><![CDATA[
+ Rust でGoogle APIログイン
+Google API に接続する方法は大きく分けて2種類あります。
+
+
+OAuth認証 - 個人ユーザーの権限で操作（今回使用）
+
+サービスアカウント - バックグラウンド処理などロボット用の権限
+
+今回は一般的なユースケースであるOAuth認証を使用します。
+
+ Google Cloud でプロジェクトを作成
+まずは Rust プログラムから Google Drive API にアクセスできるようにしましょう。 client_secret.json というプログラムから Google Drive API にアクセスするために必要な JSON...]]></description><link>https://zenn.dev/nodamushi/articles/384e104b6497f2</link><guid isPermaLink="true">https://zenn.dev/nodamushi/articles/384e104b6497f2</guid><pubDate>Fri, 07 Mar 2025 23:18:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--TK42t7K7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%2520%25E3%2581%25A7%2520GoogleDrive%2520%25E3%2582%2592%25E6%2593%258D%25E4%25BD%259C%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nodamushi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y1OGJmMTkwNjEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nodamushi</dc:creator></item><item><title><![CDATA[Rustのマッチングで@を活用]]></title><description><![CDATA[
+Rust 言語の @ 記号は強力なパターンマッチング機能を提供し、変数のバインディングをより柔軟かつ表現力豊かにします。本記事では、その基本的な使い方を例とともに紹介し、複雑なシナリオでの応用、パフォーマンス上の考慮点、およびベストプラクティスについて詳しく掘り下げます。
+
+ 列挙型のバリアントの値をバインドする
+例えば、HTTP ステータスコードを表す列挙型があるとします：
+#[derive(Debug)]
+enum HttpStatus {
+    Ok,
+    NotFound,
+    Unauthorized,
+    Unknown(u16), // 未知のステータスコー...]]></description><link>https://zenn.dev/leap_adam/articles/bde016c8738728</link><guid isPermaLink="true">https://zenn.dev/leap_adam/articles/bde016c8738728</guid><pubDate>Fri, 07 Mar 2025 19:07:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--NIOr-9YE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25AE%25E3%2583%259E%25E3%2583%2583%25E3%2583%2581%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%25A7%2540%25E3%2582%2592%25E6%25B4%25BB%25E7%2594%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Adam%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZhZDIzOTdlZTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Adam</dc:creator></item><item><title><![CDATA[【詳解】Rustで実現するクリーンアーキテクチャ&CQRS]]></title><description><![CDATA[Rustの強力な型システムと所有権モデルを活かした、堅牢で柔軟なアプリケーションを設計方法を記載します。
+　✅クリーンアーキテクチャ
+　✅CQRS(Command Query Responsibility Segregation
+　✅コマンド・クエリ責務分離)パターン
+　✅DI(Dependency Injection, 依存性注入)パターン
+　✅遅延初期化（Lazyパターン）
+これらのアーキテクチャ・パターンを組み合わせたRustならではのアーキテクチャを実装しよう。]]></description><link>https://zenn.dev/kazuma0606/books/e08dd0e43d7cdb</link><guid isPermaLink="true">https://zenn.dev/kazuma0606/books/e08dd0e43d7cdb</guid><pubDate>Fri, 07 Mar 2025 11:40:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s----sQZubV--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci81MjliM2NlNzQ1LmpwZWc=%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>カズマ</dc:creator></item><item><title><![CDATA[gRPCスキーマを活用したDTO変換パターン：型安全性と保守性の向上]]></title><description><![CDATA[
+ gRPCスキーマを活用したDTO変換パターン：型安全性と保守性の向上
+
+ はじめに
+gRPCは効率的な通信プロトコルとして広く採用されていますが、Protocol Buffersで定義されたメッセージ型と実際のアプリケーションドメインモデルの実装、もしくは変換を適切に行うことが重要です。
+この記事では、Rustにおいて.protoファイルから生成されたgRPCスキーマを利用してDTO（Data Transfer Object）変換を実装する方法と、そのメリットについて解説します。
+※クリーンアーキテクチャに関する知識があると理解しやすいと思います。
+
+ コードの概要
+サンプルコードで...]]></description><link>https://zenn.dev/kazuma0606/articles/ca13dc98ce8ad5</link><guid isPermaLink="true">https://zenn.dev/kazuma0606/articles/ca13dc98ce8ad5</guid><pubDate>Thu, 06 Mar 2025 13:10:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Nq3vF8of--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:gRPC%25E3%2582%25B9%25E3%2582%25AD%25E3%2583%25BC%25E3%2583%259E%25E3%2582%2592%25E6%25B4%25BB%25E7%2594%25A8%25E3%2581%2597%25E3%2581%259FDTO%25E5%25A4%2589%25E6%258F%259B%25E3%2583%2591%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%25B3%25EF%25BC%259A%25E5%259E%258B%25E5%25AE%2589%25E5%2585%25A8%25E6%2580%25A7%25E3%2581%25A8%25E4%25BF%259D%25E5%25AE%2588%25E6%2580%25A7%25E3%2581%25AE%25E5%2590%2591%25E4%25B8%258A%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25AB%25E3%2582%25BA%25E3%2583%259E%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI1ZjkwNWYyMmEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>カズマ</dc:creator></item><item><title><![CDATA[メモリと仲良しになろう！[アロケータ実装編]]]></title><description><![CDATA[!
+この記事は「メモリと仲良しになろう！[超入門編]」の続編です。
+メモリの基礎理解から始めたい方は前回の記事を参照してください。
+
+
+ はじめに
+本記事は「Writing an OS in Rust」のアロケータ実装編を個人的に咀嚼するために作成しました。
+不明瞭な部分がありましたら原文をご参照いただけると幸いです。
+
+ 誰のための記事か？(for whom)
+
+メモリ上でどのようにデータが載るのかが分からない人
+どのようにアロケーションが行われるか分からない人
+アロケータの実装に興味がある人
+
+
+ なぜ学ぶのか？ (why)
+
+自作 OS 開発をする上での基礎的な知識として必要である...]]></description><link>https://zenn.dev/tomoikey/articles/becdcef97aa62c</link><guid isPermaLink="true">https://zenn.dev/tomoikey/articles/becdcef97aa62c</guid><pubDate>Wed, 05 Mar 2025 22:55:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--st4_d6hj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%25A1%25E3%2583%25A2%25E3%2583%25AA%25E3%2581%25A8%25E4%25BB%25B2%25E8%2589%25AF%25E3%2581%2597%25E3%2581%25AB%25E3%2581%25AA%25E3%2582%258D%25E3%2581%2586%25EF%25BC%2581%255B%25E3%2582%25A2%25E3%2583%25AD%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25BF%25E5%25AE%259F%25E8%25A3%2585%25E7%25B7%25A8%255D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tomoikey%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJlZTJjNDgxYzIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tomoikey</dc:creator></item><item><title><![CDATA[フルスタックでRust製ブログアプリを書いてみよう]]></title><description><![CDATA[
+ Rust製ブログアプリの技術スタック: 軽量 &amp; 高速 &amp; 拡張性を兼ね備えた構成
+
+ はじめに
+現在、個人開発として Rust 製のブログアプリ を開発しています。本記事では、その技術スタックと設計方針について紹介します。
+目的:
+
+
+高速 &amp; 軽量 で、依存関係を最小限に抑えた構成
+
+
+開発効率を向上 させ、デプロイの手間を最小限に
+
+
+スケーラブルな設計 で、アクセス増加時にも対応可能
+
+この構成は、MVP開発 → 本番運用へのスムーズな移行 を意識したものになっています。
+
+
+ 技術スタック
+
+
+
+カテゴリ
+選定技術
+理由
+
+
+
+
+フロントエンド
+Le...]]></description><link>https://zenn.dev/kazuma0606/articles/795e8f146a9859</link><guid isPermaLink="true">https://zenn.dev/kazuma0606/articles/795e8f146a9859</guid><pubDate>Wed, 05 Mar 2025 13:55:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Ii1apDxk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2595%25E3%2583%25AB%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%2583%25E3%2582%25AF%25E3%2581%25A7Rust%25E8%25A3%25BD%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E6%259B%25B8%25E3%2581%2584%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%2588%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25AB%25E3%2582%25BA%25E3%2583%259E%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI1ZjkwNWYyMmEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>カズマ</dc:creator></item></channel></rss>
