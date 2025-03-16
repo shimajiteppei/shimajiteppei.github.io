@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Linux」のフィード]]></title><description><![CDATA[Zennのトピック「Linux」のRSSフィードです]]></description><link>https://zenn.dev/topics/linux</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/860a9eb1e4.png</url><title>Zennの「Linux」のフィード</title><link>https://zenn.dev/topics/linux</link></image><generator>zenn.dev</generator><lastBuildDate>Sun, 16 Mar 2025 12:03:52 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/linux/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Ubuntuにzramを導入する]]></title><description><![CDATA[
+ zramとは？
+RAM上に圧縮ブロックデバイスを作成するLinuxカーネルモジュール。
+今回はSwapに利用し、圧縮メモリとして使用する。
+zram ArchWiki
+
+ インストール方法
+今回はUbuntu 22.04 LTSを使用する。
+
+
+必要なパッケージをインストール
+
+zram kernel module: linux-image-extra-virtualパッケージ
+systemd-zram-generator
+
+sudo apt update
+sudo apt install linux-image-extra-virtual systemd-zram-generato...]]></description><link>https://zenn.dev/walkmana_25/articles/ubuntu-zram-install</link><guid isPermaLink="true">https://zenn.dev/walkmana_25/articles/ubuntu-zram-install</guid><pubDate>Sun, 16 Mar 2025 08:41:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wtKYQIfK--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ubuntu%25E3%2581%25ABzram%25E3%2582%2592%25E5%25B0%258E%25E5%2585%25A5%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Lapis%252FWalkmana-25%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4WWZuenRwVm81ZmxRVlpTaTUxT045eG1iNHEzSUtVc2FhYmVadnczZz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Lapis/Walkmana-25</dc:creator></item><item><title><![CDATA[Geforce RTX 5070 TiをLinuxで動かそうと思ったが失敗した]]></title><description><![CDATA[2025/3/16 現在の、手元で確認した結果になります。
+マザボとの相性も相当ありそうかもしれませんが、デカすぎて外すの面倒ですね・・
+
+ 環境
+
+CPU: Ryzen7 5700X (アリエクで15000円ぐらいだったやつ)
+メモリ: DDR4 3600MHz 16GB x2
+M/B: ASUS TUF GAMING B550M Plus（家にPCIe4.0のマザボすらなかったので、わざわざこの時期になってB550マザーを購入。新規に組むならAM5買った方がいいです）
+電源: GRPW-GK750W/90+（以前のからの流用。850Wの方がいいかも）
+SSD: WD 750の 1TB...]]></description><link>https://zenn.dev/showyou/articles/7a02027414cd52</link><guid isPermaLink="true">https://zenn.dev/showyou/articles/7a02027414cd52</guid><pubDate>Sun, 16 Mar 2025 05:15:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BOkg3p8g--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Geforce%2520RTX%25205070%2520Ti%25E3%2582%2592Linux%25E3%2581%25A7%25E5%258B%2595%25E3%2581%258B%25E3%2581%259D%25E3%2581%2586%25E3%2581%25A8%25E6%2580%259D%25E3%2581%25A3%25E3%2581%259F%25E3%2581%258C%25E5%25A4%25B1%25E6%2595%2597%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:showyou%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pTaGU5NVBLMWdLZ01CZ0E2dVh1SDlVYnBFM0d4cmstNFY1UHlYeFE9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>showyou</dc:creator></item><item><title><![CDATA[Ubuntuをインストールしたらやりたいことリスト]]></title><description><![CDATA[UbuntuをPCにクリーンインストールするのはいいが、
+最初は、ほぼ何もソフトが入っていない状態（それがいいのだが）
+だから、何かしらのセットアップは行いたい。
+ただ、普段Macとかに慣れていると、
+久しぶりにUbuntuとかを触ると、
+何をすればいいか忘れる...
+なので、本記事ではUbuntuを入れたら
+最低限設定したいことをまとめようと思う。
+
+ 目次
+
+日本語入力の設定
+キーボード設定
+US配列からJIS配列への変更
+ブラウザの設定
+VirtualBoxの設定
+Gitの設定
+Vim/Neovimの設定
+Node.jsの設定
+開発ツールの導入
+Tmuxの設定
+Zshの設定
+Rub...]]></description><link>https://zenn.dev/reisuta/articles/c45c4581636843</link><guid isPermaLink="true">https://zenn.dev/reisuta/articles/c45c4581636843</guid><pubDate>Sun, 16 Mar 2025 04:23:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--XGogRvhN--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ubuntu%25E3%2582%2592%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%2597%25E3%2581%259F%25E3%2582%2589%25E3%2582%2584%25E3%2582%258A%25E3%2581%259F%25E3%2581%2584%25E3%2581%2593%25E3%2581%25A8%25E3%2583%25AA%25E3%2582%25B9%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:r%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzIyYTBlNmY3YTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>r</dc:creator></item><item><title><![CDATA[Linuxコマンド]]></title><description><![CDATA[
+ はじめに
+業務でLinuxをたまに使用するのでコマンドをメモしておく
+気が向いたときに順次追加していきます。
+
+ 操作
+
+ ファイルの一覧を表示
+ls -la
+
+ ファイル名の変更
+mv ./変更前のファイル名 ./変更後のファイル名
+
+ ディレクトリを移動
+cd /home/user
+]]></description><link>https://zenn.dev/nosho/articles/0737df806bba92</link><guid isPermaLink="true">https://zenn.dev/nosho/articles/0737df806bba92</guid><pubDate>Sat, 15 Mar 2025 07:20:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wb9hOzNQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:Linux%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:meltulto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzkxZWY2ZTNkNmMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>meltulto</dc:creator></item><item><title><![CDATA[C++ Core Guidelinesでチェックする]]></title><description><![CDATA[
+ 序
+いきなり余談ですが、先日、Bjarne Stroustrup先生が警鐘を鳴らしていたとされる記事を見かけました。
+https://www.theregister.com/2025/03/02/c_creator_calls_for_action/
+最近この人何してるんだろ？と検索してみたところ、
+https://www.youtube.com/watch?v=G7oY8QVL3Fs
+という動画が出てきて、個人的にはあまり感想もないインタビューだったのですが、その中で11:30くらいでC++のガイドラインがあるよという話が出てきました。これでどんなチェックが出来るのかを見てみること...]]></description><link>https://zenn.dev/dameyodamedame/articles/de20cdf00efc9a</link><guid isPermaLink="true">https://zenn.dev/dameyodamedame/articles/de20cdf00efc9a</guid><pubDate>Sat, 15 Mar 2025 05:41:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fYhVc7Al--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:C%252B%252B%2520Core%2520Guidelines%25E3%2581%25A7%25E3%2583%2581%25E3%2582%25A7%25E3%2583%2583%25E3%2582%25AF%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:dameyodamedame%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvZC5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>dameyodamedame</dc:creator></item><item><title><![CDATA[[Linux] エイリアスをサクッと追加したかった]]></title><description><![CDATA[おはようございます、こんにちは、こんばんは。
+スペースマーケットでWebエンジニアをしています、s0arです。
+しゅんみんあかつｋ
+
+ エイリアス、どう管理してますか
+自分は今までエイリアスの管理とか考えてませんでした。
+でもこの前自宅のWSLを再構築してて思いました。
+「エイリアス追加すんのめんどくね」って。
+
+ なので作りました
+https://github.com/s-0-a-r/simple-alias
+READMEに記載のコマンドを実行すると使っているシェル環境の設定ファイルにそれっぽいエイリアスが追加されます。
+一応bash、zsh、fishに対応しているつもりですがバチクソ...]]></description><link>https://zenn.dev/spacemarket/articles/195bb44c5fb58b</link><guid isPermaLink="true">https://zenn.dev/spacemarket/articles/195bb44c5fb58b</guid><pubDate>Sat, 15 Mar 2025 04:53:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--TrLiUB57--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BLinux%255D%2520%25E3%2582%25A8%25E3%2582%25A4%25E3%2583%25AA%25E3%2582%25A2%25E3%2582%25B9%25E3%2582%2592%25E3%2582%25B5%25E3%2582%25AF%25E3%2583%2583%25E3%2581%25A8%25E8%25BF%25BD%25E5%258A%25A0%25E3%2581%2597%25E3%2581%259F%25E3%2581%258B%25E3%2581%25A3%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:s0ar%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc1NTA1NzM5OGYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25B9%25E3%2583%259A%25E3%2583%25BC%25E3%2582%25B9%25E3%2583%259E%25E3%2583%25BC%25E3%2582%25B1%25E3%2583%2583%25E3%2583%2588%2520Engineer%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lYQmZpM0tlczYtbDE1ektkMFM2N3hvWVBHZGxvZHdxTU4yVnNBUHc9czI1MC1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>s0ar</dc:creator></item><item><title><![CDATA[「ゼロからはじめるLinuxサーバー構築・運用ガイド 第2版 動かしながら学ぶWebサーバーの作り方」で学んでみた]]></title><description><![CDATA[
+ VPSのシステムアップデート
+$ sudo dnf -y update
+
+ sshコマンドでログイン　（さくらのVPS）
+管理画面参照
+$ ssh user名@Ipアドレス
+
+ nanoエディタインストール
+$ sudo dnf -y install tar nano
+
+ OSの自動アップデート
+$ sudo dnf -y install dnf-automatic
+nanoエディタで編集
+$ sudo nano /etc/dnf/automatic.confの中のapply_updates = yesに設定。
+有効化
+$ sudo systemctl start dnf-autom...]]></description><link>https://zenn.dev/t_oishi/articles/0a2280a4e00734</link><guid isPermaLink="true">https://zenn.dev/t_oishi/articles/0a2280a4e00734</guid><pubDate>Fri, 14 Mar 2025 14:34:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3h58HUih--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%258C%25E3%2582%25BC%25E3%2583%25AD%25E3%2581%258B%25E3%2582%2589%25E3%2581%25AF%25E3%2581%2598%25E3%2582%2581%25E3%2582%258BLinux%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E6%25A7%258B%25E7%25AF%2589%25E3%2583%25BB%25E9%2581%258B%25E7%2594%25A8%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%2520%25E7%25AC%25AC2%25E7%2589%2588%2520%25E5%258B%2595%25E3%2581%258B%25E3%2581%2597%25E3%2581%25AA%25E3%2581%258C%25E3%2582%2589%25E5%25AD%25A6%25E3%2581%25B6Web%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2581%25AE%25E4%25BD%259C%25E3%2582%258A%25E6%2596%25B9%25E3%2580%258D%25E3%2581%25A7%25E5%25AD%25A6%25E3%2582%2593%25E3%2581%25A7%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Taka%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ5MjUyOTY4MTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Taka</dc:creator></item><item><title><![CDATA[Linuxでマウスカーソルを可愛くする[Hyprland]]]></title><description><![CDATA[Linuxでなんかかわいいマウスカーソルに変更したいと感じた。
+Hyprlandを使用しているため、Hyprcursorのことを調べていた。そうしたら、Arch Wikiでカーソルに関するものを見つけた。
+そこからPacman Cursorっていうかわいいカーソルを見つけたから、これを使用してみたいと思う。
+サイトから圧縮ファイルをダウンロードして、以下のように解凍して保存。
+mkdir ~/.local/share/icons
+tar xvf pacman.tar.gz -C ~/.local/share/icons
+次に適用させる。hyprland.confのフォント設定部分を以下の...]]></description><link>https://zenn.dev/gobuster/articles/9560c6337ddeec</link><guid isPermaLink="true">https://zenn.dev/gobuster/articles/9560c6337ddeec</guid><pubDate>Thu, 13 Mar 2025 15:38:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--QhGEjvP9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%25E3%2581%25A7%25E3%2583%259E%25E3%2582%25A6%25E3%2582%25B9%25E3%2582%25AB%25E3%2583%25BC%25E3%2582%25BD%25E3%2583%25AB%25E3%2582%2592%25E5%258F%25AF%25E6%2584%259B%25E3%2581%258F%25E3%2581%2599%25E3%2582%258B%255BHyprland%255D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%258C%25E3%2582%2593%25E3%2581%2593%25E3%2582%2593%25E3%2583%2590%25E3%2583%258A%25E3%2583%258A%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE3NDhhNjk0MzcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>れんこんバナナ</dc:creator></item><item><title><![CDATA[Hyprlockを設定してみたよ]]></title><description><![CDATA[Hyprlandを設定していて、ロック機能がほしいと思ってHyprlockを設定した
+環境：Fedora 41
+install
+sudo dnf install hyprlock
+config fileを作ります！
+touch ~/.config/hypr/hyprlock.conf
+configしてみます。初めてなので適当につくリました。GitHubにあるサンプルconfigに壁紙要素を追加しました。
+# sample hyprlock.conf
+# for more configuration options, refer https://wiki.hyprland.org/Hypr...]]></description><link>https://zenn.dev/gobuster/articles/e6b5cbeed8ef5c</link><guid isPermaLink="true">https://zenn.dev/gobuster/articles/e6b5cbeed8ef5c</guid><pubDate>Thu, 13 Mar 2025 14:13:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7709lNIx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Hyprlock%25E3%2582%2592%25E8%25A8%25AD%25E5%25AE%259A%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25E3%2582%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%258C%25E3%2582%2593%25E3%2581%2593%25E3%2582%2593%25E3%2583%2590%25E3%2583%258A%25E3%2583%258A%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE3NDhhNjk0MzcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>れんこんバナナ</dc:creator></item><item><title><![CDATA[Linuxでepollを使ってみる]]></title><description><![CDATA[
+ 序
+昔はthreadとかがなくて(統一されてなくて)、select/pollを使って書かれたサーバーとかを良く見かけました。threadが統一され、Windowsが32bitになるとマルチスレッド全盛になってあまり見かけなくなり、nginxやnode.jsが出てきた辺りで一時期epollが持て囃されてた気がします。最近ではそんなepollの記事もメッキリ減りましたが、そろそろ私も少々使ってみるかとこんな記事を書いている次第です。
+※この記事は以前Qiitaに掲載していた記事で、以下はそのマークダウンになります。
+https://github.com/marudedameo2019/q...]]></description><link>https://zenn.dev/dameyodamedame/articles/59cab0f2c975b0</link><guid isPermaLink="true">https://zenn.dev/dameyodamedame/articles/59cab0f2c975b0</guid><pubDate>Thu, 13 Mar 2025 03:38:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--FUDy6wQd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%25E3%2581%25A7epoll%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:dameyodamedame%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvZC5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>dameyodamedame</dc:creator></item><item><title><![CDATA[前回の記事からの進捗]]></title><description><![CDATA[
+ 前回からの経過
+前回はAsahi LinuxでのFedoraのインストールを紹介しました。それからいっときFedoraを使っていましたが、私の設定がまずかったのか何故かGNOMEで謎のログインループ（ログイン画面でパスワードを入れたら入れずにまたログイン画面に戻ってくる）を繰り返したので、この際だからと昔から憧れだったArch Linuxをインストールしてみました。
+とはいうものの、インストール方法は、最初のURLが変わるだけで他は全て一緒です。
+念の為インストールのスクリプトを載せておきます。
+curl https://asahi-alarm.org/installer-boots...]]></description><link>https://zenn.dev/miosky521/articles/5d81c8f11d76dc</link><guid isPermaLink="true">https://zenn.dev/miosky521/articles/5d81c8f11d76dc</guid><pubDate>Thu, 13 Mar 2025 02:14:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--z_RmsGJC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2589%258D%25E5%259B%259E%25E3%2581%25AE%25E8%25A8%2598%25E4%25BA%258B%25E3%2581%258B%25E3%2582%2589%25E3%2581%25AE%25E9%2580%25B2%25E6%258D%2597%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Louise%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2hSWXlWVzhjZHE5aTlpZlQ1QTJiNkxDNHdQZU1yVkRIYkw3cVZudUxBPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Louise</dc:creator></item><item><title><![CDATA[Swayのキーボードレイアウトの指定方法]]></title><description><![CDATA[SwayでデフォルトだとUS配列となる。
+日本語への指定するために、Swayのconfigをいじる。configの場所は次のどれかにあると思われる。
+/etc/sway/config
+~/.config/sway/config
+inputで検索をかけ、以下を追加
+input type:keyboard {
+    xkb_layout jp
+}
+以下のコマンドを実行して、変更を適用
+swaymsg reload
+]]></description><link>https://zenn.dev/gobuster/articles/89039752307363</link><guid isPermaLink="true">https://zenn.dev/gobuster/articles/89039752307363</guid><pubDate>Wed, 12 Mar 2025 08:39:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--OfO_3VG9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Sway%25E3%2581%25AE%25E3%2582%25AD%25E3%2583%25BC%25E3%2583%259C%25E3%2583%25BC%25E3%2583%2589%25E3%2583%25AC%25E3%2582%25A4%25E3%2582%25A2%25E3%2582%25A6%25E3%2583%2588%25E3%2581%25AE%25E6%258C%2587%25E5%25AE%259A%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%258C%25E3%2582%2593%25E3%2581%2593%25E3%2582%2593%25E3%2583%2590%25E3%2583%258A%25E3%2583%258A%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE3NDhhNjk0MzcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>れんこんバナナ</dc:creator></item><item><title><![CDATA[素早くGDMへ移動する]]></title><description><![CDATA[Gnome環境で素早くGDM(ログイン画面)へ移動したいと思った。
+そこでショートカットキーの作成を行う。
+環境
+Fedora 41 Gnome
+以下をカスタムショートカットに追加した。割当はSwayと合わせてSuper+Shift+E。パスワードは必要だがまあまあ素早くできるのでしばらくこうする。
+bash -c "pkexec systemctl restart gdm"
+]]></description><link>https://zenn.dev/gobuster/articles/73e51ffaccbfa1</link><guid isPermaLink="true">https://zenn.dev/gobuster/articles/73e51ffaccbfa1</guid><pubDate>Wed, 12 Mar 2025 08:27:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9qyNEyJZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%25B4%25A0%25E6%2597%25A9%25E3%2581%258FGDM%25E3%2581%25B8%25E7%25A7%25BB%25E5%258B%2595%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%258C%25E3%2582%2593%25E3%2581%2593%25E3%2582%2593%25E3%2583%2590%25E3%2583%258A%25E3%2583%258A%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE3NDhhNjk0MzcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>れんこんバナナ</dc:creator></item><item><title><![CDATA[the philosophy settled in vertical]]></title><description><![CDATA[Reach for wisdom, yet you stray,
+Truth is closer than you say,
+Fingers turn, the words unfold,
+Mysteries solved in print, behold.
+]]></description><link>https://zenn.dev/gobuster/articles/6ff5dd0aa1c7ec</link><guid isPermaLink="true">https://zenn.dev/gobuster/articles/6ff5dd0aa1c7ec</guid><pubDate>Wed, 12 Mar 2025 07:57:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--UWbrSqZq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:the%2520philosophy%2520settled%2520in%2520vertical%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%258C%25E3%2582%2593%25E3%2581%2593%25E3%2582%2593%25E3%2583%2590%25E3%2583%258A%25E3%2583%258A%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE3NDhhNjk0MzcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>れんこんバナナ</dc:creator></item><item><title><![CDATA[【Linux】プロンプトの設定]]></title><description><![CDATA[
+ プロンプトとは
+OSログイン後に表示されているアレです。
+
+ プロンプト設定
+以下デフォルトの設定
+[root@localhost ~]# echo $PS1
+[\u@\h \W]\$
+[root@localhost ~]#
+今回は全ユーザに対して以下のオプションを設定してみます。
+export PS1="オプション"としてもよいですが、永続設定としたいため/etc/profile.d/PS1.shを作成します。
+
+
+\h：ホスト名(ショートネーム)
+
+\t：時刻(HH:mm:ss、24時間表記)
+
+$：rootのときは#、それ以外は$
+
+\W：カレントディレクトリ
+
+\u：ユーザ名...]]></description><link>https://zenn.dev/pamesan/articles/b1801a6fc9a944</link><guid isPermaLink="true">https://zenn.dev/pamesan/articles/b1801a6fc9a944</guid><pubDate>Tue, 11 Mar 2025 13:17:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--itCWWrdZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Linux%25E3%2580%2591%25E3%2583%2597%25E3%2583%25AD%25E3%2583%25B3%25E3%2583%2597%25E3%2583%2588%25E3%2581%25AE%25E8%25A8%25AD%25E5%25AE%259A%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25B1%25E3%2582%2581%25E3%2581%2595%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M5NGQ3ZjMwMjcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ぱめさん</dc:creator></item><item><title><![CDATA[WSL 2: Debianのインストールと初期設定ガイド (2025年版)]]></title><description><![CDATA[
+ tl;dr
+Windows Terminal 上で、以下のコマンドを実行して、Debian をインストール・セットアップします。
+!
+Windows 11を推奨します。
+Windows 10では一部の機能に制限があります (カーネルをwsl --updateで更新できない)。
+
+
+
+WSLの既定のバージョンを 2 に設定
+wsl --set-default-version 2
+
+
+
+Debianをインストール
+wsl --install -d Debian
+
+
+
+ユーザーアカウントを作成
+wsl -d Debian
+
+
+
+Windows Terminalを再起動
+
+
+以上で、Wind...]]></description><link>https://zenn.dev/atsushifx/articles/wsl2-setup-debian-install</link><guid isPermaLink="true">https://zenn.dev/atsushifx/articles/wsl2-setup-debian-install</guid><pubDate>Tue, 11 Mar 2025 11:36:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--p8MBWKj1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:WSL%25202%253A%2520Debian%25E3%2581%25AE%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%25A8%25E5%2588%259D%25E6%259C%259F%25E8%25A8%25AD%25E5%25AE%259A%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%2520%25282025%25E5%25B9%25B4%25E7%2589%2588%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:atsushifx%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ1ZDYxMWM1ZTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>atsushifx</dc:creator></item><item><title><![CDATA[【Linux】ユーザ設定]]></title><description><![CDATA[
+ ユーザ設定
+usermod testuser
+
+ サブグループへ追加する
+testuserを事前に作成したグループtestgroupに追加する。
+[root@localhost ~]# tail -n 2 /etc/passwd
+testuser:x:3000:3000::/home/testuser:/bin/bash    //これを
+testuser2:x:3001:3001::/home/testuser2:/sbin/nologin
+[root@localhost ~]#
+[root@localhost ~]# tail -n 3 /etc/group
+testuser:x...]]></description><link>https://zenn.dev/pamesan/articles/c7632206ac995b</link><guid isPermaLink="true">https://zenn.dev/pamesan/articles/c7632206ac995b</guid><pubDate>Mon, 10 Mar 2025 14:42:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--aRkhn0rm--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Linux%25E3%2580%2591%25E3%2583%25A6%25E3%2583%25BC%25E3%2582%25B6%25E8%25A8%25AD%25E5%25AE%259A%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25B1%25E3%2582%2581%25E3%2581%2595%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M5NGQ3ZjMwMjcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ぱめさん</dc:creator></item><item><title><![CDATA[【Linux】ユーザ作成]]></title><description><![CDATA[
+ ユーザ作成
+useradd testuser
+
+ useraddのデフォルト値
+オプションを明示的に指定しない場合、以下のデフォルト値が設定される。
+[root@localhost ~]# useradd -D
+GROUP=100
+HOME=/home
+INACTIVE=-1
+EXPIRE=
+SHELL=/bin/bash
+SKEL=/etc/skel
+CREATE_MAIL_SPOOL=yes
+[root@localhost ~]#
+
+ UID、GIDを同じ値で作成
+useradd testuser -u 3000 -U
+!
+-gオプションでグループの指定が可能だが事前に作成してい...]]></description><link>https://zenn.dev/pamesan/articles/32e3728b462a1a</link><guid isPermaLink="true">https://zenn.dev/pamesan/articles/32e3728b462a1a</guid><pubDate>Mon, 10 Mar 2025 14:05:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--SaPommML--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Linux%25E3%2580%2591%25E3%2583%25A6%25E3%2583%25BC%25E3%2582%25B6%25E4%25BD%259C%25E6%2588%2590%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25B1%25E3%2582%2581%25E3%2581%2595%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M5NGQ3ZjMwMjcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ぱめさん</dc:creator></item><item><title><![CDATA[catatsuy's Picks Vol.6]]></title><description><![CDATA[
+ Go
+
+https://www.cncf.io/blog/2025/03/03/announcing-the-beta-release-of-opentelemetry-go-auto-instrumentation-using-ebpf/
+以前から注目しているeBPFを活用し、GoでOpenTelemetryを実装できることが発表された。
+
+ Security
+
+https://zenn.dev/catatsuy/scraps/e423c2c37f3eb6
+AppleはイギリスでADPを提供できない。プライバシーを巡る法律と技術の戦いは、これからも続きそう。
+https://zen...]]></description><link>https://zenn.dev/catatsuy/articles/54b29ef51f0132</link><guid isPermaLink="true">https://zenn.dev/catatsuy/articles/54b29ef51f0132</guid><pubDate>Sun, 09 Mar 2025 07:20:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--71vG3y0o--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_76:catatsuy%2527s%2520Picks%2520Vol.6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:catatsuy%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NiYTVlYjRjMTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>catatsuy</dc:creator></item><item><title><![CDATA[AndroidのLinux開発環境(試験運用版)でRustを実行してみる]]></title><description><![CDATA[
+ 0.なんかAndroidにLinux開発環境が降ってきたらしい
+へ〜！
+https://x.com/kuro_m88/status/1898197222493503679
+リリースを確認。ほんとだ。おもしろそー
+https://developer.android.com/about/versions/15/release-notes?hl=ja#linux-development-environment
+じゃあやってみよ！ということで、以下、ただそれだけのメモです。仕様機材はpixel8a。
+!
+試験運用版ということですし、僕もよくわからないまま触っているため、
+試す場合は自己責任で...]]></description><link>https://zenn.dev/sh1r4s4g1/articles/524cc3eab835c4</link><guid isPermaLink="true">https://zenn.dev/sh1r4s4g1/articles/524cc3eab835c4</guid><pubDate>Sun, 09 Mar 2025 06:20:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3OSF5LZH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Android%25E3%2581%25AELinux%25E9%2596%258B%25E7%2599%25BA%25E7%2592%25B0%25E5%25A2%2583%2528%25E8%25A9%25A6%25E9%25A8%2593%25E9%2581%258B%25E7%2594%25A8%25E7%2589%2588%2529%25E3%2581%25A7Rust%25E3%2582%2592%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:SH1R4S4G1%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSk1YQmtDLVREWUhYTFY1NVFOQkM4NmNPZXdiM09vN1l4ZUNQSmNTckRXN2c9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>SH1R4S4G1</dc:creator></item></channel></rss>
