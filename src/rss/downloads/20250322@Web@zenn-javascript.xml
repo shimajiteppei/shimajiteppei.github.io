@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「JavaScript」のフィード]]></title><description><![CDATA[Zennのトピック「JavaScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/javascript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/64acd76870.png</url><title>Zennの「JavaScript」のフィード</title><link>https://zenn.dev/topics/javascript</link></image><generator>zenn.dev</generator><lastBuildDate>Sat, 22 Mar 2025 01:27:35 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/javascript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[フロントでのStrategyパターンの使い方]]></title><description><![CDATA[最近Reactアプリケーションでユーザーの支払い手段（例：credit、paypay、bankなど）によって処理を変える機能を作る時 if 文を多用してるのを見た。
+これだとコードがどんどん煩雑になるので、Strategy（ストラテジー）パターンを使って、支払いごとの処理を整理する方法をメモする。
+
+
+ ❌ よくある悪い例：条件分岐だらけの関数
+まずは、よくある if 文だらけの例。
+function pay(method, amount) {
+  if (method === 'credit') {
+    return fetch('/api/pay/credit', {
+     ...]]></description><link>https://zenn.dev/billysama/articles/29e8e3366d4160</link><guid isPermaLink="true">https://zenn.dev/billysama/articles/29e8e3366d4160</guid><pubDate>Fri, 21 Mar 2025 19:50:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--NJIr4T8v--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2595%25E3%2583%25AD%25E3%2583%25B3%25E3%2583%2588%25E3%2581%25A7%25E3%2581%25AEStrategy%25E3%2583%2591%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%25B3%25E3%2581%25AE%25E4%25BD%25BF%25E3%2581%2584%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Billysama%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUVkRlRwNlRkcFIydF9QeEREa0ZFR2E1OTZxbG9BbzVrcnpuUHFPRVU4Uy1MQT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Billysama</dc:creator></item><item><title><![CDATA[Twitter interestsis no thank you.]]></title><description><![CDATA[
+ だから「興味関心」のチェックを全て外すんです。
+アルゴリズムごときが図に乗るな。知りたい情報は自分で探す。電子計算機ごときが人間を知った気になるな。
+
+ 概要
+「興味関心」のチェックを全て外すんです。
+
+ 環境
+
+モダン ブラウザー
+Tampermonkey
+https://www.tampermonkey.net/
+
+
+
+ script
+今見返すともう少し良いコードが書けそうだけど。。。
+
+userscript.js
+// ==UserScript==
+// @name         だから「興味関心」のチェックを全て外すんです。
+// @namespace    http://...]]></description><link>https://zenn.dev/libraplanet/articles/23aa1b8aff2fba</link><guid isPermaLink="true">https://zenn.dev/libraplanet/articles/23aa1b8aff2fba</guid><pubDate>Fri, 21 Mar 2025 16:43:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--tCpbWpni--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:Twitter%2520interestsis%2520no%2520thank%2520you.%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:takumi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ5ZjRkNTRiODQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takumi</dc:creator></item><item><title><![CDATA[JavaScript で range 配列を作る方法は結局どれが一番いいのか]]></title><description><![CDATA[太古の昔から存在する議論。
+連番配列の作成、つまり n から [0, 1, 2, ...] を作る方法はどれがベストか。
+歴史上、数多のヘルパー関数が作られてきたであろうことは想像に難くない。
+
+ 結論
+愚直に for で回して push する。
+const arr = [];
+for (let i = 0; i &lt; len; i++) {
+  arr.push(i);
+}
+または、サイズ指定で作成して for で代入する。
+const arr = Array(len);
+for (let i = 0; i &lt; len; i++) {
+  arr[i] = i;
+}
+ベンチマ...]]></description><link>https://zenn.dev/zakuro9715/articles/js-array-range-bench</link><guid isPermaLink="true">https://zenn.dev/zakuro9715/articles/js-array-range-bench</guid><pubDate>Fri, 21 Mar 2025 04:29:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ihXkf8_O--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%2520%25E3%2581%25A7%2520range%2520%25E9%2585%258D%25E5%2588%2597%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%25E3%2581%25AF%25E7%25B5%2590%25E5%25B1%2580%25E3%2581%25A9%25E3%2582%258C%25E3%2581%258C%25E4%25B8%2580%25E7%2595%25AA%25E3%2581%2584%25E3%2581%2584%25E3%2581%25AE%25E3%2581%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:zakuro%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RhMTljMmZmZDAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>zakuro</dc:creator></item><item><title><![CDATA[AIがwebで使えるツール集を作った[Next.js]]]></title><description><![CDATA[
+ はじめに
+Copilotを積極的に活用し、通常よりも短期間で「PocketALL」というWebアプリを完成させることができました。的確なコード提案のおかげで、初心者ながらも複雑な実装にチャレンジでき、学習と開発を同時に進めることができました。このアプリは、日常的によく使う便利ツールを一箇所にまとめ、ブラウザ上で手軽に利用できるよう設計しています。
+https://pocket-all.vercel.app
+
+ 実装した機能
+現在、PocketALLには以下の4つの機能を実装しています：
+
+ 1. QRコード生成
+URLやテキストを入力するだけで、すぐにQRコードが生成できる機能です。...]]></description><link>https://zenn.dev/yuto0623/articles/4fddf369f24ce6</link><guid isPermaLink="true">https://zenn.dev/yuto0623/articles/4fddf369f24ce6</guid><pubDate>Fri, 21 Mar 2025 04:09:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--V2FuhuYH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AI%25E3%2581%258Cweb%25E3%2581%25A7%25E4%25BD%25BF%25E3%2581%2588%25E3%2582%258B%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%25E9%259B%2586%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%255BNext.js%255D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yuto0623%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FjMDMyMjVmYTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yuto0623</dc:creator></item><item><title><![CDATA[[TanStack Query v5] useMutation callback と mutate callback の挙動の違い]]></title><description><![CDATA[こんにちは、株式会社カナリーでソフトウェアエンジニアをやっている matsu です。
+先日 TanStack Query の mutation 処理で思わぬ落とし穴に遭遇したのですが、ドキュメントや解説記事が見当たらなかったので、本記事にて知見を共有します 🐈‍⬛
+
+ はじめに
+TanStack Query の mutation 処理では、onSuccess / onError / onSettled オプションにより、mutation 処理後に実行される callback 関数を登録できます。
+これらの callback 関数は、React の場合、useMutation と muta...]]></description><link>https://zenn.dev/canary_techblog/articles/c60c7ddb73e6a5</link><guid isPermaLink="true">https://zenn.dev/canary_techblog/articles/c60c7ddb73e6a5</guid><pubDate>Fri, 21 Mar 2025 01:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--EMKx-58o--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BTanStack%2520Query%2520v5%255D%2520useMutation%2520callback%2520%25E3%2581%25A8%2520mutate%2520callbac...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:matsu%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U3NzUwZmNjMzUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Canary%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZkM2Q2NzFjZWIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>matsu</dc:creator></item><item><title><![CDATA[[Node.js] ループ内でstream.pipeline()を使ってはいけない]]></title><description><![CDATA[
+ はじめに
+仕事で以下のような仕様のコードを書いていました。
+
+あるファイルを分割してダウンロード
+ダウンロードしたファイルを逐次的に一時ファイルに保存
+最後に保存した一時ファイルを結合し、1つのファイルにする
+
+これを実現するためにstream/promisesのpipeline()をループ内で使っていたところ、実行が途中で止まってしまうという問題が発生しました。
+備忘録として原因と対策を記載しておきます。
+
+ 問題のあるコード
+import { createWriteStream, createReadStream } from 'fs';
+import { pipeline } ...]]></description><link>https://zenn.dev/cococig/articles/12548670e3f642</link><guid isPermaLink="true">https://zenn.dev/cococig/articles/12548670e3f642</guid><pubDate>Thu, 20 Mar 2025 16:44:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--346V4aKA--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BNode.js%255D%2520%25E3%2583%25AB%25E3%2583%25BC%25E3%2583%2597%25E5%2586%2585%25E3%2581%25A7stream.pipeline%2528%2529%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25AF%25E3%2581%2584%25E3%2581%2591%25E3%2581%25AA%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:cococig%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ2NzVlYTM4OGYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>cococig</dc:creator></item><item><title><![CDATA[WEBシステムとは？]]></title><description><![CDATA[今、あなたが読んでいるこの記事は、どのような仕組みで表示されているのでしょうか？
+「WEBシステム」について調べると、ブラウザやサーバー、HTML、プログラミングといった言葉が出てきますが、これらはいったい何なのでしょうか。
+この記事では、それらの基本的な用語を含め、WEBシステムの仕組みをわかりやすく解説していきます。
+
+ WEBシステムの仕組み
+
+ 概要
+
+私たちがインターネットで記事を読んだり、YouTubeの動画を見るとき、スマホやパソコンの「ブラウザ」は、「サーバー」というコンピュータに「このページを表示してください」とリクエストを送ります。サーバーは、そのリクエストに応えて記...]]></description><link>https://zenn.dev/frontline/articles/0a5d26964a29fc</link><guid isPermaLink="true">https://zenn.dev/frontline/articles/0a5d26964a29fc</guid><pubDate>Thu, 20 Mar 2025 12:12:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Adcd1ssl--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:WEB%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%25E3%2581%25A8%25E3%2581%25AF%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kota%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E0YzdmNGUwOWQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kota</dc:creator></item><item><title><![CDATA[Reactでモーダルが閉じるまで処理を待機させる方法]]></title><description><![CDATA[
+ はじめに
+今回はかなり難しいです。
+非同期・Promise・useState・props・コールバック関数・移譲、あたりを知っている前提になるため、何を言っているいかわからない場合は先にこれらの記事を読むことをお勧めします。
+Promiseについては後日、私も書きたいと思っていますが、今回結構ハマったのでタイトルの答えを先に公開します。
+
+ 考え方
+モーダルの結果、画面遷移を伴う場合は何も難しくありません。
+普通にnavigateなり、aタグなりでロケーションを変えるだけです。
+しかし、同じ画面で独自仕様の確認モーダルを開いて、モーダルで押されたボタンによって処理を進めるか決めたいと...]]></description><link>https://zenn.dev/k_tabuchi/articles/20fe4fb5360556</link><guid isPermaLink="true">https://zenn.dev/k_tabuchi/articles/20fe4fb5360556</guid><pubDate>Thu, 20 Mar 2025 11:25:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8rhrSxre--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%25E3%2581%25A7%25E3%2583%25A2%25E3%2583%25BC%25E3%2583%2580%25E3%2583%25AB%25E3%2581%258C%25E9%2596%2589%25E3%2581%2598%25E3%2582%258B%25E3%2581%25BE%25E3%2581%25A7%25E5%2587%25A6%25E7%2590%2586%25E3%2582%2592%25E5%25BE%2585%25E6%25A9%259F%25E3%2581%2595%25E3%2581%259B%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:k-tabuchi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhkMjhhY2RlZGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>k-tabuchi</dc:creator></item><item><title><![CDATA[Grapesjsを構築①]]></title><description><![CDATA[
+ GrapesJSとは？
+GrapesJS（グレープスジェイエス） は、ドラッグ＆ドロップで簡単にWebサイトやメールテンプレートを作成できるオープンソースのWebビルダーです。
+特に、コーディングの知識がなくてもWebページを作れるのが大きな特徴です。
+GrapesJSを使えば、ノーコードでのデザイン作成やカスタムHTMLの編集が可能になるため、Webデザイナーやマーケター にも便利なツールとなっています。
+
+参考：GrapesJSドキュメント（公式）
+参考：GrapesJS (github)
+
+自分なりに色々カスタムしています😀
+https://pf-creater.com/gra...]]></description><link>https://zenn.dev/web_kuroko/articles/37fa74a7c25fc2</link><guid isPermaLink="true">https://zenn.dev/web_kuroko/articles/37fa74a7c25fc2</guid><pubDate>Thu, 20 Mar 2025 10:55:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7k9kv_VC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:Grapesjs%25E3%2582%2592%25E6%25A7%258B%25E7%25AF%2589%25E2%2591%25A0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:web%25E9%25BB%2592%25E5%25AD%2590%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZmNzFjODU0Y2UuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>web黒子</dc:creator></item><item><title><![CDATA[obs-websokcet-jsを使ってOBSと疎通をとる]]></title><description><![CDATA[
+ はじめに
+配信やスクリーンキャプチャなどで広く使われているOBS Studio（Open Broadcaster Software）は、多くのクリエイターにとって必須のツールとなっています。OBSを外部から制御できれば、配信の自動化やカスタムコントロールの作成など、様々な可能性が広がります。
+本記事では、OBSとWebSocketを使った連携方法、特に「obs-websocket-js」ライブラリを使用してJavaScriptからOBSを制御する方法について解説します。
+
+ OBSとは
+OBS Studio（Open Broadcaster Software）は、無料でオープンソース...]]></description><link>https://zenn.dev/te2wow/articles/825623c90abddd</link><guid isPermaLink="true">https://zenn.dev/te2wow/articles/825623c90abddd</guid><pubDate>Thu, 20 Mar 2025 06:03:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--KpIyCQOJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:obs-websokcet-js%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6OBS%25E3%2581%25A8%25E7%2596%258E%25E9%2580%259A%25E3%2582%2592%25E3%2581%25A8%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tetsuwo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSlhvdUdteF9Uanh5VXdmalVwOGx3VEE2dEduVExXMXNLQzN3ck1RUTM0RERpSFJ2WGQ9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tetsuwo</dc:creator></item><item><title><![CDATA[ぷよぷよプログラミングをGodotで実装 04 コード理解（score.js、puyoimage.js）]]></title><description><![CDATA[
+ はじめに
+前回に引き続きぷよぷよプログラミングを利用して、Godotでパズルゲームの作り方の基礎を一緒に学んでいこうと思います。YouTubeでもこの記事の内容に沿ってゲームを作っているので、動画を見ながら取り組んでみてください。
+https://youtu.be/haz-JFJueRs
+前回の記事はこちら
+https://zenn.dev/yurinchi/articles/6b2ba320e47849
+
+ 利用教材
+
+ぷよぷよプログラミング
+
+!
+当該記事の内容は、ぷよぷよプログラミングの利用条件を理解したうえで学習にご利用ください。
+
+
+ この記事で学ぶこと
+godotを触る前...]]></description><link>https://zenn.dev/yurinchi/articles/62e56f4839872e</link><guid isPermaLink="true">https://zenn.dev/yurinchi/articles/62e56f4839872e</guid><pubDate>Thu, 20 Mar 2025 06:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--aF1r6Mli--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%25B7%25E3%2582%2588%25E3%2581%25B7%25E3%2582%2588%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%259F%25E3%2583%25B3%25E3%2582%25B0%25E3%2582%2592Godot%25E3%2581%25A7%25E5%25AE%259F%25E8%25A3%2585%252004%2520%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E7%2590%2586%25E8%25A7%25A3%25EF%25BC%2588score.js%25E3%2580%2581puyoimage.js%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2586%25E3%2583%25BC%25E3%2582%258A%25E3%2582%2593%25E3%2581%25A1%25E3%2581%2583%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTG5mTmtnd0NObm1POTVBUlRkMWRMcU9vM2JiMWotcEViRVdHMlBxLS04UktHWnVTOD1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ゆーりんちぃ</dc:creator></item><item><title><![CDATA[【JavaScript】配列をマージして重複を削除する方法]]></title><description><![CDATA[
+ はじめに
+よくわからないけど動く。
+const member1 = ["2020-08-01", "2020-08-02", "2020-08-03", "2020-08-04"];
+const member2 = ["2020-08-03", "2020-08-04", "2020-08-05", "2020-08-06"];
+const result = [...member1,...member2].filter((element, index, self) =&gt; self.indexOf(element) === index);
+
+console.log(result)...]]></description><link>https://zenn.dev/rendya/articles/js-array-merge-remove-duplicates</link><guid isPermaLink="true">https://zenn.dev/rendya/articles/js-array-merge-remove-duplicates</guid><pubDate>Thu, 20 Mar 2025 02:26:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--nTJhbRoy--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590JavaScript%25E3%2580%2591%25E9%2585%258D%25E5%2588%2597%25E3%2582%2592%25E3%2583%259E%25E3%2583%25BC%25E3%2582%25B8%25E3%2581%2597%25E3%2581%25A6%25E9%2587%258D%25E8%25A4%2587%25E3%2582%2592%25E5%2589%258A%25E9%2599%25A4%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:rendya%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0ZTd5Z2psSlQtYmJpWUFGMzBieTV1MlJDZWJkaFhrZ3F2RWxTdEc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>rendya</dc:creator></item><item><title><![CDATA[あなたのウェブサイトのためのビジュアルエディター – 無料 & オープンソース]]></title><description><![CDATA[あなたのウェブサイトにコンテンツがありますか？
+コードを触らずにビジュアルで編集できたらいいなと思ったことはありませんか？
+Intlayer Visual Editor は、無料でオープンソースのツールで、ウェブアプリのコンテンツをビジュアルインターフェース上で直接編集できます。
+
+
+ なぜ Intlayer Visual Editor なのか？
+
+
+多言語対応 – 複数の言語でコンテンツを簡単に管理
+
+Markdown 対応 – 静的サイトや開発者に最適
+
+外部ファイルの編集 – .md、.txt などの形式をサポート
+
+オープンソース &amp; 無料 – 必要に応じて修正や拡張が可...]]></description><link>https://zenn.dev/aymericzip/articles/1c8141f7f3f540</link><guid isPermaLink="true">https://zenn.dev/aymericzip/articles/1c8141f7f3f540</guid><pubDate>Wed, 19 Mar 2025 22:54:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1wrHhQzL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%2582%25E3%2581%25AA%25E3%2581%259F%25E3%2581%25AE%25E3%2582%25A6%25E3%2582%25A7%25E3%2583%2596%25E3%2582%25B5%25E3%2582%25A4%25E3%2583%2588%25E3%2581%25AE%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%25E3%2583%2593%25E3%2582%25B8%25E3%2583%25A5%25E3%2582%25A2%25E3%2583%25AB%25E3%2582%25A8%25E3%2583%2587%25E3%2582%25A3%25E3%2582%25BF%25E3%2583%25BC%2520%25E2%2580%2593%2520%25E7%2584%25A1%25E6%2596%2599%2520%2526%2520%25E3%2582%25AA%25E3%2583%25BC%25E3%2583%2597%25E3%2583%25B3%25E3%2582%25BD%25E3%2583%25BC%25E3%2582%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:aymericzip%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzViNDI4NDMxMTQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>aymericzip</dc:creator></item><item><title><![CDATA[jsを読み込むだけ？？template作成ツールを製作]]></title><description><![CDATA[
+ 特徴
+
+JavaScriptの知識不要
+特殊な構文不要
+htmlにより、templeteを記述できる
+jsファイルを読み込むだけ
+html要素を引数のようにとれる
+
+以下例
+
+&lt;div class="bbb"&gt;
+    &lt;div class = "contents_wrap_test"&gt;
+        &lt;div class = "contents_wrap_test_2"&gt;
+            &lt;div class="test_wrap"&gt;
+                &lt;div class="price"  style=...]]></description><link>https://zenn.dev/kemii/articles/3c1a74e78aca74</link><guid isPermaLink="true">https://zenn.dev/kemii/articles/3c1a74e78aca74</guid><pubDate>Wed, 19 Mar 2025 06:47:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--KnJOfVh7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:js%25E3%2582%2592%25E8%25AA%25AD%25E3%2581%25BF%25E8%25BE%25BC%25E3%2582%2580%25E3%2581%25A0%25E3%2581%2591%25EF%25BC%259F%25EF%25BC%259Ftemplate%25E4%25BD%259C%25E6%2588%2590%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%25E3%2582%2592%25E8%25A3%25BD%25E4%25BD%259C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kemii%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E5ZGYyMjM5ZmIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kemii</dc:creator></item><item><title><![CDATA[nova_vmのバイトコード処理のコードリーディング]]></title><description><![CDATA[最近Novaで実装したい機能のためにbytecode_compiler.rsとその周辺をを読んでいるのでメモがてら書く。
+本当にただのメモなので、多分読んでも面白くない。
+
+ 内容
+そもそもバイトコードとは、高級言語のコードを仮想マシン向けに変換した中間コードのこと。NovaのVMでは、このバイトコードを解釈・実行することでJavaScriptを処理する。
+今回は以下のコマンドを実行した時の動作を想定して、コードを読んでいく。
+ここではコマンドの詳細は省く。
+cargo run --features typescript eval index.ts
+まず一番トップはnova_cliから始...]]></description><link>https://zenn.dev/yuto76/articles/0361c985197b48</link><guid isPermaLink="true">https://zenn.dev/yuto76/articles/0361c985197b48</guid><pubDate>Tue, 18 Mar 2025 23:38:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ge0iUbM2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:nova_vm%25E3%2581%25AE%25E3%2583%2590%25E3%2582%25A4%25E3%2583%2588%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E5%2587%25A6%25E7%2590%2586%25E3%2581%25AE%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2583%25AA%25E3%2583%25BC%25E3%2583%2587%25E3%2582%25A3%25E3%2583%25B3%25E3%2582%25B0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%25A6%25E3%2582%25A6%25E3%2583%2588%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q4NzFiYTNmNzguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ユウト</dc:creator></item><item><title><![CDATA[遅延読み込み（Lazy Loading）とはなにか？実装方法は？]]></title><description><![CDATA[
+ 遅延読み込み（Lazy Loading）とは？
+こんにちは！WEBアプリ等を開発していく中で、無限スクロールや遅延で読み込むのはどうやって実装するんだろうと思い調べたので記事にしたいと思います！結論から言うと遅延読み込み（Lazy Loading） というのは、ウェブページやアプリケーションのリソース（画像、動画、スクリプト、コンポーネントなど）を、初回のページ読み込み時にすべて読み込むのではなく、必要になったタイミングで読み込む技術のことです。
+
+ 遅延読み込みのメリット
+
+パフォーマンス向上
+初回のページ読み込みを高速化し、ユーザー体験を向上させる。
+ネットワーク負荷の軽減
+ユー...]]></description><link>https://zenn.dev/daichi09167/articles/e097c915146336</link><guid isPermaLink="true">https://zenn.dev/daichi09167/articles/e097c915146336</guid><pubDate>Tue, 18 Mar 2025 15:47:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--K3ebCa7e--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E9%2581%2585%25E5%25BB%25B6%25E8%25AA%25AD%25E3%2581%25BF%25E8%25BE%25BC%25E3%2581%25BF%25EF%25BC%2588Lazy%2520Loading%25EF%25BC%2589%25E3%2581%25A8%25E3%2581%25AF%25E3%2581%25AA%25E3%2581%25AB%25E3%2581%258B%25EF%25BC%259F%25E5%25AE%259F%25E8%25A3%2585%25E6%2596%25B9%25E6%25B3%2595%25E3%2581%25AF%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:daichi09167%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM3YTc4OTEwMDcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>daichi09167</dc:creator></item><item><title><![CDATA[スケールしてもお財布に優しいVercelのコストコントロール]]></title><description><![CDATA[
+ はじめに
+Vercelは、その優れた開発者体験と簡単なデプロイ機能により、多くの開発者に支持されています✨特に最近のAI文脈でも、v0やMCPサーバーのホスティング先としても注目を集めており、その利用範囲はますます広がっています！
+しかし、サービスがスケールするにつれて、コストがボトルネックになるケースも少なくありません。「気がついたら予想外の請求が来ていた😇」という経験をした方もいるのではないでしょうか。Vercelの料金体系は、従量課金が基本となるため、特にトラフィックや処理量が増加すると、コストコントロールが重要になります。
+この記事では、Vercelのコストに焦点を当て、効率...]]></description><link>https://zenn.dev/reiwatravel/articles/796bc3ad8be2fb</link><guid isPermaLink="true">https://zenn.dev/reiwatravel/articles/796bc3ad8be2fb</guid><pubDate>Tue, 18 Mar 2025 11:16:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--UuENv6KS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B9%25E3%2582%25B1%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%2597%25E3%2581%25A6%25E3%2582%2582%25E3%2581%258A%25E8%25B2%25A1%25E5%25B8%2583%25E3%2581%25AB%25E5%2584%25AA%25E3%2581%2597%25E3%2581%2584Vercel%25E3%2581%25AE%25E3%2582%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2588%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%25AB%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2582%2584%25E3%2581%25A3%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M1ZWFiNjc3MGMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E4%25BB%25A4%25E5%2592%258C%25E3%2583%2588%25E3%2583%25A9%25E3%2583%2599%25E3%2583%25AB%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU4YzhjMDMxNTUuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>やっ</dc:creator></item><item><title><![CDATA[【初心者向け】APIとは？使い方と実装方法をわかりやすく解説]]></title><description><![CDATA[APIは現代のソフトウェア開発において非常に重要な要素です。この記事では、APIとは何か、どのように使うのか、そして実際の実装方法について、初心者にもわかりやすく解説します。
+
+ APIとは？
+API（Application Programming Interface）は、異なるソフトウェアやサービス間でデータをやり取りするための仕組みです。簡単に言えば、「プログラムどうしが会話するための共通言語」です。
+
+ APIの役割
+
+
+データの送受信
+
+異なるシステム間でデータを交換
+必要な情報だけを効率的に取得
+
+
+
+機能の提供
+
+複雑な処理を簡単に利用可能
+サービスの機能を外部に公開
+
+
+
+...]]></description><link>https://zenn.dev/homatsu_tech/articles/d664a65b776efe</link><guid isPermaLink="true">https://zenn.dev/homatsu_tech/articles/d664a65b776efe</guid><pubDate>Tue, 18 Mar 2025 11:00:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--eaMdaIsV--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E5%2590%2591%25E3%2581%2591%25E3%2580%2591API%25E3%2581%25A8%25E3%2581%25AF%25EF%25BC%259F%25E4%25BD%25BF%25E3%2581%2584%25E6%2596%25B9%25E3%2581%25A8%25E5%25AE%259F%25E8%25A3%2585%25E6%2596%25B9%25E6%25B3%2595%25E3%2582%2592%25E3%2582%258F%25E3%2581%258B%25E3%2582%258A%25E3%2582%2584%25E3%2581%2599%25E3%2581%258F%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25AE%259D%25E6%259D%25BE%2540%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2YzZWQ1ZGYyMjYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>宝松@システムエンジニア</dc:creator></item><item><title><![CDATA[「え、こんなに便利！？」AJAXで実現する驚きの非同期通信テクニック！]]></title><description><![CDATA[
+ はじめに
+こんにちは、みなさん！Webプログラミングの世界に魅了されている一人のエンジニアです。最近、個人プロジェクトで「ユーザー体験を向上させるために、ページ遷移なしでデータを取得する機能」の実装に挑戦していました。色々と調べていると、「AJAXを使えば簡単だよ！」というアドバイスを技術フォーラムで見つけたんです。
+最初は「AJAX？なんだそれ？」と思いましたが、調べてみると...これが本当に目から鱗が落ちる体験でした！今日はそんなAJAXの魅力と基本的な使い方を、私のような初心者プログラマーの視点からご紹介します！
+
+ AJAXって何？私が感動した非同期通信の魔法！
+AJAX（エ...]]></description><link>https://zenn.dev/takuya77088/articles/a16076ee2e3f3f</link><guid isPermaLink="true">https://zenn.dev/takuya77088/articles/a16076ee2e3f3f</guid><pubDate>Tue, 18 Mar 2025 06:46:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--iqJ2gh2c--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%258C%25E3%2581%2588%25E3%2580%2581%25E3%2581%2593%25E3%2582%2593%25E3%2581%25AA%25E3%2581%25AB%25E4%25BE%25BF%25E5%2588%25A9%25EF%25BC%2581%25EF%25BC%259F%25E3%2580%258DAJAX%25E3%2581%25A7%25E5%25AE%259F%25E7%258F%25BE%25E3%2581%2599%25E3%2582%258B%25E9%25A9%259A%25E3%2581%258D%25E3%2581%25AE%25E9%259D%259E%25E5%2590%258C%25E6%259C%259F%25E9%2580%259A%25E4%25BF%25A1%25E3%2583%2586%25E3%2582%25AF%25E3%2583%258B%25E3%2583%2583%25E3%2582%25AF%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:takuya%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI1ZDMyODgxOTMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takuya</dc:creator></item><item><title><![CDATA[個人開発のeigopencilに、フラッシュカード機能を追加しました。]]></title><description><![CDATA[Rails7でHotwireを使ったファイル内でJavaScriptを使用して実装しました。
+ブラウザ
+&lt;%= render 'users/profile' %&gt;
+
+&lt;div id="container" data-controller="flashcards"&gt;
+&lt;!--ランダムで5枚のフラッシュカードを表示する--&gt;
+&lt;% @microposts.published.sample(5).each do |micropost| %&gt;
+
+ &lt;div id="flashcardContainer" class="flashcardCon...]]></description><link>https://zenn.dev/kazumawada/articles/279305fc0004e6</link><guid isPermaLink="true">https://zenn.dev/kazumawada/articles/279305fc0004e6</guid><pubDate>Mon, 17 Mar 2025 09:38:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vr5Ja_C---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2580%258B%25E4%25BA%25BA%25E9%2596%258B%25E7%2599%25BA%25E3%2581%25AEeigopencil%25E3%2581%25AB%25E3%2580%2581%25E3%2583%2595%25E3%2583%25A9%25E3%2583%2583%25E3%2582%25B7%25E3%2583%25A5%25E3%2582%25AB%25E3%2583%25BC%25E3%2583%2589%25E6%25A9%259F%25E8%2583%25BD%25E3%2582%2592%25E8%25BF%25BD%25E5%258A%25A0%25E3%2581%2597%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%25E3%2580%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25AB%25E3%2582%25BA%25E3%2583%259E%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk4NzZiNmIwYWYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>カズマ</dc:creator></item></channel></rss>
