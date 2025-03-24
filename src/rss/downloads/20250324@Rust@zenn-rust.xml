@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Rust」のフィード]]></title><description><![CDATA[Zennのトピック「Rust」のRSSフィードです]]></description><link>https://zenn.dev/topics/rust</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ba09661577.png</url><title>Zennの「Rust」のフィード</title><link>https://zenn.dev/topics/rust</link></image><generator>zenn.dev</generator><lastBuildDate>Mon, 24 Mar 2025 04:29:26 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/rust/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Rust 文字列操作完全ガイド｜よく使う26のメソッドまとめ]]></title><description><![CDATA[
+ はじめに
+Rustでは文字列操作が少し難しく感じる方も多いのではないでしょうか？
+特に、&amp;strとStringの違い、イテレータとの組み合わせ、Unicode対応など、慣れるまでは取っ付きづらく感じるかもしれません。
+そこで本記事では、Rustにおける
+よく使う文字列操作メソッド
+初心者の方は「こんな書き方があるんだ」と知るきっかけに、経験者の方はリファレンスとして使えるようにまとめています。
+今後のRust開発で文字列まわりの表現力を上げたい方は、ぜひ参考にしてみてください！
+
+
+ 1. .trim() / .trim_start() / .trim_end()  - 前後...]]></description><link>https://zenn.dev/ha_maya0104/articles/28e85a94ca0847</link><guid isPermaLink="true">https://zenn.dev/ha_maya0104/articles/28e85a94ca0847</guid><pubDate>Mon, 24 Mar 2025 04:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--brXb3Pvv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%2520%25E6%2596%2587%25E5%25AD%2597%25E5%2588%2597%25E6%2593%258D%25E4%25BD%259C%25E5%25AE%258C%25E5%2585%25A8%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%25EF%25BD%259C%25E3%2582%2588%25E3%2581%258F%25E4%25BD%25BF%25E3%2581%258626%25E3%2581%25AE%25E3%2583%25A1%25E3%2582%25BD%25E3%2583%2583%25E3%2583%2589%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2586%25E3%2581%25A7%25E3%2581%2599%25E3%2581%258E%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%25B3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNlMzJkOGNmYTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ゆですぎコーン</dc:creator></item><item><title><![CDATA[ABC398:Rustで解く！問題解説]]></title><description><![CDATA[AtCoder Beginner Contest 398のA~E問題をRustで解いた際の解法をまとめました。
+
+ A問題
+問題
+https://atcoder.jp/contests/abc398/tasks/abc398_a
+解説
+長さ N の文字列を初期化し、中央の文字を = に置き換えたものを出力します。
+
+
+N が奇数の場合
+中央の文字を = に置き換えます。このとき、中央のインデックスは N / 2 です。
+
+
+N が偶数の場合
+中央の2つの文字を = に置き換えます。このとき、中央のインデックスは N / 2 - 1 と N / 2 です。
+
+
+コード
+
+ABC398a.r...]]></description><link>https://zenn.dev/nakst_hide/articles/a62a21128b03af</link><guid isPermaLink="true">https://zenn.dev/nakst_hide/articles/a62a21128b03af</guid><pubDate>Sun, 23 Mar 2025 22:36:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--n9fBFZXG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ABC398%253ARust%25E3%2581%25A7%25E8%25A7%25A3%25E3%2581%258F%25EF%25BC%2581%25E5%2595%258F%25E9%25A1%258C%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nakahide%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YkMxNEpSQnNET01hTGcxTVRQWGNTWS1qYlNQbFRMQTN3ZU9Sdz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nakahide</dc:creator></item><item><title><![CDATA[C言語守護者 vs Rust推進派：Linuxカーネルで起きた2025年の路線対立（Rust for Linux）]]></title><description><![CDATA[
+ はじめに
+
+ Rust for Linux プロジェクトとは
+Rust for Linuxは、メモリ安全性に優れたプログラミング言語Rustを、Linuxカーネル内で使用できるようにする取り組みです。このプロジェクトは2020年頃から非公式な議論が始まり、2021年4月にMiguel Ojeda氏によって正式にLinuxカーネルメーリングリスト（LKML）に提案されました。
+プロジェクトの主な目的は、メモリ関連のバグやセキュリティ脆弱性を減らすことです。Rustは「安全性」を設計原則とする言語であり、コンパイル時に多くのエラーを検出できるため、従来のC言語で発生しがちなバッファオーバ...]]></description><link>https://zenn.dev/aliomer/articles/da8f2f082516aa</link><guid isPermaLink="true">https://zenn.dev/aliomer/articles/da8f2f082516aa</guid><pubDate>Sun, 23 Mar 2025 20:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--q2TpvP6Q--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:C%25E8%25A8%2580%25E8%25AA%259E%25E5%25AE%2588%25E8%25AD%25B7%25E8%2580%2585%2520vs%2520Rust%25E6%258E%25A8%25E9%2580%25B2%25E6%25B4%25BE%25EF%25BC%259ALinux%25E3%2582%25AB%25E3%2583%25BC%25E3%2583%258D%25E3%2583%25AB%25E3%2581%25A7%25E8%25B5%25B7%25E3%2581%258D%25E3%2581%259F2025%25E5%25B9%25B4%25E3%2581%25AE%25E8%25B7%25AF%25E7%25B7%259A%25E5%25AF%25BE%25E7%25AB%258B%25EF%25BC%2588Rust%2520for%2520Linux%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25A2%25E3%2583%25AA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzUxNzJkMzEzYTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>アリ</dc:creator></item><item><title><![CDATA[Rust非同期処理の仕組み：join! vs select!で実現する並行性]]></title><description><![CDATA[
+Future を 1 つだけ実行する場合、非同期関数 async fn または非同期コードブロック async {} の中では .await を直接使用することができます。しかし、複数の Future を並行して実行したい場合、単に .await を使うと特定の Future が完了するまで他の並行タスクがブロックされ（直列実行）、思うように並行実行されません。
+futures クレートには、Future を並行に実行できる便利なツールが多数用意されており、その中には join! マクロや select! マクロがあります。
+
+注：futures::future モジュールには、マクロ...]]></description><link>https://zenn.dev/leap_adam/articles/0753152a8148d8</link><guid isPermaLink="true">https://zenn.dev/leap_adam/articles/0753152a8148d8</guid><pubDate>Sun, 23 Mar 2025 17:19:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--V82X_FCO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E9%259D%259E%25E5%2590%258C%25E6%259C%259F%25E5%2587%25A6%25E7%2590%2586%25E3%2581%25AE%25E4%25BB%2595%25E7%25B5%2584%25E3%2581%25BF%25EF%25BC%259Ajoin%2521%2520vs%2520select%2521%25E3%2581%25A7%25E5%25AE%259F%25E7%258F%25BE%25E3%2581%2599%25E3%2582%258B%25E4%25B8%25A6%25E8%25A1%258C%25E6%2580%25A7%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Adam%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZhZDIzOTdlZTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Adam</dc:creator></item><item><title><![CDATA[浅いニューラルネットワークで作る高精度なオセロの評価関数]]></title><description><![CDATA[コンピューター将棋やチェスで主流のNNUEのような、浅いニューラルネットワークを利用したオセロの評価関数の実装に挑戦しました。リポジトリは以下からご覧いただけます。
+
+
+オセロプログラム
+リリースページでは、Windows 向けの CUI / GUI プログラム（CPU が AVX2 に対応している必要があります）と、重みファイルをダウンロードできます。
+
+
+
+学習用コード
+
+
+
+
+ ニューラルネットワーク
+StockfishのNNUEをベースにしたアーキテクチャになっています。異なる部分について簡単に解説します。
+
+
+ 特徴量
+ニューラルネットワークの入力特徴量として、「パターン」と「...]]></description><link>https://zenn.dev/natsuatsui/articles/c1d9aa50acb347</link><guid isPermaLink="true">https://zenn.dev/natsuatsui/articles/c1d9aa50acb347</guid><pubDate>Sun, 23 Mar 2025 11:39:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1KCtOwZH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%25B5%2585%25E3%2581%2584%25E3%2583%258B%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%25A9%25E3%2583%25AB%25E3%2583%258D%25E3%2583%2583%25E3%2583%2588%25E3%2583%25AF%25E3%2583%25BC%25E3%2582%25AF%25E3%2581%25A7%25E4%25BD%259C%25E3%2582%258B%25E9%25AB%2598%25E7%25B2%25BE%25E5%25BA%25A6%25E3%2581%25AA%25E3%2582%25AA%25E3%2582%25BB%25E3%2583%25AD%25E3%2581%25AE%25E8%25A9%2595%25E4%25BE%25A1%25E9%2596%25A2%25E6%2595%25B0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:natsutteatsuiyone%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdkZGJjZGYxZjEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>natsutteatsuiyone</dc:creator></item><item><title><![CDATA[IT技術解説④：組み込み開発とは何か？]]></title><description><![CDATA[
+ はじめに
+組み込み開発とは、Wikipediaでは「家電製品や産業機器などに搭載された、特定の機能を実現するためのコンピュータ向けのソフトウェア開発」と表現されるが、何が対象で何が対象でないのかについて門外漢の人間にはよくわからないのが実情です。そこで本稿では、組み込み開発の定義や具体的な分類、使用されるプログラミング言語とその理由を整理します。
+
+ 組み込み開発とはそもそも何を指すか？
+組み込み開発とは、一般的にマイクロコントローラ(マイコン)や汎用MPU上で動作するファームウェアやソフトウェアを開発することを指します。そのため、VHDLやSystemCを用いたRTL(Regist...]]></description><link>https://zenn.dev/pdfractal/articles/6376fc4a0f78fe</link><guid isPermaLink="true">https://zenn.dev/pdfractal/articles/6376fc4a0f78fe</guid><pubDate>Sun, 23 Mar 2025 08:01:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--W3KgOIA6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:IT%25E6%258A%2580%25E8%25A1%2593%25E8%25A7%25A3%25E8%25AA%25AC%25E2%2591%25A3%25EF%25BC%259A%25E7%25B5%2584%25E3%2581%25BF%25E8%25BE%25BC%25E3%2581%25BF%25E9%2596%258B%25E7%2599%25BA%25E3%2581%25A8%25E3%2581%25AF%25E4%25BD%2595%25E3%2581%258B%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:pdfractal%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M5MjFkMjlhMDEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>pdfractal</dc:creator></item><item><title><![CDATA[Ratatui で階層メニューをつくってみる]]></title><description><![CDATA[
+ 背景と概要
+日頃から、業務で使うちょっとしたツールを Rust 製に置き換えられないか、常に機を伺っております。
+とはいえ、Windows 上で動く GUI アプリを Rust 製に置き換えるのは (.NET エコシステムと比べると) まだまだ難しいような気がします。
+しかし、そこまでリッチなインタラクションが求められていなければ、TUI (Text-based User Interface) という選択肢はアリなのでは？と思い、Ratatui というクレートについて調べ始めた次第です。
+手始めに Ratatui Template から始めて、階層メニューを実装してみました。
+
+ R...]]></description><link>https://zenn.dev/kndys/articles/08980c1de5bab8</link><guid isPermaLink="true">https://zenn.dev/kndys/articles/08980c1de5bab8</guid><pubDate>Sun, 23 Mar 2025 07:31:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2XsWiH7P--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ratatui%2520%25E3%2581%25A7%25E9%259A%258E%25E5%25B1%25A4%25E3%2583%25A1%25E3%2583%258B%25E3%2583%25A5%25E3%2583%25BC%25E3%2582%2592%25E3%2581%25A4%25E3%2581%258F%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kndys%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FDTlBFdV9YRnZ5VmlFel9vdjUxUXhGRzc0RnctaFNpY3RVSWk3Rk10cHZFb1E9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kndys</dc:creator></item><item><title><![CDATA[Sniffnet に ARP のモニタリング機能を追加した]]></title><description><![CDATA[
+ はじめに
+この記事では、ネットワークモニターツールSniffnetに ARP のモニタリング機能を追加した際の流れを記載します。
+
+ Sniffnet とは?
+Sniffnet は Rust で書かれたオープンソースのネットワークモニターツールです。
+GUI 上で選んだネットワークアダプタの送受信トラフィックをリアルタイムに可視化し、
+パケット数やバイト数のグラフ表示、接続ごとの詳細情報の閲覧、フィルタリング機能などを直感的に操作できます。
+以下、公式の URL です。
+https://sniffnet.net/
+
+ Issue を見つける
+Sniffnet のリポジトリを見て Is...]]></description><link>https://zenn.dev/shu_kitamura/articles/400c3dc998f1d8</link><guid isPermaLink="true">https://zenn.dev/shu_kitamura/articles/400c3dc998f1d8</guid><pubDate>Sun, 23 Mar 2025 05:09:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qpiarzKQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Sniffnet%2520%25E3%2581%25AB%2520ARP%2520%25E3%2581%25AE%25E3%2583%25A2%25E3%2583%258B%25E3%2582%25BF%25E3%2583%25AA%25E3%2583%25B3%25E3%2582%25B0%25E6%25A9%259F%25E8%2583%25BD%25E3%2582%2592%25E8%25BF%25BD%25E5%258A%25A0%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Skit%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FjZjhiN2M4YmEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Skit</dc:creator></item><item><title><![CDATA[Ruffに搭載される新しい型チェッカーRed-knotについて]]></title><description><![CDATA[Python開発者向けツールRuff/uvの開発チーム（Astral inc.）がPython向けの型チェッカーを新規開発しているので紹介いたします。この型チェッカーはコードネーム"Red-knot"と呼ばれており、まだリリース前ですが将来的にはRuffに組み込まれる予定であるようです。以下ではこのプロジェクトの概略を説明したいと思います。
+
+ 特徴
+既存の型チェッカー(e.g. mypy, pyright)の不満点である遅さを改善すべく、徹底的にパフォーマンスに気を配った設計となっています。pyrightもそこまで遅くはないのですが、さらに高速であることを目指すようです。
+Red-kn...]]></description><link>https://zenn.dev/mtshiba/articles/about-red-knot</link><guid isPermaLink="true">https://zenn.dev/mtshiba/articles/about-red-knot</guid><pubDate>Sun, 23 Mar 2025 03:42:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--KaM787Eu--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ruff%25E3%2581%25AB%25E6%2590%25AD%25E8%25BC%2589%25E3%2581%2595%25E3%2582%258C%25E3%2582%258B%25E6%2596%25B0%25E3%2581%2597%25E3%2581%2584%25E5%259E%258B%25E3%2583%2581%25E3%2582%25A7%25E3%2583%2583%25E3%2582%25AB%25E3%2583%25BCRed-knot%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:shiba%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2g0WVFyaVliOXdBdEtlTUJXZjd1REJ5d2Q3UnJCYW5TSmlQYkRGPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>shiba</dc:creator></item><item><title><![CDATA[Rust非同期処理の仕組み：Streamトレイトと非同期イテレータ]]></title><description><![CDATA[
+Stream トレイトは Future トレイトと似ています。Future は 1 つのアイテムの状態の変化を表しますが、Stream は標準ライブラリの Iterator トレイトに似ており、終了するまでに複数の値を生成することができます。あるいは、Stream は一連の Future で構成されていると簡単に理解してもよく、Stream から各 Future の結果を読み取っていき、Stream が終了するまで続けることができます。
+
+ Stream の定義
+Future は非同期開発における最も基本的な概念です。Future が一度限りの非同期値を表すとすれば、Stream は一...]]></description><link>https://zenn.dev/leap_adam/articles/86c2f58e5cfe2e</link><guid isPermaLink="true">https://zenn.dev/leap_adam/articles/86c2f58e5cfe2e</guid><pubDate>Sat, 22 Mar 2025 19:51:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BFX3JhjU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E9%259D%259E%25E5%2590%258C%25E6%259C%259F%25E5%2587%25A6%25E7%2590%2586%25E3%2581%25AE%25E4%25BB%2595%25E7%25B5%2584%25E3%2581%25BF%25EF%25BC%259AStream%25E3%2583%2588%25E3%2583%25AC%25E3%2582%25A4%25E3%2583%2588%25E3%2581%25A8%25E9%259D%259E%25E5%2590%258C%25E6%259C%259F%25E3%2582%25A4%25E3%2583%2586%25E3%2583%25AC%25E3%2583%25BC%25E3%2582%25BF%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Adam%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZhZDIzOTdlZTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Adam</dc:creator></item><item><title><![CDATA[std::thread::spawn で見る Rust の unsafe の責務と型システム]]></title><description><![CDATA[
+ 概要
+Rustの標準ライブラリ内にstd::thread::spawnという関数があります。これは渡されたクロージャを実行するスレッドを新たに作成する関数で、並行プログラミング解説の文脈では最も基本的な例としてよく取り上げられると思います。そして同じように、このspawn関数に渡すクロージャのライフタイムに関する制限についても述べられることが多いです。クロージャの中から、その外で定義された変数を参照する場合はクロージャにmoveキーワードをつけて所有権を移さないといけないというあれのことです。本記事では、この所有権を移さないといけない(そうしないと型検査に通らない)ということが、型シ...]]></description><link>https://zenn.dev/ose20/articles/26cde561ded397</link><guid isPermaLink="true">https://zenn.dev/ose20/articles/26cde561ded397</guid><pubDate>Sat, 22 Mar 2025 09:48:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0GILQVxW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:std%253A%253Athread%253A%253Aspawn%2520%25E3%2581%25A7%25E8%25A6%258B%25E3%2582%258B%2520Rust%2520%25E3%2581%25AE%2520unsafe%2520%25E3%2581%25AE%25E8%25B2%25AC%25E5%258B%2599%25E3%2581%25A8%25E5%259E%258B%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ose20%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I3YWMwM2QzMjYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ose20</dc:creator></item><item><title><![CDATA[Rustとnextの使い分けかた]]></title><description><![CDATA[RustとNext.js（Reactベースのフレームワーク）は用途が大きく異なるので、それぞれの特性を理解した上で適材適所で使い分けるのが重要です。
+
+
+ Rustの特徴と用途
+
+Rustはシステムプログラミング向けの低レイヤ言語で、高速・安全・並行性の高さが特徴です。
+✅ Rustを使うべきケース
+
+
+パフォーマンスが重要なアプリケーション（例：ゲームエンジン、OS、データベース、ブロックチェーン）
+
+メモリ安全性が求められるシステム（例：組み込みシステム、リアルタイム処理）
+
+並行処理が必要なアプリケーション（例：マルチスレッド処理、高速なWebサーバー）
+
+CLIツールやバックエン...]]></description><link>https://zenn.dev/lyre/articles/7d0cf76db5bc94</link><guid isPermaLink="true">https://zenn.dev/lyre/articles/7d0cf76db5bc94</guid><pubDate>Sat, 22 Mar 2025 06:48:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--YMyJfZfs--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25A8next%25E3%2581%25AE%25E4%25BD%25BF%25E3%2581%2584%25E5%2588%2586%25E3%2581%2591%25E3%2581%258B%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:lyre%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhmZDFmOWJlZTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>lyre</dc:creator></item><item><title><![CDATA[Rust非同期処理の仕組み：Future実行器とタスク管理]]></title><description><![CDATA[
+
+ Future の定義
+Future は Rust の非同期プログラミングの中核です。Future トレイトの定義は次の通りです：
+#[must_use = "futures do nothing unless you `.await` or poll them"]
+#[lang = "future_trait"]
+pub trait Future {
+    type Output;
+    fn poll(self: Pin&lt;&amp;mut Self&gt;, cx: &amp;mut Context&lt;'_&gt;) -&gt; Poll&lt;Self::Outp...]]></description><link>https://zenn.dev/leap_adam/articles/d1777c3276df12</link><guid isPermaLink="true">https://zenn.dev/leap_adam/articles/d1777c3276df12</guid><pubDate>Fri, 21 Mar 2025 20:25:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--iTFz6RY7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E9%259D%259E%25E5%2590%258C%25E6%259C%259F%25E5%2587%25A6%25E7%2590%2586%25E3%2581%25AE%25E4%25BB%2595%25E7%25B5%2584%25E3%2581%25BF%25EF%25BC%259AFuture%25E5%25AE%259F%25E8%25A1%258C%25E5%2599%25A8%25E3%2581%25A8%25E3%2582%25BF%25E3%2582%25B9%25E3%2582%25AF%25E7%25AE%25A1%25E7%2590%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Adam%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZhZDIzOTdlZTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Adam</dc:creator></item><item><title><![CDATA[【Rust】ジェネリクスを使いこなして型の柔軟性を手に入れろ！]]></title><description><![CDATA[https://doc.rust-lang.org/book/ch10-01-syntax.html
+Rustのジェネリクスは、型安全性を保ちながらコードの再利用性を高めるために利用される機能です。ジェネリクスを使うことで、同じロジックを異なる型に対して適用することが可能になります。
+この記事ではジェネリクスの基本的な使い方について解説します。
+「The Rust Programming Language」を読んでもしっくり来ていないあなた、確実にこの記事で理解し、使いこなせるようになります。
+
+ ジェネリクスとは
+ジェネリクスとは、具体的な型を指定せずに抽象的に型を表現する方法です。こ...]]></description><link>https://zenn.dev/tsubasa_ryuto/articles/ba01cdd1705484</link><guid isPermaLink="true">https://zenn.dev/tsubasa_ryuto/articles/ba01cdd1705484</guid><pubDate>Fri, 21 Mar 2025 18:40:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--KlpDPGwc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Rust%25E3%2580%2591%25E3%2582%25B8%25E3%2582%25A7%25E3%2583%258D%25E3%2583%25AA%25E3%2582%25AF%25E3%2582%25B9%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2584%25E3%2581%2593%25E3%2581%25AA%25E3%2581%2597%25E3%2581%25A6%25E5%259E%258B%25E3%2581%25AE%25E6%259F%2594%25E8%25BB%259F%25E6%2580%25A7%25E3%2582%2592%25E6%2589%258B%25E3%2581%25AB%25E5%2585%25A5%25E3%2582%258C%25E3%2582%258D%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:TsubasaRyuto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ3MzgwZDBlYWQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>TsubasaRyuto</dc:creator></item><item><title><![CDATA[276,406行のC++コードを捨ててRustへ移行したスタートアップの技術的決断]]></title><description><![CDATA[
+ TL;DR
+
+私たちはデータベースプロジェクトを再構築するために C++ を Rust に置き換えました。この記事では、その理由、直面した課題、そして Rust がプロダクションレベルのプロジェクトに適しているのはどんな時かについて説明します。
+
+RisingWave  は、高性能なデータプラットフォームであり、ユーザーが馴染みのある SQL クエリを使って、イベントストリーミングのパイプラインやアプリケーションを数分で構築できるようにします。
+
+
+ RisingWave を作り始めたとき
+
+私たちが RisingWave の構築を始めたのは 2021 年初頭のことでした。当初は C...]]></description><link>https://zenn.dev/rwcolinpeng/articles/14760991836800</link><guid isPermaLink="true">https://zenn.dev/rwcolinpeng/articles/14760991836800</guid><pubDate>Fri, 21 Mar 2025 16:21:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--J_6A04Sy--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:276%252C406%25E8%25A1%258C%25E3%2581%25AEC%252B%252B%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2582%2592%25E6%258D%25A8%25E3%2581%25A6%25E3%2581%25A6Rust%25E3%2581%25B8%25E7%25A7%25BB%25E8%25A1%258C%25E3%2581%2597%25E3%2581%259F%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%2588%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%25E3%2581%25AE%25E6%258A%2580%25E8%25A1%2593%25E7%259A%2584%25E6%25B1%25BA%25E6%2596%25AD%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:RisingWave%2520Labs%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdmZmFjMDNiZWUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>RisingWave Labs</dc:creator></item><item><title><![CDATA[Rustの「トレイト」が理解しにくい原因（個人の感想です）]]></title><description><![CDATA[
+ Rustの「トレイト」が理解しにくい原因（個人の感想です）
+「トレイト（Trait）はインターフェースで、構造体はそれを実装するもの」 というのは何となく理解してます。
+でも、
+「impl &lt;Trait名&gt; for &lt;Struct名&gt;」
+って腹落ちしないんです。
+なんかこう…「わかるけど、しっくりこない！」
+わかりにくさの正体は、たぶん 「語順」 なんじゃないか？って最近思いました。
+
+ こんなふうに感じません？
+たとえば、JavaやTypeScriptでインターフェースを実装するときって…
+class Dog implements Walk {
+    pu...]]></description><link>https://zenn.dev/nakkiy/articles/48dc4445174524</link><guid isPermaLink="true">https://zenn.dev/nakkiy/articles/48dc4445174524</guid><pubDate>Fri, 21 Mar 2025 14:18:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--JGDdQbLH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25AE%25E3%2580%258C%25E3%2583%2588%25E3%2583%25AC%25E3%2582%25A4%25E3%2583%2588%25E3%2580%258D%25E3%2581%258C%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2597%25E3%2581%25AB%25E3%2581%258F%25E3%2581%2584%25E5%258E%259F%25E5%259B%25A0%25EF%25BC%2588%25E5%2580%258B%25E4%25BA%25BA%25E3%2581%25AE%25E6%2584%259F%25E6%2583%25B3%25E3%2581%25A7%25E3%2581%2599%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nakkiy%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTDRQblR4S1NRMWFmaGVudU0yT1MyNUdYNmtrQnUxY1RFMEZyNW1kZkNVR1haQTRBPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nakkiy</dc:creator></item><item><title><![CDATA[Cloudflare R2から取ってきた画像をwasm(Rust)で加工する]]></title><description><![CDATA[
+ はじめに
+タイトル通りのことをやろうとしたら、ちょっとつまづいたので自分のメモがてら記事を書きます。
+wasmやRustについて詳しくは解説しません。
+参考サイト
+https://developer.mozilla.org/ja/docs/WebAssembly/Guides/Rust_to_Wasm
+完成したやつ
+https://image.thirdlf03.com
+リポジトリ
+https://github.com/thirdlf03/image-process-wasm
+
+ 環境準備
+まず、wasm-packをインストールしてない場合はインストール
+cargo install ...]]></description><link>https://zenn.dev/thirdlf/articles/19-zenn-wasm-image-process</link><guid isPermaLink="true">https://zenn.dev/thirdlf/articles/19-zenn-wasm-image-process</guid><pubDate>Fri, 21 Mar 2025 14:14:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0nTy-Pvh--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Cloudflare%2520R2%25E3%2581%258B%25E3%2582%2589%25E5%258F%2596%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%258D%25E3%2581%259F%25E7%2594%25BB%25E5%2583%258F%25E3%2582%2592wasm%2528Rust%2529%25E3%2581%25A7%25E5%258A%25A0%25E5%25B7%25A5%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:thirdlf%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZkMDkwNDAyMzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>thirdlf</dc:creator></item><item><title><![CDATA[【Shuttle／Axum／Yew】Rust製WebサイトでZennRSSを公開する]]></title><description><![CDATA[
+ ほぼRustだけで自分のサイトを作る
+そもそもZennには、ユーザー毎にRSSがあるようです。https://zenn.dev/ユーザー名/feedで取得することができます。即ち私(ユーザー名：amenaruya)のRSSはhttps://zenn.dev/amenaruya/feedです。
+より詳しい仕様はこちらにあります。せっかくならばと、上のURLに?all=1と続け、全てのRSSを取得することにしました。
+https://zenn.dev/zenn/articles/zenn-feed-rss
+ところでRSSを取得できるとはいうものの、XML型式のデータが取得できるだけです。...]]></description><link>https://zenn.dev/amenaruya/articles/76011b6a31541b</link><guid isPermaLink="true">https://zenn.dev/amenaruya/articles/76011b6a31541b</guid><pubDate>Fri, 21 Mar 2025 01:43:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--JAhEmoOF--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Shuttle%25EF%25BC%258FAxum%25EF%25BC%258FYew%25E3%2580%2591Rust%25E8%25A3%25BDWeb%25E3%2582%25B5%25E3%2582%25A4%25E3%2583%2588%25E3%2581%25A7ZennRSS%25E3%2582%2592%25E5%2585%25AC%25E9%2596%258B%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:amenaruya%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzMwZDg5YWZmZGYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>amenaruya</dc:creator></item><item><title><![CDATA[RustのAsync/Await入門ガイド]]></title><description><![CDATA[
+
+ Rust の非同期プログラミングにおける async/.await
+async/.await は Rust に組み込まれた言語機能であり、同期コードのように記述しながら非同期処理を行うことができます。
+それでは、async/.await の使い方を例を通じて学びましょう。始める前に、futures クレートを追加する必要があります。Cargo.toml ファイルを編集し、以下の内容を追加してください。
+[dependencies]
+futures = "0.3"
+
+ async を使って非同期 Future を作成する
+簡単に言えば、async キーワードは次のような Future...]]></description><link>https://zenn.dev/leap_adam/articles/2f11f272bf8e40</link><guid isPermaLink="true">https://zenn.dev/leap_adam/articles/2f11f272bf8e40</guid><pubDate>Thu, 20 Mar 2025 20:39:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--UgESmI-k--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25AEAsync%252FAwait%25E5%2585%25A5%25E9%2596%2580%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Adam%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZhZDIzOTdlZTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Adam</dc:creator></item><item><title><![CDATA[【Rust】構造体を理解する]]></title><description><![CDATA[Rsutの構造体(Struct)は複数の関連する値をひとつのデータ型を名前をつけて独自のデータ型として扱うための仕組みです。
+この記事では、構造体の使い方、種類、設計のポイントについて解説します。
+
+ 構造体とは
+構造体(Struct)は複数の関連する値をひとつのデータ型を名前をつけて独自のデータ型として管理する仕組みです。他のプログラミング言語の「クラス」に似ていますが、Rustの構造体は単なるデータの集まりを表すだけであり、メソッドを直接持つことはできません。しかし、impl を使うことで、構造体に関連するメソッドを定義できます。
+
+ 構造体の種類
+Rustでは3種類の構造体が用意さ...]]></description><link>https://zenn.dev/tsubasa_ryuto/articles/8d5c463f3a150e</link><guid isPermaLink="true">https://zenn.dev/tsubasa_ryuto/articles/8d5c463f3a150e</guid><pubDate>Thu, 20 Mar 2025 17:02:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--oaAZV-t5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Rust%25E3%2580%2591%25E6%25A7%258B%25E9%2580%25A0%25E4%25BD%2593%25E3%2582%2592%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:TsubasaRyuto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ3MzgwZDBlYWQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>TsubasaRyuto</dc:creator></item></channel></rss>
