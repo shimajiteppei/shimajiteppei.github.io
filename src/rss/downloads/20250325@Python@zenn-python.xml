@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Tue, 25 Mar 2025 10:20:41 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[最新のTracking技術を比較！YOLO-Tracking と SAMURAI の違い]]></title><description><![CDATA[
+ はじめに
+Polaris.AIにて携わっているプロジェクトにおいて、Tracking技術について調査を実施しましたので、今回はその”学び”について説明したいと思います。
+
+ Tracking技術の重要性
+Tracking技術とは、コンピュータビジョンのタスクの一つで、動画や画像の中から特定の物体を追跡する技術になります。
+他のタスクである物体検出（Object Detection）との違いは、静止画像に対して物体を検出するのに対し、Tracking技術は動画や連続した画像に対して物体を追跡するという点になり、他のタスクに比べて難易度が高いとされています。
+実際に使用されている例として...]]></description><link>https://zenn.dev/polarisai_blog/articles/tracking-yolo-samurai-coco9122</link><guid isPermaLink="true">https://zenn.dev/polarisai_blog/articles/tracking-yolo-samurai-coco9122</guid><pubDate>Tue, 25 Mar 2025 04:15:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dpebTjH8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%259C%2580%25E6%2596%25B0%25E3%2581%25AETracking%25E6%258A%2580%25E8%25A1%2593%25E3%2582%2592%25E6%25AF%2594%25E8%25BC%2583%25EF%25BC%2581YOLO-Tracking%2520%25E3%2581%25A8%2520SAMURAI%2520%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:CoCo9122%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RmMDBmMzBmMzYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Polaris.AI%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2hLY1FkbTlXblJabGVYLTBPeE5sM0tBTmpXNDVwcGpPU3pwMXdrPXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>CoCo9122</dc:creator></item><item><title><![CDATA[Ansibleのインベントリを~/.ssh/configから動的に生成]]></title><description><![CDATA[
+ TL;DR
+
+SSH設定ファイル（~/.ssh/config）からAnsibleインベントリを動的に生成するPythonスクリプトを書きました
+SSH Configの読み取りには sshconf を用いました
+AnsibleのランタイムをPythonの仮想環境にすると、動的インベントリも同じ環境で実行できます
+
+
+ 動機
+機械学習の実験をしていると、GPUクラウドを頻繁に立てたり落としたりします。その度に接続先情報を複数の場所に書き換えるのがストレスでした。
+SSH設定は ~/.ssh/config に書いていますが、Ansibleのインベントリファイルにもホスト名を記述する必要があ...]]></description><link>https://zenn.dev/hiroga/articles/ansible-inventory-from-ssh-config</link><guid isPermaLink="true">https://zenn.dev/hiroga/articles/ansible-inventory-from-ssh-config</guid><pubDate>Tue, 25 Mar 2025 02:43:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--cfMjM4To--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ansible%25E3%2581%25AE%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2599%25E3%2583%25B3%25E3%2583%2588%25E3%2583%25AA%25E3%2582%2592%7E%252F.ssh%252Fconfig%25E3%2581%258B%25E3%2582%2589%25E5%258B%2595%25E7%259A%2584%25E3%2581%25AB%25E7%2594%259F%25E6%2588%2590%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2595%25E3%2582%258F%25E3%2582%2589%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pfZHF2VHk5OFdpTG1EZ1Q1Ry1jLVNmWjRwaEdCcGdncGVKSjhqUzhzPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>さわら</dc:creator></item><item><title><![CDATA[バックエンド不要、ブラウザだけで動く物体検出システムを作ってみた。]]></title><description><![CDATA[3連休で生きた証を残したかったので、「そういや物体検出システムって触ったことないな。なんか作ってみるか」と思ってやってみたプロジェクトのようなものです。
+
+ とりあえず触ってみたい方
+下記リンクからどうぞ。
+https://miupa.jp/projects/MimamoriAI/
+カメラは許可してもらう必要がありますが、録画してどっかに転送とかはしてないです。
+
+ きっかけ
+冒頭にも書きましたが、「3連休だしなんか作ってみるか」という単純な興味から始まったプロジェクトです。
+特に
+
+サーバーサイドの実装なしで動作する
+AIの技術を使ってみる
+リアルタイムで処理する
+
+という要素に興味が...]]></description><link>https://zenn.dev/miupa/articles/bb4520a323e561</link><guid isPermaLink="true">https://zenn.dev/miupa/articles/bb4520a323e561</guid><pubDate>Tue, 25 Mar 2025 02:42:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ZjPfLWL6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2590%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2589%25E4%25B8%258D%25E8%25A6%2581%25E3%2580%2581%25E3%2583%2596%25E3%2583%25A9%25E3%2582%25A6%25E3%2582%25B6%25E3%2581%25A0%25E3%2581%2591%25E3%2581%25A7%25E5%258B%2595%25E3%2581%258F%25E7%2589%25A9%25E4%25BD%2593%25E6%25A4%259C%25E5%2587%25BA%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25E3%2580%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:MiUPa%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0J3OVFUd0FBWUVocmdHbXFMQ2FmNWdZQllWQ1UzNTR2QVpOWVNiZ2swVkNTaGtDcnlqUT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>MiUPa</dc:creator></item><item><title><![CDATA[YouTubeの更新通知をPubSubで受け取ってDiscordに通知してみた]]></title><description><![CDATA[
+ 作るに至った経緯
+YouTubeの特定のチャンネルの更新のみをDiscordで受け取りたいって思ったから。DiscordのBotを作った後に、他にWebhookを使って送信してくれることができるらしいと分かったので使ってみたかった。
+
+ 技術スタック
+
+Google Cloud Run functions
+PubSubHubBub
+Discord Webhook
+Python(functions-framework, flask)
+(YouTube Data API)
+
+
+ 仕組み
+
+Google Cloud Run functionsでHTTPトリガーの関数をデプロイしておく。Pu...]]></description><link>https://zenn.dev/rako0x1/articles/68a531465ba89e</link><guid isPermaLink="true">https://zenn.dev/rako0x1/articles/68a531465ba89e</guid><pubDate>Mon, 24 Mar 2025 15:25:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--l_-Ch2aZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:YouTube%25E3%2581%25AE%25E6%259B%25B4%25E6%2596%25B0%25E9%2580%259A%25E7%259F%25A5%25E3%2582%2592PubSub%25E3%2581%25A7%25E5%258F%2597%25E3%2581%2591%25E5%258F%2596%25E3%2581%25A3%25E3%2581%25A6Discord%25E3%2581%25AB%25E9%2580%259A%25E7%259F%25A5%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:rako%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2Rhcmsvci5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>rako</dc:creator></item><item><title><![CDATA[Browser-UseをWindows11で使う]]></title><description><![CDATA[先日、”Browser-Use-Web-UIをDockerで試しました”という記事を書きました。
+https://zenn.dev/masaru21/articles/bf6c99be708f9f
+今回は、こちらのBrowser-UseのリポジトリをWindows11で試しました。
+https://github.com/browser-use/browser-use
+私は、Windows11で外付けドライブで、クローンを作りました。
+クローンを作ります。
+git clone https://github.com/browser-use/browser-use.git
+ディレクトリを移動し...]]></description><link>https://zenn.dev/masaru21/articles/7a750082f3a97f</link><guid isPermaLink="true">https://zenn.dev/masaru21/articles/7a750082f3a97f</guid><pubDate>Mon, 24 Mar 2025 12:32:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--09yvc3IK--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Browser-Use%25E3%2582%2592Windows11%25E3%2581%25A7%25E4%25BD%25BF%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:lonely_creator_m%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2hzOWNVVzBjY3NDOXZPcXFwd0QtZktPblJpbmM4YnFYWG9LVDhVQmxvPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>lonely_creator_m</dc:creator></item><item><title><![CDATA[OpenAIのResponses APIでRAGをやってみる]]></title><description><![CDATA[OpenAIが新たにリリースした Responses API を利用して簡単なRAGを構築してみました。Responses APIの会話履歴機能と、組み込みツールの一つであるファイル検索（ベクトル検索）を組み合わせると、いとも簡単なコードでRAGを実現できます。
+
+ OpenAIの新しいAPI: Responses API
+OpenAIは、2025年3月11日に、これまでの Chat Completions の完全上位互換となる新しいAPI Responses API をリリースしました。
+https://openai.com/ja-JP/index/new-tools-for-buil...]]></description><link>https://zenn.dev/khisa/articles/534d8c79460712</link><guid isPermaLink="true">https://zenn.dev/khisa/articles/534d8c79460712</guid><pubDate>Mon, 24 Mar 2025 11:27:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Ens5Ekj6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:OpenAI%25E3%2581%25AEResponses%2520API%25E3%2581%25A7RAG%25E3%2582%2592%25E3%2582%2584%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25B2%25E3%2581%2595%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTHFKaUVHa1VQMkc5WGpIeHlTa3p4bld3Z3JNcHFhT19hUFVKcWEyQ2YxWUZFPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ひさ</dc:creator></item><item><title><![CDATA[discordで講義レジュメを管理・要約する。]]></title><description><![CDATA[大学の講義を効率的にサボるツールをdiscordを使って作成します。
+
+ 概要
+pythonオンリーでdiscord botを作成してみました。要約に使ったLLMはGPT4oです。
+discord botの作成方法については言及しません。
+この記事に影響を受けました。↓
+https://zenn.dev/neoai/articles/768b65f5655171
+
+ なぜdiscordで管理するのか
+
+私がゲーマーのため基本的にファイルやデータの共有はdiscordで済ませたい。
+周りの友人とのメインコミュニケーションツールがdiscordだった。
+またdiscordはSlackやLin...]]></description><link>https://zenn.dev/yuuya_b/articles/3f45b7996932f8</link><guid isPermaLink="true">https://zenn.dev/yuuya_b/articles/3f45b7996932f8</guid><pubDate>Mon, 24 Mar 2025 11:25:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Y8n21u9u--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:discord%25E3%2581%25A7%25E8%25AC%259B%25E7%25BE%25A9%25E3%2583%25AC%25E3%2582%25B8%25E3%2583%25A5%25E3%2583%25A1%25E3%2582%2592%25E7%25AE%25A1%25E7%2590%2586%25E3%2583%25BB%25E8%25A6%2581%25E7%25B4%2584%25E3%2581%2599%25E3%2582%258B%25E3%2580%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:bang%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RiM2NjZjNhYzcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>bang</dc:creator></item><item><title><![CDATA[PythonとOpenAIのwhisperを使って、無料で話者分離付き文字起こしシステムを構築してNotionに自動アップロードする方法]]></title><description><![CDATA[
+ はじめに
+ブルーグラフィー株式会社の代表の伊藤景司です。
+会議の録音や講演の記録、インタビューの書き起こしなど、文字起こしの需要は多くの場面で存在します。特に複数の話者がいる場合、「誰が何を言ったのか」を区別できると非常に便利ですよね。この記事では、Python と OepnAIのWhisperを使って「誰が話しているのか」まで識別できる高度な文字起こしシステムを構築し、さらに結果を自動的にNotionにアップロードする方法をわかりやすく解説します。
+
+ 特徴
+
+オンライン会議やYoutubeの動画など、さまざまなツールで動画を見たり使ったりすると思いますが、このシステムはどんなツー...]]></description><link>https://zenn.dev/kjmooon/articles/3050610e6939a3</link><guid isPermaLink="true">https://zenn.dev/kjmooon/articles/3050610e6939a3</guid><pubDate>Mon, 24 Mar 2025 03:31:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--NLattYFd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A8OpenAI%25E3%2581%25AEwhisper%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2580%2581%25E7%2584%25A1%25E6%2596%2599%25E3%2581%25A7%25E8%25A9%25B1%25E8%2580%2585%25E5%2588%2586%25E9%259B%25A2%25E4%25BB%2598%25E3%2581%258D%25E6%2596%2587%25E5%25AD%2597%25E8%25B5%25B7%25E3%2581%2593%25E3%2581%2597%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%25E3%2582%2592%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2597%25E3%2581%25A6Notion%25E3%2581%25AB%25E8%2587%25AA...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E4%25BC%258A%25E8%2597%25A4%25E6%2599%25AF%25E5%258F%25B8%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZiMTYzYWRmYTcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>伊藤景司</dc:creator></item><item><title><![CDATA[中心極限定理(CLT)の完全証明その2～証明の道筋～]]></title><description><![CDATA[
+ このシリーズの説明
+
+統計学、データサイエンス、機械学習、金融工学、すべての分野の土台となる数学的基盤を紹介し、それを厳密に証明していく「Tech Math」シリーズのサブシリーズ「中心極限定理(CLT)の完全証明」の記事である.
+
+第一回記事：「中心極限定理(CLT)の完全証明その1:直感的な説明」
+
+
+
+本記事はその第2回「中心極限定理(CLT)の完全証明その2～証明の道筋～」である
+シリーズ一覧
+
+第一回「中心極限定理(CLT)の完全証明その1:直感的な説明」
+第二回「中心極限定理(CLT)の完全証明その2～証明の道筋～」
+第三回 coming soon
+
+
+
+
+ Abstra...]]></description><link>https://zenn.dev/okina810/articles/9cb6a61f2215f8</link><guid isPermaLink="true">https://zenn.dev/okina810/articles/9cb6a61f2215f8</guid><pubDate>Sun, 23 Mar 2025 13:06:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--EHV-hiMP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E4%25B8%25AD%25E5%25BF%2583%25E6%25A5%25B5%25E9%2599%2590%25E5%25AE%259A%25E7%2590%2586%2528CLT%2529%25E3%2581%25AE%25E5%25AE%258C%25E5%2585%25A8%25E8%25A8%25BC%25E6%2598%258E%25E3%2581%259D%25E3%2581%25AE2%25EF%25BD%259E%25E8%25A8%25BC%25E6%2598%258E%25E3%2581%25AE%25E9%2581%2593%25E7%25AD%258B%25EF%25BD%259E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258A%25E3%2581%258D%25E3%2581%25AA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS1FsTXlsaVUwRTZFbUszeS0tQ3VQNHktY181TDFmYllYc2NlYzNJeUhuYmxhXy1wND1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>おきな</dc:creator></item><item><title><![CDATA[ロジカル思考を深める：演繹法と帰納法を駆使したアルゴリズム解説]]></title><description><![CDATA[
+ 1. はじめに
+ロジカル思考（論理的思考）は、物事を整理し、合理的な結論を導くための重要なスキルです。
+プログラミングやアルゴリズム設計においても、ロジカル思考を活用することで、より効率的で堅牢なコードを書くことができます。
+本記事では、代表的なロジカル思考である 演繹法（Deduction） と 帰納法（Induction） に焦点を当て、それぞれの特徴や具体例、アルゴリズムへの応用について詳しく解説します。
+!
+ロジカル思考とアルゴリズム思考がどのように連携し、より効率的な問題解決へと導くのか、その融合の秘訣について詳しく知りたい方は、こちらの記事【ロジカル思考とアルゴリズム学習...]]></description><link>https://zenn.dev/zoldof/articles/f217d634344410</link><guid isPermaLink="true">https://zenn.dev/zoldof/articles/f217d634344410</guid><pubDate>Sun, 23 Mar 2025 13:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--S3rjGoNA--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%25AD%25E3%2582%25B8%25E3%2582%25AB%25E3%2583%25AB%25E6%2580%259D%25E8%2580%2583%25E3%2582%2592%25E6%25B7%25B1%25E3%2582%2581%25E3%2582%258B%25EF%25BC%259A%25E6%25BC%2594%25E7%25B9%25B9%25E6%25B3%2595%25E3%2581%25A8%25E5%25B8%25B0%25E7%25B4%258D%25E6%25B3%2595%25E3%2582%2592%25E9%25A7%2586%25E4%25BD%25BF%25E3%2581%2597%25E3%2581%259F%25E3%2582%25A2%25E3%2583%25AB%25E3%2582%25B4%25E3%2583%25AA%25E3%2582%25BA%25E3%2583%25A0%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:zoldof%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U5MDBiOWNlYmQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>zoldof</dc:creator></item><item><title><![CDATA[ModuleNotFoundError: No module named 'cgi']]></title><description><![CDATA[Python のバージョンを 3.12 から 3.13 にあげたところ、以下のエラーが出た。
+ModuleNotFoundError: No module named 'cgi'
+これは、v3.13 で、モジュールの cgi が標準サポートされなくなったことが原因。
+https://docs.python.org/3/library/cgi.html
+
+cgi — Common Gateway Interface support
+Deprecated since version 3.11, removed in version 3.13.
+
+対応方法としては、cgi を使っているコードを...]]></description><link>https://zenn.dev/mzeand33/articles/f57bc8bf51ffce</link><guid isPermaLink="true">https://zenn.dev/mzeand33/articles/f57bc8bf51ffce</guid><pubDate>Sun, 23 Mar 2025 12:23:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--auTsp_fe--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ModuleNotFoundError%253A%2520No%2520module%2520named%2520%2527cgi%2527%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Mizue%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lvUUFzYVlsc3JMdGplU0RTLXNOUjNlRG1xdTNEclo1NXczQXM5PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Mizue</dc:creator></item><item><title><![CDATA[中心極限定理(CLT)の完全証明その1: 直感的説明]]></title><description><![CDATA[
+ このシリーズの説明
+
+統計学、データサイエンス、機械学習、金融工学、すべての分野の土台となる数学的基盤を紹介し、それを厳密に証明していく「Tech Math」シリーズのサブシリーズ「中心極限定理(CLT)の完全証明」の記事である.
+本記事はその第一回「中心極限定理(CLT)の完全証明その1:直感的な説明」であり、直観的な説明を与える
+シリーズ一覧
+
+第一回「中心極限定理(CLT)の完全証明その1:直感的な説明」
+第二回「中心極限定理(CLT)の完全証明その2～証明の道筋～」
+第三回 coming soon
+
+
+
+
+ Abstract
+中心極限定理(CLT)の意味と直感的説明を記す
+
+...]]></description><link>https://zenn.dev/okina810/articles/c3448892342898</link><guid isPermaLink="true">https://zenn.dev/okina810/articles/c3448892342898</guid><pubDate>Sun, 23 Mar 2025 11:53:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8999l6Pd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E4%25B8%25AD%25E5%25BF%2583%25E6%25A5%25B5%25E9%2599%2590%25E5%25AE%259A%25E7%2590%2586%2528CLT%2529%25E3%2581%25AE%25E5%25AE%258C%25E5%2585%25A8%25E8%25A8%25BC%25E6%2598%258E%25E3%2581%259D%25E3%2581%25AE1%253A%2520%25E7%259B%25B4%25E6%2584%259F%25E7%259A%2584%25E8%25AA%25AC%25E6%2598%258E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258A%25E3%2581%258D%25E3%2581%25AA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS1FsTXlsaVUwRTZFbUszeS0tQ3VQNHktY181TDFmYllYc2NlYzNJeUhuYmxhXy1wND1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>おきな</dc:creator></item><item><title><![CDATA[開発者のための爆速グロースハック：コードで実現するデータドリブンマーケティング]]></title><description><![CDATA[本書は、開発者がマーケティングの知識と技術を習得し、データに基づいたグロースハックを実践するためのガイドブックです。SQL、Python、GA4などの技術を用いてデータ分析を行い、SEO、SNS、広告などのマーケティング施策をコードで実現する方法を解説します。読者は、マーケティングスキルを身につけ、キャリアアップや事業成長に貢献できるようになります。]]></description><link>https://zenn.dev/idev/books/book-20250323-202024</link><guid isPermaLink="true">https://zenn.dev/idev/books/book-20250323-202024</guid><pubDate>Sun, 23 Mar 2025 11:32:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--rUM5Syqi--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci83NDgzYWU3MmFhLnBuZw==%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>timeless-residents</dc:creator></item><item><title><![CDATA[コードで解き明かすビジネス戦略: 実践的データドリブン経営]]></title><description><![CDATA[本書は、ビジネス戦略を加速させるために、データ分析と機械学習をコードで実践的に活用する方法を解説します。データ収集から前処理、可視化、統計分析、機械学習モデル構築まで、幅広い技術と概念を網羅し、具体的なコード例を通して読者の理解を深めます。データドリブン経営を推進し、ビジネス課題を解決するための実践的な知識とスキルを習得できます。]]></description><link>https://zenn.dev/idev/books/book-20250323-185428</link><guid isPermaLink="true">https://zenn.dev/idev/books/book-20250323-185428</guid><pubDate>Sun, 23 Mar 2025 10:42:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--sp0_Ylcd--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci82ODc0NWNhNThkLnBuZw==%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>timeless-residents</dc:creator></item><item><title><![CDATA[Pythonで文字列から動的にフィールドを作成する方法（setattr）]]></title><description><![CDATA[
+ はじめに
+Pythonでは、setattr を使用することで、オブジェクトの属性（フィールド）を動的に設定することができます。特に、固定長の文字列データを解析し、各フィールドに格納する場合に役立ちます。
+この記事では、setattr を活用して、固定長の文字列データをオブジェクトのフィールドとして自動的に設定する方法を、具体的なPythonクラスの実装を通じて紹介します。
+
+ setattr を使用したクラス設計
+以下の Person クラスは、setattr を活用して固定長の文字列データを解析し、オブジェクトのフィールドとして格納します。
+
+ 実装例
+class Person:
+...]]></description><link>https://zenn.dev/tryeverything/articles/a0030_python_setattr</link><guid isPermaLink="true">https://zenn.dev/tryeverything/articles/a0030_python_setattr</guid><pubDate>Sun, 23 Mar 2025 10:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--f9F8qkt8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A7%25E6%2596%2587%25E5%25AD%2597%25E5%2588%2597%25E3%2581%258B%25E3%2582%2589%25E5%258B%2595%25E7%259A%2584%25E3%2581%25AB%25E3%2583%2595%25E3%2582%25A3%25E3%2583%25BC%25E3%2583%25AB%25E3%2583%2589%25E3%2582%2592%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%25EF%25BC%2588setattr%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259F%25E3%2582%2593%25E3%2581%2595%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc2NDc5YTUwMzguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>たんさん</dc:creator></item><item><title><![CDATA[Pythonで実際に動かしてプロセスを理解する]]></title><description><![CDATA[
+ 概要
+「プロセスって聞いたことあるけど、なんとなくしかわからない…」状態だったため、超初歩的な内容ながらも、実際にPythonを使ってプロセスの基礎の基礎を見ていきます。
+
+ プロセスとは
+プロセスは、プログラムが実行され、メモリが割り当てられて実際にCPU上で動作している状態のことを指します。
+
+ プログラムとの違い
+
+プログラム: ハードディスクなどに保存されている、実行可能なコード
+プロセス: プログラムを実行している最中の状態のこと。メモリを割り当てられ、CPU上で動いているもの。
+
+例えるならば、プログラムはレシピ、プロセスはそのレシピをもとに実際に料理している行為そのもの...]]></description><link>https://zenn.dev/shimiyu/articles/4f432e6ea1be06</link><guid isPermaLink="true">https://zenn.dev/shimiyu/articles/4f432e6ea1be06</guid><pubDate>Sun, 23 Mar 2025 07:17:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Rw1LPK_H--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A7%25E5%25AE%259F%25E9%259A%259B%25E3%2581%25AB%25E5%258B%2595%25E3%2581%258B%25E3%2581%2597%25E3%2581%25A6%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25BB%25E3%2582%25B9%25E3%2582%2592%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2597%25E3%2581%25BF%25E3%2582%2586%25E3%2583%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk0OWE2NTYxY2IuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>しみゆー</dc:creator></item><item><title><![CDATA[[docker] python環境がexitedしてしまう問題]]></title><description><![CDATA[
+ 解決方法
+以下をdocker-compose.yml(exitedしてしまうコンテナの末尾)に記載
+command: tail -f /dev/null
+あとは以下でコンテナに入って、好きなpythonファイルを実行するだけ。
+docker&nbsp;exec&nbsp;-it&nbsp;コンテナ名&nbsp;bash
+test.pyを実行
+root@dfjhi987fkj:/python# python test.py
+
+ なぜ解決するのか
+
+基本的にdockerはcommandを実行し終えたらコンテナが停止する。
+起動し続けるには、何かが実行状態でなければいけない
+-f コマンド...]]></description><link>https://zenn.dev/apo_zenn/articles/a01a152d5353ad</link><guid isPermaLink="true">https://zenn.dev/apo_zenn/articles/a01a152d5353ad</guid><pubDate>Sun, 23 Mar 2025 06:54:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--nIL_bL7W--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255Bdocker%255D%2520python%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%258Cexited%25E3%2581%2597%25E3%2581%25A6%25E3%2581%2597%25E3%2581%25BE%25E3%2581%2586%25E5%2595%258F%25E9%25A1%258C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:apo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVhNmY0NWNjMjcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>apo</dc:creator></item><item><title><![CDATA[Ruffに搭載される新しい型チェッカーRed-knotについて]]></title><description><![CDATA[Python開発者向けツールRuff/uvの開発チーム（Astral inc.）がPython向けの型チェッカーを新規開発しているので紹介いたします。この型チェッカーはコードネーム"Red-knot"と呼ばれており、まだリリース前ですが将来的にはRuffに組み込まれる予定であるようです。以下ではこのプロジェクトの概略を説明したいと思います。
+
+ 特徴
+既存の型チェッカー(e.g. mypy, pyright)の不満点である遅さを改善すべく、徹底的にパフォーマンスに気を配った設計となっています。pyrightもそこまで遅くはないのですが、さらに高速であることを目指すようです。
+Red-kn...]]></description><link>https://zenn.dev/mtshiba/articles/about-red-knot</link><guid isPermaLink="true">https://zenn.dev/mtshiba/articles/about-red-knot</guid><pubDate>Sun, 23 Mar 2025 03:42:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--KaM787Eu--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ruff%25E3%2581%25AB%25E6%2590%25AD%25E8%25BC%2589%25E3%2581%2595%25E3%2582%258C%25E3%2582%258B%25E6%2596%25B0%25E3%2581%2597%25E3%2581%2584%25E5%259E%258B%25E3%2583%2581%25E3%2582%25A7%25E3%2583%2583%25E3%2582%25AB%25E3%2583%25BCRed-knot%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:shiba%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2g0WVFyaVliOXdBdEtlTUJXZjd1REJ5d2Q3UnJCYW5TSmlQYkRGPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>shiba</dc:creator></item><item><title><![CDATA[【Python】n//2とint(n/2)の違い]]></title><description><![CDATA[今日は一見よく似た二つの計算方法「n//2」と「int(n/2)」の違いについて、わかりやすく解説していきます。
+「え？どちらも同じじゃないの？」と思った方、実はこの二つ、微妙に違うんです！
+その違いを知ることで、バグを防いだり、より効率的なコードが書けるようになります。
+
+ 基本的な違い
+まずは基本から見ていきましょう。
+
+
+n//2 は「切り捨て除算」と呼ばれるフロア除算（floor division）です。
+
+int(n/2) は「普通の除算の結果を整数に変換」する方法です。
+
+これだけだと分かりにくいので、実際のコードで確認してみましょう！
+n = 5
+result1 = n /...]]></description><link>https://zenn.dev/hovinci/articles/5d1a0f86019e6d</link><guid isPermaLink="true">https://zenn.dev/hovinci/articles/5d1a0f86019e6d</guid><pubDate>Sun, 23 Mar 2025 00:31:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5lV4kat4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591n%252F%252F2%25E3%2581%25A8int%2528n%252F2%2529%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%259B%25E3%2583%25B4%25E3%2582%25A3%25E3%2583%25B3%25E3%2583%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI0MWFjY2M3YWQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ホヴィンチ</dc:creator></item><item><title><![CDATA[【YOLO】②YOLOのテストアプリをコンテナ化してECS上で動かしてみる]]></title><description><![CDATA[
+ はじめに
+前回の記事で、YOLO12を使用した簡単なwebアプリを作成しテスト実行するところまで記載しました。
+今回はそのアプリからDockerイメージをビルドし、AWS ECS上で起動させる方法までを共有させていただきます。
+以下リンクの前回記事と内容が重複する箇所の記載は省略させていただくことをご承知おきください。
+https://zenn.dev/gj77a/articles/e5cd1056fcbdc4
+
+ なんでコンテナ化するのか？
+（※Dockerの基礎を理解されている方は読み飛ばしてください・・・）
+サーバ上で問題なくアプリが動作することを確認できましたが、その上でわざ...]]></description><link>https://zenn.dev/gj77a/articles/b4e566c612c765</link><guid isPermaLink="true">https://zenn.dev/gj77a/articles/b4e566c612c765</guid><pubDate>Sat, 22 Mar 2025 16:42:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wXZ8IvL9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590YOLO%25E3%2580%2591%25E2%2591%25A1YOLO%25E3%2581%25AE%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2586%25E3%2583%258A%25E5%258C%2596%25E3%2581%2597%25E3%2581%25A6ECS%25E4%25B8%258A%25E3%2581%25A7%25E5%258B%2595%25E3%2581%258B%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:GK7AA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY3OWM5ZmRiZGUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>GK7AA</dc:creator></item></channel></rss>

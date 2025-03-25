@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「CSS」のフィード]]></title><description><![CDATA[Zennのトピック「CSS」のRSSフィードです]]></description><link>https://zenn.dev/topics/css</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/98e1680a6c.png</url><title>Zennの「CSS」のフィード</title><link>https://zenn.dev/topics/css</link></image><generator>zenn.dev</generator><lastBuildDate>Tue, 25 Mar 2025 12:04:23 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/css/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[ブラウザのheightが狭まると上下中央揃え要素が上に行ってしまう対策]]></title><description><![CDATA[
+ 状況
+これまで便利だと思い使っていたposition: absolute;による上下中央揃え…。
+何気なくデベロッパーツールで画面の高さをいじっていたら、heightが狭まるにつれて要素が上へ逃げてしまう症状を確認。
+具体的には、レスポンシブに無理やり上下中央揃えにしようとした結果、absoluteであるために他の要素もお構いなしに移動してしまっていた。
+もしかしてと思いスマホで画面を横にしてみると…
+
+…これは美しくない。対策をしなくては！
+
+ 対策
+少し力技ではあるが、特定のheightになった時にposition: static;に切り替え、margin-topを指定してやるこ...]]></description><link>https://zenn.dev/suzukidog/articles/30fb7a50e195e4</link><guid isPermaLink="true">https://zenn.dev/suzukidog/articles/30fb7a50e195e4</guid><pubDate>Tue, 25 Mar 2025 06:27:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ZUGo7Dhi--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2596%25E3%2583%25A9%25E3%2582%25A6%25E3%2582%25B6%25E3%2581%25AEheight%25E3%2581%258C%25E7%258B%25AD%25E3%2581%25BE%25E3%2582%258B%25E3%2581%25A8%25E4%25B8%258A%25E4%25B8%258B%25E4%25B8%25AD%25E5%25A4%25AE%25E6%258F%2583%25E3%2581%2588%25E8%25A6%2581%25E7%25B4%25A0%25E3%2581%258C%25E4%25B8%258A%25E3%2581%25AB%25E8%25A1%258C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%2597%25E3%2581%25BE%25E3%2581%2586%25E5%25AF%25BE%25E7%25AD%2596%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:suzukidog%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E5ZDE1NzRjYmYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>suzukidog</dc:creator></item><item><title><![CDATA[【2025年3月】styled-componentsがメンテナンスモードになったので、改めてReactでのCSSの実装方法を整理してみる]]></title><description><![CDATA[
+ 📝 はじめに
+2025 年 3 月、長年 React 界隈を支えてきた CSS-in-JS ライブラリ「styled-components」がメンテナンスモードに移行したというニュースが流れてきました。
+https://opencollective.com/styled-components/updates/thank-you
+自分も含め、多くの React 開発者にとっては当たり前のように使っていた存在だけに、ちょっとした時代の変化を感じますね…😢
+ということで今回は、styled-components に感謝しつつ、改めて「React で CSS を書く方法」について整理してみよ...]]></description><link>https://zenn.dev/sonicmoov/articles/react-css-2025</link><guid isPermaLink="true">https://zenn.dev/sonicmoov/articles/react-css-2025</guid><pubDate>Mon, 24 Mar 2025 22:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--FrNQypZ_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%25902025%25E5%25B9%25B43%25E6%259C%2588%25E3%2580%2591styled-components%25E3%2581%258C%25E3%2583%25A1%25E3%2583%25B3%25E3%2583%2586%25E3%2583%258A%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%25A2%25E3%2583%25BC%25E3%2583%2589%25E3%2581%25AB%25E3%2581%25AA%25E3%2581%25A3%25E3%2581%259F%25E3%2581%25AE%25E3%2581%25A7%25E3%2580%2581%25E6%2594%25B9%25E3%2582%2581%25E3%2581%25A6React%25E3%2581%25A7%25E3%2581%25AECSS%25E3%2581%25AE...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:HungryGoat%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY0YjYwNGE3MzguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2582%25BD%25E3%2583%258B%25E3%2583%2583%25E3%2582%25AF%25E3%2583%25A0%25E3%2583%25BC%25E3%2583%2596%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzMyOGEyNzM5MDEuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>HungryGoat</dc:creator></item><item><title><![CDATA[[Next.js] View Transitionで画面遷移にアニメーションを付ける]]></title><description><![CDATA[
+ 環境
+以下の環境で動作確認を行った。
+
+React v19.0.0
+Next.js v15.2.3
+
+use App Router
+
+
+TypeScript v5.8.2
+
+
+ 実装
+いろいろな手法があるが、今回はなるべく簡素に実装していきたいと思う。
+
+ View Transition API
+View Transition APIを利用して画面遷移時にアニメーションを付与する。まずは、アニメーションの実装をCSSで定義していく。
+https://developer.chrome.com/docs/web-platform/view-transitions?hl=ja
+今回は以下の...]]></description><link>https://zenn.dev/hiro/articles/83d06719906696</link><guid isPermaLink="true">https://zenn.dev/hiro/articles/83d06719906696</guid><pubDate>Mon, 24 Mar 2025 03:00:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ap9a884S--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BNext.js%255D%2520View%2520Transition%25E3%2581%25A7%25E7%2594%25BB%25E9%259D%25A2%25E9%2581%25B7%25E7%25A7%25BB%25E3%2581%25AB%25E3%2582%25A2%25E3%2583%258B%25E3%2583%25A1%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%2592%25E4%25BB%2598%25E3%2581%2591%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hiro%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M2MzA3N2E1OTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hiro</dc:creator></item><item><title><![CDATA[CSSのみでカルーセルを実装してみる（Chrome 135以降）]]></title><description><![CDATA[カルーセルといえばJavaScriptやライブラリを使うのが一般的かと思いますが、
+Google Chrome 135以降では、CSSのみでカルーセルを実装できるようになりました。
+https://developer.chrome.com/blog/carousels-with-css?hl=ja
+どのように実装するのか、試してみました！
+
+ 完成したページ
+対応ブラウザ：Google Chrome 135以降
+キーボードでの操作（←/→）も可能です
+https://carousels-with-css.vercel.app/
+
+
+ 使用技術
+Astro(5.5.4) + microCM...]]></description><link>https://zenn.dev/corleonis/articles/5536f0742eb64e</link><guid isPermaLink="true">https://zenn.dev/corleonis/articles/5536f0742eb64e</guid><pubDate>Sun, 23 Mar 2025 12:19:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--VXbKErt0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:CSS%25E3%2581%25AE%25E3%2581%25BF%25E3%2581%25A7%25E3%2582%25AB%25E3%2583%25AB%25E3%2583%25BC%25E3%2582%25BB%25E3%2583%25AB%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%25EF%25BC%2588Chrome%2520135%25E4%25BB%25A5%25E9%2599%258D%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:corleonis%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBlZWQ3NGI5NDkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>corleonis</dc:creator></item><item><title><![CDATA[background-image超簡単な方法で暗くする。何故今までとても面倒な方法で実装していのか]]></title><description><![CDATA[今までbackground-blande-modeやらbackground-colorを使ってほげほげして暗くしてたけどもっと良い方法が見つかったので書いておく。
+まぁZENNを使っている優秀なフロントエンダーの方達からしたら「基本中の基本だよねぷーくすくす」って感じだろうけどねっ！
+はい
+	background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),url('../images/main.png');
+そもそも今までbackground-imageに対して値を2つ以上指定するという発想がなかった件。...]]></description><link>https://zenn.dev/riku_front/articles/ffc9f822650109</link><guid isPermaLink="true">https://zenn.dev/riku_front/articles/ffc9f822650109</guid><pubDate>Sun, 23 Mar 2025 09:49:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ziA36oJr--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:background-image%25E8%25B6%2585%25E7%25B0%25A1%25E5%258D%2598%25E3%2581%25AA%25E6%2596%25B9%25E6%25B3%2595%25E3%2581%25A7%25E6%259A%2597%25E3%2581%258F%25E3%2581%2599%25E3%2582%258B%25E3%2580%2582%25E4%25BD%2595%25E6%2595%2585%25E4%25BB%258A%25E3%2581%25BE%25E3%2581%25A7%25E3%2581%25A8%25E3%2581%25A6%25E3%2582%2582%25E9%259D%25A2%25E5%2580%2592%25E3%2581%25AA%25E6%2596%25B9%25E6%25B3%2595%25E3%2581%25A7%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2597%25E3%2581%25A6%25E3%2581%2584%25E3%2581%25AE%25E3%2581%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:riku%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTDFUUUJxUVp5SzN3c0tBX0lfVkhOZWZfaEVCYnEzX1FZVE1aOWx3M3o5Rmc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>riku</dc:creator></item><item><title><![CDATA[最近のCSSを改めてちゃんと学んでみた]]></title><description><![CDATA[
+ はじめに
+!
+修正や追加等はコメントまたはGitHubで編集リクエストをお待ちしております。
+
+弊社ではデザイナーがCSSを書いてくれるので、私はフロントエンドエンジニアながら最近はTypeScriptばかり書いていました。
+しかし、フロントエンドエンジニアならCSSもしっかり学んでおかないといけないと思い、アウトプットついでにこの記事を書いています。
+
+ 1. モダンCSSの現状と進化
+
+ 2019-2024年に標準化された主要な機能
+2019年以降、CSSには多くの革新的な機能が標準化され、JavaScriptに頼らずに実現できることが増えました。
+レイアウト関連：
+
+
+コンテナ...]]></description><link>https://zenn.dev/gmomedia/articles/6ed3718b4c6bc1</link><guid isPermaLink="true">https://zenn.dev/gmomedia/articles/6ed3718b4c6bc1</guid><pubDate>Sun, 23 Mar 2025 00:52:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5W-yk4Ae--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%259C%2580%25E8%25BF%2591%25E3%2581%25AECSS%25E3%2582%2592%25E6%2594%25B9%25E3%2582%2581%25E3%2581%25A6%25E3%2581%25A1%25E3%2582%2583%25E3%2582%2593%25E3%2581%25A8%25E5%25AD%25A6%25E3%2582%2593%25E3%2581%25A7%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Riya%2520Amemiya%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzMzOGEzNzc5MTMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:GMO%25E3%2583%25A1%25E3%2583%2587%25E3%2582%25A3%25E3%2582%25A2%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzIyOTk0YWYxZDYuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Riya Amemiya</dc:creator></item><item><title><![CDATA[よくあるサイトを訪れた際のアニメーション]]></title><description><![CDATA[備忘録
+これまた非常によく見るあれ。
+サイトを訪れた際のアニメーション。なんか最初は隠れてて時間差で出てくるあれ。
+とりあえず超汎用的なコードを書いたので備忘録用に残しておきます。
+function animation() {
+    window.addEventListener('load', function () {
+        setTimeout(function () {
+            document.getElementById('hoge').classList.add('show');
+        }, 1000)
+    })
+}
+animati...]]></description><link>https://zenn.dev/riku_front/articles/29cac0995713bd</link><guid isPermaLink="true">https://zenn.dev/riku_front/articles/29cac0995713bd</guid><pubDate>Sat, 22 Mar 2025 10:59:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ujJ9gYzG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%2588%25E3%2581%258F%25E3%2581%2582%25E3%2582%258B%25E3%2582%25B5%25E3%2582%25A4%25E3%2583%2588%25E3%2582%2592%25E8%25A8%25AA%25E3%2582%258C%25E3%2581%259F%25E9%259A%259B%25E3%2581%25AE%25E3%2582%25A2%25E3%2583%258B%25E3%2583%25A1%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:riku%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTDFUUUJxUVp5SzN3c0tBX0lfVkhOZWZfaEVCYnEzX1FZVE1aOWx3M3o5Rmc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>riku</dc:creator></item><item><title><![CDATA[【悲報】styled-components がメンテナンスモードになりました。]]></title><description><![CDATA[緊急で投稿しています。
+
+ えっ? 本当に?
+つい先程ですが、参加してるコミュニティで以下ポストが共有されて衝撃が走りました。。
+https://x.com/yug1224/status/1903045205206720836
+
+ 元の公式記事を読んでみる
+実際に、元の記事を読んでみました。
+https://opencollective.com/styled-components/updates/thank-you
+以下、Chat GPT による翻訳:
+
+まず初めに、長年にわたり styled-components に貢献してくださった皆様に感謝申し上げます。オープンソースの維持は困難な...]]></description><link>https://zenn.dev/nappa/articles/9c6df8cfda8b02</link><guid isPermaLink="true">https://zenn.dev/nappa/articles/9c6df8cfda8b02</guid><pubDate>Fri, 21 Mar 2025 17:59:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Q-bJWBvu--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E6%2582%25B2%25E5%25A0%25B1%25E3%2580%2591styled-components%2520%25E3%2581%258C%25E3%2583%25A1%25E3%2583%25B3%25E3%2583%2586%25E3%2583%258A%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%25A2%25E3%2583%25BC%25E3%2583%2589%25E3%2581%25AB%25E3%2581%25AA%25E3%2582%258A%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%25E3%2580%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nappa%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBiZTZlMDkwMDAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nappa</dc:creator></item><item><title><![CDATA[WEBシステムとは？]]></title><description><![CDATA[今、あなたが読んでいるこの記事は、どのような仕組みで表示されているのでしょうか？
+「WEBシステム」について調べると、ブラウザやサーバー、HTML、プログラミングといった言葉が出てきますが、これらはいったい何なのでしょうか。
+この記事では、それらの基本的な用語を含め、WEBシステムの仕組みをわかりやすく解説していきます。
+
+ WEBシステムの仕組み
+
+ 概要
+
+私たちがインターネットで記事を読んだり、YouTubeの動画を見るとき、スマホやパソコンの「ブラウザ」は、「サーバー」というコンピュータに「このページを表示してください」とリクエストを送ります。サーバーは、そのリクエストに応えて記...]]></description><link>https://zenn.dev/frontline/articles/0a5d26964a29fc</link><guid isPermaLink="true">https://zenn.dev/frontline/articles/0a5d26964a29fc</guid><pubDate>Thu, 20 Mar 2025 12:12:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--cH5zA2UC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:WEB%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%25E3%2581%25A8%25E3%2581%25AF%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kota%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRiYTIxOTFjNjYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kota</dc:creator></item><item><title><![CDATA[Grapesjsを構築①-ノーコードWEBビルダー]]></title><description><![CDATA[
+ GrapesJSとは？
+GrapesJS（グレープスジェイエス） は、ドラッグ＆ドロップで簡単にWebサイトやメールテンプレートを作成できるオープンソースのWebビルダーです。
+特に、コーディングの知識がなくてもWebページを作れるのが大きな特徴です。
+GrapesJSを使えば、ノーコードでのデザイン作成やカスタムHTMLの編集が可能になるため、Webデザイナーやマーケター にも便利なツールとなっています。
+
+参考：GrapesJSドキュメント（公式）
+参考：GrapesJS (github)
+
+自分なりに色々カスタムしています😀
+https://pf-creater.com/gra...]]></description><link>https://zenn.dev/web_kuroko/articles/37fa74a7c25fc2</link><guid isPermaLink="true">https://zenn.dev/web_kuroko/articles/37fa74a7c25fc2</guid><pubDate>Thu, 20 Mar 2025 10:55:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--KThXEuf1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Grapesjs%25E3%2582%2592%25E6%25A7%258B%25E7%25AF%2589%25E2%2591%25A0-%25E3%2583%258E%25E3%2583%25BC%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589WEB%25E3%2583%2593%25E3%2583%25AB%25E3%2583%2580%25E3%2583%25BC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:web%25E9%25BB%2592%25E5%25AD%2590%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2UwZTk2YjM5YTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>web黒子</dc:creator></item><item><title><![CDATA[ボックスモデルを超えてゆけ！display: contents;の使い方について実例を交えながら解説]]></title><description><![CDATA[
+ はじめに
+CSS のボックスモデルは、レイアウトを構成する基本的な概念です。
+しかし複雑なレイアウトを表現するのに不要なラッパー要素が増えてしまいがちで、マークアップが冗長になることがあります。
+display: contents; はこの問題を解決するための CSS プロパティの一つで、余計なボックスを作らずにマークアップをシンプルに保つことができます。
+本記事では、display: contents; の基本的な動作、実際のユースケース、考慮すべき注意点について述べていきたいと思います。
+!
+CSS 初学者の方はボックスモデルについてしっかり学んでいただいてから、本記事に目を通し...]]></description><link>https://zenn.dev/shunpi/articles/9fc5657702a960</link><guid isPermaLink="true">https://zenn.dev/shunpi/articles/9fc5657702a960</guid><pubDate>Thu, 20 Mar 2025 08:33:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--RhvOpiMI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%259C%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25B9%25E3%2583%25A2%25E3%2583%2587%25E3%2583%25AB%25E3%2582%2592%25E8%25B6%2585%25E3%2581%2588%25E3%2581%25A6%25E3%2582%2586%25E3%2581%2591%25EF%25BC%2581display%253A%2520contents%253B%25E3%2581%25AE%25E4%25BD%25BF%25E3%2581%2584%25E6%2596%25B9%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E5%25AE%259F%25E4%25BE%258B%25E3%2582%2592%25E4%25BA%25A4%25E3%2581%2588%25E3%2581%25AA%25E3%2581%258C%25E3%2582%2589%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2597%25E3%2582%2585%25E3%2582%2593%25E3%2581%25B4%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lJUTQ4eHRFRk8yNHpLVUFNOXNQZl93Zm9KM1RoY3hYS041VW4yPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>しゅんぴ</dc:creator></item><item><title><![CDATA[UIデザイン・生成AIとの関係を交えながら「Tailwind CSS」について考察する]]></title><description><![CDATA[タイトルにもありますが、今回はUIデザインと生成AIとの関係からTailwind CSS（ユーティリティクラスを主に使用するCSSフレームワーク）について考えていこうと思います。
+今更Tailwind CSSの話をするのか？と考える方もいらっしゃるかもしれませんが、スタイリングのデファクトスタンダードになり落ち着いてきた雰囲気がある今こそ、再考する時期かもしれません。
+!
+本記事のゴールは以下になります。
+
+Tailwind CSSについて概要を理解する
+UIデザインとTailwind CSSの関係について理解する
+生成AIとTailwind CSSの関係・相性について理解する
+Tail...]]></description><link>https://zenn.dev/saku2323/articles/dd304b2973c5c4</link><guid isPermaLink="true">https://zenn.dev/saku2323/articles/dd304b2973c5c4</guid><pubDate>Tue, 18 Mar 2025 04:43:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--MmjdQio_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:UI%25E3%2583%2587%25E3%2582%25B6%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%25BB%25E7%2594%259F%25E6%2588%2590AI%25E3%2581%25A8%25E3%2581%25AE%25E9%2596%25A2%25E4%25BF%2582%25E3%2582%2592%25E4%25BA%25A4%25E3%2581%2588%25E3%2581%25AA%25E3%2581%258C%25E3%2582%2589%25E3%2580%258CTailwind%2520CSS%25E3%2580%258D%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E8%2580%2583%25E5%25AF%259F%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:saku%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTEVpV29OeUlsWDlXVlFBSnl0NUM3M3JNeXktakJOZGNfNlBVYTBNOFhUN1NCOWlZNGw9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>saku</dc:creator></item><item><title><![CDATA[flexで孫要素の高さを揃える方法]]></title><description><![CDATA[カード風デザインを実装するとき、孫要素の高さが揃わない・位置が決まらないことはありませんか。
+
+カードが横並びのとき、flexで実装するケースが多いかと思います。
+flexで孫要素の高さを揃えるためには、flex-grow: 1;を書くだけでOKです。
+
+
+ なぜflex-grow: 1;で高さが揃うのか
+カードの高さは、中に入っているパンの画像やテキストの量で高くなったり低くなったりします。
+すべてのカードの中に入る要素の量がすべて同じであれば良いのですが、中に入る要素の量がバラバラなときそれぞれのカードの高さもバラバラになります。
+一番高いカードの高さに合わせれば、高さが揃って綺麗に...]]></description><link>https://zenn.dev/928sekine/articles/6dfb1223099282</link><guid isPermaLink="true">https://zenn.dev/928sekine/articles/6dfb1223099282</guid><pubDate>Tue, 18 Mar 2025 02:33:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0Cx1u2vv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:flex%25E3%2581%25A7%25E5%25AD%25AB%25E8%25A6%2581%25E7%25B4%25A0%25E3%2581%25AE%25E9%25AB%2598%25E3%2581%2595%25E3%2582%2592%25E6%258F%2583%25E3%2581%2588%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259B%25E3%2581%258D%25E3%2581%25AD%25E3%2582%258A%25E3%2581%25AA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAyNDQ3MGIzZjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>せきねりな</dc:creator></item><item><title><![CDATA[marginを使って中央揃えできなかったときの対処法]]></title><description><![CDATA[
+ はじめに
+CSS で margin を使ったときに中央揃えができなかったときに調べたことを記載しました。
+
+修正前のソースコード
+
+div {
+  margin: 0 auto;
+  background-color: yellow;
+}
+
+
+ 原因
+margin:0 auto;を使ったときに中央揃えできないときは下記を確認します。
+
+
+ブロックレベルの要素に対して指定しているか
+width の指定をしているか
+
+margin はブロックレベルの要素に対して指定するが、ブロックレベルだとデフォルトで width は 100%となっているため親要素の幅いっぱいに広がっています。widt...]]></description><link>https://zenn.dev/mo_ri_regen/articles/css-center-alignment</link><guid isPermaLink="true">https://zenn.dev/mo_ri_regen/articles/css-center-alignment</guid><pubDate>Mon, 17 Mar 2025 13:45:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2OnqR2NJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:margin%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E4%25B8%25AD%25E5%25A4%25AE%25E6%258F%2583%25E3%2581%2588%25E3%2581%25A7%25E3%2581%258D%25E3%2581%25AA%25E3%2581%258B%25E3%2581%25A3%25E3%2581%259F%25E3%2581%25A8%25E3%2581%258D%25E3%2581%25AE%25E5%25AF%25BE%25E5%2587%25A6%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%25A2%25E3%2583%25BC%25E3%2583%25AA%25E3%2583%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2YzN2Y0MWQxMGUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>モーリー</dc:creator></item><item><title><![CDATA[CSS vs SCSS vs TailwindCSS]]></title><description><![CDATA[
+ 導入
+こんにちは。
+最近TailwindCSSしか使っていない高専生です。
+今回は既存のCSSやSCSSと今流行りのTailwindCSSを比較してみようと思います。
+個人の主観が混じっているため、一意見として読んでいただけると幸いです。
+
+ CSS
+
+ 特徴
+
+Webページのスタイルを定義するための標準的なスタイルシート言語
+シンプルで直感的な文法である
+ブラウザによってネイティブにサポートされている
+
+
+ 長所
+
+学習コストが低い
+
+基本的な文法はシンプルで初心者でも比較的簡単に理解ができる
+
+
+ブラウザの互換性
+
+すべてのブラウザでサポートされており特別なツールやコンパイルが不...]]></description><link>https://zenn.dev/nitic_students/articles/e3988581c4eca8</link><guid isPermaLink="true">https://zenn.dev/nitic_students/articles/e3988581c4eca8</guid><pubDate>Mon, 17 Mar 2025 11:11:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3xGn5Atx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:CSS%2520vs%2520SCSS%2520vs%2520TailwindCSS%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Juna1013%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBiYzc3NDIyM2YuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E8%258C%25A8%25E5%259F%258E%25E9%25AB%2598%25E5%25B0%2582%2520%25E5%25AD%25A6%25E7%2594%259F%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk1MjYwNDRhY2QuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Juna1013</dc:creator></item><item><title><![CDATA[独学15,132円 vs スクール10万円で何をどう学ぶか]]></title><description><![CDATA[
+ 1️⃣ 独学 vs スクール、どっちがいいのか？
+
+あなたなら、どうする？
+プログラミングを学ぶ方法には、大きく分けて
+スクールに通うか、独学するか の二択がある。
+スキルレベルや学習スタイルは人それぞれ異なるため、答えは 三者三様であろう。
+✅ 手っ取り早くスキルを身につけたいなら、スクールを選ぶか？
+✅ コストを抑えつつ、マイペースに学びたいなら独学か？
+✅ しかし、本当に独学だけで戦えるのか？
+スクールは 10万円以上 かかるのが一般的である。
+一方、独学なら 本＋AIで15,132円 で済む。
+この15,132円は、私が買ったHTML &amp;CSSの古本3冊（2006年・...]]></description><link>https://zenn.dev/linux_shufu/articles/46cadab72284a2</link><guid isPermaLink="true">https://zenn.dev/linux_shufu/articles/46cadab72284a2</guid><pubDate>Sun, 16 Mar 2025 22:50:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wtyij3sW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%258B%25AC%25E5%25AD%25A615%252C132%25E5%2586%2586%2520vs%2520%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25BC%25E3%2583%25AB10%25E4%25B8%2587%25E5%2586%2586%25E3%2581%25A7%25E4%25BD%2595%25E3%2582%2592%25E3%2581%25A9%25E3%2581%2586%25E5%25AD%25A6%25E3%2581%25B6%25E3%2581%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:TAKI%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQxN2NjYWQ0N2MuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>TAKI</dc:creator></item><item><title><![CDATA[MUIでCSSアニメーションを設定する]]></title><description><![CDATA[
+ 始めに
+ReactのUIライブラリの一つに Material UI がありますが、こちらを使ってアニメーションを設定する場合Transitionsに書かれているようなトランジションでアニメーションする方法しか載っておらず、CSSアニメーションの設定は見当たりませんでした。StackOverflowなどで調べたり検証コードを書いたりして設定方法が分かったので備忘録としてまとめました。
+ちなみにトランジションのカスタマイズ方法は以下の記事にまとめておりますので興味があればご参照ください。
+https://zenn.dev/numa_san/articles/e213d29e4cc227
+...]]></description><link>https://zenn.dev/numa_san/articles/09db780f5af225</link><guid isPermaLink="true">https://zenn.dev/numa_san/articles/09db780f5af225</guid><pubDate>Sun, 16 Mar 2025 10:04:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--am5eAaho--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:MUI%25E3%2581%25A7CSS%25E3%2582%25A2%25E3%2583%258B%25E3%2583%25A1%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%2592%25E8%25A8%25AD%25E5%25AE%259A%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AC%25E3%2581%25BE%25E3%2581%2595%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI5MWZjYWE2NDYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ぬまさん</dc:creator></item><item><title><![CDATA[[CSS]スクロールバーをヘッダの下に表示する]]></title><description><![CDATA[
+ 概要
+普通にページを実装した場合、スクロールバーはページ全体に表示される。
+しかし、固定ヘッダだと、全体ではなくヘッダの下のみにスクロールバーを表示したくなることがある。
+これを実装する。といっても CSS の基本がわかっていればシンプル。
+
+ 結論
+tailwind で書いているが、特別なことはないので普通の css でも一緒。
+
+
+ ポイント
+CSS をある程度知っている人は見ればわかると思うので、簡単に
+
+
+画面サイズの要素の中に、ヘッダやスクロールする要素を入れる
+
+サイズは h-dvh で height: 100dvh を指定する。
+
+h-screen や height: ...]]></description><link>https://zenn.dev/zakuro9715/articles/scrollbar-below-header</link><guid isPermaLink="true">https://zenn.dev/zakuro9715/articles/scrollbar-below-header</guid><pubDate>Sat, 15 Mar 2025 05:35:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--owcMxa8P--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BCSS%255D%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%25AB%25E3%2583%2590%25E3%2583%25BC%25E3%2582%2592%25E3%2583%2598%25E3%2583%2583%25E3%2583%2580%25E3%2581%25AE%25E4%25B8%258B%25E3%2581%25AB%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:zakuro%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RhMTljMmZmZDAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>zakuro</dc:creator></item><item><title><![CDATA[DOMatrix で CSS の translate による移動量を取得する]]></title><description><![CDATA[タイトルの通りですが translate の移動量を取得したいなというモチベーションがあり調べていたところ、DOMMatrix に出会いました。
+https://developer.mozilla.org/ja/docs/Web/API/DOMMatrix
+この出会いを記念して以下みたいなもの（語彙力、、、）を作って遊んでみたという記事です。
+
+
+ サンプルコード
+記事では抜粋した内容しか書きませんが、React / TypeScript / CSS Modules という構成で以下のリポジトリに全体のコードはあげています。
+https://github.com/yasuhiro-yam...]]></description><link>https://zenn.dev/yall/articles/d692e52510132b</link><guid isPermaLink="true">https://zenn.dev/yall/articles/d692e52510132b</guid><pubDate>Fri, 14 Mar 2025 10:57:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3CDLR4fX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:DOMatrix%2520%25E3%2581%25A7%2520CSS%2520%25E3%2581%25AE%2520translate%2520%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258B%25E7%25A7%25BB%25E5%258B%2595%25E9%2587%258F%25E3%2582%2592%25E5%258F%2596%25E5%25BE%2597%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yasuhiro%2520Yamamoto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE2ZTM4Njc5YmIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yasuhiro Yamamoto</dc:creator></item><item><title><![CDATA[ゼロランタイムのCSS-in-JSを作った話]]></title><description><![CDATA[
+ モチベーション
+使いたいのがなかった上に*.module.cssに煩わしさを感じていた。
+ReactのCSS選択肢はVueなどに比べ非常に難しく、選択肢が多すぎるため、学習コストがかかるし捨てたり入れたりの繰り返しだった。
+
+ 筆者のこれまでのCSS経験
+Pure CSS ⇨ Tailwind CSS ⇨ Styled-JSX ⇨ Emotioin ⇨ Chakra UI ⇨ Metarial UI ⇨ CSS Modules
+
+ 興味のあったCSS in JS
+vanilla-extract・StyleX・Linaria
+
+ 作成するにあたっての条件
+・ゼロランタイム
+・機能盛り盛...]]></description><link>https://zenn.dev/refirst11/articles/81702cc1a3a475</link><guid isPermaLink="true">https://zenn.dev/refirst11/articles/81702cc1a3a475</guid><pubDate>Thu, 13 Mar 2025 10:37:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--kFbYD2ay--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25BC%25E3%2583%25AD%25E3%2583%25A9%25E3%2583%25B3%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25A0%25E3%2581%25AECSS-in-JS%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Refirst%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI3NTFjOTI4YTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Refirst</dc:creator></item></channel></rss>
