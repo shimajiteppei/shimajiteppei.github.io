@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Ubuntu」のフィード]]></title><description><![CDATA[Zennのトピック「Ubuntu」のRSSフィードです]]></description><link>https://zenn.dev/topics/ubuntu</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/8c2cdbc5b3.png</url><title>Zennの「Ubuntu」のフィード</title><link>https://zenn.dev/topics/ubuntu</link></image><generator>zenn.dev</generator><lastBuildDate>Wed, 26 Mar 2025 12:04:14 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/ubuntu/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[ぼくの.screenrcの設定]]></title><description><![CDATA[
+ はじめに
+相変わらずscreenを使用しています。
+私が設定している.screenrcの内容になります。
+tmuxも使うことはあります。
+
+ .screenrcの内容
+defscrollback 20000
+startup_message off
+altscreen on
+defbce on
+term xterm-256color
+hardstatus alwayslastline "%{= rw} %H %{= wk}%-Lw%{= bw}%n%f %t%{= wk}%+Lw %{= wk}%=%{= gk} %m/%d %0c"
+
+ 解説
+.screenrcとして保存します。
+
+...]]></description><link>https://zenn.dev/kn64872/articles/32fb33c8afd3f4</link><guid isPermaLink="true">https://zenn.dev/kn64872/articles/32fb33c8afd3f4</guid><pubDate>Wed, 26 Mar 2025 11:19:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--LAmTUVVg--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%25BC%25E3%2581%258F%25E3%2581%25AE.screenrc%25E3%2581%25AE%25E8%25A8%25AD%25E5%25AE%259A%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:O.Yabuki-213%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E1ODJlZThhMmQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>O.Yabuki-213</dc:creator></item><item><title><![CDATA[WSL2環境でのDocker host.docker.internal解決エラーの対処法]]></title><description><![CDATA[
+ なにこれ
+WSL2 + Docker 環境で開発してると、
+host.docker.internal にアクセスしようとして「繋がらない…」ってなったこと、ありませんか？
+例えばこんなエラー：
+Error creating agent_session: HTTPConnectionPool(host='host.docker.internal', port=37443):
+Max retries exceeded with url: /alive
+(Caused by ConnectTimeoutError(..., 'Connection to host.docker.intern...]]></description><link>https://zenn.dev/haruotsu/articles/3dc17cbb8c32cf</link><guid isPermaLink="true">https://zenn.dev/haruotsu/articles/3dc17cbb8c32cf</guid><pubDate>Mon, 24 Mar 2025 14:38:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ADCQtm-M--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:WSL2%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25A7%25E3%2581%25AEDocker%2520host.docker.internal%25E8%25A7%25A3%25E6%25B1%25BA%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E3%2581%25AE%25E5%25AF%25BE%25E5%2587%25A6%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:haruotsu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSTBnWkxzUU44OGI3SFRtVUpEejBuTjdDelRLbGdRWjFCY2pMMlhQWnNsYnYyMUtPZz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>haruotsu</dc:creator></item><item><title><![CDATA[UbuntuにGitHub CLIをインストール]]></title><description><![CDATA[
+ 作業環境
+uname -a
+. /etc/os-release &amp;&amp; echo "$PRETTY_NAME"
+dpkg --print-architecture
+
+実行結果
+Linux tah5-server 6.8.0-55-generic #57-Ubuntu SMP PREEMPT_DYNAMIC Wed Feb 12 23:42:21 UTC 2025 x86_64 x86_64 x86_64 GNU/Linux
+Ubuntu 24.04.2 LTS
+amd64
+
+
+ 要約
+
+ インストール
+(type -p wget &gt;/dev/null || (su...]]></description><link>https://zenn.dev/tah5/articles/2d4f9ab2c2fe78</link><guid isPermaLink="true">https://zenn.dev/tah5/articles/2d4f9ab2c2fe78</guid><pubDate>Mon, 24 Mar 2025 04:00:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--40mvVqIk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ubuntu%25E3%2581%25ABGitHub%2520CLI%25E3%2582%2592%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%2528%2520%25CF%2589%2520%2529%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdkYjZiOTQwZGEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>(☠ω☠)</dc:creator></item><item><title><![CDATA[【splunk】WSL2でdocker-splunkを動かす]]></title><description><![CDATA[
+ 前置き
+簡単なログ調査やApp・Add-on開発を行いたいとき、わざわざsplunk用VMを構築するのは面倒です。手元のWindows端末でササっと済ませたい場合、WSL2で Docker Splunk を動かしたほうが手っ取り早いです。
+!
+Docker Desktop を使わないので、この手法は商用利用でも使えます。
+
+
+ 前提条件
+WSL2 (Ubuntu) のインストールが完了している。
+
+ 1. Docker
+公式ドキュメント Install Docker Engine on Ubuntu をほぼそのままやるだけですが、一応書きます。
+
+ GPG鍵の設定
+
+
+パッケージ情報...]]></description><link>https://zenn.dev/maihaistyle/articles/docker-splunk-on-wsl2</link><guid isPermaLink="true">https://zenn.dev/maihaistyle/articles/docker-splunk-on-wsl2</guid><pubDate>Thu, 20 Mar 2025 13:13:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--HUGvI6T9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590splunk%25E3%2580%2591WSL2%25E3%2581%25A7docker-splunk%25E3%2582%2592%25E5%258B%2595%25E3%2581%258B%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%259E%25E3%2582%25A4%25E3%2583%258F%25E3%2582%25A4%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lxbTdwa0JnVlVCczZ3RjFJemFHS3NlRkxkblZvM0IxQVZwV292TUE9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>マイハイ</dc:creator></item><item><title><![CDATA[WSL Ubuntuでcolimaが起動できない Could not access KVM kernel moduleの対処法]]></title><description><![CDATA[以下のようにcolimaのログを確認したところ、
+cat ~/.config/colima/_lima/colima/ha.stderr.log
+qemu-system-x86_64: Could not access KVM kernel module: Permission denied
+qemu-system-x86_64: failed to initialize kvm: Permission denied
+こんな感じで起動できない場合がある。
+これはWSLでKVMが有効になっていないことが要因。以下コマンドでkvmがインストールされているかを確認する。
+lsmod | gre...]]></description><link>https://zenn.dev/haruotsu/articles/0b16808d1d63a6</link><guid isPermaLink="true">https://zenn.dev/haruotsu/articles/0b16808d1d63a6</guid><pubDate>Thu, 20 Mar 2025 09:28:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GlLS9uqU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:WSL%2520Ubuntu%25E3%2581%25A7colima%25E3%2581%258C%25E8%25B5%25B7%25E5%258B%2595%25E3%2581%25A7%25E3%2581%258D%25E3%2581%25AA%25E3%2581%2584%2520Could%2520not%2520access%2520KVM%2520kernel%2520modu...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:haruotsu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSTBnWkxzUU44OGI3SFRtVUpEejBuTjdDelRLbGdRWjFCY2pMMlhQWnNsYnYyMUtPZz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>haruotsu</dc:creator></item><item><title><![CDATA[screenコマンドの備忘録&UbuntuのPATHの通し方]]></title><description><![CDATA[
+ screenコマンド
+-U: Tell screen to use UTF-8 encoding.
+-A: Adapt all windows to the new display width &amp; height.
+-m: ignore $STY variable, do create a new screen session.
+-d: Detach the elsewhere running screen (and reattach here).
+-S: Name this session &lt;pid&gt;.sockname instead of &lt;pid&gt;...]]></description><link>https://zenn.dev/m20138/articles/5bbb7e15c3d755</link><guid isPermaLink="true">https://zenn.dev/m20138/articles/5bbb7e15c3d755</guid><pubDate>Tue, 18 Mar 2025 20:19:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7lnDfSRb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:screen%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2581%25AE%25E5%2582%2599%25E5%25BF%2598%25E9%258C%25B2%2526Ubuntu%25E3%2581%25AEPATH%25E3%2581%25AE%25E9%2580%259A%25E3%2581%2597%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:lonlyboy%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc3YmViY2Y5MzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>lonlyboy</dc:creator></item><item><title><![CDATA[WSL2 & Ubuntu 環境構築]]></title><description><![CDATA[本記事では、WSL2とUbuntu24.04の環境を構築する手順を記載する
+
+ wslとは
+「Windows コンピューター上で Linux 環境を実行」できるものです。
+参考：Linux用Windowsサブシステムとは より
+
+ Ubuntuとは
+Linux OSの一種である
+参考：Ubuntuとは より
+
+ wslバージョン
+WSL2
+
+ Linuxディストリビューション
+Ubuntu24.04.01 LTS
+
+ 手順
+
+WSL2とubuntu24.04LTSのインストール
+
+
+Windows PowerShellを管理者権限で実行
+
+
+
+下記コマンドを実行して、wslをインストール...]]></description><link>https://zenn.dev/zenngineer_uske/articles/ddd4f2b447f229</link><guid isPermaLink="true">https://zenn.dev/zenngineer_uske/articles/ddd4f2b447f229</guid><pubDate>Tue, 18 Mar 2025 13:06:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bvTl0Ykj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:WSL2%2520%2526%2520Ubuntu%2520%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yusuke%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA3M2M3M2Q1NTQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yusuke</dc:creator></item><item><title><![CDATA[サーバ構築まで(Part.4)]]></title><description><![CDATA[HES川添です。
+前回の記事ではHyper-Vを使ってゲストOSとしてUbuntuをインストールしました。
+当初はWindowsサーバをインストールする予定でしたが、先輩社員から「Windowsサーバを使うならライセンスが必要」と教えていただきました。
+そこで、Windows以外で初心者でもインストールが簡単という記事を見かけたことから、Ubuntu を選びました。
+しかし、前回のUbuntuインストール記事について、別の先輩社員から「なぜUbuntuを選んだのか？」という質問をいただきました。その先輩によると、最近では RHEL（Red Hat Enterprise Linux）を使用...]]></description><link>https://zenn.dev/he_service/articles/73e51891cab1b6</link><guid isPermaLink="true">https://zenn.dev/he_service/articles/73e51891cab1b6</guid><pubDate>Tue, 18 Mar 2025 09:41:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4s8rgj0---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%25BE%25E3%2581%25A7%2528Part.4%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:s_kawazoe%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdmOWUxNDBiNjEuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:HESI%2520%253A%25E6%258A%2580%25E8%25A1%2593%25E3%2582%2584%25E6%2597%25A5%25E3%2580%2585%25E3%2581%25AE%25E3%2581%258A%25E4%25BB%2595%25E4%25BA%258B%25E3%2581%25AA%25E3%2581%25A9%25E3%2582%2592%25E7%25B4%25B9%25E4%25BB%258B%25E3%2581%2597%25E3%2581%25BE%25E3%2581%2599%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTENTRzdMb0x4YVVsWmxLYVZ2M0NiLWdMd3pfZGhPTDhocEkxeGtDaTNqUV84VjRnPXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>s_kawazoe</dc:creator></item><item><title><![CDATA[Ubuntuにzramを導入する]]></title><description><![CDATA[
+ zramとは？
+RAM上に圧縮ブロックデバイスを作成するLinuxカーネルモジュール。
+今回はSwapに利用し、圧縮メモリとして使用する。
+zram ArchWiki
+
+ インストール方法
+今回はUbuntu 22.04 LTSを使用する。
+
+
+必要なパッケージをインストール
+
+zram kernel module: linux-image-extra-virtualパッケージ
+systemd-zram-generator
+
+sudo apt update
+sudo apt install linux-image-extra-virtual systemd-zram-generato...]]></description><link>https://zenn.dev/walkmana_25/articles/ubuntu-zram-install</link><guid isPermaLink="true">https://zenn.dev/walkmana_25/articles/ubuntu-zram-install</guid><pubDate>Sun, 16 Mar 2025 08:41:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wtKYQIfK--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ubuntu%25E3%2581%25ABzram%25E3%2582%2592%25E5%25B0%258E%25E5%2585%25A5%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Lapis%252FWalkmana-25%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4WWZuenRwVm81ZmxRVlpTaTUxT045eG1iNHEzSUtVc2FhYmVadnczZz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Lapis/Walkmana-25</dc:creator></item><item><title><![CDATA[Ubuntuをインストールしたらやりたいことリスト]]></title><description><![CDATA[UbuntuをPCにクリーンインストールするのはいいが、
+最初は、ほぼ何もソフトが入っていない状態（それがいいのだが）
+だから、何かしらのセットアップは行いたい。
+ただ、普段Macとかに慣れていると、
+久しぶりにUbuntuとかを触ると、
+何をすればいいか忘れる...
+なので、本記事ではUbuntuを入れたら
+最低限設定したいことをまとめようと思う。
+
+ 目次
+
+日本語入力の設定
+キーボード設定
+US配列からJIS配列への変更
+ブラウザの設定
+VirtualBoxの設定
+Gitの設定
+Vim/Neovimの設定
+Node.jsの設定
+開発ツールの導入
+Tmuxの設定
+Zshの設定
+Rub...]]></description><link>https://zenn.dev/reisuta/articles/c45c4581636843</link><guid isPermaLink="true">https://zenn.dev/reisuta/articles/c45c4581636843</guid><pubDate>Sun, 16 Mar 2025 04:23:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--XGogRvhN--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ubuntu%25E3%2582%2592%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%2597%25E3%2581%259F%25E3%2582%2589%25E3%2582%2584%25E3%2582%258A%25E3%2581%259F%25E3%2581%2584%25E3%2581%2593%25E3%2581%25A8%25E3%2583%25AA%25E3%2582%25B9%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:r%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzIyYTBlNmY3YTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>r</dc:creator></item><item><title><![CDATA[GitLabをローカル環境に構築する！]]></title><description><![CDATA[
+ 実現したいこと
+Ubuntuサーバ（仮想マシン）上にGitLabをインストールしてローカル環境でソースコードを管理すること
+
+ 環境
+
+
+
+項目
+バージョン
+
+
+
+
+物理マシン OS
+macOS Sequoia バージョン15.2
+
+
+ハイパーバイザ
+VMware Fusion プロフェッショナル バージョン 13.6.3
+
+
+仮想マシン OS
+Ubuntu 24.04.2 LTS
+
+
+仮想マシン CPU
+4vCPU
+
+
+仮想マシン Memory
+4GB
+
+
+GitLab
+17.9.1-ee
+
+
+
+
+ 仮想マシンにGitLabをインストール
+
+Ubuntu公式サイトからISOイメージ...]]></description><link>https://zenn.dev/alfredtiei/articles/35b0dd264e13d0</link><guid isPermaLink="true">https://zenn.dev/alfredtiei/articles/35b0dd264e13d0</guid><pubDate>Sat, 15 Mar 2025 04:37:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--s2BuELE8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:GitLab%25E3%2582%2592%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25AB%25E3%2583%25AB%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25AB%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2599%25E3%2582%258B%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Alfred%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvYS5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Alfred</dc:creator></item><item><title><![CDATA[センチュリー・システムズのルーターのDO（デジタル出力）を遠隔操作する（入門編）]]></title><description><![CDATA[!
+「一般消費者が事業者の表示であることを判別することが困難である表示」の運用基準に基づく開示: この記事は記載の日付時点で株式会社ソラコムに所属する社員が執筆しました。ただし、個人としての投稿であり、株式会社ソラコムとしての正式な発言や見解ではありません。
+
+
+ やりたいこと
+センチュリー・システムズのLTEルーターに搭載されている、DO（デジタル出力）を遠隔操作してLチカ（LEDをチカっと光らせる行為）を行います。
+
+
+ 概要
+センチュリーシステムズ社のMAシリーズのゲートウェイは接点出力信号を持っており、OSはLinux（Ubuntu）を採用しています。
+ゲートウェイにHTTPサー...]]></description><link>https://zenn.dev/takao2704/articles/century-systems-lte-router-blog</link><guid isPermaLink="true">https://zenn.dev/takao2704/articles/century-systems-lte-router-blog</guid><pubDate>Thu, 13 Mar 2025 15:32:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--U-kCCleS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25BB%25E3%2583%25B3%25E3%2583%2581%25E3%2583%25A5%25E3%2583%25AA%25E3%2583%25BC%25E3%2583%25BB%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%25E3%2582%25BA%25E3%2581%25AE%25E3%2583%25AB%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%25BC%25E3%2581%25AEDO%25EF%25BC%2588%25E3%2583%2587%25E3%2582%25B8%25E3%2582%25BF%25E3%2583%25AB%25E5%2587%25BA%25E5%258A%259B%25EF%25BC%2589%25E3%2582%2592%25E9%2581%25A0%25E9%259A%2594%25E6%2593%258D%25E4%25BD%259C%25E3%2581%2599%25E3%2582%258B%25EF%25BC%2588%25E5%2585%25A5%25E9%2596%2580%25E7%25B7%25A8%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:takao2704%2540SORACOM%252CSA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M3ZjVkZGZjYjQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takao2704@SORACOM,SA</dc:creator></item><item><title><![CDATA[PostmanをUbuntu22.04にインストール]]></title><description><![CDATA[
+ ダウンロード&amp;解凍
+Postmanのパッケージを以下のページからダウンロードしてきます。
+https://www.postman.com/downloads/
+
+使用中のマシンがarmかx86かはuname -mコマンドで確認できます。
+
+以下のコマンドで解凍します。
+$ pwd
+/home/username/Downloads
+$ tar zxf postman-linux-x64.tar.gz
+$ ls
+Postman  postman-linux-x64.tar.gz
+
+ 手動インストール
+この時Postmanディレクトリが作成されていると思います。
+これを/optディ...]]></description><link>https://zenn.dev/96140/articles/49e09aa4597b54</link><guid isPermaLink="true">https://zenn.dev/96140/articles/49e09aa4597b54</guid><pubDate>Thu, 13 Mar 2025 02:43:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lX83PzFZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Postman%25E3%2582%2592Ubuntu22.04%25E3%2581%25AB%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kuro-140%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y4OGI1NmMzYTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kuro-140</dc:creator></item><item><title><![CDATA[Ubuntu 24系にAWS CLIをインストールする]]></title><description><![CDATA[
+ はじめに
+Ubuntu20系からUbuntu24系に更新する際に apt-get install awscli でインストールできなくなっていたので、備忘録として投稿します。
+同じような現象に遭遇した方のお役に立てますと幸いです。
+
+ AWS CLIをインストールしようとすると以下のエラーになる
+20系のときは apt-get install -y awscli だけでインストールが可能でした。
+しかし、24系に更新すると上記のコマンドで以下のエラーが出るようになりました。
+Package 'awscli' has no installation candidate
+つまり、aptの...]]></description><link>https://zenn.dev/iwamasa/articles/0fb41d95662da2</link><guid isPermaLink="true">https://zenn.dev/iwamasa/articles/0fb41d95662da2</guid><pubDate>Wed, 12 Mar 2025 02:15:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--cmZ3yOK2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ubuntu%252024%25E7%25B3%25BB%25E3%2581%25ABAWS%2520CLI%25E3%2582%2592%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:iwamasa%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzYzODJlMTA4NGYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>iwamasa</dc:creator></item><item><title><![CDATA[【Ubuntu 20.04】apt updateしたらDatadog GPG キーエラーが出る件]]></title><description><![CDATA[Ubuntu システムで Datadog エージェントをインストールまたはアップデートしようとした際に、apt update で以下のようなエラーが発生することがあります。
+Err:6 https://apt.datadoghq.com stable Release.gpg
+  The following signatures couldn't be verified because the public key is not available: NO_PUBKEY E6266D4AC0962C7D
+W: An error occurred during the signature v...]]></description><link>https://zenn.dev/zuzuzu/articles/apt_update_datadog</link><guid isPermaLink="true">https://zenn.dev/zuzuzu/articles/apt_update_datadog</guid><pubDate>Thu, 06 Mar 2025 09:15:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ccIXFSu1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Ubuntu%252020.04%25E3%2580%2591apt%2520update%25E3%2581%2597%25E3%2581%259F%25E3%2582%2589Datadog%2520GPG%2520%25E3%2582%25AD%25E3%2583%25BC%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E3%2581%258C%25E5%2587%25BA%25E3%2582%258B%25E4%25BB%25B6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:zu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2EwYzkyNjY5ZjcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>zu</dc:creator></item><item><title><![CDATA[Linuxでディスクをマウントする基本操作]]></title><description><![CDATA[普段はクラウドにおんぶにだっこな私ですが、たまたま物理マシン（Ubuntu Server）に外付けSSDを挿して操作する用事があったので、「あれってどうやるんだっけ…」と調べながら基本操作をまとめてみました。
+今回繋いだ「外付けSSD」は元々別のUbuntuマシンのストレージとして利用していたものであるため、一般的なUSBメモリなどとは異なりLVMで管理されているものでした。そのため、後半ではLVMのマウントにも触れています。
+
+ 基本
+
+ デバイスのリスト
+接続されたブロックデバイス（例：/dev/sdb1）を探す。
+
+
+lsblk
+
+List Block Devices
+シンプルなツ...]]></description><link>https://zenn.dev/kitar/articles/4443dfabd51e36</link><guid isPermaLink="true">https://zenn.dev/kitar/articles/4443dfabd51e36</guid><pubDate>Wed, 05 Mar 2025 11:28:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qTwKjYZf--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%25E3%2581%25A7%25E3%2583%2587%25E3%2582%25A3%25E3%2582%25B9%25E3%2582%25AF%25E3%2582%2592%25E3%2583%259E%25E3%2582%25A6%25E3%2583%25B3%25E3%2583%2588%25E3%2581%2599%25E3%2582%258B%25E5%259F%25BA%25E6%259C%25AC%25E6%2593%258D%25E4%25BD%259C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Satoshi%2520Kita%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2hxTGhOUzBuNWlEZ094ZmpUT1NaT01RM0JCZFZmczNScGJZTTg1aUtjPXMyNTAtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Satoshi Kita</dc:creator></item><item><title><![CDATA[（付録（仮））WSLのUbuntuにatcoder-cliとojを準備する]]></title><description><![CDATA[競技プログラミングを始めたばかりの人は、サイトの解答フォームにコードを直接書いたり、ローカルで書いたコードをコピペで張り付けたりしたあと、サイトのテスト機能を使ってテストし、提出ボタンで提出していると思います。
+しかし、競技プログラミング等の解答コードを競プロサイトの解答スペースではなく、自分のお気に入りのエディタで作成し、出来上がったコードが正常に動くかローカルでチェックして、それからサイトへコマンド一発で提出する。これが、競プロ脱初心者の第一歩です！
+この為に巷でよく使われるのが、oj(Online Judge Tools)とatcoder-cliの二つのツールです。ojは、色々ある...]]></description><link>https://zenn.dev/ok_xmonad/articles/ae1c5bf0a955c1</link><guid isPermaLink="true">https://zenn.dev/ok_xmonad/articles/ae1c5bf0a955c1</guid><pubDate>Tue, 04 Mar 2025 11:33:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--oRDl7IAS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25EF%25BC%2588%25E4%25BB%2598%25E9%258C%25B2%25EF%25BC%2588%25E4%25BB%25AE%25EF%25BC%2589%25EF%25BC%2589WSL%25E3%2581%25AEUbuntu%25E3%2581%25ABatcoder-cli%25E3%2581%25A8oj%25E3%2582%2592%25E6%25BA%2596%25E5%2582%2599%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Shunsk2024%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRiMDY1MDRkNDQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Shunsk2024</dc:creator></item><item><title><![CDATA[Ubuntuサーバの構築 + Dockerを用いたGPU開発環境の構築【2023年12月 / 2024年1月 追記】]]></title><description><![CDATA[
+ はじめに
+本記事はQiitaから移行した記事となります．
+https://qiita.com/Yorozuya59/items/b4cee5dfdf4d56bfbb2a
+知り合いとの雑談の中でQiitaとZennのどちらが良いのかという話題になり，どちらにも投稿すれば良いのでは？となったので，コピペと若干の修正を行なったものになります．
+よろしければ見てやってください．
+ここ最近，研究室内のサーバを構築する機会が多く，毎回のように検索をしているので，いい加減にまとめておこうと考えた次第です．（近々，もう何台か組み立てる予定もあるので……）
+研究室に入って2年目の学部生がメモとして書い...]]></description><link>https://zenn.dev/yorozuya/articles/1d373e6b17798f</link><guid isPermaLink="true">https://zenn.dev/yorozuya/articles/1d373e6b17798f</guid><pubDate>Tue, 04 Mar 2025 03:20:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7RfXsIsh--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ubuntu%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2581%25AE%25E6%25A7%258B%25E7%25AF%2589%2520%252B%2520Docker%25E3%2582%2592%25E7%2594%25A8%25E3%2581%2584%25E3%2581%259FGPU%25E9%2596%258B%25E7%2599%25BA%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25AE%25E6%25A7%258B%25E7%25AF%2589%25E3%2580%25902023%25E5%25B9%25B412%25E6%259C%2588%2520%252F%25202024%25E5%25B9%25B41%25E6%259C%2588%2520%25E8%25BF%25BD%25E8%25A8%2598%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yorozuya%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSm1nVWZzSHdfMWkyOG9CSlkxY2RBQ1k5UjJkTlVuZ1BFVkNNeWprcDBiWTVNMGF3PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yorozuya</dc:creator></item><item><title><![CDATA[NetworkManagerを使ってDebian/UbuntuのIPアドレスを固定にする]]></title><description><![CDATA[Debian/UbuntuでIPアドレスを固定にする必要がありましたので、その方法を記しておきます。以前、『Netplanを使ってDebian/UbuntuのIPアドレスを固定にする』を書きましたが、今回書くのはそのNetworkManager版です。
+
+Debian 12
+
+
+ IPアドレスの固定化
+アドレスを固定するには/etc/network/interfacesを編集します。
+このファイルはデフォルトではDHCPからアドレスをもらうようになっています。これを変更して次のようにしてください（例はdiff形式です）。
+
+/etc/network/interfaces
+--- inte...]]></description><link>https://zenn.dev/seiichihorie/articles/20250304-fixed-ipaddress-nm</link><guid isPermaLink="true">https://zenn.dev/seiichihorie/articles/20250304-fixed-ipaddress-nm</guid><pubDate>Mon, 03 Mar 2025 23:28:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--rcLApCKO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:NetworkManager%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6Debian%252FUbuntu%25E3%2581%25AEIP%25E3%2582%25A2%25E3%2583%2589%25E3%2583%25AC%25E3%2582%25B9%25E3%2582%2592%25E5%259B%25BA%25E5%25AE%259A%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25A0%2580%25E6%25B1%259F%25E8%25AA%25A0%25E4%25B8%2580%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS3hveFBEMG4wNVZyT182d0hPbUpld1BTOTdVOE1Hdzg0R09IY1A5Tm1ETmk0N1V0QWZTQT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>堀江誠一</dc:creator></item><item><title><![CDATA[gmdb2 を ubuntu24.04 で動かす]]></title><description><![CDATA[
+ ubuntu16 に存在してた gmdb2
+https://launchpad.net/ubuntu/xenial/+package/mdbtools-gmdb
+現行 (noble) バージョンでは、バイナリがない模様・・・
+
+ じゃあコンパイルで
+ちょっと修正が必要だったので fork した。
+https://github.com/strnh/gmdb2
+
+ configure ... 通らない。
+strnh@ubuntu-pc:~/workdir/gmdb2$ ./configure
+bash: ./configure: そのようなファイルやディレクトリはありません
+
+仕方ない。...]]></description><link>https://zenn.dev/hikosakasohtaro/articles/31528f8df8f6db</link><guid isPermaLink="true">https://zenn.dev/hikosakasohtaro/articles/31528f8df8f6db</guid><pubDate>Mon, 03 Mar 2025 02:29:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--K6WMFcjJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:gmdb2%2520%25E3%2582%2592%2520ubuntu24.04%2520%25E3%2581%25A7%25E5%258B%2595%25E3%2581%258B%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25BD%25A6%25E5%259D%2582%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVmOThiNmFhZjIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>彦坂</dc:creator></item></channel></rss>

@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Linux」のフィード]]></title><description><![CDATA[Zennのトピック「Linux」のRSSフィードです]]></description><link>https://zenn.dev/topics/linux</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/860a9eb1e4.png</url><title>Zennの「Linux」のフィード</title><link>https://zenn.dev/topics/linux</link></image><generator>zenn.dev</generator><lastBuildDate>Wed, 26 Mar 2025 12:04:12 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/linux/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Qt環境で"いい感じ"にWindowsアプリ(Proton)を使いたいメモ]]></title><description><![CDATA[
+ はじめに
+マネージャーまでQtにしたい人向けです。
+こだわりがなければ（楽にきれいに動かしたければ）どう考えてもBottles/Lutrisのほうが快適です！
+参考：環境
+
+
+
+ Bottlesではだめ？
+A. いいえ
+正直どう考えてもBottlesを使うほうがかしこい選択だと(自分でも)思います。
+
+ TL;DR
+ProtonUp-Qtで任意のランタイム(like Proton)をインストールした後、q4wineで管理します。
+
+ (単体での)基本的なセットアップ
+Protonを使いたい場合ははじめから、普通のWineでいいならaa(or bb)からでOKです。
+
+ 必要ソフトのイ...]]></description><link>https://zenn.dev/r_ca/articles/5fe379f98b5365</link><guid isPermaLink="true">https://zenn.dev/r_ca/articles/5fe379f98b5365</guid><pubDate>Tue, 25 Mar 2025 00:29:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--U05Wfzg3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Qt%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25A7%2522%25E3%2581%2584%25E3%2581%2584%25E6%2584%259F%25E3%2581%2598%2522%25E3%2581%25ABWindows%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%2528Proton%2529%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2584%25E3%2581%259F%25E3%2581%2584%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:r_ca%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJmYTkyYzczNmMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>r_ca</dc:creator></item><item><title><![CDATA[C言語守護者 vs Rust推進派：Linuxカーネルで起きた2025年の路線対立（Rust for Linux）]]></title><description><![CDATA[
+ はじめに
+
+ Rust for Linux プロジェクトとは
+Rust for Linuxは、メモリ安全性に優れたプログラミング言語Rustを、Linuxカーネル内で使用できるようにする取り組みです。このプロジェクトは2020年頃から非公式な議論が始まり、2021年4月にMiguel Ojeda氏によって正式にLinuxカーネルメーリングリスト（LKML）に提案されました。
+プロジェクトの主な目的は、メモリ関連のバグやセキュリティ脆弱性を減らすことです。Rustは「安全性」を設計原則とする言語であり、コンパイル時に多くのエラーを検出できるため、従来のC言語で発生しがちなバッファオーバ...]]></description><link>https://zenn.dev/aliomer/articles/da8f2f082516aa</link><guid isPermaLink="true">https://zenn.dev/aliomer/articles/da8f2f082516aa</guid><pubDate>Sun, 23 Mar 2025 20:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--q2TpvP6Q--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:C%25E8%25A8%2580%25E8%25AA%259E%25E5%25AE%2588%25E8%25AD%25B7%25E8%2580%2585%2520vs%2520Rust%25E6%258E%25A8%25E9%2580%25B2%25E6%25B4%25BE%25EF%25BC%259ALinux%25E3%2582%25AB%25E3%2583%25BC%25E3%2583%258D%25E3%2583%25AB%25E3%2581%25A7%25E8%25B5%25B7%25E3%2581%258D%25E3%2581%259F2025%25E5%25B9%25B4%25E3%2581%25AE%25E8%25B7%25AF%25E7%25B7%259A%25E5%25AF%25BE%25E7%25AB%258B%25EF%25BC%2588Rust%2520for%2520Linux%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25A2%25E3%2583%25AA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzUxNzJkMzEzYTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>アリ</dc:creator></item><item><title><![CDATA[Ubuntu 以外の Distro で Intel GPU を効かせて Ollama を動かす]]></title><description><![CDATA[
+ 対象読者
+
+Intel GPU を使っている
+Ubuntu 以外の Linux を使っている
+
+Ollama を知っている
+『Docker入門（第一回）～Dockerとは何か、何が良いのか～』などの Docker 入門書を読んだ
+『Dockerfile リファレンス 』の記述がなんとなくでも分かる
+
+
+ 背景
+https://ollama.com/
+などで配布されている本家版では NVIDIA と AMD と Apple の GPU しかサポートしていないようです。 Intel は Intel GPU に対応した Ollama を次のサイトで配布しています。
+https://gith...]]></description><link>https://zenn.dev/xn__mpuv67h/articles/ab873d6df232a6</link><guid isPermaLink="true">https://zenn.dev/xn__mpuv67h/articles/ab873d6df232a6</guid><pubDate>Sat, 22 Mar 2025 15:17:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0OjNC9Dc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ubuntu%2520%25E4%25BB%25A5%25E5%25A4%2596%25E3%2581%25AE%2520Distro%2520%25E3%2581%25A7%2520Intel%2520GPU%2520%25E3%2582%2592%25E5%258A%25B9%25E3%2581%258B%25E3%2581%259B%25E3%2581%25A6%2520Ollama%2520%25E3%2582%2592%25E5%258B%2595%25E3%2581%258B%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:a_perpetual_novice%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSmRfN3Ewa1JKZkVXQWRSWjNCTkU0ejMwNHpQM09XU0FtM3E3TzdqcXlXbGhXTWh3PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>a_perpetual_novice</dc:creator></item><item><title><![CDATA[authorized_keysのcommands引数でSSHログイン時に指定したコマンドが実行されるようにする]]></title><description><![CDATA[
+ 環境
+Ubuntu 22.04
+OpenSSH_8.9p1 Ubuntu-3ubuntu0.11, OpenSSL 3.0.2 15 Mar 2022
+
+ authorized_keys commands について
+リモートのホストにSSHログインをするとき、SSHキーの公開鍵をログインしたいユーザの authorized_keys に書き加えておくことで、SSHキーによる認証が可能となる。
+
+/home/pi/.ssh/authorized_keys
+ssh-rsa AAAAB3N{...}= abc@xyz
+
+ここに、command="command" を書き足すことができる。こ...]]></description><link>https://zenn.dev/mai/articles/1640e65d692ed1</link><guid isPermaLink="true">https://zenn.dev/mai/articles/1640e65d692ed1</guid><pubDate>Sat, 22 Mar 2025 06:25:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2Sy32aWQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:authorized_keys%25E3%2581%25AEcommands%25E5%25BC%2595%25E6%2595%25B0%25E3%2581%25A7SSH%25E3%2583%25AD%25E3%2582%25B0%25E3%2582%25A4%25E3%2583%25B3%25E6%2599%2582%25E3%2581%25AB%25E6%258C%2587%25E5%25AE%259A%25E3%2581%2597%25E3%2581%259F%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2581%258C%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%2595%25E3%2582%258C%25E3%2582%258B%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mai%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhMmVkNzNmNjIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mai</dc:creator></item><item><title><![CDATA[JM Project を持続可能なプロジェクトにするための考察(ポエム)]]></title><description><![CDATA[まだ、外野がごにょごにょ言っているだけの記事です。大昔に少しだけ活動していた程度の者です。活発な議論に繋がれば、幸いです。
+Linux の man ページを日本語に翻訳しているJM Projectが、存続の危機にあるのではと勝手に危惧して書いています。
+もっと文才があれば、良いのだけれど…。
+
+ OSDN のお家騒動(?)に巻き込まれたプロジェクトの一つ
+
+「OSDN」が中国企業に買収 ～日本のオープンソースプロジェクト ホスティングサービス - 窓の杜
+20240207: JM - PIB
+コグノスケ 2023年11月24日
+
+OSDN が中国企業に買収された影響でホスティングしていた...]]></description><link>https://zenn.dev/yasumichi/articles/5e2913dd193df6</link><guid isPermaLink="true">https://zenn.dev/yasumichi/articles/5e2913dd193df6</guid><pubDate>Thu, 20 Mar 2025 04:36:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--oJRhjmfU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JM%2520Project%2520%25E3%2582%2592%25E6%258C%2581%25E7%25B6%259A%25E5%258F%25AF%25E8%2583%25BD%25E3%2581%25AA%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%25E8%2580%2583%25E5%25AF%259F%2528%25E3%2583%259D%25E3%2582%25A8%25E3%2583%25A0%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yasumichi%2520Akahoshi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSUoySnNPVXFnanR4SGcteXBvTGoxcmVpTXlzc1dwYnltZEJ2ZHZYa1ExT1kteHRFOGs9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yasumichi Akahoshi</dc:creator></item><item><title><![CDATA[Hyprland-Dotsを書いてる人のLPを書いてみた]]></title><description><![CDATA[
+ 今回の記事を書こうと思った理由
+今回の記事も短くなると思いますが、近況として残しておこうと思います。
+Hyprlandについて前回記事を書いたと思いますが、そのDotfilesを開発している人に出会えました。その人がJaKooLitさんで、今回その人のDotfilesのLP(Landing Page)を書いてあげようかと申し出たところ、快くOKしてもらえたので早速書いてみました。
+
+
+ 使用技術選定と作っての感想について
+使用技術の選定はいろいろ悩みましたが、Vue.jsとTypeScriptの経験があったのでそのままVue.jsとTypeScriptで書いてみました。
+本当は復数の...]]></description><link>https://zenn.dev/miosky521/articles/968e0ad88adf91</link><guid isPermaLink="true">https://zenn.dev/miosky521/articles/968e0ad88adf91</guid><pubDate>Tue, 18 Mar 2025 17:28:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xPzQf5_S--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Hyprland-Dots%25E3%2582%2592%25E6%259B%25B8%25E3%2581%2584%25E3%2581%25A6%25E3%2582%258B%25E4%25BA%25BA%25E3%2581%25AELP%25E3%2582%2592%25E6%259B%25B8%25E3%2581%2584%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Louise%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2hSWXlWVzhjZHE5aTlpZlQ1QTJiNkxDNHdQZU1yVkRIYkw3cVZudUxBPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Louise</dc:creator></item><item><title><![CDATA[サーバ構築まで(Part.4)]]></title><description><![CDATA[HES川添です。
+前回の記事ではHyper-Vを使ってゲストOSとしてUbuntuをインストールしました。
+当初はWindowsサーバをインストールする予定でしたが、先輩社員から「Windowsサーバを使うならライセンスが必要」と教えていただきました。
+そこで、Windows以外で初心者でもインストールが簡単という記事を見かけたことから、Ubuntu を選びました。
+しかし、前回のUbuntuインストール記事について、別の先輩社員から「なぜUbuntuを選んだのか？」という質問をいただきました。その先輩によると、最近では RHEL（Red Hat Enterprise Linux）を使用...]]></description><link>https://zenn.dev/he_service/articles/73e51891cab1b6</link><guid isPermaLink="true">https://zenn.dev/he_service/articles/73e51891cab1b6</guid><pubDate>Tue, 18 Mar 2025 09:41:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4s8rgj0---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%25BE%25E3%2581%25A7%2528Part.4%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:s_kawazoe%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdmOWUxNDBiNjEuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:HESI%2520%253A%25E6%258A%2580%25E8%25A1%2593%25E3%2582%2584%25E6%2597%25A5%25E3%2580%2585%25E3%2581%25AE%25E3%2581%258A%25E4%25BB%2595%25E4%25BA%258B%25E3%2581%25AA%25E3%2581%25A9%25E3%2582%2592%25E7%25B4%25B9%25E4%25BB%258B%25E3%2581%2597%25E3%2581%25BE%25E3%2581%2599%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTENTRzdMb0x4YVVsWmxLYVZ2M0NiLWdMd3pfZGhPTDhocEkxeGtDaTNqUV84VjRnPXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>s_kawazoe</dc:creator></item><item><title><![CDATA[【悪用厳禁】EC2 にSSHキー、パスワード無しでログイン]]></title><description><![CDATA[このIAMポリシーをユーザーにアタッチすることで、EC2 Instance Connect をサポートする様々なLinuxディストリビューションにおいて、SSHキーやパスワードなしでEC2インスタンスにセキュアにログインできるようになります。
+この方法は、EC2 Instance Connect が利用可能な幅広いLinux OS で共通して利用できます。特定のOS に限定されるものではありませんので、ご自身の環境に合わせて柔軟に活用ください。
+
+ OS 互換性
+EC2 Instance Connect は、以下の主要なLinuxディストリビューションを含む、多くのOS で利用可能です。...]]></description><link>https://zenn.dev/zuzuzu/articles/aws_ec2_ubuntu_ssh</link><guid isPermaLink="true">https://zenn.dev/zuzuzu/articles/aws_ec2_ubuntu_ssh</guid><pubDate>Tue, 18 Mar 2025 07:36:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--P-UWOp2T--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E6%2582%25AA%25E7%2594%25A8%25E5%258E%25B3%25E7%25A6%2581%25E3%2580%2591EC2%2520%25E3%2581%25ABSSH%25E3%2582%25AD%25E3%2583%25BC%25E3%2580%2581%25E3%2583%2591%25E3%2582%25B9%25E3%2583%25AF%25E3%2583%25BC%25E3%2583%2589%25E7%2584%25A1%25E3%2581%2597%25E3%2581%25A7%25E3%2583%25AD%25E3%2582%25B0%25E3%2582%25A4%25E3%2583%25B3%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:zu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2EwYzkyNjY5ZjcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>zu</dc:creator></item><item><title><![CDATA[NHKの語学講座を自動録音する]]></title><description><![CDATA[
+
+ はじめに
+NHKではラジオ第2放送で多くの語学番組が放送されています。
+この記事では、ストリーミングされている語学番組を自動録音し、自分の聴きたい時間に再生できるようにする方法を紹介します。
+動作確認はLinuxで行なっていますが、Macでもcron以外の部分は同様にできます。
+Macでの自動実行についてはこの記事を参照して下さい。
+!
+この記事ではffmpegがインストールされているものとして記述しています。
+まだインストールしていない場合は他の記事等を参考にインストールして下さい。
+
+!
+録音したファイルはNHKに著作権があるので、個人使用にとどめる必要があります。
+
+
+ NH...]]></description><link>https://zenn.dev/iot101/articles/834f9c6583684f</link><guid isPermaLink="true">https://zenn.dev/iot101/articles/834f9c6583684f</guid><pubDate>Sun, 16 Mar 2025 16:00:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--TDelTiyO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:NHK%25E3%2581%25AE%25E8%25AA%259E%25E5%25AD%25A6%25E8%25AC%259B%25E5%25BA%25A7%25E3%2582%2592%25E8%2587%25AA%25E5%258B%2595%25E9%258C%25B2%25E9%259F%25B3%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:iot101%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2EzODBhMGM3MzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>iot101</dc:creator></item><item><title><![CDATA[VSCodeでリモート開発環境の作成]]></title><description><![CDATA[
+ VSCodeの設定
+
+拡張機能で【Remote-SSH】を追加インストールする。
+左アイコンメニューに【リモートエクスプローラー】が追加されるので選択する。
+SSHターゲットを選択し下記の様に設定する。
+
+Host localhost
+  HostName 192.168.1.200
+  User root
+  Port 22
+
+root権限でアクセスできない場合は以下の様にする。
+
+Host raspi
+  HostName 192.168.1.7
+  User pi
+  StrictHostKeyChecking no
+  RemoteCommand sudo su -
+  Re...]]></description><link>https://zenn.dev/naohiro/articles/2d12e6f2ce03ba</link><guid isPermaLink="true">https://zenn.dev/naohiro/articles/2d12e6f2ce03ba</guid><pubDate>Sun, 16 Mar 2025 12:50:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bKbTqRmY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:VSCode%25E3%2581%25A7%25E3%2583%25AA%25E3%2583%25A2%25E3%2583%25BC%25E3%2583%2588%25E9%2596%258B%25E7%2599%25BA%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25AE%25E4%25BD%259C%25E6%2588%2590%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%2598%25BC%25E8%25A1%258C%25E7%2587%2588%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI1ZDFiMTU2NDMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>昼行燈</dc:creator></item><item><title><![CDATA[Ubuntuにzramを導入する]]></title><description><![CDATA[
+ zramとは？
+RAM上に圧縮ブロックデバイスを作成するLinuxカーネルモジュール。
+今回はSwapに利用し、圧縮メモリとして使用する。
+zram ArchWiki
+
+ インストール方法
+今回はUbuntu 22.04 LTSを使用する。
+
+
+必要なパッケージをインストール
+
+zram kernel module: linux-image-extra-virtualパッケージ
+systemd-zram-generator
+
+sudo apt update
+sudo apt install linux-image-extra-virtual systemd-zram-generato...]]></description><link>https://zenn.dev/walkmana_25/articles/ubuntu-zram-install</link><guid isPermaLink="true">https://zenn.dev/walkmana_25/articles/ubuntu-zram-install</guid><pubDate>Sun, 16 Mar 2025 08:41:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wtKYQIfK--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ubuntu%25E3%2581%25ABzram%25E3%2582%2592%25E5%25B0%258E%25E5%2585%25A5%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Lapis%252FWalkmana-25%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4WWZuenRwVm81ZmxRVlpTaTUxT045eG1iNHEzSUtVc2FhYmVadnczZz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Lapis/Walkmana-25</dc:creator></item><item><title><![CDATA[Geforce RTX 5070 TiをLinuxで動かそうと思ったが失敗した]]></title><description><![CDATA[2025/3/16 現在の、手元で確認した結果になります。
+マザボとの相性も相当ありそうかもしれませんが、デカすぎて外すの面倒ですね・・
+
+ 環境
+
+CPU: Ryzen7 5700X (アリエクで15000円ぐらいだったやつ)
+メモリ: DDR4 3600MHz 16GB x2
+M/B: ASUS TUF GAMING B550M Plus（家にPCIe4.0のマザボすらなかったので、わざわざこの時期になってB550マザーを購入。新規に組むならAM5買った方がいいです）
+電源: GRPW-GK750W/90+（以前のからの流用。850Wの方がいいかも）
+SSD: WD 750の 1TB...]]></description><link>https://zenn.dev/showyou/articles/7a02027414cd52</link><guid isPermaLink="true">https://zenn.dev/showyou/articles/7a02027414cd52</guid><pubDate>Sun, 16 Mar 2025 05:15:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BOkg3p8g--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Geforce%2520RTX%25205070%2520Ti%25E3%2582%2592Linux%25E3%2581%25A7%25E5%258B%2595%25E3%2581%258B%25E3%2581%259D%25E3%2581%2586%25E3%2581%25A8%25E6%2580%259D%25E3%2581%25A3%25E3%2581%259F%25E3%2581%258C%25E5%25A4%25B1%25E6%2595%2597%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:showyou%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pTaGU5NVBLMWdLZ01CZ0E2dVh1SDlVYnBFM0d4cmstNFY1UHlYeFE9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>showyou</dc:creator></item><item><title><![CDATA[Ubuntuをインストールしたらやりたいことリスト]]></title><description><![CDATA[UbuntuをPCにクリーンインストールするのはいいが、
+最初は、ほぼ何もソフトが入っていない状態（それがいいのだが）
+だから、何かしらのセットアップは行いたい。
+ただ、普段Macとかに慣れていると、
+久しぶりにUbuntuとかを触ると、
+何をすればいいか忘れる...
+なので、本記事ではUbuntuを入れたら
+最低限設定したいことをまとめようと思う。
+
+ 目次
+
+日本語入力の設定
+キーボード設定
+US配列からJIS配列への変更
+ブラウザの設定
+VirtualBoxの設定
+Gitの設定
+Vim/Neovimの設定
+Node.jsの設定
+開発ツールの導入
+Tmuxの設定
+Zshの設定
+Rub...]]></description><link>https://zenn.dev/reisuta/articles/c45c4581636843</link><guid isPermaLink="true">https://zenn.dev/reisuta/articles/c45c4581636843</guid><pubDate>Sun, 16 Mar 2025 04:23:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--XGogRvhN--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ubuntu%25E3%2582%2592%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%2597%25E3%2581%259F%25E3%2582%2589%25E3%2582%2584%25E3%2582%258A%25E3%2581%259F%25E3%2581%2584%25E3%2581%2593%25E3%2581%25A8%25E3%2583%25AA%25E3%2582%25B9%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:r%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzIyYTBlNmY3YTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>r</dc:creator></item><item><title><![CDATA[Linuxコマンド]]></title><description><![CDATA[
+ はじめに
+業務でLinuxをたまに使用するのでコマンドをメモしておく
+気が向いたときに順次追加していきます。
+
+ 操作
+
+ ファイルの一覧を表示
+ls -la
+
+ ファイル名の変更
+mv ./変更前のファイル名 ./変更後のファイル名
+
+ ディレクトリを移動
+cd /home/user
+]]></description><link>https://zenn.dev/nosho/articles/0737df806bba92</link><guid isPermaLink="true">https://zenn.dev/nosho/articles/0737df806bba92</guid><pubDate>Sat, 15 Mar 2025 07:20:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wb9hOzNQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:Linux%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:meltulto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzkxZWY2ZTNkNmMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>meltulto</dc:creator></item><item><title><![CDATA[C++ Core Guidelinesでチェックする]]></title><description><![CDATA[
+ 序
+いきなり余談ですが、先日、Bjarne Stroustrup先生が警鐘を鳴らしていたとされる記事を見かけました。
+https://www.theregister.com/2025/03/02/c_creator_calls_for_action/
+最近この人何してるんだろ？と検索してみたところ、
+https://www.youtube.com/watch?v=G7oY8QVL3Fs
+という動画が出てきて、個人的にはあまり感想もないインタビューだったのですが、その中で11:30くらいでC++のガイドラインがあるよという話が出てきました。これでどんなチェックが出来るのかを見てみること...]]></description><link>https://zenn.dev/dameyodamedame/articles/de20cdf00efc9a</link><guid isPermaLink="true">https://zenn.dev/dameyodamedame/articles/de20cdf00efc9a</guid><pubDate>Sat, 15 Mar 2025 05:41:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fYhVc7Al--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:C%252B%252B%2520Core%2520Guidelines%25E3%2581%25A7%25E3%2583%2581%25E3%2582%25A7%25E3%2583%2583%25E3%2582%25AF%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:dameyodamedame%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvZC5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>dameyodamedame</dc:creator></item><item><title><![CDATA[[Linux] エイリアスをサクッと追加したかった]]></title><description><![CDATA[おはようございます、こんにちは、こんばんは。
+スペースマーケットでWebエンジニアをしています、s0arです。
+しゅんみんあかつｋ
+
+ エイリアス、どう管理してますか
+自分は今までエイリアスの管理とか考えてませんでした。
+でもこの前自宅のWSLを再構築してて思いました。
+「エイリアス追加すんのめんどくね」って。
+
+ なので作りました
+https://github.com/s-0-a-r/simple-alias
+READMEに記載のコマンドを実行すると使っているシェル環境の設定ファイルにそれっぽいエイリアスが追加されます。
+一応bash、zsh、fishに対応しているつもりですがバチクソ...]]></description><link>https://zenn.dev/spacemarket/articles/195bb44c5fb58b</link><guid isPermaLink="true">https://zenn.dev/spacemarket/articles/195bb44c5fb58b</guid><pubDate>Sat, 15 Mar 2025 04:53:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--TrLiUB57--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BLinux%255D%2520%25E3%2582%25A8%25E3%2582%25A4%25E3%2583%25AA%25E3%2582%25A2%25E3%2582%25B9%25E3%2582%2592%25E3%2582%25B5%25E3%2582%25AF%25E3%2583%2583%25E3%2581%25A8%25E8%25BF%25BD%25E5%258A%25A0%25E3%2581%2597%25E3%2581%259F%25E3%2581%258B%25E3%2581%25A3%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:s0ar%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc1NTA1NzM5OGYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25B9%25E3%2583%259A%25E3%2583%25BC%25E3%2582%25B9%25E3%2583%259E%25E3%2583%25BC%25E3%2582%25B1%25E3%2583%2583%25E3%2583%2588%2520Engineer%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lYQmZpM0tlczYtbDE1ektkMFM2N3hvWVBHZGxvZHdxTU4yVnNBUHc9czI1MC1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>s0ar</dc:creator></item><item><title><![CDATA[「ゼロからはじめるLinuxサーバー構築・運用ガイド 第2版 動かしながら学ぶWebサーバーの作り方」で学んでみた]]></title><description><![CDATA[
+ VPSのシステムアップデート
+$ sudo dnf -y update
+
+ sshコマンドでログイン　（さくらのVPS）
+管理画面参照
+$ ssh user名@Ipアドレス
+
+ nanoエディタインストール
+$ sudo dnf -y install tar nano
+
+ OSの自動アップデート
+$ sudo dnf -y install dnf-automatic
+nanoエディタで編集
+$ sudo nano /etc/dnf/automatic.confの中のapply_updates = yesに設定。
+有効化
+$ sudo systemctl start dnf-autom...]]></description><link>https://zenn.dev/t_oishi/articles/0a2280a4e00734</link><guid isPermaLink="true">https://zenn.dev/t_oishi/articles/0a2280a4e00734</guid><pubDate>Fri, 14 Mar 2025 14:34:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3h58HUih--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%258C%25E3%2582%25BC%25E3%2583%25AD%25E3%2581%258B%25E3%2582%2589%25E3%2581%25AF%25E3%2581%2598%25E3%2582%2581%25E3%2582%258BLinux%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E6%25A7%258B%25E7%25AF%2589%25E3%2583%25BB%25E9%2581%258B%25E7%2594%25A8%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%2520%25E7%25AC%25AC2%25E7%2589%2588%2520%25E5%258B%2595%25E3%2581%258B%25E3%2581%2597%25E3%2581%25AA%25E3%2581%258C%25E3%2582%2589%25E5%25AD%25A6%25E3%2581%25B6Web%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2581%25AE%25E4%25BD%259C%25E3%2582%258A%25E6%2596%25B9%25E3%2580%258D%25E3%2581%25A7%25E5%25AD%25A6%25E3%2582%2593%25E3%2581%25A7%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Taka%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ5MjUyOTY4MTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Taka</dc:creator></item><item><title><![CDATA[Linuxでマウスカーソルを可愛くする[Hyprland]]]></title><description><![CDATA[Linuxでなんかかわいいマウスカーソルに変更したいと感じた。
+Hyprlandを使用しているため、Hyprcursorのことを調べていた。そうしたら、Arch Wikiでカーソルに関するものを見つけた。
+そこからPacman Cursorっていうかわいいカーソルを見つけたから、これを使用してみたいと思う。
+サイトから圧縮ファイルをダウンロードして、以下のように解凍して保存。
+mkdir ~/.local/share/icons
+tar xvf pacman.tar.gz -C ~/.local/share/icons
+次に適用させる。hyprland.confのフォント設定部分を以下の...]]></description><link>https://zenn.dev/gobuster/articles/9560c6337ddeec</link><guid isPermaLink="true">https://zenn.dev/gobuster/articles/9560c6337ddeec</guid><pubDate>Thu, 13 Mar 2025 15:38:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--QhGEjvP9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%25E3%2581%25A7%25E3%2583%259E%25E3%2582%25A6%25E3%2582%25B9%25E3%2582%25AB%25E3%2583%25BC%25E3%2582%25BD%25E3%2583%25AB%25E3%2582%2592%25E5%258F%25AF%25E6%2584%259B%25E3%2581%258F%25E3%2581%2599%25E3%2582%258B%255BHyprland%255D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%258C%25E3%2582%2593%25E3%2581%2593%25E3%2582%2593%25E3%2583%2590%25E3%2583%258A%25E3%2583%258A%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE3NDhhNjk0MzcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>れんこんバナナ</dc:creator></item><item><title><![CDATA[Hyprlockを設定してみたよ]]></title><description><![CDATA[Hyprlandを設定していて、ロック機能がほしいと思ってHyprlockを設定した
+環境：Fedora 41
+install
+sudo dnf install hyprlock
+config fileを作ります！
+touch ~/.config/hypr/hyprlock.conf
+configしてみます。初めてなので適当につくリました。GitHubにあるサンプルconfigに壁紙要素を追加しました。
+# sample hyprlock.conf
+# for more configuration options, refer https://wiki.hyprland.org/Hypr...]]></description><link>https://zenn.dev/gobuster/articles/e6b5cbeed8ef5c</link><guid isPermaLink="true">https://zenn.dev/gobuster/articles/e6b5cbeed8ef5c</guid><pubDate>Thu, 13 Mar 2025 14:13:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7709lNIx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Hyprlock%25E3%2582%2592%25E8%25A8%25AD%25E5%25AE%259A%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25E3%2582%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%258C%25E3%2582%2593%25E3%2581%2593%25E3%2582%2593%25E3%2583%2590%25E3%2583%258A%25E3%2583%258A%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE3NDhhNjk0MzcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>れんこんバナナ</dc:creator></item><item><title><![CDATA[Linuxでepollを使ってみる]]></title><description><![CDATA[
+ 序
+昔はthreadとかがなくて(統一されてなくて)、select/pollを使って書かれたサーバーとかを良く見かけました。threadが統一され、Windowsが32bitになるとマルチスレッド全盛になってあまり見かけなくなり、nginxやnode.jsが出てきた辺りで一時期epollが持て囃されてた気がします。最近ではそんなepollの記事もメッキリ減りましたが、そろそろ私も少々使ってみるかとこんな記事を書いている次第です。
+※この記事は以前Qiitaに掲載していた記事で、以下はそのマークダウンになります。
+https://github.com/marudedameo2019/q...]]></description><link>https://zenn.dev/dameyodamedame/articles/59cab0f2c975b0</link><guid isPermaLink="true">https://zenn.dev/dameyodamedame/articles/59cab0f2c975b0</guid><pubDate>Thu, 13 Mar 2025 03:38:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--FUDy6wQd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%25E3%2581%25A7epoll%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:dameyodamedame%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvZC5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>dameyodamedame</dc:creator></item></channel></rss>
