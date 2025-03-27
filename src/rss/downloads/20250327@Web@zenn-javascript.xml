@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「JavaScript」のフィード]]></title><description><![CDATA[Zennのトピック「JavaScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/javascript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/64acd76870.png</url><title>Zennの「JavaScript」のフィード</title><link>https://zenn.dev/topics/javascript</link></image><generator>zenn.dev</generator><lastBuildDate>Thu, 27 Mar 2025 10:08:15 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/javascript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[JavaScriptの基礎①(関数,jQuery,DOM,Ajax,CDN,プラグイン,swiper)]]></title><description><![CDATA[
+ JavaScriptの基本的な書き方
+
+ 関数とは
+「処理のまとまり」
+ある処理をひとまとまりにして、あとで何度でも使えるようにした「命令のセット」
+JavaScriptでは、function で関数（処理のまとまり）を作る。
+function 関数名(引数・受け取るデータ){
+  処理内容
+}
+
+ 例
+function ごはんをたべる() {
+  箸をもつ();
+  ごはんを口に入れる();
+  噛む();
+}
+レシピだと…
+function makeTamagoyaki() {
+  breakEgg();
+  addSalt();
+  mix();
+  fry();
+}
+
+
+ma...]]></description><link>https://zenn.dev/eliri/articles/e73d74c4aaba95</link><guid isPermaLink="true">https://zenn.dev/eliri/articles/e73d74c4aaba95</guid><pubDate>Thu, 27 Mar 2025 08:17:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3WJpKuk7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25E3%2581%25AE%25E5%259F%25BA%25E7%25A4%258E%25E2%2591%25A0%2528%25E9%2596%25A2%25E6%2595%25B0%252CjQuery%252CDOM%252CAjax%252CCDN%252C%25E3%2583%2597%25E3%2583%25A9%25E3%2582%25B0%25E3%2582%25A4%25E3%2583%25B3%252Cswiper%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Eli%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JiYWJlMzMzYzMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Eli</dc:creator></item><item><title><![CDATA[JavaScriptのマルチスレッド]]></title><description><![CDATA[
+ マルチスレッドとは
+1つのプロセス内で複数のスレッドを同時に実行する仕組み。
+メインスレッドとは別のスレッドを作成し、マルチコアで処理（並列処理）すること。
+CPU負荷の高い処理を行いたい時に、ユーザー体験を悪化させずに効率的に実行できる。
+
+ なぜ必要なのか（非同期処理との使い分け）
+非同期処理は、メインスレッド上で複数の処理を高速に切り替えて実行（並行処理）することで、
+ブロッキングの発生によるユーザー体験の悪化（画面フリーズなど）を防ぐことができる。
+CPU負荷が少なく待ち時間が発生する処理には有効だが、
+画像処理のようなCPU負荷の高い処理の場合にはあまり効果的ではない。
+
+...]]></description><link>https://zenn.dev/uniii/articles/16cd2365075a3a</link><guid isPermaLink="true">https://zenn.dev/uniii/articles/16cd2365075a3a</guid><pubDate>Thu, 27 Mar 2025 06:38:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--90VxIB-H--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25E3%2581%25AE%25E3%2583%259E%25E3%2583%25AB%25E3%2583%2581%25E3%2582%25B9%25E3%2583%25AC%25E3%2583%2583%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:uuuunnnnii%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2g1X1FuclVoSlBOTVU5em0wTV9YTEdFN0dwQmF0b0VyRGNlUUpaPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>uuuunnnnii</dc:creator></item><item><title><![CDATA[影響範囲を考えて@changeとwatchを使い分けよう！]]></title><description><![CDATA[こんにちは！ラブグラフ開発インターンの筒井（@kaito_tsu2i）です！
+今回はセレクトボックスを使った実装の際に、Vue.js の@changeとwatchの使い方に迷ったことがあったので、どうやって使い分けるかの一例を解説したいと思います！
+
+ 背景
+都道府県を選択できるセレクトボックスの値に応じて、市区町村のセレクトボックスの選択肢を絞り込むような機能を Vue.js を使って実装しました。その際に思いついた方法が２つありました。
+
+
+@changeで値が変更されるたびにメソッドを呼ぶ
+
+watchで値を監視して変更されるたびに呼ぶ
+
+両方とも同じように見えたので、どっちが適切...]]></description><link>https://zenn.dev/lovegraph/articles/a4b96fb9925341</link><guid isPermaLink="true">https://zenn.dev/lovegraph/articles/a4b96fb9925341</guid><pubDate>Thu, 27 Mar 2025 05:42:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ZkbKQXkH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%25BD%25B1%25E9%259F%25BF%25E7%25AF%2584%25E5%259B%25B2%25E3%2582%2592%25E8%2580%2583%25E3%2581%2588%25E3%2581%25A6%2540change%25E3%2581%25A8watch%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2584%25E5%2588%2586%25E3%2581%2591%25E3%2582%2588%25E3%2581%2586%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Kaito%2520Tsutsui%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZmNWYxYmUwYzAuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%25A9%25E3%2583%2596%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%2595%25E3%2581%25AE%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MzOTliYmRjMTUuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kaito Tsutsui</dc:creator></item><item><title><![CDATA[【Web開発】どのプログラミング言語が最適？用途別の技術スタックまとめてみた]]></title><description><![CDATA[
+ はじめに
+Webサイトやオンラインサービスを作るとき、どの言語やフレームワークを使えばよいか迷ったことありませんか？
+そんな悩みにお答えすべく、ケース別で最適なプログラミング言語をまとめました。
+サービス開発の一助となれば幸いです！
+
+
+ 1. 画像や動画を速く表示したい
+画像や動画をサクサク表示したいならNext.jsが最適。画像を自動で圧縮してくれるので表示速度がぐっとアップします。
+アクセスが集中するサイトには、同時処理に強いNode.jsや高速処理のGoを使えばさらに快適です！
+
+
+
+技術
+特徴
+
+
+
+
+Next.js
+画像を自動で軽くして表示速度を上げてくれる（WebPなど...]]></description><link>https://zenn.dev/tomo0108/articles/dee47c616413ca</link><guid isPermaLink="true">https://zenn.dev/tomo0108/articles/dee47c616413ca</guid><pubDate>Wed, 26 Mar 2025 13:49:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qRdSlJLR--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Web%25E9%2596%258B%25E7%2599%25BA%25E3%2580%2591%25E3%2581%25A9%25E3%2581%25AE%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%259F%25E3%2583%25B3%25E3%2582%25B0%25E8%25A8%2580%25E8%25AA%259E%25E3%2581%258C%25E6%259C%2580%25E9%2581%25A9%25EF%25BC%259F%25E7%2594%25A8%25E9%2580%2594%25E5%2588%25A5%25E3%2581%25AE%25E6%258A%2580%25E8%25A1%2593%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%2583%25E3%2582%25AF%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ToMo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTElVaUtHaTlGYTZrbjM1eVFjX1Vvd3FTQVRaRWUwWUx5SzVmeHhhRWhCdWJBPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ToMo</dc:creator></item><item><title><![CDATA[[GAS/js]サーモンランのステージ・ブキ画像を結合してDiscordに投稿する]]></title><description><![CDATA[
+ はじめに
+https://zenn.dev/mkhana/articles/d108f75f9c7040
+の続きです。
+上記で、Webhookを利用してサーモンランのスケジュールを定期投稿することができました。
+ステージとブキ編成の画像を結合することができたので、備忘録として投稿します。
+成果物はこちら （差分）
+
+
+ 処理フロー
+ざっくりこんな感じのフローになります。
+
+サーモンランのスケジュールを取得（API実行）
+メッセージを生成
+シフト分ループ
+
+embedにシフトの情報を詰める
+ビッグランだったらちょっと表示を変える
+
+シフト画像を追加(今回追加した部分)
+
+GoogleD...]]></description><link>https://zenn.dev/mkhana/articles/0932a7cf6012f2</link><guid isPermaLink="true">https://zenn.dev/mkhana/articles/0932a7cf6012f2</guid><pubDate>Wed, 26 Mar 2025 09:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--KvDkyXj0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BGAS%252Fjs%255D%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%25A2%25E3%2583%25B3%25E3%2583%25A9%25E3%2583%25B3%25E3%2581%25AE%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%25BB%25E3%2583%2596%25E3%2582%25AD%25E7%2594%25BB%25E5%2583%258F%25E3%2582%2592%25E7%25B5%2590%25E5%2590%2588%25E3%2581%2597%25E3%2581%25A6Discord%25E3%2581%25AB%25E6%258A%2595%25E7%25A8%25BF%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%25A2%25E3%2583%258E%25E3%2582%25AF%25E3%2583%25AD%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRhMmJlMTllZTMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>モノクロ</dc:creator></item><item><title><![CDATA[テストケースごとにvi.mockでモックした関数の返り値を変えたい]]></title><description><![CDATA[タイトルの通り、テストケースごとに vi.mock でモックした関数の返り値を変えたいです。
+結果的にできたのですが、ググってもAIに聞いてもズバリの情報が得られませんでした。他に良いやり方があるかもしれませんが、とりあえずこれでできましたというメモになります。
+!
+本記事において、Vitestのバージョンは以下です。
+
+"vitest": "3.0.8"
+"vite": "6.2.1"
+
+
+
+ 前提
+src
+├── my-module.ts
+└── sample.ts
+こんな感じで各ファイルがあったとします。
+
+my-module.ts
+export const getMyValue ...]]></description><link>https://zenn.dev/dyoshikawa/articles/vi-mock-change-value</link><guid isPermaLink="true">https://zenn.dev/dyoshikawa/articles/vi-mock-change-value</guid><pubDate>Wed, 26 Mar 2025 08:00:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--rm0-wc4Y--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B9%25E3%2581%2594%25E3%2581%25A8%25E3%2581%25ABvi.mock%25E3%2581%25A7%25E3%2583%25A2%25E3%2583%2583%25E3%2582%25AF%25E3%2581%2597%25E3%2581%259F%25E9%2596%25A2%25E6%2595%25B0%25E3%2581%25AE%25E8%25BF%2594%25E3%2582%258A%25E5%2580%25A4%25E3%2582%2592%25E5%25A4%2589%25E3%2581%2588%25E3%2581%259F%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:dyoshikawa%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNmN2M2YzVmZTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>dyoshikawa</dc:creator></item><item><title><![CDATA[Excel, Google Sheet の日時とタイムゾーン]]></title><description><![CDATA[Google Sheet は Excel との互換性を保つために、 Excel と同じ仕様で日時を扱っている。
+以下、 Excel として記述するが Google Sheet も全く同じである。
+
+ Excel日時の仕様
+Excelの日時は「1899-12-30からの延べ日数」として実数値で表される。
+1を足せば翌日、0.5を足せば12時間後を意味する。
+例えば 1899-12-30 6:00 は 0.25 となる。
+タイムゾーン情報は持たない ので、日本で作った Excel ファイルをイギリスで開いても0.25 は 0.25 のままだし、日時形式で表示すれば「1899-12-30 6:...]]></description><link>https://zenn.dev/kuboon/articles/a823a1eff8df84</link><guid isPermaLink="true">https://zenn.dev/kuboon/articles/a823a1eff8df84</guid><pubDate>Wed, 26 Mar 2025 04:53:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--KeMnsobt--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Excel%252C%2520Google%2520Sheet%2520%25E3%2581%25AE%25E6%2597%25A5%25E6%2599%2582%25E3%2581%25A8%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25A0%25E3%2582%25BE%25E3%2583%25BC%25E3%2583%25B3%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Ohkubo%2520KOHEI%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2hveGZBMXppa0NMRUgtWnR1ZFBnWFA3b2o3OFNjc0FMamFJVktXM0E9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Ohkubo KOHEI</dc:creator></item><item><title><![CDATA[東京テクニカルカレッジ IoT + AI 科 デバイス実習3 2025 年度教材]]></title><description><![CDATA[obniz スターターキットで学ぶ JavaScript]]></description><link>https://zenn.dev/tseigo/books/learning-javascript-with-obniz-2025</link><guid isPermaLink="true">https://zenn.dev/tseigo/books/learning-javascript-with-obniz-2025</guid><pubDate>Wed, 26 Mar 2025 03:33:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qbPeZCQ1--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci9kZDU0YWE2MGNiLnBuZw==%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>Seigo Tanaka</dc:creator></item><item><title><![CDATA[javascriptのPromiseについて考える]]></title><description><![CDATA[
+ はじめに
+javascriptプログラマーのみなさん、Promiseは得意でしょうか？
+私は苦手です。
+2024年現在のjsでは、一番の使いどころであるajaxにはasync/awaitを使えばいいので、あまり良くわかっていなくても困るケースも少ないと思います。
+さて、Promiseの解説記事は既に大量にありますが、どれを何回見ても非常に難しいので私なりの切り口でも書いてみます。
+※今回は分かりやすくするために、あえて多少語弊のある書き方をしています。イメージが伝わればと思います。
+
+ 任意のタイミングでコードを止めたり再開したりできる。
+「Promise　入門」とかで検索したら、た...]]></description><link>https://zenn.dev/k_tabuchi/articles/8a9d3c8503201f</link><guid isPermaLink="true">https://zenn.dev/k_tabuchi/articles/8a9d3c8503201f</guid><pubDate>Wed, 26 Mar 2025 02:02:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---sl9bnIl--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:javascript%25E3%2581%25AEPromise%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E8%2580%2583%25E3%2581%2588%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:k-tabuchi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhkMjhhY2RlZGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>k-tabuchi</dc:creator></item><item><title><![CDATA[URLPattern API を試す（コード例付き）]]></title><description><![CDATA[
+ はじめに
+Node Weekly というメールマガジンで、URLPattern という API が Node.js 23.8.0 でリリースされたことを知りました。
+個人的に待ち望んでいたものだったので色々試してみました。
+この記事は、その結果をまとめたメモです。
+API の詳細は以下の参考記事を参照してください。
+
+ 参照記事
+
+New URLPattern API brings improved pattern matching to Node.js and Cloudflare Workers
+
+Node.js — Node v23.8.0 (Current)
+
+Release...]]></description><link>https://zenn.dev/mryhryki/articles/2025-03-26-url-pattern-api</link><guid isPermaLink="true">https://zenn.dev/mryhryki/articles/2025-03-26-url-pattern-api</guid><pubDate>Tue, 25 Mar 2025 21:28:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--a2TqbDsV--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:URLPattern%2520API%2520%25E3%2582%2592%25E8%25A9%25A6%25E3%2581%2599%25EF%25BC%2588%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E4%25BE%258B%25E4%25BB%2598%25E3%2581%258D%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:MORIYA%2520Hiroyuki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U0Nzc0OTgwOTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>MORIYA Hiroyuki</dc:creator></item><item><title><![CDATA[Kindleで読めるエンジニアの超絶オススメ本を10冊厳選してみた]]></title><description><![CDATA[
+ スラスラ読める Pythonふりがなプログラミング
+https://amzn.to/41ZbVDj
+プログラミング初学者やPython入門者にとって、非常に優しい一冊です。
+
+ プロフェッショナルPython ソフトウェアデザインの原則と実践
+https://amzn.to/4iGrxmn
+ある程度のPython経験を持ち、より洗練されたコードを書きたいと考えるエンジニアに適した書籍です。
+
+ JavaScriptモダンプログラミング完全ガイド
+https://amzn.to/4hLXA2Z
+モダンJavaScriptの重要な概念とテクニックを網羅的に解説しています。
+
+ オブジェク...]]></description><link>https://zenn.dev/0sc/articles/7af31e96d8855a</link><guid isPermaLink="true">https://zenn.dev/0sc/articles/7af31e96d8855a</guid><pubDate>Tue, 25 Mar 2025 13:05:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9vZNAcoM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Kindle%25E3%2581%25A7%25E8%25AA%25AD%25E3%2582%2581%25E3%2582%258B%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%25E3%2581%25AE%25E8%25B6%2585%25E7%25B5%25B6%25E3%2582%25AA%25E3%2582%25B9%25E3%2582%25B9%25E3%2583%25A1%25E6%259C%25AC%25E3%2582%259210%25E5%2586%258A%25E5%258E%25B3%25E9%2581%25B8%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mikan%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2EwMDFiMDBmNTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mikan</dc:creator></item><item><title><![CDATA[テスト駆動開発を活用した安全なリファクタリング！]]></title><description><![CDATA[
+ はじめに ～既存コードの修正って怖い～
+こんにちは！ARMフロントエンド開発エンジニアの諸橋です！🦔
+私はARMの自社サービスの開発者として、新たな機能を開発しています。
+その際、既存のコードを修正することも多く、そのたびに「この修正で既存の処理に影響が出ないか心配だな...」という不安を感じることがあります。
+そのため、普段コードを修正したときは、「既存の処理が問題なく動作していること（リグレッション試験）」と「新たな機能が期待通り動作していること」の2つを確認しています。
+ただ、この方法だとコードを修正するたびに手間がかかり、開発効率が落ちてしまうことがあります。毎回画面を操作し...]]></description><link>https://zenn.dev/arm_techblog/articles/7483524f0ad081</link><guid isPermaLink="true">https://zenn.dev/arm_techblog/articles/7483524f0ad081</guid><pubDate>Tue, 25 Mar 2025 08:13:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vtxLKDNi--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E9%25A7%2586%25E5%258B%2595%25E9%2596%258B%25E7%2599%25BA%25E3%2582%2592%25E6%25B4%25BB%25E7%2594%25A8%25E3%2581%2597%25E3%2581%259F%25E5%25AE%2589%25E5%2585%25A8%25E3%2581%25AA%25E3%2583%25AA%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25AF%25E3%2582%25BF%25E3%2583%25AA%25E3%2583%25B3%25E3%2582%25B0%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2582%2582%25E3%2582%258D%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U0NzFmZDg5NDEuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:ARM%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM5ZGQ4ZWIyODguanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>もろ</dc:creator></item><item><title><![CDATA[kintone レコード一覧画面で１行を2段表示できるプラグイン「2段表示プラグイン」]]></title><description><![CDATA[
+ Abstract
+
+kintone のレコード一覧画面で、2段表示できるプラグインを作ったよ！
+
+https://github.com/Mistizz/2tierDisplay
+
+こんな感じで1つのレコードを2段表示できるよ！
+
+
+
+
+ 発端
+ある日、 「Excelの進捗管理表をkintoneに移植したいんだよね」 というご要望を頂きました。
+そのExcelの表（下の画像）を見てみると、どうやら各工程の完了日を記録していくタイプの管理表のようですが…
+
+メモ書きが多い…
+本来、日付データだけを入力する想定のセルに、メモ書きがたくさん入力されていました。
+このような表をkintoneに...]]></description><link>https://zenn.dev/moduloseal/articles/2c2288a264f503</link><guid isPermaLink="true">https://zenn.dev/moduloseal/articles/2c2288a264f503</guid><pubDate>Tue, 25 Mar 2025 07:30:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fFyy7DWc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:kintone%2520%25E3%2583%25AC%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E4%25B8%2580%25E8%25A6%25A7%25E7%2594%25BB%25E9%259D%25A2%25E3%2581%25A7%25EF%25BC%2591%25E8%25A1%258C%25E3%2582%25922%25E6%25AE%25B5%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258B%25E3%2583%2597%25E3%2583%25A9%25E3%2582%25B0%25E3%2582%25A4%25E3%2583%25B3%25E3%2580%258C2%25E6%25AE%25B5%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2583%2597%25E3%2583%25A9%25E3%2582%25B0%25E3%2582%25A4%25E3%2583%25B3%25E3%2580%258D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2582%25E3%2581%2596%25E3%2582%2589%25E3%2581%2597%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY0YTMyMTRiMDIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>あざらし</dc:creator></item><item><title><![CDATA[useOptimisticでさくっと実装する楽観的更新(Optimistic Update)]]></title><description><![CDATA[
+ はじめに
+UI/UXにおける、Optimistic Updateって知っていますか？日本語にすると楽観的更新などと呼ばれたりします。実は日常にたくさん存在しており、見かけたことはあるかなと思います。
+例えば、Xのいいねボタンです。「いいね」した瞬間にハートに色がつくのですが、サーバーへのリクエストとUIの更新は同時に行われています。つまりサーバーへのリクエスト結果を待たずにUIを更新しているということです。これが楽観的更新になります。
+
+リクエスト結果を待ってからUIを更新する場合、ユーザーが「いいね」をしてからハートに色がつくまで時間がかかり、UXが悪くなってしまいます。そのため本...]]></description><link>https://zenn.dev/gemcook/articles/4c1a327a505f8f</link><guid isPermaLink="true">https://zenn.dev/gemcook/articles/4c1a327a505f8f</guid><pubDate>Tue, 25 Mar 2025 03:55:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--q6rJNh3E--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:useOptimistic%25E3%2581%25A7%25E3%2581%2595%25E3%2581%258F%25E3%2581%25A3%25E3%2581%25A8%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2599%25E3%2582%258B%25E6%25A5%25BD%25E8%25A6%25B3%25E7%259A%2584%25E6%259B%25B4%25E6%2596%25B0%2528Optimistic%2520Update%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:KM%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQyYzJiNzVlZTIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Gemcook%2520Tech%2520Blog%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2EzYjk0ZGQyMWEuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>KM</dc:creator></item><item><title><![CDATA[『RPGツクールMZ』スキル・アイテム・武器・防具関連メソッド一覧]]></title><description><![CDATA[『RPGツクールMZ』関連記事 目次
+『RPGツクールMZ』の所持品(スキル・アイテム・武器・防具)の扱いについて調べました。
+アイテムを使えるか判定するのにも、指定アイテムを、持っている？種類は？使える人はいる？使って効果ある？など判定することが大量にあります。
+この辺の判定を行うためのメソッドにどんなものがあるのか、ガーっと並べていこうと思います。
+例によって『RPGツクールMZ』非公式JavaScriptリファレンス のページにクラスなどリンクします。
+
+ アイテム関連クラス
+アイテムに関連するデータは、ゲーム上のアイテムそのものの他に、武器・防具・スキルもほぼ同じデータで管理され...]]></description><link>https://zenn.dev/tonbi/articles/ac6fbce9873eb9</link><guid isPermaLink="true">https://zenn.dev/tonbi/articles/ac6fbce9873eb9</guid><pubDate>Tue, 25 Mar 2025 00:37:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hvWk9FOR--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%258ERPG%25E3%2583%2584%25E3%2582%25AF%25E3%2583%25BC%25E3%2583%25ABMZ%25E3%2580%258F%25E3%2582%25B9%25E3%2582%25AD%25E3%2583%25AB%25E3%2583%25BB%25E3%2582%25A2%25E3%2582%25A4%25E3%2583%2586%25E3%2583%25A0%25E3%2583%25BB%25E6%25AD%25A6%25E5%2599%25A8%25E3%2583%25BB%25E9%2598%25B2%25E5%2585%25B7%25E9%2596%25A2%25E9%2580%25A3%25E3%2583%25A1%25E3%2582%25BD%25E3%2583%2583%25E3%2583%2589%25E4%25B8%2580%25E8%25A6%25A7%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A8%25E3%2582%2593%25E3%2581%25B3%2540%25E9%25B3%25B6%25E5%25B6%258B%25E5%25B7%25A5%25E6%2588%25BF%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pBYl9FRlAtZm9RQU1pN1VoM3hzYkNyQXZUSTZjUDFkZGJJMWJrPXMyNTAtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>とんび@鳶嶋工房</dc:creator></item><item><title><![CDATA[querySelector VS getElementById]]></title><description><![CDATA[
+ ご挨拶
+初めまして、情報系の学部１年の者です。何かしら記事を書きたいなと思ったのと、コードを書いていて個人的に気になったことをメモがわりに利用していきたいなと思い書きました。何もかもが初心者なのでご容赦ください。また指摘や訂正などあればコメントをよろしくお願いいたします、自身の学習に役立てたいと考えています。m(_ _)m
+
+ 結論
+querySelectorではid、classやその他のセレクターを指定でき、DOMツリー内で上から最初に一致するセレクターから取得し、かつ取得する要素の範囲も指定できます。要素がネストされている場合の対策もされていて、その範囲もまた指定できます。この点...]]></description><link>https://zenn.dev/kimuchi/articles/09d2c2f4ea2708</link><guid isPermaLink="true">https://zenn.dev/kimuchi/articles/09d2c2f4ea2708</guid><pubDate>Mon, 24 Mar 2025 14:49:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--F3gb9wft--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:querySelector%2520VS%2520getElementById%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%2589%25AF%25E4%25BC%259A%25E9%2595%25B7%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg1MGFhMTM5ZWUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>副会長</dc:creator></item><item><title><![CDATA[関数代入時における括弧の有無による挙動の違い【個人学習まとめ】]]></title><description><![CDATA[
+ 今回の問題点
+学習中に関数の動きを確認したくて、次のようなコードを書きました。
+let function1 = () =&gt; ({ name: "太郎" });
+let function2 = () =&gt; ({ name: "次郎", age: 20 });
+function1 = function2;
+console.log(function1);
+コンソールの結果は次のような想定をしていました。
+name: "次郎", age: 20
+しかし、実際の結果は私の想定と異なりました。
+[Function: function2]
+はて？となったので今更ながら調べ、主に2つのポ...]]></description><link>https://zenn.dev/o0rororo0o/articles/8de565aa443764</link><guid isPermaLink="true">https://zenn.dev/o0rororo0o/articles/8de565aa443764</guid><pubDate>Mon, 24 Mar 2025 12:34:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--01QMCZKG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E9%2596%25A2%25E6%2595%25B0%25E4%25BB%25A3%25E5%2585%25A5%25E6%2599%2582%25E3%2581%25AB%25E3%2581%258A%25E3%2581%2591%25E3%2582%258B%25E6%258B%25AC%25E5%25BC%25A7%25E3%2581%25AE%25E6%259C%2589%25E7%2584%25A1%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258B%25E6%258C%2599%25E5%258B%2595%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%25E3%2580%2590%25E5%2580%258B%25E4%25BA%25BA%25E5%25AD%25A6%25E7%25BF%2592%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%258D%25E3%2582%258D%25E3%2582%258D%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ2ZTZjOWM4YmMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ろろろ</dc:creator></item><item><title><![CDATA[[GAS/js]サーモンランのスケジュールをDiscordに定期投稿する]]></title><description><![CDATA[
+ はじめに
+こんにちは。サービス開始から毎シフト１オカシラはやってるサモラン好きです。
+GAS(GoogleAppsScript)でDiscordのWebhook用APIを作れると知ったので、javascriptの勉強がてら作ってみることにしました。
+実装時に参考にしたものなど、備忘録として投稿します。
+成果物はこちら
+
+サーモンランのスケジュールはこちらから取得させていただいてます。感謝🙏🙏🙏
+https://spla3.yuu26.com/
+
+ 処理フロー
+ざっくりこんな感じのフローになります。
+
+サーモンランのスケジュールを取得（API実行）
+メッセージを生成
+シフト分ループ
+
+...]]></description><link>https://zenn.dev/mkhana/articles/d108f75f9c7040</link><guid isPermaLink="true">https://zenn.dev/mkhana/articles/d108f75f9c7040</guid><pubDate>Mon, 24 Mar 2025 09:45:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4-YEJwwY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BGAS%252Fjs%255D%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%25A2%25E3%2583%25B3%25E3%2583%25A9%25E3%2583%25B3%25E3%2581%25AE%25E3%2582%25B9%25E3%2582%25B1%25E3%2582%25B8%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%25AB%25E3%2582%2592Discord%25E3%2581%25AB%25E5%25AE%259A%25E6%259C%259F%25E6%258A%2595%25E7%25A8%25BF%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%25A2%25E3%2583%258E%25E3%2582%25AF%25E3%2583%25AD%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRhMmJlMTllZTMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>モノクロ</dc:creator></item><item><title><![CDATA[Webフロントエンドでのリアクティビティからalien-signalsを知ろう]]></title><description><![CDATA[近年のWebフロントエンド開発において「リアクティビティ」という概念が非常に重要になっています。今回は、このリアクティビティにまつわる歴史を辿りつつ、2025年の1月にv1.0となったリアクティビティライブラリである「alien-signals」についてを解説していきます。
+
+ リアクティビティとは何を実現するものか
+そもそも「リアクティビティ」とは何かについてを説明します。
+リアクティビティを日本語にすると「反応性」と訳されることがあります。この「反応性」とは、ある状態の変化に対してシステムが適切な対応をすることを指します。
+Webフロントエンドにおける「反応性」は、アプリケーションの...]]></description><link>https://zenn.dev/comm_vue_nuxt/articles/about-alien-signals</link><guid isPermaLink="true">https://zenn.dev/comm_vue_nuxt/articles/about-alien-signals</guid><pubDate>Mon, 24 Mar 2025 03:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---5nW40dU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Web%25E3%2583%2595%25E3%2583%25AD%25E3%2583%25B3%25E3%2583%2588%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2589%25E3%2581%25A7%25E3%2581%25AE%25E3%2583%25AA%25E3%2582%25A2%25E3%2582%25AF%25E3%2583%2586%25E3%2582%25A3%25E3%2583%2593%25E3%2583%2586%25E3%2582%25A3%25E3%2581%258B%25E3%2582%2589alien-signals%25E3%2582%2592%25E7%259F%25A5%25E3%2582%258D%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:yamanoku%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU5MTZlOWFlNjguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Vue%25E3%2583%25BBNuxt%2520%25E6%2583%2585%25E5%25A0%25B1%25E3%2581%258C%25E9%259B%2586%25E3%2581%25BE%25E3%2582%258B%25E5%25BA%2583%25E5%25A0%25B4%2520%252F%2520P...%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRlYzJhZWUxZTQuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yamanoku</dc:creator></item><item><title><![CDATA[readonly,  union, Pick, Extract, Awaitedなどの型定義を紹介]]></title><description><![CDATA[最近学んだ型定義をいくつか紹介します。
+
+ 1. readonly
+readonlyは、オブジェクト型のプロパティを読み取り専用にすることができます。
+type TestItem = {
+	readonly label: string
+	readonly content: string
+}
+export const ProfileInfo = ({ label, content }: TestItem) =&gt; {
+	return (
+		&lt;&gt;
+			&lt;p&gt;{label}&lt;/p&gt;
+			&lt;p&gt;{content}&lt;/p&gt;
+		...]]></description><link>https://zenn.dev/643866/articles/d8eb8e0e0d0fd3</link><guid isPermaLink="true">https://zenn.dev/643866/articles/d8eb8e0e0d0fd3</guid><pubDate>Sun, 23 Mar 2025 11:55:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--aC48TGXE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:readonly%252C%2520%2520union%252C%2520Pick%252C%2520Extract%252C%2520Awaited%25E3%2581%25AA%25E3%2581%25A9%25E3%2581%25AE%25E5%259E%258B%25E5%25AE%259A%25E7%25BE%25A9%25E3%2582%2592%25E7%25B4%25B9%25E4%25BB%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259F%25E3%2581%2593%25E7%2584%25BC%25E3%2581%258D%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2UxZWY2MWJmNmIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>たこ焼き</dc:creator></item></channel></rss>
