@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「JavaScript」のフィード]]></title><description><![CDATA[Zennのトピック「JavaScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/javascript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/64acd76870.png</url><title>Zennの「JavaScript」のフィード</title><link>https://zenn.dev/topics/javascript</link></image><generator>zenn.dev</generator><lastBuildDate>Sat, 29 Mar 2025 10:00:43 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/javascript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[JavaScriptの実行メカニズムをまとめる]]></title><description><![CDATA[JavaScriptの非同期処理を調べていると、度々イベントループという用語を目にします。なんとなく概要は知っていても、具体的に何が行われているのかといった仕組みを詳細に理解しているとは言い切れませんでした。そもそもJavaScriptがどのように実行されているかがあやふやです。
+気になって調べていると、イベントループとプロミスチェーンで学ぶJavaScriptの非同期処理という記事を見つけました。この記事は非同期処理を理解するために最初にイベントループを学びます。その部分ではイベントループだけではなく、それ以外のJavaScriptの実行環境や実行のメカニズムなども解説されていて、とて...]]></description><link>https://zenn.dev/hwld/articles/562f70edfe51f4</link><guid isPermaLink="true">https://zenn.dev/hwld/articles/562f70edfe51f4</guid><pubDate>Sat, 29 Mar 2025 08:23:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--b77UMQzd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25E3%2581%25AE%25E5%25AE%259F%25E8%25A1%258C%25E3%2583%25A1%25E3%2582%25AB%25E3%2583%258B%25E3%2582%25BA%25E3%2583%25A0%25E3%2582%2592%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hwld%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2YyOWJmMDY5ZjQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hwld</dc:creator></item><item><title><![CDATA[【React】Props のバケツリレー解消法について]]></title><description><![CDATA[
+ はじめに
+Reactでは、コンポーネント間のデータの受け渡しにおいて、propsのバケツリレーの問題がよく発生することがあります。
+バケツリレーとは、あるコンポーネントから別のコンポーネントに props を渡す際に、複数の中間コンポーネントを経由して渡しているだけの状態をいいます。
+なぜこのような問題が発生するかというと、React では「単方向データフロー」を採用していて、コンポーネント間で直接データをやり取りすることができないためだからです。
+Context API や状態管理ライブラリで解消する方法もありますが、props を渡すだけの分かりやすいコンポーネントを作成すること...]]></description><link>https://zenn.dev/rh820/articles/bd8e97fd315cfa</link><guid isPermaLink="true">https://zenn.dev/rh820/articles/bd8e97fd315cfa</guid><pubDate>Sat, 29 Mar 2025 08:19:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--OQjqfdjX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590React%25E3%2580%2591Props%2520%25E3%2581%25AE%25E3%2583%2590%25E3%2582%25B1%25E3%2583%2584%25E3%2583%25AA%25E3%2583%25AC%25E3%2583%25BC%25E8%25A7%25A3%25E6%25B6%2588%25E6%25B3%2595%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hodii%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhjM2JkYzhiZTUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hodii</dc:creator></item><item><title><![CDATA[React Router v7 の内部構造を探る：リクエストからレンダリングまでの道のり]]></title><description><![CDATA[
+ React Router v7 の内部構造を探る：リクエストからレンダリングまでの道のり
+
+ はじめに
+React Router は、React アプリケーションにおけるルーティングライブラリのデファクトスタンダードとして長年利用されてきました。v6 で Data API が導入され、フルスタックフレームワークとしての側面が強化されましたが、v7 ではさらに進化し、Vite との統合、Single Fetch、Lazy Loading といったモダンな機能がデフォルトで組み込まれ、より洗練された開発体験とパフォーマンスを提供します。
+しかし、これらの機能がどのように連携し、ブラウザの...]]></description><link>https://zenn.dev/coji/articles/react-router-v7-internal-flow</link><guid isPermaLink="true">https://zenn.dev/coji/articles/react-router-v7-internal-flow</guid><pubDate>Sat, 29 Mar 2025 05:38:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--TX00IYOw--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%2520Router%2520v7%2520%25E3%2581%25AE%25E5%2586%2585%25E9%2583%25A8%25E6%25A7%258B%25E9%2580%25A0%25E3%2582%2592%25E6%258E%25A2%25E3%2582%258B%25EF%25BC%259A%25E3%2583%25AA%25E3%2582%25AF%25E3%2582%25A8%25E3%2582%25B9%25E3%2583%2588%25E3%2581%258B%25E3%2582%2589%25E3%2583%25AC%25E3%2583%25B3%25E3%2583%2580%25E3%2583%25AA%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%25BE%25E3%2581%25A7%25E3%2581%25AE%25E9%2581%2593%25E3%2581%25AE%25E3%2582%258A%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Coji%2520Mizoguchi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pWY2RrNjcwV2NIdGs0anBHa2FGTDAxcERVUVlIX0JYdWE5aDRVNVE9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Coji Mizoguchi</dc:creator></item><item><title><![CDATA[【React】export default function ホイスティングによるエラー]]></title><description><![CDATA[Reactを使う場合に、export default functionのホイスティングによって起こり得る予期しない動作やエラーについて、具体的なケースを挙げて説明します。ホイスティング自体は便利である一方で、特に複雑な構造を持つプロジェクトでは、予期せぬエラーが発生することがあります。
+
+ 問題
+
+ 1. 関数コンポーネントの定義順序に依存する問題
+Reactコンポーネントをexport default functionで定義すると、その関数はホイスティングされるため、コンポーネントを定義する前に呼び出すことができてしまいます。これは通常、Reactコンポーネント内では問題ないのですが、...]]></description><link>https://zenn.dev/milkandhoney995/articles/97e4eddd7df0ae</link><guid isPermaLink="true">https://zenn.dev/milkandhoney995/articles/97e4eddd7df0ae</guid><pubDate>Sat, 29 Mar 2025 05:23:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--V2tvmSpp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590React%25E3%2580%2591export%2520default%2520function%2520%25E3%2583%259B%25E3%2582%25A4%25E3%2582%25B9%25E3%2583%2586%25E3%2582%25A3%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258B%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2594%25E3%2581%25BE%25E3%2581%25A0%25E3%2582%2593%25E3%2581%2594%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUVkRlRwNll4Y2RIakdmaEpuUGI2MkVmaXBRRmFlRG85X0ZaMFpic0lrS3Btdz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ごまだんご</dc:creator></item><item><title><![CDATA[export default function, export default constどっち？]]></title><description><![CDATA[
+ はじめに
+Next.jsで開発していて、appフォルダ内のファイルはexport default functionとexport default constどちらで記載した方が良いのか？と思い、それぞれの違いをまとめてみました。
+
+ ホイスティングについて
+両者の違いは、ホイスティングされるかどうかです。
+ホイスティング（持ち上げる（hoisted））とは、関数宣言や変数宣言がそのスコープの先頭に移動したように振る舞うというJavaScriptの仕組みです。
+
+ 関数宣言
+関数宣言は、関数が宣言された場所に関わらず使えるようになるのは、関数宣言がスコープの先頭に「持ち上げられる」から...]]></description><link>https://zenn.dev/milkandhoney995/articles/c96fd441475e43</link><guid isPermaLink="true">https://zenn.dev/milkandhoney995/articles/c96fd441475e43</guid><pubDate>Sat, 29 Mar 2025 05:09:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8lbRGwsq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:export%2520default%2520function%252C%2520export%2520default%2520const%25E3%2581%25A9%25E3%2581%25A3%25E3%2581%25A1%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2594%25E3%2581%25BE%25E3%2581%25A0%25E3%2582%2593%25E3%2581%2594%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUVkRlRwNll4Y2RIakdmaEpuUGI2MkVmaXBRRmFlRG85X0ZaMFpic0lrS3Btdz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ごまだんご</dc:creator></item><item><title><![CDATA[バニラJavaScriptだけでTODOアプリを作ろう！初心者が最初につまづくポイントも解説]]></title><description><![CDATA[
+ はじめに
+「ReactやVueより、まずはバニラJSでDOM操作を理解したい！」
+そんなあなたに向けて、JavaScriptだけで作るTODOアプリの教材をお届けします。
+
+フレームワークに頼らず、自分の手でコードを書く力をつけたい
+HTML/CSSは少し触ったことがある
+「関数って何？」くらいのレベル感の方におすすめです。
+
+今回の記事では、TODOアプリを作りながら、初心者がつまづきやすいポイントも解説していきます！
+
+
+ 1. 開発環境の準備
+
+ブラウザ（Chrome推奨）
+テキストエディタ（VSCodeがおすすめ）
+
+フォルダ構成（超シンプル）
+todo-app/
+├── i...]]></description><link>https://zenn.dev/homatsu_tech/articles/6f9713e07af688</link><guid isPermaLink="true">https://zenn.dev/homatsu_tech/articles/6f9713e07af688</guid><pubDate>Fri, 28 Mar 2025 23:00:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--axHn2knt--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2590%25E3%2583%258B%25E3%2583%25A9JavaScript%25E3%2581%25A0%25E3%2581%2591%25E3%2581%25A7TODO%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258D%25E3%2581%2586%25EF%25BC%2581%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E3%2581%258C%25E6%259C%2580%25E5%2588%259D%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%25BE%25E3%2581%25A5%25E3%2581%258F%25E3%2583%259D%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2588%25E3%2582%2582%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25AE%259D%25E6%259D%25BE%2540%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2YzZWQ1ZGYyMjYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>宝松@システムエンジニア</dc:creator></item><item><title><![CDATA[速習 Valibot]]></title><description><![CDATA[
+ はじめに
+フクロウラボでは一部のプロダクトでサーバーサイドの言語に TypeScript を採用しています。クライアントサイドからのリクエストや、外部マイクロサービスとのやり取りなどの、サービスの外の世界との接点になる部分では Zod を用いてスキーマによるバリデーションを行っています。
+Zod はとても良いライブラリですが、筆者は代替ライブラリである Valibot を好んでおり直近の個人開発では Valibot を第一の選択肢として考えるようにしています。そこで今回は、チームメンバーへの布教も兼ねて Valibot について簡単に紹介したいと思います。
+
+ Valibot とは
+...]]></description><link>https://zenn.dev/fukurou_labo/articles/73a75b53597447</link><guid isPermaLink="true">https://zenn.dev/fukurou_labo/articles/73a75b53597447</guid><pubDate>Fri, 28 Mar 2025 09:56:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--TLKEhLwI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_76:%25E9%2580%259F%25E7%25BF%2592%2520Valibot%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:shinshin%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ3NGU4Mzc3ZTIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2595%25E3%2582%25AF%25E3%2583%25AD%25E3%2582%25A6%25E3%2583%25A9%25E3%2583%259C%2520%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2QzZTUyMmM0NWQuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>shinshin</dc:creator></item><item><title><![CDATA[JavaScript②(Ajax)]]></title><description><![CDATA[昨日の復習・Ajax（Asynchronous JavaScript and XML）通信とは
+
+ Ajax（Asynchronous JavaScript and XML）通信とは
+
+HTMLの一部を追加で読み込む通信方法
+
+
+ ページを再読み込みしない・サーバーから結果待たずに画面書き換え
+
+ これらの「非同期通信」を実装するのを、Ajaxと呼ぶ！
+
+ページ全体を再読み込みせずに、一部だけを非同期で読み込む通信手法
+JavaScript を使って、裏側でデータを取得・送信し、ページの一部に反映する
+従来のHTML通信ではページ全体が再読み込みされるが、Ajaxでは必要な部分だけ更新で...]]></description><link>https://zenn.dev/eliri/articles/6db9c35ced1cda</link><guid isPermaLink="true">https://zenn.dev/eliri/articles/6db9c35ced1cda</guid><pubDate>Fri, 28 Mar 2025 08:55:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wdoEwCam--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_76:JavaScript%25E2%2591%25A1%2528Ajax%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Eli%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JiYWJlMzMzYzMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Eli</dc:creator></item><item><title><![CDATA[JavaScriptのnull/undefined判定の仕方いろいろ]]></title><description><![CDATA[
+ なんの記事？
+JavaScript で null/undefined 判定の書き方がいろいろあってコードレビューとか説明するとき用に改めてまとめてみた。
+どちらかというと普段 JavaScript をあまり書かない人が読むことを想定して書く予定。
+
+ 前提知識
+JavaScript では Boolean に変換したときに true / false になる値のことをそれぞれ Truthy (真値) / Falsy (偽値) と呼ぶ。
+
+ Truthy/Falsyを利用する時の罠
+null/undefined 判定のとき以下のように書きたくなるが、特定のケースで意図した通りに動かなかった...]]></description><link>https://zenn.dev/leaner_dev/articles/20250326-patterns_of_null_or_undefined_checks</link><guid isPermaLink="true">https://zenn.dev/leaner_dev/articles/20250326-patterns_of_null_or_undefined_checks</guid><pubDate>Fri, 28 Mar 2025 01:51:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--rDYYRDMb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25E3%2581%25AEnull%252Fundefined%25E5%2588%25A4%25E5%25AE%259A%25E3%2581%25AE%25E4%25BB%2595%25E6%2596%25B9%25E3%2581%2584%25E3%2582%258D%25E3%2581%2584%25E3%2582%258D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:glico%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhhNjFkZTAyMDUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%25AA%25E3%2583%25BC%25E3%2583%258A%25E3%2583%25BC%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzUxN2FhMGEyNTEuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>glico</dc:creator></item><item><title><![CDATA[React Native import を絶対パス（エイリアス）で参照する設定]]></title><description><![CDATA[
+ はじめに
+Reactで開発していると、コンポーネントや関数をインポートする際のパスの指定に苦しむことがよくあると思います。
+相対パスで指定する場合、下記のように「..」がたくさん並んで読みにくくなります。
+import { Component } from '../../../components/ComponentA'
+これは単に読みにくいだけでなく、ファイル構造を変更した際にパスの修正が難しくなるという大きな問題を孕んでいます。
+この問題を解決するために「＠」をプロジェクトルートからのエイリアスに設定します。
+すると、下記のように常にimportは絶対パスで参照することができます...]]></description><link>https://zenn.dev/akiakinorinori/articles/a6e26a7eeff0d4</link><guid isPermaLink="true">https://zenn.dev/akiakinorinori/articles/a6e26a7eeff0d4</guid><pubDate>Thu, 27 Mar 2025 16:09:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xsH0AY1a--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%2520Native%2520import%2520%25E3%2582%2592%25E7%25B5%25B6%25E5%25AF%25BE%25E3%2583%2591%25E3%2582%25B9%25EF%25BC%2588%25E3%2582%25A8%25E3%2582%25A4%25E3%2583%25AA%25E3%2582%25A2%25E3%2582%25B9%25EF%25BC%2589%25E3%2581%25A7%25E5%258F%2582%25E7%2585%25A7%25E3%2581%2599%25E3%2582%258B%25E8%25A8%25AD%25E5%25AE%259A%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2582%25E3%2581%258D%25E3%2581%2582%25E3%2581%258D%25E3%2581%25AE%25E3%2582%258A%25E3%2581%25AE%25E3%2582%258A%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0ZnAyUnVMSF9OSDJreFFVS1lBZmozbHZQX0lZRU5vZ3FiY3M1RW1NRDFNSU1FPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>あきあきのりのり</dc:creator></item><item><title><![CDATA[三項演算子(Ternary Operator)とは]]></title><description><![CDATA[こんにちは！三項演算子(Ternary Operator)について、JavaScript、TypeScript、Pythonでそれぞれで解説していきたいと思います。
+
+ まず、三項演算子(Ternary Operator)とは？
+三項演算子（Ternary Operator）は、簡潔に条件分岐を記述できる演算子です。
+以下の構文で表現されます：
+条件式 ? 真の値 : 偽の値
+
+ 1. JavaScript の場合
+JavaScript では if...else の短縮形として三項演算子を使用できます。
+
+ 基本構文
+
+const age = 20;
+const isAdult = ag...]]></description><link>https://zenn.dev/daichi09167/articles/fc4e5c4e31f748</link><guid isPermaLink="true">https://zenn.dev/daichi09167/articles/fc4e5c4e31f748</guid><pubDate>Thu, 27 Mar 2025 15:15:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--sn7lOIJa--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E4%25B8%2589%25E9%25A0%2585%25E6%25BC%2594%25E7%25AE%2597%25E5%25AD%2590%2528Ternary%2520Operator%2529%25E3%2581%25A8%25E3%2581%25AF%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:daichi09167%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM3YTc4OTEwMDcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>daichi09167</dc:creator></item><item><title><![CDATA[Copilotに120%働いてもらいたい。ChatGPTと作るプロンプト3段比較。]]></title><description><![CDATA[
+ はじめに
+AIがコードを書く時代になりました。
+GitHub Copilotは、その象徴的なツールのひとつです。
+最近はEditモード（Copilot Chat）も登場し、自然言語で「この部分だけ直して」と伝えれば、AIがスマートに修正してくれます。
+…のはずなんですが、実際に使ってみると──
+
+「あれ？なんでそうなる？」
+「いや、そこじゃなくて…」
+「うーん惜しい…！」
+
+Copilotが“反応はしてくれる”けれど、“思い通りに動いてくれない”という壁にぶつかります。
+そんなとき、「もしかして、Copilotの性能じゃなくて、自分のプロンプトに問題があるのでは…？」と思ったんです。...]]></description><link>https://zenn.dev/chycara344/articles/20f589e435af17</link><guid isPermaLink="true">https://zenn.dev/chycara344/articles/20f589e435af17</guid><pubDate>Thu, 27 Mar 2025 11:42:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--uPmqQrSY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Copilot%25E3%2581%25AB120%2525%25E5%2583%258D%25E3%2581%2584%25E3%2581%25A6%25E3%2582%2582%25E3%2582%2589%25E3%2581%2584%25E3%2581%259F%25E3%2581%2584%25E3%2580%2582ChatGPT%25E3%2581%25A8%25E4%25BD%259C%25E3%2582%258B%25E3%2583%2597%25E3%2583%25AD%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25883%25E6%25AE%25B5%25E6%25AF%2594%25E8%25BC%2583%25E3%2580%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E4%25B8%2589%25E6%25B5%25A6%25E3%2582%25B3%25E3%2582%25BF%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q1ZGM4MjgyMzYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>三浦コタ</dc:creator></item><item><title><![CDATA[JavaScript①(関数,jQuery,DOM,Ajax,CDN,プラグイン,swiper)]]></title><description><![CDATA[
+ JavaScriptの基本的な書き方
+
+ 関数とは
+「処理のまとまり」
+ある処理をひとまとまりにして、あとで何度でも使えるようにした「命令のセット」
+JavaScriptでは、function で関数（処理のまとまり）を作る。
+function 関数名(引数・受け取るデータ){
+  処理内容
+}
+
+ 例
+function ごはんをたべる() {
+  箸をもつ();
+  ごはんを口に入れる();
+  噛む();
+}
+レシピだと…
+function makeTamagoyaki() {
+  breakEgg();
+  addSalt();
+  mix();
+  fry();
+}
+
+
+ma...]]></description><link>https://zenn.dev/eliri/articles/e73d74c4aaba95</link><guid isPermaLink="true">https://zenn.dev/eliri/articles/e73d74c4aaba95</guid><pubDate>Thu, 27 Mar 2025 08:17:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8rBrmAJd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25E2%2591%25A0%2528%25E9%2596%25A2%25E6%2595%25B0%252CjQuery%252CDOM%252CAjax%252CCDN%252C%25E3%2583%2597%25E3%2583%25A9%25E3%2582%25B0%25E3%2582%25A4%25E3%2583%25B3%252Cswiper%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Eli%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JiYWJlMzMzYzMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Eli</dc:creator></item><item><title><![CDATA[JavaScriptのマルチスレッド]]></title><description><![CDATA[
+ マルチスレッドとは
+1つのプロセス内で複数のスレッドを同時に実行する仕組み。
+メインスレッドとは別のスレッドを作成し、マルチコアで処理（並列処理）すること。
+CPU負荷の高い処理を行いたい時に、ユーザー体験を悪化させずに効率的に実行できる。
+
+ なぜ必要なのか（非同期処理との使い分け）
+非同期処理は、メインスレッド上で複数の処理を高速に切り替えて実行（並行処理）することで、
+ブロッキングの発生によるユーザー体験の悪化（画面フリーズなど）を防ぐことができる。
+CPU負荷が少なく待ち時間が発生する処理には有効だが、
+画像処理のようなCPU負荷の高い処理の場合にはあまり効果的ではない。
+
+...]]></description><link>https://zenn.dev/uniii/articles/16cd2365075a3a</link><guid isPermaLink="true">https://zenn.dev/uniii/articles/16cd2365075a3a</guid><pubDate>Thu, 27 Mar 2025 06:38:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--90VxIB-H--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25E3%2581%25AE%25E3%2583%259E%25E3%2583%25AB%25E3%2583%2581%25E3%2582%25B9%25E3%2583%25AC%25E3%2583%2583%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:uuuunnnnii%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2g1X1FuclVoSlBOTVU5em0wTV9YTEdFN0dwQmF0b0VyRGNlUUpaPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>uuuunnnnii</dc:creator></item><item><title><![CDATA[影響範囲を考えて@changeとwatchを使い分けよう！]]></title><description><![CDATA[こんにちは！ラブグラフ開発インターンの筒井（@kaito_tsu2i）です！
+今回はセレクトボックスを使った実装の際に、Vue.js の@changeとwatchの使い方に迷ったことがあったので、どうやって使い分けるかの一例を解説したいと思います！
+
+ 背景
+都道府県を選択できるセレクトボックスの値に応じて、市区町村のセレクトボックスの選択肢を絞り込むような機能を Vue.js を使って実装しました。その際に思いついた方法が２つありました。
+
+
+@changeで値が変更されるたびにメソッドを呼ぶ
+
+watchで値を監視して変更されるたびに呼ぶ
+
+両方とも同じように見えたので、どっちが適切...]]></description><link>https://zenn.dev/lovegraph/articles/a4b96fb9925341</link><guid isPermaLink="true">https://zenn.dev/lovegraph/articles/a4b96fb9925341</guid><pubDate>Thu, 27 Mar 2025 05:42:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ZkbKQXkH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%25BD%25B1%25E9%259F%25BF%25E7%25AF%2584%25E5%259B%25B2%25E3%2582%2592%25E8%2580%2583%25E3%2581%2588%25E3%2581%25A6%2540change%25E3%2581%25A8watch%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2584%25E5%2588%2586%25E3%2581%2591%25E3%2582%2588%25E3%2581%2586%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Kaito%2520Tsutsui%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZmNWYxYmUwYzAuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%25A9%25E3%2583%2596%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%2595%25E3%2581%25AE%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MzOTliYmRjMTUuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kaito Tsutsui</dc:creator></item><item><title><![CDATA[【Web開発】どのプログラミング言語が最適？用途別の技術スタックまとめてみた]]></title><description><![CDATA[
+ はじめに
+Webサイトやオンラインサービスを作るとき、どの言語やフレームワークを使えばよいか迷ったことありませんか？
+そんな悩みにお答えすべく、ケース別で最適なプログラミング言語をまとめました。
+サービス開発の一助となれば幸いです！
+
+
+ 1. 画像や動画を速く表示したい
+画像や動画をサクサク表示したいならNext.jsが最適。画像を自動で圧縮してくれるので表示速度がぐっとアップします。
+アクセスが集中するサイトには、同時処理に強いNode.jsや高速処理のGoを使えばさらに快適です！
+
+
+
+技術
+特徴
+
+
+
+
+Next.js
+画像を自動で軽くして表示速度を上げてくれる（WebPなど...]]></description><link>https://zenn.dev/tomo0108/articles/dee47c616413ca</link><guid isPermaLink="true">https://zenn.dev/tomo0108/articles/dee47c616413ca</guid><pubDate>Wed, 26 Mar 2025 13:49:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qRdSlJLR--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Web%25E9%2596%258B%25E7%2599%25BA%25E3%2580%2591%25E3%2581%25A9%25E3%2581%25AE%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%259F%25E3%2583%25B3%25E3%2582%25B0%25E8%25A8%2580%25E8%25AA%259E%25E3%2581%258C%25E6%259C%2580%25E9%2581%25A9%25EF%25BC%259F%25E7%2594%25A8%25E9%2580%2594%25E5%2588%25A5%25E3%2581%25AE%25E6%258A%2580%25E8%25A1%2593%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%2583%25E3%2582%25AF%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ToMo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTElVaUtHaTlGYTZrbjM1eVFjX1Vvd3FTQVRaRWUwWUx5SzVmeHhhRWhCdWJBPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ToMo</dc:creator></item><item><title><![CDATA[テストケースごとにvi.mockでモックした関数の返り値を変えたい]]></title><description><![CDATA[タイトルの通り、テストケースごとに vi.mock でモックした関数の返り値を変えたいです。
+結果的にできたのですが、ググってもAIに聞いてもズバリの情報が得られませんでした。他に良いやり方があるかもしれませんが、とりあえずこれでできましたというメモになります。
+!
+本記事において、Vitestのバージョンは以下です。
+
+"vitest": "3.0.8"
+"vite": "6.2.1"
+
+
+
+ 前提
+src
+├── my-module.ts
+└── sample.ts
+こんな感じで各ファイルがあったとします。
+
+my-module.ts
+export const getMyValue ...]]></description><link>https://zenn.dev/dyoshikawa/articles/vi-mock-change-value</link><guid isPermaLink="true">https://zenn.dev/dyoshikawa/articles/vi-mock-change-value</guid><pubDate>Wed, 26 Mar 2025 08:00:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--rm0-wc4Y--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B9%25E3%2581%2594%25E3%2581%25A8%25E3%2581%25ABvi.mock%25E3%2581%25A7%25E3%2583%25A2%25E3%2583%2583%25E3%2582%25AF%25E3%2581%2597%25E3%2581%259F%25E9%2596%25A2%25E6%2595%25B0%25E3%2581%25AE%25E8%25BF%2594%25E3%2582%258A%25E5%2580%25A4%25E3%2582%2592%25E5%25A4%2589%25E3%2581%2588%25E3%2581%259F%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:dyoshikawa%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNmN2M2YzVmZTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>dyoshikawa</dc:creator></item><item><title><![CDATA[Excel, Google Sheet の日時とタイムゾーン]]></title><description><![CDATA[Google Sheet は Excel との互換性を保つために、 Excel と同じ仕様で日時を扱っている。
+以下、 Excel として記述するが Google Sheet も全く同じである。
+
+ Excel日時の仕様
+Excelの日時は「1899-12-30からの延べ日数」として実数値で表される。
+1を足せば翌日、0.5を足せば12時間後を意味する。
+例えば 1899-12-30 6:00 は 0.25 となる。
+タイムゾーン情報は持たない ので、日本で作った Excel ファイルをイギリスで開いても0.25 は 0.25 のままだし、日時形式で表示すれば「1899-12-30 6:...]]></description><link>https://zenn.dev/kuboon/articles/a823a1eff8df84</link><guid isPermaLink="true">https://zenn.dev/kuboon/articles/a823a1eff8df84</guid><pubDate>Wed, 26 Mar 2025 04:53:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--KeMnsobt--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Excel%252C%2520Google%2520Sheet%2520%25E3%2581%25AE%25E6%2597%25A5%25E6%2599%2582%25E3%2581%25A8%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25A0%25E3%2582%25BE%25E3%2583%25BC%25E3%2583%25B3%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Ohkubo%2520KOHEI%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2hveGZBMXppa0NMRUgtWnR1ZFBnWFA3b2o3OFNjc0FMamFJVktXM0E9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Ohkubo KOHEI</dc:creator></item><item><title><![CDATA[東京テクニカルカレッジ IoT + AI 科 デバイス実習3 2025 年度教材]]></title><description><![CDATA[obniz スターターキットで学ぶ JavaScript]]></description><link>https://zenn.dev/tseigo/books/learning-javascript-with-obniz-2025</link><guid isPermaLink="true">https://zenn.dev/tseigo/books/learning-javascript-with-obniz-2025</guid><pubDate>Wed, 26 Mar 2025 03:33:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qbPeZCQ1--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci9kZDU0YWE2MGNiLnBuZw==%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>Seigo Tanaka</dc:creator></item><item><title><![CDATA[javascriptのPromiseについて考える]]></title><description><![CDATA[
+ はじめに
+javascriptプログラマーのみなさん、Promiseは得意でしょうか？
+私は苦手です。
+2024年現在のjsでは、一番の使いどころであるajaxにはasync/awaitを使えばいいので、あまり良くわかっていなくても困るケースも少ないと思います。
+さて、Promiseの解説記事は既に大量にありますが、どれを何回見ても非常に難しいので私なりの切り口でも書いてみます。
+※今回は分かりやすくするために、あえて多少語弊のある書き方をしています。イメージが伝わればと思います。
+
+ 任意のタイミングでコードを止めたり再開したりできる。
+「Promise　入門」とかで検索したら、た...]]></description><link>https://zenn.dev/k_tabuchi/articles/8a9d3c8503201f</link><guid isPermaLink="true">https://zenn.dev/k_tabuchi/articles/8a9d3c8503201f</guid><pubDate>Wed, 26 Mar 2025 02:02:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---sl9bnIl--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:javascript%25E3%2581%25AEPromise%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E8%2580%2583%25E3%2581%2588%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:k-tabuchi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhkMjhhY2RlZGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>k-tabuchi</dc:creator></item></channel></rss>

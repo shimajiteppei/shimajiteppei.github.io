@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「TypeScript」のフィード]]></title><description><![CDATA[Zennのトピック「TypeScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/typescript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/f13e758fdb.png</url><title>Zennの「TypeScript」のフィード</title><link>https://zenn.dev/topics/typescript</link></image><generator>zenn.dev</generator><lastBuildDate>Sat, 29 Mar 2025 00:50:57 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/typescript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[104. Maximum Depth of Binary Tree]]></title><description><![CDATA[2分木の根が与えられたとき、その最大深度を返します。
+2分木の最大深度とは、根ノードから最も遠い葉ノードまでの最長パスに含まれるノードの数です。
+
+例1:
+入力: root = [3,9,20,null,null,15,7]
+出力: 3
+
+例2:
+入力: root = [1,null,2]
+出力: 2
+
+
+こちらのコードは、PHPで書かれた2分木の最大深度を求めるためのクラスです。以下で詳しく解説します。
+
+2分木のノードを表すクラスです。
+
+val：ノードの値
+
+left：左の子ノード
+
+right：右の子ノード
+コンストラクタでノードを初期化します。
+
+
+処理の流れ
+
+
+基底条件：
+...]]></description><link>https://zenn.dev/idapan/articles/69ec84268b6314</link><guid isPermaLink="true">https://zenn.dev/idapan/articles/69ec84268b6314</guid><pubDate>Fri, 28 Mar 2025 21:39:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--CxtnO2X8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:104.%2520Maximum%2520Depth%2520of%2520Binary%2520Tree%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Keijiro%2520Ida%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2EwYTNmOGUyMGYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Keijiro Ida</dc:creator></item><item><title><![CDATA[速習 Valibot]]></title><description><![CDATA[
+ はじめに
+フクロウラボでは一部のプロダクトでサーバーサイドの言語に TypeScript を採用しています。クライアントサイドからのリクエストや、外部マイクロサービスとのやり取りなどの、サービスの外の世界との接点になる部分では Zod を用いてスキーマによるバリデーションを行っています。
+Zod はとても良いライブラリですが、筆者は代替ライブラリである Valibot を好んでおり直近の個人開発では Valibot を第一の選択肢として考えるようにしています。そこで今回は、チームメンバーへの布教も兼ねて Valibot について簡単に紹介したいと思います。
+
+ Valibot とは
+...]]></description><link>https://zenn.dev/fukurou_labo/articles/73a75b53597447</link><guid isPermaLink="true">https://zenn.dev/fukurou_labo/articles/73a75b53597447</guid><pubDate>Fri, 28 Mar 2025 09:56:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--TLKEhLwI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_76:%25E9%2580%259F%25E7%25BF%2592%2520Valibot%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:shinshin%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ3NGU4Mzc3ZTIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2595%25E3%2582%25AF%25E3%2583%25AD%25E3%2582%25A6%25E3%2583%25A9%25E3%2583%259C%2520%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2QzZTUyMmM0NWQuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>shinshin</dc:creator></item><item><title><![CDATA[TypeScript で迷路モジュール]]></title><description><![CDATA[
+ この記事のスナップショット
+
+ソース
+https://github.com/fnamuoo/webgl/blob/main/056
+
+ 概要
+TypeScript のテスト環境を整備。
+以前JavaScriptで書いた迷路モジュールをTypeScriptで書き直しました。
+環境構築、インフラ回りの話は陳腐化しやすいのでご注意。
+閲覧時に時間がたっていたら、複数の情報／裏付けで確認を。
+迷路モジュールの中身については触れません。気になる方はこちらから。
+https://zenn.dev/fnamuoo/articles/ebd8f752af9b11
+https://zenn.dev/f...]]></description><link>https://zenn.dev/fnamuoo/articles/6fd1d5404d6d83</link><guid isPermaLink="true">https://zenn.dev/fnamuoo/articles/6fd1d5404d6d83</guid><pubDate>Fri, 28 Mar 2025 05:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--VFMZBqdX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%2520%25E3%2581%25A7%25E8%25BF%25B7%25E8%25B7%25AF%25E3%2583%25A2%25E3%2582%25B8%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%25AB%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:fnamu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSzlINGwtMEpXNk5URF9ORmMybEZ0VDJuVG4zSU1WX2c0WG5OejVzNXhwbXBhcnB3PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>fnamu</dc:creator></item><item><title><![CDATA[React特有の型定義]]></title><description><![CDATA[ReactをTypeScriptで書いたときの型定義が個人的にややこしかったのでまとめてみます。
+すべて挙げるともっとたくさんあるのでしょうが、家計簿アプリ（Udemy教材）を以前作成したときに出てきたものを中心にピックアップしました。
+
+＜目次＞
+
+React.ReactNode
+React.FC
+React.ChangeEvent
+React.MouseEvent
+React.Dispatch
+React.SetStateAction
+React.ComponentType
+
+
+
+ 1. React.ReactNode
+コンポーネントの子要素として渡せるすべての型に対して記述するユニ...]]></description><link>https://zenn.dev/masato24524/articles/9c772857328066</link><guid isPermaLink="true">https://zenn.dev/masato24524/articles/9c772857328066</guid><pubDate>Fri, 28 Mar 2025 02:33:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xGB094sl--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%25E7%2589%25B9%25E6%259C%2589%25E3%2581%25AE%25E5%259E%258B%25E5%25AE%259A%25E7%25BE%25A9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Masato%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzgwODU5NjQ1YjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Masato</dc:creator></item><item><title><![CDATA[Gemini APIを使ってXの投稿を評価・添削するアプリを作ってみた！]]></title><description><![CDATA[
+ はじめに
+今回は、Gemini APIを使ってSNSの投稿を改善するシンプルなアプリを作りながら、APIの特徴や使い方について紹介していきます。
+AIを使った個人開発は初めてなので間違ってる情報などもあるかもしれないです。その際はコメントくださると嬉しいです。
+
+ Gemini APIとは
+Gemini APIは、Googleが提供する生成AIのAPIです。
+
+無料枠が比較的大きい（月$10相当）
+レスポンスが高速
+マルチモーダル（テキスト、画像、音声など）に対応
+PaLM 2から大幅に性能向上
+
+
+ GeminiAPIを使ってアプリを作ってみた
+Post PolishというXの投稿...]]></description><link>https://zenn.dev/yukih/articles/edf1c3207e61b5</link><guid isPermaLink="true">https://zenn.dev/yukih/articles/edf1c3207e61b5</guid><pubDate>Fri, 28 Mar 2025 01:11:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2q4iYH7n--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Gemini%2520API%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6X%25E3%2581%25AE%25E6%258A%2595%25E7%25A8%25BF%25E3%2582%2592%25E8%25A9%2595%25E4%25BE%25A1%25E3%2583%25BB%25E6%25B7%25BB%25E5%2589%258A%25E3%2581%2599%25E3%2582%258B%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:uki884%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsveS5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>uki884</dc:creator></item><item><title><![CDATA[TypeScriptユーザーから見るGoの型]]></title><description><![CDATA[
+ ユニオン型について
+
+ TypeScriptのユニオン型
+TypeScriptのユニオン型とは、複数の型のいずれかを受け取る型のことです。
+let value: string | number;
+
+value = "hello"; // OK（string）
+value = 42;      // OK（number）
+value = true;    // エラー（booleanは含まれていない）
+また、TypeScriptのユニオン型は自由度が高く、リテラル型と組み合わせて使用することができます。
+type Status = "success" | "error" | "load...]]></description><link>https://zenn.dev/kiman/articles/173a4fdfbb8d58</link><guid isPermaLink="true">https://zenn.dev/kiman/articles/173a4fdfbb8d58</guid><pubDate>Thu, 27 Mar 2025 21:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--14K2QAYl--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%25E3%2583%25A6%25E3%2583%25BC%25E3%2582%25B6%25E3%2583%25BC%25E3%2581%258B%25E3%2582%2589%25E8%25A6%258B%25E3%2582%258BGo%25E3%2581%25AE%25E5%259E%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258D%25E3%2582%2593%25E3%2582%2586%25E3%2581%25BE%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ3MmYyZmE3MTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>きんゆまん</dc:creator></item><item><title><![CDATA[React Native import を絶対パス（エイリアス）で参照する設定]]></title><description><![CDATA[
+ はじめに
+Reactで開発していると、コンポーネントや関数をインポートする際のパスの指定に苦しむことがよくあると思います。
+相対パスで指定する場合、下記のように「..」がたくさん並んで読みにくくなります。
+import { Component } from '../../../components/ComponentA'
+これは単に読みにくいだけでなく、ファイル構造を変更した際にパスの修正が難しくなるという大きな問題を孕んでいます。
+この問題を解決するために「＠」をプロジェクトルートからのエイリアスに設定します。
+すると、下記のように常にimportは絶対パスで参照することができます...]]></description><link>https://zenn.dev/akiakinorinori/articles/a6e26a7eeff0d4</link><guid isPermaLink="true">https://zenn.dev/akiakinorinori/articles/a6e26a7eeff0d4</guid><pubDate>Thu, 27 Mar 2025 16:09:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xsH0AY1a--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%2520Native%2520import%2520%25E3%2582%2592%25E7%25B5%25B6%25E5%25AF%25BE%25E3%2583%2591%25E3%2582%25B9%25EF%25BC%2588%25E3%2582%25A8%25E3%2582%25A4%25E3%2583%25AA%25E3%2582%25A2%25E3%2582%25B9%25EF%25BC%2589%25E3%2581%25A7%25E5%258F%2582%25E7%2585%25A7%25E3%2581%2599%25E3%2582%258B%25E8%25A8%25AD%25E5%25AE%259A%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2582%25E3%2581%258D%25E3%2581%2582%25E3%2581%258D%25E3%2581%25AE%25E3%2582%258A%25E3%2581%25AE%25E3%2582%258A%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0ZnAyUnVMSF9OSDJreFFVS1lBZmozbHZQX0lZRU5vZ3FiY3M1RW1NRDFNSU1FPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>あきあきのりのり</dc:creator></item><item><title><![CDATA[三項演算子(Ternary Operator)とは]]></title><description><![CDATA[こんにちは！三項演算子(Ternary Operator)について、JavaScript、TypeScript、Pythonでそれぞれで解説していきたいと思います。
+
+ まず、三項演算子(Ternary Operator)とは？
+三項演算子（Ternary Operator）は、簡潔に条件分岐を記述できる演算子です。
+以下の構文で表現されます：
+条件式 ? 真の値 : 偽の値
+
+ 1. JavaScript の場合
+JavaScript では if...else の短縮形として三項演算子を使用できます。
+
+ 基本構文
+
+const age = 20;
+const isAdult = ag...]]></description><link>https://zenn.dev/daichi09167/articles/fc4e5c4e31f748</link><guid isPermaLink="true">https://zenn.dev/daichi09167/articles/fc4e5c4e31f748</guid><pubDate>Thu, 27 Mar 2025 15:15:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--sn7lOIJa--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E4%25B8%2589%25E9%25A0%2585%25E6%25BC%2594%25E7%25AE%2597%25E5%25AD%2590%2528Ternary%2520Operator%2529%25E3%2581%25A8%25E3%2581%25AF%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:daichi09167%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM3YTc4OTEwMDcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>daichi09167</dc:creator></item><item><title><![CDATA[[TypeScript] fastmcp を使ってコンパクトに MCP Server を作ろう]]></title><description><![CDATA[
+ TL;DR
+
+fastmcp が、TypeScript での MCP Server の実装に便利
+少ないコード量でサクッと実装できる
+
+
+ fastmcp とは
+Model Context Protocol (MCP) のサーバーを構築するための TypeScript フレームワーク。少ないコード量で MCP サーバーを実装できます。
+https://github.com/punkpeye/fastmcp
+
+ 実装例
+下記は文字列の長さを計算するだけどサンプルの MCP サーバーです。Deno を使って書いてます。
+import { FastMCP } from "npm:fastm...]]></description><link>https://zenn.dev/heavenosk/articles/fastmcp-simple-server</link><guid isPermaLink="true">https://zenn.dev/heavenosk/articles/fastmcp-simple-server</guid><pubDate>Thu, 27 Mar 2025 13:08:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--px1UczFi--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BTypeScript%255D%2520fastmcp%2520%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2591%25E3%2582%25AF%25E3%2583%2588%25E3%2581%25AB%2520MCP%2520Server%2520%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258D%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%2598%25E3%2583%2596%25E3%2583%25B3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhmNDMxNmYwYzcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ヘブン</dc:creator></item><item><title><![CDATA[TypeScript + clasp + pnpm + Biome で快適なGAS開発環境を構築する]]></title><description><![CDATA[
+ はじめに
+Google Apps Script (GAS) の開発をより快適に行うための開発環境の構築方法を備忘録がてら書きます。
+TypeScriptで書けて、Biomeによるコード品質管理を実現する環境を構築します。
+
+ 🌟 実現すること
+
+TypeScriptを使用したGAS開発
+Biomeによるコード品質管理
+claspによるGASプロジェクト管理
+esbuildによるビルド
+
+
+ 📚 プロジェクト構成
+.
+├── src/
+│   └── main.ts      # メインのソースコード
+├── dist/            
+│   ├── appsscript.j...]]></description><link>https://zenn.dev/myvalval/articles/a39bcbfc05d9f6</link><guid isPermaLink="true">https://zenn.dev/myvalval/articles/a39bcbfc05d9f6</guid><pubDate>Thu, 27 Mar 2025 11:45:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dxS80vOU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%2520%252B%2520clasp%2520%252B%2520pnpm%2520%252B%2520Biome%2520%25E3%2581%25A7%25E5%25BF%25AB%25E9%2581%25A9%25E3%2581%25AAGAS%25E9%2596%258B%25E7%2599%25BA%25E7%2592%25B0%25E5%25A2%2583%25E3%2582%2592%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:YukiMaeda%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzUxMDgxNGU2ZGEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>YukiMaeda</dc:creator></item><item><title><![CDATA[LLMを使った多言語ブログサービスを個人開発しました]]></title><description><![CDATA[
+ はじめに：開発の背景と目的
+こういった文章を書くとき、多くの人に読んでもらいたいと思います。おそらく多くの書き手も同じ気持ちでしょう。
+しかし、日本語で書いた文章は、ほとんどの場合日本語圏の人にしか届きません。
+これは他の言語でも同様で、情報共有において言語の壁は常に存在します。
+技術記事だけでなく、日常のエッセイや考え方、文化的な視点なども言語の違いによって孤立してしまいます。もし言語を超えて互いの考えや日常に触れる機会が増えれば、人類はより相互理解を深め、国際的な友好関係を築きやすくなるのではないでしょうか。
+しかし､多言語で文章を書き、記事を公開することは非常に手間がかかり、現...]]></description><link>https://zenn.dev/tomolld/articles/255cf5ce289b39</link><guid isPermaLink="true">https://zenn.dev/tomolld/articles/255cf5ce289b39</guid><pubDate>Thu, 27 Mar 2025 09:39:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--HfhNz_HO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:LLM%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%259F%25E5%25A4%259A%25E8%25A8%2580%25E8%25AA%259E%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2593%25E3%2582%25B9%25E3%2582%2592%25E5%2580%258B%25E4%25BA%25BA%25E9%2596%258B%25E7%2599%25BA%25E3%2581%2597%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A8%25E3%2582%2582%25E3%2581%258D%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdiODVmZTI4MjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ともき</dc:creator></item><item><title><![CDATA[TypeScript ジェネリクス型定義Array理解]]></title><description><![CDATA[
+ はじめに
+型定義のジェネリック型に関して、
+const stringArray: Array&lt;string&gt; = ["apple", "banana", "cherry"];
+もジェネリック型の理由をまとめました。
+
+ 今回の疑問：Array&lt;string&gt;もジェネリック型？
+ジェネリクス型定義とは、
+「型をパラメータ化し、型を抽象的な型引数として扱うことで、型を後から具体的に指定できるようにする仕組み」
+であると理解していました。
+コード例:
+const identity = &lt;T&gt;(arg: T): T =&gt; arg;
+const myS...]]></description><link>https://zenn.dev/yyoshioka/articles/11ad542bc3d96f</link><guid isPermaLink="true">https://zenn.dev/yyoshioka/articles/11ad542bc3d96f</guid><pubDate>Thu, 27 Mar 2025 03:40:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--sCsDYqiY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%2520%25E3%2582%25B8%25E3%2582%25A7%25E3%2583%258D%25E3%2583%25AA%25E3%2582%25AF%25E3%2582%25B9%25E5%259E%258B%25E5%25AE%259A%25E7%25BE%25A9Array%25E7%2590%2586%25E8%25A7%25A3%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25BF%25E3%2582%2587%25E3%2581%2586%25E3%2581%2598%25E3%2582%2587%25E3%2581%2586%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzkxYjkxZTg3NzEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>みょうじょう</dc:creator></item><item><title><![CDATA[[開発日記]　最近見た商品一覧]]></title><description><![CDATA[既存のプロジェクトに新しい機能を追加することを考えていたところ、LocalStorageの活用方法の一つとして「閲覧リスト」を表示させるアイデアを聞きました。そこで、早速実装してみました。
+
+ 実装概要
+
+
+クリックしたアイテムのIDをLocalStorageに保存
+最大5件まで保存（古いものは削除）
+同じアイテムの重複を防止
+最大10日間保持（期限切れのデータは自動削除）
+
+
+ 閲覧リストの管理（hooksの利用）
+
+閲覧リストの状態を管理するために、hooks（useState） を使用しました。
+
+ 満了日設定
+
+const EXPIRATION_DAYS = 10; // データ...]]></description><link>https://zenn.dev/hyoni/articles/ffc5c4aed5256f</link><guid isPermaLink="true">https://zenn.dev/hyoni/articles/ffc5c4aed5256f</guid><pubDate>Thu, 27 Mar 2025 01:22:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--l9m9Fx_i--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255B%25E9%2596%258B%25E7%2599%25BA%25E6%2597%25A5%25E8%25A8%2598%255D%25E3%2580%2580%25E6%259C%2580%25E8%25BF%2591%25E8%25A6%258B%25E3%2581%259F%25E5%2595%2586%25E5%2593%2581%25E4%25B8%2580%25E8%25A6%25A7%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%2592%25E3%2583%25A7%25E3%2583%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0sxdWxlU2pkSzlwbDVxZnp3QVlUcFhCNk9xUEhkZGpKWjRUVlRPTl9lMHdYODhLdkg9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ヒョニ</dc:creator></item><item><title><![CDATA[100. Same Tree]]></title><description><![CDATA[以下は、与えられた英文の日本語訳です：
+
+2つの二分木 p と q の根が与えられたとき、それらが同じかどうかを確認する関数を作成してください。
+2つの二分木は、構造が同一であり、かつ各ノードの値が同じである場合に「同じ」と見なされます。
+
+
+ 例 1:
+入力: p = [1,2,3], q = [1,2,3]
+出力: true
+
+ 例 2:
+入力: p = [1,2], q = [1,null,2]
+出力: false
+
+ 例 3:
+入力: p = [1,2,1], q = [1,1,2]
+出力: false
+
+
+
+両方が null → 同じ木なので true
+片方だけが null →...]]></description><link>https://zenn.dev/idapan/articles/6bd195192b0387</link><guid isPermaLink="true">https://zenn.dev/idapan/articles/6bd195192b0387</guid><pubDate>Wed, 26 Mar 2025 21:16:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--61JNskod--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_80:100.%2520Same%2520Tree%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Keijiro%2520Ida%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2EwYTNmOGUyMGYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Keijiro Ida</dc:creator></item><item><title><![CDATA[筋肉ムキムキだった頃の僕とジャンケンが出来るというクソアプリを作った話]]></title><description><![CDATA[
+ はじめに
+この記事を開いたときに皆さんはこう思ったことでしょう。
+「この人は一体、何言ってるんだ？？？」
+その気持ち、良くわかります。
+なぜなら僕自身も同じことを思っているからです。
+この記事の趣旨は至って真面目で、初めてTypescriptやReactを使って自作アプリを公開してみたい人向けの記事となっております。
+特にこれからプログラミングを始める人や業務経験が浅いが新しい技術をキャッチアップしなければいけない人に役立つキャッチアップ法もお伝えしていきます。
+
+僕については以下のような感じです。
+
+僕は現役のWEBエンジニアで、担当業務は要件定義から設計・実装・運用まで全てを担当...]]></description><link>https://zenn.dev/kudosho/articles/6964280e9bea4e</link><guid isPermaLink="true">https://zenn.dev/kudosho/articles/6964280e9bea4e</guid><pubDate>Wed, 26 Mar 2025 16:07:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--NEEClpPn--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%25AD%258B%25E8%2582%2589%25E3%2583%25A0%25E3%2582%25AD%25E3%2583%25A0%25E3%2582%25AD%25E3%2581%25A0%25E3%2581%25A3%25E3%2581%259F%25E9%25A0%2583%25E3%2581%25AE%25E5%2583%2595%25E3%2581%25A8%25E3%2582%25B8%25E3%2583%25A3%25E3%2583%25B3%25E3%2582%25B1%25E3%2583%25B3%25E3%2581%258C%25E5%2587%25BA%25E6%259D%25A5%25E3%2582%258B%25E3%2581%25A8%25E3%2581%2584%25E3%2581%2586%25E3%2582%25AF%25E3%2582%25BD%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kudo%2520sho%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0ZjhjNmZfYWJMMC1NN2FGdVFaUzVxdC1XWlM5QkNycll4MnpydzAwSGs9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kudo sho</dc:creator></item><item><title><![CDATA[本文抽出ライブラリの readability.js を DOM 非依存に書き直す(WIP)]]></title><description><![CDATA[現状、最低限動いてはいるけどガバガバ
+
+ Readability.js とは
+HTML から本文を抽出するライブラリ。
+https://github.com/mozilla/readability
+元々はArc90によって開発され、現在はMozillaのFirefox Reader View に使われている。
+AIモデルではなくルールベースだが、かなり精度がでる。
+自分はこれを AI に食わせるサマリを作るのに愛用していたのだが...
+
+ DOM API 依存と Cloudflare でJSDOMが動かない問題
+DOM API に依存しているので、 jsdom に依存してしまう。
+imp...]]></description><link>https://zenn.dev/mizchi/articles/rewrite-readability-for-ai</link><guid isPermaLink="true">https://zenn.dev/mizchi/articles/rewrite-readability-for-ai</guid><pubDate>Wed, 26 Mar 2025 15:35:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bXwFLZ7r--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%259C%25AC%25E6%2596%2587%25E6%258A%25BD%25E5%2587%25BA%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%25E3%2581%25AE%2520readability.js%2520%25E3%2582%2592%2520DOM%2520%25E9%259D%259E%25E4%25BE%259D%25E5%25AD%2598%25E3%2581%25AB%25E6%259B%25B8%25E3%2581%258D%25E7%259B%25B4%25E3%2581%2599%2528WIP%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mizchi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2liclRHT052Z3d3ay1fNGxlcVk4TGNGSlNuX0FoWnpEWVlKaXJNcWc9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mizchi</dc:creator></item><item><title><![CDATA[【React】useRef() で初回の2回実行に対応する]]></title><description><![CDATA[
+ 背景
+React の StrictMode って、開発環境で useEffect を2回実行しちゃうんですよね。
+('react 純関数'とかでググれば中の話が出てきます)
+最初は useState でフラグを管理してたんですが、「あれ？ useRef のほうがよくね？」となったので、この記事を書きました。
+
+
+ useRef とは？
+useRef は React のフックで、ざっくり言うとこんな感じで使えます。
+
+
+DOM 要素への参照を保持（ref 属性）
+コンポーネント間で値を保持（再レンダリングなし）
+useEffect の実行制御（今回のメインテーマ）
+
+
+ 基本的な使い方...]]></description><link>https://zenn.dev/antapp/articles/3345dd5fe04a5b</link><guid isPermaLink="true">https://zenn.dev/antapp/articles/3345dd5fe04a5b</guid><pubDate>Wed, 26 Mar 2025 15:17:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--KxDXEhy0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590React%25E3%2580%2591useRef%2528%2529%2520%25E3%2581%25A7%25E5%2588%259D%25E5%259B%259E%25E3%2581%25AE2%25E5%259B%259E%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%25AB%25E5%25AF%25BE%25E5%25BF%259C%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kutsu-4ta%2528yamashit...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk1ZGQ1ZTdjY2EuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kutsu-4ta(yamashita_antapp)</dc:creator></item><item><title><![CDATA[Better Authのスキーママイグレーション管理の仕組み]]></title><description><![CDATA[
+ Better Auth はどうやってDBアダプタごとのスキーママイグレーションを扱っているのか？
+この記事では、Better AuthというTypeScript向け認証・認可ライブラリのスキーママイグレーション管理について解説します。開発者Beka Cruさんが実装した仕組みを見ていきましょう。
+Better Authは、TypeScript向けの包括的な認証・認可ライブラリで、様々なデータベースやフレームワークに対応しています。今回は、Better Authがどのようにして多様なDBアダプタ（Kysely、Prisma、Drizzleなど）に対応し、スキーママイグレーションを管理し...]]></description><link>https://zenn.dev/coji/articles/better-auth-schema-migration-mechanism</link><guid isPermaLink="true">https://zenn.dev/coji/articles/better-auth-schema-migration-mechanism</guid><pubDate>Wed, 26 Mar 2025 13:42:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--18AELpqQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Better%2520Auth%25E3%2581%25AE%25E3%2582%25B9%25E3%2582%25AD%25E3%2583%25BC%25E3%2583%259E%25E3%2583%259E%25E3%2582%25A4%25E3%2582%25B0%25E3%2583%25AC%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E7%25AE%25A1%25E7%2590%2586%25E3%2581%25AE%25E4%25BB%2595%25E7%25B5%2584%25E3%2581%25BF%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Coji%2520Mizoguchi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pWY2RrNjcwV2NIdGs0anBHa2FGTDAxcERVUVlIX0JYdWE5aDRVNVE9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Coji Mizoguchi</dc:creator></item><item><title><![CDATA[テストケースごとにvi.mockでモックした関数の返り値を変えたい]]></title><description><![CDATA[タイトルの通り、テストケースごとに vi.mock でモックした関数の返り値を変えたいです。
+結果的にできたのですが、ググってもAIに聞いてもズバリの情報が得られませんでした。他に良いやり方があるかもしれませんが、とりあえずこれでできましたというメモになります。
+!
+本記事において、Vitestのバージョンは以下です。
+
+"vitest": "3.0.8"
+"vite": "6.2.1"
+
+
+
+ 前提
+src
+├── my-module.ts
+└── sample.ts
+こんな感じで各ファイルがあったとします。
+
+my-module.ts
+export const getMyValue ...]]></description><link>https://zenn.dev/dyoshikawa/articles/vi-mock-change-value</link><guid isPermaLink="true">https://zenn.dev/dyoshikawa/articles/vi-mock-change-value</guid><pubDate>Wed, 26 Mar 2025 08:00:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--rm0-wc4Y--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B9%25E3%2581%2594%25E3%2581%25A8%25E3%2581%25ABvi.mock%25E3%2581%25A7%25E3%2583%25A2%25E3%2583%2583%25E3%2582%25AF%25E3%2581%2597%25E3%2581%259F%25E9%2596%25A2%25E6%2595%25B0%25E3%2581%25AE%25E8%25BF%2594%25E3%2582%258A%25E5%2580%25A4%25E3%2582%2592%25E5%25A4%2589%25E3%2581%2588%25E3%2581%259F%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:dyoshikawa%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNmN2M2YzVmZTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>dyoshikawa</dc:creator></item><item><title><![CDATA[MCPサーバー入門＆社内サービス連携で日常業務を圧縮する]]></title><description><![CDATA[
+ 初めに
+色々話題になっているMCPですが皆さん使っていますか？
+コーディングや開発周りでも既に色々なところで採用事例が紹介されており、かくいう私も採用前後で開発体験や実装スピードに顕著な変化を感じています。
+とはいえ、日々の仕事においては幸か不幸か”開発”以外のタスクが多いのも事実であり、特に現職では情報が
+
+日々のやりとり =&gt; Slack
+社内の規定や情報 =&gt; Kibela
+プロジェクトや一般的な資料 =&gt; GoogleDrive
+チケット管理 asana or Jira
+
+のようになっており、ブックマークや拡張機能などを駆使しながらも必要な情報を探すのに一苦...]]></description><link>https://zenn.dev/akizarashi/articles/02783c2b0133f5</link><guid isPermaLink="true">https://zenn.dev/akizarashi/articles/02783c2b0133f5</guid><pubDate>Wed, 26 Mar 2025 02:17:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jFHtiB6w--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:MCP%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E5%2585%25A5%25E9%2596%2580%25EF%25BC%2586%25E7%25A4%25BE%25E5%2586%2585%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2593%25E3%2582%25B9%25E9%2580%25A3%25E6%2590%25BA%25E3%2581%25A7%25E6%2597%25A5%25E5%25B8%25B8%25E6%25A5%25AD%25E5%258B%2599%25E3%2582%2592%25E5%259C%25A7%25E7%25B8%25AE%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:saboten%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRiOTIyZTg0ODMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>saboten</dc:creator></item></channel></rss>
