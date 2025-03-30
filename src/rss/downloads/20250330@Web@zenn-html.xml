@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「HTML」のフィード]]></title><description><![CDATA[Zennのトピック「HTML」のRSSフィードです]]></description><link>https://zenn.dev/topics/html</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/171432f5a6.png</url><title>Zennの「HTML」のフィード</title><link>https://zenn.dev/topics/html</link></image><generator>zenn.dev</generator><lastBuildDate>Sun, 30 Mar 2025 11:13:35 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/html/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Beer CSSを使ってみた]]></title><description><![CDATA[
+ Beer CSSとは
+Material Design 3をベースにした軽量CSSフレームワークです。Material Designのユーザーインターフェイス（UI）をすぐに実装できる点が最大の特徴です。
+他のMaterial DesignベースのCSSフレームワークと比べて10分の1のサイズであり、セマンティックなHTMLで実装できます。従来の高機能なCSSフレームワークはユーティリティクラスを駆使して、HTMLにセマンティックさが欠けることも多かったですが、Beer CSSではそれを避けることができます。
+また、従来の高機能なCSSフレームワークがバージョンアップに伴い肥大化し複雑...]]></description><link>https://zenn.dev/daiju81/articles/90971eef4add19</link><guid isPermaLink="true">https://zenn.dev/daiju81/articles/90971eef4add19</guid><pubDate>Sun, 30 Mar 2025 09:45:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--uZTtUBjS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Beer%2520CSS%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:daiju%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzcyZjdiNGU0NjMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>daiju</dc:creator></item><item><title><![CDATA[よく見かけるウェブアクセシビリティ違反（from エンジニア目線）]]></title><description><![CDATA[
+ はじめに
+こんにちは、株式会社 Kiva の uchida です。業務では企業の Web アクセシビリティ対応を効率化支援する「ユニウェブ」の開発をしています。
+このブログでは、日々の開発やウェブ利用の中で気づいたアクセシビリティ違反の例を紹介します。エンジニアとしてアクセシビリティに配慮することは、ユーザー体験の向上だけでなく、より多くの人に情報を届けるためにとても重要なことです。
+※なお、規格という観点では代替手段が備わっていれば問題ありません。
+
+ ウェブアクセシビリティとは？
+ウェブアクセシビリティとは、障がいの有無や利用環境に関わらず、すべての人がウェブサイトを快適に利用で...]]></description><link>https://zenn.dev/kiva/articles/6325fe5077322d</link><guid isPermaLink="true">https://zenn.dev/kiva/articles/6325fe5077322d</guid><pubDate>Sun, 30 Mar 2025 05:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--SM7Ma_fc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%2588%25E3%2581%258F%25E8%25A6%258B%25E3%2581%258B%25E3%2581%2591%25E3%2582%258B%25E3%2582%25A6%25E3%2582%25A7%25E3%2583%2596%25E3%2582%25A2%25E3%2582%25AF%25E3%2582%25BB%25E3%2582%25B7%25E3%2583%2593%25E3%2583%25AA%25E3%2583%2586%25E3%2582%25A3%25E9%2581%2595%25E5%258F%258D%25EF%25BC%2588from%2520%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%25E7%259B%25AE%25E7%25B7%259A%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:uchidash%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM4OTI5MTk5ZGUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Kiva%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUVkRlRwNjdLYXh0U0p0UnlhUkVmN1pwNnI5V242emlTUURXLVNzbTI2NDk9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>uchidash</dc:creator></item><item><title><![CDATA[【CSS初心者向け】::beforeの線がimg要素の下に隠れてしまう時の対処法]]></title><description><![CDATA[
+ はじめに
+
+「CSSでタイムラインを作っていて、縦の線を ::before 擬似要素で描画したら、アイコン画像が線の後ろに隠れてしまった…」
+こんな現象に困ったことはありませんか？
+私自身、Webマーケティングの業務でポートフォリオサイトを作る中で、まさにこの問題に直面しました。HTMLとCSSはある程度触ってきたつもりでも、「z-indexってなんだっけ？」状態だったので、ChatGPTの力を借りながら試行錯誤しました。
+この記事では、CSS初心者でも理解できるように、::beforeで作った縦線とアイコン画像の重なり順を正しく調整する方法を解説します。
+
+
+ 対象読者
+
+HTML...]]></description><link>https://zenn.dev/nabesan/articles/2076009b174811</link><guid isPermaLink="true">https://zenn.dev/nabesan/articles/2076009b174811</guid><pubDate>Sat, 29 Mar 2025 07:03:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wZs3EGxM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590CSS%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E5%2590%2591%25E3%2581%2591%25E3%2580%2591%253A%253Abefore%25E3%2581%25AE%25E7%25B7%259A%25E3%2581%258Cimg%25E8%25A6%2581%25E7%25B4%25A0%25E3%2581%25AE%25E4%25B8%258B%25E3%2581%25AB%25E9%259A%25A0%25E3%2582%258C%25E3%2581%25A6%25E3%2581%2597%25E3%2581%25BE%25E3%2581%2586%25E6%2599%2582%25E3%2581%25AE%25E5%25AF%25BE%25E5%2587%25A6%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yuta%2520Watanabe%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2YzODU0MzkwNGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yuta Watanabe</dc:creator></item><item><title><![CDATA[CSS基本講座5 フレックスボックス（Flexbox）]]></title><description><![CDATA[こんにちは！
+今回は、CSSのレイアウトを非常に便利にしてくれる Flexbox（フレックスボックス） について解説します！
+Flexbox を使うと
+✅ 要素を横並びにしたり
+✅ 中央にそろえたり
+✅ スペースを均等に配置したり
+が簡単にできちゃいます！
+
+ CSS基本講座5 フレックスボックス（Flexbox）
+
+ Flexboxとは？
+📌 使いどころ
+Flexboxは、複数の要素の配置や整列を自由自在にコントロールできるレイアウト方法です。
+📖 使い方の基本
+親要素 {
+  display: flex;
+}
+💡 例：子要素を横並びにする
+
+
+ よく使うプロパティ（親要素）
+
+
+
+プ...]]></description><link>https://zenn.dev/frontline/articles/7973718c79b02c</link><guid isPermaLink="true">https://zenn.dev/frontline/articles/7973718c79b02c</guid><pubDate>Sat, 29 Mar 2025 02:49:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Q7UUxIPE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:CSS%25E5%259F%25BA%25E6%259C%25AC%25E8%25AC%259B%25E5%25BA%25A75%2520%25E3%2583%2595%25E3%2583%25AC%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25B9%25E3%2583%259C%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25B9%25EF%25BC%2588Flexbox%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kota%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRiYTIxOTFjNjYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kota</dc:creator></item><item><title><![CDATA[CSS基本講座4 ボックス]]></title><description><![CDATA[こんにちは！
+今回は、CSSのレイアウトの基本となる 「ボックスモデル」 について解説します！
+HTMLの要素は、すべて 四角いボックス（箱） として扱われます。
+この「ボックス」のサイズや位置をコントロールするのが今回のテーマです。
+
+ CSS基本講座4 ボックス
+
+ ボックスモデルとは？
+📌 使いどころ
+ボックスモデルは、要素の 余白や枠線 をコントロールするための考え方です。
+📖 構造のイメージ
+
+このような感じで、ボーダーの内側と外側にそれぞれ余白があるのが特徴です。
+内側をパディング（padding）、外側をマージン（margin） といいます。
+では、具体的にどのように使える...]]></description><link>https://zenn.dev/frontline/articles/62fc0a0d25db57</link><guid isPermaLink="true">https://zenn.dev/frontline/articles/62fc0a0d25db57</guid><pubDate>Sat, 29 Mar 2025 02:41:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--shhpd3o3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:CSS%25E5%259F%25BA%25E6%259C%25AC%25E8%25AC%259B%25E5%25BA%25A74%2520%25E3%2583%259C%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kota%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRiYTIxOTFjNjYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kota</dc:creator></item><item><title><![CDATA[CSS基本講座3 テキストとフォント]]></title><description><![CDATA[こんにちは！
+今回は、CSSで テキストの見た目を整える方法 を紹介します。
+
+フォントの種類やサイズを変えたい
+テキストを中央に揃えたい
+長い文章を折り返したい
+文字に影をつけたい
+
+そんなときに使える、よく使うプロパティを一気に学んでいきましょう！
+
+
+ CSS基本講座3 テキストとフォント
+
+ フォントを変える font-family
+
+📌 使いどころ
+文字の「書体（フォント）」を変えたいときに使います。
+📖 書き方
+セレクタ {
+  font-family: フォント名, 予備フォント;
+}
+💡 例：メイリオを指定
+
+
+ 文字サイズを変える font-size
+
+📌 使いどころ
+...]]></description><link>https://zenn.dev/frontline/articles/70de21b22485a4</link><guid isPermaLink="true">https://zenn.dev/frontline/articles/70de21b22485a4</guid><pubDate>Sat, 29 Mar 2025 02:32:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---vb53SXh--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:CSS%25E5%259F%25BA%25E6%259C%25AC%25E8%25AC%259B%25E5%25BA%25A73%2520%25E3%2583%2586%25E3%2582%25AD%25E3%2582%25B9%25E3%2583%2588%25E3%2581%25A8%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25B3%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kota%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRiYTIxOTFjNjYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kota</dc:creator></item><item><title><![CDATA[CSS基本講座2 色や背景]]></title><description><![CDATA[こんにちは！
+今回は、CSSを使った 「色」と「背景」 に関するスタイルの付け方を解説します！
+Webページの見た目を決める中でも、「色」はとても大切です。
+文字の色や背景色を変えるだけで、印象はぐっと変わります！
+
+ CSS基本講座2 色や背景
+
+ 色を変える color プロパティ
+📌 使いどころ
+文字の色を変更したいときに使います。
+📖 書き方
+セレクタ {
+  color: 色の値;
+}
+💡 例：文字を赤くする
+
+
+ 色の指定方法
+上の例では、redのようにシンプルに色名で指定をしましたが、実は色の指定方法にはいくつか種類があります。
+
+
+
+色の指定方法
+書き方例
+特徴
+
+
+
+
+...]]></description><link>https://zenn.dev/frontline/articles/40c9a03ebfdd96</link><guid isPermaLink="true">https://zenn.dev/frontline/articles/40c9a03ebfdd96</guid><pubDate>Sat, 29 Mar 2025 02:19:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vje7lfc1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:CSS%25E5%259F%25BA%25E6%259C%25AC%25E8%25AC%259B%25E5%25BA%25A72%2520%25E8%2589%25B2%25E3%2582%2584%25E8%2583%258C%25E6%2599%25AF%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kota%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRiYTIxOTFjNjYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kota</dc:creator></item><item><title><![CDATA[CSS基本講座1 基本の書き方]]></title><description><![CDATA[こんにちは！
+今回は、Webページの見た目を整えるための言語 CSS の基本的な書き方について解説します。
+
+ CSS基本講座1 基本の書き方
+
+ CSSとは？
+📌 使いどころ
+CSS（Cascading Style Sheets）は、HTMLで作った要素の「見た目（デザイン）」を装飾するための言語です。
+📖 説明
+文字の色やサイズ、余白、背景色、レイアウトなど、Webページを美しく整えるのに欠かせない技術です。
+HTMLだけでは、素朴といいますか、なんとも寂しい見た目になってしまいます...
+そこで、CSSで色や背景などの見た目の部分を調整してあげることで、かっこいいWEBページを作る...]]></description><link>https://zenn.dev/frontline/articles/861342d45c5d6e</link><guid isPermaLink="true">https://zenn.dev/frontline/articles/861342d45c5d6e</guid><pubDate>Sat, 29 Mar 2025 02:08:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vQMcfOlh--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:CSS%25E5%259F%25BA%25E6%259C%25AC%25E8%25AC%259B%25E5%25BA%25A71%2520%25E5%259F%25BA%25E6%259C%25AC%25E3%2581%25AE%25E6%259B%25B8%25E3%2581%258D%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kota%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRiYTIxOTFjNjYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kota</dc:creator></item><item><title><![CDATA[tailwindcssで入れ子だけど特定の要素にスタイル指定したかった話]]></title><description><![CDATA[tailwindcssで操作に応じたスタイル定義でつまったので備忘録です
+
+ きっかけ
+チェックボックスにチェックしたときに変更するスタイルの範囲を指定したかった
+https://github.com/tailwindlabs/tailwindcss/issues/17314
+tailwindcssのissueがあがっているように
+入れ子でグループを区別した際、
+group-has-checkedのようなそれぞれの入れ子だけスタイルを適用するのは
+現時点ではできないようです
+
+ とりあえず書く
+ドキュメントに書いているように入れ子でグループを指定するにはgroup/{name}とすればい...]]></description><link>https://zenn.dev/tanaa/articles/69a5c8001015d1</link><guid isPermaLink="true">https://zenn.dev/tanaa/articles/69a5c8001015d1</guid><pubDate>Sat, 29 Mar 2025 00:34:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6_-wCrgt--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:tailwindcss%25E3%2581%25A7%25E5%2585%25A5%25E3%2582%258C%25E5%25AD%2590%25E3%2581%25A0%25E3%2581%2591%25E3%2581%25A9%25E7%2589%25B9%25E5%25AE%259A%25E3%2581%25AE%25E8%25A6%2581%25E7%25B4%25A0%25E3%2581%25AB%25E3%2582%25B9%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25AB%25E6%258C%2587%25E5%25AE%259A%25E3%2581%2597%25E3%2581%259F%25E3%2581%258B%25E3%2581%25A3%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tana%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQxNWJiOGQ5NTUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tana</dc:creator></item><item><title><![CDATA[HTML基本講座6 テーブル]]></title><description><![CDATA[こんにちは！
+今回は、HTMLで「表（テーブル）」を作るときに使うテーブルタグについて解説します。
+Webページでよく見かける
+
+スケジュール表
+データ一覧
+成績表や価格表
+
+などは、HTMLのテーブルタグで作成できます。
+
+
+ HTML基本講座6 テーブル
+
+ テーブルタグとは？
+HTMLで表（テーブル）を作るときに使うタグは以下の通りです。
+
+
+
+タグ名
+読み方
+用途
+
+
+
+
+&lt;table&gt;
+テーブル
+表全体を囲むタグ
+
+
+&lt;tr&gt;
+テーブルロー
+行（row）を表すタグ
+
+
+&lt;th&gt;
+テーブルヘッダ
+見出しセルを表すタグ（太字・中央揃え）
+
+
+&l...]]></description><link>https://zenn.dev/frontline/articles/c41cdf5ec917bd</link><guid isPermaLink="true">https://zenn.dev/frontline/articles/c41cdf5ec917bd</guid><pubDate>Fri, 28 Mar 2025 12:21:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--N6qgpx7U--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:HTML%25E5%259F%25BA%25E6%259C%25AC%25E8%25AC%259B%25E5%25BA%25A76%2520%25E3%2583%2586%25E3%2583%25BC%25E3%2583%2596%25E3%2583%25AB%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kota%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRiYTIxOTFjNjYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kota</dc:creator></item><item><title><![CDATA[HTML基本講座5 フォーム]]></title><description><![CDATA[こんにちは！
+今回は、HTMLで「ユーザーからの入力」を受け取るために使う フォームタグ について解説します。
+Webページでよく見かける
+
+お問い合わせフォーム
+ログイン画面
+会員登録ページ
+
+などは、HTMLのフォーム構造で作られています。
+
+
+ HTML基本講座5 フォーム
+
+ フォームタグとは
+HTMLでユーザーの入力をサーバーに送るには、&lt;form&gt;タグを使います。
+
+
+
+タグ名
+読み方
+用途
+
+
+
+
+&lt;form&gt;
+フォーム
+入力フォーム全体を囲むタグ
+
+
+&lt;input&gt;
+インプット
+ユーザーが情報を入力するための汎用タグ
+
+
+&lt;tex...]]></description><link>https://zenn.dev/frontline/articles/0d83c233d06046</link><guid isPermaLink="true">https://zenn.dev/frontline/articles/0d83c233d06046</guid><pubDate>Fri, 28 Mar 2025 12:10:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Cin0jEDC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:HTML%25E5%259F%25BA%25E6%259C%25AC%25E8%25AC%259B%25E5%25BA%25A75%2520%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25BC%25E3%2583%25A0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kota%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRiYTIxOTFjNjYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kota</dc:creator></item><item><title><![CDATA[HTML基本講座4 リスト]]></title><description><![CDATA[こんにちは！
+今回は、HTMLで「箇条書き」や「番号付きリスト」を作るために使う、リストタグについて解説します。
+Webページでよく見かける
+
+項目の一覧
+ステップの説明
+メニューリスト
+
+などは、HTMLのリスト構造で表現できます。
+
+ HTML基本講座4 リスト
+
+ リストタグとは
+HTMLには主に2種類のリストがあります：
+
+
+
+タグ名
+読み方
+用途
+
+
+
+
+&lt;ul&gt;
+アンオーダードリスト（unordered list）
+順番のないリスト（箇条書き）に使う
+
+
+&lt;ol&gt;
+オーダードリスト（ordered list）
+順番のあるリスト（番号付き）に使う
+
+
+
+...]]></description><link>https://zenn.dev/frontline/articles/a7ce513f034e10</link><guid isPermaLink="true">https://zenn.dev/frontline/articles/a7ce513f034e10</guid><pubDate>Fri, 28 Mar 2025 11:58:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xc7_paUR--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:HTML%25E5%259F%25BA%25E6%259C%25AC%25E8%25AC%259B%25E5%25BA%25A74%2520%25E3%2583%25AA%25E3%2582%25B9%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kota%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRiYTIxOTFjNjYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kota</dc:creator></item><item><title><![CDATA[応用情報に合格したあと、どうしても作りたかった「過去問演習サイト」の話]]></title><description><![CDATA[
+ 応用情報に合格したあと、どうしても作りたかった「過去問演習サイト」の話
+2024年春、私は応用情報技術者試験に独学で合格しました。
+そのときずっと思っていたのが、
+
+「もっとサクッとスマホで過去問を解けるサイトがあったらよかったのに…」
+
+ということ。
+そこで合格後、過去の自分が「欲しかったもの」を形にしようと思い立ち、
+自作の過去問演習サイトを作り始めました。
+
+
+ 🐰 応用情報技術者試験ナビとは？
+私が運営している過去問演習サイトです。
+👉 https://ap-shiken-navi.jp/
+現在は以下の内容で公開中です：
+
+📚 掲載問題：令和6年 春・秋の午前問題（合計160...]]></description><link>https://zenn.dev/rabbit_works/articles/ced3a0505342c7</link><guid isPermaLink="true">https://zenn.dev/rabbit_works/articles/ced3a0505342c7</guid><pubDate>Thu, 27 Mar 2025 05:40:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_yx3w9DB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%25BF%259C%25E7%2594%25A8%25E6%2583%2585%25E5%25A0%25B1%25E3%2581%25AB%25E5%2590%2588%25E6%25A0%25BC%25E3%2581%2597%25E3%2581%259F%25E3%2581%2582%25E3%2581%25A8%25E3%2580%2581%25E3%2581%25A9%25E3%2581%2586%25E3%2581%2597%25E3%2581%25A6%25E3%2582%2582%25E4%25BD%259C%25E3%2582%258A%25E3%2581%259F%25E3%2581%258B%25E3%2581%25A3%25E3%2581%259F%25E3%2580%258C%25E9%2581%258E%25E5%258E%25BB%25E5%2595%258F%25E6%25BC%2594%25E7%25BF%2592%25E3%2582%25B5%25E3%2582%25A4%25E3%2583%2588%25E3%2580%258D%25E3%2581%25AE%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2586%25E3%2581%2595%25E3%2581%258E%25E9%2596%258B%25E7%2599%25BA%25E5%25AE%25A4%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E5ZjlhMTQyNWQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>うさぎ開発室</dc:creator></item><item><title><![CDATA[index.htmlとは？その役割と作り方を初心者向けにやさしく解説]]></title><description><![CDATA[HTMLを学び始めると、「index.html（インデックス・エイチティーエムエル）」というファイル名を耳にすることがよくあります。これは多くのウェブサイトで使われる特別な役割を持つHTMLファイルです。今回は、初心者の方に向けて index.htmlとは何か、なぜ重要なのか、どこに配置すればよいのか、そして 基本的な構成 について、専門用語もかみ砕きながら丁寧に解説します。最後に 実際に動作するindex.htmlのサンプルコード も紹介するので、ぜひ参考にしてみてください。
+
+ index.htmlとは何か？どんな役割がある？
+index.html は、多くの場合ウェブサイトの**ト...]]></description><link>https://zenn.dev/web_kuroko/articles/67a75e901240d8</link><guid isPermaLink="true">https://zenn.dev/web_kuroko/articles/67a75e901240d8</guid><pubDate>Wed, 26 Mar 2025 02:45:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9IxRdKSb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:index.html%25E3%2581%25A8%25E3%2581%25AF%25EF%25BC%259F%25E3%2581%259D%25E3%2581%25AE%25E5%25BD%25B9%25E5%2589%25B2%25E3%2581%25A8%25E4%25BD%259C%25E3%2582%258A%25E6%2596%25B9%25E3%2582%2592%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E5%2590%2591%25E3%2581%2591%25E3%2581%25AB%25E3%2582%2584%25E3%2581%2595%25E3%2581%2597%25E3%2581%258F%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:web%25E9%25BB%2592%25E5%25AD%2590%25EF%25BC%2588%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2586%25E3%2582%25A3%25E3%2583%25B3%25E3%2582%25B0%25E3%2582%25A2%25E3%2583%2589%25E3%2583%2590%25E3%2582%25A4%25E3%2582%25B9%25EF%25BC%2589%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q5OWM0M2FjYWIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>web黒子（コーティングアドバイス）</dc:creator></item><item><title><![CDATA[useOptimisticでさくっと実装する楽観的更新(Optimistic Update)]]></title><description><![CDATA[
+ はじめに
+UI/UXにおける、Optimistic Updateって知っていますか？日本語にすると楽観的更新などと呼ばれたりします。実は日常にたくさん存在しており、見かけたことはあるかなと思います。
+例えば、Xのいいねボタンです。「いいね」した瞬間にハートに色がつくのですが、サーバーへのリクエストとUIの更新は同時に行われています。つまりサーバーへのリクエスト結果を待たずにUIを更新しているということです。これが楽観的更新になります。
+
+リクエスト結果を待ってからUIを更新する場合、ユーザーが「いいね」をしてからハートに色がつくまで時間がかかり、UXが悪くなってしまいます。そのため本...]]></description><link>https://zenn.dev/gemcook/articles/4c1a327a505f8f</link><guid isPermaLink="true">https://zenn.dev/gemcook/articles/4c1a327a505f8f</guid><pubDate>Tue, 25 Mar 2025 03:55:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--q6rJNh3E--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:useOptimistic%25E3%2581%25A7%25E3%2581%2595%25E3%2581%258F%25E3%2581%25A3%25E3%2581%25A8%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2599%25E3%2582%258B%25E6%25A5%25BD%25E8%25A6%25B3%25E7%259A%2584%25E6%259B%25B4%25E6%2596%25B0%2528Optimistic%2520Update%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:KM%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQyYzJiNzVlZTIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Gemcook%2520Tech%2520Blog%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2EzYjk0ZGQyMWEuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>KM</dc:creator></item><item><title><![CDATA[HTML初心者でも安心！基本構造からタグの意味、SEO対策まで徹底解説]]></title><description><![CDATA[HTMLは、ウェブページを作成するための基本的な言語です。しかし、「難しそう」「何から始めたらいいかわからない」と感じている初心者の方も多いのではないでしょうか。
+この記事では、HTMLの基本構造からタグの意味、そしてSEOに効果的なコーディング方法まで、初心者の方にもわかりやすく解説します。この記事を読めば、あなたも今日からHTMLでウェブページを作成し、SEO対策を始めることができます！
+
+ HTMLとは？
+HTMLとは、HyperText Markup Language（ハイパーテキスト マークアップ ランゲージ）の略で、ウェブページの構造を記述するための言語です。
+
+
+ハイパーテ...]]></description><link>https://zenn.dev/web_kuroko/articles/af7b141f9cbd7f</link><guid isPermaLink="true">https://zenn.dev/web_kuroko/articles/af7b141f9cbd7f</guid><pubDate>Mon, 24 Mar 2025 01:05:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dF5o-gOT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:HTML%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E3%2581%25A7%25E3%2582%2582%25E5%25AE%2589%25E5%25BF%2583%25EF%25BC%2581%25E5%259F%25BA%25E6%259C%25AC%25E6%25A7%258B%25E9%2580%25A0%25E3%2581%258B%25E3%2582%2589%25E3%2582%25BF%25E3%2582%25B0%25E3%2581%25AE%25E6%2584%258F%25E5%2591%25B3%25E3%2580%2581SEO%25E5%25AF%25BE%25E7%25AD%2596%25E3%2581%25BE%25E3%2581%25A7%25E5%25BE%25B9%25E5%25BA%2595%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:web%25E9%25BB%2592%25E5%25AD%2590%25EF%25BC%2588%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2586%25E3%2582%25A3%25E3%2583%25B3%25E3%2582%25B0%25E3%2582%25A2%25E3%2583%2589%25E3%2583%2590%25E3%2582%25A4%25E3%2582%25B9%25EF%25BC%2589%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q5OWM0M2FjYWIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>web黒子（コーティングアドバイス）</dc:creator></item><item><title><![CDATA[background-image超簡単な方法で暗くする。何故今までとても面倒な方法で実装していのか]]></title><description><![CDATA[今までbackground-blande-modeやらbackground-colorを使ってほげほげして暗くしてたけどもっと良い方法が見つかったので書いておく。
+まぁZENNを使っている優秀なフロントエンダーの方達からしたら「基本中の基本だよねぷーくすくす」って感じだろうけどねっ！
+はい
+	background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),url('../images/main.png');
+そもそも今までbackground-imageに対して値を2つ以上指定するという発想がなかった件。...]]></description><link>https://zenn.dev/riku_front/articles/ffc9f822650109</link><guid isPermaLink="true">https://zenn.dev/riku_front/articles/ffc9f822650109</guid><pubDate>Sun, 23 Mar 2025 09:49:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ziA36oJr--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:background-image%25E8%25B6%2585%25E7%25B0%25A1%25E5%258D%2598%25E3%2581%25AA%25E6%2596%25B9%25E6%25B3%2595%25E3%2581%25A7%25E6%259A%2597%25E3%2581%258F%25E3%2581%2599%25E3%2582%258B%25E3%2580%2582%25E4%25BD%2595%25E6%2595%2585%25E4%25BB%258A%25E3%2581%25BE%25E3%2581%25A7%25E3%2581%25A8%25E3%2581%25A6%25E3%2582%2582%25E9%259D%25A2%25E5%2580%2592%25E3%2581%25AA%25E6%2596%25B9%25E6%25B3%2595%25E3%2581%25A7%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2597%25E3%2581%25A6%25E3%2581%2584%25E3%2581%25AE%25E3%2581%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:riku%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTDFUUUJxUVp5SzN3c0tBX0lfVkhOZWZfaEVCYnEzX1FZVE1aOWx3M3o5Rmc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>riku</dc:creator></item><item><title><![CDATA[HTML基本講座3 HTMLでよく使う4つのタグ解説]]></title><description><![CDATA[こんにちは！今回はHTMLでよく使う基本のタグ、&lt;p&gt;、&lt;a&gt;、&lt;h1&gt;〜&lt;h6&gt;、&lt;div&gt; について解説します。
+これらは、Webページの中で文章を書く・リンクを貼る・見出しをつける・要素をグループ化するといった基本的な役割を持つタグです。
+
+ HTML基本講座3 HTMLでよく使う4つのタグ解説
+
+ pタグ：文章を書くときに使う
+📌 使いどころ
+&lt;p&gt; は「paragraph（パラグラフ）」の略で、段落（文章）を書くときに使うタグです。
+📖 説明
+複数の文章があるときは、&lt;p&gt; をそれぞれ囲むときれ...]]></description><link>https://zenn.dev/frontline/articles/3f51d1e57b8577</link><guid isPermaLink="true">https://zenn.dev/frontline/articles/3f51d1e57b8577</guid><pubDate>Sun, 23 Mar 2025 08:58:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--cyP5Ff_x--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:HTML%25E5%259F%25BA%25E6%259C%25AC%25E8%25AC%259B%25E5%25BA%25A73%2520HTML%25E3%2581%25A7%25E3%2582%2588%25E3%2581%258F%25E4%25BD%25BF%25E3%2581%25864%25E3%2581%25A4%25E3%2581%25AE%25E3%2582%25BF%25E3%2582%25B0%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kota%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRiYTIxOTFjNjYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kota</dc:creator></item><item><title><![CDATA[HTML基本講座2 セクショニング・コンテンツ]]></title><description><![CDATA[こんにちは！前回の記事では、HTMLの基本的な書き方について紹介しました。
+今回は、HTMLでWebページを わかりやすく整理するために使われる「セクショニング・コンテンツ」 について解説します！
+
+ HTML基本講座2 セクショニング・コンテンツ
+
+ セクショニング・コンテンツとは？
+セクショニング・コンテンツとは、HTMLの中で「ここからここまでが1つのまとまりですよ」と示すためのタグのことです。
+簡単にいうと、Webページを意味ごとに分けるためのブロックのようなものです。
+なぜセクショニングが必要なのでしょうか？
+Webページには「ヘッダー」や「記事などのメインコンテンツ」、「フッ...]]></description><link>https://zenn.dev/frontline/articles/42c5c5de592053</link><guid isPermaLink="true">https://zenn.dev/frontline/articles/42c5c5de592053</guid><pubDate>Sun, 23 Mar 2025 05:38:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--nQkfiNbK--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:HTML%25E5%259F%25BA%25E6%259C%25AC%25E8%25AC%259B%25E5%25BA%25A72%2520%25E3%2582%25BB%25E3%2582%25AF%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%258B%25E3%2583%25B3%25E3%2582%25B0%25E3%2583%25BB%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2586%25E3%2583%25B3%25E3%2583%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kota%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRiYTIxOTFjNjYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kota</dc:creator></item><item><title><![CDATA[HTML基本講座１ HTMLの基本的な書き方]]></title><description><![CDATA[この記事では、HTMLの基本的な書き方について紹介しています！
+
+ HTML基本講座１ HTMLの基本的な書き方
+
+ 基本的な書き方
+私たちがインターネットを使って記事や動画を見るとき、実は「サーバー」と呼ばれるコンピューターが、Google Chrome などのブラウザにその記事や動画のデータを送っています。
+そして、ブラウザがそのデータを画面に表示してくれることで、私たちはWebページを閲覧できるのです。
+※WEBシステムの仕組みについて、もっと詳しく知りたい方は、先に「WEBシステムとは？」も読んでみてくださいね！
+このとき、サーバーから送られてくるのは HTMLやCSSといったル...]]></description><link>https://zenn.dev/frontline/articles/11c2d7c13b04ed</link><guid isPermaLink="true">https://zenn.dev/frontline/articles/11c2d7c13b04ed</guid><pubDate>Sun, 23 Mar 2025 02:44:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--G-EcURRe--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:HTML%25E5%259F%25BA%25E6%259C%25AC%25E8%25AC%259B%25E5%25BA%25A7%25EF%25BC%2591%2520HTML%25E3%2581%25AE%25E5%259F%25BA%25E6%259C%25AC%25E7%259A%2584%25E3%2581%25AA%25E6%259B%25B8%25E3%2581%258D%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kota%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRiYTIxOTFjNjYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kota</dc:creator></item></channel></rss>
