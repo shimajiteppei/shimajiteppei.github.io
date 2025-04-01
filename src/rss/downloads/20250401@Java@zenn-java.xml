@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Java」のフィード]]></title><description><![CDATA[Zennのトピック「Java」のRSSフィードです]]></description><link>https://zenn.dev/topics/java</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/5c47bb8423.png</url><title>Zennの「Java」のフィード</title><link>https://zenn.dev/topics/java</link></image><generator>zenn.dev</generator><lastBuildDate>Tue, 01 Apr 2025 00:33:41 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/java/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[結局@Controllerって何？Spring初心者のための超入門]]></title><description><![CDATA[
+ 1. はじめに
+Spring Frameworkを学び始めると、最初の方に出てくる謎のアノテーション「@Controller」。
+なんとなく「Webに関係してるんだろうな」と思いながら使っている人も多いのではないでしょうか。
+でも、結局これって何をしているの？なぜ必要なの？
+この記事では、Spring初心者にもわかりやすいように「@Controller」について丁寧に解説していきます。
+
+ 2. @Controllerとは
+@Controllerは、Spring MVC（Model-View-Controller）というWebアプリケーションを作るための仕組みで使われるアノテーション...]]></description><link>https://zenn.dev/aki05162525/articles/0b193de32ad79e</link><guid isPermaLink="true">https://zenn.dev/aki05162525/articles/0b193de32ad79e</guid><pubDate>Mon, 31 Mar 2025 15:39:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--p8v5ypHH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%25B5%2590%25E5%25B1%2580%2540Controller%25E3%2581%25A3%25E3%2581%25A6%25E4%25BD%2595%25EF%25BC%259FSpring%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E3%2581%25AE%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%25E8%25B6%2585%25E5%2585%25A5%25E9%2596%2580%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25BE%25E3%2581%25AB%25E3%2581%25BE%25E3%2581%25AB%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSjBaM1pHbFo2RUJSc0NDTnVqeUpRV0U0eXEzczZJeTNYR1NPdHE2a21ZR3dNSWpqTXA9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>まにまに</dc:creator></item><item><title><![CDATA[SpringのRestTemplateだけでSalesforceのカスタムメタデータレコードを更新する]]></title><description><![CDATA[
+ はじめに
+Salesforce Platformでは、組織に関するカスタマイズ設定は「メタデータ」として定義・管理されています。多くの場合はGUIを通じて設定画面から手動操作で行いますが、外部から「メタデータAPI」と呼ばれる専用のAPIを使い、コマンドラインやプログラムから操作することもできます。
+その場合の手段として一番の候補に上がるのは公式のSalesforce DX（sfdx CLI）ですが、Javaからアクセスする場合は、公式のWSC(Web Services Connector)があります。
+https://developer.salesforce.com/docs/at...]]></description><link>https://zenn.dev/cariot_dev/articles/bb321f61dc9d5c</link><guid isPermaLink="true">https://zenn.dev/cariot_dev/articles/bb321f61dc9d5c</guid><pubDate>Mon, 31 Mar 2025 10:12:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bhT71zOE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Spring%25E3%2581%25AERestTemplate%25E3%2581%25A0%25E3%2581%2591%25E3%2581%25A7Salesforce%25E3%2581%25AE%25E3%2582%25AB%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%25A0%25E3%2583%25A1%25E3%2582%25BF%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%25AC%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2582%2592%25E6%259B%25B4%25E6%2596%25B0%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:t_endo%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZjMjE5NTM5MjkuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2582%25AD%25E3%2583%25A3%25E3%2583%25AA%25E3%2582%25AA%25E3%2583%2583%25E3%2583%2588%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRjMDRiZjE3ZDUuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>t_endo</dc:creator></item><item><title><![CDATA[Eclipse の便利機能]]></title><description><![CDATA[
+ コード補完機能
+
+
+Ctrl + Space
+
+これから入力されるであろう文字列を自動で補完してくれる。
+よく使うもの
+
+syso (System.out.println()を補完してくれる)
+main（メインメソッドを補完してくれる）
+変数名（例えば、SimpleDateFormatterなど長い変数名はsim程度入力すると補完できる）
+
+
+
+
+
+
+ フォーマット
+
+
+Ctrl + Shift + F
+
+ソースコードが自動でフォーマットされる。
+インデントやかっこの位置が自動で調整される。
+設定 -&gt; Java -&gt; エディター -&gt; 保存アクションで「ソースコー...]]></description><link>https://zenn.dev/tarinaihitori/articles/e4059e314544ea</link><guid isPermaLink="true">https://zenn.dev/tarinaihitori/articles/e4059e314544ea</guid><pubDate>Mon, 31 Mar 2025 07:59:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--eocI4KOC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Eclipse%2520%25E3%2581%25AE%25E4%25BE%25BF%25E5%2588%25A9%25E6%25A9%259F%25E8%2583%25BD%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259F%25E3%2582%258A%25E3%2581%25AA%25E3%2581%2584%25E3%2581%25B2%25E3%2581%25A8%25E3%2582%258A%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzgyNjMzZGIxNmEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>たりないひとり</dc:creator></item><item><title><![CDATA[Javaのエントリーポイントをざっくりまとめてみた[java初心者]]]></title><description><![CDATA[
+ はじめに
+こんにちは。
+プログラミング初心者Wakinozaと申します。
+Java勉強中調べたことを記事にまとめています。
+十分気をつけて執筆するつもりが、なにぶん初心者が書いた記事なので、理解が浅い点などあるかと思います。
+記事を参考にされる方は、初心者の記事であることを念頭において、お読みいただけると幸いです。
+間違い等あれば、指摘いただけると助かります。
+
+ 対象読者
+Javaを勉強中の方。
+Java SE Bronze試験を勉強中の方。
+mainメソッドの仕様など、Javaの基礎知識を知りたい方。
+
+ 目次
+1. プログラム起動の開始位置
+2. mainメソッドの仕様
+3. ...]]></description><link>https://zenn.dev/wakinoza/articles/e8d547b4d00e56</link><guid isPermaLink="true">https://zenn.dev/wakinoza/articles/e8d547b4d00e56</guid><pubDate>Sun, 30 Mar 2025 11:58:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1ls49x0f--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java%25E3%2581%25AE%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2588%25E3%2583%25AA%25E3%2583%25BC%25E3%2583%259D%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2588%25E3%2582%2592%25E3%2581%2596%25E3%2581%25A3%25E3%2581%258F%25E3%2582%258A%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%255Bjava%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%255D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:wakinoza%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhkYzVjNWY5ZWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>wakinoza</dc:creator></item><item><title><![CDATA[CDI-Unitを試行してみた]]></title><description><![CDATA[
+ CDI-Unitを試行してみた
+
+ 📌 3秒まとめ
+
+
+✅ 簡単に CDI のユニットテストができる
+
+
+✅ @Inject などの基本的な CDI 機能をサポート
+
+
+✅ 統合テストは Arquillian、ユニットテストは CDI-Unit という使い分けが可能
+
+
+✅ データベーステストは、DeltaSpike以外はサポートされておらず、工夫が必要
+
+
+
+ 👫 どんな人向けの記事
+
+
+Jakarta EE のアプリケーションに対してJUnitで単体テストを書いている人
+
+
+Arquillian* を使って CDI の自動テストを書いている人
+
+
+これから CDI の自動テストツ...]]></description><link>https://zenn.dev/muit_techblog/articles/6da526491be1e1</link><guid isPermaLink="true">https://zenn.dev/muit_techblog/articles/6da526491be1e1</guid><pubDate>Fri, 28 Mar 2025 10:44:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--tXYVyiCg--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:CDI-Unit%25E3%2582%2592%25E8%25A9%25A6%25E8%25A1%258C%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E5%258E%259F%2520%25E6%2598%2582%25E5%25B9%25B3%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzIxZGYyYTRkNjIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E4%25B8%2589%25E8%258F%25B1UFJ%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25A1%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2583%2586%25E3%2582%25AF%25E3%2583%258E%25E3%2583%25AD%25E3%2582%25B8%25E3%2583%25BC%25E3%2583%2586...%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS1JVbHAzaUtKZ2R6MnZ4VTZ6QnF3Rk96ZlZGVks1SkZiamJlMHJKT1M4NVJXSzNnPXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>原 昂平</dc:creator></item><item><title><![CDATA[Java Silver 強化①コレクションList]]></title><description><![CDATA[
+ 1. Listインタフェース
+
+List インタフェースは、順序付きのコレクションを表します。リスト内の要素にはインデックスがあり、要素の順序が保持されます。また、List インタフェースを実装するクラスでは、重複を許可することができます。
+主なメソッドは次の通りです：
+
+
+add(E e)：リストの末尾に要素を追加する
+
+get(int index)：指定したインデックスの要素を取得する
+
+set(int index, E element)：指定したインデックスの要素を変更する
+
+remove(int index)：指定したインデックスの要素を削除する
+
+clear()：リストのす...]]></description><link>https://zenn.dev/hyoni/articles/6840b2325b1eef</link><guid isPermaLink="true">https://zenn.dev/hyoni/articles/6840b2325b1eef</guid><pubDate>Fri, 28 Mar 2025 01:27:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--TX0ACm06--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java%2520Silver%2520%25E5%25BC%25B7%25E5%258C%2596%25E2%2591%25A0%25E3%2582%25B3%25E3%2583%25AC%25E3%2582%25AF%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3List%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%2592%25E3%2583%25A7%25E3%2583%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0sxdWxlU2pkSzlwbDVxZnp3QVlUcFhCNk9xUEhkZGpKWjRUVlRPTl9lMHdYODhLdkg9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ヒョニ</dc:creator></item><item><title><![CDATA[Java8からJava21までの進化点をピックアップしてみた]]></title><description><![CDATA[Java8がGAしてから10年ほど経ちましたが、その間にJava8は開発現場に広く浸透してきました。
+しかし、サポート期限の終わりも見えてきたのと、あとの世代のJavaのLTSのバージョンもリリースされてきて、より新しいLTSが開発現場に使われるようになってきていると思います。
+この記事では、Java21までの言語仕様の変化をピックアップして簡単におさらいできればと思います。
+
+ varによる型推論（Java 10）
+Java 8では、ローカル変数の宣言には必ず型を書く必要がありました。例えば次のように：
+List&lt;String&gt; names = new ArrayList&...]]></description><link>https://zenn.dev/hrimfaxi_tpw/articles/26d320d0c7b1fc</link><guid isPermaLink="true">https://zenn.dev/hrimfaxi_tpw/articles/26d320d0c7b1fc</guid><pubDate>Thu, 27 Mar 2025 04:49:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--50zzI4o1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java8%25E3%2581%258B%25E3%2582%2589Java21%25E3%2581%25BE%25E3%2581%25A7%25E3%2581%25AE%25E9%2580%25B2%25E5%258C%2596%25E7%2582%25B9%25E3%2582%2592%25E3%2583%2594%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%258A%25E3%2582%2580%25E3%2581%25B5%25E3%2581%2581%25E3%2581%258F%25E3%2581%2597%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg5NGZhZjY3ZTMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>りむふぁくし</dc:creator></item><item><title><![CDATA[クラスとインスタンス]]></title><description><![CDATA[
+ まえがき
+chat-gptで作った学習ロードマップをプログラミング初学者が勉強する試みです
+ロードマップはchat-gptを使用してますが、学習は公式のチュートリアルや技術系ブログなどを参考にしています
+Goの復習も兼ねているのでGoとの違いについても言及します
+今回はクラスとインスタンスについて内容をまとめていきます
+
+ クラスとは？
+クラスはオブジェクトの設計図の役割を持ち、データ（フィールド）と振る舞い（メソッド）を定義することができる
+ひとつのjavaファイルには、ひとつのクラスが基本（ネストされたクラスは別）
+
+ クラスの宣言方法
+クラスはclassキーワードを使って宣言す...]]></description><link>https://zenn.dev/miya_miya/articles/291d04ffb8ea76</link><guid isPermaLink="true">https://zenn.dev/miya_miya/articles/291d04ffb8ea76</guid><pubDate>Thu, 27 Mar 2025 02:52:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--797IOwn6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25B9%25E3%2581%25A8%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%25B3%25E3%2582%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:miya%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSjBLNnZLRXFYSzJFZVBmSG1WYnNuSXFvWlA2V1J3a2ZoV0FXeXdsZFp1NV92bjdnPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>miya</dc:creator></item><item><title><![CDATA[Javaのコンパイラ方式をざっくりまとめてみた]]></title><description><![CDATA[
+ はじめに
+初めて投稿します。
+プログラミング初心者Wakinozaと申します。
+Java勉強中に調べたことを記事にまとめています。
+十分気をつけて執筆していますが、なにぶん勉強始めたての初心者が書いた記事なので、理解が浅い点などあるかと思います。
+記事を参考にされる方は、初心者の記事であることを念頭において、お読みいただけると幸いです。
+間違い等指摘いただけると、当方飛び上がって喜びます。
+よろしくお願いいたします。
+
+ 対象読者
+Java初心者の方。
+Java SE Bronze試験を勉強中の方。
+その他、Javaのコンパイラ方式について、ざっくり理解したい方など。
+
+ 目次
+1....]]></description><link>https://zenn.dev/wakinoza/articles/0a3fc55287a147</link><guid isPermaLink="true">https://zenn.dev/wakinoza/articles/0a3fc55287a147</guid><pubDate>Tue, 25 Mar 2025 10:39:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--y4EX0NrP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java%25E3%2581%25AE%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2591%25E3%2582%25A4%25E3%2583%25A9%25E6%2596%25B9%25E5%25BC%258F%25E3%2582%2592%25E3%2581%2596%25E3%2581%25A3%25E3%2581%258F%25E3%2582%258A%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:wakinoza%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhkYzVjNWY5ZWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>wakinoza</dc:creator></item><item><title><![CDATA[Java Silver 備忘録]]></title><description><![CDATA[Java Silver 備忘録]]></description><link>https://zenn.dev/v6qh2bxj/books/5e121ce96edb55</link><guid isPermaLink="true">https://zenn.dev/v6qh2bxj/books/5e121ce96edb55</guid><pubDate>Sun, 23 Mar 2025 09:11:13 GMT</pubDate><dc:creator>v6qh2bxj</dc:creator></item><item><title><![CDATA[Javaの例外処理：5つの鉄則 - 実践ガイド]]></title><description><![CDATA[
+ Javaの例外処理：5つの鉄則
+
+ はじめに
+プログラミングにおいて、エラーや例外は避けられないものです。優れた開発者は、エラーを恐れるのではなく、適切に処理する方法を知っています。「過ちは人間のもの、しかしコードは完璧であるべき」という言葉があるように、適切な例外処理はアプリケーションの品質を大きく左右します。
+この記事では、Javaにおける例外処理の5つの鉄則を紹介し、実際のコード例を通じて実装方法を解説します。これらの原則を理解し適用することで、より堅牢で保守性の高いコードを書くことができるようになります。
+
+ 例外処理の基本
+Javaにおける例外の階層は以下のようになっていま...]]></description><link>https://zenn.dev/okamyuji/articles/4ce7d79802700c</link><guid isPermaLink="true">https://zenn.dev/okamyuji/articles/4ce7d79802700c</guid><pubDate>Sat, 22 Mar 2025 22:39:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--yZtbnl7v--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java%25E3%2581%25AE%25E4%25BE%258B%25E5%25A4%2596%25E5%2587%25A6%25E7%2590%2586%25EF%25BC%259A5%25E3%2581%25A4%25E3%2581%25AE%25E9%2589%2584%25E5%2589%2587%2520-%2520%25E5%25AE%259F%25E8%25B7%25B5%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:okamyuji%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY5YjFmNDYyYjkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>okamyuji</dc:creator></item><item><title><![CDATA[Java Silver 勉強⑦インタフェースによる抽象化]]></title><description><![CDATA[【出題項目の例】
+Javaの基本データ型と文字列の操作
+演算子と制御構造
+配列の操作
+クラスの宣言とインスタンスの使用
+メソッドの作成と使用
+カプセル化の適用
+継承による実装の再利用
+インタフェースによる抽象化
+例外処理
+モジュール・システム
+
+ インタフェースによる抽象化
+
+ 1. インタフェースとは？
+
+インタフェースは、クラスが実装しなければならないメソッドの「設計図」を定義するものです。インタフェース自体は実装を持たず、メソッドのシグネチャ（引数、戻り値など）のみを定義します。クラスは、このインタフェースを実装することで、実際の処理を定義します。
+
+
+インタフェースの特徴:
+
+メ...]]></description><link>https://zenn.dev/hyoni/articles/e065e312e5ac47</link><guid isPermaLink="true">https://zenn.dev/hyoni/articles/e065e312e5ac47</guid><pubDate>Fri, 21 Mar 2025 05:54:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BL8yYUVw--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java%2520Silver%2520%25E5%258B%2589%25E5%25BC%25B7%25E2%2591%25A6%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25BF%25E3%2583%2595%25E3%2582%25A7%25E3%2583%25BC%25E3%2582%25B9%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258B%25E6%258A%25BD%25E8%25B1%25A1%25E5%258C%2596%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%2592%25E3%2583%25A7%25E3%2583%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0sxdWxlU2pkSzlwbDVxZnp3QVlUcFhCNk9xUEhkZGpKWjRUVlRPTl9lMHdYODhLdkg9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ヒョニ</dc:creator></item><item><title><![CDATA[Java Silver 勉強⑥継承による実装の再利用]]></title><description><![CDATA[【出題項目の例】
+
+Javaの基本データ型と文字列の操作
+演算子と制御構造
+配列の操作
+クラスの宣言とインスタンスの使用
+メソッドの作成と使用
+カプセル化の適用
+継承による実装の再利用
+インタフェースによる抽象化
+例外処理
+モジュール・システム
+
+
+ 継承による実装の再利用
+
+ 1. 継承の基本
+Java では extends キーワードを使って、既存のクラス（親クラス）を継承できます。
+継承したクラス（子クラス）は、親クラスのフィールドやメソッドを引き継ぐことができます。
+// 親クラス（スーパークラス）
+class Animal {
+    String name = "動物";
+
+...]]></description><link>https://zenn.dev/hyoni/articles/d1dd53b4ff1b38</link><guid isPermaLink="true">https://zenn.dev/hyoni/articles/d1dd53b4ff1b38</guid><pubDate>Fri, 21 Mar 2025 05:07:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Rselv06O--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java%2520Silver%2520%25E5%258B%2589%25E5%25BC%25B7%25E2%2591%25A5%25E7%25B6%2599%25E6%2589%25BF%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258B%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%25AE%25E5%2586%258D%25E5%2588%25A9%25E7%2594%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%2592%25E3%2583%25A7%25E3%2583%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0sxdWxlU2pkSzlwbDVxZnp3QVlUcFhCNk9xUEhkZGpKWjRUVlRPTl9lMHdYODhLdkg9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ヒョニ</dc:creator></item><item><title><![CDATA[AtCoderにJavaで出るための対策～AtCoder Beginners Selection編～]]></title><description><![CDATA[AtCoder Beginners Selectionをやっていきます。
+自分で解きながら備忘録という意味でも解説を載せています。
+パッと自分で解法が思いつかなかったときは、AtCoderに載っているユーザー解説などを参考に、Java版のコードにしたものを回答として載せています。
+以下、問題のページです。
+
+PracticeA Welcome to AtCoder
+
+
+ABC086A	Product
+ABC081A	Placing Marbles
+ABC081B	Shift only
+ABC087B	Coins
+ABC083B	Some Sums
+ABC088B	Card Game fo...]]></description><link>https://zenn.dev/haru330/articles/0daddf40ba18c8</link><guid isPermaLink="true">https://zenn.dev/haru330/articles/0daddf40ba18c8</guid><pubDate>Thu, 20 Mar 2025 09:30:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lHJZyFmd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AtCoder%25E3%2581%25ABJava%25E3%2581%25A7%25E5%2587%25BA%25E3%2582%258B%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%25E5%25AF%25BE%25E7%25AD%2596%25EF%25BD%259EAtCoder%2520Beginners%2520Selection%25E7%25B7%25A8%25EF%25BD%259E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AF%25E3%2582%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU3NzQyOWFkM2YuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>はる</dc:creator></item><item><title><![CDATA[Java データ型]]></title><description><![CDATA[
+ 基本型
+基本型は以下の8種類です。
+扱えるリテラルがそれぞれ異なります。
+
+
+
+型
+リテラル
+
+
+
+
+byte
+8ビット整数
+
+
+short
+16ビット整数
+
+
+int
+32ビット整数
+
+
+long
+64ビット整数
+
+
+float
+32ビット単精度浮動小数点数
+
+
+double
+64ビット倍精度浮動小数点数
+
+
+char
+16ビットUnicode文字
+
+
+boolean
+
+true, false
+
+
+
+
+小さい型は大きい型に自動で変換されます。
+大きい型を小さい型に変換するときは、キャストが必要です。
+/*
+byte → short → int → long → float → do...]]></description><link>https://zenn.dev/itohisamitsu0/articles/e9c8f5f80eb760</link><guid isPermaLink="true">https://zenn.dev/itohisamitsu0/articles/e9c8f5f80eb760</guid><pubDate>Thu, 20 Mar 2025 08:24:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--b1GeId-C--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:Java%2520%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E5%259E%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tsumugi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSzY0c0ZzSWQ4TEVkUU9RMHRkdFVjanB0dWRubVBZczhCOTlJdXNDdjYxZ1Q3b1BIRl89czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tsumugi</dc:creator></item><item><title><![CDATA[プログラミング自己主導学習 [Java] インターフェースの定義と役割]]></title><description><![CDATA[
+ インタフェース(Interface)とは？
+抽象メソッド（実装されていないメソッド）の集合で、クラスが特定の機能を
+具現するよう強制する役割をする。
+インターフェイスを使用すると、オブジェクト間の結合度を下げ、多形性をサポートして柔軟なコード作成が可能である。
+インターフェースの主な役割
+ポリモーフィズム（多態性）の提供
+インターフェースを使用すると、1つのインターフェースを複数のクラスが異なる方法で実装できるため、多態性を容易に活用できます。
+例）List インターフェースには ArrayList、LinkedList などの多様な実装が存在し、インターフェースを通じてオブジェクト...]]></description><link>https://zenn.dev/shubbydobob/articles/bc3ae570a852f0</link><guid isPermaLink="true">https://zenn.dev/shubbydobob/articles/bc3ae570a852f0</guid><pubDate>Wed, 19 Mar 2025 07:56:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--tfgw_qWx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%259F%25E3%2583%25B3%25E3%2582%25B0%25E8%2587%25AA%25E5%25B7%25B1%25E4%25B8%25BB%25E5%25B0%258E%25E5%25AD%25A6%25E7%25BF%2592%2520%255BJava%255D%2520%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%2595%25E3%2582%25A7%25E3%2583%25BC%25E3%2582%25B9%25E3%2581%25AE%25E5%25AE%259A%25E7%25BE%25A9%25E3%2581%25A8%25E5%25BD%25B9%25E5%2589%25B2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Sanghyun%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE5ZDZhNjJlMDguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Sanghyun</dc:creator></item><item><title><![CDATA[Javaの基本文法（基礎固め）]]></title><description><![CDATA[
+ まえがき
+chat-gptで作った学習ロードマップをプログラミング初学者が勉強する試みです
+ロードマップはchat-gptを使用してますが、学習は公式のチュートリアルや技術系ブログなどを参考にしています
+Goの復習も兼ねているのでGoとの違いについても言及します
+今回はJavaの基本文法について内容をまとめていきます
+
+ 目標
+Javaの基本的な構文を理解する
+
+ Javaの特徴・Goとの違い（静的型付け、JVMなど）
+JavaもGoも静的型付けの言語である
+両者ともに型推論に対応しているのでこれと言って違いはなさそう？
+JVMとはJava Virtual Machineの略でJav...]]></description><link>https://zenn.dev/miya_miya/articles/f3cfdaebd80caa</link><guid isPermaLink="true">https://zenn.dev/miya_miya/articles/f3cfdaebd80caa</guid><pubDate>Tue, 18 Mar 2025 03:30:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--D5XlTZdT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java%25E3%2581%25AE%25E5%259F%25BA%25E6%259C%25AC%25E6%2596%2587%25E6%25B3%2595%25EF%25BC%2588%25E5%259F%25BA%25E7%25A4%258E%25E5%259B%25BA%25E3%2582%2581%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:miya%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSjBLNnZLRXFYSzJFZVBmSG1WYnNuSXFvWlA2V1J3a2ZoV0FXeXdsZFp1NV92bjdnPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>miya</dc:creator></item><item><title><![CDATA[Spring AIの紹介]]></title><description><![CDATA[
+ Spring AIの紹介
+Spring AIは、Spring Frameworkを使って、OpenAI(ChatGPT)やGeminiなどのAIサービスと連携するためのライブラリです。
+Spring Frameworkの機能を利用しながら、AIサービスを利用するプログラムを開発することができます。
+2025年3月時点でまだ開発中の段階ですが、SpringBootアプリケーションに構成することができます。
+今回は以下の開発環境をもとに、Spring AIを使ってOpen AIのチャットを利用するプログラムの基本的な実装方法を紹介していきます。
+
+Java 21
+Gradle Groov...]]></description><link>https://zenn.dev/cariot_dev/articles/9677ef63469559</link><guid isPermaLink="true">https://zenn.dev/cariot_dev/articles/9677ef63469559</guid><pubDate>Mon, 17 Mar 2025 06:05:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3S72bfbx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:Spring%2520AI%25E3%2581%25AE%25E7%25B4%25B9%25E4%25BB%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Ogawa%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZjMjE5NTM5MjkuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2582%25AD%25E3%2583%25A3%25E3%2583%25AA%25E3%2582%25AA%25E3%2583%2583%25E3%2583%2588%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJjNDZmMGE5M2QuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Ogawa</dc:creator></item><item><title><![CDATA[プログラミング自己主導学習 [Java] DTO(Data Transfer Object)の定義と役割]]></title><description><![CDATA[
+ DTO(Data Transfer Object)
+階層間データを伝達するために使用されるオブジェクト。
+データのカプセル化(encapsulation)によって不要なデータの露出を放置し、
+ネットワークコスト削減及び性能最適化を目的に使用される。
+
+
+データ配信専用:データを保存する役割のみで、別途のビジネスロジックを含まない。
+
+
+読み込み専用または変更可能:不変(immutable)に設計されたり、必要に応じて
+
+
+可変（mutable）に使用できる。
+
+
+階層間データ移動最適化:クライアント-サーバー、コントローラ-サービス、サービス-リポジトリ間のデータ移動に使用される。
+...]]></description><link>https://zenn.dev/shubbydobob/articles/1c1edb2fedaba5</link><guid isPermaLink="true">https://zenn.dev/shubbydobob/articles/1c1edb2fedaba5</guid><pubDate>Mon, 17 Mar 2025 05:36:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4OIoCydZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%259F%25E3%2583%25B3%25E3%2582%25B0%25E8%2587%25AA%25E5%25B7%25B1%25E4%25B8%25BB%25E5%25B0%258E%25E5%25AD%25A6%25E7%25BF%2592%2520%255BJava%255D%2520DTO%2528Data%2520Transfer%2520Object%2529%25E3%2581%25AE%25E5%25AE%259A%25E7%25BE%25A9%25E3%2581%25A8%25E5%25BD%25B9%25E5%2589%25B2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Sanghyun%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE5ZDZhNjJlMDguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Sanghyun</dc:creator></item><item><title><![CDATA[Webサーバーについて知識ゼロの人がさくらVPSを使用してJavaWebアプリ環境を整えた]]></title><description><![CDATA[
+ 前提知識
+
+Javaで作成したWebアプリケーションを.warファイルで作成できる
+Tomcatのディレクトリ構造が理解できていて、/Tomcatルートディレクトリ/webappsに.warファイルを配置してTomcat起動すると.warファイルが展開できることを理解していること
+さくらVPSでパケットフィルタのカスタム設定でTCP 8080を開けれること
+
+さくらVPSの状態は以下でスタート(ただ、レンタルしただけの状態)
+本来は、Apache(Webサーバー)を導入するのが推奨されているようですが、今回は使用するほどの規模ではないため、Tomcat(アプリケーションサーバー)のみ...]]></description><link>https://zenn.dev/favopg/articles/cfb20bedaefc4d</link><guid isPermaLink="true">https://zenn.dev/favopg/articles/cfb20bedaefc4d</guid><pubDate>Sun, 16 Mar 2025 11:04:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--DGhmsoZo--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Web%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E7%259F%25A5%25E8%25AD%2598%25E3%2582%25BC%25E3%2583%25AD%25E3%2581%25AE%25E4%25BA%25BA%25E3%2581%258C%25E3%2581%2595%25E3%2581%258F%25E3%2582%2589VPS%25E3%2582%2592%25E4%25BD%25BF%25E7%2594%25A8%25E3%2581%2597%25E3%2581%25A6JavaWeb%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E7%2592%25B0%25E5%25A2%2583%25E3%2582%2592%25E6%2595%25B4%25E3%2581%2588%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25A4%25E3%2583%2583%25E3%2582%25B7%25E3%2583%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M4NWJkZTE0NzMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>イッシー</dc:creator></item></channel></rss>
