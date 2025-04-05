@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「TypeScript」のフィード]]></title><description><![CDATA[Zennのトピック「TypeScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/typescript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/f13e758fdb.png</url><title>Zennの「TypeScript」のフィード</title><link>https://zenn.dev/topics/typescript</link></image><generator>zenn.dev</generator><lastBuildDate>Sat, 05 Apr 2025 12:04:14 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/typescript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[型の絞りこみ~型ガード関数編~【個人学習まとめ】]]></title><description><![CDATA[
+ ユーザー定義の型ガード関数(型述語)
+
+ ユーザー定義の型ガード関数って？
+開発者が独自に関数を定義して、その関数に渡された値が特定の型であるかどうかをチェックすることができます。
+この関数のことをユーザー定義の型ガード関数と呼びます。
+型ガード関数
+ユーザー定義の型ガード関数を使わない型チェックとユーザー定義の型ガード関数を使った型チェックの両方から違いを確認してみましょう！
+
+ ユーザー定義の型ガード関数を使わない場合
+まずはユーザー定義の型ガード関数を使わない場合です。
+引数がnumber型かどうか判断する関数を準備します。typeof演算子を使用します。typeof演算子の戻...]]></description><link>https://zenn.dev/o0rororo0o/articles/64b198b1cafb9a</link><guid isPermaLink="true">https://zenn.dev/o0rororo0o/articles/64b198b1cafb9a</guid><pubDate>Sat, 05 Apr 2025 09:56:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1M1-7S6N--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%259E%258B%25E3%2581%25AE%25E7%25B5%259E%25E3%2582%258A%25E3%2581%2593%25E3%2581%25BF%7E%25E5%259E%258B%25E3%2582%25AC%25E3%2583%25BC%25E3%2583%2589%25E9%2596%25A2%25E6%2595%25B0%25E7%25B7%25A8%7E%25E3%2580%2590%25E5%2580%258B%25E4%25BA%25BA%25E5%25AD%25A6%25E7%25BF%2592%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%258D%25E3%2582%258D%25E3%2582%258D%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ2ZTZjOWM4YmMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ろろろ</dc:creator></item><item><title><![CDATA[Clipboard APIでJSオブジェクト丸見えでペーストしたくないしカスタムMIMEタイプを使いたい]]></title><description><![CDATA[
+ 問題
+ウェブアプリ上で内部的にはJavaScriptのオブジェクトを使っていることがよくあります。
+オブジェクト保ったままコピー＆ペーストしたいのもよくあります。
+たとえば:
+最近シーケンサのUIデザインとかをやらせていただいているVOICEVOXのノートは内部的にオブジェクトでコピー＆ペーストを実現しています。
+
+しかしオブジェクトなので普通の入力欄にペーストすると丸見えで残念なことになります。
+
+
+ 内部オブジェクトを見せたくない
+ClipboardAPIの書き込みにおいて
+
+
+text/htmlにオブジェクトを埋め込んでおく
+
+text/plainに空文字などを入れておく
+
+た...]]></description><link>https://zenn.dev/romot/articles/e6a12ae2c67fea</link><guid isPermaLink="true">https://zenn.dev/romot/articles/e6a12ae2c67fea</guid><pubDate>Sat, 05 Apr 2025 09:51:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--LJ5LDPtl--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Clipboard%2520API%25E3%2581%25A7JS%25E3%2582%25AA%25E3%2583%2596%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E4%25B8%25B8%25E8%25A6%258B%25E3%2581%2588%25E3%2581%25A7%25E3%2583%259A%25E3%2583%25BC%25E3%2582%25B9%25E3%2583%2588%25E3%2581%2597%25E3%2581%259F%25E3%2581%258F%25E3%2581%25AA%25E3%2581%2584%25E3%2581%2597%25E3%2582%25AB%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%25A0MIME%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%2597%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2584%25E3%2581%259F%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Romot%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZiY2U4ZmE1OGEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Romot</dc:creator></item><item><title><![CDATA[[Angular]CSSクラスを動的にセットする方法まとめ]]></title><description><![CDATA[Angularでは、要素にCSSクラスを動的に適用するために、classバインディングとngClassディレクティブの2つの方法が提供されています。
+それぞれの使い方や２つの違いについて、ネット上の情報は古かったり一部しか説明されていなかったりするものが多かったため自分用のメモも兼ねてまとめてみました。
+
+ classバインディングの使用方法
+classバインディングの3つの使用方法を説明します。
+1つの要素に対しこれらを複数組み合わせることも可能です。
+
+ 1.特定の一つのクラスをboolean変数で制御
+&lt;!-- isActiveがtrueの場合にactiveクラスを適用 --...]]></description><link>https://zenn.dev/engibeer/articles/cc2fcc09fb8959</link><guid isPermaLink="true">https://zenn.dev/engibeer/articles/cc2fcc09fb8959</guid><pubDate>Sat, 05 Apr 2025 08:17:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ynFMDs10--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BAngular%255DCSS%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25B9%25E3%2582%2592%25E5%258B%2595%25E7%259A%2584%25E3%2581%25AB%25E3%2582%25BB%25E3%2583%2583%25E3%2583%2588%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:EngiBeer%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdlZGNjYTFiZDEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>EngiBeer</dc:creator></item><item><title><![CDATA[React + Firebase 日々トラッカーアプリ開発]]></title><description><![CDATA[Reactのアプリ開発のチュートリアルです。
+日々トラッカーと言うタイトルにしてますが、日々のポジティブ、ネガティブな感情を記録するアプリをチュートリアル的に開発していきます。
+カレンダーイメージで、その日に感じたポジティブ・ネガティブな気持ちをチェックボックス形式で簡単に記録出来る仕組みを目指しました。また、メモ欄も設け、特に残しておきたい内容を記載出来るようにしています。
+開発プラットフォームはReact(v19) + TypeScript + Firebase、UIはMUIです。
+データの統計をわかりやすくビジュアライズするレポート機能も実装します。]]></description><link>https://zenn.dev/amayann/books/e53053d79e1f56</link><guid isPermaLink="true">https://zenn.dev/amayann/books/e53053d79e1f56</guid><pubDate>Sat, 05 Apr 2025 03:42:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ryxJnp9X--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci85YjFhZWRhYTVmLmpwZWc=%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>bauhaus</dc:creator></item><item><title><![CDATA[【Next.js(v15)】エラー解決法：Type '***' does not satisfy the constraint]]></title><description><![CDATA[
+ 【Next.js 15】エラー解決法：Type error: Type '***' does not satisfy the constraint
+Next.js(v15)及び TypeScript でアプリを開発しているのですが、ビルドする際に「Type error: Type '***' does not satisfy the constraint」というエラーによく遭遇しました。同じようなエラーが出てしまった方向けに、解決方法を解説します。
+
+ Next.js 15 とは？
+Next.js は、React をベースとした Web アプリケーションフレームワークです。サーバーサ...]]></description><link>https://zenn.dev/hayatech/articles/nextjs15-type-error-pageprops</link><guid isPermaLink="true">https://zenn.dev/hayatech/articles/nextjs15-type-error-pageprops</guid><pubDate>Sat, 05 Apr 2025 03:00:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3iWi-i55--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Next.js%2528v15%2529%25E3%2580%2591%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E8%25A7%25A3%25E6%25B1%25BA%25E6%25B3%2595%25EF%25BC%259AType%2520%2527%252A%252A%252A%2527%2520does%2520not%2520satisfy%2520the%2520cons...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:HayaTech%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I2OTUyMWE4YzYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>HayaTech</dc:creator></item><item><title><![CDATA[ESM・CJS両対応のライブラリをTypeScriptから作成]]></title><description><![CDATA[本記事では、TypeScriptで書かれたソースコードを、型定義ファイルを含む、ECMAScript module (ESM)とCommonJS module (CJS)の両方に対応したnpmパッケージ (dual package) にバンドルする、以下のツールを使用したプロジェクトの構築手順をまとめます。
+
+Package Manager: pnpm
+
+Bundler: Rollup
+
+Linter: ESLint
+
+Formatter: Prettier
+
+Testing: ts-jest
+
+
+
+ TL;DR
+以下のGitHubリポジトリのプロジェクトをテンプレートとして、packa...]]></description><link>https://zenn.dev/simayosi/articles/rollup-typescript-library</link><guid isPermaLink="true">https://zenn.dev/simayosi/articles/rollup-typescript-library</guid><pubDate>Fri, 04 Apr 2025 14:09:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--LqmqmydP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ESM%25E3%2583%25BBCJS%25E4%25B8%25A1%25E5%25AF%25BE%25E5%25BF%259C%25E3%2581%25AE%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%25E3%2582%2592TypeScript%25E3%2581%258B%25E3%2582%2589%25E4%25BD%259C%25E6%2588%2590%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:simayosi%2540systemiz.jp%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUl0YnZtbTVaYm5XazEtUnMwdEV3U3FjWjV3cldpb0NwWmJNMWxnZDhpekU9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>simayosi@systemiz.jp</dc:creator></item><item><title><![CDATA[@duckdb/node-api で sqlite ファイルの内容を duckdb ファイルにまるまるコピーする]]></title><description><![CDATA[nodejs 用の新しいクライアント(@duckdb/node-api)を使うとこんな実装になった。
+import { DuckDBInstance } from "@duckdb/node-api";
+
+export async function convertSqliteToDuckDB(
+  sqliteFilePath: string,
+  duckdbFilePath: string,
+) {
+  const duckdb = await DuckDBInstance.create(duckdbFilePath);
+  const conn = await duckdb.con...]]></description><link>https://zenn.dev/sakamoto_akira_/articles/9375d3b722435b</link><guid isPermaLink="true">https://zenn.dev/sakamoto_akira_/articles/9375d3b722435b</guid><pubDate>Fri, 04 Apr 2025 13:10:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--HjK4nNyJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%2540duckdb%252Fnode-api%2520%25E3%2581%25A7%2520sqlite%2520%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2581%25AE%25E5%2586%2585%25E5%25AE%25B9%25E3%2582%2592%2520duckdb%2520%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2581%25AB%25E3%2581%25BE%25E3%2582%258B%25E3%2581%25BE%25E3%2582%258B%25E3%2582%25B3%25E3%2583%2594%25E3%2583%25BC%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2595%25E3%2581%258B%25E3%2582%2582%25E3%2581%25A8%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RjODBjNjY2MzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>さかもと</dc:creator></item><item><title><![CDATA[react-hook-formの使い方]]></title><description><![CDATA[
+ react-hook-form とは
+react-hook-form の React（NextJS） で作成するアプリケーションのフォーム処理を簡素化し、効率的に管理するためのライブラリです。主に次のような特徴があります。
+
+TypeScript との相性が良い
+不要な再レンダリングを最小限に抑えるのでパフォーマンスに優れている
+バリデーションの設定が簡単
+
+
+ ダウンロード
+最初に next.js をダウンロードします。
+npm create-next-app
+次に react-hook-form をインストールします。
+npm install react-hook-form
+
+ ...]]></description><link>https://zenn.dev/ryo0427/articles/94be0b993f3bcc</link><guid isPermaLink="true">https://zenn.dev/ryo0427/articles/94be0b993f3bcc</guid><pubDate>Fri, 04 Apr 2025 09:08:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ciuD4kFQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:react-hook-form%25E3%2581%25AE%25E4%25BD%25BF%25E3%2581%2584%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ryo0427%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q0MjhjNTJhYjcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ryo0427</dc:creator></item><item><title><![CDATA[Astro初心者日記1]]></title><description><![CDATA[こんにちは！普段フロントエンド開発をしているまるです🙌
+4月になって桜と花粉症の季節になってきましたね〜🌸
+最近Astroを勉強しているので、自分の勉強ノートを兼ねて「SSGって何？？」ってなっているくらいの初心者の方にもわかるように内容をお伝えできればなって思ってます。
+
+
+ そもそもAstroってなんだ
+Astroというのは一言で言うと、「静的サイト生成を行うためのフレームワーク」です。
+静的と出てくるのであればもちろん動的サイトも存在します。
+静的・動的サイトの違いとそれぞれのメリット
+Chat GPTさんにそれぞれの概要・メリット・使われる例を聞いてみました。
+静的サイト
+　あら...]]></description><link>https://zenn.dev/maru_contents/articles/astro_with_rendaring</link><guid isPermaLink="true">https://zenn.dev/maru_contents/articles/astro_with_rendaring</guid><pubDate>Fri, 04 Apr 2025 09:03:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--CARgmgfn--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Astro%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E6%2597%25A5%25E8%25A8%25981%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:maru%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQyZDVlZjUxOGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>maru</dc:creator></item><item><title><![CDATA[Next.js × Google Maps Platform でマップアプリを作成する]]></title><description><![CDATA[
+ はじめに
+こんにちは、クラウドエース第四開発部の安田です。
+今回案件で利用する機会があったので、Next.js で Google Maps Platform を使ってマップアプリを作成する方法を初学者向けにまとめてみます。
+たくさんのサービスがあるけど、実際にWebサイトに組み込むときはどのサービスを利用すればいいの？ React で利用するときにはどうすればいい？
+などなど迷っている方がいれば参考にしてみてください！
+
+ Google Maps Platform について
+
+ウェブページやアプリケーションに Google マップを組み込んだり、Google マップからデータを取得し...]]></description><link>https://zenn.dev/cloud_ace/articles/6cbce23da57bde</link><guid isPermaLink="true">https://zenn.dev/cloud_ace/articles/6cbce23da57bde</guid><pubDate>Fri, 04 Apr 2025 06:53:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--37CMcP_0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Next.js%2520%25C3%2597%2520Google%2520Maps%2520Platform%2520%25E3%2581%25A7%25E3%2583%259E%25E3%2583%2583%25E3%2583%2597%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25A6%25E3%2583%2589%25E3%2582%25A8%25E3%2583%25BC%25E3%2582%25B9%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE2OGMwYmM4MTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>クラウドエース株式会社</dc:creator></item><item><title><![CDATA[型の絞りこみ~型ガード編②~【個人学習まとめ】]]></title><description><![CDATA[
+ 型ガード
+前回までの記事では、型ガードの種類をいくつか確認しました。
+今回の記事で引き続き型ガードについて学習していきましょう。
+
+ タグ付きユニオン型による絞り込み
+複数のオブジェクトから作成されたユニオン型(ことなる複数の型を組み合わせて新しい型を定義する)があるとき、各メンバーのプロパティに共通の識別子を与え、その識別子でオブジェクト型を判別することができます。
+各メンバーが共通のタグをもつユニオン型型のことをタグ付きユニオン型という。
+ユニオン型(discriminated union)
+それでは実際のコードから確認してみましょう。
+前回の記事でin演算子の確認のために利用し...]]></description><link>https://zenn.dev/o0rororo0o/articles/d80394d59961c4</link><guid isPermaLink="true">https://zenn.dev/o0rororo0o/articles/d80394d59961c4</guid><pubDate>Fri, 04 Apr 2025 06:07:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--zxXNpyBL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%259E%258B%25E3%2581%25AE%25E7%25B5%259E%25E3%2582%258A%25E3%2581%2593%25E3%2581%25BF%7E%25E5%259E%258B%25E3%2582%25AC%25E3%2583%25BC%25E3%2583%2589%25E7%25B7%25A8%25E2%2591%25A1%7E%25E3%2580%2590%25E5%2580%258B%25E4%25BA%25BA%25E5%25AD%25A6%25E7%25BF%2592%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%258D%25E3%2582%258D%25E3%2582%258D%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ2ZTZjOWM4YmMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ろろろ</dc:creator></item><item><title><![CDATA[Promise.all()の並列実行数を制限する関数]]></title><description><![CDATA[function createParallelExecutor(throttle: number) {
+  let _index = 0;
+  const processingSet: Set&lt;number&gt; = new Set();
+
+  return function executeWithLimit&lt;T&gt;(callback: () =&gt; Promise&lt;T&gt;): Promise&lt;T&gt; {
+    const index = _index++;
+
+    return new Promise((resolve, reject) =...]]></description><link>https://zenn.dev/masashi_machida/articles/5bb6ce97ac3d80</link><guid isPermaLink="true">https://zenn.dev/masashi_machida/articles/5bb6ce97ac3d80</guid><pubDate>Fri, 04 Apr 2025 06:05:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--OvM0XB_0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Promise.all%2528%2529%25E3%2581%25AE%25E4%25B8%25A6%25E5%2588%2597%25E5%25AE%259F%25E8%25A1%258C%25E6%2595%25B0%25E3%2582%2592%25E5%2588%25B6%25E9%2599%2590%25E3%2581%2599%25E3%2582%258B%25E9%2596%25A2%25E6%2595%25B0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Masashi%2520MACHIDA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzgyMmZjZjRmZTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Masashi MACHIDA</dc:creator></item><item><title><![CDATA[超直感的なバリデーション?ArkType入門]]></title><description><![CDATA[こんにちは、フォルシア株式会社エンジニアの籏野です。
+今回はzodやvalibotと同じバリデーション用ライブラリであるArkTypeについて紹介したいと思います。
+
+ ArkTypeの特徴
+ArkTypeの大きな特徴としては以下の点が挙げられます。
+
+TypeScriptの型記法に似た記法によりバリデーション定義が可能
+実行時にはzodの100倍高速に動作し、エディター上でも高パフォーマンスな補完を提供する
+
+Standard Schemaへの対応
+
+※Standard Schemaはzodやvalibotといったバリデーションライブラリの共通インターフェース仕様です。
+
+
+
+本記事で...]]></description><link>https://zenn.dev/forcia_tech/articles/202504_hatano_arktype</link><guid isPermaLink="true">https://zenn.dev/forcia_tech/articles/202504_hatano_arktype</guid><pubDate>Fri, 04 Apr 2025 04:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--c8RKj4iO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%25B6%2585%25E7%259B%25B4%25E6%2584%259F%25E7%259A%2584%25E3%2581%25AA%25E3%2583%2590%25E3%2583%25AA%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%253FArkType%25E5%2585%25A5%25E9%2596%2580%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:FORCIA%2520Tech%2520Blog%2520%25E9%2581%258B...%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2QyMDIwOGYzMDMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:FORCIA%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NkZmRkZTQ5MGUuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>FORCIA Tech Blog 運営チーム</dc:creator></item><item><title><![CDATA[React SPAでWeb APIを扱うときのA Clean Architecture]]></title><description><![CDATA[
+ はじめに
+ReactでWeb APIアクセスを実装するときにどのようにしていますか？直接コンポーネントに（useEffectなどに）fetchするコードを書いたり（・・・することはあまり多くなさそう）、libディレクトリに fetchPosts のような関数を用意してAPIを呼び出したり、hookとしてusePostsを用意ししてその中でAPIを呼ぶコードを書いていたりするでしょうか。
+この記事ではhookの下に2層(UseCase層、Interactor層)追加した、Clean Architecture的なAPIアクセスを実現する方法について述べます。
+この記事ではある程度の数以上...]]></description><link>https://zenn.dev/2_daiki_ando/articles/35c517d178198d</link><guid isPermaLink="true">https://zenn.dev/2_daiki_ando/articles/35c517d178198d</guid><pubDate>Thu, 03 Apr 2025 15:54:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--pvlbv8ld--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%2520SPA%25E3%2581%25A7Web%2520API%25E3%2582%2592%25E6%2589%25B1%25E3%2581%2586%25E3%2581%25A8%25E3%2581%258D%25E3%2581%25AEA%2520Clean%2520Architecture%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Ando%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSUVEME9QU3pVcHpaQlY0VzMzWXRsZkFMTEdoR0lzOVNBaVJRaG05YkhRVVFJbWtnPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Ando</dc:creator></item><item><title><![CDATA[clasp + TypeScript のGASローカル開発環境構築]]></title><description><![CDATA[npm, clasp のインストール、Googleへのログインは済んでいることを前提とする。
+
+
+github リポジトリのクローン
+git clone "repository_url"
+
+
+GAS プロジェクトのクローン
+clasp clone “SCRIPT_ID”
+
+
+npm プロジェクトの初期化
+npm init -y
+
+
+clasp, TypeScript のローカルインストール
+npm install --save-dev typescript prettier @types/google-apps-script
+
+
+TypeScript の設定
+5-1. tsconfig....]]></description><link>https://zenn.dev/mum26/articles/4f7ef24218ead0</link><guid isPermaLink="true">https://zenn.dev/mum26/articles/4f7ef24218ead0</guid><pubDate>Thu, 03 Apr 2025 14:24:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--l6ICxCrQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:clasp%2520%252B%2520TypeScript%2520%25E3%2581%25AEGAS%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25AB%25E3%2583%25AB%25E9%2596%258B%25E7%2599%25BA%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%258D%25E3%2581%25B6%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSkhqVGx0SGJLUVpadllrTWpWNFplbnd4X3l6Nzl5aDBmektjYkhPZDY3bWxfbUxnPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ろぶ</dc:creator></item><item><title><![CDATA[型の絞りこみ~型ガード編①~【個人学習まとめ】]]></title><description><![CDATA[
+ 型ガード
+前回の記事で型の絞り込みが 2 種類あることを学習しました。
+その 2 種類のうち、型ガードについて今回の記事から学習しましょう。
+
+ 等価性による絞り込み
+型を絞り込むために、等価演算子(===、!==、==、!=)を利用することができます。
+if 文や switch 文を使った利用方法を確認してみましょう。
+let test1 = Math.random() &gt; 0.5 ? 1 : "HELLO";
+
+if (test1 === "HELLO") {
+  console.log(test1.toLowerCase());
+  → hello
+}
+
+test1.su...]]></description><link>https://zenn.dev/o0rororo0o/articles/7e4564553b06cf</link><guid isPermaLink="true">https://zenn.dev/o0rororo0o/articles/7e4564553b06cf</guid><pubDate>Thu, 03 Apr 2025 13:22:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--z-p5eUQb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%259E%258B%25E3%2581%25AE%25E7%25B5%259E%25E3%2582%258A%25E3%2581%2593%25E3%2581%25BF%7E%25E5%259E%258B%25E3%2582%25AC%25E3%2583%25BC%25E3%2583%2589%25E7%25B7%25A8%25E2%2591%25A0%7E%25E3%2580%2590%25E5%2580%258B%25E4%25BA%25BA%25E5%25AD%25A6%25E7%25BF%2592%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%258D%25E3%2582%258D%25E3%2582%258D%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ2ZTZjOWM4YmMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ろろろ</dc:creator></item><item><title><![CDATA[Church Encoding: numberやbooleanを関数だけで表現しよう！]]></title><description><![CDATA[Church Encoding は、λ計算（Lambda Calculus）由来のテクニックで、Number、Boolean、データ構造を関数だけで表現できる驚きの手法です！つまり、プリミティブな型を一切使わずに計算ができるんです。
+この考え方は関数型プログラミングの基礎となっており、「計算とは何か？」を純粋に示してくれます。今回は、NumberとBooleanを関数のみで表す方法を一緒に見てみましょう！
+
+ Church Numerals: 数を関数でカウントする
+もし、Numberがただの値ではなく、「何回何かをするか」を決める関数だったら…？それがChurch Numeralsの考...]]></description><link>https://zenn.dev/socialplus/articles/3498a491bf977b</link><guid isPermaLink="true">https://zenn.dev/socialplus/articles/3498a491bf977b</guid><pubDate>Thu, 03 Apr 2025 09:57:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--D9tttVLn--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Church%2520Encoding%253A%2520number%25E3%2582%2584boolean%25E3%2582%2592%25E9%2596%25A2%25E6%2595%25B0%25E3%2581%25A0%25E3%2581%2591%25E3%2581%25A7%25E8%25A1%25A8%25E7%258F%25BE%25E3%2581%2597%25E3%2582%2588%25E3%2581%2586%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:kailma%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I4Mjg2YmNjMDEuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Social%2520PLUS%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSXNXRVZFaTBmMDM2VUhvckNoRzF4UkotZzdtaFpJek8xUkdWcDRjcTBlPXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kailma</dc:creator></item><item><title><![CDATA[型の絞りこみ【個人学習まとめ】]]></title><description><![CDATA[
+ 型による絞り込み
+特定の条件において、変数の型をより具体的な型へ絞り込むことができます。
+TypeScript の型チェッカーに変数の型がもともと指定されていた型や推論された型よりも狭い範囲であることを伝えることができます。
+このことを型の絞り込み(Narrowing)と呼び、
+
+代入による絞り込み
+型ガード
+
+の 2 種類があります。
+Narrowing
+
+ 代入による型の絞り込み
+変数に値を代入する時に、代入される型の値に基づいて変数の型を絞り込むことができます。
+実際のコードで確認してみましょう。
+let x = Math.random() &gt; 0.1 ? 1 : "こん...]]></description><link>https://zenn.dev/o0rororo0o/articles/9d4f06e13d7b83</link><guid isPermaLink="true">https://zenn.dev/o0rororo0o/articles/9d4f06e13d7b83</guid><pubDate>Thu, 03 Apr 2025 08:09:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fAvFj671--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%259E%258B%25E3%2581%25AE%25E7%25B5%259E%25E3%2582%258A%25E3%2581%2593%25E3%2581%25BF%25E3%2580%2590%25E5%2580%258B%25E4%25BA%25BA%25E5%25AD%25A6%25E7%25BF%2592%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%258D%25E3%2582%258D%25E3%2582%258D%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ2ZTZjOWM4YmMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ろろろ</dc:creator></item><item><title><![CDATA[TypeScript/React/Next.jsおすすめ学習資料のご紹介]]></title><description><![CDATA[
+ はじめに
+今回は、現代のWBE開発で最も使用されている言語/フレームワークであるTypeScript/React/Next.jsについて学ぶために、私がおすすめしたい学習資料についてご紹介したいと思います。
+非常に有用で、初心者から中級者、上級者まで幅広い層に向けた内容が含まれていますので、時間を見つけて是非読んでみてください。
+※TypeScript/React/Next.jsって何？という方のために、簡単に以下にそれぞれご説明いたします。
+
+
+TypeScript
+Microsoftが開発した、JavaScriptを拡張したプログラミング言語。JavaScriptに比べ、型安全性...]]></description><link>https://zenn.dev/acntechjp/articles/e8e54ee201f77e</link><guid isPermaLink="true">https://zenn.dev/acntechjp/articles/e8e54ee201f77e</guid><pubDate>Thu, 03 Apr 2025 07:25:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lsOlbDwn--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%252FReact%252FNext.js%25E3%2581%258A%25E3%2581%2599%25E3%2581%2599%25E3%2582%2581%25E5%25AD%25A6%25E7%25BF%2592%25E8%25B3%2587%25E6%2596%2599%25E3%2581%25AE%25E3%2581%2594%25E7%25B4%25B9%25E4%25BB%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Yuuichi%2520Eguchi%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U2ZDA4MDY5ODcuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Accenture%2520Japan%2520%2528%25E6%259C%2589%25E5%25BF%2597%2529%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E3Y2NiYzY2YjIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yuuichi Eguchi</dc:creator></item><item><title><![CDATA[Firebase Functions Gen 2 で Hono を動かす]]></title><description><![CDATA[
+ はじめに
+Cloud Functions for Firebase で Hono を使おうとして調べると、以下のような先駆者の記事が出てくる。
+https://zenn.dev/singularity/articles/firebase-hono
+https://zenn.dev/kazuph/articles/ee51d6cf08d620
+先駆者の記事は大変参考になるが、一方ここで紹介されている記述方法は 第1世代の記述であり、以下のように公式で推奨している第2世代の記述ではない。
+https://firebase.google.com/docs/functions/version...]]></description><link>https://zenn.dev/takanari_dev/articles/2025-03-29-firebase-functions-gen2-with-hono</link><guid isPermaLink="true">https://zenn.dev/takanari_dev/articles/2025-03-29-firebase-functions-gen2-with-hono</guid><pubDate>Thu, 03 Apr 2025 04:40:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--HmjqE6An--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Firebase%2520Functions%2520Gen%25202%2520%25E3%2581%25A7%2520Hono%2520%25E3%2582%2592%25E5%258B%2595%25E3%2581%258B%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:takanari%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNmNDg2NWU2NGUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takanari</dc:creator></item></channel></rss>
