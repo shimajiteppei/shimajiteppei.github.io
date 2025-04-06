@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「TypeScript」のフィード]]></title><description><![CDATA[Zennのトピック「TypeScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/typescript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/f13e758fdb.png</url><title>Zennの「TypeScript」のフィード</title><link>https://zenn.dev/topics/typescript</link></image><generator>zenn.dev</generator><lastBuildDate>Sun, 06 Apr 2025 12:03:53 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/typescript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Supabase ✖️ Next.jsで個人開発してみた話]]></title><description><![CDATA[
+ はじめに
+都内でフロントエンドエンジニアをしている hirotiia です！😊
+個人で「カジ活 〜家庭内で使うタスク管理アプリ」を作ってみたので、開発の道のりをシェアしていきます。
+個人開発に興味はあるけど、何を作ればいいか迷っている方の参考になれば嬉しいです。
+使った技術やこだわりポイントを気軽に紹介していくので、最後までお付き合いください！
+https://github.com/hirotiia/kajikatsu
+https://kajikatsu.vercel.app/
+
+ どんなサービス？
+カジ活は、家族やパートナーと一緒に家事の分担を見える化できるTODOアプリです！
+
+...]]></description><link>https://zenn.dev/hirotiia/articles/0f80d48b7d6919</link><guid isPermaLink="true">https://zenn.dev/hirotiia/articles/0f80d48b7d6919</guid><pubDate>Sun, 06 Apr 2025 10:55:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fCpgKiS2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Supabase%2520%2520%2520Next.js%25E3%2581%25A7%25E5%2580%258B%25E4%25BA%25BA%25E9%2596%258B%25E7%2599%25BA%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hirotiia%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSk41MnN1c3Q1S0trNmhMZ01xMDBGZ2h6V1phWmo2WGdTWklZT1lIQUJwU3lWMTU5cz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hirotiia</dc:creator></item><item><title><![CDATA[同期と非同期]]></title><description><![CDATA[
+ はじめに
+この記事は、プログラミング初心者を対象に、「同期処理」と「非同期処理」の基本をわかりやすく解説する。
+両者の概念や違いを理解すると、プログラムの挙動をイメージしやすくなり、開発の効率やコードの質を高める助けになる。
+
+ 同期処理（Synchronous）とは
+
+ 定義
+ある処理が終わるまで次の処理が始まらない方式のこと。
+コードを上から順番に実行していき、前の処理が完了するまで次の処理に進まない。
+
+ メリット
+
+
+処理の流れがわかりやすい
+コードが直列的に実行されるため、初心者でも読みやすく理解しやすい構造になりやすい。
+
+
+デバッグしやすい
+順番に処理が進むので、バグが...]]></description><link>https://zenn.dev/takumi_machino/articles/synchronous-and-asynchronous</link><guid isPermaLink="true">https://zenn.dev/takumi_machino/articles/synchronous-and-asynchronous</guid><pubDate>Sun, 06 Apr 2025 09:08:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vSfYR8EQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2590%258C%25E6%259C%259F%25E3%2581%25A8%25E9%259D%259E%25E5%2590%258C%25E6%259C%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:takumi%2520machino%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE0MTRhMTA5ZjQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takumi machino</dc:creator></item><item><title><![CDATA[chrono: 自然言語の日時をパースするNode.jsパッケージ]]></title><description><![CDATA[「昨日」「今夜」「令和元年5月1日」「12月31日」「１９９６年５月３日」
+「Friday at 4pm」「June 10th, 2018」「6/10/2018」「tomorrow from 10 to 11 AM」
+一定のフォーマットに沿っていない日付のテキストをDate型にパースしたいことはありませんか？
+上記のような自然言語の日時をパースするchrono というNode.jsパッケージを紹介します。
+https://github.com/wanasit/chrono
+https://www.npmjs.com/package/chrono-node
+
+ 前提条件
+今回、動作確認した...]]></description><link>https://zenn.dev/koji520/articles/ced5cfecb6cb34</link><guid isPermaLink="true">https://zenn.dev/koji520/articles/ced5cfecb6cb34</guid><pubDate>Sun, 06 Apr 2025 07:48:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--YR2nrpXX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:chrono%253A%2520%25E8%2587%25AA%25E7%2584%25B6%25E8%25A8%2580%25E8%25AA%259E%25E3%2581%25AE%25E6%2597%25A5%25E6%2599%2582%25E3%2582%2592%25E3%2583%2591%25E3%2583%25BC%25E3%2582%25B9%25E3%2581%2599%25E3%2582%258BNode.js%25E3%2583%2591%25E3%2583%2583%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:520%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NmMDZmOWY0NzYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>520</dc:creator></item><item><title><![CDATA[MCPサーバーを自作する中でつまずいたポイント]]></title><description><![CDATA[こんにちは。ダイの大冒険ガチ勢のbun913と申します。
+みなさんはMCPという外部システムやDBとの連携などを標準化するプロトコルをご存知ですか？
+個人的に世界一わかりやすい資料は以下の記事でしたので、ぜひご一読ください。
+https://dev.classmethod.jp/articles/shuntaka-mcp-study/
+前回の記事で、TestRailというサービスを自然言語でいい感じに操作できるようにMCPサーバーを自作しました。
+一言で目的を申し上げると「TestRailにテストケースや詳細なステップを記録しているため、Playwright-mcpなどと連携して、自然言...]]></description><link>https://zenn.dev/moneyforward/articles/6deaa22428a109</link><guid isPermaLink="true">https://zenn.dev/moneyforward/articles/6deaa22428a109</guid><pubDate>Sun, 06 Apr 2025 07:31:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hdZn8N-d--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:MCP%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2582%2592%25E8%2587%25AA%25E4%25BD%259C%25E3%2581%2599%25E3%2582%258B%25E4%25B8%25AD%25E3%2581%25A7%25E3%2581%25A4%25E3%2581%25BE%25E3%2581%259A%25E3%2581%2584%25E3%2581%259F%25E3%2583%259D%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:bun913%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzUwOTQ4MTI2ZjguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Money%2520Forward%2520Developers%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzcxNGVhMDEyMDQuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>bun913</dc:creator></item><item><title><![CDATA[ESLintで新規コードのみにルールを適応する（Bulk Suppressions）]]></title><description><![CDATA[
+ はじめに
+2025/04/05にESLint v9.24.0が公開されました。
+v9.24.0に含まれるBulk Suppressions機能が便利なので紹介します。
+この機能を使うと「プロジェクトの途中からこのルールを追加したいのだけど、既存コードにエラーが多すぎて追加できない」というシーンで、既存コードではエラーを抑制し新しいコードのみエラーを出力することが可能となります。
+つまり、新たにルールを追加する際に既存コードでのエラー件数を気にする必要がなくなり、ルール追加のハードルが下げられます。
+特に、既存コードを直して回るのが難しい大きめのプロジェクトでは恩恵を受けやすいかと思い...]]></description><link>https://zenn.dev/hmochizuki/articles/52c0647d65225a</link><guid isPermaLink="true">https://zenn.dev/hmochizuki/articles/52c0647d65225a</guid><pubDate>Sun, 06 Apr 2025 04:44:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--DmIQ2UpX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ESLint%25E3%2581%25A7%25E6%2596%25B0%25E8%25A6%258F%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2581%25AE%25E3%2581%25BF%25E3%2581%25AB%25E3%2583%25AB%25E3%2583%25BC%25E3%2583%25AB%25E3%2582%2592%25E9%2581%25A9%25E5%25BF%259C%25E3%2581%2599%25E3%2582%258B%25EF%25BC%2588Bulk%2520Suppressions%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hi_mochy%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2YxM2UxOTdiZDcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hi_mochy</dc:creator></item><item><title><![CDATA[125. Valid Palindrome]]></title><description><![CDATA[フレーズが回文であるとは、すべての大文字を小文字に変換し、英数字以外の文字をすべて削除した後に、前から読んでも後ろから読んでも同じになる場合を指します。英数字とは、アルファベットと数字を含みます。
+与えられた文字列 s が回文である場合は true を返し、そうでない場合は false を返します。
+
+
+ 例1:
+入力:
+s = "A man, a plan, a canal: Panama"
+出力:
+true
+説明:
+"amanaplanacanalpanama" は回文です。
+
+
+ 例2:
+入力:
+s = "race a car"
+出力:
+false
+説明:
+"raceacar" は...]]></description><link>https://zenn.dev/idapan/articles/6e8474a775d826</link><guid isPermaLink="true">https://zenn.dev/idapan/articles/6e8474a775d826</guid><pubDate>Sat, 05 Apr 2025 21:37:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BTSKeLRu--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_76:125.%2520Valid%2520Palindrome%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Keijiro%2520Ida%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2EwYTNmOGUyMGYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Keijiro Ida</dc:creator></item><item><title><![CDATA[ReactNative基礎中の基礎をキャッチアップして動かすまで]]></title><description><![CDATA[
+ 概要
+今回はReact Native の基礎中の基礎を学びながら、ひとまず何か動かすところまでを試してみたいと思います。
+https://reactnative.dev/docs/getting-started
+👆をベースにキャッチアップしていきたいと思います。
+
+ コアコンポーネントとネイティブコンポーネント
+
+
+
+ネイティブ コンポーネント
+
+Android および iOS と同じビューに基づいたコンポーネント
+カスタムして作ることも可能
+例えば &lt;View&gt; は Androidだと &lt;ViewGroup&gt; iOSだと &lt;UIView&gt; になる...]]></description><link>https://zenn.dev/slowhand/articles/541bb59117f919</link><guid isPermaLink="true">https://zenn.dev/slowhand/articles/541bb59117f919</guid><pubDate>Sat, 05 Apr 2025 19:12:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Ir3vbuj8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ReactNative%25E5%259F%25BA%25E7%25A4%258E%25E4%25B8%25AD%25E3%2581%25AE%25E5%259F%25BA%25E7%25A4%258E%25E3%2582%2592%25E3%2582%25AD%25E3%2583%25A3%25E3%2583%2583%25E3%2583%2581%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%25E3%2581%2597%25E3%2581%25A6%25E5%258B%2595%25E3%2581%258B%25E3%2581%2599%25E3%2581%25BE%25E3%2581%25A7%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:slowhand%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzEwY2YzMGUzMDAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>slowhand</dc:creator></item><item><title><![CDATA[型の絞りこみ~型ガード関数編~【個人学習まとめ】]]></title><description><![CDATA[
+ ユーザー定義の型ガード関数(型述語)
+
+ ユーザー定義の型ガード関数って？
+開発者が独自に関数を定義して、その関数に渡された値が特定の型であるかどうかをチェックすることができます。
+この関数のことをユーザー定義の型ガード関数と呼びます。
+型ガード関数
+ユーザー定義の型ガード関数を使わない型チェックとユーザー定義の型ガード関数を使った型チェックの両方から違いを確認してみましょう！
+
+ ユーザー定義の型ガード関数を使わない場合
+まずはユーザー定義の型ガード関数を使わない場合です。
+引数がnumber型かどうか判断する関数を準備します。typeof演算子を使用します。typeof演算子の戻...]]></description><link>https://zenn.dev/o0rororo0o/articles/64b198b1cafb9a</link><guid isPermaLink="true">https://zenn.dev/o0rororo0o/articles/64b198b1cafb9a</guid><pubDate>Sat, 05 Apr 2025 09:56:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1M1-7S6N--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%259E%258B%25E3%2581%25AE%25E7%25B5%259E%25E3%2582%258A%25E3%2581%2593%25E3%2581%25BF%7E%25E5%259E%258B%25E3%2582%25AC%25E3%2583%25BC%25E3%2583%2589%25E9%2596%25A2%25E6%2595%25B0%25E7%25B7%25A8%7E%25E3%2580%2590%25E5%2580%258B%25E4%25BA%25BA%25E5%25AD%25A6%25E7%25BF%2592%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%258D%25E3%2582%258D%25E3%2582%258D%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ2ZTZjOWM4YmMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ろろろ</dc:creator></item><item><title><![CDATA[Clipboard APIでJSオブジェクト丸見えでペーストしたくないしカスタムMIMEタイプを使いたい]]></title><description><![CDATA[
+ 問題
+ウェブアプリ上で内部的にはJavaScriptのオブジェクトを使っていることがよくあります。
+オブジェクト保ったままコピー＆ペーストしたいのもよくあります。
+たとえば:
+最近シーケンサのUIデザインとかをやらせていただいているVOICEVOXのノートは内部的にオブジェクトでコピー＆ペーストを実現しています。
+
+しかしオブジェクトなので普通の入力欄にペーストすると丸見えで残念なことになります。
+
+
+ 内部オブジェクトを見せたくない
+ClipboardAPIの書き込みにおいて
+
+
+text/htmlにオブジェクトを埋め込んでおく
+
+text/plainに空文字などを入れておく
+
+た...]]></description><link>https://zenn.dev/romot/articles/e6a12ae2c67fea</link><guid isPermaLink="true">https://zenn.dev/romot/articles/e6a12ae2c67fea</guid><pubDate>Sat, 05 Apr 2025 09:51:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--LJ5LDPtl--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Clipboard%2520API%25E3%2581%25A7JS%25E3%2582%25AA%25E3%2583%2596%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E4%25B8%25B8%25E8%25A6%258B%25E3%2581%2588%25E3%2581%25A7%25E3%2583%259A%25E3%2583%25BC%25E3%2582%25B9%25E3%2583%2588%25E3%2581%2597%25E3%2581%259F%25E3%2581%258F%25E3%2581%25AA%25E3%2581%2584%25E3%2581%2597%25E3%2582%25AB%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%25A0MIME%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%2597%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2584%25E3%2581%259F%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Romot%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZiY2U4ZmE1OGEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Romot</dc:creator></item><item><title><![CDATA[[Angular]CSSクラスを動的にセットする方法まとめ]]></title><description><![CDATA[Angularでは、要素にCSSクラスを動的に適用するために、classバインディングとngClassディレクティブの2つの方法が提供されています。
+それぞれの使い方や２つの違いについて、ネット上の情報は古かったり一部しか説明されていなかったりするものが多かったため自分用のメモも兼ねてまとめてみました。
+
+ classバインディングの使用方法
+classバインディングの3つの使用方法を説明します。
+1つの要素に対しこれらを複数組み合わせることも可能です。
+
+ 1.特定の一つのクラスをboolean変数で制御
+&lt;!-- isActiveがtrueの場合にactiveクラスを適用 --...]]></description><link>https://zenn.dev/engibeer/articles/cc2fcc09fb8959</link><guid isPermaLink="true">https://zenn.dev/engibeer/articles/cc2fcc09fb8959</guid><pubDate>Sat, 05 Apr 2025 08:17:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ynFMDs10--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BAngular%255DCSS%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25B9%25E3%2582%2592%25E5%258B%2595%25E7%259A%2584%25E3%2581%25AB%25E3%2582%25BB%25E3%2583%2583%25E3%2583%2588%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:EngiBeer%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdlZGNjYTFiZDEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>EngiBeer</dc:creator></item><item><title><![CDATA[React + Firebase 日々トラッカーアプリ開発]]></title><description><![CDATA[Reactのアプリ開発のチュートリアルです。
+日々トラッカーと言うタイトルにしてますが、日々のポジティブ、ネガティブな感情を記録するアプリをチュートリアル的に開発していきます。
+カレンダーイメージで、その日に感じたポジティブ・ネガティブな気持ちをチェックボックス形式で簡単に記録出来る仕組みを目指しました。また、メモ欄も設け、特に残しておきたい内容を記載出来るようにしています。
+開発プラットフォームはReact(v19) + TypeScript + Firebase、UIはMUIです。
+データの統計をわかりやすくビジュアライズするレポート機能も実装します。]]></description><link>https://zenn.dev/amayann/books/e53053d79e1f56</link><guid isPermaLink="true">https://zenn.dev/amayann/books/e53053d79e1f56</guid><pubDate>Sat, 05 Apr 2025 03:42:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ryxJnp9X--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci85YjFhZWRhYTVmLmpwZWc=%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>bauhaus</dc:creator></item><item><title><![CDATA[【Next.js(v15)】エラー解決法：Type '***' does not satisfy the constraint]]></title><description><![CDATA[
+ 【Next.js 15】エラー解決法：Type error: Type '***' does not satisfy the constraint
+Next.js(v15)及び TypeScript でアプリを開発しているのですが、ビルドする際に「Type error: Type '***' does not satisfy the constraint」というエラーによく遭遇しました。同じようなエラーが出てしまった方向けに、解決方法を解説します。
+
+ Next.js 15 とは？
+Next.js は、React をベースとした Web アプリケーションフレームワークです。サーバーサ...]]></description><link>https://zenn.dev/hayatech/articles/nextjs15-type-error-pageprops</link><guid isPermaLink="true">https://zenn.dev/hayatech/articles/nextjs15-type-error-pageprops</guid><pubDate>Sat, 05 Apr 2025 03:00:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3iWi-i55--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Next.js%2528v15%2529%25E3%2580%2591%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E8%25A7%25A3%25E6%25B1%25BA%25E6%25B3%2595%25EF%25BC%259AType%2520%2527%252A%252A%252A%2527%2520does%2520not%2520satisfy%2520the%2520cons...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:HayaTech%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I2OTUyMWE4YzYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>HayaTech</dc:creator></item><item><title><![CDATA[ESM・CJS両対応のライブラリをTypeScriptから作成]]></title><description><![CDATA[本記事では、TypeScriptで書かれたソースコードを、型定義ファイルを含む、ECMAScript module (ESM)とCommonJS module (CJS)の両方に対応したnpmパッケージ (dual package) にバンドルする、以下のツールを使用したプロジェクトの構築手順をまとめます。
+
+Package Manager: pnpm
+
+Bundler: Rollup
+
+Linter: ESLint
+
+Formatter: Prettier
+
+Testing: ts-jest
+
+
+
+ TL;DR
+以下のGitHubリポジトリのプロジェクトをテンプレートとして、packa...]]></description><link>https://zenn.dev/simayosi/articles/rollup-typescript-library</link><guid isPermaLink="true">https://zenn.dev/simayosi/articles/rollup-typescript-library</guid><pubDate>Fri, 04 Apr 2025 14:09:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--LqmqmydP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ESM%25E3%2583%25BBCJS%25E4%25B8%25A1%25E5%25AF%25BE%25E5%25BF%259C%25E3%2581%25AE%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%25E3%2582%2592TypeScript%25E3%2581%258B%25E3%2582%2589%25E4%25BD%259C%25E6%2588%2590%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:simayosi%2540systemiz.jp%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUl0YnZtbTVaYm5XazEtUnMwdEV3U3FjWjV3cldpb0NwWmJNMWxnZDhpekU9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>simayosi@systemiz.jp</dc:creator></item><item><title><![CDATA[@duckdb/node-api で sqlite ファイルの内容を duckdb ファイルにまるまるコピーする]]></title><description><![CDATA[nodejs 用の新しいクライアント(@duckdb/node-api)を使うとこんな実装になった。
+import { DuckDBInstance } from "@duckdb/node-api";
+
+export async function convertSqliteToDuckDB(
+  sqliteFilePath: string,
+  duckdbFilePath: string,
+) {
+  const duckdb = await DuckDBInstance.create(duckdbFilePath);
+  const conn = await duckdb.con...]]></description><link>https://zenn.dev/sakamoto_akira_/articles/9375d3b722435b</link><guid isPermaLink="true">https://zenn.dev/sakamoto_akira_/articles/9375d3b722435b</guid><pubDate>Fri, 04 Apr 2025 13:10:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--HjK4nNyJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%2540duckdb%252Fnode-api%2520%25E3%2581%25A7%2520sqlite%2520%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2581%25AE%25E5%2586%2585%25E5%25AE%25B9%25E3%2582%2592%2520duckdb%2520%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2581%25AB%25E3%2581%25BE%25E3%2582%258B%25E3%2581%25BE%25E3%2582%258B%25E3%2582%25B3%25E3%2583%2594%25E3%2583%25BC%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2595%25E3%2581%258B%25E3%2582%2582%25E3%2581%25A8%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RjODBjNjY2MzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>さかもと</dc:creator></item><item><title><![CDATA[react-hook-formの使い方]]></title><description><![CDATA[
+ react-hook-form とは
+react-hook-form の React（NextJS） で作成するアプリケーションのフォーム処理を簡素化し、効率的に管理するためのライブラリです。主に次のような特徴があります。
+
+TypeScript との相性が良い
+不要な再レンダリングを最小限に抑えるのでパフォーマンスに優れている
+バリデーションの設定が簡単
+
+
+ ダウンロード
+最初に next.js をダウンロードします。
+npm create-next-app
+次に react-hook-form をインストールします。
+npm install react-hook-form
+
+ ...]]></description><link>https://zenn.dev/ryo0427/articles/94be0b993f3bcc</link><guid isPermaLink="true">https://zenn.dev/ryo0427/articles/94be0b993f3bcc</guid><pubDate>Fri, 04 Apr 2025 09:08:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ciuD4kFQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:react-hook-form%25E3%2581%25AE%25E4%25BD%25BF%25E3%2581%2584%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ryo0427%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q0MjhjNTJhYjcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ryo0427</dc:creator></item><item><title><![CDATA[Astro初心者日記1]]></title><description><![CDATA[こんにちは！普段フロントエンド開発をしているまるです🙌
+4月になって桜と花粉症の季節になってきましたね〜🌸
+最近Astroを勉強しているので、自分の勉強ノートを兼ねて「SSGって何？？」ってなっているくらいの初心者の方にもわかるように内容をお伝えできればなって思ってます。
+
+
+ そもそもAstroってなんだ
+Astroというのは一言で言うと、「静的サイト生成を行うためのフレームワーク」です。
+静的と出てくるのであればもちろん動的サイトも存在します。
+静的・動的サイトの違いとそれぞれのメリット
+Chat GPTさんにそれぞれの概要・メリット・使われる例を聞いてみました。
+静的サイト
+　あら...]]></description><link>https://zenn.dev/maru_contents/articles/astro_with_rendaring</link><guid isPermaLink="true">https://zenn.dev/maru_contents/articles/astro_with_rendaring</guid><pubDate>Fri, 04 Apr 2025 09:03:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--CARgmgfn--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Astro%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E6%2597%25A5%25E8%25A8%25981%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:maru%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQyZDVlZjUxOGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>maru</dc:creator></item><item><title><![CDATA[Next.js × Google Maps Platform でマップアプリを作成する]]></title><description><![CDATA[
+ はじめに
+こんにちは、クラウドエース第四開発部の安田です。
+今回案件で利用する機会があったので、Next.js で Google Maps Platform を使ってマップアプリを作成する方法を初学者向けにまとめてみます。
+たくさんのサービスがあるけど、実際にWebサイトに組み込むときはどのサービスを利用すればいいの？ React で利用するときにはどうすればいい？
+などなど迷っている方がいれば参考にしてみてください！
+
+ Google Maps Platform について
+
+ウェブページやアプリケーションに Google マップを組み込んだり、Google マップからデータを取得し...]]></description><link>https://zenn.dev/cloud_ace/articles/6cbce23da57bde</link><guid isPermaLink="true">https://zenn.dev/cloud_ace/articles/6cbce23da57bde</guid><pubDate>Fri, 04 Apr 2025 06:53:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--37CMcP_0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Next.js%2520%25C3%2597%2520Google%2520Maps%2520Platform%2520%25E3%2581%25A7%25E3%2583%259E%25E3%2583%2583%25E3%2583%2597%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25A6%25E3%2583%2589%25E3%2582%25A8%25E3%2583%25BC%25E3%2582%25B9%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE2OGMwYmM4MTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>クラウドエース株式会社</dc:creator></item><item><title><![CDATA[型の絞りこみ~型ガード編②~【個人学習まとめ】]]></title><description><![CDATA[
+ 型ガード
+前回までの記事では、型ガードの種類をいくつか確認しました。
+今回の記事で引き続き型ガードについて学習していきましょう。
+
+ タグ付きユニオン型による絞り込み
+複数のオブジェクトから作成されたユニオン型(ことなる複数の型を組み合わせて新しい型を定義する)があるとき、各メンバーのプロパティに共通の識別子を与え、その識別子でオブジェクト型を判別することができます。
+各メンバーが共通のタグをもつユニオン型型のことをタグ付きユニオン型という。
+ユニオン型(discriminated union)
+それでは実際のコードから確認してみましょう。
+前回の記事でin演算子の確認のために利用し...]]></description><link>https://zenn.dev/o0rororo0o/articles/d80394d59961c4</link><guid isPermaLink="true">https://zenn.dev/o0rororo0o/articles/d80394d59961c4</guid><pubDate>Fri, 04 Apr 2025 06:07:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--zxXNpyBL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%259E%258B%25E3%2581%25AE%25E7%25B5%259E%25E3%2582%258A%25E3%2581%2593%25E3%2581%25BF%7E%25E5%259E%258B%25E3%2582%25AC%25E3%2583%25BC%25E3%2583%2589%25E7%25B7%25A8%25E2%2591%25A1%7E%25E3%2580%2590%25E5%2580%258B%25E4%25BA%25BA%25E5%25AD%25A6%25E7%25BF%2592%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%258D%25E3%2582%258D%25E3%2582%258D%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ2ZTZjOWM4YmMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ろろろ</dc:creator></item><item><title><![CDATA[Promise.all()の並列実行数を制限する関数]]></title><description><![CDATA[function createParallelExecutor(throttle: number) {
+  let _index = 0;
+  const processingSet: Set&lt;number&gt; = new Set();
+
+  return function executeWithLimit&lt;T&gt;(callback: () =&gt; Promise&lt;T&gt;): Promise&lt;T&gt; {
+    const index = _index++;
+
+    return new Promise((resolve, reject) =...]]></description><link>https://zenn.dev/masashi_machida/articles/5bb6ce97ac3d80</link><guid isPermaLink="true">https://zenn.dev/masashi_machida/articles/5bb6ce97ac3d80</guid><pubDate>Fri, 04 Apr 2025 06:05:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--OvM0XB_0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Promise.all%2528%2529%25E3%2581%25AE%25E4%25B8%25A6%25E5%2588%2597%25E5%25AE%259F%25E8%25A1%258C%25E6%2595%25B0%25E3%2582%2592%25E5%2588%25B6%25E9%2599%2590%25E3%2581%2599%25E3%2582%258B%25E9%2596%25A2%25E6%2595%25B0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Masashi%2520MACHIDA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzgyMmZjZjRmZTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Masashi MACHIDA</dc:creator></item><item><title><![CDATA[超直感的なバリデーション?ArkType入門]]></title><description><![CDATA[こんにちは、フォルシア株式会社エンジニアの籏野です。
+今回はzodやvalibotと同じバリデーション用ライブラリであるArkTypeについて紹介したいと思います。
+
+ ArkTypeの特徴
+ArkTypeの大きな特徴としては以下の点が挙げられます。
+
+TypeScriptの型記法に似た記法によりバリデーション定義が可能
+実行時にはzodの100倍高速に動作し、エディター上でも高パフォーマンスな補完を提供する
+
+Standard Schemaへの対応
+
+※Standard Schemaはzodやvalibotといったバリデーションライブラリの共通インターフェース仕様です。
+
+
+
+本記事で...]]></description><link>https://zenn.dev/forcia_tech/articles/202504_hatano_arktype</link><guid isPermaLink="true">https://zenn.dev/forcia_tech/articles/202504_hatano_arktype</guid><pubDate>Fri, 04 Apr 2025 04:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--c8RKj4iO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%25B6%2585%25E7%259B%25B4%25E6%2584%259F%25E7%259A%2584%25E3%2581%25AA%25E3%2583%2590%25E3%2583%25AA%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%253FArkType%25E5%2585%25A5%25E9%2596%2580%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:FORCIA%2520Tech%2520Blog%2520%25E9%2581%258B...%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2QyMDIwOGYzMDMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:FORCIA%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NkZmRkZTQ5MGUuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>FORCIA Tech Blog 運営チーム</dc:creator></item></channel></rss>
