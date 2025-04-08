@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Kotlin」のフィード]]></title><description><![CDATA[Zennのトピック「Kotlin」のRSSフィードです]]></description><link>https://zenn.dev/topics/kotlin</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/0e48b65ca2.png</url><title>Zennの「Kotlin」のフィード</title><link>https://zenn.dev/topics/kotlin</link></image><generator>zenn.dev</generator><lastBuildDate>Tue, 08 Apr 2025 01:11:34 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/kotlin/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Ktor3へアップグレードした]]></title><description><![CDATA[こんにちは、株式会社スマートラウンドのtsukakei1012です！
+私達が開発しているプロダクトsmartroundではKotlin製のWebフレームワークであるKtorをバージョン1.0.0-betaの頃から利用しており、3年ほど前にはバージョン2へアップグレードしました。
+https://zenn.dev/smartround_dev/articles/2-ktor-2-upgrade
+先日Ktorのバージョン3が出たため、再度メジャーバージョンのアップグレードをしました。
+その感想やハマりどころについて雑に書いてみたいと思います！
+
+ Ktor3のアップデート内容
+Ktor2から...]]></description><link>https://zenn.dev/smartround_dev/articles/f57999802e03ff</link><guid isPermaLink="true">https://zenn.dev/smartround_dev/articles/f57999802e03ff</guid><pubDate>Mon, 07 Apr 2025 00:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--i9OD_RAQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ktor3%25E3%2581%25B8%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%25E3%2582%25B0%25E3%2583%25AC%25E3%2583%25BC%25E3%2583%2589%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:tsukakei%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2EyZGQyNWFiZDUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25B9%25E3%2583%259E%25E3%2583%25BC%25E3%2583%2588%25E3%2583%25A9%25E3%2582%25A6%25E3%2583%25B3%25E3%2583%2589%2520%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI5ZjUxNmM3MDMuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tsukakei</dc:creator></item><item><title><![CDATA[【超初心者向け】名刺を作る３]]></title><description><![CDATA[!
+前回は、文字を画面に配置し、フォントを整えたんだけど、そうじゃない感がただよったところで終わりました。
+今回は部品を縦に並べるColumnの機能を勉強しながら、画面全体を整えていきます。
+
+今までの記事はこちら
+https://zenn.dev/rucco/articles/fee5c752efdd95
+https://zenn.dev/rucco/articles/e92f6a877efc59
+
+今回作る名刺のイメージはこちら
+
+
+
+ Columとは？
+前回、TextのまわりをColumnで囲みました。
+このColumnの機能でTextたちが縦に並んだ、というところまで説明しました...]]></description><link>https://zenn.dev/rucco/articles/65a6a64e35102d</link><guid isPermaLink="true">https://zenn.dev/rucco/articles/65a6a64e35102d</guid><pubDate>Sun, 06 Apr 2025 15:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bCEIZAsQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E8%25B6%2585%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E5%2590%2591%25E3%2581%2591%25E3%2580%2591%25E5%2590%258D%25E5%2588%25BA%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%25EF%25BC%2593%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%258B%25E3%2582%258B%25E3%2582%258A%25E3%2581%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTE1fMGFKYkItSUVoVE9rMXdjNXlIdnpidWJEZWMwdHVlT29RVU5aS3dsTDAzTi1fYz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>るるりこ</dc:creator></item><item><title><![CDATA[【超初心者向け】名刺を作る２]]></title><description><![CDATA[!
+前回はめちゃちっさい文字で自分の名前を表示するだけで終わりました。
+今回は少しマシにします！
+
+▽前回の記事はこちら
+https://zenn.dev/rucco/articles/fee5c752efdd95
+今回作る名刺のイメージはこちら
+
+
+
+ 新しい関数を作る
+前回せっかく途中までコーディングしましたが、以下の図を参考に削除します！
+
+MainActivityクラスの下に、新しい関数を作っていきます。
+
+MainActivity
+@Composable
+fun BusinessCardApp(modifier: Modifier = Modifier) {
+    Text(...]]></description><link>https://zenn.dev/rucco/articles/e92f6a877efc59</link><guid isPermaLink="true">https://zenn.dev/rucco/articles/e92f6a877efc59</guid><pubDate>Sun, 06 Apr 2025 08:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--YFML2DzA--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E8%25B6%2585%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E5%2590%2591%25E3%2581%2591%25E3%2580%2591%25E5%2590%258D%25E5%2588%25BA%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%25EF%25BC%2592%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%258B%25E3%2582%258B%25E3%2582%258A%25E3%2581%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTE1fMGFKYkItSUVoVE9rMXdjNXlIdnpidWJEZWMwdHVlT29RVU5aS3dsTDAzTi1fYz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>るるりこ</dc:creator></item><item><title><![CDATA[KotlinとSpring BootでAtomikosを使って分散トランザクションを実践する]]></title><description><![CDATA[
+ 概要
+複数のデータベースを使用するシステムでは、データの整合性を確保するために分散トランザクション管理が重要な課題となります。
+この記事では以下の内容をざっくりと解説していきます。
+
+分散トランザクションの基本概念と課題
+Atomikosとは何か、なぜ必要なのか
+KotlinとSpring Boot 3を使ったAtomikosの実装手順
+具体的な実装例と動作検証
+
+
+ 1. はじめに
+
+ 1.1 分散トランザクションとは？
+分散トランザクションとは、複数のデータソースにまたがるトランザクション処理のことです。
+例えば、以下のような状況で必要となってきます。
+
+複数のデータベースにデー...]]></description><link>https://zenn.dev/balista/articles/02-article-kotlin-atomikos</link><guid isPermaLink="true">https://zenn.dev/balista/articles/02-article-kotlin-atomikos</guid><pubDate>Sun, 06 Apr 2025 05:23:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--q3GZHIKB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Kotlin%25E3%2581%25A8Spring%2520Boot%25E3%2581%25A7Atomikos%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E5%2588%2586%25E6%2595%25A3%25E3%2583%2588%25E3%2583%25A9%25E3%2583%25B3%25E3%2582%25B6%25E3%2582%25AF%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%2592%25E5%25AE%259F%25E8%25B7%25B5%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:balista-yu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI1YjJiNDA1OWQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>balista-yu</dc:creator></item><item><title><![CDATA[【Android】strings.xml を読み取って tsv にする Gradle Plugin]]></title><description><![CDATA[業務で、アプリ内で使用しているstrings.xmlの ID と文字列を、スプレッドシートで一覧にすることがあったので、strings.xmlを読み取って、ID と文字列をタブ区切りで出力するstrings-export-pluginという Gradle Plugin を作ってみました。
+読み取った ID と文字列は、build/strings-export.tsvに出力されます。
+以下は、出力のイメージです。
+
+ strings.xml
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;resources&gt;
+    &lt;stri...]]></description><link>https://zenn.dev/yass97/articles/2c6cef977d8dfa</link><guid isPermaLink="true">https://zenn.dev/yass97/articles/2c6cef977d8dfa</guid><pubDate>Sat, 05 Apr 2025 14:49:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fQ9xLMQy--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Android%25E3%2580%2591strings.xml%2520%25E3%2582%2592%25E8%25AA%25AD%25E3%2581%25BF%25E5%258F%2596%25E3%2581%25A3%25E3%2581%25A6%2520tsv%2520%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%2520Gradle%2520Plugin%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2584%25E3%2581%2599%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzIyYmNiMzQ1NjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>やす</dc:creator></item><item><title><![CDATA[【超初心者向け】名刺を作る1]]></title><description><![CDATA[!
+🌸Android Studioでアプリを作りたい！と思っている方へ🌸
+コーディングしてもしてもしてもしてもエラーでまくりで、挫折しかかってませんか！？
+エラーの意味は分からないし、Geminiに聞こうとしたら英語しかしゃべってくれないし。
+まずは簡単なアプリをたくさん作ってみることから始めませんか！？
+
+
+ 新規プロジェクト作成
+とりま、新しいプロジェクトを作らないと話が始まらないです。
+プロジェクトを新規作成しましょう。
+　
+ファイルメニューがないんだが！？という方（いるかどうかはわかりませんが）
+画面左上のアンドロイドマークの横の4本線をクリックしましょう。
+メニュー出てきます✋...]]></description><link>https://zenn.dev/rucco/articles/fee5c752efdd95</link><guid isPermaLink="true">https://zenn.dev/rucco/articles/fee5c752efdd95</guid><pubDate>Sat, 05 Apr 2025 13:48:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Wkb_4QOg--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E8%25B6%2585%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E5%2590%2591%25E3%2581%2591%25E3%2580%2591%25E5%2590%258D%25E5%2588%25BA%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%258B%25E3%2582%258B%25E3%2582%258A%25E3%2581%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTE1fMGFKYkItSUVoVE9rMXdjNXlIdnpidWJEZWMwdHVlT29RVU5aS3dsTDAzTi1fYz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>るるりこ</dc:creator></item><item><title><![CDATA[ドラッグ＆ドロップの実装１]]></title><description><![CDATA[!
+「画面に赤い〇を表示させ、ドラッグ＆ドロップする」という機能を実装していきます！
+役割の明確化をするため、以下のように定義します！
+　・UI：　〇を描画させる処理
+　・viewModel：　〇の位置を移動させる処理
+
+
+ 最初にやること
+viewModelを使うので、依存関係を設定しておきます。
+ファイルの場所はこちら
+
+
+
+libs.versions.tomlのversionsとlibrariesの2か所に以下を追加
+libs.versions.toml
+[versions]
+ //その他バージョン
+ lifecycle-viewmodel-compose = "2.8.7"
+
+[...]]></description><link>https://zenn.dev/rucco/articles/f78133f0acdca3</link><guid isPermaLink="true">https://zenn.dev/rucco/articles/f78133f0acdca3</guid><pubDate>Sat, 05 Apr 2025 08:42:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ZpzzmCLb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2589%25E3%2583%25A9%25E3%2583%2583%25E3%2582%25B0%25EF%25BC%2586%25E3%2583%2589%25E3%2583%25AD%25E3%2583%2583%25E3%2583%2597%25E3%2581%25AE%25E5%25AE%259F%25E8%25A3%2585%25EF%25BC%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%258B%25E3%2582%258B%25E3%2582%258A%25E3%2581%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTE1fMGFKYkItSUVoVE9rMXdjNXlIdnpidWJEZWMwdHVlT29RVU5aS3dsTDAzTi1fYz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>るるりこ</dc:creator></item><item><title><![CDATA[ドラッグ＆ドロップ実装２]]></title><description><![CDATA[!
+前回ドラッグ＆ドロップを作りました。
+しかし！！！！
+ボールをタップしていないのに、ボールをドラッグ＆ドロップで動かしてしまうという、中途半端（バグ！？）な実装だったため、修正していきたいと思います。
+
+前回の記事
+https://zenn.dev/rucco/articles/f78133f0acdca3
+前回のアプリを見たい方はこちら
+前回のコード
+
+HogeScreen.kt
+@Composable
+fun HogeScreen(
+    modifier: Modifier = Modifier,
+    viewModel: HogeViewModel = viewMode...]]></description><link>https://zenn.dev/rucco/articles/9a0b8c321578c4</link><guid isPermaLink="true">https://zenn.dev/rucco/articles/9a0b8c321578c4</guid><pubDate>Sat, 05 Apr 2025 08:40:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GhxmSHKG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2589%25E3%2583%25A9%25E3%2583%2583%25E3%2582%25B0%25EF%25BC%2586%25E3%2583%2589%25E3%2583%25AD%25E3%2583%2583%25E3%2583%2597%25E5%25AE%259F%25E8%25A3%2585%25EF%25BC%2592%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%258B%25E3%2582%258B%25E3%2582%258A%25E3%2581%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTE1fMGFKYkItSUVoVE9rMXdjNXlIdnpidWJEZWMwdHVlT29RVU5aS3dsTDAzTi1fYz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>るるりこ</dc:creator></item><item><title><![CDATA[Dart、Kotlin、SwiftでのNullの扱い方クイズ]]></title><description><![CDATA[こんにちは。モバイルエンジニアの高橋です。
+主にiOSとFlutterの開発を行っていますが、たまにAndroidの開発も担当しています。
+今回は、DartやKotlin、SwiftにおけるNullの扱い方について、知っておかないとバグを生みそうなパターンをクイズ形式で紹介します。これらの言語のnull安全性の違いを理解することで、より安全で意図した通りのコードを書くことができるようになります。
+
+ 1. Dart
+https://dart.dev/language
+太郎さんは、int型の値がnullの場合とそうでない場合に、以下のルールに基づいた表示を行いたかったため、次のExtens...]]></description><link>https://zenn.dev/moneyforward/articles/6e6c89527e6659</link><guid isPermaLink="true">https://zenn.dev/moneyforward/articles/6e6c89527e6659</guid><pubDate>Fri, 04 Apr 2025 08:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--P6bH0aR4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Dart%25E3%2580%2581Kotlin%25E3%2580%2581Swift%25E3%2581%25A7%25E3%2581%25AENull%25E3%2581%25AE%25E6%2589%25B1%25E3%2581%2584%25E6%2596%25B9%25E3%2582%25AF%25E3%2582%25A4%25E3%2582%25BA%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:takashico%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzUwOTQ4MTI2ZjguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Money%2520Forward%2520Developers%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRkZDA5NzI2NWIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takashico</dc:creator></item><item><title><![CDATA[READ_MEDIA_IMAGESの使い方が間違っていたようなので直した]]></title><description><![CDATA[株式会社PREVENTでAndroidアプリの開発を行っている千野です。
+最近、アプリで使用している権限に見直す機会があったのでなぜなのか・どうしたのかというのを書きました。
+
+ 発端
+Googleからリリースしているアプリについて以下のようなメッセージがきていた。
+写真と動画の権限に関するポリシー: 権限の使用がアプリの重要な目的と関連していません
+お客様のアプリは READ_MEDIA_IMAGES/READ_MEDIA_VIDEO 権限の使用を許可する条件に準拠していないことが判明しました。
+
+確かに READ_MEDIA_IMAGES は使っていたので使用箇所を再確認することに
+...]]></description><link>https://zenn.dev/prevent/articles/7d403319793399</link><guid isPermaLink="true">https://zenn.dev/prevent/articles/7d403319793399</guid><pubDate>Fri, 04 Apr 2025 05:22:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8KD1QogW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:READ_MEDIA_IMAGES%25E3%2581%25AE%25E4%25BD%25BF%25E3%2581%2584%25E6%2596%25B9%25E3%2581%258C%25E9%2596%2593%25E9%2581%2595%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%2584%25E3%2581%259F%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AA%25E3%2581%25AE%25E3%2581%25A7%25E7%259B%25B4%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Chinoyatta%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2QzNzQ5ZTRhYWYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BEPREVENT%25E9%2596%258B%25E7%2599%25BA%25E9%2583%25A8%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzUwNGI4ZTVjYTMuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Chinoyatta</dc:creator></item><item><title><![CDATA[Jibを使ったJava,Kotlinアプリケーションの簡単&最適Docker化]]></title><description><![CDATA[
+ はじめに
+こんにちは！ispecでエンジニアをしているほりです！
+弊社では、バックエンドにKotlinを採用して開発を行っています。今回は、JavaやKotlinで実装したアプリケーションを、DockerやJVMの深い知識がなくても簡単に最適にDocker化できるJibをご紹介します。
+
+ Jibとは？
+
+https://github.com/GoogleContainerTools/jib
+Jibは、JavaやKotlinアプリケーションをDockerイメージに変換するための、GradleおよびMavenプラグインです。以下の特徴があります。
+
+ Dockerfileが不要
+Jib...]]></description><link>https://zenn.dev/ispec_inc/articles/java-kotlin-containerization-with-jib</link><guid isPermaLink="true">https://zenn.dev/ispec_inc/articles/java-kotlin-containerization-with-jib</guid><pubDate>Thu, 03 Apr 2025 20:47:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xRDiZb-F--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Jib%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%259FJava%252CKotlin%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2581%25AE%25E7%25B0%25A1%25E5%258D%2598%2526%25E6%259C%2580%25E9%2581%25A9Docker%25E5%258C%2596%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Masaharu%2520Hori%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRmN2Y5YzE4ZTUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:ispec%2520inc.%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRkMjdkMWQ3ODkuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Masaharu Hori</dc:creator></item><item><title><![CDATA[Server Side Kotlin with Micronaut]]></title><description><![CDATA[
+ はじめに
+バックエンドでKotlinを採用する場合、フレームワークの選定に迷いますよね。micronaut (+ jdbi3) が最もバランスが良さそうだという結論にいたったので、その構成を実装を混じえながら紹介します。
+使用したrepositoryはこちら。
+https://github.com/uga-rosa/micronaut-demo/tree/develop
+
+ 選定理由
+Kotlin向けのWebフレームワークとして有名なものとして、SpringとKtorがありますが
+
+Springは遅い。
+ktorのような薄いフレームワークはDIなど面倒な部分が多い。
+
+そのため、高性...]]></description><link>https://zenn.dev/uga_rosa/articles/922ead19fa27f5</link><guid isPermaLink="true">https://zenn.dev/uga_rosa/articles/922ead19fa27f5</guid><pubDate>Thu, 03 Apr 2025 15:09:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vU9yfsMX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:Server%2520Side%2520Kotlin%2520with%2520Micronaut%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:uga-rosa%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RkMWRkZmY1ZjIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>uga-rosa</dc:creator></item><item><title><![CDATA[オブジェクトの勉強]]></title><description><![CDATA[
+ 静的インスタンスとは？
+静的インスタンスは、プログラム内で1つだけ存在するオブジェクトです。どこからでも同じインスタンスにアクセスでき、その中に保存された状態やデータが全体で共有されます。
+通常のオブジェクトは、必要に応じて複数のインスタンスを生成できます。
+例：HogeClassがあったらHogeClass()みたいな感じで
+Kotlinでは、この仕組みを実現するために主に2つの方法があります。
+
+
+ 1. object 宣言によるシングルトンパターン
+
+ 書く理由
+プロジェクト内で既存画面の値をそのまま流用する場所があったが画像データだったので値の受け渡しとかでうまくいかなかった...]]></description><link>https://zenn.dev/gonzareth/articles/aade944f64bdcf</link><guid isPermaLink="true">https://zenn.dev/gonzareth/articles/aade944f64bdcf</guid><pubDate>Mon, 31 Mar 2025 08:05:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9ITnzWUX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25AA%25E3%2583%2596%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E3%2581%25AE%25E5%258B%2589%25E5%25BC%25B7%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25B4%25E3%2583%25B3%25E3%2582%25B6%25E3%2583%25AC%25E3%2582%25B9%25E5%2585%2583%25E6%259C%25A8%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFUWEFKeHdYLURrZG93MUF1SEtVNHVGR3djVk93R2pDTlhUdTBBVTdzUHM9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ゴンザレス元木</dc:creator></item><item><title><![CDATA[Kotlin/Wasm をブラウザで実行し、JavaScript と比較してみた]]></title><description><![CDATA[
+ はじめに
+WebAssembly（略称：Wasm）は、ブラウザでの高速実行を可能にするバイナリフォーマットです。本記事では、Kotlin/Wasmを使ってブラウザで実行し従来のJavaScriptとのパフォーマンスを比較してみたので、その結果をまとめてみました。
+
+ Wasm の簡単な概要
+Wasm の特徴は以下です。
+
+Webブラウザ上でプログラムを高速実行するためのバイナリフォーマット。従来のJavaScriptよりも高速に動作することが期待できる
+さまざまな言語からコンパイル可能。2025年3月時点では、Rust が最も使われている
+主要ブラウザ（Chrome、Edge、Saf...]]></description><link>https://zenn.dev/k_negishi/articles/c242a946bd7c60</link><guid isPermaLink="true">https://zenn.dev/k_negishi/articles/c242a946bd7c60</guid><pubDate>Sun, 30 Mar 2025 12:00:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--O6QUV42c--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Kotlin%252FWasm%2520%25E3%2582%2592%25E3%2583%2596%25E3%2583%25A9%25E3%2582%25A6%25E3%2582%25B6%25E3%2581%25A7%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%2597%25E3%2580%2581JavaScript%2520%25E3%2581%25A8%25E6%25AF%2594%25E8%25BC%2583%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kei.N%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZhMDZjZGI1YmMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kei.N</dc:creator></item><item><title><![CDATA[【Android】Jetpack Composeで実現するSplash Screenカスタマイズ＆初期化処理]]></title><description><![CDATA[
+ 概要
+Androidアプリ開発で Jetpack Compose を使用している際、Splash Screen をどのように実装すれば良いかちゃんと調べられていなかったので、本記事では、Splash Screen の実装方法に加え、表示中に初期化処理を行う方法についても、実際に試した際の知見をもとにした記事になります。
+
+ スプラッシュ画面の設定
+https://developer.android.com/develop/ui/views/launch/splash-screen?hl=ja
+
+Android 12 以降では SplashScreen APIを使うようになった
+Spl...]]></description><link>https://zenn.dev/slowhand/articles/2e21918bc05313</link><guid isPermaLink="true">https://zenn.dev/slowhand/articles/2e21918bc05313</guid><pubDate>Sat, 29 Mar 2025 20:14:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--HyP0DEMa--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Android%25E3%2580%2591Jetpack%2520Compose%25E3%2581%25A7%25E5%25AE%259F%25E7%258F%25BE%25E3%2581%2599%25E3%2582%258BSplash%2520Screen%25E3%2582%25AB%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%259E%25E3%2582%25A4%25E3%2582%25BA%25EF%25BC%2586%25E5%2588%259D%25E6%259C%259F%25E5%258C%2596%25E5%2587%25A6%25E7%2590%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:slowhand%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzEwY2YzMGUzMDAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>slowhand</dc:creator></item><item><title><![CDATA[Spring で例外を処理するより良い方法]]></title><description><![CDATA[
+ はじめに
+こんにちは、Kopherと申します。今回は Spring で例外を処理する方法を説明したいと思います。
+小さな個人ブログを開発していると仮定して説明したいと思います。
+
+ 使われる技術スタック
+Kotlinを使用していますがJavaを使っても同様です。
+
+Spring Boot 3.4.4
+Kotlin 1.9.25
+
+
+ まずはテスト
+存在しないPostを照会すると例外を出すようにしたいです。
+@Test
+fun getPost() {
+    // given
+    val post = Post(
+        _title = "123456789012345"...]]></description><link>https://zenn.dev/kopher/articles/3f65410ad5becb</link><guid isPermaLink="true">https://zenn.dev/kopher/articles/3f65410ad5becb</guid><pubDate>Sat, 29 Mar 2025 11:06:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6JIDJgd8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Spring%2520%25E3%2581%25A7%25E4%25BE%258B%25E5%25A4%2596%25E3%2582%2592%25E5%2587%25A6%25E7%2590%2586%25E3%2581%2599%25E3%2582%258B%25E3%2582%2588%25E3%2582%258A%25E8%2589%25AF%25E3%2581%2584%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kopher%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzljYTBmZmQwOWUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kopher</dc:creator></item><item><title><![CDATA[Replitをただ使ってみたかっただけ。ダミーデータ作成アプリ。]]></title><description><![CDATA[!
+この記事含め、バック/フロントエンド・データベース構築・build実行など、すべてReplitがやってくれました。（https://replit.com/）
+
+
+ はじめに
+AIエージェントを使用することが主流になってきた昨今ですが、AIエージェントは少し違った立ち位置のReplitが、どんな感じでアプリを作ってくれるのかを見てみたくて使用してみました。
+Replitは、AIエージェントのような機能を備えたオンライン開発環境です。特に「Replit Agent」と呼ばれるAIシステムを提供しており、ユーザーが自然言語でアプリやウェブサイトのアイデアを伝えると、自動的にそれを構築します...]]></description><link>https://zenn.dev/kyojinnaapyon/articles/510e8894ae52e5</link><guid isPermaLink="true">https://zenn.dev/kyojinnaapyon/articles/510e8894ae52e5</guid><pubDate>Thu, 27 Mar 2025 15:14:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--y75Qdv2z--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Replit%25E3%2582%2592%25E3%2581%259F%25E3%2581%25A0%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25E3%2581%258B%25E3%2581%25A3%25E3%2581%259F%25E3%2581%25A0%25E3%2581%2591%25E3%2580%2582%25E3%2583%2580%25E3%2583%259F%25E3%2583%25BC%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E4%25BD%259C%25E6%2588%2590%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2580%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:NANA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS3JGUUpURkRTcU5McTJoV0RZMlhSaDBUUjYtbWJGd0xRQzBHTXcxaHN1cUlUR1lRbz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>NANA</dc:creator></item><item><title><![CDATA[同じテストを複数の設定で起動させるテストコードを3分クッキング]]></title><description><![CDATA[
+ 前提
+
+SpringBoot
+kotlin
+JUnit
+
+
+ やりたいこと
+テストコードの中身は全く同じだが、複数の設定（振る舞いを制御する設定）でテストを実行させたい
+
+ 制約
+同じ内容のテストコードを複数コピペで用意するのはメンテナンスコストを鑑みて避けたい
+
+ 3分クッキング
+今回は一つのやり方として、テストコードを基底クラスに集約し実装クラス側で設定を行うことでテストコードは一つとしたまま、複数の設定でテストを可能にしたいと思います。
+@Import(ConfigA::class)
+internal class ConfigPatternA(testComponent: Te...]]></description><link>https://zenn.dev/umi_ushi/articles/9ddd572c0b2d5b</link><guid isPermaLink="true">https://zenn.dev/umi_ushi/articles/9ddd572c0b2d5b</guid><pubDate>Sun, 23 Mar 2025 14:06:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--VFi_39qb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2590%258C%25E3%2581%2598%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E3%2582%2592%25E8%25A4%2587%25E6%2595%25B0%25E3%2581%25AE%25E8%25A8%25AD%25E5%25AE%259A%25E3%2581%25A7%25E8%25B5%25B7%25E5%258B%2595%25E3%2581%2595%25E3%2581%259B%25E3%2582%258B%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2582%25923%25E5%2588%2586%25E3%2582%25AF%25E3%2583%2583%25E3%2582%25AD%25E3%2583%25B3%25E3%2582%25B0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:umiushi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzMzNmZiNTA1MGUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>umiushi</dc:creator></item><item><title><![CDATA[【Android】OSS Licenses Gradle Plugin でライセンス一覧を表示する]]></title><description><![CDATA[
+ 前提
+Version Catalogs を使用
+
+ 1. OSS Licenses Gradle Plugin の導入
+プロジェクト直下のbuild.gradleに、以下を追加します。
+
+gradle/libs.versions.toml
+
+[versions]
+ossLicensesPlugin = "0.10.6"
+playServicesOssLicenses = "17.1.0"
+
+[libraries]
+oss-licenses-plugin = { module = "com.google.android.gms:oss-licenses-plugin", version...]]></description><link>https://zenn.dev/yass97/articles/0af992ab1e5423</link><guid isPermaLink="true">https://zenn.dev/yass97/articles/0af992ab1e5423</guid><pubDate>Sun, 23 Mar 2025 03:17:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ROB-89P9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Android%25E3%2580%2591OSS%2520Licenses%2520Gradle%2520Plugin%2520%25E3%2581%25A7%25E3%2583%25A9%25E3%2582%25A4%25E3%2582%25BB%25E3%2583%25B3%25E3%2582%25B9%25E4%25B8%2580%25E8%25A6%25A7%25E3%2582%2592%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2584%25E3%2581%2599%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzIyYmNiMzQ1NjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>やす</dc:creator></item><item><title><![CDATA[Compose Multiplatform で EventBus]]></title><description><![CDATA[このようなイベント送信に対するアーキテクチャ的な是非は別として。
+次のような object を用意しておくと、任意の箇所から送信したイベントを任意の Composable で受け取ることができる。
+interface Event // これを継承してイベントを定義する
+
+object EventBus {
+    private val _events = MutableSharedFlow&lt;Event&gt;(
+        extraBufferCapacity = 10, // tryEmit の採用にあたりバッファ多めに
+    )
+    val events: Flo...]]></description><link>https://zenn.dev/hkusu/articles/1c560defa91bae</link><guid isPermaLink="true">https://zenn.dev/hkusu/articles/1c560defa91bae</guid><pubDate>Sat, 22 Mar 2025 08:42:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--aBFBE9Cf--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:Compose%2520Multiplatform%2520%25E3%2581%25A7%2520EventBus%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hkusu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2d3b3ZhZFBoRm53Ump5NFBMN0MyU3d6UkYxSmRId0ZoZDRLQU1ab0E9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hkusu</dc:creator></item></channel></rss>

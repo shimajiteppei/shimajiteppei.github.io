@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「JavaScript」のフィード]]></title><description><![CDATA[Zennのトピック「JavaScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/javascript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/64acd76870.png</url><title>Zennの「JavaScript」のフィード</title><link>https://zenn.dev/topics/javascript</link></image><generator>zenn.dev</generator><lastBuildDate>Tue, 08 Apr 2025 03:19:47 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/javascript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Stripe Price APIでlookup_keysを使う際の注意点]]></title><description><![CDATA[Stripeで複数の料金プランを管理している場合、特定のプランだけを簡単に取得したいケースは多いでしょう。そんな時に便利なのがlookup_keysパラメータです。今回はlookup_keysを使う際の重要な注意点について解説します。
+
+ lookup_keysで料金データを取得する基本
+Stripe Price APIでは、lookup_keysを使って識別子を指定することで、任意の料金データを簡単に取得できます。
+const prices = await stripe.prices.lists({
+    lookup_keys: ['starter', 'business']
+})...]]></description><link>https://zenn.dev/digitalcube/articles/7a90c1f1ea51b5</link><guid isPermaLink="true">https://zenn.dev/digitalcube/articles/7a90c1f1ea51b5</guid><pubDate>Tue, 08 Apr 2025 00:34:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ub2RlhHQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Stripe%2520Price%2520API%25E3%2581%25A7lookup_keys%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%25E9%259A%259B%25E3%2581%25AE%25E6%25B3%25A8%25E6%2584%258F%25E7%2582%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Okamoto%2520Hidetaka%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM0Y2U1ZTFlODkuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2587%25E3%2582%25B8%25E3%2582%25BF%25E3%2583%25AB%25E3%2582%25AD%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%2596%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTDFLSlFZQ1Q2d2JmNlB6dnA3eGJ6Q3QtN3I3SjZ5aWlQaGU2QlJfVlhuQWg3aVdBPXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Okamoto Hidetaka</dc:creator></item><item><title><![CDATA[Reactのカスタムフックを理解する]]></title><description><![CDATA[
+ はじめに
+Reactのカスタムフックって得意ですか？
+ベテランのフロントエンジニアならともかく、バックエンドエンジニアにとってはかなり難しいのではないでしょうか？
+というか私がすぐわからなくなるので、改めてゼロから再勉強したので、その過程を含めて共有いたします。
+これをコピペしながら動かせばきっと理解できると思います。
+
+ STEP1 固定の文言を１つ返すだけのフック
+まず、最も単純なフックを書いてみます。
+それが、これ。
+なんのへんてつもない、ただ固定値を１つ返すだけの関数です。
+
+App.js
+import "./App.css";
+
+/**
+ * カスタムフック
+ * @ret...]]></description><link>https://zenn.dev/k_tabuchi/articles/964c18dd027607</link><guid isPermaLink="true">https://zenn.dev/k_tabuchi/articles/964c18dd027607</guid><pubDate>Mon, 07 Apr 2025 12:31:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--B0VmlAK1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%25E3%2581%25AE%25E3%2582%25AB%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%25A0%25E3%2583%2595%25E3%2583%2583%25E3%2582%25AF%25E3%2582%2592%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:k-tabuchi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhkMjhhY2RlZGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>k-tabuchi</dc:creator></item><item><title><![CDATA[Mosquithon_Introduction]]></title><description><![CDATA[本篇說明
+
+
+活動期間：4/7（一）~ 5/6（二）
+主題：第一屆鐵蚊子盃 - 前端面試技術筆記
+題庫為 E+ 的前端題庫佐卡柱老師的 JS 核心書藉，用自己的理解再說明一次
+分享頻率：最少一週一篇
+
+
+
+ 大綱
+
+第一週主題：JavaScript 核心慨念強化
+第二週主題：React 與 Hooks 應用
+第三週主題：HTML、CSS、前端工具
+第四週主題：瀏覽器與綜合複習
+
+
+ 章節
+
+
+
+]]></description><link>https://zenn.dev/chloetseng/articles/mosquithon-intro</link><guid isPermaLink="true">https://zenn.dev/chloetseng/articles/mosquithon-intro</guid><pubDate>Mon, 07 Apr 2025 09:06:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--81JrygMq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_76:Mosquithon_Introduction%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Clove%2520%25E3%2582%25AF%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2596%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzViZmI0N2FhNTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Clove クローブ</dc:creator></item><item><title><![CDATA[ブラウザでsetIntervalの負荷計測を行ってみる]]></title><description><![CDATA[
+ はじめに
+setInterval は一定の間隔を置いて関数やコードスニペットを繰り返し呼び出すために利用するもので、React等のコンポーネント内で呼び出した際は コンポーネントの廃棄時に同時に clearInterval等で停止させる事が理想とされています。
+これは、コンポーネントが表示されなくなった後も バックグラウンドで定期実行が行なわれてしまうので、意図しない挙動をしたり ブラウザの負荷に繋がる事が理由とされています。
+今回は 実際にsetIntervalを実行した際にブラウザでどれくらいの負荷になっているのかをChromeのDevtoolsから確認してみます。
+
+ setI...]]></description><link>https://zenn.dev/skiyaki_dev/articles/82d7d31ea5c2ce</link><guid isPermaLink="true">https://zenn.dev/skiyaki_dev/articles/82d7d31ea5c2ce</guid><pubDate>Mon, 07 Apr 2025 04:34:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--MV9zhcB2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2596%25E3%2583%25A9%25E3%2582%25A6%25E3%2582%25B6%25E3%2581%25A7setInterval%25E3%2581%25AE%25E8%25B2%25A0%25E8%258D%25B7%25E8%25A8%2588%25E6%25B8%25AC%25E3%2582%2592%25E8%25A1%258C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2582%25A4%25E3%2582%25A4%25E3%2583%258E%25E3%2583%2586%25E3%2583%25B3%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVjOWVkYzNmNjQuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:SKIYAKI%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSU91OUVVM252UjBhZ0JhMkgyelpVc04tVkZfalN0S0JTLUsxNzJpZHFrUDQ0LWloQjc9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>イイノテン</dc:creator></item><item><title><![CDATA[三項演算子 (? :) と論理AND演算子 (&&) 、どっち使った方がいいの?]]></title><description><![CDATA[JSX内では、三項演算子（? :）と論理AND演算子（&amp;&amp;）を条件付きレンダリングとして利用することが出来ます。
+先日、自分のPRに「三項演算子を使うより論理AND演算子を使った方がいいよ」ってレビューをいただきました。
+今回は、実際にどちらの評価の負荷が大きいのか、どちらを使うべきなのかを調べてみようと思います。
+
+ テスト方法
+テストを行うため、JavaScript の performance.now() を使って、処理時間を計測しました。1,000,000 回の繰り返しを行い、実行時間を比較します。
+
+ 最初の評価テスト
+
+ テストコード
+最初に、JSX内でよく使う...]]></description><link>https://zenn.dev/skiyaki_dev/articles/733eb2c86d0868</link><guid isPermaLink="true">https://zenn.dev/skiyaki_dev/articles/733eb2c86d0868</guid><pubDate>Mon, 07 Apr 2025 04:34:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--y3O5bXEX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E4%25B8%2589%25E9%25A0%2585%25E6%25BC%2594%25E7%25AE%2597%25E5%25AD%2590%2520%2528%253F%2520%253A%2529%2520%25E3%2581%25A8%25E8%25AB%2596%25E7%2590%2586AND%25E6%25BC%2594%25E7%25AE%2597%25E5%25AD%2590%2520%2528%2526%2526%2529%2520%25E3%2580%2581%25E3%2581%25A9%25E3%2581%25A3%25E3%2581%25A1%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%259F%25E6%2596%25B9%25E3%2581%258C%25E3%2581%2584%25E3%2581%2584%25E3%2581%25AE%253F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2582%25A4%25E3%2582%25A4%25E3%2583%258E%25E3%2583%2586%25E3%2583%25B3%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVjOWVkYzNmNjQuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:SKIYAKI%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSU91OUVVM252UjBhZ0JhMkgyelpVc04tVkZfalN0S0JTLUsxNzJpZHFrUDQ0LWloQjc9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>イイノテン</dc:creator></item><item><title><![CDATA[Kuromoji.jsをローカルブラウザで動かす【デモ共有】]]></title><description><![CDATA[
+ 課題
+JavaScriptで形態素解析するとき、Node.jsではなくブラウザで動かしたいケースがありました。検索してもわかりづらかったので記事化しました。
+
+ デモ用リポジトリ
+つくったデモを共有公開したのでREADME.mdを読んでいただければと思います。
+
+
+ 手続き
+
+
+Kuromoji.jsの公式リポジトリからビルド済みのスクリプトを取得
+おなじく辞書を取得
+各種バンドル
+ローカルサーバー立ち上げ
+
+ビルド済みのJSファイルは、公式リポジトリのbuild/kuromoji.jsにあります。
+https://github.com/takuyaa/kuromoji.js/blo...]]></description><link>https://zenn.dev/jun_philos/articles/a4d0cf6ec91da7</link><guid isPermaLink="true">https://zenn.dev/jun_philos/articles/a4d0cf6ec91da7</guid><pubDate>Mon, 07 Apr 2025 00:19:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--MFCydVm6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Kuromoji.js%25E3%2582%2592%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25AB%25E3%2583%25AB%25E3%2583%2596%25E3%2583%25A9%25E3%2582%25A6%25E3%2582%25B6%25E3%2581%25A7%25E5%258B%2595%25E3%2581%258B%25E3%2581%2599%25E3%2580%2590%25E3%2583%2587%25E3%2583%25A2%25E5%2585%25B1%25E6%259C%2589%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Jun%252C%2520philos.%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzUxNDQyMDJlNzguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Jun, philos.</dc:creator></item><item><title><![CDATA[HonoとDrizzleでDB~API~Frontendと型を繋げる]]></title><description><![CDATA[
+ はじめに
+Honoとdrizzleを使って、DBのテーブル定義を「API ServerのScheme」と「Frontendの型」まで伝搬させる方法をまとめます。
+また、@hono/zod-openapiを使ったバリデーションとOpenAPIの整備を合わせて行います。
+
+
+ Honoのプロジェクト作成
+まずはHonoのプロジェクトを作成します。
+今回は zenn-hono-drizzle-todo という名前のプロジェクトとしました。
+$ npm create hono@latest
+
+create-hono version 0.16.0
+✔ Target directory zenn...]]></description><link>https://zenn.dev/nao50/articles/hono-drizzle-todo</link><guid isPermaLink="true">https://zenn.dev/nao50/articles/hono-drizzle-todo</guid><pubDate>Sun, 06 Apr 2025 22:38:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qmeAfh0C--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Hono%25E3%2581%25A8Drizzle%25E3%2581%25A7DB%7EAPI%7EFrontend%25E3%2581%25A8%25E5%259E%258B%25E3%2582%2592%25E7%25B9%258B%25E3%2581%2592%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nao%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRiY2YzZDIyYTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nao</dc:creator></item><item><title><![CDATA[そのawait、本当に必要？ 不要なawaitを避けるための考え方]]></title><description><![CDATA[
+ はじめに
+JavaScript(TypeScript)で非同期処理を書く際に、流れでなんとなくawaitを書いていないでしょうか？
+私はこれまで、fetch()やres.json()などを呼び出したらセットでawaitを書いてしまっていましたが、コードレビューで不要なawaitを書いてしまっているとの指摘を受けました。
+そのため本記事では、非同期処理でawaitを書かなくても良いケースと、不要なawaitを書いたことによるパフォーマンスの差について調査した結果を記載します。
+結論としては、次のとおりです。
+
+不必要にawaitを使用するとパフォーマンスは悪化する
+非同期処理の実行結果...]]></description><link>https://zenn.dev/nanase99/articles/856861b792deba</link><guid isPermaLink="true">https://zenn.dev/nanase99/articles/856861b792deba</guid><pubDate>Sun, 06 Apr 2025 13:10:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--J4ilvKi7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%259D%25E3%2581%25AEawait%25E3%2580%2581%25E6%259C%25AC%25E5%25BD%2593%25E3%2581%25AB%25E5%25BF%2585%25E8%25A6%2581%25EF%25BC%259F%2520%25E4%25B8%258D%25E8%25A6%2581%25E3%2581%25AAawait%25E3%2582%2592%25E9%2581%25BF%25E3%2581%2591%25E3%2582%258B%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%25E8%2580%2583%25E3%2581%2588%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%258A%25E3%2583%258A%25E3%2582%25BB%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTGVFZVBnd1UxdjJzYlVCNEEwRHd1ZGxQWkVZRUVUd1dyYng5SzFjUE1hQlpmR01QZz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ナナセ</dc:creator></item><item><title><![CDATA[登録ボタンのダブルクリックを防ぐ方法]]></title><description><![CDATA[今、laravelでwebアプリを作成しているのですが、新規登録ボタンを2度押してしまった時に2重で処理が発生してしまい。エラーが発生してしまいます。
+
+
+これの対策を行なっていきます。
+
+ 環境
+html 一部抜粋
+&lt;button class="register-button" id="register-button"&gt;新規登録&lt;/button&gt;
+    &lt;/form&gt;
+このようなコードになっています。
+jsを使用して新規登録ボタンをクリックしたら、ボタンをクリック不可の状態に変更します。
+document.addEventListener('DOM...]]></description><link>https://zenn.dev/imkei/articles/5d904bd4429320</link><guid isPermaLink="true">https://zenn.dev/imkei/articles/5d904bd4429320</guid><pubDate>Sun, 06 Apr 2025 10:00:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--gZe6u6Jx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%2599%25BB%25E9%258C%25B2%25E3%2583%259C%25E3%2582%25BF%25E3%2583%25B3%25E3%2581%25AE%25E3%2583%2580%25E3%2583%2596%25E3%2583%25AB%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2583%25E3%2582%25AF%25E3%2582%2592%25E9%2598%25B2%25E3%2581%2590%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:imkei%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M2Mzc4NTBjMzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>imkei</dc:creator></item><item><title><![CDATA[【GAS】検索順位の変動を自動で色分け！Googleスプレッドシートに「順位変動ハイライト」機能を追加する方法]]></title><description><![CDATA[
+ はじめに
+「スプレッドシートで検索順位を毎日記録しているけど、変動のチェックが手間すぎる……」
+「順位が大きく上がったり下がったりしたときだけ、ひと目で分かるようにしたい！」
+そんな悩みを解決するために、**Google Apps Script（GAS）**を使って、検索順位の変動を色で自動的にハイライト表示する方法をまとめました。
+この記事では、ある順位管理用スプレッドシートで、前日よりも検索順位が上がったセルを緑色、下がったセルを赤色に塗り分けるGASスクリプトを作成し、スプレッドシートのメニューからワンクリックで実行できるようにカスタマイズする手順を紹介します。
+
+
+ 対象読者...]]></description><link>https://zenn.dev/nabesan/articles/1992f671dc00d6</link><guid isPermaLink="true">https://zenn.dev/nabesan/articles/1992f671dc00d6</guid><pubDate>Sun, 06 Apr 2025 08:36:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--mt2obh09--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590GAS%25E3%2580%2591%25E6%25A4%259C%25E7%25B4%25A2%25E9%25A0%2586%25E4%25BD%258D%25E3%2581%25AE%25E5%25A4%2589%25E5%258B%2595%25E3%2582%2592%25E8%2587%25AA%25E5%258B%2595%25E3%2581%25A7%25E8%2589%25B2%25E5%2588%2586%25E3%2581%2591%25EF%25BC%2581Google%25E3%2582%25B9%25E3%2583%2597%25E3%2583%25AC%25E3%2583%2583%25E3%2583%2589%25E3%2582%25B7%25E3%2583%25BC%25E3%2583%2588%25E3%2581%25AB%25E3%2580%258C%25E9%25A0%2586%25E4%25BD%258D%25E5%25A4%2589%25E5%258B%2595%25E3%2583%258F%25E3%2582%25A4%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2588%25E3%2580%258D%25E6%25A9%259F%25E8%2583%25BD%25E3%2582%2592%25E8%25BF%25BD%25E5%258A%25A0%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yuta%2520Watanabe%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2YzODU0MzkwNGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yuta Watanabe</dc:creator></item><item><title><![CDATA[jsで簡単に！簡易プレゼンテーションツールを作成しました！！]]></title><description><![CDATA[
+ 簡易プレゼンテーションツール
+を作成しました！！
+↓ツール
+https://kemii.sakura.ne.jp/all/prezen_pop_anime/prezen_tool_syoukai.html
+
+ 概要
+reveal.jsすらめんどくさいと感じるので、究極に簡単にプレゼンするためにはどうしたらいいのかを考え、このツールを製作しました。
+reveal.jsは、プレゼン用に使えるjsのフレームワークです。ニッチな表現ができますので、使ったことがない方は触ってみてもいいかもしれません。
+今回作ったプレゼンツールは、zimakuクラスの中に、その内容を記述するような形式となってい...]]></description><link>https://zenn.dev/kemii/articles/c28995baf9befe</link><guid isPermaLink="true">https://zenn.dev/kemii/articles/c28995baf9befe</guid><pubDate>Sun, 06 Apr 2025 08:06:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--rtcltJti--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:js%25E3%2581%25A7%25E7%25B0%25A1%25E5%258D%2598%25E3%2581%25AB%25EF%25BC%2581%25E7%25B0%25A1%25E6%2598%2593%25E3%2583%2597%25E3%2583%25AC%25E3%2582%25BC%25E3%2583%25B3%25E3%2583%2586%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%25E3%2582%2592%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2597%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%25EF%25BC%2581%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kemii%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E5ZGYyMjM5ZmIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kemii</dc:creator></item><item><title><![CDATA[「今夜」「令和元年」「4 PM」様々な日時をパースできるNode.jsパッケージ：chrono]]></title><description><![CDATA[「昨日」「今夜」「令和元年5月1日」「12月31日」「１９９６年５月３日」
+「Friday at 4pm」「June 10th, 2018」「6/10/2018」「tomorrow from 10 to 11 AM」
+一定のフォーマットに沿っていない日付のテキストをDate型にパースしたいことはありませんか？
+上記のような自然言語の日時をパースするchrono というNode.jsパッケージを紹介します。
+https://github.com/wanasit/chrono
+https://www.npmjs.com/package/chrono-node
+
+ 前提条件
+今回、動作確認した...]]></description><link>https://zenn.dev/koji520/articles/ced5cfecb6cb34</link><guid isPermaLink="true">https://zenn.dev/koji520/articles/ced5cfecb6cb34</guid><pubDate>Sun, 06 Apr 2025 07:48:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--L-jLlkzT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%258C%25E4%25BB%258A%25E5%25A4%259C%25E3%2580%258D%25E3%2580%258C%25E4%25BB%25A4%25E5%2592%258C%25E5%2585%2583%25E5%25B9%25B4%25E3%2580%258D%25E3%2580%258C4%2520PM%25E3%2580%258D%25E6%25A7%2598%25E3%2580%2585%25E3%2581%25AA%25E6%2597%25A5%25E6%2599%2582%25E3%2582%2592%25E3%2583%2591%25E3%2583%25BC%25E3%2582%25B9%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258BNode.js%25E3%2583%2591%25E3%2583%2583%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B8%25EF%25BC%259Achrono%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:520%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NmMDZmOWY0NzYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>520</dc:creator></item><item><title><![CDATA[初心者がWebアプリを作ってみた(１)]]></title><description><![CDATA[
+ はじめに
+Webアプリの開発・作り方といった記事はたくさんあって、
+「React初心者」や「Node.js初心者」とかのサイトを見て勉強して、何となくわかった気になったけど、実際に何か作ろうとすると手が止まっちゃうんですよね。
+ネットのページを見て基本がだいたい分かって来たら、何か作ってみようと思うけど、
+何か動くものを作るという視点で、ネット上の情報を見ると、
+急に認証がどうだとか、データベースがどうだとか、難しくなって、
+まずは簡単な動くものを、と思っても全体が大きすぎて結局理解し難いと感じてました。
+まずは、簡単なものを作って、そこに機能を足していく、
+分かんない機能は、その時...]]></description><link>https://zenn.dev/maedan/articles/125304d4aef4d1</link><guid isPermaLink="true">https://zenn.dev/maedan/articles/125304d4aef4d1</guid><pubDate>Sun, 06 Apr 2025 04:52:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ZxxzrrUD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E3%2581%258CWeb%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2528%25EF%25BC%2591%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Nori%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhjMmEwY2ZjNGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Nori</dc:creator></item><item><title><![CDATA[ESLintで新規コードのみにルールを適応する（Bulk Suppressions）]]></title><description><![CDATA[
+ はじめに
+2025/04/05にESLint v9.24.0が公開されました。
+v9.24.0に含まれるBulk Suppressions機能が便利なので紹介します。
+この機能を使うと「プロジェクトの途中からこのルールを追加したいのだけど、既存コードにエラーが多すぎて追加できない」というシーンで、既存コードではエラーを抑制し新しいコードのみエラーを出力することが可能となります。
+つまり、新たにルールを追加する際に既存コードでのエラー件数を気にする必要がなくなり、ルール追加のハードルが下げられます。
+特に、既存コードを直して回るのが難しい大きめのプロジェクトでは恩恵を受けやすいかと思い...]]></description><link>https://zenn.dev/hmochizuki/articles/52c0647d65225a</link><guid isPermaLink="true">https://zenn.dev/hmochizuki/articles/52c0647d65225a</guid><pubDate>Sun, 06 Apr 2025 04:44:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--DmIQ2UpX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ESLint%25E3%2581%25A7%25E6%2596%25B0%25E8%25A6%258F%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2581%25AE%25E3%2581%25BF%25E3%2581%25AB%25E3%2583%25AB%25E3%2583%25BC%25E3%2583%25AB%25E3%2582%2592%25E9%2581%25A9%25E5%25BF%259C%25E3%2581%2599%25E3%2582%258B%25EF%25BC%2588Bulk%2520Suppressions%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hi_mochy%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2YxM2UxOTdiZDcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hi_mochy</dc:creator></item><item><title><![CDATA[[JavaScript]オブジェクト について （備忘録）]]></title><description><![CDATA[
+ １．はじめに
+・オブジェクトとは、名前（key）と値（value）のペアで構成されたデータの集合体です。
+・名前（key）と値（value）がペアになったものを、プロパティと呼びます。
+・オブジェクトは、メソッドと呼ばれる関数を値として持つことが可能で、オブジェクトの振る舞いを定義する役割を果たします。
+
+オブジェクトの作成例
+const オブジェクト名 = {
+    // プロパティ
+    key1: value,
+    // メソッド
+    key2: function() {
+        // 処理内容
+    }
+};
+
+
+ ２．サンプルプログラム
+
+ 〇例１：ま...]]></description><link>https://zenn.dev/yama_kawa/articles/f6811681e48a11</link><guid isPermaLink="true">https://zenn.dev/yama_kawa/articles/f6811681e48a11</guid><pubDate>Sun, 06 Apr 2025 03:15:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--By1xIQev--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BJavaScript%255D%25E3%2582%25AA%25E3%2583%2596%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%2520%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2520%25EF%25BC%2588%25E5%2582%2599%25E5%25BF%2598%25E9%258C%25B2%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%25A9%25E3%2582%25B6%25E3%2583%258B%25E3%2582%25A2%25E3%2583%2591%25E3%2583%25B3%25E3%2582%25B5%25E3%2583%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M1ZjYyZjIwYTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ラザニアパンサー</dc:creator></item><item><title><![CDATA[バニラJavaScriptで学ぶ！DOM操作とイベント処理の基本]]></title><description><![CDATA[
+ はじめに
+JavaScriptを学び始めたときに、最初にぶつかる壁。
+それが「DOM操作」と「イベント処理」です。
+この記事では、バニラJavaScript（純粋なJS）だけを使って、以下のような基本を丁寧に解説します：
+
+DOMとは何か？
+要素の取得と生成：getElementById, createElement, appendChild
+
+ユーザーの操作を検知する：イベントリスナーの使い方
+HTMLとJavaScriptの関係性
+
+初心者の方でも、コードを写経しながら読み進めるだけで自然に理解できる構成になっています。
+
+
+ DOMとは？
+
+Document Object Mo...]]></description><link>https://zenn.dev/homatsu_tech/articles/2a045e3300b4c9</link><guid isPermaLink="true">https://zenn.dev/homatsu_tech/articles/2a045e3300b4c9</guid><pubDate>Sat, 05 Apr 2025 11:45:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wtAxGcQ5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2590%25E3%2583%258B%25E3%2583%25A9JavaScript%25E3%2581%25A7%25E5%25AD%25A6%25E3%2581%25B6%25EF%25BC%2581DOM%25E6%2593%258D%25E4%25BD%259C%25E3%2581%25A8%25E3%2582%25A4%25E3%2583%2599%25E3%2583%25B3%25E3%2583%2588%25E5%2587%25A6%25E7%2590%2586%25E3%2581%25AE%25E5%259F%25BA%25E6%259C%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25AE%259D%25E6%259D%25BE%2540%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2YzZWQ1ZGYyMjYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>宝松@システムエンジニア</dc:creator></item><item><title><![CDATA[【2025年版】UIを一瞬でリッチに！モダンアニメーションライブラリ7選（React/Vue対応）]]></title><description><![CDATA[Kivaでエンジニアをしている吉野です！
+今回は、最近話題の モダンなフロントエンドアニメーション ライブラリを一気に紹介します！
+最近は、ちょっとしたアニメーションを加えるだけで UIの印象や使い心地が大きく変わる 時代になってきました。
+とはいえ、
+
+「アニメーションライブラリ多すぎて、何使えばいいのか分からない…」
+
+という人も多いのでは？
+そこでこの記事では、2025年時点で実用性・人気・話題性すべてを兼ね備えたアニメーションライブラリを7つ厳選してご紹介します！
+
+ 🗂 ユースケース別おすすめアニメーションライブラリ
+
+
+
+ユースケース
+おすすめライブラリ
+理由
+
+
+
+
+ホバー...]]></description><link>https://zenn.dev/kiva/articles/1b03b0f6b5bd4e</link><guid isPermaLink="true">https://zenn.dev/kiva/articles/1b03b0f6b5bd4e</guid><pubDate>Sat, 05 Apr 2025 05:12:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--oPPLo2Cs--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%25902025%25E5%25B9%25B4%25E7%2589%2588%25E3%2580%2591UI%25E3%2582%2592%25E4%25B8%2580%25E7%259E%25AC%25E3%2581%25A7%25E3%2583%25AA%25E3%2583%2583%25E3%2583%2581%25E3%2581%25AB%25EF%25BC%2581%25E3%2583%25A2%25E3%2583%2580%25E3%2583%25B3%25E3%2582%25A2%25E3%2583%258B%25E3%2583%25A1%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA7%25E9%2581%25B8%25EF%25BC%2588React%252FVue%25E5%25AF%25BE%25E5%25BF%259C%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:mizukiyoshino%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM4OTI5MTk5ZGUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Kiva%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E5MzM1OTcyMzkuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mizukiyoshino</dc:creator></item><item><title><![CDATA[[Rails,JavaScript]非同期処理・コメント機能]]></title><description><![CDATA[
+ 同期処理・非同期処理とは
+
+ 同期処理
+順番に処理を行う。（処理完了まで待つ必要がある）
+一つの処理が終わるまで次に進まない。
+同期処理 = 行列に並んでレジを1つずつ通る
+
+ 非同期処理
+他が完了するのを待たず、前の処理が完了する前に次の処理を行う。
+並行して処理されるため、非同期の方がすべての処理を完了するのが速い。
+（しかし、操作が複雑になりがち）
+非同期処理 = セルフレジでそれぞれ同時に処理
+たとえば：
+
+「いいね」ボタンを押して数だけ変わる（ページはそのまま）
+コメントを投稿してリストが更新される（リロードなし）
+このように、ユーザー体験を向上させるための通信方式。
+
+
+...]]></description><link>https://zenn.dev/eliri/articles/00ab64c72aabc2</link><guid isPermaLink="true">https://zenn.dev/eliri/articles/00ab64c72aabc2</guid><pubDate>Fri, 04 Apr 2025 08:11:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2rha2dxH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BRails%252CJavaScript%255D%25E9%259D%259E%25E5%2590%258C%25E6%259C%259F%25E5%2587%25A6%25E7%2590%2586%25E3%2583%25BB%25E3%2582%25B3%25E3%2583%25A1%25E3%2583%25B3%25E3%2583%2588%25E6%25A9%259F%25E8%2583%25BD%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Eli%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JiYWJlMzMzYzMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Eli</dc:creator></item><item><title><![CDATA[Promise.all()の並列実行数を制限する関数]]></title><description><![CDATA[function createParallelExecutor(throttle: number) {
+  let _index = 0;
+  const processingSet: Set&lt;number&gt; = new Set();
+
+  return function executeWithLimit&lt;T&gt;(callback: () =&gt; Promise&lt;T&gt;): Promise&lt;T&gt; {
+    const index = _index++;
+
+    return new Promise((resolve, reject) =...]]></description><link>https://zenn.dev/masashi_machida/articles/5bb6ce97ac3d80</link><guid isPermaLink="true">https://zenn.dev/masashi_machida/articles/5bb6ce97ac3d80</guid><pubDate>Fri, 04 Apr 2025 06:05:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--OvM0XB_0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Promise.all%2528%2529%25E3%2581%25AE%25E4%25B8%25A6%25E5%2588%2597%25E5%25AE%259F%25E8%25A1%258C%25E6%2595%25B0%25E3%2582%2592%25E5%2588%25B6%25E9%2599%2590%25E3%2581%2599%25E3%2582%258B%25E9%2596%25A2%25E6%2595%25B0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Masashi%2520MACHIDA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzgyMmZjZjRmZTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Masashi MACHIDA</dc:creator></item><item><title><![CDATA[Next.js+PrismaのPrismaのSeed実行時に他のファイルを読み込まなかった。]]></title><description><![CDATA[Next.jsでPrismaのSeedしようとした時に外部のファイルを読み取ってくれなくて困った事案があったので、どう解決したかだけ残します。これはコンパイラーのmoduleが違うことによってImportの書き方、やり方が違うことが原因のようですが、あまり正しく理解できてない気がするので解決法だけ共有とします。
+結論として、tsconfig.jsonの"compilerOptions"の"module"を、デフォルトの"esnext"から"CommonJS"などに変更するとprisma/以下のディレクトリでも他のファイルの値が読めます。ただし、プロジェクト全体でコンパイラのモジュールを"...]]></description><link>https://zenn.dev/kyokasuigetu/articles/34da763544ba6a</link><guid isPermaLink="true">https://zenn.dev/kyokasuigetu/articles/34da763544ba6a</guid><pubDate>Fri, 04 Apr 2025 04:56:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--w_dum0T6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Next.js%252BPrisma%25E3%2581%25AEPrisma%25E3%2581%25AESeed%25E5%25AE%259F%25E8%25A1%258C%25E6%2599%2582%25E3%2581%25AB%25E4%25BB%2596%25E3%2581%25AE%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2592%25E8%25AA%25AD%25E3%2581%25BF%25E8%25BE%25BC%25E3%2581%25BE%25E3%2581%25AA%25E3%2581%258B%25E3%2581%25A3%25E3%2581%259F%25E3%2580%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%2590%2588%25E5%2590%258C%25E4%25BC%259A%25E7%25A4%25BE%25E6%25A1%259C%25E8%258A%25B1%25E6%25B0%25B4%25E6%259C%2588%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc2ZDYyNjFmZDkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>合同会社桜花水月</dc:creator></item></channel></rss>
