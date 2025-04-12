@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「JavaScript」のフィード]]></title><description><![CDATA[Zennのトピック「JavaScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/javascript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/64acd76870.png</url><title>Zennの「JavaScript」のフィード</title><link>https://zenn.dev/topics/javascript</link></image><generator>zenn.dev</generator><lastBuildDate>Sat, 12 Apr 2025 03:28:18 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/javascript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[初心者がWebアプリを作ってみた(2)]]></title><description><![CDATA[
+ はじめに
+Webアプリを作ることに関しては初心者が、ネット情報で基礎的な知識は得たので、次に何するかってことでアプリ構築を行ってみました。
+今回は2回目ですが、1回目は以下を見てくださいね。
+https://zenn.dev/maedan/articles/125304d4aef4d1
+
+ カレンダーのクリックに反応しよう
+予約の登録をするにしても、カレンダーをクリックして、といった操作感だと思いますので、クリックの処理を実装しましょう。
+fullCalendarの機能として、カレンダー内のクリックに対応してくれてますので、設定を追記してクリック後の処理を書く事で対応できます。
+まず...]]></description><link>https://zenn.dev/maedan/articles/48ec3dd5cea5ad</link><guid isPermaLink="true">https://zenn.dev/maedan/articles/48ec3dd5cea5ad</guid><pubDate>Sat, 12 Apr 2025 02:57:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--cQ--rUmv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E3%2581%258CWeb%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25282%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Nori%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhjMmEwY2ZjNGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Nori</dc:creator></item><item><title><![CDATA[jsでコンテンツを表示、非表示するやつ作った。]]></title><description><![CDATA[ボタンを押すと、下にコンテンツが表示されるやつを製作。
+自分以外の表示ボタンが押されると、自動で非表示になります。
+アニメーションバージョンも製作しました。
+アニメーションが入ると、実装が複雑になり,
+わかりにくくなる可能性があるので、
+普通バージョン
+アニメーションバージョンの順に
+紹介します。
+おまけとして、自作したテンプレートライブラリを使用した場合も掲載。
+
+ 普通バージョン
+
+&lt;!DOCTYPE html&gt;
+&lt;html lang="ja"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;met...]]></description><link>https://zenn.dev/kemii/articles/b9fa4fe1e375fc</link><guid isPermaLink="true">https://zenn.dev/kemii/articles/b9fa4fe1e375fc</guid><pubDate>Fri, 11 Apr 2025 09:48:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--EAadnRYN--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:js%25E3%2581%25A7%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2586%25E3%2583%25B3%25E3%2583%2584%25E3%2582%2592%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2580%2581%25E9%259D%259E%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2599%25E3%2582%258B%25E3%2582%2584%25E3%2581%25A4%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%25E3%2580%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kemii%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E5ZGYyMjM5ZmIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kemii</dc:creator></item><item><title><![CDATA[【JavaScript】アロー関数]]></title><description><![CDATA[
+ 初めに
+JavaScriptにおけるアロー関数について、まとめていきたいと思います！
+
+ JavaScript
+
+ 基本的な構文
+const 関数名 = (引数1, 引数2, ...) =&gt; 戻り値;
+
+() 内に引数を指定する（引数が1つなら () 省略可能）。
+=&gt; の右側に関数の処理を書く（1行なら {} や return を省略できる）。
+{} を使う場合は return を明示する。
+
+
+ 基本的な使い方
+const add = (a, b) =&gt; a + b;
+console.log(add(2, 3)); 
+実行結果
+5
+
+ {} を使う場合
+cons...]]></description><link>https://zenn.dev/daichi09167/articles/d0725e7c0d50be</link><guid isPermaLink="true">https://zenn.dev/daichi09167/articles/d0725e7c0d50be</guid><pubDate>Fri, 11 Apr 2025 05:49:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--VVYEp02K--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590JavaScript%25E3%2580%2591%25E3%2582%25A2%25E3%2583%25AD%25E3%2583%25BC%25E9%2596%25A2%25E6%2595%25B0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:daichi09167%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM3YTc4OTEwMDcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>daichi09167</dc:creator></item><item><title><![CDATA[Mongooseで「populateって何？」となったので整理]]></title><description><![CDATA[Node.js と MongoDB を学習するために Udemy の講座を受講していたところ、
+Mongoose のリレーション（関連付け）を扱うサンプルコードで分からない部分があったため、自分なりに調べてまとめました。
+特に、tweet2.user = user;と.populate()の仕組みが最初はよく理解できず戸惑っていたので、
+同じように学習中の方の助けになればうれしいです。
+今回は「ツイートとユーザーの関連付け」に関するコードをもとに、Mongooseの動きを自分なりに整理してみました。
+これから使ってみる方や、同じように混乱した方の参考になればうれしいです！
+
+ スキーマの...]]></description><link>https://zenn.dev/atsukiprog/articles/6729228605182b</link><guid isPermaLink="true">https://zenn.dev/atsukiprog/articles/6729228605182b</guid><pubDate>Thu, 10 Apr 2025 13:28:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--mHDFdavL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Mongoose%25E3%2581%25A7%25E3%2580%258Cpopulate%25E3%2581%25A3%25E3%2581%25A6%25E4%25BD%2595%25EF%25BC%259F%25E3%2580%258D%25E3%2581%25A8%25E3%2581%25AA%25E3%2581%25A3%25E3%2581%259F%25E3%2581%25AE%25E3%2581%25A7%25E6%2595%25B4%25E7%2590%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E7%25A2%25A7%25E6%259C%2588%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI0MTAwYTVmYWQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>碧月</dc:creator></item><item><title><![CDATA[npm で依存関係のあるライブラリのバージョンアップの仕方]]></title><description><![CDATA[
+ 前提
+他のライブラリとの依存関係が問題にならない場合、 npm install &lt;package-name&gt;@latest でライブラリのバージョンを最新に上げることができるため難しいことはありません。
+問題は多くのライブラリと依存関係にあるライブラリ（例：react ）のバージョンを上げる場合です。
+単に npm install react@latest としても依存関係の問題でコマンドが失敗してしまいます。
+依存関係を無視して無理やりバージョンを上げる方法もありますが、その場合は他のライブラリとの依存関係の解決に失敗した状態になります。
+こうなるとそれ以降 npm i...]]></description><link>https://zenn.dev/abebe123000/articles/3991a5f8b3cb14</link><guid isPermaLink="true">https://zenn.dev/abebe123000/articles/3991a5f8b3cb14</guid><pubDate>Thu, 10 Apr 2025 13:22:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--gKG7ZJtj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:npm%2520%25E3%2581%25A7%25E4%25BE%259D%25E5%25AD%2598%25E9%2596%25A2%25E4%25BF%2582%25E3%2581%25AE%25E3%2581%2582%25E3%2582%258B%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%25E3%2581%25AE%25E3%2583%2590%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%25E3%2581%25AE%25E4%25BB%2595%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2582%25E3%2581%25B9%25E3%2581%25B9%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNhZWRlMTY3ZGUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>あべべ</dc:creator></item><item><title><![CDATA[【Playwright】Error: EPERM: operation not permittedの解消のためにしたこと]]></title><description><![CDATA[PlaywrightのテストコードをWindows Powershellで実行しようとした際に、こちらのエラーが発生しました。「test-resultsファイルの操作が許可されていないよ」という旨のエラーのようです。
+Error: EPERM: operation not permitted, rmdir 'C:\Users\-(省略)-\test-results'
+実際のエラー画面はこちらです。
+
+1行目でテストコードを実行。2行目が該当エラー
+エラーの解消に手間取ったので、誰かの参考になればと思い記事にしました。
+
+ エラーが解消した操作
+結論、PCのエクスプローラーからtest-r...]]></description><link>https://zenn.dev/okitegami/articles/c10a2bb7c94bfc</link><guid isPermaLink="true">https://zenn.dev/okitegami/articles/c10a2bb7c94bfc</guid><pubDate>Thu, 10 Apr 2025 07:46:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qohKf5N0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Playwright%25E3%2580%2591Error%253A%2520EPERM%253A%2520operation%2520not%2520permitted%25E3%2581%25AE%25E8%25A7%25A3%25E6%25B6%2588%25E3%2581%25AE%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AB%25E3%2581%2597%25E3%2581%259F%25E3%2581%2593%25E3%2581%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kikuchi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk1NTRhZDI5ZGMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kikuchi</dc:creator></item><item><title><![CDATA[docsifyのScalaシンタックスハイライティングでハマった]]></title><description><![CDATA[
+ はじめに
+こんにちは。ネクストビートでテクノロジーエヴァンジェリストをやっている水島です。最近は社外向け技術イベントの企画・運営や社内向けドキュメントの整備などの業務が多くなっている今日この頃ですが、その中で静的サイトジェネレータdocsifyを使っていてハマったところがあるので共有したいと思います。
+
+ 起こった問題
+元々、社内向けのScala関係ドキュメントをhonkitで執筆していたのですが、ページナビゲーションで不便があり、docsifyに移行することにしました。移行自体はVSCode + Cline（Gemini 2.5 Pro Exp）を使うことで十数分くらいで完了できた...]]></description><link>https://zenn.dev/nextbeat/articles/960191c692498a</link><guid isPermaLink="true">https://zenn.dev/nextbeat/articles/960191c692498a</guid><pubDate>Thu, 10 Apr 2025 05:19:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lxJzk4qy--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:docsify%25E3%2581%25AEScala%25E3%2582%25B7%25E3%2583%25B3%25E3%2582%25BF%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25B9%25E3%2583%258F%25E3%2582%25A4%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2586%25E3%2582%25A3%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%25A7%25E3%2583%258F%25E3%2583%259E%25E3%2581%25A3%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:kmizu%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q3MzM5NTFkZmMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:nextbeat%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YlNka1h3ZXdRZENWdDRvbHk0OUkyNkgyNi1IS2k0R2phNGdJdno9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kmizu</dc:creator></item><item><title><![CDATA[statement-vs-expression]]></title><description><![CDATA[!
+此篇適合的人：
+知道有陳述式跟表達式，但我還不太清楚用法跟辨別方式
+
+
+ 比較表
+
+
+
+特性
+函式陳述式 (Function Statements)
+函式表達式 (Function Expression)
+
+
+
+
+快速辨認法
+不會回傳值
+一定會回傳值
+
+
+是否需要名稱
+必須具名
+可匿名或具名
+
+
+提升 (Hoisting)
+是
+否
+
+
+呼叫時機
+可在宣告之前
+必須在宣告之後
+
+
+使用場景
+適合遞迴、需提前呼叫的情況
+適合回呼、動態分配邏輯
+
+
+例
+
+var,if, for, function foo() {}
+
+
+1+2, const a = function() {}, () =&...]]></description><link>https://zenn.dev/chloetseng/articles/statement-expression</link><guid isPermaLink="true">https://zenn.dev/chloetseng/articles/statement-expression</guid><pubDate>Thu, 10 Apr 2025 03:24:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--QS0yxPuz--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_76:statement-vs-expression%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Clove%2520%25E3%2582%25AF%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2596%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzViZmI0N2FhNTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Clove クローブ</dc:creator></item><item><title><![CDATA[【React】memo, useMemo, useCallbackを使いこなす]]></title><description><![CDATA[
+ はじめに
+Reactアプリケーションのパフォーマンスチューニングにおいて、「メモ化（Memoization）」は頻繁に議論されるテクニックです。
+React.memo、useMemo、useCallback は、適切に使えば不要な再レンダリングや計算を削減するHowToですが、誤った使い方や過剰な適用は、逆にコードの複雑性を増し、期待した効果が得られないことも少なくありません。
+将来的には、React Compilerがこれらのメモ化APIの多くを自動化し、開発者の負担を軽減することが期待されていますが、現時点では手動での最適化が重要と捉えています。
+筆者自身、直近DRESS COD...]]></description><link>https://zenn.dev/dress_code/articles/bd577b38e1c700</link><guid isPermaLink="true">https://zenn.dev/dress_code/articles/bd577b38e1c700</guid><pubDate>Thu, 10 Apr 2025 02:34:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Eh0iJSZV--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590React%25E3%2580%2591memo%252C%2520useMemo%252C%2520useCallback%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2584%25E3%2581%2593%25E3%2581%25AA%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%25B5%25E3%2582%258B%25E3%2581%2597%25E3%2582%2587%25E3%2581%2586%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRiOGMxZmU1MDUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:DRESS%2520CODE%2520TECH%2520BLOG%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2QzMmQ5N2Q0NmQuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ふるしょう</dc:creator></item><item><title><![CDATA[動的にjsを順次読み込みするjsを作成しました。]]></title><description><![CDATA[
+ 従来のコード
+&lt;!DOCTYPE html&gt;
+&lt;html lang="ja"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Document&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;script src = "console1.js"&gt;&lt;/script&gt;
+&lt;script src = "console2.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+
+...]]></description><link>https://zenn.dev/kemii/articles/99165d42da5f32</link><guid isPermaLink="true">https://zenn.dev/kemii/articles/99165d42da5f32</guid><pubDate>Thu, 10 Apr 2025 00:38:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7pACJV_O--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%258B%2595%25E7%259A%2584%25E3%2581%25ABjs%25E3%2582%2592%25E9%25A0%2586%25E6%25AC%25A1%25E8%25AA%25AD%25E3%2581%25BF%25E8%25BE%25BC%25E3%2581%25BF%25E3%2581%2599%25E3%2582%258Bjs%25E3%2582%2592%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2597%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%25E3%2580%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kemii%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E5ZGYyMjM5ZmIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kemii</dc:creator></item><item><title><![CDATA[htmlにおけるscriptのタグの実行順序について、あいまいだったのでまとめた。]]></title><description><![CDATA[
+ HTML内で複数のscriptタグを使用した場合の読み込み順序について
+
+ 同期スクリプト（デフォルト）の場合:
+スクリプトは記述された順番に厳密に実行されます
+ブラウザはスクリプトのダウンロードと実行を順番に処理し、完了するまで次のスクリプトやHTMLのパースをブロックします
+
+ async属性付きスクリプトの場合:
+スクリプトは非同期でダウンロードされ、ダウンロードが完了した時点で即時実行されます
+実行順序は保証されません（ダウンロード完了順に実行される）
+HTMLパースをブロックしません
+
+ defer属性付きスクリプトの場合:
+スクリプトは非同期でダウンロードされますが、DO...]]></description><link>https://zenn.dev/kemii/articles/63d33835e7ef3c</link><guid isPermaLink="true">https://zenn.dev/kemii/articles/63d33835e7ef3c</guid><pubDate>Thu, 10 Apr 2025 00:12:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--RqX7EUTS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:html%25E3%2581%25AB%25E3%2581%258A%25E3%2581%2591%25E3%2582%258Bscript%25E3%2581%25AE%25E3%2582%25BF%25E3%2582%25B0%25E3%2581%25AE%25E5%25AE%259F%25E8%25A1%258C%25E9%25A0%2586%25E5%25BA%258F%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E3%2580%2581%25E3%2581%2582%25E3%2581%2584%25E3%2581%25BE%25E3%2581%2584%25E3%2581%25A0%25E3%2581%25A3%25E3%2581%259F%25E3%2581%25AE%25E3%2581%25A7%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2581%259F%25E3%2580%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kemii%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E5ZGYyMjM5ZmIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kemii</dc:creator></item><item><title><![CDATA[AlpineJsを自作ライブラリで簡単に表記できるようにしてみた]]></title><description><![CDATA[&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;独立型デザイン&lt;/title&gt;
+&lt;link rel="stylesheet" href="ad_style.css"&gt;
+&lt;script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js...]]></description><link>https://zenn.dev/kemii/articles/6a4c24b82a6fed</link><guid isPermaLink="true">https://zenn.dev/kemii/articles/6a4c24b82a6fed</guid><pubDate>Wed, 09 Apr 2025 12:32:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--emlfoOmq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AlpineJs%25E3%2582%2592%25E8%2587%25AA%25E4%25BD%259C%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%25E3%2581%25A7%25E7%25B0%25A1%25E5%258D%2598%25E3%2581%25AB%25E8%25A1%25A8%25E8%25A8%2598%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258B%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kemii%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E5ZGYyMjM5ZmIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kemii</dc:creator></item><item><title><![CDATA[about-closure]]></title><description><![CDATA[
+ 關於閉包(closure)
+!
+什麼是閉包(closure)
+我租了一間辦公室(outerFunction)，理論上我退租後東西要清空，房東會斷水電(釋放記憶體)。
+但我留著鑰匙(innerFunction)，並且會把廁所的鑰匙放在外面(return innerFunction)，
+有時候還會來借廁所(counter)，
+所以房東看到我偶爾還會來，就沒有斷水電(閉包)。
+
+
+
+ 直接先來看一段 JS
+function outerFunction() {
+  let counter = 0;
+  function innerFunction() {
+    counter++;
+   ...]]></description><link>https://zenn.dev/chloetseng/articles/about-closure</link><guid isPermaLink="true">https://zenn.dev/chloetseng/articles/about-closure</guid><pubDate>Wed, 09 Apr 2025 04:08:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--N4UJFqxy--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_80:about-closure%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Clove%2520%25E3%2582%25AF%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2596%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzViZmI0N2FhNTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Clove クローブ</dc:creator></item><item><title><![CDATA[jsテンプレートライブラリをMITライセンスで公開。]]></title><description><![CDATA[
+ ほしかった機能
+vanilla jsのみで動作する。
+html側で設定、変更が可能なもの。
+簡単に導入できること。
+
+ なぜ作ろうと思ったか
+サーバーにnode.jsが入らなかったから。
+レイアウトが複雑な要素を編集するのが大変だから。
+かといって、templeteでjsを書くまでもないような場合に、ほしいなと感じていたから。
+
+ 使用方法
+replaceクラスの中に、テンプレートを記述し、その内容を参照し、テンプレートとする。
+基本的には、テンプレートの内容を重視し、innerhtmlのみを呼び出し元から参照させる。
+テンプレートを使用する物にはp_tempクラスを追加する。
+
+
+...]]></description><link>https://zenn.dev/kemii/articles/a8fcd49fd28839</link><guid isPermaLink="true">https://zenn.dev/kemii/articles/a8fcd49fd28839</guid><pubDate>Tue, 08 Apr 2025 12:26:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4YayhRRg--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:js%25E3%2583%2586%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AC%25E3%2583%25BC%25E3%2583%2588%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%25E3%2582%2592MIT%25E3%2583%25A9%25E3%2582%25A4%25E3%2582%25BB%25E3%2583%25B3%25E3%2582%25B9%25E3%2581%25A7%25E5%2585%25AC%25E9%2596%258B%25E3%2580%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kemii%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E5ZGYyMjM5ZmIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kemii</dc:creator></item><item><title><![CDATA[生成AIを活用したカスタムデータモデルの構築]]></title><description><![CDATA[こんにちは！この記事では、初心者の方でも理解できるように、生成AIを活用してカスタムデータモデルを構築する方法について説明します。生成AIは、画像生成やテキスト生成など、多くの分野で活用されています。この技術を使って、自分だけのデータモデルを作成する方法を学んでいきましょう。
+
+ 生成AIとは？
+まずは生成AIについて簡単に説明します。生成AIとは、**生成的敵対ネットワーク（GAN: Generative Adversarial Network）や変分オートエンコーダ（VAE: Variational Autoencoder）**などの技術を使って、新しいデータを生成するAI技術のこと...]]></description><link>https://zenn.dev/utokyo_aido/articles/20250305-063916</link><guid isPermaLink="true">https://zenn.dev/utokyo_aido/articles/20250305-063916</guid><pubDate>Tue, 08 Apr 2025 06:15:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--J7I0aPTC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%2594%259F%25E6%2588%2590AI%25E3%2582%2592%25E6%25B4%25BB%25E7%2594%25A8%25E3%2581%2597%25E3%2581%259F%25E3%2582%25AB%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%25A0%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%25A2%25E3%2583%2587%25E3%2583%25AB%25E3%2581%25AE%25E6%25A7%258B%25E7%25AF%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:AIdo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVhYWFkMWNkMzMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>AIdo</dc:creator></item><item><title><![CDATA[MCPサーバーのTool名のハイフン`-`とアンダースコア`_`でハマった話]]></title><description><![CDATA[
+ はじめに
+最近、界隈で話題になっている MCP（Model Context Protocol）サーバーに興味を持って実装を始めたのですが、Cursorから動かそうとしたときにはまったことを共有します。
+
+ 結論
+なんてことはないです。
+tool名にはハイフン-を使わず、アンダースコア_を使いましょう、っていう知ってる人には至極当たり前の話…たぶん
+
+ 問題
+自作のMCPサーバーでcount-charsというtoolを実装しました。
+
+それをCursorから呼び出してもらうのですが、何度やってもハイフンがアンダースコアになったcount_charsを呼んでしまい、Tool count_...]]></description><link>https://zenn.dev/moduloseal/articles/120912091210101</link><guid isPermaLink="true">https://zenn.dev/moduloseal/articles/120912091210101</guid><pubDate>Tue, 08 Apr 2025 05:00:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--SM61kuJG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:MCP%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2581%25AETool%25E5%2590%258D%25E3%2581%25AE%25E3%2583%258F%25E3%2582%25A4%25E3%2583%2595%25E3%2583%25B3%2560-%2560%25E3%2581%25A8%25E3%2582%25A2%25E3%2583%25B3%25E3%2583%2580%25E3%2583%25BC%25E3%2582%25B9%25E3%2582%25B3%25E3%2582%25A2%2560_%2560%25E3%2581%25A7%25E3%2583%258F%25E3%2583%259E%25E3%2581%25A3%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2582%25E3%2581%2596%25E3%2582%2589%25E3%2581%2597%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY0YTMyMTRiMDIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>あざらし</dc:creator></item><item><title><![CDATA[なぜかクリックイベントが暴発する？React+MUIのTableRowでハマった話]]></title><description><![CDATA[
+ なぜかクリックイベントが暴発する？React+MUIのTableRowでハマった話
+
+削除ボタン押したのに、次に別の場所クリックするとモーダルが開く……。その違和感、ちゃんと対処できます。
+
+
+ 「TableRowが勝手に反応する」現象、起きてませんか？
+React × MUI を使ってテーブルを作っていて、こんな経験ありませんか？
+
+TableRowをクリックするとモーダルが開くようにしている
+でも、行内にあるボタン（削除など）を押したあと、他の場所をクリックするとモーダルが勝手に開く
+
+&lt;TableRow onClick={() =&gt; handleRowClick(r...]]></description><link>https://zenn.dev/inzaitf/articles/0060b0a680ae37</link><guid isPermaLink="true">https://zenn.dev/inzaitf/articles/0060b0a680ae37</guid><pubDate>Tue, 08 Apr 2025 03:28:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--aQ-CPB89--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%25AA%25E3%2581%259C%25E3%2581%258B%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25A4%25E3%2583%2599%25E3%2583%25B3%25E3%2583%2588%25E3%2581%258C%25E6%259A%25B4%25E7%2599%25BA%25E3%2581%2599%25E3%2582%258B%25EF%25BC%259FReact%252BMUI%25E3%2581%25AETableRow%25E3%2581%25A7%25E3%2583%258F%25E3%2583%259E%25E3%2581%25A3%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2584%25E3%2582%2593%25E3%2581%2596%25E3%2581%2584%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzEzMWJlZTljMGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>いんざい</dc:creator></item><item><title><![CDATA[Stripe Price APIでlookup_keysを使う際の注意点]]></title><description><![CDATA[Stripeで複数の料金プランを管理している場合、特定のプランだけを簡単に取得したいケースは多いでしょう。そんな時に便利なのがlookup_keysパラメータです。今回はlookup_keysを使う際の重要な注意点について解説します。
+
+ lookup_keysで料金データを取得する基本
+Stripe Price APIでは、lookup_keysを使って識別子を指定することで、任意の料金データを簡単に取得できます。
+const prices = await stripe.prices.lists({
+    lookup_keys: ['starter', 'business']
+})...]]></description><link>https://zenn.dev/digitalcube/articles/7a90c1f1ea51b5</link><guid isPermaLink="true">https://zenn.dev/digitalcube/articles/7a90c1f1ea51b5</guid><pubDate>Tue, 08 Apr 2025 00:34:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--pV-jg6rr--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Stripe%2520Price%2520API%25E3%2581%25A7lookup_keys%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%25E9%259A%259B%25E3%2581%25AE%25E6%25B3%25A8%25E6%2584%258F%25E7%2582%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Okamoto%2520Hidetaka%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM0Y2U1ZTFlODkuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2587%25E3%2582%25B8%25E3%2582%25BF%25E3%2583%25AB%25E3%2582%25AD%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%2596%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZiZjI5ZDBmZjYuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Okamoto Hidetaka</dc:creator></item><item><title><![CDATA[Reactのカスタムフックを理解する]]></title><description><![CDATA[
+ はじめに
+Reactのカスタムフックって得意ですか？
+ベテランのフロントエンジニアならともかく、バックエンドエンジニアにとってはかなり難しいのではないでしょうか？
+というか私がすぐわからなくなるので、改めてゼロから再勉強したので、その過程を含めて共有いたします。
+これをコピペしながら動かせばきっと理解できると思います。
+
+ STEP1 固定の文言を１つ返すだけのフック
+まず、最も単純なフックを書いてみます。
+それが、これ。
+なんのへんてつもない、ただ固定値を１つ返すだけの関数です。
+
+App.js
+import "./App.css";
+
+/**
+ * カスタムフック
+ * @ret...]]></description><link>https://zenn.dev/k_tabuchi/articles/964c18dd027607</link><guid isPermaLink="true">https://zenn.dev/k_tabuchi/articles/964c18dd027607</guid><pubDate>Mon, 07 Apr 2025 12:31:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--B0VmlAK1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%25E3%2581%25AE%25E3%2582%25AB%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%25A0%25E3%2583%2595%25E3%2583%2583%25E3%2582%25AF%25E3%2582%2592%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:k-tabuchi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhkMjhhY2RlZGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>k-tabuchi</dc:creator></item><item><title><![CDATA[Mosquithon_Introduction]]></title><description><![CDATA[本篇說明
+
+
+活動期間：4/7（一）~ 5/6（二）
+主題：第一屆鐵蚊子盃 - 前端面試技術筆記
+題庫為 E+ 的前端題庫佐卡柱老師的 JS 核心書藉，用自己的理解再說明一次
+分享頻率：最少一週一篇
+
+
+
+ 大綱
+
+第一週主題：JavaScript 核心慨念強化
+第二週主題：React 與 Hooks 應用
+第三週主題：HTML、CSS、前端工具
+第四週主題：瀏覽器與綜合複習
+
+
+ 章節
+
+關於閉包(closure)
+函式陳述式與表達式
+
+]]></description><link>https://zenn.dev/chloetseng/articles/mosquithon-intro</link><guid isPermaLink="true">https://zenn.dev/chloetseng/articles/mosquithon-intro</guid><pubDate>Mon, 07 Apr 2025 09:06:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--81JrygMq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_76:Mosquithon_Introduction%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Clove%2520%25E3%2582%25AF%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2596%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzViZmI0N2FhNTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Clove クローブ</dc:creator></item></channel></rss>
