@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Java」のフィード]]></title><description><![CDATA[Zennのトピック「Java」のRSSフィードです]]></description><link>https://zenn.dev/topics/java</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/5c47bb8423.png</url><title>Zennの「Java」のフィード</title><link>https://zenn.dev/topics/java</link></image><generator>zenn.dev</generator><lastBuildDate>Sun, 13 Apr 2025 01:02:18 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/java/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Javaがよくわからなかったので、他の言語と比較して整理してみました]]></title><description><![CDATA[
+ はじめに
+普段は TypeScript や Python、Go を使っているのですが、Java に触れる機会はなかなかありませんでした。
+「Java って重そう」「エンタープライズ向け？」といった印象で止まっていたので、
+今回は他の言語と比べながら、Java がどんな特徴を持っているのかを整理してみました。
+
+
+ 実行方式・OS 対応・依存管理のざっくり比較
+
+
+
+言語
+実行方式
+コンパイル種別
+OS 差異吸収
+依存管理
+
+
+
+
+Java
+JVM + バイトコード
+JIT（AOT も可）
+JVM で抽象化
+Maven / Gradle
+
+
+JavaScript (Node.js)
+V...]]></description><link>https://zenn.dev/optimisuke/articles/c76b581bff88da</link><guid isPermaLink="true">https://zenn.dev/optimisuke/articles/c76b581bff88da</guid><pubDate>Sat, 12 Apr 2025 15:05:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3MoF60JJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java%25E3%2581%258C%25E3%2582%2588%25E3%2581%258F%25E3%2582%258F%25E3%2581%258B%25E3%2582%2589%25E3%2581%25AA%25E3%2581%258B%25E3%2581%25A3%25E3%2581%259F%25E3%2581%25AE%25E3%2581%25A7%25E3%2580%2581%25E4%25BB%2596%25E3%2581%25AE%25E8%25A8%2580%25E8%25AA%259E%25E3%2581%25A8%25E6%25AF%2594%25E8%25BC%2583%25E3%2581%2597%25E3%2581%25A6%25E6%2595%25B4%25E7%2590%2586%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Naosuke%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ3MGQ3ZTQ5MmUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Naosuke</dc:creator></item><item><title><![CDATA[JavaでAPIサーバーを作る3つの選択肢 - 他言語エンジニアに贈る、モダンJava開発の入り口 -]]></title><description><![CDATA[
+ 1. はじめに
+筆者はもともと Go や Node.js で API サーバーを構築していた経験がありました。
+シンプルな構成で高速に動作し、オープンなライブラリを自由に組み合わせられる世界はとても快適で、Java は正直「古い」「重い」「大企業向けで閉じた世界」という先入観がありました。
+特に、エンタープライズ企業で使われている Java の商用環境（WebSphere、WebLogic など） はどうなっているのか理解しづらく、言語というより“専用プラットフォーム”のような印象さえありました。
+しかし調べてみると、Java にもオープンソース化とクラウド対応の流れが急速に進んでい...]]></description><link>https://zenn.dev/optimisuke/articles/f2cde50bd4de4c</link><guid isPermaLink="true">https://zenn.dev/optimisuke/articles/f2cde50bd4de4c</guid><pubDate>Sat, 12 Apr 2025 14:14:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--MYtMIYwv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java%25E3%2581%25A7API%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B3%25E3%2581%25A4%25E3%2581%25AE%25E9%2581%25B8%25E6%258A%259E%25E8%2582%25A2%2520-%2520%25E4%25BB%2596%25E8%25A8%2580%25E8%25AA%259E%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%25E3%2581%25AB%25E8%25B4%2588%25E3%2582%258B%25E3%2580%2581%25E3%2583%25A2%25E3%2583%2580%25E3%2583%25B3Java%25E9%2596%258B%25E7%2599%25BA%25E3%2581%25AE%25E5%2585%25A5%25E3%2582%258A%25E5%258F%25A3%2520-%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Naosuke%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ3MGQ3ZTQ5MmUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Naosuke</dc:creator></item><item><title><![CDATA[Javaエンジニアのための WebAssembly 入門]]></title><description><![CDATA[こんにちは。この記事では、Java エンジニアの皆さんに向けて、WebAssembly（Wasm）の基本とその仕組みを紹介します。
+JVM やバイトコードの概念に親しんでいる方なら、Wasm もきっとスムーズに理解できるはずです。
+ただし、Wasm は JVM の後継でも代替でもありません。 似ているようで根本的に異なるその思想や特徴を、Java との対比を通じて解説していきます。
+
+
+ 1. 🧱 WebAssembly って何？
+Wasm は、主にWeb ブラウザで安全かつ高速にコードを実行するための中間表現として登場しました。これは、Java のバイトコードと JVM の関係に近く、...]]></description><link>https://zenn.dev/optimisuke/articles/df01ee3526ba83</link><guid isPermaLink="true">https://zenn.dev/optimisuke/articles/df01ee3526ba83</guid><pubDate>Sat, 12 Apr 2025 09:58:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--66pXT6nF--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%25E3%2581%25AE%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%2520WebAssembly%2520%25E5%2585%25A5%25E9%2596%2580%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Naosuke%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ3MGQ3ZTQ5MmUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Naosuke</dc:creator></item><item><title><![CDATA[Tomcat サーバでFilterを使ってみて、Spring Security を雑に理解する]]></title><description><![CDATA[
+ はじめに
+こんにちは、Cloud Ace の許です。
+とある日に Spring Security を勉強したいなと、色々な記事を読んでいました。
+その中で、よく出てくるのがこの図でした。
+
+引用元: Spring Security Reference
+この図に記載されている"Security Filter Chain"を調べてみると、Java Servlet API の Filter という仕組みを使っていることがわかりました。
+そこで、今回は Tomcat サーバを作成してみて、実際に Filter を実装することで、Spring Security がどのように動いているのかをざっ...]]></description><link>https://zenn.dev/cloud_ace/articles/617ac84b3e28a7</link><guid isPermaLink="true">https://zenn.dev/cloud_ace/articles/617ac84b3e28a7</guid><pubDate>Fri, 11 Apr 2025 08:40:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--XamW5R1k--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Tomcat%2520%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2581%25A7Filter%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%25A6%25E3%2580%2581Spring%2520Security%2520%25E3%2582%2592%25E9%259B%2591%25E3%2581%25AB%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25A6%25E3%2583%2589%25E3%2582%25A8%25E3%2583%25BC%25E3%2582%25B9%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE2OGMwYmM4MTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>クラウドエース株式会社</dc:creator></item><item><title><![CDATA[Spring Boot + Docker + MySQL + MyBatis + Flyway構成のアプリケーションを生成AIで作成してみた]]></title><description><![CDATA[
+ はじめに
+Rehab for JAPANレセプトバックエンドエンジニアの @aragane です!
+生成AIの活用が高まる中で、業務で使用している技術スタックを含めて0から作ってみたらどれくらいのものが出来るのかなと気になり、キャッチアップも兼ねて試してみました。
+試してみての記録・備忘録に近い内容のため、気軽に読んで頂ければと思います。
+後述の記事内でプロンプトや作成したソースコードを公開していますので、興味がある方は覗いてみてください☀️
+
+ 使用した生成AI
+
+ChatGPT-4o(Plus)
+Claude 3.7 Sonnet(無償版)!
+Claudeについては無償版というこ...]]></description><link>https://zenn.dev/rehabforjapan/articles/create_springboot_using_ai</link><guid isPermaLink="true">https://zenn.dev/rehabforjapan/articles/create_springboot_using_ai</guid><pubDate>Fri, 11 Apr 2025 02:48:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xhdaMTLS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Spring%2520Boot%2520%252B%2520Docker%2520%252B%2520MySQL%2520%252B%2520MyBatis%2520%252B%2520Flyway%25E6%25A7%258B%25E6%2588%2590%25E3%2581%25AE%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:aragane%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNkYzExOTgzNjguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Rehab%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E0NDczYjk0NzEuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>aragane</dc:creator></item><item><title><![CDATA[Stringインスタンスのパンを焼こう]]></title><description><![CDATA[本日のコードはこちら。簡略型で行きますが
+
+Intern.java
+String a = "abc";
+String b = new String("abc");
+
+では、次の演算は、true、false、どちらになるでしょう。
+このとき、Java人には常識かもですが、「==」という記号は、単に同値なのではなく同じインスタンスを指しているかどうかを判定することに注意してください。
+a === b;
+
+はい、こちらは先ほど述べた理由で、falseになりますね。では次です。
+a == b.intern()
+
+正解は、、、trueです。なぜでしょう。
+答えは「パンをおいておく場所」にあります。...]]></description><link>https://zenn.dev/bunkei/articles/d8960e16c83f3e</link><guid isPermaLink="true">https://zenn.dev/bunkei/articles/d8960e16c83f3e</guid><pubDate>Fri, 11 Apr 2025 01:47:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Dhorkj2G--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:String%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%25B3%25E3%2582%25B9%25E3%2581%25AE%25E3%2583%2591%25E3%2583%25B3%25E3%2582%2592%25E7%2584%25BC%25E3%2581%2593%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%2596%2587%25E7%25B3%25BB%25E5%25A4%25A7%25E5%25AD%25A6%25E7%2594%259F%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E3ODk2NmZhNTMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>文系大学生</dc:creator></item><item><title><![CDATA[ぽりもーふぃずむ]]></title><description><![CDATA[＊厳密でなければごめんなさい。黒本参照。
+ぽりもーふぃずむ。難しいですよね。語感はいいけど。
+ポリモーフィズムは多態性とも呼ばれて、要は同じメソッドを呼び出しても、インスタンスごとに違う動きをするよ、ということです。
+前提として、親クラスの型の変数は、子クラスのインスタンスも代入することができます。
+例えば、SuperHeroクラスがHeroクラスを継承している場合
+
+HeroTest.java
+Hero h = new SuperHero();
+
+これはオッケーです。SuperHeroもHeroも、Heroであることに変わりはないですもんね。
+これを踏まえて
+
+Animal.java
+...]]></description><link>https://zenn.dev/bunkei/articles/4cfeb341100a4a</link><guid isPermaLink="true">https://zenn.dev/bunkei/articles/4cfeb341100a4a</guid><pubDate>Thu, 10 Apr 2025 13:12:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--o1ibrZdh--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%25BD%25E3%2582%258A%25E3%2582%2582%25E3%2583%25BC%25E3%2581%25B5%25E3%2581%2583%25E3%2581%259A%25E3%2582%2580%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%2596%2587%25E7%25B3%25BB%25E5%25A4%25A7%25E5%25AD%25A6%25E7%2594%259F%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E3ODk2NmZhNTMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>文系大学生</dc:creator></item><item><title><![CDATA[var 〜ワイルドカード〜]]></title><description><![CDATA[＊厳密でなければごめんなさい。黒本参照。
+みなさん、varしてますか。
+突然ですが問題。
+黒本第2章第8問です。
+
+A.java
+public class A {
+    public void test() {
+        System.out.println("A");
+    }
+}
+
+
+B.java
+public class B extends A {
+    @Override
+    public void test() {
+        System.out.println("B");
+    }
+}
+
+
+C.java
+public class C extends A...]]></description><link>https://zenn.dev/bunkei/articles/4850d50c118575</link><guid isPermaLink="true">https://zenn.dev/bunkei/articles/4850d50c118575</guid><pubDate>Thu, 10 Apr 2025 12:44:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ei_GTnWz--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:var%2520%25E3%2580%259C%25E3%2583%25AF%25E3%2582%25A4%25E3%2583%25AB%25E3%2583%2589%25E3%2582%25AB%25E3%2583%25BC%25E3%2583%2589%25E3%2580%259C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%2596%2587%25E7%25B3%25BB%25E5%25A4%25A7%25E5%25AD%25A6%25E7%2594%259F%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E3ODk2NmZhNTMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>文系大学生</dc:creator></item><item><title><![CDATA[文系大学生、Java SE 17 Silverに挑戦]]></title><description><![CDATA[みなさんこんにちは。初記事です。お手柔らかに。
+自分文系大学生4年で、来年SIerに就職します。
+時間もできたので、オラクルのJava Silverを取ろうということです。
+（以前ちょろっとだけJavaを触った経験もあって）
+就職後には研修で無双しようかなという魂胆です。
+普通に楽しいですしね、プログラミング。
+自分はこれで勉強してます。
+
+徹底攻略Java SE 17 Silver問題集［1Z0-825］対応
+https://amzn.asia/d/gdjjZLt
+いわゆる黒本。わかりやすい。
+わかりやすいし、問題集というのもいい。開いたらもう問題です。純粋なインプットのページはなし。...]]></description><link>https://zenn.dev/bunkei/articles/59c85283d059a7</link><guid isPermaLink="true">https://zenn.dev/bunkei/articles/59c85283d059a7</guid><pubDate>Thu, 10 Apr 2025 12:10:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--pRJU9lZx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%2596%2587%25E7%25B3%25BB%25E5%25A4%25A7%25E5%25AD%25A6%25E7%2594%259F%25E3%2580%2581Java%2520SE%252017%2520Silver%25E3%2581%25AB%25E6%258C%2591%25E6%2588%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%2596%2587%25E7%25B3%25BB%25E5%25A4%25A7%25E5%25AD%25A6%25E7%2594%259F%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E3ODk2NmZhNTMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>文系大学生</dc:creator></item><item><title><![CDATA[Javaの「参照の値渡し」をざっくりまとめてみた[Java初心者]]]></title><description><![CDATA[
+ はじめに
+こんにちは。
+プログラミング初心者Wakinozaと申します。
+Java勉強中に調べたことを記事にまとめています。
+十分気をつけて執筆していますが、なにぶん初心者が書いた記事なので、理解が浅い点などあるかと思います。
+記事を参考にされる方は、初心者の記事であることを念頭において、お読みいただけると幸いです。
+間違い等あれば、指摘いただけると助かります。
+
+ 対象読者
+
+Javaを勉強中の方。
+Java SE Bronze試験を勉強中の方。
+Javaの「値渡しと参照の値渡し」「Stringクラス固有の特徴」についてざっくり知りたい方。
+
+
+ 目次
+1. 値渡しと参照の値渡し
+...]]></description><link>https://zenn.dev/wakinoza/articles/6c6b99deb05439</link><guid isPermaLink="true">https://zenn.dev/wakinoza/articles/6c6b99deb05439</guid><pubDate>Thu, 10 Apr 2025 11:23:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--eaGcSFWR--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java%25E3%2581%25AE%25E3%2580%258C%25E5%258F%2582%25E7%2585%25A7%25E3%2581%25AE%25E5%2580%25A4%25E6%25B8%25A1%25E3%2581%2597%25E3%2580%258D%25E3%2582%2592%25E3%2581%2596%25E3%2581%25A3%25E3%2581%258F%25E3%2582%258A%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%255BJava%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%255D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:wakinoza%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhkYzVjNWY5ZWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>wakinoza</dc:creator></item><item><title><![CDATA[TypeScript以外が嫌いです]]></title><description><![CDATA[
+ TypeScript以外が嫌いです
+こんにちは、TypeScript原理主義者のTakoです。今日は私がなぜTypeScript以外の言語が心の底から嫌いなのかをお話しします。
+
+ はじめに
+みなさん、世の中にはプログラミング言語がたくさんありますよね。Java、Python、JavaScript、Ruby、Go...。でも、私にとってそれらは全て「TypeScriptではない言語」というカテゴリに分類されます。つまり、使う価値のない言語です。
+
+ 型がないなんて、人生がないようなもの
+JavaScript？あんなの型がなくて何が楽しいんですか？undefined is not a ...]]></description><link>https://zenn.dev/takoserver/articles/7a624e38285b16</link><guid isPermaLink="true">https://zenn.dev/takoserver/articles/7a624e38285b16</guid><pubDate>Wed, 09 Apr 2025 13:43:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--UOOAg-F6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%25E4%25BB%25A5%25E5%25A4%2596%25E3%2581%258C%25E5%25AB%258C%25E3%2581%2584%25E3%2581%25A7%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259F%25E3%2581%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRmNTgyM2RjZDAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>たこ</dc:creator></item><item><title><![CDATA[Javaの「インクリメント/デクリメント演算子」についてざっくりまとめてみた[Java初心者]]]></title><description><![CDATA[
+ はじめに
+こんにちは。
+プログラミング初心者Wakinozaと申します。
+Java勉強中に調べたことを記事にまとめています。
+十分気をつけて執筆していますが、なにぶん初心者が書いた記事なので、理解が浅い点などあるかと思います。
+記事を参考にされる方は、初心者の記事であることを念頭において、お読みいただけると幸いです。
+間違い等あれば、指摘いただけると助かります。
+
+ 対象読者
+
+Javaを勉強中の方。
+Java SE Bronze試験を勉強中の方。
+Javaのインクリメント/デクリメント演算子をざっくり理解したい方。
+
+
+ 目次
+1. インクリメント/デクリメント演算子
+2. 後置記...]]></description><link>https://zenn.dev/wakinoza/articles/1f9b7fff691006</link><guid isPermaLink="true">https://zenn.dev/wakinoza/articles/1f9b7fff691006</guid><pubDate>Wed, 09 Apr 2025 13:04:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BthBaBLQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java%25E3%2581%25AE%25E3%2580%258C%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%25A1%25E3%2583%25B3%25E3%2583%2588%252F%25E3%2583%2587%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%25A1%25E3%2583%25B3%25E3%2583%2588%25E6%25BC%2594%25E7%25AE%2597%25E5%25AD%2590%25E3%2580%258D%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E3%2581%2596%25E3%2581%25A3%25E3%2581%258F%25E3%2582%258A%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%255BJava%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%255D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:wakinoza%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhkYzVjNWY5ZWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>wakinoza</dc:creator></item><item><title><![CDATA[Javaプログラムをコマンドプロンプトで実行したら日本語が文字化けして困った！]]></title><description><![CDATA[
+ はじめに
+お疲れさまです！加湿器に足す水の量が少なくなってきました。Meloです。
+ほとんど初めて触るJavaで練習がてら簡単なコンソールアプリ（コマンドラインアプリ）を作っていたところ、プログラムを実行した際に一部で文字化け現象が発生したので、その原因と解決策を共有したいと思います。
+
+ 使用している技術スタック
+今回紹介するプロジェクトで使用している技術スタックをざっくりまとめておきます。
+
+ 言語・環境
+
+
+Java: オブジェクト指向プログラミング言語
+
+Windows: 開発・実行環境
+
+PowerShell: コマンドライン環境
+
+コマンドプロンプト: コマンドライン環境...]]></description><link>https://zenn.dev/codeunit/articles/c5be934bd5154a</link><guid isPermaLink="true">https://zenn.dev/codeunit/articles/c5be934bd5154a</guid><pubDate>Wed, 09 Apr 2025 12:33:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Y99HFIn2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%25A0%25E3%2582%2592%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2583%2597%25E3%2583%25AD%25E3%2583%25B3%25E3%2583%2597%25E3%2583%2588%25E3%2581%25A7%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%2597%25E3%2581%259F%25E3%2582%2589%25E6%2597%25A5%25E6%259C%25AC%25E8%25AA%259E%25E3%2581%258C%25E6%2596%2587%25E5%25AD%2597%25E5%258C%2596%25E3%2581%2591%25E3%2581%2597%25E3%2581%25A6%25E5%259B%25B0%25E3%2581%25A3%25E3%2581%259F%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Melo%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhlZDUzODU0OWYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2583%25A6%25E3%2583%258B%25E3%2583%2583%25E3%2583%2588%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RjMTY4ZGYzMWQuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Melo</dc:creator></item><item><title><![CDATA[【Java】使えると意外に便利？！Arraysクラスについて]]></title><description><![CDATA[
+ Arrays クラスとは？
+Arrays クラス は、配列を簡単に操作するための便利な道具です
+java.util パッケージにあります
+
+配列（Array）： たくさんのデータをまとめて扱える
+Arrays クラス：「並び替え」「検索」「コピー」などの処理を簡単にできる ようになる
+
+
+ Arrays クラスの便利なメソッド
+
+表示：toString()
+並び替え：sort()
+検索：binarySearch()
+コピー：copyOf()
+初期化：fill()
+比較：equals()
+リスト変換：asList()
+
+
+ toString()：配列の中身を表示
+普通にSystem.o...]]></description><link>https://zenn.dev/codek2/articles/bdea3349abfd50</link><guid isPermaLink="true">https://zenn.dev/codek2/articles/bdea3349abfd50</guid><pubDate>Wed, 09 Apr 2025 11:25:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--tJqT6XiV--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Java%25E3%2580%2591%25E4%25BD%25BF%25E3%2581%2588%25E3%2582%258B%25E3%2581%25A8%25E6%2584%258F%25E5%25A4%2596%25E3%2581%25AB%25E4%25BE%25BF%25E5%2588%25A9%25EF%25BC%259F%25EF%25BC%2581Arrays%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25B9%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E6%2597%25A5%25E5%2592%258C%25EF%25BC%2588%25E3%2581%25B3%25E3%2582%2588%25E3%2582%258A%25EF%25BC%2589%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E3OWJlYTJhM2QuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>コード日和（びより）</dc:creator></item><item><title><![CDATA[【Java】returnより先にfinallyが実行されるって知ってた？try-catch-finallyの動作を確認してみた]]></title><description><![CDATA[Javaで例外処理を書くときによく使うtry-catch-finally構文。
+普段なんとなく使っているけれど、「return文を書いた位置によってfinallyがスキップされるのでは？」と疑問に思ったことはないでしょうか？
+今回は、「returnがfinallyの前にあっても、ちゃんとfinallyが実行されるのか？」という点を実験してみた結果をまとめます。
+
+
+ ✅ 結論
+finallyブロックは、tryやcatchの中でreturnを書いたとしても、必ず実行されます。
+つまり、returnの前にfinallyがあっても、finallyの処理が終わったあとにreturnされるという挙...]]></description><link>https://zenn.dev/shifu/articles/c82b532b2b89b5</link><guid isPermaLink="true">https://zenn.dev/shifu/articles/c82b532b2b89b5</guid><pubDate>Tue, 08 Apr 2025 13:55:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lclAPqba--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Java%25E3%2580%2591return%25E3%2582%2588%25E3%2582%258A%25E5%2585%2588%25E3%2581%25ABfinally%25E3%2581%258C%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%2595%25E3%2582%258C%25E3%2582%258B%25E3%2581%25A3%25E3%2581%25A6%25E7%259F%25A5%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%259F%25EF%25BC%259Ftry-catch-finally%25E3%2581%25AE%25E5%258B%2595%25E4%25BD%259C%25E3%2582%2592...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:shifoforge%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0NqLVphT0lnNUdVRTh5Y2owUmJoamhZVk1yOWRMVmtSN1ZURHhYLVNKUzZJczZBPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>shifoforge</dc:creator></item><item><title><![CDATA[Javaの型変換についてざっくりまとめてみた[Java初心者]]]></title><description><![CDATA[Javaの型変換についてざっくりまとめてみた[Java初心者]
+
+ はじめに
+こんにちは。
+プログラミング初心者Wakinozaと申します。
+Java勉強中に調べたことを記事にまとめています。
+十分気をつけて執筆していますが、なにぶん初心者が書いた記事なので、理解が浅い点などあるかと思います。
+記事を参考にされる方は、初心者の記事であることを念頭において、お読みいただけると幸いです。
+間違い等あれば、指摘いただけると助かります。
+
+ 対象読者
+
+Java勉強中の方。
+Java SE Bronze試験を勉強中の方。
+Javaの拡大変換・縮小変換とその注意点についてざっくり知りたい方。
+
+
+...]]></description><link>https://zenn.dev/wakinoza/articles/6dcd874e7b9f38</link><guid isPermaLink="true">https://zenn.dev/wakinoza/articles/6dcd874e7b9f38</guid><pubDate>Tue, 08 Apr 2025 10:53:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--nQFPSZir--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java%25E3%2581%25AE%25E5%259E%258B%25E5%25A4%2589%25E6%258F%259B%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E3%2581%2596%25E3%2581%25A3%25E3%2581%258F%25E3%2582%258A%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%255BJava%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%255D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:wakinoza%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhkYzVjNWY5ZWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>wakinoza</dc:creator></item><item><title><![CDATA[カプセル化（アクセス修飾子 private, public, protected）]]></title><description><![CDATA[
+ まえがき
+chat-gptで作った学習ロードマップをプログラミング初学者が勉強する試みです
+ロードマップはchat-gptを使用してますが、学習は公式のチュートリアルや技術系ブログなどを参考にしています
+Goの復習も兼ねているのでGoとの違いについても言及します
+今回はカプセル化（アクセス修飾子 private, public, protected）について内容をまとめていきます
+
+ アクセス修飾子（private, public, protected）の種類と役割
+アクセス制御にはまず大きく分けて、最上位レベルとメンバーレベルのふたつがある
+
+
+最上位レベル
+クラスのこと、サブクラ...]]></description><link>https://zenn.dev/miya_miya/articles/c44954c1cc59a0</link><guid isPermaLink="true">https://zenn.dev/miya_miya/articles/c44954c1cc59a0</guid><pubDate>Tue, 08 Apr 2025 05:53:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--sThdneHl--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25AB%25E3%2583%2597%25E3%2582%25BB%25E3%2583%25AB%25E5%258C%2596%25EF%25BC%2588%25E3%2582%25A2%25E3%2582%25AF%25E3%2582%25BB%25E3%2582%25B9%25E4%25BF%25AE%25E9%25A3%25BE%25E5%25AD%2590%2520private%252C%2520public%252C%2520protected%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:miya%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSjBLNnZLRXFYSzJFZVBmSG1WYnNuSXFvWlA2V1J3a2ZoV0FXeXdsZFp1NV92bjdnPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>miya</dc:creator></item><item><title><![CDATA[画像に任意のテキストを描画する]]></title><description><![CDATA[
+ はじめに
+今回は、プログラムで画像を加工して、任意のテキストを描画する方法について調査しました。
+
+ Pythonで画像にテキストを描画する
+Pythonで画像処理を行う為に必要なライブラリをインストールします。
+pip install pillow
+画像の任意の位置に、任意のテキストを描画するプログラムを作成します。
+from PIL import Image, ImageDraw, ImageFont
+
+def draw_text_on_image(image_path, output_path, text, position=None, 
+                   ...]]></description><link>https://zenn.dev/rescuenow/articles/6a4360ff3d3faa</link><guid isPermaLink="true">https://zenn.dev/rescuenow/articles/6a4360ff3d3faa</guid><pubDate>Tue, 08 Apr 2025 01:16:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--SFkp6hJb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%2594%25BB%25E5%2583%258F%25E3%2581%25AB%25E4%25BB%25BB%25E6%2584%258F%25E3%2581%25AE%25E3%2583%2586%25E3%2582%25AD%25E3%2582%25B9%25E3%2583%2588%25E3%2582%2592%25E6%258F%258F%25E7%2594%25BB%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:nmatsu%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E0NWI1N2NlZmMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%25AC%25E3%2582%25B9%25E3%2582%25AD%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%258A%25E3%2582%25A6%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzEzOThkNmZjMGEuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nmatsu</dc:creator></item><item><title><![CDATA[【Java】インスタンスとstaticの関係]]></title><description><![CDATA[
+ インスタンス
+クラスから作られた分身(コピー)
+例）
+クラス：ケーキのレシピ
+インスタンス：レシピから作った実際のケーキ
+class Cake {   // ← レシピ（クラス）
+    int size;  // ← 実際のケーキのサイズ（個別に異なる）
+}
+Cake cake1 = new Cake();  // ケーキ1個目
+Cake cake2 = new Cake();  // ケーキ2個目（別物）
+
+ static
+
+クラス全体で「共有の情報」「クラス全体で1つだけ」
+インスタンスを作らなくても使える
+クラス変数は、基本的にクラス名.staticがついている変数名(例：C...]]></description><link>https://zenn.dev/codek2/articles/e4255f13198206</link><guid isPermaLink="true">https://zenn.dev/codek2/articles/e4255f13198206</guid><pubDate>Tue, 08 Apr 2025 00:48:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3w-vm4R_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Java%25E3%2580%2591%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%25B3%25E3%2582%25B9%25E3%2581%25A8static%25E3%2581%25AE%25E9%2596%25A2%25E4%25BF%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E6%2597%25A5%25E5%2592%258C%25EF%25BC%2588%25E3%2581%25B3%25E3%2582%2588%25E3%2582%258A%25EF%25BC%2589%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E3OWJlYTJhM2QuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>コード日和（びより）</dc:creator></item><item><title><![CDATA[🧠 Javaのコンストラクタとthis、super完全整理]]></title><description><![CDATA[
+ 🧠 Javaのコンストラクタとthis、super完全整理
+
+ ✅ コンストラクタ(Constructor)とは？
+
+クラス名と同じ名前を持つ特別なメソッド
+オブジェクトを生成する際に自動的に実行される
+戻り値の型がない
+オーバーロードが可能（引数を変えることで複数作成可能）
+
+class A {
+    A() {
+        System.out.println("デフォルトコンストラクタ");
+    }
+
+    A(int x) {
+        System.out.println("引数付きコンストラクタ");
+    }
+}
+
+ ✅ デフォルトコンストラクタとは...]]></description><link>https://zenn.dev/kmj13/articles/java-constructor-this-super-zenn-ready</link><guid isPermaLink="true">https://zenn.dev/kmj13/articles/java-constructor-this-super-zenn-ready</guid><pubDate>Mon, 07 Apr 2025 10:33:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Nqgjjtvs--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%2520%2520Java%25E3%2581%25AE%25E3%2582%25B3%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25A9%25E3%2582%25AF%25E3%2582%25BF%25E3%2581%25A8this%25E3%2580%2581super%25E5%25AE%258C%25E5%2585%25A8%25E6%2595%25B4%25E7%2590%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kmj99%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSno0azlnb19fcW1fbjVxdkFCYkJNU2U5X2VfYWZkTGEtbHVNZDFXR2pWV05CZTBnPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kmj99</dc:creator></item></channel></rss>

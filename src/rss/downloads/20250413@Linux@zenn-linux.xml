@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Linux」のフィード]]></title><description><![CDATA[Zennのトピック「Linux」のRSSフィードです]]></description><link>https://zenn.dev/topics/linux</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/860a9eb1e4.png</url><title>Zennの「Linux」のフィード</title><link>https://zenn.dev/topics/linux</link></image><generator>zenn.dev</generator><lastBuildDate>Sun, 13 Apr 2025 04:46:27 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/linux/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[RTX50XXシリーズのROP欠落をLinuxでチェックする方法]]></title><description><![CDATA[
+ TL;DR
+
+
+LACTを使って確認する
+またはフォーラムで有志の方がプログラムを作成してくれたので、コンパイル＆実行して確認する
+
+https://forums.developer.nvidia.com/t/check-the-rop-unit-count-under-linux-affects-all-rtx-50xx-cards/324769/95
+
+ ROP欠け問題
+RTX50XXシリーズのGPUには製造時の欠陥でROPコア[1]が不足しているものが存在しています。私は深層学習のトレーニング用途でRTX5090を購入したため、ROPが欠けていても問題はない[2]とのことなので...]]></description><link>https://zenn.dev/cynagenautes/articles/8f8b50c048b8f3</link><guid isPermaLink="true">https://zenn.dev/cynagenautes/articles/8f8b50c048b8f3</guid><pubDate>Sun, 13 Apr 2025 01:43:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--DCtxoCn3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:RTX50XX%25E3%2582%25B7%25E3%2583%25AA%25E3%2583%25BC%25E3%2582%25BA%25E3%2581%25AEROP%25E6%25AC%25A0%25E8%2590%25BD%25E3%2582%2592Linux%25E3%2581%25A7%25E3%2583%2581%25E3%2582%25A7%25E3%2583%2583%25E3%2582%25AF%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2595%25E3%2581%2584%25E3%2581%25AD%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ5MGQxNWRhNGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>さいね</dc:creator></item><item><title><![CDATA[【2025年度版】Django 開発のための Python 環境構築ガイド 〜pyenv+venv+VSCode 編〜]]></title><description><![CDATA[
+ この記事でわかること
+
+✅ Ubuntu での Django インストール
+✅ プロジェクト毎に異なる Python バージョンを管理
+✅ パッケージをプロジェクト毎にインストール
+
+以前 Django で Web アプリを個人開発した際、早く公開したかったので、Python の一般的な方法というよりかは、速さ優先、自分でできる方法優先で進めました。その結果、後々のバージョン管理や環境の再現性で苦労することに...😓
+今回はその反省を活かし、Python でよくやられているであろう開発環境構築について調べて構築したので、自分も忘れないようにメモとして残します。 📝
+
+ 開発マシンの環...]]></description><link>https://zenn.dev/tamura_h_d/articles/feb394eb96013c</link><guid isPermaLink="true">https://zenn.dev/tamura_h_d/articles/feb394eb96013c</guid><pubDate>Sat, 12 Apr 2025 18:06:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--eehdhvXI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%25902025%25E5%25B9%25B4%25E5%25BA%25A6%25E7%2589%2588%25E3%2580%2591Django%2520%25E9%2596%258B%25E7%2599%25BA%25E3%2581%25AE%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%2520Python%2520%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%2520%25E3%2580%259Cpyenv%252Bvenv%252BVSCode%2520%25E7%25B7%25A8%25E3%2580%259C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Tamura%252CN%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzlmODc4NjM3ODcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Tamura,N</dc:creator></item><item><title><![CDATA[VMware Workstation Proのインストールから仮想環境構築まで]]></title><description><![CDATA[
+ VMware Workstation Pro概要
+VMware Workstation Proは、米Broadcom（旧VMware）社が提供する、WindowsおよびLinuxに対応したデスクトップ仮想化ソフトウェアです。現在（2025年4月）、個人利用に限り無償で提供されています。商用利用には有償のサブスクリプションが必要です。
+主な特徴としては、以下の点が挙げられます。
+
+
+複数の仮想マシンの同時実行: 1台の物理PC上で複数の異なるオペレーティングシステム（Windows、Linux、macOSなど）を同時に実行できます。
+
+豊富な機能:
+
+
+スナップショット: 仮想マシンの...]]></description><link>https://zenn.dev/osugi14/articles/1118559ac5818e</link><guid isPermaLink="true">https://zenn.dev/osugi14/articles/1118559ac5818e</guid><pubDate>Sat, 12 Apr 2025 09:18:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9Ak0Kb_t--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:VMware%2520Workstation%2520Pro%25E3%2581%25AE%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%258B%25E3%2582%2589%25E4%25BB%25AE%25E6%2583%25B3%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%25BE%25E3%2581%25A7%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258A%25E3%2581%2599%25E3%2581%258E%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY2NjhmMTczMDYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>おすぎ</dc:creator></item><item><title><![CDATA[シェルのオプション(-x等)を子プロセスでも維持させる方法を考える]]></title><description><![CDATA[
+ TL;DR
+
+環境変数にオプション設定値を保存する。
+オプション設定値を読み込んでカレントシェルでsetコマンドを実行するシェルスクリプトを用意し、呼び出し元シェルスクリプト内のカレントで当該スクリプトを実行する。
+スクリプト
+
+
+ 背景
+例えば以下のようなシェルスクリプトがあったとする。
+
+script1.sh
+#!/bin/sh
+echo "script 1 options: ${-}"
+"./script2.sh"
+
+
+script2.sh
+#!/bin/sh
+echo "script 2 options: ${-}"
+
+
+実行結果
+sh -c "set -x &amp;&am...]]></description><link>https://zenn.dev/nondescript/articles/872c32fd8fa067</link><guid isPermaLink="true">https://zenn.dev/nondescript/articles/872c32fd8fa067</guid><pubDate>Sat, 12 Apr 2025 08:53:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--RsRO9D4p--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B7%25E3%2582%25A7%25E3%2583%25AB%25E3%2581%25AE%25E3%2582%25AA%25E3%2583%2597%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%2528-x%25E7%25AD%2589%2529%25E3%2582%2592%25E5%25AD%2590%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25BB%25E3%2582%25B9%25E3%2581%25A7%25E3%2582%2582%25E7%25B6%25AD%25E6%258C%2581%25E3%2581%2595%25E3%2581%259B%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%25E3%2582%2592%25E8%2580%2583%25E3%2581%2588%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E7%25B4%25A0%25E4%25BA%25BA%25E3%2581%25AE%25E6%2588%25AF%25E8%25A8%2580%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVmYTVmOTBhM2EuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>素人の戯言</dc:creator></item><item><title><![CDATA[“com.docker.vmnetd”にはマルウェアが含まれているため開けませんでした。]]></title><description><![CDATA[
+ マルウェア扱いされる問題を解消！
+最近、Dockerを起動すると、「マルウェアがブロックされました」とダイアログが表示されませんか？
+参考になる記事を見つけていたのですが知識が足りておらず解決できなかったりすることがありました。
+公式のbashスクリプトを実行すれば解消できました。。。。。
+LINUXのコマンドの知識不足ですね😅
+ネットの記事で見たのですが、この手の配布されているファイルを実行するときは、気をつけろと書いてありました。悪用厳禁ということか。。。
+PC壊れるかもしれないから慎重にお願いしますということでしょうね。。。
+
+参考になった記事
+https://qiita.co...]]></description><link>https://zenn.dev/forge_tech_info/articles/73372e39d93021</link><guid isPermaLink="true">https://zenn.dev/forge_tech_info/articles/73372e39d93021</guid><pubDate>Fri, 11 Apr 2025 22:28:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--VZ3TyLRg--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E2%2580%259Ccom.docker.vmnetd%25E2%2580%259D%25E3%2581%25AB%25E3%2581%25AF%25E3%2583%259E%25E3%2583%25AB%25E3%2582%25A6%25E3%2582%25A7%25E3%2582%25A2%25E3%2581%258C%25E5%2590%25AB%25E3%2581%25BE%25E3%2582%258C%25E3%2581%25A6%25E3%2581%2584%25E3%2582%258B%25E3%2581%259F%25E3%2582%2581%25E9%2596%258B%25E3%2581%2591%25E3%2581%25BE%25E3%2581%259B%25E3%2582%2593%25E3%2581%25A7%25E3%2581%2597%25E3%2581%259F%25E3%2580%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:ForgeTechnology%25E5%25BA%2583%25E5%25A0%25B1%25E3%2582%25A2...%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzUwODk2YWU5ZmUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:ForgeTechnology%25E3%2583%25A1%25E3%2583%25B3%25E3%2583%2590%25E3%2583%25BC%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0FBbGsxaHlLSkxwUXVZNndSNVRtenltVkpGLXFLVFhtcXNfMUtOeUdjRWZlR1laZz1zOTYtYw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ForgeTechnology広報アカウント</dc:creator></item><item><title><![CDATA[初級インフラエンジニア必見！LPICレベル1＆CCNA合格記 🎉]]></title><description><![CDATA[こんにちは！インフラエンジニア2年目コダックです。
+今回はインフラエンジニアとして最初の一歩を踏み出すのにピッタリな資格、LPIC レベル1とCCNAの合格体験談をお届けします！
+結論から言うと、資格いらないって言われがちなエンジニア界隈ですが、インフラエンジニアに限っては資格があるとめちゃくちゃ有利になります🔥
+
+
+ 使った教材たち 🧑‍💻
+
+ LPIC レベル1（2024年4月合格）
+
+学習期間：約1か月
+教材：
+
+ping-t (101のみ無料)
+徹底攻略 LPIC レベル1教科書＆問題集〜Version 5.0〜対応
+
+
+
+とにかく最初の資格としてはこれ！
+Linuxの基礎をしっ...]]></description><link>https://zenn.dev/codaccu/articles/58aa81dc08b194</link><guid isPermaLink="true">https://zenn.dev/codaccu/articles/58aa81dc08b194</guid><pubDate>Fri, 11 Apr 2025 00:53:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--gdZ7yWNW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2588%259D%25E7%25B4%259A%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2595%25E3%2583%25A9%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%25E5%25BF%2585%25E8%25A6%258B%25EF%25BC%2581LPIC%25E3%2583%25AC%25E3%2583%2599%25E3%2583%25AB1%25EF%25BC%2586CCNA%25E5%2590%2588%25E6%25A0%25BC%25E8%25A8%2598%2520%2520%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25B3%25E3%2583%2580%25E3%2583%2583%25E3%2582%25AF%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJiMGJmOThhZWQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>コダック</dc:creator></item><item><title><![CDATA[大学に入ってLinuxとC言語をやれと言われて困ってる迷える子羊のための、爆速WSL2環境構築入門]]></title><description><![CDATA[
+ 🔖 1. はじめに
+この記事を、
+「Linux？ 何それ美味しいの？」
+「俺、Windowsすら買ったばかりで分からねぇよ。どうすりゃいいの？」
+と涙目になってる諸君に捧ぐ。
+心配するな。WSL2 (Windows Subsystem for Linux 2)を使えば、爆速で学習環境を整えられる。
+君のPCでLinuxが動くようになれば、そのためだけに大学の計算機室まで行く必要がなくなる。
+その分勉強がはかどるし、ストレスも軽減される。
+…………はず。
+
+ 🔖 2. 必要なもの
+
+Windows 10/11（アップデートしてから来い）
+インターネット（ないわけないよな？）
+最低限のや...]]></description><link>https://zenn.dev/ledmirage/articles/433935579b2454</link><guid isPermaLink="true">https://zenn.dev/ledmirage/articles/433935579b2454</guid><pubDate>Thu, 10 Apr 2025 23:00:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--kNUxwxls--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%25A4%25A7%25E5%25AD%25A6%25E3%2581%25AB%25E5%2585%25A5%25E3%2581%25A3%25E3%2581%25A6Linux%25E3%2581%25A8C%25E8%25A8%2580%25E8%25AA%259E%25E3%2582%2592%25E3%2582%2584%25E3%2582%258C%25E3%2581%25A8%25E8%25A8%2580%25E3%2582%258F%25E3%2582%258C%25E3%2581%25A6%25E5%259B%25B0%25E3%2581%25A3%25E3%2581%25A6%25E3%2582%258B%25E8%25BF%25B7%25E3%2581%2588%25E3%2582%258B%25E5%25AD%2590%25E7%25BE%258A%25E3%2581%25AE%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%25E3%2580%2581%25E7%2588%2586%25E9%2580%259FWSL2%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%25E5%2585%25A5%25E9%2596%2580%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:led-mirage%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS1VnUk9laFNoRXVvVXhuSVl4YVFieFAtZ2VYYTVjSWJrc3NDNzRmUnhYN1l1UTZrRT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>led-mirage</dc:creator></item><item><title><![CDATA[Linux基本コマンド演習1]]></title><description><![CDATA[
+ はじめに
+Zenn初めての記事です。
+初めての記事が自分の勉強用…
+dockerインストール済みの環境を想定しています。
+sudoしなくても済むように以下を実行済み
+参照：https://matsuand.github.io/docs.docker.jp.onthefly/engine/install/linux-postinstall/
+sudo groupadd docker
+sudo usermod -aG docker &lt;ユーザ名&gt;
+newgrp docker
+
+ Docker基本操作演習
+1. タグlatestを指定してtomcatイメージをダウンロードせよdo...]]></description><link>https://zenn.dev/kikkun_bld/articles/9419b415536707</link><guid isPermaLink="true">https://zenn.dev/kikkun_bld/articles/9419b415536707</guid><pubDate>Thu, 10 Apr 2025 14:10:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--TN7av-A5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%25E5%259F%25BA%25E6%259C%25AC%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E6%25BC%2594%25E7%25BF%25921%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kikkun%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZlYzE0NTQ2NmYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kikkun</dc:creator></item><item><title><![CDATA[自宅サーバー構築（M1 Mac + UTM + Ubuntu）体験記　追記：仮想サーバーに静的HTMLファイルを保存]]></title><description><![CDATA[
+ はじめに
+今回、自宅で使用しなくなったM1Macを活用して、自宅サーバーの構築にチャレンジしました。
+
+ 環境
+
+ホストマシン：M1 Mac
+接続確認用マシン：M3 Mac
+仮想化ソフトウェア：UTM
+OS：Ubuntu 24.04.2 LTS
+通信環境：マンションタイプで、個別には回線は引いていない。
+
+
+ 構築手順と失敗例
+
+ 1. UTMインストールと初期設定
+
+UTM公式サイトからダウンロードしてインストール。
+UbuntuのARM版ISOファイルをダウンロード。
+Ubuntu Serverの構築中に表示される基本的な設定は、「Apple仮想化」は未チェック、メモリとCPUの...]]></description><link>https://zenn.dev/kenta_unskilled/articles/80acb4edd1a56d</link><guid isPermaLink="true">https://zenn.dev/kenta_unskilled/articles/80acb4edd1a56d</guid><pubDate>Thu, 10 Apr 2025 04:27:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3C8Vdt9e--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%2587%25AA%25E5%25AE%2585%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E6%25A7%258B%25E7%25AF%2589%25EF%25BC%2588M1%2520Mac%2520%252B%2520UTM%2520%252B%2520Ubuntu%25EF%25BC%2589%25E4%25BD%2593%25E9%25A8%2593%25E8%25A8%2598%25E3%2580%2580%25E8%25BF%25BD%25E8%25A8%2598%25EF%25BC%259A%25E4%25BB%25AE%25E6%2583%25B3%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2581%25AB%25E9%259D%2599%25E7%259A%2584HTML%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2592%25E4%25BF%259D%25E5%25AD%2598%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25B1%25E3%2583%25B3%25E3%2582%25BF%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2Rhcmsvay5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ケンタ</dc:creator></item><item><title><![CDATA[WSL2新バージョンで６系Linuxカーネルバイナリがリリース(9か月ぶり２回目)]]></title><description><![CDATA[
+ カーネル６が復帰
+!
+関連記事:
+
+WSL2新バージョンで６系Linuxカーネルバイナリがリリース
+WSL2 2.2.x正式版がこっそリリース
+WSL2.2.x で DNS tunnelingがデフォルトに
+WSL2 2.0.0がこっそリリース
+WSLのアップデートでメモリ開放？
+WSL2でvmmem確保メモリを開放する方法
+
+
+以前、WSL ver2.3.11でLinuxカーネルがバージョン６になった時期がある
+だが、その後リバートされてstable版には載らなかった。
+
+ver 2.3.11
+Update Kernel to 6.6.36.3
+Hundreds of new ke...]]></description><link>https://zenn.dev/dozo/articles/ddd414e9ae1a69</link><guid isPermaLink="true">https://zenn.dev/dozo/articles/ddd414e9ae1a69</guid><pubDate>Wed, 09 Apr 2025 03:28:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--zbcwNeTy--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:WSL2%25E6%2596%25B0%25E3%2583%2590%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%25A7%25E3%2583%25B3%25E3%2581%25A7%25EF%25BC%2596%25E7%25B3%25BBLinux%25E3%2582%25AB%25E3%2583%25BC%25E3%2583%258D%25E3%2583%25AB%25E3%2583%2590%25E3%2582%25A4%25E3%2583%258A%25E3%2583%25AA%25E3%2581%258C%25E3%2583%25AA%25E3%2583%25AA%25E3%2583%25BC%25E3%2582%25B9%25289%25E3%2581%258B%25E6%259C%2588%25E3%2581%25B6%25E3%2582%258A%25EF%25BC%2592%25E5%259B%259E%25E7%259B%25AE%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:dozo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvZC5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>dozo</dc:creator></item><item><title><![CDATA[Octa Roboticsインターン体験記 Part2：ネットワーク検証編]]></title><description><![CDATA[
+ ネットワーク検証編 ～ローカル vs クラウド、失敗からの学び～
+
+ 1. はじめに：なぜネットワーク越しの検証が必要なのか？
+前回の記事では、Python Tornadoを使ったログ永続化サーバーの開発について紹介しました。今回は、その続きとして、このサーバーをネットワーク越しに検証した記録をお伝えします。
+これは単なる機能テストではなく、ネットワークの特性がアプリケーションに与える影響を理解するのに結果的に大きく役立ちました。
+
+ 検証の目的
+具体的な検証目的は以下の通りです：
+
+
+ネットワーク特性の影響を測定する
+
+遅延、パケットロス、スループット低下の実測
+実環境を想定したパ...]]></description><link>https://zenn.dev/ne_ict/articles/a78825dec28ed2</link><guid isPermaLink="true">https://zenn.dev/ne_ict/articles/a78825dec28ed2</guid><pubDate>Tue, 08 Apr 2025 08:10:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GyzRGHjr--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Octa%2520Robotics%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%25B3%25E4%25BD%2593%25E9%25A8%2593%25E8%25A8%2598%2520Part2%25EF%25BC%259A%25E3%2583%258D%25E3%2583%2583%25E3%2583%2588%25E3%2583%25AF%25E3%2583%25BC%25E3%2582%25AF%25E6%25A4%259C%25E8%25A8%25BC%25E7%25B7%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ne_ict%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc4NmUxN2JhZTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ne_ict</dc:creator></item><item><title><![CDATA[【Amazon Linux 2023】初心者がSFTP接続＆ファイル送信するシェルスクリプトを/etc/crontabで定期実行した備忘録]]></title><description><![CDATA[どうも！前歯すきっ歯です🦷
+Webサーバのconfigを自動でSFTP接続＆ファイル送信するクライアントサーバとその接続先のSFTPサーバを構築する案件に関わるので、その予習として今回はタイトルの勉強をしました！
+その時の備忘録を以下書いていきます…。
+
+ 1.本記事について
+
+ 1.1💪勉強のゴール💪
+今回のゴールは以下4点です。
+▼ゴール詳細---------------------------------------------------------------------------
+
+SFTP接続元のサーバ（クライアントサーバ）…①からSFTP接続先のサーバ（SFTPサーバ）...]]></description><link>https://zenn.dev/gapteeth/articles/9938732ec7292c</link><guid isPermaLink="true">https://zenn.dev/gapteeth/articles/9938732ec7292c</guid><pubDate>Mon, 07 Apr 2025 11:39:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--neUH99c0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Amazon%2520Linux%25202023%25E3%2580%2591%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E3%2581%258CSFTP%25E6%258E%25A5%25E7%25B6%259A%25EF%25BC%2586%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E9%2580%2581%25E4%25BF%25A1%25E3%2581%2599%25E3%2582%258B%25E3%2582%25B7%25E3%2582%25A7%25E3%2583%25AB%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2583%2588%25E3%2582%2592%252Fetc%252Fcront...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%2589%258D%25E6%25AD%25AF%25E3%2581%2599%25E3%2581%258D%25E3%2581%25A3%25E6%25AD%25AF%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZjZTI5ODhkNzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>前歯すきっ歯</dc:creator></item><item><title><![CDATA[[AWS EC2] shredで完全にファイル削除してみた（Red Hat 9 + HDD編）]]></title><description><![CDATA[!
+shred コマンドによるファイルの完全削除は HDD環境で効果があります。
+一方、SSDではデータの物理的な上書きが保証されないため、shredは完全な削除手段とは言えません。
+SSDをご利用の場合は、メーカーが提供する Secure Erase などの専用ツールを使用してください。
+
+!
+shredで削除すると復元できません。
+コマンドの実行は自己責任でお願いします。
+
+
+ 結論
+以下のコマンドを使うことで、指定したディレクトリ以下のファイルを完全削除できます。
+また、日本語・空白・改行などを含む特殊なファイル名にも対応できます。
+
+コマンド
+find 削除対象のディレクトリ名（...]]></description><link>https://zenn.dev/okyugog/articles/6390d3ab5122ca</link><guid isPermaLink="true">https://zenn.dev/okyugog/articles/6390d3ab5122ca</guid><pubDate>Sun, 06 Apr 2025 13:35:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--OuJ6Hl0h--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BAWS%2520EC2%255D%2520shred%25E3%2581%25A7%25E5%25AE%258C%25E5%2585%25A8%25E3%2581%25AB%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E5%2589%258A%25E9%2599%25A4%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25EF%25BC%2588Red%2520Hat%25209%2520%252B%2520HDD%25E7%25B7%25A8%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yugo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NmNThjMzJkMWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yugo</dc:creator></item><item><title><![CDATA[RHEL: nmcli で DNS 検索ドメインにドメインを追加する手順]]></title><description><![CDATA[
+ 概要
+RHELシステムで NetworkManager を管理するコマンドラインツール nmcli を使用して、特定のドメイン (XXX.co.jp など) を DNS の検索ドメインリストに追加する方法を備忘録として残します。
+これにより、例えば server01.XXX.co.jp という FQDN (完全修飾ドメイン名) を持っているホストに対して、ping server01 のようにホスト名だけで名前解決できるようになります。特に、社内ドメインなど、頻繁にアクセスするドメインがある場合に設定しておくと便利です。
+
+ 前提条件
+
+
+OS: NetworkManagerが動作して...]]></description><link>https://zenn.dev/remy/articles/03080b438a3ade</link><guid isPermaLink="true">https://zenn.dev/remy/articles/03080b438a3ade</guid><pubDate>Sun, 06 Apr 2025 05:10:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Tm2V1rr0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:RHEL%253A%2520nmcli%2520%25E3%2581%25A7%2520DNS%2520%25E6%25A4%259C%25E7%25B4%25A2%25E3%2583%2589%25E3%2583%25A1%25E3%2582%25A4%25E3%2583%25B3%25E3%2581%25AB%25E3%2583%2589%25E3%2583%25A1%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%2592%25E8%25BF%25BD%25E5%258A%25A0%25E3%2581%2599%25E3%2582%258B%25E6%2589%258B%25E9%25A0%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:remy%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U3YmQ3YmRlMzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>remy</dc:creator></item><item><title><![CDATA[MacBook Air (US配列) にUbuntuを入れて、変換/無変換による日本語入力切り替えをできるようにする]]></title><description><![CDATA[なんとなく、ちょっとした作業やYoutubeの垂れ流しにLinuxの入ったノートPCが欲しくなったので、MacBook Airを中古で買ってUbuntuベースのOSであるZorin OSを入れてみました。
+キーボードはUS配列ですが、JIS配列のMacのように、スペースの左右のCommandキーで日本語の入力切り替えをできるようにしてみたので、その手順をメモしておきます。
+
+ 使用した環境
+
+PC: MacBook Air 11-inch (Early 2015), US配列
+OS: Zorin OS 17.3 Core
+- Ubuntu 22.04ベースなので、他のUbuntu系のOS...]]></description><link>https://zenn.dev/hk03ne/articles/19230db9eb43b4</link><guid isPermaLink="true">https://zenn.dev/hk03ne/articles/19230db9eb43b4</guid><pubDate>Sun, 06 Apr 2025 03:58:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--X3af-XED--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:MacBook%2520Air%2520%2528US%25E9%2585%258D%25E5%2588%2597%2529%2520%25E3%2581%25ABUbuntu%25E3%2582%2592%25E5%2585%25A5%25E3%2582%258C%25E3%2581%25A6%25E3%2580%2581%25E5%25A4%2589%25E6%258F%259B%252F%25E7%2584%25A1%25E5%25A4%2589%25E6%258F%259B%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258B%25E6%2597%25A5%25E6%259C%25AC%25E8%25AA%259E%25E5%2585%25A5%25E5%258A%259B%25E5%2588%2587%25E3%2582%258A%25E6%259B%25BF%25E3%2581%2588%25E3%2582%2592%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258B%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hirune%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZlOGEzNzFmOTQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hirune</dc:creator></item><item><title><![CDATA[ネットワークパフォーマンスを支える技術 - OS/ハイパーバイザ最適化の要諦 🫠]]></title><description><![CDATA[
+ 1. 執筆モチベーション
+「ネットワーク機能のソフトウェア実装、もうちょっと踏み込んでみるか？」
+あるときふとそう思った。
+そこで見つけたのが、次の論文「Operating Systems and Hypervisors for Network Functions: A Survey of Enabling Technologies and Research Studies」。
+この論文は、汎用コンピューティング（GPC）プラットフォーム上でのネットワーク機能の実装に関するオペレーティングシステムとハイパーバイザーの側面を調査したもの。ちょうどええやんと思い、読み進めることにした。
+...]]></description><link>https://zenn.dev/su8/articles/8d3f95fdda21c7</link><guid isPermaLink="true">https://zenn.dev/su8/articles/8d3f95fdda21c7</guid><pubDate>Sun, 06 Apr 2025 01:29:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--P4cWZf5W--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%258D%25E3%2583%2583%25E3%2583%2588%25E3%2583%25AF%25E3%2583%25BC%25E3%2582%25AF%25E3%2583%2591%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25BC%25E3%2583%259E%25E3%2583%25B3%25E3%2582%25B9%25E3%2582%2592%25E6%2594%25AF%25E3%2581%2588%25E3%2582%258B%25E6%258A%2580%25E8%25A1%2593%2520-%2520OS%252F%25E3%2583%258F%25E3%2582%25A4%25E3%2583%2591%25E3%2583%25BC%25E3%2583%2590%25E3%2582%25A4%25E3%2582%25B6%25E6%259C%2580%25E9%2581%25A9%25E5%258C%2596%25E3%2581%25AE%25E8%25A6%2581%25E8%25AB%25A6%2520%2520%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:su8%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUVkRlRwNHdDZWsxTUFjbzVXNlpLQUgtaGNiMGI1SDZrODRKdkd2ZGpoNDZQUT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>su8</dc:creator></item><item><title><![CDATA[Linuxの基本コマンド - はじめてのLinux入門]]></title><description><![CDATA[
+ Linuxとは
+Linux（リナックス）は、コンピュータを動かすための基本的なソフトウェア（オペレーティングシステム、略してOS）の一つです。
+WindowsやMacOSと同じように、コンピュータを操作するための基本的なソフトウェアですが、特にサーバーや業務用のコンピュータでよく使われています。
+
+ 主要なディストリビューション
+Linuxには「ディストリビューション」という、それぞれ特徴のある種類があります。
+これは、Linuxの基本部分に、便利な機能やツールを追加したパッケージのようなものです。
+主なディストリビューションは2つのグループに分かれています。
+
+
+Debian（デビ...]]></description><link>https://zenn.dev/iyuta1124/articles/2025_04_06_linux_basic</link><guid isPermaLink="true">https://zenn.dev/iyuta1124/articles/2025_04_06_linux_basic</guid><pubDate>Sun, 06 Apr 2025 00:30:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fyChV_ZV--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%25E3%2581%25AE%25E5%259F%25BA%25E6%259C%25AC%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%2520-%2520%25E3%2581%25AF%25E3%2581%2598%25E3%2582%2581%25E3%2581%25A6%25E3%2581%25AELinux%25E5%2585%25A5%25E9%2596%2580%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:UT%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhZDA0ZjJhMjcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>UT</dc:creator></item><item><title><![CDATA[garuda linuxのMokkaエディションの一目惚れしたので普段使いする]]></title><description><![CDATA[
+ はじめに
+Garuda Linuxは、Arch Linuxをベースにした、使いやすく美しいデスクトップLinuxディストリビューションです。
+
+https://garudalinux.org/editions
+CatppuccinをテーマとしてKDEデスクトップ環境を普段使いしていきます。
+インストールについては多くの記事が出ているのと、長くなるので割愛します。
+
+
+ 私の環境
+
+
+ 良い点
+🌟デザインが良すぎる！！
+🌟OSインストール時に必要なアプリを選択でき、一緒にインストールしてくれる。
+
+ 悪い点
+🥲Chrome系のOSで、日本語入力できなくなったりなど、たまに不安定。（Wa...]]></description><link>https://zenn.dev/oyatsu_karpas/articles/b0b52e180d5c56</link><guid isPermaLink="true">https://zenn.dev/oyatsu_karpas/articles/b0b52e180d5c56</guid><pubDate>Sat, 05 Apr 2025 22:20:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Adb-6cIL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:garuda%2520linux%25E3%2581%25AEMokka%25E3%2582%25A8%25E3%2583%2587%25E3%2582%25A3%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2581%25AE%25E4%25B8%2580%25E7%259B%25AE%25E6%2583%259A%25E3%2582%258C%25E3%2581%2597%25E3%2581%259F%25E3%2581%25AE%25E3%2581%25A7%25E6%2599%25AE%25E6%25AE%25B5%25E4%25BD%25BF%25E3%2581%2584%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258A%25E3%2582%2584%25E3%2581%25A4%25E3%2582%25AB%25E3%2583%25AB%25E3%2583%2591%25E3%2582%25B9%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFmZDRhZWY5ZGEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>おやつカルパス</dc:creator></item><item><title><![CDATA[Linuxの「ファイルの基本と実装」を調査した]]></title><description><![CDATA[
+ 概要
+普段エンジニアである私たちが操作している「ファイル」について、そもそもファイルとはどのようにして構成されてたものなのか意識することはありません。
+私たちが普段見ているファイルの実態とは何なのか、なぜファイルを読み込んだり、書き込んだり、更には検索ができたりするのでしょうか？
+ls や stat を実行したときファイルに付随する色んな情報が確認できます、find を使えばファイル名による絞り込みだけでなくファイルの最終更新日時を基準とした柔軟な検索もできます。
+そもそも誰が、あるいはどこでその情報を握っているのでしょうか？
+それらを成り立たせているLinuxのファイルの実装を探索...]]></description><link>https://zenn.dev/fah_72946_engr/articles/dd825ae37a3a87</link><guid isPermaLink="true">https://zenn.dev/fah_72946_engr/articles/dd825ae37a3a87</guid><pubDate>Sat, 05 Apr 2025 10:24:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--IXfAZeOD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%25E3%2581%25AE%25E3%2580%258C%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2581%25AE%25E5%259F%25BA%25E6%259C%25AC%25E3%2581%25A8%25E5%25AE%259F%25E8%25A3%2585%25E3%2580%258D%25E3%2582%2592%25E8%25AA%25BF%25E6%259F%25BB%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:dsktchr%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg3ZGY2MDA2M2UuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>dsktchr</dc:creator></item><item><title><![CDATA[Dockerを使ってLinux環境を構築(docker compose)]]></title><description><![CDATA[
+ 前提条件
+
+Docker がインストールされていること
+docker compose（Docker CLIの一部）がインストールされていること
+
+
+ 1. プロジェクトのディレクトリを作成
+Linux環境を構築するために必要なディレクトリを作成。適当な場所にディレクトリを作成し、その中に移動。
+mkdir my-linux-env
+cd my-linux-env
+
+ 2. Dockerfileの作成
+次に、Dockerのイメージを定義するために、Dockerfileを作成する。このファイルには、コンテナの基本となるLinux環境を構築する手順が書かれている。
+以下の内容を Docke...]]></description><link>https://zenn.dev/tn_a/articles/5ba91a36bad9e6</link><guid isPermaLink="true">https://zenn.dev/tn_a/articles/5ba91a36bad9e6</guid><pubDate>Sat, 05 Apr 2025 08:02:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--mzWHZ9ZJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6Linux%25E7%2592%25B0%25E5%25A2%2583%25E3%2582%2592%25E6%25A7%258B%25E7%25AF%2589%2528docker%2520compose%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:dasu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I4MDcxYWUyMWQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>dasu</dc:creator></item></channel></rss>
