@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「TypeScript」のフィード]]></title><description><![CDATA[Zennのトピック「TypeScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/typescript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/f13e758fdb.png</url><title>Zennの「TypeScript」のフィード</title><link>https://zenn.dev/topics/typescript</link></image><generator>zenn.dev</generator><lastBuildDate>Tue, 15 Apr 2025 12:04:49 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/typescript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Marp+生成AIで書いた資料でJaSST nano vol.47で登壇してみた #jasstnano]]></title><description><![CDATA[こんにちは。ダイの大冒険ガチ勢のbun913と申します。
+本日JaSST nano vol.47というイベントにて、私がSDET（Software Development Engineer in Test）という職種になってから感じていることについて赤裸々に発表しました。
+この内容について軽く触るとともに、せっかくなので今回からチャレンジしてみたMarpと生成AIを活用したスライド作成の体験が良かったので、それについて記事にしてみました。
+
+ 発表の内容
+
+
+SDET という日本では珍しい職種で働いています
+
+名前からすると「Software Development Engineer が...]]></description><link>https://zenn.dev/moneyforward/articles/defaceaddf6756</link><guid isPermaLink="true">https://zenn.dev/moneyforward/articles/defaceaddf6756</guid><pubDate>Tue, 15 Apr 2025 10:52:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--mUpzJcee--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Marp%252B%25E7%2594%259F%25E6%2588%2590AI%25E3%2581%25A7%25E6%259B%25B8%25E3%2581%2584%25E3%2581%259F%25E8%25B3%2587%25E6%2596%2599%25E3%2581%25A7JaSST%2520nano%2520vol.47%25E3%2581%25A7%25E7%2599%25BB%25E5%25A3%2587%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2520%2523jasstnano%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:bun913%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzUwOTQ4MTI2ZjguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Money%2520Forward%2520Developers%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzcxNGVhMDEyMDQuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>bun913</dc:creator></item><item><title><![CDATA[ユーティリティ型【個人学習まとめ】]]></title><description><![CDATA[
+ ユーティリティ型
+型を変換したり、新しい型を生成するために使用する組み込み式のジェネリック型が TypeScript には存在し、ユーティリティ型と呼びます。
+いくつもの種類がありますが、今回は私が気になった 2 つの学習をしてみましょう！
+
+ Partial&lt;T&gt;型
+Partial&lt;T&gt;型は、指定された型のプロパティをオプショナルプロパティ(任意のプロパティ)に変換します。
+例として、Userインターフェイスを用意します。
+age、addressはオプショナルプロパティで、省略しても OK なプロパティです。
+interface User {
+  name:...]]></description><link>https://zenn.dev/o0rororo0o/articles/d6d9adb3b4a5ad</link><guid isPermaLink="true">https://zenn.dev/o0rororo0o/articles/d6d9adb3b4a5ad</guid><pubDate>Tue, 15 Apr 2025 08:46:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--LlmkpihM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%25A6%25E3%2583%25BC%25E3%2583%2586%25E3%2582%25A3%25E3%2583%25AA%25E3%2583%2586%25E3%2582%25A3%25E5%259E%258B%25E3%2580%2590%25E5%2580%258B%25E4%25BA%25BA%25E5%25AD%25A6%25E7%25BF%2592%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%258D%25E3%2582%258D%25E3%2582%258D%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ2ZTZjOWM4YmMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ろろろ</dc:creator></item><item><title><![CDATA[[EOL]LambdaでNode.js v18ランタイムのサポートが2025/09/01に終了します]]></title><description><![CDATA[
+ Node.js v18のサポート終了
+Node.js v18は2025/04/30にサポートを終了します
+https://endoflife.date/nodejs
+
+ Lambdaランタイムのサポート終了
+Node.js v18がサポートを終了したため、Lambdaランタイムで使用できるNode.js 18のサポートも終了されます
+終了日は2025/09/01で、それ以降は以下の通りLambdaの作成および更新に制限がかかるようになります
+
+2025/09/01~
+
+Node.js 18 ランタイムにセキュリティパッチやその他の更新を適用しなくなり、Node.js 18 を使用する...]]></description><link>https://zenn.dev/malliavin/articles/bfe98be53cf876</link><guid isPermaLink="true">https://zenn.dev/malliavin/articles/bfe98be53cf876</guid><pubDate>Tue, 15 Apr 2025 05:38:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7lzxR6q4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BEOL%255DLambda%25E3%2581%25A7Node.js%2520v18%25E3%2583%25A9%25E3%2583%25B3%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25A0%25E3%2581%25AE%25E3%2582%25B5%25E3%2583%259D%25E3%2583%25BC%25E3%2583%2588%25E3%2581%258C2025%252F09%252F01%25E3%2581%25AB%25E7%25B5%2582%25E4%25BA%2586%25E3%2581%2597%25E3%2581%25BE%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%2581%25E3%2582%25A7%25E3%2583%25BC%25E3%2582%25AA%25E3%2583%25BC%25E3%2582%2592%25E3%2581%2593%25E3%2582%2588%25E3%2581%25AA%25E3%2581%258F%25E6%2584%259B%25E3%2581%2599%25E8%2580%2585%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA3NzY3MzFlNDQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>チェーオーをこよなく愛す者</dc:creator></item><item><title><![CDATA[[RT/TS] 音声録音に関して]]></title><description><![CDATA[
+ はじめに
+近年、AIの進化とともに、その応用範囲は急速に拡大しています。少し前まで、AIは主にユーザーの入力に基づいてテキストを生成するために使われていましたが、現在では、画像生成、動画生成、そして音声認識といった分野でも目覚ましい成果を上げています。この記事では、特に「音声認識」に焦点を当て、フロントエンド開発者の視点から詳しく掘り下げていきたいと思います。
+実用的な観点から見ると、音声認識の課題は、主に次の2つのサブタスクに分解できます。
+
+入力デバイスからの音声録音
+データの整形とネットワーク送信
+
+驚くべきことに、これらの各ステップには、議論すべき点がたくさんあります。この連...]]></description><link>https://zenn.dev/sun_asterisk/articles/f51c697c5fe457</link><guid isPermaLink="true">https://zenn.dev/sun_asterisk/articles/f51c697c5fe457</guid><pubDate>Tue, 15 Apr 2025 01:28:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ib-n8S7J--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BRT%252FTS%255D%2520%25E9%259F%25B3%25E5%25A3%25B0%25E9%258C%25B2%25E9%259F%25B3%25E3%2581%25AB%25E9%2596%25A2%25E3%2581%2597%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2583%2587%25E3%2583%25AB%25E3%2583%2593%25E3%2583%25B3%2520%25E3%2582%25A2%25E3%2583%25AB%25E3%2583%2581%25E3%2583%25A7%25E3%2583%25A0%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M1YTU0ZjZiM2MuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Sun%252A%2520Developers%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRkNTVlY2IwMTMuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>デルビン アルチョム</dc:creator></item><item><title><![CDATA[171. Excel Sheet Column Number]]></title><description><![CDATA[Excel シートに表示される列タイトルを表す文字列 columnTitle が与えられたとき、その対応する列番号を返してください。
+例：
+A -&gt; 1  
+B -&gt; 2  
+C -&gt; 3  
+...  
+Z -&gt; 26  
+AA -&gt; 27  
+AB -&gt; 28  
+...
+
+例 1:
+入力: columnTitle = "A"
+出力: 1
+例 2:
+入力: columnTitle = "AB"
+出力: 28
+例 3:
+入力: columnTitle = "ZY"
+出力: 701
+
+]]></description><link>https://zenn.dev/idapan/articles/dff9fbe296c0d5</link><guid isPermaLink="true">https://zenn.dev/idapan/articles/dff9fbe296c0d5</guid><pubDate>Mon, 14 Apr 2025 21:39:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1hMu7C5A--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:171.%2520Excel%2520Sheet%2520Column%2520Number%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Keijiro%2520Ida%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2EwYTNmOGUyMGYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Keijiro Ida</dc:creator></item><item><title><![CDATA[ハンズオン！Next.js+Hono+RPC+Supabase+Drizzle+pnpm+Turborepoで作るモノレポ構成のアプリ開発]]></title><description><![CDATA[
+ はじめに
+プログラミングスクールRUNTEQでWebエンジニア兼講師をしているいっぺい（@ippei_111）と申します。
+今回は、TypeScriptを使用して、Next.js+Hono+RPC+Supabase+Drizzle+pnpm+Turborepoのモノレポ構成のアプリを作成する方法をハンズオン形式で紹介していきます。
+本記事で作成するアプリは、フロントエンドはNext.jsのApp Router、バックエンドはHonoフレームワークを使用し、Cloudflare Workersにデプロイします。データベースはSupabaseのPostgreSQLを利用し、ORM/クエリ...]]></description><link>https://zenn.dev/ippe/articles/7782e701f8df26</link><guid isPermaLink="true">https://zenn.dev/ippe/articles/7782e701f8df26</guid><pubDate>Mon, 14 Apr 2025 15:16:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--KMKKfoKQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%258F%25E3%2583%25B3%25E3%2582%25BA%25E3%2582%25AA%25E3%2583%25B3%25EF%25BC%2581Next.js%252BHono%252BRPC%252BSupabase%252BDrizzle%252Bpnpm%252BTurborepo%25E3%2581%25A7%25E4%25BD%259C%25E3%2582%258B...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Ippei%2520Shimizu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc0ODUyMDJjY2UuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Ippei Shimizu</dc:creator></item><item><title><![CDATA[ベストプラクティスをまとめてくれてる tsconfig/bases]]></title><description><![CDATA[tsconfig でよくあるやつや、ベストプラクティス的なのをまとめてくれているプロジェクト。
+
+tsconfig/bases
+
+公式ドキュメントでも紹介されているので信頼感がある。
+
+TypeScript: Documentation - What is a tsconfig.json
+
+
+ 使えるもの
+strictest は strict 以外の設定でも型チェックをカッチリしておきたい場合に便利。
+tsc の新バージョンでカッチリするルールがリリースされても追随するのがラクになる。
+
+strictest.json at tsconfig/bases
+
+next とか、フレームワークに...]]></description><link>https://zenn.dev/sakamoto_akira_/articles/26af9405640f43</link><guid isPermaLink="true">https://zenn.dev/sakamoto_akira_/articles/26af9405640f43</guid><pubDate>Mon, 14 Apr 2025 14:43:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--i2iIfFTI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2599%25E3%2582%25B9%25E3%2583%2588%25E3%2583%2597%25E3%2583%25A9%25E3%2582%25AF%25E3%2583%2586%25E3%2582%25A3%25E3%2582%25B9%25E3%2582%2592%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2581%25A6%25E3%2581%258F%25E3%2582%258C%25E3%2581%25A6%25E3%2582%258B%2520tsconfig%252Fbases%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2595%25E3%2581%258B%25E3%2582%2582%25E3%2581%25A8%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RjODBjNjY2MzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>さかもと</dc:creator></item><item><title><![CDATA[react-hook-formを使用してフォーム（サンプル）を作成]]></title><description><![CDATA[
+ はじめに
+
+react-hook-form を使用して登録フォームのサンプルを作成しました
+UI 部分は MUI を使用しています
+
+
+ ライブラリ
+
+
+
+ライブラリ
+バージョン
+
+
+
+
+react
+^19.0.0
+
+
+react-hook-form
+^7.54.2
+
+
+@mui/material
+^7.0.1
+
+
+vite
+^6.2.0
+
+
+
+
+ イメージ
+
+
+ フォーム管理ライブラリ
+
+ React Hook Form で行いたい機能
+
+ 状態管理
+
+各フィールドの入力値
+バリデーション実施結果
+
+
+ 入力フィールドとの紐づけ
+
+バリデーションルールと入力フィールドとの紐づけ
+入...]]></description><link>https://zenn.dev/by_tera/articles/202504-001-react-hook-form</link><guid isPermaLink="true">https://zenn.dev/by_tera/articles/202504-001-react-hook-form</guid><pubDate>Mon, 14 Apr 2025 12:35:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--q0HuChq9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:react-hook-form%25E3%2582%2592%25E4%25BD%25BF%25E7%2594%25A8%25E3%2581%2597%25E3%2581%25A6%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25BC%25E3%2583%25A0%25EF%25BC%2588%25E3%2582%25B5%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AB%25EF%25BC%2589%25E3%2582%2592%25E4%25BD%259C%25E6%2588%2590%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A6%25E3%2582%2589%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSkpBVkh1Rl9rdFBlM1JTYTNkU3lZUG92SXdnVWx2dGlxN2hTMkl2c1BHZ0J3cTlRPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>てら</dc:creator></item><item><title><![CDATA[AI × 個人開発：2ヶ月で「Draw.io＋Cacoo/200」をReactで作った話]]></title><description><![CDATA[初めまして。Zenn初投稿です。
+2ヶ月で「Draw.ioとCacooを足して200で割ったアプリ」をReactで作った話です。ポエムはNoteに（ChatGPTがあることないこと）書いたので良ければ。
+
+
+ きっかけ
+小さなSIerにいるんですが、いつまで経っても仕事でAI使う機会が出てず（大丈夫かSI業界）、ChatGPT-4oみて流石にマズいなと思い、個人開発で試したというところです。
+Clineが良さそうですが、まずはスタンダードにGithubCopilot + ChatGPTでどれだけ効率変わるか、実際触って試してました。
+あと、図形エディタのような高頻度なレンダリングにRea...]]></description><link>https://zenn.dev/msnakagawa/articles/57dcac4946586e</link><guid isPermaLink="true">https://zenn.dev/msnakagawa/articles/57dcac4946586e</guid><pubDate>Mon, 14 Apr 2025 10:41:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--LvhvFr-b--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AI%2520%25C3%2597%2520%25E5%2580%258B%25E4%25BA%25BA%25E9%2596%258B%25E7%2599%25BA%25EF%25BC%259A2%25E3%2583%25B6%25E6%259C%2588%25E3%2581%25A7%25E3%2580%258CDraw.io%25EF%25BC%258BCacoo%252F200%25E3%2580%258D%25E3%2582%2592React%25E3%2581%25A7%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:gznnk%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTDAxRkNPZ3VrSkhOWTVUZ2s5SGxmV3ZQUmE3QWlWbVptSzc0Z1NxX1otUnRHdmVyUWw9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>gznnk</dc:creator></item><item><title><![CDATA[Cloudflare Wokerで動くreadability.jsを実装する]]></title><description><![CDATA[n番煎じではありますが、Firefoxでも使われているヒューリスティックな本文抽出ライブラリ mozilla/readability をCloudflare Workers向けに再実装してみました。
+実装の目的として、LLMへの入力として利用したり、個人で作っているHackerNewsリーダーに乗せたりしようとしています（これが現状はHTMLまるごとをLLMに与えているため非常にお金がかかっています）。そのため、最終的にMarkdown形式で本文を出力します。
+
+ Demo &amp; リポジトリ
+
+
+
+デモサイト &amp; API: https://readability.akira...]]></description><link>https://zenn.dev/akira108/articles/984253dc74abaf</link><guid isPermaLink="true">https://zenn.dev/akira108/articles/984253dc74abaf</guid><pubDate>Mon, 14 Apr 2025 08:26:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--rb17WMT0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Cloudflare%2520Woker%25E3%2581%25A7%25E5%258B%2595%25E3%2581%258Freadability.js%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:akira108%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I3MmJiYTcwMTMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>akira108</dc:creator></item><item><title><![CDATA[MCP入門]]></title><description><![CDATA[本記事は、最近話題のMCPの入門記事です。
+MCP（Model Context Protocol）について、以下の4ステップで紹介します。
+
+ざっくり理解する
+使ってみる
+深く理解する
+作ってみる
+
+初心者でも順番に読み進めれば、MCPについてざっと理解、簡単な実装ができるようになることを目指します💪
+
+
+ ざっくり理解する
+MCPとは、ざっくり言うと、LLMアプリと外部サービスを連携するためのプロトコルです。
+
+LLMアプリとは、ChatGPTやClaude、Cursorなど、LLMを使用するためのインターフェースを提供するアプリケーションを指します。(⚠️&nbsp;GPT-4oやc...]]></description><link>https://zenn.dev/kazuwombat/articles/d8789724f10092</link><guid isPermaLink="true">https://zenn.dev/kazuwombat/articles/d8789724f10092</guid><pubDate>Mon, 14 Apr 2025 07:22:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--A37J3is6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_76:MCP%25E5%2585%25A5%25E9%2596%2580%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258B%25E3%2581%259A%25E3%2581%2586%25E3%2581%2589%25E3%2582%2593%25E3%2581%25B0%25E3%2581%25A3%25E3%2581%25A8%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhhMWQwZTBkMjIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>かずうぉんばっと</dc:creator></item><item><title><![CDATA[google books apiを使った本屋オンライン可視化サービス]]></title><description><![CDATA[
+ はじめに
+私は大学4年生のソフトウェアエンジニアです。エンジニアとして活動し始めてから、受託案件を一人で全てこなすことが、一つの目標でした。そんな目標を今回達成することができたので、ブログに記します。
+
+ サービス概要
+https://tomodachi-honya.vercel.app/
+https://github.com/kmdtomo/tomodachi-honya
+本サービスは、横浜に実店舗を構える「友達本屋」の書籍やイベントなどをオンラインで可視化・発信するWebプラットフォームです。
+「友達本屋」は、個人が棚の一区画のオーナーとなり、自身の選んだ本を自由に展示・販売する...]]></description><link>https://zenn.dev/tomowsf11/articles/87af30a5655f9b</link><guid isPermaLink="true">https://zenn.dev/tomowsf11/articles/87af30a5655f9b</guid><pubDate>Mon, 14 Apr 2025 05:33:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--SsO9xZzV--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:google%2520books%2520api%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%259F%25E6%259C%25AC%25E5%25B1%258B%25E3%2582%25AA%25E3%2583%25B3%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%25B3%25E5%258F%25AF%25E8%25A6%2596%25E5%258C%2596%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2593%25E3%2582%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A8%25E3%2582%2582%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJmZDk2Y2Q2NmEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>とも</dc:creator></item><item><title><![CDATA[Lambda × Terraform で始めるトイル削減：準備 編]]></title><description><![CDATA[
+ 🚀 Lambda × Terraform で始めるトイル削減：準備 編
+インフラ運用における日々の面倒な作業（＝トイル）を減らすために、AWS Lambda と Terraform を活用して、インフラとコードの自動化を進めていきます。
+本記事では、TypeScript で書かれた AWS Lambda 関数を Terraform でデプロイする構成を作成し、Makefile でビルドとデプロイの操作を統一管理します。
+Lambda 関数の実装には TypeScript を採用することで型安全性を確保し、ビルドには esbuild を使うことで高速かつ軽量な成果物の作成を可能にしてい...]]></description><link>https://zenn.dev/inventit/articles/automate-toil-by-lambda-terraform-prep</link><guid isPermaLink="true">https://zenn.dev/inventit/articles/automate-toil-by-lambda-terraform-prep</guid><pubDate>Mon, 14 Apr 2025 04:57:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--FfqepPCi--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Lambda%2520%25C3%2597%2520Terraform%2520%25E3%2581%25A7%25E5%25A7%258B%25E3%2582%2581%25E3%2582%258B%25E3%2583%2588%25E3%2582%25A4%25E3%2583%25AB%25E5%2589%258A%25E6%25B8%259B%25EF%25BC%259A%25E6%25BA%2596%25E5%2582%2599%2520%25E7%25B7%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:mtakahashi%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M5NTBkNTdlNTMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Inventit%2520Tech%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZhZDg3YjRkZGMuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mtakahashi</dc:creator></item><item><title><![CDATA[MCPサーバーを使った複数のStripeアカウントデータの統合分析と可視化に挑戦してみた]]></title><description><![CDATA[SaaSビジネスを成長させる過程で、複数のStripeアカウントを管理する必要性は珍しくありません。事業部門ごと、製品ラインごと、あるいは地域ごとに別々のアカウントを持つことで、会計管理や収益の追跡は柔軟になりますが、ビジネス全体を俯瞰するデータ分析は複雑になってしまいます。
+本記事では、Model Context Protocol（MCP）を活用した複数のStripeアカウントからのデータ統合、分析手法、そして意味のあるビジネスインサイトを導き出すための可視化テクニックについて解説します。すでに構築されたMCPサーバーを基盤として、データを統合し、AIアシスタントとの連携によってデータ...]]></description><link>https://zenn.dev/digitalcube/articles/95b0b2af63918e</link><guid isPermaLink="true">https://zenn.dev/digitalcube/articles/95b0b2af63918e</guid><pubDate>Mon, 14 Apr 2025 00:47:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--OM7cgVVA--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:MCP%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%259F%25E8%25A4%2587%25E6%2595%25B0%25E3%2581%25AEStripe%25E3%2582%25A2%25E3%2582%25AB%25E3%2582%25A6%25E3%2583%25B3%25E3%2583%2588%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2581%25AE%25E7%25B5%25B1%25E5%2590%2588%25E5%2588%2586%25E6%259E%2590%25E3%2581%25A8%25E5%258F%25AF%25E8%25A6%2596%25E5%258C%2596%25E3%2581%25AB%25E6%258C%2591%25E6%2588%25A6%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Okamoto%2520Hidetaka%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM0Y2U1ZTFlODkuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2587%25E3%2582%25B8%25E3%2582%25BF%25E3%2583%25AB%25E3%2582%25AD%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%2596%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZiZjI5ZDBmZjYuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Okamoto Hidetaka</dc:creator></item><item><title><![CDATA[法人番号や法人情報を検索するMCP Serverの実装を公開しました]]></title><description><![CDATA[
+ 概要
+経済産業省が公開している gBizINFO APIを利用して法人名から法人番号などの検索や、法人番号から法人情報を取得するMCP Serverの実装を公開しました
+gBizINFO API自体は利用申請をしてアクセストークンを発行する必要があります
+単純に検索する分にはWEBで公開されている経済産業省のgBizINFOや国税庁の法人番号公表サイトのほうが便利です
+!
+gBizINFOは2026年1月に新システムに移行予定のため、APIの仕様などが変わるかもしれません
+また、データの更新も段階的に停止されるようです
+この記事を執筆していて気づきました
+
+
+ MCPとは
+MCP (...]]></description><link>https://zenn.dev/tomiyan/articles/f863146e15307d</link><guid isPermaLink="true">https://zenn.dev/tomiyan/articles/f863146e15307d</guid><pubDate>Sun, 13 Apr 2025 23:20:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qov6NnSw--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%25B3%2595%25E4%25BA%25BA%25E7%2595%25AA%25E5%258F%25B7%25E3%2582%2584%25E6%25B3%2595%25E4%25BA%25BA%25E6%2583%2585%25E5%25A0%25B1%25E3%2582%2592%25E6%25A4%259C%25E7%25B4%25A2%25E3%2581%2599%25E3%2582%258BMCP%2520Server%25E3%2581%25AE%25E5%25AE%259F%25E8%25A3%2585%25E3%2582%2592%25E5%2585%25AC%25E9%2596%258B%25E3%2581%2597%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tomiyan%2520%25E5%2586%25A8%25E7%2594%25B0%2520%25E6%2598%258C%25E9%2582%25A6%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RlMzM5OTVkN2UuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tomiyan 冨田 昌邦</dc:creator></item><item><title><![CDATA[awaitあり・なしで何が変わる？パフォーマンスと挙動を再比較]]></title><description><![CDATA[前回、不要なawaitについて書いた記事の続きです。
+
+こちらの記事では、なんとなくで書きがちなawaitについて、不要となるケースを記載していました。
+async function getUsers() {
+  const res = await fetch("/api/users");
+  if (res.status !== 200) {
+    throw new Error("エラーだよ");
+  }
+  const data = await res.json(); // ← ここでのawaitはあってもなくても動作は変わらない
+  return data;
+}
+その中で実際に...]]></description><link>https://zenn.dev/nanase99/articles/94039507ed3105</link><guid isPermaLink="true">https://zenn.dev/nanase99/articles/94039507ed3105</guid><pubDate>Sun, 13 Apr 2025 21:43:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--zCaGKrGI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:await%25E3%2581%2582%25E3%2582%258A%25E3%2583%25BB%25E3%2581%25AA%25E3%2581%2597%25E3%2581%25A7%25E4%25BD%2595%25E3%2581%258C%25E5%25A4%2589%25E3%2582%258F%25E3%2582%258B%25EF%25BC%259F%25E3%2583%2591%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25BC%25E3%2583%259E%25E3%2583%25B3%25E3%2582%25B9%25E3%2581%25A8%25E6%258C%2599%25E5%258B%2595%25E3%2582%2592%25E5%2586%258D%25E6%25AF%2594%25E8%25BC%2583%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nanase%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTGVFZVBnd1UxdjJzYlVCNEEwRHd1ZGxQWkVZRUVUd1dyYng5SzFjUE1hQlpmR01QZz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nanase</dc:creator></item><item><title><![CDATA[【Web API】加速度センサーの情報を取得する 2025年版【DeviceMotionEvent】]]></title><description><![CDATA[
+ まとめ
+
+加速度センサーの情報はDeviceMotionEventインターフェースを介して取得できる
+iOS系では、requestPermission()を呼び出す必要がある
+iOS系では、さらに各加速度の正負が反転している
+
+
+
+私たちOrchestra Canvas Tokyoは、都内を中心に活動するアマチュア・オーケストラです。
+次回は2025年7月にシューマンの交響曲第2番。
+初めての方も、そうでない方も、お気軽にお越しください！
+詳しくはチケット販売ページまで。
+
+
+
+
+ 背景
+当団（Orchestra Canvas Tokyo）では、エイプリルフールとして、「Orches...]]></description><link>https://zenn.dev/orch_canvas/articles/device-motion-event</link><guid isPermaLink="true">https://zenn.dev/orch_canvas/articles/device-motion-event</guid><pubDate>Sun, 13 Apr 2025 21:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--P_TZ4CwS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Web%2520API%25E3%2580%2591%25E5%258A%25A0%25E9%2580%259F%25E5%25BA%25A6%25E3%2582%25BB%25E3%2583%25B3%25E3%2582%25B5%25E3%2583%25BC%25E3%2581%25AE%25E6%2583%2585%25E5%25A0%25B1%25E3%2582%2592%25E5%258F%2596%25E5%25BE%2597%25E3%2581%2599%25E3%2582%258B%25202025%25E5%25B9%25B4%25E7%2589%2588%25E3%2580%2590DeviceMotionEvent%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%2593%25E3%2581%25A3%25E3%2581%2593%25E3%2581%2595%25E3%2582%2593%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhlOWNmY2FkZDguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:OCT%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzlmZDA3ZTJhYTkuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>こっこさん</dc:creator></item><item><title><![CDATA[Prismaによる既存DBのリレーション構造改善 - 安全なスキーマ移行の実践]]></title><description><![CDATA[
+ はじめに
+「1つの親に複数の子を持たせたい」「リレーションに追加情報を持たせたい」―これはDB設計でよくある要件変更です。本記事では、Prismaを使用している本番アプリケーションで、単純な1対1の自己参照関係から、より柔軟な多対多関係へとデータモデルを安全に移行した実例を紹介します。型安全なORMであるPrismaの強みを最大限に活かしながら、ダウンタイムなく構造を進化させる方法を解説します。
+
+ 問題の背景
+私たちのアプリケーションでは、「プロジェクト」と「タスク」という関係があり、以下のような構造になっていました。
+model Project {
+  id        Int...]]></description><link>https://zenn.dev/shigerufukada/articles/8c1b75cefb850f</link><guid isPermaLink="true">https://zenn.dev/shigerufukada/articles/8c1b75cefb850f</guid><pubDate>Sun, 13 Apr 2025 11:52:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--djtTpgTM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Prisma%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258B%25E6%2597%25A2%25E5%25AD%2598DB%25E3%2581%25AE%25E3%2583%25AA%25E3%2583%25AC%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E6%25A7%258B%25E9%2580%25A0%25E6%2594%25B9%25E5%2596%2584%2520-%2520%25E5%25AE%2589%25E5%2585%25A8%25E3%2581%25AA%25E3%2582%25B9%25E3%2582%25AD%25E3%2583%25BC%25E3%2583%259E%25E7%25A7%25BB%25E8%25A1%258C%25E3%2581%25AE%25E5%25AE%259F%25E8%25B7%25B5%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Fukada%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2IxNTNiNGRkZjQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Fukada</dc:creator></item><item><title><![CDATA[クライアント側の日時フォーマット指定について]]></title><description><![CDATA[DB上は 2025-04-06 12:14:22.398 というような形で保持しておき、画面上に表示する際に任意の形に加工するのが良さそう。
+今回、NEXTJS の環境ではクライアント側で対応しました。参考にさせていただいたのはこの記事です。
+https://ribbit.konomi.app/blog/javascript-date-format/
+
+ 現状とやりたいこと
+
+DB上はTimeStamp型でデータを保持する
+APIからデータを受け取る(その時点では加工しない)
+画面に表示する際に任意の形に加工する(今回は YYYY/MM/DD にする)
+
+
+ APIのレスポンス
+paym...]]></description><link>https://zenn.dev/kaikusakari/articles/884ce55712a13b</link><guid isPermaLink="true">https://zenn.dev/kaikusakari/articles/884ce55712a13b</guid><pubDate>Sun, 13 Apr 2025 11:44:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--CYdm-vkl--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25A4%25E3%2582%25A2%25E3%2583%25B3%25E3%2583%2588%25E5%2581%25B4%25E3%2581%25AE%25E6%2597%25A5%25E6%2599%2582%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25BC%25E3%2583%259E%25E3%2583%2583%25E3%2583%2588%25E6%258C%2587%25E5%25AE%259A%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E8%258D%2589%25E8%258B%2585%2520%25E5%25BF%25AB%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzIxNDVmZjk5MzMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>草苅 快</dc:creator></item><item><title><![CDATA[フロントを極める.CSS編｜第1章｜ブロックレベル要素]]></title><description><![CDATA[今回の記事では、CSSの中でも
+ブロックレベル要素（Block-level content）について解説します。
+
+ ブロックレベル要素（以下”ブロック要素”と呼ぶ）
+
+ 1. 概要
+ブロックレイアウトでは、要素のボックスは包含ブロックの上から下へ垂直に配置される。各ボックスの左端は包含ブロック[1]の左端に揃う。また、ブロック要素は必ず新しい行から始まり、横書きの場合、親要素の水平方向の幅（↔️）全体と、内容に応じた垂直方向の高さを持つ「ブロック」を形成する。
+
+ 2. ポイント（デフォルトのCSSなどを含む）
+
+要素前後に改行が行われる
+子要素である場合、親要素の水平方向に膨らむ（w...]]></description><link>https://zenn.dev/wh_space/articles/6df86b17605655</link><guid isPermaLink="true">https://zenn.dev/wh_space/articles/6df86b17605655</guid><pubDate>Sun, 13 Apr 2025 09:53:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wfprdnZ9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2595%25E3%2583%25AD%25E3%2583%25B3%25E3%2583%2588%25E3%2582%2592%25E6%25A5%25B5%25E3%2582%2581%25E3%2582%258B.CSS%25E7%25B7%25A8%25EF%25BD%259C%25E7%25AC%25AC1%25E7%25AB%25A0%25EF%25BD%259C%25E3%2583%2596%25E3%2583%25AD%25E3%2583%2583%25E3%2582%25AF%25E3%2583%25AC%25E3%2583%2599%25E3%2583%25AB%25E8%25A6%2581%25E7%25B4%25A0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:wh.space%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTE1YT3l1VDlvdnVSZ250aXFna0xpMUVjYUxSRjlEYzA4M3RrSnFoYm85d1JZQTJoVT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>wh.space</dc:creator></item></channel></rss>
