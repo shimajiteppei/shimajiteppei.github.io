@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「CSS」のフィード]]></title><description><![CDATA[Zennのトピック「CSS」のRSSフィードです]]></description><link>https://zenn.dev/topics/css</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/98e1680a6c.png</url><title>Zennの「CSS」のフィード</title><link>https://zenn.dev/topics/css</link></image><generator>zenn.dev</generator><lastBuildDate>Thu, 17 Apr 2025 04:41:30 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/css/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[【Shadcn/ui】Button内のアイコンサイズが変更できない？原因は意外な基本スタイル！🛠️]]></title><description><![CDATA[
+ はじめに
+人気の UI コンポーネントライブラリ Shadcn/ui、便利ですよね！ Button コンポーネントもよく使うと思いますが、中に lucide-react などのアイコンを入れたときに、「アイコンに className でサイズ指定しても効かない！」と困ったことはありませんか？
+import { Button } from "@/components/ui/button"; // あなたのプロジェクトの Button
+import { Download } from "lucide-react";
+
+// ...
+
+&lt;Button size="lg"&gt;
+  ...]]></description><link>https://zenn.dev/noah11/articles/881f3b59ee5933</link><guid isPermaLink="true">https://zenn.dev/noah11/articles/881f3b59ee5933</guid><pubDate>Wed, 16 Apr 2025 23:18:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--IWcPn0_J--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Shadcn%252Fui%25E3%2580%2591Button%25E5%2586%2585%25E3%2581%25AE%25E3%2582%25A2%25E3%2582%25A4%25E3%2582%25B3%25E3%2583%25B3%25E3%2582%25B5%25E3%2582%25A4%25E3%2582%25BA%25E3%2581%258C%25E5%25A4%2589%25E6%259B%25B4%25E3%2581%25A7%25E3%2581%258D%25E3%2581%25AA%25E3%2581%2584%25EF%25BC%259F%25E5%258E%259F%25E5%259B%25A0%25E3%2581%25AF%25E6%2584%258F%25E5%25A4%2596%25E3%2581%25AA%25E5%259F%25BA%25E6%259C%25AC%25E3%2582%25B9%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25AB%25EF%25BC%2581%2520%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yusuken%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVjNjI1ODJjNjEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yusuken</dc:creator></item><item><title><![CDATA[📱文字サイズをレスポンシブにする方法！hタグやpタグの例付き【CSS入門】]]></title><description><![CDATA[こんにちは！
+今日は「スマホでもパソコンでも見やすい文字サイズ」＝レスポンシブな文字サイズの設定方法について、わかりやすく解説します。
+
+ そもそも「レスポンシブ」って何？
+「レスポンシブ」とは、スマホ・タブレット・パソコンなど、画面サイズに合わせて表示を変えることをいいます。
+📱 ➡ 🖥 スマホで小さく
+🖥 ➡ 📱 パソコンで大きく
+文字も同じで、画面の広さに合わせて文字の大きさが自動で変わるようにしたい！というのが今回のテーマです。
+
+ 📏 最適な文字サイズの単位は？
+文字サイズの設定にはいろんな単位がありますが、レスポンシブに最適なのはこの2つ！
+
+
+
+単位
+特徴
+
+
+
+
+rem
+...]]></description><link>https://zenn.dev/web_kuroko/articles/c4d918e208feb8</link><guid isPermaLink="true">https://zenn.dev/web_kuroko/articles/c4d918e208feb8</guid><pubDate>Wed, 16 Apr 2025 07:58:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--up4qqFEV--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%2520%25E6%2596%2587%25E5%25AD%2597%25E3%2582%25B5%25E3%2582%25A4%25E3%2582%25BA%25E3%2582%2592%25E3%2583%25AC%25E3%2582%25B9%25E3%2583%259D%25E3%2583%25B3%25E3%2582%25B7%25E3%2583%2596%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%25EF%25BC%2581h%25E3%2582%25BF%25E3%2582%25B0%25E3%2582%2584p%25E3%2582%25BF%25E3%2582%25B0%25E3%2581%25AE%25E4%25BE%258B%25E4%25BB%2598%25E3%2581%258D%25E3%2580%2590CSS%25E5%2585%25A5%25E9%2596%2580%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:web%25E9%25BB%2592%25E5%25AD%2590%25EF%25BC%2588%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2586%25E3%2582%25A3%25E3%2583%25B3%25E3%2582%25B0%25E3%2582%25A2%25E3%2583%2589%25E3%2583%2590%25E3%2582%25A4%25E3%2582%25B9%25EF%25BC%2589%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q5OWM0M2FjYWIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>web黒子（コーティングアドバイス）</dc:creator></item><item><title><![CDATA[reset.cssとは？【初心者向けCSS入門】]]></title><description><![CDATA[こんにちは！今日はWebサイト作りでよく出てくる**「reset.css」**について、できるだけカンタンに、やさしく解説します！
+
+ reset.cssってなに？
+Webページを作るとき、ブラウザによってデザインが少しずつ違うことがあります。
+たとえば、同じHTMLを書いても、
+
+Google Chrome では余白がある
+Safari では文字サイズが違う
+…みたいなことが起こるんです！
+
+この違いを**リセット（＝初期化）**して、すべてのブラウザで見た目をそろえるために使うのが 「reset.css」 です！
+
+ よく使われるreset.cssの中身と解説
+ここからは、よく使われ...]]></description><link>https://zenn.dev/web_kuroko/articles/e554c93f1dba80</link><guid isPermaLink="true">https://zenn.dev/web_kuroko/articles/e554c93f1dba80</guid><pubDate>Wed, 16 Apr 2025 07:13:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--VaxATTWX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:reset.css%25E3%2581%25A8%25E3%2581%25AF%25EF%25BC%259F%25E3%2580%2590%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E5%2590%2591%25E3%2581%2591CSS%25E5%2585%25A5%25E9%2596%2580%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:web%25E9%25BB%2592%25E5%25AD%2590%25EF%25BC%2588%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2586%25E3%2582%25A3%25E3%2583%25B3%25E3%2582%25B0%25E3%2582%25A2%25E3%2583%2589%25E3%2583%2590%25E3%2582%25A4%25E3%2582%25B9%25EF%25BC%2589%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q5OWM0M2FjYWIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>web黒子（コーティングアドバイス）</dc:creator></item><item><title><![CDATA[Web Componentsを実装する時に役立った事]]></title><description><![CDATA[
+ はじめに
+Web Componentsを実際に使ってみた時に役に立ったことをTips的に書いていきます。
+「Web Componentsとは」や「メリデメ」、「使い方」は素晴らしい記事がたくさんあるのでそちらを見ていただければと思います。
+
+ コンポーネント管理
+Reactのプロジェクトっぽく管理したかったので、componentsディレクトリにコンポーネントを配置してfetchする方法としました。
+index.html
+components.js
+components
+├─ MyButton.html
+└─ MyList.html
+コンポーネントを使う側
+&lt;!-- index...]]></description><link>https://zenn.dev/dws2020/articles/e167c2cefca39e</link><guid isPermaLink="true">https://zenn.dev/dws2020/articles/e167c2cefca39e</guid><pubDate>Tue, 15 Apr 2025 14:06:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--e1V8LGEg--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Web%2520Components%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2599%25E3%2582%258B%25E6%2599%2582%25E3%2581%25AB%25E5%25BD%25B9%25E7%25AB%258B%25E3%2581%25A3%25E3%2581%259F%25E4%25BA%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:dws%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VlOTZkNTQwNjQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>dws</dc:creator></item><item><title><![CDATA[クリック要素が重なり合うUI実装のベストプラクティス]]></title><description><![CDATA[
+ はじめに
+クリック要素が重なり合うデザインやUIはよくあると思うのですが、そのような実装のベストプラクティス(主観)を考えてみたので記事にしてみました！
+
+ 作成するもの
+
+
+ 実装方針
+様々な実装方法がありますが、今回は以下のルールに沿って作成していきます。
+
+
+&lt;a/&gt; や &lt;button/&gt; などのインタラクティブ・コンテンツは入れ子にしない。
+
+理由：HTMLのルールだから
+
+
+
+z-indexを使用しない。
+
+理由：1つ使えば乱用が始まる危険なプロパティだから
+
+
+
+positionを使わない。
+
+理由：スタックコンテキストを発生させるから
+
+
+
+デ...]]></description><link>https://zenn.dev/gemcook/articles/006fc89ebf0873</link><guid isPermaLink="true">https://zenn.dev/gemcook/articles/006fc89ebf0873</guid><pubDate>Tue, 15 Apr 2025 07:49:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Cg3YsqB5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2583%25E3%2582%25AF%25E8%25A6%2581%25E7%25B4%25A0%25E3%2581%258C%25E9%2587%258D%25E3%2581%25AA%25E3%2582%258A%25E5%2590%2588%25E3%2581%2586UI%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%25AE%25E3%2583%2599%25E3%2582%25B9%25E3%2583%2588%25E3%2583%2597%25E3%2583%25A9%25E3%2582%25AF%25E3%2583%2586%25E3%2582%25A3%25E3%2582%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Kantarou%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQyYzJiNzVlZTIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Gemcook%2520Tech%2520Blog%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzkzYTU2MDY5MDAuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kantarou</dc:creator></item><item><title><![CDATA[CSSスタイリングが煩雑化でガン萎え ⤵💅→明日の俺に任せる作戦決行✨（2025/04/14）]]></title><description><![CDATA[
+
+ ✅ 今日の作業内容
+
+作業時間：約4h30min
+やったこと： 
+・フォトサイト2のレイアウト作成
+・HTML構築
+・CSSスタイリング
+・レスポンシブ対応途中
+・明日以降の作業のための下準備・整理
+
+
+
+ 🔍 気づき・メモ
+
+CSSのレスポンシブ対応途中、CSSのスタイリングが煩雑化してきて手に負えなくなる。
+同じセレクタが2回出てきた、paddingの統一が崩れたなど。
+原因：余白以外、CSS構造設計を事前に考えずに組んだこと。
+明日はCSS整理→CSS のレイアウト作成方法を学んで再発防止にフォーカス！
+
+
+🔜 明日やること（4/15）
+
+フォトサイト2のCSSスタイリング整...]]></description><link>https://zenn.dev/tamakimaru/articles/16526e1120c8e7</link><guid isPermaLink="true">https://zenn.dev/tamakimaru/articles/16526e1120c8e7</guid><pubDate>Mon, 14 Apr 2025 12:45:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--uwkjvgLi--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:CSS%25E3%2582%25B9%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25AA%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%258C%25E7%2585%25A9%25E9%259B%2591%25E5%258C%2596%25E3%2581%25A7%25E3%2582%25AC%25E3%2583%25B3%25E8%2590%258E%25E3%2581%2588%2520%2520%2520%25E2%2586%2592%25E6%2598%258E%25E6%2597%25A5%25E3%2581%25AE%25E4%25BF%25BA%25E3%2581%25AB%25E4%25BB%25BB%25E3%2581%259B%25E3%2582%258B%25E4%25BD%259C%25E6%2588%25A6%25E6%25B1%25BA%25E8%25A1%258C%2520%25EF%25BC%25882025%252F04%252F14%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tamaki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSTNEMXNoUXBnVTY5V2R5X3hzX0FIZWlGdzdDU3F2VUhneTlxbkNGeGh5eEFHN1VGYz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tamaki</dc:creator></item><item><title><![CDATA[Figma オートレイアウトはDev Mode CSSにどう反映されるか]]></title><description><![CDATA[
+ はじめに
+Figma オートレイアウトは、フレームに含まれるオブジェクトを自動配置できる機能です。
+Figma上で余白や配置を一括指定することが可能となり、よりCSSに近い定義が可能となりました。
+この記事では、オートレイアウトがDev Mode（開発モード）のCSS表示にどのように反映されるかを記述します。
+
+ 共通
+オートレイアウトを設定すると、Dev ModeのCSSでは常にflexが指定されます。
+display: flex;
+
+ サイズ変更（幅・高さ）
+
+
+ 固定
+WやHの右プルダウンから幅/高さを固定を選択すると、コンテンツにかかわらず固定のサイズとなります。
+
+Dev ...]]></description><link>https://zenn.dev/ncdc/articles/8cd9a7d2166379</link><guid isPermaLink="true">https://zenn.dev/ncdc/articles/8cd9a7d2166379</guid><pubDate>Mon, 14 Apr 2025 05:48:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--AA0tGttC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Figma%2520%25E3%2582%25AA%25E3%2583%25BC%25E3%2583%2588%25E3%2583%25AC%25E3%2582%25A4%25E3%2582%25A2%25E3%2582%25A6%25E3%2583%2588%25E3%2581%25AFDev%2520Mode%2520CSS%25E3%2581%25AB%25E3%2581%25A9%25E3%2581%2586%25E5%258F%258D%25E6%2598%25A0%25E3%2581%2595%25E3%2582%258C%25E3%2582%258B%25E3%2581%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:K%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNhODZhNDA5ZDMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:NCDC%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE3OTg0NTdlYjQuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>K</dc:creator></item><item><title><![CDATA[全く新しいエンジニア転身ロードマップ ～プログラミング初心者が最短でReact副業デビューする方法～]]></title><description><![CDATA[
+ 全く新しいエンジニア転身ロードマップ ～プログラミング初心者が最短でReact副業デビューする方法～
+
+ はじめに
+
+ 誰向けの記事か
+この記事は、プログラミング初心者が最短でReactを使った副業案件に参画することを目的としたロードマップです。
+Web制作やアプリ開発に興味があるけど、何から学べばいいかわからない人向けです。
+
+ このロードマップのゴール
+
+最短でReactを使った副業案件に参画する
+案件獲得の実績を作る
+その後、必要に応じて基礎を学ぶ
+
+
+ JavaScriptとCSSの勉強は不要！その理由
+
+ JavaScriptとReactはまるで別物
+
+ JavaScrip...]]></description><link>https://zenn.dev/hibikiumekawa/articles/1d56ade9910e51</link><guid isPermaLink="true">https://zenn.dev/hibikiumekawa/articles/1d56ade9910e51</guid><pubDate>Mon, 14 Apr 2025 04:52:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jf_BJicH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2585%25A8%25E3%2581%258F%25E6%2596%25B0%25E3%2581%2597%25E3%2581%2584%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%25E8%25BB%25A2%25E8%25BA%25AB%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2589%25E3%2583%259E%25E3%2583%2583%25E3%2583%2597%2520%25EF%25BD%259E%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%259F%25E3%2583%25B3%25E3%2582%25B0%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E3%2581%258C%25E6%259C%2580%25E7%259F%25AD%25E3%2581%25A7React%25E5%2589%25AF%25E6%25A5%25AD%25E3%2583%2587%25E3%2583%2593%25E3%2583%25A5%25E3%2583%25BC%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%25EF%25BD%259E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:umekawahibiki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTF82QlV6VGFvLXpmTjV0OVBlUjAxdk5RYVFJMWN1VjRWRG5BTnhEWEJGejRRQzFnPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>umekawahibiki</dc:creator></item><item><title><![CDATA[ビューポートを基準として文字や余白のサイズを動的に変更するSCSSのmixin]]></title><description><![CDATA[モバイル端末とPC端末のデザインデータしかないけれどタブレットにも微妙に対応したいときに有用なのかなと思います。
+CSS-Tricksの記事をベースに、こちらで紹介されていた関数を自分なりに改変させていただいています。ありがとうございます。
+https://firstlayout.net/fluidly-font-size-created-with-sass-and-clamp/
+https://css-tricks.com/linearly-scale-font-size-with-css-clamp-based-on-the-viewport/
+
+ mixin
+@use 'sass:...]]></description><link>https://zenn.dev/sonicmoov/articles/sass-fluid-size</link><guid isPermaLink="true">https://zenn.dev/sonicmoov/articles/sass-fluid-size</guid><pubDate>Sun, 13 Apr 2025 21:30:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Kczbbdhm--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2593%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%259D%25E3%2583%25BC%25E3%2583%2588%25E3%2582%2592%25E5%259F%25BA%25E6%25BA%2596%25E3%2581%25A8%25E3%2581%2597%25E3%2581%25A6%25E6%2596%2587%25E5%25AD%2597%25E3%2582%2584%25E4%25BD%2599%25E7%2599%25BD%25E3%2581%25AE%25E3%2582%25B5%25E3%2582%25A4%25E3%2582%25BA%25E3%2582%2592%25E5%258B%2595%25E7%259A%2584%25E3%2581%25AB%25E5%25A4%2589%25E6%259B%25B4%25E3%2581%2599%25E3%2582%258BSCSS%25E3%2581%25AEmixin%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:pugipugiii%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY0YjYwNGE3MzguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2582%25BD%25E3%2583%258B%25E3%2583%2583%25E3%2582%25AF%25E3%2583%25A0%25E3%2583%25BC%25E3%2583%2596%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q5ZjNiOTA2ZmEuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>pugipugiii</dc:creator></item><item><title><![CDATA[[JavaScript]BMIを計算するプログラムを作成  （備忘録）]]></title><description><![CDATA[
+ １．はじめに
+HTML/CSS/JavaScript の理解を深めるために、BMIを計算するプログラムを作成しました。
+他のエンジニアが作成したソースコードを読みながら、作成しました。
+
+ ２．サンプルプログラム
+
+Sample.html
+&lt;!DOCTYPE html&gt;
+&lt;html lang="ja"&gt;
+&lt;head&gt;
+    &lt;!--HTML5より前の文字コードの指定方法 --&gt;
+    &lt;meta http-equiv="content-type" content="text/html; charset=Shift_JIS"&g...]]></description><link>https://zenn.dev/yama_kawa/articles/c022b9ea7e6bc6</link><guid isPermaLink="true">https://zenn.dev/yama_kawa/articles/c022b9ea7e6bc6</guid><pubDate>Sun, 13 Apr 2025 14:02:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--O_Z_DuPr--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BJavaScript%255DBMI%25E3%2582%2592%25E8%25A8%2588%25E7%25AE%2597%25E3%2581%2599%25E3%2582%258B%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%25A0%25E3%2582%2592%25E4%25BD%259C%25E6%2588%2590%2520%2520%25EF%25BC%2588%25E5%2582%2599%25E5%25BF%2598%25E9%258C%25B2%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%25A9%25E3%2582%25B6%25E3%2583%258B%25E3%2582%25A2%25E3%2583%2591%25E3%2583%25B3%25E3%2582%25B5%25E3%2583%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M1ZjYyZjIwYTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ラザニアパンサー</dc:creator></item><item><title><![CDATA[フロントを極める.CSS編｜第1章｜ブロックレベル要素]]></title><description><![CDATA[今回の記事では、CSSの中でも
+ブロックレベル要素（Block-level content）について解説します。
+
+ ブロックレベル要素（以下”ブロック要素”と呼ぶ）
+
+ 1. 概要
+ブロックレイアウトでは、要素のボックスは包含ブロックの上から下へ垂直に配置される。各ボックスの左端は包含ブロック[1]の左端に揃う。また、ブロック要素は必ず新しい行から始まり、横書きの場合、親要素の水平方向の幅（↔️）全体と、内容に応じた垂直方向の高さを持つ「ブロック」を形成する。
+
+ 2. ポイント（デフォルトのCSSなどを含む）
+
+要素前後に改行が行われる
+子要素である場合、親要素の水平方向に膨らむ（w...]]></description><link>https://zenn.dev/wh_space/articles/6df86b17605655</link><guid isPermaLink="true">https://zenn.dev/wh_space/articles/6df86b17605655</guid><pubDate>Sun, 13 Apr 2025 09:53:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wfprdnZ9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2595%25E3%2583%25AD%25E3%2583%25B3%25E3%2583%2588%25E3%2582%2592%25E6%25A5%25B5%25E3%2582%2581%25E3%2582%258B.CSS%25E7%25B7%25A8%25EF%25BD%259C%25E7%25AC%25AC1%25E7%25AB%25A0%25EF%25BD%259C%25E3%2583%2596%25E3%2583%25AD%25E3%2583%2583%25E3%2582%25AF%25E3%2583%25AC%25E3%2583%2599%25E3%2583%25AB%25E8%25A6%2581%25E7%25B4%25A0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:wh.space%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTE1YT3l1VDlvdnVSZ250aXFna0xpMUVjYUxSRjlEYzA4M3RrSnFoYm85d1JZQTJoVT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>wh.space</dc:creator></item><item><title><![CDATA[【Tailwind CSS v4】「カラーが効かない…」原因はこれだった！書き方が変わってた話]]></title><description><![CDATA[
+ 【Tailwind CSS v4】「color系が効かない…」原因はこれだった！書き方が変わってた話
+最近 Tailwind CSS v4 にアップデートしたら、
+bg-red-500 とか text-white とかのカラー系クラスが 全く効かない！ という現象にハマりました。
+
+
+ 🤔 症状
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+としっかり書いてるのに、背景色が全然反映されない。
+ブラウザの devtools で CSS を見ても bg-* 系が出力されてない。
+
+
+ 💡 原因：Tailwind ...]]></description><link>https://zenn.dev/daaaaazo/articles/7df26a85c91701</link><guid isPermaLink="true">https://zenn.dev/daaaaazo/articles/7df26a85c91701</guid><pubDate>Sun, 13 Apr 2025 05:38:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--JLEHYhrm--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Tailwind%2520CSS%2520v4%25E3%2580%2591%25E3%2580%258C%25E3%2582%25AB%25E3%2583%25A9%25E3%2583%25BC%25E3%2581%258C%25E5%258A%25B9%25E3%2581%258B%25E3%2581%25AA%25E3%2581%2584%25E2%2580%25A6%25E3%2580%258D%25E5%258E%259F%25E5%259B%25A0%25E3%2581%25AF%25E3%2581%2593%25E3%2582%258C%25E3%2581%25A0%25E3%2581%25A3%25E3%2581%259F%25EF%25BC%2581%25E6%259B%25B8%25E3%2581%258D%25E6%2596%25B9%25E3%2581%258C%25E5%25A4%2589%25E3%2582%258F%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258A%25E3%2581%25AB%25E3%2581%258E%25E3%2582%258A%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVkMzk3NTM4NzcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>おにぎり</dc:creator></item><item><title><![CDATA[【学習ログ】模写コーディングでエラー地獄→復活2025/04/12]]></title><description><![CDATA[
+ 今日やったこと（4/12）
+
+コードジャンプの1カラムサイトを模写
+
+
+Live Serverのバグ対応
+
+
+直らずHTML/CSSの構造をやり直して再構築
+header・footerのCSSスタイリングまで完了！
+
+
+ 気づき・学び
+
+PCのスリープ状態が長いとLive Serverに影響することがある（一見、VSCode内のエラーと思わせての開発環境エラーという厄介さ）
+titileタグの誤認識になる可能性があるのでクラス属性に“title”は使わない
+エラー対応で何度も書き直しているうちにHTMLの構築
+スピードが上がった
+
+
+ コンディション
+エラーに長時間対応してつかれた！...]]></description><link>https://zenn.dev/tamakimaru/articles/8e4395d4b4a731</link><guid isPermaLink="true">https://zenn.dev/tamakimaru/articles/8e4395d4b4a731</guid><pubDate>Sat, 12 Apr 2025 11:52:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--gP7_MZyB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%25AD%25A6%25E7%25BF%2592%25E3%2583%25AD%25E3%2582%25B0%25E3%2580%2591%25E6%25A8%25A1%25E5%2586%2599%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2587%25E3%2582%25A3%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%25A7%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E5%259C%25B0%25E7%258D%2584%25E2%2586%2592%25E5%25BE%25A9%25E6%25B4%25BB2025%252F04%252F12%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tamaki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSTNEMXNoUXBnVTY5V2R5X3hzX0FIZWlGdzdDU3F2VUhneTlxbkNGeGh5eEFHN1VGYz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tamaki</dc:creator></item><item><title><![CDATA[CSSだけでselectタグをスタイル！でもNext.js（Turbopack）には落とし穴も…？]]></title><description><![CDATA[2025年3月ついにchrome134とedge134でCSSだけでselectタグのカスタマイズができるようになりました。(safari、firefoxではまだ対応していないの早く対応してもらいたいですね)
+今までselectタグはブラウザネイティブUIに強く依存しており、他のフォームと見た目の統一を取るのが難しかったり、JavaScriptを使用しないとカスタマイズできなかったのでCSSだけで完結するのは開発体験の向上になってすごくありがたいです👏
+今回はNext.jsでselectタグのカスタマイズをやってみようと思います。
+
+ 検証
+https://developer.mozil...]]></description><link>https://zenn.dev/barabara/articles/5af49c9602c5cc</link><guid isPermaLink="true">https://zenn.dev/barabara/articles/5af49c9602c5cc</guid><pubDate>Sat, 12 Apr 2025 09:19:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--sG5t4WF4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:CSS%25E3%2581%25A0%25E3%2581%2591%25E3%2581%25A7select%25E3%2582%25BF%25E3%2582%25B0%25E3%2582%2592%25E3%2582%25B9%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25AB%25EF%25BC%2581%25E3%2581%25A7%25E3%2582%2582Next.js%25EF%25BC%2588Turbopack%25EF%25BC%2589%25E3%2581%25AB%25E3%2581%25AF%25E8%2590%25BD%25E3%2581%25A8%25E3%2581%2597%25E7%25A9%25B4%25E3%2582%2582%25E2%2580%25A6%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:br-to%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U4MjYwMWZiMGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>br-to</dc:creator></item><item><title><![CDATA[フロントを極める.HTML編｜第1章｜Header Footer]]></title><description><![CDATA[今回の記事では、HTMLのタグの中でも
+Header、Footerについて解説します。
+ここではARIA (Accessible Rich Internet Applications)[1]については含んでいません。
+
+ Header
+
+
+ 1. 概要
+コンテンツの導入、ナビゲーションの補助をグループ化するためのセマンティック[2]なタグである。
+
+ 2. 表示形式（display type）
+ブロックレベル要素
+
+ 3. 他のタグでも同じ実装できるのではないか？
+できる。しかし、アクセシビリティやSEOの観点からheaderタグでヘッダーを作る方が良い。
+
+ Footer
+
+
+ 1. ...]]></description><link>https://zenn.dev/wh_space/articles/5334e2539f0ff8</link><guid isPermaLink="true">https://zenn.dev/wh_space/articles/5334e2539f0ff8</guid><pubDate>Sat, 12 Apr 2025 08:35:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Llciau2k--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2595%25E3%2583%25AD%25E3%2583%25B3%25E3%2583%2588%25E3%2582%2592%25E6%25A5%25B5%25E3%2582%2581%25E3%2582%258B.HTML%25E7%25B7%25A8%25EF%25BD%259C%25E7%25AC%25AC1%25E7%25AB%25A0%25EF%25BD%259CHeader%2520Footer%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:wh.space%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTE1YT3l1VDlvdnVSZ250aXFna0xpMUVjYUxSRjlEYzA4M3RrSnFoYm85d1JZQTJoVT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>wh.space</dc:creator></item><item><title><![CDATA[styled-components から Tailwind CSS への移行作業を終えて]]></title><description><![CDATA[
+ はじめに
+以下の記事、または他の方々も発信されているように、先月3月にstyled-componentsがメンテナンスモードとなる発表がありました。
+https://opencollective.com/styled-components/updates/thank-you
+
+As I write this in 2025, styled-components as a project is in "maintenance mode". There are a number of reasons for this:
+
+個人的に、React を学び始めた時からお世話になっていて、Rea...]]></description><link>https://zenn.dev/benjuwan/articles/4041e4698dee1b</link><guid isPermaLink="true">https://zenn.dev/benjuwan/articles/4041e4698dee1b</guid><pubDate>Fri, 11 Apr 2025 06:01:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--uSgH4sSu--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:styled-components%2520%25E3%2581%258B%25E3%2582%2589%2520Tailwind%2520CSS%2520%25E3%2581%25B8%25E3%2581%25AE%25E7%25A7%25BB%25E8%25A1%258C%25E4%25BD%259C%25E6%25A5%25AD%25E3%2582%2592%25E7%25B5%2582%25E3%2581%2588%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:benjuwan%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSnd2XzJhLTN4SnJmSkN0Ql9wMkkwWUlVaVlTY1ozLTFQZFZoNkxsaUIyRmc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>benjuwan</dc:creator></item><item><title><![CDATA[最近のウェブ界隈 〜CSS〜]]></title><description><![CDATA[こんにちは。
+第3回は最近のウェブ界隈 〜CSS〜についてです。
+CSSは、ウェブサイトで見ている色、配置、文字など、ページを構成するための要素を決めている重要なものになります。
+
+ CSSの歴史
+簡単ですがCSSについての歴史ってどんな感じ？というところをまとめてみます。
+
+ ウェブ黎明期（1990-1993）
+当初HTML文書はスタイリングの機能を持っていませんでした。
+ウェブ創始者のティム・バーナーズ・リーという方が開発した初期のウェブブラウザでは、文書の見た目はブラウザが決定しており、この頃は文書構造とプレゼンテーションが分離されておらず、文書の見た目を変更する手段は限られていま...]]></description><link>https://zenn.dev/devtechspace/articles/8a60a3773203dd</link><guid isPermaLink="true">https://zenn.dev/devtechspace/articles/8a60a3773203dd</guid><pubDate>Fri, 11 Apr 2025 05:04:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2ZCsBRYs--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%259C%2580%25E8%25BF%2591%25E3%2581%25AE%25E3%2582%25A6%25E3%2582%25A7%25E3%2583%2596%25E7%2595%258C%25E9%259A%2588%2520%25E3%2580%259CCSS%25E3%2580%259C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:devtech%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E2NmQ0ZDdkNzAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>devtech</dc:creator></item><item><title><![CDATA[Laravel + Blade + Vite 環境に Tailwind CSS v4 を導入する]]></title><description><![CDATA[先日 Laravel プロジェクトに Tailwind CSS （v4.0）を導入しました。
+備忘録として、技術スタックや設定手順などを書き残しておこうと思います。
+
+ Tailwind CSS v4 を導入したプロジェクトの「技術スタック」
+
+GitHub リポジトリ
+
+1つだけ
+
+
+バックエンド
+
+言語
+
+PHP（v8.x）
+
+
+フレームワーク
+
+Laravel（v12.x）
+
+
+
+
+フロントエンド
+
+テンプレートエンジン
+
+Blade
+
+
+ビルドツール
+
+Vite（v6.x）
+
+
+
+
+
+
+ 設定方針
+
+Tailwind CSS v4 が推奨する設定にする（＝基本的に最新の設定方法に...]]></description><link>https://zenn.dev/sakataku1991/articles/2adbc666191805</link><guid isPermaLink="true">https://zenn.dev/sakataku1991/articles/2adbc666191805</guid><pubDate>Tue, 08 Apr 2025 15:26:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dtjvI1zz--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Laravel%2520%252B%2520Blade%2520%252B%2520Vite%2520%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25AB%2520Tailwind%2520CSS%2520v4%2520%25E3%2582%2592%25E5%25B0%258E%25E5%2585%25A5%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:sakataku1991%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA5MWQwYmQ0YWMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sakataku1991</dc:creator></item><item><title><![CDATA[vuejs/core に css nesting した scoped style にて :deep() を使ったときの不具合を報告した話]]></title><description><![CDATA[vuejs に scoped style というものがあります。
+https://ja.vuejs.org/api/sfc-css-features
+それは コンポーネント内に 一意の属性を付けて周りスタイルをそこに閉じ込めるものです。
+具体的には
+&lt;style scoped&gt;
+.hoge {
+    color:red;
+}
+&lt;/style&gt;
+と書くことで
+&lt;style&gt;
+[identity].hoge {
+    color: red;
+}
+&lt;/style&gt;
+の様な変換がされます。
+ただ、上記 の変換ルールに不備があります。
+具体的には...]]></description><link>https://zenn.dev/juners/articles/9f21f1292fe016</link><guid isPermaLink="true">https://zenn.dev/juners/articles/9f21f1292fe016</guid><pubDate>Tue, 08 Apr 2025 10:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--sn0mm6r3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:vuejs%252Fcore%2520%25E3%2581%25AB%2520css%2520nesting%2520%25E3%2581%2597%25E3%2581%259F%2520scoped%2520style%2520%25E3%2581%25AB%25E3%2581%25A6%2520%253Adeep%2528%2529%2520%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%259F%25E3%2581%25A8...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:juner%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pJLTZTZnZQaDFwb0M5dmMxYUpVeTFoelB0R1g1RXRmUHRpQzF4QWR3PXMyNTAtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>juner</dc:creator></item><item><title><![CDATA[next/imageで、固定値ではなくレイアウトの幅に合わせたい時の書き方]]></title><description><![CDATA[ほぼ備忘録です。
+&lt;img&gt;で書くと、linterに怒られるので何とかできないかということで調べたら見つけました。
+&lt;Image
+  src={imageUrl}
+  alt="画像"
+  width={0}
+  height={0}
+  sizes="100%"
+  style={{ width: "100%", height: "auto" }}
+/&gt;
+こう書けば、横幅に合わせた画像表示になります。
+]]></description><link>https://zenn.dev/manabu/articles/c540ae8c53cc74</link><guid isPermaLink="true">https://zenn.dev/manabu/articles/c540ae8c53cc74</guid><pubDate>Tue, 08 Apr 2025 09:05:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--izGK5DYM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:next%252Fimage%25E3%2581%25A7%25E3%2580%2581%25E5%259B%25BA%25E5%25AE%259A%25E5%2580%25A4%25E3%2581%25A7%25E3%2581%25AF%25E3%2581%25AA%25E3%2581%258F%25E3%2583%25AC%25E3%2582%25A4%25E3%2582%25A2%25E3%2582%25A6%25E3%2583%2588%25E3%2581%25AE%25E5%25B9%2585%25E3%2581%25AB%25E5%2590%2588%25E3%2582%258F%25E3%2581%259B%25E3%2581%259F%25E3%2581%2584%25E6%2599%2582%25E3%2581%25AE%25E6%259B%25B8%25E3%2581%258D%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Manabu%2520Kurita%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2hMZ0dORVhrSTM5eWlYU0pDZ2U2T0w4S2RFZmhBd2d2M2xUUU52PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Manabu Kurita</dc:creator></item></channel></rss>

@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Docker」のフィード]]></title><description><![CDATA[Zennのトピック「Docker」のRSSフィードです]]></description><link>https://zenn.dev/topics/docker</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/75b80a5922.png</url><title>Zennの「Docker」のフィード</title><link>https://zenn.dev/topics/docker</link></image><generator>zenn.dev</generator><lastBuildDate>Thu, 17 Apr 2025 00:40:22 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/docker/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Next.jsとSentryの連携でSENTRY_AUTH_TOKENをSecret mountで安全に扱う方法]]></title><description><![CDATA[
+ はじめに
+Next.jsアプリケーションでエラー監視のためにSentryを導入する際、ソースマップをSentryにアップロードすることで本番環境でのエラーを正確にデバッグできるようになります。しかし、このプロセスにはSENTRY_AUTH_TOKENという秘密情報が必要になります。この記事では、DockerのSecret mountを使ってSENTRY_AUTH_TOKENを安全に扱う方法を紹介します。
+
+ 前提知識
+
+Next.jsの基本的な知識
+Sentryの基本的な理解
+Dockerの基本的な使い方
+
+
+ なぜSecret mountが必要なのか
+Sentryにソースマップをア...]]></description><link>https://zenn.dev/nimiusrd/articles/3b6e12ff6cb53e</link><guid isPermaLink="true">https://zenn.dev/nimiusrd/articles/3b6e12ff6cb53e</guid><pubDate>Wed, 16 Apr 2025 15:19:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--YMQ_6Fxt--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Next.js%25E3%2581%25A8Sentry%25E3%2581%25AE%25E9%2580%25A3%25E6%2590%25BA%25E3%2581%25A7SENTRY_AUTH_TOKEN%25E3%2582%2592Secret%2520mount%25E3%2581%25A7%25E5%25AE%2589%25E5%2585%25A8%25E3%2581%25AB%25E6%2589%25B1%25E3%2581%2586%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nimius%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q4N2NkOGU3YTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nimius</dc:creator></item><item><title><![CDATA[初心者のための必須Docker基本コマンド10選]]></title><description><![CDATA[
+ はじめに
+近年のソフトウェア開発において、Dockerは開発環境の構築や本番環境へのデプロイを簡単かつ効率的にする革命的なツールとなっています。「コンテナ」と呼ばれる軽量な仮想環境を使用することで、アプリケーションとその依存関係をパッケージ化し、どのような環境でも同じように動作させることができます。
+Dockerを初めて使う開発者にとって、多くのコマンドやオプションがあり、どこから始めればよいか迷うことも多いでしょう。この記事では、Docker初心者が必ず知っておくべき10の基本コマンドを詳しく解説します。これらのコマンドを習得することで、Dockerの基本操作をマスターし、日々の開...]]></description><link>https://zenn.dev/mao_container/articles/fb8b0073246843</link><guid isPermaLink="true">https://zenn.dev/mao_container/articles/fb8b0073246843</guid><pubDate>Wed, 16 Apr 2025 08:40:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bStPwTCX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E3%2581%25AE%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%25E5%25BF%2585%25E9%25A0%2588Docker%25E5%259F%25BA%25E6%259C%25AC%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%258910%25E9%2581%25B8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E7%25A6%258F%25E7%2594%25B0%25E7%259C%259F%25E5%25A4%25AE%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNiMjYzNmZiNzguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>福田真央</dc:creator></item><item><title><![CDATA[Mac版Docker Desktopがマルウェア扱いされる場合の対処法]]></title><description><![CDATA[
+
+ はじめに
+2025年1月、Macを開いたらDocker Desktop（com.docker.vmnetd）がマルウェア扱いされ、警告文が出るという事象が起きました。
+最新版のdocker desktopに入れ替えるだけだとなおらなかったこともあり、解決した手順を改めて残しておこうと思います。
+
+ Resolve the recent Docker Desktop issue on macOS
+https://docs.docker.com/desktop/cert-revoke-solution/
+上記の公式情報を元に進めていきます。
+
+ 1.docker停止・問題バイナリを削除...]]></description><link>https://zenn.dev/persona/articles/d2a73584d85f73</link><guid isPermaLink="true">https://zenn.dev/persona/articles/d2a73584d85f73</guid><pubDate>Wed, 16 Apr 2025 00:16:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lTFZHke---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Mac%25E7%2589%2588Docker%2520Desktop%25E3%2581%258C%25E3%2583%259E%25E3%2583%25AB%25E3%2582%25A6%25E3%2582%25A7%25E3%2582%25A2%25E6%2589%25B1%25E3%2581%2584%25E3%2581%2595%25E3%2582%258C%25E3%2582%258B%25E5%25A0%25B4%25E5%2590%2588%25E3%2581%25AE%25E5%25AF%25BE%25E5%2587%25A6%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2597%25E3%2581%2597%25E3%2581%25BE%25E3%2582%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzYyZmZlNmRjZTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ししまる</dc:creator></item><item><title><![CDATA[Cloudflare TunnelをDockerで使うための設定]]></title><description><![CDATA[手ごろなセルフホストコンテナ環境を作るために、Docker Swarmを導入しました。コンテナへのアクセスにはCloudflare Tunnelを使用したのですが、いくつかハマった点があったのでまとめておきます。
+Docker Swarmを使用しましたが、docker-composeでもk8sでも(?)適用できるかもしれません。
+
+ 要件
+
+Cloudflare Tunnel経由でコンテナにアクセスできるようにする
+Tunnelのトークンはsecret経由で渡す
+
+
+ 実装
+composeファイルは次のような感じになりました。
+
+compose.yaml
+version: "3.9"
+s...]]></description><link>https://zenn.dev/qrtz/articles/5a1527f887a545</link><guid isPermaLink="true">https://zenn.dev/qrtz/articles/5a1527f887a545</guid><pubDate>Tue, 15 Apr 2025 23:34:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--TOk5FJm4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Cloudflare%2520Tunnel%25E3%2582%2592Docker%25E3%2581%25A7%25E4%25BD%25BF%25E3%2581%2586%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%25E8%25A8%25AD%25E5%25AE%259A%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:qrtz%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU0MjU1ZjNlZjkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>qrtz</dc:creator></item><item><title><![CDATA[[MCP]Githubリポジトリを消せるのか検証]]></title><description><![CDATA[
+ 概要
+MCPでGit操作ができるようだが、使ったことがなったので使ってみた。
+全然知識ないなりに気になったのは、リポジトリの削除などの危険な操作を行ったときにどういう挙動になるのか。
+せめて削除の時にはほんとにいいの？みたいな確認レスポンスは出してくれることを期待して試してみた。
+
+ 結論
+消えない。
+GithubのMCPにリポジトリ等々を削除する機能は用意されていない。
+なので、「普通」は消えない。
+
+ MCPの構成を作成
+Cursor、Docker（MCPサーバー）
+で検証。
+基本的にはReadmeの通りに作成すればOK！
+servers/src/github at main ·...]]></description><link>https://zenn.dev/marakasu/articles/81c567d0596ed4</link><guid isPermaLink="true">https://zenn.dev/marakasu/articles/81c567d0596ed4</guid><pubDate>Tue, 15 Apr 2025 17:44:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--D252kN_j--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BMCP%255DGithub%25E3%2583%25AA%25E3%2583%259D%25E3%2582%25B8%25E3%2583%2588%25E3%2583%25AA%25E3%2582%2592%25E6%25B6%2588%25E3%2581%259B%25E3%2582%258B%25E3%2581%25AE%25E3%2581%258B%25E6%25A4%259C%25E8%25A8%25BC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25BE%25E3%2582%2589%25E3%2581%258B%25E3%2581%2599%25E3%2581%259F%25E3%2582%258D%25E3%2581%2586%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NkMjM3OWQ4YmQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>まらかすたろう</dc:creator></item><item><title><![CDATA[Next.jsで作ったアプリケーションをGoogle Cloud Runにデプロイする場合の注意点]]></title><description><![CDATA[
+ はじめに
+Next.js アプリケーションのデプロイ先としては、一般的には Vercel が第一候補となるかと思います
+しかし、Firebase Authentication などの Google Cloud サービスとの連携や、複数のマイクロサービスをまとめてデプロイしたい場合は、Google Cloud Run も選択肢となり得るかと思います
+本記事では備忘録として、Next.js で作ったアプリケーション Cloud Run にデプロイする際の環境変数について残しておきます
+
+
+ ビルド時とデプロイ時の環境変数の違い
+Next.js は、ビルド時に環境変数を読み込み、その値をク...]]></description><link>https://zenn.dev/to4_yanagi/articles/0aef7efddb081d</link><guid isPermaLink="true">https://zenn.dev/to4_yanagi/articles/0aef7efddb081d</guid><pubDate>Tue, 15 Apr 2025 08:56:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8DxDZtZF--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Next.js%25E3%2581%25A7%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%2592Google%2520Cloud%2520Run%25E3%2581%25AB%25E3%2583%2587%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25A4%25E3%2581%2599%25E3%2582%258B%25E5%25A0%25B4%25E5%2590%2588%25E3%2581%25AE%25E6%25B3%25A8%25E6%2584%258F%25E7%2582%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nagisa_laughing%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU5YWNjZWQ1MzYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nagisa_laughing</dc:creator></item><item><title><![CDATA[Dockerの利用disk容量の増やし方]]></title><description><![CDATA[前回の記事でDockerのdiskの整理する方法を書いたのですが、そもそも割り当てられるdisk容量少なくない？って事で調べました。
+普通にDocker Desktopの設定にありました。
+
+ 1.設定画面開く
+
+
+ 2. 割当Diskの変更
+
+適当に変更して、保存する。で大丈夫なはず。
+]]></description><link>https://zenn.dev/nyudogumo/articles/9b5e2d9df603e1</link><guid isPermaLink="true">https://zenn.dev/nyudogumo/articles/9b5e2d9df603e1</guid><pubDate>Tue, 15 Apr 2025 08:39:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--x1j-LUW4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%25E3%2581%25AE%25E5%2588%25A9%25E7%2594%25A8disk%25E5%25AE%25B9%25E9%2587%258F%25E3%2581%25AE%25E5%25A2%2597%25E3%2582%2584%25E3%2581%2597%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%2585%25A5%25E9%2581%2593%25E9%259B%25B2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSTdzOG9QSVQ1Ml9GX1hjTVFySTk4azVpcHVIMnplVTEtX0hydVEyRGk1WjV2Ykt6OD1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>入道雲</dc:creator></item><item><title><![CDATA[Dockerのdisk容量不足になった時の対応]]></title><description><![CDATA[しょっちゅう発生するので忘備録として残す
+
+ 現象
+コンテナの立ち上げの時に「No space left on device」のエラーメッセージがでる
+
+ 確認
+各種dockerコマンドを実行して現状の確認をする
+# 容量の使用状況確認
+docker system df
+
+# ボリュームのリスト表示
+docker volume ls
+
+# イメージのリスト表示
+docker images
+
+ 削除
+以下コマンドはdocker全体で起動していないコンテナのimageやvolume含めて全体削除するので注意
+docker system prune -a --volumes
+何故かvolume...]]></description><link>https://zenn.dev/nyudogumo/articles/93150f366aa31f</link><guid isPermaLink="true">https://zenn.dev/nyudogumo/articles/93150f366aa31f</guid><pubDate>Tue, 15 Apr 2025 07:02:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GPvKhe9_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%25E3%2581%25AEdisk%25E5%25AE%25B9%25E9%2587%258F%25E4%25B8%258D%25E8%25B6%25B3%25E3%2581%25AB%25E3%2581%25AA%25E3%2581%25A3%25E3%2581%259F%25E6%2599%2582%25E3%2581%25AE%25E5%25AF%25BE%25E5%25BF%259C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%2585%25A5%25E9%2581%2593%25E9%259B%25B2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSTdzOG9QSVQ1Ml9GX1hjTVFySTk4azVpcHVIMnplVTEtX0hydVEyRGk1WjV2Ykt6OD1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>入道雲</dc:creator></item><item><title><![CDATA[EC2からECRへのアップロード方法]]></title><description><![CDATA[
+ Login
+aws ecr get-login-password --region ap-northeast-1 | docker login --username AWS --password-stdin {repository-arn}
+
+ Tag
+docker tag {image_tag}:latest {repository-arn}
+docker push {repository-arn}:latest
+]]></description><link>https://zenn.dev/local/articles/733dd24ae57e67</link><guid isPermaLink="true">https://zenn.dev/local/articles/733dd24ae57e67</guid><pubDate>Tue, 15 Apr 2025 04:42:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--k61ieArU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:EC2%25E3%2581%258B%25E3%2582%2589ECR%25E3%2581%25B8%25E3%2581%25AE%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2589%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Catfish%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2QzOGQ5MDdiN2EuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Catfish</dc:creator></item><item><title><![CDATA[Google Cloud SDKのslimイメージはslimじゃない]]></title><description><![CDATA[
+ はじめに
+Google Cloud SDKの公式Dockerイメージには、複数のイメージタグが用意されています。ぱっと見で目につく使えそうなのは以下のようなタグです。
+
+gcr.io/google.com/cloudsdktool/cloud-sdk:stable
+gcr.io/google.com/cloudsdktool/cloud-sdk:slim
+gcr.io/google.com/cloudsdktool/cloud-sdk:alpine
+
+じゃあ slimが軽量そうだからこれ使えばヨシ！👉
+とやってしまいそうなんですが、実際にイメージサイズを比較するとstable &lt...]]></description><link>https://zenn.dev/electricalsheep/articles/4fb75fe8f3c0c5</link><guid isPermaLink="true">https://zenn.dev/electricalsheep/articles/4fb75fe8f3c0c5</guid><pubDate>Mon, 14 Apr 2025 12:50:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Ry5MClXz--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Google%2520Cloud%2520SDK%25E3%2581%25AEslim%25E3%2582%25A4%25E3%2583%25A1%25E3%2583%25BC%25E3%2582%25B8%25E3%2581%25AFslim%25E3%2581%2598%25E3%2582%2583%25E3%2581%25AA%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Teruya%2520Ono%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk2MzZlNGRkZDcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Teruya Ono</dc:creator></item><item><title><![CDATA[Docker Composeのnetwork_mode解説]]></title><description><![CDATA[Dockerには複数のネットワークモードがありますが、docker runで利用するだけでなく、Docker Composeファイル（docker-compose.yml）のnetwork_mode設定でも柔軟に制御できます。コンテナ間の通信やホストOSとの通信の方法を、環境やセキュリティ要件に合わせて最適化できるのが大きなメリットです。
+
+bridgeモード（デフォルト）
+hostモード
+containerモード / serviceモード
+noneモード
+
+
+
+ 1. bridgeモード（デフォルト）
+Dockerではコンテナを起動するとき、特にnetwork_modeを指定しなければ...]]></description><link>https://zenn.dev/sakaki_web/articles/9ba5be6a74c6d8</link><guid isPermaLink="true">https://zenn.dev/sakaki_web/articles/9ba5be6a74c6d8</guid><pubDate>Mon, 14 Apr 2025 12:21:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---CQ0dyMW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%2520Compose%25E3%2581%25AEnetwork_mode%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:sakaki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E3MjFiNTY2YjcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sakaki</dc:creator></item><item><title><![CDATA[（備忘録）Djangoの初期構築まとめ]]></title><description><![CDATA[!
+本記事はDjangoの初期構築手順を箇条書き形式で最小限の情報にまとめたものです
+
+
+ 前提
+
+django_config：Djangoアプリ名
+
+プロジェクト全体の設定を管理するDjangoのプロジェクト名
+
+
+webapp：作成アプリ名
+
+実際の機能（Webページなど）を提供する個別のアプリ
+
+
+{func}：使用する関数名
+
+ビュー関数などの関数名をすべて {func} として統一（例：def {func}(request)）
+
+
+
+
+ 環境構築
+
+ a. venvを使う場合
+プロジェクト内にvenvで仮想環境を作成してDjangoをインストール
+
+ターミナル
+mkdir dj...]]></description><link>https://zenn.dev/nevforge/articles/a9ea7d89727e9c</link><guid isPermaLink="true">https://zenn.dev/nevforge/articles/a9ea7d89727e9c</guid><pubDate>Mon, 14 Apr 2025 09:31:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lkcOsyhm--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25EF%25BC%2588%25E5%2582%2599%25E5%25BF%2598%25E9%258C%25B2%25EF%25BC%2589Django%25E3%2581%25AE%25E5%2588%259D%25E6%259C%259F%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nev%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJmZjc0MDA3NjEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nev</dc:creator></item><item><title><![CDATA[🐳 Docker DX 拡張機能を使ってみた（VS Code）]]></title><description><![CDATA[
+ 🐳 Docker DX 拡張機能を使ってみた（VS Code）
+Visual Studio Code での Docker 開発をより快適にしてくれる「Docker DX 拡張機能」を使ってみたので、体験レポート的にまとめてみます。
+
+ 🚀 Docker DX とは？
+Docker DX は、Microsoft が提供する公式 Docker 拡張機能の一部として含まれており、以下のような機能で開発者体験を向上させてくれます。
+
+Dockerfile の構文チェック
+Docker Compose ファイルのアウトライン表示
+イメージの脆弱性スキャン（※実験的機能）
+
+参考：公式ブログ（日...]]></description><link>https://zenn.dev/georgia1/articles/d1128089d0bfdd</link><guid isPermaLink="true">https://zenn.dev/georgia1/articles/d1128089d0bfdd</guid><pubDate>Mon, 14 Apr 2025 09:17:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--I_ygDr1J--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%2520%2520Docker%2520DX%2520%25E6%258B%25A1%25E5%25BC%25B5%25E6%25A9%259F%25E8%2583%25BD%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25EF%25BC%2588VS%2520Code%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nsh58%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzczMDc2YjE4NjMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nsh58</dc:creator></item><item><title><![CDATA[AIエージェント安全実行：Docker、LXC、Qubes OSの比較]]></title><description><![CDATA[こんばんは、Komlock labのWeb3エンジニア、ズルです！
+最近、AIエージェントをいろいろ試してみたいと思う一方で、セキュリティ面に少し不安を感じることがあります。特にMacユーザーである自分にとっては、どうやって安全にAIエージェントの実行環境を構築すればいいのか悩むことも多く、調査を進めてきました。
+本記事では、自分が検討・試したDocker、LXC、そしてQubes OSという3つのアプローチについて、それぞれの特徴や運用例をご紹介します。どの方法が最適かはプロジェクトの要件やリスク許容度によって変わると思いますが、ぜひ参考になれば幸いです。
+
+ Docker
+Docke...]]></description><link>https://zenn.dev/komlock_lab/articles/c2d7254c11e9a0</link><guid isPermaLink="true">https://zenn.dev/komlock_lab/articles/c2d7254c11e9a0</guid><pubDate>Mon, 14 Apr 2025 03:32:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--PP0gXWTZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AI%25E3%2582%25A8%25E3%2583%25BC%25E3%2582%25B8%25E3%2582%25A7%25E3%2583%25B3%25E3%2583%2588%25E5%25AE%2589%25E5%2585%25A8%25E5%25AE%259F%25E8%25A1%258C%25EF%25BC%259ADocker%25E3%2580%2581LXC%25E3%2580%2581Qubes%2520OS%25E3%2581%25AE%25E6%25AF%2594%25E8%25BC%2583%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Zulfakar%2520Ashraf%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM4OTQ5NWM0ZmEuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Komlock%2520lab%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS2RDeDJaWnZyS0xPSjVwRV9ZakIwUmZuOHNacTNOeC1hYU5nSUxZa3Fxei1KRGJRPXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Zulfakar Ashraf</dc:creator></item><item><title><![CDATA[【NextJS ver15 × Prisma ver6】Prismaを今までのノリで使ってたらbuild時にコケ倒した話]]></title><description><![CDATA[
+ ゴール
+DockerでNextJSのフロントエンドとMySQLのイメージを構築して、アプリを起動する
+
+ 環境構築
+以下の設定でプロジェクトを作成
+!
+NodeJS version 22
+NextJS version 15
+prisma version 6
+
+
+.env
+MYSQL_ROOT_PASSWORD=password
+MYSQL_DATABASE=test-db
+DATABASE_URL="mysql://root:password@db:3306/test-db"
+
+
+compose.yaml
+services:
+  application:
+    container_...]]></description><link>https://zenn.dev/pinkpunkemotion/articles/1f20dc715d5bda</link><guid isPermaLink="true">https://zenn.dev/pinkpunkemotion/articles/1f20dc715d5bda</guid><pubDate>Mon, 14 Apr 2025 03:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8J8pB65s--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590NextJS%2520ver15%2520%25C3%2597%2520Prisma%2520ver6%25E3%2580%2591Prisma%25E3%2582%2592%25E4%25BB%258A%25E3%2581%25BE%25E3%2581%25A7%25E3%2581%25AE%25E3%2583%258E%25E3%2583%25AA%25E3%2581%25A7%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%259F%25E3%2582%2589build%25E6%2599%2582%25E3%2581%25AB%25E3%2582%25B3%25E3%2582%25B1%25E5%2580%2592%25E3%2581%2597%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:pink_punk_emotion%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS2o3UG5ldDRBQWVuWGh4b0tWTTVGMjBuNm5rZkZ6WktIV2xtSG9wSGNpaXh0LVdnPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>pink_punk_emotion</dc:creator></item><item><title><![CDATA[テストのためにDockerでDBを立てるときのTips]]></title><description><![CDATA[
+ はじめに
+CIなどでDBを使用したテストを行う際に、Dockerを使ってDBを立てることが多いと思います。
+今回は、DBを立ててテストを実行するCLIを叩く際の簡単なTipsを紹介します。
+
+ 問題
+以下のようなcompose.yamlを用意して、DBを立てます。
+
+compose.yaml
+name: db-for-test
+
+services:
+  postgres:
+    image: postgres:17
+    ports:
+      - 127.0.0.1:3000:5432
+    environment:
+      POSTGRES_HOST_AUTH_MET...]]></description><link>https://zenn.dev/mutex_inc/articles/docker-db-test</link><guid isPermaLink="true">https://zenn.dev/mutex_inc/articles/docker-db-test</guid><pubDate>Mon, 14 Apr 2025 02:50:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Pn_QzxOe--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E3%2581%25AE%25E3%2581%259F%25E3%2582%2581%25E3%2581%25ABDocker%25E3%2581%25A7DB%25E3%2582%2592%25E7%25AB%258B%25E3%2581%25A6%25E3%2582%258B%25E3%2581%25A8%25E3%2581%258D%25E3%2581%25AETips%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:dfc22%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZmOTE5ZmY2NmEuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:mutex%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBmODQxZTcyNzEuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>dfc22</dc:creator></item><item><title><![CDATA[Ansibleでプライベートリポジトリをクローン・ビルドしてDockerを実行する]]></title><description><![CDATA[
+ はじめに
+プライベートGitHubリポジトリのコードを自動デプロイして実行する作業は多くの開発・運用現場で必要とされます。本記事では次の作業を自動化する手順を記録します。
+
+GitHubプライベートリポジトリのクローン
+Dockerfileからのイメージビルド
+Dockerコンテナの実行
+GitHub Actionsによる定期実行
+
+※Terraform/AnsibleでのVM構築をしており、具体的なやりたいこと(アプリケーション)を別リポジトリにまとめている前提です。主にAnsible関連の内容になりますが、GitHub Actionsでの自動化の流れでの開発ですので、そちらの内容...]]></description><link>https://zenn.dev/kentymyty/articles/398735acdbbd0a</link><guid isPermaLink="true">https://zenn.dev/kentymyty/articles/398735acdbbd0a</guid><pubDate>Sun, 13 Apr 2025 12:42:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Yq1j9f1o--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ansible%25E3%2581%25A7%25E3%2583%2597%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2599%25E3%2583%25BC%25E3%2583%2588%25E3%2583%25AA%25E3%2583%259D%25E3%2582%25B8%25E3%2583%2588%25E3%2583%25AA%25E3%2582%2592%25E3%2582%25AF%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%25B3%25E3%2583%25BB%25E3%2583%2593%25E3%2583%25AB%25E3%2583%2589%25E3%2581%2597%25E3%2581%25A6Docker%25E3%2582%2592%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kenty%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U5MWE4N2VhZWYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kenty</dc:creator></item><item><title><![CDATA[uv on Docker をやっている]]></title><description><![CDATA[
+ TL;DR
+本記事に記載するコードは下記のリポジトリよりダウンロードいただけます。(⭐おまちしております)
+https://github.com/shunsock/uv_on_docker_playground
+コンテナの実行。
+uv_on_docker_playground (main) » docker run -it uv_on_docker
+Bytecode compiled 1 file in 59ms
+Hello World
+開発用コンテナとして利用する。
+$ docker compose watch app
+$ docker compose exec app bash
+...]]></description><link>https://zenn.dev/shundeveloper/articles/5602a8a0131bd9</link><guid isPermaLink="true">https://zenn.dev/shundeveloper/articles/5602a8a0131bd9</guid><pubDate>Sun, 13 Apr 2025 11:12:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dcciIQTn--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:uv%2520on%2520Docker%2520%25E3%2582%2592%25E3%2582%2584%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%2584%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:shunsock%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY3Y2U4NzUxNzkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>shunsock</dc:creator></item><item><title><![CDATA[Dockerでターミナル操作を記録＆再生したくて、scriptとscriptreplayを試してみた]]></title><description><![CDATA[
+ なにこれ？
+普段環境を汚したくないので、Docker内で色々作業をすることが多いのですが、さっき何やったっけ？となってしまうことがありました。
+そこで、作業ログを残す方法ないかなと探してみたら、ターミナルログを記録する方法を見つけました。
+scriptコマンドを使えば、ターミナルのやりとりをまるっと記録できるらしいです。
+今回はUbuntu 24.04のDockerイメージを使って、scriptによる記録をやってみます。
+
+ scriptコマンドって何？
+scriptは、ターミナル上で行われた操作を入力・出力の両方から記録してくれるコマンドらしいです。
+以下のような内容を記録してくれ...]]></description><link>https://zenn.dev/totatoti/articles/54e64d020c450e</link><guid isPermaLink="true">https://zenn.dev/totatoti/articles/54e64d020c450e</guid><pubDate>Sun, 13 Apr 2025 09:45:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--59RkQ7AS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%25E3%2581%25A7%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%259F%25E3%2583%258A%25E3%2583%25AB%25E6%2593%258D%25E4%25BD%259C%25E3%2582%2592%25E8%25A8%2598%25E9%258C%25B2%25EF%25BC%2586%25E5%2586%258D%25E7%2594%259F%25E3%2581%2597%25E3%2581%259F%25E3%2581%258F%25E3%2581%25A6%25E3%2580%2581script%25E3%2581%25A8scriptreplay%25E3%2582%2592%25E8%25A9%25A6%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:broccoli%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS01xcVV3dDBFUUxCbzRVTUZ0aURiMUdjVXV5dG0tcThYdkJDQVVCTlZHeTlrMmFkST1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>broccoli</dc:creator></item><item><title><![CDATA[PEPPER-Margin-DeepVariantがM1 Macで動くまで]]></title><description><![CDATA[
+ はじめに
+先月 (2025年3月)発売された実験デザインからわかる　マルチオミクス研究実践テキストで紹介されているコードをM1 Macの環境で練習しようとした際 PEPPER-Margin-DeepVariantの実行のところで少々躓いたのでメモしておきます。
+
+
+
+ 解析環境 (Hardware)
+-MacBook Pro
+-チップ Apple M1
+-macOS Ventura 13.6.6
+-メモリ 16GB
+
+ 解析環境 (Software)
+-PEPPER-Margin-DeepVariant r0.8
+
+ PEPPER-Margin-DeepVariantが最後まで実行で...]]></description><link>https://zenn.dev/mtojsvqi/articles/4-run-pepper-margin-deepvariant-m1mac</link><guid isPermaLink="true">https://zenn.dev/mtojsvqi/articles/4-run-pepper-margin-deepvariant-m1mac</guid><pubDate>Sun, 13 Apr 2025 05:17:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--SU7pKh8k--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:PEPPER-Margin-DeepVariant%25E3%2581%258CM1%2520Mac%25E3%2581%25A7%25E5%258B%2595%25E3%2581%258F%25E3%2581%25BE%25E3%2581%25A7%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mtojsvqi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzYxMTI1Njc2MTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mtojsvqi</dc:creator></item></channel></rss>

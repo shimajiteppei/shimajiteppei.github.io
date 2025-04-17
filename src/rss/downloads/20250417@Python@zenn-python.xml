@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Thu, 17 Apr 2025 05:18:23 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[[Python版] Azure FunctionsでMCPサーバーを動かす]]></title><description><![CDATA[Azure FunctionsがプレビューでMCPサーバーに対応したので、リファレンス実装を動作させてみました。
+
+ 本記事の概要
+
+Azure-Samples/remote-mcp-functions-python をローカルとリモートで動作させる
+まずはローカルでMCPサーバーを動作させてGithub Copilot Agentから接続して動作確認
+その後Azureにデプロイしリモート接続確認
+
+
+基本的には上記リポジトリのREADMEに則っていますが、部分的に補足や環境に合わせて手順変更している箇所があります。
+
+ ローカルでの動作確認
+
+ 起動
+公式のリファレンス実装を動かして、...]]></description><link>https://zenn.dev/mizti/articles/63db584b6abf4b</link><guid isPermaLink="true">https://zenn.dev/mizti/articles/63db584b6abf4b</guid><pubDate>Thu, 17 Apr 2025 02:39:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--pldP_XXh--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BPython%25E7%2589%2588%255D%2520Azure%2520Functions%25E3%2581%25A7MCP%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2582%2592%25E5%258B%2595%25E3%2581%258B%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mizti%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lELUQxZUcyTk4zcFpBcWxTNWgtTTV1OW9DRFFQOXpKWE14Z285eFE9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mizti</dc:creator></item><item><title><![CDATA[【AtCoder】ABC401をPythonで解く]]></title><description><![CDATA[
+ 1. はじめに
+
+ 目的
+ABCを解くことにより、とにかくRatingを上げていく。
+
+ フィードバックして欲しい点
+私は競技プログラミング初心者のため、いただいたアドバイスをすぐに理解できず、何度も質問してしまうかもしれません。それでも構わないという心優しい方がいらっしゃれば、ぜひアドバイスをいただけると嬉しいです。丁寧に教えていただけると、とても助かります！
+
+アルゴリズムの選択と最適化
+
+今の実装よりも効率的なアルゴリズムがあるか？
+
+計算量を減らせる部分や、ボトルネックになっている処理はないか？
+
+
+コードの可読性と整理
+
+もっとシンプルに書ける部分はないか？
+
+変数名や関数...]]></description><link>https://zenn.dev/keiiita/articles/c0a208aa79fb34</link><guid isPermaLink="true">https://zenn.dev/keiiita/articles/c0a208aa79fb34</guid><pubDate>Thu, 17 Apr 2025 00:38:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7goxjxs8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590AtCoder%25E3%2580%2591ABC401%25E3%2582%2592Python%25E3%2581%25A7%25E8%25A7%25A3%25E3%2581%258F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Keiiita%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSjJLZ2laOThYRjRJZDdaeEN6djVpWHdTY3pZODQ3c3pWbWhvUVZXcTRuaTMtRkJ0VT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Keiiita</dc:creator></item><item><title><![CDATA[DDDに則った機械学習テンプレを考えてみた]]></title><description><![CDATA[
+ はじめに
+ドメイン駆動設計（DDD: Domain-Driven Design） の原則に従って構築された、機械学習モデルの実験管理用Pythonコードを作成してみました。
+MLの実験から実運用へアプリ化する過程で、最初からある程度作られていると大きな障壁なくスムーズに変更できるなと思い、最初の叩き台として利用できることを目的としております。
+また、MLモデルのライフサイクルや実験履歴を明確なドメインモデルで表現することで、拡張性と保守性を高めることができます。
+GitHubにテンプレートを公開しております（こちら）。
+
+ DDDとは
+DDDは、ソフトウェアをビジネスの本質に即して設...]]></description><link>https://zenn.dev/tobiuo/articles/4704f2244ca9a4</link><guid isPermaLink="true">https://zenn.dev/tobiuo/articles/4704f2244ca9a4</guid><pubDate>Thu, 17 Apr 2025 00:24:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--B1VL0ZS5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:DDD%25E3%2581%25AB%25E5%2589%2587%25E3%2581%25A3%25E3%2581%259F%25E6%25A9%259F%25E6%25A2%25B0%25E5%25AD%25A6%25E7%25BF%2592%25E3%2583%2586%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AC%25E3%2582%2592%25E8%2580%2583%25E3%2581%2588%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:m12uk1%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAzYTkwNjkzOWYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>m12uk1</dc:creator></item><item><title><![CDATA[Python3エンジニア認定基礎試験にギリギリで合格した話。]]></title><description><![CDATA[
+ はじめに
+2025年2月19日にPython3エンジニア認定基礎試験を受験し、合格したので試験概要と勉強方法をまとめる。
+
+ Python3エンジニア認定基礎試験とは？
+Python3エンジニア認定基礎試験とは、Pythonエンジニア育成推進協会が実施している試験で、Python3の基礎を理解している事を証明できます。
+
+ 試験概要
+
+概要：Python3の文法基礎を問う試験
+受験方法：CBT形式
+試験日：通年
+受験費用 税別：10000円（学割5000円）
+試験時間：60分
+問題数：40問（選択問題）
+合格ライン：正答率 70％
+
+
+ 勉強方法
+
+UdemyのPython入門講座で...]]></description><link>https://zenn.dev/aputech/articles/6fcfda6e7c9150</link><guid isPermaLink="true">https://zenn.dev/aputech/articles/6fcfda6e7c9150</guid><pubDate>Thu, 17 Apr 2025 00:23:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--tUOypiZk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python3%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%25E8%25AA%258D%25E5%25AE%259A%25E5%259F%25BA%25E7%25A4%258E%25E8%25A9%25A6%25E9%25A8%2593%25E3%2581%25AB%25E3%2582%25AE%25E3%2583%25AA%25E3%2582%25AE%25E3%2583%25AA%25E3%2581%25A7%25E5%2590%2588%25E6%25A0%25BC%25E3%2581%2597%25E3%2581%259F%25E8%25A9%25B1%25E3%2580%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25B2%25E3%2583%25BC%2540%25E6%2583%2585%25E5%25A0%25B1%25E7%25B3%25BB%25E5%25AD%25A6%25E7%2594%259F%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA4NGM3YTBlZTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ひー@情報系学生</dc:creator></item><item><title><![CDATA[デコレータについて(Python)]]></title><description><![CDATA[
+ はじめに
+デコレータを書こうと思い至ることがあるのですが、仕組みを忘れていることがあるので備忘録として残します。結果だけ知りたい方は最後に完成形を載せているので、参照いただければと思います。
+
+ デコレータとは
+関数に機能追加するための仕組みです。
+例えば、関数の実行時間を知りたいので、以下の処理を作るとします。
+import datetime
+
+def sample_function():
+    print(f"sample_function 開始時刻:{datetime.datetime.now()}")
+    ##### 処理内容 #####
+    print(f"sam...]]></description><link>https://zenn.dev/fushirou/articles/c70c0e7ef9c761</link><guid isPermaLink="true">https://zenn.dev/fushirou/articles/c70c0e7ef9c761</guid><pubDate>Wed, 16 Apr 2025 23:25:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1EoZuoYV--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2587%25E3%2582%25B3%25E3%2583%25AC%25E3%2583%25BC%25E3%2582%25BF%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2528Python%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:fushirou%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS09STTNndjNPQ3hleVQ0RUJBY0U2V0RfYklNZkozVlpTZzdxZFpMV2k0QTRkWkF0LWU9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>fushirou</dc:creator></item><item><title><![CDATA[Python でありがちな本体バージョンとライブラリバージョンの不整合の例]]></title><description><![CDATA[
+ 1. はじめに
+ライブラリのバージョンを固定した上で最新のバージョンの Python を使おうとすると色々とエラーが発生しがちです。
+直近遭遇したエラーを記録に残しておきます。
+
+ 2. 背景
+dbt-databricks==1.7.17 のインストールを試みました。
+本来は最新バージョンをインストールすべきで、執筆時点では 1.10.0 です。
+このコマンドを知らなかったのでメモ代わりに残しておきます。
+$ pip index versions dbt-databricks
+WARNING: pip index is currently an experimental comman...]]></description><link>https://zenn.dev/genda_jp/articles/2025-04-16-issue-with-python-libraries</link><guid isPermaLink="true">https://zenn.dev/genda_jp/articles/2025-04-16-issue-with-python-libraries</guid><pubDate>Wed, 16 Apr 2025 14:55:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7mjecDIY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%2520%25E3%2581%25A7%25E3%2581%2582%25E3%2582%258A%25E3%2581%258C%25E3%2581%25A1%25E3%2581%25AA%25E6%259C%25AC%25E4%25BD%2593%25E3%2583%2590%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%25A7%25E3%2583%25B3%25E3%2581%25A8%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%25E3%2583%2590%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%25A7%25E3%2583%25B3%25E3%2581%25AE%25E4%25B8%258D%25E6%2595%25B4%25E5%2590%2588%25E3%2581%25AE%25E4%25BE%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:uma-chan%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNiM2M1MjhkNjguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:GENDA%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzIyMjZhYmJjODIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>uma-chan</dc:creator></item><item><title><![CDATA[Python -> React なアプリ開発F/Wの比較]]></title><description><![CDATA[Python だけでフロントエンドを含む Web アプリを構築できるフレームワークを比較検討しました。
+
+Flet
+WriterFramework（旧 Streamsync）
+Reflex（旧 Pynecone）
+
+これらはいずれも「フルスタック」的に、もしくはフロントエンドを Python コードから生成し、リアクティブな Web アプリを開発できるのが特徴です。
+
+
+ 1. Flet
+
+ 概要
+
+
+Flutter （プログラミング言語Dart）をベースにしたクロスプラットフォーム UI フレームワーク
+Python コードだけで Web アプリ・デスクトップアプリを構築可能
+公式: ...]]></description><link>https://zenn.dev/crandim_r_and_d/articles/250106_frontend_in_python</link><guid isPermaLink="true">https://zenn.dev/crandim_r_and_d/articles/250106_frontend_in_python</guid><pubDate>Wed, 16 Apr 2025 12:40:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ToX0VurF--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%2520-%253E%2520React%2520%25E3%2581%25AA%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E9%2596%258B%25E7%2599%25BAF%252FW%25E3%2581%25AE%25E6%25AF%2594%25E8%25BC%2583%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:tokoi%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLmRldi9pbWFnZXMvZGVmYXVsdC1wdWJsaWNhdGlvbi1hdmF0YXIucG5n%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2582%25AF%25E3%2583%25A9%25E3%2583%25B3%25E3%2583%2587%25E3%2582%25A3%25E3%2583%25A0R%2526D%25E9%2583%25A8%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U5Y2NiZGRkODIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tokoi</dc:creator></item><item><title><![CDATA[CMakeのFecthContentを自動化する]]></title><description><![CDATA[
+ TL;DR
+
+CMakeで依存関係を自動的にダウンロードできるけど、自動更新するツールはないよ！
+CMakeLists.txtを解析して自動バージョンアップを実装したよ！
+
+
+ はじめに
+C/C++ではコンパイラに依存しないビルドツールとしてCMakeが広く使われています。また、CMakeを使えば依存関係をきちんと記述して、ライブラリを簡単にリンクできます。
+CMakeにはfetchContentという仕組みがあり、CMakeLists.txtに依存関係を記述し、依存するライブラリを自動的にダウンロードできます。しかし、CMakeのfetchContentは他のプログラミング言語のよ...]]></description><link>https://zenn.dev/quesys/articles/9598c8c87de1cf</link><guid isPermaLink="true">https://zenn.dev/quesys/articles/9598c8c87de1cf</guid><pubDate>Wed, 16 Apr 2025 12:39:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--DM6j9EeA--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:CMake%25E3%2581%25AEFecthContent%25E3%2582%2592%25E8%2587%25AA%25E5%258B%2595%25E5%258C%2596%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258D%25E3%2582%2585%25E3%2583%25BC%25E3%2581%2597%25E3%2581%2599%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg5Yzg4ZmFlN2UuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>きゅーしす</dc:creator></item><item><title><![CDATA[マウス・キーボードが自動でうごく💻]]></title><description><![CDATA[
+
+ 今回やりたいこと
+「kujou」です⛩
+写真は京都哲学の道という桜の名所です。
+そんな話はさておき、pythonの勉強をしているんですけど、マウスやキーボードを自動的に動かすことができるという情報を聞いたんです。そんな事できるんやったら、「あんな事やこんな事できるやん！」と悪だくみしようと思っちゃったという経緯から今回のテストをやることに至りました。
+という事で、今回はお手持ちのマウス・キーボードを自動で動かして、windows PCのごみ箱を定期的に削除するという実用的なプログラムを試してみようと思いますm(__)m
+
+ pyautogui
+マウスやキーボードを自動的に動かすこと...]]></description><link>https://zenn.dev/kujou_haru/articles/aa21541f460158</link><guid isPermaLink="true">https://zenn.dev/kujou_haru/articles/aa21541f460158</guid><pubDate>Wed, 16 Apr 2025 09:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--e5-WuldO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%259E%25E3%2582%25A6%25E3%2582%25B9%25E3%2583%25BB%25E3%2582%25AD%25E3%2583%25BC%25E3%2583%259C%25E3%2583%25BC%25E3%2583%2589%25E3%2581%258C%25E8%2587%25AA%25E5%258B%2595%25E3%2581%25A7%25E3%2581%2586%25E3%2581%2594%25E3%2581%258F%2520%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kujou_haru%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE1ZjY5ZDQ5NTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kujou_haru</dc:creator></item><item><title><![CDATA[初心者のための必須pip基本コマンド10選]]></title><description><![CDATA[
+ はじめに
+Pythonは現代のプログラミング言語の中でも最も人気のある言語の一つであり、その魅力の一つが豊富なライブラリとパッケージのエコシステムにあります。これらのパッケージをインストールして管理するために使用される公式ツールが「pip」です。pipはPython Package Index（PyPI）からパッケージをダウンロードしてインストールするためのパッケージマネージャーであり、Pythonを使う上で欠かせないツールとなっています。
+この記事では、Python初心者が必ず知っておくべき10の基本的なpipコマンドについて詳しく解説します。これらのコマンドを習得することで、Py...]]></description><link>https://zenn.dev/rika_nlp/articles/e51c81dba96547</link><guid isPermaLink="true">https://zenn.dev/rika_nlp/articles/e51c81dba96547</guid><pubDate>Wed, 16 Apr 2025 08:48:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--kCwmeD_D--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E3%2581%25AE%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%25E5%25BF%2585%25E9%25A0%2588pip%25E5%259F%25BA%25E6%259C%25AC%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%258910%25E9%2581%25B8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E9%259D%2592%25E6%259C%25A8%25E7%2590%2586%25E9%25A6%2599%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MwZTAxN2Y5ZjkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>青木理香</dc:creator></item><item><title><![CDATA[【AtCoder】ABC400をPythonで解く]]></title><description><![CDATA[
+ 1. はじめに
+
+ 目的
+ABCを解くことにより、とにかくRatingを上げていく。
+
+ フィードバックして欲しい点
+私は競技プログラミング初心者のため、いただいたアドバイスをすぐに理解できず、何度も質問してしまうかもしれません。それでも構わないという心優しい方がいらっしゃれば、ぜひアドバイスをいただけると嬉しいです。丁寧に教えていただけると、とても助かります！
+
+アルゴリズムの選択と最適化
+
+今の実装よりも効率的なアルゴリズムがあるか？
+
+計算量を減らせる部分や、ボトルネックになっている処理はないか？
+
+
+コードの可読性と整理
+
+もっとシンプルに書ける部分はないか？
+
+変数名や関数...]]></description><link>https://zenn.dev/keiiita/articles/e174f12136c12d</link><guid isPermaLink="true">https://zenn.dev/keiiita/articles/e174f12136c12d</guid><pubDate>Wed, 16 Apr 2025 04:34:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--08jLFwqH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590AtCoder%25E3%2580%2591ABC400%25E3%2582%2592Python%25E3%2581%25A7%25E8%25A7%25A3%25E3%2581%258F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Keiiita%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSjJLZ2laOThYRjRJZDdaeEN6djVpWHdTY3pZODQ3c3pWbWhvUVZXcTRuaTMtRkJ0VT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Keiiita</dc:creator></item><item><title><![CDATA[uvでタスクランナーなpoe(poethepoet)を使う]]></title><description><![CDATA[uvでnpm run &lt;task-name&gt;みたいなことをする。
+uv add --dev poethepoetしてpyproject.tomlを次のように書きます。
+pyproject.toml
+...
+[tool.poe.tasks]
+hello = "echo 'hello, poe!'"
+タスクを走らせます。
+$poe hello
+Poe =&gt; echo 'hello, poe!'
+hello, poe!
+参考:
+https://github.com/astral-sh/uv/issues/5903#issuecomment-2802089030
+https:/...]]></description><link>https://zenn.dev/wasabind/articles/5abe8918ad69d8</link><guid isPermaLink="true">https://zenn.dev/wasabind/articles/5abe8918ad69d8</guid><pubDate>Wed, 16 Apr 2025 04:09:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--m8t7EPZ2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:uv%25E3%2581%25A7%25E3%2582%25BF%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25A9%25E3%2583%25B3%25E3%2583%258A%25E3%2583%25BC%25E3%2581%25AApoe%2528poethepoet%2529%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tortoise5k%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU1MjcxMTAyMGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tortoise5k</dc:creator></item><item><title><![CDATA[ChatGPT-4.5で試してみた！MCPとA2A、そしてAIエージェントの未来]]></title><description><![CDATA[
+ はじめまして、株式会社グロースリンクです！
+こんにちは！株式会社グロースリンクで働いているAIエンジニアのHayate Esaki(haya21_8)です。
+初めてのZenn投稿となる今回は、いま注目のAI技術、Model Context Protocol（MCP） と Agent2Agent（A2A） をご紹介します！
+実際にChatGPT-4.5を使ってサンプルコードを書きながら、これらの技術がもたらす新しいAIエージェント同士の連携について楽しく、わかりやすく解説していきます！
+
+ MCP（Model Context Protocol）とは？
+
+MCPは、AIが外部ツールやデー...]]></description><link>https://zenn.dev/growthlink1112/articles/99469af60be1ed</link><guid isPermaLink="true">https://zenn.dev/growthlink1112/articles/99469af60be1ed</guid><pubDate>Wed, 16 Apr 2025 01:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--HmmldN7C--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ChatGPT-4.5%25E3%2581%25A7%25E8%25A9%25A6%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25EF%25BC%2581MCP%25E3%2581%25A8A2A%25E3%2580%2581%25E3%2581%259D%25E3%2581%2597%25E3%2581%25A6AI%25E3%2582%25A8%25E3%2583%25BC%25E3%2582%25B8%25E3%2582%25A7%25E3%2583%25B3%25E3%2583%2588%25E3%2581%25AE%25E6%259C%25AA%25E6%259D%25A5%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Hayate%2520Esaki%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA1YWIwNzZmNTYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2582%25B0%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25B9%25E3%2583%25AA%25E3%2583%25B3%25E3%2582%25AF%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VlZjI2NmRkZjQuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Hayate Esaki</dc:creator></item><item><title><![CDATA[ispecの事業を支える技術]]></title><description><![CDATA[
+ はじめに
+株式会社ispec CTOの山田です。先日、ispecでEMをやっている元バスケ部のshinyaと一緒にバスケをしたのですが、美しいハンドリングと華麗なシュートフェイントにより完全に叩きのめされました。ソフトウェア開発だけでなくバスケの技術力も高い頼もしいEMです。
+さて、かくいう私ははるか昔にispecの技術選定に関する記事を書きましたが、あれから3年近く経ち、以下のような大きな変化がありました。
+
+医療ドメインへのフォーカス
+AI/LLMを活用したプロダクト開発
+
+3年が経過して事業の方向性も変わり、それにあわせて技術スタックも変わっているため、本記事では現在のispe...]]></description><link>https://zenn.dev/ispec_inc/articles/adacbe90d834e9</link><guid isPermaLink="true">https://zenn.dev/ispec_inc/articles/adacbe90d834e9</guid><pubDate>Wed, 16 Apr 2025 00:08:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_1Unj9q8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ispec%25E3%2581%25AE%25E4%25BA%258B%25E6%25A5%25AD%25E3%2582%2592%25E6%2594%25AF%25E3%2581%2588%25E3%2582%258B%25E6%258A%2580%25E8%25A1%2593%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Yusuke%2520Yamada%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRmN2Y5YzE4ZTUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:ispec%2520inc.%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JjOTgwOTZjODkuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yusuke Yamada</dc:creator></item><item><title><![CDATA[LangChainを使って０から何か開発してみる]]></title><description><![CDATA[最近のAIの動向は目まぐるしく盛り上がっています。新しい機能が開発されたと思ったら、数日後にはさらにハイレベルなものが出てきたりと、ちょっと目を離せない状況です。
+AI自体はこんな状態ですが、人間側がこれをただ「凄い！」と驚き屋でいるだけでは仕方ありません。エンジニアは絶滅するにではないかと言われるような時代だからこそ、人間側も新しいスキルを身に着けて、存在価値を高めておかないといけないと、身の迫る思いがしてます。
+そこで今回、実績づくりをする意味も含めて、LangChainというものを使って何かAIサービスというものを作ってみようと思います。
+
+ LangChainとは：AIアプリ開発...]]></description><link>https://zenn.dev/yoshi_in_zenn/articles/e8a2057fbff882</link><guid isPermaLink="true">https://zenn.dev/yoshi_in_zenn/articles/e8a2057fbff882</guid><pubDate>Tue, 15 Apr 2025 22:48:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--u6cLAnj5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:LangChain%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25EF%25BC%2590%25E3%2581%258B%25E3%2582%2589%25E4%25BD%2595%25E3%2581%258B%25E9%2596%258B%25E7%2599%25BA%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Jun%2520%257C%2520%25E7%2594%259F%25E6%2588%2590AI%25E6%2584%259B%25E5%25A5%25BD%25E5%25AE%25B6%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNkMGYxNzA1NjEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Jun | 生成AI愛好家</dc:creator></item><item><title><![CDATA[FastAPIで始めるMCPサーバー]]></title><description><![CDATA[最近、MCPが話題ですよね。最近でこそいろんな企業がMCPを提供する事例が増えて来ました。
+そんな中、TLを眺めていたらFastAPIで構築したアプリケーションをMCPサーバー化させるライブラリを見つけました。
+https://x.com/k_miura_io/status/1910479926341624311
+FastAPI-MCPというそのままのネーミングですが、READMEに書いてあること内容的には、FastAPIで構築したエンドポイントをMCPに変化してくれるというツールみたいです。
+というわけで、今回はFastAPIを使って初めてのMCPサーバーを構築してみます。
+なお、MC...]]></description><link>https://zenn.dev/kmiura55/articles/fastapi-mcp-starting</link><guid isPermaLink="true">https://zenn.dev/kmiura55/articles/fastapi-mcp-starting</guid><pubDate>Tue, 15 Apr 2025 17:27:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8mylDocO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:FastAPI%25E3%2581%25A7%25E5%25A7%258B%25E3%2582%2581%25E3%2582%258BMCP%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:KMiura%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJlZjZkNWJmMGMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>KMiura</dc:creator></item><item><title><![CDATA[もったいないので作ったSNSアプリ公開しました]]></title><description><![CDATA[
+ 作ったSNSアプリ
+
+
+ ドメイン
+サブドメインで分離してて計5個くらいあります。
+アプリページ：https://chienowa.social
+認証ページ：https://auth.chienowa.social
+ヘルプページ：https://support.chienowa.social
+ヘルプページは結構適当です。
+他に管理者用のページだったりがあります
+
+ 自分について
+22歳です。3浪してて去年大学入りましたが、お金がなかったり将来に不安を感じて12月に休学してしまって、それ以来これを作っていました
+
+ 経歴
+エンジニア？の経歴としては2023年の2月にパソコン買ったことか...]]></description><link>https://zenn.dev/shi_san/articles/434c01c045159f</link><guid isPermaLink="true">https://zenn.dev/shi_san/articles/434c01c045159f</guid><pubDate>Tue, 15 Apr 2025 16:38:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8W1qqaeM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%2582%25E3%2581%25A3%25E3%2581%259F%25E3%2581%2584%25E3%2581%25AA%25E3%2581%2584%25E3%2581%25AE%25E3%2581%25A7%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259FSNS%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E5%2585%25AC%25E9%2596%258B%25E3%2581%2597%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2582%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSTc5ejJLOE9HMy1iblZweS03UTk2R3p4cHpiRUVkUnpJbi03djFnYXZoZDBmV0ZBPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>あ</dc:creator></item><item><title><![CDATA[ReLUと初期値 〜ディープラーニングにおける活性化関数のふるまいと工夫〜]]></title><description><![CDATA[
+ はじめに
+いずれ自身の役に立つと考え、ディープラーニングの学習を始めました。まずは画像識別器の作成を目指し、CNN（畳み込みニューラルネットワーク）のお手本を探して実装しました。
+CNNの構成要素である畳み込み層では、画像が持つさまざまな特徴を抽出します。そしてその出力を処理するのが活性化関数です。活性化関数には複数の種類がありますが、参考にしたモデルでは ReLU（Rectified Linear Unit） が用いられていました。
+学習を進める中で、なぜReLUがよく使われるのか？ReLUを使う際の初期値設定の重要性は？という点に興味を持ったため、実際に手を動かして調べてみました...]]></description><link>https://zenn.dev/small_test/articles/07c4dcf5568028</link><guid isPermaLink="true">https://zenn.dev/small_test/articles/07c4dcf5568028</guid><pubDate>Tue, 15 Apr 2025 12:50:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--pWulWT6e--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ReLU%25E3%2581%25A8%25E5%2588%259D%25E6%259C%259F%25E5%2580%25A4%2520%25E3%2580%259C%25E3%2583%2587%25E3%2582%25A3%25E3%2583%25BC%25E3%2583%2597%25E3%2583%25A9%25E3%2583%25BC%25E3%2583%258B%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%25AB%25E3%2581%258A%25E3%2581%2591%25E3%2582%258B%25E6%25B4%25BB%25E6%2580%25A7%25E5%258C%2596%25E9%2596%25A2%25E6%2595%25B0%25E3%2581%25AE%25E3%2581%25B5%25E3%2582%258B%25E3%2581%25BE%25E3%2581%2584%25E3%2581%25A8%25E5%25B7%25A5%25E5%25A4%25AB%25E3%2580%259C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:small_test%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E1Y2Q3NWQ2MTQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>small_test</dc:creator></item><item><title><![CDATA[【AtCoder解説】ABC083B - Digits Sum Compare を解いた記録]]></title><description><![CDATA[本記事は、AtCoder の問題を解いて得た知見を記録するための学習ログです。
+毎回1問ずつ、「何を考えて解いたか」「どう実装したか」「学んだこと」を簡単にまとめていきます。
+
+ 問題概要
+数字の各桁の和が a〜b の範囲内にある数を集めて合計する問題
+
+ 解放とコード
+x, a, b = map(int, input().split())
+sum = 0
+subsum = 0
+for i in range(x + 1):
+  if i == 0:
+    continue
+  subsum = 0
+  nums = list(str(i))
+  for num in nums:
+   ...]]></description><link>https://zenn.dev/miso_devlog/articles/2559dbd18d8af1</link><guid isPermaLink="true">https://zenn.dev/miso_devlog/articles/2559dbd18d8af1</guid><pubDate>Tue, 15 Apr 2025 12:38:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Nu9W0nx6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590AtCoder%25E8%25A7%25A3%25E8%25AA%25AC%25E3%2580%2591ABC083B%2520-%2520Digits%2520Sum%2520Compare%2520%25E3%2582%2592%25E8%25A7%25A3%25E3%2581%2584%25E3%2581%259F%25E8%25A8%2598%25E9%258C%25B2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25BF%25E3%2581%259D%25E3%2583%25AD%25E3%2582%25B0%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSzFzVnc2Q3E5c3hNZWg4NDNBY2FyYnBOTDNJWUhhT3ZRQXFGTi1Qb21wRUpBeTB3PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>みそログ</dc:creator></item><item><title><![CDATA[adk-pythonの__init__.pyのimportでつまづく(adk web)]]></title><description><![CDATA[https://github.com/google/adk-samples/tree/main/agents/llm-auditor/llm_auditor
+上記のサンプルを参考にする。
+ディレクトリ名が紛らわしいのでllm-auditor(root)/llm_auditorをroot/llm_auditorとする。
+rootでadk webを実行する。たとえばuv run adk web。
+
+root/llm_auditor/__init__.py
+
+from . import agent
+
+root/llm_auditor/sub_agents/critic/__init__.py
+...]]></description><link>https://zenn.dev/wasabind/articles/f2f5e604ddfd56</link><guid isPermaLink="true">https://zenn.dev/wasabind/articles/f2f5e604ddfd56</guid><pubDate>Tue, 15 Apr 2025 10:59:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--oJZ-xGi7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:adk-python%25E3%2581%25AE__init__.py%25E3%2581%25AEimport%25E3%2581%25A7%25E3%2581%25A4%25E3%2581%25BE%25E3%2581%25A5%25E3%2581%258F%2528adk%2520web%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tortoise5k%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU1MjcxMTAyMGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tortoise5k</dc:creator></item></channel></rss>
