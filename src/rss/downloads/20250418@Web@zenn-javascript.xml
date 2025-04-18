@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「JavaScript」のフィード]]></title><description><![CDATA[Zennのトピック「JavaScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/javascript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/64acd76870.png</url><title>Zennの「JavaScript」のフィード</title><link>https://zenn.dev/topics/javascript</link></image><generator>zenn.dev</generator><lastBuildDate>Fri, 18 Apr 2025 03:05:29 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/javascript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[私の知らなかったLocaleの世界]]></title><description><![CDATA[
+ はじめに
+こんにちは、ふるしょうです。
+DRESS CODEの開発で、JavaScriptの国際化対応 APIに関するMDNを読み進めていたときに、localeが「country」ではなく「region」として扱われている点が気になり、ECMAScriptの仕様や関連する国際標準を掘り下げました。
+その過程で、localeの背後にある複雑な構造と、WEB標準の設計思想に触れることができました。
+本記事では、その調査で得た知見を共有しつつ、i18n対応に取り組むエンジニアが直面する課題の具体的な視点を紹介します。
+
+ i18nとは？
+i18nは、多様な言語や地域、文化に適応させるための...]]></description><link>https://zenn.dev/dress_code/articles/eec808b3ad3273</link><guid isPermaLink="true">https://zenn.dev/dress_code/articles/eec808b3ad3273</guid><pubDate>Fri, 18 Apr 2025 03:00:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--FVb3bsua--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%25A7%2581%25E3%2581%25AE%25E7%259F%25A5%25E3%2582%2589%25E3%2581%25AA%25E3%2581%258B%25E3%2581%25A3%25E3%2581%259FLocale%25E3%2581%25AE%25E4%25B8%2596%25E7%2595%258C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%25B5%25E3%2582%258B%25E3%2581%2597%25E3%2582%2587%25E3%2581%2586%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRiOGMxZmU1MDUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:DRESS%2520CODE%2520TECH%2520BLOG%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2QzMmQ5N2Q0NmQuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ふるしょう</dc:creator></item><item><title><![CDATA[Next.js入門１ ページ追加]]></title><description><![CDATA[
+ 記事一覧
+
+Next.js × Docker 最速環境構築
+Next.js入門１ ページ追加
+
+
+ ルーティング
+
+ ルーティングとは
+特定のURLにアクセスした際に実行する処理を割り当てること
+
+ ルーティングの種類
+Next.jsのルーティングの種類にはPage RouterとApp Routerがします
+これぐらいの考え方で大丈夫です
+
+Page Router -&gt; 古い方法
+App Router -&gt; 新しい方法
+
+今回はApp Routerを使用します。
+
+ App Router
+App Routerには以下のようなルールがあります
+
+
+src/appディレクト...]]></description><link>https://zenn.dev/kate0418/articles/60416751c95e84</link><guid isPermaLink="true">https://zenn.dev/kate0418/articles/60416751c95e84</guid><pubDate>Thu, 17 Apr 2025 16:17:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---GbYRjP2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Next.js%25E5%2585%25A5%25E9%2596%2580%25EF%25BC%2591%2520%25E3%2583%259A%25E3%2583%25BC%25E3%2582%25B8%25E8%25BF%25BD%25E5%258A%25A0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2591%25E3%2581%2583%25E3%2581%25A8%25C2%25B0%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU3OWNhMjkxZTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>けぃと°</dc:creator></item><item><title><![CDATA[kirovの初めての記事：csv途中挿入]]></title><description><![CDATA[const fs = require('fs');
+
+/**
+ * 指定されたCSVファイルに新しい行データを挿入し、
+ * 指定された列名に基づいて並べ替えた後、
+ * 行番号を再付番します。
+ * @param {string} csvFilePath - CSVファイルのパス
+ * @param {string} newRowStr - 行番号を含まない新しい行データ
+ * @param {string} sortFieldName - 並び替えの基準となる列名
+ * @throws {Error} エラーが発生した場合は例外をスローします
+ */
+function insertS...]]></description><link>https://zenn.dev/kirov/articles/8e6c9bcf805e2b</link><guid isPermaLink="true">https://zenn.dev/kirov/articles/8e6c9bcf805e2b</guid><pubDate>Thu, 17 Apr 2025 15:08:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_voPsmLE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:kirov%25E3%2581%25AE%25E5%2588%259D%25E3%2582%2581%25E3%2581%25A6%25E3%2581%25AE%25E8%25A8%2598%25E4%25BA%258B%25EF%25BC%259Acsv%25E9%2580%2594%25E4%25B8%25AD%25E6%258C%25BF%25E5%2585%25A5%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E7%258D%25A8%25E6%259C%25A8%25E6%2588%2590%25E6%259E%2597%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSVVHMGVzeWVWOVFQQ3ppTTZIMGZ2Z2hwZVNpRmlXV3hyOHlObzlabVV5UjdpY1g0X0E9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>獨木成林</dc:creator></item><item><title><![CDATA[今さら訊けないReactの基本メモ]]></title><description><![CDATA[
+ やること
+モダンなフロントエンド開発で大事そうなReactの基本をまとめておく
+
+ 参考文献
+https://ja.react.dev/learn
+
+ コンポーネント
+
+ コンポーネントとは何か
+コンポーネントはUIの再利用可能な構成部品であり、マークアップ、CSS、JavaScriptを一つにまとめたものです。例えばボタン、フォーム、ダイアログ、アバターなど、画面上のあらゆるUI要素をコンポーネントとして定義できます。
+
+ コンポーネントの定義方法
+Reactのコンポーネントは基本的にJavaScript関数として定義します。ただし、通常の関数とは異なり、名前は常に大文字で始める（...]]></description><link>https://zenn.dev/headwaters/articles/6748bcf7c11339</link><guid isPermaLink="true">https://zenn.dev/headwaters/articles/6748bcf7c11339</guid><pubDate>Thu, 17 Apr 2025 14:53:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Vzz-QA8w--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E4%25BB%258A%25E3%2581%2595%25E3%2582%2589%25E8%25A8%258A%25E3%2581%2591%25E3%2581%25AA%25E3%2581%2584React%25E3%2581%25AE%25E5%259F%25BA%25E6%259C%25AC%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:akihiro%2520nakamura%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZjNGExY2UxMDYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2598%25E3%2583%2583%25E3%2583%2589%25E3%2582%25A6%25E3%2582%25A9%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%25BC%25E3%2582%25B9%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA5MjU4ZWEwY2QuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>akihiro nakamura</dc:creator></item><item><title><![CDATA[about-sort-methods]]></title><description><![CDATA[!
+此篇適合：
+正在學習 JavaScript 的人
+
+
+面試題：JavaScript 中的 sort 傳入 (a,b) =&gt; b - a 會是升序還是降序？為什麼呢？
+
+
+ sort 是什麼
+在 JavaScript 中，如果需要將陣列進行排序可以使用方便的 .sort() 來達成
+
+ sort 怎麼用？
+在文件中關於 sort 的語法會寫到
+arr.sort(compareFunction);
+使用注意事項：
+
+compareFunction 非必填
+雖然是非必填，但如果你真的不填，他就給你亂排www(依預設排序方式)
+
+會改變原陣列
+
+所以通常來說會在 compareFunc...]]></description><link>https://zenn.dev/chloetseng/articles/about-sort-methods</link><guid isPermaLink="true">https://zenn.dev/chloetseng/articles/about-sort-methods</guid><pubDate>Thu, 17 Apr 2025 08:07:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--By6b6ZKV--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_80:about-sort-methods%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Clove%2520%25E3%2582%25AF%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2596%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzViZmI0N2FhNTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Clove クローブ</dc:creator></item><item><title><![CDATA[Growiのカスタムスクリプトを使ってjavascript:void(0)になったリンクを修復する]]></title><description><![CDATA[
+ 概要
+普段、Growiをナレッジベースとして使っています。
+DrawIOなども利用できて、マニュアルからアーキ図まで管理できる優れものです。
+https://growi.org/ja/
+そんなGrowiですが、バージョンアップによってSVNプロトコルのリンクが無効化されてしまいました。
+今回はそんなケースの対応法について紹介します。
+
+ バージョンを上げたらSVNのリンクが効かなくなった
+色々な制約があって、最新バージョンではないv6.0.15に上げました。
+元々のバージョンはv5.1.4でした。
+すると下記のように記載していたリンクが効かなくなりました。
+[SVNリンク](svn:...]]></description><link>https://zenn.dev/nekoniki/articles/b864c6418afeb0</link><guid isPermaLink="true">https://zenn.dev/nekoniki/articles/b864c6418afeb0</guid><pubDate>Thu, 17 Apr 2025 06:38:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--HUfzKNpH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Growi%25E3%2581%25AE%25E3%2582%25AB%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%25A0%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2583%2588%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6javascript%253Avoid%25280%2529%25E3%2581%25AB%25E3%2581%25AA%25E3%2581%25A3%25E3%2581%259F%25E3%2583%25AA%25E3%2583%25B3%25E3%2582%25AF%25E3%2582%2592%25E4%25BF%25AE%25E5%25BE%25A9%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nekoniki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y1OGNmMzMwMTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nekoniki</dc:creator></item><item><title><![CDATA[npm run buildでoutフォルダが作成されない時の対処(Next.js)]]></title><description><![CDATA[
+ 結論
+next.config.mjsを以下のように編集する。デフォルトでは上のコードのようになっているため、ビルドコマンドを実行してもoutフォルダ(静的ページ)が作成されない。
+next.config.mjs（修正前）
+/** @type {import('next').NextConfig} */
+const nextConfig = {};
+
+export default nextConfig;
+next.config.mjs（修正後）
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  output:...]]></description><link>https://zenn.dev/chibakawamura/articles/893f12ec5ddb32</link><guid isPermaLink="true">https://zenn.dev/chibakawamura/articles/893f12ec5ddb32</guid><pubDate>Thu, 17 Apr 2025 06:37:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--IvRzNd2K--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:npm%2520run%2520build%25E3%2581%25A7out%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25AB%25E3%2583%2580%25E3%2581%258C%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2595%25E3%2582%258C%25E3%2581%25AA%25E3%2581%2584%25E6%2599%2582%25E3%2581%25AE%25E5%25AF%25BE%25E5%2587%25A6%2528Next.js%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kawamura%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RhNTA2ZDU0OTcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kawamura</dc:creator></item><item><title><![CDATA[RubyエンジニアがJavaScriptを書くときに知っておくべきreturnの罠]]></title><description><![CDATA[
+ はじめに
+RubyからJavaScript（以下JS）に入門するとき、「なぜかfilterやsomeが思ったとおりに動かない」と感じることがあります。
+その原因の一つが JavaScriptではreturnを明示的に書かないと値が返らない という仕様です。
+この記事では、Rubyエンジニアがつまずきやすいこの点にフォーカスし、JSとの違いと注意点を紹介します。
+
+ Rubyでは「最後に評価された値」が返る
+Rubyでは、ブロックの最後に評価された値がそのまま戻り値になります。
+[1, 2, 3].select do |n|
+  n &gt; 1
+end
+# =&gt; [2, 3]
+...]]></description><link>https://zenn.dev/ayies128/articles/d5a568410956fc</link><guid isPermaLink="true">https://zenn.dev/ayies128/articles/d5a568410956fc</guid><pubDate>Thu, 17 Apr 2025 02:47:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7T411btU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ruby%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%25E3%2581%258CJavaScript%25E3%2582%2592%25E6%259B%25B8%25E3%2581%258F%25E3%2581%25A8%25E3%2581%258D%25E3%2581%25AB%25E7%259F%25A5%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%258A%25E3%2581%258F%25E3%2581%25B9%25E3%2581%258Dreturn%25E3%2581%25AE%25E7%25BD%25A0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AA%25E3%2581%25B9%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTDA3Tk9QSk1BQW54VjF6cnUzTzM2VjQwQ2oyekoxbkhTSXAzdzhoQTgwRVE9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>なべ</dc:creator></item><item><title><![CDATA[JavaScript 少なくとも1つ条件に合うかどうかを判断する`some`]]></title><description><![CDATA[JavaScriptには、配列を操作する便利なメソッドがたくさんあります。
+その中でも今回は、条件に合う要素が1つでもあるかどうかを調べるためのメソッド、someについて解説します。
+
+ someとは？
+someは配列に対して使えるメソッドで、次のような動きをします。
+
+配列の中に、少なくとも1つ条件に合う要素があれば true を返す。
+条件に合う要素が1つもなければ false を返す。
+
+
+ 基本構文
+array.some(callback);
+callback は各要素に対して実行される関数で、次のような書き方ができます：
+array.some((value, index, ar...]]></description><link>https://zenn.dev/ayies128/articles/70d1ae8b271aea</link><guid isPermaLink="true">https://zenn.dev/ayies128/articles/70d1ae8b271aea</guid><pubDate>Thu, 17 Apr 2025 02:46:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bW-ymkwy--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%2520%25E5%25B0%2591%25E3%2581%25AA%25E3%2581%258F%25E3%2581%25A8%25E3%2582%25821%25E3%2581%25A4%25E6%259D%25A1%25E4%25BB%25B6%25E3%2581%25AB%25E5%2590%2588%25E3%2581%2586%25E3%2581%258B%25E3%2581%25A9%25E3%2581%2586%25E3%2581%258B%25E3%2582%2592%25E5%2588%25A4%25E6%2596%25AD%25E3%2581%2599%25E3%2582%258B%2560some%2560%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AA%25E3%2581%25B9%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTDA3Tk9QSk1BQW54VjF6cnUzTzM2VjQwQ2oyekoxbkhTSXAzdzhoQTgwRVE9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>なべ</dc:creator></item><item><title><![CDATA[LINEミニアプリのServiceMessageを試してみた（Nextjs）]]></title><description><![CDATA[LINEミニアプリでサービスメッセージを送信する方法を検証しましたので備忘録的に纏めています。
+送信に成功すると「LINEミニアプリ　お知らせ」アカウントからメッセージを受信できます。
+
+LINEミニアプリの公式から送信方法が記載されておりますので、そちらを参考に作成していきます。
+https://developers.line.biz/ja/docs/line-mini-app/develop/service-messages/
+※基本は審査後の認証済みアプリからのみ使用可能な機能にですが、テストユーザーに限っては
+テスト環境で使用できます。
+大きな流れは以下となります。
+※今回事前準...]]></description><link>https://zenn.dev/sugu0108/articles/2dccf75b445b04</link><guid isPermaLink="true">https://zenn.dev/sugu0108/articles/2dccf75b445b04</guid><pubDate>Wed, 16 Apr 2025 09:39:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5e0ximMn--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:LINE%25E3%2583%259F%25E3%2583%258B%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2581%25AEServiceMessage%25E3%2582%2592%25E8%25A9%25A6%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25EF%25BC%2588Nextjs%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Sugu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFlYjI2MGYwNTMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Sugu</dc:creator></item><item><title><![CDATA[テストを自動化する#2｜Playwright/Javascriptのサンプルコード]]></title><description><![CDATA[Playwrightでのテスト自動化に使えるJavascriptのコードです。
+
+ 今回取り上げている内容
+!
+
+新しいタブでページを開きたい
+AまたはBと表示されている項目をクリック・テキストを入力したい
+ダイアログをescキーで閉じたい
+
+
+
+
+ 新しいタブでページを開きたい
+新しいタブでページを開く際に、以下のコードを使ってページやページ遷移を定義することができます。押下するボタンをAAA、新しく開かれたタブをpage1として記述しています。
+
+spec.ts
+// 新しいページが開く「popup」イベントを待機する Promise（非同期処理の予約） を作成
+const page...]]></description><link>https://zenn.dev/okitegami/articles/9e5c9ea4a0ba3d</link><guid isPermaLink="true">https://zenn.dev/okitegami/articles/9e5c9ea4a0ba3d</guid><pubDate>Wed, 16 Apr 2025 08:26:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3JJbUdkw--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E3%2582%2592%25E8%2587%25AA%25E5%258B%2595%25E5%258C%2596%25E3%2581%2599%25E3%2582%258B%25232%25EF%25BD%259CPlaywright%252FJavascript%25E3%2581%25AE%25E3%2582%25B5%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AB%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kikuchi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk1NTRhZDI5ZGMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kikuchi</dc:creator></item><item><title><![CDATA[Next.jsプロジェクトをJestからVitestへ移行したら実行時間が85%減った話]]></title><description><![CDATA[圧倒的じゃないか，Vitest は．
+Vitest
+Test Files  12 passed (12)
+Tests       100 passed (100)
+Start at    06:01:55
+Duration    13.46s (transform 411ms, setup 0ms, collect 2.31s, tests 1.72s, environment 5.70s, prepare 1.05s)
+Jest
+Test Suites: 12 passed, 12 total
+Tests:       100 passed, 100 total
+Snapshots: ...]]></description><link>https://zenn.dev/taroosg/articles/20250416153051-8445d65f852690</link><guid isPermaLink="true">https://zenn.dev/taroosg/articles/20250416153051-8445d65f852690</guid><pubDate>Wed, 16 Apr 2025 06:43:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--tB7-1YY7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Next.js%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E3%2582%2592Jest%25E3%2581%258B%25E3%2582%2589Vitest%25E3%2581%25B8%25E7%25A7%25BB%25E8%25A1%258C%25E3%2581%2597%25E3%2581%259F%25E3%2582%2589%25E5%25AE%259F%25E8%25A1%258C%25E6%2599%2582%25E9%2596%2593%25E3%2581%258C85%2525%25E6%25B8%259B%25E3%2581%25A3%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Taro%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MyOGZiYzgwODUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Taro</dc:creator></item><item><title><![CDATA[シンプルな解決策でClaudeデスクトップMCPサーバー構成の重大な問題を解決した方法]]></title><description><![CDATA[技術的な問題に直面して完全に困惑したものの、解決策が驚くほど単純だったという経験はありませんか？最近、私はMacでClaudeデスクトップのMCPファイルシステムサーバーを設定する際に、まさにこのような状況に遭遇しました。
+
+ 課題：謎の構成失敗
+mcp-server-sqliteとuvxは完璧に動作したのですが、claude_desktop_config.jsonを使用してファイルシステムサーバーを構成しようとした際に障害に直面しました。npxとnodeを直接使用する両方の試みが、私を困惑させる予期せぬエラーを引き起こしたのです。
+
+ 最初の試み：NPXアプローチ
+最初の構成は十分にシ...]]></description><link>https://zenn.dev/ainellc/articles/e58eda4e4e22ef</link><guid isPermaLink="true">https://zenn.dev/ainellc/articles/e58eda4e4e22ef</guid><pubDate>Wed, 16 Apr 2025 04:37:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--gLi989a_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B7%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AB%25E3%2581%25AA%25E8%25A7%25A3%25E6%25B1%25BA%25E7%25AD%2596%25E3%2581%25A7Claude%25E3%2583%2587%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%2588%25E3%2583%2583%25E3%2583%2597MCP%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E6%25A7%258B%25E6%2588%2590%25E3%2581%25AE%25E9%2587%258D%25E5%25A4%25A7%25E3%2581%25AA%25E5%2595%258F%25E9%25A1%258C%25E3%2582%2592%25E8%25A7%25A3%25E6%25B1%25BA%25E3%2581%2597%25E3%2581%259F%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Aine%2520LLC.%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JkOTJiOWM2MzIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Aine LLC.</dc:creator></item><item><title><![CDATA[今さら訊けないJavaScriptの基本メモ]]></title><description><![CDATA[
+ やること
+モダンなフロントエンド開発で大事そうなJavaScriptの基本をまとめておく
+
+ 参考文献
+https://jsprimer.net/
+
+ アロー関数
+アロー関数（Arrow Function）は、ES2015（ES6）で導入された関数を定義する新しい構文で、従来のfunctionキーワードを使った関数宣言や関数式よりも短く簡潔に書くことができます。
+アロー関数の基本的な構文と特徴は以下のとおりです。
+// 基本的な構文
+const 変数名 = () =&gt; {
+    // 処理内容
+    return 返り値;
+};
+①省略記法
+ 仮引数が1つのみなら()を省略...]]></description><link>https://zenn.dev/headwaters/articles/02d8480c7caf22</link><guid isPermaLink="true">https://zenn.dev/headwaters/articles/02d8480c7caf22</guid><pubDate>Wed, 16 Apr 2025 03:39:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--G1o1BF0n--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E4%25BB%258A%25E3%2581%2595%25E3%2582%2589%25E8%25A8%258A%25E3%2581%2591%25E3%2581%25AA%25E3%2581%2584JavaScript%25E3%2581%25AE%25E5%259F%25BA%25E6%259C%25AC%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:akihiro%2520nakamura%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZjNGExY2UxMDYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2598%25E3%2583%2583%25E3%2583%2589%25E3%2582%25A6%25E3%2582%25A9%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%25BC%25E3%2582%25B9%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA5MjU4ZWEwY2QuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>akihiro nakamura</dc:creator></item><item><title><![CDATA[Javascript / DOM に於ける　範囲表現]]></title><description><![CDATA[
+ 範囲表現
+!
+レギュレーション
+とりあえず何等かの範囲を表現する クラス / 関数 等を上げていくこととします。 関数の場合は引数名、クラスの場合は　プロパティ/関数名で それが 開始名 / 長さ / 終了名 のどれにあたるかを記録します。
+また、 終了名 にあたるものが 範囲に含まれるかどうかも記録します。
+
+
+ JavaScript API
+
+
+
+項目名
+開始名
+長さ
+終了名
+終了が含まれるか
+
+
+
+
+Array.prototype.slice()
+start
+-
+end
+いいえ
+
+
+String.prototype.substring()
+indexStart
+-
+indexE...]]></description><link>https://zenn.dev/juners/articles/a498c9333966bf</link><guid isPermaLink="true">https://zenn.dev/juners/articles/a498c9333966bf</guid><pubDate>Wed, 16 Apr 2025 03:12:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--N7wBzvEo--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Javascript%2520%252F%2520DOM%2520%25E3%2581%25AB%25E6%2596%25BC%25E3%2581%2591%25E3%2582%258B%25E3%2580%2580%25E7%25AF%2584%25E5%259B%25B2%25E8%25A1%25A8%25E7%258F%25BE%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:juner%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pJLTZTZnZQaDFwb0M5dmMxYUpVeTFoelB0R1g1RXRmUHRpQzF4QWR3PXMyNTAtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>juner</dc:creator></item><item><title><![CDATA[Qué es el principio de incertidumbre de un estado en React]]></title><description><![CDATA[
+ Principio de incertidumbre de un estado en React
+Si has trabajado con React, es probable que hayas tenido problemas con los estados de tus componentes. En este artículo veremos como enfrentar este problema y las distinas formas de solucionarlo.
+Hace poco estuve ayudando a un colega con un probl...]]></description><link>https://zenn.dev/oroyajosue/articles/ae4c8abc4fd57f</link><guid isPermaLink="true">https://zenn.dev/oroyajosue/articles/ae4c8abc4fd57f</guid><pubDate>Wed, 16 Apr 2025 02:43:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--UbzQnh7H--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Qu%25C3%25A9%2520es%2520el%2520principio%2520de%2520incertidumbre%2520de%2520un%2520estado%2520en%2520React%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25AA%25E3%2583%25AD%25E3%2583%25A4%25E3%2583%259B%25E3%2582%25B9%25E3%2582%25A8%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSlFwQzJtY0xvc3dqZzR0bVRpTDk5RU9wV3RNLUtOcTduRkdySzZaNjhPV2JpdndOTmM9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>オロヤホスエ</dc:creator></item><item><title><![CDATA[React のオプショナルチェイニングと Null 合体演算子を理解する]]></title><description><![CDATA[
+ はじめに
+最近、Udemy で NARUTO のキャラクター図鑑サイトを作ってたら、こんなコードが出てきました。
+&lt;p className="card-description"&gt;{character.debut?.appearsIn ?? "なし"}&lt;/p&gt;
+これが今回の主役 「オプショナルチェイニング（?.）」 と 「null 合体演算子（??）」 です！
+
+ オプショナルチェイニング（?.）とは？
+役割
+
+オブジェクトや配列のプロパティに安全にアクセスできる
+undefined や null でもエラーを出さずに undefined を返してくれる
+
+//...]]></description><link>https://zenn.dev/atsukiprog/articles/4b711057fd2c51</link><guid isPermaLink="true">https://zenn.dev/atsukiprog/articles/4b711057fd2c51</guid><pubDate>Tue, 15 Apr 2025 12:39:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--y9LQVa2V--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%2520%25E3%2581%25AE%25E3%2582%25AA%25E3%2583%2597%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%258A%25E3%2583%25AB%25E3%2583%2581%25E3%2582%25A7%25E3%2582%25A4%25E3%2583%258B%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%25A8%2520Null%2520%25E5%2590%2588%25E4%25BD%2593%25E6%25BC%2594%25E7%25AE%2597%25E5%25AD%2590%25E3%2582%2592%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E7%25A2%25A7%25E6%259C%2588%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI0MTAwYTVmYWQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>碧月</dc:creator></item><item><title><![CDATA[今話題のVibe Codingを取り入れてゲームメモのWebアプリを作りました]]></title><description><![CDATA[
+ はじめに
+最近、ClineをはじめとするVibe Codingが話題になっています。実は私はまだ触れていなかったので、どんなものか体験するためにWebアプリを作ってみることにしました。
+
+ 作成したもの
+https://ggmemo.pokekoyomi.com
+ゲームの戦績をメモするためのアプリです。ちょっとカッコつけて英語で作りました。
+このアプリは2つのモードを提供しています。1つ目はアクセスするだけですぐに使える「Basic Mode」で、データはすべてブラウザのローカルストレージに保存されるため気軽に利用できます。2つ目はサインインして使用する「Session Mode」で...]]></description><link>https://zenn.dev/hoshito/articles/fa378d2de365ca</link><guid isPermaLink="true">https://zenn.dev/hoshito/articles/fa378d2de365ca</guid><pubDate>Tue, 15 Apr 2025 11:11:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Liv4bR7N--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E4%25BB%258A%25E8%25A9%25B1%25E9%25A1%258C%25E3%2581%25AEVibe%2520Coding%25E3%2582%2592%25E5%258F%2596%25E3%2582%258A%25E5%2585%25A5%25E3%2582%258C%25E3%2581%25A6%25E3%2582%25B2%25E3%2583%25BC%25E3%2583%25A0%25E3%2583%25A1%25E3%2583%25A2%25E3%2581%25AEWeb%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258A%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hoshito%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U0ZWM5ZTA4MGEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hoshito</dc:creator></item><item><title><![CDATA[処理速度比較: JavaScript VS Wasm(Pyodide)]]></title><description><![CDATA[
+ 1. はじめに
+近年、ブラウザ上での高性能な処理を実現するためにWebAssembly（Wasm）が注目されています。特にPythonをブラウザ上で実行できるPyodideなどのフレームワークの登場により、データ分析や機械学習などの複雑な計算をクライアントサイドで実行できるようになりました。しかし、すべてのケースでWasmが優れているわけではありません。
+この記事では、JavaScript（ネイティブ）とWebAssembly（Python/Pyodide）の処理速度を、タスクの複雑度別に比較した検証結果を紹介します。
+
+ 2. 検証環境
+今回の検証では以下の環境とツールを使用しまし...]]></description><link>https://zenn.dev/jnch/articles/ccb59312064e83</link><guid isPermaLink="true">https://zenn.dev/jnch/articles/ccb59312064e83</guid><pubDate>Tue, 15 Apr 2025 07:00:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--iZJQS5x3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2587%25A6%25E7%2590%2586%25E9%2580%259F%25E5%25BA%25A6%25E6%25AF%2594%25E8%25BC%2583%253A%2520JavaScript%2520VS%2520Wasm%2528Pyodide%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Jnch%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSXNsY0hSNVhJeG9MWjg2Z3dRWmZlQ0JFNEFZV0ZSNGRqYUNmbGdkdnZRY3dyeHo5cz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Jnch</dc:creator></item><item><title><![CDATA[WebAssembly（Wasm）入門]]></title><description><![CDATA[
+ 1. はじめに
+
+ WebAssemblyとは何か
+WebAssembly（略称：Wasm）は、Webブラウザで動作する低レベルのバイナリフォーマットとその表現形式です。特徴としては、小さなサイズで高速に動作するバイナリ形式（人間が直接読めない機械語に近い形式）であることが挙げられます。2019年12月にW3Cにより正式な Web 標準となり、現在ではほぼすべての主要ブラウザでサポートされています。
+WebAssemblyは JavaScript と並行して動作し、Web開発者に高速なパフォーマンスを提供するために設計されました。その基本的な特徴は、コンパクトなバイナリ形式、C/C+...]]></description><link>https://zenn.dev/jnch/articles/34c97cc5c7a1a7</link><guid isPermaLink="true">https://zenn.dev/jnch/articles/34c97cc5c7a1a7</guid><pubDate>Tue, 15 Apr 2025 06:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hjTQ4ySE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:WebAssembly%25EF%25BC%2588Wasm%25EF%25BC%2589%25E5%2585%25A5%25E9%2596%2580%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Jnch%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSXNsY0hSNVhJeG9MWjg2Z3dRWmZlQ0JFNEFZV0ZSNGRqYUNmbGdkdnZRY3dyeHo5cz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Jnch</dc:creator></item></channel></rss>
