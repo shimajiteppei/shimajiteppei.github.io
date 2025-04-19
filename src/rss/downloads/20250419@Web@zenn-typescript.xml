@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「TypeScript」のフィード]]></title><description><![CDATA[Zennのトピック「TypeScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/typescript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/f13e758fdb.png</url><title>Zennの「TypeScript」のフィード</title><link>https://zenn.dev/topics/typescript</link></image><generator>zenn.dev</generator><lastBuildDate>Sat, 19 Apr 2025 05:54:28 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/typescript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[JavaScriptで巨大な静的配列を実装するときはswitchよりもarrayを使ったほうが普通にはやい]]></title><description><![CDATA[
+ 動機
+JSで巨大な事前に値が決まっている静的配列を実装するときに、Arrayじゃなくてswitchの方が早いと思ったのでベンチをとった。Denoでやったのでv8のベンチになる。
+
+ 実験
+ベンチマークを作るスクリプト。
+await Deno.remove("array_switch.ts");
+const Ns = [100, 1000, 10000];
+for (const N of Ns) {
+  const array_banch: string = `const arr${N} = [${Array.from(
+    { length: N },
+    (_, i) =&...]]></description><link>https://zenn.dev/arark/articles/ba87c78115048a</link><guid isPermaLink="true">https://zenn.dev/arark/articles/ba87c78115048a</guid><pubDate>Sat, 19 Apr 2025 01:58:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--35dBpvhL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25E3%2581%25A7%25E5%25B7%25A8%25E5%25A4%25A7%25E3%2581%25AA%25E9%259D%2599%25E7%259A%2584%25E9%2585%258D%25E5%2588%2597%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2599%25E3%2582%258B%25E3%2581%25A8%25E3%2581%258D%25E3%2581%25AFswitch%25E3%2582%2588%25E3%2582%258A%25E3%2582%2582array%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%259F%25E3%2581%25BB%25E3%2581%2586%25E3%2581%258C%25E6%2599%25AE%25E9%2580%259A%25E3%2581%25AB%25E3%2581%25AF%25E3%2582%2584%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:arark%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZiNzQ2M2E1ZmQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>arark</dc:creator></item><item><title><![CDATA[クリーンアーキテクチャについて]]></title><description><![CDATA[
+ はじめに
+はじめまして。現在大学4年生の とうふ です。
+これまでバイトやインターンで Web アプリケーション開発に携わる中で、次第に「設計の大切さ」を強く感じるようになりました。
+2社のインターンを継続しており、現在まで開発経験を積んできましたが、どちらの現場でもクリーンアーキテクチャが採用されており、自然とその設計手法に触れる機会がありました。
+最近、同期のエンジニアから「クリーンアーキテクチャって、ざっくり言うとどんな設計なの？」と聞かれる場面がありました。
+そのとき、設計に馴染みのない人にもわかりやすく説明することが意外と難しく、自分の理解を整理し直したいと感じたのが、この...]]></description><link>https://zenn.dev/dem3860/articles/b61742b6beb1e9</link><guid isPermaLink="true">https://zenn.dev/dem3860/articles/b61742b6beb1e9</guid><pubDate>Fri, 18 Apr 2025 12:53:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0b-EAYAT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%25BC%25E3%2583%25B3%25E3%2582%25A2%25E3%2583%25BC%25E3%2582%25AD%25E3%2583%2586%25E3%2582%25AF%25E3%2583%2581%25E3%2583%25A3%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A8%25E3%2581%2586%25E3%2581%25B5%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY5M2U5NTg3ZWYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>とうふ</dc:creator></item><item><title><![CDATA[モジュールとスクリプト【個人学習まとめ】]]></title><description><![CDATA[
+ モジュール
+プログラムをモジュールという単位で分割することができます。
+ソースコードの量が多くなってくると、1 つのファイルだけて管理することは難しくなります。
+例えば、
+
+名前が被ってしまうこと
+1 つの変更が他のどの部分に影響があるか見つけることが困難であること
+などの問題があります。
+
+この問題を解決するために、モジュールと呼ばれる仕組みがあります。
+
+ 利用方法
+利用するには 2 種類のキーワードが必要になります。importとexportです。
+まずはexportの例です。
+
+ clss.ts
+const PI = 3.14;
+
+function square(x: num...]]></description><link>https://zenn.dev/o0rororo0o/articles/d0a7f376c3739f</link><guid isPermaLink="true">https://zenn.dev/o0rororo0o/articles/d0a7f376c3739f</guid><pubDate>Fri, 18 Apr 2025 11:22:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GNUmiuaP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%25A2%25E3%2582%25B8%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%25A8%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2583%2588%25E3%2580%2590%25E5%2580%258B%25E4%25BA%25BA%25E5%25AD%25A6%25E7%25BF%2592%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%258D%25E3%2582%258D%25E3%2582%258D%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ2ZTZjOWM4YmMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ろろろ</dc:creator></item><item><title><![CDATA[「Health Log App」開発記：主観を記録する体調ログアプリを作った理由と工夫点]]></title><description><![CDATA[はじめに
+「自分のための体調ログ」をつけたくて、React + Firebaseでアプリを作りました。
+今回紹介するHealth Log Appは、以下のようなことができます：
+•	体調や薬の記録をその場でメモ
+•	花粉レベルの記録
+•	Markdownで出力 → Obsidianなどにコピペ可能
+•	ダークモード／スマホUIにも対応
+⸻
+技術構成
+•	React（Create React App）
+•	TypeScript
+•	Firebase Firestore
+•	Vercel
+•	React Calendar
+⸻
+こだわったポイント
+•	UIは「スマホで記録しやすい」を優先：ボタ...]]></description><link>https://zenn.dev/keinet/articles/80986f58475b1c</link><guid isPermaLink="true">https://zenn.dev/keinet/articles/80986f58475b1c</guid><pubDate>Fri, 18 Apr 2025 01:53:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--pr6KHpob--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%258CHealth%2520Log%2520App%25E3%2580%258D%25E9%2596%258B%25E7%2599%25BA%25E8%25A8%2598%25EF%25BC%259A%25E4%25B8%25BB%25E8%25A6%25B3%25E3%2582%2592%25E8%25A8%2598%25E9%258C%25B2%25E3%2581%2599%25E3%2582%258B%25E4%25BD%2593%25E8%25AA%25BF%25E3%2583%25AD%25E3%2582%25B0%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%25E7%2590%2586%25E7%2594%25B1%25E3%2581%25A8%25E5%25B7%25A5%25E5%25A4%25AB%25E7%2582%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kei%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSWZkYU9kcVJvaGQwNHlENi1JSks2c1JkZEpRV3Jycm4zR1RfeGNQZThTWDJYclo2ND1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kei</dc:creator></item><item><title><![CDATA[PipedreamにおけるBlueskyへのリンクカード付き投稿]]></title><description><![CDATA[!
+この記事は、Xへのポストを復旧させた記事と強く関連しています。
+最初の導入部分と「そもそもPipedreamとは」については、向こうを参照してください。
+
+
+ PipedreamにおけるBluesky連携
+Blueskyについては標準でアカウント連携機能がついています。
+ユーザー名とアプリパスワードの組み合わせを登録することで、組み込みのアクションを簡単に利用できます。
+
+単純なテキスト投稿をするだけならCreate Postを利用すれば事足りるので、これで十分な人には便利です。
+しかし、アクションの動作設定まで進むとはっきりするのですが、本当にテキストを投稿する機能しかありません。...]]></description><link>https://zenn.dev/attakei/articles/pipedream-actions-bluesky-linkcard</link><guid isPermaLink="true">https://zenn.dev/attakei/articles/pipedream-actions-bluesky-linkcard</guid><pubDate>Fri, 18 Apr 2025 01:30:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4tSIrtQL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Pipedream%25E3%2581%25AB%25E3%2581%258A%25E3%2581%2591%25E3%2582%258BBluesky%25E3%2581%25B8%25E3%2581%25AE%25E3%2583%25AA%25E3%2583%25B3%25E3%2582%25AF%25E3%2582%25AB%25E3%2583%25BC%25E3%2583%2589%25E4%25BB%2598%25E3%2581%258D%25E6%258A%2595%25E7%25A8%25BF%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Takei%2520Kazuya%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pKSXpPS3RSeThDU0ZoaWpHeklQSWk1Mkl2ZHRwVTB5aE1tTWJhbEE9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Takei Kazuya</dc:creator></item><item><title><![CDATA[Pipedreamで再びXにポスト出来るようにする]]></title><description><![CDATA[Zennでの記事更新や自分のサイト更新などで、通知目的でSNSに発信するというのはよくやる手法です。
+最近では、自分も下記の記事を書いて、XとBlueskyで発信しています。
+https://zenn.dev/attakei/articles/compile-sphinx-revealjs-theme-3-2
+https://x.com/attakei/status/1912490168201732268
+https://bsky.app/profile/attakei.net/post/3lmwnbnoesi25
+[1]
+ところで、SNSへの発信をどのように行っているでしょうか？
+様々...]]></description><link>https://zenn.dev/attakei/articles/pipedream-actions-x-tweet</link><guid isPermaLink="true">https://zenn.dev/attakei/articles/pipedream-actions-x-tweet</guid><pubDate>Fri, 18 Apr 2025 01:30:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hKni7KwJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Pipedream%25E3%2581%25A7%25E5%2586%258D%25E3%2581%25B3X%25E3%2581%25AB%25E3%2583%259D%25E3%2582%25B9%25E3%2583%2588%25E5%2587%25BA%25E6%259D%25A5%25E3%2582%258B%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Takei%2520Kazuya%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pKSXpPS3RSeThDU0ZoaWpHeklQSWk1Mkl2ZHRwVTB5aE1tTWJhbEE9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Takei Kazuya</dc:creator></item><item><title><![CDATA[TypeScript 狂信者のための ESLint rules 〜 null/undefined check 編]]></title><description><![CDATA[
+ 目的
+
+TypeScript は非常によい言語だが、残念なことに null と undefined という空値を表す値が2つもある。
+これらを巡って血で血を洗う宗教戦争が続いているが、今ここで争いに終止符を打つ。
+長年欲しかった lint rule を ChatGPT 神が啓示してくれたので福音伝道する。
+
+
+ TL;DR
+全て a == null または a != null で統一しなさい。
+以下を eslintrc に書き込むだけ。 ("eslint": "8.57.0" 以上で動作確認済み)
+"no-restricted-syntax": [
+  {
+    "message"...]]></description><link>https://zenn.dev/arx8/articles/08efb3889a482f</link><guid isPermaLink="true">https://zenn.dev/arx8/articles/08efb3889a482f</guid><pubDate>Thu, 17 Apr 2025 23:11:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--zuasS0oN--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%2520%25E7%258B%2582%25E4%25BF%25A1%25E8%2580%2585%25E3%2581%25AE%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%2520ESLint%2520rules%2520%25E3%2580%259C%2520null%252Fundefined%2520check%2520%25E7%25B7%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:arx8%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQwOWNlNDhjNzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>arx8</dc:creator></item><item><title><![CDATA[Vue3 + Vuetify3 で再利用できてどこでも呼び出せるモーダルを作成する]]></title><description><![CDATA[
+ はじめに
+みなさんはモーダルに悩まされていませんか？
+ポップで簡単そうに見えるからか、何かと要件が増えてしまうモーダル。
+業務で本当に悩まされたので、複数画面で利用することを想定としたモーダルコンポーネントを作成してみました。
+
+ 動作環境・使用するツールや言語
+
+Vue: v3.5.13
+Vuetify: v3.7.16
+
+
+ 作成したリポジトリ
+コード全体を知りたい方はこちらをどうぞ。
+
+リポジトリ
+コミット
+
+
+ 基盤コンポーネント
+Vuetify のv-dialogを使用してモーダルコンポーネントを作成します。
+以下の要件を満たせるようにしました。プロパティを追加すれば他の調...]]></description><link>https://zenn.dev/mk663/articles/26e36f8c997b16</link><guid isPermaLink="true">https://zenn.dev/mk663/articles/26e36f8c997b16</guid><pubDate>Thu, 17 Apr 2025 22:24:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ILjNMY6H--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Vue3%2520%252B%2520Vuetify3%2520%25E3%2581%25A7%25E5%2586%258D%25E5%2588%25A9%25E7%2594%25A8%25E3%2581%25A7%25E3%2581%258D%25E3%2581%25A6%25E3%2581%25A9%25E3%2581%2593%25E3%2581%25A7%25E3%2582%2582%25E5%2591%25BC%25E3%2581%25B3%25E5%2587%25BA%25E3%2581%259B%25E3%2582%258B%25E3%2583%25A2%25E3%2583%25BC%25E3%2583%2580%25E3%2583%25AB%25E3%2582%2592%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mk%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZkMDAzMjEzMTQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mk</dc:creator></item><item><title><![CDATA[202. Happy Number]]></title><description><![CDATA[幸せな数かどうかを判定するアルゴリズムを作成してください。
+幸せな数（happy number） は次のような過程によって定義されます：
+
+任意の正の整数から始めます。
+数字の各桁を二乗し、それらの合計で元の数を置き換えます。
+この処理を繰り返し、最終的にその数が 1 になる場合（そしてそれ以降ずっと1のままになる）は「幸せな数」と呼びます。
+もし1にならず、1を含まない数のループに陥る場合は「幸せな数ではありません」。
+
+この過程が最終的に1で終わる数は「幸せな数」です。
+n が幸せな数であれば true を、そうでなければ false を返してください。
+
+
+ 例 1：
+
+
+入力： ...]]></description><link>https://zenn.dev/idapan/articles/8be892cefcf787</link><guid isPermaLink="true">https://zenn.dev/idapan/articles/8be892cefcf787</guid><pubDate>Thu, 17 Apr 2025 22:14:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--YBINcFm4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_76:202.%2520Happy%2520Number%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Keijiro%2520Ida%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2EwYTNmOGUyMGYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Keijiro Ida</dc:creator></item><item><title><![CDATA[RPCなのにOpenAPIも自動生成？oRPCの衝撃]]></title><description><![CDATA[
+ はじめに
+最近、API設計とフロントエンド実装をもっと楽にできないかと模索していた中で、
+oRPCというライブラリに出会いました。
+https://orpc.unnoq.com/
+このoRPC、RPCの手軽さとOpenAPIドキュメント生成の恩恵を
+いいとこ取りしたかのような素晴らしい体験を提供してくれます。
+しかも、Next.js（Server Actions含む）にも対応しており、
+最新のフルスタック開発にぴったりな設計になっています。
+本記事では、
+
+「そもそもRPCとは何か？」
+「RPCが持つ課題とは？」
+「oRPCがそれをどう解決するのか？」
+「Next.jsでの具体的な使...]]></description><link>https://zenn.dev/sc30gsw/articles/1c13f3f44b40e5</link><guid isPermaLink="true">https://zenn.dev/sc30gsw/articles/1c13f3f44b40e5</guid><pubDate>Thu, 17 Apr 2025 13:09:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xVnWBEbf--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:RPC%25E3%2581%25AA%25E3%2581%25AE%25E3%2581%25ABOpenAPI%25E3%2582%2582%25E8%2587%25AA%25E5%258B%2595%25E7%2594%259F%25E6%2588%2590%25EF%25BC%259FoRPC%25E3%2581%25AE%25E8%25A1%259D%25E6%2592%2583%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kaito%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA5ZmViMGZmOGUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kaito</dc:creator></item><item><title><![CDATA[自作サイトをPWA対応にしてみた (Vite)]]></title><description><![CDATA[
+ まえがき
+自作サイトを PWA 対応してみました。
+簡単にできるかと思ったのですが若干詰まった箇所があったので共有します。
+対応したサイトはこちらになります。
+https://dual-n-back-zundamon.pages.dev/
+
+ Vite PWA
+Vite PWA というライブラリを使用しました。
+https://vite-pwa-org.netlify.app/guide/
+自分のサイトは Vite で作っていたためこのライブラリを導入するだけですぐに PWA 化できるかなと思っていました。
+
+ 詰まったポイント
+公式ドキュメントの指示に従ってライブラリをインストール...]]></description><link>https://zenn.dev/abebe123000/articles/f0bac52c23f13b</link><guid isPermaLink="true">https://zenn.dev/abebe123000/articles/f0bac52c23f13b</guid><pubDate>Thu, 17 Apr 2025 11:11:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vncRO-f2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%2587%25AA%25E4%25BD%259C%25E3%2582%25B5%25E3%2582%25A4%25E3%2583%2588%25E3%2582%2592PWA%25E5%25AF%25BE%25E5%25BF%259C%25E3%2581%25AB%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2520%2528Vite%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2582%25E3%2581%25B9%25E3%2581%25B9%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNhZWRlMTY3ZGUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>あべべ</dc:creator></item><item><title><![CDATA[フロントエンドエンジニアの為のチャットボット実装のすゝめ]]></title><description><![CDATA[
+ はじめに
+以前コーポレートサイト制作の案件でチャットボットを実装したのですが、当時の自分が参考にできる記事があまり無かった為、次回以降チャットボットを実装する際に必要な知識と実装手順をここに書き記します。
+本記事で出てくる概念や技術の説明は、筆者の考えを元にした独自の解釈となっておりますので、より正確な情報を得たい場合は参考文献を参照してください。
+尚、本記事ではチャットボットを実装する際にChatGPTを使用しますので、他のモデルを使用される方はご自身が使用したいモデルのAPIページをご覧ください。
+
+ ストリーミング
+!
+※ストリーミングについての知識がある方は飛ばしてください
+...]]></description><link>https://zenn.dev/codeunit/articles/0adda633430d48</link><guid isPermaLink="true">https://zenn.dev/codeunit/articles/0adda633430d48</guid><pubDate>Thu, 17 Apr 2025 10:18:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--gWlbw-yM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2595%25E3%2583%25AD%25E3%2583%25B3%25E3%2583%2588%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2589%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%25E3%2581%25AE%25E7%2582%25BA%25E3%2581%25AE%25E3%2583%2581%25E3%2583%25A3%25E3%2583%2583%25E3%2583%2588%25E3%2583%259C%25E3%2583%2583%25E3%2583%2588%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%25AE%25E3%2581%2599%25E3%2582%259D%25E3%2582%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Chiro%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhlZDUzODU0OWYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2583%25A6%25E3%2583%258B%25E3%2583%2583%25E3%2583%2588%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2UxODVjY2Y3MzMuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Chiro</dc:creator></item><item><title><![CDATA[初めてのcreate-next-app]]></title><description><![CDATA[
+ 1. はじめに
+Next.jsは、Reactベースのフレームワークで、サーバーサイドレンダリングやスタティックサイト生成などの機能を提供します。create-next-appはNext.jsの公式CLIツールで、新規React（Next.js）プロジェクトを自動的に構築します。
+!
+この記事では、Node.js 23.7.0を使用しています。
+
+
+ 2. create-next-appのオプションパラメータ
+create-next-appを使用する際、いくつかのオプションパラメータを指定できます。基本的な使用方法は以下の通りです。
+npx create-next-app [プロジェク...]]></description><link>https://zenn.dev/jnch/articles/a8a641c6679f86</link><guid isPermaLink="true">https://zenn.dev/jnch/articles/a8a641c6679f86</guid><pubDate>Thu, 17 Apr 2025 08:07:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--yTeBXDSL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2588%259D%25E3%2582%2581%25E3%2581%25A6%25E3%2581%25AEcreate-next-app%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Jnch%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSXNsY0hSNVhJeG9MWjg2Z3dRWmZlQ0JFNEFZV0ZSNGRqYUNmbGdkdnZRY3dyeHo5cz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Jnch</dc:creator></item><item><title><![CDATA[Next.jsのバージョン15.3が出たんじゃ]]></title><description><![CDATA[
+ 初めに
+この記事が公開されることには私は一歳年を重ねるでしょう！バースデーイイねをお待ちしています！！！！！
+さてNext.js使いの皆さん、Next.jsがバージョンアップしましたね〜
+主に5つの機能がアップデートしました。
+
+
+ビルド用 Turbopack (アルファ版) : 8000 回以上のテストに合格した、より高速な本番ビルド (99%)
+
+Rspack のコミュニティサポート（実験的） : Webpack と互換性のある代替バンドラー
+
+クライアントインストルメンテーションフック: 早期監視と分析のセットアップ
+
+ナビゲーションフック: とを使用してルーティングを制御on...]]></description><link>https://zenn.dev/omegamaster/articles/20250414next_js_15_3</link><guid isPermaLink="true">https://zenn.dev/omegamaster/articles/20250414next_js_15_3</guid><pubDate>Thu, 17 Apr 2025 03:30:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--O-7_92yQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Next.js%25E3%2581%25AE%25E3%2583%2590%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%25A7%25E3%2583%25B315.3%25E3%2581%258C%25E5%2587%25BA%25E3%2581%259F%25E3%2582%2593%25E3%2581%2598%25E3%2582%2583%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25AA%25E3%2583%25A1%25E3%2582%25AC%25E3%2583%259E%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0YzVXQURUYXFBRUlnaTg5WHM1a2JCQW1mRm05QzhDS09mNXVYODQ1QTBPYXc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>オメガマスター</dc:creator></item><item><title><![CDATA[191. Number of 1 Bits]]></title><description><![CDATA[正の整数 n が与えられたとき、2進数表現における セットビット（1のビット）の数 を返す関数を作成してください（これは「ハミング重み」としても知られています）。
+
+ 例 1:
+
+
+入力: n = 11
+
+
+出力: 3
+
+
+説明:
+入力の2進数は 1011 で、合計で3つの1（セットビット）があります。
+
+
+ 例 2:
+
+
+入力: n = 128
+
+
+出力: 1
+
+
+説明:
+入力の2進数は 10000000 で、1つのセットビットがあります。
+
+
+ 例 3:
+
+
+入力: n = 2147483645
+
+
+出力: 30
+
+
+説明:
+入力の2進数は 111111111111111111111...]]></description><link>https://zenn.dev/idapan/articles/0cc54b62b3181e</link><guid isPermaLink="true">https://zenn.dev/idapan/articles/0cc54b62b3181e</guid><pubDate>Wed, 16 Apr 2025 22:16:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--I5h9HwKs--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_76:191.%2520Number%2520of%25201%2520Bits%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Keijiro%2520Ida%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2EwYTNmOGUyMGYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Keijiro Ida</dc:creator></item><item><title><![CDATA[OpenAPI Generator の typescript-fetch をカスタマイズして  enum に対応してみた]]></title><description><![CDATA[
+ はじめに
+バックエンドで定義した型定義をフロントエンドでも共有したい！これは、多くの開発者が直面する課題の１つです。
+特に OpenAPI を利用して仕様書を出力しているプロジェクトでは、 OpenAPI Generator を活用してフロントエンドの言語に合わせた型定義を自動生成できます。
+その中でも TypeScript を利用したフロントエンド開発において typescript-fetch はとても便利で、OpenAPI の仕様書から効率よく型定義を生成可能です。
+しかし、実際に利用する中で enum の型定義エラーに出会うことがあります。
+今回は、この typescript-...]]></description><link>https://zenn.dev/acomo/articles/progress-acomo-2025-04-04-03-56-46</link><guid isPermaLink="true">https://zenn.dev/acomo/articles/progress-acomo-2025-04-04-03-56-46</guid><pubDate>Wed, 16 Apr 2025 13:50:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--SgVMe6c8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:OpenAPI%2520Generator%2520%25E3%2581%25AE%2520typescript-fetch%2520%25E3%2582%2592%25E3%2582%25AB%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%259E%25E3%2582%25A4%25E3%2582%25BA%25E3%2581%2597%25E3%2581%25A6%2520%2520enum%2520%25E3%2581%25AB%25E5%25AF%25BE%25E5%25BF%259C%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:acomo%25E3%2581%25AE%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBjMmVjZjZhOTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>acomoのエンジニア</dc:creator></item><item><title><![CDATA[acomo を支える技術 ～ 技術スタック紹介]]></title><description><![CDATA[
+ はじめに
+acomo は、開発者のためのワークフロープラットフォームとして、申請・承認ワークフローの
+開発をより自由に、より気軽にすることを目指しています。ヘッドレス志向で設計された
+API ベースのプラットフォームとして、バックエンドとフロントエンドを切り離した柔軟な
+アーキテクチャを採用しています。
+この記事では、acomo の技術スタックについて、詳しく解説します。
+
+ アーキテクチャ概要
+acomo は以下の特徴を実現するため、先進的な Web 技術とクラウドサービスを組み合わせた
+アーキテクチャを採用しています。
+
+システム連携しやすい API
+セキュアな認証・認可
+スケー...]]></description><link>https://zenn.dev/acomo/articles/progress-acomo-2025-03-26-05-34-50</link><guid isPermaLink="true">https://zenn.dev/acomo/articles/progress-acomo-2025-03-26-05-34-50</guid><pubDate>Wed, 16 Apr 2025 13:50:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wU_BYIfQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:acomo%2520%25E3%2582%2592%25E6%2594%25AF%25E3%2581%2588%25E3%2582%258B%25E6%258A%2580%25E8%25A1%2593%2520%25EF%25BD%259E%2520%25E6%258A%2580%25E8%25A1%2593%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%2583%25E3%2582%25AF%25E7%25B4%25B9%25E4%25BB%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:acomo%25E3%2581%25AE%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBjMmVjZjZhOTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>acomoのエンジニア</dc:creator></item><item><title><![CDATA[仕事で使うための Cloudflare Worker 入門]]></title><description><![CDATA[(これは某所でやる Cloudflare の入門チュートリアルで、そこの肌感に合わせています。)
+アカウント登録が終わっていることは前提とします。
+
+ Hello World
+https://developers.cloudflare.com/pages/get-started/c3/
+$ npm create cloudflare@latest
+いちばん簡単な TypeScript のワーカーのサンプルを作ります
+
+Hello World
+Worker only
+TypeScript
+
+npm run dev で起動。
+この中身を解説します。
+
+ 仕組みを知る
+
+ Wrangler
+C...]]></description><link>https://zenn.dev/mizchi/articles/cf-worker-introduce-for-pro</link><guid isPermaLink="true">https://zenn.dev/mizchi/articles/cf-worker-introduce-for-pro</guid><pubDate>Wed, 16 Apr 2025 08:31:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--UQwCStUA--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E4%25BB%2595%25E4%25BA%258B%25E3%2581%25A7%25E4%25BD%25BF%25E3%2581%2586%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%2520Cloudflare%2520Worker%2520%25E5%2585%25A5%25E9%2596%2580%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mizchi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2liclRHT052Z3d3ay1fNGxlcVk4TGNGSlNuX0FoWnpEWVlKaXJNcWc9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mizchi</dc:creator></item><item><title><![CDATA[テストを自動化する#2｜Playwright/Javascriptのサンプルコード]]></title><description><![CDATA[Playwrightでのテスト自動化に使えるJavascriptのコードです。
+
+ 今回取り上げている内容
+!
+
+新しいタブでページを開きたい
+AまたはBと表示されている項目をクリック・テキストを入力したい
+ダイアログをescキーで閉じたい
+
+
+
+
+ 新しいタブでページを開きたい
+新しいタブでページを開く際に、以下のコードを使ってページやページ遷移を定義することができます。押下するボタンをAAA、新しく開かれたタブをpage1として記述しています。
+
+spec.ts
+// 新しいページが開く「popup」イベントを待機する Promise（非同期処理の予約） を作成
+const page...]]></description><link>https://zenn.dev/okitegami/articles/9e5c9ea4a0ba3d</link><guid isPermaLink="true">https://zenn.dev/okitegami/articles/9e5c9ea4a0ba3d</guid><pubDate>Wed, 16 Apr 2025 08:26:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3JJbUdkw--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E3%2582%2592%25E8%2587%25AA%25E5%258B%2595%25E5%258C%2596%25E3%2581%2599%25E3%2582%258B%25232%25EF%25BD%259CPlaywright%252FJavascript%25E3%2581%25AE%25E3%2582%25B5%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AB%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kikuchi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk1NTRhZDI5ZGMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kikuchi</dc:creator></item><item><title><![CDATA[MCPサーバーでまだ出来ないこと]]></title><description><![CDATA[最近の生成AIのトピックはもっぱらMCP（サーバー）がトレンドで、Zennでもすごい量の記事がかかれていたりいいねが大量にあったりという状況です。
+自分もローカルでテストしてみて、AIが会社のバックログのデータを参照して回答を生成してくれることに感動しています。
+一方でMCPはまだまだ開発途中の技術であり、まだ出来ないことも分かってきたので、自分の企業でMCPサーバーを導入しようと考えた際に生じる2つのハードルについて書いていこうと思います。
+
+ MCPサーバーをローカル外に建てられない
+イントロダクションの以下の図で示されている通り、現在MCPサーバーはローカルに立ち上げて利用するよう...]]></description><link>https://zenn.dev/aidiot/articles/78b2b4e5169ff9</link><guid isPermaLink="true">https://zenn.dev/aidiot/articles/78b2b4e5169ff9</guid><pubDate>Wed, 16 Apr 2025 04:48:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0gGQkjIL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:MCP%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2581%25A7%25E3%2581%25BE%25E3%2581%25A0%25E5%2587%25BA%25E6%259D%25A5%25E3%2581%25AA%25E3%2581%2584%25E3%2581%2593%25E3%2581%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:nemunyan%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLmRldi9pbWFnZXMvZGVmYXVsdC1wdWJsaWNhdGlvbi1hdmF0YXIucG5n%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25A2%25E3%2582%25A4%25E3%2583%2587%25E3%2582%25A3%25E3%2582%25AA%25E3%2583%2583%25E3%2583%2588%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2UxY2ZmZTc5YzEuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nemunyan</dc:creator></item></channel></rss>
