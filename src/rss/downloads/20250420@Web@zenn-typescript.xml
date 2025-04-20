@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「TypeScript」のフィード]]></title><description><![CDATA[Zennのトピック「TypeScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/typescript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/f13e758fdb.png</url><title>Zennの「TypeScript」のフィード</title><link>https://zenn.dev/topics/typescript</link></image><generator>zenn.dev</generator><lastBuildDate>Sun, 20 Apr 2025 05:58:34 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/typescript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[JSONファイルをインポートする方法【個人学習まとめ】]]></title><description><![CDATA[
+ JSON ファイルをインポートする方法
+TypeScirpt では、importを用いて JSON ファイルを直接インポートすることができます。
+取り込んだデータは配列やオブジェクトとして利用できます。
+
+ オプション設定
+tsconfig.json にオプションresolveJsonModuleを追加します。
+
+ tsconfig.json
+{
+  //他のオプションは省略
+  "compilerOptions": {
+    // JSONファイルのインポートを有効に設定
+    "resolveJsonModule": true
+  }
+}
+
+
+ 読み取る JSON ファイル
+...]]></description><link>https://zenn.dev/o0rororo0o/articles/9ffd1825a59748</link><guid isPermaLink="true">https://zenn.dev/o0rororo0o/articles/9ffd1825a59748</guid><pubDate>Sun, 20 Apr 2025 05:07:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--z8Ov3S1F--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JSON%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2592%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%259D%25E3%2583%25BC%25E3%2583%2588%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%25E3%2580%2590%25E5%2580%258B%25E4%25BA%25BA%25E5%25AD%25A6%25E7%25BF%2592%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%258D%25E3%2582%258D%25E3%2582%258D%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ2ZTZjOWM4YmMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ろろろ</dc:creator></item><item><title><![CDATA[型安全に URL を構築できるライブラリ routopia を作った]]></title><description><![CDATA[
+ はじめに
+Web アプリなどソフトウェアの開発していると、必ずと言っていいほど URL の構築を行い、リンクを設定したり画面遷移させたりという制御を行うと思います。
+ただ他の多くの記事でも触れられている通り、 URL の構築には以下のような課題があります。
+
+パスやパラメータ名の typo
+パラメータの漏れ・型の不一致
+変更追従漏れ
+そもそも期待値がわからず実装を読み解く必要がある
+エンコード漏れ
+
+みなさんもこういった問題に遭遇したことはありませんか？
+これらの問題は単純にバグの温床になるだけではなく、開発者の生産性や体験を下げる要因にもなっています。
+今回はそれを解決するために ...]]></description><link>https://zenn.dev/dena/articles/328b6655439845</link><guid isPermaLink="true">https://zenn.dev/dena/articles/328b6655439845</guid><pubDate>Sun, 20 Apr 2025 03:27:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--aSplH9LM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%259E%258B%25E5%25AE%2589%25E5%2585%25A8%25E3%2581%25AB%2520URL%2520%25E3%2582%2592%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258B%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%2520routopia%2520%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%258D%25E3%2581%25A3%25E3%2581%25A1%25E3%2582%2583%25E3%2581%259D%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ViMjg2MTZiZGIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:DeNA%2520Engineers%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFjZDgxZmEzY2QuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>きっちゃそ</dc:creator></item><item><title><![CDATA[Next.js入門４ Hooks]]></title><description><![CDATA[
+ 記事一覧
+
+Next.js × Docker 最速環境構築
+Next.js入門１ ページ追加
+Next.js入門２ コンポーネント
+Next.js入門３ 無記名関数 &amp; イベントハンドラー
+Next.js入門４ Hooks
+
+
+ Hooks
+
+ Hooksとは
+Next.js（React）で使用できる、便利な機能を追加するための特別な関数
+（今回はよく使われるもの3つを紹介）
+
+ useState
+
+page.tsx
+
+"use client";
+
+// useStateをインポート
+import { useState } from "react";
+
+function Pa...]]></description><link>https://zenn.dev/kate0418/articles/a7bc79d206d15b</link><guid isPermaLink="true">https://zenn.dev/kate0418/articles/a7bc79d206d15b</guid><pubDate>Sun, 20 Apr 2025 03:24:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--WvHk7RH5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:Next.js%25E5%2585%25A5%25E9%2596%2580%25EF%25BC%2594%2520Hooks%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2591%25E3%2581%2583%25E3%2581%25A8%25C2%25B0%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzlkMGNjNmI4Y2IuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>けぃと°</dc:creator></item><item><title><![CDATA[Reactで画像がリンク切れかどうかを確認する方法について]]></title><description><![CDATA[こんにちは、ソフトウェアエンジニアのまさぴょんです！
+今回は、Reactで画像がリンク切れかどうかを確認する方法について解説していきます🐱
+
+ onErrorイベントを使う方法📝
+onErrorイベントを使って、次のSampleCodeのように画像のリンク切れ対応をすることができます👍
+// ... existing code ...
+{/* クリックで拡大できる画像 */}
+{aiRes.imageUrl &amp;&amp; (
+  &lt;img
+    src={aiRes.imageUrl}
+    alt={`${aiAgent?.name || "AI"} 生成画像`}
+ ...]]></description><link>https://zenn.dev/manase/articles/acf095d931ddd6</link><guid isPermaLink="true">https://zenn.dev/manase/articles/acf095d931ddd6</guid><pubDate>Sun, 20 Apr 2025 01:37:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6UGB7Chp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%25E3%2581%25A7%25E7%2594%25BB%25E5%2583%258F%25E3%2581%258C%25E3%2583%25AA%25E3%2583%25B3%25E3%2582%25AF%25E5%2588%2587%25E3%2582%258C%25E3%2581%258B%25E3%2581%25A9%25E3%2581%2586%25E3%2581%258B%25E3%2582%2592%25E7%25A2%25BA%25E8%25AA%258D%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25BE%25E3%2581%2595%25E3%2581%25B4%25E3%2582%2587%25E3%2582%2593%2520%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2UwMmM5YTlmMGUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>まさぴょん🐱</dc:creator></item><item><title><![CDATA[Next.js入門３ 無記名関数 & イベントハンドラー]]></title><description><![CDATA[
+ 記事一覧
+
+Next.js × Docker 最速環境構築
+Next.js入門１ ページ追加
+Next.js入門２ コンポーネント
+Next.js入門３ 無記名関数 &amp; イベントハンドラー
+Next.js入門４ Hooks
+
+
+ 無記名関数
+
+ 無記名関数とは
+名前が付けられていない関数
+
+ 宣言型関数（通常）
+function Func() {
+  return "hello world";
+}
+
+ 無記名関数（通常）
+// 無記名関数は代入して使用したり、直接使用する
+() =&gt; {
+  return "hello world";
+}
+
+// 使用例
+const F...]]></description><link>https://zenn.dev/kate0418/articles/e8f060f2befad3</link><guid isPermaLink="true">https://zenn.dev/kate0418/articles/e8f060f2befad3</guid><pubDate>Sat, 19 Apr 2025 18:26:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Y3WnQUQf--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Next.js%25E5%2585%25A5%25E9%2596%2580%25EF%25BC%2593%2520%25E7%2584%25A1%25E8%25A8%2598%25E5%2590%258D%25E9%2596%25A2%25E6%2595%25B0%2520%2526%2520%25E3%2582%25A4%25E3%2583%2599%25E3%2583%25B3%25E3%2583%2588%25E3%2583%258F%25E3%2583%25B3%25E3%2583%2589%25E3%2583%25A9%25E3%2583%25BC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2591%25E3%2581%2583%25E3%2581%25A8%25C2%25B0%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzlkMGNjNmI4Y2IuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>けぃと°</dc:creator></item><item><title><![CDATA[NEXTJS+tailwind+Flowbiteでモーダルを使う]]></title><description><![CDATA[最新バージョンの情報がなかったので記載いたします。tailwind+UIライブラリのFlowbiteでは色々なモーダルを利用することができます。
+https://flowbite.com/docs/components/modal/
+
+ 対象バージョン
+NEXTJS 15.2.3
+tailwind 4.1.4
+Flowbite 3.1.2
+
+ 公式の手順を順番に実施する
+公式の手順の一番下にサンプルと実装例があるので参考に作っていく。HTMLのサンプルを1つのコンポーネントにして、親コンポーネントにイベントハンドラなど実装する。
+
+ モーダル部分
+
+modal.tsx
+export fu...]]></description><link>https://zenn.dev/kaikusakari/articles/b45d73631b5301</link><guid isPermaLink="true">https://zenn.dev/kaikusakari/articles/b45d73631b5301</guid><pubDate>Sat, 19 Apr 2025 17:24:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--kSZxjBQy--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:NEXTJS%252Btailwind%252BFlowbite%25E3%2581%25A7%25E3%2583%25A2%25E3%2583%25BC%25E3%2583%2580%25E3%2583%25AB%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E8%258D%2589%25E8%258B%2585%2520%25E5%25BF%25AB%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzIxNDVmZjk5MzMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>草苅 快</dc:creator></item><item><title><![CDATA[TypeScript製SQLビルダー Kysely で Hono×PostgreSQL 構成の CRUD APIを構築]]></title><description><![CDATA[
+ 概要
+とあるリポジトリでSQL クエリ ビルダーのKyselyを知ったので、今回は色々試してみたいと思います。
+https://kysely.dev/
+Kyselyとは?
+
+Knexに触発されて開発されたTypeScript向けの型安全なSQLクエリビルダーです。
+
+Knexとの違いは?
+
+KnexはJavaScriptで書かれており、TypeScriptのサポートは限定的です。そのため、複雑なクエリでは型推論が難しく、型安全性が保証されない場合があります。一方、KyselyはTypeScriptを第一級でサポートし、データベーススキーマの型情報を活用して、コンパイル時にエラーを検出...]]></description><link>https://zenn.dev/slowhand/articles/6598214b1a738a</link><guid isPermaLink="true">https://zenn.dev/slowhand/articles/6598214b1a738a</guid><pubDate>Sat, 19 Apr 2025 15:37:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--OL-Qsa05--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%25E8%25A3%25BDSQL%25E3%2583%2593%25E3%2583%25AB%25E3%2583%2580%25E3%2583%25BC%2520Kysely%2520%25E3%2581%25A7%2520Hono%25C3%2597PostgreSQL%2520%25E6%25A7%258B%25E6%2588%2590%25E3%2581%25AE%2520CRUD%2520API%25E3%2582%2592%25E6%25A7%258B%25E7%25AF%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:slowhand%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzEwY2YzMGUzMDAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>slowhand</dc:creator></item><item><title><![CDATA[OpenAI Codex CLI のソースコードを読む]]></title><description><![CDATA[Codex のソースコードを調査する機会があったので、どなたかの参考になればと思いコードリーディング時のメモを記事にしました！
+!
+この記事は 2025 年 4 月 19 日時点の Codex CLI のソースコードをもとに書かれています。
+ドキュメントには以下のような記載があり、コードベースが大幅に変わる可能性があります。
+
+This project is under active development and the code will likely change pretty significantly. We'll update this message once that's...]]></description><link>https://zenn.dev/takiko/articles/e2b8065158c8d0</link><guid isPermaLink="true">https://zenn.dev/takiko/articles/e2b8065158c8d0</guid><pubDate>Sat, 19 Apr 2025 13:56:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--kC2Bj_YU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:OpenAI%2520Codex%2520CLI%2520%25E3%2581%25AE%25E3%2582%25BD%25E3%2583%25BC%25E3%2582%25B9%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2582%2592%25E8%25AA%25AD%25E3%2582%2580%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:takigon%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNmZTE0YmI0ZWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takigon</dc:creator></item><item><title><![CDATA[MCP クライアントをTypescriptで利用する]]></title><description><![CDATA[
+ はじめに
+Model Context Protocol (MCP) は、LLM エージェントから外部ツールを容易に呼び出せる仕組みを提供します。
+最近MCPを使っているのですが、コードを書くたびに過去のコードを掘り起こしているので、これを機にまとめておきます。
+ということで本記事では、TypeScript SDK を用いて複数の MCP サーバーを統合し、ツールを実行する手順を具体的なコード例とともに解説します。
+コード全文はGitHubに公開しています。
+https://github.com/M6saw0/mcp-client-typescript
+
+ 動作環境
+
+Node.js ...]]></description><link>https://zenn.dev/mseabass/articles/e75ce635a7138b</link><guid isPermaLink="true">https://zenn.dev/mseabass/articles/e75ce635a7138b</guid><pubDate>Sat, 19 Apr 2025 13:06:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jHTSkbNx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:MCP%2520%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25A4%25E3%2582%25A2%25E3%2583%25B3%25E3%2583%2588%25E3%2582%2592Typescript%25E3%2581%25A7%25E5%2588%25A9%25E7%2594%25A8%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:M%2520Sea%2520Bass%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VjN2NkZGNkYmEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>M Sea Bass</dc:creator></item><item><title><![CDATA[remix-auth-twitchを実装して公開]]></title><description><![CDATA[remix-authのv4によって破壊的変更が加えられているauthenticatorに対応するために、プラグインであるremix-auth-twitchを公開しました。
+github: https://github.com/tkitsunai/remix-auth-twitch
+npm: https://www.npmjs.com/package/@tkitsunai/remix-auth-twitch
+remix-authのv3系統では、認証処理とルーティング処理等が密結合になっていて、認証済ユーザの取得のセッションへの保存、ログアウト、リダイレクトルーティングなどがauthenti...]]></description><link>https://zenn.dev/tkitsunai/articles/8cf1676692b485</link><guid isPermaLink="true">https://zenn.dev/tkitsunai/articles/8cf1676692b485</guid><pubDate>Sat, 19 Apr 2025 12:07:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--napQjWSQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:remix-auth-twitch%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2597%25E3%2581%25A6%25E5%2585%25AC%25E9%2596%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kits%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lKdWt5ZWFocHRYbWlyNVBoTTBCT2xzRXhMU1JORjd5U1NMY3pMTUE9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kits</dc:creator></item><item><title><![CDATA[Gemini で型安全にレスポンスを扱うユーティリティを Valibot を使って実装してみる]]></title><description><![CDATA[早い・安い・うまい（？）な gemini-2.0-flashですが、gemini は response format に JSON が適用されていないため、自前でパースしてあげる必要があります。（違ったらすみません）
+今回は、valibot で型安全にパースするユーティリティを実装してみます。
+
+ 方針
+以下の方針で実装していきます。
+
+レスポンスのフォーマットを渡す
+a. 今回は json or text で実装
+プロンプトを gemini に投げる
+レスポンスから不要なマークダウンなどを取り除く
+取り除いたら valibot でパース
+レスポンスを返す
+
+
+ 型定義
+response...]]></description><link>https://zenn.dev/vanellope/articles/1dc37bc50bd48a</link><guid isPermaLink="true">https://zenn.dev/vanellope/articles/1dc37bc50bd48a</guid><pubDate>Sat, 19 Apr 2025 09:26:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--rEKGVR8w--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Gemini%2520%25E3%2581%25A7%25E5%259E%258B%25E5%25AE%2589%25E5%2585%25A8%25E3%2581%25AB%25E3%2583%25AC%25E3%2582%25B9%25E3%2583%259D%25E3%2583%25B3%25E3%2582%25B9%25E3%2582%2592%25E6%2589%25B1%25E3%2581%2586%25E3%2583%25A6%25E3%2583%25BC%25E3%2583%2586%25E3%2582%25A3%25E3%2583%25AA%25E3%2583%2586%25E3%2582%25A3%25E3%2582%2592%2520Valibot%2520%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:marromugi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQyOWZmOTQwZmIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>marromugi</dc:creator></item><item><title><![CDATA[Next.js入門２ コンポーネント]]></title><description><![CDATA[
+ 記事一覧
+
+Next.js × Docker 最速環境構築
+Next.js入門１ ページ追加
+Next.js入門２ コンポーネント
+Next.js入門３ 無記名関数 &amp; イベントハンドラー
+Next.js入門４ Hooks
+
+
+ コンポーネント
+
+ コンポーネントとは
+
+UIの一部を切り出したもの
+（複数箇所で使い回すことができる）
+
+
+ ファイル作成
+
+今回はボタン用のコンポーネントを作る
+
+
+
+components/Button.tsxを作成
+
+.
+├── next-app
+│   ├── app
+│   └── components
+│       └── Button...]]></description><link>https://zenn.dev/kate0418/articles/4504fa603d368b</link><guid isPermaLink="true">https://zenn.dev/kate0418/articles/4504fa603d368b</guid><pubDate>Sat, 19 Apr 2025 07:29:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2L-Dtim1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Next.js%25E5%2585%25A5%25E9%2596%2580%25EF%25BC%2592%2520%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%259D%25E3%2583%25BC%25E3%2583%258D%25E3%2583%25B3%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2591%25E3%2581%2583%25E3%2581%25A8%25C2%25B0%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzlkMGNjNmI4Y2IuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>けぃと°</dc:creator></item><item><title><![CDATA[初心者がTypeScriptで学ぶasync/await]]></title><description><![CDATA[
+ はじめに
+現代のWeb開発において、非同期処理は避けて通れない重要な概念です。APIからのデータ取得、ファイルの読み書き、タイマー処理など、時間がかかる操作を行う際に、アプリケーションの応答性を維持するために非同期処理が必要となります。
+TypeScriptにおける非同期処理の実装方法はいくつかありますが、中でもasync/awaitは読みやすく、保守性の高いコードを書くための強力な機能です。この記事では、非同期処理の基本からTypeScriptにおけるasync/awaitの使い方、そして実践的なパターンまでを初心者向けに解説します。
+この記事を読むことで、次のことが理解できます！...]]></description><link>https://zenn.dev/umibudou/articles/19237538b2cab1</link><guid isPermaLink="true">https://zenn.dev/umibudou/articles/19237538b2cab1</guid><pubDate>Sat, 19 Apr 2025 06:05:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xYYa1_an--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E3%2581%258CTypeScript%25E3%2581%25A7%25E5%25AD%25A6%25E3%2581%25B6async%252Fawait%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Umibudou%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvdS5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Umibudou</dc:creator></item><item><title><![CDATA[JavaScriptで巨大な静的配列を実装するときはswitchよりもarrayを使ったほうが普通にはやい]]></title><description><![CDATA[
+ 動機
+JSで事前に値が決まっている巨大な静的配列を実装するときに、arrayじゃなくてswitchの方が早いと思ったのでベンチをとった。DenoでやったのでV8のベンチになる。
+
+ 実験
+ベンチマークを作るスクリプト。
+await Deno.remove("array_switch.ts");
+const Ns = [100, 1000, 10000];
+for (const N of Ns) {
+  const array_banch: string = `const arr${N} = [${Array.from(
+    { length: N },
+    (_, i) =&...]]></description><link>https://zenn.dev/arark/articles/ba87c78115048a</link><guid isPermaLink="true">https://zenn.dev/arark/articles/ba87c78115048a</guid><pubDate>Sat, 19 Apr 2025 01:58:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--35dBpvhL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25E3%2581%25A7%25E5%25B7%25A8%25E5%25A4%25A7%25E3%2581%25AA%25E9%259D%2599%25E7%259A%2584%25E9%2585%258D%25E5%2588%2597%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2599%25E3%2582%258B%25E3%2581%25A8%25E3%2581%258D%25E3%2581%25AFswitch%25E3%2582%2588%25E3%2582%258A%25E3%2582%2582array%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%259F%25E3%2581%25BB%25E3%2581%2586%25E3%2581%258C%25E6%2599%25AE%25E9%2580%259A%25E3%2581%25AB%25E3%2581%25AF%25E3%2582%2584%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:arark%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZiNzQ2M2E1ZmQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>arark</dc:creator></item><item><title><![CDATA[クリーンアーキテクチャについて]]></title><description><![CDATA[
+ はじめに
+はじめまして。現在大学4年生の とうふ です。
+これまでバイトやインターンで Web アプリケーション開発に携わる中で、次第に「設計の大切さ」を強く感じるようになりました。
+2社のインターンを継続しており、現在まで開発経験を積んできましたが、どちらの現場でもクリーンアーキテクチャが採用されており、自然とその設計手法に触れる機会がありました。
+最近、同期のエンジニアから「クリーンアーキテクチャって、ざっくり言うとどんな設計なの？」と聞かれる場面がありました。
+そのとき、設計に馴染みのない人にもわかりやすく説明することが意外と難しく、自分の理解を整理し直したいと感じたのが、この...]]></description><link>https://zenn.dev/dem3860/articles/b61742b6beb1e9</link><guid isPermaLink="true">https://zenn.dev/dem3860/articles/b61742b6beb1e9</guid><pubDate>Fri, 18 Apr 2025 12:53:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0b-EAYAT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%25BC%25E3%2583%25B3%25E3%2582%25A2%25E3%2583%25BC%25E3%2582%25AD%25E3%2583%2586%25E3%2582%25AF%25E3%2583%2581%25E3%2583%25A3%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A8%25E3%2581%2586%25E3%2581%25B5%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY5M2U5NTg3ZWYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>とうふ</dc:creator></item><item><title><![CDATA[モジュールとスクリプト【個人学習まとめ】]]></title><description><![CDATA[
+ モジュール
+プログラムをモジュールという単位で分割することができます。
+ソースコードの量が多くなってくると、1 つのファイルだけて管理することは難しくなります。
+例えば、
+
+名前が被ってしまうこと
+1 つの変更が他のどの部分に影響があるか見つけることが困難であること
+などの問題があります。
+
+この問題を解決するために、モジュールと呼ばれる仕組みがあります。
+
+ 利用方法
+利用するには 2 種類のキーワードが必要になります。importとexportです。
+まずはexportの例です。
+
+ clss.ts
+const PI = 3.14;
+
+function square(x: num...]]></description><link>https://zenn.dev/o0rororo0o/articles/d0a7f376c3739f</link><guid isPermaLink="true">https://zenn.dev/o0rororo0o/articles/d0a7f376c3739f</guid><pubDate>Fri, 18 Apr 2025 11:22:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GNUmiuaP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%25A2%25E3%2582%25B8%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%25A8%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2583%2588%25E3%2580%2590%25E5%2580%258B%25E4%25BA%25BA%25E5%25AD%25A6%25E7%25BF%2592%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%258D%25E3%2582%258D%25E3%2582%258D%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ2ZTZjOWM4YmMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ろろろ</dc:creator></item><item><title><![CDATA[「Health Log App」開発記：主観を記録する体調ログアプリを作った理由と工夫点]]></title><description><![CDATA[はじめに
+「自分のための体調ログ」をつけたくて、React + Firebaseでアプリを作りました。
+今回紹介するHealth Log Appは、以下のようなことができます：
+•	体調や薬の記録をその場でメモ
+•	花粉レベルの記録
+•	Markdownで出力 → Obsidianなどにコピペ可能
+•	ダークモード／スマホUIにも対応
+⸻
+技術構成
+•	React（Create React App）
+•	TypeScript
+•	Firebase Firestore
+•	Vercel
+•	React Calendar
+⸻
+こだわったポイント
+•	UIは「スマホで記録しやすい」を優先：ボタ...]]></description><link>https://zenn.dev/keinet/articles/80986f58475b1c</link><guid isPermaLink="true">https://zenn.dev/keinet/articles/80986f58475b1c</guid><pubDate>Fri, 18 Apr 2025 01:53:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--pr6KHpob--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%258CHealth%2520Log%2520App%25E3%2580%258D%25E9%2596%258B%25E7%2599%25BA%25E8%25A8%2598%25EF%25BC%259A%25E4%25B8%25BB%25E8%25A6%25B3%25E3%2582%2592%25E8%25A8%2598%25E9%258C%25B2%25E3%2581%2599%25E3%2582%258B%25E4%25BD%2593%25E8%25AA%25BF%25E3%2583%25AD%25E3%2582%25B0%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%25E7%2590%2586%25E7%2594%25B1%25E3%2581%25A8%25E5%25B7%25A5%25E5%25A4%25AB%25E7%2582%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kei%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSWZkYU9kcVJvaGQwNHlENi1JSks2c1JkZEpRV3Jycm4zR1RfeGNQZThTWDJYclo2ND1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kei</dc:creator></item><item><title><![CDATA[PipedreamにおけるBlueskyへのリンクカード付き投稿]]></title><description><![CDATA[!
+この記事は、Xへのポストを復旧させた記事と強く関連しています。
+最初の導入部分と「そもそもPipedreamとは」については、向こうを参照してください。
+
+
+ PipedreamにおけるBluesky連携
+Blueskyについては標準でアカウント連携機能がついています。
+ユーザー名とアプリパスワードの組み合わせを登録することで、組み込みのアクションを簡単に利用できます。
+
+単純なテキスト投稿をするだけならCreate Postを利用すれば事足りるので、これで十分な人には便利です。
+しかし、アクションの動作設定まで進むとはっきりするのですが、本当にテキストを投稿する機能しかありません。...]]></description><link>https://zenn.dev/attakei/articles/pipedream-actions-bluesky-linkcard</link><guid isPermaLink="true">https://zenn.dev/attakei/articles/pipedream-actions-bluesky-linkcard</guid><pubDate>Fri, 18 Apr 2025 01:30:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4tSIrtQL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Pipedream%25E3%2581%25AB%25E3%2581%258A%25E3%2581%2591%25E3%2582%258BBluesky%25E3%2581%25B8%25E3%2581%25AE%25E3%2583%25AA%25E3%2583%25B3%25E3%2582%25AF%25E3%2582%25AB%25E3%2583%25BC%25E3%2583%2589%25E4%25BB%2598%25E3%2581%258D%25E6%258A%2595%25E7%25A8%25BF%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Takei%2520Kazuya%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pKSXpPS3RSeThDU0ZoaWpHeklQSWk1Mkl2ZHRwVTB5aE1tTWJhbEE9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Takei Kazuya</dc:creator></item><item><title><![CDATA[Pipedreamで再びXにポスト出来るようにする]]></title><description><![CDATA[Zennでの記事更新や自分のサイト更新などで、通知目的でSNSに発信するというのはよくやる手法です。
+最近では、自分も下記の記事を書いて、XとBlueskyで発信しています。
+https://zenn.dev/attakei/articles/compile-sphinx-revealjs-theme-3-2
+https://x.com/attakei/status/1912490168201732268
+https://bsky.app/profile/attakei.net/post/3lmwnbnoesi25
+[1]
+ところで、SNSへの発信をどのように行っているでしょうか？
+様々...]]></description><link>https://zenn.dev/attakei/articles/pipedream-actions-x-tweet</link><guid isPermaLink="true">https://zenn.dev/attakei/articles/pipedream-actions-x-tweet</guid><pubDate>Fri, 18 Apr 2025 01:30:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hKni7KwJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Pipedream%25E3%2581%25A7%25E5%2586%258D%25E3%2581%25B3X%25E3%2581%25AB%25E3%2583%259D%25E3%2582%25B9%25E3%2583%2588%25E5%2587%25BA%25E6%259D%25A5%25E3%2582%258B%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Takei%2520Kazuya%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pKSXpPS3RSeThDU0ZoaWpHeklQSWk1Mkl2ZHRwVTB5aE1tTWJhbEE9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Takei Kazuya</dc:creator></item><item><title><![CDATA[TypeScript 狂信者のための ESLint rules 〜 null/undefined check 編]]></title><description><![CDATA[
+ 目的
+
+TypeScript は非常によい言語だが、残念なことに null と undefined という空値を表す値が2つもある。
+これらを巡って血で血を洗う宗教戦争が続いているが、今ここで争いに終止符を打つ。
+長年欲しかった lint rule を ChatGPT 神が啓示してくれたので福音伝道する。
+
+
+ TL;DR
+全て a == null または a != null で統一しなさい。
+以下を eslintrc に書き込むだけ。 ("eslint": "8.57.0" 以上で動作確認済み)
+"no-restricted-syntax": [
+  {
+    "message"...]]></description><link>https://zenn.dev/arx8/articles/08efb3889a482f</link><guid isPermaLink="true">https://zenn.dev/arx8/articles/08efb3889a482f</guid><pubDate>Thu, 17 Apr 2025 23:11:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--zuasS0oN--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%2520%25E7%258B%2582%25E4%25BF%25A1%25E8%2580%2585%25E3%2581%25AE%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%2520ESLint%2520rules%2520%25E3%2580%259C%2520null%252Fundefined%2520check%2520%25E7%25B7%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:arx8%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQwOWNlNDhjNzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>arx8</dc:creator></item></channel></rss>
