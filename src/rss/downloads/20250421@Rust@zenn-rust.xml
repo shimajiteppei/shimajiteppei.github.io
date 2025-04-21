@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Rust」のフィード]]></title><description><![CDATA[Zennのトピック「Rust」のRSSフィードです]]></description><link>https://zenn.dev/topics/rust</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ba09661577.png</url><title>Zennの「Rust」のフィード</title><link>https://zenn.dev/topics/rust</link></image><generator>zenn.dev</generator><lastBuildDate>Mon, 21 Apr 2025 08:15:43 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/rust/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[RustのOptionとResultを使いこなす]]></title><description><![CDATA[
+ はじめに
+Rust では値の有無を表す Option&lt;T&gt; と、成功 / 失敗を表す Result&lt;T,&nbsp;E&gt; が標準で用意されています。本稿では match を最小限に抑え、メソッドチェーンや演算子を駆使してエレガントに扱うための実践テクニックを解説します。
+
+ Option&lt;T&gt; 基礎
+Option&lt;T&gt; は「値がある / ない」を表す列挙型です。
+enum Option&lt;T&gt; { Some(T), None }
+
+ Option&lt;T&gt; を使いこなす
+
+ 値がある時だけ取り出す — if let
+i...]]></description><link>https://zenn.dev/harutin/articles/3bba8889e3b6a5</link><guid isPermaLink="true">https://zenn.dev/harutin/articles/3bba8889e3b6a5</guid><pubDate>Mon, 21 Apr 2025 06:35:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bJXDGFge--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25AEOption%25E3%2581%25A8Result%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2584%25E3%2581%2593%25E3%2581%25AA%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%258F%25E3%2583%25AB%25E3%2581%25A1%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTDhfQWxsbUEzdUNWSDl4b2dCaGR6RWNjXzdyUm1zUWhjOEZDVWRwU2JlNGs1a0RlND1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ハルちん</dc:creator></item><item><title><![CDATA[JetBrainsのAIであるJunieに記事を作らせてみた (Rustで始めるWebAssembly入門)]]></title><description><![CDATA[
+ この記事について
+この記事は、私のZennの投稿を管理しているリポジトリにおいて、JetBrainsのAIであるJunieに以下の指示をして生成したものです。
+https://www.jetbrains.com/ja-jp/junie/
+このリポジトリはzennという技術ブログプラットフォームの記事データです。package.jsonとarticlesディレクトリにある既存の記事を読み、新しい記事を1つ書いてみてください。その際、技術的にニッチで特定の読者に強く紐づく内容でありつつ、既存の記事から得られる人物像や文体に即した内容であり、かつ正確性を重視して記載してください。
+
+私が行...]]></description><link>https://zenn.dev/miketako3/articles/abcdef0123456</link><guid isPermaLink="true">https://zenn.dev/miketako3/articles/abcdef0123456</guid><pubDate>Mon, 21 Apr 2025 03:30:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qyBs_8SA--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JetBrains%25E3%2581%25AEAI%25E3%2581%25A7%25E3%2581%2582%25E3%2582%258BJunie%25E3%2581%25AB%25E8%25A8%2598%25E4%25BA%258B%25E3%2582%2592%25E4%25BD%259C%25E3%2582%2589%25E3%2581%259B%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2520%2528Rust%25E3%2581%25A7%25E5%25A7%258B%25E3%2582%2581%25E3%2582%258BWebAssembly%25E5%2585%25A5%25E9%2596%2580%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25BF%25E3%2581%2591%25E3%2581%259F%25E3%2581%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJmMmZjNTY0MjEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>みけたこ</dc:creator></item><item><title><![CDATA[Rustの所有権と借用の仕組みを解説]]></title><description><![CDATA[
+
+ 前書き
+Rust において、所有権とはメモリを管理するための仕組みであり、ある時点でどの変数がメモリの制御権を持っているかを決定します。Rust はコンパイル時に所有権の関係をチェックし、プログラマーに対して変数をいつ使用でき、いつメモリを解放する必要があるかを知らせます。
+すべての値には所有者（owner）が存在し、任意の時点で一つの値には一人の所有者しか存在できません。所有者がスコープを離れると、それが所有していたメモリは自動的に解放されます。既に解放されたメモリにアクセスしようとすると、Rust はコンパイルを拒否します。
+Rust における所有権の仕組みは、借用（borro...]]></description><link>https://zenn.dev/leap_adam/articles/5242011ce9e83f</link><guid isPermaLink="true">https://zenn.dev/leap_adam/articles/5242011ce9e83f</guid><pubDate>Sun, 20 Apr 2025 19:17:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--mRbT0rrM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25AE%25E6%2589%2580%25E6%259C%2589%25E6%25A8%25A9%25E3%2581%25A8%25E5%2580%259F%25E7%2594%25A8%25E3%2581%25AE%25E4%25BB%2595%25E7%25B5%2584%25E3%2581%25BF%25E3%2582%2592%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Adam%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZhZDIzOTdlZTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Adam</dc:creator></item><item><title><![CDATA[Cargo Lambda のログを JSON(Bunyan format) で出力する]]></title><description><![CDATA[
+ 内容
+出力するログのフォーマットは JSON で出力すると便利なことが多い。
+CloudWatchLogs なら Subscription filter を使って一定以上の Log Level のもののみを転送して通知するなどがやりやすいためである。
+Bunyan format
+{
+  "v": 0,
+  "name": "lambda",
+  "msg": "information",
+  "level": 30,
+  "hostname": "Workstation",
+  "pid": 4574,
+  "time": "2025-04-20T17:21:57.31645104Z...]]></description><link>https://zenn.dev/creanciel/articles/cargo-lambda-bunyan</link><guid isPermaLink="true">https://zenn.dev/creanciel/articles/cargo-lambda-bunyan</guid><pubDate>Sun, 20 Apr 2025 18:30:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4ZYS313G--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Cargo%2520Lambda%2520%25E3%2581%25AE%25E3%2583%25AD%25E3%2582%25B0%25E3%2582%2592%2520JSON%2528Bunyan%2520format%2529%2520%25E3%2581%25A7%25E5%2587%25BA%25E5%258A%259B%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Creanciel%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzIwOWFkYmIxNjAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Creanciel</dc:creator></item><item><title><![CDATA[ABC402:Rustで解く！問題解説]]></title><description><![CDATA[AtCoder Beginner Contest 402のA~E問題をRustで解いた際の解法をまとめました。
+
+ A問題
+問題
+https://atcoder.jp/contests/abc402/tasks/abc402_a
+解説
+与えられた文字列 S からASCIIの大文字(A~Z)のみを抽出して、それらを連結した文字列を出力します。
+コード
+
+abc402a.rs
+use proconio::{input, marker::Chars};
+use itertools::Itertools;
+fn main() {
+    // 入力
+    input!{
+        s: ...]]></description><link>https://zenn.dev/nakst_hide/articles/b2e2bcbdf511e8</link><guid isPermaLink="true">https://zenn.dev/nakst_hide/articles/b2e2bcbdf511e8</guid><pubDate>Sun, 20 Apr 2025 11:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--uIj0wN_d--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ABC402%253ARust%25E3%2581%25A7%25E8%25A7%25A3%25E3%2581%258F%25EF%25BC%2581%25E5%2595%258F%25E9%25A1%258C%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nakahide%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YkMxNEpSQnNET01hTGcxTVRQWGNTWS1qYlNQbFRMQTN3ZU9Sdz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nakahide</dc:creator></item><item><title><![CDATA[Rustのシャドーイング]]></title><description><![CDATA[
+ Rustのシャドーイング：JavaScriptプログラマーが驚く変数の扱い方
+
+ はじめに
+普段JavaScriptを書いてる私が、Rustの勉強を始めて、多くの概念が新しく見えますが、その中でも「変数のシャドーイング」が新しい概念だったので、この記事を起こしました。
+この記事では、Rustの変数シャドウイングの基本から、JavaScriptプログラマーが驚くポイント、そして実際の使い方までを解説します。
+
+ シャドーイングの基本概念
+
+ シャドーイングとは何か
+シャドーイングとは、同じスコープ内で同じ変数名を再度宣言することで、以前の変数を「影」に隠す（シャドウする）機能です。Ru...]]></description><link>https://zenn.dev/nisitin/articles/54f840e37942fd</link><guid isPermaLink="true">https://zenn.dev/nisitin/articles/54f840e37942fd</guid><pubDate>Sun, 20 Apr 2025 04:12:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--DCZtXX1j--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25AE%25E3%2582%25B7%25E3%2583%25A3%25E3%2583%2589%25E3%2583%25BC%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nishitin%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ2YWFkNTFhYzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nishitin</dc:creator></item><item><title><![CDATA[Rustで計算グラフを実装中]]></title><description><![CDATA[AIの勉強を始めたので「ゼロからつくるDeep Learning（以降、ゼロつく）」を読みながら、Rustで計算グラフを実装することにしました。
+
+ 大枠ではこんな感じです。
+まずは計算グラフのノードを用意。
+struct Node {
+    parents: Vec&lt;Rc&lt;RefCell&lt;FunctionNode&gt;&gt;&gt;,
+    data: Tensor,
+    //　逆伝播まで値がないのでOptionに包む
+    grad: Option&lt;Tensor&gt;,
+}
+それから、ノードの親としてFunctionNodeを用意しました。
+s...]]></description><link>https://zenn.dev/nium_dev/articles/4023149300396d</link><guid isPermaLink="true">https://zenn.dev/nium_dev/articles/4023149300396d</guid><pubDate>Sat, 19 Apr 2025 07:28:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wD4bMrmT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25A7%25E8%25A8%2588%25E7%25AE%2597%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%2595%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E4%25B8%25AD%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nium_dev%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSnZOZXNmOS1wc0x3b2VKSlNFUXRHbVdoU1dyT3M1anRaVmRyRGZtZ0FMZlpHNEJnPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nium_dev</dc:creator></item><item><title><![CDATA[Rust+terraform+cloudrunでHello world]]></title><description><![CDATA[
+ 概要
+SAM(lambda)でRustの処理を組み込んだ経験はあるけど、cloudrunとかで試したことがなかったのと、terraformと組み合わせようということで、作ってみました。
+lambdaをデプロイする際にクロスコンパイル周りで過去に苦戦したことがあるのですが、同様にcloudrunでもMacでハマったところがあるので、そちらを含めて備忘録としてまとめます。今回はMacで開発を進めていますので、ご容赦ください。
+
+ 開発手順
+
+ 構成
+ファイル構成は下記になります。
+.
+├── Cargo.lock
+├── Cargo.toml
+├── Dockerfile
+├── REA...]]></description><link>https://zenn.dev/bamboo_nova/articles/7169cb3163b7d1</link><guid isPermaLink="true">https://zenn.dev/bamboo_nova/articles/7169cb3163b7d1</guid><pubDate>Sat, 19 Apr 2025 04:30:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--sWfR99DH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:Rust%252Bterraform%252Bcloudrun%25E3%2581%25A7Hello%2520world%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E8%25A1%2580%25E5%25A8%2581%25E8%258F%25AF%25E6%2588%2591%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZiMmY0NjM5OTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>血威華我</dc:creator></item><item><title><![CDATA[Rustを始めました]]></title><description><![CDATA[
+ Rustを始めた
+この春からRustを始めました。（まだ一月経ってないかな）
+「そのうち技術ブログなるものを書こう」と思っていて、「そのうち」っていつくるんだろう？って感じだったのですが、「技術ブログは自分用の公開メモだ」のような言説を見かけて、「ならば」と思い、書き残すことにしました。
+あとはZenn見ているとすごい記事ばっかりで「私のようなものの記事など…」と思ってしまうので、「他の入門者のためにハードルを下げよう！」というのもあり。
+
+
+ Rust初心者のRustへの雑感
+私はほぼほぼPHPしか経験がないので、Rustのあれこれを学ぶのがとても楽しかったです。
+所有権とか参照と...]]></description><link>https://zenn.dev/nium_dev/articles/2ca869bc32d5a7</link><guid isPermaLink="true">https://zenn.dev/nium_dev/articles/2ca869bc32d5a7</guid><pubDate>Fri, 18 Apr 2025 21:13:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0Hs0cWYO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2582%2592%25E5%25A7%258B%25E3%2582%2581%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nium_dev%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSnZOZXNmOS1wc0x3b2VKSlNFUXRHbVdoU1dyT3M1anRaVmRyRGZtZ0FMZlpHNEJnPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nium_dev</dc:creator></item><item><title><![CDATA[Rust並行処理：非同期ランタイムの適切な使い方]]></title><description><![CDATA[
+Rust の非同期ランタイムはさまざまな場面で非常に有用であり、特に高い並行性と高性能が求められる I/O 集約型のアプリケーションにおいて顕著です。以下は、Rust の非同期ランタイムがよく使用されるシナリオのいくつかです。
+
+ ネットワークプログラミング
+
+
+Web サーバーおよびクライアント： 多数の同時接続を処理することは Web サーバーの主要な要件です。非同期ランタイムを使用することで、各接続ごとにスレッドを生成することなく、数千から数万の同時リクエストを効率的に処理できます。Tokio や async-std のようなランタイムは、高性能な Web アプリケーションの構築...]]></description><link>https://zenn.dev/leap_adam/articles/72c76fec66cd90</link><guid isPermaLink="true">https://zenn.dev/leap_adam/articles/72c76fec66cd90</guid><pubDate>Fri, 18 Apr 2025 18:56:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--K5XJjVtS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E4%25B8%25A6%25E8%25A1%258C%25E5%2587%25A6%25E7%2590%2586%25EF%25BC%259A%25E9%259D%259E%25E5%2590%258C%25E6%259C%259F%25E3%2583%25A9%25E3%2583%25B3%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25A0%25E3%2581%25AE%25E9%2581%25A9%25E5%2588%2587%25E3%2581%25AA%25E4%25BD%25BF%25E3%2581%2584%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Adam%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZhZDIzOTdlZTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Adam</dc:creator></item><item><title><![CDATA[RustでFFmpegフィルターを簡単に実装：音声・動画処理をシンプルにする新手法]]></title><description><![CDATA[
+
+ はじめに
+
+FFmpegは、動画や音声のエンコード、デコード、トランスコード、フィルター処理に広く使われる強力なツールです。しかし、RustプロジェクトでFFmpegのC APIを直接使うと、メモリ管理の複雑さやセキュリティリスクに直面することがあります。特にカスタムフィルターを実装する場合、従来の方法ではCコードを書き、FFmpegの内部構造を深く理解する必要があり、多くの開発者にとってハードルが高いです。Rustのメモリ安全性とシンプルさを利用して、ez-ffmpegライブラリを使えば、純粋なRustコードでFFmpegのカスタムフィルターを実装でき、開発の難易度を大幅に下げる...]]></description><link>https://zenn.dev/yeauty/articles/dd2361213ffc09</link><guid isPermaLink="true">https://zenn.dev/yeauty/articles/dd2361213ffc09</guid><pubDate>Fri, 18 Apr 2025 03:00:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--E4OYiidZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25A7FFmpeg%25E3%2583%2595%25E3%2582%25A3%25E3%2583%25AB%25E3%2582%25BF%25E3%2583%25BC%25E3%2582%2592%25E7%25B0%25A1%25E5%258D%2598%25E3%2581%25AB%25E5%25AE%259F%25E8%25A3%2585%25EF%25BC%259A%25E9%259F%25B3%25E5%25A3%25B0%25E3%2583%25BB%25E5%258B%2595%25E7%2594%25BB%25E5%2587%25A6%25E7%2590%2586%25E3%2582%2592%25E3%2582%25B7%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AB%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B0%25E6%2589%258B%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yeauty%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFlMjMwYTI3Y2MuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yeauty</dc:creator></item><item><title><![CDATA[Rustの並行処理：非同期で陥りがちな落とし穴]]></title><description><![CDATA[
+Rust での非同期実行には一定の複雑さがあり、プログラミング中にいくつかのミスを犯しやすいです。この記事では、Rust の非同期ランタイムでよくある落とし穴について紹介します。
+
+ 意図しない同期ブロッキング
+非同期コードの中で意図せず同期ブロッキング操作を行うことは、非同期プログラミングにおける重要な落とし穴の一つです。これは非同期プログラミングの利点を損ない、パフォーマンスのボトルネックとなります。以下はよくあるシナリオです：
+
+非同期関数内でブロッキング I/O 操作を使う：例えば、async fn内で標準のstd::fs::File::openやstd::net::TcpSt...]]></description><link>https://zenn.dev/leap_adam/articles/71a0792375b352</link><guid isPermaLink="true">https://zenn.dev/leap_adam/articles/71a0792375b352</guid><pubDate>Thu, 17 Apr 2025 18:45:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--n_ZIkrbW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25AE%25E4%25B8%25A6%25E8%25A1%258C%25E5%2587%25A6%25E7%2590%2586%25EF%25BC%259A%25E9%259D%259E%25E5%2590%258C%25E6%259C%259F%25E3%2581%25A7%25E9%2599%25A5%25E3%2582%258A%25E3%2581%258C%25E3%2581%25A1%25E3%2581%25AA%25E8%2590%25BD%25E3%2581%25A8%25E3%2581%2597%25E7%25A9%25B4%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Adam%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZhZDIzOTdlZTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Adam</dc:creator></item><item><title><![CDATA[Voisona talk等で出力した音声ファイルのタイトルをセリフにするツールをRustで書いた話]]></title><description><![CDATA[voisona Talk等で出力された音声ファイルの名前を、同名のセリフを含むテキストファイルを参照して変換するツールをRustで書いてみたのでそれの紹介です。ほとんどREADMEのコピペかも。
+ソースコードは今見ても綺麗とは言えないですが動作はちゃんとしてます。
+https://github.com/Uliboooo/track2line
+
+ GUIもあります
+GUI版を作ってみました
+https://github.com/Uliboooo/track2line_gui
+まだエラーハンドリングもしてないですが、一応動きます。
+
+ Lates Release
+https://github...]]></description><link>https://zenn.dev/uliboooo/articles/5a1cf3772bf9c0</link><guid isPermaLink="true">https://zenn.dev/uliboooo/articles/5a1cf3772bf9c0</guid><pubDate>Thu, 17 Apr 2025 02:20:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--mzsOlmSu--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Voisona%2520talk%25E7%25AD%2589%25E3%2581%25A7%25E5%2587%25BA%25E5%258A%259B%25E3%2581%2597%25E3%2581%259F%25E9%259F%25B3%25E5%25A3%25B0%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2581%25AE%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%2588%25E3%2583%25AB%25E3%2582%2592%25E3%2582%25BB%25E3%2583%25AA%25E3%2583%2595%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%25E3%2582%2592Rust%25E3%2581%25A7%25E6%259B%25B8%25E3%2581%2584%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2586%25E3%2582%258A%25E3%2581%25BC%25E3%2581%2586%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY0MTFjYWRhM2YuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>うりぼう</dc:creator></item><item><title><![CDATA[作って学ぶブラウザの仕組み　第３章]]></title><description><![CDATA[
+ HTTP とは
+いろいろ書いてあるが、みなさんわかると思うのでスキップ。。。
+
+ HTTPの構成
+HTTPメッセージは大きく３つの要素に分けることができる。
+
+スタートライン
+ヘッダ
+ボディ
+
+スタートラインはリクエストの場合はリクエストライン、レスポンスの場合はステータスラインと呼ばれる。
+リクエストラインはよくみられる
+GET /index.html HTTP/1.1
+レスポンスラインは
+HTTP/1.1 200 OK
+ヘッダはリクエストとレスポンスの２行目以降、改行だけの行までの部分。
+HTTP/1.1からは１つのIPアドレスとポート番号で複数のWebサイトを運用しているときの...]]></description><link>https://zenn.dev/greenteabiscuit/articles/8d889cedc7da76</link><guid isPermaLink="true">https://zenn.dev/greenteabiscuit/articles/8d889cedc7da76</guid><pubDate>Wed, 16 Apr 2025 12:54:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--t1l8q3pH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E5%25AD%25A6%25E3%2581%25B6%25E3%2583%2596%25E3%2583%25A9%25E3%2582%25A6%25E3%2582%25B6%25E3%2581%25AE%25E4%25BB%2595%25E7%25B5%2584%25E3%2581%25BF%25E3%2580%2580%25E7%25AC%25AC%25EF%25BC%2593%25E7%25AB%25A0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:greenteabiscuit%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvZy5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>greenteabiscuit</dc:creator></item><item><title><![CDATA[3分でマスター！RustでFFmpegを使って動画解像度を簡単に変更する方法]]></title><description><![CDATA[
+
+ はじめに
+
+動画処理の現場では、解像度の調整がどうしても必要な場面がたくさんありますよね。たとえば、スマホやタブレット、テレビなど、さまざまなデバイスに動画を合わせたり、ストレージやネットワークの負担を減らすために動画サイズを小さくしたり…。でも、伝統的なFFmpegのコマンドラインツールって、確かにすごい力を持っているけれど、パラメータが複雑でちょっと扱いにくいと思いませんか？特にRustが大好きな開発者の皆さんなら、プロジェクトでコマンドラインを直接呼び出すのは面倒だし、エラーも出やすいと感じているはず。そんなお悩みを、この記事で一緒にスッキリ解決しましょう！Rustを使って、...]]></description><link>https://zenn.dev/yeauty/articles/e3780271e37a06</link><guid isPermaLink="true">https://zenn.dev/yeauty/articles/e3780271e37a06</guid><pubDate>Wed, 16 Apr 2025 02:49:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--AvvFx6Kp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:3%25E5%2588%2586%25E3%2581%25A7%25E3%2583%259E%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%25BC%25EF%25BC%2581Rust%25E3%2581%25A7FFmpeg%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E5%258B%2595%25E7%2594%25BB%25E8%25A7%25A3%25E5%2583%258F%25E5%25BA%25A6%25E3%2582%2592%25E7%25B0%25A1%25E5%258D%2598%25E3%2581%25AB%25E5%25A4%2589%25E6%259B%25B4%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yeauty%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFlMjMwYTI3Y2MuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yeauty</dc:creator></item><item><title><![CDATA[#88　Getting Started with Writing a Smart Contract on Solana]]></title><description><![CDATA[
+ Introduction
+Solana, known for its high throughput and low latency, is rapidly becoming a preferred blockchain for decentralized applications (dApps). Writing a smart contract on Solana is both a rewarding and challenging experience due to its unique programming model. This blog will guide you ...]]></description><link>https://zenn.dev/nxted_sapporo/articles/f1a08a3ac788ed</link><guid isPermaLink="true">https://zenn.dev/nxted_sapporo/articles/f1a08a3ac788ed</guid><pubDate>Tue, 15 Apr 2025 12:23:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--nWvHR1Bl--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%252388%25E3%2580%2580Getting%2520Started%2520with%2520Writing%2520a%2520Smart%2520Contract%2520on%2520Solana%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:NXTEDCo.%252C%2520Ltd.%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBmZjQzOTVhYzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>NXTEDCo., Ltd.</dc:creator></item><item><title><![CDATA[#81 Exploring Solana Actions]]></title><description><![CDATA[
+ Introduction
+Recently, Solana announced the Solana Actions and Blinks. These new features promise to enhance the user experience and broaden the capabilities of decentralized applications (dApps) on the Solana network. In this blog, we’ll delve into what Actions and Blinks are, how they work.
+
+...]]></description><link>https://zenn.dev/nxted_sapporo/articles/38a6f92750215d</link><guid isPermaLink="true">https://zenn.dev/nxted_sapporo/articles/38a6f92750215d</guid><pubDate>Tue, 15 Apr 2025 12:08:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--VfzsbTGc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:%252381%2520Exploring%2520Solana%2520Actions%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:NXTEDCo.%252C%2520Ltd.%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBmZjQzOTVhYzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>NXTEDCo., Ltd.</dc:creator></item><item><title><![CDATA[ゼロから始めるRust：FFmpegとOpenGLで作る本格動画エフェクト]]></title><description><![CDATA[
+
+ はじめに：動画エフェクト開発の悩み、あなたはいくつ当てはまりますか？
+
+動画エフェクトは、今や私たちの身近な存在です。ショートビデオアプリのオシャレなフィルターや美顔機能、ライブ配信でのリアルタイム美顔、映画のポストプロダクションで見るシネマティックなカラー調整、そしてAIが作り出すダイナミックなエフェクトまで！個人開発者の方も、チームで開発されている方も、ユーザーの心をつかむ強力な武器として動画エフェクトを活用しているのではないでしょうか。でも、いざ開発を始めると、こんな「壁」にぶつかってしまうこと、ありませんか？
+
+
+シーン1：大量処理の壁
+何百もの動画に自動で背景をぼかしたい...]]></description><link>https://zenn.dev/yeauty/articles/6bf78c97e5c24c</link><guid isPermaLink="true">https://zenn.dev/yeauty/articles/6bf78c97e5c24c</guid><pubDate>Tue, 15 Apr 2025 09:31:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--FppzAvpf--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25BC%25E3%2583%25AD%25E3%2581%258B%25E3%2582%2589%25E5%25A7%258B%25E3%2582%2581%25E3%2582%258BRust%25EF%25BC%259AFFmpeg%25E3%2581%25A8OpenGL%25E3%2581%25A7%25E4%25BD%259C%25E3%2582%258B%25E6%259C%25AC%25E6%25A0%25BC%25E5%258B%2595%25E7%2594%25BB%25E3%2582%25A8%25E3%2583%2595%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yeauty%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFlMjMwYTI3Y2MuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yeauty</dc:creator></item><item><title><![CDATA[ABC401:Rustで解く！問題解説]]></title><description><![CDATA[AtCoder Beginner Contest 401のA~E問題をRustで解いた際の解法をまとめました。
+
+ A問題
+問題
+https://atcoder.jp/contests/abc401/tasks/abc401_a
+解説
+S の値が 200 以上 299 以下であれば、 Success を出力し、それ以外の場合は Failure を出力します。
+コード
+
+abc401a.rs
+use proconio::input;
+
+fn main() {
+    // 入力
+    input! {
+        s: usize,
+    }
+
+    // 出力
+    prin...]]></description><link>https://zenn.dev/nakst_hide/articles/5f069316da3e2a</link><guid isPermaLink="true">https://zenn.dev/nakst_hide/articles/5f069316da3e2a</guid><pubDate>Sun, 13 Apr 2025 11:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---9eotj5d--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ABC401%253ARust%25E3%2581%25A7%25E8%25A7%25A3%25E3%2581%258F%25EF%25BC%2581%25E5%2595%258F%25E9%25A1%258C%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nakahide%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YkMxNEpSQnNET01hTGcxTVRQWGNTWS1qYlNQbFRMQTN3ZU9Sdz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nakahide</dc:creator></item><item><title><![CDATA[Rust入門者は非同期Rustをやらないでください]]></title><description><![CDATA[
+ はじめに
+すいません、連日の記事があったため少し煽りっぽいタイトルにしてしまいました。
+平常時の感覚だったら、「Rustに入門するなら、同期Rustから始めるのがおすすめ」 とかにしてた記事だと思います。
+この記事で主張したいことは以下です。
+
+Rustは難しい
+Rustに入門するときの題材に、"Web Backend"や"Wasmでブラウザで動く何か"などの非同期Rustで無ければ達成できない題材を採用している人はそれがRust初級者への道を阻んでいる可能性がある
+過去に非同期Rustで入門した人を否定する記事ではない
+Rustに入門することが目的なら、非非同期Rustから始めた方...]]></description><link>https://zenn.dev/higumachan/articles/b2d7b5f1e77c50</link><guid isPermaLink="true">https://zenn.dev/higumachan/articles/b2d7b5f1e77c50</guid><pubDate>Sun, 13 Apr 2025 09:38:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hZKfd8N8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E5%2585%25A5%25E9%2596%2580%25E8%2580%2585%25E3%2581%25AF%25E9%259D%259E%25E5%2590%258C%25E6%259C%259FRust%25E3%2582%2592%25E3%2582%2584%25E3%2582%2589%25E3%2581%25AA%25E3%2581%2584%25E3%2581%25A7%25E3%2581%258F%25E3%2581%25A0%25E3%2581%2595%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:higumachan%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2h6aERNREQ5RmE1ZEpPaDRGUTNWellUb2xsaVRlSFdqMXpkQ0VBPXMyNTAtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>higumachan</dc:creator></item></channel></rss>

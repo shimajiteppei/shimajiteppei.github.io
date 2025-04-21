@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「JavaScript」のフィード]]></title><description><![CDATA[Zennのトピック「JavaScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/javascript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/64acd76870.png</url><title>Zennの「JavaScript」のフィード</title><link>https://zenn.dev/topics/javascript</link></image><generator>zenn.dev</generator><lastBuildDate>Mon, 21 Apr 2025 11:51:24 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/javascript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[【GAS】メールを自動送信するスプレッドシートテンプレート]]></title><description><![CDATA[
+ はじめに（リマインドメールは自動送信がよい）
+私はリマインドメールの送信が非常に苦手です。
+「会議開催の5営業日前になったらリマインドを送る」みたいなやつです。
+以下のような理由で苦手です…
+
+送信日を覚えておくに脳のリソースがとられる
+メールを1通送る5分のために集中力が途切れるのが嫌い
+忘れたときに「5営業日前を過ぎてしまって申し訳ありません」の一文を加えないと（社会人としては）いけないのがメンドウ
+
+リマインドメールが重要なのも理解していますが、苦手なものは苦手。
+そこでスプレッドシートに情報を記入しておいて、GAS（GoogleAppsScript）で自動送信することを覚えま...]]></description><link>https://zenn.dev/kojimaru/articles/959dddc7a630f8</link><guid isPermaLink="true">https://zenn.dev/kojimaru/articles/959dddc7a630f8</guid><pubDate>Mon, 21 Apr 2025 09:29:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--U005LwUH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590GAS%25E3%2580%2591%25E3%2583%25A1%25E3%2583%25BC%25E3%2583%25AB%25E3%2582%2592%25E8%2587%25AA%25E5%258B%2595%25E9%2580%2581%25E4%25BF%25A1%25E3%2581%2599%25E3%2582%258B%25E3%2582%25B9%25E3%2583%2597%25E3%2583%25AC%25E3%2583%2583%25E3%2583%2589%25E3%2582%25B7%25E3%2583%25BC%25E3%2583%2588%25E3%2583%2586%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AC%25E3%2583%25BC%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2593%25E3%2581%2598%25E3%2581%25BE%25E3%2582%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSzR6Y3lfaVFlMGstVHN6b0prWFpXMFlNOG9wdEYwMkVnaXRibTRTd2otOFo5UE95dz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>こじまる</dc:creator></item><item><title><![CDATA[Reactの配列メソッドと向き合う]]></title><description><![CDATA[JavaScript（React）での配列操作は、データの取得から整形・表示まで、map、filter、reduceといったメソッドを使うことで、処理の意図が明確で保守しやすいコードを書きやすくなる。
+たとえば、以下のようなJSON形式の三重県の市町村データがあるとする。
+// 令和6年10月1日の三重県の市区町村
+const mieCities = [
+  { "name": "四日市市", "area": "北勢", "population": 300457 },
+  { "name": "桑名市", "area": "北勢", "population": 135308 },
+  {...]]></description><link>https://zenn.dev/ayatakaa_chan/articles/39be5986980674</link><guid isPermaLink="true">https://zenn.dev/ayatakaa_chan/articles/39be5986980674</guid><pubDate>Mon, 21 Apr 2025 08:35:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--szhfezFj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%25E3%2581%25AE%25E9%2585%258D%25E5%2588%2597%25E3%2583%25A1%25E3%2582%25BD%25E3%2583%2583%25E3%2583%2589%25E3%2581%25A8%25E5%2590%2591%25E3%2581%258D%25E5%2590%2588%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%259D%2591%25E4%25B8%25AD%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FjMjFjMTZiMTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>村中</dc:creator></item><item><title><![CDATA[【JavaScript】Number(null)は0が返る]]></title><description><![CDATA[プロジェクトの一部画面をRails + Reactで作っている場合の注意点をメモしておく。ちょっとハマった。
+RailsのViewからデータ属性を使って以下のように値をフロントエンドへ渡している箇所があった場合。
+  #hoge-form{data: { hogeId: @hoge&amp;.id }}
+    = javascript_include_tag('HogeWritingForm')
+@hoge&amp;.idはある条件下でnilになる。
+フロントエンド側で以下のように値を取得すると、hogeIdには0が代入されることになる。
+const container = docum...]]></description><link>https://zenn.dev/kanazawa/articles/0709640529730c</link><guid isPermaLink="true">https://zenn.dev/kanazawa/articles/0709640529730c</guid><pubDate>Mon, 21 Apr 2025 05:53:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--JcZKD19V--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590JavaScript%25E3%2580%2591Number%2528null%2529%25E3%2581%25AF0%25E3%2581%258C%25E8%25BF%2594%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25B3%25E3%2583%25BC%25E3%2582%25BF%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MzMjYzZTE1MjEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>コータ</dc:creator></item><item><title><![CDATA[https://rb.gy/95ate7]]></title><description><![CDATA[よって、無いと困る存在です。
+もしもNode.jsを使わない場合は、他にも機能拡張版JavaScriptが何種類か存在しますので、その中のどれかを使う必要があります。
+なお、「標準JavaScriptを機能拡張したもの」と前述しましたが、正確に表現すると、「JavaScript文法でプログラムを書ける &lt;&lt; サーバサイドスクリプト &gt;&gt; が、Node.js、もしくは、その他の機能拡張版JavaScript」となります。
+下記に順番に説明します。
+[初期のWebは、スクリプト言語はなく、HTMLのみ]
+Web自体（インターネット自体）は、16ビット時代の後半から普及...]]></description><link>https://zenn.dev/hitoma55/articles/050da0bd636eb6</link><guid isPermaLink="true">https://zenn.dev/hitoma55/articles/050da0bd636eb6</guid><pubDate>Mon, 21 Apr 2025 04:38:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--U4iIVSi---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_76:https%253A%252F%252Frb.gy%252F95ate7%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hitomasasuke%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTC1oRnFsbDM1V1dMcHo5MUkxWHVPY2hMZVVOMzV6bzdLb0gxWmc5MV93Z1E2MHN3PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hitomasasuke</dc:creator></item><item><title><![CDATA[JetBrainsのAIであるJunieに記事を作らせてみた (Rustで始めるWebAssembly入門)]]></title><description><![CDATA[
+ この記事について
+この記事は、私のZennの投稿を管理しているリポジトリにおいて、JetBrainsのAIであるJunieに以下の指示をして生成したものです。
+https://www.jetbrains.com/ja-jp/junie/
+このリポジトリはzennという技術ブログプラットフォームの記事データです。package.jsonとarticlesディレクトリにある既存の記事を読み、新しい記事を1つ書いてみてください。その際、技術的にニッチで特定の読者に強く紐づく内容でありつつ、既存の記事から得られる人物像や文体に即した内容であり、かつ正確性を重視して記載してください。
+
+私が行...]]></description><link>https://zenn.dev/miketako3/articles/abcdef0123456</link><guid isPermaLink="true">https://zenn.dev/miketako3/articles/abcdef0123456</guid><pubDate>Mon, 21 Apr 2025 03:30:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qyBs_8SA--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JetBrains%25E3%2581%25AEAI%25E3%2581%25A7%25E3%2581%2582%25E3%2582%258BJunie%25E3%2581%25AB%25E8%25A8%2598%25E4%25BA%258B%25E3%2582%2592%25E4%25BD%259C%25E3%2582%2589%25E3%2581%259B%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2520%2528Rust%25E3%2581%25A7%25E5%25A7%258B%25E3%2582%2581%25E3%2582%258BWebAssembly%25E5%2585%25A5%25E9%2596%2580%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25BF%25E3%2581%2591%25E3%2581%259F%25E3%2581%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJmMmZjNTY0MjEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>みけたこ</dc:creator></item><item><title><![CDATA[分割代入と splice【個人学習まとめ】]]></title><description><![CDATA[
+ 分割代入と splice
+TypeScirpt の学習を進めている際に、分割代入とspliceを使って「配列からランダムに 1 つだけデータを取り出す」というサンプルコードがありました。
+分割代入とspliceの組み合わせに躓いたので、調べたことをまとめました。
+
+ やりたかったこと
+やりたかったこととしてはシンプルです。
+
+あらかじめquestionsという配列にデータが入っている
+
+questionsからランダムに 1 つ取り出して配列で返す
+一度取り出した問題はquestionsから取り除く
+
+サンプルコードは次のようなコードでした。
+const questions = ["Q...]]></description><link>https://zenn.dev/o0rororo0o/articles/61f433f5e7e434</link><guid isPermaLink="true">https://zenn.dev/o0rororo0o/articles/61f433f5e7e434</guid><pubDate>Sun, 20 Apr 2025 20:18:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jS8S6gDD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2588%2586%25E5%2589%25B2%25E4%25BB%25A3%25E5%2585%25A5%25E3%2581%25A8%2520splice%25E3%2580%2590%25E5%2580%258B%25E4%25BA%25BA%25E5%25AD%25A6%25E7%25BF%2592%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%258D%25E3%2582%258D%25E3%2582%258D%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ2ZTZjOWM4YmMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ろろろ</dc:creator></item><item><title><![CDATA[ブラウザベースのメタバースを作る3]]></title><description><![CDATA[
+ 前回までのあらすじ
+この記事シリーズではブラウザベースのメタバースを作っていきます。
+前回はメタバース実装の準備として、ブラウザ上でVRMを表示してキーボード操作で歩かせるコードを試作しました。
+
+ 記載するコードの動かし方
+第1回をまだ見てない人は、第1回の最後にある環境構築の項目を呼んで環境を構築してください。
+https://zenn.dev/velserm/articles/localverse_0001
+環境構築したディレクトリを「配置先ディレクトリ」とします。
+その後、ターミナルを開いて以下のコマンドを入力してhttpサーバを起動します。
+cd 配置先ディレクトリ
+nod...]]></description><link>https://zenn.dev/velserm/articles/localverse_0003</link><guid isPermaLink="true">https://zenn.dev/velserm/articles/localverse_0003</guid><pubDate>Sun, 20 Apr 2025 15:19:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--kLlOyJNp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2596%25E3%2583%25A9%25E3%2582%25A6%25E3%2582%25B6%25E3%2583%2599%25E3%2583%25BC%25E3%2582%25B9%25E3%2581%25AE%25E3%2583%25A1%25E3%2582%25BF%25E3%2583%2590%25E3%2583%25BC%25E3%2582%25B9%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B3%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:velserm%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2EzM2I5MjMzZDIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>velserm</dc:creator></item><item><title><![CDATA[チーム開発2を通して]]></title><description><![CDATA[先週、チーム開発2という課題に取り組みました。名前の通り、3人1組のチームでWebアプリを企画・実装するというものです。
+僕たちのチームでは「一緒に運動できる人を募集するWebアプリ」を作ることにしました。普段の開発では一人で黙々と進めることが多いので、複数人で相談しながら決めていくのは新鮮な体験でした。
+
+ 概要
+サービス名：yurutto
+なぜ作ったか：気軽に一緒に運動する人を募集するため
+使用技術：PHP,JavaScript,MySQL,HTML,CSS,GitHub
+
+ 開発プロセス
+
+ 1.アイデアだし
+3人で作りたいものをリストアップして、なぜ作りたいか、どのような人向けか...]]></description><link>https://zenn.dev/imkei/articles/d1dccc3f235ce8</link><guid isPermaLink="true">https://zenn.dev/imkei/articles/d1dccc3f235ce8</guid><pubDate>Sun, 20 Apr 2025 12:04:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1BA11XEz--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2581%25E3%2583%25BC%25E3%2583%25A0%25E9%2596%258B%25E7%2599%25BA2%25E3%2582%2592%25E9%2580%259A%25E3%2581%2597%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:imkei%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M2Mzc4NTBjMzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>imkei</dc:creator></item><item><title><![CDATA[ファイルをコピペ・ドラッグアンドドロップするとストレージにアップロードされたファイルのURLが自動で挿入されるtextareaの実装してみた]]></title><description><![CDATA[
+ ファイルをコピペ・ドラッグアンドドロップするとストレージにアップロードされたファイルのURLが自動で挿入されるtextareaの実装してみた
+ZennやQiitaではファイルをドラッグアンドドロップすると自動でファイルがアップロードされてURLがフォームに自動で挿入されます。
+このフォームについて気になったので動きだけ同じものを作ってみました。
+
+ 実際の画面
+
+!
+実際はストレージに格納されているファイルのURLが表示されます
+
+
+ コード
+
+
+ 使用技術
+
+Next.js
+Vercel Blob
+zod
+react-hook-form
+
+
+ 実装
+関連するところだけ抜き出して書き...]]></description><link>https://zenn.dev/mitate_gengaku/articles/copy-or-drop-file-textarea</link><guid isPermaLink="true">https://zenn.dev/mitate_gengaku/articles/copy-or-drop-file-textarea</guid><pubDate>Sun, 20 Apr 2025 11:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--HDSJ4IuA--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2592%25E3%2582%25B3%25E3%2583%2594%25E3%2583%259A%25E3%2583%25BB%25E3%2583%2589%25E3%2583%25A9%25E3%2583%2583%25E3%2582%25B0%25E3%2582%25A2%25E3%2583%25B3%25E3%2583%2589%25E3%2583%2589%25E3%2583%25AD%25E3%2583%2583%25E3%2583%2597%25E3%2581%2599%25E3%2582%258B%25E3%2581%25A8%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25AC%25E3%2583%25BC%25E3%2582%25B8%25E3%2581%25AB%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2589%25E3%2581%2595%25E3%2582%258C%25E3%2581%259F%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2581%25AEURL%25E3%2581%258C%25E8%2587%25AA%25E5%258B%2595%25E3%2581%25A7%25E6%258C%25BF%25E5%2585%25A5%25E3%2581%2595%25E3%2582%258C%25E3%2582%258Bte...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25BE%25A1%25E6%25A5%25AF%25E7%258E%2584%25E5%25B6%25BD%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0tQOVRYWHQ5Qm1BLVplcURoLWdxUHl4RVFjMmNsRkhSNk95XzVVSVVhPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>御楯玄嶽</dc:creator></item><item><title><![CDATA[ブラウザベースのメタバースを作る2]]></title><description><![CDATA[
+ 前回までのあらすじ
+この記事シリーズではブラウザベースのメタバースを作っていきます。
+前回は第1回として、企画の趣旨と環境構築について書きました。
+今回はメタバース実装の準備として、ブラウザ上でVRMを表示してキーボード操作で歩かせるコードを試作します。
+
+ 記載するコードの動かし方
+第1回をまだ見てない人は、第1回の最後にある環境構築の項目を呼んで環境を構築してください。
+https://zenn.dev/velserm/articles/localverse_0001
+環境構築したディレクトリを「配置先ディレクトリ」とします。
+その後、ターミナルを開いて以下のコマンドを入力してh...]]></description><link>https://zenn.dev/velserm/articles/localverse_0002</link><guid isPermaLink="true">https://zenn.dev/velserm/articles/localverse_0002</guid><pubDate>Sun, 20 Apr 2025 09:27:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Fsi2_pmy--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2596%25E3%2583%25A9%25E3%2582%25A6%25E3%2582%25B6%25E3%2583%2599%25E3%2583%25BC%25E3%2582%25B9%25E3%2581%25AE%25E3%2583%25A1%25E3%2582%25BF%25E3%2583%2590%25E3%2583%25BC%25E3%2582%25B9%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:velserm%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2EzM2I5MjMzZDIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>velserm</dc:creator></item><item><title><![CDATA[Next.js入門４ Hooks]]></title><description><![CDATA[
+ 記事一覧
+
+Next.js × Docker 最速環境構築
+Next.js入門１ ページ追加
+Next.js入門２ コンポーネント
+Next.js入門３ 無記名関数 &amp; イベントハンドラー
+Next.js入門４ Hooks
+
+
+ Hooks
+
+ Hooksとは
+Next.js（React）で使用できる、便利な機能を追加するための特別な関数
+（今回はよく使われるもの3つを紹介）
+
+ useState
+
+page.tsx
+
+"use client";
+
+// useStateをインポート
+import { useState } from "react";
+
+function Pa...]]></description><link>https://zenn.dev/kate0418/articles/a7bc79d206d15b</link><guid isPermaLink="true">https://zenn.dev/kate0418/articles/a7bc79d206d15b</guid><pubDate>Sun, 20 Apr 2025 03:24:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--WvHk7RH5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:Next.js%25E5%2585%25A5%25E9%2596%2580%25EF%25BC%2594%2520Hooks%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2591%25E3%2581%2583%25E3%2581%25A8%25C2%25B0%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzlkMGNjNmI4Y2IuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>けぃと°</dc:creator></item><item><title><![CDATA[ブラウザベースのメタバースを作る1]]></title><description><![CDATA[
+ はじめに
+この記事シリーズではブラウザベースのメタバースを作っていきます。
+正確には、メタバースを構成する要素のうち、
+「ユーザーが自分で用意したアバターを使って他のユーザーと交流する。」
+をブラウザ上で実現するシステムの開発の流れを書いていきます。
+既存のメタバース用のサービスは使いませんが、フルスクラッチというわけではなくThree.js及びthree-vrmなどのオープンソースなライブラリは使用します。
+インターネット上のサーバを持ってない人でも自分で試せるように、ローカルPC上でサーバも動かして完結できる形で記事は書いていきます。
+独自実装する部分についてはコードを記載してい...]]></description><link>https://zenn.dev/velserm/articles/localverse_0001</link><guid isPermaLink="true">https://zenn.dev/velserm/articles/localverse_0001</guid><pubDate>Sun, 20 Apr 2025 00:35:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--drJs9IJk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2596%25E3%2583%25A9%25E3%2582%25A6%25E3%2582%25B6%25E3%2583%2599%25E3%2583%25BC%25E3%2582%25B9%25E3%2581%25AE%25E3%2583%25A1%25E3%2582%25BF%25E3%2583%2590%25E3%2583%25BC%25E3%2582%25B9%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:velserm%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2EzM2I5MjMzZDIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>velserm</dc:creator></item><item><title><![CDATA[Next.js入門３ 無記名関数 & イベントハンドラー]]></title><description><![CDATA[
+ 記事一覧
+
+Next.js × Docker 最速環境構築
+Next.js入門１ ページ追加
+Next.js入門２ コンポーネント
+Next.js入門３ 無記名関数 &amp; イベントハンドラー
+Next.js入門４ Hooks
+
+
+ 無記名関数
+
+ 無記名関数とは
+名前が付けられていない関数
+
+ 宣言型関数（通常）
+function Func() {
+  return "hello world";
+}
+
+ 無記名関数（通常）
+// 無記名関数は代入して使用したり、直接使用する
+() =&gt; {
+  return "hello world";
+}
+
+// 使用例
+const F...]]></description><link>https://zenn.dev/kate0418/articles/e8f060f2befad3</link><guid isPermaLink="true">https://zenn.dev/kate0418/articles/e8f060f2befad3</guid><pubDate>Sat, 19 Apr 2025 18:26:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Y3WnQUQf--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Next.js%25E5%2585%25A5%25E9%2596%2580%25EF%25BC%2593%2520%25E7%2584%25A1%25E8%25A8%2598%25E5%2590%258D%25E9%2596%25A2%25E6%2595%25B0%2520%2526%2520%25E3%2582%25A4%25E3%2583%2599%25E3%2583%25B3%25E3%2583%2588%25E3%2583%258F%25E3%2583%25B3%25E3%2583%2589%25E3%2583%25A9%25E3%2583%25BC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2591%25E3%2581%2583%25E3%2581%25A8%25C2%25B0%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzlkMGNjNmI4Y2IuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>けぃと°</dc:creator></item><item><title><![CDATA[JavaScriptで始める非同期処理入門]]></title><description><![CDATA[
+ JavaScriptで始める非同期処理入門
+JavaScriptでウェブアプリケーションを開発していると、必ず出会うのが非同期処理です。APIからデータを取得したり、ファイルを読み込んだり、タイマー処理を実装したりと、様々な場面で非同期処理が必要になります。
+この記事では、JavaScriptにおける非同期処理の基本を理解し、実践的なコードで学んでいきましょう。
+
+ なぜ非同期処理が必要か？
+JavaScriptは基本的にシングルスレッドで動作します。これは一度に1つの処理しか実行できないことを意味します。
+例えば、サーバーからデータを取得する処理が3秒かかるとしましょう。この間、同...]]></description><link>https://zenn.dev/zak4132/articles/javascript-1745084609189</link><guid isPermaLink="true">https://zenn.dev/zak4132/articles/javascript-1745084609189</guid><pubDate>Sat, 19 Apr 2025 17:43:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3lwUyC5y--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25E3%2581%25A7%25E5%25A7%258B%25E3%2582%2581%25E3%2582%258B%25E9%259D%259E%25E5%2590%258C%25E6%259C%259F%25E5%2587%25A6%25E7%2590%2586%25E5%2585%25A5%25E9%2596%2580%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:zak4132%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JjMjVjYzRiYTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>zak4132</dc:creator></item><item><title><![CDATA[React の Suspense でコンポーネントを遅延読み込みする]]></title><description><![CDATA[
+ Suspenseとは？
+React の Suspense は、非同期で読み込まれるコンポーネントやデータが「まだ準備できていない」ときに、代わりに表示するフォールバックUI（ローディング画面など）を定義する仕組み。
+React.lazy() 関数でモジュールを動的に読み込み、Suspense で読み込み完了を待つ。React は未完了の Promise を throw し、Suspense がそれをキャッチして fallback を表示する。
+React.lazy() を使った遅延読み込みに対応した Suspense は、React 16.6 以降で利用できる。
+
+ React.la...]]></description><link>https://zenn.dev/kkoisland/articles/446d84d40eaf17</link><guid isPermaLink="true">https://zenn.dev/kkoisland/articles/446d84d40eaf17</guid><pubDate>Sat, 19 Apr 2025 16:16:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--EU2bpce8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%2520%25E3%2581%25AE%2520Suspense%2520%25E3%2581%25A7%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%259D%25E3%2583%25BC%25E3%2583%258D%25E3%2583%25B3%25E3%2583%2588%25E3%2582%2592%25E9%2581%2585%25E5%25BB%25B6%25E8%25AA%25AD%25E3%2581%25BF%25E8%25BE%25BC%25E3%2581%25BF%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kkoisland%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E2MzIwYmQ0NDQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kkoisland</dc:creator></item><item><title><![CDATA[JavaScriptでABC402(A-D)]]></title><description><![CDATA[今回からメモ程度でも毎回書こうと思います。
+https://atcoder.jp/contests/abc402
+
+ A - CBC
+https://atcoder.jp/contests/abc402/tasks/abc402_a
+英大文字な文字だけ残して出力すればOK
+Array.from(str)で1文字ずつの配列に分けてあげて、/[A-Z]/にマッチするかどうかでArray.filter()かければいいと思います
+「正規表現にマッチするかどうか」はRegExp.test()、返り値はboolean
+https://atcoder.jp/contests/abc402/submis...]]></description><link>https://zenn.dev/aya_koto/articles/31c9142e86fbc2</link><guid isPermaLink="true">https://zenn.dev/aya_koto/articles/31c9142e86fbc2</guid><pubDate>Sat, 19 Apr 2025 13:47:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--zlgBw41a--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:JavaScript%25E3%2581%25A7ABC402%2528A-D%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Ayasaka-Koto%2520%252F%2520Aya...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VkNTRlMDBjYTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Ayasaka-Koto / AyagawaP</dc:creator></item><item><title><![CDATA[Next.js入門２ コンポーネント]]></title><description><![CDATA[
+ 記事一覧
+
+Next.js × Docker 最速環境構築
+Next.js入門１ ページ追加
+Next.js入門２ コンポーネント
+Next.js入門３ 無記名関数 &amp; イベントハンドラー
+Next.js入門４ Hooks
+
+
+ コンポーネント
+
+ コンポーネントとは
+
+UIの一部を切り出したもの
+（複数箇所で使い回すことができる）
+
+
+ ファイル作成
+
+今回はボタン用のコンポーネントを作る
+
+
+
+components/Button.tsxを作成
+
+.
+├── next-app
+│   ├── app
+│   └── components
+│       └── Button...]]></description><link>https://zenn.dev/kate0418/articles/4504fa603d368b</link><guid isPermaLink="true">https://zenn.dev/kate0418/articles/4504fa603d368b</guid><pubDate>Sat, 19 Apr 2025 07:29:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2L-Dtim1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Next.js%25E5%2585%25A5%25E9%2596%2580%25EF%25BC%2592%2520%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%259D%25E3%2583%25BC%25E3%2583%258D%25E3%2583%25B3%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2591%25E3%2581%2583%25E3%2581%25A8%25C2%25B0%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzlkMGNjNmI4Y2IuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>けぃと°</dc:creator></item><item><title><![CDATA[splitメソッド、reduceメソッドの学習]]></title><description><![CDATA[JavaScriptの基礎的な内容ですが、自身の学習のために記載しておこうと思います。
+
+
+ splitメソッド
+問題：
+"5 2 4"のような数字（文字列）の入力が与えられているとする。
+これらの入力を配列に変換するには？
+（下記ではさらに中身を数字に変換し、配列を一つずつ変数に代入）
+const numbers = "5 2 4"
+const [A, B, C] = numbers.split(" ").map(Number)
+console.log(A)
+console.log(B)
+console.log(C)
+
+出力結果：
+5
+2
+4
+
+＜メモ＞
+
+
+「const [A, B,...]]></description><link>https://zenn.dev/masato24524/articles/f6cc43d8f835a2</link><guid isPermaLink="true">https://zenn.dev/masato24524/articles/f6cc43d8f835a2</guid><pubDate>Sat, 19 Apr 2025 05:40:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--psjt0zC3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:split%25E3%2583%25A1%25E3%2582%25BD%25E3%2583%2583%25E3%2583%2589%25E3%2580%2581reduce%25E3%2583%25A1%25E3%2582%25BD%25E3%2583%2583%25E3%2583%2589%25E3%2581%25AE%25E5%25AD%25A6%25E7%25BF%2592%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Masato%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzgwODU5NjQ1YjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Masato</dc:creator></item><item><title><![CDATA[Node.jsって結局なに？コードなしでわかる基礎のきそ]]></title><description><![CDATA[「Node.jsってよく聞くけど、結局なにができるの？」
+「JavaScriptってフロントエンドの言語じゃないの？」
+そう思っている人、実は多いんじゃないでしょうか。この記事では、コードを書かずにNode.jsのイメージをざっくりつかむことを目的に、初心者向けにやさしく解説していきます。
+
+Node.jsは“JavaScriptをパソコンで動かすためのエンジン”
+JavaScriptといえば、ブラウザ（ChromeやSafariなど）で動く言語というイメージがありますよね。
+でも、Node.jsを使うとブラウザの外＝PCやサーバー上でもJavaScriptを動かせるようになります。
+
+...]]></description><link>https://zenn.dev/siwangqishiq/articles/6c4c99f74c565d</link><guid isPermaLink="true">https://zenn.dev/siwangqishiq/articles/6c4c99f74c565d</guid><pubDate>Sat, 19 Apr 2025 04:39:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2e2lbeAd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Node.js%25E3%2581%25A3%25E3%2581%25A6%25E7%25B5%2590%25E5%25B1%2580%25E3%2581%25AA%25E3%2581%25AB%25EF%25BC%259F%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2581%25AA%25E3%2581%2597%25E3%2581%25A7%25E3%2582%258F%25E3%2581%258B%25E3%2582%258B%25E5%259F%25BA%25E7%25A4%258E%25E3%2581%25AE%25E3%2581%258D%25E3%2581%259D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:siwangqishiq%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSWd5ekFSV3VQWFFFWkp2c3Fsa000SHY0ZkdrM09yZHdFY3VfT3ZpTkQtdVh4OWNBPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>siwangqishiq</dc:creator></item><item><title><![CDATA[JavaScriptで巨大な静的配列を実装するときはswitchよりもarrayを使ったほうが普通にはやい]]></title><description><![CDATA[
+ 動機
+JSで事前に値が決まっている巨大な静的配列を実装するときに、arrayじゃなくてswitchの方が早いと思ったのでベンチをとった。DenoでやったのでV8のベンチになる。
+
+ 実験
+ベンチマークを作るスクリプト。
+await Deno.remove("array_switch.ts");
+const Ns = [100, 1000, 10000];
+for (const N of Ns) {
+  const array_banch: string = `const arr${N} = [${Array.from(
+    { length: N },
+    (_, i) =&...]]></description><link>https://zenn.dev/arark/articles/ba87c78115048a</link><guid isPermaLink="true">https://zenn.dev/arark/articles/ba87c78115048a</guid><pubDate>Sat, 19 Apr 2025 01:58:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--35dBpvhL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25E3%2581%25A7%25E5%25B7%25A8%25E5%25A4%25A7%25E3%2581%25AA%25E9%259D%2599%25E7%259A%2584%25E9%2585%258D%25E5%2588%2597%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2599%25E3%2582%258B%25E3%2581%25A8%25E3%2581%258D%25E3%2581%25AFswitch%25E3%2582%2588%25E3%2582%258A%25E3%2582%2582array%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%259F%25E3%2581%25BB%25E3%2581%2586%25E3%2581%258C%25E6%2599%25AE%25E9%2580%259A%25E3%2581%25AB%25E3%2581%25AF%25E3%2582%2584%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:arark%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZiNzQ2M2E1ZmQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>arark</dc:creator></item></channel></rss>
