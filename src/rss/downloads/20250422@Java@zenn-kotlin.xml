@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Kotlin」のフィード]]></title><description><![CDATA[Zennのトピック「Kotlin」のRSSフィードです]]></description><link>https://zenn.dev/topics/kotlin</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/0e48b65ca2.png</url><title>Zennの「Kotlin」のフィード</title><link>https://zenn.dev/topics/kotlin</link></image><generator>zenn.dev</generator><lastBuildDate>Tue, 22 Apr 2025 09:36:12 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/kotlin/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[AndroidでAppsFlyerに送るイベントのパラメーターがnullになっていた問題に対応した]]></title><description><![CDATA[
+ はじめに
+みてねのCREグループでエンジニアをしているこすげです。
+この記事では、AndroidアプリのKotlinコードでAppsFlyerに送信しているイベントのパラメーターが、not-nullであるはずなのに管理画面上でnullになってしまう問題に気がつき、対応したことについて書きました。
+同じような問題に直面している人だったり、同じような実装をしている人の気づきになれたらいいなと思います。
+
+ 前提知識
+
+ AppsFlyer
+AppsFlyerは、モバイルアプリのインストールやイベントを計測・分析できるモバイル計測プラットフォームです。
+https://www.appsfl...]]></description><link>https://zenn.dev/ryokosuge/articles/ddd6cd0aec0f17</link><guid isPermaLink="true">https://zenn.dev/ryokosuge/articles/ddd6cd0aec0f17</guid><pubDate>Tue, 22 Apr 2025 00:42:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--uzID0LXM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Android%25E3%2581%25A7AppsFlyer%25E3%2581%25AB%25E9%2580%2581%25E3%2582%258B%25E3%2582%25A4%25E3%2583%2599%25E3%2583%25B3%25E3%2583%2588%25E3%2581%25AE%25E3%2583%2591%25E3%2583%25A9%25E3%2583%25A1%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%25BC%25E3%2581%258Cnull%25E3%2581%25AB%25E3%2581%25AA%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%2584%25E3%2581%259F%25E5%2595%258F%25E9%25A1%258C%25E3%2581%25AB%25E5%25AF%25BE%25E5%25BF%259C%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2593%25E3%2581%2599%25E3%2581%2592%25E3%2582%258A%25E3%2582%2587%25E3%2581%2586%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lxTUZSYkE2dzhHb2RLa21NTTk1YTYtY2NxZDVYTmluMXFTcG5WdUE9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>こすげりょう</dc:creator></item><item><title><![CDATA[モノリスからマイクロサービスへ（アルダグラムの場合）]]></title><description><![CDATA[こんにちは！アルダグラムでエンジニアをしている @sukechannnn です。
+アルダグラムでは企画・開発・採用とプロダクト開発に関わることを色々やってます。今回はアーキテクチャのお話です。
+アルダグラムのサーバーサイドは、元々は Ruby on Rails で実装されたモノリシックな構成でした。そこから、新プロダクトの開発をきっかけにサーバーを分離して開発し始め、直近ではサービスの責務に応じてサーバーを新しく立てる方針を取っており、だんだんとマイクロサービスみが出てきました。
+そこで、どんな進め方で完全なモノリスからマイクロサービス化を進めていったのかをご紹介しようと思います！
+
+ ...]]></description><link>https://zenn.dev/aldagram_tech/articles/8f57836ff7bb1e</link><guid isPermaLink="true">https://zenn.dev/aldagram_tech/articles/8f57836ff7bb1e</guid><pubDate>Tue, 22 Apr 2025 00:41:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--TJD6fkOr--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%25A2%25E3%2583%258E%25E3%2583%25AA%25E3%2582%25B9%25E3%2581%258B%25E3%2582%2589%25E3%2583%259E%25E3%2582%25A4%25E3%2582%25AF%25E3%2583%25AD%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2593%25E3%2582%25B9%25E3%2581%25B8%25EF%25BC%2588%25E3%2582%25A2%25E3%2583%25AB%25E3%2583%2580%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%25A0%25E3%2581%25AE%25E5%25A0%25B4%25E5%2590%2588%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:sukechannnn%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JiM2FkMDk1NzUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25A2%25E3%2583%25AB%25E3%2583%2580%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%25A0%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2QzOTljNjM5YmQuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sukechannnn</dc:creator></item><item><title><![CDATA[Minecraftプラグインで実現するOpenAI APIを活用した自然言語取引アシスタント]]></title><description><![CDATA[
+ Minecraftプラグインで実現するOpenAI APIを活用した自然言語取引アシスタント
+
+ はじめに
+OpenAI APIを使用して、自作のマーケットプラグインを自然言語で取引できるようにしました。
+自然言語によるリクエストをAPIで処理して、コマンドを覚えなくても複雑な注文や取引を行えるようになります。
+
+ アシスタント機能の概要
+Man10Marketのアシスタント機能は、プレイヤーが自然言語で市場操作を行えるようにするものです。例えば：
+
+「ダイヤモンドの価格を教えて」
+「鉄インゴットを10個買いたい」
+「エメラルドを5個、1個あたり100円で売りたい」
+「市場の動向を分...]]></description><link>https://zenn.dev/morilyn/articles/9a41c5117332d9</link><guid isPermaLink="true">https://zenn.dev/morilyn/articles/9a41c5117332d9</guid><pubDate>Mon, 21 Apr 2025 05:44:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--kvkmDnND--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Minecraft%25E3%2583%2597%25E3%2583%25A9%25E3%2582%25B0%25E3%2582%25A4%25E3%2583%25B3%25E3%2581%25A7%25E5%25AE%259F%25E7%258F%25BE%25E3%2581%2599%25E3%2582%258BOpenAI%2520API%25E3%2582%2592%25E6%25B4%25BB%25E7%2594%25A8%25E3%2581%2597%25E3%2581%259F%25E8%2587%25AA%25E7%2584%25B6%25E8%25A8%2580%25E8%25AA%259E%25E5%258F%2596%25E5%25BC%2595%25E3%2582%25A2%25E3%2582%25B7%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%25B3%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Jin%2520Morikawa%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSWFCa1poR1g5am5kOW9FQy1tM1o0VVNQRUU4Y3ppY0dXRG9yeGQ3LWRva2wtRHAwdVc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Jin Morikawa</dc:creator></item><item><title><![CDATA[MCP QuickStart の For Server Developers を Kotlin でやるときにハマったこと & 解決方法]]></title><description><![CDATA[最近何かと流行りの Model Context Protocol（以降、MCP）。ということで MCP Server の QuickStart （チュートリアル）を Kotlin でやろうと思いましてチャレンジしてみました。（へーしゃ、Server Side Kotlinを実践で使っているのでその影響です）
+QuickStart↓
+https://modelcontextprotocol.io/quickstart/server#kotlin
+チャレンジの中でいくつかハマった（というか愚直に書いてたらエラーに遭遇した）のでエラーについてと解決策をまとめます。
+
+ 1. Import がな...]]></description><link>https://zenn.dev/yukinissie/articles/141bd3ec0459ef</link><guid isPermaLink="true">https://zenn.dev/yukinissie/articles/141bd3ec0459ef</guid><pubDate>Sun, 20 Apr 2025 23:57:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--IpLI3qNT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:MCP%2520QuickStart%2520%25E3%2581%25AE%2520For%2520Server%2520Developers%2520%25E3%2582%2592%2520Kotlin%2520%25E3%2581%25A7%25E3%2582%2584%25E3%2582%258B%25E3%2581%25A8%25E3%2581%258D%25E3%2581%25AB%25E3%2583%258F%25E3%2583%259E%25E3%2581%25A3...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%258B%25E3%2583%2583%25E3%2582%25B7%25E3%2583%25BC%25E2%2598%2586%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2l1b2RyRXVWYkQzY1hnVWFiU2JLWkI2c1l5aDRlTUUyZWh2UE5nPXMyNTAtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ニッシー☆</dc:creator></item><item><title><![CDATA[Spring WebMVC/WebFlux で実現する省エネなスキーマ駆動開発]]></title><description><![CDATA[
+ はじめに
+“スキーマ駆動開発 (Schema‑Driven Development)” という概念があります。APIのドキュメントをOpenAPIのスキーマとしてまず定義し、そのスキーマからサーバーコードとクライアントコードを自動生成することでドキュメントと実装の乖離を防ぎ、開発サイクルの高速化と品質を担保する手法です。
+一方で、OpenAPIのスキーマを人間が手で書くのはやや体験が悪いです。
+その解決策としてtypespecなどもありますが、今回は紹介しません。
+Spring WebMVC/WebFluxにおいては、springdoc-openapiを使うことで、Springのコン...]]></description><link>https://zenn.dev/be_hase/articles/e55f96be2856e6</link><guid isPermaLink="true">https://zenn.dev/be_hase/articles/e55f96be2856e6</guid><pubDate>Sun, 20 Apr 2025 07:48:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--RThayC8Z--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Spring%2520WebMVC%252FWebFlux%2520%25E3%2581%25A7%25E5%25AE%259F%25E7%258F%25BE%25E3%2581%2599%25E3%2582%258B%25E7%259C%2581%25E3%2582%25A8%25E3%2583%258D%25E3%2581%25AA%25E3%2582%25B9%25E3%2582%25AD%25E3%2583%25BC%25E3%2583%259E%25E9%25A7%2586%25E5%258B%2595%25E9%2596%258B%25E7%2599%25BA%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:be-hase%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dNaVhNZnFBWE9yTXdHZVdBMEpmaE5OX3FJRVExUWQzRUw2MVJtM0E9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>be-hase</dc:creator></item><item><title><![CDATA[Kotlin でローカルに MCP サーバーを構築し、Claude Desktop と連携してみた]]></title><description><![CDATA[
+ はじめに
+2025年に入ってから急激に「MCP」という単語を目にするようになりました。少し前にキャッチアップのために公式のKotlin MCPクイックスタートを実践したところ理解を深めることができたので、やや遅くなりましたが、本記事ではその実践内容とMCPの概要について解説します。
+
+ MCPの技術概要
+Model Context Protocol (MCP)は、LLM（大規模言語モデル）と外部ツールを連携させるための標準化された通信プロトコルです。技術的には以下の特徴があります。
+
+ MCP の主要用語
+
+
+ツール（Tool）: LLMが呼び出せる機能のこと。例えば「天気予報を取得...]]></description><link>https://zenn.dev/k_negishi/articles/ae6e39481943d5</link><guid isPermaLink="true">https://zenn.dev/k_negishi/articles/ae6e39481943d5</guid><pubDate>Sat, 19 Apr 2025 13:35:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7AUUBCDA--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Kotlin%2520%25E3%2581%25A7%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25AB%25E3%2583%25AB%25E3%2581%25AB%2520MCP%2520%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2582%2592%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2597%25E3%2580%2581Claude%2520Desktop%2520%25E3%2581%25A8%25E9%2580%25A3%25E6%2590%25BA%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kei.N%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZhMDZjZGI1YmMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kei.N</dc:creator></item><item><title><![CDATA[Androidによる画像処理OpenCV]]></title><description><![CDATA[!
+手書き数字の読み取りにmnistを使っているのだけど、画像処理の部分で限界を感じたので、
+OpenCVを使ってみる。
+pythonでは有名なライブラリのようですね。
+Kotlinの導入がんばります！
+
+mnistに関する記事はこちら
+https://zenn.dev/rucco/scraps/fe07980a609c94
+
+
+ OpenCV導入
+
+ 公式サイトからOpenCVライブラリをDL
+
+
+公式サイトから最新のOpenCV Android SDKをダウンロード
+現在の最新バージョンは4.11.0（2025年4月15日時点）
+
+
+最新バージョン（4.11.0）の「opencv-4...]]></description><link>https://zenn.dev/rucco/articles/40f94118c34613</link><guid isPermaLink="true">https://zenn.dev/rucco/articles/40f94118c34613</guid><pubDate>Sat, 19 Apr 2025 04:09:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BpCzVdj2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Android%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258B%25E7%2594%25BB%25E5%2583%258F%25E5%2587%25A6%25E7%2590%2586OpenCV%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%258B%25E3%2582%258B%25E3%2582%258A%25E3%2581%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTE1fMGFKYkItSUVoVE9rMXdjNXlIdnpidWJEZWMwdHVlT29RVU5aS3dsTDAzTi1fYz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>るるりこ</dc:creator></item><item><title><![CDATA[【MNIST】手書き数字の読み取り]]></title><description><![CDATA[GeminiさんによるとAIによる手書き文字の読み取りは可能とのことなので、教えてもらったことを書いておく。
+使うライブラリはMNIST、モデルはCNN。
+
+MNIST：手書きの数字を認識担当　取り扱い範囲は０～９までの数字のみ
+CNN：GPUによる高速処理担当　リアルタイム処理が可能
+
+
+ 依存関係
+
+ TensorFlow Lite
+pythonやってた時になんか使ったなーといううっすらとした記憶が。
+AndroidStudioのプロジェクトにTensorFlowを導入することで、CNNモデルをアプリに統合できるようです。
+
+ライブラリ追加
+
+
+libs.versions.toml
+...]]></description><link>https://zenn.dev/rucco/articles/54268daae57aa1</link><guid isPermaLink="true">https://zenn.dev/rucco/articles/54268daae57aa1</guid><pubDate>Sat, 19 Apr 2025 00:28:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--W6nPQF44--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590MNIST%25E3%2580%2591%25E6%2589%258B%25E6%259B%25B8%25E3%2581%258D%25E6%2595%25B0%25E5%25AD%2597%25E3%2581%25AE%25E8%25AA%25AD%25E3%2581%25BF%25E5%258F%2596%25E3%2582%258A%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%258B%25E3%2582%258B%25E3%2582%258A%25E3%2581%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTE1fMGFKYkItSUVoVE9rMXdjNXlIdnpidWJEZWMwdHVlT29RVU5aS3dsTDAzTi1fYz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>るるりこ</dc:creator></item><item><title><![CDATA[Kotlin で本格 Web アプリを作る Kobweb の紹介]]></title><description><![CDATA[最近 教えてもらった Kobweb というフレームワークについて、個人的見解も含めて 導入, 構成要素, 検証, 考察の 4段階で紹介します。
+
+ ⭐️ 導入-1: Kobweb is 何？
+https://kobweb.varabyte.com/
+Kobweb は Kotlin と Compose で Webアプリを作るフレームワークです。
+Compose で HTML/CSS を記述しながら アノテーションを使用したWebアプリ構築が可能になっています。
+また クライアント側のみならず サーバ側も実装でき、Nextjs のようなクライアントと距離の近いサーバの開発もできるフレームワー...]]></description><link>https://zenn.dev/tbsten/articles/afa0163ade71c6</link><guid isPermaLink="true">https://zenn.dev/tbsten/articles/afa0163ade71c6</guid><pubDate>Fri, 18 Apr 2025 09:39:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--EtMOXa4x--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Kotlin%2520%25E3%2581%25A7%25E6%259C%25AC%25E6%25A0%25BC%2520Web%2520%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%2520Kobweb%2520%25E3%2581%25AE%25E7%25B4%25B9%25E4%25BB%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A6%25E3%2581%25B9%25E3%2581%2599%25E3%2581%25A6%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FjMGFhMjliZTUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>てべすてん</dc:creator></item><item><title><![CDATA[IntelliJ IDEAを使っている人は全員Junieを導入しよう！]]></title><description><![CDATA[
+ はじめに
+こんにちは、株式会社スマートラウンドでチーフテックリードをしているtsukakei1012です。
+ついに、JetBrains製のAIコーディングエージェントであるJunieがGenerally Availableになりました🎉
+https://www.jetbrains.com/ja-jp/junie/
+弊社では、EAP（Early Access Program）の頃から開発チーム全体で導入・活用していることもあり、既にいくつかの知見が蓄積されています。
+この記事では、新たにJunieを導入しよう・してみたいと考えている方に向けた参考資料になればいいと思い、書きましたのでぜ...]]></description><link>https://zenn.dev/smartround_dev/articles/b90904e75666a3</link><guid isPermaLink="true">https://zenn.dev/smartround_dev/articles/b90904e75666a3</guid><pubDate>Fri, 18 Apr 2025 08:30:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Yg3FBXuY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:IntelliJ%2520IDEA%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%2584%25E3%2582%258B%25E4%25BA%25BA%25E3%2581%25AF%25E5%2585%25A8%25E5%2593%25A1Junie%25E3%2582%2592%25E5%25B0%258E%25E5%2585%25A5%25E3%2581%2597%25E3%2582%2588%25E3%2581%2586%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:tsukakei%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2EyZGQyNWFiZDUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25B9%25E3%2583%259E%25E3%2583%25BC%25E3%2583%2588%25E3%2583%25A9%25E3%2582%25A6%25E3%2583%25B3%25E3%2583%2589%2520%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI5ZjUxNmM3MDMuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tsukakei</dc:creator></item><item><title><![CDATA[【Compose for TV】ユーザーを迷子にさせないフォーカス制御]]></title><description><![CDATA[
+ 本記事の内容
+Compose for TV によって Android TV でも宣言的な UI 開発が可能になりました。
+Tv Lazy Layout の廃止など、Compose for TV は着実に進化を遂げています。
+しかし自然な UX を実現するための "フォーカス制御" に関しては、依然として実装の工夫が必要です。
+本記事では、以下のような Master/Detail Flow の画面を例に、Compose for TV で必要になるフォーカス制御に関して解説します。
+
+
+ デフォルトのフォーカス制御ロジック
+本題に入る前に、Compose for TV におけるデフォルト...]]></description><link>https://zenn.dev/taked137/articles/15d2c55f56c21e</link><guid isPermaLink="true">https://zenn.dev/taked137/articles/15d2c55f56c21e</guid><pubDate>Wed, 16 Apr 2025 00:51:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--HkOq-0xg--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Compose%2520for%2520TV%25E3%2580%2591%25E3%2583%25A6%25E3%2583%25BC%25E3%2582%25B6%25E3%2583%25BC%25E3%2582%2592%25E8%25BF%25B7%25E5%25AD%2590%25E3%2581%25AB%25E3%2581%2595%25E3%2581%259B%25E3%2581%25AA%25E3%2581%2584%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25BC%25E3%2582%25AB%25E3%2582%25B9%25E5%2588%25B6%25E5%25BE%25A1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:taked137%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2EzYjhhOTUyYzYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>taked137</dc:creator></item><item><title><![CDATA[ispecの事業を支える技術]]></title><description><![CDATA[
+ はじめに
+株式会社ispec CTOの山田です。先日、ispecでEMをやっている元バスケ部のshinyaと一緒にバスケをしたのですが、美しいハンドリングと華麗なシュートフェイントにより完全に叩きのめされました。ソフトウェア開発だけでなくバスケの技術力も高い頼もしいEMです。
+さて、かくいう私ははるか昔にispecの技術選定に関する記事を書きましたが、あれから3年近く経ち、以下のような大きな変化がありました。
+
+医療ドメインへのフォーカス
+AI/LLMを活用したプロダクト開発
+
+3年が経過して事業の方向性も変わり、それにあわせて技術スタックも変わっているため、本記事では現在のispe...]]></description><link>https://zenn.dev/ispec_inc/articles/adacbe90d834e9</link><guid isPermaLink="true">https://zenn.dev/ispec_inc/articles/adacbe90d834e9</guid><pubDate>Wed, 16 Apr 2025 00:08:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_1Unj9q8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ispec%25E3%2581%25AE%25E4%25BA%258B%25E6%25A5%25AD%25E3%2582%2592%25E6%2594%25AF%25E3%2581%2588%25E3%2582%258B%25E6%258A%2580%25E8%25A1%2593%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Yusuke%2520Yamada%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRmN2Y5YzE4ZTUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:ispec%2520inc.%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JjOTgwOTZjODkuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yusuke Yamada</dc:creator></item><item><title><![CDATA[【Flutter】Androidのビルドが失敗 対応のMEMO]]></title><description><![CDATA[
+ 💻 環境
+flutter doctor
+Doctor summary (to see all details, run flutter doctor -v):
+[✓] Flutter (Channel stable, 3.27.4, on macOS 15.4 24E248 darwin-arm64, locale ja-JP)
+[✓] Android toolchain - develop for Android devices (Android SDK version 34.0.0)
+[✓] Xcode - develop for iOS and macOS (Xcode 16....]]></description><link>https://zenn.dev/suzuki_kawasaki/articles/c716299ec18dd6</link><guid isPermaLink="true">https://zenn.dev/suzuki_kawasaki/articles/c716299ec18dd6</guid><pubDate>Mon, 14 Apr 2025 03:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--aN7LUFph--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Flutter%25E3%2580%2591Android%25E3%2581%25AE%25E3%2583%2593%25E3%2583%25AB%25E3%2583%2589%25E3%2581%258C%25E5%25A4%25B1%25E6%2595%2597%2520%25E5%25AF%25BE%25E5%25BF%259C%25E3%2581%25AEMEMO%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:SUZUKI_Kawasaki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdhZmY4YjVhODcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>SUZUKI_Kawasaki</dc:creator></item><item><title><![CDATA[DIについて。AIバイブコーディングでバグらないためには？アウトプット]]></title><description><![CDATA[
+ はじめに
+こんにちは、2月から本格的にプログラマーになるために個人開発を始めた yuma です。
+とりあえず Java はしっかり学ぶと良いと聞いて Java Silver を取りました。でも実際に開発を始めてみると、資格は取れたけど全体の開発の流れがいまいち掴めてないことに気づきました。「じゃあもう実際に作りながら覚えよう」と思って、AI の力も借りつつ個人開発に取り組むことにしました。
+ただ、ちゃんとしたコーディングルールも決めずにやり始めたもんだから、ちょっと修正しただけでバグが出まくって、もう収集がつかない。
+そんなとき「もっと保守性とか可読性を上げるにはどうすればいいんだろ...]]></description><link>https://zenn.dev/wyuma/articles/c46a045f0460af</link><guid isPermaLink="true">https://zenn.dev/wyuma/articles/c46a045f0460af</guid><pubDate>Mon, 14 Apr 2025 01:00:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6ylqfH3I--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:DI%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E3%2580%2582AI%25E3%2583%2590%25E3%2582%25A4%25E3%2583%2596%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2587%25E3%2582%25A3%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%25A7%25E3%2583%2590%25E3%2582%25B0%25E3%2582%2589%25E3%2581%25AA%25E3%2581%2584%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AB%25E3%2581%25AF%25EF%25BC%259F%25E3%2582%25A2%25E3%2582%25A6%25E3%2583%2588%25E3%2583%2597%25E3%2583%2583%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:wYuma%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JjNmExMTI1OTQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>wYuma</dc:creator></item><item><title><![CDATA[Canvasを使った手書き機能]]></title><description><![CDATA[!
+以前、ドラッグ＆ドロップの記事を書いたときに、ジェスチャー（タップとかドラッグ＆ドロップ）も描画も両方Canvasで処理しました。
+有識者に確認したところ、Canvasは描画に専念させて、ジェスチャーはBoxを使った方がいいとアドバイスいただきました。
+Canvasはジェスチャーが得意ではないそうです。
+
+
+ UIの基本部分
+UI作っていきます。
+
+Canvas作って、Boxでラップ
+Boxのmodifierを領域いっぱいまで広げ、背景色を黄色、枠線も引いておく
+背景色と枠線は手書きできる場所を明確にするための処置なので、あとで消すかも。
+Canvasも領域いっぱいまで広げておく
+
+...]]></description><link>https://zenn.dev/rucco/articles/57b9f57781e70f</link><guid isPermaLink="true">https://zenn.dev/rucco/articles/57b9f57781e70f</guid><pubDate>Sun, 13 Apr 2025 00:06:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qhb9HH26--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Canvas%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%259F%25E6%2589%258B%25E6%259B%25B8%25E3%2581%258D%25E6%25A9%259F%25E8%2583%25BD%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%258B%25E3%2582%258B%25E3%2582%258A%25E3%2581%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTE1fMGFKYkItSUVoVE9rMXdjNXlIdnpidWJEZWMwdHVlT29RVU5aS3dsTDAzTi1fYz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>るるりこ</dc:creator></item><item><title><![CDATA[Canvasを使って画面にスタンプを押す]]></title><description><![CDATA[!
+スクラップで描いていたものを記事にしました。
+Canvasクラスを使うと、画面に色々なものが描画できます。
+画像ファイルを用意し、それをスタンプにして画面にポコポコ押すだけの機能を作ります。
+ViewModelとかわかる人向けです。
+
+
+ スタンプ用の画像用意
+pngでOK。
+res＞drawableに突っ込む
+
+ bitmapを保持する変数宣言
+
+context・・・resourcesはそのままでは使えないので、アプリのcontextから取得
+bitmap・・・BitmapFactoryというAPIを使う
+rememberを使って画像を保持する（毎回デコードさせないため）
+画像の大...]]></description><link>https://zenn.dev/rucco/articles/bf627ef4a9f324</link><guid isPermaLink="true">https://zenn.dev/rucco/articles/bf627ef4a9f324</guid><pubDate>Sat, 12 Apr 2025 23:56:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--rZZvrqOs--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Canvas%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E7%2594%25BB%25E9%259D%25A2%25E3%2581%25AB%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%25B3%25E3%2583%2597%25E3%2582%2592%25E6%258A%25BC%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%258B%25E3%2582%258B%25E3%2582%258A%25E3%2581%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTE1fMGFKYkItSUVoVE9rMXdjNXlIdnpidWJEZWMwdHVlT29RVU5aS3dsTDAzTi1fYz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>るるりこ</dc:creator></item><item><title><![CDATA[【超初心者向け】エミュレータと実機の設定]]></title><description><![CDATA[!
+Android Studioでコードの実行結果をエミュレーターや、自分のスマホで確認できます。
+そのやり方を説明します！
+Android Studio Developersのトレーニングで紹介されている内容とほぼ同じです。
+https://developer.android.com/courses/pathways/android-basics-compose-unit-1-pathway-2
+
+
+ エミュレーターを設定する
+!
+エミュレータはかなり重いです。
+サイズも大きいのでダウンロードに気合がいります。
+
+
+ エミュレータのシステム要件
+本家サイトによると、エミュレータを快適に...]]></description><link>https://zenn.dev/rucco/articles/41b472d9456bfb</link><guid isPermaLink="true">https://zenn.dev/rucco/articles/41b472d9456bfb</guid><pubDate>Sat, 12 Apr 2025 13:47:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bAqGzmC2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E8%25B6%2585%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E5%2590%2591%25E3%2581%2591%25E3%2580%2591%25E3%2582%25A8%25E3%2583%259F%25E3%2583%25A5%25E3%2583%25AC%25E3%2583%25BC%25E3%2582%25BF%25E3%2581%25A8%25E5%25AE%259F%25E6%25A9%259F%25E3%2581%25AE%25E8%25A8%25AD%25E5%25AE%259A%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%258B%25E3%2582%258B%25E3%2582%258A%25E3%2581%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTE1fMGFKYkItSUVoVE9rMXdjNXlIdnpidWJEZWMwdHVlT29RVU5aS3dsTDAzTi1fYz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>るるりこ</dc:creator></item><item><title><![CDATA[【超初心者向け】お天気カード２]]></title><description><![CDATA[!
+前回に引き続き、画面に配置されているボタンをクリックすると、お天気カードがランダムに1枚表示される、というアプリを作っていきます。
+今回はボタンをクリックしたときの処理を追加していきます。
+
+前回の記事はこちら
+https://zenn.dev/rucco/articles/8575173ca0e3da
+
+
+ ボタンを押したときの処理の概要
+「明日の天気は？」ボタンを押したとき、現在表示されている「？」カード以外のお天気カードが表示されるように変更していきます。
+現在、画像表示している部分は、
+Image(painter = painterResource(id = R.drawab...]]></description><link>https://zenn.dev/rucco/articles/278e341ad24df3</link><guid isPermaLink="true">https://zenn.dev/rucco/articles/278e341ad24df3</guid><pubDate>Thu, 10 Apr 2025 11:29:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--CWzdjy6c--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E8%25B6%2585%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E5%2590%2591%25E3%2581%2591%25E3%2580%2591%25E3%2581%258A%25E5%25A4%25A9%25E6%25B0%2597%25E3%2582%25AB%25E3%2583%25BC%25E3%2583%2589%25EF%25BC%2592%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%258B%25E3%2582%258B%25E3%2582%258A%25E3%2581%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTE1fMGFKYkItSUVoVE9rMXdjNXlIdnpidWJEZWMwdHVlT29RVU5aS3dsTDAzTi1fYz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>るるりこ</dc:creator></item><item><title><![CDATA[【超初心者向け】お天気カード1]]></title><description><![CDATA[!
+画面に配置されているボタンをクリックすると、お天気カードがランダムに1枚表示される
+というアプリを作っていきます。
+
+Android Studioを触るのは初めてという方へ
+Android Studioを触るのは初めてという方は、こちらの記事がおすすめです。
+https://zenn.dev/rucco/articles/fee5c752efdd95
+
+この記事で覚えられること
+
+画像を表示する方法
+ボタンをクリックしたときのロジック作成
+
+
+
+ アプリイメージ
+アプリの画面イメージはこんな感じです。
+シンプルなので、画面はすぐに完成します👌
+
+
+ プロジェクトを新規作成する
+
+「A...]]></description><link>https://zenn.dev/rucco/articles/8575173ca0e3da</link><guid isPermaLink="true">https://zenn.dev/rucco/articles/8575173ca0e3da</guid><pubDate>Wed, 09 Apr 2025 21:46:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--10WGUryJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E8%25B6%2585%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E5%2590%2591%25E3%2581%2591%25E3%2580%2591%25E3%2581%258A%25E5%25A4%25A9%25E6%25B0%2597%25E3%2582%25AB%25E3%2583%25BC%25E3%2583%25891%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%258B%25E3%2582%258B%25E3%2582%258A%25E3%2581%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTE1fMGFKYkItSUVoVE9rMXdjNXlIdnpidWJEZWMwdHVlT29RVU5aS3dsTDAzTi1fYz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>るるりこ</dc:creator></item><item><title><![CDATA[【超初心者向け】Modifierとは！？]]></title><description><![CDATA[!
+composable関数のそこかしこで見かけるModifier。
+その正体をさぐります！
+わかりやすくするため、TextやColumnのようなUIのことを「部品」と呼んでます。
+
+
+ 結論
+Modifierとは部品にスタイルやレイアウトを設定するためのもの。
+主に以下のような設定ができます。
+
+幅・高さ(widht,height)
+余白（padding）
+背景色(background)
+クリックイベントの追加(clicable)
+配置(align)
+
+
+ 使い方
+まずは、Modiferを設定しないパターンを見てみましょう！
+以下は、縦にテキストを3つ並べるだけのコードです。
+@Com...]]></description><link>https://zenn.dev/rucco/articles/3695199707fa72</link><guid isPermaLink="true">https://zenn.dev/rucco/articles/3695199707fa72</guid><pubDate>Tue, 08 Apr 2025 22:13:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--UNbmKh1z--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E8%25B6%2585%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E5%2590%2591%25E3%2581%2591%25E3%2580%2591Modifier%25E3%2581%25A8%25E3%2581%25AF%25EF%25BC%2581%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%258B%25E3%2582%258B%25E3%2582%258A%25E3%2581%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTE1fMGFKYkItSUVoVE9rMXdjNXlIdnpidWJEZWMwdHVlT29RVU5aS3dsTDAzTi1fYz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>るるりこ</dc:creator></item></channel></rss>
