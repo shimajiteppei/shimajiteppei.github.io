@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「JavaScript」のフィード]]></title><description><![CDATA[Zennのトピック「JavaScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/javascript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/64acd76870.png</url><title>Zennの「JavaScript」のフィード</title><link>https://zenn.dev/topics/javascript</link></image><generator>zenn.dev</generator><lastBuildDate>Sat, 26 Apr 2025 00:59:31 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/javascript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[UI開発は「構造を書く」時代へ ～ Structive に見る、もう一つの設計思想 ～]]></title><description><![CDATA[
+ はじめに
+現代のフロントエンド開発は、コンポーネント指向やデータフロー管理といった考え方を主軸に進化してきました。複雑なUIを部品に分割し、データの流れを管理可能な形にすることで、大規模アプリケーション開発の効率は飛躍的に向上しました。
+しかし、多くの開発者が共通して感じる課題も存在します。例えば、UIと状態（データ）の同期や、特にネストしたリストや計算値を含むデータの表示・更新に伴うコードの煩雑さ、フレームワーク特有のボイラープレートなどです。これらの課題は、UIの「見た目」や「振る舞い」を記述するコードの中に、データの加工や同期のための手続き的なロジックが多く混在することで発生し...]]></description><link>https://zenn.dev/mogera/articles/ad6df27b51ae51</link><guid isPermaLink="true">https://zenn.dev/mogera/articles/ad6df27b51ae51</guid><pubDate>Fri, 25 Apr 2025 23:25:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--NUVt6fZz--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:UI%25E9%2596%258B%25E7%2599%25BA%25E3%2581%25AF%25E3%2580%258C%25E6%25A7%258B%25E9%2580%25A0%25E3%2582%2592%25E6%259B%25B8%25E3%2581%258F%25E3%2580%258D%25E6%2599%2582%25E4%25BB%25A3%25E3%2581%25B8%2520%25EF%25BD%259E%2520Structive%2520%25E3%2581%25AB%25E8%25A6%258B%25E3%2582%258B%25E3%2580%2581%25E3%2582%2582%25E3%2581%2586%25E4%25B8%2580%25E3%2581%25A4%25E3%2581%25AE%25E8%25A8%25AD%25E8%25A8%2588%25E6%2580%259D%25E6%2583%25B3%2520%25EF%25BD%259E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mogera%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFUWEFKeU81R0xzNDk1VUxWUy1MTlZLdktsQWpMY3NuZnZueC00S1lYWUQ9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mogera</dc:creator></item><item><title><![CDATA[２つの摘みを持ったレンジバーを作ってみた]]></title><description><![CDATA[個人開発のアプリの一環にゾゾタ⚪︎ンのような価格の絞り込み機能を作ってみたので共有します
+参考にさせて頂いた動画
+https://youtu.be/zksYICkbBbY?si=uVZ3QMiP9ApUrDVT
+実際の使用感は以下のような感じ
+
+
+ bladeとコントローラー
+
+home.blade.php
+&lt;form action="{{route('app.home.search')}}" method="get" class="flex items-center justify-start" id="searchForm"&gt;
+    &lt;div&gt;
+      ...]]></description><link>https://zenn.dev/amethyst/articles/52b06dd5ee69ab</link><guid isPermaLink="true">https://zenn.dev/amethyst/articles/52b06dd5ee69ab</guid><pubDate>Fri, 25 Apr 2025 18:04:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--YFAQ16iK--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25EF%25BC%2592%25E3%2581%25A4%25E3%2581%25AE%25E6%2591%2598%25E3%2581%25BF%25E3%2582%2592%25E6%258C%2581%25E3%2581%25A3%25E3%2581%259F%25E3%2583%25AC%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%2590%25E3%2583%25BC%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E7%25B4%25AB%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2QzYTAyNjNlN2YuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>紫</dc:creator></item><item><title><![CDATA[[メモ]: inputタグでEnterをクリックしたときに特定の処理を実行する]]></title><description><![CDATA[
+ inputタグでEnterをクリックしたときに特定の処理を実行する
+例えば下のようなEnterキーを押すとタグが追加されるみたいな動作を実装したいときがある。しかしform内のinputでEnterを押したらフォームのonSubmitが走ってしまうのでその回避方法を調べたときのメモ
+
+https://zenn.dev/takasy/articles/react-tags-inputより拝借
+
+ 結論
+onKeyDown内で押されたキーがEnterキーかどうかをチェックすることで実現できる。
+import { Input } from "@/components/ui/input";
+...]]></description><link>https://zenn.dev/mitate_gengaku/articles/input-keypress-enter</link><guid isPermaLink="true">https://zenn.dev/mitate_gengaku/articles/input-keypress-enter</guid><pubDate>Fri, 25 Apr 2025 10:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--iHp_mcct--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255B%25E3%2583%25A1%25E3%2583%25A2%255D%253A%2520input%25E3%2582%25BF%25E3%2582%25B0%25E3%2581%25A7Enter%25E3%2582%2592%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2583%25E3%2582%25AF%25E3%2581%2597%25E3%2581%259F%25E3%2581%25A8%25E3%2581%258D%25E3%2581%25AB%25E7%2589%25B9%25E5%25AE%259A%25E3%2581%25AE%25E5%2587%25A6%25E7%2590%2586%25E3%2582%2592%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25BE%25A1%25E6%25A5%25AF%25E7%258E%2584%25E5%25B6%25BD%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0tQOVRYWHQ5Qm1BLVplcURoLWdxUHl4RVFjMmNsRkhSNk95XzVVSVVhPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>御楯玄嶽</dc:creator></item><item><title><![CDATA[Web Animations APIの一番の強みは、擬似要素アニメーションだと思う。]]></title><description><![CDATA[「JavaScriptで擬似要素をアニメーションさせるのは面倒くさい」
+Webサイトのコーディング経験が豊富な方ほど、このように思っているのではないでしょうか。
+結論、Web Animations APIを使えば、たったこれだけです！
+el.animate([{ opacity: 0 }, { opacity: 1 }], {
+  duration: 300,
+  pseudoElement: '::before',
+});
+何を今さら……と呆れ顔で読んでいる方もいらっしゃるかもしれませんが、これを最近知った私はかなり感動したので、まだ知らない人に届けばいいなと思い筆を取りました。
+
+ ...]]></description><link>https://zenn.dev/izakikazuho/articles/7eb05799cb6904</link><guid isPermaLink="true">https://zenn.dev/izakikazuho/articles/7eb05799cb6904</guid><pubDate>Fri, 25 Apr 2025 09:23:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--WxddGqex--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Web%2520Animations%2520API%25E3%2581%25AE%25E4%25B8%2580%25E7%2595%25AA%25E3%2581%25AE%25E5%25BC%25B7%25E3%2581%25BF%25E3%2581%25AF%25E3%2580%2581%25E6%2593%25AC%25E4%25BC%25BC%25E8%25A6%2581%25E7%25B4%25A0%25E3%2582%25A2%25E3%2583%258B%25E3%2583%25A1%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2581%25A0%25E3%2581%25A8%25E6%2580%259D%25E3%2581%2586%25E3%2580%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:izakikazuho%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSzZidndlTndKSzY0Q19UblpzQWxEMVRnMm1ieWxXRi1JWFQ3Ul9vSEZMN1JRb2s1N1g4dz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>izakikazuho</dc:creator></item><item><title><![CDATA[TypeScript Compilerの裏側をちょっとだけ理解する]]></title><description><![CDATA[
+ 背景
+2025年5月に東京で開催されるTSKaigiに30分のセッションとしてプロポーザルを提出しました。
+しかし、結果は残念ながら落選し、登壇することはできませんでした。
+ですが、プロポーザルを提出するにあたって、TypeScript について整理していた内容や調査していた事がたくさんあり、それをそのままお蔵入りさせるのはもったいないと感じました。そのため、発表内容をできるだけそのまま記事にし、公開しようと思い当たりました。
+記事として文字起こしを行うと少し分量として多くなってしまうかもしれないのですが、TypeScript の経験が少ない初学者や、TypeScript を何となく...]]></description><link>https://zenn.dev/noko_noko/articles/f09d10cae0e5f7</link><guid isPermaLink="true">https://zenn.dev/noko_noko/articles/f09d10cae0e5f7</guid><pubDate>Fri, 25 Apr 2025 09:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--FxBkKvpl--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%2520Compiler%25E3%2581%25AE%25E8%25A3%258F%25E5%2581%25B4%25E3%2582%2592%25E3%2581%25A1%25E3%2582%2587%25E3%2581%25A3%25E3%2581%25A8%25E3%2581%25A0%25E3%2581%2591%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A4%25E3%2581%25A1%25E3%2581%25AE%25E3%2581%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRjZDZjM2E1ZmQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>つちのこ</dc:creator></item><item><title><![CDATA[PRエビデンス作成時に便利なChrome拡張機能をFlutterで実装してみた]]></title><description><![CDATA[こんにちは、スペースマーケットでモバイルエンジニアをしている村田です。
+今回、普段開発で触っているFlutterでChromeの拡張機能を作ってみたので、その内容を本記事でご紹介します！
+
+ 作成物
+タイトルの通り、PR作成時に便利な以下の2つの機能を備えたツールを作成しました
+
+Markdown形式の画像記法 ![タイトル](URL) をHTMLの &lt;img&gt;タグ に変換
+最大4x3のMarkdownテーブル生成
+
+
+
+ 背景
+PRのエビデンスを作成する際に愛用していた、ImgConverterが利用不可になってしまい、作業効率が落ちてしまいました。代替サービスも見当たらな...]]></description><link>https://zenn.dev/spacemarket/articles/flutter-chrome-extension</link><guid isPermaLink="true">https://zenn.dev/spacemarket/articles/flutter-chrome-extension</guid><pubDate>Fri, 25 Apr 2025 07:06:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--muUQNNPG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:PR%25E3%2582%25A8%25E3%2583%2593%25E3%2583%2587%25E3%2583%25B3%25E3%2582%25B9%25E4%25BD%259C%25E6%2588%2590%25E6%2599%2582%25E3%2581%25AB%25E4%25BE%25BF%25E5%2588%25A9%25E3%2581%25AAChrome%25E6%258B%25A1%25E5%25BC%25B5%25E6%25A9%259F%25E8%2583%25BD%25E3%2582%2592Flutter%25E3%2581%25A7%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:nmurata%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc1NTA1NzM5OGYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25B9%25E3%2583%259A%25E3%2583%25BC%25E3%2582%25B9%25E3%2583%259E%25E3%2583%25BC%25E3%2582%25B1%25E3%2583%2583%25E3%2583%2588%2520Engineer%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I4YzgxNzdkMTcuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nmurata</dc:creator></item><item><title><![CDATA[ref とreactive、toRefs、toRef]]></title><description><![CDATA[
+ ref とreactive
+refも内部的にはreactiveを使っている。refもオブジェクト型に使える上、reactiveはいくつか制約があるため、基本的にrefを使う。
+
+ toRefs、toRef
+
+ toRef
+オブジェクトの一部のプロパティをrefに変換する。
+元の値がreactiveの場合、どちらもリアクティブなため、どちらかの値を変更すると、もう片方の値も変わる。
+
+ toRefs
+オブジェクトの全てのプロパティをrefに変換する。
+分割代入やスプレッドで使える。
+
+ 参考
+
+【Vue】reactive()って要らなくね？ref()だけでよくね？ #Vue.js - ...]]></description><link>https://zenn.dev/minato_nanzyou/articles/e781f6f671f818</link><guid isPermaLink="true">https://zenn.dev/minato_nanzyou/articles/e781f6f671f818</guid><pubDate>Fri, 25 Apr 2025 06:35:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--x2EmMvDx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ref%2520%25E3%2581%25A8reactive%25E3%2580%2581toRefs%25E3%2580%2581toRef%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25BF%25E3%2581%25AA%25E3%2581%25A8%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTDF6U0VrNjB6Tk9wZFVJb1o3NEpqRHhtM1NUZlQ1LUU0elQ0T3RHLTZQVnc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>みなと</dc:creator></item><item><title><![CDATA[JSConf JP(2024)感想]]></title><description><![CDATA[
+ 参加したセッション※ライブ配信
+
+ トラックA
+
+React Server Componentsとは何であって何でないか
+Web標準の進化を止めない！Baselineというブラウザサポートの考え方
+Sponsor LT x 12
+
+
+ トラックB
+
+LT: Promise.try: シンプルで強力な同期/非同期統合の未来 - 実装の深層とPromiseの進化
+LT: JavaScriptを支えるエコシステム（漫才）
+LT: romajip: 日本の住所CSVデータを活用した英語住所変換ライブラリを作った話
+LT: ステップバイステップで進めるYahoo!知恵袋のフロントエンドリアーキ...]]></description><link>https://zenn.dev/minato_nanzyou/articles/b2231f5c757af9</link><guid isPermaLink="true">https://zenn.dev/minato_nanzyou/articles/b2231f5c757af9</guid><pubDate>Fri, 25 Apr 2025 06:25:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--at1huIRZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:JSConf%2520JP%25282024%2529%25E6%2584%259F%25E6%2583%25B3%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25BF%25E3%2581%25AA%25E3%2581%25A8%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTDF6U0VrNjB6Tk9wZFVJb1o3NEpqRHhtM1NUZlQ1LUU0elQ0T3RHLTZQVnc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>みなと</dc:creator></item><item><title><![CDATA[生成 AI の時代だからこそ、ブックマークレットのススメ]]></title><description><![CDATA[皆さん、ブックマークレットという古から伝わる技術をご存じでしょうか？
+https://ja.wikipedia.org/wiki/ブックマークレット
+https://qiita.com/aqril_1132/items/b5f9040ccb8cbc705d04
+生成 AI の時代に入り、このブックマークレットという技術がまた熱くなってきた！と巷で話題なので、僭越ながら筆を取らせて頂きました。
+
+ なぜ熱いのか
+ブックマークレットの以下の特徴が生成 AI にぴったりだと考えています。
+
+とても枯れている
+コード生成に必要な情報を AI に食わせることができる
+
+
+ ブックマークレットででき...]]></description><link>https://zenn.dev/t0yohei/articles/6d5bb3a558fef1</link><guid isPermaLink="true">https://zenn.dev/t0yohei/articles/6d5bb3a558fef1</guid><pubDate>Fri, 25 Apr 2025 04:52:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Uri5xYPj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%2594%259F%25E6%2588%2590%2520AI%2520%25E3%2581%25AE%25E6%2599%2582%25E4%25BB%25A3%25E3%2581%25A0%25E3%2581%258B%25E3%2582%2589%25E3%2581%2593%25E3%2581%259D%25E3%2580%2581%25E3%2583%2596%25E3%2583%2583%25E3%2582%25AF%25E3%2583%259E%25E3%2583%25BC%25E3%2582%25AF%25E3%2583%25AC%25E3%2583%2583%25E3%2583%2588%25E3%2581%25AE%25E3%2582%25B9%25E3%2582%25B9%25E3%2583%25A1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:t0yohei%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pqOHU5emlQc1NqU0RDSm5sb2V5LWZjSDE3dzdSMXBsWWlyUERkTFE9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>t0yohei</dc:creator></item><item><title><![CDATA[PCでもっと気軽にサンプリングで遊べるWebアプリ『YouChop』を作った話]]></title><description><![CDATA[https://youchop.onrender.com/
+※モバイルからはアクセスができません；；
+今回、RUNTEQ祭に向けて初めてWebアプリを開発することになったので、課題的観点と技術的観点の２つからこのWebアプリを紹介しようと思います！
+ただ、まず前提として「サンプリングとはなんぞや」という人のために簡潔にサンプリングというものを説明した後で、それら２つの項目へ進んでいきます。
+
+ サンプリングとは
+昨今、全世界ではhiphopが音楽シーンのメジャーを張っています。
+hiphopの楽曲は大きく分けて２つで構成されています。
+「ラップ」と「ビート」です。
+このうち、「ビート」と...]]></description><link>https://zenn.dev/yuto_dev/articles/b0c5be28e613e6</link><guid isPermaLink="true">https://zenn.dev/yuto_dev/articles/b0c5be28e613e6</guid><pubDate>Fri, 25 Apr 2025 02:46:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--e9An8RLJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:PC%25E3%2581%25A7%25E3%2582%2582%25E3%2581%25A3%25E3%2581%25A8%25E6%25B0%2597%25E8%25BB%25BD%25E3%2581%25AB%25E3%2582%25B5%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AA%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%25A7%25E9%2581%258A%25E3%2581%25B9%25E3%2582%258BWeb%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2580%258EYouChop%25E3%2580%258F%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yuto_byte%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA4NmYxNTg0YzMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yuto_byte</dc:creator></item><item><title><![CDATA[SourceTreeの追跡中チェックボックスが何を意味しているのか]]></title><description><![CDATA[
+ この記事を書こうと思った経緯
+SourceTreeのpushGUIの右に三段階のチェックボックスがあり、該当の欄には追跡中と書いてあるのですが、チェックボックスの状態が何を表すのかわからず、一日もやもやしていたので理解した内容をアウトプットするため。
+
+ 結果から話すと
+
+ 1. チェックが完全に入っている状態（白いチェックマーク）:
+
+そのブランチは完全に追跡設定されている
+ッシュやプルを行うとき、引数なしでも自動的に対応するリモートブランチを特定できる
+git branch -vv で対応するリモートブランチが表示される状態
+
+
+ 2. チェックが部分的に入っている状態（グレーの...]]></description><link>https://zenn.dev/utan0907/articles/d1a4fa16ef147c</link><guid isPermaLink="true">https://zenn.dev/utan0907/articles/d1a4fa16ef147c</guid><pubDate>Fri, 25 Apr 2025 02:32:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--X3y-BI_Y--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:SourceTree%25E3%2581%25AE%25E8%25BF%25BD%25E8%25B7%25A1%25E4%25B8%25AD%25E3%2583%2581%25E3%2582%25A7%25E3%2583%2583%25E3%2582%25AF%25E3%2583%259C%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25B9%25E3%2581%258C%25E4%25BD%2595%25E3%2582%2592%25E6%2584%258F%25E5%2591%25B3%25E3%2581%2597%25E3%2581%25A6%25E3%2581%2584%25E3%2582%258B%25E3%2581%25AE%25E3%2581%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yuta%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzkwNjJjNjE3MTQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yuta</dc:creator></item><item><title><![CDATA[コンポーネントライブラリ開発におけるcvaやTailwind Variantsもどき]]></title><description><![CDATA[があれば便利だなと思いましたが、
+たかが文字列結合だけの処理にライブラリ依存したくないので自作することにしました。
+
+ 詳細
+バリエーション毎のスタイルを作成することはコンポーネント実装でお馴染みであり、近年は省力化のためにClass Variance AuthorityやTailwind Variantsといったライブラリもよく使われてます。
+もし上記のライブラリを使わず実装しようとしたとき、大した問題ではないのですが条件分岐はオブジェクトのマッピング・if・Switch・三項演算子などの書き方の幅が産まれてしまい、本質的ではない議論をしがちです。
+
+ 完成形
+!
+cnはclsxとtw...]]></description><link>https://zenn.dev/yhase_rqp/articles/c63233223678d8</link><guid isPermaLink="true">https://zenn.dev/yhase_rqp/articles/c63233223678d8</guid><pubDate>Fri, 25 Apr 2025 01:30:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--cRSKlw96--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%259D%25E3%2583%25BC%25E3%2583%258D%25E3%2583%25B3%25E3%2583%2588%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%25E9%2596%258B%25E7%2599%25BA%25E3%2581%25AB%25E3%2581%258A%25E3%2581%2591%25E3%2582%258Bcva%25E3%2582%2584Tailwind%2520Variants%25E3%2582%2582%25E3%2581%25A9%25E3%2581%258D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yha%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MyZTY1OTg3NjEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yha</dc:creator></item><item><title><![CDATA[知識ゼロの未経験エンジニアがTodo アプリを作った話 ✨]]></title><description><![CDATA[こんにちは！Web 開発を始めたばかりの駆け出しエンジニア、k33です。
+コードの知識はまだ浅いですが、「使いやすくて見た目もかっこいい Todo リストを自分で作りたい！」と思い立ち、ChatGPT を相棒にプロトタイプを完成させました。
+⭐ はじめに
+Enter でタスク追加、Shift+Enter で改行
+タスクは ドラッグ＆ドロップ で並び替え（SortableJS）
+ダーク／ライトモード 切替 ＋ 背景画像 のアップロード
+タスクの 完了チェック・編集・削除
+GA4 （gtag.js） でアクセス計測
+完全クライアントサイド × localStorage で永続化
+Vercel...]]></description><link>https://zenn.dev/k33/articles/2665e47a34fd7f</link><guid isPermaLink="true">https://zenn.dev/k33/articles/2665e47a34fd7f</guid><pubDate>Thu, 24 Apr 2025 22:07:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BVpuAJRc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%259F%25A5%25E8%25AD%2598%25E3%2582%25BC%25E3%2583%25AD%25E3%2581%25AE%25E6%259C%25AA%25E7%25B5%258C%25E9%25A8%2593%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%25E3%2581%258CTodo%2520%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%25E8%25A9%25B1%2520%2520%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:k33%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS1A3YVBzanptenZ2SFlJWnlDZTdGbXFlODRjVDJuTFRSdHpjcEtRM2kxUF9hN1Bpc3I9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>k33</dc:creator></item><item><title><![CDATA[JavaScript１日目]]></title><description><![CDATA[今日覚えたことをまとめていきます
+変数の定義の仕方には二種類ある！
+一つ目が
+const
+二つ目が
+let
+constが変更はできない変数らしいけど使い分けがよくわからない、、constしかまだ使えてないです
+次に入力の受け取り方で多分一つしかない！
+const fs =require("fs");
+const input =fs.readFileSync("ファイル名","utf-8").trim();
+trimは余計なものを消してくれるから早めに置いといたほうがいいらしい！！
+const hensu = input.split(" ").map(Number);
+全部数値の時とかには...]]></description><link>https://zenn.dev/tkt03/articles/6006e35db9360d</link><guid isPermaLink="true">https://zenn.dev/tkt03/articles/6006e35db9360d</guid><pubDate>Thu, 24 Apr 2025 15:45:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--KZyI-7ja--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:JavaScript%25EF%25BC%2591%25E6%2597%25A5%25E7%259B%25AE%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tkt03%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSWQyOHNDQVU4bEF3SkJOa0VoM1N6QzNLOXZJcUw2MkRjcGJxNDJhWF9LNDBpUGFRPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tkt03</dc:creator></item><item><title><![CDATA[[メモ]: FormDataで配列を渡したい]]></title><description><![CDATA[
+ FormDataで配列を渡したい
+FormDataに配列を渡す方法を忘れる→調べる→思い出すの繰り返しだったためメモで残す
+
+ コード
+
+keyにkey + []としてfor文でデータを追加する
+formDataからデータを取得するときはgetAllを使用する
+
+// 送る側(フロントエンド等)
+const formData = new FormData();
+
+for (const name of names) {
+  formData.append("names[]", name);
+}
+
+// fileの場合
+for (const file of files) {
+  form...]]></description><link>https://zenn.dev/mitate_gengaku/articles/form-data-array</link><guid isPermaLink="true">https://zenn.dev/mitate_gengaku/articles/form-data-array</guid><pubDate>Thu, 24 Apr 2025 14:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--eK_8KRqI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255B%25E3%2583%25A1%25E3%2583%25A2%255D%253A%2520FormData%25E3%2581%25A7%25E9%2585%258D%25E5%2588%2597%25E3%2582%2592%25E6%25B8%25A1%25E3%2581%2597%25E3%2581%259F%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25BE%25A1%25E6%25A5%25AF%25E7%258E%2584%25E5%25B6%25BD%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0tQOVRYWHQ5Qm1BLVplcURoLWdxUHl4RVFjMmNsRkhSNk95XzVVSVVhPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>御楯玄嶽</dc:creator></item><item><title><![CDATA[オブジェクト構造の再構築の考え方]]></title><description><![CDATA[
+ 基本概念
+
+既存のデータを変換して、必要な形式のデータ構造に作り直す技法
+
+
+ 主な目的
+
+
+データの整形: API応答やDBデータを表示や処理に適した形式に変換
+
+
+ 実装例
+// 元データ
+const user = {
+  user_id: 123,
+  user_first_name: "太郎",
+  user_last_name: "山田",
+  user_email: "taro@example.com"
+};
+
+// 再構築したデータ
+const formattedUser = {
+  id: user.user_id,
+  name: `${user.user_last...]]></description><link>https://zenn.dev/yyoshioka/articles/1bc5c914d02f1b</link><guid isPermaLink="true">https://zenn.dev/yyoshioka/articles/1bc5c914d02f1b</guid><pubDate>Thu, 24 Apr 2025 07:38:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3pNb5gcc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25AA%25E3%2583%2596%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E6%25A7%258B%25E9%2580%25A0%25E3%2581%25AE%25E5%2586%258D%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%25AE%25E8%2580%2583%25E3%2581%2588%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25BF%25E3%2582%2587%25E3%2581%2586%25E3%2581%2598%25E3%2582%2587%25E3%2581%2586%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzkxYjkxZTg3NzEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>みょうじょう</dc:creator></item><item><title><![CDATA[FastAPI × JWTで認証付きAPIを作ってVueとつないだ話]]></title><description><![CDATA[
+ FastAPI × JWTで認証付きAPIを作ってVueとつないだ話
+
+ 🔹 1. 導入文（エピソード）
+最近、近所のパン屋さんで顔なじみの店員さんができた。
+最初は「毎朝同じ時間にクロワッサン買う人」として認識されてたっぽいんだけど、ある日ついに言われた。
+
+「いつもこの時間ですね！常連さんですね☺️」
+
+それを聞いてふと思った。
+「“認証”って、こういうことかもな」と。
+
+Web開発では、「誰がアクセスしてるか？」を識別する仕組みがとても大事で、それを担うのが**認証（Authentication）**という仕組み。
+最近、SNSのフォロワーを可視化するダッシュボードをVue +...]]></description><link>https://zenn.dev/tfuji/articles/1a7e11aa3d7a65</link><guid isPermaLink="true">https://zenn.dev/tfuji/articles/1a7e11aa3d7a65</guid><pubDate>Wed, 23 Apr 2025 22:45:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--pJk_YG2p--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:FastAPI%2520%25C3%2597%2520JWT%25E3%2581%25A7%25E8%25AA%258D%25E8%25A8%25BC%25E4%25BB%2598%25E3%2581%258DAPI%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6Vue%25E3%2581%25A8%25E3%2581%25A4%25E3%2581%25AA%25E3%2581%2584%25E3%2581%25A0%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%25A1%25E3%2583%25BC%25E3%2583%2597%25E3%2583%25AB%25E3%2582%25B7%25E3%2583%25AD%25E3%2583%2583%25E3%2583%2597%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzcwMjVlOTIxMWMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>メープルシロップ</dc:creator></item><item><title><![CDATA[TypeScriptとJavaScriptの関係性をシンプルにわかりやすく解説してみます！]]></title><description><![CDATA[
+
+ はじめに
+最近よく聞く「TypeScript（タイプスクリプト）」という言葉。
+「なんとなくJavaScriptと関係がありそうだけど、よくわからない…」という方も多いのではないでしょうか？
+この記事では、TypeScriptとJavaScriptの違いや関係性を、初心者でもわかるようにやさしく解説していきます。
+
+ JavaScriptってどんな言語？
+JavaScript（JS）は、Webの世界で超メジャーなプログラミング言語です。
+2014～2023年時点では世界で一番使用されていた言語です。
+
+ブラウザ上で動く
+コードが柔軟に書ける
+サーバーサイド(Node.js)でも使え...]]></description><link>https://zenn.dev/pataro/articles/3f35b60ecb7c29</link><guid isPermaLink="true">https://zenn.dev/pataro/articles/3f35b60ecb7c29</guid><pubDate>Wed, 23 Apr 2025 14:41:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--M4VDNcS6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%25E3%2581%25A8JavaScript%25E3%2581%25AE%25E9%2596%25A2%25E4%25BF%2582%25E6%2580%25A7%25E3%2582%2592%25E3%2582%25B7%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AB%25E3%2581%25AB%25E3%2582%258F%25E3%2581%258B%25E3%2582%258A%25E3%2582%2584%25E3%2581%2599%25E3%2581%258F%25E8%25A7%25A3%25E8%25AA%25AC%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%25BE%25E3%2581%2599%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:pataro%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q0MDkwNGY2MmMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>pataro</dc:creator></item><item><title><![CDATA[Angular 19.2で、HTTPリソースとレスポンスストリーミングが実験的に登場！]]></title><description><![CDATA[!
+本記事は、 https://www.youtube.com/watch?v=sGSKSh5yNIE をソースとして読み込み、生成AIが執筆したあと、著者が内容を確認・推敲しています。
+
+!
+これらの機能は現在実験的な機能です。本番環境での使用は慎重に検討してください。
+
+Angular 19.2がリリースされました！今回の目玉は、HTTPリソースとレスポンスストリーミングの実験的機能です。Signalベースの開発がますます便利になっていくのを感じますね。
+
+ HTTPリソースで、非同期処理がもっとシンプルに
+Angular v19で実験的に再リリースされたHTTPリソース、めちゃくち...]]></description><link>https://zenn.dev/rdlabo/articles/35e1d6ae8d8adf</link><guid isPermaLink="true">https://zenn.dev/rdlabo/articles/35e1d6ae8d8adf</guid><pubDate>Wed, 23 Apr 2025 13:53:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Ey5vUwI2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Angular%252019.2%25E3%2581%25A7%25E3%2580%2581HTTP%25E3%2583%25AA%25E3%2582%25BD%25E3%2583%25BC%25E3%2582%25B9%25E3%2581%25A8%25E3%2583%25AC%25E3%2582%25B9%25E3%2583%259D%25E3%2583%25B3%25E3%2582%25B9%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25AA%25E3%2583%25BC%25E3%2583%259F%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%258C%25E5%25AE%259F%25E9%25A8%2593%25E7%259A%2584%25E3%2581%25AB%25E7%2599%25BB%25E5%25A0%25B4%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%25A6%258A%25E5%258E%259F%25E6%2598%258C%25E5%25BD%25A6%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2hPaXJOMUlrUWZNc0J2Vlljc1NzOGRGYW9USjV1TnZNTHF5TUp4cWc9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>榊原昌彦</dc:creator></item><item><title><![CDATA[【毎日アプリ作成チャレンジ3日目】集中力アップ！シンプルなタイマー「Focus Timer」]]></title><description><![CDATA[こんにちは、森です。
+現在、「毎日アプリ作成チャレンジ」として毎日1つ小さなWebアプリを作っています。
+今回は3日目、テーマは 「集中力」。
+シンプルなタイマーアプリ「Focus Timer」を制作しました。
+
+
+ 🎯 作ったもの：Focus Timer
+
+※GitHubへのリンクやスクリーンショット画像は適宜差し替えてください。
+
+
+ 🛠 技術要素
+
+HTML / CSS / JavaScript
+
+setInterval() による1秒ごとの更新
+スタート・ストップ・リセットのイベント制御
+
+Audio要素でアラーム音再生
+
+
+
+ 💡 学んだこと・工夫したこと
+
+時間のフォーマット...]]></description><link>https://zenn.dev/homatsu_tech/articles/ea24812b5883b4</link><guid isPermaLink="true">https://zenn.dev/homatsu_tech/articles/ea24812b5883b4</guid><pubDate>Wed, 23 Apr 2025 13:46:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--y64KQUA_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E6%25AF%258E%25E6%2597%25A5%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E4%25BD%259C%25E6%2588%2590%25E3%2583%2581%25E3%2583%25A3%25E3%2583%25AC%25E3%2583%25B3%25E3%2582%25B83%25E6%2597%25A5%25E7%259B%25AE%25E3%2580%2591%25E9%259B%2586%25E4%25B8%25AD%25E5%258A%259B%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%25EF%25BC%2581%25E3%2582%25B7%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AB%25E3%2581%25AA%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%259E%25E3%2583%25BC%25E3%2580%258CFocus%2520Timer%25E3%2580%258D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25AE%259D%25E6%259D%25BE%2540%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc2NmRlNTNlODQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>宝松@システムエンジニア</dc:creator></item></channel></rss>
