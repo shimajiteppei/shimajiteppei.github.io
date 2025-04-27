@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Sun, 27 Apr 2025 05:44:34 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[[Python-Agno] ユーザ情報をMemoryに蓄積するAgentをつくる (基本編)]]></title><description><![CDATA[
+ はじめに
+MoatになりうるAIエージェントのメモリデザインパターン でも示されているように、LLMが組み込まれたAgenticなプロダクトを構築するにあたって、ユーザのパーソナルデータを蓄積することは非常に重要です。
+Moatとはビジネスにおいて競合他社と差別化して競合優位性を築くためのものです。
+他の類似プロダクトが収集・蓄積していないユーザのパーソナル情報を元にユーザ体験を向上させることができれば、プロダクトを利用してもらう強力な理由になります。
+今回は、Agnoのメモリ機能に焦点を当て、ユーザ情報をメモリに保存する方法を見ていきます。今回紹介するようなメモリ機能を発展させるこ...]]></description><link>https://zenn.dev/lud/articles/agent-memory-1</link><guid isPermaLink="true">https://zenn.dev/lud/articles/agent-memory-1</guid><pubDate>Sun, 27 Apr 2025 04:57:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--pOR0_bMf--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BPython-Agno%255D%2520%25E3%2583%25A6%25E3%2583%25BC%25E3%2582%25B6%25E6%2583%2585%25E5%25A0%25B1%25E3%2582%2592Memory%25E3%2581%25AB%25E8%2593%2584%25E7%25A9%258D%25E3%2581%2599%25E3%2582%258BAgent%25E3%2582%2592%25E3%2581%25A4%25E3%2581%258F%25E3%2582%258B%2520%2528%25E5%259F%25BA%25E6%259C%25AC%25E7%25B7%25A8%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:t_nakatani%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NjM2JlNGUzZjguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>t_nakatani</dc:creator></item><item><title><![CDATA[【実装解説】Google ADKで「動的ParallelAgent」パターンを作る]]></title><description><![CDATA[GoogleのAgent Development Kit（ADK）を使っていると、こんな課題にぶつかりませんか？
+
+「実行時にタスクの種類や数が決まるんだけど、どう並列処理すればいい？」
+
+そんな時に使えるのが、
+「Custom Agentがその場でParallelAgentを組み立てて、session.stateでデータをやりとりする」
+という設計パターンです。
+この記事では、この手法を
+✅ なぜ必要か
+✅ 最小コード例
+✅ 実行方法と実行結果
+✅ 実装のコツと落とし穴
+✅ 応用アイデア
+の順で、わかりやすく解説していきます！
+
+
+ 🤔なぜ「動的ParallelAgent」が必要なのか...]]></description><link>https://zenn.dev/masahide/articles/ee3fdb85c5221e</link><guid isPermaLink="true">https://zenn.dev/masahide/articles/ee3fdb85c5221e</guid><pubDate>Sun, 27 Apr 2025 03:49:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--RHhq8QjP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%25AE%259F%25E8%25A3%2585%25E8%25A7%25A3%25E8%25AA%25AC%25E3%2580%2591Google%2520ADK%25E3%2581%25A7%25E3%2580%258C%25E5%258B%2595%25E7%259A%2584ParallelAgent%25E3%2580%258D%25E3%2583%2591%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%25B3%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Masahide%2520YAMASAKI%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2hlUENqQlhHelBNMVplbm4xMzdpUXFkUlZiS0xaeEFZWjQwdDVPVVNnPXMyNTAtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Masahide YAMASAKI</dc:creator></item><item><title><![CDATA[【Python】線形回帰とは何か？]]></title><description><![CDATA[線形回帰は、データ分析や機械学習の入門として最もよく使われる手法の一つです。
+シンプルながら強力なこの方法を理解すれば、データからパターンを見つけて予測ができるようになります。
+この記事では、線形回帰の基本から実際のPythonでの実装まで説明していきます。
+
+ 線形回帰とは？
+線形回帰とは、データポイント間の関係を直線で表現する方法です。
+たとえば、勉強時間と成績の関係や、広告費と売上の関係などを分析するのに使われます。
+簡単に言うと、点と点の間に「最も当てはまりの良い直線」を引くことです。
+
+ どうして「線形」回帰というの？
+「線形」という言葉は「直線的な」という意味です。
+つまり、...]]></description><link>https://zenn.dev/hovinci/articles/04fc5e2990c4ac</link><guid isPermaLink="true">https://zenn.dev/hovinci/articles/04fc5e2990c4ac</guid><pubDate>Sun, 27 Apr 2025 01:46:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--pKqjKznt--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591%25E7%25B7%259A%25E5%25BD%25A2%25E5%259B%259E%25E5%25B8%25B0%25E3%2581%25A8%25E3%2581%25AF%25E4%25BD%2595%25E3%2581%258B%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%259B%25E3%2583%25B4%25E3%2582%25A3%25E3%2583%25B3%25E3%2583%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI0MWFjY2M3YWQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ホヴィンチ</dc:creator></item><item><title><![CDATA[🧪 Pythonの仮想環境とは？venv・virtualenv・condaの使い方を解説]]></title><description><![CDATA[
+ 📝 はじめに
+Pythonでプロジェクトを進めていると、こんな悩みを持ったことはありませんか？
+
+「あるプロジェクトで使ったパッケージが、別のプロジェクトと競合する…」
+「バージョン違いでコードが動かなくなった…」
+
+そんなときに役立つのが、仮想環境（Virtual Environment）です。
+この記事では、Pythonにおける仮想環境の基本と、venv・virtualenv・conda などの主要なツールを使った環境構築方法を解説します。
+
+
+仮想環境とは何か？なぜ必要？
+venv を使った基本的な仮想環境の作り方
+virtualenv の特徴と使い方
+conda 環境との違い...]]></description><link>https://zenn.dev/oit2003/articles/a6689ba4c071ff</link><guid isPermaLink="true">https://zenn.dev/oit2003/articles/a6689ba4c071ff</guid><pubDate>Sun, 27 Apr 2025 01:19:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1NzH4Oqe--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%2520%2520Python%25E3%2581%25AE%25E4%25BB%25AE%25E6%2583%25B3%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25A8%25E3%2581%25AF%25EF%25BC%259Fvenv%25E3%2583%25BBvirtualenv%25E3%2583%25BBconda%25E3%2581%25AE%25E4%25BD%25BF%25E3%2581%2584%25E6%2596%25B9%25E3%2582%2592%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:OIT2003%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSUwxN0ZaM1B3YkZyak5GWFVZRnNva000aldZTWZaQzc0MVh1UzhtRDdlZUNJVT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>OIT2003</dc:creator></item><item><title><![CDATA[Raspberry Pi Picoノート]]></title><description><![CDATA[Raspberry Pi Picoを使った工作用のノート
+
+ 製品全般
+
+ Raspberry Pi Picoファミリーについて
+Picoは2021年1月リリースの第一世代、2024年8月リリースの第二世代がある。
+ラズベリーパイ財団からはFlash ROM等を搭載したマイコンボードとしてPico1やPico2がリリースされているが、チップ単品も購入することが出来るため、オリジナルのハードウェアにPicoのチップを搭載することも出来る。
+
+ チップ単体のスペック
+チップ単体のスペックは以下の通り。
+
+
+
+Name
+Pico1
+Pico2
+
+
+
+
+世代
+第一世代
+第二世代
+
+
+リリース
+2...]]></description><link>https://zenn.dev/kojiro/articles/641f560cc3bbf5</link><guid isPermaLink="true">https://zenn.dev/kojiro/articles/641f560cc3bbf5</guid><pubDate>Sat, 26 Apr 2025 21:18:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--CnoSjQeQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:Raspberry%2520Pi%2520Pico%25E3%2583%258E%25E3%2583%25BC%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2593%25E3%2581%2598%25E3%2582%258D%25E3%2583%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M5YzllNTkyN2YuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>こじろー</dc:creator></item><item><title><![CDATA[うさぎでもわかるシリーズ：Rust製のPythonパッケージ管理ツール「uv」が急に流行った件について]]></title><description><![CDATA[
+ うさぎでもわかるシリーズ：Rust製のPythonパッケージ管理ツール「uv」が急に流行った件について
+
+ 1. はじめに
+こんにちは、みなさん！最近、Pythonの開発環境に新しい風が吹いています。それが「uv」というRust製のPythonパッケージ管理ツールです。
+「またパッケージ管理ツール？pip, conda, poetry...すでにたくさんあるのに、なぜ新しいものが必要なの？」と思われるかもしれません。でも、uvが登場してから短期間で多くの開発者から支持を集めているのには、ちゃんと理由があるんです。
+uvはAstral社（Pythonの高速リンター/フォーマッターである...]]></description><link>https://zenn.dev/taku_sid/articles/20250427_rust_uv</link><guid isPermaLink="true">https://zenn.dev/taku_sid/articles/20250427_rust_uv</guid><pubDate>Sat, 26 Apr 2025 21:05:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wrpv4awW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%2586%25E3%2581%2595%25E3%2581%258E%25E3%2581%25A7%25E3%2582%2582%25E3%2582%258F%25E3%2581%258B%25E3%2582%258B%25E3%2582%25B7%25E3%2583%25AA%25E3%2583%25BC%25E3%2582%25BA%25EF%25BC%259ARust%25E8%25A3%25BD%25E3%2581%25AEPython%25E3%2583%2591%25E3%2583%2583%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B8%25E7%25AE%25A1%25E7%2590%2586%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%25E3%2580%258Cuv%25E3%2580%258D%25E3%2581%258C%25E6%2580%25A5%25E3%2581%25AB%25E6%25B5%2581%25E8%25A1%258C%25E3%2581%25A3%25E3%2581%259F%25E4%25BB%25B6%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:taku_sid%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTFFIVERiOTUwakhtTUJlendZR0RaeHlPX290RnJISktCY2ZYUFFuY1dVVGNGRkd1d3A9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>taku_sid</dc:creator></item><item><title><![CDATA[Claude + MCP + BigQueryMLで、タイタニック生存予測]]></title><description><![CDATA[
+ 0. 対象読者
+「MCP触ってみよう」っていうPythonユーザ
+
+ 1. はじめに
+こんにちは！なおずみです！
+本記事は前回書いた以下の記事のおまけになります。
+まだ見てない方はそっちから見てもらえると嬉しいです！
+https://zenn.dev/naozumi23/articles/1ad57b29affc46
+前回、自然言語でBigQueryを触ってみましたが、今回はBigQueryMLを使って、簡単な生存予測をやってみました。
+
+ 2. 今回やること
+今回のスコープは以下の通り
+
+claude desktop
+fastapi-mcp
+poetry
+Docker
+pytest...]]></description><link>https://zenn.dev/naozumi23/articles/5b7c98cdfdd750</link><guid isPermaLink="true">https://zenn.dev/naozumi23/articles/5b7c98cdfdd750</guid><pubDate>Sat, 26 Apr 2025 16:08:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--zOeX4d6w--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Claude%2520%252B%2520MCP%2520%252B%2520BigQueryML%25E3%2581%25A7%25E3%2580%2581%25E3%2582%25BF%25E3%2582%25A4%25E3%2582%25BF%25E3%2583%258B%25E3%2583%2583%25E3%2582%25AF%25E7%2594%259F%25E5%25AD%2598%25E4%25BA%2588%25E6%25B8%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AA%25E3%2581%258A%25E3%2581%259A%25E3%2581%25BF%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSnRVbVV4S3Y4ZnhXMUZZNlIxM0JMLUNTZE9rTXVFY1BTZDZSa2w5V1d3NXZrUjRlUT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>なおずみ</dc:creator></item><item><title><![CDATA[REINVENT4の入れ直し]]></title><description><![CDATA[理由はわからないが、REINVENT4で色々遊んでいたらAnacondaが色々エラーを多発するようになった。
+chatGPT曰く、M1 MacはAnacondaに正式には対応していないそうで、Miniforgeの方が安定しているとのことだった。
+というわけで、Miniforgeから入れ直すことにしたので備忘録。
+
+ Anacondaの削除
+rm -r ~/opt/anaconda3
+hash -r
+which conda
+
+# conda () {
+#	\local cmd="${1-__missing__}"
+#	case "$cmd" in
+#		(activate | deacti...]]></description><link>https://zenn.dev/keetane/articles/0427911a05eee3</link><guid isPermaLink="true">https://zenn.dev/keetane/articles/0427911a05eee3</guid><pubDate>Sat, 26 Apr 2025 14:10:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--gvpS_B-P--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:REINVENT4%25E3%2581%25AE%25E5%2585%25A5%25E3%2582%258C%25E7%259B%25B4%25E3%2581%2597%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Keetane%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc1YzhkYjk2ODguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Keetane</dc:creator></item><item><title><![CDATA[n番煎じだけど、WindowsだとクセがあるMCPサーバ実装]]></title><description><![CDATA[昨日(4/25)、ぬこぬこさん (https://x.com/schroneko) が開催されたMCPサーバの勉強会の投稿を目撃しました！
+https://x.com/schroneko/status/1915765080723169283
+いきたかったーーー！と思いつつ後の祭り。
+で、参加者のみなさんが作ったMCPサーバを投稿していたんですよね。
+このMCPサーバのノベル面白かった。
+https://x.com/gota_bara/status/1915778159276146852
+で、目についたのが、このMCPサーバ。
+https://x.com/yoshikai_man/stat...]]></description><link>https://zenn.dev/acntechjp/articles/7ad3b0d7238c25</link><guid isPermaLink="true">https://zenn.dev/acntechjp/articles/7ad3b0d7238c25</guid><pubDate>Sat, 26 Apr 2025 13:13:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2K-txgcR--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:n%25E7%2595%25AA%25E7%2585%258E%25E3%2581%2598%25E3%2581%25A0%25E3%2581%2591%25E3%2581%25A9%25E3%2580%2581Windows%25E3%2581%25A0%25E3%2581%25A8%25E3%2582%25AF%25E3%2582%25BB%25E3%2581%258C%25E3%2581%2582%25E3%2582%258BMCP%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E5%25AE%259F%25E8%25A3%2585%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2583%259E%25E3%2583%2583%25E3%2582%25B5%25E3%2583%25B3%2520%2528Masanori%2520Yos...%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U2ZDA4MDY5ODcuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Accenture%2520Japan%2520%2528%25E6%259C%2589%25E5%25BF%2597%2529%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU5MzkwNDBmYjYuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>マッサン (Masanori Yoshida)</dc:creator></item><item><title><![CDATA[Raspberry Pi と VOICEVOX で Discord の読み上げBotを作ってみる]]></title><description><![CDATA[今回の記事は、Macでの作業となりますのでご留意ください。
+
+ 利用製品
+
+Raspberry Pi4 ModelB 4GB（技適対応品）
+microSDカード
+ケース
+
+
+ Raspberry Pi 初期設定編
+
+ 1. OSのダウンロード
+今回はVOICEVOXを使うため、64BitのOSが必要です。
+Raspberry Pi OS (64-bit)
+なるべく軽量なものが良かったため、今回は Raspberry Pi OS Liteを利用することにしました。
+Raspberry Pi OS Lite
+Release date: November 19th 2024
+System: 6...]]></description><link>https://zenn.dev/ynug/articles/raspberry-pi4-modelb-4gb_discord-bot_voicevox</link><guid isPermaLink="true">https://zenn.dev/ynug/articles/raspberry-pi4-modelb-4gb_discord-bot_voicevox</guid><pubDate>Sat, 26 Apr 2025 10:29:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--VWYVRwx_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Raspberry%2520Pi%2520%25E3%2581%25A8%2520VOICEVOX%2520%25E3%2581%25A7%2520Discord%2520%25E3%2581%25AE%25E8%25AA%25AD%25E3%2581%25BF%25E4%25B8%258A%25E3%2581%2592Bot%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yuna%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc5MDBjMDcxMTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yuna</dc:creator></item><item><title><![CDATA[Apache Airflow使ってみた]]></title><description><![CDATA[今回はApache Airflow（以下、Airflow）について調べてみました。調べようと思った理由としては
+
+以前から名前は知っていたが調べる機会がなかった
+Google Cloudの勉強をしている中でCloud ComposerがAirflowを使っているということでどんなものか気になっていた
+
+からです。今回は本格的な調査というよりは、まずはどんなものかについて調べてみようと思います。
+
+ Apache Airflowとは？
+一言で言ってしまえばワークフロー管理ツールということみたいです。Pythonを使ってワークフローを構成し、スケジューリングを行ったり動作のモニタリングができ...]]></description><link>https://zenn.dev/akasan/articles/bb86a3442214da</link><guid isPermaLink="true">https://zenn.dev/akasan/articles/bb86a3442214da</guid><pubDate>Sat, 26 Apr 2025 10:05:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--B55m_GUg--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Apache%2520Airflow%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Akasan%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUVkRlRwNXJfNDFtel9OY3dPYUtMRE1vc09tbVB6YmxHM0V5N3lNZzI3QWM9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Akasan</dc:creator></item><item><title><![CDATA[PySparkのpandas_udfをnumbaで高速化する方法]]></title><description><![CDATA[
+ はじめに
+Apache Spark は、ビッグデータ処理のための分散コンピューティングフレームワークであり、PySpark はその Python API です。PySpark では、ユーザー定義関数（UDF）を使用してカスタム処理を行うことができます。
+UDF は、Python の関数を Spark の 分散処理に適用するための便利な方法ですが、パフォーマンスが低下することがあります。特に、Python の関数は遅いため、大量のデータを処理する際にはボトルネックになることがあります。
+そこで、今回は、PySpark で numba を使用して UDF を高速化する方法について説明しま...]]></description><link>https://zenn.dev/derbuihan/articles/107c07a2c4de43</link><guid isPermaLink="true">https://zenn.dev/derbuihan/articles/107c07a2c4de43</guid><pubDate>Sat, 26 Apr 2025 05:25:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--WAgbYgk2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:PySpark%25E3%2581%25AEpandas_udf%25E3%2582%2592numba%25E3%2581%25A7%25E9%25AB%2598%25E9%2580%259F%25E5%258C%2596%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%2520%2520%2520%2520%2520%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzkzZTRhYTM2MGMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>🤨🤔😑😨😱</dc:creator></item><item><title><![CDATA[.ipynbと.pyを相互変換するためのツールを自作した]]></title><description><![CDATA[
+ やったこと
+仕事でJupyter Notebookを使用しております。
+ただし、.ipynbファイルはGitHubで管理すると差分が見にくいという問題点がありました。
+.ipynbを.pyに変換してGitHubで管理することで、差分を見やすくなります。
+ここまでは、nbconvertコマンドを使用すれば可能です。
+問題は.py形式のファイルを.ipynbに戻す方法です。
+この辺りの知見を得たので、メモとして残します。
+
+ GitHub
+ライブラリとして使える状態にしておきました。
+https://github.com/tactical-k/nb2py
+
+ 今後
+PyPIに登録してpi...]]></description><link>https://zenn.dev/tactical_k/articles/ipynb_converter</link><guid isPermaLink="true">https://zenn.dev/tactical_k/articles/ipynb_converter</guid><pubDate>Sat, 26 Apr 2025 02:19:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--CEurgaTD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:.ipynb%25E3%2581%25A8.py%25E3%2582%2592%25E7%259B%25B8%25E4%25BA%2592%25E5%25A4%2589%25E6%258F%259B%25E3%2581%2599%25E3%2582%258B%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%25E3%2582%2592%25E8%2587%25AA%25E4%25BD%259C%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tactical-k%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2YzOWM0YzUzYWIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tactical-k</dc:creator></item><item><title><![CDATA[Vue + Chart.js でSNSダッシュボードを作った話]]></title><description><![CDATA[
+ Vue + Chart.js でSNSダッシュボードを作った話
+FastAPI × Supabaseでデータの永続化まで実装できたので、
+今回はそのデータを可視化するために、フロントエンドを組み立てていきました。
+選んだのは、
+
+
+Vue 3（Composition API）
+
+
+Chart.js（v4）
+
+
+Axios（API通信）
+
+
+この記事では、
+
+
+FastAPIで取得したデータの受け取り方
+
+
+Chart.jsでの折れ線グラフ描画の方法
+
+
+JWTトークンの扱い（ログイン後のセキュアな通信）
+
+
+表示されないときのデバッグポイント
+
+
+を、フロントエンド視点で丁寧に解説し...]]></description><link>https://zenn.dev/tfuji/articles/4d287fd94ca39e</link><guid isPermaLink="true">https://zenn.dev/tfuji/articles/4d287fd94ca39e</guid><pubDate>Sat, 26 Apr 2025 01:39:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GjQHcylO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Vue%2520%252B%2520Chart.js%2520%25E3%2581%25A7SNS%25E3%2583%2580%25E3%2583%2583%25E3%2582%25B7%25E3%2583%25A5%25E3%2583%259C%25E3%2583%25BC%25E3%2583%2589%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%25A1%25E3%2583%25BC%25E3%2583%2597%25E3%2583%25AB%25E3%2582%25B7%25E3%2583%25AD%25E3%2583%2583%25E3%2583%2597%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzcwMjVlOTIxMWMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>メープルシロップ</dc:creator></item><item><title><![CDATA[Djangoのチュートリアルをやってみた感想]]></title><description><![CDATA[Djangoのチュートリアルを一通りやってみたので、感想を書ます。
+なお、pythonの仮想環境はuvを使用しました。
+
+ 良かった点
+
+ データベースの扱い
+データベースの扱いがとても楽でした。
+クラスを作成して、appとして登録してマイグレーションコマンド打つ。
+これだけでデータモデルを作れる手軽さに感動しました。
+
+ adminページが多機能
+最初にDjangoのプロジェクトを作成した際に、adminページが出来上がっているのが良かったです。
+フィールド追加などのカスタマイズも簡単だったので、データの管理はやりやすそうでした。
+
+ 驚いた点
+
+ ディレクトリ構成がえ？ってなる
+今回...]]></description><link>https://zenn.dev/yut_wq/articles/c1dbc4b6599ad4</link><guid isPermaLink="true">https://zenn.dev/yut_wq/articles/c1dbc4b6599ad4</guid><pubDate>Sat, 26 Apr 2025 01:32:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ytQ5RsjH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Django%25E3%2581%25AE%25E3%2583%2581%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%2588%25E3%2583%25AA%25E3%2582%25A2%25E3%2583%25AB%25E3%2582%2592%25E3%2582%2584%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25E6%2584%259F%25E6%2583%25B3%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:YT%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTHhoaTdpLUpwaHdzY21VRFRSMGh0ZzFGd1ZXMDA1S3IyeV9RVzZFWXZNNEU2YndxVjg9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>YT</dc:creator></item><item><title><![CDATA[PythonでロードバイクのFITファイルを分析・可視化する]]></title><description><![CDATA[こんにちは！ロードバイクに乗る皆さん、日々の走行データ、どう活用していますか？ Garmin Connect や Strava などのサービスも素晴らしいですが、「自分でデータをいじってみたい！」「もっと自由に分析したい！」と思ったことはありませんか？
+この記事では、Pythonを使ってロードバイクの走行データ（FITファイル）を読み込み、基本的な情報を分析・視覚化する方法を解説します。プログラミングで、あなたのサイクリングライフをもっと豊かにしてみませんか。
+
+ この記事を読むとできるようになること:
+• FITファイルから走行データをPythonで読み込む方法
+• pandas を使...]]></description><link>https://zenn.dev/pincolo/articles/620b1c793cf69d</link><guid isPermaLink="true">https://zenn.dev/pincolo/articles/620b1c793cf69d</guid><pubDate>Fri, 25 Apr 2025 19:15:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--KiIJlVQW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A7%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2589%25E3%2583%2590%25E3%2582%25A4%25E3%2582%25AF%25E3%2581%25AEFIT%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2592%25E5%2588%2586%25E6%259E%2590%25E3%2583%25BB%25E5%258F%25AF%25E8%25A6%2596%25E5%258C%2596%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%2594%25E3%2583%25B3%25E3%2582%25B3%25E3%2583%25AD%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MxMmRjOWM3YmYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ピンコロ</dc:creator></item><item><title><![CDATA[AI系のコーディング基礎的お作法まとめ]]></title><description><![CDATA[!
+これは知っておこうね、という初学者向けの駄文です。
+
+
+ 「美しい」コード
+一般に、「美しさ」には主観が多分に含まれる。芸術作品であるとか、俳優さん女優さんに対して使う場合は特にそうだろう。しかし、こと数学の証明だとかコーディングといったものに対して使用される場合、そうしたものたちは基本的に一定のルールに従っていることがほとんどだ。
+
+ 「美しい」コードとはどんなもの？
+美しいコードは読みやすい。
+どのファイルにどの機能の関数があるか分かりやすく、保守性が高い。
+そうであるから、1週間後・1ヶ月後の自分がみてもすぐその内容を思い出せるし、何より他人に見せても恥ずかしくない。
+
+ 「美...]]></description><link>https://zenn.dev/tsei/articles/9ddaf42d187b3b</link><guid isPermaLink="true">https://zenn.dev/tsei/articles/9ddaf42d187b3b</guid><pubDate>Fri, 25 Apr 2025 14:40:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hzjZ3ijN--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AI%25E7%25B3%25BB%25E3%2581%25AE%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2587%25E3%2582%25A3%25E3%2583%25B3%25E3%2582%25B0%25E5%259F%25BA%25E7%25A4%258E%25E7%259A%2584%25E3%2581%258A%25E4%25BD%259C%25E6%25B3%2595%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:T_Tsei%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ViNGY0ZWI3MjAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>T_Tsei</dc:creator></item><item><title><![CDATA[感想文という名のAIコーディングの進化]]></title><description><![CDATA[#女子大学生がチャットGPT使って百日毎日アプリの制作チャレンジしたらエンジニア就職できた話
+https://www.amazon.co.jp/dp/4296071068?ref=ppx_yo2ov_dt_b_fed_asin_title
+テーマはAIコーディングについてだ、書籍のコーディングで使ってるチャットGPTが二年前のもので私が三時間程度で作ったオセロと比較する。
+コード見ないと確実に言えないがクオリティは私のオセロ方が高い、これは私の性能よりもチャットGPTやGeminiの性能差だろう。加えて私がいきなりAIコーディングをするのでなくプロゲートやら書籍で「勉強」してる点も大きな...]]></description><link>https://zenn.dev/rurihari/articles/8d19480b4b49a1</link><guid isPermaLink="true">https://zenn.dev/rurihari/articles/8d19480b4b49a1</guid><pubDate>Fri, 25 Apr 2025 14:39:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--f0oj0rxQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%2584%259F%25E6%2583%25B3%25E6%2596%2587%25E3%2581%25A8%25E3%2581%2584%25E3%2581%2586%25E5%2590%258D%25E3%2581%25AEAI%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2587%25E3%2582%25A3%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%25AE%25E9%2580%25B2%25E5%258C%2596%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:python%25EF%25BC%2590%25E5%25B9%25B4%25E7%2594%259F%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSXpKNW1OZU91aWhfWjI2V0VnZ096QTZPZGhBd09raHByUjJMNjFzTnRoVnpvVVloRDNUQT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>python０年生</dc:creator></item><item><title><![CDATA[Git操作ミスで消えたLLM連携コードの復旧（開発日記 No.056）]]></title><description><![CDATA[!
+この記事はgemini-2.5-pro-exp-03-25によって自動生成されています。
+
+
+ 関連リンク
+
+前回の開発日記
+
+
+ はじめに
+昨日は、note API経由での記事投稿を断念し、開発日記をMarkdownファイルとして生成・保存する方針に切り替えました。関連するコードの修正や不要ファイルの削除を行い、新しいフローの準備を進めました。
+今日はこの新しい方針に基づき、システム全体の動作を確認し、完成に向けて必要な作業を進めていきます。まずはEnd-to-End (E2E) テストから始めることにしました。
+
+ 背景と目的
+新しい方針では、開発日記のMarkdownファイルを...]]></description><link>https://zenn.dev/centervil/articles/2025-04-25_056_dev-diary</link><guid isPermaLink="true">https://zenn.dev/centervil/articles/2025-04-25_056_dev-diary</guid><pubDate>Fri, 25 Apr 2025 09:34:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Qa4ai3ey--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Git%25E6%2593%258D%25E4%25BD%259C%25E3%2583%259F%25E3%2582%25B9%25E3%2581%25A7%25E6%25B6%2588%25E3%2581%2588%25E3%2581%259FLLM%25E9%2580%25A3%25E6%2590%25BA%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2581%25AE%25E5%25BE%25A9%25E6%2597%25A7%25EF%25BC%2588%25E9%2596%258B%25E7%2599%25BA%25E6%2597%25A5%25E8%25A8%2598%2520No.056%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:centervil%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YlVZNXZiN0NvbG1TN0tPQmhqQ2M5V3lIRXYwVVhwZ2YyY2wxYTc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>centervil</dc:creator></item><item><title><![CDATA[【Python】回帰分析とは何か？]]></title><description><![CDATA[回帰分析は、データの中から関係性を見つけ出す統計手法です。
+今回は、初心者にもわかりやすく回帰分析の基本を説明します。
+
+ 回帰分析とは？
+回帰分析とは、あるデータ（説明変数）から別のデータ（目的変数）を予測するための手法です。
+たとえば、勉強時間から試験の点数を予測したり、広告費から売上を予測したりする時に使います。
+データ間の関係を数式で表すことで、未来の予測ができるようになります。
+
+ なぜ回帰分析が役立つのか？
+回帰分析を使うと、以下のようなことができるようになります：
+
+データ間の関係性を理解できる
+将来の値を予測できる
+どの要素が結果に大きく影響しているかを知ることができる
+...]]></description><link>https://zenn.dev/hovinci/articles/d7a2a9feddc8b2</link><guid isPermaLink="true">https://zenn.dev/hovinci/articles/d7a2a9feddc8b2</guid><pubDate>Fri, 25 Apr 2025 02:47:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Ml_EYXAx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591%25E5%259B%259E%25E5%25B8%25B0%25E5%2588%2586%25E6%259E%2590%25E3%2581%25A8%25E3%2581%25AF%25E4%25BD%2595%25E3%2581%258B%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%259B%25E3%2583%25B4%25E3%2582%25A3%25E3%2583%25B3%25E3%2583%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI0MWFjY2M3YWQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ホヴィンチ</dc:creator></item></channel></rss>
