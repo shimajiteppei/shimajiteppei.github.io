@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「TypeScript」のフィード]]></title><description><![CDATA[Zennのトピック「TypeScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/typescript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/f13e758fdb.png</url><title>Zennの「TypeScript」のフィード</title><link>https://zenn.dev/topics/typescript</link></image><generator>zenn.dev</generator><lastBuildDate>Mon, 28 Apr 2025 06:17:43 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/typescript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[シンプルで使いやすい新たなRPCライブラリ~oRPCとは何者か？~]]></title><description><![CDATA[
+ はじめに
+こんにちは、エンジニアの籏野です。
+先日、oRPCというライブラリのV1がリリースされました。
+https://x.com/unnoqcom/status/1912153521060987057
+oRPCはTypeScriptを利用するシステムにおいてRPC(Remote Procedure Call)を実現するためのライブラリです。
+RPCの特徴は、クライアント側からはメソッドを呼び出すような感覚でAPIを利用することができ、REST APIのようにエンドポイントを意識する必要がなくなることが挙げられます。
+RPCを実現する有名なライブラリとしてtRPCがありますが、どの...]]></description><link>https://zenn.dev/forcia_tech/articles/202504_hatano_orpc</link><guid isPermaLink="true">https://zenn.dev/forcia_tech/articles/202504_hatano_orpc</guid><pubDate>Mon, 28 Apr 2025 04:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--VstzfLFu--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B7%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AB%25E3%2581%25A7%25E4%25BD%25BF%25E3%2581%2584%25E3%2582%2584%25E3%2581%2599%25E3%2581%2584%25E6%2596%25B0%25E3%2581%259F%25E3%2581%25AARPC%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%7EoRPC%25E3%2581%25A8%25E3%2581%25AF%25E4%25BD%2595%25E8%2580%2585%25E3%2581%258B%25EF%25BC%259F%7E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:FORCIA%2520Tech%2520Blog%2520%25E9%2581%258B...%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2QyMDIwOGYzMDMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:FORCIA%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NkZmRkZTQ5MGUuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>FORCIA Tech Blog 運営チーム</dc:creator></item><item><title><![CDATA[Webブラウザのセキュリティについて理解しよう(Origin,SOP,CORS)]]></title><description><![CDATA[
+ はじめに
+はじめまして。大学4年生のとうふと申します。
+今回は、3回目のZenn投稿になります！
+Web開発をしていると、CORSという言葉を一度は耳にしたことがあるのではないでしょうか？
+私自身初めて個人開発を始めた際、開発中に「設定しないとうまく動かないけど、そもそもCORSって何をしているの？」と疑問に思ったことがあり、Webブラウザのセキュリティについて勉強しました。
+今回の記事では、そこで得た知識をできるだけコンパクトかつわかりやすくまとめ、読んでくださる皆さんにもスムーズに理解してもらえるよう工夫しています。
+ぜひ最後までご覧いただけると嬉しいです！
+
+ 前提
+本記事では...]]></description><link>https://zenn.dev/dem3860/articles/a0478649339e8b</link><guid isPermaLink="true">https://zenn.dev/dem3860/articles/a0478649339e8b</guid><pubDate>Mon, 28 Apr 2025 02:18:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lsx4KUGq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Web%25E3%2583%2596%25E3%2583%25A9%25E3%2582%25A6%25E3%2582%25B6%25E3%2581%25AE%25E3%2582%25BB%25E3%2582%25AD%25E3%2583%25A5%25E3%2583%25AA%25E3%2583%2586%25E3%2582%25A3%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2597%25E3%2582%2588%25E3%2581%2586%2528Origin%252CSOP%252CCORS%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A8%25E3%2581%2586%25E3%2581%25B5%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY5M2U5NTg3ZWYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>とうふ</dc:creator></item><item><title><![CDATA[リトライ処理時のExponential Backoff（指数関数バックオフ）戦略]]></title><description><![CDATA[
+ はじめに
+Google Drive APIについて調べていたところ、使用制限の箇所で指数バックオフアルゴリズムに関する記述がありました。
+https://developers.google.com/workspace/drive/labels/limits?hl=ja
+自分が初めてエンジニアになった頃に、あるエンジニアがAngulerのRxJSを使用して指数バックオフを作成していたことがあり、その時はあまり理解できていなかったので、改めて調べてみることにしました。
+
+
+ Exponential Backoff（指数関数バックオフ）とは
+指数バックオフとは、通信に失敗した際に、待ち時間...]]></description><link>https://zenn.dev/arsaga/articles/5b15281c7fb9fa</link><guid isPermaLink="true">https://zenn.dev/arsaga/articles/5b15281c7fb9fa</guid><pubDate>Mon, 28 Apr 2025 01:44:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--XszGNtJK--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%25AA%25E3%2583%2588%25E3%2583%25A9%25E3%2582%25A4%25E5%2587%25A6%25E7%2590%2586%25E6%2599%2582%25E3%2581%25AEExponential%2520Backoff%25EF%25BC%2588%25E6%258C%2587%25E6%2595%25B0%25E9%2596%25A2%25E6%2595%25B0%25E3%2583%2590%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25AA%25E3%2583%2595%25EF%25BC%2589%25E6%2588%25A6%25E7%2595%25A5%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%25BE%25E3%2581%2595%25E3%2581%258D%25E3%2581%25A1%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VkN2YzMzc0YjcuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Arsaga%2520Developers%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzczM2I3ZDlmZDUuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>まさきち</dc:creator></item><item><title><![CDATA[React Hook Formで「どちらか一方が必須」なフォームの再評価はdepsが便利]]></title><description><![CDATA[
+ はじめに
+フォームで「メールアドレスか電話番号のどちらかは必須」としたい場面があるとします。
+しかし実装してみると、片方を入力してももう片方のバリデーションエラーが残ってしまうなど、思ったように動かず苦戦することがあります。
+メールアドレスを入力しても、電話番号側のエラーが残ってしまう例
+こうした「どちらか一方を満たせばOK」というバリデーションは、deps オプションを活用すると、スムーズに実現できます。
+
+ depsとは？
+deps は dependencies（依存関係）の略で、あるフィールドが他のフィールドの値に依存してバリデーションを再評価するための仕組みです。
+React...]]></description><link>https://zenn.dev/kaz_z/articles/react-hook-form-deps</link><guid isPermaLink="true">https://zenn.dev/kaz_z/articles/react-hook-form-deps</guid><pubDate>Mon, 28 Apr 2025 00:46:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ZT55CoSv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%2520Hook%2520Form%25E3%2581%25A7%25E3%2580%258C%25E3%2581%25A9%25E3%2581%25A1%25E3%2582%2589%25E3%2581%258B%25E4%25B8%2580%25E6%2596%25B9%25E3%2581%258C%25E5%25BF%2585%25E9%25A0%2588%25E3%2580%258D%25E3%2581%25AA%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25BC%25E3%2583%25A0%25E3%2581%25AE%25E5%2586%258D%25E8%25A9%2595%25E4%25BE%25A1%25E3%2581%25AFdeps%25E3%2581%258C%25E4%25BE%25BF%25E5%2588%25A9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kazuho%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI2ZTM2MzIzZWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kazuho</dc:creator></item><item><title><![CDATA[JavaScriptのtruthyとfalsyとは？ショートサーキット評価もあわせて解説]]></title><description><![CDATA[
+ はじめに
+JavaScriptを書いていて、こんな経験はありませんか？
+
+「条件式やif文で、判定が意図しないものになった」
+
+私自身、実務で
+truthyやfalsyという概念に初めて触れました。
+また、以下のような
+ショートサーキット評価と呼ばれる書き方も学びました。
+const value = A || B;
+本記事では、truthy/falsyの基本とショートサーキット評価の使い方について解説します。
+
+ truthyとfalsyとは？
+JavaScriptでは、
+値そのものが真偽値（true/false）に変換されるルールがあります。
+これを、
+
+truthy（trueとみ...]]></description><link>https://zenn.dev/fd2025/articles/2a2f4aacaa2450</link><guid isPermaLink="true">https://zenn.dev/fd2025/articles/2a2f4aacaa2450</guid><pubDate>Sun, 27 Apr 2025 22:38:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0sewaBCR--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25E3%2581%25AEtruthy%25E3%2581%25A8falsy%25E3%2581%25A8%25E3%2581%25AF%25EF%25BC%259F%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25BC%25E3%2583%2588%25E3%2582%25B5%25E3%2583%25BC%25E3%2582%25AD%25E3%2583%2583%25E3%2583%2588%25E8%25A9%2595%25E4%25BE%25A1%25E3%2582%2582%25E3%2581%2582%25E3%2582%258F%25E3%2581%259B%25E3%2581%25A6%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:fd2025%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2EzMzVlNTI5MmQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>fd2025</dc:creator></item><item><title><![CDATA[234. Palindrome Linked List]]></title><description><![CDATA[単方向リンクリストの先頭ノードが与えられたとき、それが回文であれば true を、そうでなければ false を返してください。
+
+ 例1:
+入力: head = [1,2,2,1]
+出力: true
+
+ 例2:
+入力: head = [1,2]
+出力: false
+
+
+ 制約:
+
+リスト内のノード数は [1, 10^5] の範囲です。
+0 &lt;= Node.val &lt;= 9
+
+
+
+ 発展問題（Follow-up）:
+O(n) 時間かつ O(1) 空間で解くことはできますか？
+
+
+$slow と $fast を使ってリストの中央まで移動する
+中央に着いたら、$slow 以降のリ...]]></description><link>https://zenn.dev/idapan/articles/f3cef24750871f</link><guid isPermaLink="true">https://zenn.dev/idapan/articles/f3cef24750871f</guid><pubDate>Sun, 27 Apr 2025 22:22:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--igACOiTN--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:234.%2520Palindrome%2520Linked%2520List%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Keijiro%2520Ida%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2EwYTNmOGUyMGYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Keijiro Ida</dc:creator></item><item><title><![CDATA[【React Native】Expo Routerを導入する]]></title><description><![CDATA[
+ 概要
+今回は、React&nbsp;Native に Expo&nbsp;Router を導入して基本的なルーティングを構築して動作確認しました。あわせて BottomTab ナビゲーションと併用する方法も検証してみました。
+
+ Expo Router とは?
+
+React NativeとWebアプリケーションのためのファイルベースのルーティングライブラリ
+
+Next.js みたいな使い方ができる様です 👀
+https://docs.expo.dev/versions/latest/sdk/router/
+
+ 動作環境構築
+早速試していく環境を作成します。 react-native-...]]></description><link>https://zenn.dev/slowhand/articles/331f6d4ac2ce11</link><guid isPermaLink="true">https://zenn.dev/slowhand/articles/331f6d4ac2ce11</guid><pubDate>Sun, 27 Apr 2025 20:04:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wc8Z2rw3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590React%2520Native%25E3%2580%2591Expo%2520Router%25E3%2582%2592%25E5%25B0%258E%25E5%2585%25A5%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:slowhand%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzEwY2YzMGUzMDAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>slowhand</dc:creator></item><item><title><![CDATA[ドメイン駆動設計と関数型プログラミング]]></title><description><![CDATA[
+ ドメイン駆動設計と関数型プログラミングの融合
+!
+This article is generated by Claude.
+
+こんにちは！今回は「Domain Modeling Made Functional」という素晴らしい本から学んだ、ドメイン駆動設計(DDD)と関数型プログラミングを組み合わせるアプローチについてお話しします。ビジネスの複雑さをコードで正確に表現し、しかも保守しやすいシステムを構築するための実践的な方法論です ✨
+
+ やりたいこと
+この記事では以下のことを目指します：
+
+EventStormingを使ってビジネスデータフローを整理する方法
+ドメインバウンダリーを...]]></description><link>https://zenn.dev/toitoy8/articles/ddd-functional-modeling</link><guid isPermaLink="true">https://zenn.dev/toitoy8/articles/ddd-functional-modeling</guid><pubDate>Sun, 27 Apr 2025 15:50:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--UAVlnxVP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2589%25E3%2583%25A1%25E3%2582%25A4%25E3%2583%25B3%25E9%25A7%2586%25E5%258B%2595%25E8%25A8%25AD%25E8%25A8%2588%25E3%2581%25A8%25E9%2596%25A2%25E6%2595%25B0%25E5%259E%258B%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%259F%25E3%2583%25B3%25E3%2582%25B0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:toitoy8%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ5YWNlODUxMjMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>toitoy8</dc:creator></item><item><title><![CDATA[2025年のWeb開発を加速！「astro-shadcn-template」で始めるモダン環境]]></title><description><![CDATA[
+ 2025年のWeb開発を加速！「astro-shadcn-template」で始めるモダン環境
+
+
+ astro-shadcn-templateとは？
+「プロジェクトのセットアップに時間がかかりすぎる」「モダンな技術スタックを整理するのが大変」——そんな悩みを抱えていませんか？
+astro-shadcn-templateは、こうした課題を解決するために包括的なAstroテンプレートとして制作しました。最新のWeb開発に必要な機能をすべて統合し、すぐに開発を始められる環境を提供します。
+主な特徴
+
+
+高速ビルドを実現するAstro v5.7.5（静的サイトジェネレーター）
+
+UI開発を...]]></description><link>https://zenn.dev/n_tong/articles/55d83786d6d1ba</link><guid isPermaLink="true">https://zenn.dev/n_tong/articles/55d83786d6d1ba</guid><pubDate>Sun, 27 Apr 2025 15:18:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wsv8Tbek--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:2025%25E5%25B9%25B4%25E3%2581%25AEWeb%25E9%2596%258B%25E7%2599%25BA%25E3%2582%2592%25E5%258A%25A0%25E9%2580%259F%25EF%25BC%2581%25E3%2580%258Castro-shadcn-template%25E3%2580%258D%25E3%2581%25A7%25E5%25A7%258B%25E3%2582%2581%25E3%2582%258B%25E3%2583%25A2%25E3%2583%2580%25E3%2583%25B3%25E7%2592%25B0%25E5%25A2%2583%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:n_tong%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZjNDQ3YmY5YmMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>n_tong</dc:creator></item><item><title><![CDATA[[Flutter]Hono✖️Supabaseでアプリを作る- delete -]]></title><description><![CDATA[ぽちぽちのつどいGW Advent(?) Calendar２日目の記事です！
+今日は少し前から書いてるHonoとSupabaseをつかった開発の備忘録の最後deleteです。
+
+ HonoとSupabaseでアプリを作った話
+触れる話
+CRUD操作とFlutterの実装
+触れない話
+デプロイの仕方
+Honoの基本
+Honoの基本とGet/postについてはこちら
+https://zenn.dev/tolto/articles/a1cb22bcdb5eac
+https://zenn.dev/pochipochitudoi/articles/25013408f6c9ca
+
+ Honoの実装
+...]]></description><link>https://zenn.dev/pochipochitudoi/articles/7fe38f5fa21235</link><guid isPermaLink="true">https://zenn.dev/pochipochitudoi/articles/7fe38f5fa21235</guid><pubDate>Sun, 27 Apr 2025 14:53:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bK_MxH5l--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BFlutter%255DHono%2520Supabase%25E3%2581%25A7%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B-%2520delete%2520-%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:tolto%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQwMGFjMDNhYWQuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2581%25BD%25E3%2581%25A1%25E3%2581%25BD%25E3%2581%25A1%25E3%2581%25AE%25E3%2581%25A4%25E3%2581%25A9%25E3%2581%2584%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JhOGVmY2QxOWEuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tolto</dc:creator></item><item><title><![CDATA[コンテナに GAS + TypeScript + clasp + Jest の環境を作成したい!]]></title><description><![CDATA[
+ はじめに
+Docker コンテナを利用して、ホストOS の環境を汚さずに Google Apps Script (GAS) の開発環境をセットアップするテンプレートリポジトリを作成しました。
+https://github.com/ko-uema2/gas-proj-template
+この記事では、このコンテナ環境でできることを紹介します。
+
+ 前提
+このテンプレートリポジトリを利用するにあたり、下記事項を満たしている必要があります。
+
+ホストOS に Docker Desktop がインストールされていること
+ホストOS に VSCode がインストールされていること
+ホストOS の...]]></description><link>https://zenn.dev/ko_uema2/articles/c0d5731ec64eef</link><guid isPermaLink="true">https://zenn.dev/ko_uema2/articles/c0d5731ec64eef</guid><pubDate>Sun, 27 Apr 2025 13:33:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--YvLtL2Cv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2586%25E3%2583%258A%25E3%2581%25AB%2520GAS%2520%252B%2520TypeScript%2520%252B%2520clasp%2520%252B%2520Jest%2520%25E3%2581%25AE%25E7%2592%25B0%25E5%25A2%2583%25E3%2582%2592%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2597%25E3%2581%259F%25E3%2581%2584%2521%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25BE%25E3%2581%25A3%25E3%2581%25A4%25E3%2583%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSkFFWXN0a1UtbWo0UWF6Y2RDcGpxMUhEZFlxb0RrcHp6cVUzT29iTUdsb3Vnaj1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>まっつー</dc:creator></item><item><title><![CDATA[Next.jsをDockerで開発するときのハマりポイントとその解決法について]]></title><description><![CDATA[
+ これは何？
+ローカルで動かしていたNext.jsの開発環境をDockerに移した。
+いくつかハマったので、解決法を備忘録として残す。
+
+ ローカルで動かしていた環境
+
+Next.js 15.2.3
+Postgres 16
+bun 1.1.34
+Prisma 6.3.1
+
+
+ Dockerに移行した結果の環境構成
+
+Next.js 15.3.1
+Docker Compose 2.32.4
+Postgres 16
+bun 1.1.34
+Prisma 6.3.1
+
+Dockerで動かすためにNext.jsを15.3.1にアップグレードした。
+
+ Dockerfileの構築
+
+ ハマりポイン...]]></description><link>https://zenn.dev/yasuakiomokawa/articles/60e6d9750c000d</link><guid isPermaLink="true">https://zenn.dev/yasuakiomokawa/articles/60e6d9750c000d</guid><pubDate>Sun, 27 Apr 2025 12:44:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--r_iHAW9f--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Next.js%25E3%2582%2592Docker%25E3%2581%25A7%25E9%2596%258B%25E7%2599%25BA%25E3%2581%2599%25E3%2582%258B%25E3%2581%25A8%25E3%2581%258D%25E3%2581%25AE%25E3%2583%258F%25E3%2583%259E%25E3%2582%258A%25E3%2583%259D%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2588%25E3%2581%25A8%25E3%2581%259D%25E3%2581%25AE%25E8%25A7%25A3%25E6%25B1%25BA%25E6%25B3%2595%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E9%259D%25A2%25E5%25B7%259D%25E6%25B3%25B0%25E6%2598%258E%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2o4Z2JYdTRLN2ZxZHJfaGhJTjlKWWZ5TDUtRG1qVDd2aWpKVWVFVXc9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>面川泰明</dc:creator></item><item><title><![CDATA[LLMはリネームが苦手？MCP+ts-morphで補えるかも？]]></title><description><![CDATA[私がメインで担当しているプロジェクトでは、コンポーネントや関数の命名規則、ファイル構成に一貫性がなく、恥ずかしながらリファクタリングが追いついていない状態にあります。
+作った時期やメンバーによっても違いがあり、スクリプトによるリファクタリングも難しい状態にあります。
+このような無秩序なフォルダ構成に方向性を与えて、完成形を考えさせるのにLLMのエージェントは大変便利なように思えます。
+このファイルはあの名前にする、このフォルダにする、プランを最初に決めて、機械的に実行させれば上手くいきそうではないでしょうか？
+
+ LLMはリネーム作業が苦手？
+ところが、これがどうにも全く上手くいかない。...]]></description><link>https://zenn.dev/sirosuzume/articles/71283906800a49</link><guid isPermaLink="true">https://zenn.dev/sirosuzume/articles/71283906800a49</guid><pubDate>Sun, 27 Apr 2025 11:11:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GHvEM293--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:LLM%25E3%2581%25AF%25E3%2583%25AA%25E3%2583%258D%25E3%2583%25BC%25E3%2583%25A0%25E3%2581%258C%25E8%258B%25A6%25E6%2589%258B%25EF%25BC%259FMCP%252Bts-morph%25E3%2581%25A7%25E8%25A3%259C%25E3%2581%2588%25E3%2582%258B%25E3%2581%258B%25E3%2582%2582%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E7%2599%25BD%25E9%259B%2580%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg3MjRmZTJiMTMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>白雀</dc:creator></item><item><title><![CDATA[TypeScript でつくる型レベル正規表現処理系]]></title><description><![CDATA[
+ はじめに
+この記事では、正規表現や言語処理系のしくみ、型レベルプログラミング等について理解しながら、TypeScript の型システム上で動作する正規表現処理系をつくることを目指します。この記事の内容を完了すると、以下のような型をつくることができます。
+// 正規表現文字列から TRegExp 型を作成
+type EmailRegExp = TRegExp&lt;"^.+@.+\\..+$"&gt;;
+// 正規表現にマッチする文字列であれば true 型になる (ValidEmail: true)
+type ValidEmail = TRegExpTest&lt;"piyo@hiy...]]></description><link>https://zenn.dev/nerupo/articles/8bda76f0b77cbe</link><guid isPermaLink="true">https://zenn.dev/nerupo/articles/8bda76f0b77cbe</guid><pubDate>Sun, 27 Apr 2025 10:52:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--L3gpG3zY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%2520%25E3%2581%25A7%25E3%2581%25A4%25E3%2581%258F%25E3%2582%258B%25E5%259E%258B%25E3%2583%25AC%25E3%2583%2599%25E3%2583%25AB%25E6%25AD%25A3%25E8%25A6%258F%25E8%25A1%25A8%25E7%258F%25BE%25E5%2587%25A6%25E7%2590%2586%25E7%25B3%25BB%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nerupo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U3YzcwYTNkNmYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nerupo</dc:creator></item><item><title><![CDATA[unionなオブジェクト型をPickするときはDistributive Conditional TypeでPickする]]></title><description><![CDATA[
+ 始めに
+Reactでpropsを一部pickした際にunionで定義した情報が消えてしまい条件分岐によって型が変わらなくなってしまっていました。
+
+pickをそのまま使うとunionの情報がなくなる
+import { pick } from 'lodash-es'
+
+type Props = {
+  label: string
+  required?: boolean
+} &amp; (
+  | {
+      multiple?: false
+      value: number | null
+      onChangeValue: (newValue: number | nu...]]></description><link>https://zenn.dev/numa_san/articles/fb3bb4a870bec5</link><guid isPermaLink="true">https://zenn.dev/numa_san/articles/fb3bb4a870bec5</guid><pubDate>Sun, 27 Apr 2025 10:33:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8Ge346-Q--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:union%25E3%2581%25AA%25E3%2582%25AA%25E3%2583%2596%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E5%259E%258B%25E3%2582%2592Pick%25E3%2581%2599%25E3%2582%258B%25E3%2581%25A8%25E3%2581%258D%25E3%2581%25AFDistributive%2520Conditional%2520Type%25E3%2581%25A7Pick%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AC%25E3%2581%25BE%25E3%2581%2595%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI5MWZjYWE2NDYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ぬまさん</dc:creator></item><item><title><![CDATA[【Typescript】letを使いたくないならreduceを覚えろ]]></title><description><![CDATA[
+ はじめに
+Typescriptを初めて学習した時に、
+基本的にconstを使うようにと言われ、それに従ってコードを書いていると、
+「あれ、letなんか使わなくてもコード書けるじゃん」
+「letなんか一生使うことないわ〜」
+とイキっていた時期が自分にはありました (笑)
+しかしある日、
+・ 配列の合計値を求めるコードを実装しろ
+「え、これ1ループごとに配列の値を合算して更新していくにはletを使うしか無理くね、、？」
+このようにして、【Typescriptを完全に理解した】初学者の自尊心は粉々に砕け散ることになるのでした、、 (めでたしめでたし)
+
+ 対象読者
+
+この記事では、そのよう...]]></description><link>https://zenn.dev/kanamo/articles/f2601b9f14fa51</link><guid isPermaLink="true">https://zenn.dev/kanamo/articles/f2601b9f14fa51</guid><pubDate>Sun, 27 Apr 2025 09:03:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--g7VfWH7u--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Typescript%25E3%2580%2591let%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2584%25E3%2581%259F%25E3%2581%258F%25E3%2581%25AA%25E3%2581%2584%25E3%2581%25AA%25E3%2582%2589reduce%25E3%2582%2592%25E8%25A6%259A%25E3%2581%2588%25E3%2582%258D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258B%25E3%2581%25AA%25E3%2582%2582%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2UxMmMwN2YyM2EuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>かなも</dc:creator></item><item><title><![CDATA[MCP Quickstat For Client Developersを読む(typescript)]]></title><description><![CDATA[
+ はじめに
+MCPドキュメントのQuickstatｎ For Client Developersを読みながらうごかしたことをメモしておこうと思います。
+https://modelcontextprotocol.io/quickstart/client
+今回はTypescriptでやっていきます。
+
+ 読んでいく
+
+ セットアップ
+専用ディレクトリ作って、typescriptとmodelcontextprotocol/sdkが使えるようにセットアップしていきます。
+$ mkdir mcp-client-typescript
+$ cd mcp-client-typescript
+$ npm...]]></description><link>https://zenn.dev/yasi/articles/learn-mcp-client-typescript</link><guid isPermaLink="true">https://zenn.dev/yasi/articles/learn-mcp-client-typescript</guid><pubDate>Sun, 27 Apr 2025 04:47:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8ttlvvMN--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:MCP%2520Quickstat%2520For%2520Client%2520Developers%25E3%2582%2592%25E8%25AA%25AD%25E3%2582%2580%2528typescript%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yasi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTEd1cFBMTS1wcXlaYVlPcE5Uek9QemJpcXNCU3pMRHlJTlhaMTlTRnQ2RnVVPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yasi</dc:creator></item><item><title><![CDATA[初心者のためのFactory Methodパターン入門]]></title><description><![CDATA[
+ はじめに
+プログラミングを学ぶ過程で、コードの再利用性や保守性を高めるための「デザインパターン」という概念に出会うことでしょう。その中でも今回は、オブジェクト指向プログラミングにおける基本的かつ重要なデザインパターンである「Factory Method（ファクトリーメソッド）パターン」について解説します。
+このパターンは初めて学ぶ人にとっては少し難解に感じるかもしれませんが、理解すると多くの場面で活用できる便利なツールとなります。この記事では、Factory Methodパターンの基本概念から実装例、活用シーンまでをわかりやすく説明していきます。
+
+ Factory Methodパタ...]]></description><link>https://zenn.dev/umibudou/articles/93192b2d527ad9</link><guid isPermaLink="true">https://zenn.dev/umibudou/articles/93192b2d527ad9</guid><pubDate>Sun, 27 Apr 2025 03:18:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--iVy4LVqD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E3%2581%25AE%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AEFactory%2520Method%25E3%2583%2591%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%25B3%25E5%2585%25A5%25E9%2596%2580%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Umibudou%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvdS5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Umibudou</dc:creator></item><item><title><![CDATA[おすすめの小説を見つけれる「リーディア 」を全体的にアップデートしました]]></title><description><![CDATA[こんにちは、もっちーです。
+去年の12月に完成した「リーディア」という個人開発のアプリを改善しました。
+https://zenn.dev/mnao46/articles/3dc7e4eb8d3aa3
+一通りの開発が終わったらリーディアに対するモチベが下がってしまって、新しく散歩アプリの開発を始めることに。
+このアプリについても記事を書こうと考えています。
+そのため前回の記事から半年ほど時間が経ってしまいました。
+
+ 前回からの変更点
+
+デザインを全体的に調整（AI全任せで）
+フロントとバックを分ける（どちらもTypeScript）
+フロントのデプロイ先をCloudflare Pagesに...]]></description><link>https://zenn.dev/mnao46/articles/339123364c34e9</link><guid isPermaLink="true">https://zenn.dev/mnao46/articles/339123364c34e9</guid><pubDate>Sun, 27 Apr 2025 02:57:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2n-dosj---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%258A%25E3%2581%2599%25E3%2581%2599%25E3%2582%2581%25E3%2581%25AE%25E5%25B0%258F%25E8%25AA%25AC%25E3%2582%2592%25E8%25A6%258B%25E3%2581%25A4%25E3%2581%2591%25E3%2582%258C%25E3%2582%258B%25E3%2580%258C%25E3%2583%25AA%25E3%2583%25BC%25E3%2583%2587%25E3%2582%25A3%25E3%2582%25A2%2520%25E3%2580%258D%25E3%2582%2592%25E5%2585%25A8%25E4%25BD%2593%25E7%259A%2584%25E3%2581%25AB%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%25E3%2583%2587%25E3%2583%25BC%25E3%2583%2588%25E3%2581%2597%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2582%25E3%2581%25A3%25E3%2581%25A1%25E3%2583%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2IyYWY1NTI4ZTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>もっちー</dc:creator></item><item><title><![CDATA[React + fetch + AbortController の最小構成]]></title><description><![CDATA[Reactコンポーネントにfetch機能を実装したい。かつ、任意のタイミングでキャンセルできるようにしたい。
+…を実現するためのサンプルコードになります。
+（正直、何かしらのfetchライブラリを使えば、もっと簡単に実現できる気がしますが。。）
+
+ ソースコード
+
+Sample.tsx
+import { useCallback, useEffect, useRef, useState } from 'react';
+
+export const Sample = () =&gt; {
+  const [data, setData] = useState('');
+  const [isLo...]]></description><link>https://zenn.dev/t_tonyo_maru/articles/8672df8e03c047</link><guid isPermaLink="true">https://zenn.dev/t_tonyo_maru/articles/8672df8e03c047</guid><pubDate>Sun, 27 Apr 2025 01:06:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--22X4qwlk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%2520%252B%2520fetch%2520%252B%2520AbortController%2520%25E3%2581%25AE%25E6%259C%2580%25E5%25B0%258F%25E6%25A7%258B%25E6%2588%2590%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A8%25E3%2582%2593%25E3%2582%2588%25E3%2583%25BC%25E3%2580%2582%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NhNjVjZjg3MjguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>とんよー。</dc:creator></item></channel></rss>
