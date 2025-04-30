@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Linux」のフィード]]></title><description><![CDATA[Zennのトピック「Linux」のRSSフィードです]]></description><link>https://zenn.dev/topics/linux</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/860a9eb1e4.png</url><title>Zennの「Linux」のフィード</title><link>https://zenn.dev/topics/linux</link></image><generator>zenn.dev</generator><lastBuildDate>Wed, 30 Apr 2025 11:26:49 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/linux/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[書籍「はじめて読む486」のLinux環境構築]]></title><description><![CDATA[
+ TLDR
+QEMUの設定
+sudo apt update
+sudo apt install qemu-system-i386
+sudo wget https://archive.org/download/FD12CD/FD12CD.iso
+qemu-img create -f raw freedos.img 300M
+qemu-system-i386 -cpu 486 -drive file=freedos.img,format=raw -cdrom FD12CD.iso -boot d -nographic
+openwatcomの設定
+wget https://openwatcom...]]></description><link>https://zenn.dev/greenteabiscuit/articles/bc34670421f556</link><guid isPermaLink="true">https://zenn.dev/greenteabiscuit/articles/bc34670421f556</guid><pubDate>Wed, 30 Apr 2025 08:10:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1dlksbDx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%259B%25B8%25E7%25B1%258D%25E3%2580%258C%25E3%2581%25AF%25E3%2581%2598%25E3%2582%2581%25E3%2581%25A6%25E8%25AA%25AD%25E3%2582%2580486%25E3%2580%258D%25E3%2581%25AELinux%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:greenteabiscuit%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvZy5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>greenteabiscuit</dc:creator></item><item><title><![CDATA[Dockerではなくcontainerd＋nerdctlを使ってみる]]></title><description><![CDATA[
+ そもそもcontainerdって？
+
+
+containerd: ざっくり言うと、Docker（コンテナエンジン）の中身（コンテナランタイム）。Docker社が開発しCNCF（組織名）に寄贈されたシステムから派生。
+
+nerdctl: containerdを直接操作するためのCLIツール。NTTの方が開発者。
+
+参考: なぜオープンソースソフトウェアにコントリビュートすべきなのか
+
+
+
+
+Docker APIを叩いてDockerにcontainerdを操作してもらうよりも、直接containerdに命令したほうがシンプルだよね、という考えが広がってきている。
+（推奨）まずはこの記事を読...]]></description><link>https://zenn.dev/lotation/articles/5e938db6fdcbee</link><guid isPermaLink="true">https://zenn.dev/lotation/articles/5e938db6fdcbee</guid><pubDate>Tue, 29 Apr 2025 14:07:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4pW6rdNx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%25E3%2581%25A7%25E3%2581%25AF%25E3%2581%25AA%25E3%2581%258Fcontainerd%25EF%25BC%258Bnerdctl%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:vAr%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZkYzFmZDEwZDIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>vAr</dc:creator></item><item><title><![CDATA[WSLのパスワード忘れてログインできなくなったけど何とかなった方法]]></title><description><![CDATA[
+ vscode上でubuntu22.04を使っていたが数か月利用していなかったので、パスワード忘れてしまった間抜けです
+
+ 自分の状況を説明
+パスワード忘れたのでvscode上でrootユーザー(管理者権限)からパスワードを変更しようとしたが、ログインユーザーのパスワードがないとvscode上ではユーザーの切り替えができないため詰んだ。。
+powershellやlinuxの管理者権限で直接パスワードを変更するもvscodeに反映されない
+vscodeのwslプロンプト(ubuntu22.04)で下記コマンドを叩くとログインユーザー名が表示される
+whoami
+例として：foouserと...]]></description><link>https://zenn.dev/wakki/articles/370e16af17e4c2</link><guid isPermaLink="true">https://zenn.dev/wakki/articles/370e16af17e4c2</guid><pubDate>Sun, 27 Apr 2025 19:45:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fBh4U4il--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:WSL%25E3%2581%25AE%25E3%2583%2591%25E3%2582%25B9%25E3%2583%25AF%25E3%2583%25BC%25E3%2583%2589%25E5%25BF%2598%25E3%2582%258C%25E3%2581%25A6%25E3%2583%25AD%25E3%2582%25B0%25E3%2582%25A4%25E3%2583%25B3%25E3%2581%25A7%25E3%2581%258D%25E3%2581%25AA%25E3%2581%258F%25E3%2581%25AA%25E3%2581%25A3%25E3%2581%259F%25E3%2581%2591%25E3%2581%25A9%25E4%25BD%2595%25E3%2581%25A8%25E3%2581%258B%25E3%2581%25AA%25E3%2581%25A3%25E3%2581%259F%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%25AF%25E3%2583%2583%25E3%2582%25AD%25E3%2583%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RkOTg4YTEyNmEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ワッキー</dc:creator></item><item><title><![CDATA[Borgbackupを導入してMinecraftサーバーのバックアップを劇的に改善してみた]]></title><description><![CDATA[こんにちは！
+現在、友人数人と遊ぶ小規模なMinecraftサーバーを、自宅のサーバーで運用しています。今回は、バックアップに関する悩みをborgbackupというツールで解消したので、その体験談を書いておこうと思います。
+
+ 抱えていた問題
+ゲームが進むにつれてワールドデータは徐々に大きくなり2.4GB程度になっていました。
+従来のバックアップは、一定時間ごとにワールドデータを丸ごと圧縮して保存するというものでした。
+当初は30分ごとのバックアップ24時間分と1日ごとのバックアップを1週間分だけ保持するようにしていましたが、容量は70GBほどになってしまいました。
+
+ Borgback...]]></description><link>https://zenn.dev/arum/articles/62c4e9aa8e69c6</link><guid isPermaLink="true">https://zenn.dev/arum/articles/62c4e9aa8e69c6</guid><pubDate>Sun, 27 Apr 2025 07:08:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4y_3a3mQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Borgbackup%25E3%2582%2592%25E5%25B0%258E%25E5%2585%25A5%25E3%2581%2597%25E3%2581%25A6Minecraft%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2581%25AE%25E3%2583%2590%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%25E3%2582%2592%25E5%258A%2587%25E7%259A%2584%25E3%2581%25AB%25E6%2594%25B9%25E5%2596%2584%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Arum%2Cx_90%2Cy_121/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Arum</dc:creator></item><item><title><![CDATA[Raspberry Pi に Bluetooth 経由でログインしよう]]></title><description><![CDATA[Raspberry Pi をヘッドレスで利用している場合に役立つかもしれません。
+イーサネット経由（主に SSH）で Raspberry Pi を操作していて、ネットワーク周りの設定をいじって失敗すると、KVM を繋ぐかシリアルコンソールに繋ぐ必要が生じますが、Bluetooth 経由でのログインを用意しておくとバックアップコンソールとして使えます。
+
+ テスト条件
+
+ハードウェア：Raspberry Pi 5
+OS：Raspberry Pi OS Lite (64-bit) 2024-11-19
+
+以下の２つのサービスは有効にしておきます（デフォルトで有効になっているはず）。
+
+blu...]]></description><link>https://zenn.dev/19931/articles/e56aa361684664</link><guid isPermaLink="true">https://zenn.dev/19931/articles/e56aa361684664</guid><pubDate>Sun, 27 Apr 2025 04:23:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wdBSQhay--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Raspberry%2520Pi%2520%25E3%2581%25AB%2520Bluetooth%2520%25E7%25B5%258C%25E7%2594%25B1%25E3%2581%25A7%25E3%2583%25AD%25E3%2582%25B0%25E3%2582%25A4%25E3%2583%25B3%25E3%2581%2597%25E3%2582%2588%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Ippei%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JhYTViMjM2ZWYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Ippei</dc:creator></item><item><title><![CDATA[Linuxで顔認証を動作させる]]></title><description><![CDATA[Linuxで、Windows Helloのように色々な所で顔認証を使う方法
+
+ 1. Howdyをインストール
+基本的にLinuxで顔認証したい場合はhowdyを使う。これをまずはインストールする。ただし、リリース版は非常に古いため、git版を使うことを前提にする。
+ArchであればAURにパッケージがあるため、
+paru -Sy howdy-git
+などとしてインストールできる
+
+ 2. howdyの設定
+まずは目的のカメラを探そう。例えばmpvがインストールされていれば
+mpv /dev/video0
+などとしてカメラ映像を見ることができる。video0の数字部分を変えながらどれが正...]]></description><link>https://zenn.dev/nazo6/articles/linux-howdy-tutorial</link><guid isPermaLink="true">https://zenn.dev/nazo6/articles/linux-howdy-tutorial</guid><pubDate>Sat, 26 Apr 2025 13:28:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--efKUqZ4a--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%25E3%2581%25A7%25E9%25A1%2594%25E8%25AA%258D%25E8%25A8%25BC%25E3%2582%2592%25E5%258B%2595%25E4%25BD%259C%25E3%2581%2595%25E3%2581%259B%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nazo6%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc0YTA4ZjY1ZTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nazo6</dc:creator></item><item><title><![CDATA[【linux】treeコマンドが無いときに，ディレクトリ構造を表示]]></title><description><![CDATA[
+ treeコマンドでディレクトリ構造を表示したい
+Linuxにおいて，ディレクトリ構造を表示したいとき，treeコマンドはとても便利です．
+しかし，Linuxの標準コマンドではないため，root権限のないサーバーや，treeをインストールできない環境だとディレクトリ構造をツリー形式で表示することが出来ません．
+そこで，findとsedを使ってtreeの代替コマンドを作成しました．
+
+ 代替treeコマンド（findとsedを利用）
+👇️ディレクトリのみ表示する場合
+pwd; find . -type d | sort | sed '1d;s/^\.//;s/\/\([^/]*\)$/|...]]></description><link>https://zenn.dev/hotate_ai/articles/bdb1c50ee84485</link><guid isPermaLink="true">https://zenn.dev/hotate_ai/articles/bdb1c50ee84485</guid><pubDate>Sat, 26 Apr 2025 07:03:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--MdvSKyVS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590linux%25E3%2580%2591tree%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2581%258C%25E7%2584%25A1%25E3%2581%2584%25E3%2581%25A8%25E3%2581%258D%25E3%2581%25AB%25EF%25BC%258C%25E3%2583%2587%25E3%2582%25A3%25E3%2583%25AC%25E3%2582%25AF%25E3%2583%2588%25E3%2583%25AA%25E6%25A7%258B%25E9%2580%25A0%25E3%2582%2592%25E8%25A1%25A8%25E7%25A4%25BA%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%259B%25E3%2582%25BF%25E3%2583%2586%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q1NGU1MWM4ZjEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ホタテ</dc:creator></item><item><title><![CDATA[Linuc101勉強記録　GNUとUnixのコマンド分野編　その１]]></title><description><![CDATA[
+ はじめに
+みなさんこんにちは。
+GNUとUnixのコマンドの分野の勉強を始めたので、自分の記憶のアウトプットとして学んだ部分をメモとしてまとめていきたいと思います。
+今回は、Linuxの基本コマンドについてまとめていきたいと思います。
+
+ １.Linux 基本コマンド
+
+$ man:コマンドに関するマニュアルが⾒られる。
+オプションの使い⽅を忘れた時に重宝「q」キーでマニュアルから抜けられる。
+$ cd：現在のディレクトリの変更
+$ pwd：現在のディレクトリの表示
+$ mkdir：ディレクトリの作成
+$ ls：ファイル・ディレクトリの一覧の表示
+$ rm：ファイルやディレクトリの削...]]></description><link>https://zenn.dev/smbysdisk/articles/2e31b5d256a937</link><guid isPermaLink="true">https://zenn.dev/smbysdisk/articles/2e31b5d256a937</guid><pubDate>Thu, 24 Apr 2025 08:43:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7F72Z1hn--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linuc101%25E5%258B%2589%25E5%25BC%25B7%25E8%25A8%2598%25E9%258C%25B2%25E3%2580%2580GNU%25E3%2581%25A8Unix%25E3%2581%25AE%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E5%2588%2586%25E9%2587%258E%25E7%25B7%25A8%25E3%2580%2580%25E3%2581%259D%25E3%2581%25AE%25EF%25BC%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A0%25E3%2581%2584%25E3%2581%2599%25E3%2583%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzUxNmE0YjNhNzguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>だいすー</dc:creator></item><item><title><![CDATA[VMware Workstation 17.6.3のカーネルモジュールを手動でFedora 41にインストールするメモ]]></title><description><![CDATA[本当にただのメモ書きです
+
+ TL;DR
+https://github.com/gleb-kun/vmware-host-modules/tree/workstation-17.6.1
+をインストールすれば(とりあえず)OK
+
+ 概要
+授業用に3Dアクセラレーションが動くWindowsのVMを作ろうとしてハマったので
+VMware Workstation Pro 17.6.3 on Fedora 41を想定しています
+
+
+ 手順
+
+ 依存をインストール
+sudo dnf install kernel-devel kernel-headers
+(どっちが必要だったかうろ覚えですが、調べた感...]]></description><link>https://zenn.dev/r_ca/articles/73431085c2258a</link><guid isPermaLink="true">https://zenn.dev/r_ca/articles/73431085c2258a</guid><pubDate>Thu, 24 Apr 2025 03:27:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--PzdNE5Qv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:VMware%2520Workstation%252017.6.3%25E3%2581%25AE%25E3%2582%25AB%25E3%2583%25BC%25E3%2583%258D%25E3%2583%25AB%25E3%2583%25A2%25E3%2582%25B8%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%25AB%25E3%2582%2592%25E6%2589%258B%25E5%258B%2595%25E3%2581%25A7Fedora%252041%25E3%2581%25AB%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%2599%25E3%2582%258B%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:r_ca%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJmYTkyYzczNmMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>r_ca</dc:creator></item><item><title><![CDATA[【Linux】SSHでLinuxサーバーに接続したら覚えておきたいCLIコマンドと注意点]]></title><description><![CDATA[
+ はじめに
+LinuxサーバーへのSSH接続はエンジニアにとってよくある作業です。ただ、慣れないうちはサーバー上で操作することに不安を感じることも多いと思います。この記事では、サーバーにSSH接続した際に知っておきたいCLIコマンドや注意点、効率化のためのTipsをまとめました。
+
+ 対象者
+
+SSHを使ってLinuxサーバーに接続するエンジニア
+CLIでの作業に慣れていない方
+検証/本番環境での作業時に不安を感じる方
+
+
+ SSH接続
+
+ 基本操作
+
+接続: ssh user@hostname
+
+接続（ポート指定）: ssh -p port_number user@hostname
+...]]></description><link>https://zenn.dev/ykbone/articles/7328fdae62f937</link><guid isPermaLink="true">https://zenn.dev/ykbone/articles/7328fdae62f937</guid><pubDate>Tue, 22 Apr 2025 12:56:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jGUpCm90--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Linux%25E3%2580%2591SSH%25E3%2581%25A7Linux%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2581%25AB%25E6%258E%25A5%25E7%25B6%259A%25E3%2581%2597%25E3%2581%259F%25E3%2582%2589%25E8%25A6%259A%25E3%2581%2588%25E3%2581%25A6%25E3%2581%258A%25E3%2581%258D%25E3%2581%259F%25E3%2581%2584CLI%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2581%25A8%25E6%25B3%25A8%25E6%2584%258F%25E7%2582%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ykbone%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAyYmU2ODQzYjEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ykbone</dc:creator></item><item><title><![CDATA[UbuntuでCapsLockをCtrlに！ターミナルだけでキーバインドを変更する方法]]></title><description><![CDATA[
+ UbuntuでCapsLockをCtrlに！ターミナルだけでキーバインドを変更する方法
+Ubuntuを使っていると「CapsLockキーをCtrlキーとして使いたい！」と思うこと、ありませんか？
+(特にemacsを使っている方)
+この記事ではターミナルだけでCapsLockキーをCtrlキーに変更する方法を、一時的な設定と永続的な設定の2通りで解説します。
+自身の記録用に作成しましたが参考になれば嬉しいです。
+
+
+ 1. 一時的にCapsLockをCtrlに変更する（Xセッション限定）
+まずは、今のセッションだけCapsLockをCtrlとして使いたい場合の方法です。
+ターミナルで以...]]></description><link>https://zenn.dev/sudonotfound/articles/38cdf3da8a78a5</link><guid isPermaLink="true">https://zenn.dev/sudonotfound/articles/38cdf3da8a78a5</guid><pubDate>Tue, 22 Apr 2025 12:05:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--F3Lyz_3R--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ubuntu%25E3%2581%25A7CapsLock%25E3%2582%2592Ctrl%25E3%2581%25AB%25EF%25BC%2581%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%259F%25E3%2583%258A%25E3%2583%25AB%25E3%2581%25A0%25E3%2581%2591%25E3%2581%25A7%25E3%2582%25AD%25E3%2583%25BC%25E3%2583%2590%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2589%25E3%2582%2592%25E5%25A4%2589%25E6%259B%25B4%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:sudonotfound%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NkMDNlYjQ3MWMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sudonotfound</dc:creator></item><item><title><![CDATA[WSL上のKali Linux apt Failed to fetch問題の対応]]></title><description><![CDATA[
+ 問題点
+特定のアプリをapt installしようとすると「Failed to fetch」が発生することがある。
+
+Error: Failed to fetch http://mirror.hashy0917.net/kali/pool/main/n/node-cjs-module-lexer/node-cjs-module-lexer_1.2.3+dfsg-1_all.deb  Cannot initiate the connection to mirror.hashy0917.net:80 (2001:df4:1780:d000:103:152:178:42). - conne...]]></description><link>https://zenn.dev/lemon_soda/articles/871738f8b56a07</link><guid isPermaLink="true">https://zenn.dev/lemon_soda/articles/871738f8b56a07</guid><pubDate>Tue, 22 Apr 2025 01:13:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---37Ito_---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:WSL%25E4%25B8%258A%25E3%2581%25AEKali%2520Linux%2520apt%2520Failed%2520to%2520fetch%25E5%2595%258F%25E9%25A1%258C%25E3%2581%25AE%25E5%25AF%25BE%25E5%25BF%259C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:sam%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBmNWVlYjg2YWYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sam</dc:creator></item><item><title><![CDATA[Proxmox VEマシンのSSDを交換、 ClonezillaでのクローニングとLVM拡張手順(自分用メモ)]]></title><description><![CDATA[私は開発や、デモや、信用の出来ないコードの実行はVirtual Machineで行っているんですが、古くはMacにParallelsをいれてWindowsやLinuxのVMをいれてそれを行ってきました。
+しかし、Apple Silicon時代のMacはVM化と超絶的に相性が悪く、どうしようもないわ！ということで色々と諦め、VMは外に持つことになり、最近だとProxmoxにまとめておいている、という感じ。
+で、昨今。
+「パンッパンやがな！！」
+元々そこそこ良いLinux box用として買ったPCを転用したんで、メモリ32GB、SSD512GBというスペが段々不便になってきます。「買い替え」...]]></description><link>https://zenn.dev/uzulla/articles/90bcb2e1d4deff</link><guid isPermaLink="true">https://zenn.dev/uzulla/articles/90bcb2e1d4deff</guid><pubDate>Sun, 20 Apr 2025 22:26:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--03pzPhL9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Proxmox%2520VE%25E3%2583%259E%25E3%2582%25B7%25E3%2583%25B3%25E3%2581%25AESSD%25E3%2582%2592%25E4%25BA%25A4%25E6%258F%259B%25E3%2580%2581%2520Clonezilla%25E3%2581%25A7%25E3%2581%25AE%25E3%2582%25AF%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%258B%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%25A8LVM%25E6%258B%25A1%25E5%25BC%25B5%25E6%2589%258B%25E9%25A0%2586%2528%25E8%2587%25AA%25E5%2588%2586%25E7%2594%25A8%25E3%2583%25A1%25E3%2583%25A2%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:uzulla%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NlYTlhNTcwYjEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>uzulla</dc:creator></item><item><title><![CDATA[システムコール"を"使うのはLinux自身です]]></title><description><![CDATA[
+ 概要
+"システムコール" はご存知でしょうか？
+ターミナルからなにかコマンドを実行したときに呼ばれているんでしょ？という認識が何となくある人が多いかと思います。
+システムコールの仕組に関しては正確に分からないため調査した次第です。
+当記事はシステムコールがどのように実行されるのかを把握し、システムコールの正体を探索した記録の記事です。
+
+ 対象読者
+
+システムコールがOSの機能だと思っている人
+システムコールを使っているのがユーザーだと思っている人
+コマンドラインで何かしら命令を実行した事がある人
+Linuxカーネルに興味がある人
+ある程度根本まで知らないと気が済まないタイプの人
+
+...]]></description><link>https://zenn.dev/fah_72946_engr/articles/3b12a7082c7017</link><guid isPermaLink="true">https://zenn.dev/fah_72946_engr/articles/3b12a7082c7017</guid><pubDate>Sun, 20 Apr 2025 15:53:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ULNh26yQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%25AB%2522%25E3%2582%2592%2522%25E4%25BD%25BF%25E3%2581%2586%25E3%2581%25AE%25E3%2581%25AFLinux%25E8%2587%25AA%25E8%25BA%25AB%25E3%2581%25A7%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:dsktchr%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg3ZGY2MDA2M2UuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>dsktchr</dc:creator></item><item><title><![CDATA[WSL2導入手順]]></title><description><![CDATA[
+ WSLとは
+WSL（Windows Subsystem for Linux）は、Windows上でLinux環境を動かせる仕組みです。Linux用の開発ツールやコマンドを、仮想マシンを使わずに直接Windowsで利用できるようになります。
+
+ 必要条件
+
+Windows 10 (バージョン 2004 以降) または Windows 11
+インターネット接続
+管理者権限 (PCの設定を変更できる権限)
+
+
+ 導入手順
+
+
+管理者権限で、PowerShellを開きます
+
+
+
+インストール可能なLinux一覧を取得する
+wsl --list --online
+
+
+
+ディストリビューションを...]]></description><link>https://zenn.dev/west_river/articles/46f164ebdacafb</link><guid isPermaLink="true">https://zenn.dev/west_river/articles/46f164ebdacafb</guid><pubDate>Sun, 20 Apr 2025 08:46:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--D_0u4LIY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:WSL2%25E5%25B0%258E%25E5%2585%25A5%25E6%2589%258B%25E9%25A0%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:WestRiver%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0ZVdPUEQ0WFBfeHhfOG9Ob0FfdVZ2dXFGX2ZEWTJHQ3Ffbml2REY9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>WestRiver</dc:creator></item><item><title><![CDATA[systemd-resolved 環境下での incus コンテナ名前解決]]></title><description><![CDATA[systemd-resolved 環境下において、ホストから incus コンテナに対しコンテナ名(+.incus)でアクセスできるように名前解決をセットアップする。
+Incus 公式ドキュメントのユニットファイルのサンプルを参考に、テンプレートユニットを利用する。
+https://linuxcontainers.org/incus/docs/main/howto/network_bridge_resolved/
+次のユニットファイルを/etc/systemd/system/incus-dns@.serviceに作成する。
+
+/etc/systemd/system/incus-dns@....]]></description><link>https://zenn.dev/oyster_oku/articles/5f6e24dd4fecf6</link><guid isPermaLink="true">https://zenn.dev/oyster_oku/articles/5f6e24dd4fecf6</guid><pubDate>Sat, 19 Apr 2025 08:15:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ufL5BQpX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:systemd-resolved%2520%25E7%2592%25B0%25E5%25A2%2583%25E4%25B8%258B%25E3%2581%25A7%25E3%2581%25AE%2520incus%2520%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2586%25E3%2583%258A%25E5%2590%258D%25E5%2589%258D%25E8%25A7%25A3%25E6%25B1%25BA%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:oyster%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI3NmYzM2NjMTUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>oyster</dc:creator></item><item><title><![CDATA[AWS CLIのインストール（Windows・Mac・Linux（Ubuntu））]]></title><description><![CDATA[初心者向けにはなりますが良ければお役立てください。
+
+ Windows向け AWS CLIインストール
+インストーラDLリンクよりダウンロードし、実行します。
+「次へ」をポチポチ通していくだけで問題なく、以下コマンドプロンプトもしくはVSCode等から以下のコマンドを実行してバージョンが表示されればOKです。
+aws --version
+
+ Mac向け AWS CLIインストール
+パッケージDLリンクよりダウンロードし、実行します。
+その後は画面の指示に従ってポチポチしていくだけで完了です。ターミナルを開いて以下のコマンドを実行してaws cliの場所とバージョンが表示されればOKです。...]]></description><link>https://zenn.dev/ci/articles/f790f11dba73f8</link><guid isPermaLink="true">https://zenn.dev/ci/articles/f790f11dba73f8</guid><pubDate>Sat, 19 Apr 2025 04:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--cMnHPqhm--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AWS%2520CLI%25E3%2581%25AE%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25EF%25BC%2588Windows%25E3%2583%25BBMac%25E3%2583%25BBLinux%25EF%25BC%2588Ubuntu%25EF%25BC%2589%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AA%25E3%2581%258C%25E3%2581%258A%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhjMmY5OTdiYTUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ながお</dc:creator></item><item><title><![CDATA[systemd でのリソース管理と失敗の通知]]></title><description><![CDATA[
+ systemd でのリソース管理と失敗の通知
+— MemoryMax, OnFailure, Slack 通知ユニット連携、起動順序制御の実践例 —
+
+ 📝 概要
+本記事では、Linux の初期化システムである systemd を使って、サービスの起動制御・リソース制限・障害通知といった運用に使えそうな構成例を紹介します。
+systemd は単なるサービスの起動管理にとどまらず、
+
+
+MemoryMax による メモリ制限
+
+
+After / Requires を使った 起動順序の制御
+
+
+@.service を活用した テンプレートユニットによる柔軟なサービス定義
+
+
+など、非常に...]]></description><link>https://zenn.dev/inventit/articles/systemd-resource-controll</link><guid isPermaLink="true">https://zenn.dev/inventit/articles/systemd-resource-controll</guid><pubDate>Fri, 18 Apr 2025 09:05:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--mRv88VZh--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:systemd%2520%25E3%2581%25A7%25E3%2581%25AE%25E3%2583%25AA%25E3%2582%25BD%25E3%2583%25BC%25E3%2582%25B9%25E7%25AE%25A1%25E7%2590%2586%25E3%2581%25A8%25E5%25A4%25B1%25E6%2595%2597%25E3%2581%25AE%25E9%2580%259A%25E7%259F%25A5%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:mtakahashi%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M5NTBkNTdlNTMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Inventit%2520Tech%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZhZDg3YjRkZGMuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mtakahashi</dc:creator></item><item><title><![CDATA[Macで爆速！OrbStackでKali LinuxをGUI付きで動かす全手順]]></title><description><![CDATA[
+ はじめに
+こんにちは、@k_ingです！
+最近ハッキングの勉強を始めたのですが、Kali LinuxをMacで快適に動かす方法がなかなか見つからない…！
+そんなときに出会ったのが OrbStack。Docker代替として有名ですが、Linux仮想環境も超快適に動かせるんです！
+この記事では、Macユーザー向けに OrbStack + RDP を使ってGUI付きKali Linuxを爆速構築する方法を紹介します。
+
+
+ この記事を読むとこんなことがわかります👇
+
+OrbStackの仮想マシンでKali Linuxを動かす方法
+GUIを有効化して快適に操作する設定方法
+Microsoft...]]></description><link>https://zenn.dev/k_ing/articles/abcbe71c105b3d</link><guid isPermaLink="true">https://zenn.dev/k_ing/articles/abcbe71c105b3d</guid><pubDate>Fri, 18 Apr 2025 03:42:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--tGhbtmea--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Mac%25E3%2581%25A7%25E7%2588%2586%25E9%2580%259F%25EF%25BC%2581OrbStack%25E3%2581%25A7Kali%2520Linux%25E3%2582%2592GUI%25E4%25BB%2598%25E3%2581%258D%25E3%2581%25A7%25E5%258B%2595%25E3%2581%258B%25E3%2581%2599%25E5%2585%25A8%25E6%2589%258B%25E9%25A0%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:k_ing%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2QxYWQxMWJmY2YuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>k_ing</dc:creator></item><item><title><![CDATA[ジャンクのThinkpad E430にProxmoxを導入し、Ubuntu ServerとAmazon Linux 2023を動かす]]></title><description><![CDATA[
+ この記事はなんですか
+2025年4月現在予算1万前後でそこそこ使えて場所を取らないProxmoxノードを用意するにはどうしたらいいか考える過程でラップトップをサーバとして使う方法を手順にまとめた方法です。まともに予算がある場合はミニPCかスリム型デスクトップ、ラックサーバをおすすめします。
+Proxmoxのインストール手順だけ読みたい方は目次から飛べます。
+
+ この作業のモチベーションはなんですか
+自宅に仮想化基盤を用意することで検証用やアプリサービスを自前で持つことができます。
+仮想基盤といえばVMware vSphere(ESXi)が主流でしたが、無償ライセンスの提供が終了した上...]]></description><link>https://zenn.dev/suzushiroz/articles/21978931ab2185</link><guid isPermaLink="true">https://zenn.dev/suzushiroz/articles/21978931ab2185</guid><pubDate>Thu, 17 Apr 2025 03:09:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--n0RbMdas--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B8%25E3%2583%25A3%25E3%2583%25B3%25E3%2582%25AF%25E3%2581%25AEThinkpad%2520E430%25E3%2581%25ABProxmox%25E3%2582%2592%25E5%25B0%258E%25E5%2585%25A5%25E3%2581%2597%25E3%2580%2581Ubuntu%2520Server%25E3%2581%25A8Amazon%2520Linux...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:suzushiro%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg5ODAzNjNiODUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>suzushiro</dc:creator></item></channel></rss>
