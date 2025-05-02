@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Fri, 02 May 2025 05:53:00 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Dify 旧バージョンを利用した際にエラーが発生する]]></title><description><![CDATA[こんにちは、nachiです。
+Dify Community をローカル環境で試していたところ、Gemini の API トークン設定時に次のエラーが発生しました。
+
+404 models/gemini-pro is not found for API version v1beta, or is not supported for generateContent. 
+Call ListModels to see the list of available models and their supported methods.
+以前試した際には、同じトークンで設定できたのになぜでしょうか。
+...]]></description><link>https://zenn.dev/upgradetech/articles/dify-old-version-use</link><guid isPermaLink="true">https://zenn.dev/upgradetech/articles/dify-old-version-use</guid><pubDate>Fri, 02 May 2025 05:37:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--FxnvfHsG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Dify%2520%25E6%2597%25A7%25E3%2583%2590%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%2592%25E5%2588%25A9%25E7%2594%25A8%25E3%2581%2597%25E3%2581%259F%25E9%259A%259B%25E3%2581%25AB%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E3%2581%258C%25E7%2599%25BA%25E7%2594%259F%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:nachi%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI4NmJmMzNhODkuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:UPGRADE%2520tech%2520blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ1NmQ1MTgxNTUuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nachi</dc:creator></item><item><title><![CDATA[MCPのPython SDK + FastAPIでMCPサーバーを起動する]]></title><description><![CDATA[最近話題のMCP(Model-Context-Protocol)を学習していて、試しにMCPサーバーを作ってみました。
+
+ やりたかったこと
+
+stdioモードで起動する
+sseモードで起動する、その際にFastAPIやFlask等のWebフレームワークを使用したい
+
+FastAPI-MCPというライブラリもあるみたいですが、これはFastAPIで構築したエンドポイントをMCPに変換してくれるツールの模様。MCPサーバーの起動方法を任意に選択できるというわけではなさそうなので、今回は使用しません。学習目的も兼ねているので、MCPのPythonSDKを直接触ってみたかったのもあります。
+
+...]]></description><link>https://zenn.dev/curry_katsu/articles/c674b834e1ad05</link><guid isPermaLink="true">https://zenn.dev/curry_katsu/articles/c674b834e1ad05</guid><pubDate>Fri, 02 May 2025 02:44:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--F2_ApFCX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:MCP%25E3%2581%25AEPython%2520SDK%2520%252B%2520FastAPI%25E3%2581%25A7MCP%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2582%2592%25E8%25B5%25B7%25E5%258B%2595%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:KKobayashi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM5ZWJiZjRiZWUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>KKobayashi</dc:creator></item><item><title><![CDATA[なぜ Rust で文字列にインデックスでアクセスできないのか？]]></title><description><![CDATA[
+ なぜ Rust で文字列にインデックスでアクセスできないのか？
+Rust の文字列に s[0] のようなインデックスでアクセスしようとしてエラーになった経験はありませんか？
+しばしば Python や C++のノリで Rust を書いて、めちゃくちゃコンパイラに怒られるということが多々あります。
+例えば、次のようなコードを書いたとします。
+fn main() {
+    let s = String::from("hello");
+    let c = s[0];
+}
+このコードをコンパイルしようとすると、次のようなエラーが発生します。
+ cargo run
+   Compilin...]]></description><link>https://zenn.dev/ekusiadadus/articles/rust-string-index</link><guid isPermaLink="true">https://zenn.dev/ekusiadadus/articles/rust-string-index</guid><pubDate>Thu, 01 May 2025 16:47:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6Q1LvySU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%25AA%25E3%2581%259C%2520Rust%2520%25E3%2581%25A7%25E6%2596%2587%25E5%25AD%2597%25E5%2588%2597%25E3%2581%25AB%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2587%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25B9%25E3%2581%25A7%25E3%2582%25A2%25E3%2582%25AF%25E3%2582%25BB%25E3%2582%25B9%25E3%2581%25A7%25E3%2581%258D%25E3%2581%25AA%25E3%2581%2584%25E3%2581%25AE%25E3%2581%258B%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ekusiadadus%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2owQTdHV3Q0eUx2U1dIamZ5eVhhSjNMSWpaUVJ4MlNxTFNvMzExPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ekusiadadus</dc:creator></item><item><title><![CDATA[Claude、Gemini 超えの Local LLM (32B) ／ Python ゲーム編]]></title><description><![CDATA[
+ 偽りなし
+少なくとも今回試した内容では、Claude 3.7 Sonnet や Gemini 2.5 Pro (experimental) より、明らかに良いものを THUDM/GLM-4-32B-0414 は生成してくれた。
+
+ 前回の続き
+
+ローカル LLM ですごいやつに出会った／Qwen3 と Qwen2.5-Coder と比較（Web アプリ編） - zenn.dev
+
+今度は、 Python でゲーム開発。
+
+ ユーザープロンプト
+LLM に投げたプロンプト
+Please create a side-scrolling shooter game similar to Gr...]]></description><link>https://zenn.dev/5203life/articles/8fa73e70b9e93e</link><guid isPermaLink="true">https://zenn.dev/5203life/articles/8fa73e70b9e93e</guid><pubDate>Thu, 01 May 2025 13:54:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9-pbqyhT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Claude%25E3%2580%2581Gemini%2520%25E8%25B6%2585%25E3%2581%2588%25E3%2581%25AE%2520Local%2520LLM%2520%252832B%2529%2520%25EF%25BC%258F%2520Python%2520%25E3%2582%25B2%25E3%2583%25BC%25E3%2583%25A0%25E7%25B7%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:High%2520U%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUVkRlRwNDlZQXVSdWVTM2xEYms5WGZMbXkwT1RtN1hYcllEbDlQZEc3N0s9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>High U</dc:creator></item><item><title><![CDATA[Snowflake Cortex Search Boosts & Decays で RAG チャットアプリを強化する]]></title><description><![CDATA[
+ はじめに
+2025/4/28に、Snowflake で RAG フレームワークなどを構成できる Cortex Search に Boosts / Decays 機能が追加されました！この機能により検索スコアを 「数値メタデータ (例: いいね数や閲覧数など)」 や 「経過時間」 に応じて柔軟に調整できるようになり、RAG アプリなどにおけるドキュメント検索精度をさらに高めることが可能になりました。
+今回はこの機能を使って、より高度な検索機能を備えた RAG チャットボットを作ってみましたので是非使ってみてください。クイックに試してカスタムしていただけるよう シンプルなソースコードかつ...]]></description><link>https://zenn.dev/tsubasa_tech/articles/b52f1e9d820759</link><guid isPermaLink="true">https://zenn.dev/tsubasa_tech/articles/b52f1e9d820759</guid><pubDate>Thu, 01 May 2025 13:11:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--IDnBBtpi--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Snowflake%2520Cortex%2520Search%2520Boosts%2520%2526%2520Decays%2520%25E3%2581%25A7%2520RAG%2520%25E3%2583%2581%25E3%2583%25A3%25E3%2583%2583%25E3%2583%2588%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E5%25BC%25B7%25E5%258C%2596%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tsubasa%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzIzNTYwMzlkYjIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tsubasa</dc:creator></item><item><title><![CDATA[fastmcpを使ってサクッとSSEサーバーを立てる]]></title><description><![CDATA[mcpとても便利ですね。最近流行っているようです。
+この波に乗っていきたい！
+
+ fastmcpとは？
+fastmcpは簡単にmcpを作れるPythonのツールです。
+https://github.com/jlowin/fastmcp
+studio型で使用する場合は
+mcp.run()
+だけで実装できてしまいます。
+特にClaude Desktopで使う場合はmcpの登録までやってくれるとても便利なツールです。
+今回はdifyから使いたいこともあり、SSEのサーバーを立てます。
+とても簡単に立てれたので書いておこうと思いました。
+
+ 試してみる
+uvの環境下で行います。
+適当にserve...]]></description><link>https://zenn.dev/konoe_akitoshi/articles/babdc695e53826</link><guid isPermaLink="true">https://zenn.dev/konoe_akitoshi/articles/babdc695e53826</guid><pubDate>Thu, 01 May 2025 11:54:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xr9y0Nn7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:fastmcp%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2582%25B5%25E3%2582%25AF%25E3%2583%2583%25E3%2581%25A8SSE%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2582%2592%25E7%25AB%258B%25E3%2581%25A6%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:konoe_akitoshi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2UzZTE1YTU4YTUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>konoe_akitoshi</dc:creator></item><item><title><![CDATA[#0　データサイエンティストへの第一歩]]></title><description><![CDATA[
+ ✍️ まえがき
+
+ 📘 著者について
+
+ 👤 著者の基本情報
+初めまして。
+私は、Pythonもデータサイエンスも未経験から学び始めた、ただの一人の学習者です。
+現在30代、一般企業勤めのよくいる技術系総合職サラリーマン。
+簡単ですが自己紹介をさせて下さい。
+
+ 🎓 学生時代
+大学では化学工学を専攻し、材料関係の研究に取り組んでいました。
+修士の研究テーマは鉛筆の芯からダイヤモンド粒子を生成する研究。
+今思い返すと夢のあるテーマです。
+肝心の統計学ですが、必修科目で10年以上前に履修した程度。
+ほとんど歩留っていないのが正直なところです。
+またプログラミングについても、趣味で少し触っ...]]></description><link>https://zenn.dev/maejima/articles/fa4d76bd9195ea</link><guid isPermaLink="true">https://zenn.dev/maejima/articles/fa4d76bd9195ea</guid><pubDate>Thu, 01 May 2025 09:34:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--LjlkskKg--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25230%25E3%2580%2580%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%25B5%25E3%2582%25A4%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2586%25E3%2582%25A3%25E3%2582%25B9%25E3%2583%2588%25E3%2581%25B8%25E3%2581%25AE%25E7%25AC%25AC%25E4%25B8%2580%25E6%25AD%25A9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%259E%25E3%2582%25A8%25E3%2582%25B8%25E3%2583%259E%25E3%2582%25AB%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS2duTHJXOEZ4S1FpUWtVWGJxclNFdlJQTjh5Rnh1OEg4ajk3UmpERzhDaHFJNkZaVT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>マエジマカ</dc:creator></item><item><title><![CDATA[うっかり GitHub に公開しない！5分でできる生成AI APIキー管理するTips紹介]]></title><description><![CDATA[
+ はじめに
+OpenAI、Gemini、Claude など、生成AI の API を手軽に試せる時代になりました。
+まともに検証コードを書くとしたら、下記のようなコードになります。
+import google.generativeai as genai
+
+# APIキーを設定
+API_KEY = "xxx"
+
+# Gemini APIの設定
+genai.configure(api_key=API_KEY)
+model = genai.GenerativeModel("gemini-2.0-flash")
+
+user_input = input("質問: ")
+response = mo...]]></description><link>https://zenn.dev/yagiyuki/articles/secure-genai-api-keys-v2</link><guid isPermaLink="true">https://zenn.dev/yagiyuki/articles/secure-genai-api-keys-v2</guid><pubDate>Thu, 01 May 2025 09:02:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--POr-poj9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%2586%25E3%2581%25A3%25E3%2581%258B%25E3%2582%258A%2520GitHub%2520%25E3%2581%25AB%25E5%2585%25AC%25E9%2596%258B%25E3%2581%2597%25E3%2581%25AA%25E3%2581%2584%25EF%25BC%25815%25E5%2588%2586%25E3%2581%25A7%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258B%25E7%2594%259F%25E6%2588%2590AI%2520API%25E3%2582%25AD%25E3%2583%25BC%25E7%25AE%25A1%25E7%2590%2586%25E3%2581%2599%25E3%2582%258BTips%25E7%25B4%25B9%25E4%25BB%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yagiyuki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRmZmIzYzYyYjQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yagiyuki</dc:creator></item><item><title><![CDATA[OpenAI Agent SDKによるMCP clientサンプル]]></title><description><![CDATA[
+ はじめに
+この記事はOpenAI Agents SDK用のMCP clientのサンプルの解説です。OpenAI AgentsはAIエージェントを作るためのSDKで、チャット機能よりは外部システムとの連携に重点が置かれています。
+MCPはModel Context Protocolの略で、Anthropic社が発表したLLMと外部システムの連携用プロトコルで、MCPによりシステム間連携がかんたんになりました。
+この記事で解説するコードはただのサンプルレベルのものですが、MCPサーバを設定ファイルで追加するだけで、ここやここにあるアプリやシステムから情報取得、操作が可能になります。
+参...]]></description><link>https://zenn.dev/exyrias/articles/cf20a571041c4b</link><guid isPermaLink="true">https://zenn.dev/exyrias/articles/cf20a571041c4b</guid><pubDate>Thu, 01 May 2025 07:53:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ilEyt_mR--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:OpenAI%2520Agent%2520SDK%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258BMCP%2520client%25E3%2582%25B5%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AB%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:exyrias%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvZS5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>exyrias</dc:creator></item><item><title><![CDATA[pythonのリスト内包表記における二重ループ]]></title><description><![CDATA[
+ はじめに
+pythonでの内包表記は、もちろん多重ループも可能ですが、実行の度に迷うこともあるので整理がてらにまとめます。
+
+ 内包表記とは
+ほとんどの方が問題ないかと思いますが、ほんの少しばかり序章として書いておきます。
+内包表記とは一言でいうと「forループでリストなどをシンプルに生成するための構文」といったところでしょうか。
+例えば、0~4の整数のリストを作りたい場合
+list = []
+for i in range(5):
+    list.append(i)
+とすれば生成できます。これを内包表記で書くなら,
+list = [i for i in range(5)]
+と非常に...]]></description><link>https://zenn.dev/tndr1934/articles/04a571c73833f4</link><guid isPermaLink="true">https://zenn.dev/tndr1934/articles/04a571c73833f4</guid><pubDate>Thu, 01 May 2025 05:15:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--HQh5BIQe--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:python%25E3%2581%25AE%25E3%2583%25AA%25E3%2582%25B9%25E3%2583%2588%25E5%2586%2585%25E5%258C%2585%25E8%25A1%25A8%25E8%25A8%2598%25E3%2581%25AB%25E3%2581%258A%25E3%2581%2591%25E3%2582%258B%25E4%25BA%258C%25E9%2587%258D%25E3%2583%25AB%25E3%2583%25BC%25E3%2583%2597%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Tom2_98%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTGJoZmt5d3MybDZQbVhxdW5FNHBTMzlXOGo0TVE1NVk1cXFUT3RyZUZDcURBRzl3PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Tom2_98</dc:creator></item><item><title><![CDATA[Discord日程調整Botの開発からSynology NASでのホスティングまで]]></title><description><![CDATA[
+ Discord日程調整Botの開発からSynology NASでのホスティングまで
+この記事では、Discordサーバーでのスケジュール調整に役立つ投票Botを開発し、Synology NASでホスティングする方法を紹介します。時間枠の重複ありで投票を自動作成する機能を持ち、サーバーメンバーの予定調整を効率化するBotです。
+
+ 目次
+
+Discord日程調整Botの開発からSynology NASでのホスティングまで
+
+目次
+
+1. Discord Botの概要
+2. 開発環境の準備
+3. Discord Developer Portalでの設定
+4. Botのコード実装
+
+5. ...]]></description><link>https://zenn.dev/k1nsenka/articles/155cfb537b3e47</link><guid isPermaLink="true">https://zenn.dev/k1nsenka/articles/155cfb537b3e47</guid><pubDate>Thu, 01 May 2025 02:36:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8bihCMrl--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Discord%25E6%2597%25A5%25E7%25A8%258B%25E8%25AA%25BF%25E6%2595%25B4Bot%25E3%2581%25AE%25E9%2596%258B%25E7%2599%25BA%25E3%2581%258B%25E3%2582%2589Synology%2520NAS%25E3%2581%25A7%25E3%2581%25AE%25E3%2583%259B%25E3%2582%25B9%25E3%2583%2586%25E3%2582%25A3%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%25BE%25E3%2581%25A7%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25BC%25E3%2582%2584%25E3%2581%25A1%25E3%2582%2583%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc1ZWJmY2I3NTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ぼやちゃん</dc:creator></item><item><title><![CDATA[株式・暗号資産で儲けるための分析支援系OSS一覧]]></title><description><![CDATA[以下に、株式および暗号資産を対象にファンダメンタル分析またはテクニカル分析が可能で、バックテスト機能を備えた主要なオープンソース・ソフトウェア（OSS）をリストアップしました。
+まだどれも試せていないので使った方は使用感をコメント欄で教えてくださると嬉しいです。
+
+ Backtrader（Python）
+
+
+対応言語: Python
+
+主な機能: 豊富なテクニカル指標と分析機能を内蔵し、過去データを用いたバックテストやライブ取引に対応。再利用可能なストラテジーやインジケーターの作成に集中できる設計 (Welcome - Backtrader)（ファンダメンタル分析機能は特になし）。
+
+対...]]></description><link>https://zenn.dev/giba/articles/python_stock_analysis_oss_list_by_deepresearch</link><guid isPermaLink="true">https://zenn.dev/giba/articles/python_stock_analysis_oss_list_by_deepresearch</guid><pubDate>Wed, 30 Apr 2025 23:50:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Ec83fs8G--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%25A0%25AA%25E5%25BC%258F%25E3%2583%25BB%25E6%259A%2597%25E5%258F%25B7%25E8%25B3%2587%25E7%2594%25A3%25E3%2581%25A7%25E5%2584%25B2%25E3%2581%2591%25E3%2582%258B%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%25E5%2588%2586%25E6%259E%2590%25E6%2594%25AF%25E6%258F%25B4%25E7%25B3%25BBOSS%25E4%25B8%2580%25E8%25A6%25A7%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:GIBA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y5MmM4MjdhMmEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>GIBA</dc:creator></item><item><title><![CDATA[LangChain × OpenAI エージェント試作 調査結果]]></title><description><![CDATA[
+ 調査日
+2025年4月30日（水）
+
+ 調査テーマ
+LangChain と OpenAI API を使用して、自己紹介および質問応答が可能なエージェントを試作する。
+
+ 実施環境
+
+OS: Windows 11
+Python: 3.10
+仮想環境: venv
+LangChain: 最新版（v0.1.0 以降）
+OpenAI: gpt-3.5-turbo
+プロキシ環境: あり
+
+
+ 実施手順
+
+ プロジェクト作成と環境構築
+mkdir langchain-agent-test
+cd langchain-agent-test
+python -m venv venv
+.\venv\Scri...]]></description><link>https://zenn.dev/homatsu_tech/articles/eeb073263b6135</link><guid isPermaLink="true">https://zenn.dev/homatsu_tech/articles/eeb073263b6135</guid><pubDate>Wed, 30 Apr 2025 14:30:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--DETsvCJP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:LangChain%2520%25C3%2597%2520OpenAI%2520%25E3%2582%25A8%25E3%2583%25BC%25E3%2582%25B8%25E3%2582%25A7%25E3%2583%25B3%25E3%2583%2588%25E8%25A9%25A6%25E4%25BD%259C%2520%25E8%25AA%25BF%25E6%259F%25BB%25E7%25B5%2590%25E6%259E%259C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25AE%259D%25E6%259D%25BE%2540%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc2NmRlNTNlODQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>宝松@システムエンジニア</dc:creator></item><item><title><![CDATA[KaggleのPlaygroundコンペ「Predict Podcast Listening Time」にベースラインモデルを提出しました]]></title><description><![CDATA[
+ 概要
+
+KaggleではPlaygroundコンペが毎月開催されている
+2025年4月の課題は「ポッドキャストのエピソードの視聴時間を予測する（回帰）」
+
+Playgroundコンペは「回帰」と「2値分類」のタスクが多い
+
+
+この記事のテンプレート少し変えるだけで提出までは簡単にできる（5~10分程度）
+
+このベースラインモデルの順位は毎回半分ちょい下くらい
+
+
+順位をちゃんと上げたいなら、EDAを行い、適切な前処理と学習アルゴリズムの選定、ハイパーパラメータチューニング、クロスバリデーションなどが必要
+
+
+ URL
+
+Predict Podcast Listening Time
+P...]]></description><link>https://zenn.dev/btforest/articles/9b03602fee01c7</link><guid isPermaLink="true">https://zenn.dev/btforest/articles/9b03602fee01c7</guid><pubDate>Wed, 30 Apr 2025 12:48:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--rgeEUxaU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Kaggle%25E3%2581%25AEPlayground%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%259A%25E3%2580%258CPredict%2520Podcast%2520Listening%2520Time%25E3%2580%258D%25E3%2581%25AB%25E3%2583%2599%25E3%2583%25BC%25E3%2582%25B9%25E3%2583%25A9...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:btforest%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSjRHTHk5MWY2Z0h4X0EtV0JPUXhYam1ONGt2N18waU42bkhlNXQ5QklDcmZWR2NPND1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>btforest</dc:creator></item><item><title><![CDATA[Python (.py) をJupyterのセルっぽく実行する +α]]></title><description><![CDATA[
+ 前置き (飛ばしてOK)
+VSCodeでは、Jupyter拡張機能を入れることで、Jupyter Notebookを実行することができます。
+
+Jupyter Notebookは.ipynbという拡張子で保存されますが、中身を見るとJSONで保存されています。
+実行ごとに増えるexecution_countや、環境固有のkernelspecなども情報として含まれており、Git管理とは相性が悪い部分があります（そう思ったことがある人は少なくないはず！）。
+Jupyter Notebookの中身{
+ "cells": [
+  {
+   "cell_type": "markdown",
+ ...]]></description><link>https://zenn.dev/ras96/articles/09948eaf09c438</link><guid isPermaLink="true">https://zenn.dev/ras96/articles/09948eaf09c438</guid><pubDate>Wed, 30 Apr 2025 11:17:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---1FdpvJM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%2520%2528.py%2529%2520%25E3%2582%2592Jupyter%25E3%2581%25AE%25E3%2582%25BB%25E3%2583%25AB%25E3%2581%25A3%25E3%2581%25BD%25E3%2581%258F%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%2599%25E3%2582%258B%2520%252B%25CE%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ras0q%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY0N2Y1MjhiMzYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ras0q</dc:creator></item><item><title><![CDATA[Pythonだけで完結！Streamlit + Flask + Whisperで作る文字起こしアプリを構築してみよう]]></title><description><![CDATA[
+ ✨ はじめに
+会議の文字起こしをしてみたいけど、
+
+外部に録音データを送るのは情報漏洩が不安…
+TeamsやZoomの文字起こしは精度がイマイチ…
+
+そんなとき、軽量なGPU（例：RTX 1650などVRAM4GB程度）さえあれば、自社内のローカル環境で高精度な文字起こしを実現できます！
+今回は、Streamlit + Flask + Whisperを使ってシンプルな文字起こしアプリを構築してみました。
+
+ 📂 構成概要
+このシステムは以下の3つのPythonファイルで構成されています：
+
+
+
+ファイル名
+役割
+
+
+
+
+app_flask.py
+ユーザーが音声ファイルをアップロードす...]]></description><link>https://zenn.dev/tsuzukia/articles/05162d92997634</link><guid isPermaLink="true">https://zenn.dev/tsuzukia/articles/05162d92997634</guid><pubDate>Wed, 30 Apr 2025 10:31:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--IjgQ6-Od--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A0%25E3%2581%2591%25E3%2581%25A7%25E5%25AE%258C%25E7%25B5%2590%25EF%25BC%2581Streamlit%2520%252B%2520Flask%2520%252B%2520Whisper%25E3%2581%25A7%25E4%25BD%259C%25E3%2582%258B%25E6%2596%2587%25E5%25AD%2597%25E8%25B5%25B7%25E3%2581%2593%25E3%2581%2597%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%2588%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:TSUZUKIA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzIwYmY4NGExNGEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>TSUZUKIA</dc:creator></item><item><title><![CDATA[うさぎでもわかるTikTok API活用術]]></title><description><![CDATA[
+ うさぎでもわかるTikTok API活用術
+こんにちは！🐰です。今回は、TikTok APIを使って様々な操作を自動化する方法について解説します。動画の自動投稿からライブ配信のいいね連打まで、API活用のポイントを紹介しますよ！
+
+ はじめに
+TikTokは世界で最も急速に成長しているSNSプラットフォームの一つです。そのユーザー数は10億人を超え、特に若い世代を中心に人気を集めています。そんなTikTokを効率的に運用するためには、APIを活用することが重要です。
+TikTok APIとは、TikTokが提供する機能にプログラムからアクセスするためのインターフェースです。これを使う...]]></description><link>https://zenn.dev/taku_sid/articles/20250430_tiktok_api</link><guid isPermaLink="true">https://zenn.dev/taku_sid/articles/20250430_tiktok_api</guid><pubDate>Wed, 30 Apr 2025 09:47:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--YNwNWHHE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%2586%25E3%2581%2595%25E3%2581%258E%25E3%2581%25A7%25E3%2582%2582%25E3%2582%258F%25E3%2581%258B%25E3%2582%258BTikTok%2520API%25E6%25B4%25BB%25E7%2594%25A8%25E8%25A1%2593%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:taku_sid%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTFFIVERiOTUwakhtTUJlendZR0RaeHlPX290RnJISktCY2ZYUFFuY1dVVGNGRkd1d3A9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>taku_sid</dc:creator></item><item><title><![CDATA[Day 3オセロ　完全版]]></title><description><![CDATA[
+ミニマックス法による一手先読みがイージーですが、イージーで適当に打ってると負けるレベル
+実装機能としては
+レベル１　一手先読み
+レベル２二手先読み
+レベル3　三手先読み
+石が切り替わるアニメーション
+下の画像で今の状況の説明
+リスタート
+今までの投稿からのオセロの集大成
+]]></description><link>https://zenn.dev/rurihari/articles/87e0ff5f37c43d</link><guid isPermaLink="true">https://zenn.dev/rurihari/articles/87e0ff5f37c43d</guid><pubDate>Wed, 30 Apr 2025 08:11:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Ju29afdR--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Day%25203%25E3%2582%25AA%25E3%2582%25BB%25E3%2583%25AD%25E3%2580%2580%25E5%25AE%258C%25E5%2585%25A8%25E7%2589%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:python%25EF%25BC%2590%25E5%25B9%25B4%25E7%2594%259F%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSXpKNW1OZU91aWhfWjI2V0VnZ096QTZPZGhBd09raHByUjJMNjFzTnRoVnpvVVloRDNUQT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>python０年生</dc:creator></item><item><title><![CDATA[Raspberry PiでRS-C380を使うメモ]]></title><description><![CDATA[!
+ここではすでにFelicaその他いろいろを知っている前提でお話しします
+
+
+ 使ったもの
+
+Raspberry Pi Zero W
+SONY RS-C380
+
+
+ Raspberry Piのセットアップ
+ここではPythonのライブラリであるnfcpyを使うので公式ドキュメントに従ってインストールします。
+Python3やpip、nfcpyなどはこの記事と同じなのでそちらを参照して入れてください。
+https://zenn.dev/ichidomisssuru/articles/9b1abbd47839c3
+
+ RC-S380を接続
+Raspberry PiにRC-S380を接続しま...]]></description><link>https://zenn.dev/ichidomisssuru/articles/8afc96c55803f5</link><guid isPermaLink="true">https://zenn.dev/ichidomisssuru/articles/8afc96c55803f5</guid><pubDate>Wed, 30 Apr 2025 03:51:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ePP7wmSj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Raspberry%2520Pi%25E3%2581%25A7RS-C380%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25A4%25E3%2583%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y4YmNkMzk1MGIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>イチ</dc:creator></item><item><title><![CDATA[Seleniumの使い方　第１回　環境構築（Microsoft Edge）]]></title><description><![CDATA[
+ 1. はじめに
+
+Seleniumは、Webブラウザの操作を自動化するためのツール
+オープンソースなので、無料で利用可能
+WebスクレイピングやRPA（Robotic Process Automation）などに活用できる
+
+
+ 1.1 この記事について
+
+Seleniumを使うための環境構築の手順をまとめた
+Chromeを使用した例が（公式サイト含め）多かったため、Microsoft Edgeでの使い方をまとめる
+企業などの方針でChromeがインストールできない人でも大丈夫です！
+
+
+
+ 1.2 対象読者
+
+プログラム言語（特にpython）が多少読める、書ける
+PCの基本操作（...]]></description><link>https://zenn.dev/hoshinagi1219/articles/b61f220e0908c5</link><guid isPermaLink="true">https://zenn.dev/hoshinagi1219/articles/b61f220e0908c5</guid><pubDate>Wed, 30 Apr 2025 03:28:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--PX5-QDkB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Selenium%25E3%2581%25AE%25E4%25BD%25BF%25E3%2581%2584%25E6%2596%25B9%25E3%2580%2580%25E7%25AC%25AC%25EF%25BC%2591%25E5%259B%259E%25E3%2580%2580%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%25EF%25BC%2588Microsoft%2520Edge%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%2598%259F%25E6%259D%259C%25E3%2581%25AA%25E3%2581%258E%25E3%2581%2595%25EF%25BC%2588Nagisa%2520Hoshi...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MzMTgwYmFjZjYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>星杜なぎさ（Nagisa Hoshimori）</dc:creator></item></channel></rss>
