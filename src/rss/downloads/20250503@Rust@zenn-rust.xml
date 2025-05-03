@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Rust」のフィード]]></title><description><![CDATA[Zennのトピック「Rust」のRSSフィードです]]></description><link>https://zenn.dev/topics/rust</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ba09661577.png</url><title>Zennの「Rust」のフィード</title><link>https://zenn.dev/topics/rust</link></image><generator>zenn.dev</generator><lastBuildDate>Sat, 03 May 2025 06:19:47 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/rust/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Linuxカーネルへの Rust 導入の研究論文メモ]]></title><description><![CDATA[
+ はじめに
+北京郵電大学とUESTC研究者による論文「An Empirical Study of Rust-for-Linux」を読んだメモ。Linuxカーネルへの言語Rust導入（RFL）がどうなっているのか、実際のデータに基づいた分析が面白かった。
+
+ Rustとカーネルの出会い
+Linuxカーネルは30年以上の歴史を持ち、現代コンピューティングの基盤だ。しかしC言語で書かれているため、メモリ関連やコンカレンシーのバグが絶えない。Rustはこの問題を所有権メカニズムで解決できるかもしれない。
+
+
+
+所有権ルール
+説明
+
+
+
+
+排他的所有権
+メモリ位置は一度に1つの変数だけが所有でき...]]></description><link>https://zenn.dev/su8/articles/7291385a521b62</link><guid isPermaLink="true">https://zenn.dev/su8/articles/7291385a521b62</guid><pubDate>Fri, 02 May 2025 13:32:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9z2ddgKt--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%25E3%2582%25AB%25E3%2583%25BC%25E3%2583%258D%25E3%2583%25AB%25E3%2581%25B8%25E3%2581%25AE%2520Rust%2520%25E5%25B0%258E%25E5%2585%25A5%25E3%2581%25AE%25E7%25A0%2594%25E7%25A9%25B6%25E8%25AB%2596%25E6%2596%2587%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:su8%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUVkRlRwNHdDZWsxTUFjbzVXNlpLQUgtaGNiMGI1SDZrODRKdkd2ZGpoNDZQUT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>su8</dc:creator></item><item><title><![CDATA[rustでビルド時にCargo.tomlからバージョン情報を取得する]]></title><description><![CDATA[
+ env!で普通に取得できるらしい
+pub const VERSION: &amp;str = env!("CARGO_PKG_VERSION");
+
+fn main() {
+    println!("version: {}", VERSION);
+}
+これでこうなる。
+&gt; cargo run
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.07s
+     Running `target/debug/play_ground`
+version: 0.1.0
+configとかの整合性とかで使え...]]></description><link>https://zenn.dev/uliboooo/articles/3bd360b1d73a9a</link><guid isPermaLink="true">https://zenn.dev/uliboooo/articles/3bd360b1d73a9a</guid><pubDate>Fri, 02 May 2025 10:27:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ljZoOpe2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:rust%25E3%2581%25A7%25E3%2583%2593%25E3%2583%25AB%25E3%2583%2589%25E6%2599%2582%25E3%2581%25ABCargo.toml%25E3%2581%258B%25E3%2582%2589%25E3%2583%2590%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%25A7%25E3%2583%25B3%25E6%2583%2585%25E5%25A0%25B1%25E3%2582%2592%25E5%258F%2596%25E5%25BE%2597%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2586%25E3%2582%258A%25E3%2581%25BC%25E3%2581%2586%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY0MTFjYWRhM2YuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>うりぼう</dc:creator></item><item><title><![CDATA[Rust製のPythonライブラリ一覧]]></title><description><![CDATA[
+ はじめに
+Rustは、高いパフォーマンスと安全性、並列性を追求したシステムプログラミング言語であり、内部処理をRustで実装したPythonライブラリが増加している。
+uvやruff、pydantic、polarsなどのライブラリは、Rustの性能を活かしており多くの開発者に支持されている。
+しかし各ライブラリの概要やサンプルコードはあっても、Rust製のPythonライブラリを網羅的にまとめた記事は見当たらない。そこで、一覧にまとめてみた。
+
+ Rust製のPythonライブラリ一覧
+
+ パッケージ管理、コード解析、型定義
+
+
+
+ライブラリ
+概要
+2025年5月時点バージョン
+主な...]]></description><link>https://zenn.dev/nwth/articles/202505-python-libraries-by-rust</link><guid isPermaLink="true">https://zenn.dev/nwth/articles/202505-python-libraries-by-rust</guid><pubDate>Fri, 02 May 2025 09:43:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0929Ssng--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E8%25A3%25BD%25E3%2581%25AEPython%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%25E4%25B8%2580%25E8%25A6%25A7%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A6%25E3%2581%258F%25E3%2581%25A6%25E3%2581%258F%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2IzZmIwNWNkYmEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>てくてく</dc:creator></item><item><title><![CDATA[Rust (cargo-ndk) でビルドした Android 向け Unity プラグインを 16KB アライメントに対応する]]></title><description><![CDATA[Rust (cargo-ndk) でビルドした Android 向けプラグインを含む Unity プロジェクトを Unity 2023.3.56f1 または 6000.0.38f1 以降でビルドすると以下のような警告が表示される場合があります。ここではこの警告に対応するための手順を説明します。
+Plugin 'Packages/com.example.myplugin/Plugins/MyPlugin.so' is not 16KB-aligned. This may cause issues on ARM64 devices running Android 15+.
+More info...]]></description><link>https://zenn.dev/mayuki/articles/7eb1e503ee10e6</link><guid isPermaLink="true">https://zenn.dev/mayuki/articles/7eb1e503ee10e6</guid><pubDate>Fri, 02 May 2025 07:14:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--M19MuyZi--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%2520%2528cargo-ndk%2529%2520%25E3%2581%25A7%25E3%2583%2593%25E3%2583%25AB%25E3%2583%2589%25E3%2581%2597%25E3%2581%259F%2520Android%2520%25E5%2590%2591%25E3%2581%2591%2520Unity%2520%25E3%2583%2597%25E3%2583%25A9%25E3%2582%25B0%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%2592%252016KB%2520%25E3%2582%25A2%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%25A1...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Mayuki%2520Sawatari%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lqYVJGX25mOWVjSDNCczhaeWtZWDNZN1JVV2tCQjd6dE5yVlpCPXMyNTAtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Mayuki Sawatari</dc:creator></item><item><title><![CDATA[0015-read_string]]></title><description><![CDATA[use std::fs::read_to_string;
+
+fn main() -&gt; Result&lt;(), Box&lt;dyn std::error::Error&gt;&gt; {
+    let path = "example.txt";
+    let str = read_to_string(path)?;
+    println!("{}", str);
+
+    let path = "num.txt";
+    // 改行文字もあるよね
+    let num:i32 = read_to_string(path)?.trim().parse()?;
+    p...]]></description><link>https://zenn.dev/yukinekonyan/articles/2a215872051a23</link><guid isPermaLink="true">https://zenn.dev/yukinekonyan/articles/2a215872051a23</guid><pubDate>Fri, 02 May 2025 02:46:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--alTpcgEe--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_80:0015-read_string%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yukineko%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTHdrb1VFNXJOaVI2dndBUlBkMVNhYXM5QVBRMk45Nk1qTVdPTlp5VXFjNkhLdndRPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yukineko</dc:creator></item><item><title><![CDATA[0014-box-dyn-error]]></title><description><![CDATA[File::openのときとstd::env::varで発生するエラーの型が違うのでResultのエラーを静的に定義できない
+そういった時にBox&lt;dyn ...&gt;にすることで、複数のエラーを処理できるようにコンパイルできる
+use std::fs::File;
+fn main() -&gt; Result&lt;(), Box&lt;dyn std::error::Error&gt;&gt; {
+    let _fd = File::open("./test.txt")?;
+    let _env = std::env::var("RUST_BACKTRACE")?;
+...]]></description><link>https://zenn.dev/yukinekonyan/articles/f9268c58062405</link><guid isPermaLink="true">https://zenn.dev/yukinekonyan/articles/f9268c58062405</guid><pubDate>Fri, 02 May 2025 01:56:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--XXWA-T9t--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_80:0014-box-dyn-error%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yukineko%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTHdrb1VFNXJOaVI2dndBUlBkMVNhYXM5QVBRMk45Nk1qTVdPTlp5VXFjNkhLdndRPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yukineko</dc:creator></item><item><title><![CDATA[【そのVibeCoding,Vibes足りてなくない?】VibeCodingのためVibesぶち上げるCLIをVibeCodingで作り公開]]></title><description><![CDATA[
+ はじめに
+Vibe Codingをしているとバックエンドの言語をVibeで決めたくなること、ありますよね。
+そんなときのために自動で言語を選んでくれるCLIを作って公開しました。
+自作CLIの公開手順が勉強になったので記事に残します。
+
+ 作ったCLIはこちら
+https://github.com/mio-inamijima/backend-slot
+https://deepwiki.com/mio-inamijima/backend-slot
+バックエンド開発の選択肢に挙がりやすい10個の言語の中からランダムで1つを表示してくれます、
+
+
+ 作成過程
+
+ 言語選定
+「CLIを作るな...]]></description><link>https://zenn.dev/chanmio3108341/articles/backend-slot</link><guid isPermaLink="true">https://zenn.dev/chanmio3108341/articles/backend-slot</guid><pubDate>Thu, 01 May 2025 23:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jy5YiDvb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E3%2581%259D%25E3%2581%25AEVibeCoding%252CVibes%25E8%25B6%25B3%25E3%2582%258A%25E3%2581%25A6%25E3%2581%25AA%25E3%2581%258F%25E3%2581%25AA%25E3%2581%2584%253F%25E3%2580%2591VibeCoding%25E3%2581%25AE%25E3%2581%259F%25E3%2582%2581Vibes%25E3%2581%25B6%25E3%2581%25A1%25E4%25B8%258A%25E3%2581%2592%25E3%2582%258BCLI%25E3%2582%2592Vi...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Chanmio%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFjODcxNTRmNDcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Chanmio</dc:creator></item><item><title><![CDATA[なぜ Rust で文字列にインデックスでアクセスできないのか？]]></title><description><![CDATA[
+ なぜ Rust で文字列にインデックスでアクセスできないのか？
+Rust の文字列に s[0] のようなインデックスでアクセスしようとしてエラーになった経験はありませんか？
+しばしば Python や C++のノリで Rust を書いて、めちゃくちゃコンパイラに怒られるということが多々あります。
+例えば、次のようなコードを書いたとします。
+fn main() {
+    let s = String::from("hello");
+    let c = s[0];
+}
+このコードをコンパイルしようとすると、次のようなエラーが発生します。
+ cargo run
+   Compilin...]]></description><link>https://zenn.dev/ekusiadadus/articles/rust-string-index</link><guid isPermaLink="true">https://zenn.dev/ekusiadadus/articles/rust-string-index</guid><pubDate>Thu, 01 May 2025 16:47:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6Q1LvySU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%25AA%25E3%2581%259C%2520Rust%2520%25E3%2581%25A7%25E6%2596%2587%25E5%25AD%2597%25E5%2588%2597%25E3%2581%25AB%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2587%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25B9%25E3%2581%25A7%25E3%2582%25A2%25E3%2582%25AF%25E3%2582%25BB%25E3%2582%25B9%25E3%2581%25A7%25E3%2581%258D%25E3%2581%25AA%25E3%2581%2584%25E3%2581%25AE%25E3%2581%258B%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ekusiadadus%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2owQTdHV3Q0eUx2U1dIamZ5eVhhSjNMSWpaUVJ4MlNxTFNvMzExPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ekusiadadus</dc:creator></item><item><title><![CDATA[Rustにおける関数とマクロの違いLv.2]]></title><description><![CDATA[マクロと関数って何が違うの？と聞かれたとして、テンプレートな反応としては「関数はまあ所謂関数、マクロはコンパイル前に展開されるんやでー」と言う説明になるかと思います
+この説明でも必要十分ではありますが、そろそろLv2に上がりませうと言う事でもうちょっと突っ込んだ見方をしてみます
+サンプルコードにrustを使っているので"Rustにおける"、と銘打っていますが、結構一般的な話になっていると思います
+記事内のコードブロックでassemblyの部分がありますが、内容はわりかし易しめなのでassemblyが読めなくても問題ありません
+というか僕も読めません
+ほな早速
+
+ 結論
+
+マクロと関数は最...]]></description><link>https://zenn.dev/cp_r/articles/06a0dd84110d05</link><guid isPermaLink="true">https://zenn.dev/cp_r/articles/06a0dd84110d05</guid><pubDate>Thu, 01 May 2025 14:44:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ubVG6eJB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25AB%25E3%2581%258A%25E3%2581%2591%25E3%2582%258B%25E9%2596%25A2%25E6%2595%25B0%25E3%2581%25A8%25E3%2583%259E%25E3%2582%25AF%25E3%2583%25AD%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584Lv.2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:9kv8xiyi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE1NjljYjFhZGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>9kv8xiyi</dc:creator></item><item><title><![CDATA[0013-Box]]></title><description><![CDATA[BoxはHeap上に保存される
+実行時に型が決まる値のためにdynと組みあわせて使うのがメイン
+use rand::prelude::*;
+struct Sheep {
+    age: u32,
+}
+
+struct Cow {
+    age: u32,
+}
+
+trait Animal {
+    fn get_age(&amp;self) -&gt; u32;
+}
+
+impl Animal for Sheep {
+    fn get_age(&amp;self) -&gt; u32 {
+        self.age
+    }
+}
+
+impl Animal for Cow {
+...]]></description><link>https://zenn.dev/yukinekonyan/articles/ffc989128e82b5</link><guid isPermaLink="true">https://zenn.dev/yukinekonyan/articles/ffc989128e82b5</guid><pubDate>Thu, 01 May 2025 03:09:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--00wkkq1v--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_80:0013-Box%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yukineko%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTHdrb1VFNXJOaVI2dndBUlBkMVNhYXM5QVBRMk45Nk1qTVdPTlp5VXFjNkhLdndRPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yukineko</dc:creator></item><item><title><![CDATA[anyhow で簡単になる Rust のエラー処理]]></title><description><![CDATA[
+
+ 前書き
+anyhow は Rust における人気のあるエラーハンドリングライブラリであり、エラー処理を簡潔かつ柔軟に管理する方法を提供します。特に迅速な開発やプロトタイピングに適しています。anyhow は主に共通のエラー型 anyhow::Error を提供することで、エラー処理を簡素化し、エラー情報を犠牲にすることなくボイラープレートコードを減らすことができます。以下では、anyhow の機能、使用方法、およびベストプラクティスについて詳しく解説します。
+
+ なぜ anyhow を使うのか？
+Rust では、エラー処理に通常 Result&lt;T, E&gt; 型が使用され、...]]></description><link>https://zenn.dev/leap_adam/articles/f5271d9d81e63a</link><guid isPermaLink="true">https://zenn.dev/leap_adam/articles/f5271d9d81e63a</guid><pubDate>Wed, 30 Apr 2025 21:48:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---Eh4HZuC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:anyhow%2520%25E3%2581%25A7%25E7%25B0%25A1%25E5%258D%2598%25E3%2581%25AB%25E3%2581%25AA%25E3%2582%258B%2520Rust%2520%25E3%2581%25AE%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E5%2587%25A6%25E7%2590%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Adam%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZhZDIzOTdlZTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Adam</dc:creator></item><item><title><![CDATA[0012-?-map_err]]></title><description><![CDATA[?とmap_errでResult Errを処理する
+inspect_errはエラーメッセージはだすが、新規にエラーは作成しない
+fn main() -&gt; Result&lt;(), std::io::Error&gt; {
+    let f0 = std::fs::File::open("src/main.rs")?;
+    println!("File opened successfully: {:?}", f0);
+        // inspect_errはエラーのResultは返さない
+    
+    let f1 = std::fs::File::open("sr...]]></description><link>https://zenn.dev/yukinekonyan/articles/8c3e15594fcb84</link><guid isPermaLink="true">https://zenn.dev/yukinekonyan/articles/8c3e15594fcb84</guid><pubDate>Wed, 30 Apr 2025 08:52:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--kfmCtxlU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_80:0012-%253F-map_err%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yukineko%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTHdrb1VFNXJOaVI2dndBUlBkMVNhYXM5QVBRMk45Nk1qTVdPTlp5VXFjNkhLdndRPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yukineko</dc:creator></item><item><title><![CDATA[0011-FnOnce, FnMut]]></title><description><![CDATA[fn main() {
+    fn consume_with_relish&lt;T&gt;(f: T) 
+        where T:FnOnce() -&gt; String{
+            println!("{} is good", f());
+
+    }
+    let x = String::from("xyz");
+    let consume_and_return_x = move || x;
+    consume_with_relish(consume_and_return_x);
+
+    fn do_twice&lt;T&gt;(mut f: ...]]></description><link>https://zenn.dev/yukinekonyan/articles/120eed2acd2077</link><guid isPermaLink="true">https://zenn.dev/yukinekonyan/articles/120eed2acd2077</guid><pubDate>Wed, 30 Apr 2025 07:18:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bF0aFK3w--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_76:0011-FnOnce%252C%2520FnMut%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yukineko%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTHdrb1VFNXJOaVI2dndBUlBkMVNhYXM5QVBRMk45Nk1qTVdPTlp5VXFjNkhLdndRPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yukineko</dc:creator></item><item><title><![CDATA[0010 fn]]></title><description><![CDATA[fn main() {
+    fn sum (x: i32, y: i32) -&gt; i32 {
+        x + y
+    }
+    let f: fn (i32, i32) -&gt; i32  = sum;  // 明示的な型指定 fn型への変換{main::sum}からfn
+    println!("{}", f(1, 2));
+    let f0: fn(i32, i32) -&gt; i32 = f; // Copyトレイトを実装しているのでコピー可能
+    let f1: fn(i32, i32) -&gt; i32 = f; // Copyトレイトを...]]></description><link>https://zenn.dev/yukinekonyan/articles/fe75462e1e8cad</link><guid isPermaLink="true">https://zenn.dev/yukinekonyan/articles/fe75462e1e8cad</guid><pubDate>Wed, 30 Apr 2025 02:14:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--HGFahkFK--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_80:0010%2520fn%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yukineko%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTHdrb1VFNXJOaVI2dndBUlBkMVNhYXM5QVBRMk45Nk1qTVdPTlp5VXFjNkhLdndRPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yukineko</dc:creator></item><item><title><![CDATA[deadpool に deadlock された話]]></title><description><![CDATA[
+ はじめに
+Fairy Devices で LINKLET のサーバーサイドの開発をしている nope です。
+みなさんは、サーバーからのレスポンスが全く返ってこない、そんな悪夢のような事態に遭遇したことはありますか？
+私たち LINKLET 開発チームは、今年 (2025年) の 1 月、まさにその悪夢を体験しました。以下はその時の Slack の投稿です。
+
+「サーバーがダウンした？」「まさか DB に異常が？」様々な憶測が飛び交う中、原因特定は難航しました。
+この記事では、障害の概要と、そこから得られた教訓についてお話しします。
+!
+発見当初は、LINKLET Console で...]]></description><link>https://zenn.dev/fairydevices/articles/3e2099b323dfbb</link><guid isPermaLink="true">https://zenn.dev/fairydevices/articles/3e2099b323dfbb</guid><pubDate>Wed, 30 Apr 2025 01:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--XEaisSGf--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:deadpool%2520%25E3%2581%25AB%2520deadlock%2520%25E3%2581%2595%25E3%2582%258C%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:nope_noshishi%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E5MjE4ODkwNjAuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2595%25E3%2582%25A7%25E3%2582%25A2%25E3%2583%25AA%25E3%2583%25BC%25E3%2583%2587%25E3%2583%2590%25E3%2582%25A4%25E3%2582%25BB%25E3%2582%25BA%25E5%2585%25AC%25E5%25BC%258F%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2QxMjZkZDZkMmUuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nope_noshishi</dc:creator></item><item><title><![CDATA[並行処理の世界 - fork()、Thread、goroutine、Virtual Thread、Tokioの比較]]></title><description><![CDATA[
+ 並行処理の世界
+こんにちは！本記事では、プログラミングにおける並行処理の様々な手法について、初心者の方にもわかりやすく解説します。
+プログラミングの世界では「同時に複数のことを処理したい」という状況がよくあります。例えば、複数の音声ファイルを変換したり、複数のWebリクエストを処理したりする場合などです。この「並行処理」を実現するための方法は様々あり、それぞれに特徴があります。
+
+ 並行処理とは何か
+並行処理とは、複数の処理を同時に、あるいは見かけ上同時に実行することです。一般的なPCは複数のCPUコア（処理装置）を持っているため、実際に複数の処理を同時に行うことができます。
+今回は...]]></description><link>https://zenn.dev/okamyuji/articles/baa7673eb02023</link><guid isPermaLink="true">https://zenn.dev/okamyuji/articles/baa7673eb02023</guid><pubDate>Wed, 30 Apr 2025 00:19:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--h0QszZWP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E4%25B8%25A6%25E8%25A1%258C%25E5%2587%25A6%25E7%2590%2586%25E3%2581%25AE%25E4%25B8%2596%25E7%2595%258C%2520-%2520fork%2528%2529%25E3%2580%2581Thread%25E3%2580%2581goroutine%25E3%2580%2581Virtual%2520Thread%25E3%2580%2581Tokio%25E3%2581%25AE%25E6%25AF%2594%25E8%25BC%2583%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:okamyuji%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY5YjFmNDYyYjkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>okamyuji</dc:creator></item><item><title><![CDATA[Rustのログ処理をレベル別に行う]]></title><description><![CDATA[
+ この記事の背景
+
+Rustでログにかかわる処理を理解しようとする際、その他の（ログ処理以外の）実装を含むコード
+ではなく、純粋にログ処理のみを対象とするコードで理解するため。
+実行環境がLinuxと思われるコマンドのベタ張りで説明している記事が多く、Windows11環境での
+実装時に実行すべきコマンドをWeb検索を行った上で直接見つけられなかったため。
+
+
+ 前提条件
+
+Rustのプログラムファイルを新規に作成することができる。(Hello Worldが行える程度でOK)
+CLIでのコマンド操作が行える。
+
+
+ 実行環境
+OS:Microsoft Windows11 Pro(AMD...]]></description><link>https://zenn.dev/minatoha/articles/afd85eb96c9133</link><guid isPermaLink="true">https://zenn.dev/minatoha/articles/afd85eb96c9133</guid><pubDate>Tue, 29 Apr 2025 15:16:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_xxo9BA3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25AE%25E3%2583%25AD%25E3%2582%25B0%25E5%2587%25A6%25E7%2590%2586%25E3%2582%2592%25E3%2583%25AC%25E3%2583%2599%25E3%2583%25AB%25E5%2588%25A5%25E3%2581%25AB%25E8%25A1%258C%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:minatoha%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI5NTZmOGIwNDQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>minatoha</dc:creator></item><item><title><![CDATA[RustでLSMツリーを実装してみた]]></title><description><![CDATA[
+ 概要
+CassandraやScyllaDBといったKVSで使用されているLSMツリーを簡単に実装してみたので、簡単にお話ししていきたいと思います
+こちらがリポジトリです
+https://github.com/sraku2159/lsmtree
+実装のお話をする前に簡単にLSMツリーについてお話ししていきたいと思います
+
+ LSMツリーとは
+LSMツリーとはLog Structre Merge ツリーの略で以下の四つのコンポーネントから構成されます。
+
+Memtable
+CommitLog
+SSTable
+コンパクション
+
+以下、ScyllaDBのちょー親切なドキュメントから拝借した画...]]></description><link>https://zenn.dev/sraku/articles/25ead9b5012c15</link><guid isPermaLink="true">https://zenn.dev/sraku/articles/25ead9b5012c15</guid><pubDate>Tue, 29 Apr 2025 10:09:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Ed1E_0bt--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25A7LSM%25E3%2583%2584%25E3%2583%25AA%25E3%2583%25BC%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:sraku%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NhNTFkZmRiNTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sraku</dc:creator></item><item><title><![CDATA[Rust で Raspberry Pi Pico 2 W で L チカする]]></title><description><![CDATA[とりあえず状況を確認したということで、L チカのサンプルコードでも動かしてみるか～、と思ったら意外と大変でした。
+https://zenn.dev/yutannihilation/articles/56a8c08e2f649b
+
+ tl;dr
+Rust で L チカして満足したいだけなら「W」じゃないやつを買いましょう。
+
+ Raspberry Pi Pico 2 W とは
+Raspberry Pi Pico 2 に無線モジュール（CYW43439）がついたバージョンです。
+https://www.switch-science.com/products/10053
+
+ Raspberry...]]></description><link>https://zenn.dev/yutannihilation/articles/812c1ed1f2357d</link><guid isPermaLink="true">https://zenn.dev/yutannihilation/articles/812c1ed1f2357d</guid><pubDate>Tue, 29 Apr 2025 09:08:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--cSXyNx4u--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%2520%25E3%2581%25A7%2520Raspberry%2520Pi%2520Pico%25202%2520W%2520%25E3%2581%25A7%2520L%2520%25E3%2583%2581%25E3%2582%25AB%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yutannihilation%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2cxWXFZLWt6LTVmNFhSNVdXbjFNOVBpaWxaMkdYNHkwNjdtZy1VOEE9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yutannihilation</dc:creator></item><item><title><![CDATA[ABC403:Rustで解く！問題解説]]></title><description><![CDATA[AtCoder Beginner Contest 403のA~E問題をRustで解いた際の解法をまとめました。
+
+ A問題
+問題
+https://atcoder.jp/contests/abc403/tasks/abc403_a
+解説
+数列 A の奇数番目（1-indexed）の値のみを足した合計値を求めます。
+コード
+
+abc403a.rs
+use proconio::input;
+
+fn main() {
+    // 入力
+    input! {
+        n: usize,
+        a: [usize; n],
+    }
+
+    // 奇数番目（1-index...]]></description><link>https://zenn.dev/nakst_hide/articles/f699981bb755f5</link><guid isPermaLink="true">https://zenn.dev/nakst_hide/articles/f699981bb755f5</guid><pubDate>Tue, 29 Apr 2025 03:00:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bug1f56Y--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ABC403%253ARust%25E3%2581%25A7%25E8%25A7%25A3%25E3%2581%258F%25EF%25BC%2581%25E5%2595%258F%25E9%25A1%258C%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nakahide%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YkMxNEpSQnNET01hTGcxTVRQWGNTWS1qYlNQbFRMQTN3ZU9Sdz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nakahide</dc:creator></item></channel></rss>

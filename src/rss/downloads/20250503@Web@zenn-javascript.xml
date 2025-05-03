@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「JavaScript」のフィード]]></title><description><![CDATA[Zennのトピック「JavaScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/javascript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/64acd76870.png</url><title>Zennの「JavaScript」のフィード</title><link>https://zenn.dev/topics/javascript</link></image><generator>zenn.dev</generator><lastBuildDate>Sat, 03 May 2025 00:08:42 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/javascript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[OpenAIの埋め込みを使ったスマートドキュメントの構築（チャンク化、インデックス作成、検索）]]></title><description><![CDATA[
+ OpenAIの埋め込みを使ったスマートドキュメントの構築（チャンク化、インデックス作成、検索）
+こんにちは、みなさん！今回は、私が取り組んでいるプロジェクト用に作成した「スマートドキュメント」チャットボットのアプローチを共有したいと思います。
+私はAIの専門家ではないので、改善点やアドバイスがあればぜひ教えてください！
+この投稿の目的は、「OpenAIを使ったチャットボットの作り方」のチュートリアルをもう一つ作ることではありません。
+その手の内容はすでに豊富にあります。
+代わりに、ここでの主なアイデアは、ドキュメントをインデックス化し、扱いやすいチャンクに分割し、OpenAIを使って...]]></description><link>https://zenn.dev/aymericzip/articles/d35644d4fa2fa5</link><guid isPermaLink="true">https://zenn.dev/aymericzip/articles/d35644d4fa2fa5</guid><pubDate>Fri, 02 May 2025 21:30:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ZblNnDY7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:OpenAI%25E3%2581%25AE%25E5%259F%258B%25E3%2582%2581%25E8%25BE%25BC%25E3%2581%25BF%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%259F%25E3%2582%25B9%25E3%2583%259E%25E3%2583%25BC%25E3%2583%2588%25E3%2583%2589%25E3%2582%25AD%25E3%2583%25A5%25E3%2583%25A1%25E3%2583%25B3%25E3%2583%2588%25E3%2581%25AE%25E6%25A7%258B%25E7%25AF%2589%25EF%25BC%2588%25E3%2583%2581%25E3%2583%25A3%25E3%2583%25B3%25E3%2582%25AF%25E5%258C%2596%25E3%2580%2581%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2587%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25B9%25E4%25BD%259C%25E6%2588%2590%25E3%2580%2581%25E6%25A4%259C%25E7%25B4%25A2%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:aymericzip%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzViNDI4NDMxMTQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>aymericzip</dc:creator></item><item><title><![CDATA[LeetCode #9 Palindrome Numberをやってみた]]></title><description><![CDATA[
+ 問題 (Easy)
+Given an integer x, return true if x is a palindrome, and false otherwise.
+→ 詳細
+
+ 問題を理解する (5分)
+与えられた整数xが、回文（上から読んでも下から読んでも同じ）である時、true、そうでない時(マイナスの時も)は、falseを返す。
+
+ 解き方を日本語で組み立てる (10分)
+
+整数を文字列の型にし、それぞれの桁の数字を分解して、配列に挿入する  (split関数)
+配列の先頭 (head)と後尾の数(end)を比較する
+indexが同じまたは、隣同士（1違い）になるまで繰り...]]></description><link>https://zenn.dev/akinko0915/articles/b621529333f4e6</link><guid isPermaLink="true">https://zenn.dev/akinko0915/articles/b621529333f4e6</guid><pubDate>Fri, 02 May 2025 14:01:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--zddyRvDT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:LeetCode%2520%25239%2520Palindrome%2520Number%25E3%2582%2592%25E3%2582%2584%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:akinko%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSy13cHdwSE5jYThHWWJKMHBCb0NRU3A3WFlZd3Q0Wjc5SFY3clVhWENIUmFpSTlXZz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>akinko</dc:creator></item><item><title><![CDATA[V8とC++とNode.jsの関係性をC++にV8を組み込んで理解した]]></title><description><![CDATA[
+ 1. はじめに
+この記事は、C++・JavaScriptエンジンのV8・Node.jsの関係性および内部構造を探求したものです。
+JavaScriptエンジンのV8を理解しようとV8についてWikipediaを読んでいると、よくわからないと思った箇所があった。
+
+C++で書かれたアプリケーションの一部として動作させることもできる。
+
+
+ C++アプリケーションの中でV8を動かせるってどういう意味？
+
+じゃあ、実際にC++アプリケーションにV8を組み込んでみよう！
+ChatGPTとお話ししながら、進めた。
+
+ 2. まず…V8とは何か？
+JavaScriptエンジン。
+
+ JavaSc...]]></description><link>https://zenn.dev/akinko0915/articles/1a96a5c5e470c6</link><guid isPermaLink="true">https://zenn.dev/akinko0915/articles/1a96a5c5e470c6</guid><pubDate>Fri, 02 May 2025 13:55:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--SCi3Ny0q--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:V8%25E3%2581%25A8C%252B%252B%25E3%2581%25A8Node.js%25E3%2581%25AE%25E9%2596%25A2%25E4%25BF%2582%25E6%2580%25A7%25E3%2582%2592C%252B%252B%25E3%2581%25ABV8%25E3%2582%2592%25E7%25B5%2584%25E3%2581%25BF%25E8%25BE%25BC%25E3%2582%2593%25E3%2581%25A7%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:akinko%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSy13cHdwSE5jYThHWWJKMHBCb0NRU3A3WFlZd3Q0Wjc5SFY3clVhWENIUmFpSTlXZz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>akinko</dc:creator></item><item><title><![CDATA[JavaScript「this」とbind(this)]]></title><description><![CDATA[毎回わからなくなるthisとbindについてのメモ書き
+
+ thisの基本
+JavaScriptでの「this」は関数の呼び出し方によって参照先が変わる：
+
+イベントリスナー：イベントが発生した要素を参照
+
+
+ bind(this)の役割
+bind(this)は関数内のthisの参照先を固定する。
+// 例：クラス内でのbind(this)
+class Counter {
+  count = 0;
+
+  constructor() {
+    const button = document.querySelector('button');
+
+    // thisを固定する場合
+    ...]]></description><link>https://zenn.dev/yyoshioka/articles/bc3bff1fcbe330</link><guid isPermaLink="true">https://zenn.dev/yyoshioka/articles/bc3bff1fcbe330</guid><pubDate>Fri, 02 May 2025 03:06:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--10CRH_6---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25E3%2580%258Cthis%25E3%2580%258D%25E3%2581%25A8bind%2528this%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25BF%25E3%2582%2587%25E3%2581%2586%25E3%2581%2598%25E3%2582%2587%25E3%2581%2586%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzkxYjkxZTg3NzEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>みょうじょう</dc:creator></item><item><title><![CDATA[react-pagenate 押下後にページングをキャンセルする]]></title><description><![CDATA[
+ はじめに
+react-pagenateは、React上でページングUIを実装するためのライブラリです。
+このライブラリでページングアイテムを押下後、特定の条件であればページングをキャンセルする処理を実装します。
+
+ 実装方法
+挙動に関連する実装のみ記載します。
+const handleClick = (event: {
+  index: number | null;
+  selected: number;
+  nextSelectedPage: number | undefined;
+  event: object;
+  isPrevious: boolean;
+  isNext: ...]]></description><link>https://zenn.dev/ncdc/articles/4abe19f77a359e</link><guid isPermaLink="true">https://zenn.dev/ncdc/articles/4abe19f77a359e</guid><pubDate>Fri, 02 May 2025 02:59:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ZJl5UerB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:react-pagenate%2520%25E6%258A%25BC%25E4%25B8%258B%25E5%25BE%258C%25E3%2581%25AB%25E3%2583%259A%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%25B3%25E3%2582%25B0%25E3%2582%2592%25E3%2582%25AD%25E3%2583%25A3%25E3%2583%25B3%25E3%2582%25BB%25E3%2583%25AB%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:K%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNhODZhNDA5ZDMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:NCDC%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE3OTg0NTdlYjQuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>K</dc:creator></item><item><title><![CDATA[忘年会の余興で自作のクイズアプリを開発した話【フロントエンド/デザイン】]]></title><description><![CDATA[
+ はじめに
+
+ これはなに
+会社の忘年会の余興として、オリジナルのクイズアプリ「オンリーワンゲーム」を企画し、開発まで担当しました！
+本記事では、新入社員である私が、ゲームの企画からフロントエンド実装、UI・デザインに至るまでの制作過程や、試行錯誤の裏側について記録しています。
+!
+バックエンドとインフラ開発については、優秀な同期によるこちらの記事をぜひお読みください！
+
+
+ 自己紹介
+忘年会幹事・余興担当を任された新入社員です。
+
+本プロジェクトの発起人&amp;リーダー。
+日本の市町村ヲタク。全市町村の出身の人に出会うのが人生の目標。現在229市町村/1741(=13.15%)
+普...]]></description><link>https://zenn.dev/rei_osally/articles/91bfc0bf6e5720</link><guid isPermaLink="true">https://zenn.dev/rei_osally/articles/91bfc0bf6e5720</guid><pubDate>Fri, 02 May 2025 00:12:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--tqabzJeQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%25BF%2598%25E5%25B9%25B4%25E4%25BC%259A%25E3%2581%25AE%25E4%25BD%2599%25E8%2588%2588%25E3%2581%25A7%25E8%2587%25AA%25E4%25BD%259C%25E3%2581%25AE%25E3%2582%25AF%25E3%2582%25A4%25E3%2582%25BA%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E9%2596%258B%25E7%2599%25BA%25E3%2581%2597%25E3%2581%259F%25E8%25A9%25B1%25E3%2580%2590%25E3%2583%2595%25E3%2583%25AD%25E3%2583%25B3%25E3%2583%2588%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2589%252F%25E3%2583%2587%25E3%2582%25B6%25E3%2582%25A4%25E3%2583%25B3%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:rei_osally%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSVFzc05tS2V2blVZajRQVlI2cWhDcFNQYWpicS1wRldOTVZ2UUZTUFRRTmpJSlk2cTA9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>rei_osally</dc:creator></item><item><title><![CDATA[bun install は npm より最大90倍速い!?!?──手元でガチ測定してみた]]></title><description><![CDATA[
+ はじめに
+・bunってnpmよりinstall速いらしいけど実際どれくらい速いの？
+・私の手元でも速いの？
+・みんな大好きなあのパッケージでも速いの？
+Bunは、JavaScriptランタイムとしてNode.jsの代替を目指しており、パッケージマネージャーとしてだけでなく、以下のような面でも高速化を実現しています：
+
+🚀 JavaScriptの実行速度（Node.jsの約4倍）
+📦 ビルド速度（webpackやesbuildと比較して最大30倍）
+🔄 Hot Reloading（従来のdev serverより高速）
+
+今回は、その中でも特に開発者の日常的な作業に直結する(?)「パッケ...]]></description><link>https://zenn.dev/chanmio3108341/articles/npm-vs-bun-install</link><guid isPermaLink="true">https://zenn.dev/chanmio3108341/articles/npm-vs-bun-install</guid><pubDate>Thu, 01 May 2025 23:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--l0n0tS-3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:bun%2520install%2520%25E3%2581%25AF%2520npm%2520%25E3%2582%2588%25E3%2582%258A%25E6%259C%2580%25E5%25A4%25A790%25E5%2580%258D%25E9%2580%259F%25E3%2581%2584%2521%253F%2521%253F%25E2%2594%2580%25E2%2594%2580%25E6%2589%258B%25E5%2585%2583%25E3%2581%25A7%25E3%2582%25AC%25E3%2583%2581%25E6%25B8%25AC%25E5%25AE%259A%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Chanmio%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFjODcxNTRmNDcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Chanmio</dc:creator></item><item><title><![CDATA[100vhの罠を回避！動的ビューポートにより崩れるレイアウトを回避する3つの方法]]></title><description><![CDATA[
+ はじめに
+スマホ向けwebsiteで高さを100vhに指定すると、アドレスバーの表示/非表示によってビューポートが動的に変化し、意図しないオーバーフローが起きます。
+本記事では、その原因と対策をまとめます。
+
+ 結論だけ知りたい方向け
+先に結論です。最新のブラウザでは、svh、dvhのサポートが進んでおり、100vhの代わりにこれらを活用することでほとんどのオーバーフロー問題は解決可能です。
+各ブラウザの対応状況は 下記を参照してください。
+https://caniuse.com/viewport-unit-variants
+
+ オーバーフローが起きる原因
+そもそもオーバーフローが起...]]></description><link>https://zenn.dev/gaogaoasia/articles/fba17bee87a333</link><guid isPermaLink="true">https://zenn.dev/gaogaoasia/articles/fba17bee87a333</guid><pubDate>Thu, 01 May 2025 11:40:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8aLIm0Cf--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:100vh%25E3%2581%25AE%25E7%25BD%25A0%25E3%2582%2592%25E5%259B%259E%25E9%2581%25BF%25EF%25BC%2581%25E5%258B%2595%25E7%259A%2584%25E3%2583%2593%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%259D%25E3%2583%25BC%25E3%2583%2588%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258A%25E5%25B4%25A9%25E3%2582%258C%25E3%2582%258B%25E3%2583%25AC%25E3%2582%25A4%25E3%2582%25A2%25E3%2582%25A6%25E3%2583%2588%25E3%2582%2592%25E5%259B%259E%25E9%2581%25BF%25E3%2581%2599%25E3%2582%258B3%25E3%2581%25A4%25E3%2581%25AE%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:daiju%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzUwMDNjMGFhOWEuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:GAOGAO%2520Engineer%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzcyZjdiNGU0NjMuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>daiju</dc:creator></item><item><title><![CDATA[イベントリスナー[memo]]]></title><description><![CDATA[✅ 1. DOMの読み込み後（HTMLの構造がすべて読み込まれた後）
+document.addEventListener("DOMContentLoaded", function () {
+  // DOMの構築が完了したら実行
+  myFunction();
+});
+
+function myFunction() {
+  console.log("DOM読み込み完了！");
+}
+✅ 2. 画像やCSSなどを含むページ全体の読み込み後
+window.addEventListener("load", function () {
+  // ページ全体の読み込み完了後に実行
+  myFuncti...]]></description><link>https://zenn.dev/takeda_kaho/articles/62938dcf07990a</link><guid isPermaLink="true">https://zenn.dev/takeda_kaho/articles/62938dcf07990a</guid><pubDate>Thu, 01 May 2025 09:49:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wbzqGLX4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25A4%25E3%2583%2599%25E3%2583%25B3%25E3%2583%2588%25E3%2583%25AA%25E3%2582%25B9%25E3%2583%258A%25E3%2583%25BC%255Bmemo%255D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:takepanda%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAxZWRlZDIyZDYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takepanda</dc:creator></item><item><title><![CDATA[JS で簡単にドラッグ]]></title><description><![CDATA[const elm = document.getElementById('hoge');
+const handleMouseMove = (ev) =&gt; {
+    if (ev.buttons) {
+        const { scroller } = canvasRef.current || {};
+        scroller?.scrollBy({
+            left: -ev.movementX,
+            top: -ev.movementY,
+        });
+    };
+};
+
+elm.addEventListener('...]]></description><link>https://zenn.dev/yamakyu/articles/9aad99a302b909</link><guid isPermaLink="true">https://zenn.dev/yamakyu/articles/9aad99a302b909</guid><pubDate>Thu, 01 May 2025 09:39:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--MYCevGVZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JS%2520%25E3%2581%25A7%25E7%25B0%25A1%25E5%258D%2598%25E3%2581%25AB%25E3%2583%2589%25E3%2583%25A9%25E3%2583%2583%25E3%2582%25B0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yamakyu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzExMDcyNTliZDAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yamakyu</dc:creator></item><item><title><![CDATA[【TypeScript】ReturnType<typeof 関数名>とは？]]></title><description><![CDATA[
+ 関数の型と関数の戻り値の型
+type 型名 = ReturnType&lt;typeof 関数名&gt;;
+上記のような構文があったとき、ReturnTypeとtypeof 関数名の違いについて調べたのでメモ（どちらも関数の型＝関数の戻り値の型？と思ったので）。
+以下の文字列を受け取って文字列を返す関数greetについて考える。
+function greet(name: string): string {
+  return `Hello, ${name}`;
+}
+
+ typeof 関数名
+これは「関数自体の型」を表し、戻り値だけでなく、引数の型情報も含む。
+上記のgreet関数の場合...]]></description><link>https://zenn.dev/iskw_tech/articles/0eaade874712a5</link><guid isPermaLink="true">https://zenn.dev/iskw_tech/articles/0eaade874712a5</guid><pubDate>Thu, 01 May 2025 01:44:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ynwqHo6W--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590TypeScript%25E3%2580%2591ReturnType%253Ctypeof%2520%25E9%2596%25A2%25E6%2595%25B0%25E5%2590%258D%253E%25E3%2581%25A8%25E3%2581%25AF%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25A4%25E3%2582%25B7%25E3%2582%25AB%25E3%2583%25AF%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSUhxY25EM0hyQTRvYWpEcnUxN3l0UnAzYXVwUDY2XzhLZUNzcjhjYkh3ejBvNG1IQT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>イシカワ</dc:creator></item><item><title><![CDATA[【JS】`new Date("2025-05-01")` って何時何分？　～Dateコンストラクターとタイムゾーンの仕様～]]></title><description><![CDATA[日付および時刻を扱う処理を書いていた際、Date コンストラクターの仕様に混乱させられたので整理がてら記事にします。
+
+ Date コンストラクターの基本動作
+new Date() の形式で Date オブジェクトを生成できます。
+引数なしで実行すると現在の日時を表し、引数を与えると指定した日時を表します。
+// 現在の日時を取得
+new Date();
+
+// 指定した日時を取得
+new Date("2025-05-01");
+new Date("2025-05-01T12:34:56Z");
+https://developer.mozilla.org/ja/docs/Web/Java...]]></description><link>https://zenn.dev/kagan/articles/js-date-constructor</link><guid isPermaLink="true">https://zenn.dev/kagan/articles/js-date-constructor</guid><pubDate>Wed, 30 Apr 2025 17:08:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--XxdKI-9R--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590JS%25E3%2580%2591%2560new%2520Date%2528%25222025-05-01%2522%2529%2560%2520%25E3%2581%25A3%25E3%2581%25A6%25E4%25BD%2595%25E6%2599%2582%25E4%25BD%2595%25E5%2588%2586%25EF%25BC%259F%25E3%2580%2580%25EF%25BD%259EDate%25E3%2582%25B3%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25A9%25E3%2582%25AF%25E3%2582%25BF%25E3%2583%25BC%25E3%2581%25A8%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25A0%25E3%2582%25BE%25E3%2583%25BC%25E3%2583%25B3...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258B%25E3%2581%258C%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pxRzhkLXVXenp5SlJteDF3NU9tcE9KZjdkNHFHUXo5ZFowNy0wNmc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>かがん</dc:creator></item><item><title><![CDATA[【初心者向け】WindowsでNode.js入門　インストールからデバッグまで]]></title><description><![CDATA[
+ 🔖 記事の概要
+Node.jsはJavaScriptで書かれたコードをサーバーサイドやローカルPC上で実行できる強力な実行環境です。この記事ではNode.jsのインストールからテストプログラムの作成、デバッグまでのひと通りの流れを分かりやすく解説します。
+
+ 🔖 対象読者
+
+Node.js をこれから始めたいと思ってる初心者のかた
+Windows ユーザー
+
+
+ 🔖 NVM for Windows のインストール
+NVM for Windoes（nvm-windows）はNode.jsのバージョン管理ツールです。これを使用すればNode.jsのバージョンを簡単に切り替えることができま...]]></description><link>https://zenn.dev/ledmirage/articles/db03372704bdba</link><guid isPermaLink="true">https://zenn.dev/ledmirage/articles/db03372704bdba</guid><pubDate>Wed, 30 Apr 2025 14:40:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--zwFQJS5P--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E5%2590%2591%25E3%2581%2591%25E3%2580%2591Windows%25E3%2581%25A7Node.js%25E5%2585%25A5%25E9%2596%2580%25E3%2580%2580%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%258B%25E3%2582%2589%25E3%2583%2587%25E3%2583%2590%25E3%2583%2583%25E3%2582%25B0%25E3%2581%25BE%25E3%2581%25A7%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:led-mirage%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS1VnUk9laFNoRXVvVXhuSVl4YVFieFAtZ2VYYTVjSWJrc3NDNzRmUnhYN1l1UTZrRT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>led-mirage</dc:creator></item><item><title><![CDATA[『RPGツクールMZ』シーンの生成から廃棄まで]]></title><description><![CDATA[『RPGツクールMZ』関連記事 目次
+今回はシーンが生成から廃棄まで、どういう動作をしているのかを調べます。
+以前にシーンとウィンドウの関係について書いたので、興味があればそちらもどうぞ。
+『RPGツクールMZ』シーンのウィンドウ生成を調べてみた
+例によって適宜『RPGツクールMZ』非公式JavaScriptリファレンスのページにクラスなどリンクします。
+
+ シーンのクラスツリー
+これはシーン(Scene_Base)の子孫のクラスツリーです。
+大量にあってちょっとたじろぎますが、名前を見れば「あああれね」と大体予想がつきますし、よく考えたら必要だなということもわかると思います。
+画面の切...]]></description><link>https://zenn.dev/tonbi/articles/591aa52bd5306e</link><guid isPermaLink="true">https://zenn.dev/tonbi/articles/591aa52bd5306e</guid><pubDate>Wed, 30 Apr 2025 11:18:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--m-NnDxKj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%258ERPG%25E3%2583%2584%25E3%2582%25AF%25E3%2583%25BC%25E3%2583%25ABMZ%25E3%2580%258F%25E3%2582%25B7%25E3%2583%25BC%25E3%2583%25B3%25E3%2581%25AE%25E7%2594%259F%25E6%2588%2590%25E3%2581%258B%25E3%2582%2589%25E5%25BB%2583%25E6%25A3%2584%25E3%2581%25BE%25E3%2581%25A7%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A8%25E3%2582%2593%25E3%2581%25B3%2540%25E9%25B3%25B6%25E5%25B6%258B%25E5%25B7%25A5%25E6%2588%25BF%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pBYl9FRlAtZm9RQU1pN1VoM3hzYkNyQXZUSTZjUDFkZGJJMWJrPXMyNTAtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>とんび@鳶嶋工房</dc:creator></item><item><title><![CDATA[【JavaScript】forEachと非同期処理が噛み合わなかった話]]></title><description><![CDATA[株式会社アドバンテッジリスクマネジメント DX開発2部の古堅です。
+今回は、不具合の解消を通じて学んだ繰り返し処理と非同期処理の競合について書きます。
+
+ 背景
+Vue.jsで実装したアプリのメニュー構造について、特定条件下で意図しない構造になるという不具合に遭遇しました。
+メニューリストを繰り返し処理（forEach）を用いて作成しており、その内部で非同期処理（async/await）をしていることが原因でしたが、なぜforEach内でasync/awaitがうまく機能しないのか、最初は理解できませんでした。
+本記事が、同様の事象に悩んでいる方（と未来の自分）にとって、参考になれば幸い...]]></description><link>https://zenn.dev/arm_techblog/articles/2682b1184bfb54</link><guid isPermaLink="true">https://zenn.dev/arm_techblog/articles/2682b1184bfb54</guid><pubDate>Wed, 30 Apr 2025 09:11:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--r_vm2qOC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590JavaScript%25E3%2580%2591forEach%25E3%2581%25A8%25E9%259D%259E%25E5%2590%258C%25E6%259C%259F%25E5%2587%25A6%25E7%2590%2586%25E3%2581%258C%25E5%2599%259B%25E3%2581%25BF%25E5%2590%2588%25E3%2582%258F%25E3%2581%25AA%25E3%2581%258B%25E3%2581%25A3%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:mfurugen%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U0NzFmZDg5NDEuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:ARM%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSXB0a1gzem5lUVV4MGd2Z0FvcExJa3lMd0l5SEdSME0yNEVhdW15WnhiNWpnUnRhY0g9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mfurugen</dc:creator></item><item><title><![CDATA[React + Intersection Observerで作る超軽量なInViewコンポーネント（Tailwind対応）]]></title><description><![CDATA[
+ React + Intersection Observerで作る超軽量なInViewコンポーネント（Tailwind対応）
+Reactでアニメーションや表示制御によく使う「in-view検出」。今回は、Intersection Observer API を活用した超軽量なInViewコンポーネントを作成し、Tailwind CSSで簡単にスタイリングできる形にまとめます。
+
+
+ なぜ軽量？
+
+
+ライブラリ不使用（framer-motionやreact-intersection-observerなどに頼らない）
+IntersectionObserverをラップしただけのシンプルなロジッ...]]></description><link>https://zenn.dev/ugaaa/articles/cd2e318753b288</link><guid isPermaLink="true">https://zenn.dev/ugaaa/articles/cd2e318753b288</guid><pubDate>Wed, 30 Apr 2025 00:55:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--gDBRoJFS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%2520%252B%2520Intersection%2520Observer%25E3%2581%25A7%25E4%25BD%259C%25E3%2582%258B%25E8%25B6%2585%25E8%25BB%25BD%25E9%2587%258F%25E3%2581%25AAInView%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%259D%25E3%2583%25BC%25E3%2583%258D%25E3%2583%25B3%25E3%2583%2588%25EF%25BC%2588Tailwin...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:UGA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FGZFp1Y3FZcHBFLWpxZlVSZ0tiTGhMc3lrNnRYVEV5MGFZcWZsR2NMWWRCRVE9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>UGA</dc:creator></item><item><title><![CDATA[Electron + Phaserでデスクトップゲームアプリ開発！Nintendo Switch Pro コントローラーで操作しよう編]]></title><description><![CDATA[前回に「Nintendo Switch Pro コントローラーで、Phaserのブラウザゲームを操作する方法」を投稿していましたが、今回のその続編です。
+フロントエンド技術でデスクトップアプリを作成できるElectronにPhaserを載せてみます。
+さらに、作成したデスクトップゲームアプリを、Nintendo Switch Pro コントローラーで操作してみます。
+
+ 成果物
+リポジトリURL：https://github.com/t-tonyo-maru/pub_electron-phaser-desktop-game-sample
+
+Electronアプリをbuildした際のスクシ...]]></description><link>https://zenn.dev/t_tonyo_maru/articles/b12ff77cd0d7f6</link><guid isPermaLink="true">https://zenn.dev/t_tonyo_maru/articles/b12ff77cd0d7f6</guid><pubDate>Tue, 29 Apr 2025 12:32:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--A3XGf4cT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Electron%2520%252B%2520Phaser%25E3%2581%25A7%25E3%2583%2587%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%2588%25E3%2583%2583%25E3%2583%2597%25E3%2582%25B2%25E3%2583%25BC%25E3%2583%25A0%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E9%2596%258B%25E7%2599%25BA%25EF%25BC%2581Nintendo%2520Switch%2520Pro%2520%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2588%25E3%2583%25AD...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A8%25E3%2582%2593%25E3%2582%2588%25E3%2583%25BC%25E3%2580%2582%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NhNjVjZjg3MjguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>とんよー。</dc:creator></item><item><title><![CDATA[【JavaScript】Web APIインターフェースを使ってみた-其の2:IntersectionObserver]]></title><description><![CDATA[
+ このシリーズについて
+JavaScriptのＷeb APIインターフェースについて、どんなケースで使ったのかという具体例やコードも含めて、シンプルにその有用性についてまとめよう！というシリーズです。
+※MDNで多数のAPIとそのインターフェースが公開されています。
+https://developer.mozilla.org/ja/docs/Web/API
+2本目となる記事で取り上げるのは、こちらです。
+
+ IntersectionObserver
+交差オブザーバーAPIのインターフェスである【IntersectionObserver】を取り上げます。
+https://develope...]]></description><link>https://zenn.dev/inob/articles/26eb802ef1e74b</link><guid isPermaLink="true">https://zenn.dev/inob/articles/26eb802ef1e74b</guid><pubDate>Tue, 29 Apr 2025 07:36:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--CDHfqcHY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590JavaScript%25E3%2580%2591Web%2520API%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%2595%25E3%2582%25A7%25E3%2583%25BC%25E3%2582%25B9%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F-%25E5%2585%25B6%25E3%2581%25AE2%253AIntersectionObserver%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:i-nob%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc2YzUzNTQyOGEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>i-nob</dc:creator></item><item><title><![CDATA[【Vue.js】コンポーネント（Component）について]]></title><description><![CDATA[
+ この記事を読む前に
+環境構築などが完了されてない方は以下を参照。
+https://zenn.dev/code_journey_ys/articles/bbe3b67bed48e2
+
+ コンポーネントの考え方
+!
+
+ 【Component Hierarchy（コンポーネント階層）】とは
+・Vue.jsではこのように 小さな部品（コンポーネント）を階層的に組み合わせて アプリケーションを構築していく。
+・階層という名のとおり、コンポーネントが親ー子ー孫のような関係性となる。
+・レイアウトを部品のように管理することでメンテナンスが行いやすくなるメリットがある。
+
+
+ コンポーネント階層を理...]]></description><link>https://zenn.dev/code_journey_ys/articles/88fd14cb436677</link><guid isPermaLink="true">https://zenn.dev/code_journey_ys/articles/88fd14cb436677</guid><pubDate>Tue, 29 Apr 2025 07:22:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--t_7WhD1J--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Vue.js%25E3%2580%2591%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%259D%25E3%2583%25BC%25E3%2583%258D%25E3%2583%25B3%25E3%2583%2588%25EF%25BC%2588Component%25EF%25BC%2589%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yusuke%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2QxYmU5MTc2ZTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yusuke</dc:creator></item><item><title><![CDATA[Jest における「ホイスト問題」とその解決策：mockプレフィックスの活用]]></title><description><![CDATA[※本記事は生成AIを活用して執筆していますが、全体の構成と主張は筆者自身の考えによるものです。
+
+
+ 1. はじめに
+JavaScript のテストフレームワークとして広く利用されている Jest。そのパワフルな機能の一つがモック機能です。しかし、Jest でモックを扱う際に多くの開発者が頭を悩ませる問題があります。それが「ホイスト問題」です。
+モックはテストコードをシンプルに保つための強力なツールですが、Jest 特有の仕様により、時に直感に反するコードを書かざるを得ないケースがあります。本記事では、Jest のモック実装における「ホイスト問題」の本質を理解し、より簡潔で保守性の高いテ...]]></description><link>https://zenn.dev/tutti/articles/c7ac6ce866241e</link><guid isPermaLink="true">https://zenn.dev/tutti/articles/c7ac6ce866241e</guid><pubDate>Tue, 29 Apr 2025 07:21:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--paX5MrH4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Jest%2520%25E3%2581%25AB%25E3%2581%258A%25E3%2581%2591%25E3%2582%258B%25E3%2580%258C%25E3%2583%259B%25E3%2582%25A4%25E3%2582%25B9%25E3%2583%2588%25E5%2595%258F%25E9%25A1%258C%25E3%2580%258D%25E3%2581%25A8%25E3%2581%259D%25E3%2581%25AE%25E8%25A7%25A3%25E6%25B1%25BA%25E7%25AD%2596%25EF%25BC%259Amock%25E3%2583%2597%25E3%2583%25AC%25E3%2583%2595%25E3%2582%25A3%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25B9%25E3%2581%25AE%25E6%25B4%25BB%25E7%2594%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tutti%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pjM0tSTk45cVoyX3N6dTBZSi1IVUg0UDZ4QUtfNkZRRFlsZE8xaEE9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tutti</dc:creator></item></channel></rss>
