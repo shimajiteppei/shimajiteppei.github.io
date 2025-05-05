@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Linux」のフィード]]></title><description><![CDATA[Zennのトピック「Linux」のRSSフィードです]]></description><link>https://zenn.dev/topics/linux</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/860a9eb1e4.png</url><title>Zennの「Linux」のフィード</title><link>https://zenn.dev/topics/linux</link></image><generator>zenn.dev</generator><lastBuildDate>Mon, 05 May 2025 12:04:20 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/linux/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[接続不能になる前に！Linuxの設定ミスを防ぐatコマンド]]></title><description><![CDATA[
+ はじめに
+ネットワーク設定を変更したら、二度と接続できなくなったという経験ありませんか？
+そんなときの“保険”として使えるのが、at コマンドです。
+たった一行で「5分後に元に戻す」を予約できると設定ミスも怖くありません。
+
+ インストール
+sudo apt install -y at
+
+ 今回利用するコマンドとフロー図
+
+
+
+コマンド
+説明
+
+
+
+
+at &lt;時刻指定&gt;
+ジョブを実行予約する
+
+
+atq
+実行待ちジョブを表示する
+
+
+atrm &lt;ジョブID&gt;
+実行待ちジョブを削除する
+
+
+
+
+フロー図
+[変更前にジョブ予約(at)] → [設定変更] → [動...]]></description><link>https://zenn.dev/tsukimi_site/articles/homelab_tips_at_command</link><guid isPermaLink="true">https://zenn.dev/tsukimi_site/articles/homelab_tips_at_command</guid><pubDate>Mon, 05 May 2025 11:28:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2EPyfYCQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%258E%25A5%25E7%25B6%259A%25E4%25B8%258D%25E8%2583%25BD%25E3%2581%25AB%25E3%2581%25AA%25E3%2582%258B%25E5%2589%258D%25E3%2581%25AB%25EF%25BC%2581Linux%25E3%2581%25AE%25E8%25A8%25AD%25E5%25AE%259A%25E3%2583%259F%25E3%2582%25B9%25E3%2582%2592%25E9%2598%25B2%25E3%2581%2590at%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%259C%2588%25E8%25A6%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJkMzMyNTRjOWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>月見</dc:creator></item><item><title><![CDATA[Gitで直近のコミットメッセージを変更する方法]]></title><description><![CDATA[以下のコマンドを実行すると、直前のコミットメッセージを変更できます。
+git commit --amend -m "変更後のコミットメッセージ"
+]]></description><link>https://zenn.dev/t0mzenn/articles/4751965ed7c964</link><guid isPermaLink="true">https://zenn.dev/t0mzenn/articles/4751965ed7c964</guid><pubDate>Mon, 05 May 2025 09:44:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jTFqfMln--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Git%25E3%2581%25A7%25E7%259B%25B4%25E8%25BF%2591%25E3%2581%25AE%25E3%2582%25B3%25E3%2583%259F%25E3%2583%2583%25E3%2583%2588%25E3%2583%25A1%25E3%2583%2583%25E3%2582%25BB%25E3%2583%25BC%25E3%2582%25B8%25E3%2582%2592%25E5%25A4%2589%25E6%259B%25B4%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tom%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvdC5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tom</dc:creator></item><item><title><![CDATA[Gitで複数行のコミットメッセージを記載する方法]]></title><description><![CDATA[Gitで複数行のコミットメッセージを記載するには、主に以下の方法があります。
+
+mオプションありで以下のコマンドを実行する方法
+
+git commit -m "コミットメッセージ1行目" -m "コミットメッセージ2行目"
+
+
+mオプションなしの以下コマンドを実行し、実行後に立ち上がるエディタ使う方法
+
+git commit
+
+
+
+]]></description><link>https://zenn.dev/t0mzenn/articles/4ffec85fa4fc76</link><guid isPermaLink="true">https://zenn.dev/t0mzenn/articles/4ffec85fa4fc76</guid><pubDate>Mon, 05 May 2025 09:38:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--TxBJ4HY9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Git%25E3%2581%25A7%25E8%25A4%2587%25E6%2595%25B0%25E8%25A1%258C%25E3%2581%25AE%25E3%2582%25B3%25E3%2583%259F%25E3%2583%2583%25E3%2583%2588%25E3%2583%25A1%25E3%2583%2583%25E3%2582%25BB%25E3%2583%25BC%25E3%2582%25B8%25E3%2582%2592%25E8%25A8%2598%25E8%25BC%2589%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tom%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvdC5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tom</dc:creator></item><item><title><![CDATA[【Linux】Minecraftで日本語入力したい on ArchLinux+KDE Plasma]]></title><description><![CDATA[
+ きっかけ
+Linux上のMinecraftは日本語入力ができない。入力しようとしても反映されずにそのまま送信されてしまう。
+steve、こんにちは！がsteve　だけになるような感じ。
+これをなんとかしようってわけです。
+
+ クリップボードから貼り付ける作戦
+どうやらctrl+vでチャット欄に貼り付ければ日本語だろうが何だろうがいけるみたいなので、その挙動を参考にシェルスクリプトを書けばいけそうです。
+ちょっと古めの記事ですが、こんなものがありました
+https://www.r-cnct.com/2018/03/08/linux-minecraft.html
+ここのシェルスクリプトを...]]></description><link>https://zenn.dev/r64/articles/7a23ebc14bf91a</link><guid isPermaLink="true">https://zenn.dev/r64/articles/7a23ebc14bf91a</guid><pubDate>Mon, 05 May 2025 02:49:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--R2JiMPch--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Linux%25E3%2580%2591Minecraft%25E3%2581%25A7%25E6%2597%25A5%25E6%259C%25AC%25E8%25AA%259E%25E5%2585%25A5%25E5%258A%259B%25E3%2581%2597%25E3%2581%259F%25E3%2581%2584%2520on%2520ArchLinux%252BKDE%2520Plasma%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ruka64%2528%25E3%2582%258B%25E3%2581%258B%2529%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBiZDlmOWU5NzEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ruka64(るか)</dc:creator></item><item><title><![CDATA[ゼロからのOS自作入門 メモ (Day1-1)]]></title><description><![CDATA[こんにちは。 kaiware です。
+LLMが世を席巻している昨今、低レイヤー技術へ自分のコア技術をシフトしていくことで 競争から逃げ、 より付加価値の高い人材になれると思い自作OSにチャレンジする。
+ここでは、書籍「ゼロからのOS自作入門」をなぞっていき、メモを残していく。
+メインOSはWindows11を使い、その上にWSL2でUbuntu環境を構築して学習していく。
+https://zero.osdev.jp
+!
+以下 みかん本 と呼ぶ。
+
+
+ 動作環境
+
+Windows バージョン: 10.0.26100.3915
+WSL バージョン: 2.4.13.0
+カーネル バージョン: ...]]></description><link>https://zenn.dev/kaiware0x/articles/mikan-osbook-day1</link><guid isPermaLink="true">https://zenn.dev/kaiware0x/articles/mikan-osbook-day1</guid><pubDate>Sun, 04 May 2025 13:06:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--q7omlaP2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25BC%25E3%2583%25AD%25E3%2581%258B%25E3%2582%2589%25E3%2581%25AEOS%25E8%2587%25AA%25E4%25BD%259C%25E5%2585%25A5%25E9%2596%2580%2520%25E3%2583%25A1%25E3%2583%25A2%2520%2528Day1-1%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kaiware%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2Rhcmsvay5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kaiware</dc:creator></item><item><title><![CDATA[Android12でGoogle Play開発者サービスが暴走した]]></title><description><![CDATA[
+ 経緯
+Motorola g52j 5Gを使っており、2025/05/01あたりからスマホが異常に発熱するようになりました。
+とりあえず、ネットで調べた限りGoogle Play開発者サービスが悪さをしているみたいなのでキャッシュの削除と強制停止をしてみることにしました。
+しかし、発熱が収まらずいつもの3倍の速度 （めちゃくちゃ嬉しくない赤い彗星） で電池が減るのでどうにかしたいところ、adbを使えば原因を探れるのではと思い実践してみました。
+
+ 事前に試したこと
+
+Google Play開発者サービスのキャッシュを削除・強制停止
+Google Play Storeのキャッシュ及びアッ...]]></description><link>https://zenn.dev/donabe8898/articles/0c36bac7b52d60</link><guid isPermaLink="true">https://zenn.dev/donabe8898/articles/0c36bac7b52d60</guid><pubDate>Sat, 03 May 2025 16:09:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Axr1I_ZU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Android12%25E3%2581%25A7Google%2520Play%25E9%2596%258B%25E7%2599%25BA%25E8%2580%2585%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2593%25E3%2582%25B9%25E3%2581%258C%25E6%259A%25B4%25E8%25B5%25B0%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Donabe%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FkZTRlY2I4NTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Donabe</dc:creator></item><item><title><![CDATA[Windows 11にDocker Desktopを入れる手順（令和７年最新版）]]></title><description><![CDATA[
+ 🖥 対応PCの条件（システム要件）
+Docker Desktop for Windows を動かすためには、以下の要件を満たす必要があります：
+
+
+Windows 11 64bit（21H2以上）
+
+対応エディション：Home / Pro / Enterprise / Education
+
+
+メモリ 4GB 以上
+BIOS/UEFI でハードウェア仮想化（Hardware Virtualization）が有効になっていること
+
+
+💡 メモリについて：Windows 11 自体が 4GB 必要なので、通常気にしなくてOKです
+💡 ハードウェア仮想化：CPUに依存します。無効な場合は B...]]></description><link>https://zenn.dev/upgradetech/articles/8e8b82e9d5c494</link><guid isPermaLink="true">https://zenn.dev/upgradetech/articles/8e8b82e9d5c494</guid><pubDate>Sat, 03 May 2025 13:23:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--FquIRrvl--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Windows%252011%25E3%2581%25ABDocker%2520Desktop%25E3%2582%2592%25E5%2585%25A5%25E3%2582%258C%25E3%2582%258B%25E6%2589%258B%25E9%25A0%2586%25EF%25BC%2588%25E4%25BB%25A4%25E5%2592%258C%25EF%25BC%2597%25E5%25B9%25B4%25E6%259C%2580%25E6%2596%25B0%25E7%2589%2588%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:seine%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI4NmJmMzNhODkuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:UPGRADE%2520tech%2520blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSVJxelNZdG5aeHlhdDAxaEtIN2JnQTNxS1dadzVqek9FX2NycWRsRzJaZGNibVRLYz1zOTYtYw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>seine</dc:creator></item><item><title><![CDATA[SSHでrootログインできない問題の完全トラブルシューティングガイド]]></title><description><![CDATA[SSHでrootユーザーとしてログインできない場合、様々な設定やセキュリティ対策が原因となっています。この記事では、問題解決のための体系的なアプローチを優先順位別に解説します。
+
+ 前提条件
+
+一般ユーザーアカウントでのSSH接続は可能であること
+sudoもしくはroot権限が何らかの方法で取得できること
+
+
+ トラブルシューティング手順（優先順位順）
+
+ 1. SSHサーバー設定の確認 (最優先)
+SSHサーバーの設定ファイルは、rootログインの可否を直接制御します。
+# 一般ユーザーでログインしてから実行
+cat /etc/ssh/sshd_config | grep -i "Pe...]]></description><link>https://zenn.dev/mt_trero53/articles/19e15380644818</link><guid isPermaLink="true">https://zenn.dev/mt_trero53/articles/19e15380644818</guid><pubDate>Sat, 03 May 2025 11:56:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--TlUVt1Sc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:SSH%25E3%2581%25A7root%25E3%2583%25AD%25E3%2582%25B0%25E3%2582%25A4%25E3%2583%25B3%25E3%2581%25A7%25E3%2581%258D%25E3%2581%25AA%25E3%2581%2584%25E5%2595%258F%25E9%25A1%258C%25E3%2581%25AE%25E5%25AE%258C%25E5%2585%25A8%25E3%2583%2588%25E3%2583%25A9%25E3%2583%2596%25E3%2583%25AB%25E3%2582%25B7%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%2586%25E3%2582%25A3%25E3%2583%25B3%25E3%2582%25B0%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mt_trero53%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhmMTM4YTMxZjAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mt_trero53</dc:creator></item><item><title><![CDATA[Linuxで富士通FMV Lifebookの充電制御をおこなう]]></title><description><![CDATA[Linuxカーネルが富士通製ノートPC、FMV Lifebookの充電制御に対応したので、その使い方を書いておきます。
+手元の実験は以下の環境で行いました。
+
+富士通FMV Lifebook U939 (Intel Core i5 8635U)
+Linux カーネル 6.11 (Elementary OS 8.0.1)
+Linux カーネル 6.14 (Kubuntu 25.04)
+
+
+ 方法
+充電制御はドライバとしてカーネルに含まれており、特別なソフトウェアのインストールや実行は不要です。
+バッテリーの充電をnnパーセントで停止したい場合、コマンドラインから以下のコマンドを実行します。...]]></description><link>https://zenn.dev/seiichihorie/articles/20250503-u939-charge-limit</link><guid isPermaLink="true">https://zenn.dev/seiichihorie/articles/20250503-u939-charge-limit</guid><pubDate>Sat, 03 May 2025 05:28:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dPxsYbwr--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%25E3%2581%25A7%25E5%25AF%258C%25E5%25A3%25AB%25E9%2580%259AFMV%2520Lifebook%25E3%2581%25AE%25E5%2585%2585%25E9%259B%25BB%25E5%2588%25B6%25E5%25BE%25A1%25E3%2582%2592%25E3%2581%258A%25E3%2581%2593%25E3%2581%25AA%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25A0%2580%25E6%25B1%259F%25E8%25AA%25A0%25E4%25B8%2580%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS3hveFBEMG4wNVZyT182d0hPbUpld1BTOTdVOE1Hdzg0R09IY1A5Tm1ETmk0N1V0QWZTQT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>堀江誠一</dc:creator></item><item><title><![CDATA[ディスク暗号化したLinuxのスワップ領域]]></title><description><![CDATA[有名どころのLinuxディストリビューションについて『ディスク暗号化したときのスワップ領域はどうなっているのか』を調べてみました。
+ディストリビューションによってスワップ領域はパーティションであったり、ファイルであったりします。それぞれに一長一短ありますが、パーティションの場合はサイズ変更にひと手間かかります。そしてディスク暗号化している場合にはこれがひと手間では済まない場合もあります。
+特にラップトップPCにインストールしたときには、休止（ハイバーネーション）を利用するためにスワップサイズを変更することになるかもしれません。ですので、ラップトップPC利用者にとってスワップ領域の情報は重...]]></description><link>https://zenn.dev/seiichihorie/articles/20250502-swap-luks</link><guid isPermaLink="true">https://zenn.dev/seiichihorie/articles/20250502-swap-luks</guid><pubDate>Sat, 03 May 2025 01:08:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--oAx40a0q--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2587%25E3%2582%25A3%25E3%2582%25B9%25E3%2582%25AF%25E6%259A%2597%25E5%258F%25B7%25E5%258C%2596%25E3%2581%2597%25E3%2581%259FLinux%25E3%2581%25AE%25E3%2582%25B9%25E3%2583%25AF%25E3%2583%2583%25E3%2583%2597%25E9%25A0%2598%25E5%259F%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25A0%2580%25E6%25B1%259F%25E8%25AA%25A0%25E4%25B8%2580%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS3hveFBEMG4wNVZyT182d0hPbUpld1BTOTdVOE1Hdzg0R09IY1A5Tm1ETmk0N1V0QWZTQT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>堀江誠一</dc:creator></item><item><title><![CDATA[Linuxカーネルへの Rust 導入の研究論文メモ]]></title><description><![CDATA[
+ はじめに
+北京郵電大学とUESTC研究者による論文「An Empirical Study of Rust-for-Linux」を読んだメモ。Linuxカーネルへの言語Rust導入（RFL）がどうなっているのか、実際のデータに基づいた分析が面白かった。
+
+ Rustとカーネルの出会い
+Linuxカーネルは30年以上の歴史を持ち、現代コンピューティングの基盤だ。しかしC言語で書かれているため、メモリ関連やコンカレンシーのバグが絶えない。Rustはこの問題を所有権メカニズムで解決できるかもしれない。
+
+
+
+所有権ルール
+説明
+
+
+
+
+排他的所有権
+メモリ位置は一度に1つの変数だけが所有でき...]]></description><link>https://zenn.dev/su8/articles/7291385a521b62</link><guid isPermaLink="true">https://zenn.dev/su8/articles/7291385a521b62</guid><pubDate>Fri, 02 May 2025 13:32:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9z2ddgKt--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%25E3%2582%25AB%25E3%2583%25BC%25E3%2583%258D%25E3%2583%25AB%25E3%2581%25B8%25E3%2581%25AE%2520Rust%2520%25E5%25B0%258E%25E5%2585%25A5%25E3%2581%25AE%25E7%25A0%2594%25E7%25A9%25B6%25E8%25AB%2596%25E6%2596%2587%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:su8%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUVkRlRwNHdDZWsxTUFjbzVXNlpLQUgtaGNiMGI1SDZrODRKdkd2ZGpoNDZQUT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>su8</dc:creator></item><item><title><![CDATA[Linuxのジョブとプロセスの関係を理解しよう]]></title><description><![CDATA[Linux学習時にジョブとプロセスの概念が理解できなかったため、初学者向けに執筆しました。
+Linux環境で効率的に作業を行うには、ジョブとプロセスの概念と関係性を理解することが重要です。本記事では、ジョブとプロセスの基本から応用まで、実用的な知識を解説します。
+
+ 目次
+
+プロセスとジョブの基本概念
+ジョブコントロールの基本コマンド
+プロセス管理コマンド
+実践的な使用例
+まとめ
+
+
+ プロセスとジョブの基本概念
+
+ プロセスとは
+プロセスはLinuxシステム上で実行されるプログラムのインスタンスです。各プロセスには：
+
+一意のプロセスID（PID）
+親プロセス（PPID）
+実行優先度
+...]]></description><link>https://zenn.dev/mt_trero53/articles/4ad7ed56760a78</link><guid isPermaLink="true">https://zenn.dev/mt_trero53/articles/4ad7ed56760a78</guid><pubDate>Fri, 02 May 2025 03:55:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--DlEf7vRs--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%25E3%2581%25AE%25E3%2582%25B8%25E3%2583%25A7%25E3%2583%2596%25E3%2581%25A8%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25BB%25E3%2582%25B9%25E3%2581%25AE%25E9%2596%25A2%25E4%25BF%2582%25E3%2582%2592%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2597%25E3%2582%2588%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mt_trero53%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhmMTM4YTMxZjAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mt_trero53</dc:creator></item><item><title><![CDATA[GNS3準備④ GNS3へのネットワーク機器登録（例：Debian Linux）]]></title><description><![CDATA[
+ GNS3Appliancesからの登録
+
+GNS3にネットワーク機器となる仮想マシンを登録するには、QEMUを直接アップロード、Dockerなどいくつかやり方があります。ここでは、Appliancesファイルから登録する方法をご紹介します。
+
+
+
+
+ Debian Linuxの登録
+
+GNS3のMarcketplaceに行きましてDebianを検索します。検索結果からDebianのAppliancesファイルをダウンロードします。「debian.gns3a」というファイルがダウンロードできます。
+https://gns3.com/marketplace/appliances
+
+
+
+
+...]]></description><link>https://zenn.dev/labathome/articles/701b5e8da2b360</link><guid isPermaLink="true">https://zenn.dev/labathome/articles/701b5e8da2b360</guid><pubDate>Thu, 01 May 2025 13:24:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xzOo2zkY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:GNS3%25E6%25BA%2596%25E5%2582%2599%25E2%2591%25A3%2520GNS3%25E3%2581%25B8%25E3%2581%25AE%25E3%2583%258D%25E3%2583%2583%25E3%2583%2588%25E3%2583%25AF%25E3%2583%25BC%25E3%2582%25AF%25E6%25A9%259F%25E5%2599%25A8%25E7%2599%25BB%25E9%258C%25B2%25EF%25BC%2588%25E4%25BE%258B%25EF%25BC%259ADebian%2520Linux%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:lab%2540home%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y1NmFlNTZmM2EuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>lab@home</dc:creator></item><item><title><![CDATA[【Linuc101勉強記録】　GNUとUnixのコマンド分野編　その２]]></title><description><![CDATA[
+Linux公式マスコット　タックス（英: Tux）
+
+ はじめに
+みなさんこんにちは。
+GNUとUnixのコマンドの分野の勉強を始めたので、自分の記憶のアウトプットとして学んだ部分をメモとしてまとめていきたいと思います。
+今回は、正規表現と拡張正規表現についてまとめていきたいと思います。
+
+ 正規表現
+
+正規表現は任意の文字列パターンを表す表記方法。
+
+
+
+
+正規表現
+説明
+
+
+
+
+*
+直前の文字の0回以上の繰り返し
+
+
+.
+任意の1文字の文字列例 ： 1..4.txt →　1234.txt、1ab4.txt
+
+
+[　]
+[ ] 内の任意の１文字の文字列　例 ： 1[23]4.txt ...]]></description><link>https://zenn.dev/smbysdisk/articles/4de559bcd7c508</link><guid isPermaLink="true">https://zenn.dev/smbysdisk/articles/4de559bcd7c508</guid><pubDate>Thu, 01 May 2025 08:23:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--f10eVFVv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Linuc101%25E5%258B%2589%25E5%25BC%25B7%25E8%25A8%2598%25E9%258C%25B2%25E3%2580%2591%25E3%2580%2580GNU%25E3%2581%25A8Unix%25E3%2581%25AE%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E5%2588%2586%25E9%2587%258E%25E7%25B7%25A8%25E3%2580%2580%25E3%2581%259D%25E3%2581%25AE%25EF%25BC%2592%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A0%25E3%2581%2584%25E3%2581%2599%25E3%2583%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q1N2U3MzU3YmMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>だいすー</dc:creator></item><item><title><![CDATA[書籍「はじめて読む486」のLinux環境構築]]></title><description><![CDATA[
+ TLDR
+QEMUの設定
+sudo apt update
+sudo apt install qemu-system-i386
+sudo wget https://archive.org/download/FD12CD/FD12CD.iso
+qemu-img create -f raw freedos.img 300M
+qemu-system-i386 -cpu 486 -drive file=freedos.img,format=raw -cdrom FD12CD.iso -boot d -nographic
+openwatcomの設定
+wget https://openwatcom...]]></description><link>https://zenn.dev/greenteabiscuit/articles/bc34670421f556</link><guid isPermaLink="true">https://zenn.dev/greenteabiscuit/articles/bc34670421f556</guid><pubDate>Wed, 30 Apr 2025 08:10:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1dlksbDx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%259B%25B8%25E7%25B1%258D%25E3%2580%258C%25E3%2581%25AF%25E3%2581%2598%25E3%2582%2581%25E3%2581%25A6%25E8%25AA%25AD%25E3%2582%2580486%25E3%2580%258D%25E3%2581%25AELinux%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:greenteabiscuit%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvZy5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>greenteabiscuit</dc:creator></item><item><title><![CDATA[Dockerではなくcontainerd＋nerdctlを使ってみる]]></title><description><![CDATA[
+ そもそもcontainerdって？
+
+
+containerd: ざっくり言うと、Docker（コンテナエンジン）の中身（コンテナランタイム）。Docker社が開発しCNCF（組織名）に寄贈されたシステムから派生。
+
+nerdctl: containerdを直接操作するためのCLIツール。NTTの方が開発者。
+
+参考: なぜオープンソースソフトウェアにコントリビュートすべきなのか
+
+
+
+
+Docker APIを叩いてDockerにcontainerdを操作してもらうよりも、直接containerdに命令したほうがシンプルだよね、という考えが広がってきている。
+（推奨）まずはこの記事を読...]]></description><link>https://zenn.dev/lotation/articles/5e938db6fdcbee</link><guid isPermaLink="true">https://zenn.dev/lotation/articles/5e938db6fdcbee</guid><pubDate>Tue, 29 Apr 2025 14:07:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4pW6rdNx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%25E3%2581%25A7%25E3%2581%25AF%25E3%2581%25AA%25E3%2581%258Fcontainerd%25EF%25BC%258Bnerdctl%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:vAr%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZkYzFmZDEwZDIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>vAr</dc:creator></item><item><title><![CDATA[WSLのパスワード忘れてログインできなくなったけど何とかなった方法]]></title><description><![CDATA[
+ vscode上でubuntu22.04を使っていたが数か月利用していなかったので、パスワード忘れてしまった間抜けです
+
+ 自分の状況を説明
+パスワード忘れたのでvscode上でrootユーザー(管理者権限)からパスワードを変更しようとしたが、ログインユーザーのパスワードがないとvscode上ではユーザーの切り替えができないため詰んだ。。
+powershellやlinuxの管理者権限で直接パスワードを変更するもvscodeに反映されない
+vscodeのwslプロンプト(ubuntu22.04)で下記コマンドを叩くとログインユーザー名が表示される
+whoami
+例として：foouserと...]]></description><link>https://zenn.dev/wakki/articles/370e16af17e4c2</link><guid isPermaLink="true">https://zenn.dev/wakki/articles/370e16af17e4c2</guid><pubDate>Sun, 27 Apr 2025 19:45:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fBh4U4il--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:WSL%25E3%2581%25AE%25E3%2583%2591%25E3%2582%25B9%25E3%2583%25AF%25E3%2583%25BC%25E3%2583%2589%25E5%25BF%2598%25E3%2582%258C%25E3%2581%25A6%25E3%2583%25AD%25E3%2582%25B0%25E3%2582%25A4%25E3%2583%25B3%25E3%2581%25A7%25E3%2581%258D%25E3%2581%25AA%25E3%2581%258F%25E3%2581%25AA%25E3%2581%25A3%25E3%2581%259F%25E3%2581%2591%25E3%2581%25A9%25E4%25BD%2595%25E3%2581%25A8%25E3%2581%258B%25E3%2581%25AA%25E3%2581%25A3%25E3%2581%259F%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%25AF%25E3%2583%2583%25E3%2582%25AD%25E3%2583%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RkOTg4YTEyNmEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ワッキー</dc:creator></item><item><title><![CDATA[Borgbackupを導入してMinecraftサーバーのバックアップを劇的に改善してみた]]></title><description><![CDATA[こんにちは！
+現在、友人数人と遊ぶ小規模なMinecraftサーバーを、自宅のサーバーで運用しています。今回は、バックアップに関する悩みをborgbackupというツールで解消したので、その体験談を書いておこうと思います。
+
+ 抱えていた問題
+ゲームが進むにつれてワールドデータは徐々に大きくなり2.4GB程度になっていました。
+従来のバックアップは、一定時間ごとにワールドデータを丸ごと圧縮して保存するというものでした。
+当初は30分ごとのバックアップ24時間分と1日ごとのバックアップを1週間分だけ保持するようにしていましたが、容量は70GBほどになってしまいました。
+
+ Borgback...]]></description><link>https://zenn.dev/arum/articles/62c4e9aa8e69c6</link><guid isPermaLink="true">https://zenn.dev/arum/articles/62c4e9aa8e69c6</guid><pubDate>Sun, 27 Apr 2025 07:08:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4y_3a3mQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Borgbackup%25E3%2582%2592%25E5%25B0%258E%25E5%2585%25A5%25E3%2581%2597%25E3%2581%25A6Minecraft%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2581%25AE%25E3%2583%2590%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25A2%25E3%2583%2583%25E3%2583%2597%25E3%2582%2592%25E5%258A%2587%25E7%259A%2584%25E3%2581%25AB%25E6%2594%25B9%25E5%2596%2584%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Arum%2Cx_90%2Cy_121/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Arum</dc:creator></item><item><title><![CDATA[Raspberry Pi に Bluetooth 経由でログインしよう]]></title><description><![CDATA[Raspberry Pi をヘッドレスで利用している場合に役立つかもしれません。
+イーサネット経由（主に SSH）で Raspberry Pi を操作していて、ネットワーク周りの設定をいじって失敗すると、KVM を繋ぐかシリアルコンソールに繋ぐ必要が生じますが、Bluetooth 経由でのログインを用意しておくとバックアップコンソールとして使えます。
+
+ テスト条件
+
+ハードウェア：Raspberry Pi 5
+OS：Raspberry Pi OS Lite (64-bit) 2024-11-19
+
+以下の２つのサービスは有効にしておきます（デフォルトで有効になっているはず）。
+
+blu...]]></description><link>https://zenn.dev/19931/articles/e56aa361684664</link><guid isPermaLink="true">https://zenn.dev/19931/articles/e56aa361684664</guid><pubDate>Sun, 27 Apr 2025 04:23:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wdBSQhay--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Raspberry%2520Pi%2520%25E3%2581%25AB%2520Bluetooth%2520%25E7%25B5%258C%25E7%2594%25B1%25E3%2581%25A7%25E3%2583%25AD%25E3%2582%25B0%25E3%2582%25A4%25E3%2583%25B3%25E3%2581%2597%25E3%2582%2588%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Ippei%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JhYTViMjM2ZWYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Ippei</dc:creator></item><item><title><![CDATA[Linuxで顔認証を動作させる]]></title><description><![CDATA[Linuxで、Windows Helloのように色々な所で顔認証を使う方法
+
+ 1. Howdyをインストール
+基本的にLinuxで顔認証したい場合はhowdyを使う。これをまずはインストールする。ただし、リリース版は非常に古いため、git版を使うことを前提にする。
+ArchであればAURにパッケージがあるため、
+paru -Sy howdy-git
+などとしてインストールできる
+
+ 2. howdyの設定
+まずは目的のカメラを探そう。例えばmpvがインストールされていれば
+mpv /dev/video0
+などとしてカメラ映像を見ることができる。video0の数字部分を変えながらどれが正...]]></description><link>https://zenn.dev/nazo6/articles/linux-howdy-tutorial</link><guid isPermaLink="true">https://zenn.dev/nazo6/articles/linux-howdy-tutorial</guid><pubDate>Sat, 26 Apr 2025 13:28:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--efKUqZ4a--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%25E3%2581%25A7%25E9%25A1%2594%25E8%25AA%258D%25E8%25A8%25BC%25E3%2582%2592%25E5%258B%2595%25E4%25BD%259C%25E3%2581%2595%25E3%2581%259B%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nazo6%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc0YTA4ZjY1ZTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nazo6</dc:creator></item></channel></rss>
