@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「HTML」のフィード]]></title><description><![CDATA[Zennのトピック「HTML」のRSSフィードです]]></description><link>https://zenn.dev/topics/html</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/171432f5a6.png</url><title>Zennの「HTML」のフィード</title><link>https://zenn.dev/topics/html</link></image><generator>zenn.dev</generator><lastBuildDate>Tue, 06 May 2025 08:19:34 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/html/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[【備忘録】アクセシビリティ初心者が学んだWAI-ARIAについて]]></title><description><![CDATA[最近、フォーム周りの実装を通してアクセシビティについて考える機会が増えたので、今後の備忘録として記録しました。
+※内容はややざっくりとしておりますことあらかじめご了承ください。
+
+ WAI-ARIA（ウェイ アリア）とは
+WAI-ARIAはWeb Accessibility Initiative Accessible Rich Internet Applicationsの略です。
+W3Cによって定められた追加仕様で、HTMLだけでは表すことのできない構造や状態などを明示することができます。
+
+ role属性について
+HTMLの要素にARIAロールを割り当てて、その要素の役割を明確にします...]]></description><link>https://zenn.dev/shin_03/articles/97f5125136fcfb</link><guid isPermaLink="true">https://zenn.dev/shin_03/articles/97f5125136fcfb</guid><pubDate>Tue, 06 May 2025 02:38:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--P5d78HV4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%2582%2599%25E5%25BF%2598%25E9%258C%25B2%25E3%2580%2591%25E3%2582%25A2%25E3%2582%25AF%25E3%2582%25BB%25E3%2582%25B7%25E3%2583%2593%25E3%2583%25AA%25E3%2583%2586%25E3%2582%25A3%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E3%2581%258C%25E5%25AD%25A6%25E3%2582%2593%25E3%2581%25A0WAI-ARIA%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:shin%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzUzN2NkNmZhYzkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>shin</dc:creator></item><item><title><![CDATA[overflow:scrollの初期表示でJavaScriptを使わず任意の位置にスクロールさせるワークアラウンド]]></title><description><![CDATA[
+ 前置き
+スクロール可能な要素で初期表示時点で終端にスクロールしておきたいという場面が稀にあるかもしれません。
+
+そのような場合、React、Next.jsではuseEffectを利用して実現することが多いと思います。
+export default function Page() {
+  const containerRef = useRef&lt;HTMLDivElement|null&gt;(null)
+  useEffect(() =&gt; {
+    containerRef.current?.scrollTo({left: containerRef.current.scro...]]></description><link>https://zenn.dev/mukanakazato/articles/250f00c82e0334</link><guid isPermaLink="true">https://zenn.dev/mukanakazato/articles/250f00c82e0334</guid><pubDate>Thu, 01 May 2025 10:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--RopCY-Nd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:overflow%253Ascroll%25E3%2581%25AE%25E5%2588%259D%25E6%259C%259F%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%25A7JavaScript%25E3%2582%2592%25E4%25BD%25BF%25E3%2582%258F%25E3%2581%259A%25E4%25BB%25BB%25E6%2584%258F%25E3%2581%25AE%25E4%25BD%258D%25E7%25BD%25AE%25E3%2581%25AB%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%2595%25E3%2581%259B%25E3%2582%258B%25E3%2583%25AF%25E3%2583%25BC%25E3%2582%25AF%25E3%2582%25A2%25E3%2583%25A9%25E3%2582%25A6%25E3%2583%25B3%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Muka%2520Nakazato%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSThmbVd4Vm5pTktGQnJ1b05PWWpDUUFTNklaVFRUUF9NZHBsblhZZjd3Y0E9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Muka Nakazato</dc:creator></item><item><title><![CDATA[<select>タグの中身をCSSだけでカスタマイズできるようになったっぽい]]></title><description><![CDATA[
+ はじめに
+「セレクトボックスを自分好みの見た目にしたい」
+でも「JavaScript 書くのはちょっと面倒…」💦
+そんなWeb制作ビギナーさんに向けて、最近ブラウザに入り始めた &lt;select&gt; の新仕様を使って、HTMLとCSSだけで見た目をガラッと変える方法を紹介します🙌
+
+ 1. そもそも &lt;select&gt; ってなに？
+フォーム（入力欄）で プルダウンメニュー を作るときに使うタグです。
+HTML はこんな感じ👇
+&lt;select&gt;
+  &lt;option value="cat"&gt;Cat&lt;/option&gt;
+  &lt;opt...]]></description><link>https://zenn.dev/kibe/articles/b52b18c70c2d65</link><guid isPermaLink="true">https://zenn.dev/kibe/articles/b52b18c70c2d65</guid><pubDate>Wed, 30 Apr 2025 09:08:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Jbmx_WwU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%253Cselect%253E%25E3%2582%25BF%25E3%2582%25B0%25E3%2581%25AE%25E4%25B8%25AD%25E8%25BA%25AB%25E3%2582%2592CSS%25E3%2581%25A0%25E3%2581%2591%25E3%2581%25A7%25E3%2582%25AB%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%259E%25E3%2582%25A4%25E3%2582%25BA%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258B%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E3%2581%25AA%25E3%2581%25A3%25E3%2581%259F%25E3%2581%25A3%25E3%2581%25BD%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:k1b3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAwOTYwY2IzNTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>k1b3</dc:creator></item><item><title><![CDATA[Blenderで作った3DモデルをThree.jsを使ってWebブラウザ上に表示せてみた日記]]></title><description><![CDATA[ここ最近、WebGLに興味があり、Three.jsやBlenderというものを知りました。
+まずはこれらでできることを知ってみたかったので、ChatGPTに頼りつつ、Blenderで作った3DモデルをThree.jsを使ってWebブラウザ上に表示させてみることにしました。
+なお、本当にはじめの一歩なので、「仕組み」や「jsの書き方」の詳細はわからずにThree.jsを操作しています。すべてChatGPTが吐き出したコードを貼り付けるのみで実装しています。
+なので、この記事では、コードは表記せず、「結果的に表示がどうなったのか？」「手応えはどうか？」という部分を日記的に書き残します。
+
+ ...]]></description><link>https://zenn.dev/tomuko_coder/articles/6edaa3ad1187f7</link><guid isPermaLink="true">https://zenn.dev/tomuko_coder/articles/6edaa3ad1187f7</guid><pubDate>Wed, 30 Apr 2025 06:28:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--gsIzTyJW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Blender%25E3%2581%25A7%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F3D%25E3%2583%25A2%25E3%2583%2587%25E3%2583%25AB%25E3%2582%2592Three.js%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6Web%25E3%2583%2596%25E3%2583%25A9%25E3%2582%25A6%25E3%2582%25B6%25E4%25B8%258A%25E3%2581%25AB%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%259B%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25E6%2597%25A5%25E8%25A8%2598%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A8%25E3%2582%2580%25E3%2581%2593%2540%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2580%25E3%2583%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhhNDlkZWVhZmIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>とむこ@コーダー</dc:creator></item><item><title><![CDATA[FastAPI でとても簡単なToDoアプリを作る！！]]></title><description><![CDATA[
+ 目標
+フロントエンド（HTML）とバックエンド（Python/FastAPI）を自分で繋いで動かす。
+最小構成で、初心者が「Webアプリの仕組み」を理解できる。
+
+ フォルダ構成
+todo-app/
+├── main.py              ← FastAPIのメインサーバー
+├── templates/
+│   └── index.html       ← フロントエンド（HTML）
+└── static/
+    └── style.css        ← CSS（お好みで）
+
+ ステップ①：FastAPIを立ち上げよう！
+
+ 1. 仮想環境を作成して起動
+python...]]></description><link>https://zenn.dev/utokyo_aido/articles/d9022eb200b5f0</link><guid isPermaLink="true">https://zenn.dev/utokyo_aido/articles/d9022eb200b5f0</guid><pubDate>Wed, 30 Apr 2025 05:49:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BcqMRs_m--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:FastAPI%2520%25E3%2581%25A7%25E3%2581%25A8%25E3%2581%25A6%25E3%2582%2582%25E7%25B0%25A1%25E5%258D%2598%25E3%2581%25AAToDo%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%25EF%25BC%2581%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:AIdo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVhYWFkMWNkMzMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>AIdo</dc:creator></item><item><title><![CDATA[CSSの@counter-styleを利用してリスト要素のマーカーに「・（中黒）」を表示する]]></title><description><![CDATA[
+ はじめに
+Webデザインにおいて、リスト要素のマーカーを「・（中黒）」にしたい場面は意外と多くあります。
+特に日本語コンテンツでは、標準のdiscマーカーでは大きすぎ、デザインに馴染まないことも珍しくありません。
+これまでは、::before擬似要素で「・」を表示したり、マージンを手動で調整する必要がありましたが、CSSの@counter-styleを使えば、シンプルかつ柔軟性高く実現できます。
+この記事では、CSSの@counter-styleを利用して、リストマーカーに「・（中黒）」を表示する方法を紹介します。
+
+ 実装方法
+完成コードはこちら
+@counter-style mi...]]></description><link>https://zenn.dev/kshr/articles/7042c96901dcc9</link><guid isPermaLink="true">https://zenn.dev/kshr/articles/7042c96901dcc9</guid><pubDate>Tue, 29 Apr 2025 15:12:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--VbkRfcHx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:CSS%25E3%2581%25AE%2540counter-style%25E3%2582%2592%25E5%2588%25A9%25E7%2594%25A8%25E3%2581%2597%25E3%2581%25A6%25E3%2583%25AA%25E3%2582%25B9%25E3%2583%2588%25E8%25A6%2581%25E7%25B4%25A0%25E3%2581%25AE%25E3%2583%259E%25E3%2583%25BC%25E3%2582%25AB%25E3%2583%25BC%25E3%2581%25AB%25E3%2580%258C%25E3%2583%25BB%25EF%25BC%2588%25E4%25B8%25AD%25E9%25BB%2592%25EF%25BC%2589%25E3%2580%258D%25E3%2582%2592%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:_H_R_%25E2%2593%25BF%25E1%25B4%25A5%25E2%2593%25BF%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFUWEFKeGdZMGlDYkVyeUp3cml1OVROb3VYUktXM2NxWk5COFM2QjZnVVQ9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>_H_R_⓿ᴥ⓿</dc:creator></item><item><title><![CDATA[ブラウザのオブジェクトモデルの構築について]]></title><description><![CDATA[
+ はじめに
+こんにちは。
+今回はブラウザがレンダリングする際に構築されるDOM（Document ObjectModel）とCSSOM（CSS Object Model）について書いてみました。
+
+ レンダリングとは？
+ブラウザに指定されたURLをブラウザの画面に表示することです。
+ブラウザには以下のように、さまざまな機能が搭載されていますが、レンダリングの役割を担っているのがレンダリングエンジンです。
+以下のサイトでまとまっているように使用されているレンダリングエンジンは使用されているブラウザごとにさまざまです。
+https://webukatu.com/wordpress/blog...]]></description><link>https://zenn.dev/rh820/articles/47ac8c392bb409</link><guid isPermaLink="true">https://zenn.dev/rh820/articles/47ac8c392bb409</guid><pubDate>Tue, 29 Apr 2025 03:46:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--coND547B--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2596%25E3%2583%25A9%25E3%2582%25A6%25E3%2582%25B6%25E3%2581%25AE%25E3%2582%25AA%25E3%2583%2596%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E3%2583%25A2%25E3%2583%2587%25E3%2583%25AB%25E3%2581%25AE%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hodii%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhjM2JkYzhiZTUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hodii</dc:creator></item><item><title><![CDATA[Tableauで作成したダッシュボードをhtmlファイルに載せて好きなデザインにする。]]></title><description><![CDATA[
+ まえがき
+2025年の3月にTableauのDATASaberになんとかなることができました。
+ありがたいことに今年の4月から3人も弟子を持たせていただけることになり、何か出来ることはないかなと思っていたところちょうど以下のような「DATASaber認定後初めてLT会」がtechplayで行われるとのことだったのでLTさせていただきました🙌
+https://techplay.jp/event/977224
+DATASaberになったはいいもののTableau Publicにある世界中から公開されるようなVizを作成することができなかったのでもっとデザインに凝るためにどういう方法がある...]]></description><link>https://zenn.dev/amana/articles/bfc54fe89247b5</link><guid isPermaLink="true">https://zenn.dev/amana/articles/bfc54fe89247b5</guid><pubDate>Mon, 28 Apr 2025 10:38:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--FB-3eziG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Tableau%25E3%2581%25A7%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2597%25E3%2581%259F%25E3%2583%2580%25E3%2583%2583%25E3%2582%25B7%25E3%2583%25A5%25E3%2583%259C%25E3%2583%25BC%25E3%2583%2589%25E3%2582%2592html%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2581%25AB%25E8%25BC%2589%25E3%2581%259B%25E3%2581%25A6%25E5%25A5%25BD%25E3%2581%258D%25E3%2581%25AA%25E3%2583%2587%25E3%2582%25B6%25E3%2582%25A4%25E3%2583%25B3%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%25E3%2580%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nk_work%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ1MjJkN2U5MzIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nk_work</dc:creator></item><item><title><![CDATA[Zodのcoerce機能で解決：HTMLのinput type="number"が文字列になる問題]]></title><description><![CDATA[
+ 🤔 こんな問題に悩んでいませんか？
+&lt;input type="number" id="count" /&gt;
+👆 このフォーム要素、見た目は数値入力用なのに、JavaScript側では、
+const value = document.getElementById('count').value;
+console.log(typeof value); // "string" 😱
+文字列として扱われてしまいます！
+
+ 📝 よくある解決パターン
+こんな解決パターンを見かけることがあります。
+// フォーム用とサーバー用、2つの型定義を作成
+interface FormData {
+ ...]]></description><link>https://zenn.dev/asamin/articles/223a250ad675f6</link><guid isPermaLink="true">https://zenn.dev/asamin/articles/223a250ad675f6</guid><pubDate>Mon, 28 Apr 2025 08:37:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--NbYpgVLE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Zod%25E3%2581%25AEcoerce%25E6%25A9%259F%25E8%2583%25BD%25E3%2581%25A7%25E8%25A7%25A3%25E6%25B1%25BA%25EF%25BC%259AHTML%25E3%2581%25AEinput%2520type%253D%2522number%2522%25E3%2581%258C%25E6%2596%2587%25E5%25AD%2597%25E5%2588%2597%25E3%2581%25AB%25E3%2581%25AA%25E3%2582%258B%25E5%2595%258F%25E9%25A1%258C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:asami%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk0YWMyYjMxNjEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>asami</dc:creator></item><item><title><![CDATA[ユーザーが使いやすいログインフォームを作る]]></title><description><![CDATA[ログインフォームは、ほとんどのWebサイトで必要不可欠な要素です。
+制作者にとって頻繁に作るパーツだからこそ、使いやすく、そして安全に設計することがとても重要になります。
+今回は、どのデバイスでも快適に使えるログインフォームを作るためのTipsをまとめました。
+安全策についてはまた別の機会に。
+
+ 最低限押さえたいフォームのマークアップ
+基本的なマークアップは以下のようになります。
+ &lt;form&gt;
+    &lt;label for="email"&gt;メールアドレス&lt;/label&gt;
+    &lt;input type="email" id="email" n...]]></description><link>https://zenn.dev/369code/articles/20146a0c988bbb</link><guid isPermaLink="true">https://zenn.dev/369code/articles/20146a0c988bbb</guid><pubDate>Mon, 28 Apr 2025 05:16:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--gQTXGbzO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%25A6%25E3%2583%25BC%25E3%2582%25B6%25E3%2583%25BC%25E3%2581%258C%25E4%25BD%25BF%25E3%2581%2584%25E3%2582%2584%25E3%2581%2599%25E3%2581%2584%25E3%2583%25AD%25E3%2582%25B0%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25BC%25E3%2583%25A0%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:369code%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzliMjg2MzhjYzMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>369code</dc:creator></item><item><title><![CDATA[GithubやGit使わずにWebサイト公開したい！]]></title><description><![CDATA[
+ 初めに
+ウェブサイトを公開したいけど何が何だかわかんない...
+Git? GitHub? なんやそれ...
+そんな悩めるあなたへの記事になります！
+（初めての zenn の記事なので温かい目で見ていただきたいです）
+（どこか間違ってたらごめんなさい）
+
+ 公開するぞ！
+今回は Netlify というサービスを使って公開します。
+アメリカの会社が提供してくださってるサービスです。
+https://app.netlify.com/
+
+ 1. Netlifyのアカウントを作成
+
+このリンクをクリックして Netlify にアクセスし、下の Sign up を押します。
+次に、Sign up...]]></description><link>https://zenn.dev/litkyan/articles/eb43b2453e8178</link><guid isPermaLink="true">https://zenn.dev/litkyan/articles/eb43b2453e8178</guid><pubDate>Sun, 27 Apr 2025 17:39:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--zncvMQcj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Github%25E3%2582%2584Git%25E4%25BD%25BF%25E3%2582%258F%25E3%2581%259A%25E3%2581%25ABWeb%25E3%2582%25B5%25E3%2582%25A4%25E3%2583%2588%25E5%2585%25AC%25E9%2596%258B%25E3%2581%2597%25E3%2581%259F%25E3%2581%2584%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258D%25E3%2582%2583%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MzOTBkYjAyODEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>きゃ</dc:creator></item><item><title><![CDATA[📅 今日の振り返り（2025/04/27）]]></title><description><![CDATA[✅️作業時間:合計5h（準備1h/コーディング4h）
+✅ 今日やったこと
+今日やることリスト作成
+ストアサイト制作時に出てきた学び・改善整理
+ECサイト制作開始
+-SP/PC版レイアウト図解
+-HTMLレイアウト作成
+-HTML実装
+
+✨ 良かった点
+ECサイトでの4セクション構成であれば
+約4hでHTML実装までいけると気づいた。
+レイアウト段階でinnerの考え方を改善できた
+SP/PC図解がしっかりできたことで、次のスタイリングの土台ができた
+計画に沿って着実に進める意識が持てた
+
+✍️ 気づき・改善点
+フォームタグを使ったサイト制作に慣れる必要がありそう。
+感覚ではなく、設計→実...]]></description><link>https://zenn.dev/tamakimaru/articles/59e4d5879d5ab7</link><guid isPermaLink="true">https://zenn.dev/tamakimaru/articles/59e4d5879d5ab7</guid><pubDate>Sun, 27 Apr 2025 13:27:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vcVkDHuA--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%2520%2520%25E4%25BB%258A%25E6%2597%25A5%25E3%2581%25AE%25E6%258C%25AF%25E3%2582%258A%25E8%25BF%2594%25E3%2582%258A%25EF%25BC%25882025%252F04%252F27%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tamaki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSTNEMXNoUXBnVTY5V2R5X3hzX0FIZWlGdzdDU3F2VUhneTlxbkNGeGh5eEFHN1VGYz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tamaki</dc:creator></item><item><title><![CDATA[Discordアイコン"風"ジェネレーターの作成]]></title><description><![CDATA[
+ GitHub Pageを使用した静的Webページの公開
+
+ 初めに
+エンジニアになったのでWebサイトを作りたいな～と思いました。
+特に作りたいサイトはなかったのですが、個人的にDiscordの初期アイコンが好きで
+様々な色のアイコンがほしいと思ったので、Discordアイコン"風"ジェネレーターを作りました。
+
+ 作成したサイト
+https://onoshii.github.io/discord-avatar-generator/
+
+ 手順
+
+ 1.GitHubアカウントの作成
+割愛します。
+
+ 2.コードの作成
+GitHub Pageは静的なサイトしか作れないと何処かに書いていた...]]></description><link>https://zenn.dev/onoshii/articles/8e344ae8641a2c</link><guid isPermaLink="true">https://zenn.dev/onoshii/articles/8e344ae8641a2c</guid><pubDate>Sun, 27 Apr 2025 03:29:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7sX0K_kd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Discord%25E3%2582%25A2%25E3%2582%25A4%25E3%2582%25B3%25E3%2583%25B3%2522%25E9%25A2%25A8%2522%25E3%2582%25B8%25E3%2582%25A7%25E3%2583%258D%25E3%2583%25AC%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%25BC%25E3%2581%25AE%25E4%25BD%259C%25E6%2588%2590%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:onoshi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY3NzEyNDAwZTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>onoshi</dc:creator></item><item><title><![CDATA[【MindAR】サークルのチラシにARを実装した話【+Cloudflare Pages】]]></title><description><![CDATA[
+ ことの始まりと記事の概要
+LinuxClub(以下LC)という東京工科大学のサークルでは、毎年4月に行われる大学の新入生歓迎会にてチラシを配布しています。
+もちろん今年も開催されたので、フレッシュな新入生を集めるためにチラシの作成を行いました。
+ただ、毎年同じ紙媒体を配るのは味気ないですし、ClubPortal(現在停止中)という学校のサークルを集めたLCのWebサービスも普及しきれてないため、「何か変わったことができないか」と部員でアイデアを考えました。
+その結果、「ARを付けよう」ということになり、わずか2週間でARを実装することになりました。
+本記事では、MindARというオー...]]></description><link>https://zenn.dev/linux_club/articles/7837cf0a810a9f</link><guid isPermaLink="true">https://zenn.dev/linux_club/articles/7837cf0a810a9f</guid><pubDate>Sat, 26 Apr 2025 11:59:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--cUjqxFNY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590MindAR%25E3%2580%2591%25E3%2582%25B5%25E3%2583%25BC%25E3%2582%25AF%25E3%2583%25AB%25E3%2581%25AE%25E3%2583%2581%25E3%2583%25A9%25E3%2582%25B7%25E3%2581%25ABAR%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2597%25E3%2581%259F%25E8%25A9%25B1%25E3%2580%2590%252BCloudflare%2520Pages%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Mikuto%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ0Yzg5Njk5YTYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Linux%2520Club%2520-%2520%25E6%259D%25B1%25E4%25BA%25AC%25E5%25B7%25A5%25E7%25A7%2591%25E5%25A4%25A7%25E5%25AD%25A6%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSnFUQW91RU5ZUjJkRTVhOFNBUzlhUnhRQnNHVVBxQkozZF9NNC00SEV0UnlmdHM4ST1zOTYtYw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Mikuto</dc:creator></item><item><title><![CDATA[CSS `mask-image` を使って要素の一部だけをはみ出して見せるテクニック]]></title><description><![CDATA[Webサイトのデザインにおいて、要素がその背景やコンテナから一部分だけはみ出しているような表現を使いたい場面があります。例えば、商品画像の上部だけが背景の上に飛び出しているようなデザインです。
+
+参考：BOTANIST | フレグランスコレクション サクラとチェリーの香り
+これを実現するために、画像を複数枚用意して重ねたり、overflow: hidden を駆使したりする方法も考えられますが、CSSの mask-image プロパティを使うことで、よりスマートかつ柔軟に実装できます。今回はその具体的な方法について解説します。
+
+ TL;DR
+下記のようなMaskで再現する。
+
+
+ 実現...]]></description><link>https://zenn.dev/kazuma_horiike/articles/8a69618e9d8973</link><guid isPermaLink="true">https://zenn.dev/kazuma_horiike/articles/8a69618e9d8973</guid><pubDate>Fri, 25 Apr 2025 18:11:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--IFp7DuQs--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:CSS%2520%2560mask-image%2560%2520%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E8%25A6%2581%25E7%25B4%25A0%25E3%2581%25AE%25E4%25B8%2580%25E9%2583%25A8%25E3%2581%25A0%25E3%2581%2591%25E3%2582%2592%25E3%2581%25AF%25E3%2581%25BF%25E5%2587%25BA%25E3%2581%2597%25E3%2581%25A6%25E8%25A6%258B%25E3%2581%259B%25E3%2582%258B%25E3%2583%2586%25E3%2582%25AF%25E3%2583%258B%25E3%2583%2583%25E3%2582%25AF%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%259B%25E3%2583%25AA%25E3%2582%25A4%25E3%2582%25B1%2520%25E3%2582%25AB%25E3%2582%25BA%25E3%2583%259E%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhjMzU3ZjZjODUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ホリイケ カズマ</dc:creator></item><item><title><![CDATA[タイトル：もうフォーマットで悩まない！Web・Word・PDFをワンクリックで Markdown ― ToMarkdown.org 徹底]]></title><description><![CDATA[
+ 1. 「コピペ地獄」にハマったこと、ありませんか？
+ブログ執筆や技術ドキュメント作成で、Web ページや Word、PDF のゴチャゴチャした書式を手作業で直す──そんな時間をまだ費やしていますか？
+ToMarkdown.org なら、どんなレイアウトも 一発で “ピュア” な GitHub Flavored Markdown（GFM）に変換。太字も表もコードブロックも、そのまま再現してくれます。
+
+
+ 2. ToMarkdown.org の実力をざっくりチェック
+
+
+
+キー機能
+体験ポイント
+
+
+
+
+多形式入力
+
+HTML、URL、Word、PDF の 4 形式に対応。
+
+
+ローカ...]]></description><link>https://zenn.dev/cnych/articles/b29225c2868353</link><guid isPermaLink="true">https://zenn.dev/cnych/articles/b29225c2868353</guid><pubDate>Fri, 25 Apr 2025 11:27:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--skhW-zBj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%2588%25E3%2583%25AB%25EF%25BC%259A%25E3%2582%2582%25E3%2581%2586%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25BC%25E3%2583%259E%25E3%2583%2583%25E3%2583%2588%25E3%2581%25A7%25E6%2582%25A9%25E3%2581%25BE%25E3%2581%25AA%25E3%2581%2584%25EF%25BC%2581Web%25E3%2583%25BBWord%25E3%2583%25BBPDF%25E3%2582%2592%25E3%2583%25AF%25E3%2583%25B3%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2583%25E3%2582%25AF%25E3%2581%25A7%2520Markdown%2520%25E2%2580%2595%2520ToMark...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E9%2598%25B3%25E6%2598%258E%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2d0S3ZnRmladHZNNmNnX3dUSG44LUxEM09fM0xCeXM4OHluemlYU1E9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>阳明</dc:creator></item><item><title><![CDATA[Jetpack compose 1.8.0 から使える <ul> タグを使用してみる]]></title><description><![CDATA[
+ Jetpack compose 1.8.0 がリリース
+https://android-developers.googleblog.com/2025/04/whats-new-in-jetpack-compose-april-25.html
+
+AutoFill の追加
+AutoSizeText ができるようになった
+70個も試験的 API が削減された（安定化した）
+
+など、様々な変更がありました。
+更新内容は上記の開発者ブログを見ていただきたいのですが、今回は Jetpack compose 1.8.0 から使える &lt;ul&gt; を使用していきたいと思います。
+
+ 以前に作...]]></description><link>https://zenn.dev/u_chan/articles/4eac777634fd7c</link><guid isPermaLink="true">https://zenn.dev/u_chan/articles/4eac777634fd7c</guid><pubDate>Fri, 25 Apr 2025 10:13:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--flvY0KPW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Jetpack%2520compose%25201.8.0%2520%25E3%2581%258B%25E3%2582%2589%25E4%25BD%25BF%25E3%2581%2588%25E3%2582%258B%2520%253Cul%253E%2520%25E3%2582%25BF%25E3%2582%25B0%25E3%2582%2592%25E4%25BD%25BF%25E7%2594%25A8%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2586%25E3%2583%25BC%25E3%2581%25A1%25E3%2582%2583%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzljYTk3ODY3ZDMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ゆーちゃん</dc:creator></item><item><title><![CDATA[知識ゼロの未経験エンジニアがTodo アプリを作った話 ✨]]></title><description><![CDATA[こんにちは！Web 開発を始めたばかりの駆け出しエンジニア、k33です。
+コードの知識はまだ浅いですが、「使いやすくて見た目もかっこいい Todo リストを自分で作りたい！」と思い立ち、ChatGPT を相棒にプロトタイプを完成させました。
+⭐ はじめに
+Enter でタスク追加、Shift+Enter で改行
+タスクは ドラッグ＆ドロップ で並び替え（SortableJS）
+ダーク／ライトモード 切替 ＋ 背景画像 のアップロード
+タスクの 完了チェック・編集・削除
+GA4 （gtag.js） でアクセス計測
+完全クライアントサイド × localStorage で永続化
+Vercel...]]></description><link>https://zenn.dev/k33/articles/2665e47a34fd7f</link><guid isPermaLink="true">https://zenn.dev/k33/articles/2665e47a34fd7f</guid><pubDate>Thu, 24 Apr 2025 22:07:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BVpuAJRc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%259F%25A5%25E8%25AD%2598%25E3%2582%25BC%25E3%2583%25AD%25E3%2581%25AE%25E6%259C%25AA%25E7%25B5%258C%25E9%25A8%2593%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%25E3%2581%258CTodo%2520%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%25E8%25A9%25B1%2520%2520%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:k33%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS1A3YVBzanptenZ2SFlJWnlDZTdGbXFlODRjVDJuTFRSdHpjcEtRM2kxUF9hN1Bpc3I9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>k33</dc:creator></item><item><title><![CDATA[📅 今日の模写コーディング振り返り（2025/04/22）]]></title><description><![CDATA[✅ 今日の作業内容
+作業時間
+合計：8時間
+やったこと：
+・CSSレイアウト
+ｰ横並びになる構造の整理
+（レスポンシブ後除くFlex使用箇所一覧）
+-セレクタ構造の整理（セクションごとのコメント）
+ｰクラス命名と再利用ルールの整理
+・レスポンシブレイアウト
+ｰSP/PC違いの図解整理とスタイル切り替え一覧化
+・HTML/CSSレイアウト方法wordにまとめ・整理
+・余白変数の実装＆CSSスタイリング（SP版）
+・Contactフォームの修正
+🔍 学んだこと・気づき
+🧠 HTML / CSSのエラー対応・修正
+学んだこと
+・フォーム要素のクリック時に表示される太枠は outline: no...]]></description><link>https://zenn.dev/tamakimaru/articles/3ec4d8d916c530</link><guid isPermaLink="true">https://zenn.dev/tamakimaru/articles/3ec4d8d916c530</guid><pubDate>Tue, 22 Apr 2025 09:44:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Pyg7geir--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%2520%2520%25E4%25BB%258A%25E6%2597%25A5%25E3%2581%25AE%25E6%25A8%25A1%25E5%2586%2599%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2587%25E3%2582%25A3%25E3%2583%25B3%25E3%2582%25B0%25E6%258C%25AF%25E3%2582%258A%25E8%25BF%2594%25E3%2582%258A%25EF%25BC%25882025%252F04%252F22%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tamaki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSTNEMXNoUXBnVTY5V2R5X3hzX0FIZWlGdzdDU3F2VUhneTlxbkNGeGh5eEFHN1VGYz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tamaki</dc:creator></item><item><title><![CDATA[AsciiDocの良さを知る]]></title><description><![CDATA[
+ AsciiDocというのを聞いたことはあるか？
+AsciiDocとは、軽量マークアップ言語のひとつである。例を挙げるならMarkdownがそのうちのひとつである。Markdownは、シンプルで読み書きが容易であるため、多くの人に利用されている。そのため、AsciiDocの影は薄い。しかし、AsciiDocにはMarkdownにはない機能があり、それが非常に便利であるので紹介する。
+
+ AsciiDocとは
+繰り返しになるが、AsciiDocは軽量マークアップ言語のひとつであり、2002年に開発された。構想としては、「平文、つまり対人可読なファイルを通常の出版に用いられる形式に変換」と...]]></description><link>https://zenn.dev/toshi_hawk/articles/49c63198c64bd9</link><guid isPermaLink="true">https://zenn.dev/toshi_hawk/articles/49c63198c64bd9</guid><pubDate>Tue, 22 Apr 2025 05:24:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8p3q2H5J--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AsciiDoc%25E3%2581%25AE%25E8%2589%25AF%25E3%2581%2595%25E3%2582%2592%25E7%259F%25A5%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258F%25E3%2582%258A%25E3%2583%25BC%25E3%2582%2580%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M0ZThlMGQ4NzMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>くりーむ</dc:creator></item></channel></rss>
