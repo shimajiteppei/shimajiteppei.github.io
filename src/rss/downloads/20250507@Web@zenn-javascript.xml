@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「JavaScript」のフィード]]></title><description><![CDATA[Zennのトピック「JavaScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/javascript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/64acd76870.png</url><title>Zennの「JavaScript」のフィード</title><link>https://zenn.dev/topics/javascript</link></image><generator>zenn.dev</generator><lastBuildDate>Wed, 07 May 2025 01:38:09 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/javascript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[JavaScriptのCallBack関数]]></title><description><![CDATA[
+ callback function?
+コールバック関数は、他の関数に引数として渡される関数です。その関数内で実行（呼び出し）されます。
+
+ なぜ使う？
+
+
+非同期処理の管理
+非同期処理を行う際に、処理が完了した後に実行するコードを指定するためにコールバック関数を使用します。これにより、処理が完了するまで待つことなく、他の作業を進めることができます。
+
+
+動的なコード実行
+特定の条件に基づいて異なる処理を実行したいときに、コールバック関数を使うことで、動的に異なる関数や処理を実行できます。
+
+
+再利用性の向上
+コールバック関数を使用することで、同じ関数を何度も呼び出し、異なる挙動を定義...]]></description><link>https://zenn.dev/hyoni/articles/74d5fe2319657e</link><guid isPermaLink="true">https://zenn.dev/hyoni/articles/74d5fe2319657e</guid><pubDate>Wed, 07 May 2025 01:35:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--IyTHtTdB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:JavaScript%25E3%2581%25AECallBack%25E9%2596%25A2%25E6%2595%25B0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%2592%25E3%2583%25A7%25E3%2583%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0sxdWxlU2pkSzlwbDVxZnp3QVlUcFhCNk9xUEhkZGpKWjRUVlRPTl9lMHdYODhLdkg9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ヒョニ</dc:creator></item><item><title><![CDATA[async/await理解のためのクイズを考えてみた (後半)]]></title><description><![CDATA[
+ はじめに
+今私は、JSの非同期処理を100%理解したいと思い、以下の学習ロードマップを参考にして学習を進めています。
+JSの非同期処理を理解するために必要だった知識と学習ロードマップ
+
+今回は、その学習ロードマップの中の「Promise チェーンの構築のアンチパターンを学ぶ」という章で紹介されていた以下の動画に取り組んでいきます。
+JavaScriptのasync/await 理解してますか？ 説明できますか？ クイズに答えてもらって良いですか？
+今回は、動画の後半を進めていきます。
+
+ 問題
+以下の処理を、async/awaitを利用しないで、きちんと待つ関数を作りなさいという問題...]]></description><link>https://zenn.dev/akinko0915/articles/0b8bec12c6f8ab</link><guid isPermaLink="true">https://zenn.dev/akinko0915/articles/0b8bec12c6f8ab</guid><pubDate>Wed, 07 May 2025 00:20:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--C-ktBryj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:async%252Fawait%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%25AE%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%25E3%2582%25AF%25E3%2582%25A4%25E3%2582%25BA%25E3%2582%2592%25E8%2580%2583%25E3%2581%2588%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2520%2528%25E5%25BE%258C%25E5%258D%258A%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:akinko%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSy13cHdwSE5jYThHWWJKMHBCb0NRU3A3WFlZd3Q0Wjc5SFY3clVhWENIUmFpSTlXZz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>akinko</dc:creator></item><item><title><![CDATA[async/await理解のためのクイズを考えてみた (前半)]]></title><description><![CDATA[
+ はじめに
+今私は、JSの非同期処理を100%理解したいと思い、以下の学習ロードマップを参考にして学習を進めています。
+JSの非同期処理を理解するために必要だった知識と学習ロードマップ
+
+今回は、その学習ロードマップの中の「Promise チェーンの構築のアンチパターンを学ぶ」という章で紹介されていた以下の動画に取り組んでいきます。
+JavaScriptのasync/await 理解してますか？ 説明できますか？ クイズに答えてもらって良いですか？
+今回は、動画の前半くらいまでのアンチパターンを修正するというところ考えてみます。
+
+ アンチパターン
+以下のコードを正しい書き方にしろとい...]]></description><link>https://zenn.dev/akinko0915/articles/6885dce4c14f8b</link><guid isPermaLink="true">https://zenn.dev/akinko0915/articles/6885dce4c14f8b</guid><pubDate>Tue, 06 May 2025 14:29:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qNz715ma--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:async%252Fawait%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%25AE%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%25E3%2582%25AF%25E3%2582%25A4%25E3%2582%25BA%25E3%2582%2592%25E8%2580%2583%25E3%2581%2588%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2520%2528%25E5%2589%258D%25E5%258D%258A%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:akinko%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSy13cHdwSE5jYThHWWJKMHBCb0NRU3A3WFlZd3Q0Wjc5SFY3clVhWENIUmFpSTlXZz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>akinko</dc:creator></item><item><title><![CDATA[状態管理がめちゃくちゃ楽になるフレームワークStructiveの仕様]]></title><description><![CDATA[
+ Structiveとは？
+StructiveはシングルファイルベースのWebコンポーネントを採用したフレームワークです。より宣言的な記述と状態管理のためのボイラープレートや状態フックを極力なくした構造駆動型テンプレートが特徴になります。
+以下に仕様を見ていきますが、覚えることが
+
+状態とUIテンプレートで同じ構造パスを使う
+状態の更新は構造パスで行う
+getterで派生状態を作れる
+ループ内では暗黙のインデックス($1、$2...)を使う
+
+ぐらいしかなく、非常にシンプルであり学習しやすくなっています。しかし、モダンなフレームワークで求められる宣言的なUIとリアクティブ性をしっかりと...]]></description><link>https://zenn.dev/mogera/articles/685e2562d05f6a</link><guid isPermaLink="true">https://zenn.dev/mogera/articles/685e2562d05f6a</guid><pubDate>Tue, 06 May 2025 01:01:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--gPMRZj5u--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%258A%25B6%25E6%2585%258B%25E7%25AE%25A1%25E7%2590%2586%25E3%2581%258C%25E3%2582%2581%25E3%2581%25A1%25E3%2582%2583%25E3%2581%258F%25E3%2581%25A1%25E3%2582%2583%25E6%25A5%25BD%25E3%2581%25AB%25E3%2581%25AA%25E3%2582%258B%25E3%2583%2595%25E3%2583%25AC%25E3%2583%25BC%25E3%2583%25A0%25E3%2583%25AF%25E3%2583%25BC%25E3%2582%25AFStructive%25E3%2581%25AE%25E4%25BB%2595%25E6%25A7%2598%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mogera%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFUWEFKeU81R0xzNDk1VUxWUy1MTlZLdktsQWpMY3NuZnZueC00S1lYWUQ9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mogera</dc:creator></item><item><title><![CDATA[【Matter.js】SVGの凹面処理による複合ボディに単一のテクスチャを適応する]]></title><description><![CDATA[
+ 解決したい問題
+https://brm.io/matter-js/demo/#svg
+Matter.jsでは凹面（concave）を含むSVGをpoly-decomp.jsというライブラリで複数の凸面のみのパーツに分割し、それらのパーツをまとめて複合ボディとして生成する。
+
+で、複合ボディにテクスチャを適応するとこうなる。
+
+チューチュートレイン
+// Matter.jsのワールドに追加
+const body = Bodies.fromVertices(
+  x,
+  y,
+  vertices,
+  {
+    mass,
+    render: {
+      sprite: {...]]></description><link>https://zenn.dev/210neon/articles/d60da3b8cc911e</link><guid isPermaLink="true">https://zenn.dev/210neon/articles/d60da3b8cc911e</guid><pubDate>Mon, 05 May 2025 17:25:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lN9-pF3p--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Matter.js%25E3%2580%2591SVG%25E3%2581%25AE%25E5%2587%25B9%25E9%259D%25A2%25E5%2587%25A6%25E7%2590%2586%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258B%25E8%25A4%2587%25E5%2590%2588%25E3%2583%259C%25E3%2583%2587%25E3%2582%25A3%25E3%2581%25AB%25E5%258D%2598%25E4%25B8%2580%25E3%2581%25AE%25E3%2583%2586%25E3%2582%25AF%25E3%2582%25B9%25E3%2583%2581%25E3%2583%25A3%25E3%2582%2592%25E9%2581%25A9%25E5%25BF%259C%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:NettoNeon%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJlNGZhNmYxMjQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>NettoNeon</dc:creator></item><item><title><![CDATA[書かない勇気、書くやさしさ。]]></title><description><![CDATA[
+ はじめに
+JavaScript をそれなりに書いてきたあなたなら、
+「型なんてなくても動くし」と思ってしまう瞬間、ありませんか？
+TypeScript を触り始めると、やたら目にする : string や : number。
+ふと、「これ、全部書く必要あるの？」という問いが浮かびます。
+結論から言うと、推論できるところには、書かなくて大丈夫。
+でも、オブジェクトの構造は、少し話が違います。
+そんなときこそ、インターフェースの出番。
+この記事では、JavaScript の延長線で理解できる範囲のまま、
+「どこに型注釈を置くか」
+「インターフェースって、どう役立つのか」
+そんなことを、や...]]></description><link>https://zenn.dev/tcool/articles/236404cdc39d4b</link><guid isPermaLink="true">https://zenn.dev/tcool/articles/236404cdc39d4b</guid><pubDate>Mon, 05 May 2025 07:42:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--peOVTJi4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%259B%25B8%25E3%2581%258B%25E3%2581%25AA%25E3%2581%2584%25E5%258B%2587%25E6%25B0%2597%25E3%2580%2581%25E6%259B%25B8%25E3%2581%258F%25E3%2582%2584%25E3%2581%2595%25E3%2581%2597%25E3%2581%2595%25E3%2580%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:t-cool%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2liVmViMFdEdFlWcUtvVDRvYktNeDNTUGZvRTVFOW9rNUV0c21Dc2RvPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>t-cool</dc:creator></item><item><title><![CDATA[Jestの基本をざっくりと理解する]]></title><description><![CDATA[
+ はじめに
+PHPUnitの学習はしましたがJestも使う機会があったので、同じタイミングで学習しました。
+その学習の過程をまとめたのが本記事です。
+
+ Jestとは？
+Jestは、Facebook（現Meta）が開発した、JavaScript・TypeScript向けのテスティングフレームワークです。主に フロントエンドアプリケーション（Reactなど） の単体テストやスナップショットテストに使われます。
+
+ この記事で学べること
+Jestの基本的な書き方や、ユニットテストの方法が学べます。
+実際のテストの具体例を見てテストとはどういうものなのか？をざっくりと把握できます。
+
+ 動作...]]></description><link>https://zenn.dev/tsubasa0509/articles/9b68d5c821374c</link><guid isPermaLink="true">https://zenn.dev/tsubasa0509/articles/9b68d5c821374c</guid><pubDate>Mon, 05 May 2025 07:10:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--UcK1yIlz--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Jest%25E3%2581%25AE%25E5%259F%25BA%25E6%259C%25AC%25E3%2582%2592%25E3%2581%2596%25E3%2581%25A3%25E3%2581%258F%25E3%2582%258A%25E3%2581%25A8%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:TSUBASA_KK%2Cx_90%2Cy_121/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>TSUBASA_KK</dc:creator></item><item><title><![CDATA[TypeScript応用]]></title><description><![CDATA[
+ はじめに
+実務で TypeScript を使用していますが、なんとなく基礎の型の使い方しかできなかったので、応用的な使い方の型についてまとめます。
+
+ 対象読者
+TypeScript を実務で使い始めたが、なんとなくで使っている人
+
+ 前提知識・用語
+一旦読み飛ばして、わからなかったときにここに戻って読んでみてください。
+リテラル型：
+プリミティブ型の特定の値だけを代入可能にする型。
+const isTrue: true = true;
+const num: 123 = 123;
+const str: "foo" = "foo";
+型アノテーション：
+変数宣言のときに変数名の後ろに:...]]></description><link>https://zenn.dev/kisaragi71/articles/c5ec467428f295</link><guid isPermaLink="true">https://zenn.dev/kisaragi71/articles/c5ec467428f295</guid><pubDate>Mon, 05 May 2025 04:59:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xcs83Gls--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_76:TypeScript%25E5%25BF%259C%25E7%2594%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:eee%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE5ODY3YzM2MTcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>eee</dc:creator></item><item><title><![CDATA[配列に型は必要ですか]]></title><description><![CDATA[
+ はじめに
+JavaScript をそこそこ書いてきたあなたなら、配列の扱いには慣れているはず。でも、TypeScript を使い始めたとたん、「え、この配列、なんか型がついてる？」「readonly ってなに？」と混乱した経験、ありませんか？
+この記事では、TypeScript の配列型について、実際の開発で役立つトピックを 5 つ厳選して紹介します。どれも JavaScript の延長で理解できる内容ばかりですが、知っておくと「型の力」でコードのバグがグッと減ります。気軽に読み進めてみてください。
+
+
+ 1. タプル型で「順番」と「中身」を縛る
+JavaScript では配列の中身...]]></description><link>https://zenn.dev/tcool/articles/1a1065310a0cf4</link><guid isPermaLink="true">https://zenn.dev/tcool/articles/1a1065310a0cf4</guid><pubDate>Mon, 05 May 2025 04:01:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Jx7k9zLv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E9%2585%258D%25E5%2588%2597%25E3%2581%25AB%25E5%259E%258B%25E3%2581%25AF%25E5%25BF%2585%25E8%25A6%2581%25E3%2581%25A7%25E3%2581%2599%25E3%2581%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:t-cool%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2liVmViMFdEdFlWcUtvVDRvYktNeDNTUGZvRTVFOW9rNUV0c21Dc2RvPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>t-cool</dc:creator></item><item><title><![CDATA[非同期処理、実はここが誤解だった ：同期・非同期・Promiseの挙動を実験で理解するイベントループ]]></title><description><![CDATA[
+ はじめに
+非同期処理を理解するにあたって、処理される順番とその仕組みというのを知る必要があります。
+その仕組みについては以下の記事にまとめています。
+ここでの内容を前提に話したいと思います。
+ざっくりEvent Loopを理解する
+
+今回は、処理される順番を手を動かしながら、実験的に理解していこうと思います。
+
+ 同期コールバック関数
+同期コールバック関数とは、呼び出されたその場で実行されるコールバック関数です。
+JavaScript のメインスレッドで即時に実行され、イベントループの待機を必要としません。つまり、 Call Stack に入った瞬間に処理されます。
+
+ よく使われる...]]></description><link>https://zenn.dev/akinko0915/articles/b24412ddce4f6c</link><guid isPermaLink="true">https://zenn.dev/akinko0915/articles/b24412ddce4f6c</guid><pubDate>Mon, 05 May 2025 02:09:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--aVT-9mDk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E9%259D%259E%25E5%2590%258C%25E6%259C%259F%25E5%2587%25A6%25E7%2590%2586%25E3%2580%2581%25E5%25AE%259F%25E3%2581%25AF%25E3%2581%2593%25E3%2581%2593%25E3%2581%258C%25E8%25AA%25A4%25E8%25A7%25A3%25E3%2581%25A0%25E3%2581%25A3%25E3%2581%259F%2520%25EF%25BC%259A%25E5%2590%258C%25E6%259C%259F%25E3%2583%25BB%25E9%259D%259E%25E5%2590%258C%25E6%259C%259F%25E3%2583%25BBPromise%25E3%2581%25AE%25E6%258C%2599%25E5%258B%2595%25E3%2582%2592%25E5%25AE%259F%25E9%25A8%2593%25E3%2581%25A7%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2599%25E3%2582%258B%25E3%2582%25A4%25E3%2583%2599%25E3%2583%25B3%25E3%2583%2588%25E3%2583%25AB%25E3%2583%25BC%25E3%2583%2597%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:akinko%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSy13cHdwSE5jYThHWWJKMHBCb0NRU3A3WFlZd3Q0Wjc5SFY3clVhWENIUmFpSTlXZz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>akinko</dc:creator></item><item><title><![CDATA[JavaScriptのmap()とforEach()の違い：戻り値や使い分けを解説]]></title><description><![CDATA[
+ はじめに
+JavaScriptで配列をループ処理する方法として
+map() と forEach() があります。
+最初はこの2つの違いがよくわかりませんでした。
+「どちらも繰り返し処理できるなら、同じではないのか」と思ったこともあります。
+しかし、実際は 「目的」「戻り値」「使いどころ」 が違います。
+本記事では
+map() と forEach() の違いや使い分けについて解説します。
+
+ forEach()とは
+forEach() は 「配列の要素を1つずつ処理する」 ためのメソッドです。
+単に処理をするだけで、戻り値はありません（undefined）。
+例：
+const frui...]]></description><link>https://zenn.dev/fd2025/articles/0a551734ca6ffe</link><guid isPermaLink="true">https://zenn.dev/fd2025/articles/0a551734ca6ffe</guid><pubDate>Mon, 05 May 2025 01:43:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--EiIcfbcl--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25E3%2581%25AEmap%2528%2529%25E3%2581%25A8forEach%2528%2529%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%25EF%25BC%259A%25E6%2588%25BB%25E3%2582%258A%25E5%2580%25A4%25E3%2582%2584%25E4%25BD%25BF%25E3%2581%2584%25E5%2588%2586%25E3%2581%2591%25E3%2582%2592%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:fd2025%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2EzMzVlNTI5MmQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>fd2025</dc:creator></item><item><title><![CDATA[JavaScript:  オブジェクトとは]]></title><description><![CDATA[
+ 気になった理由
+前回、LeetCodeの問題を解いた時に、オブジェクトを作った方が簡単だったということに気づいた。
+{}使うのがオブジェクトだろうくらいのなんとなくの理解しかなかった。ここでちゃんと理解しておこう。
+
+ 前回の記事
+LeetCode #Roman to Integerやってみた
+私のコード
+ // 1. 文字を数値に変換
+    for (let i = 0; i &lt; s.length; i++) {
+        if (s[i] === 'I') {
+            num_array.push(1);
+        } else if (s[i...]]></description><link>https://zenn.dev/akinko0915/articles/81b3f94d1cc7f9</link><guid isPermaLink="true">https://zenn.dev/akinko0915/articles/81b3f94d1cc7f9</guid><pubDate>Sun, 04 May 2025 14:58:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qfGeqn0x--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%253A%2520%2520%25E3%2582%25AA%25E3%2583%2596%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E3%2581%25A8%25E3%2581%25AF%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:akinko%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSy13cHdwSE5jYThHWWJKMHBCb0NRU3A3WFlZd3Q0Wjc5SFY3clVhWENIUmFpSTlXZz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>akinko</dc:creator></item><item><title><![CDATA[js　メモ管理システムのコードを作成したので、参考用に公開しておきます。]]></title><description><![CDATA[相互リンク可能な文書管理システムを作成したので、ここに張り付けときます。
+間違っている所は、指摘していただけるとうれしいです。
+このシステムは、
+データとして、
+ * @property {number} id
+ * @property {string} title
+ * @property {string} content
+ * @property {number[]} relatedIds
+ * @property {number} createdAt - 作成日時 (UTCミリ秒タイムスタンプ)
+ * @property {number} updatedAt - 最終更新日時 (U...]]></description><link>https://zenn.dev/kemii/articles/64f168edb0af40</link><guid isPermaLink="true">https://zenn.dev/kemii/articles/64f168edb0af40</guid><pubDate>Sun, 04 May 2025 12:05:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qtxlMRXH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:js%25E3%2580%2580%25E3%2583%25A1%25E3%2583%25A2%25E7%25AE%25A1%25E7%2590%2586%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%25E3%2581%25AE%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2582%2592%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2597%25E3%2581%259F%25E3%2581%25AE%25E3%2581%25A7%25E3%2580%2581%25E5%258F%2582%25E8%2580%2583%25E7%2594%25A8%25E3%2581%25AB%25E5%2585%25AC%25E9%2596%258B%25E3%2581%2597%25E3%2581%25A6%25E3%2581%258A%25E3%2581%258D%25E3%2581%25BE%25E3%2581%2599%25E3%2580%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kemii%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E5ZGYyMjM5ZmIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kemii</dc:creator></item><item><title><![CDATA[ざっくりEvent Loopを理解する]]></title><description><![CDATA[
+ はじめに
+JavaScriptで非同期処理を理解するにあたって、必ず理解しておきたいのが、Event Loop。Event Loopの処理の中にはいろんなステップがあるようですが、その説明はとりあえず省いて、まずEvent Loopとはなんぞやというところを簡潔に理解したい。
+
+ 参照した記事
+
+イベントループとは一体なんですか？
+JavaScript Visualized - Event Loop, Web APIs, (Micro)task Queue
+
+
+ 全体図
+
+参照した記事の中の図の方がわかりやすいと思います笑
+
+ イベントループを説明する前に知っておくべき用語
+
+Cal...]]></description><link>https://zenn.dev/akinko0915/articles/d887cc9624fbd1</link><guid isPermaLink="true">https://zenn.dev/akinko0915/articles/d887cc9624fbd1</guid><pubDate>Sun, 04 May 2025 02:57:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--pZMJJEcP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%2596%25E3%2581%25A3%25E3%2581%258F%25E3%2582%258AEvent%2520Loop%25E3%2582%2592%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:akinko%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSy13cHdwSE5jYThHWWJKMHBCb0NRU3A3WFlZd3Q0Wjc5SFY3clVhWENIUmFpSTlXZz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>akinko</dc:creator></item><item><title><![CDATA[「今だけ除外したい」はコメントアウトじゃなくて `if (false)` にしよう]]></title><description><![CDATA[
+ 概要
+部分的に実行したくないコードは以下のように書いてみましょう！
+// JavaScript
+if (false) {
+  doSomething();
+}
+
+function someFunction() {
+  if (true) {
+    return;
+  }
+  doSomething();
+}
+
+// TypeScript
+if (false as boolean) {
+  doSomething();
+}
+
+function someFunction() {
+  if (true as boolean) {
+    return;
+  }
+  doSomething...]]></description><link>https://zenn.dev/kagan/articles/if-false-instead-of-comments</link><guid isPermaLink="true">https://zenn.dev/kagan/articles/if-false-instead-of-comments</guid><pubDate>Sat, 03 May 2025 18:12:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--geZl1xuo--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%258C%25E4%25BB%258A%25E3%2581%25A0%25E3%2581%2591%25E9%2599%25A4%25E5%25A4%2596%25E3%2581%2597%25E3%2581%259F%25E3%2581%2584%25E3%2580%258D%25E3%2581%25AF%25E3%2582%25B3%25E3%2583%25A1%25E3%2583%25B3%25E3%2583%2588%25E3%2582%25A2%25E3%2582%25A6%25E3%2583%2588%25E3%2581%2598%25E3%2582%2583%25E3%2581%25AA%25E3%2581%258F%25E3%2581%25A6%2520%2560if%2520%2528false%2529%2560%2520%25E3%2581%25AB%25E3%2581%2597%25E3%2582%2588%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258B%25E3%2581%258C%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pxRzhkLXVXenp5SlJteDF3NU9tcE9KZjdkNHFHUXo5ZFowNy0wNmc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>かがん</dc:creator></item><item><title><![CDATA[【JavaScript】超初心者向け！DOMと仮想DOMの違い]]></title><description><![CDATA[
+ 👶 超初心者向け！DOMと仮想DOMの違いをやさしく解説
+こんにちは、Greentomatoです！
+Reactを学び始めたけど、「仮想DOMって何？」「DOMって結局なに？」という方、多いと思います。
+今回は、初心者でも直感的にわかるように、たとえ話と実例で DOMと仮想DOM を比較していきます！
+
+
+ 🌳 DOMってなに？
+
+ 💡 ざっくり言うと…
+
+DOM = HTMLを「ツリー構造のデータ」にしたもの
+つまり、画面の設計図みたいなもの！
+
+
+ 例えば…
+&lt;div id="app"&gt;
+  &lt;p&gt;Hello, world!&lt;/p&gt;
+&lt;/d...]]></description><link>https://zenn.dev/tokogreen/articles/010efbc861c9db</link><guid isPermaLink="true">https://zenn.dev/tokogreen/articles/010efbc861c9db</guid><pubDate>Sat, 03 May 2025 15:42:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jQc2XpcF--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590JavaScript%25E3%2580%2591%25E8%25B6%2585%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E5%2590%2591%25E3%2581%2591%25EF%25BC%2581DOM%25E3%2581%25A8%25E4%25BB%25AE%25E6%2583%25B3DOM%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Greentomato%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FjNjYyMWI5NGMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Greentomato</dc:creator></item><item><title><![CDATA[【JavaScript】モダンJavaScriptと昔のJavaScriptの違いって理解している？]]></title><description><![CDATA[
+ 🧠 モダンJavaScriptと昔のJavaScriptの違いをしっかり理解しよう
+こんにちは、Greentomatoです。
+ReactやPythonで副業スキルを構築するチャレンジ中ですが、今回はその前提となる「モダンJavaScript」について整理します。
+
+
+ ✅ この記事でわかること
+
+モダンJavaScript（ES6以降）とは何か？
+旧来のJavaScript（ES5以前）と何が違うのか？
+なぜモダン構文が推奨されるのか？
+
+
+
+ 🕰 昔のJavaScript（ES5以前）の特徴
+昔のJavaScriptは、次のような特徴がありました：
+
+
+var しか使えずスコープ管...]]></description><link>https://zenn.dev/tokogreen/articles/defb67ee197e72</link><guid isPermaLink="true">https://zenn.dev/tokogreen/articles/defb67ee197e72</guid><pubDate>Sat, 03 May 2025 13:52:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7qnWkncM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590JavaScript%25E3%2580%2591%25E3%2583%25A2%25E3%2583%2580%25E3%2583%25B3JavaScript%25E3%2581%25A8%25E6%2598%2594%25E3%2581%25AEJavaScript%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%25E3%2581%25A3%25E3%2581%25A6%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2597%25E3%2581%25A6%25E3%2581%2584%25E3%2582%258B%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Greentomato%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FjNjYyMWI5NGMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Greentomato</dc:creator></item><item><title><![CDATA[JavaScriptでABC404(A-D)]]></title><description><![CDATA[https://atcoder.jp/contests/abc404
+
+ A - Not Found
+https://atcoder.jp/contests/abc404/tasks/abc404_a
+aからzまで文字列中に存在するか順番に検索して、なかったらそれ出力して終了。
+a-zの列挙は10〜35を36進数変換するのが楽だと思っている
+https://atcoder.jp/contests/abc404/submissions/65420255
+1分07秒 AC!
+
+ B - Grid Rotation
+https://atcoder.jp/contests/abc404/task...]]></description><link>https://zenn.dev/aya_koto/articles/6284414877717a</link><guid isPermaLink="true">https://zenn.dev/aya_koto/articles/6284414877717a</guid><pubDate>Sat, 03 May 2025 13:43:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--InvabV38--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:JavaScript%25E3%2581%25A7ABC404%2528A-D%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Ayasaka-Koto%2520%252F%2520Aya...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VkNTRlMDBjYTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Ayasaka-Koto / AyagawaP</dc:creator></item><item><title><![CDATA[【JavaScript】の「let」と「const」って何が違う？初心者卒業のための再整理メモ]]></title><description><![CDATA[
+ JavaScript基礎：「let」と「const」の本当の違いを理解する
+こんにちは、Greentomatoです。
+今日から「React × Python（＋Three.js）」で副業につながるスキルを3ヶ月で構築するチャレンジを始めました。
+初回のテーマは、Reactの土台となるJavaScriptの変数宣言について。
+
+
+ ✅ はじめに：ただの文法じゃなく「意図」を理解する
+JavaScriptには変数を宣言する方法が3つあります：
+
+var
+let
+const
+
+その中でも現代的なJavaScriptでは let と const を使いこなすことが重要です。
+本記事では「何が...]]></description><link>https://zenn.dev/tokogreen/articles/b01675b65713ea</link><guid isPermaLink="true">https://zenn.dev/tokogreen/articles/b01675b65713ea</guid><pubDate>Sat, 03 May 2025 13:38:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--gG7-JD-0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590JavaScript%25E3%2580%2591%25E3%2581%25AE%25E3%2580%258Clet%25E3%2580%258D%25E3%2581%25A8%25E3%2580%258Cconst%25E3%2580%258D%25E3%2581%25A3%25E3%2581%25A6%25E4%25BD%2595%25E3%2581%258C%25E9%2581%2595%25E3%2581%2586%25EF%25BC%259F%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E5%258D%2592%25E6%25A5%25AD%25E3%2581%25AE%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%25E5%2586%258D%25E6%2595%25B4%25E7%2590%2586%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Greentomato%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FjNjYyMWI5NGMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Greentomato</dc:creator></item><item><title><![CDATA[XRPLでのAMM機能実装ガイド②：AMMへの流動性追加 (AMMDeposit)]]></title><description><![CDATA[
+ はじめに
+前回の記事「XRPLでのAMM機能実装ガイド①：セットアップからプール作成まで」では、XRP Ledger (XRPL) 上でAMM（Automated Market Maker）プールを作成する基本的な流れを解説しました。今回はその続きとして、作成したAMMプールに流動性を追加するための AMMDeposit トランザクションについて詳しく見ていきます。
+流動性の提供はAMMの根幹をなす活動であり、これによりユーザーはスムーズなトークン交換が可能になります。流動性提供者（LP）は、その見返りとしてLPトークンを受け取り、取引手数料の一部を収益として得ることができます。
+こ...]]></description><link>https://zenn.dev/nabe3/articles/40dbb5232e8776</link><guid isPermaLink="true">https://zenn.dev/nabe3/articles/40dbb5232e8776</guid><pubDate>Sat, 03 May 2025 10:28:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--SP9Oy-9---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:XRPL%25E3%2581%25A7%25E3%2581%25AEAMM%25E6%25A9%259F%25E8%2583%25BD%25E5%25AE%259F%25E8%25A3%2585%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%25E2%2591%25A1%25EF%25BC%259AAMM%25E3%2581%25B8%25E3%2581%25AE%25E6%25B5%2581%25E5%258B%2595%25E6%2580%25A7%25E8%25BF%25BD%25E5%258A%25A0%2520%2528AMMDeposit%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Nabe3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2IzZjM2ZDU5MDAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Nabe3</dc:creator></item></channel></rss>
