@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Thu, 08 May 2025 03:03:05 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[StreamDiffusionとQuest3で視界をリアルタイム変換してみる]]></title><description><![CDATA[日本では発売されていないですが Ray-Ban Meta や今後発売される Meta Orion など、これから MRグラス + AIの組み合わせが盛り上がってきそうです。
+そんな世界がどういったものかを考えてみたくて 最近リリースされた Meta Quest 3　パススルーAPI + 画像生成AIの組み合わせで視界をリアルタイムで変換する、みたいなことをやってみました。
+
+ 概要
+MetaからQuest3のパススルーAPIがリリースされました。Quest3では画像生成AIの動作は厳しいので、Quest3のパススルー映像をPCに送信、PC上で画像生成、それをまたQuest3に返信して表示...]]></description><link>https://zenn.dev/hololab/articles/82033f37797831</link><guid isPermaLink="true">https://zenn.dev/hololab/articles/82033f37797831</guid><pubDate>Thu, 08 May 2025 01:44:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--KyrE0gPC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:StreamDiffusion%25E3%2581%25A8Quest3%25E3%2581%25A7%25E8%25A6%2596%25E7%2595%258C%25E3%2582%2592%25E3%2583%25AA%25E3%2582%25A2%25E3%2583%25AB%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25A0%25E5%25A4%2589%25E6%258F%259B%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%2597%25E3%2582%2589%25E3%2581%258D%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RkMzA4MzIwZTkuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%259B%25E3%2583%25AD%25E3%2583%25A9%25E3%2583%259C%25E3%2581%25AE%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS1AxQmxtUUJIcWZfTklKbjdra3NYTEtfdHY1MUxqdnZsTEJ1WE1zUzhnR2duQjZHSWs9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>しらき</dc:creator></item><item><title><![CDATA[俺と一緒にpytestをゼロから理解しないかい？]]></title><description><![CDATA[こんにちは。もんた。です。
+新しい試みとして、私がゼロベースから「完全に理解した」領域までのプロセスをそのまま記事にしたら「そのトピックを理解できる」かつ「記事いっぱい書いててなんかすごいやつ」という一石二鳥かませるんじゃね？これイノベーションじゃね？と思ったの始めてみます。
+
+ これはなに
+この記事は私がpytestの理解がゼロの状態から「完全に理解した」領域に至るまでのプロセスをまとめたものです。
+この記事を読んで私と一緒にpytestを理解していきましょう。
+
+ はじめに：pytestとは？
+
+はじめに：ソフトウェア品質の要 🛡️ - テストとPytest
+ソフトウェア開発において...]]></description><link>https://zenn.dev/monta107/articles/d24a31879b5a74</link><guid isPermaLink="true">https://zenn.dev/monta107/articles/d24a31879b5a74</guid><pubDate>Thu, 08 May 2025 00:24:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--b1PQmd30--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E4%25BF%25BA%25E3%2581%25A8%25E4%25B8%2580%25E7%25B7%2592%25E3%2581%25ABpytest%25E3%2582%2592%25E3%2582%25BC%25E3%2583%25AD%25E3%2581%258B%25E3%2582%2589%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2597%25E3%2581%25AA%25E3%2581%2584%25E3%2581%258B%25E3%2581%2584%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2582%25E3%2582%2593%25E3%2581%259F%25E3%2580%2582%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFlN2JiZTdjZGIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>もんた。</dc:creator></item><item><title><![CDATA[【技術書アウトプット】（書籍）テスト駆動開発のハンズオンをPythonで実装してみた]]></title><description><![CDATA[
+ はじめに
+こんにちは！もんたです。
+今回はKent Beck（著）の『テスト駆動開発』という技術書を読み、テスト駆動開発の基礎を学んだので、アウトプットとして記事にしました。
+
+本書では以下の内容を学ぶことができます！
+
+テスト駆動開発の基礎
+Pythonを使ったテスト駆動開発の方法
+
+「テスト駆動開発って何〜」っていう初心者向けの内容となっております。
+自分もゴリゴリの初心者エンジニアなので、一緒に学んでいけたらなと思います。
+!
+🐶「テスト駆動開発（TDD）の基礎が学べます」
+
+
+ 前提
+まずは前提を共有します。
+この記事は「テスト駆動開発」という本をベースとしています。
+テスト...]]></description><link>https://zenn.dev/monta107/articles/3b2faada905dd1</link><guid isPermaLink="true">https://zenn.dev/monta107/articles/3b2faada905dd1</guid><pubDate>Thu, 08 May 2025 00:19:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--WktJwF9i--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E6%258A%2580%25E8%25A1%2593%25E6%259B%25B8%25E3%2582%25A2%25E3%2582%25A6%25E3%2583%2588%25E3%2583%2597%25E3%2583%2583%25E3%2583%2588%25E3%2580%2591%25EF%25BC%2588%25E6%259B%25B8%25E7%25B1%258D%25EF%25BC%2589%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E9%25A7%2586%25E5%258B%2595%25E9%2596%258B%25E7%2599%25BA%25E3%2581%25AE%25E3%2583%258F%25E3%2583%25B3%25E3%2582%25BA%25E3%2582%25AA%25E3%2583%25B3%25E3%2582%2592Python%25E3%2581%25A7%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2582%25E3%2582%2593%25E3%2581%259F%25E3%2580%2582%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFlN2JiZTdjZGIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>もんた。</dc:creator></item><item><title><![CDATA[【個人開発】 Googleエンジニアに教えてもらいながらAIチャットアプリをデプロイした話]]></title><description><![CDATA[はじめまして！もんたです。
+最近、インフラに興味を持っておりまして、KubernetesとかTerraformとかを使って何かアプリケーションをデプロイして仕事でもバリバリ使えるようになりたいなと思ってるんです。
+そこで最近流行りのLangChainを使ってAIチャットアプリを作ってみて、LLMの勉強をしつつデプロイのアウトプットまでしちゃおうというプロジェクトを考え、実際にやってみました。
+!
+🐶「なんとなくインフラとLangChainの勉強を始める。」
+
+ちなみにですが、私には（自称）Googleエンジニアの友達がいるんですが、その人に教えてもらいながらなんとかデプロイまで漕ぎ着けま...]]></description><link>https://zenn.dev/monta107/articles/8f1d9991420342</link><guid isPermaLink="true">https://zenn.dev/monta107/articles/8f1d9991420342</guid><pubDate>Thu, 08 May 2025 00:15:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--VWLEe6i---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%2580%258B%25E4%25BA%25BA%25E9%2596%258B%25E7%2599%25BA%25E3%2580%2591%2520Google%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%25E3%2581%25AB%25E6%2595%2599%25E3%2581%2588%25E3%2581%25A6%25E3%2582%2582%25E3%2582%2589%25E3%2581%2584%25E3%2581%25AA%25E3%2581%258C%25E3%2582%2589AI%25E3%2583%2581%25E3%2583%25A3%25E3%2583%2583%25E3%2583%2588%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E3%2583%2587%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25A4%25E3%2581%2597%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2582%25E3%2582%2593%25E3%2581%259F%25E3%2580%2582%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFlN2JiZTdjZGIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>もんた。</dc:creator></item><item><title><![CDATA[WebSocketを完全に理解できるコードを書いたので解説します]]></title><description><![CDATA[
+ これはなに
+こんにちは。もんたです。
+最近WebSocketなるものについて勉強をしたので、そのアウトプットとして記事を書いてみました。
+WebSocketの勉強としてはローカル環境にNext.jsとPythonを使ってWebSocketを用いて通信を行うコードを書いて、WebSocketって何ができるのか、どうやって実装するかについて勉強しました。
+
+ なぜWebSocketの勉強をすることになったのか
+私、現在仕事で生成AIを用いたチャットシステムの開発をしておりまして、そのチャットシステムの通信でWebSocketを使う必要があるからになります。
+ChatGPTとかの生成AIを...]]></description><link>https://zenn.dev/monta107/articles/d24dd975e75484</link><guid isPermaLink="true">https://zenn.dev/monta107/articles/d24dd975e75484</guid><pubDate>Thu, 08 May 2025 00:12:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7aWmh6Be--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:WebSocket%25E3%2582%2592%25E5%25AE%258C%25E5%2585%25A8%25E3%2581%25AB%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258B%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2582%2592%25E6%259B%25B8%25E3%2581%2584%25E3%2581%259F%25E3%2581%25AE%25E3%2581%25A7%25E8%25A7%25A3%25E8%25AA%25AC%25E3%2581%2597%25E3%2581%25BE%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2582%25E3%2582%2593%25E3%2581%259F%25E3%2580%2582%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFlN2JiZTdjZGIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>もんた。</dc:creator></item><item><title><![CDATA[プログラミング初学者がゲーム効率化アプリ作ってみた話]]></title><description><![CDATA[プログラミング初心者でもイメージがわく開発日記
+思いついたキッカケ ―― ケンカをなくしたい！
+友達とオンラインゲーム（LoL）をしていたら、**「誰がどの役割をやる？」**で毎回モメる。
+そこで「ボタンひとつでランダム決定できたらラクじゃない？」とひらめく。
+目標：名前を入力 → 役職が自動で決まるシンプルなツール。
+使ったものは 3 つだけ
+目的 選んだもの ざっくり理由
+見た目を作る HTML “骨組み”を作る言語
+色や配置 CSS 文字サイズやボタン色を決める
+動きを付ける JavaScript ルーレットを回す／結果を表示
+ポイント
+わずか 1 ファイル（index.html）...]]></description><link>https://zenn.dev/k33/articles/27a38914997455</link><guid isPermaLink="true">https://zenn.dev/k33/articles/27a38914997455</guid><pubDate>Wed, 07 May 2025 21:04:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--F4KDmxQi--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%259F%25E3%2583%25B3%25E3%2582%25B0%25E5%2588%259D%25E5%25AD%25A6%25E8%2580%2585%25E3%2581%258C%25E3%2582%25B2%25E3%2583%25BC%25E3%2583%25A0%25E5%258A%25B9%25E7%258E%2587%25E5%258C%2596%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:k33%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS1A3YVBzanptenZ2SFlJWnlDZTdGbXFlODRjVDJuTFRSdHpjcEtRM2kxUF9hN1Bpc3I9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>k33</dc:creator></item><item><title><![CDATA[uvを使ったdbt Coreの導入手順]]></title><description><![CDATA[dbt公式の手順では、
+
+Docker
+pip
+source
+
+でのdbt Core導入手順が掲載されています。
+本記事ではuvを用いたdbt Core導入手順を紹介します。
+
+ Requirements
+
+macOS 14.5
+Apple M1+ CPU (not Intel Mac)
+zsh
+
+!
+Windowsは未検証なので適宜Windows環境に読み替えてください。
+
+
+ Setup
+!
+本手順ではTerminal.app, Visual Studio Codeの利用を前提としています。
+上記以外のターミナルエミュレーター(iTermなど)でも利用できますが動作保証はしません。
+...]]></description><link>https://zenn.dev/kazuya_araki/articles/20250508__dbt_core_environment</link><guid isPermaLink="true">https://zenn.dev/kazuya_araki/articles/20250508__dbt_core_environment</guid><pubDate>Wed, 07 May 2025 15:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--T3-riTHQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:uv%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%259Fdbt%2520Core%25E3%2581%25AE%25E5%25B0%258E%25E5%2585%25A5%25E6%2589%258B%25E9%25A0%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kazuya.araki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg0MzJkNzU1NzcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kazuya.araki</dc:creator></item><item><title><![CDATA[#93 AWS CodeGuru Reviewerを使ってコードレビューをしてみる]]></title><description><![CDATA[
+ はじめに
+ソフトウェア開発の中でコードレビューは、コードの品質を保つために欠かせないプロセスです。しかし、手動でのレビューは時間とリソースを大量に消費します。そこで登場するのが AWS CodeGuru Reviewer です。本記事では、CodeGuru Reviewerとは何か、そしてセットアップ手順を解説します。
+
+ AWS CodeGuru Reviewerとは？
+AWS CodeGuru Reviewerは、機械学習を利用してコードレビューを自動化するサービスです。CodeGuru Reviewerは、JavaやPythonのコードベースを分析し、コードのバグや非効率な部分...]]></description><link>https://zenn.dev/nxted_sapporo/articles/a34ff82d0a4f12</link><guid isPermaLink="true">https://zenn.dev/nxted_sapporo/articles/a34ff82d0a4f12</guid><pubDate>Wed, 07 May 2025 14:37:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--VC6IGe1B--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%252393%2520AWS%2520CodeGuru%2520Reviewer%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2583%25AC%25E3%2583%2593%25E3%2583%25A5%25E3%2583%25BC%25E3%2582%2592%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:NXTEDCo.%252C%2520Ltd.%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBmZjQzOTVhYzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>NXTEDCo., Ltd.</dc:creator></item><item><title><![CDATA[手を動かして学ぶ！MCPステップバイステップ実践ガイド for Beginners - Vol.1 MCPって一体どんなものなの？]]></title><description><![CDATA[
+ 1. はじめに：このシリーズで一緒に冒険しましょう！
+皆さん、こんにちは！そして、ようこそ「手を動かして学ぶ！MCPステップバイステップ実践ガイド for Beginners」へ！
+このブログシリーズは、「MCPってなんだか難しそう…」「プログラミングで何か作ってみたいけど、何から始めればいいの？」と感じている初心者の方に向けて、実際に手を動かしながら、簡単なコードでMCP（Model Context Protocol）の世界を体験していただくことを目的としています。
+「プロトコル」や「サーバー」といった言葉を聞くと、ちょっと身構えてしまうかもしれません。でも、安心してください！この...]]></description><link>https://zenn.dev/querypie/articles/6baab4ecd1b670</link><guid isPermaLink="true">https://zenn.dev/querypie/articles/6baab4ecd1b670</guid><pubDate>Wed, 07 May 2025 14:27:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qHHYSQGP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%2589%258B%25E3%2582%2592%25E5%258B%2595%25E3%2581%258B%25E3%2581%2597%25E3%2581%25A6%25E5%25AD%25A6%25E3%2581%25B6%25EF%25BC%2581MCP%25E3%2582%25B9%25E3%2583%2586%25E3%2583%2583%25E3%2583%2597%25E3%2583%2590%25E3%2582%25A4%25E3%2582%25B9%25E3%2583%2586%25E3%2583%2583%25E3%2583%2597%25E5%25AE%259F%25E8%25B7%25B5%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%2520for%2520Beginners%2520-%2520Vol.1%2520MCP%25E3%2581%25A3%25E3%2581%25A6%25E4%25B8%2580%25E4%25BD%2593...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:QueryPie%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk1MzUyMzdkYzguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>QueryPie</dc:creator></item><item><title><![CDATA[toio-mcpを作りました]]></title><description><![CDATA[
+ toio-mcpとは？
+toio-mcpはtoio 用の MCP サーバーです。
+toio.pyというPythonからtoio コアキューブを制御するためのライブラリと、MCP Python SDKを眺めているうちに、この両者をPPAP(通じる?)したくなり、AIアシスタントの助けを借りながら実装してみました。
+出来たものはこちら。
+https://github.com/comoc/toio-mcp
+
+ 動作の様子
+この動画は愛用しているVS Code上のRoo Clineにtoio-mcpを登録して使っているところです。ちょっと見えにくいですが自然言語でtoioを動かすことが出来て...]]></description><link>https://zenn.dev/comoc/articles/908991bac42762</link><guid isPermaLink="true">https://zenn.dev/comoc/articles/908991bac42762</guid><pubDate>Wed, 07 May 2025 10:58:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1L7Ob85n--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:toio-mcp%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258A%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:comoc%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pjRDFfOFF1SXE1dGdLNWwzdG1ObzFWbWxHT0hBdVlfZTB3M2NobGc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>comoc</dc:creator></item><item><title><![CDATA[【記事紹介】ベイジアンA/Bテストはpeekingの影響を受けないのか?]]></title><description><![CDATA[
+ はじめに
+ベイジアンABテストについて調べ物をしている時に、興味深い記事を見つけました。
+http://varianceexplained.org/r/bayesian-ab-testing/
+ベイジアンABテストについてインターネットで調べると、「頻度論的な仮説検定（NHST）よりも便利で優れている！」というポジティブな記事が多く散見されます。そして、ベイズ統計を用いるメリットとして「途中で結果を確認して意思決定を行ってもよい（peekingしてもよい）」という内容が挙げられていることがあります。
+これに対し、上の記事では「ベイジアンABであれば途中結果の覗き見(peeking)に...]]></description><link>https://zenn.dev/hanata/articles/c470f073d2046f</link><guid isPermaLink="true">https://zenn.dev/hanata/articles/c470f073d2046f</guid><pubDate>Wed, 07 May 2025 09:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dEiZEVAC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E8%25A8%2598%25E4%25BA%258B%25E7%25B4%25B9%25E4%25BB%258B%25E3%2580%2591%25E3%2583%2599%25E3%2582%25A4%25E3%2582%25B8%25E3%2582%25A2%25E3%2583%25B3A%252FB%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E3%2581%25AFpeeking%25E3%2581%25AE%25E5%25BD%25B1%25E9%259F%25BF%25E3%2582%2592%25E5%258F%2597%25E3%2581%2591%25E3%2581%25AA%25E3%2581%2584%25E3%2581%25AE%25E3%2581%258B%253F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hanata%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI4ZWRhZjgwZGIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hanata</dc:creator></item><item><title><![CDATA[タンパク質のTransformerモデルを作ってパッケージにしてみる]]></title><description><![CDATA[
+ 🐊はじめに🐊
+GWの空き時間に勢いで書いたものなので、温かい目で見てください。
+タンパク質の機械学習モデル、特にアミノ酸配列をTransformerベースで埋め込む手法は最近とてもよく見られると思います。一方で、タンパク質を対象にしたTransformerの実装を実例で学べる機会はあんまりないかなっと思います[1]。
+いろいろ探しているうちに、丁度いいサイトを見つけました
+https://open.substack.com/pub/ytian/p/building-transformer-models-for-proteins?utm_campaign=post&amp;utm_me...]]></description><link>https://zenn.dev/catalyst/articles/b3e747a3353bd5</link><guid isPermaLink="true">https://zenn.dev/catalyst/articles/b3e747a3353bd5</guid><pubDate>Wed, 07 May 2025 07:17:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--HPW_049l--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25BF%25E3%2583%25B3%25E3%2583%2591%25E3%2582%25AF%25E8%25B3%25AA%25E3%2581%25AETransformer%25E3%2583%25A2%25E3%2583%2587%25E3%2583%25AB%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2583%2591%25E3%2583%2583%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B8%25E3%2581%25AB%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%258F%25E3%2581%25AB%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E2ZGY0MmVjYTQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>わに</dc:creator></item><item><title><![CDATA[オブジェクト指向とは何か]]></title><description><![CDATA[
+ オブジェクト指向とは
+オブジェクト指向（Object Oriented Programming, OOP）とは、**「現実世界のモノや概念をプログラム上の"オブジェクト"として捉え、設計・実装する考え方」**である。
+これにより、再利用性・保守性・拡張性の高いソフトウェア開発が可能となる。
+
+
+ オブジェクト指向の3大要素
+
+
+
+要素
+概要
+例（Python）
+
+
+
+
+カプセル化
+データ（属性）と処理（メソッド）を1つの単位（クラス）にまとめる
+class Circle: ...
+
+
+継承
+既存クラスの機能を引き継ぎ、新たなクラスを作成できる
+class Dog(Animal): ....]]></description><link>https://zenn.dev/o_kai/articles/1cca090193d4fb</link><guid isPermaLink="true">https://zenn.dev/o_kai/articles/1cca090193d4fb</guid><pubDate>Wed, 07 May 2025 07:02:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--SMlj1KXj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25AA%25E3%2583%2596%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E6%258C%2587%25E5%2590%2591%25E3%2581%25A8%25E3%2581%25AF%25E4%25BD%2595%25E3%2581%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:o_kai%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2YzNTk5NDA1MjguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>o_kai</dc:creator></item><item><title><![CDATA[SnowflakeのワーカーノードがGraviton３に！]]></title><description><![CDATA[先日、Snowflakeから「Gen2 スタンダードウェアハウス」が発表されました（リリースノート 2025-05-05-gen2-standard-warehouses）。
+以前、こちらの記事と同様の手法で、この新しいGen2環境の内部を調査した。
+
+ 結論
+C7g.2xlargeが使われるようになった。CPU以外に大きな変更はないけれど、CPUレベルで列ストレージ向けに最適化がされたっぽい。
+Gen2 (2025年5月現在) の推定マシン構成 (1ノードあたり):
+
+
+
+パラメータ
+値
+
+
+
+
+インスタンスタイプ
+C7g.2xlarge
+
+
+ディストリビューション
+不明 (inux-...]]></description><link>https://zenn.dev/dataheroes/articles/009c93c5d667be</link><guid isPermaLink="true">https://zenn.dev/dataheroes/articles/009c93c5d667be</guid><pubDate>Wed, 07 May 2025 06:28:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dowywbYx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Snowflake%25E3%2581%25AE%25E3%2583%25AF%25E3%2583%25BC%25E3%2582%25AB%25E3%2583%25BC%25E3%2583%258E%25E3%2583%25BC%25E3%2583%2589%25E3%2581%258CGraviton%25EF%25BC%2593%25E3%2581%25AB%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Kentaro%2520Maeda%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzUxNDFkYTVlNTUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Snowflake%2520Data%2520Heroes%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FjYTJlMzdkM2QuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kentaro Maeda</dc:creator></item><item><title><![CDATA[ClaudeとExchange Onlineを連携する - MCPサーバー実装検証]]></title><description><![CDATA[
+ 1. はじめに
+近年のAI技術の発展により、大規模言語モデル（LLM）を活用したAIアシスタントが業務現場にも広がりつつあります。ChatGPTやClaudeといったAIアシスタントは、情報の要約や文書作成などでは既に多くの企業で活用されています。しかし、AIアシスタントをより実務で活用するには「企業システムとの連携」という壁が存在していました。
+本記事では、Anthropic社の標準プロトコルである「Model Context Protocol (MCP)」を活用して、AIアシスタントとMicrosoft 365のExchange Onlineを連携させる実装例を紹介します。MCP...]]></description><link>https://zenn.dev/jnch/articles/5035e5c1a458f3</link><guid isPermaLink="true">https://zenn.dev/jnch/articles/5035e5c1a458f3</guid><pubDate>Wed, 07 May 2025 05:54:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--EfIAzwk0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Claude%25E3%2581%25A8Exchange%2520Online%25E3%2582%2592%25E9%2580%25A3%25E6%2590%25BA%25E3%2581%2599%25E3%2582%258B%2520-%2520MCP%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E5%25AE%259F%25E8%25A3%2585%25E6%25A4%259C%25E8%25A8%25BC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Jnch%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSXNsY0hSNVhJeG9MWjg2Z3dRWmZlQ0JFNEFZV0ZSNGRqYUNmbGdkdnZRY3dyeHo5cz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Jnch</dc:creator></item><item><title><![CDATA[【Python】pycURL で HTTP/3 を利用するための環境構築]]></title><description><![CDATA[Chromebook で pycURL の HTTP/3 対応のための環境構築をしました。ChatGPT の力を借りた記事です。
+
+ 前提環境
+OS: Debian Bookworm (Chromebook、bookworm-backports を追加)
+Python: uv による管理（Python 3.13.3）
+curl: 手動ビルド版 (GnuTLS + HTTP/3 対応) を ~/.local にインストール
+Debian の nookworm-backports のリポジトリでは curl は GunTLS (libcurl3-gnutls) に依存しており、HTTP/3 ...]]></description><link>https://zenn.dev/masakielastic/articles/603954347fbf77</link><guid isPermaLink="true">https://zenn.dev/masakielastic/articles/603954347fbf77</guid><pubDate>Wed, 07 May 2025 03:14:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--MwKTmjgM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591pycURL%2520%25E3%2581%25A7%2520HTTP%252F3%2520%25E3%2582%2592%25E5%2588%25A9%25E7%2594%25A8%25E3%2581%2599%25E3%2582%258B%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Masaki%2520Kagaya%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc3ODAxZTNiZTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Masaki Kagaya</dc:creator></item><item><title><![CDATA[【初学者向け】自分自身の「あったら嬉しい」を生成 AI を用いて作成してみる]]></title><description><![CDATA[
+ はじめに
+クラウドエース 第一開発部の濱です。
+普段生活していて「これあったら便利なんだけど、ちょっと満足できないんだよなぁ」と思うこと、よくあると思います。
+
+有料アプリしかない
+欲しい機能がない
+自分専用にカスタマイズしたい
+
+こうなってしまった場合、妥協するか...ではなく、簡単な機能なら生成 AI を用いて自分で作ってしまえばいいと考えています。
+
+ 私の「あったら嬉しい」と思った瞬間
+先日 (2025年2月28日)、モンスターハンターワイルズが発売されました。私はゲームが大好きで、本作もよくプレイしています。
+現状の最終コンテンツまでクリアして、あとは最強の装備を作成するの...]]></description><link>https://zenn.dev/cloud_ace/articles/e8162951481ebf</link><guid isPermaLink="true">https://zenn.dev/cloud_ace/articles/e8162951481ebf</guid><pubDate>Wed, 07 May 2025 02:26:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Vb2tQ89o--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%2588%259D%25E5%25AD%25A6%25E8%2580%2585%25E5%2590%2591%25E3%2581%2591%25E3%2580%2591%25E8%2587%25AA%25E5%2588%2586%25E8%2587%25AA%25E8%25BA%25AB%25E3%2581%25AE%25E3%2580%258C%25E3%2581%2582%25E3%2581%25A3%25E3%2581%259F%25E3%2582%2589%25E5%25AC%2589%25E3%2581%2597%25E3%2581%2584%25E3%2580%258D%25E3%2582%2592%25E7%2594%259F%25E6%2588%2590%2520AI%2520%25E3%2582%2592%25E7%2594%25A8%25E3%2581%2584%25E3%2581%25A6%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25A6%25E3%2583%2589%25E3%2582%25A8%25E3%2583%25BC%25E3%2582%25B9%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE2OGMwYmM4MTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>クラウドエース株式会社</dc:creator></item><item><title><![CDATA[Pythonのdict.get()と[ ]の違いと使い分け]]></title><description><![CDATA[
+ はじめに
+Pythonで辞書（dict）から値を取り出すとき、
+次の2つの書き方があります。
+value = my_dict['key']
+value = my_dict.get('key')
+最初は、どちらも同じではないかと思うかもしれません。
+しかし実際は、エラーの起き方や挙動に違いがあります。
+本記事では、dict.get() と [] の違いと使い分けについて解説します。
+
+ []（キーアクセス）の特徴
+value = my_dict['key']
+✅ 指定したキーが辞書に存在すれば値を返します
+✅ 存在しないキーを指定すると、KeyError というエラーが発生します
+例：...]]></description><link>https://zenn.dev/fd2025/articles/f1173f1384787d</link><guid isPermaLink="true">https://zenn.dev/fd2025/articles/f1173f1384787d</guid><pubDate>Wed, 07 May 2025 02:24:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--kOnO5Na---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25AEdict.get%2528%2529%25E3%2581%25A8%255B%2520%255D%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%25E3%2581%25A8%25E4%25BD%25BF%25E3%2581%2584%25E5%2588%2586%25E3%2581%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:fd2025%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2EzMzVlNTI5MmQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>fd2025</dc:creator></item><item><title><![CDATA[お掃除サポートデモアプリを1日で作った話]]></title><description><![CDATA[
+ TL;DR
+
+写真をアップロードすると指示を出してくれるデモアプリを開発しました。
+フロントエンドの知見がなくともChatGPTやCursorを使うことで1日で設計・開発できました
+作業スペースをキレイにすることができました（コレが一番大事）
+
+
+ アプリの概要と目的
+いきなり恥ずかしいですが、僕は掃除がとにかく苦手です。
+部屋が汚くなっているという自覚はありますが、まず何をしたらいいのかよくわからない…という状況なのでいつもモチベーションが上がりません。
+指示さえしてもらえればできるのでは？と思ったので、指示出ししてもらうアプリを作りました。（刃を研ぐのが先とか言いますしね！）
+特...]]></description><link>https://zenn.dev/508shuto/articles/885407ce2053e4</link><guid isPermaLink="true">https://zenn.dev/508shuto/articles/885407ce2053e4</guid><pubDate>Tue, 06 May 2025 23:58:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--mRe5wgOD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%258A%25E6%258E%2583%25E9%2599%25A4%25E3%2582%25B5%25E3%2583%259D%25E3%2583%25BC%25E3%2583%2588%25E3%2583%2587%25E3%2583%25A2%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%25921%25E6%2597%25A5%25E3%2581%25A7%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:508shuto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFkOTkzYTFlMWYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>508shuto</dc:creator></item><item><title><![CDATA[よくわからずに並行リクエストを書いてた時の話]]></title><description><![CDATA[
+ 並行リクエストなのに遅いコード
+Pythonの非同期処理（async/await）を使うと、複数の処理を効率よく並行して実行できます。特にネットワークリクエストのような「待ち時間」が発生する処理では効果的です。
+非同期処理を触り始めた頃、あるAPIからデータを取得するために、こんなコードを書いたことがあります。
+import asyncio
+import httpx
+
+async def fetch_data(url: str) -&gt; str:
+    """指定されたURLから非同期にデータを取得する"""
+    with httpx.Client() as client:...]]></description><link>https://zenn.dev/higasun/articles/6bf5fa107ffa48</link><guid isPermaLink="true">https://zenn.dev/higasun/articles/6bf5fa107ffa48</guid><pubDate>Tue, 06 May 2025 23:30:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--gL4tF1-p--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%2588%25E3%2581%258F%25E3%2582%258F%25E3%2581%258B%25E3%2582%2589%25E3%2581%259A%25E3%2581%25AB%25E4%25B8%25A6%25E8%25A1%258C%25E3%2583%25AA%25E3%2582%25AF%25E3%2582%25A8%25E3%2582%25B9%25E3%2583%2588%25E3%2582%2592%25E6%259B%25B8%25E3%2581%2584%25E3%2581%25A6%25E3%2581%259F%25E6%2599%2582%25E3%2581%25AE%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:higasun%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y2MDllYzVhNTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>higasun</dc:creator></item></channel></rss>
