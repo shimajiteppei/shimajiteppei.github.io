@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Java」のフィード]]></title><description><![CDATA[Zennのトピック「Java」のRSSフィードです]]></description><link>https://zenn.dev/topics/java</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/5c47bb8423.png</url><title>Zennの「Java」のフィード</title><link>https://zenn.dev/topics/java</link></image><generator>zenn.dev</generator><lastBuildDate>Fri, 09 May 2025 01:44:06 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/java/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[javaメソッドメモ]]></title><description><![CDATA[
+ 1. Setの意味
+Set&lt;String&gt; seen = new HashSet&lt;&gt;();
+Set は Java のコレクションフレームワークの一つです。リスト（List）とは異なり、Set は順序を保持しないコレクションであり、重複を許さないという特徴があります。
+Set に同じ要素を何度追加しても、最初の一回しか追加されません。例えば、"A" を2回追加しても、セットの中には "A" は1回しか存在しません。
+import java.util.*;
+
+public class Main {
+    public static void main(Strin...]]></description><link>https://zenn.dev/takeda_kaho/articles/698d31a4f38331</link><guid isPermaLink="true">https://zenn.dev/takeda_kaho/articles/698d31a4f38331</guid><pubDate>Thu, 08 May 2025 11:02:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--XuiJNQuc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:java%25E3%2583%25A1%25E3%2582%25BD%25E3%2583%2583%25E3%2583%2589%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:takepanda%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAxZWRlZDIyZDYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takepanda</dc:creator></item><item><title><![CDATA[入門クラスパス]]></title><description><![CDATA[普段はIDEやビルドツール（MavenやGradle）が影でやってくれているので、あまり意識しないと思います。そもそもクラスパスというものの存在を知らない人も多いのではないでしょうか。
+
+ 環境
+
+JDK 21
+macOS 15
+
+
+ コマンドでコンパイル・実行してクラスパスを体験しよう
+カレントフォルダがcp-sampleだとします。この直下にcom/example/Main.javaがあるとします。
+
+コンパイル前のフォルダ構造
+cp-sample/  &lt;---- 今ここ
+└── com
+    └── example
+        └── Main.java
+
+
+Main....]]></description><link>https://zenn.dev/masatoshi_tada/articles/f3dafd605acd65</link><guid isPermaLink="true">https://zenn.dev/masatoshi_tada/articles/f3dafd605acd65</guid><pubDate>Thu, 08 May 2025 08:42:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--q4MKPIaZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2585%25A5%25E9%2596%2580%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25B9%25E3%2583%2591%25E3%2582%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Masatoshi%2520Tada%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FlNzY1NjBmYTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Masatoshi Tada</dc:creator></item><item><title><![CDATA[入門Service Loader: SLF4JはなぜLogbackのロガーを取得できるのか]]></title><description><![CDATA[
+ 環境
+
+JDK 21
+lobback-classic 1.5.18
+slf4j-api 2.0.17
+
+
+ SLF4Jの謎
+こんな感じでLogbackを追加します。
+
+pom.xml
+    &lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;ch.qos.logback&lt;/groupId&gt;
+            &lt;artifactId&gt;logback-classic&lt;/artifactId&gt;
+            &lt;version&gt;1...]]></description><link>https://zenn.dev/masatoshi_tada/articles/02ffee033865f2</link><guid isPermaLink="true">https://zenn.dev/masatoshi_tada/articles/02ffee033865f2</guid><pubDate>Thu, 08 May 2025 07:13:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vuUVjP4A--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2585%25A5%25E9%2596%2580Service%2520Loader%253A%2520SLF4J%25E3%2581%25AF%25E3%2581%25AA%25E3%2581%259CLogback%25E3%2581%25AE%25E3%2583%25AD%25E3%2582%25AC%25E3%2583%25BC%25E3%2582%2592%25E5%258F%2596%25E5%25BE%2597%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258B%25E3%2581%25AE%25E3%2581%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Masatoshi%2520Tada%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FlNzY1NjBmYTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Masatoshi Tada</dc:creator></item><item><title><![CDATA[[Java]ユニットテスト・モック]]></title><description><![CDATA[
+ はじめに
+ここでは以下についてまとめています。
+
+ユニットテストとは
+アサーション
+モック
+
+
+ ユニットテストとは
+個々のメソッドやクラス単位で正しい動作を保証するためのテスト手法です。
+特にバグを早期に発見しやすく、保守性や信頼性の高いコードを書くために不可欠になっています。
+
+ アサーション
+
+
+
+メソッド
+説明
+
+
+
+
+assertEquals(expected, actual)
+値が一致することをテスト
+
+
+assertTrue(condition)
+条件がtrueであることをテスト
+
+
+assertFalse(condition)
+条件がfalseであることをテスト
+
+
+...]]></description><link>https://zenn.dev/kasai/articles/e08f6f1e27f45f</link><guid isPermaLink="true">https://zenn.dev/kasai/articles/e08f6f1e27f45f</guid><pubDate>Wed, 07 May 2025 14:30:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wkqOjfc0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BJava%255D%25E3%2583%25A6%25E3%2583%258B%25E3%2583%2583%25E3%2583%2588%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BB%25E3%2583%25A2%25E3%2583%2583%25E3%2582%25AF%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kasai%2520Ukyo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVlYjgwMzQ4N2UuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kasai Ukyo</dc:creator></item><item><title><![CDATA[Javaに関する記事]]></title><description><![CDATA[レベル順には並んでいませんので、好きな記事からお読みください♪
+]]></description><link>https://zenn.dev/codek2/books/558aed0bb9c678</link><guid isPermaLink="true">https://zenn.dev/codek2/books/558aed0bb9c678</guid><pubDate>Wed, 07 May 2025 08:13:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--nf52fZAF--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci81NzZmMjcxYzk1LmpwZWc=%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>コード日和（びより）</dc:creator></item><item><title><![CDATA[macOS に Java をインストールして Nand to Tetris 環境を構築する]]></title><description><![CDATA[
+ macOS に Java をインストールして Nand to Tetris 環境を構築する
+「The Elements of Computing Systems」（通称 Nand to Tetris）は、コンピュータの基本原理をハンズオンで学べる素晴らしい教材です。このコースのプロジェクトを進めるには、提供されているシミュレータなどのツールを実行する必要があります。これらのツールは Java で作られているため、まずローカルマシンに Java 実行環境 (JRE) または開発キット (JDK) をインストールする必要があります。
+この記事では、macOS (本記事執筆時点の環境: V...]]></description><link>https://zenn.dev/jinchangz/articles/1486fb3874c28e</link><guid isPermaLink="true">https://zenn.dev/jinchangz/articles/1486fb3874c28e</guid><pubDate>Mon, 05 May 2025 23:40:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5wlVTe1H--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:macOS%2520%25E3%2581%25AB%2520Java%2520%25E3%2582%2592%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%2597%25E3%2581%25A6%2520Nand%2520to%2520Tetris%2520%25E7%2592%25B0%25E5%25A2%2583%25E3%2582%2592%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hoso8722%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFUWEFKd2dWZ2I1Yk1hcW82dS1BY1FyZnBRb0hCNUxlX2ZLeHhLRWVHOD1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hoso8722</dc:creator></item><item><title><![CDATA[Java と Kotlin の主な違い: 変数、関数、クラス]]></title><description><![CDATA[
+ 1. 変数宣言
+
+ Kotlin
+
+
+キーワード: val（読み取り専用、再代入不可）または var（再代入可能）を使用。
+
+構文: val/var 変数名: 型 = 初期値
+
+
+型推論: 初期値から型が明らかな場合は、型の指定 (: 型) を省略可能。
+
+Null安全性: 型名の末尾に ? を付けることで、nullを許容する型 (String?) と許容しない型 (String) を明確に区別。コンパイル時にチェックされる。
+
+val messageText: String = "こんにちは" // 型を明示 (読み取り専用)
+var userCount = 10         ...]]></description><link>https://zenn.dev/wyuma/articles/0855ae5a70e48e</link><guid isPermaLink="true">https://zenn.dev/wyuma/articles/0855ae5a70e48e</guid><pubDate>Mon, 05 May 2025 01:33:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--s5C-OJbj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java%2520%25E3%2581%25A8%2520Kotlin%2520%25E3%2581%25AE%25E4%25B8%25BB%25E3%2581%25AA%25E9%2581%2595%25E3%2581%2584%253A%2520%25E5%25A4%2589%25E6%2595%25B0%25E3%2580%2581%25E9%2596%25A2%25E6%2595%25B0%25E3%2580%2581%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:wYuma%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFkZjJmOWZjMzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>wYuma</dc:creator></item><item><title><![CDATA[Processingの環境をVSCodeで作れない件(続き)]]></title><description><![CDATA[先日ProcessingをVSCodeで実行したくてもできないという記事を書いた。
+後日ICT管理者に話を聞いたところ、どうやらProcessingのバージョンが4.0以降になってから
+インストーラからのインストールになり、Zipファイル解凍などの手順がなくなったこと。
+さらにProcesing-javaの項目がなくなったことでrun命令が出せなくなったことで
+VSCodeで実行できなくなったらしい。
+VSCodeで実行したいのは完全に自分の趣味、嗜好の問題なので、日常使いには困らないだろう。
+しかし少し悲しい。。。
+]]></description><link>https://zenn.dev/scotch/articles/17d1e287d178a1</link><guid isPermaLink="true">https://zenn.dev/scotch/articles/17d1e287d178a1</guid><pubDate>Sun, 04 May 2025 01:28:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--WFzU_u2c--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Processing%25E3%2581%25AE%25E7%2592%25B0%25E5%25A2%2583%25E3%2582%2592VSCode%25E3%2581%25A7%25E4%25BD%259C%25E3%2582%258C%25E3%2581%25AA%25E3%2581%2584%25E4%25BB%25B6%2528%25E7%25B6%259A%25E3%2581%258D%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Scotch%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg2NDgwZjAyODIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Scotch</dc:creator></item><item><title><![CDATA[UbuntuにasdfをインストールしてJava環境を構築する]]></title><description><![CDATA[
+ 使用するUbuntu
+# cat /etc/os-release
+PRETTY_NAME="Ubuntu 22.04.5 LTS"
+NAME="Ubuntu"
+VERSION_ID="22.04"
+VERSION="22.04.5 LTS (Jammy Jellyfish)"
+VERSION_CODENAME=jammy
+ID=ubuntu
+ID_LIKE=debian
+HOME_URL="https://www.ubuntu.com/"
+SUPPORT_URL="https://help.ubuntu.com/"
+BUG_REPORT_URL="https://bugs.launc...]]></description><link>https://zenn.dev/kentama/articles/63196f749d4c86</link><guid isPermaLink="true">https://zenn.dev/kentama/articles/63196f749d4c86</guid><pubDate>Sat, 03 May 2025 06:16:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--RDJ6yjGP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ubuntu%25E3%2581%25ABasdf%25E3%2582%2592%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%2597%25E3%2581%25A6Java%25E7%2592%25B0%25E5%25A2%2583%25E3%2582%2592%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kentama%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU0YzhlNTMwNjQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kentama</dc:creator></item><item><title><![CDATA[1ヶ月で「Javaで簡単なWebアプリを作れる」＋「Dockerで動かす」]]></title><description><![CDATA[
+ はじめに
+1か月後から新しいプロジェクトに参加することになりました！
+このプロジェクトは、COBOL/VBからJavaへの言語統一が進められており、私もJavaでの開発を担当する予定です。
+ただ…実は私、Javaは未経験なんです
+ということで、1ヶ月でJavaを学びながらWebアプリを作成し、Dockerで動かすという計画を立てました。
+
+ プロジェクトで必要になりそうなスキル
+まだ要件定義中のため確定ではありませんが、以下のようなスキルが求められると想定しています。
+
+ Java関連
+
+Java文法の基礎
+オブジェクト指向（OOP）の理解
+標準ライブラリ（コレクション、例外処理、ス...]]></description><link>https://zenn.dev/hiruma_devlog/articles/8df045e0bc8dc3</link><guid isPermaLink="true">https://zenn.dev/hiruma_devlog/articles/8df045e0bc8dc3</guid><pubDate>Sat, 03 May 2025 00:01:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--YXP6_7dC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:1%25E3%2583%25B6%25E6%259C%2588%25E3%2581%25A7%25E3%2580%258CJava%25E3%2581%25A7%25E7%25B0%25A1%25E5%258D%2598%25E3%2581%25AAWeb%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258C%25E3%2582%258B%25E3%2580%258D%25EF%25BC%258B%25E3%2580%258CDocker%25E3%2581%25A7%25E5%258B%2595%25E3%2581%258B%25E3%2581%2599%25E3%2580%258D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hiruma%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJiZDhjN2U2NjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hiruma</dc:creator></item><item><title><![CDATA[Re:ゼロから始めるSpring Boot実践#1 WebBlog開発#8 パスワード変更]]></title><description><![CDATA[
+ 機能一覧※再掲
+
+ユーザ
+1.1 新規登録
+1.2 ログイン
+1.3 ユーザ情報取得
+1.4 ユーザ情報更新
+1.5 アバター画像変更
+1.6 パスワード変更   ← 本記事の内容
+
+記事カテゴリ
+略
+記事管理
+略
+
+
+ API設計
+
+ 1.5.1 APIの基本情報
+
+リクエストパス：/updatePassword
+リクエスト方式：PATCH
+
+
+ 1.5.2 リクエストパラメータ
+
+リクエストパラメータ形式：json
+リクエストデータ例：
+
+{
+    "old_password":"123456",
+    "new_password":"123456",
+    "re_pas...]]></description><link>https://zenn.dev/willyang/articles/80c63097910acd</link><guid isPermaLink="true">https://zenn.dev/willyang/articles/80c63097910acd</guid><pubDate>Thu, 01 May 2025 12:05:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--q6LzIfHX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Re%253A%25E3%2582%25BC%25E3%2583%25AD%25E3%2581%258B%25E3%2582%2589%25E5%25A7%258B%25E3%2582%2581%25E3%2582%258BSpring%2520Boot%25E5%25AE%259F%25E8%25B7%25B5%25231%2520WebBlog%25E9%2596%258B%25E7%2599%25BA%25238%2520%25E3%2583%2591%25E3%2582%25B9%25E3%2583%25AF%25E3%2583%25BC%25E3%2583%2589%25E5%25A4%2589%25E6%259B%25B4%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Willyang%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQyNDZhMDk5NTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Willyang</dc:creator></item><item><title><![CDATA[Re:ゼロから始めるSpring Boot実践#1 WebBlog開発#7 アバター画像変更]]></title><description><![CDATA[
+ 機能一覧※再掲
+
+ユーザ
+1.1 新規登録
+1.2 ログイン
+1.3 ユーザ情報取得
+1.4 ユーザ情報更新
+1.5 アバター画像変更   ← 本記事の内容
+1.6 パスワード変更
+記事カテゴリ
+略
+記事管理
+略
+
+
+ API設計
+
+ 1.5.1 APIの基本情報
+
+リクエストパス：/user/updateAvatar
+リクエスト方式：PATCH
+インターフェース説明：このインターフェースは、ログイン中のユーザーのアバター（プロフィール画像）を更新するために使用される。
+
+
+ 1.5.2 リクエストパラメータ
+
+リクエストパラメータ形式：queryString
+リクエストデータ例：
+...]]></description><link>https://zenn.dev/willyang/articles/5a2235eba430b6</link><guid isPermaLink="true">https://zenn.dev/willyang/articles/5a2235eba430b6</guid><pubDate>Thu, 01 May 2025 11:42:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8tnK7WVt--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Re%253A%25E3%2582%25BC%25E3%2583%25AD%25E3%2581%258B%25E3%2582%2589%25E5%25A7%258B%25E3%2582%2581%25E3%2582%258BSpring%2520Boot%25E5%25AE%259F%25E8%25B7%25B5%25231%2520WebBlog%25E9%2596%258B%25E7%2599%25BA%25237%2520%25E3%2582%25A2%25E3%2583%2590%25E3%2582%25BF%25E3%2583%25BC%25E7%2594%25BB%25E5%2583%258F%25E5%25A4%2589%25E6%259B%25B4%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Willyang%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQyNDZhMDk5NTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Willyang</dc:creator></item><item><title><![CDATA[Re:ゼロから始めるSpring Boot実践#1 WebBlog開発#6 ユーザ情報更新]]></title><description><![CDATA[
+ 機能一覧※再掲
+
+ユーザ
+1.1 新規登録
+1.2 ログイン
+1.3 ユーザ情報取得
+1.4 ユーザ情報更新   ← 本記事の内容
+1.5 アバター画像変更
+1.6 パスワード変更
+記事カテゴリ
+略
+記事管理
+略
+
+
+ API設計
+1.4.1 基本情報
+
+リクエストパス：/user/update
+リクエスト方式：PUT
+インターフェース説明：このインターフェースは、ログイン中のユーザーの基本情報（アバターとパスワードを除く）を更新するために使用されます。
+
+1.4.2 リクエストパラメータ
+
+リクエストパラメータ形式：application/json
+リクエストデータ例：
+
+{
+  ...]]></description><link>https://zenn.dev/willyang/articles/83ed32dbfdb85b</link><guid isPermaLink="true">https://zenn.dev/willyang/articles/83ed32dbfdb85b</guid><pubDate>Thu, 01 May 2025 11:11:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--41X5NaYD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Re%253A%25E3%2582%25BC%25E3%2583%25AD%25E3%2581%258B%25E3%2582%2589%25E5%25A7%258B%25E3%2582%2581%25E3%2582%258BSpring%2520Boot%25E5%25AE%259F%25E8%25B7%25B5%25231%2520WebBlog%25E9%2596%258B%25E7%2599%25BA%25236%2520%25E3%2583%25A6%25E3%2583%25BC%25E3%2582%25B6%25E6%2583%2585%25E5%25A0%25B1%25E6%259B%25B4%25E6%2596%25B0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Willyang%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQyNDZhMDk5NTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Willyang</dc:creator></item><item><title><![CDATA[[Java]String.join()]]></title><description><![CDATA[
+ String.join()
+
+String.join()は、複数の文字列を特定の区切り文字で結合するための便利なメソッドで、Java8以降で使えます。
+
+ 使用例
+複数の文字列を結合します。
+String result = String.join(", ", "apple", "banana", "orange");
+System.out.println(result); // → apple, banana, orange
+リストの要素を結合します。
+List&lt;String&gt; items = List.of("HTML", "CSS", "JavaScript");
+S...]]></description><link>https://zenn.dev/kasai/articles/ddad8efd9b3360</link><guid isPermaLink="true">https://zenn.dev/kasai/articles/ddad8efd9b3360</guid><pubDate>Thu, 01 May 2025 09:03:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--VKweya4r--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_76:%255BJava%255DString.join%2528%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kasai%2520Ukyo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVlYjgwMzQ4N2UuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kasai Ukyo</dc:creator></item><item><title><![CDATA[[Java]StringBuilder]]></title><description><![CDATA[
+ StringBuilder
+
+JavaのStringは不変（immutable）です。
+つまり+で文字列を結合すると、新しい文字列オブジェクトが都度生成されるため、処理が重くなります。
+一方、StringBuilderは可変（mutable）な文字列を扱い、効率よく変更できるのが特徴です。
+
+
+
+特徴
+内容
+
+
+
+
+可変オブジェクト
+内容を書き換えられる（再生成しない）
+
+
+高速
+
++ 演算よりメモリ効率が良い
+
+
+スレッド非安全
+複数スレッドから同時に使うのは非推奨（その場合は StringBuffer）
+
+
+
+
+ 文字列を追加
+append(String str)を使用します。
+...]]></description><link>https://zenn.dev/kasai/articles/6633b1b27ac8e7</link><guid isPermaLink="true">https://zenn.dev/kasai/articles/6633b1b27ac8e7</guid><pubDate>Thu, 01 May 2025 08:50:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0WRPJu9Z--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_76:%255BJava%255DStringBuilder%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kasai%2520Ukyo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVlYjgwMzQ4N2UuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kasai Ukyo</dc:creator></item><item><title><![CDATA[[Javaの基礎]インターフェース]]></title><description><![CDATA[
+ はじめに
+ここでは以下についてまとめている。
+
+インターフェースとは
+
+defaultメソッド・staticメソッド
+関数型インターフェース
+
+
+ インターフェースとは
+クラスに実装を強制するメソッドの集合を定義するための仕組みです。
+メソッドの「名前・引数・戻り値」だけを定義し、実装はインターフェースを実装するクラス側に任せます。クラスが単一継承なのに対して多重実装が可能であり柔軟な設計ができます。
+インターフェースは以下のような場合に使用します。
+
+多態性の実現（ポリモーフィズム）
+設計の契約・API定義
+依存性の逆転（DI）に役立つ
+関数型インターフェースのベース（Runnab...]]></description><link>https://zenn.dev/kasai/articles/43d7b7057e0e43</link><guid isPermaLink="true">https://zenn.dev/kasai/articles/43d7b7057e0e43</guid><pubDate>Thu, 01 May 2025 07:42:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--TSHHTSI7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BJava%25E3%2581%25AE%25E5%259F%25BA%25E7%25A4%258E%255D%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%2595%25E3%2582%25A7%25E3%2583%25BC%25E3%2582%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kasai%2520Ukyo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVlYjgwMzQ4N2UuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kasai Ukyo</dc:creator></item><item><title><![CDATA[[Java]クラスの継承]]></title><description><![CDATA[
+ はじめに
+ここでは以下についてまとめています。
+
+クラスの継承
+オーバーライド
+super
+抽象クラス(abstract)
+
+
+ クラスの継承
+既存のクラス（親クラス/スーパークラス）を拡張して、新しいクラス（子クラス/サブクラス）を作る仕組みです。コードの再利用性や拡張性を高めることができます。
+すべてのクラスは、暗黙的にjava.lang.Objectクラスを継承しています。
+
+ 継承
+あるクラスが他のクラスを「継承（inherit）」することで、そのクラスのフィールドやメソッドを引き継ぐことができます。
+また、親クラスの機能を再利用・拡張・上書き（オーバーライド）できます。
+J...]]></description><link>https://zenn.dev/kasai/articles/9acd6beaa828f2</link><guid isPermaLink="true">https://zenn.dev/kasai/articles/9acd6beaa828f2</guid><pubDate>Thu, 01 May 2025 06:43:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--n_yhTFsR--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BJava%255D%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25B9%25E3%2581%25AE%25E7%25B6%2599%25E6%2589%25BF%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kasai%2520Ukyo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVlYjgwMzQ4N2UuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kasai Ukyo</dc:creator></item><item><title><![CDATA[[Javaの基礎]クラス]]></title><description><![CDATA[
+ はじめに
+ここでは以下についてまとめています。
+
+クラスの記述方法
+クラスの構成要素
+
+getterとsetter
+
+static
+
+
+ クラス
+クラスはオブジェクト指向プログラミングの中心的な概念です。
+以下はPersonというクラスです。
+public class Person {
+    // フィールド（属性）
+    String name;
+    int age;
+
+    // コンストラクタ（初期化）
+    public Person(String name, int age) {
+        this.name = name;
+        this.ag...]]></description><link>https://zenn.dev/kasai/articles/48e906fcb16d69</link><guid isPermaLink="true">https://zenn.dev/kasai/articles/48e906fcb16d69</guid><pubDate>Thu, 01 May 2025 05:51:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ztahpNyv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BJava%25E3%2581%25AE%25E5%259F%25BA%25E7%25A4%258E%255D%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kasai%2520Ukyo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVlYjgwMzQ4N2UuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kasai Ukyo</dc:creator></item><item><title><![CDATA[[Javaの基礎]メソッド参照]]></title><description><![CDATA[
+ メソッド参照とは
+ラムダ式をより簡潔に書くための構文です。Java8から導入され、関数型インターフェースと一緒に使われます。
+メソッド参照を使用するには、対象が関数型インターフェースであることが条件です。
+ラムダ式に比べるとコードが短くなり読みやすくなりますが、柔軟性が低く条件付き処理や複雑な処理には向いていません。
+// ラムダ式
+list.forEach(s -&gt; System.out.println(s));
+
+// メソッド参照
+list.forEach(System.out::println);
+
+ メソッド参照の構文パターン
+メソッド参照は以下の4つのパターンがあり...]]></description><link>https://zenn.dev/kasai/articles/0bb9fc71cd89d2</link><guid isPermaLink="true">https://zenn.dev/kasai/articles/0bb9fc71cd89d2</guid><pubDate>Thu, 01 May 2025 03:07:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--V0tW19w9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BJava%25E3%2581%25AE%25E5%259F%25BA%25E7%25A4%258E%255D%25E3%2583%25A1%25E3%2582%25BD%25E3%2583%2583%25E3%2583%2589%25E5%258F%2582%25E7%2585%25A7%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kasai%2520Ukyo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVlYjgwMzQ4N2UuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kasai Ukyo</dc:creator></item><item><title><![CDATA[[Javaの基礎]Mapについて]]></title><description><![CDATA[
+ はじめに
+ここでは以下についてまとめています。
+
+Map
+Mapで使用されるメソッド
+
+
+ Mapとは
+JavaのMapは、キー（key）と値（value）のペアを格納するデータ構造です。キーは一意である必要があり、それに対応する値を保持します。JavaではMapはインターフェースであり、主に以下のような実装があります。ここではHashMapを使用します。
+
+
+
+クラス名
+説明
+
+
+
+
+HashMap
+高速なアクセス・要素の順序なし・nullキー/値を許容
+
+
+LinkedHashMap
+挿入順を保持
+
+
+TreeMap
+キーの自然順または指定Comparatorによる順序付け
+
+
+...]]></description><link>https://zenn.dev/kasai/articles/e4251ad602906d</link><guid isPermaLink="true">https://zenn.dev/kasai/articles/e4251ad602906d</guid><pubDate>Thu, 01 May 2025 01:37:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GXtgE4AR--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BJava%25E3%2581%25AE%25E5%259F%25BA%25E7%25A4%258E%255DMap%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kasai%2520Ukyo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVlYjgwMzQ4N2UuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kasai Ukyo</dc:creator></item></channel></rss>

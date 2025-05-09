@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Docker」のフィード]]></title><description><![CDATA[Zennのトピック「Docker」のRSSフィードです]]></description><link>https://zenn.dev/topics/docker</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/75b80a5922.png</url><title>Zennの「Docker」のフィード</title><link>https://zenn.dev/topics/docker</link></image><generator>zenn.dev</generator><lastBuildDate>Fri, 09 May 2025 12:04:28 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/docker/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[ECS で awslogs のデフォルト設定で blocking / non-blocking モードが選択できるようになった]]></title><description><![CDATA[
+ はじめに
+2025/4/17、Amazon ECS のアカウント設定でログドライバーモードのデフォルトを指定できるアップデートがありました。
+これまではデフォルトで blocking モードでしたが、そのデフォルトを変更できるアップデートとなります。
+https://aws.amazon.com/about-aws/whats-new/2025/04/amazon-ecs-set-default-log-driver-blocking-mode/
+この記事では、blocking と non-blocking モードの違いから入り、どこで実装されているのかみてみます。
+
+ blocki...]]></description><link>https://zenn.dev/k_yoshi/articles/14ab4af6f55b2a</link><guid isPermaLink="true">https://zenn.dev/k_yoshi/articles/14ab4af6f55b2a</guid><pubDate>Fri, 09 May 2025 07:18:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wKG7RuzH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ECS%2520%25E3%2581%25A7%2520awslogs%2520%25E3%2581%25AE%25E3%2583%2587%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25AB%25E3%2583%2588%25E8%25A8%25AD%25E5%25AE%259A%25E3%2581%25A7%2520blocking%2520%252F%2520non-blocking%2520%25E3%2583%25A2%25E3%2583%25BC%25E3%2583%2589%25E3%2581%258C%25E9%2581%25B8%25E6%258A%259E%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258B...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yk68-hanpen%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE3MDhlZjM4MjkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yk68-hanpen</dc:creator></item><item><title><![CDATA[Next.jsとRailsで日記アプリを作って学んだこと]]></title><description><![CDATA[
+ はじめに
+大相撲5月場所、楽しみですね
+はじめまして、株式会社ウェイブでエンジニアをしているほさざえもんです
+普段業務で使っているNext.jsとRailsで0からプロダクトを作った経験がなかったので日記アプリを個人開発しました
+
+実装したコードはこちら 👉 GitHub
+開発期間は4週間くらいでした
+個人開発を通して学んだことやハマったところについて振り返りたいと思います！
+
+ きっかけ
+自分は今まで競プロやCTFの経験はあるものの、Web開発に関しては道筋のあるハンズオンに取り組む程度で0から考えて何かを作った経験がありませんでした
+エンジニアたるもの、何かしらの0から開発する経...]]></description><link>https://zenn.dev/wwwave/articles/24169c6c13469d</link><guid isPermaLink="true">https://zenn.dev/wwwave/articles/24169c6c13469d</guid><pubDate>Fri, 09 May 2025 06:48:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--NIPuxXpE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Next.js%25E3%2581%25A8Rails%25E3%2581%25A7%25E6%2597%25A5%25E8%25A8%2598%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E5%25AD%25A6%25E3%2582%2593%25E3%2581%25A0%25E3%2581%2593%25E3%2581%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%25BB%25E3%2581%2595%25E3%2581%2596%25E3%2581%2588%25E3%2582%2582%25E3%2582%2593%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA0OTU3ZTVkYWIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:wwwave%2527s%2520Techblog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSUhCTHp4QmRlMDZBRENNSGVIQlg2OU5MRGNHQlVlbFl3UzJGbHpOWnRWcFMwckZXMD1zOTYtYw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ほさざえもん</dc:creator></item><item><title><![CDATA[Terraform+Docker+Kubernetesの三角関係]]></title><description><![CDATA[同期にこの３つの関係についてうまく説明ができず、とっても悔しかったので記事としてまとめてみました。
+
+ Terraformとは
+IaC（Infrastructure as Code）ツールの一つで、インフラをコードで定義して、自動で作成や変更ができるツールです。
+AWSなどのサービスはコンソール画面を操作してサーバ、ネットワークなどの設定をすることができますが、Terraformを使用することで、それらの操作をすべてコード化することができます。
+インフラをこういった状態にしたい、と記入すると、Terraformがその通りに構築してくれるのです。
+インフラをコード化することで、変更履歴を追...]]></description><link>https://zenn.dev/arraya/articles/751177cbc91ef4</link><guid isPermaLink="true">https://zenn.dev/arraya/articles/751177cbc91ef4</guid><pubDate>Thu, 08 May 2025 17:33:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--J0Arexqy--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Terraform%252BDocker%252BKubernetes%25E3%2581%25AE%25E4%25B8%2589%25E8%25A7%2592%25E9%2596%25A2%25E4%25BF%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:arraya%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JlYzY3OGQwMTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>arraya</dc:creator></item><item><title><![CDATA[SynologyのContainer ManagerからDocker Compose使ってたらユーザにフォルダアクセスの権限渡すの忘れてた]]></title><description><![CDATA[出落ち。記事名の通り。
+Container Managerはコンテナマネージャである。まあこれはDocker Composeを叩けるWeb UIと思っておけばよい。
+Dockerを実行する際、コンテナ内部のユーザは細かく設定したい。そこで
+
+コントロールパネルの「ユーザとグループ」でユーザの設定を行う
+そのコンテナ用のユーザを作成する
+作成したユーザに、コンテナにマウントするディレクトリにアクセスする権限を設定する
+作成したユーザのUID, GIDを取得する
+compose.ymlで設定
+4. userにUID,GIDを設定
+5. volumeで対象ディレクトリをマウント
+
+今回、途中で...]]></description><link>https://zenn.dev/hidaruma/articles/ac73d458c871dc</link><guid isPermaLink="true">https://zenn.dev/hidaruma/articles/ac73d458c871dc</guid><pubDate>Thu, 08 May 2025 16:23:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--e1AN12Dc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Synology%25E3%2581%25AEContainer%2520Manager%25E3%2581%258B%25E3%2582%2589Docker%2520Compose%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%259F%25E3%2582%2589%25E3%2583%25A6%25E3%2583%25BC%25E3%2582%25B6%25E3%2581%25AB%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25AB%25E3%2583%2580%25E3%2582%25A2%25E3%2582%25AF...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hidaruma%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNiYjc2MzRmNTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hidaruma</dc:creator></item><item><title><![CDATA[Terraform で ECR + Lambda + API Gateway 構築し、FastAPI をサーバーレスにデプロイ]]></title><description><![CDATA[
+ はじめに
+本記事は前回の記事「Terraform で Docker イメージを Lambda にデプロイする」 の続編です。
+↓前回の記事
+https://zenn.dev/fuuji/articles/547388be4ca9ce#ローカルで関数をテストする
+今回は Terraform で API Gatewayを追加し、Lambda + API Gateway構成でFastAPIを公開するところまでをハンズオン形式で紹介します。
+
+ 構成イメージ
+
+
+API Gateway
+
+インターネットからのリクエストを受け取り、Lambdaにリクエストをプロキシ
+
+
+ECR・Lambda
+...]]></description><link>https://zenn.dev/fuuji/articles/f712b546218815</link><guid isPermaLink="true">https://zenn.dev/fuuji/articles/f712b546218815</guid><pubDate>Thu, 08 May 2025 12:23:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ksUwCY-7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Terraform%2520%25E3%2581%25A7%2520ECR%2520%252B%2520Lambda%2520%252B%2520API%2520Gateway%2520%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2597%25E3%2580%2581FastAPI%2520%25E3%2582%2592%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2583%25AC...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Fuji%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRhYTQ2NzZjNDAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Fuji</dc:creator></item><item><title><![CDATA[Dockerとkubernetesをlocalで一緒に使ってみた]]></title><description><![CDATA[
+ はじめに
+Dockerとkubernetesをlocalで一緒に使ってみました。
+dockerのメーリングリストから以下のメールが来たのがきっかけです。
+dockerの連携はdocker-composeでしか実施したことがなく、kubernetesを使ったことがないのでやってみます。
+
+Docker と Kubernetes の違いが問題なのではなく、それらがどう連携すれば最も効果的かが重要です。Docker と Kubernetes は連携して、コンテナ化された開発・デプロイ・管理のための完全なエコシステムを構築します。
+開発者が Docker を使ってアプリケーションをセキュアな...]]></description><link>https://zenn.dev/kiitosu/articles/9d4d783ba44f37</link><guid isPermaLink="true">https://zenn.dev/kiitosu/articles/9d4d783ba44f37</guid><pubDate>Thu, 08 May 2025 10:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GXUGMakP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%25E3%2581%25A8kubernetes%25E3%2582%2592local%25E3%2581%25A7%25E4%25B8%2580%25E7%25B7%2592%25E3%2581%25AB%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kiitosu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFUWEFKdzJBNDNaZzRhRzk5b0NEMm5aMFY1RDJISlVUVGtySVB4UWhtaXU9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kiitosu</dc:creator></item><item><title><![CDATA[WSL2にDocker環境を構築する - ダイジェスト版]]></title><description><![CDATA[備忘録として必要最低限の情報だけまとめます。
+
+ 実行するコマンド
+sudo apt update &amp;&amp; sudo apt upgrade -y
+sudo apt install curl apt-transport-https -y
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+echo "deb [arch=amd64 signed-by=/usr/share/k...]]></description><link>https://zenn.dev/neko3cs/articles/setup-docker-in-wsl2</link><guid isPermaLink="true">https://zenn.dev/neko3cs/articles/setup-docker-in-wsl2</guid><pubDate>Thu, 08 May 2025 02:27:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--KMIhmRqw--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:WSL2%25E3%2581%25ABDocker%25E7%2592%25B0%25E5%25A2%2583%25E3%2582%2592%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2599%25E3%2582%258B%2520-%2520%25E3%2583%2580%25E3%2582%25A4%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25B9%25E3%2583%2588%25E7%2589%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:neko3cs%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQzNzM0NmNjNmMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>neko3cs</dc:creator></item><item><title><![CDATA[DeepWiki-Openを試してみる]]></title><description><![CDATA[DeepWikiのオープン版を試してみました。プライベートリポジトリでもDeepWikiしたかったのがモチベーションです。リポジトリは以下です。
+https://github.com/AsyncFuncAI/deepwiki-open
+ほとんどREADME通りですが、少しだけ注意点があったり、Dockerだとかなり手軽に動かせたので、一応メモしておきます。
+
+ DeepWiki-Openセットアップ
+環境はmacOSで試しました。DockerなのでLinuxでもWindows（WSL2）でも同じ要領で動くかと思います。まずはDockerをいれます。以下記事参照してください。
+https:...]]></description><link>https://zenn.dev/karaage0703/articles/8ae9dd499d31ad</link><guid isPermaLink="true">https://zenn.dev/karaage0703/articles/8ae9dd499d31ad</guid><pubDate>Wed, 07 May 2025 16:45:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wpbRtSO2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:DeepWiki-Open%25E3%2582%2592%25E8%25A9%25A6%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258B%25E3%2582%2589%25E3%2581%2582%25E3%2581%2592%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2hDZEtvakJfZXdDTjNCV1Z0WXIteFNIZ0hmRjlXZmt3QzI5c0Y0aXYwPXMyNTAtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>からあげ</dc:creator></item><item><title><![CDATA[Docker + Python で現在時刻を返すMCPサーバを作って学ぶ]]></title><description><![CDATA[
+ はじめに
+以下の記事に書かれていたAIの使い方がいいなと思ったので自分も真似しようとやっているのですが、現在時刻や日付をこちらの意図に沿わせるのがどうも難しいなと感じました。
+
+そこで、現在時刻を返却するMCPサーバを立て、Cursorを当該MCPサーバと連携させることで日時の精度が上がるのではないかと考えました。
+時刻に関するMCPサーバは記事執筆時点でも無数に存在していますが、MCPに関する学習も踏まえ、今回は自分でMCPサーバを実装し、それをCursorと連携させてみます。
+
+ この記事で達成したいこと
+
+DockerコンテナとしてMCPサーバの実行環境を構築する
+現在時刻を返...]]></description><link>https://zenn.dev/kyukei/articles/4c653ff1493d43</link><guid isPermaLink="true">https://zenn.dev/kyukei/articles/4c653ff1493d43</guid><pubDate>Tue, 06 May 2025 12:00:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--SmFgnSJs--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%2520%252B%2520Python%2520%25E3%2581%25A7%25E7%258F%25BE%25E5%259C%25A8%25E6%2599%2582%25E5%2588%25BB%25E3%2582%2592%25E8%25BF%2594%25E3%2581%2599MCP%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E5%25AD%25A6%25E3%2581%25B6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258D%25E3%2582%2585%25E3%2581%2586%25E3%2581%2591%25E3%2581%2584%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSnhPUS1jZExKcHJObjJOR3E2VVgzb2N5d2ZiZV9jMVNZcVVJYkNaVmNORkE9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>きゅうけい</dc:creator></item><item><title><![CDATA[SinatraをDocker上で動かす方法]]></title><description><![CDATA[
+ これは何?
+SinatraをDocker上で動かす方法を記載します。
+
+ 準備するファイル
+
+Dockerfile
+FROM ruby:3.4-slim
+
+RUN apt-get update -qq &amp;&amp; apt-get install -y build-essential
+
+COPY app.rb .
+
+RUN gem install rackup
+RUN gem install puma
+RUN gem install sinatra
+
+EXPOSE 4567
+
+CMD ["ruby", "app.rb"]
+
+以下は、Sinatra関連のファイルになります。
+
+...]]></description><link>https://zenn.dev/1s22s1/articles/eefa0b1fc18c04</link><guid isPermaLink="true">https://zenn.dev/1s22s1/articles/eefa0b1fc18c04</guid><pubDate>Tue, 06 May 2025 10:35:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hJwTRt2e--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Sinatra%25E3%2582%2592Docker%25E4%25B8%258A%25E3%2581%25A7%25E5%258B%2595%25E3%2581%258B%25E3%2581%2599%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%258E%259F%25E5%25AD%2590%25E8%25BB%258C%25E9%2581%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2IxZTYxYjc3N2IuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>原子軌道</dc:creator></item><item><title><![CDATA[Docker + Embulk でDBからCSVを抽出するだけの最小構成ガイド]]></title><description><![CDATA[
+ はじめに
+システムリプレイスに伴うデータ移行対応で、Embulk を使って DB からデータを抽出する必要があり、Docker 上に実行環境を構築しました。本記事では、その構築手順と設定内容を備忘としてまとめています。
+対象範囲は、Docker + Embulk 環境で「DB から CSV を抽出すること」までで移行処理は含みません。
+なお、今回構築したサンプル環境は以下の GitHub リポジトリに公開していますので、ご自由にご利用ください。
+https://github.com/masuoka-hcompany/docker-embulk-example
+
+ 動作環境
+
+Wind...]]></description><link>https://zenn.dev/hcompany/articles/20250506_embulk_docker_setup_memo</link><guid isPermaLink="true">https://zenn.dev/hcompany/articles/20250506_embulk_docker_setup_memo</guid><pubDate>Tue, 06 May 2025 09:35:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lB_qqkC_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%2520%252B%2520Embulk%2520%25E3%2581%25A7DB%25E3%2581%258B%25E3%2582%2589CSV%25E3%2582%2592%25E6%258A%25BD%25E5%2587%25BA%25E3%2581%2599%25E3%2582%258B%25E3%2581%25A0%25E3%2581%2591%25E3%2581%25AE%25E6%259C%2580%25E5%25B0%258F%25E6%25A7%258B%25E6%2588%2590%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:kmasuoka%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhlNDc2OGQyNDkuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:H%2526Company%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY1OTUxNDI4MDEuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kmasuoka</dc:creator></item><item><title><![CDATA[Terraform で DockerイメージをLambdaへデプロイ]]></title><description><![CDATA[
+ はじめに
+今回は、Terraformを使用してDockerイメージをLambdaへデプロイする手順を紹介していこうと思います。
+本記事では、TerraformからECRへDockerイメージをプッシュし、それをLambdaで実行するシンプルな構成をまとめています。
+
+ Terraformとは
+まず簡単にTerraformについてまとめていきます。
+一言で言えば、IaCの一種でクラウドリソースをコード化することができるツールです。
+Terraform は、AWS、Azure、GCP など、1000 以上のプロバイダーに対応しており、異なるプロバイダーのリソースをHCL（HashiCor...]]></description><link>https://zenn.dev/fuuji/articles/547388be4ca9ce</link><guid isPermaLink="true">https://zenn.dev/fuuji/articles/547388be4ca9ce</guid><pubDate>Tue, 06 May 2025 05:19:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--DC64VV0A--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Terraform%2520%25E3%2581%25A7%2520Docker%25E3%2582%25A4%25E3%2583%25A1%25E3%2583%25BC%25E3%2582%25B8%25E3%2582%2592Lambda%25E3%2581%25B8%25E3%2583%2587%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25A4%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Fuji%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRhYTQ2NzZjNDAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Fuji</dc:creator></item><item><title><![CDATA[docker-compose.ymlについて一緒に学ぼう]]></title><description><![CDATA[Kyonと申します。
+現在、ECサイトを管理している会社で業務しています。使用言語はPHP・Laravelです。　
+経歴を話すと、元々は高専の建築学科を卒業後、インフラ系企業で2D設計や構造計算・現場監督、その後、自動車企業で走行テスト・2D・3D設計に従事しており、今までITはほぼ未経験です。
+ずっとvibe cording（AIプログラミング）できてしまい、中身をしっかりと読み込む機会がありませんでした。そのため、CursorでECサイトの構築を行いながら、構成ファイルの分析も行っています。
+この記事はGPTも使用していますが、しっかりと内容は確認し、構築ファイルを7割以上は理解でき...]]></description><link>https://zenn.dev/kyon_programing/articles/d445e24eba5254</link><guid isPermaLink="true">https://zenn.dev/kyon_programing/articles/d445e24eba5254</guid><pubDate>Tue, 06 May 2025 00:55:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--d7thNw6t--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:docker-compose.yml%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E4%25B8%2580%25E7%25B7%2592%25E3%2581%25AB%25E5%25AD%25A6%25E3%2581%25BC%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kyon%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS2EwUUhrT2ZwTEY2T2FGcklLckwtQ241QzM2LWZVSFl1UkVXNlFncmVZeEM0UW5RPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kyon</dc:creator></item><item><title><![CDATA[公式推奨のDockerfileの記述法とWebアプリ作成時のDockerfile作成例]]></title><description><![CDATA[
+ はじめに
+https://zenn.dev/wan0ri/articles/ee3a7dff1b368e
+こちらの記事でDockerコマンドを使って起動・停止・状態確認・削除などをのコマンドを掲載しているが、いちいちコマンドを入力してDockerを扱うのは非常に面倒になってくる。
+そこで、Dockerfileを使用してDockerの取り扱いを楽にしていく。
+
+
+ 概要
+
+ そもそもDockerfileとは？
+
+特定の命令セットを記述することで、コンテナのビルド手順を定義するファイル
+主に開発者が使用し、プロジェクトの依存関係や必要な設定を一元管理する
+これにより、チーム全体で一貫した...]]></description><link>https://zenn.dev/wan0ri/articles/dd7056371fac57</link><guid isPermaLink="true">https://zenn.dev/wan0ri/articles/dd7056371fac57</guid><pubDate>Tue, 06 May 2025 00:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---OWxiiq2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2585%25AC%25E5%25BC%258F%25E6%258E%25A8%25E5%25A5%25A8%25E3%2581%25AEDockerfile%25E3%2581%25AE%25E8%25A8%2598%25E8%25BF%25B0%25E6%25B3%2595%25E3%2581%25A8Web%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E4%25BD%259C%25E6%2588%2590%25E6%2599%2582%25E3%2581%25AEDockerfile%25E4%25BD%259C%25E6%2588%2590%25E4%25BE%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:wan0ri%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2IzM2M3Y2U5OTUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>wan0ri</dc:creator></item><item><title><![CDATA[n8nをローカル環境(Docker)でサクッと動かしてみよう！]]></title><description><![CDATA[
+ はじめに
+最近、ノーコードで様々なサービス連携や自動化を実現できるツールとして「n8n」が注目を集めています。
+クラウド版も便利ですが、「まずは手元で試してみたい」って思います。
+今回は、Dockerを使ってn8nをサクッとローカル環境で動かす手順をご紹介します。Dockerさえあれば、驚くほど簡単にn8nの世界を体験できます！
+
+ n8nの準備：Dockerでサクッと起動！
+n8nをローカルで動かす方法はいくつかありますが、今回は一番手軽なDockerを使った方法で進めていきましょう。もし、まだDockerをインストールしていない場合は、Docker公式サイトなどを参考に、お使いの...]]></description><link>https://zenn.dev/digilaweb/articles/d2918deeeb5c25</link><guid isPermaLink="true">https://zenn.dev/digilaweb/articles/d2918deeeb5c25</guid><pubDate>Mon, 05 May 2025 12:22:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lmYEI7Y2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:n8n%25E3%2582%2592%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25AB%25E3%2583%25AB%25E7%2592%25B0%25E5%25A2%2583%2528Docker%2529%25E3%2581%25A7%25E3%2582%25B5%25E3%2582%25AF%25E3%2583%2583%25E3%2581%25A8%25E5%258B%2595%25E3%2581%258B%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%2588%25E3%2581%2586%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%2587%25E3%2582%25B8%25E3%2583%25A9%25E3%2582%25A6%25E3%2582%25A7%25E3%2583%2596%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2gwWm1yTGRZSTU0Q1NVQmNLZGlpXzVtelFTUDNlaVRoY3p6eE02PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>デジラウェブ</dc:creator></item><item><title><![CDATA[Dockerコマンドまとめ]]></title><description><![CDATA[
+ はじめに
+
+学習したDockerコマンドのまとめを下記に記載する。
+Dockerに関する詳細は記載しない。（あくまでコマンドのまとめだけ実施）
+docker-composeは記事の内容が煩雑になると思うので別途まとめ実施
+
+
+ 基本操作
+docker 対象 操作
+
+
+ 起動
+
+ コンテナを作成し、起動
+docker run --name &lt;コンテナ名&gt; -p &lt;ホスト側のポート&gt;:&lt;コンテナ側のポート&gt; -d &lt;イメージ&gt;
+下記はdocker-nginxという名前のコンテナを作成し、バックグラウンドで実行しているコマンド。
+ホストの80...]]></description><link>https://zenn.dev/wan0ri/articles/ee3a7dff1b368e</link><guid isPermaLink="true">https://zenn.dev/wan0ri/articles/ee3a7dff1b368e</guid><pubDate>Mon, 05 May 2025 08:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0WjFfq3w--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:wan0ri%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2IzM2M3Y2U5OTUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>wan0ri</dc:creator></item><item><title><![CDATA[Artifact Registryを単体で色々試す]]></title><description><![CDATA[
+ 概要
+今回は普段何気なく使っている Artifact Registry を単体で色々試してみようという試みです。gcloud CLIとTerraformを使って試してみた記事になります。
+https://cloud.google.com/artifact-registry/docs/overview?hl=ja
+
+ サポートされている形式
+
+Dockerだけかと思っていましたが、色々とサポートしているんですね…
+
+ サービスの有効と無効を切り替える
+https://cloud.google.com/artifact-registry/docs/enable-service?hl=ja...]]></description><link>https://zenn.dev/slowhand/articles/b9f2314f74a850</link><guid isPermaLink="true">https://zenn.dev/slowhand/articles/b9f2314f74a850</guid><pubDate>Sun, 04 May 2025 21:24:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--l35Fk0ba--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Artifact%2520Registry%25E3%2582%2592%25E5%258D%2598%25E4%25BD%2593%25E3%2581%25A7%25E8%2589%25B2%25E3%2580%2585%25E8%25A9%25A6%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:slowhand%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzEwY2YzMGUzMDAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>slowhand</dc:creator></item><item><title><![CDATA[LWA(Lambda Web Adapter)を使うためには]]></title><description><![CDATA[
+ LWA(Lambda Web Adapter)
+
+ LWAのモチベーション
+自作したサーバーをコンテナ化してlambdaにデプロイするためにはコードベースにおいて、最上位の処理をlambda handler化しないといけないという認識があり、若干不都合に感じていました。
+https://docs.aws.amazon.com/ja_jp/lambda/latest/dg/golang-handler.html#golang-example-code
+ローカルで当該サーバーを実行するときと、クラウド環境で当該サーバーを実行するときに処理の中身を分岐させないといけず、また、コードベースが...]]></description><link>https://zenn.dev/enomo/articles/a2a2caac58c5d6</link><guid isPermaLink="true">https://zenn.dev/enomo/articles/a2a2caac58c5d6</guid><pubDate>Sun, 04 May 2025 18:18:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--sPawNg7s--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:LWA%2528Lambda%2520Web%2520Adapter%2529%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AB%25E3%2581%25AF%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:eno%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y3ZjQ4ZTFiMWQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>eno</dc:creator></item><item><title><![CDATA[Dockerの基本からメリット、活用シーンまでを解説します 🐳]]></title><description><![CDATA[
+ はじめに
+Dockerという技術について、
+「名前は聞くけれど、具体的に何ができて、どんなメリットがあるのだろう？」
+と感じている方もいるかもしれません。
+この記事では、Dockerの基本的な概念、主な利点、構成要素、そしてどのような開発で役立つのかを、順を追って解説していきます。
+Dockerの全体像を掴み、なぜ多くの現場で活用されているのか、その理由を探っていきましょう。🚀
+
+ Dockerとは？ 🤔
+
+Dockerは、コンテナという技術を利用して、アプリケーションとその実行に必要な環境（ライブラリ、設定ファイル、ミドルウェアなど）を一つのパッケージにまとめ、どのような環境でも同...]]></description><link>https://zenn.dev/pataro/articles/04dae702e9b073</link><guid isPermaLink="true">https://zenn.dev/pataro/articles/04dae702e9b073</guid><pubDate>Sun, 04 May 2025 14:12:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--kAGGq5cN--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%25E3%2581%25AE%25E5%259F%25BA%25E6%259C%25AC%25E3%2581%258B%25E3%2582%2589%25E3%2583%25A1%25E3%2583%25AA%25E3%2583%2583%25E3%2583%2588%25E3%2580%2581%25E6%25B4%25BB%25E7%2594%25A8%25E3%2582%25B7%25E3%2583%25BC%25E3%2583%25B3%25E3%2581%25BE%25E3%2581%25A7%25E3%2582%2592%25E8%25A7%25A3%25E8%25AA%25AC%25E3%2581%2597%25E3%2581%25BE%25E3%2581%2599%2520%2520%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:pataro%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q0MDkwNGY2MmMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>pataro</dc:creator></item><item><title><![CDATA[Docker × Nuxt3 × Flask 開発環境構築手順（WSL2対応）]]></title><description><![CDATA[
+ DockerでNuxt3とFlaskの開発環境構築を行い疎通確認まで
+
+ 環境
+
+OS: Windows 11 + WSL2 (Ubuntu 22.04)
+Docker Desktop for Windows
+VSCode
+
+
+ 導入手順
+
+プロジェクトのルートディレクトリの作成
+
+mkdir nuxt-project
+
+ルートディレクトリに移動してその他の必要なディレクトリを作成
+
+cd nuxt-project
+mkdir frontend
+mkdir backend
+
+frontendディレクトリに移動してDockerfileを作成します
+
+cd frontend
+touch ...]]></description><link>https://zenn.dev/tspk/articles/109ae479438a38</link><guid isPermaLink="true">https://zenn.dev/tspk/articles/109ae479438a38</guid><pubDate>Sun, 04 May 2025 07:06:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2PF3hSC3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%2520%25C3%2597%2520Nuxt3%2520%25C3%2597%2520Flask%2520%25E9%2596%258B%25E7%2599%25BA%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%25E6%2589%258B%25E9%25A0%2586%25EF%25BC%2588WSL2%25E5%25AF%25BE%25E5%25BF%259C%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25B7%25E3%2581%25A3%25E3%2581%2591%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSzRaUk5ISjNvUTRveHRBeGZBcVh5Y2RlVV9HbUxldnlQVUFiNUhMcU4ybUVZVVpsM2E9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ぷっけ</dc:creator></item></channel></rss>
