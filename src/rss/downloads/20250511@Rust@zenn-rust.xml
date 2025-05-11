@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Rust」のフィード]]></title><description><![CDATA[Zennのトピック「Rust」のRSSフィードです]]></description><link>https://zenn.dev/topics/rust</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ba09661577.png</url><title>Zennの「Rust」のフィード</title><link>https://zenn.dev/topics/rust</link></image><generator>zenn.dev</generator><lastBuildDate>Sun, 11 May 2025 06:37:44 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/rust/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Rust & Wasm でミニ迷路ゲームを作る]]></title><description><![CDATA[
+ はじめに
+「RustとWebAssemblyによるゲーム開発」を参考に作成した「3D迷路ゲーム」を紹介させて頂きます。3D迷路ゲームは、「マイコンBASICマガジン」を読んでいる人であれば、一度は、チャレンジしたテーマだと思います。今回、"Rust &amp; Wasm"を実使い、実際に作ってみた感想についても記載させて頂きます。
+
+ 対象のバージョン
+
+Rust 2024 Edition
+rustc 1.83.0
+cargo 1.80.1
+rustup 1.27.1
+pnpm 9.12.3
+
+
+ Rust&amp;Wasm ミニ迷路ゲーム
+Play in browser
+
+ゴースト...]]></description><link>https://zenn.dev/yurioka/articles/0d98bb4bd0578e</link><guid isPermaLink="true">https://zenn.dev/yurioka/articles/0d98bb4bd0578e</guid><pubDate>Sun, 11 May 2025 03:52:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--XN-yqeEv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%2520%2526%2520Wasm%2520%25E3%2581%25A7%25E3%2583%259F%25E3%2583%258B%25E8%25BF%25B7%25E8%25B7%25AF%25E3%2582%25B2%25E3%2583%25BC%25E3%2583%25A0%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:myurioka%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY3YTE2NGMzMzkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>myurioka</dc:creator></item><item><title><![CDATA[Rust 初心者のための非同期入門：上司と部下にたとえてわかるFutureとランタイム]]></title><description><![CDATA[非同期処理は難しそう…でもちょっとした視点の切り替えで、実はぐっとわかりやすくなるんです。 本記事では、VOICEVOX に登場するキャラクター「ずんだもん」「めたん」「つむぎ」の対話形式で、非同期処理・ランタイム・async fn in traits など Rust の重要トピックを親しみやすく解説します。
+Tokio はどんな上司？ async-std との違いは？ そして FFI の外注先とは？
+あなたのRustライフの視界が変わるかもしれません。
+この記事は ChatGPT で生成しました。
+
+ずんだもん「非同期処理ってなに？ポーリングってめんどうそう…」
+めたん「それ、上司と部...]]></description><link>https://zenn.dev/masakielastic/articles/4ec5f5671f2e01</link><guid isPermaLink="true">https://zenn.dev/masakielastic/articles/4ec5f5671f2e01</guid><pubDate>Sat, 10 May 2025 03:45:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--H6JIIDr6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%2520%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E3%2581%25AE%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%25E9%259D%259E%25E5%2590%258C%25E6%259C%259F%25E5%2585%25A5%25E9%2596%2580%25EF%25BC%259A%25E4%25B8%258A%25E5%258F%25B8%25E3%2581%25A8%25E9%2583%25A8%25E4%25B8%258B%25E3%2581%25AB%25E3%2581%259F%25E3%2581%25A8%25E3%2581%2588%25E3%2581%25A6%25E3%2582%258F%25E3%2581%258B%25E3%2582%258BFuture%25E3%2581%25A8%25E3%2583%25A9%25E3%2583%25B3%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25A0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Masaki%2520Kagaya%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc3ODAxZTNiZTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Masaki Kagaya</dc:creator></item><item><title><![CDATA[FastAPI で作った HTTP API を Rust に置き換えるとしたら？]]></title><description><![CDATA[登場人物：
+
+
+ずんだもん（質問役）：Rust 初心者。FastAPI には慣れている。
+
+めたん（解説役）：Webフレームワークと非同期処理に詳しい技術オタク。
+
+つむぎ（補足ナレーション）：仕様整理や長期的視点の提案が得意。
+
+この記事は ChatGPT で生成しました。
+
+ずんだもん：VOICEVOX の HTTP API って FastAPI で作られてるけど、Rust に置き換えるとしたらどこから手をつけるといいの？
+めたん：まず考えるべきは「何を置き換えるか」だね。VOICEVOX Core はすでに Rust 製だから、対象は HTTP サーバー部分、つまり FastAPI...]]></description><link>https://zenn.dev/masakielastic/articles/d8779e6400b2cf</link><guid isPermaLink="true">https://zenn.dev/masakielastic/articles/d8779e6400b2cf</guid><pubDate>Sat, 10 May 2025 03:16:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7YOLT-R3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:FastAPI%2520%25E3%2581%25A7%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%2520HTTP%2520API%2520%25E3%2582%2592%2520Rust%2520%25E3%2581%25AB%25E7%25BD%25AE%25E3%2581%258D%25E6%258F%259B%25E3%2581%2588%25E3%2582%258B%25E3%2581%25A8%25E3%2581%2597%25E3%2581%259F%25E3%2582%2589%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Masaki%2520Kagaya%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc3ODAxZTNiZTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Masaki Kagaya</dc:creator></item><item><title><![CDATA[WebAssemblyはJavaScriptの何倍速く動くのかベンチマークしてみた。]]></title><description><![CDATA[近年のWebアプリケーションは、単なる情報表示にとどまらず、複雑なデータ処理や高度な計算処理を必要とするケースが増えています。TypeScriptは型安全性と優れた開発体験でフロントエンド開発の標準となりつつありますが、パフォーマンスが重要な処理においては限界に直面することもあります。
+一方、WebAssembly（以下Wasm）は、ブラウザ上で動作する低レベルなバイナリフォーマットとして、ネイティブに近いパフォーマンスを実現する技術です。C++やRustなどの言語からコンパイルされ、JavaScriptとシームレスに連携できるため、Web開発の可能性を大きく広げています。
+しかし、「い...]]></description><link>https://zenn.dev/moxak/articles/39b82280a191d9</link><guid isPermaLink="true">https://zenn.dev/moxak/articles/39b82280a191d9</guid><pubDate>Fri, 09 May 2025 20:34:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--NsQJarce--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:WebAssembly%25E3%2581%25AFJavaScript%25E3%2581%25AE%25E4%25BD%2595%25E5%2580%258D%25E9%2580%259F%25E3%2581%258F%25E5%258B%2595%25E3%2581%258F%25E3%2581%25AE%25E3%2581%258B%25E3%2583%2599%25E3%2583%25B3%25E3%2583%2581%25E3%2583%259E%25E3%2583%25BC%25E3%2582%25AF%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25E3%2580%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Ackkerman%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M2NDY2ZTM5NTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Ackkerman</dc:creator></item><item><title><![CDATA[Rust+Github Actionsで、ReleaseまでカバーしたCICDを構築する]]></title><description><![CDATA[
+ はじめに
+質の高いコードを書くためには、効果的なCI/CDの仕組みが必要です。そして、インターネットでGitHub Actionsを利用したワークフローを調べてみると多くはdeprecatedとなったツールを使用していました。そこで、改めてワークフローを再構築したのでそのやり方を共有します。
+
+ できること
+
+GitHub Actionsによる自動化
+
+プルリクエスト時に複数OSでのテスト、lint、フォーマットチェックを実行
+
+すべてのチェックが成功した場合のみマージを許可
+
+
+
+
+OSごとのテストとビルドの自動化
+
+OSごとにテストを行うため、OS依存の問題を事前にテストできる
+...]]></description><link>https://zenn.dev/walkmana_25/articles/rust-github-actions-cicd</link><guid isPermaLink="true">https://zenn.dev/walkmana_25/articles/rust-github-actions-cicd</guid><pubDate>Fri, 09 May 2025 02:49:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--IG6xzTUP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%252BGithub%2520Actions%25E3%2581%25A7%25E3%2580%2581Release%25E3%2581%25BE%25E3%2581%25A7%25E3%2582%25AB%25E3%2583%2590%25E3%2583%25BC%25E3%2581%2597%25E3%2581%259FCICD%25E3%2582%2592%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Lapis%252FWalkmana-25%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4WWZuenRwVm81ZmxRVlpTaTUxT045eG1iNHEzSUtVc2FhYmVadnczZz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Lapis/Walkmana-25</dc:creator></item><item><title><![CDATA[0019-rc]]></title><description><![CDATA[use std::rc::Rc;
+
+#[derive(Debug)]
+#[allow(dead_code)]
+enum List {
+    Cons(i32, Rc&lt;List&gt;),
+    Nil
+}
+use List::{Cons, Nil};
+
+// https://doc.rust-jp.rs/book-ja/ch15-04-rc.html
+// 参照させる変数をRc::newする
+// Rcでは変数はmoveを避け、参照される。参照カウントはRc::cloneごとに増える
+fn main() {
+    let a = Rc::new(Cons(5, Rc::new...]]></description><link>https://zenn.dev/yukinekonyan/articles/f36d4a6f3e58bd</link><guid isPermaLink="true">https://zenn.dev/yukinekonyan/articles/f36d4a6f3e58bd</guid><pubDate>Fri, 09 May 2025 02:45:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--q_NgLun6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_80:0019-rc%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yukineko%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTHdrb1VFNXJOaVI2dndBUlBkMVNhYXM5QVBRMk45Nk1qTVdPTlp5VXFjNkhLdndRPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yukineko</dc:creator></item><item><title><![CDATA[[Bevy] たくさんのコンポーネントをまとめる]]></title><description><![CDATA[Bevyでたくさんのコンポーネントを定義して、いろいろなところにコンポーネントがバラけてしまったので、一箇所にまとめるためにextra.rsというモジュールにコンポーネントを切り分けました。
+main.rsでモジュールを登録しておけば、あとはhoge.rsでuseを使ってextra.rsで定義したコンポーネントを使えます。
+変数でも定数でも構造体でもenumでも同じように切り分けられます。
+
+extra.rs
+#[derive(Component)]
+pub struct Hoge1;
+
+#[derive(Component)]
+pub struct Hoge2;
+
+#[derive(C...]]></description><link>https://zenn.dev/omini/articles/41d0d6ffe39f62</link><guid isPermaLink="true">https://zenn.dev/omini/articles/41d0d6ffe39f62</guid><pubDate>Thu, 08 May 2025 20:58:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--rxR54zHb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BBevy%255D%2520%25E3%2581%259F%25E3%2581%258F%25E3%2581%2595%25E3%2582%2593%25E3%2581%25AE%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%259D%25E3%2583%25BC%25E3%2583%258D%25E3%2583%25B3%25E3%2583%2588%25E3%2582%2592%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:omini%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2Rhcmsvby5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>omini</dc:creator></item><item><title><![CDATA[vite-plugin-singlefileでwasmを単一HTMLに埋め込む]]></title><description><![CDATA[備忘録メモ
+どうしてもネットから隔離されたローカル環境の某RADソフトウェアでwasmを動作させたかったため、単一HTMLにRustで作ったwasmを埋め込めるか試してみました。
+単一HTMLを某RADソフトウェア内に埋め込んでwasmがWebビューで動作することを確認しました。
+
+ Viteで新規プロジェクト
+今回はViteで新規プロジェクトを立ち上げてみます。
+$ npm create vite@latest my-wasm-app -- --template vanilla-ts
+
+$ cd my-wasm-app
+$ npm install
+publicディレクトリは使わないので...]]></description><link>https://zenn.dev/craneduck/articles/5068ca21322398</link><guid isPermaLink="true">https://zenn.dev/craneduck/articles/5068ca21322398</guid><pubDate>Thu, 08 May 2025 13:49:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Dc-mwy-C--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:vite-plugin-singlefile%25E3%2581%25A7wasm%25E3%2582%2592%25E5%258D%2598%25E4%25B8%2580HTML%25E3%2581%25AB%25E5%259F%258B%25E3%2582%2581%25E8%25BE%25BC%25E3%2582%2580%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25AF%25E3%2583%25AC%25E3%2583%25BC%25E3%2583%25B3%25E3%2583%2580%25E3%2583%2583%25E3%2582%25AF%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM5NDVkNWY1NzIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>クレーンダック</dc:creator></item><item><title><![CDATA[医療現場のデジタル課題 - エンジニアが知るべき医療システムの実態]]></title><description><![CDATA[
+ はじめに
+現代のソフトウェア開発において、エンジニアは常に最新のアーキテクチャやパターンを追求します。
+　　マイクロサービス
+　　サーバーレス
+　　イベント駆動設計...
+次々と現れる新しい概念を学び、取り入れていく文化がエンジニアリングの世界には存在します。
+しかし、医療現場に足を踏み入れると、そこには全く異なるデジタル風景が広がっています。
+2025年現在もなお、多くの医療機関では10年以上前の技術スタックでシステムが構築され、運用されています。
+この状況は単なる「レガシー問題」ではなく、患者ケアの質や医療安全に直結する重大な課題です。
+本記事では、エンジニアの視点から医療現場の...]]></description><link>https://zenn.dev/kazuma0606/articles/dfa0912ab1ec03</link><guid isPermaLink="true">https://zenn.dev/kazuma0606/articles/dfa0912ab1ec03</guid><pubDate>Thu, 08 May 2025 10:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lcQOxwZY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%258C%25BB%25E7%2599%2582%25E7%258F%25BE%25E5%25A0%25B4%25E3%2581%25AE%25E3%2583%2587%25E3%2582%25B8%25E3%2582%25BF%25E3%2583%25AB%25E8%25AA%25B2%25E9%25A1%258C%2520-%2520%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%25E3%2581%258C%25E7%259F%25A5%25E3%2582%258B%25E3%2581%25B9%25E3%2581%258D%25E5%258C%25BB%25E7%2599%2582%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%25E3%2581%25AE%25E5%25AE%259F%25E6%2585%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25AB%25E3%2582%25BA%25E3%2583%259E%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzYwMWM1OTYyYmUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>カズマ</dc:creator></item><item><title><![CDATA[「エンジニアのための医療DX入門」]]></title><description><![CDATA[
+ シリーズ概要
+最新のプログラミング言語（Rust/Go）と現代的アーキテクチャを活用し、医療現場の具体的課題を解決する実践的なアプローチを解説するシリーズ。単なる技術解説ではなく、医療現場の実態とエンジニアリングの接点を探る。
+
+ 対象読者
+
+医療ドメインに興味を持つエンジニア
+システム設計・アーキテクチャに関心のあるギーク層
+セキュリティや分散システムに興味を持つ開発者
+
+
+ シリーズ構成案
+
+ 第1部: 医療DXの現状と課題（3記事）
+#1: 医療現場のデジタル課題 - エンジニアが知るべき医療システムの実態
+
+医療現場とITのギャップ（シャドーIT問題など）
+レガシーシステムが...]]></description><link>https://zenn.dev/kazuma0606/articles/a80d74e4a9ede3</link><guid isPermaLink="true">https://zenn.dev/kazuma0606/articles/a80d74e4a9ede3</guid><pubDate>Thu, 08 May 2025 10:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3DiFwR4t--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%258C%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%25E3%2581%25AE%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%25E5%258C%25BB%25E7%2599%2582DX%25E5%2585%25A5%25E9%2596%2580%25E3%2580%258D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25AB%25E3%2582%25BA%25E3%2583%259E%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzYwMWM1OTYyYmUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>カズマ</dc:creator></item><item><title><![CDATA[医療現場の通信インフラ - モバイル医療機器の接続性問題]]></title><description><![CDATA[
+ はじめに
+前回の記事「医療データセキュリティの真実」では、
+https://zenn.dev/kazuma0606/articles/0664ea988f48f1
+オンプレミス環境の誤った安全神話とゼロトラストアーキテクチャの必要性について議論しました。
+今回は、医療DXの現場で日々発生している具体的な問題、特にモバイル医療機器の通信接続性に焦点を当てます。
+ポータブルX線装置、超音波診断装置、患者モニターなどの移動型医療機器は、現代の医療現場において不可欠な存在です。
+しかし、これらの機器が直面している通信の課題は、患者ケアの質に直接影響を与えるだけでなく、医療従事者の業務効率を著...]]></description><link>https://zenn.dev/kazuma0606/articles/f38646f148484a</link><guid isPermaLink="true">https://zenn.dev/kazuma0606/articles/f38646f148484a</guid><pubDate>Thu, 08 May 2025 10:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--oAE7BgyI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%258C%25BB%25E7%2599%2582%25E7%258F%25BE%25E5%25A0%25B4%25E3%2581%25AE%25E9%2580%259A%25E4%25BF%25A1%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2595%25E3%2583%25A9%2520-%2520%25E3%2583%25A2%25E3%2583%2590%25E3%2582%25A4%25E3%2583%25AB%25E5%258C%25BB%25E7%2599%2582%25E6%25A9%259F%25E5%2599%25A8%25E3%2581%25AE%25E6%258E%25A5%25E7%25B6%259A%25E6%2580%25A7%25E5%2595%258F%25E9%25A1%258C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25AB%25E3%2582%25BA%25E3%2583%259E%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzYwMWM1OTYyYmUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>カズマ</dc:creator></item><item><title><![CDATA[医療データセキュリティの真実 - オンプレミスからゼロトラストへ]]></title><description><![CDATA[医療データセキュリティの真実 - オンプレミスからゼロトラストへ
+
+ はじめに
+前回の記事「医療現場のデジタル課題」では、
+https://zenn.dev/kazuma0606/articles/dfa0912ab1ec03
+医療機関におけるシャドーIT、認証の問題、データアクセスの非効率性など、現場が直面している課題を概観しました。
+今回は、これらの問題の核心である「医療データセキュリティ」に焦点を当て、特に広く信じられている「オンプレミスなら安全」という神話を検証していきます。
+2025年現在も、多くの医療機関がクラウド移行に慎重な姿勢を示している一方で、院内システムのセキュリティ...]]></description><link>https://zenn.dev/kazuma0606/articles/0664ea988f48f1</link><guid isPermaLink="true">https://zenn.dev/kazuma0606/articles/0664ea988f48f1</guid><pubDate>Thu, 08 May 2025 10:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---LtEY8R4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%258C%25BB%25E7%2599%2582%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%25BB%25E3%2582%25AD%25E3%2583%25A5%25E3%2583%25AA%25E3%2583%2586%25E3%2582%25A3%25E3%2581%25AE%25E7%259C%259F%25E5%25AE%259F%2520-%2520%25E3%2582%25AA%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AC%25E3%2583%259F%25E3%2582%25B9%25E3%2581%258B%25E3%2582%2589%25E3%2582%25BC%25E3%2583%25AD%25E3%2583%2588%25E3%2583%25A9%25E3%2582%25B9%25E3%2583%2588%25E3%2581%25B8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25AB%25E3%2582%25BA%25E3%2583%259E%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzYwMWM1OTYyYmUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>カズマ</dc:creator></item><item><title><![CDATA[なぜNetflixやAppleはRustとPostgreSQL、Icebergを使うのか？注目のデータスタックを解説]]></title><description><![CDATA[
+「現代のデータインフラ構築には構造的な変化が起きています。」
+
+LinkedIn、Apple、Netflix、Tencentなど、最先端のテック企業が選ぶデータ技術には、ある共通点があります。それは、リアルタイムかつ拡張性のあるパイプラインを実現するために、Rust、PostgreSQL、Amazon S3、Apache Iceberg を基盤として採用しているということです。
+本記事では、これらの技術がなぜ注目されているのか、そしてRisingWaveがそれらをどのように統合しているのかを解説します。
+
+ 🚀 Rust：パフォーマンスと安全性を両立する言語
+Rustは、システムプログ...]]></description><link>https://zenn.dev/rwcolinpeng/articles/98c851082be726</link><guid isPermaLink="true">https://zenn.dev/rwcolinpeng/articles/98c851082be726</guid><pubDate>Thu, 08 May 2025 07:35:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Eyg2TTOM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%25AA%25E3%2581%259CNetflix%25E3%2582%2584Apple%25E3%2581%25AFRust%25E3%2581%25A8PostgreSQL%25E3%2580%2581Iceberg%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%25E3%2581%25AE%25E3%2581%258B%25EF%25BC%259F%25E6%25B3%25A8%25E7%259B%25AE%25E3%2581%25AE%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%2583%25E3%2582%25AF%25E3%2582%2592%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:RisingWave%2520Labs%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdmZmFjMDNiZWUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>RisingWave Labs</dc:creator></item><item><title><![CDATA[Rustで時間の関わるコードを簡単にテストする]]></title><description><![CDATA[ちゃんとやる場合はchrono::TimeZoneを実装すると思うが手間なので、自分の書く範囲であれば次のようにnow() -&gt; chrono::DateTime&lt;chrono::Utc&gt;を持つ別物のmock_chrono::Utcを置くのが良さそう。
+https://stackoverflow.com/a/76747577/4593717
+時分秒を指定したりしてセットできると便利だろう。
+#[cfg(test)]
+mod mock_chrono {
+    use chrono::{DateTime, NaiveDate};
+    use std::cell::Ce...]]></description><link>https://zenn.dev/kinon/articles/f112f460748223</link><guid isPermaLink="true">https://zenn.dev/kinon/articles/f112f460748223</guid><pubDate>Wed, 07 May 2025 07:58:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--yd8K-8PY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25A7%25E6%2599%2582%25E9%2596%2593%25E3%2581%25AE%25E9%2596%25A2%25E3%2582%258F%25E3%2582%258B%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2582%2592%25E7%25B0%25A1%25E5%258D%2598%25E3%2581%25AB%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2590%2582%25E4%25B9%2583%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q0ZjVmM2M5OTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>㐂乃</dc:creator></item><item><title><![CDATA[0018-seek-cursor]]></title><description><![CDATA[use std::fs::File;
+use std::io::{Read, Seek};
+use std::io::SeekFrom;
+fn main() -&gt; Result&lt;(), Box&lt;dyn std::error::Error&gt;&gt; {
+    let mut f = File::open("example.txt")?;
+    // 最後まで読む
+    let mut buffer = Vec::new();
+    f.read_to_end(&amp;mut buffer)?;
+
+    // 100 bytes戻る
+    // Curr...]]></description><link>https://zenn.dev/yukinekonyan/articles/2724be9e2f9ac7</link><guid isPermaLink="true">https://zenn.dev/yukinekonyan/articles/2724be9e2f9ac7</guid><pubDate>Wed, 07 May 2025 04:07:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--PuFc0ta1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_80:0018-seek-cursor%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yukineko%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTHdrb1VFNXJOaVI2dndBUlBkMVNhYXM5QVBRMk45Nk1qTVdPTlp5VXFjNkhLdndRPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yukineko</dc:creator></item><item><title><![CDATA[0017-from-trait]]></title><description><![CDATA[use std::convert::From;
+
+#[derive(Debug)]
+#[allow(dead_code)]
+struct NameNumber {
+    name: String,
+    number: i32,
+}
+
+impl From&lt;(String, i32)&gt; for NameNumber {
+    fn from(tuple: (String, i32)) -&gt; Self {
+        NameNumber {
+            name: tuple.0,
+            number: tuple.1,
+     ...]]></description><link>https://zenn.dev/yukinekonyan/articles/4c83d26e1c9f98</link><guid isPermaLink="true">https://zenn.dev/yukinekonyan/articles/4c83d26e1c9f98</guid><pubDate>Wed, 07 May 2025 03:51:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--oB2m9WpG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_80:0017-from-trait%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yukineko%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTHdrb1VFNXJOaVI2dndBUlBkMVNhYXM5QVBRMk45Nk1qTVdPTlp5VXFjNkhLdndRPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yukineko</dc:creator></item><item><title><![CDATA[Zennのスクラップをマークダウンに変換するCLIツールを書いた]]></title><description><![CDATA[RustでZennの「スクラップ」機能でまとめたメモを一括でMarkdownファイルに変換するCLIツールを書いたので備忘録がてら使い方を説明します。
+https://github.com/ackkerman/zenn-scrap-to-md
+
+ 1. 機能
+
+
+スクラップの取得：ZennのAPI（/api/scraps/&lt;slug&gt;/blob.json）からJSONを取得
+
+画像記法の変換：Zenn特有の ![](URL =300x) を &lt;img&gt; タグに自動変換
+
+認証対応：Cookieを渡してログインが必要なスクラップも取得可能
+
+オプション：コメント見出...]]></description><link>https://zenn.dev/moxak/articles/4f695c08676d0a</link><guid isPermaLink="true">https://zenn.dev/moxak/articles/4f695c08676d0a</guid><pubDate>Wed, 07 May 2025 03:31:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7ui0j1i1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Zenn%25E3%2581%25AE%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25A9%25E3%2583%2583%25E3%2583%2597%25E3%2582%2592%25E3%2583%259E%25E3%2583%25BC%25E3%2582%25AF%25E3%2583%2580%25E3%2582%25A6%25E3%2583%25B3%25E3%2581%25AB%25E5%25A4%2589%25E6%258F%259B%25E3%2581%2599%25E3%2582%258BCLI%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%25E3%2582%2592%25E6%259B%25B8%25E3%2581%2584%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Ackkerman%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M2NDY2ZTM5NTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Ackkerman</dc:creator></item><item><title><![CDATA[0016-binary-file-read]]></title><description><![CDATA[use std::io::Read;
+use std::fs::File;
+fn main() -&gt; Result&lt;(), Box&lt;dyn std::error::Error&gt;&gt; {
+    let path = "test.png";
+    let mut f = File::open(path)?;
+    let mut buf = [0; 10];
+    let n = f.read(&amp;mut buf)?;
+    println!("{:?}",  &amp;buf[..n]);
+    let n = f.read(&amp;mut ...]]></description><link>https://zenn.dev/yukinekonyan/articles/cde4cead79a36e</link><guid isPermaLink="true">https://zenn.dev/yukinekonyan/articles/cde4cead79a36e</guid><pubDate>Wed, 07 May 2025 02:18:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GdR9yr1O--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_76:0016-binary-file-read%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yukineko%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTHdrb1VFNXJOaVI2dndBUlBkMVNhYXM5QVBRMk45Nk1qTVdPTlp5VXFjNkhLdndRPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yukineko</dc:creator></item><item><title><![CDATA[Rustでユーザー入力を受けつつログも流す]]></title><description><![CDATA[イベント駆動で色々するものを書いていたが、金の掛かるAPI（OpenAI API）だけ確認を入れたかったので。
+
+ やりたいこと
+
+マルチスレッドのプログラムで一部にステップ実行を入れたい
+普通に標準入出力だとプロンプト（入力を促すcontinue? [y/n] みたいなの）が流されてしまって嫌
+プロンプトは固定表示してログは別で流したい
+
+
+ コード例
+tui-loggerが丁度良いので、大袈裟な気もするがratatuiでTUIを作る。
+[dependencies]
+tokio = { version = "1.45.0", features = ["full"] }
+color-ey...]]></description><link>https://zenn.dev/kinon/articles/888c40d104197f</link><guid isPermaLink="true">https://zenn.dev/kinon/articles/888c40d104197f</guid><pubDate>Tue, 06 May 2025 15:18:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--XzGpPaWe--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25A7%25E3%2583%25A6%25E3%2583%25BC%25E3%2582%25B6%25E3%2583%25BC%25E5%2585%25A5%25E5%258A%259B%25E3%2582%2592%25E5%258F%2597%25E3%2581%2591%25E3%2581%25A4%25E3%2581%25A4%25E3%2583%25AD%25E3%2582%25B0%25E3%2582%2582%25E6%25B5%2581%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2590%2582%25E4%25B9%2583%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q0ZjVmM2M5OTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>㐂乃</dc:creator></item><item><title><![CDATA[Rustで自作MCPサーバー]]></title><description><![CDATA[
+ はじめに
+みなさんそろそろ「こんなものをMCPサーバー化してみました！」という記事は見飽きてきた頃だと思います。
+この記事ではSpecificationを読み解き、公式SDKを使わずにMCPサーバーを実装します。なお、MCPの本質でない部分ではサードパーティークレートを使用します。使用したクレートは以下の通りです。
+
+ Cargo.toml
+async-trait = "0.1.88"
+schemars = "0.8.22"
+serde = { version = "1.0.219", features = ["derive"] }
+serde_json = "1.0.140"
+se...]]></description><link>https://zenn.dev/taro137/articles/0b21b2b6757951</link><guid isPermaLink="true">https://zenn.dev/taro137/articles/0b21b2b6757951</guid><pubDate>Tue, 06 May 2025 14:36:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--FbxoEdY1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25A7%25E8%2587%25AA%25E4%25BD%259CMCP%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Taro%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBlOGE5ZGM1NjEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Taro</dc:creator></item></channel></rss>

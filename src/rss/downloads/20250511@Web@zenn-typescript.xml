@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「TypeScript」のフィード]]></title><description><![CDATA[Zennのトピック「TypeScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/typescript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/f13e758fdb.png</url><title>Zennの「TypeScript」のフィード</title><link>https://zenn.dev/topics/typescript</link></image><generator>zenn.dev</generator><lastBuildDate>Sun, 11 May 2025 06:39:10 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/typescript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[MCPサーバーの多言語対応ムズくね？という話]]></title><description><![CDATA[最近はMCPサーバーで遊んでいます
+その過程でとくに意味もなく多言語対応したくなり、やろうと思ったのですがムズくね？と思った話です
+!
+この記事はムズくねと思った話であり、解決策はのっていません！ごめんなさい🙇‍♂️
+
+
+ 何をつくっていたのか
+とあるWebAPIをMCPサーバーの中で呼び出すチュートリアルのような実装をしていました
+https://github.com/morimorig3/overwatch2-mcp-server
+呼び出すAPIはこちら
+https://overfast-api.tekrop.fr/docs#/
+※オーバーウォッチ2というゲームの情報を取得できるWe...]]></description><link>https://zenn.dev/morimorig3/articles/8110d482893c0c</link><guid isPermaLink="true">https://zenn.dev/morimorig3/articles/8110d482893c0c</guid><pubDate>Sun, 11 May 2025 03:27:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--X0LYGbwe--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:MCP%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2581%25AE%25E5%25A4%259A%25E8%25A8%2580%25E8%25AA%259E%25E5%25AF%25BE%25E5%25BF%259C%25E3%2583%25A0%25E3%2582%25BA%25E3%2581%258F%25E3%2581%25AD%25EF%25BC%259F%25E3%2581%25A8%25E3%2581%2584%25E3%2581%2586%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:morimorig3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2EwOTQyMzMwZjEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>morimorig3</dc:creator></item><item><title><![CDATA[あなたはuseEffectを正しく使えてますか？]]></title><description><![CDATA[
+ はじめに
+
+ 想定する読者
+本記事はReact初級者から中級者向けの記事になります。
+特に普段何となくでuseEffectを使用している方や使用を避けるべきアンチパターンを理解していない方、まだReactの公式ドキュメントのそのエフェクト不要かもを読んでない方などに少しでも知見になればと思います。
+
+ なぜ理解する必要があるのか
+恐らく普段何となくでuseEffectを使用していてもそのコードの多くはひとまず期待する結果になっていると思います。「だったらいいじゃん。」と思考を停止していてはエンジニアとして成長がありませし、当然誤った使い方をするとパフォーマンスの低下やバグの温床になっ...]]></description><link>https://zenn.dev/noda_k/articles/17361623ad8ba4</link><guid isPermaLink="true">https://zenn.dev/noda_k/articles/17361623ad8ba4</guid><pubDate>Sat, 10 May 2025 16:57:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--DrMG5bxL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%2582%25E3%2581%25AA%25E3%2581%259F%25E3%2581%25AFuseEffect%25E3%2582%2592%25E6%25AD%25A3%25E3%2581%2597%25E3%2581%258F%25E4%25BD%25BF%25E3%2581%2588%25E3%2581%25A6%25E3%2581%25BE%25E3%2581%2599%25E3%2581%258B%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:noda%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg0MTYyOTRjNGUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>noda</dc:creator></item><item><title><![CDATA[TypeScriptのユーティリティ型を使いこなす：実践的なレシピ集🎯]]></title><description><![CDATA[こんにちはCloudCreatorLabを運営している中の人です！👋
+今回はTypeScriptのユーティリティ型について、実践的な使い方を紹介していきます。
+ユーティリティ型を活用することで、型安全性を高めながら、より効率的な開発が可能になります。
+
+ はじめに 🎬
+TypeScriptの型システムは強力ですが、特にユーティリティ型を使いこなすことで、より効率的で型安全なコードを書くことができます。
+過去に非常にきれいな形で解説されている記事もありますので気になる方はご確認を‼
+この記事では、基本的なユーティリティ型から応用まで、実際のユースケースとともに解説していきます！
+
+ ユーテ...]]></description><link>https://zenn.dev/cloudcreatorlab/articles/a5bfbaaf7f761d</link><guid isPermaLink="true">https://zenn.dev/cloudcreatorlab/articles/a5bfbaaf7f761d</guid><pubDate>Sat, 10 May 2025 16:36:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--JrtD1ZSo--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%25E3%2581%25AE%25E3%2583%25A6%25E3%2583%25BC%25E3%2583%2586%25E3%2582%25A3%25E3%2583%25AA%25E3%2583%2586%25E3%2582%25A3%25E5%259E%258B%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2584%25E3%2581%2593%25E3%2581%25AA%25E3%2581%2599%25EF%25BC%259A%25E5%25AE%259F%25E8%25B7%25B5%25E7%259A%2584%25E3%2581%25AA%25E3%2583%25AC%25E3%2582%25B7%25E3%2583%2594%25E9%259B%2586%2520%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Cloud%2520Creator%2520Lab%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E3YmM0Y2Y4N2QuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Cloud Creator Lab</dc:creator></item><item><title><![CDATA[LLM + Playwright MCPでブラウザ操作を自動化する全ステップ]]></title><description><![CDATA[
+ 📘 この記事を読んで分かること
+
+LLM（GPT-4 など）と Playwright MCP を組み合わせたブラウザ自動操作の全体像
+ユーザーの自然言語指示がどのように実行可能なブラウザ操作に変換されるか
+各ステップで何が起きているのか（設計・実行・解析・意思決定の流れ）
+Web テストや業務自動化への応用のヒント
+
+
+
+ 👤 この記事の対象の読者
+
+ChatGPT や LLM を実際の自動化タスクに使いたい開発者
+Playwright MCP の構造や LLM 連携について学びたい人
+Web テストやデータ取得業務を効率化したい QA エンジニアや
+Mastra や MCP などの...]]></description><link>https://zenn.dev/amanotakeshi/articles/48f0af20502a89</link><guid isPermaLink="true">https://zenn.dev/amanotakeshi/articles/48f0af20502a89</guid><pubDate>Sat, 10 May 2025 12:02:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jJhV7HYa--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:LLM%2520%252B%2520Playwright%2520MCP%25E3%2581%25A7%25E3%2583%2596%25E3%2583%25A9%25E3%2582%25A6%25E3%2582%25B6%25E6%2593%258D%25E4%25BD%259C%25E3%2582%2592%25E8%2587%25AA%25E5%258B%2595%25E5%258C%2596%25E3%2581%2599%25E3%2582%258B%25E5%2585%25A8%25E3%2582%25B9%25E3%2583%2586%25E3%2583%2583%25E3%2583%2597%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25A4%25A9%25E9%2587%258E%25E3%2581%259F%25E3%2581%2591%25E3%2581%2597%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE1MWVkNzc2ZDAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>天野たけし</dc:creator></item><item><title><![CDATA[Next.jsのインフラ構成案]]></title><description><![CDATA[
+ Next.js × AWSで実現するWebアプリのインフラ構成
+こんにちは、オアシステクノロジーズの古本です！
+今回は Next.jsをAWSにデプロイする際の構成パターンと実装の考え方 について紹介します。
+
+
+ 🏗 インフラ構成の代表パターン3選
+
+ ① 静的ホスティング構成（SSG + CDN）
+
+
+next export でビルドし、S3 + CloudFrontでホスティング
+シンプル・安価で高速
+完全静的なWebサイト向き（LPやドキュメント）
+
+
+ ② Lambda@Edge構成（VercelライクなSSR構成）
+
+
+serverless-next.js などで構築
+グ...]]></description><link>https://zenn.dev/oasys/articles/b1cec4ed947c62</link><guid isPermaLink="true">https://zenn.dev/oasys/articles/b1cec4ed947c62</guid><pubDate>Sat, 10 May 2025 11:30:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--LcPlEWA7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Next.js%25E3%2581%25AE%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2595%25E3%2583%25A9%25E6%25A7%258B%25E6%2588%2590%25E6%25A1%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25AA%25E3%2582%25A2%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2582%25AF%25E3%2583%258E%25E3%2583%25AD%25E3%2582%25B8%25E3%2583%25BC%25E3%2582%25BA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQyMGUxYmY0YzcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>オアシステクノロジーズ</dc:creator></item><item><title><![CDATA[React × Viteでコードレビュー効率化のためのChrome拡張機能を作った話]]></title><description><![CDATA[
+ はじめに
+こんにちは。
+今回は、自身がレビュワーに設定されているPRを一覧で確認することができるChrome拡張機能を開発したので、その内容についてお話ししたいと思います。
+また、この拡張機能はGitHubでのPRレビューを効率化したいという思いがあり、業務では拡張機能の開発をしていますが、個人では開発したことがなかったので良い機会だと思い、成果物を Chrome Web Store に公開するところまで行いました。
+エンジニアは日常業務において毎日のようにコードレビューを行なっていると思いますが、
+以下のような課題があり、どうにか解決できないかと考えていました。
+
+レビューの見逃し...]]></description><link>https://zenn.dev/rh820/articles/2d845784f0802f</link><guid isPermaLink="true">https://zenn.dev/rh820/articles/2d845784f0802f</guid><pubDate>Sat, 10 May 2025 10:52:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--QoHSZDIL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%2520%25C3%2597%2520Vite%25E3%2581%25A7%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2583%25AC%25E3%2583%2593%25E3%2583%25A5%25E3%2583%25BC%25E5%258A%25B9%25E7%258E%2587%25E5%258C%2596%25E3%2581%25AE%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AEChrome%25E6%258B%25A1%25E5%25BC%25B5%25E6%25A9%259F%25E8%2583%25BD%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hodii%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhjM2JkYzhiZTUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hodii</dc:creator></item><item><title><![CDATA[新しいAIコードレビューツール aica の紹介]]></title><description><![CDATA[こちらが作成している自動PRレビューツールです。
+https://github.com/dotneet/aica
+自動PRレビューのOSSとしてはおそらく pr-agentがもっとも使われていると思います。
+pr-agent は優れたツールですが、下記のようなところで使いづらさを感じることがありました。
+
+Python製でローカルでの起動が面倒
+GitHub Actionsへの依存が強く他のツールに組み込みづらい
+素朴な機能も有料版に含まれており、無償の範囲では機能不足を感じることがある
+
+そこで新たに作成しているのが aica です。
+
+ aicaの概要
+aica は自動PRレビューツ...]]></description><link>https://zenn.dev/devneko/articles/1d099c4935a3aa</link><guid isPermaLink="true">https://zenn.dev/devneko/articles/1d099c4935a3aa</guid><pubDate>Sat, 10 May 2025 09:43:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--tOEuT7fk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%2596%25B0%25E3%2581%2597%25E3%2581%2584AI%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2583%25AC%25E3%2583%2593%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%2520aica%2520%25E3%2581%25AE%25E7%25B4%25B9%25E4%25BB%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Shinji%2520Yamada%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk3NWI3ZmY3YTQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Shinji Yamada</dc:creator></item><item><title><![CDATA[【ローカルLLM × MCP】OllamaとMCPでLINE風チャットAIを作ってみた【Node.js／TypeScript】]]></title><description><![CDATA[
+ 【ローカルLLM × MCP】OllamaとMCPでLINE風チャットAIを作ってみた【Node.js／TypeScript】
+最近話題のローカルLLM「Ollama」と、外部機能連携が簡単になる「Model Context Protocol（MCP）」を組み合わせて、LINE風のチャットUIを備えたAIチャットアプリを作ってみました。
+この記事では、プロジェクトの概要、技術構成、インストール手順、そしてアーキテクチャのポイントをご紹介します。
+
+
+ 🎬 デモ動画
+まずは完成したチャットアプリの動作をご覧ください👇
+📽️ &lt;iframe width="560" height="...]]></description><link>https://zenn.dev/japan/articles/79d5f416a0c711</link><guid isPermaLink="true">https://zenn.dev/japan/articles/79d5f416a0c711</guid><pubDate>Sat, 10 May 2025 07:28:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--SHMLJM50--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25AB%25E3%2583%25ABLLM%2520%25C3%2597%2520MCP%25E3%2580%2591Ollama%25E3%2581%25A8MCP%25E3%2581%25A7LINE%25E9%25A2%25A8%25E3%2583%2581%25E3%2583%25A3%25E3%2583%2583%25E3%2583%2588AI%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25E3%2580%2590Node.js%25EF%25BC%258FTypeS...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:SOFTBASE%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E0ODM2OTE0YjguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>SOFTBASE</dc:creator></item><item><title><![CDATA[Edge Runtimeで動かすNext.js × GraphQL × 生成AIアーキテクチャ入門]]></title><description><![CDATA[
+ はじめに (ฅ•ω•ฅ)
+「とりあえず Vercel にデプロイすればいいっしょ ★」で始めた個人開発が、気づけば マルチテナント SaaS に進化してしまう――そんな経験、ありませんか？
+今日はオタク系エンジニア女子のわたしが ❤️‍🔥 Next.js 15 の Edge Runtime + TypeScript + GraphQL + PostgreSQL に加え、生成 AI をスパイスにした “ギークのためのフルスタック構成” を語ります。サーバーレスと AI の組み合わせにモエモエしつつ、抽象度高めに設計戦略を覗いていきましょう。
+
+ 目次
+
+テーマの背景
+アーキテクチャ全景...]]></description><link>https://zenn.dev/koshiosaki/articles/d31a41faa3565a</link><guid isPermaLink="true">https://zenn.dev/koshiosaki/articles/d31a41faa3565a</guid><pubDate>Sat, 10 May 2025 06:41:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8hqdGWfy--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Edge%2520Runtime%25E3%2581%25A7%25E5%258B%2595%25E3%2581%258B%25E3%2581%2599Next.js%2520%25C3%2597%2520GraphQL%2520%25C3%2597%2520%25E7%2594%259F%25E6%2588%2590AI%25E3%2582%25A2%25E3%2583%25BC%25E3%2582%25AD%25E3%2583%2586%25E3%2582%25AF%25E3%2583%2581%25E3%2583%25A3%25E5%2585%25A5%25E9%2596%2580%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2582%25E3%2582%2582%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2EzNjQwNTUxY2UuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>もも</dc:creator></item><item><title><![CDATA[【初心者向け】Vite + Vue に AWS Amplify Gen2 を導入して認証機能を実装してみた]]></title><description><![CDATA[
+ 【初心者向け】Vite + Vue に AWS Amplify Gen2 を導入して認証機能を実装してみた
+
+ Amplify Gen2とは？
+AWS Amplify Gen2は、フロントエンド開発者向けのモダンなフルスタック
+開発プラットフォームの第2世代です。
+第1世代ではインフラ定義がCLIベース（JSON/YAML形式）でしたが、
+第2世代ではインフラ定義をTypeScriptで記述できるようになり、より柔軟で開発者に優しい設計となっています。
+
+ ViteでVue環境を作成
+npm create vite@latest
+質問されるので答えていきます📝
+今回はVueを選択し、...]]></description><link>https://zenn.dev/tspk/articles/a44795b2a508ad</link><guid isPermaLink="true">https://zenn.dev/tspk/articles/a44795b2a508ad</guid><pubDate>Sat, 10 May 2025 06:21:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--nQ2dtAAm--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E5%2590%2591%25E3%2581%2591%25E3%2580%2591Vite%2520%252B%2520Vue%2520%25E3%2581%25AB%2520AWS%2520Amplify%2520Gen2%2520%25E3%2582%2592%25E5%25B0%258E%25E5%2585%25A5%25E3%2581%2597%25E3%2581%25A6%25E8%25AA%258D%25E8%25A8%25BC%25E6%25A9%259F%25E8%2583%25BD%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25B7%25E3%2581%25A3%25E3%2581%2591%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSzRaUk5ISjNvUTRveHRBeGZBcVh5Y2RlVV9HbUxldnlQVUFiNUhMcU4ybUVZVVpsM2E9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ぷっけ</dc:creator></item><item><title><![CDATA[TypeScriptのanyとunknown]]></title><description><![CDATA[何度も調べるので自分用メモとして、ざっくり見るように残しておく。
+
+ ざっくり
+any
+
+型を指定しない
+どんな操作もできる
+
+プロパティへのアクセス
+メソッド呼び出し
+関数呼び出し
+
+
+
+unknown
+
+最初は型を指定しないので何でも受け付けるがチェックは必要
+unknownが指定された場合は、使用する前に型チェックやアサーションが必要
+
+
+ 使い方
+
+ any
+何を代入しても、型のエラーは出ない。
+実行時にエラーになる可能性はある。
+
+any
+let valueAny: any = 10;
+valueAny = "hello";
+valueAny = true;
+valueAny....]]></description><link>https://zenn.dev/nana/articles/0578ff4dd31b2a</link><guid isPermaLink="true">https://zenn.dev/nana/articles/0578ff4dd31b2a</guid><pubDate>Sat, 10 May 2025 04:24:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--PeDpf64Q--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:TypeScript%25E3%2581%25AEany%25E3%2581%25A8unknown%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Ugo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E3OGQxMTFjYmUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Ugo</dc:creator></item><item><title><![CDATA[Mastra + Playwright MCPでTypeScript使ってスクリプト書いたら簡単だった]]></title><description><![CDATA[
+ 📘 この記事を読んだら分かること
+
+Mastra と Playwright MCP を使って、LLM でブラウザを自動操作するエージェントを TypeScript で作成する方法
+コマンドラインから LLM エージェントを実行する方法
+コマンドラインからブラウザを操作できる runPrompt.tsの詳細
+プロンプトから Playwright の自動テストステップを作成できるrunTestGen.tsの使い方
+
+コマンドラインのプロンプトから
+www.google.comを開いて、宮古島の天気で検索して、サマリーをください
+と渡すだけで、ブラウザが操作され、結果が返ってくるスクリプト...]]></description><link>https://zenn.dev/amanotakeshi/articles/772201b9883199</link><guid isPermaLink="true">https://zenn.dev/amanotakeshi/articles/772201b9883199</guid><pubDate>Sat, 10 May 2025 02:17:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wHzF-29J--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Mastra%2520%252B%2520Playwright%2520MCP%25E3%2581%25A7TypeScript%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2583%2588%25E6%259B%25B8%25E3%2581%2584%25E3%2581%259F%25E3%2582%2589%25E7%25B0%25A1%25E5%258D%2598%25E3%2581%25A0%25E3%2581%25A3%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25A4%25A9%25E9%2587%258E%25E3%2581%259F%25E3%2581%2591%25E3%2581%2597%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE1MWVkNzc2ZDAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>天野たけし</dc:creator></item><item><title><![CDATA[Node.js で TypeScript を直接実行してみた記録とノウハウ]]></title><description><![CDATA[最近の Node.js は TypeScript のコードを直接実行できます。v23.6.0 以降（最新の v24 系含む）ではそのまま実行できますし、最新の LTS である v22.15.0 では実行時に --experimental-strip-types のオプションを指定することで実行できます。
+どんなものなのか実際に試してみました。
+
+ まとめ・注意点
+
+学習やお試しのレベルではかなり有用。
+プロダクションレベルでは特にまだメリットがない。
+エディタ (VSCode) の型エラーと実行時エラーは別。
+
+VSCode に型エラーがあるが、実行できることがある。
+VSCode に型...]]></description><link>https://zenn.dev/tris/articles/node-typescript</link><guid isPermaLink="true">https://zenn.dev/tris/articles/node-typescript</guid><pubDate>Sat, 10 May 2025 00:29:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2QYxAVqG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Node.js%2520%25E3%2581%25A7%2520TypeScript%2520%25E3%2582%2592%25E7%259B%25B4%25E6%258E%25A5%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25E8%25A8%2598%25E9%258C%25B2%25E3%2581%25A8%25E3%2583%258E%25E3%2582%25A6%25E3%2583%258F%25E3%2582%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tris%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM4OWRmOWFjMmEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tris</dc:creator></item><item><title><![CDATA[チュートリアル請求書アプリをもっと使いやすく！AG Grid×AIでUIを改良してみた話]]></title><description><![CDATA[
+ はじめに：アプリ改良の背景と目的
+YouTubeで公開されている請求書アプリのチュートリアルをベースに、より実用的なUIへの改良を試みました。従来のWebアプリケーションでは、データ編集のたびに一覧画面から個別の詳細画面へ遷移する必要があり、業務利用の観点では操作の煩雑さや効率の悪さが課題となりがちです。
+
+今回の改良では、一覧表上で直接データを編集できる高機能グリッドコンポーネント「AG Grid」を導入し、Excelのような直感的な操作性を実現しました。また、開発効率向上のためにAIコーディングツールも積極的に活用しています。
+
+AIの力を借りることで、一般的な実装やデバッグは驚...]]></description><link>https://zenn.dev/satoshi_tech/articles/20250510-inline-grid-with-ai-dev</link><guid isPermaLink="true">https://zenn.dev/satoshi_tech/articles/20250510-inline-grid-with-ai-dev</guid><pubDate>Sat, 10 May 2025 00:08:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--zcPmbEZ2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2581%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%2588%25E3%2583%25AA%25E3%2582%25A2%25E3%2583%25AB%25E8%25AB%258B%25E6%25B1%2582%25E6%259B%25B8%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E3%2582%2582%25E3%2581%25A3%25E3%2581%25A8%25E4%25BD%25BF%25E3%2581%2584%25E3%2582%2584%25E3%2581%2599%25E3%2581%258F%25EF%25BC%2581AG%2520Grid%25C3%2597AI%25E3%2581%25A7UI%25E3%2582%2592%25E6%2594%25B9%25E8%2589%25AF%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:SatoshiTech%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzkwY2YwZDhlMGEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>SatoshiTech</dc:creator></item><item><title><![CDATA[React buttonの汎用的な型定義]]></title><description><![CDATA[React+Typescriptで開発していると、必ずPropsの型定義をしますよね。
+ただ、後になって型の拡張性に悩むなんてことがよくあると思います。
+そんな悩みを解消する方法を見つけたので紹介します。
+
+ 前提
+見つけた後（生成AI様のおかげ）にネットで調べると、すでに色々な方が紹介していました。
+ただ、私的に目から鱗な内容だったので学習メモとして残します。
+
+ 結論
+まず先に結論。「HTML要素の型」を拡張して使いましょう👍
+例えばButtonコンポーネントであれば、
+React.ButtonHTMLAttributes&lt;HTMLButtonElement&gt;
+を使います...]]></description><link>https://zenn.dev/aki_chan_desu/articles/bda34736575689</link><guid isPermaLink="true">https://zenn.dev/aki_chan_desu/articles/bda34736575689</guid><pubDate>Fri, 09 May 2025 23:40:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--VoW5y97X--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%2520button%25E3%2581%25AE%25E6%25B1%258E%25E7%2594%25A8%25E7%259A%2584%25E3%2581%25AA%25E5%259E%258B%25E5%25AE%259A%25E7%25BE%25A9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25A2%25E3%2582%25AD%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA0NTNhNzU0NWUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>アキ</dc:creator></item><item><title><![CDATA[WebAssemblyはJavaScriptの何倍速く動くのかベンチマークしてみた。]]></title><description><![CDATA[近年のWebアプリケーションは、単なる情報表示にとどまらず、複雑なデータ処理や高度な計算処理を必要とするケースが増えています。TypeScriptは型安全性と優れた開発体験でフロントエンド開発の標準となりつつありますが、パフォーマンスが重要な処理においては限界に直面することもあります。
+一方、WebAssembly（以下Wasm）は、ブラウザ上で動作する低レベルなバイナリフォーマットとして、ネイティブに近いパフォーマンスを実現する技術です。C++やRustなどの言語からコンパイルされ、JavaScriptとシームレスに連携できるため、Web開発の可能性を大きく広げています。
+しかし、「い...]]></description><link>https://zenn.dev/moxak/articles/39b82280a191d9</link><guid isPermaLink="true">https://zenn.dev/moxak/articles/39b82280a191d9</guid><pubDate>Fri, 09 May 2025 20:34:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--NsQJarce--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:WebAssembly%25E3%2581%25AFJavaScript%25E3%2581%25AE%25E4%25BD%2595%25E5%2580%258D%25E9%2580%259F%25E3%2581%258F%25E5%258B%2595%25E3%2581%258F%25E3%2581%25AE%25E3%2581%258B%25E3%2583%2599%25E3%2583%25B3%25E3%2583%2581%25E3%2583%259E%25E3%2583%25BC%25E3%2582%25AF%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25E3%2580%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Ackkerman%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M2NDY2ZTM5NTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Ackkerman</dc:creator></item><item><title><![CDATA[Vueのcomposablesの呼び出しを受け取る変数名に、$assetsのように$プリフィックスを使ってみてる]]></title><description><![CDATA[
+ 結論
+下記のような感じ。
+&lt;script setup lang="ts"&gt;
+const $assets = useAssets()
+&lt;/script&gt;
+そもそも「（Vue3の）composablesとは？」は下記を参照してください。
+
+コンポーザブル - Vue.js
+
+簡単に言うと、Reactのhooksと近いものです。
+
+ $を使っていなかったときに起こった問題
+例えば上記の例に則ってuseAssetsを呼び出すとすると、今までは下記のようにしていました。
+&lt;script setup lang="ts"&gt;
+const assets = useA...]]></description><link>https://zenn.dev/aiya000/articles/454c6f314895b5</link><guid isPermaLink="true">https://zenn.dev/aiya000/articles/454c6f314895b5</guid><pubDate>Fri, 09 May 2025 15:48:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--iSpr57Kd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Vue%25E3%2581%25AEcomposables%25E3%2581%25AE%25E5%2591%25BC%25E3%2581%25B3%25E5%2587%25BA%25E3%2581%2597%25E3%2582%2592%25E5%258F%2597%25E3%2581%2591%25E5%258F%2596%25E3%2582%258B%25E5%25A4%2589%25E6%2595%25B0%25E5%2590%258D%25E3%2581%25AB%25E3%2580%2581%2524assets%25E3%2581%25AE%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%2524%25E3%2583%2597%25E3%2583%25AA%25E3%2583%2595%25E3%2582%25A3%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25B9%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%25A6%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2582%25E3%2581%2584%25E3%2582%2584%2520-%2520aiya000%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pZVUM0QXdxcVdtMVZmVWtiQXFzdE5ra1BFZU1FOUN0NFY1UzdiPXMyNTAtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>あいや - aiya000</dc:creator></item><item><title><![CDATA[React×Rxでフォームの状態管理をすることの可能性🧐]]></title><description><![CDATA[
+ はじめに
+こんにちは。最近にわかにFP、FRP(Functional Reactive Programming)というものにハマって宣言的なプログラミングの面白さや気持ちよさを日々感じているs.katoです。
+そんなマイブームの勢いで「RxJS、ReactRxを用いて複雑な副作用を持つフォームの状態管理をいい感じにできるんじゃないか」、ということでReactHookFormのような規模感で内製をしてみたのですが、結構おもしろかったので紹介できたらなと思ってます🥳
+
+ やりたいこと
+例えば入力フィールドがA、Bで2つ存在し「BはAの値が特定の値の時だけenabledになり、それ以外の時...]]></description><link>https://zenn.dev/ispec_inc/articles/df161fd18bc886</link><guid isPermaLink="true">https://zenn.dev/ispec_inc/articles/df161fd18bc886</guid><pubDate>Fri, 09 May 2025 14:29:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--buDVorX4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%25C3%2597Rx%25E3%2581%25A7%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25BC%25E3%2583%25A0%25E3%2581%25AE%25E7%258A%25B6%25E6%2585%258B%25E7%25AE%25A1%25E7%2590%2586%25E3%2582%2592%25E3%2581%2599%25E3%2582%258B%25E3%2581%2593%25E3%2581%25A8%25E3%2581%25AE%25E5%258F%25AF%25E8%2583%25BD%25E6%2580%25A7%2520%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:s.kato%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRmN2Y5YzE4ZTUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:ispec%2520inc.%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JlOTEwZDc3Y2UuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>s.kato</dc:creator></item><item><title><![CDATA[Wails v2のSvelteテンプレートで生成されるアプリの仕組み]]></title><description><![CDATA[
+ Wailsとは？
+
+Wailsアプリの主要コンポーネント: 上図はWailsアプリの構成概念図です。Wailsでは、Go言語で書かれたバックエンド（下段の青緑色部分）と、Webビュー（Webkit等）を用いたフロントエンド（上段の赤色部分）を組み合わせてデスクトップアプリを構築します。Go側ではアプリケーションコードとランタイム（ウィンドウ操作などの機能提供）が動作し、フロントエンド側では組み込みのブラウザウィンドウ上にHTML/JS/CSSで構築したUIが表示されます。また、WailsではGoのメソッドをJavaScriptから呼び出せるよう「バインド」して公開する機能があり、これ...]]></description><link>https://zenn.dev/exmedia/articles/inside-wails-v2-svelte-app</link><guid isPermaLink="true">https://zenn.dev/exmedia/articles/inside-wails-v2-svelte-app</guid><pubDate>Fri, 09 May 2025 14:03:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--oDgR0JFr--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Wails%2520v2%25E3%2581%25AESvelte%25E3%2583%2586%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AC%25E3%2583%25BC%25E3%2583%2588%25E3%2581%25A7%25E7%2594%259F%25E6%2588%2590%25E3%2581%2595%25E3%2582%258C%25E3%2582%258B%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2581%25AE%25E4%25BB%2595%25E7%25B5%2584%25E3%2581%25BF%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:exMedia%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdjNzZmZjNmMmMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>exMedia</dc:creator></item><item><title><![CDATA[AG-Gridによるインライン新規データ作成機能の実装ガイド]]></title><description><![CDATA[
+ はじめに
+AG-Gridによるインライン新規データ作成機能の実装ガイドです。
+新規登録の場合、フォームポップアップを使えば簡単なのですが、
+グリッド上に新規行を追加する形での登録UIの実装で苦労しました。
+公式ドキュメントにあまり詳しく記載がなかったので、AIの助けを借りつつ実装しました。
+以下は実装のまとめになります。
+
+記事の作成もAIを活用しているので、ちょっと文体がそっけないですが、リファレンス資料として見ていただければと思います。
+実装プロセスにおける、AI駆動開発の良かった点、苦労した点についての記事はこちらです。
+チュートリアル請求書アプリをもっと使いやすく！AG Gr...]]></description><link>https://zenn.dev/satoshi_tech/articles/20250509-inline-grid-dev</link><guid isPermaLink="true">https://zenn.dev/satoshi_tech/articles/20250509-inline-grid-dev</guid><pubDate>Fri, 09 May 2025 12:31:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ZGjYzyOJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AG-Grid%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258B%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%25B3%25E6%2596%25B0%25E8%25A6%258F%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E4%25BD%259C%25E6%2588%2590%25E6%25A9%259F%25E8%2583%25BD%25E3%2581%25AE%25E5%25AE%259F%25E8%25A3%2585%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:SatoshiTech%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzkwY2YwZDhlMGEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>SatoshiTech</dc:creator></item></channel></rss>
