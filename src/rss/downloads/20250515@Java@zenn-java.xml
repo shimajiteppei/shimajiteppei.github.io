@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Java」のフィード]]></title><description><![CDATA[Zennのトピック「Java」のRSSフィードです]]></description><link>https://zenn.dev/topics/java</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/5c47bb8423.png</url><title>Zennの「Java」のフィード</title><link>https://zenn.dev/topics/java</link></image><generator>zenn.dev</generator><lastBuildDate>Thu, 15 May 2025 06:15:18 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/java/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[[Spring]バリテーション]]></title><description><![CDATA[
+ バリテーションとは
+フォームなどから送られてくるユーザーからの入力の正しさをチェックする仕組みです。
+入力漏れや正しい形式かをチェックしてエラーを防ぎます。
+また、ユーザー側にわかりやすいエラーメッセージを返すことができます。
+
+ 使用方法
+フォームクラスにアノテーションを付けます。
+public class UserForm {
+
+    @NotBlank
+    private String name;
+
+    @Email(message = "正しいメールアドレスを入力してください")
+    private String email;
+
+    @Size(min = ...]]></description><link>https://zenn.dev/kasai/articles/7384f37a03d133</link><guid isPermaLink="true">https://zenn.dev/kasai/articles/7384f37a03d133</guid><pubDate>Wed, 14 May 2025 16:40:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--w6Lmdj-v--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BSpring%255D%25E3%2583%2590%25E3%2583%25AA%25E3%2583%2586%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kasai%2520Ukyo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVlYjgwMzQ4N2UuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kasai Ukyo</dc:creator></item><item><title><![CDATA[[Spring]Model.addAttribute()]]></title><description><![CDATA[
+ Model.addAttribute()
+
+Modelは、ControllerからViewへ値を渡すための仕組みです。addAttributeメソッドを使って、Viewで使う変数を定義します。
+model.addAttribute("属性名", 値);
+Controller側
+@GetMapping("/hello")
+public String hello(Model model) {
+    model.addAttribute("message", "こんにちは！");
+    return "hello"; // hello.htmlにmessage変数を渡す
+}
+View側...]]></description><link>https://zenn.dev/kasai/articles/3b09e04f44bc87</link><guid isPermaLink="true">https://zenn.dev/kasai/articles/3b09e04f44bc87</guid><pubDate>Wed, 14 May 2025 15:32:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Cd2Evp5---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:%255BSpring%255DModel.addAttribute%2528%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kasai%2520Ukyo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVlYjgwMzQ4N2UuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kasai Ukyo</dc:creator></item><item><title><![CDATA[[Spring]アノテーション]]></title><description><![CDATA[
+ アノテーションの例
+
+
+
+アノテーション
+説明
+
+
+
+
+@Controller
+クラスをコントローラーとして定義
+
+
+
+@GetMapping, @PostMapping, @PutMapping, @PatchMapping, @DeleteMapping
+
+特定のHTTPメソッドを処理
+
+
+@RequestParam
+クエリパラメータを取得
+
+
+@PathVariable
+URLのパス変数を取得
+
+
+@ModelAttribute
+リクエストデータをオブジェクトにバインド
+
+
+
+
+ @Controller
+
+@Controllerはクラスに付与して、そのクラスがWebリクエストを...]]></description><link>https://zenn.dev/kasai/articles/1454054f4e1c4b</link><guid isPermaLink="true">https://zenn.dev/kasai/articles/1454054f4e1c4b</guid><pubDate>Wed, 14 May 2025 15:31:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--mXcT9Wb4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BSpring%255D%25E3%2582%25A2%25E3%2583%258E%25E3%2583%2586%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kasai%2520Ukyo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVlYjgwMzQ4N2UuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kasai Ukyo</dc:creator></item><item><title><![CDATA[Goのディレクトリ構成、どうしてる？ Java脳で考える最小構成]]></title><description><![CDATA[
+ シンプルに管理したい！
+おつかれさまです。
+GoでAPI開発をして数か月が経ちました。
+最近、悩んでいるのが「ディレクトリ構成」でございます。
+わたくしJava出身でして、Javaでは多くのWebアプリケーションがMVCアーキテクチャに基づいて構成されてるんですよ。フレームワークもそれを前提に設計されています。
+MVCのような明確なアーキテクチャパターンがあれば（だいぶテンプレート化されているので）まあまあ馴染みがあるのですが、Goの『シンプルで柔軟なスタイル』って難しくないですか？
+柔軟というか曖昧というか。どう整理すべきか迷うところ。
+この記事では、Java出身のエンジニアが「こ...]]></description><link>https://zenn.dev/ameiro_lab/articles/cf490c3f75ea4a</link><guid isPermaLink="true">https://zenn.dev/ameiro_lab/articles/cf490c3f75ea4a</guid><pubDate>Wed, 14 May 2025 14:05:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_p57f0zj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Go%25E3%2581%25AE%25E3%2583%2587%25E3%2582%25A3%25E3%2583%25AC%25E3%2582%25AF%25E3%2583%2588%25E3%2583%25AA%25E6%25A7%258B%25E6%2588%2590%25E3%2580%2581%25E3%2581%25A9%25E3%2581%2586%25E3%2581%2597%25E3%2581%25A6%25E3%2582%258B%25EF%25BC%259F%2520Java%25E8%2584%25B3%25E3%2581%25A7%25E8%2580%2583%25E3%2581%2588%25E3%2582%258B%25E6%259C%2580%25E5%25B0%258F%25E6%25A7%258B%25E6%2588%2590%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ameiro_lab%2520%25E8%25BB%25A2%25E8%2581%25B7%25E6%25B4%25BB%25E5%258B%2595%25E4%25B8%25AD%2520%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTFBJdUxDX2RpbHNGNkJCOUktcU53ZkxLbnBvenRKNHBTX3BHQlRFTkdydGVINGZNaz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ameiro_lab🔥転職活動中🔥</dc:creator></item><item><title><![CDATA[[Spring]Spring MVC]]></title><description><![CDATA[
+ Spring MVCとは
+Sprng MVCとはJavaでWebアプリケーションを開発するための強力なWebアーキテクチャフレームワークです。アプリケーションのロジック（Model）、ユーザインターフェース（View）、リクエスト処理（Controller）を分離し、保守性と拡張性に優れたWebアプリケーションを構築できます。
+
+ Spring MVCの構成要素
+
+Model（モデル）
+
+
+ビジネスロジックやデータの状態を保持
+データベースとのやりとりや、アプリケーションの状態の保持などを行う
+
+
+View（ビュー）
+
+
+クライアントに表示されるUI部分を担当
+HTMLなどが使われる...]]></description><link>https://zenn.dev/kasai/articles/e2948c6f8ed5a2</link><guid isPermaLink="true">https://zenn.dev/kasai/articles/e2948c6f8ed5a2</guid><pubDate>Wed, 14 May 2025 13:42:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--73L7SYwC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_76:%255BSpring%255DSpring%2520MVC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kasai%2520Ukyo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVlYjgwMzQ4N2UuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kasai Ukyo</dc:creator></item><item><title><![CDATA[[イベントレポート]Omiai×ココナラ 大規模toCサービスにおける技術負債との向き合い方]]></title><description><![CDATA[
+2025年4月9日に株式会社Omiaiと株式会社ココナラとによる共催イベント「大規模toCサービスにおける技術負債との向き合い方」が開催されました。
+技術負債というエンジニアリングの普遍的な課題について、両社から2名ずつが登壇するLTと、パネルディスカッション形式でお話しし、実際のプロダクト開発現場からのリアルな知見が共有されました。
+当日の内容を一部抜粋する形でレポートします。
+
+ タイムテーブル
+
+
+ LT
+
+ 「技術負債へのアプローチの仕方」／株式会社ココナラ アプリ開発グループマネージャー 中田有紀さん
+
+中田さんからは、開発現場で技術負債の対応がどうしても後回しになりやすいと...]]></description><link>https://zenn.dev/omiai_techblog/articles/ac5afae7a85018</link><guid isPermaLink="true">https://zenn.dev/omiai_techblog/articles/ac5afae7a85018</guid><pubDate>Wed, 14 May 2025 04:20:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s----Q1Eq-x--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255B%25E3%2582%25A4%25E3%2583%2599%25E3%2583%25B3%25E3%2583%2588%25E3%2583%25AC%25E3%2583%259D%25E3%2583%25BC%25E3%2583%2588%255DOmiai%25C3%2597%25E3%2582%25B3%25E3%2582%25B3%25E3%2583%258A%25E3%2583%25A9%2520%25E5%25A4%25A7%25E8%25A6%258F%25E6%25A8%25A1toC%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2593%25E3%2582%25B9%25E3%2581%25AB%25E3%2581%258A%25E3%2581%2591%25E3%2582%258B%25E6%258A%2580%25E8%25A1%2593%25E8%25B2%25A0%25E5%2582%25B5%25E3%2581%25A8%25E3%2581%25AE%25E5%2590%2591%25E3%2581%258D%25E5%2590%2588%25E3%2581%2584%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:akira.ueda%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI1OGM1ZjI5N2QuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Omiai%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0VRRndRVHRLR0cwZEZuaUM1eGhmXzR6NHotaTJOZ0U1SHJMVng3RGVzME5vaTlnPXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>akira.ueda</dc:creator></item><item><title><![CDATA[【開発日記#1】Webインターバルタイマーを作る理由と構想]]></title><description><![CDATA[こんにちは！２６年４月からSEになるｍAgmAです。
+今日から、プログラミングの勉強も兼ねてWebインターバルタイマーの開発に挑戦していくことにしました。
+この記事はその【第1回目】として、開発の動機や構想を書き残す“スタートログ”です。
+
+
+ 💡 なぜインターバルタイマーを作るのか？
+最近、作業や勉強中に時間管理の重要性を感じることが増えてきました。
+「ポモドーロテクニック」や「インターバルトレーニング」のように、時間を区切って行動することが集中力UPや効率UPに効果的だと知ったのがきっかけです。筋トレや資格等の時間管理に使えるようなアプリを作りたい！
+
+ブラウザでサッと使いたい
+シン...]]></description><link>https://zenn.dev/magma_program/articles/db3242a6cde0d8</link><guid isPermaLink="true">https://zenn.dev/magma_program/articles/db3242a6cde0d8</guid><pubDate>Wed, 14 May 2025 01:51:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---qh1O3Z3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E9%2596%258B%25E7%2599%25BA%25E6%2597%25A5%25E8%25A8%2598%25231%25E3%2580%2591Web%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25AB%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%259E%25E3%2583%25BC%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%25E7%2590%2586%25E7%2594%25B1%25E3%2581%25A8%25E6%25A7%258B%25E6%2583%25B3%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mAgmA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSlE1LTgyWVdfSW5kQURGZFBlNi1nOWxVWGVNT0xzTm1nOHVWemwxMUQyLTFiM3Q2TT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mAgmA</dc:creator></item><item><title><![CDATA[Java × Logback でログを出力する基本設定]]></title><description><![CDATA[Javaでの開発において、ログ出力はデバッグや運用の強力な味方です。本記事では、ロギングライブラリ「Logback」を使って、ログをコンソールに出力する基本的な方法を紹介します。
+
+ 💡 Logbackとは？
+Logback は、Javaで広く使われているロギングフレームワークであり、SLF4J（Simple Logging Facade for Java）と連携して利用されます。構成ファイルは logback.xml で記述し、きめ細やかなログ設定が可能です。
+
+ 📁 プロジェクト構成
+my-java-app/
+├── src/
+│   └── main/
+│       └── re...]]></description><link>https://zenn.dev/leegrey/articles/f129781c504f99</link><guid isPermaLink="true">https://zenn.dev/leegrey/articles/f129781c504f99</guid><pubDate>Tue, 13 May 2025 16:31:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--X7YbEflK--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java%2520%25C3%2597%2520Logback%2520%25E3%2581%25A7%25E3%2583%25AD%25E3%2582%25B0%25E3%2582%2592%25E5%2587%25BA%25E5%258A%259B%25E3%2581%2599%25E3%2582%258B%25E5%259F%25BA%25E6%259C%25AC%25E8%25A8%25AD%25E5%25AE%259A%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:GlobalPaws%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzgwNTcxOWUyM2QuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>GlobalPaws</dc:creator></item><item><title><![CDATA[포켓몬 육성과 같이 오브젝트 지향을 가족으로 배울 수 있는 Java 초클래스 입문 ~"좋아"가 배움으로 바뀌는 마법의 도감~]]></title><description><![CDATA[
+ 📚 목차
+
+🔹 제1장 포켓몬 도감 만들기! 클래스 설계도
+
+🔹 1.1 오브젝트란?
+
+🔹 1.2 클래스를 만들자
+
+🔹 1.3 정리와 테스트
+
+🔹 제2장 몬스터볼에서 GET! 인스턴스 생성과 사용법
+
+🔹 2.1 인스턴스를 만들자
+
+🔹 2.2 게터와 세터의 사용법
+
+🔹 2.3 메서드를 추가하자
+
+🔹 2.4 정리와 테스트
+
+🔹 제3장 포켓몬의 비밀을 지켜라! 클래스의 구조
+
+🔹 3.1 다른 클래스에서의 접근 제한
+
+🔹 3.2 멤버의 구조
+
+🔹 3.3 생성자의 구조
+
+🔹 3.4 정리와 테스트
+
+🔹 제4장 포켓몬을 가리켜라! 인스턴스...]]></description><link>https://zenn.dev/nakamotojp/articles/eab3f35e104447</link><guid isPermaLink="true">https://zenn.dev/nakamotojp/articles/eab3f35e104447</guid><pubDate>Tue, 13 May 2025 09:52:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--nnAW7hGC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25ED%258F%25AC%25EC%25BC%2593%25EB%25AA%25AC%2520%25EC%259C%25A1%25EC%2584%25B1%25EA%25B3%25BC%2520%25EA%25B0%2599%25EC%259D%25B4%2520%25EC%2598%25A4%25EB%25B8%258C%25EC%25A0%259D%25ED%258A%25B8%2520%25EC%25A7%2580%25ED%2596%25A5%25EC%259D%2584%2520%25EA%25B0%2580%25EC%25A1%25B1%25EC%259C%25BC%25EB%25A1%259C%2520%25EB%25B0%25B0%25EC%259A%25B8%2520%25EC%2588%2598%2520%25EC%259E%2588%25EB%258A%2594%2520Java%2520%25EC%25B4%2588%25ED%2581%25B4%25EB%259E%2598%25EC%258A%25A4%2520%25EC%259E%2585%25EB%25AC%25B8%2520%7E%2522%25EC%25A2%258B%25EC%2595%2584%2522%25EA%25B0%2580%2520%25EB%25B0%25B0%25EC%259B%2580%25EC%259C%25BC%25EB%25A1%259C...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nakamoto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY3MzcxNGVkNGIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nakamoto</dc:creator></item><item><title><![CDATA[让全家人像养育宝可梦一样学习面向对象编程的超强Java入门书～将热情转化为学习的神奇绘本～]]></title><description><![CDATA[
+ 📚 宝可梦与Java编程：章节目录
+
+🔹 第1章 创建宝可梦图鉴！类的设计图
+
+🔹 第2章 从精灵球中召唤！实例的创建与使用
+
+🔹 第3章 保护宝可梦的秘密！类的机制
+
+🔹 第4章 指向宝可梦！实例与引用的秘密
+
+🔹 第5章 设计你的原创宝可梦！对象建模
+
+🔹 第6章 揭开进化的秘密！继承的血统
+
+🔹 第7章 解开宝可梦家族之谜！深入继承关系
+
+🔹 第8章 宝可梦的变身术！引用的自动类型转换
+
+🔹 第9章 一招多用！多态性的魔力
+
+🔹 第10章 幻之宝可梦的谜团！抽象类的世界
+
+🔹 第11章 宝可梦的属性与能力！接口的力量
+
+
+
+
+ 🧩 第1章 创建宝可梦图鉴！类的设计图
+
+ 🎯 1...]]></description><link>https://zenn.dev/nakamotojp/articles/fd7c89dc8b6d91</link><guid isPermaLink="true">https://zenn.dev/nakamotojp/articles/fd7c89dc8b6d91</guid><pubDate>Tue, 13 May 2025 09:31:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--My6JRd17--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%25AE%25A9%25E5%2585%25A8%25E5%25AE%25B6%25E4%25BA%25BA%25E5%2583%258F%25E5%2585%25BB%25E8%2582%25B2%25E5%25AE%259D%25E5%258F%25AF%25E6%25A2%25A6%25E4%25B8%2580%25E6%25A0%25B7%25E5%25AD%25A6%25E4%25B9%25A0%25E9%259D%25A2%25E5%2590%2591%25E5%25AF%25B9%25E8%25B1%25A1%25E7%25BC%2596%25E7%25A8%258B%25E7%259A%2584%25E8%25B6%2585%25E5%25BC%25BAJava%25E5%2585%25A5%25E9%2597%25A8%25E4%25B9%25A6%25EF%25BD%259E%25E5%25B0%2586%25E7%2583%25AD%25E6%2583%2585%25E8%25BD%25AC%25E5%258C%2596%25E4%25B8%25BA%25E5%25AD%25A6%25E4%25B9%25A0%25E7%259A%2584%25E7%25A5%259E%25E5%25A5%2587%25E7%25BB%2598%25E6%259C%25AC%25EF%25BD%259E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nakamoto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY3MzcxNGVkNGIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nakamoto</dc:creator></item><item><title><![CDATA[Javaの「オーバーロード」をざっくりまとめてみた[Java初心者]]]></title><description><![CDATA[
+ はじめに
+こんにちは。
+プログラミング初心者Wakinozaと申します。
+Java勉強中に調べたことを記事にまとめています。
+十分気をつけて執筆していますが、なにぶん初心者が書いた記事なので、理解が浅い点などあるかと思います。
+記事を参考にされる方は、初心者の記事であることを念頭において、お読みいただけると幸いです。
+間違い等あれば、指摘いただけると助かります。
+
+ 対象読者
+
+Javaを勉強中の方
+Java Silver試験を勉強中の方
+Javaの「オーバーロード」についてざっくり知りたい方
+
+
+ 目次
+1. オーバーロードとは
+2. オーバーロードの具体例
+
+ 本文
+
+ 1. オ...]]></description><link>https://zenn.dev/wakinoza/articles/5ff2730b92d3d4</link><guid isPermaLink="true">https://zenn.dev/wakinoza/articles/5ff2730b92d3d4</guid><pubDate>Tue, 13 May 2025 01:08:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--AW66iAQq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java%25E3%2581%25AE%25E3%2580%258C%25E3%2582%25AA%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2589%25E3%2580%258D%25E3%2582%2592%25E3%2581%2596%25E3%2581%25A3%25E3%2581%258F%25E3%2582%258A%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%255BJava%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%255D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:wakinoza%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhkYzVjNWY5ZWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>wakinoza</dc:creator></item><item><title><![CDATA[ポケモン育成みたいにオブジェクト指向を家族で学べるJava超クラス入門 〜“好き”が学びに変わる魔法の図鑑〜]]></title><description><![CDATA[
+ 📚 目次
+
+🔹 第1章 ポケモン図鑑を作ろう！クラスの設計図
+
+🔹 1.1 オブジェクトとは
+
+🔹 1.2 クラスを作る
+
+🔹 1.3 まとめとテスト
+
+🔹 第2章 モンスターボールからGET！インスタンスの作り方と使い方
+
+🔹 2.1 インスタンスを作る
+
+🔹 2.2 ゲッターとセッターの使い方
+
+🔹 2.3 メソッドを追加する
+
+🔹 2.4 まとめとテスト
+
+🔹 第3章 ポケモンのひみつを守れ！クラスの仕組み
+
+🔹 3.1 他のクラスからのアクセスを制限する
+
+🔹 3.2 メンバの仕組み
+
+🔹 3.3 コンストラクタの仕組み
+
+🔹 3.4 まとめとテスト
+
+🔹 第4章 ポケモンを...]]></description><link>https://zenn.dev/nakamotojp/articles/2380912ca4e522</link><guid isPermaLink="true">https://zenn.dev/nakamotojp/articles/2380912ca4e522</guid><pubDate>Mon, 12 May 2025 12:17:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_QlYN0ZK--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%259D%25E3%2582%25B1%25E3%2583%25A2%25E3%2583%25B3%25E8%2582%25B2%25E6%2588%2590%25E3%2581%25BF%25E3%2581%259F%25E3%2581%2584%25E3%2581%25AB%25E3%2582%25AA%25E3%2583%2596%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E6%258C%2587%25E5%2590%2591%25E3%2582%2592%25E5%25AE%25B6%25E6%2597%258F%25E3%2581%25A7%25E5%25AD%25A6%25E3%2581%25B9%25E3%2582%258BJava%25E8%25B6%2585%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25B9%25E5%2585%25A5%25E9%2596%2580%2520%25E3%2580%259C%25E2%2580%259C%25E5%25A5%25BD%25E3%2581%258D%25E2%2580%259D%25E3%2581%258C%25E5%25AD%25A6%25E3%2581%25B3%25E3%2581%25AB%25E5%25A4%2589%25E3%2582%258F%25E3%2582%258B%25E9%25AD%2594%25E6%25B3%2595%25E3%2581%25AE%25E5%259B%25B3%25E9%2591%2591%25E3%2580%259C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nakamoto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY3MzcxNGVkNGIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nakamoto</dc:creator></item><item><title><![CDATA[「中学生でもわかるポケモンで完全理解！Javaの例外処理11選：ピカチュウがコードも出力もぜんぶ見せるからNullも配列ミスも怖くない」]]></title><description><![CDATA[
+ 💥Javaの例外処理をポケモンで学ぼう！
+プログラムには、予想外のトラブルが起きることがあります。
+Javaではそのような「問題が起きたとき」に、プログラムが止まらないように**例外処理（Exception Handling）**を使います。
+今回は、ポケモンの世界と実生活を使って、楽しく学んでみましょう！
+
+ 🔖 目次（逆引き付き）
+
+✅ 例1：技の使用失敗時に例外処理を使う（PP不足）
+
+✅ 例2：財布にお金がないときの処理（現実的な例）
+
+⚠️ 例3：配列の外を参照してしまったとき（ArrayIndexOutOfBoundsException）
+
+⚠️ 例4：nullのまま使お...]]></description><link>https://zenn.dev/nakamotojp/articles/36e8c3615cd470</link><guid isPermaLink="true">https://zenn.dev/nakamotojp/articles/36e8c3615cd470</guid><pubDate>Mon, 12 May 2025 10:32:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--G6Xtf9aq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%258C%25E4%25B8%25AD%25E5%25AD%25A6%25E7%2594%259F%25E3%2581%25A7%25E3%2582%2582%25E3%2582%258F%25E3%2581%258B%25E3%2582%258B%25E3%2583%259D%25E3%2582%25B1%25E3%2583%25A2%25E3%2583%25B3%25E3%2581%25A7%25E5%25AE%258C%25E5%2585%25A8%25E7%2590%2586%25E8%25A7%25A3%25EF%25BC%2581Java%25E3%2581%25AE%25E4%25BE%258B%25E5%25A4%2596%25E5%2587%25A6%25E7%2590%258611%25E9%2581%25B8%25EF%25BC%259A%25E3%2583%2594%25E3%2582%25AB%25E3%2583%2581%25E3%2583%25A5%25E3%2582%25A6%25E3%2581%258C%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2582%2582%25E5%2587%25BA%25E5%258A%259B%25E3%2582%2582%25E3%2581%259C%25E3%2582%2593%25E3%2581%25B6%25E8%25A6%258B%25E3%2581%259B%25E3%2582%258B%25E3%2581%258B%25E3%2582%2589Null...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nakamoto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY3MzcxNGVkNGIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nakamoto</dc:creator></item><item><title><![CDATA[🗂 Javaコレクション入門：ポケモンと日常業務で学ぼう！ListとMapとSetの使い分け具体例]]></title><description><![CDATA[
+ 🗂 Javaコレクション入門：ポケモンと日常業務で学ぼう！
+
+ 🔰 目次
+
+配列（Array）とリスト（List）の違い
+
+
+配列（Array)は入れ物の大きさが固定
+リスト（List)は入れ物の大きさが変更可能
+
+
+
+List（順番を大事にしたいとき）
+
+ポケモンの例：手持ちポケモンの順番
+実務の例：注文の順番管理
+
+
+
+Set（重複を避けたいとき）
+
+ポケモンの例：図鑑登録（重複しない）
+実務の例：メールアドレスの重複登録防止
+
+
+
+Map（名前から情報を取り出したいとき）
+
+ポケモンの例：タイプ別ポケモン表
+実務の例：社員IDからプロフィール管理
+
+
+
+
+
+ 配列（Array）...]]></description><link>https://zenn.dev/nakamotojp/articles/56fc1ce6ed95bf</link><guid isPermaLink="true">https://zenn.dev/nakamotojp/articles/56fc1ce6ed95bf</guid><pubDate>Mon, 12 May 2025 04:52:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5WkQj-NH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%2520%2520Java%25E3%2582%25B3%25E3%2583%25AC%25E3%2582%25AF%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E5%2585%25A5%25E9%2596%2580%25EF%25BC%259A%25E3%2583%259D%25E3%2582%25B1%25E3%2583%25A2%25E3%2583%25B3%25E3%2581%25A8%25E6%2597%25A5%25E5%25B8%25B8%25E6%25A5%25AD%25E5%258B%2599%25E3%2581%25A7%25E5%25AD%25A6%25E3%2581%25BC%25E3%2581%2586%25EF%25BC%2581List%25E3%2581%25A8Map%25E3%2581%25A8Set%25E3%2581%25AE%25E4%25BD%25BF%25E3%2581%2584%25E5%2588%2586%25E3%2581%2591%25E5%2585%25B7%25E4%25BD%2593%25E4%25BE%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nakamoto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY3MzcxNGVkNGIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nakamoto</dc:creator></item><item><title><![CDATA[Javaの基本概念をポケットモンスター風育成ゲームでオブジェクト指向を理解する]]></title><description><![CDATA[更新中最新記事はこちら：https://qiita.com/nakamoto/items/2f376266988176cf2f7c
+画像は ChatGPT4o で生成したものです。
+
+ Javaの初学者の方向けに、Javaを好きになりながら基本概念をイメージしてもらう目的で書いています。
+
+ゲームを起動する
+変数というボール
+配列というボールケース
+データの種類（データ型）
+もし〇〇だったらというif文
+◯回繰り返すfor文
+表示させる
+入力する
+メソッドというモンスターのわざ
+
+
+
+ ゲームを起動する
+コード内の日本語表記はプログラマーが変更するところだと思ってください
+// アプリを...]]></description><link>https://zenn.dev/nakamotojp/articles/07efeeccd3db71</link><guid isPermaLink="true">https://zenn.dev/nakamotojp/articles/07efeeccd3db71</guid><pubDate>Sun, 11 May 2025 11:25:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--W_z4SFVY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java%25E3%2581%25AE%25E5%259F%25BA%25E6%259C%25AC%25E6%25A6%2582%25E5%25BF%25B5%25E3%2582%2592%25E3%2583%259D%25E3%2582%25B1%25E3%2583%2583%25E3%2583%2588%25E3%2583%25A2%25E3%2583%25B3%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%25BC%25E9%25A2%25A8%25E8%2582%25B2%25E6%2588%2590%25E3%2582%25B2%25E3%2583%25BC%25E3%2583%25A0%25E3%2581%25A7%25E3%2582%25AA%25E3%2583%2596%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E6%258C%2587%25E5%2590%2591%25E3%2582%2592%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nakamoto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY3MzcxNGVkNGIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nakamoto</dc:creator></item><item><title><![CDATA[⭐️子供の年収UPと夢の実現を両立！年収2000万円を目指す子供を応援しつつ、事業売却という選択肢も伝えたい保護者へ]]></title><description><![CDATA[
+ 🎯 年収の意味を考え直す
+実は、経営者の立場から言うと「年収」という考え方にはあまり意味がありません。なぜなら、事業主として大切なのは「自分が実現したいこと」と「生活の質」だからです。
+あなたが本当に好きなこと・得意なことを事業にすれば、次のようなメリットがあります：
+
+🔥 自分の情熱を仕事にできる
+📊 やりたいことに必要なものは「経費」として購入できる
+🎁 結果的に物欲は自然と満たされていく
+
+例えば、写真やゲーム、旅行が好きなら、それを仕事にすることで最新のカメラ機材やゲーム、旅費などを経費として計上できます。これは給与所得者が自分の趣味のために使うお金とは全く違う性質を持ちます...]]></description><link>https://zenn.dev/nakamotojp/articles/1a4a782922c384</link><guid isPermaLink="true">https://zenn.dev/nakamotojp/articles/1a4a782922c384</guid><pubDate>Sun, 11 May 2025 11:09:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--49E2FwC---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%2520%25E5%25AD%2590%25E4%25BE%259B%25E3%2581%25AE%25E5%25B9%25B4%25E5%258F%258EUP%25E3%2581%25A8%25E5%25A4%25A2%25E3%2581%25AE%25E5%25AE%259F%25E7%258F%25BE%25E3%2582%2592%25E4%25B8%25A1%25E7%25AB%258B%25EF%25BC%2581%25E5%25B9%25B4%25E5%258F%258E2000%25E4%25B8%2587%25E5%2586%2586%25E3%2582%2592%25E7%259B%25AE%25E6%258C%2587%25E3%2581%2599%25E5%25AD%2590%25E4%25BE%259B%25E3%2582%2592%25E5%25BF%259C%25E6%258F%25B4%25E3%2581%2597%25E3%2581%25A4%25E3%2581%25A4%25E3%2580%2581%25E4%25BA%258B%25E6%25A5%25AD%25E5%25A3%25B2%25E5%258D%25B4%25E3%2581%25A8%25E3%2581%2584%25E3%2581%2586%25E9%2581%25B8%25E6%258A%259E%25E8%2582%25A2%25E3%2582%2582%25E4%25BC%259D%25E3%2581%2588%25E3%2581%259F%25E3%2581%2584%25E4%25BF%259D%25E8%25AD%25B7%25E8%2580%2585%25E3%2581%25B8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nakamoto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY3MzcxNGVkNGIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nakamoto</dc:creator></item><item><title><![CDATA[🧠Java初学者向け：List・ArrayList・LinkedListの違いとポケモンで学ぶ使い分け]]></title><description><![CDATA[
+ 📌 目次
+
+
+はじめに
+
+
+List・ArrayList・LinkedListの違い
+
+
+業務での使い分けアドバイス
+
+
+ポケモンを例にした使用シーンとコード解説
+
+ArrayListを使うべき例
+LinkedListを使うべき例
+Listで柔軟に書く方法
+
+
+
+まとめ
+
+
+
+
+ 🎓はじめに
+JavaのList系コレクションは頻繁に登場しますが、「ArrayListとLinkedList、どっちを使えばいいの？」という疑問を抱く方も多いのではないでしょうか。
+この記事では、初学者でもイメージしやすいポケモンを題材に、実際の使い分けをコード付きで解説していきます！
+
+
+ 🗂️List・...]]></description><link>https://zenn.dev/nakamotojp/articles/5522893bdaad19</link><guid isPermaLink="true">https://zenn.dev/nakamotojp/articles/5522893bdaad19</guid><pubDate>Sun, 11 May 2025 11:00:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--SFcod3WZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%2520Java%25E5%2588%259D%25E5%25AD%25A6%25E8%2580%2585%25E5%2590%2591%25E3%2581%2591%25EF%25BC%259AList%25E3%2583%25BBArrayList%25E3%2583%25BBLinkedList%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%25E3%2581%25A8%25E3%2583%259D%25E3%2582%25B1%25E3%2583%25A2%25E3%2583%25B3%25E3%2581%25A7%25E5%25AD%25A6%25E3%2581%25B6%25E4%25BD%25BF%25E3%2581%2584%25E5%2588%2586%25E3%2581%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nakamoto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY3MzcxNGVkNGIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nakamoto</dc:creator></item><item><title><![CDATA[【MapStruct】Javaでオブジェクトの構成が複雑な場合のコピー（マッピング）方法]]></title><description><![CDATA[
+ はじめに
+この記事では、Javaのアノテーションプロセッサ型ライブラリである「MapStruct」を使う上での設定方法や実装例を載せています。
+
+ MapStructを使用するメリット
+マッピング処理を1から手書きする必要が無く、高速かつ型安全に自動生成が実現可能！
+
+ 開発環境
+・Java：21
+・SpringBoot：3.4.5
+・MapStruct：1.5.5.Final
+・Maven
+
+ pom.xmlの設定
+&lt;properties&gt;
+    &lt;java.version&gt;21&lt;/java.version&gt;
+    &lt;mapstruct...]]></description><link>https://zenn.dev/keita09/articles/d7176937c3b456</link><guid isPermaLink="true">https://zenn.dev/keita09/articles/d7176937c3b456</guid><pubDate>Sat, 10 May 2025 14:50:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--eTC662Yy--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590MapStruct%25E3%2580%2591Java%25E3%2581%25A7%25E3%2582%25AA%25E3%2583%2596%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E3%2581%25AE%25E6%25A7%258B%25E6%2588%2590%25E3%2581%258C%25E8%25A4%2587%25E9%259B%2591%25E3%2581%25AA%25E5%25A0%25B4%25E5%2590%2588%25E3%2581%25AE%25E3%2582%25B3%25E3%2583%2594%25E3%2583%25BC%25EF%25BC%2588%25E3%2583%259E%25E3%2583%2583%25E3%2583%2594%25E3%2583%25B3%25E3%2582%25B0%25EF%25BC%2589%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Keita%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdjZGUxZTY1NTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Keita</dc:creator></item><item><title><![CDATA[Spring BootでMongoDBを操作する方法]]></title><description><![CDATA[個人的に詰まったところの備忘録
+
+ MongoDBとは
+MongoDBはNoSQL(RDBのように表で管理しない)の中でもドキュメント指向と呼ばれるジャンルに該当する。キーに基づくデータをJSONのようなドキュメント形式で保持しておくことができる。
+シェル(mongosh)で操作できるほか、CRUDツールのMongodb CompassでGUIで操作したり MongoDB Atlasではクラウド環境でインストール不要でデータベースを扱える。
+
+ Spring Bootで扱う
+Spring BootでMongoDBを扱う方法は実は簡単で、MongoRepositoryインターフェースを継承...]]></description><link>https://zenn.dev/titleholder/articles/b7565ad2770ba2</link><guid isPermaLink="true">https://zenn.dev/titleholder/articles/b7565ad2770ba2</guid><pubDate>Fri, 09 May 2025 13:03:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2RMtbN08--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Spring%2520Boot%25E3%2581%25A7MongoDB%25E3%2582%2592%25E6%2593%258D%25E4%25BD%259C%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%2599%25E3%2583%2586%25E3%2583%25A9%25E3%2583%25B3%25E3%2583%259A%25E3%2583%25BC%25E3%2583%2591%25E3%2583%25BC%25E3%2583%2589%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2590%25E3%2583%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSV8wODdYZlg5S2E3MkdSSHllbk1nSXlJbzRMa0VDSzhydGt6WnVwbkJxQnJMUmtlQT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ベテランペーパードライバー</dc:creator></item><item><title><![CDATA[Javaの「staticイニシャライザ」をざっくりまとめてみた[Java初心者]]]></title><description><![CDATA[
+ はじめに
+こんにちは。
+プログラミング初心者Wakinozaと申します。
+Java勉強中に調べたことを記事にまとめています。
+十分気をつけて執筆していますが、なにぶん初心者が書いた記事なので、理解が浅い点などあるかと思います。
+記事を参考にされる方は、初心者の記事であることを念頭において、お読みいただけると幸いです。
+間違い等あれば、指摘いただけると助かります。
+
+ 対象読者
+
+Javaを勉強中の方
+Java Silver試験を勉強中の方
+Javaのstaticイニシャライザをざっくり知りたい方
+
+
+ 目次
+1.「staticイニシャライザ」とは
+2. クラスロード時の実行順番
+3....]]></description><link>https://zenn.dev/wakinoza/articles/1e0947765db16c</link><guid isPermaLink="true">https://zenn.dev/wakinoza/articles/1e0947765db16c</guid><pubDate>Fri, 09 May 2025 05:47:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--n_Yszk0U--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Java%25E3%2581%25AE%25E3%2580%258Cstatic%25E3%2582%25A4%25E3%2583%258B%25E3%2582%25B7%25E3%2583%25A3%25E3%2583%25A9%25E3%2582%25A4%25E3%2582%25B6%25E3%2580%258D%25E3%2582%2592%25E3%2581%2596%25E3%2581%25A3%25E3%2581%258F%25E3%2582%258A%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%255BJava%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%255D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:wakinoza%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhkYzVjNWY5ZWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>wakinoza</dc:creator></item></channel></rss>

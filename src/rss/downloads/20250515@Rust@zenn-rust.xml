@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Rust」のフィード]]></title><description><![CDATA[Zennのトピック「Rust」のRSSフィードです]]></description><link>https://zenn.dev/topics/rust</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ba09661577.png</url><title>Zennの「Rust」のフィード</title><link>https://zenn.dev/topics/rust</link></image><generator>zenn.dev</generator><lastBuildDate>Thu, 15 May 2025 00:57:59 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/rust/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[RustでAtCoderの過去問をやってみた]]></title><description><![CDATA[モダンな言語を使って他のエンジニアと差別化したいと思ったことはりませんか？
+今回はモダンな言語であるRustで競技プログラミングAtcoderをやってみました。
+なぜ競技プログラミングでRustなどのモダンな言語を使ったのかというと、モダン言語の書き方やアルゴリズムの組み方をトライアンドエラーしながら学習でき、点数として出来具合が表示されるため技術力に自信がつくと思ったからです。
+前半ではRustとAtcoderについて、後半には実際にRustで回答したコードを記載しました。これを機にRustに挑戦してみましょう！
+
+ Rust
+
+ Rustの概要
+Rustはメモリ安全性、並行性、および...]]></description><link>https://zenn.dev/headwaters/articles/4233c785a49a04</link><guid isPermaLink="true">https://zenn.dev/headwaters/articles/4233c785a49a04</guid><pubDate>Tue, 13 May 2025 12:23:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3giFegsG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25A7AtCoder%25E3%2581%25AE%25E9%2581%258E%25E5%258E%25BB%25E5%2595%258F%25E3%2582%2592%25E3%2582%2584%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2582%25B1%25E3%2583%25B3%25E5%2590%2589%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZjNGExY2UxMDYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2598%25E3%2583%2583%25E3%2583%2589%25E3%2582%25A6%25E3%2582%25A9%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%25BC%25E3%2582%25B9%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSTlSRFk5eEFXaDBwVGgyZnNJX0w2VnFXZmFfYWR4NG9Oc1JhQ1BVV3hkenNGa3hDLW49czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ケン吉</dc:creator></item><item><title><![CDATA[uv + maturin + PyO3でRustをPythonから呼ぶ]]></title><description><![CDATA[PyO3/maturin は、Rust コードを Python から使えるようにバインディングを生成し、Pythonパッケージとしてビルド・配布するためのツールチェインです。
+この記事では、maturin を用いて Rust ライブラリを Python から使用し、更に Rust 実装に基づき Python の型定義ファイル(.pyi)を自動生成したり、独自の Python 実装部分を記述する方法について説明します。
+
+ 準備
+Python のモダンなパッケージマネージャである uv をインストールします。既にインストール済みの方は飛ばしてください。
+他のパッケージマネージャを使いたいと...]]></description><link>https://zenn.dev/nahco3/articles/519560fe186cb0</link><guid isPermaLink="true">https://zenn.dev/nahco3/articles/519560fe186cb0</guid><pubDate>Tue, 13 May 2025 12:07:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bmfO1Dlr--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:uv%2520%252B%2520maturin%2520%252B%2520PyO3%25E3%2581%25A7Rust%25E3%2582%2592Python%25E3%2581%258B%25E3%2582%2589%25E5%2591%25BC%25E3%2581%25B6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nahco314%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U3ZmRiZWNiNDAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nahco314</dc:creator></item><item><title><![CDATA[0023-RefCell]]></title><description><![CDATA[RefCellはCellと同じく構造体メンバーにアクセスして参照を取得し処理することができる
+RefCell&lt;T&gt;で定義されているときに参照を借用(borrow)したときはRef&lt;T&gt;を、可変参照を借用したときはRefMut&lt;T&gt;を処理する
+借用チェックはコンパイル時でなく、実行時に実施される
+pub trait Messenger {
+    fn send(&amp;self, msg: &amp;str);
+}
+
+pub struct LimitTracker&lt;'a, T: 'a + Messenger&gt; {
+    messenge...]]></description><link>https://zenn.dev/yukinekonyan/articles/0eefeb655cccf1</link><guid isPermaLink="true">https://zenn.dev/yukinekonyan/articles/0eefeb655cccf1</guid><pubDate>Tue, 13 May 2025 05:21:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--EDQaEIc4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_80:0023-RefCell%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yukineko%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTHdrb1VFNXJOaVI2dndBUlBkMVNhYXM5QVBRMk45Nk1qTVdPTlp5VXFjNkhLdndRPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yukineko</dc:creator></item><item><title><![CDATA[0022-Cell]]></title><description><![CDATA[structのメンバーの値にアクセスする
+Cellは即値でCellが覆う値はCopyが必要
+use std::cell::Cell;
+
+#[derive(Debug)]
+pub struct SomeStruct {
+    some_field: Cell&lt;i32&gt;,
+    imutalbe_field: String
+}
+fn main() {
+    let a = SomeStruct {
+        some_field: Cell::new(1),
+        imutalbe_field: String::from("hello")
+    };  
+...]]></description><link>https://zenn.dev/yukinekonyan/articles/6a9105be245c73</link><guid isPermaLink="true">https://zenn.dev/yukinekonyan/articles/6a9105be245c73</guid><pubDate>Tue, 13 May 2025 05:04:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--cjyIMhfF--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_80:0022-Cell%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yukineko%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTHdrb1VFNXJOaVI2dndBUlBkMVNhYXM5QVBRMk45Nk1qTVdPTlp5VXFjNkhLdndRPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yukineko</dc:creator></item><item><title><![CDATA[RustでGodot Engineを使ったテスト可能な設計: 依存性逆転の原則を活用する]]></title><description><![CDATA[
+ はじめに
+
+Godot EngineをRustで利用する際、Camera3DやInputEventMouseMotionなどのGodotクラスを直接操作するコードをそのまま書くと、テストが非常に難しくなります。
+特に、new_allocといったGodot特有のメソッドは、Godot Engineのランタイム環境が必要なため、テスト環境ではエラーとなります。
+そこで、依存性逆転の原則を活用して、Godot Engineに依存しない形で設計する方法を紹介します。これにより、テスト可能で拡張性の高いコードを実現できます。
+
+
+ 依存性逆転の原則とは
+
+依存性逆転の原則は、SOLID原則の一...]]></description><link>https://zenn.dev/soyukke/articles/dfd29368ba7c77</link><guid isPermaLink="true">https://zenn.dev/soyukke/articles/dfd29368ba7c77</guid><pubDate>Mon, 12 May 2025 23:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--TceE7G7G--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25A7Godot%2520Engine%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%259F%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E5%258F%25AF%25E8%2583%25BD%25E3%2581%25AA%25E8%25A8%25AD%25E8%25A8%2588%253A%2520%25E4%25BE%259D%25E5%25AD%2598%25E6%2580%25A7%25E9%2580%2586%25E8%25BB%25A2%25E3%2581%25AE%25E5%258E%259F%25E5%2589%2587%25E3%2582%2592%25E6%25B4%25BB%25E7%2594%25A8%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259D%25E3%2582%2586%25E3%2581%25A3%25E3%2581%2591%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg5MDU4YzBkM2YuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>そゆっけ</dc:creator></item><item><title><![CDATA[[Bevy] アプリの終了アクションの変更点について]]></title><description><![CDATA[https://bevy-cheatbook.github.io/programming/app-builder.html#quitting-the-app
+↑Xボタンなどでアプリを終了するシステムが解説されていますが、実際には動きません。
+正しくは以下の通りです。
+
+quit.rs
+fn quit_system(
+    mut interaction_query: Query&lt;&amp;Interaction, (Changed&lt;Interaction&gt;, With&lt;QuitButton&gt;),&gt;,
+    mut exit: EventWriter...]]></description><link>https://zenn.dev/omini/articles/870cf995110feb</link><guid isPermaLink="true">https://zenn.dev/omini/articles/870cf995110feb</guid><pubDate>Mon, 12 May 2025 20:46:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--E1DXDiwg--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BBevy%255D%2520%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2581%25AE%25E7%25B5%2582%25E4%25BA%2586%25E3%2582%25A2%25E3%2582%25AF%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2581%25AE%25E5%25A4%2589%25E6%259B%25B4%25E7%2582%25B9%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:omini%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2Rhcmsvby5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>omini</dc:creator></item><item><title><![CDATA[爆速 Python 型チェッカーの ty を触ってみる]]></title><description><![CDATA[
+ はじめに
+今や Python の環境構築のスタンダードになりつつある uv (rye) や 高速 Linter の ruff などを管理する Astral から、Rust 製高速型チェッカーの ty がリリースされました。2025年5月現在、プレリリース版とのことで公式ドキュメントも整備されていない状態ではありますが、公式の README を読みながら試してみます。
+https://github.com/astral-sh/ty
+
+ インストール方法
+uv を使っている方は以下のコマンドでグローバルにインストールできます。
+uv tool install ty@latest
+開発環境...]]></description><link>https://zenn.dev/prgckwb/articles/ty-type-checker</link><guid isPermaLink="true">https://zenn.dev/prgckwb/articles/ty-type-checker</guid><pubDate>Mon, 12 May 2025 15:19:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--TBbs8nbM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%2588%2586%25E9%2580%259F%2520Python%2520%25E5%259E%258B%25E3%2583%2581%25E3%2582%25A7%25E3%2583%2583%25E3%2582%25AB%25E3%2583%25BC%25E3%2581%25AE%2520ty%2520%25E3%2582%2592%25E8%25A7%25A6%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A1%25E3%2581%258F%25E3%2582%258F%25E3%2581%25B6%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU1MWU5MTZhMjguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ちくわぶ</dc:creator></item><item><title><![CDATA[#94　Creating Solana Token Metadata]]></title><description><![CDATA[
+ Introduction
+Creating and managing tokens on the Solana blockchain has become a fundamental task for developers involved in decentralized finance (DeFi), NFTs, and other blockchain applications. However, the process involves more than just minting tokens; it also requires associating them with ...]]></description><link>https://zenn.dev/nxted_sapporo/articles/46288ae0d14f62</link><guid isPermaLink="true">https://zenn.dev/nxted_sapporo/articles/46288ae0d14f62</guid><pubDate>Mon, 12 May 2025 13:42:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--XSYklTs3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:%252394%25E3%2580%2580Creating%2520Solana%2520Token%2520Metadata%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:NXTEDCo.%252C%2520Ltd.%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBmZjQzOTVhYzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>NXTEDCo., Ltd.</dc:creator></item><item><title><![CDATA[ABC405:Rustで解く！問題解説]]></title><description><![CDATA[AtCoder Beginner Contest 405のA~E問題をRustで解いた際の解法をまとめました。
+
+ A問題
+問題
+https://atcoder.jp/contests/abc405/tasks/abc405_a
+解説
+与えられた値 R（レート）と X（条件）に基づいて、R が「Rated対象」に該当するかを判定する問題です。
+以下表の条件に従って判定します。
+
+
+
+X
+判定対象の R の範囲
+
+
+
+
+1
+1600 \leq R \leq 2999
+
+
+2
+1200 \leq R \leq 2399
+
+
+
+コード
+
+abc405a.rs
+use proconio::inp...]]></description><link>https://zenn.dev/nakst_hide/articles/32bac535a03cf3</link><guid isPermaLink="true">https://zenn.dev/nakst_hide/articles/32bac535a03cf3</guid><pubDate>Mon, 12 May 2025 13:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dz8npuof--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ABC405%253ARust%25E3%2581%25A7%25E8%25A7%25A3%25E3%2581%258F%25EF%25BC%2581%25E5%2595%258F%25E9%25A1%258C%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nakahide%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YkMxNEpSQnNET01hTGcxTVRQWGNTWS1qYlNQbFRMQTN3ZU9Sdz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nakahide</dc:creator></item><item><title><![CDATA[〚Rust〛GitHub ActionsでtauriのAndroidビルドを行う]]></title><description><![CDATA[https://github.com/tauri-apps/tauri-action/issues/525#issuecomment-2339980065
+これを元に少し手を加えた。
+name: Build
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  CARGO_TERM_COLOR: always
+  NDK_VERSION: 29.0.13113456
+
+jobs:
+  android:
+    runs-on: ubuntu-latest
+    steps:
+
+    - uses: actions/checkout@v4
+
+ ...]]></description><link>https://zenn.dev/kinon/articles/4587c6b9e72fac</link><guid isPermaLink="true">https://zenn.dev/kinon/articles/4587c6b9e72fac</guid><pubDate>Mon, 12 May 2025 12:11:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bK_fJtMY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%259ARust%25E3%2580%259BGitHub%2520Actions%25E3%2581%25A7tauri%25E3%2581%25AEAndroid%25E3%2583%2593%25E3%2583%25AB%25E3%2583%2589%25E3%2582%2592%25E8%25A1%258C%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2590%2582%25E4%25B9%2583%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q0ZjVmM2M5OTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>㐂乃</dc:creator></item><item><title><![CDATA[0021-mpsc]]></title><description><![CDATA[use std::sync::mpsc;
+use std::thread;
+use std::time::Duration;
+fn main() {
+    let (tx, rx) = mpsc::channel();
+    let tx1 = mpsc::Sender::clone(&amp;tx); // txをcloneしつつ、rxは同一のものを使用する
+
+    thread::spawn(move || {
+        let helloworld = vec![
+            String::from("hello"),
+            String...]]></description><link>https://zenn.dev/yukinekonyan/articles/88a19251ef9e66</link><guid isPermaLink="true">https://zenn.dev/yukinekonyan/articles/88a19251ef9e66</guid><pubDate>Mon, 12 May 2025 09:52:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Z_Xi-CDI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_80:0021-mpsc%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yukineko%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTHdrb1VFNXJOaVI2dndBUlBkMVNhYXM5QVBRMk45Nk1qTVdPTlp5VXFjNkhLdndRPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yukineko</dc:creator></item><item><title><![CDATA[0020-arc]]></title><description><![CDATA[use std::sync::{Arc, Mutex};
+use std::thread;
+fn main() {
+    let counter = Arc::new(Mutex::new(0));
+    let mut handles = vec![];
+    for _ in 0..10 {
+        let counter = Arc::clone(&amp;counter);
+        let handle = thread::spawn(move || {
+            let mut num = counter.lock().unwrap();
+ ...]]></description><link>https://zenn.dev/yukinekonyan/articles/2ec8b3b337d0de</link><guid isPermaLink="true">https://zenn.dev/yukinekonyan/articles/2ec8b3b337d0de</guid><pubDate>Mon, 12 May 2025 09:49:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--D2SdUx9W--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_80:0020-arc%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yukineko%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTHdrb1VFNXJOaVI2dndBUlBkMVNhYXM5QVBRMk45Nk1qTVdPTlp5VXFjNkhLdndRPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yukineko</dc:creator></item><item><title><![CDATA[遠隔支援サービスLINKLETのシステムアーキテクチャの紹介]]></title><description><![CDATA[
+ はじめに
+こんにちは、プロダクト開発部の大森です。
+Fairy Devices（以降、当社とします）では首掛け型ウェアラブルデバイス「THINKLET」を開発しています。
+
+THINKLETは先端についているカメラで装着者視点の映像を記録し、
+首元の5chマイクと当社の持つ音声処理技術により、高騒音な現場環境においてもクリアに装着者の音声を集音することができます。
+さらに4GLTE通信が行えるため、こうして記録した映像や音声をネットワークを通して共有することができます。
+これらを利用すると、装着者はハンズフリーで手元の映像を遠隔地に共有することができます。
+こうしたTHINKLETの...]]></description><link>https://zenn.dev/fairydevices/articles/7a59373fed1b6a</link><guid isPermaLink="true">https://zenn.dev/fairydevices/articles/7a59373fed1b6a</guid><pubDate>Mon, 12 May 2025 08:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jKREr1dK--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E9%2581%25A0%25E9%259A%2594%25E6%2594%25AF%25E6%258F%25B4%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2593%25E3%2582%25B9LINKLET%25E3%2581%25AE%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%25E3%2582%25A2%25E3%2583%25BC%25E3%2582%25AD%25E3%2583%2586%25E3%2582%25AF%25E3%2583%2581%25E3%2583%25A3%25E3%2581%25AE%25E7%25B4%25B9%25E4%25BB%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:anraku%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E5MjE4ODkwNjAuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2595%25E3%2582%25A7%25E3%2582%25A2%25E3%2583%25AA%25E3%2583%25BC%25E3%2583%2587%25E3%2583%2590%25E3%2582%25A4%25E3%2582%25BB%25E3%2582%25BA%25E5%2585%25AC%25E5%25BC%258F%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NlMjdkNDMyNjEuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>anraku</dc:creator></item><item><title><![CDATA[clapでサブコマンドがないときにヘルプを表示しないようにする]]></title><description><![CDATA[
+ はじめに
+これはRustのclapクレートで必須のサブコマンドを指定しなかったときにヘルプメッセージではなくエラーを表示する方法についての記事です。
+
+ 環境
+$ cargo version
+cargo 1.86.0 (adf9b6ad1 2025-02-28)
+
+Cargo.toml
+[dependencies]
+clap = { version = "4.5.38", features = ["derive"] }
+
+
+ 方法
+以下はaddとremoveというサブコマンドを持つコマンドのコードです。
+command: Commandは必須のサブコマンドを定義しています。
+
+mai...]]></description><link>https://zenn.dev/sorairolake/articles/not-print-help-for-clap-without-subcommand</link><guid isPermaLink="true">https://zenn.dev/sorairolake/articles/not-print-help-for-clap-without-subcommand</guid><pubDate>Mon, 12 May 2025 06:24:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Huq3aEvn--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:clap%25E3%2581%25A7%25E3%2582%25B5%25E3%2583%2596%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2581%258C%25E3%2581%25AA%25E3%2581%2584%25E3%2581%25A8%25E3%2581%258D%25E3%2581%25AB%25E3%2583%2598%25E3%2583%25AB%25E3%2583%2597%25E3%2582%2592%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2597%25E3%2581%25AA%25E3%2581%2584%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:SorairoLake%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzEyZGZiOGQyM2QuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>SorairoLake</dc:creator></item><item><title><![CDATA[なぜPythonはAIコード生成の王者なのか：LLM時代における開発言語の選び方（2025年5月版）]]></title><description><![CDATA[2025年5月の今、AIを活用したアプリケーション開発の鍵は「コード生成精度の高い言語を選ぶこと」にあります。生成AIはもはやアイデア段階からアプリの完成までをサポートする開発パートナーとなりつつありますが、そのパフォーマンスは選択するプログラミング言語によって大きく変わります。中でも、Pythonは依然として圧倒的な優位性を持つ言語です。
+最新の大規模言語モデル（LLM）—GPT-4o、Claude 3、Gemini 1.5 など—はいずれもGitHub、Kaggle、StackOverflowをはじめとする膨大なPythonコードを学習データとして取り入れており、文法や設計思想、ライ...]]></description><link>https://zenn.dev/ken1618/articles/7cd623cd9e56df</link><guid isPermaLink="true">https://zenn.dev/ken1618/articles/7cd623cd9e56df</guid><pubDate>Mon, 12 May 2025 04:49:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--DHsNxptk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%25AA%25E3%2581%259CPython%25E3%2581%25AFAI%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E7%2594%259F%25E6%2588%2590%25E3%2581%25AE%25E7%258E%258B%25E8%2580%2585%25E3%2581%25AA%25E3%2581%25AE%25E3%2581%258B%25EF%25BC%259ALLM%25E6%2599%2582%25E4%25BB%25A3%25E3%2581%25AB%25E3%2581%258A%25E3%2581%2591%25E3%2582%258B%25E9%2596%258B%25E7%2599%25BA%25E8%25A8%2580%25E8%25AA%259E%25E3%2581%25AE%25E9%2581%25B8%25E3%2581%25B3%25E6%2596%25B9%25EF%25BC%25882025%25E5%25B9%25B45%25E6%259C%2588%25E7%2589%2588%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ken1618%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RlYTJjY2E0YTQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ken1618</dc:creator></item><item><title><![CDATA[AIの時代だからこそ、型システムがより厳格な静的型付け言語（GoやRustなど）が良いのでは？という話]]></title><description><![CDATA[
+ はじめに
+CursorのようなAIのコードエディタがめちゃくちゃ進化してきている、こんな時代だからこそ静的型付け言語、特に厳格な静的型付け言語であるRustとの相性が良いのでは？という話をポエム的に書いてみます。
+この記事ではあえてRustに特化して比較や検討をしているのは、個人的な好みの問題です笑
+今の現場では静的型付け言語であるTypeScriptを使っているけど、厳格な静的型付け言語ではないし、実装されているコードも現場や人によって異なることが多くて、AIと共創していくことを考えたときにベターな言語があるんじゃないかって思ってつらつら書いてみます。
+（TypeScriptって本...]]></description><link>https://zenn.dev/dress_code/articles/9fcfe8a7288dbd</link><guid isPermaLink="true">https://zenn.dev/dress_code/articles/9fcfe8a7288dbd</guid><pubDate>Mon, 12 May 2025 00:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5am7UhgL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AI%25E3%2581%25AE%25E6%2599%2582%25E4%25BB%25A3%25E3%2581%25A0%25E3%2581%258B%25E3%2582%2589%25E3%2581%2593%25E3%2581%259D%25E3%2580%2581%25E5%259E%258B%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%25E3%2581%258C%25E3%2582%2588%25E3%2582%258A%25E5%258E%25B3%25E6%25A0%25BC%25E3%2581%25AA%25E9%259D%2599%25E7%259A%2584%25E5%259E%258B%25E4%25BB%2598%25E3%2581%2591%25E8%25A8%2580%25E8%25AA%259E%25EF%25BC%2588Go%25E3%2582%2584Rust%25E3%2581%25AA%25E3%2581%25A9%25EF%25BC%2589%25E3%2581%258C%25E8%2589%25AF%25E3%2581%2584%25E3%2581%25AE%25E3%2581%25A7%25E3%2581%25AF%25EF%25BC%259F%25E3%2581%25A8%25E3%2581%2584%25E3%2581%2586%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%258B%25E3%2582%258F%25E3%2581%2586%25E3%2581%259D%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRiOGMxZmU1MDUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:DRESS%2520CODE%2520TECH%2520BLOG%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg5OThmMTk2YzAuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>かわうそ</dc:creator></item><item><title><![CDATA[Rust 1.82 (2024-10-17) 以降の raw pointer (生ポインタ) の作成方法]]></title><description><![CDATA[
+ Rust 1.82 以降の raw pointer の作成方法
+
+Immutable raw pointer: &amp;raw const x
+
+Mutable raw pointer: &amp;raw mut x
+
+
+let mut num = 5;
+
+let r1 = &amp;raw const num;
+let r2 = &amp;raw mut num;
+引用元: Unsafe Rust - The Rust Programming Language
+
+ Rust 1.82 より前の raw pointer の作成方法
+
+Immutable raw pointer: &...]]></description><link>https://zenn.dev/rustacean42/articles/rust-raw-pointer-1_82</link><guid isPermaLink="true">https://zenn.dev/rustacean42/articles/rust-raw-pointer-1_82</guid><pubDate>Sun, 11 May 2025 17:59:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Y_yJLviA--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25201.82%2520%25282024-10-17%2529%2520%25E4%25BB%25A5%25E9%2599%258D%25E3%2581%25AE%2520raw%2520pointer%2520%2528%25E7%2594%259F%25E3%2583%259D%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25BF%2529%2520%25E3%2581%25AE%25E4%25BD%259C%25E6%2588%2590%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:R%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSjVxSmV3QkZONC1QRnc2UzhWb08tMktqNllmZENhb2UtM3VPZzkyX2hmYmw0Zmd3PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>R</dc:creator></item><item><title><![CDATA[Rustでシンプルなリンカーを実装してみた]]></title><description><![CDATA[
+ はじめに
+以前からリンカーに興味あったので、リンカーの勉強の一環でシンプルなリンカーを実装してみました。
+https://github.com/skanehira/yui
+次のコードのオブジェクトファイルからaarch64向けのELFバイナリを生成して実行できるだけのリンカーですが、
+それでも色々と学びがあったので、実装について解説をしていきたいと思います。
+
+main.c
+__asm__(
+      ".global _start\n"
+      "_start:\n"
+      "    adr     x0, x\n"
+      "    ldr     w0, [x0...]]></description><link>https://zenn.dev/techlead/articles/2025-05-10-rust-write-a-simple-linker</link><guid isPermaLink="true">https://zenn.dev/techlead/articles/2025-05-10-rust-write-a-simple-linker</guid><pubDate>Sun, 11 May 2025 15:11:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--iw14XVku--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25A7%25E3%2582%25B7%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AB%25E3%2581%25AA%25E3%2583%25AA%25E3%2583%25B3%25E3%2582%25AB%25E3%2583%25BC%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2582%25B4%25E3%2583%25AA%25E3%2583%25A9%2540%25E3%2583%2580%25E3%2582%25A4%25E3%2582%25A8%25E3%2583%2583%25E3%2583%2588%25E9%25A0%2591%25E5%25BC%25B5%25E3%2582%258A%25E3%2581%259F%25E3%2581%2584%25E3%2581%25AA%25E3%2581%25AE%25E3%2581%25A0%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJmODRjMjM5ZTAuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%25BC%25E3%2583%2589%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdlNGE3Zjg2ODIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ゴリラ@ダイエット頑張りたいなのだ</dc:creator></item><item><title><![CDATA[WasabiOS 上に任意のビットマップフォント表示を実装する]]></title><description><![CDATA[私も流行りに乗って（？） hikalium さん著の「［作って学ぶ］OSのしくみⅠ─⁠─メモリ管理、マルチタスク、ハードウェア制御」を進めているところです．めちゃくちゃ楽しすぎて研究その他に悪影響を及ぼしていて大変に困っています．誰か助けてください．
+というわけで題の通りです．この本においては，文字を描画するために，川合秀実さん著「30日でできる! OS自作入門」に付属していたビットマップフォントもどきのテキストファイルを使用しているのですが，せっかくなので任意のビットマップフォントを表示できるように実装しました．本稿はそのまとめです．
+
+ ビットマップフォント
+文字をドット絵のような形...]]></description><link>https://zenn.dev/itsu_dev/articles/e605d3d2f230eb</link><guid isPermaLink="true">https://zenn.dev/itsu_dev/articles/e605d3d2f230eb</guid><pubDate>Sun, 11 May 2025 13:10:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--e8P5aGDU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:WasabiOS%2520%25E4%25B8%258A%25E3%2581%25AB%25E4%25BB%25BB%25E6%2584%258F%25E3%2581%25AE%25E3%2583%2593%25E3%2583%2583%25E3%2583%2588%25E3%2583%259E%25E3%2583%2583%25E3%2583%2597%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25B3%25E3%2583%2588%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A1%25E3%2582%2585%25E3%2582%258B%25E3%2582%258A%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FkNGNhZjgxZDUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ちゅるり</dc:creator></item><item><title><![CDATA[Appleの認証処理をPythonとRustで再現できるか試してみた]]></title><description><![CDATA[
+ Appleの認証における全体像
+Appleのサービスでは、Apple IDとパスワードだけでなく、多要素認証とSRPを使って本人確認をセキュアに実施しています。
+SRPを使う目的は、盗聴防止でパスワードをネットワーク上に送らず認証するためであり、Appleにもパスワードを保存しない形になっています。また、多要素認証を行うことによって、他人によるなりすましを防ぐことができます。
+
+ 必要な構成要素
+
+ srp_client: パスワードを使った安全な認証鍵
+通信の流れは、以下のようになっています。
+クライアントとサーバーで共通鍵を計算する
+↓
+サーバーに「私はこの共通鍵を知ってるよ」と...]]></description><link>https://zenn.dev/bamboo_nova/articles/ff98a3efcb3f80</link><guid isPermaLink="true">https://zenn.dev/bamboo_nova/articles/ff98a3efcb3f80</guid><pubDate>Sun, 11 May 2025 11:02:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BAoLjlfC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Apple%25E3%2581%25AE%25E8%25AA%258D%25E8%25A8%25BC%25E5%2587%25A6%25E7%2590%2586%25E3%2582%2592Python%25E3%2581%25A8Rust%25E3%2581%25A7%25E5%2586%258D%25E7%258F%25BE%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258B%25E3%2581%258B%25E8%25A9%25A6%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E8%25A1%2580%25E5%25A8%2581%25E8%258F%25AF%25E6%2588%2591%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZiMmY0NjM5OTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>血威華我</dc:creator></item></channel></rss>
