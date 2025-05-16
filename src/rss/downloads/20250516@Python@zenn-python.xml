@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Fri, 16 May 2025 00:09:18 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[変動率０は異常値？：TARGET=0除去による株価予測AIの精度改善]]></title><description><![CDATA[
+ 実験1：TARGET=0の取扱いによる影響検証（V1 vs V2）
+
+ 1. 検証目的
+本節では、株価予測回帰モデル（XGBoost）における目的変数（以下、Target）として設定した「翌営業日のlog収益率」に対し、値が0となるデータを保持する場合（V1）と、それを除外する場合（V2）で、モデル性能や学習安定性にどのような差異が生じるかを検証する。特に、log収益率が0となるデータの存在が学習にどのような影響を及ぼすかを数理的に観察し、誤差関数（MAE, RMSE, R², MAPE）を用いた評価を行う。
+
+ 2. 数学的背景
+log収益率（log-return）は以下の式により...]]></description><link>https://zenn.dev/kto2myk/articles/a7c53d3b805770</link><guid isPermaLink="true">https://zenn.dev/kto2myk/articles/a7c53d3b805770</guid><pubDate>Thu, 15 May 2025 16:04:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vMjnPUkz--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%25A4%2589%25E5%258B%2595%25E7%258E%2587%25EF%25BC%2590%25E3%2581%25AF%25E7%2595%25B0%25E5%25B8%25B8%25E5%2580%25A4%25EF%25BC%259F%25EF%25BC%259ATARGET%253D0%25E9%2599%25A4%25E5%258E%25BB%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258B%25E6%25A0%25AA%25E4%25BE%25A1%25E4%25BA%2588%25E6%25B8%25ACAI%25E3%2581%25AE%25E7%25B2%25BE%25E5%25BA%25A6%25E6%2594%25B9%25E5%2596%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E7%25A5%259E%25E7%2594%25B0%25E3%2580%2580%25E6%2599%25BA%25E5%25BC%25A5%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc1NjdiNTRjYTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>神田　智弥</dc:creator></item><item><title><![CDATA[clickを使ってPythonのコマンドライン引数をきれいにしよう！]]></title><description><![CDATA[今回は、Pythonできれいなコマンドラインインターフェースを実装できるclickについて紹介してみようと思います。
+
+ clickとは？
+clickとはPythonできれいなコマンドラインインターフェースを実装するためのライブラリです。その名前はCommand Line Interface Creation Kitの頭文字をとったようです。レポジトリは以下になります。
+https://github.com/pallets/click
+clickはコマンドラインツールを素早く実装できることに注力しており、従来のsysやargparseを利用したものと比べて格段に実装難易度が下がっていると...]]></description><link>https://zenn.dev/akasan/articles/034598cbd096e2</link><guid isPermaLink="true">https://zenn.dev/akasan/articles/034598cbd096e2</guid><pubDate>Thu, 15 May 2025 13:08:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--onc9q-rP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:click%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6Python%25E3%2581%25AE%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%25B3%25E5%25BC%2595%25E6%2595%25B0%25E3%2582%2592%25E3%2581%258D%25E3%2582%258C%25E3%2581%2584%25E3%2581%25AB%25E3%2581%2597%25E3%2582%2588%25E3%2581%2586%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Akasan%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUVkRlRwNXJfNDFtel9OY3dPYUtMRE1vc09tbVB6YmxHM0V5N3lNZzI3QWM9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Akasan</dc:creator></item><item><title><![CDATA[コンテナのPythonからMySQLにzstd圧縮を有効にして接続する]]></title><description><![CDATA[mysql-connector-python を使えば簡単なのですが、あえて mysqlclient を使う場合の話です。
+まず、Pythonの公式DockerイメージはDebianベースになっていますが、Debianではデフォルトではapt-getでMySQLをインストールできません。 (Debian sid では MySQL が復活していますが、stableになるには時間がかかります)
+代わりにmariadbのクライアントライブラリ(libmariadb)はインストールできるのですが、MariaDBはzstd圧縮に対応しておらず、そのせいかクライアントライブラリはzstd圧縮に対応し...]]></description><link>https://zenn.dev/methane/articles/mariadb-client-in-container</link><guid isPermaLink="true">https://zenn.dev/methane/articles/mariadb-client-in-container</guid><pubDate>Thu, 15 May 2025 13:00:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--20AQdKxY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2586%25E3%2583%258A%25E3%2581%25AEPython%25E3%2581%258B%25E3%2582%2589MySQL%25E3%2581%25ABzstd%25E5%259C%25A7%25E7%25B8%25AE%25E3%2582%2592%25E6%259C%2589%25E5%258A%25B9%25E3%2581%25AB%25E3%2581%2597%25E3%2581%25A6%25E6%258E%25A5%25E7%25B6%259A%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:methane%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2h4RE5nS2F5a3FreGhkeUZMaG9Yc3hRVk9QVFVrd3hqTngtZGlxT05FPXMyNTAtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>methane</dc:creator></item><item><title><![CDATA[seleniumの使い方　第５回　ActionChainの活用（python×Microsoft Edge）]]></title><description><![CDATA[こんにちは、星杜なぎさです
+今回は、seleniumで文字入力やクリックを行う方法について学びます。
+環境構築がまだの人は、以下の記事で準備してから本記事を読まれるとよいでしょう
+https://zenn.dev/hoshinagi1219/articles/b61f220e0908c5
+
+ 1. はじめに
+
+Seleniumは、Webブラウザの操作を自動化するためのツール
+オープンソースなので、無料で利用可能
+WebスクレイピングやRPA（Robotic Process Automation）などに活用できる
+
+
+ 1.1 この記事について
+
+Seleniumでできることを端的に表した...]]></description><link>https://zenn.dev/hoshinagi1219/articles/1c195715a380a9</link><guid isPermaLink="true">https://zenn.dev/hoshinagi1219/articles/1c195715a380a9</guid><pubDate>Thu, 15 May 2025 08:10:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--rq24Pvul--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:selenium%25E3%2581%25AE%25E4%25BD%25BF%25E3%2581%2584%25E6%2596%25B9%25E3%2580%2580%25E7%25AC%25AC%25EF%25BC%2595%25E5%259B%259E%25E3%2580%2580ActionChain%25E3%2581%25AE%25E6%25B4%25BB%25E7%2594%25A8%25EF%25BC%2588python%25C3%2597Microsoft%2520Edge%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%2598%259F%25E6%259D%259C%25E3%2581%25AA%25E3%2581%258E%25E3%2581%2595%25EF%25BC%2588Nagisa%2520Hoshi...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MzMTgwYmFjZjYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>星杜なぎさ（Nagisa Hoshimori）</dc:creator></item><item><title><![CDATA[uvで管理するFastAPIプロジェクトの本番イメージのMulti Stage Build]]></title><description><![CDATA[
+ はじめに
+Nauhの池田です。
+以前はPythonのプロジェクトはpoetryで管理することが多かったのですが、最近はuvを使用することが増えてきました。
+FastAPIのバックエンドサービスをKubernetes, CloudRun, ECSなどでホストする際はContainer Imageのサイズをできるだけ削減するために最低限の依存関係だけをインストールしたContainerを用意することが一般的ですが、uvで管理するプロジェクトの場合はどのように実現できるのかを調べたのでその結果をまとめておきます。
+
+ uvについて
+uvの特徴としてはRustで開発されており高速に動作するこ...]]></description><link>https://zenn.dev/nauh_blog/articles/14a92d11006199</link><guid isPermaLink="true">https://zenn.dev/nauh_blog/articles/14a92d11006199</guid><pubDate>Thu, 15 May 2025 07:15:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7fV1HVO_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:uv%25E3%2581%25A7%25E7%25AE%25A1%25E7%2590%2586%25E3%2581%2599%25E3%2582%258BFastAPI%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E3%2581%25AE%25E6%259C%25AC%25E7%2595%25AA%25E3%2582%25A4%25E3%2583%25A1%25E3%2583%25BC%25E3%2582%25B8%25E3%2581%25AEMulti%2520Stage%2520Build%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:atsuik%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VjODAxYjVlNzIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Nauh%2528%25E3%2583%258A%25E3%2582%25A6%25E3%2582%25A2%2529%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0Y2VyRXg4M0pVblZyenZhVGVuVmZyNXNHbWRoOXpheThtTjhDY2FEdWJXPXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>atsuik</dc:creator></item><item><title><![CDATA[LiNGAMで因果探索する際の概観分析について調査した（正規性）]]></title><description><![CDATA[
+ はじめに
+こんにちは、因果探索アプリケーション Causalas 開発の井手です。
+今回は、因果探索アルゴリズムの一つであるLiNGAMを用いた因果探索における、概観分析について調査しました。
+LiNGAMに関連する論文を中心に調査を行い、因果探索の際に共通して実施される概観分析の項目として、正規性の分析方法についてまとめましたので紹介します。
+
+ 正規性
+LiNGAMは非ガウス性を仮定とした因果探索手法です。
+そのため、多くの論文では、因果探索を実行するデータセットの各変数が正規分布に従うかどうかを検証し、LiNGAMの前提条件を満たしているかを確認しています。
+
+ ヒストグラム
+...]]></description><link>https://zenn.dev/as_causal/articles/6a5b7c3f9745a6</link><guid isPermaLink="true">https://zenn.dev/as_causal/articles/6a5b7c3f9745a6</guid><pubDate>Thu, 15 May 2025 03:35:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xax4Nmqa--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:LiNGAM%25E3%2581%25A7%25E5%259B%25A0%25E6%259E%259C%25E6%258E%25A2%25E7%25B4%25A2%25E3%2581%2599%25E3%2582%258B%25E9%259A%259B%25E3%2581%25AE%25E6%25A6%2582%25E8%25A6%25B3%25E5%2588%2586%25E6%259E%2590%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E8%25AA%25BF%25E6%259F%25BB%25E3%2581%2597%25E3%2581%259F%25EF%25BC%2588%25E6%25AD%25A3%25E8%25A6%258F%25E6%2580%25A7%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E4%25BA%2595%25E6%2589%258B%2520%25E9%25BA%25BB%25E5%258F%258B%25E7%25BE%258E%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRlNDhjNDQ5MDQuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:SCREEN%2520AS%2520%25E5%259B%25A0%25E6%259E%259C%25E6%258E%25A2%25E7%25B4%25A2%25E3%2583%2581%25E3%2583%25BC%25E3%2583%25A0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTEJja2JDb2wtY3MyNG56dUZkT0tNOEVWVU5JeXNXbmhPbGZ5LTJIdU9BUkMwVmR3PXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>井手 麻友美</dc:creator></item><item><title><![CDATA[uvでライブラリをグルーピングして最小限の依存関係で起動できるようにする]]></title><description><![CDATA[
+ 始めに
+Pythonに限らずアプリケーションを大規模で運用していくほどライブラリの依存関係が増えていきます。その時にAPIとバッチ等の用途に応じたアプリケーションごと分割する方法もありますが二重管理が面倒になります。JavaではGradleを使用してマルチプロジェクト構成にしておくことで、必要なライブラリだけで起動するようにできました。
+今回の記事では、Pythonのuvを使用してライブラリをグルーピングすることで、必要なライブラリを最小限にする方法を記載します。
+
+ 環境
+
+Python
+
+3.13
+
+
+uv
+
+0.7.2
+
+
+
+
+ 実装
+
+ ライブラリのグルーピング
+depend...]]></description><link>https://zenn.dev/kirimaru/articles/b67401a01dda80</link><guid isPermaLink="true">https://zenn.dev/kirimaru/articles/b67401a01dda80</guid><pubDate>Thu, 15 May 2025 03:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--TtH8Vr5q--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:uv%25E3%2581%25A7%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%25E3%2582%2592%25E3%2582%25B0%25E3%2583%25AB%25E3%2583%25BC%25E3%2583%2594%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%2597%25E3%2581%25A6%25E6%259C%2580%25E5%25B0%258F%25E9%2599%2590%25E3%2581%25AE%25E4%25BE%259D%25E5%25AD%2598%25E9%2596%25A2%25E4%25BF%2582%25E3%2581%25A7%25E8%25B5%25B7%25E5%258B%2595%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258B%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258D%25E3%2582%258A%25E4%25B8%25B8%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM1OTcxNmNjNDMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>きり丸</dc:creator></item><item><title><![CDATA[PythonとOpenAI APIで実践！MCP開発入門 【第1回】AI開発のスタートライン！Pythonプログラミング環境構築 完全ガイド]]></title><description><![CDATA[
+ はじめに
+
+ AI開発の世界へ、ようこそ！その第一歩は「環境構築」から
+皆さん、こんにちは！今日から始まる新シリーズ「PythonとOpenAI APIで実践！はじめてのMCP（モデルコンテキストプロトコル）開発入門」へ、ようこそお越しくださいました。このシリーズでは、今話題のOpenAI APIを使いこなし、AIにこちらの意図や状況（コンテキスト）を的確に伝え、より賢い応答を引き出すための「モデルコンテキストプロトコル（MCP）」的な考え方と、その実践方法を、Pythonプログラミングを通じて学んでいきます。
+AI、機械学習、大規模言語モデル（LLM）…こうした言葉を耳にする機会が...]]></description><link>https://zenn.dev/querypie/articles/f8fedd7fbe66a5</link><guid isPermaLink="true">https://zenn.dev/querypie/articles/f8fedd7fbe66a5</guid><pubDate>Thu, 15 May 2025 00:55:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--o11G_nRm--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A8OpenAI%2520API%25E3%2581%25A7%25E5%25AE%259F%25E8%25B7%25B5%25EF%25BC%2581MCP%25E9%2596%258B%25E7%2599%25BA%25E5%2585%25A5%25E9%2596%2580%2520%25E3%2580%2590%25E7%25AC%25AC1%25E5%259B%259E%25E3%2580%2591AI%25E9%2596%258B%25E7%2599%25BA%25E3%2581%25AE%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%2588%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%25B3%25EF%25BC%2581Python%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:QueryPie%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk1MzUyMzdkYzguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>QueryPie</dc:creator></item><item><title><![CDATA[sorted(args, key=lambda x: x[0])について]]></title><description><![CDATA[
+ 1. 文字列リストのソート
+以下の例では、words リスト内の各文字列の 1文字目 (x[0]) を基準にしてソートを行う：
+words = ["banana", "apple", "cherry"]
+sorted_words = sorted(words, key=lambda x: x[0])
+print(sorted_words)  # 出力: ['apple', 'banana', 'cherry']
+
+
+lambda x: x[0] の x は "banana", "apple", "cherry" が順に渡される。
+
+x[0] はそれぞれ 'b', 'a', 'c' と...]]></description><link>https://zenn.dev/aki05162525/articles/2aa0f4c4b7a3bf</link><guid isPermaLink="true">https://zenn.dev/aki05162525/articles/2aa0f4c4b7a3bf</guid><pubDate>Thu, 15 May 2025 00:03:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Zb8c5IQn--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:sorted%2528args%252C%2520key%253Dlambda%2520x%253A%2520x%255B0%255D%2529%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2584%25E3%2582%258B%25E3%2581%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSjBaM1pHbFo2RUJSc0NDTnVqeUpRV0U0eXEzczZJeTNYR1NPdHE2a21ZR3dNSWpqTXA9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>いるか</dc:creator></item><item><title><![CDATA[【初心者向け】Pythonのtype() と isinstance() の違いを整理する]]></title><description><![CDATA[
+ はじめに
+Pythonでは、変数の「型（データ型）」を調べたい場面がよくあります。
+そのときによく使われるのが type() と isinstance() です。
+私自身、最初は「どちらを使えばいいのか？」「違いがよくわからない」と感じました。
+本記事では、type() と isinstance() の違いについて、
+役割・使いどころ・注意点を初心者向けに整理します。
+
+ 1. type() の基本
+type() は、オブジェクトの正確な型を取得するための関数です。
+print(type(123))        # &lt;class 'int'&gt;
+print(type("h...]]></description><link>https://zenn.dev/fd2025/articles/27aef5ada237c5</link><guid isPermaLink="true">https://zenn.dev/fd2025/articles/27aef5ada237c5</guid><pubDate>Wed, 14 May 2025 22:55:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--C5O0kdh9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E5%2590%2591%25E3%2581%2591%25E3%2580%2591Python%25E3%2581%25AEtype%2528%2529%2520%25E3%2581%25A8%2520isinstance%2528%2529%2520%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%25E3%2582%2592%25E6%2595%25B4%25E7%2590%2586%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:fd2025%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2EzMzVlNTI5MmQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>fd2025</dc:creator></item><item><title><![CDATA[Termuxでpythonを使う]]></title><description><![CDATA[https://zenn.dev/dameyodamedame/articles/937421d81b5949
+上記の記事の詳細記事です。
+日本では最初に教えるプログラミング言語をScratchにしている場合も多いようですが、Termux環境は基本CLIなので、動作しません。なのでここでは最初にPythonを選択します。
+
+ Pythonをインストールする
+~ $ pkg install python
+インストール中に何か聞かれたら⏎すればOKです。勝手にデフォルトの選択肢が適宜選ばれます。
+
+ エディタでPythonのプログラムを書く
+nanoを使ってloop.pyという名前のファイル...]]></description><link>https://zenn.dev/dameyodamedame/articles/5b61268cf03c95</link><guid isPermaLink="true">https://zenn.dev/dameyodamedame/articles/5b61268cf03c95</guid><pubDate>Wed, 14 May 2025 16:50:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Za7IlMRW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:Termux%25E3%2581%25A7python%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:dameyodamedame%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvZC5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>dameyodamedame</dc:creator></item><item><title><![CDATA[log変換で見えてきた落とし穴──Targetの12%が“変動なし”だった話]]></title><description><![CDATA[
+ はじめに
+log変換は、株価のような桁の大きな時系列データを扱う上で、非常に有効なスケーリング手法です。
+本研究でも、XGBoostモデルにおいて価格スケールの歪みを是正するために、log変換を導入しました。
+しかし、logを使って予測Target（log収益率）を定義した結果、思わぬ落とし穴に遭遇したのです。
+
+
+ Target定義：log差による収益率
+本研究では、以下のようにして翌営業日の収益率（logベース）を予測ターゲットとしました。
+df["LogClose"] = np.log(df["Close"])
+df["Target"] = df["LogClose"].shi...]]></description><link>https://zenn.dev/kto2myk/articles/247daaf4734b9f</link><guid isPermaLink="true">https://zenn.dev/kto2myk/articles/247daaf4734b9f</guid><pubDate>Wed, 14 May 2025 15:39:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hInkYVw9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:log%25E5%25A4%2589%25E6%258F%259B%25E3%2581%25A7%25E8%25A6%258B%25E3%2581%2588%25E3%2581%25A6%25E3%2581%258D%25E3%2581%259F%25E8%2590%25BD%25E3%2581%25A8%25E3%2581%2597%25E7%25A9%25B4%25E2%2594%2580%25E2%2594%2580Target%25E3%2581%25AE12%2525%25E3%2581%258C%25E2%2580%259C%25E5%25A4%2589%25E5%258B%2595%25E3%2581%25AA%25E3%2581%2597%25E2%2580%259D%25E3%2581%25A0%25E3%2581%25A3%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E7%25A5%259E%25E7%2594%25B0%25E3%2580%2580%25E6%2599%25BA%25E5%25BC%25A5%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc1NjdiNTRjYTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>神田　智弥</dc:creator></item><item><title><![CDATA[生成AIアプリをゼロから作る（第1回）ColabとGradioで環境を整えよう]]></title><description><![CDATA[こんにちは！この連載では、Python と Gradio、OpenAI API を使って、生成AIを活用した質問応答アプリを段階的に開発していきます。
+初学者でも取り組める内容になっているので、
+
+💡「生成AIって触ってみたいけど、何から始めればいいの？」
+💡「ChatGPTの仕組みをアプリで体験してみたい！」
+
+という方にぴったりの内容です。
+
+ はじめに
+この連載では「生成AIアプリの開発」にフォーカスしており、
+Google Colabの基本的な使い方やPython言語そのものの学習については詳しく触れません。
+「Colabって何？」「Pythonってどう書くの？」という方には少し...]]></description><link>https://zenn.dev/ykoba933/articles/f6a64d7cd1bb3c</link><guid isPermaLink="true">https://zenn.dev/ykoba933/articles/f6a64d7cd1bb3c</guid><pubDate>Wed, 14 May 2025 10:10:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--68mcRtQF--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%2594%259F%25E6%2588%2590AI%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E3%2582%25BC%25E3%2583%25AD%25E3%2581%258B%25E3%2582%2589%25E4%25BD%259C%25E3%2582%258B%25EF%25BC%2588%25E7%25AC%25AC1%25E5%259B%259E%25EF%25BC%2589Colab%25E3%2581%25A8Gradio%25E3%2581%25A7%25E7%2592%25B0%25E5%25A2%2583%25E3%2582%2592%25E6%2595%25B4%25E3%2581%2588%25E3%2582%2588%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ykoba%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M3MjI3ZjE2MGYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ykoba</dc:creator></item><item><title><![CDATA[精度を引き上げるLog変換の裏技：XGBoostと相性抜群な理由を数学で解剖する]]></title><description><![CDATA[
+ 1. 現場でよくある問題：「株価はバラつきすぎる」
+
+株価などの金融データは桁も動きも大きすぎる
+XGBoostにそのまま突っ込むと、大きな値に引っ張られがちになる
+⇒ モデルが一部のスケールに過剰適合するリスク
+
+
+
+
+ 2. 実はみんな使ってる「log変換」という裏技
+
+
+よく見る処理：
+df["LogClose"] = np.log(df["Close"])
+df["Target"] = df["LogClose"].shift(-1) - df["LogClose"]
+
+
+
+これ、ただの前処理じゃない
+
+
+学習の安定性と精度に効く「重要な変換」
+
+
+
+
+ 3. Logの何がい...]]></description><link>https://zenn.dev/kto2myk/articles/3ddbad2e568768</link><guid isPermaLink="true">https://zenn.dev/kto2myk/articles/3ddbad2e568768</guid><pubDate>Wed, 14 May 2025 10:03:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--HKN6V_SA--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%25B2%25BE%25E5%25BA%25A6%25E3%2582%2592%25E5%25BC%2595%25E3%2581%258D%25E4%25B8%258A%25E3%2581%2592%25E3%2582%258BLog%25E5%25A4%2589%25E6%258F%259B%25E3%2581%25AE%25E8%25A3%258F%25E6%258A%2580%25EF%25BC%259AXGBoost%25E3%2581%25A8%25E7%259B%25B8%25E6%2580%25A7%25E6%258A%259C%25E7%25BE%25A4%25E3%2581%25AA%25E7%2590%2586%25E7%2594%25B1%25E3%2582%2592%25E6%2595%25B0%25E5%25AD%25A6%25E3%2581%25A7%25E8%25A7%25A3%25E5%2589%2596%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E7%25A5%259E%25E7%2594%25B0%25E3%2580%2580%25E6%2599%25BA%25E5%25BC%25A5%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc1NjdiNTRjYTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>神田　智弥</dc:creator></item><item><title><![CDATA[GitHub Copilotによるユニットテスト自動生成の体験レポート]]></title><description><![CDATA[
+ 調査日
+2025年5月13日（火）
+
+ 調査目的
+GitHub Copilotを用いて、ユニットテストの自動生成能力と開発効率の向上度を体験し、Copilotの導入効果を定性的・定量的に把握する。
+
+ 実施環境
+
+
+OS：Windows 11
+
+
+エディタ：Visual Studio Code (v1.89)
+
+
+拡張機能：
+
+Python
+GitHub Copilot
+
+
+
+言語：Python 3.11
+
+
+テストツール：unittest
+
+
+
+ テスト対象コード
+# src/my_module.py
+def add(a: int, b: int) -&gt; int:
+    r...]]></description><link>https://zenn.dev/homatsu_tech/articles/f41f1b9c5c3dae</link><guid isPermaLink="true">https://zenn.dev/homatsu_tech/articles/f41f1b9c5c3dae</guid><pubDate>Wed, 14 May 2025 09:00:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6CyRqQmy--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:GitHub%2520Copilot%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258B%25E3%2583%25A6%25E3%2583%258B%25E3%2583%2583%25E3%2583%2588%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E8%2587%25AA%25E5%258B%2595%25E7%2594%259F%25E6%2588%2590%25E3%2581%25AE%25E4%25BD%2593%25E9%25A8%2593%25E3%2583%25AC%25E3%2583%259D%25E3%2583%25BC%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25AE%259D%25E6%259D%25BE%2540%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc2NmRlNTNlODQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>宝松@システムエンジニア</dc:creator></item><item><title><![CDATA[生成モデルを実装してみる ~拡散モデル実装までの道のり~(VAE編)]]></title><description><![CDATA[
+ 概要
+拡散モデル(diffusion model)という単語を何かで見かけたけど、なにそれわからん。ってなったので実装して拡散モデルについてざっくり理解しようと思い色路調べたのでその備忘録になります。
+データを生成するタイプのモデルだったので、クラシックなVAE、GAN、も実装して歴史を辿りながらdiffusion modelの実装を行おうと思います。
+本記事では、その第1歩として VAE（Variational Autoencoder） を取り上げます。
+
+VAE &lt;-イマココ
+GAN
+Diffusion Model
+
+
+ 目次
+
+概要
+目次
+VAEとは
+
+モデル構造
+
+En...]]></description><link>https://zenn.dev/knee_kakkun/articles/vae_ngaopisejfpoaijgaerj124ml</link><guid isPermaLink="true">https://zenn.dev/knee_kakkun/articles/vae_ngaopisejfpoaijgaerj124ml</guid><pubDate>Wed, 14 May 2025 07:24:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--nft4_UoT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%2594%259F%25E6%2588%2590%25E3%2583%25A2%25E3%2583%2587%25E3%2583%25AB%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2520%7E%25E6%258B%25A1%25E6%2595%25A3%25E3%2583%25A2%25E3%2583%2587%25E3%2583%25AB%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%25BE%25E3%2581%25A7%25E3%2581%25AE%25E9%2581%2593%25E3%2581%25AE%25E3%2582%258A%7E%2528VAE%25E7%25B7%25A8%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:knee_kakkun%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2QxYjliNWNhYmEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>knee_kakkun</dc:creator></item><item><title><![CDATA[「y_hat」の意味と使い方：機械学習・統計モデリングにおける命名の基礎]]></title><description><![CDATA[Pythonなどのコードを読んでいると、y_hat や theta_hat といった変数名を目にすることがあります。この「_hat」という接尾辞には、単なる命名の癖以上の意味が込められています。
+本記事では、統計・機械学習における「_hat」の由来とその使い方について、数学的背景から解説します。
+
+
+ 1. 数学における「hat（ハット）」の意味
+もともと「hat（帽子）」という言葉は、数学や統計学において「推定値」や「予測値」を示す**記号（ˆ）**として使われてきました。
+特に統計学の推定理論（Estimation Theory）では、真の母数や関数に対して、それをデータから推定した...]]></description><link>https://zenn.dev/kotai/articles/bc0ef81b8ad060</link><guid isPermaLink="true">https://zenn.dev/kotai/articles/bc0ef81b8ad060</guid><pubDate>Wed, 14 May 2025 03:37:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8lOjepHq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%258Cy_hat%25E3%2580%258D%25E3%2581%25AE%25E6%2584%258F%25E5%2591%25B3%25E3%2581%25A8%25E4%25BD%25BF%25E3%2581%2584%25E6%2596%25B9%25EF%25BC%259A%25E6%25A9%259F%25E6%25A2%25B0%25E5%25AD%25A6%25E7%25BF%2592%25E3%2583%25BB%25E7%25B5%25B1%25E8%25A8%2588%25E3%2583%25A2%25E3%2583%2587%25E3%2583%25AA%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%25AB%25E3%2581%258A%25E3%2581%2591%25E3%2582%258B%25E5%2591%25BD%25E5%2590%258D%25E3%2581%25AE%25E5%259F%25BA%25E7%25A4%258E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kotai2003%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2gzSEtteFhtSDhmSkd3aDV3cVYtY2tvbVB1NE1rbTN4bWhQRmE2eGc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kotai2003</dc:creator></item><item><title><![CDATA[負荷テスト｜Locust with Minikube]]></title><description><![CDATA[
+ 概要
+この記事ではMinikubeで動く単一のクラスタ上に、Python負荷検証ツールLocustを複数構築する。テスト対象サーバに対して、複数のLocustから一斉に負荷をかけられるようになるまでの環境構築手順を記す。
+この内容は次リポジトリでも確認可能である：
+https://github.com/inuverse44/locust-with-minikube
+
+ 導入と背景（読み飛ばしてOK）
+GKE上に存在するサービスの負荷検証をLocustで実施しておりました。対象サービスに対してAPIを実行しまくって、パルス状の負荷をかけた時に、設定通りにpodが増加してくれるかどうかを...]]></description><link>https://zenn.dev/tatsukikodama/articles/34abd263427902</link><guid isPermaLink="true">https://zenn.dev/tatsukikodama/articles/34abd263427902</guid><pubDate>Wed, 14 May 2025 01:34:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ALZ3fsuy--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%25B2%25A0%25E8%258D%25B7%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25EF%25BD%259CLocust%2520with%2520Minikube%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:INUVERSE%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2QyMzBhMjAyNzMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>INUVERSE</dc:creator></item><item><title><![CDATA[【PyTorch】モデルの中間層の出力を取得する「Hook」の使い方：ResNetでの具体例付き]]></title><description><![CDATA[PyTorchで深層学習モデルの**中間層の出力（特徴量）**を取得したいとき、モデル構造を壊さずにアクセスできるのが「Hook（フック）」です。
+この記事では、WideResNet50 を例にとって、forward_hook を使って中間特徴マップを抽出する方法を、実用コードとともに解説します。
+
+ 0.Hookとは？なぜ使うのか？
+PyTorchの Hook（フック） とは、モデルの 特定の層の順伝播や逆伝播のタイミングで、入力や出力にアクセスできる仕組み です。とくに forward_hook を使うと、「順伝播（forward）」の 出力 をキャッチできます。
+
+ フックが活躍す...]]></description><link>https://zenn.dev/kotai/articles/91bca72e931da0</link><guid isPermaLink="true">https://zenn.dev/kotai/articles/91bca72e931da0</guid><pubDate>Tue, 13 May 2025 17:14:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Hwyo8vK2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590PyTorch%25E3%2580%2591%25E3%2583%25A2%25E3%2583%2587%25E3%2583%25AB%25E3%2581%25AE%25E4%25B8%25AD%25E9%2596%2593%25E5%25B1%25A4%25E3%2581%25AE%25E5%2587%25BA%25E5%258A%259B%25E3%2582%2592%25E5%258F%2596%25E5%25BE%2597%25E3%2581%2599%25E3%2582%258B%25E3%2580%258CHook%25E3%2580%258D%25E3%2581%25AE%25E4%25BD%25BF%25E3%2581%2584%25E6%2596%25B9%25EF%25BC%259AResNet%25E3%2581%25A7%25E3%2581%25AE%25E5%2585%25B7%25E4%25BD%2593%25E4%25BE%258B%25E4%25BB%2598%25E3%2581%258D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kotai2003%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2gzSEtteFhtSDhmSkd3aDV3cVYtY2tvbVB1NE1rbTN4bWhQRmE2eGc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kotai2003</dc:creator></item><item><title><![CDATA[FastMCP 2.0を用いてHTTP RequestからHTTP headerやquery parameterを簡単に取得する方法]]></title><description><![CDATA[本記事では、FastMCP 2.0を用いて、MCP Client(Streamable HTTP)のHTTP RequestからHTTP HeaderやQuery Parameterを取得する方法を紹介します。
+
+ 背景
+筆者は、MCPを使用したサービスの開発を進める中で、MCPサーバ上でHTTPヘッダーやクエリーパラメータを取得する必要が生じました。
+そのため、FastMCPを用いてMCP Client(Streamable HTTP)のHTTP RequestからHTTP Headerを取得する方法を調査しました。
+MCPのorganizationから提供されているPython SD...]]></description><link>https://zenn.dev/5enxia/articles/10b6fb06be1dc0</link><guid isPermaLink="true">https://zenn.dev/5enxia/articles/10b6fb06be1dc0</guid><pubDate>Tue, 13 May 2025 15:11:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--I6Ukcy2x--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:FastMCP%25202.0%25E3%2582%2592%25E7%2594%25A8%25E3%2581%2584%25E3%2581%25A6HTTP%2520Request%25E3%2581%258B%25E3%2582%2589HTTP%2520header%25E3%2582%2584query%2520parameter%25E3%2582%2592...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:5enxia%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZlMDI3NjY3MmEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>5enxia</dc:creator></item></channel></rss>

@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「JavaScript」のフィード]]></title><description><![CDATA[Zennのトピック「JavaScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/javascript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/64acd76870.png</url><title>Zennの「JavaScript」のフィード</title><link>https://zenn.dev/topics/javascript</link></image><generator>zenn.dev</generator><lastBuildDate>Fri, 16 May 2025 00:55:18 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/javascript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[【Vue3・Nuxt3】最新のVue3で、`<script setup>`で単に値をexportする（defineExposeではない）]]></title><description><![CDATA[
+ 結論
+下記のように、先に&lt;script&gt;（&lt;script setup&gt;でない）でexportすればよいです。
+
+実際に動く環境: Vue3: An example to export consts from components
+
+
+GoodExportValue.vue
+&lt;template&gt;
+  &lt;p&gt;dummy&lt;/p&gt;
+&lt;/template&gt;
+
+&lt;script lang="ts"&gt;
+import { a } from '../utils/a'
+import { b } from '../utils...]]></description><link>https://zenn.dev/aiya000/articles/f7faffce4eab5d</link><guid isPermaLink="true">https://zenn.dev/aiya000/articles/f7faffce4eab5d</guid><pubDate>Thu, 15 May 2025 14:17:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--glVknD-9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Vue3%25E3%2583%25BBNuxt3%25E3%2580%2591%25E6%259C%2580%25E6%2596%25B0%25E3%2581%25AEVue3%25E3%2581%25A7%25E3%2580%2581%2560%253Cscript%2520setup%253E%2560%25E3%2581%25A7%25E5%258D%2598%25E3%2581%25AB%25E5%2580%25A4%25E3%2582%2592export%25E3%2581%2599%25E3%2582%258B%25EF%25BC%2588define...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2582%25E3%2581%2584%25E3%2582%2584%2520-%2520aiya000%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pZVUM0QXdxcVdtMVZmVWtiQXFzdE5ra1BFZU1FOUN0NFY1UzdiPXMyNTAtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>あいや - aiya000</dc:creator></item><item><title><![CDATA[初心者によるJavascript講座1(変数と宣言)]]></title><description><![CDATA[これは初心者によるjs講座です。（ChatGPTと会話して作りました）
+
+ 目的
+・JavaScriptにおける変数と宣言の基本を理解すること
+・変数はプログラムでデータを扱うために欠かせないことを紹介する
+
+ まとめ（忙しい人向け）
+・変数とは、データを保存するための名前付きの箱。
+・変数を宣言するには、var / let / constを使う。
+・基本は const、値を変えたいときだけ let を使う。
+・varは再宣言できてしまうため、バグのもとになりやすいので基本使わない。
+・変数にはスコープ（使える範囲）があり、letとconstはブロック単位、varは関数単位で管理される。...]]></description><link>https://zenn.dev/ripoh/articles/af561e6fc8aaca</link><guid isPermaLink="true">https://zenn.dev/ripoh/articles/af561e6fc8aaca</guid><pubDate>Thu, 15 May 2025 12:57:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--k2b8DX_1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258BJavascript%25E8%25AC%259B%25E5%25BA%25A71%2528%25E5%25A4%2589%25E6%2595%25B0%25E3%2581%25A8%25E5%25AE%25A3%25E8%25A8%2580%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:w4daka%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM0Y2ZjZDZhMmQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>w4daka</dc:creator></item><item><title><![CDATA[TermuxでJavaScript(node.js)]]></title><description><![CDATA[
+上記の記事の詳細記事です。
+
+ 典型的なJavasScript
+JavaScriptというとHTMLの中のスクリプト要素でもよく使用されます。典型的なのだとこんなのですね。
+
+counter.html
+&lt;span id="counter"&gt;0&lt;/span&gt;
+&lt;script&gt;
+addEventListener("DOMContentLoaded", (event) =&gt; {
+    const counter_span = document.querySelector('#counter');
+    function countup(e) {
+...]]></description><link>https://zenn.dev/dameyodamedame/articles/3b83a6184d8cae</link><guid isPermaLink="true">https://zenn.dev/dameyodamedame/articles/3b83a6184d8cae</guid><pubDate>Thu, 15 May 2025 09:13:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--H-LQMBNz--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:Termux%25E3%2581%25A7JavaScript%2528node.js%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:dameyodamedame%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvZC5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>dameyodamedame</dc:creator></item><item><title><![CDATA[AWS SDK for JavaScript v3はMFA認証を自動でやってくれなくなったぞ]]></title><description><![CDATA[AWS SDK for JavaScript を v2 から v3 にアップデートしたら、MFA認証が失敗するという思わぬ落とし穴に遭遇した。
+ローカル開発環境で、~/.aws/credentials の設定と MFA (Multi-Factor Authentication) を使って一時クレデンシャルを取得していたのだが、v3ではMFAの対話的認証を自動でやってくれないらしい。
+
+ v2ではどうだったの？
+v2では AWS.SharedIniFileCredentials を使うことで、.aws/config に mfa_serial が設定されていれば、自動的にMFAプロンプトが表...]]></description><link>https://zenn.dev/padawan/articles/7029067790f8ab</link><guid isPermaLink="true">https://zenn.dev/padawan/articles/7029067790f8ab</guid><pubDate>Thu, 15 May 2025 07:11:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--FqWTZTp2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AWS%2520SDK%2520for%2520JavaScript%2520v3%25E3%2581%25AFMFA%25E8%25AA%258D%25E8%25A8%25BC%25E3%2582%2592%25E8%2587%25AA%25E5%258B%2595%25E3%2581%25A7%25E3%2582%2584%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%258F%25E3%2582%258C%25E3%2581%25AA%25E3%2581%258F%25E3%2581%25AA%25E3%2581%25A3%25E3%2581%259F%25E3%2581%259E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%2590%25E3%2583%258A%25E3%2583%25AF%25E3%2583%25B3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE1MjAzNTk0NjAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>バナワン</dc:creator></item><item><title><![CDATA[React と MUI で ToDo アプリを作ろう！]]></title><description><![CDATA[
+ 🎯 はじめに
+本記事では、React と Material UI（MUI） を使って、シンプルな ToDo リストアプリを一から構築するハンズオンを紹介します。まずは基本機能を実装し、その後でMUIを使ってデザインを整えていきます。
+
+✅ Reactの基本的な構成が学べる
+✅ 機能実装からスタイリングまでステップバイステップで解説
+✅ MUIによるスタイリングの実践
+
+完成イメージはこちら（GitHub リポジトリ）👇
+👉 https://github.com/Ash65536/todo-app/
+
+
+ 🛠 開発環境のセットアップ
+まずは React アプリを作成します。
+npx c...]]></description><link>https://zenn.dev/ash65536/articles/3213d5eed49cff</link><guid isPermaLink="true">https://zenn.dev/ash65536/articles/3213d5eed49cff</guid><pubDate>Thu, 15 May 2025 05:13:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--JIJPLFD8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%2520%25E3%2581%25A8%2520MUI%2520%25E3%2581%25A7%2520ToDo%2520%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258D%25E3%2581%2586%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:webspresso%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNlYmU4NDgyMmMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>webspresso</dc:creator></item><item><title><![CDATA[PongゲームのDiscord アクティビティを自作する]]></title><description><![CDATA[https://github.com/sas-news/Discord-Pong
+
+ はじめに
+
+ Discord アクティビティとは
+皆さんは Discord を利用しているでしょうか。Discord は広く知られたコミュニケーションツールで、ゲーマーを中心に利用されています。Discord には「アクティビティ」という機能があり、これは Discord 内で複数人のユーザー同士でゲームをプレイするための機能です。
+
+ Discord Embedded App SDK とは
+Discord Embedded App SDK は、Discord アクティビティを自作するための SDK で...]]></description><link>https://zenn.dev/sasnews/articles/3df0c2608b3230</link><guid isPermaLink="true">https://zenn.dev/sasnews/articles/3df0c2608b3230</guid><pubDate>Wed, 14 May 2025 08:24:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--YmKOuCGk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Pong%25E3%2582%25B2%25E3%2583%25BC%25E3%2583%25A0%25E3%2581%25AEDiscord%2520%25E3%2582%25A2%25E3%2582%25AF%25E3%2583%2586%25E3%2582%25A3%25E3%2583%2593%25E3%2583%2586%25E3%2582%25A3%25E3%2582%2592%25E8%2587%25AA%25E4%25BD%259C%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:SAS%25E6%2596%25B0%25E8%2581%259E%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhmOGNmZWE1MTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>SAS新聞</dc:creator></item><item><title><![CDATA[【JS・TS】具体例で学ぶバンドル・ミニファイ・ツリーシェイキング]]></title><description><![CDATA[
+ 前提
+
+
+今回はビルドツールとしてesbuildを使用しています。
+理由としては、今回この記事を書こうと思ったきっかけが AWS Lambda であり、CDK で Lambda を作成する際に使う NodejsFunction がデフォルトで esbuild を使っているためです。
+ただし、フロントエンドでも使える（むしろフロントエンドで大事な）知識なのでフロントエンド側の方も対象読者です。
+
+
+タイトルに TS と書いていますが、バンドル・ミニファイ・ツリーシェイキングは JS も TS も変わらないと思うので、例は JS で書いています。
+
+
+具体例は index.js がエント...]]></description><link>https://zenn.dev/spectee/articles/fb736319c34213</link><guid isPermaLink="true">https://zenn.dev/spectee/articles/fb736319c34213</guid><pubDate>Wed, 14 May 2025 08:12:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GX9wHVtI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590JS%25E3%2583%25BBTS%25E3%2580%2591%25E5%2585%25B7%25E4%25BD%2593%25E4%25BE%258B%25E3%2581%25A7%25E5%25AD%25A6%25E3%2581%25B6%25E3%2583%2590%25E3%2583%25B3%25E3%2583%2589%25E3%2583%25AB%25E3%2583%25BB%25E3%2583%259F%25E3%2583%258B%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25BB%25E3%2583%2584%25E3%2583%25AA%25E3%2583%25BC%25E3%2582%25B7%25E3%2582%25A7%25E3%2582%25A4%25E3%2582%25AD%25E3%2583%25B3%25E3%2582%25B0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Y.N%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzkwYzYyY2ZlNDQuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Spectee%2520Developers%2520Blog%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFlZjQyYWRjNGQuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Y.N</dc:creator></item><item><title><![CDATA[【JavaScriptベンチマーク】pop ≒ shift >> push > unshift]]></title><description><![CDATA[タイトルの通りですが、JavaScriptのArray操作でpop / shift / push / unshiftを比較してどのような順番になるかを測ってみました。
+
+pop ・・・ 配列の最後から要素を取り除き、取り除いた要素を返却
+shift ・・・ 配列の最初から要素を取り除き、取り除いた要素を返却
+unshift ・・・ 配列の最初に要素を追加し、要素数を返却
+push ・・・ 配列の最後に要素を追加し、要素数を返却
+
+ベンチマークテスト：ブラウザはChromeです。FirefoxとかSafariが好きな人がいたら流してみてください。僕はChrome（Brave）に骨をうずめる...]]></description><link>https://zenn.dev/drop_table_user/articles/pop-shift-unshift-push</link><guid isPermaLink="true">https://zenn.dev/drop_table_user/articles/pop-shift-unshift-push</guid><pubDate>Wed, 14 May 2025 04:14:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--o4cLtZXR--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590JavaScript%25E3%2583%2599%25E3%2583%25B3%25E3%2583%2581%25E3%2583%259E%25E3%2583%25BC%25E3%2582%25AF%25E3%2580%2591pop%2520%25E2%2589%2592%2520shift%2520%253E%253E%2520push%2520%253E%2520unshift%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:edaoh%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk4YTY3OGY3ZGYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>edaoh</dc:creator></item><item><title><![CDATA[非同期処理つまづきポイント]]></title><description><![CDATA[
+ はじめに
+これまでJavaScriptの非同期処理やPromiseについて学習していく中で、誤解していたことや自分でコードを書いたときに間違えていたことがありました。
+今回はそのつまづいたポイントを2つについて考えてみようと思います。
+
+ つまづいているコード
+過去私が間違えた以下のコードでは、つまづいたポイント3つすべてが含まれています🤔
+どういう出力になるのかぜひ考えてみてください。
+const test = new Promise((resolve) =&gt; 
+    {
+        console.log(2);
+        setTimeout(() =&gt;...]]></description><link>https://zenn.dev/akinko0915/articles/513fb5761dd5f0</link><guid isPermaLink="true">https://zenn.dev/akinko0915/articles/513fb5761dd5f0</guid><pubDate>Wed, 14 May 2025 00:37:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Z6Hs6-QL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E9%259D%259E%25E5%2590%258C%25E6%259C%259F%25E5%2587%25A6%25E7%2590%2586%25E3%2581%25A4%25E3%2581%25BE%25E3%2581%25A5%25E3%2581%258D%25E3%2583%259D%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:akinko%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSy13cHdwSE5jYThHWWJKMHBCb0NRU3A3WFlZd3Q0Wjc5SFY3clVhWENIUmFpSTlXZz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>akinko</dc:creator></item><item><title><![CDATA[TypeScript の型のみで世界一型の厳しいプログラミング]]></title><description><![CDATA[
+ はじめに
+TypeScript の型は世界一自由度の高い設計になっていると思います。
+その根拠として、型を関数型のように書けるというのが大きいと思います。
+type Trim&lt;S extends string&gt; = 
+  S extends ` ${infer R}` | `${infer R} ` ? Trim&lt;R&gt; : S;
+例えば、これは文字列の両端から空白を取り除く、str.trim() 相当のジェネリクスを含んだ型です。 (ジェネリクスは、型で用いられる引数のような存在だと思って貰えれば大丈夫です。)
+実際に見てみましょう。
+
+TypeScript ...]]></description><link>https://zenn.dev/ame_x/articles/8ec1ec35cdc392</link><guid isPermaLink="true">https://zenn.dev/ame_x/articles/8ec1ec35cdc392</guid><pubDate>Tue, 13 May 2025 12:26:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--h58yXdyT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%2520%25E3%2581%25AE%25E5%259E%258B%25E3%2581%25AE%25E3%2581%25BF%25E3%2581%25A7%25E4%25B8%2596%25E7%2595%258C%25E4%25B8%2580%25E5%259E%258B%25E3%2581%25AE%25E5%258E%25B3%25E3%2581%2597%25E3%2581%2584%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%259F%25E3%2583%25B3%25E3%2582%25B0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:EdamAmex%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2EwZDE2YmYxODEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>EdamAmex</dc:creator></item><item><title><![CDATA[🌟 小学生でもわかる！ワンピースで学ぶJavaScriptのDOM操作（完全保存版）]]></title><description><![CDATA[
+ 🌟 小学生でもわかる！ワンピースで学ぶJavaScriptのDOM操作（完全保存版）
+
+ 📖 DOMとは？
+DOM（ドム）とは、HTMLで作ったページをJavaScriptで動かすためのしくみのことです。
+たとえば「ルフィの名前をゾロに変える」「画像を変える」「ボタンを押したら動く」など、全部DOMのおかげ！
+
+
+ 🧰 ファイル構成
+
+
+index.html：ページの設計図（絵やボタンを置く）
+
+style.css：ページの見た目（色や形）
+
+main.js：魔法のコード（ボタンを押したらキャラが変わる！）
+
+
+
+ 🖥 index.html
+&lt;!DOCTYPE html&gt;...]]></description><link>https://zenn.dev/nakamotojp/articles/294f92c0edff18</link><guid isPermaLink="true">https://zenn.dev/nakamotojp/articles/294f92c0edff18</guid><pubDate>Tue, 13 May 2025 08:55:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wm5Ej92e--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%2520%2520%25E5%25B0%258F%25E5%25AD%25A6%25E7%2594%259F%25E3%2581%25A7%25E3%2582%2582%25E3%2582%258F%25E3%2581%258B%25E3%2582%258B%25EF%25BC%2581%25E3%2583%25AF%25E3%2583%25B3%25E3%2583%2594%25E3%2583%25BC%25E3%2582%25B9%25E3%2581%25A7%25E5%25AD%25A6%25E3%2581%25B6JavaScript%25E3%2581%25AEDOM%25E6%2593%258D%25E4%25BD%259C%25EF%25BC%2588%25E5%25AE%258C%25E5%2585%25A8%25E4%25BF%259D%25E5%25AD%2598%25E7%2589%2588%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nakamoto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY3MzcxNGVkNGIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nakamoto</dc:creator></item><item><title><![CDATA[なぜ生成AIはTypeScriptでコードを書くのか？AI駆動開発に必要な最低限のTypeScript知識]]></title><description><![CDATA[
+ TypeScriptはAI駆動開発に必須？
+AI駆動スタイルでwebサイトやwebアプリを開発しようとした時に、TypeScriptが即時に選ばれた経験ありませんか？
+もちろん条件や環境によっては他言語が選ばれますが、私は技術選定をお任せにした上で個人開発を行ってみると、ほぼすべてのプロジェクトでTypeScriptが選ばれました。
+
+↑先日作ったwebアプリの言語選定(別途記事にする予定です)
+私自身「JavaScriptをより扱いやすくした言語？」くらいの認識しかなかったのでこれを機に色々と調べてみたのですが、TypeScriptはAIにとって非常に扱いやすい言語 のようです。
+...]]></description><link>https://zenn.dev/headwaters/articles/20250508-typescript-ai-development</link><guid isPermaLink="true">https://zenn.dev/headwaters/articles/20250508-typescript-ai-development</guid><pubDate>Mon, 12 May 2025 23:23:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2GlnJ8an--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%25AA%25E3%2581%259C%25E7%2594%259F%25E6%2588%2590AI%25E3%2581%25AFTypeScript%25E3%2581%25A7%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2582%2592%25E6%259B%25B8%25E3%2581%258F%25E3%2581%25AE%25E3%2581%258B%25EF%25BC%259FAI%25E9%25A7%2586%25E5%258B%2595%25E9%2596%258B%25E7%2599%25BA%25E3%2581%25AB%25E5%25BF%2585%25E8%25A6%2581%25E3%2581%25AA%25E6%259C%2580%25E4%25BD%258E%25E9%2599%2590%25E3%2581%25AETypeScript%25E7%259F%25A5%25E8%25AD%2598%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%259B%25E3%2581%25A8%25E3%2581%2585%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZjNGExY2UxMDYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2598%25E3%2583%2583%25E3%2583%2589%25E3%2582%25A6%25E3%2582%25A9%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%25BC%25E3%2582%25B9%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzMyZGJmYjNkNmIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>せとぅ</dc:creator></item><item><title><![CDATA[#96　JavaScriptのシャローコピーとディープコピーについて]]></title><description><![CDATA[
+ はじめに
+Reactでイミュータブルを意識して実装をするにはImmerというライブラリを使うと良いということで色々調べてみると、オブジェクトのコピーに関して曖昧な理解をしていたことを実感しました。
+そこで今回は、JavaScriptのシャローコピーとディープコピーについて備忘録としてまとめていきたいと思います。
+
+ シャローコピー
+
+ シャローコピーとは
+MDN Web Docs 用語集では以下のように説明されています。
+
+オブジェクトのシャローコピーとは、コピーがコピー元のオブジェクトとプロパティにおいて同じ参照を共有する（同じ基礎値を指す）コピーのことを指します。その結果、コピー...]]></description><link>https://zenn.dev/nxted_sapporo/articles/78ce70590400a4</link><guid isPermaLink="true">https://zenn.dev/nxted_sapporo/articles/78ce70590400a4</guid><pubDate>Mon, 12 May 2025 13:55:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--IK-Jlt1D--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%252396%25E3%2580%2580JavaScript%25E3%2581%25AE%25E3%2582%25B7%25E3%2583%25A3%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25B3%25E3%2583%2594%25E3%2583%25BC%25E3%2581%25A8%25E3%2583%2587%25E3%2582%25A3%25E3%2583%25BC%25E3%2583%2597%25E3%2582%25B3%25E3%2583%2594%25E3%2583%25BC%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:NXTEDCo.%252C%2520Ltd.%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBmZjQzOTVhYzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>NXTEDCo., Ltd.</dc:creator></item><item><title><![CDATA[[メモ]: ??と||演算子のメモ]]></title><description><![CDATA[
+ ??と||ような演算子のメモ
+たまに使用するときに間違えるので簡単なメモ
+
+ ??
+
+ECMAScript2020(ES11)で追加された比較的新しい文法
+左辺の値がnullかundefinedのときだけ右辺の値を返す
+基本は左辺の値を返す
+
+const result = user ?? "John Doe";
+// userがnull | undefinedのときはJohn Doe"
+// それ以外はuserを返す
+
+ ||
+
+論理和演算子
+オペランドの値が1つでもtrueがある場合、trueになる。
+
+false, 0, "", NaN, nullまたはundefinedはfal...]]></description><link>https://zenn.dev/mitate_gengaku/articles/js-nullish-operator-memo</link><guid isPermaLink="true">https://zenn.dev/mitate_gengaku/articles/js-nullish-operator-memo</guid><pubDate>Mon, 12 May 2025 13:12:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--s9Ve-BCU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255B%25E3%2583%25A1%25E3%2583%25A2%255D%253A%2520%253F%253F%25E3%2581%25A8%257C%257C%25E6%25BC%2594%25E7%25AE%2597%25E5%25AD%2590%25E3%2581%25AE%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25BE%25A1%25E6%25A5%25AF%25E7%258E%2584%25E5%25B6%25BD%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0tQOVRYWHQ5Qm1BLVplcURoLWdxUHl4RVFjMmNsRkhSNk95XzVVSVVhPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>御楯玄嶽</dc:creator></item><item><title><![CDATA[React Email で HTML メールを作成・送信する]]></title><description><![CDATA[
+ React Email とは
+https://react.email/
+React Email は、React コンポーネントを使用してメールテンプレートを構築するためのフレームワークです。
+HTML メールの複雑さを抽象化し、開発者が使い慣れた React でメールを作成できるようにするものです。
+主な特徴は以下です。
+
+React ベース: 使い慣れた React コンポーネントでメールを設計
+レスポンシブ対応: 様々なデバイスでの表示に最適化
+再利用可能なコンポーネント: 一貫したデザインを実現
+型安全: TypeScript によるサポート
+プレビュー機能: 開発中にリアルタ...]]></description><link>https://zenn.dev/microcms/articles/94d7f0b87fe31c</link><guid isPermaLink="true">https://zenn.dev/microcms/articles/94d7f0b87fe31c</guid><pubDate>Mon, 12 May 2025 11:47:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4DgBlW8D--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%2520Email%2520%25E3%2581%25A7%2520HTML%2520%25E3%2583%25A1%25E3%2583%25BC%25E3%2583%25AB%25E3%2582%2592%25E4%25BD%259C%25E6%2588%2590%25E3%2583%25BB%25E9%2580%2581%25E4%25BF%25A1%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E5%25B1%25B1%25E3%2581%25A8%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg3NWY4MDNiMWIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BEmicroCMS%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y5MGU2OTJiOTguanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>山とコード</dc:creator></item><item><title><![CDATA[manabaの期日前リマインドをお手軽に実装した話]]></title><description><![CDATA[
+ 経緯
+うちの大学ではLMSとしてmanabaが導入されています。
+しかしながらですね、このmanabaくん結構曲者でして、、、
+なにかと言いますと、
+「課題の締め切りが近くなったら通知してくれる機能がない！！」
+ええ、そうなんです。多分学生でも一番欲しい機能No1になるくらいの機能がないんですよね。
+このせいで、何度課題を逃したことか
+ということで、この期日前通知が届く様にGASを少し作ったので紹介。
+
+ 前提
+manabaのAPI(そもそもない)だったり、ページを直接スクレイピングしたりすると、わんちゃんサーバーダウンに繋がりかねないので、課題公開時にメールとして届く文章から必要な...]]></description><link>https://zenn.dev/seiwell/articles/a39fab80cdb146</link><guid isPermaLink="true">https://zenn.dev/seiwell/articles/a39fab80cdb146</guid><pubDate>Mon, 12 May 2025 08:19:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---3jYmzzT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:manaba%25E3%2581%25AE%25E6%259C%259F%25E6%2597%25A5%25E5%2589%258D%25E3%2583%25AA%25E3%2583%259E%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2589%25E3%2582%2592%25E3%2581%258A%25E6%2589%258B%25E8%25BB%25BD%25E3%2581%25AB%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2597%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ruis%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M5MGVkYzQxMDcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ruis</dc:creator></item><item><title><![CDATA[トークンのコントラクトアドレスから価格を取得]]></title><description><![CDATA[JavaScriptはウェブの開発において欠かせないプログラミング言語です。
+Web開発初心者でもチュートリアルを見ながら簡単に学べるのが最大の魅力。
+DEXをいじる時はPythonよりJavaScriptの方が全然扱いやすいです。
+下記を参考に
+https://docs.uniswap.org/sdk/v3/overview
+npm i --save @uniswap/v3-sdk
+npm i --save @uniswap/sdk-core
+をインストール。
+]]></description><link>https://zenn.dev/satorusugaya/articles/67d3828c392950</link><guid isPermaLink="true">https://zenn.dev/satorusugaya/articles/67d3828c392950</guid><pubDate>Mon, 12 May 2025 05:02:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8-6HNtBc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2588%25E3%2583%25BC%25E3%2582%25AF%25E3%2583%25B3%25E3%2581%25AE%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2588%25E3%2583%25A9%25E3%2582%25AF%25E3%2583%2588%25E3%2582%25A2%25E3%2583%2589%25E3%2583%25AC%25E3%2582%25B9%25E3%2581%258B%25E3%2582%2589%25E4%25BE%25A1%25E6%25A0%25BC%25E3%2582%2592%25E5%258F%2596%25E5%25BE%2597%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E8%258F%2585%25E8%25B0%25B7%25E8%25A6%259A%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhiYzQ5NDA0ODIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>菅谷覚</dc:creator></item><item><title><![CDATA[「e.preventDefault()」とは？]]></title><description><![CDATA[
+ e.preventDefault()とは
+submitイベントでフォームの送信ボタンを押すとブラウザのデフォルト動作でページがリロードされてしまいます。
+こちらのリロードを防げるためにはe.preventDefault()が必要です。
+const handleSubmit = async (e: React.FormEvent&lt;HTMLFormElement&gt;) =&gt; {
+    e.preventDefault(); // ✅リロード防止
+    //...フォームの内容をJSで処理（例：fetchでAPIに送信）
+};
+
+
+フォーム送信時にページリロードなしで、...]]></description><link>https://zenn.dev/hyoni/articles/4e0873fa961a46</link><guid isPermaLink="true">https://zenn.dev/hyoni/articles/4e0873fa961a46</guid><pubDate>Mon, 12 May 2025 03:50:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Gea3ck8---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%258Ce.preventDefault%2528%2529%25E3%2580%258D%25E3%2581%25A8%25E3%2581%25AF%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%2592%25E3%2583%25A7%25E3%2583%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0sxdWxlU2pkSzlwbDVxZnp3QVlUcFhCNk9xUEhkZGpKWjRUVlRPTl9lMHdYODhLdkg9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ヒョニ</dc:creator></item><item><title><![CDATA[JavaScriptにおける undefined と null の違いを整理する]]></title><description><![CDATA[
+ はじめに
+JavaScriptを学び始めたときに、undefined と null の違いでつまずいたことはありませんか？
+私自身、最初はどちらも「値がない」状態のように見えて、
+どう使い分けるべきなのか混乱していました。
+本記事では、undefined と null の違いを、
+基本の考え方から実務での使い分けまで整理してみます。
+
+ 1. undefined とは
+undefined は、「まだ値が代入されていない」ことを表す値です。
+
+ 例：変数を宣言しただけの状態
+let name;
+console.log(name); // undefined
+変数 name は宣言されて...]]></description><link>https://zenn.dev/fd2025/articles/a29cf92a9e12db</link><guid isPermaLink="true">https://zenn.dev/fd2025/articles/a29cf92a9e12db</guid><pubDate>Mon, 12 May 2025 00:09:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--pmhHzT9g--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25E3%2581%25AB%25E3%2581%258A%25E3%2581%2591%25E3%2582%258B%2520undefined%2520%25E3%2581%25A8%2520null%2520%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%25E3%2582%2592%25E6%2595%25B4%25E7%2590%2586%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:fd2025%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2EzMzVlNTI5MmQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>fd2025</dc:creator></item><item><title><![CDATA[UUIDを絵文字にするライブラリを作った]]></title><description><![CDATA[
+ 概要
+暇つぶしにネットサーフィンをしていて、次のような記事を見つけました。こちらの記事では、UUIDをBase58にエンコードすることで、URLをスッキリさせるライブラリが紹介されています。
+https://zenn.dev/yoshinani_dev/articles/001be9fd0377b3
+スッキリするのは素敵ですが、無機質な文字の羅列では愛が足りないと感じたので、UUIDをすべて絵文字で表現するライブラリを作成してみました。
+
+ どんな感じ
+たとえば、こんな無機質なUUIDが：
+https://example.com/resource/87040469-7443-4416...]]></description><link>https://zenn.dev/pompompudding/articles/b930ef9e72fc81</link><guid isPermaLink="true">https://zenn.dev/pompompudding/articles/b930ef9e72fc81</guid><pubDate>Sun, 11 May 2025 14:40:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--L7fbQHmc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:UUID%25E3%2582%2592%25E7%25B5%25B5%25E6%2596%2587%25E5%25AD%2597%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25A2%25E3%2583%25AB%25E3%2583%2591%25E3%2582%25AB%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I4MzA0N2JiZGMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>アルパカ</dc:creator></item></channel></rss>

