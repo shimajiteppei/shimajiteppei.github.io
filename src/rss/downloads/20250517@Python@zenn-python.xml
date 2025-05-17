@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Sat, 17 May 2025 00:11:18 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[gc.collect()じゃメモリは減らないよ]]></title><description><![CDATA[
+ 背景
+インターンでメモリ使用量が逼迫して、それを減らすタスクをもらったが、メモリに関してよく分かっていなかったので調べた。しかし、わかりやすく解説してくれてるサイトが少なかった。
+
+ 目的
+pythonのメモリ管理について、わかりやすく例え話で解説していこうと思う。正直自分も全く詳しくなく、大枠しか掴んでいないため、そこは理解してほしい。
+
+ 登場人物、もの、用語
+
+メモリという単位のお金
+OSお父さん
+Pythonくん（末っ子）
+glibc兄ちゃん（主にPythonくんの財布管理係）
+ガベージコレクション（gc）という名の貯金箱
+RSSは仕送り残高のこと
+gc.collect()は...]]></description><link>https://zenn.dev/arupaka_sho/articles/88a5f68baaeaf0</link><guid isPermaLink="true">https://zenn.dev/arupaka_sho/articles/88a5f68baaeaf0</guid><pubDate>Fri, 16 May 2025 20:29:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Kf4voFss--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:gc.collect%2528%2529%25E3%2581%2598%25E3%2582%2583%25E3%2583%25A1%25E3%2583%25A2%25E3%2583%25AA%25E3%2581%25AF%25E6%25B8%259B%25E3%2582%2589%25E3%2581%25AA%25E3%2581%2584%25E3%2582%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:shoga%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdiZjdhYjg0Y2IuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>shoga</dc:creator></item><item><title><![CDATA[Pythonでサイクリングデータを深掘り！自作FITファイル解析アプリ紹介（範囲指定機能付き）]]></title><description><![CDATA[サイクリストの皆さん、日々のライドデータをどのように活用していますか？ Garmin ConnectやStravaなどのプラットフォームは非常に便利ですが、「もっと特定の区間に注目したい」「自分だけの指標で分析したい」と感じたことはありませんか？
+今回は、以前の記事で紹介したFITファイルの解析スクリプトをベースに、PythonのTkinterでアプリケーションを自作してみたのでご紹介します。このアプリを使えば、FITファイル形式の走行データを読み込み、様々な角度からグラフや数値で可視化・分析できます。さらに、指定した距離範囲だけを切り出して分析する機能も搭載しています！
+
+ このアプリ...]]></description><link>https://zenn.dev/pincolo/articles/a67131bca0524b</link><guid isPermaLink="true">https://zenn.dev/pincolo/articles/a67131bca0524b</guid><pubDate>Fri, 16 May 2025 17:34:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Nj55Y4jE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A7%25E3%2582%25B5%25E3%2582%25A4%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%25B3%25E3%2582%25B0%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%2592%25E6%25B7%25B1%25E6%258E%2598%25E3%2582%258A%25EF%25BC%2581%25E8%2587%25AA%25E4%25BD%259CFIT%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E8%25A7%25A3%25E6%259E%2590%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E7%25B4%25B9%25E4%25BB%258B%25EF%25BC%2588%25E7%25AF%2584%25E5%259B%25B2%25E6%258C%2587%25E5%25AE%259A%25E6%25A9%259F%25E8%2583%25BD%25E4%25BB%2598%25E3%2581%258D%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%2594%25E3%2583%25B3%25E3%2582%25B3%25E3%2583%25AD%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MxMmRjOWM3YmYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ピンコロ</dc:creator></item><item><title><![CDATA[なぜ複数のプログラミング言語を使い分けるのか？～C、C++、Java、Python比較で見えるそれぞれの役割～]]></title><description><![CDATA[
+ なぜ複数のプログラミング言語を使い分けるのか？～C、C++、Java、Python比較で見えるそれぞれの役割～
+AIによる回答がわかりやすかったので掲載しておきます。CSの基礎で習うのかな？
+ソフトウェア開発の世界には、数多くのプログラミング言語が存在します。なぜ一つの万能な言語で全てを開発するのではなく、プロジェクトや目的によって異なる言語が使われるのでしょうか？
+それは、それぞれの言語が持つ「得意なこと」「苦手なこと」が異なり、「適材適所」で使い分けることで、より効率的で質の高いソフトウェア開発が可能になるからです。
+この記事では、代表的な言語であるC言語、C++、Java、Py...]]></description><link>https://zenn.dev/wyuma/articles/ddb90b50a9ff19</link><guid isPermaLink="true">https://zenn.dev/wyuma/articles/ddb90b50a9ff19</guid><pubDate>Fri, 16 May 2025 12:05:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--HAfEROWR--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%25AA%25E3%2581%259C%25E8%25A4%2587%25E6%2595%25B0%25E3%2581%25AE%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%259F%25E3%2583%25B3%25E3%2582%25B0%25E8%25A8%2580%25E8%25AA%259E%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2584%25E5%2588%2586%25E3%2581%2591%25E3%2582%258B%25E3%2581%25AE%25E3%2581%258B%25EF%25BC%259F%25EF%25BD%259EC%25E3%2580%2581C%252B%252B%25E3%2580%2581Java%25E3%2580%2581Python%25E6%25AF%2594%25E8%25BC%2583%25E3%2581%25A7%25E8%25A6%258B%25E3%2581%2588%25E3%2582%258B%25E3%2581%259D%25E3%2582%258C%25E3%2581%259E%25E3%2582%258C%25E3%2581%25AE%25E5%25BD%25B9%25E5%2589%25B2%25EF%25BD%259E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:wYuma%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFkZjJmOWZjMzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>wYuma</dc:creator></item><item><title><![CDATA[SlackからCloud Run jobsを実行する仕組みを作った話]]></title><description><![CDATA[
+ はじめに
+WED株式会社で機械学習エンジニアをしています、ishi2kiです。
+当社では以前、Slack のOutgoing Webhook をトリガーにして特定のタスクを実行する Cloud Run services を作成したことがあります。
+Slack から簡単に実行できるので、非エンジニアでも自動化の恩恵を受けられ、単純作業の工数を削減することができました。
+しかし、これには以下のような課題がありました。
+
+Outgoing Webhook ではなく Slack API を使うことが推奨されている
+タスクの実行に1時間以上かかる場合、Cloud Run services がタ...]]></description><link>https://zenn.dev/wed_engineering/articles/slack_job_executor</link><guid isPermaLink="true">https://zenn.dev/wed_engineering/articles/slack_job_executor</guid><pubDate>Fri, 16 May 2025 06:44:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--03tcjZaD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Slack%25E3%2581%258B%25E3%2582%2589Cloud%2520Run%2520jobs%25E3%2582%2592%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%2599%25E3%2582%258B%25E4%25BB%2595%25E7%25B5%2584%25E3%2581%25BF%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:ishi2ki%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzIxYjlmMzI3YWMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:WED%2520Engineering%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MwMmZhZjBjOWUuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ishi2ki</dc:creator></item><item><title><![CDATA[手を動かして学ぶ！MCPステップバイステップ実践ガイド for Beginners - Vol.4 JSON形式でMCPデータをやり取りする]]></title><description><![CDATA[
+ 1. はじめに：ただの文字列じゃ物足りない！
+皆さん、こんにちは！「手を動かして学ぶ！MCPステップバイステップ実践ガイド for Beginners」へようこそ！シリーズも折り返し地点が近づいてきた第4回です。
+前回のVol.3では、Pythonのrequestsライブラリを使って、初めての「MCPクライアント」プログラムを作成しましたね。そして、Vol.2で作ったFlaskサーバーに対して「お願い（リクエスト）」を送り、サーバーからの「お返事（レスポンス）」を受け取るという、基本的な通信を体験しました。自分の作ったプログラム同士が会話する様子は、なかなか感動的だったのではないでし...]]></description><link>https://zenn.dev/querypie/articles/afd4fa6cf9bb45</link><guid isPermaLink="true">https://zenn.dev/querypie/articles/afd4fa6cf9bb45</guid><pubDate>Fri, 16 May 2025 05:53:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--mqfFj1cy--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%2589%258B%25E3%2582%2592%25E5%258B%2595%25E3%2581%258B%25E3%2581%2597%25E3%2581%25A6%25E5%25AD%25A6%25E3%2581%25B6%25EF%25BC%2581MCP%25E3%2582%25B9%25E3%2583%2586%25E3%2583%2583%25E3%2583%2597%25E3%2583%2590%25E3%2582%25A4%25E3%2582%25B9%25E3%2583%2586%25E3%2583%2583%25E3%2583%2597%25E5%25AE%259F%25E8%25B7%25B5%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%2520for%2520Beginners%2520-%2520Vol.4%2520JSON%25E5%25BD%25A2%25E5%25BC%258F%25E3%2581%25A7...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:QueryPie%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk1MzUyMzdkYzguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>QueryPie</dc:creator></item><item><title><![CDATA[mcp server (Streamable HTTP) に対応したrokadoc変換を試す。]]></title><description><![CDATA[
+ mcp server (Streamable HTTP) のtool
+mcp server(Streamable HTTP) でドキュメント変換用のtoolをrokadocが提供したようなので記事化しました。
+(APIの使用回数制限あり)
+ただ結構mcp client側がSSEは対応してるけど、(Streamable HTTP)に対応していないものもたくさんあるので,今回はPython SDKを使用します。
+n8n
+https://community.n8n.io/t/support-mcp-streamablehttp-transport-for-mcp-clients-and-m...]]></description><link>https://zenn.dev/timoneko/articles/644be3e64ab0f8</link><guid isPermaLink="true">https://zenn.dev/timoneko/articles/644be3e64ab0f8</guid><pubDate>Fri, 16 May 2025 05:25:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--H0s-qyiV--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:mcp%2520server%2520%2528Streamable%2520HTTP%2529%2520%25E3%2581%25AB%25E5%25AF%25BE%25E5%25BF%259C%25E3%2581%2597%25E3%2581%259Frokadoc%25E5%25A4%2589%25E6%258F%259B%25E3%2582%2592%25E8%25A9%25A6%25E3%2581%2599%25E3%2580%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:timoneko%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM4NjZlZGEzNjEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>timoneko</dc:creator></item><item><title><![CDATA[seleniumの使い方　第６回　待機処理（python×Microsoft Edge）]]></title><description><![CDATA[こんにちは、星杜なぎさです
+今回は、seleniumで文字入力やクリックを行う方法について学びます。
+環境構築がまだの人は、以下の記事で準備してから本記事を読まれるとよいでしょう
+https://zenn.dev/hoshinagi1219/articles/b61f220e0908c5
+
+ 1. はじめに
+
+Seleniumは、Webブラウザの操作を自動化するためのツール
+オープンソースなので、無料で利用可能
+WebスクレイピングやRPA（Robotic Process Automation）などに活用できる
+
+
+ 1.1 この記事について
+
+SeleniumのWebDriverWai...]]></description><link>https://zenn.dev/hoshinagi1219/articles/51b10dc4564609</link><guid isPermaLink="true">https://zenn.dev/hoshinagi1219/articles/51b10dc4564609</guid><pubDate>Fri, 16 May 2025 03:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hLIiEtwK--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:selenium%25E3%2581%25AE%25E4%25BD%25BF%25E3%2581%2584%25E6%2596%25B9%25E3%2580%2580%25E7%25AC%25AC%25EF%25BC%2596%25E5%259B%259E%25E3%2580%2580%25E5%25BE%2585%25E6%25A9%259F%25E5%2587%25A6%25E7%2590%2586%25EF%25BC%2588python%25C3%2597Microsoft%2520Edge%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%2598%259F%25E6%259D%259C%25E3%2581%25AA%25E3%2581%258E%25E3%2581%2595%25EF%25BC%2588Nagisa%2520Hoshi...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MzMTgwYmFjZjYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>星杜なぎさ（Nagisa Hoshimori）</dc:creator></item><item><title><![CDATA[VOICEVOX/AivisSpeech で音声合成を自動化 - NotebookLM 音声概要 吹き替え計画 その2]]></title><description><![CDATA[
+ 概要
+
+前回の記事で作成した話者分離済みの文字起こしCSVデータをもとに、ローカル環境で音声合成を行う方法を解説します。
+
+https://zenn.dev/geniee/articles/audio-diarization-transcript-202505003
+
+オープンソースの音声合成ソフトウェアVOICEVOXおよびAivisSpeechのエンジンAPIを活用します。
+
+https://voicevox.hiroshiba.jp/
+https://aivis-project.com/
+
+話者ごとのテキストから音声ファイルを自動生成するPythonプログラムを開発しGitHu...]]></description><link>https://zenn.dev/geniee/articles/voicevox-sbv2-transcript-synthesizer-20250504</link><guid isPermaLink="true">https://zenn.dev/geniee/articles/voicevox-sbv2-transcript-synthesizer-20250504</guid><pubDate>Fri, 16 May 2025 02:27:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8arV7FTv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:VOICEVOX%252FAivisSpeech%2520%25E3%2581%25A7%25E9%259F%25B3%25E5%25A3%25B0%25E5%2590%2588%25E6%2588%2590%25E3%2582%2592%25E8%2587%25AA%25E5%258B%2595%25E5%258C%2596%2520-%2520NotebookLM%2520%25E9%259F%25B3%25E5%25A3%25B0%25E6%25A6%2582%25E8%25A6%2581%2520%25E5%2590%25B9%25E3%2581%258D%25E6%259B%25BF%25E3%2581%2588%25E8%25A8%2588%25E7%2594%25BB%2520%25E3%2581%259D%25E3%2581%25AE2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E5%25BF%2597%25E8%25B3%2580%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQyMmViZTNjMjIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:GENIEE%2520TechBlog%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRlMGQ3NDExYzUuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>志賀</dc:creator></item><item><title><![CDATA[Whisper/pyannoteを用いたローカル環境での話者分離＆文字起こし - NotebookLM 音声概要 吹き替え計画 その1]]></title><description><![CDATA[
+ 概要
+
+この記事は、Google NotebookLMの音声概要機能を他の音声合成ソフトで再現するプロジェクトの第一弾です。
+音声ファイルの話者分離と文字起こしをローカル環境で実行するPythonプログラムを紹介します。
+話者分離には、Hugging Faceで公開されている pyannote/speaker-diarization-3.1モデルを利用します。
+
+https://huggingface.co/pyannote/speaker-diarization-3.1
+
+文字起こしには、OpenAIの Whisperモデル（例: whisper-large-v3）を利用し、分離さ...]]></description><link>https://zenn.dev/geniee/articles/audio-diarization-transcript-202505003</link><guid isPermaLink="true">https://zenn.dev/geniee/articles/audio-diarization-transcript-202505003</guid><pubDate>Fri, 16 May 2025 02:23:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hwS0NsEK--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Whisper%252Fpyannote%25E3%2582%2592%25E7%2594%25A8%25E3%2581%2584%25E3%2581%259F%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25AB%25E3%2583%25AB%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25A7%25E3%2581%25AE%25E8%25A9%25B1%25E8%2580%2585%25E5%2588%2586%25E9%259B%25A2%25EF%25BC%2586%25E6%2596%2587%25E5%25AD%2597%25E8%25B5%25B7%25E3%2581%2593%25E3%2581%2597%2520-%2520NotebookLM%2520%25E9%259F%25B3%25E5%25A3%25B0%25E6%25A6%2582%25E8%25A6%2581%2520...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E5%25BF%2597%25E8%25B3%2580%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQyMmViZTNjMjIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:GENIEE%2520TechBlog%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRlMGQ3NDExYzUuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>志賀</dc:creator></item><item><title><![CDATA[変動率０は異常値？：TARGET=0除去による株価予測AIの精度改善]]></title><description><![CDATA[
+ 実験1：TARGET=0の取扱いによる影響検証（V1 vs V2）
+
+ 1. 検証目的
+本節では、株価予測回帰モデル（XGBoost）における目的変数（以下、Target）として設定した「翌営業日のlog収益率」に対し、値が0となるデータを保持する場合（V1）と、それを除外する場合（V2）で、モデル性能や学習安定性にどのような差異が生じるかを検証する。特に、log収益率が0となるデータの存在が学習にどのような影響を及ぼすかを数理的に観察し、誤差関数（MAE, RMSE, R², MAPE）を用いた評価を行う。
+
+ 2. 数学的背景
+log収益率（log-return）は以下の式により...]]></description><link>https://zenn.dev/kto2myk/articles/a7c53d3b805770</link><guid isPermaLink="true">https://zenn.dev/kto2myk/articles/a7c53d3b805770</guid><pubDate>Thu, 15 May 2025 16:04:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vMjnPUkz--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%25A4%2589%25E5%258B%2595%25E7%258E%2587%25EF%25BC%2590%25E3%2581%25AF%25E7%2595%25B0%25E5%25B8%25B8%25E5%2580%25A4%25EF%25BC%259F%25EF%25BC%259ATARGET%253D0%25E9%2599%25A4%25E5%258E%25BB%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258B%25E6%25A0%25AA%25E4%25BE%25A1%25E4%25BA%2588%25E6%25B8%25ACAI%25E3%2581%25AE%25E7%25B2%25BE%25E5%25BA%25A6%25E6%2594%25B9%25E5%2596%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E7%25A5%259E%25E7%2594%25B0%25E3%2580%2580%25E6%2599%25BA%25E5%25BC%25A5%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc1NjdiNTRjYTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>神田　智弥</dc:creator></item><item><title><![CDATA[clickを使ってPythonのコマンドライン引数をきれいにしよう！]]></title><description><![CDATA[今回は、Pythonできれいなコマンドラインインターフェースを実装できるclickについて紹介してみようと思います。
+
+ clickとは？
+clickとはPythonできれいなコマンドラインインターフェースを実装するためのライブラリです。その名前はCommand Line Interface Creation Kitの頭文字をとったようです。レポジトリは以下になります。
+https://github.com/pallets/click
+clickはコマンドラインツールを素早く実装できることに注力しており、従来のsysやargparseを利用したものと比べて格段に実装難易度が下がっていると...]]></description><link>https://zenn.dev/akasan/articles/034598cbd096e2</link><guid isPermaLink="true">https://zenn.dev/akasan/articles/034598cbd096e2</guid><pubDate>Thu, 15 May 2025 13:08:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--onc9q-rP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:click%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6Python%25E3%2581%25AE%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%25B3%25E5%25BC%2595%25E6%2595%25B0%25E3%2582%2592%25E3%2581%258D%25E3%2582%258C%25E3%2581%2584%25E3%2581%25AB%25E3%2581%2597%25E3%2582%2588%25E3%2581%2586%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Akasan%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUVkRlRwNXJfNDFtel9OY3dPYUtMRE1vc09tbVB6YmxHM0V5N3lNZzI3QWM9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Akasan</dc:creator></item><item><title><![CDATA[コンテナのPythonからMySQLにzstd圧縮を有効にして接続する]]></title><description><![CDATA[mysql-connector-python を使えば簡単なのですが、あえて mysqlclient を使う場合の話です。
+まず、Pythonの公式DockerイメージはDebianベースになっていますが、Debianではデフォルトではapt-getでMySQLをインストールできません。 (Debian sid では MySQL が復活していますが、stableになるには時間がかかります)
+代わりにmariadbのクライアントライブラリ(libmariadb)はインストールできるのですが、MariaDBはzstd圧縮に対応しておらず、そのせいかクライアントライブラリはzstd圧縮に対応し...]]></description><link>https://zenn.dev/methane/articles/mariadb-client-in-container</link><guid isPermaLink="true">https://zenn.dev/methane/articles/mariadb-client-in-container</guid><pubDate>Thu, 15 May 2025 13:00:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--20AQdKxY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2586%25E3%2583%258A%25E3%2581%25AEPython%25E3%2581%258B%25E3%2582%2589MySQL%25E3%2581%25ABzstd%25E5%259C%25A7%25E7%25B8%25AE%25E3%2582%2592%25E6%259C%2589%25E5%258A%25B9%25E3%2581%25AB%25E3%2581%2597%25E3%2581%25A6%25E6%258E%25A5%25E7%25B6%259A%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:methane%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2h4RE5nS2F5a3FreGhkeUZMaG9Yc3hRVk9QVFVrd3hqTngtZGlxT05FPXMyNTAtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>methane</dc:creator></item><item><title><![CDATA[seleniumの使い方　第５回　ActionChainの活用（python×Microsoft Edge）]]></title><description><![CDATA[こんにちは、星杜なぎさです
+今回は、seleniumで文字入力やクリックを行う方法について学びます。
+環境構築がまだの人は、以下の記事で準備してから本記事を読まれるとよいでしょう
+https://zenn.dev/hoshinagi1219/articles/b61f220e0908c5
+
+ 1. はじめに
+
+Seleniumは、Webブラウザの操作を自動化するためのツール
+オープンソースなので、無料で利用可能
+WebスクレイピングやRPA（Robotic Process Automation）などに活用できる
+
+
+ 1.1 この記事について
+
+Seleniumでできることを端的に表した...]]></description><link>https://zenn.dev/hoshinagi1219/articles/1c195715a380a9</link><guid isPermaLink="true">https://zenn.dev/hoshinagi1219/articles/1c195715a380a9</guid><pubDate>Thu, 15 May 2025 08:10:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--rq24Pvul--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:selenium%25E3%2581%25AE%25E4%25BD%25BF%25E3%2581%2584%25E6%2596%25B9%25E3%2580%2580%25E7%25AC%25AC%25EF%25BC%2595%25E5%259B%259E%25E3%2580%2580ActionChain%25E3%2581%25AE%25E6%25B4%25BB%25E7%2594%25A8%25EF%25BC%2588python%25C3%2597Microsoft%2520Edge%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%2598%259F%25E6%259D%259C%25E3%2581%25AA%25E3%2581%258E%25E3%2581%2595%25EF%25BC%2588Nagisa%2520Hoshi...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MzMTgwYmFjZjYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>星杜なぎさ（Nagisa Hoshimori）</dc:creator></item><item><title><![CDATA[uvで管理するFastAPIプロジェクトの本番イメージのMulti Stage Build]]></title><description><![CDATA[
+ はじめに
+Nauhの池田です。
+以前はPythonのプロジェクトはpoetryで管理することが多かったのですが、最近はuvを使用することが増えてきました。
+FastAPIのバックエンドサービスをKubernetes, CloudRun, ECSなどでホストする際はContainer Imageのサイズをできるだけ削減するために最低限の依存関係だけをインストールしたContainerを用意することが一般的ですが、uvで管理するプロジェクトの場合はどのように実現できるのかを調べたのでその結果をまとめておきます。
+
+ uvについて
+uvの特徴としてはRustで開発されており高速に動作するこ...]]></description><link>https://zenn.dev/nauh_blog/articles/14a92d11006199</link><guid isPermaLink="true">https://zenn.dev/nauh_blog/articles/14a92d11006199</guid><pubDate>Thu, 15 May 2025 07:15:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7fV1HVO_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:uv%25E3%2581%25A7%25E7%25AE%25A1%25E7%2590%2586%25E3%2581%2599%25E3%2582%258BFastAPI%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E3%2581%25AE%25E6%259C%25AC%25E7%2595%25AA%25E3%2582%25A4%25E3%2583%25A1%25E3%2583%25BC%25E3%2582%25B8%25E3%2581%25AEMulti%2520Stage%2520Build%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:atsuik%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VjODAxYjVlNzIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Nauh%2528%25E3%2583%258A%25E3%2582%25A6%25E3%2582%25A2%2529%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0Y2VyRXg4M0pVblZyenZhVGVuVmZyNXNHbWRoOXpheThtTjhDY2FEdWJXPXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>atsuik</dc:creator></item><item><title><![CDATA[LiNGAMで因果探索する際の概観分析について調査した（正規性）]]></title><description><![CDATA[
+ はじめに
+こんにちは、因果探索アプリケーション Causalas 開発の井手です。
+今回は、因果探索アルゴリズムの一つであるLiNGAMを用いた因果探索における、概観分析について調査しました。
+LiNGAMに関連する論文を中心に調査を行い、因果探索の際に共通して実施される概観分析の項目として、正規性の分析方法についてまとめましたので紹介します。
+
+ 正規性
+LiNGAMは非ガウス性を仮定とした因果探索手法です。
+そのため、多くの論文では、因果探索を実行するデータセットの各変数が正規分布に従うかどうかを検証し、LiNGAMの前提条件を満たしているかを確認しています。
+
+ ヒストグラム
+...]]></description><link>https://zenn.dev/as_causal/articles/6a5b7c3f9745a6</link><guid isPermaLink="true">https://zenn.dev/as_causal/articles/6a5b7c3f9745a6</guid><pubDate>Thu, 15 May 2025 03:35:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xax4Nmqa--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:LiNGAM%25E3%2581%25A7%25E5%259B%25A0%25E6%259E%259C%25E6%258E%25A2%25E7%25B4%25A2%25E3%2581%2599%25E3%2582%258B%25E9%259A%259B%25E3%2581%25AE%25E6%25A6%2582%25E8%25A6%25B3%25E5%2588%2586%25E6%259E%2590%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E8%25AA%25BF%25E6%259F%25BB%25E3%2581%2597%25E3%2581%259F%25EF%25BC%2588%25E6%25AD%25A3%25E8%25A6%258F%25E6%2580%25A7%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E4%25BA%2595%25E6%2589%258B%2520%25E9%25BA%25BB%25E5%258F%258B%25E7%25BE%258E%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRlNDhjNDQ5MDQuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:SCREEN%2520AS%2520%25E5%259B%25A0%25E6%259E%259C%25E6%258E%25A2%25E7%25B4%25A2%25E3%2583%2581%25E3%2583%25BC%25E3%2583%25A0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTEJja2JDb2wtY3MyNG56dUZkT0tNOEVWVU5JeXNXbmhPbGZ5LTJIdU9BUkMwVmR3PXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>井手 麻友美</dc:creator></item><item><title><![CDATA[uvでライブラリをグルーピングして最小限の依存関係で起動できるようにする]]></title><description><![CDATA[
+ 始めに
+Pythonに限らずアプリケーションを大規模で運用していくほどライブラリの依存関係が増えていきます。その時にAPIとバッチ等の用途に応じたアプリケーションごと分割する方法もありますが二重管理が面倒になります。JavaではGradleを使用してマルチプロジェクト構成にしておくことで、必要なライブラリだけで起動するようにできました。
+今回の記事では、Pythonのuvを使用してライブラリをグルーピングすることで、必要なライブラリを最小限にする方法を記載します。
+
+ 環境
+
+Python
+
+3.13
+
+
+uv
+
+0.7.2
+
+
+
+
+ 実装
+
+ ライブラリのグルーピング
+depend...]]></description><link>https://zenn.dev/kirimaru/articles/b67401a01dda80</link><guid isPermaLink="true">https://zenn.dev/kirimaru/articles/b67401a01dda80</guid><pubDate>Thu, 15 May 2025 03:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--TtH8Vr5q--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:uv%25E3%2581%25A7%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%25E3%2582%2592%25E3%2582%25B0%25E3%2583%25AB%25E3%2583%25BC%25E3%2583%2594%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%2597%25E3%2581%25A6%25E6%259C%2580%25E5%25B0%258F%25E9%2599%2590%25E3%2581%25AE%25E4%25BE%259D%25E5%25AD%2598%25E9%2596%25A2%25E4%25BF%2582%25E3%2581%25A7%25E8%25B5%25B7%25E5%258B%2595%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258B%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258D%25E3%2582%258A%25E4%25B8%25B8%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM1OTcxNmNjNDMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>きり丸</dc:creator></item><item><title><![CDATA[PythonとOpenAI APIで実践！MCP開発入門 【第1回】AI開発のスタートライン！Pythonプログラミング環境構築 完全ガイド]]></title><description><![CDATA[
+ はじめに
+
+ AI開発の世界へ、ようこそ！その第一歩は「環境構築」から
+皆さん、こんにちは！今日から始まる新シリーズ「PythonとOpenAI APIで実践！はじめてのMCP（モデルコンテキストプロトコル）開発入門」へ、ようこそお越しくださいました。このシリーズでは、今話題のOpenAI APIを使いこなし、AIにこちらの意図や状況（コンテキスト）を的確に伝え、より賢い応答を引き出すための「モデルコンテキストプロトコル（MCP）」的な考え方と、その実践方法を、Pythonプログラミングを通じて学んでいきます。
+AI、機械学習、大規模言語モデル（LLM）…こうした言葉を耳にする機会が...]]></description><link>https://zenn.dev/querypie/articles/f8fedd7fbe66a5</link><guid isPermaLink="true">https://zenn.dev/querypie/articles/f8fedd7fbe66a5</guid><pubDate>Thu, 15 May 2025 00:55:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--o11G_nRm--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A8OpenAI%2520API%25E3%2581%25A7%25E5%25AE%259F%25E8%25B7%25B5%25EF%25BC%2581MCP%25E9%2596%258B%25E7%2599%25BA%25E5%2585%25A5%25E9%2596%2580%2520%25E3%2580%2590%25E7%25AC%25AC1%25E5%259B%259E%25E3%2580%2591AI%25E9%2596%258B%25E7%2599%25BA%25E3%2581%25AE%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%2588%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%25B3%25EF%25BC%2581Python%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:QueryPie%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk1MzUyMzdkYzguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>QueryPie</dc:creator></item><item><title><![CDATA[sorted(args, key=lambda x: x[0])について]]></title><description><![CDATA[
+ 1. 文字列リストのソート
+以下の例では、words リスト内の各文字列の 1文字目 (x[0]) を基準にしてソートを行う：
+words = ["banana", "apple", "cherry"]
+sorted_words = sorted(words, key=lambda x: x[0])
+print(sorted_words)  # 出力: ['apple', 'banana', 'cherry']
+
+
+lambda x: x[0] の x は "banana", "apple", "cherry" が順に渡される。
+
+x[0] はそれぞれ 'b', 'a', 'c' と...]]></description><link>https://zenn.dev/aki05162525/articles/2aa0f4c4b7a3bf</link><guid isPermaLink="true">https://zenn.dev/aki05162525/articles/2aa0f4c4b7a3bf</guid><pubDate>Thu, 15 May 2025 00:03:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Zb8c5IQn--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:sorted%2528args%252C%2520key%253Dlambda%2520x%253A%2520x%255B0%255D%2529%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2584%25E3%2582%258B%25E3%2581%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSjBaM1pHbFo2RUJSc0NDTnVqeUpRV0U0eXEzczZJeTNYR1NPdHE2a21ZR3dNSWpqTXA9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>いるか</dc:creator></item><item><title><![CDATA[【初心者向け】Pythonのtype() と isinstance() の違いを整理する]]></title><description><![CDATA[
+ はじめに
+Pythonでは、変数の「型（データ型）」を調べたい場面がよくあります。
+そのときによく使われるのが type() と isinstance() です。
+私自身、最初は「どちらを使えばいいのか？」「違いがよくわからない」と感じました。
+本記事では、type() と isinstance() の違いについて、
+役割・使いどころ・注意点を初心者向けに整理します。
+
+ 1. type() の基本
+type() は、オブジェクトの正確な型を取得するための関数です。
+print(type(123))        # &lt;class 'int'&gt;
+print(type("h...]]></description><link>https://zenn.dev/fd2025/articles/27aef5ada237c5</link><guid isPermaLink="true">https://zenn.dev/fd2025/articles/27aef5ada237c5</guid><pubDate>Wed, 14 May 2025 22:55:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--C5O0kdh9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E5%2590%2591%25E3%2581%2591%25E3%2580%2591Python%25E3%2581%25AEtype%2528%2529%2520%25E3%2581%25A8%2520isinstance%2528%2529%2520%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%25E3%2582%2592%25E6%2595%25B4%25E7%2590%2586%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:fd2025%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2EzMzVlNTI5MmQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>fd2025</dc:creator></item><item><title><![CDATA[Termuxでpythonを使う]]></title><description><![CDATA[https://zenn.dev/dameyodamedame/articles/937421d81b5949
+上記の記事の詳細記事です。
+日本では最初に教えるプログラミング言語をScratchにしている場合も多いようですが、Termux環境は基本CLIなので、動作しません。なのでここでは最初にPythonを選択します。
+
+ Pythonをインストールする
+~ $ pkg install python
+インストール中に何か聞かれたら⏎すればOKです。勝手にデフォルトの選択肢が適宜選ばれます。
+
+ エディタでPythonのプログラムを書く
+nanoを使ってloop.pyという名前のファイル...]]></description><link>https://zenn.dev/dameyodamedame/articles/5b61268cf03c95</link><guid isPermaLink="true">https://zenn.dev/dameyodamedame/articles/5b61268cf03c95</guid><pubDate>Wed, 14 May 2025 16:50:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Za7IlMRW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:Termux%25E3%2581%25A7python%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:dameyodamedame%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvZC5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>dameyodamedame</dc:creator></item></channel></rss>
