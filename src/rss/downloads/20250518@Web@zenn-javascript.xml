@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「JavaScript」のフィード]]></title><description><![CDATA[Zennのトピック「JavaScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/javascript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/64acd76870.png</url><title>Zennの「JavaScript」のフィード</title><link>https://zenn.dev/topics/javascript</link></image><generator>zenn.dev</generator><lastBuildDate>Sun, 18 May 2025 10:09:32 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/javascript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Typescript 関数の理解を深める]]></title><description><![CDATA[日頃プログラミングをしていてTypescriptの関数について理解を深めたいなと思い記事を書きました。
+内容は僕が理解不足だったり深めたい箇所がメインですのでそこをご了承いただけると嬉しいです！
+
+ void関数における早期returnについて
+戻り値の型がvoidである関数においても、returnによる処理の中断が可能です。
+この性質を活用することで、条件によって処理を早期に終了させ、不要なネストや処理の継続を避けることができます。
+function doSomething(): void {
+  if (someCondition) return;
+  console.log("続行...]]></description><link>https://zenn.dev/you_ik/articles/a1f48acb35f6ec</link><guid isPermaLink="true">https://zenn.dev/you_ik/articles/a1f48acb35f6ec</guid><pubDate>Sun, 18 May 2025 09:56:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--KO67HafI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Typescript%2520%25E9%2596%25A2%25E6%2595%25B0%25E3%2581%25AE%25E7%2590%2586%25E8%25A7%25A3%25E3%2582%2592%25E6%25B7%25B1%25E3%2582%2581%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%25A8%25E3%2583%25AB%25E3%2582%25B7%25E3%2582%25AB%25E3%2581%25B5%25E3%2581%2581%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNjYTY1YmYwYWYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ヨルシカふぁん</dc:creator></item><item><title><![CDATA[バーコードリーダー実装に使えるライブラリを比べてみた]]></title><description><![CDATA[
+ 背景
+バーコードスキャン機能付きのアプリの開発に興味を持ち、色々と調べていました。私は本を読むのが好きで、読んだ本を簡単に管理できるアプリがあればなぁと思って試しに簡単なアプリを作ってみました。
+今まで考えたことがなかったのですが、バーコードスキャンを使う場面はたくさんあると気づきました。
+
+在庫管理
+モバイル決済
+チケット認証
+レジでの買い物
+棚卸し作業
+
+などなど、バーコード／QR コードの読み取りはいろんな業務で便利ですね。
+そう思ってから、巷のバーコードスキャンライブラリにどんな種類があるのか、比較検討するための調査をしてみました。
+この記事では、
+
+どのバーコードスキャンラ...]]></description><link>https://zenn.dev/maidog/articles/bb5fdaebba1f8c</link><guid isPermaLink="true">https://zenn.dev/maidog/articles/bb5fdaebba1f8c</guid><pubDate>Sat, 17 May 2025 18:43:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--SC7kVpzD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2590%25E3%2583%25BC%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2583%25AA%25E3%2583%25BC%25E3%2583%2580%25E3%2583%25BC%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%25AB%25E4%25BD%25BF%25E3%2581%2588%25E3%2582%258B%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%25E3%2582%2592%25E6%25AF%2594%25E3%2581%25B9%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Marina%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA2NDA3ZjJiOWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Marina</dc:creator></item><item><title><![CDATA[ノーコードでニューラルネットワークのPythonコードを生成するアプリの開発]]></title><description><![CDATA[
+ 1.はじめに
+現在，機械学習，特にニューラルネットワークは現在のテクノロジー分野で欠かせない技術となっていますが，機械学習を知らない人には，実装やニューラルネットワークの仕組みの理解のハードルが依然として高いままです．プログラミングの知識やライブラリの理解が必要とされるため，初学者自身がコードを作成するのは，難しいように感じます．
+そこで私は，プログラミングの専門知識がなくても，わずか数クリックでPyTorchを使った本格的なニューラルネットワークのコードを生成できるWebアプリケーション「No-Code Neural Network Code Generator」を開発しました．こ...]]></description><link>https://zenn.dev/kenjiendou/articles/39d0a5e96b57fd</link><guid isPermaLink="true">https://zenn.dev/kenjiendou/articles/39d0a5e96b57fd</guid><pubDate>Sat, 17 May 2025 16:55:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jzgAWKPg--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%258E%25E3%2583%25BC%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2581%25A7%25E3%2583%258B%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%25A9%25E3%2583%25AB%25E3%2583%258D%25E3%2583%2583%25E3%2583%2588%25E3%2583%25AF%25E3%2583%25BC%25E3%2582%25AF%25E3%2581%25AEPython%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2582%2592%25E7%2594%259F%25E6%2588%2590%25E3%2581%2599%25E3%2582%258B%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2581%25AE%25E9%2596%258B%25E7%2599%25BA%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2591%25E3%2582%2593%25E3%2581%2598%25E3%2581%2588%25E3%2582%2593%25E3%2581%25A9%25E3%2581%2586%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U1ODFiNmE1MmEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>けんじえんどう</dc:creator></item><item><title><![CDATA[JavaScriptでABC406(A-D)]]></title><description><![CDATA[https://atcoder.jp/contests/abc406
+
+ A - Not Acceptable
+https://atcoder.jp/contests/abc406/tasks/abc406_a
+0時00分からの分数を求めて比較するのが楽で確実な気がします
+C \times 60 + D &lt; A \times 60 + B ってことですね
+https://atcoder.jp/contests/abc406/submissions/65847652
+1分03秒 AC!
+
+ B - Product Calculator
+https://atcoder.jp/conte...]]></description><link>https://zenn.dev/aya_koto/articles/f6233c939b6bd4</link><guid isPermaLink="true">https://zenn.dev/aya_koto/articles/f6233c939b6bd4</guid><pubDate>Sat, 17 May 2025 13:49:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--P9B7lkPU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:JavaScript%25E3%2581%25A7ABC406%2528A-D%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Ayasaka-Koto%2520%252F%2520Aya...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VkNTRlMDBjYTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Ayasaka-Koto / AyagawaP</dc:creator></item><item><title><![CDATA[【Vue.js】ユーザーアクション編[methods/v-on:(@)/emit()]]]></title><description><![CDATA[
+ methods()
+!
+
+ 【methods】とは
+
+[実装例]あいさつボタンを押した際に下にこんにちはと表示される。
+・イベントに応じた処理（関数）を定義することができる。
+・Vue2では、export defalt methodsとすることで関数を定義することができた。
+・Vue3では、&lt;script setup&gt;構文を使うことで、methodsオブジェクトの定義は不要となった。
+Vue2での記述方法　VS Vue3での記述方法
+
+Vue2だとexport defalt methodsとする必要があった。
+&lt;template&gt;
+  &lt;button @...]]></description><link>https://zenn.dev/code_journey_ys/articles/538de1849cfa9f</link><guid isPermaLink="true">https://zenn.dev/code_journey_ys/articles/538de1849cfa9f</guid><pubDate>Sat, 17 May 2025 09:18:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8Xw6zSTp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Vue.js%25E3%2580%2591%25E3%2583%25A6%25E3%2583%25BC%25E3%2582%25B6%25E3%2583%25BC%25E3%2582%25A2%25E3%2582%25AF%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E7%25B7%25A8%255Bmethods%252Fv-on%253A%2528%2540%2529%252Femit%2528%2529%255D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yusuke%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2QxYmU5MTc2ZTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yusuke</dc:creator></item><item><title><![CDATA[正規表現（Regular Expression）]]></title><description><![CDATA[
+ 正規表現とは
+文字列の集合を特定の記法で表現する。正規表現は、デリミタ（/「スラッシュ」）で囲んで使用することがほとんど。
+URLにマッチするかを判定する場合、「\」のようなエスケープを使用することが多い。
+デリミタで正規表現で囲んでURLの確認するようなコードを書いた際に、プログラマ的に見づらくなってしまうこともあるので、「#」に変換すると読みやすくなることがある。
+
+ 正規表現を使うと具体的にどんなことができるのか？
+主に以下のようなことで良く使用する。
+
+判定
+検索
+置換
+
+
+ 正規表現の種類
+正規表現は以下のようなものがある。また、正規表現は記法の組み合わせでいろんなパターン...]]></description><link>https://zenn.dev/monyyy/articles/819c9e3aeee37e</link><guid isPermaLink="true">https://zenn.dev/monyyy/articles/819c9e3aeee37e</guid><pubDate>Sat, 17 May 2025 08:01:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--x7frfDmR--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%25AD%25A3%25E8%25A6%258F%25E8%25A1%25A8%25E7%258F%25BE%25EF%25BC%2588Regular%2520Expression%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Mon%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSUxJMlItWWhrem0zQUVwMW5TeU1acUFrWlA2TWtvZjRwNUs5VGhkV2EzXzRVPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Mon</dc:creator></item><item><title><![CDATA[複数回呼ばれるクラスでリストを順に処理する]]></title><description><![CDATA[!
+汎用向きです（JavaScript）
+
+呼び出し元から複数回処理が呼び出されている状況において、呼び出し元のコードに手を加えられない場合の対応方法について記載します。
+
+ 元のコードイメージ
+呼び出し元の実行によって呼び出し先が複数回実行されるコードです。
+class Parent {
+  createChildren() {
+    for (let i = 1; i &lt;= 3; i++) {
+      const child = new Child(i);
+    }
+  }
+}
+
+class Child {
+  constructor(index) {
+    this...]]></description><link>https://zenn.dev/fukagawa/articles/a3f1e2f59499ae</link><guid isPermaLink="true">https://zenn.dev/fukagawa/articles/a3f1e2f59499ae</guid><pubDate>Sat, 17 May 2025 04:44:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Pf8YU_TD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%25A4%2587%25E6%2595%25B0%25E5%259B%259E%25E5%2591%25BC%25E3%2581%25B0%25E3%2582%258C%25E3%2582%258B%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25B9%25E3%2581%25A7%25E3%2583%25AA%25E3%2582%25B9%25E3%2583%2588%25E3%2582%2592%25E9%25A0%2586%25E3%2581%25AB%25E5%2587%25A6%25E7%2590%2586%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:fukagawa%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJjYjFhNWE4YzEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>fukagawa</dc:creator></item><item><title><![CDATA[JavaScriptのDateはなぜ月を0から数えるのか？仕様の背景と対策を調べてみた]]></title><description><![CDATA[console.log(new Date(2025,5,17));
+// Mayではないことに最初は驚くと思います
+Tue Jun 17 2025 00:00:00 GMT+0900 (日本標準時)
+上記のように、JavaScriptで月を指定する際、
+なぜ1から12ではなく0から11で表すのかふと疑問に思ったので調べてみました。
+
+ MDNを見てみる
+Dateオブジェクトに関するMDNのページを見てみたものの、なぜ1からではなく0から始まっているのかということに言及するような記載はありませんでした、、、
+※getMonth()のページも見てみたが同様でした、、、
+言語仕様を説明するドキ...]]></description><link>https://zenn.dev/ohimusdev46301/articles/50d5ebc277d9b1</link><guid isPermaLink="true">https://zenn.dev/ohimusdev46301/articles/50d5ebc277d9b1</guid><pubDate>Sat, 17 May 2025 02:29:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--MAMRPmpr--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25E3%2581%25AEDate%25E3%2581%25AF%25E3%2581%25AA%25E3%2581%259C%25E6%259C%2588%25E3%2582%25920%25E3%2581%258B%25E3%2582%2589%25E6%2595%25B0%25E3%2581%2588%25E3%2582%258B%25E3%2581%25AE%25E3%2581%258B%25EF%25BC%259F%25E4%25BB%2595%25E6%25A7%2598%25E3%2581%25AE%25E8%2583%258C%25E6%2599%25AF%25E3%2581%25A8%25E5%25AF%25BE%25E7%25AD%2596%25E3%2582%2592%25E8%25AA%25BF%25E3%2581%25B9%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Wataru%2520Takiguchi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdkOTBhM2EyYTcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Wataru Takiguchi</dc:creator></item><item><title><![CDATA[🌳 ディレクトリ構造を簡単テキスト化！nodejs/cliツール「filetree」]]></title><description><![CDATA[
+ ✨ はじめに
+開発プロジェクトを進めていると、「このプロジェクトのディレクトリ構造をドキュメントに載せたい」「チームメンバーに特定の範囲のファイル構成を伝えたい」といった場面がよくありますよね。そんなとき、手動でツリー構造を書き出すのは手間がかかりますし、ミスも起こりやすいものです 😥
+今回ご紹介する @telosh/filetree は、そんな悩みを解決してくれる Node.js 向けの npm パッケージです。指定したディレクトリのファイルやフォルダの構造を、簡単に美しいツリー形式の文字列で出力してくれます！
+
+ 📦 @telosh/filetree とは？
+@telosh/fi...]]></description><link>https://zenn.dev/terumi_web/articles/09bfbe35b0835d</link><guid isPermaLink="true">https://zenn.dev/terumi_web/articles/09bfbe35b0835d</guid><pubDate>Sat, 17 May 2025 02:15:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_REyC5GT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%2520%2520%25E3%2583%2587%25E3%2582%25A3%25E3%2583%25AC%25E3%2582%25AF%25E3%2583%2588%25E3%2583%25AA%25E6%25A7%258B%25E9%2580%25A0%25E3%2582%2592%25E7%25B0%25A1%25E5%258D%2598%25E3%2583%2586%25E3%2582%25AD%25E3%2582%25B9%25E3%2583%2588%25E5%258C%2596%25EF%25BC%2581nodejs%252Fcli%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%25E3%2580%258Cfiletree%25E3%2580%258D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:telosh%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2UzMGVkN2M4NDMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>telosh</dc:creator></item><item><title><![CDATA[【Vue.js】状態管理編[ref/reactive/v-model/compted/watch]+Pinia]]></title><description><![CDATA[
+ ref()
+!
+
+ 【ref()】とは
+
+
+[実装例]カウントアップのボタンが押される（click）と数値（count）が増える（increment）
+・数値や文字列などの単一の値の状態を管理したい時に用いる。
+・リアクティブな変数を定義して、単方向に状態を管理する。
+・変数.valueとすることで&lt;script&gt;内で値を取得することができる。
+【リアクティブ】とは
+・「変数の変化を追いかける」仕組みのこと。
+・値の変化を自動で監視して、画面の表示も勝手に更新してくれる。
+
+
+ref（）の実装例と解説
+countという変数をref関数で監視している
+&lt;templat...]]></description><link>https://zenn.dev/code_journey_ys/articles/e620a3e8f0238b</link><guid isPermaLink="true">https://zenn.dev/code_journey_ys/articles/e620a3e8f0238b</guid><pubDate>Fri, 16 May 2025 14:35:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--AoP6Pxlr--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Vue.js%25E3%2580%2591%25E7%258A%25B6%25E6%2585%258B%25E7%25AE%25A1%25E7%2590%2586%25E7%25B7%25A8%255Bref%252Freactive%252Fv-model%252Fcompted%252Fwatch%255D%252BPinia%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yusuke%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2QxYmU5MTc2ZTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yusuke</dc:creator></item><item><title><![CDATA[Reactナニソレおいしいの？というそこのあたなへ]]></title><description><![CDATA[
+ はじめに
+初めに勉強した時、もし私がこの記事に出会っていたら挫折はしなかったと断言できる記事に仕上げました。
+Reactを学習したいけどなにからやればいいかわからない人や現在勉強していて躓いている人は是日最後まで読んで見て下さい。
+私はReactをあらゆる教材（Reactチュートリアル（公式）・Udemy・Youtube）を使って学習しましたが幾度となく挫折して勉強を投げ出してきました。
+しかし今回基本の「き」から勉強することで理解が深まり挫折しにくくなったと思いますのでその教材と学んだことをまとめます。
+この記事を読むことで得られるもの
+
+Reactってなに？
+Reactの基本JS...]]></description><link>https://zenn.dev/keit0025/articles/08231345b6a233</link><guid isPermaLink="true">https://zenn.dev/keit0025/articles/08231345b6a233</guid><pubDate>Fri, 16 May 2025 09:04:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Rn1VferT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%25E3%2583%258A%25E3%2583%258B%25E3%2582%25BD%25E3%2583%25AC%25E3%2581%258A%25E3%2581%2584%25E3%2581%2597%25E3%2581%2584%25E3%2581%25AE%25EF%25BC%259F%25E3%2581%25A8%25E3%2581%2584%25E3%2581%2586%25E3%2581%259D%25E3%2581%2593%25E3%2581%25AE%25E3%2581%2582%25E3%2581%259F%25E3%2581%25AA%25E3%2581%25B8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:keita%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSUV0WmxKQU1pNUN0dlhsdzh1OWhGZTZCaEdiWEpHY1o3dEJpU3Q5TWlHanBVeUpNST1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>keita</dc:creator></item><item><title><![CDATA[[React] 親から渡すのか、子に書けばいいのか、どっちなんだい]]></title><description><![CDATA[
+ 悩んでる
+React で使いまわしたい関数がありました。こんなのです。
+const getRelativeTimeString = (date) =&gt; {
+        const targeDate = date instanceof Date ? date : new Date(date);
+
+        // 現在時刻との差分をミリ秒で計算
+        const now = new Date();
+        const diff = now.getTime() - targeDate.getTime();
+
+        // 秒、分、時間、日、月、年...]]></description><link>https://zenn.dev/miyan0mori/articles/480fb179f3e006</link><guid isPermaLink="true">https://zenn.dev/miyan0mori/articles/480fb179f3e006</guid><pubDate>Fri, 16 May 2025 04:54:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--MAA-kmXv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BReact%255D%2520%25E8%25A6%25AA%25E3%2581%258B%25E3%2582%2589%25E6%25B8%25A1%25E3%2581%2599%25E3%2581%25AE%25E3%2581%258B%25E3%2580%2581%25E5%25AD%2590%25E3%2581%25AB%25E6%259B%25B8%25E3%2581%2591%25E3%2581%25B0%25E3%2581%2584%25E3%2581%2584%25E3%2581%25AE%25E3%2581%258B%25E3%2580%2581%25E3%2581%25A9%25E3%2581%25A3%25E3%2581%25A1%25E3%2581%25AA%25E3%2582%2593%25E3%2581%25A0%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25BF%25E3%2582%2584%25E3%2581%25AE%25E3%2582%2582%25E3%2582%258A%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NlMjQ4OTg3YjEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>みやのもり</dc:creator></item><item><title><![CDATA[【Vue3・Nuxt3】最新のVue3で、`<script setup>`で単に値をexportする（defineExposeではない）]]></title><description><![CDATA[
+ 結論
+下記のように、先に&lt;script&gt;（&lt;script setup&gt;でない）でexportすればよいです。
+
+実際に動く環境: Vue3: An example to export consts from components
+
+
+GoodExportValue.vue
+&lt;template&gt;
+  &lt;p&gt;dummy&lt;/p&gt;
+&lt;/template&gt;
+
+&lt;script lang="ts"&gt;
+import { a } from '../utils/a'
+import { b } from '../utils...]]></description><link>https://zenn.dev/aiya000/articles/f7faffce4eab5d</link><guid isPermaLink="true">https://zenn.dev/aiya000/articles/f7faffce4eab5d</guid><pubDate>Thu, 15 May 2025 14:17:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--glVknD-9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Vue3%25E3%2583%25BBNuxt3%25E3%2580%2591%25E6%259C%2580%25E6%2596%25B0%25E3%2581%25AEVue3%25E3%2581%25A7%25E3%2580%2581%2560%253Cscript%2520setup%253E%2560%25E3%2581%25A7%25E5%258D%2598%25E3%2581%25AB%25E5%2580%25A4%25E3%2582%2592export%25E3%2581%2599%25E3%2582%258B%25EF%25BC%2588define...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2582%25E3%2581%2584%25E3%2582%2584%2520-%2520aiya000%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pZVUM0QXdxcVdtMVZmVWtiQXFzdE5ra1BFZU1FOUN0NFY1UzdiPXMyNTAtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>あいや - aiya000</dc:creator></item><item><title><![CDATA[初心者によるJavascript講座1(変数と宣言)]]></title><description><![CDATA[これは初心者によるjs講座です。（ChatGPTと会話して作りました）
+
+ 目的
+・JavaScriptにおける変数と宣言の基本を理解すること
+・変数はプログラムでデータを扱うために欠かせないことを紹介する
+
+ まとめ（忙しい人向け）
+・変数とは、データを保存するための名前付きの箱。
+・変数を宣言するには、var / let / constを使う。
+・基本は const、値を変えたいときだけ let を使う。
+・varは再宣言できてしまうため、バグのもとになりやすいので基本使わない。
+・変数にはスコープ（使える範囲）があり、letとconstはブロック単位、varは関数単位で管理される。...]]></description><link>https://zenn.dev/ripoh/articles/af561e6fc8aaca</link><guid isPermaLink="true">https://zenn.dev/ripoh/articles/af561e6fc8aaca</guid><pubDate>Thu, 15 May 2025 12:57:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--k2b8DX_1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258BJavascript%25E8%25AC%259B%25E5%25BA%25A71%2528%25E5%25A4%2589%25E6%2595%25B0%25E3%2581%25A8%25E5%25AE%25A3%25E8%25A8%2580%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:w4daka%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM0Y2ZjZDZhMmQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>w4daka</dc:creator></item><item><title><![CDATA[TermuxでJavaScript(node.js)]]></title><description><![CDATA[
+上記の記事の詳細記事です。
+
+ 典型的なJavasScript
+JavaScriptというとHTMLの中のスクリプト要素でもよく使用されます。典型的なのだとこんなのですね。
+
+counter.html
+&lt;span id="counter"&gt;0&lt;/span&gt;
+&lt;script&gt;
+addEventListener("DOMContentLoaded", (event) =&gt; {
+    const counter_span = document.querySelector('#counter');
+    function countup(e) {
+...]]></description><link>https://zenn.dev/dameyodamedame/articles/3b83a6184d8cae</link><guid isPermaLink="true">https://zenn.dev/dameyodamedame/articles/3b83a6184d8cae</guid><pubDate>Thu, 15 May 2025 09:13:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--H-LQMBNz--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:Termux%25E3%2581%25A7JavaScript%2528node.js%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:dameyodamedame%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvZC5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>dameyodamedame</dc:creator></item><item><title><![CDATA[AWS SDK for JavaScript v3はMFA認証を自動でやってくれなくなったぞ]]></title><description><![CDATA[AWS SDK for JavaScript を v2 から v3 にアップデートしたら、MFA認証が失敗するという思わぬ落とし穴に遭遇した。
+ローカル開発環境で、~/.aws/credentials の設定と MFA (Multi-Factor Authentication) を使って一時クレデンシャルを取得していたのだが、v3ではMFAの対話的認証を自動でやってくれないらしい。
+
+ v2ではどうだったの？
+v2では AWS.SharedIniFileCredentials を使うことで、.aws/config に mfa_serial が設定されていれば、自動的にMFAプロンプトが表...]]></description><link>https://zenn.dev/padawan/articles/7029067790f8ab</link><guid isPermaLink="true">https://zenn.dev/padawan/articles/7029067790f8ab</guid><pubDate>Thu, 15 May 2025 07:11:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--FqWTZTp2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AWS%2520SDK%2520for%2520JavaScript%2520v3%25E3%2581%25AFMFA%25E8%25AA%258D%25E8%25A8%25BC%25E3%2582%2592%25E8%2587%25AA%25E5%258B%2595%25E3%2581%25A7%25E3%2582%2584%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%258F%25E3%2582%258C%25E3%2581%25AA%25E3%2581%258F%25E3%2581%25AA%25E3%2581%25A3%25E3%2581%259F%25E3%2581%259E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%2590%25E3%2583%258A%25E3%2583%25AF%25E3%2583%25B3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE1MjAzNTk0NjAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>バナワン</dc:creator></item><item><title><![CDATA[React と MUI で ToDo アプリを作ろう！]]></title><description><![CDATA[
+ 🎯 はじめに
+本記事では、React と Material UI（MUI） を使って、シンプルな ToDo リストアプリを一から構築するハンズオンを紹介します。まずは基本機能を実装し、その後でMUIを使ってデザインを整えていきます。
+
+✅ Reactの基本的な構成が学べる
+✅ 機能実装からスタイリングまでステップバイステップで解説
+✅ MUIによるスタイリングの実践
+
+完成イメージはこちら（GitHub リポジトリ）👇
+👉 https://github.com/Ash65536/todo-app/
+
+
+ 🛠 開発環境のセットアップ
+まずは React アプリを作成します。
+npx c...]]></description><link>https://zenn.dev/ash65536/articles/3213d5eed49cff</link><guid isPermaLink="true">https://zenn.dev/ash65536/articles/3213d5eed49cff</guid><pubDate>Thu, 15 May 2025 05:13:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--JIJPLFD8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%2520%25E3%2581%25A8%2520MUI%2520%25E3%2581%25A7%2520ToDo%2520%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258D%25E3%2581%2586%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:webspresso%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNlYmU4NDgyMmMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>webspresso</dc:creator></item><item><title><![CDATA[PongゲームのDiscord アクティビティを自作する]]></title><description><![CDATA[https://github.com/sas-news/Discord-Pong
+
+ はじめに
+
+ Discord アクティビティとは
+皆さんは Discord を利用しているでしょうか。Discord は広く知られたコミュニケーションツールで、ゲーマーを中心に利用されています。Discord には「アクティビティ」という機能があり、これは Discord 内で複数人のユーザー同士でゲームをプレイするための機能です。
+
+ Discord Embedded App SDK とは
+Discord Embedded App SDK は、Discord アクティビティを自作するための SDK で...]]></description><link>https://zenn.dev/sasnews/articles/3df0c2608b3230</link><guid isPermaLink="true">https://zenn.dev/sasnews/articles/3df0c2608b3230</guid><pubDate>Wed, 14 May 2025 08:24:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--YmKOuCGk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Pong%25E3%2582%25B2%25E3%2583%25BC%25E3%2583%25A0%25E3%2581%25AEDiscord%2520%25E3%2582%25A2%25E3%2582%25AF%25E3%2583%2586%25E3%2582%25A3%25E3%2583%2593%25E3%2583%2586%25E3%2582%25A3%25E3%2582%2592%25E8%2587%25AA%25E4%25BD%259C%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:SAS%25E6%2596%25B0%25E8%2581%259E%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhmOGNmZWE1MTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>SAS新聞</dc:creator></item><item><title><![CDATA[【JS・TS】具体例で学ぶバンドル・ミニファイ・ツリーシェイキング]]></title><description><![CDATA[
+ 前提
+
+
+今回はビルドツールとしてesbuildを使用しています。
+理由としては、今回この記事を書こうと思ったきっかけが AWS Lambda であり、CDK で Lambda を作成する際に使う NodejsFunction がデフォルトで esbuild を使っているためです。
+ただし、フロントエンドでも使える（むしろフロントエンドで大事な）知識なのでフロントエンド側の方も対象読者です。
+
+
+タイトルに TS と書いていますが、バンドル・ミニファイ・ツリーシェイキングは JS も TS も変わらないと思うので、例は JS で書いています。
+
+
+具体例は index.js がエント...]]></description><link>https://zenn.dev/spectee/articles/fb736319c34213</link><guid isPermaLink="true">https://zenn.dev/spectee/articles/fb736319c34213</guid><pubDate>Wed, 14 May 2025 08:12:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GX9wHVtI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590JS%25E3%2583%25BBTS%25E3%2580%2591%25E5%2585%25B7%25E4%25BD%2593%25E4%25BE%258B%25E3%2581%25A7%25E5%25AD%25A6%25E3%2581%25B6%25E3%2583%2590%25E3%2583%25B3%25E3%2583%2589%25E3%2583%25AB%25E3%2583%25BB%25E3%2583%259F%25E3%2583%258B%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25BB%25E3%2583%2584%25E3%2583%25AA%25E3%2583%25BC%25E3%2582%25B7%25E3%2582%25A7%25E3%2582%25A4%25E3%2582%25AD%25E3%2583%25B3%25E3%2582%25B0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Y.N%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzkwYzYyY2ZlNDQuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Spectee%2520Developers%2520Blog%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFlZjQyYWRjNGQuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Y.N</dc:creator></item><item><title><![CDATA[【JavaScriptベンチマーク】pop ≒ shift >> push > unshift]]></title><description><![CDATA[タイトルの通りですが、JavaScriptのArray操作でpop / shift / push / unshiftを比較してどのような順番になるかを測ってみました。
+
+pop ・・・ 配列の最後から要素を取り除き、取り除いた要素を返却
+shift ・・・ 配列の最初から要素を取り除き、取り除いた要素を返却
+unshift ・・・ 配列の最初に要素を追加し、要素数を返却
+push ・・・ 配列の最後に要素を追加し、要素数を返却
+
+ベンチマークテスト：ブラウザはChromeです。FirefoxとかSafariが好きな人がいたら流してみてください。僕はChrome（Brave）に骨をうずめる...]]></description><link>https://zenn.dev/drop_table_user/articles/pop-shift-unshift-push</link><guid isPermaLink="true">https://zenn.dev/drop_table_user/articles/pop-shift-unshift-push</guid><pubDate>Wed, 14 May 2025 04:14:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--o4cLtZXR--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590JavaScript%25E3%2583%2599%25E3%2583%25B3%25E3%2583%2581%25E3%2583%259E%25E3%2583%25BC%25E3%2582%25AF%25E3%2580%2591pop%2520%25E2%2589%2592%2520shift%2520%253E%253E%2520push%2520%253E%2520unshift%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:edaoh%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk4YTY3OGY3ZGYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>edaoh</dc:creator></item></channel></rss>
