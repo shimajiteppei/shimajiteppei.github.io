@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Docker」のフィード]]></title><description><![CDATA[Zennのトピック「Docker」のRSSフィードです]]></description><link>https://zenn.dev/topics/docker</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/75b80a5922.png</url><title>Zennの「Docker」のフィード</title><link>https://zenn.dev/topics/docker</link></image><generator>zenn.dev</generator><lastBuildDate>Tue, 20 May 2025 00:47:24 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/docker/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[🔐【Docker】DOCKER_CONTENT_TRUST とは？]]></title><description><![CDATA[
+ ✅ はじめに
+Docker でイメージの push/pull を行う際、以下のようなエラーに遭遇したことはありませんか？
+Error: remote trust data does not exist for docker image
+こんな時、よく見かける解決法として
+export DOCKER_CONTENT_TRUST=0 を実行すると解決することがあります。
+
+⚠️ ですが...
+
+この環境変数、何をしてるの？
+無効化して大丈夫？
+安全性はどうなの？
+
+
+と疑問を持った方も多いのではないでしょうか。
+本記事では、Docker における Content Trust（DCT）の概...]]></description><link>https://zenn.dev/railgun0402/articles/6e0fd37d5b8c6c</link><guid isPermaLink="true">https://zenn.dev/railgun0402/articles/6e0fd37d5b8c6c</guid><pubDate>Mon, 19 May 2025 15:50:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--D_SdUaTu--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%2520%25E3%2580%2590Docker%25E3%2580%2591DOCKER_CONTENT_TRUST%2520%25E3%2581%25A8%25E3%2581%25AF%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25BE%25E3%2582%2581%25E3%2581%2597%25E3%2581%25B0%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VjMmIxMzk5NWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>まめしば</dc:creator></item><item><title><![CDATA[Dockerでコンテナ間通信をする方法]]></title><description><![CDATA[
+ これは何？
+Dockerでコンテナ間通信をする方法を記載します。
+
+ 手順
+Dockerでコンテナ間通信を行う場合、基本的にDockerネットワークを作成し、通信を送受信するコンテナをDockerネットワークに所属させる必要があります。
+まずは、Dockerネットワークを作成します。
+$ docker network create ocha-network
+次に受信側のDockerコンテナを起動します。
+$ docker run --network=ocha-network -p 4567:4567 1s22s1/sinatra_app
+最後に送信側のDockerコンテナを起動します...]]></description><link>https://zenn.dev/1s22s1/articles/61f6e705accae4</link><guid isPermaLink="true">https://zenn.dev/1s22s1/articles/61f6e705accae4</guid><pubDate>Mon, 19 May 2025 14:37:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--olSiyePB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%25E3%2581%25A7%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2586%25E3%2583%258A%25E9%2596%2593%25E9%2580%259A%25E4%25BF%25A1%25E3%2582%2592%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%258E%259F%25E5%25AD%2590%25E8%25BB%258C%25E9%2581%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JlNDRiNGRjYTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>原子軌道</dc:creator></item><item><title><![CDATA[図解：Windows11でWSL2＋DockerによるPython開発環境を構築する手順]]></title><description><![CDATA[
+ はじめに
+こんにちは、SE出身のデータサイエンティスト「マチ」です。データ分析や機械学習を始める際に、最初につまずきやすいのが「開発環境の構築」ですよね。今回は、Windows11 PCにWSL2（Windows Subsystem for Linux 2）を導入し、Dockerを使ってPython環境を構築する方法を、手順を追って説明します。構築する環境のイメージ図は以下です。
+
+
+ 1. WSL2でUbuntuをインストールする
+
+ 1-1. WSL機能を有効化する
+WSL[1]とは、Windows上でLinuxを実行するためのシステムです。Windows11には標準搭載されてお...]]></description><link>https://zenn.dev/stockdatalab/articles/20250519_tech_env_docker</link><guid isPermaLink="true">https://zenn.dev/stockdatalab/articles/20250519_tech_env_docker</guid><pubDate>Mon, 19 May 2025 14:33:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--EiQjBEfX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%259B%25B3%25E8%25A7%25A3%25EF%25BC%259AWindows11%25E3%2581%25A7WSL2%25EF%25BC%258BDocker%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258BPython%25E9%2596%258B%25E7%2599%25BA%25E7%2592%25B0%25E5%25A2%2583%25E3%2582%2592%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2599%25E3%2582%258B%25E6%2589%258B%25E9%25A0%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%25A0%25AA%25E3%2581%25AE%25E6%2583%2585%25E5%25A0%25B1%25E5%258F%258E%25E9%259B%2586%25E3%2583%25A9%25E3%2583%259C%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2IzZjRkZjY4MGYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>株の情報収集ラボ</dc:creator></item><item><title><![CDATA[Alibaba Cloud ACS 入門：完全サーバーレスでKubernetes運用をもっと簡単に]]></title><description><![CDATA[
+ 一、はじめに
+クラウドネイティブ技術の進化に伴い、Kubernetes（K8s）の利用が一般化しています。しかし、その運用管理は依然として複雑で、多くの学習コストが伴います。Alibaba Cloudは、これらの課題を解決するために、Alibaba Cloud ACSを提供しています。ACSは、Kubernetesの利点を活かしつつ、運用の簡素化を実現する新しいサービスです。
+
+ 二、ACSの概要
+ACSは、Kubernetesをユーザーインターフェースとする、サーバーレス型のコンテナベースのコンピューティングサービスです。このサービスは正式には「Alibaba Cloud Cont...]]></description><link>https://zenn.dev/kaikakin/articles/a6a5d6af274887</link><guid isPermaLink="true">https://zenn.dev/kaikakin/articles/a6a5d6af274887</guid><pubDate>Mon, 19 May 2025 12:58:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--nQeomlsS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Alibaba%2520Cloud%2520ACS%2520%25E5%2585%25A5%25E9%2596%2580%25EF%25BC%259A%25E5%25AE%258C%25E5%2585%25A8%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2583%25AC%25E3%2582%25B9%25E3%2581%25A7Kubernetes%25E9%2581%258B%25E7%2594%25A8%25E3%2582%2592%25E3%2582%2582%25E3%2581%25A3%25E3%2581%25A8%25E7%25B0%25A1%25E5%258D%2598%25E3%2581%25AB%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:HAIKAKIN%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI1YWM5N2IwZGIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>HAIKAKIN</dc:creator></item><item><title><![CDATA[【ポート競合対策】個人開発でローカル環境のポート番号割り当ての工夫]]></title><description><![CDATA[
+ はじめに
+ローカルで複数のWebアプリやサービスを開発していると、ポートが競合して接続できない事態に遭遇します。特にDockerやXAMPP、MySQLなどを併用していると頻繁に発生します。本記事では、開発環境でのポート競合を未然に防ぐポート番号の割当の方法をご紹介します。
+
+ 対象者
+
+個人開発エンジニア
+複数のアプリをローカルで並行開発している方
+ポート競合の解消に時間を取られた経験がある方
+
+
+ 結論：ポート割り当てルール（個人用）
+私個人のローカル環境におけるポート割り当てルールとして、基本ポート番号に「+1」した番号を開発用に使う方針を採っています。たとえば：
+
+Webアプ...]]></description><link>https://zenn.dev/ykbone/articles/efd31b50df3172</link><guid isPermaLink="true">https://zenn.dev/ykbone/articles/efd31b50df3172</guid><pubDate>Mon, 19 May 2025 00:41:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--QgYXl7kf--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E3%2583%259D%25E3%2583%25BC%25E3%2583%2588%25E7%25AB%25B6%25E5%2590%2588%25E5%25AF%25BE%25E7%25AD%2596%25E3%2580%2591%25E5%2580%258B%25E4%25BA%25BA%25E9%2596%258B%25E7%2599%25BA%25E3%2581%25A7%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25AB%25E3%2583%25AB%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25AE%25E3%2583%259D%25E3%2583%25BC%25E3%2583%2588%25E7%2595%25AA%25E5%258F%25B7%25E5%2589%25B2%25E3%2582%258A%25E5%25BD%2593%25E3%2581%25A6%25E3%2581%25AE%25E5%25B7%25A5%25E5%25A4%25AB%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ykbone%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAyYmU2ODQzYjEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ykbone</dc:creator></item><item><title><![CDATA[LLMとの対話型UXをMCPで実装]]></title><description><![CDATA[
+先日投稿した下記記事の続編となります。
+https://zenn.dev/acntechjp/articles/869ca7b01d0db4
+https://zenn.dev/acntechjp/articles/99c4f460a553bd
+より環境構築できるようにしたいのと、エンタープライズを意識したマルチクラウド(AWS, Azure, GCP)を目指すようにしたい、MCP Serverとロジック部分を分離させたいというのを踏まえてアーキテクチャを見直しました。
+具体的には、下記アーキテクチャとなります。
+
+おさらいになりますが、Claude for desktopで使用している...]]></description><link>https://zenn.dev/acntechjp/articles/2a17bd142faeea</link><guid isPermaLink="true">https://zenn.dev/acntechjp/articles/2a17bd142faeea</guid><pubDate>Sun, 18 May 2025 20:33:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--kNqGbJf7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:LLM%25E3%2581%25A8%25E3%2581%25AE%25E5%25AF%25BE%25E8%25A9%25B1%25E5%259E%258BUX%25E3%2582%2592MCP%25E3%2581%25A7%25E5%25AE%259F%25E8%25A3%2585%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2583%259E%25E3%2583%2583%25E3%2582%25B5%25E3%2583%25B3%2520%2528Masanori%2520Yos...%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U2ZDA4MDY5ODcuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Accenture%2520Japan%2520%2528%25E6%259C%2589%25E5%25BF%2597%2529%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU5MzkwNDBmYjYuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>マッサン (Masanori Yoshida)</dc:creator></item><item><title><![CDATA[【kamal2】EC2にRails8アプリをデプロイしてみる (DockerHub不使用)]]></title><description><![CDATA[
+ ゴール
+Rails8で採用されたkamal2を使用して、EC2に簡単にデプロイできるようにしていきます。
+標準ではdockerhubを使用しますが、今回はdockerのpush先にAWS ECRを使用します。
+
+ 前提
+・rails newにて、kamalがインストール済みであること
+・EC2にSSHログインができていること
+※~/.ssh/config設定済みで ssh xxxでログイン可能
+・AWS CLIがインストール済みでPush先のAWS環境で利用可能であること
+・direnvが使用可能であること
+
+ Kamalについて
+Rails8ではkamal2を使用して、EC2に簡単...]]></description><link>https://zenn.dev/alt_tanuki/articles/c3a120b8ef6890</link><guid isPermaLink="true">https://zenn.dev/alt_tanuki/articles/c3a120b8ef6890</guid><pubDate>Sun, 18 May 2025 14:51:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--j2dP_q7g--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590kamal2%25E3%2580%2591EC2%25E3%2581%25ABRails8%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E3%2583%2587%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25A4%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2520%2528DockerHub%25E4%25B8%258D%25E4%25BD%25BF%25E7%2594%25A8%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tanukinmugi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I1MjljMzZhYjQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tanukinmugi</dc:creator></item><item><title><![CDATA[AsustorのNASが便利すぎた件]]></title><description><![CDATA[最近AIエージェントで簡単なwebアプリはあっという間に作れるが、手元のNASを生かせばいいんじゃないかと思って調べてみたところ、思ったより完璧だったという話
+
+ Asustorってどこのメーカー?
+https://www.asustor.com/ja/about/about_asustor
+ASUSの子会社です。
+単にネットワークストレージとしての性能も優秀ですが、ゲーミングPCを扱っているASUSだけあって使いやすいポータルアプリが優秀で、様々な拡張機能が多くのモデルで使えるようになっています。
+
+ 結構安い
+https://kakaku.com/pc/nas/itemlist.as...]]></description><link>https://zenn.dev/frost2lt/articles/5c5fde5395a127</link><guid isPermaLink="true">https://zenn.dev/frost2lt/articles/5c5fde5395a127</guid><pubDate>Sun, 18 May 2025 10:55:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fx6cBKl2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Asustor%25E3%2581%25AENAS%25E3%2581%258C%25E4%25BE%25BF%25E5%2588%25A9%25E3%2581%2599%25E3%2581%258E%25E3%2581%259F%25E4%25BB%25B6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:frost%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzYzZThjOGIzMjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>frost</dc:creator></item><item><title><![CDATA[Docker Composeでバックエンドコンテナがunhealthyに？原因は意外な「あのコマンド」の不在だった！【生成AI執筆】]]></title><description><![CDATA[Docker Composeを使って開発環境を構築していると、時々コンテナが期待通りに起動せず、「unhealthy（不健康）」と表示されてしまうことがあります。特にバックエンドサービスがデータベースなどの他のサービスに依存している場合、この問題は連鎖的に他のコンテナの起動失敗を引き起こし、頭を抱える原因となりがちです。
+先日、まさにこの「unhealthy」問題に遭遇し、試行錯誤の末に解決しました。今回はその経緯と解決策を、同じように困っている方々の助けになればと思い、記事にまとめます。
+
+ 問題発生：バックエンドコンテナが起動しない！
+開発中のプロジェクトで docker compo...]]></description><link>https://zenn.dev/manntera/articles/1d030ce0facc2e</link><guid isPermaLink="true">https://zenn.dev/manntera/articles/1d030ce0facc2e</guid><pubDate>Sun, 18 May 2025 06:48:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--LM1Q80e7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%2520Compose%25E3%2581%25A7%25E3%2583%2590%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2589%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2586%25E3%2583%258A%25E3%2581%258Cunhealthy%25E3%2581%25AB%25EF%25BC%259F%25E5%258E%259F%25E5%259B%25A0%25E3%2581%25AF%25E6%2584%258F%25E5%25A4%2596%25E3%2581%25AA%25E3%2580%258C%25E3%2581%2582%25E3%2581%25AE%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2580%258D%25E3%2581%25AE%25E4%25B8%258D%25E5%259C%25A8%25E3%2581%25A0%25E3%2581%25A3%25E3%2581%259F...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25BE%25E3%2582%2593%25E3%2581%25A6%25E3%2582%2589%25E3%2582%25B9%25E3%2582%25BF%25E3%2582%25B8%25E3%2582%25AA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc1NWJmOTI0MDcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>まんてらスタジオ</dc:creator></item><item><title><![CDATA[Go × Firebase Emulator で Firestore にデータを追加する]]></title><description><![CDATA[Firebase Firestore をローカルで安全に試したいときに便利なのが Firebase Emulator Suite。
+Go（Golang）からも簡単に接続して、エミュレータ上の Firestore にデータ追加ができます。
+今回は Docker 上で Firebase Emulator を起動し、Go から Firestore にデータを追加してみます。
+リポジトリはこちら
+
+
+ こんな人にオススメ
+
+CLIをローカル環境に入れたくない
+FirestoreにGoで読み書きをしたい
+料金気にせずにFirestoreをローカルで使いまわしたい
+
+
+ Docker環境構築
+まずは...]]></description><link>https://zenn.dev/shunfree/articles/f64c1a10d6fa04</link><guid isPermaLink="true">https://zenn.dev/shunfree/articles/f64c1a10d6fa04</guid><pubDate>Sat, 17 May 2025 05:40:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--LIXw1PSo--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Go%2520%25C3%2597%2520Firebase%2520Emulator%2520%25E3%2581%25A7%2520Firestore%2520%25E3%2581%25AB%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%2592%25E8%25BF%25BD%25E5%258A%25A0%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2597%25E3%2582%2585%25E3%2582%2593%2Cx_90%2Cy_121/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>しゅん</dc:creator></item><item><title><![CDATA[DevOpsやSREの面接対策・実践的な技術問題を学べる神リポジトリ devops-exercises]]></title><description><![CDATA[
+ 想定読者
+
+
+「DevOps や SRE の面接対策って何をやればいいの？」 という人
+DevOps/SRE 初学者〜中級者
+DevOps/SRE関連の技術を総復習したい人
+
+
+ はじめに
+https://github.com/bregman-arie/devops-exercises
+↑こちらのリポジトリご存知でしょうか？
+
+技術面接でよく出る質問と回答
+DevOps/SRE の実践課題
+各種クラウドやツールの学習素材
+
+これらが詰まった神リポジトリです。
+この記事では、実際に触ってみた解説記事です。
+
+ リポジトリの全体像
+devops-exercises/
+├── certif...]]></description><link>https://zenn.dev/takaha4k/articles/devops-exercises</link><guid isPermaLink="true">https://zenn.dev/takaha4k/articles/devops-exercises</guid><pubDate>Sat, 17 May 2025 03:03:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--XjBnZM0u--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:DevOps%25E3%2582%2584SRE%25E3%2581%25AE%25E9%259D%25A2%25E6%258E%25A5%25E5%25AF%25BE%25E7%25AD%2596%25E3%2583%25BB%25E5%25AE%259F%25E8%25B7%25B5%25E7%259A%2584%25E3%2581%25AA%25E6%258A%2580%25E8%25A1%2593%25E5%2595%258F%25E9%25A1%258C%25E3%2582%2592%25E5%25AD%25A6%25E3%2581%25B9%25E3%2582%258B%25E7%25A5%259E%25E3%2583%25AA%25E3%2583%259D%25E3%2582%25B8%25E3%2583%2588%25E3%2583%25AA%2520devops-exercises%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:takaha4k%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M3Y2RiYWUwNDUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takaha4k</dc:creator></item><item><title><![CDATA[Docker上でKanboardを実行する]]></title><description><![CDATA[
+ 実行方法
+docker run -d --name kanboard -p 3000:80 -t kanboard/kanboard:latest
+
+Open http://localhost:3000/login
+
+Username &amp; Password is admin
+
+
+
+ 参考資料
+
+https://hub.docker.com/r/kanboard/kanboard
+https://kanboard-documentation-ja.readthedocs.io/ja/latest/admin_guide/docker.html
+
+]]></description><link>https://zenn.dev/wasabina67/articles/18-7ratsmf1xodlswfr</link><guid isPermaLink="true">https://zenn.dev/wasabina67/articles/18-7ratsmf1xodlswfr</guid><pubDate>Fri, 16 May 2025 15:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--TD7xjKho--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%25E4%25B8%258A%25E3%2581%25A7Kanboard%25E3%2582%2592%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:wasabina67%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0tBQmhwQURYZVpZNU9UQl81MjhsZDNXRXh4cXE5c3dWVFQxMGVwbXRlT1gwbTVtVT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>wasabina67</dc:creator></item><item><title><![CDATA[Cloud Storageに保存したSQLiteファイルからデータをリストア（復元）する方法]]></title><description><![CDATA[
+ 背景
+Dockerコンテナで動かしているRailsアプリケーションにおいて、データベースとしてSQLiteを使っている場合、「万が一コンテナが停止したらデータはどうなるのか？」という点が気になる場面がありました。
+そこで、本記事では、Cloud Storageに保存していたSQLiteファイルを使って、別の環境（もしくは、ローカルマシン上で再起動したdockerコンテナ）でデータをリストアできるかを検証した手順を紹介します。
+
+ 検証の目的
+
+コンテナが停止・破棄されたとしても、Cloud Storage上のSQLiteファイルを使えばデータをリストアできるのか？
+SQLiteファイ...]]></description><link>https://zenn.dev/kingdom0927/articles/bd13acb77a79ff</link><guid isPermaLink="true">https://zenn.dev/kingdom0927/articles/bd13acb77a79ff</guid><pubDate>Fri, 16 May 2025 11:17:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--eLrxwVIf--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Cloud%2520Storage%25E3%2581%25AB%25E4%25BF%259D%25E5%25AD%2598%25E3%2581%2597%25E3%2581%259FSQLite%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2581%258B%25E3%2582%2589%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%2592%25E3%2583%25AA%25E3%2582%25B9%25E3%2583%2588%25E3%2582%25A2%25EF%25BC%2588%25E5%25BE%25A9%25E5%2585%2583%25EF%25BC%2589%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:parapone1005%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FiZWZlYWI5M2UuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>parapone1005</dc:creator></item><item><title><![CDATA[お名前ドットコムVPSでのマルチコンテナWebシステム構築解説（VPS初心者向け）]]></title><description><![CDATA[本書では、お名前ドットコムのVPS（KVM、メモリ1GB）で運用中の以下のWebサイトの構築方法を解説します：
+- WordPressブログ: https://kikuichige.com/
+- Djangoアプリ群: https://django6.kikuichige.com/#onamae
+初めてのVPS構築に基づくガイドのため、一部不正確な点があるかもしれませんが、ご了承ください。初心者向けにわかりやすく説明します。
+本書は、ブログ記事https://kikuichige.com/category/programing/loadtovps/を再構成したものです。
+
+注意：
+具体的なコード例を掲載しますが、動作中の環境に基づいているため、そのまま動作するかは未検証です。
+環境差により動作が異なる場合があります。動作確認を行い、必要に応じて調整してください。
+DockerとDocker Composeのインストール、SSH接続やポートの許可等、本書でふれない内容は、私のブログを参照してください。
+VS CodeでのSSH接続を前提に解説します。
+
+実際に稼働していますが、セキュリティや動作の不具合などは自己責任で対応してください。]]></description><link>https://zenn.dev/sosa/books/a8d31c049b991a</link><guid isPermaLink="true">https://zenn.dev/sosa/books/a8d31c049b991a</guid><pubDate>Fri, 16 May 2025 04:06:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--YxdTbNw2--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci9hYjY3MDc4ZGM1LmpwZWc=%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>sosa</dc:creator></item><item><title><![CDATA[Nginxのサードパーティーモジュールをビルドする方法]]></title><description><![CDATA[サードパーティー製のNginx用モジュールを、Nginx本体をビルドせずに動的モジュールとしてビルドする方法をまとめます。
+
+ TL;DR
+Nginx公式のpkg-ossに含まれるbuild_module.shを使うのが簡単です。
+ただし、Alpine Linuxでは一部バグがあるため、筆者によるバグ修正版の利用を推奨します。
+サードパーティーモジュール入りのDockerイメージを作る場合は、公式イメージリポジトリのmodule用Dockerfileが使えます。
+もしくは、筆者が作成した軽量化Dockerfileを使うと便利です。
+
+ 背景
+Nginxはモジュールを用いるアーキテクチャを...]]></description><link>https://zenn.dev/simayosi/articles/nginx-3rdparty-module</link><guid isPermaLink="true">https://zenn.dev/simayosi/articles/nginx-3rdparty-module</guid><pubDate>Thu, 15 May 2025 13:44:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--smj86C8X--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Nginx%25E3%2581%25AE%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2589%25E3%2583%2591%25E3%2583%25BC%25E3%2583%2586%25E3%2582%25A3%25E3%2583%25BC%25E3%2583%25A2%25E3%2582%25B8%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%25AB%25E3%2582%2592%25E3%2583%2593%25E3%2583%25AB%25E3%2583%2589%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:simayosi%2540systemiz.jp%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUl0YnZtbTVaYm5XazEtUnMwdEV3U3FjWjV3cldpb0NwWmJNMWxnZDhpekU9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>simayosi@systemiz.jp</dc:creator></item><item><title><![CDATA[uvで管理するFastAPIプロジェクトの本番イメージのMulti Stage Build]]></title><description><![CDATA[
+ はじめに
+Nauhの池田です。
+以前はPythonのプロジェクトはpoetryで管理することが多かったのですが、最近はuvを使用することが増えてきました。
+FastAPIのバックエンドサービスをKubernetes, CloudRun, ECSなどでホストする際はContainer Imageのサイズをできるだけ削減するために最低限の依存関係だけをインストールしたContainerを用意することが一般的ですが、uvで管理するプロジェクトの場合はどのように実現できるのかを調べたのでその結果をまとめておきます。
+
+ uvについて
+uvの特徴としてはRustで開発されており高速に動作するこ...]]></description><link>https://zenn.dev/nauh_blog/articles/14a92d11006199</link><guid isPermaLink="true">https://zenn.dev/nauh_blog/articles/14a92d11006199</guid><pubDate>Thu, 15 May 2025 07:15:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7fV1HVO_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:uv%25E3%2581%25A7%25E7%25AE%25A1%25E7%2590%2586%25E3%2581%2599%25E3%2582%258BFastAPI%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E3%2581%25AE%25E6%259C%25AC%25E7%2595%25AA%25E3%2582%25A4%25E3%2583%25A1%25E3%2583%25BC%25E3%2582%25B8%25E3%2581%25AEMulti%2520Stage%2520Build%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:atsuik%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VjODAxYjVlNzIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Nauh%2528%25E3%2583%258A%25E3%2582%25A6%25E3%2582%25A2%2529%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0Y2VyRXg4M0pVblZyenZhVGVuVmZyNXNHbWRoOXpheThtTjhDY2FEdWJXPXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>atsuik</dc:creator></item><item><title><![CDATA[最小構成(PostgreSQL)で学ぶDocker/Podman]]></title><description><![CDATA[
+ 1. はじめに
+みなさん、こんにちは。私の学習も兼ねて、PostgreSQLのみの最小構成のDocker/Podmanコンテナを作ってみました。コンテナを作る中でDocker/Podmanの知見が深まったので、お話しできたらと思います！構築に必要な資源をGitHubにアップしました。ぜひご覧ください！
+https://github.com/Masa1984a/PostgreSQL_Minimum_Database_Container
+
+ 2. コンテナ技術とは？
+コンテナ技術とは、アプリケーションとその実行環境を一つのパッケージ（コンテナイメージ）にまとめ、様々な環境で一貫して動作さ...]]></description><link>https://zenn.dev/acntechjp/articles/99c4f460a553bd</link><guid isPermaLink="true">https://zenn.dev/acntechjp/articles/99c4f460a553bd</guid><pubDate>Wed, 14 May 2025 21:55:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--cnV-M5_b--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%259C%2580%25E5%25B0%258F%25E6%25A7%258B%25E6%2588%2590%2528PostgreSQL%2529%25E3%2581%25A7%25E5%25AD%25A6%25E3%2581%25B6Docker%252FPodman%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2583%259E%25E3%2583%2583%25E3%2582%25B5%25E3%2583%25B3%2520%2528Masanori%2520Yos...%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U2ZDA4MDY5ODcuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Accenture%2520Japan%2520%2528%25E6%259C%2589%25E5%25BF%2597%2529%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU5MzkwNDBmYjYuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>マッサン (Masanori Yoshida)</dc:creator></item><item><title><![CDATA[WSL + Ubuntuで始めるDocker開発環境構築ガイド]]></title><description><![CDATA[
+ はじめに
+Dockerの基本概念から、WSL上のUbuntuへの導入方法、頻出コマンド、実践的なDockerfileやdocker-compose.ymlの記述方法、軽量化テクニックまでを一貫して解説します。本記事は、業務効率化や環境統一を目指す開発者に向けた内容です。（著者個人の備忘録的な意味も含む）
+
+ 対象読者
+
+Dockerについて知りたい人
+DockerDesktopを使わずにWSL上でDocker環境構築がしたい人
+Dockerコマンド、docker composeコマンドの簡単な使い方を知りたい人
+マルチステージビルドやdistroless等軽量化をしたい人
+
+
+ Do...]]></description><link>https://zenn.dev/chronos_pokkuru/articles/5f0fd9fe1f97a8</link><guid isPermaLink="true">https://zenn.dev/chronos_pokkuru/articles/5f0fd9fe1f97a8</guid><pubDate>Wed, 14 May 2025 12:08:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--k4aYN4jA--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:WSL%2520%252B%2520Ubuntu%25E3%2581%25A7%25E5%25A7%258B%25E3%2582%2581%25E3%2582%258BDocker%25E9%2596%258B%25E7%2599%25BA%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25BD%25E3%2581%25A3%25E3%2581%258F%25E3%2582%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ5ZjZjMjNhMDUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ぽっくる</dc:creator></item><item><title><![CDATA[Apache Guacamoleとはなんなのか？]]></title><description><![CDATA[今回は、Apache Guacamoleとは何かについて調べてみました。今回も以下のツールを使って対象プロジェクトを決めました！
+https://zenn.dev/akasan/articles/7e30ad266c02c4
+※ 本企画に関する記事の目的は、それぞれのプロジェクトを本格的に深ぼるのではなく、プロジェクト名⇆どんな内容かをパッと思い出せるようにすることを目指します！
+※ とはいえ深ぼってみたいプロジェクトがあればどんどん複数連載になると思います。
+
+ Apache Guacamoleとは？
+公式サイトを見ると、
+
+Apache Guacamole is a clientle...]]></description><link>https://zenn.dev/akasan/articles/6af98c0cd8fcff</link><guid isPermaLink="true">https://zenn.dev/akasan/articles/6af98c0cd8fcff</guid><pubDate>Wed, 14 May 2025 10:50:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GaWt5sHh--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Apache%2520Guacamole%25E3%2581%25A8%25E3%2581%25AF%25E3%2581%25AA%25E3%2582%2593%25E3%2581%25AA%25E3%2581%25AE%25E3%2581%258B%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Akasan%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUVkRlRwNXJfNDFtel9OY3dPYUtMRE1vc09tbVB6YmxHM0V5N3lNZzI3QWM9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Akasan</dc:creator></item><item><title><![CDATA[LocalStackのS3を本気で使いこなす：DNS設定からURL形式まで]]></title><description><![CDATA[
+ はじめに
+
+ この記事は何
+LocalStackは、AWSの各種サービスをローカルで模倣できる便利なツールです。特にS3などの基本的なサービスは、AWS SDKのエンドポイントを切り替えるだけで簡単に扱えます。しかし、LocalStackをDockerコンテナ上で動かし、さらにアプリケーションも別のコンテナで動かす場合、「アプリケーションコンテナとホストPCの双方からS3にアクセスする」ことは、思いのほか難易度が高くなります。
+本記事では、LocalStackとアプリケーションコンテナを連携させる際の具体的な課題や設定（エンドポイントの指定、DNSによる名前解決の工夫）について、サン...]]></description><link>https://zenn.dev/foxtail88/articles/handle-localstack-hoststyle</link><guid isPermaLink="true">https://zenn.dev/foxtail88/articles/handle-localstack-hoststyle</guid><pubDate>Tue, 13 May 2025 23:28:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--P-ZV-lvD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:LocalStack%25E3%2581%25AES3%25E3%2582%2592%25E6%259C%25AC%25E6%25B0%2597%25E3%2581%25A7%25E4%25BD%25BF%25E3%2581%2584%25E3%2581%2593%25E3%2581%25AA%25E3%2581%2599%25EF%25BC%259ADNS%25E8%25A8%25AD%25E5%25AE%259A%25E3%2581%258B%25E3%2582%2589URL%25E5%25BD%25A2%25E5%25BC%258F%25E3%2581%25BE%25E3%2581%25A7%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tenkoh%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzkxZjIzZDE4NGMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tenkoh</dc:creator></item></channel></rss>
