@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Thu, 22 May 2025 02:53:45 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[【Pysrp】 ModuleNotFoundError: No module named]]></title><description><![CDATA[https://github.com/cocagne/pysrp
+pysrpを使おうとすると、以下のエラーが発生しました。
+import srp._pysrp as srp
+ModuleNotFoundError: No module named 'srp'
+
+ 解決方法
+まずは、ちゃんとpysrpがインストールされているか確認してください。
+python -m pip install srp
+それが確認できたたら、import文のsrpを大文字にしてください。
+なぜかというと、モジュール名前が大文字になっているからです。
+
+これで直らなかった場合、pipをupgradeするなどしてみる...]]></description><link>https://zenn.dev/glisan/articles/7b43c7ac030dfe</link><guid isPermaLink="true">https://zenn.dev/glisan/articles/7b43c7ac030dfe</guid><pubDate>Wed, 21 May 2025 23:50:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fqs32Cyf--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Pysrp%25E3%2580%2591%2520ModuleNotFoundError%253A%2520No%2520module%2520named%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25B0%25E3%2583%25AA%25E3%2583%2583%25E3%2582%25B5%25E3%2583%25B3%25E3%2583%2589%25E3%2580%2582%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M0MzU1YzBlZDcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>グリッサンド。</dc:creator></item><item><title><![CDATA[Python のフォーマッターに Ruff を使うべき根拠]]></title><description><![CDATA[特別な理由がない限り、Python コードのフォーマッターは Ruff を使用することをお奨めします
+
+
+Black とほぼ同一の出力を生成するように設計されており、次のような Black の利点を引き継いでいるため:
+
+フォーマッターのカスタマイズで揉めないため
+誰が書いても同じコードになりやすいため
+
+
+
+Black と比較して次の点で優れているため:
+
+
+Black のコードスタイルを、様々なリンターの指摘を受けることがなくなるよう改善しているため
+
+Black よりも高速に動作するため
+
+
+
+
+ Python の 3 大主要フォーマッター比較
+
+
+
+フォーマッター
+GitHub ...]]></description><link>https://zenn.dev/y_shinoda/articles/reasons-why-we-should-use-ruff-for-formatter</link><guid isPermaLink="true">https://zenn.dev/y_shinoda/articles/reasons-why-we-should-use-ruff-for-formatter</guid><pubDate>Wed, 21 May 2025 23:19:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--WeQtA24J--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%2520%25E3%2581%25AE%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25BC%25E3%2583%259E%25E3%2583%2583%25E3%2582%25BF%25E3%2583%25BC%25E3%2581%25AB%2520Ruff%2520%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%25E3%2581%25B9%25E3%2581%258D%25E6%25A0%25B9%25E6%258B%25A0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E7%25AF%25A0%25E7%2594%25B0%2520%25E5%25B0%2586%25E5%25BD%25A6%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSWtoTi1MMk9aSmVZVWVzN1NBazM3eDZjOVpzTlJYX01EaWdmS21ReHRPcWhjaVpBTHk9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>篠田 将彦</dc:creator></item><item><title><![CDATA[DaVinci Resolveのマクロ用設定ファイルの整形02]]></title><description><![CDATA[
+ InstanceInputの編集
+マクロを書き出すとコントロールは元のノードのコントロール名では無く
+Inputxx = InstanceInput {...}という形で書き出されます。
+これがインスペクタに表示される項目なので、マクロのUIに直接関係する所です。
+それ故に書き出したsettingファイルをテキストエディタで編集する上で最も頻度が高い項目と言えるでしょう。
+settingファイル内ではファイルの再序盤のInputs = oredered() {...}のブロック内に存在します。
+
+
+ DaVinci Resolve内では編集不可な項目
+DaVinci Resolve付...]]></description><link>https://zenn.dev/2ndillness/articles/b1fdd7663a0081</link><guid isPermaLink="true">https://zenn.dev/2ndillness/articles/b1fdd7663a0081</guid><pubDate>Wed, 21 May 2025 17:13:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--JC3NIUyI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:DaVinci%2520Resolve%25E3%2581%25AE%25E3%2583%259E%25E3%2582%25AF%25E3%2583%25AD%25E7%2594%25A8%25E8%25A8%25AD%25E5%25AE%259A%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2581%25AE%25E6%2595%25B4%25E5%25BD%25A202%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25BB%25E3%2582%25AB%25E3%2582%25A4%25E3%2583%25AB%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZkMzM1OTBlOTQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>セカイル</dc:creator></item><item><title><![CDATA[print()便利オプション　sepとend]]></title><description><![CDATA[
+ 初めに
+「set」と「end」の使用方法についてご説明します。
+
+ sep
+sepは、区切り文字を指定することができます。
+print("A", "B", sep="-")
+出力
+A-B-C 
+
+ end
+行の最後にどう終わるかを決める。改行しないようにもできる。↓sepも合わせて使ってみて、
+print("Hello", "world", sep="-", end="!")
+print("I love you")
+出力
+Hello-world!I love you
+
+sep２回使ったら、エラーになりました。
+print("私は","日本人","です",sep="＠",sep="ww...]]></description><link>https://zenn.dev/akanesi/articles/cb1473eef8a099</link><guid isPermaLink="true">https://zenn.dev/akanesi/articles/cb1473eef8a099</guid><pubDate>Wed, 21 May 2025 12:16:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5S35OW5p--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:print%2528%2529%25E4%25BE%25BF%25E5%2588%25A9%25E3%2582%25AA%25E3%2583%2597%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2580%2580sep%25E3%2581%25A8end%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25BF%25E3%2581%25A4%25E3%2581%2584%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q3YjYyNWJhZjYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>みつい</dc:creator></item><item><title><![CDATA[pyhton初心者講座]]></title><description><![CDATA[どうもこんにちは！！Fri@-@です　自己紹介にある通りpyhton,java.javascript,HTML,GASなどを経験してきました。　
+そしてそれをみんなに伝えたい（初心者の人のために）という思いから、アカウントを作ってこの活動を始めました。　
+大したものではないですが。見ていってください！
+時々更新しますので こちらにアクセスしてください→  https://github.com/Fridausu0228/Python-beginner-course よろしくおねがいします！！
+]]></description><link>https://zenn.dev/furidausu0228/articles/f6e6d18f8cf1fd</link><guid isPermaLink="true">https://zenn.dev/furidausu0228/articles/f6e6d18f8cf1fd</guid><pubDate>Wed, 21 May 2025 12:12:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Wtuly6yw--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:pyhton%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E8%25AC%259B%25E5%25BA%25A7%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Fri%2540-%2540%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvZi5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Fri@-@</dc:creator></item><item><title><![CDATA[データサイエンス初学者のための「現場で本当に使える」前処理＆AI学習Tips集]]></title><description><![CDATA[
+ はじめに
+機械学習やデータ分析で「AIの性能を最大化するコツ」として、
+**“データの前処理”や“特徴量の整形”**は非常に重要です。
+この記事では、具体的な業種や用途を限定せず、どんな案件でも使える実践的なパターンを解説します。
+
+
+ 1. 欠損値の安全な補完
+
+**欠損値（NaN）**が混じったデータは、そのままでは学習に使えません。
+一番安全なのは「平均値」「中央値」「0」などで埋める方法。
+
+import pandas as pd
+import numpy as np
+
+def safe_mean(series):
+    arr = pd.to_numeric(series...]]></description><link>https://zenn.dev/kto2myk/articles/09062699b54d93</link><guid isPermaLink="true">https://zenn.dev/kto2myk/articles/09062699b54d93</guid><pubDate>Wed, 21 May 2025 11:00:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--aMMHZbR4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%25B5%25E3%2582%25A4%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B9%25E5%2588%259D%25E5%25AD%25A6%25E8%2580%2585%25E3%2581%25AE%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%25E3%2580%258C%25E7%258F%25BE%25E5%25A0%25B4%25E3%2581%25A7%25E6%259C%25AC%25E5%25BD%2593%25E3%2581%25AB%25E4%25BD%25BF%25E3%2581%2588%25E3%2582%258B%25E3%2580%258D%25E5%2589%258D%25E5%2587%25A6%25E7%2590%2586%25EF%25BC%2586AI%25E5%25AD%25A6%25E7%25BF%2592Tips%25E9%259B%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E7%25A5%259E%25E7%2594%25B0%25E3%2580%2580%25E6%2599%25BA%25E5%25BC%25A5%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc1NjdiNTRjYTYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>神田　智弥</dc:creator></item><item><title><![CDATA[Dockerイメージを使って、AWS Lambda 関数（Python 3.12）をデプロイ・実行する方法]]></title><description><![CDATA[
+ 概要
+このドキュメントでは、以下の構成で Dockerイメージを使って、AWS Lambda 関数を構築・デプロイ・実行するワークフローの実装方法について記載します。
+
+ 元となるベースイメージ
+今回、使用するランタイムは Python 3.12 とします。
+その他の言語でも、同様の手順で実装可能です。
+次のAWS Lambda 用の公式 Python 3.12 イメージをベースにLambda関数を構築して行きます。
+public.ecr.aws/lambda/python:3.12
+
+ ディレクトリ構成
+下記のようなディレクトリ構成を想定しています。
+lambda/
+├── Doc...]]></description><link>https://zenn.dev/mimimi193/articles/20250521-lambda-duckdb</link><guid isPermaLink="true">https://zenn.dev/mimimi193/articles/20250521-lambda-duckdb</guid><pubDate>Wed, 21 May 2025 09:32:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--NjuT2Aue--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%25E3%2582%25A4%25E3%2583%25A1%25E3%2583%25BC%25E3%2582%25B8%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2580%2581AWS%2520Lambda%2520%25E9%2596%25A2%25E6%2595%25B0%25EF%25BC%2588Python%25203.12%25EF%25BC%2589%25E3%2582%2592%25E3%2583%2587%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25A4%25E3%2583%25BB%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25BF%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFkYjY2MzYyY2UuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>み</dc:creator></item><item><title><![CDATA[手を動かして学ぶ！MCPステップバイステップ実践ガイド for Beginners - Vol.6 MCPモデル情報の登録(POST)＆更新]]></title><description><![CDATA[
+ はじめに
+皆さん、こんにちは！「手を動かして学ぶ！MCPステップバイステップ実践ガイド for Beginners」へようこそ。このシリーズでは、Model Context Protocol (MCP) という仕組みを、Pythonというプログラミング言語を使って、実際に手を動かしながら学んでいきます。
+前回 (Vol.5 URLで指定したMCPモデル情報だけを取得) は、特定のMCPデバイスの情報だけをピンポイントで取得する方法を学びましたね。サーバーに「このIDのデバイス情報をください！」とお願いして、その情報だけを手に入れることができました。
+今回は、これまでとは逆のステップに...]]></description><link>https://zenn.dev/querypie/articles/330c096ce19431</link><guid isPermaLink="true">https://zenn.dev/querypie/articles/330c096ce19431</guid><pubDate>Wed, 21 May 2025 09:27:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--nYtKR7If--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%2589%258B%25E3%2582%2592%25E5%258B%2595%25E3%2581%258B%25E3%2581%2597%25E3%2581%25A6%25E5%25AD%25A6%25E3%2581%25B6%25EF%25BC%2581MCP%25E3%2582%25B9%25E3%2583%2586%25E3%2583%2583%25E3%2583%2597%25E3%2583%2590%25E3%2582%25A4%25E3%2582%25B9%25E3%2583%2586%25E3%2583%2583%25E3%2583%2597%25E5%25AE%259F%25E8%25B7%25B5%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%2520for%2520Beginners%2520-%2520Vol.6%2520MCP%25E3%2583%25A2%25E3%2583%2587%25E3%2583%25AB%25E6%2583%2585...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:QueryPie%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk1MzUyMzdkYzguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>QueryPie</dc:creator></item><item><title><![CDATA[［AtCoder］ABC-403｜B - Four Hidden]]></title><description><![CDATA[
+ 設問ページ
+
+🔗ABC-403 B - Four Hidden
+
+
+
+ 提出結果
+def getString():
+    return input()
+
+
+def main():
+    T = getString()
+    U = getString()
+
+    al = len(T)
+    pl = len(U)
+
+    r = False
+    for i in range(0, al - pl + 1):
+        x = T[i : i + pl]
+        y = [0 if x[i] == U[i] or x[i] == "?" else 1 f...]]></description><link>https://zenn.dev/hyperdb/articles/d3c93ac01e3c83</link><guid isPermaLink="true">https://zenn.dev/hyperdb/articles/d3c93ac01e3c83</guid><pubDate>Wed, 21 May 2025 08:55:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ekjLnAoC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25EF%25BC%25BBAtCoder%25EF%25BC%25BDABC-403%25EF%25BD%259CB%2520-%2520Four%2520Hidden%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AF%25E3%2581%2584%25E3%2581%25B1%25E3%2581%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhODJkODgwMzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>はいぱぁ</dc:creator></item><item><title><![CDATA[［AtCoder］ABC-403｜A - Odd Position Sum]]></title><description><![CDATA[
+ 設問ページ
+
+🔗ABC-403 A - Odd Position Sum
+
+
+
+ 提出結果
+def getInt():
+    return int(input())
+
+
+def getIntList():
+    return list(map(int, input().split()))
+
+
+def main():
+    N = getInt()
+    A = getIntList()
+
+    r = 0
+    for i in range(N):
+        if i % 2 == 0:
+            r += A[i]
+
+    print(r)
+
+
+i...]]></description><link>https://zenn.dev/hyperdb/articles/b7338e3056a959</link><guid isPermaLink="true">https://zenn.dev/hyperdb/articles/b7338e3056a959</guid><pubDate>Wed, 21 May 2025 08:55:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--W3KgQDDV--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25EF%25BC%25BBAtCoder%25EF%25BC%25BDABC-403%25EF%25BD%259CA%2520-%2520Odd%2520Position%2520Sum%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AF%25E3%2581%2584%25E3%2581%25B1%25E3%2581%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhODJkODgwMzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>はいぱぁ</dc:creator></item><item><title><![CDATA[【LangChain】「このチェーンの入出力の型なんだっけ？」を回避するための方法]]></title><description><![CDATA[
+ はじめに: その辞書、どんなキーが必要でしたっけ？
+LangChainを使ってアプリケーションを開発していると、チェーンの入出力で辞書（dict）を扱う場面が頻繁にあります。最初はシンプルでも、開発が進むにつれて「あれ、このチェーンの入力に必要なキーって何だっけ？」「このキーに対応する値の型は何を期待してたっけ？」と、ドキュメントや過去のコードを何度も見返す…なんて経験はありませんか？
+Pythonは動的型付け言語であり、LangChain自体も非常に柔軟な設計になっています。この柔軟性は大きなメリットである一方、特に複数人で開発していたり、後からコードを修正したりする際に、データの...]]></description><link>https://zenn.dev/vlntr_telco_rd/articles/7fe8ae08681748</link><guid isPermaLink="true">https://zenn.dev/vlntr_telco_rd/articles/7fe8ae08681748</guid><pubDate>Wed, 21 May 2025 07:58:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9Qc0hLpv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590LangChain%25E3%2580%2591%25E3%2580%258C%25E3%2581%2593%25E3%2581%25AE%25E3%2583%2581%25E3%2582%25A7%25E3%2583%25BC%25E3%2583%25B3%25E3%2581%25AE%25E5%2585%25A5%25E5%2587%25BA%25E5%258A%259B%25E3%2581%25AE%25E5%259E%258B%25E3%2581%25AA%25E3%2582%2593%25E3%2581%25A0%25E3%2581%25A3%25E3%2581%2591%25EF%25BC%259F%25E3%2580%258D%25E3%2582%2592%25E5%259B%259E%25E9%2581%25BF%25E3%2581%2599%25E3%2582%258B%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:kawamou%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NiMWRjY2I0MzAuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2581%25A8%25E3%2581%2582%25E3%2582%258B%25E9%2580%259A%25E4%25BF%25A1%25E4%25BC%259A%25E7%25A4%25BE%25E3%2581%25AE%25E6%259C%2589%25E5%25BF%2597%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y1ZTI2ZDkxZGUuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kawamou</dc:creator></item><item><title><![CDATA[LangGraphでSupervisor型Agentを試す]]></title><description><![CDATA[いつの間にかLangChainLangGraph Supervisorというものがリリースされていたのに気づきました。
+https://github.com/langchain-ai/langgraph-supervisor-py
+ぱっと見た感じ、関数を一つ呼び出すだけでSupervisor型（階層型）エージェントを容易に作成できるようです。
+その他にも、create_react_agentのインターフェースがパブリッククラウドのエージェント系サービスやMastra、Agnoのように、今年話題になっているエージェントの基本的な構造を備えていたことや、API提供される代表的なチャットモデル...]]></description><link>https://zenn.dev/vlntr_telco_rd/articles/langgraph-supervisor-mcp</link><guid isPermaLink="true">https://zenn.dev/vlntr_telco_rd/articles/langgraph-supervisor-mcp</guid><pubDate>Wed, 21 May 2025 07:30:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vsMFBUll--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:LangGraph%25E3%2581%25A7Supervisor%25E5%259E%258BAgent%25E3%2582%2592%25E8%25A9%25A6%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2583%25A6%25E3%2582%25A6%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NiMWRjY2I0MzAuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2581%25A8%25E3%2581%2582%25E3%2582%258B%25E9%2580%259A%25E4%25BF%25A1%25E4%25BC%259A%25E7%25A4%25BE%25E3%2581%25AE%25E6%259C%2589%25E5%25BF%2597%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzExZmM2MWE2MDAuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ユウ</dc:creator></item><item><title><![CDATA[【要説版】Streamlitアプリにユーザー認証を追加する方法3選]]></title><description><![CDATA[この記事は、「Streamlitでユーザー認証を実現する方法3選」の要点をまとめたものです。コードサンプルや詳細なトレードオフ分析をご希望の方は、ぜひ完全版をご覧ください。
+https://www.squadbase.dev/ja/blog/3-ways-to-implement-user-authentication-with-streamlit
+
+ 1. OpenID Connect (OIDC)
+
+概要
+Streamlit が v1.32 以降でネイティブにサポートする認証プロトコルです。ログイン処理は Google Identity、Auth0、Azure AD、Okta、Key...]]></description><link>https://zenn.dev/morph_tech_blog/articles/dccb9415780e04</link><guid isPermaLink="true">https://zenn.dev/morph_tech_blog/articles/dccb9415780e04</guid><pubDate>Wed, 21 May 2025 04:56:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0bgugvZd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E8%25A6%2581%25E8%25AA%25AC%25E7%2589%2588%25E3%2580%2591Streamlit%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2581%25AB%25E3%2583%25A6%25E3%2583%25BC%25E3%2582%25B6%25E3%2583%25BC%25E8%25AA%258D%25E8%25A8%25BC%25E3%2582%2592%25E8%25BF%25BD%25E5%258A%25A0%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%25953%25E9%2581%25B8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Keita%2520Mitsuhashi%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2EzNmMyNTE0NTcuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Squadbase%2520%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzYyMDk4NDcwZGUuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Keita Mitsuhashi</dc:creator></item><item><title><![CDATA[Python初心者が作った「PyRepoProfile」：GitHubリポジトリ一覧を生成するプロフィールページ作成ツール]]></title><description><![CDATA[
+ Python初心者が作った「PyRepoProfile」：GitHubリポジトリ一覧を生成するプロフィールページ作成ツール
+「Pythonでどんなことができるのかを探ってみたい」 という思いから、初めてのPython作品としてこのツールを作ってみました。
+今回紹介する「PyRepoProfile」は、GitHubのリポジトリ情報を自動取得し、HTML形式のプロフィールページを生成するツールです。
+
+ 🔧 主な機能
+
+GitHubユーザーの全パブリックのリポジトリを取得
+各リポジトリの説明、スター数、使用言語を表示
+自己紹介欄を含めたHTMLファイルの出力
+
+
+ ▶️ 使い方
+
+ 1....]]></description><link>https://zenn.dev/gratien583/articles/a8fbaf873295f0</link><guid isPermaLink="true">https://zenn.dev/gratien583/articles/a8fbaf873295f0</guid><pubDate>Wed, 21 May 2025 03:21:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--UXjfRvpJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E3%2581%258C%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%25E3%2580%258CPyRepoProfile%25E3%2580%258D%25EF%25BC%259AGitHub%25E3%2583%25AA%25E3%2583%259D%25E3%2582%25B8%25E3%2583%2588%25E3%2583%25AA%25E4%25B8%2580%25E8%25A6%25A7%25E3%2582%2592%25E7%2594%259F%25E6%2588%2590%25E3%2581%2599%25E3%2582%258B%25E3%2583%2597%25E3%2583%25AD%25E3%2583%2595%25E3%2582%25A3%25E3%2583%25BC%25E3%2583%25AB%25E3%2583%259A%25E3%2583%25BC%25E3%2582%25B8%25E4%25BD%259C...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Gratien583%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE5MmM2ZjY3YzIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Gratien583</dc:creator></item><item><title><![CDATA[【初心者向け】Pythonの sort() と sorted() の違いを解説]]></title><description><![CDATA[
+ はじめに
+Pythonでリストを並び替えたいときに使われるのが、sort() と sorted() という2つの方法です。
+どちらも並び替えができるため、最初は違いが分かりづらいかもしれません。
+
+「どちらを使っても同じでは？」
+
+と思ったことがある方も多いのではないでしょうか？
+実はこの2つ、使い方や動作に大きな違いがあります。
+本記事では、初心者の方向けに sort() と sorted() の違いと、それぞれの使い分けについて解説します。
+
+ sort() は元のリストを直接変更する
+sort() は、リストのメソッドです。
+実行すると、元のリスト自体が並び替えられ、その内容が...]]></description><link>https://zenn.dev/fd2025/articles/aa137e971210c8</link><guid isPermaLink="true">https://zenn.dev/fd2025/articles/aa137e971210c8</guid><pubDate>Tue, 20 May 2025 22:49:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3J0AAi3v--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E5%2590%2591%25E3%2581%2591%25E3%2580%2591Python%25E3%2581%25AE%2520sort%2528%2529%2520%25E3%2581%25A8%2520sorted%2528%2529%2520%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%25E3%2582%2592%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:fd2025%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2EzMzVlNTI5MmQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>fd2025</dc:creator></item><item><title><![CDATA[SHAPによるモデル解釈 ── ゲーム理論ベースで“なぜその予測になったか”を説明する]]></title><description><![CDATA[
+Shapley Additive exPlanations（SHAP）は、ゲーム理論の Shapley 値を応用した機械学習モデルの説明手法。
+複雑モデル でも “公平かつ一貫” に特徴量寄与を数値化でき、豊富な可視化が魅力です。
+本記事では
+
+
+なぜ SHAP が必要か（他手法との比較）
+SHAP 値の数学的定義
+数式の直感的理解
+
+LightGBM × SHAP 実装 &amp; 可視化
+をわかりやすく解説します。
+
+
+
+
+ 目次
+
+SHAP とは？
+
+なぜ SHAP が必要か
+2.1 他手法との比較
+
+SHAP 値の数学的定義
+数式の直感的理解
+
+LightGBM × SHAP ...]]></description><link>https://zenn.dev/fuukanoo/articles/77c6affe33a0e7</link><guid isPermaLink="true">https://zenn.dev/fuukanoo/articles/77c6affe33a0e7</guid><pubDate>Tue, 20 May 2025 13:34:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--suZD9Aep--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:SHAP%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258B%25E3%2583%25A2%25E3%2583%2587%25E3%2583%25AB%25E8%25A7%25A3%25E9%2587%2588%2520%25E2%2594%2580%25E2%2594%2580%2520%25E3%2582%25B2%25E3%2583%25BC%25E3%2583%25A0%25E7%2590%2586%25E8%25AB%2596%25E3%2583%2599%25E3%2583%25BC%25E3%2582%25B9%25E3%2581%25A7%25E2%2580%259C%25E3%2581%25AA%25E3%2581%259C%25E3%2581%259D%25E3%2581%25AE%25E4%25BA%2588%25E6%25B8%25AC%25E3%2581%25AB%25E3%2581%25AA%25E3%2581%25A3%25E3%2581%259F%25E3%2581%258B%25E2%2580%259D%25E3%2582%2592%25E8%25AA%25AC%25E6%2598%258E%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:fuukanoo%2520%252F%2520DS%25C3%2597Cloud%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSXZxa3pZcVdfN2Y2bGpiOUUyS3FpdTJCRGh6QjU5WmNJWjhDYU9MR2dnOFZYbWNnPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>fuukanoo / DS×Cloud</dc:creator></item><item><title><![CDATA[モデルの学習速度を上げる小手先のテクニック集（PyTorch）]]></title><description><![CDATA[
+ なんか学習時間長くないか？？？
+って思う瞬間、ありますよね。このあとパラメータチューニングもしなきゃいけないと考えると、気が遠くなります。
+今回は、私がいろいろ調べた中で実際に学習速度が向上した方法をいくつか紹介します。（なんとな～く上がったかも、的なプラシーボかもしれませんが。）
+最初の方法に関しては、完全に私の勉強不足で、おそらく常識レベルだと思いますが同じ悩みを抱えている人がいれば力になれればと思います。Zennや〇iitaなどのテック系ブログでPytorchのチュートリアルを調べてみると、最初の方法をやっていない記事もいくつか見つかったのでもしかしたら誰かを救えるかもしれませ...]]></description><link>https://zenn.dev/kita_no_in/articles/cb1bbd09d1be88</link><guid isPermaLink="true">https://zenn.dev/kita_no_in/articles/cb1bbd09d1be88</guid><pubDate>Tue, 20 May 2025 12:26:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vX4eyrI1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%25A2%25E3%2583%2587%25E3%2583%25AB%25E3%2581%25AE%25E5%25AD%25A6%25E7%25BF%2592%25E9%2580%259F%25E5%25BA%25A6%25E3%2582%2592%25E4%25B8%258A%25E3%2581%2592%25E3%2582%258B%25E5%25B0%258F%25E6%2589%258B%25E5%2585%2588%25E3%2581%25AE%25E3%2583%2586%25E3%2582%25AF%25E3%2583%258B%25E3%2583%2583%25E3%2582%25AF%25E9%259B%2586%25EF%25BC%2588PyTorch%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%25A5%25A5%25E3%2581%25AE%25E9%2599%25A2%25E7%2594%259F%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJmYTRkMjk4ZWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>奥の院生</dc:creator></item><item><title><![CDATA[生成AIをPythonでAIチャットボットを作った話]]></title><description><![CDATA[どうも。かりんです。
+生成AIを使ったLINEチャットボットを作った時のメモです。
+今回は使用した技術については割愛させていただきます。
+使用環境
+
+Python 3.10.4
+Flask
+ngrok（ローカル開発用）
+Render（本番環境としてデプロイ）
+
+作った経緯
+もともとLINEでちょっとした会話ができる対話型のチャットボットが欲しいと思っていて、自分用に作ってみようと思ったのがきっかけです。
+ちょうど生成AIにも触れていたので、それを組み合わせて遊べそうだなと思い、簡単なBotを作ることにしました。
+作ったもの
+作ったのは、LINEでメッセージを送ると返事をしてくれるBotで...]]></description><link>https://zenn.dev/karin_lab/articles/999897149b8d10</link><guid isPermaLink="true">https://zenn.dev/karin_lab/articles/999897149b8d10</guid><pubDate>Tue, 20 May 2025 11:45:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--DzoZJEK---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%2594%259F%25E6%2588%2590AI%25E3%2582%2592Python%25E3%2581%25A7AI%25E3%2583%2581%25E3%2583%25A3%25E3%2583%2583%25E3%2583%2588%25E3%2583%259C%25E3%2583%2583%25E3%2583%2588%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258B%25E3%2582%258A%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZmNjQ5NDk1MzMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>かりん</dc:creator></item><item><title><![CDATA[AIとの共創で実現した「数あて対戦ゲーム」開発 - 驚きの生産性と可能性]]></title><description><![CDATA[
+ AIとの共創で実現した「数あて対戦ゲーム」開発 - 驚きの生産性と可能性
+
+ はじめに
+「AIにプログラミングを任せる」という話を聞くと、多くのエンジニアは懐疑的な反応を示します。「本当に実用的なコードが書けるのか？」「結局は人間が修正しないといけないのでは？」という疑問は当然のものでしょう。
+私自身もそんな一人でした。しかし、最近のAIプログラミング支援ツールを使って「数あて対戦ゲーム（Hit &amp; Blow風）」のWebアプリを開発した経験から、その認識が大きく変わりました。
+この記事では、AIとの共創によるWebアプリ開発の全過程を公開し、その驚くべき生産性と可能性につい...]]></description><link>https://zenn.dev/koukiwf/articles/c6b5408caac002</link><guid isPermaLink="true">https://zenn.dev/koukiwf/articles/c6b5408caac002</guid><pubDate>Tue, 20 May 2025 10:13:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7jj45epj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AI%25E3%2581%25A8%25E3%2581%25AE%25E5%2585%25B1%25E5%2589%25B5%25E3%2581%25A7%25E5%25AE%259F%25E7%258F%25BE%25E3%2581%2597%25E3%2581%259F%25E3%2580%258C%25E6%2595%25B0%25E3%2581%2582%25E3%2581%25A6%25E5%25AF%25BE%25E6%2588%25A6%25E3%2582%25B2%25E3%2583%25BC%25E3%2583%25A0%25E3%2580%258D%25E9%2596%258B%25E7%2599%25BA%2520-%2520%25E9%25A9%259A%25E3%2581%258D%25E3%2581%25AE%25E7%2594%259F%25E7%2594%25A3%25E6%2580%25A7%25E3%2581%25A8%25E5%258F%25AF%25E8%2583%25BD%25E6%2580%25A7%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%2585%2589%25E8%25BC%259D%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q5ZWExZjhkOGEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>光輝</dc:creator></item><item><title><![CDATA[【LLM】Llama3をGoogle Colabで動かすだけ]]></title><description><![CDATA[こんにちは。
+絶賛、卒研を進めている学生です。
+今何かと話題の生成AIですが、「生成AIを卒研に取り入れたらおもろくね」という単純な興味から、アメリカのMeta社が無償でオープンソースとして公開している Llama を最近触り始めました。
+https://www.llama.com/
+そこで、今回は LlamaをGoogle Colab上で動かすまで を解説していきます。
+!
+掲載している内容は、2025年5月20日 時点での情報です。最新の情報とは異なる場合もありますので、ご了承ください。
+
+
+ 0. 前提
+
+ 0.1 Llamaとは
+Llamaとは、「ラマ」と読み、Facebookや...]]></description><link>https://zenn.dev/laughtaone/articles/564d7df70b9b38</link><guid isPermaLink="true">https://zenn.dev/laughtaone/articles/564d7df70b9b38</guid><pubDate>Tue, 20 May 2025 09:45:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4gGjYSwr--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590LLM%25E3%2580%2591Llama3%25E3%2582%2592Google%2520Colab%25E3%2581%25A7%25E5%258B%2595%25E3%2581%258B%25E3%2581%2599%25E3%2581%25A0%25E3%2581%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%25A9%25E3%2583%2595%25E3%2582%25BF%25E3%2583%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSllFa0d5ekJyS2xkcXR1bmh6dDNyOVhvQ3hpUzZkZXFjbDUyZFBQdnFWMEE9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ラフター</dc:creator></item></channel></rss>
