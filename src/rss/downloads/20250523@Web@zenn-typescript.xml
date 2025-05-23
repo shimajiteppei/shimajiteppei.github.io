@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「TypeScript」のフィード]]></title><description><![CDATA[Zennのトピック「TypeScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/typescript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/f13e758fdb.png</url><title>Zennの「TypeScript」のフィード</title><link>https://zenn.dev/topics/typescript</link></image><generator>zenn.dev</generator><lastBuildDate>Fri, 23 May 2025 09:53:28 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/typescript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[LLM生成コードのリンター・フォーマット問題を解決！Biome MCPサーバーの作り方]]></title><description><![CDATA[
+ はじめに
+こんにちは或いはこんばんは。Ryuzakiです。
+いきなりですが、皆さんLLMを用いて生成したコードのリンターチェックやフォーマッティングってどうしていますか？
+自分はGitHub CopilotやClineを用いて実装を進めることが多いのですが、どちらもリンターエラーを拾ってくれないことが多く、手動で直したり、当該箇所を明示して再度コードを書き直させたりしています。
+また、フォーマットに至っては、LLMは基本的に関与しないため、手動で適用するか、pre-commitのような仕組みを用いて適用させる必要があります。（個人開発やプロトタイプ開発のようにちゃちゃっと動くものを作...]]></description><link>https://zenn.dev/ryuzaki/articles/4940746cf52706</link><guid isPermaLink="true">https://zenn.dev/ryuzaki/articles/4940746cf52706</guid><pubDate>Fri, 23 May 2025 08:53:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--pffgkcZ6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:LLM%25E7%2594%259F%25E6%2588%2590%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2581%25AE%25E3%2583%25AA%25E3%2583%25B3%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%25BB%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25BC%25E3%2583%259E%25E3%2583%2583%25E3%2583%2588%25E5%2595%258F%25E9%25A1%258C%25E3%2582%2592%25E8%25A7%25A3%25E6%25B1%25BA%25EF%25BC%2581Biome%2520MCP%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2581%25AE%25E4%25BD%259C%25E3%2582%258A%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Ryuzaki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzExNTRhNzg4YzIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Ryuzaki</dc:creator></item><item><title><![CDATA[TSKaigi 2025「TypeScriptとは何であって何でなく、誰のもので、どこへ向かうのか」スピーカーノート]]></title><description><![CDATA[
+ 導入
+今日は「TypeScriptとは何であって何でなく、誰のもので、どこへ向かうのか」というタイトルでお話させていただきます。よろしくお願いします。
+まず最初に、軽く自己紹介をさせていただきます。Suzuki Sosuke と申します。ユビー株式会社でソフトウェアエンジニアをしています。今日ブースやってるので遊びにきてください。あと趣味でPrettierというコードフォーマッターのメンテナンスをしたり、WebKitのReviewerをやっていたりします。WebKitといってもJavaScriptCoreの部分だけなんですけどね。
+で、トークの方に移っていくんですが、今回のトークのタ...]]></description><link>https://zenn.dev/sosukesuzuki/articles/5146c84504445f</link><guid isPermaLink="true">https://zenn.dev/sosukesuzuki/articles/5146c84504445f</guid><pubDate>Fri, 23 May 2025 08:14:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Y32p6aNm--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TSKaigi%25202025%25E3%2580%258CTypeScript%25E3%2581%25A8%25E3%2581%25AF%25E4%25BD%2595%25E3%2581%25A7%25E3%2581%2582%25E3%2581%25A3%25E3%2581%25A6%25E4%25BD%2595%25E3%2581%25A7%25E3%2581%25AA%25E3%2581%258F%25E3%2580%2581%25E8%25AA%25B0%25E3%2581%25AE%25E3%2582%2582%25E3%2581%25AE%25E3%2581%25A7%25E3%2580%2581%25E3%2581%25A9%25E3%2581%2593%25E3%2581%25B8%25E5%2590%2591%25E3%2581%258B%25E3%2581%2586%25E3%2581%25AE%25E3%2581%258B%25E3%2580%258D%25E3%2582%25B9%25E3%2583%2594%25E3%2583%25BC%25E3%2582%25AB%25E3%2583%25BC%25E3%2583%258E%25E3%2583%25BC%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Sosuke%2520Suzuki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2kzVm5WZHo2MC1CT3lMTS1VVnZaNmdNSDJlTlp1T0lTa1owT3lyNnc9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Sosuke Suzuki</dc:creator></item><item><title><![CDATA[MCPでclaude desktopと連携してコード編集してくれるツール作った(紹介記事)]]></title><description><![CDATA[
+ MCPでclaude desktopと連携してコード編集してくれるツール作った(紹介記事)
+MCPでコード編集するツールはいくつかありますが、bash実行やディレクトリアクセスが制限されていないなど、セキュリティ面が気になるものが多いです。そこで、セキュリティを重視したコード編集ツール「MCP-Code」を自作してみました。
+
+ 既存ツールの課題
+一般的なMCPコード編集ツールには以下のような問題があります。
+
+
+shellツールでrm -rf /のような危険なコマンドが実行可能
+プロジェクト外の/etc/passwdや~/.ssh/へのアクセスが可能
+
+.envファイルや秘密鍵ファ...]]></description><link>https://zenn.dev/sika7/articles/6322bda825186a</link><guid isPermaLink="true">https://zenn.dev/sika7/articles/6322bda825186a</guid><pubDate>Fri, 23 May 2025 06:23:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ViaOobNI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:MCP%25E3%2581%25A7claude%2520desktop%25E3%2581%25A8%25E9%2580%25A3%25E6%2590%25BA%25E3%2581%2597%25E3%2581%25A6%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E7%25B7%25A8%25E9%259B%2586%25E3%2581%2597%25E3%2581%25A6%25E3%2581%258F%25E3%2582%258C%25E3%2582%258B%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%2528%25E7%25B4%25B9%25E4%25BB%258B%25E8%25A8%2598%25E4%25BA%258B%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:sika7%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzgxNjE5NWFiMzYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sika7</dc:creator></item><item><title><![CDATA[【Typescript】Utility Typesの使いかたをまとめてみた]]></title><description><![CDATA[
+ Utility Typesとは?
+Utility TypesはTypescriptの既存の型を再利用・加工などが出来る便利な型です。
+既に定義されている型と似たような型が欲しい時などにUtility Typesを使うことで、コードの重複を減らすことが出来たりし効率的に型を扱うことが出来ます。
+
+ Awaited&lt;T&gt;
+
+Awaited&lt;T&gt;はawaitや.then()を使った時に得られる値の型を扱う時に使えます。
+例えば非同期関数の戻り値の型が欲しい時などです。
+// 基本的な構文
+type Sample = Awaited&lt;Promise&lt;str...]]></description><link>https://zenn.dev/kasshii18/articles/21d164a27e99b0</link><guid isPermaLink="true">https://zenn.dev/kasshii18/articles/21d164a27e99b0</guid><pubDate>Fri, 23 May 2025 05:59:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--u1AtnrDT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Typescript%25E3%2580%2591Utility%2520Types%25E3%2581%25AE%25E4%25BD%25BF%25E3%2581%2584%25E3%2581%258B%25E3%2581%259F%25E3%2582%2592%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kasshii%25EF%25BC%2588%25E3%2581%258B%25E3%2581%25A3%25E3%2581%2597%25E3%2583%25BC%25EF%25BC%2589%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U4NDljMWEyNDEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kasshii（かっしー）</dc:creator></item><item><title><![CDATA[Reactを解き明かす：宣言的UIからFiberアーキテクチャ、そして未来のWebへ]]></title><description><![CDATA[
+ 1. はじめに：Reactとは何か？なぜ世界を魅了するのか？
+
+ Reactの基本理念と、それが解決しようとしたWeb開発の課題
+Reactは、Meta社（旧Facebook）によって開発された、ユーザーインターフェース（UI）を構築するためのJavaScriptライブラリです。その登場以前のWeb開発、特に複雑なUIを持つアプリケーション開発は、直接的なDOM（Document Object Model）操作の煩雑さ、それに伴うパフォーマンスの課題、そして大規模化するにつれて困難になる状態管理という大きな壁に直面していました。Reactは、これらの根深い問題を解決し、より効率的で、...]]></description><link>https://zenn.dev/asagumo/articles/368af532918505</link><guid isPermaLink="true">https://zenn.dev/asagumo/articles/368af532918505</guid><pubDate>Fri, 23 May 2025 04:02:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--KuHKaKo8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%25E3%2582%2592%25E8%25A7%25A3%25E3%2581%258D%25E6%2598%258E%25E3%2581%258B%25E3%2581%2599%25EF%25BC%259A%25E5%25AE%25A3%25E8%25A8%2580%25E7%259A%2584UI%25E3%2581%258B%25E3%2582%2589Fiber%25E3%2582%25A2%25E3%2583%25BC%25E3%2582%25AD%25E3%2583%2586%25E3%2582%25AF%25E3%2583%2581%25E3%2583%25A3%25E3%2580%2581%25E3%2581%259D%25E3%2581%2597%25E3%2581%25A6%25E6%259C%25AA%25E6%259D%25A5%25E3%2581%25AEWeb%25E3%2581%25B8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Naoaki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2QzYjQ2MmJiZTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Naoaki</dc:creator></item><item><title><![CDATA[ビット演算できる型を使って、○×ゲームで遊べるようにしてみた]]></title><description><![CDATA[こんにちは、エンジニアの籏野です。
+先日、とある開発中の思い付きでTypeScriptの型でビット演算ができるようにしてみました。
+残念ながらその型はアプリで採用されることはなかったのですが、何かしらに活かしてみたいなと思い、TypeScriptの型レベルプログラミングだけで○×ゲームを作ってみました。
+!
+今回の型を作ろうとしたきっかけは、ある選択肢の中からいくつか選び出す際に、選び取った組み合わせと選んだもの以外の組み合わせが同じ状態を示すというルールがあったためです。
+例: 1~5の選択肢がある場合に、「1, 3」と「2, 4, 5」は同じ状態を示すことを型で表現する
+ビット演算で...]]></description><link>https://zenn.dev/forcia_tech/articles/202505_hatano_bit_type_tictactoe</link><guid isPermaLink="true">https://zenn.dev/forcia_tech/articles/202505_hatano_bit_type_tictactoe</guid><pubDate>Fri, 23 May 2025 04:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--roP5puU---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2593%25E3%2583%2583%25E3%2583%2588%25E6%25BC%2594%25E7%25AE%2597%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258B%25E5%259E%258B%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2580%2581%25E2%2597%258B%25C3%2597%25E3%2582%25B2%25E3%2583%25BC%25E3%2583%25A0%25E3%2581%25A7%25E9%2581%258A%25E3%2581%25B9%25E3%2582%258B%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:FORCIA%2520Tech%2520Blog%2520%25E9%2581%258B...%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2QyMDIwOGYzMDMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:FORCIA%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NkZmRkZTQ5MGUuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>FORCIA Tech Blog 運営チーム</dc:creator></item><item><title><![CDATA[Reactでライブラリをインポートする方法（初心者向け）]]></title><description><![CDATA[
+ Reactでライブラリをインポートする方法（初心者向け）
+Reactでは、便利な機能やUI部品を提供するライブラリを簡単に追加して使うことができます。
+ここでは、代表的なライブラリを例にして、インポートの基本を解説します。
+
+
+ ステップ1: ライブラリをインストールする
+まずは、使いたいライブラリをプロジェクトに追加します。
+以下のコマンドをターミナルで実行してください。
+npm install dayjs
+これは「dayjs」という日付操作のライブラリをインストールしています。
+
+
+ ステップ2: ライブラリをインポートする
+Reactのファイルで、インポート文を使ってライブラリ...]]></description><link>https://zenn.dev/hibikiumekawa/articles/50889244cf3ce8</link><guid isPermaLink="true">https://zenn.dev/hibikiumekawa/articles/50889244cf3ce8</guid><pubDate>Fri, 23 May 2025 01:25:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--kIe3yx3z--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%25E3%2581%25A7%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%25E3%2582%2592%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%259D%25E3%2583%25BC%25E3%2583%2588%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%25EF%25BC%2588%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E5%2590%2591%25E3%2581%2591%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:umekawahibiki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTF82QlV6VGFvLXpmTjV0OVBlUjAxdk5RYVFJMWN1VjRWRG5BTnhEWEJGejRRQzFnPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>umekawahibiki</dc:creator></item><item><title><![CDATA[【初心者向け】コンポーネントとレンダリングのお話]]></title><description><![CDATA[
+ Reactのコンポーネントとレンダリングの基本
+Reactは、UI（ユーザーインターフェース）を構築するためのJavaScriptライブラリです。
+Reactの基本的な考え方として、「コンポーネント」と「レンダリング」があります。
+
+
+ コンポーネントとは？
+コンポーネントは、アプリケーションのUIを構成する再利用可能な部品です。
+例えば、ボタンやフォーム、ページ全体などもコンポーネントとして定義できます。
+const Hello = () =&gt; {
+  return &lt;h1&gt;こんにちは！&lt;/h1&gt;;
+};
+これは「Hello」というコンポーネントで、画...]]></description><link>https://zenn.dev/hibikiumekawa/articles/8c968123a92440</link><guid isPermaLink="true">https://zenn.dev/hibikiumekawa/articles/8c968123a92440</guid><pubDate>Fri, 23 May 2025 00:50:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--draKW_wZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E5%2590%2591%25E3%2581%2591%25E3%2580%2591%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%259D%25E3%2583%25BC%25E3%2583%258D%25E3%2583%25B3%25E3%2583%2588%25E3%2581%25A8%25E3%2583%25AC%25E3%2583%25B3%25E3%2583%2580%25E3%2583%25AA%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%25AE%25E3%2581%258A%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:umekawahibiki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTF82QlV6VGFvLXpmTjV0OVBlUjAxdk5RYVFJMWN1VjRWRG5BTnhEWEJGejRRQzFnPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>umekawahibiki</dc:creator></item><item><title><![CDATA[Google Maps PlatformとReactで実現するルート検索機能]]></title><description><![CDATA[
+ はじめに
+こんにちは。第四開発部の富田です。
+皆さんは Google Maps を使って普段どんなことをしていますか？
+行きたい場所までのルートを調べることが多いのではないでしょうか。
+ウェブアプリケーションやモバイルアプリケーションにおいて、ユーザーが出発地から目的地までのルートを検索できる機能は非常に価値が高いものです。Google Maps Platform は、このルート検索機能を実現するための強力なツール群を提供しています。
+本記事では、特に React アプリケーションでルート検索機能を実装する方法を解説します。
+
+ ルート検索機能の実装
+Google Maps Plat...]]></description><link>https://zenn.dev/cloud_ace/articles/0841252de9ce04</link><guid isPermaLink="true">https://zenn.dev/cloud_ace/articles/0841252de9ce04</guid><pubDate>Fri, 23 May 2025 00:33:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GyRZ19wL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Google%2520Maps%2520Platform%25E3%2581%25A8React%25E3%2581%25A7%25E5%25AE%259F%25E7%258F%25BE%25E3%2581%2599%25E3%2582%258B%25E3%2583%25AB%25E3%2583%25BC%25E3%2583%2588%25E6%25A4%259C%25E7%25B4%25A2%25E6%25A9%259F%25E8%2583%25BD%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25A6%25E3%2583%2589%25E3%2582%25A8%25E3%2583%25BC%25E3%2582%25B9%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE2OGMwYmM4MTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>クラウドエース株式会社</dc:creator></item><item><title><![CDATA[ポーリング方式からPubSubHubbubへ：YouTubeの動画更新を効率的に取得する技術]]></title><description><![CDATA[
+ 概要
+以前作成した以下の記事で、YouTubeのライブ配信や動画投稿をDiscordにリアルタイムで通知するシステムを構築しました。
+https://zenn.dev/tatsumin/articles/stream-notifications-bot
+この仕組みでPostgreSQLにはかなりのデータが保存されてきており、そのデータを利用してさまざまな見せ方ができるのではないかと考えて、WebアプリとしてStreamer Nowを作成し公開しました。
+これまでの仕組みではRSSフィードを定期的にチェックするポーリング方式で行なっていたため、YouTube Feedへのアクセス負荷を...]]></description><link>https://zenn.dev/tatsumin/articles/youtube-pubsub</link><guid isPermaLink="true">https://zenn.dev/tatsumin/articles/youtube-pubsub</guid><pubDate>Thu, 22 May 2025 23:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Ye5Zxikw--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%259D%25E3%2583%25BC%25E3%2583%25AA%25E3%2583%25B3%25E3%2582%25B0%25E6%2596%25B9%25E5%25BC%258F%25E3%2581%258B%25E3%2582%2589PubSubHubbub%25E3%2581%25B8%25EF%25BC%259AYouTube%25E3%2581%25AE%25E5%258B%2595%25E7%2594%25BB%25E6%259B%25B4%25E6%2596%25B0%25E3%2582%2592%25E5%258A%25B9%25E7%258E%2587%25E7%259A%2584%25E3%2581%25AB%25E5%258F%2596%25E5%25BE%2597%25E3%2581%2599%25E3%2582%258B%25E6%258A%2580%25E8%25A1%2593%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259F%25E3%2581%25A4%25E3%2581%25BF%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdkZGUxNjAyNTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>たつみん</dc:creator></item><item><title><![CDATA[非エンジニアがObsidianのタグ命名だけでファイル整理したくて、ゆるふわプラグイン自作をしてみた話]]></title><description><![CDATA[
+ はじめに
+はじめましてこんにちは、モカです。
+普段Obsidianでノートを整理していると、
+「タグの命名だけでフォルダ分けまで自動でやってほしい！」
+「#pjt/みたいなタグでノートを管理したら、そのままファイルも振り分けたい！」
+そんな欲がどんどん膨らみ…
+「たぶん既存プラグインあるんだろうな～」と思いつつも、TOEIC200点の私が英語まみれの記事を探す気も起こせなかったので、勢いで自作してしまいました。
+この記事は、その勢いだけで作った「Project Tag Mover」というObsidianプラグインの開発記録です。
+
+ なんで自作？勢いとLLMコネコネ
+世の中にそれっぽ...]]></description><link>https://zenn.dev/mocachimoca/articles/708e223017de6f</link><guid isPermaLink="true">https://zenn.dev/mocachimoca/articles/708e223017de6f</guid><pubDate>Thu, 22 May 2025 19:13:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--TKW-5Qbs--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E9%259D%259E%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%25E3%2581%258CObsidian%25E3%2581%25AE%25E3%2582%25BF%25E3%2582%25B0%25E5%2591%25BD%25E5%2590%258D%25E3%2581%25A0%25E3%2581%2591%25E3%2581%25A7%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E6%2595%25B4%25E7%2590%2586%25E3%2581%2597%25E3%2581%259F%25E3%2581%258F%25E3%2581%25A6%25E3%2580%2581%25E3%2582%2586%25E3%2582%258B%25E3%2581%25B5%25E3%2582%258F%25E3%2583%2597%25E3%2583%25A9%25E3%2582%25B0%25E3%2582%25A4%25E3%2583%25B3%25E8%2587%25AA%25E4%25BD%259C%25E3%2582%2592%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%25A2%25E3%2582%25AB%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSWRRbUU3WXZONWFENzBKMU5sQk0wQVNrS3FLd1luRE5yVzU0X3RWQUdlaFY4bk12ST1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>モカ</dc:creator></item><item><title><![CDATA[VSCode拡張機能のつくり方]]></title><description><![CDATA[Visual Studio Code (VSCode) は、その高い拡張性により、世界中の開発者から絶大な支持を得ています。この記事では、VSCode拡張機能の開発プロセス全体を網羅的に解説します。開発環境のセットアップから、主要な概念、APIの活用、デバッグ、テスト、そしてVSCode Marketplaceへの公開までの流れを整理します。
+
+ ■VSCode拡張機能開発の概要
+
+ ●VSCodeの拡張性
+VSCodeは、拡張性を設計の核としています。そのコア機能の多くは、サードパーティ開発者と同じAPIを用いた拡張機能として構築されています。このアプローチは、開発者の参入障壁を低くし...]]></description><link>https://zenn.dev/suwash/articles/vscode_extension_20250523</link><guid isPermaLink="true">https://zenn.dev/suwash/articles/vscode_extension_20250523</guid><pubDate>Thu, 22 May 2025 15:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--feqzt0-A--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:VSCode%25E6%258B%25A1%25E5%25BC%25B5%25E6%25A9%259F%25E8%2583%25BD%25E3%2581%25AE%25E3%2581%25A4%25E3%2581%258F%25E3%2582%258A%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:suwa-sh%2520%252F%2520%25E8%25AB%258F%25E8%25A8%25AA%25E7%259C%259F%25E4%25B8%2580%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUVkRlRwNlQ0cjdIdGJrWG10aG42OE53dmlHWXBLcGI5VWQ5N3hnRS1aQnM9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>suwa-sh / 諏訪真一</dc:creator></item><item><title><![CDATA[Zustand × React Context を組み合わせたデザインパターン実践]]></title><description><![CDATA[
+ はじめに
+Dress Code株式会社で直近HR Forceの開発をしている、ふるしょうです。
+HR領域のSaaSは、複雑なフォームの機能要件が伴うことが少なくありません。
+例えば、入社手続きにおける家族情報の登録など、動的フィールドの表示/非表示や編集制御、複雑な依存関係を持つ計算フィールド、再起的な階層構造、同一ページ内に複数の独立したフォームインスタンスが存在する場合の適切な状態管理が必要になります。
+弊社では、このような複雑なフォーム要件に対応するため、Zustand と React Context を組み合わせたアーキテクチャパターンを採用し、開発を進めています。
+本記事で...]]></description><link>https://zenn.dev/dress_code/articles/7229462ef29103</link><guid isPermaLink="true">https://zenn.dev/dress_code/articles/7229462ef29103</guid><pubDate>Thu, 22 May 2025 08:00:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--K7soH42H--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Zustand%2520%25C3%2597%2520React%2520Context%2520%25E3%2582%2592%25E7%25B5%2584%25E3%2581%25BF%25E5%2590%2588%25E3%2582%258F%25E3%2581%259B%25E3%2581%259F%25E3%2583%2587%25E3%2582%25B6%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2591%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%25B3%25E5%25AE%259F%25E8%25B7%25B5%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%25B5%25E3%2582%258B%25E3%2581%2597%25E3%2582%2587%25E3%2581%2586%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRiOGMxZmU1MDUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:DRESS%2520CODE%2520TECH%2520BLOG%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2QzMmQ5N2Q0NmQuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ふるしょう</dc:creator></item><item><title><![CDATA[TypeScript CLI で Markdown 1 ファイルから Cursor／Cline ルールを自動生成する方法]]></title><description><![CDATA[こんにちは！アルダグラムでエンジニアをしている柴田です
+
+ はじめに
+近年、AI エージェントツールの発展が著しく、開発現場でも Cursor や Cline のような自律エージェントを活用してコード生成やレビューを行うケースが増えていると思います。
+弊社でも業務効率化を目的に複数の AI ツールを試験的に導入しており、特定のAIツールに依存せず用途に応じて併用しています。
+これらのツールでは、プロジェクト固有のガイドラインやインデックス除外設定を記述したルールファイルを設定することができますが、Cursor と Cline の両方でほぼ同一のルールファイルを手動管理していると、更新タイ...]]></description><link>https://zenn.dev/aldagram_tech/articles/452ce8ea87baea</link><guid isPermaLink="true">https://zenn.dev/aldagram_tech/articles/452ce8ea87baea</guid><pubDate>Thu, 22 May 2025 03:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--iSezeGGU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%2520CLI%2520%25E3%2581%25A7%2520Markdown%25201%2520%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2581%258B%25E3%2582%2589%2520Cursor%25EF%25BC%258FCline%2520%25E3%2583%25AB%25E3%2583%25BC%25E3%2583%25AB%25E3%2582%2592%25E8%2587%25AA%25E5%258B%2595%25E7%2594%259F%25E6%2588%2590%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Shibata%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JiM2FkMDk1NzUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25A2%25E3%2583%25AB%25E3%2583%2580%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%25A0%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVkZTMwMDdmMmQuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Shibata</dc:creator></item><item><title><![CDATA[JavaScriptオブジェクトのキー（プロパティ名）の書き方、全部解説します！]]></title><description><![CDATA[こんにちは！ JavaScriptでプログラミングをしていると、オブジェクトのキー（プロパティ名）の書き方がいくつかあって、「あれ？これはどういう意味だっけ？」と混乱することはありませんか？
+{ key: value } だけでなく、[変数]: value とか、obj.key と obj['key'] の違いとか、ちょっとごちゃごちゃして見えますよね。
+この記事では、そんなJavaScriptオブジェクトのキーに関するあらゆる表現方法を、一つ一つ丁寧に、オリジナルのサンプルコードを交えながら解説していきます。TypeScriptでの書き方も少し触れます。
+
+
+ 1. オブジェクトリテラ...]]></description><link>https://zenn.dev/noah11/articles/b789bcaa75c887</link><guid isPermaLink="true">https://zenn.dev/noah11/articles/b789bcaa75c887</guid><pubDate>Thu, 22 May 2025 02:49:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wffpKwZW--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25E3%2582%25AA%25E3%2583%2596%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E3%2581%25AE%25E3%2582%25AD%25E3%2583%25BC%25EF%25BC%2588%25E3%2583%2597%25E3%2583%25AD%25E3%2583%2591%25E3%2583%2586%25E3%2582%25A3%25E5%2590%258D%25EF%25BC%2589%25E3%2581%25AE%25E6%259B%25B8%25E3%2581%258D%25E6%2596%25B9%25E3%2580%2581%25E5%2585%25A8%25E9%2583%25A8%25E8%25A7%25A3%25E8%25AA%25AC%25E3%2581%2597%25E3%2581%25BE%25E3%2581%2599%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yusuken%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVjNjI1ODJjNjEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yusuken</dc:creator></item><item><title><![CDATA[TypeScriptの「?」と「!」の違い]]></title><description><![CDATA[TypeScriptにおける
+foo?: number
+と
+foo!: number
+の違いを分かりやすく解説します。
+
+
+ foo?: number の意味
+
+
+「foo」はオプショナル（省略可能）なプロパティです。
+
+型は number または undefined になります。
+オブジェクトを生成する際、fooを指定してもしなくてもOKです。
+
+例:
+type Example = {
+  foo?: number;
+};
+
+const a: Example = {};           // OK（fooなし）
+const b: Example = { foo: 42 }; // ...]]></description><link>https://zenn.dev/btc/articles/250522_typescript_mark</link><guid isPermaLink="true">https://zenn.dev/btc/articles/250522_typescript_mark</guid><pubDate>Thu, 22 May 2025 02:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ToR-vmYS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%25E3%2581%25AE%25E3%2580%258C%253F%25E3%2580%258D%25E3%2581%25A8%25E3%2580%258C%2521%25E3%2580%258D%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:my%2520log%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzEwODIzM2M5OGYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>my log</dc:creator></item><item><title><![CDATA[確定代入アサーションはつけるべき？]]></title><description><![CDATA[
+ 確定代入アサーション（definite assignment assertion）はつけるべき？
+
+ 結論
+確定代入アサーション（!）は「本当にその変数やプロパティが必ず初期化される」と自信がある場合のみ使うべきです。
+乱用は避け、TypeScriptの型安全性を損なわないよう注意が必要です。
+
+
+ 詳細
+
+確定代入アサーション（!）は、TypeScriptのstrictNullChecksが有効なときに「この変数（プロパティ）は必ず初期化される」とコンパイラに伝えるためのものです。
+これを使うと、初期化チェックのエラーが出なくなりますが、実際には初期化されていない場合でもエラーを抑...]]></description><link>https://zenn.dev/btc/articles/250522_definite_assignment_assertion</link><guid isPermaLink="true">https://zenn.dev/btc/articles/250522_definite_assignment_assertion</guid><pubDate>Thu, 22 May 2025 02:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--MWhwowN_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%25A2%25BA%25E5%25AE%259A%25E4%25BB%25A3%25E5%2585%25A5%25E3%2582%25A2%25E3%2582%25B5%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2581%25AF%25E3%2581%25A4%25E3%2581%2591%25E3%2582%258B%25E3%2581%25B9%25E3%2581%258D%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:my%2520log%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzEwODIzM2M5OGYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>my log</dc:creator></item><item><title><![CDATA[this.player = null!; の意味]]></title><description><![CDATA[
+ this.player = null!; の意味
+
+ 1. !（Non-null Assertion Operator）とは？
+TypeScriptの!（ノン・ヌル・アサーション演算子）は
+「この値は絶対にnullやundefinedじゃないよ」とコンパイラに伝えるための記号です。
+
+
+ 2. this.player = null!; の挙動
+
+
+null! は「nullだけど、nullじゃないとみなして！」という意味です。
+つまり、TypeScriptの型チェックを一時的にごまかして、nullを代入しています。
+
+
+
+ 3. どんなときに使う？
+
+クラスのプロパティを「とりあえずn...]]></description><link>https://zenn.dev/btc/articles/250522_typescript_null_exclamation</link><guid isPermaLink="true">https://zenn.dev/btc/articles/250522_typescript_null_exclamation</guid><pubDate>Thu, 22 May 2025 02:00:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GGhxi-PB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:this.player%2520%253D%2520null%2521%253B%2520%25E3%2581%25AE%25E6%2584%258F%25E5%2591%25B3%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:my%2520log%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzEwODIzM2M5OGYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>my log</dc:creator></item><item><title><![CDATA[nullの扱いに注意...(TSでの工夫)]]></title><description><![CDATA[!
+後日追記
+この記事を読むにあたって私の知識の乏しさと勢いとノリで書いてしまった部分もあるので間違っている部分が多くあると思います。
+数件コメントをいただきましたが、参考になるコメントです。
+コメントを踏まえた上でリプレイスしてみました。
+それも踏まえた上で読んでいただけると幸いです。
+
+こんにちは。
+てるし〜です。
+JavascriptやTypescriptでプログラムを書いているとnullが出てくると思います。
+みなさんはこれらを使っていますか？
+nullを使う場合はしっかりとハンドリングする必要があります。
+ですが、経験の浅い私はうっかり雑なハンドリングをしてしまいバグを起こして...]]></description><link>https://zenn.dev/terusi/articles/e243ead933d406</link><guid isPermaLink="true">https://zenn.dev/terusi/articles/e243ead933d406</guid><pubDate>Wed, 21 May 2025 19:04:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--S3gUt41P--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:null%25E3%2581%25AE%25E6%2589%25B1%25E3%2581%2584%25E3%2581%25AB%25E6%25B3%25A8%25E6%2584%258F...%2528TS%25E3%2581%25A7%25E3%2581%25AE%25E5%25B7%25A5%25E5%25A4%25AB%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A6%25E3%2582%258B%25E3%2581%2597%25E3%2580%259C%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRlM2M5MzkyNjguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>てるし〜</dc:creator></item><item><title><![CDATA[Google Gemini APIで複数話者テキスト音声合成（TTS）を実現！会話を自然な声で生成]]></title><description><![CDATA[
+ はじめに
+近年、AI技術の進化は目覚ましく、特にテキスト音声合成（Text-to-Speech: TTS）は、その品質と表現力が飛躍的に向上しています。これまでは単一話者の音声合成が主流でしたが、Google Gemini APIを使うことで、なんと複数話者の会話を、それぞれの話者に異なる声色を割り当てて自然に生成できるようになりました。
+本記事では、Google Gemini APIの新しいTTS機能 gemini-2.5-flash-preview-tts モデルとTypeScriptを使用して、複数話者での会話を音声ファイルとして出力する実装方法を解説します。ポッドキャスト、オ...]]></description><link>https://zenn.dev/coji/articles/gemini-multi-speaker-tts</link><guid isPermaLink="true">https://zenn.dev/coji/articles/gemini-multi-speaker-tts</guid><pubDate>Wed, 21 May 2025 15:19:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xprTlpbG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Google%2520Gemini%2520API%25E3%2581%25A7%25E8%25A4%2587%25E6%2595%25B0%25E8%25A9%25B1%25E8%2580%2585%25E3%2583%2586%25E3%2582%25AD%25E3%2582%25B9%25E3%2583%2588%25E9%259F%25B3%25E5%25A3%25B0%25E5%2590%2588%25E6%2588%2590%25EF%25BC%2588TTS%25EF%25BC%2589%25E3%2582%2592%25E5%25AE%259F%25E7%258F%25BE%25EF%25BC%2581%25E4%25BC%259A%25E8%25A9%25B1%25E3%2582%2592%25E8%2587%25AA%25E7%2584%25B6%25E3%2581%25AA%25E5%25A3%25B0%25E3%2581%25A7%25E7%2594%259F%25E6%2588%2590%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Coji%2520Mizoguchi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pWY2RrNjcwV2NIdGs0anBHa2FGTDAxcERVUVlIX0JYdWE5aDRVNVE9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Coji Mizoguchi</dc:creator></item></channel></rss>
