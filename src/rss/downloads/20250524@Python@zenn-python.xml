@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Sat, 24 May 2025 05:14:51 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[既存Pythonプロジェクトをuv管理へ移行する動機と方法]]></title><description><![CDATA[
+ 記事概要
+既存Pythonプロジェクトをuv管理へ移行する動機やその方法を記載します。
+uvの詳しい使い方についてはこの記事ではカバーしません。（別途記事作成予定）
+注：本記事の内容はuvのv0.6.13時の情報に基づきます。最新情報は公式Docを参照ください
+
+ 想定読者
+
+uvは気になっているが移行に二の足を踏んでいるような人
+
+→とりあえずブランチ切って移行してみて使い心地を体験すると良いと思います。
+
+
+
+
+ Pythonプロジェクトのよくある既存構成
+既存Pythonプロジェクトはここではよくある以下の構成を想定とします。
+
+
+
+管理対象
+管理方法
+
+
+
+
+Pythonバー...]]></description><link>https://zenn.dev/teihenn/articles/202504-how-to-migrate-to-uv</link><guid isPermaLink="true">https://zenn.dev/teihenn/articles/202504-how-to-migrate-to-uv</guid><pubDate>Sat, 24 May 2025 03:53:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--uKqyn17---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%2597%25A2%25E5%25AD%2598Python%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E3%2582%2592uv%25E7%25AE%25A1%25E7%2590%2586%25E3%2581%25B8%25E7%25A7%25BB%25E8%25A1%258C%25E3%2581%2599%25E3%2582%258B%25E5%258B%2595%25E6%25A9%259F%25E3%2581%25A8%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yyossy%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2YzNmIwMjg3YzkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yyossy</dc:creator></item><item><title><![CDATA[サカバンバスピス(模型の方)のプリクラを作った]]></title><description><![CDATA[
+ Intro
+ハロー！MAYAです。
+1年半ぐらいに作ったSAKABANN_Timeを解説していきます。
+環境依存が激しくて今のところラズパイ以外では動いたことがないのですが
+動いてる画像がこれしかなかった…しかもズレてる
+こんな感じになってます。
+
+ Main
+全体像がこんな感じです
+https://github.com/PGA942/SAKABANN-Time/blob/main/kaohaihu.py
+GitHub見れない人向け
+kaohaihu.py
+import cv2
+import numpy as np
+cascade = cv2.CascadeClassifier("/...]]></description><link>https://zenn.dev/xepos/articles/0b6a508965020e</link><guid isPermaLink="true">https://zenn.dev/xepos/articles/0b6a508965020e</guid><pubDate>Fri, 23 May 2025 22:41:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hVDh-QdU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B5%25E3%2582%25AB%25E3%2583%2590%25E3%2583%25B3%25E3%2583%2590%25E3%2582%25B9%25E3%2583%2594%25E3%2582%25B9%2528%25E6%25A8%25A1%25E5%259E%258B%25E3%2581%25AE%25E6%2596%25B9%2529%25E3%2581%25AE%25E3%2583%2597%25E3%2583%25AA%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:MAYA_Vistro%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdjYTYwY2ExZDcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>MAYA_Vistro</dc:creator></item><item><title><![CDATA[プログラミング言語が多すぎる！！]]></title><description><![CDATA[
+ 初めに
+４月末にサークルに入ったばかりで分からないことばかりですが、よろしくお願いします。
+
+ 言語多くね？
+このサークルに入ってまず、dartって何だ？となりました。
+そもそも私が知っていたのってpython、c言語くらいでした。
+それが急にjava、c++、c#、dartと知らない言語が身近なものとなり、いろいろと違いを調べてみました。ぜひ読んでみてください。
+
+ python
+pythonは１番有名な言語だと私は思ってます。
+現段階で私はまだ学んでいませんが、秋ごろから学べたらいいと思っています。
+調べたところ、pythonはwebアプリ開発や人工知能の開発が得意らしく、また、...]]></description><link>https://zenn.dev/pochipochitudoi/articles/6c86a66ce14bf3</link><guid isPermaLink="true">https://zenn.dev/pochipochitudoi/articles/6c86a66ce14bf3</guid><pubDate>Fri, 23 May 2025 20:46:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--JsWx3bbN--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%259F%25E3%2583%25B3%25E3%2582%25B0%25E8%25A8%2580%25E8%25AA%259E%25E3%2581%258C%25E5%25A4%259A%25E3%2581%2599%25E3%2581%258E%25E3%2582%258B%25EF%25BC%2581%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%25B0%25E3%2581%25AC%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQwMGFjMDNhYWQuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2581%25BD%25E3%2581%25A1%25E3%2581%25BD%25E3%2581%25A1%25E3%2581%25AE%25E3%2581%25A4%25E3%2581%25A9%25E3%2581%2584%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I5MjNmMmQyMTYuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ばぬ</dc:creator></item><item><title><![CDATA[BFSをステップバイステップで実装してみよう]]></title><description><![CDATA[
+ BFS（幅優先探索）の実装手順まとめ
+
+
+ ✅ 目標
+BFS（幅優先探索）を**deque（キュー）**構造で実装しながら、
+探索の流れとコードの仕組みを体系的に理解する。
+
+
+ 📌 ステップごとの解説
+
+ 【ステップ1】グラフの基本構造を作る
+n, m, v = map(int, input().split())
+graph = [[] for _ in range(n)]
+
+for _ in range(m):
+    a, b = map(int, input().split())
+    graph[a].append(b)
+    graph[b].append(a)
+
+f...]]></description><link>https://zenn.dev/kmj13/articles/bfs_step_by_step_ja</link><guid isPermaLink="true">https://zenn.dev/kmj13/articles/bfs_step_by_step_ja</guid><pubDate>Fri, 23 May 2025 12:50:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--RgQs4Hjc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:BFS%25E3%2582%2592%25E3%2582%25B9%25E3%2583%2586%25E3%2583%2583%25E3%2583%2597%25E3%2583%2590%25E3%2582%25A4%25E3%2582%25B9%25E3%2583%2586%25E3%2583%2583%25E3%2583%2597%25E3%2581%25A7%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%2588%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kmj99%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSno0azlnb19fcW1fbjVxdkFCYkJNU2U5X2VfYWZkTGEtbHVNZDFXR2pWV05CZTBnPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kmj99</dc:creator></item><item><title><![CDATA[PythonとOpenAI APIで実践！MCP開発入門 【第4回】コードでAIと初対話！リクエストを送信、JSONレスポンスを体験]]></title><description><![CDATA[
+ はじめに：理論から実践へ！AIとのファーストコンタクト、その瞬間
+皆さん、こんにちは！AI開発の冒険、第4回です。前回（第3回）では、OpenAI APIを利用するための「通行証」であるAPIキーを取得し、それを環境変数と .envファイル 、そして .gitignore を駆使して、プロフェッショナルかつ安全に管理する鉄壁のテクニックを学びました。これで、私たちはAIの強力な能力を安全に呼び出す準備が整いました。
+今回は、まさにその瞬間、理論が実践へと変わるエキサイティングなステップです！ 私たちが書いたPythonのコードから、実際にOpenAIのAIモデル（今回は広く使われてい...]]></description><link>https://zenn.dev/querypie/articles/fe632f440a466d</link><guid isPermaLink="true">https://zenn.dev/querypie/articles/fe632f440a466d</guid><pubDate>Fri, 23 May 2025 11:28:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vkt0Ke4k--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A8OpenAI%2520API%25E3%2581%25A7%25E5%25AE%259F%25E8%25B7%25B5%25EF%25BC%2581MCP%25E9%2596%258B%25E7%2599%25BA%25E5%2585%25A5%25E9%2596%2580%2520%25E3%2580%2590%25E7%25AC%25AC4%25E5%259B%259E%25E3%2580%2591%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2581%25A7AI%25E3%2581%25A8%25E5%2588%259D%25E5%25AF%25BE%25E8%25A9%25B1%25EF%25BC%2581%25E3%2583%25AA%25E3%2582%25AF%25E3%2582%25A8%25E3%2582%25B9%25E3%2583%2588%25E3%2582%2592%25E9%2580%2581%25E4%25BF%25A1%25E3%2580%2581JSO...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:QueryPie%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk1MzUyMzdkYzguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>QueryPie</dc:creator></item><item><title><![CDATA[PythonとOpenAI APIで実践！MCP開発入門 【第3回】 AIへの「通行証」- OpenAI APIキー発行と安全な管理設定方法]]></title><description><![CDATA[
+ はじめに - AI開発の「鍵」を手に入れ、鉄壁の守りを固める！
+皆さん、こんにちは！前回の第2回では、OpenAI APIが持つ驚異的な能力と、AIを真に賢くする「コンテキスト（MCPの考え方）」の重要性について学びましたね。AIが私たちの言葉や状況を理解し、まるで人間のように対話したり、創造的なタスクをこなしたりする未来に、きっと胸が躍ったことでしょう。
+さて、その強力なAIの能力を私たちのPythonプログラムから利用するためには、OpenAIのサービスに対する 「通行証」 、すなわち 「APIキー」 が必要になります。これは、あなたが正当な利用者であることを証明し、OpenAI...]]></description><link>https://zenn.dev/querypie/articles/91aee7e3e51373</link><guid isPermaLink="true">https://zenn.dev/querypie/articles/91aee7e3e51373</guid><pubDate>Fri, 23 May 2025 11:23:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--aePfwxM2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A8OpenAI%2520API%25E3%2581%25A7%25E5%25AE%259F%25E8%25B7%25B5%25EF%25BC%2581MCP%25E9%2596%258B%25E7%2599%25BA%25E5%2585%25A5%25E9%2596%2580%2520%25E3%2580%2590%25E7%25AC%25AC3%25E5%259B%259E%25E3%2580%2591%2520AI%25E3%2581%25B8%25E3%2581%25AE%25E3%2580%258C%25E9%2580%259A%25E8%25A1%258C%25E8%25A8%25BC%25E3%2580%258D-%2520OpenAI%2520API%25E3%2582%25AD...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:QueryPie%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk1MzUyMzdkYzguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>QueryPie</dc:creator></item><item><title><![CDATA[Azure FunctionでMCPサーバーのデプロイのやり方:その１]]></title><description><![CDATA[今日はAzure Functionを使って最近の話題のMCPサーバーの立て方についてお話しします。MCPサーバーに馴染みのない方はModel Context Protocolの公式ドキュメントを参考にして下さい。
+Azure FunctionでMCPサーバーのデプロイに二つのステップがあります。
+
+Azure上でAzure Functionの設定
+設定されたAzure FunctionにMCPサーバーのコードをデプロイ
+
+
+ Azure 上でAzure Functionの設定
+画像を使用して詳細を話しませんが、設定のステップを以下に述べますので、Azure Portal上それぞれの具体的...]]></description><link>https://zenn.dev/dxclab/articles/e5b0e01bd534f0</link><guid isPermaLink="true">https://zenn.dev/dxclab/articles/e5b0e01bd534f0</guid><pubDate>Fri, 23 May 2025 10:34:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--tV0WhwDP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Azure%2520Function%25E3%2581%25A7MCP%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2581%25AE%25E3%2583%2587%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25A4%25E3%2581%25AE%25E3%2582%2584%25E3%2582%258A%25E6%2596%25B9%253A%25E3%2581%259D%25E3%2581%25AE%25EF%25BC%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Mustahid%2520Ahmed%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNlN2I4MjBlOGUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:DXC%2520Lab%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSV90TGZNaEtmUjJCTENPd2hIUFlKejV1dk9NY0ZNMGcyTHdvaFlQcDdGUlpZMDZRPXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Mustahid Ahmed</dc:creator></item><item><title><![CDATA[Laravel 経験者のための FastAPI チャットボット構成ガイド（初心者向け）]]></title><description><![CDATA[Laravelに慣れた筆者が FastAPIでチャットボットアプリを開発する際、「慣れ親しんだ構造で学びたい」という思いから、AIとの壁打ちで「Laravel風FastAPI ディレクトリ構造」考えたので紹介する。
+
+
+ ディレクトリ構成（筆者のような初心者向け）
+chatbot_app/
+├── main.py                    # アプリのエントリーポイント
+├── app/
+│   ├── routers/               # URLルーティング
+│   │   └── chat.py
+│   ├── controllers/           #...]]></description><link>https://zenn.dev/nunu_nai/articles/bd3453b827d8c6</link><guid isPermaLink="true">https://zenn.dev/nunu_nai/articles/bd3453b827d8c6</guid><pubDate>Fri, 23 May 2025 09:26:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0dQ5XaMn--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Laravel%2520%25E7%25B5%258C%25E9%25A8%2593%25E8%2580%2585%25E3%2581%25AE%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%2520FastAPI%2520%25E3%2583%2581%25E3%2583%25A3%25E3%2583%2583%25E3%2583%2588%25E3%2583%259C%25E3%2583%2583%25E3%2583%2588%25E6%25A7%258B%25E6%2588%2590%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%25EF%25BC%2588%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E5%2590%2591%25E3%2581%2591%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AC%25E3%2581%25AC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2UyNTU3YmJlMzcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ぬぬ</dc:creator></item><item><title><![CDATA[手を動かして学ぶ！MCPステップバイステップ実践ガイド for Beginners - Vol.7 MCP通信のエラー処理]]></title><description><![CDATA[
+ はじめに
+皆さん、こんにちは！「手を動かして学ぶ！MCPステップバイステップ実践ガイド for Beginners」へようこそ。このシリーズでは、Model Context Protocol (MCP) という仕組みを、Pythonを使って実際に手を動かしながら学んでいます。
+前回 (Vol.6 MCPモデル情報の登録(POST)＆更新(PUT)) は、クライアントからサーバーへ新しい情報を登録したり(POST)、既存の情報を更新したり(PUT)する方法を学びましたね。これで、MCPデバイスの情報を読み取るだけでなく、作成・更新もできるようになりました。
+しかし、プログラムの世界では...]]></description><link>https://zenn.dev/querypie/articles/82062ea23a1227</link><guid isPermaLink="true">https://zenn.dev/querypie/articles/82062ea23a1227</guid><pubDate>Fri, 23 May 2025 06:40:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--e27-RicE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%2589%258B%25E3%2582%2592%25E5%258B%2595%25E3%2581%258B%25E3%2581%2597%25E3%2581%25A6%25E5%25AD%25A6%25E3%2581%25B6%25EF%25BC%2581MCP%25E3%2582%25B9%25E3%2583%2586%25E3%2583%2583%25E3%2583%2597%25E3%2583%2590%25E3%2582%25A4%25E3%2582%25B9%25E3%2583%2586%25E3%2583%2583%25E3%2583%2597%25E5%25AE%259F%25E8%25B7%25B5%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%2520for%2520Beginners%2520-%2520Vol.7%2520MCP%25E9%2580%259A%25E4%25BF%25A1%25E3%2581%25AE%25E3%2582%25A8...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:QueryPie%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk1MzUyMzdkYzguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>QueryPie</dc:creator></item><item><title><![CDATA[コヨーテAIを作ってみた話  (不完全情報ゲームにDeepCFR風DQNを適用してみる)]]></title><description><![CDATA[
+ コヨーテAIを作ってみた話 〜不完全情報ゲームにDeepCFR風DQNを適用してみる〜
+こんにちは、今回はカードゲーム「コヨーテ（Coyote）」のAIを作った話をZenn記事風にまとめてみます。不完全情報ゲームの中でも特殊なこのゲームに対し、ルールベースAIとDQN風戦略ネットワークを組み合わせて構築しました。
+
+ コヨーテってどんなゲーム？
+コヨーテは「自分のカードだけ見えない」というユニークなルールのゲームです。以下のような特徴があります。
+・全員がカードを1枚ずつ持っており、自分のカードは見えない
+・順番に場の合計値を推測して「30！」などと宣言する
+・宣言が回ってきた時に「...]]></description><link>https://zenn.dev/back77/articles/a51abfa123c3d8</link><guid isPermaLink="true">https://zenn.dev/back77/articles/a51abfa123c3d8</guid><pubDate>Fri, 23 May 2025 02:49:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hf8WIwpN--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B3%25E3%2583%25A8%25E3%2583%25BC%25E3%2583%2586AI%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25E8%25A9%25B1%2520%2520%2528%25E4%25B8%258D%25E5%25AE%258C%25E5%2585%25A8%25E6%2583%2585%25E5%25A0%25B1%25E3%2582%25B2%25E3%2583%25BC%25E3%2583%25A0%25E3%2581%25ABDeepCFR%25E9%25A2%25A8DQN%25E3%2582%2592%25E9%2581%25A9%25E7%2594%25A8%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Back%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVhMDc1NjQ3M2IuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Back</dc:creator></item><item><title><![CDATA[ぴちぴちJK(情報系高専生)と学ぶDeepLearningとは？【ニンゲンとAI編】]]></title><description><![CDATA[
+ ご挨拶
+どうもこんにちは。🥧です。元々はnoteでテクノロジーに興味のある人に向けて記事を書いていたのですが、Zennという素晴らしいプラットフォームを見つけたので、noteで執筆した記事をブラッシュアップして投稿していきます。
+改善点や良いと思ったところなどコメントしていただけると嬉しいです。
+
+ AI（人工知能）ってなんなの？
+最近よく耳にする エーアイ（AI）。
+でも皆さん、本当にこの言葉の意味、ちゃんと理解していますか？
+AIとは、
+Artificial（人工的な）Intelligence（知能）の略。
+つまり、人工知能。
+日本語にするとあまりにも直訳で、逆に意味が伝わりづら...]]></description><link>https://zenn.dev/pai314159265358/articles/5159b52bcd5e48</link><guid isPermaLink="true">https://zenn.dev/pai314159265358/articles/5159b52bcd5e48</guid><pubDate>Fri, 23 May 2025 01:58:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lHdJ7M9M--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%25B4%25E3%2581%25A1%25E3%2581%25B4%25E3%2581%25A1JK%2528%25E6%2583%2585%25E5%25A0%25B1%25E7%25B3%25BB%25E9%25AB%2598%25E5%25B0%2582%25E7%2594%259F%2529%25E3%2581%25A8%25E5%25AD%25A6%25E3%2581%25B6DeepLearning%25E3%2581%25A8%25E3%2581%25AF%25EF%25BC%259F%25E3%2580%2590%25E3%2583%258B%25E3%2583%25B3%25E3%2582%25B2%25E3%2583%25B3%25E3%2581%25A8AI%25E7%25B7%25A8%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:pai314%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNhMmVhNDU5YzMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>pai314</dc:creator></item><item><title><![CDATA[【初心者向け】Pythonの remove() と pop() の違いを解説]]></title><description><![CDATA[
+ はじめに
+Pythonでリストから要素を取り除きたいとき、remove() と pop() の2つのメソッドがあります。
+しかし、
+
+「この2つの違いがよく分からない」
+「どっちを使えばいいのか分からない」
+
+という初心者の方も多いのではないでしょうか？
+本記事では、remove() と pop() の違いと使い分け方を解説します。
+
+ remove()：値を指定して削除する
+fruits = ['apple', 'banana', 'orange']
+fruits.remove('banana')
+print(fruits)  # ['apple', 'orange']
+
+ ✅ ポ...]]></description><link>https://zenn.dev/fd2025/articles/9a893c19f6a3d6</link><guid isPermaLink="true">https://zenn.dev/fd2025/articles/9a893c19f6a3d6</guid><pubDate>Thu, 22 May 2025 21:42:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--u4cSXsOO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E5%2590%2591%25E3%2581%2591%25E3%2580%2591Python%25E3%2581%25AE%2520remove%2528%2529%2520%25E3%2581%25A8%2520pop%2528%2529%2520%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%25E3%2582%2592%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:fd2025%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2EzMzVlNTI5MmQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>fd2025</dc:creator></item><item><title><![CDATA[uv + ruff + tyを使ったモダンな環境でdiscord bot作ってみよう]]></title><description><![CDATA[
+ 記事の趣旨
+今回は、Astral社のツールを使ったモダンな環境でdiscord botを作っていこうという趣旨の記事です。
+ただ、メッセージを送るbotだと単純すぎるのでModalやViewを使ったより実践的なBotを作っていきます。
+
+ 対象読者
+一応、Python の書き方がわかれば読めるくらいの難易度ですがデコレーターや非同期処理はちょっと難しいかもしれないです。
+
+ Astral社とは
+Astral社は、uvやruff、tyなど次世代のPythonツールを作っている会社です。
+https://astral.sh/
+この会社が作っているツールのおかげで、Pythonの開発体験が...]]></description><link>https://zenn.dev/thirdlf/articles/26-zenn-uv-discordpy</link><guid isPermaLink="true">https://zenn.dev/thirdlf/articles/26-zenn-uv-discordpy</guid><pubDate>Thu, 22 May 2025 14:08:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wP1fFIyJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:uv%2520%252B%2520ruff%2520%252B%2520ty%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%259F%25E3%2583%25A2%25E3%2583%2580%25E3%2583%25B3%25E3%2581%25AA%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25A7discord%2520bot%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%2588%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:thirdlf%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZkMDkwNDAyMzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>thirdlf</dc:creator></item><item><title><![CDATA[PythonとOpenAI APIで実践！MCP開発入門 【第3回】 AIへの「通行証」- APIキー発行と安全な管理・設定テクニック]]></title><description><![CDATA[
+ はじめに - AI開発の「鍵」を手に入れ、鉄壁の守りを固める！
+皆さん、こんにちは！前回の第2回では、OpenAI APIが持つ驚異的な能力と、AIを真に賢くする「コンテキスト（MCPの考え方）」の重要性について学びましたね。AIが私たちの言葉や状況を理解し、まるで人間のように対話したり、創造的なタスクをこなしたりする未来に、きっと胸が躍ったことでしょう。
+さて、その強力なAIの能力を私たちのPythonプログラムから利用するためには、OpenAIのサービスに対する 「通行証」 、すなわち 「APIキー」 が必要になります。これは、あなたが正当な利用者であることを証明し、OpenAI...]]></description><link>https://zenn.dev/querypie/articles/07fbc1c9af374f</link><guid isPermaLink="true">https://zenn.dev/querypie/articles/07fbc1c9af374f</guid><pubDate>Thu, 22 May 2025 13:42:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--PuItvs9B--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A8OpenAI%2520API%25E3%2581%25A7%25E5%25AE%259F%25E8%25B7%25B5%25EF%25BC%2581MCP%25E9%2596%258B%25E7%2599%25BA%25E5%2585%25A5%25E9%2596%2580%2520%25E3%2580%2590%25E7%25AC%25AC3%25E5%259B%259E%25E3%2580%2591%2520AI%25E3%2581%25B8%25E3%2581%25AE%25E3%2580%258C%25E9%2580%259A%25E8%25A1%258C%25E8%25A8%25BC%25E3%2580%258D-%2520API%25E3%2582%25AD%25E3%2583%25BC%25E7%2599%25BA%25E8%25A1%258C%25E3%2581%25A8%25E5%25AE%2589%25E5%2585%25A8%25E3%2581%25AA...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:QueryPie%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk1MzUyMzdkYzguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>QueryPie</dc:creator></item><item><title><![CDATA[keyhacでWindowWalkerもどき]]></title><description><![CDATA[https://github.com/betsegaw/windowwalker
+2025年5月現在、PowerToysのランチャであるPowerToys Runのプラグインとして組み込まれています。
+ランチャ上で &lt; に続けた入力から開いているウィンドウを絞り込んでアクティブ化する機能で、Alt+Tab連打から解放してくれる神ツールです。
+今回はkeyhacでこのツールを再現してみようと思います。
+
+ 完成形
+コード全体（最低限の記述でもなかなかのボリューム）import time
+import shutil
+import subprocess
+
+import ckit
+impo...]]></description><link>https://zenn.dev/awtnb/articles/389c0d9a9578a5</link><guid isPermaLink="true">https://zenn.dev/awtnb/articles/389c0d9a9578a5</guid><pubDate>Thu, 22 May 2025 12:14:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--gAm5caLm--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:keyhac%25E3%2581%25A7WindowWalker%25E3%2582%2582%25E3%2581%25A9%25E3%2581%258D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:AWtnb%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E2MTdhZTAxZjQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>AWtnb</dc:creator></item><item><title><![CDATA[Pythonを利用してPub/Subトピックを扱ってみた]]></title><description><![CDATA[今回はPythonを利用して、Google CloudのPub/Subを利用してみました。認定資格の勉強中にももちろん出てきますし、以前実施したGCSとDataflowの連携においてもPub/Subを利用しました。Pub/SubはGoogle Cloudのサービスの中でも特に重要な要素の一つだと思いますが、直接利用したことがなかったので、PythonのSDKを利用して実際に使ってみました。
+https://zenn.dev/akasan/articles/e17a1867408c53
+
+ 実際に使ってみる
+今回は、公式のこちらのドキュメントに従ってチュートリアルをしてみようと思います！
+...]]></description><link>https://zenn.dev/akasan/articles/471883f3a9495f</link><guid isPermaLink="true">https://zenn.dev/akasan/articles/471883f3a9495f</guid><pubDate>Thu, 22 May 2025 12:00:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wOxCHAS7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2582%2592%25E5%2588%25A9%25E7%2594%25A8%25E3%2581%2597%25E3%2581%25A6Pub%252FSub%25E3%2583%2588%25E3%2583%2594%25E3%2583%2583%25E3%2582%25AF%25E3%2582%2592%25E6%2589%25B1%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Akasan%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUVkRlRwNXJfNDFtel9OY3dPYUtMRE1vc09tbVB6YmxHM0V5N3lNZzI3QWM9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Akasan</dc:creator></item><item><title><![CDATA[PyMuPDFライブラリを用いてPDFファイルにヘッダーを表記する]]></title><description><![CDATA[
+ 概要
+筆者の本業は弁護士です。
+裁判所に証拠を提出する際、「甲１、２、３、…」「乙１、２、３、…」といった形で証拠番号を表記しなければならないのですが、事務局が紙媒体にスタンプ＋手書きをしたり、Acrobatでヘッダーを追加したりといった方法で対応してきました。
+例）
+
+今般、申立時から証拠の数が200に届きそうな案件があり、手動でやるのがめんどくさいので、pythonとPyMuPDFライブラリを用いて、複数ファイルに対し自動で番号を表記してくれるetc.のツールセットを作りました。
+https://pymupdf.readthedocs.io/ja/latest/index.htm...]]></description><link>https://zenn.dev/t_xi/articles/220cf8cf3d04fe</link><guid isPermaLink="true">https://zenn.dev/t_xi/articles/220cf8cf3d04fe</guid><pubDate>Thu, 22 May 2025 10:52:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--L7BY5Zid--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:PyMuPDF%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%25E3%2582%2592%25E7%2594%25A8%25E3%2581%2584%25E3%2581%25A6PDF%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2581%25AB%25E3%2583%2598%25E3%2583%2583%25E3%2583%2580%25E3%2583%25BC%25E3%2582%2592%25E8%25A1%25A8%25E8%25A8%2598%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%2528%25C2%25B4%25E3%2583%25BB%25CF%2589%25E3%2583%25BB%25EF%25BD%2580%2529%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTEEyRmFmZjBTSUh6U0FVOUtGTGpYX21SVU9xTktKNVVoU2ZEbkNOODViTkp4M2p1c0s9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>(´・ω・｀)</dc:creator></item><item><title><![CDATA[CloudTrailを使わずにIAMアクションの棚卸し補助を行うCLIツールを作成した話]]></title><description><![CDATA[IAMポリシーの最適化や棚卸しを行うにあたって、アクションの使用状況を把握することは重要ですが、実際の運用では判断が難しい場面が多くあります。
+この記事では、CloudTrailやAccess Analyzerのリソースを利用せずに、IAMの「最終アクセス情報」APIと独自のアクションカタログを用いて、未使用とみなせるアクションを抽出するために実装したCLIツール iam-action-catalog ついて紹介します。
+https://github.com/tanagumo/iam-action-catalog
+
+
+ 1. 作成の背景
+
+ アクションの棚卸しにおける課題
+
+どのアクショ...]]></description><link>https://zenn.dev/tanagumo/articles/056e54ae2dd460</link><guid isPermaLink="true">https://zenn.dev/tanagumo/articles/056e54ae2dd460</guid><pubDate>Thu, 22 May 2025 10:05:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--AIFiaI4U--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:CloudTrail%25E3%2582%2592%25E4%25BD%25BF%25E3%2582%258F%25E3%2581%259A%25E3%2581%25ABIAM%25E3%2582%25A2%25E3%2582%25AF%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2581%25AE%25E6%25A3%259A%25E5%258D%25B8%25E3%2581%2597%25E8%25A3%259C%25E5%258A%25A9%25E3%2582%2592%25E8%25A1%258C%25E3%2581%2586CLI%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%25E3%2582%2592%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2597%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tanagumo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lWaFJKdEozT0Rnd3Uyd3hub3FRU1I5ZnM1elNGd29FamRXYWhNPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tanagumo</dc:creator></item><item><title><![CDATA[【Python】 FastAPI + Lambda Web Adapter コンテナをマルチステージビルドで作成する]]></title><description><![CDATA[
+ はじめに
+こんにちは、がんがんです。
+生成AI・MCPは凄まじい速度で進化しており気づいたら知らないものが登場している印象です。Codex、MCP on Windowsが登場してびっくりしています。
+個人でも活用できる点を増やしたいなと考え、Lambda MCP Server、AWS Chatbot + Bedrockについて調査を進めています。
+前段としてFastAPI + Lambda Web Adapter on Dockerコンテナを作成したところ、思ったよりも時間がかかってしまい結構つまずきました。
+そこで備忘録を残しておきます。
+
+ まとめ
+# Base image
+FR...]]></description><link>https://zenn.dev/gangannikki/articles/fastapi-on-docker</link><guid isPermaLink="true">https://zenn.dev/gangannikki/articles/fastapi-on-docker</guid><pubDate>Thu, 22 May 2025 10:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xXp45d7I--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591%2520FastAPI%2520%252B%2520Lambda%2520Web%2520Adapter%2520%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2586%25E3%2583%258A%25E3%2582%2592%25E3%2583%259E%25E3%2583%25AB%25E3%2583%2581%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%2593%25E3%2583%25AB%25E3%2583%2589%25E3%2581%25A7%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:GANGAN%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2YzNjRkNWJmZGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>GANGAN</dc:creator></item><item><title><![CDATA[TechCrunch記事を要約・翻訳してDiscord経由で自動投稿するBotを構築する]]></title><description><![CDATA[
+ はじめに
+こんにちは:)
+今回は、TechCrunchの最新記事を自動取得し、Dicsordに翻訳・要約付きでチャンネルに告知するDicordBotを構築します。
+いきなりですが、みなさまは最新の毎朝ニュースサイトをチェックするの正直めんどくさくないですか？
+今回つくったのは、海外テックメディア「TechCrunch」の最新記事をDiscordに自動で投稿し、さらに「この記事ってどういうこと？」みたいな質問にも答えてくれる、ちょっと賢いニュースBotです。
+そんな仕組みを、今回も一から構築したので、このあと実装ステップ・サンプルコードも交えて紹介していきます！
+
+ 背景と課題
+海外の...]]></description><link>https://zenn.dev/solvio/articles/3374bb15aca47f</link><guid isPermaLink="true">https://zenn.dev/solvio/articles/3374bb15aca47f</guid><pubDate>Thu, 22 May 2025 07:19:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--pPVYq8ws--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TechCrunch%25E8%25A8%2598%25E4%25BA%258B%25E3%2582%2592%25E8%25A6%2581%25E7%25B4%2584%25E3%2583%25BB%25E7%25BF%25BB%25E8%25A8%25B3%25E3%2581%2597%25E3%2581%25A6Discord%25E7%25B5%258C%25E7%2594%25B1%25E3%2581%25A7%25E8%2587%25AA%25E5%258B%2595%25E6%258A%2595%25E7%25A8%25BF%25E3%2581%2599%25E3%2582%258BBot%25E3%2582%2592%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:okawa_%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhlNjEyZGFhZWIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Solvio%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzkxNjU0ZTk1MmUuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>okawa_</dc:creator></item></channel></rss>
