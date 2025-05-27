@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Tue, 27 May 2025 11:12:15 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[snowflake-connectorを使用する]]></title><description><![CDATA[
+ はじめに
+snowflakeをpythonライブラリのsnowflake-connectorを使ってキーペア認証で操作をしてみました。
+
+ 準備
+
+ インストール
+python &gt;= 3.8が条件です。
+$ pip install snowflake-connector-python
+バージョン管理ツールpoetryを使って仮想環境に使いたい場合は
+$ pip install poetry
+$ poetry new snowflake_python
+$ poetry config virtualenvs.in-project true
+$ poetry add snowflak...]]></description><link>https://zenn.dev/wannyannyanwan/articles/ba36acd2e7ffd9</link><guid isPermaLink="true">https://zenn.dev/wannyannyanwan/articles/ba36acd2e7ffd9</guid><pubDate>Tue, 27 May 2025 11:06:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dF1ZXGHr--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:snowflake-connector%25E3%2582%2592%25E4%25BD%25BF%25E7%2594%25A8%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Mikage_Sumiyoshi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NiNTBkZjZiMDcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Mikage_Sumiyoshi</dc:creator></item><item><title><![CDATA[おうちで拡散言語モデル「Dream 7B(4bit)」を試す]]></title><description><![CDATA[
+ おうちで拡散言語モデル「Dream 7B(4bit)」を試す
+Google I/OでのGemini Diffusion発表を皮切りにDiffusion系の言語モデルが話題になっています.
+流れに乗ってDiffusion系の言語モデルを家で試してみたいけど, 一般的にDiffusion系の言語モデルはGPUのVRAMを大量に消費するため, 手元のPCでは試すことはTransformaer系の言語モデルと比較して難しいようです.
+この記事では一般?のご家庭にあるPC(VRAMが10GB程度)で試しやすい, 拡散言語モデルDream 7Bを4bit量子化したDream 7B(4bit)を動...]]></description><link>https://zenn.dev/kappa1779/articles/5e78d4a867bf3a</link><guid isPermaLink="true">https://zenn.dev/kappa1779/articles/5e78d4a867bf3a</guid><pubDate>Tue, 27 May 2025 09:54:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--U2FPC4ml--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%258A%25E3%2581%2586%25E3%2581%25A1%25E3%2581%25A7%25E6%258B%25A1%25E6%2595%25A3%25E8%25A8%2580%25E8%25AA%259E%25E3%2583%25A2%25E3%2583%2587%25E3%2583%25AB%25E3%2580%258CDream%25207B%25284bit%2529%25E3%2580%258D%25E3%2582%2592%25E8%25A9%25A6%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:AI%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4Yi03c2lGV3ZrVm84NW1VYjBkZV9EOHVVa1pBLXltYnFhQndEZXk9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>AI</dc:creator></item><item><title><![CDATA[Qwen3の思考を日本語に！~Qwen3の日本語思考力を獲得する手法~]]></title><description><![CDATA[
+ 概要
+Qwen3には、&lt;think&gt;というタグを使ってモデルが思考するプロセスが搭載されています。
+これにより、数学やコーディングのような思考が必要なタスクへの理解が深まると同時に、AIがどのように結論に至ったかの推論（Reasoning）を確認でき、AIの解釈性向上に繋がります。
+しかし、この&lt;think&gt;内の思考は、ほとんどの場合英語で出力されます。日本人ユーザーにとっては、思考プロセスも日本語で読みたいもの。かといって、その都度翻訳するのは手間がかかります。
+本記事では、Qwen3の思考を日本語で実行させることを目指し、いくつかの手法を検証します。結論か...]]></description><link>https://zenn.dev/labdemy/articles/a85689d3957a09</link><guid isPermaLink="true">https://zenn.dev/labdemy/articles/a85689d3957a09</guid><pubDate>Tue, 27 May 2025 05:36:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--M5yZMfwn--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Qwen3%25E3%2581%25AE%25E6%2580%259D%25E8%2580%2583%25E3%2582%2592%25E6%2597%25A5%25E6%259C%25AC%25E8%25AA%259E%25E3%2581%25AB%25EF%25BC%2581%7EQwen3%25E3%2581%25AE%25E6%2597%25A5%25E6%259C%25AC%25E8%25AA%259E%25E6%2580%259D%25E8%2580%2583%25E5%258A%259B%25E3%2582%2592%25E7%258D%25B2%25E5%25BE%2597%25E3%2581%2599%25E3%2582%258B%25E6%2589%258B%25E6%25B3%2595%7E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:bekku%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAzMjE0YmZiZDkuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:labdemy%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ExNGI5NjcxYWUuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>bekku</dc:creator></item><item><title><![CDATA[pythonを使ってアンケート生データを処理してみた]]></title><description><![CDATA[
+対象読者
+
+Excel は触れるけど Python はこれから
+クロス集計を毎回手で作るのがつらい
+
+
+
+
+ 前提
+今回、業者に頼んでアンケートを取ったんですが、アンケート解析をもっとしたい！
+けど、納品まで終わってしまった・・・
+自分でクロス分析とかしたいけど、手作業だと時間がかかる・・・
+と言うのを解決するために、作ってみました。
+どのようなデータかは割愛しますが、今回のものをカスタマイズすれば、業務の自動化ができると思います。
+
+ セル0,1 準備： Colab ノートブックを5セルに分ける
+
+cell0
+# 0️⃣ Colab: 必要ライブラリ
+!pip install --q...]]></description><link>https://zenn.dev/sushizanmai/articles/f23d4296afc187</link><guid isPermaLink="true">https://zenn.dev/sushizanmai/articles/f23d4296afc187</guid><pubDate>Tue, 27 May 2025 05:18:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lEuasiau--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:python%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2582%25A2%25E3%2583%25B3%25E3%2582%25B1%25E3%2583%25BC%25E3%2583%2588%25E7%2594%259F%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%2592%25E5%2587%25A6%25E7%2590%2586%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2599%25E3%2581%2597%25E3%2581%2596%25E3%2582%2593%25E3%2581%25BE%25E3%2581%2584%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI5ZGU4OGE3NGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>すしざんまい</dc:creator></item><item><title><![CDATA[【Agent開発入門】Langchainって？]]></title><description><![CDATA[
+ LangChainとは
+LangChainは、大規模言語モデル（LLM）を使用したアプリケーション開発を効率化するためのライブラリです。
+機械学習でよく使われるPythonで使用することが可能です。
+
+ Langchainの主な特徴
+
+LLMの選択
+ツールの実行
+プロンプトの管理
+
+個人的に特にツールの実行（Tool calling）は非常に強力で、Agent開発で役に立つ機能だと思いました。
+
+ 実装例
+
+ シンプルなエージェント
+以下は、シンプルなタスク管理エージェントの実装例です
+Tool callingを使用し、プロンプトの内容に応じて、タスクリストの取得か、タスクの追加を行...]]></description><link>https://zenn.dev/upgradetech/articles/36191095b9f11b</link><guid isPermaLink="true">https://zenn.dev/upgradetech/articles/36191095b9f11b</guid><pubDate>Tue, 27 May 2025 01:15:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0OeUEgkT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Agent%25E9%2596%258B%25E7%2599%25BA%25E5%2585%25A5%25E9%2596%2580%25E3%2580%2591Langchain%25E3%2581%25A3%25E3%2581%25A6%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:T.S%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI4NmJmMzNhODkuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:UPGRADE%2520tech%2520blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhiNGIzNWM3NjkuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>T.S</dc:creator></item><item><title><![CDATA[【Streamlit入門】爆速でWEBアプリを作ろう]]></title><description><![CDATA[
+ Streamlitとは？
+Streamlitは、PythonベースのWEBアプリケーションを簡単に作成できるオープンソースのフレームワークです。データサイエンティストやエンジニアが、比較的簡単にWebアプリケーションを開発できるように設計されています。
+
+ Streamlitの主な特徴
+
+
+シンプルな構文: Pythonの知識があれば、HTMLやCSSの知識なしでも簡単にWebアプリケーションを作成可能
+
+インタラクティブな要素: スライダー、ボタン、テキスト入力などのUIコンポーネントが簡単に実装可能
+
+データ可視化: Matplotlib、Plotlyなどの主要な可視化ライブラリ...]]></description><link>https://zenn.dev/upgradetech/articles/8d81f8a8df88cc</link><guid isPermaLink="true">https://zenn.dev/upgradetech/articles/8d81f8a8df88cc</guid><pubDate>Tue, 27 May 2025 01:14:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Xf6oK5Lt--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Streamlit%25E5%2585%25A5%25E9%2596%2580%25E3%2580%2591%25E7%2588%2586%25E9%2580%259F%25E3%2581%25A7WEB%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258D%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:T.S%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI4NmJmMzNhODkuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:UPGRADE%2520tech%2520blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhiNGIzNWM3NjkuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>T.S</dc:creator></item><item><title><![CDATA[my-snippets]]></title><description><![CDATA[自分用のsnippetを集めたもの]]></description><link>https://zenn.dev/shimo_s3/books/my-snippets-collected</link><guid isPermaLink="true">https://zenn.dev/shimo_s3/books/my-snippets-collected</guid><pubDate>Mon, 26 May 2025 23:03:00 GMT</pubDate><dc:creator>shimo</dc:creator></item><item><title><![CDATA[日常の開発で使うuvのエッセンス]]></title><description><![CDATA[
+ 記事概要
+Pythonのプロジェクト管理ツールであるuvの使用方法を記載します。
+自分は仕事でもプライベートでもPythonプロジェクトではuvを使用しており、普段の開発でよく使うエッセンスを公式Docや自分の経験からまとめてみました。
+なお、内容はv0.6.14時点の内容に準拠します。
+Stableステータスにもなっているので劇的に使い方が変更されることはあまり無いと思いますが最新情報は公式Docを参照ください。
+プロジェクトをuv管理にする動機や方法は以下を参考
+https://zenn.dev/teihenn/articles/202504-how-to-migrate-to-...]]></description><link>https://zenn.dev/teihenn/articles/202504-how-to-use-uv</link><guid isPermaLink="true">https://zenn.dev/teihenn/articles/202504-how-to-use-uv</guid><pubDate>Mon, 26 May 2025 16:53:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--XZTrodKj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%2597%25A5%25E5%25B8%25B8%25E3%2581%25AE%25E9%2596%258B%25E7%2599%25BA%25E3%2581%25A7%25E4%25BD%25BF%25E3%2581%2586uv%25E3%2581%25AE%25E3%2582%25A8%25E3%2583%2583%25E3%2582%25BB%25E3%2583%25B3%25E3%2582%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yyossy%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2YzNmIwMjg3YzkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yyossy</dc:creator></item><item><title><![CDATA[Edge Worker って JS しか動かないの？もも 🍑 の RAG 大冒険メモ]]></title><description><![CDATA[
+💟 読んでほしい人
+
+Slack や MTG ログを丸ごと溜め込んで RAG したい新人さん
+Edge Functions/Cloudflare Workers/Vercel Edge に興味あるフロント勢
+「JS 以外動かせないの？！」とモヤモヤしてるバックエンド勢
+Obsidian／PostgreSQL どっちにデータ入れよう…と迷い中のノート魔 📝
+
+
+
+
+ 0️⃣ もも 🍑 のひとりごと (ᐢ ˙꒳˙ ᐢ)💗
+
+「Slack 全履歴と議事録をローカルで保持して、自分ぽい返信を Gemini に作らせたいんだけど…
+Edge Worker、Python、Obsidian…頭ぐるぐ...]]></description><link>https://zenn.dev/koshiosaki/articles/2c8f4e9a7969c2</link><guid isPermaLink="true">https://zenn.dev/koshiosaki/articles/2c8f4e9a7969c2</guid><pubDate>Mon, 26 May 2025 16:48:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--SiCoIitf--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Edge%2520Worker%2520%25E3%2581%25A3%25E3%2581%25A6%2520JS%2520%25E3%2581%2597%25E3%2581%258B%25E5%258B%2595%25E3%2581%258B%25E3%2581%25AA%25E3%2581%2584%25E3%2581%25AE%25EF%25BC%259F%25E3%2582%2582%25E3%2582%2582%2520%2520%2520%25E3%2581%25AE%2520RAG%2520%25E5%25A4%25A7%25E5%2586%2592%25E9%2599%25BA%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2582%25E3%2582%2582%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2EzNjQwNTUxY2UuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>もも</dc:creator></item><item><title><![CDATA[【ABC406】AtCoder Beginner Contest 406C 自分用解説]]></title><description><![CDATA[
+ ABC406C - ~
+問題リンク : https://atcoder.jp/contests/abc406/tasks/abc406_c
+
+ 解法メモ
+問題で与えられる整数列Pに対し、その連続部分列Bを考える。
+試しに色々書き出してみると、B（長さn）がチルダ型とは次を満たすことと同値であるとわかる。
+
+\begin{aligned}
+&amp; B\text{がチルダ型}のとき、 次を満たすk_1, k_2, k_3 \geq 1 \text{ が存在する.} \\
+&amp;\quad
+\begin{cases}
+B_1, A_2, \dots, B_{1 + k_1} \te...]]></description><link>https://zenn.dev/seck/articles/1c033ec2cc12ed</link><guid isPermaLink="true">https://zenn.dev/seck/articles/1c033ec2cc12ed</guid><pubDate>Mon, 26 May 2025 14:59:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--09sWABAD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590ABC406%25E3%2580%2591AtCoder%2520Beginner%2520Contest%2520406C%2520%25E8%2587%25AA%25E5%2588%2586%25E7%2594%25A8%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:seck%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTDNUd0hZejhTVjZHek5UVnZpSXRTQUJNcjNKYWg0SFd5Mm9vYUo3LXk4elEzd3NucGQ9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>seck</dc:creator></item><item><title><![CDATA[PythonとOpenAI APIで実践！MCP開発入門【第5回】AIを操る「呪文」？ プロンプトエンジニアリングの基礎と効果的な指示]]></title><description><![CDATA[
+ はじめに：AIのポテンシャルを解放する「プロンプト」という鍵
+皆さん、こんにちは！ AI開発の冒険、第5回へようこそ！前回（第4回）では、Pythonコードを使ってOpenAI APIに初めてのリクエストを送信し、AIからの応答（JSON形式）を受け取るという、記念すべき「ファーストコンタクト」を果たしましたね。AIがあなたの指示に応じてテキストを生成する様は、まさに未来を感じさせる体験だったのではないでしょうか。（2025年5月、ここ東京をはじめ世界中で、LLMを活用したサービス開発が熱を帯びています！）
+しかし、AIから返ってきた応答を見て、「うーん、ちょっと期待と違うな…」「も...]]></description><link>https://zenn.dev/querypie/articles/4fa79c05b417ec</link><guid isPermaLink="true">https://zenn.dev/querypie/articles/4fa79c05b417ec</guid><pubDate>Mon, 26 May 2025 11:26:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--T0qO1nwZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A8OpenAI%2520API%25E3%2581%25A7%25E5%25AE%259F%25E8%25B7%25B5%25EF%25BC%2581MCP%25E9%2596%258B%25E7%2599%25BA%25E5%2585%25A5%25E9%2596%2580%25E3%2580%2590%25E7%25AC%25AC5%25E5%259B%259E%25E3%2580%2591AI%25E3%2582%2592%25E6%2593%258D%25E3%2582%258B%25E3%2580%258C%25E5%2591%25AA%25E6%2596%2587%25E3%2580%258D%25EF%25BC%259F%2520%25E3%2583%2597%25E3%2583%25AD%25E3%2583%25B3%25E3%2583%2597%25E3%2583%2588%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%25E3%2583%25AA%25E3%2583%25B3%25E3%2582%25B0...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:QueryPie%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk1MzUyMzdkYzguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>QueryPie</dc:creator></item><item><title><![CDATA[Structured Outputsのコールドスタート問題は解消されたのか？]]></title><description><![CDATA[
+ はじめに
+LLMでjsonを出力させる際に、プロンプトにjsonのスキーマを書いて制御するのと、Structured Outputの速度って直感的にはStructured Outputの方が早いのかなと思ってo3に聞いてみました。
+
+ o3の回答
+
+
+
+方法
+仕組み
+1 回の API 呼び出しのレイテンシ
+総合的な開発・運用コスト
+備考
+
+
+
+
+① プロンプトで「JSON で返して」と書く
+単なる自然言語指示
+速い（追加オーバーヘッドなし）
+失敗時のリトライやパース失敗が多く、結果的に遅延が膨らみやすい
+出力が壊れると業務ロジック側で再試行・修正が必要
+
+
+② JSON mode（"...]]></description><link>https://zenn.dev/headwaters/articles/4e0610bfd66134</link><guid isPermaLink="true">https://zenn.dev/headwaters/articles/4e0610bfd66134</guid><pubDate>Mon, 26 May 2025 10:55:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_cTwkCgs--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Structured%2520Outputs%25E3%2581%25AE%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%25AB%25E3%2583%2589%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%2588%25E5%2595%258F%25E9%25A1%258C%25E3%2581%25AF%25E8%25A7%25A3%25E6%25B6%2588%25E3%2581%2595%25E3%2582%258C%25E3%2581%259F%25E3%2581%25AE%25E3%2581%258B%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:koki%2520takeishi%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZjNGExY2UxMDYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%2598%25E3%2583%2583%25E3%2583%2589%25E3%2582%25A6%25E3%2582%25A9%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%25BC%25E3%2582%25B9%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ3M2E2MGRhNDcuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>koki takeishi</dc:creator></item><item><title><![CDATA[Azure FunctionでMCPサーバーのデプロイのやり方(SQL版):その３＋ボーナス]]></title><description><![CDATA[パート1では、Azure Functionsをローカルおよびクラウドでデプロイする基本と、Model Context Protocol (MCP) インスペクターについて説明しました。パート2ではさらに一歩進み、引数を受け取るMCPツールをAzure Functionとして定義する方法を説明しました。そして今回は、パート3として、PostgreSQLデータベースとやり取りするMCPツールセットをAzure Functions上で構築する方法について深く掘り下げます。また、Azure FunctionからMCPツールがスムーズにアクセスできるようにするために、PostgreSQLをどのよう...]]></description><link>https://zenn.dev/dxclab/articles/235c50260b9d9f</link><guid isPermaLink="true">https://zenn.dev/dxclab/articles/235c50260b9d9f</guid><pubDate>Mon, 26 May 2025 09:01:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qD2yNXXh--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Azure%2520Function%25E3%2581%25A7MCP%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2581%25AE%25E3%2583%2587%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25A4%25E3%2581%25AE%25E3%2582%2584%25E3%2582%258A%25E6%2596%25B9%2528SQL%25E7%2589%2588%2529%253A%25E3%2581%259D%25E3%2581%25AE%25EF%25BC%2593%25EF%25BC%258B%25E3%2583%259C%25E3%2583%25BC%25E3%2583%258A%25E3%2582%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Mustahid%2520Ahmed%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNlN2I4MjBlOGUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:DXC%2520Lab%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSV90TGZNaEtmUjJCTENPd2hIUFlKejV1dk9NY0ZNMGcyTHdvaFlQcDdGUlpZMDZRPXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Mustahid Ahmed</dc:creator></item><item><title><![CDATA[［AtCoder］ABC-404｜A - Not Found]]></title><description><![CDATA[
+ 設問ページ
+
+🔗ABC-404 A - Not Found
+
+
+
+ 提出結果
+def getString():
+    return input()
+
+
+def main():
+    S = getString()
+
+    for i in range(26):
+        c = ord("a") + i
+        if chr(c) in S:
+            continue
+        else:
+            print(chr(c))
+            break
+
+
+if __name__ == "__main__":
+    ...]]></description><link>https://zenn.dev/hyperdb/articles/fd7e7ecd6c3191</link><guid isPermaLink="true">https://zenn.dev/hyperdb/articles/fd7e7ecd6c3191</guid><pubDate>Mon, 26 May 2025 08:20:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--SCOl89g8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25EF%25BC%25BBAtCoder%25EF%25BC%25BDABC-404%25EF%25BD%259CA%2520-%2520Not%2520Found%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AF%25E3%2581%2584%25E3%2581%25B1%25E3%2581%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhODJkODgwMzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>はいぱぁ</dc:creator></item><item><title><![CDATA[［AtCoder］ABC-406｜B - Product Calculator]]></title><description><![CDATA[
+ 設問ページ
+
+🔗ABC-406 B - Product Calculator
+
+
+
+ 提出結果
+def getIntMap():
+    return map(int, input().split())
+
+
+def getIntList():
+    return list(map(int, input().split()))
+
+
+def main():
+    N, K = getIntMap()
+    A = getIntList()
+
+    d = 1
+    for i in range(N):
+        d *= A[i]
+        if d &gt;= 1...]]></description><link>https://zenn.dev/hyperdb/articles/f449ec5c1aed1a</link><guid isPermaLink="true">https://zenn.dev/hyperdb/articles/f449ec5c1aed1a</guid><pubDate>Mon, 26 May 2025 08:20:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--67S_QTgV--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25EF%25BC%25BBAtCoder%25EF%25BC%25BDABC-406%25EF%25BD%259CB%2520-%2520Product%2520Calculator%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AF%25E3%2581%2584%25E3%2581%25B1%25E3%2581%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhODJkODgwMzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>はいぱぁ</dc:creator></item><item><title><![CDATA[［AtCoder］ABC-405｜A - Is it rated?]]></title><description><![CDATA[
+ 設問ページ
+
+🔗ABC-405 A - Is it rated?
+
+
+
+ 提出結果
+def getIntMap():
+    return map(int, input().split())
+
+
+def main():
+    R, X = getIntMap()
+
+    print("Yes" if (X == 1 and 1600 &lt;= R &lt;= 2999) or (X == 2 and 1200 &lt;= R &lt;= 2399) else "No")
+
+
+if __name__ == "__main__":
+    main()
+]]></description><link>https://zenn.dev/hyperdb/articles/e100a367a24552</link><guid isPermaLink="true">https://zenn.dev/hyperdb/articles/e100a367a24552</guid><pubDate>Mon, 26 May 2025 08:20:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--P7WfPE33--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25EF%25BC%25BBAtCoder%25EF%25BC%25BDABC-405%25EF%25BD%259CA%2520-%2520Is%2520it%2520rated%253F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AF%25E3%2581%2584%25E3%2581%25B1%25E3%2581%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhODJkODgwMzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>はいぱぁ</dc:creator></item><item><title><![CDATA[［AtCoder］ABC-404｜B - Grid Rotation]]></title><description><![CDATA[
+ 設問ページ
+
+🔗ABC-404 B - Grid Rotation
+
+
+
+ 提出結果
+import copy
+
+
+def getInt():
+    return int(input())
+
+
+def getStringRow(N):
+    return [list(input()) for _ in range(N)]
+
+
+def rotate_r(array):
+    array.reverse()
+    a1 = list(zip(*array, strict=False))
+    a2 = list(map(list, a1))
+    return a2
+
+
+def...]]></description><link>https://zenn.dev/hyperdb/articles/c88cff47ac3c16</link><guid isPermaLink="true">https://zenn.dev/hyperdb/articles/c88cff47ac3c16</guid><pubDate>Mon, 26 May 2025 08:20:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--57sM_u5z--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25EF%25BC%25BBAtCoder%25EF%25BC%25BDABC-404%25EF%25BD%259CB%2520-%2520Grid%2520Rotation%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AF%25E3%2581%2584%25E3%2581%25B1%25E3%2581%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhODJkODgwMzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>はいぱぁ</dc:creator></item><item><title><![CDATA[［AtCoder］ABC-405｜B - Not All]]></title><description><![CDATA[
+ 設問ページ
+
+🔗ABC-405 B - Not All
+
+
+
+ 提出結果
+def getIntMap():
+    return map(int, input().split())
+
+
+def getIntList():
+    return list(map(int, input().split()))
+
+
+def main():
+    N, M = getIntMap()
+    A = getIntList()
+
+    r = 0
+    for _ in range(N):
+        if len(set(A)) == M:
+            A.pop()
+...]]></description><link>https://zenn.dev/hyperdb/articles/9d050977fa89f3</link><guid isPermaLink="true">https://zenn.dev/hyperdb/articles/9d050977fa89f3</guid><pubDate>Mon, 26 May 2025 08:20:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--HmxzCmEb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25EF%25BC%25BBAtCoder%25EF%25BC%25BDABC-405%25EF%25BD%259CB%2520-%2520Not%2520All%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AF%25E3%2581%2584%25E3%2581%25B1%25E3%2581%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhODJkODgwMzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>はいぱぁ</dc:creator></item><item><title><![CDATA[［AtCoder］ABC-406｜A - Not Acceptable]]></title><description><![CDATA[
+ 設問ページ
+
+🔗ABC-406 A - Not Acceptable
+
+
+
+ 提出結果
+def getIntMap():
+    return map(int, input().split())
+
+
+def main():
+    A, B, C, D = getIntMap()
+
+    print("Yes" if A * 60 + B &gt;= C * 60 + D else "No")
+
+
+if __name__ == "__main__":
+    main()
+]]></description><link>https://zenn.dev/hyperdb/articles/4ec12d31e615fa</link><guid isPermaLink="true">https://zenn.dev/hyperdb/articles/4ec12d31e615fa</guid><pubDate>Mon, 26 May 2025 08:20:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8gJMkWZC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25EF%25BC%25BBAtCoder%25EF%25BC%25BDABC-406%25EF%25BD%259CA%2520-%2520Not%2520Acceptable%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AF%25E3%2581%2584%25E3%2581%25B1%25E3%2581%2581%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBhODJkODgwMzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>はいぱぁ</dc:creator></item><item><title><![CDATA[AI が生成する大量の Python コードの品質を管理するための pyproject.toml 設定]]></title><description><![CDATA[
+ AI が生成する大量のコードをレビューできますか？
+チームで Python の開発を行うとき、ChatGPT などで作られたコードをレビューすることになることも増えてきました
+生成 AI によってコードは大量生産することが可能になりましたが、
+レビューのプロセスでその大量のコードをチェックすることができる体制は整っていますでしょうか？
+レビューにも AI を使う手法もありますが、次の問題があります:
+
+料金
+
+ハルシネーション による誤検知やバグの見逃し
+
+AI を使う前に、まずはアルゴリズムによるレビューの自動化を行うことが重要です
+
+ 全体的な方針
+
+ 最低でも Ruff は使い...]]></description><link>https://zenn.dev/y_shinoda/articles/python-development-settings-pyproject-toml</link><guid isPermaLink="true">https://zenn.dev/y_shinoda/articles/python-development-settings-pyproject-toml</guid><pubDate>Mon, 26 May 2025 07:19:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3oLYnxEk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AI%2520%25E3%2581%258C%25E7%2594%259F%25E6%2588%2590%25E3%2581%2599%25E3%2582%258B%25E5%25A4%25A7%25E9%2587%258F%25E3%2581%25AE%2520Python%2520%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2581%25AE%25E5%2593%2581%25E8%25B3%25AA%25E3%2582%2592%25E7%25AE%25A1%25E7%2590%2586%25E3%2581%2599%25E3%2582%258B%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%2520pyproject.toml%2520%25E8%25A8%25AD%25E5%25AE%259A%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E7%25AF%25A0%25E7%2594%25B0%2520%25E5%25B0%2586%25E5%25BD%25A6%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSWtoTi1MMk9aSmVZVWVzN1NBazM3eDZjOVpzTlJYX01EaWdmS21ReHRPcWhjaVpBTHk9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>篠田 将彦</dc:creator></item></channel></rss>

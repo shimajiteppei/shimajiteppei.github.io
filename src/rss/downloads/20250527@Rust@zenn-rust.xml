@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Rust」のフィード]]></title><description><![CDATA[Zennのトピック「Rust」のRSSフィードです]]></description><link>https://zenn.dev/topics/rust</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ba09661577.png</url><title>Zennの「Rust」のフィード</title><link>https://zenn.dev/topics/rust</link></image><generator>zenn.dev</generator><lastBuildDate>Tue, 27 May 2025 10:33:10 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/rust/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[技術書典 18 と Rust グラフィックス本のご紹介]]></title><description><![CDATA[技術書典をご存知ですか？
+テックベース合同会社と事務局が運営している、技術書オンリーイベントです。
+年 2 回のペースで開催されており、オフライン会場（＠池袋）は毎回なかなかの賑わいを見せています。
+書籍の出版や販売に関する情報発信なども手厚く、未経験者も安心してサークル出展できます。
+https://techbookfest.org/event/tbf18
+一般参加する側から見ても、技術書典は注目のイベントです。
+ノウハウをぎゅっと一冊にまとめましたみたいな技術書が、手軽に入手できるのが一番うれしいですね。
+商業書籍では見られないニッチな話題や、新しすぎる技術を扱ったものもあったりする...]]></description><link>https://zenn.dev/abechanta/articles/855d330528c174</link><guid isPermaLink="true">https://zenn.dev/abechanta/articles/855d330528c174</guid><pubDate>Sun, 25 May 2025 23:05:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--tnmW9R46--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%258A%2580%25E8%25A1%2593%25E6%259B%25B8%25E5%2585%25B8%252018%2520%25E3%2581%25A8%2520Rust%2520%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%2595%25E3%2582%25A3%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25B9%25E6%259C%25AC%25E3%2581%25AE%25E3%2581%2594%25E7%25B4%25B9%25E4%25BB%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:abechanta%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNhZmY0YzAyYzcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>abechanta</dc:creator></item><item><title><![CDATA[ABC407: Rustで解く！問題解説]]></title><description><![CDATA[AtCoder Beginner Contest 407のA-E問題をRustで解いた際の解法をまとめました。
+
+ A 問題
+問題
+https://atcoder.jp/contests/abc407/tasks/abc407_a
+解説
+A を B で割った結果を小数点第1位で四捨五入した値を求める問題です。
+浮動小数点による誤差を避けるため、整数演算だけで四捨五入を実装します。具体的には、\frac{A}{B} の結果に 0.5 を加えた値を整数に切り捨てることで四捨五入を実現します。この操作を整数演算で表現するために、以下の式を用いて計算を行います。
+
+\text{AをBで割った結果...]]></description><link>https://zenn.dev/nakst_hide/articles/8e4e34aae22036</link><guid isPermaLink="true">https://zenn.dev/nakst_hide/articles/8e4e34aae22036</guid><pubDate>Sun, 25 May 2025 12:48:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5rus_67e--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ABC407%253A%2520Rust%25E3%2581%25A7%25E8%25A7%25A3%25E3%2581%258F%25EF%25BC%2581%25E5%2595%258F%25E9%25A1%258C%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nakahide%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YkMxNEpSQnNET01hTGcxTVRQWGNTWS1qYlNQbFRMQTN3ZU9Sdz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nakahide</dc:creator></item><item><title><![CDATA[RustでDDD実装]]></title><description><![CDATA[
+ 概要
+RustでDDDを実装する機会が今後増えていきそうだったので、RustでDDDを実装してみることにしました。今回は簡単にユーザーの登録と検索を実装していきます。
+
+ 開発
+
+ ディレクトリ構成
+まず、ディレクトリ構成は下記の通りです。各構成要素については、順番に説明していきます。
+.
+├── controller
+│   ├── mod.rs
+│   └── user_handler.rs
+├── domain
+│   ├── mod.rs
+│   └── user.rs
+├── main.rs
+├── prepare.rs
+├── repository
+│   ├── mod...]]></description><link>https://zenn.dev/bamboo_nova/articles/28fd32e81ff4f3</link><guid isPermaLink="true">https://zenn.dev/bamboo_nova/articles/28fd32e81ff4f3</guid><pubDate>Sun, 25 May 2025 07:44:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--mU2b_Sg1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:Rust%25E3%2581%25A7DDD%25E5%25AE%259F%25E8%25A3%2585%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E8%25A1%2580%25E5%25A8%2581%25E8%258F%25AF%25E6%2588%2591%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZiMmY0NjM5OTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>血威華我</dc:creator></item><item><title><![CDATA[Rustの型システムでSudokuソルバーを作る話🦀]]></title><description><![CDATA[https://zenn.dev/ame_x/articles/8ec1ec35cdc392
+この記事から着想を得ています。
+TypeScriptの型システムって（実用的かはおいておいて）そんなに応用的なんだな...と感動を覚えたのです。
+そして私が今学習中のRustの型システムでも同様のことができないかと考えました。
+TypeScriptの型システムはチューチング完全で、数独も競技プログラミングもできるらしいですが、
+https://github.com/gruhn/typescript-sudoku/tree/master
+https://speakerdeck.com/imaima...]]></description><link>https://zenn.dev/oumi0804/articles/450d54afafa303</link><guid isPermaLink="true">https://zenn.dev/oumi0804/articles/450d54afafa303</guid><pubDate>Sat, 24 May 2025 09:51:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--S2Bi3mNi--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25AE%25E5%259E%258B%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%25E3%2581%25A7Sudoku%25E3%2582%25BD%25E3%2583%25AB%25E3%2583%2590%25E3%2583%25BC%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%25E8%25A9%25B1%2520%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%25A1%259C%25E6%25B5%25B7%2520%252F%2520saqula%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZlMmViMDczZmYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>桜海 / saqula</dc:creator></item><item><title><![CDATA[依存クレートが依存しているクレートを調べる]]></title><description><![CDATA[
+ はじめに
+kraken_collectorで使ってるクレートの一部がwarning: the following packages contain code that will be rejected by a future version of Rustとなっていたんですが、ついに1.80系でコンパイルエラーとなったのでアップデートしようとしてます。その関係で調べた備忘録。結論cargoめっちゃ便利だった。
+
+ Warningの原因を探る
+現時点のkraken_collectorをビルドした際に以下のようなwaringが出る
+rustc -V
+rustc 1.79.0 (129f3...]]></description><link>https://zenn.dev/bathtimefish/articles/9f32404414246c</link><guid isPermaLink="true">https://zenn.dev/bathtimefish/articles/9f32404414246c</guid><pubDate>Sat, 24 May 2025 06:55:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--UtVIgm6O--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E4%25BE%259D%25E5%25AD%2598%25E3%2582%25AF%25E3%2583%25AC%25E3%2583%25BC%25E3%2583%2588%25E3%2581%258C%25E4%25BE%259D%25E5%25AD%2598%25E3%2581%2597%25E3%2581%25A6%25E3%2581%2584%25E3%2582%258B%25E3%2582%25AF%25E3%2583%25AC%25E3%2583%25BC%25E3%2583%2588%25E3%2582%2592%25E8%25AA%25BF%25E3%2581%25B9%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:bathtimefish%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhiNjQyNThkN2IuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>bathtimefish</dc:creator></item><item><title><![CDATA[editの使い方(初心者向け)]]></title><description><![CDATA[
+ 初めに
+!
+本稿では、Ctrl キーと nキーを同時押しすることをCtrl + nと書きます。
+同様にAltキーとfキーを同時押しすることをAlt + f等と書きます！
+
+3日前くらいにMicrosoftから公式のCLIエディターが発表されました。
+https://github.com/microsoft/edit?tab=readme-ov-file
+曰く、MS-DOSエディタへのオマージュをしつつ、VS Codeに似たモダンなインターフェースと入力コントロールを備えているとのこと！
+Windows環境において、コーディング環境としては心もとないですが、ちょっとした設定ファイルなど...]]></description><link>https://zenn.dev/96140/articles/c9b6add175b005</link><guid isPermaLink="true">https://zenn.dev/96140/articles/c9b6add175b005</guid><pubDate>Fri, 23 May 2025 14:54:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--iubDDX-P--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:edit%25E3%2581%25AE%25E4%25BD%25BF%25E3%2581%2584%25E6%2596%25B9%2528%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E5%2590%2591%25E3%2581%2591%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kuro-140%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y4OGI1NmMzYTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kuro-140</dc:creator></item><item><title><![CDATA[ABC_406_E 'Popcount Sum 3'をRustで解く]]></title><description><![CDATA[今回はRubyではなくRustを使います。理由はカッコいいからです。
+
+ 問題
+N以下、かつpop countがKの整数を全部合計してください。答えは998244353の剰余で
+https://atcoder.jp/contests/abc406/tasks/abc406_e
+
+ 解法
+いくつか存在しますが、私の観測範囲で最も一般的なのは桁DPでした。
+https://x.com/yiwiy9/status/1924810348676448564
+https://atcoder.jp/contests/abc406/editorial/13071
+公式解説だと誤字なのか何なのか変な記法に...]]></description><link>https://zenn.dev/hal_mat/articles/0e8799c6ddd0ac</link><guid isPermaLink="true">https://zenn.dev/hal_mat/articles/0e8799c6ddd0ac</guid><pubDate>Thu, 22 May 2025 05:36:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--zXdxU4uE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ABC_406_E%2520%2527Popcount%2520Sum%25203%2527%25E3%2582%2592Rust%25E3%2581%25A7%25E8%25A7%25A3%25E3%2581%258F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Hal_Mat%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvaC5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Hal_Mat</dc:creator></item><item><title><![CDATA[nullの扱いに注意...(TSでの工夫)]]></title><description><![CDATA[!
+後日追記
+この記事を読むにあたって私の知識の乏しさと勢いとノリで書いてしまった部分もあるので間違っている部分が多くあると思います。
+数件コメントをいただきましたが、参考になるコメントです。
+コメントを踏まえた上でリプレイスしてみました。
+それも踏まえた上で読んでいただけると幸いです。
+
+こんにちは。
+てるし〜です。
+JavascriptやTypescriptでプログラムを書いているとnullが出てくると思います。
+みなさんはこれらを使っていますか？
+nullを使う場合はしっかりとハンドリングする必要があります。
+ですが、経験の浅い私はうっかり雑なハンドリングをしてしまいバグを起こして...]]></description><link>https://zenn.dev/terusi/articles/e243ead933d406</link><guid isPermaLink="true">https://zenn.dev/terusi/articles/e243ead933d406</guid><pubDate>Wed, 21 May 2025 19:04:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--S3gUt41P--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:null%25E3%2581%25AE%25E6%2589%25B1%25E3%2581%2584%25E3%2581%25AB%25E6%25B3%25A8%25E6%2584%258F...%2528TS%25E3%2581%25A7%25E3%2581%25AE%25E5%25B7%25A5%25E5%25A4%25AB%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A6%25E3%2582%258B%25E3%2581%2597%25E3%2580%259C%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRlM2M5MzkyNjguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>てるし〜</dc:creator></item><item><title><![CDATA[ABC406: Rustで解く！問題解説]]></title><description><![CDATA[AtCoder Beginner Contest 406のA-E問題をRustで解いた際の解法をまとめました。
+
+ A 問題
+問題
+https://atcoder.jp/contests/abc406/tasks/abc406_a
+解説
+この問題は、締め切り時刻と提出時刻を比較し、締め切り前に提出できたかを判定する問題です。
+まず、締め切り時刻と提出時刻をそれぞれ分単位に変換します。その後、締め切り時刻 \geq 提出時刻のときは Yes 、そうでない場合は No を出力します。
+コード
+
+abc406a.rs
+use proconio::input;
+
+fn main() {
+    ...]]></description><link>https://zenn.dev/nakst_hide/articles/f1dbff117f09d9</link><guid isPermaLink="true">https://zenn.dev/nakst_hide/articles/f1dbff117f09d9</guid><pubDate>Wed, 21 May 2025 13:10:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--x4Q3EjlY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ABC406%253A%2520Rust%25E3%2581%25A7%25E8%25A7%25A3%25E3%2581%258F%25EF%25BC%2581%25E5%2595%258F%25E9%25A1%258C%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nakahide%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YkMxNEpSQnNET01hTGcxTVRQWGNTWS1qYlNQbFRMQTN3ZU9Sdz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nakahide</dc:creator></item><item><title><![CDATA[Rust×Next.jsで画像をシルエット化！Wasmで遊びながら学ぶWeb開発]]></title><description><![CDATA[Rustで画像処理してみたい！でもCLIツールだけじゃなくて、Webアプリにも活かせたら楽しそう……。そんな気持ちから始まった今回の企画。
+
+この記事では、Rustで書いた画像処理ロジックをWebAssembly（Wasm）に変換して、Next.js上で動かす方法を紹介します。最終的には「画像をアップロード → シルエット風に変換 → ダウンロードできる」Webアプリを完成させます。]]></description><link>https://zenn.dev/kenquichi/books/b01ffcb33259da</link><guid isPermaLink="true">https://zenn.dev/kenquichi/books/b01ffcb33259da</guid><pubDate>Wed, 21 May 2025 10:09:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--TYjUWMbB--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci8zZjhhMzE2YTNlLmpwZWc=%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>ケン吉</dc:creator></item><item><title><![CDATA[0027-trait-object]]></title><description><![CDATA[on_screenの型はdyn Drawになっている
+これはgenericsとちがって引数のdrawの型は動的となる。またコンパイルされるコードも型ごとにバイナリが生成されたりしない
+実際のところon_screen内のboundsはvtableを参照して解決することになるため実行時間が不利になり
+ただしgenericsとちがってコンパイル時に型ごとのbinaryを生成しないためコンパイルタイムは減る
+内部的な型情報は失われdraw変数は実体ではなく抽象化され、SquareでもCircleでもtrait_obj::Drawとなる、またこの時にTypeIdも同一のものになる
+use std:...]]></description><link>https://zenn.dev/yukinekonyan/articles/0c641c3ce1ff38</link><guid isPermaLink="true">https://zenn.dev/yukinekonyan/articles/0c641c3ce1ff38</guid><pubDate>Wed, 21 May 2025 09:48:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--nVSkWcJF--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_80:0027-trait-object%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yukineko%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTHdrb1VFNXJOaVI2dndBUlBkMVNhYXM5QVBRMk45Nk1qTVdPTlp5VXFjNkhLdndRPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yukineko</dc:creator></item><item><title><![CDATA[0026-generics]]></title><description><![CDATA[このコードの重要なポイントはon_screenのところで、ここの型は&amp;Tになっている
+この場合は、on_screenはC++でいうところのtemplateと同様にこの関数のバインリをcallしてくる型の分だけ生成する
+このことによって呼びだし時のcostは少くてすむが、バイナリやコンパイルタイムは増大することになる
+use std::any::{type_name, TypeId};
+#[derive(Debug, Clone, Copy)]
+struct Point {
+    x: f64,
+    y: f64,
+}
+
+#[derive(Debug, Clone, Copy...]]></description><link>https://zenn.dev/yukinekonyan/articles/3d14ec1813dd6d</link><guid isPermaLink="true">https://zenn.dev/yukinekonyan/articles/3d14ec1813dd6d</guid><pubDate>Wed, 21 May 2025 09:41:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Gsg3uY9S--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_80:0026-generics%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yukineko%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTHdrb1VFNXJOaVI2dndBUlBkMVNhYXM5QVBRMk45Nk1qTVdPTlp5VXFjNkhLdndRPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yukineko</dc:creator></item><item><title><![CDATA[🦀Deep dive into Reth⚙️]]></title><description><![CDATA[
+ 0. はじめに
+https://github.com/paradigmxyz/reth
+Rethはその名のとおりRustで実装されたEthereumのExecution Clientである。
+プロジェクトをリードするParadigm が宣言している通りいくつか特徴があるが、競合となるGethと比較した時に強調できるのは以下の3点である。
+
+Modularity
+Performance
+Client Diversity
+
+1と2は密接に関係しているだけでなく、3の課題解決に繋がっていると言っても過言ではない。
+この記事はGethのアーキテクチャと比較しながら主にModularityとP...]]></description><link>https://zenn.dev/adust/articles/e7f916f26f0cf0</link><guid isPermaLink="true">https://zenn.dev/adust/articles/e7f916f26f0cf0</guid><pubDate>Wed, 21 May 2025 08:52:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--798zVe7m--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:%2520Deep%2520dive%2520into%2520Reth%2520%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:adust%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhkNmY2ODhiYmYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>adust</dc:creator></item><item><title><![CDATA[microsoft/editを使ってみた]]></title><description><![CDATA[microsoftのeditというcuiエディタがgithub上で公開されたので
+それについて詳しく書く。
+
+ editとは
+windowsにはデフォルトでインストールされているms公式の
+エディタがnotepadしかない。
+notepadはあくまでguiのツールだし、ターミナル上で
+動作するvimみたいなエディタが存在しないため、
+今回windowsに載せる目的でeditを作ったという事らしい。
+sshからwindowsにログインした場合は公式が推奨する
+エディタで編集するというのが不可能になるのだから確かに必要だ。
+現在はmicrosoft/editのレポジトリに
+windowsのx...]]></description><link>https://zenn.dev/oto/articles/accb6006803bbb</link><guid isPermaLink="true">https://zenn.dev/oto/articles/accb6006803bbb</guid><pubDate>Tue, 20 May 2025 19:09:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--i2y4fCNq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:microsoft%252Fedit%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Otogawa%2520Katsutoshi...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRiZTMxMWQ2YmIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Otogawa Katsutoshi(oto)</dc:creator></item><item><title><![CDATA[RustでMCPを作ろうとしたが...]]></title><description><![CDATA[
+ RustでMCPを作ろうとした
+MCPサーバーを作ろうと思い。
+MCP公式のライブラリ rmcpを使い作成しようとした。
+現状の公式版は扱いづらいため結局やめてしまった。
+現状の公式配布バージョン
+rmcp = { version = "0.1.5", features = ["server", "macros"] }
+何が具体的に扱いづらかったかというと。
+サンプルには属性マクロで設定する方法が書かれていた。
+だが 0.1.5 だとtool_box!( … ); しかなく、IDEが警告を出してくる。
+それで諦めた。
+現在開発中のバージョンがリリースされてから作ってみようと思います。...]]></description><link>https://zenn.dev/sika7/articles/432a36a99b5c0d</link><guid isPermaLink="true">https://zenn.dev/sika7/articles/432a36a99b5c0d</guid><pubDate>Tue, 20 May 2025 07:42:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--IZUcm74_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%25E3%2581%25A7MCP%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258D%25E3%2581%2586%25E3%2581%25A8%25E3%2581%2597%25E3%2581%259F%25E3%2581%258C...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:sika7%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzgxNjE5NWFiMzYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sika7</dc:creator></item><item><title><![CDATA[Tauri v2 + Svelte 5をはじめとしたMnemnkの技術スタック]]></title><description><![CDATA[現在、開発中のMnemnkの技術スタックについて紹介します。
+https://ja.mnemnk.com/
+
+ Tauri v2
+MnemnkはTauriを用いてデスクトップアプリとして動作します。
+https://tauri.app/
+Tauriを用いることでマルチプラットフォームのアプリケーションを一つのコードで書くことができます。今の構成になるまでに試みたものは、以下の通りです。
+
+
+Electron: 実際、前身のアプリはElectronを使っていました。ライフロギングに必要な情報、スクリーンショットであったりアクティブなアプリを得るためのNode.jsライブラリーなども存在しま...]]></description><link>https://zenn.dev/akrisn/articles/mnemnk_tech_stack</link><guid isPermaLink="true">https://zenn.dev/akrisn/articles/mnemnk_tech_stack</guid><pubDate>Tue, 20 May 2025 00:28:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--QUeDd2vS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Tauri%2520v2%2520%252B%2520Svelte%25205%25E3%2582%2592%25E3%2581%25AF%25E3%2581%2598%25E3%2582%2581%25E3%2581%25A8%25E3%2581%2597%25E3%2581%259FMnemnk%25E3%2581%25AE%25E6%258A%2580%25E8%25A1%2593%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%2583%25E3%2582%25AF%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:akrisn%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM4NGY4MTFkZjQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>akrisn</dc:creator></item><item><title><![CDATA[rust-analyzerはrustcと別の警告を出すことがある]]></title><description><![CDATA[rust-analyzerのソースを参照するとわかりますが、警告の検出処理が独自に実装されています(すべての警告が独自実装なのか、一部はrustcの処理を使用しているのか? は未調査)。
+rustcがバッチ処理でコンパイルできればよいのに対してrust-analyzerはインタラクティブなチェックが必要となるため、データ構造が共用できないのではないかと思われる。
+これで何が困るかと言うと、cargo buildでは何も出ないのにrust-analyzerだけ警告を出してくるといった謎のバグを踏んで小一時間悩むことがある。踏んだ。
+「そういうこともある」というのを覚えておくと稀に役立ちます。
+]]></description><link>https://zenn.dev/todesking/articles/26321407bd936e</link><guid isPermaLink="true">https://zenn.dev/todesking/articles/26321407bd936e</guid><pubDate>Mon, 19 May 2025 13:57:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--AqI0QyUG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:rust-analyzer%25E3%2581%25AFrustc%25E3%2581%25A8%25E5%2588%25A5%25E3%2581%25AE%25E8%25AD%25A6%25E5%2591%258A%25E3%2582%2592%25E5%2587%25BA%25E3%2581%2599%25E3%2581%2593%25E3%2581%25A8%25E3%2581%258C%25E3%2581%2582%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:todesking%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJiNGY3OGYyOTUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>todesking</dc:creator></item><item><title><![CDATA[Rust & Wasm から Gemini APIを使う(マイク付き)]]></title><description><![CDATA[
+ はじめに
+前回、GeminiAPIを使ったミニゲームを作成してみましたが、生成AIをもっと活用するには、マイクから音声の取り込みができた方が良いと考え、ブラウザーのマイク機能を使った音声入力機能を追加してみました。
+
+ 対象のバージョン
+
+Rust 2024 Edition
+rustc 1.83.0
+cargo 1.80.1
+rustup 1.27.1
+pnpm 9.12.3
+
+
+ Rust&amp;Wasm サンプル
+Play in browser
+
+※サンプルを動作するためには、最初にGeminiAPIキーの入力が必要です。
+※入力されたGeminiAPIキーは、安全のためcoo...]]></description><link>https://zenn.dev/yurioka/articles/1b4bfb097814a6</link><guid isPermaLink="true">https://zenn.dev/yurioka/articles/1b4bfb097814a6</guid><pubDate>Mon, 19 May 2025 13:48:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--EZcFKqbi--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%2520%2526%2520Wasm%2520%25E3%2581%258B%25E3%2582%2589%2520Gemini%2520API%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%2528%25E3%2583%259E%25E3%2582%25A4%25E3%2582%25AF%25E4%25BB%2598%25E3%2581%258D%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:myurioka%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY3YTE2NGMzMzkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>myurioka</dc:creator></item><item><title><![CDATA[rustのclapでサブコマンドを実装]]></title><description><![CDATA[
+ clap
+
+ 構成
+enumでサブコマンドをリスト、サブコマンド自体(引数とかオプション)は別のstructで定義、サブコマンドをリストしたenumの各バリアントにサブコマンドのstructを入れる。
+#[derive(Debug, Parser)]
+struct Cli {
+    #[command(subcommand)]
+    subcommand: Commands,
+}
+
+#[derive(Debug, Subcommand)]
+enum Commands {
+    /// initialize
+    Init(Init),
+    /// create new
+ ...]]></description><link>https://zenn.dev/uliboooo/articles/d8d9b0e1ee6650</link><guid isPermaLink="true">https://zenn.dev/uliboooo/articles/d8d9b0e1ee6650</guid><pubDate>Mon, 19 May 2025 05:51:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--64io76rQ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:rust%25E3%2581%25AEclap%25E3%2581%25A7%25E3%2582%25B5%25E3%2583%2596%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2582%2592%25E5%25AE%259F%25E8%25A3%2585%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Uliboooo%2528%25E3%2581%2586%25E3%2582%258A%25E3%2581%25BC%25E3%2581%2586%2529%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY0MTFjYWRhM2YuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Uliboooo(うりぼう)</dc:creator></item><item><title><![CDATA[なぜRustを選ぶのか]]></title><description><![CDATA[
+ はじめに
+この記事を書いた目的としては、現在インターン先で使っている言語でRustを扱っていて、そもそもなぜRustなのか？私の中で理解が落とし込めてなかったのでこの記事でまとめようと思い書くことにしました。
+
+ Rustの概要
+Rustは、安全性、速度、並行性を重視して設計された、比較的新しいシステムプログラミング言語であり、近年ウェブ開発の分野で注目を集めています。 その性能と信頼性から、特に高いパフォーマンスが要求されるアプリケーションにおいて、その採用が拡大しています。
+以下では簡単な例を出してみようと思います。
+
+ 安全性
+Rustでは所有権システムによって、Use Aft...]]></description><link>https://zenn.dev/kentaafk/articles/7d14026c914175</link><guid isPermaLink="true">https://zenn.dev/kentaafk/articles/7d14026c914175</guid><pubDate>Sun, 18 May 2025 15:51:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--nXAAY-6N--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%25AA%25E3%2581%259CRust%25E3%2582%2592%25E9%2581%25B8%25E3%2581%25B6%25E3%2581%25AE%25E3%2581%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kenta-afk%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0d0Ry1tdC1lQTVVOW0wM092c3o0WDVPMlRQcGRIakZpM1I0SWZlYmNaQzlEdktlUT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kenta-afk</dc:creator></item></channel></rss>
