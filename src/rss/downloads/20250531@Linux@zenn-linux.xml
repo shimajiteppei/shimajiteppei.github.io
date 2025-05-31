@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Linux」のフィード]]></title><description><![CDATA[Zennのトピック「Linux」のRSSフィードです]]></description><link>https://zenn.dev/topics/linux</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/860a9eb1e4.png</url><title>Zennの「Linux」のフィード</title><link>https://zenn.dev/topics/linux</link></image><generator>zenn.dev</generator><lastBuildDate>Sat, 31 May 2025 08:56:35 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/linux/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[passphraseを自動で入力できるようにする]]></title><description><![CDATA[シェルの立ち上げ毎に実行が必要。
+# SSH エージェントが動いていなければ起動して鍵を追加する
+if [ -z "$SSH_AUTH_SOCK" ] ; then
+  eval "$(ssh-agent -s)"
+  ssh-add ~/.ssh/id_ed25519
+fi
+]]></description><link>https://zenn.dev/yuto_mo/articles/a44158052b6442</link><guid isPermaLink="true">https://zenn.dev/yuto_mo/articles/a44158052b6442</guid><pubDate>Fri, 30 May 2025 23:52:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lMmGm2-V--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:passphrase%25E3%2582%2592%25E8%2587%25AA%25E5%258B%2595%25E3%2581%25A7%25E5%2585%25A5%25E5%258A%259B%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258B%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yuto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VkZTU2N2E0NDcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yuto</dc:creator></item><item><title><![CDATA[Puppy Linux のインストール]]></title><description><![CDATA[Puppy Linux のインストールした時のメモです。
+
+ Puppy Linux の OS の書き込み
+
+次のサイトからイメージファイル(ISO)をダウンロード 。https://puppylinux-woof-ce.github.io/
+
+私のコンピュータのアーキテクチャは x86_64 64-bit で、さらに Puppy Linux は Ubuntu ベースが良かったので Ubuntu Focal 64 でした
+
+
+Rufusで USB メモリに書き込む。Refusは窓の杜にある。
+
+
+ BIOSの設定
+・BIOSの設定で USB メモリの起動順位をトップにする
+・BIOSの設...]]></description><link>https://zenn.dev/15bluefortran/articles/70a4ed3d56aed2</link><guid isPermaLink="true">https://zenn.dev/15bluefortran/articles/70a4ed3d56aed2</guid><pubDate>Fri, 30 May 2025 19:46:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5yp2zhq---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Puppy%2520Linux%2520%25E3%2581%25AE%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:K%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSXlKaklHWTlqc3JjcFhuZFctLVlvVlJxNkFROXlicmhiN1AxVlV2aHJxT0VzPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>K</dc:creator></item><item><title><![CDATA[【完全解説】Git・ツリー表示も！lsより快適なRust製ファイル表示コマンド解説集【eza 2/3】]]></title><description><![CDATA[
+ はじめに
+どうも！
+lsコマンドはaとlを多用しがちな、しがない酒飲みエンジニアです。
+今回は、ezaコマンドのオプションについて解説していきます！
+
+ 解説バージョン
+
+
+
+解説アプリ
+バージョン名
+
+
+
+
+eza
+v0.21.3
+
+
+warp
+v0.2025.05.21.08.11.stable_01
+
+
+JetBrainsMono
+v2.304
+
+
+
+
+ 【完全解説】ezaコマンドのオプション
+使い方
+eza [オプション] [ファイル...]
+
+利用頻度に関しては完全偏見で作成しました！
+
+ 表示オプション(必要に応じて呼び出す系)
+
+
+
+オプション
+説明
+利用頻度
+実行
+
+...]]></description><link>https://zenn.dev/tomy_ch/articles/5042fc5b8e57b0</link><guid isPermaLink="true">https://zenn.dev/tomy_ch/articles/5042fc5b8e57b0</guid><pubDate>Fri, 30 May 2025 09:00:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--n9UT5i6K--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%25AE%258C%25E5%2585%25A8%25E8%25A7%25A3%25E8%25AA%25AC%25E3%2580%2591Git%25E3%2583%25BB%25E3%2583%2584%25E3%2583%25AA%25E3%2583%25BC%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2582%2582%25EF%25BC%2581ls%25E3%2582%2588%25E3%2582%258A%25E5%25BF%25AB%25E9%2581%25A9%25E3%2581%25AARust%25E8%25A3%25BD%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E8%25A7%25A3%25E8%25AA%25AC%25E9%259B%2586%25E3%2580%2590eza%25202%252F3%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%2588%25E3%2583%259F%25E3%2583%25BC%25E3%2581%25A1%25E3%2582%2583%25E3%2582%2593%25E3%2581%25AD%25E3%2582%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzgxNDM2NDU4OWQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>トミーちゃんねる</dc:creator></item><item><title><![CDATA[主要OSの特徴と活用シーン：初心者からプロまで]]></title><description><![CDATA[
+ 主要OSの特徴と活用シーン
+オペレーティングシステム（OS）は、コンピュータのハードウェアとソフトウェアを管理する基本ソフトウェアです。本記事では、主要なOSの特徴と、それぞれの活用シーンについて解説します。
+
+ Windows
+
+ 特徴
+
+マイクロソフトが開発・提供する商用OS
+世界で最も普及しているデスクトップOS
+豊富なソフトウェアとハードウェアの互換性
+
+
+ 主な用途
+
+一般的なオフィスワーク
+ゲーム
+ビジネスソフトウェアの利用
+
+
+ バージョン
+
+Windows 11：最新バージョン、モダンなUI、Android アプリ対応
+Windows 10：安定性が高く、広く普及
+W...]]></description><link>https://zenn.dev/iikanash1/articles/operating-systems-overview</link><guid isPermaLink="true">https://zenn.dev/iikanash1/articles/operating-systems-overview</guid><pubDate>Fri, 30 May 2025 05:29:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9H1paror--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E4%25B8%25BB%25E8%25A6%2581OS%25E3%2581%25AE%25E7%2589%25B9%25E5%25BE%25B4%25E3%2581%25A8%25E6%25B4%25BB%25E7%2594%25A8%25E3%2582%25B7%25E3%2583%25BC%25E3%2583%25B3%25EF%25BC%259A%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E3%2581%258B%25E3%2582%2589%25E3%2583%2597%25E3%2583%25AD%25E3%2581%25BE%25E3%2581%25A7%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258B%25E3%2581%25AA%25E3%2581%2597%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTDFiWHB5WG1ra0p5WS16N0d5bExrZFdLelFBRFl5RFExd1dsQkxvNldjX21WeTY2eUQ9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>かなし</dc:creator></item><item><title><![CDATA[シェルスクリプトの基本その1]]></title><description><![CDATA[どうも、かりんです
+
+ はじめに
+これから作業を自動化したいと考えている方には、シェルスクリプトを覚えておくことをおすすめいたします。
+業務で使用する場面もありますし、プライベートでもファイル処理などを効率化できるため、覚えておいて損はございません。
+そのため、まずは基礎的な部分から順を追って記録していきます。
+
+ シェルスクリプトとは何か
+簡単に申し上げますと、ターミナルで使用するコマンドを並べて書いたファイルのことです。
+たとえば、同じ操作を何度も繰り返しているような場合、それらをスクリプトとしてまとめておけば効率化につながります。
+
+ スクリプトの作成と実行権限の付与
+シェルスクリ...]]></description><link>https://zenn.dev/karin_lab/articles/2f199ea4051bb3</link><guid isPermaLink="true">https://zenn.dev/karin_lab/articles/2f199ea4051bb3</guid><pubDate>Fri, 30 May 2025 02:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--LGx2K-CK--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B7%25E3%2582%25A7%25E3%2583%25AB%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2583%2588%25E3%2581%25AE%25E5%259F%25BA%25E6%259C%25AC%25E3%2581%259D%25E3%2581%25AE1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258B%25E3%2582%258A%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZmNjQ5NDk1MzMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>かりん</dc:creator></item><item><title><![CDATA[わかりづらいコマンドのソートを解説してみた]]></title><description><![CDATA[
+ はじめに
+どうも！
+lsコマンドやezaコマンドを実行するときは、大体grepでデータを引っ張り出す、しがない酒飲みエンジニアです。
+今回は、ezaコマンドの-sオプションを調べてみたのまとめてみました！
+
+ SortKeyの設定
+
+
+
+ソートキー
+意味
+
+
+
+
+name
+名前順（アルファベット順）
+
+
+Name
+大文字→小文字の順でソート
+
+
+extension
+拡張子順（例：txt,zip）
+
+
+Extension
+大文字を優先した拡張子順
+
+
+size
+ファイルサイズ順
+
+
+type
+ファイル種別順
+
+
+created
+作成日順
+
+
+date
+最終更新順（新しい順）
+
+
+cha...]]></description><link>https://zenn.dev/tomy_ch/articles/aea9bef463eaa3</link><guid isPermaLink="true">https://zenn.dev/tomy_ch/articles/aea9bef463eaa3</guid><pubDate>Thu, 29 May 2025 09:00:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--FNkXsDwn--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%258F%25E3%2581%258B%25E3%2582%258A%25E3%2581%25A5%25E3%2582%2589%25E3%2581%2584%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2581%25AE%25E3%2582%25BD%25E3%2583%25BC%25E3%2583%2588%25E3%2582%2592%25E8%25A7%25A3%25E8%25AA%25AC%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%2588%25E3%2583%259F%25E3%2583%25BC%25E3%2581%25A1%25E3%2582%2583%25E3%2582%2593%25E3%2581%25AD%25E3%2582%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzgxNDM2NDU4OWQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>トミーちゃんねる</dc:creator></item><item><title><![CDATA[chromebookにNixOSを導入して最強のlinux開発環境を整える。]]></title><description><![CDATA[最近ChromeBookを購入しました。
+youtubeを見るネットサーフィンぐらいしかChromeBookの活用を見出していませんでした。
+ChromeBookには、Linuxを使用できる機能があり、でも基本的にはdebian、ubuntuベースであまり使いたいとは思いませんでした。
+なので頑張ってNixOSを自分の気に入ったOSを別で入れてみたいと思います。
+
+ chrome bookのターミナル
+ChromeOS
+ctrl+alt+f2~f7を押すとchromeOSの「仮想コンソール」を開けます。
+ここではchromeOS自体の操作ができます。gentooのようなコマンドや、chr...]]></description><link>https://zenn.dev/tositada/articles/457d5dd3aaf7f1</link><guid isPermaLink="true">https://zenn.dev/tositada/articles/457d5dd3aaf7f1</guid><pubDate>Wed, 28 May 2025 10:19:31 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--AlhF_CjH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:chromebook%25E3%2581%25ABNixOS%25E3%2582%2592%25E5%25B0%258E%25E5%2585%25A5%25E3%2581%2597%25E3%2581%25A6%25E6%259C%2580%25E5%25BC%25B7%25E3%2581%25AElinux%25E9%2596%258B%25E7%2599%25BA%25E7%2592%25B0%25E5%25A2%2583%25E3%2582%2592%25E6%2595%25B4%25E3%2581%2588%25E3%2582%258B%25E3%2580%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tositada%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2dqd1FPYmhFZkxNaTVBMnBxQnZ5Wmgzbi1jVXVIZnhleXdvaHJIb0E9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tositada</dc:creator></item><item><title><![CDATA[【導入ガイド】Mac/Windows/Linux対応：Font導入まで完全解説（lsの次世代ツール）【eza 1/3】]]></title><description><![CDATA[
+ はじめに
+こんにちは！
+Windowsを使わなくなった理由はlsコマンドがなくdirを強要されたからな、しがない酒飲みエンジニアです。
+
+ 解説バージョン
+
+
+
+解説アプリ
+バージョン名
+
+
+
+
+eza
+v0.21.3
+
+
+warp
+v0.2025.05.21.08.11.stable_01
+
+
+JetBrainsMono
+v2.304
+
+
+
+
+ ezaとは？
+簡単にいえば、「Rust製のモダンなlsコマンド」です！
+
+カラー表示の非対応
+Git との統合の欠如
+ツリー表示の非対応
+拡張属性やシンボリックリンクの情報表示の制限
+
+などができます。
+
+ lsdとの比較(eza vs l...]]></description><link>https://zenn.dev/tomy_ch/articles/cce923d8c3f0d0</link><guid isPermaLink="true">https://zenn.dev/tomy_ch/articles/cce923d8c3f0d0</guid><pubDate>Wed, 28 May 2025 03:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--DRflUHLZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%25B0%258E%25E5%2585%25A5%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%25E3%2580%2591Mac%252FWindows%252FLinux%25E5%25AF%25BE%25E5%25BF%259C%25EF%25BC%259AFont%25E5%25B0%258E%25E5%2585%25A5%25E3%2581%25BE%25E3%2581%25A7%25E5%25AE%258C%25E5%2585%25A8%25E8%25A7%25A3%25E8%25AA%25AC%25EF%25BC%2588ls%25E3%2581%25AE%25E6%25AC%25A1%25E4%25B8%2596%25E4%25BB%25A3%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%25EF%25BC%2589%25E3%2580%2590eza%25201%252F3%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%2588%25E3%2583%259F%25E3%2583%25BC%25E3%2581%25A1%25E3%2582%2583%25E3%2582%2593%25E3%2581%25AD%25E3%2582%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzgxNDM2NDU4OWQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>トミーちゃんねる</dc:creator></item><item><title><![CDATA[Linuxへの感覚的アプローチ]]></title><description><![CDATA[
+ Linuxを勉強するための準備
+Linuxの勉強を始めると沢山のキーワードが出てきて少し迷子になりがち。キーワードの関係を整理しながら、Linuxの勉強に取り組むための一歩目のアプローチを提案する。
+
+ Linuxとは
+Linuxは(コンピュータの)OSの種類の一つです。
+GNU/Linuxなどとも呼ばれます。
+
+ 特徴
+
+LinuxはUnix互換を目指して、リーナス・トーバルズ氏により開発されたOSです。(※Unix互換 : Unixを真似て、Unixと同じように使える)
+自由に使えることを目的としておりGPLライセンスで管理されています。
+厳密には「Linux」はOSのカーネル(...]]></description><link>https://zenn.dev/niibori/articles/linux-intuitive-approach</link><guid isPermaLink="true">https://zenn.dev/niibori/articles/linux-intuitive-approach</guid><pubDate>Tue, 27 May 2025 15:59:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ele0sELB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%25E3%2581%25B8%25E3%2581%25AE%25E6%2584%259F%25E8%25A6%259A%25E7%259A%2584%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Niibori%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U4ZDA4Mjg3YTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Niibori</dc:creator></item><item><title><![CDATA[Kernelへの感覚的アプローチ]]></title><description><![CDATA[
+ カーネルを理解するのに苦労する
+Linuxの勉強を始めると苦労する カーネル(Kernel) 。特に難しい事は言っていないはずなのに、何故か理解に苦しむ。カーネル理解に向けた一歩目のアプローチを提案してみる。
+
+ カーネルとは
+カーネルはハードウェアを制御するプログラムです。
+
+ ハードウェアとは
+コンピュータは沢山のハードウェアで構成されています。CPUを始め記憶デバイスや入出力デバイスその他諸々です。
+これらのハードウェアが適切に動作し合うことでコンピュータは動作します。
+
+ ハードウェアの制御
+適切に動作させるためには、適切な制御が必要です。しかし、これを人間が行うのは困難です...]]></description><link>https://zenn.dev/niibori/articles/kernel-intuitive-approach</link><guid isPermaLink="true">https://zenn.dev/niibori/articles/kernel-intuitive-approach</guid><pubDate>Tue, 27 May 2025 15:59:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wEJz_7Ra--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Kernel%25E3%2581%25B8%25E3%2581%25AE%25E6%2584%259F%25E8%25A6%259A%25E7%259A%2584%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Niibori%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U4ZDA4Mjg3YTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Niibori</dc:creator></item><item><title><![CDATA[Lnuc101　合格体験記（勉強方法など）]]></title><description><![CDATA[
+Linux公式マスコット　タックス（英: Tux）
+
+ はじめに
+
+皆さん、こんにちわ。だいすーです。
+今回は、Linuc101を受験し無事合格することができたのでその体験をまとめていきたいと思います。
+
+
+ 勉強のきっかけ
+
+以前からLinuxを触っていたのですが、この度インフラ系の職種に就職したので、改めて学習しより基礎を固めたい事と資格を取って自身の能力を他の人にわかりやすくしたいと考えたからです。
+
+
+ 勉強方針
+
+Ping-tや教本(あずき本)で対策をし、取得することを目標とした
+コマンドオプションは由来を調べたりして効率的に覚えた
+テキストだけでは知識が薄くなってしまう部分...]]></description><link>https://zenn.dev/smbysdisk/articles/adb1494f526c1b</link><guid isPermaLink="true">https://zenn.dev/smbysdisk/articles/adb1494f526c1b</guid><pubDate>Tue, 27 May 2025 07:30:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--B3gIZCxA--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Lnuc101%25E3%2580%2580%25E5%2590%2588%25E6%25A0%25BC%25E4%25BD%2593%25E9%25A8%2593%25E8%25A8%2598%25EF%25BC%2588%25E5%258B%2589%25E5%25BC%25B7%25E6%2596%25B9%25E6%25B3%2595%25E3%2581%25AA%25E3%2581%25A9%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A0%25E3%2581%2584%25E3%2581%2599%25E3%2583%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q1N2U3MzU3YmMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>だいすー</dc:creator></item><item><title><![CDATA[[Tips] LFTPによるデータ転送]]></title><description><![CDATA[
+ はじめに
+Turingの基盤AIチームに業務委託として所属している東京科学大学(Institute of Science Tokyo)の藤井です。
+本記事では、LLM(Large Language Models)やVLM(Vision Language Models)などの学習で利用するデータセットを複数のデータセンター間で並列転送する際に利用しているLFTPの使用方法について紹介します。AWS S3, GCSなどのCloud Service企業のストレージサービスを利用される場合は、aws s3コマンドやgcloudコマンドなどにより並列転送を容易に実現可能ですが、そうでない場合に...]]></description><link>https://zenn.dev/turing_motors/articles/9243bd64258c7e</link><guid isPermaLink="true">https://zenn.dev/turing_motors/articles/9243bd64258c7e</guid><pubDate>Tue, 27 May 2025 07:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9KIX5nse--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BTips%255D%2520LFTP%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258B%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E8%25BB%25A2%25E9%2580%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Kazuki%2520Fujii%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VhNmQ4MDk1OGQuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Tech%2520Blog%2520-%2520Turing%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NiYTAwZDNmYWIuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kazuki Fujii</dc:creator></item><item><title><![CDATA[(執筆中)【Linux】ディストリビューションの選び方！]]></title><description><![CDATA[
+ 突然ですが、Linuxディストリビューションに迷っていませんか？
+もし迷っているなら、
+
+サーバーで使いたい
+普段使いで試してみたい
+セキュリティ重視のOSがいい
+など、色々な理由があると思います。
+この記事では、あまり知られていないディストリビューションも紹介していくので、ぜひ見ていってください！
+
+
+ Linuxのいいところ
+Linuxは、他のOSとは違う特徴を持っています。
+カスタマイズ性が最も高いと言っていいぐらいなことや、軽量すぎるという面もあり、最近では普段使い向けに特化したLinuxも出てきています。
+
+Windows: 最も使われているOS。ほぼ全てのソフトが動くが、...]]></description><link>https://zenn.dev/techcat56/articles/713e73e09ccdaa</link><guid isPermaLink="true">https://zenn.dev/techcat56/articles/713e73e09ccdaa</guid><pubDate>Mon, 26 May 2025 13:56:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4psg5kbj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%2528%25E5%259F%25B7%25E7%25AD%2586%25E4%25B8%25AD%2529%25E3%2580%2590Linux%25E3%2580%2591%25E3%2583%2587%25E3%2582%25A3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25AA%25E3%2583%2593%25E3%2583%25A5%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2581%25AE%25E9%2581%25B8%25E3%2581%25B3%25E6%2596%25B9%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:DiamondGotCat%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZjMjk0OGU5NWMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>DiamondGotCat</dc:creator></item><item><title><![CDATA[ラズパイでOpenMediavalut7とTailscaleVPNを使って便利なNASを作ろう]]></title><description><![CDATA[前回の続きです。
+詳しくはNASを作ろう(計画・設計編)をご覧ください。
+材料を用意したので、組み立てからNASを構築して、VPNでファイルにアクセスできるところまで行きたいと思います
+
+ 今回用意したもの
+GeekpiのM.2対応ケース
+M.2 SSD 256GB
+64GB MicroSD
+ラズパイ 5 8GB
+
+ 利用するOS・サービス
+Rasberrypi OS
+OpenMediavalut ※以下OMV
+Tailscale VPN
+
+ ラズパイの組み立て
+ケースにラズパイを組み付けて行きます
+今回はGeekpiのこちらのケースを使用します
+M.2を乗せるためのボードが付いています...]]></description><link>https://zenn.dev/manatosasaki/articles/836ec80112dcf6</link><guid isPermaLink="true">https://zenn.dev/manatosasaki/articles/836ec80112dcf6</guid><pubDate>Mon, 26 May 2025 01:08:27 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fFtDByZD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%25A9%25E3%2582%25BA%25E3%2583%2591%25E3%2582%25A4%25E3%2581%25A7OpenMediavalut7%25E3%2581%25A8TailscaleVPN%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E4%25BE%25BF%25E5%2588%25A9%25E3%2581%25AANAS%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258D%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2595%25E3%2581%2595%25E3%2581%258D%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZlOTgzNWNjOTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ささき</dc:creator></item><item><title><![CDATA[開発用AIターミナル Warpのダイマをするだけの話【Warp 1/3】]]></title><description><![CDATA[
+ はじめに
+とうも、会社で真っ黒なターミナルに飽きた、しがない酒飲みエンジニアです。
+今回ご紹介するWarpは端的に言えば、「Rustで開発された高速かつ高機能なターミナルエミュレータ」。
+
+ 対応OS
+現在は、Linux, Mac, Windowsの3大OSでリリースされています！
+
+
+ 機能
+一般的なターミナルよりもリッチになっています！
+入力補完やコマンド履歴機能などは作業する時に痒いところに手が届くほか、
+テーマを手軽に弄れたりするのでモチベも上がります！
+個人的には、コマンド履歴が見やすいのと入力補完があるだけで結構嬉しいです^ - ^
+Warp公式サイト
+
+ AIによる対話...]]></description><link>https://zenn.dev/tomy_ch/articles/e9485921a1fc45</link><guid isPermaLink="true">https://zenn.dev/tomy_ch/articles/e9485921a1fc45</guid><pubDate>Sun, 25 May 2025 06:27:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GMpVMfNI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E9%2596%258B%25E7%2599%25BA%25E7%2594%25A8AI%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%259F%25E3%2583%258A%25E3%2583%25AB%2520Warp%25E3%2581%25AE%25E3%2583%2580%25E3%2582%25A4%25E3%2583%259E%25E3%2582%2592%25E3%2581%2599%25E3%2582%258B%25E3%2581%25A0%25E3%2581%2591%25E3%2581%25AE%25E8%25A9%25B1%25E3%2580%2590Warp%25201%252F3%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%2588%25E3%2583%259F%25E3%2583%25BC%25E3%2581%25A1%25E3%2582%2583%25E3%2582%2593%25E3%2581%25AD%25E3%2582%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzgxNDM2NDU4OWQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>トミーちゃんねる</dc:creator></item><item><title><![CDATA[2025年、Windows 10からLinuxデスクトップへ移行を検討する人へ]]></title><description><![CDATA[Windows 10のサポートが2025年10月に終了します。サポートが終了すると、セキュリティアップデートが提供されなくなり、新たな脆弱性が修正されなくなります。そのため、引き続きWindows 10を使い続けることは、ハッキングなどのリスクが高まることを意味します。
+Windows 11への移行には、ある程度新しいハードウェアが必要です。特にIntel製CPUの場合、第8世代以降（2017年以降発売）のCore iシリーズが必要となります。これより古いパソコンはWindows 11にアップグレードできないため、新しいパソコンを購入するか、Linuxへの乗り換えを検討する必要があります...]]></description><link>https://zenn.dev/ouvill/articles/should_switch_to_linux_from_windows</link><guid isPermaLink="true">https://zenn.dev/ouvill/articles/should_switch_to_linux_from_windows</guid><pubDate>Sat, 24 May 2025 16:46:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--FqDAY_VD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:2025%25E5%25B9%25B4%25E3%2580%2581Windows%252010%25E3%2581%258B%25E3%2582%2589Linux%25E3%2583%2587%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%2588%25E3%2583%2583%25E3%2583%2597%25E3%2581%25B8%25E7%25A7%25BB%25E8%25A1%258C%25E3%2582%2592%25E6%25A4%259C%25E8%25A8%258E%25E3%2581%2599%25E3%2582%258B%25E4%25BA%25BA%25E3%2581%25B8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Ouvill%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q3NDgyNGFjZDQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Ouvill</dc:creator></item><item><title><![CDATA[リンカーとローダーの技術詳解 ~ ソフトウェア開発の出雲大社 ~]]></title><description><![CDATA[
+ はじめに ~ なぜリンカー・ローダーを理解する必要があるのか ~
+
+ 日本神話にあるから
+リンカーとローダーは、ソフトウェア開発における「縁結びの神」と言える存在だ。古来より出雲大社は日本全国の神々を集めて縁結びをする神聖な場所とされてきたが、リンカーとローダーもまた、散り散りになった関数やデータという「神々」を一堂に集め、互いの縁を結び、一つの調和したプログラムという「神事」を執り行う。
+関数たちは遠く離れたソースファイルという「国々」から集められ、リンカーという「神主」の手によって結びつけられる。シンボルの解決は、お互いを探し求めていた関数と変数の「良縁」を成立させる儀式のような...]]></description><link>https://zenn.dev/su8/articles/268d3741077368</link><guid isPermaLink="true">https://zenn.dev/su8/articles/268d3741077368</guid><pubDate>Sat, 24 May 2025 13:22:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dSpZ1GqO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%25AA%25E3%2583%25B3%25E3%2582%25AB%25E3%2583%25BC%25E3%2581%25A8%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2580%25E3%2583%25BC%25E3%2581%25AE%25E6%258A%2580%25E8%25A1%2593%25E8%25A9%25B3%25E8%25A7%25A3%2520%7E%2520%25E3%2582%25BD%25E3%2583%2595%25E3%2583%2588%25E3%2582%25A6%25E3%2582%25A7%25E3%2582%25A2%25E9%2596%258B%25E7%2599%25BA%25E3%2581%25AE%25E5%2587%25BA%25E9%259B%25B2%25E5%25A4%25A7%25E7%25A4%25BE%2520%7E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:su8%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUVkRlRwNHdDZWsxTUFjbzVXNlpLQUgtaGNiMGI1SDZrODRKdkd2ZGpoNDZQUT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>su8</dc:creator></item><item><title><![CDATA[catatsuy's Picks Vol.14]]></title><description><![CDATA[
+ Go
+https://nghiant3223.github.io/2025/04/15/go-scheduler.html
+goroutineのruntime上での挙動について解説されている。
+
+ Security
+https://zenn.dev/catatsuy/articles/3b1e07e674c875
+自分で書いた記事。ECHの実装が現実的に進んできているため、最新のアップデートをまとめた。
+
+ AI
+https://developer.chrome.com/blog/ai-io25
+ChromeとGeminiの統合が進んでいる。今後、体験が大きく変わりそう。
+
+ Bro...]]></description><link>https://zenn.dev/catatsuy/articles/3ede8069505001</link><guid isPermaLink="true">https://zenn.dev/catatsuy/articles/3ede8069505001</guid><pubDate>Sat, 24 May 2025 09:40:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ZSSYu2JG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_76:catatsuy%2527s%2520Picks%2520Vol.14%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:catatsuy%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NiYTVlYjRjMTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>catatsuy</dc:creator></item><item><title><![CDATA[Linux の man ページ翻訳用に Weblate サイトを構築中の件]]></title><description><![CDATA[
+ 前回の記事をポエムで終わらせないために
+https://zenn.dev/yasumichi/articles/5e2913dd193df6
+言うは易く行うは難し
+前回の記事からの変化事項です。
+JM Projectに関すること
+
+
+メーリングリストへの復帰
+以下のメンバーとして追加していただいた
+
+sourceforge.net のプロジェクト
+GitHub の Organazation
+
+
+Weblate[1] サイトを構築作業中 ← 今ここ
+
+前回の記事で事実誤認がありましたが、2014年頃から多くの man ページに po4aが導入されていたようです。（正式なアナウンスがあっ...]]></description><link>https://zenn.dev/yasumichi/articles/b93ed514a00275</link><guid isPermaLink="true">https://zenn.dev/yasumichi/articles/b93ed514a00275</guid><pubDate>Sat, 24 May 2025 05:05:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Oj6obBwN--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%2520%25E3%2581%25AE%2520man%2520%25E3%2583%259A%25E3%2583%25BC%25E3%2582%25B8%25E7%25BF%25BB%25E8%25A8%25B3%25E7%2594%25A8%25E3%2581%25AB%2520Weblate%2520%25E3%2582%25B5%25E3%2582%25A4%25E3%2583%2588%25E3%2582%2592%25E6%25A7%258B%25E7%25AF%2589%25E4%25B8%25AD%25E3%2581%25AE%25E4%25BB%25B6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yasumichi%2520Akahoshi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSUoySnNPVXFnanR4SGcteXBvTGoxcmVpTXlzc1dwYnltZEJ2ZHZYa1ExT1kteHRFOGs9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yasumichi Akahoshi</dc:creator></item><item><title><![CDATA[Linux + Arduino-CLI + M5Stackで開発ができない]]></title><description><![CDATA[
+ ことの始まり
+久しぶりにM5Stack core2で開発しようと思ったら下記エラー
+/home/ryo-hey/Arduino/libraries/M5Core2/src/utility/pngle.c:31:10: fatal error: rom/miniz.h: No such file or directory
+  31 | #include &lt;rom/miniz.h&gt;
+     |          ^~~~~~~~~~~~~
+compilation terminated.
+idfのv5.4からはromというフォルダはごっそりなくなっていました。
+chatGPT...]]></description><link>https://zenn.dev/gyoppee/articles/cf6db10d0b7715</link><guid isPermaLink="true">https://zenn.dev/gyoppee/articles/cf6db10d0b7715</guid><pubDate>Fri, 23 May 2025 07:57:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--epkupBgf--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%2520%252B%2520Arduino-CLI%2520%252B%2520M5Stack%25E3%2581%25A7%25E9%2596%258B%25E7%2599%25BA%25E3%2581%258C%25E3%2581%25A7%25E3%2581%258D%25E3%2581%25AA%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Gyoppe-%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvZy5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Gyoppe-</dc:creator></item></channel></rss>
