@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Linux」のフィード]]></title><description><![CDATA[Zennのトピック「Linux」のRSSフィードです]]></description><link>https://zenn.dev/topics/linux</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/860a9eb1e4.png</url><title>Zennの「Linux」のフィード</title><link>https://zenn.dev/topics/linux</link></image><generator>zenn.dev</generator><lastBuildDate>Wed, 04 Jun 2025 09:30:58 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/linux/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[【Shell】Shell のループ構文まとめ]]></title><description><![CDATA[
+ Shell スクリプトで使える「for ループ」3選！
+Shell スクリプトでよく使う「for ループ」。
+この記事では、基本から応用まで、代表的な3つの書き方を紹介します。
+
+
+ ✅ 1. 基本的なリスト形式のループ
+for i in 1 2 3 4 5
+do
+  echo "A"
+done
+📝 1 2 3 4 5 を直接書く形式です。小規模な固定回数ループに便利です。
+
+
+ ✅ 2. seq を使ってループ
+for i in $(seq 1 5)
+do
+  echo "B"
+done
+📝 seq コマンドを使えば、範囲指定で柔軟なループができます。
+
+
+ ✅ 3. 変数を使った...]]></description><link>https://zenn.dev/qa_dev/articles/26da468b22515f</link><guid isPermaLink="true">https://zenn.dev/qa_dev/articles/26da468b22515f</guid><pubDate>Tue, 03 Jun 2025 23:24:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--DSUbKCqg--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Shell%25E3%2580%2591Shell%2520%25E3%2581%25AE%25E3%2583%25AB%25E3%2583%25BC%25E3%2583%2597%25E6%25A7%258B%25E6%2596%2587%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:qa_dev%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTGRfRnVZcmtndVIzVW1ScTVFMWdDMmozVmR4cFRjV29uUTJYd2JOQ2RhQ3ltaEFBPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>qa_dev</dc:creator></item><item><title><![CDATA[【Python】Shell Scriptを実行する基本]]></title><description><![CDATA[
+ PythonからShell Scriptを実行する基本
+Mac や Linux 環境で、Pythonから .sh ファイル（シェルスクリプト）を呼び出す方法を紹介します。
+テスト自動化や簡単なタスク実行にも応用できます。
+
+ ✅ サンプルコード
+import subprocess
+
+# capture_output=True: 標準出力・標準エラー出力を取得する
+# text=True: 出力をバイト列ではなく文字列として扱う
+result = subprocess.run(['bash', 'test.sh'], capture_output=True, text=True)
+pr...]]></description><link>https://zenn.dev/qa_dev/articles/b880d3e97d8696</link><guid isPermaLink="true">https://zenn.dev/qa_dev/articles/b880d3e97d8696</guid><pubDate>Tue, 03 Jun 2025 12:20:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--N_yzl5m3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591Shell%2520Script%25E3%2582%2592%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%2599%25E3%2582%258B%25E5%259F%25BA%25E6%259C%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:qa_dev%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTGRfRnVZcmtndVIzVW1ScTVFMWdDMmozVmR4cFRjV29uUTJYd2JOQ2RhQ3ltaEFBPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>qa_dev</dc:creator></item><item><title><![CDATA[GL.inetルーター GL-MT6000 #2: NFS サーバーにもしてしまう。]]></title><description><![CDATA[
+ 目的
+
+GL.inet 社製ルーター GL-MT6000 (Flint2) 上に NFS サーバーを作りたい。
+
+このルーター、国産 WiFi ルーターにはありえない高機能＆カスタマイズ性があり、
+とっても使いやすく／設定できてよいのだが、ハマりポイントも多数のため記録。
+
+
+
+
+ 前提
+https://zenn.dev/koinec/articles/869a9e0201895b
+の続きのため、こちらでのユーザー作成、OpenSSH 化を前提としています。
+
+ NFS サーバー化の仕様
+まず仕様を整理。
+
+NFS 領域は USB スティック型 SSD を挿して利用
+
+ルーターの標準...]]></description><link>https://zenn.dev/koinec/articles/42abf37207c43c</link><guid isPermaLink="true">https://zenn.dev/koinec/articles/42abf37207c43c</guid><pubDate>Tue, 03 Jun 2025 11:52:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--mFYfpPgU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:GL.inet%25E3%2583%25AB%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%25BC%2520GL-MT6000%2520%25232%253A%2520NFS%2520%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2581%25AB%25E3%2582%2582%25E3%2581%2597%25E3%2581%25A6%25E3%2581%2597%25E3%2581%25BE%25E3%2581%2586%25E3%2580%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:koinec%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ0ZGQ0NjhjYzYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>koinec</dc:creator></item><item><title><![CDATA[[Linux] 起動時間を*極限まで*短くする]]></title><description><![CDATA[ノートパソコンでもなくただのデスクトップなので起動時間が長いのもしょうがないかなーとか思っていたのですがやっぱり起動時間が長いとモチベーションが下がるのでちょうどArch LinuxからCachyOSに移行したのを機にいろいろ変えてみました
+
+ 環境
+
+$ systemd-analyze #現在の起動時間
+Startup finished in 17.469s (firmware) + 6.790s (loader) + 11.084s (kernel) + 7.852s (userspace) = 43.196s 
+graphical.target reached after 4.80...]]></description><link>https://zenn.dev/hayattgd/articles/bb438a4b27dcf3</link><guid isPermaLink="true">https://zenn.dev/hayattgd/articles/bb438a4b27dcf3</guid><pubDate>Tue, 03 Jun 2025 08:25:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3T5Hy9gX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BLinux%255D%2520%25E8%25B5%25B7%25E5%258B%2595%25E6%2599%2582%25E9%2596%2593%25E3%2582%2592%252A%25E6%25A5%25B5%25E9%2599%2590%25E3%2581%25BE%25E3%2581%25A7%252A%25E7%259F%25AD%25E3%2581%258F%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hayattgd%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E1NjBlNTFhNmQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hayattgd</dc:creator></item><item><title><![CDATA[🐳Docker基礎]]></title><description><![CDATA[
+ 🐳Dockerとは？
+Dockerとは、コンテナ技術を使ってアプリケーションを実行・配布・管理するためのツールです。
+Linuxカーネルの機能を直接使ってコンテナを実現しています。
+イメージ（アプリの設計図）とコンテナ（実行中の実体）を区別します。
+仮想マシンと違って軽量・高速に起動・削除ができます。
+
+ コンテナとは？
+コンテナは、「ホストOSのカーネルを共有しながら、隔離された環境で動くプロセス」のことです。
+ホストのカーネルは使いますが、ファイルシステム・プロセス空間・ネットワークなどは仮想的に独立しています。
+
+ カーネルとは？
+カーネルとは、OSの中核部分でハードウェアとソ...]]></description><link>https://zenn.dev/kasai/articles/39d65d4825abc2</link><guid isPermaLink="true">https://zenn.dev/kasai/articles/39d65d4825abc2</guid><pubDate>Tue, 03 Jun 2025 07:11:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Bdfbe1Tv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_76:%2520Docker%25E5%259F%25BA%25E7%25A4%258E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kasai%2520Ukyo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVlYjgwMzQ4N2UuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kasai Ukyo</dc:creator></item><item><title><![CDATA[asdf + poetry環境手順]]></title><description><![CDATA[
+ asdf + Poetry 環境構築ガイド
+この記事では、バージョン管理ツール「asdf」を用いて、Poetryを含むPython開発環境を構築する手順をまとめます。asdfは複数のプログラミング言語のバージョンを統一的に管理できるツールで、PythonやPoetryのバージョンを柔軟に切り替えることができます。
+
+ 環境
+
+Ubuntu 24.04
+Windows WSL2
+
+
+ 1. asdfのインストール
+公式ガイドを参考にして、asdfをインストールします。
+
+asdfインストール手順
+v0.16以降のアップグレードガイド
+
+
+ 2. バイナリのダウンロードと配置
+以下のコマ...]]></description><link>https://zenn.dev/west_river/articles/55c73be4d8d478</link><guid isPermaLink="true">https://zenn.dev/west_river/articles/55c73be4d8d478</guid><pubDate>Tue, 03 Jun 2025 03:18:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--NErS3vHI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:asdf%2520%252B%2520poetry%25E7%2592%25B0%25E5%25A2%2583%25E6%2589%258B%25E9%25A0%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:WestRiver%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0ZVdPUEQ0WFBfeHhfOG9Ob0FfdVZ2dXFGX2ZEWTJHQ3Ffbml2REY9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>WestRiver</dc:creator></item><item><title><![CDATA[Linuxコマンドとトラブルシューティングの基礎知識]]></title><description><![CDATA[インターンのケース面接で、どう答えていいかわからなかったので、まとめておきます。
+この記事では、Linux環境で作業をする上で不可欠な基本的なコマンドとシステムやネットワークのトラブルシューティング時に役立つコマンドをまとめておきます。
+
+ 1.Linuxの基本的なコマンド
+日常的に使用する基本的なコマンドをカテゴリ別にまとめておきます。
+
+ 1.1.ファイルとディレクトリの操作
+
+
+
+
+コマンド
+説明
+主なオプション/使用例
+
+
+
+
+pwd
+現在のディレクトリのパスを表示
+pwd
+
+
+cd
+ディレクトリを移動
+
+cd /home/user/documents(絶対パス) cd ..(親...]]></description><link>https://zenn.dev/kasa02/articles/c6fb0441d2f3be</link><guid isPermaLink="true">https://zenn.dev/kasa02/articles/c6fb0441d2f3be</guid><pubDate>Tue, 03 Jun 2025 02:21:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Vu9eTt73--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2581%25A8%25E3%2583%2588%25E3%2583%25A9%25E3%2583%2596%25E3%2583%25AB%25E3%2582%25B7%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%2586%25E3%2582%25A3%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%25AE%25E5%259F%25BA%25E7%25A4%258E%25E7%259F%25A5%25E8%25AD%2598%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kasa%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdjZDFjM2U0ZDUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kasa</dc:creator></item><item><title><![CDATA[✍️ 1行目を除いて5行ごとに保存する小ワザ]]></title><description><![CDATA[テキストファイルを扱っていて、1行目にヘッダーがあるケースってよくありますよね。
+ヘッダー行はそのまま残しておきたいけど、データ部分は5行おきに抜き出したい…そんなときに使えるワンライナーをご紹介します。
+
+
+ 使うコマンド
+# ヘッダーを除いてから、5行ごとに1行だけ抽出するパターン
+tail -n +2 input.txt | awk 'NR%5==1' &gt; output.txt
+
+
+tail -n +2 input.txt
+
+ファイルの2行目以降を全部表示します。
+1行目（ヘッダー）をスルーするイメージ。
+
+
+
+awk 'NR%5==1'
+
+パイプで流れてきた2行目以降のデー...]]></description><link>https://zenn.dev/yicr/articles/624f0a4e03e310</link><guid isPermaLink="true">https://zenn.dev/yicr/articles/624f0a4e03e310</guid><pubDate>Mon, 02 Jun 2025 14:30:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ZLwGQeUX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%2520%25201%25E8%25A1%258C%25E7%259B%25AE%25E3%2582%2592%25E9%2599%25A4%25E3%2581%2584%25E3%2581%25A65%25E8%25A1%258C%25E3%2581%2594%25E3%2581%25A8%25E3%2581%25AB%25E4%25BF%259D%25E5%25AD%2598%25E3%2581%2599%25E3%2582%258B%25E5%25B0%258F%25E3%2583%25AF%25E3%2582%25B6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yicr%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0ZUY0Sjg5VVRKclNZLWN1TDNEOU51MjFtNlZscFVWU3ExS2YwcXhuYUNpZDJvPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yicr</dc:creator></item><item><title><![CDATA[ECSサービスのターゲットグループ設定ミスでハマった話]]></title><description><![CDATA[
+ 概要
+ECSサービスでRegisterTargetsイベントが発生しているにも関わらず、Application Load Balancerでターゲットが登録されない問題の調査・解決記録です。
+結論：ECSサービスが意図しないターゲットグループを参照していることが原因でした。
+
+注意： 本記事のコマンド例では、実際のリソース名やARNは仮名に置き換えています。実際の運用では、適切なリソース名に読み替えてください。
+
+
+ 背景・経緯
+この問題は、以下のTerraform運用過程で発生しました：
+
+
+STG環境で正常に動作していたリソースをベースにTerraformモジュール化を実施
+作成...]]></description><link>https://zenn.dev/zuzuzu/articles/ecs-target-group-error</link><guid isPermaLink="true">https://zenn.dev/zuzuzu/articles/ecs-target-group-error</guid><pubDate>Mon, 02 Jun 2025 12:52:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dSPgSgJ---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ECS%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2593%25E3%2582%25B9%25E3%2581%25AE%25E3%2582%25BF%25E3%2583%25BC%25E3%2582%25B2%25E3%2583%2583%25E3%2583%2588%25E3%2582%25B0%25E3%2583%25AB%25E3%2583%25BC%25E3%2583%2597%25E8%25A8%25AD%25E5%25AE%259A%25E3%2583%259F%25E3%2582%25B9%25E3%2581%25A7%25E3%2583%258F%25E3%2583%259E%25E3%2581%25A3%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:zu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2EwYzkyNjY5ZjcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>zu</dc:creator></item><item><title><![CDATA[Parabola GNU/Linux-libreのインストールと初期設定]]></title><description><![CDATA[Windows11とParabola GNU/Linux-libreのマルチブート環境構築手順です。
+Parabola GNU/Linux-libreは、通常のLinuxカーネルではなく、Linux-libre(https://www.fsfla.org/ikiwiki/selibre/linux-libre/ )という完全に自由なソフトウェアだけで構成されたカーネルを用いています。Archから派生したディストリビューションですが、パッケージマネージャーで導入できるソフトウェアも全て自由なソフトウェアのみで構成されています。
+WifiやBluetooth、GPUの選択によっては潔く諦める...]]></description><link>https://zenn.dev/hironori_ueno/articles/c7928f8dbb8178</link><guid isPermaLink="true">https://zenn.dev/hironori_ueno/articles/c7928f8dbb8178</guid><pubDate>Mon, 02 Jun 2025 12:45:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--tKdSugsc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Parabola%2520GNU%252FLinux-libre%25E3%2581%25AE%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%25A8%25E5%2588%259D%25E6%259C%259F%25E8%25A8%25AD%25E5%25AE%259A%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Hiro%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvaC5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Hiro</dc:creator></item><item><title><![CDATA[GL.inetルーター GL-MT6000 #1: 紹介〜初期設定〜OpenSSH 化]]></title><description><![CDATA[
+ 目的
+
+GL.inet 社製ルーター GL-MT6000 (Flint2) を WiFi ルーター兼 NFS サーバーにしたい。
+
+このルーター、国産 WiFi ルーターにはありえない高機能＆カスタマイズ性があり、
+とっても使いやすく／設定できてよいのだが、ハマりポイントも多数のため記録。
+まずは基礎となる OpenSSH を入れたい。
+
+
+
+
+ 発端は次期 WiFi ルーター探しで困っていた...
+自宅の WiFi ルーターはこれまで国産を使っており、安定性などには不安はなかったのだが、一応 Linux 関連の仕事をしていて、プライベートでも　FreeBSD や Linux ユーザ...]]></description><link>https://zenn.dev/koinec/articles/869a9e0201895b</link><guid isPermaLink="true">https://zenn.dev/koinec/articles/869a9e0201895b</guid><pubDate>Mon, 02 Jun 2025 12:19:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bsnHAeRk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:GL.inet%25E3%2583%25AB%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%25BC%2520GL-MT6000%2520%25231%253A%2520%25E7%25B4%25B9%25E4%25BB%258B%25E3%2580%259C%25E5%2588%259D%25E6%259C%259F%25E8%25A8%25AD%25E5%25AE%259A%25E3%2580%259COpenSSH%2520%25E5%258C%2596%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:koinec%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ0ZGQ0NjhjYzYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>koinec</dc:creator></item><item><title><![CDATA[AndroidにLinuxターミナルアプリが追加(導入編)]]></title><description><![CDATA[
+ はじめに
+本記事で扱う内容は、2025年3月上旬に、Android 15に追加された、Linuxターミナルアプリに関連したものです。
+今回は、その導入編となります。今後、端末内での仕組みを踏まえた解説などを予定しています。
+
+ Android15に追加されたLinuxターミナルアプリとは
+3月上旬、Android 15にLinuxターミナルアプリが追加されました。(ただし、まだPixelのみでの利用です)
+当初、Android16向けに搭載されると噂されていた本機能ですが、Pixelではそれに先んじてAndroid15からの搭載になりました。
+これまでも、Android向けにLinu...]]></description><link>https://zenn.dev/nttdata_tech/articles/8560b587626eb3</link><guid isPermaLink="true">https://zenn.dev/nttdata_tech/articles/8560b587626eb3</guid><pubDate>Mon, 02 Jun 2025 08:02:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--I9DCRS1o--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Android%25E3%2581%25ABLinux%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%259F%25E3%2583%258A%25E3%2583%25AB%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2581%258C%25E8%25BF%25BD%25E5%258A%25A0%2528%25E5%25B0%258E%25E5%2585%25A5%25E7%25B7%25A8%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Akihiro%2520Shiota%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg2ZTQyNDMyMWQuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:NTT%2520DATA%2520TECH%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvYS5wbmc=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Akihiro Shiota</dc:creator></item><item><title><![CDATA[wslにRocky Linuxをインストールする]]></title><description><![CDATA[https://docs.rockylinux.org/guides/interoperability/import_rocky_to_wsl/
+上記URLからRocky Linuxの9のBase x86_64をダウンロードする（今回はWindowsのデスクトップへ）。
+Get the container rootfs. This is possible in multiple ways:
+以下にある。
+保存先としてG:\wsl\rockylinux9フォルダにインストールしたい為先にフォルダを作成しておく。
+ダウンロードを完了しフォルダが作成済みなら以下のコマンドを実行。
+wsl --...]]></description><link>https://zenn.dev/it_ojisan/articles/d6318e23f42b94</link><guid isPermaLink="true">https://zenn.dev/it_ojisan/articles/d6318e23f42b94</guid><pubDate>Mon, 02 Jun 2025 05:31:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--QF7nXiSo--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:wsl%25E3%2581%25ABRocky%2520Linux%25E3%2582%2592%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2599%25E3%2581%258E%25E3%2581%259F%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUxtNXd1MFFzTXVqcG1WN0pYMHU0RHY2dHZEZjNKMFFWZmZiSGQ0Q3A5cGs9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>すぎた</dc:creator></item><item><title><![CDATA[Syncthing＋Samba構成メモ]]></title><description><![CDATA[
+
+ 📁 Raspberry Pi 5 に Android スマホの写真を Syncthing で一方向送信する構成メモ (バックアップ用)
+
+ 🧾 概要
+
+スマホで撮影した写真を Syncthing で Raspberry Pi に一方向送信
+Raspberry Pi 側では Samba により Windows PC からもアクセス可能
+
+
+
+ 🧱 構成概要
+
+
+
+機器
+用途
+
+
+
+
+Raspberry Pi 5
+受信サーバー・Samba共有
+
+
+Android スマホ
+写真を送信（Syncthing）
+
+
+Windows PC
+Sambaでフォルダ閲覧用
+
+
+
+
+
+ 🔧 1. Sam...]]></description><link>https://zenn.dev/memo_h_bar/articles/45666e7ec80b22</link><guid isPermaLink="true">https://zenn.dev/memo_h_bar/articles/45666e7ec80b22</guid><pubDate>Sun, 01 Jun 2025 12:06:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8oBiGl4d--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Syncthing%25EF%25BC%258BSamba%25E6%25A7%258B%25E6%2588%2590%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%258A%2580%25E8%25A1%2593%25E3%2583%25A1%25E3%2583%25A2%25E7%2594%25A8%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSS1ZcmxIWVozdkRtMVN4bmVuZ2tOd2YyeGVtblJoZ0k2V24tLTRhZ3p5ZFRuYjRRPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>技術メモ用</dc:creator></item><item><title><![CDATA[LPIC学習日記2️⃣]]></title><description><![CDATA[
+ 📅 学習日：2025年05月31日
+
+ 🎯 今日の学習目標
+
+UNIXコマンドについて
+
+
+ 📚 学んだことまとめ
+
+Linuxでよく利用されるコマンドについて
+
+
+ 💡 実行コマンド・使用例
+■find － ファイルを条件で検索
+find /etc -name "*.conf"
+find /home -type f -size +100M
+■cut － 指定フィールドや文字を抽出
+cut ［オプション] ファイル名
+・オプション
+-d:区切り文字を指定（デフォルトはタブ）→例:cut -d ":" /xxx/yyy.conf
+-f:フィールド番号を指定→例:cut -d "," -...]]></description><link>https://zenn.dev/kasumi98/articles/89e5814be6d838</link><guid isPermaLink="true">https://zenn.dev/kasumi98/articles/89e5814be6d838</guid><pubDate>Sat, 31 May 2025 15:53:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--E5xeqtsj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:LPIC%25E5%25AD%25A6%25E7%25BF%2592%25E6%2597%25A5%25E8%25A8%2598%2520%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kasumi98%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTDgzZW0xZUZKM2VPNm5SR0VqVU5DVnFqRjRvcmdfdUNXRHUzek9hVzQxYzQ5ZW1sWTU9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kasumi98</dc:creator></item><item><title><![CDATA[po4a 化されていない man ページの po4a 化]]></title><description><![CDATA[
+ 前回の記事
+https://zenn.dev/yasumichi/articles/b93ed514a00275
+
+ リストアップ
+以下、左側が、manual ディレクトリにあるすべてのディレクトリ、右側は po4a 化が終わっているディレクトリです。
+GNU_autoconf                                                    GNU_autoconf
+GNU_automake                                                    GNU_automake
+GNU_bash      ...]]></description><link>https://zenn.dev/yasumichi/articles/1f6873bc5cfefa</link><guid isPermaLink="true">https://zenn.dev/yasumichi/articles/1f6873bc5cfefa</guid><pubDate>Sat, 31 May 2025 11:50:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--nOrlh9Lp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:po4a%2520%25E5%258C%2596%25E3%2581%2595%25E3%2582%258C%25E3%2581%25A6%25E3%2581%2584%25E3%2581%25AA%25E3%2581%2584%2520man%2520%25E3%2583%259A%25E3%2583%25BC%25E3%2582%25B8%25E3%2581%25AE%2520po4a%2520%25E5%258C%2596%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yasumichi%2520Akahoshi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSUoySnNPVXFnanR4SGcteXBvTGoxcmVpTXlzc1dwYnltZEJ2ZHZYa1ExT1kteHRFOGs9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yasumichi Akahoshi</dc:creator></item><item><title><![CDATA[passphraseを自動で入力できるようにする]]></title><description><![CDATA[シェルの立ち上げ毎に実行が必要。
+# SSH エージェントが動いていなければ起動して鍵を追加する
+if [ -z "$SSH_AUTH_SOCK" ] ; then
+  eval "$(ssh-agent -s)"
+  ssh-add ~/.ssh/id_ed25519
+fi
+]]></description><link>https://zenn.dev/yuto_mo/articles/a44158052b6442</link><guid isPermaLink="true">https://zenn.dev/yuto_mo/articles/a44158052b6442</guid><pubDate>Fri, 30 May 2025 23:52:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lMmGm2-V--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:passphrase%25E3%2582%2592%25E8%2587%25AA%25E5%258B%2595%25E3%2581%25A7%25E5%2585%25A5%25E5%258A%259B%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258B%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yuto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VkZTU2N2E0NDcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yuto</dc:creator></item><item><title><![CDATA[Puppy Linux のインストール]]></title><description><![CDATA[Puppy Linux のインストールした時のメモです。
+
+ Puppy Linux の OS の書き込み
+
+次のサイトからイメージファイル(ISO)をダウンロード 。https://puppylinux-woof-ce.github.io/
+
+私のコンピュータのアーキテクチャは x86_64 64-bit で、さらに Puppy Linux は Ubuntu ベースが良かったので Ubuntu Focal 64 でした
+
+
+Rufusで USB メモリに書き込む。Refusは窓の杜にある。
+
+
+ BIOSの設定
+・BIOSの設定で USB メモリの起動順位をトップにする
+・BIOSの設...]]></description><link>https://zenn.dev/15bluefortran/articles/70a4ed3d56aed2</link><guid isPermaLink="true">https://zenn.dev/15bluefortran/articles/70a4ed3d56aed2</guid><pubDate>Fri, 30 May 2025 19:46:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5yp2zhq---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Puppy%2520Linux%2520%25E3%2581%25AE%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:K%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSXlKaklHWTlqc3JjcFhuZFctLVlvVlJxNkFROXlicmhiN1AxVlV2aHJxT0VzPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>K</dc:creator></item><item><title><![CDATA[【完全解説】Git・ツリー表示も！lsより快適なRust製ファイル表示コマンド解説集【eza 2/3】]]></title><description><![CDATA[
+ はじめに
+どうも！
+lsコマンドはaとlを多用しがちな、しがない酒飲みエンジニアです。
+今回は、ezaコマンドのオプションについて解説していきます！
+
+ 解説バージョン
+
+
+
+解説アプリ
+バージョン名
+
+
+
+
+eza
+v0.21.3
+
+
+warp
+v0.2025.05.21.08.11.stable_01
+
+
+JetBrainsMono
+v2.304
+
+
+
+
+ 【完全解説】ezaコマンドのオプション
+使い方
+eza [オプション] [ファイル...]
+
+利用頻度に関しては完全偏見で作成しました！
+
+ 表示オプション(必要に応じて呼び出す系)
+
+
+
+オプション
+説明
+利用頻度
+実行
+
+...]]></description><link>https://zenn.dev/tomy_ch/articles/5042fc5b8e57b0</link><guid isPermaLink="true">https://zenn.dev/tomy_ch/articles/5042fc5b8e57b0</guid><pubDate>Fri, 30 May 2025 09:00:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--n9UT5i6K--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%25AE%258C%25E5%2585%25A8%25E8%25A7%25A3%25E8%25AA%25AC%25E3%2580%2591Git%25E3%2583%25BB%25E3%2583%2584%25E3%2583%25AA%25E3%2583%25BC%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2582%2582%25EF%25BC%2581ls%25E3%2582%2588%25E3%2582%258A%25E5%25BF%25AB%25E9%2581%25A9%25E3%2581%25AARust%25E8%25A3%25BD%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E8%25A7%25A3%25E8%25AA%25AC%25E9%259B%2586%25E3%2580%2590eza%25202%252F3%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%2588%25E3%2583%259F%25E3%2583%25BC%25E3%2581%25A1%25E3%2582%2583%25E3%2582%2593%25E3%2581%25AD%25E3%2582%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzgxNDM2NDU4OWQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>トミーちゃんねる</dc:creator></item><item><title><![CDATA[主要OSの特徴と活用シーン：初心者からプロまで]]></title><description><![CDATA[
+ 主要OSの特徴と活用シーン
+オペレーティングシステム（OS）は、コンピュータのハードウェアとソフトウェアを管理する基本ソフトウェアです。本記事では、主要なOSの特徴と、それぞれの活用シーンについて解説します。
+
+ Windows
+
+ 特徴
+
+マイクロソフトが開発・提供する商用OS
+世界で最も普及しているデスクトップOS
+豊富なソフトウェアとハードウェアの互換性
+
+
+ 主な用途
+
+一般的なオフィスワーク
+ゲーム
+ビジネスソフトウェアの利用
+
+
+ バージョン
+
+Windows 11：最新バージョン、モダンなUI、Android アプリ対応
+Windows 10：安定性が高く、広く普及
+W...]]></description><link>https://zenn.dev/iikanash1/articles/operating-systems-overview</link><guid isPermaLink="true">https://zenn.dev/iikanash1/articles/operating-systems-overview</guid><pubDate>Fri, 30 May 2025 05:29:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9H1paror--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E4%25B8%25BB%25E8%25A6%2581OS%25E3%2581%25AE%25E7%2589%25B9%25E5%25BE%25B4%25E3%2581%25A8%25E6%25B4%25BB%25E7%2594%25A8%25E3%2582%25B7%25E3%2583%25BC%25E3%2583%25B3%25EF%25BC%259A%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E3%2581%258B%25E3%2582%2589%25E3%2583%2597%25E3%2583%25AD%25E3%2581%25BE%25E3%2581%25A7%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258B%25E3%2581%25AA%25E3%2581%2597%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTDFiWHB5WG1ra0p5WS16N0d5bExrZFdLelFBRFl5RFExd1dsQkxvNldjX21WeTY2eUQ9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>かなし</dc:creator></item></channel></rss>

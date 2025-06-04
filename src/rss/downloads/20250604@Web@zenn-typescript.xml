@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「TypeScript」のフィード]]></title><description><![CDATA[Zennのトピック「TypeScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/typescript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/f13e758fdb.png</url><title>Zennの「TypeScript」のフィード</title><link>https://zenn.dev/topics/typescript</link></image><generator>zenn.dev</generator><lastBuildDate>Wed, 04 Jun 2025 09:32:19 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/typescript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[TypeScript(Deno)におけるモジュールとパッケージの使い分け]]></title><description><![CDATA[
+ 要約
+TypeScript実行環境であるDenoを例に、モジュール(ESM)/パッケージ/ワークスペースの概念と適切な使い分けを整理します。これらを理解することで、コードの構造化とプロジェクト管理が効率的になります。
+
+ はじめに
+TypeScriptはJavaScriptに型システムを加えた言語ですが、歴史的経緯から複雑な概念が存在します。特に、処理をどこに配置するのが適切かという点は重要な課題です。
+本記事では、Denoのワークスペース機能を理解する過程で明確になった、モジュール・パッケージ・ワークスペースの役割と使い分けについて解説します。
+
+ 対象読者
+
+他言語経験者でTyp...]]></description><link>https://zenn.dev/yabuki/articles/2025-06-04-typescript-workspace</link><guid isPermaLink="true">https://zenn.dev/yabuki/articles/2025-06-04-typescript-workspace</guid><pubDate>Wed, 04 Jun 2025 06:10:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Du7G37-m--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%2528Deno%2529%25E3%2581%25AB%25E3%2581%258A%25E3%2581%2591%25E3%2582%258B%25E3%2583%25A2%25E3%2582%25B8%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%25A8%25E3%2583%2591%25E3%2583%2583%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B8%25E3%2581%25AE%25E4%25BD%25BF%25E3%2581%2584%25E5%2588%2586%25E3%2581%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:YABUKI%2520Yukiharu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2huRmQ1MnFmTEF6bUNNYVREYVhrTEZsZ0l0d1FrNVlrczJvcjBEPXMyNTAtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>YABUKI Yukiharu</dc:creator></item><item><title><![CDATA[値が無いかもしれない、を`Option<T>`で表す！`T | null`との違いは？🤔]]></title><description><![CDATA[
+ はじめに
+こんにちは。最近fp-tsを用いた関数型プログラミングにハマっているs.katoです。
+そんなfp-tsについてキャッチアップをするときに割と最初に触れた概念(型？表現？)であるOptionについて、今回は紹介したいと思います！
+まずはfp-tsにおけるOptionの定義から
+export interface None {
+  readonly _tag: 'None'
+}
+
+export interface Some&lt;A&gt; {
+  readonly _tag: 'Some'
+  readonly value: A
+
+export type Option&lt;...]]></description><link>https://zenn.dev/ispec_inc/articles/e968d8e0732f5d</link><guid isPermaLink="true">https://zenn.dev/ispec_inc/articles/e968d8e0732f5d</guid><pubDate>Wed, 04 Jun 2025 03:00:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--HQmM5C9L--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2580%25A4%25E3%2581%258C%25E7%2584%25A1%25E3%2581%2584%25E3%2581%258B%25E3%2582%2582%25E3%2581%2597%25E3%2582%258C%25E3%2581%25AA%25E3%2581%2584%25E3%2580%2581%25E3%2582%2592%2560Option%253CT%253E%2560%25E3%2581%25A7%25E8%25A1%25A8%25E3%2581%2599%25EF%25BC%2581%2560T%2520%257C%2520null%2560%25E3%2581%25A8%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%25E3%2581%25AF%25EF%25BC%259F%2520%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:s.kato%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRmN2Y5YzE4ZTUuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:ispec%2520inc.%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JlOTEwZDc3Y2UuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>s.kato</dc:creator></item><item><title><![CDATA[型アノテーションでなく satisfies 演算子を使うことで得られる恩恵]]></title><description><![CDATA[TypeScript の satisfies 演算子は既にご存知の方も多いと思いますが、実際のプロジェクトでは「型アノテーションで十分では？」と考えて、従来通りの型アノテーション（: Type構文）を使い続けている方も多いのではないでしょうか？
+確かに型アノテーションでも型安全性は確保できますが、satisfies 演算子を使うことで得られる具体的な恩恵を理解すると、より型安全なコードにすることができます。
+本記事では、型アノテーションと satisfies 演算子の実用的な違いを具体的なコード例で比較し、なぜ satisfies を積極的に採用すべきなのかを解説します。この記事を読めば...]]></description><link>https://zenn.dev/m0t0taka/articles/03ee63ea2565b5</link><guid isPermaLink="true">https://zenn.dev/m0t0taka/articles/03ee63ea2565b5</guid><pubDate>Wed, 04 Jun 2025 02:08:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--K-BdluZK--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%259E%258B%25E3%2582%25A2%25E3%2583%258E%25E3%2583%2586%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2581%25A7%25E3%2581%25AA%25E3%2581%258F%2520satisfies%2520%25E6%25BC%2594%25E7%25AE%2597%25E5%25AD%2590%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%25E3%2581%2593%25E3%2581%25A8%25E3%2581%25A7%25E5%25BE%2597%25E3%2582%2589%25E3%2582%258C%25E3%2582%258B%25E6%2581%25A9%25E6%2581%25B5%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258E%25E3%2583%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQxZTJhNzliZWMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ぎー</dc:creator></item><item><title><![CDATA[TypeScriptの型システムを紐解いてIsAnyを知る]]></title><description><![CDATA[
+ はじめに
+!
+修正や追加等はコメントまたはGitHubで編集リクエストをお待ちしております。
+
+type-challengesというTypeScriptの型パズルを集めたリポジトリに、「IsAny」という問題があります。これは、与えられた型が any かどうかを判定する型を実装する問題です。
+この問題に対して、Issue #232で紹介されている解法が実に美しい:
+type IsAny&lt;T&gt; = 0 extends 1 &amp; T ? true : false;
+一見すると「0 extends 1」という不可能な条件と交差型を組み合わせた奇妙な実装ですが、これが an...]]></description><link>https://zenn.dev/gmomedia/articles/cc28d14c13a418</link><guid isPermaLink="true">https://zenn.dev/gmomedia/articles/cc28d14c13a418</guid><pubDate>Wed, 04 Jun 2025 01:13:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--St_3z16H--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%25E3%2581%25AE%25E5%259E%258B%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%25E3%2582%2592%25E7%25B4%2590%25E8%25A7%25A3%25E3%2581%2584%25E3%2581%25A6IsAny%25E3%2582%2592%25E7%259F%25A5%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Riya%2520Amemiya%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzMzOGEzNzc5MTMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:GMO%25E3%2583%25A1%25E3%2583%2587%25E3%2582%25A3%25E3%2582%25A2%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzIyOTk0YWYxZDYuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Riya Amemiya</dc:creator></item><item><title><![CDATA[「チーバくんのどこ？」がすぐわかるアプリを作りました]]></title><description><![CDATA[
+ デプロイしたWebアプリ
+
+
+chibakun-doko（開発中）
+
+
+検索欄に千葉県の市町村を入力します
+市町村をリストから選択します
+チーバくんのどのあたりにあるかわかります
+
+
+
+工夫点
+
+テキスト入力中（ひらがな）に自動的に市町村が絞り込まれます
+「チーバくん」や「市町村名」はリンク（太字部分）になっており、クリックすると飛べます
+レスポンシブデザインを意識しました（最低限、スマホだと見にくい）
+
+
+ バージョン履歴
+ver 0.1
+
+プロトタイプをデプロイしました
+
+
+ TODO
+
+選択した市町村に色をつけて表示する
+
+現在は画像表示しているだけ
+
+
+若干UIずれてるのが気...]]></description><link>https://zenn.dev/btforest/articles/64b58a370a2cc3</link><guid isPermaLink="true">https://zenn.dev/btforest/articles/64b58a370a2cc3</guid><pubDate>Tue, 03 Jun 2025 17:16:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Cqh9ums---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%258C%25E3%2583%2581%25E3%2583%25BC%25E3%2583%2590%25E3%2581%258F%25E3%2582%2593%25E3%2581%25AE%25E3%2581%25A9%25E3%2581%2593%25EF%25BC%259F%25E3%2580%258D%25E3%2581%258C%25E3%2581%2599%25E3%2581%2590%25E3%2582%258F%25E3%2581%258B%25E3%2582%258B%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258A%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:btforest%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSjRHTHk5MWY2Z0h4X0EtV0JPUXhYam1ONGt2N18waU42bkhlNXQ5QklDcmZWR2NPND1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>btforest</dc:creator></item><item><title><![CDATA[typescriptのsatisfiesをちょっと調べた]]></title><description><![CDATA[
+ どんなもの？
+typescriptサバイバルより引用。
+
+*satisfies T(Tは型)は、変数宣言時に使用する演算子で、その値が型Tを満たすことを検証します。この演算子は型の絞り込みを保持したまま型チェックを行える特徴があります。
+as constと異なり、satisfiesはその後に型を要求します。単独で使用することはできません。*
+
+文法的には satisfies T らしいです。
+const user = {
+	name: string
+} satisfies UserType // &lt;- これ！
+ちなみに、型アノテーションと違う部分も書いてありました。
+
+型アノテ...]]></description><link>https://zenn.dev/pitta/articles/adb0016c94fbcd</link><guid isPermaLink="true">https://zenn.dev/pitta/articles/adb0016c94fbcd</guid><pubDate>Tue, 03 Jun 2025 13:19:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BUEGts8e--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:typescript%25E3%2581%25AEsatisfies%25E3%2582%2592%25E3%2581%25A1%25E3%2582%2587%25E3%2581%25A3%25E3%2581%25A8%25E8%25AA%25BF%25E3%2581%25B9%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%2592%25E3%2583%25A7%25E3%2583%25B3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q5NWIzNjkzYjguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ヒョン</dc:creator></item><item><title><![CDATA[Web Stream APIを使ってサーバーのメモリより大きなデータを扱う]]></title><description><![CDATA[
+ はじめに
+Web Stream APIを試してみました!
+それまであまり技術イベントに参加したことはなかったのですが、2024年10月のNihonbashi.jsに参加し、詳しい方のお話を聞いて興味を持ったのがきっかけです
+
+ 前提
+
+ Web Stream APIとは？
+こちらのスライドの解説が非常にわかりやすいです
+https://speakerdeck.com/tasshi/tskaigi-2025-web-streams-api
+MDNでは下記のように紹介されています
+
+ストリーム API を使用すると、 JavaScript がネットワーク経由で受信したデータのストリームに...]]></description><link>https://zenn.dev/dev_commune/articles/e9cf974989409e</link><guid isPermaLink="true">https://zenn.dev/dev_commune/articles/e9cf974989409e</guid><pubDate>Tue, 03 Jun 2025 12:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--clAMdYly--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Web%2520Stream%2520API%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2581%25AE%25E3%2583%25A1%25E3%2583%25A2%25E3%2583%25AA%25E3%2582%2588%25E3%2582%258A%25E5%25A4%25A7%25E3%2581%258D%25E3%2581%25AA%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%2592%25E6%2589%25B1%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:astatsuya%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y1MTE3MTI5NDIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25B3%25E3%2583%259F%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%25B3%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ExNDAyZDljNDkuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>astatsuya</dc:creator></item><item><title><![CDATA[【Playwright】「Add/Remove Elements」のボタン操作を練習する]]></title><description><![CDATA[
+ 🔘 Playwrightで「Add/Remove Elements」のボタン操作を練習する
+The Internet は、E2E テストツールの練習にぴったりなデモサイトです。
+その中でも今回は、「Add/Remove Elements」という、シンプルながらも 要素の追加と削除 を学べるページを使って、Playwright でのボタン操作を試してみます。
+
+
+ 🌐 対象ページ
+📎 https://the-internet.herokuapp.com/add_remove_elements/
+このページには、以下のような動作が用意されています：
+
+「Add Element」ボタンをク...]]></description><link>https://zenn.dev/qa_dev/articles/2ddbaa2fd23ed0</link><guid isPermaLink="true">https://zenn.dev/qa_dev/articles/2ddbaa2fd23ed0</guid><pubDate>Tue, 03 Jun 2025 11:59:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Hp7P5-C8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Playwright%25E3%2580%2591%25E3%2580%258CAdd%252FRemove%2520Elements%25E3%2580%258D%25E3%2581%25AE%25E3%2583%259C%25E3%2582%25BF%25E3%2583%25B3%25E6%2593%258D%25E4%25BD%259C%25E3%2582%2592%25E7%25B7%25B4%25E7%25BF%2592%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:qa_dev%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTGRfRnVZcmtndVIzVW1ScTVFMWdDMmozVmR4cFRjV29uUTJYd2JOQ2RhQ3ltaEFBPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>qa_dev</dc:creator></item><item><title><![CDATA[[Prisma]カラムを他の型に変更したい時はmigration.sqlに移行クエリを書くのがよい。]]></title><description><![CDATA[Prismaでカラムを追加しようとしてprisma.schemaを見直していたら、Enum型で想定していたカラムがよく見たらEnum型ではなくString型になっていました。うっかりミスです。このままでも運用できなくはないですが気持ちが晴れないので、今まで文字列で保存していたカラムをEnumに移行することにしました。
+
+ 参考
+https://www.prisma.io/docs/orm/prisma-migrate/workflows/customizing-migrations
+
+ カラム名を変更する場合
+ドキュメントの例。例えば以下のようなschemaがあったとして、
+model ...]]></description><link>https://zenn.dev/kyokasuigetu/articles/f5284b8cc588b9</link><guid isPermaLink="true">https://zenn.dev/kyokasuigetu/articles/f5284b8cc588b9</guid><pubDate>Tue, 03 Jun 2025 11:14:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3A7xLQ2---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BPrisma%255D%25E3%2582%25AB%25E3%2583%25A9%25E3%2583%25A0%25E3%2582%2592%25E4%25BB%2596%25E3%2581%25AE%25E5%259E%258B%25E3%2581%25AB%25E5%25A4%2589%25E6%259B%25B4%25E3%2581%2597%25E3%2581%259F%25E3%2581%2584%25E6%2599%2582%25E3%2581%25AFmigration.sql%25E3%2581%25AB%25E7%25A7%25BB%25E8%25A1%258C%25E3%2582%25AF%25E3%2582%25A8%25E3%2583%25AA%25E3%2582%2592%25E6%259B%25B8%25E3%2581%258F%25E3%2581%25AE%25E3%2581%258C%25E3%2582%2588%25E3%2581%2584%25E3%2580%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%2590%2588%25E5%2590%258C%25E4%25BC%259A%25E7%25A4%25BE%25E6%25A1%259C%25E8%258A%25B1%25E6%25B0%25B4%25E6%259C%2588%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc2ZDYyNjFmZDkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>合同会社桜花水月</dc:creator></item><item><title><![CDATA[wasm-bindgen: Javascriptから呼び出せるRust関数を作ろう]]></title><description><![CDATA[
+ wasm-bindgen: Javascriptから呼び出せるRust関数を作ろう
+
+ はじめに
+Rustは高速な実行速度を持つプログラミング言語であり、WebAssembly（Wasm）を使うことで、ブラウザ上でもそのパフォーマンスを活かすことができる。具体的には、時系列データの統計処理などを高速に行うことが可能である。
+wasm-bindgenは、Rustで書いた関数をJavaScriptから呼び出せるようにするためのツールである。今回は文字列を返す関数をRustで書き、それをReactアプリケーションから呼び出す方法を紹介する。
+なお、RustとReactについての基本的な知識...]]></description><link>https://zenn.dev/emoba_tech/articles/f225f007dde195</link><guid isPermaLink="true">https://zenn.dev/emoba_tech/articles/f225f007dde195</guid><pubDate>Tue, 03 Jun 2025 08:56:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--A_aJ6QU6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:wasm-bindgen%253A%2520Javascript%25E3%2581%258B%25E3%2582%2589%25E5%2591%25BC%25E3%2581%25B3%25E5%2587%25BA%25E3%2581%259B%25E3%2582%258BRust%25E9%2596%25A2%25E6%2595%25B0%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258D%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:k22036%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NmNTk5ZjM4YjcuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Emoba%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSzh4UXU2YWV5OElrWS1ma1ZPLUxYMkc5TFBKMU9CMEhfY25MMVNlNTNQSkpDZnpKd1E9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>k22036</dc:creator></item><item><title><![CDATA[僕が考えるフロントエンドの APIクライアント設計：型安全で柔軟なfetchの共通化]]></title><description><![CDATA[
+ Next.jsのAPI呼び出し、もっとスマートにしませんか？
+Next.jsでAPI呼び出しを共通化すると、コードがシンプルになり、開発効率が格段に上がります。この記事では、僕がこだわったAPIクライアントの実装を紹介します。特に、次の2点に力を入れました：
+•  型安全な戻り値：Result&lt;T&gt;型で成功/失敗を明確にし、TypeScriptの型推論で開発を快適に。
+•  関数のみのエクスポート：getやpostを直接エクスポートし、シンプルなインターフェースを提供。
+さらに、以下の点も意識しました：
+•  fetchの隠蔽：URL構築やエラーハンドリングを内部で完結。...]]></description><link>https://zenn.dev/wwwave/articles/12c792f065bc21</link><guid isPermaLink="true">https://zenn.dev/wwwave/articles/12c792f065bc21</guid><pubDate>Tue, 03 Jun 2025 05:01:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GIzhY-NE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2583%2595%25E3%2581%258C%25E8%2580%2583%25E3%2581%2588%25E3%2582%258B%25E3%2583%2595%25E3%2583%25AD%25E3%2583%25B3%25E3%2583%2588%25E3%2582%25A8%25E3%2583%25B3%25E3%2583%2589%25E3%2581%25AE%2520API%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25A4%25E3%2582%25A2%25E3%2583%25B3%25E3%2583%2588%25E8%25A8%25AD%25E8%25A8%2588%25EF%25BC%259A%25E5%259E%258B%25E5%25AE%2589%25E5%2585%25A8%25E3%2581%25A7%25E6%259F%2594%25E8%25BB%259F%25E3%2581%25AAfetch%25E3%2581%25AE%25E5%2585%25B1%25E9%2580%259A%25E5%258C%2596%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%25B4%25E3%2582%2589%25E3%2581%25B5%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA0OTU3ZTVkYWIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:wwwave%2527s%2520Techblog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUVkRlRwNXNESkZ4SHNNMElTM3ZlSV9YU1J6a2pFV2pkQURRWE92RjJNODY9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ぴらふ</dc:creator></item><item><title><![CDATA[【Orval】APIスキーマからほぼノーコードでAPI/クライアント/MCPを生成する]]></title><description><![CDATA[
+ はじめに
+こんにちは。とあるモアイ好きの FE エンジニアです🗿
+今回は Orval というライブラリを使い、OpenAPI スキーマから
+
+API
+API クライアントコード
+MCP サーバー
+
+の TypeScript コード を自動生成し、ほぼ追加コード記述なしで、「チャット入力→ API 呼び出し」「画面描画→ API 呼び出し」を実現します。
+また本記事は1から真似して実行できるようになっているので、ぜひ記事を見ながら手を動かして Orval を使ったスキーマ駆動開発を体感してみてください。
+
+
+ 対象読者
+
+TypeScript で開発を行なっている方
+Orval を用い...]]></description><link>https://zenn.dev/hiromoa1/articles/65756e296283e6</link><guid isPermaLink="true">https://zenn.dev/hiromoa1/articles/65756e296283e6</guid><pubDate>Tue, 03 Jun 2025 04:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--AQ-lCHOO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Orval%25E3%2580%2591API%25E3%2582%25B9%25E3%2582%25AD%25E3%2583%25BC%25E3%2583%259E%25E3%2581%258B%25E3%2582%2589%25E3%2581%25BB%25E3%2581%25BC%25E3%2583%258E%25E3%2583%25BC%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2581%25A7API%252F%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25A4%25E3%2582%25A2%25E3%2583%25B3%25E3%2583%2588%252FMCP%25E3%2582%2592%25E7%2594%259F%25E6%2588%2590%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hiromoa1%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJhN2M3NzE1MjkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hiromoa1</dc:creator></item><item><title><![CDATA[ElectroDB で既存の DynamoDB を扱うときにハマったこと]]></title><description><![CDATA[
+ TL;DR
+
+
+attributes.field で物理名（例: item-id）をマッピングできる
+マッピングした attribute を PK/SKで使うには、indexes.{pk|sk} の composite と template が必要
+
+composite と template には attribute 名（例: itemId） を設定する
+
+
+ はじめに
+このような　DynamoDB　があるとします。
+{
+  "item-id": "abc123",       # PK
+  "category": "electronics", # SK
+  "item-nm": "...]]></description><link>https://zenn.dev/haruc/articles/electrodb-tips</link><guid isPermaLink="true">https://zenn.dev/haruc/articles/electrodb-tips</guid><pubDate>Tue, 03 Jun 2025 03:16:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--NZk-YiTa--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ElectroDB%2520%25E3%2581%25A7%25E6%2597%25A2%25E5%25AD%2598%25E3%2581%25AE%2520DynamoDB%2520%25E3%2582%2592%25E6%2589%25B1%25E3%2581%2586%25E3%2581%25A8%25E3%2581%258D%25E3%2581%25AB%25E3%2583%258F%25E3%2583%259E%25E3%2581%25A3%25E3%2581%259F%25E3%2581%2593%25E3%2581%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Haruto%2520Takeuchi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTDh3WUVjWktUR01tcUwzckpxTXFhYUFKbF9rZ0VzX3lYc1BPcHlUN1dkSE5WdjRhST1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Haruto Takeuchi</dc:creator></item><item><title><![CDATA[【超簡単!】Next.jsにClerkのゲストログイン機能を5分で実装する]]></title><description><![CDATA[
+ 【超簡単!】Next.js + Clerkでゲストログイン機能を5分で実装する
+
+ はじめに
+Next.jsのアプリで認証にClerkを使用している際、「ユーザー登録やログインの手間を省いてアプリを試してもらいたい」という場面があると思います。
+実装方法について分かりやすい情報が見つからなかったので今回はClerkでゲストログインをとっても簡単に実装する方法を紹介します。
+個人開発のアプリを友達にサクッと試してもらいたい。就職活動や転職活動でのポートフォリオにゲストログイン機能を実装したい。と悩んでいる方は是非本記事を読んでみてください。
+
+ この記事のゴール
+Clerk認証を導入し...]]></description><link>https://zenn.dev/ren21/articles/3ded98f7fc9fbd</link><guid isPermaLink="true">https://zenn.dev/ren21/articles/3ded98f7fc9fbd</guid><pubDate>Tue, 03 Jun 2025 01:24:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0C2cPqkj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E8%25B6%2585%25E7%25B0%25A1%25E5%258D%2598%2521%25E3%2580%2591Next.js%25E3%2581%25ABClerk%25E3%2581%25AE%25E3%2582%25B2%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25AD%25E3%2582%25B0%25E3%2582%25A4%25E3%2583%25B3%25E6%25A9%259F%25E8%2583%25BD%25E3%2582%25925%25E5%2588%2586%25E3%2581%25A7%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%258C%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY4YTk2YTVjMDQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>れん</dc:creator></item><item><title><![CDATA[Webサービス+Discord BotのCloudflare移行記録(個人開発)]]></title><description><![CDATA[こんにちは、sugar-catです。
+この記事はとある個人開発のWeb/DiscordサービスをVercelからCloudflareへ移行した際の記録です。
+!
+個人の趣味の範囲での検証のため、業務での利用を前提とした内容ではありません。
+
+個人開発の内容については下記のスライドもご参考ください。
+https://speakerdeck.com/sugarcat7/cloudflare-workflows?slide=21
+https://speakerdeck.com/sugarcat7/zui-jin-ge-ren-kai-fa-kare-i-duo-yan-yu-dui-ying-...]]></description><link>https://zenn.dev/king/articles/fde6d255e1bdc5</link><guid isPermaLink="true">https://zenn.dev/king/articles/fde6d255e1bdc5</guid><pubDate>Tue, 03 Jun 2025 00:25:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_Lx54bj---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Web%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2593%25E3%2582%25B9%252BDiscord%2520Bot%25E3%2581%25AECloudflare%25E7%25A7%25BB%25E8%25A1%258C%25E8%25A8%2598%25E9%258C%25B2%2528%25E5%2580%258B%25E4%25BA%25BA%25E9%2596%258B%25E7%2599%25BA%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:sugar-cat%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVlMTllYzU4NDAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sugar-cat</dc:creator></item><item><title><![CDATA[query-by-role というライブラリを作った]]></title><description><![CDATA[こんにちは、フロントエンドエンジニアの mehm8128 です。最近やってることは sizu.me とか Bluesky とかに書いてます。
+今回は、タイトルの通りライブラリを作ってみたので紹介します。
+
+ query-by-role とは
+フロントエンドエンジニアならきっと使ったことがあるであろう、Testing Library や Playwright などでよく出てくる、あれです。getByRole と queryByRole がありますが、どちらに近いとか考えずに、クエリする感じが出ている query-by-role としました。汎用的すぎるので SWR みたいに、略して qbr...]]></description><link>https://zenn.dev/mehm8128/articles/query-by-role</link><guid isPermaLink="true">https://zenn.dev/mehm8128/articles/query-by-role</guid><pubDate>Mon, 02 Jun 2025 14:29:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3ptMWCxF--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:query-by-role%2520%25E3%2581%25A8%25E3%2581%2584%25E3%2581%2586%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mehm8128%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQxMDA2NzMzZWUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mehm8128</dc:creator></item><item><title><![CDATA[おかえり never のもりへ]]></title><description><![CDATA[
+ こんにちは
+型のくにからこんにちは。
+最近型レベルプログラミングにハマりつつある yossuli です。
+#1 日 1Zenn はちょっと無茶があり期間があいてしまいましたが、前回触れた never の特殊？な挙動についてまとめていきます。
+
+ any でも unknown でもない、そのあいだのなめらかなゆめ
+never とは型システムを集合論としてとらえたときに「空集合」を表す型です。
+空集合であるがゆえに、never には代入することはできず、逆に never は型レベルではどんな型にも代入可能です。
+declare const never: never;
+declare co...]]></description><link>https://zenn.dev/yossuli/articles/5792b6c8d4a245</link><guid isPermaLink="true">https://zenn.dev/yossuli/articles/5792b6c8d4a245</guid><pubDate>Mon, 02 Jun 2025 13:48:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Qw_O5Olv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%258A%25E3%2581%258B%25E3%2581%2588%25E3%2582%258A%2520never%2520%25E3%2581%25AE%25E3%2582%2582%25E3%2582%258A%25E3%2581%25B8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yossuli%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNkYmRjMjQzYjMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yossuli</dc:creator></item><item><title><![CDATA[【Next.js入門】認証付きTask管理アプリを作りながら学ぶモダンなフロントエンド開発]]></title><description><![CDATA[前回は FastAPI を使って、ログイン機能付きのAPIサーバーを作りました。
+今回はその続き、Next.js を使って実際に動くタスク管理アプリのフロントエンドを作っていきます！
+
+✅ ログイン・新規登録画面の作成
+✅ JWTを使った認証処理の実装
+✅ タスクの一覧表示・追加・削除のAPI連携
+
+などなど、「APIをどうやってフロントエンドから使うのか？」という超実践的な内容を、初心者にもわかりやすく丁寧に解説していきます！
+
+「ログイン状態ってどう管理するの？」「画面とAPIってどうつなぐの？」といった疑問も、コードを追いながら一緒に解決していきましょう！
+
+Tailwind CSSで見た目も整えていくので、動くだけじゃない、見た目もちゃんとしたアプリになりますよ！
+
+Azure・FastAPI・Next.js・PostgreSQL というモダンな構成で、
+「自分にもこんなWebアプリ作れるんだ！」という成功体験、ぜひ体験してください💪]]></description><link>https://zenn.dev/kenquichi/books/d22a904cd124a8</link><guid isPermaLink="true">https://zenn.dev/kenquichi/books/d22a904cd124a8</guid><pubDate>Mon, 02 Jun 2025 12:14:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--yLJD0xfK--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci8yM2JiOGE4NDI1LmpwZWc=%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>ケン吉</dc:creator></item><item><title><![CDATA[【設計思想】割り勘計算アプリ「わりまる」の開発で学んだ、ユーザー体験を重視した設計のポイント]]></title><description><![CDATA[
+
+ はじめに
+こんにちは、ぐみと申します。花見やタコパなど、持ち寄りパーティーをよく主催する中で、支払い計算の煩わしさを感じていました。特に、複数人が支払った場合の精算計算が面倒で、楽しい会話の途中で計算に時間を取られてしまうことが多かったんです。
+今回は、そんな経験から生まれた 割り勘計算 WEB サイト「わりまる」 の開発を通じて学んだ、ユーザー体験を重視した設計のポイントについて解説します。
+
+ 開発の背景と目的
+
+ アプリ名の由来と設計思想
+
+「わりまる」という名前には、2 つの意味が込められています：
+
+「わり」は「割り勘」から
+「まる」は「支払いが丸く収まる」という願いから...]]></description><link>https://zenn.dev/gumigumih/articles/20250602_warikan-app</link><guid isPermaLink="true">https://zenn.dev/gumigumih/articles/20250602_warikan-app</guid><pubDate>Mon, 02 Jun 2025 11:09:59 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ekjemrXw--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E8%25A8%25AD%25E8%25A8%2588%25E6%2580%259D%25E6%2583%25B3%25E3%2580%2591%25E5%2589%25B2%25E3%2582%258A%25E5%258B%2598%25E8%25A8%2588%25E7%25AE%2597%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2580%258C%25E3%2582%258F%25E3%2582%258A%25E3%2581%25BE%25E3%2582%258B%25E3%2580%258D%25E3%2581%25AE%25E9%2596%258B%25E7%2599%25BA%25E3%2581%25A7%25E5%25AD%25A6%25E3%2582%2593%25E3%2581%25A0%25E3%2580%2581%25E3%2583%25A6%25E3%2583%25BC%25E3%2582%25B6%25E3%2583%25BC%25E4%25BD%2593%25E9%25A8%2593%25E3%2582%2592%25E9%2587%258D%25E8%25A6%2596%25E3%2581%2597%25E3%2581%259F%25E8%25A8%25AD%25E8%25A8%2588%25E3%2581%25AE%25E3%2583%259D%25E3%2582%25A4%25E3%2583%25B3%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2590%25E3%2581%25BF%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTHBNOHNUZXlfY0lydExIS3NhanNpb0U2QUZhVjFJSmJId3c0OGtmYUNUeVg5enV3TT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ぐみ</dc:creator></item><item><title><![CDATA[Mastra で作った Deep Research の劣化版コピー Cheap Research をデプロイしました。]]></title><description><![CDATA[こんにちは、オートロの代表をしております。福田です。今回は、前にご紹介した「チープリサーチ：Mastra で Deep Research の模倣し、Open Cheap Research を作りました。」をデプロイしたことについてご紹介します。フロントエンドは、インターン生に作ってもらいました。
+https://zenn.dev/open_developers/articles/ca49b32c4f8232
+
+ チープリサーチとは？
+チープリサーチは、上記の記事でソースコードも公開されていますが、Mastra というエージェントアプリ開発フレームワークで開発した、Deep Researc...]]></description><link>https://zenn.dev/open_developers/articles/f0e4701c493c7e</link><guid isPermaLink="true">https://zenn.dev/open_developers/articles/f0e4701c493c7e</guid><pubDate>Mon, 02 Jun 2025 10:06:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--LK1d77oq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Mastra%2520%25E3%2581%25A7%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%2520Deep%2520Research%2520%25E3%2581%25AE%25E5%258A%25A3%25E5%258C%2596%25E7%2589%2588%25E3%2582%25B3%25E3%2583%2594%25E3%2583%25BC%2520Cheap%2520Research%2520%25E3%2582%2592%25E3%2583%2587%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25A4%25E3%2581%2597%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%25E3%2580%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E7%25A6%258F%25E7%2594%25B0%25E5%25BF%2597%25E9%2583%258E%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg3Nzg4MGI3YTkuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25AA%25E3%2583%25BC%25E3%2583%2597%25E3%2583%25B3%25E9%2596%258B%25E7%2599%25BA%25E3%2583%2581%25E3%2583%25BC%25E3%2583%25A0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSk10eHRDLUlpSzFEdnk4UVVnODJaRGhCZ1gtUDZZOHVLdm1tSDhQNklVMEJzbDk4ZGI9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>福田志郎</dc:creator></item></channel></rss>
