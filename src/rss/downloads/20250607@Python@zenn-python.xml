@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Sat, 07 Jun 2025 07:20:01 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Model Context Protocol（邦訳）]]></title><description><![CDATA[Model Context Protocol（MCP）の邦訳版です。]]></description><link>https://zenn.dev/uxoxu/books/mcp-docs-japanese</link><guid isPermaLink="true">https://zenn.dev/uxoxu/books/mcp-docs-japanese</guid><pubDate>Sat, 07 Jun 2025 06:10:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--clm17xxs--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci9mZDVkZTNkZTBkLnBuZw==%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>春風</dc:creator></item><item><title><![CDATA[chatGPT先生に聞きながら、Render×Docker×Playwright構成を通すまでの全記録]]></title><description><![CDATA[
+ はじめに
+
+生活系スケジューラーの個人開発を進めています。
+一部の処理に自動ブラウザ操作が必要だったため、これまではローカルでPython＋Seleniumを動かしていましたが、更新や実行が煩雑だったためRenderへ移行することにしました。
+この記事では、Playwright入りPythonスクリプトをRenderで動かすまでに行った設定、ハマった点、改善点を整理して記録します。AIを使えばすぐ動くと思ったら大間違いでした。
+
+ 想定している読者
+
+
+RenderでPlaywrightを動かしたいが構成に不安がある個人開発者
+AIに聞きながらクラウド環境構築に挑戦している初心者
+「...]]></description><link>https://zenn.dev/tanakama/articles/d5c36ae6f52dbd</link><guid isPermaLink="true">https://zenn.dev/tanakama/articles/d5c36ae6f52dbd</guid><pubDate>Sat, 07 Jun 2025 06:07:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--f8n8klvJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:chatGPT%25E5%2585%2588%25E7%2594%259F%25E3%2581%25AB%25E8%2581%259E%25E3%2581%258D%25E3%2581%25AA%25E3%2581%258C%25E3%2582%2589%25E3%2580%2581Render%25C3%2597Docker%25C3%2597Playwright%25E6%25A7%258B%25E6%2588%2590%25E3%2582%2592%25E9%2580%259A%25E3%2581%2599%25E3%2581%25BE%25E3%2581%25A7%25E3%2581%25AE%25E5%2585%25A8%25E8%25A8%2598%25E9%258C%25B2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259F%25E3%2581%25AA%25E3%2581%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2UwZDgwODA4NjQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>たなか</dc:creator></item><item><title><![CDATA[chatGPT先生とBubble×Render開発、はじめました]]></title><description><![CDATA[
+ きっかけは「スケジュール確認がめんどくさい」から
+
+もともと、通っているフィットネススタジオの予約ページを毎回開いて確認するのが手間で、
+「自分の希望のレッスンだけをいい感じに一覧表示してくれる何かが欲しい」と思ったのがスタートでした。
+最初はローカルで動くPythonスクリプトを書いて、手動で動かして整形するだけ。
+でも思った以上に便利で、「これ、もう少しちゃんと動かしたい」と思うようになりました。
+
+ なぜ“ちゃんとシステムを作ろう”と思ったのか
+
+以前から趣味でWeb制作や小さなスクリプトを書いていましたが、「もっと本格的に作りたい」と思い、IT業界に転職もしました。
+ただ、配...]]></description><link>https://zenn.dev/tanakama/articles/a8d6b2682c6ab3</link><guid isPermaLink="true">https://zenn.dev/tanakama/articles/a8d6b2682c6ab3</guid><pubDate>Sat, 07 Jun 2025 06:07:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--NK86Nuom--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:chatGPT%25E5%2585%2588%25E7%2594%259F%25E3%2581%25A8Bubble%25C3%2597Render%25E9%2596%258B%25E7%2599%25BA%25E3%2580%2581%25E3%2581%25AF%25E3%2581%2598%25E3%2582%2581%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259F%25E3%2581%25AA%25E3%2581%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2UwZDgwODA4NjQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>たなか</dc:creator></item><item><title><![CDATA[PlaywrightがRenderでクラッシュした理由と対策（headless=FalseはPaaSでは動かない）録]]></title><description><![CDATA[
+ はじめに
+
+Playwrightを使ってWeb画面を自動操作するスクリプトを作成し、ローカルではGUI表示（headless=False）で問題なく動作していました。
+ところがRenderにデプロイした途端、スクリプトは即クラッシュ。
+「設定の問題？」と思って調べていくと、“headless”という仕組みそのものを分かっていなかったと気づかされました。
+この記事では、PaaS(RenderやHeroku等)でGUIブラウザ処理を動かそうとすると発生するクラッシュの原因と、正しい対処法をまとめます。
+
+
+ 現象：headless=Falseでクラッシュする
+
+RenderにPlaywr...]]></description><link>https://zenn.dev/tanakama/articles/5e041a43bee8e2</link><guid isPermaLink="true">https://zenn.dev/tanakama/articles/5e041a43bee8e2</guid><pubDate>Sat, 07 Jun 2025 06:07:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3WsSG2RE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Playwright%25E3%2581%258CRender%25E3%2581%25A7%25E3%2582%25AF%25E3%2583%25A9%25E3%2583%2583%25E3%2582%25B7%25E3%2583%25A5%25E3%2581%2597%25E3%2581%259F%25E7%2590%2586%25E7%2594%25B1%25E3%2581%25A8%25E5%25AF%25BE%25E7%25AD%2596%25EF%25BC%2588headless%253DFalse%25E3%2581%25AFPaaS%25E3%2581%25A7%25E3%2581%25AF%25E5%258B%2595%25E3%2581%258B%25E3%2581%25AA%25E3%2581%2584%25EF%25BC%2589%25E9%258C%25B2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%259F%25E3%2581%25AA%25E3%2581%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2UwZDgwODA4NjQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>たなか</dc:creator></item><item><title><![CDATA[🗃 FlaskでSQLiteとSQLAlchemyを使う基本入門]]></title><description><![CDATA[
+ 📝 はじめに
+Flaskでユーザー情報や投稿内容などを保存・管理したいとき、データベースとの連携は不可欠です。特に、軽量でシンプルに使えるSQLiteと、Pythonのオブジェクト指向と相性が良いSQLAlchemyは、Flaskと組み合わせることでとても扱いやすくなります。
+この記事では、SQLiteとSQLAlchemyを使って、Flaskアプリケーションにおける基本的なデータベース操作（CRUD）の方法を、初心者にもわかりやすく丁寧に解説します。
+
+ ✅ この記事で学べること
+
+SQLAlchemyの特徴と基本概念
+FlaskでSQLAlchemyを使う準備方法
+データベーステ...]]></description><link>https://zenn.dev/oit2003/articles/d448857294bfd2</link><guid isPermaLink="true">https://zenn.dev/oit2003/articles/d448857294bfd2</guid><pubDate>Sat, 07 Jun 2025 05:27:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--sTdAeg6b--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%2520%2520Flask%25E3%2581%25A7SQLite%25E3%2581%25A8SQLAlchemy%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%25E5%259F%25BA%25E6%259C%25AC%25E5%2585%25A5%25E9%2596%2580%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:OIT2003%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSUwxN0ZaM1B3YkZyak5GWFVZRnNva000aldZTWZaQzc0MVh1UzhtRDdlZUNJVT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>OIT2003</dc:creator></item><item><title><![CDATA[pythonでのPDF編集ライブラリ選定 メタデータがどうなるか]]></title><description><![CDATA[実務で気づいたPDF編集ライブラリの違いについてまとめます。
+各ライブラリの使い勝手などの詳細は他様々な記事で解説されてますので、ここでは実務で遭遇したポイントのみ触れていきます。
+表には出ないPDFのメタデータがポイントでした。
+
+ 必要な機能
+・PDFを指定ページで分割する
+・指定ページを削除する
+です。複数PDFの結合までは求められてないです。
+
+ 選定候補
+・pymupdf
+高機能で様々な事ができます。
+ただし、商用ライセンス。
+・pypdf
+上記の機能は問題なく使えますがメタデータの編集に難があるようで、フォント情報がなくなる事例に遭遇しました(ver5.4.0)。
+・pike...]]></description><link>https://zenn.dev/jun1026/articles/d33f9f474745b9</link><guid isPermaLink="true">https://zenn.dev/jun1026/articles/d33f9f474745b9</guid><pubDate>Sat, 07 Jun 2025 03:35:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--lvFwhsv9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:python%25E3%2581%25A7%25E3%2581%25AEPDF%25E7%25B7%25A8%25E9%259B%2586%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%25E9%2581%25B8%25E5%25AE%259A%2520%25E3%2583%25A1%25E3%2582%25BF%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2581%258C%25E3%2581%25A9%25E3%2581%2586%25E3%2581%25AA%25E3%2582%258B%25E3%2581%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:jlmn1026%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBlZjRjZWY2YTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>jlmn1026</dc:creator></item><item><title><![CDATA[【Python - pandas】ユーザーガイド - パンダまであと10分（2/2）]]></title><description><![CDATA[
+ パンダまであと10分
+
+
+ 前編
+【Python - pandas】ユーザーガイド - パンダまであと10分（1/2）
+
+ マージ
+セクション：マージ、結合、連結、比較
+
+pandas.concat()
+pandas.merge()
+
+マージ
+
+連結
+
+df = pd.DataFrame(np.random.randn(10, 4))
+pieces = [
+    df[:3],
+    df[3:7],
+    df[7:]
+]
+concatted_pieces = pd.concat(pieces)
+
+print("-- df --")
+print(df)
+print("-- p...]]></description><link>https://zenn.dev/takami544/articles/ef4cb6db4e4dde</link><guid isPermaLink="true">https://zenn.dev/takami544/articles/ef4cb6db4e4dde</guid><pubDate>Fri, 06 Jun 2025 23:47:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--bnC3uhb2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%2520-%2520pandas%25E3%2580%2591%25E3%2583%25A6%25E3%2583%25BC%25E3%2582%25B6%25E3%2583%25BC%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%2520-%2520%25E3%2583%2591%25E3%2583%25B3%25E3%2583%2580%25E3%2581%25BE%25E3%2581%25A7%25E3%2581%2582%25E3%2581%25A810%25E5%2588%2586%25EF%25BC%25882%252F2%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:takamin%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg1ZmE4ZDYxNjAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takamin</dc:creator></item><item><title><![CDATA[zshのコマンド履歴みてみた]]></title><description><![CDATA[今回は、私の使っているzshに蓄えられた過去のコマンド履歴について、何を一番使ってきたのかをただ確認したかったので確認するためのコードを書いたという内容を共有します。
+
+ 実装開始！！！
+
+ .zsh_historyのフォーマット
+意外と~/.zsh_historyを直接みたことがある人は少ないのではないでしょうか？かくいう自分も今回はじめてみました。ファイルは以下のようになっています。以下は最初の20行をお見せしています。このようなフォーマットになっており、実行したコマンドは基本的には;の直ごに来ていそうなので、実装ではその部分を取り出すようにしました。
+: 1702554011:0;...]]></description><link>https://zenn.dev/akasan/articles/6333702fc35afc</link><guid isPermaLink="true">https://zenn.dev/akasan/articles/6333702fc35afc</guid><pubDate>Fri, 06 Jun 2025 13:41:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--rzlDm_Mc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:zsh%25E3%2581%25AE%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E5%25B1%25A5%25E6%25AD%25B4%25E3%2581%25BF%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Akasan%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUVkRlRwNXJfNDFtel9OY3dPYUtMRE1vc09tbVB6YmxHM0V5N3lNZzI3QWM9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Akasan</dc:creator></item><item><title><![CDATA[初めてのuv入門｜uvコマンドガイド：uv Tools編]]></title><description><![CDATA[
+知識は武器とかけまして、レゴブロックと解く、その心は――
+今日もKnowledge Oasisへようこそ
+案内人はkoふみです
+本日のテーマは『uv コマンドガイド Tools編』
+
+ はじめに
+uvはPythonパッケージマネージャ兼タスクランナーとして、プロジェクトの依存管理やスクリプト実行だけでなく、外部ツールの実行やインストール機能も提供します。uvを使えば、依存関係をシームレスに扱いながら、例えばコードフォーマッタやテストランナーなどの外部ツールを一時環境で実行したり、ユーザー環境に永続的にインストールしてPATHに追加したりできます。この記事では、uvのツールインターフェー...]]></description><link>https://zenn.dev/knowledge_oasis/articles/command-guide-uv-tool</link><guid isPermaLink="true">https://zenn.dev/knowledge_oasis/articles/command-guide-uv-tool</guid><pubDate>Fri, 06 Jun 2025 13:22:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--l8vhDemY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2588%259D%25E3%2582%2581%25E3%2581%25A6%25E3%2581%25AEuv%25E5%2585%25A5%25E9%2596%2580%25EF%25BD%259Cuv%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%25EF%25BC%259Auv%2520Tools%25E7%25B7%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ko%25E3%2581%25B5%25E3%2581%25BF%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc1NTJjMWYyZTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>koふみ</dc:creator></item><item><title><![CDATA[【Python】システムに取り込ませる用の構造化ログを自動生成する方法]]></title><description><![CDATA[
+ はじめに
+QA業務の現場で「ログをシステムに流し込んで動作確認をしたい」というケースは意外と多くあります。
+特に構造化ログ（JSON形式など）を使っているシステムでは、
+
+「このログ形式で流し込んで動作確認して」
+「ログ受信処理が正しく動くか検証したい」
+
+といったリクエストが日常的に発生します。
+そこで今回は、構造化されたサンプルログを簡単に作成するコードを紹介します。
+
+
+ sample code
+
+import os
+from datetime import datetime
+
+# 書き込む変数
+# varAは固定
+varA = "START_LOG"
+varB_A = "これ...]]></description><link>https://zenn.dev/qa_dev/articles/e77048ce2932f4</link><guid isPermaLink="true">https://zenn.dev/qa_dev/articles/e77048ce2932f4</guid><pubDate>Fri, 06 Jun 2025 12:59:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Q8fIbb5F--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%25E3%2581%25AB%25E5%258F%2596%25E3%2582%258A%25E8%25BE%25BC%25E3%2581%25BE%25E3%2581%259B%25E3%2582%258B%25E7%2594%25A8%25E3%2581%25AE%25E6%25A7%258B%25E9%2580%25A0%25E5%258C%2596%25E3%2583%25AD%25E3%2582%25B0%25E3%2582%2592%25E8%2587%25AA%25E5%258B%2595%25E7%2594%259F%25E6%2588%2590%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:qa_dev%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTGRfRnVZcmtndVIzVW1ScTVFMWdDMmozVmR4cFRjV29uUTJYd2JOQ2RhQ3ltaEFBPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>qa_dev</dc:creator></item><item><title><![CDATA[BirdClef+2025 で銀メダルを獲れました]]></title><description><![CDATA[
+はじめに
+　鳥コンペ2025銀メダルを獲得しました．ソロ参加で分からないことだらけでしたがChatGPTと先人の知恵を借りながらなんとか目標としていた銀メダルを獲得することができました．以下に参加体験記を書きます．
+コンペの概要
+　熱帯雨林に暮らす野生動物たちは、環境の変化にとても敏感です。彼らの「鳴き声」や「音」は、生態系の状態を知るための大切な手がかりになります。しかし、人間が広い森を歩いて調査するのはとても大変で、時間もお金もかかります。
+　そこで今回のKaggleコンペでは、「音声データを使って、どんな動物がいるかをAIで判別する」ことに挑戦します。対象は鳥だけでなく、カエル、...]]></description><link>https://zenn.dev/nomurrrr/articles/0da67ca1b008c7</link><guid isPermaLink="true">https://zenn.dev/nomurrrr/articles/0da67ca1b008c7</guid><pubDate>Fri, 06 Jun 2025 12:06:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--SFtzsDCL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:BirdClef%252B2025%2520%25E3%2581%25A7%25E9%258A%2580%25E3%2583%25A1%25E3%2583%2580%25E3%2583%25AB%25E3%2582%2592%25E7%258D%25B2%25E3%2582%258C%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nomurrrrr%2Cx_90%2Cy_121/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nomurrrrr</dc:creator></item><item><title><![CDATA[ChatGPT APIなしでBlueSkyにキャラbotを作ってみた]]></title><description><![CDATA[BlueSkybotを作ってみたいと思いつつ、chatGPTのAPI課金はしたくないっていう無課金環境でキャラbotを作った手順を紹介していきます。
+
+ 🗂 投稿文はローカルで大量生成するだけ
+使ったのはchatGPT4o。
+まずは一般的なキャラ設定。んで、ここでは「キャラbot」を作るからAI人格+趣味趣向やキャラに付属する人物条件も付与。
+AI人格設定は誰もが一度は触るだろうし、詳しいことは割愛。
+私がAI人格設定するときの条件なんかは以下の記事に詳しく書いています。
+https://zenn.dev/nachi_m/articles/e8547e375fd21a
+人格設定が完了した...]]></description><link>https://zenn.dev/nachi_m/articles/564b31d43265ff</link><guid isPermaLink="true">https://zenn.dev/nachi_m/articles/564b31d43265ff</guid><pubDate>Fri, 06 Jun 2025 02:22:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--26dneqFH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ChatGPT%2520API%25E3%2581%25AA%25E3%2581%2597%25E3%2581%25A7BlueSky%25E3%2581%25AB%25E3%2582%25AD%25E3%2583%25A3%25E3%2583%25A9bot%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25BF%25E3%2581%258B%25E3%2581%2592%25E3%2581%25AA%25E3%2581%25A1%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RjY2Q5Yzk4NWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>みかげなち</dc:creator></item><item><title><![CDATA[MCP対応ツールで実現する会話自動記録システム - 知識の積み重ね効果で学習を加速]]></title><description><![CDATA[「あれ、前にClaudeと話したAWSの設定手順、どこに行ったっけ？」
+そんな経験はありませんか？毎日cursorやclaude desktopなどで貴重なAI対話をしているのに、その知識が蓄積されず散逸してしまうのは本当にもったいないですよね。そこで、今回は知識を蓄積して、分析するシステムを開発しました。
+
+ 開発のモチベーション
+
+ 現状の課題認識
+現代のAI活用においては、新たに以下の根本的な課題が存在してしまいます。
+履歴検索の困難さ
+
+Claude Desktop、ChatGPT、Cursorなどで豊富な対話履歴があっても、内容での検索が困難である
+
+時系列の履歴表示のみで、ト...]]></description><link>https://zenn.dev/okamyuji/articles/44a06d1061a9d7</link><guid isPermaLink="true">https://zenn.dev/okamyuji/articles/44a06d1061a9d7</guid><pubDate>Thu, 05 Jun 2025 21:22:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--M__ZhcUT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:MCP%25E5%25AF%25BE%25E5%25BF%259C%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%25A7%25E5%25AE%259F%25E7%258F%25BE%25E3%2581%2599%25E3%2582%258B%25E4%25BC%259A%25E8%25A9%25B1%25E8%2587%25AA%25E5%258B%2595%25E8%25A8%2598%25E9%258C%25B2%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%2520-%2520%25E7%259F%25A5%25E8%25AD%2598%25E3%2581%25AE%25E7%25A9%258D%25E3%2581%25BF%25E9%2587%258D%25E3%2581%25AD%25E5%258A%25B9%25E6%259E%259C%25E3%2581%25A7%25E5%25AD%25A6%25E7%25BF%2592%25E3%2582%2592%25E5%258A%25A0%25E9%2580%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:okamyuji%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY5YjFmNDYyYjkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>okamyuji</dc:creator></item><item><title><![CDATA[ROS 2: Gazebo上にFusionで作成した探査機のmodelを出現させる]]></title><description><![CDATA[宇宙系のロボット開発サークルで制御の開発をしています。
+アメリカで行われる火星探査機の世界大会UniversityRoverChallengeに出場した際、Navigation2を使ってGPSポイントを巡るような探査機型ロボットの制御開発をしていたのでその備忘録になります。
+本記事では、Fusionから作成したモデルをgazeboで読み込むところまでを紹介します。ローバーのモデルを実際に動作させるのは次回以降の記事で紹介します。
+
+ 1. fusionを使ったモデルの作成
+
+
+
+項目
+Version
+
+
+
+
+Ubuntu
+22.04
+
+
+ROS2
+Iron
+
+
+CPU
+Intel Cor...]]></description><link>https://zenn.dev/karisora/articles/fe1a843cf966ad</link><guid isPermaLink="true">https://zenn.dev/karisora/articles/fe1a843cf966ad</guid><pubDate>Thu, 05 Jun 2025 20:59:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--AOWY8a77--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ROS%25202%253A%2520Gazebo%25E4%25B8%258A%25E3%2581%25ABFusion%25E3%2581%25A7%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2597%25E3%2581%259F%25E6%258E%25A2%25E6%259F%25BB%25E6%25A9%259F%25E3%2581%25AEmodel%25E3%2582%2592%25E5%2587%25BA%25E7%258F%25BE%25E3%2581%2595%25E3%2581%259B%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:karisora%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M4ZjU2YTA1ZjIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>karisora</dc:creator></item><item><title><![CDATA[Cloud Runでハマったslack-bolt + flaskをデプロイした際のエラー対処法]]></title><description><![CDATA[
+ はじめに
+Slackアプリ開発でslack-bolt-pythonとFlaskを組み合わせてCloud Runにデプロイしようとしたところ、エラーに遭遇し、かなり苦戦しました...
+遭遇したエラーとその解決方法をまとめます。
+
+ 環境・構成
+
+Python: 3.10
+slack-bolt: 1.23.0
+Flask: 3.1.1
+Google Cloud Run
+
+
+ 発生したエラー
+
+ エラー1: Slackのイベント検証失敗
+症状
+Your URL didn't respond.
+もしくは
+Your URL didn't respond with the value of th...]]></description><link>https://zenn.dev/yotto428/articles/f97a3cc3d36c7e</link><guid isPermaLink="true">https://zenn.dev/yotto428/articles/f97a3cc3d36c7e</guid><pubDate>Thu, 05 Jun 2025 16:23:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xvb83C_J--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Cloud%2520Run%25E3%2581%25A7%25E3%2583%258F%25E3%2583%259E%25E3%2581%25A3%25E3%2581%259Fslack-bolt%2520%252B%2520flask%25E3%2582%2592%25E3%2583%2587%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25A4%25E3%2581%2597%25E3%2581%259F%25E9%259A%259B%25E3%2581%25AE%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E5%25AF%25BE%25E5%2587%25A6%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yotto428%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JmNDUxYjdjOTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yotto428</dc:creator></item><item><title><![CDATA[クラウドプロキシ下のSSLErrorについて]]></title><description><![CDATA[業務中に発生したクラウドプロキシ下でのPythonでHTTPSリクエストする際に発生するSSLErrorについての覚書
+
+ 前提
+
+ 使用クラウドプロキシ
+Zscaler
+RootCAは取得可能
+
+ エラー例
+
+ssl.SSLCertVerificationError: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:997)
+
+
+ いつ発生するか？
+PythonのrequestsライブラリでHTTPS通信を行う際
+
+req...]]></description><link>https://zenn.dev/marumine_yk/articles/fff9b458b8cdea</link><guid isPermaLink="true">https://zenn.dev/marumine_yk/articles/fff9b458b8cdea</guid><pubDate>Thu, 05 Jun 2025 15:29:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--iWIo10jE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25A6%25E3%2583%2589%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25AD%25E3%2582%25B7%25E4%25B8%258B%25E3%2581%25AESSLError%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yk%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU2YjQ2YzYxMjguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yk</dc:creator></item><item><title><![CDATA[Pythonで作るCSVマージツール - 2つのCSVファイルを簡単に結合]]></title><description><![CDATA[
+ Pythonで作るCSVマージツール - 2つのCSVファイルを簡単に結合
+
+ はじめに
+データ分析やデータ処理の現場では、複数のCSVファイルを結合する必要がよくあります。特に、異なるソースから取得したデータを統合する際に、このような操作が必要になります。
+この記事では、Pythonを使用して2つのCSVファイルを指定したキーでマージするCLIツールを作成する方法を紹介します。
+
+ 作成するツールの機能
+
+2つのCSVファイルを引数として受け取る
+マージのキーを指定可能
+出力ファイル名を指定可能（デフォルトはoutput.csv）
+重複する列は自動的に1つにまとめる
+エラーハンドリ...]]></description><link>https://zenn.dev/long910/articles/2025-06-05-python-csv-merge-tool</link><guid isPermaLink="true">https://zenn.dev/long910/articles/2025-06-05-python-csv-merge-tool</guid><pubDate>Thu, 05 Jun 2025 14:50:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--felUMSl---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A7%25E4%25BD%259C%25E3%2582%258BCSV%25E3%2583%259E%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%2520-%25202%25E3%2581%25A4%25E3%2581%25AECSV%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2592%25E7%25B0%25A1%25E5%258D%2598%25E3%2581%25AB%25E7%25B5%2590%25E5%2590%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Long%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc3YjMxYzM0YjIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Long</dc:creator></item><item><title><![CDATA[CLIテストを安定させカバレッジを大幅向上（開発日記 No.096）]]></title><description><![CDATA[!
+この記事はgemini-2.5-flash-preview-04-17によって自動生成されています。
+
+
+ 関連リンク
+
+前回の開発日記
+
+
+ はじめに
+前回の開発では、CLI機能の修正やテンプレート・モデル指定といった新機能の追加、そしてそれらに伴うテストの更新を行いました。しかし、テストカバレッジはまだ低く、特にCLIモジュール（cli.py）は14%と改善の余地が大きい状況でした。
+そこで本日は、このCLIモジュールのテストに集中的に取り組み、テストの安定化、設計の統一、そしてカバレッジの大幅な向上を目指しました。
+
+ 背景と目的
+開発中のツールは、コマンドラインインターフェー...]]></description><link>https://zenn.dev/centervil/articles/2025-06-04_096_dev-diary</link><guid isPermaLink="true">https://zenn.dev/centervil/articles/2025-06-04_096_dev-diary</guid><pubDate>Thu, 05 Jun 2025 14:42:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--iUbsPO4C--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:CLI%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E3%2582%2592%25E5%25AE%2589%25E5%25AE%259A%25E3%2581%2595%25E3%2581%259B%25E3%2582%25AB%25E3%2583%2590%25E3%2583%25AC%25E3%2583%2583%25E3%2582%25B8%25E3%2582%2592%25E5%25A4%25A7%25E5%25B9%2585%25E5%2590%2591%25E4%25B8%258A%25EF%25BC%2588%25E9%2596%258B%25E7%2599%25BA%25E6%2597%25A5%25E8%25A8%2598%2520No.096%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:centervil%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YlVZNXZiN0NvbG1TN0tPQmhqQ2M5V3lIRXYwVVhwZ2YyY2wxYTc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>centervil</dc:creator></item><item><title><![CDATA[LangGraph×MCPでAIエージェント開発が…始まらなかった💦（無料モデルの場合]]></title><description><![CDATA[
+ はじめに
+最近はMCPサーバー作ったり、動かしたりばっかりしていたので「今度はMCPで呼び出す側だ！」と思いたち、MCPホスト兼AIエージェントをLangGraphで実装してみました。
+開発のハードル下げるため、LLMはTool対応の無料モデル（DeepSeek、Llama等）縛りでやってみましたが、期待する結果が得られず、最終的には低価格有料モデル使うことになりました。
+（興味深いことに、Clineでは同じ無料モデル＆プロンプトでタスク完了できています。これは純粋にAIエージェントの差異ということであり、とても興味深いテーマですが、それはまた別の機会に。）
+本記事では、AIエージェ...]]></description><link>https://zenn.dev/fujihide/articles/2639defa132194</link><guid isPermaLink="true">https://zenn.dev/fujihide/articles/2639defa132194</guid><pubDate>Thu, 05 Jun 2025 14:01:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Hs-AaxRH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:LangGraph%25C3%2597MCP%25E3%2581%25A7AI%25E3%2582%25A8%25E3%2583%25BC%25E3%2582%25B8%25E3%2582%25A7%25E3%2583%25B3%25E3%2583%2588%25E9%2596%258B%25E7%2599%25BA%25E3%2581%258C%25E2%2580%25A6%25E5%25A7%258B%25E3%2581%25BE%25E3%2582%2589%25E3%2581%25AA%25E3%2581%258B%25E3%2581%25A3%25E3%2581%259F%2520%25EF%25BC%2588%25E7%2584%25A1%25E6%2596%2599%25E3%2583%25A2%25E3%2583%2587%25E3%2583%25AB%25E3%2581%25AE%25E5%25A0%25B4%25E5%2590%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:fujihide%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E5Njc5YjYxNDIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>fujihide</dc:creator></item><item><title><![CDATA[【Python】毎回設定ファイルを書き換えるの、そろそろやめませんか？自動置換スクリプトを紹介]]></title><description><![CDATA[
+ 😄 概要
+このスクリプトは、
+・設定ファイルのバックアップを作成
+・特定の設定項目を自動的に置換・更新
+ができるスクリプトです。
+
+ 以下の経験が多いならおすすめかも
+・毎回インストール時に設定の値を変えないといけない・・・・
+・ループバックのIP[127.0.0.1]を毎回直さないといけない・・・
+・ディレクトリの設定を毎回直さないといけない・・・
+
+ コード
+
+import os
+import shutil
+from datetime import datetime
+
+# 編集対象ファイルのパス
+# ここで書き換えたい設定ファイル（.confなど）を指定します
+file_path...]]></description><link>https://zenn.dev/qa_dev/articles/aa2df675eca141</link><guid isPermaLink="true">https://zenn.dev/qa_dev/articles/aa2df675eca141</guid><pubDate>Thu, 05 Jun 2025 12:45:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--g7ME6Nxd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591%25E6%25AF%258E%25E5%259B%259E%25E8%25A8%25AD%25E5%25AE%259A%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2592%25E6%259B%25B8%25E3%2581%258D%25E6%258F%259B%25E3%2581%2588%25E3%2582%258B%25E3%2581%25AE%25E3%2580%2581%25E3%2581%259D%25E3%2582%258D%25E3%2581%259D%25E3%2582%258D%25E3%2582%2584%25E3%2582%2581%25E3%2581%25BE%25E3%2581%259B%25E3%2582%2593%25E3%2581%258B%25EF%25BC%259F%25E8%2587%25AA%25E5%258B%2595%25E7%25BD%25AE%25E6%258F%259B%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2583%2588%25E3%2582%2592%25E7%25B4%25B9%25E4%25BB%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:qa_dev%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTGRfRnVZcmtndVIzVW1ScTVFMWdDMmozVmR4cFRjV29uUTJYd2JOQ2RhQ3ltaEFBPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>qa_dev</dc:creator></item></channel></rss>
