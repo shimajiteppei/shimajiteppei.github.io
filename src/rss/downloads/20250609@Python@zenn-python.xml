@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Mon, 09 Jun 2025 06:20:12 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[初めてのuv入門｜uvコマンドガイド：Utilities編]]></title><description><![CDATA[
+知識は武器とかけまして、レゴブロックと解く、その心は――
+今日もKnowledge Oasisへようこそ
+案内人はkoふみです
+本日のテーマは『uv コマンドガイド Utilities編』
+
+ はじめに
+Pythonプロジェクトの開発では、パッケージ取得の高速化や環境の再現性を保つために、キャッシュやツール自身のバージョン管理が欠かせません。uvは依存キャッシュの操作から、uvコマンド自身のアップデート、さらにはシェル補完の生成まで、開発のオアシスのように一手で整えてくれる頼もしい相棒です。本記事では、uv cache clean／uv cache prune／uv cache dir...]]></description><link>https://zenn.dev/knowledge_oasis/articles/command-guide-uv-utilities</link><guid isPermaLink="true">https://zenn.dev/knowledge_oasis/articles/command-guide-uv-utilities</guid><pubDate>Mon, 09 Jun 2025 03:46:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6gruk-MM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2588%259D%25E3%2582%2581%25E3%2581%25A6%25E3%2581%25AEuv%25E5%2585%25A5%25E9%2596%2580%25EF%25BD%259Cuv%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%25EF%25BC%259AUtilities%25E7%25B7%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ko%25E3%2581%25B5%25E3%2581%25BF%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc1NTJjMWYyZTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>koふみ</dc:creator></item><item><title><![CDATA[Claude Code×JetBrains IDE「最強のふたり」]]></title><description><![CDATA[
+
+ はじめに
+こんにちは。JetBrainsの公式代理店NATTOSYSTEMの私です。
+AIコーディングアシスタント「Claude Code」が、JetBrains製のIDEに対応しました。
+本記事では、JetBrains IDEへのClaude Code導入方法、起動方法、そして注目すべき便利機能を詳しく紹介します。
+
+ Claude Code
+Claude Codeは、Anthropic社の大規模言語モデル「Claude」ファミリーをベースにしたコード特化AIアシスタントです。
+
+ 特徴
+
+200Kトークンの長文対応
+自然言語からのコード生成
+セキュリティ・保守性を重視
+多言語（...]]></description><link>https://zenn.dev/nattosystem_jp/articles/fd9a2c0994aff6</link><guid isPermaLink="true">https://zenn.dev/nattosystem_jp/articles/fd9a2c0994aff6</guid><pubDate>Mon, 09 Jun 2025 03:27:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--uLl5g19F--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Claude%2520Code%25C3%2597JetBrains%2520IDE%25E3%2580%258C%25E6%259C%2580%25E5%25BC%25B7%25E3%2581%25AE%25E3%2581%25B5%25E3%2581%259F%25E3%2582%258A%25E3%2580%258D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%25AD%25E3%2581%25B0%25E3%2581%25AD%25E3%2581%25B0%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RiYWQxMDhjNTMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BENATTOSYSTEM%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2Rhcmsvbi5wbmc=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ねばねば</dc:creator></item><item><title><![CDATA[爆安 .inドメインで君だけのURLを！Spaceshipで "ryosh.in" を取得した全記録]]></title><description><![CDATA[
+ はじめに
+こんにちは、梁震 (RYO SHIN) です。
+自分だけのオリジナルドメイン、憧れますよね。ポートフォリオサイトや個人ブログ、メールアドレスなどに使えば、唯一無二のアイデンティティになります。
+しかし、.com や .jp といった人気のドメインは、すでに取得されていたり、価格が高騰していたりとなかなか手が出しにくいのが現実です。
+そこで僕が注目したのが .in ドメイン。インドの国別コードトップレベルドメイン（ccTLD）ですが、近年 「ドメインハック」 としての活用が世界中で広がっています。
+今回は、僕が自分の名前 ryoshin をもじって ryosh.in というド...]]></description><link>https://zenn.dev/ryoushin/articles/65a88d487269ae</link><guid isPermaLink="true">https://zenn.dev/ryoushin/articles/65a88d487269ae</guid><pubDate>Mon, 09 Jun 2025 03:02:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--oGw9eqxf--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%2588%2586%25E5%25AE%2589%2520.in%25E3%2583%2589%25E3%2583%25A1%25E3%2582%25A4%25E3%2583%25B3%25E3%2581%25A7%25E5%2590%259B%25E3%2581%25A0%25E3%2581%2591%25E3%2581%25AEURL%25E3%2582%2592%25EF%25BC%2581Spaceship%25E3%2581%25A7%2520%2522ryosh.in%2522%2520%25E3%2582%2592%25E5%258F%2596%25E5%25BE%2597%25E3%2581%2597%25E3%2581%259F%25E5%2585%25A8%25E8%25A8%2598%25E9%258C%25B2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2597%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzlkZGE1ZGRlZGIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>しん</dc:creator></item><item><title><![CDATA[Pythonでトグル式左クリックマクロを作る（PyAutoGUIとkeyboard）]]></title><description><![CDATA[
+ 🖱️ はじめに
+マインクラフトを友人と遊んでいると、トラップで敵を倒し続けるときや、
+ブロックを掘り続ける単純作業などで「左クリックをずっと押しっぱなしにする」ことが多くなってきました。
+ずっとマウスを押しているのはしんどいなぁ…と感じていたので、
+トグル式でクリックをON/OFFできるマクロツールをPythonで作ってみました！
+
+
+ 💡 作成背景
+最初は左クリックだけですが、
+右クリックや特定のキーに対応させたり、複数マクロを同時に動かしたり、
+よりカスタム性を高められるようにアップデートする予定です😊
+
+
+ 🐍 使用したライブラリ
+
+
+pyautogui: マウス操作の自動化
+...]]></description><link>https://zenn.dev/magma_program/articles/0e93e7b804e0aa</link><guid isPermaLink="true">https://zenn.dev/magma_program/articles/0e93e7b804e0aa</guid><pubDate>Mon, 09 Jun 2025 01:10:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--a5AQKPXl--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A7%25E3%2583%2588%25E3%2582%25B0%25E3%2583%25AB%25E5%25BC%258F%25E5%25B7%25A6%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2583%25E3%2582%25AF%25E3%2583%259E%25E3%2582%25AF%25E3%2583%25AD%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%25EF%25BC%2588PyAutoGUI%25E3%2581%25A8keyboard%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mAgmA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSlE1LTgyWVdfSW5kQURGZFBlNi1nOWxVWGVNT0xzTm1nOHVWemwxMUQyLTFiM3Q2TT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mAgmA</dc:creator></item><item><title><![CDATA[Pythonにおける抽象クラス（Abstract Base Class,ABC）とは？]]></title><description><![CDATA[
+ 1.はじめに
+抽象クラスは、直接インスタンス化することができない「設計図」のような特別なクラスです。その主な役割は、それを継承するサブクラス（子クラス）に「必ず実装してほしいメソッド」を定義し、その実装を強制することにあります。これにより、プロジェクトが大規模になっても、設計の一貫性を保ち、実装漏れを防ぐ上で非常に役立ちます。
+通常のクラスは直接オブジェクト（インスタンス）を作成して利用できますが、抽象クラスはそれ自体が未完成な「枠組み」であるため、直接インスタンス化することはできません。もし抽象クラスを直接インスタンス化しようとすると、TypeError: Can't instan...]]></description><link>https://zenn.dev/kotai/articles/234b8706fad39f</link><guid isPermaLink="true">https://zenn.dev/kotai/articles/234b8706fad39f</guid><pubDate>Sun, 08 Jun 2025 22:39:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wDzY21ev--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25AB%25E3%2581%258A%25E3%2581%2591%25E3%2582%258B%25E6%258A%25BD%25E8%25B1%25A1%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25B9%25EF%25BC%2588Abstract%2520Base%2520Class%252CABC%25EF%25BC%2589%25E3%2581%25A8%25E3%2581%25AF%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kotai2003%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2gzSEtteFhtSDhmSkd3aDV3cVYtY2tvbVB1NE1rbTN4bWhQRmE2eGc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kotai2003</dc:creator></item><item><title><![CDATA[DevContainerでFlask + DBを構築してみた]]></title><description><![CDATA[
+ はじめに
+この記事では、DevContainerを使用してFlaskアプリケーションとMySQLデータベースを構築する手順を紹介します。
+ローカル環境を汚さずに開発環境を構築する方法として、非常に便利です。
+
+ 目的
+開発する上で、外せないのが開発環境を整えること。
+その環境を統一するために、今回はDevcontainerを使って環境構築していきます。
+DockerとDevContainerを活用して、FlaskアプリケーションとMySQLデータベースを簡単に立ち上げ、開発をスムーズに行える環境を整備します。
+
+ 構築内容
+
+ 使用技術
+
+
+Flask: Python製の軽量なWeb...]]></description><link>https://zenn.dev/secondselection/articles/_devcontainer_flask</link><guid isPermaLink="true">https://zenn.dev/secondselection/articles/_devcontainer_flask</guid><pubDate>Sun, 08 Jun 2025 20:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--P9aSZl0n--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:DevContainer%25E3%2581%25A7Flask%2520%252B%2520DB%25E3%2582%2592%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2582%258A%25E3%2582%2587%25E3%2583%25BC%25E3%2581%25A1%25E3%2582%2593%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzljNTA3MDMwNTguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25BB%25E3%2582%25AB%25E3%2583%25B3%25E3%2583%2589%25E3%2582%25BB%25E3%2583%25AC%25E3%2582%25AF%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTFM2cXRsM1d1RFNMX3VPLUlUUE9ZaUtXSUZyc05SclN5c2xxNEV2aVJNUGc9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>りょーちん</dc:creator></item><item><title><![CDATA[ROS 2: Nav2でGPS,  IMU, LiDARを使ってGPS Waypoint Followerを動かす- gazebo編]]></title><description><![CDATA[宇宙系のロボット開発サークルで制御の開発をしています。
+アメリカで行われる火星探査機の世界大会UniversityRoverChallengeに出場した際、Navigation2を使ってGPSポイントを巡るような探査機型ロボットの制御開発をしていたのでその備忘録になります。
+
+本記事では、Nav2のtutorialにあるnav2_gps_waypoint_follower_demoをベースに、自分たちのURDFを用いながらgazebo上で複数点設定したGNSSポイントを巡れるようなパッケージを紹介します。
+今回取り扱うパッケージはnav_rover_controlという名前で公開していま...]]></description><link>https://zenn.dev/karisora/articles/fd2baa85105b91</link><guid isPermaLink="true">https://zenn.dev/karisora/articles/fd2baa85105b91</guid><pubDate>Sun, 08 Jun 2025 15:41:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--JJr_AHaI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ROS%25202%253A%2520Nav2%25E3%2581%25A7GPS%252C%2520%2520IMU%252C%2520LiDAR%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6GPS%2520Waypoint%2520Follower%25E3%2582%2592%25E5%258B%2595%25E3%2581%258B%25E3%2581%2599...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:karisora%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M4ZjU2YTA1ZjIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>karisora</dc:creator></item><item><title><![CDATA[【ABC409】AtCoder Beginner Contest 409B 自分用解説]]></title><description><![CDATA[
+ ABC409B - Citation
+問題リンク : https://atcoder.jp/contests/abc409/tasks/abc409_b
+解答リンク : https://atcoder.jp/contests/abc409/submissions/66585671
+
+ 解法メモ
+公式解説の通りなのだが、一部自分の勘違いによりWAとなってしまったのでメモを残す。
+まずインプットとしてN、Aが与えられる。(簡単のためAは昇順にソート済みとする。)
+非負整数xに対する命題P(x)を、「Aに、x以上の要素が重複を含めてx回以上現れる」こととして定義する。
+自分がしてしまった勘...]]></description><link>https://zenn.dev/seck/articles/c966ac38fc3b1b</link><guid isPermaLink="true">https://zenn.dev/seck/articles/c966ac38fc3b1b</guid><pubDate>Sun, 08 Jun 2025 15:28:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--mNj7wtYZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590ABC409%25E3%2580%2591AtCoder%2520Beginner%2520Contest%2520409B%2520%25E8%2587%25AA%25E5%2588%2586%25E7%2594%25A8%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:seck%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTDNUd0hZejhTVjZHek5UVnZpSXRTQUJNcjNKYWg0SFd5Mm9vYUo3LXk4elEzd3NucGQ9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>seck</dc:creator></item><item><title><![CDATA[Pythonのキホン - 変数編]]></title><description><![CDATA[
+ はじめに
+Pythonを使い始めて数年、ある程度アウトプットしていきたいことも溜まってきたので、自分の振り返りも兼ねて記事にしました。
+本記事はPython使い始めて〜1年くらいの人をターゲットにしております。
+正直こんなことはわかるよ！とかもあるかと思いますが、温かい目で見ていただけると幸いです。
+ここではPython3のお話をメインに記載していきます。
+
+ PEPについて
+大体Pythonで開発を行う場合に目を通すのが、PEP8のドキュメントかと思います。
+PEPとは「Python Enhancement Proposal」の略で、コーディング規約、ドキュメント規約など、Pyth...]]></description><link>https://zenn.dev/m2lab/articles/e6d8e548106bad</link><guid isPermaLink="true">https://zenn.dev/m2lab/articles/e6d8e548106bad</guid><pubDate>Sun, 08 Jun 2025 13:33:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fUemsk4F--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25AE%25E3%2582%25AD%25E3%2583%259B%25E3%2583%25B3%2520-%2520%25E5%25A4%2589%25E6%2595%25B0%25E7%25B7%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Masa0209%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA4ZWJkMzI1Y2QuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Masa0209</dc:creator></item><item><title><![CDATA[Django で各テーブルに簡単に論理削除や作成日付を入れたい時]]></title><description><![CDATA[
+ はじめに
+Backendでよくある問題として以下に出くわすことよくあると思います。
+
+レコードを削除したけど、後から「やっぱり必要だった...」という状況
+いつ作られたデータなのか、いつ更新されたのかを確認したい時
+
+そのような時に各々のテーブルにいちいち実装するのは面倒かな、、と思います。
+そんな時に便利なのが基底クラスによる、論理削除（ソフトデリート）とタイムスタンプの自動記録です。今回は、これらの機能を簡単に実装する方法を紹介します！
+
+ 開発環境
+
+Python 3.9
+Django 4.2
+PostgreSQL 14
+
+
+ ディレクトリ構成
+myproject/
+├── m...]]></description><link>https://zenn.dev/m2lab/articles/abed6833b79f30</link><guid isPermaLink="true">https://zenn.dev/m2lab/articles/abed6833b79f30</guid><pubDate>Sun, 08 Jun 2025 13:33:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_FvobH2c--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Django%2520%25E3%2581%25A7%25E5%2590%2584%25E3%2583%2586%25E3%2583%25BC%25E3%2583%2596%25E3%2583%25AB%25E3%2581%25AB%25E7%25B0%25A1%25E5%258D%2598%25E3%2581%25AB%25E8%25AB%2596%25E7%2590%2586%25E5%2589%258A%25E9%2599%25A4%25E3%2582%2584%25E4%25BD%259C%25E6%2588%2590%25E6%2597%25A5%25E4%25BB%2598%25E3%2582%2592%25E5%2585%25A5%25E3%2582%258C%25E3%2581%259F%25E3%2581%2584%25E6%2599%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Masa0209%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA4ZWJkMzI1Y2QuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Masa0209</dc:creator></item><item><title><![CDATA[【LLM】PDFファイルを活用したマルチモーダルチャットアプリケーションの構築]]></title><description><![CDATA[
+ PDFファイルを活用したマルチモーダルチャットアプリケーションの構築
+
+
+ はじめに
+※以下は日曜大工のノリで、Cursorを利用してどこまでかけるか試したものになります。
+本アプリケーションはPDFファイルをアップロードして、テキスト検索と画像認識を組み合わせた対話型アプリケーションを構築を試しました。PDFファイルからテキストと画像を抽出し、ユーザーの質問に対して回答を提供します。
+
+ 主な機能
+
+PDFファイルのアップロードとテキスト抽出
+ベクトルデータベースを使用した効率的な検索
+テキストベースの質問応答
+画像認識を活用したマルチモーダルな質問応答
+Streamlitベースの...]]></description><link>https://zenn.dev/m2lab/articles/b5d0e283f9b68b</link><guid isPermaLink="true">https://zenn.dev/m2lab/articles/b5d0e283f9b68b</guid><pubDate>Sun, 08 Jun 2025 12:03:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--l_IQTK2O--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590LLM%25E3%2580%2591PDF%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2592%25E6%25B4%25BB%25E7%2594%25A8%25E3%2581%2597%25E3%2581%259F%25E3%2583%259E%25E3%2583%25AB%25E3%2583%2581%25E3%2583%25A2%25E3%2583%25BC%25E3%2583%2580%25E3%2583%25AB%25E3%2583%2581%25E3%2583%25A3%25E3%2583%2583%25E3%2583%2588%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2581%25AE%25E6%25A7%258B%25E7%25AF%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Masa0209%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA4ZWJkMzI1Y2QuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Masa0209</dc:creator></item><item><title><![CDATA[Atcoder ABC409の備忘録]]></title><description><![CDATA[
+ Atcoder ABC409の備忘録
+
+ ABC409 A問題
+特に言うことなし
+import sys
+N = int(input())
+T = input()
+A = input()
+
+for i in range(N):
+    if T[i] == A[i] == "o":
+        print("Yes")
+        sys.exit()
+
+print("No")
+
+ ABC409 B問題
+解けたけど模範解答がよい感じだったから、読んで理解してみた
+コード中のコメントの通り
+N = int(input())
+A = sorted(map(int, input()....]]></description><link>https://zenn.dev/ritoru/articles/96ef8bbd6de18f</link><guid isPermaLink="true">https://zenn.dev/ritoru/articles/96ef8bbd6de18f</guid><pubDate>Sun, 08 Jun 2025 11:15:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--RPWZRDuL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Atcoder%2520ABC409%25E3%2581%25AE%25E5%2582%2599%25E5%25BF%2598%25E9%258C%25B2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%258A%25E3%2581%25A8%25E3%2582%258B%2528ETL%25E3%2583%2590%25E3%2583%25AA%25E3%2583%2590%25E3%2583%25AA%25E3%2582%2584%25E3%2582%258B%25E8%2581%25B7%25E3%2581%25AB%25E8%25BB%25A2%25E8%2581%25B7%25E3%2581%2597%25E3%2581%259F%25E3%2581%2584%2529%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQyODNmODNhOTMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>りとる(ETLバリバリやる職に転職したい)</dc:creator></item><item><title><![CDATA[「AIが自分で学ぶってどういうこと？」その疑問、Pythonで迷路AIを作りながら解決しませんか？]]></title><description><![CDATA[はじめまして！
+本講座で講師を務めるSAKAIです。
+普段は開発者として働きながら、UdemyでプログラミングやAIに関する講座を公開しています。
+突然ですが、皆さんは「強化学習」と聞いて、どのようなイメージをお持ちでしょうか？
+「なんだかすごく難しそう…」
+「記事を読んだけど、数式や専門用語ばかりで挫折してしまった…」
+「AIに興味はあるけれど、何から手をつければいいか分からない…」
+もし、あなたが少しでもこのように感じたことがあるなら、ぜひこのまま少しだけ読み進めてみてください。きっと、お役に立てるお話ができると思います。
+
+ なぜこの講座を作ったのか
+何を隠そう、私自身も強化学習を...]]></description><link>https://zenn.dev/sakai13/articles/e88bf3f15a1be6</link><guid isPermaLink="true">https://zenn.dev/sakai13/articles/e88bf3f15a1be6</guid><pubDate>Sun, 08 Jun 2025 10:37:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--fdEFKMbJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%258CAI%25E3%2581%258C%25E8%2587%25AA%25E5%2588%2586%25E3%2581%25A7%25E5%25AD%25A6%25E3%2581%25B6%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25A9%25E3%2581%2586%25E3%2581%2584%25E3%2581%2586%25E3%2581%2593%25E3%2581%25A8%25EF%25BC%259F%25E3%2580%258D%25E3%2581%259D%25E3%2581%25AE%25E7%2596%2591%25E5%2595%258F%25E3%2580%2581Python%25E3%2581%25A7%25E8%25BF%25B7%25E8%25B7%25AFAI%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258A%25E3%2581%25AA%25E3%2581%258C%25E3%2582%2589%25E8%25A7%25A3%25E6%25B1%25BA%25E3%2581%2597%25E3%2581%25BE%25E3%2581%259B%25E3%2582%2593%25E3%2581%258B%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:SAKAItech%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I2OWI1OWY3NGUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>SAKAItech</dc:creator></item><item><title><![CDATA[Python、PEP8（ペップ・エイト）をざっくりまとめてみた♪]]></title><description><![CDATA[今回は、Python のコーディング規約、PEP8（ペップ・エイト）について、ざっくり、まとめていこーと思います！れっつらごー♪
+PEP8: https://pep8-ja.readthedocs.io/ja/latest/
+
+
+ 一貫性にこだわりすぎるのは、狭い心の現れである
+
+ガイドラインの目的は、可読性（PEP20）と一貫性
+PEP20 - The Zen of Python: https://peps.python.org/pep-0020/
+
+
+
+ pep8.py
+import this
+
+
+プロジェクトで一貫性を保つことが重要
+一番重要、特定のモジュールや関数の中で一貫性を保...]]></description><link>https://zenn.dev/animalz/articles/9b96c5ebd5684a</link><guid isPermaLink="true">https://zenn.dev/animalz/articles/9b96c5ebd5684a</guid><pubDate>Sun, 08 Jun 2025 10:34:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xybCxgEe--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2580%2581PEP8%25EF%25BC%2588%25E3%2583%259A%25E3%2583%2583%25E3%2583%2597%25E3%2583%25BB%25E3%2582%25A8%25E3%2582%25A4%25E3%2583%2588%25EF%25BC%2589%25E3%2582%2592%25E3%2581%2596%25E3%2581%25A3%25E3%2581%258F%25E3%2582%258A%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25E2%2599%25AA%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2582%25E3%2581%25AB%25E3%2581%25BE%25E3%2582%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk0ZTA2MDVlMTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>あにまる</dc:creator></item><item><title><![CDATA[その「エモい色」、Pythonで再現しない？変換前後の画像からLUTを作ってみた]]></title><description><![CDATA[
+ はじめに
+「この写真の色合い、最高にエモい...。自分の他の写真にも適用したい！」と思ったことはありませんか？
+多くの場合、そうした色合いは「プリセット」や「LUT（ルックアップテーブル）」として配布されており、自由に画像の変換を行うことができます。
+LUTとは
+
+LUT（ルックアップテーブル）とは、映像の色味を数式によって変換するカラープリセットのことです。引用元：LUTとは？種類や使い方を解説【カラーグレーディング効率化】
+
+つまり画像の色味をいい感じに変換してくれる色の対応表と思ってもらえば大丈夫です。
+そこで、もしLUTの変換前・変換後の画像があったとき、そのLUTを逆算(逆...]]></description><link>https://zenn.dev/kinnkinn/articles/6d4de71d91ac6a</link><guid isPermaLink="true">https://zenn.dev/kinnkinn/articles/6d4de71d91ac6a</guid><pubDate>Sun, 08 Jun 2025 10:24:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--oCSHGBk3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%259D%25E3%2581%25AE%25E3%2580%258C%25E3%2582%25A8%25E3%2583%25A2%25E3%2581%2584%25E8%2589%25B2%25E3%2580%258D%25E3%2580%2581Python%25E3%2581%25A7%25E5%2586%258D%25E7%258F%25BE%25E3%2581%2597%25E3%2581%25AA%25E3%2581%2584%25EF%25BC%259F%25E5%25A4%2589%25E6%258F%259B%25E5%2589%258D%25E5%25BE%258C%25E3%2581%25AE%25E7%2594%25BB%25E5%2583%258F%25E3%2581%258B%25E3%2582%2589LUT%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kinnkinn%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc3Y2M3ZGVjYmEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kinnkinn</dc:creator></item><item><title><![CDATA[AI画像認識の「なぜ？」がわかる！ゼロからPythonで学ぶCNN講座を作りました]]></title><description><![CDATA[はじめまして！
+Udemy講師のSAKAIです。
+この記事を読んでくださっているあなたは、
+「AIやディープラーニングって、なんだか難しそう…」
+「CNN（畳み込みニューラルネットワーク）に興味はあるけど、何から手をつけていいか分からない…」
+「画像認識をやってみたいけど、プログラミング経験がなくて不安…」
+そんな風に感じて、学習の一歩を踏み出せずにいませんか？
+もし少しでも心当たりがあれば、ぜひこのまま読み進めていただけると嬉しいです。
+きっと、あなたのための講座だと感じていただけるはずです。
+
+ なぜこの講座を作ったのか（私の開発ストーリー）
+何を隠そう、私自身もAIの学習で何度も壁...]]></description><link>https://zenn.dev/sakai13/articles/078b12b9eef1c8</link><guid isPermaLink="true">https://zenn.dev/sakai13/articles/078b12b9eef1c8</guid><pubDate>Sun, 08 Jun 2025 10:21:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ad3GPqkC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AI%25E7%2594%25BB%25E5%2583%258F%25E8%25AA%258D%25E8%25AD%2598%25E3%2581%25AE%25E3%2580%258C%25E3%2581%25AA%25E3%2581%259C%25EF%25BC%259F%25E3%2580%258D%25E3%2581%258C%25E3%2582%258F%25E3%2581%258B%25E3%2582%258B%25EF%25BC%2581%25E3%2582%25BC%25E3%2583%25AD%25E3%2581%258B%25E3%2582%2589Python%25E3%2581%25A7%25E5%25AD%25A6%25E3%2581%25B6CNN%25E8%25AC%259B%25E5%25BA%25A7%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258A%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:SAKAItech%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I2OWI1OWY3NGUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>SAKAItech</dc:creator></item><item><title><![CDATA[djangoをpythonanywhere上にデプロイする]]></title><description><![CDATA[今回は簡単なWebアプリモドキをdjangoで作って、現状pythonWebアプリが無料でデプロイできる唯一（？）の環境であるpythonanywhere上にデプロイしてみる。
+結果的に再アップする方法ほかにないんかって感じになったが。
+
+ 1. ローカル環境構築
+ローカル側はあんまし言うことないので、見出しだけ書いておく
+
+ 1. pythonインストール
+今回は現在最新バージョンである3.13にした。
+
+ 2. pycharmインストール
+
+ 3. djangoインストール
+これも最新バージョンにした。
+
+ 4. 追加ライブラリインストール
+今回はdjango_bootstrap5を...]]></description><link>https://zenn.dev/malahcad/articles/36ef4c19564657</link><guid isPermaLink="true">https://zenn.dev/malahcad/articles/36ef4c19564657</guid><pubDate>Sun, 08 Jun 2025 10:02:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--r-rd3m_p--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:django%25E3%2582%2592pythonanywhere%25E4%25B8%258A%25E3%2581%25AB%25E3%2583%2587%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25A4%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Malah%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2UyNTJkOTY4YzcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Malah</dc:creator></item><item><title><![CDATA[プログラミング未経験者へ。あなたのPCで「りんご」を自動で見分けるAIを作ってみませんか？]]></title><description><![CDATA[はじめまして！本講座で講師を務めます、開発者のSAKAIです。
+突然ですが、あなたはこのように感じていませんか？
+
+「AIや深層学習って面白そうだけど、何だか難しそう…」
+「プログラミング経験もないし、数学も苦手だから自分には無理かも…」
+「分厚い専門書を買ってみたけど、数式ばかりで挫折してしまった…」
+
+もし一つでも当てはまったなら、ぜひこのまま少しだけ読み進めてみてください。
+なぜなら、何を隠そう過去の私が全く同じ悩みを抱えていたからです。
+
+ なぜこの講座を作ったのか（私の想い）
+私が初めてAIや深層学習の世界に触れたとき、その可能性に心からワクワクしました。しかし、学習を進めよう...]]></description><link>https://zenn.dev/sakai13/articles/8e9be798e1cd82</link><guid isPermaLink="true">https://zenn.dev/sakai13/articles/8e9be798e1cd82</guid><pubDate>Sun, 08 Jun 2025 09:46:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--d04hijG6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%259F%25E3%2583%25B3%25E3%2582%25B0%25E6%259C%25AA%25E7%25B5%258C%25E9%25A8%2593%25E8%2580%2585%25E3%2581%25B8%25E3%2580%2582%25E3%2581%2582%25E3%2581%25AA%25E3%2581%259F%25E3%2581%25AEPC%25E3%2581%25A7%25E3%2580%258C%25E3%2582%258A%25E3%2582%2593%25E3%2581%2594%25E3%2580%258D%25E3%2582%2592%25E8%2587%25AA%25E5%258B%2595%25E3%2581%25A7%25E8%25A6%258B%25E5%2588%2586%25E3%2581%2591%25E3%2582%258BAI%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%25BE%25E3%2581%259B%25E3%2582%2593%25E3%2581%258B%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:SAKAItech%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I2OWI1OWY3NGUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>SAKAItech</dc:creator></item><item><title><![CDATA[【Python】リスト内包表記の基本と使いどころを解説]]></title><description><![CDATA[
+ はじめに
+Pythonには「リスト内包表記（List Comprehension）」という便利な記法があります。
+これは、リストを生成するときに for 文を使わずに、簡潔かつ直感的に書ける構文です。
+初めは少しわかりにくいかもしれませんが、
+慣れると「コードの見通しが良くなる」「記述量が減る」など多くのメリットがあります。
+本記事では、リスト内包表記の基本的な使い方から、条件付き・入れ子のパターンまで順にご紹介します。
+
+ 1. 基本の書き方
+まずは、通常の for 文でリストを作るコードと、リスト内包表記の比較から見てみましょう。
+
+ 通常の for 文
+squares = []...]]></description><link>https://zenn.dev/fd2025/articles/10c8cd2e00e48e</link><guid isPermaLink="true">https://zenn.dev/fd2025/articles/10c8cd2e00e48e</guid><pubDate>Sun, 08 Jun 2025 07:10:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5adtG4fX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591%25E3%2583%25AA%25E3%2582%25B9%25E3%2583%2588%25E5%2586%2585%25E5%258C%2585%25E8%25A1%25A8%25E8%25A8%2598%25E3%2581%25AE%25E5%259F%25BA%25E6%259C%25AC%25E3%2581%25A8%25E4%25BD%25BF%25E3%2581%2584%25E3%2581%25A9%25E3%2581%2593%25E3%2582%258D%25E3%2582%2592%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:fd2025%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2EzMzVlNTI5MmQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>fd2025</dc:creator></item><item><title><![CDATA[UV(高速Pythonパッケージマネージャー)をとりあえず触って取得する]]></title><description><![CDATA[
+ 概要
+UVについて色々と便利そうなことをまとめたものです。
+とにかくpipを使っていたものとしては、高速なのでありがたい。
+あとアクティベートとかも鬱陶しいのを省くことも出来るのは良い！
+UV触ったことない人や、大量のモジュールをpipでインストールしたりしてる人には試す価値はあると思います。(まだ自分自身も色々なものでは試してないですけど)
+
+ UVレポはここ
+https://github.com/astral-sh/uv
+
+ 感想
+とりあえずセットアップインストールのセットアップが早い。
+localでactivate/deactivateなどの手間がない。
+悪い点は今のところ無し...]]></description><link>https://zenn.dev/testkun08080/articles/python-uv-99ae614a1a4f13</link><guid isPermaLink="true">https://zenn.dev/testkun08080/articles/python-uv-99ae614a1a4f13</guid><pubDate>Sun, 08 Jun 2025 03:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--LNSvpHdF--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:UV%2528%25E9%25AB%2598%25E9%2580%259FPython%25E3%2583%2591%25E3%2583%2583%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%259E%25E3%2583%258D%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%25A3%25E3%2583%25BC%2529%25E3%2582%2592%25E3%2581%25A8%25E3%2582%258A%25E3%2581%2582%25E3%2581%2588%25E3%2581%259A%25E8%25A7%25A6%25E3%2581%25A3%25E3%2581%25A6%25E5%258F%2596%25E5%25BE%2597%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:testkun08080%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzYxMjE5ZTQ2YzguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>testkun08080</dc:creator></item></channel></rss>
