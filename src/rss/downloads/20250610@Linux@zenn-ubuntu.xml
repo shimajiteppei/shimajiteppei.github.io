@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Ubuntu」のフィード]]></title><description><![CDATA[Zennのトピック「Ubuntu」のRSSフィードです]]></description><link>https://zenn.dev/topics/ubuntu</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/8c2cdbc5b3.png</url><title>Zennの「Ubuntu」のフィード</title><link>https://zenn.dev/topics/ubuntu</link></image><generator>zenn.dev</generator><lastBuildDate>Tue, 10 Jun 2025 12:05:00 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/ubuntu/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[UbuntuからOpenVPNで京都大学のVPNに接続する]]></title><description><![CDATA[
+ はじめに
+情報環境機構のページにはVPNでIKEv2かOpenVPNを使って京都大学のVPNに接続する方法が記載されているが、WindowsかMac OS、iPad/iPhone、Androidで行う方法しかない。
+また、Linuxで接続する方法を使えばCUIで接続できるが、できればGUIで接続したい。
+そのため、UbuntuからGUIでOpenVPNを介して学内のネットワークに接続する方法を記述する。
+環境はUbuntu 22.04以降を動作確認済み。
+
+ 手順
+
+(研究室などにVLAN固定接続をする場合) VLANへの全学アカウント登録
+
+
+クライアント証明書申請
+VLAN固定接...]]></description><link>https://zenn.dev/corner0530/articles/b1213e7d28cb49</link><guid isPermaLink="true">https://zenn.dev/corner0530/articles/b1213e7d28cb49</guid><pubDate>Mon, 09 Jun 2025 12:49:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--yq98CsTI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ubuntu%25E3%2581%258B%25E3%2582%2589OpenVPN%25E3%2581%25A7%25E4%25BA%25AC%25E9%2583%25BD%25E5%25A4%25A7%25E5%25AD%25A6%25E3%2581%25AEVPN%25E3%2581%25AB%25E6%258E%25A5%25E7%25B6%259A%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:corner0530%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS21oVkNlcTBXbHU4bXFWMmUyRXhRTUluR0hDLUdsNHBjNUdDQk1GVlRjdlE9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>corner0530</dc:creator></item><item><title><![CDATA[PS Vitaの音声ストリーミング方法を考えてみた。]]></title><description><![CDATA[
+ その前に
+※もし余裕があるならPS Vita TVを買えば以下の問題はすべて解決します。
+PS Vitaの画面のストリーミングは実は非常に簡単ですが、充電しながらの音声ストリーミングを実現する方法はずっと厄介な問題でした。
+筆者はネット上のいくつかの記事を参考にし、いくつかの解決策を検討しました。
+皆さんもぜひ試して検証し、他の新しい解決策を提案していただければと思います。
+また本記事では原理についても触れていますが、具体的な説明の一部は皆さんに補完していただきたいと考えています。
+あらかじめ感謝を申し上げます。
+筆者の手元にあるPS VitaはPCH-1000シリーズで、ノートパソ...]]></description><link>https://zenn.dev/chukogals/articles/013c27d12964df</link><guid isPermaLink="true">https://zenn.dev/chukogals/articles/013c27d12964df</guid><pubDate>Mon, 09 Jun 2025 01:32:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--CJ8P6aCF--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:PS%2520Vita%25E3%2581%25AE%25E9%259F%25B3%25E5%25A3%25B0%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25AA%25E3%2583%25BC%25E3%2583%259F%25E3%2583%25B3%25E3%2582%25B0%25E6%2596%25B9%25E6%25B3%2595%25E3%2582%2592%25E8%2580%2583%25E3%2581%2588%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25E3%2580%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258D%25E3%2582%258A%25E3%2582%2584%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS2xBNkE1MXZod2FOZ3gtVDJKZU5OQkxlakJQOFRZeVZZeGk3VFo3TFUzUnlIeT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>きりや</dc:creator></item><item><title><![CDATA[apt-fastのインストール方法 nointeractive]]></title><description><![CDATA[
+ 始まりと終わり
+
+環境：ubuntu 22.04 vagrant virtualbox
+
+GUI?が表示されないようにインストールしたくて探し回ったので。
+GithubのIssueで紹介されていましたがソースの場所を忘れました。
+add-apt-repository -y ppa:apt-fast/stable
+apt-get update
+echo debconf apt-fast/maxdownloads string 5 | debconf-set-selections
+echo debconf apt-fast/dlflag boolean true | debconf-se...]]></description><link>https://zenn.dev/mtlom/articles/56e15ecb96cf14</link><guid isPermaLink="true">https://zenn.dev/mtlom/articles/56e15ecb96cf14</guid><pubDate>Fri, 06 Jun 2025 20:37:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xLmSRcCO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:apt-fast%25E3%2581%25AE%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E6%2596%25B9%25E6%25B3%2595%2520nointeractive%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%2588%25E3%2583%25BC%25E3%2583%2586%25E3%2583%25A0%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I3MmZkNTcyZjkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>トーテム</dc:creator></item><item><title><![CDATA[Mac から Windows‑WSL2 の Ubuntu に SSH/VS Code でリモート開発環境を構築してみた]]></title><description><![CDATA[
+ はじめに
+今回、タイトルの通りMac から Windows‑WSL2 の Ubuntu に SSH/VS Code でリモート開発環境を構築してみました。
+やろうと思った理由は、ただMacBookの容量が少なくなってきたからです。そんな時に大学入学時に生協で買ったパソコンがあることに気づき、こいつをなんとか利用しようとと思った次第です。
+また、今まで開発環境やLinuxなどの理解を深める上で良い材料になると感じたので今回記事にまとめてみました。
+アーキテクチャ図
+以下が今回構築する開発環境のアーキテクチャ図です。
+
+ 前提条件
+
+
+Windows 10または Windows 11 を...]]></description><link>https://zenn.dev/tacos/articles/d25d0ffffb8e83</link><guid isPermaLink="true">https://zenn.dev/tacos/articles/d25d0ffffb8e83</guid><pubDate>Thu, 05 Jun 2025 23:01:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--q5MIGD99--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Mac%2520%25E3%2581%258B%25E3%2582%2589%2520Windows%25E2%2580%2591WSL2%2520%25E3%2581%25AE%2520Ubuntu%2520%25E3%2581%25AB%2520SSH%252FVS%25E2%2580%25AFCode%2520%25E3%2581%25A7%25E3%2583%25AA%25E3%2583%25A2%25E3%2583%25BC%25E3%2583%2588%25E9%2596%258B%25E7%2599%25BA%25E7%2592%25B0%25E5%25A2%2583%25E3%2582%2592%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25BF%25E3%2582%25B3%25E3%2582%25B9%25E3%2583%259E%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTHNqWVZUSXZtQmFWX3VLeWdicy0tbDVHRG13dUpVMWd6TEtDYzJPRElNTlE5T0JBPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>タコスマスター</dc:creator></item><item><title><![CDATA[WSL(Ubuntu)にArduino IDEを導入する]]></title><description><![CDATA[
+ WSLでもArduino IDEを使う
+WSLこと「Windows Subsystem for Linux」は、Windows上でLinuxを使えるというものです。今回、既にWindowsでArduino IDEを利用していた最中、真更なArduino IDEの環境が欲しくなることがありました。
+そこで、WSL上のLinux(Ubuntu 22.04.5 LTS)にこれをインストールします。本記事は、その手順や露見した問題点をまとめるものです。なおWSLやLinuxの導入手順などは、本記事の主旨から逸れるため扱いません。導入済みを前提としています。また、Windows11を使用してい...]]></description><link>https://zenn.dev/amenaruya/articles/ffd2397d5f0231</link><guid isPermaLink="true">https://zenn.dev/amenaruya/articles/ffd2397d5f0231</guid><pubDate>Wed, 04 Jun 2025 15:35:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--AzzjlyAO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:WSL%2528Ubuntu%2529%25E3%2581%25ABArduino%2520IDE%25E3%2582%2592%25E5%25B0%258E%25E5%2585%25A5%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:amenaruya%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzMwZDg5YWZmZGYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>amenaruya</dc:creator></item><item><title><![CDATA[WSL2, ubuntu 個人的 初期設定]]></title><description><![CDATA[
+ WSL
+
+ ubuntu
+
+ インストール直後の設定確認
+
+ バージョン
+$ lsb_release -a
+No LSB modules are available.
+Distributor ID: Ubuntu
+Description:    Ubuntu 24.04.2 LTS
+Release:        24.04
+Codename:       noble
+
+ ロケール設定
+$ localectl
+System Locale: LANG=C.UTF-8
+    VC Keymap: (unset)
+   X11 Layout: us
+    X11 Model: pc10...]]></description><link>https://zenn.dev/6zkyoichi3945/articles/62f23a7eb77daa</link><guid isPermaLink="true">https://zenn.dev/6zkyoichi3945/articles/62f23a7eb77daa</guid><pubDate>Tue, 03 Jun 2025 14:37:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--zSlvJk_7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:WSL2%252C%2520ubuntu%2520%25E5%2580%258B%25E4%25BA%25BA%25E7%259A%2584%2520%25E5%2588%259D%25E6%259C%259F%25E8%25A8%25AD%25E5%25AE%259A%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%2585%25AD%25E6%25A2%259D%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS05kNE9FYXFPWTNabTExQUxPcjFmNDBYcVk2bXpneTFLNEhnU2stR0x1dHhra2ZnPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>六條</dc:creator></item><item><title><![CDATA[Intel MacBook Pro (Mid 2014) に Ubuntu 25.04 をインストールする]]></title><description><![CDATA[https://zenn.dev/plesio/articles/54d8771dc69bfe
+の物語の続き。
+!
+【再掲】強い理由がなければ 24.04 LTS を推奨。
+
+
+ 要約
+
+直インストールは相変わらずできない。
+
+24.10経由してアップグレードしても普通にブランクスクリーン問題が再発するぞ。
+
+
+でも、カーネルバージョンを最新化してやれば動くぞ！！
+
+同じ現象喰らってるレガシーSoCマシンは同様の方法でいけるはず
+
+
+25.04 標準のカーネルバージョンはマジで危ないからなんとかしてくれ。
+
+
+ 背景
+2014 年製 MacBook Pro 13 inch. さすがに11...]]></description><link>https://zenn.dev/plesio/articles/692596076895bd</link><guid isPermaLink="true">https://zenn.dev/plesio/articles/692596076895bd</guid><pubDate>Mon, 02 Jun 2025 14:18:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--oIi-HKXx--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Intel%2520MacBook%2520Pro%2520%2528Mid%25202014%2529%2520%25E3%2581%25AB%2520Ubuntu%252025.04%2520%25E3%2582%2592%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:plesio_%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ3NjgxN2M0NWYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>plesio_</dc:creator></item><item><title><![CDATA[ECSサービスのターゲットグループ設定ミスでハマった話]]></title><description><![CDATA[
+ 概要
+ECSサービスでRegisterTargetsイベントが発生しているにも関わらず、Application Load Balancerでターゲットが登録されない問題の調査・解決記録です。
+結論：ECSサービスが意図しないターゲットグループを参照していることが原因でした。
+
+注意： 本記事のコマンド例では、実際のリソース名やARNは仮名に置き換えています。実際の運用では、適切なリソース名に読み替えてください。
+
+
+ 背景・経緯
+この問題は、以下のTerraform運用過程で発生しました：
+
+
+STG環境で正常に動作していたリソースをベースにTerraformモジュール化を実施
+作成...]]></description><link>https://zenn.dev/zuzuzu/articles/ecs-target-group-error</link><guid isPermaLink="true">https://zenn.dev/zuzuzu/articles/ecs-target-group-error</guid><pubDate>Mon, 02 Jun 2025 12:52:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dSPgSgJ---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ECS%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2593%25E3%2582%25B9%25E3%2581%25AE%25E3%2582%25BF%25E3%2583%25BC%25E3%2582%25B2%25E3%2583%2583%25E3%2583%2588%25E3%2582%25B0%25E3%2583%25AB%25E3%2583%25BC%25E3%2583%2597%25E8%25A8%25AD%25E5%25AE%259A%25E3%2583%259F%25E3%2582%25B9%25E3%2581%25A7%25E3%2583%258F%25E3%2583%259E%25E3%2581%25A3%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:zu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2EwYzkyNjY5ZjcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>zu</dc:creator></item><item><title><![CDATA[PYENVの導入]]></title><description><![CDATA[今まで特に意識することなくPYTHONはUbuntuレポジトリのデフォルトのものつかってその上で仮想環境を作ってきました。
+apt install python3-venv python3-pip
+python3 -m venv myenv
+ところが先日あるパッケージをいれようとしたときPYTHONのVersionエラー、最新のPythonであると動かないライブラリもまだまだあるようです
+(cutest) root@ip-172-31-18-243:/opt# python --version
+Python 3.12.3
+(cutest) root@ip-172-31-18-243:/o...]]></description><link>https://zenn.dev/takeofuture/articles/b1801b6a01e6c2</link><guid isPermaLink="true">https://zenn.dev/takeofuture/articles/b1801b6a01e6c2</guid><pubDate>Sun, 01 Jun 2025 22:29:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--truO9EfV--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:PYENV%25E3%2581%25AE%25E5%25B0%258E%25E5%2585%25A5%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:takeofuture%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSnJ3cjVZTDFacmZXZ0NfWEVhb0xveEN1Mi1nYmNYQTNkUnJRQ2RwTnhkcEhGcTJWZjE9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>takeofuture</dc:creator></item><item><title><![CDATA[EthernetポートをEtherCAT専用に設定・解除する手順]]></title><description><![CDATA[
+ Ethernet ポートを EtherCAT 専用に設定・解除する手順
+
+ 前提
+
+対象 OS: Ubuntu 22.04 など NetworkManager を利用している Linux
+EtherCAT 用に設定したいインターフェース名（例: enp6s0）を事前に確認
+
+
+ EtherCAT 用に Ethernet ポートを「unmanaged（管理外）」に設定する
+
+ 1. インターフェース名を確認
+ip link
+# または
+nmcli device status
+使用可能なネットワークインターフェースの一覧が表示されます。EtherCAT 用に使用したいインターフェース名を...]]></description><link>https://zenn.dev/fuminori/articles/20250531-networkmanager-ethercat-setup</link><guid isPermaLink="true">https://zenn.dev/fuminori/articles/20250531-networkmanager-ethercat-setup</guid><pubDate>Sat, 31 May 2025 13:01:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GBVv8gt6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ethernet%25E3%2583%259D%25E3%2583%25BC%25E3%2583%2588%25E3%2582%2592EtherCAT%25E5%25B0%2582%25E7%2594%25A8%25E3%2581%25AB%25E8%25A8%25AD%25E5%25AE%259A%25E3%2583%25BB%25E8%25A7%25A3%25E9%2599%25A4%25E3%2581%2599%25E3%2582%258B%25E6%2589%258B%25E9%25A0%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Fuminori%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2hjd3o5a3Y5THN1T3E5R0FadGpTbkt6V2ZTXzl4UUROZW9tcTlhanc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Fuminori</dc:creator></item><item><title><![CDATA[VirtualBox: UbuntuホストからDualbootのWindowsをゲストOSで起動する]]></title><description><![CDATA[海洋ロボコンをやってた人です。
+今回はVirtualBoxを使用して、UbuntuホストでDualbootで既に存在するWindowsをゲストOSで起動する方法を備忘録として書いていきます。
+Dualbootの設定はしたものの、CADソフトやMSソフトを使う際に毎度デュアルブートしており、この手間をなんとかしたいと思っていました。
+あるきっかけでデュアルブートしているWindowsをUbuntu側から起動できると知ったので試したものを、記していきます。
+この影響でWindowsのブート順が変わったり、なにかトラブルが起きた際は自己責任でお願いいたします。
+私は今のところ問題なく使用できて...]]></description><link>https://zenn.dev/tasada038/articles/16626a2ac5eb2f</link><guid isPermaLink="true">https://zenn.dev/tasada038/articles/16626a2ac5eb2f</guid><pubDate>Sat, 31 May 2025 10:30:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_2_IRkSU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:VirtualBox%253A%2520Ubuntu%25E3%2583%259B%25E3%2582%25B9%25E3%2583%2588%25E3%2581%258B%25E3%2582%2589Dualboot%25E3%2581%25AEWindows%25E3%2582%2592%25E3%2582%25B2%25E3%2582%25B9%25E3%2583%2588OS%25E3%2581%25A7%25E8%25B5%25B7%25E5%258B%2595%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Takumi%2520Asada%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FDTlBFdS02UlRlclRjeFNkX3dsSDk4WE1LY1dHNDJ3b2ZoR1ZmUWNDdVhlPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Takumi Asada</dc:creator></item><item><title><![CDATA[Puppy Linux のインストール]]></title><description><![CDATA[Puppy Linux のインストールした時のメモです。
+
+ Puppy Linux の OS の書き込み
+
+次のサイトからイメージファイル(ISO)をダウンロード 。https://puppylinux-woof-ce.github.io/
+
+私のコンピュータのアーキテクチャは x86_64 64-bit で、さらに Puppy Linux は Ubuntu ベースが良かったので Ubuntu Focal 64 でした
+
+
+Rufusで USB メモリに書き込む。Refusは窓の杜にある。
+
+
+ BIOSの設定
+・BIOSの設定で USB メモリの起動順位をトップにする
+・BIOSの設...]]></description><link>https://zenn.dev/15bluefortran/articles/70a4ed3d56aed2</link><guid isPermaLink="true">https://zenn.dev/15bluefortran/articles/70a4ed3d56aed2</guid><pubDate>Fri, 30 May 2025 19:46:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5yp2zhq---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Puppy%2520Linux%2520%25E3%2581%25AE%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:K%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSXlKaklHWTlqc3JjcFhuZFctLVlvVlJxNkFROXlicmhiN1AxVlV2aHJxT0VzPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>K</dc:creator></item><item><title><![CDATA[【Zorin OS ／ Ubuntu】Arduino IDE 2.3.6 on VirtualBox]]></title><description><![CDATA[
+ 仮想環境で心機一転
+!
+本記事ではVirtualBox及びこれに導入したZorin OSを話題にしておりますが、しかしこれらの導入手順は本記事の主旨より逸れるため、これを述べません。
+なおZorin OSは、Ubuntuを始めとするDebian系に当るOSです。従って、本記事の手順はUbuntuに関する情報を基にしており、Debian系の環境に共通する可能性があります。
+
+冒頭から私事で恐縮ですが、近頃LvGL(組込みシステム用GUIライブラリー)を試しています。しかし訳あって、7.0.2という古いバージョンを使っています。因みに現在の最新は9.3です。
+全く解決策が分からず素直に諦...]]></description><link>https://zenn.dev/amenaruya/articles/c00dfb2c4aabb3</link><guid isPermaLink="true">https://zenn.dev/amenaruya/articles/c00dfb2c4aabb3</guid><pubDate>Tue, 27 May 2025 17:42:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--mPehUCkn--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Zorin%2520OS%2520%25EF%25BC%258F%2520Ubuntu%25E3%2580%2591Arduino%2520IDE%25202.3.6%2520on%2520VirtualBox%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:amenaruya%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzMwZDg5YWZmZGYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>amenaruya</dc:creator></item><item><title><![CDATA[Ubuntu 24.04 LTS にCeforeを導入する方法]]></title><description><![CDATA[
+ はじめに
+動画配信や情報共有の効率化を目指す次世代ネットワーク技術「CCN（Content-Centric Networking）」の実装の1つであり、NICT によりープンソースプラットフォームにて開発が行われている Cefore。本記事では、Ubuntu環境にCeforeを導入し、起動の確認までの手順をまとめます。
+!
+本記事は作成時点において最新であるCefore-version0.11.0を元に動作確認を行っています。
+バージョンによっては異なる操作が必要となる可能性があるため、詳しくはGithub repositoryのreadmeを参照ください。
+
+
+ 対象読者
+
+CCN...]]></description><link>https://zenn.dev/k4e/articles/k4e-cefore-on-ubuntu</link><guid isPermaLink="true">https://zenn.dev/k4e/articles/k4e-cefore-on-ubuntu</guid><pubDate>Sun, 25 May 2025 17:17:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Vqz2gi4L--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ubuntu%252024.04%2520LTS%2520%25E3%2581%25ABCefore%25E3%2582%2592%25E5%25B0%258E%25E5%2585%25A5%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yurin_Kanade%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y4NjJmNDQ2NjYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yurin_Kanade</dc:creator></item><item><title><![CDATA[WSL2 Ubuntu でVulkanをGPUで動かす]]></title><description><![CDATA[mesaにWSL2用の実験的なコードがあるので、それを有効化すればよいらしい。
+
+ mesaのソース準備
+deb-srcを準備しておいて以下で依存を取得。
+$ apt-get source mesa
+$ sudo apt-get install build-essential
+$ sudo apt-get build-dep mesa
+
+ WSL2サポートを追加
+debian/rules を以下のように変更して、フラグを有効化
+ VULKAN_DRIVERS =
++VULKAN_DRIVERS += microsoft-experimental
+新たに spirv2dxil が生成される...]]></description><link>https://zenn.dev/qnighy/articles/9a89541fcb4946</link><guid isPermaLink="true">https://zenn.dev/qnighy/articles/9a89541fcb4946</guid><pubDate>Sat, 24 May 2025 08:31:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--W7ZoqPKX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:WSL2%2520Ubuntu%2520%25E3%2581%25A7Vulkan%25E3%2582%2592GPU%25E3%2581%25A7%25E5%258B%2595%25E3%2581%258B%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Masaki%2520Hara%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2l3aEI4dTM5cFZyM09sWVFLcUU5Z1ozV2d3MHlsMS03cUZad0huYWc9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Masaki Hara</dc:creator></item><item><title><![CDATA[古い Mac Mini (2014) を Ubuntu 開発マシンに！（1/3） インストールと初期設定をやってみた]]></title><description><![CDATA[
+ はじめに
+こんにちは！この記事では、使わなくなった古い Mac Mini (僕のは 2014 年モデルです) に Ubuntu Desktop を入れて、開発用のマシンとして復活させる手順を紹介します。３回シリーズの初回となる今回は、OS のインストールと最初の設定までを一緒にやっていきましょう！
+
+ きっかけは、ちょっとした悩みから
+普段 Windows で開発しているんですが、デプロイ先が Linux (AWS とか) だと、環境の違いで「あれ？」ってなることが時々あって…。もう少しスムーズに進めたいな、と思っていました。
+WSL2 も試したんですが、なんとなく自分には合わない感...]]></description><link>https://zenn.dev/lucasnote/articles/c165bec025bed2</link><guid isPermaLink="true">https://zenn.dev/lucasnote/articles/c165bec025bed2</guid><pubDate>Sat, 24 May 2025 06:11:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vtEfVZHI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%258F%25A4%25E3%2581%2584%2520Mac%2520Mini%2520%25282014%2529%2520%25E3%2582%2592%2520Ubuntu%2520%25E9%2596%258B%25E7%2599%25BA%25E3%2583%259E%25E3%2582%25B7%25E3%2583%25B3%25E3%2581%25AB%25EF%25BC%2581%25EF%25BC%25881%252F3%25EF%25BC%2589%2520%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%25A8%25E5%2588%259D%25E6%259C%259F%25E8%25A8%25AD%25E5%25AE%259A%25E3%2582%2592%25E3%2582%2584%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Luca%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2E1MmM0OWYzMGYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Luca</dc:creator></item><item><title><![CDATA[Ubuntu × DockerでPHP-FPM環境を構築する最小構成メモ]]></title><description><![CDATA[Docker を使って PHP-FPM の環境を Ubuntu ベースで構築する際の基本的な Dockerfile について、各ステップの意味や注意点を詳しく解説しています。
+この記事では「なぜその命令が必要なのか？」「どんなトラブルを避けているのか？」を意識し、見返したときに理解が深まるようにまとめました。
+
+ 全体構成の目的
+この Dockerfile は、Ubuntu 22.04 をベースに PHP-FPM をインストールして、FastCGI 用に TCP ポート 9000 で待ち受ける PHP 実行環境を構築するものです。
+
+ dockerfileのコード
+FROM ubuntu...]]></description><link>https://zenn.dev/toshi052312/articles/caabb8821d6f59</link><guid isPermaLink="true">https://zenn.dev/toshi052312/articles/caabb8821d6f59</guid><pubDate>Thu, 22 May 2025 01:22:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--a5qk-Zkf--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ubuntu%2520%25C3%2597%2520Docker%25E3%2581%25A7PHP-FPM%25E7%2592%25B0%25E5%25A2%2583%25E3%2582%2592%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2599%25E3%2582%258B%25E6%259C%2580%25E5%25B0%258F%25E6%25A7%258B%25E6%2588%2590%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:toshi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2YyN2FlNzg3NGMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>toshi</dc:creator></item><item><title><![CDATA[Ubuntu⇔GitHubをHTTPS接続に変更する（備忘）]]></title><description><![CDATA[
+ はじめに
+これまでSSH接続していたが、ある日突然git pushができなくなってしまったため（原因不明...）、HTTPS接続に切り替えた。
+
+ configファイルの修正
+Ubuntuの対象リポジトリにある.git &gt; configファイルをエクスプローラーからメモ帳で開く。
+（エクスプローラーではなく、Ubuntuターミナルから直接nanoエディタ等で編集しても良い）
+
+GitHubから対象リポジトリのリモートURLをコピーし、メモ帳で開いたconfigファイルの[remote "origin"]のurl部分を上書き保存する。
+
+
+
+ 認証設定（Personal Acce...]]></description><link>https://zenn.dev/kento_mm_ninw/articles/f99a4722aef0b1</link><guid isPermaLink="true">https://zenn.dev/kento_mm_ninw/articles/f99a4722aef0b1</guid><pubDate>Mon, 19 May 2025 01:59:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3X9ICYS7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ubuntu%25E2%2587%2594GitHub%25E3%2582%2592HTTPS%25E6%258E%25A5%25E7%25B6%259A%25E3%2581%25AB%25E5%25A4%2589%25E6%259B%25B4%25E3%2581%2599%25E3%2582%258B%25EF%25BC%2588%25E5%2582%2599%25E5%25BF%2598%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kent-Watson%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzI3OGE1ZjhmMWQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kent-Watson</dc:creator></item><item><title><![CDATA[マインクラフトサーバー設定(統合版)]]></title><description><![CDATA[
+ 概要
+
+UbuntuでマインクラフトのBedrock(統合版)サーバのいくつかの設定方法を記載します。
+今回の方法はすべてコンソールから操作(サーバーを直接操作)する方法になります。
+
+
+ 環境
+*ローカル環境の為、VPSやクラウドの環境と少し違う場合がございます。
+*VPSなどの方は最初にマインクラフトサーバーを停止してください。
+
+
+
+項目
+Version
+
+
+
+
+OS
+Ubuntu Server 24.04.2 LTS
+
+
+サーバーバーョン
+1.21.81.2
+
+
+
+
+ 設定項目
+
+ server.properties
+
+allow-list
+default-player-pe...]]></description><link>https://zenn.dev/catcatflame/articles/5867cb7f2c9786</link><guid isPermaLink="true">https://zenn.dev/catcatflame/articles/5867cb7f2c9786</guid><pubDate>Sun, 18 May 2025 17:08:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Fi7H5At2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%259E%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25AF%25E3%2583%25A9%25E3%2583%2595%25E3%2583%2588%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E8%25A8%25AD%25E5%25AE%259A%2528%25E7%25B5%25B1%25E5%2590%2588%25E7%2589%2588%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E7%258C%25AB%25E5%258F%2588%25E6%258E%25A2%25E5%2581%25B5%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzgwZDBlYjg3OWQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>猫又探偵</dc:creator></item><item><title><![CDATA[WSLでVSCodeやCursorを接続モードのまま起動する設定]]></title><description><![CDATA[
+ はじめに
+WSL（Windows Subsystem for Linux）を使って開発していて、code . や cursor .を使ってカレントディレクトリでエディタを起動したけど、毎回左下のconnect to..みたいなやつをポチポチしてwslに接続しに行かなければならなくて、とても不便でした。
+人によっては何も設定せずにそのままうまくいくらしいのですが、自分はうまくいかなかったので、どのように対処したかのログを残しておきます。
+
+ 何がわるいか
+vscodeやcursorがubuntuからみて、mntディレクトリにあるのでwindowsで起動しようとしてしまうっぽいです。
+な...]]></description><link>https://zenn.dev/haruotsu/articles/9db23bdeafdd72</link><guid isPermaLink="true">https://zenn.dev/haruotsu/articles/9db23bdeafdd72</guid><pubDate>Sat, 17 May 2025 09:48:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--M8dnc28U--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:WSL%25E3%2581%25A7VSCode%25E3%2582%2584Cursor%25E3%2582%2592%25E6%258E%25A5%25E7%25B6%259A%25E3%2583%25A2%25E3%2583%25BC%25E3%2583%2589%25E3%2581%25AE%25E3%2581%25BE%25E3%2581%25BE%25E8%25B5%25B7%25E5%258B%2595%25E3%2581%2599%25E3%2582%258B%25E8%25A8%25AD%25E5%25AE%259A%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:haruotsu%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSTBnWkxzUU44OGI3SFRtVUpEejBuTjdDelRLbGdRWjFCY2pMMlhQWnNsYnYyMUtPZz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>haruotsu</dc:creator></item></channel></rss>
