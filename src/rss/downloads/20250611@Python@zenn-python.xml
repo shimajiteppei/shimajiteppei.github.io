@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Wed, 11 Jun 2025 06:43:54 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[SQLAlchemyを用いたRDB操作の流れ(初学者)]]></title><description><![CDATA[
+ 初めに
+初めまして。筆者はバックエンド初学者の大学生です。最近、API開発で初めてSQLAlchemyを使用し、学んだ知識をアウトプットして残したい、という思いで記事を書くことにしました。初めて触った時によく理解できていなかった内容を中心に書いているので、他の初学者の方の参考になったら嬉しいですが、初学者なりの解釈のため、鵜呑みにはしないように注意してください。（ChatGPTに聞きながら知識の整理をしていますが、内容の正確さは保証できません。）もし誤った理解があれば指摘してくださると大変助かります。
+
+ オブジェクト指向(Object-Oriented Programming: O...]]></description><link>https://zenn.dev/kyorokyoro/articles/570510650d2f16</link><guid isPermaLink="true">https://zenn.dev/kyorokyoro/articles/570510650d2f16</guid><pubDate>Wed, 11 Jun 2025 06:12:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--pYnfab0M--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:SQLAlchemy%25E3%2582%2592%25E7%2594%25A8%25E3%2581%2584%25E3%2581%259FRDB%25E6%2593%258D%25E4%25BD%259C%25E3%2581%25AE%25E6%25B5%2581%25E3%2582%258C%2528%25E5%2588%259D%25E5%25AD%25A6%25E8%2580%2585%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258D%25E3%2582%2587%25E3%2582%258D%25E3%2581%258D%25E3%2582%2587%25E3%2582%258D%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTHpWSnB0bktnNkJoek9kWFlBblBCeTJFYUplOWVnbjNfSVdjSGZ2VVJJWDJtbHh3PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>きょろきょろ</dc:creator></item><item><title><![CDATA[スマートロックを顔認証で解錠]]></title><description><![CDATA[VisionCraftクレーンプログラムチームの学習用]]></description><link>https://zenn.dev/micanis/books/20f84608e07c2e</link><guid isPermaLink="true">https://zenn.dev/micanis/books/20f84608e07c2e</guid><pubDate>Wed, 11 Jun 2025 05:00:52 GMT</pubDate><dc:creator>micanis</dc:creator></item><item><title><![CDATA[つえぇやつと出会うとワクワクすっぞツール — ミニマップから試合を分析する（MLBB）]]></title><description><![CDATA[🟥プロローグ
+皆さんはゲーム好きですか？
+僕は好きです。
+MOBAというジャンルのゲーム（今だとポケモンUNITEが有名？）はとても戦略的でありますが、初心者には少しハードルが高いという欠点があります。
+手っ取り早く強くなるためには、つえぇ奴の動きを吸収すればいいという魔人ブウのような思想のものと行動を分析できるようなツールを拙速で作ってみました。
+いくつか課題や懸念点はあるが、もう少しUpdateをかけていけば、分析できるのではないのかというところまで来ました。
+そのため、自分自身のIn/Outを明確に記録するために、この記事を作成しようと思います。完全に自己満足です。
+ーーーーーー
+...]]></description><link>https://zenn.dev/shogithub/articles/c0bb4388daee05</link><guid isPermaLink="true">https://zenn.dev/shogithub/articles/c0bb4388daee05</guid><pubDate>Wed, 11 Jun 2025 04:44:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3i4gEAE1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%25A4%25E3%2581%2588%25E3%2581%2587%25E3%2582%2584%25E3%2581%25A4%25E3%2581%25A8%25E5%2587%25BA%25E4%25BC%259A%25E3%2581%2586%25E3%2581%25A8%25E3%2583%25AF%25E3%2582%25AF%25E3%2583%25AF%25E3%2582%25AF%25E3%2581%2599%25E3%2581%25A3%25E3%2581%259E%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%2520%25E2%2580%2594%2520%25E3%2583%259F%25E3%2583%258B%25E3%2583%259E%25E3%2583%2583%25E3%2583%2597%25E3%2581%258B%25E3%2582%2589%25E8%25A9%25A6%25E5%2590%2588%25E3%2582%2592%25E5%2588%2586%25E6%259E%2590%25E3%2581%2599%25E3%2582%258B%25EF%25BC%2588MLBB%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:sho%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTDc0ZkUwSl9tcDMtRF9majluTDdNaHZTdTA2REJrSEh0bDRqUGFZblRLdVlzV1BnPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sho</dc:creator></item><item><title><![CDATA[Claude Codeでトークン使用量を削減するアプローチ]]></title><description><![CDATA[Claude Codeは強力なAI開発支援ツールですが、Claudeのプロプランにはレート制限があるため、トークン使用量を意識した効率的な使い方をすることで、レート制限に達する頻度を下げ、より快適な開発体験が得られます。
+本記事では、実際の開発で使える具体的な削減の考え方をまとめました。
+
+ 1. コード生成の最適化
+
+ 具体的な指示を出す
+曖昧な要求は Claude Code との長いやり取りを生み、大量のトークンを消費します。
+❌ 悪い例: "ログイン機能を作って"
+
+✅ 良い例: "FastAPIでJWT認証を使ったログイン機能を実装して、
+- Pydanticでリクエスト/レスポ...]]></description><link>https://zenn.dev/driller/articles/ff6a50ae228b2b</link><guid isPermaLink="true">https://zenn.dev/driller/articles/ff6a50ae228b2b</guid><pubDate>Wed, 11 Jun 2025 03:48:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--sr5xVJDJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Claude%2520Code%25E3%2581%25A7%25E3%2583%2588%25E3%2583%25BC%25E3%2582%25AF%25E3%2583%25B3%25E4%25BD%25BF%25E7%2594%25A8%25E9%2587%258F%25E3%2582%2592%25E5%2589%258A%25E6%25B8%259B%25E3%2581%2599%25E3%2582%258B%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:driller%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lPT1dLNnlQWE9BNndvZDFlYkxTQ0FLOGlpX1E3X2hqWmVwbDdJeUE9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>driller</dc:creator></item><item><title><![CDATA[標準ライブラリを使うか、自作するか？ ― 時刻差分で考える判断基準 ―]]></title><description><![CDATA[こんにちは、zoldofです。
+今回は「時刻差分の処理って、ライブラリ使うとメモリ食うよね？」という話から、ちょっとマニアックにメモリの話や極限環境の話に広げてみようと思います。
+✅ 判断軸と優先度一覧（評価軸）
+
+
+
+判断軸
+優先度
+理由
+
+
+
+
+実行時間の短さ
+高
+リアルタイム処理に直結
+
+
+メモリ使用量の少なさ
+高
+組込み・省リソース環境で重要
+
+
+コードの簡潔さ
+中
+拡張性・開発効率に影響
+
+
+ライブラリの機能性
+低〜中
+複雑な処理には重要
+
+
+
+
+
+ ⏳ 実行時間とメモリ、どこまでなら許容される？
+いろんなライブラリで時刻差分をとったときの実測値がこちら。
+
+
+
+ライブラリ
+実...]]></description><link>https://zenn.dev/zoldof/articles/tech-algo-library</link><guid isPermaLink="true">https://zenn.dev/zoldof/articles/tech-algo-library</guid><pubDate>Wed, 11 Jun 2025 03:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--PKniVzo4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%25A8%2599%25E6%25BA%2596%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%25E3%2581%258B%25E3%2580%2581%25E8%2587%25AA%25E4%25BD%259C%25E3%2581%2599%25E3%2582%258B%25E3%2581%258B%25EF%25BC%259F%2520%25E2%2580%2595%2520%25E6%2599%2582%25E5%2588%25BB%25E5%25B7%25AE%25E5%2588%2586%25E3%2581%25A7%25E8%2580%2583%25E3%2581%2588%25E3%2582%258B%25E5%2588%25A4%25E6%2596%25AD%25E5%259F%25BA%25E6%25BA%2596%2520%25E2%2580%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:zoldof%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk3MzFiNTFiZGYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>zoldof</dc:creator></item><item><title><![CDATA[Pythonでコマンドライン引数を受け取る関数]]></title><description><![CDATA[
+ はじめに
+Pythonでコマンドライン引数を受け取る処理が必要になった時用のコードスニペットです。
+
+ コードテンプレート
+
+parse_args.py
+import argparse
+
+class ParsedArguments:
+  """パース後のコマンドライン引数を格納するためのクラス
+
+  Attributes
+  ----------
+  hoge: str
+      引数--hogeの値
+  fuga: str
+      引数--fugaの値
+  """
+  hoge: str
+  fuga: str
+
+def parse_args() -&gt; ParsedAr...]]></description><link>https://zenn.dev/takumaikeda/articles/3c2f6e6615ebb0</link><guid isPermaLink="true">https://zenn.dev/takumaikeda/articles/3c2f6e6615ebb0</guid><pubDate>Wed, 11 Jun 2025 02:27:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--zgapFlnI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A7%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%25B3%25E5%25BC%2595%25E6%2595%25B0%25E3%2582%2592%25E5%258F%2597%25E3%2581%2591%25E5%258F%2596%25E3%2582%258B%25E9%2596%25A2%25E6%2595%25B0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ch%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y0OGQ5ODRmYjcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ch</dc:creator></item><item><title><![CDATA[チャチャっとクイック、FastAPI]]></title><description><![CDATA[
+ 概要
+とりあえず、FastAPIでチャチャっと何か作るときに素早く立ち上げたい。
+そんなときに、多分便利なshellスクリプトと手順をまとめたものです。
+
+ 感想
+イメージのビルドとかに時間は多少かかるものの、全て揃っていればとりあえず2分未満でDoker上で動くまでは行くはず。（個人環境でテスト）
+
+ 開発環境
+
+macOS Sequoia 15.5
+VsCode
+zsh 5.9 (arm64-apple-darwin24.0)
+
+
+ 前提条件
+システムに以下がインストールされていることを確認してください:
+
+Python 3.12
+uv pip (インストールはこちら)
+
+!
+u...]]></description><link>https://zenn.dev/testkun08080/articles/python-fastapi-000375fd0e8de7</link><guid isPermaLink="true">https://zenn.dev/testkun08080/articles/python-fastapi-000375fd0e8de7</guid><pubDate>Wed, 11 Jun 2025 02:11:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--B3doSXbL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2581%25E3%2583%25A3%25E3%2583%2581%25E3%2583%25A3%25E3%2581%25A3%25E3%2581%25A8%25E3%2582%25AF%25E3%2582%25A4%25E3%2583%2583%25E3%2582%25AF%25E3%2580%2581FastAPI%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:testkun08080%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzYxMjE5ZTQ2YzguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>testkun08080</dc:creator></item><item><title><![CDATA[【PlayWright】Pythonプログラムを呼び出す]]></title><description><![CDATA[
+ 概要
+Webの自動化中にこっそり python を実行したいことありませんか。
+今回はその方法を紹介！！
+
+ サンプルコード
+const { test, expect, chromium } = require('@playwright/test');
+const { exec } = require('child_process');
+
+test('サンプルサイトを開いてPythonスクリプトを実行する', async () =&gt; {
+  // ブラウザをデバッグモードで起動
+  const browser = await chromium.launch({ headless...]]></description><link>https://zenn.dev/qa_dev/articles/3ed124bbb3ba65</link><guid isPermaLink="true">https://zenn.dev/qa_dev/articles/3ed124bbb3ba65</guid><pubDate>Tue, 10 Jun 2025 23:35:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--idl_vBnb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590PlayWright%25E3%2580%2591Python%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%25A0%25E3%2582%2592%25E5%2591%25BC%25E3%2581%25B3%25E5%2587%25BA%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:qa_dev%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTGRfRnVZcmtndVIzVW1ScTVFMWdDMmozVmR4cFRjV29uUTJYd2JOQ2RhQ3ltaEFBPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>qa_dev</dc:creator></item><item><title><![CDATA[Slackの特定チャンネルのメッセージをスレッド含め取得]]></title><description><![CDATA[
+ はじめに
+色々検索したりしてみたのですが、イマイチピンポイントでコードまで含めた完成形に近い記事が見当たらなかったのでSlackの特定チャンネルのメッセージをスレッド含めて全件取得するコードをNo Coding(No 人間成分)で作成しました。
+
+ 環境
+
+ローカル環境(Windows)
+Python
+Cursor
+Claude Desktop
+
+
+ やったこと
+ユーザーからの依頼で特定チャンネルのメッセージを全件取得したいとの事で、時間をかければSlackの標準エクスポート機能でも出来るのですが今回はプライベートチャンネルだったため標準機能（パブリックチャンネルのみエクスポート可能...]]></description><link>https://zenn.dev/ramatsu/articles/5cce8211f86b23</link><guid isPermaLink="true">https://zenn.dev/ramatsu/articles/5cce8211f86b23</guid><pubDate>Tue, 10 Jun 2025 23:34:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--JOpvPLuT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Slack%25E3%2581%25AE%25E7%2589%25B9%25E5%25AE%259A%25E3%2583%2581%25E3%2583%25A3%25E3%2583%25B3%25E3%2583%258D%25E3%2583%25AB%25E3%2581%25AE%25E3%2583%25A1%25E3%2583%2583%25E3%2582%25BB%25E3%2583%25BC%25E3%2582%25B8%25E3%2582%2592%25E3%2582%25B9%25E3%2583%25AC%25E3%2583%2583%25E3%2583%2589%25E5%2590%25AB%25E3%2582%2581%25E5%258F%2596%25E5%25BE%2597%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%25A9%25E3%2583%25BC%25E3%2583%259E2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzlhZWJiNGI5MWMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ラーマ2</dc:creator></item><item><title><![CDATA[【AtCoder】ABC409 自分用めも📝]]></title><description><![CDATA[
+
+ ABC409 - A 
+
+最近フロントエンドばっかり書いていたからPythonの書き方をすべて忘れ去っていて、inputをintにする方法すらわからなくて焦った…
+まあ解けたは解けたからOKかな？
+n = int(input())
+a = input()
+b = input()
+
+for i in range(n):
+    if(a[i]=="o" and  a[i]==b[i]):
+        print("Yes")
+        break
+    if(i==n-1):
+        print("No")
+
+ ABC409 - B 
+
+見える範囲のテストケースは...]]></description><link>https://zenn.dev/guinea_pig/articles/16dd786ac4440f</link><guid isPermaLink="true">https://zenn.dev/guinea_pig/articles/16dd786ac4440f</guid><pubDate>Tue, 10 Jun 2025 22:16:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jrGxqphr--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590AtCoder%25E3%2580%2591ABC409%2520%25E8%2587%25AA%25E5%2588%2586%25E7%2594%25A8%25E3%2582%2581%25E3%2582%2582%2520%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%2597%25A7%25E5%25AD%2597%25E4%25BD%2593%25E3%2583%25A2%25E3%2583%25AB%25E3%2583%25A2%25E3%2583%2583%25E3%2583%2588%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA4NTVjMDAyZjQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>旧字体モルモット</dc:creator></item><item><title><![CDATA[VRChいびきを検知して自動でマイクをミュートするツールを作った話]]></title><description><![CDATA[
+ はじめに
+自己満個人ツールを片隅で作っていたのですが、
+たまにはアウトプットしてみようかなと思って始めて記事書いてます。
+
+ なにつくったの？
+最近、VRChatやらにはまり夜な夜なVRでインしていた時に
+ふと、寝落ちしていました💤
+起きてから気が付いたのですかミュートが外れており...
+やらかしたかなと思ったことがきっかけで、本アプリを作ってみました
+
+ 何ができるの？
+Windowsで動くシンプルなアプリです。
+主な機能はこんな感じです。
+
+
+いびき検出:
+
+マイクの音をリアルタイムで分析して、いびきを検知します。
+
+
+
+VRChat自動ミュート連携:
+
+いびきを検知したら、OS...]]></description><link>https://zenn.dev/sakagi/articles/2dda14730f5f8d</link><guid isPermaLink="true">https://zenn.dev/sakagi/articles/2dda14730f5f8d</guid><pubDate>Tue, 10 Jun 2025 13:23:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qGYTkWQv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:VRCh%25E3%2581%2584%25E3%2581%25B3%25E3%2581%258D%25E3%2582%2592%25E6%25A4%259C%25E7%259F%25A5%25E3%2581%2597%25E3%2581%25A6%25E8%2587%25AA%25E5%258B%2595%25E3%2581%25A7%25E3%2583%259E%25E3%2582%25A4%25E3%2582%25AF%25E3%2582%2592%25E3%2583%259F%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%2588%25E3%2581%2599%25E3%2582%258B%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:atama%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY4ZWM5MWFmZTkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>atama</dc:creator></item><item><title><![CDATA[LLM活用！FlaskとAIで作るPDF検索アプリの開発ガイド]]></title><description><![CDATA[LLM（大規模言語モデル）を活用したWebアプリ開発に挑戦しませんか？この記事では、Flask、LangChain、PostgreSQLを使い、アップロードしたPDFの内容をAIで検索・質問できるアプリケーションの具体的な開発手順を解説します。
+
+Dockerを使った簡単な環境構築から、LangChainによるAI連携、データベースへの情報保存まで、実践的なスキルが身につきます。AIアプリ開発の第一歩に最適なチュートリアルです。]]></description><link>https://zenn.dev/kenquichi/books/d5127b1633e8fd</link><guid isPermaLink="true">https://zenn.dev/kenquichi/books/d5127b1633e8fd</guid><pubDate>Tue, 10 Jun 2025 13:17:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--orUiVf3B--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci8zMDZjN2MyYjA0LmpwZWc=%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>ケン吉</dc:creator></item><item><title><![CDATA[langgraph-supervisorでStreamingすると何が出てくるの？]]></title><description><![CDATA[メモ的な記事。ただただ、どんな情報が出力されるのかの具体例が知りたかったので…。
+
+ Supervisorくんは具体的に何をするの？
+langgraph-supervisorを使って、LLMのストリーミングを行うと、どのような情報が出力されるのかを確認する。というか、LangGraphでの「ストリーミング」がどんな内容なのかを確認したい。
+以下のようなサンプルコードがあるが、最終出力ではなくストリーミング中にどのような情報が出力されるのか。
+https://github.com/langchain-ai/langgraph-supervisor-py
+サンプルではSupervisorに対...]]></description><link>https://zenn.dev/vlntr_telco_rd/articles/supervisor-streaming</link><guid isPermaLink="true">https://zenn.dev/vlntr_telco_rd/articles/supervisor-streaming</guid><pubDate>Tue, 10 Jun 2025 10:08:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wJNg8rd8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:langgraph-supervisor%25E3%2581%25A7Streaming%25E3%2581%2599%25E3%2582%258B%25E3%2581%25A8%25E4%25BD%2595%25E3%2581%258C%25E5%2587%25BA%25E3%2581%25A6%25E3%2581%258F%25E3%2582%258B%25E3%2581%25AE%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2583%25A6%25E3%2582%25A6%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NiMWRjY2I0MzAuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2581%25A8%25E3%2581%2582%25E3%2582%258B%25E9%2580%259A%25E4%25BF%25A1%25E4%25BC%259A%25E7%25A4%25BE%25E3%2581%25AE%25E6%259C%2589%25E5%25BF%2597%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzExZmM2MWE2MDAuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ユウ</dc:creator></item><item><title><![CDATA[#110　Interacting with Restaking Config Accounts in Python]]></title><description><![CDATA[
+ Introduction
+I’ve been building a Python SDK to interact with the protocol, focusing on interacting with Restaking protocol.
+In this blog, I'll walk through how to use Python to fetch Restaking Config accounts, highlighting the tools and techniques involved.
+
+ Restaking Config Accounts
+Restakin...]]></description><link>https://zenn.dev/nxted_sapporo/articles/2da8f9096919ab</link><guid isPermaLink="true">https://zenn.dev/nxted_sapporo/articles/2da8f9096919ab</guid><pubDate>Tue, 10 Jun 2025 05:13:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0cCq5-9J--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%2523110%25E3%2580%2580Interacting%2520with%2520Restaking%2520Config%2520Accounts%2520in%2520Python%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:NXTEDCo.%252C%2520Ltd.%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBmZjQzOTVhYzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>NXTEDCo., Ltd.</dc:creator></item><item><title><![CDATA[#109　【Django】ORMとN+1問題についての備忘録]]></title><description><![CDATA[
+ はじめに
+今回はPythonのフレームワークであるDjangoのORMについての備忘録です。
+速度改善のため、N+1問題についてや、select_related・prefetch_related・Qオブジェクトなどでパフォーマンスを改善できないか調べていました。
+
+ N+1問題
+
+ N+1問題とは
+DBからN個のデータを取得するとき、関連するデータを取得するためにさらにN回のクエリが発生する問題です。
+データが増えるほどクエリの発行が多くなり、パフォーマンスが低下する原因となってしまいます。
+
+ 具体例
+社員（Employee）と会社（Company）という2つのモデルを定義しました...]]></description><link>https://zenn.dev/nxted_sapporo/articles/29315a2d7ab503</link><guid isPermaLink="true">https://zenn.dev/nxted_sapporo/articles/29315a2d7ab503</guid><pubDate>Tue, 10 Jun 2025 05:11:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_gz6Yp-n--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%2523109%25E3%2580%2580%25E3%2580%2590Django%25E3%2580%2591ORM%25E3%2581%25A8N%252B1%25E5%2595%258F%25E9%25A1%258C%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E3%2581%25AE%25E5%2582%2599%25E5%25BF%2598%25E9%258C%25B2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:NXTEDCo.%252C%2520Ltd.%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBmZjQzOTVhYzUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>NXTEDCo., Ltd.</dc:creator></item><item><title><![CDATA[【python】雑に始める並列処理（multiprocessing）]]></title><description><![CDATA[雑なメモ書きです（後でもう少しまとめます）
+
+ 1. はじめに
+
+multiprocessingは、pythonにて並列処理を実装するための標準ライブラリ
+threadingやasyncと比較して、高速化の恩恵が大きい
+実行する関数自体が独立であり、内部で並列処理が行われていないかは、注意しておく必要がある
+
+multiprocessing --- プロセスベースの並列処理
+https://docs.python.org/ja/3/library/multiprocessing.html
+multiprocess, threading, asyncの違い・使い分けについては、下記の記事が...]]></description><link>https://zenn.dev/hoshinagi1219/articles/b78878cd618713</link><guid isPermaLink="true">https://zenn.dev/hoshinagi1219/articles/b78878cd618713</guid><pubDate>Tue, 10 Jun 2025 03:30:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--aWAyiy-G--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590python%25E3%2580%2591%25E9%259B%2591%25E3%2581%25AB%25E5%25A7%258B%25E3%2582%2581%25E3%2582%258B%25E4%25B8%25A6%25E5%2588%2597%25E5%2587%25A6%25E7%2590%2586%25EF%25BC%2588multiprocessing%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%2598%259F%25E6%259D%259C%25E3%2581%25AA%25E3%2581%258E%25E3%2581%2595%25EF%25BC%2588Nagisa%2520Hoshi...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQ5ZGRkYjJkZjIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>星杜なぎさ（Nagisa Hoshimori）</dc:creator></item><item><title><![CDATA[MCPホスト構築：非同期処理とリソース管理の基礎と実装]]></title><description><![CDATA[この記事では、MCPホストを実際に作成するプロセスを通じて、その際に不可欠となる「非同期処理」の考え方と、通信セッションなどを安全に扱うための「リソース管理」のテクニックについて、基礎から具体的な実装までを解説します。記事では「MCPホスト」と「AIエージェント」の両方の表現が使われていますが、AIエージェントもMCPホストで実装されていることを前提に書いています。
+MCPの概念については以下の記事を参考にしてください。
+https://zenn.dev/mkj/articles/0ed4d02ef3439c
+AIエージェントがMCPのような外部サーバと連携して動作する際には、必然的に以...]]></description><link>https://zenn.dev/mkj/articles/95c0083a15b630</link><guid isPermaLink="true">https://zenn.dev/mkj/articles/95c0083a15b630</guid><pubDate>Tue, 10 Jun 2025 02:50:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--kgJlSfbk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:MCP%25E3%2583%259B%25E3%2582%25B9%25E3%2583%2588%25E6%25A7%258B%25E7%25AF%2589%25EF%25BC%259A%25E9%259D%259E%25E5%2590%258C%25E6%259C%259F%25E5%2587%25A6%25E7%2590%2586%25E3%2581%25A8%25E3%2583%25AA%25E3%2582%25BD%25E3%2583%25BC%25E3%2582%25B9%25E7%25AE%25A1%25E7%2590%2586%25E3%2581%25AE%25E5%259F%25BA%25E7%25A4%258E%25E3%2581%25A8%25E5%25AE%259F%25E8%25A3%2585%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E6%259D%258E%2520%25E7%25A2%25A9%25E6%25A0%25B9%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U2NGM3ZTBkMzIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%259D%25BE%25E5%25B0%25BE%25E7%25A0%2594%25E7%25A9%25B6%25E6%2589%2580%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNmYWUwZTA4Y2IuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>李 碩根</dc:creator></item><item><title><![CDATA[Pythonで連射マクロツールを作る（複数ホットキー＆インターバル設定対応）]]></title><description><![CDATA[
+ 🔫 はじめに
+マインクラフトを友人と遊んでいると、トラップで敵を倒し続けるときや、
+長時間の移動や作業でキーを連打する必要が出てくることがよくあります。
+マウスやキーボードを手動で押し続けるのはしんどいなぁ…と感じていたので、
+複数ホットキーで連射ON/OFFが切り替えられるマクロツールをPythonで作ってみました！
+それぞれのキーにクリック間隔 / 連射時間 / 休止時間を設定できるのがポイントです！
+
+
+ 💡 作成背景
+最初は左クリックの自動連射だけを考えていましたが、
+右クリックやWASDなどキー連射にも応用できるように拡張しました。
+さらに、複数のマクロを同時に動かせるよう...]]></description><link>https://zenn.dev/magma_program/articles/c0b1c34e345a2c</link><guid isPermaLink="true">https://zenn.dev/magma_program/articles/c0b1c34e345a2c</guid><pubDate>Tue, 10 Jun 2025 02:20:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--sdsiRLyD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2581%25A7%25E9%2580%25A3%25E5%25B0%2584%25E3%2583%259E%25E3%2582%25AF%25E3%2583%25AD%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%25EF%25BC%2588%25E8%25A4%2587%25E6%2595%25B0%25E3%2583%259B%25E3%2583%2583%25E3%2583%2588%25E3%2582%25AD%25E3%2583%25BC%25EF%25BC%2586%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25AB%25E8%25A8%25AD%25E5%25AE%259A%25E5%25AF%25BE%25E5%25BF%259C%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mAgmA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSlE1LTgyWVdfSW5kQURGZFBlNi1nOWxVWGVNT0xzTm1nOHVWemwxMUQyLTFiM3Q2TT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mAgmA</dc:creator></item><item><title><![CDATA[LiNGAMで因果探索する際の概観分析について調査した（線形性）]]></title><description><![CDATA[
+ はじめに
+こんにちは、因果探索アプリケーション Causalas 開発の井手です。
+今回は、因果探索アルゴリズムの一つであるLiNGAMを用いた因果探索における、概観分析について調査しました。
+LiNGAMに関連する論文を中心に調査を行い、因果探索する際に共通して実施される概観分析の項目として、線形性の分析方法についてまとめましたので紹介します。
+LiNGAMの概観分析における正規性の確認については、前回の記事を参照してください。
+
+
+ 線形性
+LiNGAMは線形性を前提とした因果探索手法です。
+そのため、多くの論文では因果探索の実行前に各変数の線形性を検証することで、LiNGAMの...]]></description><link>https://zenn.dev/as_causal/articles/6604ac6f6cac20</link><guid isPermaLink="true">https://zenn.dev/as_causal/articles/6604ac6f6cac20</guid><pubDate>Tue, 10 Jun 2025 00:52:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--X6wWH0_W--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:LiNGAM%25E3%2581%25A7%25E5%259B%25A0%25E6%259E%259C%25E6%258E%25A2%25E7%25B4%25A2%25E3%2581%2599%25E3%2582%258B%25E9%259A%259B%25E3%2581%25AE%25E6%25A6%2582%25E8%25A6%25B3%25E5%2588%2586%25E6%259E%2590%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E8%25AA%25BF%25E6%259F%25BB%25E3%2581%2597%25E3%2581%259F%25EF%25BC%2588%25E7%25B7%259A%25E5%25BD%25A2%25E6%2580%25A7%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E4%25BA%2595%25E6%2589%258B%2520%25E9%25BA%25BB%25E5%258F%258B%25E7%25BE%258E%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRlNDhjNDQ5MDQuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:SCREEN%2520AS%2520%25E5%259B%25A0%25E6%259E%259C%25E6%258E%25A2%25E7%25B4%25A2%25E3%2583%2581%25E3%2583%25BC%25E3%2583%25A0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTEJja2JDb2wtY3MyNG56dUZkT0tNOEVWVU5JeXNXbmhPbGZ5LTJIdU9BUkMwVmR3PXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>井手 麻友美</dc:creator></item><item><title><![CDATA[【Python】現在のOSをWindowsかLinuxか判断するコード]]></title><description><![CDATA[
+ 概要
+現在使っているOSをWindowsかLinuxか判断したいことはないだろうか。
+PythonはWindowsでもLinuxでも使える便利なコードで使うことが多いと思います。
+でもOSが違うことでちょっとだけ設定を変えたりする必要があると思います。
+その時にOSの判断ができれば良いなと思い作成
+
+ サンプルコード
+import platform
+
+def check_os():
+    """
+    現在利用しているOSを判定して表示する。
+    """
+    os_name = platform.system()
+    if os_name == "Windows":
+...]]></description><link>https://zenn.dev/qa_dev/articles/1a4478077d5be1</link><guid isPermaLink="true">https://zenn.dev/qa_dev/articles/1a4478077d5be1</guid><pubDate>Mon, 09 Jun 2025 23:43:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--aLV4giOc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591%25E7%258F%25BE%25E5%259C%25A8%25E3%2581%25AEOS%25E3%2582%2592Windows%25E3%2581%258BLinux%25E3%2581%258B%25E5%2588%25A4%25E6%2596%25AD%25E3%2581%2599%25E3%2582%258B%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:qa_dev%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTGRfRnVZcmtndVIzVW1ScTVFMWdDMmozVmR4cFRjV29uUTJYd2JOQ2RhQ3ltaEFBPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>qa_dev</dc:creator></item></channel></rss>
