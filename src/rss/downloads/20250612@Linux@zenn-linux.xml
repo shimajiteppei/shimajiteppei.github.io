@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Linux」のフィード]]></title><description><![CDATA[Zennのトピック「Linux」のRSSフィードです]]></description><link>https://zenn.dev/topics/linux</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/860a9eb1e4.png</url><title>Zennの「Linux」のフィード</title><link>https://zenn.dev/topics/linux</link></image><generator>zenn.dev</generator><lastBuildDate>Thu, 12 Jun 2025 05:40:52 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/linux/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Podman + Quadlet で OneDrive の Linux クライアントを自動起動する(systemd対応)]]></title><description><![CDATA[
+ 背景
+
+自分のPC買い替えのときにせっかくなので podman に切り替えてみた
+docker だと --restart always を入れれば Docker の起動時に自動でコンテナが立ち上がってくれるが podman はサービス化に一手間必要
+
+OneDrive Client for Linux はコンテナイメージでも配布されている。コンテナを自動起動する方法として、ドキュメントでは podman generate systemd で systemd のユニットファイルを生成するやり方が記載されていたが、このコマンドは非推奨になったようなので Quadlet を使うことにした
+...]]></description><link>https://zenn.dev/ykrods/articles/b8a19698c2932e</link><guid isPermaLink="true">https://zenn.dev/ykrods/articles/b8a19698c2932e</guid><pubDate>Thu, 12 Jun 2025 04:28:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--NfMjj0WX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Podman%2520%252B%2520Quadlet%2520%25E3%2581%25A7%2520OneDrive%2520%25E3%2581%25AE%2520Linux%2520%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25A4%25E3%2582%25A2%25E3%2583%25B3%25E3%2583%2588%25E3%2582%2592%25E8%2587%25AA%25E5%258B%2595%25E8%25B5%25B7%25E5%258B%2595%25E3%2581%2599%25E3%2582%258B%2528systemd%25E5%25AF%25BE%25E5%25BF%259C%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ykrods%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4WlBRUzctLVUzaHJPQ3B3bVViRkpJZmRoTEktY0pUcWVpRVRSVTQ9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ykrods</dc:creator></item><item><title><![CDATA[Linux　Webサーバー構築(Apache)]]></title><description><![CDATA[
+ 第1章：はじめに
+
+ 概要
+このブログでは、無料で安定性の高いLinuxディストリビューション「AlmaLinux」を使って、Apache（httpd）Webサーバーを構築する手順を紹介します。CentOSの後継として注目されているAlmaLinuxは、企業利用にも適しており、学習用途にも最適です。
+Linux初心者でも安心して取り組めるように、各コマンドの意味やポイントも丁寧に解説していきます。
+
+
+ 第2章：Apacheのインストール
+まずはWebサーバーの中核となるApacheをインストールします。AlmaLinuxでは「httpd」という名前で提供されています。
+
+ ステップ...]]></description><link>https://zenn.dev/kenshinyamamoto/articles/c5429ce7dbd599</link><guid isPermaLink="true">https://zenn.dev/kenshinyamamoto/articles/c5429ce7dbd599</guid><pubDate>Thu, 12 Jun 2025 00:51:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qCizhTrP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%25E3%2580%2580Web%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E6%25A7%258B%25E7%25AF%2589%2528Apache%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kenshin%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS1pLVWprWFB2Sk9GcHRzeUQtTVQ1d3pvVnBHd3pWZHpFMlVmSExCOFJGSmNjX0lEMTQ9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kenshin</dc:creator></item><item><title><![CDATA[Mac/Linuxユーザーのためのターミナルでよく使う基本コマンド。〜その2〜編集・コピー・差分・表示 編]]></title><description><![CDATA[どうも、かりんです。
+前回の記事、Mac/Linuxユーザーのためのターミナルでよく使う基本コマンド〜その1〜では、MacやLinuxでターミナルを使う際によく登場する基本的なコマンドを紹介しました。
+今回はその続きとして、「ファイルの中身を見たい」「コピーしたい」「編集したい」「違いを見比べたい」といった日常操作で使う基本コマンドを紹介していきます。
+この記事も初心者の方向けに、「この場面ではこう使う」というシーンと一緒にできるだけシンプルにまとめています。
+
+ ファイルの中身を確認する（短いファイル）
+・コマンド
+cat ファイル名
+・用途
+テキストファイルなどの中身をそのまま表示し...]]></description><link>https://zenn.dev/karin_lab/articles/28bf751c824563</link><guid isPermaLink="true">https://zenn.dev/karin_lab/articles/28bf751c824563</guid><pubDate>Wed, 11 Jun 2025 23:34:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--f9jKvmxl--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Mac%252FLinux%25E3%2583%25A6%25E3%2583%25BC%25E3%2582%25B6%25E3%2583%25BC%25E3%2581%25AE%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%259F%25E3%2583%258A%25E3%2583%25AB%25E3%2581%25A7%25E3%2582%2588%25E3%2581%258F%25E4%25BD%25BF%25E3%2581%2586%25E5%259F%25BA%25E6%259C%25AC%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2580%2582%25E3%2580%259C%25E3%2581%259D%25E3%2581%25AE2%25E3%2580%259C%25E7%25B7%25A8%25E9%259B%2586%25E3%2583%25BB%25E3%2582%25B3%25E3%2583%2594%25E3%2583%25BC%25E3%2583%25BB%25E5%25B7%25AE%25E5%2588%2586%25E3%2583%25BB%25E8%25A1%25A8%25E7%25A4%25BA%2520%25E7%25B7%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258B%25E3%2582%258A%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZmNjQ5NDk1MzMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>かりん</dc:creator></item><item><title><![CDATA[Meow | Hack The Box Writeup]]></title><description><![CDATA[
+ マシン情報
+
+マシン名：Meow
+
+
+ 攻略方法
+
+ 1. ポートスキャン
+nmapコマンドでポートスキャンします。
+nmap -sV {マシンIP}
+nmapのオプション
+-sV：サービスのバージョンを検出する
+
+
+23番ポートでtelnetが稼働していることがわかります。
+
+ 2. 検出されたサービスに接続
+telnetコマンドでサーバーに接続してみます
+ログイン名を聞かれるので試しにrootと入力してみたところ、パスワードなしでログインできてしまいます。
+telnet {マシンIP}
+
+
+ 3. flag取得
+lsコマンドでファイルやフォルダを一覧表示すると、flag.txtが...]]></description><link>https://zenn.dev/maetsuyo/articles/ad0b2274bfd67e</link><guid isPermaLink="true">https://zenn.dev/maetsuyo/articles/ad0b2274bfd67e</guid><pubDate>Wed, 11 Jun 2025 15:20:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vyqvi5hC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:Meow%2520%257C%2520Hack%2520The%2520Box%2520Writeup%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%2589%258D%25E7%2594%25B0%25E5%2589%259B%25E5%25BF%2597%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSTF1WVdfQVQzMVhJWXBKMGIwc1lJX1ZjcExBSUtiLWR2UEhjRVZHSFdwSGhrU0xRPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>前田剛志</dc:creator></item><item><title><![CDATA[2025年の今、開発用OSとして私がMX Linux(xfce)を推す理由]]></title><description><![CDATA[
+ はじめに
+2025年、今年は何の年かわかりますか？
+そう、Linuxのデスクトップ元年です！
+2025年10月、Windows 10のサポートが終了し、Windows 11のシステム要件が厳しくなったことで、
+多くのPCがLinuxデスクトップへの移行が加速する・・・と超期待しています
+そんな2025年の今、あくまで個人の感想ですが開発用OSとしてMX Linux(xfce)を推す理由
+をまとめてみました。
+*筆者はMX Linuxとmanjaro Linuxを普段使いとして使っています。
+fedoraやubuntuでもvirtual boxで遊んでいたりします。
+
+ 開発用OSとし...]]></description><link>https://zenn.dev/ko202305/articles/78cbdf02768660</link><guid isPermaLink="true">https://zenn.dev/ko202305/articles/78cbdf02768660</guid><pubDate>Wed, 11 Jun 2025 11:58:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--pDx8t8Tt--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:2025%25E5%25B9%25B4%25E3%2581%25AE%25E4%25BB%258A%25E3%2580%2581%25E9%2596%258B%25E7%2599%25BA%25E7%2594%25A8OS%25E3%2581%25A8%25E3%2581%2597%25E3%2581%25A6%25E7%25A7%2581%25E3%2581%258CMX%2520Linux%2528xfce%2529%25E3%2582%2592%25E6%258E%25A8%25E3%2581%2599%25E7%2590%2586%25E7%2594%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kosuke%2520Oya%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4Yms1LW9HVkRyd3RPRFJmZWFJby1xSkk4MXBqR2ZCY2xjVnA4YVI9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kosuke Oya</dc:creator></item><item><title><![CDATA[【Linux】cron（クーロン）で30分ごとにジョブを実行する方法と登録例30個]]></title><description><![CDATA[
+ Linux
+Linuxのcron（クーロン）を使って、30分おきにスクリプトやコマンドを実行する設定方法を紹介します。
+
+
+ 🕒 基本のcron設定（30分おき）
+*/30 * * * * /path/to/your/command.sh
+
+ 各フィールドの意味：
+┌──────────── 分（0〜59）
+│ ┌────────── 時（0〜23）
+│ │ ┌──────── 日（1〜31）
+│ │ │ ┌────── 月（1〜12）
+│ │ │ │ ┌──── 曜日（0〜7）※0と7は日曜
+│ │ │ │ │
+*/30 * * * * ← 30分ごと
+
+
+ ✅ 登録手順
+
+ターミ...]]></description><link>https://zenn.dev/qa_dev/articles/421293e124db5a</link><guid isPermaLink="true">https://zenn.dev/qa_dev/articles/421293e124db5a</guid><pubDate>Wed, 11 Jun 2025 09:36:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Q-xBo5bf--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Linux%25E3%2580%2591cron%25EF%25BC%2588%25E3%2582%25AF%25E3%2583%25BC%25E3%2583%25AD%25E3%2583%25B3%25EF%25BC%2589%25E3%2581%25A730%25E5%2588%2586%25E3%2581%2594%25E3%2581%25A8%25E3%2581%25AB%25E3%2582%25B8%25E3%2583%25A7%25E3%2583%2596%25E3%2582%2592%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%25E3%2581%25A8%25E7%2599%25BB%25E9%258C%25B2%25E4%25BE%258B30%25E5%2580%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:qa_dev%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTGRfRnVZcmtndVIzVW1ScTVFMWdDMmozVmR4cFRjV29uUTJYd2JOQ2RhQ3ltaEFBPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>qa_dev</dc:creator></item><item><title><![CDATA[【Vim】いろいろなエラーに対処できるように①]]></title><description><![CDATA[
+ はじめに
+最近Vimを触れる機会が増え、慣れていないこともあり様々な「壁」に当たっています。HJKLを使用した操作や、ノーマルモードのコマンドなど慣れないことばかりですが、今個人的に一番当たりたくない壁があります。それは 「直し方が分からないエラー」 です！
+エラーの直し方が分からず、困った経験を何度もしました。
+今回は、各エラーに対する対処方法についてまとめてみようと思います！
+
+ E37: No write since last change
+
+このエラーは英語が苦手な方でも多少理解できる内容ではないでしょうか。
+恐らく遭遇率が一番高いエラーです。
+「保存していない変更があるけど...]]></description><link>https://zenn.dev/mirus/articles/e5ef6fef7b6278</link><guid isPermaLink="true">https://zenn.dev/mirus/articles/e5ef6fef7b6278</guid><pubDate>Wed, 11 Jun 2025 08:20:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2BYoEWLj--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Vim%25E3%2580%2591%25E3%2581%2584%25E3%2582%258D%25E3%2581%2584%25E3%2582%258D%25E3%2581%25AA%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E3%2581%25AB%25E5%25AF%25BE%25E5%2587%25A6%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258B%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E2%2591%25A0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:mirus%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAwNGEzYzJmZmMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>mirus</dc:creator></item><item><title><![CDATA[🎤【Linux48】コマンドメンバー紹介！〜推しを見つけよう〜1]]></title><description><![CDATA[
+ 🎤【Linux48】コマンドメンバー紹介！〜推しを見つけよう〜
+こんにちは〜！今回は、Linuxアイドルグループの中でも「コマンドメンバー」にスポットライトを当てて紹介します。
+彼女たちは、ターミナルというステージで活躍する、超実力派のメンバーたちです🌟
+それぞれの役割を覚えると、Linuxがグッと楽しくなります。
+
+
+ 🏠 1. pwdちゃん（ピー・ダブリュー・ディー）
+
+「今どこにいるか、ちゃんと教えてあげるね！」
+
+
+今いる場所（フォルダ）を教えてくれる子。
+迷子になったらこの子に聞こう！
+
+📌 具体例：
+$ pwd
+/home/user/projects
+
+---
+
+ 📦 2...]]></description><link>https://zenn.dev/haruharuta1177/articles/ba78c245344ba3</link><guid isPermaLink="true">https://zenn.dev/haruharuta1177/articles/ba78c245344ba3</guid><pubDate>Wed, 11 Jun 2025 05:30:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--I5LhuP3I--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%2520%25E3%2580%2590Linux48%25E3%2580%2591%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2583%25A1%25E3%2583%25B3%25E3%2583%2590%25E3%2583%25BC%25E7%25B4%25B9%25E4%25BB%258B%25EF%25BC%2581%25E3%2580%259C%25E6%258E%25A8%25E3%2581%2597%25E3%2582%2592%25E8%25A6%258B%25E3%2581%25A4%25E3%2581%2591%25E3%2582%2588%25E3%2581%2586%25E3%2580%259C1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AF%25E3%2582%258B%25E3%2581%25AF%25E3%2582%258B%25E3%2581%25AF%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM4MjE0ZDdkMTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>はるはるは</dc:creator></item><item><title><![CDATA[Stratosharkを利用してLinuxのシステムコール解析をやってみる]]></title><description><![CDATA[
+ はじめに
+本記事では、Stratosharkというツールを使ってシステムコールを解析してみたいと思います。前半はStratosharkの紹介と使い方、後半は、Stratosharkを利用した解析のイメージを載せています。
+
+ 本記事の対象者
+システムコールの解析に興味がある方
+
+ 動作環境
+本記事ではWindows 11にStratosharkをインストールし、Ubuntu上のnginxのシステムコールを解析しています。動作環境については以下の通りです。
+
+ ホストOS（Windows 11）
+
+OS：Windows 11 Pro 64bit 24H2
+仮想化ソフト：Oracle V...]]></description><link>https://zenn.dev/progdence/articles/4d2089e32c8803</link><guid isPermaLink="true">https://zenn.dev/progdence/articles/4d2089e32c8803</guid><pubDate>Tue, 10 Jun 2025 13:34:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--YjOEN2Ae--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Stratoshark%25E3%2582%2592%25E5%2588%25A9%25E7%2594%25A8%25E3%2581%2597%25E3%2581%25A6Linux%25E3%2581%25AE%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%25AB%25E8%25A7%25A3%25E6%259E%2590%25E3%2582%2592%25E3%2582%2584%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:nagano%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAyNTg2NWZiY2IuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%2587%25E3%2583%25B3%25E3%2582%25B9%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUl0YnZtbm9FTUNCNU0wVFJibXNFdkZiaFRWSnRJaFB4XzNiekVnT25kUDY9czk2LWM=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nagano</dc:creator></item><item><title><![CDATA[マシンスペック確認用コマンドまとめ]]></title><description><![CDATA[
+ 概要
+Ubuntu マシンで、PC のハードウェアスペックをコマンド上で確認するためのコマンドをまとめてます。随時更新予定です。
+
+ CPU スペック [1]
+
+$ lscpu
+
+ メモリサイズ [2]
+
+$ free -h
+
+脚注
+
+
+【 lscpu 】コマンド――CPU の情報を表示する ↩︎
+
+
+【Linux コマンド】メモリ容量・CPU コア数・ディスク容量・OS バージョンを確認する ↩︎
+
+
+
+]]></description><link>https://zenn.dev/shunatori/articles/9650968ebf5f51</link><guid isPermaLink="true">https://zenn.dev/shunatori/articles/9650968ebf5f51</guid><pubDate>Tue, 10 Jun 2025 11:58:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2hnFJqgM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%259E%25E3%2582%25B7%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%259A%25E3%2583%2583%25E3%2582%25AF%25E7%25A2%25BA%25E8%25AA%258D%25E7%2594%25A8%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25B5%25E3%2581%258F%25E3%2581%2597%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RlN2Q1NTg0NzkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ふくしん</dc:creator></item><item><title><![CDATA[WWDC25 発表の apple/containerをmacOS15で動かしてみた]]></title><description><![CDATA[
+
+ はじめに
+つい先ほど、macOSでのコンテナ環境に新しい選択肢が登場しました。
+Appleが提供する apple/containerは、macOS上でLinuxコンテナを動かすための新しいツールです。今回は、このツールをmacOS 15で実際に動かしてみた結果をまとめます。
+https://github.com/apple/Container
+
+container relies on the new features and enhancements present in the macOS 26 Beta 1. You can run the tool on macOS 15, ...]]></description><link>https://zenn.dev/sheero/articles/a4a16d548bc510</link><guid isPermaLink="true">https://zenn.dev/sheero/articles/a4a16d548bc510</guid><pubDate>Tue, 10 Jun 2025 05:07:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--QUSMZ2-k--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:WWDC25%2520%25E7%2599%25BA%25E8%25A1%25A8%25E3%2581%25AE%2520apple%252Fcontainer%25E3%2582%2592macOS15%25E3%2581%25A7%25E5%258B%2595%25E3%2581%258B%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2599%25E3%2581%25BF%25E3%2582%2584%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFhMWFiOGFmMGIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>すみや</dc:creator></item><item><title><![CDATA[【Python】現在のOSをWindowsかLinuxか判断するコード]]></title><description><![CDATA[
+ 概要
+現在使っているOSをWindowsかLinuxか判断したいことはないだろうか。
+PythonはWindowsでもLinuxでも使える便利なコードで使うことが多いと思います。
+でもOSが違うことでちょっとだけ設定を変えたりする必要があると思います。
+その時にOSの判断ができれば良いなと思い作成
+
+ サンプルコード
+import platform
+
+def check_os():
+    """
+    現在利用しているOSを判定して表示する。
+    """
+    os_name = platform.system()
+    if os_name == "Windows":
+...]]></description><link>https://zenn.dev/qa_dev/articles/1a4478077d5be1</link><guid isPermaLink="true">https://zenn.dev/qa_dev/articles/1a4478077d5be1</guid><pubDate>Mon, 09 Jun 2025 23:43:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--aLV4giOc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591%25E7%258F%25BE%25E5%259C%25A8%25E3%2581%25AEOS%25E3%2582%2592Windows%25E3%2581%258BLinux%25E3%2581%258B%25E5%2588%25A4%25E6%2596%25AD%25E3%2581%2599%25E3%2582%258B%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:qa_dev%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTGRfRnVZcmtndVIzVW1ScTVFMWdDMmozVmR4cFRjV29uUTJYd2JOQ2RhQ3ltaEFBPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>qa_dev</dc:creator></item><item><title><![CDATA[WWDC25 で出てきた Containerization Framework を試す]]></title><description><![CDATA[Containerization Framework は Apple の OSS で提供される Mac 上で直接 Linux コンテナイメージの作成、ダウンロード、実行ができる API およびツールです。
+
+キーノートでは一切触れられなかったけど、Newsroom の記事にこっそり載っており、Inductor さんのツイートで気づきました。
+
+https://www.apple.com/newsroom/2025/06/apple-supercharges-its-tools-and-technologies-for-developers/
+Containerization Framew...]]></description><link>https://zenn.dev/k2wanko/articles/7b12cc87fabc18</link><guid isPermaLink="true">https://zenn.dev/k2wanko/articles/7b12cc87fabc18</guid><pubDate>Mon, 09 Jun 2025 21:29:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GY2-5XlZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:WWDC25%2520%25E3%2581%25A7%25E5%2587%25BA%25E3%2581%25A6%25E3%2581%258D%25E3%2581%259F%2520Containerization%2520Framework%2520%25E3%2582%2592%25E8%25A9%25A6%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25B3%25E3%2582%25AD%25E3%2583%2581%25E3%2583%25BC%25E3%2582%25BA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2h3dEJpcG9IY3hCYndzajJ5bFFjdkZfd2NHa2otald4bGFSQ2FxOU5VPXMyNTAtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>コキチーズ</dc:creator></item><item><title><![CDATA[LinuxでAX88179 Ethernetアダプタを使う]]></title><description><![CDATA[USBドックのEthernetデバイスをParabola GNU/Linuxで試そうとしたところ接続できなかったので、解決方法をメモしておきます。
+該当のEthernetデバイスは、lsusbコマンドで以下のように確認できます。
+$ lsusb
+Bus 002 Device 005: ID 0b95:1790 ASIX Electronics Corp. AX88179 Gigabit Ethernet
+ハードウェアの状況を詳しく確認するため、smxi/inxiを使用します。このツールはパッケージマネージャからインストールできます。
+$ sudo pacman -S inxi
+ネットワー...]]></description><link>https://zenn.dev/hironori_ueno/articles/de5f19aaa436de</link><guid isPermaLink="true">https://zenn.dev/hironori_ueno/articles/de5f19aaa436de</guid><pubDate>Mon, 09 Jun 2025 13:26:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--zOnT-PlU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%25E3%2581%25A7AX88179%2520Ethernet%25E3%2582%25A2%25E3%2583%2580%25E3%2583%2597%25E3%2582%25BF%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Hiro%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvaC5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Hiro</dc:creator></item><item><title><![CDATA[コマンドを打ち間違えるエンジニアが許せない]]></title><description><![CDATA[
+ 最近のエンジニアはコマンドの打ち間違いが多い
+昨今のAIプロンプトに慣れ親しんだエンジニアは軟弱だ
+私の若いころはタイポするごとに叱られ、大きな声でコマンドを読み上げながら100回打ち込んでいた。
+しかし今のエンジニアときたらどうだろうか。
+上司が見ている前で平気でコマンドを打ち間違えては、「command not found」の文字を見てヘラヘラしながら、再度コマンドを打ち直す始末。
+そんなエンジニアが私は許せません。
+今の若者は付き合いが悪いだとか、根性が無いとか言っている人がいますが、私にとってはそんなことどうでも良いのです。
+今の若者はコマンドを打ち間違える
+この言葉こそ、真...]]></description><link>https://zenn.dev/codeunit/articles/d8c77d6601d814</link><guid isPermaLink="true">https://zenn.dev/codeunit/articles/d8c77d6601d814</guid><pubDate>Mon, 09 Jun 2025 03:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--HLGVRU1S--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2582%2592%25E6%2589%2593%25E3%2581%25A1%25E9%2596%2593%25E9%2581%2595%25E3%2581%2588%25E3%2582%258B%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2%25E3%2581%258C%25E8%25A8%25B1%25E3%2581%259B%25E3%2581%25AA%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Chiro%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhlZDUzODU0OWYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2583%25A6%25E3%2583%258B%25E3%2583%2583%25E3%2583%2588%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2UxODVjY2Y3MzMuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Chiro</dc:creator></item><item><title><![CDATA[[VM] Proxmox VEでBadStoreを立ててみた]]></title><description><![CDATA[
+ はじめに
+仮想化プラットフォームのProxmox VEを最近使い始めた。
+Webコンソール画面からisoファイルをUploadした後、簡単な設定をするだけでVMが立ち上がるので、大変便利である。
+AlmaLinux10[1]やUbuntu24などは立ててみたものの、BadStoreなどのやられアプリサーバも立てられると便利だと思い、動作確認することにした。
+元々自宅サーバとしてProxmoxが存在する環境であるため、Proxmox自体の導入や構築方法は割愛する。
+
+ BadStoreの導入
+以下のVulnHubからisoファイルをダウンロードする。約11MBと大変軽量である。
+htt...]]></description><link>https://zenn.dev/anri99103/articles/a45c5f2db8888f</link><guid isPermaLink="true">https://zenn.dev/anri99103/articles/a45c5f2db8888f</guid><pubDate>Sat, 07 Jun 2025 17:36:49 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BT5HQ6QU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BVM%255D%2520Proxmox%2520VE%25E3%2581%25A7BadStore%25E3%2582%2592%25E7%25AB%258B%25E3%2581%25A6%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Anri%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhkMzc5YmEwMGUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Anri</dc:creator></item><item><title><![CDATA[全学生に知ってもらいたいChromebookにLinuxをクリーンインストールする方法]]></title><description><![CDATA[みなさんChromebookをお持ちでしょうか。
+我が国では2019年からGIGAスクール構想が始まり生徒のPC所持が必須になりました。その過程でChromebookを所持する事になった学生の方も多いと思います。
+いろいろ酷評の多いChromebookですが、最大の難点は機能が限られているということです。Androidアプリが(なんとか)動くとはいえ、ほとんどのアプリはブラウザだけで動かされ、拡張性のかの字もありません。はっきり言ってゴミです
+そんなChromebookを、Ultrabookにする方法が一つあります。それはLinuxをインストールすることです。
+実はChromeOSでは開...]]></description><link>https://zenn.dev/roistaff/articles/30ce3883b3b9d9</link><guid isPermaLink="true">https://zenn.dev/roistaff/articles/30ce3883b3b9d9</guid><pubDate>Sat, 07 Jun 2025 15:44:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qV-suyB1--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2585%25A8%25E5%25AD%25A6%25E7%2594%259F%25E3%2581%25AB%25E7%259F%25A5%25E3%2581%25A3%25E3%2581%25A6%25E3%2582%2582%25E3%2582%2589%25E3%2581%2584%25E3%2581%259F%25E3%2581%2584Chromebook%25E3%2581%25ABLinux%25E3%2582%2592%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%25BC%25E3%2583%25B3%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Staff%2520Roi%2520%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%2583%25E3%2583%2595%25E3%2583%25BB%25E3%2583%25AD%25E3%2582%25A4%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4WmdUZURqZjNBbUtMWXN1VVdralB4SzJKVV82MUozMEFSTW9uaVItdz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Staff Roi スタッフ・ロイ</dc:creator></item><item><title><![CDATA[dockerコマンドを通してlinuxのsocket通信を確認]]></title><description><![CDATA[
+ GOAL
+dockerCLIとdockerdとのソケット通信を確認してみます。
+
+ 環境
+EC2を立ち上げ、ssmで接続して確認していきます。
+例：↓↓↓↓
+resource "aws_vpc" "main" {
+  cidr_block = "10.0.0.0/16"
+
+  enable_dns_support   = true
+  enable_dns_hostnames = true
+
+  tags = {
+    Name = "${local.env}-main-vpc"
+  }
+}
+
+resource "aws_subnet" "public-1a" {
+  vpc_id...]]></description><link>https://zenn.dev/osachi/articles/7d9fde5628dd45</link><guid isPermaLink="true">https://zenn.dev/osachi/articles/7d9fde5628dd45</guid><pubDate>Sat, 07 Jun 2025 05:17:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4WSTVCkY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:docker%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2582%2592%25E9%2580%259A%25E3%2581%2597%25E3%2581%25A6linux%25E3%2581%25AEsocket%25E9%2580%259A%25E4%25BF%25A1%25E3%2582%2592%25E7%25A2%25BA%25E8%25AA%258D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:osachi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS1dQbG9ta3VENjRseUgxcHZnX3BHMjA5cEZQTjM2UGZtN3lzLTNIUVJGPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>osachi</dc:creator></item><item><title><![CDATA[linuxで日本語を入力できるようにする]]></title><description><![CDATA[
+ 手順
+
+sudo apt update
+sudo apt install ibus-mozc
+
+ibus restart(デバイスによってはreboot)
+ibus-setup
+(GUI上で)入力メソッドの項目を開く
+
+
+add(追加)をクリック
+日本語を選択し「Mozc」を選択
+
+
+
+!
+ディストリビューションによっては、キーボードのデフォルトの設定が違うらしいので、反映できなかったら「fcitx5」とかで調べるといいかも。
+
+
+ その後の注意点
+キーボード設定を英語(US)に設定すると、再度mozc(日本語)に切り替えてもキーボードの入力が、日本語入力にならなくなる。(「半角/全...]]></description><link>https://zenn.dev/tttttttttt/articles/9e56b440bd67da</link><guid isPermaLink="true">https://zenn.dev/tttttttttt/articles/9e56b440bd67da</guid><pubDate>Fri, 06 Jun 2025 14:24:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--O9icHfoD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:linux%25E3%2581%25A7%25E6%2597%25A5%25E6%259C%25AC%25E8%25AA%259E%25E3%2582%2592%25E5%2585%25A5%25E5%258A%259B%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258B%25E3%2582%2588%25E3%2581%2586%25E3%2581%25AB%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tttttttttt%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2IxZTcyNjQ1MWMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tttttttttt</dc:creator></item><item><title><![CDATA[Mac から Windows‑WSL2 の Ubuntu に SSH/VS Code でリモート開発環境を構築してみた]]></title><description><![CDATA[
+ はじめに
+今回、タイトルの通りMac から Windows‑WSL2 の Ubuntu に SSH/VS Code でリモート開発環境を構築してみました。
+やろうと思った理由は、ただMacBookの容量が少なくなってきたからです。そんな時に大学入学時に生協で買ったパソコンがあることに気づき、こいつをなんとか利用しようとと思った次第です。
+また、今まで開発環境やLinuxなどの理解を深める上で良い材料になると感じたので今回記事にまとめてみました。
+アーキテクチャ図
+以下が今回構築する開発環境のアーキテクチャ図です。
+
+ 前提条件
+
+
+Windows 10または Windows 11 を...]]></description><link>https://zenn.dev/tacos/articles/d25d0ffffb8e83</link><guid isPermaLink="true">https://zenn.dev/tacos/articles/d25d0ffffb8e83</guid><pubDate>Thu, 05 Jun 2025 23:01:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--q5MIGD99--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Mac%2520%25E3%2581%258B%25E3%2582%2589%2520Windows%25E2%2580%2591WSL2%2520%25E3%2581%25AE%2520Ubuntu%2520%25E3%2581%25AB%2520SSH%252FVS%25E2%2580%25AFCode%2520%25E3%2581%25A7%25E3%2583%25AA%25E3%2583%25A2%25E3%2583%25BC%25E3%2583%2588%25E9%2596%258B%25E7%2599%25BA%25E7%2592%25B0%25E5%25A2%2583%25E3%2582%2592%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25BF%25E3%2582%25B3%25E3%2582%25B9%25E3%2583%259E%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTHNqWVZUSXZtQmFWX3VLeWdicy0tbDVHRG13dUpVMWd6TEtDYzJPRElNTlE5T0JBPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>タコスマスター</dc:creator></item></channel></rss>
