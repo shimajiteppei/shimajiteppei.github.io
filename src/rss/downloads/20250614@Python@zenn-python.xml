@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Sat, 14 Jun 2025 07:41:58 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[物体検出をDETRモデルで行う]]></title><description><![CDATA[
+ サマリ
+今回はDETRという機械学習モデルを使用して、物体検出を行います。
+DETRは対象の画像をCNNで畳み込みTransformerモデル内でベクトルの類似度から、物体を推定するアルゴリズムだったかと覚えています。
+上記は完全に正しい説明ではないため参考程度にしていただき、詳しくはリポジトリや論文を参照ください。
+
+ マシンスペック
+今回はgooglecolabで行います。
+
+ 画像内に何が写っているか判別する
+対話形式で進めます。
+# モデルのインポート
+import torch as th
+import torchvision.transforms as T
+import r...]]></description><link>https://zenn.dev/ka_kan/articles/5518b346f6fa3f</link><guid isPermaLink="true">https://zenn.dev/ka_kan/articles/5518b346f6fa3f</guid><pubDate>Sat, 14 Jun 2025 06:25:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--nsbQql9_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%2589%25A9%25E4%25BD%2593%25E6%25A4%259C%25E5%2587%25BA%25E3%2582%2592DETR%25E3%2583%25A2%25E3%2583%2587%25E3%2583%25AB%25E3%2581%25A7%25E8%25A1%258C%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kanda%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVlOGJhYTMxOGYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kanda</dc:creator></item><item><title><![CDATA[棒消しゲームの必勝法]]></title><description><![CDATA[
+ 棒消しゲームとは
+2人のプレイヤーがルールに沿って交互に棒を消していき、最後の棒を消したプレイヤーが勝ちというゲーム。
+初期配置として、図のようにいくつかの棒が数段に分かれて並んでいる。
+
+||| \\
+||||| \\
+|||||||
+
+
+ 棒を消すルール
+
+1本以上消さないといけない
+消せる棒は同じ行のもののみ
+すでに消されている棒を超えて消すことはできない
+
+例えば、下図のような盤面だと、2段目は左右の棒を同時に消すことはできない。
+
+||| \\
+|\sout{|||}| \\
+|||||||
+
+
+ 必勝法
+この棒消しゲームには必勝法がある。今回はその必勝法を書いていく。
+
+...]]></description><link>https://zenn.dev/firedial/articles/13951b2683487e</link><guid isPermaLink="true">https://zenn.dev/firedial/articles/13951b2683487e</guid><pubDate>Sat, 14 Jun 2025 06:13:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--XhbsGjN7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%25A3%2592%25E6%25B6%2588%25E3%2581%2597%25E3%2582%25B2%25E3%2583%25BC%25E3%2583%25A0%25E3%2581%25AE%25E5%25BF%2585%25E5%258B%259D%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:firedial%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2hEenpQSVMtSzBVX2JIYXl3S1NWTzNKYjFEYnZoOTZuc2V1Q3Rjd0E9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>firedial</dc:creator></item><item><title><![CDATA[[Python] AHC048振り返り]]></title><description><![CDATA[
+ [Python] AHC048 Mixing on the Palette
+
+ 問題
+https://atcoder.jp/contests/ahc048/tasks/ahc048_a
+
+ 最終結果
+miso253oudonさんのMC Digital プログラミングコンテスト2025（AtCoder Heuristic Contest 048）での成績：556位
+パフォーマンス：1293相当
+レーティング：308→745 (+437) :)
+Highestを更新し、7 級になりました！
+#AtCoder #MCDigitalプログラミングコンテスト2025（AtCoderHeuris...]]></description><link>https://zenn.dev/miso253udon/articles/67a435f7342ce8</link><guid isPermaLink="true">https://zenn.dev/miso253udon/articles/67a435f7342ce8</guid><pubDate>Sat, 14 Jun 2025 05:54:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--RrK54rRz--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BPython%255D%2520AHC048%25E6%258C%25AF%25E3%2582%258A%25E8%25BF%2594%25E3%2582%258A%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:miso253oudon%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA5MTQ0ODZlMjkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>miso253oudon</dc:creator></item><item><title><![CDATA[リリース作業でハマったPyPIバージョン問題と解決（開発日記 No.101）]]></title><description><![CDATA[!
+この記事は gemini-2.5-flash-preview-04-17 によって自動生成されています。
+
+
+ 関連リンク
+
+前回の開発日記
+
+
+ はじめに
+昨日は開発中の Python パッケージのリリース準備を進めました。今日は、そのリリース作業を完遂させるべく、PyPI への公開とそれに伴う諸々の作業に取り組みました。
+
+ 背景と目的
+開発してきた Python パッケージを、Python Package Index (PyPI) で公開し、誰でも pip install でインストールできるようにすることが最終的な目的です。プロジェクトにはリリースガイドが用意されているので、...]]></description><link>https://zenn.dev/centervil/articles/2025-06-09_101_dev-diary</link><guid isPermaLink="true">https://zenn.dev/centervil/articles/2025-06-09_101_dev-diary</guid><pubDate>Sat, 14 Jun 2025 05:36:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Op4m3r_I--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%25AA%25E3%2583%25AA%25E3%2583%25BC%25E3%2582%25B9%25E4%25BD%259C%25E6%25A5%25AD%25E3%2581%25A7%25E3%2583%258F%25E3%2583%259E%25E3%2581%25A3%25E3%2581%259FPyPI%25E3%2583%2590%25E3%2583%25BC%25E3%2582%25B8%25E3%2583%25A7%25E3%2583%25B3%25E5%2595%258F%25E9%25A1%258C%25E3%2581%25A8%25E8%25A7%25A3%25E6%25B1%25BA%25EF%25BC%2588%25E9%2596%258B%25E7%2599%25BA%25E6%2597%25A5%25E8%25A8%2598%2520No.101%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:centervil%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YlVZNXZiN0NvbG1TN0tPQmhqQ2M5V3lIRXYwVVhwZ2YyY2wxYTc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>centervil</dc:creator></item><item><title><![CDATA[uvでPythonアプリをポータブルにしてオフラインPCへインストール]]></title><description><![CDATA[
+ 可搬性を持ったPythonアプリを作成して生産設備のPCで実行する
+
+ はじめに
+生産設備で物体検出や画像認識を行いたいときなど、PythonとYOLO, Open-CVなどを使ってシステムを作ったりすると思います。作るまでは簡単で良いのですが、これを生産設備のオフラインPCにインストールして実行したいのです。
+今回は、OSはWindows、VSCode等の環境で自由気ままに作成したPythonプログラムを、外部パッケージや実行環境一式と共に一つのディレクトリに詰め込んでzipで固めた後、目的のPCで展開して実行できるようにします。
+
+
+ 1. Pythonプログラムを用意する
+VS...]]></description><link>https://zenn.dev/nfukuoka/articles/qiita-20250506-e39a86e7a3ce767cb5ca</link><guid isPermaLink="true">https://zenn.dev/nfukuoka/articles/qiita-20250506-e39a86e7a3ce767cb5ca</guid><pubDate>Sat, 14 Jun 2025 05:15:32 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6-XutFHz--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:uv%25E3%2581%25A7Python%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E3%2583%259D%25E3%2583%25BC%25E3%2582%25BF%25E3%2583%2596%25E3%2583%25AB%25E3%2581%25AB%25E3%2581%2597%25E3%2581%25A6%25E3%2582%25AA%25E3%2583%2595%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%25B3PC%25E3%2581%25B8%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nfukuoka%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRhZmNmOTYyNjMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nfukuoka</dc:creator></item><item><title><![CDATA[Amazon Q CLIでゲームを作ってみた]]></title><description><![CDATA[
+ 👾 Amazon Q CLI × Pythonでゲーム開発してみた！【Tシャツほしいだけ】
+Amazon Q CLI でゲームを作ろう Tシャツキャンペーン に便乗して、
+ゲームを作ってみたよ🎮✨
+Tシャツがほしいだけの一般人JKなので
+コードや設計にツッコミどころあってもそっとしておいてください👕笑
+参考程度にふわっと見てくれたらうれしい〜！
+
+ 🌟 (そもそも)Q CLIって...？
+
+自然言語でやりたいことを伝えるだけで、CLI上でコード作成や実行ができる！
+ローカル環境のファイルやツール（npm, Git, AWS CLIなど）を直接使って作業してくれる！
+会話型でやりとりで...]]></description><link>https://zenn.dev/nknk12/articles/b2955197983d33</link><guid isPermaLink="true">https://zenn.dev/nknk12/articles/b2955197983d33</guid><pubDate>Sat, 14 Jun 2025 03:34:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--SDToBPaX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Amazon%2520Q%2520CLI%25E3%2581%25A7%25E3%2582%25B2%25E3%2583%25BC%25E3%2583%25A0%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:N%7Eekotiyan%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUxtNXd1MUp5RkQ2TC03SmxpUl9uWTl1cEhPTU93OEQ1OHdCSG9IWFBQSm50dz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>N~ekotiyan</dc:creator></item><item><title><![CDATA[uv, ruff, devcontainer, Claude Codeを使ったモダンなPython開発環境のテンプレート]]></title><description><![CDATA[こんにちは．今回は，uv, ruff, devcontainer, Claude Code, Cursorなどのモダンなツールを使ったPythonの開発環境テンプレートを作成したので，その内容を紹介します．
+テンプレートは以下のリポジトリで公開しています．
+https://github.com/mjun0812/python-copier-template
+https://github.com/mjun0812/python-project-template
+
+ テンプレートの特徴・構成
+本テンプレートは，シンプルで自由度の高いテンプレートを目指すため，あまり多くのツールを導入しないよう...]]></description><link>https://zenn.dev/mjun0812/articles/0ae2325d40ed20</link><guid isPermaLink="true">https://zenn.dev/mjun0812/articles/0ae2325d40ed20</guid><pubDate>Sat, 14 Jun 2025 02:13:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Cq6OLft7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:uv%252C%2520ruff%252C%2520devcontainer%252C%2520Claude%2520Code%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%259F%25E3%2583%25A2%25E3%2583%2580%25E3%2583%25B3%25E3%2581%25AAPython%25E9%2596%258B%25E7%2599%25BA%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25AE%25E3%2583%2586%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AC%25E3%2583%25BC%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2582%25E3%2582%258A%25E3%2582%258A%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY1NmNjYzA5MTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>もりりん</dc:creator></item><item><title><![CDATA[claude code、テスト駆動開発してもエラー起きる問題]]></title><description><![CDATA[
+ TDD実践で陥りがちな罠と根本的なプロセス改善策
+
+ はじめに
+テスト駆動開発（TDD）を実践していても、実際のUIで動かすとエラーが頻発する...そんな経験はありませんか？
+「テストは通っているのに、なぜ本番で動かないのか？」
+この記事では、実際のプロジェクトで遭遇したTDDの落とし穴と、それを根本的に解決するプロセス改善策を紹介します。
+
+ 🚨 よくある問題：テストは通るのに実際は動かない
+
+ 実例：家事管理アプリの開発で起きた問題
+Next.js + TypeScript + Prismaで家事管理アプリを開発していた時のことです。
+// ✅ このテストは通る
+it('shou...]]></description><link>https://zenn.dev/nukinuki555/articles/661eed9f91721c</link><guid isPermaLink="true">https://zenn.dev/nukinuki555/articles/661eed9f91721c</guid><pubDate>Fri, 13 Jun 2025 14:20:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--JWUAvKI4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:claude%2520code%25E3%2580%2581%25E3%2583%2586%25E3%2582%25B9%25E3%2583%2588%25E9%25A7%2586%25E5%258B%2595%25E9%2596%258B%25E7%2599%25BA%25E3%2581%2597%25E3%2581%25A6%25E3%2582%2582%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E8%25B5%25B7%25E3%2581%258D%25E3%2582%258B%25E5%2595%258F%25E9%25A1%258C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2588%25E3%2581%2588%25E3%2582%2584%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSm5VVVdfQVJyVGR5R2ltaW9aWFlwbWN0NDk4REMxdjRVT0tJN3ZEZ1VHVU1nbzF3PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ええやん</dc:creator></item><item><title><![CDATA[WelchのANOVA｜独立3群以上の差検定]]></title><description><![CDATA[
+ 概要
+3群以上のグループに対して平均値に有意な差があるかを検定する手法（等分散性不要）
+
+ 主な用途
+
+
+
+パターン
+説明
+実務ユースケース
+
+
+
+
+群間比較（3群以上）
+異なる3群以上の平均を比較
+地域（東京・大阪・福岡）や施策別（A,B,C）で売上額に差があるかを検証
+
+
+属性による比較
+属性で分けた3群以上の差を比較
+学歴別に平均収入の差を検定
+
+
+ランダム分割テスト
+無作為に3群以上を作り効果を検証
+ボタンA/B/Cでクリック率の差を検定
+
+
+
+!
+WelchのANOVAは、等分散性を仮定しないため実務でも使いやすく、
+通常のANOVAよりも広く使える柔軟な平均差の検定
+
+
+...]]></description><link>https://zenn.dev/bambi_ds/articles/4528f6137f0719</link><guid isPermaLink="true">https://zenn.dev/bambi_ds/articles/4528f6137f0719</guid><pubDate>Fri, 13 Jun 2025 13:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5HkP_qzw--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Welch%25E3%2581%25AEANOVA%25EF%25BD%259C%25E7%258B%25AC%25E7%25AB%258B3%25E7%25BE%25A4%25E4%25BB%25A5%25E4%25B8%258A%25E3%2581%25AE%25E5%25B7%25AE%25E6%25A4%259C%25E5%25AE%259A%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Bambi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2YxYTczMzU2NmQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Bambi</dc:creator></item><item><title><![CDATA[【Python】zip() の使い方・注意点・元に戻す方法を解説]]></title><description><![CDATA[
+ はじめに
+Pythonで複数のリストを同時に処理したいときに便利なのが zip() 関数です。
+例えば「名前と年齢のリストを一緒に扱いたい」といった場面で、シンプルに書くことができます。
+本記事では、zip() の基本的な使い方から、注意点、まとめたデータを元の形に戻す方法（zip(*リスト)）や、要素数が合わない場合の対処法まで整理します。
+
+ 1. zip() の基本的な使い方
+複数のイテラブル（リストやタプルなど）を1つにまとめてループ処理できる関数です。
+names = ['Alice', 'Bob', 'Charlie']
+ages = [25, 30, 35]
+
+for ...]]></description><link>https://zenn.dev/fd2025/articles/f755d3169916e7</link><guid isPermaLink="true">https://zenn.dev/fd2025/articles/f755d3169916e7</guid><pubDate>Fri, 13 Jun 2025 12:59:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--eK2xYTtv--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591zip%2528%2529%2520%25E3%2581%25AE%25E4%25BD%25BF%25E3%2581%2584%25E6%2596%25B9%25E3%2583%25BB%25E6%25B3%25A8%25E6%2584%258F%25E7%2582%25B9%25E3%2583%25BB%25E5%2585%2583%25E3%2581%25AB%25E6%2588%25BB%25E3%2581%2599%25E6%2596%25B9%25E6%25B3%2595%25E3%2582%2592%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:fd2025%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2EzMzVlNTI5MmQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>fd2025</dc:creator></item><item><title><![CDATA[【Python】スクリーンショット]]></title><description><![CDATA[
+ スクリーンショットを行うコード
+
+ サンプルコード
+import pyautogui
+
+# installは以下のコマンド
+# pip install pyautogui 
+# スクリーンショットを撮影して保存
+screenshot = pyautogui.screenshot()
+screenshot.save("screenshot.png")
+
+print("スクリーンショットを保存しました: screenshot.png")
+
+ 実行例
+(.venv) $ python screenshot.py
+スクリーンショットを保存しました: screenshot.png
+(.venv...]]></description><link>https://zenn.dev/qa_dev/articles/1f378075faa068</link><guid isPermaLink="true">https://zenn.dev/qa_dev/articles/1f378075faa068</guid><pubDate>Fri, 13 Jun 2025 12:17:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--JWly7GOC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%25BC%25E3%2583%25B3%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%2583%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:qa_dev%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTGRfRnVZcmtndVIzVW1ScTVFMWdDMmozVmR4cFRjV29uUTJYd2JOQ2RhQ3ltaEFBPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>qa_dev</dc:creator></item><item><title><![CDATA[uv｜設定：Configuration（ビルド＆依存関係）編]]></title><description><![CDATA[
+知識は武器とかけまして、レゴブロックと解く、その心は――
+今日もKnowledge Oasisへようこそ
+案内人はkoふみです
+本日のテーマは『uv設定徹底ガイド：ビルド＆依存関係編』
+
+
+ はじめに
+「uvのビルドや依存解決設定、種類が多すぎて迷子になったこと…ありませんか？」
+Pythonプロジェクトを進めるうえで、ビルド処理や依存関係の選定は要です。でも、どの設定がどう影響するのか、直感的につかみにくいのも事実。今日はその迷路をひとつずつ整理して、迷わずに最適化できるようにしましょう。
+
+ 対象読者
+
+uvでビルド挙動やインストール手順を細かくコントロールしたいエンジニア
+CI/...]]></description><link>https://zenn.dev/knowledge_oasis/articles/uv-settings-configuration-build_and_dependency</link><guid isPermaLink="true">https://zenn.dev/knowledge_oasis/articles/uv-settings-configuration-build_and_dependency</guid><pubDate>Fri, 13 Jun 2025 12:04:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--XxOdq831--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:uv%25EF%25BD%259C%25E8%25A8%25AD%25E5%25AE%259A%25EF%25BC%259AConfiguration%25EF%25BC%2588%25E3%2583%2593%25E3%2583%25AB%25E3%2583%2589%25EF%25BC%2586%25E4%25BE%259D%25E5%25AD%2598%25E9%2596%25A2%25E4%25BF%2582%25EF%25BC%2589%25E7%25B7%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ko%25E3%2581%25B5%25E3%2581%25BF%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc1NTJjMWYyZTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>koふみ</dc:creator></item><item><title><![CDATA[Claude Codeで挫折しないための開発方法論 - 要件定義が品質の80%を決める]]></title><description><![CDATA[
+ Claude Codeを使ったけど、思うようにいかない方へ
+「Claude Codeでアプリ開発を始めたものの、途中で品質が保てなくなった」「AIが生成するコードが期待と違う」「結局、従来の開発と変わらない工数がかかっている」
+そんな悩みを抱えていませんか？
+実は、Claude Code開発の成否の80%は要件定義で決まります。本記事では、家事管理アプリの実開発を通じて発見した、AI時代の新しい開発方法論を実践的な観点からお伝えします。特に重要なのは、Claude Sonnet 4を活用した革新的な要件定義プロセスです。
+
+ 従来開発とAI支援開発の根本的違い
+
+ 従来の開発フロー
+...]]></description><link>https://zenn.dev/nukinuki555/articles/dd1856f0a8f6dc</link><guid isPermaLink="true">https://zenn.dev/nukinuki555/articles/dd1856f0a8f6dc</guid><pubDate>Fri, 13 Jun 2025 11:16:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--7jDBDquc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Claude%2520Code%25E3%2581%25A7%25E6%258C%25AB%25E6%258A%2598%25E3%2581%2597%25E3%2581%25AA%25E3%2581%2584%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%25E9%2596%258B%25E7%2599%25BA%25E6%2596%25B9%25E6%25B3%2595%25E8%25AB%2596%2520-%2520%25E8%25A6%2581%25E4%25BB%25B6%25E5%25AE%259A%25E7%25BE%25A9%25E3%2581%258C%25E5%2593%2581%25E8%25B3%25AA%25E3%2581%25AE80%2525%25E3%2582%2592%25E6%25B1%25BA%25E3%2582%2581%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2588%25E3%2581%2588%25E3%2582%2584%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSm5VVVdfQVJyVGR5R2ltaW9aWFlwbWN0NDk4REMxdjRVT0tJN3ZEZ1VHVU1nbzF3PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ええやん</dc:creator></item><item><title><![CDATA[忘我LMS - AI時代のプログラミング学習プラッフォーム]]></title><description><![CDATA[5年後のAIと学びの世界から逆算し、未来の教育を今実現するAI駆動型学習プラットフォーム「忘我 LMS」。
+個別最適化されたプログラミング教育の実践ガイド。
+]]></description><link>https://zenn.dev/nop42/books/1ef5eb382ac377</link><guid isPermaLink="true">https://zenn.dev/nop42/books/1ef5eb382ac377</guid><pubDate>Fri, 13 Jun 2025 09:36:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qQwFd1EW--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci9kYWEzY2JmNjdkLmpwZWc=%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>nop42</dc:creator></item><item><title><![CDATA[【Python/AI】「CNNわからん…」で挫折した僕が、"手を動かして実感"できる画像認識の本をZennで書いた話]]></title><description><![CDATA[
+ はじめに：こんな経験ありませんか？
+こんにちは！
+AIやディープラーニングの世界に足を踏み入れたとき、誰もが一度は「画像認識」にワクワクしますよね。でも、いざ学習を始めると…
+
+AIの専門書を開いたけど、数式のオンパレードで心が折れた…
+CNNの「畳み込み」の図を見て「ふむふむ」と分かった気になったけど、いざコードにすると手が止まる。
+とりあえず動くサンプルコードをコピペしたけど、結局「何がどう動いているのか」はブラックボックスのまま。
+
+これは、かつての僕自身が通ってきた道です。
+理論と実装の間に横たわる、この大きな溝。この溝を埋め、「自分の手で動かしながら、AIが画像を"見る"仕...]]></description><link>https://zenn.dev/sakai13/articles/a573df8992e27c</link><guid isPermaLink="true">https://zenn.dev/sakai13/articles/a573df8992e27c</guid><pubDate>Fri, 13 Jun 2025 04:14:29 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--CUbJzN-4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%252FAI%25E3%2580%2591%25E3%2580%258CCNN%25E3%2582%258F%25E3%2581%258B%25E3%2582%2589%25E3%2582%2593%25E2%2580%25A6%25E3%2580%258D%25E3%2581%25A7%25E6%258C%25AB%25E6%258A%2598%25E3%2581%2597%25E3%2581%259F%25E5%2583%2595%25E3%2581%258C%25E3%2580%2581%2522%25E6%2589%258B%25E3%2582%2592%25E5%258B%2595%25E3%2581%258B%25E3%2581%2597%25E3%2581%25A6%25E5%25AE%259F%25E6%2584%259F%2522%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258B%25E7%2594%25BB%25E5%2583%258F%25E8%25AA%258D%25E8%25AD%2598%25E3%2581%25AE%25E6%259C%25AC%25E3%2582%2592Zenn%25E3%2581%25A7%25E6%259B%25B8%25E3%2581%2584%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:SAKAItech%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I2OWI1OWY3NGUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>SAKAItech</dc:creator></item><item><title><![CDATA[JetBrains ×  NATTOSYSTEM 開発生産性 Conference 2025 に共同出展します]]></title><description><![CDATA[
+弊社のオリジナルキャラクター、ヌルとツル
+
+ NATTOSYSTEMはJetBrainsとともに開発生産性Conference 2025に出展します
+こんにちは、Jetbrains公式代理店NATTOSYSTEMのクリハラです。
+私たちは、JetBrains とともに、ファインディ株式会社主催の「開発生産性Conference 2025」 に出展いたします。
+共同ブースでは私たちが取り組んでいる開発の改善事例や、JetBrainsツールとの連携活用ノウハウをお届けします。
+
+
+ 世界的レジェンドが登壇
+開発生産性 Conference 2025では、超豪華スピーカーが登壇します。
+
+ ...]]></description><link>https://zenn.dev/nattosystem_jp/articles/00964ca3ff2a5d</link><guid isPermaLink="true">https://zenn.dev/nattosystem_jp/articles/00964ca3ff2a5d</guid><pubDate>Fri, 13 Jun 2025 02:27:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--W_dY-tcT--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JetBrains%2520%25C3%2597%2520%2520NATTOSYSTEM%2520%25E9%2596%258B%25E7%2599%25BA%25E7%2594%259F%25E7%2594%25A3%25E6%2580%25A7%2520Conference%25202025%2520%25E3%2581%25AB%25E5%2585%25B1%25E5%2590%258C%25E5%2587%25BA%25E5%25B1%2595%25E3%2581%2597%25E3%2581%25BE%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%25AD%25E3%2581%25B0%25E3%2581%25AD%25E3%2581%25B0%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RiYWQxMDhjNTMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BENATTOSYSTEM%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2Rhcmsvbi5wbmc=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ねばねば</dc:creator></item><item><title><![CDATA[【実装ガイド】LLMの推論能力を最大化するCognitive Stretchingテクニック - 学術研究に基づく実践的アプローチ]]></title><description><![CDATA[
+ はじめに
+前回の記事で紹介した「Cognitive Stretching（認知的活性化）」について、今回は学術的背景を踏まえた実装ガイドを提供します。Chain-of-Thought（CoT）の発展形として、LLMの推論能力を最大化する実践的テクニックをコード例とともに解説します。
+
+ 1. Cognitive Stretchingの学術的基盤
+
+ 1.1 Chain-of-Thought (CoT) からの進化
+
+cot_comparison.py
+# 通常のCoTプロンプト
+normal_cot = """
+問題：1000から7を引き続けた時、最初に100を下回るのは何回目？
+L...]]></description><link>https://zenn.dev/response_lab/articles/c75096719484f5</link><guid isPermaLink="true">https://zenn.dev/response_lab/articles/c75096719484f5</guid><pubDate>Fri, 13 Jun 2025 01:38:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--_qPPLkg_--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%25AE%259F%25E8%25A3%2585%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%25E3%2580%2591LLM%25E3%2581%25AE%25E6%258E%25A8%25E8%25AB%2596%25E8%2583%25BD%25E5%258A%259B%25E3%2582%2592%25E6%259C%2580%25E5%25A4%25A7%25E5%258C%2596%25E3%2581%2599%25E3%2582%258BCognitive%2520Stretching%25E3%2583%2586%25E3%2582%25AF%25E3%2583%258B%25E3%2583%2583%25E3%2582%25AF%2520-%2520%25E5%25AD%25A6%25E8%25A1%2593%25E7%25A0%2594%25E7%25A9%25B6%25E3%2581%25AB%25E5%259F%25BA%25E3%2581%25A5%25E3%2581%258F...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Response_Lab%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNiYjk1MzIyNGMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Response_Lab</dc:creator></item><item><title><![CDATA[ComfyUIをAPIサーバーとして使ってみる]]></title><description><![CDATA[
+ はじめに
+ComfyUI を API サーバーとして利用し、画像生成の自動化や外部ツールとの連携を行う方法について解説します。
+
+ 環境・準備
+まずは ComfyUI をセットアップし、起動しておきます。
+基本的には以下の手順で準備できます。
+
+GitHub リポジトリをクローン、またはオールインなどのダウンロード
+必要な Python パッケージをインストール
+main.py を実行して起動
+
+
+ WebSocket接続：ComfyUIのステータス監視
+WebSocket を利用して実行中のジョブや処理の進行状況をリアルタイムに監視できます。
+ComfyUI の現在の状態（例：アイ...]]></description><link>https://zenn.dev/baleenstudio/articles/9de129695cb0dc</link><guid isPermaLink="true">https://zenn.dev/baleenstudio/articles/9de129695cb0dc</guid><pubDate>Fri, 13 Jun 2025 01:03:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wCeG2ezB--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ComfyUI%25E3%2582%2592API%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2581%25A8%25E3%2581%2597%25E3%2581%25A6%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:developmaeda%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc2OWZhMGRkNDAuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/g_south_west%2Ch_34%2Cl_default:og-publication-pro-mark-xcosax%2Cw_34%2Cx_217%2Cy_158/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BEBALEEN%2520STUDIO%2Cx_255%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSktRXzFXSVdPVmEyQlIyMUVKRmpZUjNzQ0xJRU42WEJQczdnanhxd3ZiQi05WXpBPXM5Ni1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>developmaeda</dc:creator></item><item><title><![CDATA[GitHub Copilot Coding AgentでCODEOWNERSファイルを複数リポジトリに一気に配置した方法と課題]]></title><description><![CDATA[
+ はじめに
+こんにちは。イオンスマートテクノロジー株式会社（AST）でSREチームの林akaもりはやです。
+当社は各種サービスのプログラムソースコードをVCSで管理しています。従来はAzure DevOps Repos(以降はADO)を中心に利用してきましたが、直近では少しずつGitHubへ移行を進めています。
+本記事ではADOからGitHubへ移行が終わった数十のリポジトリに対して、レビュワーへSREチームを自動でアサインするためのCODEOWNERSファイルを配置するチーム要件に対し、GitHub Copilot Coding Agentを利用して手作業を減らした取り組みについて紹...]]></description><link>https://zenn.dev/aeonpeople/articles/morihaya-20250612-create-multi-issues-for-copilot</link><guid isPermaLink="true">https://zenn.dev/aeonpeople/articles/morihaya-20250612-create-multi-issues-for-copilot</guid><pubDate>Thu, 12 Jun 2025 23:30:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--HGr2YcuD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:GitHub%2520Copilot%2520Coding%2520Agent%25E3%2581%25A7CODEOWNERS%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2592%25E8%25A4%2587%25E6%2595%25B0%25E3%2583%25AA%25E3%2583%259D%25E3%2582%25B8%25E3%2583%2588%25E3%2583%25AA%25E3%2581%25AB%25E4%25B8%2580%25E6%25B0%2597%25E3%2581%25AB%25E9%2585%258D%25E7%25BD%25AE%25E3%2581%2597...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2582%2582%25E3%2582%258A%25E3%2581%25AF%25E3%2582%2584%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA3ZjEwNGIzZWIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:AEON%2520TECH%2520HUB%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzIyZWMxMmQxNTcuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>もりはや</dc:creator></item><item><title><![CDATA[Python未経験者がAmazonQでゲーム開発してみた話]]></title><description><![CDATA[
+ はじめに
+最近、Amazon Q を使ったゲーム開発イベントが開催されているのを知り、興味本位でチャレンジしてみました。
+https://aws.amazon.com/jp/blogs/news/build-games-with-amazon-q-cli-and-score-a-t-shirt/
+少し調べてみたところ、PyGame を使ったゲームづくりが人気らしいということだったので、Python 未経験者ながらチャレンジしてみることに。今回は、そのゲームについてご紹介します！
+なお、Amazon Q の導入方法や使い方は公式や他の方の記事でもたくさん紹介されているのでこの記事では割...]]></description><link>https://zenn.dev/mknsk0309/articles/a4462924f48aeb</link><guid isPermaLink="true">https://zenn.dev/mknsk0309/articles/a4462924f48aeb</guid><pubDate>Thu, 12 Jun 2025 23:00:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--f7zhOIP---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E6%259C%25AA%25E7%25B5%258C%25E9%25A8%2593%25E8%2580%2585%25E3%2581%258CAmazonQ%25E3%2581%25A7%25E3%2582%25B2%25E3%2583%25BC%25E3%2583%25A0%25E9%2596%258B%25E7%2599%25BA%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25BE%25E3%2581%258D%25E3%2581%25AE%25E3%2581%2599%25E3%2581%2591%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VhYWZmZjcyNjAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>まきのすけ</dc:creator></item></channel></rss>
