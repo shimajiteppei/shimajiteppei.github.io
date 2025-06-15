@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「JavaScript」のフィード]]></title><description><![CDATA[Zennのトピック「JavaScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/javascript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/64acd76870.png</url><title>Zennの「JavaScript」のフィード</title><link>https://zenn.dev/topics/javascript</link></image><generator>zenn.dev</generator><lastBuildDate>Sun, 15 Jun 2025 05:40:31 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/javascript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[ChatGPTでVoiceroid2の作業を効率化するWebアプリを作ってみた～その1～]]></title><description><![CDATA[
+ 🛠️ ChatGPTでVoiceroid2の作業を効率化するWebアプリを作ってみた～その1～
+
+ 🎬 はじめに
+動画制作において、VOICEROID2で音声を合成し、動画編集ソフトへ取り込むまでの工程が煩雑で悩んでいました。本記事では、その課題を解決するためにChatGPTを活用して効率化の方法を探り、ローカル環境で動作するWebアプリケーションを構築した事例をご紹介します。
+実際に利用したプロンプトも一部公開するので参考にしていただければ幸いです。
+
+ 🎯 背景と課題
+VOICEROID2で音声を生成するには、以下のような手順を踏む必要があります。
+
+喋らせるテキストを入力
+音声...]]></description><link>https://zenn.dev/pwrengineer/articles/4ee18ef1828662</link><guid isPermaLink="true">https://zenn.dev/pwrengineer/articles/4ee18ef1828662</guid><pubDate>Sun, 15 Jun 2025 00:33:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--u2BUUsrG--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ChatGPT%25E3%2581%25A7Voiceroid2%25E3%2581%25AE%25E4%25BD%259C%25E6%25A5%25AD%25E3%2582%2592%25E5%258A%25B9%25E7%258E%2587%25E5%258C%2596%25E3%2581%2599%25E3%2582%258BWeb%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25EF%25BD%259E%25E3%2581%259D%25E3%2581%25AE1%25EF%25BD%259E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:PWR%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M5MTM5YzVkZWYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>PWR</dc:creator></item><item><title><![CDATA[ReactとTypeScriptでコールバック関数を理解しよう]]></title><description><![CDATA[
+みなさんこんにちは。
+最近はTypeScriptとReactを使ったフロントエンドのコードを書くことが増えてきました。まだまだ初学者なのですが、何かを調べていると「コールバック関数」という言葉をよく目にします。意味が曖昧なままだったので、この機会に整理して覚えようと思います。
+最初は、async/awaitやuseMemo、useCallbackを使う場面でよく耳にする印象でした。
+
+
+ コールバック関数とは
+
+コールバック関数は、引数として他の関数に渡され、その関数の中で必要に応じて呼び出される関数です。呼び出されるタイミングは関数の処理の途中や後、あるいは非同期イベントが発生した時...]]></description><link>https://zenn.dev/sho0226/articles/1d93c7ee8a0ac3</link><guid isPermaLink="true">https://zenn.dev/sho0226/articles/1d93c7ee8a0ac3</guid><pubDate>Sat, 14 Jun 2025 19:13:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--y4HBnwyg--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%25E3%2581%25A8TypeScript%25E3%2581%25A7%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%25AB%25E3%2583%2590%25E3%2583%2583%25E3%2582%25AF%25E9%2596%25A2%25E6%2595%25B0%25E3%2582%2592%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2597%25E3%2582%2588%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2597%25E3%2582%2587%25E3%2581%2586%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MzM2Y4ZjVhN2MuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>しょう</dc:creator></item><item><title><![CDATA[Vercel デプロイエラーの解決方法（Next.js 15対応）]]></title><description><![CDATA[
+ はじめに
+Next.js 15のプロジェクトをVercelにデプロイする際に、以下のようなエラーに遭遇しました。
+Error: Command "npm run build" exited with 1
+ローカル環境では npm run build が正常に動作するにもかかわらず、Vercelでのデプロイが失敗するという状況でした。本記事では、このエラーの原因と解決方法について解説します。
+
+ エラーの詳細
+
+ 環境情報
+
+Next.js: 15.3.3
+Node.js: 18.17.0以上
+Tailwind CSS: v4
+Vercel CLI: 41.7.8
+
+
+ エラー発生時の...]]></description><link>https://zenn.dev/ryoushin/articles/027b9b8bbd9be4</link><guid isPermaLink="true">https://zenn.dev/ryoushin/articles/027b9b8bbd9be4</guid><pubDate>Sat, 14 Jun 2025 16:34:43 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--JRSfq0fc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Vercel%2520%25E3%2583%2587%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25A4%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E3%2581%25AE%25E8%25A7%25A3%25E6%25B1%25BA%25E6%2596%25B9%25E6%25B3%2595%25EF%25BC%2588Next.js%252015%25E5%25AF%25BE%25E5%25BF%259C%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%25A2%2581%25E9%259C%2587%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzlkZGE1ZGRlZGIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>梁震</dc:creator></item><item><title><![CDATA[Vercelデプロイ時にCSSが崩れる問題を解決！Tailwind CSS v4の依存関係の罠]]></title><description><![CDATA[
+ 🚨 問題：ローカルでは動くのに本番環境でCSSが完全に崩れる
+Next.js 15 + Tailwind CSS v4のプロジェクトで、以下のような症状に悩まされました：
+
+✅ npm run dev → 正常に表示
+
+✅ npm run build → ビルド成功
+
+❌ Vercelデプロイ → CSSが完全に崩れる
+
+
+
+ 📝 環境
+{
+  "dependencies": {
+    "next": "15.3.3",
+    "react": "^19.0.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^...]]></description><link>https://zenn.dev/ryoushin/articles/45b9cac420b701</link><guid isPermaLink="true">https://zenn.dev/ryoushin/articles/45b9cac420b701</guid><pubDate>Sat, 14 Jun 2025 15:24:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--FKpY3jec--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Vercel%25E3%2583%2587%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25A4%25E6%2599%2582%25E3%2581%25ABCSS%25E3%2581%258C%25E5%25B4%25A9%25E3%2582%258C%25E3%2582%258B%25E5%2595%258F%25E9%25A1%258C%25E3%2582%2592%25E8%25A7%25A3%25E6%25B1%25BA%25EF%25BC%2581Tailwind%2520CSS%2520v4%25E3%2581%25AE%25E4%25BE%259D%25E5%25AD%2598%25E9%2596%25A2%25E4%25BF%2582%25E3%2581%25AE%25E7%25BD%25A0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%25A2%2581%25E9%259C%2587%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzlkZGE1ZGRlZGIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>梁震</dc:creator></item><item><title><![CDATA[JavaScriptでABC410(A-C)]]></title><description><![CDATA[https://atcoder.jp/contests/abc410
+
+ A - G1
+https://atcoder.jp/contests/abc410/tasks/abc410_a
+「AのうちK以上のものの個数」を出せば終わりです
+https://atcoder.jp/contests/abc410/submissions/66717659
+1分17秒 AC!
+
+ B - Reverse Proxy
+https://atcoder.jp/contests/abc410/tasks/abc410_b
+B問題は言われたとおりやるの法則
+箱にどのボールが入っているかは見ないので、箱のデー...]]></description><link>https://zenn.dev/aya_koto/articles/fc145bb59991f1</link><guid isPermaLink="true">https://zenn.dev/aya_koto/articles/fc145bb59991f1</guid><pubDate>Sat, 14 Jun 2025 13:51:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--jCWmb6-s--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:JavaScript%25E3%2581%25A7ABC410%2528A-C%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Ayasaka-Koto%2520%252F%2520Aya...%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VkNTRlMDBjYTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Ayasaka-Koto / AyagawaP</dc:creator></item><item><title><![CDATA[スクロール連動URL更新とSEO対策を両立させるシングルページアプリケーションの実装]]></title><description><![CDATA[
+ はじめに
+モダンなポートフォリオサイトでは、スムーズなスクロール体験とSEO対策の両立が求められます。本記事では、Next.js 15を使用して、スクロールに応じてURLが変化し、各セクションが個別のURLを持ちながらも、シングルページアプリケーション（SPA）のような体験を提供する実装方法を解説します。
+
+ 実装の要件
+
+
+各セクションが独立したURLを持つ - SEO対策として重要
+
+スクロールに応じてURLが自動更新 - ユーザーの現在位置を反映
+
+ブラウザの戻る/進むボタンが機能 - 適切なナビゲーション
+
+直接URLアクセスで該当セクションを表示 - ディープリンク対応
+
+...]]></description><link>https://zenn.dev/ryoushin/articles/0edb7e9cb02a86</link><guid isPermaLink="true">https://zenn.dev/ryoushin/articles/0edb7e9cb02a86</guid><pubDate>Sat, 14 Jun 2025 11:53:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--FsIFVo3O--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%25AB%25E9%2580%25A3%25E5%258B%2595URL%25E6%259B%25B4%25E6%2596%25B0%25E3%2581%25A8SEO%25E5%25AF%25BE%25E7%25AD%2596%25E3%2582%2592%25E4%25B8%25A1%25E7%25AB%258B%25E3%2581%2595%25E3%2581%259B%25E3%2582%258B%25E3%2582%25B7%25E3%2583%25B3%25E3%2582%25B0%25E3%2583%25AB%25E3%2583%259A%25E3%2583%25BC%25E3%2582%25B8%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%25B1%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2581%25AE%25E5%25AE%259F%25E8%25A3%2585%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%25A2%2581%25E9%259C%2587%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzlkZGE1ZGRlZGIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>梁震</dc:creator></item><item><title><![CDATA[【JavaScript】typeof の使い方と注意点を解説（null や配列の扱いに注意）]]></title><description><![CDATA[
+ はじめに
+JavaScriptで変数のデータ型を調べるときに使われる typeof 演算子。
+基本的な使い方はとてもシンプルですが、いくつか注意すべき落とし穴もあります。
+本記事では、typeof の基本的な使い方から、
+よくある落とし穴や、正しく型を判定するための代替手段についても解説します。
+
+ 1. typeof の基本的な使い方
+typeof は、変数や値のデータ型を文字列で返す演算子です。
+console.log(typeof 'hello'); // "string"
+console.log(typeof 42);      // "number"
+console.log...]]></description><link>https://zenn.dev/fd2025/articles/f1da66dee27db7</link><guid isPermaLink="true">https://zenn.dev/fd2025/articles/f1da66dee27db7</guid><pubDate>Sat, 14 Jun 2025 10:31:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--GbaQh4tO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590JavaScript%25E3%2580%2591typeof%2520%25E3%2581%25AE%25E4%25BD%25BF%25E3%2581%2584%25E6%2596%25B9%25E3%2581%25A8%25E6%25B3%25A8%25E6%2584%258F%25E7%2582%25B9%25E3%2582%2592%25E8%25A7%25A3%25E8%25AA%25AC%25EF%25BC%2588null%2520%25E3%2582%2584%25E9%2585%258D%25E5%2588%2597%25E3%2581%25AE%25E6%2589%25B1%25E3%2581%2584%25E3%2581%25AB%25E6%25B3%25A8%25E6%2584%258F%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:fd2025%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2EzMzVlNTI5MmQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>fd2025</dc:creator></item><item><title><![CDATA[electron + typescript + tailwind + vite の環境構築]]></title><description><![CDATA[pnpm create @quick-start/electron electron-playground --template react-ts
+cd react-ts
+pnpm install
+pnpm install -D tailwindcss @tailwindcss/vite
+electron.vite.config.ts を以下のように修正
+import { resolve } from "path";
+import { defineConfig, externalizeDepsPlugin } from "electron-vite";
+import react from...]]></description><link>https://zenn.dev/mstn_/articles/82be50f5242599</link><guid isPermaLink="true">https://zenn.dev/mstn_/articles/82be50f5242599</guid><pubDate>Sat, 14 Jun 2025 08:23:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BJrarlRM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:electron%2520%252B%2520typescript%2520%252B%2520tailwind%2520%252B%2520vite%2520%25E3%2581%25AE%25E7%2592%25B0%25E5%25A2%2583%25E6%25A7%258B%25E7%25AF%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25BE%25E3%2581%2597%25E3%2582%258D%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2drUmpodDM4dWpKbVFoTzFTYVNMeXYyRkQ3M3g0d2dUWW5fY0N3QWc9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ましろ</dc:creator></item><item><title><![CDATA[一日一処: TypeScriptでピラミッド建造プログラムをできるだけ長く書く]]></title><description><![CDATA[
+ 昔話
+以前にピラミッドを建造するプログラムについての記事を投稿している。個人的には、ぎゅっと短くなったりシンプルなプログラムを好む。
+https://zenn.dev/jinkutoriu/articles/ec81d4eced5dea
+
+ モチベーション
+前回はJavaScriptで可能な限り短縮を意識した記述を行った。今回はTypeScriptを使用して、できるだけ詳細で長いプログラムを書いてみる。
+「プログラムを短くしよう」という考え方ももちろん大切だ。しかし、TypeScriptの機能をふんだんに用いて、具体的で正確で堅牢なものが作れるかもしれない。そして、なんといっても巨大...]]></description><link>https://zenn.dev/jinkutoriu/articles/7372822a4857c7</link><guid isPermaLink="true">https://zenn.dev/jinkutoriu/articles/7372822a4857c7</guid><pubDate>Sat, 14 Jun 2025 06:59:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--AORh0zwY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E4%25B8%2580%25E6%2597%25A5%25E4%25B8%2580%25E5%2587%25A6%253A%2520TypeScript%25E3%2581%25A7%25E3%2583%2594%25E3%2583%25A9%25E3%2583%259F%25E3%2583%2583%25E3%2583%2589%25E5%25BB%25BA%25E9%2580%25A0%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%25A0%25E3%2582%2592%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258B%25E3%2581%25A0%25E3%2581%2591%25E9%2595%25B7%25E3%2581%258F%25E6%259B%25B8%25E3%2581%258F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E9%25B3%25A5%25E7%2594%259F%2520%25E7%2594%259A%25E5%258F%25A5%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2IyZTA4MTQ0MTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>鳥生 甚句</dc:creator></item><item><title><![CDATA[HTML5製のwebアプリをTauri 2.0でexe化する]]></title><description><![CDATA[
+ はじめに
+HTML＋CSS＋JavaScriptで作ったwebアプリをデスクトップアプリ化したい。Electronだとnode.jsに加えてChromiumによるレンダリングはスペック盛りすぎだと思う。exeサイズが大きくなるのも好ましくない。
+今回は、HTML5アプリを、Tauri 2.0でexe化して実行できるようにします。
+
+
+ 1. HTML5プログラムを用意する
+HTML5プログラムを作成し、1つのフォルダにまとめてフォルダ内のindex.htmlからブラウザで起動できるようにして、動作確認までしておきます。
+例えば以下のようなもの。
+
+ソースコードは以下から取得
+http...]]></description><link>https://zenn.dev/nfukuoka/articles/qiita-20250613-07a341af9e9a4407d0af</link><guid isPermaLink="true">https://zenn.dev/nfukuoka/articles/qiita-20250613-07a341af9e9a4407d0af</guid><pubDate>Sat, 14 Jun 2025 05:15:55 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--g0IAgqjH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:HTML5%25E8%25A3%25BD%25E3%2581%25AEweb%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592Tauri%25202.0%25E3%2581%25A7exe%25E5%258C%2596%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nfukuoka%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRhZmNmOTYyNjMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nfukuoka</dc:creator></item><item><title><![CDATA[AWSのキャンペーンに乗ってゲームを作ってみる]]></title><description><![CDATA[前回の記事はゲームの開発環境を作ったのでした。
+https://zenn.dev/euptilurus/articles/0966723ec46be2
+今度こそ、Amazon Qに聞きながらゲームを作ってみます。
+先日、偶然見つけたキャンペーンの記事はこれです。
+AWS公式ブログの記事です。ゲームを作るのは生まれて初めてです。AWSのTシャツも欲しいです。
+https://aws.amazon.com/jp/blogs/news/build-games-with-amazon-q-cli-and-score-a-t-shirt/
+WSLのUbuntuから再びAmazon Qを起動します。...]]></description><link>https://zenn.dev/euptilurus/articles/b10e646f243ebf</link><guid isPermaLink="true">https://zenn.dev/euptilurus/articles/b10e646f243ebf</guid><pubDate>Fri, 13 Jun 2025 17:27:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--M9skGwo3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AWS%25E3%2581%25AE%25E3%2582%25AD%25E3%2583%25A3%25E3%2583%25B3%25E3%2583%259A%25E3%2583%25BC%25E3%2583%25B3%25E3%2581%25AB%25E4%25B9%2597%25E3%2581%25A3%25E3%2581%25A6%25E3%2582%25B2%25E3%2583%25BC%25E3%2583%25A0%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%2587%25E3%2582%25B6%25E3%2582%25A4%25E3%2583%258A%25E3%2583%25BC%25E3%2581%25AE%25E5%258D%25B5%25E3%2581%25AE%25E5%258B%2589%25E5%25BC%25B7%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg5NjUwZmNkMzYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>デザイナーの卵の勉強ブログ</dc:creator></item><item><title><![CDATA[ゲームを作る開発環境を整える]]></title><description><![CDATA[前回の記事は以下です。
+Amazon Q Developerに助けてもらえる環境ができました。
+https://zenn.dev/euptilurus/articles/c6b10e62817bf2
+そういえば、言語とパッケージの環境を忘れていました。
+Pythonでゲームを作る場合と、Javascriptでゲームを作る場合、どんなものが必要でしょうか。Amazon Qに聞いてみます。
+&gt; あなたはウェブアプリの開発者であり、ゲームの制作が得意です。ブラウザだけで遊べるゲームを作ります。動作環境はGoogle Chromeで、スマートフォンではタップとフリック操作、PCではマウスの...]]></description><link>https://zenn.dev/euptilurus/articles/0966723ec46be2</link><guid isPermaLink="true">https://zenn.dev/euptilurus/articles/0966723ec46be2</guid><pubDate>Fri, 13 Jun 2025 15:43:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ebQgKxjq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B2%25E3%2583%25BC%25E3%2583%25A0%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%25E9%2596%258B%25E7%2599%25BA%25E7%2592%25B0%25E5%25A2%2583%25E3%2582%2592%25E6%2595%25B4%25E3%2581%2588%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%2587%25E3%2582%25B6%25E3%2582%25A4%25E3%2583%258A%25E3%2583%25BC%25E3%2581%25AE%25E5%258D%25B5%25E3%2581%25AE%25E5%258B%2589%25E5%25BC%25B7%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg5NjUwZmNkMzYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>デザイナーの卵の勉強ブログ</dc:creator></item><item><title><![CDATA[JavaScriptとクッキーでユーザーのタイムゾーンを検出・記憶するスマートWeb時計の作り方]]></title><description><![CDATA[📝 はじめに
+このチュートリアルでは、HTML、CSS、JavaScriptを使用して、ユーザーのローカルタイムゾーンを自動的に検出し、ブラウザのクッキーに保存するスマートな時計を作成します。これは、ユーザーの地域に応じたパーソナライズされたツールやダッシュボードを作成する際に非常に役立ちます。
+
+このガイドの終わりには、以下の機能を備えた完全なWeb時計を作成できます：
+
+
+Intl.DateTimeFormat()を使用してユーザーのタイムゾーンを検出
+タイムゾーンをクッキーに保存
+リアルタイムの時刻を表示し、毎秒更新
+次回訪問時にタイムゾーンを記憶
+
+この手法は、計算機、ダッシュボ...]]></description><link>https://zenn.dev/hinatatachibana/articles/1bc8154fbfb677</link><guid isPermaLink="true">https://zenn.dev/hinatatachibana/articles/1bc8154fbfb677</guid><pubDate>Fri, 13 Jun 2025 15:22:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--F32Pje4m--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25E3%2581%25A8%25E3%2582%25AF%25E3%2583%2583%25E3%2582%25AD%25E3%2583%25BC%25E3%2581%25A7%25E3%2583%25A6%25E3%2583%25BC%25E3%2582%25B6%25E3%2583%25BC%25E3%2581%25AE%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25A0%25E3%2582%25BE%25E3%2583%25BC%25E3%2583%25B3%25E3%2582%2592%25E6%25A4%259C%25E5%2587%25BA%25E3%2583%25BB%25E8%25A8%2598%25E6%2586%25B6%25E3%2581%2599%25E3%2582%258B%25E3%2582%25B9%25E3%2583%259E%25E3%2583%25BC%25E3%2583%2588Web%25E6%2599%2582%25E8%25A8%2588%25E3%2581%25AE%25E4%25BD%259C%25E3%2582%258A%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hinatatachibana%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSUJvMEJIMzFZekZyTnNpVGZYUFptSm5TVm5WVlhiRlpwN2pvdnA1S2RUOEttNFFBPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hinatatachibana</dc:creator></item><item><title><![CDATA[Astro新時代! 再ビルド不要のLive Content Collections]]></title><description><![CDATA[
+ はじめに
+これから説明するのは、astro@5.10.0以降にて提供される予定の機能です。
+2025-06-14時点では、astroのセルフビルドが必要になることに注意してください。
+公式のRFCやPRで、この機能に関するディスカッションやフィードバックを受け付けているので、気になった方はぜひ
+Live Content collections RFC
+Add docs for experimental live collections
+実際の動作例を見たい場合は、以下のYoutube配信のアーカイブから
+https://www.youtube.com/live/2Skg7wo_dTk...]]></description><link>https://zenn.dev/katsuyuki/articles/69081373cf9f0b</link><guid isPermaLink="true">https://zenn.dev/katsuyuki/articles/69081373cf9f0b</guid><pubDate>Fri, 13 Jun 2025 14:46:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Duz8KLAK--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Astro%25E6%2596%25B0%25E6%2599%2582%25E4%25BB%25A3%2521%2520%25E5%2586%258D%25E3%2583%2593%25E3%2583%25AB%25E3%2583%2589%25E4%25B8%258D%25E8%25A6%2581%25E3%2581%25AELive%2520Content%2520Collections%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:LaPh%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFiYzcxMjA0NGYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>LaPh</dc:creator></item><item><title><![CDATA[【Laravel】静的ファイル管理方法]]></title><description><![CDATA[
+ はじめに
+Webアプリケーション開発を進めていて、CSSやJavaScriptといった静的ファイルの置き場所について迷ったことはありませんか？
+public/ディレクトリに置いてよいファイルやresources/ディレクトリに置くべきファイルなど、安全性や保守性の観点から正しい構成を知ることはとても大切です。この記事では、Laravelにおける静的ファイルの配置に関する方針を紹介します。
+
+ 対象者
+
+CSSやJSファイルをpublic/に直接置いてしまっているエンジニア
+チーム開発をしている方
+ViteやLaravel Mixのビルドを見直したい方
+
+
+ Laravel ディレクト...]]></description><link>https://zenn.dev/ykbone/articles/b1fcce41c176cc</link><guid isPermaLink="true">https://zenn.dev/ykbone/articles/b1fcce41c176cc</guid><pubDate>Fri, 13 Jun 2025 10:56:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--g1wtY2nc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Laravel%25E3%2580%2591%25E9%259D%2599%25E7%259A%2584%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E7%25AE%25A1%25E7%2590%2586%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ykbone%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAyYmU2ODQzYjEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ykbone</dc:creator></item><item><title><![CDATA[Web制作に最適！Astro × Nano Storesで学ぶ状態管理の基本]]></title><description><![CDATA[
+ この記事を書こうと思った理由
+
+状態管理について理解が浅く、自分自身の学習のために Nano Stores を使ってみたかったため。
+Astro を使っている同じような立場の、コーダー・エンジニアの参考になればと思ったため。
+普段の開発で React などのフレームワークを使わず、JS/TS 単体で実装している人向けに情報を共有したかったため。
+
+
+ ゴール
+
+Nano Stores を使って、状態管理を体験してみる
+状態管理の基本的な考え方を少しでも理解する
+
+
+ 対象者
+
+「状態管理って何？」というレベルの方
+JavaScript/TypeScript 単体で Web 制作をして...]]></description><link>https://zenn.dev/d2cid_inc/articles/8835c3a527dc16</link><guid isPermaLink="true">https://zenn.dev/d2cid_inc/articles/8835c3a527dc16</guid><pubDate>Fri, 13 Jun 2025 07:55:37 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8JdnAlcl--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Web%25E5%2588%25B6%25E4%25BD%259C%25E3%2581%25AB%25E6%259C%2580%25E9%2581%25A9%25EF%25BC%2581Astro%2520%25C3%2597%2520Nano%2520Stores%25E3%2581%25A7%25E5%25AD%25A6%25E3%2581%25B6%25E7%258A%25B6%25E6%2585%258B%25E7%25AE%25A1%25E7%2590%2586%25E3%2581%25AE%25E5%259F%25BA%25E6%259C%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:taku%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NjNDM3ZGE5YjguanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BED2C%2520ID%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSnlhZ3d2T2FJRExLV2pYWVVkLXNpUDVzM1c0TXRHQ1pzbUVJZWpKTDVsMHMxYk9CUT1zOTYtYw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>taku</dc:creator></item><item><title><![CDATA[JavaScriptだけでやってきた私が今からReactを学ぶ理由]]></title><description><![CDATA[
+ はじめに
+これまで関わってきた制作現場では、ずっと素のJavaScriptやjQueryが中心。
+しかも複数の制作会社が関わっていたため、自分だけReactやNext.jsに乗り換えるわけにもいかず、技術の波に乗れずにいました。
+でも、技術書やSNSの情報を見ていると、「このままじゃマズいかも」という焦りも。
+そんな思いから、いまさらですがReactを勉強してみました。
+この記事では、初心者目線でReactの基本を整理してみます。
+同じような立場の方のヒントになればうれしいです。
+
+ なぜReactなのか？
+Reactを学んで気づいたのは、単なる流行りじゃなく、根本的な開発の考え方そ...]]></description><link>https://zenn.dev/akky709/articles/1ea43e213c0818</link><guid isPermaLink="true">https://zenn.dev/akky709/articles/1ea43e213c0818</guid><pubDate>Fri, 13 Jun 2025 06:40:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--nNiJg-QV--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25E3%2581%25A0%25E3%2581%2591%25E3%2581%25A7%25E3%2582%2584%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%258D%25E3%2581%259F%25E7%25A7%2581%25E3%2581%258C%25E4%25BB%258A%25E3%2581%258B%25E3%2582%2589React%25E3%2582%2592%25E5%25AD%25A6%25E3%2581%25B6%25E7%2590%2586%25E7%2594%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:akky%2Cx_90%2Cy_121/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>akky</dc:creator></item><item><title><![CDATA[CODE BATTLER を支える技術]]></title><description><![CDATA[https://code-battler.heartrails.com/
+本記事では、Javascript コードでバトルする戦略対戦ゲーム CODE BATTLER の実装に使用した技術をご紹介していきます。似たような仕組みのゲームを自分でも作ってみたい！という方はご参考ください。
+CODE BATTLER の紹介、プレイヤー向けの記事はこちらをどうぞ。
+https://techblog.heartrails.com/ja/articles/code-battler
+
+ ユーザの Javascript を安全に実行する
+CODE BATTLER では、ユーザー入力の Javascrip...]]></description><link>https://zenn.dev/heartrails/articles/6915c0c2c2cb3d</link><guid isPermaLink="true">https://zenn.dev/heartrails/articles/6915c0c2c2cb3d</guid><pubDate>Fri, 13 Jun 2025 02:01:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3djo5G5G--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:CODE%2520BATTLER%2520%25E3%2582%2592%25E6%2594%25AF%25E3%2581%2588%25E3%2582%258B%25E6%258A%2580%25E8%25A1%2593%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Ohkubo%2520KOHEI%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y0ODIyMDRiZDMuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2583%258F%25E3%2583%25BC%25E3%2583%2588%25E3%2583%25AC%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%25BA%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2hveGZBMXppa0NMRUgtWnR1ZFBnWFA3b2o3OFNjc0FMamFJVktXM0E9czI1MC1j%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Ohkubo KOHEI</dc:creator></item><item><title><![CDATA[日付や時間の計算に役立つユーティリティ関数をまとめてみた]]></title><description><![CDATA[日報やCSV出力、Excel貼り付けなど、日付や時間を扱う際に役立つユーティリティ関数をTypeScriptで整理してみました。
+数字に弱いので、必要な時に参考しようと思います😀
+主な言語
+TypeScript
+
+
+ 🕒 1. parseTimeToDecimal(timeStr: string): number
+
+"2:30" → 2.5 に変換する関数です。
+作業時間の合計や平均を出す時にとても便利です。
+
+例：分 ÷ 60 = 小数点（例：30 ÷ 60 = 0.5 → 2 + 0.5 = 2.5）
+
+export function parseTimeToDecimal(timeS...]]></description><link>https://zenn.dev/hyoni/articles/d2931c3174dde4</link><guid isPermaLink="true">https://zenn.dev/hyoni/articles/d2931c3174dde4</guid><pubDate>Fri, 13 Jun 2025 01:53:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Pd536S2x--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E6%2597%25A5%25E4%25BB%2598%25E3%2582%2584%25E6%2599%2582%25E9%2596%2593%25E3%2581%25AE%25E8%25A8%2588%25E7%25AE%2597%25E3%2581%25AB%25E5%25BD%25B9%25E7%25AB%258B%25E3%2581%25A4%25E3%2583%25A6%25E3%2583%25BC%25E3%2583%2586%25E3%2582%25A3%25E3%2583%25AA%25E3%2583%2586%25E3%2582%25A3%25E9%2596%25A2%25E6%2595%25B0%25E3%2582%2592%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%2592%25E3%2583%25A7%25E3%2583%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0sxdWxlU2pkSzlwbDVxZnp3QVlUcFhCNk9xUEhkZGpKWjRUVlRPTl9lMHdYODhLdkg9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ヒョニ</dc:creator></item><item><title><![CDATA[React	コンポーネント分割の際に出たエラーについて]]></title><description><![CDATA[Udemyでの学習にて以下のようなエラーがコンポーネントを分割して読み込み際に出たのでその対策を記録しておきます。
+
+ 発生したエラー
+Failed to parse source for import analysis because the content contains invalid JS syntax. If you are using JSX, make sure to name the file with the .jsx or .tsx extension.
+翻訳すると「無効なJS構文が見つかり。インポート分析に失敗しました。jsxを使用している場合は、ファイル名に.j...]]></description><link>https://zenn.dev/hosoya_ren/articles/7c3a00988a288a</link><guid isPermaLink="true">https://zenn.dev/hosoya_ren/articles/7c3a00988a288a</guid><pubDate>Fri, 13 Jun 2025 00:30:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--EjTjz2No--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%2509%25E3%2582%25B3%25E3%2583%25B3%25E3%2583%259D%25E3%2583%25BC%25E3%2583%258D%25E3%2583%25B3%25E3%2583%2588%25E5%2588%2586%25E5%2589%25B2%25E3%2581%25AE%25E9%259A%259B%25E3%2581%25AB%25E5%2587%25BA%25E3%2581%259F%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Hosoya%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS0JfWGxNdE5wRVlwTm5GUENGWV9DZ0RPYjZ4d3k3TnhtNWRpcDVTbHNIWGtyWllYND1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Hosoya</dc:creator></item></channel></rss>
