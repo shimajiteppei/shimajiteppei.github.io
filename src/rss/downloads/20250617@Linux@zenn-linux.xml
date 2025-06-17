@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Linux」のフィード]]></title><description><![CDATA[Zennのトピック「Linux」のRSSフィードです]]></description><link>https://zenn.dev/topics/linux</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/860a9eb1e4.png</url><title>Zennの「Linux」のフィード</title><link>https://zenn.dev/topics/linux</link></image><generator>zenn.dev</generator><lastBuildDate>Tue, 17 Jun 2025 05:42:36 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/linux/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[raspberry pi 4でNTPサーバーの設定をする]]></title><description><![CDATA[
+ raspberry pi 4のバージョン
+uname -a
+Linux production 6.6.74+rpt-rpi-v8 #1 SMP PREEMPT Debian 1:6.6.74-1+rpt1 (2025-01-27) aarch64 GNU/Linux
+cat /etc/os-release
+PRETTY_NAME="Debian GNU/Linux 12 (bookworm)"
+NAME="Debian GNU/Linux"
+VERSION_ID="12"
+VERSION="12 (bookworm)"
+VERSION_CODENAME=bookworm
+ID=deb...]]></description><link>https://zenn.dev/neuron_grid/articles/7f3b23fcf2dd0a</link><guid isPermaLink="true">https://zenn.dev/neuron_grid/articles/7f3b23fcf2dd0a</guid><pubDate>Mon, 16 Jun 2025 19:54:44 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--iAAN4aWf--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:raspberry%2520pi%25204%25E3%2581%25A7NTP%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2581%25AE%25E8%25A8%25AD%25E5%25AE%259A%25E3%2582%2592%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Neuron%2520Grid%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2Rhcmsvbi5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Neuron Grid</dc:creator></item><item><title><![CDATA[Zabbix構築ガイド：オープンソース監視ツールの導入から初期設定まで]]></title><description><![CDATA[
+ はじめに
+Zabbixは、サーバー、ネットワーク機器、アプリケーションなど、ITインフラのあらゆる要素を集中監視できる強力なオープンソースの統合監視ソフトウェアです。本記事では、Zabbixサーバーを構築し、監視対象のサーバーを追加するまでの基本的な手順を解説します。
+
+ この記事のゴール
+
+Zabbixサーバーをインストールし、Webインターフェースにアクセスできる状態にする。
+監視対象のサーバーにZabbixエージェントを導入し、基本的な監視を開始する。
+
+
+ 対象環境
+
+
+OS: Rocky Linux 9
+
+Zabbix Version: 6.0 LTS (または最新安定版)...]]></description><link>https://zenn.dev/iikanash1/articles/zabbix-build</link><guid isPermaLink="true">https://zenn.dev/iikanash1/articles/zabbix-build</guid><pubDate>Sun, 15 Jun 2025 21:07:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ElFH_dQw--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Zabbix%25E6%25A7%258B%25E7%25AF%2589%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589%25EF%25BC%259A%25E3%2582%25AA%25E3%2583%25BC%25E3%2583%2597%25E3%2583%25B3%25E3%2582%25BD%25E3%2583%25BC%25E3%2582%25B9%25E7%259B%25A3%25E8%25A6%2596%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%25AE%25E5%25B0%258E%25E5%2585%25A5%25E3%2581%258B%25E3%2582%2589%25E5%2588%259D%25E6%259C%259F%25E8%25A8%25AD%25E5%25AE%259A%25E3%2581%25BE%25E3%2581%25A7%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258B%25E3%2581%25AA%25E3%2581%2597%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTDFiWHB5WG1ra0p5WS16N0d5bExrZFdLelFBRFl5RFExd1dsQkxvNldjX21WeTY2eUQ9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>かなし</dc:creator></item><item><title><![CDATA[Ubuntu 24.04 でなぜか突然 iPhone のテザリングができなくなった件]]></title><description><![CDATA[ある日突然 Ubuntu 24.04 で iPhone のテザリングができなくなった。調べてもあまり情報が出てこなかったので、個人的な備忘録として残しておく。
+
+ TL;DR
+
+SSID となる iPhone 名が日本語で長すぎたせい。
+接続に失敗した Wi-Fi と一致する netplan の設定ファイルを削除して netplan apply で再読み込みさせたら解決。
+SSID は UTF-8 エンコード + URL エンコードされ、日本語などは長くなりすぎるので注意。
+一度接続に失敗すると他の Wi-Fi にも繋がらなくなる可能性あり。
+
+
+ 事象
+いつものように iPhone の...]]></description><link>https://zenn.dev/senken/articles/ubuntu-tezaling</link><guid isPermaLink="true">https://zenn.dev/senken/articles/ubuntu-tezaling</guid><pubDate>Sun, 15 Jun 2025 20:37:36 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--FduwaKk2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ubuntu%252024.04%2520%25E3%2581%25A7%25E3%2581%25AA%25E3%2581%259C%25E3%2581%258B%25E7%25AA%2581%25E7%2584%25B6%2520iPhone%2520%25E3%2581%25AE%25E3%2583%2586%25E3%2582%25B6%25E3%2583%25AA%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%258C%25E3%2581%25A7%25E3%2581%258D%25E3%2581%25AA%25E3%2581%258F%25E3%2581%25AA%25E3%2581%25A3%25E3%2581%259F%25E4%25BB%25B6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:SENKEN%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q3ZTQyODM5Y2UuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>SENKEN</dc:creator></item><item><title><![CDATA[[Kali Linux] Raspberry PiにKali Piを入れる]]></title><description><![CDATA[
+ はじめに
+Raspberry PiにKali Linuxを入れる手順をまとめる。
+microSDカードをフォーマットして、使いたいOSのimgを入れればいい。本記事ではRaspberry Pi Imagerを使用した手順を説明する。
+なお今回はRaspberry Pi4を使用している。
+Kali Pi以外のOSでも、基本的な手順は本記事と同じである。
+https://www.raspberrypi.com/
+
+ 前提事項
+
+Raspberry PiのアーキテクチャはARMであるため、x86向けのOSは使えない。
+
+x86環境で動かしたい場合は、x86に対応したミニPC等を検討したほう...]]></description><link>https://zenn.dev/anri99103/articles/589b10008e3c84</link><guid isPermaLink="true">https://zenn.dev/anri99103/articles/589b10008e3c84</guid><pubDate>Sun, 15 Jun 2025 18:45:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--PRWPWZ0g--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BKali%2520Linux%255D%2520Raspberry%2520Pi%25E3%2581%25ABKali%2520Pi%25E3%2582%2592%25E5%2585%25A5%25E3%2582%258C%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Anri%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhkMzc5YmEwMGUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Anri</dc:creator></item><item><title><![CDATA[WindowsPCにSSH接続したら自動的にWSLのUbuntuに繋げる]]></title><description><![CDATA[
+ はじめに
+Windows OpenSSH で 「SSH ⇒ そのまま WSL Ubuntu 24.04」 を実現しようとすると、素直に
+HKLM\SOFTWARE\OpenSSH\DefaultShell = C:\Windows\System32\wsl.exe -d Ubuntu-24.04 -e bash -l
+と書きたくなるが DefaultShell には “実行ファイルのフルパス” しか入らず、引数を書けない。
+他にも以下の問題が
+
+Windows SSHD は内部 UTF-8 だが、親コンソールが Shift-JIS (CP932) のままだと日本語が化ける。
+Micr...]]></description><link>https://zenn.dev/rhyizm/articles/a0c2be1be19876</link><guid isPermaLink="true">https://zenn.dev/rhyizm/articles/a0c2be1be19876</guid><pubDate>Sun, 15 Jun 2025 11:43:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--LhRTaAJ4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:WindowsPC%25E3%2581%25ABSSH%25E6%258E%25A5%25E7%25B6%259A%25E3%2581%2597%25E3%2581%259F%25E3%2582%2589%25E8%2587%25AA%25E5%258B%2595%25E7%259A%2584%25E3%2581%25ABWSL%25E3%2581%25AEUbuntu%25E3%2581%25AB%25E7%25B9%258B%25E3%2581%2592%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:rhyizm%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg0YWYxYTlkYjguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>rhyizm</dc:creator></item><item><title><![CDATA[nginx->php-fpmにUnixドメインソケット通信しているサーバーの設定を確認]]></title><description><![CDATA[
+ はじめに
+Unixドメインソケット通信とソケット通信の比較は、他の方の記事など参考にして下さい。
+https://qiita.com/toshihirock/items/b643ed0edd30e6fd1f14
+Unixドメインソケット通信では基本的に同一ホスト環境上で、sockファイルを仲介してプロセス間通信をします。
+（自分が作った環境ではないですが）nginx -&gt; php-fpmにUnixドメインソケット通信している環境があったので、どんな設定になっているのかを確認していきます。
+下記のような通信が行われています。
+[クライアントブラウザ]
+ ↓
+[nginx]
+ ↓ ...]]></description><link>https://zenn.dev/osachi/articles/c19d71a0244c52</link><guid isPermaLink="true">https://zenn.dev/osachi/articles/c19d71a0244c52</guid><pubDate>Sun, 15 Jun 2025 06:11:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qunrpel9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:nginx-%253Ephp-fpm%25E3%2581%25ABUnix%25E3%2583%2589%25E3%2583%25A1%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25BD%25E3%2582%25B1%25E3%2583%2583%25E3%2583%2588%25E9%2580%259A%25E4%25BF%25A1%25E3%2581%2597%25E3%2581%25A6%25E3%2581%2584%25E3%2582%258B%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2581%25AE%25E8%25A8%25AD%25E5%25AE%259A%25E3%2582%2592%25E7%25A2%25BA%25E8%25AA%258D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:osachi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS1dQbG9ta3VENjRseUgxcHZnX3BHMjA5cEZQTjM2UGZtN3lzLTNIUVJGPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>osachi</dc:creator></item><item><title><![CDATA[po4a 化されていない POD ページの po4a 化]]></title><description><![CDATA[
+ 前回の記事
+https://zenn.dev/yasumichi/articles/1f6873bc5cfefa
+
+ 今回の作業対象
+https://github.com/linux-jm/manual/tree/master/pod/sudo
+現在、翻訳されているファイルは、以下の通り。
+
+sudo.pod
+sudoers.pod
+visudo.pod
+
+
+ POD とは
+Perl 関連パッケージで良く用いられる、 POD (Plain Old Documentation) 形式で書かれたページです。
+
+JM Project (Japanese)
+perlpod - Plain O...]]></description><link>https://zenn.dev/yasumichi/articles/6b666fd24e230a</link><guid isPermaLink="true">https://zenn.dev/yasumichi/articles/6b666fd24e230a</guid><pubDate>Sat, 14 Jun 2025 08:08:19 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--r5v-wDJZ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:po4a%2520%25E5%258C%2596%25E3%2581%2595%25E3%2582%258C%25E3%2581%25A6%25E3%2581%2584%25E3%2581%25AA%25E3%2581%2584%2520POD%2520%25E3%2583%259A%25E3%2583%25BC%25E3%2582%25B8%25E3%2581%25AE%2520po4a%2520%25E5%258C%2596%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yasumichi%2520Akahoshi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSUoySnNPVXFnanR4SGcteXBvTGoxcmVpTXlzc1dwYnltZEJ2ZHZYa1ExT1kteHRFOGs9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yasumichi Akahoshi</dc:creator></item><item><title><![CDATA[Linux:gitリポジトリを一時的にweb公開するscript]]></title><description><![CDATA[gitは "git instaweb" でカレントのリポジトリをweb公開できて、webブラウザからlogやdiffがとれる。
+特に複数のbranchを持っている状態のときにあちこちのbranchに移動しつつ参照できて便利だなと思う。
+便利だけど、数十人のproject等でサーバマシンを共有している場合にportがかぶるとやだなって思ったので、開いているportを自動で割り当ててinstawebするshell-scriptを書いた。
+"webgit.sh start" &nbsp; で開始して
+"webgit.sh stop" &nbsp;で停止する
+
+表示イメージ
+
+
+
+#!/bin/...]]></description><link>https://zenn.dev/nfukuoka/articles/qiita-20181104-c3f179d1045cca658360</link><guid isPermaLink="true">https://zenn.dev/nfukuoka/articles/qiita-20181104-c3f179d1045cca658360</guid><pubDate>Sat, 14 Jun 2025 05:07:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Zrj6NP2L--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%253Agit%25E3%2583%25AA%25E3%2583%259D%25E3%2582%25B8%25E3%2583%2588%25E3%2583%25AA%25E3%2582%2592%25E4%25B8%2580%25E6%2599%2582%25E7%259A%2584%25E3%2581%25ABweb%25E5%2585%25AC%25E9%2596%258B%25E3%2581%2599%25E3%2582%258Bscript%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nfukuoka%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRhZmNmOTYyNjMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nfukuoka</dc:creator></item><item><title><![CDATA[Linux: od でちょっと見慣れた感じに表示]]></title><description><![CDATA[od、デフォルト表示だとちょっと見辛いので、hex とasciiをどこかで見た風に表示するよう指定する
+od -v -t x1z -Ax
+
+表示例
+
+$ od -v -t x1z -Ax b.out
+000000 7f 45 4c 46 01 01 01 00 00 00 00 00 00 00 00 00  &gt;.ELF............&lt;
+000010 02 00 03 00 01 00 00 00 60 83 04 08 34 00 00 00  &gt;........`...4...&lt;
+000020
+]]></description><link>https://zenn.dev/nfukuoka/articles/qiita-20181104-c36ec710482e903a2528</link><guid isPermaLink="true">https://zenn.dev/nfukuoka/articles/qiita-20181104-c36ec710482e903a2528</guid><pubDate>Sat, 14 Jun 2025 05:05:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--cyHlxAvk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%253A%2520od%2520%25E3%2581%25A7%25E3%2581%25A1%25E3%2582%2587%25E3%2581%25A3%25E3%2581%25A8%25E8%25A6%258B%25E6%2585%25A3%25E3%2582%258C%25E3%2581%259F%25E6%2584%259F%25E3%2581%2598%25E3%2581%25AB%25E8%25A1%25A8%25E7%25A4%25BA%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nfukuoka%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRhZmNmOTYyNjMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nfukuoka</dc:creator></item><item><title><![CDATA[半自作Linuxで理解するLinux起動のしくみ]]></title><description><![CDATA[ブートからログインプロンプトに至るまでのLinuxの起動プロセスはどうなっているのか？ 本稿は、Linuxが起動する過程を「ブートローダ」と「ユーザ空間開始」の２つのポイントに分けて、それぞれの仕組みを解説しております。
+また机上理論だけではなく、中盤の章からは実際のUSBメモリからブートするLinuxの試作を通してリアルなブートまわりの理解を試みています。USBブートのLinuxは、debootstrapを活用して基礎研究に適したコンパクトなDebianベースシステムを「半自作Linux」のように構築します。
+ユーザ空間開始からはinitramfsとsystemdのユニットの理論をまとめており、最後は簡単なサービスの試作を紹介してます。]]></description><link>https://zenn.dev/akmidori/books/linuxbootseq</link><guid isPermaLink="true">https://zenn.dev/akmidori/books/linuxbootseq</guid><pubDate>Sat, 14 Jun 2025 00:12:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--RuPGcnR3--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci8zODYxMDEzYWJmLmpwZw==%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>AK-Midori</dc:creator></item><item><title><![CDATA[OS起動の仕組み（Linux）]]></title><description><![CDATA[はじめに
+OSが起動するまでの流れをざっくり記載。
+1.電源投入
+コンピュータの電源を投入すると、コンピュータのシステムが起動。
+2.UEFI起動（ハードウェアの初期化）
+UEFI(BIOS)はコンピュータのシステム起動時に最初に実行されるファームウェア。
+※ファームウェアとはコンピュータやスマートフォンなどの電子機器のハードウェアを動かすために組み込まれている専用のソフトウェア。主に機器の内部（チップやメモリ）に書き込まれており、電源を入れるとすぐに動き出して、ハードウェアの基本的な動作を制御する。
+【UEFIの主な動作】
+　├─メモリのチェック
+　├─ハードウェア設定の読み込み
+　├...]]></description><link>https://zenn.dev/eiken/articles/8181c0a968b45d</link><guid isPermaLink="true">https://zenn.dev/eiken/articles/8181c0a968b45d</guid><pubDate>Fri, 13 Jun 2025 23:15:54 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--uNrQh1J---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:OS%25E8%25B5%25B7%25E5%258B%2595%25E3%2581%25AE%25E4%25BB%2595%25E7%25B5%2584%25E3%2581%25BF%25EF%25BC%2588Linux%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:enjine%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvZS5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>enjine</dc:creator></item><item><title><![CDATA[【Linux】テキスト入力可能なログ保存方法！]]></title><description><![CDATA[普通、Linuxでログを保存するときは
+go run main.go &gt; output.txt 2&gt;&amp;1
+みたいに書きますが、これだとログがリアルタイムで表示されないがためにテキスト入力ができません。
+
+修正後
+go run main.go |&amp; tee output.txt
+
+【解説】
+|&amp;: 標準出力と標準エラー出力を一緒にパイプする
+tee output.txt: 受け取った出力を「画面に表示」＋「output.txtに保存」
+もし、output.txtが既に存在していて、そこに書き加える形で出力したい場合は、teeの後に-aオプションをつけるこ...]]></description><link>https://zenn.dev/glisan/articles/e7264c0aa7bf6d</link><guid isPermaLink="true">https://zenn.dev/glisan/articles/e7264c0aa7bf6d</guid><pubDate>Fri, 13 Jun 2025 15:07:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--JZ4e1_5V--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Linux%25E3%2580%2591%25E3%2583%2586%25E3%2582%25AD%25E3%2582%25B9%25E3%2583%2588%25E5%2585%25A5%25E5%258A%259B%25E5%258F%25AF%25E8%2583%25BD%25E3%2581%25AA%25E3%2583%25AD%25E3%2582%25B0%25E4%25BF%259D%25E5%25AD%2598%25E6%2596%25B9%25E6%25B3%2595%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25B0%25E3%2583%25AA%25E3%2583%2583%25E3%2582%25B5%25E3%2583%25B3%25E3%2583%2589%25E3%2580%2582%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M0MzU1YzBlZDcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>グリッサンド。</dc:creator></item><item><title><![CDATA[Linuxの基礎コマンド]]></title><description><![CDATA[
+ Linuxの基礎コマンドを使いこなそう
+
+Linuxには英単語くらいに数多くのコマンドが存在しています。
+それらを全て覚えて使いこなせるようになるまでに数十年、数百年かかるかもしれない…
+基本的な9つのコマンドのうち、5つ紹介します！
+
+
+ pwd
+
+「print work directory」の略
+現在の作業ディレクトリ「カレントディレクトリ」を絶対パスで表示する。
+迷子防止のために、ディレクトリを移動したときは必ず使って確認しています。
+pwd
+
+
+ ls
+
+「list segments」の略
+ディレクトリに存在するファイルやディレクトリの一覧を表示する。
+今いるディレクトリや指...]]></description><link>https://zenn.dev/kenichiburoro/articles/c8753e0ef60139</link><guid isPermaLink="true">https://zenn.dev/kenichiburoro/articles/c8753e0ef60139</guid><pubDate>Fri, 13 Jun 2025 06:56:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--saa20mgt--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%25E3%2581%25AE%25E5%259F%25BA%25E7%25A4%258E%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%2588%25B8%25E5%25B3%25B6%25E3%2580%2580%25E5%2581%25A5%25E4%25B8%2580%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSmxzSDMtU2hZeVZOUmlOUzRHREVVeDVIX2NscjVCekY4Um9Qdkk2Nlhrenk3UVNyclc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>戸島　健一</dc:creator></item><item><title><![CDATA[vimの使い方]]></title><description><![CDATA[vimを操作する際にコマンドを忘れがちなので、まとめておきます。
+
+ vimを使ってファイルを開く
+"vim file.md"
+このfile.mdはどのファイルでも開けます。
+
+ vimでファイルの編集を行う
+vimはコマンドが多く、重要なコマンドを見つけにくいので、普段良く使うものをまとめました。
+
+
+
+コマンド
+コマンド内容
+
+
+
+
+i
+インサートモード (文字の入力が可能)
+
+
+esc
+ノーマルモード (モードの選択)
+
+
+v
+ビジュアルモード (文字の選択)
+
+
+d
+文字の削除
+
+
+:w
+ファイルの保存
+
+
+:q
+編集終了
+
+
+:q!
+保存せず終了
+
+
+
+
+ 最後に
+vimは、U...]]></description><link>https://zenn.dev/airin/articles/tips_6-13-2025_vim</link><guid isPermaLink="true">https://zenn.dev/airin/articles/tips_6-13-2025_vim</guid><pubDate>Fri, 13 Jun 2025 05:21:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--P3UyAMC0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:vim%25E3%2581%25AE%25E4%25BD%25BF%25E3%2581%2584%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:poe125%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSkl5c0pkNGR1RFBsbzUya3NHMlN0bzBiRUdBTUcxb0xzMEVQMHVTd3hZYVR4QkVnPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>poe125</dc:creator></item><item><title><![CDATA[Linuxのファイルシステム]]></title><description><![CDATA[
+ はじめに
+
+こんにちは。ふまたんです。今回の記事は、Linuxのファイルシステムについてまとめていきたいと思います。
+どの階層にどんなデータが格納されるのか、記事にしていこうと思います。
+LinuCの学習をしていてファイルシステムを問われる問題があり、各ファイルにどんな役割があるのかまとめようと思い、記事にしてみようと思いました。
+
+
+ Filesystem Hierarchy Standard (FHS)
+ファイルシステムの詳細をまとめる前に、Filesystem Hierarchy Standard (FHS) について少しまとめていきます。
+FHSとは、Linuxを含むUnix...]]></description><link>https://zenn.dev/whomatan/articles/7552fcfdd10511</link><guid isPermaLink="true">https://zenn.dev/whomatan/articles/7552fcfdd10511</guid><pubDate>Thu, 12 Jun 2025 23:45:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--NZy-Ahs3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%25E3%2581%25AE%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25B5%25E3%2581%25BE%25E3%2581%259F%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS09yeC1lSjJ5Z2tqa3Y3dlZkcUxNUE9KemtIZTJVcFYwVzZicFFSMHZZSTFBak51Zmo9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ふまたん</dc:creator></item><item><title><![CDATA[Podman + Quadlet で OneDrive の Linux クライアントを自動起動する(systemd対応)]]></title><description><![CDATA[
+ 背景
+
+自分のPC買い替えのときにせっかくなので podman に切り替えてみた
+docker だと --restart always を入れれば Docker の起動時に自動でコンテナが立ち上がってくれるが podman はサービス化に一手間必要
+
+OneDrive Client for Linux はコンテナイメージでも配布されている。コンテナを自動起動する方法として、ドキュメントでは podman generate systemd で systemd のユニットファイルを生成するやり方が記載されていたが、このコマンドは非推奨になったようなので Quadlet を使うことにした
+...]]></description><link>https://zenn.dev/ykrods/articles/b8a19698c2932e</link><guid isPermaLink="true">https://zenn.dev/ykrods/articles/b8a19698c2932e</guid><pubDate>Thu, 12 Jun 2025 04:28:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--NfMjj0WX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Podman%2520%252B%2520Quadlet%2520%25E3%2581%25A7%2520OneDrive%2520%25E3%2581%25AE%2520Linux%2520%25E3%2582%25AF%25E3%2583%25A9%25E3%2582%25A4%25E3%2582%25A2%25E3%2583%25B3%25E3%2583%2588%25E3%2582%2592%25E8%2587%25AA%25E5%258B%2595%25E8%25B5%25B7%25E5%258B%2595%25E3%2581%2599%25E3%2582%258B%2528systemd%25E5%25AF%25BE%25E5%25BF%259C%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ykrods%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4WlBRUzctLVUzaHJPQ3B3bVViRkpJZmRoTEktY0pUcWVpRVRSVTQ9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ykrods</dc:creator></item><item><title><![CDATA[Linux　Webサーバー構築(Apache)]]></title><description><![CDATA[
+ 第1章：はじめに
+
+ 概要
+このブログでは、無料で安定性の高いLinuxディストリビューション「AlmaLinux」を使って、Apache（httpd）Webサーバーを構築する手順を紹介します。CentOSの後継として注目されているAlmaLinuxは、企業利用にも適しており、学習用途にも最適です。
+Linux初心者でも安心して取り組めるように、各コマンドの意味やポイントも丁寧に解説していきます。
+
+
+ 第2章：Apacheのインストール
+まずはWebサーバーの中核となるApacheをインストールします。AlmaLinuxでは「httpd」という名前で提供されています。
+
+ ステップ...]]></description><link>https://zenn.dev/kenshinyamamoto/articles/c5429ce7dbd599</link><guid isPermaLink="true">https://zenn.dev/kenshinyamamoto/articles/c5429ce7dbd599</guid><pubDate>Thu, 12 Jun 2025 00:51:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qCizhTrP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%25E3%2580%2580Web%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E6%25A7%258B%25E7%25AF%2589%2528Apache%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kenshin%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS1pLVWprWFB2Sk9GcHRzeUQtTVQ1d3pvVnBHd3pWZHpFMlVmSExCOFJGSmNjX0lEMTQ9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kenshin</dc:creator></item><item><title><![CDATA[Mac/Linuxユーザーのためのターミナルでよく使う基本コマンド。〜その2〜編集・コピー・差分・表示 編]]></title><description><![CDATA[どうも、かりんです。
+前回の記事、Mac/Linuxユーザーのためのターミナルでよく使う基本コマンド〜その1〜では、MacやLinuxでターミナルを使う際によく登場する基本的なコマンドを紹介しました。
+今回はその続きとして、「ファイルの中身を見たい」「コピーしたい」「編集したい」「違いを見比べたい」といった日常操作で使う基本コマンドを紹介していきます。
+この記事も初心者の方向けに、「この場面ではこう使う」というシーンと一緒にできるだけシンプルにまとめています。
+
+ ファイルの中身を確認する（短いファイル）
+・コマンド
+cat ファイル名
+・用途
+テキストファイルなどの中身をそのまま表示し...]]></description><link>https://zenn.dev/karin_lab/articles/28bf751c824563</link><guid isPermaLink="true">https://zenn.dev/karin_lab/articles/28bf751c824563</guid><pubDate>Wed, 11 Jun 2025 23:34:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--f9jKvmxl--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Mac%252FLinux%25E3%2583%25A6%25E3%2583%25BC%25E3%2582%25B6%25E3%2583%25BC%25E3%2581%25AE%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%25E3%2582%25BF%25E3%2583%25BC%25E3%2583%259F%25E3%2583%258A%25E3%2583%25AB%25E3%2581%25A7%25E3%2582%2588%25E3%2581%258F%25E4%25BD%25BF%25E3%2581%2586%25E5%259F%25BA%25E6%259C%25AC%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2580%2582%25E3%2580%259C%25E3%2581%259D%25E3%2581%25AE2%25E3%2580%259C%25E7%25B7%25A8%25E9%259B%2586%25E3%2583%25BB%25E3%2582%25B3%25E3%2583%2594%25E3%2583%25BC%25E3%2583%25BB%25E5%25B7%25AE%25E5%2588%2586%25E3%2583%25BB%25E8%25A1%25A8%25E7%25A4%25BA%2520%25E7%25B7%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258B%25E3%2582%258A%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2ZmNjQ5NDk1MzMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>かりん</dc:creator></item><item><title><![CDATA[Meow | Hack The Box Writeup]]></title><description><![CDATA[
+ マシン情報
+
+マシン名：Meow
+
+
+ 攻略方法
+
+ 1. ポートスキャン
+nmapコマンドでポートスキャンします。
+nmap -sV {マシンIP}
+nmapのオプション
+-sV：サービスのバージョンを検出する
+
+
+23番ポートでtelnetが稼働していることがわかります。
+
+ 2. 検出されたサービスに接続
+telnetコマンドでサーバーに接続してみます
+ログイン名を聞かれるので試しにrootと入力してみたところ、パスワードなしでログインできてしまいます。
+telnet {マシンIP}
+
+
+ 3. flag取得
+lsコマンドでファイルやフォルダを一覧表示すると、flag.txtが...]]></description><link>https://zenn.dev/maetsuyo/articles/ad0b2274bfd67e</link><guid isPermaLink="true">https://zenn.dev/maetsuyo/articles/ad0b2274bfd67e</guid><pubDate>Wed, 11 Jun 2025 15:20:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vyqvi5hC--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:Meow%2520%257C%2520Hack%2520The%2520Box%2520Writeup%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%2589%258D%25E7%2594%25B0%25E5%2589%259B%25E5%25BF%2597%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSTF1WVdfQVQzMVhJWXBKMGIwc1lJX1ZjcExBSUtiLWR2UEhjRVZHSFdwSGhrU0xRPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>前田剛志</dc:creator></item><item><title><![CDATA[2025年の今、開発用OSとして私がMX Linux(xfce)を推す理由]]></title><description><![CDATA[
+ はじめに
+2025年、今年は何の年かわかりますか？
+そう、Linuxのデスクトップ元年です！
+2025年10月、Windows 10のサポートが終了し、Windows 11のシステム要件が厳しくなったことで、
+多くのPCがLinuxデスクトップへの移行が加速する・・・と超期待しています
+そんな2025年の今、あくまで個人の感想ですが開発用OSとしてMX Linux(xfce)を推す理由
+をまとめてみました。
+*筆者はMX Linuxとmanjaro Linuxを普段使いとして使っています。
+fedoraやubuntuでもvirtual boxで遊んでいたりします。
+
+ 開発用OSとし...]]></description><link>https://zenn.dev/ko202305/articles/78cbdf02768660</link><guid isPermaLink="true">https://zenn.dev/ko202305/articles/78cbdf02768660</guid><pubDate>Wed, 11 Jun 2025 11:58:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--pDx8t8Tt--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:2025%25E5%25B9%25B4%25E3%2581%25AE%25E4%25BB%258A%25E3%2580%2581%25E9%2596%258B%25E7%2599%25BA%25E7%2594%25A8OS%25E3%2581%25A8%25E3%2581%2597%25E3%2581%25A6%25E7%25A7%2581%25E3%2581%258CMX%2520Linux%2528xfce%2529%25E3%2582%2592%25E6%258E%25A8%25E3%2581%2599%25E7%2590%2586%25E7%2594%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kosuke%2520Oya%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4Yms1LW9HVkRyd3RPRFJmZWFJby1xSkk4MXBqR2ZCY2xjVnA4YVI9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kosuke Oya</dc:creator></item></channel></rss>

@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「TypeScript」のフィード]]></title><description><![CDATA[Zennのトピック「TypeScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/typescript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/f13e758fdb.png</url><title>Zennの「TypeScript」のフィード</title><link>https://zenn.dev/topics/typescript</link></image><generator>zenn.dev</generator><lastBuildDate>Tue, 17 Jun 2025 07:01:05 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/typescript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[リファクタリング？if文って美味しいの？]]></title><description><![CDATA[
+ if文のリファクタリングあるある
+本記事では、TypeScriptで書きます。
+
+ 1. if文の中にif文を書いてすぐreturn
+before リファクタリング
+// その1　値比較
+if ( a === 1 ) {
+    if ( b === 2 )
+        return true
+}
+
+// その２　真偽比較
+if ( result === "成功" ) {
+    if ( this.navigateToProfilePage( this.profile.name ) )
+        return
+}
+after リファクタリング// その1　値比較
+if (...]]></description><link>https://zenn.dev/protagonist/articles/f0de6889e2df62</link><guid isPermaLink="true">https://zenn.dev/protagonist/articles/f0de6889e2df62</guid><pubDate>Tue, 17 Jun 2025 03:20:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--F9WXz4Z9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%25AA%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25AF%25E3%2582%25BF%25E3%2583%25AA%25E3%2583%25B3%25E3%2582%25B0%25EF%25BC%259Fif%25E6%2596%2587%25E3%2581%25A3%25E3%2581%25A6%25E7%25BE%258E%25E5%2591%25B3%25E3%2581%2597%25E3%2581%2584%25E3%2581%25AE%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25BF%25E3%2582%25B4%2520%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdmOGQzNTUzM2QuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>プロタゴ🚀</dc:creator></item><item><title><![CDATA[TypeScriptのUnion Type活用術：APIレスポンスで学ぶ実践的な型設計]]></title><description><![CDATA[
+ はじめに
+フロントエンド開発において、TypeScriptのUnion Typeは強力な型安全性を提供する重要な機能です。特にAPIレスポンスの型定義では、Union Typeを使うかOptional Propertiesを使うかで、実装が変わります。
+
+ 具体例：ユーザー検索APIのレスポンス
+以下のようなユーザー検索APIがあるとします：
+// 成功時のレスポンス
+{
+  "status": "success",
+  "data": {
+    "users": [
+      {
+        "id": "123",
+        "name": "田中太郎",
+    ...]]></description><link>https://zenn.dev/aki05162525/articles/572926c2470e60</link><guid isPermaLink="true">https://zenn.dev/aki05162525/articles/572926c2470e60</guid><pubDate>Tue, 17 Jun 2025 02:54:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--qNIUhHAq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%25E3%2581%25AEUnion%2520Type%25E6%25B4%25BB%25E7%2594%25A8%25E8%25A1%2593%25EF%25BC%259AAPI%25E3%2583%25AC%25E3%2582%25B9%25E3%2583%259D%25E3%2583%25B3%25E3%2582%25B9%25E3%2581%25A7%25E5%25AD%25A6%25E3%2581%25B6%25E5%25AE%259F%25E8%25B7%25B5%25E7%259A%2584%25E3%2581%25AA%25E5%259E%258B%25E8%25A8%25AD%25E8%25A8%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2584%25E3%2582%258B%25E3%2581%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSjBaM1pHbFo2RUJSc0NDTnVqeUpRV0U0eXEzczZJeTNYR1NPdHE2a21ZR3dNSWpqTXA9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>いるか</dc:creator></item><item><title><![CDATA[コード品質を保つ ESLint のルール設定]]></title><description><![CDATA[
+ はじめに
+ESLint は JavaScript/TypeScript プロジェクトにおいて、コードの品質を保つために欠かせないツールです。適切な設定により、チーム全体でコードの一貫性を保ち、バグの早期発見やメンテナンス性の向上を実現できます。
+本記事では、当プロジェクトで採用している ESLint 設定を、その目的や効果に応じて以下のカテゴリーに分類して解説します：
+
+
+可読性（Readability）: コードの読みやすさを向上させるルール
+
+メンテナンス性（Maintainability）: 長期的な保守性を高めるルール
+
+品質・複雑性管理（Quality &amp; Comp...]]></description><link>https://zenn.dev/superstudio/articles/cf84eb91eb560e</link><guid isPermaLink="true">https://zenn.dev/superstudio/articles/cf84eb91eb560e</guid><pubDate>Tue, 17 Jun 2025 01:11:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--VgytrIo5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E5%2593%2581%25E8%25B3%25AA%25E3%2582%2592%25E4%25BF%259D%25E3%2581%25A4%2520ESLint%2520%25E3%2581%25AE%25E3%2583%25AB%25E3%2583%25BC%25E3%2583%25AB%25E8%25A8%25AD%25E5%25AE%259A%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Mun%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2U4NWIxMTkzZGYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:SUPER%2520STUDIO%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2EzYjFmZWMwMDQuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Mun</dc:creator></item><item><title><![CDATA[【個人開発】AI学習の"次の一冊"が見つかる！教材ライブラリ「SAKAItechLibrary」を公開しました]]></title><description><![CDATA[皆さん、こんにちは！
+この度、「未来を創るAI技術を、深く・体系的に学ぶ」をコンセプトにした電子書籍・教材のライブラリサイト SAKAItechLibrary を個人開発しました。
+Webサイトはこちら
+https://sakaitechlibrary.web.app/
+「AIを学びたいけど、どの本から読めばいいかわからない…」
+「自分のレベルに合った、実践的な教材が見つからない…」
+そんな悩みを解決するための一助となればと思い、このサイトを開発しました。
+
+ 「SAKAItechLibrary」とは？
+AI・機械学習・深層学習の分野に特化した、書籍や教材を探せるライブラリサイトです。
+...]]></description><link>https://zenn.dev/sakai13/articles/419d380f76b984</link><guid isPermaLink="true">https://zenn.dev/sakai13/articles/419d380f76b984</guid><pubDate>Mon, 16 Jun 2025 23:53:26 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--EVqu0NcJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%2580%258B%25E4%25BA%25BA%25E9%2596%258B%25E7%2599%25BA%25E3%2580%2591AI%25E5%25AD%25A6%25E7%25BF%2592%25E3%2581%25AE%2522%25E6%25AC%25A1%25E3%2581%25AE%25E4%25B8%2580%25E5%2586%258A%2522%25E3%2581%258C%25E8%25A6%258B%25E3%2581%25A4%25E3%2581%258B%25E3%2582%258B%25EF%25BC%2581%25E6%2595%2599%25E6%259D%2590%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%25E3%2580%258CSAKAItechLibrary%25E3%2580%258D%25E3%2582%2592%25E5%2585%25AC%25E9%2596%258B%25E3%2581%2597%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:SAKAItech%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I2OWI1OWY3NGUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>SAKAItech</dc:creator></item><item><title><![CDATA[【個人開発】AI・プログラミング初学者のための学習サイト「SAKAItech」を公開しました！]]></title><description><![CDATA[皆さん、こんにちは！
+この度、AIやプログラミングを学ぶためのUdemy講座紹介サイト「SAKAItech」を個人開発し、リリースしました！
+Webサイトはこちら
+https://udemy-c1f90.web.app/
+この記事では、サイトを作った想いや特徴、そして使用した技術についてご紹介します。
+
+ 背景：なぜこのサイトを作ったのか
+私自身、AIやプログラミングを学習する中で、「何から学べばいいかわからない」「環境構築で挫折してしまった」という声をよく耳にしてきました。
+そこで、初心者でも、実践的かつ視覚的に楽しく学べるコンテンツを届けたいという想いから、学習の入り口となるようなプ...]]></description><link>https://zenn.dev/sakai13/articles/ad7aa31b87efdd</link><guid isPermaLink="true">https://zenn.dev/sakai13/articles/ad7aa31b87efdd</guid><pubDate>Mon, 16 Jun 2025 23:42:13 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--gfDbCgE5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%2580%258B%25E4%25BA%25BA%25E9%2596%258B%25E7%2599%25BA%25E3%2580%2591AI%25E3%2583%25BB%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%259F%25E3%2583%25B3%25E3%2582%25B0%25E5%2588%259D%25E5%25AD%25A6%25E8%2580%2585%25E3%2581%25AE%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%25E5%25AD%25A6%25E7%25BF%2592%25E3%2582%25B5%25E3%2582%25A4%25E3%2583%2588%25E3%2580%258CSAKAItech%25E3%2580%258D%25E3%2582%2592%25E5%2585%25AC%25E9%2596%258B%25E3%2581%2597%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:SAKAItech%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I2OWI1OWY3NGUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>SAKAItech</dc:creator></item><item><title><![CDATA[TypeScript でオーバーロードシグネチャよりジェネリックを使った条件型を優先して使用すべき理由]]></title><description><![CDATA[TypeScript で関数の型定義時、「引数の型に応じて戻り値の型を変えたい」というケースがありますよね。そのようなときに選択肢としてあるオーバーロードシグネチャですが、多くのケースで条件型を使った方がより良い策となります。
+本記事では、オーバーロードシグネチャと条件型の違いを詳しく比較し、なぜ条件型を優先すべきなのかを実例とともに解説します。この記事を読めば、TypeScript でより型安全で拡張性の高いコードが書けるようになります。
+
+ オーバーロードシグネチャとは関数に複数の呼び出し方法を定義する仕組み
+オーバーロードシグネチャは、同じ関数に対して複数の異なるシグネチャを定義す...]]></description><link>https://zenn.dev/m0t0taka/articles/972f92b7185408</link><guid isPermaLink="true">https://zenn.dev/m0t0taka/articles/972f92b7185408</guid><pubDate>Mon, 16 Jun 2025 23:32:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--EFXFrM8u--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%2520%25E3%2581%25A7%25E3%2582%25AA%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2589%25E3%2582%25B7%25E3%2582%25B0%25E3%2583%258D%25E3%2583%2581%25E3%2583%25A3%25E3%2582%2588%25E3%2582%258A%25E3%2582%25B8%25E3%2582%25A7%25E3%2583%258D%25E3%2583%25AA%25E3%2583%2583%25E3%2582%25AF%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%259F%25E6%259D%25A1%25E4%25BB%25B6%25E5%259E%258B%25E3%2582%2592%25E5%2584%25AA%25E5%2585%2588%25E3%2581%2597%25E3%2581%25A6%25E4%25BD%25BF%25E7%2594%25A8%25E3%2581%2599%25E3%2581%25B9%25E3%2581%258D%25E7%2590%2586%25E7%2594%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258E%25E3%2583%25BC%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQxZTJhNzliZWMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ぎー</dc:creator></item><item><title><![CDATA[配列のconstって意味なくね？の違和感から始める配列の"非"破壊的操作の勉強【Javascript/Typescript】]]></title><description><![CDATA[Typescript初心者の時にconstを使っていると、
+値の変更ができないのが使いづらいと思っていたのですが、その一方で、
+「配列やオブジェクトの場合はconstでも中身の値は変更できるんだ！ラッキー！」
+と思ってコーディングしていました。しかしある時、
+「あれ、配列の中身の値を変えれたらconst使ってる意味なくね？letで良くね？」
+そんな違和感に気付いてしまったエンジニアの方々が、配列の破壊的操作と"非"破壊的操作について学ぶきっかけになればと思い、この記事を書きました
+
+ 破壊的操作とは
+ここまで読んでくれた方は気付いるかもしれませんが、配列の破壊的操作とは、
+配列やオブジェ...]]></description><link>https://zenn.dev/kanamo/articles/f4670121ca45cd</link><guid isPermaLink="true">https://zenn.dev/kanamo/articles/f4670121ca45cd</guid><pubDate>Mon, 16 Jun 2025 21:34:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Ac_HROW4--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E9%2585%258D%25E5%2588%2597%25E3%2581%25AEconst%25E3%2581%25A3%25E3%2581%25A6%25E6%2584%258F%25E5%2591%25B3%25E3%2581%25AA%25E3%2581%258F%25E3%2581%25AD%25EF%25BC%259F%25E3%2581%25AE%25E9%2581%2595%25E5%2592%258C%25E6%2584%259F%25E3%2581%258B%25E3%2582%2589%25E5%25A7%258B%25E3%2582%2581%25E3%2582%258B%25E9%2585%258D%25E5%2588%2597%25E3%2581%25AE%2522%25E9%259D%259E%2522%25E7%25A0%25B4%25E5%25A3%258A%25E7%259A%2584%25E6%2593%258D%25E4%25BD%259C%25E3%2581%25AE%25E5%258B%2589%25E5%25BC%25B7%25E3%2580%2590Javascript%252FTypesc...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258B%25E3%2581%25AA%25E3%2582%2582%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q4ZGZmMzkyOTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>かなも</dc:creator></item><item><title><![CDATA[TypeScriptの初めての学習についてのまとめ]]></title><description><![CDATA[
+ 1. TypeScriptとは何か？
+
+
+TypeScriptは、JavaScriptに型（Type）の概念を追加したプログラミング言語。
+型とは、変数や関数が扱うデータの種類を明確に定義するための仕組み。
+
+
+ TypeScriptの特徴
+
+拡張子は .ts または .tsx を使用する
+変数や関数の引数・戻り値などに型を指定できる
+型定義によりコードが自己ドキュメント化される
+既存のJavaScriptと互換性があり、段階的な導入が容易
+
+@types を利用すれば、型のないライブラリも型安全に使用可能
+
+React や Vue などのフレームワークとの相性が良い
+
+
+ Type...]]></description><link>https://zenn.dev/tteaoocl/articles/47d383730a51f9</link><guid isPermaLink="true">https://zenn.dev/tteaoocl/articles/47d383730a51f9</guid><pubDate>Mon, 16 Jun 2025 15:02:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--EnwEsiTr--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:TypeScript%25E3%2581%25AE%25E5%2588%259D%25E3%2582%2581%25E3%2581%25A6%25E3%2581%25AE%25E5%25AD%25A6%25E7%25BF%2592%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25E3%2581%25AE%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hasegawa%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSkYxQWtRaGVBVlJ2Tldac0dZQUVSbFAyX2dQUktEZlZiQUhTMUlIOEM2T3c9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hasegawa</dc:creator></item><item><title><![CDATA[Astro最初のつまずきメモ]]></title><description><![CDATA[
+ 初めに
+備忘録なので役に立たない情報かもしれません
+Astro を初めて使うと「ドキュメント通りに書いたはずなのに動かない…」とつまずきがちです。ここでは筆者自身が遭遇した“初段”のトラブル事例を3つピックアップし、原因とナイスハックをお届けします。
+
+ 1. frontmatter（YAML ヘッダー）を忘れる
+
+ 症状
+[error] Could not parse frontmatter.
+新規 .astro ファイルを追加しても画面が白紙のまま。ターミナルに上記エラー。
+
+ 原因
+Astro はページ冒頭に --- で囲んだ frontmatter が必須。内容が不要でも「空...]]></description><link>https://zenn.dev/mergelog/articles/bb67ba17615f0f</link><guid isPermaLink="true">https://zenn.dev/mergelog/articles/bb67ba17615f0f</guid><pubDate>Mon, 16 Jun 2025 14:37:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---fbUro-t--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Astro%25E6%259C%2580%25E5%2588%259D%25E3%2581%25AE%25E3%2581%25A4%25E3%2581%25BE%25E3%2581%259A%25E3%2581%258D%25E3%2583%25A1%25E3%2583%25A2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%25AB%25E3%2583%2594%25E3%2583%2590%25E3%2583%25A9%25E7%25AE%25A1%25E7%2590%2586%25E4%25BA%25BA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU5YjEyOGQ4NTQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>カピバラ管理人</dc:creator></item><item><title><![CDATA["Uncaught SyntaxError: Unexpected token ':'"が出た場合]]></title><description><![CDATA[久しぶりにTSでコードを書いてみて嬉々として実行しようとしたらエラーが出たのでその備忘録です。
+
+ 状況
+googleマップを表示させるために以下のコードを書き、実行しようとした。
+
+index
+let map: google.maps.Map;
+
+async function initMap(): Promise&lt;void&gt; {
+  const { Map } = await google.maps.importLibrary("maps") as google.maps.MapsLibrary;
+  map = new Map(document.getElementByI...]]></description><link>https://zenn.dev/haru0510/articles/ed4970e09e30ec</link><guid isPermaLink="true">https://zenn.dev/haru0510/articles/ed4970e09e30ec</guid><pubDate>Mon, 16 Jun 2025 13:25:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5Ac94zG6--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%2522Uncaught%2520SyntaxError%253A%2520Unexpected%2520token%2520%2527%253A%2527%2522%25E3%2581%258C%25E5%2587%25BA%25E3%2581%259F%25E5%25A0%25B4%25E5%2590%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:haru%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzJhY2IxYzU2YmEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>haru</dc:creator></item><item><title><![CDATA[話題のMCPを使ってモバイルオーダーアプリを作ってみた]]></title><description><![CDATA[
+ はじめに
+昨年11月にAnthropic社が提唱したMCP（Model Context Protocol）が話題ですね。MCPは、AIモデルとアプリケーション間のコミュニケーションを標準化する新しいプロトコルです。
+株式会社Samuraiでは、オムニチャネルを管理するためのパッケージシステム「Airbeyond」を提供しています。商品情報や注文情報、会員情報などを一元管理できるこのシステムは、モバイルオーダーを導入したい飲食店様やECサイトを運営する企業様に広くご利用いただいています。
+そこで、MCPを活用したモバイルオーダーアプリのプロトタイプをサクッと開発しましたので、その体験を...]]></description><link>https://zenn.dev/nonejp/articles/0fa3dadf4a3363</link><guid isPermaLink="true">https://zenn.dev/nonejp/articles/0fa3dadf4a3363</guid><pubDate>Mon, 16 Jun 2025 08:41:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Ql6Ssm59--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%25A9%25B1%25E9%25A1%258C%25E3%2581%25AEMCP%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2583%25A2%25E3%2583%2590%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%25AA%25E3%2583%25BC%25E3%2583%2580%25E3%2583%25BC%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:moro934%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q1NTJjOGRjY2YuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:NonEntropy%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NhZTVjMWM5MmMuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>moro934</dc:creator></item><item><title><![CDATA[A2A JS サンプル: 映画エージェント]]></title><description><![CDATA[
+
+ ソースコード
+A2A JS サンプル: 映画エージェント
+
+ プロジェクト概要
+このプロジェクトは、A2A（Agent-to-Agent）フレームワークで構築された包括的な映画情報エージェントを実演します。このエージェントは、TMDB（The Movie Database）APIを活用して詳細な映画情報、検索機能、およびOpenRouter統合を通じたAI駆動の会話機能を提供します。
+
+ 主な機能
+
+
+強化されたTMDB API統合: Bearerトークン認証を使用した現代的な実装
+
+包括的な映画検索: 年、アダルトコンテンツなどのフィルターで映画を検索
+
+マルチ検索機能: 映画、...]]></description><link>https://zenn.dev/czmilo/articles/1aef63f48e8750</link><guid isPermaLink="true">https://zenn.dev/czmilo/articles/1aef63f48e8750</guid><pubDate>Mon, 16 Jun 2025 07:03:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Mlr4Ujj7--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:A2A%2520JS%2520%25E3%2582%25B5%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AB%253A%2520%25E6%2598%25A0%25E7%2594%25BB%25E3%2582%25A8%25E3%2583%25BC%25E3%2582%25B8%25E3%2582%25A7%25E3%2583%25B3%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:milo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS1ViZDhTc2tuMVIwekdDeEdoX05MbUdISW1pV21UaDdZdnBhSmR2WDM3V2JzWlJEUks9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>milo</dc:creator></item><item><title><![CDATA[設計作成アプリを自作してみる]]></title><description><![CDATA[
+ はじめに
+変化が起きない時代よりも変化の激しい時代の方が面白いと感じているAIエンジニアです。
+歴史的に見ると変化のスパン（感覚や周期）はどんどん短くなっているらしいです。
+なかなか良い時代を生きている気がします。
+取り残されないように注意しつつ、楽しんでいきたいと思います。
+さて、生成AI活用に関するセミナーで開発用の設計を作成するツールを見て衝撃を受けました。
+無性に作りたくなったのでアプリ開発の勉強をしつつ作ってみた、という感じの記事です。
+フロントエンドはReact + TypeScriptを触って半年程度、バックエンドは初挑戦レベルの人の記事です。
+私はGPTのAPI登録を...]]></description><link>https://zenn.dev/goals_techblog/articles/d96121d4e4966c</link><guid isPermaLink="true">https://zenn.dev/goals_techblog/articles/d96121d4e4966c</guid><pubDate>Mon, 16 Jun 2025 06:04:20 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--q_VsUhYL--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%25A8%25AD%25E8%25A8%2588%25E4%25BD%259C%25E6%2588%2590%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E8%2587%25AA%25E4%25BD%259C%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Kei%2520TAKAHATA%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY0ZmMzNjliMDYuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Goals%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RiNjg4MDE4MTguanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kei TAKAHATA</dc:creator></item><item><title><![CDATA[大規模 Node.js サーバーに潜むパフォーマンス上のリスクを Event Loop から理解する]]></title><description><![CDATA[潜んでいるリスク、一番苦手なリスクです！どうも、whatasoda です。
+モノリシックなサービスでは、サービスの成長とともに 1 つのアプリケーションの中にさまざまな性質の処理が混在するようになります。Node.js のようなシングルスレッドで処理が実行されるランタイムでは、複数の処理を走らせる場合に 1 つしかないスレッドを取り合う形で互いの処理を待機させ合うような振る舞いをすることがあります。
+技術スタックを TypeScript に統一しているダイニーでは当然バックエンドの API サーバーを Node.js 上で実行しています。過去、「注文の受付」や「会計処理」といったリアルタ...]]></description><link>https://zenn.dev/dinii/articles/f09d21542871ae</link><guid isPermaLink="true">https://zenn.dev/dinii/articles/f09d21542871ae</guid><pubDate>Mon, 16 Jun 2025 05:08:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--JBN3bZzq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%25A4%25A7%25E8%25A6%258F%25E6%25A8%25A1%2520Node.js%2520%25E3%2582%25B5%25E3%2583%25BC%25E3%2583%2590%25E3%2583%25BC%25E3%2581%25AB%25E6%25BD%259C%25E3%2582%2580%25E3%2583%2591%25E3%2583%2595%25E3%2582%25A9%25E3%2583%25BC%25E3%2583%259E%25E3%2583%25B3%25E3%2582%25B9%25E4%25B8%258A%25E3%2581%25AE%25E3%2583%25AA%25E3%2582%25B9%25E3%2582%25AF%25E3%2582%2592%2520Event%2520Loop%2520%25E3%2581%258B%25E3%2582%2589%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:whatasoda%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZhNTVhMGJiNDIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Dinii%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzdlZWE3MDkzNTkuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>whatasoda</dc:creator></item><item><title><![CDATA[Next.jsのApp Routerでライブラリに頼らない多言語対応]]></title><description><![CDATA[
+ はじめに
+以前、こちらの記事を書いた時は昔だったのでPages Routerが前提でまだ自前でi18n対応するのは簡単でした
+https://zenn.dev/steelydylan/articles/nextjs-with-i18n
+最近はNext.jsのApp RouterでWebアプリを作るので、作ったサイトを国際化対応したのですが、ライブラリの選定に悩みました。
+昔みたいにクライアントコンポーネントだけが前提ではなく、サーバーコンポーネントとクライアントコンポーネントがApp Routerでは混在しているので、単純にhooksを使うだけでは解決できないからです！
+そのため、最...]]></description><link>https://zenn.dev/progate/articles/app-router-i18n-without-library</link><guid isPermaLink="true">https://zenn.dev/progate/articles/app-router-i18n-without-library</guid><pubDate>Sun, 15 Jun 2025 22:30:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--OP9GlOrq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Next.js%25E3%2581%25AEApp%2520Router%25E3%2581%25A7%25E3%2583%25A9%25E3%2582%25A4%25E3%2583%2596%25E3%2583%25A9%25E3%2583%25AA%25E3%2581%25AB%25E9%25A0%25BC%25E3%2582%2589%25E3%2581%25AA%25E3%2581%2584%25E5%25A4%259A%25E8%25A8%2580%25E8%25AA%259E%25E5%25AF%25BE%25E5%25BF%259C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Godai%2520Hori%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2UzOTZjNjhlM2MuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Progate%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzU2MzlkZTY4MGYuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Godai Hori</dc:creator></item><item><title><![CDATA[スプレッド構文を１行で理解する【Javascript / Typescript 初心者向け】]]></title><description><![CDATA[スプレッド構文の使い方が初心者の頃はよく分かっておらず、Webで調べてみても難しい説明ばかりでなかなか理解が進まなかった記憶があるので、
+簡単な文言を使って１行でスプレッド構文の使い方を説明したいと思い、記事にしました。
+
+ 解説
+スプレッド構文を1行で説明すると、
+配列やオブジェクトの外側の括弧 ( [], {} ) を取り除くことです。
+具体的に説明すると、arrと[...arr]は同じ配列を表し、objと{...obj}は同じオブジェクトを表すことになります。
+// 配列の場合
+const arr = [1, 2, 3];
+console.log(arr); // [1, 2, 3...]]></description><link>https://zenn.dev/kanamo/articles/39e8da9c41025d</link><guid isPermaLink="true">https://zenn.dev/kanamo/articles/39e8da9c41025d</guid><pubDate>Sun, 15 Jun 2025 22:23:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ozIWHmyn--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25B9%25E3%2583%2597%25E3%2583%25AC%25E3%2583%2583%25E3%2583%2589%25E6%25A7%258B%25E6%2596%2587%25E3%2582%2592%25EF%25BC%2591%25E8%25A1%258C%25E3%2581%25A7%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2599%25E3%2582%258B%25E3%2580%2590Javascript%2520%252F%2520Typescript%2520%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E5%2590%2591%25E3%2581%2591%25E3%2580%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%258B%25E3%2581%25AA%25E3%2582%2582%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q4ZGZmMzkyOTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>かなも</dc:creator></item><item><title><![CDATA[drizzle-llm ~自然言語で指示できる、ビルド時SQL生成~]]></title><description><![CDATA[飲み会で「もうSQLはLLMに書いてもらう方が良さそうですね〜ガハハ」という会話があったので、drizzle-orm向けの仕組みを作ってみました。
+https://github.com/iwamatsu0430/drizzle-llm
+https://www.npmjs.com/package/drizzle-llm
+
+ できること
+自然言語でクエリロジックを書くと、LLMがSQLを生成してくれます。
+ビルド時に生成する仕組みなので、一度生成してしまえば実行ごとにお金がかかることはありません。
+また、クエリ自体はSQLファイルで保存されるため必要に応じて修正できますし、型安全性をある程度...]]></description><link>https://zenn.dev/iwmat/articles/ca0021791f4b4a</link><guid isPermaLink="true">https://zenn.dev/iwmat/articles/ca0021791f4b4a</guid><pubDate>Sun, 15 Jun 2025 22:00:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wRfHNyMH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:drizzle-llm%2520%7E%25E8%2587%25AA%25E7%2584%25B6%25E8%25A8%2580%25E8%25AA%259E%25E3%2581%25A7%25E6%258C%2587%25E7%25A4%25BA%25E3%2581%25A7%25E3%2581%258D%25E3%2582%258B%25E3%2580%2581%25E3%2583%2593%25E3%2583%25AB%25E3%2583%2589%25E6%2599%2582SQL%25E7%2594%259F%25E6%2588%2590%7E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:iwmat%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzYxMDdhMzA0NTMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>iwmat</dc:creator></item><item><title><![CDATA[【react/typescript】propsの渡し方をミスると大変なことに！？(気がついたことのまとめ)]]></title><description><![CDATA[みなさん、こんにちは。
+てるし〜です。
+今回、propsの渡し方をミスると大変なことになってしまうのでは？という記事です。
+完璧な説明ができないとは思いますが、少しでも意識付けしていただければと記事にします。
+!
+最近暑くなってきましたね。
+みなさん、熱中症等には気をつけてください！🥵
+
+
+ 私自身がやっているpropsの渡し方
+今回、簡単なソースを用意しました。
+まず、AComponentというコンポーネントを用意しました。
+
+a-components.tsx
+interface Props {
+  username: string;
+}
+
+export function ACompo...]]></description><link>https://zenn.dev/terusi/articles/46abffaaf7f002</link><guid isPermaLink="true">https://zenn.dev/terusi/articles/46abffaaf7f002</guid><pubDate>Sun, 15 Jun 2025 16:10:39 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--P8o4ORJI--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590react%252Ftypescript%25E3%2580%2591props%25E3%2581%25AE%25E6%25B8%25A1%25E3%2581%2597%25E6%2596%25B9%25E3%2582%2592%25E3%2583%259F%25E3%2582%25B9%25E3%2582%258B%25E3%2581%25A8%25E5%25A4%25A7%25E5%25A4%2589%25E3%2581%25AA%25E3%2581%2593%25E3%2581%25A8%25E3%2581%25AB%25EF%25BC%2581%25EF%25BC%259F%2528%25E6%25B0%2597%25E3%2581%258C%25E3%2581%25A4%25E3%2581%2584%25E3%2581%259F%25E3%2581%2593%25E3%2581%25A8%25E3%2581%25AE%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25A6%25E3%2582%258B%25E3%2581%2597%25E3%2580%259C%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRlM2M5MzkyNjguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>てるし〜</dc:creator></item><item><title><![CDATA[React Native + Expo Go + Firebaseでアプリ開発＃１]]></title><description><![CDATA[
+ はじめに
+この「でぶろぐ」について
+初心者エンジニアが四苦八苦しながら個人開発していく過程をつらつら書きます。
+備忘録のようなものです。。。
+&nbsp;
+React Native + Expo Go + Firebaseでチャットアプリ開発 ～開発環境構築編～
+&nbsp;
+
+ 開発環境
+フロントエンド
+
+Node.jsとnpm
+React Native
+Expo Go
+TypeScript
+
+バックエンド
+
+Google Firebase
+&nbsp;
+
+
+ 開発環境の構築
+Windows環境にVisual Studio Code、Node.jsがインストールされていることが前提...]]></description><link>https://zenn.dev/moony0111/articles/4172577f566369</link><guid isPermaLink="true">https://zenn.dev/moony0111/articles/4172577f566369</guid><pubDate>Sun, 15 Jun 2025 14:08:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vr7mlznH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%2520Native%2520%252B%2520Expo%2520Go%2520%252B%2520Firebase%25E3%2581%25A7%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E9%2596%258B%25E7%2599%25BA%25EF%25BC%2583%25EF%25BC%2591%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2582%2580%25E3%2581%2585%25E3%2581%25AB%25E3%2581%2583%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q3YTMzMTRlMmEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>むぅにぃ</dc:creator></item><item><title><![CDATA[ツリーシェイキングと副作用 ツリーシェイキングが効く時と効かない時]]></title><description><![CDATA[
+ 用語の整理：「ビルド」と「バンドル」
+一般的に「ビルド」は、ソースコードを本番用に変換する一連の工程全体（トランスパイル・圧縮・バンドルなどを含む広義の用語）を指します。
+一方「バンドル」は、その中の一工程で、複数のファイルやモジュールを1つまたは少数のファイルにまとめる処理です。ツリーシェイキングもこのバンドル工程の中で行われます。
+
+補足：「ビルド」と「バンドル」の関係
+「ビルド」は、ソースコードを本番用に変換・最適化する全体の工程を指し、その中に「バンドル」（複数ファイルの結合）や「トランスパイル」「圧縮」などが含まれます。
+「バンドル」は「ビルド」の一工程（または一形態）であ...]]></description><link>https://zenn.dev/illionillion/articles/2025-06-14-tree-shaking-and-side-effect</link><guid isPermaLink="true">https://zenn.dev/illionillion/articles/2025-06-14-tree-shaking-and-side-effect</guid><pubDate>Sun, 15 Jun 2025 13:31:17 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4rujHP9s--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2584%25E3%2583%25AA%25E3%2583%25BC%25E3%2582%25B7%25E3%2582%25A7%25E3%2582%25A4%25E3%2582%25AD%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%25A8%25E5%2589%25AF%25E4%25BD%259C%25E7%2594%25A8%2520%25E3%2583%2584%25E3%2583%25AA%25E3%2583%25BC%25E3%2582%25B7%25E3%2582%25A7%25E3%2582%25A4%25E3%2582%25AD%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%258C%25E5%258A%25B9%25E3%2581%258F%25E6%2599%2582%25E3%2581%25A8%25E5%258A%25B9%25E3%2581%258B%25E3%2581%25AA%25E3%2581%2584%25E6%2599%2582%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Sei%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSlVQMXV1aHVjMjhGSms3b1JxbHdRQ3BQUncyblVUMlp2SWpmYUN0VHhkM1E9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Sei</dc:creator></item></channel></rss>
