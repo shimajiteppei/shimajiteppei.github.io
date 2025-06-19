@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Rust」のフィード]]></title><description><![CDATA[Zennのトピック「Rust」のRSSフィードです]]></description><link>https://zenn.dev/topics/rust</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ba09661577.png</url><title>Zennの「Rust」のフィード</title><link>https://zenn.dev/topics/rust</link></image><generator>zenn.dev</generator><lastBuildDate>Thu, 19 Jun 2025 02:37:01 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/rust/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[セキュリティ装置がいる環境で開発ツールが壊れる問題集（Node / Rust）]]></title><description><![CDATA[
+ Claude Code(Node)
+Claude Code が以下のエラーで起動できなかったので対応
+&gt; このレポジトリがなにか教えて
+  ⎿  API Error (Connection error.) · Retrying in 1 seconds… (attempt 1/10)
+    ⎿  TypeError (fetch failed)
+  ⎿  API Error (Connection error.) · Retrying in 1 seconds… (attempt 2/10)
+    ⎿  TypeError (fetch failed)
+  ⎿  API E...]]></description><link>https://zenn.dev/tomesq/articles/e0681d260b1632</link><guid isPermaLink="true">https://zenn.dev/tomesq/articles/e0681d260b1632</guid><pubDate>Thu, 19 Jun 2025 01:21:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Jx8sCC6D--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2582%25BB%25E3%2582%25AD%25E3%2583%25A5%25E3%2583%25AA%25E3%2583%2586%25E3%2582%25A3%25E8%25A3%2585%25E7%25BD%25AE%25E3%2581%258C%25E3%2581%2584%25E3%2582%258B%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25A7%25E9%2596%258B%25E7%2599%25BA%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%258C%25E5%25A3%258A%25E3%2582%258C%25E3%2582%258B%25E5%2595%258F%25E9%25A1%258C%25E9%259B%2586%25EF%25BC%2588Node%2520%252F%2520Rust%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tomesq%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk0YWMyZWYxOWEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tomesq</dc:creator></item><item><title><![CDATA[Rust イテレータ関連チートシート]]></title><description><![CDATA[
+ はじめに
+こんにちは、ファスト株式会社のyutakです！
+今回は、Rustでよく使うイテレータの操作で調べながら使うことが多々ありましたので、
+チートシート的な意味でまとめました。
+
+ 対象読者
+
+Rustの基本的な文法を理解している人
+イテレータの使い方を学びたい人
+よく使うメソッドを手軽に確認したい人
+
+
+ 1. イテレータの作成方法
+
+ iter() - 借用イテレータ
+要素を借用して処理します。元のデータは変更されません。
+let numbers = vec![1, 2, 3];
+let iter = numbers.iter(); // &amp;i32を返す
+
+ into...]]></description><link>https://zenn.dev/fast/articles/04cfdbbdf5c654</link><guid isPermaLink="true">https://zenn.dev/fast/articles/04cfdbbdf5c654</guid><pubDate>Wed, 18 Jun 2025 12:57:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--zCzUXJ2X--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%2520%25E3%2582%25A4%25E3%2583%2586%25E3%2583%25AC%25E3%2583%25BC%25E3%2582%25BF%25E9%2596%25A2%25E9%2580%25A3%25E3%2583%2581%25E3%2583%25BC%25E3%2583%2588%25E3%2582%25B7%25E3%2583%25BC%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:Yutak%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzljYTEzZDEyMWEuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:FAST%2520Tech%2520Blog%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MzNjBmNTJkYmUuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yutak</dc:creator></item><item><title><![CDATA[Rust + Raspberry Pi Pico ：“cargo run”一発でLチカプログラムを書き込むまで]]></title><description><![CDATA[
+ 目標
+
+開発環境を整えること
+
+なるべく楽に開発を進められるように
+将来性を加味してEmbassyの活用を行う
+
+
+Lチカまで行う
+
+
+ TL;DR
+MacにRustクロスコンパイル環境を入れ、cargo generate でEmbassyテンプレートを作成。
+.cargo/config.toml のrunnerをelf2uf2-rs -dに設定。
+cargo run --release
+ラズパイのボリュームにドラッグ&amp;ドロップなどが必要なくなって、プロジェクトの作成から、ラズパイの書き込みまで、快適に開発が続けられます。
+
+ 環境構築
+
+ 構成
+
+Mac OS 15.5
+
+...]]></description><link>https://zenn.dev/yuppon/articles/6896a0fe2648ed</link><guid isPermaLink="true">https://zenn.dev/yuppon/articles/6896a0fe2648ed</guid><pubDate>Wed, 18 Jun 2025 11:54:57 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ZCyeusc0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%2520%252B%2520Raspberry%2520Pi%2520Pico%2520%25EF%25BC%259A%25E2%2580%259Ccargo%2520run%25E2%2580%259D%25E4%25B8%2580%25E7%2599%25BA%25E3%2581%25A7L%25E3%2583%2581%25E3%2582%25AB%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%25A0%25E3%2582%2592%25E6%259B%25B8%25E3%2581%258D%25E8%25BE%25BC%25E3%2582%2580%25E3%2581%25BE%25E3%2581%25A7%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yuppon%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2d6UERsdDl6bWFhS1hIWGNUN2M2TENrcHBtZXRDUDcxMWM0YmNzWFE9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yuppon</dc:creator></item><item><title><![CDATA[reqwestでリトライをする]]></title><description><![CDATA[
+ 目的
+reqwestは本番で利用するにはタイムアウトとリトライは必須です。開発中は問題無く動いたとしても、サーバーの調子が悪くなった時に、正常に動かなくなります。
+タイムアウトはreqwestにtimeoutメソッドで指定できるので簡単に設定できます。リトライはcrateを利用するか自前で実装する必要があります。
+
+ crates
+
+ reqwest-retry
+reqwest-middlewareを利用したretryのcrateです。ポリシーを設定した後の使い心地はreqwestと同じです。本家のドキュメントにあるサンプルを引用します。
+use reqwest_middleware...]]></description><link>https://zenn.dev/aoyagikouhei/articles/fabcbae069ce7e</link><guid isPermaLink="true">https://zenn.dev/aoyagikouhei/articles/fabcbae069ce7e</guid><pubDate>Tue, 17 Jun 2025 23:31:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--zlWiWI_Y--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:reqwest%25E3%2581%25A7%25E3%2583%25AA%25E3%2583%2588%25E3%2583%25A9%25E3%2582%25A4%25E3%2582%2592%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E9%259D%2592%25E6%259F%25B3%25E5%25BA%25B7%25E5%25B9%25B3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzFjZDA3ZGRhNzguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>青柳康平</dc:creator></item><item><title><![CDATA[Rust の println! は Windows 環境でも CR を出力しない]]></title><description><![CDATA[Rust の println! マクロは、Windows 環境でも \n のみを出力する。これはプラットフォーム非依存の動作であり、Rust の設計思想に基づいた一貫した仕様となっている。
+リファレンスを読んでいるときに気がついた。
+https://doc.rust-lang.org/std/macro.println.html
+
+ 背景
+Windows においては、伝統的に改行コードとして \r\n（CR + LF）を使用してきた。一方で Unix 系（Linux や macOS）では \n（LF）のみが改行として使用されている。多くの言語やランタイムは、この違いを抽象化し、OS に応...]]></description><link>https://zenn.dev/ongaeshi/articles/0bb7ae517246bd</link><guid isPermaLink="true">https://zenn.dev/ongaeshi/articles/0bb7ae517246bd</guid><pubDate>Tue, 17 Jun 2025 18:45:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9caihWd9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%2520%25E3%2581%25AE%2520println%2521%2520%25E3%2581%25AF%2520Windows%2520%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25A7%25E3%2582%2582%2520CR%2520%25E3%2582%2592%25E5%2587%25BA%25E5%258A%259B%25E3%2581%2597%25E3%2581%25AA%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ongaeshi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE2ZjY4ZDAyMjMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ongaeshi</dc:creator></item><item><title><![CDATA[Rust✖️組み込みで非同期処理（async）をしてみた（Embassy）]]></title><description><![CDATA[
+ はじめに
+Rustの組み込み開発の非同期処理のデファクトスタンダードになりつつあるEmbassyを動かしてみました。また動かすハードウェアは、手軽にRust組み込みを試せる開発ボードであるBaker link. Devを利用しました。
+
+ 非同期とは
+非同期処理とは、１つの処理（関数など）の完了を待たずに、他の処理（関数など）を先に進める仕組みです。これにより、１つのコアで複数の処理を同時に実行することができます。たとえば、温度センサーのデータ取得中にLEDの点滅を続けるような場面で使われます。非同期処理はasyncや awaitなどのキーワードを使って書かれ、効率的な処理を実現しま...]]></description><link>https://zenn.dev/baker_link_lab/articles/705de547cc7077</link><guid isPermaLink="true">https://zenn.dev/baker_link_lab/articles/705de547cc7077</guid><pubDate>Sun, 15 Jun 2025 13:53:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--QE2K-__Z--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rust%2520%25E7%25B5%2584%25E3%2581%25BF%25E8%25BE%25BC%25E3%2581%25BF%25E3%2581%25A7%25E9%259D%259E%25E5%2590%258C%25E6%259C%259F%25E5%2587%25A6%25E7%2590%2586%25EF%25BC%2588async%25EF%25BC%2589%25E3%2582%2592%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25EF%25BC%2588Embassy%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Baker%2520link.%2520Lab%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2FkNzkyZGRhODEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Baker link. Lab</dc:creator></item><item><title><![CDATA[ABC410: Rustで解く！問題解説]]></title><description><![CDATA[AtCoder Beginner Contest 410のA-E問題をRustで解いた際の解法をまとめました。
+
+ A 問題
+問題
+https://atcoder.jp/contests/abc410/tasks/abc410_a
+解説
+K 歳の馬が出場可能なレースの個数を求める問題です。
+各レースには年齢制限があり、その上限が A_i で与えられています。したがって、A_i \geq K を満たすレースの個数を数えれば答えが求まります。
+コード
+
+abc410a.rs
+use proconio::input;
+
+fn main() {
+    // 入力
+    input! {
+  ...]]></description><link>https://zenn.dev/nakst_hide/articles/5fc92b420ee8a6</link><guid isPermaLink="true">https://zenn.dev/nakst_hide/articles/5fc92b420ee8a6</guid><pubDate>Sun, 15 Jun 2025 11:23:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xxymDmoz--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ABC410%253A%2520Rust%25E3%2581%25A7%25E8%25A7%25A3%25E3%2581%258F%25EF%25BC%2581%25E5%2595%258F%25E9%25A1%258C%25E8%25A7%25A3%25E8%25AA%25AC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:nakahide%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YkMxNEpSQnNET01hTGcxTVRQWGNTWS1qYlNQbFRMQTN3ZU9Sdz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nakahide</dc:creator></item><item><title><![CDATA[UEFI環境でaarch64カーネル実行が出来ずに万策尽きかけた話]]></title><description><![CDATA[最近前々から興味のあったOS開発をしています
+せっかく自作するんだから、ということでBootloaderも含めてフルスクラッチから作成しており、Pure Rustで書かれたaarch64向けオペレーティングシステムです
+bootloaderから自作しよう！となるとネット上の情報も少なく、またPure RustでのOS開発というのも依然ニッチなジャンルです
+さらにそこにaarch64向けというフィルタも加えると更に有益な情報は少なくなります
+体感としてもこれは実感していて、ドキュメントが少なくあったとしても結局 クソ長い退屈な 1次情報である仕様書/規格書に辿り着く、
+やっと分かりやすそう...]]></description><link>https://zenn.dev/cp_r/articles/41c2ce160d692a</link><guid isPermaLink="true">https://zenn.dev/cp_r/articles/41c2ce160d692a</guid><pubDate>Sun, 15 Jun 2025 05:00:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Rk3AP2-r--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:UEFI%25E7%2592%25B0%25E5%25A2%2583%25E3%2581%25A7aarch64%25E3%2582%25AB%25E3%2583%25BC%25E3%2583%258D%25E3%2583%25AB%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%258C%25E5%2587%25BA%25E6%259D%25A5%25E3%2581%259A%25E3%2581%25AB%25E4%25B8%2587%25E7%25AD%2596%25E5%25B0%25BD%25E3%2581%258D%25E3%2581%258B%25E3%2581%2591%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:9kv8xiyi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE1NjljYjFhZGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>9kv8xiyi</dc:creator></item><item><title><![CDATA[Cargo Lambda | Rustコードを AWS Lambda に手っ取り早くデプロイする]]></title><description><![CDATA[
+ はじめに
+お久しぶりです〜！
+最近スプラトゥーン3のアップデートがあり、ドライブワイパーRustなるブキが追加されました。
+カーリングボムで前に出てメインの素早いキル性能と回転率爆早のウルトラショットで後衛に圧をかけつつ、、、
+みたいなことを考えていると、最近Rust触っていないことに気づき、記事を執筆することに。
+今回はCargo Lambdaを使ってRustコードをLambdaにデプロイしてみようと思います！
+
+ Cargo Lambdaを使うための下準備
+まずは何もない（Cargoとかは使える）状態で、下準備を整えていきたいと思います。
+大前提、Macで下準備を整えていきたいと...]]></description><link>https://zenn.dev/taroyamada5963/articles/b36963d2f14e87</link><guid isPermaLink="true">https://zenn.dev/taroyamada5963/articles/b36963d2f14e87</guid><pubDate>Sun, 15 Jun 2025 04:02:04 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---RDgLj1r--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Cargo%2520Lambda%2520%257C%2520Rust%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2582%2592%2520AWS%2520Lambda%2520%25E3%2581%25AB%25E6%2589%258B%25E3%2581%25A3%25E5%258F%2596%25E3%2582%258A%25E6%2597%25A9%25E3%2581%258F%25E3%2583%2587%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25A4%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Shota%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNkOTBhMWI3M2YuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Shota</dc:creator></item><item><title><![CDATA[LLM時代の言語選定――こんな時代だからこそGolang?!]]></title><description><![CDATA[
+ 前置き
+この記事は、当初『LLM時代にどの言語を選定すべきか?』というタイトルで書き始めました。
+書いている途中でインパクトに欠けると感じ、今のタイトルに落ち着きました。
+しかし、主張の本質はあくまで「LLMの進化と普及を踏まえ、改めて言語選定のあり方を問い直すべきではないか？」という点にあります。本記事では、そのような時代に合致した言語の条件を考え、最も現実的な選択肢の一つとしてGolangを提案します。
+!
+前提として、"Web開発のサーバーサイド言語選定"に限定して述べていきます。
+
+
+ 惰性の言語選定に一石を投じたい
+「俺の財宝か？欲しけりゃくれてやる。探せ、この世の全てをそ...]]></description><link>https://zenn.dev/t_keshi/articles/go-in-the-roaring-age</link><guid isPermaLink="true">https://zenn.dev/t_keshi/articles/go-in-the-roaring-age</guid><pubDate>Sat, 14 Jun 2025 12:08:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--XKbNQ_wR--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:LLM%25E6%2599%2582%25E4%25BB%25A3%25E3%2581%25AE%25E8%25A8%2580%25E8%25AA%259E%25E9%2581%25B8%25E5%25AE%259A%25E2%2580%2595%25E2%2580%2595%25E3%2581%2593%25E3%2582%2593%25E3%2581%25AA%25E6%2599%2582%25E4%25BB%25A3%25E3%2581%25A0%25E3%2581%258B%25E3%2582%2589%25E3%2581%2593%25E3%2581%259DGolang%253F%2521%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:t_keshi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA2MTRjNmQ0N2YuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>t_keshi</dc:creator></item><item><title><![CDATA[自作のスキーマ言語: TYML]]></title><description><![CDATA[
+ TYMLとは
+TYMLとは、JsonSchemaよりも簡潔で厳密な仕様を持つ、任意の設定用言語(現在はiniとtoml)に対応可能なスキーマ言語です。
+JsonSchemaの置き換えを目標としています。
+既にCLIツールとLSPサーバーをリリースしており、VSCode Marketplaceよりダウンロードして使用できます。
+
+https://tyml-org.github.io/tyml-lang.org/
+https://github.com/tyml-org/tyml
+
+ モチベーションとJsonSchema
+既に存在し最も普及しているスキーマ言語としてJsonSchemaが挙...]]></description><link>https://zenn.dev/bea4dev/articles/49adc4be4638b0</link><guid isPermaLink="true">https://zenn.dev/bea4dev/articles/49adc4be4638b0</guid><pubDate>Sat, 14 Jun 2025 08:27:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5UzRII7P--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%2587%25AA%25E4%25BD%259C%25E3%2581%25AE%25E3%2582%25B9%25E3%2582%25AD%25E3%2583%25BC%25E3%2583%259E%25E8%25A8%2580%25E8%25AA%259E%253A%2520TYML%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:bea4dev%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY2ZDVjZWFkMTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>bea4dev</dc:creator></item><item><title><![CDATA[音声のリサンプリング手法とリアルタイムに向けた実装の紹介]]></title><description><![CDATA[Parakeet株式会社でResearcherをしている金子(nadare)です。CPUのみで動作するリアルタイムAIボイスチェンジャーのParavoの研究開発をしております。
+本記事ではリアルタイムアプリケーションにおけるリサンプリングの課題と、Paravoアプリにおける「Rubato」ライブラリを用いたリサンプリングの実装の紹介をします。
+対象読者
+
+音声処理のアプリケーションに興味のある方
+Rubatoの設定のコツを知りたい方
+
+
+ リサンプリング手法の必要性
+
+ サンプリングレートとは
+音声は本来アナログの波形ですが、コンピューター上で扱う際は一定時間ごとに区切ってデジタル表現に...]]></description><link>https://zenn.dev/parakeet_tech/articles/aff019a2e3a1e7</link><guid isPermaLink="true">https://zenn.dev/parakeet_tech/articles/aff019a2e3a1e7</guid><pubDate>Sat, 14 Jun 2025 07:42:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--SnAVYd5j--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E9%259F%25B3%25E5%25A3%25B0%25E3%2581%25AE%25E3%2583%25AA%25E3%2582%25B5%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AA%25E3%2583%25B3%25E3%2582%25B0%25E6%2589%258B%25E6%25B3%2595%25E3%2581%25A8%25E3%2583%25AA%25E3%2582%25A2%25E3%2583%25AB%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%25A0%25E3%2581%25AB%25E5%2590%2591%25E3%2581%2591%25E3%2581%259F%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%25AE%25E7%25B4%25B9%25E4%25BB%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:nadare%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzgzNmJlNDAxZmQuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Parakeet%2520%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc0MzY5NWY5NjguanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>nadare</dc:creator></item><item><title><![CDATA[Rust Wasm64 on IC]]></title><description><![CDATA[
+ はじめに
+分散型クラウドを実現するInternet ComputerのCanisterがついにWasm64バイナリに対応しました。
+アーキテクチャが32bitから64bitに変わることにより、プログラムで直接扱える最大メモリが4GiB (2^{32} bytes)から、理論上は16EiB (2^{64} bytes)になります。
+Canisterの制約上、2025年6月時点では最大6GiBまでしかサポートされませんが、今後上限は引き上げられていくと思われますので、将来的にはLLMなど大量にメモリを必要とするような処理にも対応できる可能性は十分にあります。
+Canister開発ツールは...]]></description><link>https://zenn.dev/halifax/articles/ic_rust_wasm64</link><guid isPermaLink="true">https://zenn.dev/halifax/articles/ic_rust_wasm64</guid><pubDate>Sat, 14 Jun 2025 04:07:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--w5txOgbn--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_76:Rust%2520Wasm64%2520on%2520IC%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:halifax%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JhNWUxM2Q5YzQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>halifax</dc:creator></item><item><title><![CDATA[AI コーディングエージェントのルールファイルを管理するツールを作りました]]></title><description><![CDATA[こんにちは、Timelabで Lynxというカレンダーサービスを開発している諸岡（@hakoten）です。
+最近、Claude Code、Cursor、Cline、GitHub Copilot など、AIを活用したコーディングエージェントが徐々に開発現場にも浸透し、開発効率を大幅に向上させてくれています。
+これらのエージェントは、それぞれルールファイル(rules, instruction)というものを持っており、プロジェクトやチームのルールや指示をエージェントに反映することができます。
+そこで今回は、社内で利用しているルールファイルを統一的に管理できるツール「aicm」についてご紹介し...]]></description><link>https://zenn.dev/timelab/articles/3f199a6ebbb92c</link><guid isPermaLink="true">https://zenn.dev/timelab/articles/3f199a6ebbb92c</guid><pubDate>Sat, 14 Jun 2025 03:17:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--wtNiIjo5--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:AI%2520%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2587%25E3%2582%25A3%25E3%2583%25B3%25E3%2582%25B0%25E3%2582%25A8%25E3%2583%25BC%25E3%2582%25B8%25E3%2582%25A7%25E3%2583%25B3%25E3%2583%2588%25E3%2581%25AE%25E3%2583%25AB%25E3%2583%25BC%25E3%2583%25AB%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2582%2592%25E7%25AE%25A1%25E7%2590%2586%25E3%2581%2599%25E3%2582%258B%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258A%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:hakotensan%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzkxMjE1ZGFiYzIuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:Timelab%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2YzNGM1MmE4MWMuanBlZw==%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hakotensan</dc:creator></item><item><title><![CDATA[C言語、C++、Rustで関数を使ってビット操作をする]]></title><description><![CDATA[
+ はじめに
+C23以降のC言語、C++20以降のC++、Rustは関数（メソッド）を使ってビット操作をすることができます。
+これらの関数はC言語では&lt;stdbit.h&gt;、C++では&lt;bit&gt;、Rustではプリミティブ整数型のメソッドとして定義されています。
+この記事では、これらの関数を操作ごとに紹介します。
+
+ 整数値が2の累乗かを判定する
+C言語ではstdc_has_single_bit関数を使って求めることができます。
+#include &lt;assert.h&gt;
+#include &lt;stdbit.h&gt;
+
+assert(stdc_has_s...]]></description><link>https://zenn.dev/sorairolake/articles/bit-manipulation-in-system-programming-languages</link><guid isPermaLink="true">https://zenn.dev/sorairolake/articles/bit-manipulation-in-system-programming-languages</guid><pubDate>Thu, 12 Jun 2025 22:01:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dMc6zN12--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:C%25E8%25A8%2580%25E8%25AA%259E%25E3%2580%2581C%252B%252B%25E3%2580%2581Rust%25E3%2581%25A7%25E9%2596%25A2%25E6%2595%25B0%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2583%2593%25E3%2583%2583%25E3%2583%2588%25E6%2593%258D%25E4%25BD%259C%25E3%2582%2592%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:SorairoLake%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzEyZGZiOGQyM2QuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>SorairoLake</dc:creator></item><item><title><![CDATA[Apache の開発が止まったら .htaccess をどうする？]]></title><description><![CDATA[
+ もし Apache の開発が止まったら？
+💚ずんだもん
+むむっ！ Apache がもう開発されないかもしれないって本当なのだ！？ ぼくの .htaccess はどうなるのだ〜！
+
+🎀めたん
+その通りですね。Apache HTTP Server プロジェクトは現在もメンテナンスされていますが、HTTP/3 の実装や積極的な機能拡張の動きは見られず、開発の停滞が指摘されています。
+
+🗡️つるぎ
+とくに .htaccess に依存したサイト構成は、Apache 特有の設計ゆえに移行が困難でござる。よって、共有ホスティング業者が取るべき対応策が議論されておるのだ。
+
+💚ずんだもん
+ほかのサー...]]></description><link>https://zenn.dev/masakielastic/articles/20250611-apache-shared-hosting-survival</link><guid isPermaLink="true">https://zenn.dev/masakielastic/articles/20250611-apache-shared-hosting-survival</guid><pubDate>Thu, 12 Jun 2025 10:08:23 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Jyn_laNU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Apache%2520%25E3%2581%25AE%25E9%2596%258B%25E7%2599%25BA%25E3%2581%258C%25E6%25AD%25A2%25E3%2581%25BE%25E3%2581%25A3%25E3%2581%259F%25E3%2582%2589%2520.htaccess%2520%25E3%2582%2592%25E3%2581%25A9%25E3%2581%2586%25E3%2581%2599%25E3%2582%258B%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Masaki%2520Kagaya%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc3ODAxZTNiZTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Masaki Kagaya</dc:creator></item><item><title><![CDATA[Dockerで feature 'edition2024' is required エラーが出た]]></title><description><![CDATA[
+ はじめに
+docker compose upを叩いたら、特定のサービスだけビルドが通らなくなった！
+この記事では、当時のトラブルシューティングの流れを備忘録がてらまとめておこうと思います。
+「え、同じエラー出たかも…？」という人のヒントになればうれしいです🙏
+
+ 発生したエラー
+問題が起きたのは、開発環境の立ち上げ時。migrationというサービスのビルド中に、以下のようなエラーが発生してストップしてしまいました。
+error: failed to compile `sqlx-cli v0.8.6` ...
+Caused by:
+  failed to parse manifest...]]></description><link>https://zenn.dev/kibe/articles/6cbf88602873b7</link><guid isPermaLink="true">https://zenn.dev/kibe/articles/6cbf88602873b7</guid><pubDate>Thu, 12 Jun 2025 02:59:14 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Y6O2i4Ue--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Docker%25E3%2581%25A7%2520feature%2520%2527edition2024%2527%2520is%2520required%2520%25E3%2582%25A8%25E3%2583%25A9%25E3%2583%25BC%25E3%2581%258C%25E5%2587%25BA%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:k1b3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzAwOTYwY2IzNTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>k1b3</dc:creator></item><item><title><![CDATA[[Bevy] Android用のテンプレートを作りました]]></title><description><![CDATA[Windows, mac, Linux, Webの場合は比較的簡単にバイナリを作成できますが、モバイル向けだと少し面倒です。手順が増えるのに加えて、情報が少ないためです。
+AndroidはiOSよりもさらに情報がすくないです。めっっちゃ不安になります。まあ頑張りましょう。
+ところでAndroid用の公式サンプルが、Javaで書かれていて、kotlinではありません。Discordのandroidのチャットではkotlinのサンプルを求める声が散見されたため、kotlinのサンプルを作成しました。
+使用手順は公式サンプルと同じで、jniLibsにネイティブライブラリを出力してAndroid...]]></description><link>https://zenn.dev/omini/articles/72aeca6c10b073</link><guid isPermaLink="true">https://zenn.dev/omini/articles/72aeca6c10b073</guid><pubDate>Wed, 11 Jun 2025 23:06:46 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--A8lDofdJ--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255BBevy%255D%2520Android%25E7%2594%25A8%25E3%2581%25AE%25E3%2583%2586%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AC%25E3%2583%25BC%25E3%2583%2588%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258A%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:omini%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2Rhcmsvby5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>omini</dc:creator></item><item><title><![CDATA[🧭 やりたいことから始める！AI 時代の Rust 学習術とその落とし穴]]></title><description><![CDATA[
+ 🎓逆算型プログラミング学習法とは？
+―ずんだもん、めたん、つるぎの HTTP サーバー開発ふりかえり―
+この記事は ChatGPT で生成しました。
+
+💚ずんだもん（質問役）
+むむっ！？ めたん！「逆算型」ってなんか算数っぽい言葉だけど、プログラミングでも使えるのだ？
+
+🎀めたん（解説担当）
+はい、ずんだもん。「逆算型学習法」というのは、目的から逆に必要な知識やステップを割り出して学習する方法です。たとえば「Rust で HTTP サーバーを作りたい！」という目標があるなら、そこから逆に「Hyper というライブラリが必要そうだ」「そのためには Tokio の非同期処理を知っておく必...]]></description><link>https://zenn.dev/masakielastic/articles/20250611-ai-rust-learning-from-failure</link><guid isPermaLink="true">https://zenn.dev/masakielastic/articles/20250611-ai-rust-learning-from-failure</guid><pubDate>Wed, 11 Jun 2025 09:55:08 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---Hejn2OM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%2520%2520%25E3%2582%2584%25E3%2582%258A%25E3%2581%259F%25E3%2581%2584%25E3%2581%2593%25E3%2581%25A8%25E3%2581%258B%25E3%2582%2589%25E5%25A7%258B%25E3%2582%2581%25E3%2582%258B%25EF%25BC%2581AI%2520%25E6%2599%2582%25E4%25BB%25A3%25E3%2581%25AE%2520Rust%2520%25E5%25AD%25A6%25E7%25BF%2592%25E8%25A1%2593%25E3%2581%25A8%25E3%2581%259D%25E3%2581%25AE%25E8%2590%25BD%25E3%2581%25A8%25E3%2581%2597%25E7%25A9%25B4%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Masaki%2520Kagaya%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc3ODAxZTNiZTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Masaki Kagaya</dc:creator></item><item><title><![CDATA[Dioxus v0.6 でデスクトップアプリを作る実装 Tips]]></title><description><![CDATA[
+ 概要
+Rust のフレームワーク「Dioxus」と画像処理ライブラリ「OpenCV」を組み合わせて、テンプレートマッチングアプリを開発した際の実装 Tips をまとめました。
+
+ 環境
+
+Rust 1.86.0
+Dioxus CLI 0.6.3
+OpenCV 4.11.0
+npm 10.8.2
+Tailwind CSS 4.1.7
+daisyUI 5.0.35
+
+
+ 作ったもの
+
+Windows の画面をキャプチャし、指定したテンプレート画像と一致する箇所を検出
+GUI でテンプレート画像や検出感度などを設定可能
+検出時に通知やサウンド、Discord 通知も送信できる
+
+
+ リポジ...]]></description><link>https://zenn.dev/st_little/articles/learned-from-building-desktop-app-with-dioxus-v06</link><guid isPermaLink="true">https://zenn.dev/st_little/articles/learned-from-building-desktop-app-with-dioxus-v06</guid><pubDate>Tue, 10 Jun 2025 10:25:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--SakjqrTm--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Dioxus%2520v0.6%2520%25E3%2581%25A7%25E3%2583%2587%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%2588%25E3%2583%2583%25E3%2583%2597%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E4%25BD%259C%25E3%2582%258B%25E5%25AE%259F%25E8%25A3%2585%2520Tips%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:st-little%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUxtNXd1MzFRX0lpMkZWUVdwclRKOUluaXJPN092TlI2WkV6c1A3WGRRMTU9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>st-little</dc:creator></item></channel></rss>
