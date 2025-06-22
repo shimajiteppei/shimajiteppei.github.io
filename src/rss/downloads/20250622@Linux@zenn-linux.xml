@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Linux」のフィード]]></title><description><![CDATA[Zennのトピック「Linux」のRSSフィードです]]></description><link>https://zenn.dev/topics/linux</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/860a9eb1e4.png</url><title>Zennの「Linux」のフィード</title><link>https://zenn.dev/topics/linux</link></image><generator>zenn.dev</generator><lastBuildDate>Sun, 22 Jun 2025 06:22:35 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/linux/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[Linux jobsコマンドを理解する]]></title><description><![CDATA[
+ 本記事を書くきっかけ
+LPIC1の勉強で、jobsコマンドに遭遇。
+「これいつ使うんだ？」と思ったので、掘り下げてみました。
+
+ 疑問1 ジョブって何？プロセスとの違いは？
+
+ジョブ = シェルから見た、実行中のコマンドのこと。jobsコマンドで確認できる
+プロセス = OSから見た、実行中のプログラムのこと。psコマンドで確認できる
+
+
+ 疑問2 あるジョブが実行中に別のジョブを実行するなんてできるの？コマンド実行中のときは新しいコマンド実行できないと思うんだけど…
+あるジョブ（コマンド）が実行中でも、それをバックグラウンドで動かせば、別のコマンド（ジョブ）を同じシェルで新たに実行...]]></description><link>https://zenn.dev/micchi55555/articles/6dfea60cbc5901</link><guid isPermaLink="true">https://zenn.dev/micchi55555/articles/6dfea60cbc5901</guid><pubDate>Sun, 22 Jun 2025 02:38:47 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--mXcU6FG8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%2520jobs%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2582%2592%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:sakih5%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhjMzkyY2E1MjAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>sakih5</dc:creator></item><item><title><![CDATA[さくらVPSで固定IPを取得＋VPN接続]]></title><description><![CDATA[
+ 前提
+さくら VPS で固定 IP を取得し、そこに VPN 接続するまでの作業メモです。
+さくら VPS は 2 週間トライアルできるので試すのに便利です。
+環境
+
+PC: MacOS（Windows でも問題ないと思います）
+さくら VPS: Rocky Linux 9
+
+
+ さくら VPS の設定
+
+ パケットフィルターの設定
+まずは GUI 上でパケットフィルターの設定。使うパケットのみ許可しておく
+
+
+ ファイアウォールの設定
+ここからは VPS のコンソールに入って設定。
+最初はテーブルがないと思うので作成
+$ sudo nft add table inet filter...]]></description><link>https://zenn.dev/raihara3/articles/20250621_sakura_vps</link><guid isPermaLink="true">https://zenn.dev/raihara3/articles/20250621_sakura_vps</guid><pubDate>Sat, 21 Jun 2025 13:59:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--OPJJ_l_L--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%2595%25E3%2581%258F%25E3%2582%2589VPS%25E3%2581%25A7%25E5%259B%25BA%25E5%25AE%259AIP%25E3%2582%2592%25E5%258F%2596%25E5%25BE%2597%25EF%25BC%258BVPN%25E6%258E%25A5%25E7%25B6%259A%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:raihara3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzBlMGVjYTdhZTQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>raihara3</dc:creator></item><item><title><![CDATA[🐧 Linuxのリリースモデルとは？ 🚀🔧📘]]></title><description><![CDATA[
+ 📦 固定リリースモデル（Fixed Release Model） 🏢💼🛡️
+固定リリースモデルは、企業や業務用途で広く利用されている安定性重視のモデルです。この方式では、半年や2年など定期的なスケジュールに基づいて、メジャーアップデート（バージョンアップ）が提供されます。それ以外の期間は、主にセキュリティ修正やバグ修正といった小規模な更新のみが配信されます。🗂️🔁📅
+
+ 特徴：
+
+長期サポートが提供されるバージョンが多く、安心して運用できる
+リリース前に徹底的にテストされており、トラブルが少ない
+大規模アップグレードの際には注意が必要で、作業コストも増える
+
+
+ 利用シーン：
+
+サー...]]></description><link>https://zenn.dev/oit2003/articles/081b03dbb839ea</link><guid isPermaLink="true">https://zenn.dev/oit2003/articles/081b03dbb839ea</guid><pubDate>Sat, 21 Jun 2025 07:21:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--nVgpgWOo--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%2520%2520Linux%25E3%2581%25AE%25E3%2583%25AA%25E3%2583%25AA%25E3%2583%25BC%25E3%2582%25B9%25E3%2583%25A2%25E3%2583%2587%25E3%2583%25AB%25E3%2581%25A8%25E3%2581%25AF%25EF%25BC%259F%2520%2520%2520%2520%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:OIT2003%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSUwxN0ZaM1B3YkZyak5GWFVZRnNva000aldZTWZaQzc0MVh1UzhtRDdlZUNJVT1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>OIT2003</dc:creator></item><item><title><![CDATA[Ubuntu 24.04でGDM3がクラッシュしてログインできない問題の備忘録]]></title><description><![CDATA[
+ Ubuntu 24.04でGDM3がクラッシュしてログインできない問題の備忘録
+
+ 問題の概要
+Ubuntu をインストールして環境設定を整えて再起動すると何故かログイン画面までたどり着けなくなったので修復方法を記載します。
+結論、Ubuntu 24.04.2 LTSでGDM3（GNOME Display Manager）が壊れていたので、ログイン画面までたどりつけませんでした。
+
+ 問題の診断手順
+
+ 1. システムログの確認
+まず、GDM3の状態とログを確認します：
+# GDM3サービスの状態確認
+systemctl status gdm3
+
+# システムログでGDM3関連のエラ...]]></description><link>https://zenn.dev/myvalval/articles/ece0845f66a650</link><guid isPermaLink="true">https://zenn.dev/myvalval/articles/ece0845f66a650</guid><pubDate>Sat, 21 Jun 2025 06:20:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--MFy0lk8k--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Ubuntu%252024.04%25E3%2581%25A7GDM3%25E3%2581%258C%25E3%2582%25AF%25E3%2583%25A9%25E3%2583%2583%25E3%2582%25B7%25E3%2583%25A5%25E3%2581%2597%25E3%2581%25A6%25E3%2583%25AD%25E3%2582%25B0%25E3%2582%25A4%25E3%2583%25B3%25E3%2581%25A7%25E3%2581%258D%25E3%2581%25AA%25E3%2581%2584%25E5%2595%258F%25E9%25A1%258C%25E3%2581%25AE%25E5%2582%2599%25E5%25BF%2598%25E9%258C%25B2%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:YukiMaeda%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzUxMDgxNGU2ZGEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>YukiMaeda</dc:creator></item><item><title><![CDATA[WSL2にArchLinuxをインストールして初期設定する]]></title><description><![CDATA[
+ はじめに
+WSL2のディストリビューションにArch Linuxが公式対応したことを受けて、実際にインストールと初期設定を行いました。
+この記事では、インストール時に遭遇した問題とその解決方法、および初期設定手順を備忘録として記録します。
+
+ 前提条件
+
+Windows 11 Pro
+WSL2が有効化済み（初回の場合は管理者権限での実行と再起動が必要）
+WSL 2.4.4以降が必要（WSL2のみ対応）
+PowerShellの使用
+
+
+ インストール方法
+
+ インストール手順
+PowerShellで以下のコマンドを実行します。
+wsl --install archlinux
+インストー...]]></description><link>https://zenn.dev/willow555/articles/4652866b8375d0</link><guid isPermaLink="true">https://zenn.dev/willow555/articles/4652866b8375d0</guid><pubDate>Fri, 20 Jun 2025 07:29:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6QLTrEaY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:WSL2%25E3%2581%25ABArchLinux%25E3%2582%2592%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25B9%25E3%2583%2588%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%2597%25E3%2581%25A6%25E5%2588%259D%25E6%259C%259F%25E8%25A8%25AD%25E5%25AE%259A%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:willow%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSVJPR3Vrd294MlJEeDEzdVZlM19Oak1nNE1VOVNLYnNKcXdaeVRpY3d5VGlJaE1HZz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>willow</dc:creator></item><item><title><![CDATA[Linuxのvim基礎]]></title><description><![CDATA[
+ Linuxで快適にテキスト編集を始めよう
+Linuxを使っていると、避けて通れないのが「Vim（ヴィム）」というテキストエディタ。
+「黒い画面で操作が難しそう…」と思っていませんか？
+でも大丈夫。この記事では、Vim初心者が最初に覚えるべき5つの基本操作を、やさしく丁寧に解説します。
+
+
+ 1. Vimとは？なぜ使うのか
+
+ Vimって何？
+Vimは「Vi IMproved」の略で、Unix系OSに標準で搭載されているテキストエディタ「vi」を拡張したものです。
+LinuxやmacOSでは、サーバー設定やプログラミングなど、さまざまな場面で使われています。
+
+ なぜVimを使うの？
+...]]></description><link>https://zenn.dev/kenshinyamamoto/articles/c3ca848583370f</link><guid isPermaLink="true">https://zenn.dev/kenshinyamamoto/articles/c3ca848583370f</guid><pubDate>Fri, 20 Jun 2025 07:21:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--PyJzCEdE--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:Linux%25E3%2581%25AEvim%25E5%259F%25BA%25E7%25A4%258E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kenshin%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS1pLVWprWFB2Sk9GcHRzeUQtTVQ1d3pvVnBHd3pWZHpFMlVmSExCOFJGSmNjX0lEMTQ9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kenshin</dc:creator></item><item><title><![CDATA[Linuxの基礎コマンドについて（続）]]></title><description><![CDATA[
+ はじめに
+前回の記事では、Linuxの基礎コマンドについて、９つのうち５つを紹介しました。
+この記事では、残りの４つ紹介したいと思います。
+
+ cp
+
+copyの略
+指定されたファイルを指定したディレクトリへコピーする。
+cp （オプション）[コピー元ファイル名][コピー先ファイル名]
+「-r」オプションを使うと、ディレクトリもコピーすることができる。
+cp -r （オプション）[コピー元ファイル名][コピー先ファイル名]
+
+
+ mv
+
+moveの略
+ファイルやディレクトリを指定のディレクトリへ移動する。
+mv （オプション）[移動元パス][移動先パス]
+また、名前を変更することがで...]]></description><link>https://zenn.dev/kenichiburoro/articles/a3356fde8c2274</link><guid isPermaLink="true">https://zenn.dev/kenichiburoro/articles/a3356fde8c2274</guid><pubDate>Fri, 20 Jun 2025 06:41:07 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--xjtUwRoy--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%25E3%2581%25AE%25E5%259F%25BA%25E7%25A4%258E%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%25EF%25BC%2588%25E7%25B6%259A%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%2588%25B8%25E5%25B3%25B6%25E3%2580%2580%25E5%2581%25A5%25E4%25B8%2580%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSmxzSDMtU2hZeVZOUmlOUzRHREVVeDVIX2NscjVCekY4Um9Qdkk2Nlhrenk3UVNyclc9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>戸島　健一</dc:creator></item><item><title><![CDATA[vimについて]]></title><description><![CDATA[
+ まずはじめに
+今回は先週の研修で学んだvimについて記載したいと思います。
+
+ vim
+vimとは
+
+Linuxに標準で入っているテキストエディタでWindowsでいうところのメモ帳です。操作方法がメモ帳と大きく異なるため初心者が扱うためにはかなりの時間が必要になります。
+vimに並んで、Linuxで利用されるエディタとしてemacsやnanoがあります。
+
+
+ vimの特徴
+
+ 基本はhjklキーでカーソル移動する
+
+ホームポジションから移動しない、速度重視の設計
+十字キーでもｍ移動できますが、できないサーバーもある
+h左　j下　k上　l右
+
+
+ モードが3つある
+
+ ノーマルモー...]]></description><link>https://zenn.dev/minnie/articles/44319eb54381b2</link><guid isPermaLink="true">https://zenn.dev/minnie/articles/44319eb54381b2</guid><pubDate>Fri, 20 Jun 2025 06:40:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--X6EBW87p--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:vim%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%2584%25E3%2583%25A6%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNjYTY4OTM1NWQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ツユ</dc:creator></item><item><title><![CDATA[Linux初心者が知っておくべき危険なコマンド：`rm -rf /`を実行するとどうなるのか？]]></title><description><![CDATA[
+ rm -rf /コマンドとは何か？
+
+ コマンドの構成要素
+rm -rf /コマンドは、以下の要素から構成されています：
+
+
+rm: ファイルやディレクトリを削除するコマンド
+
+-r: 再帰的（recursive）にディレクトリとその中身を削除
+
+-f: 強制的（force）に削除、確認なしで実行
+
+/: ルートディレクトリを指定
+
+
+ なぜ危険なのか？
+このコマンドが危険な理由は、システム全体のルートディレクトリ（/）から始まって、すべてのファイルとディレクトリを再帰的に、そして強制的に削除してしまうからです。
+
+ 実際に実行するとどうなるのか？
+
+ システムへの影響
+rm -rf...]]></description><link>https://zenn.dev/manatosasaki/articles/84d5bc06508e8e</link><guid isPermaLink="true">https://zenn.dev/manatosasaki/articles/84d5bc06508e8e</guid><pubDate>Fri, 20 Jun 2025 06:37:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--RPkxApdb--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E3%2581%258C%25E7%259F%25A5%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%258A%25E3%2581%258F%25E3%2581%25B9%25E3%2581%258D%25E5%258D%25B1%25E9%2599%25BA%25E3%2581%25AA%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%25EF%25BC%259A%2560rm%2520-rf%2520%252F%2560%25E3%2582%2592%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%2599%25E3%2582%258B%25E3%2581%25A8%25E3%2581%25A9%25E3%2581%2586%25E3%2581%25AA%25E3%2582%258B%25E3%2581%25AE%25E3%2581%258B%25EF%25BC%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%2520%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzZlOTgzNWNjOTAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>🎋</dc:creator></item><item><title><![CDATA[fail2ban]]></title><description><![CDATA[
+ fail2banとは
+不正アクセスからサーバを守るソフトウェアです。具体的には、ログファイルに記録される内容を監視して、何度も認証に失敗しているログや、連続アクセスしているログを見つけると、ファイアーウォールを自動的に調整して、攻撃元の IP アドレスを自動で遮断します。
+
+ fail2ban設定
+ここからはfail2banの設定方法について書いていきます。
+
+ fail2banのインストール
+dnf -y install fail2ban
+dnf install -y fail2banを実行し、Complete！と出力されていることを確認
+
+ fail2banの自動起動設定、起動
+...]]></description><link>https://zenn.dev/daidai7650/articles/2c5ee83d94bc24</link><guid isPermaLink="true">https://zenn.dev/daidai7650/articles/2c5ee83d94bc24</guid><pubDate>Fri, 20 Jun 2025 04:59:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--2_VyY459--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_80:fail2ban%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:DaiDai%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTFdUZGRoQXJ4SldCeGVHZjJ3OTF3ZEJqSF95bmdZTnp1SXRfVDh6NmZzUVh6MXNRPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>DaiDai</dc:creator></item><item><title><![CDATA[vimについて]]></title><description><![CDATA[こんにちは以前実習にてvimエディタに初めて触れたので簡単にまとめてみました
+
+ Vim 入門：モードとよく使うコマンドまとめ
+Vimは高機能なテキストエディタで、キーボード操作に特化した効率的な操作が可能です。本記事では、Vimの基本的なモードの説明と、よく使うコマンド一覧を紹介します。
+
+
+ 📚 モードの種類
+Vimには複数のモードがあり、それぞれで使用できるコマンドが異なります。
+
+
+
+モード名
+説明
+
+
+
+
+ノーマルモード
+デフォルトのモード。移動・削除・コピーなどの操作が可能。
+
+
+挿入モード
+テキストを入力するモード。ノーマルモードでiなどを押して入る。
+
+
+ビジュアルモード...]]></description><link>https://zenn.dev/saka2003/articles/fed78db3a71c38</link><guid isPermaLink="true">https://zenn.dev/saka2003/articles/fed78db3a71c38</guid><pubDate>Fri, 20 Jun 2025 04:50:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--tqzLFxyP--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:vim%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:saka%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzNlM2U2NzMzNzIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>saka</dc:creator></item><item><title><![CDATA[Vimについて]]></title><description><![CDATA[
+ はじめに
+お疲れ様です。件の新卒新米インフラエンジニアです。
+皆さんはVimをご存知ですか？
+非ITエンジニアの方であれば知らないという方がほとんどだと思いますし、システムエンジニアの方は知らないという方が多いと思います。
+とはいえ、流石にインフラエンジニアで知らないという方はいないと思います。
+よくnanoとどっちが使いやすいと論争になりますが、今回はVimについて調べてきたので今回はVimの歴史や対応OSなどについて紹介しようと思います。
+ご存知のように私は新米のインフラエンジニアですのでベテランの方には釈迦に説法かもしれません。
+
+
+ Vimとは
+Vim(Vi IMproved...]]></description><link>https://zenn.dev/greenwolfenrir/articles/eaaa7a5114cf9c</link><guid isPermaLink="true">https://zenn.dev/greenwolfenrir/articles/eaaa7a5114cf9c</guid><pubDate>Fri, 20 Jun 2025 04:30:00 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--JgrPA40c--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:Vim%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Creeper%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA3M2ZiYWU3OGQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Creeper</dc:creator></item><item><title><![CDATA[Linuxの基本的な9つのコマンド]]></title><description><![CDATA[
+ ・はじめに
+
+今回はLinuxで使用する基本的なコマンドについて紹介していこうと思います！
+
+ ・Linuxの基本的なコマンドとは
+
+Linuxコマンドは、Linuxに対してテキスト形式で指示を出すためのもの。キーボードからテキストを入力するだけで、Linuxにさまざまな処理を指示できる。
+Linuxサーバーを運用する現場は、CLIで操作を行う業務が多い為、よく使うコマンドを覚えておく必要がある。
+
+ ・基本的なコマンド一覧
+
+1.ls(List): ディレクトリの内容を表示する
+-コマンドオプション-
+・-l：ファイルやディレクトリの詳細情報を一覧表示する
+・-a：すべてのファイル...]]></description><link>https://zenn.dev/sabrina_o/articles/b4a7b72409948f</link><guid isPermaLink="true">https://zenn.dev/sabrina_o/articles/b4a7b72409948f</guid><pubDate>Fri, 20 Jun 2025 00:03:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BHIuJF28--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Linux%25E3%2581%25AE%25E5%259F%25BA%25E6%259C%25AC%25E7%259A%2584%25E3%2581%25AA9%25E3%2581%25A4%25E3%2581%25AE%25E3%2582%25B3%25E3%2583%259E%25E3%2583%25B3%25E3%2583%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:rina.o%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzQyYjE4MGM1Y2EuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>rina.o</dc:creator></item><item><title><![CDATA[Vimエディタ]]></title><description><![CDATA[
+ はじめに
+
+こんにちは。ふまたんです。
+Linuxの研修で学んだVimについて記事をまとめていきます。
+Vimでよく使う操作などについて、まとめていきます。
+
+
+ Vimとは
+Vimとは、Unix系のOSに標準で搭載されているテキストディタです。
+Windowsなどでいうところのメモ帳ですね。
+Vimでは、CUIでの操作のため、カーソルの移動など操作はキーボードで行います。
+
+ Vimのモード
+
+
+
+モード
+動作
+
+
+
+
+ノーマルモード
+Vim起動時の最初のモードです。カーソルの移動やコピー、ペーストを行うことができます。各モードから、Esc もしくは、Ctrl + [ でノーマルモ...]]></description><link>https://zenn.dev/whomatan/articles/ff1207d9676415</link><guid isPermaLink="true">https://zenn.dev/whomatan/articles/ff1207d9676415</guid><pubDate>Thu, 19 Jun 2025 23:45:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--OFAknIdr--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:Vim%25E3%2582%25A8%25E3%2583%2587%25E3%2582%25A3%25E3%2582%25BF%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25B5%25E3%2581%25BE%25E3%2581%259F%25E3%2582%2593%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS09yeC1lSjJ5Z2tqa3Y3dlZkcUxNUE9KemtIZTJVcFYwVzZicFFSMHZZSTFBak51Zmo9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ふまたん</dc:creator></item><item><title><![CDATA[【Linux/Unix】Shebang（#!）とは？スクリプトを直接実行する仕組みの基本と使い方]]></title><description><![CDATA[スクリプトファイルを作成するとき、頭に #!/usr/bin/env node や #!/bin/bash のような記述をすることがあるかと思います。
+Node.jsのプロジェクトなどでよく見かける #!/usr/bin/env node 、いつもなんとなくそういうものだと思って書いているけどこれって一体何者だろう、どういう役割を担っているんだろうと思い、調べてみました。
+今回はこの Shebang（シバン） についてまとめようと思います。
+
+ Shebangとは何か
+Shebang（シバン）は、スクリプトファイルの先頭に書く #! で始まる特別な行のことです。この文字列（#!）はシバン...]]></description><link>https://zenn.dev/n_haru2/articles/32c93a649da132</link><guid isPermaLink="true">https://zenn.dev/n_haru2/articles/32c93a649da132</guid><pubDate>Thu, 19 Jun 2025 17:38:06 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--dihCq5kY--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Linux%252FUnix%25E3%2580%2591Shebang%25EF%25BC%2588%2523%2521%25EF%25BC%2589%25E3%2581%25A8%25E3%2581%25AF%25EF%25BC%259F%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2583%2588%25E3%2582%2592%25E7%259B%25B4%25E6%258E%25A5%25E5%25AE%259F%25E8%25A1%258C%25E3%2581%2599%25E3%2582%258B%25E4%25BB%2595%25E7%25B5%2584%25E3%2581%25BF%25E3%2581%25AE%25E5%259F%25BA%25E6%259C%25AC%25E3%2581%25A8%25E4%25BD%25BF%25E3%2581%2584%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:pen2%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzhkYmJjY2MwZmYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>pen2</dc:creator></item><item><title><![CDATA[『argparse』 × 『Shell Script』 でパラメータを変えながら Python を一括実行]]></title><description><![CDATA[今回は、パラメータを変えながら、プログラムを一括実行する方法についてまとめてみました。
+『argparse』と『Shell Script』を用いることで、変数の値を変更しつつ、複数回実行することができます。
+!
+この記事でわかること
+
+パラメータを変えながら、プログラムを一括実行する方法
+argparseの基本
+Shell Scriptの基本
+
+
+!
+注意
+
+Shell Script は基本的に Unix 系のシェルでしか動きません
+Windows では WSL、Git Bash、MSYS2 などの Unix 互換環境を入れれば同じスクリプトを実行できます
+
+
+
+ argparse の使...]]></description><link>https://zenn.dev/mugi_cha/articles/1c2c19d46d9e0c</link><guid isPermaLink="true">https://zenn.dev/mugi_cha/articles/1c2c19d46d9e0c</guid><pubDate>Thu, 19 Jun 2025 16:22:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Dgn2VVAK--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%258Eargparse%25E3%2580%258F%2520%25C3%2597%2520%25E3%2580%258EShell%2520Script%25E3%2580%258F%2520%25E3%2581%25A7%25E3%2583%2591%25E3%2583%25A9%25E3%2583%25A1%25E3%2583%25BC%25E3%2582%25BF%25E3%2582%2592%25E5%25A4%2589%25E3%2581%2588%25E3%2581%25AA%25E3%2581%258C%25E3%2582%2589%2520Python%2520%25E3%2582%2592%25E4%25B8%2580%25E6%258B%25AC%25E5%25AE%259F%25E8%25A1%258C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Mugicha%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA2MjRmMzAxNDcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Mugicha</dc:creator></item><item><title><![CDATA[Linuxについて]]></title><description><![CDATA[
+ Linuxについて
+
+ 1. はじめに
+この記事では、Linuxの概要及び基本的な操作方法についてまとめていきたいと思います。書く目的としては、研修にて躓いたこと、学んだことを改めて整理し、定着させるためです。備忘録として読み返せるようにまとめていきたいと思います。
+
+ 2. Linuxとは...?
+Linuxとは、OSの一つです。主にサーバーOSとして用いられます。サーバーOSとは、サーバー（インターネットにおいて様々な機能を提供する機能を持つもの）の中核を担う機能のことです。
+Linuxの特徴として
+・ オープンソースOS
+・CUI操作
+・社外向けシステム向き
+・ディストリビュー...]]></description><link>https://zenn.dev/koizumi_ss1/articles/b10168582852a5</link><guid isPermaLink="true">https://zenn.dev/koizumi_ss1/articles/b10168582852a5</guid><pubDate>Thu, 19 Jun 2025 08:11:50 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--vfXQLiUX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:Linux%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:zumi%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzliYWY0ZjEyYTUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>zumi</dc:creator></item><item><title><![CDATA[Lame | Hack The Box Writeup]]></title><description><![CDATA[
+ マシン情報
+
+マシン名：Lame
+OS：Linux
+難易度：Easy
+
+
+ 使用ツール
+
+Nmap
+FTP
+Metasploit
+Samba
+
+
+ 攻略方法
+
+ 1. ポートスキャン
+nmapでポートスキャンします。
+nmap -sV {マシンIP}
+nmapのオプション
+-sV：サービスのバージョンを検出する
+
+
+スキャンの結果、以下のサービスが稼働していることがわかります。
+
+
+
+ポート
+状態
+サービス
+バージョン
+
+
+
+
+21/tcp
+open
+ftp
+vsftpd 2.3.4
+
+
+22/tcp
+open
+ssh
+OpenSSH 4.7p1
+
+
+139, 445/tcp
+ope...]]></description><link>https://zenn.dev/maetsuyo/articles/aadc6e1d75a2a5</link><guid isPermaLink="true">https://zenn.dev/maetsuyo/articles/aadc6e1d75a2a5</guid><pubDate>Wed, 18 Jun 2025 19:25:25 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--IGVXRei8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_72:Lame%2520%257C%2520Hack%2520The%2520Box%2520Writeup%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%2589%258D%25E7%2594%25B0%25E5%2589%259B%25E5%25BF%2597%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSTF1WVdfQVQzMVhJWXBKMGIwc1lJX1ZjcExBSUtiLWR2UEhjRVZHSFdwSGhrU0xRPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>前田剛志</dc:creator></item><item><title><![CDATA[Claude Codeのmigrate-installerによるIDE統合の不具合は、PATHを通したら直った]]></title><description><![CDATA[
+ 経緯
+Linux(Fedora)でVSCode＋Claude Codeを動かしていたが、/migrate-installer後、IDE統合がうまく動かなくなった。
+具体的には、
+
+✅️ Claude Codeから/ideを叩き、Visual Studio Codeが選択できる
+✅️ Claude CodeのVSCode拡張機能はインストールされている
+❌️ Claude Codeボタンや、差分をIDEのビューアで直接表示するなどの統合機能が動作しない。
+
+しかし、公式TroubleShootingに記載のRecommended solution ではIDE統合はうまく動いた。
+諸々の...]]></description><link>https://zenn.dev/cherr/articles/d2a9e21bdba3bf</link><guid isPermaLink="true">https://zenn.dev/cherr/articles/d2a9e21bdba3bf</guid><pubDate>Wed, 18 Jun 2025 11:39:21 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--igl29Ltz--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Claude%2520Code%25E3%2581%25AEmigrate-installer%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258BIDE%25E7%25B5%25B1%25E5%2590%2588%25E3%2581%25AE%25E4%25B8%258D%25E5%2585%25B7%25E5%2590%2588%25E3%2581%25AF%25E3%2580%2581PATH%25E3%2582%2592%25E9%2580%259A%25E3%2581%2597%25E3%2581%259F%25E3%2582%2589%25E7%259B%25B4%25E3%2581%25A3%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Cherr%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2IyOWI4OGMyMmQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Cherr</dc:creator></item><item><title><![CDATA[firewalldについて(Linux)]]></title><description><![CDATA[
+ はじめに
+firewallとは、外部からの不正アクセスやサイバー攻撃から内部ネットワークを保護するためのセキュリティ機能です。IPアドレス、ポート番号、プロトコル、サービスなどの条件に基づいて、通信を許可または拒否するルールを設定することで、ネットワークトラフィックを制御します。
+※基本コマンド：firewall-cmd
+※設定には原則root権限が必要
+
+ 1.firewallが現在動作しているか確認
+$ sudo firewall-cmd --state
+running
+ # firewallが起動している
+
+$ sudo firewall-cmd --state
+not run...]]></description><link>https://zenn.dev/eiken/articles/b46084b55eaf8a</link><guid isPermaLink="true">https://zenn.dev/eiken/articles/b46084b55eaf8a</guid><pubDate>Tue, 17 Jun 2025 22:02:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--HqTsWfbO--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:firewalld%25E3%2581%25AB%25E3%2581%25A4%25E3%2581%2584%25E3%2581%25A6%2528Linux%2529%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:enjine%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvZS5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>enjine</dc:creator></item></channel></rss>

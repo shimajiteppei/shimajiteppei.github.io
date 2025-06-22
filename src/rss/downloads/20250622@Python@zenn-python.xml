@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「Python」のフィード]]></title><description><![CDATA[Zennのトピック「Python」のRSSフィードです]]></description><link>https://zenn.dev/topics/python</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/ebddf7c6bb.png</url><title>Zennの「Python」のフィード</title><link>https://zenn.dev/topics/python</link></image><generator>zenn.dev</generator><lastBuildDate>Sun, 22 Jun 2025 06:50:44 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/python/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[pyinstallerとGitHub Actions(CI/CD)組んでみる]]></title><description><![CDATA[
+ はじめに
+Pyinstallerとqt5を使って様々なスタジオへいろんなものをバンドして配布する機会がありました。
+今回は、Pyinstallerを使ったパッケージ作成(windows/mac)までの工程をチュートリアル形式でここに残したいと思います。
+また、今回はCI/CDにはGitHub Actionsを使って行います。
+
+ チュートリアルの流れ
+
+UVを使って、ローカルでPyQt5を使った簡単アプリの起動
+GitHub Actionsのワークフローを作成(DL)
+タグの作成とリリース
+
+
+ サンプルレポ
+https://github.com/testkun08080/pyins...]]></description><link>https://zenn.dev/testkun08080/articles/python-cicd-4884a85e28bc3a</link><guid isPermaLink="true">https://zenn.dev/testkun08080/articles/python-cicd-4884a85e28bc3a</guid><pubDate>Sun, 22 Jun 2025 06:00:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ygbfmKUR--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:pyinstaller%25E3%2581%25A8GitHub%2520Actions%2528CI%252FCD%2529%25E7%25B5%2584%25E3%2582%2593%25E3%2581%25A7%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:testkun08080%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzYxMjE5ZTQ2YzguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>testkun08080</dc:creator></item><item><title><![CDATA[簡単な収益予測シミュレーション]]></title><description><![CDATA[
+ ボトムアップ売上シミュレーション入門
+
+ はじめに
+「来年の売上はどうなるだろう？」「営業担当者を2名増やしたらどのくらい売上が上がるだろう？」
+こうした疑問に、勘や経験だけでなく、数値で答える方法があります。それが売上シミュレーションです。
+売上予測をしたかったため、o3に手伝ってもらいながら、簡単なコードを実装しました。
+この記事では、シンプルな予測モデルである「ボトムアップモデル」について、解説します。
+
+ 売上シミュレーションとは
+
+ 基本的な考え方
+売上シミュレーションは、「もしも〜だったら」を数値で検証する手法です。
+例えば：
+
+「もしもエンジニアを3名増やしたら？」
+「...]]></description><link>https://zenn.dev/mseabass/articles/011139f1d54678</link><guid isPermaLink="true">https://zenn.dev/mseabass/articles/011139f1d54678</guid><pubDate>Sun, 22 Jun 2025 05:56:41 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--EqMIs40o--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E7%25B0%25A1%25E5%258D%2598%25E3%2581%25AA%25E5%258F%258E%25E7%259B%258A%25E4%25BA%2588%25E6%25B8%25AC%25E3%2582%25B7%25E3%2583%259F%25E3%2583%25A5%25E3%2583%25AC%25E3%2583%25BC%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:M%2520Sea%2520Bass%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VjN2NkZGNkYmEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>M Sea Bass</dc:creator></item><item><title><![CDATA[【Pythonで統計×AIリブート】1-1.記述統計 位置編]]></title><description><![CDATA[
+ はじめに
+Python 片手に統計と AI をもう一度叩き込んでいます。
+ここは、大学でまなんだことを再び学び直し、忘れないようにメモしている場所。
+まだまだ修行中なので、もし違う所があったらコメントをお願いします。
+この記事では、超基礎である記述統計を整理します
+内容が多いため5パートに分け、そのうち今回はパート1-1 位置編です。
+動かしながら覚えるために、各指標の最小限のPython実装例も添えました。
+各パートの内容
+
+
+
+パート
+内容
+具体例
+
+
+
+
+1
+位置
+平均・中央・最頻値
+
+
+2
+散布・ばらつき
+最小・最大・四分位範囲・分散...
+
+
+3
+位置の相対指標
+パーセンタ...]]></description><link>https://zenn.dev/masamamo/articles/a0556b054b6680</link><guid isPermaLink="true">https://zenn.dev/masamamo/articles/a0556b054b6680</guid><pubDate>Sun, 22 Jun 2025 03:03:58 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--yrxPakeD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2581%25A7%25E7%25B5%25B1%25E8%25A8%2588%25C3%2597AI%25E3%2583%25AA%25E3%2583%2596%25E3%2583%25BC%25E3%2583%2588%25E3%2580%25911-1.%25E8%25A8%2598%25E8%25BF%25B0%25E7%25B5%25B1%25E8%25A8%2588%2520%25E4%25BD%258D%25E7%25BD%25AE%25E7%25B7%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:masa%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzczMWEwZGNlOWUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>masa</dc:creator></item><item><title><![CDATA[【Python】Slackの特定ユーザーメッセージを効率的に取得・分析するツール]]></title><description><![CDATA[
+ はじめに
+Slackでの会話データを分析したい、特定のメンバーの発言を抽出したい、そんなニーズはありませんか？
+本記事では、Slack APIを使って特定ユーザーのメッセージを効率的に取得するPythonツールを作成しました。日付範囲指定、大量データ対応、セキュアな環境変数管理など、実用的な機能を網羅しています。
+!
+📁 完全なソースコード
+この記事で紹介するツールの完全なソースコードは、以下のGitHubリポジトリで公開しています。
+🔗 GitHub: slack-message-extractor
+すぐに試したい方は、リポジトリをクローンして使用してください。
+
+
+ 🎯 この記事...]]></description><link>https://zenn.dev/okamyuji/articles/slack-message-extractor</link><guid isPermaLink="true">https://zenn.dev/okamyuji/articles/slack-message-extractor</guid><pubDate>Sun, 22 Jun 2025 01:45:15 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--8FkOQfic--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591Slack%25E3%2581%25AE%25E7%2589%25B9%25E5%25AE%259A%25E3%2583%25A6%25E3%2583%25BC%25E3%2582%25B6%25E3%2583%25BC%25E3%2583%25A1%25E3%2583%2583%25E3%2582%25BB%25E3%2583%25BC%25E3%2582%25B8%25E3%2582%2592%25E5%258A%25B9%25E7%258E%2587%25E7%259A%2584%25E3%2581%25AB%25E5%258F%2596%25E5%25BE%2597%25E3%2583%25BB%25E5%2588%2586%25E6%259E%2590%25E3%2581%2599%25E3%2582%258B%25E3%2583%2584%25E3%2583%25BC%25E3%2583%25AB%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:okamyuji%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY5YjFmNDYyYjkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>okamyuji</dc:creator></item><item><title><![CDATA[値渡し、ポインタ渡し、オブジェクト渡し、参照渡しの言語別対応表と用語説明]]></title><description><![CDATA[関数の実引数に変数を指定したとき、仮引数にどんな渡し方ができるかの言語別対応表と、関連用語の説明を書いてみました。
+値渡しと参照渡しの理解の助けになりましたら幸いです。
+!
+「オブジェクト渡し」はWikipediaにある「参照の値渡し」で記載しています。
+
+
+ 言語別対応表
+
+
+
+＼ 渡し方　 ＼言語　＼
+
+値渡し(値コピー)
+
+
+ポインタ渡し(ポインタ値コピー値共有)
+
+参照の値渡し(参照値コピーオブジェクト共有)
+
+参照渡し(コピーなし変数共有)
+
+
+
+
+C#
+できる(int arg)
+できる(int *arg)
+できる(Object arg)
+できる(ref int arg)
+
+
+...]]></description><link>https://zenn.dev/shiracamus/articles/7d0b9e65e92e67</link><guid isPermaLink="true">https://zenn.dev/shiracamus/articles/7d0b9e65e92e67</guid><pubDate>Sat, 21 Jun 2025 23:29:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--EXucpA4v--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%2580%25A4%25E6%25B8%25A1%25E3%2581%2597%25E3%2580%2581%25E3%2583%259D%25E3%2582%25A4%25E3%2583%25B3%25E3%2582%25BF%25E6%25B8%25A1%25E3%2581%2597%25E3%2580%2581%25E3%2582%25AA%25E3%2583%2596%25E3%2582%25B8%25E3%2582%25A7%25E3%2582%25AF%25E3%2583%2588%25E6%25B8%25A1%25E3%2581%2597%25E3%2580%2581%25E5%258F%2582%25E7%2585%25A7%25E6%25B8%25A1%25E3%2581%2597%25E3%2581%25AE%25E8%25A8%2580%25E8%25AA%259E%25E5%2588%25A5%25E5%25AF%25BE%25E5%25BF%259C%25E8%25A1%25A8%25E3%2581%25A8%25E7%2594%25A8%25E8%25AA%259E%25E8%25AA%25AC%25E6%2598%258E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:shiracamus%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2Rhcmsvcy5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>shiracamus</dc:creator></item><item><title><![CDATA[【図解・初心者向け】PandasのDataFrameとSeriesの違いをやさしく解説！]]></title><description><![CDATA[Pythonでデータ分析を始めたばかりの頃、
+**「DataFrameとSeriesって何が違うの？」**と感じたことはありませんか？
+私も最初は df["A"] と df[["A"]] の違いがわからず、思わぬエラーに悩まされました。
+この記事では、図解・構造比較・コード出力結果を通して、初心者でも理解しやすいよう丁寧に解説します。
+
+
+ 🔍 DataFrameとSeriesの違い（図解）
+構造の違いを図でまとめました。
+
+
+
+
+構造
+説明
+次元
+
+
+
+
+Series
+ラベル付きの1次元データ構造
+1次元
+
+
+DataFrame
+行・列からなる2次元の表形式
+2次元
+
+
+
+
+
+ 💡 コ...]]></description><link>https://zenn.dev/coin_collector/articles/a262462b739a64</link><guid isPermaLink="true">https://zenn.dev/coin_collector/articles/a262462b739a64</guid><pubDate>Sat, 21 Jun 2025 22:57:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Ol80C00c--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%259B%25B3%25E8%25A7%25A3%25E3%2583%25BB%25E5%2588%259D%25E5%25BF%2583%25E8%2580%2585%25E5%2590%2591%25E3%2581%2591%25E3%2580%2591Pandas%25E3%2581%25AEDataFrame%25E3%2581%25A8Series%25E3%2581%25AE%25E9%2581%2595%25E3%2581%2584%25E3%2582%2592%25E3%2582%2584%25E3%2581%2595%25E3%2581%2597%25E3%2581%258F%25E8%25A7%25A3%25E8%25AA%25AC%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:coin_collector%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzgxNzM3NTQ5ODUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>coin_collector</dc:creator></item><item><title><![CDATA[CVE情報を管理するための個人用のWebアプリを作成した]]></title><description><![CDATA[
+ サマリ
+CVE情報を個人的に一元管理できると面白いなと思い、claude Codeに作成していただきました。
+Next.js, Python, SQLiteの組み合わせを指定して作ってもらったところ、いい感じのWebアプリが完成しました。
+私はコードを一切書かずに、対話で構築しました。
+対応方法をローカルのLLMに問い合わせる機能も実装しました。
+
+ マシンスペック
+MacBook Air M2 arm64
+
+ 作成
+
+ アイデア・動き出し
+個人的にセキュリティに強くなりたいと思い日々奮闘をしています。
+USのTechMediaなどでCVEの記事を見て、なんとなく手元に一元管理して眺...]]></description><link>https://zenn.dev/ka_kan/articles/3dff5db691b5f0</link><guid isPermaLink="true">https://zenn.dev/ka_kan/articles/3dff5db691b5f0</guid><pubDate>Sat, 21 Jun 2025 21:00:05 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--P3nuh6jK--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:CVE%25E6%2583%2585%25E5%25A0%25B1%25E3%2582%2592%25E7%25AE%25A1%25E7%2590%2586%25E3%2581%2599%25E3%2582%258B%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AE%25E5%2580%258B%25E4%25BA%25BA%25E7%2594%25A8%25E3%2581%25AEWeb%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E4%25BD%259C%25E6%2588%2590%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kanda%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzVlOGJhYTMxOGYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kanda</dc:creator></item><item><title><![CDATA[さよなら、スクレイピングコード。可愛い犬AIが自律的にPCを操作するデスクトップマスコットの作り方【AIエージェント× MCP】]]></title><description><![CDATA[
+ はじめに
+デスクトップ上で機能する犬AIエージェントを作りました。
+
+「ミスタードーナツの期間限定商品を調べて、商品情報をCSVファイルに保存しておいて」
+こんな風に話しかけるだけで、デスクトップ上の可愛い柴犬AIがブラウザを立ち上げ、情報を集め、構造化されたデータとしてファイルに保存してくれる。そんな未来がもう現実になっています。
+この記事では、面倒なスクレイピングのコード記述からあなたを解放する、デスクトップマスコット型AIエージェントの作り方を解説します。
+生成AIモデルのAPIと、AIに手足を与える技術「MCP」を組み合わせることで、AIは単なるチャットボットから、あなたのP...]]></description><link>https://zenn.dev/hiratsukaaa682/articles/a647310db65166</link><guid isPermaLink="true">https://zenn.dev/hiratsukaaa682/articles/a647310db65166</guid><pubDate>Sat, 21 Jun 2025 15:34:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--uNhwzMS0--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2581%2595%25E3%2582%2588%25E3%2581%25AA%25E3%2582%2589%25E3%2580%2581%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AC%25E3%2582%25A4%25E3%2583%2594%25E3%2583%25B3%25E3%2582%25B0%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%2589%25E3%2580%2582%25E5%258F%25AF%25E6%2584%259B%25E3%2581%2584%25E7%258A%25ACAI%25E3%2581%258C%25E8%2587%25AA%25E5%25BE%258B%25E7%259A%2584%25E3%2581%25ABPC%25E3%2582%2592%25E6%2593%258D%25E4%25BD%259C%25E3%2581%2599%25E3%2582%258B%25E3%2583%2587%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%2588%25E3%2583%2583%25E3%2583%2597%25E3%2583%259E%25E3%2582%25B9%25E3%2582%25B3%25E3%2583%2583%25E3%2583%2588%25E3%2581%25AE%25E4%25BD%259C%25E3%2582%258A%25E6%2596%25B9%25E3%2580%2590AI%25E3%2582%25A8%25E3%2583%25BC%25E3%2582%25B8%25E3%2582%25A7%25E3%2583%25B3...%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hiratsukaaa%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Y0NTQwZTkxMzkuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hiratsukaaa</dc:creator></item><item><title><![CDATA[【AtCoder】ABC411 振り返り📝]]></title><description><![CDATA[
+ ABC411 - A 【AC】
+問題はこちら
+最初&gt;=を&gt;にして提出してしまった…
+あるあるだから気をつけよう！
+P = input()
+L = int(input())
+
+if(len(P) &gt;= L):
+    print("Yes")
+else:
+    print("No")
+
+ ABC411 - B 【AC】
+問題はこちら
+なんかﾜﾀﾜﾀしてしまってたけど、len(D)ってNでは？
+まあ解けたのでヨシ！
+先頭を捨てるのはなかなか良い思いつきだったと思うます。
+N = int(input())
+D = list(map(int,input().split()...]]></description><link>https://zenn.dev/guinea_pig/articles/b8d141e8e04bf6</link><guid isPermaLink="true">https://zenn.dev/guinea_pig/articles/b8d141e8e04bf6</guid><pubDate>Sat, 21 Jun 2025 14:36:52 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--ZzzTw0l2--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590AtCoder%25E3%2580%2591ABC411%2520%25E6%258C%25AF%25E3%2582%258A%25E8%25BF%2594%25E3%2582%258A%2520%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%2597%25A7%25E5%25AD%2597%25E4%25BD%2593%25E3%2583%25A2%25E3%2583%25AB%25E3%2583%25A2%25E3%2583%2583%25E3%2583%2588%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA4NTVjMDAyZjQuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>旧字体モルモット</dc:creator></item><item><title><![CDATA[Richを使ってファンクションコーリングの結果を美しく表示する方法（Googleノート付）]]></title><description><![CDATA[
+ はじめに
+こんにちは！今回は、PythonのRichライブラリを使って、AIモデルのファンクションコーリング結果を美しく表示する方法をご紹介します。初心者の方でも理解しやすいように、step by stepで解説していきますので、ぜひ最後までお付き合いください。
+
+
+ 必要なライブラリのインストール
+まずは、必要なライブラリをインストールしましょう。Google Colabを使用している場合は、以下のセルを実行してRichをインストールしてください。
+!pip install rich
+
+ 必要なモジュールのインポート
+次に、必要なモジュールをインポートします。
+# Richライブラ...]]></description><link>https://zenn.dev/sunwood_ai_labs/articles/beautiful-function-calling-results-with-rich</link><guid isPermaLink="true">https://zenn.dev/sunwood_ai_labs/articles/beautiful-function-calling-results-with-rich</guid><pubDate>Sat, 21 Jun 2025 13:56:22 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--r52NVp_Z--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Rich%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2583%2595%25E3%2582%25A1%25E3%2583%25B3%25E3%2582%25AF%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%25B3%25E3%2582%25B3%25E3%2583%25BC%25E3%2583%25AA%25E3%2583%25B3%25E3%2582%25B0%25E3%2581%25AE%25E7%25B5%2590%25E6%259E%259C%25E3%2582%2592%25E7%25BE%258E%25E3%2581%2597%25E3%2581%258F%25E8%25A1%25A8%25E7%25A4%25BA%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%25EF%25BC%2588Google%25E3%2583%258E%25E3%2583%25BC%25E3%2583%2588%25E4%25BB%2598%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Maki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jTDdpSmVyNldLVlpKLUd4N054QWVuSFVtYXQ3MUhhd1NXaU5hRG5FTnZiMXZZdHBIaGs9czk2LWM=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Maki</dc:creator></item><item><title><![CDATA[Mark2の座標ファイルからMark2リポジトリのJSONに変換するPythonプログラム]]></title><description><![CDATA[
+ Mark2リポジトリとは
+マークシートシステム Mark2ではマーク認識の際にマーク座標のエクセルファイルを指定する必要がありますが、大規模な運用の際にはマーク座標をWeb上のJSONファイルで指定することもできます。この機能をMark2リポジトリと呼んでいます。
+
+ 定義ファイルの作成
+Mark2の座標ファイルからMark2リポジトリのJSONに変換する際には以下のようなPythonプログラムを利用しています。
+エクセルのシート名が調査のサブタイトルになります。
+import json
+import openpyxl
+
+title = "Mark2リポジトリのサンプル"
+paylo...]]></description><link>https://zenn.dev/kaorumori/articles/adf6b932471a2c</link><guid isPermaLink="true">https://zenn.dev/kaorumori/articles/adf6b932471a2c</guid><pubDate>Sat, 21 Jun 2025 13:53:10 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--5YEw24Js--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Mark2%25E3%2581%25AE%25E5%25BA%25A7%25E6%25A8%2599%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%25E3%2581%258B%25E3%2582%2589Mark2%25E3%2583%25AA%25E3%2583%259D%25E3%2582%25B8%25E3%2583%2588%25E3%2583%25AA%25E3%2581%25AEJSON%25E3%2581%25AB%25E5%25A4%2589%25E6%258F%259B%25E3%2581%2599%25E3%2582%258BPython%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%25A0%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:kaorumori%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzRjZjA1YmY3MzAuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>kaorumori</dc:creator></item><item><title><![CDATA[【Python】二分探索法の実装と仕組み]]></title><description><![CDATA[
+ 初めに
+二分探索法の実装と仕組みについて、改めてまとめてみようと思いこの記事を書いています。
+今回は実装においては、ループ（反復処理） を使った実装でやっています。
+
+ 二分探索法とは
+ソートされた（昇順または降順に並べられた）データの配列の中から、特定の要素を探し出す際に有効なアルゴリズムです。二分探索法の根本的な考え方は、「分割統治」 という考え方にあります。これは、問題を小さな部分問題に分割し、それぞれを解決することで全体の解を導き出す手法です。
+具体的には、以下の手順を繰り返します。
+
+探索範囲の中央にある要素に着目する。
+その中央の要素と、探している値を比較する。
+比較結果...]]></description><link>https://zenn.dev/daichi09167/articles/b0d338e4715aef</link><guid isPermaLink="true">https://zenn.dev/daichi09167/articles/b0d338e4715aef</guid><pubDate>Sat, 21 Jun 2025 13:00:48 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--1qMhYTRq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Python%25E3%2580%2591%25E4%25BA%258C%25E5%2588%2586%25E6%258E%25A2%25E7%25B4%25A2%25E6%25B3%2595%25E3%2581%25AE%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%25A8%25E4%25BB%2595%25E7%25B5%2584%25E3%2581%25BF%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:daichi09167%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM3YTc4OTEwMDcuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>daichi09167</dc:creator></item><item><title><![CDATA[uv｜設定：Pip Configuration（セキュリティ＆環境管理）編]]></title><description><![CDATA[
+知識は武器とかけまして、レゴブロックと解く、その心は――
+今日もKnowledge Oasisへようこそ
+案内人はkoふみです
+本日のテーマは『uv設定：セキュリティ＆環境管理ガイド』
+
+
+ はじめに
+「ハッシュがあるとセキュリティが強化されるって、本当？」
+「特定のPythonバージョンやOS向けに依存を調整できるの？」
+こんな疑問、ありませんか？
+uvは依存の安全性や実行環境、互換性を細かく制御できるパワフルなツールです。
+この記事では「セキュリティ」「環境管理」について解説します。
+
+ 対象読者
+
+セキュリティ重視で依存関係を構築したいエンジニア
+特定のPythonやプラットフォ...]]></description><link>https://zenn.dev/knowledge_oasis/articles/uv-settings-pip-configuration-security-and-env</link><guid isPermaLink="true">https://zenn.dev/knowledge_oasis/articles/uv-settings-pip-configuration-security-and-env</guid><pubDate>Sat, 21 Jun 2025 12:32:12 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--6THYJ6Qh--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:uv%25EF%25BD%259C%25E8%25A8%25AD%25E5%25AE%259A%25EF%25BC%259APip%2520Configuration%25EF%25BC%2588%25E3%2582%25BB%25E3%2582%25AD%25E3%2583%25A5%25E3%2583%25AA%25E3%2583%2586%25E3%2582%25A3%25EF%25BC%2586%25E7%2592%25B0%25E5%25A2%2583%25E7%25AE%25A1%25E7%2590%2586%25EF%25BC%2589%25E7%25B7%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:ko%25E3%2581%25B5%25E3%2581%25BF%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzc1NTJjMWYyZTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>koふみ</dc:creator></item><item><title><![CDATA[Claude Code中心の開発のためのPythonテンプレートの設計]]></title><description><![CDATA[
+ はじめに
+こんにちは。動詞です。
+最近、Claude Codeを使った開発に重点を置いたPythonのプロジェクトテンプレートを作成しました。
+しばらく運用しながら改善を重ねてきましたが、そろそろ使えるレベルになってきたので、覚書も兼ねてその設計について説明しようと思います。
+https://github.com/discus0434/python-template-for-claude-code
+
+ Claude Code向けの設計
+このテンプレートを作る上で意識したのは、Claude Codeが指示しなくても思い通りに動いてくれること、変な動きをしないことです。
+そのために今回整...]]></description><link>https://zenn.dev/discus0434/articles/claude-code-python-template</link><guid isPermaLink="true">https://zenn.dev/discus0434/articles/claude-code-python-template</guid><pubDate>Sat, 21 Jun 2025 08:27:45 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--N4M3aa97--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Claude%2520Code%25E4%25B8%25AD%25E5%25BF%2583%25E3%2581%25AE%25E9%2596%258B%25E7%2599%25BA%25E3%2581%25AE%25E3%2581%259F%25E3%2582%2581%25E3%2581%25AEPython%25E3%2583%2586%25E3%2583%25B3%25E3%2583%2597%25E3%2583%25AC%25E3%2583%25BC%25E3%2583%2588%25E3%2581%25AE%25E8%25A8%25AD%25E8%25A8%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%258B%2595%25E8%25A9%259E%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I4NTY4MDQ2N2MuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>動詞</dc:creator></item><item><title><![CDATA[会社の出勤退勤管理を少し楽にした話]]></title><description><![CDATA[日々のルーティン業務である出退勤記録を効率化する仕組みを作成しました。本記事では、Google Apps ScriptとDiscord Botを活用して、自動化を実現する手順をお話しします。
+
+ 馴れ初め
+私の職場では、以下のような手順で出退勤を記録しています：
+
+
+出勤時
+
+Discordに「おはようございます、出社してます」と投稿
+スプレッドシートに出社時間を記入
+
+
+
+退勤時
+
+Discordに「お先に失礼します、お疲れ様でした」と投稿
+スプレッドシートに退勤時間を記入
+
+
+
+しかし、二度手間感があってめんどくさいと感じたので、これらを一元化し、自動化する仕組みを作りました。
+
+ ...]]></description><link>https://zenn.dev/hitto/articles/c41e753875927b</link><guid isPermaLink="true">https://zenn.dev/hitto/articles/c41e753875927b</guid><pubDate>Sat, 21 Jun 2025 08:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Sb_AwELX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E4%25BC%259A%25E7%25A4%25BE%25E3%2581%25AE%25E5%2587%25BA%25E5%258B%25A4%25E9%2580%2580%25E5%258B%25A4%25E7%25AE%25A1%25E7%2590%2586%25E3%2582%2592%25E5%25B0%2591%25E3%2581%2597%25E6%25A5%25BD%25E3%2581%25AB%25E3%2581%2597%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hitto%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lLVjlTa3N0QjVPNjBmV3JmWkJaNkJhd0ZiR25rQmdPNENabW1CPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hitto</dc:creator></item><item><title><![CDATA[Claude Codeの知見をObsidianで横断管理する - CKCによる実践的なナレッジマネジメント]]></title><description><![CDATA[
+ はじめに
+以前の記事「Claude Codeで効率的に開発するための知見管理」では、プロジェクト単位でのClaude Code知見管理について紹介しました。
+しかし、プロジェクト個別の管理では解決できない課題があると考えられます。
+主な課題：
+
+プロジェクト間での知見共有が困難
+類似パターンの再発見に時間がかかる
+チーム全体の技術ナレッジの蓄積が散在
+
+これらの課題を解決するため、Claude Codeの知見をObsidianに自動同期し、その情報を横断的に管理するツール「Claude Knowledge Catalyst (CKC)」を開発しました。
+!
+本記事で紹介するCKCは実...]]></description><link>https://zenn.dev/driller/articles/1551674785f7fd</link><guid isPermaLink="true">https://zenn.dev/driller/articles/1551674785f7fd</guid><pubDate>Sat, 21 Jun 2025 05:47:35 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--NxnOkHkX--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Claude%2520Code%25E3%2581%25AE%25E7%259F%25A5%25E8%25A6%258B%25E3%2582%2592Obsidian%25E3%2581%25A7%25E6%25A8%25AA%25E6%2596%25AD%25E7%25AE%25A1%25E7%2590%2586%25E3%2581%2599%25E3%2582%258B%2520-%2520CKC%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258B%25E5%25AE%259F%25E8%25B7%25B5%25E7%259A%2584%25E3%2581%25AA%25E3%2583%258A%25E3%2583%25AC%25E3%2583%2583%25E3%2582%25B8%25E3%2583%259E%25E3%2583%258D%25E3%2582%25B8%25E3%2583%25A1%25E3%2583%25B3%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:driller%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2lPT1dLNnlQWE9BNndvZDFlYkxTQ0FLOGlpX1E3X2hqWmVwbDdJeUE9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>driller</dc:creator></item><item><title><![CDATA[FastAPIで初めてのMCP入門ワークショップ]]></title><description><![CDATA[この資料では、MCPの初心者向けワークショップです。MCPの基本を学び、実際にハンズオンを通じてMCPを体験します。
+サンプルのMCPを触り、その後実際にPythonでMCPサーバーを構築していき、MCPの動作を理解する内容になっています。
+]]></description><link>https://zenn.dev/kmiura55/books/first-mcp-workshop</link><guid isPermaLink="true">https://zenn.dev/kmiura55/books/first-mcp-workshop</guid><pubDate>Sat, 21 Jun 2025 02:38:24 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--mN5Q5MKU--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci9hOGM5Y2JjYThjLnBuZw==%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg" length="0" type="image/jpeg"/><dc:creator>KMiura</dc:creator></item><item><title><![CDATA[身近なデータで試すPythonによる機械学習！　その１　　家庭の電気使用量と天気の関係を分析してみよう]]></title><description><![CDATA[こんにちは！データ分析や機械学習に興味はあるけど、何から始めればいいかわからない…そんな風に思っていませんか？
+今回は、私たちの生活に身近な「家庭の電気使用量」と「天気」の関係を、Pythonを使って分析するプロセスをステップバイステップでご紹介します。難しい理論は一旦置いておいて、基本的なモデル作成の練習の題材として参考になればと思います！
+
+ この記事を読むとわかること:
+実際のデータ（関西電力の電気使用量、気象庁の気象データ）を使ったデータ分析の基本的な流れ
+Pandasライブラリを使ったデータの読み込みと前処理の方法
+Scikit-learnライブラリを使った簡単な機械学習モデル...]]></description><link>https://zenn.dev/pincolo/articles/244e195f04f553</link><guid isPermaLink="true">https://zenn.dev/pincolo/articles/244e195f04f553</guid><pubDate>Fri, 20 Jun 2025 17:32:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s---RfWplzs--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E8%25BA%25AB%25E8%25BF%2591%25E3%2581%25AA%25E3%2583%2587%25E3%2583%25BC%25E3%2582%25BF%25E3%2581%25A7%25E8%25A9%25A6%25E3%2581%2599Python%25E3%2581%25AB%25E3%2582%2588%25E3%2582%258B%25E6%25A9%259F%25E6%25A2%25B0%25E5%25AD%25A6%25E7%25BF%2592%25EF%25BC%2581%25E3%2580%2580%25E3%2581%259D%25E3%2581%25AE%25EF%25BC%2591%25E3%2580%2580%25E3%2580%2580%25E5%25AE%25B6%25E5%25BA%25AD%25E3%2581%25AE%25E9%259B%25BB%25E6%25B0%2597%25E4%25BD%25BF%25E7%2594%25A8%25E9%2587%258F%25E3%2581%25A8%25E5%25A4%25A9%25E6%25B0%2597%25E3%2581%25AE%25E9%2596%25A2%25E4%25BF%2582%25E3%2582%2592%25E5%2588%2586%25E6%259E%2590%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%2588%25E3%2581%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2583%2594%25E3%2583%25B3%25E3%2582%25B3%25E3%2583%25AD%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2MxMmRjOWM3YmYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>ピンコロ</dc:creator></item><item><title><![CDATA[LINE × Googleスプレッドシートで作る日報Bot｜FastAPIで自分専用業務管理]]></title><description><![CDATA[
+
+ 📌 はじめに
+LINEで日報を送ると、自動でGoogleスプレッドシートに記録されるBotを作りました。
+個人開発や業務改善を目的とした、自分専用の軽量日報システムです。
+本記事では、FastAPI × LINE Bot × Google Sheets API を使って構築した手順と実装内容を紹介します。
+
+
+ 📐 アーキテクチャ構成
+以下のようなシンプルな流れです。
+
+
+
+LINE ユーザーが日報を送信
+
+FastAPI（Render上） がWebhook受信し、解析
+
+Google Sheets API を使って スプレッドシートに記録
+
+
+
+ ⚙️ 技術スタック
+
+
+
+技術
+...]]></description><link>https://zenn.dev/tkagawa/articles/72802cd7378e7b</link><guid isPermaLink="true">https://zenn.dev/tkagawa/articles/72802cd7378e7b</guid><pubDate>Fri, 20 Jun 2025 15:22:28 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--X-ptNm-K--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:LINE%2520%25C3%2597%2520Google%25E3%2582%25B9%25E3%2583%2597%25E3%2583%25AC%25E3%2583%2583%25E3%2583%2589%25E3%2582%25B7%25E3%2583%25BC%25E3%2583%2588%25E3%2581%25A7%25E4%25BD%259C%25E3%2582%258B%25E6%2597%25A5%25E5%25A0%25B1Bot%25EF%25BD%259CFastAPI%25E3%2581%25A7%25E8%2587%25AA%25E5%2588%2586%25E5%25B0%2582%25E7%2594%25A8%25E6%25A5%25AD%25E5%258B%2599%25E7%25AE%25A1%25E7%2590%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:TKAGAWA%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSmItNzBTcWtSV0lHT2NDd1pMa05ocjBHamo0YlRBWmZWa1Vhamk0dnJKYXlualBnPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>TKAGAWA</dc:creator></item><item><title><![CDATA[Python、Django ログイン、チュートリアル（パスワード強化版）]]></title><description><![CDATA[今回は、Django のログイン、チュートリアルを書こうと思います。
+パスワードを強化した、ログイン機能のみに、ほぼ特化したチュートリアルを実装します。
+ややこしくなるかもですが、なるたけシンプルにわかりやすくをモットーに書こうと思うので、よろしくお願いしまっす！
+ちょぃ長めになりますが、いきまっす♪
+
+
+ 環境
+Windows10、VSCode、Django(v5.1.7)
+
+
+ フォルダ構成
+（注：最終、作成･変更したファイルのみです）
+
+ ディレクトリ構成
+login
+  ├ settings.py
+  ├ urls.py
+  ├ templates（以下、省略）
+  └ user...]]></description><link>https://zenn.dev/animalz/articles/40f03536dec071</link><guid isPermaLink="true">https://zenn.dev/animalz/articles/40f03536dec071</guid><pubDate>Fri, 20 Jun 2025 10:41:40 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Btwy2lgA--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Python%25E3%2580%2581Django%2520%25E3%2583%25AD%25E3%2582%25B0%25E3%2582%25A4%25E3%2583%25B3%25E3%2580%2581%25E3%2583%2581%25E3%2583%25A5%25E3%2583%25BC%25E3%2583%2588%25E3%2583%25AA%25E3%2582%25A2%25E3%2583%25AB%25EF%25BC%2588%25E3%2583%2591%25E3%2582%25B9%25E3%2583%25AF%25E3%2583%25BC%25E3%2583%2589%25E5%25BC%25B7%25E5%258C%2596%25E7%2589%2588%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2582%25E3%2581%25AB%25E3%2581%25BE%25E3%2582%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzk0ZTA2MDVlMTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>あにまる</dc:creator></item></channel></rss>
