@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Zennの「JavaScript」のフィード]]></title><description><![CDATA[Zennのトピック「JavaScript」のRSSフィードです]]></description><link>https://zenn.dev/topics/javascript</link><image><url>https://storage.googleapis.com/zenn-user-upload/topics/64acd76870.png</url><title>Zennの「JavaScript」のフィード</title><link>https://zenn.dev/topics/javascript</link></image><generator>zenn.dev</generator><lastBuildDate>Thu, 26 Jun 2025 08:28:15 GMT</lastBuildDate><atom:link href="https://zenn.dev/topics/javascript/feed" rel="self" type="application/rss+xml"/><language><![CDATA[ja]]></language><item><title><![CDATA[【Day17】JavaScriptだけで保存ではなく、DBの必要性]]></title><description><![CDATA[
+ 【Day17】JavaScriptだけで保存ではなく、DBの必要性
+こんにちは、Keisukeです。
+最近、自分で開発・更新を続けている「生活改善Webシステム」に、小さなアップデートを入れました。
+ちょっとした投稿や、履歴の記録など、ごくごく簡単なものです。
+でも、実際に運用していく中で、「やっぱりDBは必要だ」と痛感した出来事がありました。
+
+
+ 💾 JavaScriptだけでも一応動く
+まず前提として、JavaScriptだけでデータを保存する手段は色々あります。
+
+
+localStorage：ブラウザに永続保存できる（簡単）
+
+sessionStorage：一時的な保存用
+
+...]]></description><link>https://zenn.dev/keisuke4649/articles/cc9e724ec1c335</link><guid isPermaLink="true">https://zenn.dev/keisuke4649/articles/cc9e724ec1c335</guid><pubDate>Wed, 25 Jun 2025 20:40:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--4cEi6uhR--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Day17%25E3%2580%2591JavaScript%25E3%2581%25A0%25E3%2581%2591%25E3%2581%25A7%25E4%25BF%259D%25E5%25AD%2598%25E3%2581%25A7%25E3%2581%25AF%25E3%2581%25AA%25E3%2581%258F%25E3%2580%2581DB%25E3%2581%25AE%25E5%25BF%2585%25E8%25A6%2581%25E6%2580%25A7%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:keisuke%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jS1N6RW9ldTZzVFN5UDFTUEpZazlwSkFDYUVwMGhWeGRQYzVIcHlzeXpKdlBKUGpHcWZ0dz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>keisuke</dc:creator></item><item><title><![CDATA[JavaScriptで始めるAIエージェント開発入門]]></title><description><![CDATA[
+ 背景
+AIエージェントが自律的に複数のタスクを行う際、エージェントを呼び出すエージェント(オーケストレーター)が連携を管理する必要があります。また、最近では様々なエージェントフレームワークが登場しています。複数のAIエージェント同士が連携をとるAgent to Agent(A2A)の時代において、オーケストレーターの存在はますます大きくなり、今後のAIエージェント開発の鍵を握る存在になると考えられます。そこで今回はオーケストレーターの構築に役立つエージェントフレームワークについて調べ、いくつかのサンプル実装を試しました。
+　なお、今回はTeamsアプリにおけるAIエージェントを作るた...]]></description><link>https://zenn.dev/serio/articles/c92fc40c28d963</link><guid isPermaLink="true">https://zenn.dev/serio/articles/c92fc40c28d963</guid><pubDate>Wed, 25 Jun 2025 07:25:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--Q-5PIgeq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:JavaScript%25E3%2581%25A7%25E5%25A7%258B%25E3%2582%2581%25E3%2582%258BAI%25E3%2582%25A8%25E3%2583%25BC%25E3%2582%25B8%25E3%2582%25A7%25E3%2583%25B3%25E3%2583%2588%25E9%2596%258B%25E7%2599%25BA%25E5%2585%25A5%25E9%2596%2580%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_34:%25E3%2581%25AF%25E3%2581%2597%25E3%2581%258F%25E3%2582%258C%2Cx_220%2Cy_108/bo_3px_solid_rgb:d6e3ed%2Cg_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzM4OGEyY2UyNGQuanBlZw==%2Cr_20%2Cw_90%2Cx_92%2Cy_102/co_rgb:6e7b85%2Cg_south_west%2Cl_text:notosansjp-medium.otf_30:%25E3%2582%25BB%25E3%2583%25AA%25E3%2582%25AA%25E6%25A0%25AA%25E5%25BC%258F%25E4%25BC%259A%25E7%25A4%25BE%2520%25E3%2583%2586%25E3%2583%2583%25E3%2582%25AF%25E3%2583%2596%25E3%2583%25AD%25E3%2582%25B0%2Cx_220%2Cy_160/bo_4px_solid_white%2Cg_south_west%2Ch_50%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvbS5wbmc=%2Cr_max%2Cw_50%2Cx_139%2Cy_84/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>はしくれ</dc:creator></item><item><title><![CDATA[【三目並べ】【NAGOYA AI YOUTH CAMP 2025】AIでプログラミングを体験してみよう！]]></title><description><![CDATA[
+ 環境構築
+
+ 1. VSCode
+
+ インストール
+
+ Windows
+
+
+VSCodeのダウンロードページにアクセス
+
+Downroad for Windows をクリック
+ダウンロード完了後、インストーラーを実行
+インストーラーの指示に従い、インストールを完了させる
+
+
+ Mac
+
+
+VSCodeのダウンロードページにアクセス
+
+Downroad for MacOS をクリック
+ダウンロード完了後、ダウンロードしたファイルをダブルクリックで展開
+展開された Visual Studio Code.app をアプリケーションフォルダにドラッグして移動
+
+
+ 初期設定（拡張機能の導入）...]]></description><link>https://zenn.dev/is0629sy/articles/nagoya_ai_youth2025_v2</link><guid isPermaLink="true">https://zenn.dev/is0629sy/articles/nagoya_ai_youth2025_v2</guid><pubDate>Wed, 25 Jun 2025 06:35:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hV7QPmcp--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E4%25B8%2589%25E7%259B%25AE%25E4%25B8%25A6%25E3%2581%25B9%25E3%2580%2591%25E3%2580%2590NAGOYA%2520AI%2520YOUTH%2520CAMP%25202025%25E3%2580%2591AI%25E3%2581%25A7%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25B0%25E3%2583%25A9%25E3%2583%259F%25E3%2583%25B3%25E3%2582%25B0%25E3%2582%2592%25E4%25BD%2593%25E9%25A8%2593%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%2588%25E3%2581%2586%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:is0629sy%252FGB%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSkNSLTlEdGVIdlpOcDlfcVpTX0lFNFhvS3l4VXlOdXY2bHpXX2Q2US1YNUYzMWFBPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>is0629sy/GB</dc:creator></item><item><title><![CDATA[🍭 糖衣構文 Q&A（Ruby & JavaScript編）]]></title><description><![CDATA[
+書いてるコード、実は“甘々”だったりしない⁉
+本質は変わらず、読み書きラクになってる構文、それが「糖衣構文」やで💅✨
+
+
+
+ 💡 Q1. 糖衣構文ってなに？
+
+ A1.
+糖衣構文（Syntactic Sugar）は、本質的な動作・意味は同じだけど、見た目を優しく書ける文法のこと。
+
+例：
+Rubyの後置if
+puts "Hello" if greet?
+
+は、
+if greet?
+  puts "Hello"
+end
+
+と意味は一緒。でも断然スッキリ✨
+
+
+
+ 💡 Q2. なんで「糖衣」って呼ぶの？
+
+ A2.
+由来はクスリの「糖衣錠」🍬
+苦い中身を、見た目＆味を甘くして飲みやすくする...]]></description><link>https://zenn.dev/lksgd2me/articles/c42db264d53f41</link><guid isPermaLink="true">https://zenn.dev/lksgd2me/articles/c42db264d53f41</guid><pubDate>Wed, 25 Jun 2025 03:24:03 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--piar3NUq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%2520%2520%25E7%25B3%2596%25E8%25A1%25A3%25E6%25A7%258B%25E6%2596%2587%2520Q%2526A%25EF%25BC%2588Ruby%2520%2526%2520JavaScript%25E7%25B7%25A8%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Ralph_SH%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly96ZW5uLWRldi5naXRodWIuaW8vZGVmYXVsdC1hdmF0YXJzL2RhcmsvbC5wbmc=%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Ralph_SH</dc:creator></item><item><title><![CDATA[Swiperで途切れることなくループする]]></title><description><![CDATA[今回は空のスライドを挟むことなく自然な流れでループさせる方法について解説します。
+Swiperの公式のリンクは以下です。
+https://swiperjs.com/
+
+ 概要
+
+デモ動画のように途切れることなくループさせる方法の解説です。
+要件は以下です。
+
+10枚のスライドを4枚単位でスライドさせる
+無限にループする
+枚数が足りない部分は空白のスライドを作らない
+
+
+ コード解説
+
+HTMLやCSSについては解説を割愛します。ポイントはJavaScriptのこの部分です。
+const swiper = new Swiper('.swiper', {
+  // Optional para...]]></description><link>https://zenn.dev/namiya/articles/e1bdc7dae1327d</link><guid isPermaLink="true">https://zenn.dev/namiya/articles/e1bdc7dae1327d</guid><pubDate>Tue, 24 Jun 2025 23:44:56 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--tISZyBjw--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Swiper%25E3%2581%25A7%25E9%2580%2594%25E5%2588%2587%25E3%2582%258C%25E3%2582%258B%25E3%2581%2593%25E3%2581%25A8%25E3%2581%25AA%25E3%2581%258F%25E3%2583%25AB%25E3%2583%25BC%25E3%2583%2597%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%25AA%25E3%2581%25BF%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M5OGExYmRlNmIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>なみ</dc:creator></item><item><title><![CDATA[Flutterの新しいjs_interopまとめ]]></title><description><![CDATA[
+ Flutterの新しいjs_interopまとめ
+ついに、package:jsがdiscontinuedとなり、dart:jsもあまり推奨されずjs_interopにそろそろ移行した方が良さそうな感じになりました。
+しかし、新しいことで、情報が少ない上に、Flutter webを使っているという少ない人口の上に、ネイティブのコードを扱うという非常に情報が見つかりにくいので、わかったことを、まとめておきます。
+
+ そもそも、js_interopって
+dart:jsとpackage:jsは、どちらもflutterのwasmビルドに対応していません。
+まず、js_interopという名前は...]]></description><link>https://zenn.dev/tocot/articles/flutter-js-interop</link><guid isPermaLink="true">https://zenn.dev/tocot/articles/flutter-js-interop</guid><pubDate>Tue, 24 Jun 2025 12:47:34 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--BpCnI04i--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Flutter%25E3%2581%25AE%25E6%2596%25B0%25E3%2581%2597%25E3%2581%2584js_interop%25E3%2581%25BE%25E3%2581%25A8%25E3%2582%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:tOcOt%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzg2MTIwNmIzNDUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>tOcOt</dc:creator></item><item><title><![CDATA[React + TypeScriptで「保存ボタンを2回押さないと動かない」問題を解決した方法]]></title><description><![CDATA[
+ はじめに
+React + TypeScript を使ってプロダクト改善をしていたとき、
+「保存ボタンを 1 回押しただけじゃ保存されない…？」「2 回押さないと動かない…？」という、ちょっと不思議な現象に遭遇しました。
+「なんで動かないの…？」と悩んだことがある方、きっと多いんじゃないかなと思います。
+私も最初は首をかしげながら原因を探していましたが、調べたり試したりするうちに、だんだんと原因と直し方が見えてきました。
+この記事では、初心者なりの視点でその気づきや対処法をまとめています。
+同じようなモヤモヤを感じている方に、少しでもヒントになれば嬉しいです！
+!
+コードは実際のもので...]]></description><link>https://zenn.dev/yucco/articles/e25cdcd6e839b6</link><guid isPermaLink="true">https://zenn.dev/yucco/articles/e25cdcd6e839b6</guid><pubDate>Tue, 24 Jun 2025 12:29:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--o1rAFBYg--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:React%2520%252B%2520TypeScript%25E3%2581%25A7%25E3%2580%258C%25E4%25BF%259D%25E5%25AD%2598%25E3%2583%259C%25E3%2582%25BF%25E3%2583%25B3%25E3%2582%25922%25E5%259B%259E%25E6%258A%25BC%25E3%2581%2595%25E3%2581%25AA%25E3%2581%2584%25E3%2581%25A8%25E5%258B%2595%25E3%2581%258B%25E3%2581%25AA%25E3%2581%2584%25E3%2580%258D%25E5%2595%258F%25E9%25A1%258C%25E3%2582%2592%25E8%25A7%25A3%25E6%25B1%25BA%25E3%2581%2597%25E3%2581%259F%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yuki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSVN2WjZVdFAzVlN1TlhIdm9uaDBUc0lSYklLUEQwY0pnTTlORVA0ZjlCN0QxMDNTZz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yuki</dc:creator></item><item><title><![CDATA[ドラッグ＆ドロップでリスト並び替え！@dnd-kitを使った実装の工夫]]></title><description><![CDATA[
+ 💡 導入の小話： とある会社のちょっとしたやりとりから…
+👤 A さん：「この順番ってどこで変えるんでしたっけ？」
+👤 B さん：「えーと、編集画面で index の数字を直接書き換えてください」
+👤 A さん：「（げ…10 個もあるのに手で？）」
+👤 B さん：「はい、1 から順番に振り直せば OK です。かぶると保存できませんけど」
+👤 A さん：「あっ…（それ一番やっちゃいけないやつ…）」
+
+社内ツールや CMS でよくある「リストの並び順を番号で管理する UI」は、最初はシンプルですが、
+項目数が増えるにつれてメンテナンスが地獄化します。
+今回は、このような不便を解消するため...]]></description><link>https://zenn.dev/yucco/articles/26463c7e00b2f6</link><guid isPermaLink="true">https://zenn.dev/yucco/articles/26463c7e00b2f6</guid><pubDate>Tue, 24 Jun 2025 12:29:33 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--3LqnQiJ9--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%2589%25E3%2583%25A9%25E3%2583%2583%25E3%2582%25B0%25EF%25BC%2586%25E3%2583%2589%25E3%2583%25AD%25E3%2583%2583%25E3%2583%2597%25E3%2581%25A7%25E3%2583%25AA%25E3%2582%25B9%25E3%2583%2588%25E4%25B8%25A6%25E3%2581%25B3%25E6%259B%25BF%25E3%2581%2588%25EF%25BC%2581%2540dnd-kit%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%259F%25E5%25AE%259F%25E8%25A3%2585%25E3%2581%25AE%25E5%25B7%25A5%25E5%25A4%25AB%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Yuki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSVN2WjZVdFAzVlN1TlhIdm9uaDBUc0lSYklLUEQwY0pnTTlORVA0ZjlCN0QxMDNTZz1zOTYtYw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Yuki</dc:creator></item><item><title><![CDATA[ChatGPTでVOICEROID2の作業を効率化するWebアプリを作ってみた～その3 改良編～]]></title><description><![CDATA[
+ 🛠 ChatGPTでVOICEROID2の作業を効率化するWebアプリを作ってみた～その3 改良編～
+前回の記事では、ChatGPTを活用して「VOICEROID2をWebアプリから制御する」構想とChatGPTを活用して環境構築をしてく過程を紹介しました。
+今回はいよいよ、実際にアプリを構築して動かすまでの過程をまとめます。
+開発中はChatGPTと会話しながら進めたリアルな記録を元にしているので、同じように構築してみたい方にも参考になるはずです。
+
+ 🚀 今回の改良内容
+
+
+ファイルの保存先を自由に設定できるように修正
+　→ 現在はE:\A_動画編集素材\ボイス\琴葉葵に保存され...]]></description><link>https://zenn.dev/pwrengineer/articles/372992bc132529</link><guid isPermaLink="true">https://zenn.dev/pwrengineer/articles/372992bc132529</guid><pubDate>Tue, 24 Jun 2025 12:13:51 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--g3RtlO_d--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:ChatGPT%25E3%2581%25A7VOICEROID2%25E3%2581%25AE%25E4%25BD%259C%25E6%25A5%25AD%25E3%2582%2592%25E5%258A%25B9%25E7%258E%2587%25E5%258C%2596%25E3%2581%2599%25E3%2582%258BWeb%25E3%2582%25A2%25E3%2583%2597%25E3%2583%25AA%25E3%2582%2592%25E4%25BD%259C%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25EF%25BD%259E%25E3%2581%259D%25E3%2581%25AE3%2520%25E6%2594%25B9%25E8%2589%25AF%25E7%25B7%25A8%25EF%25BD%259E%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:PWR%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2M5MTM5YzVkZWYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>PWR</dc:creator></item><item><title><![CDATA[cluster から OSC を送信して Switchbot を操作する]]></title><description><![CDATA[
+ はじめに
+こんにちは Smith です、クラスター株式会社のプラットフォーム事業部でプロダクトマネージャーとかをやっています。
+クラスター株式会社では、バーチャル空間向けのコンテンツを作ったり誰かが作った様々なコンテンツを楽しめる cluster というサービスを提供しています。
+cluster では、ユーザーが自らスクリプトを用いてインタラクティブな体験を空間内に作り出せます。
+これにより、ただの「鑑賞型」ではない空間設計が可能になります。
+（もちろん、スクリプトを書かないで作る方法もあります）
+この記事では cluster から OSC 通信をする方法について解説します。
+clu...]]></description><link>https://zenn.dev/smith/articles/cluster-osc-sender</link><guid isPermaLink="true">https://zenn.dev/smith/articles/cluster-osc-sender</guid><pubDate>Tue, 24 Jun 2025 06:50:38 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--0pwZlD58--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:cluster%2520%25E3%2581%258B%25E3%2582%2589%2520OSC%2520%25E3%2582%2592%25E9%2580%2581%25E4%25BF%25A1%25E3%2581%2597%25E3%2581%25A6%2520Switchbot%2520%25E3%2582%2592%25E6%2593%258D%25E4%25BD%259C%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Smith%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2NiZTVkNTA3YjEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Smith</dc:creator></item><item><title><![CDATA[ワンクリックでPDFを根こそぎDL！ブックマークレット「pdf-bulk-downloader」を開発した話]]></title><description><![CDATA[
+ 🎯 この記事の対象読者
+
+
+自治体や官公庁にお勤めの方で、日々の情報収集や資料作成に追われている方
+ウェブサイトからの大量の資料（PDF）ダウンロードに「もう嫌だ！」と感じたことがある方
+プログラミングで業務改善って言うけど、「何から始めたらいいかわからない…」という方
+手軽に使える便利なツールに興味があるすべてのエンジニア
+
+
+ 💡 この記事を読むと得られること
+
+単純なダウンロード作業をブックマークレットで自動化する具体的な方法
+サーバーの準備もインストールも不要な「ブックマークレット」という武器の手に入れ方
+JavaScriptだけで、いかに現場の課題を解決できるかの実例
+明日...]]></description><link>https://zenn.dev/hosoyayusaku/articles/e6dd7e1c6caca8</link><guid isPermaLink="true">https://zenn.dev/hosoyayusaku/articles/e6dd7e1c6caca8</guid><pubDate>Tue, 24 Jun 2025 03:00:01 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--9GP0np4K--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%25AF%25E3%2583%25B3%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2583%25E3%2582%25AF%25E3%2581%25A7PDF%25E3%2582%2592%25E6%25A0%25B9%25E3%2581%2593%25E3%2581%259D%25E3%2581%258EDL%25EF%25BC%2581%25E3%2583%2596%25E3%2583%2583%25E3%2582%25AF%25E3%2583%259E%25E3%2583%25BC%25E3%2582%25AF%25E3%2583%25AC%25E3%2583%2583%25E3%2583%2588%25E3%2580%258Cpdf-bulk-downloader%25E3%2580%258D%25E3%2582%2592%25E9%2596%258B%25E7%2599%25BA%25E3%2581%2597%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Hosoya%2520Yusaku%2520%252F%2520Ci...%2Cx_90%2Cy_121/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Hosoya Yusaku / CivicTech Developer</dc:creator></item><item><title><![CDATA[【今からReact #3】useStateで「状態管理ってこういうことか」]]></title><description><![CDATA[
+ はじめに
+Reactではコンポーネントを組み合わせてUI全体を作るイメージです。
+ReactでUIを作るとき、コンポーネントは見た目の表示だけでなく、ユーザーの操作やデータの変化に応じて動的に変わる情報（状態）を扱う必要があります。
+例えば、ボタンをクリックしてカウントが増えたり、入力フォームの内容が変わったりするようなケースです。
+こうした「変わる情報」を管理するためにReactではステートという仕組みがあります。
+そして関数コンポーネントでステートを使いやすくするための仕組みが、今回紹介するステートフック（useState）です。
+Reactで動的なUIを作るための基本中の基本。...]]></description><link>https://zenn.dev/akky709/articles/7641a5356d9648</link><guid isPermaLink="true">https://zenn.dev/akky709/articles/7641a5356d9648</guid><pubDate>Tue, 24 Jun 2025 01:56:09 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--iClOAGNs--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E4%25BB%258A%25E3%2581%258B%25E3%2582%2589React%2520%25233%25E3%2580%2591useState%25E3%2581%25A7%25E3%2580%258C%25E7%258A%25B6%25E6%2585%258B%25E7%25AE%25A1%25E7%2590%2586%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%2593%25E3%2581%2586%25E3%2581%2584%25E3%2581%2586%25E3%2581%2593%25E3%2581%25A8%25E3%2581%258B%25E3%2580%258D%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:akky%2Cx_90%2Cy_121/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>akky</dc:creator></item><item><title><![CDATA[[保存版]HTML Living Standardで定義されているイベントハンドラ全70種]]></title><description><![CDATA[こんにちは、yamanakaです。
+Web開発をしているとたくさんのイベントに出会うと思います。
+それぞれのイベントがどんなときに使えるのか気になりますよね。
+今回はHTML Living Standardに記載のイベントハンドラについて、コード例とすぐに試せるCodePenをあわせて図鑑的にまとめてみました！
+あなたは70種類すべて知っているでしょうか？
+イベントが必要なとき、UI/UXを考えるときにこの記事を参考にしてもらえると嬉しいです。
+
+ マウスイベント
+
+ onclick
+
+
+イベントの発生タイミング: 要素がマウスポインターでクリックされた（左ボタンで押されて離された）時。...]]></description><link>https://zenn.dev/yamanaka_swe/articles/acb1dda443892e</link><guid isPermaLink="true">https://zenn.dev/yamanaka_swe/articles/acb1dda443892e</guid><pubDate>Mon, 23 Jun 2025 22:00:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--gEm0fvuc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%255B%25E4%25BF%259D%25E5%25AD%2598%25E7%2589%2588%255DHTML%2520Living%2520Standard%25E3%2581%25A7%25E5%25AE%259A%25E7%25BE%25A9%25E3%2581%2595%25E3%2582%258C%25E3%2581%25A6%25E3%2581%2584%25E3%2582%258B%25E3%2582%25A4%25E3%2583%2599%25E3%2583%25B3%25E3%2583%2588%25E3%2583%258F%25E3%2583%25B3%25E3%2583%2589%25E3%2583%25A9%25E5%2585%25A870%25E7%25A8%25AE%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:yamanaka%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSThyaVB1NnZCMlJaQVYtV0hmMEdiYXpRRlJ4SU9vUWlNZ1FQMy1PaDV1VjBkQXlRPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>yamanaka</dc:creator></item><item><title><![CDATA[Reactやめようぜ]]></title><description><![CDATA[
+TL;DR
+React は “UI ライブラリ” を名乗っているが、実態は 「あなたの週末を三つくらい平気で溶かすフルスタック・パズル」。
+本稿ではまず React を愛ゆえに斬りまくり、その後「じゃあ他の選択肢は？」を体系的に整理する。笑いながら読めて、読み終えたら技術選定会議にすぐ投げ込める内容を目指した。
+
+
+
+ 1. 🥶 ReactJS 皮肉大喜利
+
+ 1.1 「useEffect の檻に入る覚悟はあるか？」
+
+
+あるある①
+依存配列に値を入れ忘れる→バグ。
+入れる→無限ループ。
+空配列にする→過去の値を読むゴーストバグ。
+─ これぞ React 三段活用。
+
+
+あるある②
+n...]]></description><link>https://zenn.dev/4_4_rest/articles/11e39c1b1fc481</link><guid isPermaLink="true">https://zenn.dev/4_4_rest/articles/11e39c1b1fc481</guid><pubDate>Mon, 23 Jun 2025 13:03:02 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--T2PSzP4n--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:React%25E3%2582%2584%25E3%2582%2581%25E3%2582%2588%25E3%2581%2586%25E3%2581%259C%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E5%2585%25A8%25E4%25BC%2591%25E7%25AC%25A6%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2VlOGY1YTNlZjMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>全休符</dc:creator></item><item><title><![CDATA[Google PageSpeed Insightsでスコア95以上を達成するまでにやったこと]]></title><description><![CDATA[最初にウェブツールを作り始めたとき、Google PageSpeed Insightsのスコアなんてそこまで気にしていませんでした。でも、ある日ふとテストしてみたら、モバイルのスコアが60点台。
+これはまずいと思い、本格的にパフォーマンス改善に取り組むことにしました。
+結果として、今ではモバイル・デスクトップの両方で95点以上をキープしています。
+この記事では、実際に行ったステップを詳しく紹介します。特別なことはしていません。WordPress、WP Rocket、Cloudflare、Kadenceテーマなどを使って、誰でもできることばかりです。
+
+🔧 最初の状態（最適化前）
+当初の構...]]></description><link>https://zenn.dev/hinatatachibana/articles/b6ec0a8e82b011</link><guid isPermaLink="true">https://zenn.dev/hinatatachibana/articles/b6ec0a8e82b011</guid><pubDate>Mon, 23 Jun 2025 10:48:30 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--838eMHv8--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Google%2520PageSpeed%2520Insights%25E3%2581%25A7%25E3%2582%25B9%25E3%2582%25B3%25E3%2582%25A295%25E4%25BB%25A5%25E4%25B8%258A%25E3%2582%2592%25E9%2581%2594%25E6%2588%2590%25E3%2581%2599%25E3%2582%258B%25E3%2581%25BE%25E3%2581%25A7%25E3%2581%25AB%25E3%2582%2584%25E3%2581%25A3%25E3%2581%259F%25E3%2581%2593%25E3%2581%25A8%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hinatatachibana%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSUJvMEJIMzFZekZyTnNpVGZYUFptSm5TVm5WVlhiRlpwN2pvdnA1S2RUOEttNFFBPXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hinatatachibana</dc:creator></item><item><title><![CDATA[indexファイル(バレルファイル)不使用のすゝめ]]></title><description><![CDATA[
+ はじめに
+どうも。ニートですわ～。
+https://zenn.dev/majomajo/articles/bc7e1e7ad18db8
+この記事を拝見しました。そして、僕も同様の理由で「バレルファイルいいじゃんこれ」と思って使っていた時期がありましたが、現在では使用しないようにしています。
+以下に理由を書いていきます。
+
+ バレルファイルって？
+バレルファイル（Barrel File）とは、複数のモジュールをまとめて再エクスポートするファイルのことです。主にindex.tsやindex.jsという名前で作成され、ディレクトリ内の複数のファイルからエクスポートされた関数、クラス、定数な...]]></description><link>https://zenn.dev/miyabitti256/articles/dont-use-barrel-file</link><guid isPermaLink="true">https://zenn.dev/miyabitti256/articles/dont-use-barrel-file</guid><pubDate>Mon, 23 Jun 2025 10:37:16 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--w0nov_Xh--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:index%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%2528%25E3%2583%2590%25E3%2583%25AC%25E3%2583%25AB%25E3%2583%2595%25E3%2582%25A1%25E3%2582%25A4%25E3%2583%25AB%2529%25E4%25B8%258D%25E4%25BD%25BF%25E7%2594%25A8%25E3%2581%25AE%25E3%2581%2599%25E3%2582%259D%25E3%2582%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:miyabitti%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY2NjVmZThjM2UuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>miyabitti</dc:creator></item><item><title><![CDATA[es-module-lexerで読み解く依存関係解析]]></title><description><![CDATA[
+ はじめに
+es-module-lexerとはなんでしょうか。es-module-lexerはビルドツールやプラグインでよく使われます。私はプライベートでAstroを愛用し、業務ではKnipを組み込んでいたりします。それらは、当然es-module-lexerを使用しているのです。
+小さなライブラリであるes-module-lexerが大規模ソースコードを瞬時に解析するのを目の当たりにしたとき、私は大きな衝撃を受けました。本稿ではその実装をひも解きつつ、KnipとAstro+Viteにおける活用例を整理した備忘録としてまとめています。
+
+ 依存解析の 2 つのアプローチ: Parser...]]></description><link>https://zenn.dev/ignorant_kenji/articles/2fba12fea9a94f</link><guid isPermaLink="true">https://zenn.dev/ignorant_kenji/articles/2fba12fea9a94f</guid><pubDate>Mon, 23 Jun 2025 08:00:42 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--64XsnFyn--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:es-module-lexer%25E3%2581%25A7%25E8%25AA%25AD%25E3%2581%25BF%25E8%25A7%25A3%25E3%2581%258F%25E4%25BE%259D%25E5%25AD%2598%25E9%2596%25A2%25E4%25BF%2582%25E8%25A7%25A3%25E6%259E%2590%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Kenji%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q5NDJhNGFhMjUuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Kenji</dc:creator></item><item><title><![CDATA[大体なんでも接続する VS Code の Node.js 用デバッガーを気軽に使いたい]]></title><description><![CDATA[VS Code でデバッグを行う場合、ググったり AI に質問すると launch.json を作成する方法が上位に表示されます(されないこともあります)。しかし、状況によっては事前に設定を作るのは少しばかり手間に感じることもあります。
+
+実験用に作った .js .ts ファイルの挙動を確認したい場合
+
+npm run test でちょっとだけ変数の内容を確認したい場合
+
+今回の記事は VS Code + Node.js の組み合わせにおいて、組み込みのデバッガーで気軽にデバッグする方法のメモとなります。
+
+ 気軽にデバッグする方針
+VS Code でのデバッグは「各言語用のデバッグアダ...]]></description><link>https://zenn.dev/hankei6km/articles/simple-nodejs-debugging-vscode</link><guid isPermaLink="true">https://zenn.dev/hankei6km/articles/simple-nodejs-debugging-vscode</guid><pubDate>Sun, 22 Jun 2025 13:11:11 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--PmSirLUD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E5%25A4%25A7%25E4%25BD%2593%25E3%2581%25AA%25E3%2582%2593%25E3%2581%25A7%25E3%2582%2582%25E6%258E%25A5%25E7%25B6%259A%25E3%2581%2599%25E3%2582%258B%2520VS%2520Code%2520%25E3%2581%25AE%2520Node.js%2520%25E7%2594%25A8%25E3%2583%2587%25E3%2583%2590%25E3%2583%2583%25E3%2582%25AC%25E3%2583%25BC%25E3%2582%2592%25E6%25B0%2597%25E8%25BB%25BD%25E3%2581%25AB%25E4%25BD%25BF%25E3%2581%2584%25E3%2581%259F%25E3%2581%2584%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:hankei6km%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzA0NzEwMGYzNTguanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>hankei6km</dc:creator></item><item><title><![CDATA[AppleのLiquid GlassをSvelteで再現してみた]]></title><description><![CDATA[こんにちは。
+AppleのWWDC25で発表された新しいUI、Liquid Glassにびっくりしました。
+https://www.youtube.com/watch?t=601&amp;v=0_DjDdfqtUE
+動画にある通り、ガラスのような見た目のボタンやアイコンを新たなデザインとして発表しました。
+これを見た途端CSSで再現したいと思いました。
+ということで、Liquid GlassをCSSで再現してSvelteコンポーネントにしてnpmで公開するまでです。
+
+ 使い方
+本題の前に、使い方を説明します。
+Svelteの環境をViteなどで構築した後、以下のコマンドでインストールし...]]></description><link>https://zenn.dev/tozaburo/articles/liquid-glass-svelte</link><guid isPermaLink="true">https://zenn.dev/tozaburo/articles/liquid-glass-svelte</guid><pubDate>Sun, 22 Jun 2025 11:34:18 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--AdxhtKnd--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Apple%25E3%2581%25AELiquid%2520Glass%25E3%2582%2592Svelte%25E3%2581%25A7%25E5%2586%258D%25E7%258F%25BE%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Tozaburo%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2RlZWRmNGVkNTIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Tozaburo</dc:creator></item><item><title><![CDATA[ローカルで編集してリモートでビルドするJSC開発用スクリプト]]></title><description><![CDATA[JavaScriptCoreはx84_64とarm64以外にも実はARMv7をサポートしている[1]
+自分の手元にある環境はx84_64とarm64だけで、ARMv7マシン[2]はとある会社がホストしているssh可能なマシンを貸してもらっている。そのマシンは性能は良いので特に問題なくJSCをビルドできる。しかし地理的に遠いためかレイテンシがやばくて、そのマシン上でWebKitのソースコードを編集するのはストレスがすごい。こういうの普通どうするの？
+普通にどうするのかわからないので、自分のローカルのx86_64マシンでソースコードを編集し、ARMv7のマシンにsshしてそっちでビルドして開...]]></description><link>https://zenn.dev/sosukesuzuki/articles/2fc200e56d8adf</link><guid isPermaLink="true">https://zenn.dev/sosukesuzuki/articles/2fc200e56d8adf</guid><pubDate>Sun, 22 Jun 2025 10:19:53 GMT</pubDate><enclosure url="https://res.cloudinary.com/zenn/image/upload/s--hInJDQbM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2583%25AD%25E3%2583%25BC%25E3%2582%25AB%25E3%2583%25AB%25E3%2581%25A7%25E7%25B7%25A8%25E9%259B%2586%25E3%2581%2597%25E3%2581%25A6%25E3%2583%25AA%25E3%2583%25A2%25E3%2583%25BC%25E3%2583%2588%25E3%2581%25A7%25E3%2583%2593%25E3%2583%25AB%25E3%2583%2589%25E3%2581%2599%25E3%2582%258BJSC%25E9%2596%258B%25E7%2599%25BA%25E7%2594%25A8%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%2597%25E3%2583%2588%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:Sosuke%2520Suzuki%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2kzVm5WZHo2MC1CT3lMTS1VVnZaNmdNSDJlTlp1T0lTa1owT3lyNnc9czI1MC1j%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" length="0" type="image/png"/><dc:creator>Sosuke Suzuki</dc:creator></item></channel></rss>
